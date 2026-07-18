@@ -39,7 +39,7 @@ def test_fts_holds_no_verbatim_bytes():
 def test_independent_chunk_segmentation_matches_across_a_turn_boundary():
     # A chunk window can carry two ideas a turn-window would split — the point of the distinct segmentation.
     idx = LexicalIndex()
-    idx.index_atom("cid-a", CONTENT["cid-a"], size=80, overlap=0)  # one wide chunk over the atom
+    idx.index_atom("cid-a", CONTENT["cid-a"], size=80, overlap=0)  # one wide chunk over the block
     hits = idx.search("incense AND orichalcum", _get)  # both terms, far apart, in one chunk
     assert hits  # the chunk surfaces a co-occurrence a narrow turn-window might miss
     idx.close()

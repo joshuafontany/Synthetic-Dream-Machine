@@ -238,7 +238,7 @@ def compose_persistence_cap(root: str, *, half_life: "float | None" = None,
     """Declare rooted persistence without materializing testimony state.
 
     Activation names a later lifecycle decision only. It does not open the
-    store here; capture never promotes content records into testimony atoms.
+    store here; capture never promotes content records into testimony blocks.
     """
     if half_life is not None and half_life <= 0:
         raise ValueError("persistence half_life must be positive or null (standing by witness)")

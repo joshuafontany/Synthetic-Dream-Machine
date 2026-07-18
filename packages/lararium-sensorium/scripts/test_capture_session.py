@@ -20,7 +20,7 @@ from capture_sources import derive_cid
 
 FIXTURES = os.path.join(os.path.dirname(__file__), "fixtures", "capture")
 CLAUDE = os.path.join(FIXTURES, "claude-main.jsonl")
-TURN_COUNT = 9  # the claude-main fixture atomizes to 9 atoms (steering·thinking·surface·action·result·…)
+TURN_COUNT = 9  # the claude-main fixture atomizes to 9 blocks (steering·thinking·surface·action·result·…)
 
 
 def _stub_embed_factory(dim=4, model="stub-minilm/4"):
@@ -79,11 +79,11 @@ def test_serve_holder_keeps_capture_in_python_and_rederives_idempotently(tmp_pat
 
 def test_w1_5c_crash_then_full_recovers_the_tail(tmp_path):
     # crash sim: land only a truncated prefix (a partial transcript = the "crash"), then re-run over the
-    # FULL fixture — the re-derivation lands the tail (the atoms past the prefix), skips the durable prefix.
+    # FULL fixture — the re-derivation lands the tail (the blocks past the prefix), skips the durable prefix.
     palace = str(tmp_path / ".mem")
     partial = tmp_path / "partial.jsonl"
     lines = open(CLAUDE, encoding="utf-8").read().splitlines()
-    # keep the header + records through a-3 (drop the u-4/a-4 tail): u-1·a-1(×3)·u-2·u-3·a-3 = 7 atoms.
+    # keep the header + records through a-3 (drop the u-4/a-4 tail): u-1·a-1(×3)·u-2·u-3·a-3 = 7 blocks.
     partial.write_text("\n".join(lines[:6]) + "\n", encoding="utf-8")
 
     # the partial file has a DIFFERENT basename → a different source_file/cid, so witness the crash-cure
@@ -91,7 +91,7 @@ def test_w1_5c_crash_then_full_recovers_the_tail(tmp_path):
     stable = tmp_path / "claude-main.jsonl"
     stable.write_text(partial.read_text(encoding="utf-8"), encoding="utf-8")
     r1 = capture_and_observe(palace, "claude", str(stable), wing="wing_proj", embed_factory=_stub_embed_factory())
-    assert r1["landed"] == 7                                       # the crash left only the 7 prefix atoms
+    assert r1["landed"] == 7                                       # the crash left only the 7 prefix blocks
 
     stable.write_text(open(CLAUDE, encoding="utf-8").read(), encoding="utf-8")  # the full transcript returns
     r2 = capture_and_observe(palace, "claude", str(stable), wing="wing_proj", embed_factory=_stub_embed_factory())

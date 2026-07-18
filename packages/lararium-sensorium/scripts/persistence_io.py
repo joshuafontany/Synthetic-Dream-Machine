@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """persistence_io — the substrate side of the PersistencePalace (the 5th sensorium part).
 
-A caller-vector mempalace-instance that persists TESTIMONY atoms: a nanopub-shaped record
+A caller-vector mempalace-instance that persists TESTIMONY blocks: a nanopub-shaped record
 (assertion vector ⊥ provenance ⊥ pubinfo) plus a signed WITNESS-LOG. Twin to structurepalace /
 formpalace — the SAME ChromaDB engine, a separate palace dir; it NEVER federates (local, the
 5th plane's durable floor). An operator Act alone crosses it to a federated surface.
@@ -149,7 +149,7 @@ class PersistenceStore:
             "provenance": {"signer": meta.get("lar_signer", ""), "frontier": meta.get("lar_frontier", "")},
             "pubinfo": pubinfo,
             "witnesses": witnesses,
-            # the OPTIONAL text projection (the "past text" slot) — "" when only the vector-atom rides.
+            # the OPTIONAL text projection (the "past text" slot) — "" when only the vector-block rides.
             "document": raw.get("document") or "",
         }
 
@@ -179,8 +179,8 @@ class PersistenceStore:
         if self._expected_model is not None:
             meta["lar_embedder_model"] = self._expected_model
         # The document slot carries the OPTIONAL text projection (the "past text" design — text is
-        # ONE projection of the vector-atom). Absent one, the id rides as a non-empty placeholder
-        # (chroma requires a document); the atom stays the assertion vector.
+        # ONE projection of the vector-block). Absent one, the id rides as a non-empty placeholder
+        # (chroma requires a document); the block stays the assertion vector.
         mine_busy_retry(lambda: self._col.upsert(ids=[claim_cid], embeddings=[assertion], documents=[document or claim_cid], metadatas=[meta]))
         return {"claim_cid": claim_cid}
 

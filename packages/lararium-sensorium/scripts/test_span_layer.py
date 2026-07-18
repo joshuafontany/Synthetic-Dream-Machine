@@ -34,7 +34,7 @@ def test_chunk_spans_cover_with_overlap_and_clamp():
     assert spans[0].resolve(_get) == text[0:10]
     # step = size - overlap = 7
     assert spans[1].start == 7
-    # the final span clamps to the atom end, never past it
+    # the final span clamps to the block end, never past it
     assert spans[-1].end == len(text)
     # overlap means consecutive spans share text
     assert spans[0].resolve(_get)[7:] == spans[1].resolve(_get)[:3]

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """entity_graph — the ENTITY recall surface as a DERIVED, REBUILDABLE view over the one content source.
 
-Entities extracted from each content atom (keyed by cid) form two recall structures — an INVERTED entity
-index (entity → the cids that mention it) and HALLWAYS (entity co-occurrence over shared atoms). Both hold
-NO verbatim bytes: an atom's entities are a small derived tag-set keyed by its cid; the words live once in
+Entities extracted from each content block (keyed by cid) form two recall structures — an INVERTED entity
+index (entity → the cids that mention it) and HALLWAYS (entity co-occurrence over shared blocks). Both hold
+NO verbatim bytes: an block's entities are a small derived tag-set keyed by its cid; the words live once in
 content. So the mempalace gains its entity-graph arm — entity recall + co-occurrence — duplicating no
 source and rebuilding from content alone (the one-bit test).
 
@@ -28,7 +28,7 @@ def nakama_entity_extractor() -> Callable[[str], "list[str]"]:
 
 
 class EntityGraph:
-    """A cid-keyed entity index + co-occurrence hallways over content-addressed atoms. Tags live here;
+    """A cid-keyed entity index + co-occurrence hallways over content-addressed blocks. Tags live here;
     bytes live in content. Drop it and re-index to rebuild — it holds a derived view, never authority."""
 
     def __init__(self, db_path: str = ":memory:", extract_entities: "Callable[[str], list[str]] | None" = None) -> None:
@@ -44,7 +44,7 @@ class EntityGraph:
         return self._extract
 
     def index_atom(self, cid: str, text: str) -> int:
-        """Extract an atom's entities and land them as cid→entity edges (idempotent; no verbatim held)."""
+        """Extract an block's entities and land them as cid→entity edges (idempotent; no verbatim held)."""
         ents = set(self._extractor()(text))
         for e in ents:
             self._db.execute("INSERT OR IGNORE INTO entities(cid, entity) VALUES (?,?)", (cid, e))
@@ -55,11 +55,11 @@ class EntityGraph:
         return [r[0] for r in self._db.execute("SELECT entity FROM entities WHERE cid=? ORDER BY entity", (cid,))]
 
     def cids_with(self, entity: str) -> "list[str]":
-        """The entity inverted index — the atoms that mention an entity (entity recall over the corpus)."""
+        """The entity inverted index — the blocks that mention an entity (entity recall over the corpus)."""
         return [r[0] for r in self._db.execute("SELECT cid FROM entities WHERE entity=? ORDER BY cid", (entity,))]
 
     def hallways(self, min_count: int = 1) -> "list[dict]":
-        """Entity co-occurrence edges — pairs sharing atoms, with a count. A self-join over the shared cid,
+        """Entity co-occurrence edges — pairs sharing blocks, with a count. A self-join over the shared cid,
         the pair ordered `a < b` so each edge counts once. This is the hallway the nakama draws, here over
         the sensorium's own cids rather than a duplicated drawer store."""
         rows = self._db.execute(

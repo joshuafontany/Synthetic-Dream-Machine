@@ -23,7 +23,7 @@ def test_entity_inverted_index_recalls_atoms_across_the_corpus():
     g = EntityGraph(extract_entities=_extract)
     g.index_atom("cid-a", "Joshua opened the shrine")
     g.index_atom("cid-b", "Joshua closed the loop")
-    assert g.cids_with("Joshua") == ["cid-a", "cid-b"]  # entity recall spans atoms — the graph's value
+    assert g.cids_with("Joshua") == ["cid-a", "cid-b"]  # entity recall spans blocks — the graph's value
     g.close()
 
 
@@ -52,6 +52,6 @@ def test_holds_no_verbatim_and_rebuilds_from_content():
 def test_index_atom_is_idempotent():
     g = EntityGraph(extract_entities=_extract)
     g.index_atom("cid-a", "Joshua Lares")
-    g.index_atom("cid-a", "Joshua Lares")  # re-index the same atom
+    g.index_atom("cid-a", "Joshua Lares")  # re-index the same block
     assert sorted(g.entities_of("cid-a")) == ["Joshua", "Lares"]  # no duplicate edges (UNIQUE)
     g.close()

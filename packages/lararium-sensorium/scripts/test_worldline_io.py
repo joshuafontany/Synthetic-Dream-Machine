@@ -228,9 +228,9 @@ def test_move_not_delete_history_preserved(tmp_path):
     # the content rows persist through the whole cycle (muted, then restored) — never deleted
     assert mst.get("m-B") is not None and mst.get("m-B1") is not None
     assert dst.get("d-B") is not None
-    # while muted (re-kapae), the immutable-ground Memory row STILL carries its verbatim atom
+    # while muted (re-kapae), the immutable-ground Memory row STILL carries its verbatim block
     wl.cascade_kapae(store, [mst, dst], "t-B", tick=7)
-    assert mst.get("m-B")["document"] == "mem B"            # the atom untouched — mute is metadata
+    assert mst.get("m-B")["document"] == "mem B"            # the block untouched — mute is metadata
 
 
 def test_kapae_survives_a_restart(tmp_path):

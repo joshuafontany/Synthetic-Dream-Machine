@@ -153,7 +153,7 @@ def test_systemic_floor_violation_propagates_loud_not_poison_swallowed(tmp_path)
 
 
 def test_rewind_retracts_on_the_immutable_ground(tmp_path):
-    # on the IMMUTABLE Memory ground a committed atom never overwrites — the rewind RETRACTS (kapae-mutes)
+    # on the IMMUTABLE Memory ground a committed block never overwrites — the rewind RETRACTS (kapae-mutes)
     # the stale so recall stops serving it (the fresh-cid append-vector re-land rides a later commit).
     store = cio.ContentStore(str(tmp_path / ".mem"), required_keys={"wing", "room"}, append_only=True)
     pipe = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store), embed=_fake_embed)
@@ -163,7 +163,7 @@ def test_rewind_retracts_on_the_immutable_ground(tmp_path):
     assert res["skipped"] == 1                               # c-0 holds
     assert res["retracted"] == 2 and res["relanded"] == 0   # the immutable ground retracts, never overwrites
     assert store.get("c-1")["metadata"].get("lar_kapae") == "1"   # the stale is muted — recall excludes it
-    assert store.get("c-1")["document"] == "b"             # move-not-delete: the committed atom stays, muted
+    assert store.get("c-1")["document"] == "b"             # move-not-delete: the committed block stays, muted
     assert res["audit"]["ok"]
 
 # --- the plane fan-out (RUN-ARC #1 — further planes ride the SAME records) --------------------------

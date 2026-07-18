@@ -48,7 +48,7 @@ def test_hybrid_search_fuses_lexical_and_entity():
     p = _proj()
     # "Joshua" is both a lexical token AND an entity → both surfaces contribute, RRF fuses
     fused = p.hybrid_search("Joshua", _get, k=5)
-    assert "cid-a" in fused and "cid-c" in fused  # both atoms mentioning Joshua surface
+    assert "cid-a" in fused and "cid-c" in fused  # both blocks mentioning Joshua surface
     p.close()
 
 

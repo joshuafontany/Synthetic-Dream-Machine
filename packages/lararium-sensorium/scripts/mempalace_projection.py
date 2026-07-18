@@ -4,7 +4,7 @@ source.
 
 It ties the derived recall surfaces the keel carries: a LEXICAL surface (contentless FTS5 over chunk-spans)
 + an ENTITY-GRAPH (inverted index + hallways), both keyed by content cid, holding NO verbatim. `index_atom`
-fans one atom into every surface; `hybrid_search` fuses the lexical + entity recalls by Reciprocal Rank
+fans one block into every surface; `hybrid_search` fuses the lexical + entity recalls by Reciprocal Rank
 Fusion (RRF) — the rank-merge that dodges BM25-vs-graph score incompatibility. The whole projection drops
 and rebuilds from content (the one-bit test): content is the single writable source, this cap is a
 disposable combined-arms VIEW over it — the shape the kupono data-model research named.
@@ -35,7 +35,7 @@ class MempalaceProjection:
         self._size, self._overlap = chunk_size, overlap
 
     def index_atom(self, cid: str, text: str) -> None:
-        """Fan one content atom into every derived surface — the lexical chunks + the entity edges."""
+        """Fan one content block into every derived surface — the lexical chunks + the entity edges."""
         self._lex.index_atom(cid, text, size=self._size, overlap=self._overlap)
         self._ent.index_atom(cid, text)
 
@@ -44,7 +44,7 @@ class MempalaceProjection:
         return self._lex.search(query, get_content, k=k)
 
     def recall_entity(self, entity: str) -> "list[str]":
-        """The entity inverted index — atoms mentioning an entity."""
+        """The entity inverted index — blocks mentioning an entity."""
         return self._ent.cids_with(entity)
 
     def hallways(self, min_count: int = 1) -> "list[dict]":

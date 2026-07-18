@@ -33,7 +33,7 @@ def _normalize_for_index(text: str) -> str:
 
 
 class LexicalIndex:
-    """A contentless-FTS5 lexical surface over content-addressed atoms. Tokens live here; bytes live in
+    """A contentless-FTS5 lexical surface over content-addressed blocks. Tokens live here; bytes live in
     content. Drop it and re-index to rebuild — it holds no authority, only a derived view."""
 
     def __init__(self, db_path: str = ":memory:") -> None:
@@ -50,9 +50,9 @@ class LexicalIndex:
         )
 
     def index_atom(self, cid: str, text: str, size: int = 512, overlap: int = 64, layer: str = "chunk") -> int:
-        """Chunk ONE content atom into overlapping lexical spans and index each chunk's tokens. The chunk
+        """Chunk ONE content block into overlapping lexical spans and index each chunk's tokens. The chunk
         text tokenizes into the FTS (tokens only at rest); the span's offsets land in the side table. The
-        chunk text reads from the atom text in hand — content is not re-fetched at index time."""
+        chunk text reads from the block text in hand — content is not re-fetched at index time."""
         n = 0
         for span in chunk_spans(cid, len(text), size=size, overlap=overlap, layer=layer):
             cur = self._db.execute(

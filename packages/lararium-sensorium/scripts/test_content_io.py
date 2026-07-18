@@ -136,7 +136,7 @@ def test_append_only_refuses_a_differing_vector_re_put(tmp_path):
         s.put("a", "same text", [0.9, 0.8, 0.7], meta)
     with pytest.raises(ValueError):                            # (the text-differ half still holds)
         s.put("a", "edited text", [0.1, 0.2, 0.3], meta)
-    assert s.get("a")["document"] == "same text"              # the committed atom stands unchanged
+    assert s.get("a")["document"] == "same text"              # the committed block stands unchanged
 
 
 def test_session_memory_store_enforces_schema_and_dim(tmp_path):
@@ -169,7 +169,7 @@ def test_session_memory_store_enforces_embedder_model(tmp_path):
 
 
 def test_append_only_is_the_immutable_ground(tmp_path):
-    # the Memory sensorium (W1.1): a committed atom's text can't be overwritten (an edit rides kapae),
+    # the Memory sensorium (W1.1): a committed block's text can't be overwritten (an edit rides kapae),
     # but an idempotent same-text re-put passes (the re-derivation crash-cure).
     s = cio.ContentStore(str(tmp_path / ".memory"), append_only=True)
     s.put("c-1", "the verbatim turn", [0.1, 0.2], {"wing": "w"})

@@ -9,7 +9,7 @@ data exfiltrate, that bare handle rides out with it. This module VEILS the root:
 
 keyed by a LOCAL SECRET the owner holds in `<state>/identity/` — a dedicated worldline-salt
 (env) or, failing that, the persona-group-root SIGNING key (the private persona-side half). NEVER the
-vessel public key, NEVER a did (canon `persona-circle#the-atom`: the vessel key MUST NEVER co-surface;
+vessel public key, NEVER a did (canon `persona-circle#the-block`: the vessel key MUST NEVER co-surface;
 a did would re-expose the DreamNet identity the veil hides).
 
 What the veil buys:

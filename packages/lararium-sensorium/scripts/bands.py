@@ -541,7 +541,7 @@ def allocate_band_cuts(order: list[int], mra: dict) -> list[int]:
     so a corpus whose power sits at a coarse scale grows the coarse bands. Nesting is the
     load-bearing invariant: a coarser band's cuts are a PREFIX of a finer band's, so the
     lar_ffz address stays prefix-truncatable (the ultrametric holds). Pulse is per-chunk
-    (implicit — the finest atom), so only Theme..Beat draw from the shared cut budget."""
+    (implicit — the finest block), so only Theme..Beat draw from the shared cut budget."""
     K = len(order)
     # Coarse→fine band energies (D5=Theme … D1=Beat). Pad/truncate to 4 coarse bands.
     frac = band_energy_fractions(mra)  # fine→coarse (D1..Dk)
@@ -586,7 +586,7 @@ def ffz_cells(order: list[int], band_counts: list[int], n: int,
 
     For each aperture band the segmentation uses the first `band_counts[b]` cuts (a PREFIX
     of the finer band's cuts → nesting), so the address is prefix-truncatable exactly like
-    mesh/ffz-project.ts ffzMembershipAddress. Pulse = the chunk index (the finest atom).
+    mesh/ffz-project.ts ffzMembershipAddress. Pulse = the chunk index (the finest block).
     Returns one row per chunk: {"index", "cells": {Theme,Arc,Measure,Beat,Pulse},
     "lar_ffz": "<profile>/…", "repro_grade": reproduced|fragile}."""
     theme_n, arc_n, measure_n, beat_n = (band_counts + [0, 0, 0, 0])[:4]

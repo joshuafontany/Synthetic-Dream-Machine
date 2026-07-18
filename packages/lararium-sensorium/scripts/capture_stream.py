@@ -63,7 +63,7 @@ class ContentStoreLandCap:
 
     def reland(self, cid: str, text: str, vector, metadata: dict) -> str:
         """The REWIND cure for an already-landed cid whose re-derived text DIVERGED. On the IMMUTABLE
-        Memory ground (append_only) a committed atom never overwrites — RETRACT the stale (kapae-mute,
+        Memory ground (append_only) a committed block never overwrites — RETRACT the stale (kapae-mute,
         metadata-only, so it stops recalling) and let the fresh-cid append-vector re-land ride a later
         commit; on a MUTABLE store the re-land OVERWRITES in place (the new text supersedes the stale).
         Returns "retracted" (immutable ground) or "relanded" (mutable overwrite)."""

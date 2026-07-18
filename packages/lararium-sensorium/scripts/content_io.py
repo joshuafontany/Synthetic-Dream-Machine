@@ -46,7 +46,7 @@ _LOCK_PREFIX = "content_serve"
 
 # The kapae mute-leg (Phase 4) rides two metadata slots. `lar_turn_key` binds a content row to a
 # worldline turn (the kapae cascade resolves cids by it); `lar_kapae` marks a row MUTED so recall
-# excludes it — a metadata FLAG the atom (document+embedding) never sees, so mute stays move-not-
+# excludes it — a metadata FLAG the block (document+embedding) never sees, so mute stays move-not-
 # delete: the row persists, only the flag flips. A row without the slot reads live (unset = live).
 TURN_KEY_META = "lar_turn_key"
 KAPAE_META = "lar_kapae"
@@ -111,7 +111,7 @@ class ContentStore:
         self._expected_dim = expected_dim
         self._expected_model = expected_model
         # append_only = the IMMUTABLE-GROUND policy (the Memory sensorium: verbatim/eidetic). A put on
-        # an existing cid whose text DIFFERS is refused — a committed atom is never overwritten; an edit
+        # an existing cid whose text DIFFERS is refused — a committed block is never overwritten; an edit
         # rides kapae/worldline (a muted fork-branch), never a silent re-put. An idempotent same-text
         # re-put still passes (the re-derivation crash-cure). The Dream sensorium leaves this off (mutable).
         self._append_only = append_only
@@ -169,7 +169,7 @@ class ContentStore:
 
     @property
     def append_only(self) -> bool:
-        """Whether this store rides the IMMUTABLE-GROUND policy — a committed atom never overwrites (the
+        """Whether this store rides the IMMUTABLE-GROUND policy — a committed block never overwrites (the
         Memory sensorium). The rewind cure reads this to CHOOSE its move: retract-and-mute on immutable
         ground vs a re-land overwrite on a mutable store."""
         return self._append_only
@@ -245,7 +245,7 @@ class ContentStore:
                 raise ContentFloorError(f"content put {cid}: embedder model {got_model!r} != expected {self._expected_model!r} "
                                         "(embedder-identity floor — a same-dim different-model swap corrupts recall silently)")
         if self._append_only:
-            # the immutable-ground guard: a committed atom is never overwritten (an edit rides kapae, not a
+            # the immutable-ground guard: a committed block is never overwritten (an edit rides kapae, not a
             # re-put). An identical re-put passes (idempotent re-derivation crash-cure). BOTH halves must
             # match — same TEXT and same VECTOR: a same-text DIFFERENT-embedding re-put (a silent model
             # drift the model-stamp missed) would corrupt recall of the immutable ground just as a text
@@ -254,11 +254,11 @@ class ContentStore:
             if existing is not None:
                 if (existing.get("document") or "") != text:
                     raise ValueError(f"content put {cid}: append-only sensorium (immutable ground) — a committed "
-                                     "atom's text cannot be overwritten; an edit rides kapae/worldline, never a re-put")
+                                     "block's text cannot be overwritten; an edit rides kapae/worldline, never a re-put")
                 if _vectors_differ(existing.get("embedding"), embedding):
                     raise ValueError(f"content put {cid}: append-only sensorium (immutable ground) — a committed "
-                                     "atom's VECTOR cannot be overwritten (same text, different embedding — a silent "
-                                     "recall-corrupt); re-embed under the held model or kapae the atom")
+                                     "block's VECTOR cannot be overwritten (same text, different embedding — a silent "
+                                     "recall-corrupt); re-embed under the held model or kapae the block")
         # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites. The
         # backend upsert self-takes the palace flock (mine_palace_lock) — hardened — but the flock is
         # LOCK_NB and RAISES on contention; mine_busy_retry WAITS out a concurrent mempalace write.
@@ -373,7 +373,7 @@ class ContentStore:
     def mute(self, cid: str, tick=None) -> dict:
         """MUTE one row for kapae — flip the `lar_kapae` flag via patch_metadata (chroma-native
         col.update: the document AND the embedding survive, no re-embed, no vector clobber). The
-        atom never changes, so this rides the IMMUTABLE-GROUND (append-only) Memory sensorium too —
+        block never changes, so this rides the IMMUTABLE-GROUND (append-only) Memory sensorium too —
         a mute is metadata, not an edit. `tick` (a caller LOGICAL mark) stamps when, never a host
         clock. Idempotent; {ok:false} for an absent cid."""
         patch = {KAPAE_META: "1"}
@@ -529,7 +529,7 @@ def main() -> None:
     s.add_argument("--expected-model", default=None,
                    help="pin the embedder MODEL name (checked vs each drawer's lar_embedder_model); a same-dim different-model swap fails loud (session-memory opt-in; unset = off)")
     s.add_argument("--append-only", action="store_true",
-                   help="immutable-ground policy (the Memory sensorium): a committed atom's text cannot be overwritten (an edit rides kapae); idempotent same-text re-put still passes")
+                   help="immutable-ground policy (the Memory sensorium): a committed block's text cannot be overwritten (an edit rides kapae); idempotent same-text re-put still passes")
     s.add_argument("--collection", default=None,
                    help="which collection in the palace holds this plane's records (the form registry writes 'form' beside the base drawers); unset = the base default")
     s.set_defaults(fn=lambda a: _serve(
