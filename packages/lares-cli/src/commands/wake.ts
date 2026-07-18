@@ -103,11 +103,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
 
   // 1b. The AI-SURFACE SEATS — every harness reaches the memory sensorium through the same lares seat.
   //     `--init` stands the WHOLE house, so it tends EVERY surface: each wire converges on the RESOLVED
-  //     spawn (aligned passes untouched · drifted re-aims · absent wires), which makes running them on
-  //     every init safe AND load-bearing — a package that re-homes its sidecar would otherwise leave
-  //     each seat aiming at a deleted file while the wire reported success (witnessed: the claude seat
-  //     sat shut from the sensorium package split until a re-aim). A single surface flag still targets
-  //     that one alone; every wire stays graceful when its tool isn't set up here.
+  //     spawn (aligned passes untouched · drifted re-aims · absent wires), which keeps running them on
+  //     every init both safe AND load-bearing — a seat aimed at a moved sidecar script otherwise stays
+  //     shut while its wire reports success, and only re-aiming heals it. A single surface flag still
+  //     targets that one alone; every wire stays graceful when its tool sits un-installed here.
   const initAll = args.flags["init"] === true;
   let claude: ClaudeWireResult | undefined;
   if (initAll || args.flags["claude"]) {

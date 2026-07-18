@@ -88,7 +88,7 @@ export function wireVscode(opts: { home?: string } = {}): VscodeWireResult {
 
     // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
     // package that moves its sidecar) otherwise sits drifted forever while the wire reports it present —
-    // the door shut, the health line green. Re-aim whenever the registered command/args drift.
+    // the door stays shut, the health line stays green. Re-aim whenever the registered command/args drift.
     const seat = servers["lares"] as { command?: string; args?: readonly string[] } | undefined;
     const aligned = seat !== undefined && seat.command === laresMcp.command
       && JSON.stringify(seat.args ?? []) === JSON.stringify(laresMcp.args);

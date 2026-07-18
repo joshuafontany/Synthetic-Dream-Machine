@@ -84,11 +84,11 @@ function registerLaresMcp(): ClaudeWireStep {
   if (got.error !== undefined) {
     return { item: "mcp:lares", action: "missing-script", detail: "`claude` CLI not found — cannot register the lares seat" };
   }
-  // A registration STANDING never proves it points ANYWHERE real. Presence-idempotence let a moved
-  // script (a package that re-homed its sidecar) leave this seat aimed at a deleted file while the wire
-  // reported success — the harness's door shut silently and every `wake --init` after it skipped the
-  // cure. So converge on the RESOLVED spawn, never on mere presence: a seat whose command/script drifts
-  // from what resolves now gets RE-POINTED (remove → re-add), and an aligned seat passes untouched.
+  // A registration STANDING never proves it points ANYWHERE real. Presence-idempotence lets a moved
+  // sidecar script leave this seat aimed at a deleted file while the wire reports success — the harness
+  // door shuts silently and every `wake --init` after it skips the cure. So converge on the RESOLVED
+  // spawn, never on mere presence: a seat whose command/script drifts from what resolves now gets
+  // RE-POINTED (remove → re-add), and an aligned seat passes untouched.
   let repointed = false;
   if (got.status === 0) {
     const registered = String(got.stdout ?? "");

@@ -578,7 +578,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       withClient: (fn) => fn(sovereignRecallClient),
       turnsForHandleStubs: async (handle, opts) => {
         // Page the content plane, keep drawers stamped with this agent-lineage handle, order by the shared
-        // functor. Zero guest code (mirrors the recall cutover) — the join keys (lar_agent_handle ·
+        // functor — house-code content_io alone, the guest client nowhere. The join keys (lar_agent_handle ·
         // lar_verbatim_sha) ride sovereign-captured exchange drawers; an empty plane → an empty trajectory.
         recallContent ??= makeContentPalace(larContentDir());
         const turns: HandleTurn[] = [];

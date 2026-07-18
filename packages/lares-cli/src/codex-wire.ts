@@ -68,7 +68,7 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
   } else {
     // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
     // package that moves its sidecar) otherwise sits drifted forever while the wire reports it present —
-    // the door shut, the health line green. A drifted section strips, then re-aims below.
+    // the door stays shut, the health line stays green. A drifted section strips, then re-aims below.
     const seatStands = toml.includes(LARES_MCP_KEY);
     const aligned = seatStands
       && toml.includes(JSON.stringify(laresMcp.command))
