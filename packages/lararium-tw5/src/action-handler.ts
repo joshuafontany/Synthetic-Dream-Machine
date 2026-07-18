@@ -660,7 +660,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
     // A PACK carrier records its membership ASIDE (`$:/config/OriginalTiddlerPaths`)
     // and tombstones any member the re-ingest DROPPED from the file — the group
     // loop above never sees a pack's foreign-titled members (they don't nest under
-    // the carrier URI), so the map is the only record of the pack's prior shape.
+    // the carrier URI), so the map alone holds the pack's prior shape.
     if (packInfo) {
       const provRec = await readFromBag(access, action.toBag, ORIGINAL_TIDDLER_PATHS);
       const prov    = parseProvenance(typeof provRec?.tiddler["text"] === "string" ? (provRec.tiddler["text"] as string) : undefined);
