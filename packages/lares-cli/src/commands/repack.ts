@@ -2,8 +2,8 @@
  * `lares repack --source <bundle-file> --to <bagUri> [--out <file>]` — the
  * collect-the-residency EXPORT.
  *
- * A multi-tiddler bundle (a `.json` array of tiddlers) is a PACK: one file, many
- * tiddlers, whose membership rides ASIDE in the bag's `$:/config/OriginalTiddlerPaths`
+ * A multi-tiddler bundle (a `.json` array of tiddlers) rides as a PACK — one file,
+ * many tiddlers — whose membership rides ASIDE in the bag's `$:/config/OriginalTiddlerPaths`
  * (never on the tiddlers). REPACK asks the island to collect the pack's members
  * from that aside map and re-render the bundle via TW5's OWN serializer, then
  * writes the bytes back to disk — the deliberate round-trip a foreign bundle takes
