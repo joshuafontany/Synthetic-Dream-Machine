@@ -82,3 +82,22 @@ def test_authored_only_keeps_normal_skips_low_volume():
 def test_no_keep_indexes_every_stratum():
     store = MetaStore([("cid-auth", "x", {"lar_volume": "normal"}), ("cid-harness", "y", {"lar_volume": "low"})])
     assert len(list(content_atoms(store))) == 2  # keep=None → the whole stream
+
+
+def test_dedup_by_atom_key_collapses_a_re_carried_atom():
+    # one atom (a1) re-carried across a resume: same lar_atom_key, distinct cids under different sources.
+    store = MetaStore([
+        ("cid-parent_0", "the ruling atom", {"lar_atom_key": "a1"}),
+        ("cid-resume_0", "the ruling atom", {"lar_atom_key": "a1"}),   # the re-carry — content keeps it, view drops it
+        ("cid-other_0",  "a different atom", {"lar_atom_key": "a2"}),
+        ("cid-yes-a_0",  "yes", {"lar_atom_key": "a3"}),               # a genuine repeat: same bytes, own atom-key
+        ("cid-yes-b_0",  "yes", {"lar_atom_key": "a4"}),               # keeps its own identity — both ride
+    ])
+    cids = [c for c, _ in content_atoms(store, dedup_key="lar_atom_key")]
+    assert cids == ["cid-parent_0", "cid-other_0", "cid-yes-a_0", "cid-yes-b_0"]  # a1 rode once; a3/a4 both kept
+
+
+def test_dedup_absent_key_still_rides():
+    # a record lacking the dedup key never collapses (an absent atom-key is not a shared identity).
+    store = MetaStore([("cid-a_0", "x", {}), ("cid-b_0", "y", {})])
+    assert len(list(content_atoms(store, dedup_key="lar_atom_key"))) == 2

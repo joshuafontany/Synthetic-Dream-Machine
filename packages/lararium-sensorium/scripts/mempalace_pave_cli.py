@@ -42,7 +42,11 @@ def run(content_dir: str, mempalace_dir: str, query: "str | None" = None, k: int
     proj = MempalaceProjection(db_path=db, extract_entities=extract)
     keep = None if all_strata else authored_only
     try:
-        n = pave(content_atoms(store, keep=keep), proj, rebuild=rebuild)
+        # Dedup the VIEW by each ATOM's true identity: an atom re-carried across a resume/rewind (same
+        # lar_atom_key — native uuid + block ordinal, stable across the re-carry — under distinct
+        # source-keyed cids) paves ONCE; content keeps every copy. Keying on the atom, not the turn, so
+        # a turn's several atoms all survive (turn-key would collapse them to the first).
+        n = pave(content_atoms(store, keep=keep, dedup_key="lar_atom_key"), proj, rebuild=rebuild)
         out: dict = {"content": content_dir, "mempalace": db, "paved": n, "rebuild": rebuild,
                      "entities": extract is not None, "strata": "all" if all_strata else "authored"}
         if query:

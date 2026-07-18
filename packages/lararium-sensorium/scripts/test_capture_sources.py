@@ -95,31 +95,51 @@ def test_cid_is_full_hex_and_distinct_per_chunk():
     assert derive_cid("sess-abc.jsonl", 0) == c0      # idempotent re-derivation
 
 
-def test_distinct_same_source_turns_get_distinct_cids_no_clobber():
+def test_distinct_same_source_atoms_get_distinct_cids_no_clobber():
     recs = list(claude_source(wing="w")(CLAUDE))
     cids = [r["cid"] for r in recs]
-    assert len(cids) == len(set(cids))                # no two turns share a cid (no turnKey clobber)
+    assert len(cids) == len(set(cids))                # no two atoms share a cid (no clobber)
     # every cid ties to the SAME source_file but a distinct chunk → the chunk is what disambiguates.
     # source_file now carries the session+surface-qualified key (C3), never the bare basename.
     assert {r["metadata"]["source_file"] for r in recs} == {"claude:claude-main"}
-    assert sorted(r["metadata"]["chunk_index"] for r in recs) == [0, 1, 2]
+    assert sorted(r["metadata"]["chunk_index"] for r in recs) == list(range(9))   # one atom per block
+    # atom-keys stay distinct even where blocks share a record uuid (a-1's thinking/surface/action)
+    keys = [r["metadata"]["lar_atom_key"] for r in recs]
+    assert len(keys) == len(set(keys))
+    assert {"a-1#0", "a-1#1", "a-1#2"} <= set(keys)   # the three blocks of one message, distinct keys
 
 
 # --- W5.1 — Claude parse ----------------------------------------------------
 
-def test_claude_parse_lands_correct_records():
+def test_claude_parse_lands_atoms_across_the_taxonomy():
     recs = list(claude_source(wing="wing_proj", room="conversations")(CLAUDE))
-    assert len(recs) == 3                             # 3 exchanges (the tool_result-only user turn drops)
-    assert [r["seq"] for r in recs] == [1, 2, 3]      # dense 1-based pass seq
+    assert len(recs) == 9                             # one atom per content-block, NO exchange merge
+    assert [r["seq"] for r in recs] == list(range(1, 10))            # dense 1-based pass seq
+    pairs = [(r["metadata"]["lar_speaker"], r["metadata"]["lar_move"]) for r in recs]
+    assert ("operator", "steering") in pairs          # the operator's hand, its own recallable atom
+    assert ("agent", "thinking") in pairs             # inner speech — its own low-volume atom
+    assert ("agent", "action") in pairs               # a tool-call now RIDES content (was dropped)
+    assert ("harness", "result") in pairs             # a tool-return now rides content (harness speaker)
+
     first = recs[0]
-    assert first["text"].startswith("> light the capture engine")   # user side carries the `>` quote
-    assert "the source-cap parses the transcript" in first["text"]  # assistant joined into one drawer
-    assert "tool_use" not in first["text"]            # tool block dropped from the recall text
+    assert first["text"] == "light the capture engine"              # verbatim, NO `>` quote prefix
     m = first["metadata"]
     assert m["wing"] == "wing_proj" and m["room"] == "conversations"
-    assert m["lar_turn_key"] == "u-1"                 # the user turn's uuid binds the worldline
+    assert m["lar_speaker"] == "operator" and m["lar_move"] == "steering"
+    assert m["lar_volume"] == "normal"                # the operator's steering rides at full volume
+    assert m["lar_turn_key"] == "u-1"                 # an operator atom HEADS its turn; the uuid binds it
     assert m["lar_surface"] == "claude"
     assert first["cid"] == derive_cid("claude:claude-main", 0)       # the single gate (qualified key, C3)
+
+    # the agent atoms of u-1's turn (thinking, surface, action) + the tool-result INHERIT its turn-key,
+    # so the exchange-view can regroup the whole turn from the atoms — the merge became a read-time view.
+    by_key = [r["metadata"]["lar_turn_key"] for r in recs]
+    assert by_key[:5] == ["u-1"] * 5                  # steering + thinking + surface + action + result
+    # a tool-call renders name(input); a tool-result renders its return — both verbatim in content
+    action = next(r for r in recs if r["metadata"]["lar_move"] == "action")
+    assert action["text"] == "Write({})" and action["metadata"]["lar_volume"] == "low"
+    result = next(r for r in recs if r["metadata"]["lar_move"] == "result")
+    assert result["text"] == "ok" and result["metadata"]["lar_speaker"] == "harness"
 
 
 def test_claude_subagent_file_marks_sidechain(tmp_path):
@@ -131,24 +151,33 @@ def test_claude_subagent_file_marks_sidechain(tmp_path):
         encoding="utf-8",
     )
     recs = list(claude_source(wing="wing_proj__spirits")(str(agent)))
-    assert len(recs) == 1
-    assert recs[0]["metadata"]["lar_sidechain"] == 1   # int, isomorphic with the TS stamp (Q3)
-    assert recs[0]["metadata"]["lar_agent"] == "deadbeef"
+    assert len(recs) == 2                              # the spirit's steering + the agent's surface, atomized
+    assert all(r["metadata"]["lar_sidechain"] == 1 for r in recs)   # int, isomorphic with the TS stamp (Q3)
+    assert all(r["metadata"]["lar_agent"] == "deadbeef" for r in recs)
 
 
 # --- W5.1 — Codex parse -----------------------------------------------------
 
-def test_codex_parse_lands_correct_records():
+def test_codex_parse_lands_atoms_across_the_taxonomy():
     recs = list(codex_source(wing="wing_proj")(CODEX))
-    assert len(recs) == 2                             # developer / reasoning / event_msg all drop
+    assert len(recs) == 8                             # message · reasoning · call · output all atomize
+    pairs = [(r["metadata"]["lar_speaker"], r["metadata"]["lar_move"]) for r in recs]
+    assert ("harness", "scaffold") in pairs           # the developer preamble — kept, low-volume (eidetic)
+    assert ("operator", "steering") in pairs
+    assert ("agent", "thinking") in pairs             # a reasoning item — its own thinking atom
+    assert ("agent", "action") in pairs               # a function_call — an agent action atom
+    assert ("harness", "result") in pairs             # a function_call_output — a harness result atom
     texts = "\n".join(r["text"] for r in recs)
-    assert "base instructions injection" not in texts          # developer role skipped
-    assert "reasoning item" not in texts and "double-count trap" not in texts
-    assert recs[0]["text"].startswith("> parse the codex rollout")
-    assert "the response_item lines carry the transcript" in recs[0]["text"]
+    assert "double-count trap" not in texts           # event_msg (not a response_item) still drops
+    op = next(r for r in recs if r["metadata"]["lar_move"] == "steering")
+    assert op["text"] == "parse the codex rollout"     # verbatim, NO `>` quote prefix
     assert recs[0]["metadata"]["lar_surface"] == "codex"
-    # a user turn carries no native id → content-hash turn-key (16 hex), never empty
-    assert len(recs[0]["metadata"]["lar_turn_key"]) == 16
+    # a codex atom carries no native uuid → content-hash atom-key (16 hex), never empty
+    assert len(op["metadata"]["lar_atom_key"]) == 16
+    # the loud voices sound at full volume; the murmur beneath (scaffold/thinking/action/result) stays low
+    assert op["metadata"]["lar_volume"] == "normal"
+    assert all(r["metadata"]["lar_volume"] == "low"
+               for r in recs if r["metadata"]["lar_move"] in ("scaffold", "thinking", "action", "result"))
 
 
 # --- W5.2 — Copilot reads the SQLite store, NOT events.jsonl ----------------
@@ -178,12 +207,13 @@ def test_copilot_reads_sqlite_not_events_jsonl(tmp_path):
         '{"type":"user.message","data":{"content":"DECOY from events.jsonl"}}\n', encoding="utf-8")
 
     recs = list(copilot_source(wing="wing_proj")(str(db)))
-    assert len(recs) == 2                             # two turn-rows → two exchanges
-    assert [r["seq"] for r in recs] == [1, 2]         # one dense running seq across the session
+    assert len(recs) == 4                             # two turn-rows → each SPLITS into operator + agent atoms
+    assert [r["seq"] for r in recs] == [1, 2, 3, 4]   # one dense running seq across the session
     texts = "\n".join(r["text"] for r in recs)
     assert "DECOY from events.jsonl" not in texts     # the SQLite path never touched events.jsonl
-    assert recs[0]["text"].startswith("> read the sqlite store")
-    assert "not the deleted events.jsonl" in recs[0]["text"]
+    # the row's two columns land as DISTINCT atoms: the operator's message, then the agent's response
+    assert recs[0]["text"] == "read the sqlite store" and recs[0]["metadata"]["lar_speaker"] == "operator"
+    assert recs[1]["text"] == "not the deleted events.jsonl" and recs[1]["metadata"]["lar_speaker"] == "agent"
     m = recs[0]["metadata"]
     assert m["lar_surface"] == "copilot-cli" and m["wing"] == "wing_proj"
     assert m["source_file"] == "copilot:cop-sess-1"                  # session+surface-qualified key (C3)
@@ -195,7 +225,7 @@ def test_copilot_sqlite_source_can_select_one_native_session(tmp_path):
     _build_copilot_db(str(db))
     selected = list(copilot_source(wing="wing_proj", session_id="cop-sess-1")(str(db)))
     missing = list(copilot_source(wing="wing_proj", session_id="absent")(str(db)))
-    assert len(selected) == 2 and not missing
+    assert len(selected) == 4 and not missing         # two rows → operator + agent atoms each
 
 
 def test_copilot_sqlite_adapter_lists_and_exports_only_the_selected_session(tmp_path):
@@ -229,10 +259,11 @@ def test_copilot_vscode_reads_its_native_event_stream_not_a_staged_rewrite(tmp_p
         encoding="utf-8",
     )
     recs = list(copilot_vscode_source(wing="wing_proj")(str(stream)))
-    assert len(recs) == 1
+    assert len(recs) == 2                              # the user event + the assistant event, atomized
     assert recs[0]["metadata"]["source_file"] == "copilot-vscode:vscode-7"
     assert recs[0]["metadata"]["lar_surface"] == "copilot-vscode"
-    assert "Python reads it directly" in recs[0]["text"]
+    assert recs[0]["text"] == "native event stream" and recs[0]["metadata"]["lar_speaker"] == "operator"
+    assert recs[1]["text"] == "Python reads it directly" and recs[1]["metadata"]["lar_speaker"] == "agent"
 
 
 def test_resolve_source_dispatch_and_wing_floor():

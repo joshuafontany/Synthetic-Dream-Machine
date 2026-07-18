@@ -2,19 +2,27 @@
 
 The engine (capture_stream.Pipeline) drives a source-cap: `callable(pointer) -> iterable of records
 {seq, cid, text, metadata}`. This module supplies ONE cap per surface — **Claude Code · Codex ·
-Copilot** each reading its native transcript into the engine's record grain, plus the
-**curated human-text corpus** cap (markdown/text trees — the RUN-arc test-bed ground). The engine's crash-safe
+Copilot** each reading its native transcript into the engine's record grain, plus the **curated
+human-text corpus** cap (markdown/text trees — the test-bed ground). The engine's crash-safe
 re-derivation makes BULK and LIVE the SAME cap over one pointer: a re-pass re-reads the whole (growing)
 source, is_landed skips the already-durable prefix, only the fresh tail lands. Main and sub-agent
 sessions ride the same cap (a sub-agent transcript reads through the same parser, marked by surface).
 
-THE SINGLE CID GATE (the W1.5d fix — dissolves the W9 divergence). ONE derivation mints every drawer id:
-`cid = sha256(source_file)_<chunk_index>`, FULL sha256 hex (never py's old [:24] truncation), matching
-`caller-vector-flush.ts`'s `drawerCid`. The `chunk_index` (the per-source exchange ordinal) makes
-distinct same-source turns derive DISTINCT cids — so no turn clobbers another under one shared key
-(the live turnKey-clobber the W9 note flagged). The `lar_turn_key` (the user turn's uuid) rides METADATA
-for the worldline binding, NEVER the cid — the address stays pure content-identity, the turn-key keys
-the kapae cascade. Idempotent by construction: the same (source_file, chunk) re-derives the same cid.
+THE ATOM GRAIN. A source reads as a stream of typed ATOMS, not merged exchanges: each content-block
+lands 1:1, carrying WHO authored the bytes (`lar_speaker`) × WHAT MOVE it carries (`lar_move`). The
+operator's steering, the agent's surface/thinking/action, and the harness's result/scaffold each ride
+as their own atom — so content keeps the operator/agent boundary the eidetic ground demands, and recall
+pairs atoms into exchanges as a derived VIEW. The three native encodings normalize into this one grain:
+Claude's DAG-linked JSONL and Codex's flat response_items already atomize per message; Copilot's SQLite
+`turns` row splits its user_message ⊥ assistant_response columns into two atoms.
+
+THE SINGLE CID GATE. ONE derivation mints every atom id: `cid = sha256(source_file)_<chunk_index>`, FULL
+sha256 hex, matching `caller-vector-flush.ts`'s `drawerCid`. The `chunk_index` (the per-source atom
+ordinal) makes distinct same-source atoms derive DISTINCT cids — so none clobbers another under a shared
+key. Two identity keys ride METADATA, never the cid (the address stays pure content-identity): the
+`lar_turn_key` (the heading operator atom, worldline binding + kapae cascade) and the `lar_atom_key`
+(this atom's own identity, the dedup key across a re-carry). Idempotent by construction: the same
+(source_file, chunk) re-derives the same cid.
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/capture-sources
 """
@@ -86,76 +94,71 @@ def _source_key(surface: str, pointer: str) -> str:
     return f"{surface}:{base}"
 
 
-def _assemble_exchanges(turns: list) -> list:
-    """The EXCHANGE-ASSEMBLER (readExchanges port): pair each user turn with the assistant response(s)
-    that follow into ONE recall drawer — a bare "yes do it" or an answer shorn of its question recalls
-    poorly. The user side carries a `>` quote prefix (the convo grain); orphans (a question with no
-    answer, an answer with no question) flush alone. The paired drawer keeps the USER turn's uuid, so
-    its turn-key names the exchange."""
-    out: list = []
-    q: dict | None = None
-    for t in turns:
-        # Only the AUTHORED stratum forms an exchange. Inner speech and harness-injected text land as
-        # their own low-volume drawers — fusing them would put machine text in the operator's mouth
-        # and bury the murmur inside the utterance.
-        if t.get("stratum", "authored") != "authored":
-            out.append(t)
-            continue
-        if t["role"] == "user":
-            if q is not None:
-                out.append(q)                                     # a prior question never answered — flush alone
-            q = {**t, "text": "> " + t["text"].replace("\n", "\n> ")}
-        else:
-            if q is not None:
-                q = {**q, "text": q["text"] + "\n\n" + t["text"]}  # join the answer onto its question
-                out.append(q)
-                q = None
-            else:
-                out.append(t)                                      # an answer with no preceding question
-    if q is not None:
-        out.append(q)
-    return out
+def _atom_key(source_file: str, atom: dict, chunk_index: int) -> str:
+    """THIS atom's stable identity — the DEDUP key across a re-carry. A native uuid folds the block
+    ordinal (`bi`), so two atoms from one message (a thinking block + its utterance share the record's
+    uuid) still get DISTINCT keys, while a resumed transcript re-carries each atom under the SAME
+    key (uuid + bi stay stable across the resume). A surface with no native id (a Codex user message,
+    a Copilot column) falls back to a source+chunk-folded content hash — distinct atoms stay distinct."""
+    uuid = atom.get("uuid")
+    if uuid:
+        return f"{uuid}#{atom.get('bi', 0)}"
+    return _sha16(f"{source_file}#{chunk_index}#" + atom.get("ts", "") + (atom.get("text") or "")[:64])
 
 
-def _drawers(source_file: str, turns: list, *, wing: str, room: str,
-             extra: "dict | None" = None) -> Iterator[tuple]:
-    """Yield (cid, text, metadata) per exchange — WITHOUT a seq (the caller assigns the dense pass seq,
-    so a multi-session source runs one contiguous watermark). The metadata carries the schema floor
-    (wing/room), the drawer provenance (source_file/chunk_index), the worldline binding (lar_turn_key),
-    and `lar_chain` — a CONTENT-hash-chain (chain_i = sha16(text_i + chain_{i-1})) per source_file. The
-    cid keys on source+index (content-INDEPENDENT), so an edited/truncated prefix keeps the same cid and
-    is_landed would silently SKIP it; the chain binds each link to its text + predecessor, so a tampered
-    prefix BREAKS the chain and a re-capture pass detects the rewind (worldline_observe.detect_rewind).
-    `extra` folds in per-surface marks (lar_surface, lar_sidechain)."""
-    # SURFACE-AGNOSTIC stratum: a parser that never stratified (Codex/Copilot default authored) gets the
-    # harness-opener check HERE, before assembly — so machine boilerplate lands low-volume on every
-    # surface, never fusing into an exchange nor sounding in the authored voice a derived plane reads.
-    turns = [t if t.get("stratum") else {**t, "stratum": _harness_stratum(t.get("role", ""), t.get("text", ""))} for t in turns]
+def _atoms(source_file: str, atoms: list, *, wing: str, room: str,
+           extra: "dict | None" = None) -> Iterator[tuple]:
+    """Yield (cid, text, metadata) per ATOM — content's 1:1 grain, NO exchange merge. The operator's
+    steering and the agent's surface land as DISTINCT atoms, each its own cid; recall pairs them into
+    exchanges as a derived VIEW (grouped by lar_turn_key), so the operator's steering stays its own
+    recallable speaker instead of fusing into the agent's stream the way a merged drawer fused them.
+
+    Each atom carries: `lar_speaker`/`lar_move` (the taxonomy axes — who authored the bytes, what move
+    they carry); `lar_atom_key` (this atom's identity, the dedup key across a re-carry); `lar_turn_key`
+    (the turn it HEADS — an operator atom — or JOINS — the atoms that follow, until the next operator
+    atom; the exchange-view groups on it, the kapae cascade mutes on it); `lar_parent` (the source DAG
+    link, e.g. Claude's parentUuid, the view may walk); `lar_chain` (the per-source content-hash chain —
+    an edited prefix keeps its content-INDEPENDENT cid but BREAKS the chain, so a re-capture detects the
+    rewind). An atom carrying a bare `role` but no (speaker, move) — a surface with no block detail, e.g.
+    a Copilot column — gets classified here. The caller assigns the dense pass seq; `extra` folds in the
+    per-surface marks (lar_surface, lar_sidechain)."""
     prev_chain = ""
-    for chunk, ex in enumerate(_assemble_exchanges(turns)):
-        chain = _sha16(ex["text"] + prev_chain)   # each link binds its text + the predecessor's link
+    turn_key = ""
+    for chunk, a in enumerate(atoms):
+        text = a.get("text") or ""
+        speaker, move = a.get("speaker"), a.get("move")
+        if speaker is None or move is None:
+            speaker, move = _classify(str(a.get("role", "")), text)
+        atom_key = _atom_key(source_file, a, chunk)
+        # An operator atom HEADS a new turn; the atoms after it inherit its turn-key. A session opening
+        # on agent/harness atoms (no operator yet) lets the first atom head, so nothing rides keyless.
+        if speaker == "operator" or not turn_key:
+            turn_key = _turn_key(source_file, a, chunk) if speaker == "operator" else atom_key
+        chain = _sha16(text + prev_chain)   # each link binds its text + the predecessor's link
         prev_chain = chain
-        stratum = ex.get("stratum", "authored")   # set above for every surface; harness turns stand alone
         meta = {
             "wing": wing,
             "room": room,
             "source_file": source_file,
             "chunk_index": chunk,
-            "lar_turn_key": _turn_key(source_file, ex, chunk),
+            "lar_turn_key": turn_key,
+            "lar_atom_key": atom_key,
+            "lar_parent": a.get("parent") or "",
             "lar_chain": chain,
             # AI-operator chat IS native memetic-wikitext — a turn that invokes no sigil holds a
-            # DEGRADED state of the same grammar, never a foreign one. The kind rides the drawer so
-            # the structure plane parses it down the graceful gradient (sigils wrap, prose fills)
-            # rather than skipping it for want of a file extension. One stamp, all three surfaces.
+            # DEGRADED state of the same grammar, never a foreign one. One stamp lets the structure
+            # plane parse it down the graceful gradient rather than skip it for want of an extension.
             "lar_kind": "memetic-wikitext",
-            # The stratum + its volume. The content plane holds every stratum (eidetic ground); a
-            # derived plane reads by volume, so the authored voice carries without the murmur.
-            "lar_stratum": stratum,
-            "lar_volume": _VOLUME[stratum],
+            # The taxonomy axes + the volume the move sounds at. Content holds every move (eidetic
+            # ground); a derived plane reads the loud voices (steering + surface) without the murmur.
+            "lar_speaker": speaker,
+            "lar_move": move,
+            "lar_stratum": _MOVE_STRATUM.get(move, "authored"),
+            "lar_volume": _MOVE_VOLUME.get(move, "normal"),
         }
         if extra:
             meta.update(extra)
-        yield derive_cid(source_file, chunk), ex["text"], meta
+        yield derive_cid(source_file, chunk), text, meta
 
 
 def _seq_records(drawers: Iterable[tuple]) -> Iterator[Record]:
@@ -170,13 +173,27 @@ def _seq_records(drawers: Iterable[tuple]) -> Iterator[Record]:
 # Each line carries `type` (user/assistant), `uuid`, `timestamp`, `sessionId`, `message` (text blocks).
 
 
-# The STRATA of a captured stream, and the VOLUME each speaks at. Nothing drops; the eidetic ground
-# keeps every stratum. Volume marks how loudly a stratum sounds, so a derived plane may read the
-# authored voice without the murmur beneath it:
-#   authored — the operator's and the agent's own prose (and the red sigil register riding in it)
-#   thinking — inner speech; present, sub-vocal, never uttered
-#   harness  — machine text injected into the operator's channel (notifications, caveats, IDE marks)
-_VOLUME = {"authored": "normal", "thinking": "low", "harness": "low"}
+# The atom taxonomy — WHO authored the bytes × WHAT MOVE the atom carries. A source reads as a stream
+# of typed atoms; content holds each 1:1 (eidetic ground), and recall pairs them into exchanges as a
+# derived VIEW, so the operator's steering rides as its own recallable speaker rather than fusing into
+# the agent's stream the way a merged drawer fused them.
+#   speaker: operator (the human hand) · agent (the Lares) · harness (the machinery — it injects
+#            tool-results, caveats, notifications on the `user` channel, but no human authored them)
+#   move:    steering (an operator directive) · surface (the agent's uttered text) · thinking (the
+#            agent's inner speech) · action (an agent tool-call) · result (a harness tool-return) ·
+#            scaffold (harness boilerplate — caveats, reminders, IDE marks)
+# Content keeps every move (nothing drops); VOLUME marks how loudly each sounds, so a derived plane
+# reads the loud voices (steering + surface) without the low murmur beneath.
+_MOVE_VOLUME = {
+    "steering": "normal", "surface": "normal",
+    "thinking": "low", "action": "low", "result": "low", "scaffold": "low",
+}
+# The coarse stratum a move rolls up to — provenance only (the derived plane reads by VOLUME above,
+# never this). Kept so a reader of lar_stratum still resolves.
+_MOVE_STRATUM = {
+    "steering": "authored", "surface": "authored",
+    "thinking": "thinking", "action": "action", "result": "harness", "scaffold": "harness",
+}
 
 # Harness-injected openers. These arrive on the `user` role but no operator authored them; left
 # unmarked they would manufacture the corpus's strongest false structural recurrence (one opener
@@ -196,46 +213,77 @@ _HARNESS_OPENERS = (
 )
 
 
-def _claude_message_text(message) -> str:
-    """Pull the readable text from a Claude message — a bare string or an array of `{type:text}` blocks
-    (tool blocks drop from the recall text; the bearing leg reads them elsewhere)."""
-    if isinstance(message, str):
-        return message
-    content = message.get("content") if isinstance(message, dict) else None
+def _render_tool_use(b: dict) -> str:
+    """An agent ACTION atom's verbatim — the tool name + its input args (the move the agent took)."""
+    name = b.get("name") or "?"
+    inp = b.get("input")
+    try:
+        args = json.dumps(inp, ensure_ascii=False)
+    except (TypeError, ValueError):
+        args = str(inp)
+    return f"{name}({args})"
+
+
+def _render_tool_result(b: dict) -> str:
+    """A harness RESULT atom's verbatim — the tool return, a bare string or joined text blocks."""
+    c = b.get("content")
+    if isinstance(c, str):
+        return c
+    if isinstance(c, list):
+        return "\n".join(x["text"] for x in c
+                         if isinstance(x, dict) and isinstance(x.get("text"), str))
+    return "" if c is None else str(c)
+
+
+def _claude_blocks(rtype: str, message) -> Iterator[tuple]:
+    """Yield (speaker, move, text, bi) atoms from one Claude message, in document order — `bi` names the
+    block ordinal within the record (stable across a re-carry), so atoms sharing the record's uuid still
+    get distinct atom-keys. A user record's content is a bare string (operator steering, unless a harness
+    opener) or a list mixing text (operator steering) and tool_result (harness result); an assistant
+    record's content lists text (agent surface), thinking (agent inner speech), and tool_use (agent
+    action) blocks. Thinking precedes the utterance it thought toward, in its native block order."""
+    content = message.get("content") if isinstance(message, dict) else message
     if isinstance(content, str):
-        return content
+        speaker, move = _classify("user", content) if rtype == "user" else ("agent", "surface")
+        yield speaker, move, content, 0
+        return
     if not isinstance(content, list):
-        return ""
-    parts = [b["text"] for b in content
-             if isinstance(b, dict) and b.get("type") == "text" and isinstance(b.get("text"), str)]
-    return "\n".join(parts)
+        return
+    for bi, b in enumerate(content):
+        if not isinstance(b, dict):
+            continue
+        t = b.get("type")
+        if t == "text" and isinstance(b.get("text"), str):
+            speaker, move = _classify("user", b["text"]) if rtype == "user" else ("agent", "surface")
+            yield speaker, move, b["text"], bi
+        elif t == "thinking" and isinstance(b.get("thinking"), str):
+            yield "agent", "thinking", b["thinking"], bi
+        elif t == "tool_use":
+            yield "agent", "action", _render_tool_use(b), bi
+        elif t == "tool_result":
+            yield "harness", "result", _render_tool_result(b), bi
 
 
-def _claude_thinking_text(message) -> str:
-    """The THINKING stratum of a Claude message — inner speech. It arrives in its own blocks and,
-    measured over real transcripts, in its own messages (never interleaved with uttered text), so it
-    lands as its own low-volume drawer rather than fusing into the utterance."""
-    content = message.get("content") if isinstance(message, dict) else None
-    if not isinstance(content, list):
-        return ""
-    parts = [b["thinking"] for b in content
-             if isinstance(b, dict) and b.get("type") == "thinking" and isinstance(b.get("thinking"), str)]
-    return "\n".join(parts)
-
-
-def _harness_stratum(role: str, text: str) -> str:
-    """Which stratum a turn speaks from — SURFACE-AGNOSTIC. A `user`-channel turn opening with a harness
-    marker carries machine text, never the operator's hand (the channel says `user`, the stratum says
-    otherwise). The markers repeat identically across sessions and surfaces (Claude · Codex · Copilot),
-    so one opener-set stratifies them all — a surface that never ran this left its boilerplate authored."""
-    if role == "user" and text.lstrip().startswith(_HARNESS_OPENERS):
-        return "harness"
-    return "authored"
+def _classify(role: str, text: str) -> tuple:
+    """The (speaker, move) of a bare role+text turn — SURFACE-AGNOSTIC, the fallback for a surface with
+    no block-level detail (a Copilot user_message / assistant_response column). A `user`-channel turn
+    opening with a harness marker carries machine text, never the operator's hand (the channel says
+    `user`, the speaker says harness). The markers repeat identically across Claude · Codex · Copilot,
+    so one opener-set classifies them all — a surface that never ran this left its boilerplate authored."""
+    if role == "user":
+        if text.lstrip().startswith(_HARNESS_OPENERS):
+            return "harness", "scaffold"
+        return "operator", "steering"
+    if role == "assistant":
+        return "agent", "surface"
+    return "harness", "scaffold"
 
 
 def _parse_claude(path: str) -> list:
-    """Parse a Claude `.jsonl` transcript into turns (user/assistant only, non-empty text)."""
-    turns: list = []
+    """Parse a Claude `.jsonl` transcript into ATOMS — one per message content-block, each carrying its
+    speaker and move (operator steering · agent surface/thinking/action · harness result/scaffold), its
+    record uuid + block ordinal, and the parentUuid DAG link."""
+    atoms: list = []
     # errors="replace": a lone non-UTF8 byte substitutes U+FFFD, never crashes the whole pass on one
     # line (matches structure_router's decode idiom); the bad line still JSON-parses or skips cleanly.
     with open(path, encoding="utf-8", errors="replace") as fh:
@@ -247,21 +295,18 @@ def _parse_claude(path: str) -> list:
                 row = json.loads(line)
             except json.JSONDecodeError:
                 continue
-            role = str(row.get("type", ""))
-            if role not in ("user", "assistant"):
+            rtype = str(row.get("type", ""))
+            if rtype not in ("user", "assistant"):
                 continue
-            uuid, ts = str(row.get("uuid") or ""), str(row.get("timestamp") or "")
-            # Inner speech first — it precedes the utterance it thought toward.
-            thinking = _claude_thinking_text(row.get("message"))
-            if thinking.strip():
-                turns.append({"uuid": uuid, "role": role, "text": thinking, "ts": ts,
-                              "stratum": "thinking"})
-            text = _claude_message_text(row.get("message"))
-            if not text.strip():
-                continue
-            turns.append({"uuid": uuid, "role": role, "text": text, "ts": ts,
-                          "stratum": _harness_stratum(role, text)})
-    return turns
+            uuid = str(row.get("uuid") or "")
+            parent = str(row.get("parentUuid") or "")
+            ts = str(row.get("timestamp") or "")
+            for speaker, move, text, bi in _claude_blocks(rtype, row.get("message")):
+                if not text.strip():
+                    continue
+                atoms.append({"uuid": uuid, "bi": bi, "parent": parent, "speaker": speaker,
+                              "move": move, "text": text, "ts": ts})
+    return atoms
 
 
 def _claude_agent_id(path: str) -> "str | None":
@@ -280,7 +325,7 @@ def claude_source(*, wing: str, room: str = "conversations") -> SourceCap:
         extra = {"lar_surface": "claude"}
         if agent_id is not None:
             extra.update({"lar_sidechain": 1, "lar_agent": agent_id})  # int, isomorphic with the TS stamp (Q3)
-        yield from _seq_records(_drawers(_source_key("claude", pointer), _parse_claude(pointer),
+        yield from _seq_records(_atoms(_source_key("claude", pointer), _parse_claude(pointer),
                                          wing=wing, room=room, extra=extra))
     return source
 
@@ -302,11 +347,44 @@ def _codex_message_text(content) -> str:
     return "\n".join(parts)
 
 
+def _codex_reasoning_text(p: dict) -> str:
+    """Plaintext reasoning from a Codex `reasoning` item — its summary blocks and any content; the
+    encrypted_content stays opaque (skipped). Often empty → the atom drops upstream."""
+    parts: list = []
+    for field in ("summary", "content"):
+        v = p.get(field)
+        if isinstance(v, str):
+            parts.append(v)
+        elif isinstance(v, list):
+            parts += [b.get("text", "") for b in v
+                      if isinstance(b, dict) and isinstance(b.get("text"), str)]
+    return "\n".join(x for x in parts if x)
+
+
+def _render_codex_call(p: dict) -> str:
+    """An agent ACTION atom's verbatim across the Codex tool payloads — function_call (name+arguments),
+    custom_tool_call (name+input), web_search_call (the search action)."""
+    if p.get("type") == "web_search_call":
+        return f"web_search({json.dumps(p.get('action'), ensure_ascii=False)})"
+    name = p.get("name") or "?"
+    args = p.get("arguments")
+    if args is None:
+        args = p.get("input") or ""
+    if not isinstance(args, str):
+        try:
+            args = json.dumps(args, ensure_ascii=False)
+        except (TypeError, ValueError):
+            args = str(args)
+    return f"{name}({args})"
+
+
 def _parse_codex(path: str) -> list:
-    """Parse a Codex rollout `.jsonl` into turns (message response_items, user/assistant only). An
-    assistant message carries a stable `id`; a user message carries none (the turn-key falls back to
-    the content hash)."""
-    turns: list = []
+    """Parse a Codex rollout `.jsonl` into ATOMS. A `response_item` payload maps to the taxonomy: a
+    message (user→operator/steering · assistant→agent/surface · developer→harness/scaffold), a reasoning
+    item (agent/thinking), a function_call / custom_tool_call / web_search_call (agent/action), a
+    *_output (harness/result). A user message and the tool items often carry no native id → a content-hash
+    atom-key. Codex atoms carry no per-record block split (bi stays 0; each item is one atom)."""
+    atoms: list = []
     # errors="replace": one non-UTF8 byte never crashes the pass (matches _parse_claude / structure_router).
     with open(path, encoding="utf-8", errors="replace") as fh:
         for line in fh:
@@ -320,23 +398,41 @@ def _parse_codex(path: str) -> list:
             if row.get("type") != "response_item":
                 continue
             p = row.get("payload") or {}
-            if p.get("type") != "message":
+            pt = p.get("type")
+            ts = str(row.get("timestamp") or "")
+            iid = str(p.get("id") or p.get("call_id") or "")
+            if pt == "message":
+                role = str(p.get("role", ""))
+                text = _codex_message_text(p.get("content"))
+                if role == "developer":
+                    speaker, move = "harness", "scaffold"
+                elif role == "user":
+                    speaker, move = _classify("user", text)
+                elif role == "assistant":
+                    speaker, move = "agent", "surface"
+                else:
+                    continue
+            elif pt == "reasoning":
+                text, (speaker, move) = _codex_reasoning_text(p), ("agent", "thinking")
+            elif pt in ("function_call", "custom_tool_call", "web_search_call"):
+                text, (speaker, move) = _render_codex_call(p), ("agent", "action")
+            elif pt in ("function_call_output", "custom_tool_call_output"):
+                out = p.get("output")
+                text = out if isinstance(out, str) else ("" if out is None else json.dumps(out, ensure_ascii=False))
+                speaker, move = "harness", "result"
+            else:
                 continue
-            role = str(p.get("role", ""))
-            if role not in ("user", "assistant"):
-                continue
-            text = _codex_message_text(p.get("content"))
             if not text.strip():
                 continue
-            turns.append({"uuid": str(p.get("id") or ""), "role": role,
-                          "text": text, "ts": str(row.get("timestamp") or "")})
-    return turns
+            atoms.append({"uuid": iid, "bi": 0, "parent": "", "speaker": speaker,
+                          "move": move, "text": text, "ts": ts})
+    return atoms
 
 
 def codex_source(*, wing: str, room: str = "conversations") -> SourceCap:
     """The Codex source-cap. `pointer` names one rollout `.jsonl`."""
     def source(pointer: str) -> Iterator[Record]:
-        yield from _seq_records(_drawers(_source_key("codex", pointer), _parse_codex(pointer),
+        yield from _seq_records(_atoms(_source_key("codex", pointer), _parse_codex(pointer),
                                          wing=wing, room=room, extra={"lar_surface": "codex"}))
     return source
 
@@ -358,7 +454,7 @@ def copilot_source(*, wing: "str | None" = None, room: str = "conversations",
                 if session_id is not None and sid != session_id:
                     continue
                 w = wing or "wing_copilot_unsorted"
-                yield from _drawers(f"copilot:{sid}", turns, wing=w, room=room,
+                yield from _atoms(f"copilot:{sid}", turns, wing=w, room=room,
                                     extra={"lar_surface": "copilot-cli"})
         yield from _seq_records(all_drawers())
     return source
@@ -399,7 +495,7 @@ def copilot_vscode_source(*, wing: str, room: str = "conversations") -> SourceCa
     def source(pointer: str) -> Iterator[Record]:
         session_id, turns = _parse_copilot_vscode(pointer)
         source_file = f"copilot-vscode:{session_id}" if session_id else _source_key("copilot-vscode", pointer)
-        yield from _seq_records(_drawers(source_file, turns, wing=wing, room=room,
+        yield from _seq_records(_atoms(source_file, turns, wing=wing, room=room,
                                          extra={"lar_surface": "copilot-vscode"}))
     return source
 

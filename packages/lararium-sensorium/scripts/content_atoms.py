@@ -20,20 +20,35 @@ def authored_only(meta: dict) -> bool:
     return (meta.get("lar_volume") or "normal") == "normal"
 
 
-def content_atoms(store, page: int = 256, keep: "Callable[[dict], bool] | None" = None) -> "Iterator[Tuple[str, str]]":
+def content_atoms(store, page: int = 256, keep: "Callable[[dict], bool] | None" = None,
+                  dedup_key: "str | None" = None) -> "Iterator[Tuple[str, str]]":
     """Drain the store's `scan` into `(cid, text)` atoms — content's own cids, verbatim documents.
 
     Pages `scan(offset, limit)` until it reports no `next`. A record carrying no document yields an
     empty text (the surfaces hold no verbatim regardless); its cid still rides, so a later resolve
     fetches the bytes from content. `keep(meta)` filters records into the VIEW without touching content
-    — the stream stays whole; the projection reads only what it should (e.g. `authored_only`)."""
+    — the stream stays whole; the projection reads only what it should (e.g. `authored_only`).
+
+    `dedup_key` (a metadata key, e.g. `lar_turn_key`) collapses records sharing one value to the FIRST
+    seen — a turn re-carried across a resume or a rewind (same turn-key, distinct cids under different
+    source_files) lands ONCE in the view, while content keeps every copy (the eidetic ground of what each
+    transcript held). Identity keys on the TURN, not the source, so genuinely-distinct turns that merely
+    share bytes (a repeated "yes") keep their own turn-keys and both ride — the record stays true."""
+    seen: "set | None" = set() if dedup_key else None
     offset = 0
     while True:
         page_rec = store.scan(offset, page)
         records = page_rec.get("records") or []
         for r in records:
-            if keep is not None and not keep(r.get("metadata") or {}):
+            meta = r.get("metadata") or {}
+            if keep is not None and not keep(meta):
                 continue
+            if seen is not None:
+                k = meta.get(dedup_key)
+                if k not in (None, ""):
+                    if k in seen:
+                        continue          # one turn already rode the view — its re-carry stays in content only
+                    seen.add(k)
             yield r.get("cid"), (r.get("document") or "")
         nxt = page_rec.get("next")
         if nxt is None:

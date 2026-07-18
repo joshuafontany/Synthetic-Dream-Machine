@@ -128,7 +128,7 @@ def test_capture_and_observe_lands_content_and_builds_the_worldline(tmp_path):
     res = capture_and_observe(root, "claude", main, wing="wing_proj",
                               embed_factory=_stub_embed_factory(), veil_secret=_SECRET)
     # content landed AND the worldline built in one pass
-    assert res["landed"] == 2 and res["audit"]["ok"]           # two main exchanges (u1/a1, u2/a2)
+    assert res["landed"] == 4 and res["audit"]["ok"]           # u1/a1/u2/a2 atomize to four atoms
     run = _run("sess-xyz")
     assert res["worldline"]["run"] == run                       # the VEILED root rides the summary
     assert res["worldline"]["spirits"] == [derive_handle(run, "aaa")]
