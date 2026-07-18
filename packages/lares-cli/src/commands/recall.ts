@@ -77,6 +77,9 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   // The addressed sensorium (from `lares sense <sensorium> recall`) — recall that sensorium up the ladder.
   if (typeof args.options["sensorium-root"] === "string") verbArgs["sensoriumRoot"] = args.options["sensorium-root"];
   for (const k of filterKeys) if (args.options[k] !== undefined) verbArgs[k] = args.options[k];
+  // --pair returns the exchange-VIEW: each matched block paired with its turn's siblings (steering
+  // beside surface), the merge done as a read-time view rather than baked into content.
+  if (args.flags["pair"]) verbArgs["pair"] = true;
 
 
   let did: string;

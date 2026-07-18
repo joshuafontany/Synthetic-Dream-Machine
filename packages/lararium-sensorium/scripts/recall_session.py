@@ -51,9 +51,10 @@ class RecallServer:
             speaker=(req.get("speaker") or None),
             channel=(req.get("channel") or None),
             function=(req.get("function") or None),
+            pair=bool(req.get("pair")),
         )
-        if drawer or as_list:
-            return out                                    # drawer entry / taxonomy — pass through
+        if drawer or as_list or "exchanges" in out:
+            return out                                    # drawer entry / taxonomy / paired exchanges — pass through
         results = []
         for m in out.get("matches", []):
             meta = m.get("metadata") or {}

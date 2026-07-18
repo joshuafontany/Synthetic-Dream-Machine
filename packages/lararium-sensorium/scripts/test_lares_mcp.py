@@ -61,6 +61,21 @@ def test_recall_filters_by_the_block_taxonomy(tmp_path):
     assert "operator" in everyone and "agent" in everyone   # unfiltered spans all — steering no longer drowns
 
 
+def test_recall_pairs_blocks_into_exchanges(tmp_path):
+    # the exchange-VIEW: a matched block recalls WITH its turn's siblings (steering beside surface),
+    # the merge done as a read-time view — never baked into content.
+    coord = _coord(tmp_path)
+    coord.pour("claude", _FIXTURE, wing="w")
+    out = coord.recall("engine", 8, pair=True)
+    assert "exchanges" in out and out["exchanges"]                # grouped into turns, not bare blocks
+    ex = next((e for e in out["exchanges"] if any(b["speaker"] == "operator" for b in e["blocks"])), None)
+    assert ex is not None                                          # a turn headed by the operator surfaced
+    speakers = [b["speaker"] for b in ex["blocks"]]
+    assert "operator" in speakers and "agent" in speakers         # steering paired with the agent's stream
+    idx = [b["chunk_index"] for b in ex["blocks"]]
+    assert idx == sorted(idx)                                      # blocks ride in document order
+
+
 def _live_turn_keys(coord):
     # the turn-keys RECALL surfaces (search excludes kapae-muted; taxonomy counts physical rows, so the
     # kapae contract reads through recall, not status).

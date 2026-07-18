@@ -192,10 +192,36 @@ class LaresCoordinator:
         return capture_and_observe(self._palace, surface, pointer, wing=wing or self._wing, room=room,
                                    embed_factory=lambda: (self._embed_one, self._model))
 
+    def _exchange_view(self, matches: list) -> list:
+        """Pair matched blocks into EXCHANGES — the read-time view the ontology names. Group the matches
+        by lar_turn_key, fetch each turn's FULL block-set (its siblings via content.cids_for_turn), order
+        by chunk_index. So a bare matched block recalls WITH its turn's context — the operator's steering
+        beside the agent's surface — the merge done as a VIEW, never baked into content. Turn order follows
+        the match ranking (the best-matching turn first); a turn surfaces once however many blocks matched."""
+        exchanges: list = []
+        seen: "set[str]" = set()
+        for m in matches:
+            tk = (m.get("metadata") or {}).get("lar_turn_key")
+            if not tk or tk in seen:
+                continue
+            seen.add(tk)
+            blocks = []
+            for cid in self._content.cids_for_turn(tk):
+                rec = self._content.get(cid)
+                if not rec:
+                    continue
+                meta = rec.get("metadata") or {}
+                blocks.append({"cid": cid, "chunk_index": meta.get("chunk_index", 0),
+                               "speaker": meta.get("lar_speaker"), "function": meta.get("lar_function"),
+                               "channel": meta.get("lar_channel"), "text": rec.get("document", "")})
+            blocks.sort(key=lambda b: b["chunk_index"])
+            exchanges.append({"turn_key": tk, "blocks": blocks})
+        return exchanges
+
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None, drawer: "str | None" = None,
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
                speaker: "str | None" = None, channel: "str | None" = None, function: "str | None" = None,
-               lens: str = "content") -> dict:
+               pair: bool = False, lens: str = "content") -> dict:
         """Recall the nearest turns to a query (mirrors `lares sense recall`); kapae-muted turns stay excluded.
 
         The `lens` folds the per-plane reads onto this one verb — the plane rides as a parameter, so the
@@ -230,19 +256,25 @@ class LaresCoordinator:
         surfaces = self._recall_surfaces()
         if where or len(surfaces) <= 1:
             # a filtered read, or a bare single-surface sensorium → the content-vector path, unchanged.
-            return self._content.search(self._embed_one(query), k, where)
-        # FUSE the #has surfaces: each yields ordered cids; RRF merges them; content resolves the verbatim.
-        pool = max(k * 2, 16)
-        ranked = [fn(query, pool) for _name, fn in surfaces]
-        fused = _rrf_fuse(ranked, k)
-        matches = []
-        for cid in fused:
-            rec = self._content.get(cid)
-            if rec:
-                matches.append({"cid": cid, "distance": None,
-                                "document": rec.get("document", ""), "metadata": rec.get("metadata", {})})
-        return {"matches": matches, "scanned": pool, "matched": len(matches),
-                "surfaces": [name for name, _ in surfaces]}
+            out = self._content.search(self._embed_one(query), k, where)
+        else:
+            # FUSE the #has surfaces: each yields ordered cids; RRF merges; content resolves the verbatim.
+            pool = max(k * 2, 16)
+            ranked = [fn(query, pool) for _name, fn in surfaces]
+            fused = _rrf_fuse(ranked, k)
+            matches = []
+            for cid in fused:
+                rec = self._content.get(cid)
+                if rec:
+                    matches.append({"cid": cid, "distance": None,
+                                    "document": rec.get("document", ""), "metadata": rec.get("metadata", {})})
+            out = {"matches": matches, "scanned": pool, "matched": len(matches),
+                   "surfaces": [name for name, _ in surfaces]}
+        if pair:
+            # the exchange-VIEW: pair the matched blocks into their turns (steering beside surface).
+            rest = {kk: vv for kk, vv in out.items() if kk != "matches"}
+            return {"exchanges": self._exchange_view(out.get("matches", [])), **rest}
+        return out
 
     def _recall_surfaces(self) -> list:
         """The recall-surface caps this sensorium #has — each `(name, search(query, k) -> ordered cids)`.
