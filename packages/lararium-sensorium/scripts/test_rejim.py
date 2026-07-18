@@ -9,7 +9,8 @@
 """
 import numpy as np
 
-from rejim import CONTENT, _amplitude_modulation, couple_rejim, detect_rejim, strip_private
+from rejim import (CONTENT, _amplitude_modulation, couple_rejim, detect_rejim, dfa_alpha,
+                   stream_realness, strip_private)
 
 
 def _refrain_text(n_reps: int = 140, seed: int = 11) -> str:
@@ -82,6 +83,25 @@ def test_amplitude_modulation_reads_the_two_witness():
     assert mod is not None and flat is not None
     assert mod > 0.3                                               # the fast envelope carries the slow period
     assert mod > flat + 0.2                                        # genuine nesting stands well clear of flat
+
+
+def test_dfa_alpha_separates_longrange_from_white():
+    # the long-memory meter: white noise sits at α≈0.5; an integrated random walk (strong persistence)
+    # rides α well above 1 — the scaling the placebo gate reads to tell geology from short-memory noise.
+    rng = np.random.default_rng(3)
+    a_white = dfa_alpha(rng.standard_normal(8192))
+    a_brown = dfa_alpha(np.cumsum(rng.standard_normal(8192)))
+    assert abs(a_white - 0.5) < 0.15                              # white/Markov flattens to ~0.5
+    assert a_brown > 1.2                                          # the walk is strongly long-range
+
+
+def test_stream_realness_gates_geology_from_markov():
+    # the cheap placebo gate: a stream with a real content refrain reads long-range; pure noise reads
+    # markov — so a rejim detected in a markov stream would be reading noise, and the gate says so.
+    real = stream_realness(_refrain_text())
+    noise = stream_realness(_noise_text())
+    assert real["verdict"] == "long-range" and real["alpha"] > 0.55
+    assert noise["verdict"] == "markov" and (noise["alpha"] is None or noise["alpha"] < 0.55)
 
 
 def test_strip_private_drops_the_band_series():

@@ -123,6 +123,51 @@ def couple_rejim(reading: dict) -> "list[dict]":
     return couples
 
 
+def dfa_alpha(x: np.ndarray, *, n_min: int = 16, n_max: "int | None" = None, n_scales: int = 14) -> "float | None":
+    """Detrended Fluctuation Analysis exponent α — the long-memory meter (Peng; Pulse-Seeker's import).
+    Integrate the series to a walk, fit local linear trends in windows of size n, measure the residual
+    fluctuation F(n) ∝ n^α. α≈0.5 = white / short-memory (a Markov stream flattens here by construction);
+    α>0.5 = persistent long-range correlation; a real geology stream sits α≈0.6–0.9. numpy-only. None when
+    the stream is too short to fit a scaling."""
+    x = np.asarray(x, dtype=float).ravel()
+    N = x.size
+    if N < 4 * n_min:
+        return None
+    y = np.cumsum(x - x.mean())
+    hi = n_max or N // 4
+    ns = np.unique(np.logspace(np.log10(n_min), np.log10(max(hi, n_min + 1)), n_scales).astype(int))
+    pts = []
+    for n in ns:
+        if n < 4 or N // n < 1:
+            continue
+        t = np.arange(n)
+        rms = []
+        for w in range(N // n):
+            seg = y[w * n:(w + 1) * n]
+            resid = seg - np.polyval(np.polyfit(t, seg, 1), t)
+            rms.append(float(np.sqrt(np.mean(resid ** 2))))
+        if rms:
+            pts.append((n, float(np.mean(rms))))
+    if len(pts) < 3:
+        return None
+    logn = np.log(np.array([p[0] for p in pts], dtype=float))
+    logf = np.log(np.array([p[1] for p in pts], dtype=float) + 1e-12)
+    return float(np.polyfit(logn, logf, 1)[0])
+
+
+def stream_realness(text: str, *, channel: str = CONTENT) -> dict:
+    """Does the stream carry REAL long-range structure (geology worth reading) or short-memory noise? Pour
+    the channel and read its DFA α — the cheap placebo gate the research earned (a Markov-babble stream
+    flattens α to 0.5 by construction, so no rejim it yields could be trusted). Returns {alpha, verdict}:
+    'long-range' (α>0.55 — detection is meaningful) · 'markov' (α≈0.5 — a detected rejim would read noise)
+    · 'too-short' (no scaling to fit). A stream-level witness beside the per-rejim gate."""
+    poured = pour_ticks([{"stream": "rejim", "text": text}])
+    a = dfa_alpha(poured["signals"][channel])
+    if a is None:
+        return {"alpha": None, "verdict": "too-short"}
+    return {"alpha": a, "verdict": "long-range" if a > 0.55 else "markov"}
+
+
 def strip_private(reading: dict) -> dict:
     """Drop the retained band series (`_series`/`_stride`) from every rejim — the persistable record.
     The band arrays serve only the in-memory coupling; a landed rejim resolves back to the stream by
