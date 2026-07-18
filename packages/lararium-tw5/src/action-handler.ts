@@ -84,6 +84,11 @@ export interface Tw5Deserializer {
    *  honors the same §6 law as a memetic carrier, never a silent last-write-wins
    *  overwrite. The `.meta` folds into the hash, so a FIELD-only edit surfaces too. */
   renderCarrier(uri: string, fields: Record<string, unknown>): { body: string; metaBody?: string };
+  /** Re-serialize a set of member records back into ONE multi-tiddler file (the
+   *  REPACK reciprocal of a bundle deserialize), via TW5's own field serializer.
+   *  `.json` emits the tiddler-array form (byte-shaped like TW5's getTiddlersAsJson);
+   *  an unsupported filetype throws. The members ride byte-clean (no injected fields). */
+  serializeBundle(records: ReadonlyArray<Record<string, unknown>>, ext: string): string;
 }
 
 /**
@@ -103,6 +108,17 @@ export function makeTw5Deserializer(engine: { readonly $tw: TW5Instance }): Tw5D
     renderCarrier: (uri, fields) => {
       const info = makeTw5FileInfo(engine.$tw, uri, fields);
       return { body: info.body, ...(info.hasMetaFile && info.metaBody !== undefined ? { metaBody: info.metaBody } : {}) };
+    },
+    serializeBundle: (records, ext) => {
+      const $tw = engine.$tw as unknown as { Tiddler: new (f: Record<string, unknown>) => { getFieldStrings(o?: { exclude?: string[] }): Record<string, string> }; config: { preferences?: { jsonSpaces?: number } } };
+      if (ext === ".json") {
+        const spaces = $tw.config.preferences?.jsonSpaces ?? 4;
+        // getFieldStrings excludes the runtime `bag` stamp — the members re-emit
+        // byte-clean, exactly as TW5's own getTiddlersAsJson shapes the array.
+        const data = records.map((f) => new $tw.Tiddler(f).getFieldStrings({ exclude: ["bag"] }));
+        return JSON.stringify(data, null, spaces);
+      }
+      throw new Error(`REPACK: no serializer for "${ext}" yet — only .json (a .multids / recursive-.tid serializer follows)`);
     },
   };
 }
@@ -235,6 +251,44 @@ export function registerActionReactors(table: VerbTable, opts: ActionHandlerOpti
   for (const verb of ACTION_VERBS) {
     table.register(verb, makeActionReactorFor(verb, opts));
   }
+  // REPACK — a QUERY verb (read + serialize, NO residency mutation, no
+  // effect-record): collect a pack's members via the aside provenance
+  // (`$:/config/OriginalTiddlerPaths`) and re-render the bundle file via TW5's own
+  // serializer (the reciprocal of a multi-tiddler deserialize). Returns the bytes;
+  // the gesture writes them to disk (for the operator's upstream PR). Read cap only.
+  table.register("REPACK", async (args, ctx) => {
+    const bag = String(args["bag"] ?? "");
+    const packPath = String(args["pack-path"] ?? "");
+    if (!bag || !packPath) throw new Error("REPACK: `bag` and `pack-path` required");
+    const proof = await ctx.cap("read", bag);
+    if (!proof.ok) throw new Error(`cap-denied: read on ${bag} required to REPACK (${proof.reason ?? "no reason"})`);
+    return executeRepack(makeBagAccess(opts), bag, packPath, opts.tw5);
+  });
+}
+
+/**
+ * REPACK — collect a pack's members from the aside provenance and re-render the
+ * multi-tiddler bundle. The members ride byte-clean (no injected fields); a
+ * missing member (tombstoned since its record vanished) surfaces in `missing`,
+ * never silently dropped.
+ */
+async function executeRepack(access: BagAccess, bag: string, packPath: string, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
+  if (!tw5) throw new Error("REPACK: no native serializer (no booted $tw)");
+  const provRec = await readFromBag(access, bag, ORIGINAL_TIDDLER_PATHS);
+  const prov    = parseProvenance(typeof provRec?.tiddler["text"] === "string" ? (provRec.tiddler["text"] as string) : undefined);
+  const members = membersOfPack(prov, packPath);
+  if (members.length === 0) throw new Error(`REPACK: no pack membership recorded for "${packPath}" in ${bag}`);
+  const records: Array<Record<string, unknown>> = [];
+  const missing: string[] = [];
+  for (const title of members) {
+    const rec = await readFromBag(access, bag, title);
+    if (rec) records.push(rec.tiddler as unknown as Record<string, unknown>);
+    else missing.push(title);
+  }
+  const dot = packPath.lastIndexOf(".");
+  const ext = dot >= 0 ? packPath.slice(dot) : "";
+  const text = tw5.serializeBundle(records, ext);
+  return { verb: "REPACK", path: packPath, text, count: records.length, ...(missing.length > 0 ? { missing } : {}) };
 }
 
 /** Per-ACTION-verb reactor factory. */

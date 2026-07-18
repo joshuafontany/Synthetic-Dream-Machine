@@ -98,4 +98,25 @@ describe.skipIf(!corePresent)("pack ingest — a .json bundle lands members + re
     expect(await liveTitle(composite, "Alpha")).toBe(true);
     expect(membersOfPack(await provenance(composite), PACK)).toEqual(["Alpha"]);
   });
+
+  test("REPACK collects the members via provenance + re-renders the bundle (round-trip)", async () => {
+    const composite = makeComposite();
+    await runIngest(composite, engine, jsonArgs([
+      { title: "Alpha", text: "a", tags: "keep" }, { title: "Beta", text: "b" },
+    ]));
+    // REPACK — the query verb: collect by provenance, serialize via TW5's own field serializer
+    const table = new VerbTable();
+    registerActionReactors(table, { composite, tw5: makeTw5Deserializer(engine) });
+    const args = { bag: BAG, "pack-path": PACK };
+    const result = await table.get("REPACK")!(args, ctx(composite, args)) as Record<string, unknown>;
+    expect(result["count"]).toBe(2);
+    expect(result["missing"]).toBeUndefined();
+    // the re-rendered bundle deserializes BACK to the same members (byte-clean round-trip)
+    const reparsed = JSON.parse(String(result["text"])) as Array<Record<string, string>>;
+    const byTitle = new Map(reparsed.map((t) => [t["title"], t] as const));
+    expect([...byTitle.keys()].sort()).toEqual(["Alpha", "Beta"]);
+    expect(byTitle.get("Alpha")!["text"]).toBe("a");
+    expect(byTitle.get("Alpha")!["tags"]).toContain("keep");
+    expect(byTitle.get("Alpha")!["bag"]).toBeUndefined();     // the runtime bag stamp stays OFF the bundle
+  });
 });

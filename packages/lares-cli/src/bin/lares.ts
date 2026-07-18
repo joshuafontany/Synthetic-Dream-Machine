@@ -35,6 +35,7 @@ import { cmdIngest }                  from "../commands/ingest.js";
 import { cmdSeed }                    from "../commands/seed.js";
 import { cmdRegenesis }               from "../commands/regenesis.js";
 import { cmdWatch }                   from "../commands/watch.js";
+import { cmdRepack }                  from "../commands/repack.js";
 import { cmdWingOf }                  from "../commands/wing-of.js";
 import { cmdSense }                   from "../commands/sense.js";
 import { cmdMempalace }               from "../commands/mempalace.js";
@@ -64,6 +65,7 @@ const COMMANDS: readonly Command[] = [
   { name: "act",           summary: "Residency Model ACTION verb (ADD/COPY/MOVE/CLEAR/DROP/LOAD). Run `lares act` for usage.", handler: cmdAct          },
   { name: "ingest",        summary: "Disk→records through the §6 gate: scan + diff (preview) or --apply through the island's INGEST verb.", handler: cmdIngest       },
   { name: "watch",         summary: "Watch a source dir and fire the ingest gesture per settle — one wave per quiet window. Preview by default; --apply submits.", handler: cmdWatch        },
+  { name: "repack",        summary: "Collect a multi-tiddler bundle's (.json) members from its aside provenance and re-render the packed file — the deliberate round-trip before an upstream TW5 PR.", handler: cmdRepack       },
   { name: "seed",          summary: "Plant every bags/@* holding back into its doc, kind-routed: system bags (@lares/@lararium) → the diff-gated ingest gesture; other holdings → `act LOAD` (mints the catalog-corpus entry on a virgin catalog). Idempotent — a converged tree no-ops. Preview by default; --apply submits. The regenesis re-feed entity.", handler: cmdSeed },
   { name: "regenesis",     summary: "CRDT-layer rebirth from bags/ (alpha ritual): stop incumbent → reset (store + genesis + projection watermark) → wake → seed --apply (zero-new wave = FAIL post-reset). Identity preserved; the mempalace stays untouched (its own cadence: palace-teardown + harvest --all). Every step idempotent, so a failed ceremony re-runs from the top. Preview by default; --force enacts.", handler: cmdRegenesis },
   { name: "draft",         summary: "Pull a tiddler from a lower bag into a writable draft (no tombstone). The operator may later land it through a residency ACTION verb (`lares act`).", handler: cmdDraft        },
