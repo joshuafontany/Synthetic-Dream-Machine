@@ -676,6 +676,32 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).repourRejim(req);
       },
+      status: async (input) => {
+        // The taxonomy over the holder's content store — reads the ONE handle the holder owns (no second client).
+        const { sensoriumRoot } = input;
+        return await captureFor(sensoriumRoot).status({});
+      },
+      worldline: async (input) => {
+        // The fork-DAG rhizome read through the holder that owns the store (fresh worldline handle per-op).
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).worldlineDag(req);
+      },
+      kapae: async (input) => {
+        // Mute a worldline branch + cascade across the content store, through the holder — serialized with
+        // capture so the mutation never races the live writer (the one-owner discipline).
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).cascadeKapae(req);
+      },
+      unKapae: async (input) => {
+        // Restore a muted worldline branch across the content store — the reverse of kapae, through the holder.
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).cascadeUnKapae(req);
+      },
+      planeRecord: async (input) => {
+        // The cross-plane witness through the holder that owns the store (read-only, shared plane-query impl).
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).planeRecord(req);
+      },
       placeStructurepalaceKapae: (turnKey, ended) => daemonVm.placeStructurepalaceKapae(turnKey, ended),
       subagentEdges: (transcript) => deriveSubagentEdges(transcript),
       worldlineCompare: (input) => daemonVm.worldlineCompare(input),

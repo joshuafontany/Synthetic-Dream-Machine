@@ -74,6 +74,17 @@ export interface SourceCapture {
   /** Re-derive the rejim plane over the content the holder already owns — the heavy whole-stream repour,
    *  queued between capture passes so it never races the writer. */
   repourRejim(request?: { channel?: string; nSurrogates?: number }): Promise<Record<string, unknown>>;
+  /** The taxonomy over the holder's content store — what the sensorium holds. Rides the serialized pipe. */
+  status(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
+  /** The fork-DAG rhizome (bitemporal AS-OF `asOf`, else the whole history). Read-only over the pipe. */
+  worldlineDag(request?: { selector?: string; asOf?: number | null }): Promise<Record<string, unknown>>;
+  /** Mute a worldline branch + cascade the mute across the holder's content store (move-not-delete). A
+   *  MUTATION, serialized with capture so it never races the live writer. `cascadeUnKapae` restores. */
+  cascadeKapae(request: { branch: string; tick: number }): Promise<Record<string, unknown>>;
+  /** Restore a muted worldline branch across the holder's content store — the reverse of `cascadeKapae`. */
+  cascadeUnKapae(request: { branch: string; tick: number }): Promise<Record<string, unknown>>;
+  /** The cross-plane witness: ONE cid → presence across content · structure · form (honest nulls). Read-only. */
+  planeRecord(request: { cid: string }): Promise<Record<string, unknown>>;
   close(): Promise<void>;
 }
 
@@ -110,6 +121,14 @@ export function makeSourceCapture(
     // the holder already owns — both ride the pipe (queue between capture passes, never race the writer).
     readRejim: async (request) => await p.send("read_rejim", { ...(request ?? {}) }) as Record<string, unknown>,
     repourRejim: async (request) => await p.send("repour_rejim", { ...(request ?? {}) }) as Record<string, unknown>,
+    // The lifecycle + cross-plane serve-ops: the taxonomy read, the fork-DAG read, the kapae/un-kapae
+    // branch-mute cascades (mutations, serialized with capture — never a second writer), and the cross-plane
+    // witness. Each rides the SAME serialized pipe as capture through the holder that owns the palace.
+    status: async (request) => await p.send("status", { ...(request ?? {}) }) as Record<string, unknown>,
+    worldlineDag: async (request) => await p.send("worldline", { ...(request ?? {}) }) as Record<string, unknown>,
+    cascadeKapae: async (request) => await p.send("kapae", { ...request }) as Record<string, unknown>,
+    cascadeUnKapae: async (request) => await p.send("un_kapae", { ...request }) as Record<string, unknown>,
+    planeRecord: async (request) => await p.send("plane_record", { ...request }) as Record<string, unknown>,
     close: p.close,
   };
 }

@@ -131,6 +131,20 @@ export interface DaemonVerbProvider {
   /** Re-derive the rejim plane over the content plane, THROUGH the serialized capture holder — the heavy
    *  whole-stream repour queues between capture passes and never races the live writer. */
   repourRejim(input: { channel?: string; nSurrogates?: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** The taxonomy over a sensorium's content store — what it holds — THROUGH the holder that owns the store.
+   *  `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
+  status(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** The fork-DAG rhizome read (bitemporal AS-OF `asOf`, else whole history) — THROUGH the capture holder,
+   *  which opens a fresh worldline handle per-op. `selector` narrows on the CLI skin. */
+  worldline(input: { selector?: string; asOf?: number | null; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** Mute a worldline branch + cascade the mute across the sensorium's content store — THROUGH the capture
+   *  holder, serialized with capture so the mutation never races the live writer. `unKapae` restores. */
+  kapae(input: { branch: string; tick: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** Restore a muted worldline branch across the sensorium — the reverse of `kapae`, THROUGH the holder. */
+  unKapae(input: { branch: string; tick: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** The cross-plane witness: ONE cid → presence across content · structure · form (honest nulls) — THROUGH
+   *  the holder that owns the store (read-only, one shared plane-query implementation). */
+  planeRecord(input: { cid: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the @daemon (warm holder).
    *  Fire-and-forget — the convergence twin of the CLI-side worldline KG valid-close. */
   placeStructurepalaceKapae(turnKey: string, ended?: string): void;
@@ -392,6 +406,48 @@ export function captureVerbCap(): CapModule {
             ...(nSurrogates !== undefined ? { nSurrogates } : {}),
             ...(sensoriumRoot ? { sensoriumRoot } : {}),
           });
+        });
+        registry.register("status", async (args) => {
+          // The taxonomy over a sensorium's content store — what it holds — through the holder that owns it.
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.status({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("worldline", async (args) => {
+          // The fork-DAG rhizome read (bitemporal AS-OF `asOf`, else whole history), through the capture
+          // holder (fresh worldline handle per-op). `selector` narrows on the CLI skin; the py `dag` renders whole.
+          const selector = typeof args["selector"] === "string" ? (args["selector"] as string) : undefined;
+          const asOf = typeof args["asOf"] === "number" ? (args["asOf"] as number) : undefined;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.worldline({
+            ...(selector ? { selector } : {}),
+            ...(asOf !== undefined ? { asOf } : {}),
+            ...(sensoriumRoot ? { sensoriumRoot } : {}),
+          });
+        });
+        registry.register("kapae", async (args) => {
+          // Mute a worldline branch + cascade the mute across the content store, through the capture holder —
+          // serialized with capture (the mutation never races the live writer). Reversible via `un-kapae`.
+          const branch = typeof args["branch"] === "string" ? (args["branch"] as string) : "";
+          const tick = typeof args["tick"] === "number" ? (args["tick"] as number) : NaN;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          if (!branch || Number.isNaN(tick)) throw new Error("kapae: args.branch (non-empty string) + args.tick (number) required");
+          return await daemon.kapae({ branch, tick, ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("un-kapae", async (args) => {
+          // Restore a muted worldline branch across the sensorium — the reverse of `kapae`, through the holder.
+          const branch = typeof args["branch"] === "string" ? (args["branch"] as string) : "";
+          const tick = typeof args["tick"] === "number" ? (args["tick"] as number) : NaN;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          if (!branch || Number.isNaN(tick)) throw new Error("un-kapae: args.branch (non-empty string) + args.tick (number) required");
+          return await daemon.unKapae({ branch, tick, ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("plane-record", async (args) => {
+          // The cross-plane witness: ONE cid → presence across content · structure · form (honest nulls),
+          // through the holder that owns the store (read-only, one shared plane-query implementation).
+          const cid = typeof args["cid"] === "string" ? (args["cid"] as string) : "";
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          if (!cid) throw new Error("plane-record: args.cid (non-empty string) required");
+          return await daemon.planeRecord({ cid, ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("structurepalace-kapae", async (args) => {
           // REWIND one turn's .structurepalace tally (+ salience down-weight) — the convergence twin of the
