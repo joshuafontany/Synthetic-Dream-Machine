@@ -186,3 +186,4 @@ export * from "./ingest-tolerant.js";
 export * from "./doc-load-probe-contract.js";
 
 export * from "./doctor-sweep.js";
+export * from "./pack-provenance.js";
