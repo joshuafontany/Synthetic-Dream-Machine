@@ -74,3 +74,47 @@ describe("VesselIslandPoolCore — single-flight activation latch", () => {
     await pool.disposeAll();
   });
 });
+
+describe("VesselIslandPoolCore — activation-on-reference (ensureWiki)", () => {
+  test("ensureWiki re-mounts a cold grain from its retained spec", async () => {
+    const { host, spawns } = countingHost();
+    const pool = new VesselIslandPoolCore({ host });
+
+    await pool.mountWiki(WIKI_ID, spec());
+    expect(pool.tier(WIKI_ID)).toBe("wela");
+
+    await pool.unmountWiki(WIKI_ID);          // cold — worker gone, spec retained
+    expect(pool.tier(WIKI_ID)).toBe("anu");
+
+    // A REFERENCE reactivates it — no spec passed; the grain identity outlived the body.
+    const live = await pool.ensureWiki(WIKI_ID);
+    expect(live).toBe(true);
+    expect(pool.tier(WIKI_ID)).toBe("wela");
+    expect(spawns()).toBe(2);                 // one original + one reactivation
+
+    await pool.disposeAll();
+  });
+
+  test("ensureWiki on a never-mounted grain returns false (caller resolves the spec)", async () => {
+    const { host } = countingHost();
+    const pool = new VesselIslandPoolCore({ host });
+
+    expect(await pool.ensureWiki("lar:///wiki/unknown")).toBe(false);
+    await pool.disposeAll();
+  });
+
+  test("concurrent ensureWiki on a cold grain still spawns exactly one worker", async () => {
+    const { host, spawns } = countingHost();
+    const pool = new VesselIslandPoolCore({ host });
+
+    await pool.mountWiki(WIKI_ID, spec());
+    await pool.unmountWiki(WIKI_ID);
+    const spawnsAfterFirst = spawns();
+
+    await Promise.all(Array.from({ length: 6 }, () => pool.ensureWiki(WIKI_ID)));
+    expect(pool.tier(WIKI_ID)).toBe("wela");
+    expect(spawns() - spawnsAfterFirst).toBe(1);   // single-flight holds through ensureWiki
+
+    await pool.disposeAll();
+  });
+});

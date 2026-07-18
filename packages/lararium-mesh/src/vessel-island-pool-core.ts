@@ -151,6 +151,11 @@ export class VesselIslandPoolCore {
   // single-owner gate: concurrent references to one cold grain fold into ONE
   // activation, so no stream ever spawns two sovereign workers (no safe epsilon).
   private readonly _activating = new Map<string, Promise<void>>();
+  // Retained mount spec per grain — the reactivation source. A cold slot drops its
+  // worker + ports, but its spec (recipe/grants/coreHash + pinned) stays here, so a
+  // later REFERENCE re-mounts it byte-for-byte (Orleans activation-on-reference: the
+  // grain identity outlives its physical activation). `ensureWiki` reads this.
+  private readonly _mountSpecs = new Map<string, { spec: WikiMountSpec; pinned: boolean }>();
   private readonly _host:           VesselIslandHost;
   private readonly _mainRepo:       Repo | null;
   private readonly _diskMirrorGrant: DiskMirrorGrant;
@@ -215,11 +220,39 @@ export class VesselIslandPoolCore {
     }
   }
 
+  /**
+   * Activation-on-REFERENCE — ensure a grain is live, mounting it from its retained
+   * spec if cold/absent (Orleans: a reference activates the grain; the resolver need
+   * not know whether it already runs). Idempotent + single-flight (folds through
+   * mountWiki), so a cold→wela activation preserves single-owner under concurrent
+   * references. Returns true when the grain is live after the call.
+   *
+   * A grain never mounted here (no retained spec) needs its spec resolved by the
+   * CALLER first (the resolver's spec-resolution seam) — `ensureWiki` re-mounts a
+   * KNOWN grain; it does not invent a spec. Absent a retained spec it returns false
+   * (the caller resolves the spec, then calls `mountWiki`).
+   */
+  async ensureWiki(wikiId: string): Promise<boolean> {
+    if (this.has(wikiId)) {
+      const slot = this._slots.get(wikiId);
+      if (slot && slot.temperature === "wela") slot.lastUsedAt = Date.now();
+      return true;
+    }
+    const retained = this._mountSpecs.get(wikiId);
+    if (!retained) return false;
+    await this.mountWiki(wikiId, retained.spec, { pinned: retained.pinned });
+    return this.has(wikiId);
+  }
+
   /** The activation body proper — intensity gate → LRU evict → spawn → `ea`
    *  handshake → live slot. Runs under mountWiki's single-flight latch, so exactly
    *  one activation runs per grain at a time (single-owner preserved). */
   private async _activateWiki(wikiId: string, spec: WikiMountSpec, opts: { pinned?: boolean }): Promise<void> {
     const pinned = opts.pinned ?? false;
+    // Retain the spec BEFORE the mount can fail — so a later reference re-mounts the
+    // grain identically whether this activation lands or not (the spec is the grain's
+    // durable identity; the worker is just its current body).
+    this._mountSpecs.set(wikiId, { spec, pinned });
     // Intensity gate (MaxR/MaxT): a wiki that keeps failing its mount inside
     // the window fails FAST and NAMED — never another full silence budget per
     // attempt, never a restart storm. The window prunes itself; success clears.
