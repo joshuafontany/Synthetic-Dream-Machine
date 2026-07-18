@@ -652,7 +652,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // on its own; the home wiki registers in the ONE collector as a PINNED `wiki` grain
       // (the single rotatable pin this constrained vessel grants besides @daemon).
       // mountPrimaryWiki already mounted + spec-retained it → onHydrate no-ops.
-      void residency.pin(slotActiveWikiId, "boot:home-wiki", "wiki");
+      if (slotActiveWikiId) void residency.pin(slotActiveWikiId, "boot:home-wiki", "wiki");
     },
   }, [...meshExtraCaps, ...whoExtraCaps]);
 

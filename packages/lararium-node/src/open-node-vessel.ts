@@ -881,7 +881,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // exempt from collection. Everything else activates on reference through the cap.
     // mountPrimaryWiki already mounted + spec-retained it, so onHydrate → ensureWiki
     // sees it live and no-ops (idempotent). Rotation = unpin the old, pin the new.
-    void residency.pin(slotActiveWikiId, "boot:home-wiki", "wiki");
+    if (slotActiveWikiId) void residency.pin(slotActiveWikiId, "boot:home-wiki", "wiki");
   };
 
   const orchestration: VesselOrchestration<VesselIslandPool> = {
