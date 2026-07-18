@@ -32,14 +32,14 @@ import {
   makeDurableMailbox,
   OpenIdentitySlot,
   emptyLarDoc, mutableLarRecord, tiddlerText,
-  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, recipeHostFacets,
+  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, recipeHostFacets, wikiBagUri,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
   BAG_IDS, slugFromUri, registerCrossroadsInOracle,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs, makeWikiActivationCap,
 }                                       from "@lararium/mesh";
-import type { WikiActivationCap }       from "@lararium/mesh";
+import type { WikiActivationCap, ResolveWikiSpec } from "@lararium/mesh";
 import { casDirForStorage, mirrorGenesisCasFs } from "./node-cas.js";
 import {
   ACTIVE_WIKI_URI,
@@ -50,6 +50,7 @@ import {
   composeVerbPlane,
   mempalaceProviderCap, formPalaceProviderCap, daemonVerbProviderCap, telemetryProviderCap,
   recallVerbCap, telemetryVerbCap, captureVerbCap, worldlineVerbCap,
+  buildWikiMountSpec,
 } from "@lararium/tw5";
 import type {
   VesselWikiSlot, DaemonVmCore, VesselDaemonVm, VesselOrchestration,
@@ -816,12 +817,33 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       onEa: (wikiId) => { void mailbox.drain(wikiId); },   // breath → parked verbs deliver
     });
 
+    // resolveWikiSpec — the UNKNOWN-grain branch: a bare reference to a NEVER-opened
+    // wiki resolves its mount spec from the recipe/catalog (the true multi-wiki swap).
+    // READ-ONLY catalog lookup (never `resolveOracleDoc`, which would MINT a phantom
+    // wiki): a slug with no registered canon-doc returns null → the caller parks. The
+    // island self-resolves its composition from the grants (buildWikiMountSpec), and the
+    // daemon reaches any bag by ACCESS, so no vessel-composite layer mount is needed here.
+    const resolveWikiSpec: ResolveWikiSpec = async (wikiId) => {
+      const slug    = slugFromUri(wikiId);
+      const wikiUrl = tiddlerText(assembly.catalogHandle.doc()?.tiddlers?.[wikiBagUri(slug)]) ?? null;
+      if (!wikiUrl || !wikiUrl.startsWith("automerge:")) return null;   // unknown → park
+      const { spec } = await buildWikiMountSpec(daemonVm, {
+        activeWikiId: wikiId,
+        wikiSlug:     slug,
+        coreHash:     assembly.coreHash,
+        islandUrl:    assembly.islandHandle.url,
+        wikiUrl,
+        catalogUrl:   assembly.catalogHandle.url,
+      });
+      return spec;
+    };
+
     // The activation-on-reference CAP the vessel HOLDS + the resolver READS. Node
     // advertises the FULL grant (concurrent multi-wiki + rotatable pins besides @daemon).
     wikiActivation = makeWikiActivationCap(residency, vmManager, {
       activationCap: NODE_WIKI_ACTIVATION_CAP,
       pinBudget:     NODE_WIKI_PIN_BUDGET,
-    });
+    }, resolveWikiSpec);
 
     // Sovereign-worker: bind the pool MECHANISM to the worker's POLICY commands.
     // A daemon evict request routes THROUGH the ONE collector (cool → onEvict →

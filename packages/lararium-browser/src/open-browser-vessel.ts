@@ -22,7 +22,7 @@ import {
   CATALOG_DOC_URI, DAEMON_BAG_ID,
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
-  BAG_IDS, slugFromUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap,
+  BAG_IDS, slugFromUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
@@ -40,6 +40,7 @@ import {
   COHERENCE_FRAME,
   SENSORIUM_FRAME,
   createWikiSenseSupervisor, registerWikiSenseVerbs,
+  buildWikiMountSpec,
 }                                            from "@lararium/tw5";
 import type { WikiSenseSupervisor }          from "@lararium/tw5";
 import type { CoherenceStatus } from "@lararium/tw5";
@@ -604,12 +605,30 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         },
         ...(workerScriptUrl ? { workerScriptUrl } : {}),
       });
+      // resolveWikiSpec — the UNKNOWN-grain branch (the true multi-wiki swap): a bare
+      // reference to a never-opened wiki resolves its spec from the recipe/catalog.
+      // READ-ONLY catalog lookup (no phantom mint); the island self-resolves its
+      // composition from the grants. Browser resolves within its minimal grant like node.
+      const resolveWikiSpec: ResolveWikiSpec = async (wikiId) => {
+        const slug    = slugFromUri(wikiId);
+        const wikiUrl = tiddlerText(assembly.catalogHandle.doc()?.tiddlers?.[wikiBagUri(slug)]) ?? null;
+        if (!wikiUrl || !wikiUrl.startsWith("automerge:")) return null;   // unknown → best-effort drop
+        const { spec } = await buildWikiMountSpec(daemon, {
+          activeWikiId: wikiId,
+          wikiSlug:     slug,
+          coreHash:     assembly.coreHash,
+          islandUrl:    assembly.islandHandle.url,
+          wikiUrl,
+          catalogUrl:   assembly.catalogHandle.url,
+        });
+        return spec;
+      };
       // The activation-on-reference CAP the vessel HOLDS + the resolver READS —
       // browser advertises the MINIMAL grant (small active set + @daemon; one rotatable pin).
       wikiActivation = makeWikiActivationCap(residency, vmManager, {
         activationCap: BROWSER_WIKI_ACTIVATION_CAP,
         pinBudget:     BROWSER_WIKI_PIN_BUDGET,
-      });
+      }, resolveWikiSpec);
       // A daemon evict request routes THROUGH the ONE collector (cool → onEvict →
       // unmountWiki) so the collector stays authoritative (never a desyncing direct unmount).
       daemon.onEvictRequest(async (bagId) => { await residency.cool(bagId); });
