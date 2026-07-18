@@ -43,6 +43,7 @@ import {
   ACTION_VERBS, type ActionVerb,
   parseResidencyAction, withEffectRecord, sha256HexSync, carrierHash,
   emptyLarDoc, mutableLarRecord, CATALOG_DOC_URI, ORACLE_DOC_URI,
+  ORIGINAL_TIDDLER_PATHS, parseProvenance, serializeProvenance, recordPack, membersOfPack,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 import type { TW5Instance } from "./types/tiddlywiki.js";
@@ -544,6 +545,10 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
     // the recover; the native path leans on the registry + the echo gate.
     let freshRecords: Array<Record<string, unknown>>;
     let receipt: Record<string, unknown>;
+    // A PACK: a native carrier whose file yields FOREIGN-titled tiddlers (a `.json`
+    // array · `.multids` · a `.tid` whose inner title ≠ its path). Its membership
+    // rides ASIDE in `$:/config/OriginalTiddlerPaths`, never on the tiddlers.
+    let packInfo: { packPath: string; members: string[] } | null = null;
     if (memetic) {
       const current = new Map<string, Record<string, unknown>>();
       for (const t of groupTitles) {
@@ -598,6 +603,15 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
         return { ...fields, title: own || uri };
       });
+      // Pack detection: any member whose title is NOT the carrier's own loci URI
+      // came from a bundle (the file's tiddlers self-title). Record the WHOLE
+      // membership → the pack file path, so REPACK can re-collect it and the
+      // projector suppresses per-member explosion. The path mirrors the disk
+      // mirror-relative form (`<uri-path><ext>`), TW5-legible for the PR workflow.
+      if (freshRecords.some((r) => r["title"] !== uri)) {
+        const packPath = (uri.startsWith("lar:///") ? uri.slice("lar:///".length) : uri) + (carrier.ext || "");
+        packInfo = { packPath, members: freshRecords.map((r) => String(r["title"])) };
+      }
 
       // §6 for a native carrier — the SAME triangle a memetic carrier runs, via
       // the registry's own render (the file-info BODY, the digest surface the
@@ -643,7 +657,22 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         tombstoned.push(t);
       }
     }
-    results.push({ ...receipt, landed: freshTitles.size, tombstoned });
+    // A PACK carrier records its membership ASIDE (`$:/config/OriginalTiddlerPaths`)
+    // and tombstones any member the re-ingest DROPPED from the file — the group
+    // loop above never sees a pack's foreign-titled members (they don't nest under
+    // the carrier URI), so the map is the only record of the pack's prior shape.
+    if (packInfo) {
+      const provRec = await readFromBag(access, action.toBag, ORIGINAL_TIDDLER_PATHS);
+      const prov    = parseProvenance(typeof provRec?.tiddler["text"] === "string" ? (provRec.tiddler["text"] as string) : undefined);
+      const dropped = membersOfPack(prov, packInfo.packPath).filter((t) => !freshTitles.has(t));
+      for (const t of dropped) { await tombstoneIn(access, action.toBag, t, o); tombstoned.push(t); }
+      const next = serializeProvenance(recordPack(prov, packInfo.packPath, packInfo.members));
+      await landInBag(access, action.toBag, {
+        tiddler: { title: ORIGINAL_TIDDLER_PATHS, type: "application/json", text: next } as LarTiddlerRecord["tiddler"],
+        meta: {},
+      }, action.changeId, o);
+    }
+    results.push({ ...receipt, landed: freshTitles.size, tombstoned, ...(packInfo ? { pack: packInfo.packPath } : {}) });
   }
 
   // ── apply the deletion wave ──────────────────────────────────────────────
