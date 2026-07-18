@@ -520,7 +520,7 @@ export interface MultiGraphRecallResult {
  * `extraGraphs`), build their weighted legs, then RRF-fuse them on the verbatim_sha. The aperture
  * knobs ride here — `formWeight` tilts the form leg, `register`/`grammarLayer` scope it, and
  * `apertureGrain` (P6) re-weights the fused ranking toward the paragraph-scale basin-peak. Wired into
- * the @daemon `recall` verb (open-node-vessel) as a recall mode beside `search` / `list` / `drawer`.
+ * the @daemon `recall` verb (open-node-vessel) as a recall mode beside `search` / `list` / `imago`.
  */
 export async function multiGraphRecall(
   deps: MultiGraphRecallDeps,

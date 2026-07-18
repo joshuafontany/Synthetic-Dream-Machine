@@ -61,7 +61,7 @@ async function recallIntoWake(): Promise<WakeRecall> {
     const r = await runVerb("recall", { wing, limit: 5 }, did, { timeoutMs: 9000 });
     if (r.status !== "done") return { ok: false, wing, note: r.errorMessage ?? "recall error" };
     const out = summaryOutput(r) ?? {};
-    const rows = Array.isArray(out["drawers"]) ? (out["drawers"] as Array<Record<string, unknown>>) : [];
+    const rows = Array.isArray(out["imagines"]) ? (out["imagines"] as Array<Record<string, unknown>>) : [];
     const recent = rows.slice(0, 5).map((d) => ({
       room: typeof d["room"] === "string" ? d["room"] : "",
       preview: String(d["content_preview"] ?? d["content"] ?? d["preview"] ?? d["text"] ?? "").replace(/\s+/g, " ").trim().slice(0, 140),

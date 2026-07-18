@@ -143,7 +143,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "--lens <plane>  content | structure | form | persistence (default content) — READ verbs",
       "--wing <w>      scope to one project wing",
       "--voice/--band/--agent/--surface/--drift   recall stamp filters (compose AND, honest counts)",
-      "--drawer <id>   (recall) fetch one drawer verbatim; --list lists drawers",
+      "--imago <id>    (recall) fetch one imago verbatim; --list lists imagines",
       "--all           (pour) sweep every transcript source",
       "--confirm/--drain/--force   (teardown) remove / quiesce-first / override live holders",
     ],

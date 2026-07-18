@@ -11,8 +11,8 @@
  *   lares sense recall <keywords...>          semantic search (default)
  *   lares sense recall <kw> --wing <w>        filter to one project wing
  *   lares sense recall <kw> --k <n>           cap results (default 5); --limit stays as a back-compat alias
- *   lares sense recall --drawer <id>          fetch one drawer verbatim
- *   lares sense recall --list [--wing <w>]    list drawers (no query)
+ *   lares sense recall --imago <id>           fetch one imago verbatim
+ *   lares sense recall --list [--wing <w>]    list imagines (no query)
  *
  * The `--k` name mirrors the isomorphic MCP tool arg (`recall(query, k)`); `--limit`
  * keeps working for muscle-memory (`--k` wins when the operator passes both).
@@ -49,7 +49,7 @@ function preview(text: unknown, n = 180): string {
 
 export async function cmdRecall(args: ParsedArgs): Promise<number> {
   const query   = args.positional.join(" ").trim();
-  const drawer  = args.options["drawer"];
+  const imago   = args.options["imago"];
   const wing    = args.options["wing"];
   // `--k` mirrors the MCP tool arg; `--limit` survives as a back-compat alias (--k wins).
   const limit   = args.options["k"] ?? args.options["limit"];
@@ -61,8 +61,8 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   const filterKeys = ["agent", "surface", "speaker", "channel", "function"] as const;
   const hasFilters = filterKeys.some((k) => args.options[k] !== undefined);
 
-  if (!query && !drawer && !wantList && !hasFilters) {
-    console.error("usage: lares sense recall <keywords...> | --drawer <id> | --list [--wing <w>] [--k <n>]");
+  if (!query && !imago && !wantList && !hasFilters) {
+    console.error("usage: lares sense recall <keywords...> | --imago <id> | --list [--wing <w>] [--k <n>]");
     console.error("  filters: --agent <id> --surface <claude|codex|copilot-cli|copilot-vscode>");
     console.error("           --speaker <operator|agent|harness> --channel <speech|thought|tool> --function <steering|surface|scaffold|thinking|action|result>");
     return 2;
@@ -70,7 +70,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
 
   // The recall verb args (the daemon's handler dispatches by which are present).
   const verbArgs: Record<string, unknown> = {};
-  if (drawer)            verbArgs["drawer"] = drawer;
+  if (imago)             verbArgs["imago"] = imago;
   else if (query)        verbArgs["query"]  = query;
   if (wing  !== undefined) verbArgs["wing"]  = wing;
   if (limit !== undefined) verbArgs["limit"] = Number(limit);
@@ -126,7 +126,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   // STALE-DAEMON GUARD — a daemon predating the stamp filters ignores unknown verb args and
   // returns the UNFILTERED result (the silent drop the filters ban). A filtered response always
   // carries `scanned`; its absence under requested filters refuses loud, never lies quietly.
-  if (hasFilters && mode !== "drawer" && typeof out["scanned"] !== "number") {
+  if (hasFilters && mode !== "imago" && typeof out["scanned"] !== "number") {
     const msg = "the running daemon predates recall stamp filters (it returned an unfiltered result)";
     emit(args, {
       ok: false, requestId: result.requestId,
@@ -140,9 +140,9 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
     requestId: result.requestId,
     data: out,
     human: () => {
-      if (mode === "drawer") {
-        const d = (out["drawer"] ?? {}) as Record<string, unknown>;
-        console.log(`drawer ${String(d["drawer_id"] ?? "?")}`);
+      if (mode === "imago") {
+        const d = (out["imago"] ?? {}) as Record<string, unknown>;
+        console.log(`imago ${String(d["imago_id"] ?? "?")}`);
         console.log(typeof d["content"] === "string" ? d["content"] : JSON.stringify(d, null, 2));
       } else if (mode === "search") {
         const hits = Array.isArray(out["results"]) ? (out["results"] as Array<Record<string, unknown>>) : [];
@@ -157,13 +157,13 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
         }
       } else {
         // list
-        const drawers = Array.isArray(out["drawers"]) ? (out["drawers"] as Array<Record<string, unknown>>) : [];
+        const imagines = Array.isArray(out["imagines"]) ? (out["imagines"] as Array<Record<string, unknown>>) : [];
         const total = out["total"];
         const fnote = typeof out["scanned"] === "number" ? ` (filtered from ${String(out["scanned"])} scanned)` : "";
-        console.log(`drawers ${drawers.length}${typeof total === "number" ? ` of ${total}` : ""}${fnote}`);
-        for (const d of drawers) {
+        console.log(`imagines ${imagines.length}${typeof total === "number" ? ` of ${total}` : ""}${fnote}`);
+        for (const d of imagines) {
           const loc = [d["wing"], d["room"]].filter(Boolean).join("/") || "—";
-          console.log(`  ${String(d["drawer_id"] ?? d["id"] ?? "?")}  ${loc}`);
+          console.log(`  ${String(d["imago_id"] ?? d["id"] ?? "?")}  ${loc}`);
           console.log(`        ${preview(d["content"] ?? d["preview"] ?? d["text"])}`);
         }
       }

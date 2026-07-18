@@ -68,7 +68,7 @@ export const VERB_GROUP = {
 /** The pooled mempalace READ client face the recall verb drives inside a `withClient` scope (the
  *  three read ops; the verbatim PLACE-memory membrane). */
 export interface RecallClient {
-  getDrawer(drawerId: string): Promise<Record<string, unknown>>;
+  getImago(imagoId: string): Promise<Record<string, unknown>>;
   search(args: Record<string, unknown>): Promise<Record<string, unknown>>;
   listDrawers(args: Record<string, unknown>): Promise<Record<string, unknown>>;
 }
@@ -203,21 +203,21 @@ async function filteredList(
   let matched = 0;
   for (let offset = 0; ; offset += pageSize) {
     const page = await client.listDrawers({ ...(a.wing !== undefined ? { wing: a.wing } : {}), limit: pageSize, offset });
-    const drawers = Array.isArray(page["drawers"]) ? (page["drawers"] as Array<Record<string, unknown>>) : [];
-    scanned += drawers.length;
-    for (const d of drawers) {
+    const imagines = Array.isArray(page["imagines"]) ? (page["imagines"] as Array<Record<string, unknown>>) : [];
+    scanned += imagines.length;
+    for (const d of imagines) {
       const meta = (d["metadata"] as Record<string, unknown> | undefined) ?? {};
       if (!drawerPassesStampFilters(filters, meta)) continue;
       matched += 1;
       if (kept.length < limit) kept.push(d);
     }
-    const count = typeof page["count"] === "number" ? (page["count"] as number) : drawers.length;
+    const count = typeof page["count"] === "number" ? (page["count"] as number) : imagines.length;
     const total = typeof page["total"] === "number" ? (page["total"] as number) : scanned;
     if (count < pageSize || offset + count >= total) break;
   }
   return {
     mode: "list",
-    drawers: kept,
+    imagines: kept,
     total: matched,
     filters: filters as unknown as Record<string, unknown>,
     scanned,
@@ -236,7 +236,7 @@ export function recallVerbCap(): CapModule {
       const form = resolve<FormPalaceProvider>(VERB_PROVIDER.formPalace);
       return (registry: VerbTable) => {
         registry.register("recall", async (args) => {
-          const drawerId = typeof args["drawer"] === "string" ? (args["drawer"] as string) : "";
+          const imagoId = typeof args["imago"] === "string" ? (args["imago"] as string) : "";
           const query    = typeof args["query"]  === "string" ? (args["query"]  as string) : "";
           const wing     = typeof args["wing"]   === "string" ? (args["wing"]   as string) : undefined;
           const limitRaw = args["limit"];
@@ -269,7 +269,7 @@ export function recallVerbCap(): CapModule {
           // Warm pooled sidecar (started once, reused, self-healing) — recall stays sub-second after the
           // first cold start; this makes recall-into-wake fast.
           return mp.withClient(async (client) => {
-            if (drawerId) return { mode: "drawer", drawer: await client.getDrawer(drawerId) };
+            if (imagoId) return { mode: "imago", imago: await client.getImago(imagoId) };
             if (filters && query) return filteredSearch(client, filters, { query, wing, limit });
             if (filters) return filteredList(client, filters, { wing, limit });
             if (dual && query) {

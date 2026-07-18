@@ -41,13 +41,13 @@ class RecallServer:
 
     def recall(self, req: dict) -> dict:
         """Combined-arms recall over the sensorium's #has stack — content-vector ⊕ mempalace projection,
-        RRF-fused, resolved verbatim from content. `drawer` fetches one entry; `list` reports the taxonomy.
+        RRF-fused, resolved verbatim from content. `imago` fetches one entry; `list` reports the taxonomy.
 
         The daemon recall verb + CLI read the `{results:[{text,similarity,wing,room,cid}]}` shape, so the
-        search face MAPS the coordinator's `matches` into it (drawer/list pass through unchanged). This is
+        search face MAPS the coordinator's `matches` into it (imago/list pass through unchanged). This is
         the one adaptation the read-holder owns — the coordinator stays the pure engine. The holder forwards
         every recall arg the API accepts (below), re-declaring no filter of its own."""
-        drawer = req.get("drawer") or None
+        imago = req.get("imago") or None
         as_list = bool(req.get("list"))
         # Forward every recall param the request carries — the API signature is the single source of truth.
         kwargs = {}
@@ -60,8 +60,8 @@ class RecallServer:
                 kwargs[name] = req[name]
         out = self._coord.recall(str(req.get("query") or ""),
                                  int(req.get("k") or req.get("limit") or 8), **kwargs)
-        if drawer or as_list or "exchanges" in out:
-            return out                                    # drawer entry / taxonomy / paired exchanges — pass through
+        if imago or as_list or "exchanges" in out:
+            return out                                    # imago entry / taxonomy / paired exchanges — pass through
         results = []
         for m in out.get("matches", []):
             meta = m.get("metadata") or {}

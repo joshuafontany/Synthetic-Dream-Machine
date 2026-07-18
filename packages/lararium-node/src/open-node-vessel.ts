@@ -305,10 +305,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const { sensoriumRoot: _sensoriumRoot, ...req } = a;
       return await recallFor(root).recall(req);
     },
-    getDrawer: async (drawerId) => {
+    getImago: async (imagoId) => {
       recallContent ??= makeContentPalace(larContentDir());
-      const e = await recallContent.get(drawerId);
-      return e ? { drawer_id: e.cid, content: e.document, ...e.metadata } : {};
+      const e = await recallContent.get(imagoId);
+      return e ? { imago_id: e.cid, content: e.document, ...e.metadata } : {};
     },
     listDrawers: async (a) => {
       recallContent ??= makeContentPalace(larContentDir());
@@ -318,7 +318,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       let recs = page.records as ReadonlyArray<{ cid: string; document?: string; metadata?: Record<string, unknown> }>;
       if (wing) recs = recs.filter((r) => r.metadata?.["wing"] === wing);
       return {
-        drawers: recs.map((r) => ({ drawer_id: r.cid, content: r.document ?? "", wing: r.metadata?.["wing"], room: r.metadata?.["room"] })),
+        imagines: recs.map((r) => ({ imago_id: r.cid, content: r.document ?? "", wing: r.metadata?.["wing"], room: r.metadata?.["room"] })),
         total: page.total,
       };
     },

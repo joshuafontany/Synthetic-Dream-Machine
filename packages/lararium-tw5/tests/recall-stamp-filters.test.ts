@@ -34,20 +34,20 @@ const HITS = [
   { text: "another codex turn", source_path: "/stage/codex__run-cdx-2.jsonl", similarity: 0.7 },
 ];
 
-const DRAWERS = [
-  { drawer_id: "d1", metadata: { source_file: "codex__run-cdx-1.jsonl", lar_surface: "codex", lar_band: "raw" } },
-  { drawer_id: "d2", metadata: { source_file: "claude__run-cl-1.jsonl", lar_surface: "claude", lar_band: "canon", lar_voices: "Council (Lares)" } },
-  { drawer_id: "d3", metadata: { source_file: "codex__run-cdx-2.jsonl", lar_surface: "codex", lar_band: "synthesis", lar_drift: "arity:2" } },
+const IMAGINES = [
+  { imago_id: "d1", metadata: { source_file: "codex__run-cdx-1.jsonl", lar_surface: "codex", lar_band: "raw" } },
+  { imago_id: "d2", metadata: { source_file: "claude__run-cl-1.jsonl", lar_surface: "claude", lar_band: "canon", lar_voices: "Council (Lares)" } },
+  { imago_id: "d3", metadata: { source_file: "codex__run-cdx-2.jsonl", lar_surface: "codex", lar_band: "synthesis", lar_drift: "arity:2" } },
 ];
 
 function fakeClient(): RecallClient & { lastSearchLimit?: number } {
   const c: RecallClient & { lastSearchLimit?: number } = {
-    async getDrawer(id) { return { drawer_id: id, content: "x" }; },
+    async getImago(id) { return { imago_id: id, content: "x" }; },
     async search(args) {
       c.lastSearchLimit = typeof args["limit"] === "number" ? (args["limit"] as number) : undefined;
       return { query: args["query"], results: HITS };
     },
-    async listDrawers() { return { drawers: DRAWERS, count: DRAWERS.length, total: DRAWERS.length, offset: 0, limit: 200 }; },
+    async listDrawers() { return { imagines: IMAGINES, count: IMAGINES.length, total: IMAGINES.length, offset: 0, limit: 200 }; },
   };
   return c;
 }
@@ -111,8 +111,8 @@ describe("recall verb — stamp filters over the list (exact lar_* metadata)", (
   test("--surface codex lists only codex drawers", async () => {
     const recall = await makeRecall(fakeClient());
     const out = await recall({ surface: "codex" });
-    const drawers = out["drawers"] as Array<Record<string, unknown>>;
-    expect(drawers.map((d) => d["drawer_id"])).toEqual(["d1", "d3"]);
+    const imagines = out["imagines"] as Array<Record<string, unknown>>;
+    expect(imagines.map((d) => d["imago_id"])).toEqual(["d1", "d3"]);
     expect(out["scanned"]).toBe(3);
     expect(out["matched"]).toBe(2);
   });
@@ -120,9 +120,9 @@ describe("recall verb — stamp filters over the list (exact lar_* metadata)", (
   test("--drift keeps only drift-stamped drawers; --band composes", async () => {
     const recall = await makeRecall(fakeClient());
     const drifted = await recall({ drift: true });
-    expect((drifted["drawers"] as Array<Record<string, unknown>>).map((d) => d["drawer_id"])).toEqual(["d3"]);
+    expect((drifted["imagines"] as Array<Record<string, unknown>>).map((d) => d["imago_id"])).toEqual(["d3"]);
     const both = await recall({ drift: true, band: "canon" });
-    expect((both["drawers"] as unknown[]).length).toBe(0); // composed clauses — honest empty
+    expect((both["imagines"] as unknown[]).length).toBe(0); // composed clauses — honest empty
     expect(both["matched"]).toBe(0);
   });
 
@@ -130,7 +130,7 @@ describe("recall verb — stamp filters over the list (exact lar_* metadata)", (
     const recall = await makeRecall(fakeClient());
     const out = await recall({});
     expect(out["mode"]).toBe("list");
-    expect((out["drawers"] as unknown[]).length).toBe(3);
+    expect((out["imagines"] as unknown[]).length).toBe(3);
     expect(out["filters"]).toBeUndefined();
   });
 });

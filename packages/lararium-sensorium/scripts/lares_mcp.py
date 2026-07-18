@@ -218,7 +218,7 @@ class LaresCoordinator:
             exchanges.append({"turn_key": tk, "blocks": blocks})
         return exchanges
 
-    def recall(self, query: str, k: int = 8, *, wing: "str | None" = None, drawer: "str | None" = None,
+    def recall(self, query: str, k: int = 8, *, wing: "str | None" = None, imago: "str | None" = None,
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
                speaker: "str | None" = None, channel: "str | None" = None, function: "str | None" = None,
                pair: bool = False, lens: str = "content") -> dict:
@@ -234,7 +234,7 @@ class LaresCoordinator:
         Isomorphic: a bare stream sensorium recalls by vector alone; a memory sensorium fuses
         lexical+entity+vector — the SAME machinery reading whatever the stack composes (never a hardcoded list).
 
-        Read modes + filters shed onto this spine: `drawer` fetches ONE verbatim entry by turn-key; `list`
+        Read modes + filters shed onto this spine: `imago` fetches ONE verbatim entry by turn-key; `list`
         reports the taxonomy. A `wing`/`agent`/`surface` filter narrows by provenance; the TAXONOMY filters
         `speaker`/`channel`/`function` narrow by the block's own axis — so a recall can surface the operator's
         steering as its own stratum (speaker="operator"), the loud voices (channel="speech"), or one role.
@@ -247,8 +247,8 @@ class LaresCoordinator:
             return self.recall_form(query, k)
         if lens != "content":
             raise ValueError(f"recall lens {lens!r} unknown — name one of: content · structure · form")
-        if drawer:
-            return self._content.get(drawer) or {}
+        if imago:
+            return self._content.get(imago) or {}
         if list:
             return self._content.taxonomy()
         where = _recall_where(wing=wing, agent=agent, surface=surface,
@@ -494,19 +494,19 @@ def build_mcp(coordinator: LaresCoordinator):
                      wing=wing, room=room)
 
     @mcp.tool()
-    def recall(query: str, k: int = 8, wing: "str | None" = None, drawer: "str | None" = None,
+    def recall(query: str, k: int = 8, wing: "str | None" = None, imago: "str | None" = None,
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
                speaker: "str | None" = None, channel: "str | None" = None, function: "str | None" = None,
                pair: bool = False, lens: str = "content", sensorium: "str | None" = None) -> dict:
         """Recall the nearest turns to a query from a sensorium (`sensorium` names it; absent → memory).
         `lens` names the plane: `content` (default, combined-arms) · `structure` (nearest shapes) · `form`
-        (induced-template membership, by cid). `drawer` fetches one verbatim; `list` reports the taxonomy.
+        (induced-template membership, by cid). `imago` fetches one verbatim; `list` reports the taxonomy.
         Filters narrow the pool: wing/agent/surface by provenance; the block-taxonomy `speaker` (operator/
         agent/harness) · `channel` (speech/thought/tool) · `function` (steering/surface/…) surface ONE
         stratum — the operator's steering alone, the loud voices, a single role. `pair` returns the
         exchange-view (each block paired with its turn's siblings). Mirrors `lares sense recall` exactly —
         two surfaces, one API."""
-        return _call("recall", sensorium, query, k, wing=wing, drawer=drawer, list=list,
+        return _call("recall", sensorium, query, k, wing=wing, imago=imago, list=list,
                      agent=agent, surface=surface, speaker=speaker, channel=channel, function=function,
                      pair=pair, lens=lens)
 
@@ -572,15 +572,15 @@ class DaemonCoordinator:
         )
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None,
-               drawer: "str | None" = None, sensorium_root: "str | None" = None,
+               imago: "str | None" = None, sensorium_root: "str | None" = None,
                lens: str = "content", **_) -> dict:
         # The plane lenses (structure/form) ride the py engine directly; the daemon read-holder threads
         # the CONTENT lens today, so a plane lens over the routed wire OWES the routing generalization.
         if lens != "content":
             self._owed(f"recall --lens {lens}")
         args: dict = {"limit": k}
-        if drawer:
-            args["drawer"] = drawer
+        if imago:
+            args["imago"] = imago
         else:
             args["query"] = query
         if wing or self._wing != "wing_default":
