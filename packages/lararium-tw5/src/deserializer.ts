@@ -97,8 +97,9 @@ export function memeticWikitextDeserializer(
   // ev.fullText because MemeStreamParser frames on SOH/ETX. Capture
   // everything before the first SOH as `prologue` on the first carrier's
   // parent and everything after the last ETX/EOT as `postamble` on the
-  // last carrier's parent. The markdown-meme template re-emits both
-  // verbatim. Round-trip law: anything in the operator's source survives.
+  // last carrier's parent. The recompose inverse (`expandMemeRefs` /
+  // `exportMemeText`) re-emits both verbatim. Round-trip law: anything in
+  // the operator's source survives.
   // (Multi-meme prologue/postamble distribution between intermediate
   // carriers lands when MemeStreamParser surfaces positional metadata on
   // carrier events.)

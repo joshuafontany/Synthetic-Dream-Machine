@@ -141,7 +141,7 @@ Write-back routes by ''type'', in three rules:
 # ''Default rule.'' Every other tiddler follows the ''standard TW5 path'' — `$tw.utils.generateTiddlerFileInfo` semantics, run inside the island's own TW5 VM: `.tid` for tw5-wikitext, content-file + `.meta` sidecar for foreign types, `.json` for unsafe fields. One tiddler, one file, TW5's own format law.
 # ''Cascade rule.'' Siting and format overrides ride ''composable cascade tiddlers inside the wiki'' — `lar:///ha.ka.ba/lararium/config/disk-paths` and `…/config/disk-extensions`, first non-empty filter result wins, per-wiki overlays compose through the recipe (the proven `config/bag-paths` pattern; the lar-native mirror of TW5's `$:/config/FileSystemPaths` / `FileSystemExtensions`).
 
-''What this burns:'' the hardcoded `canonicalNamedBagRelPath` fragment siting in `bag-paths.ts` (`toRelMd`'s `frag → base/frag.md` ternary — hole H1's birthplace) and `meme-write.ts`'s per-node flush law (every record its own file). The kupono vectors (`tests/e2e/carrier-roundtrip.test.ts` V3/V4) alarm when the burn lands.
+''One siting fn.'' `carrierBaseRelPath` (bag-paths.ts) sites every carrier extension-less by its lar-URI and returns null for a fragment (`#slot`), an unstable root, or a non-lar URI — so a fragment owns no disk file by construction (the grain-leak guard, #granularity). `meme-write.ts` recomposes the whole carrier through `expandMemeRefs`; no per-node template renders a record to its own file. The kupono vectors live in `tests/e2e/carrier-roundtrip.test.ts` (V3/V4).
 
 <<~/ahu >>
 

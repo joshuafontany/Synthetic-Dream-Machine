@@ -80,9 +80,11 @@ export interface Tw5Deserializer {
   /** Render a native record to its carrier BODY + `.meta` sidecar (the file-info
    *  the projector + the ingest echo gate share). The INGEST gate hashes this via
    *  `carrierHash` to detect a native carrier's canonical-equivalence (a cosmetic
-   *  edit) and a conflict (both disk AND records moved) — so a native filetype
-   *  honors the same Confluence law as a memetic carrier, never a silent last-write-wins
-   *  overwrite. The `.meta` folds into the hash, so a FIELD-only edit surfaces too. */
+   *  edit) and a conflict (both disk AND records moved) — so a native filetype runs
+   *  the same surface-never-overwrite Confluence check — echo · canonical-equivalent ·
+   *  conflict — as a memetic carrier (it omits the memetic refuse-on-grade and
+   *  ahu-fidelity legs; a native deserialize throws rather than grading), never a silent
+   *  last-write-wins overwrite. The `.meta` folds into the hash, so a FIELD-only edit surfaces too. */
   renderCarrier(uri: string, fields: Record<string, unknown>): { body: string; metaBody?: string };
   /** Re-serialize a set of member records back into ONE multi-tiddler file (the
    *  REPACK reciprocal of a bundle deserialize), via TW5's own field serializer.
@@ -130,7 +132,10 @@ export function makeTw5Deserializer(engine: { readonly $tw: TW5Instance }): Tw5D
         const shared: Record<string, string> = {};
         for (const name of fieldNames) {
           const vals = strung.map((t) => t[name]);
-          if (vals.every((v) => v !== undefined && v === vals[0])) shared[name] = vals[0]!;
+          if (vals.every((v) => v !== undefined && v === vals[0])) {
+            if (vals[0]!.includes("\n")) throw new Error(`REPACK .multids: shared field "${name}" has a multi-line value — .multids holds single-line values only; repack as .json`);
+            shared[name] = vals[0]!;
+          }
         }
         for (const t of strung) {
           for (const k of Object.keys(t)) {
@@ -554,7 +559,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
  * currentRenderHash from its own merge seat. On an ingest decision the fresh
  * records land under the action's changeId and group members that vanished
  * from the re-parsed carrier tombstone (LOAD never removes; INGEST must).
- * noop/refuse/conflict apply NOTHING — the decision rides the outcome.
+ * noop/refuse/conflict apply NOTHING (native emits noop/conflict; refuse is the memetic grade-leg) — the decision rides the outcome.
  */
 async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
   const o = origin(action);
@@ -693,7 +698,8 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         packInfo = { packPath, members: freshRecords.map((r) => String(r["title"])) };
       }
 
-      // Confluence for a SINGLE native carrier — the SAME triangle a memetic carrier runs,
+      // Confluence for a SINGLE native carrier — the same 3-way SHAPE a memetic carrier
+      // runs (echo · canonical-equivalent · conflict), minus the refuse-on-grade + ahu-fidelity legs,
       // via the registry's own render (the file-info BODY, the digest surface the
       // projector + echo gate share). Without it a native carrier read
       // last-write-wins over a wiki-side edit (a silent overwrite the Confluence forbids). A PACK skips
