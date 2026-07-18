@@ -175,6 +175,23 @@ def test_mcp_tools_mirror_the_cli_lifecycle_verbs(tmp_path):
     assert _mcp_tool_names(tmp_path) == set(LIFECYCLE_VERBS) | set(PLANE_VERBS)
 
 
+def test_recall_tool_args_are_isomorphic_with_the_recall_api(tmp_path):
+    """ARG-level isomorphism (2 surfaces, 1 API): the /mcp recall TOOL exposes the same filter set as the
+    LaresCoordinator.recall API the CLI also drives. A filter added to the coordinator but not the tool
+    (or vice versa) fails this loud, so the two surfaces can never silently drift. The CLI's
+    --speaker/--channel/--function/--pair mirror the same names."""
+    import inspect
+    mcp = build_mcp(_coord(tmp_path))
+    tools = {t.name: t for t in asyncio.run(mcp.list_tools())}
+    tool_args = set(tools["recall"].inputSchema.get("properties", {}))
+    api_args = set(inspect.signature(LaresCoordinator.recall).parameters) - {"self"}
+    taxonomy = {"speaker", "channel", "function", "pair"}
+    assert taxonomy <= tool_args, "the recall TOOL is missing a taxonomy filter"
+    assert taxonomy <= api_args, "the recall API is missing a taxonomy filter"
+    # the tool mirrors the API and adds only `sensorium` (the router's which-sensorium key)
+    assert tool_args <= api_args | {"sensorium"}, "the recall tool grew an arg the API cannot serve"
+
+
 def test_parity_inventory_three_way(tmp_path):
     """THREE-WAY isomorphism guard against the CLI-verb INVENTORY (fixtures/cli-verbs.json — the
     surface GROWS into it). Mutating any side (add an orphan MCP tool, seat-drop a mirrored verb,

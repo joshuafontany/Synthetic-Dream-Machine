@@ -496,13 +496,19 @@ def build_mcp(coordinator: LaresCoordinator):
     @mcp.tool()
     def recall(query: str, k: int = 8, wing: "str | None" = None, drawer: "str | None" = None,
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
-               lens: str = "content", sensorium: "str | None" = None) -> dict:
+               speaker: "str | None" = None, channel: "str | None" = None, function: "str | None" = None,
+               pair: bool = False, lens: str = "content", sensorium: "str | None" = None) -> dict:
         """Recall the nearest turns to a query from a sensorium (`sensorium` names it; absent → memory).
         `lens` names the plane: `content` (default, combined-arms) · `structure` (nearest shapes) · `form`
-        (induced-template membership, by cid). `drawer` fetches one verbatim; `list` reports the taxonomy;
-        wing/agent/surface narrow the content pool. (Enrichment filters deferred until the sensorium breathes.)"""
+        (induced-template membership, by cid). `drawer` fetches one verbatim; `list` reports the taxonomy.
+        Filters narrow the pool: wing/agent/surface by provenance; the block-taxonomy `speaker` (operator/
+        agent/harness) · `channel` (speech/thought/tool) · `function` (steering/surface/…) surface ONE
+        stratum — the operator's steering alone, the loud voices, a single role. `pair` returns the
+        exchange-view (each block paired with its turn's siblings). Mirrors `lares sense recall` exactly —
+        two surfaces, one API."""
         return _call("recall", sensorium, query, k, wing=wing, drawer=drawer, list=list,
-                     agent=agent, surface=surface, lens=lens)
+                     agent=agent, surface=surface, speaker=speaker, channel=channel, function=function,
+                     pair=pair, lens=lens)
 
     @mcp.tool()
     def status(sensorium: "str | None" = None) -> dict:
