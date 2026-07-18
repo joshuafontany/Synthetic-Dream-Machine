@@ -599,11 +599,16 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         else                     residency.registerCold(bagId);
       });
       // Wiki-alert delivery — place a system-alert verb into the affected wiki's live
-      // island (skip if not mounted). Same isomorphic seam as node. wikiId = host:slug.
+      // island. The pool keys a slot by its BARE SLUG (`slotActiveWikiId = sel.slug`;
+      // `placeWikiVerb(slotActiveWikiId, …)`), so this MUST key the bare slug too —
+      // keying `${hostId}:${wikiSlug}` forks the keyspace: placeWikiVerb never matches a
+      // live slot (even the active wiki) and the alert is lost. Browser holds no durable
+      // mailbox (unlike node, which parks), so an unmounted target is a best-effort drop.
       daemon.onWikiAlert((wikiSlug, message, cause) => {
-        void vmManager.placeWikiVerb(`${hostId}:${wikiSlug}`, {
+        const wikiId = wikiSlug;
+        void vmManager.placeWikiVerb(wikiId, {
           verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
-        }).catch(() => { /* not mounted — best-effort */ });
+        }).catch(() => { /* not mounted — no browser mailbox, best-effort drop */ });
       });
       // The @daemon inherits the render cap (dormant-mounted at boot). Forward its frames into the SAME
       // #projection sink the pool wikis use — gated on the active-surface pointer, so a summoned @daemon paints
