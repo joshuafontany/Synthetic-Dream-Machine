@@ -557,9 +557,15 @@ class DaemonCoordinator:
     puts a second writer on the palace, the one thing this wire stands to prevent.
     """
 
-    # The verbs the @daemon answers today. The rest stay OWED node-side; each wants a verb that routes
-    # to a holder the daemon already owns (worldline_io, structurepalace_io, form_encoder, content_io).
-    ROUTED = {"recall"}
+    # The verbs the @daemon answers today over the UDS cap-wire (`registry.register(...)` on the TS side):
+    # `recall` (the read) and `capture` (the per-pointer pour). The REST stay OWED node-side — each wants a
+    # @daemon verb the wire does NOT yet carry: `status`/taxonomy, the worldline `dag` read, the worldline
+    # `cascade_kapae`/`cascade_un_kapae`, and the cross-plane `plane_record` all live in py holders the
+    # daemon owns (content_io, worldline_io, structurepalace_io, form_encoder) but carry NO registered wire
+    # verb to reach them. Routing them here would have to INVENT the daemon-side verb name + arg mapping
+    # (a protocol change, not a mirror) and would fail at the wire on an unknown verb — so they refuse
+    # honestly through `_owed` until the @daemon grows the verb (the wall this surface names, not hides).
+    ROUTED = {"recall", "pour"}
 
     def __init__(self, wing: str = "wing_default") -> None:
         self._wing = wing
@@ -591,7 +597,32 @@ class DaemonCoordinator:
             args["sensoriumRoot"] = sensorium_root
         return uds.output("recall", args)
 
-    def pour(self, *a, **k):             return self._owed("pour")
+    def pour(self, surface: str, pointer: str, *, all: bool = False, writeback: bool = False,
+             dry_run: bool = False, wing: "str | None" = None, room: str = "conversations",
+             sensorium_root: "str | None" = None, **_) -> dict:
+        # Route ONE pointer's capture through the @daemon `capture` verb (the same verb `lares sense pour`
+        # / harvest drives) — the daemon owns the capture holder, so the compute lands there, this surface
+        # holds nothing. Mirrors `recall` above: build the daemon's camelCase args, ride `uds.output`.
+        #
+        # The shaping args (all/writeback/dry_run) carry NO holder-side support on the `capture` verb (it
+        # accepts surface/pointer/wing/room/sensoriumRoot alone), so they REFUSE here rather than route and
+        # get silently dropped — dry_run=True would otherwise LAND for real on the append-only ground, the
+        # same footgun the standalone `LaresCoordinator.pour` guards. The sweep/writeback/preview shaping
+        # rides in when the @daemon (or capture_and_observe) grows it; until then, refusing keeps the wire
+        # honest.
+        if all or writeback or dry_run:
+            raise NotImplementedError(
+                "pour all/writeback/dry_run: the @daemon `capture` verb carries no sweep/writeback/preview "
+                "shaping, so this routed surface refuses rather than silently drop them (dry_run especially "
+                "would LAND on the append-only ground) — owed: the shaping verb on the daemon or in "
+                "capture_and_observe")
+        args: dict = {"surface": surface, "pointer": pointer, "wing": wing or self._wing, "room": room}
+        # The addressed sensorium (an AI names it; the tool resolved it to a root) — the @daemon capture
+        # verb picks the holder by root up the cap-ladder. Absent → the memory default the daemon holds.
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("capture", args)
+
     def status(self, *a, **k):           return self._owed("status")
     def worldline(self, *a, **k):        return self._owed("worldline")
     def kapae(self, *a, **k):            return self._owed("kapae")

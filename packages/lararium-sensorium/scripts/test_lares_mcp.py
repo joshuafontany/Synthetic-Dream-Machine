@@ -382,6 +382,63 @@ def test_daemon_recall_plane_lens_owes_the_routing():
         dc.recall("q", 2, lens="structure")
 
 
+def test_daemon_pour_routes_to_the_capture_verb(monkeypatch):
+    # pour rides the @daemon `capture` verb (the same verb harvest/`lares sense pour` drives) — the
+    # routed surface REACHES the holder instead of `_owed`-refusing. Record the wire call to prove the
+    # verb name + camelCase arg mapping without a live daemon.
+    calls = []
+
+    def _rec(verb, args):
+        calls.append((verb, args))
+        return {"landed": 1}
+
+    monkeypatch.setattr("lares_mcp.uds.output", _rec)
+    dc = DaemonCoordinator(wing="w")
+    out = dc.pour("claude", "/x/claude-main.jsonl", wing="w", room="conversations")
+    assert out == {"landed": 1}                                   # the daemon's payload rides back
+    assert calls == [("capture",                                  # routed, never _owed
+                      {"surface": "claude", "pointer": "/x/claude-main.jsonl",
+                       "wing": "w", "room": "conversations"})]
+    # the addressed sensorium threads as the daemon's `sensoriumRoot` (picks the holder by root)
+    calls.clear()
+    dc.pour("codex", "/y/codex.jsonl", wing="w", sensorium_root="/root/mesh")
+    assert calls[0][1]["sensoriumRoot"] == "/root/mesh"
+    # an absent wing falls to the coordinator default (capture needs a non-empty wing)
+    calls.clear()
+    dc.pour("claude", "/z", room="conversations")
+    assert calls[0][1]["wing"] == "w"
+
+
+def test_daemon_pour_refuses_shaping_args_over_the_wire(monkeypatch):
+    # all/writeback/dry_run carry no `capture`-verb support — the routed pour REFUSES them (never routes
+    # a silently-dropped shaping arg; dry_run=True would otherwise LAND for real). Same footgun the
+    # standalone LaresCoordinator.pour guards, held at the wire.
+    monkeypatch.setattr("lares_mcp.uds.output",
+                        lambda *a, **k: pytest.fail("shaping args must not reach the wire"))
+    dc = DaemonCoordinator(wing="w")
+    for kwargs in ({"all": True}, {"writeback": True}, {"dry_run": True}):
+        with pytest.raises(NotImplementedError):
+            dc.pour("claude", "/x", wing="w", **kwargs)
+
+
+def test_daemon_still_owes_the_unrouted_verbs():
+    # THE WALL SURFACED: status/worldline/kapae/un_kapae/plane_record carry NO @daemon wire verb yet
+    # (the UDS table holds recall + capture, never taxonomy/dag/cascade_kapae/plane_record). They refuse
+    # honestly through `_owed` rather than route to an unknown verb — the surface names the gap, never
+    # fakes a reading.
+    dc = DaemonCoordinator()
+    with pytest.raises(RuntimeError):
+        dc.status()
+    with pytest.raises(RuntimeError):
+        dc.worldline()
+    with pytest.raises(RuntimeError):
+        dc.kapae("branch", 1)
+    with pytest.raises(RuntimeError):
+        dc.un_kapae("branch", 1)
+    with pytest.raises(RuntimeError):
+        dc.plane_record("f" * 64)
+
+
 # ── the sensorium address resolver (name → root; mirrors TS sensoriumDir/sensoriumNames) ──────
 
 
