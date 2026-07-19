@@ -435,7 +435,7 @@ def _prose_segment(text: str) -> dict:
         word_split = lambda s: s.split()  # noqa: E731
     root = {"type": "source_file", "children": []}
     budget = _MAX_NODES
-    for para in _re.split(r"\n\s*\n", text):
+    for para in _re.split(r"\n\s*\n", _bound_sentences(text[:100_000])):   # same input bound as the tiers above
         if not para.strip() or budget <= 0:
             continue
         pnode = {"type": "paragraph", "children": []}
