@@ -1,17 +1,12 @@
 title: lar:///ha.ka.ba/lararium/templates/aka/html
 type: text/vnd.tiddlywiki
 
-\define _aka-favicon-url()
-https://icons.duckduckgo.com/ip3/${ [<currentTiddler>split[://]last[1]split[/]first[]] }$.ico
-\end
 <$set name="_aka-has-thumb" filter="[<currentTiddler>get[thumbnail]]" value="yes" emptyValue="no">
-<$set name="_aka-is-http" filter="[<currentTiddler>regexp[^https?://]]" value="yes" emptyValue="no">
 <details class="lar-aka" data-aka-uri=<<currentTiddler>>>
   <summary class="lar-aka-header">
     <$list filter="[<_aka-has-thumb>match[yes]]" variable="_t"><img class="lar-aka-thumb" src={{!!thumbnail}} alt=""/></$list>
-    <$list filter="[<_aka-has-thumb>match[no]][<_aka-is-http>match[yes]]" variable="_t"><img class="lar-aka-favicon" src=<<_aka-favicon-url>> onerror="this.style.display='none'" alt=""/></$list>
     <$link to=<<currentTiddler>>><$text text=<<currentTiddler>>/></$link>
   </summary>
   <div class="lar-aka-body"><$transclude $tiddler=<<currentTiddler>> mode="block"><$fill $name="ts-missing"><span class="lar-aka-empty"/></$fill></$transclude></div>
 </details>
-</$set></$set>
+</$set>

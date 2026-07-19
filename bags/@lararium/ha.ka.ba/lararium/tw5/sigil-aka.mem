@@ -77,11 +77,9 @@ Template selection precedence: p2 explicit > cascade > fallback shadow tiddler.
 The `aka-template-html.tid` shows a preview image when available:
 
 # ''`thumbnail` field'' on the target tiddler — displayed as `<img class="lar-aka-thumb">`.
-   Any resolver that fetches metadata writes this field.
-# ''Domain favicon fallback'' — for HTTP/HTTPS URIs with no `thumbnail` field, the template
-   renders `<img src="https://icons.duckduckgo.com/ip3/{domain}.ico">` with `onerror` hide.
-   DuckDuckGo favicon endpoint: privacy-respecting, no tracking, silently fails offline.
-   `lar:///` URIs skip this path (no domain to extract).
+   Any resolver that fetches metadata writes this field. The template renders no image when
+   the field is absent — the preview stays fully local (web3-only law: no CDN favicon fetch).
+   A node-side resolver MAY write a `thumbnail` pointing at a local/CID-carried icon.
 
 !!! Tier 2 — Node-side OG metadata fetch (deferred)
 
