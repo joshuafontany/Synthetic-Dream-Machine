@@ -1,0 +1,4 @@
+{
+  "preset": "repo",
+  "note": "This checkout opts ITSELF in as the corpus/resource root for local dev — the named repo dev-preset (env.ts repoPresetEnabled). Removing this marker (and leaving LAR_DEV_REPO_ROOT unset) re-arms the clean 'no corpus root sited' error. Production @daemons site LAR_ROOT / LAR_BAGS / LAR_WIKIS / LAR_GENESIS explicitly and carry no marker."
+}

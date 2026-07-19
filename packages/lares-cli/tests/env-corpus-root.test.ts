@@ -1,0 +1,70 @@
+/**
+ * env-corpus-root — the corpus-root siting law (env.ts resolveLarRoot / composable resource caps).
+ *
+ * No silent global-tree default: an unconfigured root throws a CLEAN error; explicit LAR_ROOT siting
+ * wins; the named repo dev-preset opts in. The resource caps (bags · wikis · genesis · cas) site
+ * INDEPENDENTLY — each derives off the corpus root, each overrides on its own env var.
+ */
+
+import { describe, test, expect, beforeEach, afterEach } from "vitest";
+import { join } from "node:path";
+import {
+  resolveLarRoot, repoPresetEnabled,
+  larRoot, larBagsDir, larWikisDir, larGenesisDir, larCasDir, larBootstrapPath,
+} from "../src/env.js";
+
+const REPO = "/tmp/fake-repo";
+
+describe("resolveLarRoot — the siting law", () => {
+  test("unconfigured (no LAR_ROOT, preset off) throws a clean error, no silent repo fallback", () => {
+    expect(() => resolveLarRoot({ larRootEnv: undefined, presetEnabled: false, repoRoot: REPO }))
+      .toThrow(/no corpus root sited/);
+  });
+
+  test("the named dev-preset opts the repo in", () => {
+    expect(resolveLarRoot({ larRootEnv: undefined, presetEnabled: true, repoRoot: REPO })).toBe(REPO);
+  });
+
+  test("explicit LAR_ROOT siting wins over the preset", () => {
+    expect(resolveLarRoot({ larRootEnv: "/srv/daemon-a", presetEnabled: true, repoRoot: REPO }))
+      .toBe("/srv/daemon-a");
+  });
+});
+
+describe("repoPresetEnabled — the named opt-in", () => {
+  const KEY = "LAR_DEV_REPO_ROOT";
+  let saved: string | undefined;
+  beforeEach(() => { saved = process.env[KEY]; });
+  afterEach(() => { if (saved === undefined) delete process.env[KEY]; else process.env[KEY] = saved; });
+
+  test("the LAR_DEV_REPO_ROOT env switch enables the preset", () => {
+    process.env[KEY] = "1";
+    expect(repoPresetEnabled()).toBe(true);
+  });
+});
+
+describe("composable resource caps — independent siting off the corpus root", () => {
+  const KEYS = ["LAR_ROOT", "LAR_BAGS", "LAR_WIKIS", "LAR_GENESIS", "LAR_CAS"] as const;
+  const saved: Record<string, string | undefined> = {};
+  beforeEach(() => { for (const k of KEYS) saved[k] = process.env[k]; process.env["LAR_ROOT"] = "/corpus"; });
+  afterEach(() => { for (const k of KEYS) { if (saved[k] === undefined) delete process.env[k]; else process.env[k] = saved[k]!; } });
+
+  test("each resource derives off the corpus root when unset", () => {
+    for (const k of ["LAR_BAGS", "LAR_WIKIS", "LAR_GENESIS", "LAR_CAS"]) delete process.env[k];
+    expect(larRoot()).toBe("/corpus");
+    expect(larBagsDir()).toBe(join("/corpus", "bags"));
+    expect(larWikisDir()).toBe(join("/corpus", "wikis"));
+    expect(larGenesisDir()).toBe(join("/corpus", "genesis"));
+    expect(larCasDir()).toBe(join("/corpus", "cas"));
+    expect(larBootstrapPath()).toBe(join("/corpus", "genesis", "social-bootstrap.json"));
+  });
+
+  test("each resource overrides INDEPENDENTLY on its own env var", () => {
+    process.env["LAR_BAGS"] = "/mnt/bags";
+    process.env["LAR_GENESIS"] = "/mnt/seed";
+    expect(larBagsDir()).toBe("/mnt/bags");
+    expect(larGenesisDir()).toBe("/mnt/seed");
+    expect(larWikisDir()).toBe(join("/corpus", "wikis"));   // untouched → still derives
+    expect(larBootstrapPath()).toBe(join("/mnt/seed", "social-bootstrap.json")); // carries LAR_GENESIS
+  });
+});
