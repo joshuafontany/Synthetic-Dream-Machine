@@ -21,6 +21,18 @@ from plane_base import BASE_RECORD, PatternRegistry
 from run_projector import _centrality, _rank_salience
 from channel_dial import _TOKEN_RE
 from structure_router import parse_to_tree, structural_hash
+import pytest
+import structure_router as _sr
+
+#: The sigil-tokenization witness rides the COMPILED carrier grammar (tree_sitter runtime
+#: + memetic.so); its structure sits DOWNSTREAM of the content re-pours. Absent that runtime
+#: parse_to_tree degrades to the prose gradient, which carries no sigil nodes — so a test that
+#: counts sigil/ahu nodes has nothing to witness. Gate on the capability, never fake the green.
+_needs_carrier = pytest.mark.skipif(
+    _sr._carrier_parser() is None,
+    reason="carrier grammar runtime (tree_sitter + memetic.so) unavailable — sigil "
+           "tokenization needs the compiled carrier (downstream of the re-pours)",
+)
 
 # A wrapped mini-meme whose ENVELOPE carries sigil lines only (no black envelope prose),
 # so the black channel equals the #source-text interior modulo blank lines — the case
@@ -84,6 +96,7 @@ def test_strip_red_deterministic():
     assert strip_red(_MIXED_WRAPPED) == strip_red(_MIXED_WRAPPED)
 
 
+@_needs_carrier
 def test_channels_complement_the_sigil_parse():
     # The sigil parser reads tokens as nodes and inter-token spans as text leaves; the
     # split reads the SAME token grammar, so black + red account for the whole text.
