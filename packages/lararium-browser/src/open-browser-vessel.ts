@@ -221,6 +221,52 @@ async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHa
   }
 }
 
+/**
+ * Load a PREVIOUSLY-FOUNDED @catalog by its persisted url — and never re-found it SILENTLY. A stored
+ * catalogUrl means this vessel already founded + persisted a catalog; a find() rejection here means the
+ * LOCAL copy is gone (IndexedDB quota eviction under storage pressure, or corruption). Re-founding a
+ * BLANK catalog in that case is data-amnesia — every registered wiki/recipe vanishes from local view
+ * with no trace. So we surface the loss LOUD (never a bare `catch`→blank) before recovering with a fresh
+ * blank catalog, so the vessel still boots but the operator SEES the amnesia. (First boot — no stored
+ * url — never reaches here; that founding is legitimate.)
+ */
+export async function loadFoundedCatalogOrWarn<T>(
+  repo: Repo,
+  url: string,
+  refound: () => DocHandle<T>,
+  onLoud: (msg: string) => void = (m) => console.error(m),
+): Promise<DocHandle<T>> {
+  try {
+    return await repo.find<T>(url as AutomergeUrl);
+  } catch (err) {
+    onLoud(
+      `[lararium-browser] DATA-AMNESIA: the persisted @catalog (${url}) FAILED to load — its local ` +
+      `copy is gone (IndexedDB quota eviction or corruption). Founding a BLANK catalog so the vessel ` +
+      `boots; previously-registered wikis/recipes are ABSENT locally until a peer re-sync restores ` +
+      `them. This is NOT a silent discard — repair or re-admit before relying on local catalog state: ${String(err)}`,
+    );
+    return refound();
+  }
+}
+
+/**
+ * A browser wiki-alert had no live target and no durable mailbox — surface the drop LOUD. The browser
+ * holds no park (unlike node), so an un-deliverable operator alert would otherwise vanish invisibly.
+ * The console is the browser's observability floor: a warn keeps the drop legible.
+ */
+export function warnDroppedBrowserAlert(
+  wikiSlug: string,
+  message: string,
+  cause: string | undefined,
+  reason: string,
+  onWarn: (msg: string) => void = (m) => console.warn(m),
+): void {
+  onWarn(
+    `[lararium-browser] wiki-alert DROPPED (${reason}) for "${wikiSlug}" — no durable browser mailbox: ` +
+    `${message}${cause ? ` (cause: ${cause})` : ""}`,
+  );
+}
+
 export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<BrowserVesselResult> {
   const {
     hostId, wikiId,
@@ -334,7 +380,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   };
   let catalogHandle: DocHandle<LarDoc>;
   if (bootKeys.catalogUrl) {
-    catalogHandle = await waitHandleLocal<LarDoc>(repo, bootKeys.catalogUrl, blankCatalog);
+    // A catalog was previously founded + persisted — a load failure is DATA-AMNESIA, surfaced LOUD
+    // (never a silent blank re-founding). See loadFoundedCatalogOrWarn.
+    catalogHandle = await loadFoundedCatalogOrWarn<LarDoc>(repo, bootKeys.catalogUrl, blankCatalog);
   } else {
     catalogHandle = blankCatalog();
     bootKeyWrites.catalogUrl = catalogHandle.url;
@@ -732,10 +780,13 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         // mailbox, so a grain that cannot activate (unregistered — no catalog entry to
         // resolve — or the mount cap full) is a best-effort drop — the constrained-vessel degradation.
         void wikiActivation.ensureActive(wikiId)
-          .then((live) => { if (live) void vmManager.placeWikiVerb(wikiId, {
-            verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
-          }).catch(() => { /* raced cold — best-effort drop */ }); })
-          .catch(() => { /* not activatable — no browser mailbox, best-effort drop */ });
+          .then((live) => {
+            if (live) void vmManager.placeWikiVerb(wikiId, {
+              verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
+            }).catch(() => warnDroppedBrowserAlert(wikiId, message, cause, "raced-cold"));
+            else warnDroppedBrowserAlert(wikiId, message, cause, "unmounted-no-mailbox");
+          })
+          .catch(() => warnDroppedBrowserAlert(wikiId, message, cause, "not-activatable"));
       });
       // The @daemon inherits the render cap (dormant-mounted at boot). Forward its frames into the SAME
       // #projection sink the pool wikis use — gated on the active-surface pointer, so a summoned @daemon paints

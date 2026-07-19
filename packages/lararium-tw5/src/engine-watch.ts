@@ -59,6 +59,11 @@ export function startEngineWatch(ctx: IslandContext): (() => void) | undefined {
     if (!entry?.sha256) return;
     if (entry.sha256 === ctx.engine.sha256) return;          // still the booted engine
     if (entry.sha256 === lastAlertedSha) return;             // already alerted this epoch
+    // The sha guard advances SYNCHRONOUSLY (coalesces repeat change-events for this epoch to
+    // one put), but a FAILED write must NOT stay swallowed: the engine-waiting / rollback notice
+    // is an operator-critical alert. On a put rejection we roll the guard back to `prevAlerted`
+    // so the NEXT change retries, and surface the failure LOUD — never a silent drop.
+    const prevAlerted = lastAlertedSha;
     lastAlertedSha = entry.sha256;
 
     const incoming  = String(entry.version ?? "");
@@ -84,7 +89,16 @@ export function startEngineWatch(ctx: IslandContext): (() => void) | undefined {
       },
       origin,
       { bag: wikiSlotUri(ctx.recipe.wikiSlug, "temp") },
-    );
+    ).catch((err: unknown) => {
+      // The alert write FAILED. Without this leg the notice vanished silently AND stayed
+      // suppressed forever (the sha guard already advanced past this epoch). Roll the guard
+      // back so the next change retries, and surface the drop LOUD.
+      lastAlertedSha = prevAlerted;
+      console.warn(
+        `[engine-watch] FAILED to write the engine-waiting alert for ${incoming} ` +
+        `(sha ${entry.sha256}); rolled back — will retry on the next @oracle change: ${String(err)}`,
+      );
+    });
   };
 
   const onChange = (): void => check();

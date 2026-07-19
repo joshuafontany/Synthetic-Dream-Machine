@@ -125,6 +125,38 @@ describe("engine-watch", () => {
     stop?.();
   });
 
+  test("a FAILED alert write surfaces LOUD and does NOT stay suppressed (retries next change)", async () => {
+    const { handle, setCore } = fakeLarariumHandle(BOOTED);
+    const { composite, ctx } = makeCtx(handle);
+    // First put rejects (e.g. a transient store fault), the second succeeds.
+    const realPut = composite.put.bind(composite);
+    const putSpy = vi
+      .spyOn(composite, "put")
+      .mockRejectedValueOnce(new Error("store offline"))
+      .mockImplementation((...args: Parameters<typeof composite.put>) => realPut(...args));
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const stop = startEngineWatch(ctx);
+
+    // Epoch arrives — the write fails, the alert is absent, but the failure was surfaced LOUD.
+    setCore({ sha256: "bbb222", version: "5.4.0" });
+    await settle();
+    expect(putSpy).toHaveBeenCalledTimes(1);
+    expect(await composite.get(ENGINE_WAITING_ALERT_TITLE)).toBeNull();
+    expect(warnSpy).toHaveBeenCalledOnce();
+    expect(String(warnSpy.mock.calls[0]?.[0])).toContain("FAILED to write the engine-waiting alert");
+
+    // The SAME epoch changes again — because the guard rolled back, it RETRIES (not swallowed).
+    setCore({ sha256: "bbb222", version: "5.4.0" });
+    await settle();
+    expect(putSpy).toHaveBeenCalledTimes(2);
+    const alert = await composite.get(ENGINE_WAITING_ALERT_TITLE);
+    expect(alert).not.toBeNull();
+    expect(alert?.tiddler["waiting-sha256"]).toBe("bbb222");
+
+    warnSpy.mockRestore();
+    stop?.();
+  });
+
   test("cleanup unsubscribes — post-stop changes stay silent", async () => {
     const { handle, setCore, listenerCount } = fakeLarariumHandle(BOOTED);
     const { composite, ctx } = makeCtx(handle);

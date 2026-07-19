@@ -90,6 +90,19 @@ import { composeLararium, composeHerm, meshPalaceCap, carriageCap, meshSelfSeed,
 
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
+/** FNV-1a 32-bit over a string → a STABLE non-negative index label. Deterministic per axis-id, so
+ *  the SAME axis id maps to the SAME index in EVERY turn's vector — the cross-turn alignment a sparse
+ *  form-vector needs. (A dense global basis index would be exact, but the stored `document` does not
+ *  carry it — see parseFormVector; this keeps the axis IDENTITY instead of discarding it.) */
+function axisIdToIndex(id: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;   // unsigned 32-bit
+}
+
 /**
  * Pull a sparse form-vector out of a form-store entry's stored `document` (the move-space position
  * the worldline-trajectory read joins). The python store keeps the dense embedding internally; the
@@ -97,17 +110,40 @@ const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early 
  * node child_process the worker can't reach) and SHIPS it to the in-VM trajectory read. An absent /
  * unparseable document yields null (the worker keeps the turn's TIME slot, form null). Moved here from
  * the retired node-side worldline-holder when the reads lifted into the sovereign worker.
+ *
+ * The stored `document` carries `axis_activation` as an axis-ID-KEYED map (`{ "voice:council": 0.9, … }`).
+ * Each key IS the axis identity — it MUST determine the sparse index, else two turns whose active-axis
+ * SETS differ get misaligned indices (a positional counter maps `voice:council`→0 in one turn and →1 in
+ * another, silently corrupting every cross-turn comparison). We derive a stable index per axis-id so the
+ * axis KEY survives. When the encoder's canonical `form_vector` rides the document (the exact indices),
+ * we prefer it verbatim.
  */
-function parseFormVector(document: string): SparseFormVector | null {
+export function parseFormVector(document: string): SparseFormVector | null {
   try {
     const obj = JSON.parse(document) as Record<string, unknown>;
+    // Preferred: the encoder's canonical sparse vector, if the store persisted it — exact basis indices.
+    const fv = obj["form_vector"];
+    if (fv && typeof fv === "object") {
+      const rec = fv as Record<string, unknown>;
+      const idx = rec["indices"];
+      const val = rec["values"];
+      if (Array.isArray(idx) && Array.isArray(val) && idx.length === val.length
+          && idx.every((n) => typeof n === "number") && val.every((n) => typeof n === "number")) {
+        return { indices: idx as number[], values: val as number[] };
+      }
+    }
     const act = obj["axis_activation"];
     if (act && typeof act === "object") {
       const entries = Object.entries(act as Record<string, unknown>).filter(([, v]) => typeof v === "number");
       if (entries.length === 0) return { indices: [], values: [] };
+      // Index by the axis KEY (not by position) so the identity survives + aligns across turns; sort
+      // by the derived index so the pairing stays deterministic.
+      const pairs = entries
+        .map(([k, v]) => [axisIdToIndex(k), v as number] as const)
+        .sort((a, b) => a[0] - b[0]);
       return {
-        indices: entries.map((_, i) => i),
-        values: entries.map(([, v]) => v as number),
+        indices: pairs.map(([i]) => i),
+        values: pairs.map(([, v]) => v),
       };
     }
     return { indices: [], values: [] };
