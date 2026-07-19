@@ -337,7 +337,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 * ''~16KiB inline threshold'': Bytes below the range-verify granularity ride inline; larger bodies land on the filesystem and stream range-verified.
 
 ''Contrast with DreamNet:''
-* Iroh addresses //plaintext//; DreamNet addresses //ciphertext// (`cid = BLAKE3(ciphertext)`), so an untrusted holder verifies and repairs blind without a confirmation oracle. The `@cad` bag lifts Iroh's blob/doc split (skinny TW5 handle stores the hash; bytes leave the CRDT), the ~16KiB inline/range-verify boundary, and the BlobTicket `hash + NodeAddr` hint directly. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+* Iroh addresses //plaintext//; DreamNet addresses //ciphertext// (`cid = BLAKE3(ciphertext)`), so an untrusted holder verifies and repairs blind without a confirmation oracle. The content-addressed tier `@cad` (NOT a bag — bytes in the `cid/<hash>` KIND-plane, handles riding the publicity-tiered bags) lifts Iroh's blob/doc split (skinny TW5 handle stores the hash; bytes leave the CRDT), the ~16KiB inline/range-verify boundary, and the BlobTicket `hash + NodeAddr` hint directly. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 
 ''Named Patterns:''
 * bao — BLAKE3 verified-streaming format (range proofs)

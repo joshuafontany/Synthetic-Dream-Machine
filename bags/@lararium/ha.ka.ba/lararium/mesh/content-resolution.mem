@@ -10,7 +10,7 @@ manao     = 16
 manaoio   = 14
 register  = "Synthesis"
 retain    = true
-role      = "the converged DreamNet content-resolution design — large bodies leave the CRDT: skinny TW5 handle + @cad ciphertext-addressed CAS + resolveByCid over three gates + DHT-free discovery; doubly-grounded (2 research waves ∪ @oracle/convergent-mesh canon)"
+role      = "the converged DreamNet content-resolution design — large bodies leave the CRDT: skinny TW5 handle + bytes in the cid/ KIND-plane addressed by the three-plane oracle model (public @crossroads plaintext ni:// / private @catalog ciphertext / system @oracle CID-floor) + resolveByCid over three gates + DHT-free discovery; doubly-grounded (2 research waves ∪ @oracle/convergent-mesh canon)"
 status    = "proposed"
 tags      = ["api/pono/convergent-mesh", "mesh/oracle-governance", "api/pono/causal-islands", "api/pono/orichalcum-capabilities"]
 type      = "text/x-memetic-wikitext"
@@ -28,9 +28,10 @@ written   = "2026-07-19"
 
 The mesh once carried every body //inside// the Automerge doc; a 16MB Twain overflowed
 the CRDT and named the law aloud (#51). This meme carries the converged answer: ''the''
-''body leaves the doc.'' A skinny TW5 handle stays in the CRDT; the bytes ride a
-ciphertext-addressed CAS (`@cad`); a `resolveByCid` callback walks them home across three
-gates that ''never fuse''; discovery runs ''without a DHT''. The design stands
+''body leaves the doc.'' A skinny TW5 handle stays in the CRDT; the bytes leave for the
+content-addressed `cid/` tier (`@cad` names the tier, never a bag); a `resolveByCid`
+callback walks them home across three gates that ''never fuse''; discovery runs
+''without a DHT''. The design stands
 ''doubly-grounded'' — two astral-sea research waves (Fathom on CAS/blob mechanics,
 Meridian on federated capability) INDEPENDENTLY re-derived what the `@oracle`
 (<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>) and `convergent-mesh`
@@ -71,31 +72,47 @@ verified in TW5 source — the house adds a resolver, never a fork of the lazy p
 
 <<~ ahu #cad-storage >>
 
-!! `@cad` storage ~ ciphertext-addressed, per-operator convergent
+!! Storage ~ `@cad` names a tier, not a bag
 
-The bytes rest in the ''`@cad` bag'' — the canon's Scope-1 CID/CAD-blob
-DreamNet→Meshpalace networking pipe, `@daemon`-verb-coordinated
-(<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#scope-1-networking >>). Its
-storage law, five moves:
+''`@cad` dissolves as a bag'' — it names the ''content-addressed TIER'', never a place.
+The bytes rest in the ''`cid/<hash>` KIND-plane'' (`genesis/cas/`, the canon
+bag-wiki-uri-split, <<~ loulou lar:///ha.ka.ba/lararium/mesh/base-doc >>); the ''handles''
+ride the ''publicity-tiered bags''. The ''three-plane oracle model'' — the grant-graph
+WHO-axis recurring at the blob layer — carries the ruling law: ''the publicity plane''
+''decides the addressing mode.''
 
-* ''`cid = BLAKE3(ciphertext)` — ciphertext-addressed.'' An untrusted holder verifies,
-  pins, and repairs ''blind'' — it never touches the key (Tahoe ''verify-cap ⊥ read-cap'';
-  repair needs only ciphertext, not plaintext). A plaintext-hash would stand as a
-  confirmation oracle AND read uncacheable → rejected.
-* ''Key = hash(per-operator convergence-secret + plaintext)'' (Tahoe). Dedup converges
-  WITHIN one operator's `@cad`; zero cross-operator confirmation-of-file leak. Beats both
-  global-convergent (CFA/LRI leak) and Peergos random-key (no dedup).
-* ''Big-on-fs, small-inline'' (~16KiB, Iroh); the blob carries a ''BLAKE3 outboard'' for
-  range-verify.
-* ''Retention rides two tags'' — a cap-lifetime-bound tag ''PINs'', an untagged body
-  ''CACHEs'' under LRU; GC runs mark-and-sweep from the tags (Iroh tags).
-* ''Each island pins its own'' — it pays its own disk. A peer MAY opportunistically cache
-  (best-effort, zero obligation). Filecoin deal/PoSt/slashing reads as
-  global-ledger/block-height = a global-now trap → avoided.
+* ''Public → `@crossroads`.'' A ''plaintext `ni://` multihash'' (RFC-6920): a stranger
+  fetches AND verifies, foreign-legible, federates at ≥meme-rating, archival to 500 years.
+  No confirmation-oracle risk — the content stands public by design.
+* ''Private → `@catalog`.'' A ''ciphertext cid'', capability-gated. Here the ciphertext
+  address earns its keep: `cid = BLAKE3(ciphertext)` lets an untrusted holder verify, pin,
+  and repair ''blind'' — never touching the key (Tahoe ''verify-cap ⊥ read-cap''; repair
+  needs only ciphertext, not plaintext). The key = hash(per-operator convergence-secret +
+  plaintext) (Tahoe) dedups WITHIN one operator's private tier, zero cross-operator
+  confirmation-of-file leak — beating both global-convergent (CFA/LRI leak) and Peergos
+  random-key (no dedup).
+* ''System → `@oracle`.'' The ''frozen CID floor'' — already built; the `@oracle` serves
+  engine and genesis blobs by CID
+  (<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>).
 
-<<~ confidence Synthesis 13/20 >> ciphertext-addressing carries the load-bearing move:
-it splits the //verify// authority from the //read// authority, so a peer repairs and pins
-a body it can never open.
+''The dissolve of the ciphertext-vs-plaintext fork.'' The design once held ONE global
+choice — address every body by ciphertext or by plaintext. The three-plane model dissolves
+it: no global choice, the PLANE sets the mode. And ''even public keeps the gate'' —
+"public" reads as a ''generous anonymous grant'', `pull` ≠ `read`; the three gates
+(#resolve-by-cid) stay intact, publicity only sets how generous gate-2 grows.
+
+''Tier-general mechanics'' (every plane carries these): big-on-fs, small-inline (~16KiB,
+Iroh); the blob carries a ''BLAKE3 outboard'' for range-verify; a ''self-describing''
+''multihash'' `(algo, len, digest)` (multiformats / `ni://`) carries the address AND the
+in-band migration path (sha256→BLAKE3→future, old ids stay parseable). Retention rides two
+tags — a cap-lifetime-bound tag ''PINs'', an untagged body ''CACHEs'' under LRU; GC runs
+mark-and-sweep from the tags (Iroh tags). ''Each island pins its own'' — it pays its own
+disk; a peer MAY opportunistically cache (best-effort, zero obligation). Filecoin
+deal/PoSt/slashing reads as global-ledger/block-height = a global-now trap → avoided.
+
+<<~ confidence Synthesis-Canon 14/20 >> the publicity plane carries the load-bearing
+move: it dissolves the addressing fork into the grant-graph the mesh already runs, so the
+same WHO-axis that tiers a bag tiers its bytes.
 
 <<~/ahu >>
 
@@ -116,7 +133,7 @@ URL. This resolver keeps them ''three orthogonal gates'', none collapsing into a
   MLS-Delivery-Service-never-decryptor keel, the node-never-Auth-root law
   (<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#contract-key-agreement >>).
 
-Between gate 2 and gate 3 the resolver ''walks a chain'': local `@cad` →
+Between gate 2 and gate 3 the resolver ''walks a chain'': local `cid/` store →
 hint-named provider (Iroh BlobTicket = hash + NodeAddr, the discovery collapsing into the
 reference) → connected bag-peers `want-have` (Bitswap) → named bag-scoped
 tracker/rendezvous (opt-in, signed, replaceable) → ''declared-unresolved = PENDING''. That
@@ -128,6 +145,36 @@ large body.
 <<~ confidence Synthesis-Canon 14/20 >> the never-fuse discipline carries the security:
 transport, content-authz, and read each answer their own gate, so no single leaked handle
 grants passage past all three.
+
+<<~/ahu >>
+
+<<~ ahu #cad-candidates >>
+
+!! Two CAD-candidate scenarios ~ one store, two extraction boundaries
+
+What gets content-addressed comes in ''two granularities''; the CAD mechanism handles both,
+differing ''only in the extraction boundary'':
+
+* ''A — a blob-worthy `#source-text` ahu inside a pono meme.'' A memetic-wikitext meme
+  (its own lar URI, `iam` header, ahu structure) holds one or more blob-worthy
+  `#source-text` ahus — a book chapter, a full corpus. ''Sub-carrier externalization:'' the
+  meme's structure + small ahus stay in the CRDT; the large ahu's content extracts to the
+  `cid/` store and the ahu ''becomes a handle'' (`_canonical_uri`/cid + `_integrity`
+  multihash); `resolveByCid` pulls it on render (the `lazyLoad` path this house owns). This
+  IS the ''pack model at ahu grain'' — a meme reads as a pack whose blob-worthy ahu stands
+  a CAS member. Blob-worthiness = the `#source-text` convention + a size threshold.
+* ''B — a raw other-data shard.'' Raw bytes, no memetic-wikitext wrapper (image, audio,
+  binary, data). ''Whole-carrier:'' the entire shard rests as a `cid/` CAS blob, referenced
+  by a skinny handle (the TW5 External Image/Audio/Text pattern).
+
+Both route to the ''SAME `cid/` byte store + `resolveByCid`''. Stage-1 (whole-body
+transport) covers B-shaped whole bodies; Stage-2/3 add the A-shaped ''intra-ahu''
+''extraction'' (the `#source-text` boundary) + the publicity-plane addressing. The moved
+`@crossroads` library holds BOTH today — raw `.txt` books (B) and structured `.mem` memes
+with large source ahus (A).
+
+<<~ confidence Synthesis 12/20 >> A and B differ only where the cut falls; the byte store
+and the resolver never learn which grain birthed the blob.
 
 <<~/ahu >>
 
@@ -157,7 +204,8 @@ The skinny tiddler carries a ''stable logical handle'' (cap/name) plus a
 ''provider-locality hint'' — never the raw cid as identity. It resolves through an
 ''indirection map (logical name → current cid)'' so a re-key survives (WNFS
 private-forest). That map reads as small mutable metadata → it lives in the ''Automerge''
-''doc'' (the docs/blobs split applied to the map itself); only the bytes ride `@cad`.
+''doc'' (the docs/blobs split applied to the map itself); only the bytes ride the `cid/`
+tier.
 
 <<~/ahu >>
 

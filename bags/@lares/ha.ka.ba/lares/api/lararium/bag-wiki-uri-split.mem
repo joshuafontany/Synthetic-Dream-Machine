@@ -23,7 +23,7 @@ A `lar:` URI names one of three surfaces, and the KIND rides the ''first path se
 
 * ''`bags/@slug`'' — the IPNS-shaped mutable content plane: a bag (a CRDT surface, today an Automerge doc). A composable recipe piece, shared as the operator wishes.
 * ''`wikis/@slug`'' — a `#has` bag-stack: a wiki's IDENTITY. Its per-wiki layers route off it (above the fold).
-* ''`cid/<hash>`'' — the /ipfs/ plane: the name IS the content hash, so it never changes. A frozen artifact answers to it forever. Its complement is the /ipns/ pointer — the `@oracle` `genesis-cid-*` tiddler carries a `cid:` field naming which cid stands current. `cid/` names the immutable artifact; the pointer names the current one; together they are IPFS ⋈ IPNS. Per `lar:` law `cid/<hash>` NAMES — the `genesis/cas/` store resolves bytes.
+* ''`cid/<hash>`'' — the /ipfs/ plane: the name IS the content hash, so it never changes. A frozen artifact answers to it forever. Its complement is the /ipns/ pointer — the `@oracle` `genesis-cid-*` tiddler carries a `cid:` field naming which cid stands current. `cid/` names the immutable artifact; the pointer names the current one; together they are IPFS ⋈ IPNS. Per `lar:` law `cid/<hash>` NAMES — the `genesis/cas/` store resolves bytes. This `cid/<hash>` KIND-plane IS the ''content-addressed (CAD) byte tier'': the dissolved `@cad` names this tier, never a bag; its bytes live here (`genesis/cas`), while its handles ride the publicity-tiered bags — public `@crossroads` plaintext · private `@catalog` ciphertext · system `@oracle` (<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>).
 
 !! Identity ⋈ canon — a wiki's two addresses
 

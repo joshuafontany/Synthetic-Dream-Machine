@@ -229,8 +229,10 @@ the first sync message — removes the need for TLS as the transport trust layer
 
 The six-tier ladder above discovers ''doc URLs'' — random UUIDs the CRDT sync
 protocol reconciles. A second, distinct problem rides beside it: resolving the
-large ''body content'' that leaves the CRDT and lives in `@cad` (the
-content-addressed bag). The two never conflate — a doc URL names a mutable
+large ''body content'' that leaves the CRDT and lives in the
+content-addressed tier `@cad` (NOT a bag — bytes in the `cid/<hash>` KIND-plane,
+handles in the publicity-tiered bags: public `@crossroads` plaintext, private
+`@catalog` ciphertext). The two never conflate — a doc URL names a mutable
 Automerge document; a blob names immutable bytes.
 
 Blob content carries its own address: `cid = BLAKE3(ciphertext)`. Unlike a doc

@@ -42,6 +42,19 @@ The name carries the load deliberately: the Lares Compitales kept the ''crossroa
 
 <<~/ahu >>
 
+<<~ ahu #cad-tenant >>
+
+!! The concrete role ~ the public tier of the content-addressed layer
+
+The `@cad` dissolve gave @crossroads its ''first concrete tenant''. `@cad` reads not as a bag but as the //name// of the content-addressed tier; its bytes rest in the `cid/<hash>` KIND-plane, and its handles ride the publicity-tiered bags. The publicity plane the content sits in ''decides its addressing mode'' — the grant-graph WHO-axis recurring at the blob layer — and @crossroads holds the ''public leg'' of that three-plane split (`@catalog`-private → ciphertext cid; `@oracle`-system → the frozen CID floor).
+
+* ''First tenant landed 2026-07-19'' — the public-domain library moved home to @crossroads (`bags/@crossroads/…/library`: Twain, the Kumulipo, the Discordian texts). It carries both kinds — raw `.txt` books and structured `.mem` memes holding large `#source-text` ahus (`content-resolution` CAD taxonomy A and B).
+* ''Public CAD blobs carry plaintext `ni://` multihash anchors.'' A stranger both //fetches// and //verifies// against a foreign-legible, self-describing content id (RFC-6920 `ni://` shape) — federable at `meme`-rated and above, durable toward the 500-year archival horizon. BECAUSE @crossroads sits public, ''no confirmation-oracle stands to protect'' — the plaintext-hash leak that bars `@catalog`-private (→ ciphertext cid) simply does not apply where the content already stands open.
+
+This ''coheres with the constraints above'', never contradicts them. The plaintext anchor sets only ''how a stranger verifies'' a body; the orichalcum gate still decides whether they may `pull` or `read` (`pull` ≠ `read` — "public" names a generous anonymous grant, never a gateless plane). One home per oracle holds: the library crossed //to// @crossroads, it did not fork across two authorities. Access ≠ load: the anchor lets a stranger verify what they fetch, never mounts the layer for them. <<~ confidence Provisional 6/20 >> the tenant landed and the anchor mode reads decided; the wider @crossroads build (community authority, federation discovery, sharding) stays the open basin below.
+
+<<~/ahu >>
+
 <<~ ahu #open >>
 
 !! Open (deliberately)
@@ -56,6 +69,7 @@ Who writes @crossroads (community authority shape), how Nexus-level federation d
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
 <<~/ahu >>
