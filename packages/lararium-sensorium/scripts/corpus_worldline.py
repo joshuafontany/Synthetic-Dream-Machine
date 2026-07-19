@@ -11,10 +11,10 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 
+from deep_time import content_hash
 from sensorium import read_stream_manifest, sensorium_paths
 from worldline_io import WorldlineStore
 
@@ -60,7 +60,7 @@ def _records(content_dir: str) -> list[dict]:
 
 
 def _root_for(source_file: str) -> str:
-    digest = hashlib.sha256(source_file.encode("utf-8")).hexdigest()[:24]
+    digest = content_hash(source_file.encode("utf-8"))[:24]
     return f"corpus:{digest}"
 
 

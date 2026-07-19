@@ -458,9 +458,12 @@ def canonical_json(value) -> str:
 
 
 def structural_hash(tree) -> str:
-    import hashlib
+    # Routes the identity KEY through the ONE content-address home (deep_time.content_hash,
+    # hash-agility); today still sha256, BYTE-IDENTICAL, so it stays byte-for-byte the TS
+    # crypto.canonicalJson mirror and every stored structural key resolves.
+    from deep_time import content_hash
 
-    return hashlib.sha256(canonical_json(tree).encode("utf-8")).hexdigest()
+    return content_hash(canonical_json(tree).encode("utf-8"))
 
 
 # ── the batch INGEST command — router → structurepalace encoder → structure palace ───────────

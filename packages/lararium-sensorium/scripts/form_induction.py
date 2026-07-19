@@ -60,11 +60,12 @@ Run under the mempalace venv (PYTHONPATH=<repo>/mempalace so `induce`'s chroma r
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import math
 import sys
 from collections import Counter
+
+from deep_time import content_hash
 
 # ── caps ────────────────────────────────────────────────────────────────────────────
 # Bounds so a pathological forest can never make the miners run unbounded. The templates
@@ -112,7 +113,7 @@ def _canonical(value) -> str:
 def _struct_hash(value) -> str:
     """The constructicon KEY — sha256 of a template's canonical form (mirrors the S2
     structurepalace structural_hash), so a form is addressed by its shape, never a name."""
-    return hashlib.sha256(_canonical(value).encode("utf-8")).hexdigest()[:32]
+    return content_hash(_canonical(value).encode("utf-8"))[:32]
 
 
 # ── ordered EMBEDDED tree inclusion (the TreeMiner support relation) ──────────────────

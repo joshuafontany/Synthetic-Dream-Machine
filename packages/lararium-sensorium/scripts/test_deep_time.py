@@ -29,6 +29,24 @@ def test_content_hash_is_byte_identical_to_bare_sha256():
         assert content_hash(data) == hashlib.sha256(data).hexdigest()
 
 
+def test_routed_identity_hash_callers_stay_byte_pinned():
+    # Every content-ADDRESS/identity site routed through content_hash MUST stay byte-identical —
+    # a drift orphans stored addresses/keys. These pins lock the hash-agility seam's callers:
+    # derive_cid (the canonical cid), the corpus worldline root, the constructicon key, and the
+    # structure-palace structural key (which also mirrors the TS crypto.canonicalJson byte-for-byte).
+    from capture_sources import derive_cid
+    from corpus_worldline import _root_for
+    from form_induction import _struct_hash
+    from structure_router import structural_hash
+
+    assert derive_cid("some/file.jsonl", 3) == (
+        "97a91a0a641038aaba24bc544a83955d0732fa6d670cc0f8fb51b339aa75ac02_3")
+    assert _root_for("claude:sess-x/file.jsonl") == "corpus:36c106d82b3f7603d2458f2e"
+    assert _struct_hash({"type": "x", "children": [1, 2]}) == "e904fb57fef5a699e3458945d6ff801d"
+    assert structural_hash({"type": "source_file", "children": []}) == (
+        "6d077246ee7fb09098af26ff1b950b16a3a021d24f4900160bfdaa2468637b72")
+
+
 def test_deep_time_imports_only_stdlib_no_sensorium_cycle():
     import ast
 
