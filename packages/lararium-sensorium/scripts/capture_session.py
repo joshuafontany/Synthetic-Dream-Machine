@@ -163,7 +163,7 @@ class CaptureSessionServer:
         # rejim (DETECT the nameless rhythm → geology) and worldline-ffz (ASSIGN prenamed membership slots per
         # node from the DAG → content metadata) ride ONE cadence machinery; the WORK differs, the DRIVE is one.
         # Clock-pure + dormant until ticked, so every existing deploy stays unchanged until the holder serves.
-        from derived_cadence import DEFAULT_COALESCE_WINDOW, DerivedCadence
+        from derived_cadence import DEFAULT_COALESCE_WINDOW, DerivedCadence, seeded_servo
         self._clock = 0
         self._backlog = 0
         _env = os.environ.get("LARES_DERIVED_WINDOW")
