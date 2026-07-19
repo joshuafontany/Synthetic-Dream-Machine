@@ -354,7 +354,15 @@ export function telemetryVerbCap(): CapModule {
   };
 }
 
-/** capture — submit ONE transcript source stream to the Python-owned capture holder. */
+/** The SOVEREIGN-HOLDER verb family — every verb the one serialized Python capture holder serves for a
+ *  palace, grouped here because they SHARE that provider (`daemonVm` → `captureFor(root)`) and its
+ *  serialization, not because they are all "capture". Three concerns ride the one holder: WRITE/derive
+ *  (`capture` · `refresh` the mempalace projection · `rejim`/`repour-rejim` the rhythm plane), READ
+ *  (`status` taxonomy · `worldline` fork-DAG · `plane-record` cross-plane witness), and MUTATE (`kapae`/
+ *  `un-kapae` the worldline branch-mute cascade · `structurepalace-kapae` the structure-tally rewind). The
+ *  serialized pipe is WHY they cohere: reads see a consistent snapshot, mutations never race the writer.
+ *  (The group id stays `verb/capture` — the `verb/` prefix is what composeVerbPlane collects; the suffix
+ *  carries no routing, so the honest scope lives in this doc, not a churning rename.) */
 export function captureVerbCap(): CapModule {
   return {
     id: VERB_GROUP.capture,
