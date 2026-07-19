@@ -16,11 +16,12 @@
 
 import { Repo }                              from "@automerge/automerge-repo";
 import { IndexedDBStorageAdapter }           from "@automerge/automerge-repo-storage-indexeddb";
-import type { DocHandle, AutomergeUrl }      from "@automerge/automerge-repo";
+import type { DocHandle, AutomergeUrl, PeerId } from "@automerge/automerge-repo";
 import {
   emptyLarDoc, mutableLarRecord,
   CATALOG_DOC_URI, DAEMON_BAG_ID,
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
+  DeterministicFederationGate, federationShareDecision, type FederationGate,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, laresVerbUriArg, bagStackFromRec, recipeUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
@@ -281,9 +282,18 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   emit("boot");
 
   // ── Repo — IndexedDB-backed (substrate) ────────────────────────────────────
+  // The federation ring split. This vessel's own islands (daemon + wiki workers) sync over
+  // MessageChannel and are house members — they share freely. The spore crossing (below) may add
+  // a WS *relay* adapter reaching the wider Nexus; a relay peer must NOT be volunteered every
+  // sovereign doc. `relayPeers` tags exactly the peers that arrive via the relay adapter (the
+  // adapter-scoped peer-candidate is unambiguous — no socket-map inference), and `fedGate`
+  // (a DENY-BY-DEFAULT FederationGate) is armed ONLY for a cross-operator crossing. Absent a
+  // gate the relay is the operator's OWN node (same-operator leaf, own DID) → full device sync.
+  const relayPeers = new Set<string>();
+  let   fedGate: FederationGate | null = null;
   const repo = new Repo({
     storage:     new IndexedDBStorageAdapter(`${idbName}:repo`),
-    sharePolicy: async () => true,   // same-origin/in-process peers only (no WS server)
+    sharePolicy: (peerId, documentId) => federationShareDecision(relayPeers, fedGate, peerId, documentId),
   });
   emit("repo-open");
 
@@ -369,6 +379,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     const relayAdapter = new LarWSClientAdapter({
       url: relayUrl, identity: leaf, aud: DAEMON_BAG_ID, gatePubKey: relayGatePubKey ?? operatorDid,
     });
+    // Tag the relay ring: every peer reached through this adapter enters `relayPeers`, so the
+    // sharePolicy gates them while the in-process island peers keep sharing freely. Listeners
+    // attach BEFORE addNetworkAdapter so a peer is classified before any doc is announced to it.
+    relayAdapter.on("peer-candidate",    ({ peerId }: { peerId: PeerId }) => { relayPeers.add(peerId); });
+    relayAdapter.on("peer-disconnected", ({ peerId }: { peerId: PeerId }) => { relayPeers.delete(peerId); });
+    // Arm the deny-by-default gate ONLY for a cross-operator crossing (relayGatePubKey names a
+    // foreign Nexus, and its deterministic @crossroads + WHO board are the whole public surface).
+    // Absent a gate key the relay is the operator's own node: fedGate stays null → full device sync.
+    if (relayGatePubKey) fedGate = new DeterministicFederationGate(relayGatePubKey);
     repo.networkSubsystem.addNetworkAdapter(relayAdapter);
   }
 

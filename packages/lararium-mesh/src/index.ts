@@ -63,6 +63,8 @@ export * from "./lar-vessel.js";
 export * from "./lararium-vessel.js";
 export type { IdentitySlot, CapabilityToken, ActorId } from "./identity-slot.js";
 export { OpenIdentitySlot } from "./identity-slot.js";
+export type { FederationGate } from "./federation-gate.js";
+export { DeterministicFederationGate, federationShareDecision } from "./federation-gate.js";
 export * from "./meme-provider.js";
 export * from "./reaction-graph.js";
 export * from "./wiki-recipe.js";

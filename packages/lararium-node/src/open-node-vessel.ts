@@ -273,6 +273,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // house members and share freely. Without the island ring, main never
     // relays daemon-island-minted docs (@personal/@draft bindings) to the wiki
     // island and its slot-resolve hangs at boot.
+    //
+    // V5 SYMMETRY: this WS ring gates at the PEER (gate-passed vs not); the browser
+    // leaf gates at the DOC (a deny-by-default FederationGate, since a leaf cannot
+    // run a gate). Both are the same seam at two resolutions — the V5 KeyhiveIdentitySlot
+    // composes verifyCapability(docUrl, ability) as the INNER ring here (per-doc caps
+    // behind the per-peer admission), matching the browser's FederationGate call site.
     sharePolicy: async (peerId) => {
       const wsSocket = (network.sockets as Record<string, unknown> | undefined)?.[peerId];
       return wsSocket ? peerIdentifierMap.has(peerId) : true;
