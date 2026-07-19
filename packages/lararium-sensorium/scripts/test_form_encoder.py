@@ -459,6 +459,21 @@ def test_store_then_get_round_trip(store):
     assert got["metadata"]["conformance"] == pytest.approx(0.83)
 
 
+def test_store_persists_form_vector_in_document(store):
+    """The TRUE dense basis (sparse form_vector) rides the persisted document alongside
+    axis_activation — a downstream reader (node parse-form-vector) recovers the real basis
+    rather than reconstructing indices from the ID-keyed activation profile alone (F4)."""
+    fv = {"indices": [0, 2], "values": [1.0, 0.5]}
+    store.store(
+        SHA_A, fv, dimension=4,
+        metadata={"verbatim_sha": SHA_A,
+                  "axis_activation": {"sigil:loulou": 0.91}},
+    )
+    doc = json.loads(store.get(SHA_A)["document"])
+    assert doc["form_vector"] == fv  # the basis round-trips verbatim
+    assert doc["axis_activation"] == {"sigil:loulou": 0.91}  # profile still carried
+
+
 def test_store_recurrence_bumps_count(store):
     fv = {"indices": [0], "values": [1.0]}
     store.store(SHA_A, fv, 4, {"verbatim_sha": SHA_A})

@@ -810,6 +810,11 @@ class FormPalaceStore:
                 meta[bk] = bv
         document = json.dumps(
             {
+                # The TRUE dense basis — sparse {indices, values} the encoder already
+                # computes. Persisting it hands the node reader (parse-form-vector, which
+                # PREFERS form_vector when present) the real basis, rather than forcing it
+                # to reconstruct indices from the ID-keyed axis_activation profile alone.
+                "form_vector": form_vector,
                 "axis_activation": metadata.get("axis_activation", {}),
                 "turn_conformance": meta["conformance"],
             }
