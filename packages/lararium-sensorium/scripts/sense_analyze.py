@@ -35,6 +35,11 @@ from sequitur_grammar import induce           # the grammar inducer (spine) — 
 DEFAULT_HALVES = (4, 8, 16, 32, 64, 128)
 #: Top-K peaks reported per scale — nobody types the boundary count; each scale offers its K strongest.
 K_CUTS = 16
+#: Hard ceiling on the spectral sample. The concentration matrix runs O(n²) and the eigenmap control O(n³) in
+#: the row count, so an unclamped sample (a --sample over a 28k corpus) would OOM/hang the eigendecomposition.
+#: The spectral arm reads a positive CONTROL, not the primary finding, so a bounded sample answers it — this
+#: caps the sample a caller can push into the dense operators, a safety backstop, never a result knob.
+_SPECTRAL_MAX_N = 3000
 
 
 def resolve_content(sensorium: str) -> str:
@@ -187,27 +192,36 @@ def branching_entropy(toks: "list[str]", depths=(1, 2), k: int = K_CUTS) -> dict
 # ── the spectral arm: the embedding GEOMETRY surface (not stream positions) ──────────────────────────
 def _load_vectors(sensorium: str, sample_n: int = 2000, seed: int = 7) -> "tuple[np.ndarray, list]":
     """Page the poured sensorium's OWN vectors out through ContentStore.scan (the machina's bulk-vector door,
-    no raw chroma) → the embedding matrix + metadatas, sub-sampled to sample_n. The chunker makes these
-    FAITHFUL now — before it, a whole-file record's vector represented only its opening (the window-fit gap)."""
+    no raw chroma), RESERVOIR-sampling to at most sample_n rows AS it pages — so peak memory stays bounded to
+    the sample, never the whole corpus resident. The dense operators downstream run O(n²)–O(n³) in the row
+    count, so an unclamped load would OOM/hang on a large sensorium; the reservoir holds the count flat. The
+    chunker makes these vectors FAITHFUL now — before it, a whole-file record's vector represented only its
+    opening (the window-fit gap)."""
     store = ContentStore(resolve_content(sensorium))
+    rng = np.random.default_rng(seed)
     embs: list = []
     metas: list = []
+    n_seen = 0
     off = 0
     while True:
         page = store.scan(offset=off, limit=512)
         for r in page["records"]:
-            if r.get("embedding"):
+            if not r.get("embedding"):
+                continue
+            if len(embs) < sample_n:
                 embs.append(r["embedding"])
                 metas.append(r.get("metadata") or {})
+            else:
+                j = int(rng.integers(0, n_seen + 1))   # reservoir: keep the seen row with prob sample_n/n_seen
+                if j < sample_n:
+                    embs[j] = r["embedding"]
+                    metas[j] = r.get("metadata") or {}
+            n_seen += 1
         nxt = page.get("next")
         if nxt is None:
             break
         off = nxt
-    emb = np.asarray(embs, dtype=float)
-    if emb.shape[0] > sample_n:
-        take = np.random.default_rng(seed).choice(emb.shape[0], size=sample_n, replace=False)
-        emb, metas = emb[take], [metas[i] for i in take]
-    return emb, metas
+    return np.asarray(embs, dtype=float), metas
 
 
 def validity_gate(emb: np.ndarray, metas) -> dict:
@@ -308,6 +322,7 @@ def spectral(sensorium: str, *, sample_n: int = 2000) -> dict:
     """The EMBEDDING-geometry surface of a poured sensorium (distinct from the stream-boundary surface): read
     the faithful chunk vectors through the machina's own door, gate their health, diagnose concentration, and
     run the eigenmap positive control. Blind to any ground-truth — it reports the geometry, not a verdict."""
+    sample_n = min(sample_n, _SPECTRAL_MAX_N)   # clamp before the O(n²)/O(n³) dense ops — a safety backstop
     emb, metas = _load_vectors(sensorium, sample_n=sample_n)
     gate = validity_gate(emb, metas)
     out = {"sensorium": sensorium, "validity": gate}
