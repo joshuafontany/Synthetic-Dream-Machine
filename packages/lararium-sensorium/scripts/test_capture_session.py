@@ -170,6 +170,17 @@ def test_kapae_serve_op_round_trips_mute_then_restore(tmp_path):
     assert restored["resolved"] and restored["restored_entries"] >= 1  # move-not-delete restores them
 
 
+def test_kapae_mutation_guards_its_own_args(tmp_path):
+    # a MUTATION self-guards: an empty branch or a missing/non-int tick raises BEFORE any store opens — the
+    # capture-op rigor held at the mutation point. Reads degrade to honest nulls; a mute never runs on bad args.
+    server = _captured_server(tmp_path)
+    for bad in ({"branch": "b"}, {"branch": "b", "tick": "1"}, {"tick": 1}, {"branch": "", "tick": 1}):
+        with pytest.raises(ValueError):
+            server.kapae(bad)
+        with pytest.raises(ValueError):
+            server.un_kapae(bad)
+
+
 def test_plane_record_serve_op_witnesses_the_content_leg(tmp_path):
     # the cross-plane witness over the holder's own content store — a real captured cid reads present on the
     # content leg (the SAME plane_query implementation the /mcp coordinator drives); an unknown cid reads null.

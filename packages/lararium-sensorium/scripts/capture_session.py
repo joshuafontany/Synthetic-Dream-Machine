@@ -284,12 +284,14 @@ class CaptureSessionServer:
         `un_kapae` restores). MUTATION — it rides the SAME serialized pipe as capture, so the mute never races
         the live writer (the serialization is WHY this op homes on the capture holder). REUSES the holder's ONE
         content handle (never a second writer); opens a fresh WorldlineStore, closes it in `finally`."""
+        branch, tick = str(req.get("branch") or ""), req.get("tick")
+        if not branch or not isinstance(tick, int):
+            raise ValueError("kapae requires a non-empty branch + an integer tick — a mutation guards its own args")
         import worldline_io
         from worldline_io import WorldlineStore
         store = WorldlineStore(self._paths.worldline)
         try:
-            return worldline_io.cascade_kapae(store, [self._content_store()],
-                                              str(req.get("branch") or ""), req.get("tick"))
+            return worldline_io.cascade_kapae(store, [self._content_store()], branch, tick)
         finally:
             store.close()
 
@@ -297,12 +299,14 @@ class CaptureSessionServer:
         """Restore a muted worldline branch across THIS holder's content store — the reverse of `kapae`.
         MUTATION on the serialized pipe (never races the live writer); reuses the holder's ONE content handle;
         opens a fresh WorldlineStore, closes it in `finally`."""
+        branch, tick = str(req.get("branch") or ""), req.get("tick")
+        if not branch or not isinstance(tick, int):
+            raise ValueError("un_kapae requires a non-empty branch + an integer tick — a mutation guards its own args")
         import worldline_io
         from worldline_io import WorldlineStore
         store = WorldlineStore(self._paths.worldline)
         try:
-            return worldline_io.cascade_un_kapae(store, [self._content_store()],
-                                                 str(req.get("branch") or ""), req.get("tick"))
+            return worldline_io.cascade_un_kapae(store, [self._content_store()], branch, tick)
         finally:
             store.close()
 
