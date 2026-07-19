@@ -52,6 +52,10 @@
       "import": "./dist/crypto.js",
       "types": "./dist/crypto.d.ts"
     },
+    "./agile-digest": {
+      "import": "./dist/agile-digest.js",
+      "types": "./dist/agile-digest.d.ts"
+    },
     "./ffz-project": {
       "import": "./dist/ffz-project.js",
       "types": "./dist/ffz-project.d.ts"

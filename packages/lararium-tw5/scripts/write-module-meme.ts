@@ -14,6 +14,7 @@ import { createHash } from "crypto";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { tw5MemesRoot } from "@lararium/tw5/tw5-memes-root";
+import { formatDigest } from "@lararium/mesh/agile-digest";
 
 const __dirname  = dirname(fileURLToPath(import.meta.url));
 const bundlePath = resolve(__dirname, "../dist-bundle/lararium-tw5-modules.tw5.js");
@@ -21,6 +22,9 @@ const memePath   = join(tw5MemesRoot, "modules/tw5-modules.mem");
 
 const bundle = readFileSync(bundlePath, "utf8").trimEnd();
 const sha256 = createHash("sha256").update(bundle, "utf8").digest("hex");
+// The emitted field rides algorithm-tagged (`sha256:<hex>`); `verifySha256` dual-reads,
+// so a body-sha256 stored bare pre-agile still verifies. The bare hex stays for logging.
+const sha256Tagged = formatDigest("sha256", sha256);
 
 let meme = readFileSync(memePath, "utf8");
 
@@ -59,8 +63,8 @@ const tomlOrig = tomlMatch[1];
 const SHA_FIELD = /^body-sha256\s*=\s*"[^"]*"/m;
 
 const tomlPatched = SHA_FIELD.test(tomlOrig)
-  ? tomlOrig.replace(SHA_FIELD, `body-sha256 = "${sha256}"`)
-  : tomlOrig.replace(/(\n```)$/, `\nbody-sha256 = "${sha256}"$1`);
+  ? tomlOrig.replace(SHA_FIELD, `body-sha256 = "${sha256Tagged}"`)
+  : tomlOrig.replace(/(\n```)$/, `\nbody-sha256 = "${sha256Tagged}"$1`);
 
 meme = meme.replace(tomlOrig, tomlPatched);
 

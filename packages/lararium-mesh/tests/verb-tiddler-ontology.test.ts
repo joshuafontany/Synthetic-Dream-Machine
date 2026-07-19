@@ -12,6 +12,7 @@ import {
   taskUri, receiptUri, taskContentId, TASK_KIND, RECEIPT_KIND,
   buildVerb, summon, parseVerb,
 } from "../src/verb-tiddler.js";
+import { larRoot, isStableLarUri } from "../src/lar-uris.js";
 
 const BAG = "lar:///ha.ka.ba/bags/@daemon";
 
@@ -27,7 +28,19 @@ describe("task/receipt URI ontology (seed)", () => {
     const a = await taskContentId({ subject: BAG, command: "MOVE", args: { x: 1 } });
     const b = await taskContentId({ subject: BAG, command: "MOVE", args: { x: 1 } });
     expect(a).toBe(b);
-    expect(a).toHaveLength(64); // sha256 hex
+    expect(a).toMatch(/^sha256:[0-9a-f]{64}$/); // canonical algorithm-tagged sha256
+  });
+
+  test("a tagged taskContentId rides SAFELY inside the receipt URI (colon stays deep)", async () => {
+    // The tag lives within the final path segment (`…/receipt/sha256:<hex>`). `larRoot`
+    // reads only the three-term root, so the deep colon never touches the arity law:
+    // the URI stays a stable ha.ka.ba address with the id as ONE segment (not a 5th).
+    const id  = await taskContentId({ subject: BAG, command: "MOVE", args: { x: 1 } });
+    const uri = receiptUri(BAG, id);
+    expect(uri).toBe(`lar:///ha.ka.ba/bags/@daemon/receipt/${id}`);
+    expect(larRoot(uri)).toBe("ha.ka.ba");
+    expect(isStableLarUri(uri)).toBe(true);
+    expect(uri.split("/").length).toBe(taskUri(BAG, "abc").split("/").length); // id = one segment, colon and all
   });
 
   test("a fresh nonce yields a distinct task id (idempotent vs fresh dial)", async () => {

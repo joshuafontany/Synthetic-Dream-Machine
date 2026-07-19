@@ -36,6 +36,7 @@ import { createHash } from "crypto";
 import { resolve, relative, dirname } from "path";
 import { fileURLToPath } from "url";
 import { repoRoot } from "@lararium/mesh/node";
+import { tagDigest, digestsEqual } from "@lararium/mesh/agile-digest";
 
 const root     = repoRoot;
 const pkgsRoot = resolve(root, "packages");
@@ -152,14 +153,18 @@ function applySourcePatch(content: string, liveCode: string): string | null {
 }
 
 // Patches body-sha256 in the first ```toml block (the root toml iam prelude).
-// Adds the field if absent; replaces it if stale.
+// Adds the field if absent; replaces it if stale. The emitted value rides
+// ALGORITHM-TAGGED (`sha256:<hex>`) — `verifySha256` (the runtime cold-boot reader)
+// and this script's own drift check both dual-read via `digestsEqual`, so a field
+// stored bare pre-agile keeps comparing equal until the next commit rewrites it.
 function applyBodySha256Patch(content: string, sha256: string): string {
+  const tagged = tagDigest(sha256);
   const SHA_FIELD = /^body-sha256\s*=\s*"[^"]*"/m;
   if (SHA_FIELD.test(content)) {
-    return content.replace(SHA_FIELD, `body-sha256 = "${sha256}"`);
+    return content.replace(SHA_FIELD, `body-sha256 = "${tagged}"`);
   }
   // Insert before the closing ``` of the first toml fence
-  return content.replace(/(```toml[\s\S]*?)(\n```)/, `$1\nbody-sha256 = "${sha256}"$2`);
+  return content.replace(/(```toml[\s\S]*?)(\n```)/, `$1\nbody-sha256 = "${tagged}"$2`);
 }
 
 // ---------------------------------------------------------------------------
@@ -467,7 +472,10 @@ function runSyncModules(): { drift: number; missing: number; patched: number } {
 
     const liveHash     = createHash("sha256").update(modBody, "utf8").digest("hex");
     const existingHash = toml["body-sha256"] ?? "";
-    const hashDrift    = liveHash !== existingHash;
+    // Dual-read across the tag boundary: `existingHash` may ride bare (pre-agile) OR
+    // tagged (`sha256:…`); `digestsEqual` normalizes both, so a merely-reformatted
+    // digest never reads as content drift. Empty existing → not-equal → drift (add).
+    const hashDrift    = !digestsEqual(liveHash, existingHash);
 
     const anchorUri = toml["uri-path"] ?? mdPath;
 
@@ -598,7 +606,7 @@ function scaffoldDecoratorMeme(d: DecoratorFile): void {
   const srcSym    = d.symbols.join(" ");
   const bodies    = d.symbols.map(s => extractSymbol(d.relPath, s) ?? "").filter(Boolean);
   const joined    = bodies.join("\n\n");
-  const bodyHash  = createHash("sha256").update(joined, "utf8").digest("hex");
+  const bodyHash  = tagDigest(createHash("sha256").update(joined, "utf8").digest("hex"));   // canonical tagged
   const kindLabel   = d.kind === "filter-operator" ? "TW5 filter operator" : "TW5 widget";
   // ka handles a single symbol; ba handles multiple space-separated symbols
   const heleumaMode = d.symbols.length === 1 ? "ka" : "ba";
@@ -792,7 +800,7 @@ for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
     const baDrift     = checkDrift(slotM[1]!, baLiveCode);
     const baLiveHash  = createHash("sha256").update(baLiveCode, "utf8").digest("hex");
     const baExistHash = toml["body-sha256"] ?? "";
-    const baHashDrift = baExistHash !== baLiveHash;
+    const baHashDrift = !digestsEqual(baLiveHash, baExistHash);   // dual-read the tag boundary
 
     if (COMMIT && (baDrift || baHashDrift)) {
       let working: string = content;
@@ -856,7 +864,7 @@ for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
   // sha256(liveCode) is the quine integrity anchor for DreamNet cold-boot verification.
   const liveHash     = mode === "ka" ? createHash("sha256").update(liveCode, "utf8").digest("hex") : null;
   const existingHash = mode === "ka" ? (toml["body-sha256"] ?? "") : null;
-  const hashDrift    = liveHash !== null && existingHash !== liveHash;
+  const hashDrift    = liveHash !== null && !digestsEqual(liveHash, existingHash!);   // dual-read the tag boundary
 
   if (COMMIT && (drift || hashDrift)) {
     let working: string = content;

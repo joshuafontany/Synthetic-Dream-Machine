@@ -48,6 +48,7 @@ import {
   LARES_VERB_EVENT_TAG, LARES_VERB_TAG,
 } from "./lar-uris.js";
 import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvider } from "./crypto.js";
+import { formatDigest } from "./agile-digest.js";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
 
 // ── URI prefixes ───────────────────────────────────────────────────────────
@@ -92,13 +93,18 @@ export function receiptUri(bagUri: string, taskContentId: string): string {
  * a fresh task. sha256 over canonical JSON — our native content-address; an
  * IPFS-CID projection at the peer boundary stays a later option (C). Async per
  * crypto law (routes through the platform CryptoProvider).
+ *
+ * The id rides ALGORITHM-TAGGED (`sha256:<hex>`), so a task identity carries its own
+ * digest scheme and stays agile. The tag lives WITHIN the final URI path segment
+ * (`…/receipt/sha256:<hex>`) — `larRoot` reads only the three-term root, so the deep
+ * colon never touches the arity law; the same tuple still yields one deterministic id.
  */
-export function taskContentId(
+export async function taskContentId(
   parts: { subject: string; command: string; args: Readonly<Record<string, unknown>>; nonce?: string },
   provider: DigestProvider = defaultCryptoProvider,
 ): Promise<string> {
   const canonical = { subject: parts.subject, command: parts.command, args: parts.args, nonce: parts.nonce ?? "" };
-  return sha256Hex(canonicalJsonBytes(canonical), provider);
+  return formatDigest("sha256", await sha256Hex(canonicalJsonBytes(canonical), provider));
 }
 
 // ── Verb invocation shape ──────────────────────────────────────────────────

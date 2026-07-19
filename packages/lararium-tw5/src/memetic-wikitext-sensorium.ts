@@ -38,6 +38,7 @@ import { windowInit, windowPush, windowLengthFor, type WindowConfig, type Window
 import { linearityGate, type LinearityReading } from "@lararium/mesh/linearity-gate";
 import { ffzMembershipAddress, ffzTruncate, type FfzCells, type FfzBand } from "@lararium/mesh/ffz-project";
 import { sha256HexSync } from "@lararium/mesh/crypto";
+import { formatDigest } from "@lararium/mesh/agile-digest";
 import type { ComparisonStalk, PlaneRestriction } from "@lararium/mesh/sensorium-consistency";
 
 // ── the two axes ─────────────────────────────────────────────────────────────────────────────────
@@ -164,7 +165,10 @@ export function sourceCidOf(text: string): string {
       "[memetic-wikitext-sensorium] the VM sandbox carries no TextEncoder — pass an explicit sourceCid to stratify()",
     );
   }
-  return "sha256-" + sha256HexSync(text);
+  // Canonical algorithm-tagged form (`sha256:<hex>`, agile-digest). The reader side
+  // (`parseDigest`/`digestsEqual`) still accepts the legacy `sha256-<hex>` SRI dash
+  // form, so a stored dash-tagged pin keeps comparing equal across the migration.
+  return formatDigest("sha256", sha256HexSync(text));
 }
 
 /** Does a red span carry a bare Mu operator as its steering glyph? (`<<~ ward ! …`, `<<~ mu * …`). */

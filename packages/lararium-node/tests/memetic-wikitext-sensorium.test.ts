@@ -36,7 +36,7 @@ const SAMPLE =
 describe("the reader — stratify (LI face): skeletal tier + red/base strata + associations", () => {
   test("splits into black skeletal anchors + red/base strata, source-CID pinned", () => {
     const s = stratify(SAMPLE);
-    expect(s.sourceCid).toMatch(/^sha256-[0-9a-f]{64}$/);
+    expect(s.sourceCid).toMatch(/^sha256:[0-9a-f]{64}$/);   // canonical algorithm-tagged form
     // two sigils → two strata; the prose gaps → skeletal anchors
     expect(s.strata.length).toBe(2);
     expect(s.skeletal.length).toBeGreaterThanOrEqual(2);
