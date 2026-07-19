@@ -26,10 +26,9 @@ import json
 import re
 
 import boundary_score as BS
-import tw5_boundary as TB  # noqa: F401 — imported for its SIDE EFFECT: it rebinds BS.ground_truth at the TW5 bed …
 import pidgin_bed
 
-BS.ground_truth = pidgin_bed.ground_truth   # … and this RE-AIMS it at the pidgin bed. Last write wins.
+BS.ground_truth = pidgin_bed.ground_truth   # re-aim the pre-registered scorer at the pidgin bed's own key
 
 from boundary_score import report, render  # noqa: E402  (must follow the rebind)
 
