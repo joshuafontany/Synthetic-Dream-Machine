@@ -168,14 +168,13 @@ class CaptureSessionServer:
         self._backlog = 0
         _env = os.environ.get("LARES_DERIVED_WINDOW")
         window = float(_env) if _env else DEFAULT_COALESCE_WINDOW
-        self._rejim = DerivedCadence(window=window)   # kept by name for the rejim_tick manual op
         # The three-fold of derived WORK, one DRIVE: rejim DISCOVERS the nameless rhythm, mempalace PROJECTS
         # content into the recall surface, worldline-ffz ASSIGNS prenamed membership slots per node. All
-        # content-derived, rebuildable, refreshed on new shards. (rederive/bands are cousins — canon-triggered,
-        # not new-shard, so they ride their own cadence, not this one.)
+        # content-derived, rebuildable, refreshed on new shards — the ONE `refresh` command re-derives them all,
+        # the idle beat auto-drives them. (rederive/bands are cousins — canon-triggered, not new-shard.)
         self._derived = [
-            _DerivedEnricher("rejim", self._rejim, lambda: self.repour_rejim({})),
-            _DerivedEnricher("mempalace", DerivedCadence(window=window), lambda: self.refresh({})),
+            _DerivedEnricher("rejim", DerivedCadence(window=window), lambda: self.repour_rejim({})),
+            _DerivedEnricher("mempalace", DerivedCadence(window=window), self._pave_mempalace),
         ]
         if self._worldline_declared():
             self._derived.append(_DerivedEnricher("worldline-ffz", DerivedCadence(window=window),
@@ -273,24 +272,27 @@ class CaptureSessionServer:
         }
 
     def refresh(self, req: dict) -> dict:
-        """Re-pave the in-tree mempalace projection over THIS holder's content store — the derived recall
-        surface rebuilt from the eidetic ground.
+        """Re-derive the sensorium's whole DERIVED layer in ONE command — every content-derived enrichment
+        the holder owns (rejim rhythm DISCOVERY · mempalace projection · worldline slot ASSIGNMENT where the
+        aperture is declared), the SAME registry the idle beat auto-drives. FORCED — a manual ask re-derives
+        now, bypassing the cadence gate. Optional `which` names a single enrichment (else all). Rides the
+        serialized pipe, so it queues between capture passes and never races the writer. A live session's
+        later turns land on the next `capture`; a later `refresh` re-derives the layer over them. Returns
+        `{refreshed: {name: summary}}` — an honest empty when `which` names an enrichment this sensorium lacks."""
+        which = req.get("which")
+        refreshed: dict = {}
+        for enr in self._derived:
+            if which and enr.name != which:
+                continue
+            refreshed[enr.name] = enr.derive()
+        return {"refreshed": refreshed}
 
-        Rides the SAME serialized pipe as `capture`, so a refresh queues BETWEEN capture passes and never
-        races the writer: no second store connection, and the content read stays consistent. The op is
-        AWARE that open sessions may run alongside it — it paves the content as of now; a live session's
-        later turns land on the next `capture`, and a later `refresh` re-derives the view. A full
-        teardown/rebuild tears content first and re-captures every surface (the heavy path); this op only
-        re-derives the projection, so it stays cheap enough to ask for anytime while capture continues."""
+    def _pave_mempalace(self) -> dict:
+        """The mempalace enrichment's derive: re-pave the in-tree projection over THIS holder's content — the
+        derived recall surface rebuilt from the eidetic ground. Rides the serialized pipe (no second store
+        connection). Querying the projection is recall's job, not the pave's — this only re-derives the view."""
         import mempalace_pave_cli as pave_cli
-        mempalace_dir = self._paths.mempalace
-        query = req.get("query")
-        return pave_cli.run(
-            self._paths.content, mempalace_dir,
-            query=(str(query) if query else None),
-            k=int(req.get("k") or 5),
-            all_strata=bool(req.get("allStrata")),
-        )
+        return pave_cli.run(self._paths.content, self._paths.mempalace, query=None, k=5, all_strata=False)
 
     def repour_rejim(self, req: dict) -> dict:
         """Re-derive the REJIM (rhythm/geology) plane over THIS holder's content — the nameless regimes the
@@ -315,25 +317,6 @@ class CaptureSessionServer:
         rejim_dir = self._paths.rejim
         geology = rejim_io.read_rejim(rejim_dir)
         return {"repoured": geology is not None, "geology": geology}
-
-    def enrich_worldline(self, req: dict) -> dict:
-        """Manually re-assign the worldline membership slots NOW (the idle beat keeps them fresh on its own).
-        An honest no-op summary when this sensorium bears no worldline cap (no `apertures.beat` declared)."""
-        if not any(e.name == "worldline-ffz" for e in self._derived):
-            return {"worldline": False, "note": "this sensorium declares no `apertures.beat: worldline-dag`"}
-        return {"worldline": True, **self._enrich_worldline()}
-
-    def rejim_tick(self, req: dict) -> dict:
-        """DRIVE the rejim cadence one ordinal tick (the manual/external trigger; the idle beat AUTO-drives
-        every enrichment). Fire ONLY when the coalesce window crested over marked ground AND capture settled
-        (the backlog drained) — so the heavy whole-stream repour runs on quiet ground. `backlog` rides the
-        request (its live drain reading) or falls back to the last capture's backlog. Holds until due."""
-        raw = req.get("backlog")
-        backlog = int(raw) if raw is not None else self._backlog
-        res = self._drive_enricher(self._derived[0], self._tick(), backlog)   # [0] = rejim, composed first
-        if res is None:
-            return {"fired": False, "backlog": backlog}
-        return {"fired": True, "revision": res["revision"], **res["summary"]}
 
     # ── the lifecycle + cross-plane serve-ops (the /mcp DaemonCoordinator routes to these) ─────────
     # Each rides the SAME serialized pipe as capture (run_sidecar dispatch is serial), so a MUTATION never
@@ -406,11 +389,8 @@ def _serve(sensorium_root: str) -> None:
         build_dispatch=lambda: make_dispatch({
             "ping": lambda _req: {"ready": True},
             "capture": server.capture,
-            "refresh": server.refresh,   # re-pave the mempalace projection, serialized with capture
-            "repour_rejim": server.repour_rejim,   # re-derive the rejim geology plane, serialized with capture
+            "refresh": server.refresh,   # RE-DERIVE the whole derived layer (rejim · mempalace · worldline)
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
-            "rejim_tick": server.rejim_tick,       # manually drive the rejim cadence (the idle beat auto-drives)
-            "enrich_worldline": server.enrich_worldline,   # manually assign worldline slots (idle beat auto-drives)
             "status": server.status,               # the taxonomy over the holder's content store
             "worldline": server.worldline,         # the fork-DAG rhizome read (fresh worldline handle)
             "kapae": server.kapae,                 # mute a branch across the content store (serialized mutation)

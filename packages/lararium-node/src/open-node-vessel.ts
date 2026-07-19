@@ -659,9 +659,9 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).capture(req);
       },
-      refreshMempalace: async (input) => {
-        // The SAME serialized capture holder (for this sensorium root) owns the store; a refresh rides its
-        // pipe (queues between capture passes), so the projection re-paves without racing the live writer.
+      refreshDerived: async (input) => {
+        // RE-DERIVE the whole derived layer through the holder that owns the store — one command, serialized
+        // on the capture pipe (queues between passes, never races the writer). `which` narrows to one.
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).refresh(req);
       },
@@ -669,12 +669,6 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // Read the landed rejim (rhythm/geology) plane through the holder that owns the store.
         const { sensoriumRoot } = input;
         return await captureFor(sensoriumRoot).readRejim({});
-      },
-      repourRejim: async (input) => {
-        // Re-derive the rejim plane over the holder's content — the heavy repour rides the capture pipe, so
-        // it queues between passes and never races the live writer (the derived-view discipline).
-        const { sensoriumRoot, ...req } = input;
-        return await captureFor(sensoriumRoot).repourRejim(req);
       },
       status: async (input) => {
         // The taxonomy over the holder's content store — reads the ONE handle the holder owns (no second client).

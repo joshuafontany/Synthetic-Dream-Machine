@@ -121,16 +121,13 @@ export interface DaemonVerbProvider {
   /** Send one source-stream pointer to the serialized Python capture holder. `sensoriumRoot` addresses a
    *  specific sensorium's holder (absent → the memory default). */
   captureSource(input: { surface: "claude" | "codex" | "copilot" | "copilot-vscode"; pointer: string; wing: string; room?: string; sessionId?: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
-  /** Re-pave the in-tree mempalace projection over the content plane, THROUGH the same serialized Python
-   *  capture holder — so a refresh queues between capture passes and never races the live writer.
-   *  `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
-  refreshMempalace(input: { query?: string; k?: number; allStrata?: boolean; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
+   *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races
+   *  the writer. `which` narrows to a single enrichment; `sensoriumRoot` addresses a sensorium (absent → memory). */
+  refreshDerived(input: { which?: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** Read the landed rejim (rhythm/geology) plane — the derived regimes made askable — THROUGH the holder
    *  that owns the store. `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
   readRejim(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
-  /** Re-derive the rejim plane over the content plane, THROUGH the serialized capture holder — the heavy
-   *  whole-stream repour queues between capture passes and never races the live writer. */
-  repourRejim(input: { channel?: string; nSurrogates?: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** The taxonomy over a sensorium's content store — what it holds — THROUGH the holder that owns the store.
    *  `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
   status(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
@@ -358,8 +355,9 @@ export function telemetryVerbCap(): CapModule {
 /** The SOVEREIGN-HOLDER verb family — every verb the one serialized Python capture holder serves for a
  *  palace, grouped here because they SHARE that provider (`daemonVm` → `captureFor(root)`) and its
  *  serialization, not because they are all "capture". Three concerns ride the one holder: WRITE/derive
- *  (`capture` · `refresh` the mempalace projection · `rejim`/`repour-rejim` the rhythm plane), READ
- *  (`status` taxonomy · `worldline` fork-DAG · `plane-record` cross-plane witness), and MUTATE (`kapae`/
+ *  (`capture` the source · `refresh` the WHOLE derived layer in one command — rejim rhythm · mempalace
+ *  projection · worldline slots), READ (`status` taxonomy · `rejim` geology · `worldline` fork-DAG ·
+ *  `plane-record` cross-plane witness), and MUTATE (`kapae`/
  *  `un-kapae` the worldline branch-mute cascade · `structurepalace-kapae` the structure-tally rewind). The
  *  serialized pipe is WHY they cohere: reads see a consistent snapshot, mutations never race the writer.
  *  (The group id stays `verb/capture` — the `verb/` prefix is what composeVerbPlane collects; the suffix
@@ -385,16 +383,14 @@ export function captureVerbCap(): CapModule {
           return await daemon.captureSource({ surface, pointer, wing, ...(room ? { room } : {}), ...(sessionId ? { sessionId } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("refresh", async (args) => {
-          // Re-pave the mempalace projection over the content plane, serialized on the capture holder's
-          // pipe (rides between capture passes — no race with the live writer).
-          const query = typeof args["query"] === "string" ? (args["query"] as string) : undefined;
-          const k = typeof args["k"] === "number" ? (args["k"] as number) : undefined;
-          const allStrata = args["allStrata"] === true;
+          // RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline
+          // slots) in ONE command, serialized on the capture holder's pipe (rides between capture passes —
+          // no race with the writer). `which` narrows to a single enrichment; else all. The idle beat
+          // auto-drives the same registry between refreshes.
+          const which = typeof args["which"] === "string" ? (args["which"] as string) : undefined;
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
-          return await daemon.refreshMempalace({
-            ...(query ? { query } : {}),
-            ...(k !== undefined ? { k } : {}),
-            ...(allStrata ? { allStrata } : {}),
+          return await daemon.refreshDerived({
+            ...(which ? { which } : {}),
             ...(sensoriumRoot ? { sensoriumRoot } : {}),
           });
         });
@@ -403,18 +399,6 @@ export function captureVerbCap(): CapModule {
           // it, this reads it). An honest absence when the plane has never been repoured.
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.readRejim({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
-        });
-        registry.register("repour-rejim", async (args) => {
-          // Re-derive the rejim plane over the content plane, serialized on the capture holder's pipe (rides
-          // between capture passes — no race with the live writer), exactly as `refresh` re-paves the projection.
-          const channel = typeof args["channel"] === "string" ? (args["channel"] as string) : undefined;
-          const nSurrogates = typeof args["nSurrogates"] === "number" ? (args["nSurrogates"] as number) : undefined;
-          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
-          return await daemon.repourRejim({
-            ...(channel ? { channel } : {}),
-            ...(nSurrogates !== undefined ? { nSurrogates } : {}),
-            ...(sensoriumRoot ? { sensoriumRoot } : {}),
-          });
         });
         registry.register("status", async (args) => {
           // The taxonomy over a sensorium's content store — what it holds — through the holder that owns it.

@@ -65,15 +65,12 @@ export interface SourceCaptureResult {
 
 export interface SourceCapture {
   capture(request: SourceCaptureRequest): Promise<SourceCaptureResult>;
-  /** Re-pave the in-tree mempalace projection over the content plane, on the SAME serialized pipe — so a
-   *  refresh queues between capture passes and never races the writer (a second store connection would). */
-  refresh(request: { query?: string; k?: number; allStrata?: boolean }): Promise<Record<string, unknown>>;
+  /** RE-DERIVE the sensorium's whole derived layer (rejim · mempalace · worldline) in ONE command, on the
+   *  SAME serialized pipe — queues between capture passes, never races the writer. `which` narrows to one. */
+  refresh(request?: { which?: string }): Promise<Record<string, unknown>>;
   /** Read the landed rejim (rhythm/geology) plane — the derived regimes made askable, or an honest absence
    *  when the plane has never been repoured. Rides the same serialized pipe. */
   readRejim(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
-  /** Re-derive the rejim plane over the content the holder already owns — the heavy whole-stream repour,
-   *  queued between capture passes so it never races the writer. */
-  repourRejim(request?: { channel?: string; nSurrogates?: number }): Promise<Record<string, unknown>>;
   /** The taxonomy over the holder's content store — what the sensorium holds. Rides the serialized pipe. */
   status(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
   /** The fork-DAG rhizome (bitemporal AS-OF `asOf`, else the whole history). Read-only over the pipe. */
@@ -114,13 +111,11 @@ export function makeSourceCapture(
   const p = composePalace(LABEL, sensoriumRoot, opts.spawn ?? defaultSpawn(sensoriumRoot), opts.timeoutMs ?? 120_000);
   return {
     capture: async (request) => await p.send("capture", sourceCaptureDescriptor(request)) as SourceCaptureResult,
-    // A refresh carries no session text — only the projection knobs — so it needs no admission descriptor;
-    // the holder re-derives the view from the content it already owns.
-    refresh: async (request) => await p.send("refresh", { ...request }) as Record<string, unknown>,
-    // The rejim (rhythm/geology) DERIVED plane: read the landed geology, or re-derive it over the content
-    // the holder already owns — both ride the pipe (queue between capture passes, never race the writer).
+    // A refresh carries no session text — only the optional `which` — so it needs no admission descriptor;
+    // the holder RE-DERIVES its whole derived layer (or the one named) from the content it already owns.
+    refresh: async (request) => await p.send("refresh", { ...(request ?? {}) }) as Record<string, unknown>,
+    // Read the landed rejim (rhythm/geology) plane — the derived regimes made askable. Rides the pipe.
     readRejim: async (request) => await p.send("read_rejim", { ...(request ?? {}) }) as Record<string, unknown>,
-    repourRejim: async (request) => await p.send("repour_rejim", { ...(request ?? {}) }) as Record<string, unknown>,
     // The lifecycle + cross-plane serve-ops: the taxonomy read, the fork-DAG read, the kapae/un-kapae
     // branch-mute cascades (mutations, serialized with capture — never a second writer), and the cross-plane
     // witness. Each rides the SAME serialized pipe as capture through the holder that owns the palace.

@@ -104,30 +104,27 @@ def test_read_rejim_makes_the_geology_askable(tmp_path):
     assert got["repoured"] is True and got["geology"]["stream_chars"] > 0  # the landed geology reads back
 
 
-def test_rejim_tick_holds_under_backpressure_then_fires_on_settled_ground(tmp_path, monkeypatch):
-    # the live-drive: capture MARKS the scheduler; a tick under backpressure (a non-empty backlog) HOLDS the
-    # heavy repour off the capture path, and only a settled + crested tick fires ONE repour of quiet ground.
-    monkeypatch.setenv("LARES_DERIVED_WINDOW", "2")                        # a tiny window crests in-test
+def test_refresh_rederives_the_whole_derived_layer(tmp_path):
+    # THE condensation: ONE `refresh` command re-derives the sensorium's whole derived layer — rejim (DISCOVER)
+    # · mempalace (PROJECT) · worldline (ASSIGN) — each reporting its summary. One command per sensorium, the
+    # same registry the idle beat auto-drives.
     root = str(tmp_path / ".mem")
-    server = CaptureSessionServer(root, embed_factory=_stub_embed_factory())
-    server.capture({"surface": "claude", "pointer": CLAUDE, "wing": "wing_proj", "room": "conversations"})
-    assert server.rejim_tick({"backlog": 3})["fired"] is False            # backpressure holds the re-regime
-    fired = server.rejim_tick({"backlog": 0})                             # settled + crested → fire once
-    assert fired["fired"] is True and fired["revision"] >= 1
-    assert os.path.exists(os.path.join(root, "rejim", "geology.json"))    # the repour landed on the tick
-    assert server.rejim_tick({"backlog": 0})["fired"] is False            # coalesced — no new ground, no repour
-
-
-def test_enrich_worldline_assigns_membership_slots(tmp_path):
-    # the worldline enrichment: ASSIGN prenamed membership slots per node (the beat cell = turn-identity) down
-    # the DAG — the deterministic counterpart to rejim's whole-stream detection. The memory sensorium declares
-    # the worldline aperture, so the enricher is active; it stamps every braid's blocks (idempotent).
     server = _captured_server(tmp_path)
-    out = server.enrich_worldline({})
-    assert out["worldline"] is True and out["stamped"] >= 1               # slots assigned across the braids
+    out = server.refresh({})
+    assert set(out["refreshed"]) == {"rejim", "mempalace", "worldline-ffz"}   # every enrichment re-derived
+    assert os.path.exists(os.path.join(root, "rejim", "geology.json"))        # rejim landed
+    assert os.path.exists(os.path.join(root, "mempalace", "mempalace.lex"))   # mempalace paved
+
+
+def test_refresh_which_rederives_one_enrichment(tmp_path):
+    # `which` narrows the condensed command to a single enrichment. worldline-ffz ASSIGNS membership slots per
+    # node (the beat cell = turn-identity) down the DAG — the deterministic counterpart to rejim's detection.
+    server = _captured_server(tmp_path)
+    out = server.refresh({"which": "worldline-ffz"})
+    assert set(out["refreshed"]) == {"worldline-ffz"}                     # only the named enrichment ran
+    assert out["refreshed"]["worldline-ffz"]["stamped"] >= 1              # slots assigned across the braids
     got = server._content_store()._col.get(include=["metadatas"])         # noqa: SLF001 — the test reads raw rows
-    ffz = [(m or {}).get("lar_ffz") for m in (got.get("metadatas") or [])]
-    assert any(a and "/" in a for a in ffz)                              # a membership address stands (slot filled)
+    assert any(a and "/" in a for a in [(m or {}).get("lar_ffz") for m in (got.get("metadatas") or [])])
 
 
 def test_derived_idle_beat_drives_every_enrichment(tmp_path, monkeypatch):
