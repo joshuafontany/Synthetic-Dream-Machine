@@ -179,8 +179,11 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
           let meta: string | undefined;
           try { if (existsSync(f + ".meta")) meta = readFileSync(f + ".meta", "utf8"); } catch { /* none */ }
           // A verb rides a REFERENCE, never a body: stage the body to the corpus CAS and
-          // carry its `textCid`. The island resolves it back and lands the record.
-          return { textCid: stageBodyToCas(text), title: lociTitleForLoad(sourceUri, f, toBag), ext: extname(f), ...(meta !== undefined ? { meta } : {}) };
+          // carry its `textCid` (+ size + the skinny verdict for an oversized raw shard). The
+          // island resolves a normal carrier back and lands the record; an oversized shard
+          // lands as a skinny handle, its body staying in the CAS.
+          const staged = stageBodyToCas(text);
+          return { textCid: staged.cid, size: staged.size, title: lociTitleForLoad(sourceUri, f, toBag), ext: extname(f), ...(staged.skinny ? { skinny: true } : {}), ...(meta !== undefined ? { meta } : {}) };
         });
       if (carriers.length > 0) {
         actionArgs["carriers"] = carriers;

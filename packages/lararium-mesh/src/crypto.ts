@@ -261,3 +261,30 @@ export function cidV1Sha256FromHex(hexDigest: string): string {
 export function cidV1Sha256(content: Uint8Array): string {
   return cidV1Sha256FromHex(sha256HexBytesSync(content));
 }
+
+/** base64url (RFC-4648 §5), no padding — isomorphic, no Buffer. */
+function base64UrlNoPad(bytes: Uint8Array): string {
+  const A = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  let out = "";
+  for (let i = 0; i < bytes.length; i += 3) {
+    const b0 = bytes[i]!;
+    const b1 = i + 1 < bytes.length ? bytes[i + 1]! : 0;
+    const b2 = i + 2 < bytes.length ? bytes[i + 2]! : 0;
+    const n = (b0 << 16) | (b1 << 8) | b2;
+    out += A[(n >> 18) & 63]! + A[(n >> 12) & 63]!;
+    if (i + 1 < bytes.length) out += A[(n >> 6) & 63]!;
+    if (i + 2 < bytes.length) out += A[n & 63]!;
+  }
+  return out;
+}
+
+/**
+ * RFC-6920 named-information URI for a SHA-256 digest: `ni:///sha-256;<base64url>`.
+ * A self-describing, foreign-legible content integrity name — a stranger fetches the bytes
+ * and verifies them against this id without any local context. The algorithm rides IN the
+ * name (`sha-256`), so a future digest (BLAKE3, …) stays parseable beside it. The public
+ * plane's addressing mode (content-resolution.mem #cad-storage).
+ */
+export function niUriSha256FromHex(hexDigest: string): string {
+  return `ni:///sha-256;${base64UrlNoPad(parseHexDigest(hexDigest))}`;
+}

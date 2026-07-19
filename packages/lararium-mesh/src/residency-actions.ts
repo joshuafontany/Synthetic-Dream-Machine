@@ -148,6 +148,13 @@ export interface LoadCarrier {
    *  parser) and seeds the deserialize, so an edit to the body never drops the
    *  sidecar's type/tags/custom fields. Absent → no sidecar. */
   readonly meta?:  string;
+  /** The body's byte length — metadata; the body lives in the CAS. Lets the island decide
+   *  skinny-vs-inline WITHOUT resolving the bytes. */
+  readonly size?:  number;
+  /** The gesture flags an OVERSIZED RAW shard: the island writes a skinny handle (cid +
+   *  integrity, no body) rather than materialize the body as a CRDT text field
+   *  (content-resolution.mem Scenario B). */
+  readonly skinny?: boolean;
 }
 
 /** LOAD — bring external content from sourceUri into toBag. Mints fresh changeId.
@@ -193,6 +200,13 @@ export interface IngestCarrier {
    *  island parses it and seeds the deserialize so a body-only edit never drops
    *  the sidecar's fields. Absent → no sidecar (or a self-contained filetype). */
   readonly meta?:      string;
+  /** The body's byte length — metadata; the body lives in the CAS. Lets the island decide
+   *  skinny-vs-inline WITHOUT resolving the bytes. */
+  readonly size?:      number;
+  /** The gesture flags an OVERSIZED RAW shard: the island writes a skinny handle (cid +
+   *  integrity, no body) rather than materialize the body as a CRDT text field
+   *  (content-resolution.mem Scenario B). */
+  readonly skinny?:    boolean;
 }
 
 /** One vanished carrier riding an INGEST wave — a path gone from disk that the
@@ -358,7 +372,7 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       for (const c of rawCarriers) {
         if (!c || typeof c !== "object") return null;
         const o = c as Record<string, unknown>;
-        const uri = o["uri"]; const text = o["text"]; const textCid = o["textCid"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"]; const ext = o["ext"]; const meta = o["meta"];
+        const uri = o["uri"]; const text = o["text"]; const textCid = o["textCid"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"]; const ext = o["ext"]; const meta = o["meta"]; const size = o["size"]; const skinny = o["skinny"];
         if (typeof uri !== "string" || !uri) return null;
         // A verb NEVER inlines a body: a carrier rides EITHER an inline `text` OR a
         // corpus-CAS `textCid`, never neither. The island resolves the ref before the gate.
@@ -369,7 +383,9 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
         if (syncedHash !== null && typeof syncedHash !== "string") return null;
         if (ext !== undefined && typeof ext !== "string") return null;
         if (meta !== undefined && typeof meta !== "string") return null;
-        carriers.push({ uri, ...(hasText ? { text: text as string } : {}), ...(hasCid ? { textCid: textCid as string } : {}), diskHash, syncedHash: syncedHash as string | null, ...(typeof ext === "string" ? { ext } : {}), ...(typeof meta === "string" ? { meta } : {}) });
+        if (size !== undefined && typeof size !== "number") return null;
+        if (skinny !== undefined && typeof skinny !== "boolean") return null;
+        carriers.push({ uri, ...(hasText ? { text: text as string } : {}), ...(hasCid ? { textCid: textCid as string } : {}), diskHash, syncedHash: syncedHash as string | null, ...(typeof ext === "string" ? { ext } : {}), ...(typeof meta === "string" ? { meta } : {}), ...(typeof size === "number" ? { size } : {}), ...(skinny === true ? { skinny: true } : {}) });
       }
     }
     const deletions: IngestDeletion[] = [];
@@ -426,6 +442,8 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       const title   = (c as Record<string, unknown>)["title"];
       const ext     = (c as Record<string, unknown>)["ext"];
       const meta    = (c as Record<string, unknown>)["meta"];
+      const size    = (c as Record<string, unknown>)["size"];
+      const skinny  = (c as Record<string, unknown>)["skinny"];
       // EITHER an inline `text` OR a corpus-CAS `textCid` — never neither.
       const hasText = typeof text === "string" && text.length > 0;
       const hasCid  = typeof textCid === "string" && textCid.length > 0;
@@ -433,12 +451,16 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       if (title !== undefined && typeof title !== "string") return null;
       if (ext !== undefined && typeof ext !== "string") return null;
       if (meta !== undefined && typeof meta !== "string") return null;
+      if (size !== undefined && typeof size !== "number") return null;
+      if (skinny !== undefined && typeof skinny !== "boolean") return null;
       carriers.push({
         ...(typeof title === "string" && title ? { title } : {}),
         ...(typeof ext === "string" && ext ? { ext } : {}),
         ...(typeof meta === "string" && meta ? { meta } : {}),
         ...(hasText ? { text: text as string } : {}),
         ...(hasCid ? { textCid: textCid as string } : {}),
+        ...(typeof size === "number" ? { size } : {}),
+        ...(skinny === true ? { skinny: true } : {}),
       });
     }
   }

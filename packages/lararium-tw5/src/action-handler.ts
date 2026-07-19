@@ -45,6 +45,7 @@ import {
   emptyLarDoc, mutableLarRecord, CATALOG_DOC_URI, ORACLE_DOC_URI,
   ORIGINAL_TIDDLER_PATHS, parseProvenance, serializeProvenance, recordPack, membersOfPack,
   ORIGINAL_TIDDLER_HASHES, parseHashes, serializeHashes, recordPackHashes, hashOfMember,
+  skinnyHandleTiddler, isOversizedBody,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 import type { TW5Instance } from "./types/tiddlywiki.js";
@@ -560,6 +561,21 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
  */
 const CARRIER_SOH = /<<~[^&\n]*&#x(?:0001|0011);/;
 
+/**
+ * Land a whole-carrier SKINNY HANDLE — the body stays in the cid/ tier; the CRDT keeps only
+ * the reference (cid + integrity + metadata, NEVER the body). This is what keeps an oversized
+ * body from materializing as a CRDT scalar-string and OOMing automerge on sync-apply. Never
+ * resolves the bytes (the handle points; the read-side resolver rehydrates on render — a later
+ * leg). content-resolution.mem Scenario B.
+ */
+async function landSkinnyHandle(
+  access: BagAccess, toBag: string, title: string, cid: string, size: number,
+  ext: string | undefined, changeId: string, o: ChangeOrigin,
+): Promise<void> {
+  const tiddler = { ...skinnyHandleTiddler(title, cid, size, ext), bag: toBag } as unknown as LarTiddlerRecord["tiddler"];
+  await writeIn(access, toBag, { tiddler, meta: { changeId } }, o);
+}
+
 async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deserializer, resolveByCid?: CarrierResolver): Promise<Record<string, unknown>> {
   const carriers = action.carriers ?? [];
   if (carriers.length === 0) {
@@ -570,9 +586,26 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
   }
   const titles: string[] = [];
   for (const carrier of carriers) {
+    // Scenario B: an OVERSIZED RAW shard rides a skinny handle — the body stays in the cid/
+    // tier, never entering the CRDT (nor RAM here — the gesture flags it, so we honor the flag
+    // WITHOUT resolving the bytes).
+    if (carrier.skinny && carrier.textCid) {
+      const title = carrier.title;
+      if (!title) throw new Error("LOAD: a skinny carrier needs a title (its loci URI) — the handle names the body");
+      await landSkinnyHandle(access, action.toBag, title, carrier.textCid, carrier.size ?? 0, carrier.ext, action.changeId, origin(action));
+      titles.push(title);
+      continue;
+    }
     // The verb rode a reference, never a body: resolve the carrier body from the
     // corpus CAS (or take an inline `text`) BEFORE routing.
     const carrierText = await resolveCarrierText(carrier, resolveByCid);
+    // Defense in depth: an un-flagged body that STILL resolves oversized leaves the CRDT
+    // (never OOM the doc), provided it names a cid to point at and carries no memetic wrapper.
+    if (carrier.textCid && !CARRIER_SOH.test(carrierText) && isOversizedBody(carrier.size ?? carrierText.length) && carrier.title) {
+      await landSkinnyHandle(access, action.toBag, carrier.title, carrier.textCid, carrier.size ?? carrierText.length, carrier.ext, action.changeId, origin(action));
+      titles.push(carrier.title);
+      continue;
+    }
     // Route by content: a memetic-wikitext carrier (SOH heading) decomposes at the
     // membrane via the direct memetic deserializer; any other legal TW5 filetype
     // lands through TW5's OWN deserializer registry, resolved from its extension.
@@ -670,11 +703,39 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       continue;
     }
     const uri = carrier.uri;
+    // Scenario B: an OVERSIZED RAW shard rides a skinny handle — the body stays in the cid/
+    // tier, never materializing as a CRDT scalar-string (the automerge OOM wall). The gate
+    // runs at content-address grain: the handle's cid IS its render, so an unchanged cid
+    // noops and a changed cid replaces the handle. Honored WITHOUT resolving the bytes.
+    if (carrier.skinny && carrier.textCid) {
+      const current = await readFromBag(access, action.toBag, uri);
+      const currentCid = current && typeof current.tiddler["textCid"] === "string" ? (current.tiddler["textCid"] as string) : undefined;
+      if (currentCid === carrier.textCid) {
+        results.push({ uri, decision: "noop", reason: "cid-matches-current" });
+        continue;
+      }
+      await landSkinnyHandle(access, action.toBag, uri, carrier.textCid, carrier.size ?? 0, carrier.ext, action.changeId, origin(action));
+      results.push({ uri, decision: "ingest", grade: "clean", skinny: true });
+      continue;
+    }
     // The verb rode a reference, never a body: resolve the carrier body from the
     // corpus CAS (or take an inline `text`) BEFORE the Confluence gate reads it. This
     // keeps a 16MB body out of the @daemon command doc; it lands here, per-carrier, in
     // the TARGET bag doc (each scalar-string field under the automerge capacity wall).
     const carrierText = await resolveCarrierText(carrier, resolveByCid);
+    // Defense in depth: an un-flagged body that STILL resolves oversized leaves the CRDT
+    // (never OOM the doc) rather than land as a giant text field.
+    if (carrier.textCid && !CARRIER_SOH.test(carrierText) && isOversizedBody(carrier.size ?? carrierText.length)) {
+      const current = await readFromBag(access, action.toBag, uri);
+      const currentCid = current && typeof current.tiddler["textCid"] === "string" ? (current.tiddler["textCid"] as string) : undefined;
+      if (currentCid === carrier.textCid) {
+        results.push({ uri, decision: "noop", reason: "cid-matches-current" });
+        continue;
+      }
+      await landSkinnyHandle(access, action.toBag, uri, carrier.textCid, carrier.size ?? carrierText.length, carrier.ext, action.changeId, origin(action));
+      results.push({ uri, decision: "ingest", grade: "clean", skinny: true });
+      continue;
+    }
     const all = await listLiveTitlesInBag(access, action.toBag);
     // The carrier group: the root + its fragment children (FFZ decomposition
     // emits `uri#slot` titles) + any path children (`uri/wires/...` era).

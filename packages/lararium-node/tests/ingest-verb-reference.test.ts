@@ -63,18 +63,19 @@ function ingestArgsByRef(cid: string, diskText: string): Record<string, unknown>
 }
 
 describe("INGEST by reference — summons lean, body resolved + landed", () => {
-  test("a large carrier: the summons carries NO body inline, yet the body lands in the target bag", async () => {
-    // A 4MB body — far past any tiddler-field norm; the point is that NONE of it rides
-    // the verb args. (16MB would panic automerge as a scalar-string; MemoryTiddlerStore
-    // here isolates the transport claim from that separate storage wall.)
-    const body = "The Adventures of a very long corpus.\n".repeat(110_000);
-    expect(body.length).toBeGreaterThan(4_000_000);
+  test("an inline-sized carrier: the summons carries NO body inline, yet the body resolves + lands", async () => {
+    // A ~500KB body — under the 1 MiB skinny threshold, so it resolves + lands inline; the
+    // point is that NONE of it rides the verb args (the transport seam). The >1 MiB handle
+    // path is proven in the Stage 2 suite below.
+    const body = "The Adventures of a very long corpus.\n".repeat(13_000);
+    expect(body.length).toBeGreaterThan(400_000);
+    expect(body.length).toBeLessThan(1024 * 1024);
     const cid = cidOf(body);
 
     const args = ingestArgsByRef(cid, body);
 
-    // THE TRANSPORT INVARIANT: the summons stays skinny — the 4MB body is NOWHERE in the
-    // args. A reference (the cid) plus metadata only.
+    // THE TRANSPORT INVARIANT: the summons stays skinny — the body is NOWHERE in the args.
+    // A reference (the cid) plus metadata only.
     const wire = JSON.stringify(args);
     expect(wire.length).toBeLessThan(4_096);
     expect(wire).not.toContain("very long corpus");
@@ -90,12 +91,11 @@ describe("INGEST by reference — summons lean, body resolved + landed", () => {
     const carriers = result["carriers"] as Array<Record<string, unknown>>;
     expect(carriers[0]!["decision"]).toBe("ingest");
 
-    // The whole 4MB body transited the reference path and landed in the target bag's
-    // per-carrier field (the membrane normalizes a trailing newline — a decompose
-    // detail, not a transport loss): the landed record carries the full corpus.
+    // The whole body transited the reference path and landed in the target bag's per-carrier
+    // field (the membrane normalizes a trailing newline — a decompose detail, not a transport
+    // loss): the landed record carries the full corpus.
     const landed = (await composite.resolveAll(URI)).find((e) => e.bagId === BAG)!.record;
     const landedText = String(landed.tiddler["text"] ?? "");
-    expect(landedText.length).toBeGreaterThan(4_000_000);
     expect(landedText).toBe(body.replace(/\n$/, ""));
     expect(landed.meta?.["changeId"]).toBe("chg-ref-1");
   });
@@ -124,6 +124,67 @@ describe("INGEST by reference — summons lean, body resolved + landed", () => {
 
     await expect(table.get("INGEST")!(args, ctx(composite, args)))
       .rejects.toThrow(/no resolveByCid/);
+  });
+});
+
+describe("Stage 2 — oversized carrier → SKINNY HANDLE (body leaves the CRDT)", () => {
+  test("a skinny-flagged INGEST carrier lands a handle: cid + integrity present, body ABSENT, never resolved", async () => {
+    const body = "The Entire Works — a 16MB corpus.\n".repeat(500_000);
+    const cid  = cidOf(body);
+    const size = new TextEncoder().encode(body).length;
+    expect(size).toBeGreaterThan(16_000_000);
+
+    // The daemon MUST NOT resolve an oversized body (that is the OOM path): a resolver that
+    // throws proves the handle-write never touches the bytes.
+    const exploding: (c: string) => Promise<Uint8Array | null> =
+      async () => { throw new Error("resolveByCid MUST NOT be called for a skinny carrier"); };
+
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite, resolveByCid: exploding });
+    const args = {
+      "source-uri": "file:///corpus/@crossroads/library/big-book.txt",
+      "to-bag":     BAG,
+      "change-id":  "chg-skinny-1",
+      carriers: [{ uri: URI, textCid: cid, size, skinny: true, ext: ".txt", diskHash: sha(body), syncedHash: null }],
+    };
+
+    const result = await table.get("INGEST")!(args, ctx(composite, args)) as Record<string, unknown>;
+    const carriers = result["carriers"] as Array<Record<string, unknown>>;
+    expect(carriers[0]!["decision"]).toBe("ingest");
+    expect(carriers[0]!["skinny"]).toBe(true);
+
+    // The landed record is a HANDLE: it names the body by content-address + integrity, and
+    // carries NO `text` — so the 16MB body never entered the CRDT.
+    const landed = (await composite.resolveAll(URI)).find((e) => e.bagId === BAG)!.record.tiddler;
+    expect(landed["text"]).toBeUndefined();
+    expect(landed["_is_skinny"]).toBe("yes");
+    expect(landed["textCid"]).toBe(cid);
+    expect(String(landed["_canonical_uri"])).toContain(`/cid/${cid}`);
+    expect(String(landed["_integrity"])).toMatch(/^ni:\/\/\/sha-256;/);
+    expect(landed["size"]).toBe(String(size));
+
+    // Re-submitting the SAME cid noops (content-address grain gate).
+    const again = await table.get("INGEST")!(args, ctx(composite, args)) as Record<string, unknown>;
+    expect((again["carriers"] as Array<Record<string, unknown>>)[0]!["decision"]).toBe("noop");
+  });
+
+  test("a small carrier still inlines (backward-compat) — the body IS the record's text", async () => {
+    const body = "a modest carrier body, well under the threshold";
+    const cid  = cidOf(body);
+    const blobs = new Map<string, Uint8Array>([[cid, new TextEncoder().encode(body)]]);
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite, resolveByCid: casResolver(blobs) });
+    const args = {
+      "source-uri": "file:///corpus/small.txt", "to-bag": BAG, "change-id": "chg-small-1",
+      carriers: [{ uri: URI, textCid: cid, size: body.length, diskHash: sha(body), syncedHash: null }],
+    };
+    const result = await table.get("INGEST")!(args, ctx(composite, args)) as Record<string, unknown>;
+    expect((result["carriers"] as Array<Record<string, unknown>>)[0]!["decision"]).toBe("ingest");
+    const landed = (await composite.resolveAll(URI)).find((e) => e.bagId === BAG)!.record.tiddler;
+    expect(landed["_is_skinny"]).toBeUndefined();       // inline, not a handle
+    expect(String(landed["text"] ?? "")).toContain("modest carrier body");
   });
 });
 

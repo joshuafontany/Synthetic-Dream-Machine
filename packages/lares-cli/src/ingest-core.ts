@@ -339,10 +339,14 @@ export async function submitIngest(opts: SubmitIngestOpts): Promise<SubmitResult
     // and carry its `textCid`. The summons stays skinny; the island resolves the ref and
     // lands the body in the TARGET bag. This keeps an oversized carrier (a whole book) out
     // of the @daemon command doc (the automerge scalar-string capacity wall) — bag-agnostic.
-    carriers: opts.candidates.map((r) => ({
-      uri: r.uri, textCid: stageBodyToCas(r.text), diskHash: r.diskHash, syncedHash: r.syncedHash, ext: r.ext,
-      ...(r.meta !== undefined ? { meta: r.meta } : {}),
-    })),
+    carriers: opts.candidates.map((r) => {
+      const staged = stageBodyToCas(r.text);
+      return {
+        uri: r.uri, textCid: staged.cid, size: staged.size, diskHash: r.diskHash, syncedHash: r.syncedHash, ext: r.ext,
+        ...(staged.skinny ? { skinny: true } : {}),
+        ...(r.meta !== undefined ? { meta: r.meta } : {}),
+      };
+    }),
     ...(deletions.length > 0 ? { deletions: deletions.map((d) => ({ uri: d.uri, syncedHash: d.syncedHash })) } : {}),
     ...(opts.massDeleteFraction !== undefined ? { massDeleteFraction: opts.massDeleteFraction } : {}),
   };
