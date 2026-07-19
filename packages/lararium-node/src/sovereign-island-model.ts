@@ -21,6 +21,7 @@
  */
 
 import { parentPort } from "worker_threads";
+import { join } from "node:path";
 import { DurableNodeFSStorageAdapter } from "./durable-storage-adapter.js";
 import {
   runSovereignKernel,
@@ -58,6 +59,16 @@ export function runSovereignWorker(
   // (the CID plane is required).
   let casDir: string | null = null;
 
+  // The CORPUS CAS dir — where the operator gesture stages oversized carrier bodies (whole
+  // books) that ride LOAD/INGEST verbs BY REFERENCE, never inline. Read from the inherited
+  // env (LAR_CAS, else <LAR_ROOT>/cas) so the fs-less worker resolves the SAME dir the CLI
+  // stager wrote — process-shared filesystem, no IPC. The `wake` gesture exports LAR_CAS =
+  // larCasDir() when it spawns the daemon, so this stays deterministic across the two processes.
+  // Distinct from the runtime `casDir` (engine/plugin bytes under <storage>/cas, wiped on reset):
+  // the corpus CAS is repo-relative and persistent.
+  const corpusCasDir: string | null =
+    process.env["LAR_CAS"] ?? (process.env["LAR_ROOT"] ? join(process.env["LAR_ROOT"], "cas") : null);
+
   const host: IslandHostSeam = {
     post:    (msg: IslandToVesselMsg) => port.postMessage(msg),
     listen:  (onMessage) => port.on("message", onMessage),
@@ -65,7 +76,14 @@ export function runSovereignWorker(
       if (msg.storage?.type === "nodefs") casDir = casDirFromIslandStorageDir(msg.storage.dir);
       return _buildStorage(msg.storage);
     },
-    resolveByCid: async (cid) => (casDir ? readCasBlobFromFs(cid, casDir) : null),
+    // Resolve by content-address: the runtime CID plane first (engine/plugin bytes), then the
+    // corpus CAS (staged carrier bodies). The caller re-verifies cid==hash(bytes), so a two-dir
+    // lookup never widens trust.
+    resolveByCid: async (cid) => {
+      const runtime = casDir ? readCasBlobFromFs(cid, casDir) : null;
+      if (runtime) return runtime;
+      return corpusCasDir ? readCasBlobFromFs(cid, corpusCasDir) : null;
+    },
   };
 
   runSovereignKernel(host, behaviorOrFactory);

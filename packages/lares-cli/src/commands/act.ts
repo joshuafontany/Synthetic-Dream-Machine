@@ -36,6 +36,7 @@ import { statSync, readdirSync, readFileSync, existsSync } from "node:fs";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
 import { readCarrierText } from "../ingest-core.js";
+import { stageBodyToCas } from "../cas-stage.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId, OUTCOME_URI_PREFIX } from "@lararium/mesh";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
@@ -177,7 +178,9 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
           // Pair a `.meta` sidecar so a content filetype keeps its fields at the membrane.
           let meta: string | undefined;
           try { if (existsSync(f + ".meta")) meta = readFileSync(f + ".meta", "utf8"); } catch { /* none */ }
-          return { text, title: lociTitleForLoad(sourceUri, f, toBag), ext: extname(f), ...(meta !== undefined ? { meta } : {}) };
+          // A verb rides a REFERENCE, never a body: stage the body to the corpus CAS and
+          // carry its `textCid`. The island resolves it back and lands the record.
+          return { textCid: stageBodyToCas(text), title: lociTitleForLoad(sourceUri, f, toBag), ext: extname(f), ...(meta !== undefined ? { meta } : {}) };
         });
       if (carriers.length > 0) {
         actionArgs["carriers"] = carriers;

@@ -416,7 +416,9 @@ export function runSovereignKernel(
     // load slot — @catalog is absent from expandRecipe). Worker behaviors build
     // a CatalogAccessor over it to reach any registered bag; recipe-watch keeps
     // reconciling the SAME path boot just walked.
-    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, oracleUrl: msg.grants.islandUrl, engine, recipe: msg.recipe };
+    // The CID plane the kernel already pulls engine/plugin bytes from, lifted to
+    // behaviors: a residency handler resolves a carrier body a verb rode by reference.
+    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, oracleUrl: msg.grants.islandUrl, engine, recipe: msg.recipe, ...(host.resolveByCid ? { resolveByCid: host.resolveByCid } : {}) };
     tick("behavior");
     await behavior.onEa(_ctx);
 

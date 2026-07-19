@@ -133,7 +133,16 @@ export interface LoadCarrier {
    *  non-memetic carrier through TW5's own deserializer registry by content-type.
    *  Absent → the island treats the text as a memetic-wikitext carrier. */
   readonly ext?:   string;
-  readonly text:   string;
+  /** The carrier body. A verb NEVER inlines a body: the operator gesture stages it
+   *  to the corpus CAS and rides `textCid` instead. `text` stays for a small in-line
+   *  carrier and for backward-compat (the island resolves `textCid` → `text` before
+   *  use). Exactly one of `text` / `textCid` MUST hold. */
+  readonly text?:  string;
+  /** Content-address (hex sha256) of the carrier body staged in the corpus CAS.
+   *  The island resolves it via `resolveByCid` and re-verifies `cid == hash(bytes)`
+   *  — content-addressed trust, no host trust. This keeps the giant Text out of the
+   *  @daemon command doc (the automerge scalar-string capacity wall). */
+  readonly textCid?: string;
   /** Raw `.meta` sidecar text for a content filetype (a `.md`/image/… carrier
    *  keeps its fields beside the body). The island parses it (TW5's own field
    *  parser) and seeds the deserialize, so an edit to the body never drops the
@@ -159,8 +168,17 @@ export interface LoadAction extends ResidencyActionBase {
 export interface IngestCarrier {
   /** The carrier-root lar: URI this disk path projects. */
   readonly uri:        string;
-  /** Settled disk bytes (quiet + stat-stable + hash-confirmed by the gesture). */
-  readonly text:       string;
+  /** The settled carrier body (quiet + stat-stable + hash-confirmed by the gesture).
+   *  A verb NEVER inlines a body: the gesture stages it to the corpus CAS and rides
+   *  `textCid` instead. `text` stays for backward-compat (the island resolves
+   *  `textCid` → `text` before the Confluence gate). Exactly one of `text` /
+   *  `textCid` MUST hold. */
+  readonly text?:      string;
+  /** Content-address (hex sha256) of the carrier body staged in the corpus CAS. The
+   *  island resolves it via `resolveByCid` and re-verifies `cid == hash(bytes)`. This
+   *  keeps a 16MB carrier out of the @daemon command doc, whose automerge scalar-string
+   *  value overflows past ~2^24 chars. */
+  readonly textCid?:   string;
   /** Hash of text, computed gesture-side. */
   readonly diskHash:   string;
   /** Last-projected hash from the Synced tree; null = never projected. */
@@ -340,14 +358,18 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       for (const c of rawCarriers) {
         if (!c || typeof c !== "object") return null;
         const o = c as Record<string, unknown>;
-        const uri = o["uri"]; const text = o["text"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"]; const ext = o["ext"]; const meta = o["meta"];
+        const uri = o["uri"]; const text = o["text"]; const textCid = o["textCid"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"]; const ext = o["ext"]; const meta = o["meta"];
         if (typeof uri !== "string" || !uri) return null;
-        if (typeof text !== "string" || !text) return null;
+        // A verb NEVER inlines a body: a carrier rides EITHER an inline `text` OR a
+        // corpus-CAS `textCid`, never neither. The island resolves the ref before the gate.
+        const hasText = typeof text === "string" && text.length > 0;
+        const hasCid  = typeof textCid === "string" && textCid.length > 0;
+        if (!hasText && !hasCid) return null;
         if (typeof diskHash !== "string" || !diskHash) return null;
         if (syncedHash !== null && typeof syncedHash !== "string") return null;
         if (ext !== undefined && typeof ext !== "string") return null;
         if (meta !== undefined && typeof meta !== "string") return null;
-        carriers.push({ uri, text, diskHash, syncedHash: syncedHash as string | null, ...(typeof ext === "string" ? { ext } : {}), ...(typeof meta === "string" ? { meta } : {}) });
+        carriers.push({ uri, ...(hasText ? { text: text as string } : {}), ...(hasCid ? { textCid: textCid as string } : {}), diskHash, syncedHash: syncedHash as string | null, ...(typeof ext === "string" ? { ext } : {}), ...(typeof meta === "string" ? { meta } : {}) });
       }
     }
     const deletions: IngestDeletion[] = [];
@@ -399,11 +421,15 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
     carriers = [];
     for (const c of rawCarriers) {
       if (!c || typeof c !== "object") return null;
-      const text  = (c as Record<string, unknown>)["text"];
-      const title = (c as Record<string, unknown>)["title"];
-      const ext   = (c as Record<string, unknown>)["ext"];
-      const meta  = (c as Record<string, unknown>)["meta"];
-      if (typeof text !== "string" || text.length === 0) return null;
+      const text    = (c as Record<string, unknown>)["text"];
+      const textCid = (c as Record<string, unknown>)["textCid"];
+      const title   = (c as Record<string, unknown>)["title"];
+      const ext     = (c as Record<string, unknown>)["ext"];
+      const meta    = (c as Record<string, unknown>)["meta"];
+      // EITHER an inline `text` OR a corpus-CAS `textCid` — never neither.
+      const hasText = typeof text === "string" && text.length > 0;
+      const hasCid  = typeof textCid === "string" && textCid.length > 0;
+      if (!hasText && !hasCid) return null;
       if (title !== undefined && typeof title !== "string") return null;
       if (ext !== undefined && typeof ext !== "string") return null;
       if (meta !== undefined && typeof meta !== "string") return null;
@@ -411,7 +437,8 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
         ...(typeof title === "string" && title ? { title } : {}),
         ...(typeof ext === "string" && ext ? { ext } : {}),
         ...(typeof meta === "string" && meta ? { meta } : {}),
-        text,
+        ...(hasText ? { text: text as string } : {}),
+        ...(hasCid ? { textCid: textCid as string } : {}),
       });
     }
   }

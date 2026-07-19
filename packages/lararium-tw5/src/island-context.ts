@@ -61,6 +61,16 @@ export interface IslandContext {
    * and reconcile composition changes live.
    */
   recipe: WikiRecipe;
+  /**
+   * Resolve immutable bytes by content-address (hex sha256) from the platform CAS —
+   * the fs-less island's seam onto the process-shared byte plane. The kernel already
+   * pulls engine/plugin bytes by CID at boot through the host callback of the same
+   * name; this lifts it to behaviors so a residency handler (INGEST/LOAD) can resolve
+   * a carrier body a verb rode BY REFERENCE, never inline. Absent on a memory-storage
+   * island (no CAS dir). The resolver returns bytes only; the caller re-verifies
+   * `cid == hash(bytes)` — content-addressed trust, never host trust.
+   */
+  resolveByCid?: (cid: string) => Promise<Uint8Array | null>;
 }
 
 /**

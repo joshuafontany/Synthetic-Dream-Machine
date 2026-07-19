@@ -13,7 +13,7 @@ import { existsSync, mkdirSync, openSync, readFileSync, statSync } from "node:fs
 import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
-import { larRoot, larBootstrapPath, larDataDir } from "../env.js";
+import { larRoot, larBootstrapPath, larDataDir, larCasDir } from "../env.js";
 import { udsAvailable } from "../local-connector.js";
 import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
@@ -167,6 +167,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
         detached: true,
         windowsHide: true, // no console window on Windows; harmless on Unix
         stdio: ["ignore", logFd, logFd],
+        // Export the corpus CAS dir so the daemon worker's resolveByCid reads the SAME
+        // dir the CLI stages carrier bodies to (larCasDir) — deterministic across the two
+        // processes regardless of the LAR_ROOT default. A verb rides references, not bodies.
+        env: { ...process.env, LAR_CAS: larCasDir() },
       });
       child.unref();
       started = true;

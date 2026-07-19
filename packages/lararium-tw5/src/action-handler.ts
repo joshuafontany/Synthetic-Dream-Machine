@@ -41,7 +41,7 @@ import type {
 } from "@lararium/mesh";
 import {
   ACTION_VERBS, type ActionVerb,
-  parseResidencyAction, withEffectRecord, sha256HexSync, tagDigest, digestsEqual,
+  parseResidencyAction, withEffectRecord, sha256HexSync, sha256HexBytesSync, tagDigest, digestsEqual,
   emptyLarDoc, mutableLarRecord, CATALOG_DOC_URI, ORACLE_DOC_URI,
   ORIGINAL_TIDDLER_PATHS, parseProvenance, serializeProvenance, recordPack, membersOfPack,
   ORIGINAL_TIDDLER_HASHES, parseHashes, serializeHashes, recordPackHashes, hashOfMember,
@@ -189,6 +189,16 @@ export interface ActionHandlerOptions {
    * The arg is the lar: BAG URL (the cap-gate's verify key), never the doc url.
    */
   readonly registerBag?: (bagUrl: string) => Promise<void>;
+  /**
+   * Resolve a carrier body by content-address (hex sha256) from the corpus CAS —
+   * the fs-less worker's seam onto the process-shared byte plane. A verb NEVER
+   * inlines a body: LOAD/INGEST carriers ride a `textCid`, and the handler resolves
+   * it HERE, re-verifying `cid == hash(bytes)` (content-addressed trust, not host
+   * trust — sovereignty-safe). Exposed from the kernel's `resolveByCid` host callback
+   * via IslandContext. Absent (a no-CAS island / tests) → only inline-`text` carriers
+   * land; a `textCid` carrier faults loud.
+   */
+  readonly resolveByCid?: (cid: string) => Promise<Uint8Array | null>;
 }
 
 /**
@@ -396,11 +406,11 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
     // AND the effect-record ledger are captured, nothing commits.
     if (dryRun) {
       const cap = makeCapturingBagAccess(access);
-      const summary = await withEffectRecord(action, (bag) => cap.access.write(bag), () => executeAction(action, cap.access, opts.tw5));
+      const summary = await withEffectRecord(action, (bag) => cap.access.write(bag), () => executeAction(action, cap.access, opts.tw5, opts.resolveByCid));
       return { verb, dryRun: true, ...summary, ...projectedEffect(cap.captured) };
     }
 
-    const summary = await withEffectRecord(action, (bag) => access.write(bag), () => executeAction(action, access, opts.tw5));
+    const summary = await withEffectRecord(action, (bag) => access.write(bag), () => executeAction(action, access, opts.tw5, opts.resolveByCid));
     return { verb, ...summary };
   };
 }
@@ -444,17 +454,45 @@ function destinationBag(action: ResidencyAction): string {
 
 // ── Per-verb executors ─────────────────────────────────────────────────────
 
-async function executeAction(action: ResidencyAction, access: BagAccess, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
+async function executeAction(action: ResidencyAction, access: BagAccess, tw5?: Tw5Deserializer, resolveByCid?: CarrierResolver): Promise<Record<string, unknown>> {
   switch (action.verb) {
     case "ADD":   return executeAdd(action, access);
     case "COPY":  return executeCopy(action, access);
     case "MOVE":  return executeMove(action, access);
     case "CLEAR": return executeClear(action, access);
     case "DROP":  return executeDrop(action, access);
-    case "LOAD":  return executeLoad(action, access, tw5);
-    case "INGEST": return executeIngest(action, access, tw5);
+    case "LOAD":  return executeLoad(action, access, tw5, resolveByCid);
+    case "INGEST": return executeIngest(action, access, tw5, resolveByCid);
     case "CREATE": throw new Error("action-handler: CREATE is handled in the reactor (plane-aware gate + mint), not executeAction");
   }
+}
+
+/** Resolve a carrier body by content-address from the corpus CAS (the fs-less worker's
+ *  seam). Verbs ride references, never bodies. */
+export type CarrierResolver = (cid: string) => Promise<Uint8Array | null>;
+
+/**
+ * Resolve a carrier's body to its `text` string. An inline `text` rides straight through
+ * (backward-compat). A `textCid` resolves from the corpus CAS via `resolveByCid`, then
+ * re-verifies `cid == hash(bytes)` — the worker trusts CONTENT, never the host (Island
+ * Sovereignty). The body round-trips byte-exact: the gesture staged `utf8Bytes(text)`,
+ * so utf8-decoding the resolved bytes reproduces the same string (utf8 text or base64
+ * body alike). Faults loud on an absent resolver, an absent blob, or a hash mismatch.
+ */
+async function resolveCarrierText(
+  carrier: { readonly uri?: string; readonly title?: string; readonly text?: string; readonly textCid?: string },
+  resolveByCid?: CarrierResolver,
+): Promise<string> {
+  if (typeof carrier.text === "string") return carrier.text;
+  const cid = carrier.textCid;
+  const label = carrier.uri ?? carrier.title ?? "(carrier)";
+  if (!cid) throw new Error(`carrier ${label} carries neither text nor textCid — a verb rides one body reference`);
+  if (!resolveByCid) throw new Error(`carrier ${label} rides textCid ${cid} but this island exposes no resolveByCid (no corpus CAS seam)`);
+  const bytes = await resolveByCid(cid);
+  if (!bytes) throw new Error(`carrier ${label}: CAS blob ${cid} absent — stage the body before submitting the verb`);
+  const got = sha256HexBytesSync(bytes);
+  if (got !== cid) throw new Error(`carrier ${label}: CAS integrity fault — textCid ${cid} != hash(bytes) ${got}`);
+  return new TextDecoder().decode(bytes);
 }
 
 /**
@@ -522,7 +560,7 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
  */
 const CARRIER_SOH = /<<~[^&\n]*&#x(?:0001|0011);/;
 
-async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
+async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deserializer, resolveByCid?: CarrierResolver): Promise<Record<string, unknown>> {
   const carriers = action.carriers ?? [];
   if (carriers.length === 0) {
     throw new Error(
@@ -532,13 +570,16 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
   }
   const titles: string[] = [];
   for (const carrier of carriers) {
+    // The verb rode a reference, never a body: resolve the carrier body from the
+    // corpus CAS (or take an inline `text`) BEFORE routing.
+    const carrierText = await resolveCarrierText(carrier, resolveByCid);
     // Route by content: a memetic-wikitext carrier (SOH heading) decomposes at the
     // membrane via the direct memetic deserializer; any other legal TW5 filetype
     // lands through TW5's OWN deserializer registry, resolved from its extension.
     // Absent a native resolver (no booted $tw), every carrier falls back to memetic.
     let fieldsList: Array<Record<string, unknown>>;
-    if (!tw5 || CARRIER_SOH.test(carrier.text)) {
-      fieldsList = memeticWikitextDeserializer(carrier.text, { title: carrier.title ?? "" });
+    if (!tw5 || CARRIER_SOH.test(carrierText)) {
+      fieldsList = memeticWikitextDeserializer(carrierText, { title: carrier.title ?? "" });
     } else {
       // The `.meta` sidecar seeds fields FIRST (TW5's own parser), so a content
       // carrier keeps its type/tags/custom fields; the carrier title (when named)
@@ -547,7 +588,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
       const baseFields: Record<string, unknown> = {};
       if (carrier.meta) Object.assign(baseFields, tw5.parseFields(carrier.meta));
       if (carrier.title) baseFields["title"] = carrier.title;
-      fieldsList = tw5.deserialize(carrier.ext || "text/plain", carrier.text, baseFields);
+      fieldsList = tw5.deserialize(carrier.ext || "text/plain", carrierText, baseFields);
     }
     for (const fields of fieldsList) {
       const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
@@ -577,7 +618,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
  * `IngestOps`); the refuse leg fires only where a family grades error (memetic), riding
  * dormant for native (a native deserialize throws rather than grading).
  */
-async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
+async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5Deserializer, resolveByCid?: CarrierResolver): Promise<Record<string, unknown>> {
   const o = origin(action);
   const deletions = action.deletions ?? [];
 
@@ -629,6 +670,11 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       continue;
     }
     const uri = carrier.uri;
+    // The verb rode a reference, never a body: resolve the carrier body from the
+    // corpus CAS (or take an inline `text`) BEFORE the Confluence gate reads it. This
+    // keeps a 16MB body out of the @daemon command doc; it lands here, per-carrier, in
+    // the TARGET bag doc (each scalar-string field under the automerge capacity wall).
+    const carrierText = await resolveCarrierText(carrier, resolveByCid);
     const all = await listLiveTitlesInBag(access, action.toBag);
     // The carrier group: the root + its fragment children (FFZ decomposition
     // emits `uri#slot` titles) + any path children (`uri/wires/...` era).
@@ -639,7 +685,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
     // legal TW5 filetype rides TW5's OWN deserializer registry, keyed by its
     // extension. The registry — not a CLI-side reimplementation — owns the
     // filetype routing; the island hands the bytes to it.
-    const memetic = !tw5 || CARRIER_SOH.test(carrier.text);
+    const memetic = !tw5 || CARRIER_SOH.test(carrierText);
 
     // Records to land + the receipt this carrier rides. The memetic path grades
     // the recover; the native path leans on the registry + the echo gate.
@@ -658,7 +704,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       const currentText = expandMemeRefs((t) => current.get(t) as never, uri) ?? "";
       const decision = decideIngest({
         uri,
-        diskText:          carrier.text,
+        diskText:          carrierText,
         diskHash:          carrier.diskHash,
         syncedHash:        carrier.syncedHash,
         currentRenderHash: renderHash(currentText),
@@ -704,7 +750,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       const baseFields: Record<string, unknown> = {};
       if (carrier.meta) Object.assign(baseFields, tw5!.parseFields(carrier.meta));
       delete baseFields["title"];
-      const fieldsList = tw5!.deserialize(carrier.ext || "text/plain", carrier.text, baseFields);
+      const fieldsList = tw5!.deserialize(carrier.ext || "text/plain", carrierText, baseFields);
       freshRecords = fieldsList.map((fields) => {
         const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
         return { ...fields, title: own || uri };
@@ -861,7 +907,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         : (carrier.syncedHash ?? "");
       const decision = decideIngest<Record<string, unknown>>({
         uri,
-        diskText:          carrier.text,
+        diskText:          carrierText,
         diskHash:          carrier.diskHash,
         syncedHash:        carrier.syncedHash,
         currentRenderHash,

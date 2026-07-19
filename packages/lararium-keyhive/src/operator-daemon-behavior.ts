@@ -91,6 +91,9 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         // LOAD lands every legal TW5 filetype via TW5's own deserializer registry,
         // resolved lazily through the daemon island's live $tw at action time.
         tw5: makeTw5Deserializer(ctx.tw5),
+        // Resolve a carrier body a LOAD/INGEST verb rode BY REFERENCE (never inline) —
+        // the fs-less worker pulls it from the corpus CAS by content-address.
+        ...(ctx.resolveByCid ? { resolveByCid: ctx.resolveByCid } : {}),
       });
       // Residency mutators (pin/unpin/register-cold) — gated in-worker; they command the
       // main-resident BagResidencyManager via daemon:residency-op (ctx.post). `residency`

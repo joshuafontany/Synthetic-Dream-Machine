@@ -21,6 +21,7 @@ import { newChangeId, taskContentId, carrierHash, digestsEqual } from "@lararium
 import { SyncedTree, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
 import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
+import { stageBodyToCas } from "./cas-stage.js";
 
 export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc" | "deleted" | "renamed";
 
@@ -334,8 +335,12 @@ export async function submitIngest(opts: SubmitIngestOpts): Promise<SubmitResult
     "source-uri": opts.source,
     "to-bag":     opts.toBag,
     "change-id":  changeId,
+    // A verb rides a REFERENCE, never a body: stage each carrier body to the corpus CAS
+    // and carry its `textCid`. The summons stays skinny; the island resolves the ref and
+    // lands the body in the TARGET bag. This keeps an oversized carrier (a whole book) out
+    // of the @daemon command doc (the automerge scalar-string capacity wall) — bag-agnostic.
     carriers: opts.candidates.map((r) => ({
-      uri: r.uri, text: r.text, diskHash: r.diskHash, syncedHash: r.syncedHash, ext: r.ext,
+      uri: r.uri, textCid: stageBodyToCas(r.text), diskHash: r.diskHash, syncedHash: r.syncedHash, ext: r.ext,
       ...(r.meta !== undefined ? { meta: r.meta } : {}),
     })),
     ...(deletions.length > 0 ? { deletions: deletions.map((d) => ({ uri: d.uri, syncedHash: d.syncedHash })) } : {}),
