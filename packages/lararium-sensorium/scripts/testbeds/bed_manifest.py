@@ -55,7 +55,8 @@ _TWIN_GRAINS = {"in-file-token"}
 #: the predictions gate's sibling).
 _WIKI_CONTENT_ROOTS = ("bags", "wikis", "genesis")
 
-_REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
+# this module lives in scripts/testbeds/, so the repo root sits four levels up
+_REPO_ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", ".."))
 
 
 def load_manifest(path: str) -> dict:

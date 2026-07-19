@@ -69,7 +69,9 @@ CARRIERS = ("kumulipo-liliuokalani.mem", "kumulipo-beckwith.mem")
 #: The real library shelf (relative to the repo root) and the fixtures home.
 LIBRARY_DIR = os.path.join("bags", "@lares", "ha.ka.ba", "lares", "library",
                            "hawaii", "kumulipo")
-FIXTURES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+# fixtures/ stays in the parent scripts/ dir (shared with the core suites),
+# one level up from this testbeds/ home
+FIXTURES_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                             "fixtures", "placebo-kumulipo")
 
 # The envelope swaps ONLY these address strings (file-path first — it contains the

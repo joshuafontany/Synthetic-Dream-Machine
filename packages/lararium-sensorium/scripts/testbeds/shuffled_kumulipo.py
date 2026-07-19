@@ -51,7 +51,9 @@ from placebo_kumulipo import (
 )
 
 #: The fixtures home — beside the Markov placebo's, one dir per null.
-FIXTURES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+# fixtures/ stays in the parent scripts/ dir (shared with the core suites),
+# one level up from this testbeds/ home
+FIXTURES_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                             "fixtures", "shuffled-kumulipo")
 
 # The envelope swaps ONLY these address strings (file-path first — it contains the

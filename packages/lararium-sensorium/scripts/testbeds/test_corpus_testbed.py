@@ -6,7 +6,9 @@ import sys
 
 from corpus_testbed import write_bed_manifest
 
-_HERE = os.path.dirname(os.path.abspath(__file__))
+# the core scripts this suite subprocess-invokes (worldline_ffz.py) stay in the
+# parent scripts/ dir, one level up from this testbeds/ home
+_HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def test_bed_manifest_declares_geology(tmp_path):

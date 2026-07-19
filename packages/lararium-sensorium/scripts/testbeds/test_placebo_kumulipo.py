@@ -124,8 +124,9 @@ def test_missing_source_text_fails_loud():
 
 # ── the committed fixtures (regeneration witness, gated on the real shelf) ───────────────
 
-_REPO = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
+# this suite lives in scripts/testbeds/, so the repo root sits five levels up
+_REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))))
 _LIBRARY = os.path.join(_REPO, LIBRARY_DIR)
 
 

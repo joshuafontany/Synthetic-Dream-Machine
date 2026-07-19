@@ -47,7 +47,8 @@ import os
 import re
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_FIX = os.path.join(_HERE, "fixtures", "shuffled-kumulipo")
+# fixtures/ stays in the parent scripts/ dir, one level up from this testbeds/ home
+_FIX = os.path.join(os.path.dirname(_HERE), "fixtures", "shuffled-kumulipo")
 
 #: The wā markers each bed speaks in its own tongue. The Hawaiian counts to sixteen; the Queen's
 #: English counts to twelve, then BRANCHES, then resumes at fourteen — she never writes a thirteenth.
