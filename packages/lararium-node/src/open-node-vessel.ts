@@ -30,17 +30,17 @@ import type {
 } from "@lararium/mesh";
 import {
   makeDurableMailbox,
+  type DurableMailbox,
   OpenIdentitySlot,
   emptyLarDoc, mutableLarRecord, tiddlerText,
-  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, recipeHostFacets, wikiBagUri,
+  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, recipeHostFacets,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
   BAG_IDS, slugFromUri, verbArgsFromPayload, registerCrossroadsInOracle,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
-  ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs, makeWikiActivationCap,
-  DEFAULT_HOT_CAP, DEFAULT_IDLE_MS, DEFAULT_SWEEP_INTERVAL_MS,
+  ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
 }                                       from "@lararium/mesh";
-import type { WikiActivationCap, ResolveWikiSpec } from "@lararium/mesh";
+import type { WikiActivationCap } from "@lararium/mesh";
 import { casDirForStorage, mirrorGenesisCasFs } from "./node-cas.js";
 import {
   ACTIVE_WIKI_URI,
@@ -51,7 +51,6 @@ import {
   composeVerbPlane,
   mempalaceProviderCap, formPalaceProviderCap, daemonVerbProviderCap, telemetryProviderCap,
   recallVerbCap, telemetryVerbCap, captureVerbCap, worldlineVerbCap,
-  buildWikiMountSpec,
 } from "@lararium/tw5";
 import type {
   VesselWikiSlot, DaemonVmCore, VesselDaemonVm, VesselOrchestration,
@@ -84,7 +83,8 @@ import { loadIdentityArchive } from "./identity-anchors.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
   makeResidencyStatsReactor,
-} from "@lararium/tw5";   // residency stats — the lone read that stays main-resident
+  makeVesselResidency, type VesselResidency,
+} from "@lararium/tw5";   // residency stats — the lone read that stays main-resident; the shared residency/pool-wiring factory
 import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
 import { DaemonAuthGate }                           from "./daemon-auth-gate.js";
 import { composeLararium, composeHerm, meshPalaceCap, carriageCap, meshSelfSeed, type MeshSelf } from "./node-caps.js";
@@ -317,6 +317,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   //    mechanism here). onEvict commands the pool via the forward `vmManager` ref. ──
   let vmManager!: VesselIslandPool;        // set in makePool
   let wikiActivation!: WikiActivationCap;  // set in makePool — the activation-on-reference cap
+  let mailbox!: DurableMailbox;            // set in makePool — the durable park/drain lane (node-only capability)
   let daemonVm!:   DaemonVmCore;           // set in openDaemon
   let eventBus!:  LarEventBusImpl;         // set in makePool
   let bootstrap!: VesselBootstrap;         // captured in loadGenesis
@@ -390,27 +391,24 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // applies this cached contribution synchronously.
   let pendingVerbContribution: VerbContribution | null = null;
 
-  // The ONE residency collector — bags AND wiki islands, per-grain-type dials. It
-  // is the sole authority for reachability + eviction: the pool no longer self-evicts.
-  // wiki grains heat by re-mounting (activation-on-reference) and cool by unmounting;
-  // bag grains carry no hydrate today (the repo#358 find-on-heat stays reserved).
-  const residency = new BagResidencyManager({
-    hotCap:          DEFAULT_HOT_CAP,                     // bag cap (the shared vessel dial)
-    typeCaps:        { wiki: NODE_WIKI_ACTIVATION_CAP },  // live-wiki cap (the collector owns wiki eviction)
-    idleMs:          DEFAULT_IDLE_MS,
-    sweepIntervalMs: DEFAULT_SWEEP_INTERVAL_MS,
-    onHydrate: async (id, grainType) => {
-      if (grainType === "wiki") await vmManager.ensureWiki(id);
+  // The ONE residency collector + pool-wiring, composed through the SHARED factory (both vessels
+  // call it). Node advertises the FULL grant (concurrent multi-wiki + rotatable pins besides
+  // @daemon) and supplies its vessel-specific hooks: it NARRATES a cool (browser stays silent),
+  // stamps the alert `kind`, and PARKS an undeliverable alert in the durable mailbox (a dropped
+  // verb stays observable, never nowhere — the Akka /deadLetters lesson; browser has no mailbox,
+  // so it warns + drops best-effort). getPool reads vmManager lazily (the forward-ref pattern);
+  // the alert hook reads the forward-declared mailbox at delivery time (long after boot).
+  const residencyWiring: VesselResidency = makeVesselResidency(
+    () => vmManager,
+    { wikiActivationCap: NODE_WIKI_ACTIVATION_CAP, wikiPinBudget: NODE_WIKI_PIN_BUDGET },
+    {
+      onWikiCooled: (id) => console.log(`[residency] cooled wiki ${id} (island unmounted)`),
+      onBagCooled:  (id) => console.log(`[residency] cooled bag ${id} (compact-then-drop reserved for repo#358)`),
+      alertArgs:    (kind) => ({ kind: kind ?? "" }),
+      onUndeliverableAlert: (wikiId, verbOpts) => { void mailbox.park(wikiId, verbOpts); },
     },
-    onEvict: async (id, grainType) => {
-      if (grainType === "wiki") {
-        await vmManager.unmountWiki(id);
-        console.log(`[residency] cooled wiki ${id} (island unmounted)`);
-      } else {
-        console.log(`[residency] cooled bag ${id} (compact-then-drop reserved for repo#358)`);
-      }
-    },
-  });
+  );
+  const residency = residencyWiring.residency;
 
   // Read the daemon doc (idempotent re-resolve; openDaemonVm finds the same handle).
   const readDaemonDoc = async (): Promise<DocHandle<LarDoc>> =>
@@ -874,8 +872,9 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // Island pool (worker_threads) + the event bus + the sovereign-worker command bindings.
   const makePool: VesselOrchestration<VesselIslandPool>["makePool"] = (_daemon, assembly) => {
     // ── Durable mailbox (lane law §7) — keel mechanism (vessel-mailbox.ts,
-    // substrate-agnostic); this vessel supplies only its live-delivery path.
-    const mailbox = makeDurableMailbox(
+    // substrate-agnostic); this vessel supplies only its live-delivery path. Assigned to the
+    // forward-declared ref so the shared residency wiring's undeliverable-alert hook parks here.
+    mailbox = makeDurableMailbox(
       assembly.composite,
       // Delivery activates on reference: a drain to a cold grain re-mounts it first
       // (on `ea` the grain is already live → a cheap no-op; this covers a drain raced
@@ -929,63 +928,20 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       onEa: (wikiId) => { void mailbox.drain(wikiId); },   // breath → parked verbs deliver
     });
 
-    // resolveWikiSpec — the UNKNOWN-grain branch: a bare reference to a NEVER-opened
-    // wiki resolves its mount spec from the recipe/catalog (the true multi-wiki swap).
-    // READ-ONLY catalog lookup (never `resolveOracleDoc`, which would MINT a phantom
-    // wiki): a slug with no registered canon-doc returns null → the caller parks. The
-    // island self-resolves its composition from the grants (buildWikiMountSpec), and the
-    // daemon reaches any bag by ACCESS, so no vessel-composite layer mount is needed here.
-    const resolveWikiSpec: ResolveWikiSpec = async (wikiId) => {
-      const slug    = slugFromUri(wikiId);
-      const wikiUrl = tiddlerText(assembly.catalogHandle.doc()?.tiddlers?.[wikiBagUri(slug)]) ?? null;
-      if (!wikiUrl || !wikiUrl.startsWith("automerge:")) return null;   // unknown → park
-      const { spec } = await buildWikiMountSpec(daemonVm, {
-        activeWikiId: wikiId,
-        wikiSlug:     slug,
-        coreHash:     assembly.coreHash,
-        islandUrl:    assembly.islandHandle.url,
-        wikiUrl,
-        catalogUrl:   assembly.catalogHandle.url,
-      });
-      return spec;
-    };
-
-    // The activation-on-reference CAP the vessel HOLDS + the resolver READS. Node
-    // advertises the FULL grant (concurrent multi-wiki + rotatable pins besides @daemon).
-    wikiActivation = makeWikiActivationCap(residency, vmManager, {
-      activationCap: NODE_WIKI_ACTIVATION_CAP,
-      pinBudget:     NODE_WIKI_PIN_BUDGET,
-    }, resolveWikiSpec);
-
-    // Sovereign-worker: bind the pool MECHANISM to the worker's POLICY commands.
-    // A daemon evict request routes THROUGH the ONE collector (cool → onEvict →
-    // unmountWiki), so the collector stays authoritative — never a direct unmount
-    // that would desync its wela/anu view (and it refuses a pinned grain, correctly).
-    daemonVm.onEvictRequest(async (bagId) => { await residency.cool(bagId); });
-    daemonVm.onResidencyOp(async (op, bagId, reason) => {
-      if (op === "pin")        await residency.pin(bagId, reason);
-      else if (op === "unpin") residency.unpin(bagId);
-      else                     residency.registerCold(bagId);
-    });
-    // Wiki-alert delivery: the worker named an affected wiki; place a system-alert verb
-    // into that wiki's live island (parks durably if not mounted). The pool + the
-    // mailbox drain key a slot by its BARE SLUG (`slotActiveWikiId = sel.slug`;
-    // `placeWikiVerb(slotActiveWikiId, …)`; `onEa(wikiId) → mailbox.drain`), so this
-    // MUST key the bare slug too — keying `${hostId}:${wikiSlug}` here forked the
-    // keyspace: placeWikiVerb never matched a live slot (even the active wiki) and
-    // the parked verb never drained, so every wiki-alert was silently lost.
-    daemonVm.onWikiAlert((wikiSlug, message, cause, kind) => {
-      const wikiId = wikiSlug;
-      const verbOpts = { verb: "system-alert", args: { message, cause: cause ?? "", kind: kind ?? "" }, requestedBy: "daemon" };
-      // Resolver-as-activator: a REFERENCE to a cold wiki ACTIVATES it — ensureActive
-      // re-mounts a known grain, or resolves a never-opened grain's spec through
-      // resolveWikiSpec (single-flight) — then delivers. A grain that cannot activate
-      // (unregistered — no catalog entry to resolve — or the mount cap full) PARKS
-      // durably and delivers on next mount — a dropped verb stays observable, never
-      // nowhere (the Akka /deadLetters lesson).
-      void wikiActivation.ensureActive(wikiId)
-        .then((live) => (live ? vmManager.placeWikiVerb(wikiId, verbOpts).then(() => {}) : mailbox.park(wikiId, verbOpts)))
-        .catch(() => mailbox.park(wikiId, verbOpts));
+    // Wire the pool through the SHARED residency factory: resolveWikiSpec (the UNKNOWN-grain
+    // branch of the true multi-wiki swap) + the activation-on-reference cap (node's full grant)
+    // + the sovereign-worker residency binding (daemon evict routes THROUGH the ONE collector) +
+    // wiki-alert delivery (the resolver-as-activator single-flight orchestration; node's hook
+    // parks an undeliverable alert durably). The pool + the mailbox drain key a slot by its BARE
+    // SLUG (`slotActiveWikiId = sel.slug`; `onEa(wikiId) → mailbox.drain`), and the shared wiring
+    // keys the alert on that same bare slug — never `${hostId}:${wikiSlug}`, which would fork the
+    // keyspace and silently lose every alert.
+    wikiActivation = residencyWiring.wireToPool({
+      daemon:        daemonVm,
+      pool:          vmManager,
+      coreHash:      assembly.coreHash,
+      islandUrl:     assembly.islandHandle.url,
+      catalogHandle: assembly.catalogHandle,
     });
     return vmManager;
   };

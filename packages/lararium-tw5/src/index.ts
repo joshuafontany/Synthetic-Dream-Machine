@@ -166,6 +166,11 @@ export { runSovereignKernel } from "./sovereign-kernel.js";
 export type { IslandHostSeam } from "./sovereign-kernel.js";
 export { mountSocialPlane, addSubstrateLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki, buildWikiMountSpec } from "./vessel-steps.js";
 export type { ResolveBagHandle, SocialPlaneUrls, SocialPlaneHandles, PrimaryMountPool, BindingResolver, PrimaryMountInputs } from "./vessel-steps.js";
+export { makeVesselResidency } from "./vessel-residency-wiring.js";
+export type {
+  VesselResidency, VesselResidencyPool, VesselResidencyConfig, VesselResidencyHooks,
+  VesselAlertVerbOpts, AlertDropReason, WireToPoolArgs,
+} from "./vessel-residency-wiring.js";
 export { loadCatalogCorpora } from "./load-corpora.js";
 export type { CorpusLoaderDeps } from "./load-corpora.js";
 export {

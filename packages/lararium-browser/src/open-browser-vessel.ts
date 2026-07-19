@@ -23,7 +23,7 @@ import {
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   DeterministicFederationGate, federationShareDecision, type FederationGate,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
-  BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, BagResidencyManager, DEFAULT_HOT_CAP, DEFAULT_IDLE_MS, DEFAULT_SWEEP_INTERVAL_MS, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
+  BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, recipeHostFacets, type WikiActivationCap,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
@@ -37,11 +37,11 @@ import {
   selectActiveWikiSlug,
   loadCatalogCorpora, seedVesselDefaults,
   makeResidencyStatsReactor,
+  makeVesselResidency, type VesselResidency,
   PROJECTION_FRAME,
   COHERENCE_FRAME,
   SENSORIUM_FRAME,
   createWikiSenseSupervisor, registerWikiSenseVerbs,
-  buildWikiMountSpec,
 }                                            from "@lararium/tw5";
 import type { WikiSenseSupervisor }          from "@lararium/tw5";
 import type { CoherenceStatus } from "@lararium/tw5";
@@ -458,14 +458,25 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // materializes it fresh — never a merge-into-stale reconcile. No engine
   // CID-diverge merge happens at boot, so this stays false (kept for API parity).
   const engineUpdated = false;
-  // The ONE residency collector — bags AND wiki islands, per-grain-type dials. Sole
-  // authority for reachability + eviction (the pool no longer self-evicts). Browser's
-  // small wiki cap rides the constrained grant; wiki grains heat by re-mounting.
-  const residency = new BagResidencyManager({
-    hotCap: DEFAULT_HOT_CAP, typeCaps: { wiki: BROWSER_WIKI_ACTIVATION_CAP }, idleMs: DEFAULT_IDLE_MS, sweepIntervalMs: DEFAULT_SWEEP_INTERVAL_MS,
-    onHydrate: async (id, grainType) => { if (grainType === "wiki") await vmManager.ensureWiki(id); },
-    onEvict:   async (id, grainType) => { if (grainType === "wiki") await vmManager.unmountWiki(id); },
-  });
+  // The ONE residency collector + pool-wiring, composed through the SHARED factory (both vessels
+  // call it). Browser advertises the MINIMAL grant (a small live-wiki set + one rotatable pin
+  // besides @daemon) and supplies its vessel-specific hooks: it stays SILENT on a cool (node
+  // narrates the cool) and holds NO durable mailbox, so an undeliverable alert WARNS + drops
+  // best-effort (node parks it durably). getPool reads vmManager lazily (the forward-ref pattern).
+  const residencyWiring: VesselResidency = makeVesselResidency(
+    () => vmManager,
+    { wikiActivationCap: BROWSER_WIKI_ACTIVATION_CAP, wikiPinBudget: BROWSER_WIKI_PIN_BUDGET },
+    {
+      onUndeliverableAlert: (wikiId, verbOpts, reason) =>
+        warnDroppedBrowserAlert(
+          wikiId,
+          String(verbOpts.args["message"] ?? ""),
+          (verbOpts.args["cause"] as string) || undefined,
+          reason,
+        ),
+    },
+  );
+  const residency = residencyWiring.residency;
 
   // ── The mesh carriage as a LEAF ───────────────────────────────
   // PRESENT → derive the leaf standing and compose the carriage ALONGSIDE the wiki core: meshpalace
@@ -753,59 +764,20 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         },
         ...(workerScriptUrl ? { workerScriptUrl } : {}),
       });
-      // resolveWikiSpec — the UNKNOWN-grain branch (the true multi-wiki swap): a bare
-      // reference to a never-opened wiki resolves its spec from the recipe/catalog.
-      // READ-ONLY catalog lookup (no phantom mint); the island self-resolves its
-      // composition from the grants. Browser resolves within its minimal grant like node.
-      const resolveWikiSpec: ResolveWikiSpec = async (wikiId) => {
-        const slug    = slugFromUri(wikiId);
-        const wikiUrl = tiddlerText(assembly.catalogHandle.doc()?.tiddlers?.[wikiBagUri(slug)]) ?? null;
-        if (!wikiUrl || !wikiUrl.startsWith("automerge:")) return null;   // unknown → best-effort drop
-        const { spec } = await buildWikiMountSpec(daemon, {
-          activeWikiId: wikiId,
-          wikiSlug:     slug,
-          coreHash:     assembly.coreHash,
-          islandUrl:    assembly.islandHandle.url,
-          wikiUrl,
-          catalogUrl:   assembly.catalogHandle.url,
-        });
-        return spec;
-      };
-      // The activation-on-reference CAP the vessel HOLDS + the resolver READS —
-      // browser advertises the MINIMAL grant (small active set + @daemon; one rotatable pin).
-      wikiActivation = makeWikiActivationCap(residency, vmManager, {
-        activationCap: BROWSER_WIKI_ACTIVATION_CAP,
-        pinBudget:     BROWSER_WIKI_PIN_BUDGET,
-      }, resolveWikiSpec);
-      // A daemon evict request routes THROUGH the ONE collector (cool → onEvict →
-      // unmountWiki) so the collector stays authoritative (never a desyncing direct unmount).
-      daemon.onEvictRequest(async (bagId) => { await residency.cool(bagId); });
-      daemon.onResidencyOp(async (op, bagId, reason) => {
-        if (op === "pin")        await residency.pin(bagId, reason);
-        else if (op === "unpin") residency.unpin(bagId);
-        else                     residency.registerCold(bagId);
-      });
-      // Wiki-alert delivery — place a system-alert verb into the affected wiki's live
-      // island. The pool keys a slot by its BARE SLUG (`slotActiveWikiId = sel.slug`;
-      // `placeWikiVerb(slotActiveWikiId, …)`), so this MUST key the bare slug too —
-      // keying `${hostId}:${wikiSlug}` forks the keyspace: placeWikiVerb never matches a
-      // live slot (even the active wiki) and the alert is lost. Browser holds no durable
-      // mailbox (unlike node, which parks), so an unmounted target is a best-effort drop.
-      daemon.onWikiAlert((wikiSlug, message, cause) => {
-        const wikiId = wikiSlug;
-        // Resolver-as-activator: a reference ACTIVATES a cold grain — ensureActive
-        // re-mounts a known grain, or resolves a never-opened grain's spec through
-        // resolveWikiSpec (single-flight) — then delivers. Browser holds no durable
-        // mailbox, so a grain that cannot activate (unregistered — no catalog entry to
-        // resolve — or the mount cap full) is a best-effort drop — the constrained-vessel degradation.
-        void wikiActivation.ensureActive(wikiId)
-          .then((live) => {
-            if (live) void vmManager.placeWikiVerb(wikiId, {
-              verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
-            }).catch(() => warnDroppedBrowserAlert(wikiId, message, cause, "raced-cold"));
-            else warnDroppedBrowserAlert(wikiId, message, cause, "unmounted-no-mailbox");
-          })
-          .catch(() => warnDroppedBrowserAlert(wikiId, message, cause, "not-activatable"));
+      // Wire the pool through the SHARED residency factory: resolveWikiSpec (the UNKNOWN-grain
+      // branch of the true multi-wiki swap) + the activation-on-reference cap (browser's minimal
+      // grant) + the sovereign-worker residency binding (daemon evict routes THROUGH the ONE
+      // collector) + wiki-alert delivery (the resolver-as-activator single-flight orchestration;
+      // browser's hook WARNS + drops best-effort — no durable mailbox). The pool keys a slot by
+      // its BARE SLUG (`slotActiveWikiId = sel.slug`), and the shared wiring keys the alert on
+      // that same bare slug — never `${hostId}:${wikiSlug}`, which would fork the keyspace and
+      // lose every alert. Browser resolves within its minimal grant exactly like node.
+      wikiActivation = residencyWiring.wireToPool({
+        daemon,
+        pool:          vmManager,
+        coreHash:      assembly.coreHash,
+        islandUrl:     assembly.islandHandle.url,
+        catalogHandle: assembly.catalogHandle,
       });
       // The @daemon inherits the render cap (dormant-mounted at boot). Forward its frames into the SAME
       // #projection sink the pool wikis use — gated on the active-surface pointer, so a summoned @daemon paints
