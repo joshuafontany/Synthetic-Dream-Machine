@@ -400,7 +400,7 @@ def _prose_spacy(text: str) -> dict | None:
             _spacy_nlp = None
             return None
     try:
-        doc = _spacy_nlp(text[:100_000])
+        doc = _spacy_nlp(_bound_sentences(text[:100_000]))   # same per-sentence guard as the stanza tier
         root = {"type": "source_file", "children": []}
         budget = [_MAX_NODES]
 
