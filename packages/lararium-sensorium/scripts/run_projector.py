@@ -55,7 +55,7 @@ import random
 import sys
 
 import content_io as cio
-from corpus_testbed import _refuse_comparator
+from capture_corpus import refuse_comparator as _refuse_comparator
 from predictive_coding import free_energy
 from sensorium_consistency import (
     _angular_cosine,

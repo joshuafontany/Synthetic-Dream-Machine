@@ -83,7 +83,7 @@ import os
 import sys
 
 import content_io as cio
-from corpus_testbed import _refuse_comparator
+from capture_corpus import refuse_comparator as _refuse_comparator
 from form_induction import _preorder_types, _seq_support, induce_forest
 from plane_base import sole_pattern_tree
 from run_projector import _read_planes, build_assignment

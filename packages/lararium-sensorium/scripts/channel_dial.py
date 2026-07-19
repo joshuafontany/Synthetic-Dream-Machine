@@ -70,7 +70,7 @@ import json
 import os
 import sys
 
-from corpus_testbed import _refuse_comparator
+from capture_corpus import refuse_comparator as _refuse_comparator
 from form_induction import _preorder_types, _seq_support, induce_forest
 from plane_base import (
     BASE_RECORD,
