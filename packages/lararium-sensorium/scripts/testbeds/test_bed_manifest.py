@@ -119,6 +119,16 @@ def test_operator_act_admits_wiki_sources(tmp_path):
     assert m["operatorAct"]["who"] == "operator"
 
 
+def test_manifest_without_root_still_validates(tmp_path):
+    # the collapse retired `root` from the required set — the pour derives the
+    # home from the bed NAME, so a rootless manifest loads clean.
+    path, m = _manifest(tmp_path)
+    del m["root"]
+    open(path, "w").write(json.dumps(m))
+    loaded = bm.load_manifest(path)
+    assert "root" not in loaded
+
+
 def test_pour_roots_in_the_xdg_sensorium_roster(tmp_path, monkeypatch):
     # the collapse: a bed pours into the ONE roster <data>/sensoriums/<bed>,
     # resolved from the bed NAME — never the manifest's stale literal root.

@@ -66,7 +66,10 @@ def load_manifest(path: str) -> dict:
     problems: list[str] = []
     if m.get("schema") != BED_SCHEMA:
         problems.append(f"schema must read {BED_SCHEMA}, found {m.get('schema')!r}")
-    for key in ("bed", "root", "flow", "worldline", "twins", "apertures", "predictions"):
+    # `root` no longer rides the required set — the pour derives each bed's home
+    # from its NAME (the one XDG sensorium roster); a manifest MAY still carry a
+    # `root` for documentation, but the pour ignores it.
+    for key in ("bed", "flow", "worldline", "twins", "apertures", "predictions"):
         if key not in m:
             problems.append(f"missing member {key!r}")
     flow = m.get("flow", {})
