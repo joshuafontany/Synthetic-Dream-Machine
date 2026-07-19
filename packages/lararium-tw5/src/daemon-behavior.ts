@@ -37,6 +37,7 @@ import {
   type CapabilityVerifier,
   type CaptureEngine,
   type CapturePost,
+  LARES_VERB_URI_PREFIX,
 } from "@lararium/mesh";
 import { placeVerb } from "./verb-vm.js";
 import { composeIsland } from "./island-caps.js";
@@ -152,7 +153,35 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
         ...(verifier ? { verifier } : {}),
       });
       _dispatcher.start();
+      // The @daemon's OWN verb OUT-path (the twin of the pool island-kernel's wiring):
+      // a projected switcher click writes a verb-carrying summon tiddler, whose
+      // reaction-router fires a tm-verse-event. Forward it to main as an IslandMsg_Event
+      // — main's daemon-vm listener routes it to placeVerb (verify-then-delegate → the
+      // main registry, e.g. wiki-switch). Without this, @daemon-origin verbs never leave
+      // the worker (projection frames reach main, but verse-events had no bridge).
+      const cancelVerse = tw5.onVerseEvent({
+        handleVerseEvent: (uri: string, listenable: string, verb?: string, fromUri?: string) => {
+          // Forward ONLY genuine button summons (LARES_VERB_URI_PREFIX = …/verb/<v>/<args>).
+          // ALLOWLIST, not blocklist: the verb machinery's OWN lar:-titled tiddlers that
+          // carry a `verb` field — the dispatcher's volatile invocations (…/verbs/<id>) and
+          // the durable OUTCOME tiddlers — also trip the reaction-router, and re-forwarding
+          // either loops (placeVerb → invocation/outcome → verse-event → placeVerb → …).
+          if (!uri.startsWith(LARES_VERB_URI_PREFIX)) return;
+          post({
+            schema_version: 1,
+            type:           "event",
+            wikiUri:        ctx.wikiUri,
+            listenable,
+            payload: {
+              uri,
+              ...(verb    !== undefined ? { verb }    : {}),
+              ...(fromUri !== undefined ? { fromUri } : {}),
+            },
+          });
+        },
+      });
       return () => {
+        cancelVerse();
         _dispatcher?.stop();
         _dispatcher = null;
       };

@@ -271,6 +271,14 @@ export interface DaemonVmCore {
    * interactivity, never synchronous default-action arbitration (the async law the causal-island house runs).
    */
   sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) => void;
+  /**
+   * Verb OUT-path for the @daemon's OWN surface — the twin of a pool wiki's worker.event→placeVerb
+   * bridge. A DOM click in the projected @daemon writes a verb-carrying summon tiddler; its reaction-router
+   * fires a `tm-verse-event` that surfaces here as an IslandMsg_Event carrying {verb, uri/fromUri}. The
+   * vessel wires this to placeVerb, re-entering the dispatcher's verify-then-delegate gate so the verb runs
+   * on the main registry (e.g. wiki-switch). Absent → @daemon-origin verbs are silently dropped.
+   */
+  onVerbEvent: (fn: (e: { verb: string; args: Record<string, unknown>; fromUri?: string; listenable?: string }) => void) => void;
 }
 
 export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions): DaemonVmCore {
@@ -287,6 +295,8 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   let _wikiAlertHandler: ((wikiSlug: string, message: string, cause?: string, kind?: string) => void) | null = null;
   // Projection-frame forwarding — set via onProjection() after the boot sink exists.
   let _projectionHandler: ((frame: { html: string; css: string; rev: number }) => void) | null = null;
+  // Verb OUT-path forwarding — set via onVerbEvent() after the vessel's placeVerb exists.
+  let _verbEventHandler: ((e: { verb: string; args: Record<string, unknown>; fromUri?: string; listenable?: string }) => void) | null = null;
 
   // ── Vessel composite (cap-event + receipt writes) ──────────────────────────
   const composite  = new CompositeStore();
@@ -362,6 +372,19 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
           html: String(ev.payload["html"] ?? ""),
           css:  String(ev.payload["css"]  ?? ""),
           rev:  Number(ev.payload["rev"]  ?? 0),
+        });
+        return;
+      }
+      // Verb OUT-path: a verb-carrying verse-event from the @daemon's own surface
+      // (a projected switcher click). Forward it to the vessel's placeVerb bridge.
+      const verb = typeof ev.payload["verb"] === "string" ? (ev.payload["verb"] as string) : undefined;
+      if (verb && _verbEventHandler) {
+        const fromUri = typeof ev.payload["fromUri"] === "string" ? (ev.payload["fromUri"] as string) : undefined;
+        _verbEventHandler({
+          verb,
+          args:      ev.payload as unknown as Record<string, unknown>,
+          ...(fromUri ? { fromUri } : {}),
+          listenable: ev.listenable,
         });
       }
       return;
@@ -589,6 +612,9 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     },
     onProjection: (fn: (frame: { html: string; css: string; rev: number }) => void) => {
       _projectionHandler = fn;
+    },
+    onVerbEvent: (fn: (e: { verb: string; args: Record<string, unknown>; fromUri?: string; listenable?: string }) => void) => {
+      _verbEventHandler = fn;
     },
     sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) =>
       worker.post(mkWikiDomEvent({ renderId, eventType, fields })),

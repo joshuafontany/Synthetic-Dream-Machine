@@ -7,7 +7,7 @@
  * story). Location-agnostic: served from localhost / LAN / elyncia.app, the vessel
  * always runs here; the origin is a static host, never an authority.
  */
-import { openBrowserVessel, generateOrLoadBrowserVesselIdentity, parseAdmitCarriage } from "@lararium/browser";
+import { openBrowserVessel, generateOrLoadBrowserVesselIdentity, parseAdmitCarriage, DAEMON_SURFACE_ID } from "@lararium/browser";
 import type { DeviceAdmitPayload } from "@lararium/keyhive";
 import { pullAndVerifyOracle, type GenesisCasManifest, type GenesisSeed } from "@lararium/mesh";
 import { Idiomorph } from "idiomorph";
@@ -200,6 +200,16 @@ async function bootVessel(): Promise<void> {
       ...(meshLeaf ? { meshLeaf } : {}),
     });
     _sendDomEvent = result.sendDomEvent;        // arm the interactivity RETURN leg
+    // The UNIVERSAL summon (the reachability affordance): host chrome overlays EVERY
+    // wiki, so this button + chord flips the projection gate to the @daemon from any
+    // active surface — a pure gate flip (both surfaces already mounted), no reboot.
+    // Distinct from the @daemon-scoped $:/lares/surface toggle inside the widget.
+    const summon = (): void => result.setActiveSurface(DAEMON_SURFACE_ID);
+    const summonBtn = document.getElementById("summon-daemon") as HTMLButtonElement | null;
+    if (summonBtn) { summonBtn.disabled = false; summonBtn.addEventListener("click", summon); }
+    window.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === "D" || e.key === "d")) { e.preventDefault(); summon(); }
+    });
     const vesselEl = $("vessel"); vesselEl.replaceChildren();
     row(vesselEl, "status", "live — sovereign local island", "ok");
     row(vesselEl, "did", did);

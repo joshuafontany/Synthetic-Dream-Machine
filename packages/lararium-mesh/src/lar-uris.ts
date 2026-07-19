@@ -70,6 +70,37 @@ export function stableTagUri(name: string): string {
   return `${TAG_PREFIX}${name.replace(/^\/+/, "")}`;
 }
 
+// ── Lares verb-tiddler namespace (DOM summon → verse-event) ────────────────
+// A TW5 <$button> summons a verb by writing a tiddler whose TITLE lives here and
+// whose `verb` field names the verb. The reaction-router forwards only lar:-titled
+// tiddlers carrying a `verb` field, and the verse-event payload admits ONLY
+// {uri, verb, fromUri} — never arbitrary args — so a verb's positional args ride
+// as URI path segments (each a NAME/address, honoring the URI-carries-bearing law),
+// and the handler reads them back off `args.uri`. The VOLATILE namespace keeps the
+// summon tiddler reaction-routable (lar: prefix) yet unpersisted/unsynced
+// (isVolatileVmUri → the capture path skips it).
+export const LARES_VERB_URI_PREFIX = volatileVmUri("verb/");
+
+/** Build a verb-summon tiddler title: `…/verb/<verb>/<arg0>/<arg1>…` (args %-encoded). */
+export function laresVerbUri(verb: string, ...args: string[]): string {
+  const tail = args.length ? `/${args.map(encodeURIComponent).join("/")}` : "";
+  return `${LARES_VERB_URI_PREFIX}${verb}${tail}`;
+}
+
+/** Read `{ verb, args }` back off a verb-summon tiddler title; null when not one. */
+export function laresVerbUriArgs(uri: string): { verb: string; args: string[] } | null {
+  if (!uri.startsWith(LARES_VERB_URI_PREFIX)) return null;
+  const parts = uri.slice(LARES_VERB_URI_PREFIX.length).split("/");
+  const verb  = parts.shift() ?? "";
+  if (!verb) return null;
+  return { verb, args: parts.map((a) => decodeURIComponent(a)) };
+}
+
+/** Convenience: the Nth positional arg off a verb-summon URI, or "" when absent. */
+export function laresVerbUriArg(uri: string, index: number): string {
+  return laresVerbUriArgs(uri)?.args[index] ?? "";
+}
+
 // ── Bag / Wiki / Cid identity — the three kind-planes ──────────────────────
 // The KIND rides the first path segment (the heaviest-weight slot in lar: law):
 // `bags/@slug` names a composable recipe piece (mutable, the IPNS-shaped content

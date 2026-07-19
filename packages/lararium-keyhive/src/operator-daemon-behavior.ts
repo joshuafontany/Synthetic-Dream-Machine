@@ -21,6 +21,7 @@ import {
   makeInitWikiReactor, makeOpenWikiReactor, makeDraftReactor, makePruneStaleReactor,
   makeWardAlertReactor,
   makeAddBagReactor, makeRemoveBagReactor, makeEpochBagReactor, makeRotateRecipeReactor,
+  makeSwitcherStateReactor,
 } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
@@ -100,6 +101,11 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
 
       // draft needs no catalog — register it regardless of slot.
       registry.register("draft", makeDraftReactor({ composite: ctx.composite }));
+
+      // switcher-state — the @daemon UX widget's IN path: main pushes the live
+      // activation state and this writes the LOCAL, volatile $:/temp/lares/switcher
+      // tiddler so the projected switcher re-renders (reactive, never a poll).
+      registry.register("switcher-state", makeSwitcherStateReactor(ctx.tw5));
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
       // in @daemon + $:/tags/Alert into the operator's pinned VM.

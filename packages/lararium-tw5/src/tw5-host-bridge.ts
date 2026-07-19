@@ -333,6 +333,15 @@ export async function prepareHostBootInstance(
     // and `??=` respects any the bundler already provides.
     (globalThis as Record<string, unknown>)["Buffer"]  ??= {};
     (globalThis as Record<string, unknown>)["process"] ??= makeBrowserProcessShim();
+    // TW5 boots with node={} (so bootprefix loads the vm shim, not the browser DOM
+    // path), so its core `$tw.utils.nextTick` binds the Node branch — a BARE
+    // `setImmediate`, which the module sandbox resolves to globalThis. A browser
+    // Worker has none, so a post-mount render (a story-navigation beat — the @daemon
+    // switcher surfacing) threw `setImmediate is not defined`. Supply it (macrotask
+    // parity, arg-forwarding), the same "last missing Node-ism" contract as global/
+    // process/Buffer above. `??=` respects any the bundler already provides.
+    (globalThis as Record<string, unknown>)["setImmediate"]  ??= (fn: (...a: unknown[]) => void, ...args: unknown[]) => setTimeout(fn, 0, ...args);
+    (globalThis as Record<string, unknown>)["clearImmediate"] ??= ((id: ReturnType<typeof setTimeout>) => clearTimeout(id));
 
     const instance = loadTiddlyWikiFromBlob(coreBlob, makeBrowserWorkerBootEnv()).TiddlyWiki() as unknown as TW5Instance;
     // Forge the THIRD runtime AFTER blob eval, BEFORE boot.boot(). The engine's own content-

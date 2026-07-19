@@ -22,7 +22,7 @@ import {
   CATALOG_DOC_URI, DAEMON_BAG_ID,
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
-  BAG_IDS, slugFromUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
+  BAG_IDS, slugFromUri, laresVerbUriArg, bagStackFromRec, recipeUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
@@ -352,6 +352,41 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   let daemon!:     DaemonVmCore;      // set in openDaemon
   let wikiSense!:  WikiSenseSupervisor;   // set in wireVerbs (post-daemon)
   let slotActiveWikiId = "";
+
+  // Push the live switcher state INTO the @daemon widget (main → local, reactive — never
+  // a poll): the switcher-state worker verb writes $:/temp/lares/switcher (volatile, local)
+  // so the @daemon's projected list re-renders. Called on every activation change and on
+  // summon. Fire-and-forget — a lost push self-heals on the next change or summon.
+  const pushSwitcherState = (): void => {
+    if (!daemon || !vmManager || !wikiActivation) return;
+    const active = vmManager.inspect().filter((s) => s.temperature === "wela").map((s) => s.wikiId);
+    // The recipe surface edits the vessel's HOME wiki (always present) — read its
+    // bag-stack off the catalog so the widget paints a live, editable recipe.
+    const recipeSlug = slotActiveWikiId ? slugFromUri(slotActiveWikiId) : "";
+    let recipe: string[] = [];
+    if (recipeSlug) {
+      const rec = catalogHandle.doc()?.tiddlers?.[recipeUri("@catalog", recipeSlug)];
+      if (rec) recipe = bagStackFromRec(rec);
+    }
+    // Add-candidates: the daemon-resolvable system library bags not already in this
+    // recipe. The projection round-trip relays CLICKS only (never text input), so
+    // recipe-add rides click-to-add candidates rather than a typed URI.
+    const inRecipe = new Set(recipe);
+    const availableBags = [BAG_IDS.lares, BAG_IDS.lararium, BAG_IDS.crossroads]
+      .filter((b) => !inRecipe.has(b));
+    void daemon.placeVerb({
+      verb: "switcher-state",
+      args: {
+        active:        active.join(" "),
+        held:          [...wikiActivation.held()].join(" "),
+        surface:       activeSurfaceId,
+        recipeSlug,
+        recipe:        recipe.join(" "),
+        availableBags: availableBags.slice(0, 8).join(" "),
+      },
+      requestedBy: "switcher",
+    });
+  };
   // The materialize-fresh path RELOADS a persisted @oracle intact (find-first) or
   // materializes it fresh — never a merge-into-stale reconcile. No engine
   // CID-diverge merge happens at boot, so this stays false (kept for API parity).
@@ -527,12 +562,16 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // singleton #projection gate to it — the summon, mount-then-flip. Persist the
       // choice fire-and-forget to the boot pointer (read only at next cold boot).
       registry.register("wiki-switch", async (args) => {
-        const slug = String(args["slug"] ?? "");
+        // slug rides EITHER as an explicit arg (CLI / MCP) OR encoded in the summon
+        // tiddler URI (`…/verb/wiki-switch/<slug>`) when a DOM verse-event drives it
+        // — the verse-event payload admits only {uri, verb, fromUri}, never args.
+        const slug = String(args["slug"] ?? "") || laresVerbUriArg(String(args["uri"] ?? ""), 0);
         if (!slug) throw new Error("wiki-switch: `slug` required");
         const active = await wikiActivation.ensureActive(slug);
         if (active) {
           activeSurfaceId = slug;   // flip the projection gate to the now-live wiki
           void daemon.placeVerb({ verb: "open-wiki", args: { slug }, requestedBy: "wiki-switch" });
+          pushSwitcherState();      // reflect the new surface into the @daemon widget
         }
         return { verb: "wiki-switch", slug, active, held: [...wikiActivation.held()] };
       });
@@ -542,12 +581,14 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         const slug = String(args["slug"] ?? "");
         if (!slug) throw new Error("wiki-hold: `slug` required");
         const held = await wikiActivation.hold(slug);
+        pushSwitcherState();
         return { verb: "wiki-hold", slug, held, holds: [...wikiActivation.held()], budget: wikiActivation.grant.pinBudget };
       });
       registry.register("wiki-release", async (args) => {
         const slug = String(args["slug"] ?? "");
         if (!slug) throw new Error("wiki-release: `slug` required");
         wikiActivation.release(slug);
+        pushSwitcherState();
         return { verb: "wiki-release", slug, holds: [...wikiActivation.held()] };
       });
       // wiki-active — the live switcher state: which wikis run now + which are held +
@@ -702,6 +743,24 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       daemon.onProjection((frame) => {
         if (activeSurfaceId === DAEMON_SURFACE_ID) onProjection?.(frame);
       });
+      // The @daemon's OWN verb OUT-path (a projected switcher click → wiki-switch /
+      // add-bag / remove-bag): re-enter the dispatcher via placeVerb so the verb runs on
+      // the main registry. The bridge is wired end-to-end (daemon-vm onVerbEvent), but the
+      // forward is GATED OFF pending a loop-safe dispatch: a verb's durable outcome +
+      // volatile invocation are themselves lar:-titled with a `verb` field, so the
+      // reaction-router re-fires on the verb machinery's own writes and re-forwarding them
+      // loops. #48 (args-payload in the verse-event contract) carries the clean fix; until
+      // then the switcher activates wikis via the CLI `lares wiki switch` face.
+      const DAEMON_SURFACE_VERBS_LIVE = false;   // flip on with the #48 loop-safe dispatch
+      if (DAEMON_SURFACE_VERBS_LIVE) {
+        daemon.onVerbEvent((e) => {
+          void daemon.placeVerb({
+            verb: e.verb, args: e.args, requestedBy: "daemon-surface",
+            ...(e.fromUri ? { fromUri: e.fromUri } : {}),
+            ...(e.listenable ? { listenable: e.listenable } : {}),
+          });
+        });
+      }
       return vmManager;
     },
 
@@ -745,6 +804,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         args: { slug: surfaceId === DAEMON_SURFACE_ID ? "daemon" : surfaceId },
         requestedBy: "summon",
       });
+      // Summoning the @daemon: seed its switcher list with the live activation state so
+      // the projected widget paints a current list the moment it becomes the surface.
+      if (surfaceId === DAEMON_SURFACE_ID) pushSwitcherState();
     },
   };
 }
