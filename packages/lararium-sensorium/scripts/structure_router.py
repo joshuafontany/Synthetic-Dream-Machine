@@ -49,12 +49,22 @@ import argparse
 import json
 import os
 import re as _re
+import signal
 import sys
+import threading
 
 # A hard cap on tree size — a pathological / huge file cannot make the encoder walk
 # unbounded. The shape vector saturates well before this; truncation only drops the
 # deepest tail, never the dominant silhouette.
 _MAX_NODES = 20_000
+
+# stanza's constituency parse is O(sentence-length³): a single pathological "sentence" — a table, an index,
+# a run-on with no terminal punctuation — walks for HOURS and locks the whole pour. Two graceful-failure
+# guards keep the top prose tier degrading INTO its gradient (spaCy → nltk → regex) instead of hanging:
+#   · a per-sentence CHAR cap bounds the cubic input before it reaches the parser (the dominant fix);
+#   · a wall-clock TIMEOUT is the general backstop — any residual hang falls through to the spaCy tier.
+_MAX_SENT_CHARS = 2_000     # ~400 tokens; above this a "sentence" is layout/data, not prose worth a tree
+_STANZA_TIMEOUT_S = 30      # a legitimate 100k-char parse finishes in seconds; this only catches pathology
 
 
 def _count_nodes(children: list, cap: int) -> int:
@@ -283,6 +293,39 @@ def _device_cap() -> str:
         return "cpu"
 
 
+def _bound_sentences(text: str, cap: int = _MAX_SENT_CHARS) -> str:
+    """Truncate any candidate sentence over `cap` chars so the O(n³) constituency parse stays bounded. Splits
+    on sentence terminals and hard line breaks (a table's rows, a run-on's absent terminals), keeps each
+    segment's head, and rejoins preserving the delimiters — graceful degradation of the pathological tail,
+    never a hang. Prose sentences sit far under the cap; only data/layout runs get clipped."""
+    parts = _re.split(r"([.!?\n])", text)          # keep the delimiters so layout survives
+    out = []
+    for i in range(0, len(parts), 2):
+        seg = parts[i]
+        out.append(seg[:cap] if len(seg) > cap else seg)
+        if i + 1 < len(parts):
+            out.append(parts[i + 1])
+    return "".join(out)
+
+
+def _call_stanza(text: str):
+    """Run the stanza pipeline under a wall-clock timeout so no residual pathology can hang the pour. The
+    alarm rides the MAIN thread only (signal's home); off the main thread the per-sentence cap alone guards,
+    and the call runs plain. A timeout raises through as an ordinary exception → the spaCy tier takes over."""
+    on_main = threading.current_thread() is threading.main_thread()
+    if _STANZA_TIMEOUT_S and hasattr(signal, "SIGALRM") and on_main:
+        def _boom(_sig, _frame):
+            raise TimeoutError(f"stanza constituency exceeded {_STANZA_TIMEOUT_S}s — degrading tier")
+        prev = signal.signal(signal.SIGALRM, _boom)
+        signal.alarm(_STANZA_TIMEOUT_S)
+        try:
+            return _stanza_nlp(text)
+        finally:
+            signal.alarm(0)
+            signal.signal(signal.SIGALRM, prev)
+    return _stanza_nlp(text)
+
+
 def _prose_stanza(text: str) -> dict | None:
     """Tier 1: stanza constituency parse (Stanford NLP — maintained, PyTorch, modern-torch
     clean). The nested phrase SPANS `(ROOT (S (NP …) (VP …)))` are exactly the form-induction
@@ -315,7 +358,7 @@ def _prose_stanza(text: str) -> dict | None:
             _stanza_nlp = None
             return None
     try:
-        doc = _stanza_nlp(text[:100_000])
+        doc = _call_stanza(_bound_sentences(text[:100_000]))
         root = {"type": "source_file", "children": []}
         budget = [_MAX_NODES]
 
