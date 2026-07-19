@@ -353,7 +353,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // bag grains carry no hydrate today (the repo#358 find-on-heat stays reserved).
   const residency = new BagResidencyManager({
     hotCap:          32,                                  // bag cap
-    typeCaps:        { wiki: NODE_WIKI_ACTIVATION_CAP },  // live-wiki cap (was the pool's LRU)
+    typeCaps:        { wiki: NODE_WIKI_ACTIVATION_CAP },  // live-wiki cap (the collector owns wiki eviction)
     idleMs:          300_000,
     sweepIntervalMs:  30_000,
     onHydrate: async (id, grainType) => {
@@ -937,12 +937,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     daemonVm.onWikiAlert((wikiSlug, message, cause, kind) => {
       const wikiId = wikiSlug;
       const verbOpts = { verb: "system-alert", args: { message, cause: cause ?? "", kind: kind ?? "" }, requestedBy: "daemon" };
-      // Resolver-as-activator: a REFERENCE to a cold wiki ACTIVATES it (ensureActive
-      // re-mounts a known grain, single-flight) then delivers. A grain that cannot
-      // activate (never opened under retain-only / grant exhausted) PARKS durably and
-      // delivers on next mount — a dropped verb stays observable, never nowhere (the
-      // Akka /deadLetters lesson). `resolveWikiSpec` is the follow-on that teaches a
-      // never-opened grain its spec so this path activates rather than parks.
+      // Resolver-as-activator: a REFERENCE to a cold wiki ACTIVATES it — ensureActive
+      // re-mounts a known grain, or resolves a never-opened grain's spec through
+      // resolveWikiSpec (single-flight) — then delivers. A grain that cannot activate
+      // (unregistered — no catalog entry to resolve — or the mount cap full) PARKS
+      // durably and delivers on next mount — a dropped verb stays observable, never
+      // nowhere (the Akka /deadLetters lesson).
       void wikiActivation.ensureActive(wikiId)
         .then((live) => (live ? vmManager.placeWikiVerb(wikiId, verbOpts).then(() => {}) : mailbox.park(wikiId, verbOpts)))
         .catch(() => mailbox.park(wikiId, verbOpts));

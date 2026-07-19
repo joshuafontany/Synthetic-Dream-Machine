@@ -12,8 +12,8 @@
  * the gate hashes (`render(parse(disk)) ≈ current` names "framing only"), which
  * structural surface a round-trip MUST preserve, and how it grades a fault. The
  * DEFAULT ops read the memetic-wikitext family; a native filetype passes its own
- * `IngestOps`, so BOTH carrier families run this one triangle — the memetic gate
- * and the native inline mini-triangle collapse into a single decision path.
+ * `IngestOps`, so BOTH carrier families run this one triangle — one decision path,
+ * each family reading it through its own congruence.
  *
  * Three states meet per carrier:
  *   - the DISK bytes (what the operator's hands left),

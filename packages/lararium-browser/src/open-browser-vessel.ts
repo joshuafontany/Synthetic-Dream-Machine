@@ -353,7 +353,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   let wikiSense!:  WikiSenseSupervisor;   // set in wireVerbs (post-daemon)
   let slotActiveWikiId = "";
   // The materialize-fresh path RELOADS a persisted @oracle intact (find-first) or
-  // materializes it fresh — never the old merge-into-stale reconcile. No engine
+  // materializes it fresh — never a merge-into-stale reconcile. No engine
   // CID-diverge merge happens at boot, so this stays false (kept for API parity).
   const engineUpdated = false;
   // The ONE residency collector — bags AND wiki islands, per-grain-type dials. Sole
@@ -685,10 +685,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // mailbox (unlike node, which parks), so an unmounted target is a best-effort drop.
       daemon.onWikiAlert((wikiSlug, message, cause) => {
         const wikiId = wikiSlug;
-        // Resolver-as-activator: a reference ACTIVATES a cold known grain (ensureActive,
-        // single-flight) then delivers. Browser holds no durable mailbox, so a grain that
-        // cannot activate (never opened under retain-only / grant exhausted) is a best-effort
-        // drop — the constrained-vessel degradation (`resolveWikiSpec` is the follow-on).
+        // Resolver-as-activator: a reference ACTIVATES a cold grain — ensureActive
+        // re-mounts a known grain, or resolves a never-opened grain's spec through
+        // resolveWikiSpec (single-flight) — then delivers. Browser holds no durable
+        // mailbox, so a grain that cannot activate (unregistered — no catalog entry to
+        // resolve — or the mount cap full) is a best-effort drop — the constrained-vessel degradation.
         void wikiActivation.ensureActive(wikiId)
           .then((live) => { if (live) void vmManager.placeWikiVerb(wikiId, {
             verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",

@@ -718,8 +718,8 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       };
 
       if (packInfo) {
-        // A PACK reconciles PER MEMBER through the ONE Confluence gate — the pack-skip is
-        // GONE. Each member runs the single-carrier triangle (echo · canonical-equivalent ·
+        // A PACK reconciles PER MEMBER through the ONE Confluence gate. Each member
+        // runs the single-carrier triangle (echo · canonical-equivalent ·
         // conflict) at member grain, its content-hash the leg, REUSING `decideIngest` (no
         // new comparison logic). The aside hash map (`$:/config/OriginalTiddlerHashes`) holds
         // each member's last-synced content — the per-member merge base — SIBLING to the path
