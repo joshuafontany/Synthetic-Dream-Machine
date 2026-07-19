@@ -19,13 +19,23 @@ Meme: lar:///ha.ka.ba/lararium/sensorium/derived-cadence
 """
 from __future__ import annotations
 
+from dataclasses import replace
+
 from nalu_gate import CoalesceGate, WindowServo, adapt_window
 
-#: The coalesce window, in ORDINAL idle beats (the holder ticks the cadence ~once/sec on the serve loop's
+#: The coalesce window seeds in ORDINAL idle beats (the holder ticks the cadence ~once/sec on the serve loop's
 #: idle select). 64 beats ≈ a minute of quiet ground before a settled batch fires one re-derivation — long
-#: enough to coalesce a capture burst, short enough to keep a derived plane fresh. A free cadence knob (no
-#: nalu-gate default exists — CoalesceGate takes the window from its caller); the servo adapts it from cost.
+#: enough to coalesce a capture burst, short enough to keep a derived plane fresh. The servo then PACES this
+#: from real cost, so the seed only opens the loop; it never freezes the window.
 DEFAULT_COALESCE_WINDOW = 64.0
+
+
+def seeded_servo(window: float) -> WindowServo:
+    """Hand back a cost-seeding window servo for a derived cadence. The window bounds DERIVE from the seeded
+    window — a quarter to quadruple it, in beats — so no absolute floor/ceiling gets guessed; and the target
+    stays 0 to mark SEED-ME, so the cadence adopts the FIRST measured repour cost as the set-point and paces
+    the window around what a repour actually costs on this deployment. AIMD does the rest."""
+    return WindowServo(target_ms=0.0, min_ms=max(1.0, window / 4.0), max_ms=window * 4.0)
 
 
 class DerivedCadence:
@@ -61,6 +71,11 @@ class DerivedCadence:
     def observe_repour(self, cost: float) -> None:
         """Fold the derive's true cost into the coalesce window — grow it when the derive runs slow (fewer,
         fresher re-derivations on quieter ground) and shrink on headroom (stay responsive). AIMD, the
-        coalesce homeostat; a no-op when no servo is configured (the window then stays fixed)."""
-        if self._servo is not None:
-            self._gate._window = adapt_window(self._gate._window, cost, self._servo)  # noqa: SLF001
+        coalesce homeostat; holds the window fixed only when no servo rides along. A seed-mode servo
+        (target_ms ≤ 0) ADOPTS the first real cost as its set-point, so the window paces around measured
+        cost, never a guessed budget."""
+        if self._servo is None:
+            return
+        if self._servo.target_ms <= 0.0 and cost > 0.0:
+            self._servo = replace(self._servo, target_ms=cost)   # seed the set-point from the first repour
+        self._gate._window = adapt_window(self._gate._window, cost, self._servo)  # noqa: SLF001

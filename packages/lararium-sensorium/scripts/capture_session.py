@@ -172,13 +172,19 @@ class CaptureSessionServer:
         # content into the recall surface, worldline-ffz ASSIGNS prenamed membership slots per node. All
         # content-derived, rebuildable, refreshed on new shards — the ONE `refresh` command re-derives them all,
         # the idle beat auto-drives them. (rederive/bands are cousins — canon-triggered, not new-shard.)
+        # Each cadence rides its OWN cost-seeding servo — rejim, mempalace, worldline each pay a different
+        # repour cost, so each seeds its window set-point from its own first measured repour and paces from
+        # there. The window no longer freezes at the seed; the servo drives it.
         self._derived = [
-            _DerivedEnricher("rejim", DerivedCadence(window=window), lambda: self.repour_rejim({})),
-            _DerivedEnricher("mempalace", DerivedCadence(window=window), self._pave_mempalace),
+            _DerivedEnricher("rejim", DerivedCadence(window=window, servo=seeded_servo(window)),
+                             lambda: self.repour_rejim({})),
+            _DerivedEnricher("mempalace", DerivedCadence(window=window, servo=seeded_servo(window)),
+                             self._pave_mempalace),
         ]
         if self._worldline_declared():
-            self._derived.append(_DerivedEnricher("worldline-ffz", DerivedCadence(window=window),
-                                                  self._enrich_worldline))
+            self._derived.append(_DerivedEnricher(
+                "worldline-ffz", DerivedCadence(window=window, servo=seeded_servo(window)),
+                self._enrich_worldline))
 
     @staticmethod
     def _make_embedder():
