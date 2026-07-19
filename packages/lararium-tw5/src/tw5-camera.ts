@@ -19,6 +19,14 @@ import type {
 } from "./types/tiddlywiki.js";
 import type { TW5Engine } from "./tw5-vm.js";
 
+// TW5-core UI tiddler paths the cameras transclude. Named here (not inlined at each
+// mount site) so a TW5-core upgrade that relocates them turns ONE line, and every
+// camera reads the SAME registry — the paths ride a const, never a scattered literal.
+/** TW5 core view-root — the default Story River frustum a camera renders. */
+export const TW5_ROOT_TEMPLATE = "$:/core/ui/RootTemplate";
+/** TW5 core page stylesheet — the CSS a stylesheet camera reads as textContent. */
+export const TW5_PAGE_STYLESHEET = "$:/core/ui/PageStylesheet";
+
 /** Static structure of one camera: the parse→widget→fakeDOM chain. */
 export interface CameraMount {
   /** Root tiddler whose wikitext body defines the view frustum. */

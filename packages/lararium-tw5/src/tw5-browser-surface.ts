@@ -18,6 +18,7 @@ import type {
   TW5ChangeRecord,
 } from "./types/tiddlywiki.js";
 import { BOOT_SPLASH_ACTIVE_URI } from "@lararium/mesh/lar-uris";
+import { TW5_ROOT_TEMPLATE, TW5_PAGE_STYLESHEET } from "./tw5-camera.js";
 import type { TW5Engine } from "./tw5-vm.js";
 
 // ---------------------------------------------------------------------------
@@ -41,7 +42,7 @@ export function mountPanel(engine: TW5Engine, container: HTMLElement): () => voi
   const shadow = container.shadowRoot ?? container.attachShadow({ mode: "open" });
 
   // Stylesheet camera — renders into fakeDocument, syncs CSS text to shadow DOM.
-  const styleWidget = tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet", {
+  const styleWidget = tw.wiki.makeTranscludeWidget(TW5_PAGE_STYLESHEET, {
     document:     tw.fakeDocument,
     parentWidget: tw.rootWidget,
   });
@@ -73,7 +74,7 @@ export function mountPanel(engine: TW5Engine, container: HTMLElement): () => voi
     })();
 
   // Story river camera — the default TW5 view frustum.
-  const storyWidget = tw.wiki.makeTranscludeWidget("$:/core/ui/RootTemplate", {
+  const storyWidget = tw.wiki.makeTranscludeWidget(TW5_ROOT_TEMPLATE, {
     document:     document as unknown as TW5FakeDocument,
     parentWidget: tw.rootWidget,
   });

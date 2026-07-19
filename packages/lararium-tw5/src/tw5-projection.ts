@@ -19,7 +19,7 @@
  */
 
 import type { IslandContext } from "./island-context.js";
-import { mountCamera } from "./tw5-camera.js";
+import { mountCamera, TW5_ROOT_TEMPLATE, TW5_PAGE_STYLESHEET } from "./tw5-camera.js";
 import { tw5ElementToHtml } from "./fake-dom.js";
 import { CoalesceGate } from "@lararium/mesh";
 
@@ -106,14 +106,14 @@ export function mountProjection(ctx: IslandContext): () => void {
   // the live `change → widget.refresh()` loop; we re-snapshot on the same change beat.
   const storyContainer = fakeDoc.createElement("div");
   const stopStory = mountCamera(ctx.tw5, {
-    rootTiddler: "$:/core/ui/RootTemplate",
+    rootTiddler: TW5_ROOT_TEMPLATE,
     document:    fakeDoc,
     container:   storyContainer,
   });
 
   // Stylesheet camera — PageStylesheet → a fake <style>; we read its textContent. (The fakeDocument
   // half of mountPanel; the shadow-root half lives main-side.)
-  const styleWidget = tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet", {
+  const styleWidget = tw.wiki.makeTranscludeWidget(TW5_PAGE_STYLESHEET, {
     document:     fakeDoc,
     parentWidget: tw.rootWidget,
   });
