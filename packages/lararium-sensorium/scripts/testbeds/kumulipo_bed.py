@@ -79,7 +79,7 @@ def _read(name: str) -> "list[str]":
 
 def _hawaiian_lines() -> "list[str]":
     """Cut the Kalakaua appendix out of the Beckwith meme — the chant alone, no commentary."""
-    lines = _read("kumulipo-beckwith.md")
+    lines = _read("kumulipo-beckwith.mem")
     start = end = None
     for i, ln in enumerate(lines):
         if start is None and _HAWAIIAN_OPEN.match(ln):
@@ -108,8 +108,8 @@ def _liliu_marks(lines: "list[str]") -> "list[int]":
 #: bed -> (lines, wā-opening indices). The instrument reads the first; only the scorer reads the second.
 _BEDS = {
     "hawaiian": lambda: (lambda L: (L, _mark(L, _HAWAIIAN_WA)))(_hawaiian_lines()),
-    "beckwith": lambda: (lambda L: (L, _mark(L, _HAWAIIAN_WA)))(_read("kumulipo-beckwith.md")),
-    "liliuokalani": lambda: (lambda L: (L, _liliu_marks(L)))(_read("kumulipo-liliuokalani.md")),
+    "beckwith": lambda: (lambda L: (L, _mark(L, _HAWAIIAN_WA)))(_read("kumulipo-beckwith.mem")),
+    "liliuokalani": lambda: (lambda L: (L, _liliu_marks(L)))(_read("kumulipo-liliuokalani.mem")),
 }
 
 
