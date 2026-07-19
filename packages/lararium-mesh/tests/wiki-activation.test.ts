@@ -154,3 +154,43 @@ describe("wiki-activation cap — activation-on-reference over the one collector
     await pool.disposeAll();
   });
 });
+
+describe("wiki-activation cap — rotatable pins + pin-budget (the switcher's hold)", () => {
+  const W1 = "lar:///wiki/one", W2 = "lar:///wiki/two", W3 = "lar:///wiki/three";
+  const anySpec = async (): Promise<WikiMountSpec> => spec();
+
+  // makeVesselTrio wires pinBudget 1 (the browser gradient: @daemon always + ONE rotatable).
+  test("hold pins a live wiki; release unpins it; held() tracks the set", async () => {
+    const { residency, cap } = makeVesselTrio(4, anySpec);
+    expect(cap.grant.pinBudget).toBe(1);
+    expect(await cap.hold(W1)).toBe(true);
+    expect(residency.isPinned(W1)).toBe(true);           // exempt from collection
+    expect([...cap.held()]).toEqual([W1]);
+
+    cap.release(W1);
+    expect(residency.isPinned(W1)).toBe(false);
+    expect([...cap.held()]).toEqual([]);
+  });
+
+  test("pin-budget 1 rotates: W1 → W2 → W3 keeps exactly the newest held, releases the rest", async () => {
+    const { residency, cap } = makeVesselTrio(4, anySpec);
+    await cap.hold(W1);
+    await cap.hold(W2);   // budget full → W1 (LRU) releases
+    expect(residency.isPinned(W1)).toBe(false);
+    expect(residency.isPinned(W2)).toBe(true);
+    expect([...cap.held()]).toEqual([W2]);
+
+    await cap.hold(W3);   // W2 (LRU) releases
+    expect(residency.isPinned(W2)).toBe(false);
+    expect(residency.isPinned(W3)).toBe(true);
+    expect([...cap.held()]).toEqual([W3]);
+  });
+
+  test("re-holding an already-held grain refreshes recency, never self-evicts", async () => {
+    const { residency, cap } = makeVesselTrio(4, anySpec);
+    await cap.hold(W1);
+    await cap.hold(W1);                            // idempotent — still held, still one
+    expect([...cap.held()]).toEqual([W1]);
+    expect(residency.isPinned(W1)).toBe(true);
+  });
+});

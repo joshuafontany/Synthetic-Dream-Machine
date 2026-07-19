@@ -761,6 +761,41 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       });
     });
     registry.register("residency", makeResidencyStatsReactor({ residency }));
+
+    // ── The wiki-SWITCHER surface (the FACE over the activation cap) ──────────────
+    // The LIVE chokepoint (distinct from boot-time `open-wiki`): a reference ACTIVATES
+    // the grain (resolveWikiSpec wakes ANY registered wiki cold, single-flight). node is
+    // headless — no #projection surface to flip — so a switch here is pure activation.
+    registry.register("wiki-switch", async (args) => {
+      const slug = String(args["slug"] ?? "");
+      if (!slug) throw new Error("wiki-switch: `slug` required");
+      const active = await wikiActivation.ensureActive(slug);
+      return { verb: "wiki-switch", slug, active, held: [...wikiActivation.held()] };
+    });
+    // wiki-hold / wiki-release — the ROTATABLE active-wiki pin (the switcher's pin
+    // control), budget-enforced by the cap (@daemon always + pinBudget rotatable).
+    // Distinct from the recipe-bag `pin-wiki`: this pins the wiki GRAIN in the collector.
+    registry.register("wiki-hold", async (args) => {
+      const slug = String(args["slug"] ?? "");
+      if (!slug) throw new Error("wiki-hold: `slug` required");
+      const held = await wikiActivation.hold(slug);
+      return { verb: "wiki-hold", slug, held, holds: [...wikiActivation.held()], budget: wikiActivation.grant.pinBudget };
+    });
+    registry.register("wiki-release", async (args) => {
+      const slug = String(args["slug"] ?? "");
+      if (!slug) throw new Error("wiki-release: `slug` required");
+      wikiActivation.release(slug);
+      return { verb: "wiki-release", slug, holds: [...wikiActivation.held()] };
+    });
+    // wiki-active — the live switcher state: which wikis run now + which are held.
+    registry.register("wiki-active", async () => {
+      const active = vmManager.inspect().filter((s) => s.temperature === "wela").map((s) => s.wikiId);
+      return {
+        verb: "wiki-active", active, held: [...wikiActivation.held()],
+        activationCap: wikiActivation.grant.activationCap, pinBudget: wikiActivation.grant.pinBudget,
+      };
+    });
+
     // The four provider-heavy verb groups (recall · lar-telemetry · capture · worldline-compare/-trajectory)
     // lifted into the NESTED #has-cap-stack (verb-caps.ts) — composed at the END of openDaemon (where the
     // daemonVm + the node helpers are live) and stashed in `pendingVerbContribution`. Apply it here,

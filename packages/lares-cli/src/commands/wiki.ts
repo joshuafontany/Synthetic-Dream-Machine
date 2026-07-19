@@ -192,6 +192,105 @@ export async function cmdWikiUnpin(args: ParsedArgs): Promise<number> {
   return 0;
 }
 
+/** `lares wiki switch <slug>` — LIVE-activate a wiki (no reboot; the true swap).
+ *  Distinct from `open`, which sets the next-boot pointer. On the browser this also
+ *  flips the #projection surface to the newly-live wiki. */
+export async function cmdWikiSwitch(args: ParsedArgs): Promise<number> {
+  const slug = args.positional[0];
+  if (!slug) {
+    console.error("usage: lares wiki switch <slug>");
+    return 2;
+  }
+  const did = await operatorDid();
+  const r = await call("wiki-switch", { slug }, did, { timeoutMs: 30_000 });
+  if (r.status === "error") {
+    console.error(`switch failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
+  }
+  const result = summaryOutput(r) ?? {};
+  const active = result["active"] === true;
+  const held   = (result["held"] ?? []) as string[];
+  console.log("");
+  if (active) {
+    console.log(`switched → ${slug} (live)`);
+  } else {
+    console.log(`switch ${slug}: NOT activatable (unregistered wiki, or grant exhausted) — parked`);
+  }
+  if (held.length > 0) console.log(`  held: ${held.join(", ")}`);
+  console.log("");
+  return active ? 0 : 5;
+}
+
+/** `lares wiki hold <slug>` — pin a wiki as a rotatable active pin (budget-enforced:
+ *  @daemon always + N rotatable; a hold past the budget releases the least-recently-held). */
+export async function cmdWikiHold(args: ParsedArgs): Promise<number> {
+  const slug = args.positional[0];
+  if (!slug) {
+    console.error("usage: lares wiki hold <slug>");
+    return 2;
+  }
+  const did = await operatorDid();
+  const r = await call("wiki-hold", { slug }, did, { timeoutMs: 30_000 });
+  if (r.status === "error") {
+    console.error(`hold failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
+  }
+  const result = summaryOutput(r) ?? {};
+  const held   = result["held"] === true;
+  const holds  = (result["holds"] ?? []) as string[];
+  console.log("");
+  console.log(held ? `held → ${slug}` : `hold ${slug}: not activatable — not held`);
+  console.log(`  rotatable pins (${holds.length}/${result["budget"] ?? "?"}): ${holds.join(", ") || "(none)"}`);
+  console.log("");
+  return held ? 0 : 5;
+}
+
+/** `lares wiki release <slug>` — drop a wiki's rotatable pin (it stays live, just becomes a cooling candidate). */
+export async function cmdWikiRelease(args: ParsedArgs): Promise<number> {
+  const slug = args.positional[0];
+  if (!slug) {
+    console.error("usage: lares wiki release <slug>");
+    return 2;
+  }
+  const did = await operatorDid();
+  const r = await call("wiki-release", { slug }, did);
+  if (r.status === "error") {
+    console.error(`release failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
+  }
+  const result = summaryOutput(r) ?? {};
+  const holds  = (result["holds"] ?? []) as string[];
+  console.log("");
+  console.log(`released ${slug}`);
+  console.log(`  rotatable pins (${holds.length}): ${holds.join(", ") || "(none)"}`);
+  console.log("");
+  return 0;
+}
+
+/** `lares wiki active` — the live switcher state: which wikis run now + which are held. */
+export async function cmdWikiActive(args: ParsedArgs): Promise<number> {
+  const did = await operatorDid();
+  const r = await call("wiki-active", {}, did);
+  if (r.status === "error") {
+    console.error(`active failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
+  }
+  const result  = summaryOutput(r) ?? {};
+  const active  = (result["active"] ?? []) as string[];
+  const held    = new Set((result["held"] ?? []) as string[]);
+  const surface = result["activeSurface"];
+  console.log("");
+  console.log(`active wikis (${active.length}/${result["activationCap"] ?? "?"}):`);
+  if (active.length === 0) console.log("  (none live)");
+  for (const w of active) {
+    const marks = [held.has(w) ? "📌" : "  ", surface === w ? "◀ surface" : ""].filter(Boolean).join(" ");
+    console.log(`  ${marks} ${w}`);
+  }
+  console.log(`  rotatable pin budget: ${result["pinBudget"] ?? "?"}`);
+  console.log("");
+  return 0;
+}
+
 export async function cmdWikiAddBag(args: ParsedArgs): Promise<number> {
   const slug   = args.positional[0];
   const bagUrl = args.positional[1];
@@ -441,6 +540,10 @@ export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
 const SUBCOMMANDS: Readonly<Record<string, { handler: WikiSubcommand; summary: string }>> = {
   "init":  { handler: cmdWikiInit,  summary: "Mint a fresh wiki: wiki canonical + per-wiki draft + recipe. Idempotent." },
   "open":  { handler: cmdWikiOpen,  summary: "Set which wiki the next `lares serve` boot mounts as active. Does not live-remount the current vessel." },
+  "switch": { handler: cmdWikiSwitch, summary: "LIVE-activate a wiki (no reboot — the true swap; wakes it cold from its recipe). Browser flips the projection surface." },
+  "hold":    { handler: cmdWikiHold,    summary: "Pin a wiki as a rotatable active pin (@daemon always + N rotatable; a hold past budget releases the least-recently-held)." },
+  "release": { handler: cmdWikiRelease, summary: "Drop a wiki's rotatable pin (it stays live, becomes a cooling candidate)." },
+  "active":  { handler: cmdWikiActive,  summary: "Show the live switcher state: which wikis run now + which are held + the projection surface." },
   "sync":  { handler: cmdWikiSync,  summary: "Walk wikis/<slug>/memes/** and ingest into the canonical bag. Idempotent." },
   "pin":        { handler: cmdWikiPin,       summary: "Pin every bag in the wiki's recipe (whole-recipe residency)." },
   "unpin":      { handler: cmdWikiUnpin,     summary: "Unpin every bag in the wiki's recipe." },

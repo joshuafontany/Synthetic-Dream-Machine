@@ -520,6 +520,46 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         });
       });
       registry.register("residency", makeResidencyStatsReactor({ residency }));
+
+      // ── The wiki-SWITCHER surface (the FACE over the activation cap) ────────────
+      // The LIVE swap (distinct from boot-time `open-wiki`): ACTIVATE the grain
+      // (resolveWikiSpec wakes ANY registered wiki cold, single-flight) THEN flip the
+      // singleton #projection gate to it — the summon, mount-then-flip. Persist the
+      // choice fire-and-forget to the boot pointer (read only at next cold boot).
+      registry.register("wiki-switch", async (args) => {
+        const slug = String(args["slug"] ?? "");
+        if (!slug) throw new Error("wiki-switch: `slug` required");
+        const active = await wikiActivation.ensureActive(slug);
+        if (active) {
+          activeSurfaceId = slug;   // flip the projection gate to the now-live wiki
+          void daemon.placeVerb({ verb: "open-wiki", args: { slug }, requestedBy: "wiki-switch" });
+        }
+        return { verb: "wiki-switch", slug, active, held: [...wikiActivation.held()] };
+      });
+      // wiki-hold / wiki-release — the ROTATABLE active-wiki pin (budget-enforced by the
+      // cap: @daemon always + pinBudget rotatable; browser grant = one). The switcher's pin.
+      registry.register("wiki-hold", async (args) => {
+        const slug = String(args["slug"] ?? "");
+        if (!slug) throw new Error("wiki-hold: `slug` required");
+        const held = await wikiActivation.hold(slug);
+        return { verb: "wiki-hold", slug, held, holds: [...wikiActivation.held()], budget: wikiActivation.grant.pinBudget };
+      });
+      registry.register("wiki-release", async (args) => {
+        const slug = String(args["slug"] ?? "");
+        if (!slug) throw new Error("wiki-release: `slug` required");
+        wikiActivation.release(slug);
+        return { verb: "wiki-release", slug, holds: [...wikiActivation.held()] };
+      });
+      // wiki-active — the live switcher state: which wikis run now + which are held +
+      // which surface holds the projection. The @daemon widget's state-tiddler reads this.
+      registry.register("wiki-active", async () => {
+        const active = vmManager.inspect().filter((s) => s.temperature === "wela").map((s) => s.wikiId);
+        return {
+          verb: "wiki-active", active, held: [...wikiActivation.held()], activeSurface: activeSurfaceId,
+          activationCap: wikiActivation.grant.activationCap, pinBudget: wikiActivation.grant.pinBudget,
+        };
+      });
+
       // wiki-sense (the supervision reads) — the daemon's supervision READ-verbs over the islands this vessel's pool
       // actually holds. The seams ARE the supervision grant: designation resolves through the pool
       // alone (confused-deputy ward — a name outside the pool fails loud at both ends), and the
