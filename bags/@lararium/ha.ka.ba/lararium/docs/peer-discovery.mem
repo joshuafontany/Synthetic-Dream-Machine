@@ -225,10 +225,57 @@ the first sync message — removes the need for TLS as the transport trust layer
    → human-shareable wiki invitations
 ```
 
+!! Content Resolution — Blobs, not Doc-URLs
+
+The six-tier ladder above discovers ''doc URLs'' — random UUIDs the CRDT sync
+protocol reconciles. A second, distinct problem rides beside it: resolving the
+large ''body content'' that leaves the CRDT and lives in `@cad` (the
+content-addressed bag). The two never conflate — a doc URL names a mutable
+Automerge document; a blob names immutable bytes.
+
+Blob content carries its own address: `cid = BLAKE3(ciphertext)`. Unlike a doc
+URL, the address ''derives from the bytes'' — ciphertext-addressed, so an
+untrusted holder verifies, pins, and repairs blind, never touching the key. The
+cid names the content itself; discovery answers "who holds these bytes," never
+"what do they call it."
+
+Blob discovery runs its own ladder, lowest-ceremony first:
+
+```
+B0 — hint-in-reference    (the skinny handle carries a provider/bag-locality hint — PRIMARY)
+B1 — connected bag-peers  (want-have; DONT-HAVE stays lawful)
+B2 — named bag-scoped tracker/rendezvous (opt-in, signed, replaceable)
+B3 — declared-unresolved  (PENDING — a first-class lawful state, never a thrown error)
+```
+
+# ''Hint-in-reference'' (primary). The skinny handle carries a provider/bag-locality
+   hint beside the cid, so discovery collapses into the reference itself — the
+   reference already names where the bytes live (Iroh `BlobTicket` = hash + NodeAddr).
+   Most fetches resolve here, one hop, no lookup.
+# ''Connected bag-peers.'' The node asks peers it already talks to `want-have`;
+   a peer lacking the bytes answers `DONT-HAVE` (Bitswap) — a lawful negative,
+   not a failure.
+# ''Named bag-scoped tracker / rendezvous.'' A bag names an opt-in, signed,
+   replaceable tracker mapping cid → provider. It scopes to the bag, never to a
+   global board.
+# ''Declared-unresolved (PENDING).'' When no tier answers, the resolver declares
+   the blob PENDING — a first-class lawful state (our `allowableStates`, Bitswap
+   DONT-HAVE, Hyperdrive wait), never a thrown error.
+
+The global Kademlia DHT — the one structurally-forced global-now — stays
+''behind a causal-island boundary''. `@oracle` supplies the capability-gated
+rendezvous: a well-known per-nexus `docId` names an ''address, not a shared
+present'' — each peer materializes its own converging island over that address,
+state stays local-first, no-global-now enacted rather than breached.
+
 !! What NOT to Build
 
-* ''Automerge DHT / content-addressed URLs'': not supported; random UUIDs are
+* ''Automerge DHT / content-addressed DOC URLs'': not supported; random UUIDs are
   the protocol. Do not try to derive deterministic doc IDs from content hashes.
+  ''Distinction'' — this holds for DOC-IDs alone. ''Blob content'' legitimately
+  carries a content address (`cid = BLAKE3(ciphertext)`) with its own resolution
+  layer (see ''Content Resolution'' above); the two never conflate. Doc-URLs stay
+  random-UUID; blob-CIDs stay content-addressed.
 * ''Server-as-authority'': the node server does not hold content truth, only relays.
   Discovery tiers give peers URLs; authority flows from CRDT merge, not server.
 * ''mDNS in the browser'': not available (no UDP multicast in browsers). LAN
@@ -240,5 +287,7 @@ the first sync message — removes the need for TLS as the transport trust layer
 <<~ ahu #edges >>
 
 !! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 
 <<~/ahu >>

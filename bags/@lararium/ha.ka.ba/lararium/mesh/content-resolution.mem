@@ -1,0 +1,244 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/content-resolution.mem"
+l-space   = "lararium"
+mana      = 16
+manao     = 16
+manaoio   = 14
+register  = "Synthesis"
+retain    = true
+role      = "the converged DreamNet content-resolution design — large bodies leave the CRDT: skinny TW5 handle + @cad ciphertext-addressed CAS + resolveByCid over three gates + DHT-free discovery; doubly-grounded (2 research waves ∪ @oracle/convergent-mesh canon)"
+status    = "proposed"
+tags      = ["api/pono/convergent-mesh", "mesh/oracle-governance", "api/pono/causal-islands", "api/pono/orichalcum-capabilities"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/mesh/content-resolution"
+written   = "2026-07-19"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Content Resolution ~ large bodies leave the CRDT
+
+The mesh once carried every body //inside// the Automerge doc; a 16MB Twain overflowed
+the CRDT and named the law aloud (#51). This meme carries the converged answer: ''the''
+''body leaves the doc.'' A skinny TW5 handle stays in the CRDT; the bytes ride a
+ciphertext-addressed CAS (`@cad`); a `resolveByCid` callback walks them home across three
+gates that ''never fuse''; discovery runs ''without a DHT''. The design stands
+''doubly-grounded'' — two astral-sea research waves (Fathom on CAS/blob mechanics,
+Meridian on federated capability) INDEPENDENTLY re-derived what the `@oracle`
+(<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>) and `convergent-mesh`
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>) canon already held.
+
+> Status: PROPOSED — design-north, NOT built. The #51 hotfix (eager CAS staging +
+> `resolveByCid` seam) ships step 1; this meme carries the persistent-external north
+> ahead of the code.
+
+<<~/ahu >>
+
+<<~ ahu #the-birth >>
+
+!! The birth ~ #51, the 16MB-Twain overflow
+
+The overflow named the law: a body large enough to burst the CRDT ''must leave it''. A
+CRDT carries convergence and causal order well; it carries megabytes badly, and every peer
+that syncs the doc pays the whole weight. So the design ''splits docs from blobs'' — the
+doc keeps small, mutable, causal metadata; the bytes move to a content-addressed store the
+doc merely //points at//. #51 births the seam; the north sits here, at the persistent
+external body.
+
+<<~/ahu >>
+
+<<~ ahu #tw5-seam >>
+
+!! The TW5 seam ~ ride the lazy engine, never fork it
+
+TW5 ''already built the lazy engine'' — the design supplies only the resolver. A carrier
+body becomes a ''skinny handle'': `_is_skinny` marks it, and `getTiddlerText` fires
+`dispatchEvent("lazyLoad", title)` and returns null ("loading") at `wiki.js:1485`. The
+syncer sits under this house's hand, so the house answers that one event with the resolver.
+The `_canonical_uri` variant (`wiki.js:1078`, parse-time, per-parser) carries the media-src
+case. <<~ confidence Synthesis-Canon 14/20 >> the seam rides TW5's own machinery
+verified in TW5 source — the house adds a resolver, never a fork of the lazy path.
+
+<<~/ahu >>
+
+<<~ ahu #cad-storage >>
+
+!! `@cad` storage ~ ciphertext-addressed, per-operator convergent
+
+The bytes rest in the ''`@cad` bag'' — the canon's Scope-1 CID/CAD-blob
+DreamNet→Meshpalace networking pipe, `@daemon`-verb-coordinated
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#scope-1-networking >>). Its
+storage law, five moves:
+
+* ''`cid = BLAKE3(ciphertext)` — ciphertext-addressed.'' An untrusted holder verifies,
+  pins, and repairs ''blind'' — it never touches the key (Tahoe ''verify-cap ⊥ read-cap'';
+  repair needs only ciphertext, not plaintext). A plaintext-hash would stand as a
+  confirmation oracle AND read uncacheable → rejected.
+* ''Key = hash(per-operator convergence-secret + plaintext)'' (Tahoe). Dedup converges
+  WITHIN one operator's `@cad`; zero cross-operator confirmation-of-file leak. Beats both
+  global-convergent (CFA/LRI leak) and Peergos random-key (no dedup).
+* ''Big-on-fs, small-inline'' (~16KiB, Iroh); the blob carries a ''BLAKE3 outboard'' for
+  range-verify.
+* ''Retention rides two tags'' — a cap-lifetime-bound tag ''PINs'', an untagged body
+  ''CACHEs'' under LRU; GC runs mark-and-sweep from the tags (Iroh tags).
+* ''Each island pins its own'' — it pays its own disk. A peer MAY opportunistically cache
+  (best-effort, zero obligation). Filecoin deal/PoSt/slashing reads as
+  global-ledger/block-height = a global-now trap → avoided.
+
+<<~ confidence Synthesis 13/20 >> ciphertext-addressing carries the load-bearing move:
+it splits the //verify// authority from the //read// authority, so a peer repairs and pins
+a body it can never open.
+
+<<~/ahu >>
+
+<<~ ahu #resolve-by-cid >>
+
+!! `resolveByCid` ~ three gates that never fuse
+
+Matrix's leaked-URL sin fused //may-talk//, //may-resolve//, and //may-read// into one
+URL. This resolver keeps them ''three orthogonal gates'', none collapsing into another:
+
+* ''Gate 1 — may-this-peer-talk (transport).'' FederationGate allowlist (#49) +
+  DaemonAuthGate Ed25519 proof-of-possession.
+* ''Gate 2 — may-this-identity-resolve-THIS-cid (content-authz).'' A `#has` cap scoped
+  `{peer × address}`, validated UCAN-shape (aud==next-iss → sub=holder) against a grow-only
+  revocation-CID set (<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>).
+* ''Gate 3 — may-they-read (decrypt).'' CGKA/BeeKEM decrypt, ''held SEPARATE'' — the node
+  routes and verifies ciphertext and ''never decrypts''. That IS the
+  MLS-Delivery-Service-never-decryptor keel, the node-never-Auth-root law
+  (<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#contract-key-agreement >>).
+
+Between gate 2 and gate 3 the resolver ''walks a chain'': local `@cad` →
+hint-named provider (Iroh BlobTicket = hash + NodeAddr, the discovery collapsing into the
+reference) → connected bag-peers `want-have` (Bitswap) → named bag-scoped
+tracker/rendezvous (opt-in, signed, replaceable) → ''declared-unresolved = PENDING''. That
+PENDING stands as a ''first-class lawful state'' (Bitswap DONT-HAVE / Hyperdrive wait /
+this house's `allowableStates`), never a thrown error. And the resolver
+''verifies `BLAKE3(ciphertext)==cid` every hop'' — range-verified per ≤16KiB slice for a
+large body.
+
+<<~ confidence Synthesis-Canon 14/20 >> the never-fuse discipline carries the security:
+transport, content-authz, and read each answer their own gate, so no single leaked handle
+grants passage past all three.
+
+<<~/ahu >>
+
+<<~ ahu #dht-free-discovery >>
+
+!! Discovery without a DHT ~ the rendezvous, not the shared present
+
+The load-bearing question both waves chased: ''how a body finds its provider without a
+global DHT''. The chain answers it — hint-in-reference → connected peers → named
+bag-scoped tracker — and the global Kademlia DHT, the one structurally-forced global-now,
+stays ''behind a causal-island boundary''
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>). This IS the `@oracle`
+shape: a well-known per-nexus ROOT/INDEX `docId` names a ''rendezvous ADDRESS, not a''
+''shared present'' — each peer materializes its own converging causal island over the
+address; the address coordinates, the state stays local-first, ''no-global-now enacted, not''
+''breached'' (<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance#board-model >>).
+Per-nexus on ownership and scale (never one global board); steward-signed source →
+verify-only public read; ''forkable'' — the fork guards.
+
+<<~/ahu >>
+
+<<~ ahu #handle-and-map >>
+
+!! The handle ~ logical name over an indirection map
+
+The skinny tiddler carries a ''stable logical handle'' (cap/name) plus a
+''provider-locality hint'' — never the raw cid as identity. It resolves through an
+''indirection map (logical name → current cid)'' so a re-key survives (WNFS
+private-forest). That map reads as small mutable metadata → it lives in the ''Automerge''
+''doc'' (the docs/blobs split applied to the map itself); only the bytes ride `@cad`.
+
+<<~/ahu >>
+
+<<~ ahu #two-revocation-modes >>
+
+!! Revocation ~ two modes, already-fetched unrecallable
+
+Revocation runs two modes, matching `convergent-mesh`'s epoch-lease-vs-convergent-removal
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#two-revocation-modes >>):
+
+* ''authz-revoke'' — drop the `#has` cap + drop the retention tag. Cheap,
+  forward-immediate.
+* ''content-revoke'' — re-key → new ciphertext → new cid → indirection-map update.
+  Forward-only.
+
+''Already-fetched bytes stand UNRECALLABLE by construction.'' The design assumes it:
+deletion across caches ''cannot exist'' in no-global-now, so the model never pretends to
+it. Revocation ratchets past the broken party; it never re-seals a body already handed.
+
+<<~/ahu >>
+
+<<~ ahu #the-convergence >>
+
+!! The convergence ~ external re-derived internal
+
+The design reads as a real pattern-integrity, not a Law-of-5s pleasing story, //because//
+two independent forces landed on one structure under their own selection pressure. External
+first-principles (Fathom + Meridian) and the internal crucible (`@oracle` /
+`convergent-mesh`) each arrived at the same shape:
+
+| External finding | Internal canon it re-derived |
+|---|---|
+| ''rendezvous, not DHT'' | the `@oracle` (address ≠ shared present) |
+| ''authz-revoke vs content-revoke'' | epoch-lease vs Keyhive convergent-removal |
+| ''ciphertext-relay, node-never-decrypts'' | the Beelay-bypass keel |
+| ''`@cad` content-addressed pipe'' | the Scope-1 networking pipe |
+| ''cap-root + provider hint'' | rhizome peer-signed edges |
+
+<<~ confidence Synthesis-Canon 14/20 >> every part of the smallest core ships in
+production somewhere — Matrix, UCAN, WNFS, Beelay, bao, MLS, Tahoe, Iroh — so the house
+invents ''only the composition'', never a new primitive.
+
+<<~/ahu >>
+
+<<~ ahu #open-forks >>
+
+!! Open ~ four operator/wave-3 forks
+
+Four choices ride ahead of the build, each holding for the operator:
+
+* ''① sha256 → BLAKE3 migration.'' Live `genesis/cas/` hashes sha256; range-verifiable
+  lazy-fetch wants `BLAKE3(ciphertext)`. Tiered (BLAKE3 only for federated/range-fetched
+  `@cad`, sha256 stays for locally-rehashed genesis) vs dual-hash transition (#46).
+* ''② Convergence-secret custody.'' The per-operator secret must persist AND survive a
+  device-add — it rhymes with the recovery keel
+  (<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>); re-derivable on
+  re-admission from operator key material?
+* ''③ Indirection-map placement.'' The logical-name→cid map likely rides the Automerge doc
+  (small ordered causal metadata) — the docs/blobs split applied to the map.
+* ''④ Bilateral pin economics.'' Island A pins for B under a revocable cap — what does B
+  offer (reciprocal pin? the "fed node hums" ritual-feeding)? The one storage-economics
+  frontier no system solved without a global ledger.
+
+<<~ confidence Synthesis 11/20 >> the four forks stay genuinely open; the operator's
+priors decide them, and wave-3 may reopen any.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/base-doc >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

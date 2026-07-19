@@ -157,12 +157,47 @@ board.
 
 <<~/ahu >>
 
+<<~ ahu #rendezvous-not-dht >>
+
+!! Rendezvous, Not a DHT — the DreamNet answer to provider discovery
+
+The `@oracle` rendezvous carries the DreamNet answer to ''capability-gated provider''
+''discovery WITHOUT a global DHT'' — the load-bearing question the content-resolution
+design chased (<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>). A content
+address names //what// a peer wants; //who holds it// resolves through the rendezvous, never
+through a planet-wide index.
+
+''Two independent research waves re-derived exactly this.'' From first principles, under
+separate selection pressure, both landed on the same shape: ''a capability-gated''
+''rendezvous — a relay-as-boundaried-meeting-point, never a global index.'' The
+well-known-`docId` board that this meme governs IS that meeting-point: the address
+coordinates the dial, and each peer materializes its own causal island of provider-state
+behind it (the same global-address/local-state pattern the board model names above,
+#board-model).
+
+''The one structurally-forced global-now stays behind a causal-island boundary.'' A global
+Kademlia DHT concentrates a shared present — every provider announcement racing one
+routing table. That pressure does not enter the Lares stack proper: the `@oracle`
+rendezvous ''replaces'' the DHT for discovery, and any DHT that survives sits //behind// a
+causal-island boundary as an external bridge, never a load-bearing floor. The rendezvous
+hands out an ''address''; the provider-state stays ''local-first''.
+
+<<~ confidence Synthesis 13/20 >> this reads as a ''convergence'', not a fresh invention:
+the outside re-derived the inside. Two external waves, chasing capability-gated discovery
+cold, arrived at the rendezvous the `@oracle` canon already stood — pattern-integrity
+confirmed by independent arrival, the way a proof gains weight when a second hand reaches
+it through a different door (<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-discovery >>).
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-discovery >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu >>
 
 <<~/ahu >>
