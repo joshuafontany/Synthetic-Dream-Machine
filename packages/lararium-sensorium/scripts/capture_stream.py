@@ -24,8 +24,17 @@ Meme: lar:///ha.ka.ba/lararium/sensorium/capture-stream (the composable pipeline
 """
 from __future__ import annotations
 
+import os
+
 from capture_drain import DrainLedger
 from content_io import ContentFloorError
+
+# The embed BATCH window — how many un-landed records to buffer and hand the embedder in ONE call. The model
+# sub-batches internally (32), so feeding it one text at a time starves the GPU (the 18%-utilization pour);
+# a window amortizes the call across many texts and the vectors + stream order stay identical. 256 rides ~8×
+# the internal sub-batch, memory-bounded (a window of texts + vectors, cleared each flush). A lossless
+# batch-DEPTH servo — the dual of the coalesce window's AIMD — would tune this from cost; that stays a follow.
+_EMBED_BATCH = int(os.environ.get("LARES_EMBED_BATCH", "256"))
 
 
 class ContentStoreLandCap:
@@ -119,7 +128,7 @@ class Pipeline:
         seen = landed = skipped = relanded = retracted = 0
         failed: list = []
         plane_failed: dict = {p.name: [] for p in self._planes}
-        for rec in self._source(pointer):
+        for rec in self._embed_windows(self._source(pointer)):
             seen += 1
             seq, cid = rec["seq"], rec["cid"]
             try:
@@ -200,12 +209,45 @@ class Pipeline:
             out[p.name] = summary
         return out
 
+    def _embed_windows(self, source):
+        """Wrap the record source to BATCH embedding: buffer up to `_EMBED_BATCH` records, embed the texts of
+        those that need a vector — no caller-vector, not already durable — in ONE engine call (order
+        preserved), stash each on its record as `_vector`, then yield the buffer in order. The GPU sees a
+        window per call instead of one text at a time; the vectors and the stream order stay identical.
+        Passes straight through when no batched embedder rides (a caller-vector pipeline) or the cap predates
+        `embed_many`. The rare rewind/re-land path falls back to the scalar embed in `_vector_for`."""
+        embed_many = getattr(self._embed, "embed_many", None) if self._embed is not None else None
+        if embed_many is None:
+            yield from source
+            return
+        buf: list = []
+        for rec in source:
+            buf.append(rec)
+            if len(buf) >= _EMBED_BATCH:
+                yield from self._flush_embed_window(buf, embed_many)
+                buf = []
+        yield from self._flush_embed_window(buf, embed_many)
+
+    def _flush_embed_window(self, buf, embed_many):
+        """Embed the window's un-landed, un-vectored records in one call and stash each vector on its record.
+        A record already durable (is_landed) or carrying a caller-vector never re-embeds — so a re-run pays no
+        wasted embedding, only the fresh tail does. Returns the buffer in order for the caller to yield."""
+        need = [r for r in buf
+                if r.get("vector") is None and "text" in r and not self._land.is_landed(r["cid"])]
+        if need:
+            for r, vec in zip(need, embed_many([r["text"] for r in need])):
+                r["_vector"] = vec
+        return buf
+
     def _vector_for(self, rec):
-        """The record's vector — the caller-supplied one, else embed-in-engine (the warm model) when the
-        pipeline carries an embed-cap; None when neither (a caller-vector land-cap tolerates it)."""
+        """The record's vector — a window-prefetched batch vector, else the caller-supplied one, else
+        embed-in-engine (the warm model) when the pipeline carries an embed-cap; None when neither (a
+        caller-vector land-cap tolerates it)."""
+        if "_vector" in rec:
+            return rec["_vector"]                 # the batch window already embedded this record
         vector = rec.get("vector")
         if vector is None and self._embed is not None:
-            vector = self._embed(rec["text"])   # embed-in-engine (the warm model)
+            vector = self._embed(rec["text"])     # the rare rewind/re-land path — one warm embed
         return vector
 
 
