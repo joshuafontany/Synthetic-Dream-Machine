@@ -66,7 +66,9 @@ def derived_views(root: str) -> dict:
     lands, never a claim). The mempalace projection (paved from content) + the rejim rhythm/geology (repoured
     from content); each reports presence, and the rejim carries its landed regime count + stream span."""
     paths = sensorium_paths(root)
-    views: dict = {"mempalace": {"present": os.path.exists(os.path.join(paths.mempalace, "mempalace"))}}
+    # the pave writes `mempalace.lex` (+ `.ent`) under the dir — the db path is a PREFIX, not a file, so the
+    # lexical index is the honest presence marker (present once refresh/pave has run).
+    views: dict = {"mempalace": {"present": os.path.exists(os.path.join(paths.mempalace, "mempalace.lex"))}}
     geology = os.path.join(paths.rejim, "geology.json")
     rejim: dict = {"present": os.path.exists(geology)}
     if rejim["present"]:

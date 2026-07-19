@@ -130,18 +130,20 @@ def test_enrich_worldline_assigns_membership_slots(tmp_path):
     assert any(a and "/" in a for a in ffz)                              # a membership address stands (slot filled)
 
 
-def test_derived_idle_beat_drives_both_rejim_and_worldline(tmp_path, monkeypatch):
-    # THE COLLAPSE witness: ONE idle beat drives EVERY derived enrichment off one cadence machinery. With a
-    # tiny window, a capture then a crest fires BOTH — rejim lands geology.json (DETECTION) AND worldline
-    # assigns membership slots (ASSIGNMENT) — distinct work, one drive.
+def test_derived_idle_beat_drives_every_enrichment(tmp_path, monkeypatch):
+    # THE COLLAPSE witness: ONE idle beat drives EVERY derived enrichment off one cadence machinery — the
+    # three-fold of derived work. With a tiny window, a capture then a crest fires ALL THREE: rejim lands
+    # geology.json (DISCOVER), mempalace paves the recall surface (PROJECT), worldline assigns slots (ASSIGN).
     monkeypatch.setenv("LARES_DERIVED_WINDOW", "2")
+    root = str(tmp_path / ".mem")
     server = _captured_server(tmp_path)
-    assert {e.name for e in server._derived} == {"rejim", "worldline-ffz"}   # both enrichers, one registry
-    for _ in range(4):                                                   # tick past the window → both crest once
+    assert {e.name for e in server._derived} == {"rejim", "mempalace", "worldline-ffz"}   # one registry, three shards
+    for _ in range(4):                                                   # tick past the window → all crest once
         server._derived_idle_beat()
-    assert os.path.exists(os.path.join(str(tmp_path / ".mem"), "rejim", "geology.json"))   # rejim fired
+    assert os.path.exists(os.path.join(root, "rejim", "geology.json"))                    # rejim DISCOVER fired
+    assert os.path.exists(os.path.join(root, "mempalace", "mempalace.lex"))               # mempalace PROJECT fired
     got = server._content_store()._col.get(include=["metadatas"])        # noqa: SLF001
-    assert any((m or {}).get("lar_ffz") for m in (got.get("metadatas") or []))              # worldline fired
+    assert any((m or {}).get("lar_ffz") for m in (got.get("metadatas") or []))            # worldline ASSIGN fired
 
 
 def _captured_server(tmp_path):
@@ -174,6 +176,8 @@ def test_status_reports_the_derived_layer(tmp_path):
     after = server.status({})
     assert after["derived"]["rejim"]["present"] is True              # the repour landed → the view reads present
     assert "regimes" in after["derived"]["rejim"]                    # + the landed summary (regime count)
+    server.refresh({})                                              # pave the mempalace projection
+    assert server.status({})["derived"]["mempalace"]["present"] is True   # the projection now reads present
 
 
 def test_worldline_serve_op_reads_the_forkdag(tmp_path):

@@ -169,7 +169,14 @@ class CaptureSessionServer:
         _env = os.environ.get("LARES_DERIVED_WINDOW")
         window = float(_env) if _env else DEFAULT_COALESCE_WINDOW
         self._rejim = DerivedCadence(window=window)   # kept by name for the rejim_tick manual op
-        self._derived = [_DerivedEnricher("rejim", self._rejim, lambda: self.repour_rejim({}))]
+        # The three-fold of derived WORK, one DRIVE: rejim DISCOVERS the nameless rhythm, mempalace PROJECTS
+        # content into the recall surface, worldline-ffz ASSIGNS prenamed membership slots per node. All
+        # content-derived, rebuildable, refreshed on new shards. (rederive/bands are cousins — canon-triggered,
+        # not new-shard, so they ride their own cadence, not this one.)
+        self._derived = [
+            _DerivedEnricher("rejim", self._rejim, lambda: self.repour_rejim({})),
+            _DerivedEnricher("mempalace", DerivedCadence(window=window), lambda: self.refresh({})),
+        ]
         if self._worldline_declared():
             self._derived.append(_DerivedEnricher("worldline-ffz", DerivedCadence(window=window),
                                                   self._enrich_worldline))
