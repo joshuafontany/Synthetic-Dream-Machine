@@ -38,8 +38,8 @@ import time
 from typing import Callable, Iterator
 
 from capture_sources import Record, SourceCap, resolve_source
-from sensorium import (compose_content_land, compose_persistence_cap,
-                       compose_stream_sensorium, sensorium_paths, write_stream_manifest, OrderCap)
+from sensorium import (compose_content_land, compose_persistence_cap, compose_stream_sensorium,
+                       derived_views, sensorium_paths, write_stream_manifest, OrderCap)
 from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
 
 
@@ -207,7 +207,7 @@ class CaptureSessionServer:
         teardown/rebuild tears content first and re-captures every surface (the heavy path); this op only
         re-derives the projection, so it stays cheap enough to ask for anytime while capture continues."""
         import mempalace_pave_cli as pave_cli
-        mempalace_dir = os.path.join(self._paths.root, "mempalace")
+        mempalace_dir = self._paths.mempalace
         query = req.get("query")
         return pave_cli.run(
             self._paths.content, mempalace_dir,
@@ -223,7 +223,7 @@ class CaptureSessionServer:
         queues BETWEEN capture passes and never races the writer (the pipe IS the serializer; no second
         store connection). Content-only, so a sigil-less sensorium repours unchanged."""
         import rejim_io
-        rejim_dir = os.path.join(self._paths.root, "rejim")
+        rejim_dir = self._paths.rejim
         return rejim_io.repour_rejim(
             self._paths.content, rejim_dir,
             channel=str(req.get("channel") or rejim_io.CONTENT),
@@ -236,7 +236,7 @@ class CaptureSessionServer:
         this reads it), or an honest absence when it has never been repoured. Rides the serialized pipe like
         every other op, so a read never tears a half-written geology (the land swaps atomically)."""
         import rejim_io
-        rejim_dir = os.path.join(self._paths.root, "rejim")
+        rejim_dir = self._paths.rejim
         geology = rejim_io.read_rejim(rejim_dir)
         return {"repoured": geology is not None, "geology": geology}
 
@@ -263,9 +263,10 @@ class CaptureSessionServer:
     # races the live writer — that serialization is WHY the capture holder owns these ops, not a bare store.
 
     def status(self, req: dict) -> dict:
-        """What THIS holder's palace holds — the taxonomy over the ONE persistent content store the holder
-        already owns (reused, never a second client)."""
-        return self._content_store().taxonomy()
+        """What THIS holder's palace holds — the content taxonomy over the ONE persistent store the holder
+        already owns (reused, never a second client), PLUS the DERIVED layer (mempalace projection · rejim
+        geology). Status tells the whole truth: the eidetic ground AND the rebuildable views hanging off it."""
+        return {**self._content_store().taxonomy(), "derived": derived_views(self._paths.root)}
 
     def worldline(self, req: dict) -> dict:
         """The fork-DAG rhizome for THIS holder (bitemporal AS-OF `asOf`, else the whole history). Opens a

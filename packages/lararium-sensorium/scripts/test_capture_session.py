@@ -137,6 +137,19 @@ def test_status_serve_op_reports_the_taxonomy_over_the_owned_store(tmp_path):
     assert tax["total"] == TURN_COUNT                                # the whole fixture landed, counted
 
 
+def test_status_reports_the_derived_layer(tmp_path):
+    # status tells the WHOLE truth: the content taxonomy AND the derived layer (mempalace · rejim), each an
+    # honest absence until re-derived. After a rejim repour the rhythm view reads present with its regime count.
+    server = _captured_server(tmp_path)
+    before = server.status({})
+    assert before["derived"]["rejim"]["present"] is False            # never repoured → honest absent, no lie
+    assert before["derived"]["mempalace"]["present"] is False        # never paved → honest absent
+    server.repour_rejim({})
+    after = server.status({})
+    assert after["derived"]["rejim"]["present"] is True              # the repour landed → the view reads present
+    assert "regimes" in after["derived"]["rejim"]                    # + the landed summary (regime count)
+
+
 def test_worldline_serve_op_reads_the_forkdag(tmp_path):
     # the claude surface builds the fork-DAG braid beside the palace; the serve-op reads it through a
     # fresh WorldlineStore (opened + closed per-op), so the rhizome reads back over the pipe.

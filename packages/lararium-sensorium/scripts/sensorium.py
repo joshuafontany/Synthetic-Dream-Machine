@@ -38,6 +38,11 @@ class SensoriumPaths:
     form: str
     persistence: str
     worldline: str
+    # The DERIVED layer — rebuildable views off the content ground, NOT eidetic #has planes (a repour/pave
+    # re-mints them from content). Their dirs derive from root exactly like the planes, so no caller
+    # ad-hoc-joins them — the same anti-drift discipline the eidetic paths hold.
+    mempalace: str
+    rejim: str
 
 
 def sensorium_paths(root: str) -> SensoriumPaths:
@@ -50,7 +55,30 @@ def sensorium_paths(root: str) -> SensoriumPaths:
         form=os.path.join(root, "form"),
         persistence=os.path.join(root, "persistence"),
         worldline=os.path.join(root, "worldline"),
+        mempalace=os.path.join(root, "mempalace"),
+        rejim=os.path.join(root, "rejim"),
     )
+
+
+def derived_views(root: str) -> dict:
+    """The DERIVED layer a sensorium holds beside its eidetic #has planes — the rebuildable projections that
+    hang off the content ground, PRESENT only once re-derived (an honest absence until their pave/repour
+    lands, never a claim). The mempalace projection (paved from content) + the rejim rhythm/geology (repoured
+    from content); each reports presence, and the rejim carries its landed regime count + stream span."""
+    paths = sensorium_paths(root)
+    views: dict = {"mempalace": {"present": os.path.exists(os.path.join(paths.mempalace, "mempalace"))}}
+    geology = os.path.join(paths.rejim, "geology.json")
+    rejim: dict = {"present": os.path.exists(geology)}
+    if rejim["present"]:
+        try:
+            with open(geology, encoding="utf-8") as fh:
+                landed = json.load(fh)
+            rejim["regimes"] = len(landed.get("rejim") or [])
+            rejim["stream_chars"] = landed.get("stream_chars")
+        except (OSError, ValueError):
+            pass   # a torn/half-written geology reads present-but-unsummarized — status never crashes on it
+    views["rejim"] = rejim
+    return views
 
 
 def _lar_data_home() -> str:

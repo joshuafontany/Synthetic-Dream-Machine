@@ -23,7 +23,7 @@ from embed_cap import make_embed_cap
 from plane_query import (open_plane_store, plane_record_witness,
                          reads_as_cid as _reads_as_cid,
                          structure_entry_for_cid as _structure_entry_for_cid)
-from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir
+from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir, derived_views
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
@@ -280,8 +280,9 @@ class LaresCoordinator:
         return surfaces
 
     def status(self) -> dict:
-        """What the sensorium holds — the taxonomy over the palace (mirrors `lares status`)."""
-        return self._content.taxonomy()
+        """What the sensorium holds — the content taxonomy PLUS the DERIVED layer (mempalace projection ·
+        rejim geology), so status names the eidetic ground AND the rebuildable views (mirrors `lares status`)."""
+        return {**self._content.taxonomy(), "derived": derived_views(self._palace)}
 
     def worldline(self, selector: "str | None" = None, *, as_of=None) -> dict:
         """The fork-DAG rhizome (mirrors `lares worldline`). `selector` names which run/handle the CLI
