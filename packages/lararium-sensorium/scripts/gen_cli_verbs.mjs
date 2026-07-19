@@ -34,6 +34,9 @@ const CLI_FORMS = {
   worldline: "sense worldline",
   kapae:     "sense worldline kapae",
   un_kapae:  "sense worldline un-kapae",
+  // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
+  // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
+  wiki:      "wiki switch",
 };
 // The CLI TOP-LEVEL verbs that HOST a mirror — DERIVED from the cli_forms value-heads (single source,
 // never drifts): `sensorium status` → sensorium, `worldline kapae` → worldline, harvest → harvest. The

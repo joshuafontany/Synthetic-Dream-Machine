@@ -7,6 +7,7 @@
     "act",
     "ingest",
     "watch",
+    "repack",
     "seed",
     "regenesis",
     "draft",
@@ -41,7 +42,8 @@
     "status",
     "worldline",
     "kapae",
-    "un_kapae"
+    "un_kapae",
+    "wiki"
   ],
   "cli_forms": {
     "pour": "sense pour",
@@ -49,10 +51,12 @@
     "status": "sense status",
     "worldline": "sense worldline",
     "kapae": "sense worldline kapae",
-    "un_kapae": "sense worldline un-kapae"
+    "un_kapae": "sense worldline un-kapae",
+    "wiki": "wiki switch"
   },
   "mirror_hosts": [
-    "sense"
+    "sense",
+    "wiki"
   ],
   "not_yet_mirrored": [
     "wake",
@@ -61,11 +65,11 @@
     "act",
     "ingest",
     "watch",
+    "repack",
     "seed",
     "regenesis",
     "draft",
     "bag",
-    "wiki",
     "status",
     "node",
     "cleanup-days",

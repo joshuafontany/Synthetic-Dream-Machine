@@ -38,6 +38,13 @@ LIFECYCLE_VERBS = ("pour", "recall", "status", "worldline", "kapae", "un_kapae")
 # (mcp_tools − PLANE_VERBS mirrors the fixture) until the CLI catches up.
 PLANE_VERBS = ("plane_record",)
 
+# The wiki-SWITCHER namespace — ONE flat `wiki` MCP tool (a `verb` arg: switch/hold/release/active)
+# mirrors the `lares wiki <verb>` CLI namespace, honest to its subcommand shape (never 4 flat tools that
+# would flatten the namespace). A PROPER CLI mirror — the host `wiki` is a real top-level command — so it
+# rides `mirrored`/`cli_forms` in the fixture, not an ahead-of-CLI allowance. All four sub-verbs are
+# uniformly low-trust · reversible · LOCAL residency ops (one conservative VERB_SEATS seat covers them).
+WIKI_VERBS = ("wiki",)
+
 # The reversibility×trust GRID: each verb declares (reversible, trust_crossing). The seat follows —
 # HOTL (reversible AND trusted) runs on the operator's loop, no pause; HITL (irreversible OR trust-
 # crossing) blocks for the operator's hand. One grid across both surfaces (CLI + MCP). The @daemon holds
@@ -51,6 +58,7 @@ VERB_SEATS = {
     "kapae": (True, False),      # move-not-delete mute — reversible, trusted
     "un_kapae": (True, False),   # restore — reversible, trusted
     "plane_record": (True, False),      # cross-plane read — reversible, trusted (structure/form fold onto recall --lens)
+    "wiki": (True, False),              # switcher (switch/hold/release/active) — reversible, low-trust, LOCAL residency → HOTL
     # teardown tears a whole sensorium store DOWN — IRREVERSIBLE → HITL. It rides the CLI today, gated
     # by --confirm (the operator's hand at the door); the grid NAMES its HITL seat so a future MCP mirror
     # inherits the gate rather than crossing the surface ungated.
@@ -472,6 +480,20 @@ def build_mcp(coordinator: LaresCoordinator):
         structure and form (honest nulls where a plane lacks it). `sensorium` names the sensorium
         (absent → memory)."""
         return _call("plane_record", sensorium, cid)
+
+    @mcp.tool()
+    def wiki(verb: str, slug: "str | None" = None) -> dict:
+        """The wiki-SWITCHER — mirrors `lares wiki <verb>` over the @daemon activation cap:
+        `switch <slug>` LIVE-activates a wiki (no reboot — the true swap; wakes it cold from its
+        recipe; a browser flips its projection surface). `hold`/`release <slug>` rotate the
+        active-wiki pin (budget-enforced: @daemon always + N rotatable). `active` reports the live
+        state (running wikis + which are held). One namespace, four sub-verbs — never top-level twins.
+        Rides the @daemon cap-wire like every verb (uds), never a local store."""
+        allowed = {"switch", "hold", "release", "active"}
+        if verb not in allowed:
+            raise ValueError(f"wiki: `verb` must be one of {sorted(allowed)}, got {verb!r}")
+        args: dict = {"slug": slug} if slug else {}
+        return uds.output(f"wiki-{verb}", args)
 
     return mcp
 
