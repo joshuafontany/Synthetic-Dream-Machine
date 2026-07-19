@@ -13,13 +13,13 @@ a source/land/embed cannot exist, rather than erroring later. Meme: lar:///ha.ka
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timezone
 import json
 import os
 import tempfile
 
 import content_io as cio
 from capture_stream import ContentStoreLandCap, Pipeline
+from deep_time import island_local_now
 from sidecar_caps import acquire_root_lock, release_lock, root_mutation
 
 
@@ -376,7 +376,7 @@ def _write_stream_manifest_unlocked(paths: SensoriumPaths, *, name: str, lar: st
         "bands": manifest.get("bands", {"grain": "membership", "computed": "sidecar"}),
         "coupling": manifest.get("coupling", {"children": []}),
         "ephemeral": ephemeral,
-        "created": created or datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+        "created": created or island_local_now(millis=True, z=True),
     })
     if apertures:
         manifest["apertures"] = apertures

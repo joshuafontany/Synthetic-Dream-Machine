@@ -745,10 +745,11 @@ def _densify(form_vector: dict, dimension: int) -> list[float]:
 def _unreliable_witness_timestamp() -> str:
     """A host-wall-clock reading — an UNRELIABLE WITNESS under no-global-now: island clocks skew, so
     this value NEVER compares across islands and NEVER orders anything. Provenance only; the logical/FFZ
-    clock is the ordering authority once it lands py-side. Named to strip the false-clock authority."""
-    import datetime
+    clock is the ordering authority once it lands py-side. Named to strip the false-clock authority.
+    Routes through deep_time — the ONE island-local-wall-time provenance home."""
+    from deep_time import island_local_now
 
-    return datetime.datetime.now(datetime.timezone.utc).isoformat()
+    return island_local_now()
 
 
 class FormPalaceStore:

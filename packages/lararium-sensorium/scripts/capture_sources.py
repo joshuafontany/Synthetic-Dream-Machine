@@ -36,6 +36,7 @@ from typing import Callable, Iterable, Iterator
 
 from copilot_sqlite_normalize import read_sessions as _copilot_read_sessions
 from copilot_vscode_normalize import normalize as _normalize_copilot_vscode
+from deep_time import content_hash
 
 # A record the engine lands: the dense pass seq, the single-gate cid, the drawer text, the schema meta.
 Record = dict
@@ -51,8 +52,10 @@ def derive_cid(source_file: str, chunk_index: int) -> str:
     clobber); the same (source_file, chunk) re-derives the same cid (idempotent re-derivation). The
     turn-key rides metadata, not here — the cid names content-identity, the turn-key names the worldline
     binding. NOTE: the qualified key diverges from caller-vector-flush.ts's bare-basename drawerCid — the
-    TS side carries the same cross-session collision and wants the same qualification (a parity fork)."""
-    src_hash = hashlib.sha256(source_file.encode("utf-8")).hexdigest()
+    TS side carries the same cross-session collision and wants the same qualification (a parity fork).
+    The hash routes through deep_time.content_hash — the ONE content-address/identity-hash home
+    (hash-agility seam); today still sha256, BYTE-IDENTICAL, so every existing cid stays valid."""
+    src_hash = content_hash(source_file.encode("utf-8"))
     return f"{src_hash}_{chunk_index}"
 
 

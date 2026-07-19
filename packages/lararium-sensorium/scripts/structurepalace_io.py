@@ -294,10 +294,11 @@ def _unreliable_witness_timestamp() -> str:
     this value NEVER compares across islands and NEVER orders anything. Provenance only (a rough "this
     node saw it around here"); the logical/FFZ clock — once it lands py-side — is the ordering authority.
     Named to strip the false-clock authority, not to fabricate a global-now (two-clocks: this is neither
-    the CRDT-causal clock nor the FFZ rhythm)."""
-    import datetime
+    the CRDT-causal clock nor the FFZ rhythm). Routes through deep_time — the ONE island-local-wall-time
+    provenance home (hedge against a centuries-long drift scattering the intent)."""
+    from deep_time import island_local_now
 
-    return datetime.datetime.now(datetime.timezone.utc).isoformat()
+    return island_local_now()
 
 
 # The reverse-index db name — sits BESIDE the chroma store in the palace dir (kg_io's

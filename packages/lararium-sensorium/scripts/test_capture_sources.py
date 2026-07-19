@@ -95,6 +95,15 @@ def test_cid_is_full_hex_and_distinct_per_chunk():
     assert derive_cid("sess-abc.jsonl", 0) == c0      # idempotent re-derivation
 
 
+def test_derive_cid_pins_exact_hex_across_the_hash_agility_seam():
+    # REGRESSION PIN — derive_cid routes through deep_time.content_hash (the hash-agility seam), but
+    # the output MUST stay BYTE-IDENTICAL: a changed cid breaks EVERY content address in the store.
+    # Any future hash roll keeps old sha256 addresses valid, so this literal MUST NOT drift.
+    assert derive_cid("some/file.jsonl", 3) == (
+        "97a91a0a641038aaba24bc544a83955d0732fa6d670cc0f8fb51b339aa75ac02_3"
+    )
+
+
 def test_distinct_same_source_atoms_get_distinct_cids_no_clobber():
     recs = list(claude_source(wing="w")(CLAUDE))
     cids = [r["cid"] for r in recs]
