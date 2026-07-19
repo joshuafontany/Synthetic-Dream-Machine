@@ -23,7 +23,7 @@ import {
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   DeterministicFederationGate, federationShareDecision, type FederationGate,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
-  BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
+  BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, BagResidencyManager, DEFAULT_HOT_CAP, DEFAULT_IDLE_MS, DEFAULT_SWEEP_INTERVAL_MS, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
@@ -462,7 +462,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // authority for reachability + eviction (the pool no longer self-evicts). Browser's
   // small wiki cap rides the constrained grant; wiki grains heat by re-mounting.
   const residency = new BagResidencyManager({
-    hotCap: 32, typeCaps: { wiki: BROWSER_WIKI_ACTIVATION_CAP }, idleMs: 300_000, sweepIntervalMs: 30_000,
+    hotCap: DEFAULT_HOT_CAP, typeCaps: { wiki: BROWSER_WIKI_ACTIVATION_CAP }, idleMs: DEFAULT_IDLE_MS, sweepIntervalMs: DEFAULT_SWEEP_INTERVAL_MS,
     onHydrate: async (id, grainType) => { if (grainType === "wiki") await vmManager.ensureWiki(id); },
     onEvict:   async (id, grainType) => { if (grainType === "wiki") await vmManager.unmountWiki(id); },
   });

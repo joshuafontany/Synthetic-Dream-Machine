@@ -38,6 +38,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs, makeWikiActivationCap,
+  DEFAULT_HOT_CAP, DEFAULT_IDLE_MS, DEFAULT_SWEEP_INTERVAL_MS,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap, ResolveWikiSpec } from "@lararium/mesh";
 import { casDirForStorage, mirrorGenesisCasFs } from "./node-cas.js";
@@ -394,10 +395,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // wiki grains heat by re-mounting (activation-on-reference) and cool by unmounting;
   // bag grains carry no hydrate today (the repo#358 find-on-heat stays reserved).
   const residency = new BagResidencyManager({
-    hotCap:          32,                                  // bag cap
+    hotCap:          DEFAULT_HOT_CAP,                     // bag cap (the shared vessel dial)
     typeCaps:        { wiki: NODE_WIKI_ACTIVATION_CAP },  // live-wiki cap (the collector owns wiki eviction)
-    idleMs:          300_000,
-    sweepIntervalMs:  30_000,
+    idleMs:          DEFAULT_IDLE_MS,
+    sweepIntervalMs: DEFAULT_SWEEP_INTERVAL_MS,
     onHydrate: async (id, grainType) => {
       if (grainType === "wiki") await vmManager.ensureWiki(id);
     },

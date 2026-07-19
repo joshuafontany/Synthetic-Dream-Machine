@@ -78,6 +78,16 @@ export interface BagResidencyStats {
  *  bounds both, with per-type caps (the F2 collapse: fewer parts, one collector). */
 export const DEFAULT_GRAIN_TYPE = "bag";
 
+// The vessel-resource dials — named ONCE here (the residency model's home) so node +
+// browser vessels reference the registry instead of each re-inlining the same magic
+// numbers. A vessel scales a dial by passing an override; absent one, it reads these.
+/** Default soft cap on unpinned-wela (live) `bag`-grain residents. */
+export const DEFAULT_HOT_CAP = 32;
+/** Default idle threshold (ms): a wela grain untouched longer cools to anu. 5 min. */
+export const DEFAULT_IDLE_MS = 300_000;
+/** Default sweeper tick interval (ms). 30 s. */
+export const DEFAULT_SWEEP_INTERVAL_MS = 30_000;
+
 export interface BagResidencyManagerOptions {
   /** Soft cap on unpinned-wela (live) `bag`-grain count. Default 32. Pinned grains
    *  are exempt and do not count against the cap. This is the `bag`-type dial; other
@@ -144,10 +154,10 @@ export class BagResidencyManager {
   private sweepInFlight = false;
 
   constructor(opts: BagResidencyManagerOptions = {}) {
-    this.hotCap          = opts.hotCap          ?? 32;
+    this.hotCap          = opts.hotCap          ?? DEFAULT_HOT_CAP;
     this.typeCaps        = opts.typeCaps        ?? {};
-    this.idleMs          = opts.idleMs          ?? 300_000;
-    this.sweepIntervalMs = opts.sweepIntervalMs ?? 30_000;
+    this.idleMs          = opts.idleMs          ?? DEFAULT_IDLE_MS;
+    this.sweepIntervalMs = opts.sweepIntervalMs ?? DEFAULT_SWEEP_INTERVAL_MS;
     if (opts.onHydrate) this.onHydrate = opts.onHydrate;
     if (opts.onEvict)   this.onEvict   = opts.onEvict;
   }
