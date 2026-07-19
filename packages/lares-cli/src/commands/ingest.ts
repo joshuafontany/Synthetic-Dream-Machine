@@ -22,7 +22,7 @@ import { emit, wantsJson, exitFor } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { OUTCOME_URI_PREFIX } from "@lararium/mesh";
 import { larRoot, operatorDid } from "../env.js";
-import { openSyncedTree, scanSource, candidatesOf, submitIngest, recordLandedPacks } from "../ingest-core.js";
+import { openSyncedTree, scanSource, candidatesOf, submitIngest, recordLandedPacks, applyConfirmedRenames } from "../ingest-core.js";
 
 function printUsage(): void {
   console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--in-wiki] [--yes]");
@@ -48,6 +48,10 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   }
   const { rows, skipped } = scan;
   const candidates = candidatesOf(rows);
+  // R2 — a full scan discovers a moved carrier's gone source; it rides the wave as a
+  // rename-deletion so the island re-links records (change-id preserved) and the
+  // observation survives the move (see applyConfirmedRenames, post-submit).
+  const renameDeletions = scan.renameDeletions ?? [];
 
   // ── preview (the default posture) ──────────────────────────────────────
   if (!args.flags["apply"]) {
@@ -103,6 +107,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     result = await submitIngest({
       source, toBag, candidates, did,
       inWiki: Boolean(args.flags["in-wiki"]),
+      ...(renameDeletions.length > 0 ? { deletions: renameDeletions } : {}),
       ...(args.options["change-id"] ? { changeId: args.options["change-id"] } : {}),
     });
   } catch (err) {
@@ -122,7 +127,11 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   // never does — a pack file has no project-back), so an unchanged pack noops on
   // the next scan instead of re-landing the whole bundle.
   const landedCarriers = (summary as { carriers?: Array<Record<string, unknown>> }).carriers ?? [];
-  if (recordLandedPacks(tree, toBag, candidates, landedCarriers) > 0) tree.flush();
+  const packsRecorded = recordLandedPacks(tree, toBag, candidates, landedCarriers);
+  // R2 — a confirmed rename moves its observation to the new location (delete old key,
+  // set new), so the moved carrier reads `unchanged` next scan instead of re-landing.
+  const renamesMoved = applyConfirmedRenames(tree, toBag, candidates, (summary as { deletions?: Record<string, unknown> }).deletions);
+  if (packsRecorded + renamesMoved > 0) tree.flush();
 
   const auditUri = `${OUTCOME_URI_PREFIX}${result.requestId}`;
   emit(args, {

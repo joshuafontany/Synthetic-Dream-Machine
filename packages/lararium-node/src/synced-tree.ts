@@ -18,6 +18,7 @@
 import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync } from "fs";
 import { dirname, join } from "path";
 import { createHash } from "crypto";
+import { tagDigest } from "@lararium/mesh";
 
 export function contentHash(text: string): string {
   return createHash("sha256").update(text, "utf8").digest("hex");
@@ -34,6 +35,22 @@ export function syncedTreeKey(bagId: string, uri: string): string {
 export class SyncedTree {
   private map = new Map<string, string>();   // `${bagId}\0${carrier-root URI}` → sha256 of last-projected bytes (a carrier may project to multiple mirrors)
   private persistTimer: ReturnType<typeof setTimeout> | null = null;
+
+  /**
+   * R2 rename-index — the CONTENT-addressed reverse view: `${bagId}\0${canonical-hash}`
+   * → the set of carrier URIs in that bag currently observing that exact content.
+   * MIRRORS `map` exactly (every live primary observation appears here), so a lookup
+   * answers "which live carrier(s) in this bag hold this content right now". A rename
+   * keeps the whole-carrier `carrierHash` identical while the location (uri) moves, so
+   * this index recovers the moved observation by CONTENT before the echo gate mis-reads
+   * the new location as `new` and re-lands it (#46 content-addressing, deferred R2).
+   *
+   * DERIVED, never persisted: rebuilt from `map` on load, so the on-disk format stays
+   * byte-identical (no migration) and a torn/absent tree degrades to fresh-adoption
+   * exactly as before. The hash normalizes through `tagDigest` (the agile-digest seam),
+   * so a STORED bare-hex value and a freshly-tagged query land on the SAME index key.
+   */
+  private byHash = new Map<string, Set<string>>();
 
   constructor(
     private readonly filePath: string,
@@ -57,6 +74,7 @@ export class SyncedTree {
       // never-projected, the gate falls back to fresh-adoption — safe.
       this.map = new Map();
     }
+    this.rebuildIndex();
   }
 
   get(uri: string): string | null {
@@ -65,12 +83,78 @@ export class SyncedTree {
 
   /** Record a projection observation; persistence coalesces per quiet window. */
   set(uri: string, hash: string): void {
+    const prev = this.map.get(uri);
+    if (prev !== undefined) this.indexRemove(uri, prev);   // the old content leaves the reverse view
     this.map.set(uri, hash);
+    this.indexAdd(uri, hash);                              // the new content enters it
     this.schedulePersist();
   }
 
   delete(uri: string): void {
-    if (this.map.delete(uri)) this.schedulePersist();
+    const prev = this.map.get(uri);
+    if (this.map.delete(uri)) {
+      if (prev !== undefined) this.indexRemove(uri, prev);
+      this.schedulePersist();
+    }
+  }
+
+  /**
+   * R2 rename resolution — given a bag and a carrier's whole-carrier hash, answer the
+   * UNIQUE live carrier URI currently observing that exact content in that bag, else
+   * null. Null on no match OR an AMBIGUOUS match (>1 live carrier shares the content —
+   * two-carriers-same-content; the caller MUST NOT guess, mirroring the delete-gate's
+   * decline-on-collision). Tag-agnostic: a stored bare hash and a freshly-tagged query
+   * normalize to one index key, so the lookup straddles the agile-digest boundary.
+   * A rename is confirmed by the CALLER (the moved uri differs AND the source file is
+   * gone from disk — a copy leaves the source live and never resolves here).
+   */
+  renameSourceUri(bagId: string, hash: string): string | null {
+    const ik = this.hashIndexKey(bagId, hash);
+    if (ik === null) return null;
+    const bucket = this.byHash.get(ik);
+    if (!bucket || bucket.size !== 1) return null;         // unseen or ambiguous → decline, never guess
+    return bucket.values().next().value ?? null;
+  }
+
+  /** Split a primary key `${bagId}\0${uri}` back into its two terms (NUL never
+   *  appears inside a bagId or a lar: uri, so the first NUL is the sole boundary). */
+  private splitKey(key: string): { bagId: string; uri: string } {
+    const i = key.indexOf("\0");
+    return i < 0 ? { bagId: "", uri: key } : { bagId: key.slice(0, i), uri: key.slice(i + 1) };
+  }
+
+  /** The reverse-index key for a (bagId, hash) pair — the hash canonicalized so a
+   *  bare-hex stored value and a tagged fresh value collapse together. A malformed
+   *  hash returns null (that observation simply stays out of the rename-index — it
+   *  degrades to a fresh-adoption decision, never a crash). */
+  private hashIndexKey(bagId: string, hash: string): string | null {
+    try { return `${bagId}\0${tagDigest(hash)}`; } catch { return null; }
+  }
+
+  private indexAdd(key: string, hash: string): void {
+    const { bagId, uri } = this.splitKey(key);
+    const ik = this.hashIndexKey(bagId, hash);
+    if (ik === null) return;
+    let bucket = this.byHash.get(ik);
+    if (!bucket) { bucket = new Set(); this.byHash.set(ik, bucket); }
+    bucket.add(uri);
+  }
+
+  private indexRemove(key: string, hash: string): void {
+    const { bagId, uri } = this.splitKey(key);
+    const ik = this.hashIndexKey(bagId, hash);
+    if (ik === null) return;
+    const bucket = this.byHash.get(ik);
+    if (!bucket) return;
+    bucket.delete(uri);
+    if (bucket.size === 0) this.byHash.delete(ik);
+  }
+
+  /** Rebuild the reverse index from the primary map (load-time; the index never
+   *  persists, so the on-disk shape stays byte-identical across the R2 change). */
+  private rebuildIndex(): void {
+    this.byHash.clear();
+    for (const [key, hash] of this.map) this.indexAdd(key, hash);
   }
 
   get size(): number {

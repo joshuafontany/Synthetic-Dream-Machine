@@ -22,7 +22,7 @@ import { SyncedTree, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjection
 import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
 
-export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc" | "deleted";
+export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc" | "deleted" | "renamed";
 
 /** A vanished carrier the Synced tree still projects — rides an INGEST wave's
  *  `deletions[]`; the island gate splits rename re-links from tombstones. */
@@ -45,11 +45,21 @@ export interface ScanRow {
    *  the carrier so the island keeps the sidecar's fields across a body edit.
    *  Absent for a self-contained filetype (`.mem`/`.tid`) or no sidecar. */
   readonly meta?:      string;
+  /** R2 — set on a `renamed` row: the VANISHED source URI whose byte-identical
+   *  observation this carrier re-homes. The row rides as an ADD (so the island
+   *  re-links records change-id-preserving via the delete-gate), the source rides
+   *  the wave as a rename-deletion, and the CLI moves the observation post-confirm. */
+  readonly renameFrom?: string;
 }
 
 export interface ScanResult {
   readonly rows:    ScanRow[];
   readonly skipped: string[];
+  /** R2 — the rename-deletions a FULL scan discovered (each `renamed` row's gone
+   *  source), threaded into the INGEST wave's `deletions[]` so the island pairs
+   *  them and re-homes records. Absent on a partial (watcher) scan, which keeps
+   *  its own grace-window + delete-gate rename path. */
+  readonly renameDeletions?: PendingDeletion[];
 }
 
 /** Open the Synced tree at the canonical projection-state path (larProjectionDir() —
@@ -193,8 +203,44 @@ export function recordLandedPacks(
   return recorded;
 }
 
+/**
+ * R2 rename-survival — over a FULL scan's rows, recover the observation of a carrier
+ * that MOVED (its uri changed) with byte-identical content. For each location-`new`
+ * row, ask the Synced tree's content-index for the UNIQUE live carrier already
+ * observing that exact content in this bag; when it names a DIFFERENT uri whose file
+ * is GONE from disk (not present among this full walk's live carriers — a COPY leaves
+ * the source live and never qualifies), the row is a RENAME, not a fresh landing.
+ *
+ * The renamed row keeps riding as an ADD (so the island's delete-gate re-links its
+ * records change-id-preserving), and its gone source rides the wave as a
+ * rename-deletion; the caller moves the Synced observation on confirm
+ * (`applyConfirmedRenames`). A genuine EDIT never matches (its hash changed); two
+ * carriers sharing content decline (the index answers null on a >1 collision).
+ *
+ * FULL-scan only: `liveUris` must be the WHOLE on-disk carrier set for the gone-guard
+ * to read true, which a partial (watcher) wave cannot supply — so the watcher keeps
+ * its grace-window + delete-gate path and never calls this.
+ */
+export function resolveRenames(rows: ScanRow[], toBag: string, tree: SyncedTree): { rows: ScanRow[]; renameDeletions: PendingDeletion[] } {
+  const liveUris = new Set(rows.filter((r) => r.status !== "deleted").map((r) => r.uri));
+  const renameDeletions: PendingDeletion[] = [];
+  const claimedSources = new Set<string>();   // one source re-homes at most once per wave
+  const out = rows.map((r) => {
+    if (r.status !== "new") return r;
+    const src = tree.renameSourceUri(toBag, r.diskHash);
+    if (src === null || src === r.uri || liveUris.has(src) || claimedSources.has(src)) return r;
+    const srcHash = tree.get(syncedTreeKey(toBag, src));
+    if (srcHash === null) return r;             // the index and the map disagree — decline, never guess
+    claimedSources.add(src);
+    renameDeletions.push({ uri: src, syncedHash: srcHash });
+    return { ...r, status: "renamed" as ScanStatus, renameFrom: src };
+  });
+  return { rows: out, renameDeletions };
+}
+
 /** Walk a source and scan it whole. Returns null when the source does not
- *  resolve. `fileToUri` defaults to the source's mirror plane (bags/ vs wikis/). */
+ *  resolve. `fileToUri` defaults to the source's mirror plane (bags/ vs wikis/).
+ *  A full walk resolves renames (R2) — a moved carrier's observation survives. */
 export function scanSource(
   root:   string,
   source: string,
@@ -204,12 +250,48 @@ export function scanSource(
 ): ScanResult | null {
   const files = listCarriers(source);
   if (files === null) return null;
-  return scanFiles(root, files, toBag, tree, fileToUri);
+  const scan = scanFiles(root, files, toBag, tree, fileToUri);
+  const { rows, renameDeletions } = resolveRenames(scan.rows, toBag, tree);
+  return { rows, skipped: scan.skipped, ...(renameDeletions.length > 0 ? { renameDeletions } : {}) };
 }
 
-/** The rows an INGEST submission carries — NEW and CHANGED only. */
+/** The rows an INGEST submission carries — NEW, CHANGED, and RENAMED. A `renamed`
+ *  row rides as an ADD so the island's delete-gate pairs it with its gone source and
+ *  re-links the records (change-id preserved); it returns `rename-target`, never a
+ *  fresh re-land. */
 export function candidatesOf(rows: readonly ScanRow[]): ScanRow[] {
-  return rows.filter((r) => r.status === "new" || r.status === "changed");
+  return rows.filter((r) => r.status === "new" || r.status === "changed" || r.status === "renamed");
+}
+
+/**
+ * R2 — move the Synced observation for each rename the island CONFIRMED. Reads the
+ * authoritative `deletions.renames` the gate returned (never the CLI's own guess),
+ * so a suspended wave (mass-delete brake) moves nothing. For each `fromUri → toUri`
+ * it drops the stale source observation and records the moved carrier's hash at the
+ * new location — so the NEXT scan reads the moved carrier `unchanged` and never
+ * re-lands it. Returns the count moved; the caller flushes the tree.
+ */
+export function applyConfirmedRenames(
+  tree: SyncedTree,
+  toBag: string,
+  candidates: readonly ScanRow[],
+  deletionSummary: Record<string, unknown> | undefined,
+): number {
+  if (!deletionSummary || deletionSummary["decision"] !== "apply") return 0;
+  const renames = deletionSummary["renames"];
+  if (!Array.isArray(renames)) return 0;
+  const diskHashByUri = new Map(candidates.map((c) => [c.uri, c.diskHash] as const));
+  let moved = 0;
+  for (const r of renames as Array<Record<string, unknown>>) {
+    const fromUri = String(r["fromUri"]);
+    const toUri   = String(r["toUri"]);
+    const diskHash = diskHashByUri.get(toUri);
+    if (diskHash === undefined) continue;   // a rename we did not submit — leave it be
+    tree.delete(syncedTreeKey(toBag, fromUri));
+    tree.set(syncedTreeKey(toBag, toUri), diskHash);
+    moved++;
+  }
+  return moved;
 }
 
 /** The vanished carriers in a scan — DELETED rows, as INGEST `deletions[]`. */
