@@ -117,3 +117,25 @@ def test_operator_act_admits_wiki_sources(tmp_path):
         operatorAct={"who": "operator", "date": "2026-07-15", "ruling": "Pono. Enact."})
     m = bm.load_manifest(path)
     assert m["operatorAct"]["who"] == "operator"
+
+
+def test_pour_roots_in_the_xdg_sensorium_roster(tmp_path, monkeypatch):
+    # the collapse: a bed pours into the ONE roster <data>/sensoriums/<bed>,
+    # resolved from the bed NAME — never the manifest's stale literal root.
+    monkeypatch.setenv("LAR_ROOT", str(tmp_path / "home"))     # redirect the XDG data home
+    path, _ = _manifest(tmp_path, root="~/.lares/testbeds/ignored-stale-root")
+    m = bm.load_manifest(path)
+    monkeypatch.setattr(bm, "predictions_stand", lambda _m: True)
+
+    seen = {}
+    def _capture_run(corpus, root, **kw):
+        seen["root"] = root
+        return {}
+    import corpus_testbed
+    monkeypatch.setattr(corpus_testbed, "run", _capture_run)
+
+    bm.pour(m)
+    from sensorium import sensorium_dir
+    assert seen["root"] == sensorium_dir(m["bed"])           # the bed name, not the stale field
+    assert os.path.join("sensoriums", m["bed"]) in seen["root"]
+    assert seen["root"].startswith(str(tmp_path / "home"))   # under the redirected home

@@ -201,7 +201,14 @@ def pour(m: dict, *, twin: bool = False) -> dict:
                          "declared but the pour engine speaks only 'file' today; the "
                          "turn/tiddler/module seams land with their own engines")
     files, tally = resolve_flow(m)
-    root = os.path.expanduser(m["root"])
+    # Every bed lands in the ONE sensorium roster the node governs: XDG
+    # <data>/sensoriums/<bed>, resolved from the bed NAME (the address carries
+    # the bearing — the manifest's literal `root` field stays advisory). This
+    # seats each poured bed as a first-class EPHEMERAL sensorium (compose_testbed
+    # stamps ephemeral=true) that the standing roster + teardown already reach,
+    # collapsing the per-bed ~/.lares scatter into the one home.
+    from sensorium import sensorium_dir
+    root = sensorium_dir(m["bed"])
     if twin:
         twin_dir = root + "-twin-corpus"
         twin_stats = build_twin_corpus(m, files, twin_dir)
