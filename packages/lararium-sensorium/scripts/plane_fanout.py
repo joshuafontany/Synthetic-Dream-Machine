@@ -52,9 +52,10 @@ class StructurePlaneCap:
 
     name = "structure"
 
-    def __init__(self, store, *, trees: "dict | None" = None) -> None:
+    def __init__(self, store, *, trees: "dict | None" = None, hashes: "dict | None" = None) -> None:
         self._store = store            # a StructurePalaceStore (put / get by hash)
         self.trees = trees if trees is not None else {}   # cid -> tree, the pass-shared parse
+        self.hashes = hashes if hashes is not None else {}   # cid -> structural_hash, computed once here
         self._landed = 0
         self._already = 0
         self._skipped = 0              # records the router holds no grammar for
@@ -72,6 +73,7 @@ class StructurePlaneCap:
         cid = rec["cid"]
         self.trees[cid] = tree
         h = structural_hash(tree)
+        self.hashes[cid] = h           # cache the hash — the form cap reuses it, one hash per record
         # Idempotence: a provenance line already carrying this cid marks the durable no-op
         # (a bare re-put would re-bump the recurrence count on every re-pass).
         entry = self._store.get(h)
@@ -101,11 +103,13 @@ class FormPlaneCap:
 
     name = "form"
 
-    def __init__(self, store, *, trees: dict, min_support: int = _DEFAULT_MIN_SUPPORT,
+    def __init__(self, store, *, trees: dict, hashes: "dict | None" = None,
+                 min_support: int = _DEFAULT_MIN_SUPPORT,
                  max_forms: int = _DEFAULT_MAX_FORMS,
                  max_candidates: "int | None" = _DEFAULT_MAX_CANDIDATES) -> None:
         self._store = store            # a FormPalaceStore (store / get by key)
         self._trees = trees            # SHARED with the structure cap — one parse per record
+        self._hashes = hashes if hashes is not None else {}   # SHARED hash cache — reuse, never recompute
         self._min_support = min_support
         self._max_forms = max_forms
         self._max_candidates = max_candidates   # bounds the per-pass MDL pool (bounded work)
@@ -161,7 +165,7 @@ class FormPlaneCap:
                     indices.append(i)
                     values.append(1.0)
             self._store.store(cid, {"indices": indices, "values": values}, dimension,
-                              {"verbatim_sha": cid, "struct_hash": structural_hash(tree)})
+                              {"verbatim_sha": cid, "struct_hash": self._hashes.get(cid) or structural_hash(tree)})
             landed += 1
         return {"landed": landed, "already": already, "skipped": skipped,
                 "forms": dimension, "induction": res["summary"]}
@@ -178,7 +182,9 @@ def compose_text_planes(root_dir: str, *, min_support: int = _DEFAULT_MIN_SUPPOR
     from structurepalace_io import StructurePalaceStore
 
     trees: dict = {}
-    structure = StructurePlaneCap(StructurePalaceStore(os.path.join(root_dir, "structure")), trees=trees)
-    form = FormPlaneCap(FormPalaceStore(os.path.join(root_dir, "form")), trees=trees,
+    hashes: dict = {}          # cid -> structural_hash, computed once at land, reused at form-finish
+    structure = StructurePlaneCap(StructurePalaceStore(os.path.join(root_dir, "structure")),
+                                  trees=trees, hashes=hashes)
+    form = FormPlaneCap(FormPalaceStore(os.path.join(root_dir, "form")), trees=trees, hashes=hashes,
                         min_support=min_support, max_forms=max_forms, max_candidates=max_candidates)
     return [structure, form]
