@@ -223,8 +223,7 @@ class WorldlineClock:
     bands: tuple = field(default_factory=tuple)
 
 
-def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
-                         lock_threshold: float = 0.3) -> dict:
+def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None) -> dict:
     """Enrich `lar_ffz` membership stamps across every braid, and testify each braid's rhythm.
 
     Per root: order the content turns, read their vectors, and ENRICH each turn's blocks — the beat
@@ -261,7 +260,9 @@ def assign_worldline_ffz(worldline_store, content_stores, *, as_of=None,
             # Keep only the turns that carry content (the events the signal can read), in braid order.
             content_keys = [k for k in ordered_keys if k in vecmap]
             signal = drift_signal([vecmap[k] for k in content_keys])
-        rec = recover_clock(signal, lock_threshold=lock_threshold)
+        # the lock-assert level defers to recover_clock's physics default (the ffz-clock/nalu-gate lock
+        # threshold) — this leg re-magics no threshold of its own; the rhythm is REPORT-ONLY testimony anyway.
+        rec = recover_clock(signal)
         phase = phases.get(root, 0.0)
 
         stamped = 0

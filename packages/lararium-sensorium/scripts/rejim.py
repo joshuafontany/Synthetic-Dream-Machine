@@ -30,8 +30,14 @@ CONTENT = "recurrence"       # the content-borne geology (black channel): refrai
 SHAPE = "class-transition"   # the word/clause texture (line-blind)
 FRAME = "sigil-event"        # the memetic-wikitext exchange-frame cadence (red channel; framed beds only)
 
+#: Surrogate draws for the anti-fabrication null — a MINIMAL gate (a regime must clear its own block-shuffle
+#: surrogates). Deliberately low for the live cadence; the sharpened gate (red-noise/IAAFT null + FDR, the
+#: swarm's convergence) raises this when it lands. Named here so every caller shares the one value.
+DEFAULT_N_SURROGATES = 3
 
-def detect_rejim(text: str, *, channel: str = CONTENT, n_surrogates: int = 3, seed: int = 4241) -> dict:
+
+def detect_rejim(text: str, *, channel: str = CONTENT, n_surrogates: int = DEFAULT_N_SURROGATES,
+                 seed: int = 4241) -> dict:
     """Pour a stream and DETECT its nameless rejim on one channel — the real characteristic scales the
     stream's own structure holds (the gate's REPRODUCED scales), each emitted as a nameless capability
     record, ordered cepat→lambat (fast→slow). Content-only by default, so the SAME detector runs on a

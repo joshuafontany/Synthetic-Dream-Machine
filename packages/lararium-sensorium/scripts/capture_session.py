@@ -150,7 +150,8 @@ class CaptureSessionServer:
         # holder drives a monotonic ordinal; nothing fires until the daemon ticks, so the drive stays dormant
         # (and every existing deploy unchanged) until something asks the rhythm plane to keep itself fresh.
         from rejim_scheduler import RejimScheduler
-        self._rejim = RejimScheduler(window=float(os.environ.get("LARES_REJIM_WINDOW") or 64))
+        _window_env = os.environ.get("LARES_REJIM_WINDOW")
+        self._rejim = RejimScheduler(window=float(_window_env)) if _window_env else RejimScheduler()
         self._rejim_clock = 0
         self._rejim_backlog = 0
 
@@ -227,7 +228,7 @@ class CaptureSessionServer:
         return rejim_io.repour_rejim(
             self._paths.content, rejim_dir,
             channel=str(req.get("channel") or rejim_io.CONTENT),
-            n_surrogates=int(req.get("nSurrogates") or 3),
+            n_surrogates=int(req.get("nSurrogates") or rejim_io.DEFAULT_N_SURROGATES),
             content_store=self._content_store(),   # reuse the holder's ONE content handle (the discipline)
         )
 

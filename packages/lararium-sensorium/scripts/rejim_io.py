@@ -19,7 +19,7 @@ from __future__ import annotations
 import json
 import os
 
-from rejim import CONTENT, couple_rejim, detect_rejim, strip_private
+from rejim import CONTENT, DEFAULT_N_SURROGATES, couple_rejim, detect_rejim, strip_private
 from content_io import ContentStore
 
 GEOLOGY_FILE = "geology.json"
@@ -46,7 +46,8 @@ def _content_stream(store: ContentStore) -> str:
 
 
 def repour_rejim(content_dir: str, rejim_dir: str, *, channel: str = CONTENT,
-                  n_surrogates: int = 3, content_store: "ContentStore | None" = None) -> dict:
+                  n_surrogates: int = DEFAULT_N_SURROGATES,
+                  content_store: "ContentStore | None" = None) -> dict:
     """Repour the derived rejim plane over the whole content: read content → concatenate the stream in
     authored order → DETECT the nameless regimes → couple cepat⊥lambat → land. Rebuildable — a re-repour
     fully overwrites from content, the one writable source; it holds no verbatim (a landed rejim resolves

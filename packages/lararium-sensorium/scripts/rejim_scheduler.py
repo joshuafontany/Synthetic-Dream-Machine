@@ -19,13 +19,19 @@ from __future__ import annotations
 
 from nalu_gate import CoalesceGate, WindowServo, adapt_window
 
+#: The coalesce window, in ORDINAL idle beats (the holder ticks the scheduler ~once/sec on the serve loop's
+#: idle select). 64 beats ≈ a minute of quiet ground before a settled batch fires one repour — long enough to
+#: coalesce a capture burst, short enough to keep the rhythm plane fresh. A free cadence knob (no nalu-gate
+#: default exists — CoalesceGate takes the window from its caller); the servo adapts it from the true repour cost.
+DEFAULT_COALESCE_WINDOW = 64.0
+
 
 class RejimScheduler:
     """Decide WHEN a heavy rejim repour is due, riding the pressure machinery we already have. `mark(now)`
     on each capture-land; `due(now, backlog)` returns a coalesce revision to repour at (else None), holding
     under backpressure; `observe_repour(cost)` folds the repour's true cost into the window servo."""
 
-    def __init__(self, *, window: float = 64.0, servo: "WindowServo | None" = None,
+    def __init__(self, *, window: float = DEFAULT_COALESCE_WINDOW, servo: "WindowServo | None" = None,
                  settled_backlog: int = 0) -> None:
         self._gate = CoalesceGate(window)
         self._servo = servo
