@@ -3,7 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-liliuokalani >>
 ```toml iam
 cacheable = false
-file-path = "packages/lararium-mempalace/scripts/fixtures/placebo-kumulipo/kumulipo-liliuokalani.mem"
+file-path = "packages/lararium-sensorium/scripts/fixtures/placebo-kumulipo/kumulipo-liliuokalani.mem"
 l-space   = "stable"
 mana      = 18
 manao     = 18

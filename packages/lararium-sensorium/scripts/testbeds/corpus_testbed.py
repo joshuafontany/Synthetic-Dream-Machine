@@ -7,18 +7,19 @@ three planes — content (text + warm-embed vector) · structure (parse-router t
 (induced-grammar membership) — then WITNESS the planes populated over the same cids, and the
 second pass landing zero (idempotent re-derivation). Prove-by-witness, not green units.
 
-THE S5 SENSORIUM LAW this driver enforces:
-  · the test-bed lives under ~/.lares (or any operator root) and reads as EPHEMERAL —
-    controlled ground-truth for the independence test, disposable after;
-  · it REFUSES a root under ~/.mempalace (the comparator stays clean — a contaminated
-    comparator loses its value).
+THE SENSORIUM LAW this driver enforces:
+  · the test-bed lives in the XDG sensorium roster (<data>/sensoriums/<name>, or any
+    operator root) and reads as EPHEMERAL — controlled ground-truth for the
+    independence test, disposable after;
+  · it REFUSES a root under the ~/.mempalace guest comparator (the comparator stays
+    clean — a contaminated comparator loses its value).
 
 Layout under --sensorium:  content/ (the Memory-pinned ContentStore) · structure/ (the
 structurepalace) · form/ (the form collection) · all three keyed by the record cid.
 
 Usage (the mempalace venv):
   PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 corpus_testbed.py run \
-      --corpus <dir> [--corpus <dir> ...] --sensorium ~/.lares/testbeds/human-text-<name> \
+      --corpus <dir> [--corpus <dir> ...] --sensorium <data>/sensoriums/human-text-<name> \
       [--wing wing_testbed] [--room corpus] [--min-support 2] [--max-forms 64]
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/corpus-testbed
@@ -161,7 +162,7 @@ def main() -> None:
     r.add_argument("--corpus", action="append", required=True,
                    help="a corpus root (repeatable; dirs walk recursively for markdown/text)")
     r.add_argument("--sensorium", required=True,
-                   help="the EPHEMERAL test-bed sensorium (e.g. ~/.lares/testbeds/human-text-x); never ~/.mempalace")
+                   help="the EPHEMERAL test-bed sensorium (e.g. <data>/sensoriums/human-text-x); never ~/.mempalace")
     r.add_argument("--wing", default="wing_testbed")
     r.add_argument("--room", default="corpus")
     r.add_argument("--min-support", type=int, default=2, dest="min_support")

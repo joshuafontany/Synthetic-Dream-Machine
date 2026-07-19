@@ -55,7 +55,7 @@ Protocol — a BATCH CLI (mirrors structure_router / bands_sidecar, not a serve 
 Run under the mempalace venv (PYTHONPATH=<repo>/mempalace so `induce`'s chroma readback
 `import mempalace` resolves; the pure miners need neither):
   PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 form_induction.py \
-      induce --structure ~/.lares/.corpus/c-x/structure
+      induce --structure <data>/sensoriums/c-x/structure
 """
 from __future__ import annotations
 

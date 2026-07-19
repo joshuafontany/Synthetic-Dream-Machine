@@ -43,7 +43,7 @@ Protocol — NDJSON over stdin/stdout, one JSON object per line (only JSON to st
     <- {"id":5,"ok":true,"result":{"population":[[...],[...],…]}}
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
-  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 persistence_io.py serve --palace ~/.lares/.persistence
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 persistence_io.py serve --palace <data>/sensoriums/<target>/persistence
 """
 from __future__ import annotations
 
