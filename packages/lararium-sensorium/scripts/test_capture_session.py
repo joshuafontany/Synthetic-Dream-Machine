@@ -107,7 +107,7 @@ def test_read_rejim_makes_the_geology_askable(tmp_path):
 def test_rejim_tick_holds_under_backpressure_then_fires_on_settled_ground(tmp_path, monkeypatch):
     # the live-drive: capture MARKS the scheduler; a tick under backpressure (a non-empty backlog) HOLDS the
     # heavy repour off the capture path, and only a settled + crested tick fires ONE repour of quiet ground.
-    monkeypatch.setenv("LARES_REJIM_WINDOW", "2")                          # a tiny window crests in-test
+    monkeypatch.setenv("LARES_DERIVED_WINDOW", "2")                        # a tiny window crests in-test
     root = str(tmp_path / ".mem")
     server = CaptureSessionServer(root, embed_factory=_stub_embed_factory())
     server.capture({"surface": "claude", "pointer": CLAUDE, "wing": "wing_proj", "room": "conversations"})
@@ -116,6 +116,32 @@ def test_rejim_tick_holds_under_backpressure_then_fires_on_settled_ground(tmp_pa
     assert fired["fired"] is True and fired["revision"] >= 1
     assert os.path.exists(os.path.join(root, "rejim", "geology.json"))    # the repour landed on the tick
     assert server.rejim_tick({"backlog": 0})["fired"] is False            # coalesced — no new ground, no repour
+
+
+def test_enrich_worldline_assigns_membership_slots(tmp_path):
+    # the worldline enrichment: ASSIGN prenamed membership slots per node (the beat cell = turn-identity) down
+    # the DAG — the deterministic counterpart to rejim's whole-stream detection. The memory sensorium declares
+    # the worldline aperture, so the enricher is active; it stamps every braid's blocks (idempotent).
+    server = _captured_server(tmp_path)
+    out = server.enrich_worldline({})
+    assert out["worldline"] is True and out["stamped"] >= 1               # slots assigned across the braids
+    got = server._content_store()._col.get(include=["metadatas"])         # noqa: SLF001 — the test reads raw rows
+    ffz = [(m or {}).get("lar_ffz") for m in (got.get("metadatas") or [])]
+    assert any(a and "/" in a for a in ffz)                              # a membership address stands (slot filled)
+
+
+def test_derived_idle_beat_drives_both_rejim_and_worldline(tmp_path, monkeypatch):
+    # THE COLLAPSE witness: ONE idle beat drives EVERY derived enrichment off one cadence machinery. With a
+    # tiny window, a capture then a crest fires BOTH — rejim lands geology.json (DETECTION) AND worldline
+    # assigns membership slots (ASSIGNMENT) — distinct work, one drive.
+    monkeypatch.setenv("LARES_DERIVED_WINDOW", "2")
+    server = _captured_server(tmp_path)
+    assert {e.name for e in server._derived} == {"rejim", "worldline-ffz"}   # both enrichers, one registry
+    for _ in range(4):                                                   # tick past the window → both crest once
+        server._derived_idle_beat()
+    assert os.path.exists(os.path.join(str(tmp_path / ".mem"), "rejim", "geology.json"))   # rejim fired
+    got = server._content_store()._col.get(include=["metadatas"])        # noqa: SLF001
+    assert any((m or {}).get("lar_ffz") for m in (got.get("metadatas") or []))              # worldline fired
 
 
 def _captured_server(tmp_path):

@@ -35,6 +35,7 @@ import json
 import os
 import sys
 import time
+from dataclasses import dataclass
 from typing import Callable, Iterator
 
 from capture_sources import Record, SourceCap, resolve_source
@@ -134,6 +135,18 @@ def capture_and_observe(sensorium_root: str, surface: str, pointer: str, *, wing
             "embedder_model": model, "embedder_dim": dim, **summary}
 
 
+@dataclass
+class _DerivedEnricher:
+    """One content-DERIVED enrichment the holder keeps fresh on new shards — a name, its coalesce cadence,
+    and the derive callable that re-derives it from the content ground (returns a summary dict). rejim
+    (DISCOVER the nameless rhythm) and worldline-ffz (ASSIGN prenamed slots per node) are both these: the
+    work differs (detection vs assignment), the drive is one."""
+
+    name: str
+    cadence: "object"          # a derived_cadence.DerivedCadence (mark/due/observe_repour)
+    derive: "Callable[[], dict]"
+
+
 class CaptureSessionServer:
     """One Python-owned source-stream writer for one sovereign content palace.
 
@@ -145,15 +158,21 @@ class CaptureSessionServer:
     def __init__(self, sensorium_root: str, *, embed_factory: "Callable | None" = None) -> None:
         self._stream, self._model, self._dim, self._paths = compose_memory_stream_sensorium(
             sensorium_root, embed_factory=embed_factory or self._make_embedder)
-        # The backpressure-triggered rejim cadence rides here: each capture MARKS the scheduler (the ground
-        # moved), and an idle `rejim_tick` fires ONE repour per settled + crested batch. Clock-pure — the
-        # holder drives a monotonic ordinal; nothing fires until the daemon ticks, so the drive stays dormant
-        # (and every existing deploy unchanged) until something asks the rhythm plane to keep itself fresh.
-        from rejim_scheduler import RejimScheduler
-        _window_env = os.environ.get("LARES_REJIM_WINDOW")
-        self._rejim = RejimScheduler(window=float(_window_env)) if _window_env else RejimScheduler()
-        self._rejim_clock = 0
-        self._rejim_backlog = 0
+        # The DERIVED-ENRICHMENT registry — content-derived metadata the holder keeps fresh on new shards,
+        # each a re-derivation on the coalesced idle beat (marks on capture, fires on settled quiet ground).
+        # rejim (DETECT the nameless rhythm → geology) and worldline-ffz (ASSIGN prenamed membership slots per
+        # node from the DAG → content metadata) ride ONE cadence machinery; the WORK differs, the DRIVE is one.
+        # Clock-pure + dormant until ticked, so every existing deploy stays unchanged until the holder serves.
+        from derived_cadence import DEFAULT_COALESCE_WINDOW, DerivedCadence
+        self._clock = 0
+        self._backlog = 0
+        _env = os.environ.get("LARES_DERIVED_WINDOW")
+        window = float(_env) if _env else DEFAULT_COALESCE_WINDOW
+        self._rejim = DerivedCadence(window=window)   # kept by name for the rejim_tick manual op
+        self._derived = [_DerivedEnricher("rejim", self._rejim, lambda: self.repour_rejim({}))]
+        if self._worldline_declared():
+            self._derived.append(_DerivedEnricher("worldline-ffz", DerivedCadence(window=window),
+                                                  self._enrich_worldline))
 
     @staticmethod
     def _make_embedder():
@@ -161,10 +180,57 @@ class CaptureSessionServer:
         return make_embed_cap()
 
     def _tick(self) -> int:
-        """Bump the rejim scheduler's monotonic ordinal clock — the daemon's tick cadence sets its real-time
-        meaning; the scheduler itself reads only the ordinal (clock-pure), so a replay drives it the same."""
-        self._rejim_clock += 1
-        return self._rejim_clock
+        """Bump the holder's monotonic ordinal clock — the tick cadence sets its real-time meaning; the
+        derived cadences read only the ordinal (clock-pure), so a replay drives them the same."""
+        self._clock += 1
+        return self._clock
+
+    def _worldline_declared(self) -> bool:
+        """Does this sensorium BEAR the worldline cap? The membership-slot assignment runs only where the
+        manifest declares `apertures.beat: worldline-dag` (declaration-carries-authority — the same gate the
+        worldline_ffz CLI holds). A non-worldline stream carries no beat leg, so no worldline enricher."""
+        from sensorium import read_stream_manifest
+        try:
+            manifest = read_stream_manifest(self._paths.root, absent_ok=True)
+        except Exception:  # noqa: BLE001 — an unreadable manifest simply carries no declared beat leg
+            return False
+        return ((manifest or {}).get("apertures") or {}).get("beat") == "worldline-dag"
+
+    def _enrich_worldline(self) -> dict:
+        """ASSIGN the membership-slot stamps across every braid (down the DAG spawn-tree) — the deterministic,
+        per-node counterpart to rejim's whole-stream detection. Idempotent (a re-run mints the same slots);
+        REUSES the holder's ONE content handle; opens a fresh WorldlineStore, closes it in `finally`."""
+        from worldline_ffz import assign_worldline_ffz
+        from worldline_io import WorldlineStore
+        store = WorldlineStore(self._paths.worldline)
+        try:
+            report = assign_worldline_ffz(store, [self._content_store()])
+            report.pop("__vector_fault__", None)
+            return {"braids": len(report), "stamped": sum(c.stamped for c in report.values())}
+        finally:
+            store.close()
+
+    def _drive_enricher(self, enr: "_DerivedEnricher", now: int, backlog: int) -> "dict | None":
+        """Drive one derived enrichment's cadence a tick: fire its derive when due AND settled, fold the true
+        cost into the servo, and return {revision, name, summary} — or None when it holds (not yet due)."""
+        rev = enr.cadence.due(now, backlog)
+        if rev is None:
+            return None
+        t0 = time.perf_counter()
+        summary = enr.derive()
+        enr.cadence.observe_repour((time.perf_counter() - t0) * 1000.0)   # fold true cost into the window servo
+        return {"revision": rev, "name": enr.name, "summary": summary}
+
+    def _derived_idle_beat(self) -> None:
+        """One idle beat: tick EVERY derived enrichment; each due + settled one re-derives on quiet ground
+        (a burst of captures coalesces to one re-derivation of the freshest settled content). The serve loop's
+        idle guard swallows any error — background derivation, never the holder's lifeline. The AUTO-drive."""
+        now, backlog = self._tick(), self._backlog
+        for enr in self._derived:
+            res = self._drive_enricher(enr, now, backlog)
+            if res is not None:
+                sys.stderr.write(f"capture_session: {enr.name} re-derived on idle (rev {res['revision']})\n")
+                sys.stderr.flush()
 
     def _content_store(self):
         """The ONE persistent content handle this holder already owns (opened once at compose). Every
@@ -187,9 +253,11 @@ class CaptureSessionServer:
             raise ValueError("capture requires a non-empty wing")
 
         summary = self._stream.capture(pointer, surface=surface, wing=wing, room=room, session_id=session_id)
-        # the ground moved: arm the coalesce window and record the honest backlog the next tick reads.
-        self._rejim.mark(self._tick())
-        self._rejim_backlog = len(summary.get("backlog") or [])
+        # the ground moved: arm EVERY derived cadence and record the honest backlog the next tick reads.
+        now = self._tick()
+        for enr in self._derived:
+            enr.cadence.mark(now)
+        self._backlog = len(summary.get("backlog") or [])
         return {
             "surface": surface, "pointer": pointer, "wing": wing, "room": room,
             **({"sessionId": session_id} if session_id else {}),
@@ -241,23 +309,24 @@ class CaptureSessionServer:
         geology = rejim_io.read_rejim(rejim_dir)
         return {"repoured": geology is not None, "geology": geology}
 
+    def enrich_worldline(self, req: dict) -> dict:
+        """Manually re-assign the worldline membership slots NOW (the idle beat keeps them fresh on its own).
+        An honest no-op summary when this sensorium bears no worldline cap (no `apertures.beat` declared)."""
+        if not any(e.name == "worldline-ffz" for e in self._derived):
+            return {"worldline": False, "note": "this sensorium declares no `apertures.beat: worldline-dag`"}
+        return {"worldline": True, **self._enrich_worldline()}
+
     def rejim_tick(self, req: dict) -> dict:
-        """DRIVE the backpressure-triggered rejim cadence one ordinal tick. Fire a re-regime ONLY when the
-        coalesce window has crested over marked ground AND capture has settled (the backlog drained) — so the
-        heavy whole-stream repour runs on quiet ground, coalescing a burst to ONE repour of the freshest
-        content, never on the capture path. The daemon calls this on idle; `backlog` rides the request (its
-        live drain reading) or falls back to the last capture's backlog. Holds (fires nothing) until due."""
+        """DRIVE the rejim cadence one ordinal tick (the manual/external trigger; the idle beat AUTO-drives
+        every enrichment). Fire ONLY when the coalesce window crested over marked ground AND capture settled
+        (the backlog drained) — so the heavy whole-stream repour runs on quiet ground. `backlog` rides the
+        request (its live drain reading) or falls back to the last capture's backlog. Holds until due."""
         raw = req.get("backlog")
-        backlog = int(raw) if raw is not None else self._rejim_backlog
-        rev = self._rejim.due(self._tick(), backlog=backlog)
-        if rev is None:
+        backlog = int(raw) if raw is not None else self._backlog
+        res = self._drive_enricher(self._derived[0], self._tick(), backlog)   # [0] = rejim, composed first
+        if res is None:
             return {"fired": False, "backlog": backlog}
-        t0 = time.perf_counter()
-        landed = self.repour_rejim(req)
-        self._rejim.observe_repour((time.perf_counter() - t0) * 1000.0)   # fold true cost into the window servo
-        self._rejim_backlog = 0
-        return {"fired": True, "revision": rev, "stream_chars": landed.get("stream_chars"),
-                "rejim": landed.get("rejim", []), "couples": landed.get("couples", [])}
+        return {"fired": True, "revision": res["revision"], **res["summary"]}
 
     # ── the lifecycle + cross-plane serve-ops (the /mcp DaemonCoordinator routes to these) ─────────
     # Each rides the SAME serialized pipe as capture (run_sidecar dispatch is serial), so a MUTATION never
@@ -319,21 +388,10 @@ class CaptureSessionServer:
         return plane_record_witness(self._content_store(), self._paths.root, str(req.get("cid") or ""))
 
 
-def _rejim_idle_beat(server: "CaptureSessionServer") -> None:
-    """One idle beat of the backpressure-triggered rejim cadence: tick the scheduler; a DUE + settled beat
-    fires ONE repour on quiet ground (a burst of captures coalesces to one repour of the freshest settled
-    content). The serve loop's idle guard swallows any error — the cadence rides background derivation, never
-    the holder's lifeline. This is the AUTO-drive: the holder keeps its own rhythm plane fresh, no TS poll."""
-    out = server.rejim_tick({})
-    if out.get("fired"):
-        sys.stderr.write(f"capture_session: rejim re-poured on idle (rev {out.get('revision')}, "
-                         f"{out.get('stream_chars')} chars)\n")
-        sys.stderr.flush()
-
-
 def _serve(sensorium_root: str) -> None:
-    """Serve one serialized Python capture pipe over NDJSON stdio. The holder AUTO-drives the rejim cadence
-    on the serve loop's idle beat — each capture marks the scheduler, and quiet ground fires the repour."""
+    """Serve one serialized Python capture pipe over NDJSON stdio. The holder AUTO-drives EVERY derived
+    enrichment (rejim rhythm + worldline membership slots) on the serve loop's idle beat — each capture marks
+    the cadences, and quiet, settled ground fires the re-derivations."""
     server = CaptureSessionServer(sensorium_root)
     run_sidecar(
         palace=server._paths.content,
@@ -344,7 +402,8 @@ def _serve(sensorium_root: str) -> None:
             "refresh": server.refresh,   # re-pave the mempalace projection, serialized with capture
             "repour_rejim": server.repour_rejim,   # re-derive the rejim geology plane, serialized with capture
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
-            "rejim_tick": server.rejim_tick,       # drive the backpressure-triggered re-regime cadence
+            "rejim_tick": server.rejim_tick,       # manually drive the rejim cadence (the idle beat auto-drives)
+            "enrich_worldline": server.enrich_worldline,   # manually assign worldline slots (idle beat auto-drives)
             "status": server.status,               # the taxonomy over the holder's content store
             "worldline": server.worldline,         # the fork-DAG rhizome read (fresh worldline handle)
             "kapae": server.kapae,                 # mute a branch across the content store (serialized mutation)
@@ -353,7 +412,7 @@ def _serve(sensorium_root: str) -> None:
         }),
         idle_ttl=idle_ttl_seconds("LARES_CAPTURE_IDLE_TTL", 600.0),
         singleton_msg="capture_session: another holder already serves this palace; exiting (singleton)\n",
-        on_idle=lambda: _rejim_idle_beat(server),   # AUTO-drive the rejim cadence on quiet ground
+        on_idle=server._derived_idle_beat,   # AUTO-drive every derived enrichment on quiet ground
     )
 
 
