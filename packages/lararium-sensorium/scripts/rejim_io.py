@@ -7,8 +7,10 @@ rebuildable view at `<root>/rejim`, wiped-and-repoured, exactly as the mempalace
 Why REPOUR, not per-block: the geology is a whole-stream property (a dyadic scale needs the accumulated
 stream to resolve; recurrence reads across the corpus). Pouring block-by-block would re-impose the block
 grain the continuous pour exists to drop. So rejim re-derives from the content ground on a cadence, the
-derived-view discipline — the caller wraps it in the exclusive root-mutation lease + a coalesce-gate so it
-never blocks capture/recall and self-paces under pressure (rederive.py's skeleton; wired at the CLI/refresh).
+derived-view discipline — the caller drives it on the SERIALIZED capture pipe + a coalesce-gate so it never
+blocks capture/recall and self-paces under pressure. The one-holder serialization IS the mutual exclusion
+here (a single-writer palace via the singleton flock), not an explicit root-mutation lease; wired at the
+serve-op + the idle beat (capture_session).
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/rejim-io
 """

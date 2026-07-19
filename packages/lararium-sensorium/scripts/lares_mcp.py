@@ -589,11 +589,10 @@ class DaemonCoordinator:
 
     def worldline(self, selector: "str | None" = None, *, as_of=None,
                   sensorium_root: "str | None" = None, **_) -> dict:
-        # Route the fork-DAG read through the @daemon `worldline` verb. `selector` narrows on the CLI skin
-        # (the py `dag` renders the whole edge-DAG); `as_of` rides the bitemporal slice.
+        # Route the fork-DAG read through the @daemon `worldline` verb. `selector` stays a CLI-skin concern
+        # (it narrows the RETURNED whole edge-DAG); the py `dag` renders whole and never reads it, so it does
+        # NOT cross the wire — the arg is accepted for CLI-parity, applied caller-side. `as_of` rides the slice.
         args: dict = {}
-        if selector:
-            args["selector"] = selector
         if as_of is not None:
             args["asOf"] = as_of
         if sensorium_root:

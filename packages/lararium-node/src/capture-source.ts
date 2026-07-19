@@ -77,7 +77,7 @@ export interface SourceCapture {
   /** The taxonomy over the holder's content store — what the sensorium holds. Rides the serialized pipe. */
   status(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
   /** The fork-DAG rhizome (bitemporal AS-OF `asOf`, else the whole history). Read-only over the pipe. */
-  worldlineDag(request?: { selector?: string; asOf?: number | null }): Promise<Record<string, unknown>>;
+  worldlineDag(request?: { asOf?: number | null }): Promise<Record<string, unknown>>;
   /** Mute a worldline branch + cascade the mute across the holder's content store (move-not-delete). A
    *  MUTATION, serialized with capture so it never races the live writer. `cascadeUnKapae` restores. */
   cascadeKapae(request: { branch: string; tick: number }): Promise<Record<string, unknown>>;

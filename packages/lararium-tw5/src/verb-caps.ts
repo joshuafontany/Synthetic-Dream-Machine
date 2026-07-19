@@ -135,8 +135,9 @@ export interface DaemonVerbProvider {
    *  `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
   status(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** The fork-DAG rhizome read (bitemporal AS-OF `asOf`, else whole history) — THROUGH the capture holder,
-   *  which opens a fresh worldline handle per-op. `selector` narrows on the CLI skin. */
-  worldline(input: { selector?: string; asOf?: number | null; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+   *  which opens a fresh worldline handle per-op. The py `dag` renders the WHOLE edge-DAG; a `selector`
+   *  narrows caller-side (the CLI skin) and never crosses the wire — only `asOf` slices the read. */
+  worldline(input: { asOf?: number | null; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** Mute a worldline branch + cascade the mute across the sensorium's content store — THROUGH the capture
    *  holder, serialized with capture so the mutation never races the live writer. `unKapae` restores. */
   kapae(input: { branch: string; tick: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
@@ -422,12 +423,11 @@ export function captureVerbCap(): CapModule {
         });
         registry.register("worldline", async (args) => {
           // The fork-DAG rhizome read (bitemporal AS-OF `asOf`, else whole history), through the capture
-          // holder (fresh worldline handle per-op). `selector` narrows on the CLI skin; the py `dag` renders whole.
-          const selector = typeof args["selector"] === "string" ? (args["selector"] as string) : undefined;
+          // holder (fresh worldline handle per-op). The py `dag` renders the WHOLE edge-DAG; a `selector`
+          // narrows caller-side (the CLI skin), so it is not forwarded here — only `asOf` slices the read.
           const asOf = typeof args["asOf"] === "number" ? (args["asOf"] as number) : undefined;
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.worldline({
-            ...(selector ? { selector } : {}),
             ...(asOf !== undefined ? { asOf } : {}),
             ...(sensoriumRoot ? { sensoriumRoot } : {}),
           });
