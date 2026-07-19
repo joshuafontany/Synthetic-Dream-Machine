@@ -317,15 +317,10 @@ def spectral(sensorium: str, *, sample_n: int = 2000) -> dict:
     return out
 
 
-def detect(sensorium: str, *, halves=DEFAULT_HALVES) -> dict:
-    """DETECT-ONLY over a poured sensorium: reconstruct its content stream → words → the full arm surface,
-    every cut reported as a word position. The arms adapt four segmenters to the one stream — Foote novelty
-    (vocabulary turnover), sequitur depth+seam (grammar hierarchy), sequitur-MDL (compression stall), and
-    branching entropy (successor unpredictability). Blind to any ground-truth (the wall). Retains the words
-    in-memory for context snippets (not persisted)."""
-    content = resolve_content(sensorium)
-    stream = _content_stream(ContentStore(content))
-    toks = stream_words(stream)
+def run_arms(toks: "list[str]", *, halves=DEFAULT_HALVES) -> "tuple[dict, dict | None, int]":
+    """The full adapted arm surface over a word stream → (boundaries, grammar, mdl_inferred_cuts). The ONE
+    place the arms compose — detect() (the poured-stream read) and sense_run (a bed's word stream) both ride
+    it, so the arm sequence lives once. Every cut reports a word position; blind to any ground-truth."""
     boundaries: dict = {}
     grammar = None
     mdl_inferred = 0
@@ -337,6 +332,19 @@ def detect(sensorium: str, *, halves=DEFAULT_HALVES) -> dict:
         mdl_cuts, mdl_inferred = pelt_change_points(mdl_growth(toks))
         boundaries["sequitur-mdl"] = mdl_cuts
         boundaries.update(branching_entropy(toks))
+    return boundaries, grammar, mdl_inferred
+
+
+def detect(sensorium: str, *, halves=DEFAULT_HALVES) -> dict:
+    """DETECT-ONLY over a poured sensorium: reconstruct its content stream → words → the full arm surface,
+    every cut reported as a word position. The arms adapt four segmenters to the one stream — Foote novelty
+    (vocabulary turnover), sequitur depth+seam (grammar hierarchy), sequitur-MDL (compression stall), and
+    branching entropy (successor unpredictability). Blind to any ground-truth (the wall). Retains the words
+    in-memory for context snippets (not persisted)."""
+    content = resolve_content(sensorium)
+    stream = _content_stream(ContentStore(content))
+    toks = stream_words(stream)
+    boundaries, grammar, mdl_inferred = run_arms(toks, halves=halves)
     return {"sensorium": sensorium, "n_chars": len(stream), "n_words": len(toks),
             "boundaries": boundaries, "grammar": grammar, "mdl_inferred_cuts": mdl_inferred, "_words": toks}
 

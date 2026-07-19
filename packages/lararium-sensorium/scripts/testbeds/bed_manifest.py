@@ -154,7 +154,12 @@ def resolve_flow(m: dict) -> tuple[list[str], dict]:
                     tally["_ext_filtered"] += 1
                     continue
                 try:
-                    over = os.path.getsize(fp) > 512_000
+                    # the per-file size cap is MANIFEST-declared (flow.max_file_bytes; default 512 KB, 0 =
+                    # uncapped) — a bed owns its own size policy, never a hardcoded global. A large file pours
+                    # as many window-fit chunks now (the corpus chunker), so the cap reads as a bed's INCLUSION
+                    # policy — whether to admit the big ones at all — not a truncation guard.
+                    cap = int((m.get("flow") or {}).get("max_file_bytes", 512_000))
+                    over = cap > 0 and os.path.getsize(fp) > cap
                     empty = not over and not open(fp, encoding="utf-8", errors="replace").read().strip()
                 except OSError:
                     over, empty = True, False

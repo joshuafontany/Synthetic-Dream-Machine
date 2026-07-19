@@ -59,18 +59,11 @@ def word_ground_truth(mod, bed: str) -> dict:
 
 
 def arm_cuts(lines: "list[str]") -> "tuple[list, dict]":
-    """Every sense_analyze arm run on the bed's word stream → {arm: [word positions]}. The whole adapted
-    surface at once — Foote scales, sequitur depth+seam, sequitur-mdl, branching entropy."""
+    """The bed's word stream → {arm: [word positions]}, the whole adapted surface at once. Rides
+    sense_analyze.run_arms — the one place the arm sequence composes, shared with the poured-stream read."""
     toks = sa.stream_words("\n".join(lines))
-    arms: dict = {}
-    arms.update(sa.foote_sweep(toks, sa.DEFAULT_HALVES))
-    seq = sa.sequitur_arms(toks)
-    seq.pop("_grammar")
-    arms.update(seq)
-    mdl, _ = sa.pelt_change_points(sa.mdl_growth(toks))
-    arms["sequitur-mdl"] = mdl
-    arms.update(sa.branching_entropy(toks))
-    return toks, arms
+    boundaries, _grammar, _mdl_inferred = sa.run_arms(toks)
+    return toks, boundaries
 
 
 def score_word(pred: "list[int]", truth: dict, tol: int) -> dict:
