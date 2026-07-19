@@ -43,6 +43,7 @@
 
 import {
   CompositeStore,
+  ENGINE_CORE_ID,
   LARES_BAG,
   LARARIUM_BAG,
   ORACLE_BAG,
@@ -338,7 +339,13 @@ export function runSovereignKernel(
     // pulled by CID (host.resolveByCid) — immutable bytes fetched by content-address +
     // verified by rehash, off the sync port. The CRDT plane carries no bytes. A missing
     // resolver, a missing coreHash, or a CAS miss faults the boot.
-    const coreVersion = "";
+    // The booted engine version rides the SAME genesis blob entry the post-boot
+    // engine-watch later compares against (blobs[ENGINE_CORE_ID].version on the
+    // oracle doc). Sourcing it here — not a hardcoded "" — arms the anti-rollback
+    // check: a later genesis pointing at a LOWER version reads as BACKWARD instead
+    // of being silently presented as an upgrade (an empty booted-version made every
+    // incoming version sort as newer).
+    const coreVersion = String(laraiumHandle.doc()?.blobs?.[ENGINE_CORE_ID]?.version ?? "");
     const pluginTiddlers: Record<string, unknown>[] = [];
 
     if (!host.resolveByCid || !msg.coreHash) {

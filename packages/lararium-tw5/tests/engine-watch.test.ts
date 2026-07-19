@@ -85,6 +85,24 @@ describe("engine-watch", () => {
     stop?.();
   });
 
+  test("an EMPTY booted-version DEFEATS rollback naming — why the kernel must source a real version", async () => {
+    // Pins HOLE 2: sovereign-kernel once hardcoded `coreVersion = ""`, so ctx.engine.version
+    // arrived blank. compareVersions(incoming, "") sorts EVERY incoming as newer, so a LOWER
+    // incoming version silently reads as an upgrade instead of a rollback. The kernel now sources
+    // the booted version from the oracle doc's blobs[ENGINE_CORE_ID].version; this guards the
+    // consumer's dependency on that being populated.
+    const { handle, setCore } = fakeLarariumHandle({ sha256: "aaa111", version: "" });
+    const { composite, ctx } = makeCtx(handle);
+    (ctx as unknown as { engine: { sha256: string; version: string } }).engine = { sha256: "aaa111", version: "" };
+    const stop = startEngineWatch(ctx);
+    setCore({ sha256: "ccc333", version: "5.2.0" });
+    await settle();
+    const alert = await composite.get(ENGINE_WAITING_ALERT_TITLE);
+    // With a blank booted-version the rollback is NOT named — the hole this fix closes upstream.
+    expect(String(alert?.tiddler["text"])).not.toContain("BACKWARD");
+    stop?.();
+  });
+
   test("repeated change events for the same epoch coalesce to one put", async () => {
     const { handle, setCore } = fakeLarariumHandle(BOOTED);
     const { composite, ctx } = makeCtx(handle);
