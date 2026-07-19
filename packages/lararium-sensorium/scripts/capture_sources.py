@@ -32,6 +32,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 from typing import Callable, Iterable, Iterator
 
 from copilot_sqlite_normalize import read_sessions as _copilot_read_sessions
@@ -535,6 +536,41 @@ _CORPUS_MAX_BYTES = 512_000
 # Directories that carry no curated-corpus signal (mirrors structure_router._SKIP_DIRS).
 _CORPUS_SKIP_DIRS = {".git", "node_modules", "dist", "__pycache__", ".venv"}
 
+# A corpus chunk's size + overlap in CHARS — a conservative window that stays UNDER the embedder's TOKEN
+# window (MiniLM ~256 tokens ≈ ~1k chars at ~4 chars/token; 800 leaves headroom for token-dense text), so
+# each chunk's dense vector faithfully represents it. This is the window-fit invariant a chat block meets by
+# CONSTRUCTION (a message is small), made EXPLICIT for arbitrary corpus text — one grain across both pipelines.
+# (Refinement: size against the embedder's real tokenizer, not this char proxy.)
+_CORPUS_CHUNK_CHARS = 800
+_CORPUS_CHUNK_OVERLAP = 128
+
+
+def _corpus_chunks(text: str) -> "list[str]":
+    """Split a corpus file into embedder-window-sized chunks, STRUCTURE-FIRST: pack whole paragraphs
+    (blank-line-delimited) until the window fills; a paragraph that alone exceeds the window falls to the
+    fixed overlapping char-window primitive (`span_layer.chunk_spans`, the SAME chunker the lexical surface
+    already trusts). Every chunk stays within the window, so its dense vector represents it faithfully —
+    carrying the span-layer discipline onto the dense (embedding) surface, where truncation actually bites."""
+    from span_layer import chunk_spans
+    paras = [p.strip() for p in re.split(r"\n[ \t]*\n", text) if p.strip()]
+    chunks: "list[str]" = []
+    buf = ""
+    for p in paras:
+        if len(p) > _CORPUS_CHUNK_CHARS:                       # a lone paragraph over the window → window-split it
+            if buf:
+                chunks.append(buf)
+                buf = ""
+            chunks.extend(p[s.start:s.end] for s in
+                          chunk_spans("", len(p), _CORPUS_CHUNK_CHARS, _CORPUS_CHUNK_OVERLAP))
+        elif buf and len(buf) + len(p) + 2 > _CORPUS_CHUNK_CHARS:   # packing p would overflow → flush, start fresh
+            chunks.append(buf)
+            buf = p
+        else:                                                  # pack the small paragraph into the running window
+            buf = (buf + "\n\n" + p) if buf else p
+    if buf:
+        chunks.append(buf)
+    return chunks or ([text.strip()] if text.strip() else [])
+
 
 def _mtime_sighting(path: str) -> str:
     """The file's host mtime as a SIGHTING — an unreliable-witness provenance mark under
@@ -586,19 +622,17 @@ def _iter_corpus_files(pointer: str) -> Iterator[tuple]:
 
 
 def corpus_source(*, wing: str, room: str = "corpus") -> SourceCap:
-    """The curated human-text corpus source-cap. One file → one record: cid rides the
-    single gate (`derive_cid('corpus:<key-path>', 0)`), `lar_chain` binds the text (an
-    edited file keeps its cid, breaks its chain → the rewind guard re-lands, never
-    silent-skips), `lar_kind` carries the structure-router kind so the structure plane
-    parses without re-sniffing, and the host mtime rides the sighting register only."""
+    """The curated human-text corpus source-cap. One file → one-or-MANY chunk records: each chunk rides the
+    single cid gate (`derive_cid('corpus:<key-path>', n)`), sized to the embedder window so its dense vector
+    represents it faithfully (the window-fit block grain — the same a chat block meets by construction).
+    `lar_chain` binds each CHUNK's text (an edited chunk keeps its cid, breaks its chain → the rewind guard
+    re-lands, never silent-skips), `lar_kind` carries the structure-router kind, host mtime the sighting."""
     from structure_router import detect_kind  # kind-detection borrowed (RUN-ARC #2); module import stays light
 
     def source(pointer: str) -> Iterator[Record]:
         def all_drawers() -> Iterator[tuple]:
             for key_path, fp in _iter_corpus_files(pointer):
                 try:
-                    if os.path.getsize(fp) > _CORPUS_MAX_BYTES:
-                        continue
                     with open(fp, encoding="utf-8", errors="replace") as fh:
                         text = fh.read()
                 except OSError:
@@ -606,19 +640,24 @@ def corpus_source(*, wing: str, room: str = "corpus") -> SourceCap:
                 if not text.strip():
                     continue
                 source_file = f"corpus:{key_path}"
-                chain = _sha16(text)  # a one-link chain: the file IS the whole source
-                meta = {
-                    "wing": wing,
-                    "room": room,
-                    "source_file": source_file,
-                    "chunk_index": 0,
-                    "lar_turn_key": _turn_key(source_file, {"text": text}, 0),
-                    "lar_chain": chain,
-                    "lar_surface": "corpus",
-                    "lar_kind": detect_kind(fp, text) or "",
-                    "lar_mtime_sighting": _mtime_sighting(fp),
-                }
-                yield derive_cid(source_file, 0), text, meta
+                kind = detect_kind(fp, text) or ""
+                sighting = _mtime_sighting(fp)
+                # CHUNK the file into embedder-window-sized records — a large file lands as MANY chunks (each
+                # faithfully embedded), never one truncated record; the cid gate's chunk ordinal was reserved
+                # for exactly this. No per-file byte cap now: the window bounds each record, so any size pours.
+                for n, chunk in enumerate(_corpus_chunks(text)):
+                    meta = {
+                        "wing": wing,
+                        "room": room,
+                        "source_file": source_file,
+                        "chunk_index": n,
+                        "lar_turn_key": _turn_key(source_file, {"text": chunk}, n),
+                        "lar_chain": _sha16(chunk),   # a per-CHUNK chain — an edited chunk re-lands, never silent-skips
+                        "lar_surface": "corpus",
+                        "lar_kind": kind,
+                        "lar_mtime_sighting": sighting,
+                    }
+                    yield derive_cid(source_file, n), chunk, meta
 
         landed = 0
         for rec in _seq_records(all_drawers()):
@@ -629,9 +668,8 @@ def corpus_source(*, wing: str, room: str = "corpus") -> SourceCap:
             # builds "successfully" and reads as a finding downstream.
             raise SystemExit(
                 f"corpus_source: the corpus at {pointer!r} yielded ZERO records — "
-                f"wrong path, or every file filtered (exts {_CORPUS_EXTS}, "
-                f"ceiling {_CORPUS_MAX_BYTES} bytes). Name a corpus that holds "
-                "records, or stop."
+                f"wrong path, or every file filtered (exts {_CORPUS_EXTS}). "
+                "Name a corpus that holds records, or stop."
             )
     return source
 

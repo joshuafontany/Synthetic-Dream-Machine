@@ -395,3 +395,29 @@ def test_sectioned_extract_designates_prose_when_the_sniffer_abstains(tmp_path):
     assert recs, "the sectioner still cuts the carrier"
     assert all(r["metadata"]["lar_kind"] for r in recs), "no record rides kindless"
     assert {r["metadata"]["lar_kind"] for r in recs} <= {"prose", "markdown", "memetic-wikitext"}
+
+
+def test_corpus_chunks_fit_the_embedder_window():
+    # STRUCTURE-first, WINDOW-fit: a text with small paragraphs + one over-window paragraph splits into
+    # chunks each within the char window — the invariant a chunk's dense vector needs (no truncation).
+    import capture_sources as cs
+    text = ("A short paragraph. " * 12) + "\n\n" + ("token " * 500) + "\n\n" + "A short tail."
+    chunks = cs._corpus_chunks(text)
+    assert len(chunks) >= 3                                        # the giant paragraph forced a window-split
+    assert all(len(c) <= cs._CORPUS_CHUNK_CHARS for c in chunks)  # EVERY chunk fits the window
+    assert all(c.strip() for c in chunks)                         # no empty chunk
+
+
+def test_corpus_source_yields_one_record_per_chunk(tmp_path):
+    # a corpus FILE lands as MANY chunk records (not one whole-file record), each carrying its own
+    # chunk_index — the cid gate's reserved ordinal — so a large file pours faithful, never truncated.
+    from capture_sources import corpus_source
+    corp = tmp_path / "corpus"
+    corp.mkdir()
+    (corp / "work.txt").write_text("\n\n".join(f"Paragraph {i}: " + "word " * 120 for i in range(6)),
+                                   encoding="utf-8")
+    recs = list(corpus_source(wing="w")(str(corp)))
+    assert len(recs) > 1                                          # chunked, not one whole-file record
+    assert [r["metadata"]["chunk_index"] for r in recs] == list(range(len(recs)))   # 0,1,2,… ordinal
+    assert all(len(r["text"]) <= 800 for r in recs)              # each record is window-sized
+    assert len({r["cid"] for r in recs}) == len(recs)            # distinct cids (the gate mints per chunk)
