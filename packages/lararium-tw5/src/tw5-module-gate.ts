@@ -1,4 +1,4 @@
-import { parsePonoLevel } from "@lararium/mesh";
+import { parsePonoLevel, digestsEqual } from "@lararium/mesh";
 import type { TW5Instance } from "./types/tiddlywiki.js";
 
 // Preserves the old 0.00–1.00 gate pressure as SDM+ 0–20 Levels:
@@ -77,7 +77,10 @@ async function verifySha256(body: string, claimedHex: string): Promise<boolean> 
     const actual = Array.from(new Uint8Array(buf))
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
-    return actual === claimedHex;
+    // Dual-read: a `body-sha256` field may ride bare (implicit sha256) OR tagged
+    // (`sha256:…`) — `digestsEqual` normalizes both, so read-accepts-both lands
+    // BEFORE any emitter (sync-heleuma) starts writing the tagged form.
+    return digestsEqual(actual, claimedHex);
   } catch {
     return false;
   }

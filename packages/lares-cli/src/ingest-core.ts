@@ -17,7 +17,7 @@
 
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, resolve, sep, extname } from "node:path";
-import { newChangeId, taskContentId, carrierHash } from "@lararium/mesh";
+import { newChangeId, taskContentId, carrierHash, digestsEqual } from "@lararium/mesh";
 import { SyncedTree, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
 import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
@@ -158,8 +158,12 @@ export function scanFiles(
     } catch { /* no readable sidecar — a self-contained filetype needs none */ }
     const diskHash   = carrierHash(text, meta);
     const syncedHash = tree.get(syncedTreeKey(toBag, uri));
+    // Dual-read: the tree value may be stored bare (pre-agile) while `diskHash`
+    // comes freshly computed (tagged post-step-3) — `digestsEqual` normalizes the
+    // straddle, so a byte-identical carrier still reads "unchanged" across the tag
+    // boundary (no mass re-land). Behaviour byte-identical on today's all-bare store.
     const status: ScanStatus =
-      syncedHash === null ? "new" : diskHash === syncedHash ? "unchanged" : "changed";
+      syncedHash === null ? "new" : digestsEqual(diskHash, syncedHash) ? "unchanged" : "changed";
     rows.push({ file, uri, text, diskHash, syncedHash, status, ext, ...(meta !== undefined ? { meta } : {}) });
   }
   return { rows, skipped };

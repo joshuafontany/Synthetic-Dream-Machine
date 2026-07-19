@@ -14,6 +14,7 @@ export * from "./bag-residency.js";
 export * from "./vessel-identity-core.js";
 export * from "./capability.js";
 export * from "./crypto.js";
+export * from "./agile-digest.js";
 export * from "./projection-registry.js";
 export * from "./readiness.js";
 export * from "./lar-uris.js";
