@@ -1,12 +1,11 @@
 /**
- * VesselIslandPoolCore — the one platform-blind island pool (pair 4).
+ * VesselIslandPoolCore — the one platform-blind island pool.
  *
- * Both vessels ran their own pool: node carried full residency (wela/anu + pin,
- * LRU, sweeper, placeWikiVerb, diskMirror); browser carried a bare slot Map.
- * This core holds that logic ONCE; node and browser supply only a VesselIslandHost
- * (worker spawn, sync channel, per-wiki storage, the ready handshake flag) and
- * pool config (mainRepo, diskMirrorGrant, hotCap). Browser inherits residency by
- * subtraction; `pinned` turns load-bearing wherever a finite hotCap creates
+ * Holds all island residency ONCE — wela/anu + pin, LRU, sweeper, placeWikiVerb,
+ * diskMirror. Node and browser each supply only a VesselIslandHost (worker spawn,
+ * sync channel, per-wiki storage, the ready handshake flag) and pool config
+ * (mainRepo, diskMirrorGrant, hotCap); the browser runs the same residency on a
+ * smaller hotCap. `pinned` turns load-bearing wherever a finite hotCap creates
  * eviction pressure.
  *
  * No TW5 dependency — pure protocol + transport + residency, so it lives in mesh.

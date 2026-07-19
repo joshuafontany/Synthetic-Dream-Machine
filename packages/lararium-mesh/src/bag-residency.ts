@@ -249,7 +249,7 @@ export class BagResidencyManager {
     return true;
   }
 
-  /** Alias — historical name for cooling a bag to anu (handle drop). */
+  /** Alias for `cool` — drops the handle, cooling a bag to anu. */
   async evict(url: BagUrl): Promise<boolean> {
     return this.cool(url);
   }
