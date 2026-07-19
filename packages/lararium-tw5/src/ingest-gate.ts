@@ -40,6 +40,7 @@
  *      Unison's law; the CRDT diff-splice path refines this later)
  */
 
+import { digestsEqual } from "@lararium/mesh";
 import { deserializeCarrier, expandMemeRefs } from "./deserializer.js";
 import type { TiddlerFields } from "./deserializer.js";
 import { collectAhuSlots } from "./meme-ast/ahu-scan.js";
@@ -125,7 +126,10 @@ export function decideIngest<R = TiddlerFields>(
   const congruence = ops ?? (memeticIngestOps as unknown as IngestOps<R>);
 
   // 1 — echo gate: the disk holds exactly what the projector last wrote.
-  if (syncedHash !== null && diskHash === syncedHash) {
+  // `digestsEqual` normalizes the tag boundary: `diskHash` rides freshly computed
+  // (tagged `sha256:hex`) while `syncedHash` may be a pre-agile bare value still
+  // resting in the tree — same content reads equal across the two forms.
+  if (syncedHash !== null && digestsEqual(diskHash, syncedHash)) {
     return { kind: "noop", reason: "disk-matches-synced" };
   }
 
@@ -173,7 +177,9 @@ export function decideIngest<R = TiddlerFields>(
   }
 
   // 4 — clean ingest: the records stand where the last projection left them.
-  if (syncedHash !== null && currentRenderHash === syncedHash) {
+  // Same tag-boundary normalization as the echo gate above — `currentRenderHash`
+  // comes freshly computed (tagged) while `syncedHash` may still be stored bare.
+  if (syncedHash !== null && digestsEqual(currentRenderHash, syncedHash)) {
     return { kind: "ingest", records, canonicalText, diagnostics };
   }
   // Never-projected carriers (syncedHash null) with no current-render match

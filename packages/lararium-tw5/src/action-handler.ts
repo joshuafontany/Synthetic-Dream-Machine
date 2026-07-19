@@ -41,7 +41,7 @@ import type {
 } from "@lararium/mesh";
 import {
   ACTION_VERBS, type ActionVerb,
-  parseResidencyAction, withEffectRecord, sha256HexSync,
+  parseResidencyAction, withEffectRecord, sha256HexSync, tagDigest, digestsEqual,
   emptyLarDoc, mutableLarRecord, CATALOG_DOC_URI, ORACLE_DOC_URI,
   ORIGINAL_TIDDLER_PATHS, parseProvenance, serializeProvenance, recordPack, membersOfPack,
   ORIGINAL_TIDDLER_HASHES, parseHashes, serializeHashes, recordPackHashes, hashOfMember,
@@ -58,6 +58,17 @@ import { decideDeletions } from "./delete-gate.js";
 
 /** Island default mass-delete brake when the wave carries no operator dial. */
 const DEFAULT_MASS_DELETE_FRACTION = 0.25;
+
+/**
+ * The render-leg digest the Confluence gate keys on — a native record's canonical
+ * carrier text hashed and ALGORITHM-TAGGED (`sha256:hex`), so it sits in the SAME
+ * digest-space as `carrierHash` (the disk `diskHash` + the projector's synced-tree
+ * `obsHash`). The gate's candidate-render leg (`hash`) and its current-render leg
+ * (`currentRenderHash`) both ride this producer, so the intra-gate `candidateHash
+ * === currentRenderHash` stays tag-consistent while the gate's echo checks against a
+ * possibly-bare STORED `syncedHash` normalize through `digestsEqual`.
+ */
+const renderHash = (text: string): string => tagDigest(sha256HexSync(text));
 
 // ── Options + registration ─────────────────────────────────────────────────
 
@@ -81,7 +92,7 @@ export interface Tw5Deserializer {
   parseFields(metaText: string): Record<string, unknown>;
   /** Render a native record to its carrier BODY + `.meta` sidecar (the file-info
    *  the projector + the ingest echo gate share). The INGEST gate reads this join as
-   *  the native congruence's `render` — its sha256 equals `carrierHash(body, meta)` — so
+   *  the native congruence's `render` — its tagged digest equals `carrierHash(body, meta)` — so
    *  a native filetype runs the SAME `decideIngest` Confluence gate a memetic carrier does
    *  (echo · canonical-equivalent · conflict · ingest), never a silent last-write-wins
    *  overwrite. Native declares ∅ structure and never grades error, so the gate's
@@ -650,8 +661,8 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         diskText:          carrier.text,
         diskHash:          carrier.diskHash,
         syncedHash:        carrier.syncedHash,
-        currentRenderHash: sha256HexSync(currentText),
-        hash:              sha256HexSync,
+        currentRenderHash: renderHash(currentText),
+        hash:              renderHash,
       });
       if (decision.kind === "noop") {
         results.push({ uri, decision: "noop", reason: decision.reason });
@@ -677,7 +688,10 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       // hash in the Synced tree, so a re-ingest of an unprojected-back carrier reads
       // this echo. (`decideIngest` re-checks the echo cheaply; keeping it here spares
       // the deserialize.)
-      if (carrier.syncedHash !== null && carrier.diskHash === carrier.syncedHash) {
+      // `digestsEqual` normalizes the tag boundary: `carrier.diskHash` rides freshly
+      // computed (tagged) while `carrier.syncedHash` may still rest bare in the tree —
+      // this pre-gate echo short-circuit stays true across the two forms.
+      if (carrier.syncedHash !== null && digestsEqual(carrier.diskHash, carrier.syncedHash)) {
         results.push({ uri, decision: "noop", reason: "disk-matches-synced" });
         continue;
       }
@@ -749,11 +763,11 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
             grade: () => "clean",
           };
           const memberDiskText = nativeRender(title, [member]);
-          const memberDiskHash = sha256HexSync(memberDiskText);
+          const memberDiskHash = renderHash(memberDiskText);
           const memberSynced   = hashOfMember(prevHashes, title) ?? null;   // the per-member merge base
           const currentRec     = await readFromBag(access, action.toBag, title);
           const memberCurrentHash = currentRec
-            ? sha256HexSync(nativeRender(title, [currentRec.tiddler as unknown as Record<string, unknown>]))
+            ? renderHash(nativeRender(title, [currentRec.tiddler as unknown as Record<string, unknown>]))
             : (memberSynced ?? "");   // no record → unmoved from base (fresh adoption / re-land, never phantom conflict)
           const decision = decideIngest<Record<string, unknown>>({
             uri:               title,
@@ -761,7 +775,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
             diskHash:          memberDiskHash,
             syncedHash:        memberSynced,
             currentRenderHash: memberCurrentHash,
-            hash:              sha256HexSync,
+            hash:              renderHash,
           }, memberOps);
           if (decision.kind === "noop") {
             memberResults.push({ title, decision: "noop", reason: decision.reason });
@@ -843,7 +857,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
       // re-land, never a phantom conflict — decideIngest routes both to ingest).
       const currentRec = await readFromBag(access, action.toBag, uri);
       const currentRenderHash = currentRec
-        ? sha256HexSync(nativeRender(uri, [currentRec.tiddler as unknown as Record<string, unknown>]))
+        ? renderHash(nativeRender(uri, [currentRec.tiddler as unknown as Record<string, unknown>]))
         : (carrier.syncedHash ?? "");
       const decision = decideIngest<Record<string, unknown>>({
         uri,
@@ -851,7 +865,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         diskHash:          carrier.diskHash,
         syncedHash:        carrier.syncedHash,
         currentRenderHash,
-        hash:              sha256HexSync,
+        hash:              renderHash,
       }, nativeOps);
       if (decision.kind === "noop") {
         results.push({ uri, decision: "noop", reason: decision.reason });

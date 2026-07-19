@@ -16,6 +16,7 @@
  *     already live async.
  */
 import { sha256 as nobleSha256 } from "@noble/hashes/sha2.js";
+import { formatDigest } from "./agile-digest.js";
 
 // ---------------------------------------------------------------------------
 // Provider interfaces
@@ -188,11 +189,19 @@ export function sha256HexSync(text: string): string {
  * form (the field block, a blank line, then the text: exactly how TW5 serializes
  * a tiddler to a single file). The first blank line is TW5's own field/text
  * delimiter, so the boundary stays unambiguous with no out-of-band separator. A
- * carrier with NO sidecar (every `.mem`/`.tid`) hashes body-only — byte-identical
- * to the old `contentHash(body)`, so no stored observation migrates.
+ * carrier with NO sidecar (every `.mem`/`.tid`) hashes body-only — the same bytes
+ * the body-only `contentHash` folds, so the digest surface stays stable.
+ *
+ * The output rides ALGORITHM-TAGGED (`sha256:<hex>`, the agile-digest canonical
+ * form), so a `carrierHash` value carries its own scheme and can sit beside a
+ * future digest algorithm. Readers of a STORED value (a pre-agile bare hex synced
+ * tree entry) still match through `digestsEqual`, which normalizes a bare side to
+ * implicit sha256 — so tagging the producer converges the store lazily, never
+ * forcing a re-key of already-stored observations.
  */
 export function carrierHash(body: string, meta?: string): string {
-  return meta === undefined ? sha256HexSync(body) : sha256HexSync(`${meta}\n\n${body}`);
+  const hex = meta === undefined ? sha256HexSync(body) : sha256HexSync(`${meta}\n\n${body}`);
+  return formatDigest("sha256", hex);
 }
 
 /**

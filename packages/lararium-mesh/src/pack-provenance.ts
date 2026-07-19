@@ -99,14 +99,16 @@ export function forgetPack(p: PackProvenance, packPath: string): PackProvenance 
 // (echo · canonical-equivalent · conflict), so a concurrent wiki-edit + disk-change
 // names WHICH member conflicts and the rest flow clean.
 //
-// The hash reads bare-hex `carrierHash`-family (sha256 of the member's canonical
-// carrier render) — agile-comparable, so a later dual-read widening picks it up for
-// free, never a parallel digest scheme.
+// The hash reads `carrierHash`-family (the member's canonical carrier render,
+// algorithm-tagged `sha256:hex`) — the map stores it opaquely, and the gate compares
+// it through `digestsEqual`, so a value stored bare in a pre-agile era still matches a
+// freshly-tagged one, never a parallel digest scheme.
 
 /** The sibling aside tiddler — a JSON map of member title → content-hash. */
 export const ORIGINAL_TIDDLER_HASHES = "$:/config/OriginalTiddlerHashes";
 
-/** member title → the bare-hex content-hash of the member as last reconciled. */
+/** member title → the content-hash of the member as last reconciled (carrierHash-family,
+ *  algorithm-tagged; a value stored bare pre-agile still compares via `digestsEqual`). */
 export type PackHashes = Readonly<Record<string, string>>;
 
 /** Parse the hash map from a tiddler's text; a missing or malformed body reads as
