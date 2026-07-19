@@ -592,23 +592,30 @@ def _iter_corpus_files(pointer: str) -> Iterator[tuple]:
     `<root-basename>/<relpath>` — stable across machines (never an absolute path). Two
     roots whose key paths collide FAIL LOUD (designation carries authority; a silent
     merge would fuse two distinct files under one cid)."""
-    seen: dict = {}
+    roots_candidates: list = []
     for root in pointer.split(os.pathsep):
         root = root.strip()
         if not root:
             continue
         if os.path.isfile(root):
-            candidates = [(os.path.basename(root), root)]
+            roots_candidates.append([(os.path.basename(root), root)])
         else:
-            candidates = []
+            cands: list = []
             for dirpath, dirnames, filenames in os.walk(root):
                 dirnames[:] = sorted(d for d in dirnames
                                      if d not in _CORPUS_SKIP_DIRS and not d.startswith("."))
                 for fn in sorted(filenames):
                     fp = os.path.join(dirpath, fn)
                     rel = os.path.relpath(fp, root)
-                    candidates.append((os.path.join(os.path.basename(root.rstrip(os.sep)), rel), fp))
-        for key_path, fp in sorted(candidates):
+                    cands.append((os.path.join(os.path.basename(root.rstrip(os.sep)), rel), fp))
+            roots_candidates.append(cands)
+    # PRE-SCAN: rule out source-key collisions across EVERY candidate BEFORE yielding any record — a colliding
+    # corpus fails loud at the START, never mid-pour after a long landed prefix that a late abort would waste
+    # (designation carries authority; a silent merge would fuse two distinct files under one cid). Fail-loud
+    # stays exactly as before; only its timing moves to the front.
+    seen: dict = {}
+    for cands in roots_candidates:
+        for key_path, fp in sorted(cands):
             if os.path.splitext(fp)[1].lower() not in _CORPUS_EXTS:
                 continue
             prior = seen.get(key_path)
@@ -616,8 +623,15 @@ def _iter_corpus_files(pointer: str) -> Iterator[tuple]:
                 raise ValueError(
                     f"corpus_source: source-key collision — {key_path!r} names both "
                     f"{prior!r} and {fp!r}; point at roots whose basename+relpath stay disjoint")
-            if prior is None:
-                seen[key_path] = fp
+            seen.setdefault(key_path, fp)
+    # Collision-free — yield per root in sorted order (unchanged from before), each key once.
+    yielded: set = set()
+    for cands in roots_candidates:
+        for key_path, fp in sorted(cands):
+            if os.path.splitext(fp)[1].lower() not in _CORPUS_EXTS:
+                continue
+            if key_path not in yielded:
+                yielded.add(key_path)
                 yield key_path, fp
 
 
