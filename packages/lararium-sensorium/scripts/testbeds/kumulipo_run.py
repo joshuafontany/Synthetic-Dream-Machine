@@ -40,7 +40,7 @@ import random
 
 import numpy as np
 
-from boundary_score import render, report
+from boundary_score import make_truth, remap, render, report
 from ffz_continuous_pour import (
     ZONING_LADDER,
     band_boundaries,
@@ -49,7 +49,7 @@ from ffz_continuous_pour import (
     zoning_gate,
     zoning_read,
 )
-from kumulipo_bed import bed_names, bed_text, ground_truth
+from kumulipo_bed import BRANCH_PARENT_WA, BRANCH_WA, bed_names, bed_text, ground_truth
 
 
 def frames_from_lines(lines: "list[str]", stream: str = "kumulipo"):
@@ -76,16 +76,10 @@ def line_offsets(lines: "list[str]") -> "list[int]":
     return out
 
 
-def ticks_to_lines(ticks: "list[int]", offsets: "list[int]") -> "list[int]":
-    """Each boundary tick lands on the line whose span holds it."""
-    return [max(0, int(np.searchsorted(offsets, t, side="right")) - 1) for t in ticks]
-
-
 def pour_bed(lines: "list[str]", *, seed: int, surrogates: int) -> dict:
     """One bed, one pour: every signal poured at the whole zoning ladder, ruled by the gate, and read
     for boundaries ONLY where a scale HELD. Reads no answer key."""
     poured = pour_ticks(frames_from_lines(lines))
-    offsets = line_offsets(lines)
     out = {"n_ticks": poured["n_ticks"], "signals": {}}
     for name, sig in poured["signals"].items():
         if float(np.var(sig)) < 1e-12:
@@ -104,7 +98,7 @@ def pour_bed(lines: "list[str]", *, seed: int, surrogates: int) -> dict:
             reproduced.append({
                 "band": g["band"], "scale_ticks": g["scale_ticks"],
                 "energy_excess": g["energy_excess_by_zoning"].get(str(row["zoning"]), 0.0),
-                "boundary_lines": ticks_to_lines(band_boundaries(row), offsets),
+                "boundary_ticks": band_boundaries(row),          # the instrument's NATIVE tick positions
             })
         out["signals"][name] = {"gate": gate, "reproduced": reproduced}
     return out
@@ -119,6 +113,11 @@ def run_bed(bed: str, *, seed: int, surrogates: int, placebo: bool) -> dict:
 
     real = pour_bed(lines, seed=seed, surrogates=surrogates)
     print(f"  poured {real['n_ticks']:,} character ticks\n")
+    # the answer key rides into the instrument's OWN coordinate — the line-indexed wā opens map to character
+    # ticks, so FFZ scores where it perceives (ticks) instead of round-tripping through lines. Lines survive
+    # only as the key's authoring format; nothing perceives in them.
+    truth = remap(make_truth(g, branch={"wa": BRANCH_WA, "parent": BRANCH_PARENT_WA}),
+                  line_offsets(lines), "tick", real["n_ticks"])
 
     print("  ── THE ZONING GATE (a real band HOLDS under re-zoning; an alias MOVES)")
     for name, s in real["signals"].items():
@@ -141,10 +140,10 @@ def run_bed(bed: str, *, seed: int, surrogates: int, placebo: bool) -> dict:
     results = {}
     for name, s in real["signals"].items():
         for p in s.get("reproduced", []):
-            bl = p["boundary_lines"]
-            if not bl:
+            bt = p["boundary_ticks"]
+            if not bt:
                 continue
-            rep = report(bl, bed, ranked=bl)
+            rep = report(bt, truth, ranked=bt)
             best = max(rep["tolerance_curve"], key=lambda r: r["lift"])
             # A scale that beats BOTH floors and survives meaning-death has found the chant, not itself.
             surviving = None

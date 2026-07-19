@@ -22,7 +22,7 @@ import argparse
 import json
 
 import sense_analyze as sa
-from boundary_score import TOLERANCES, chance_recall, match_one_to_one
+from boundary_score import hinge_test, make_truth, remap, score, tolerances_for
 
 
 def line_word_offsets(lines: "list[str]") -> "tuple[list[int], int]":
@@ -36,26 +36,14 @@ def line_word_offsets(lines: "list[str]") -> "tuple[list[int], int]":
     return offs, t
 
 
-def word_ground_truth(mod, bed: str) -> dict:
-    """Map the bed's LINE-coordinate answer key into WORD coordinates. The SCORER crosses the wall; the
-    instrument never does. `mod` is any bed module exposing bed_text(bed) + ground_truth(bed)."""
+def word_truth(mod, bed: str) -> dict:
+    """The bed's line-indexed answer key carried into WORD coordinate (sense_analyze's grain) via the shared
+    coordinate-remap. The scorer holds no coordinate of its own; the truth carries it. The wall holds —
+    bed_text is the instrument's only door, the key crosses on the scorer's side. `mod` is any bed module
+    exposing bed_text(bed) + ground_truth(bed)."""
     lines = mod.bed_text(bed)
-    g = mod.ground_truth(bed)
     offs, n_words = line_word_offsets(lines)
-
-    def to_word(line_idx: "int | None") -> "int | None":
-        if line_idx is None:
-            return None
-        return offs[line_idx] if 0 <= line_idx < len(offs) else n_words
-
-    return {
-        "bed": bed,
-        "n_words": n_words,
-        "n_lines": g["n_lines"],
-        "boundaries": [to_word(b) for b in g["boundaries"]],
-        "hinge": to_word(g.get("hinge")),
-        "words_per_line": round(n_words / max(1, g["n_lines"]), 2),
-    }
+    return remap(make_truth(mod.ground_truth(bed)), offs, "word", n_words)
 
 
 def arm_cuts(lines: "list[str]") -> "tuple[list, dict]":
@@ -66,50 +54,22 @@ def arm_cuts(lines: "list[str]") -> "tuple[list, dict]":
     return toks, boundaries
 
 
-def score_word(pred: "list[int]", truth: dict, tol: int) -> dict:
-    """One rung of the ladder in word coordinates — precision/recall/F1 and the LIFT over a random detector
-    of equal size. Reuses boundary_score's one-to-one match + chance floor UNCHANGED; only the grain differs."""
-    pred = sorted(set(int(p) for p in pred))
-    true = truth["boundaries"]
-    hits = match_one_to_one(pred, true, tol)
-    prec = len(hits) / len(pred) if pred else 0.0
-    rec = len(hits) / len(true) if true else 0.0
-    f1 = 2 * prec * rec / (prec + rec) if (prec + rec) else 0.0
-    floor = chance_recall(len(pred), truth["n_words"], tol)
-    return {"tol": tol, "n_pred": len(pred), "matched": len(hits),
-            "precision": round(prec, 4), "recall": round(rec, 4), "f1": round(f1, 4),
-            "chance_recall": round(floor, 4), "lift": round(rec - floor, 4)}
-
-
-def hinge_word(ranked: "list[int]", truth: dict, tol: int) -> dict:
-    """Of the cuts an arm found, does its strongest land on the hinge? Chance pays 1/n_boundaries, and no
-    widening of the tolerance buys the rank. `ranked` arrives strongest-first."""
-    hinge = truth["hinge"]
-    n_true = len(truth["boundaries"])
-    if hinge is None or not ranked:
-        return {"scored": False}
-    on = [i for i, p in enumerate(ranked) if abs(p - hinge) <= tol]
-    rank = (on[0] + 1) if on else None
-    return {"scored": True, "hinge_word": hinge, "rank_of_hinge": rank,
-            "found": rank is not None, "strongest_is_hinge": rank == 1,
-            "chance": round(1 / max(1, n_true), 4)}
-
-
 def run(mod, bed: str) -> dict:
-    """One bed, one pass: the arms on its word stream, each scored across the word-scaled tolerance ladder
-    against the word-coordinate answer key. Reads no key into the instrument — the wall holds."""
+    """One bed, one pass: the arms on its word stream, each scored across the tolerance ladder — the shared
+    scorer scales the canonical (line-unit) ladder into word coordinate by the truth's own grain — against
+    the word-coordinate answer key. Reads no key into the instrument; the wall holds."""
     lines = mod.bed_text(bed)                    # the instrument's ONLY door
-    truth = word_ground_truth(mod, bed)          # the SCORER crosses the wall, in word coordinates
+    truth = word_truth(mod, bed)                 # the SCORER crosses the wall, in word coordinates
     _toks, arms = arm_cuts(lines)
-    wpl = truth["n_words"] / max(1, truth["n_lines"])
-    tols = sorted(set(max(0, round(t * wpl)) for t in TOLERANCES))   # the SAME physical span, in words
+    tols = tolerances_for(truth)                 # one canonical ladder, scaled by the truth's derived grain
+    wpl = truth["n_total"] / max(1, truth["key_lines"])
     rows = {}
     for arm, cuts in arms.items():
-        curve = [score_word(cuts, truth, t) for t in tols]
+        curve = [score(cuts, truth, t) for t in tols]
         best = max(curve, key=lambda r: r["lift"])
-        rows[arm] = {"best": best, "hinge": hinge_word(cuts, truth, tols[len(tols) // 2])}
-    return {"bed": bed, "n_words": truth["n_words"], "n_boundaries": len(truth["boundaries"]),
-            "words_per_line": truth["words_per_line"], "tolerances_words": tols, "arms": rows}
+        rows[arm] = {"best": best, "hinge": hinge_test(cuts, truth, tols[len(tols) // 2])}
+    return {"bed": bed, "n_words": truth["n_total"], "n_boundaries": len(truth["boundaries"]),
+            "words_per_line": round(wpl, 2), "tolerances_words": tols, "arms": rows}
 
 
 def render(rep: dict) -> None:

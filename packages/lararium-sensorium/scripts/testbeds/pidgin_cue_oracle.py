@@ -25,12 +25,8 @@ import argparse
 import json
 import re
 
-import boundary_score as BS
 import pidgin_bed
-
-BS.ground_truth = pidgin_bed.ground_truth   # re-aim the pre-registered scorer at the pidgin bed's own key
-
-from boundary_score import report, render  # noqa: E402  (must follow the rebind)
+from boundary_score import make_truth, render, report
 
 _ENVELOPE = re.compile(r"^\s*</?(?:tool_use|param)\b")
 _FENCE = re.compile(r"^\s*```")
@@ -54,8 +50,9 @@ def main() -> None:
     for bed in (a.bed or pidgin_bed.bed_names()):
         lines = pidgin_bed.bed_text(bed)                    # THE INSTRUMENT'S ONLY DOOR
         pred = cue_cuts(lines)
-        k = len(pidgin_bed.ground_truth(bed)["boundaries"])
-        rep = report(pred, bed, ranked=pred)
+        g = pidgin_bed.ground_truth(bed)
+        k = len(g["boundaries"])
+        rep = report(pred, make_truth(g), ranked=pred)      # cues fire on lines → a line-coordinate truth
         best = max(rep["tolerance_curve"], key=lambda r: r["lift"])
         print(f"\n▓▓ CUE ORACLE · {bed} · {len(pred)} cue lines vs {k} true switches")
         render(rep)
