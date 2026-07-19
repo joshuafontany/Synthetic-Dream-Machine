@@ -31,6 +31,9 @@ import {
   ReactionGraph,
 } from "@lararium/mesh/reaction-graph";
 import type { ReactionBinding } from "@lararium/mesh/reaction-graph";
+// Leaf subpath (NOT the barrel) — this file bundles into the CJS plugin-tiddler, and the
+// full @lararium/mesh barrel drags automerge WASM (top-level await) into that CJS output.
+import { LARES_DISPATCH_FIELD, LARES_VERB_ARG_PREFIX } from "@lararium/mesh/lar-uris";
 
 // ---------------------------------------------------------------------------
 // TW5 startup lifecycle
@@ -74,43 +77,62 @@ function bindingsFromUri(wiki: TW5Wiki, uri: string): ReactionBinding[] {
   }
 }
 
+/** One fired reaction: a papalohe observation (verb absent) or a verb dispatch (verb +
+ *  its lifted `arg-<name>` args). */
+interface Reaction {
+  verb?: string;
+  args?: Record<string, unknown>;
+}
+
 /**
  * Fire tm-verse-event for every unique listenable on uri.
  *
  * Collects listenables from two sources:
  *   1. ReactionGraph bindings (papalohe wires) where fromUri === uri
- *   2. Tiddler `verb` field — fires verb dispatch when the tiddler carries
- *      a direct `verb` field (the verb-as-tiddler-field architecture).
- *      `listenable` field names the Verse event; defaults to verb name if absent.
+ *   2. Tiddler `verb` field — fires verb dispatch ONLY when the tiddler ALSO carries a
+ *      truthy `lares-dispatch` marker (a genuine DOM summon). The verb machinery's own
+ *      lar:-titled writes (invocations `…/verbs/<id>`, outcomes `@daemon/outcomes/<id>`)
+ *      carry a `verb` field but NEVER the marker, so they stay router-inert and no
+ *      dispatch loop forms (#48). `listenable` field names the Verse event; defaults to
+ *      the verb name. The summon's per-invocation args ride `arg-<name>` fields; they are
+ *      lifted here into the structured `args` payload the event carries.
  *
- * Verb-carrying events: { uri, listenable, verb, fromUri }.
+ * Verb-carrying events: { uri, listenable, verb, fromUri, args }.
  * Listenable-only events (no verb): { uri, listenable } — observation only.
  */
 function fireReactionsForUri(wiki: TW5Wiki, graph: ReactionGraph, uri: string): void {
-  // listenable → verb? (undefined = observation-only)
-  const listenables = new Map<string, string | undefined>();
+  const listenables = new Map<string, Reaction>();
 
   for (const b of graph.bindings) {
-    if (b.fromUri === uri) listenables.set(b.listenable, undefined);
+    if (b.fromUri === uri) listenables.set(b.listenable, {});
   }
 
-  // Verb dispatch: read verb + listenable directly from tiddler fields.
+  // Verb dispatch: read verb + listenable directly from tiddler fields — gated on the
+  // dispatch-intent marker so only genuine summons fire (the loop-break, #48).
   const tiddler = wiki.getTiddler(uri);
   if (tiddler) {
     const verb = typeof tiddler.fields["verb"] === "string" && tiddler.fields["verb"]
       ? (tiddler.fields["verb"] as string) : undefined;
-    if (verb) {
+    const dispatchMarked = Boolean(tiddler.fields[LARES_DISPATCH_FIELD]);
+    if (verb && dispatchMarked) {
       const listenable = typeof tiddler.fields["listenable"] === "string" && tiddler.fields["listenable"]
         ? (tiddler.fields["listenable"] as string) : verb;
-      listenables.set(listenable, verb);
+      // Lift every `arg-<name>` field into the structured args payload.
+      const args: Record<string, unknown> = {};
+      for (const [field, value] of Object.entries(tiddler.fields)) {
+        if (field.startsWith(LARES_VERB_ARG_PREFIX)) {
+          args[field.slice(LARES_VERB_ARG_PREFIX.length)] = value;
+        }
+      }
+      listenables.set(listenable, { verb, args });
     }
   }
 
-  for (const [listenable, verb] of listenables) {
+  for (const [listenable, reaction] of listenables) {
     wiki.dispatchEvent("tm-verse-event", {
       uri,
       listenable,
-      ...(verb !== undefined && { verb, fromUri: uri }),
+      ...(reaction.verb !== undefined && { verb: reaction.verb, fromUri: uri, args: reaction.args ?? {} }),
     });
   }
 }

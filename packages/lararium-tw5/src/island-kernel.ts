@@ -46,6 +46,7 @@ import {
   mkEa,
   mkFault,
   ISLAND_PROTOCOL_VERSION,
+  LARES_VERB_ARGS_WIRE_FIELD,
 } from "@lararium/mesh";
 
 export class IslandKernel {
@@ -87,7 +88,9 @@ export class IslandKernel {
 
     this._liveHandles.add({
       cancel: this._tw5.onVerseEvent({
-        handleVerseEvent: (uri: string, listenable: string, verb?: string, fromUri?: string) => {
+        handleVerseEvent: (uri: string, listenable: string, verb?: string, fromUri?: string, args?: Record<string, unknown>) => {
+          // Structured summon args ride the GP-2-flat island wire as ONE `verb-args` JSON
+          // string (the payload admits only scalars); the vessel re-parses it (#48).
           this._post({
             schema_version: ISLAND_PROTOCOL_VERSION,
             type: "event",
@@ -97,6 +100,7 @@ export class IslandKernel {
               uri,
               ...(verb    !== undefined && { verb }),
               ...(fromUri !== undefined && { fromUri }),
+              ...(args    !== undefined && { [LARES_VERB_ARGS_WIRE_FIELD]: JSON.stringify(args) }),
             },
           } satisfies IslandMsg_Event);
         },

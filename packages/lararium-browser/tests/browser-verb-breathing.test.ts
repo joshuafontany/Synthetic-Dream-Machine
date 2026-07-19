@@ -27,7 +27,7 @@ import { Repo }                    from "@automerge/automerge-repo";
 import { mutableLarRecord } from "@lararium/mesh";
 import type { LarDoc, IslandMsg_Event, LarTiddlerRecord } from "@lararium/mesh";
 import {
-  findVerbBreathingEvent, assertVerbBreathingEvent,
+  findVerbBreathingEvent, assertVerbBreathingEvent, dispatchTiddlerFields,
   type VerbBreathingContract,
 } from "@lararium/mesh";
 import { BrowserVesselIslandPool }   from "../src/browser-vessel-island-pool.js";
@@ -43,6 +43,9 @@ const CONTRACT = {
   buttonUri:  BUTTON_URI,
   verb:       "MOVE",
   listenable: "InteractedWithEvent",
+  // Same #48 args-payload exercise as the node platform — the `arg-target` field the
+  // island lifts into the flat-wire `verb-args` JSON.
+  args:       { target: "hearth" },
 } satisfies VerbBreathingContract;
 
 function waitFor<T>(check: () => T | null | undefined, timeoutMs: number, label: string): Promise<T> {
@@ -66,10 +69,9 @@ describe("browser verb breathing — verb tiddler surfaces as IslandMsg_Event vi
     const wikiHandle = vesselRepo.create<LarDoc>();
     wikiHandle.change((d) => {
       d.tiddlers = {
-        [BUTTON_URI]: mutableLarRecord(BUTTON_URI, {
-          verb:       "MOVE",
-          listenable: "InteractedWithEvent",
-        }, "browser-verb-test") as LarTiddlerRecord,
+        // Seed via the SHARED dispatch-field battery (verb + listenable + `lares-dispatch`
+        // marker + `arg-*` fields) — identical to the node platform (#48).
+        [BUTTON_URI]: mutableLarRecord(BUTTON_URI, dispatchTiddlerFields(CONTRACT), "browser-verb-test") as LarTiddlerRecord,
       };
     });
 

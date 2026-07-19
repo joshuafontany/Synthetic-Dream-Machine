@@ -22,19 +22,26 @@ import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-
 
 let wikiUri = "";
 
-// Mirror the reaction-router's output: one IslandMsg_Event per verb-bearing
-// tiddler. mutableLarRecord nests fields under `record.tiddler` (base-doc.ts).
+// Mirror the reaction-router's output: one IslandMsg_Event per GENUINE verb summon.
+// mutableLarRecord nests fields under `record.tiddler` (base-doc.ts). Faithful to #48:
+// fire ONLY on a tiddler carrying the `lares-dispatch` marker (the loop-break gate), and
+// lift `arg-<name>` fields into the flat-wire `verb-args` JSON string.
 function emitVerbEvents(doc) {
   const tiddlers = doc?.tiddlers ?? {};
   for (const [uri, record] of Object.entries(tiddlers)) {
     const fields = record?.tiddler ?? {};
     if (typeof fields.verb !== "string") continue;
+    if (!fields["lares-dispatch"]) continue;   // router-inert without the dispatch marker
+    const args = {};
+    for (const [f, v] of Object.entries(fields)) {
+      if (f.startsWith("arg-")) args[f.slice(4)] = v;
+    }
     self.postMessage({
       schema_version: 1,
       type: "event",
       wikiUri,
       listenable: typeof fields.listenable === "string" ? fields.listenable : "",
-      payload: { verb: fields.verb, fromUri: uri, uri },
+      payload: { verb: fields.verb, fromUri: uri, uri, "verb-args": JSON.stringify(args) },
     });
   }
 }

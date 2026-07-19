@@ -34,7 +34,7 @@ import {
   emptyLarDoc, mutableLarRecord, tiddlerText,
   ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, recipeHostFacets, wikiBagUri,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
-  BAG_IDS, slugFromUri, laresVerbUriArg, registerCrossroadsInOracle,
+  BAG_IDS, slugFromUri, verbArgsFromPayload, registerCrossroadsInOracle,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs, makeWikiActivationCap,
@@ -803,10 +803,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // the grain (resolveWikiSpec wakes ANY registered wiki cold, single-flight). node is
     // headless — no #projection surface to flip — so a switch here is pure activation.
     registry.register("wiki-switch", async (args) => {
-      // The slug rides EITHER as an explicit arg (CLI / MCP) OR encoded in the
-      // verb-tiddler URI (`…/verb/wiki-switch/<slug>`) when the summon arrives as
-      // a DOM-driven verse-event, whose payload admits only {uri, verb, fromUri}.
-      const slug = String(args["slug"] ?? "") || laresVerbUriArg(String(args["uri"] ?? ""), 0);
+      // The slug rides as a structured `slug` arg — from the CLI / MCP, OR from a
+      // DOM-driven verse-event whose `arg-slug` field the reaction-router lifted into
+      // the args payload (#48 unified the DOM path onto the CLI's structured-args contract).
+      const slug = String(args["slug"] ?? "");
       if (!slug) throw new Error("wiki-switch: `slug` required");
       const active = await wikiActivation.ensureActive(slug);
       return { verb: "wiki-switch", slug, active, held: [...wikiActivation.held()] };
@@ -999,7 +999,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         if (!verb) return;
         daemonVm.placeVerb({
           verb,
-          args:        payload as unknown as Record<string, unknown>,
+          args:        verbArgsFromPayload(payload),   // structured args off the `verb-args` JSON (#48)
           requestedBy: typeof payload["requestedBy"] === "string" ? payload["requestedBy"] : listenable,
           listenable,
           ...(fromUri ? { fromUri } : {}),

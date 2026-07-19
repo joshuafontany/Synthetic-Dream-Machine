@@ -42,6 +42,7 @@ import {
   mkTeardown,
   isIslandToVesselMsg,
   CROSSROADS_DOC_URI,
+  verbArgsFromPayload,
   mkWikiDomEvent,
   type IslandMsg_Event,
   type VesselWorkerHandle,
@@ -377,12 +378,14 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
       }
       // Verb OUT-path: a verb-carrying verse-event from the @daemon's own surface
       // (a projected switcher click). Forward it to the vessel's placeVerb bridge.
+      // The summon's structured args ride the flat wire as a `verb-args` JSON string;
+      // re-parse it (#48) — no longer the whole flat payload smuggling {uri,verb,fromUri}.
       const verb = typeof ev.payload["verb"] === "string" ? (ev.payload["verb"] as string) : undefined;
       if (verb && _verbEventHandler) {
         const fromUri = typeof ev.payload["fromUri"] === "string" ? (ev.payload["fromUri"] as string) : undefined;
         _verbEventHandler({
           verb,
-          args:      ev.payload as unknown as Record<string, unknown>,
+          args:      verbArgsFromPayload(ev.payload),
           ...(fromUri ? { fromUri } : {}),
           listenable: ev.listenable,
         });

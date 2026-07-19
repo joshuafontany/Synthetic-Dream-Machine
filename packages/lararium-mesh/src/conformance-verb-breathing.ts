@@ -19,6 +19,12 @@
  */
 
 import type { IslandMsg_Event } from "./island-protocol.js";
+import {
+  LARES_DISPATCH_FIELD,
+  LARES_VERB_ARG_PREFIX,
+  LARES_VERB_ARGS_WIRE_FIELD,
+  verbArgsFromPayload,
+} from "./lar-uris.js";
 
 export interface VerbBreathingContract {
   /** The island's wiki URI (mountWiki id). */
@@ -29,6 +35,25 @@ export interface VerbBreathingContract {
   verb:       string;
   /** The listenable the tiddler carries. */
   listenable: string;
+  /** Optional per-invocation args the summon carries as `arg-<name>` fields — the router
+   *  lifts them into the structured `verb-args` payload (#48). Absent → a no-arg summon. */
+  args?:      Readonly<Record<string, string>>;
+}
+
+/**
+ * The FIELDS a genuine DOM verb-summon tiddler MUST carry for the reaction-router to fire
+ * (#48): the `verb`, its `listenable`, the `lares-dispatch` MARKER (absent → router-inert,
+ * the loop-break), and each arg as an `arg-<name>` field. Both platform harnesses seed a
+ * summon tiddler with these, so the marker/args contract lives in ONE place.
+ */
+export function dispatchTiddlerFields(c: VerbBreathingContract): Record<string, string> {
+  const fields: Record<string, string> = {
+    verb:                 c.verb,
+    listenable:           c.listenable,
+    [LARES_DISPATCH_FIELD]: "1",
+  };
+  for (const [k, v] of Object.entries(c.args ?? {})) fields[`${LARES_VERB_ARG_PREFIX}${k}`] = v;
+  return fields;
 }
 
 /** Locate the verb event in a collected stream (use inside a poll/waitFor). */
@@ -57,4 +82,10 @@ export function assertVerbBreathingEvent(
   eq(hit.payload["verb"],    c.verb,        "verb");
   eq(hit.payload["fromUri"], c.buttonUri,   "fromUri");
   eq(hit.payload["uri"],     c.buttonUri,   "uri");
+  // The structured args ride the flat wire as a `verb-args` JSON string; it re-parses to
+  // the contract's args (empty for a no-arg summon). This proves the payload path (#48).
+  if (c.args !== undefined) {
+    eq(typeof hit.payload[LARES_VERB_ARGS_WIRE_FIELD], "string", "verb-args-is-string");
+    eq(JSON.stringify(verbArgsFromPayload(hit.payload)), JSON.stringify(c.args), "verb-args");
+  }
 }

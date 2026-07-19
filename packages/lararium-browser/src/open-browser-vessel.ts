@@ -23,7 +23,7 @@ import {
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   DeterministicFederationGate, federationShareDecision, type FederationGate,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
-  BAG_IDS, slugFromUri, laresVerbUriArg, bagStackFromRec, recipeUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
+  BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, BagResidencyManager, recipeHostFacets, makeWikiActivationCap, type WikiActivationCap, type ResolveWikiSpec, wikiBagUri, tiddlerText,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
@@ -629,10 +629,10 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // singleton #projection gate to it — the summon, mount-then-flip. Persist the
       // choice fire-and-forget to the boot pointer (read only at next cold boot).
       registry.register("wiki-switch", async (args) => {
-        // slug rides EITHER as an explicit arg (CLI / MCP) OR encoded in the summon
-        // tiddler URI (`…/verb/wiki-switch/<slug>`) when a DOM verse-event drives it
-        // — the verse-event payload admits only {uri, verb, fromUri}, never args.
-        const slug = String(args["slug"] ?? "") || laresVerbUriArg(String(args["uri"] ?? ""), 0);
+        // slug rides as a structured `slug` arg — from the CLI / MCP, OR from a DOM
+        // verse-event whose `arg-slug` field the reaction-router lifted into the args
+        // payload (#48 unified the DOM path onto the CLI's structured-args contract).
+        const slug = String(args["slug"] ?? "");
         if (!slug) throw new Error("wiki-switch: `slug` required");
         const active = await wikiActivation.ensureActive(slug);
         if (active) {
@@ -746,7 +746,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           const fromUri = typeof msg.payload["fromUri"] === "string" ? msg.payload["fromUri"] : undefined;
           if (!verb) return;
           daemon.placeVerb({
-            verb, args: msg.payload as unknown as Record<string, unknown>,
+            verb, args: verbArgsFromPayload(msg.payload),   // structured args off the `verb-args` JSON (#48)
             requestedBy: typeof msg.payload["requestedBy"] === "string" ? msg.payload["requestedBy"] : msg.listenable,
             listenable: msg.listenable, ...(fromUri ? { fromUri } : {}),
           });
@@ -815,13 +815,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       });
       // The @daemon's OWN verb OUT-path (a projected switcher click → wiki-switch /
       // add-bag / remove-bag): re-enter the dispatcher via placeVerb so the verb runs on
-      // the main registry. The bridge is wired end-to-end (daemon-vm onVerbEvent), but the
-      // forward is GATED OFF pending a loop-safe dispatch: a verb's durable outcome +
-      // volatile invocation are themselves lar:-titled with a `verb` field, so the
-      // reaction-router re-fires on the verb machinery's own writes and re-forwarding them
-      // loops. #48 (args-payload in the verse-event contract) carries the clean fix; until
-      // then the switcher activates wikis via the CLI `lares wiki switch` face.
-      const DAEMON_SURFACE_VERBS_LIVE = false;   // flip on with the #48 loop-safe dispatch
+      // the main registry. LOOP-SAFE as of #48: the reaction-router fires a verb
+      // verse-event ONLY on a tiddler carrying the `lares-dispatch` marker, which the verb
+      // machinery's own invocation/outcome writes never set — so re-forwarding cannot loop.
+      // Summon args ride the structured `verb-args` payload, not the URI (bearing-only).
+      const DAEMON_SURFACE_VERBS_LIVE = true;   // #48 loop-safe dispatch — live
       if (DAEMON_SURFACE_VERBS_LIVE) {
         daemon.onVerbEvent((e) => {
           void daemon.placeVerb({

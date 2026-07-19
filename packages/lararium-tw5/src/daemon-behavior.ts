@@ -37,7 +37,7 @@ import {
   type CapabilityVerifier,
   type CaptureEngine,
   type CapturePost,
-  LARES_VERB_URI_PREFIX,
+  LARES_VERB_ARGS_WIRE_FIELD,
 } from "@lararium/mesh";
 import { placeVerb } from "./verb-vm.js";
 import { composeIsland } from "./island-caps.js";
@@ -160,13 +160,12 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
       // main registry, e.g. wiki-switch). Without this, @daemon-origin verbs never leave
       // the worker (projection frames reach main, but verse-events had no bridge).
       const cancelVerse = tw5.onVerseEvent({
-        handleVerseEvent: (uri: string, listenable: string, verb?: string, fromUri?: string) => {
-          // Forward ONLY genuine button summons (LARES_VERB_URI_PREFIX = …/verb/<v>/<args>).
-          // ALLOWLIST, not blocklist: the verb machinery's OWN lar:-titled tiddlers that
-          // carry a `verb` field — the dispatcher's volatile invocations (…/verbs/<id>) and
-          // the durable OUTCOME tiddlers — also trip the reaction-router, and re-forwarding
-          // either loops (placeVerb → invocation/outcome → verse-event → placeVerb → …).
-          if (!uri.startsWith(LARES_VERB_URI_PREFIX)) return;
+        handleVerseEvent: (uri: string, listenable: string, verb?: string, fromUri?: string, args?: Record<string, unknown>) => {
+          // The reaction-router already gates on the `lares-dispatch` marker, so ONLY a
+          // genuine summon reaches here (the verb machinery's own invocation/outcome
+          // writes never carry the marker → router-inert; #48 retired the fragile
+          // URI-prefix allowlist that this bridge used to run). The structured args ride
+          // the GP-2-flat island wire as ONE `verb-args` JSON string; main re-parses.
           post({
             schema_version: 1,
             type:           "event",
@@ -176,6 +175,7 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
               uri,
               ...(verb    !== undefined ? { verb }    : {}),
               ...(fromUri !== undefined ? { fromUri } : {}),
+              ...(args    !== undefined ? { [LARES_VERB_ARGS_WIRE_FIELD]: JSON.stringify(args) } : {}),
             },
           });
         },

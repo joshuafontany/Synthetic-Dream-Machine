@@ -71,34 +71,54 @@ export function stableTagUri(name: string): string {
 }
 
 // ── Lares verb-tiddler namespace (DOM summon → verse-event) ────────────────
-// A TW5 <$button> summons a verb by writing a tiddler whose TITLE lives here and
-// whose `verb` field names the verb. The reaction-router forwards only lar:-titled
-// tiddlers carrying a `verb` field, and the verse-event payload admits ONLY
-// {uri, verb, fromUri} — never arbitrary args — so a verb's positional args ride
-// as URI path segments (each a NAME/address, honoring the URI-carries-bearing law),
-// and the handler reads them back off `args.uri`. The VOLATILE namespace keeps the
-// summon tiddler reaction-routable (lar: prefix) yet unpersisted/unsynced
-// (isVolatileVmUri → the capture path skips it).
+// A TW5 <$button> summons a verb by writing a tiddler whose TITLE names the verb
+// (`…/verb/<verb>` — PURE BEARING, the URI-carries-bearing law: the address names the
+// verb, nothing per-invocation) and whose `verb` field re-states it. Per-invocation
+// ARGS ride as sibling `arg-<name>` fields on the same tiddler, NOT smuggled into the
+// URI — the reaction-router lifts them into a structured args payload the verse-event
+// carries (#48). A GENUINE dispatch also sets the `lares-dispatch` marker field; the
+// router fires a verb verse-event ONLY on a marked tiddler, so the verb machinery's own
+// lar:-titled writes (`…/verbs/<id>` invocations, `@daemon/outcomes/<id>` outcomes —
+// which carry a `verb` field but never the marker) stay router-inert BY CONSTRUCTION,
+// and no dispatch loop can form. The VOLATILE namespace keeps the summon tiddler
+// reaction-routable (lar: prefix) yet unpersisted/unsynced (isVolatileVmUri → the
+// capture path skips it).
 export const LARES_VERB_URI_PREFIX = volatileVmUri("verb/");
 
-/** Build a verb-summon tiddler title: `…/verb/<verb>/<arg0>/<arg1>…` (args %-encoded). */
-export function laresVerbUri(verb: string, ...args: string[]): string {
-  const tail = args.length ? `/${args.map(encodeURIComponent).join("/")}` : "";
-  return `${LARES_VERB_URI_PREFIX}${verb}${tail}`;
+/**
+ * The dispatch-intent MARKER field. A genuine DOM verb-summon carries `lares-dispatch`
+ * (truthy); the reaction-router fires the verb verse-event only on a marked tiddler.
+ * The verb machinery's own invocation/outcome builders NEVER set it — that positive,
+ * fail-safe discriminator (absent → no fire) is what breaks the reaction loop (#48).
+ */
+export const LARES_DISPATCH_FIELD = "lares-dispatch";
+
+/** Field-name prefix carrying a summon's named args (`arg-slug`, `arg-bagUrl`, …). The
+ *  reaction-router lifts every `arg-<name>` field into the structured args payload. */
+export const LARES_VERB_ARG_PREFIX = "arg-";
+
+/** The single flat-wire key the structured summon args ride as a JSON string. IslandMsg_Event
+ *  payloads admit only scalars (GP-2), so the router's structured args serialize to this key
+ *  crossing the worker→vessel boundary; the vessel re-parses via `verbArgsFromPayload` (#48). */
+export const LARES_VERB_ARGS_WIRE_FIELD = "verb-args";
+
+/** Re-parse the structured summon args off a flat verse-event payload (`verb-args` JSON string).
+ *  Empty object when absent or malformed — a summon with no args is the common case. */
+export function verbArgsFromPayload(payload: Record<string, unknown>): Record<string, unknown> {
+  const raw = payload[LARES_VERB_ARGS_WIRE_FIELD];
+  if (typeof raw !== "string" || !raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? (parsed as Record<string, unknown>) : {};
+  } catch {
+    return {};
+  }
 }
 
-/** Read `{ verb, args }` back off a verb-summon tiddler title; null when not one. */
-export function laresVerbUriArgs(uri: string): { verb: string; args: string[] } | null {
-  if (!uri.startsWith(LARES_VERB_URI_PREFIX)) return null;
-  const parts = uri.slice(LARES_VERB_URI_PREFIX.length).split("/");
-  const verb  = parts.shift() ?? "";
-  if (!verb) return null;
-  return { verb, args: parts.map((a) => decodeURIComponent(a)) };
-}
-
-/** Convenience: the Nth positional arg off a verb-summon URI, or "" when absent. */
-export function laresVerbUriArg(uri: string, index: number): string {
-  return laresVerbUriArgs(uri)?.args[index] ?? "";
+/** Build a verb-summon tiddler title: `…/verb/<verb>` — PURE BEARING, no args (they ride
+ *  the tiddler's `arg-<name>` fields; #48 retired the args-in-URI smuggling). */
+export function laresVerbUri(verb: string): string {
+  return `${LARES_VERB_URI_PREFIX}${verb}`;
 }
 
 // ── Bag / Wiki / Cid identity — the three kind-planes ──────────────────────

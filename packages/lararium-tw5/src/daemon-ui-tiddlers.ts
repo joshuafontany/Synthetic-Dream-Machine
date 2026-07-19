@@ -22,6 +22,9 @@
  * Meme: lar:///ha.ka.ba/lararium/tw5/daemon-ui-tiddlers
  */
 
+// Leaf subpath (NOT the barrel) — keeps automerge WASM out of any CJS plugin bundle this
+// module's constants get pulled into (the reaction-router leaf-import rule).
+import { LARES_DISPATCH_FIELD, LARES_VERB_ARG_PREFIX } from "@lararium/mesh/lar-uris";
 import type { TW5Engine } from "./tw5-vm.js";
 import type { VerbReactor } from "./verb-dispatcher.js";
 
@@ -37,9 +40,10 @@ const WORKING_TITLE   = "$:/lares/ui/working-surface";
 const PAGECTRL_TITLE  = "$:/lares/ui/PageControls/daemon";
 
 // The volatile verb-summon namespace (mirrors mesh/lar-uris laresVerbUri). A button
-// writes `…/verb/<verb>/<arg…>` with a `verb` field; the reaction-router forwards it
-// as a tm-verse-event and the vessel routes it to the main verb plane. Kept as a
-// literal here so the wikitext can build titles with TW5 filter operators.
+// writes a tiddler titled `…/verb/<verb>` (PURE BEARING — the verb NAME, no args) carrying
+// a `verb` field, the `lares-dispatch` MARKER (so the reaction-router fires — the loop-break,
+// #48), and its per-invocation args as `arg-<name>` fields the router lifts into the
+// structured payload. Kept as a literal here so the wikitext can build titles inline.
 const VERB_PREFIX = "lar:///lararium.local.vm/verb/";
 
 // ── The four CODE tiddlers ───────────────────────────────────────────────────
@@ -58,10 +62,10 @@ const WORKING_BODY = `\\whitespace trim
 <h2 class="lares-switcher-title">Active wikis</h2>
 <div class="lares-switcher-list">
 <$list filter="[list[${SWITCHER_STATE_TITLE}]]" variable="wikiSlug" emptyMessage="<p class='lares-empty' data-lares-empty='wikis'>No live wikis yet — summon again to refresh.</p>">
-<$let verbTitle={{{ [<wikiSlug>addprefix[${VERB_PREFIX}wiki-switch/]] }}} heldHit={{{ [enlist{${SWITCHER_STATE_TITLE}!!held}] +[match<wikiSlug>] }}} surfaceHit={{{ [{${SWITCHER_STATE_TITLE}!!surface}match<wikiSlug>] }}}>
+<$let heldHit={{{ [enlist{${SWITCHER_STATE_TITLE}!!held}] +[match<wikiSlug>] }}} surfaceHit={{{ [{${SWITCHER_STATE_TITLE}!!surface}match<wikiSlug>] }}}>
 <div class="lares-switcher-row">
 <$button class="lares-switch-btn" data-lares-wiki=<<wikiSlug>>>
-<$action-setfield $tiddler=<<verbTitle>> verb="wiki-switch"/>
+<$action-setfield $tiddler="${VERB_PREFIX}wiki-switch" verb="wiki-switch" ${LARES_DISPATCH_FIELD}="1" ${LARES_VERB_ARG_PREFIX}slug=<<wikiSlug>>/>
 <$text text=<<wikiSlug>>/><$list filter="[<heldHit>minlength[1]]" variable="_"> <span class="lares-pin" data-lares-pin=<<wikiSlug>>>📌</span></$list><$list filter="[<surfaceHit>minlength[1]]" variable="_"> <span class="lares-surface-mark">◀</span></$list>
 </$button>
 </div>
@@ -73,17 +77,13 @@ const WORKING_BODY = `\\whitespace trim
 <div class="lares-recipe" data-lares-recipe={{${SWITCHER_STATE_TITLE}!!recipeSlug}}>
 <div class="lares-recipe-list">
 <$list filter="[enlist{${SWITCHER_STATE_TITLE}!!recipe}]" variable="bagUri" emptyMessage="<p class='lares-empty' data-lares-empty='recipe'>(recipe empty — add a bag below)</p>">
-<$let rmTitle={{{ [{${SWITCHER_STATE_TITLE}!!recipeSlug}addprefix[${VERB_PREFIX}remove-bag/]addsuffix[/]] }}} bagEnc={{{ [<bagUri>encodeuricomponent[]] }}}>
-<div class="lares-recipe-row"><span class="lares-recipe-bag"><$text text=<<bagUri>>/></span> <$button class="lares-recipe-remove" data-lares-remove=<<bagUri>>><$action-setfield $tiddler={{{ [<rmTitle>addsuffix<bagEnc>] }}} verb="remove-bag"/>remove</$button></div>
-</$let>
+<div class="lares-recipe-row"><span class="lares-recipe-bag"><$text text=<<bagUri>>/></span> <$button class="lares-recipe-remove" data-lares-remove=<<bagUri>>><$action-setfield $tiddler="${VERB_PREFIX}remove-bag" verb="remove-bag" ${LARES_DISPATCH_FIELD}="1" ${LARES_VERB_ARG_PREFIX}slug={{${SWITCHER_STATE_TITLE}!!recipeSlug}} ${LARES_VERB_ARG_PREFIX}bagUrl=<<bagUri>>/>remove</$button></div>
 </$list>
 </div>
 <div class="lares-recipe-add">
 <p class="lares-recipe-add-label">Add a bag:</p>
 <$list filter="[enlist{${SWITCHER_STATE_TITLE}!!availableBags}]" variable="bagUri" emptyMessage="<p class='lares-empty' data-lares-empty='available'>(no other bags to add)</p>">
-<$let addTitle={{{ [{${SWITCHER_STATE_TITLE}!!recipeSlug}addprefix[${VERB_PREFIX}add-bag/]addsuffix[/]] }}} bagEnc={{{ [<bagUri>encodeuricomponent[]] }}}>
-<div class="lares-recipe-row"><span class="lares-recipe-bag"><$text text=<<bagUri>>/></span> <$button class="lares-recipe-add-btn" data-lares-add=<<bagUri>>><$action-setfield $tiddler={{{ [<addTitle>addsuffix<bagEnc>] }}} verb="add-bag"/>add</$button></div>
-</$let>
+<div class="lares-recipe-row"><span class="lares-recipe-bag"><$text text=<<bagUri>>/></span> <$button class="lares-recipe-add-btn" data-lares-add=<<bagUri>>><$action-setfield $tiddler="${VERB_PREFIX}add-bag" verb="add-bag" ${LARES_DISPATCH_FIELD}="1" ${LARES_VERB_ARG_PREFIX}slug={{${SWITCHER_STATE_TITLE}!!recipeSlug}} ${LARES_VERB_ARG_PREFIX}bagUrl=<<bagUri>>/>add</$button></div>
 </$list>
 </div>
 </div>

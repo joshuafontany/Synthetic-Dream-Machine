@@ -2,7 +2,6 @@ import type { LarTiddlerRecord } from "@lararium/mesh";
 import {
   bagStackFromRec,
   recipeUri,
-  laresVerbUriArgs,
   mkDaemonResidencyOp,
   mkDaemonWikiAlert,
 } from "@lararium/mesh";
@@ -10,16 +9,15 @@ import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
 
 /**
- * Read a recipe-verb's {slug, bagUrl} from EITHER explicit args (CLI / MCP) OR the
- * summon-tiddler URI (`…/verb/<add|remove>-bag/<slug>/<bagUrl>`) when a DOM-driven
- * verse-event carried it — that payload admits only {uri, verb, fromUri}, so the two
- * positional args ride the URI (each %-encoded; #48 migrates this onto an args payload).
+ * Read a recipe-verb's {slug, bagUrl} from the structured args — ONE contract for the
+ * CLI / MCP AND the DOM path: #48 unified the DOM summon onto the same `slug` / `bagUrl`
+ * args (its `arg-slug` / `arg-bagUrl` fields the reaction-router lifts into the payload),
+ * retiring the args-in-URI smuggling the handler used to decode.
  */
 function recipeArgs(args: Readonly<Record<string, unknown>>): { slug: string; bagUrl: string } {
-  const parsed = laresVerbUriArgs(stringArg(args, "uri"));
   return {
-    slug:   stringArg(args, "slug")   || (parsed?.args[0] ?? ""),
-    bagUrl: stringArg(args, "bagUrl") || (parsed?.args[1] ?? ""),
+    slug:   stringArg(args, "slug"),
+    bagUrl: stringArg(args, "bagUrl"),
   };
 }
 import type { WikiComposeOptions } from "./wiki-handler-options.js";

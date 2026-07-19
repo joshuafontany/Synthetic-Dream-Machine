@@ -2,11 +2,14 @@
  * verb-tiddler-dispatch.test.ts — M.3 full-TW5-boot verb dispatch gate.
  *
  * Proves the complete path:
- *   tiddler with `verb` field arrives in island wiki (via CRDT sync)
- *   → reaction-router nalu fires → reads tiddler.fields["verb"]
- *   → tm-verse-event { verb, listenable, fromUri }
+ *   tiddler with `verb` field AND the `lares-dispatch` marker arrives in island wiki (CRDT)
+ *   → reaction-router nalu fires → reads fields["verb"] gated on the marker (#48)
+ *   → tm-verse-event { verb, listenable, fromUri, args }
  *   → island-kernel posts IslandMsg_Event with payload.verb
  *   → vessel onWorkerEvent receives verb
+ *
+ * And the loop-break invariant (#48): a verb tiddler WITHOUT the marker — the shape the
+ * verb machinery's own invocation/outcome writes take — stays router-inert (no event).
  *
  * Uses the real compiled node-wiki-island.js + genesis blob.
  * Requires: pnpm --filter @lararium/node build and build:genesis.
@@ -141,10 +144,12 @@ describe.skipIf(skipReason)(
           // The nalu engine restores title from change.title when applying to the wiki.
           tiddlers[DEVICE_URI] = {
             tiddler: {
-              verb:       "MOVE",
-              listenable: "InteractedWithEvent",
-              text:       "test device tiddler",
-              tags:       "",
+              verb:             "MOVE",
+              listenable:       "InteractedWithEvent",
+              "lares-dispatch": "1",     // the dispatch-intent marker — the router fires only on this (#48)
+              "arg-target":     "hearth", // a named arg the router lifts into the verb-args payload
+              text:             "test device tiddler",
+              tags:             "",
             },
           };
         });
@@ -161,6 +166,8 @@ describe.skipIf(skipReason)(
         expect(ev.payload["fromUri"]).toBe(DEVICE_URI);
         expect(ev.payload["uri"]).toBe(DEVICE_URI);
         expect(ev.wikiUri).toBe(WIKI_ID);
+        // The `arg-target` field rode into the structured args as the flat `verb-args` JSON (#48).
+        expect(JSON.parse(String(ev.payload["verb-args"]))).toEqual({ target: "hearth" });
 
       } finally {
         await pool.disposeAll();
@@ -172,7 +179,7 @@ describe.skipIf(skipReason)(
   );
 
   test(
-    "tiddler without verb field fires no verb event (observation-only)",
+    "a verb tiddler WITHOUT the dispatch marker fires nothing — the loop-break (#48)",
     async () => {
       const startedAt     = Date.now();
       const genesisBytes  = new Uint8Array(readFileSync(GENESIS_BIN));
@@ -208,18 +215,24 @@ describe.skipIf(skipReason)(
           grants:   { islandUrl: laraiumHandle.url, wikiUrl: wikiHandle.url },
         });
 
-        // The tiddler under observation carries NO verb, so the router must let it pass in silence.
-        // The SENTINEL follows it and does carry one. Both ride the same CRDT change, so the island
-        // sees the observed tiddler no later than the sentinel — and the sentinel's event is the only
-        // thing that licenses reading the silence as a REFUSAL rather than as a slow boot.
+        // Two tiddlers that MUST stay silent: OBSERVED_URI carries no verb at all, and
+        // MACHINERY_URI carries a `verb` field but NO `lares-dispatch` marker — exactly the
+        // shape of the verb machinery's own invocation/outcome writes, the loop the marker
+        // breaks (#48). The SENTINEL follows, carrying verb + marker, so it DOES fire. All
+        // ride the same CRDT change, so the island sees the silent pair no later than the
+        // sentinel — the sentinel's event is what licenses reading their silence as a REFUSAL.
+        const MACHINERY_URI = "lar:///lararium.local.vm/verbs/machinery-write-1";
         wikiHandle.change((d) => {
           const tiddlers = (d as unknown as Record<string, unknown>)["tiddlers"] as
             Record<string, unknown>;
           tiddlers[OBSERVED_URI] = {
             tiddler: { text: "no verb here", tags: "" },
           };
+          tiddlers[MACHINERY_URI] = {
+            tiddler: { verb: "MOVE", listenable: "InteractedWithEvent", text: "machinery write (no marker)", tags: "" },
+          };
           tiddlers[SENTINEL_URI] = {
-            tiddler: { verb: "DRAIN", listenable: "InteractedWithEvent", text: "sentinel", tags: "" },
+            tiddler: { verb: "DRAIN", listenable: "InteractedWithEvent", "lares-dispatch": "1", text: "sentinel", tags: "" },
           };
         });
 
@@ -230,8 +243,11 @@ describe.skipIf(skipReason)(
           "the DRAIN sentinel's IslandMsg_Event",
         );
 
-        // The silence now MEANS something: the router saw the observed tiddler and fired nothing for it.
-        expect(verbEvents.map((e) => e.payload["fromUri"])).not.toContain(OBSERVED_URI);
+        // The silence now MEANS something: the router saw both silent tiddlers and fired
+        // nothing for either — neither the verb-less one NOR the markerless-verb machinery write.
+        const firedFrom = verbEvents.map((e) => e.payload["fromUri"]);
+        expect(firedFrom).not.toContain(OBSERVED_URI);
+        expect(firedFrom).not.toContain(MACHINERY_URI);   // the loop-break: verb without marker = inert
         expect(verbEvents.filter((e) => e.payload["verb"] !== "DRAIN")).toHaveLength(0);
 
       } finally {

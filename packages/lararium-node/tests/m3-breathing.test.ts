@@ -33,7 +33,7 @@ import {
 } from "@lararium/mesh";
 import type { LarDoc, IslandMsg_Event } from "@lararium/mesh";
 import {
-  findVerbBreathingEvent, assertVerbBreathingEvent,
+  findVerbBreathingEvent, assertVerbBreathingEvent, dispatchTiddlerFields,
   type VerbBreathingContract,
 } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
@@ -85,6 +85,9 @@ const CONTRACT = {
   buttonUri:  BUTTON_URI,
   verb:       "MOVE",
   listenable: "InteractedWithEvent",
+  // Exercise the #48 args-payload path: an `arg-target` field the router lifts into the
+  // structured `verb-args` JSON on the flat wire.
+  args:       { target: "hearth" },
 } satisfies VerbBreathingContract;
 
 // ── Suite ──────────────────────────────────────────────────────────────────
@@ -112,10 +115,10 @@ describe.skipIf(skipReason)(
         const wikiHandle = vesselRepo.create<LarDoc>();
         wikiHandle.change((d) => {
           (d as unknown as Record<string, unknown>)["tiddlers"] = {
-            [BUTTON_URI]: mutableLarRecord(BUTTON_URI, {
-              verb:       "MOVE",
-              listenable: "InteractedWithEvent",
-            }, "m3-test"),
+            // Seed the summon via the SHARED dispatch-field battery (verb + listenable +
+            // the `lares-dispatch` marker + `arg-*` fields) — the same fields both platforms
+            // must carry for the reaction-router to fire (#48).
+            [BUTTON_URI]: mutableLarRecord(BUTTON_URI, dispatchTiddlerFields(CONTRACT), "m3-test"),
           };
         });
 
