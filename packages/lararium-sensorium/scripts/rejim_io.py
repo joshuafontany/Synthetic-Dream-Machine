@@ -44,15 +44,19 @@ def _content_stream(store: ContentStore) -> str:
 
 
 def repour_rejim(content_dir: str, rejim_dir: str, *, channel: str = CONTENT,
-                  n_surrogates: int = 3) -> dict:
+                  n_surrogates: int = 3, content_store: "ContentStore | None" = None) -> dict:
     """Repour the derived rejim plane over the whole content: read content → concatenate the stream in
     authored order → DETECT the nameless regimes → couple cepat⊥lambat → land. Rebuildable — a re-repour
     fully overwrites from content, the one writable source; it holds no verbatim (a landed rejim resolves
     back to the stream by scale + span). Content-only, so the same repour runs on a sigil-less corpus.
 
-    The caller owns the pressure discipline (exclusive root-mutation lease + coalesce-gate + timeout servo);
+    `content_store` (optional): reuse an ALREADY-OPEN content handle — the capture holder passes its ONE
+    handle so the whole holder shares a single content connection (the dual-writer discipline, held even for
+    this read; a caller-owned handle is never closed here). Absent → open from `content_dir` (the CLI path).
+
+    The caller owns the cadence discipline (the serialized capture pipe + the coalesce-gate + timeout servo);
     this is the pure derive-and-land, decoupled from the store the way the pave is."""
-    stream = _content_stream(ContentStore(content_dir))
+    stream = _content_stream(content_store if content_store is not None else ContentStore(content_dir))
     reading = detect_rejim(stream, channel=channel, n_surrogates=n_surrogates)
     landed = {**strip_private(reading), "couples": couple_rejim(reading), "stream_chars": len(stream)}
     os.makedirs(rejim_dir, exist_ok=True)

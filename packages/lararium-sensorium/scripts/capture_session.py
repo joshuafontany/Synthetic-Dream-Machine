@@ -228,6 +228,7 @@ class CaptureSessionServer:
             self._paths.content, rejim_dir,
             channel=str(req.get("channel") or rejim_io.CONTENT),
             n_surrogates=int(req.get("nSurrogates") or 3),
+            content_store=self._content_store(),   # reuse the holder's ONE content handle (the discipline)
         )
 
     def read_rejim(self, req: dict) -> dict:
