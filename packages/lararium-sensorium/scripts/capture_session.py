@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""capture_session — the COORDINATOR/DRIVER that takes the capture engine LIVE (the M1 keystone wire).
+"""capture_session — the COORDINATOR/DRIVER that takes the capture engine LIVE (the keystone wire).
 
 The engine (capture_stream.Pipeline via sensorium.compose_stream_sensorium) stood DARK: no surface cap
 parsed a transcript, nothing drove a pass. This driver composes the whole cap-stack and pulls the

@@ -3,7 +3,7 @@ sensorium's OWN process (minilm/384, loaded once + process-cached). It CONSUMES 
 mempalace.embedding.get_embedding_function, so a vector here matches the mine-path's for the same text
 (store-compatible by construction). The web2 model runs behind the causal-island (this process); the
 sensorium sees only a text→vector callable. `embed_io` (the separate NDJSON holder) stands in place for
-the parallel fan-out split; this in-engine cap serves the M1 serial land-leg (fork-B: embed-in-engine —
+the parallel fan-out split; this in-engine cap serves the serial land-leg (fork-B: embed-in-engine —
 the ~500ms budget forbids a cold per-hook embed, and the model rides warm here).
 """
 from __future__ import annotations

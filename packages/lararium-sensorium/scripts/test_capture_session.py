@@ -6,7 +6,7 @@ an EPHEMERAL Memory palace (never the sovereign ~/.mempalace).
   · W1.5c crash re-derivation: a partial pass, then a full re-run lands the TAIL (the crash-cure).
   · W1.5d cid single-derivation: distinct turns → distinct FULL-hex cids in the LANDED store, re-derive matches.
   + the embedder-identity floor: the driver stamps lar_embedder_model + pins dim/model.
-  + a REAL warm-embed wire (skipped when minilm can't load) — the true M1 keystone.
+  + a REAL warm-embed wire (skipped when minilm can't load) — the true keystone.
 
     PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_capture_session.py -q
 """
@@ -280,7 +280,7 @@ def test_embedder_model_floor_rejects_a_mismatched_stamp(tmp_path):
 
 @pytest.mark.parametrize("_", [0])
 def test_real_warm_embed_wires_the_keystone(tmp_path, _):
-    # THE true M1 wire — the real warm minilm cap. Skips when the model can't load (offline/no weights).
+    # THE true wire — the real warm minilm cap. Skips when the model can't load (offline/no weights).
     try:
         from embed_cap import make_embed_cap
         embed_one, model = make_embed_cap()

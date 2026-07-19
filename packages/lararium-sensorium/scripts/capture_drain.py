@@ -11,7 +11,7 @@ from the accept path (the old leak becomes unrepresentable). The watermark advan
 contiguous committed frontier, never by per-event increment — a scan is replay-idempotent, an
 increment is not.
 
-In the M1 capture-engine this orders the landing within one processing pass + carries the exactly-once
+In the capture-engine this orders the landing within one processing pass + carries the exactly-once
 audit; the crash-safety itself rests on the durable transcript (the source) + content_io (the sink) +
 re-derivation, NOT on this in-memory ledger. Pure: no store, no clock, no IO — the engine drives
 stage()/commit() from the real transcript read + content_io land confirmations.

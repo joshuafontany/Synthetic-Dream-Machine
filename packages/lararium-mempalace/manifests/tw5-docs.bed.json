@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "bed": "tw5-docs",
-  "root": "~/.lares/testbeds/tw5-docs",
+  "root": "<data>/sensoriums/tw5-docs",
   "wing": "wing_testbed",
   "room": "corpus",
   "min_support": 2,

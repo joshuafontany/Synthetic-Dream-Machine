@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""form_induction — the S3 FORM cap: the corpus's OWN grammar, induced BLIND.
+"""form_induction — the FORM cap: the corpus's OWN grammar, induced BLIND.
 
 corpus.md #the-form-induction. The COARSEST of the corpus planes (Content ↠ Structure
 ↠ FORM — the chain of coarsenings; bands dissolved into the stored address). Where
@@ -10,7 +10,7 @@ shape, description-length keeps only what pays, and the LLM names LAST (never in
 loop).
 
 An OFFLINE BATCH over the accumulated STRUCTURE plane (the structurepalace of content-free
-trees the S2 router filed under <corpus>/structure), NOT a per-turn hot-path move. One
+trees the structure router filed under <corpus>/structure), NOT a per-turn hot-path move. One
 `induce` command reads the forest back, mines it, and writes the corpus's constructicon
 keyed by structural hash.
 
@@ -79,7 +79,7 @@ _DEFAULT_MIN_SUPPORT = 2     # a template must recur at least this many trees/se
 _DP_MIN = 0.25               # the ΔP association floor for a candidate bigram
 
 
-# ── tree helpers (the content-free {"type", "children"} shape the S2 router emits) ────
+# ── tree helpers (the content-free {"type", "children"} shape the structure router emits) ────
 
 
 def _children(node: dict) -> list:
@@ -111,7 +111,7 @@ def _canonical(value) -> str:
 
 
 def _struct_hash(value) -> str:
-    """The constructicon KEY — sha256 of a template's canonical form (mirrors the S2
+    """The constructicon KEY — sha256 of a template's canonical form (mirrors the
     structurepalace structural_hash), so a form is addressed by its shape, never a name."""
     return content_hash(_canonical(value).encode("utf-8"))[:32]
 
@@ -858,7 +858,7 @@ def label_constructicon(forms: list, namer=None) -> list:
 
 
 def _read_structure_forest(structure_dir: str) -> tuple[list, str | None]:
-    """Read the content-free trees back out of the S2 structure structurepalace (the chroma at
+    """Read the content-free trees back out of the structure structurepalace (the chroma at
     <corpus>/structure). Returns (forest, error). A missing/empty store → ([], reason)."""
     try:
         from mempalace.palace import get_collection
@@ -945,10 +945,10 @@ def cmd_induce(args) -> None:
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="form_induction — the S3 corpus FORM cap (blind grammar induction)")
+    ap = argparse.ArgumentParser(description="form_induction — the corpus FORM cap (blind grammar induction)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     ind = sub.add_parser("induce", help="batch-induce a corpus's constructicon from its structure forest")
-    ind.add_argument("--structure", required=True, help="the S2 structure structurepalace dir (<corpus>/structure)")
+    ind.add_argument("--structure", required=True, help="the structure structurepalace dir (<corpus>/structure)")
     ind.add_argument("--out", default="", help="also write the constructicon NDJSON here")
     ind.add_argument("--min-support", type=int, default=_DEFAULT_MIN_SUPPORT, dest="min_support")
     ind.add_argument("--max-forms", type=int, default=_MAX_FORMS_DEFAULT, dest="max_forms")
