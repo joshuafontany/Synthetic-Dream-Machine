@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "bed": "mark-twain",
+  "wing": "wing_testbed",
+  "room": "corpus",
+  "min_support": 2,
+  "max_forms": 64,
+  "flow": {
+    "sources": [
+      "bags/@lares/ha.ka.ba/lares/library/mark-twain"
+    ],
+    "exclusions": [
+      "*pg3200*",
+      "*WHAT IS MAN*"
+    ],
+    "record_unit": {
+      ".txt": "file"
+    }
+  },
+  "worldline": {
+    "real": [
+      "in-file",
+      "containment"
+    ],
+    "arbitrary": [
+      "walk-order"
+    ]
+  },
+  "twins": {
+    "grain": "in-file-token",
+    "size_matched": true,
+    "seed": 191
+  },
+  "apertures": [
+    {
+      "name": "path-address",
+      "provenance": "given"
+    },
+    {
+      "name": "planes",
+      "provenance": "induced"
+    }
+  ],
+  "predictions": {
+    "sheet": "packages/lararium-mempalace/docs/EMERGENCE-PREREG.md",
+    "anchor": "bed-mark-twain"
+  },
+  "operatorAct": {
+    "who": "operator (Joshua Fontany)",
+    "date": "2026-07-19",
+    "ruling": "Approve #1 + the mark-twain library source. Ordinary literary English as the NEUTRAL comparator bed. The pg3200 complete-works dump and the over-cap WHAT IS MAN essay stand excluded (declared, never silent); the four short works carry the baseline."
+  }
+}

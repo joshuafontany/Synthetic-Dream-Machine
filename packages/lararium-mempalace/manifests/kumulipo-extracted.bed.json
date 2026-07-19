@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "bed": "kumulipo-extracted",
+  "wing": "wing_testbed",
+  "room": "corpus",
+  "min_support": 2,
+  "max_forms": 64,
+  "sections": "extracted",
+  "flow": {
+    "sources": [
+      "bags/@lares/ha.ka.ba/lares/library/hawaii/kumulipo"
+    ],
+    "exclusions": [],
+    "record_unit": {
+      ".mem": "file"
+    }
+  },
+  "worldline": {
+    "real": [
+      "in-file",
+      "containment"
+    ],
+    "arbitrary": [
+      "walk-order"
+    ]
+  },
+  "twins": {
+    "grain": "in-file-token",
+    "size_matched": true,
+    "seed": 191
+  },
+  "apertures": [
+    {
+      "name": "path-address",
+      "provenance": "given"
+    },
+    {
+      "name": "planes",
+      "provenance": "induced"
+    }
+  ],
+  "predictions": {
+    "sheet": "packages/lararium-mempalace/docs/EMERGENCE-PREREG.md",
+    "anchor": "bed-kumulipo-extracted"
+  },
+  "operatorAct": {
+    "who": "operator (Joshua Fontany)",
+    "date": "2026-07-19",
+    "ruling": "Approve #1 — the kumulipo triad + Mark Twain pour through the collapsed manifest runner. The thesis bed reads the #source-text interior (extracted), the native-format law."
+  }
+}

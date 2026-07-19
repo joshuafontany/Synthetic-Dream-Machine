@@ -280,3 +280,53 @@ the memory sensorium joins the rederive queue after the running reap lands.
 house_seeds() re-keyed to carrier vocabulary. The register-separation trial
 MUST run entirely inside this epoch (one parser's eyes across all registers
 — the cross-dialect confound this merge exists to kill).
+
+## Bed predictions — kumulipo-extracted · kumulipo-wrapped (vowed at manifest time, 2026-07-19; UNPOURED)
+
+The dual-run pours the SAME kumulipo carriers two ways through the one
+collapsed runner (the `sections` flag): the thesis reads the `#source-text`
+interior (extracted); the ablation keeps the sigil envelope whole (wrapped).
+Records = one per wā/section; worldline = in-file (the wā sequence) REAL.
+
+<a id="bed-kumulipo-extracted"></a>
+**bed-kumulipo-extracted** — the THESIS bed, the native-format law.
+
+- Wā-grain re-emergence: the coarsening stop (C4) lands at a content-bearing
+  wā level, not the degenerate top — the wā boundaries the meme carries re-read
+  from the text unaided. Vowed at Synthesis 11/20 (it read q 0.58 vs 0.21
+  pre-founding; the re-run must not lose it, but the instruments beneath it
+  changed).
+- Meaning carries the grammar (C1): real ≫ seeded shuffled twin — the savings
+  come from the wā content, not the alphabet. Vowed at Synthesis 10/20.
+
+<a id="bed-kumulipo-wrapped"></a>
+**bed-kumulipo-wrapped** — the ABLATION CONTROL: it tests the instruments, never
+the corpus (wrapping replaces structure and manufactures form — the dual-run
+finding). Read only ALONGSIDE extracted, never as a corpus claim.
+
+- Manufactured form: the wrapped bed's C1 savings lean on the sigil-envelope
+  ALPHABET (the repeated `<<~ … >>` anatomy), so its real-vs-shuffled
+  separation SHRINKS toward the twin relative to extracted — the wā content no
+  longer carries the grammar once the envelope dominates. Vowed at Synthesis
+  10/20 — the frozen-rhythm lock held 0.49 (real) vs 0.31 (placebo); the
+  wrapped-vs-extracted gap is the ablation's whole reading.
+- Kept templates skew to sigil-envelope anatomy (sharktooth frames, ahu
+  wrappers), visibly unlike the extracted bed's wā-content templates. Vowed at
+  Provisional-Synthesis 6/20.
+
+## Bed predictions — mark-twain (vowed at manifest time, 2026-07-19; UNPOURED)
+
+<a id="bed-mark-twain"></a>
+**bed-mark-twain** — the NEUTRAL comparator: ordinary literary English, no sigil
+envelope, whole-file records (four short works; the pg3200 complete-works dump
+and the over-cap WHAT IS MAN essay stand excluded, declared). Its job: a floor
+the structured and enveloped beds must EXCEED, so a "structure" reading on them
+means the text, not the machinery.
+
+- Shallow-but-real structure: C1 savings stay POSITIVE (natural English carries
+  real collocation) yet MODEST — smaller than the liturgical and
+  kumulipo-extracted beds at matched size, and the real-vs-shuffled gap narrower.
+  Vowed at Provisional-Synthesis 7/20.
+- Not the silence attractor (C4): the coarsening stop lands at a content level,
+  not the degenerate top — ordinary prose reads as real language, never noise.
+  Vowed at Provisional-Synthesis 6/20.
