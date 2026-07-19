@@ -3,7 +3,7 @@
 source.
 
 It ties the derived recall surfaces the keel carries: a LEXICAL surface (contentless FTS5 over chunk-spans)
-+ an ENTITY-GRAPH (inverted index + hallways), both keyed by content cid, holding NO verbatim. `index_atom`
++ an ENTITY-GRAPH (inverted index + hallways), both keyed by content cid, holding NO verbatim. `index_block`
 fans one block into every surface; `hybrid_search` fuses the lexical + entity recalls by Reciprocal Rank
 Fusion (RRF) — the rank-merge that dodges BM25-vs-graph score incompatibility. The whole projection drops
 and rebuilds from content (the one-bit test): content is the single writable source, this cap is a
@@ -34,10 +34,10 @@ class MempalaceProjection:
         self._ent = EntityGraph(ent_path, extract_entities)
         self._size, self._overlap = chunk_size, overlap
 
-    def index_atom(self, cid: str, text: str) -> None:
+    def index_block(self, cid: str, text: str) -> None:
         """Fan one content block into every derived surface — the lexical chunks + the entity edges."""
-        self._lex.index_atom(cid, text, size=self._size, overlap=self._overlap)
-        self._ent.index_atom(cid, text)
+        self._lex.index_block(cid, text, size=self._size, overlap=self._overlap)
+        self._ent.index_block(cid, text)
 
     def search_lexical(self, query: str, get_content: Callable[[str], "str | None"], k: int = 10):
         """The independent chunk-lexical surface — spans + verbatim resolved from content."""

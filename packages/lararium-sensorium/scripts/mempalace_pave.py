@@ -23,6 +23,6 @@ def pave(blocks: "Iterable[Tuple[str, str]]", projection, rebuild: bool = True) 
         projection.clear()
     n = 0
     for cid, text in blocks:
-        projection.index_atom(cid, text)
+        projection.index_block(cid, text)
         n += 1
     return n

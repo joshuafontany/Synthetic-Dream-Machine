@@ -24,11 +24,11 @@ def _extract(text):
 def _proj():
     p = MempalaceProjection(extract_entities=_extract, chunk_size=40, overlap=8)
     for cid, text in CONTENT.items():
-        p.index_atom(cid, text)
+        p.index_block(cid, text)
     return p
 
 
-def test_index_atom_fans_into_both_surfaces():
+def test_index_block_fans_into_both_surfaces():
     p = _proj()
     # lexical surface finds a keyword; entity surface recalls by entity
     assert p.search_lexical("orichalcum", _get)
@@ -61,6 +61,6 @@ def test_projection_holds_no_verbatim_and_rebuilds():
     p.clear()
     assert not p.search_lexical("shrine", _get)
     for cid, text in CONTENT.items():
-        p.index_atom(cid, text)
+        p.index_block(cid, text)
     assert p.search_lexical("shrine", _get)
     p.close()

@@ -14,24 +14,24 @@ def _extract(text):
 
 def test_entities_indexed_and_recalled_by_cid():
     g = EntityGraph(extract_entities=_extract)
-    g.index_atom("cid-a", "Joshua built the Lares node with Bob")
+    g.index_block("cid-a", "Joshua built the Lares node with Bob")
     assert set(g.entities_of("cid-a")) == {"Joshua", "Lares", "Bob"}
     g.close()
 
 
 def test_entity_inverted_index_recalls_atoms_across_the_corpus():
     g = EntityGraph(extract_entities=_extract)
-    g.index_atom("cid-a", "Joshua opened the shrine")
-    g.index_atom("cid-b", "Joshua closed the loop")
+    g.index_block("cid-a", "Joshua opened the shrine")
+    g.index_block("cid-b", "Joshua closed the loop")
     assert g.cids_with("Joshua") == ["cid-a", "cid-b"]  # entity recall spans blocks — the graph's value
     g.close()
 
 
 def test_hallways_count_co_occurrence():
     g = EntityGraph(extract_entities=_extract)
-    g.index_atom("cid-a", "Joshua Bob")
-    g.index_atom("cid-b", "Joshua Bob")
-    g.index_atom("cid-c", "Joshua Mara")
+    g.index_block("cid-a", "Joshua Bob")
+    g.index_block("cid-b", "Joshua Bob")
+    g.index_block("cid-c", "Joshua Mara")
     halls = g.hallways(min_count=2)
     assert any(h["entity_a"] == "Bob" and h["entity_b"] == "Joshua" and h["count"] == 2 for h in halls)
     # the min_count gate drops the single co-occurrence (Joshua-Mara)
@@ -41,17 +41,17 @@ def test_hallways_count_co_occurrence():
 
 def test_holds_no_verbatim_and_rebuilds_from_content():
     g = EntityGraph(extract_entities=_extract)
-    g.index_atom("cid-a", "Joshua built Lares")
+    g.index_block("cid-a", "Joshua built Lares")
     g.clear()
     assert g.entities_of("cid-a") == []  # dropped
-    g.index_atom("cid-a", "Joshua built Lares")  # rebuild from content alone
+    g.index_block("cid-a", "Joshua built Lares")  # rebuild from content alone
     assert set(g.entities_of("cid-a")) == {"Joshua", "Lares"}
     g.close()
 
 
-def test_index_atom_is_idempotent():
+def test_index_block_is_idempotent():
     g = EntityGraph(extract_entities=_extract)
-    g.index_atom("cid-a", "Joshua Lares")
-    g.index_atom("cid-a", "Joshua Lares")  # re-index the same block
+    g.index_block("cid-a", "Joshua Lares")
+    g.index_block("cid-a", "Joshua Lares")  # re-index the same block
     assert sorted(g.entities_of("cid-a")) == ["Joshua", "Lares"]  # no duplicate edges (UNIQUE)
     g.close()

@@ -42,7 +42,7 @@ def run(content_dir: str, mempalace_dir: str, query: "str | None" = None, k: int
     proj = MempalaceProjection(db_path=db, extract_entities=extract)
     keep = None if all_strata else authored_only
     try:
-        # Dedup the VIEW by each BLOCK's true identity: an block re-carried across a resume/rewind (same
+        # Dedup the VIEW by each BLOCK's true identity: a block re-carried across a resume/rewind (same
         # lar_block_key — native uuid + block ordinal, stable across the re-carry — under distinct
         # source-keyed cids) paves ONCE; content keeps every copy. Keying on the block, not the turn, so
         # a turn's several blocks all survive (turn-key would collapse them to the first).

@@ -3,7 +3,7 @@
 
 Entities extracted from each content block (keyed by cid) form two recall structures — an INVERTED entity
 index (entity → the cids that mention it) and HALLWAYS (entity co-occurrence over shared blocks). Both hold
-NO verbatim bytes: an block's entities are a small derived tag-set keyed by its cid; the words live once in
+NO verbatim bytes: a block's entities are a small derived tag-set keyed by its cid; the words live once in
 content. So the mempalace gains its entity-graph arm — entity recall + co-occurrence — duplicating no
 source and rebuilding from content alone (the one-bit test).
 
@@ -43,8 +43,8 @@ class EntityGraph:
             self._extract = nakama_entity_extractor()
         return self._extract
 
-    def index_atom(self, cid: str, text: str) -> int:
-        """Extract an block's entities and land them as cid→entity edges (idempotent; no verbatim held)."""
+    def index_block(self, cid: str, text: str) -> int:
+        """Extract a block's entities and land them as cid→entity edges (idempotent; no verbatim held)."""
         ents = set(self._extractor()(text))
         for e in ents:
             self._db.execute("INSERT OR IGNORE INTO entities(cid, entity) VALUES (?,?)", (cid, e))

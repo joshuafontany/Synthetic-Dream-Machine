@@ -49,7 +49,7 @@ class LexicalIndex:
             "(rowid INTEGER PRIMARY KEY, cid TEXT, start INTEGER, end INTEGER, layer TEXT)"
         )
 
-    def index_atom(self, cid: str, text: str, size: int = 512, overlap: int = 64, layer: str = "chunk") -> int:
+    def index_block(self, cid: str, text: str, size: int = 512, overlap: int = 64, layer: str = "chunk") -> int:
         """Chunk ONE content block into overlapping lexical spans and index each chunk's tokens. The chunk
         text tokenizes into the FTS (tokens only at rest); the span's offsets land in the side table. The
         chunk text reads from the block text in hand — content is not re-fetched at index time."""
