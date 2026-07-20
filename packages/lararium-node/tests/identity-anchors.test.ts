@@ -37,14 +37,14 @@ describe("identity anchors (M2)", () => {
   test("persists into the identity home and reads back identically", () => {
     expect(loadIdentityAnchors()).toBeNull();               // nothing yet
     persistIdentityAnchors(anchors);
-    expect(existsSync(join(larIdentityDir(), "anchors.json"))).toBe(true);
+    expect(existsSync(join(larIdentityDir(), "anchors-h0.json"))).toBe(true);
     expect(loadIdentityAnchors()).toEqual(anchors);
   });
 
   test("an incomplete anchors file reads as null (never a partial Handle)", () => {
     persistIdentityAnchors(anchors);
     // Overwrite with a partial record.
-    writeFileSync(join(larIdentityDir(), "anchors.json"), JSON.stringify({ personaGroupDocIdHex: "aa11" }));
+    writeFileSync(join(larIdentityDir(), "anchors-h0.json"), JSON.stringify({ personaGroupDocIdHex: "aa11" }));
     expect(loadIdentityAnchors()).toBeNull();
   });
 

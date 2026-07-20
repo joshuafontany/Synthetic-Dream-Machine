@@ -13,7 +13,7 @@
 
 import { readFileSync, mkdirSync, chmodSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import type { RecoveryShare, CustodianTag } from "@lararium/mesh";
+import type { RecoveryShare, CustodianTag, RecoveryShareStore } from "@lararium/mesh";
 import { larIdentityDir } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignSecret } from "./archive-seal.js";
@@ -21,11 +21,10 @@ import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignS
 /** The device recovery-share carrier path. Exported so the vault passphrase-lifecycle surface
  *  (`archive-passphrase`) names the ONE carrier location, never a duplicated magic string. A vessel
  *  wearing several personas splits EACH persona-root independently, so the device-share keys by
- *  handle-index (0 = founding persona, `recovery-device-share.bin`, back-compat; higher indices hang
- *  off `recovery-device-share-h${N}.bin`) — one persona's quorum never reconstructs another's root. */
+ *  handle-index (UNIFORM `recovery-device-share-h${N}.bin`, no founding special-case) — one persona's
+ *  quorum never reconstructs another's root. */
 export function deviceSharePath(handleIndex = 0): string {
-  const suffix = handleIndex === 0 ? "" : `-h${handleIndex}`;
-  return join(larIdentityDir(), `recovery-device-share${suffix}.bin`);
+  return join(larIdentityDir(), `recovery-device-share-h${handleIndex}.bin`);
 }
 
 interface StoredShare {
@@ -62,3 +61,11 @@ export function loadRecoveryDeviceShare(handleIndex = 0): RecoveryShare | null {
   const j = JSON.parse(new TextDecoder().decode(plain)) as StoredShare;
   return { bytes: { x: j.x, ys: new Uint8Array(j.ys) }, custodian: j.custodian, recoveryEpoch: j.recoveryEpoch };
 }
+
+/** The node sealed RecoveryShareStore — the seam the PersonaVault carries. The SEAL stays here (custody
+ *  by TYPE: only the vessel's OWN sovereign device-share reaches `asSelfSovereignSecret`); the mesh core
+ *  never sees seal policy. */
+export const nodeRecoveryShareStore: RecoveryShareStore = {
+  load: (handleIndex) => loadRecoveryDeviceShare(handleIndex),
+  save: (handleIndex, share) => persistRecoveryDeviceShare(share, handleIndex),
+};

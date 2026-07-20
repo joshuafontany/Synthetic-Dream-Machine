@@ -23,7 +23,7 @@ const SHARE: RecoveryShare = {
   custodian: "device",
   recoveryEpoch: 1,
 };
-const sharePath = (): string => join(larIdentityDir(), "recovery-device-share.bin");
+const sharePath = (): string => join(larIdentityDir(), "recovery-device-share-h0.bin");
 
 describe("recovery-share-store — the device share at rest", () => {
   let root: string;

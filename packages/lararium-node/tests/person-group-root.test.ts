@@ -66,7 +66,7 @@ describe("PersonaGroup-root custody (operator-root capability — genesis Phase 
   it("loadPersonaGroupRootSeed returns the 32-byte seed founder-only, throws when absent", async () => {
     const dataDir = freshDataDir();
     try {
-      await expect(loadPersonaGroupRootSeed(dataDir)).rejects.toThrow(/no PersonaGroup root/);
+      await expect(loadPersonaGroupRootSeed(dataDir)).rejects.toThrow(/no persona-root/);
       await generateOrLoadPersonaGroupRoot(dataDir);
       const seed = await loadPersonaGroupRootSeed(dataDir);
       expect(seed).toBeInstanceOf(Uint8Array);

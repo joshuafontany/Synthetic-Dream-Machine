@@ -58,19 +58,21 @@ describe("multi-persona-per-vessel (#63)", () => {
     rmSync(root, { recursive: true, force: true });
   });
 
-  test("ONE-persona vessel is byte-identical to today — index 0 has no `-h` suffix, no selector file", async () => {
+  test("UNIFORM keying — the founding persona spells `-h0`, its mint records the explicit roster, selector unset reads undefined", async () => {
     const founding = await generateOrLoadPersonaGroupRoot(dataDir());   // default index 0
     expect(founding.created).toBe(true);
 
     const idDir = larIdentityDir();
     const rootFiles = readdirSync(idDir).filter((f) => /^\.persona-group-root/.test(f));
     expect(rootFiles.length, "exactly one root file at founding").toBe(1);
-    expect(rootFiles[0], "the founding persona carries NO -h suffix").not.toMatch(/-h\d/);
+    expect(rootFiles[0], "uniform keying — the founding persona carries the -h0 suffix").toMatch(/-h0\.json$/);
 
-    // No selector file has landed, so the vessel reads the founding persona — the pre-multi-persona default.
-    expect(existsSync(join(idDir, ".active-persona.json")) || readdirSync(idDir).some((f) => f.startsWith(".active-persona"))).toBe(false);
-    expect(await loadActivePersonaIndex(dataDir())).toBe(0);
+    // The roster is the store's OWN explicit written record (no dir-scan), and the mint recorded index 0.
     expect(await listPersonaRoots(dataDir())).toEqual([0]);
+
+    // No selector has landed, so the vessel wears NONE yet — undefined, never a silently-inferred founding.
+    expect(existsSync(join(idDir, ".active-persona.json")) || readdirSync(idDir).some((f) => f.startsWith(".active-persona"))).toBe(false);
+    expect(await loadActivePersonaIndex(dataDir())).toBeUndefined();
   });
 
   test("a vessel HOLDS two distinct persona-roots (multitude-of-one), each its own sovereign key", async () => {
@@ -98,7 +100,7 @@ describe("multi-persona-per-vessel (#63)", () => {
     await generateOrLoadPersonaGroupRoot(dataDir(), 0);
     await generateOrLoadPersonaGroupRoot(dataDir(), 1);
 
-    expect(await loadActivePersonaIndex(dataDir())).toBe(0);   // default = founding
+    expect(await loadActivePersonaIndex(dataDir())).toBeUndefined();   // nothing worn yet — no inference
     await wearPersona(dataDir(), 1);
     expect(await loadActivePersonaIndex(dataDir())).toBe(1);   // the mask is on
     await wearPersona(dataDir(), 0);
@@ -109,7 +111,7 @@ describe("multi-persona-per-vessel (#63)", () => {
     await generateOrLoadPersonaGroupRoot(dataDir(), 0);
     expect(await personaRootExists(dataDir(), 7)).toBe(false);
     await expect(wearPersona(dataDir(), 7)).rejects.toThrow(/no persona-root held/);
-    // Index 0 is ALWAYS wearable (a joinee wears its admitted persona through the edge, holds no root).
+    // The custody guard reads uniformly — index 0 wears only because its root was just minted (held).
     await expect(wearPersona(dataDir(), 0)).resolves.toBeUndefined();
   });
 
@@ -139,12 +141,12 @@ describe("multi-persona-per-vessel (#63)", () => {
   test("veiled-Handle anchors extend to a SET — each persona anchors to its OWN PersonaGroup", () => {
     const a0 = { personaGroupDocIdHex: "a0".repeat(32), meshCabalDocIdHex: "b0".repeat(32), personaGroupAgentIdHex: "c0".repeat(32) };
     const a1 = { personaGroupDocIdHex: "a1".repeat(32), meshCabalDocIdHex: "b1".repeat(32), personaGroupAgentIdHex: "c1".repeat(32) };
-    persistIdentityAnchors(a0);          // default index 0 (founding) → anchors.json, back-compat
+    persistIdentityAnchors(a0);          // default index 0 (founding) → anchors-h0.json, uniform keying
     persistIdentityAnchors(a1, 1);       // persona 1 → anchors-h1.json
 
-    expect(loadIdentityAnchors()).toEqual(a0);       // the founding-persona read is unchanged
+    expect(loadIdentityAnchors()).toEqual(a0);       // the founding-persona read round-trips
     expect(loadIdentityAnchors(1)).toEqual(a1);
-    expect(existsSync(join(larIdentityDir(), "anchors.json"))).toBe(true);   // byte-identical founding spelling
-    expect(listAnchoredPersonas()).toEqual([0, 1]);
+    expect(existsSync(join(larIdentityDir(), "anchors-h0.json"))).toBe(true);   // uniform founding spelling
+    expect(listAnchoredPersonas()).toEqual([0, 1]);   // the explicit roster record
   });
 });

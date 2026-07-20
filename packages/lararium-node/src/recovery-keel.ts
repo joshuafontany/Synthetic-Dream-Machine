@@ -1,107 +1,62 @@
 /**
- * recovery-keel (node) — the founding-split + recover-readmit flows, composing all three keel layers
- * into the two moments a citizen lives them: FOUNDING (split the root so a lost device is survivable)
- * and RECOVERY (reconstruct from the surviving shares, re-admit a fresh device).
+ * recovery-keel (node) — the founding-split + recover-readmit flows, wired to node seams.
  *
- * The lone-citizen truth: the device-share dies WITH the device, so recovery cannot ride it. A founding
- * split is 2-of-3 {device, recorded-code, escrow-peer} — normal life uses any two, but a drowned device
- * recovers from {recorded-code (the citizen wrote it down) + escrow (a peer relays it)}. Neither of
- * those two parties can recover alone (the escrow peer holds one share; the code is one share) — the
- * recovery quorum IS the impersonation quorum, and it needs both.
+ * The recovery FLOWS live in @lararium/mesh (recovery-keel-core) — platform-blind, over the crypto
+ * primitives already in mesh. THIS adapter binds them to the two node-only edges the core cannot hold:
+ *   · the KEYHIVE re-admit edge-signer (`runReadmitEdge`) — injected because keyhive DEPENDS ON mesh, so
+ *     mesh importing keyhive would cycle; the core reconstructs the branded root and hands it here.
+ *   · the FS-backed PersonaVault — supplies the root seed to split + the sealed device-share store.
  *
- * This is the recovery FLOWS module: the pure atoms (splitRootAtFounding, reconstructAndReadmit) plus
- * the founding-provision that ties them to the identity home (provisionRecoveryAtFounding). The escrow
- * SRP transport + the `lares device-readmit` CLI are the thin wiring that rides on top.
+ * The lone-citizen truth stands unchanged: a founding split is 2-of-3 {device, recorded-code, escrow-peer};
+ * a drowned device (its share gone) recovers from {recorded-code, escrow}. Neither party recovers alone —
+ * the recovery quorum IS the impersonation quorum (recovery-share enforces it at the TYPE wall).
  */
 
-import type { RandomProvider } from "@lararium/mesh";
+import type { RandomProvider, ReadmissionSecret } from "@lararium/mesh";
 import {
-  splitToShares, assembleQuorum, reconstructFromQuorum, encodeShareBytes,
-  type RecoveryShare, type CustodianTag,
+  reconstructAndReadmit as coreReconstructAndReadmit,
+  provisionRecoveryAtFounding as coreProvisionRecoveryAtFounding,
+  type RecoveryShare,
 } from "@lararium/mesh";
 import { runReadmitEdge, type ReadmitEdgeInput } from "@lararium/keyhive";
 import type { DeviceAdmitPayload } from "@lararium/keyhive";
-import { loadPersonaGroupRootSeed } from "./node-vessel-identity.js";
-import { persistRecoveryDeviceShare } from "./recovery-share-store.js";
+import { makeNodeFsPersonaVault } from "./node-vessel-identity.js";
 
-/** The three shares a founding split produces. Any two DISTINCT custodians recover — so a lost device
- *  (its share gone) still recovers from {recorded-code, escrow-peer}. */
-export interface FoundingShares {
-  readonly deviceShare:       RecoveryShare;   // sealed on the device (dies with it — never the recovery path)
-  readonly recordedCodeShare: RecoveryShare;   // the citizen writes it down (the one external factor)
-  readonly escrowShare:       RecoveryShare;   // a peer/kahu holds it (≤1 share, cannot recover alone)
-  /** The recorded-code share encoded for transcription (base32-adjacent hex + checksum). */
-  readonly recordedCode:      string;
-  /** The escrow-peer share encoded for a peer to hold (relayed, never openable into a solo recovery). */
-  readonly escrowCarrier:     string;
-}
+// splitRootAtFounding + FoundingShares are pure crypto flow — re-exported straight from the core.
+export { splitRootAtFounding, type FoundingShares } from "@lararium/mesh";
 
 /**
- * Split the PersonaGroup root at founding into a 2-of-3 {device, recorded-code, escrow-peer}. The floor's
- * real job runs HERE, at onboarding: it forces one external factor (the recorded code) to exist before
- * the Handle carries standing — because no crypto recovers a secret from nothing. The caller seals the
- * device-share, surfaces the recorded code for the citizen to write down, and relays the escrow share.
- */
-export function splitRootAtFounding(rootSeed: Uint8Array, rng: RandomProvider, recoveryEpoch = 1): FoundingShares {
-  const custodians: CustodianTag[] = ["device", "recorded-code", "escrow-peer"];
-  const shares = splitToShares(rootSeed, 2, custodians, recoveryEpoch, rng);
-  const byTag = (t: CustodianTag): RecoveryShare => shares.find((s) => s.custodian === t)!;
-  const recordedCodeShare = byTag("recorded-code");
-  const escrowShare = byTag("escrow-peer");
-  return {
-    deviceShare: byTag("device"),
-    recordedCodeShare, escrowShare,
-    recordedCode:  encodeShareBytes(recordedCodeShare.bytes),
-    escrowCarrier: encodeShareBytes(escrowShare.bytes),
-  };
-}
-
-/**
- * Reconstruct the root from a recovery quorum (≥ 2 distinct custodians) and re-admit a fresh device. The
- * device-share is ABSENT after device loss; recovery rides {recorded-code, escrow}. The reconstructed
- * root is zeroized the instant re-admission is signed — the reconstruction window kept as narrow as the
- * floor allows (FROST closes it for good later).
+ * Reconstruct the root from a recovery quorum (≥ 2 distinct custodians) and re-admit a fresh device. Binds
+ * the keyhive edge-signer to the core flow: the core reconstructs the branded ReadmissionSecret, this
+ * wrapper signs the re-admit edge with it, and the core zeroizes it the instant this returns. The device-
+ * share is ABSENT after device loss; recovery rides {recorded-code, escrow}.
  */
 export async function reconstructAndReadmit(
   quorumShares: readonly RecoveryShare[],
   readmit: Omit<ReadmitEdgeInput, "reconstructedRoot">,
 ): Promise<DeviceAdmitPayload> {
-  const reconstructedRoot = reconstructFromQuorum(assembleQuorum(quorumShares, 2));
-  try {
-    return await runReadmitEdge({ ...readmit, reconstructedRoot });
-  } finally {
-    reconstructedRoot.fill(0);   // close the reconstruction window immediately
-  }
+  return coreReconstructAndReadmit(
+    quorumShares,
+    readmit,
+    (reconstructedRoot: ReadmissionSecret, r) => runReadmitEdge({ ...r, reconstructedRoot }),
+  );
 }
 
 /**
- * Provision recovery at FOUNDING: split the freshly-minted PersonaGroup root, SEAL the device-share into
- * the identity home, and return the two shares the citizen carries OFF the device — the recorded code
- * (write it down) and the escrow carrier (hand to a peer). The floor's real work runs here, at
- * onboarding: it forces one external factor to exist BEFORE the Handle carries standing, because no
- * crypto recovers a secret from nothing. The root seed is zeroized the instant it is split.
+ * Provision recovery at FOUNDING: split the freshly-minted PersonaGroup root at `handleIndex`, SEAL the
+ * device-share into the identity home (through the vault's sealed recovery store), and return the two
+ * shares the citizen carries OFF the device — the recorded code (write it down) and the escrow carrier
+ * (hand to a peer). The floor's real work runs here, because no crypto recovers a secret from nothing.
  *
- * Additive — the mint (generateOrLoadPersonaGroupRoot) is untouched; the founding caller invokes this
- * once the root exists, then SURFACES the recorded code to the citizen and relays the escrow carrier.
- *
- * `handleIndex` selects WHICH persona-root to split (0 = founding, back-compat). A vessel wearing several
- * personas provisions recovery PER persona: each root splits into its own 2-of-3 quorum and seals its own
- * device-share, keyed by handle-index — one persona's quorum never reconstructs another's root. (POLICY
- * fork surfaced to the operator: whether N personas on ONE disk constitute distinct-enough custodians for
- * a real quorum is NOT decided here; this splits the seam so either resolution stands.)
+ * PER-PERSONA: a vessel wearing several personas provisions recovery per persona-root. (POLICY fork
+ * surfaced to the operator: whether N personas on ONE disk constitute distinct-enough custodians is NOT
+ * decided here; the seam splits so either resolution stands.)
  */
 export async function provisionRecoveryAtFounding(
-  dataDir: string,
+  _dataDir: string,
   rng: RandomProvider,
   recoveryEpoch = 1,
   handleIndex = 0,
 ): Promise<{ recordedCode: string; escrowCarrier: string }> {
-  const rootSeed = await loadPersonaGroupRootSeed(dataDir, handleIndex);
-  try {
-    const shares = splitRootAtFounding(rootSeed, rng, recoveryEpoch);
-    persistRecoveryDeviceShare(shares.deviceShare, handleIndex);
-    return { recordedCode: shares.recordedCode, escrowCarrier: shares.escrowCarrier };
-  } finally {
-    rootSeed.fill(0);   // the root never lingers after the split
-  }
+  return coreProvisionRecoveryAtFounding(await makeNodeFsPersonaVault(), rng, recoveryEpoch, handleIndex);
 }

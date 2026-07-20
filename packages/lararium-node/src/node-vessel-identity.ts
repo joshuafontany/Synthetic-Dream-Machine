@@ -40,15 +40,26 @@
 import { generateKeyPairSync, createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from "node:fs";
 import { join } from "node:path";
 import { larIdentityDir } from "./vessel-paths.js";
 import {
   generateOrLoadKeypair,
   signingSeedFromHex,
+  generateOrLoadPersonaRoot,
+  loadPersonaRootSeed,
+  wearPersona as coreWearPersona,
+  loadActivePersona as coreLoadActivePersona,
+  personaRootExists as corePersonaRootExists,
+  listPersonaRoots as coreListPersonaRoots,
   type KeypairStore,
   type KeypairCrypto,
+  type PersonaVault,
+  type ActivePersonaStore,
+  type PersonaRoot,
 } from "@lararium/mesh";
+import { nodeAnchorStore } from "./identity-anchors.js";
+import { nodeRecoveryShareStore } from "./recovery-share-store.js";
 
 /**
  * The identity dir — the ONE resolver, `<state>/identity` (`larIdentityDir`), in the XDG
@@ -353,234 +364,166 @@ export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array
   return signingSeedFromHex(raw.signingKey);
 }
 
-// ── PersonaGroup root key custody (the operator-root delegation capability) ──────
+// ── PersonaGroup root key custody — the FS-backed PersonaVault (over @lararium/mesh) ─────
 //
-// Two DISTINCT capabilities, never two numbered planes (#has-stack ontology — a
-// nameless entity carries a stack of capabilities, not a layer index):
-//   · the per-vessel device key above = the capability a vessel #has to sign AS
-//     ITSELF (its own leaf identity).
-//   · the PersonaGroup root here        = the operator-root capability that SIGNS the
-//     device-delegation edges granting vessels membership. Its public key is the
-//     operator-root DID (`0x`+hex) peers PIN to verify those edges offline at the Binding Gate
-//     (no Beelay). A vessel joins the PersonaGroup by holding a signed edge from this
-//     root — membership is a capability the vessel's stack #has, not a plane it sits on.
+// Two DISTINCT capabilities, never two numbered planes (#has-stack ontology — a nameless entity
+// carries a stack of capabilities, not a layer index):
+//   · the per-vessel device key above = the capability a vessel #has to sign AS ITSELF (its own leaf).
+//   · the PersonaGroup root here        = the operator-root capability that SIGNS the device-delegation
+//     edges granting vessels membership. Its public key is the operator-root DID (`0x`+hex) peers PIN
+//     to verify those edges offline at the Binding Gate (no Beelay). A vessel joins the PersonaGroup by
+//     holding a signed edge from this root — membership is a capability the stack #has, not a plane.
 //
-// The root lives ONLY on the founding vessel: a joining vessel holds the founder's
-// public DID + a signed edge, NEVER the root seed (two roots for ONE persona = two
-// operators; but N roots for N DISTINCT personas = one human's multitude, see below).
+// The isomorphic control flow (generate/load/wear/custody-refuse/roster) lives in @lararium/mesh's
+// persona-vault — platform-blind. THIS adapter supplies the node seams: per-index 0o600 KeypairStore
+// slots in `<state>/identity` (outside every `reset`/`rebuild` wipe), a JSON active-persona selector,
+// the anchor store, and the sealed recovery-share store. The SEAL stays in this adapter — the core
+// never sees plaintext seal policy (custody-by-TYPE: each root is the vessel's OWN sovereign secret).
 //
-// Custody law (same as the vessel key): persists into `<state>/identity`, mode 0o600,
-// structurally outside any `reset`/`rebuild` wipe. A root seed inside the `<data>/vessel`
-// store would mean operator-identity loss on `lares reset` — the same keypair-wipe
-// lesson, now for the operator-root capability.
+// ROOT-ON-FOUNDER: `generateOrLoadPersonaGroupRoot` mints founder-side only; a joinee holds the
+// founder's public DID + a signed edge at admit, so its vault reads listRoots()=[]. UNIFORM KEYING —
+// every persona-root spells `-h${N}` (no founding special-case); the ROSTER is an EXPLICIT written
+// record the slot's save maintains, never inferred from an empty home nor regex-scanned off the dir.
 //
-// PLURALITY PONO at the identity layer: a human contains multitudes, so a vessel may HOLD
-// a SET of persona-roots — one per persona the operator wears — keyed by handle-index (the
-// `handle'` the persona-HD scheme derives, persona-identity m/handle'/context'). Each index
-// names a DISTINCT quorum-identity: its own root, its own device-delegation edge, its own
-// recovery split. Custody-by-TYPE survives untouched — EACH root is the vessel's OWN
-// sovereign secret (nodeKeypairCrypto.generate, never a held/citizen principal's), so N
-// roots make a wider self-surface, never a custodial honeypot. Index 0 = the FOUNDING
-// persona: every path spells byte-identically to a one-persona vessel (back-compat). The
-// SET is founder-side (a joinee wears its ONE admitted persona through the edge, holds no
-// root); whether the a-multitude-of-one quorum wants N personas on ONE disk or N distinct
-// vessels is a live custody fork surfaced to the operator, NOT resolved here — this storage
-// generalization stands regardless of that resolution.
-//
-// Pre-rotation for the root is a follow-on (same register as the vessel KERI hook
-// above): the root is the MORE pin-worthy identity, so its inception commitment +
-// offline next-seed custody upgrade lands with the full `lares rotate-root` ceremony.
+// Pre-rotation for the root is a follow-on (same register as the vessel KERI hook above): the root is
+// the MORE pin-worthy identity, so its inception commitment + offline next-seed custody upgrade lands
+// with the full `lares rotate-root` ceremony.
 
-/**
- * Validate a persona handle-index — the `handle'` the persona-HD scheme derives. Index 0 = the founding
- * persona (back-compat). The bound mirrors the SLIP-0010 hardened-index ceiling (< 0x80000000), the same
- * space persona-identity allocates handles in, so the storage layer never keys outside the derivation's range.
- */
-function assertHandleIndex(handleIndex: number): void {
-  if (!Number.isSafeInteger(handleIndex) || handleIndex < 0 || handleIndex >= 0x80000000) {
-    throw new RangeError(
-      `[vessel-identity] persona handle-index out of range: ${handleIndex} (expected 0 ≤ n < 0x80000000)`,
-    );
-  }
+/** The persona-root keypair filename — uniform `-h${N}` per handle-index, login-scoped so developers on
+ *  one machine hold separate roots. No founding special-case (uniform keying). */
+function personaGroupRootFileName(login: string | null, handleIndex: number): string {
+  return login ? `.persona-group-root-${login}-h${handleIndex}.json` : `.persona-group-root-h${handleIndex}.json`;
 }
 
-/** The per-persona filename suffix — EMPTY at the founding persona (index 0) so a one-persona vessel's
- *  files spell byte-identically to today; `-h${N}` names each additional persona-root the vessel holds. */
-function personaSuffix(handleIndex: number): string {
-  return handleIndex === 0 ? "" : `-h${handleIndex}`;
-}
-
-function personaGroupRootFileName(login: string | null, handleIndex = 0): string {
-  const suffix = personaSuffix(handleIndex);
-  return login ? `.persona-group-root-${login}${suffix}.json` : `.persona-group-root${suffix}.json`;
-}
-
-export interface PersonaGroupRoot {
-  /** Hex-encoded 32-byte Ed25519 verifying key — the operator-root DID peers pin (`0x`+hex). */
-  verifyingKey: string;
-  /** True when this call minted a fresh root; false when it loaded an existing one. */
-  created: boolean;
-}
-
-/**
- * Generate or load the PersonaGroup-root keypair (the operator-root delegation capability).
- *
- * Idempotent: loads an existing root, mints one only on first call. FOUNDER-ONLY —
- * a joining vessel must NEVER call this; it receives the founder's public DID + a
- * signed delegation edge at admit (Phase 3) instead.
- *
- * Returns only the public verifyingKey; the signing seed surfaces via
- * `loadPersonaGroupRootSeed` for the founding ceremony's edge-minting.
- *
- * `handleIndex` selects WHICH persona-root — 0 (default) = the founding persona (back-compat: the file
- * spells exactly as a one-persona vessel's). A higher index mints an ADDITIONAL, DISTINCT quorum-identity
- * for the same operator's multitude; each carries its own edge + recovery split. Every root is the vessel's
- * OWN sovereign secret regardless of index — the SET never becomes a custodial honeypot.
- */
-export async function generateOrLoadPersonaGroupRoot(
-  dataDir: string,
-  handleIndex = 0,
-): Promise<PersonaGroupRoot> {
-  assertHandleIndex(handleIndex);
-  const idDir = identityDir(dataDir);
-  mkdirSync(idDir, { recursive: true });
-
-  const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const rootFile = join(idDir, personaGroupRootFileName(hint.login, handleIndex));
-  const store    = fileKeypairStore(rootFile, hint.login);
-  const tag      = `${hint.login ? ` for ${hint.login}` : ""}${handleIndex === 0 ? "" : ` (persona h${handleIndex})`}`;
-
-  // The root rides the same generate-or-load skeleton + seams as the device key —
-  // with the root's stricter load-time verifyingKey guard kept (it is the more
-  // pin-worthy identity) and FOUNDER-ONLY semantics carried by the caller.
-  const existing = await store.load();
-  if (existing) {
-    if (existing.verifyingKey.length !== 64) {
-      throw new Error(`[vessel-identity] malformed verifyingKey in ${rootFile}`);
-    }
-    console.log(`[vessel-identity] loaded PersonaGroup root${tag}`);
-    return { verifyingKey: existing.verifyingKey, created: false };
-  }
-
-  const fresh = await nodeKeypairCrypto.generate();
-  await store.save(fresh);
-  console.log(`[vessel-identity] minted PersonaGroup root${tag}`);
-  return { verifyingKey: fresh.verifyingKey, created: true };
-}
-
-/**
- * Load the PersonaGroup-root 32-byte Ed25519 SIGNING seed (founder-only).
- *
- * The founding ceremony signs device-delegation edges with this seed. SECURITY: the
- * returned bytes ARE the operator-root private key — the most sensitive secret on the
- * vessel (it authorizes PersonaGroup membership). Same handling rules as
- * `loadVesselSigningSeed`. Throws when absent — call `generateOrLoadPersonaGroupRoot`
- * first (founding only; a joinee never holds this).
- *
- * `handleIndex` selects the persona-root within the vessel's SET (0 = founding, back-compat).
- */
-export async function loadPersonaGroupRootSeed(dataDir: string, handleIndex = 0): Promise<Uint8Array> {
-  assertHandleIndex(handleIndex);
-  const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const rootFile = join(identityDir(dataDir), personaGroupRootFileName(hint.login, handleIndex));
-  if (!existsSync(rootFile)) {
-    throw new Error(
-      `[vessel-identity] no PersonaGroup root at ${rootFile} — mint it via the founding ceremony first (founder-only; a joining vessel never holds the root seed)`,
-    );
-  }
-  const raw = JSON.parse(readFileSync(rootFile, "utf8")) as PersistedKey;
-  if (typeof raw.signingKey !== "string" || raw.signingKey.length !== 64) {
-    throw new Error(`[vessel-identity] malformed signingKey in ${rootFile}`);
-  }
-  return signingSeedFromHex(raw.signingKey);
-}
-
-// ── The active-persona selector — "put on a mask" at the identity layer ──────────
-//
-// A human contains multitudes; a vessel WEARS one persona at a time (signs/acts as it) and MAY switch.
-// The selector persists in the identity home OUTSIDE the wipe (beside the roots it points at), so a
-// `reset`/`rebuild` reforges the substrate while the worn persona survives. Default = 0 (the founding
-// persona): a one-persona vessel — and every joinee, which holds only its admitted persona — reads 0
-// with no selector file present, byte-identical to a vessel that never heard of multi-persona. The
-// selector moves a POINTER; it never moves a root (custody stays put).
+/** The active-persona selector filename — one pointer per vessel, login-scoped. */
 function activePersonaFileName(login: string | null): string {
   return login ? `.active-persona-${login}.json` : ".active-persona.json";
 }
 
-interface ActivePersonaSelector {
-  /** The handle-index of the persona this vessel currently wears. */
-  handleIndex: number;
+/** The persona-root ROSTER filename — the EXPLICIT written record of every handle-index this vessel
+ *  holds a root for. The founding persona becomes a record on its mint, never inferred. */
+function personaRosterFileName(login: string | null): string {
+  return login ? `.persona-roster-${login}.json` : ".persona-roster.json";
 }
 
-/**
- * True when this vessel HOLDS a persona-root at `handleIndex` (founder-side custody). A joinee holds
- * none — it wears its admitted persona (index 0) through the anchors/edge, not a root.
- */
-export async function personaRootExists(dataDir: string, handleIndex: number): Promise<boolean> {
-  assertHandleIndex(handleIndex);
-  const hint = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  return existsSync(join(identityDir(dataDir), personaGroupRootFileName(hint.login, handleIndex)));
-}
-
-/**
- * Load the active-persona handle-index — which persona the vessel currently WEARS. Default 0 (the
- * founding persona) when no selector has landed OR a torn one reads back: never strand the vessel
- * personaless. A one-persona vessel behaves exactly as today.
- */
-export async function loadActivePersonaIndex(dataDir: string): Promise<number> {
-  const hint = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const file = join(identityDir(dataDir), activePersonaFileName(hint.login));
-  if (!existsSync(file)) return 0;
+/** Read the roster's explicit record (ascending), or [] when none has landed / a torn one reads back. */
+function readPersonaRoster(idDir: string, login: string | null): number[] {
+  const file = join(idDir, personaRosterFileName(login));
+  if (!existsSync(file)) return [];
   try {
-    const raw = JSON.parse(readFileSync(file, "utf8")) as Partial<ActivePersonaSelector>;
-    if (Number.isSafeInteger(raw.handleIndex) && (raw.handleIndex as number) >= 0) {
-      return raw.handleIndex as number;
+    const raw = JSON.parse(readFileSync(file, "utf8")) as { roots?: unknown };
+    if (Array.isArray(raw.roots)) {
+      return [...new Set(raw.roots.filter((n): n is number => Number.isSafeInteger(n) && n >= 0))].sort((a, b) => a - b);
     }
-  } catch { /* a torn selector falls back to the founding default — the vessel never loses its face */ }
-  return 0;
+  } catch { /* a torn roster reads empty — a re-mint re-records the index it holds */ }
+  return [];
 }
 
-/**
- * WEAR a persona — set the active handle-index (persist 0o600 in the identity home). "Put on a mask."
- * Index 0 (the founding persona) is ALWAYS wearable (a joinee wears it through its edge). A higher index
- * REQUIRES that this vessel HOLD that persona-root — you cannot sign AS a persona whose sovereign secret
- * you do not carry (the custody-by-type wall, in mask form). Only the pointer moves; the root never does.
- */
-export async function wearPersona(dataDir: string, handleIndex: number): Promise<void> {
-  assertHandleIndex(handleIndex);
-  if (handleIndex !== 0 && !(await personaRootExists(dataDir, handleIndex))) {
-    throw new Error(
-      `[vessel-identity] cannot wear persona h${handleIndex} — no persona-root held for it; ` +
-      `mint it via the founding ceremony (founder-side) first`,
-    );
-  }
-  const idDir = identityDir(dataDir);
-  mkdirSync(idDir, { recursive: true });
-  const hint = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const file = join(idDir, activePersonaFileName(hint.login));
-  const selector: ActivePersonaSelector = { handleIndex };
-  writeFileSync(file, JSON.stringify(selector, null, 2), { mode: 0o600, encoding: "utf8" });
+/** Record a held handle-index into the roster (0o600) — the founding persona's explicit written mark. */
+function recordPersonaRoot(idDir: string, login: string | null, handleIndex: number): void {
+  const roots = new Set(readPersonaRoster(idDir, login));
+  roots.add(handleIndex);
+  const file = join(idDir, personaRosterFileName(login));
+  writeFileSync(file, JSON.stringify({ roots: [...roots].sort((a, b) => a - b) }, null, 2), { mode: 0o600, encoding: "utf8" });
   chmodSync(file, 0o600);
-  console.log(`[vessel-identity] wearing persona h${handleIndex}${hint.login ? ` for ${hint.login}` : ""}`);
+}
+
+/** The node FS ActivePersonaStore — a JSON pointer at `<state>/identity`, 0o600, outside the wipe. */
+function nodeActivePersonaStore(idDir: string, login: string | null): ActivePersonaStore {
+  const file = join(idDir, activePersonaFileName(login));
+  return {
+    async load() {
+      if (!existsSync(file)) return undefined;   // no inference: an unset selector reads undefined
+      try {
+        const raw = JSON.parse(readFileSync(file, "utf8")) as { handleIndex?: unknown };
+        if (Number.isSafeInteger(raw.handleIndex) && (raw.handleIndex as number) >= 0) return raw.handleIndex as number;
+      } catch { /* a torn selector reads unset — the caller decides any default */ }
+      return undefined;
+    },
+    async save(handleIndex) {
+      mkdirSync(idDir, { recursive: true });
+      writeFileSync(file, JSON.stringify({ handleIndex }, null, 2), { mode: 0o600, encoding: "utf8" });
+      chmodSync(file, 0o600);
+    },
+  };
 }
 
 /**
- * The persona ROSTER — every handle-index this vessel HOLDS a root for, ascending. A one-persona vessel
- * returns `[0]`; a multitude-of-one returns `[0, 1, …]`. Enumerated from the identity home by the
- * persona-root filename convention — the disk IS the roster (no registry).
+ * Build the node FS-backed PersonaVault. Resolves the git-email hint ONCE (login-scoped filenames), then
+ * closes over the identity dir + hint. `rootSlot(i)` vends the existing 0o600 KeypairStore, wrapping its
+ * save to RECORD the index into the explicit roster (the founding mark). `hasRoot`/`listRoots` read that
+ * roster — never a dir-scan. `anchors`/`recovery` ride the node stores where the at-rest SEAL lives.
  */
-export async function listPersonaRoots(dataDir: string): Promise<number[]> {
+export async function makeNodeFsPersonaVault(): Promise<PersonaVault> {
   const hint  = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const idDir = identityDir(dataDir);
-  if (!existsSync(idDir)) return [];
-  const base0 = personaGroupRootFileName(hint.login, 0);          // the founding-persona spelling
-  const stem  = base0.slice(0, -".json".length);                 // …-h${N}.json hangs off this exact stem
-  const extra = new RegExp(`^${stem.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}-h(\\d+)\\.json$`);
-  const found = new Set<number>();
-  for (const f of readdirSync(idDir)) {
-    if (f === base0) { found.add(0); continue; }
-    const m = extra.exec(f);
-    if (m) found.add(Number(m[1]));
-  }
-  return [...found].sort((a, b) => a - b);
+  const idDir = larIdentityDir();
+  mkdirSync(idDir, { recursive: true });
+  const login = hint.login;
+  return {
+    rootSlot(handleIndex) {
+      const file = join(idDir, personaGroupRootFileName(login, handleIndex));
+      const base = fileKeypairStore(file, login);
+      return {
+        load: () => base.load(),
+        async save(keypair) {
+          await base.save(keypair);
+          recordPersonaRoot(idDir, login, handleIndex);   // the mint writes the explicit roster mark
+        },
+      };
+    },
+    async listRoots() { return readPersonaRoster(idDir, login); },
+    async hasRoot(handleIndex) { return readPersonaRoster(idDir, login).includes(handleIndex); },
+    selector: nodeActivePersonaStore(idDir, login),
+    anchors:  nodeAnchorStore,
+    recovery: nodeRecoveryShareStore,
+  };
+}
+
+/** A persona-root's public face + whether THIS call minted it (the mesh core's PersonaRoot). */
+export type PersonaGroupRoot = PersonaRoot;
+
+/**
+ * Generate or load the PersonaGroup-root keypair at `handleIndex` (the operator-root delegation
+ * capability). FOUNDER-ONLY — a joining vessel receives the founder's public DID + a signed delegation
+ * edge at admit instead. Thin wrapper over the mesh core flow; `dataDir` rides the call-site contract
+ * (the identity home resolves under XDG state, outside the substrate wipe).
+ */
+export async function generateOrLoadPersonaGroupRoot(_dataDir: string, handleIndex = 0): Promise<PersonaGroupRoot> {
+  const vault  = await makeNodeFsPersonaVault();
+  const result = await generateOrLoadPersonaRoot(vault, nodeKeypairCrypto, handleIndex);
+  console.log(`[vessel-identity] ${result.created ? "minted" : "loaded"} PersonaGroup root (persona h${handleIndex})`);
+  return result;
+}
+
+/**
+ * Load the PersonaGroup-root 32-byte Ed25519 SIGNING seed at `handleIndex` (founder-only). SECURITY: the
+ * returned bytes ARE the operator-root private key — the most sensitive secret on the vessel. Throws when
+ * absent — mint via the founding ceremony first (a joinee never holds this).
+ */
+export async function loadPersonaGroupRootSeed(_dataDir: string, handleIndex = 0): Promise<Uint8Array> {
+  return loadPersonaRootSeed(await makeNodeFsPersonaVault(), handleIndex);
+}
+
+/** True when this vessel HOLDS a persona-root at `handleIndex` (founder-side custody). A joinee holds none. */
+export async function personaRootExists(_dataDir: string, handleIndex: number): Promise<boolean> {
+  return corePersonaRootExists(await makeNodeFsPersonaVault(), handleIndex);
+}
+
+/** Load the active-persona handle-index the vessel currently WEARS, or undefined when it wears none yet
+ *  (no inference from an empty home — the caller decides any default). */
+export async function loadActivePersonaIndex(_dataDir: string): Promise<number | undefined> {
+  return coreLoadActivePersona(await makeNodeFsPersonaVault());
+}
+
+/** WEAR a persona — set the active handle-index ("put on a mask"). The custody-by-TYPE wall (uniform,
+ *  no founding special-case): wearing REQUIRES that this vessel HOLD that persona-root. */
+export async function wearPersona(_dataDir: string, handleIndex: number): Promise<void> {
+  await coreWearPersona(await makeNodeFsPersonaVault(), handleIndex);
+  console.log(`[vessel-identity] wearing persona h${handleIndex}`);
+}
+
+/** The persona ROSTER — every handle-index this vessel HOLDS a root for, ascending, from the explicit
+ *  written record. A one-persona vessel returns `[0]`; a joinee returns `[]`. */
+export async function listPersonaRoots(_dataDir: string): Promise<number[]> {
+  return coreListPersonaRoots(await makeNodeFsPersonaVault());
 }

@@ -10,37 +10,62 @@
  * @daemon store while re-reading the SAME anchors — the Handle survives the substrate.
  */
 
-import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { larIdentityDir } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
+import { readIdentityAnchors, type AnchorStore, type IdentityAnchors } from "@lararium/mesh";
 import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignSecret, ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 
-/** The sentinel anchors that bind a vessel to its veiled Handle. Hex doc-ids + agentId. */
-export interface IdentityAnchors {
-  readonly personaGroupDocIdHex: string;
-  readonly meshCabalDocIdHex: string;
-  /** The PersonaGroup agentId — Gate-C membership needs it, and the bootstrap never held it. */
-  readonly personaGroupAgentIdHex: string;
-}
+// The IdentityAnchors SHAPE + the AnchorStore seam lift to @lararium/mesh (platform-blind); this node
+// adapter implements the fs seam. Re-exported so existing importers keep their spelling.
+export type { IdentityAnchors } from "@lararium/mesh";
 
 // PLURALITY PONO at the identity layer: a vessel that WEARS several personas anchors EACH to its OWN
 // veiled Handle (distinct PersonaGroup + MeshCabal ids + agentId). The anchor store is therefore a SET
-// keyed by handle-index (the `handle'` the persona-HD scheme derives). Index 0 = the founding persona:
-// its file spells `anchors.json`, byte-identical to a one-persona vessel (back-compat). Each higher index
-// hangs off `anchors-h${N}.json`. A joinee holds only its ONE admitted persona's anchors at index 0.
-function anchorsPath(handleIndex = 0): string {
-  const suffix = handleIndex === 0 ? "" : `-h${handleIndex}`;
-  return join(larIdentityDir(), `anchors${suffix}.json`);
+// keyed by handle-index (the `handle'` the persona-HD scheme derives). UNIFORM KEYING — every index
+// spells `anchors-h${N}.json` (no founding special-case). Anchors carry PUBLIC doc-ids, so no seal
+// touches them (the at-rest seal governs the keyhive ARCHIVE below — a distinct concern). A joinee
+// holds only its ONE admitted persona's anchors, no matching root.
+function anchorsPath(handleIndex: number): string {
+  return join(larIdentityDir(), `anchors-h${handleIndex}.json`);
 }
 
-/** Write ONE persona's anchor set to the identity home (0o600), founding + admit both land it here.
- *  `handleIndex` selects which persona (0 = founding, back-compat). */
+/** The anchored-persona ROSTER filename — the EXPLICIT written record of every index this vessel anchors. */
+function anchorRosterPath(): string {
+  return join(larIdentityDir(), "anchor-roster.json");
+}
+
+/** Read the anchor roster's explicit record (ascending), or [] when none / a torn one reads back. */
+function readAnchorRoster(): number[] {
+  const file = anchorRosterPath();
+  if (!existsSync(file)) return [];
+  try {
+    const raw = JSON.parse(readFileSync(file, "utf8")) as { anchors?: unknown };
+    if (Array.isArray(raw.anchors)) {
+      return [...new Set(raw.anchors.filter((n): n is number => Number.isSafeInteger(n) && n >= 0))].sort((a, b) => a - b);
+    }
+  } catch { /* a torn roster reads empty — a re-persist re-records the index it holds */ }
+  return [];
+}
+
+/** Record an anchored handle-index into the roster (0o600) — the explicit written mark, never a dir-scan. */
+function recordAnchor(handleIndex: number): void {
+  const anchors = new Set(readAnchorRoster());
+  anchors.add(handleIndex);
+  const file = anchorRosterPath();
+  writeFileSync(file, JSON.stringify({ anchors: [...anchors].sort((a, b) => a - b) }, null, 2), { mode: 0o600, encoding: "utf8" });
+  try { chmodSync(file, 0o600); } catch { /* best-effort on a non-POSIX fs */ }
+}
+
+/** Write ONE persona's anchor set to the identity home (0o600), founding + admit both land it here, and
+ *  record the index into the explicit roster. `handleIndex` selects which persona (0 = founding). */
 export function persistIdentityAnchors(anchors: IdentityAnchors, handleIndex = 0): void {
   mkdirSync(larIdentityDir(), { recursive: true });
   const path = anchorsPath(handleIndex);
   writeFileSync(path, JSON.stringify(anchors, null, 2), "utf8");
   try { chmodSync(path, 0o600); } catch { /* best-effort — a non-POSIX fs still holds the bytes */ }
+  recordAnchor(handleIndex);
 }
 
 /** The keyhive Archive carrier path — the sovereign identity floor at rest. Exported so the vault
@@ -98,36 +123,28 @@ export function loadIdentityArchive(): Uint8Array | null {
   return openArchiveBytes(stored); // unseal or pass-through; throws loud on sealed-without-key / tamper
 }
 
-/** Read ONE persona's anchor set back, or null when a founding predates the anchor lift (or the index
- *  holds no persona). `handleIndex` selects which persona (0 = founding, back-compat). */
+/** Read ONE persona's anchor set back, or null when the index holds no persona (or a torn write reads
+ *  back). `handleIndex` selects which persona (0 = founding). */
 export function loadIdentityAnchors(handleIndex = 0): IdentityAnchors | null {
   const path = anchorsPath(handleIndex);
   if (!existsSync(path)) return null;
   try {
-    const parsed = JSON.parse(readFileSync(path, "utf8")) as Partial<IdentityAnchors>;
-    if (
-      typeof parsed.personaGroupDocIdHex === "string" &&
-      typeof parsed.meshCabalDocIdHex === "string" &&
-      typeof parsed.personaGroupAgentIdHex === "string"
-    ) {
-      return parsed as IdentityAnchors;
-    }
-    return null;
+    return readIdentityAnchors(JSON.parse(readFileSync(path, "utf8")) as Partial<IdentityAnchors>);
   } catch {
     return null;
   }
 }
 
 /** The anchored-persona ROSTER — every handle-index whose veiled-Handle anchors this vessel holds,
- *  ascending. A one-persona vessel returns `[0]`. The disk IS the roster (no registry). */
+ *  ascending, from the explicit written record (never a dir-scan). A one-persona vessel returns `[0]`. */
 export function listAnchoredPersonas(): number[] {
-  const idDir = larIdentityDir();
-  if (!existsSync(idDir)) return [];
-  const found = new Set<number>();
-  for (const f of readdirSync(idDir)) {
-    if (f === "anchors.json") { found.add(0); continue; }
-    const m = /^anchors-h(\d+)\.json$/.exec(f);
-    if (m) found.add(Number(m[1]));
-  }
-  return [...found].sort((a, b) => a - b);
+  return readAnchorRoster();
 }
+
+/** The node fs AnchorStore — the seam the PersonaVault carries. `save` records the index into the
+ *  explicit roster; `list` reads it back. Anchors carry public doc-ids, so no seal touches this store. */
+export const nodeAnchorStore: AnchorStore = {
+  load: (handleIndex) => loadIdentityAnchors(handleIndex),
+  save: (handleIndex, anchors) => persistIdentityAnchors(anchors, handleIndex),
+  list: () => listAnchoredPersonas(),
+};
