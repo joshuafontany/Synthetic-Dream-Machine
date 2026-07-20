@@ -278,43 +278,56 @@ class CaptureSessionServer:
         }
 
     def sweep(self, req: dict) -> dict:
-        """BULK backfill on THIS holder's own warm stream — capture/RECAPTURE every discovered transcript
+        """BULK backfill on THIS holder's own warm stream — capture/RECAPTURE every discovered session
         through the ONE live writer (model + store loaded once), never a second holder. `surface` `all` folds
-        claude+codex+copilot; `project` narrows claude; `limit` caps each surface (oldest first). Idempotent:
-        already-landed turns skip. Reuses memory_sensorium's discovery. A per-transcript failure SKIPS to
+        every operator-AI chat surface; `project` narrows claude; `limit` caps each surface (oldest first).
+        Each session files under its OWN per-project wing (the wing_derive law, so backfill wings equal the
+        live-hook wings); tasked-spirit sub-sessions route to `<wing>__spirits`; a scratch or marked session
+        SKIPS the rhizome (the ephemeral gate, one loud line each). The passed `wing` rides only as the
+        fallback for a cwd-less source. Idempotent: already-landed turns skip. A per-session failure SKIPS to
         `failed` (one unreadable session never aborts the sweep); a SYSTEMIC embedder floor fails loud. Arms
         every derived cadence once at the end, so the idle beat re-derives the settled bulk. The ROUTED spine
-        the CLI (`lares sense sweep` / `pour --all`) and the MCP (`sweep`) both reach through the @daemon."""
+        the CLI (`lares sense sweep`) and the MCP (`sweep`) both reach through the @daemon."""
         from content_io import ContentFloorError
-        from memory_sensorium import ALL_SURFACES, transcripts
+        from ephemeral import session_ephemeral
+        from session_discovery import ALL_SURFACES, discover
         surface = str(req.get("surface") or "all")
-        wing = str(req.get("wing") or "")
+        default_wing = str(req.get("wing") or "")
         room = str(req.get("room") or "conversations")
         project = req.get("project")
         limit = req.get("limit")
-        if not wing:
-            raise ValueError("sweep requires a non-empty wing")
+        if not default_wing:
+            raise ValueError("sweep requires a non-empty wing (the fallback for a cwd-less source)")
         surfaces = ALL_SURFACES if surface == "all" else (surface,)
-        out: dict = {"wing": wing, "sessions": 0, "landed": 0, "skipped": 0, "by_surface": {}, "failed": []}
+        out: dict = {"wing": default_wing, "sessions": 0, "landed": 0, "skipped": 0,
+                     "ephemeral": 0, "spirits": 0, "by_surface": {}, "failed": []}
         for surf in surfaces:
-            if surf not in {"claude", "codex", "copilot", "copilot-vscode"}:
-                raise ValueError(f"sweep surface {surf!r} unknown")
-            pointers = transcripts(surf, project=project if surf == "claude" else None)
+            entries = discover(surf, project=project)
             if limit is not None:
-                pointers = pointers[: int(limit)]
-            s_landed = s_skipped = 0
-            for p in pointers:
+                entries = entries[: int(limit)]
+            s_landed = s_skipped = s_eph = 0
+            for e in entries:
+                reason = session_ephemeral(e["pointer"])
+                if reason is not None:                # a scratch/marked session never enters the rhizome
+                    s_eph += 1
+                    sys.stderr.write(f"[sweep] SKIP ephemeral {e['pointer']}: {reason}\n")
+                    continue
+                wing = e["wing"] or default_wing
                 try:
-                    summary = self._stream.capture(p, surface=surf, wing=wing, room=room)
+                    summary = self._stream.capture(e["pointer"], surface=e["surface"], wing=wing, room=room)
                 except ContentFloorError:
                     raise                          # systemic — a wrong embedder poisons every session; fail loud
-                except Exception as exc:  # noqa: BLE001 — one unreadable transcript never aborts the sweep
-                    out["failed"].append({"surface": surf, "pointer": p, "error": f"{type(exc).__name__}: {exc}"})
+                except Exception as exc:  # noqa: BLE001 — one unreadable session never aborts the sweep
+                    out["failed"].append({"surface": surf, "pointer": e["pointer"], "error": f"{type(exc).__name__}: {exc}"})
                     continue
                 out["sessions"] += 1
+                if e["spirit"]:
+                    out["spirits"] += 1
                 s_landed += int(summary.get("landed") or 0)
                 s_skipped += int(summary.get("skipped") or 0)
-            out["by_surface"][surf] = {"pointers": len(pointers), "landed": s_landed, "skipped": s_skipped}
+            out["ephemeral"] += s_eph
+            out["by_surface"][surf] = {"entries": len(entries), "landed": s_landed,
+                                       "skipped": s_skipped, "ephemeral": s_eph}
             out["landed"] += s_landed
             out["skipped"] += s_skipped
         now = self._tick()                          # the ground moved: arm every derived cadence once
