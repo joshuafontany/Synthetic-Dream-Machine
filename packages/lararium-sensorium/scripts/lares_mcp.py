@@ -437,6 +437,37 @@ def build_mcp(coordinator: LaresCoordinator):
                      wing=wing, room=room)
 
     @mcp.tool()
+    def sweep(surface: str = "claude", wing: "str | None" = None, project: "str | None" = None,
+              limit: "int | None" = None, sensorium: "str | None" = None) -> dict:
+        """Capture/RECAPTURE every local operator-AI chat transcript of a surface into a sensorium in ONE pass
+        — the bulk backfill / re-pour that `pour` handles one pointer at a time. A thin skin over the existing
+        memory_sensorium driver: it walks the surface's transcript root (each project session + every
+        sub-agent), lands them onto all three planes through ONE warm holder, and reads the tri-plane witness
+        back. IDEMPOTENT — already-landed turns skip, so a re-run catches up and a fresh sensorium fills fully.
+        `surface` = claude|codex; `project` narrows claude to one project; `limit` caps (oldest first);
+        `sensorium` names the root (absent → the canonical memory).
+
+        Runs STANDALONE — it composes its own holder, so the sensorium must NOT be held by a live @daemon. Run
+        under `lares_mcp --standalone --sensorium <root>`, or the CLI `memory_sensorium.py run --surface
+        <surface> --wing <wing>`. A routed surface refuses rather than contend the daemon's writer."""
+        if routed:
+            raise RuntimeError(
+                "sweep runs standalone (it composes its own holder); the routed @daemon owns the store, so a "
+                "sweep would contend its writer. Run `lares_mcp --standalone --sensorium <root>` and call "
+                "sweep, or the CLI `memory_sensorium.py run --surface <surface> --wing <wing>` with the daemon down.")
+        from memory_sensorium import memory_sensorium_dir, run as ms_run, transcripts
+        root = _address(sensorium) or bound_root or memory_sensorium_dir()
+        wing = wing or ("wing_" + os.path.basename(os.path.expanduser("~")) or "wing_operator")
+        pointers = transcripts(surface, project=project)
+        if limit is not None:
+            pointers = pointers[:limit]
+        if not pointers:
+            return {"root": root, "surface": surface, "wing": wing, "pointers": 0,
+                    "note": f"no {surface} transcripts found"}
+        return ms_run(root, surface=surface, wing=wing, room="conversations", pointers=pointers,
+                      min_support=2, max_forms=64, max_candidates=96)
+
+    @mcp.tool()
     def recall(query: str, k: int = 8, wing: "str | None" = None, imago: "str | None" = None,
                list: bool = False, agent: "str | None" = None, surface: "str | None" = None,
                speaker: "str | None" = None, channel: "str | None" = None, function: "str | None" = None,
