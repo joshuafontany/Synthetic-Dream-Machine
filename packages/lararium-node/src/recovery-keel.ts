@@ -83,16 +83,23 @@ export async function reconstructAndReadmit(
  *
  * Additive — the mint (generateOrLoadPersonaGroupRoot) is untouched; the founding caller invokes this
  * once the root exists, then SURFACES the recorded code to the citizen and relays the escrow carrier.
+ *
+ * `handleIndex` selects WHICH persona-root to split (0 = founding, back-compat). A vessel wearing several
+ * personas provisions recovery PER persona: each root splits into its own 2-of-3 quorum and seals its own
+ * device-share, keyed by handle-index — one persona's quorum never reconstructs another's root. (POLICY
+ * fork surfaced to the operator: whether N personas on ONE disk constitute distinct-enough custodians for
+ * a real quorum is NOT decided here; this splits the seam so either resolution stands.)
  */
 export async function provisionRecoveryAtFounding(
   dataDir: string,
   rng: RandomProvider,
   recoveryEpoch = 1,
+  handleIndex = 0,
 ): Promise<{ recordedCode: string; escrowCarrier: string }> {
-  const rootSeed = await loadPersonaGroupRootSeed(dataDir);
+  const rootSeed = await loadPersonaGroupRootSeed(dataDir, handleIndex);
   try {
     const shares = splitRootAtFounding(rootSeed, rng, recoveryEpoch);
-    persistRecoveryDeviceShare(shares.deviceShare);
+    persistRecoveryDeviceShare(shares.deviceShare, handleIndex);
     return { recordedCode: shares.recordedCode, escrowCarrier: shares.escrowCarrier };
   } finally {
     rootSeed.fill(0);   // the root never lingers after the split

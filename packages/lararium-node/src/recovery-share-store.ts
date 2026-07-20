@@ -19,9 +19,13 @@ import { atomicWriteFileSync } from "./fs-atomic.js";
 import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignSecret } from "./archive-seal.js";
 
 /** The device recovery-share carrier path. Exported so the vault passphrase-lifecycle surface
- *  (`archive-passphrase`) names the ONE carrier location, never a duplicated magic string. */
-export function deviceSharePath(): string {
-  return join(larIdentityDir(), "recovery-device-share.bin");
+ *  (`archive-passphrase`) names the ONE carrier location, never a duplicated magic string. A vessel
+ *  wearing several personas splits EACH persona-root independently, so the device-share keys by
+ *  handle-index (0 = founding persona, `recovery-device-share.bin`, back-compat; higher indices hang
+ *  off `recovery-device-share-h${N}.bin`) — one persona's quorum never reconstructs another's root. */
+export function deviceSharePath(handleIndex = 0): string {
+  const suffix = handleIndex === 0 ? "" : `-h${handleIndex}`;
+  return join(larIdentityDir(), `recovery-device-share${suffix}.bin`);
 }
 
 interface StoredShare {
@@ -36,11 +40,11 @@ interface StoredShare {
  * branded self-sovereign — the seal accepts them precisely because they belong to THIS vessel's own
  * root; a non-self share would not compile past `asSelfSovereignSecret`.
  */
-export function persistRecoveryDeviceShare(share: RecoveryShare): void {
+export function persistRecoveryDeviceShare(share: RecoveryShare, handleIndex = 0): void {
   mkdirSync(larIdentityDir(), { recursive: true });
   const stored: StoredShare = { x: share.bytes.x, ys: [...share.bytes.ys], custodian: share.custodian, recoveryEpoch: share.recoveryEpoch };
   const plain = new TextEncoder().encode(JSON.stringify(stored));
-  const path = deviceSharePath();
+  const path = deviceSharePath(handleIndex);
   atomicWriteFileSync(path, sealArchiveBytes(asSelfSovereignSecret(plain), resolveSealPolicy()));
   try { chmodSync(path, 0o600); } catch { /* best-effort on a non-POSIX fs */ }
 }
@@ -49,8 +53,8 @@ export function persistRecoveryDeviceShare(share: RecoveryShare): void {
  * Read the device share back, or null when none has landed. A sealed store with no key source throws
  * LOUD (never a silent null — a half-recovered quorum is worse than a clear failure).
  */
-export function loadRecoveryDeviceShare(): RecoveryShare | null {
-  const path = deviceSharePath();
+export function loadRecoveryDeviceShare(handleIndex = 0): RecoveryShare | null {
+  const path = deviceSharePath(handleIndex);
   if (!existsSync(path)) return null;
   let stored: Uint8Array;
   try { stored = readFileSync(path); } catch { return null; }

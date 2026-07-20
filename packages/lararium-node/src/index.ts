@@ -104,7 +104,7 @@ export { openDaemonVm } from "./open-daemon-vm.js";
 export { runDoctor, formatDoctorReport, enumerateStoreDocs } from "./doctor.js";
 export { probeDocLoad, makeChildProcessDocLoadProbe, quarantineDoc } from "./doc-load-probe.js";
 export { precheckDocStore, docStorePath } from "./store-integrity.js";
-export { persistIdentityAnchors, loadIdentityAnchors, persistIdentityArchive, loadIdentityArchive, archivePath, type IdentityAnchors } from "./identity-anchors.js";
+export { persistIdentityAnchors, loadIdentityAnchors, listAnchoredPersonas, persistIdentityArchive, loadIdentityArchive, archivePath, type IdentityAnchors } from "./identity-anchors.js";
 
 // The passphrase-LIFECYCLE surface over the at-rest seal (#60) — status/seal/rotate/export/repair + the
 // boot-gate + the daemon vault handler. No new crypto; composes archive-seal's atoms under a ratify
@@ -134,6 +134,9 @@ export { runDeviceAdmit } from "./commands/device-admit.js";
 export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-admit.js";
 
 export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
+// The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root
+// SET (generateOrLoadPersonaGroupRoot / loadPersonaGroupRootSeed) stays imported directly where consumed.
+export { loadActivePersonaIndex, wearPersona, personaRootExists, listPersonaRoots } from "./node-vessel-identity.js";
 export { loadLeafIdentity } from "./leaf-identity.js";
 export type { LeafIdentity } from "./leaf-identity.js";
 export { VerbDispatcher, VerbTable } from "@lararium/tw5";
