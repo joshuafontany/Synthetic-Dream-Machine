@@ -38,7 +38,7 @@
  * ONE load-bearing mapping — precision = the confidence register (0..20) read as a GAIN — where
  * the register conceptually lives (beside ffz-project's confidence ladder).
  *
- * ## The loop (sensorium-rhymes.md #the-predictive-upgrade)
+ * ## The loop (sensorium-machina.md #the-py-r-web)
  *
  *   PREDICT   a lightweight generative model g (EWMA / AR(1)) emits the next frame's forecast.
  *   ERROR     ε = obs − pred — what the model got wrong.
@@ -57,7 +57,7 @@
  * commits, guarded by the R keel: it FIRES only on SURROGATE-significance (the τ beats an AR(1)
  * null) AND multi-scale agreement (dyadic bands trend up together). Either alone stays a WATCH.
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-predictive-upgrade
+ * Meme: lar:///ha.ka.ba/lares/api/pono/sensorium-machina#the-py-r-web
  */
 
 const EPS = 1e-9;

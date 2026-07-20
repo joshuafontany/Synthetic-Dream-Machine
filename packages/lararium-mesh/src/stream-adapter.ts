@@ -129,7 +129,7 @@ export interface PalaceComposition {
   /** A human-readable provenance line. */
   readonly note: string;
   /**
-   * The PREDICTIVE read (sensorium-rhymes.md #the-predictive-upgrade), attached over a numeric
+   * The PREDICTIVE read (sensorium-machina.md #the-py-r-web), attached over a numeric
    * stream by the sensing wire (sense-stream) using the native {@link freeEnergy} / {@link forecastEws}
    * core — absent when the modality carries no direct `signal` (a text corpus). The sensorium's
    * per-frame objective F = Σ π·ε² + complexity, exposed here at the composition level.

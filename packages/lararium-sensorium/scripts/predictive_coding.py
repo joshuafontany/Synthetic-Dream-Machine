@@ -2,7 +2,7 @@
 """predictive_coding — the sensorium's per-plane PREDICT → ERROR → PRECISION → UPDATE loop
 and the variational free-energy objective F = Σ π·ε² + complexity(model).
 
-sensorium-rhymes.md #the-predictive-upgrade. The single most-adoptable cross-domain
+sensorium-machina.md #the-py-r-web. The single most-adoptable cross-domain
 finding: DO NOT measure the stream as it is — measure it against what you PREDICTED. This
 module turns every plane from a feedforward DESCRIBER into a predictive-coding LOOP: a
 lightweight generative model `g_i` emits a top-down PREDICTION of the next frame's
@@ -10,7 +10,7 @@ features; the residual `ε_i = obs_i − g_i(pred)` becomes the plane's output, 
 precision GAIN `π_i`; a DETECTION becomes surprise `π_i·ε_i²` — what the model FAILED to
 predict, not what arrived.
 
-THE ONE OBJECTIVE (sensorium-rhymes.md #the-one-objective)
+THE ONE OBJECTIVE (sensorium-machina.md #the-one-objective)
 =========================================================
 All five planes estimate facets of ONE quantity — excess-entropy / predictive-information
 (Bialek-Tishby) = free-energy accuracy−complexity (Friston). The per-frame objective is the
@@ -27,7 +27,7 @@ sensorium was always estimating.
 
 PRECISION = CONFIDENCE-AS-GAIN (the load-bearing mapping)
 =========================================================
-sensorium-rhymes.md #the-five-domains (neuroscience): *precision-weighting — how strongly
+sensorium-machina.md #grounds (neuroscience): *precision-weighting — how strongly
 the brain trusts a given prediction-error — reads as a near-exact rhyme with the house's
 confidence sigil.* The precision `π` that weights `ε²` IS the confidence register (0–20)
 read as a GAIN. The map runs both ways (predictive coding learns precision bottom-up AND
@@ -58,7 +58,7 @@ when present, degrading to a native BIC-style param cost otherwise):
   ~/.venv/bin/python3 predictive_coding.py pc --signal fixture.ndjson --model ewma
   ~/.venv/bin/python3 predictive_coding.py objective --signal content=c.ndjson --signal bands=b.ndjson
 
-Meme: lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-predictive-upgrade
+Meme: lar:///ha.ka.ba/lares/api/pono/sensorium-machina#the-py-r-web
 """
 from __future__ import annotations
 
@@ -166,7 +166,7 @@ def model_complexity(n_params: int, n_obs: int) -> float:
 
 def plane_pc(obs, model: str = "ewma", alpha: float = 0.3,
              confidence: float | None = None, warmup: int = 1) -> dict:
-    """ONE plane's predictive-coding loop (sensorium-rhymes #the-predictive-upgrade).
+    """ONE plane's predictive-coding loop (sensorium-machina #the-py-r-web).
 
     PREDICT   a generative model `g` (EWMA or AR(1)) emits the one-step forecast of each
               frame's features BEFORE it arrives.
@@ -266,7 +266,7 @@ def free_energy(planes: dict, model: str = "ewma", alpha: float = 0.3,
                 form_streams: list | None = None,
                 form_alphabet: int | None = None) -> dict:
     """The sensorium's per-frame OBJECTIVE: `F = Σ_i π_i·ε_i² + complexity(model)` over the
-    planes (sensorium-rhymes #the-one-objective). Each plane runs its own predictive-coding
+    planes (sensorium-machina #the-one-objective). Each plane runs its own predictive-coding
     loop ({@link plane_pc}); the accuracy term sums their precision-weighted surprises, the
     complexity term sums their model description-lengths.
 

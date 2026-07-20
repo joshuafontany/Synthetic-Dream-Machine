@@ -46,7 +46,7 @@
  * one multivariate least-squares pass and reads the spectra — no iteration, no sidecar, no deps.
  *
  * Platform-blind, pure. Meme: lar:///ha.ka.ba/lares/api/pono/scale-architecture (the EI-selection
- * north-star, here BUILT) · lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-predictive-upgrade
+ * north-star, here BUILT) · lar:///ha.ka.ba/lares/api/pono/sensorium-machina#the-py-r-web
  */
 
 import { jacobiEigen } from "./ffz-project.js";

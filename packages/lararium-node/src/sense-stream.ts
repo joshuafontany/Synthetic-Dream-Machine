@@ -153,7 +153,7 @@ export function composeStreamSensorium<Raw>(opts: ComposeStreamOptions<Raw>): Pa
  * in-process via the {@link freeEnergy} / {@link forecastEws} core (no extra sidecar spawn, the
  * dependency-light hot path). Graceful: a stream with no direct `signal` (text) returns the
  * composition unchanged (the predictive read lives on the numeric door; text's derived-bands
- * read rides the corpus run). sensorium-rhymes.md #the-predictive-upgrade.
+ * read rides the corpus run). sensorium-machina.md #the-py-r-web.
  */
 function attachPredictiveRead(comp: PalaceComposition, frames: readonly StreamFrame[]): PalaceComposition {
   const rows = frames.map((f) => Array.from(f.signal)).filter((r) => r.length > 0);

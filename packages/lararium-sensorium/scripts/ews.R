@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # ews.R — the THIN R sidecar for the PREDICTIVE bands leg's early-warning-signals route
-# (sensorium-rhymes.md #the-predictive-upgrade, the dynamical-systems leg).
+# (sensorium-machina.md #the-py-r-web, the dynamical-systems leg).
 #
 # The causal-island boundary made crossable for what R's `earlywarnings` owns: `generic_ews`
 # (rolling lag-1-AC / variance / skewness + their Kendall-τ trends) and `surrogates_ews` (the
@@ -15,7 +15,7 @@
 #
 # Run:  Rscript --vanilla ews.R  < request.ndjson
 #
-# Meme: lar:///ha.ka.ba/lares/api/pono/sensorium-rhymes#the-predictive-upgrade
+# Meme: lar:///ha.ka.ba/lares/api/pono/sensorium-machina#the-py-r-web
 
 # Add the user library so a --user install of earlywarnings is visible.
 suppressWarnings(try(.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths())), silent = TRUE))

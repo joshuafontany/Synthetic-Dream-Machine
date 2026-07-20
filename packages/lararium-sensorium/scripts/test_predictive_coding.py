@@ -1,6 +1,6 @@
 """Tests for predictive_coding — the sensorium's per-plane predict→error→precision→update
-loop + the free-energy objective F = Σ π·ε² + complexity (sensorium-rhymes.md
-#the-predictive-upgrade).
+loop + the free-energy objective F = Σ π·ε² + complexity (sensorium-machina.md
+#the-py-r-web).
 
 The load-bearing properties, all chroma-free (pure signal in, surprise/F out):
   1. the LOOP emits prediction-ERROR SURPRISE, not raw features — a forecastable stream

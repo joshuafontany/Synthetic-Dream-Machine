@@ -715,11 +715,11 @@ def wavelet_threshold_floor(mra: dict) -> float:
 
 # ── EWS — the PREDICTIVE bands leg: forecast the regime-shift BEFORE it commits ────────────
 #
-# sensorium-rhymes.md #the-predictive-upgrade (the dynamical-systems leg): critical-slowing-
+# sensorium-machina.md #the-py-r-web (the dynamical-systems leg): critical-slowing-
 # down. As a system approaches a bifurcation it loses resilience — recovery from perturbation
 # slows — and this shows up BEFORE the transition commits as a RISING lag-1 autocorrelation
 # and RISING variance. The `changepoint_tree` (ecp) detects a shift once it COMMITS; the EWS
-# leg forecasts its APPROACH. The R keel (sensorium-rhymes #R-is-the-keel) is LOAD-BEARING:
+# leg forecasts its APPROACH. The R keel (sensorium-machina #ki) is LOAD-BEARING:
 # a rising-trend indicator is worthless without a false-positive guard, so a forecast FIRES
 # only on (a) SURROGATE-significance — the observed Kendall-τ beats an AR(1)-null ensemble —
 # AND (b) MULTI-BAND agreement — several MODWT bands independently show the rising trend.
@@ -825,7 +825,7 @@ def phase_randomized_surrogate(x: np.ndarray, rng: np.random.Generator) -> np.nd
     """One PHASE-RANDOMIZED (Fourier) surrogate of `x`: preserve the FULL power spectrum (all
     of the signal's COLOR — its linear autocorrelation at every lag) and randomize only the
     Fourier phases → a stationary Gaussian series with an IDENTICAL spectrum but no trend and
-    no time-asymmetry. THE COLORED NULL (sensorium-rhymes #R-is-the-keel, the hardening): a
+    no time-asymmetry. THE COLORED NULL (sensorium-machina #ki, the hardening): a
     white shuffle destroys the color and OVER-rejects on long-range-correlated streams (text
     and code ARE colored), so a rising-variance artefact of the color reads as a false
     positive; this null keeps the color and only tests for the trend/nonstationarity the
@@ -849,7 +849,7 @@ def surrogate_pvalue(x: np.ndarray, window: int, indicator: str = "ar1",
     """One-sided surrogate p-value for a RISING indicator trend: the fraction of NULL
     surrogates whose indicator Kendall-τ is ≥ the observed τ. A small p ⇒ the rising trend is
     unlikely under a null that carries the signal's autocorrelation (the R-keel: detection that
-    survives its own null, sensorium-rhymes #R-is-the-keel). Two COLORED nulls, never a white
+    survives its own null, sensorium-machina #ki). Two COLORED nulls, never a white
     shuffle: `surrogate="ar1"` — the init-matched AR(1) null (carries lag-1 AC + the observed
     burn-in transient, so a from-equilibrium transient appears in the null too); `="phase"` —
     the phase-randomized null (carries the FULL spectrum, so a variance-inflation artefact of
@@ -897,7 +897,7 @@ def _ews_R(x: np.ndarray, window: int) -> dict | None:
 def forecast_ews(matrix: np.ndarray, window: int = 50, n_surr: int = 200,
                  alpha: float = 0.05, min_bands: int = 2, seed: int = 1) -> dict:
     """The PREDICTIVE bands leg — forecast an approaching bifurcation from critical-slowing-
-    down (sensorium-rhymes #the-predictive-upgrade). Feeds:
+    down (sensorium-machina #the-py-r-web). Feeds:
       · the POOLED signal (mean across columns) carries the PRIMARY indicators — rolling
         lag-1-AC + variance + their Kendall-τ, with an AR(1)-surrogate p-value on each.
       · the MODWT detail BANDS carry the multi-band agreement guard — each band's rolling-
@@ -1096,7 +1096,7 @@ def dfa_hurst(x: np.ndarray) -> float:
 
 def criticality_signature(x: np.ndarray, n_bins: int = 4, n_shuffle: int = 20,
                           seed: int = 1) -> dict:
-    """THE TWO-POINT-MI CRITICALITY VERDICT (sensorium-rhymes #the-predictive-upgrade, the
+    """THE TWO-POINT-MI CRITICALITY VERDICT (sensorium-machina #the-py-r-web, the
     dynamical leg; Lin & Tegmark, *Entropy* 2017). Fit MI(d) vs d and classify:
 
       · CRITICAL — MI(d) decays as a POWER LAW `d^-μ` over DECADES (no finite correlation
@@ -1247,7 +1247,7 @@ def _slaving_gain(prior: np.ndarray, target: np.ndarray,
 
 
 def slaving_leg(mra: dict, warmup: int = 1) -> dict:
-    """THE ORDER-PARAMETER / SLAVING LEG (sensorium-rhymes #the-predictive-upgrade, the
+    """THE ORDER-PARAMETER / SLAVING LEG (sensorium-machina #the-py-r-web, the
     top-down leg; Haken synergetics). The aperture ladder IS an order-parameter hierarchy: the
     SLOW/coarse band (Theme) is the order parameter that ENSLAVES the FAST/fine band (Pulse).
     Wire the CIRCULAR CAUSALITY between each adjacent MODWT band pair (coarse→fine):
