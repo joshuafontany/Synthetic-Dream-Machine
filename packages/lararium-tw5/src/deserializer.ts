@@ -823,11 +823,10 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
 // ---------------------------------------------------------------------------
 
 /**
- * The deserializer used to report a fault by synthesising a tiddler whose title carried the word
- * `parse-warning`, which left every consumer sniffing a string to learn whether a carrier survived.
- * The fault now rides the same diagnostics contract the parser and the render plane already speak,
- * so the gate reads a grade rather than a title. The synthesised tiddler stays, since the live wiki
- * surfaces it, but nothing downstream has to recognise it by name.
+ * The deserializer reports a fault on the same diagnostics contract the parser and the render plane
+ * already speak, so the gate reads a grade rather than a title. It also synthesises a `parse-warning`
+ * tiddler for the live wiki to surface, but nothing downstream recognises the fault by that title —
+ * the diagnostics carry the grade, freeing every consumer from sniffing a string for carrier survival.
  */
 export function deserializeCarrier(
   text:   string,

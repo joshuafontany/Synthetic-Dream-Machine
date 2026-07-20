@@ -1,8 +1,8 @@
 import { parsePonoLevel, digestsEqual } from "@lararium/mesh";
 import type { TW5Instance } from "./types/tiddlywiki.js";
 
-// Preserves the old 0.00–1.00 gate pressure as SDM+ 0–20 Levels:
-// 0.90 → 18, 0.85 → 17.
+// Module gate thresholds on the 0–20 Level scale: mana ≥ 18, confidence ≥ 18,
+// manao ≥ 17, manaoio ≥ 17.
 const MODULE_MANA_THRESHOLD = 18;
 const MODULE_MANAO_THRESHOLD = 17;
 const MODULE_MANAOIO_THRESHOLD = 17;

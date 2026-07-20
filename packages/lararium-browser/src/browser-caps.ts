@@ -14,6 +14,6 @@ import { composeCoreVessel } from "@lararium/tw5";
 
 /**
  * composeBrowser — the browser #has-cap-stack: the shared granular `composeCoreVessel`. Returns the
- * VesselCoreResult directly (the old `{vessel,core}` wrapper dropped; the caller used only `.core`).
+ * VesselCoreResult directly — one core, no wrapper.
  */
 export const composeBrowser = composeCoreVessel;

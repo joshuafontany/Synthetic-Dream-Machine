@@ -72,8 +72,8 @@ export async function writeOutcome(
 
 /**
  * Render any thrown value to a readable message. A non-Error throw (a plain object,
- * e.g. a `{ok:false,reason}` verify result) used to stringify to "[object Object]";
- * prefer its message/reason/error field, else a compact JSON, never the bare cast.
+ * e.g. a `{ok:false,reason}` verify result) yields its message/reason/error field,
+ * else a compact JSON — never the bare "[object Object]" cast.
  */
 function errorText(err: unknown): string {
   if (err instanceof Error) return err.message;

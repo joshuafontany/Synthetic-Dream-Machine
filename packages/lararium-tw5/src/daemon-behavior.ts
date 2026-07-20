@@ -163,8 +163,8 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
         handleVerseEvent: (uri: string, listenable: string, verb?: string, fromUri?: string, args?: Record<string, unknown>) => {
           // The reaction-router already gates on the `lares-dispatch` marker, so ONLY a
           // genuine summon reaches here (the verb machinery's own invocation/outcome
-          // writes never carry the marker → router-inert; #48 retired the fragile
-          // URI-prefix allowlist that this bridge used to run). The structured args ride
+          // writes never carry the marker → router-inert, the marker alone gating this
+          // bridge, no URI-prefix allowlist). The structured args ride
           // the GP-2-flat island wire as ONE `verb-args` JSON string; main re-parses.
           post({
             schema_version: 1,

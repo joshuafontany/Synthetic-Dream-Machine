@@ -13,7 +13,7 @@ import { pullAndVerifyOracle, type GenesisCasManifest, type GenesisSeed } from "
 import { Idiomorph } from "idiomorph";
 // The materialize-fresh boot artifact: the PLAIN-DATA @oracle seed (island.genesis.json).
 // The vessel materializes the @oracle CRDT fresh from it under the deterministic doc id
-// (node-parity); the retired island.bin Automerge binary is no longer imported at boot.
+// (node-parity). Boot imports this plain-data seed alone — no Automerge binary.
 import genesisSeed from "../../../genesis/island.genesis.json";
 // The genesis CRDT carries blob METADATA only; the engine + plugin BYTES ship as
 // content-addressed genesis/cas/<cid> files, indexed by this manifest. First boot fetches

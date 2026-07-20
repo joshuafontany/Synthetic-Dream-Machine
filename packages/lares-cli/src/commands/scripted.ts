@@ -82,7 +82,7 @@ export function resetTargets(): Array<{ path: string; recursive: boolean }> {
     gen("social-bootstrap.json"),
     gen("island.bin"),
     gen("island.sha256"),
-    gen("island.sha256-pre"),                  // legacy (pre-split); cleaned for migration
+    gen("island.sha256-pre"),                  // the pre-split SHA sidecar — a reset target, so no stale digest survives
     gen("island.cid"),
     gen("island.cid-engine"),
     gen("island.cid-plugins"),

@@ -23,8 +23,7 @@ import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
-  // The env-contract data dir (LAR_ROOT/.lararium) — not the old package-local path,
-  // which left draft unable to find the operator key (surfaced during the rollout).
+  // The env-contract data dir (LAR_ROOT/.lararium) — where the operator key lives.
   return "0x" + (await loadVesselVerifyingKey(larDataDir()));
 }
 

@@ -10,9 +10,8 @@ import { makeRequestId, stringArg } from "./handler-args.js";
 
 /**
  * Read a recipe-verb's {slug, bagUrl} from the structured args — ONE contract for the
- * CLI / MCP AND the DOM path: #48 unified the DOM summon onto the same `slug` / `bagUrl`
- * args (its `arg-slug` / `arg-bagUrl` fields the reaction-router lifts into the payload),
- * retiring the args-in-URI smuggling the handler used to decode.
+ * CLI / MCP AND the DOM path: the DOM summon rides the same `slug` / `bagUrl`
+ * args (its `arg-slug` / `arg-bagUrl` fields the reaction-router lifts into the payload).
  */
 function recipeArgs(args: Readonly<Record<string, unknown>>): { slug: string; bagUrl: string } {
   return {

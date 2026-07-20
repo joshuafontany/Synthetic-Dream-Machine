@@ -5,8 +5,7 @@
  * makeWikiBehavior (@lararium/tw5) — the SAME behavior the node wiki island runs
  * (ACTION verb registry + wiki:place-verb dispatch). The browser supplies no
  * onBoot capability; disk projection is a node-held capability (fs), absent here
- * by composition, not by a fork. The former browser-only stub (onSignal → false)
- * is gone — the browser now inherits the full dispatch path.
+ * by composition, not by a fork. The browser inherits the full dispatch path.
  *
  * DOM types do not appear in this file (BA-1). `self` is the sole platform surface.
  *

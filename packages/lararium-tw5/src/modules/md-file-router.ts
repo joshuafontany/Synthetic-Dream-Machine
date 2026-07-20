@@ -24,10 +24,8 @@ const MEMETIC_TYPE  = "text/x-memetic-wikitext";
 const MARKDOWN_TYPE = "text/x-markdown";
 
 // Carrier sniff: canonical carriers open with the !DOCTYPE comment on
-// line 1 and the SOH on line ~3 — the old line-1-only SOH peek misrouted
-// EVERY canonical corpus meme to plain markdown. The
-// sniffer reads the head: DOCTYPE comment fast-path, else a line-bound
-// SOH within the first few lines.
+// line 1 and the SOH on line ~3. The sniffer reads the head: DOCTYPE
+// comment fast-path, else a line-bound SOH within the first few lines.
 const DOCTYPE_COMMENT_RE = /^<!--\s*<<~\s*!DOCTYPE/;
 const SOH_LINE_RE        = /^<<~[^>\n]*&#x(?:0001|0011);/m;
 const SNIFF_HEAD_BYTES   = 512;

@@ -21,7 +21,7 @@ export interface WikiHandlerOptions {
 /** Options for handlers that need raw repo access to mint new docs.
  *  `catalog` is the one catalog-driven accessor (access≠load): the registry
  *  doc itself via `catalog.handle()`, any registered bag via `catalog.find()`
- *  — collapses the old per-verb `catalogHandle` + `islandHandle` plumbing. */
+ *  — one accessor for every verb, no separate catalogHandle / islandHandle. */
 export interface WikiMintHandlerOptions {
   readonly repo:        Repo;
   readonly catalog:     CatalogAccessor;

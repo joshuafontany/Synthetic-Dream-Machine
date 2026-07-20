@@ -267,9 +267,8 @@ export function closePatternToTag(pattern: string): string | null {
  * Name normalisation:
  *   \\name → name  (pragma-form sigils, e.g. "\\procedure" → "procedure")
  *
- * SharktoothSigil tiddlers carry canonical names directly (e.g. "kahea"), so the
- * former GRAMMAR_NAME_MAP (kahea-block → kahea) is no longer needed. The sigil-kahea
- * tiddler merges both leaf and block forms under one name.
+ * SharktoothSigil tiddlers carry canonical names directly (e.g. "kahea"). The
+ * sigil-kahea tiddler merges both leaf and block forms under one name.
  */
 export function buildClosers(grammar: GrammarRules | null): Record<string, string> {
   if (!grammar) return BLOCK_CLOSERS;

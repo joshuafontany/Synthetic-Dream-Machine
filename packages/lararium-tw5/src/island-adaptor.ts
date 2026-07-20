@@ -7,13 +7,13 @@
  *   - cross-bag tombstone resolution stays in TS (needs async getLive on composite)
  *   - echo guard delegates to $tw.lares.isApplyingNalu() (wiki owns apply lifetime)
  *
- * What this used to own and no longer does (moved into TW5 module nalu-engine):
- *   - per-island pre-sync buffer (initial replay flows through enqueueNalu)
- *   - onSyncComplete batch flush (sync gate is observability only now)
- *   - IslandAccumulator wiring (single shared queue lives in the wiki)
- *   - flushAll(accs, budget) (frame drain lives in the wiki)
- *   - wiki.transact() wrapping (one transact per nalu — wiki side)
- *   - kernel.applyDelta calls (retired — the wiki module owns wiki writes)
+ * The TW5 module nalu-engine owns (not this adaptor):
+ *   - the per-island buffer — initial replay flows through enqueueNalu
+ *   - batch flush on sync — the sync gate is observability only
+ *   - IslandAccumulator wiring — one shared queue lives in the wiki
+ *   - flushAll(accs, budget) — frame drain lives in the wiki
+ *   - wiki.transact() wrapping — one transact per nalu, wiki side
+ *   - kernel.applyDelta calls — the wiki module owns wiki writes
  *
  * Initial replay path:
  *   AutomergeDocStore.emitInitialReplay() fires fireImmediate per existing tiddler
@@ -217,9 +217,8 @@ export class IslandAdaptor implements MemeProjection {
     const title  = fields["title"] ?? "";
 
     // Cascade pre-check: skip if no rule routes this title AND no explicit
-    // `bag` override (ceremony). Filters that USED to live here as hard-coded
-    // prefix checks now live in the in-wiki bag-paths cascade — operator-
-    // editable, per-wiki overlayable.
+    // `bag` override (ceremony). Routing filters live in the in-wiki bag-paths
+    // cascade — operator-editable, per-wiki overlayable.
     const explicitBag = fields["bag"];
     if (!explicitBag && this._routeBag(title) === null) return Promise.resolve();
 

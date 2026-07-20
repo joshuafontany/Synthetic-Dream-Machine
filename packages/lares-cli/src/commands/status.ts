@@ -234,7 +234,7 @@ async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
       // One line over the sock (the lares↔lararium binding). Cheap probe; any failure
       // falls through silently — `lares status` never errors. The residency verb is
       // cap-gated, so it needs the real operator did (a non-did requestedBy cap-errors
-      // quietly — the old "lares-status" label always did).
+      // quietly).
       const did = "0x" + (await loadVesselVerifyingKey(larDataDir()));
       const r = await runVerb("residency", {}, did, { timeoutMs: 2000 });
       if (r.status === "done") {

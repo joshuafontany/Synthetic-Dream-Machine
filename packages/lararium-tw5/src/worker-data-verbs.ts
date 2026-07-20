@@ -111,7 +111,7 @@ export function makeResolveReactor(composite: CompositeStore): VerbReactor {
 
 /** `list-wikis` — enumerate the wikis registered in the catalog (oracle tiddlers).
  *  Reads @catalog via the accessor (access≠load) — the registry is NOT a loaded
- *  composite layer, so the old composite.listVisible() read returned nothing. */
+ *  composite layer, so the accessor reads it directly, never through the composite. */
 export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: CatalogAccessor): VerbReactor {
   return async () => {
     const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null; kind: string }> = [];
