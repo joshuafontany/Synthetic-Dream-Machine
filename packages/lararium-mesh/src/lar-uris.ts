@@ -161,6 +161,21 @@ export function cidUri(cid: string): string {
   return stableLarUri(`${CID_SEGMENT}/${cid}`);
 }
 
+/** The parse-back reciprocal of `cidUri` — read the content hash out of a `lar:///…/cid/<hash>`
+ *  URI. Returns null for any URI that does NOT name a content-addressed artifact (a bag/wiki
+ *  address, a web2 `http(s)://`/`data:` media src, an unstable root), so a caller can
+ *  scheme-discriminate a media `_canonical_uri`: a lar cid → resolve by CID; anything else →
+ *  leave to the native/DOM path. Tolerant of a trailing `#fragment`. */
+export function cidFromUri(uri: string): string | null {
+  if (typeof uri !== "string") return null;
+  const marker = `/${CID_SEGMENT}/`;
+  const at = uri.indexOf(marker);
+  if (at < 0 || !uri.startsWith(LAR_PREFIX)) return null;
+  const rest = uri.slice(at + marker.length);
+  const hash = rest.split(/[#/?]/, 1)[0] ?? "";
+  return hash.length > 0 ? hash : null;
+}
+
 /** Mint the bare `lar:///ha.ka.ba/bags/@{slug}` form — a reader tries the canonical `bags/@`
  *  form first, then falls back here to resolve a store that carries the un-prefixed shape. */
 export function legacyIdentityUri(slug: string): string {

@@ -70,6 +70,7 @@ import {
 import { IslandKernel } from "./island-kernel.js";
 import { buildIslandRecipe } from "./island-recipe.js";
 import { makeCatalogAccessor } from "./catalog-accessor.js";
+import { installLazyResolver } from "./lazy-resolver.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
 // ── The host seam — platform divergence as composition ──────────────────────
@@ -121,6 +122,7 @@ export function runSovereignKernel(
   let _handles:   Map<string, DocHandle<LarDoc>> = new Map();
   let _composite: CompositeStore | null = null;
   let _ctx:       IslandContext | null  = null;
+  let _lazyUnsub: (() => void) | null   = null;
   let _activeWikiUri                    = "";
 
   // Live CRDT patches flow through AutomergeDocStore.handle.on("change") →
@@ -419,6 +421,12 @@ export function runSovereignKernel(
     // The CID plane the kernel already pulls engine/plugin bytes from, lifted to
     // behaviors: a residency handler resolves a carrier body a verb rode by reference.
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, oracleUrl: msg.grants.islandUrl, engine, recipe: msg.recipe, ...(host.resolveByCid ? { resolveByCid: host.resolveByCid } : {}) };
+    // Read-side skinny-handle rehydration: answer TW5's own `lazyLoad` event (fired when
+    // `getTiddlerText` meets a bodyless `_is_skinny` tiddler) by pulling the body from the corpus
+    // CAS through the SAME resolveByCid seam the kernel already rides for engine/plugin blobs. The
+    // splice runs through the guarded nalu rail, so a rehydrated body never echoes back to the CRDT
+    // (content-resolution.mem #tw5-seam). Off when the island exposes no CAS resolver.
+    if (host.resolveByCid) _lazyUnsub = installLazyResolver(tw5, host.resolveByCid);
     tick("behavior");
     await behavior.onEa(_ctx);
 
@@ -428,6 +436,8 @@ export function runSovereignKernel(
   // ── Teardown / Demote (OTP terminate) ──────────────────────────────────────
 
   async function _handleTeardown(): Promise<void> {
+    _lazyUnsub?.();
+    _lazyUnsub = null;
     if (_ctx && behavior) await behavior.onHooAnu(_ctx);
     handler.teardown();
 

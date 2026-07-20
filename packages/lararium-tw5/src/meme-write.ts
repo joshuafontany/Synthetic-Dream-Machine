@@ -83,6 +83,26 @@ export function exportCarrierFile(tw5: TW5Engine, memeUri: string): CarrierFile 
   const tiddler = wiki.getTiddler?.(memeUri) as { fields?: TiddlerFields } | undefined;
   const fields = tiddler?.fields;
   if (!fields) return null;
+
+  // Skinny-handle rule (T3, disk-projection#granularity + content-resolution.mem): a carrier
+  // whose body left the CRDT for the `cid/` CAS tier projects as its HANDLE ALONE. The bytes
+  // stay content-addressed; disk keeps only the small pointer (`_canonical_uri`/`_integrity`/
+  // `textCid` + metadata). The `text` field is STRIPPED before serialization — so even after the
+  // read-side lazyLoad resolver rehydrates the body INTO the VM tiddler (for render), the disk
+  // projection never writes the whole body and never re-opens the #51 overflow on re-ingest. The
+  // handle rides TW5's own native file-info (a `.tid` for the typeless handle). This wins over the
+  // memetic recompose below — a skinny carrier is a pointer, never a body to recompose.
+  const isSkinny = fields["_is_skinny"] === "yes" || typeof fields["textCid"] === "string";
+  if (isSkinny) {
+    const { text: _body, ...handleFields } = fields as Record<string, unknown>;
+    const info = makeTw5FileInfo(tw5.$tw as unknown as TW5Instance, memeUri, handleFields);
+    return {
+      ext:  info.ext,
+      body: info.body,
+      ...(info.hasMetaFile && info.metaBody !== undefined ? { metaBody: info.metaBody } : {}),
+    };
+  }
+
   const type = typeof fields["type"] === "string" ? (fields["type"] as string) : "";
   // Memetic carriers keep the membrane recompose + the `.mem` extension: their
   // ahu children live as separate records and MUST splice back whole (a native

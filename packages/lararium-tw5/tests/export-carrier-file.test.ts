@@ -41,6 +41,27 @@ describe.skipIf(!coreBlobPresent)("exportCarrierFile — native filetype project
       type:  "text/x-memetic-wikitext",
       text:  "a memetic carrier still recomposes to .mem.\n",
     });
+    // A skinny handle whose body left the CRDT for the cid/ tier — NO text.
+    engine.setTiddler({
+      title:          "lar:///ha.ka.ba/bags/@crossroads/library/skinny-book",
+      _is_skinny:     "yes",
+      _canonical_uri: "lar:///ha.ka.ba/cid/deadbeef",
+      _integrity:     "ni:///sha-256;deadbeef",
+      textCid:        "deadbeef",
+      size:           "18000000",
+      _source_ext:    ".txt",
+    });
+    // A skinny handle the read-side resolver ALREADY rehydrated into the VM (text present) —
+    // the projection MUST still write only the handle, never the whole body.
+    engine.setTiddler({
+      title:          "lar:///ha.ka.ba/bags/@crossroads/library/rehydrated-book",
+      _is_skinny:     "yes",
+      _canonical_uri: "lar:///ha.ka.ba/cid/cafef00d",
+      _integrity:     "ni:///sha-256;cafef00d",
+      textCid:        "cafef00d",
+      size:           "18000000",
+      text:           "THE ENTIRE 18MB BOOK BODY THAT MUST NOT REACH DISK ".repeat(4),
+    });
   }, 60_000);
 
   test("a content filetype projects to its native file + a .meta sidecar", () => {
@@ -69,6 +90,27 @@ describe.skipIf(!coreBlobPresent)("exportCarrierFile — native filetype project
     expect(file!.metaBody).toBeUndefined();
     // the SOH carrier envelope surfaces — the membrane recompose ran
     expect(file!.body).toContain("&#x0001;");
+  });
+
+  test("a skinny handle projects its handle alone — the pointer, never the body", () => {
+    const file = exportCarrierFile(engine, "lar:///ha.ka.ba/bags/@crossroads/library/skinny-book");
+    expect(file).not.toBeNull();
+    // small handle file — carries the content-address + integrity + metadata
+    expect(file!.body).toContain("deadbeef");
+    expect(file!.body).toContain("_is_skinny");
+    // the bytes stay in the cid/ CAS — the size metadata rides, the 18MB body does NOT
+    expect(file!.body.length).toBeLessThan(2000);
+    expect(file!.encoding).toBeUndefined();
+  });
+
+  test("a rehydrated skinny handle STRIPS the body — no re-overflow to disk", () => {
+    const file = exportCarrierFile(engine, "lar:///ha.ka.ba/bags/@crossroads/library/rehydrated-book");
+    expect(file).not.toBeNull();
+    // even with `text` present in the VM, the projected handle omits the body entirely
+    expect(file!.body).not.toContain("THE ENTIRE 18MB BOOK BODY");
+    expect(file!.body).toContain("cafef00d");
+    expect(file!.body).toContain("_is_skinny");
+    expect(file!.body.length).toBeLessThan(2000);
   });
 
   test("an absent tiddler projects nothing", () => {

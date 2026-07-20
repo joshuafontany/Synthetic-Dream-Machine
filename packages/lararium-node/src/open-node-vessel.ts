@@ -33,7 +33,7 @@ import {
   type DurableMailbox,
   OpenIdentitySlot,
   emptyLarDoc, mutableLarRecord, tiddlerText,
-  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, recipeHostFacets,
+  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, CROSSROADS_DOC_URI, recipeHostFacets,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
   BAG_IDS, slugFromUri, verbArgsFromPayload, registerCrossroadsInOracle,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
@@ -893,6 +893,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     const diskMirrorGrant: DiskMirrorGrant = [
       { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares"),    scope: "@lares" },
       { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium"), scope: "@lararium" },
+      // @crossroads = the PUBLIC plane's seed/canon bag — it holds the moved public-domain
+      // library (raw .txt books + .mem memes with large source ahus). It projects to
+      // bags/@crossroads like the other seed bags. Safe to project ONLY with the skinny-handle
+      // rule in place (T3): a book too big for the CRDT lands as a skinny handle, and the
+      // projector writes only its handle — the body stays in the cid/ CAS, never re-overflowing.
+      { bagId: CROSSROADS_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@crossroads"), scope: "@crossroads" },
       // working = the live write layer; projects per-wiki to wikis/@{slug} (BOTH
       // the bag `wikis/@{slug}/working` and the leaf fill from the slug at mount —
       // wikiSlot). The authority (the wikis base) stays static here; designation

@@ -131,6 +131,8 @@ export type { ActionHandlerOptions } from "./action-handler.js";
 
 export { exportMemeText, exportCarrierFile } from "./meme-write.js";
 export type { CarrierFile } from "./meme-write.js";
+export { installLazyResolver, skinnyCid } from "./lazy-resolver.js";
+export type { CarrierResolver as LazyCarrierResolver } from "./lazy-resolver.js";
 
 export { tw5ElementToVdom, tw5ElementToHtml } from "./fake-dom.js";
 export type { VDomNode, TW5FakeElement, TW5FakeTextNode, TW5FakeNode } from "./fake-dom.js";
