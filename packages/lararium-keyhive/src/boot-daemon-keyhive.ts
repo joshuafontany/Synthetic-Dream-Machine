@@ -110,7 +110,7 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
   // conflated ID-with-authz, assumed single-membership, and read a global "now"). Boot proves
   // IDENTITY ONLY: Gate A (key self-consistency) + the Binding Gate (the signed delegation edge).
   // `personaGroupAgentIdHex` / `meshCabalDocIdHex` stay on the input for the founding sentinel
-  // dance + the future affiliation layer; boot no longer reads them.
+  // dance + the affiliation layer; boot itself proves identity only and does not read them.
 
   // Register the operator's writable bags so cap checks resolve against lar: URIs.
   for (const bagUrl of input.registerBags) {

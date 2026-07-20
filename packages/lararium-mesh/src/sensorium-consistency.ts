@@ -126,7 +126,7 @@ function forestSize(f: readonly LabeledTree[]): number {
 //     the construction is elementary (shred → bag → bag-distance) and is INLINED here clean-room, so no GPL
 //     obligation touches this MIT tree.
 //
-//   exact TED (shelved) — {@link treeEditExact} keeps the old forestEditRaw behind the `"exact"` method for
+//   exact TED (shelved) — {@link treeEditExact} exposes forestEditRaw behind the `"exact"` method for
 //     the rare certified-count case; it is cubic and caps out ~200 nodes, so it is NEVER the hot path.
 //
 // All three are DISAGREEMENT SIGNALS (caution b), never distortion bounds.
@@ -541,8 +541,8 @@ export function assertSheafPlanes(restrictions: readonly PlaneRestriction[]): vo
 //                     synthesizes up into a shared coface AGREES on the coefficient there.
 //   ki-radius > 0  ⟺  a localizable CO-OBSTRUCTION, keyed to the offending coface.
 //
-// The extension operator is REAL, never faked through a restriction (the old caution-c refusal is
-// dissolved): the bands plane's MODWT-MRA SYNTHESIS (the additive reconstruction `x = ΣD_j + A`) IS the
+// The extension operator is REAL, never faked through a restriction: the bands plane's MODWT-MRA
+// SYNTHESIS (the additive reconstruction `x = ΣD_j + A`) IS the
 // extension — a fine detail band synthesizes UP into a coarse coface (a coarse-block coefficient), and the
 // check reads whether the fine cells AGREE on the coarse coefficient they jointly produce. Under real scale
 // separation every fine band is ZERO-MEAN over a coarse block, so the bands co-extend to the same coarse

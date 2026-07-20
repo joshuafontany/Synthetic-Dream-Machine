@@ -60,8 +60,8 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
   return makeDaemonBehavior({
     ...daemonExtra, // the vessel-injected telemetry capture SINK flows through (idempotent cap → live)
     // Sovereign-worker data-plane: register the read-only reactors in-worker over the
-    // IslandContext composite (verify-then-delegate gate inherited). The first slice
-    // off the old main-thread jobRegistry; pool-touching residency reactors follow.
+    // IslandContext composite (verify-then-delegate gate inherited); the residency
+    // ACTION reactors register alongside them below.
     wireWorkerVerbs: (registry, ctx: IslandContext) => {
       // `where` reaches every registered bag across both oracle planes by ACCESS
       // (access≠load) — the daemon queries all bags, mounts none. resolve stays

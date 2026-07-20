@@ -1,7 +1,9 @@
 /**
- * Browser stub for Node's `crypto` module.
- * Provides `createHash` via Web Crypto SHA-256 for browser test environments.
- * Only the synchronous hash pattern used by tw5-host-bridge is stubbed here.
+ * Browser stub for Node's `crypto` module — TEST ENVIRONMENTS ONLY.
+ * `createHash("sha256")` returns a DETERMINISTIC non-crypto FNV-1a digest, NOT a real
+ * SHA-256. It stands in for the synchronous hash pattern tw5-host-bridge uses, where a
+ * test asserts value STABILITY, never cryptographic strength. Never reach this off the
+ * test path — a real digest needs Node `crypto` or an async WebCrypto call.
  */
 
 export function createHash(algorithm: string) {
@@ -18,14 +20,11 @@ export function createHash(algorithm: string) {
       }
       return this;
     },
-    // Returns hex digest synchronously by combining chunks.
-    // Uses a pre-seeded table approach — suitable for test stubs only.
+    // Synchronous hex digest — the Node createHash API is synchronous, so a real async
+    // WebCrypto call cannot stand here. FNV-1a over ALL input bytes gives a deterministic,
+    // test-stable value (never a cryptographic digest).
     digest(encoding: "hex" | "base64" = "hex"): string {
-      // Defer to WebCrypto in an async context would be ideal, but the Node
-      // crypto.createHash API is synchronous. For test stubs, return a
-      // deterministic placeholder derived from the first 8 bytes of input.
       const allBytes = mergeChunks(chunks);
-      // Simple FNV-1a to produce a deterministic 32-byte hex for testing.
       const fnv = fnv1a256(allBytes);
       if (encoding === "hex") return fnv;
       const bytes = hexToBytes(fnv);
