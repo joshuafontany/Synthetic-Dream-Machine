@@ -18,7 +18,7 @@
  * the @daemon's composed caps, and nothing behind it opens a store.
  */
 
-import { openMemorySensorium, sensoriumLenses, sensoriumNames, sensoriumDir } from "@lararium/node";
+import { openMemorySensorium, sensoriumLenses, sensoriumNames, sensoriumDir, memorySensoriumDir } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 import { cmdHarvest, cmdCapture, cmdSweep } from "./harvest.js";
@@ -29,6 +29,32 @@ import { cmdRecall } from "./recall.js";
 import { cmdRefresh } from "./refresh.js";
 import { cmdFlow } from "./flow.js";
 import { cmdMeta } from "./meta.js";
+import { runQuiesce, runResume, runTopology, type DoorScope } from "./mempalace.js";
+
+/**
+ * The SOVEREIGN door onto a sensorium island's lifecycle — the parallel of the guest
+ * `lares mempalace` door, so `lares sense quiesce/resume/holders` control ONLY the
+ * sovereign sensorium's holders, never the guest comparator. `sensorium-root` (threaded
+ * by the addressing layer, default = the memory sensorium) is the scope holders must sit
+ * under. Only the MEMORY sensorium owns the daemon-minting hook legs (they mint the
+ * memory capture) and the shared hook marker; a NON-memory sensorium address scopes to
+ * its own holders and leaves both the legs and the marker to memory.
+ */
+function senseDoor(args: ParsedArgs): DoorScope {
+  const root = args.options["sensorium-root"] ?? memorySensoriumDir();
+  const isMemory = root === memorySensoriumDir();
+  return { scope: root, spawners: isMemory, manageHooks: isMemory, label: "lares sense" };
+}
+
+function cmdSenseQuiesce(args: ParsedArgs): Promise<number> {
+  return runQuiesce(args, senseDoor(args), args.flags["hold"] === true);
+}
+function cmdSenseResume(args: ParsedArgs): number {
+  return runResume(args, senseDoor(args));
+}
+function cmdSenseHolders(args: ParsedArgs): number {
+  return runTopology(args, senseDoor(args), "holders");
+}
 
 const VERBS = ["search", "relate", "structure", "status"] as const;
 type Verb = (typeof VERBS)[number];
@@ -54,6 +80,11 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
   telemetry: cmdTelemetry,
   flow:      cmdFlow,
   meta:      cmdMeta,
+  // Holder lifecycle — the SOVEREIGN parallel of `lares mempalace`, each door scoped to its own island.
+  // `status` is already a plane-READ verb (the persistence lens), so the holder TOPOLOGY rides as `holders`.
+  quiesce:   cmdSenseQuiesce,
+  resume:    cmdSenseResume,
+  holders:   cmdSenseHolders,
 };
 
 export async function cmdSense(args: ParsedArgs): Promise<number> {

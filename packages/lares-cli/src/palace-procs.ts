@@ -274,6 +274,39 @@ export function livePalaceProcs(opts: { vesselPids?: readonly number[]; vesselPo
   });
 }
 
+// ── palace-scope selection (per-island holder addressing) ─────────────────────
+
+/**
+ * Is `dir` at or beneath `root`? — path-segment safe, never a bare string-prefix
+ * match (so `/a/memory` never reads as under `/a/mem`). A trailing slash on `root`
+ * normalizes away first.
+ */
+export function isUnderPath(dir: string, root: string): boolean {
+  const r = root.endsWith("/") ? root.slice(0, -1) : root;
+  return dir === r || dir.startsWith(r + "/");
+}
+
+/**
+ * Does this proc belong to ONE island's holder set, keyed by its store PATH? A
+ * store-HOLDER (write-daemon · recall sidecar · one-shot mine · chroma · capture
+ * holder) pins an absolute store path — `serves` carries it — so it counts only
+ * when that path sits UNDER `root`. The daemon-MINTING legs (the ingest hook +
+ * `lares capture/subagents/telemetry`) carry a WING, not a path, and mint the
+ * SOVEREIGN memory capture; a caller owns them only when it says `spawners: true`
+ * (the sovereign memory door), never the guest. Everything else (the node vessel)
+ * belongs to no island's drain. This is the predicate that keeps `lares mempalace`
+ * off the sovereign holder and `lares sense` off the guest — one island per door.
+ */
+export function procInPalaceScope(
+  p: PalaceProc,
+  root: string,
+  opts: { spawners?: boolean } = {},
+): boolean {
+  if (p.holdsStore) return p.serves.startsWith("/") && isUnderPath(p.serves, root);
+  if (p.mintsDaemons) return opts.spawners === true;
+  return false;
+}
+
 /** Format an uptime in seconds as a compact `Nd`/`Nh`/`Nm`/`Ns` string; "—" when unknown. */
 export function fmtUptime(sec: number | null): string {
   if (sec === null) return "—";

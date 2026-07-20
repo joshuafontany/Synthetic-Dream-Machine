@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   parseEtime, parseProcTable, classifyKind, classifyPalaceProcs, fmtUptime, KIND_META,
+  isUnderPath, procInPalaceScope, type PalaceProc,
 } from "../src/palace-procs.js";
 
 // A fixture `ps -eo pid=,ppid=,etime=,args=` dump modeling the whack-a-mole:
@@ -124,6 +125,51 @@ describe("KIND_META coverage", () => {
     for (const k of ["write-daemon", "read-sidecar", "one-shot-mine", "chroma", "node-vessel", "ingest-hook", "capture-job", "subagents-job", "telemetry-job"] as const) {
       expect(KIND_META[k]).toBeDefined();
     }
+  });
+});
+
+describe("isUnderPath", () => {
+  it("matches at-or-beneath, path-segment safe (no bare prefix)", () => {
+    expect(isUnderPath("/a/b", "/a/b")).toBe(true);
+    expect(isUnderPath("/a/b/c", "/a/b")).toBe(true);
+    expect(isUnderPath("/a/b/c", "/a/b/")).toBe(true);   // trailing slash normalized
+    expect(isUnderPath("/a/bc", "/a/b")).toBe(false);     // segment boundary, not string prefix
+    expect(isUnderPath("/a", "/a/b")).toBe(false);
+  });
+});
+
+describe("procInPalaceScope — one island per door", () => {
+  // The two islands the ruling separates: the guest comparator and the sovereign memory sensorium.
+  const GUEST = "/home/joshu/.mempalace/palace";
+  const MEMORY = "/home/joshu/.local/share/lares/sensoriums/memory";
+
+  const holder = (serves: string): PalaceProc => ({
+    pid: 1, ppid: 1, kind: "write-daemon", serves, uptimeSec: 1, spawnerCmd: "x",
+    holdsStore: true, mintsDaemons: false, cmd: serves,
+  });
+  const captureHolder: PalaceProc = { // the sovereign serialized writer — serves <memory>/content
+    pid: 2, ppid: 1, kind: "capture-holder", serves: `${MEMORY}/content`, uptimeSec: 1, spawnerCmd: "x",
+    holdsStore: true, mintsDaemons: false, cmd: "capture_session.py --serve",
+  };
+  const spawner: PalaceProc = { // an ingest-hook leg — mints the sovereign capture, keyed by WING not path
+    pid: 3, ppid: 1, kind: "capture-job", serves: "wing_x", uptimeSec: 1, spawnerCmd: "x",
+    holdsStore: false, mintsDaemons: true, cmd: "lares capture --wing wing_x",
+  };
+
+  it("the GUEST scope selects ONLY the guest holder — never the sovereign capture holder", () => {
+    expect(procInPalaceScope(holder(`${GUEST}`), GUEST)).toBe(true);
+    expect(procInPalaceScope(captureHolder, GUEST)).toBe(false);     // the witnessed breach — now excluded
+  });
+
+  it("the SOVEREIGN memory scope selects the capture holder — never the guest holder", () => {
+    expect(procInPalaceScope(captureHolder, MEMORY)).toBe(true);
+    expect(procInPalaceScope(holder(`${GUEST}`), MEMORY)).toBe(false);
+  });
+
+  it("the minting legs join only when the door OWNS them (sovereign memory), never the guest", () => {
+    expect(procInPalaceScope(spawner, GUEST, { spawners: false })).toBe(false);
+    expect(procInPalaceScope(spawner, MEMORY, { spawners: true })).toBe(true);
+    expect(procInPalaceScope(spawner, MEMORY, { spawners: false })).toBe(false); // a non-memory sovereign
   });
 });
 

@@ -32,7 +32,7 @@ import { execFileSync } from "node:child_process";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { initGuestMempalace, guestMempalaceOrgan, organHealthy, resolveMempalaceExe } from "@lararium/node";
-import { livePalaceProcs, fmtUptime, type PalaceProc, type ProcKind } from "../palace-procs.js";
+import { livePalaceProcs, fmtUptime, procInPalaceScope, type PalaceProc, type ProcKind } from "../palace-procs.js";
 import { hookPauseState, pauseHooks, resumeHooks } from "../hook-pause.js";
 import { portHolderPids } from "../port-control.js";
 import { larPort } from "../env.js";
@@ -104,17 +104,27 @@ function serialize(p: PalaceProc): Record<string, unknown> {
   };
 }
 
-// ── status ──────────────────────────────────────────────────────────────────
+// ── topology (holder scan) ────────────────────────────────────────────────────
 
-function cmdStatus(args: ParsedArgs): number {
-  const procs   = snapshot();
+/**
+ * The ONE topology renderer, parameterized by the door's island scope — `lares
+ * mempalace status` (guest) and `lares sense holders` (sovereign) both ride it, so
+ * the two doors can never drift a copy-paste twin. It lists ONLY the holders (and
+ * spawner legs) the door OWNS: the guest scope keeps the sovereign capture holder
+ * off the guest table, and vice-versa. `verb` heads the surface with the door's own
+ * verb name (`status` under mempalace, `holders` under sense).
+ */
+export function runTopology(args: ParsedArgs, door: DoorScope, verb: string): number {
+  const procs   = snapshot().filter((p) => procInPalaceScope(p, door.scope, { spawners: door.spawners }));
   const hooks   = hookPauseState();
   const holders = procs.filter((p) => p.holdsStore);
   const spawners = procs.filter((p) => p.mintsDaemons);
+  const head = `${door.label} ${verb}`;
 
   emit(args, {
     ok: true,
     data: {
+      scope: door.scope,
       hooksPaused: hooks.paused,
       hooksMarker: hooks.marker,
       ...(hooks.reason ? { hooksReason: hooks.reason } : {}),
@@ -122,11 +132,11 @@ function cmdStatus(args: ParsedArgs): number {
       processes: procs.map(serialize),
     },
     human: () => {
-      console.log("lares mempalace status — palace daemon/hook/capture topology\n");
+      console.log(`${head} — palace daemon/hook/capture topology (scope: ${door.scope})\n`);
       console.log(`  hooks: ${hooks.paused ? `PAUSED (${hooks.reason ?? "manual"}${hooks.since ? ` since ${hooks.since}` : ""})` : "LIVE (minting on dispatch)"}`);
       console.log(`  marker: ${hooks.marker}\n`);
       if (procs.length === 0) {
-        console.log("  (no palace processes — quiescent)\n");
+        console.log("  (no palace processes for this island — quiescent)\n");
         console.log("  the warm daemon re-spawns lazily on the next mine / recall.");
         return;
       }
@@ -146,17 +156,20 @@ function cmdStatus(args: ParsedArgs): number {
         for (const p of spawners) console.log(row(p));
         console.log("");
       }
-      const others = procs.filter((p) => !p.holdsStore && !p.mintsDaemons);
-      if (others.length) {
-        console.log("  OTHER:");
-        for (const p of others) console.log(row(p));
-        console.log("");
-      }
       console.log("  ↪ kill the SPAWNER, not the children: `lares hooks pause` stops the minting,");
-      console.log("    then `lares mempalace quiesce` drains the warm daemons to zero.");
+      console.log(`    then \`${door.label} quiesce\` drains the warm daemons to zero.`);
     },
   });
   return 0;
+}
+
+/** The GUEST door onto the comparator island — `~/.mempalace`, no spawner legs, no hook management. */
+function guestDoor(): DoorScope {
+  return { scope: guestPalace(), spawners: false, manageHooks: false, label: "lares mempalace" };
+}
+
+function cmdStatus(args: ParsedArgs): number {
+  return runTopology(args, guestDoor(), "status");
 }
 
 // ── quiesce ─────────────────────────────────────────────────────────────────
@@ -171,21 +184,49 @@ function cmdStatus(args: ParsedArgs): number {
 const drainable = (p: PalaceProc): boolean => p.holdsStore || p.mintsDaemons;
 
 /**
+ * A drain SELECTOR scoped to ONE island — the per-door instrument the operator
+ * ruling names: `lares mempalace` and `lares sense` each control ONLY their own
+ * island's holders. Holders count only when their store path sits UNDER `scope`;
+ * the daemon-MINTING legs join only when `spawners` (the sovereign memory door
+ * owns them, the guest never does). The UNSCOPED `drainable` above stays the
+ * teardown drain — it reaps every island in one cut.
+ */
+function scopedDrain(scope: string, spawners: boolean): (p: PalaceProc) => boolean {
+  return (p) => procInPalaceScope(p, scope, { spawners });
+}
+
+/**
+ * A door onto ONE island's lifecycle — the parameter that keeps the `mempalace`
+ * (guest) and `sense` (sovereign) sides ONE implementation, never a copy-paste twin.
+ * `scope` is the palace root holders must sit under; `spawners` owns the minting legs
+ * (sovereign only); `manageHooks` lets `quiesce` auto-pause/auto-resume the shared hook
+ * marker (sovereign only — the guest raises no hook-driven spawner, so it never touches
+ * the sovereign minting lever); `label` heads the rendered surface.
+ */
+export interface DoorScope {
+  readonly scope:       string;
+  readonly spawners:    boolean;
+  readonly manageHooks: boolean;
+  readonly label:       string;
+}
+
+/**
  * Drain every store-HOLDER and daemon-MINTING job to zero: SIGTERM each (its own
  * graceful flush-then-force handler, `main.ts` for the vessel, mempalace's daemon
  * for the rest), poll the topology until no drainable proc remains, then SIGKILL
  * as a bounded fallback. The live process table is the authority — never a stale
  * PID file.
  */
-async function drainHolders(opts: { graceMs?: number; pollMs?: number; killMs?: number } = {}): Promise<{
+async function drainHolders(opts: { select?: (p: PalaceProc) => boolean; graceMs?: number; pollMs?: number; killMs?: number } = {}): Promise<{
   drained: number[]; forced: number[]; remaining: PalaceProc[];
 }> {
+  const select  = opts.select ?? drainable;
   const graceMs = opts.graceMs ?? 8_000;
   const pollMs  = opts.pollMs  ?? 200;
   const killMs  = opts.killMs  ?? 3_000;
   const drained = new Set<number>();
 
-  const holdersNow = (): PalaceProc[] => snapshot().filter(drainable);
+  const holdersNow = (): PalaceProc[] => snapshot().filter(select);
   const initial = holdersNow();
   if (initial.length === 0) return { drained: [], forced: [], remaining: [] };
 
@@ -215,78 +256,126 @@ export interface QuiesceResult {
   readonly holdersLeft: PalaceProc[];
   readonly remaining:   PalaceProc[];
   readonly hooksHeld:   boolean;
+  /** Did this call operate the shared hook marker? (false for the guest door — it owns no spawner.) */
+  readonly hooksManaged: boolean;
   readonly marker:      string;
 }
 
 /**
- * The quiesce core (shared by `lares mempalace quiesce` AND `lares palace-teardown
- * --drain`): pause the hooks FIRST (stop the minting), drain every warm holder AND
- * wedged spawner job (SIGTERM → poll → bounded SIGKILL), then confirm zero. Un-pauses on a clean quiet
- * unless `hold` (a teardown keeps minting suppressed until it finishes). Idempotent.
+ * The quiesce core (shared by `lares mempalace quiesce`, `lares sense quiesce` AND
+ * `lares palace-teardown --drain`): when it manages the hooks, pause them FIRST (stop
+ * the minting); drain every warm holder AND wedged spawner job the door OWNS (SIGTERM →
+ * poll → bounded SIGKILL), then confirm zero. Un-pauses on a clean quiet unless `hold`
+ * (a teardown keeps minting suppressed until it finishes). Idempotent.
+ *
+ * `palaceScope` narrows the drain to ONE island's holders (holders under that root,
+ * plus the minting legs only when `includeSpawners`); absent → the UNSCOPED drain that
+ * teardown needs (every island). `manageHooks` (default true) gates the auto-pause /
+ * auto-resume of the SHARED hook marker — the guest door passes false, so it never
+ * touches the sovereign minting lever nor clobbers a sovereign `--hold`.
  */
-export async function quiescePalace(opts: { hold?: boolean } = {}): Promise<QuiesceResult> {
-  const hold = opts.hold === true;
-  const paused = pauseHooks("quiesce");
-  const { drained, forced, remaining } = await drainHolders();
-  const holdersLeft = snapshot().filter(drainable);
+export async function quiescePalace(opts: {
+  hold?: boolean;
+  palaceScope?: string;
+  includeSpawners?: boolean;
+  manageHooks?: boolean;
+} = {}): Promise<QuiesceResult> {
+  const hold        = opts.hold === true;
+  const manageHooks = opts.manageHooks !== false;
+  const select = opts.palaceScope !== undefined
+    ? scopedDrain(opts.palaceScope, opts.includeSpawners === true)
+    : drainable;
+
+  const marker = manageHooks ? pauseHooks("quiesce").marker : hookPauseState().marker;
+  const { drained, forced, remaining } = await drainHolders({ select });
+  const holdersLeft = snapshot().filter(select);
   const quiet = holdersLeft.length === 0;
-  if (!hold && quiet) resumeHooks();
-  return { quiet, drained, forced, holdersLeft, remaining, hooksHeld: hold || !quiet, marker: paused.marker };
+  if (manageHooks && !hold && quiet) resumeHooks();
+  return {
+    quiet, drained, forced, holdersLeft, remaining,
+    hooksHeld: manageHooks ? (hold || !quiet) : false,
+    hooksManaged: manageHooks,
+    marker,
+  };
 }
 
-async function cmdQuiesce(args: ParsedArgs): Promise<number> {
-  const hold = args.flags["hold"] === true;
-  const { quiet, drained, forced, holdersLeft, remaining, marker } = await quiescePalace({ hold });
-  const paused = { marker };
+/**
+ * The ONE quiesce runner, parameterized by the door's island scope — `lares mempalace
+ * quiesce` (guest) and `lares sense quiesce` (sovereign) both ride it. It drains ONLY
+ * the door's own holders (the scoped `quiescePalace`), so the guest door can never
+ * SIGTERM the sovereign capture holder — the witnessed two-door breach — and vice-versa.
+ * The guest door leaves the shared hook marker untouched (`manageHooks:false`).
+ */
+export async function runQuiesce(args: ParsedArgs, door: DoorScope, hold: boolean): Promise<number> {
+  const { quiet, drained, forced, holdersLeft, remaining, marker, hooksManaged } = await quiescePalace({
+    hold, palaceScope: door.scope, includeSpawners: door.spawners, manageHooks: door.manageHooks,
+  });
+  const head = `${door.label} quiesce`;
 
   emit(args, {
     ok: quiet,
-    ...(quiet ? {} : { error: { code: "conflict", message: `${holdersLeft.length} holder(s) survived SIGTERM+SIGKILL`, hint: "re-run `lares mempalace status` to inspect; a wedged proc may need manual intervention" } }),
+    ...(quiet ? {} : { error: { code: "conflict", message: `${holdersLeft.length} holder(s) survived SIGTERM+SIGKILL`, hint: `re-run \`${door.label} status\` to inspect; a wedged proc may need manual intervention` } }),
     data: {
-      hooksPaused: hold || !quiet,
-      hookMarker: paused.marker,
+      scope: door.scope,
+      hooksManaged,
+      hooksPaused: hooksManaged && (hold || !quiet),
+      hookMarker: marker,
       drained, forced,
       quiescent: quiet,
       remaining: remaining.map(serialize),
     },
     human: () => {
-      console.log("lares mempalace quiesce — graceful stop-the-world\n");
-      console.log(`  hooks: PAUSED (${paused.marker})`);
+      console.log(`${head} — graceful stop-the-world (scope: ${door.scope})\n`);
+      if (hooksManaged) console.log(`  hooks: PAUSED (${marker})`);
+      else              console.log("  hooks: untouched (this island raises no hook-driven spawner)");
       if (drained.length === 0) {
-        console.log("  drain: no warm holders — already quiet (idempotent no-op).");
+        console.log("  drain: no warm holders for this island — already quiet (idempotent no-op).");
       } else {
         console.log(`  drain: SIGTERM'd ${drained.length} holder(s)${forced.length ? `, SIGKILL'd ${forced.length} stubborn` : ""}.`);
       }
       if (quiet) {
         console.log("  confirm: 0 holders remain — QUIESCENT. ✓");
-        if (hold) console.log("  hooks HELD paused (--hold) — run `lares mempalace resume` when done.");
-        else      console.log("  hooks un-paused — the warm daemon re-spawns lazily on next use.");
+        if (hooksManaged && hold) console.log(`  hooks HELD paused (--hold) — run \`${door.label} resume\` when done.`);
+        else if (hooksManaged)    console.log("  hooks un-paused — the warm daemon re-spawns lazily on next use.");
       } else {
-        console.log(`  confirm: ⚠ ${holdersLeft.length} holder(s) SURVIVED — hooks held paused:`);
+        console.log(`  confirm: ⚠ ${holdersLeft.length} holder(s) SURVIVED${hooksManaged ? " — hooks held paused" : ""}:`);
         for (const p of holdersLeft) console.log(`      pid ${p.pid}  ${p.serves}  (${p.cmd})`);
-        console.log("    inspect with `lares mempalace status`.");
+        console.log(`    inspect with \`${door.label} status\`.`);
       }
     },
   });
   return quiet ? 0 : 4;
 }
 
+function cmdQuiesce(args: ParsedArgs): Promise<number> {
+  return runQuiesce(args, guestDoor(), args.flags["hold"] === true);
+}
+
 // ── resume ──────────────────────────────────────────────────────────────────
 
-function cmdResume(args: ParsedArgs): number {
+/**
+ * The ONE resume runner — un-pause the SHARED hook marker (the same lever as `lares
+ * hooks resume`). An explicit operator act on both doors; the marker is global, so a
+ * resume re-arms minting for the whole node. Idempotent.
+ */
+export function runResume(args: ParsedArgs, door: DoorScope): number {
   const before = hookPauseState();
   const after = resumeHooks();
   emit(args, {
     ok: true,
-    data: { wasPaused: before.paused, hooksPaused: after.paused, marker: after.marker },
+    data: { scope: door.scope, wasPaused: before.paused, hooksPaused: after.paused, marker: after.marker },
     human: () => {
-      console.log("lares mempalace resume\n");
+      console.log(`${door.label} resume\n`);
       console.log(before.paused
         ? "  hooks UN-PAUSED — capture/ingest mint the warm daemon lazily again."
         : "  hooks were already live — nothing to do (idempotent no-op).");
     },
   });
   return 0;
+}
+
+function cmdResume(args: ParsedArgs): number {
+  return runResume(args, guestDoor());
 }
 
 /**
