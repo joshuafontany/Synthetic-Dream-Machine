@@ -31,6 +31,7 @@ import {
   type PeerId,
 } from "@automerge/automerge-repo";
 import { crossroadsDocUrl, whoBoardDocUrl } from "./deterministic-doc.js";
+import type { IdentitySlot } from "./identity-slot.js";
 
 /**
  * FederationGate — MAY this document cross to this (relay) peer? DENY-BY-DEFAULT.
@@ -94,4 +95,72 @@ export async function federationShareDecision(
   if (!fedGate)                return true;    // same-operator relay (own node) — full device sync
   if (!documentId)             return false;   // relay ring gated, no doc id → deny-by-default
   return fedGate.mayFederate(documentId, peerId as PeerId);
+}
+
+/**
+ * IdentityRing — the INNER capability ring the identity slot supplies to a
+ * composed sharePolicy. The slot answers "may I (this vessel, presenter = self)
+ * sync this doc" against the REAL barrier; `bagUrlForDoc` resolves the Automerge
+ * `documentId` the sharePolicy carries back to the registered bag URL the slot's
+ * `verifyCapability` speaks. A null return from `bagUrlForDoc` names an
+ * unresolvable doc→bag mapping — treated as DENY (a cap cannot be proven for a
+ * doc whose bag is unknown), never a silent allow.
+ */
+export interface IdentityRing {
+  readonly slot: IdentitySlot;
+  /** Resolve an Automerge documentId → the registered bag URL the slot verifies. */
+  bagUrlForDoc(documentId: DocumentId): string | null;
+  /** The ability the sharePolicy self-question asks of the barrier (default "read"). */
+  readonly ability?: "read" | "edit";
+}
+
+/**
+ * identityShareDecision — the #58 COMPOSITION: the #49 federation gate (OUTER
+ * ring) AND the identity slot's capability barrier (INNER ring), deny-by-default,
+ * with AND semantics — a doc crosses to a relay peer only if BOTH rings allow it.
+ *
+ * The rings compose the same way the node sharePolicy already layers them
+ * (per-peer admission OUTSIDE, per-doc caps INSIDE — open-node-vessel.ts:278-282):
+ *   - fed gate DENIES         → deny (the private planes never reach the ring).
+ *   - no identity ring wired  → the fed gate verdict IS the whole decision (today's
+ *                               behavior; the slot socket stays inert until injected).
+ *   - in-process island peer  → house member, the slot is NOT consulted (freely shared).
+ *   - gated relay, no doc id   → deny-by-default.
+ *   - doc→bag unresolvable     → deny (cannot prove a cap for an unknown bag).
+ *   - else                    → the slot's verifyCapability against the REAL barrier.
+ *
+ * ── HONEST BOUND (the #58 wiring gap this fn is the socket for) ──────────────
+ * This fn ENFORCES a genuine capability check ONLY where a live `IdentityRing`
+ * is passed — i.e. where a slot backed by a REAL provider AND a doc→bag resolver
+ * are both in scope at the sharePolicy seam. TODAY neither vessel has that at its
+ * main-thread sharePolicy: the live KeyhiveProvider runs INSIDE the daemon-island
+ * worker (bootDaemonKeyhive over the worker composite), and the bag↔docId registry
+ * lives there too — the founding ceremony DISPOSES its transient provider before
+ * returning, and LarVessel (whose `identity` field would carry the slot) is not on
+ * the live factory path. So both vessels pass `identity = null` and this degenerates
+ * EXACTLY to federationShareDecision (zero behavior change, deny-by-default intact).
+ * Making the inner ring LIVE needs the main↔worker cap-verify bridge (the async
+ * `daemon:verify-request` seam the node peer-gate already uses) + a docId→bagUrl
+ * resolver over the worker's bag registry — a SEPARATE thread. This fn is that
+ * seam's tested socket; it never fakes a verdict.
+ *
+ * Meme: lar:///ha.ka.ba/lararium/mesh/identity-share-decision
+ */
+export async function identityShareDecision(
+  relayPeers: ReadonlySet<string>,
+  fedGate:    FederationGate | null,
+  identity:   IdentityRing | null,
+  peerId:     string,
+  documentId?: DocumentId,
+): Promise<boolean> {
+  // OUTER ring — the #49 federation gate. Its own deny-by-default holds first.
+  const fedAllows = await federationShareDecision(relayPeers, fedGate, peerId, documentId);
+  if (!fedAllows)               return false;   // outer ring denies → done (AND semantics)
+  if (!identity)                return true;    // no inner ring wired → fed gate is the whole verdict
+  if (!relayPeers.has(peerId))  return true;    // in-process island peer — slot not consulted
+  if (!documentId)              return false;   // gated relay, no doc id → deny-by-default
+  // INNER ring — resolve doc→bag, then ask the REAL barrier "may I sync this doc".
+  const bagUrl = identity.bagUrlForDoc(documentId);
+  if (!bagUrl)                  return false;   // doc→bag unresolvable → cannot prove a cap → DENY
+  return identity.slot.verifyCapability(bagUrl, identity.ability ?? "read");
 }

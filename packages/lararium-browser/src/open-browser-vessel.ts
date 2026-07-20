@@ -21,7 +21,7 @@ import {
   emptyLarDoc, mutableLarRecord,
   CATALOG_DOC_URI, DAEMON_BAG_ID,
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
-  DeterministicFederationGate, federationShareDecision, type FederationGate,
+  DeterministicFederationGate, identityShareDecision, type FederationGate, type IdentityRing,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, recipeHostFacets, type WikiActivationCap,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
@@ -291,9 +291,23 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // gate the relay is the operator's OWN node (same-operator leaf, own DID) → full device sync.
   const relayPeers = new Set<string>();
   let   fedGate: FederationGate | null = null;
+  // #58 — the deny-by-default IDENTITY ring, composed INSIDE the #49 federation gate
+  // (identityShareDecision: a doc crosses only if BOTH rings allow). This is the
+  // socket the crypto-backed KeyhiveIdentitySlot slots into — mirroring how `fedGate`
+  // itself pre-sockets ahead of a cross-operator crossing.
+  //
+  // HONEST GAP (surfaced, NOT papered): `identityRing` stays null on this path today,
+  // so the composition degenerates EXACTLY to the #49 fed gate (zero behavior change).
+  // The live KeyhiveProvider runs INSIDE the daemon-island worker (bootDaemonKeyhive
+  // over the worker composite); the founding ceremony DISPOSES its transient provider
+  // before returning, so NO provider — and no bag↔docId registry — reaches this
+  // main-thread seam synchronously. Arming this ring needs the async main↔worker
+  // cap-verify bridge (the `daemon:verify-request` seam node's peer-gate already uses)
+  // + a docId→bagUrl resolver over the worker's registry — a SEPARATE thread (#58-b).
+  const identityRing: IdentityRing | null = null;
   const repo = new Repo({
     storage:     new IndexedDBStorageAdapter(`${idbName}:repo`),
-    sharePolicy: (peerId, documentId) => federationShareDecision(relayPeers, fedGate, peerId, documentId),
+    sharePolicy: (peerId, documentId) => identityShareDecision(relayPeers, fedGate, identityRing, peerId, documentId),
   });
   emit("repo-open");
 
