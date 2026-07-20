@@ -53,6 +53,8 @@ import type { DeviceAdmitPayload } from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
 import {
   generateOrLoadBrowserVesselIdentity, loadBrowserSigningSeed,
+  generateOrLoadBrowserPersonaRoot, loadBrowserPersonaRootSeed, wearBrowserPersona,
+  browserJoineePersonaIndex,
   openVesselIdb, idbGet, idbPut,
 }                                            from "./browser-vessel-identity.js";
 import { BrowserVesselIslandPool }           from "./browser-vessel-island-pool.js";
@@ -62,6 +64,11 @@ import { BrowserVesselIslandPool }           from "./browser-vessel-island-pool.
  *  The resolver honors this smaller grant — the same cap, a lower point on the spectrum. */
 const BROWSER_WIKI_ACTIVATION_CAP = 2;
 const BROWSER_WIKI_PIN_BUDGET     = 1;
+
+/** The founding persona's handle-index. A fresh browser founds its FIRST persona here (never the self-
+ *  signed floor); the multitude adds h1, h2, … each with its own root (a stage-4+ UX). Kept explicit so
+ *  the founding + the worker-reach selector name the SAME index. */
+const FOUNDING_PERSONA_INDEX = 0;
 import {
   fetchGenesisCasToOpfs,
 }                                            from "./browser-genesis.js";
@@ -353,13 +360,21 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     };
     bootKeyWrites.bootstrap = bootstrap;
   } else if (!bootstrap) {
-    // FOUND. No admit — the vessel raises its own PersonaGroup and stands at the floor as an anon. This
-    // is a correct outcome, not a failure: fail-closed reads stay-at-the-floor, never destroy.
+    // FOUND. No admit — the vessel raises its own PersonaGroup and founds its FIRST persona (never the
+    // self-signed floor). The two-key atom: the DEVICE key (operatorSeed) inits keyhive as the Individual;
+    // a DISTINCT PersonaGroup ROOT signs the device-delegation edge. Mint that root founder-side (root-on-
+    // founder), load its seed as the signer, and WEAR it — mirroring node's `lares init` (init.ts: mint
+    // generateOrLoadPersonaGroupRoot → loadPersonaGroupRootSeed → runFoundingCeremony{signerSeed}).
+    await generateOrLoadBrowserPersonaRoot(idbName, FOUNDING_PERSONA_INDEX);
+    const signerSeed = await loadBrowserPersonaRootSeed(idbName, FOUNDING_PERSONA_INDEX);
+    await wearBrowserPersona(idbName, FOUNDING_PERSONA_INDEX);   // the selector points at the founded root
     const f = await runFoundingCeremony({
       repo, operatorSeed,
       operatorVerifyingKey: operatorIdentity.verifyingKey,
       operatorDisplayName:  displayName ?? "Browser Operator",
-      signerSeed: operatorSeed,   // self-signed anon (signerDid == deviceDid) — the floor tier
+      // The persona-root SIGNS (signerDid == the root DID, DISTINCT from deviceDid). The self-signed anon
+      // (signerSeed == operatorSeed) survives ONLY as an explicit named floor tier, never the default.
+      signerSeed,
       hearthTrueName: "",          // hearth-agnostic: an anon is not yet bound to a place; it binds on upgrade
     });
     bootstrap = {
@@ -602,6 +617,23 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // @crossroads into the recipe + registerBags for either vessel — only the nexus key differs (here the
       // relay's gate key, so a human's two vessels register the SAME @crossroads).
       if (relayGatePubKey) await registerCrossroadsInOracle(repo, assembly.islandHandle, relayGatePubKey);
+      // The worker boots on the WORN persona's binding. The two-key atom: `seed` is the DEVICE key —
+      // it inits keyhive as the Individual, and NEVER derives the persona-root — while `signerDid` +
+      // `deviceEdge` carry the WORN PersonaGroup root's founder-signed binding (the Binding Gate pins
+      // that root). The selector chooses WHICH root: `browserJoineePersonaIndex` reads the worn index
+      // (a founder's worn/founding root, or a joinee's admitted anchor index — the anchor/edge path,
+      // never a held root the joinee lacks).
+      //
+      // SURFACED FORK (per-persona social plane): the browser bootstrap holds ONE founding's social docs,
+      // so today the WORN binding IS the founding persona's. Wearing a SECOND persona whose OWN
+      // PersonaGroup + @daemon social docs feed the worker means founding those docs per persona and
+      // keying the bootstrap by index — a whole-social-plane fork node itself does NOT exercise (node
+      // founds only index 0). Left to the operator; this reach threads the worn root's binding from the
+      // single bootstrap, which is exactly node's behaviour.
+      const wornPersona = await browserJoineePersonaIndex(idbName);
+      if (wornPersona !== undefined && wornPersona !== FOUNDING_PERSONA_INDEX) {
+        console.log(`[lararium-browser] worker boots on worn persona h${wornPersona} (binding from bootstrap)`);
+      }
       const daemonAuth = {
         seed: operatorSeed, operatorVerifyingKey: operatorIdentity.verifyingKey,
         personaGroupDocIdHex: social.personaGroupDocIdHex,
@@ -612,6 +644,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares,
           slot.wikiBagId, slot.draftBagId,
         ],
+        // The WORN persona-root's binding (founder-signed): signerDid pins the root, deviceEdge is the
+        // signed device→hearth edge. From the single bootstrap (see the per-persona fork above).
         signerDid: social.signerDid,
         deviceEdge: social.deviceEdge,
       };
