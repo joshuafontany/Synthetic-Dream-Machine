@@ -137,6 +137,13 @@ export class KeyhiveProvider implements CapabilityProvider {
   private readonly delegationAudience = new Map<string, string>();
   /** delegationId → bag URL (so revoke knows which Document.toMembered() to use). */
   private readonly delegationBag = new Map<string, string>();
+  /** CIV-2b — islands whose events already sit in keyhive memory: the self slice seeded eagerly at boot,
+   *  every island this vessel minted/adopted live, plus any foreign island a first-access materialized.
+   *  A resident island's lazy-load noops. */
+  private readonly hydratedIslands = new Set<string>();
+  /** CIV-2b — the N=1 default boot (no self set) loads EVERY event eagerly, so no island ever defers;
+   *  this flag makes `materializeIsland` a pure noop in that path (byte-identical to before CIV-2b). */
+  private allEager = false;
 
   async init(opts: CapabilityProviderInitOpts): Promise<void> {
     if (this.kh) throw new Error("KeyhiveProvider: already initialized");
@@ -239,6 +246,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     const docIdHex = bytesToHex(doc.id.toBytes());
     this.bagToDocId.set(bagUrl, docIdHex);
     this.docIdToBag.set(docIdHex, bagUrl);
+    this.hydratedIslands.add(docIdHex);   // CIV-2b — a freshly-minted island is live in memory, never deferred
     return { docId: docIdHex };
   }
 
@@ -250,11 +258,15 @@ export class KeyhiveProvider implements CapabilityProvider {
   adoptBag(bagUrl: string, docIdHex: string): void {
     this.bagToDocId.set(bagUrl, docIdHex);
     this.docIdToBag.set(docIdHex, bagUrl);
+    // CIV-2b — a peer's bag hydrates from the WIRE (ingestPeerEvents), not the deferred local store, so a
+    // first access must NOT try to lazy-load it from `list()` — mark it resident the moment we adopt it.
+    this.hydratedIslands.add(docIdHex);
   }
 
   async delegate(args: DelegateArgs): Promise<DelegateResult> {
     const docIdHex = this.bagToDocId.get(args.bagUrl);
     if (!docIdHex) throw new Error(`bag not registered: ${args.bagUrl} (call registerBag first)`);
+    await this.ensureIsland(docIdHex);   // CIV-2b — first access materializes a boot-deferred island
     const docId = new KH.DocumentId(hexToBytes(docIdHex));
 
     const access = KH.Access.tryFromString(args.access);
@@ -290,6 +302,7 @@ export class KeyhiveProvider implements CapabilityProvider {
   private async requireDoc(bagUrl: string): Promise<KH.Document> {
     const docIdHex = this.bagToDocId.get(bagUrl);
     if (!docIdHex) throw new Error(`bag not registered: ${bagUrl} (call registerBag first)`);
+    await this.ensureIsland(docIdHex);   // CIV-2b — first access materializes a boot-deferred island
     const doc = await this.requireKh().getDocument(new KH.DocumentId(hexToBytes(docIdHex)));
     if (!doc) throw new Error(`document not in scope (lost from local state?): ${bagUrl}`);
     return doc;
@@ -391,6 +404,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     if (!docIdHex) {
       return { ok: false, reason: `bag not registered: ${args.bagUrl}` };
     }
+    await this.ensureIsland(docIdHex);   // CIV-2b — first access materializes a boot-deferred island
     const docId = new KH.DocumentId(hexToBytes(docIdHex));
     const presenterId = new KH.Identifier(hexToBytes(args.presenter));
 
@@ -532,20 +546,58 @@ export class KeyhiveProvider implements CapabilityProvider {
     const records = await this.eventStore.list();
     const eager = selfIslands === undefined ? records : records.filter((r) => inSelfSlice(r, selfIslands));
     const deferred = records.length - eager.length;
+    // CIV-2b — record what boot already holds, so a first-access lazy-load noops for it. The default
+    // (no self set) loads EVERY event → flag allEager, and materializeIsland stays a pure noop. With a
+    // self set, the self islands are resident; cross-cutting events (island-undefined) always ride the
+    // eager slice too, so only genuinely-foreign islands remain to materialize on demand.
+    if (selfIslands === undefined) this.allEager = true;
+    else for (const id of selfIslands) this.hydratedIslands.add(id);
+    const { ingested, skipped } = await this.ingestChunked(eager.map((r) => r.bytes));
+    return { ingested, skipped, deferred };
+  }
+
+  /**
+   * Replay a slice of event bytes into keyhive, PACED by the homeostatic depth SERVO (#13 — the boot-CPU
+   * spike): each chunk's depth SERVOS toward a per-chunk latency set-point (`adaptGate`, negative feedback) —
+   * smaller batches when a chunk runs slow, larger with headroom — with an event-loop yield between them, so
+   * a large replay never pegs the loop synchronously. Torn-tolerant (CIV-1): a corrupt record degrades its
+   * own membership slice (`skipped`), never fells the replay. Keyhive resolves causality internally, so chunk
+   * order is byte-equivalent to one batch. Shared by boot (`hydrateFromEventStore`) and CIV-2b lazy first-access.
+   */
+  private async ingestChunked(byteSlices: readonly Uint8Array[]): Promise<{ ingested: number; skipped: number }> {
     const kh = this.requireKh();
     const TARGET_MS = 40;              // per-chunk ingest set-point; the loop breathes between chunks
     let gate = PONO_FLUSH_GATE;        // depth 32, servoed by adaptGate against observed latency
     let ingested = 0, skipped = 0;
-    for (let i = 0; i < eager.length; ) {
-      const slice = eager.slice(i, i + gate.depth).map((r) => r.bytes);
+    for (let i = 0; i < byteSlices.length; ) {
+      const slice = byteSlices.slice(i, i + gate.depth) as Uint8Array[];
       const t0 = Date.now();
       const r = await ingestTolerant(slice, (batch) => kh.ingestEventsBytes(batch as Uint8Array[]));
       ingested += r.ingested; skipped += r.skipped;
       i += slice.length;
-      gate = adaptGate(gate, Date.now() - t0, TARGET_MS);                       // servo the depth toward the set-point
-      if (i < eager.length) await new Promise<void>((res) => setImmediate(res));  // let the loop breathe
+      gate = adaptGate(gate, Date.now() - t0, TARGET_MS);                            // servo the depth toward the set-point
+      if (i < byteSlices.length) await new Promise<void>((res) => setImmediate(res)); // let the loop breathe
     }
-    return { ingested, skipped, deferred };
+    return { ingested, skipped };
+  }
+
+  async materializeIsland(islandId: string): Promise<{ ingested: number; skipped: number }> {
+    // Resident already — the self slice, the N=1 all-eager boot, or a prior materialization. Cheap noop.
+    if (this.allEager || this.hydratedIslands.has(islandId) || !this.eventStore) return { ingested: 0, skipped: 0 };
+    // Just THIS island's own deferred events: cross-cutting (island-undefined) rode the eager boot slice,
+    // so filter them out here — re-ingesting them would be redundant (keyhive dedups, but no need to pay).
+    const own = (await this.eventStore.list(islandId)).filter((r) => r.island === islandId);
+    const result = await this.ingestChunked(own.map((r) => r.bytes));
+    // Mark resident only after a clean ingest; a throw leaves the island retryable (the provider awaits
+    // doc-ops sequentially — single-writer law — so no concurrent access double-loads between here and now).
+    this.hydratedIslands.add(islandId);
+    return result;
+  }
+
+  /** CIV-2b seam — before an op resolves a bag's Document, materialize its island if boot deferred it.
+   *  A noop for a resident island; the "first access" that turns a deferred foreign island live. */
+  private async ensureIsland(docIdHex: string): Promise<void> {
+    await this.materializeIsland(docIdHex);
   }
 
   async dispose(): Promise<void> {

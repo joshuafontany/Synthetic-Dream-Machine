@@ -90,6 +90,52 @@ describe("CIV-2 boot-flatness — eager cost ⊥ held-principal count", () => {
     }
   });
 
+  test("CIV-2b: a boot-deferred foreign island materializes on first access, then noops", async () => {
+    // A causally-closed real event set (well-formed — it reaches ingest, unlike the synthetic-N garbage).
+    const realBytes = await gatherRealSelfEvents();
+    expect(realBytes.length).toBeGreaterThan(1);
+    const FOREIGN = "abcdabcdabcdabcdabcdabcdabcdabcd";
+
+    const store = new InMemoryEventStore();
+    // Event 0 rides cross-cutting (eager, so its causal root is resident before the lazy slice loads);
+    // the rest tag to FOREIGN and DEFER past the self-only boot.
+    for (let i = 0; i < realBytes.length; i++) {
+      await store.put({ hash: `r-${i}`, variant: "CGKA_OPERATION", bytes: realBytes[i], ...(i === 0 ? {} : { island: FOREIGN }) });
+    }
+
+    const boot = new KeyhiveProvider();
+    await boot.init({ seed: new Uint8Array(32).fill(3), eventStore: store });
+    const { deferred } = await boot.hydrateFromEventStore([SELF_ISLAND]);   // FOREIGN ∉ self → deferred
+    expect(deferred).toBe(realBytes.length - 1);
+
+    // First access pulls EXACTLY FOREIGN's own slice (not the cross-cutting event, already resident).
+    const first = await boot.materializeIsland(FOREIGN);
+    expect(first.ingested + first.skipped).toBe(realBytes.length - 1);
+    // Second access noops — the island is now resident.
+    const second = await boot.materializeIsland(FOREIGN);
+    expect(second.ingested + second.skipped).toBe(0);
+    // An island with no stored slice noops too (nothing to pull).
+    const none = await boot.materializeIsland("00000000000000000000000000000000");
+    expect(none.ingested + none.skipped).toBe(0);
+    await boot.dispose();
+  });
+
+  test("CIV-2b: the N=1 default (allEager) makes materializeIsland a pure noop", async () => {
+    const realBytes = await gatherRealSelfEvents();
+    const HELD = "beadbeadbeadbeadbeadbeadbeadbead";
+    const store = new InMemoryEventStore();
+    for (let i = 0; i < realBytes.length; i++) {
+      await store.put({ hash: `d-${i}`, variant: "CGKA_OPERATION", bytes: realBytes[i], ...(i === 0 ? {} : { island: HELD }) });
+    }
+    const boot = new KeyhiveProvider();
+    await boot.init({ seed: new Uint8Array(32).fill(4), eventStore: store });
+    await boot.hydrateFromEventStore();   // no self set → allEager, every event already loaded
+    // Nothing defers in the N=1 path, so a lazy-load has nothing to do — a pure noop.
+    const r = await boot.materializeIsland(HELD);
+    expect(r.ingested + r.skipped).toBe(0);
+    await boot.dispose();
+  });
+
   test("default path (no selfIslands) loads every event eagerly — the N=1 daemon, unchanged", async () => {
     const realBytes = await gatherRealSelfEvents();
     const store = new InMemoryEventStore();

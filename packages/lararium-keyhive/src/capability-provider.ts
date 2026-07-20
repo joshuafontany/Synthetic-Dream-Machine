@@ -48,10 +48,11 @@ export interface CapabilityProviderInitOpts {
 }
 
 /** Lightweight reference shape so this file doesn't depend on event-store.ts.
- *  Real implementations import EventStore from event-store.ts directly. */
+ *  Real implementations import EventStore from event-store.ts directly. The optional `island` scope
+ *  (CIV-3) rides each record; `list(islandId)` fetches one island's slice + cross-cutting (CIV-2b). */
 export interface EventStoreRef {
-  put(rec: { hash: string; variant: string; bytes: Uint8Array }): Promise<void>;
-  list(): Promise<readonly { hash: string; variant: string; bytes: Uint8Array }[]>;
+  put(rec: { hash: string; variant: string; bytes: Uint8Array; island?: string }): Promise<void>;
+  list(islandId?: string): Promise<readonly { hash: string; variant: string; bytes: Uint8Array; island?: string }[]>;
 }
 
 export interface DelegateArgs {
@@ -96,6 +97,13 @@ export interface CapabilityProvider extends CapabilityVerifier {
    *  eagerly; held/foreign islands defer (`deferred`) to lazy first-access. Absent → all eager
    *  (the N=1 daemon default). */
   hydrateFromEventStore(selfIslands?: readonly string[]): Promise<{ ingested: number; skipped: number; deferred: number }>;
+
+  /** CIV-2b — the lazy island-materialization kernel: hydrate ONE deferred foreign island's events into
+   *  memory on first access. Boot loads the self slice eagerly (CIV-2) and DEFERS every held/foreign
+   *  island; this pulls just that island's own deferred events (CIV-3 per-island `list`) and ingests them.
+   *  Noops when the island is already resident (self slice, N=1 default, or a prior materialization) — so
+   *  it stays cheap and idempotent to re-call. Called automatically at each island-access seam. */
+  materializeIsland(islandId: string): Promise<{ ingested: number; skipped: number }>;
 
   /** Tear down. Frees WASM resources. */
   dispose(): Promise<void>;
