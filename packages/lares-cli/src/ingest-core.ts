@@ -21,7 +21,7 @@ import { newChangeId, taskContentId, carrierHash, digestsEqual } from "@lararium
 import { SyncedTree, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
 import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
-import { stageBodyToCas } from "./cas-stage.js";
+import { stageBodyToCas, carrierCasFlagged } from "./cas-stage.js";
 
 export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc" | "deleted" | "renamed";
 
@@ -42,6 +42,9 @@ export interface ScanRow {
   /** The file's extension (".mem" / ".tid" / ".json" / ".md" …); rides the
    *  INGEST carrier so the island routes by TW5's own filetype registry. */
   readonly ext:        string;
+  /** The body failed the utf8 round-trip (a raw binary shard rides base64) — feeds the
+   *  opt-in-CAD backstop, which externalizes a binary body even absent the `_lar_cas` flag. */
+  readonly binary?:    boolean;
   /** Raw `<file>.meta` sidecar text when one sits beside a content file — rides
    *  the carrier so the island keeps the sidecar's fields across a body edit.
    *  Absent for a self-contained filetype (`.mem`/`.tid`) or no sidecar. */
@@ -175,7 +178,7 @@ export function scanFiles(
     // boundary (no mass re-land). Behaviour byte-identical on today's all-bare store.
     const status: ScanStatus =
       syncedHash === null ? "new" : digestsEqual(diskHash, syncedHash) ? "unchanged" : "changed";
-    rows.push({ file, uri, text, diskHash, syncedHash, status, ext, ...(meta !== undefined ? { meta } : {}) });
+    rows.push({ file, uri, text, diskHash, syncedHash, status, ext, binary, ...(meta !== undefined ? { meta } : {}) });
   }
   return { rows, skipped };
 }
@@ -335,14 +338,18 @@ export async function submitIngest(opts: SubmitIngestOpts): Promise<SubmitResult
     "source-uri": opts.source,
     "to-bag":     opts.toBag,
     "change-id":  changeId,
-    // A verb rides a REFERENCE, never a body: stage each carrier body to the corpus CAS
-    // and carry its `textCid`. The summons stays skinny; the island resolves the ref and
-    // lands the body in the TARGET bag. This keeps an oversized carrier (a whole book) out
-    // of the @daemon command doc (the automerge scalar-string capacity wall) — bag-agnostic.
+    // Opt-in CAD (content-resolution.mem): a small un-flagged body rides INLINE `text` — a meme
+    // is an inline-by-nature tiddler bundle, no persistent CAS blob. Only a flagged (`_lar_cas`)
+    // or backstop-caught (binary / oversized-non-text) body stages to the corpus CAS and rides a
+    // skinny `textCid` — keeping the giant out of the CRDT (the automerge scalar-string wall). An
+    // oversized un-flagged text stages for transport but rides no `skinny`, so the island faults
+    // it (a verb rides a reference, never a body) rather than materializing it — bag-agnostic.
     carriers: opts.candidates.map((r) => {
-      const staged = stageBodyToCas(r.text);
+      const flagged = carrierCasFlagged(r.text, r.meta);
+      const staged = stageBodyToCas(r.text, { ext: r.ext, flagged, binary: r.binary ?? false });
       return {
-        uri: r.uri, textCid: staged.cid, size: staged.size, diskHash: r.diskHash, syncedHash: r.syncedHash, ext: r.ext,
+        uri: r.uri, size: staged.size, diskHash: r.diskHash, syncedHash: r.syncedHash, ext: r.ext,
+        ...(staged.staged ? { textCid: staged.cid } : { text: r.text }),
         ...(staged.skinny ? { skinny: true } : {}),
         ...(r.meta !== undefined ? { meta: r.meta } : {}),
       };

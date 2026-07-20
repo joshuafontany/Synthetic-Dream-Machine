@@ -33,9 +33,60 @@ import { niUriSha256FromHex } from "./crypto.js";
  */
 export const SKINNY_CARRIER_THRESHOLD = 1024 * 1024; // 1 MiB
 
-/** Is a carrier body (its byte length) oversized for the CRDT? */
+/** Is a carrier body (its byte length) oversized for the CRDT? Names the hard inline
+ *  wall — a body past it MUST leave the CRDT (a handle) or the ingest faults, never
+ *  materializing as an automerge scalar-string. The opt-in-CAD backstop below sits far
+ *  under this; this wall stays the last line against the OOM. */
 export function isOversizedBody(byteLength: number): boolean {
   return byteLength > SKINNY_CARRIER_THRESHOLD;
+}
+
+/**
+ * The opt-in-CAD BACKSTOP size floor (64 KiB). CAS-ing a body goes opt-in (the operator
+ * flags `_lar_cas`); this floor only feeds the forgot-to-flag safety net below. Flag-primary:
+ * the flag decides first, the backstop only catches an un-flagged shard.
+ */
+export const CAS_BACKSTOP_SIZE = 64 * 1024; // 64 KiB
+
+const IMAGE_EXT = new Set([".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".bmp", ".tif", ".tiff", ".avif"]);
+const AUDIO_EXT = new Set([".mp3", ".wav", ".ogg", ".flac", ".m4a", ".aac", ".opus"]);
+const VIDEO_EXT = new Set([".mp4", ".webm", ".mov", ".mkv", ".avi", ".m4v"]);
+
+/**
+ * Classify a file extension to the media-type FAMILY the opt-in-CAD backstop reads. The
+ * send side holds no `$tw`, so this stands a small dependency-free classifier: the known
+ * binary media families map to `image/` · `audio/` · `video/`, and everything else reads
+ * by byte-nature — a body that failed the utf8 round-trip rides `application/octet-stream`,
+ * a utf8-clean body rides `text/plain`. TW5's structured text dialects (`.mem`/`.tid`/`.json`/
+ * `.multids`) stay utf8-clean → `text/` → INLINE, so a meme or a pack still decomposes in the
+ * CRDT (a bundle is inline by nature). The receive side re-reads `$tw.config` for the handle's
+ * own `type`; both agree on the external families. A family-representative type suffices — the
+ * backstop reads the family, never the exact subtype.
+ */
+export function mediaTypeFromExt(ext: string, binary = false): string {
+  const e = ext.toLowerCase();
+  if (IMAGE_EXT.has(e)) return "image/" + (e === ".jpg" ? "jpeg" : e === ".tif" ? "tiff" : e.slice(1));
+  if (AUDIO_EXT.has(e)) return "audio/" + e.slice(1);
+  if (VIDEO_EXT.has(e)) return "video/" + e.slice(1);
+  return binary ? "application/octet-stream" : "text/plain";
+}
+
+/**
+ * The un-flagged CAS backstop (content-resolution.mem, opt-in CAD). A body rides a persistent
+ * handle WITHOUT the operator's `_lar_cas` flag only when it lands in an inherently-external
+ * media family (image/audio/video/octet-stream — a binary shard never inlines pono), OR it runs
+ * oversized-and-not-text. All text families (a meme, a pack, markdown) stay inline by preference.
+ */
+export function casBackstopFires(byteLength: number, mediaType: string): boolean {
+  if (
+    mediaType.startsWith("image/") ||
+    mediaType.startsWith("audio/") ||
+    mediaType.startsWith("video/") ||
+    mediaType === "application/octet-stream"
+  ) {
+    return true;
+  }
+  return byteLength > CAS_BACKSTOP_SIZE && !mediaType.startsWith("text/");
 }
 
 /**
@@ -46,13 +97,17 @@ export function isOversizedBody(byteLength: number): boolean {
  *   - `_integrity`     the RFC-6920 ni:// multihash — foreign-verifiable, algorithm-agile.
  *   - `textCid`        the CAS key the daemon `resolveByCid` reads (hex sha256).
  *   - `size`           the body's byte length (metadata; the body is elsewhere).
- *   - `_source_ext`    the on-disk extension, so the read path recovers the content-type.
+ *   - `type`           TW5's NATIVE content-type field (from the ext via `$tw.config.contentTypeInfo`)
+ *                      — the handle self-describes its media dialect, so a rehydrated body renders
+ *                      native (no `_lar_type` shadow field; `type` IS the TW5 slot).
+ *   - `_source_ext`    the on-disk extension, so the read path recovers the projection filename.
  */
 export function skinnyHandleTiddler(
   title: string,
   cid: string,
   size: number,
   ext?: string,
+  mediaType?: string,
 ): Record<string, unknown> {
   return {
     title,
@@ -61,6 +116,7 @@ export function skinnyHandleTiddler(
     _integrity:     niUriSha256FromHex(cid),
     textCid:        cid,
     size:           String(size),
+    ...(mediaType ? { type: mediaType } : {}),
     ...(ext ? { _source_ext: ext } : {}),
   };
 }

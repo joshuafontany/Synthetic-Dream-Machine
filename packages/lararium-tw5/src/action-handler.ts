@@ -105,6 +105,11 @@ export interface Tw5Deserializer {
    *  `.json` emits the tiddler-array form (byte-shaped like TW5's getTiddlersAsJson);
    *  an unsupported filetype throws. The members ride byte-clean (no injected fields). */
   serializeBundle(records: ReadonlyArray<Record<string, unknown>>, ext: string): string;
+  /** Resolve a file extension (".png") to its TW5-NATIVE media-type via `$tw`'s own
+   *  `fileExtensionInfo` registry — the same chain `deserialize` defers to. A skinny handle
+   *  stamps the result in its `type` field so a rehydrated body renders native (the operator
+   *  correction: TW5's `type`, never a `_lar_type` shadow). Undefined for an unknown extension. */
+  contentTypeFromExt(ext: string): string | undefined;
 }
 
 /**
@@ -163,6 +168,12 @@ export function makeTw5Deserializer(engine: { readonly $tw: TW5Instance }): Tw5D
         return `${sharedBlock}\n\n${memberLines}`;
       }
       throw new Error(`REPACK: no serializer for "${ext}" — native bundle types are .json and .multids`);
+    },
+    contentTypeFromExt: (ext) => {
+      if (!ext) return undefined;
+      const cfg = engine.$tw.config as unknown as { fileExtensionInfo?: Record<string, { type?: string }> };
+      const info = cfg.fileExtensionInfo?.[ext.charAt(0) === "." ? ext : "." + ext];
+      return info?.type;
     },
   };
 }
@@ -570,9 +581,9 @@ const CARRIER_SOH = /<<~[^&\n]*&#x(?:0001|0011);/;
  */
 async function landSkinnyHandle(
   access: BagAccess, toBag: string, title: string, cid: string, size: number,
-  ext: string | undefined, changeId: string, o: ChangeOrigin,
+  ext: string | undefined, changeId: string, o: ChangeOrigin, mediaType?: string,
 ): Promise<void> {
-  const tiddler = { ...skinnyHandleTiddler(title, cid, size, ext), bag: toBag } as unknown as LarTiddlerRecord["tiddler"];
+  const tiddler = { ...skinnyHandleTiddler(title, cid, size, ext, mediaType), bag: toBag } as unknown as LarTiddlerRecord["tiddler"];
   await writeIn(access, toBag, { tiddler, meta: { changeId } }, o);
 }
 
@@ -592,7 +603,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
     if (carrier.skinny && carrier.textCid) {
       const title = carrier.title;
       if (!title) throw new Error("LOAD: a skinny carrier needs a title (its loci URI) — the handle names the body");
-      await landSkinnyHandle(access, action.toBag, title, carrier.textCid, carrier.size ?? 0, carrier.ext, action.changeId, origin(action));
+      await landSkinnyHandle(access, action.toBag, title, carrier.textCid, carrier.size ?? 0, carrier.ext, action.changeId, origin(action), tw5?.contentTypeFromExt(carrier.ext ?? ""));
       titles.push(title);
       continue;
     }
@@ -602,9 +613,16 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
     // Defense in depth: an un-flagged body that STILL resolves oversized leaves the CRDT
     // (never OOM the doc), provided it names a cid to point at and carries no memetic wrapper.
     if (carrier.textCid && !CARRIER_SOH.test(carrierText) && isOversizedBody(carrier.size ?? carrierText.length) && carrier.title) {
-      await landSkinnyHandle(access, action.toBag, carrier.title, carrier.textCid, carrier.size ?? carrierText.length, carrier.ext, action.changeId, origin(action));
+      await landSkinnyHandle(access, action.toBag, carrier.title, carrier.textCid, carrier.size ?? carrierText.length, carrier.ext, action.changeId, origin(action), tw5?.contentTypeFromExt(carrier.ext ?? ""));
       titles.push(carrier.title);
       continue;
+    }
+    // The ungated-large-inline wall (the second wall — the TARGET bag doc, not @daemon): past
+    // the skinny paths, an oversized body that reached the inline routes WOULD materialize a
+    // CRDT scalar-string past the automerge capacity. It never may. A memetic carrier decomposes
+    // (Scenario A intra-ahu extraction rides a later leg), so the wall reads NON-memetic only.
+    if (!CARRIER_SOH.test(carrierText) && isOversizedBody(carrier.size ?? carrierText.length)) {
+      throw new Error(`carrier ${carrier.title ?? "(carrier)"}: body ${carrier.size ?? carrierText.length}B would inline oversized — a verb rides a reference, never a body (flag _lar_cas or stage the body to CAS)`);
     }
     // Route by content: a memetic-wikitext carrier (SOH heading) decomposes at the
     // membrane via the direct memetic deserializer; any other legal TW5 filetype
@@ -714,7 +732,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         results.push({ uri, decision: "noop", reason: "cid-matches-current" });
         continue;
       }
-      await landSkinnyHandle(access, action.toBag, uri, carrier.textCid, carrier.size ?? 0, carrier.ext, action.changeId, origin(action));
+      await landSkinnyHandle(access, action.toBag, uri, carrier.textCid, carrier.size ?? 0, carrier.ext, action.changeId, origin(action), tw5?.contentTypeFromExt(carrier.ext ?? ""));
       results.push({ uri, decision: "ingest", grade: "clean", skinny: true });
       continue;
     }
@@ -732,9 +750,16 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
         results.push({ uri, decision: "noop", reason: "cid-matches-current" });
         continue;
       }
-      await landSkinnyHandle(access, action.toBag, uri, carrier.textCid, carrier.size ?? carrierText.length, carrier.ext, action.changeId, origin(action));
+      await landSkinnyHandle(access, action.toBag, uri, carrier.textCid, carrier.size ?? carrierText.length, carrier.ext, action.changeId, origin(action), tw5?.contentTypeFromExt(carrier.ext ?? ""));
       results.push({ uri, decision: "ingest", grade: "clean", skinny: true });
       continue;
+    }
+    // The ungated-large-inline wall (item 5): past the skinny paths, an oversized NON-memetic
+    // body would materialize a CRDT scalar-string past the automerge capacity in the TARGET bag.
+    // It never may — a verb rides a reference, never a body. A memetic meme decomposes (Scenario A
+    // intra-ahu extraction rides a later leg), so the wall reads non-memetic only.
+    if (!CARRIER_SOH.test(carrierText) && isOversizedBody(carrier.size ?? carrierText.length)) {
+      throw new Error(`carrier ${uri}: body ${carrier.size ?? carrierText.length}B would inline oversized — a verb rides a reference, never a body (flag _lar_cas or stage the body to CAS)`);
     }
     const all = await listLiveTitlesInBag(access, action.toBag);
     // The carrier group: the root + its fragment children (FFZ decomposition
