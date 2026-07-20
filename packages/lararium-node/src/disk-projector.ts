@@ -45,6 +45,7 @@ import { dirname, basename } from "path";
 import { confineMirrorWrite, carrierBaseRelPath } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
 import { isEffectRecordUri, KeyedCoalesceGate, carrierHash } from "@lararium/mesh";
+import { ORIGINAL_TIDDLER_PATHS, parseProvenance, packOfMember } from "@lararium/mesh";
 import type { ReadinessMap, WindowServo } from "@lararium/mesh";
 import type { TW5Engine, CarrierFile } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
@@ -239,7 +240,34 @@ export class LarDiskProjector {
    * when the destination lands — the unlink can never be the final word for a
    * carrier a bag still holds.
    */
+  /**
+   * A tiddler that belongs to a PACK — its title rides in the pack's aside
+   * provenance map (`$:/config/OriginalTiddlerPaths`, the same map INGEST wrote,
+   * read here from the settled VM view). A pack member's bytes live INSIDE its
+   * pack file (`foo.json`), so the member NEVER owns its own disk file. Reads
+   * false when no $tw is mounted or the map is absent/malformed (degrades to "no
+   * packs" — a forgotten observation never suppresses a legitimate projection).
+   */
+  private isPackMember(title: string): boolean {
+    const provFields = this._tw5?.$tw.wiki.getTiddler?.(ORIGINAL_TIDDLER_PATHS)?.fields as
+      | Record<string, unknown>
+      | undefined;
+    const provText = provFields?.["text"];
+    if (typeof provText !== "string") return false;
+    return packOfMember(parseProvenance(provText), title) !== undefined;
+  }
+
   private async reconcile(rootUri: string): Promise<void> {
+    // Pack-member projection-suppress — the loop-stopper. A member whose title
+    // rides in a pack's aside provenance lives inside its pack file (`foo.json`)
+    // and MUST NOT self-project: a per-member file explodes the pack into N files,
+    // leaves `foo.json` stale, and the watcher then re-ingests both copies (once
+    // from `foo.json`, once from the exploded files) — an unbounded doubling loop.
+    // WITH the suppress: the pack file stays the one file on disk; a member edit
+    // marks it stale-on-disk, and only a deliberate REPACK re-renders it. The guard
+    // rides FIRST so it also holds the gone-branch (a vanished member never owns a
+    // file to unlink — its home is the pack).
+    if (this.isPackMember(rootUri)) return;
     const tiddler = this._tw5?.$tw.wiki.getTiddler?.(rootUri);
     if (!tiddler) {
       await this._scheduleUnlinkByTitle(rootUri);
