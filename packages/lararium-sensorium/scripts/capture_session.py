@@ -287,52 +287,21 @@ class CaptureSessionServer:
         fallback for a cwd-less source. Idempotent: already-landed turns skip. A per-session failure SKIPS to
         `failed` (one unreadable session never aborts the sweep); a SYSTEMIC embedder floor fails loud. Arms
         every derived cadence once at the end, so the idle beat re-derives the settled bulk. The ROUTED spine
-        the CLI (`lares sense sweep`) and the MCP (`sweep`) both reach through the @daemon."""
-        from content_io import ContentFloorError
-        from ephemeral import session_ephemeral
-        from session_discovery import ALL_SURFACES, discover
-        surface = str(req.get("surface") or "all")
+        the CLI (`lares sense sweep`) and the MCP (`sweep`) both reach through the @daemon. The loop itself
+        rides `session_discovery.run_bulk_sweep` — the ONE bulk-sweep spine the standalone MCP path shares,
+        so daemon-UP and daemon-DOWN re-pours capture identically."""
+        from session_discovery import run_bulk_sweep
         default_wing = str(req.get("wing") or "")
-        room = str(req.get("room") or "conversations")
-        project = req.get("project")
-        limit = req.get("limit")
         if not default_wing:
             raise ValueError("sweep requires a non-empty wing (the fallback for a cwd-less source)")
-        surfaces = ALL_SURFACES if surface == "all" else (surface,)
-        out: dict = {"wing": default_wing, "sessions": 0, "landed": 0, "skipped": 0,
-                     "ephemeral": 0, "spirits": 0, "by_surface": {}, "failed": []}
-        for surf in surfaces:
-            entries = discover(surf, project=project)
-            if limit is not None:
-                entries = entries[: int(limit)]
-            s_landed = s_skipped = s_eph = 0
-            for e in entries:
-                reason = session_ephemeral(e["pointer"])
-                if reason is not None:                # a scratch/marked session never enters the rhizome
-                    s_eph += 1
-                    sys.stderr.write(f"[sweep] SKIP ephemeral {e['pointer']}: {reason}\n")
-                    continue
-                wing = e["wing"] or default_wing
-                cap_kwargs = {"surface": e["surface"], "wing": wing, "room": room}
-                if e.get("session_id"):               # copilot's ONE store narrows to this session
-                    cap_kwargs["session_id"] = e["session_id"]
-                try:
-                    summary = self._stream.capture(e["pointer"], **cap_kwargs)
-                except ContentFloorError:
-                    raise                          # systemic — a wrong embedder poisons every session; fail loud
-                except Exception as exc:  # noqa: BLE001 — one unreadable session never aborts the sweep
-                    out["failed"].append({"surface": surf, "pointer": e["pointer"], "error": f"{type(exc).__name__}: {exc}"})
-                    continue
-                out["sessions"] += 1
-                if e["spirit"]:
-                    out["spirits"] += 1
-                s_landed += int(summary.get("landed") or 0)
-                s_skipped += int(summary.get("skipped") or 0)
-            out["ephemeral"] += s_eph
-            out["by_surface"][surf] = {"entries": len(entries), "landed": s_landed,
-                                       "skipped": s_skipped, "ephemeral": s_eph}
-            out["landed"] += s_landed
-            out["skipped"] += s_skipped
+        out = run_bulk_sweep(
+            self._stream.capture,          # THIS holder's ONE warm writer (model + store loaded once)
+            surface=str(req.get("surface") or "all"),
+            default_wing=default_wing,
+            project=req.get("project"),
+            limit=req.get("limit"),
+            room=str(req.get("room") or "conversations"),
+        )
         now = self._tick()                          # the ground moved: arm every derived cadence once
         for enr in self._derived:
             enr.cadence.mark(now)

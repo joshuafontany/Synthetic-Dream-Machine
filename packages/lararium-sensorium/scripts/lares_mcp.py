@@ -176,26 +176,26 @@ class LaresCoordinator:
     def sweep(self, surface: str = "all", *, wing: "str | None" = None, project: "str | None" = None,
               limit: "int | None" = None, room: str = "conversations") -> dict:
         """Capture/RECAPTURE every local operator-AI chat transcript into this Memory sensorium in ONE pass —
-        the bulk backfill that `pour` handles one pointer at a time (mirrors `lares sensorium memory sweep`).
-        `surface` `all` folds claude+codex+copilot; else names one. Reuses the memory_sensorium driver's OWN
-        discovery (transcripts) + three-plane capture (run) — no re-roll — passing THIS coordinator's warm
-        embedder so the model never reloads. IDEMPOTENT: a re-run lands only the un-landed tail (the crash
-        cure). `project` narrows claude to one project; `limit` caps each surface (oldest first)."""
-        from memory_sensorium import ALL_SURFACES, run as ms_run, transcripts
-        surfaces = ALL_SURFACES if surface == "all" else (surface,)
-        wing = wing or self._wing
-        out = {"root": self._palace, "wing": wing, "by_surface": {}}
-        for surf in surfaces:
-            pointers = transcripts(surf, project=project if surf == "claude" else None)
-            if limit is not None:
-                pointers = pointers[:limit]
-            if not pointers:
-                out["by_surface"][surf] = {"pointers": 0, "note": "no transcripts found"}
-                continue
-            out["by_surface"][surf] = ms_run(
-                self._palace, surface=surf, wing=wing, room=room, pointers=pointers,
-                min_support=2, max_forms=64, max_candidates=96,
-                embed_factory=lambda: (self._embed_one, self._model))
+        the bulk backfill that `pour` handles one pointer at a time (mirrors `lares sense sweep`). `surface`
+        `all` folds claude+codex+copilot+copilot-vscode; else names one. Rides the SAME bulk-sweep spine the
+        daemon holder drives (`session_discovery.run_bulk_sweep`): the shared `session_discovery` (per-project
+        wings + tasked-spirits→`<wing>__spirits` + ephemeral gate + copilot's threaded store), so a
+        daemon-DOWN standalone re-pour captures IDENTICALLY to the daemon path — no forked discovery.
+
+        Composes the Memory stream ONCE (`compose_memory_stream_sensorium` over THIS coordinator's warm
+        embedder, so the model never reloads) and passes its `.capture` — never `capture_and_observe`
+        per-pointer, which recomposes the stream on every call (slow over ~1700 sessions). IDEMPOTENT: a
+        re-run lands only the un-landed tail (the crash cure). `project` narrows claude to one project;
+        `limit` caps each surface (oldest first); the passed `wing` rides only as the cwd-less fallback."""
+        from capture_session import compose_memory_stream_sensorium
+        from session_discovery import run_bulk_sweep
+        default_wing = wing or self._wing
+        stream, model, _dim, _paths = compose_memory_stream_sensorium(
+            self._palace, embed_factory=lambda: (self._embed_one, self._model))
+        out = run_bulk_sweep(stream.capture, surface=surface, default_wing=default_wing,
+                             project=project, limit=limit, room=room)
+        out["root"] = self._palace
+        out["embedder_model"] = model
         return out
 
     def _exchange_view(self, matches: list) -> list:

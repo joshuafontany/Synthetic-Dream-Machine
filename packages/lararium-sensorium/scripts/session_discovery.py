@@ -164,3 +164,65 @@ def discover_all(project=None):
     for surface in ALL_SURFACES:
         out.extend(discover(surface, project=project) if surface == "claude" else discover(surface))
     return out
+
+
+def run_bulk_sweep(capture_fn, *, surface="all", default_wing, project=None, limit=None,
+                   room="conversations"):
+    """The ONE bulk-sweep loop BOTH island lanes drive — the sovereign daemon holder
+    (`CaptureSessionServer.sweep`) and the standalone MCP coordinator (`LaresCoordinator.sweep`) each pass
+    their OWN warm stream's `.capture` as `capture_fn`, so the routing + ephemeral gate + tally live in
+    ONE place and can never diverge (a daemon-DOWN re-pour captures identically to a daemon-UP one).
+
+    Folds `ALL_SURFACES` (or the named `surface`), discovers each via `discover`, SKIPS a scratch/marked
+    session (the `ephemeral.session_ephemeral` gate, one loud stderr line each), and per live entry calls
+    `capture_fn(pointer, surface=e['surface'], wing=(e['wing'] or default_wing), room=room[, session_id])`.
+    Each session files under its OWN per-project wing (the wing_derive law, so backfill wings equal the
+    live-hook wings); `default_wing` rides only as the fallback for a cwd-less source; tasked-spirit
+    sub-sessions land in `<wing>__spirits` and count into `spirits`. `session_id` rides ONLY when the entry
+    carries one (copilot's ONE store narrows to that session). Idempotent: already-landed turns skip. A
+    `ContentFloorError` fails LOUD (systemic — a wrong embedder poisons every session); any other
+    per-session failure SKIPS to `failed` (one unreadable session never aborts the sweep). Returns the
+    tally dict `{wing, sessions, landed, skipped, ephemeral, spirits, by_surface, failed}`; each lane
+    stamps its own `embedder_model`/`root` and arms its own derived cadences."""
+    import sys
+
+    from content_io import ContentFloorError
+    from ephemeral import session_ephemeral
+    if not default_wing:
+        raise ValueError("run_bulk_sweep requires a non-empty default_wing (the fallback for a cwd-less source)")
+    surfaces = ALL_SURFACES if surface == "all" else (surface,)
+    out: dict = {"wing": default_wing, "sessions": 0, "landed": 0, "skipped": 0,
+                 "ephemeral": 0, "spirits": 0, "by_surface": {}, "failed": []}
+    for surf in surfaces:
+        entries = discover(surf, project=project)
+        if limit is not None:
+            entries = entries[: int(limit)]
+        s_landed = s_skipped = s_eph = 0
+        for e in entries:
+            reason = session_ephemeral(e["pointer"])
+            if reason is not None:                # a scratch/marked session never enters the rhizome
+                s_eph += 1
+                sys.stderr.write(f"[sweep] SKIP ephemeral {e['pointer']}: {reason}\n")
+                continue
+            cap_kwargs = {"surface": e["surface"], "wing": e["wing"] or default_wing, "room": room}
+            if e.get("session_id"):               # copilot's ONE store narrows to this session
+                cap_kwargs["session_id"] = e["session_id"]
+            try:
+                summary = capture_fn(e["pointer"], **cap_kwargs)
+            except ContentFloorError:
+                raise                          # systemic — a wrong embedder poisons every session; fail loud
+            except Exception as exc:  # noqa: BLE001 — one unreadable session never aborts the sweep
+                out["failed"].append({"surface": surf, "pointer": e["pointer"],
+                                      "error": f"{type(exc).__name__}: {exc}"})
+                continue
+            out["sessions"] += 1
+            if e["spirit"]:
+                out["spirits"] += 1
+            s_landed += int(summary.get("landed") or 0)
+            s_skipped += int(summary.get("skipped") or 0)
+        out["ephemeral"] += s_eph
+        out["by_surface"][surf] = {"entries": len(entries), "landed": s_landed,
+                                   "skipped": s_skipped, "ephemeral": s_eph}
+        out["landed"] += s_landed
+        out["skipped"] += s_skipped
+    return out
