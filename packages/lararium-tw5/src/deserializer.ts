@@ -629,15 +629,26 @@ export function splitBodyTiddler(
 
 export type FieldsReader = (title: string) => TiddlerFields | undefined;
 
-// The single deny-set: runtime/structural fields never re-emit into the iam
-// fence — they live in the envelope, the record stratum, or the VM, not in the
-// operator's TOML.
+// The single deny-set: STRUCTURAL / ENVELOPE fields never re-emit into the iam
+// fence — they rebuild from the envelope + record stratum on recompose, so
+// emitting them into the TOML DOUBLES the body (title/text) or the framing.
+//
+// Telemetry-fence supersession (operator overrule 2026-07-20, supersedes ruling
+// 16f4b271): sensorium/worldline telemetry routes through Py on capture, and a
+// sensorium→wiki pull MUST carry ALL its metadata. So `lar_*` sensorium fields
+// (`lar_agent_handle`, `lar_ffz`, `lar_root_handle`, …) round-trip WHOLE — the
+// blanket `lar_` prefix-strip is gone. Only two `lar_*` markers stay denied by
+// EXACT name: the transient parse-grade diagnostics `lar_parse_failures` /
+// `lar_parse_degraded`, which `parseMemeText`/`safeSplitMeme` stamp on ingest to
+// surface degradation — derived-on-read diagnostics, never authored metadata,
+// so they stay off the operator's TOML (map never fuses to territory).
 const IAM_DENY: ReadonlySet<string> = new Set([
+  // envelope + record stratum — reconstructed on recompose, never authored TOML
   "title", "text", "modified", "revision", "bag",
   "slot", "fragment-parent", "preamble", "postamble", "prologue",
-  "header-text",
-  "synced-at", "disk-projection", "lar-generated",
-  "ahu-parent", "ahu-slot", "realm-origin", "origin-bag", "carrier-soh",
+  "header-text", "ahu-parent", "ahu-slot", "carrier-soh",
+  // transient parse-grade diagnostics — stamped on ingest, denied by exact name
+  "lar_parse_failures", "lar_parse_degraded",
 ]);
 // Authored-identity resurrections: the deny-set
 // holds MACHINE stamps only. `type` re-emits verbatim — the carrier
@@ -693,9 +704,10 @@ function fmtNamespaceEntities(v: string): string {
 }
 
 /** Canonical iam TOML: sorted keys, equals-signs aligned to the longest key.
- *  Machine telemetry (`lar_*` — parse grades, lar-telemetry projections) NEVER
- *  re-emits: sensor readings stay off the operator's TOML (map never fuses to
- *  territory). */
+ *  `lar_*` sensorium/worldline metadata re-emits WHOLE (telemetry-fence
+ *  supersession, 2026-07-20 — see IAM_DENY); the deny-set names the only
+ *  denials by exact key (structural/envelope + the two parse-grade markers).
+ *  TW5-internal `$…` fields stay off the operator's TOML. */
 /** Field-value equality across the string | string[] carrier shapes (undefined never matches). */
 function sameFieldValue(a: TiddlerFields[string] | undefined, b: TiddlerFields[string] | undefined): boolean {
   if (a === undefined || b === undefined) return false;
@@ -712,7 +724,7 @@ function sameFieldValue(a: TiddlerFields[string] | undefined, b: TiddlerFields[s
 // silently — the author sees it once, at the level that set it, never re-stamped on every fragment.
 function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>, parentFields?: TiddlerFields): string {
   const keys = Object.keys(fields).sort().filter((k) => {
-    if (deny.has(k) || k.charAt(0) === "$" || k.startsWith("lar_")) return false;
+    if (deny.has(k) || k.charAt(0) === "$") return false;
     const v = fields[k];
     if (v === undefined || v === null || v === "" || (Array.isArray(v) && v.length === 0)) return false;
     // Inherited-and-matching → skip (write only what the child changes from its parent).
