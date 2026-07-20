@@ -65,6 +65,11 @@ export interface SourceCaptureResult {
 
 export interface SourceCapture {
   capture(request: SourceCaptureRequest): Promise<SourceCaptureResult>;
+  /** BULK backfill — capture/RECAPTURE every discovered transcript through the holder's ONE warm stream (the
+   *  same writer live capture uses). `surface` `all` folds claude+codex+copilot; `project`/`limit` narrow.
+   *  Idempotent (already-landed turns skip). The routed sweep spine — no second holder, no contention. */
+  sweep(request?: { surface?: string; wing?: string; project?: string; limit?: number; room?: string }):
+    Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim · mempalace · worldline) in ONE command, on the
    *  SAME serialized pipe — queues between capture passes, never races the writer. `which` narrows to one. */
   refresh(request?: { which?: string }): Promise<Record<string, unknown>>;
@@ -111,6 +116,9 @@ export function makeSourceCapture(
   const p = composePalace(LABEL, sensoriumRoot, opts.spawn ?? defaultSpawn(sensoriumRoot), opts.timeoutMs ?? 120_000);
   return {
     capture: async (request) => await p.send("capture", sourceCaptureDescriptor(request)) as SourceCaptureResult,
+    // The BULK backfill: the holder iterates its OWN discovery through the ONE warm stream. No session text
+    // crosses (the holder discovers the pointers itself), only the sweep shape (surface/wing/project/limit).
+    sweep: async (request) => await p.send("sweep", { ...(request ?? {}) }) as Record<string, unknown>,
     // A refresh carries no session text — only the optional `which` — so it needs no admission descriptor;
     // the holder RE-DERIVES its whole derived layer (or the one named) from the content it already owns.
     refresh: async (request) => await p.send("refresh", { ...(request ?? {}) }) as Record<string, unknown>,
