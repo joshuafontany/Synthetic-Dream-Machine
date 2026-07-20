@@ -45,6 +45,17 @@ PLANE_VERBS = ("plane_record",)
 # uniformly low-trust · reversible · LOCAL residency ops (one conservative VERB_SEATS seat covers them).
 WIKI_VERBS = ("wiki",)
 
+# The VAULT namespace — the at-rest seal LIFECYCLE the operator drives (status/seal/rotate/export the two
+# sovereign secret carriers: the keyhive archive + the recovery share). Each MCP tool rides the @daemon
+# vault verb over the owner-only 0600 UDS, so the passphrase crosses the SAME trust boundary a CLI arg
+# does on the operator's own machine, and MCP reaches ONLY the daemon (never a local store). Like
+# PLANE_VERBS, these ride the MCP surface AHEAD of a formal `cli_forms` mirror: the CLI form `lares vault
+# <sub>` exists, but the fixture has not yet mapped the vault sub-verbs, so the parity test carries them
+# as a NAMED allowance (mcp_tools − VAULT_VERBS mirrors the anchor) until the fixture grows the mapping.
+# `vault-repair` (the split-KEK cure) stays CLI-ONLY on purpose — kept off the agent surface so a repair
+# rides the operator's own hand, never an MCP client's.
+VAULT_VERBS = ("vault_status", "vault_seal", "vault_rotate", "vault_export")
+
 # The reversibility×trust GRID: each verb declares (reversible, trust_crossing). The seat follows —
 # HOTL (reversible AND trusted) runs on the operator's loop, no pause; HITL (irreversible OR trust-
 # crossing) blocks for the operator's hand. One grid across both surfaces (CLI + MCP). The @daemon holds
@@ -60,6 +71,12 @@ VERB_SEATS = {
     "un_kapae": (True, False),   # restore — reversible, trusted
     "plane_record": (True, False),      # cross-plane read — reversible, trusted (structure/form fold onto recall --lens)
     "wiki": (True, False),              # switcher (switch/hold/release/active) — reversible, low-trust, LOCAL residency → HOTL
+    # The vault seal-lifecycle tools — a status READ rides HOTL; every MUTATION of the sovereign at-rest
+    # seal crosses a trust boundary (it touches identity secret material), so it seats HITL.
+    "vault_status": (True, False),      # read the per-carrier seal STATE — reversible, trusted → HOTL
+    "vault_seal": (True, True),         # seal cleartext carriers under a passphrase — TRUST-CROSSING → HITL
+    "vault_rotate": (True, True),       # re-seal old→new passphrase — TRUST-CROSSING → HITL
+    "vault_export": (False, True),      # write a passphrase-sealed secret backup to a path — irreversible + trust-crossing → HITL
     # teardown tears a whole sensorium store DOWN — IRREVERSIBLE → HITL. It rides the CLI today, gated
     # by --confirm (the operator's hand at the door); the grid NAMES its HITL seat so a future MCP mirror
     # inherits the gate rather than crossing the surface ungated.
@@ -617,6 +634,40 @@ def build_mcp(coordinator: LaresCoordinator):
             raise ValueError(f"wiki: `verb` must be one of {sorted(allowed)}, got {verb!r}")
         args: dict = {"slug": slug} if slug else {}
         return uds.output(f"wiki-{verb}", args)
+
+    @mcp.tool()
+    def vault_status(probe: "str | None" = None) -> dict:
+        """Report the at-rest seal STATE of the two sovereign secret carriers (the keyhive archive + the
+        recovery share) — per-carrier absent/cleartext/sealed, NEVER any key material. `probe` supplies a
+        passphrase to test each sealed carrier against, surfacing a split-KEK (the carriers disagreeing on
+        one passphrase). Rides the @daemon vault verb over the owner-only 0600 UDS, never a local store."""
+        args = {"probe": probe} if probe else {}
+        return uds.output("vault-status", args)
+
+    @mcp.tool()
+    def vault_seal(passphrase: str) -> dict:
+        """Seal the cleartext secret carriers under `passphrase` (scrypt KEK, AES-256-GCM at rest). The
+        passphrase rides the verb args over the owner-only 0600 UDS to the @daemon — the SAME trust
+        boundary as a CLI argument on the operator's own machine — and MCP reaches ONLY the daemon, never
+        a local store. Prefer configuring the passphrase via the environment in practice; this arg exists
+        for the operator's own driven use."""
+        return uds.output("vault-seal", {"passphrase": passphrase})
+
+    @mcp.tool()
+    def vault_rotate(old: str, new: str) -> dict:
+        """Re-seal both carriers from the `old` passphrase to the `new` one (a wrong `old` fails the GCM
+        tag and aborts with zero writes). Both passphrases ride the verb args over the owner-only 0600 UDS
+        to the @daemon — the SAME trust boundary as a CLI argument on the operator's own machine — and MCP
+        reaches ONLY the daemon, never a local store."""
+        return uds.output("vault-rotate", {"old": old, "new": new})
+
+    @mcp.tool()
+    def vault_export(passphrase: str, dest: str, force: bool = False) -> dict:
+        """Write a passphrase-SEALED backup of the keyhive archive to `dest` — NEVER the raw cleartext.
+        `force` overwrites an existing file (else the export refuses a silent clobber). The passphrase
+        rides the verb args over the owner-only 0600 UDS to the @daemon — the SAME trust boundary as a CLI
+        argument on the operator's own machine — and MCP reaches ONLY the daemon, never a local store."""
+        return uds.output("vault-export", {"passphrase": passphrase, "dest": dest, "force": force})
 
     return mcp
 

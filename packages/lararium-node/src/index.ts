@@ -103,7 +103,21 @@ export { openDaemonVm } from "./open-daemon-vm.js";
 export { runDoctor, formatDoctorReport, enumerateStoreDocs } from "./doctor.js";
 export { probeDocLoad, makeChildProcessDocLoadProbe, quarantineDoc } from "./doc-load-probe.js";
 export { precheckDocStore, docStorePath } from "./store-integrity.js";
-export { persistIdentityAnchors, loadIdentityAnchors, persistIdentityArchive, loadIdentityArchive, type IdentityAnchors } from "./identity-anchors.js";
+export { persistIdentityAnchors, loadIdentityAnchors, persistIdentityArchive, loadIdentityArchive, archivePath, type IdentityAnchors } from "./identity-anchors.js";
+
+// The passphrase-LIFECYCLE surface over the at-rest seal (#60) — status/seal/rotate/export/repair + the
+// boot-gate + the daemon vault handler. No new crypto; composes archive-seal's atoms under a ratify
+// discipline (two carriers, independent write lifecycles, never one shared envelope).
+export {
+  archiveSealStatus, sealArchiveWithPassphrase, rotateArchivePassphrase, exportSealedArchive,
+  repairSplitKek, assertSealReady, runVaultVerb, weakPassphraseWarning, PASSPHRASE_MIN_LENGTH,
+} from "./archive-passphrase.js";
+export type {
+  ArchiveSealStatus, CarrierStatus, CarrierState, CarrierName,
+  SealResult, RotateResult, ExportResult, RepairResult,
+} from "./archive-passphrase.js";
+export { sealExpected, setSealExpected } from "./lares-config.js";
+export { ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 export type { DaemonVmOptions } from "./open-daemon-vm.js";
 export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase } from "./open-node-vessel.js";
 

@@ -36,7 +36,10 @@ export function persistIdentityAnchors(anchors: IdentityAnchors): void {
   try { chmodSync(path, 0o600); } catch { /* best-effort — a non-POSIX fs still holds the bytes */ }
 }
 
-function archivePath(): string {
+/** The keyhive Archive carrier path — the sovereign identity floor at rest. Exported so the vault
+ *  passphrase-lifecycle surface (`archive-passphrase`) names the ONE carrier location, never a
+ *  duplicated magic string that could drift from this writer. */
+export function archivePath(): string {
   return join(larIdentityDir(), "keyhive-archive.bin");
 }
 

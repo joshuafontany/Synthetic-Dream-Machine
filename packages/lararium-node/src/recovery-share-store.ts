@@ -18,7 +18,9 @@ import { larIdentityDir } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignSecret } from "./archive-seal.js";
 
-function deviceSharePath(): string {
+/** The device recovery-share carrier path. Exported so the vault passphrase-lifecycle surface
+ *  (`archive-passphrase`) names the ONE carrier location, never a duplicated magic string. */
+export function deviceSharePath(): string {
   return join(larIdentityDir(), "recovery-device-share.bin");
 }
 

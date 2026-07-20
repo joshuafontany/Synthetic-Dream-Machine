@@ -48,6 +48,7 @@ import {
   cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild, cmdRefresh,
 } from "../commands/scripted.js";
 import { cmdDeviceAdmit, cmdInviteSend, cmdInviteReceive } from "../commands/ceremony.js";
+import { cmdVault }                    from "../commands/vault.js";
 import { freshBuildGate, FRESH_BUILD_COMMANDS } from "../build-freshness.js";
 
 type Handler = (args: ParsedArgs) => Promise<number>;
@@ -90,6 +91,7 @@ const COMMANDS: readonly Command[] = [
   { name: "test-quine",    summary: "Verify the quine round-trip: genesis → boot → render → hash.",                  handler: cmdTestQuine     },
   { name: "heleuma",       summary: "Audit / scaffold load-bearing source-file memes. Pass --write to scaffold.",    handler: cmdHeleuma       },
   { name: "normalize",     summary: "Canonicalize a meme carrier's framing (embeds the iam namespace into the SOH) so the round-trip laws hold. `--check` reports drift without writing (CI/pre-commit).", handler: cmdNormalize     },
+  { name: "vault",         summary: "At-rest seal LIFECYCLE for the sovereign secret carriers (keyhive archive + recovery share): `status` shows the seal state (--check probes a passphrase → split-KEK detection); `seal` seals cleartext carriers under a new passphrase; `rotate` re-seals old→new; `export <path>` writes a passphrase-SEALED backup (--force overwrites); `repair` cures a split-KEK. DAEMON-FIRST: mutating verbs route through the daemon when up (so its in-memory policy moves with the carriers — no un-rotate), direct file op when down. The passphrase never touches argv/history — no-echo TTY prompt (double-entry for a new pass) or LARES_ARCHIVE_PASSPHRASE(+_NEW)+--yes.", handler: cmdVault },
   { name: "device-admit",  summary: "Admit a new vessel into your operator PersonaGroup (produces an admit payload via runDeviceAdmit; QR/NFC/LAN transport pending).",    handler: cmdDeviceAdmit  },
   { name: "invite-send",   summary: "Invite another operator into the Nexus MeshCabal (DreamNet founding ceremony — not yet implemented).",  handler: cmdInviteSend   },
   { name: "invite-receive",summary: "Receive and apply a Nexus MeshCabal invitation (DreamNet — not yet implemented).",                      handler: cmdInviteReceive },

@@ -81,6 +81,7 @@ import { multiGraphRecall, makeFormSearch, makeStructureSearch }  from "./sensor
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { makeChildProcessDocLoadProbe, quarantineDoc, recoverCleanTail } from "./doc-load-probe.js";
 import { loadIdentityArchive } from "./identity-anchors.js";
+import { assertSealReady } from "./archive-passphrase.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
   makeResidencyStatsReactor,
@@ -588,6 +589,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // M3 — node-main reads the persisted keyhive Archive from the identity home and passes it into the
     // worker (same custody boundary the 32-byte seed already crosses). keyhive inits from it as the
     // restore FLOOR, then replays @daemon cap-events on top — a torn @daemon restores instead of orphaning.
+    // BOOT-GATE (#60): when the config marks sealing expected but no LARES_ARCHIVE_PASSPHRASE rides the
+    // environment, fail PRECISELY here — naming the fix — rather than deeper in the reader on the generic
+    // sealed-without-key throw. The marker is a config HINT, never a secret.
+    assertSealReady();
     const archiveBytes = loadIdentityArchive();
     const daemonAuth = {
       seed:                 operatorSeed,

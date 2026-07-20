@@ -36,6 +36,12 @@ import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from 
  *  makeDaemonBehavior). Absent (a browser vessel with no fs) → the archive floor simply never persists. */
 type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs" | "onBoot"> & {
   persistArchive?: (bytes: Uint8Array) => void | Promise<void>;
+  /** `vault` — the SAME Boundary-1 inversion for the at-rest seal LIFECYCLE (#60): keyhive stays
+   *  fs-blind, so NODE injects the handler that seals/rotates/exports the identity-home carriers and
+   *  updates the worker's own in-memory seal policy (no un-rotate). Registered as the `vault-*` worker
+   *  verbs below. Absent (a browser vessel with no fs) → the vault verbs simply never register. The
+   *  passphrase rides the verb args over the owner-only 0600 UDS — the same trust boundary as a CLI arg. */
+  vault?: (verb: string, args: Record<string, unknown>) => Promise<Record<string, unknown>>;
 };
 import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof, verifyDeviceDelegation } from "@lararium/mesh";
 import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
@@ -49,8 +55,8 @@ import type { KeyhiveProvider } from "./keyhive-provider.js";
  * daemon manifests always carry daemonAuth, so that path guards tests.
  */
 export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: DaemonExtra = {}): IslandBehavior {
-  // persistArchive rides node-only; keep it OUT of the makeDaemonBehavior spread (not a DaemonBehaviorOption).
-  const { persistArchive, ...daemonExtra } = extra;
+  // persistArchive + vault ride node-only; keep them OUT of the makeDaemonBehavior spread (not DaemonBehaviorOptions).
+  const { persistArchive, vault, ...daemonExtra } = extra;
   const daemonAuth = manifest.daemonAuth;
   if (!daemonAuth) return makeDaemonBehavior({ ...daemonExtra });
 
@@ -113,6 +119,17 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
       // in @daemon + $:/tags/Alert into the operator's pinned VM.
       registry.register("ward-alert", makeWardAlertReactor(ctx.composite, ctx.post));
+
+      // The at-rest seal LIFECYCLE (#60) — DAEMON-FIRST: seal/rotate/export/repair/status route THROUGH
+      // this worker (which owns the M3 archive re-seal), so the daemon updates its OWN in-memory seal
+      // policy in the same act it re-persists the carriers — no un-rotate. The node-injected `vault`
+      // handler does the fs + policy work (keyhive stays fs-blind). The passphrase rides the args over
+      // the owner-only 0600 UDS. Absent injection (no fs) → the verbs never register.
+      if (vault) {
+        for (const v of ["vault-status", "vault-seal", "vault-rotate", "vault-export", "vault-repair"] as const) {
+          registry.register(v, async (args) => vault(v, args));
+        }
+      }
 
       // Every other daemon verb reaches USER registry data in @catalog (wiki oracles,
       // recipes) via the accessor over ctx.repo/ctx.catalogUrl — access≠load. The daemon

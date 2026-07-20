@@ -32,6 +32,7 @@
     "test-quine",
     "heleuma",
     "normalize",
+    "vault",
     "device-admit",
     "invite-send",
     "invite-receive"
@@ -90,6 +91,7 @@
     "test-quine",
     "heleuma",
     "normalize",
+    "vault",
     "device-admit",
     "invite-send",
     "invite-receive"

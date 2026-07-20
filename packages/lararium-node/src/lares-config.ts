@@ -17,10 +17,11 @@
  * the genesis seed lives in the checkout — so a headless boot needs no config to stand.
  */
 
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
 import { larHome } from "./vessel-paths.js";
+import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /** Per-resource root overrides an operator may site in `~/.lares/config.json`. Each sites INDEPENDENTLY. */
 export interface LaresResourceRoots {
@@ -36,6 +37,14 @@ export interface LaresResourceRoots {
 /** The `~/.lares/config.json` shape. `resources` carries the per-@daemon resource-root overrides. */
 export interface LaresConfig {
   readonly resources?: LaresResourceRoots;
+  /**
+   * The boot-gate HINT (never a secret): `true` once the operator has SEALED the at-rest archive.
+   * A boot that finds this set but no `LARES_ARCHIVE_PASSPHRASE` in the environment fails with a
+   * PRECISE message (`archive-passphrase#assertSealReady`) instead of the generic sealed-without-key
+   * throw — it names the fix. It carries no key material; a stolen config.json reveals only that a
+   * passphrase EXISTS, never what it is.
+   */
+  readonly sealExpected?: boolean;
 }
 
 /** The per-@daemon config file — `~/.lares/config.json`. LAR_ROOT-isolated for staged pairs (larHome
@@ -99,4 +108,25 @@ export function daemonBagsDir(cfg: LaresConfig = loadLaresConfig()): string {
  *  reads NO env var: `LAR_CAS` is the RUNTIME vessel-cas lever (a distinct resource, storage-rooted). */
 export function daemonCasDir(cfg: LaresConfig = loadLaresConfig()): string {
   return cfg.resources?.cas ?? join(daemonGenesisDir(cfg), "cas");
+}
+
+// ── The seal-expectation boot-gate marker ───────────────────────────────────────────────────────────
+// A HINT the operator's seal act writes, never a secret. The reader stays pure; the writer merges the
+// key into the EXISTING config (never clobbering resource overrides) and lands it atomically.
+
+/** Read the boot-gate marker — `true` once the archive was sealed. A missing/false key reads false. */
+export function sealExpected(cfg: LaresConfig = loadLaresConfig()): boolean {
+  return cfg.sealExpected === true;
+}
+
+/**
+ * Set (or clear) the boot-gate marker in `~/.lares/config.json`, MERGING into any existing config so a
+ * resource override never gets dropped. Atomic (temp→rename). Carries NO key material — it records only
+ * THAT sealing is in force, never the passphrase. Injectable `path` keeps the writer testable off $HOME.
+ */
+export function setSealExpected(value: boolean, path: string = laresConfigPath()): void {
+  const current = existsSync(path) ? loadLaresConfig(path) : {};
+  const next: LaresConfig = { ...current, sealExpected: value };
+  mkdirSync(larHome(), { recursive: true });
+  atomicWriteFileSync(path, JSON.stringify(next, null, 2));
 }
