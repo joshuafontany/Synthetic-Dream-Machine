@@ -28,7 +28,7 @@ Two concerns ride here, both pure caps the pipeline composes later:
      Kumulipo's wā PERIOD (C7, beat ~10,240 ticks against a measured ~9.4k wā gap, killed by
      meaning-death) and placed its BOUNDARIES at crest-recall 0.06. That gap names a CATEGORY ERROR,
      never a tuning failure — a periodicity instrument was asked a change-point question. Boundaries
-     ride `kumulipo_boundary` (a cosine-drop / novelty read, which is what the grain specified all
+     ride a cosine-drop / novelty read (a change-point instrument, which is what the grain specified all
      along); this returns a period, and a period is what a caller may take from it.
 
 CLOCK-PURITY (two-clocks law): the recovery path touches NO host wall-time (no time.time()). Event

@@ -46,8 +46,8 @@ def read_cwd_from_transcript(jsonl):
 
 
 def read_codex_cwd(file):
-    """Codex rollout cwd — the first `session_meta` line's `payload.cwd` (5-line window).
-    Mirrors `harvest.ts::readCodexCwd`."""
+    """Codex rollout cwd — the first `session_meta` line's `payload.cwd` (5-line window). Python owns
+    the codex-cwd read (no TS twin)."""
     try:
         with open(file, "r", encoding="utf-8") as fh:
             for i, line in enumerate(fh):
@@ -90,8 +90,8 @@ def resolve_transcript_wing(transcript):
 
 
 def scrape_wing(file):
-    """Copilot transcripts carry no cwd — scrape the most-frequent `<home>/<seg>` from tool-call
-    paths. Mirrors `harvest.ts::scrapeWing` (its own slug rule, distinct from wingFromDir)."""
+    """Copilot transcripts carry no cwd — scrape the most-frequent `<home>/<seg>` from tool-call paths.
+    Python owns the copilot scrape (no TS twin); its slug rule stays distinct from wing_from_dir."""
     try:
         with open(file, "r", encoding="utf-8") as fh:
             content = fh.read()

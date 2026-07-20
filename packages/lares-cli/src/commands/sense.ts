@@ -24,7 +24,6 @@ import type { ParsedArgs } from "../parse-args.js";
 import { cmdHarvest, cmdCapture, cmdSweep } from "./harvest.js";
 import { cmdWorldline } from "./worldline.js";
 import { cmdTelemetry } from "./telemetry.js";
-import { cmdSubagents } from "./subagents.js";
 import { cmdPalaceTeardown } from "./palace-teardown.js";
 import { cmdRecall } from "./recall.js";
 import { cmdRefresh } from "./refresh.js";
@@ -53,7 +52,6 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
   teardown:  cmdPalaceTeardown,
   worldline: cmdWorldline,
   telemetry: cmdTelemetry,
-  subagents: cmdSubagents,
   flow:      cmdFlow,
   meta:      cmdMeta,
 };
