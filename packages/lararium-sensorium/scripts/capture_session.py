@@ -277,6 +277,52 @@ class CaptureSessionServer:
             **summary,
         }
 
+    def sweep(self, req: dict) -> dict:
+        """BULK backfill on THIS holder's own warm stream — capture/RECAPTURE every discovered transcript
+        through the ONE live writer (model + store loaded once), never a second holder. `surface` `all` folds
+        claude+codex+copilot; `project` narrows claude; `limit` caps each surface (oldest first). Idempotent:
+        already-landed turns skip. Reuses memory_sensorium's discovery. A per-transcript failure SKIPS to
+        `failed` (one unreadable session never aborts the sweep); a SYSTEMIC embedder floor fails loud. Arms
+        every derived cadence once at the end, so the idle beat re-derives the settled bulk. The ROUTED spine
+        the CLI (`lares sense sweep` / `pour --all`) and the MCP (`sweep`) both reach through the @daemon."""
+        from content_io import ContentFloorError
+        from memory_sensorium import ALL_SURFACES, transcripts
+        surface = str(req.get("surface") or "all")
+        wing = str(req.get("wing") or "")
+        room = str(req.get("room") or "conversations")
+        project = req.get("project")
+        limit = req.get("limit")
+        if not wing:
+            raise ValueError("sweep requires a non-empty wing")
+        surfaces = ALL_SURFACES if surface == "all" else (surface,)
+        out: dict = {"wing": wing, "sessions": 0, "landed": 0, "skipped": 0, "by_surface": {}, "failed": []}
+        for surf in surfaces:
+            if surf not in {"claude", "codex", "copilot", "copilot-vscode"}:
+                raise ValueError(f"sweep surface {surf!r} unknown")
+            pointers = transcripts(surf, project=project if surf == "claude" else None)
+            if limit is not None:
+                pointers = pointers[: int(limit)]
+            s_landed = s_skipped = 0
+            for p in pointers:
+                try:
+                    summary = self._stream.capture(p, surface=surf, wing=wing, room=room)
+                except ContentFloorError:
+                    raise                          # systemic — a wrong embedder poisons every session; fail loud
+                except Exception as exc:  # noqa: BLE001 — one unreadable transcript never aborts the sweep
+                    out["failed"].append({"surface": surf, "pointer": p, "error": f"{type(exc).__name__}: {exc}"})
+                    continue
+                out["sessions"] += 1
+                s_landed += int(summary.get("landed") or 0)
+                s_skipped += int(summary.get("skipped") or 0)
+            out["by_surface"][surf] = {"pointers": len(pointers), "landed": s_landed, "skipped": s_skipped}
+            out["landed"] += s_landed
+            out["skipped"] += s_skipped
+        now = self._tick()                          # the ground moved: arm every derived cadence once
+        for enr in self._derived:
+            enr.cadence.mark(now)
+        out["embedder_model"] = self._model
+        return out
+
     def refresh(self, req: dict) -> dict:
         """Re-derive the sensorium's whole DERIVED layer in ONE command — every content-derived enrichment
         the holder owns (rejim rhythm DISCOVERY · mempalace projection · worldline slot ASSIGNMENT where the
@@ -395,6 +441,7 @@ def _serve(sensorium_root: str) -> None:
         build_dispatch=lambda: make_dispatch({
             "ping": lambda _req: {"ready": True},
             "capture": server.capture,
+            "sweep": server.sweep,       # BULK backfill on the holder's warm stream (the routed sweep spine)
             "refresh": server.refresh,   # RE-DERIVE the whole derived layer (rejim · mempalace · worldline)
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
             "status": server.status,               # the taxonomy over the holder's content store

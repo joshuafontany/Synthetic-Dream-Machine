@@ -27,7 +27,7 @@ from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir, deri
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
-LIFECYCLE_VERBS = ("pour", "recall", "status", "worldline", "kapae", "un_kapae")
+LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae")
 
 # The per-plane QUERY DOOR verb — read-only cross-plane interrogation of a 3-plane test-bed sensorium
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
@@ -52,6 +52,7 @@ WIKI_VERBS = ("wiki",)
 # authorized approval capability an HITL verb needs (capability-based — the @daemon is the cap-holder).
 VERB_SEATS = {
     "pour": (True, False),       # append-only capture — reversible (an edit rides kapae), trusted
+    "sweep": (True, False),      # append-only BULK capture — reversible (an edit rides kapae), trusted
     "recall": (True, False),     # read — reversible, trusted
     "status": (True, False),     # read — reversible, trusted
     "worldline": (True, False),  # read — reversible, trusted
@@ -564,7 +565,7 @@ class DaemonCoordinator:
     # the palace (content_io · worldline_io · structurepalace_io · form_encoder), serialized with capture so a
     # mutation never races the live writer. A verb the wire does NOT yet carry refuses honestly through
     # `_owed` rather than route to an unknown verb (the wall this surface names, not hides).
-    ROUTED = {"recall", "pour", "status", "worldline", "kapae", "un_kapae", "plane_record"}
+    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record"}
 
     def __init__(self, wing: str = "wing_default") -> None:
         self._wing = wing
@@ -576,15 +577,21 @@ class DaemonCoordinator:
             f"Owed: a node verb for `{verb}` that routes to the holder the daemon already owns."
         )
 
-    def sweep(self, surface: str = "all", *, sensorium_root: "str | None" = None, **_) -> dict:
-        """A bulk backfill cannot ride the routed wire: the @daemon owns the palace writer, so a sweep of the
-        SAME store would contend it, and there is no @daemon sweep-op yet. Run it STANDALONE with the daemon
-        down: `lares_mcp --standalone --sensorium <root>` then sweep (owed: a @daemon sweep-op routing to the
-        holder it already owns, iterating the transcripts through the ONE live writer)."""
-        raise RuntimeError(
-            "sweep is a bulk backfill and the routed @daemon owns the palace writer — a second sweep would "
-            "contend it. Run it STANDALONE with the daemon down: `lares_mcp --standalone --sensorium <root>` "
-            "and call sweep (owed: a @daemon sweep-op that routes to the holder it already owns).")
+    def sweep(self, surface: str = "all", *, wing: "str | None" = None, project: "str | None" = None,
+              limit: "int | None" = None, room: str = "conversations",
+              sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the BULK backfill through the @daemon `sweep` op — the daemon's capture holder iterates every
+        # transcript through its ONE warm writer (model + store loaded once), so the compute lands there and
+        # this surface holds nothing. The routed spine both `lares sense sweep` (CLI) and the MCP `sweep` /
+        # `pour --all` reach. `surface` `all` folds claude+codex+copilot; project/limit narrow it.
+        args: dict = {"surface": surface, "wing": wing or self._wing, "room": room}
+        if project:
+            args["project"] = project
+        if limit is not None:
+            args["limit"] = limit
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("sweep", args)
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None,
                imago: "str | None" = None, sensorium_root: "str | None" = None,
@@ -619,12 +626,15 @@ class DaemonCoordinator:
         # same footgun the standalone `LaresCoordinator.pour` guards. The sweep/writeback/preview shaping
         # rides in when the @daemon (or capture_and_observe) grows it; until then, refusing keeps the wire
         # honest.
-        if all or writeback or dry_run:
+        if all:
+            # `pour --all` = the bulk backfill, now ROUTED onto the @daemon `sweep` op (the SAME spine `sweep`
+            # rides) — no refusal where the holder answers it.
+            return self.sweep(surface="all", wing=wing, room=room, sensorium_root=sensorium_root)
+        if writeback or dry_run:
             raise NotImplementedError(
-                "pour all/writeback/dry_run: the @daemon `capture` verb carries no sweep/writeback/preview "
-                "shaping, so this routed surface refuses rather than silently drop them (dry_run especially "
-                "would LAND on the append-only ground) — owed: the shaping verb on the daemon or in "
-                "capture_and_observe")
+                "pour writeback/dry_run: the @daemon `capture` verb carries no writeback/preview shaping, so "
+                "this routed surface refuses rather than silently drop them (dry_run would LAND on the "
+                "append-only ground) — owed: the shaping verb on the daemon or in capture_and_observe")
         args: dict = {"surface": surface, "pointer": pointer, "wing": wing or self._wing, "room": room}
         # The addressed sensorium (an AI names it; the tool resolved it to a root) — the @daemon capture
         # verb picks the holder by root up the cap-ladder. Absent → the memory default the daemon holds.
