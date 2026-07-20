@@ -171,6 +171,21 @@ When `@caverns-of-neo-thracia` mounts `@elyncia`, does it inherit `@elyncia`'s l
 
 <<~/ahu >>
 
+<<~ ahu #pack-refinements >>
+
+!! Pack Model — Owed Refinements (held; external precedent)
+
+The multi-tiddler ''pack'' (hold-a-set) crossing rides the same //working ↔ canon// law: a member edit shadows UP into `@working`, the pack file stays one file on disk (projection SUPPRESSED for pack members by `isPackMember`), and a deliberate ''REPACK'' re-renders. ''Built'': the in-VM deserializer, `$:/`-aside provenance (`OriginalTiddlerPaths`), REPACK, and the projection-suppress loop-stopper. FOUR refinements stay owed, each read off external precedent (Git · OCI · Nix · Unison · matview · overlayfs):
+
+* ''One descriptor·kind'' — the three //what-belongs// mechanisms (title-nesting · aside-JSON · plugin payload) collapse to ONE aside descriptor `{member content-DIGEST, kind, annotations}`, never an in-band member edit (OCI: layers[] vs subject = one shape, differ by relationship-kind).
+* ''Filter-seed matview'' — `OriginalTiddlerPaths` today is a materialized view with its definition thrown away. Store the filter-SEED beside the snapshot; REPACK = `REFRESH MATERIALIZED VIEW`; add a sync-audit (snapshot provably re-derivable FROM the seed, or the pair flags drift). full-REFRESH (REPACK) vs incremental-REFRESH (delta) = two verbs.
+* ''COW-overlay PACK/UNPACK + atomic PROMOTE'' — LOWER (canon, read-only) + UPPER (`@working`) + WORK; copy-up-on-first-write IS UNPACK; overlay never destroys lower = //working shadows canon// in fs primitives. PACK = ONE atomic reconcile (shadow-paging root-swap) coalescing MOVE's two halves — the missing verb. VCS vocab NOT adopted (''rite not drift'').
+* ''Agile algorithm-tagged digest'' — identity = `algorithm:hex` content digest, SRI strongest-wins (no flag-day), identity-hash SEPARATED from location/attestation (referrers OVER digests, the chain links digests never re-hashes locations).
+
+Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired (content-addressing reframe); the Confluence is already ONE gate over a semantic congruence `≈`.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 !! Edges
