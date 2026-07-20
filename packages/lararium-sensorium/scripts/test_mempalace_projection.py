@@ -52,6 +52,18 @@ def test_hybrid_search_fuses_lexical_and_entity():
     p.close()
 
 
+def test_hybrid_search_cid_filter_narrows_both_surfaces():
+    # a FILTERED recall carries a cid_filter (the taxonomy `where`) — the projection narrows BOTH surfaces
+    # to the cids that pass, so a filtered recall KEEPS combined-arms rather than dropping the projection
+    # leg (the SPEAKER-stratum fix). None → the unfiltered combined-arms, unchanged.
+    p = _proj()
+    fused = p.hybrid_search("Joshua", _get, k=5, cid_filter=lambda cid: cid == "cid-c")
+    assert fused == ["cid-c"]                       # cid-a matches "Joshua" but is filtered OUT
+    wide = p.hybrid_search("Joshua", _get, k=5, cid_filter=None)
+    assert "cid-a" in wide and "cid-c" in wide      # no narrowing without a filter
+    p.close()
+
+
 def test_projection_holds_no_verbatim_and_rebuilds():
     p = _proj()
     # verbatim comes only from content: drop content, the lexical match still lands but carries no words

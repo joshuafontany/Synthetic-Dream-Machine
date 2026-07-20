@@ -46,6 +46,7 @@ import {
 } from "@lararium/mesh";
 import {
   resolveComputeCapEnv, resolveFormEncoderSpawn, resolveContentPalaceSpawn, resolvePersistencePalaceSpawn,
+  resolveStructurePalaceSpawn,
 } from "@lararium/mempalace";
 import type { MoveSkeleton, ConstructiconBasis, BearingFacets } from "@lararium/tw5/form-layer";
 import { atomicWriteFileSync } from "./fs-atomic.js";
@@ -1019,6 +1020,94 @@ export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormP
 /** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
 export function _liveFormHolderCount(): number {
   return livePalaceHolderCount(LABEL_FORM);
+}
+
+// ============================================================================
+// structurepalace — the STRUCTURE read-client (twin to the form/content clients)
+// ============================================================================
+/**
+ * structurepalace — the STRUCTURE plane's read-client: a thin PalaceHolder client to the
+ * `structurepalace_io.py serve` holder (twin to {@link makeFormPalace}/{@link makeContentPalace}). It
+ * carries the plane's OWN query semantics — text → detect-kind + parse-tree → STRUCTURAL embed → nearest
+ * shapes (NEVER a content vector; the independence law holds through the door), so a recall over the
+ * structure lens rides the structure engine rather than a content query forced onto a non-content store.
+ * Each match carries its `verbatim_sha` (the cross-plane join key) so a multi-graph recall can fuse the
+ * structure leg against content by that sha.
+ *
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#dual-graph
+ */
+
+/** One nearest-shape match from the structure query face. `verbatim_sha` is the cross-plane join key. */
+export interface StructureMatch {
+  readonly hash: string;
+  readonly distance: number | null;
+  readonly count?: number;
+  readonly verbatim_sha?: string;
+  readonly source_file?: string;
+}
+
+/** The structure query-face result: the parsed query `kind`, its nearest-shape matches, an optional note
+ *  (a kind the router holds no grammar for → empty matches + note). */
+export interface StructureQueryResult {
+  readonly kind: string | null;
+  readonly matches: StructureMatch[];
+  readonly note?: string;
+}
+
+/** A structure entry resolved from a content cid through the provenance join — the by-cid cross-plane door. */
+export interface StructureEntryForCid {
+  readonly hash: string;
+  readonly count?: number;
+  readonly provenance_cids?: string[];
+}
+
+export interface StructurePalace {
+  /** Nearest STRUCTURES to a free-text query — the clean query face (text → tree → structural embed). */
+  query(input: { text: string; nResults?: number }): Promise<StructureQueryResult>;
+  /** Read a structure entry back by its structural hash, or null if absent. */
+  get(hash: string): Promise<unknown | null>;
+  /** Resolve a content cid to its STRUCTURE entry through the provenance join (the cross-plane by-cid door). */
+  entryForCid(cid: string): Promise<StructureEntryForCid | null>;
+  /** Release this reference; the holder process is killed when the last reference closes. */
+  close(): Promise<void>;
+}
+
+const LABEL_STRUCTURE = "structure";
+
+/** Default holder spawn: the venv-aware python running `structurepalace_io.py serve --palace <dir>`. */
+const defaultStructureHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveStructurePalaceSpawn);
+
+export interface StructurePalaceOptions {
+  /** per-call RPC timeout (ms); default 60s (covers the one-time chroma open). */
+  readonly timeoutMs?: number;
+  /** test seam: override how the holder process is produced (defaults to the python helper). */
+  readonly spawn?: PalaceHolderSpawn;
+}
+
+/**
+ * Open the STRUCTURE store rooted at `dir` — a memory sensorium's "structure" collection. Composes the
+ * shared transport cap (ref-counted ONE holder per canonical dir) with the structure op-surface;
+ * `close()` releases this reference and kills the process when the last reference closes.
+ */
+export function makeStructurePalace(dir: string, opts: StructurePalaceOptions = {}): StructurePalace {
+  const p = composePalace(LABEL_STRUCTURE, dir, opts.spawn ?? defaultStructureHolderSpawn, opts.timeoutMs ?? 60_000);
+  return {
+    async query({ text, nResults }): Promise<StructureQueryResult> {
+      return (await p.send("query", { query: text, k: nResults ?? 8 })) as StructureQueryResult;
+    },
+    async get(hash: string): Promise<unknown | null> {
+      return (await p.send("get", { hash })) as unknown | null;
+    },
+    async entryForCid(cid: string): Promise<StructureEntryForCid | null> {
+      return (await p.send("entry_for_cid", { cid })) as StructureEntryForCid | null;
+    },
+    close: p.close,
+  };
+}
+
+/** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
+export function _liveStructureHolderCount(): number {
+  return livePalaceHolderCount(LABEL_STRUCTURE);
 }
 
 // ============================================================================

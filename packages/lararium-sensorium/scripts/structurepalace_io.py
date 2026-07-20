@@ -33,6 +33,9 @@ stdout (banners/library noise → stderr, which the TS side drains and ignores):
     -> {"id":3,"op":"get","hash":H}
     <- {"id":3,"ok":true,"result":{ <StructureEntry> | null }}
 
+    -> {"id":5,"op":"query","query":"<free text>","k":8}
+    <- {"id":5,"ok":true,"result":{"kind":K,"matches":[{"hash":H,"distance":D,"verbatim_sha":V,…}]}}
+
     -> {"id":4,"op":"kapae","turn_key":K,"set_aside_mark":M}
     <- {"id":4,"ok":true,"result":{"closed":N,"tombstoned":[H,…],"verbatim_shas":[V,…],"turn_key":K}}
 
@@ -356,6 +359,52 @@ class StructurePalaceStore:
         raw = self._get_raw(structural_hash)
         return self._to_entry(raw) if raw is not None else None
 
+    def entry_for_cid(self, cid: str) -> dict | None:
+        """Resolve a content cid to its STRUCTURE entry through the provenance join — the structurepalace
+        keys by structural hash, so the cid walks the provenance lines. The by-cid door a cross-plane
+        recall joins on (mirrors plane_query.structure_entry_for_cid, kept on the store so the serve holder
+        answers it too). None when no entry binds the cid."""
+        got = self._col.get(include=["metadatas"])
+        ids = got.get("ids") or []
+        metas = got.get("metadatas") or []
+        for i, h in enumerate(ids):
+            meta = metas[i] or {}
+            try:
+                provenance = json.loads(meta.get("lar_provenance") or "[]")
+            except (ValueError, TypeError):
+                provenance = []
+            if any(p.get("verbatim_sha") == cid for p in provenance):
+                return {"hash": h, "count": meta.get("count"),
+                        "provenance_cids": sorted({p.get("verbatim_sha") for p in provenance
+                                                   if p.get("verbatim_sha")})}
+        return None
+
+    def query(self, text: str, k: int = 8) -> dict:
+        """The CLEAN query face — nearest STRUCTURES to a free-text query, so callers stop reaching `_col`
+        directly. Route the text through the SAME structural pipeline capture rides: detect the kind, parse
+        to a content-free tree, encode its SHAPE ({@link _structural_embed}), then read the collection by
+        that vector — NEVER a content vector (the independence law holds). Returns
+        {kind, matches:[{hash, distance, count, verbatim_sha, source_file}]}; each match carries
+        `verbatim_sha` (its most-recent provenance join) so a cross-plane recall can join it to content. A
+        kind the router holds no grammar for → an empty match-set + a note (never a crash)."""
+        from structure_router import detect_kind, parse_to_tree
+        kind = detect_kind("query.md", text)
+        tree = parse_to_tree(kind, text)
+        if tree is None:
+            return {"kind": kind, "matches": [], "note": f"the router holds no grammar for kind {kind!r}"}
+        got = self._col.query(query_embeddings=[_structural_embed(tree)], n_results=max(k, 1),
+                              include=["metadatas", "distances"])
+        ids = (got.get("ids") or [[]])[0]
+        metas = (got.get("metadatas") or [[]])[0]
+        dists = (got.get("distances") or [[]])[0]
+        matches = [{"hash": ids[i],
+                    "distance": dists[i] if i < len(dists) else None,
+                    "count": (metas[i] or {}).get("count"),
+                    "verbatim_sha": (metas[i] or {}).get("lar_verbatim_sha", ""),
+                    "source_file": (metas[i] or {}).get("source_file", "")}
+                   for i in range(len(ids))]
+        return {"kind": kind, "matches": matches}
+
     def put(self, structural_hash: str, ast_json: str, source_file: str, verbatim_sha: str, turn_key: str = "") -> dict:
         sighting = _unreliable_witness_timestamp()  # a PURE unreliable-witness sighting — provenance only, never a worldline/tombstone marker
         # The provenance line carries the kapae key (the USER turn's uuid) alongside the verbatim
@@ -502,6 +551,8 @@ def _build_ops(store: StructurePalaceStore) -> dict:
             req.get("turn_key", ""),
         ),
         "get": lambda req: store.get(req["hash"]),
+        "query": lambda req: store.query(req.get("query", ""), int(req.get("k", req.get("n_results", 8)))),
+        "entry_for_cid": lambda req: store.entry_for_cid(req.get("cid", "")),
         "kapae": lambda req: store.kapae(req["turn_key"], req.get("set_aside_mark")),
     }
 

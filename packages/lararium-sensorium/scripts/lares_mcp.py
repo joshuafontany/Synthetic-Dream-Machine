@@ -20,7 +20,7 @@ import worldline_io as wl
 import lares_uds as uds
 from capture_session import capture_and_observe, worldline_path
 from embed_cap import make_embed_cap
-from plane_query import (open_plane_store, plane_record_witness,
+from plane_query import (crossplane_hit as _crossplane_hit, open_plane_store, plane_record_witness,
                          reads_as_cid as _reads_as_cid,
                          structure_entry_for_cid as _structure_entry_for_cid)
 from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir, derived_views
@@ -115,6 +115,32 @@ def _recall_where(*, wing=None, agent=None, surface=None, speaker=None, channel=
                "speaker": speaker, "channel": channel, "function": function}
     where = {_STAMP_KEYS[name]: val for name, val in clauses.items() if val is not None}
     return where or None
+
+
+def _where_matches(meta: dict, where: "dict | None") -> bool:
+    """Does a record's metadata satisfy a chroma-shaped `where`? A flat clause ANDs key==val; an `$and`
+    recurses. The predicate the projection filter reads (the projection owns no metadata — the content
+    store backs it)."""
+    if not where:
+        return True
+    if "$and" in where:
+        return all(_where_matches(meta, c) for c in where["$and"])
+    return all(meta.get(kk) == vv for kk, vv in where.items())
+
+
+def _make_where_predicate(content_store, where: "dict | None"):
+    """A `cid -> bool` predicate that narrows the mempalace PROJECTION leg to the cids whose CONTENT
+    metadata satisfies `where` — so a FILTERED recall (speaker="operator", …) keeps combined-arms fusion
+    rather than falling to the content-vector alone (the SPEAKER-stratum tension). The projection holds no
+    metadata, so the content store backs the check. None where nothing narrows."""
+    if not where:
+        return None
+
+    def keep(cid: str) -> bool:
+        rec = content_store.get(cid) or {}
+        return _where_matches(rec.get("metadata") or {}, where)
+
+    return keep
 
 
 def _rrf_fuse(ranked_lists: "list[list[str]]", k: int, rrf_k: int = 60) -> "list[str]":
@@ -244,27 +270,35 @@ class LaresCoordinator:
         reports the taxonomy. A `wing`/`agent`/`surface` filter narrows by provenance; the TAXONOMY filters
         `speaker`/`channel`/`function` narrow by the block's own axis — so a recall can surface the operator's
         steering as its own stratum (speaker="operator"), the loud voices (channel="speech"), or one role.
-        Because the lexical/entity projection carries no such filter yet, a FILTERED recall rides the
-        content-vector ALONE (honest — never fuse in unfiltered hits); the unfiltered common case fuses the
-        full combined-arms."""
+        A FILTERED recall now KEEPS combined-arms: the `where` rides INTO every surface — the content-vector
+        filters natively (chroma), the mempalace projection rides a content-backed `cid_filter` — so the
+        SPEAKER stratum no longer falls to the content-vector alone."""
         if lens == "structure":
             return self.recall_structure(query, k)
         if lens == "form":
             return self.recall_form(query, k)
+        if lens == "persistence":
+            return self.recall_persistence(query, k)
+        if lens == "crossplane":
+            return self.recall_crossplane(query, k, wing=wing, agent=agent, surface=surface,
+                                          speaker=speaker, channel=channel, function=function)
         if lens != "content":
-            raise ValueError(f"recall lens {lens!r} unknown — name one of: content · structure · form")
+            raise ValueError(
+                f"recall lens {lens!r} unknown — name one of: content · structure · form · persistence · crossplane")
         if imago:
             return self._content.get(imago) or {}
         if list:
             return self._content.taxonomy()
         where = _recall_where(wing=wing, agent=agent, surface=surface,
                               speaker=speaker, channel=channel, function=function)
-        surfaces = self._recall_surfaces()
-        if where or len(surfaces) <= 1:
-            # a filtered read, or a bare single-surface sensorium → the content-vector path, unchanged.
+        surfaces = self._recall_surfaces(where)
+        if len(surfaces) <= 1:
+            # a bare single-surface sensorium → the content-vector path (the where filters natively).
             out = self._content.search(self._embed_one(query), k, where)
         else:
             # FUSE the #has surfaces: each yields ordered cids; RRF merges; content resolves the verbatim.
+            # The `where` rode INTO each surface (content-vector native · projection cid_filter), so a
+            # FILTERED recall keeps combined-arms rather than dropping to the content-vector alone.
             pool = max(k * 2, 16)
             ranked = [fn(query, pool) for _name, fn in surfaces]
             fused = _rrf_fuse(ranked, k)
@@ -282,15 +316,19 @@ class LaresCoordinator:
             return {"exchanges": self._exchange_view(out.get("matches", [])), **rest}
         return out
 
-    def _recall_surfaces(self) -> list:
+    def _recall_surfaces(self, where: "dict | None" = None) -> list:
         """The recall-surface caps this sensorium #has — each `(name, search(query, k) -> ordered cids)`.
 
         Discovered from the manifest #has stack (the nameless-entity composition), never a hardcoded list:
         the content-vector rides the eidetic ground always; the mempalace projection (lexical + entity) rides
         when the stack declares a `mempalace` cap AND its projection is paved on disk. A future recall-capable
-        cap joins the fusion simply by standing in the stack — the recall composes what the sensorium has."""
+        cap joins the fusion simply by standing in the stack — the recall composes what the sensorium has.
+
+        A `where` narrows EVERY surface uniformly — the content-vector filters natively (chroma); the
+        projection rides a content-backed `cid_filter` — so a FILTERED recall keeps combined-arms rather
+        than dropping to the content-vector alone (the SPEAKER-stratum fix)."""
         def _vector(query: str, k: int) -> "list[str]":
-            res = self._content.search(self._embed_one(query), k)
+            res = self._content.search(self._embed_one(query), k, where)
             return [m["cid"] for m in res.get("matches", [])]
         surfaces: list = [("content-vector", _vector)]
         manifest = read_stream_manifest(self._palace, absent_ok=True) or {}
@@ -298,12 +336,14 @@ class LaresCoordinator:
         if isinstance(mp, dict):
             mp_db = os.path.join(self._palace, mp.get("dir") or "mempalace", "mempalace")
             if os.path.exists(mp_db + ".lex"):                 # the projection is paved (realized on disk)
+                keep = _make_where_predicate(self._content, where)
                 def _projection(query: str, k: int) -> "list[str]":
                     from mempalace_projection import MempalaceProjection
                     proj = MempalaceProjection(db_path=mp_db)   # read-only: hybrid_search reads the stored graph
                     try:
                         return proj.hybrid_search(
-                            query, lambda cid: (self._content.get(cid) or {}).get("document"), k)
+                            query, lambda cid: (self._content.get(cid) or {}).get("document"), k,
+                            cid_filter=keep)
                     finally:
                         proj.close()
                 surfaces.append(("mempalace", _projection))
@@ -358,24 +398,13 @@ class LaresCoordinator:
             entry = _structure_entry_for_cid(store, query_or_cid)
             return {"plane": "structure", "present": True, "cid": query_or_cid,
                     "entry": entry, "matches": []}
-        from structure_router import detect_kind, parse_to_tree
-        from structurepalace_io import _structural_embed
-        kind = detect_kind("query.md", query_or_cid)
-        tree = parse_to_tree(kind, query_or_cid)
-        if tree is None:
+        # The store now #has a clean query face (text → detect_kind + parse_to_tree → structural embed →
+        # nearest shapes) — the coordinator stops reaching `_col` directly.
+        res = store.query(query_or_cid, k)
+        if res.get("note") and not res.get("matches"):
             return {"plane": "structure", "present": True, "matches": [],
-                    "note": f"structure: the router holds no grammar for kind {kind!r}"}
-        got = store._col.query(query_embeddings=[_structural_embed(tree)],  # noqa: SLF001 — the store carries no query face yet
-                               n_results=max(k, 1), include=["metadatas", "distances"])
-        ids = (got.get("ids") or [[]])[0]
-        metas = (got.get("metadatas") or [[]])[0]
-        dists = (got.get("distances") or [[]])[0]
-        matches = [{"hash": ids[i],
-                    "distance": dists[i] if i < len(dists) else None,
-                    "count": (metas[i] or {}).get("count"),
-                    "source_file": (metas[i] or {}).get("source_file", "")}
-                   for i in range(len(ids))]
-        return {"plane": "structure", "present": True, "kind": kind, "matches": matches}
+                    "note": f"structure: {res['note']}"}
+        return {"plane": "structure", "present": True, "kind": res.get("kind"), "matches": res["matches"]}
 
     def recall_form(self, query_or_cid: str, k: int = 8) -> dict:
         """Interrogate the FORM plane (read-only): a cid fetches its induced-template membership row,
@@ -407,6 +436,53 @@ class LaresCoordinator:
         matches = [{"cid": ids[i], "distance": dists[i] if i < len(dists) else None}
                    for i in range(len(ids)) if ids[i] != query_or_cid][:max(k, 1)]
         return {"plane": "form", "present": True, "cid": query_or_cid, "record": record, "matches": matches}
+
+    def recall_persistence(self, query_or_cid: str, k: int = 8) -> dict:
+        """Interrogate the PERSISTENCE plane (read-only) — the plane where a ki finding earns standing
+        through witness. A cid fetches its testimony (kind · provenance · witness-count) and rides its OWN
+        stored assertion vector into the nearest ki-findings (self dropped). A text query answers an honest
+        null: the assertion IS the vector (the plane runs no embedder), so text→assertion carries no bridge
+        — query by cid. Symmetric with `recall_form` (the by-cid + neighbors shape)."""
+        store = self._plane_store("persistence")
+        if store is None:
+            return {"plane": "persistence", "present": False, "matches": [],
+                    "note": "persistence: this palace carries no persistence store"}
+        if not _reads_as_cid(query_or_cid):
+            return {"plane": "persistence", "present": True, "matches": [],
+                    "note": "persistence: text queries need an assertion vector (the plane runs no "
+                            "embedder) — query by cid"}
+        testimony = store.get(query_or_cid)
+        if testimony is None:
+            return {"plane": "persistence", "present": True, "cid": query_or_cid, "record": None, "matches": []}
+        assertion = testimony.get("assertion") or []
+        record = {"kind": testimony.get("kind", ""),
+                  "signer": (testimony.get("provenance") or {}).get("signer", ""),
+                  "witnesses": len(testimony.get("witnesses") or [])}
+        matches = []
+        if assertion:
+            got = store._col.query(query_embeddings=[assertion], n_results=max(k, 1) + 1,  # noqa: SLF001 — +1 covers the self-hit
+                                   include=["distances"])
+            ids = (got.get("ids") or [[]])[0]
+            dists = (got.get("distances") or [[]])[0]
+            matches = [{"cid": ids[i], "distance": dists[i] if i < len(dists) else None}
+                       for i in range(len(ids)) if ids[i] != query_or_cid][:max(k, 1)]
+        return {"plane": "persistence", "present": True, "cid": query_or_cid, "record": record, "matches": matches}
+
+    def recall_crossplane(self, query: str, k: int = 8, *, wing: "str | None" = None,
+                          agent: "str | None" = None, surface: "str | None" = None,
+                          speaker: "str | None" = None, channel: "str | None" = None,
+                          function: "str | None" = None) -> dict:
+        """HUMAN-QUERY ALL PLANES — one TEXT query → the content combined-arms recall → each top hit WIDENED
+        across the tri-plane by the cross-plane cid-join. Form answers by-cid only (no text→form) and
+        structure keys by shape, so a bare human text query cannot hit them directly; this bridges it — the
+        content recall finds the cids, then the form-vector + structure-tree ride back per hit
+        ({@link plane_query.crossplane_hit}). Read-only; the filters narrow the CONTENT leg (the operator's
+        steering stratum, etc.). Returns {plane, query, hits:[{cid, join_key, content, structure, form}]}."""
+        base = self.recall(query, k, wing=wing, agent=agent, surface=surface,
+                           speaker=speaker, channel=channel, function=function, lens="content")
+        hits = [_crossplane_hit(self._palace, m) for m in base.get("matches", [])]
+        return {"plane": "crossplane", "query": query, "hits": hits,
+                "scanned": base.get("scanned"), "matched": len(hits)}
 
     def plane_record(self, cid: str) -> dict:
         """The cross-plane witness read: ONE cid → its presence + payload summary across content ·
@@ -487,7 +563,9 @@ def build_mcp(coordinator: LaresCoordinator):
                pair: bool = False, lens: str = "content", sensorium: "str | None" = None) -> dict:
         """Recall the nearest turns to a query from a sensorium (`sensorium` names it; absent → memory).
         `lens` names the plane: `content` (default, combined-arms) · `structure` (nearest shapes) · `form`
-        (induced-template membership, by cid). `imago` fetches one verbatim; `list` reports the taxonomy.
+        (induced-template membership, by cid) · `persistence` (a witnessed ki-finding + neighbors, by cid) ·
+        `crossplane` (HUMAN-QUERY ALL PLANES: a text query → content hits widened across form+structure by
+        the cid-join). `imago` fetches one verbatim; `list` reports the taxonomy.
         Filters narrow the pool: wing/agent/surface by provenance; the block-taxonomy `speaker` (operator/
         agent/harness) · `channel` (speech/thought/tool) · `function` (steering/surface/…) surface ONE
         stratum — the operator's steering alone, the loud voices, a single role. `pair` returns the

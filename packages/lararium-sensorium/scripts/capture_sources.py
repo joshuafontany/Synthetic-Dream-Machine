@@ -52,9 +52,9 @@ def derive_cid(source_file: str, chunk_index: int) -> str:
     collide (QA C3). The chunk ordinal disambiguates distinct turns of one source into distinct cids (no
     clobber); the same (source_file, chunk) re-derives the same cid (idempotent re-derivation). The
     turn-key rides metadata, not here — the cid names content-identity, the turn-key names the worldline
-    binding. NOTE: the qualified key diverges from caller-vector-flush.ts's bare-basename drawerCid — the
-    TS side carries the same cross-session collision and wants the same qualification (a parity fork).
-    The hash routes through deep_time.content_hash — the ONE content-address/identity-hash home
+    binding. Capture rides py-side HERE now (the earlier TS `drawerCid`/`caller-vector-flush.ts` bare-
+    basename keying retired), so THIS gate owns the session-qualification and no cross-surface parity fork
+    stands open. The hash routes through deep_time.content_hash — the ONE content-address/identity-hash home
     (hash-agility seam); today still sha256, BYTE-IDENTICAL, so every existing cid stays valid."""
     src_hash = content_hash(source_file.encode("utf-8"))
     return f"{src_hash}_{chunk_index}"
@@ -161,7 +161,6 @@ def _blocks(source_file: str, blocks: list, *, wing: str, room: str,
             "lar_speaker": speaker,
             "lar_function": function,
             "lar_channel": channel,
-            "lar_stratum": _FUNCTION_STRATUM.get(function, "authored"),
             "lar_volume": _FUNCTION_VOLUME.get(function, "normal"),
         }
         if extra:
@@ -206,12 +205,6 @@ _CHANNEL = {
 _FUNCTION_VOLUME = {
     "steering": "normal", "surface": "normal",
     "thinking": "low", "action": "low", "result": "low", "scaffold": "low",
-}
-# The coarse stratum a function rolls up to — provenance only (the derived plane reads by VOLUME above,
-# never this). Kept so a reader of lar_stratum still resolves.
-_FUNCTION_STRATUM = {
-    "steering": "authored", "surface": "authored",
-    "thinking": "thinking", "action": "action", "result": "harness", "scaffold": "harness",
 }
 
 # Harness-injected openers. These arrive on the `user` role but no operator authored them; left

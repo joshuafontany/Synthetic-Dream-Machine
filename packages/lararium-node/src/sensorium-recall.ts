@@ -26,7 +26,7 @@ import type { SearchArgs, SearchHit, SearchResult } from "@lararium/mempalace";
 import type { BearingFacets, MoveSkeleton } from "@lararium/tw5/form-layer";
 import { parseBearing, bearingFacets } from "@lararium/tw5/form-layer";
 
-import type { FormMatch, FormPalace, SerializedBasis } from "./sensorium.js";
+import type { FormMatch, FormPalace, SerializedBasis, StructureMatch, StructurePalace } from "./sensorium.js";
 
 /** RRF damping constant. k=60 is the standard (Cormack et al.) — large enough that top-rank
  *  differences don't dominate, small enough that rank still matters. */
@@ -354,6 +354,40 @@ export function makeFormSearch(
     // 3. KEYWORDS — an aperture scope present → filter by it; else DEFER (content-only fusion).
     if (where !== undefined) return cfg.formPalace.filter({ where, nResults });
     return [];
+  };
+}
+
+// ---------------------------------------------------------------------------
+// the STRUCTURE leg — the 3rd graph, joined on the verbatim_sha like content+form
+// ---------------------------------------------------------------------------
+
+/** What the structure leg needs of a {@link StructurePalace}: the text query-face. */
+export type StructureSearchPalace = Pick<StructurePalace, "query">;
+
+/**
+ * Build the STRUCTURE {@link ExtraGraph} leg — the 3rd fusion graph the multi-graph recall reserved
+ * ("the extra graph … structure/worldline/federation, later"). A text query rides the structure store's
+ * OWN query face (text → parse-tree → structural embed → nearest shapes); each match's `verbatim_sha`
+ * routes through the SAME {@link verbatimShaOf} join-morphism content+form ride, so a structure hit fuses
+ * against its content+form twins on the shared sha (a cross-confirmed shape outranks a single-leg one). A
+ * holder fault → [] (graceful: the fusion degrades to content+form, never throws). Feed the returned
+ * search to `multiGraphRecall`'s `extraGraphs` as `{ name: "structure", search }`.
+ */
+export function makeStructureSearch(
+  palace: StructureSearchPalace,
+): (input: { query: string; limit: number }) => Promise<readonly GraphItem[]> {
+  return async ({ query, limit }) => {
+    let matches: readonly StructureMatch[];
+    try {
+      const res = await palace.query({ text: query, nResults: limit });
+      matches = res.matches ?? [];
+    } catch {
+      return [];
+    }
+    return matches.map((m, i) => {
+      const { key, sha } = joinKeyFor(verbatimShaOf(m.verbatim_sha), "structure", i);
+      return { key, sha, payload: m };
+    });
   };
 }
 

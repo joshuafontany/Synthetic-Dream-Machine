@@ -374,6 +374,69 @@ def test_recall_unknown_lens_refuses(tmp_path):
         coord.recall("q", 2, lens="bogus")
 
 
+def test_structure_query_face_carries_the_cross_plane_join(tmp_path):
+    # the STORE now #has a clean query face (the coordinator stops reaching `_col`) — and each match
+    # rides its `verbatim_sha`, the join key a cross-plane recall needs.
+    coord, cids, hashes = _bed_coord(tmp_path)
+    res = coord.recall_structure("# Gamma\n\nthird body\n", 2)
+    assert res["present"] and res["matches"]
+    top = res["matches"][0]
+    assert top["hash"] == hashes["alpha.md"]
+    assert top["verbatim_sha"] == cids["alpha.md"]
+
+
+def test_recall_crossplane_widens_a_text_query_across_all_planes(tmp_path):
+    # HUMAN-QUERY ALL PLANES: one text query → content hits, each WIDENED across form + structure by the
+    # cross-plane cid-join (WITHOUT text-searching form/structure).
+    coord, cids, hashes = _bed_coord(tmp_path)
+    res = coord.recall_crossplane("body", 4)
+    assert res["plane"] == "crossplane" and res["hits"]
+    by_cid = {h["cid"]: h for h in res["hits"]}
+    h = by_cid[cids["alpha.md"]]
+    assert h["join_key"] == cids["alpha.md"]
+    assert h["content"]["present"] and h["content"]["source_file"] == "alpha.md"
+    assert h["structure"]["present"] and h["structure"]["hash"] == hashes["alpha.md"]
+    assert h["form"]["present"] and h["form"]["active_templates"] == 1
+    # the lens folds onto recall (isomorphic with the direct method)
+    assert coord.recall("body", 4, lens="crossplane") == res
+
+
+def test_recall_persistence_by_cid_neighbors_and_text_null(tmp_path):
+    from persistence_io import PersistenceStore
+    root = str(tmp_path / "bed")
+    p = PersistenceStore(os.path.join(root, "persistence"))
+    p.put("a" * 64, "ki", [1.0, 0.0], "signer", "frontier", {}, "finding one")
+    p.put("b" * 64, "ki", [0.9, 0.1], "signer", "frontier", {}, "finding two")
+    coord = LaresCoordinator(root, wing="w", embed_factory=_fake_embed)
+    res = coord.recall_persistence("a" * 64, 3)
+    assert res["present"] and res["record"]["kind"] == "ki"
+    ncids = [m["cid"] for m in res["matches"]]
+    assert ("b" * 64) in ncids and ("a" * 64) not in ncids     # neighbor rides, self dropped
+    null = coord.recall_persistence("what earned standing", 3)
+    assert null["present"] and null["matches"] == [] and "note" in null
+    assert coord.recall("a" * 64, 3, lens="persistence") == res
+    # honest null where the palace carries no persistence store
+    assert _coord(tmp_path).recall("c" * 64, 2, lens="persistence")["present"] is False
+
+
+def test_where_predicate_narrows_by_taxonomy():
+    # the SPEAKER-stratum predicate: a filtered recall's `where` reads against the content metadata (the
+    # projection owns none), so the projection leg narrows to the same stratum the content-vector does.
+    from lares_mcp import _where_matches, _make_where_predicate
+    assert _where_matches({"lar_speaker": "operator"}, {"lar_speaker": "operator"})
+    assert not _where_matches({"lar_speaker": "agent"}, {"lar_speaker": "operator"})
+    assert _where_matches({"a": 1, "b": 2}, {"$and": [{"a": 1}, {"b": 2}]})
+    assert not _where_matches({"a": 1, "b": 3}, {"$and": [{"a": 1}, {"b": 2}]})
+
+    class _FakeContent:
+        def get(self, cid):
+            return {"metadata": {"lar_speaker": "operator" if cid == "ok" else "agent"}}
+
+    keep = _make_where_predicate(_FakeContent(), {"lar_speaker": "operator"})
+    assert keep("ok") and not keep("no")
+    assert _make_where_predicate(_FakeContent(), None) is None
+
+
 def test_daemon_recall_plane_lens_owes_the_routing():
     # the routed read-holder threads the CONTENT lens today — a plane lens over the wire refuses,
     # naming the routing generalization rather than silently reading content.

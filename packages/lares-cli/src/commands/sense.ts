@@ -114,7 +114,9 @@ export async function cmdSense(args: ParsedArgs): Promise<number> {
   // `--key value` lands in `options`; `--key` alone lands in `flags`. The lens carries a VALUE.
   const [verb, ...rest] = positional;
   const lens = args.options["lens"] ?? "content";
-  const known = Object.keys(sensoriumLenses());
+  // `crossplane` is a search MODE, not a plane-dir (it widens content hits across form+structure by the
+  // cid-join), so it rides the lens slot beside the real planes without a dir of its own.
+  const known = [...Object.keys(sensoriumLenses()), "crossplane"];
 
   if (!verb || !VERBS.includes(verb as Verb)) {
     emit(args, {

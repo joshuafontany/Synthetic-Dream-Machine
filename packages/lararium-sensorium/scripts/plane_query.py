@@ -48,16 +48,69 @@ def structure_entry_for_cid(store, cid: str) -> "dict | None":
 
 
 def open_plane_store(palace_root: str, plane: str):
-    """Open the named plane palace (<root>/structure | <root>/form) READ-only, or None when the plane
-    carries no store yet — the read verbs answer an honest null rather than PLANTING an empty palace."""
+    """Open the named plane palace (<root>/structure | <root>/form | <root>/persistence) READ-only, or
+    None when the plane carries no store yet — the read verbs answer an honest null rather than PLANTING
+    an empty palace."""
     path = os.path.join(palace_root, plane)
     if not os.path.exists(os.path.join(path, "chroma.sqlite3")):
         return None
     if plane == "structure":
         from structurepalace_io import StructurePalaceStore
         return StructurePalaceStore(path)
+    if plane == "persistence":
+        from persistence_io import PersistenceStore
+        return PersistenceStore(path)
     from form_encoder import FormPalaceStore
     return FormPalaceStore(path)
+
+
+def _structure_leg(palace_root: str, key: str) -> dict:
+    """The STRUCTURE view for one cross-plane join key — its structural entry through the provenance join,
+    honest null where the plane or the record stays absent. Shared by the by-cid witness and the human-
+    query cross-plane widen."""
+    s_store = open_plane_store(palace_root, "structure")
+    if s_store is None:
+        return {"present": False, "note": "no structure store"}
+    entry = structure_entry_for_cid(s_store, key)
+    return {"present": entry is not None, **(entry or {})}
+
+
+def _form_leg(palace_root: str, key: str) -> dict:
+    """The FORM view for one cross-plane join key — the induced-template membership summary by cid, honest
+    null where the plane or the record stays absent. Shared by the by-cid witness and the human-query
+    cross-plane widen."""
+    f_store = open_plane_store(palace_root, "form")
+    if f_store is None:
+        return {"present": False, "note": "no form store"}
+    f_row = f_store.get(key)
+    if f_row is None:
+        return {"present": False}
+    got = f_store._col.get(ids=[key], include=["embeddings"])  # noqa: SLF001 — the membership count reads the vector
+    embs = got.get("embeddings")
+    vec = [float(x) for x in embs[0]] if embs is not None and len(embs) else []
+    f_meta = f_row.get("metadata") or {}
+    return {"present": True, "dimension": f_meta.get("dimension"),
+            "count": f_meta.get("count"), "active_templates": sum(1 for v in vec if v > 0.0)}
+
+
+def crossplane_hit(palace_root: str, content_match: dict) -> dict:
+    """Widen ONE content hit across the tri-plane — the human-query bridge (HUMAN-QUERY ALL PLANES). A
+    text query hits content (combined-arms); this takes the hit and looks up the FORM vector + STRUCTURE
+    tree by the cross-plane join key (`lar_verbatim_sha`, else the cid), WITHOUT text-searching form or
+    structure (form carries no text→membership, structure keys by shape). Returns
+    {cid, join_key, content, structure, form} — human eyes on all three planes from one text query."""
+    meta = content_match.get("metadata") or {}
+    key = meta.get("lar_verbatim_sha") or content_match.get("cid") or ""
+    return {
+        "cid": content_match.get("cid"),
+        "join_key": key,
+        "content": {"present": True,
+                    "head": (content_match.get("document") or "")[:120].replace("\n", " "),
+                    "source_file": meta.get("source_file", ""),
+                    "wing": meta.get("wing", ""), "room": meta.get("room", "")},
+        "structure": _structure_leg(palace_root, key),
+        "form": _form_leg(palace_root, key),
+    }
 
 
 def plane_record_witness(content_store, palace_root: str, cid: str) -> dict:
@@ -75,25 +128,6 @@ def plane_record_witness(content_store, palace_root: str, cid: str) -> dict:
                           "head": (row.get("document") or "")[:120].replace("\n", " "),
                           "source_file": meta.get("source_file", ""),
                           "wing": meta.get("wing", ""), "room": meta.get("room", "")}
-    s_store = open_plane_store(palace_root, "structure")
-    if s_store is None:
-        out["structure"] = {"present": False, "note": "no structure store"}
-    else:
-        entry = structure_entry_for_cid(s_store, cid)
-        out["structure"] = {"present": entry is not None, **(entry or {})}
-    f_store = open_plane_store(palace_root, "form")
-    if f_store is None:
-        out["form"] = {"present": False, "note": "no form store"}
-    else:
-        f_row = f_store.get(cid)
-        if f_row is None:
-            out["form"] = {"present": False}
-        else:
-            got = f_store._col.get(ids=[cid], include=["embeddings"])  # noqa: SLF001 — the membership count reads the vector
-            embs = got.get("embeddings")
-            vec = [float(x) for x in embs[0]] if embs is not None and len(embs) else []
-            f_meta = f_row.get("metadata") or {}
-            out["form"] = {"present": True, "dimension": f_meta.get("dimension"),
-                           "count": f_meta.get("count"),
-                           "active_templates": sum(1 for v in vec if v > 0.0)}
+    out["structure"] = _structure_leg(palace_root, cid)
+    out["form"] = _form_leg(palace_root, cid)
     return out

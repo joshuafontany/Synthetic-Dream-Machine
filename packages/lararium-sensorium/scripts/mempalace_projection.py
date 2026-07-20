@@ -52,19 +52,26 @@ class MempalaceProjection:
 
     def hybrid_search(
         self, query: str, get_content: Callable[[str], "str | None"], k: int = 10, rrf_k: int = 60,
+        cid_filter: "Callable[[str], bool] | None" = None,
     ) -> "list[str]":
         """Fuse the lexical + entity recalls into ONE ranked cid list by RRF: `score(cid) = Σ 1/(rrf_k +
         rank_i)` over each surface's own ranking. Lexical contributes BM25-ranked cids (via its spans);
         entity contributes the cids whose entities match a query token. The fusion is rank-only, so BM25
-        scores and graph hits never have to share a scale."""
+        scores and graph hits never have to share a scale.
+
+        `cid_filter` (cid -> bool) narrows BOTH surfaces to the cids that pass — the taxonomy `where` a
+        FILTERED recall carries (speaker/channel/function), so a filtered recall KEEPS combined-arms rather
+        than falling to the content-vector alone. The projection owns no metadata, so the predicate rides in
+        from the coordinator (content-store-backed). None → no narrowing."""
+        keep = cid_filter or (lambda _cid: True)
         lex_cids: "list[str]" = []
         for span, _ in self._lex.search(query, get_content, k=k * 2):
-            if span.cid not in lex_cids:
+            if span.cid not in lex_cids and keep(span.cid):
                 lex_cids.append(span.cid)
         ent_cids: "list[str]" = []
         for tok in query.split():
             for cid in self._ent.cids_with(tok):
-                if cid not in ent_cids:
+                if cid not in ent_cids and keep(cid):
                     ent_cids.append(cid)
         scores: "dict[str, float]" = {}
         for ranked in (lex_cids, ent_cids):
