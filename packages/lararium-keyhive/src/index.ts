@@ -9,6 +9,8 @@ export type {
 } from "./capability-provider.js";
 
 export { KeyhiveProvider, ensureKeyhiveWasm, setKeyhiveWasmBytes } from "./keyhive-provider.js";
+export { KeyhiveIdentitySlot } from "./keyhive-identity-slot.js";
+export type { KeyhiveIdentitySlotOpts } from "./keyhive-identity-slot.js";
 export { packPersonaCrossing, applyPersonaCrossing } from "./persona-crossing.js";
 export type { PersonaCrossingBundle, CrossingContent, CrossingPlaintext } from "./persona-crossing.js";
 
