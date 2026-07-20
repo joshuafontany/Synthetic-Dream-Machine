@@ -20,7 +20,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
-import { larDataDir, loadVesselVerifyingKey } from "@lararium/node";
+import { larDataDir, loadVesselVerifyingKey, runtimeCasOverride } from "@lararium/node";
 
 // The vessel runtime-state resolvers — defined once in @lararium/node, surfaced here.
 export {
@@ -98,7 +98,7 @@ export function larGenesisDir(): string {
  * the CAS roots off the vessel-state home (like the store) — the one resource cap that is state, not corpus.
  */
 export function larCasDir(): string {
-  return process.env["LAR_CAS"] ?? join(larDataDir(), "cas");
+  return runtimeCasOverride() ?? join(larDataDir(), "cas");   // LAR_CAS → config.vessel.cas → <state>/cas
 }
 
 /** The runtime bootstrap artifact — `<genesis>/social-bootstrap.json`. Routes through larGenesisDir

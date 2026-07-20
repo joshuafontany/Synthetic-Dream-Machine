@@ -14,10 +14,14 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync, copyFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { type GenesisCasManifest } from "@lararium/mesh";
+import { runtimeCasOverride } from "./lares-config.js";
 
-/** The CAS dir for a vessel rooted at `storageDir` (e.g. ~/.lares/.lararium → …/cas). */
+/** The CAS dir for a vessel rooted at `storageDir` (e.g. ~/.lares/.lararium → …/cas). The runtime-cas
+ *  OVERRIDE (`LAR_CAS` → `config.vessel.cas`) wins when sited — the SAME lever the CLI stager (`larCasDir`)
+ *  honors, so the blob the CLI stages and the blob a worker resolveByCid-reads land in ONE dir. Absent →
+ *  the storage-rooted default. (Before this, `LAR_CAS` moved only the CLI, silently diverging the two.) */
 export function casDirForStorage(storageDir: string): string {
-  return join(storageDir, "cas");
+  return runtimeCasOverride() ?? join(storageDir, "cas");
 }
 
 /**

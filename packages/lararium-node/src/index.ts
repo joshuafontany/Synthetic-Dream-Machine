@@ -16,8 +16,9 @@ export { atomicWriteFileSync } from "./fs-atomic.js";
 // sites bags/genesis/cas away from the repo-relative default; genesis artifacts stay checked-in by default).
 export {
   loadLaresConfig, laresConfigPath, daemonCorpusRoot, daemonGenesisDir, daemonBagsDir, daemonCasDir,
+  runtimeCasOverride,
 } from "./lares-config.js";
-export type { LaresConfig, LaresResourceRoots } from "./lares-config.js";
+export type { LaresConfig, LaresResourceRoots, LaresVesselState } from "./lares-config.js";
 
 // The SHEAF-TRUE sensorium primitive — a dir that `#has` fiber-caps (content/structure/form) with
 // bands + coupling as base-caps living IN the manifest. The filetree IS the composition.

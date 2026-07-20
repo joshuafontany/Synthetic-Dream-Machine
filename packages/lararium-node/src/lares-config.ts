@@ -30,13 +30,24 @@ export interface LaresResourceRoots {
   /** The tracked genesis seed dir (island.bin + bootstrap + cas/) — overrides `<corpus>/genesis`. */
   readonly genesis?: string;
   /** The genesis CAS-SOURCE dir (the tracked `genesis/cas/<cid>` blobs) — overrides `<genesis>/cas`.
-   *  NOT the runtime vessel cas (that roots off vessel storage and rides the `LAR_CAS` env lever). */
+   *  NOT the runtime vessel cas (that is vessel STATE — see `LaresVesselState.cas`). */
   readonly cas?:     string;
 }
 
-/** The `~/.lares/config.json` shape. `resources` carries the per-@daemon resource-root overrides. */
+/** Per-@daemon VESSEL-STATE overrides. STATE, never corpus — held apart from `resources` so the
+ *  corpus/state boundary the whole cap-stack rests on (bags=corpus vs store=state) stays legible. */
+export interface LaresVesselState {
+  /** The RUNTIME vessel-cas dir — the live CAS the island workers resolveByCid from (rebuilt from the
+   *  genesis-cas source on seed + grown by staging). Overrides `<vessel-storage>/cas`. The `LAR_CAS`
+   *  env lever takes precedence over this; both move the CLI stager AND the daemon reader together. */
+  readonly cas?: string;
+}
+
+/** The `~/.lares/config.json` shape. `resources` carries corpus-root overrides; `vessel` carries
+ *  vessel-STATE overrides — the two kept apart so corpus and state never blur. */
 export interface LaresConfig {
   readonly resources?: LaresResourceRoots;
+  readonly vessel?:    LaresVesselState;
   /**
    * The boot-gate HINT (never a secret): `true` once the operator has SEALED the at-rest archive.
    * A boot that finds this set but no `LARES_ARCHIVE_PASSPHRASE` in the environment fails with a
@@ -108,6 +119,16 @@ export function daemonBagsDir(cfg: LaresConfig = loadLaresConfig()): string {
  *  reads NO env var: `LAR_CAS` is the RUNTIME vessel-cas lever (a distinct resource, storage-rooted). */
 export function daemonCasDir(cfg: LaresConfig = loadLaresConfig()): string {
   return cfg.resources?.cas ?? join(daemonGenesisDir(cfg), "cas");
+}
+
+/**
+ * The RUNTIME vessel-cas OVERRIDE — the ONE lever that re-points the live CAS for BOTH the CLI stager
+ * (`larCasDir`) and the daemon reader (`casDirForStorage`), so they never diverge: `LAR_CAS` env →
+ * `config.vessel.cas` → null (each caller then falls to its own storage-rooted default). Threading ONE
+ * override through both keeps the blob the CLI stages and the blob the workers resolveByCid the SAME file.
+ */
+export function runtimeCasOverride(cfg: LaresConfig = loadLaresConfig()): string | null {
+  return process.env["LAR_CAS"] ?? cfg.vessel?.cas ?? null;
 }
 
 // ── The seal-expectation boot-gate marker ───────────────────────────────────────────────────────────
