@@ -46,6 +46,7 @@ The attribution notice from the original scan is retained inline in the Title Pa
 ```toml iam
 role = "source-text interior — transcribed as received, md-era rendering"
 type = "text/markdown"
+_lar_cas = "yes"
 ```
 
 ## Title Page
