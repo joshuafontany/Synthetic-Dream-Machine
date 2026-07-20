@@ -81,3 +81,6 @@ entities.json
 
 # local dev corpus-root marker — opt-in per install, never ship to clones (#53)
 lar-dev-root.json
+
+# runtime content-addressed store — vessel state (larDataDir/cas), never the repo (#54)
+/cas

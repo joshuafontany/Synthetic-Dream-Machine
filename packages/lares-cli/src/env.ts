@@ -92,11 +92,13 @@ export function larGenesisDir(): string {
 }
 
 /**
- * The CAS dir SEAM — `LAR_CAS`, else `<corpus>/cas`. Reserved for @cad's future content-addressed
- * store; the resolver sites the resource so @cad lands into a ready cap, no re-plumbing of the root.
+ * The CAS dir — `LAR_CAS`, else `<vessel-state>/cas` (larDataDir-adjacent). The content-addressed
+ * store holds RUNTIME vessel state, never the corpus/repo: its blobs rebuild from the `bags/` carriers
+ * on each seed, so they stay OUT of the tracked tree. `bags`/`wikis`/`genesis` root off the corpus;
+ * the CAS roots off the vessel-state home (like the store) — the one resource cap that is state, not corpus.
  */
 export function larCasDir(): string {
-  return process.env["LAR_CAS"] ?? join(larRoot(), "cas");
+  return process.env["LAR_CAS"] ?? join(larDataDir(), "cas");
 }
 
 /** The runtime bootstrap artifact — `<genesis>/social-bootstrap.json`. Routes through larGenesisDir
