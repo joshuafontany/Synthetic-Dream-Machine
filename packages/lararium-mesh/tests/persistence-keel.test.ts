@@ -4,9 +4,11 @@
  * merged `admit` gate (Cut B).
  */
 import { describe, test, expect } from "vitest";
+import * as ed25519 from "@noble/ed25519";
 import {
   recordTestimony, witness, reentryPrior, admit, maturationMode, WITNESS_POLICY,
   emptyStoreCode, observeClaim, storeCodeFrom, prequentialBits,
+  signWitness, verifyWitnessSig, witnessProofBytes, hex,
   STANDING_FLOOR, STANDING_CEILING, type PersistencePolicy,
 } from "../src/index.js";
 
@@ -99,6 +101,61 @@ describe("persistence-keel — maturation mode = the half-life", () => {
     t = witness(t, vouch("vessel-B", "f2", 1000));           // same signer, re-vouched fresh
     const revived = reentryPrior(t, affinity, 1000).standing;
     expect(revived).toBeGreaterThan(aged);
+  });
+});
+
+describe("persistence-keel — the witness signature (the string the log carries)", () => {
+  const seed = new Uint8Array(32).fill(7);
+  const claimCid = "claim-cid-abc123";                // the content-address of the testimony being attested
+  let signerHex = "";
+  const sign = async (bytes: Uint8Array) => hex(await ed25519.signAsync(bytes, seed));
+
+  test("a signed edge round-trips: sign → verify TRUE against the attested testimony", async () => {
+    signerHex = hex(await ed25519.getPublicKeyAsync(seed));
+    const edge = await signWitness({ claimCid, signer: signerHex, frontier: "f1", polarity: 1, sign });
+    expect(edge.signature).toMatch(/^[0-9a-f]{128}$/);              // the string is there now
+    expect(await verifyWitnessSig(claimCid, edge)).toBe(true);       // defaults to edge.signer, verifies
+  });
+
+  test("a tampered edge FAILS — flipping polarity or frontier breaks the seal", async () => {
+    signerHex = hex(await ed25519.getPublicKeyAsync(seed));
+    const edge = await signWitness({ claimCid, signer: signerHex, frontier: "f1", polarity: 1, tick: 5, sign });
+    expect(await verifyWitnessSig(claimCid, { ...edge, polarity: -1 })).toBe(false);   // vouch→defeat: caught
+    expect(await verifyWitnessSig(claimCid, { ...edge, frontier: "f2" })).toBe(false); // moved frontier: caught
+    expect(await verifyWitnessSig(claimCid, { ...edge, tick: 6 })).toBe(false);        // moved tick: caught
+  });
+
+  test("re-pointing the edge at a DIFFERENT testimony fails — the seal binds the claimCid", async () => {
+    signerHex = hex(await ed25519.getPublicKeyAsync(seed));
+    const edge = await signWitness({ claimCid, signer: signerHex, frontier: "f1", polarity: 1, sign });
+    expect(await verifyWitnessSig("some-other-claim-cid", edge)).toBe(false);
+  });
+
+  test("FAIL-CLOSED: an unsigned edge, a bad signer key, and a wrong key all read false", async () => {
+    signerHex = hex(await ed25519.getPublicKeyAsync(seed));
+    const edge = await signWitness({ claimCid, signer: signerHex, frontier: "f1", polarity: 1, sign });
+    // an unsigned edge — the standing law still counts it, but the signature gate denies it
+    expect(await verifyWitnessSig(claimCid, { signer: signerHex, frontier: "f1", polarity: 1 })).toBe(false);
+    // a signer field that is not raw verifying-key hex → shape guard denies (caller must supply a trusted key)
+    expect(await verifyWitnessSig(claimCid, { ...edge, signer: "vessel-A" })).toBe(false);
+    // a different, valid key that did not sign this edge
+    const otherHex = hex(await ed25519.getPublicKeyAsync(new Uint8Array(32).fill(9)));
+    expect(await verifyWitnessSig(claimCid, edge, otherHex)).toBe(false);
+  });
+
+  test("the proof binds every load-bearing field — same inputs, same bytes (deterministic)", () => {
+    const a = witnessProofBytes(claimCid, { signer: "S", frontier: "F", polarity: 1, tick: 3 });
+    const b = witnessProofBytes(claimCid, { signer: "S", frontier: "F", polarity: 1, tick: 3 });
+    expect(hex(a)).toBe(hex(b));
+    expect(hex(a)).not.toBe(hex(witnessProofBytes(claimCid, { signer: "S", frontier: "F", polarity: -1, tick: 3 })));
+  });
+
+  test("a signed edge still flows through the standing law unchanged — the signature is orthogonal", async () => {
+    signerHex = hex(await ed25519.getPublicKeyAsync(seed));
+    const edge = await signWitness({ claimCid, signer: signerHex, frontier: "f1", polarity: 1, sign });
+    const t = witness(recordTestimony("innovation", [1, 2, 3], { signer: "vessel-A", frontier: "f0" }), edge);
+    expect(reentryPrior(t).voice).toBe("spoken");                    // one distinct signer speaks it, signed or not
+    expect(reentryPrior(t).standing).toBeGreaterThan(STANDING_FLOOR);
   });
 });
 

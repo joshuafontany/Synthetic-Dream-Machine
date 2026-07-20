@@ -34,6 +34,9 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/persistence-keel
  */
 
+import * as ed25519 from "@noble/ed25519";
+import { hexToBytes } from "./crypto.js";
+
 /** The 0..20 STANDING dial's floor/step/ceiling for a testimony's lifecycle. */
 export const STANDING_FLOOR = 3;    // born at the noise band — quiet, honest, not failed
 export const STANDING_STEP = 4;     // one independent corroborator's worth of earned standing
@@ -62,6 +65,13 @@ export interface Witness {
   readonly polarity: 1 | -1;
   /** monotone time for affinity-mode decay; omitted / ignored under witness mode (halfLife null). */
   readonly tick?: number;
+  /**
+   * The Ed25519 signature (hex) the signer draws over {@link witnessProofBytes} — the CRYPTOGRAPHIC
+   * STRING that turns the `signer` field from a bare claim into a proven vouch/defeat. OPTIONAL for
+   * back-compat: an unsigned edge stays a valid log entry the standing law still counts, but
+   * {@link verifyWitnessSig} refuses it (deny-by-default). Minted by {@link signWitness}.
+   */
+  readonly signature?: string;
 }
 
 /**
@@ -114,6 +124,87 @@ export function recordTestimony(
  */
 export function witness(t: Testimony, edge: Witness): Testimony {
   return { ...t, witnesses: [...t.witnesses, edge] };
+}
+
+/* ══════════════════ THE WITNESS SIGNATURE — the string the log was always described to carry ══════════════════
+ *
+ * The keel's header names the witness-log SIGNED, and the standing law only counts DISTINCT-SIGNER edges —
+ * but a `signer` field is a bare CLAIM until a key proves it. This block gives the witness edge its
+ * cryptographic string: the signer draws an Ed25519 signature over canonical bytes binding the TESTIMONY it
+ * attests (by content-address) to its own vouch/defeat, and a verifier re-derives those bytes and checks the
+ * signature. It mirrors the wax-stamp floor exactly (proofBytes · mint · verifySig) and rides the SAME
+ * @noble/ed25519 the auth-wire and wax-stamp keels already ride — no new crypto enters the stack.
+ *
+ * WHAT IT ATTESTS — a PAST, never a global now (preserves no-global-now / causal-islands): "signer S,
+ * standing at causal frontier F, corroborated (+1) / defeated (−1) the testimony content-addressed by
+ * `claimCid`." `frontier` is an ITC bound-past (the same opaque frontier the provenance inlines), so the seal
+ * freezes a causal fact — it says nothing about the testimony's LIVE standing, which DERIVES at read from the
+ * whole distinct-signer log ({@link reentryPrior}), never from any one signature.
+ *
+ * OUT OF SCOPE — deliberately: (a) the signature does NOT gate the standing arithmetic. {@link standingUnder}
+ * stays signature-blind: it trusts the log it is handed, exactly as wax-stamp's `classifySeal` trusts its
+ * injected `verifySig`. A caller admits an edge into the log by running {@link verifyWitnessSig} FIRST
+ * (deny-by-default: an absent or bad signature → do not append), so curation happens at the gate, never inside
+ * the dial — which is why the unsigned edges the standing-law tests use stay valid. (b) carrying this string
+ * THROUGH the dumb python store (persistence_io) so a re-loaded edge still verifies is an owed cross-language
+ * fixture (the parity manifest already names the debt) — the sovereign keel mints and checks the seal; the
+ * store need not understand it. (c) WHO may witness (authorization) is the caller's policy, not the
+ * signature's — the seal proves possession of `signer`'s key and nothing more.
+ */
+
+/** The version-tagged, strict `|`-delimited canonical bytes a witness edge signs (the wax-stamp proof shape). */
+export function witnessProofBytes(
+  claimCid: string,
+  edge: Pick<Witness, "signer" | "frontier" | "polarity" | "tick">,
+): Uint8Array {
+  return new TextEncoder().encode(
+    `lar-witness/v1|${claimCid}|${edge.signer}|${edge.frontier}|${edge.polarity}|${edge.tick ?? ""}`,
+  );
+}
+
+/**
+ * Mint a SIGNED witness edge: sign the proof bytes (`claimCid` ← the testimony being attested) with the
+ * signer's key. `sign` yields a hex Ed25519 signature; the caller injects the key material (the same
+ * injected-`sign` shape as `mintWaxStamp` / `buildAuthResponse` — no keyhive dep enters the keel).
+ */
+export async function signWitness(input: {
+  readonly claimCid: string;
+  readonly signer: string;
+  readonly frontier: string;
+  readonly polarity: 1 | -1;
+  readonly tick?: number;
+  readonly sign: (bytes: Uint8Array) => Promise<string>;
+}): Promise<Witness> {
+  const core: Pick<Witness, "signer" | "frontier" | "polarity" | "tick"> = {
+    signer: input.signer, frontier: input.frontier, polarity: input.polarity,
+    ...(input.tick !== undefined ? { tick: input.tick } : {}),
+  };
+  const signature = await input.sign(witnessProofBytes(input.claimCid, core));
+  return { ...core, signature };
+}
+
+/**
+ * Verify a witness edge's Ed25519 signature against the testimony it attests (`claimCid`). FAIL-CLOSED: an
+ * absent signature, a malformed key/sig, or ANY verify error all read `false` — an unsigned or tampered edge
+ * NEVER passes. `signerKeyHex` defaults to the edge's own `signer` (the raw verifying-key hex the mesh uses
+ * for identity); a conservative caller MAY pass a trusted key explicitly (the wax-stamp / verifyAuthProof
+ * conservative-caller law — never trust a wire-claimed key where a trusted one is held). A `signer` that is
+ * not raw verifying-key hex fails the shape guard and forces the caller to supply the trusted key.
+ */
+export async function verifyWitnessSig(
+  claimCid: string,
+  edge: Witness,
+  signerKeyHex: string = edge.signer,
+): Promise<boolean> {
+  if (edge.signature === undefined) return false;                 // no string → nothing attested → deny
+  if (!/^[0-9a-fA-F]{64}$/.test(signerKeyHex)) return false;      // not a 32-byte verifying key
+  if (!/^[0-9a-fA-F]{128}$/.test(edge.signature)) return false;   // not a 64-byte signature
+  const msg = witnessProofBytes(claimCid, edge);
+  try {
+    return await ed25519.verifyAsync(hexToBytes(edge.signature), msg, hexToBytes(signerKeyHex));
+  } catch {
+    return false;
+  }
 }
 
 /**
