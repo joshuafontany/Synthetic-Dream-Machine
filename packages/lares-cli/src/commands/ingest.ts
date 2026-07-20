@@ -23,13 +23,16 @@ import { summaryOutput } from "../verb-result.js";
 import { OUTCOME_URI_PREFIX } from "@lararium/mesh";
 import { larRoot, operatorDid } from "../env.js";
 import { openSyncedTree, scanSource, candidatesOf, submitIngest, recordLandedPacks, applyConfirmedRenames } from "../ingest-core.js";
+import { carrierNeedsTag, tagBlobs } from "../tag-blobs.js";
 
 function printUsage(): void {
-  console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--in-wiki] [--yes]");
-  console.log("  default  = preview (scan + two-leg diff, no submission);");
-  console.log("  --apply  sends NEW+CHANGED carriers through the island's INGEST gate;");
-  console.log("  --in-wiki runs the INGEST in the active wiki island (the path for the working");
-  console.log("           write-layer ingest-back — a wikis/ source derives its URIs off that layer).");
+  console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--tag-blobs] [--in-wiki] [--yes]");
+  console.log("  default    = preview (scan + two-leg diff, no submission);");
+  console.log("  --tag-blobs writes the CAS opt-in flag (`.meta` sidecar / meme ahu iam) for the");
+  console.log("             large un-flagged carriers that would fault at regenesis; writes no records;");
+  console.log("  --apply    sends NEW+CHANGED carriers through the island's INGEST gate;");
+  console.log("  --in-wiki  runs the INGEST in the active wiki island (the path for the working");
+  console.log("             write-layer ingest-back — a wikis/ source derives its URIs off that layer).");
 }
 
 export async function cmdIngest(args: ParsedArgs): Promise<number> {
@@ -53,6 +56,25 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   // observation survives the move (see applyConfirmedRenames, post-submit).
   const renameDeletions = scan.renameDeletions ?? [];
 
+  // Carriers that would hit the ungated-large-inline wall at regenesis, still
+  // un-flagged — the readiness law reads off text the scan already holds.
+  const wouldFault = rows.filter((r) => carrierNeedsTag(r));
+
+  // ── --tag-blobs (write the CAS opt-in flag; submit nothing) ─────────────
+  if (args.flags["tag-blobs"]) {
+    const outcomes = tagBlobs(rows);
+    const wrote = outcomes.filter((o) => o.wrote);
+    emit(args, {
+      ok: true,
+      data: { toBag, scanned: rows.length, tagged: wrote.length, outcomes },
+      human: () => {
+        for (const o of outcomes) console.log(`  ${(o.wrote ? "TAGGED" : "REPORT").padEnd(8)} ${o.file}  (${o.kind}: ${o.detail})`);
+        console.log(`\n  ${wrote.length} of ${outcomes.length} flag-ready carrier(s) tagged · the rest reported, canon untouched`);
+      },
+    });
+    return 0;
+  }
+
   // ── preview (the default posture) ──────────────────────────────────────
   if (!args.flags["apply"]) {
     emit(args, {
@@ -64,6 +86,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
         changed: rows.filter((r) => r.status === "changed").length,
         unchanged: rows.filter((r) => r.status === "unchanged").length,
         nonNfc: rows.filter((r) => r.status === "non-nfc").map((r) => r.uri),
+        wouldFault: wouldFault.map((r) => r.uri),
         skipped,
         rows: rows.filter((r) => r.status !== "unchanged").map((r) => ({ uri: r.uri, status: r.status })),
       },
@@ -71,6 +94,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
         for (const r of rows) console.log(`  ${r.status.toUpperCase().padEnd(10)} ${r.uri}`);
         for (const f of skipped) console.log(`  SKIPPED    ${f} (no loci derivation — outside bags//wikis/, non-.md, or rootless interior)`);
         console.log(`\n  ${rows.length} scanned · ${candidates.length} would submit · preview only (pass --apply)`);
+        if (wouldFault.length > 0) console.log(`  ${wouldFault.length} large un-flagged file(s) would fault on regenesis — run \`--tag-blobs\` to flag them.`);
       },
     });
     return 0;
