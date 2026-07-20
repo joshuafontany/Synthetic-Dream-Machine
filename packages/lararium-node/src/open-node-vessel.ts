@@ -75,7 +75,7 @@ import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool
 const NODE_WIKI_PIN_BUDGET = 3;
 import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, larContentDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace, makeStructurePalace, type StructurePalace }  from "./sensorium.js";
-import { readMemeticWikitextCoupling } from "./sensorium-coupling.js";
+import { readCoupling } from "./sensorium-coupling.js";
 import { makeRecallHolder, type RecallHolder } from "./recall-holder.js";
 import { makeContentPalace, type ContentPalace } from "./sensorium.js";
 import { multiGraphRecall, makeFormSearch, makeStructureSearch }  from "./sensorium-recall.js";
@@ -731,11 +731,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).analyze(req);
       },
-      ki: async (_input) => {
-        // The Ki (氣) corpus-coupling verdict computed HERE in TS — the H¹-gated fuse over the memetic-
-        // wikitext peers, the node twin of what `lares sense ki` reads + `lares status` surfaces. The MCP
-        // `ki` tool reaches this daemon verb (routed-only; no python standalone computes the cohomology).
-        return readMemeticWikitextCoupling() as unknown as Record<string, unknown>;
+      ki: async (input) => {
+        // The Ki (氣) coupling verdict computed HERE in TS — the H¹-gated fuse over the ADDRESSED sensorium's
+        // coupling cap (general: any sensorium that #has coupling.children answers; memory carries none). The
+        // MCP `ki` tool reaches this daemon verb (routed-only; no python standalone computes the cohomology).
+        const root = input?.sensoriumRoot ?? memorySensoriumDir();
+        return readCoupling(root) as unknown as Record<string, unknown>;
       },
       refreshDerived: async (input) => {
         // RE-DERIVE the whole derived layer through the holder that owns the store — one command, serialized
