@@ -158,15 +158,44 @@ class LaresCoordinator:
         worldline fork-DAG into the shared `worldline/`, so `worldline()`/`kapae` read a REAL braid on
         the shipping path; the sweep/writeback/preview SHAPING rides the CLI skin + the deferred
         @daemon-cap-wire, so the params stand in the signature and thread through as the wire lands them."""
-        if all or writeback or dry_run:
-            # REFUSE HONESTLY, never silently ignore: dry_run especially would otherwise LAND on the
-            # append-only ground (the tool advertises a preview it can't yet give). The sweep/writeback/
-            # preview shaping rides the deferred @daemon-cap-wire — the same discipline as the kapae stub.
+        if all:
+            # `pour --all` = the bulk backfill across EVERY surface, now wired onto the ONE spine: it rides
+            # `sweep` (the same method the CLI's `lares sense pour --all` reaches). No refusal where the CLI
+            # works — the surfaces match.
+            return self.sweep("all", wing=wing, room=room)
+        if writeback or dry_run:
+            # STILL refuse honestly: dry_run especially would otherwise LAND on the append-only ground (the
+            # tool advertises a preview it can't yet give). Writeback/preview shaping rides the deferred wire.
             raise NotImplementedError(
-                "pour all/writeback/dry_run: the sweep/writeback/preview shaping rides the deferred "
-                "@daemon-cap-wire (not yet wired) — refusing rather than capturing for real")
+                "pour writeback/dry_run: the writeback/preview shaping rides the deferred @daemon-cap-wire "
+                "(not yet wired) — refusing rather than capturing for real")
         return capture_and_observe(self._palace, surface, pointer, wing=wing or self._wing, room=room,
                                    embed_factory=lambda: (self._embed_one, self._model))
+
+    def sweep(self, surface: str = "all", *, wing: "str | None" = None, project: "str | None" = None,
+              limit: "int | None" = None, room: str = "conversations") -> dict:
+        """Capture/RECAPTURE every local operator-AI chat transcript into this Memory sensorium in ONE pass —
+        the bulk backfill that `pour` handles one pointer at a time (mirrors `lares sensorium memory sweep`).
+        `surface` `all` folds claude+codex+copilot; else names one. Reuses the memory_sensorium driver's OWN
+        discovery (transcripts) + three-plane capture (run) — no re-roll — passing THIS coordinator's warm
+        embedder so the model never reloads. IDEMPOTENT: a re-run lands only the un-landed tail (the crash
+        cure). `project` narrows claude to one project; `limit` caps each surface (oldest first)."""
+        from memory_sensorium import ALL_SURFACES, run as ms_run, transcripts
+        surfaces = ALL_SURFACES if surface == "all" else (surface,)
+        wing = wing or self._wing
+        out = {"root": self._palace, "wing": wing, "by_surface": {}}
+        for surf in surfaces:
+            pointers = transcripts(surf, project=project if surf == "claude" else None)
+            if limit is not None:
+                pointers = pointers[:limit]
+            if not pointers:
+                out["by_surface"][surf] = {"pointers": 0, "note": "no transcripts found"}
+                continue
+            out["by_surface"][surf] = ms_run(
+                self._palace, surface=surf, wing=wing, room=room, pointers=pointers,
+                min_support=2, max_forms=64, max_candidates=96,
+                embed_factory=lambda: (self._embed_one, self._model))
+        return out
 
     def _exchange_view(self, matches: list) -> list:
         """Pair matched blocks into EXCHANGES — the read-time view the ontology names. Group the matches
@@ -437,35 +466,18 @@ def build_mcp(coordinator: LaresCoordinator):
                      wing=wing, room=room)
 
     @mcp.tool()
-    def sweep(surface: str = "claude", wing: "str | None" = None, project: "str | None" = None,
+    def sweep(surface: str = "all", wing: "str | None" = None, project: "str | None" = None,
               limit: "int | None" = None, sensorium: "str | None" = None) -> dict:
-        """Capture/RECAPTURE every local operator-AI chat transcript of a surface into a sensorium in ONE pass
-        — the bulk backfill / re-pour that `pour` handles one pointer at a time. A thin skin over the existing
-        memory_sensorium driver: it walks the surface's transcript root (each project session + every
-        sub-agent), lands them onto all three planes through ONE warm holder, and reads the tri-plane witness
-        back. IDEMPOTENT — already-landed turns skip, so a re-run catches up and a fresh sensorium fills fully.
-        `surface` = claude|codex; `project` narrows claude to one project; `limit` caps (oldest first);
-        `sensorium` names the root (absent → the canonical memory).
+        """Capture/RECAPTURE every local operator-AI chat transcript into a sensorium in ONE pass — the bulk
+        backfill / re-pour that `pour` handles one pointer at a time (mirrors `lares sensorium memory sweep`).
+        `surface` `all` folds claude+codex+copilot; else names one; `project` narrows claude; `limit` caps
+        each surface (oldest first); `sensorium` names the root (absent → memory). IDEMPOTENT — already-landed
+        turns skip, so a re-run catches up and a fresh sensorium fills fully; the tri-plane witness rides back.
 
-        Runs STANDALONE — it composes its own holder, so the sensorium must NOT be held by a live @daemon. Run
-        under `lares_mcp --standalone --sensorium <root>`, or the CLI `memory_sensorium.py run --surface
-        <surface> --wing <wing>`. A routed surface refuses rather than contend the daemon's writer."""
-        if routed:
-            raise RuntimeError(
-                "sweep runs standalone (it composes its own holder); the routed @daemon owns the store, so a "
-                "sweep would contend its writer. Run `lares_mcp --standalone --sensorium <root>` and call "
-                "sweep, or the CLI `memory_sensorium.py run --surface <surface> --wing <wing>` with the daemon down.")
-        from memory_sensorium import memory_sensorium_dir, run as ms_run, transcripts
-        root = _address(sensorium) or bound_root or memory_sensorium_dir()
-        wing = wing or ("wing_" + os.path.basename(os.path.expanduser("~")) or "wing_operator")
-        pointers = transcripts(surface, project=project)
-        if limit is not None:
-            pointers = pointers[:limit]
-        if not pointers:
-            return {"root": root, "surface": surface, "wing": wing, "pointers": 0,
-                    "note": f"no {surface} transcripts found"}
-        return ms_run(root, surface=surface, wing=wing, room="conversations", pointers=pointers,
-                      min_support=2, max_forms=64, max_candidates=96)
+        Routes through the shared coordinator (the same method `lares sensorium memory sweep` calls). Runs
+        STANDALONE — the sensorium must NOT be held by a live @daemon, so the routed surface refuses and points
+        you at `lares_mcp --standalone --sensorium <root>` (or the CLI's --standalone)."""
+        return _call("sweep", sensorium, surface, wing=wing, project=project, limit=limit)
 
     @mcp.tool()
     def recall(query: str, k: int = 8, wing: "str | None" = None, imago: "str | None" = None,
@@ -563,6 +575,16 @@ class DaemonCoordinator:
             "Opening one would put a second writer on the palace (N sessions, N clients, one index). "
             f"Owed: a node verb for `{verb}` that routes to the holder the daemon already owns."
         )
+
+    def sweep(self, surface: str = "all", *, sensorium_root: "str | None" = None, **_) -> dict:
+        """A bulk backfill cannot ride the routed wire: the @daemon owns the palace writer, so a sweep of the
+        SAME store would contend it, and there is no @daemon sweep-op yet. Run it STANDALONE with the daemon
+        down: `lares_mcp --standalone --sensorium <root>` then sweep (owed: a @daemon sweep-op routing to the
+        holder it already owns, iterating the transcripts through the ONE live writer)."""
+        raise RuntimeError(
+            "sweep is a bulk backfill and the routed @daemon owns the palace writer — a second sweep would "
+            "contend it. Run it STANDALONE with the daemon down: `lares_mcp --standalone --sensorium <root>` "
+            "and call sweep (owed: a @daemon sweep-op that routes to the holder it already owns).")
 
     def recall(self, query: str, k: int = 8, *, wing: "str | None" = None,
                imago: "str | None" = None, sensorium_root: "str | None" = None,

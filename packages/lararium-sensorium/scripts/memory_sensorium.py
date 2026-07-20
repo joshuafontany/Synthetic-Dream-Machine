@@ -37,6 +37,11 @@ _SURFACE_ROOTS = {
     "claude": ("~/.claude/projects", ".jsonl"),
     "codex": ("~/.codex/sessions", ".jsonl"),
 }
+#: Copilot rides ONE global SQLite store, not per-session files — its source-cap reads every session within,
+#: so its "transcripts" list is the single store pointer (present) or empty (absent).
+_COPILOT_STORE = "~/.copilot/session-store.db"
+#: The surfaces a full sweep walks when none is named — every local operator-AI chat source on the machine.
+ALL_SURFACES = ("claude", "codex", "copilot")
 
 
 def memory_sensorium_dir() -> str:
@@ -68,11 +73,15 @@ def _refuse_comparator(root: str) -> None:
 
 def transcripts(surface: str, *, project: "str | None" = None) -> list:
     """Every transcript pointer a surface holds, newest LAST (so a sweep lands oldest-first and the
-    watermark advances monotonically). `project` narrows claude to one project dir."""
+    watermark advances monotonically). `project` narrows claude to one project dir. copilot rides ONE global
+    SQLite store — its pointer list is that single store (present) or empty (absent)."""
+    if surface == "copilot":
+        db = os.path.expanduser(_COPILOT_STORE)
+        return [db] if os.path.isfile(db) else []
     spec = _SURFACE_ROOTS.get(surface)
     if spec is None:
         raise SystemExit(f"memory_sensorium: surface {surface!r} carries no transcript root "
-                         f"(known: {sorted(_SURFACE_ROOTS)}); copilot rides a SQLite store, not files")
+                         f"(known: {sorted(_SURFACE_ROOTS)} + copilot)")
     root, ext = spec
     base = os.path.expanduser(root)
     if project:
@@ -87,7 +96,7 @@ def transcripts(surface: str, *, project: "str | None" = None) -> list:
     return sorted(found, key=lambda p: os.path.getmtime(p))
 
 
-def tri_plane_witness(root: str, *, sample_limit: int = 200) -> dict:
+def tri_plane_witness(root: str, *, sample_limit: int = 200, embed_factory=None) -> dict:
     """The cross-plane read-back: how many cids the THREE planes jointly key, and whether the form
     plane's `struct_hash` agrees with the structure plane's own hash for them.
 
@@ -104,7 +113,7 @@ def tri_plane_witness(root: str, *, sample_limit: int = 200) -> dict:
     from structurepalace_io import StructurePalaceStore
 
     root = os.path.expanduser(root)
-    embed_one, model = make_embed_cap()
+    embed_one, model = (embed_factory or make_embed_cap)()   # the caller's warm embedder, else load one
     # Content derives from the sensorium root.  There is no root-as-content
     # fallback: one address means one stable capability stack.
     content = content_dir_of(root)
@@ -171,16 +180,18 @@ def tri_plane_witness(root: str, *, sample_limit: int = 200) -> dict:
 
 
 def run(root: str, *, surface: str, wing: str, room: str, pointers: list,
-        min_support: int, max_forms: int, max_candidates: int) -> dict:
+        min_support: int, max_forms: int, max_candidates: int, embed_factory=None) -> dict:
     """Capture every pointer onto all three planes, then witness what landed. Each pointer stands a
     FRESH cap-stack (the plane caps hold a per-pass tree map), so idempotence must live in the durable
-    stores, never in process state."""
+    stores, never in process state. `embed_factory` lets a caller (the coordinator) pass its OWN warm
+    embedder so the sweep never reloads the model — absent, one loads here."""
     _refuse_comparator(root)
     os.makedirs(os.path.expanduser(root), exist_ok=True)
     root = os.path.expanduser(root)
 
     stream, model, dim, _paths = compose_memory_stream_sensorium(
-        root, planes_factory=lambda **_route: _planes(root, min_support, max_forms, max_candidates),
+        root, embed_factory=embed_factory,
+        planes_factory=lambda **_route: _planes(root, min_support, max_forms, max_candidates),
     )
     passes = []
     for p in pointers:
@@ -203,7 +214,7 @@ def run(root: str, *, surface: str, wing: str, room: str, pointers: list,
     # Read the planes back off FRESH handles — the witness never trusts the writer's own count.
     return {"root": root, "surface": surface, "wing": wing,
             "pointers": len(pointers), "passes": passes,
-            "witness": tri_plane_witness(root)}
+            "witness": tri_plane_witness(root, embed_factory=embed_factory)}
 
 
 def _planes(root: str, min_support: int, max_forms: int, max_candidates: int):
