@@ -700,6 +700,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).capture(req);
       },
+      sweep: async (input) => {
+        // BULK backfill through the holder that owns the store — it discovers EVERY transcript and captures
+        // each on its ONE warm stream (never a second holder). The routed sweep spine.
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).sweep(req);
+      },
       refreshDerived: async (input) => {
         // RE-DERIVE the whole derived layer through the holder that owns the store — one command, serialized
         // on the capture pipe (queues between passes, never races the writer). `which` narrows to one.

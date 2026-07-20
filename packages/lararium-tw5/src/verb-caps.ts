@@ -121,6 +121,11 @@ export interface DaemonVerbProvider {
   /** Send one source-stream pointer to the serialized Python capture holder. `sensoriumRoot` addresses a
    *  specific sensorium's holder (absent → the memory default). */
   captureSource(input: { surface: "claude" | "codex" | "copilot" | "copilot-vscode"; pointer: string; wing: string; room?: string; sessionId?: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** BULK backfill — capture/RECAPTURE EVERY discovered transcript into a sensorium THROUGH the serialized
+   *  capture holder, on its ONE warm stream (the holder discovers the pointers itself; no second writer).
+   *  `surface` `all` folds claude+codex+copilot; `project`/`limit` narrow. Idempotent (already-landed turns
+   *  skip). `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
+  sweep(input: { surface?: string; wing?: string; project?: string; limit?: number; room?: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
    *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races
    *  the writer. `which` narrows to a single enrichment; `sensoriumRoot` addresses a sensorium (absent → memory). */
@@ -381,6 +386,20 @@ export function captureVerbCap(): CapModule {
           if (!pointer || !wing) throw new Error("capture: args.pointer + args.wing (non-empty strings) required");
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.captureSource({ surface, pointer, wing, ...(room ? { room } : {}), ...(sessionId ? { sessionId } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("sweep", async (args) => {
+          // BULK backfill — the holder discovers EVERY transcript itself and captures each through its ONE
+          // warm stream (no pointer crosses; the holder owns discovery). `surface` `all` (default) folds
+          // claude+codex+copilot; `project`/`limit` narrow. The routed sweep spine `lares sense sweep` /
+          // `pour --all` / the MCP `sweep` all reach.
+          const surface = typeof args["surface"] === "string" ? args["surface"] : "all";
+          const wing = typeof args["wing"] === "string" ? args["wing"] : "";
+          if (!wing) throw new Error("sweep: args.wing (a non-empty string) required");
+          const room = typeof args["room"] === "string" ? args["room"] : undefined;
+          const project = typeof args["project"] === "string" ? (args["project"] as string) : undefined;
+          const limit = typeof args["limit"] === "number" ? (args["limit"] as number) : undefined;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.sweep({ surface, wing, ...(room ? { room } : {}), ...(project ? { project } : {}), ...(limit !== undefined ? { limit } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("refresh", async (args) => {
           // RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline

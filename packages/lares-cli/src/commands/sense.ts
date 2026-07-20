@@ -21,7 +21,7 @@
 import { openMemorySensorium, sensoriumLenses, sensoriumNames, sensoriumDir } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
-import { cmdHarvest, cmdCapture } from "./harvest.js";
+import { cmdHarvest, cmdCapture, cmdSweep } from "./harvest.js";
 import { cmdWorldline } from "./worldline.js";
 import { cmdTelemetry } from "./telemetry.js";
 import { cmdSubagents } from "./subagents.js";
@@ -49,6 +49,7 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
   refresh:   cmdRefresh,
   capture:   cmdCapture,
   pour:      cmdHarvest,
+  sweep:     cmdSweep,       // the BULK backfill on the ONE spine — CLI twin of the MCP `sweep` tool
   teardown:  cmdPalaceTeardown,
   worldline: cmdWorldline,
   telemetry: cmdTelemetry,

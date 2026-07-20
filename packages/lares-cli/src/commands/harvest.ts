@@ -948,6 +948,32 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
  * the same pointer re-derives its ledger and lands only the new tail; the TypeScript layer neither
  * reads exchanges for capture nor holds a capture WAL.
  */
+/** `lares sense sweep` — the BULK backfill, routed to the ONE @daemon `sweep` op: the holder discovers every
+ *  transcript and captures each on its warm stream (no per-session round-trips, no second writer). The
+ *  isomorphic twin of the MCP `sweep` tool — CLI + MCP land on the SAME spine. `--surface all|claude|codex|
+ *  copilot` (default all) · `--wing` (default wing_<user>) · `--project` (narrows claude) · `--limit`.
+ *  Idempotent — a re-run catches up, a fresh sensorium fills fully. */
+export async function cmdSweep(args: ParsedArgs): Promise<number> {
+  const surface = typeof args.options["surface"] === "string" ? (args.options["surface"] as string) : "all";
+  const wing = typeof args.options["wing"] === "string" && args.options["wing"]
+    ? (args.options["wing"] as string) : `wing_${basename(homedir())}`;
+  const sensoriumRoot = typeof args.options["sensorium-root"] === "string" ? (args.options["sensorium-root"] as string) : undefined;
+  const project = typeof args.options["project"] === "string" ? (args.options["project"] as string) : undefined;
+  const limitRaw = typeof args.options["limit"] === "string" ? Number(args.options["limit"]) : undefined;
+  const limit = limitRaw !== undefined && !Number.isNaN(limitRaw) ? limitRaw : undefined;
+  let did = "";
+  try { did = await operatorDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
+  const r = await runVerb("sweep", {
+    surface, wing,
+    ...(project ? { project } : {}),
+    ...(limit !== undefined ? { limit } : {}),
+    ...(sensoriumRoot ? { sensoriumRoot } : {}),
+  }, did, { timeoutMs: TIMEOUT_CEIL_MS });
+  const result = (r.results as Record<string, unknown> | undefined) ?? {};
+  emit(args, { ok: true, data: { surface, wing, result }, human: () => console.log(`[sweep] ${JSON.stringify(result, null, 2)}`) });
+  return 0;
+}
+
 export async function cmdCapture(args: ParsedArgs): Promise<number> {
   const roomGuard = guardRoom(args, "capture");
   if (roomGuard !== null) return roomGuard;
