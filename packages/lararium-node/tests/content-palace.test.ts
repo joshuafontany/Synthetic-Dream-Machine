@@ -8,7 +8,7 @@ import { join } from "node:path";
 
 import { afterEach, describe, expect, test } from "vitest";
 
-import { makeContentPalace, _liveContentHolderCount, type ContentPalace } from "../src/content-palace.js";
+import { makeContentPalace, _liveContentHolderCount, type ContentPalace } from "../src/sensorium.js";
 
 const TEST_TIMEOUT = 60_000;
 

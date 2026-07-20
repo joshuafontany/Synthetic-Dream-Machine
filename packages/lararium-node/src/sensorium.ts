@@ -31,11 +31,27 @@
  * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance · lar:///ha.ka.ba/lares/api/pono/has-stack#runtime-twin
  */
 
-import { existsSync, readFileSync } from "node:fs";
-import { isAbsolute, join, relative } from "node:path";
-import type { PersistencePolicy, SensoriumContract, SensoriumOrderEvidence, Variance } from "@lararium/mesh";
-import { declareSensoriumContract, SHEAF_PLANES, COSHEAF_PLANES } from "@lararium/mesh";
+import { spawn } from "node:child_process";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
+import { isAbsolute, join, relative, resolve } from "node:path";
+import type {
+  PersistencePolicy, SensoriumContract, SensoriumOrderEvidence, Variance,
+  Testimony, Witness, StoreCode,
+} from "@lararium/mesh";
+import {
+  declareSensoriumContract, SHEAF_PLANES, COSHEAF_PLANES,
+  canonicalJsonBytes, defaultCryptoProvider, sha256Hex,
+  reentryPrior, admit as keelAdmit, storeCodeFrom, observeClaim,
+  WITNESS_POLICY,
+} from "@lararium/mesh";
+import {
+  resolveComputeCapEnv, resolveFormEncoderSpawn, resolveContentPalaceSpawn, resolvePersistencePalaceSpawn,
+} from "@lararium/mempalace";
+import type { MoveSkeleton, ConstructiconBasis, BearingFacets } from "@lararium/tw5/form-layer";
 import { atomicWriteFileSync } from "./fs-atomic.js";
+import { makeSearchCap, type SearchCap, type SearchCapOptions } from "./search-cap.js";
+import { makeKgCap, type KgCap, type KgCapOptions } from "./kg-cap.js";
+import { makeGraphCap, type GraphCap, type GraphCapOptions } from "./graph-cap.js";
 
 /** The manifest schema version — bump only on a breaking shape change. */
 export const SENSORIUM_SCHEMA = 1 as const;
@@ -345,4 +361,860 @@ export function readManifest(sensoriumDir: string): SensoriumManifest | null {
 /** Write a sensorium manifest atomically (write-temp-then-rename) so a reader/crash never tears it. */
 export function writeManifest(sensoriumDir: string, m: SensoriumManifest): void {
   atomicWriteFileSync(manifestPath(sensoriumDir), JSON.stringify(parseSensoriumManifest(m), null, 2) + "\n");
+}
+
+// ============================================================================
+// palace-holder — the SHARED palace-instance transport cap (folded from palace-holder.ts)
+// ============================================================================
+/**
+ * palace-holder — the SHARED palace-instance transport cap (the @daemon's TS side).
+ *
+ * The nameless palace-instance model, one level up from the python sidecar-caps collapse
+ * (b18235f6): a palace client = its #has-stack of caps composed at a root, NOT a bespoke
+ * holder per store with copy-pasted serve machinery. This module IS the one cap every
+ * local palace-instance #has — the NDJSON line-RPC transport over a persistent python
+ * `serve` holder, ref-counted to ONE process per canonical palace dir (reap-don't-pile).
+ *
+ * The caps a palace-instance composes from here:
+ *   - the TRANSPORT cap  → {@link PalaceHolder} (this module): spawn-once, line-RPC, stderr
+ *     surfacing, ping handshake, self-healing registry, ref-counted singleton-per-dir.
+ *   - the REGISTRY cap   → {@link PalaceHolderRegistry}: ONE map per palace TYPE, so two
+ *     palace types serving the SAME dir never collide (structurepalace ⟂ formpalace).
+ * Each store (structurepalace · formpalace) then #has only its own OP SURFACE — a thin typed
+ * facade of `holder.send(op, fields)` calls — and nothing of the transport machinery.
+ *
+ * The honest grain (NOT a god base-class — the sidecar 2-shapes lesson carried up): the
+ * two LOCAL stores split by op-surface, but BOTH ride the identical transport, so the
+ * transport collapses to ONE file while the op-surfaces stay distinct. A third shape, the
+ * MESHPALACE, would compose this SAME transport plus a SOURCE-FEED cap (see {@link PalaceFeedCap})
+ * — modeled here, federation deferred.
+ *
+ * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#isomorphic-telemetry-vm
+ */
+
+
+/** A child process plus the read-only stream surface the line-RPC needs (test-injectable). */
+export interface PalaceHolderProc {
+  readonly stdin: NodeJS.WritableStream | null;
+  readonly stdout: NodeJS.ReadableStream | null;
+  readonly stderr: NodeJS.ReadableStream | null;
+  on(event: "exit", cb: (code: number | null) => void): void;
+  on(event: "error", cb: (err: Error) => void): void;
+  kill(): void;
+}
+
+/** Test seam: produce the holder process for a canonical palace dir (defaults to a python helper). */
+export type PalaceHolderSpawn = (canonicalDir: string) => PalaceHolderProc;
+
+/** The resolved spawn inputs a python `serve` holder needs (the shape StructurePalaceSpawn / FormEncoderSpawn share). */
+export interface ResolvedServeSpawn {
+  /** the venv-aware interpreter, or null when none holds mempalace */
+  readonly python: string | null;
+  /** the helper script (full path) to run `serve` on */
+  readonly script: string;
+  /** the mempalace submodule root — the spawn cwd + PYTHONPATH so `import mempalace` resolves */
+  readonly submoduleRoot: string;
+  /** whether {@link ResolvedServeSpawn.script} exists on disk */
+  readonly scriptPresent: boolean;
+}
+
+/**
+ * Build the default holder spawn for a python `serve` palace store: resolve the venv-aware python
+ * + helper script (lazily, per spawn, via `resolveSpawn`), then run `<python> <script> serve
+ * --palace <dir>` with PYTHONPATH reaching the mempalace submodule. structurepalace + formpalace share
+ * this verbatim — the only divergence was the resolve fn, lifted to a parameter here.
+ */
+export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn, opts: { readonly palaceless?: boolean } = {}): PalaceHolderSpawn {
+  return (canonicalDir: string): PalaceHolderProc => {
+    const { python, script, submoduleRoot, scriptPresent } = resolveSpawn();
+    if (!python) throw new Error("no python holds mempalace — create ~/.venv and install the sidecar (`lares wake --install`)");
+    if (!scriptPresent) throw new Error(`serve helper missing at ${script}`);
+    // PYTHONPATH=submoduleRoot makes `import mempalace` resolve (it is not pip-installed); the venv
+    // python supplies chromadb. `python script.py` sets sys.path[0] to the SCRIPT dir, so PYTHONPATH
+    // is the seam that reaches the submodule package.
+    // The GPU compute cap (LD_LIBRARY_PATH → CUDA runtime libs + the device hint): the `serve` holder
+    // opens its chroma collection, which builds the default onnxruntime embedder — and onnxruntime-gpu
+    // HARD-fails to import (`libcudart.so.NN`) without the CUDA libs on the loader path. resolveComputeCapEnv
+    // walks torch's bundled nvidia wheels; absent (the QA box) it adds only the device hint and degrades to CPU.
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
+    // A palace-less holder (the embed cap) serves `serve` with NO --palace: the model is the
+    // resource, not a store dir; `canonicalDir` is only the registry KEY, never passed to python.
+    const argv = opts.palaceless ? [script, "serve"] : [script, "serve", "--palace", canonicalDir];
+    return spawn(python, argv, {
+      cwd: submoduleRoot,
+      env,
+      stdio: ["pipe", "pipe", "pipe"],
+    }) as unknown as PalaceHolderProc;
+  };
+}
+
+/** Canonicalize a palace dir the way the python side will (realpath when it exists, else resolve). */
+export function canonicalDirOf(dir: string): string {
+  try {
+    return realpathSync(dir);
+  } catch {
+    return resolve(dir);
+  }
+}
+
+interface Pending {
+  resolve: (value: unknown) => void;
+  reject: (err: Error) => void;
+  timer: ReturnType<typeof setTimeout>;
+}
+
+/**
+ * The TRANSPORT cap — one live holder for one canonical palace dir. Owns the child, speaks
+ * NDJSON line-RPC ({id, op, ...fields} → {id, ok, result|error}) over stdin/stdout, buffers
+ * the stderr tail and folds it into faults (the silent-error footgun cure), ref-counts its
+ * users, and self-heals (drops itself from its registry on death so the next call respawns ONE).
+ */
+export class PalaceHolder {
+  private proc: PalaceHolderProc | null = null;
+  private starting: Promise<void> | null = null;
+  private nextId = 1;
+  private readonly pending = new Map<number, Pending>();
+  private stdoutBuf = "";
+  /** Last ~4KB of stderr — a ChromaDB permission/disk-full error surfaces here, never swallowed. */
+  private stderrTail = "";
+  refs = 0;
+
+  constructor(
+    /** the canonical palace dir this holder serves — the registry key */
+    readonly canonicalDir: string,
+    private readonly spawnProc: PalaceHolderSpawn,
+    private readonly timeoutMs: number,
+    /** error-message prefix, e.g. "structurepalace" | "form_encoder" */
+    private readonly label: string,
+    /** drop this holder from its registry on death (self-heal) */
+    private readonly dropSelf: (holder: PalaceHolder) => void,
+  ) {}
+
+  private async ensure(): Promise<void> {
+    if (this.proc) return;
+    if (this.starting) return this.starting;
+    this.starting = new Promise<void>((res, rej) => {
+      const proc = this.spawnProc(this.canonicalDir);
+      this.proc = proc;
+      proc.stdout?.setEncoding?.("utf8");
+      proc.stdout?.on?.("data", (chunk: string) => this.onStdout(chunk));
+      proc.stderr?.setEncoding?.("utf8");
+      // stderr carries library/banner noise on a healthy boot, but ALSO the real fault on a sick one
+      // (ChromaDB permission denied, disk full, an import blow-up). BUFFER its tail and SURFACE it on
+      // failure — never swallow it to a noop. stdout stays the JSON-RPC channel.
+      proc.stderr?.on?.("data", (chunk: string) => { this.stderrTail = (this.stderrTail + chunk).slice(-4096); });
+      proc.on("exit", (code) => this.onDown(this.withStderr(new Error(`${this.label} holder exited (code ${code ?? "null"})`))));
+      proc.on("error", (err) => this.onDown(this.withStderr(err)));
+      // Handshake: a ping confirms the holder (and its chroma collection) opened before any op rides.
+      this.request("ping", {}).then(() => res()).catch(rej);
+    });
+    try {
+      await this.starting;
+    } finally {
+      this.starting = null;
+    }
+  }
+
+  private onStdout(chunk: string): void {
+    this.stdoutBuf += chunk;
+    let idx: number;
+    while ((idx = this.stdoutBuf.indexOf("\n")) !== -1) {
+      const line = this.stdoutBuf.slice(0, idx).trim();
+      this.stdoutBuf = this.stdoutBuf.slice(idx + 1);
+      if (!line) continue;
+      let msg: { id?: unknown; ok?: boolean; result?: unknown; error?: string };
+      try {
+        msg = JSON.parse(line);
+      } catch {
+        continue; // non-JSON on stdout (stray banner) — ignore
+      }
+      if (typeof msg.id !== "number") continue;
+      const p = this.pending.get(msg.id);
+      if (!p) continue;
+      this.pending.delete(msg.id);
+      clearTimeout(p.timer);
+      if (msg.ok === false) p.reject(new Error(msg.error ?? `${this.label} error`));
+      else p.resolve(msg.result);
+    }
+  }
+
+  /** Fold the buffered stderr tail into an error so a python-side fault reaches the caller, not a noop. */
+  private withStderr(err: Error): Error {
+    const tail = this.stderrTail.trim();
+    if (tail) err.message = `${err.message}\n  holder stderr: ${tail}`;
+    return err;
+  }
+
+  private onDown(err: Error): void {
+    for (const p of this.pending.values()) {
+      clearTimeout(p.timer);
+      p.reject(err);
+    }
+    this.pending.clear();
+    this.proc = null;
+    // Self-healing: drop from the registry so the next call respawns ONE fresh holder.
+    this.dropSelf(this);
+  }
+
+  private request(op: string, fields: Record<string, unknown>): Promise<unknown> {
+    const id = this.nextId++;
+    return new Promise<unknown>((res, rej) => {
+      const timer = setTimeout(() => {
+        this.pending.delete(id);
+        rej(new Error(`${this.label} '${op}' timed out after ${this.timeoutMs}ms`));
+      }, this.timeoutMs);
+      this.pending.set(id, { resolve: res, reject: rej, timer });
+      try {
+        if (!this.proc?.stdin) throw new Error(`${this.label} holder not started`);
+        this.proc.stdin.write(JSON.stringify({ id, op, ...fields }) + "\n");
+      } catch (err) {
+        this.pending.delete(id);
+        clearTimeout(timer);
+        rej(err as Error);
+      }
+    });
+  }
+
+  /** Ensure the holder is up (handshake once), then issue one RPC and await its result. */
+  async send(op: string, fields: Record<string, unknown> = {}): Promise<unknown> {
+    await this.ensure();
+    return this.request(op, fields);
+  }
+
+  shutdown(): void {
+    this.onDown(new Error(`${this.label} holder closed`));
+    try {
+      this.proc?.stdin?.end?.();
+    } catch { /* ignore */ }
+    this.proc?.kill?.();
+  }
+}
+
+/**
+ * The REGISTRY cap — ONE holder per canonical palace dir, scoped to ONE palace TYPE. Each
+ * palace store instantiates its OWN registry, so structurepalace's holders and formpalace's holders
+ * stay separate even when they happen to serve the same dir. Makes "one holder, never a pile"
+ * true and gives the store a uniform acquire/release lifecycle.
+ */
+export class PalaceHolderRegistry {
+  private readonly holders = new Map<string, PalaceHolder>();
+
+  /** @param label error-message prefix shared by every holder this registry makes. */
+  constructor(private readonly label: string) {}
+
+  /** Get-or-create the singleton holder for `canonicalDir` and add a reference to it. */
+  acquire(canonicalDir: string, spawnProc: PalaceHolderSpawn, timeoutMs: number): PalaceHolder {
+    let holder = this.holders.get(canonicalDir);
+    if (!holder) {
+      holder = new PalaceHolder(canonicalDir, spawnProc, timeoutMs, this.label, (h) => {
+        if (this.holders.get(h.canonicalDir) === h) this.holders.delete(h.canonicalDir);
+      });
+      this.holders.set(canonicalDir, holder);
+    }
+    holder.refs += 1;
+    return holder;
+  }
+
+  /** Release one reference; kill the process (and drop it) when the last reference closes. */
+  release(holder: PalaceHolder): void {
+    holder.refs -= 1;
+    if (holder.refs <= 0) {
+      holder.shutdown(); // shutdown → onDown → dropSelf removes it from the map
+    }
+  }
+
+  /** How many holder processes are live — proves "one holder per palace, never a pile". */
+  size(): number {
+    return this.holders.size;
+  }
+}
+
+/**
+ * A COMPOSED HOLDER — the send/close handle onto one held line-RPC subprocess. The shape every
+ * cap that rides a python holder returns (palace store · encoder · a future consume-sidecar).
+ */
+export interface ComposedHolder {
+  /** issue one line-RPC to the holder (the op-surface's single verb). */
+  send(op: string, fields?: Record<string, unknown>): Promise<unknown>;
+  /** release this reference; the holder process dies when the last reference closes. Idempotent. */
+  close(): Promise<void>;
+}
+
+/** ONE registry per label — module-global so a label's holders singleton across composes. */
+const holderRegistries = new Map<string, PalaceHolderRegistry>();
+
+/**
+ * composeHolder — the GENERAL held-subprocess cap: one ref-counted line-RPC holder per `key` within
+ * a `label` registry (+ a `send`/`close` pair). Knows NOTHING of "palace" — a nameless entity that
+ * #has {held-process · line-RPC · one-per-key registry}. `composePalace` and `composeEncoder` both
+ * COMPOSE this (siblings, neither over the other — the IoC that dissolves the palace-less sentinel):
+ * a palace keys by its store DIR; an encoder keys by its LABEL (the model is the resource, no dir).
+ * `key` is handed to `spawn` too — a palace-spawn reads it as the dir; an encoder-spawn ignores it.
+ */
+export function composeHolder(label: string, key: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedHolder {
+  let registry = holderRegistries.get(label);
+  if (!registry) { registry = new PalaceHolderRegistry(label); holderRegistries.set(label, registry); }
+  const reg = registry;
+  const holder = reg.acquire(key, spawn, timeoutMs);
+  let closed = false;
+  return {
+    send: (op: string, fields: Record<string, unknown> = {}) => holder.send(op, fields),
+    close: async (): Promise<void> => { if (closed) return; closed = true; reg.release(holder); },
+  };
+}
+
+/** A PALACE holder — composeHolder keyed by the canonical store DIR (one holder per dir per label). */
+export function composePalace(label: string, dir: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedHolder {
+  return composeHolder(label, canonicalDirOf(dir), spawn, timeoutMs);
+}
+
+/** An ENCODER holder — composeHolder keyed by the LABEL (palace-less: ONE holder, the model is the
+ *  resource; the spawn ignores the key). No sentinel dir — the sibling of composePalace. */
+export function composeEncoder(label: string, spawn: PalaceHolderSpawn, timeoutMs: number): ComposedHolder {
+  return composeHolder(label, label, spawn, timeoutMs);
+}
+
+/** How many holder processes a label holds live (proves "one holder per label, never a pile"). */
+export function livePalaceHolderCount(label: string): number {
+  return holderRegistries.get(label)?.size() ?? 0;
+}
+
+/**
+ * MESHPALACE shape — FLAGGED, MODELED, NOT BUILT HERE.
+ *
+ * The meshpalace = a mempalace-instance fed by the @meshpalace Automerge doc through a FEED
+ * ADAPTER, AND the cross-Lararium bridge (peer Lararia federate their ≥meme memes through it).
+ * As a palace-instance it #has the SAME transport cap above PLUS this feed cap — the doc→palace
+ * feed adapter. The op-surface would be read-oriented (search/get over
+ * the federated corpus), the FEED replacing the per-turn local `encodeStore`/`put` write path.
+ *
+ * The full DreamNet peer-federation wiring (the @meshpalace AutomergeDocStore FLOW-map,
+ * mesh-memegraph, manaoio, the read-face wire) is a SEPARATE, larger mesh-domain piece and
+ * is NOT implemented here. This interface only names the seam so the shape is ready.
+ */
+export interface PalaceFeedCap {
+  /** Pull the next batch of source records (e.g. ≥meme drawers off the @meshpalace doc) to index. */
+  pull(sinceWatermark?: string): Promise<{ records: readonly unknown[]; watermark: string }>;
+}
+
+// ============================================================================
+// content-palace — the Li-triple CONTENT plane (folded from content-palace.ts)
+// ============================================================================
+/**
+ * content-palace — the Li-triple's CONTENT plane for NON-MEMORY targeted content: a caller-vector
+ * store over arbitrary target corpora (Twain · TiddlyWiki5 · the Kumulipo · Discordian Catma · any
+ * ingest target) that are NOT the operator's session-memory (the mempalace stays the private
+ * interoception content). Each target gets its own content palace dir.
+ *
+ * THE CAP-STACK: content-palace = the SHARED transport cap ({@link composePalace}, palace-holder.ts)
+ * composed with its OWN thin op-surface — `put`/`get`/`search` over the python `content_io.py serve`
+ * holder. Caller-vector (the embedding arrives on the wire, no model load) — uniform with structure/
+ * form/persistence AND split-ready: the parallel-ingest embeds upstream, this commits the vector.
+ *
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu (the content plane)
+ */
+
+
+
+/** the palace label — the transport registry key. */
+const LABEL_CONTENT = "content";
+
+/** A stored content record read back by cid: the text (document) + its where-filterable metadata. */
+export interface ContentEntry {
+  readonly cid: string;
+  readonly document: string;
+  readonly metadata: Record<string, unknown>;
+}
+
+/** One content-similarity match — carries the document so recall needs no follow-up get. */
+export interface ContentMatch {
+  readonly cid: string;
+  readonly distance: number | null;
+  readonly document: string;
+  readonly metadata: Record<string, unknown>;
+}
+
+/** One scanned record — carries its embedding OUT (the guest-import read leg: copy store→store). */
+export interface ScannedRecord {
+  readonly cid: string;
+  readonly document: string;
+  readonly embedding: number[] | null;
+  readonly metadata: Record<string, unknown>;
+}
+
+/** A page of a scan: the records + the offset to resume from (`next` null = drained). */
+export interface ScanPage {
+  readonly records: ScannedRecord[];
+  readonly next: number | null;
+  readonly total: number;
+}
+
+/**
+ * The status/taxonomy read: distinct wings/rooms/halls + an entity frequency map, over a census.
+ *
+ * `total` counts what the STORE holds; `scanned` counts what the aggregation WALKED, and `partial`
+ * fires when the walk stopped short. A reader that collapses the two takes a scan limit for a
+ * population — the aggregate fields below describe the `scanned` prefix, never the whole census.
+ */
+export interface Taxonomy {
+  readonly total: number;
+  readonly scanned: number;
+  readonly partial: boolean;
+  readonly wings: string[];
+  readonly rooms: string[];
+  readonly halls: string[];
+  readonly entities: Record<string, number>;
+}
+
+export interface ContentPalace {
+  /**
+   * Store one content record: `cid` (a content-hash or stable target id), the `text` (rides the
+   * document slot), the caller-supplied `embedding`, and where-filterable `metadata`. Idempotent on
+   * cid (a re-put overwrites). THROWS if the holder did not persist.
+   */
+  put(cid: string, text: string, embedding: readonly number[], metadata?: Record<string, unknown>): Promise<{ cid: string }>;
+  /** Read a content record back by cid, or null if absent. */
+  get(cid: string): Promise<ContentEntry | null>;
+  /** Nearest content by vector similarity, optional where-filter. */
+  search(embedding: readonly number[], opts?: { k?: number; where?: Record<string, unknown> }): Promise<ContentMatch[]>;
+  /** Read a PAGE of records WITH embeddings (the guest-import read leg — copy store→store, no re-embed). */
+  scan(opts?: { offset?: number; limit?: number }): Promise<ScanPage>;
+  /** The status/taxonomy read — distinct wings/rooms/halls + entity frequencies + drawer total. */
+  taxonomy(opts?: { limit?: number }): Promise<Taxonomy>;
+  /** Release this reference; the holder process dies when the last reference closes. */
+  close(): Promise<void>;
+}
+
+/** Test seam alias: how the holder process is produced (defaults to the python helper). */
+export type ContentHolderSpawn = PalaceHolderSpawn;
+
+/** Default holder spawn: the venv-aware python running `content_io.py serve --palace <dir>`. */
+const defaultContentHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveContentPalaceSpawn);
+
+export interface ContentPalaceOptions {
+  /** per-call RPC timeout (ms); default 30s (covers the one-time chroma open on first call). */
+  readonly timeoutMs?: number;
+  /** test seam: override how the holder process is produced (defaults to the python helper). */
+  readonly spawn?: ContentHolderSpawn;
+}
+
+/**
+ * Open a CONTENT store rooted at `dir` (a per-target palace dir). Composes the shared transport cap
+ * with the content op-surface; `close()` releases this reference.
+ */
+export function makeContentPalace(dir: string, opts: ContentPalaceOptions = {}): ContentPalace {
+  const p = composePalace(LABEL_CONTENT, dir, opts.spawn ?? defaultContentHolderSpawn, opts.timeoutMs ?? 30_000);
+
+  return {
+    async put(cid, text, embedding, metadata = {}): Promise<{ cid: string }> {
+      await p.send("put", { cid, text, embedding, metadata });
+      return { cid };
+    },
+
+    async get(cid: string): Promise<ContentEntry | null> {
+      return (await p.send("get", { cid })) as ContentEntry | null;
+    },
+
+    async search(embedding, opts2 = {}): Promise<ContentMatch[]> {
+      const res = (await p.send("search", {
+        embedding, k: opts2.k ?? 8,
+        ...(opts2.where !== undefined ? { where: opts2.where } : {}),
+      })) as { matches: ContentMatch[] };
+      return res.matches ?? [];
+    },
+
+    async scan(opts2 = {}): Promise<ScanPage> {
+      const res = (await p.send("scan", { offset: opts2.offset ?? 0, limit: opts2.limit ?? 256 })) as Partial<ScanPage> | null;
+      return { records: res?.records ?? [], next: res?.next ?? null, total: res?.total ?? 0 };
+    },
+
+    async taxonomy(opts2 = {}): Promise<Taxonomy> {
+      const r = (await p.send("taxonomy", { limit: opts2.limit ?? 4096 })) as Partial<Taxonomy> | null;
+      const total = r?.total ?? 0;
+      const scanned = r?.scanned ?? 0;
+      return {
+        total,
+        scanned,
+        partial: r?.partial ?? scanned < total,
+        wings: r?.wings ?? [],
+        rooms: r?.rooms ?? [],
+        halls: r?.halls ?? [],
+        entities: r?.entities ?? {},
+      };
+    },
+
+    close: p.close,
+  };
+}
+
+/** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
+export function _liveContentHolderCount(): number {
+  return livePalaceHolderCount(LABEL_CONTENT);
+}
+
+// ============================================================================
+// formpalace — the LIVING-GRAMMAR FORM store (folded from formpalace.ts)
+// ============================================================================
+/**
+ * formpalace — the LIVING-GRAMMAR FORM store: a LOCAL, caller-vector store for the per-turn
+ * FORM-vector (the two-planes form-capture's CONTINUOUS plane, encoded). Backed by a "form"
+ * collection inside a mempalace instance (the same ChromaDB engine, the SECOND collection beside
+ * the palace default), reached through ONE persistent Python holder (`form_encoder.py serve
+ * --palace <dir>`). It NEVER federates — local, the eidetic↔grammatical bridge twin to `.structurepalace`.
+ *
+ * Each turn's move-skeleton (emitMoveSkeleton, P1) + constructicon basis (buildConstructiconBasis,
+ * P0) ride to the holder, which ENCODES the sparse fuzzy-membership form-vector (form_encoder, P2)
+ * and STORES it as a caller-supplied dense vector (densified to basis.dimension), keyed by the
+ * turn's `verbatim_sha` — the SAME key the content drawer carries as `lar_verbatim_sha`, so the
+ * FORM graph and the CONTENT graph (the existing verbatim mempalace) fuse on one join key. The
+ * embedding model is never invoked (we always supply our own vector), mirroring `.structurepalace`.
+ *
+ * THE CAP-STACK (the palace-instance #has): formpalace = the SHARED palace transport
+ * ({@link PalaceHolderRegistry}, palace-holder.ts) composed with its OWN op-surface —
+ * `encode_store`/`query`/`filter`/`get` over the python form-encoder holder. DISTINCT from
+ * structurepalace (per-turn form-vectors keyed by verbatim_sha vs per-structure AST drawers keyed by
+ * structural hash, no AST payload stored here) but riding the IDENTICAL transport cap — two
+ * op-surface shapes, one transport, no god base-class (the sidecar 2-shapes lesson, one up).
+ *
+ * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
+ */
+
+
+
+/** the palace label — the transport registry key (one holder singleton per label per dir). */
+const LABEL_FORM = "form";
+
+/** The serializable basis shape the Python encoder consumes (its `index` is re-derived from order). */
+export interface SerializedBasis {
+  readonly axes: ConstructiconBasis["axes"];
+  readonly dimension: number;
+}
+
+/** The metadata stamped on a form entry — the where-filterable facets + the content-join key.
+ *  Carries the {@link BearingFacets} (bearing_w1/w2/w3/root/path/frag/grade) too: the aim/yield
+ *  bearing descended into flat scalars, where-filterable for the STRUCTURED bearing recall path
+ *  (multi-graph-recall#makeFormSearch). Stamped off `skeleton.bearing.facets` in
+ *  node-capture-engine#makeFormSplitFlush; the python store carries any `bearing_*` key through. */
+export interface FormMetadata extends BearingFacets {
+  /** the confidence register band (e.g. "synthesis"), for where-filtering */
+  readonly register?: string;
+  /** the deepest grammar-stack layer the turn touched */
+  readonly grammar_layer?: string;
+  /** the DECLARED HUD attention grain (0..20 Aperture) — the paragraph-scale recall knob (P6) */
+  readonly aperture?: number;
+  /** sha256 of the canonical placeholdered-graph — the FORM recurrence key */
+  readonly struct_hash?: string;
+  /** sha256 of the verbatim turn — the CROSS-GRAPH join key to the content drawer */
+  readonly verbatim_sha: string;
+}
+
+/** The outcome of an encode+store round-trip. */
+export interface FormStoreResult {
+  readonly key: string;
+  readonly dimension: number;
+  readonly count: number;
+  readonly conformance: number;
+  readonly slor: { readonly live: boolean; readonly model: string | null; readonly reason: string };
+  readonly form_vector: { readonly indices: readonly number[]; readonly values: readonly number[] };
+}
+
+/** One form-similarity match. */
+export interface FormMatch {
+  readonly key: string;
+  readonly distance: number | null;
+  readonly metadata: Record<string, unknown>;
+}
+
+/** A stored form entry read back by key. */
+export interface FormEntry {
+  readonly key: string;
+  readonly metadata: Record<string, unknown>;
+  readonly document: string | null;
+}
+
+export interface FormPalace {
+  /**
+   * Encode a turn's move-skeleton against the basis, then STORE the form-vector keyed by its
+   * `verbatim_sha`. Returns the encode+store outcome. THROWS if the holder did not persist, so the
+   * caller never stamps a dangling form reference (the content path stays intact regardless).
+   */
+  encodeStore(input: {
+    skeleton: MoveSkeleton;
+    basis: SerializedBasis;
+    key: string;
+    metadata: FormMetadata;
+  }): Promise<FormStoreResult>;
+  /** Nearest turns by FORM similarity (encode the query skeleton, then search), optional where-filter. */
+  query(input: {
+    skeleton: MoveSkeleton;
+    basis: SerializedBasis;
+    nResults?: number;
+    where?: Record<string, unknown>;
+  }): Promise<FormMatch[]>;
+  /**
+   * METADATA-ONLY filter — NO vector. The structured bearing / keyword recall path: match form
+   * entries by a `where`-clause alone (chroma `.get(where=…)`), so a bearing root or a register
+   * scope yields matches without encoding a query skeleton. `distance` is null on each match (a
+   * where-match carries no similarity ranking). A null/empty `where` returns up to `nResults` of
+   * the collection; a where matching nothing returns []. (multi-graph-recall#makeFormSearch.)
+   */
+  filter(input: { where?: Record<string, unknown>; nResults?: number }): Promise<FormMatch[]>;
+  /** Read a form entry back by its key (the verbatim_sha), or null if absent. */
+  get(key: string): Promise<FormEntry | null>;
+  /** Release this reference; the holder process is killed when the last reference closes. */
+  close(): Promise<void>;
+}
+
+/** Test seam alias: how the holder process is produced (defaults to the python helper). */
+export type FormHolderSpawn = PalaceHolderSpawn;
+
+/** Default holder spawn: the venv-aware python running `form_encoder.py serve --palace <dir>`. */
+const defaultFormHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveFormEncoderSpawn);
+
+export interface FormPalaceOptions {
+  /** per-call RPC timeout (ms); default 60s (covers the one-time chroma open + first encode). */
+  readonly timeoutMs?: number;
+  /** test seam: override how the holder process is produced (defaults to the python helper). */
+  readonly spawn?: FormHolderSpawn;
+}
+
+/**
+ * Open the FORM store rooted at `dir` — a mempalace instance's "form" collection. Composes the
+ * shared transport cap (ref-counted ONE holder per canonical dir) with the form op-surface;
+ * `close()` releases this reference and kills the process when the last reference closes.
+ */
+export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormPalace {
+  // Compose the SHARED transport cap; layer only the form op-surface below (the sidecar-2-shapes ward).
+  const p = composePalace(LABEL_FORM, dir, opts.spawn ?? defaultFormHolderSpawn, opts.timeoutMs ?? 60_000);
+
+  return {
+    async encodeStore({ skeleton, basis, key, metadata }): Promise<FormStoreResult> {
+      return (await p.send("encode_store", { key, skeleton, basis, metadata })) as FormStoreResult;
+    },
+
+    async query({ skeleton, basis, nResults, where }): Promise<FormMatch[]> {
+      const res = (await p.send("query", {
+        skeleton, basis, n_results: nResults ?? 10,
+        ...(where !== undefined ? { where } : {}),
+      })) as { matches: FormMatch[] };
+      return res.matches ?? [];
+    },
+
+    async filter({ where, nResults }): Promise<FormMatch[]> {
+      const res = (await p.send("filter", {
+        n_results: nResults ?? 10,
+        ...(where !== undefined ? { where } : {}),
+      })) as { matches: FormMatch[] };
+      return res.matches ?? [];
+    },
+
+    async get(key: string): Promise<FormEntry | null> {
+      return (await p.send("get", { key })) as FormEntry | null;
+    },
+
+    close: p.close,
+  };
+}
+
+/** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
+export function _liveFormHolderCount(): number {
+  return livePalaceHolderCount(LABEL_FORM);
+}
+
+// ============================================================================
+// persistence-palace — the Testimony cosheaf cap (folded from persistence-palace.ts)
+// ============================================================================
+/**
+ * persistence-palace — the TS op-surface for a PersistencePalace instance: the cap ANY sensorium
+ * composes to persist its readings as Testimony atoms. It BRIDGES the two halves that must never
+ * fuse — the DUMB python store (persistence_io.py: put/get/witness/neighbors, no logic) and the
+ * SOVEREIGN TS keel (persistence-keel.ts: the standing law, the admit gate, mode=halfLife). The
+ * store persists; the keel decides; this surface wires them over the shared holder transport.
+ *
+ * THE CAP-STACK: persistence-palace = the SHARED palace transport ({@link PalaceHolder} +
+ * {@link PalaceHolderRegistry}, palace-holder.ts) composed with its OWN op-surface over the python
+ * `persistence_io.py serve` holder. It owns NONE of the transport machinery (that lives once in the
+ * shared cap) and NONE of the lifecycle law (that lives once in the mesh keel) — a thin bridge only.
+ *
+ * The atom's id is CONTENT-ADDRESSED (sha256 of {signer, frontier, assertion}) — pure-TS, computed
+ * here, so an identical testimony collides idempotently and neither side waits on the other's id.
+ *
+ * Meme: lar:///ha.ka.ba/lararium/mesh/persistence-keel · lar:///ha.ka.ba/lares/api/pono/has-stack
+ */
+
+
+
+/** the palace label — the transport registry key. */
+const LABEL_PERSISTENCE = "persistence";
+
+/** A testimony's provenance as the caller presents it (attribution + causal position). */
+export interface RecordProvenance {
+  readonly signer: string;
+  readonly frontier: string;
+}
+
+export interface PersistencePalace {
+  /**
+   * Record a reading as a Testimony (born silent). Content-addressed by {signer, frontier,
+   * assertion} — an identical re-record collides idempotently. `document` is the OPTIONAL text
+   * projection (the "past text" slot). Returns the testimony id. THROWS if the store did not persist.
+   */
+  record(kind: string, assertion: readonly number[], provenance: RecordProvenance, pubinfo?: Record<string, unknown>, document?: string): Promise<{ claimCid: string }>;
+  /** Load a Testimony by id, or null if absent. */
+  get(claimCid: string): Promise<Testimony | null>;
+  /** Append a witness edge (corroboration polarity +1 / defeat −1) — the store persists it (move-not-delete). */
+  witness(claimCid: string, edge: Witness): Promise<{ ok: boolean; witnesses: number }>;
+  /**
+   * The FEP re-entry read THROUGH the keel: load the testimony, derive standing+voice under the
+   * policy (mode = policy.halfLife), return the low-standing prior. Null if the testimony is absent.
+   */
+  reentry(claimCid: string, policy?: PersistencePolicy, now?: number): Promise<{ value: readonly number[]; standing: number; voice: "silent" | "spoken" } | null>;
+  /**
+   * The admit gate THROUGH the keel: score the candidate against the store's OWN code — the diagonal
+   * predictive against its pooled-scale sibling — and admit iff the store's code cannot beat ignorance
+   * on it. The write-time decision the caller enacts before {@link record}. Carries no threshold.
+   */
+  admit(candidate: readonly number[], policy?: PersistencePolicy): Promise<{ admit: boolean; score: number; bitsSaved: number }>;
+  /** Release this reference to the shared holder; the process dies when the last reference closes. */
+  close(): Promise<void>;
+}
+
+/** Default holder spawn: the venv-aware python running `persistence_io.py serve --palace <dir>`. */
+const defaultPersistenceHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolvePersistencePalaceSpawn);
+
+export interface PersistencePalaceOptions {
+  /** per-call RPC timeout (ms); default 30s (covers the one-time chroma open on first call). */
+  readonly timeoutMs?: number;
+  /** test seam: override how the holder process is produced (defaults to the python helper). */
+  readonly spawn?: PalaceHolderSpawn;
+}
+
+/**
+ * Open a PersistencePalace instance rooted at `dir`. Composes the shared transport cap (ref-counted
+ * ONE holder per canonical dir) with the persistence op-surface + the mesh keel; `close()` releases
+ * this reference. Each sensorium composes its OWN instance — persistence is a cap, not a singleton.
+ */
+export function makePersistencePalace(dir: string, opts: PersistencePalaceOptions = {}): PersistencePalace {
+  // Compose the SHARED transport cap; layer the persistence op-surface + the mesh keel below.
+  const p = composePalace(LABEL_PERSISTENCE, dir, opts.spawn ?? defaultPersistenceHolderSpawn, opts.timeoutMs ?? 30_000);
+
+  const claimCidOf = (kind: string, assertion: readonly number[], prov: RecordProvenance): Promise<string> =>
+    sha256Hex(canonicalJsonBytes({ signer: prov.signer, frontier: prov.frontier, assertion }), defaultCryptoProvider);
+
+  // The store's CODE, held here and updated in O(d) per record. The keel's gate reads sufficient statistics
+  // over the ADMITTED store — never a neighbourhood, never a per-candidate refit — so one cold seed from a
+  // uniform draw of the store, then Welford forever after. A candidate cannot steer this.
+  let code: StoreCode | null = null;
+  const seedCode = async (dims: number): Promise<StoreCode> => {
+    if (code !== null && code.dims === dims) return code;
+    const r = (await p.send("sample", { k: 4096, seed: 4241 })) as { population?: number[][] } | null;
+    code = storeCodeFrom(r?.population ?? [], dims);
+    return code;
+  };
+
+  return {
+    async record(kind, assertion, provenance, pubinfo = {}, document = ""): Promise<{ claimCid: string }> {
+      const claimCid = await claimCidOf(kind, assertion, provenance);
+      await p.send("put", {
+        claim_cid: claimCid, kind, assertion, signer: provenance.signer, frontier: provenance.frontier, pubinfo, document,
+      });
+      // The code follows what the store actually holds; a recorded claim joins it, and only then.
+      if (code !== null && code.dims === assertion.length) code = observeClaim(code, assertion);
+      return { claimCid };
+    },
+
+    async get(claimCid: string): Promise<Testimony | null> {
+      return (await p.send("get", { claim_cid: claimCid })) as Testimony | null;
+    },
+
+    async witness(claimCid: string, edge: Witness): Promise<{ ok: boolean; witnesses: number }> {
+      const r = (await p.send("witness", {
+        claim_cid: claimCid, signer: edge.signer, frontier: edge.frontier, polarity: edge.polarity,
+        ...(edge.tick !== undefined ? { tick: edge.tick } : {}),
+      })) as { ok?: boolean; witnesses?: number } | null;
+      return { ok: r?.ok ?? false, witnesses: r?.witnesses ?? 0 };
+    },
+
+    async reentry(claimCid, policy = WITNESS_POLICY, now?): Promise<{ value: readonly number[]; standing: number; voice: "silent" | "spoken" } | null> {
+      const t = (await p.send("get", { claim_cid: claimCid })) as Testimony | null;
+      if (t === null) return null;
+      return reentryPrior(t, policy, now);   // the keel derives standing+voice — the store never does
+    },
+
+    async admit(candidate, policy = WITNESS_POLICY): Promise<{ admit: boolean; score: number; bitsSaved: number }> {
+      // A code the candidate cannot select. The `neighbors` op stays available for RECALL, and it must never
+      // feed this gate: a k-nearest population makes the model a function of the candidate (so it normalizes
+      // to nothing and stops being a code at all), and in high dimension the k-NN list skews toward hubs near
+      // the centroid anyway, which admits antihubs on geometry rather than on novelty.
+      const c = await seedCode(candidate.length);
+      const v = keelAdmit(candidate, c, policy);   // the keel prices — the store only ever supplied the statistics
+      return { admit: v.admit, score: v.score, bitsSaved: v.bitsSaved };
+    },
+
+    close: p.close,
+  };
+}
+
+/** Test-only: how many holder processes are live (proves "one holder per palace, never a pile"). */
+export function _livePersistenceHolderCount(): number {
+  return livePalaceHolderCount(LABEL_PERSISTENCE);
+}
+
+// ============================================================================
+// palace-caps — the UNIFIED cap-stack every palace #has (folded from palace-caps.ts)
+// ============================================================================
+/**
+ * palace-caps — the UNIFIED cap-stack every palace entity #has. A palace is a nameless entity whose
+ * behavior IS its composed caps; this composer hands ANY palace dir the full stack — content store,
+ * hybrid search, bitemporal KG, structure/graph — so every instance (contentpalace, structurepalace,
+ * formpalace, persistencepalace, the mesh children, the memetic-wikitext peers) carries the same
+ * capabilities uniformly. Each cap is dir-keyed (composeHolder), so the caps flow to every palace by
+ * construction; this makes that flow explicit + closes them as one.
+ *
+ * The consumed engine + code (chroma · search_memories · KnowledgeGraph · palace_graph) sit behind
+ * the causal-island boundary; the caps that produce results depend on the palace's data SHAPE (graph
+ * needs `entities` metadata; search needs documents) — but the stack COMPOSES on every palace.
+ * The meta-model cap is palace-LESS (a process-wide encoder), so it is NOT per-palace here.
+ *
+ * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
+ */
+
+
+/** The full cap-stack a palace entity #has — one per palace dir, closed together. */
+export interface PalaceCaps {
+  readonly content: ContentPalace;
+  readonly search: SearchCap;
+  readonly kg: KgCap;
+  readonly graph: GraphCap;
+  /** Release every cap's holder reference for this palace. */
+  close(): Promise<void>;
+}
+
+export interface PalaceCapsOptions {
+  readonly content?: ContentPalaceOptions;
+  readonly search?: SearchCapOptions;
+  readonly kg?: KgCapOptions;
+  readonly graph?: GraphCapOptions;
+}
+
+/**
+ * Compose the full cap-stack for a palace dir. Every palace entity gets the SAME caps uniformly — the
+ * "all caps flow to all palaces" invariant made a single call. The per-cap holders (content/search/
+ * kg/graph) each ref-count independently via composeHolder; `close()` releases all four.
+ */
+export function composePalaceCaps(dir: string, opts: PalaceCapsOptions = {}): PalaceCaps {
+  const content = makeContentPalace(dir, opts.content ?? {});
+  const search = makeSearchCap(dir, opts.search ?? {});
+  const kg = makeKgCap(dir, opts.kg ?? {});
+  const graph = makeGraphCap(dir, opts.graph ?? {});
+  return {
+    content,
+    search,
+    kg,
+    graph,
+    close: async (): Promise<void> => {
+      // close each independently — one holder fault must not orphan the others
+      await Promise.allSettled([content.close(), search.close(), kg.close(), graph.close()]);
+    },
+  };
 }

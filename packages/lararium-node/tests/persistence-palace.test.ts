@@ -15,7 +15,7 @@ import { join } from "node:path";
 
 import { afterEach, describe, expect, test } from "vitest";
 
-import { makePersistencePalace, _livePersistenceHolderCount, type PersistencePalace } from "../src/persistence-palace.js";
+import { makePersistencePalace, _livePersistenceHolderCount, type PersistencePalace } from "../src/sensorium.js";
 
 const TEST_TIMEOUT = 60_000;
 const prov = { signer: "vessel-A", frontier: "f0" };

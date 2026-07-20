@@ -10,7 +10,7 @@ import { join } from "node:path";
 import { afterEach, beforeAll, describe, expect, test } from "vitest";
 
 import { makeEmbedCap, type EmbedCap } from "../src/embed-cap.js";
-import { makeContentPalace, type ContentPalace } from "../src/content-palace.js";
+import { makeContentPalace, type ContentPalace } from "../src/sensorium.js";
 import { makeSearchCap, _liveSearchHolderCount, type SearchCap } from "../src/search-cap.js";
 
 const TEST_TIMEOUT = 120_000;

@@ -10,7 +10,7 @@
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import { resolveCaptureSessionSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
-import { composePalace, type PalaceHolderProc, type PalaceHolderSpawn } from "./palace-holder.js";
+import { composePalace, type PalaceHolderProc, type PalaceHolderSpawn } from "./sensorium.js";
 
 const LABEL = "recall-holder";
 

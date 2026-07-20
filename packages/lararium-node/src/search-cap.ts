@@ -13,7 +13,7 @@
 
 import { resolveSearchSpawn } from "@lararium/mempalace";
 
-import { composePalace, livePalaceHolderCount, makeServeSpawn, type PalaceHolderSpawn } from "./palace-holder.js";
+import { composePalace, livePalaceHolderCount, makeServeSpawn, type PalaceHolderSpawn } from "./sensorium.js";
 
 /** the palace label — the transport registry key. */
 const LABEL = "search";

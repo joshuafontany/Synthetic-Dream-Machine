@@ -9,7 +9,7 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
-import type { ContentPalace } from "./content-palace.js";
+import type { ContentPalace } from "./sensorium.js";
 
 /** The outcome of an import: records copied, records skipped (no vector), and the source total. */
 export interface GuestImportResult {

@@ -143,56 +143,51 @@ export type {
 
 export { VesselIslandPool } from "./vessel-island-pool.js";
 export type { VesselIslandPoolOptions } from "./vessel-island-pool.js";
-export { makeSubprocessFlush } from "./capture-flush.js";
-export type { SubprocessFlushOptions } from "./capture-flush.js";
-export { makeCaptureReserve } from "./capture-reserve.js";
-export type { CaptureReserveOptions } from "./capture-reserve.js";
-// The shared palace-instance transport cap (the #has-stack foundation both local stores compose).
-export { PalaceHolder, PalaceHolderRegistry, canonicalDirOf } from "./palace-holder.js";
-export type { PalaceHolderProc, PalaceHolderSpawn, PalaceFeedCap } from "./palace-holder.js";
-export { makePersistencePalace } from "./persistence-palace.js";
-export type { PersistencePalace, RecordProvenance, PersistencePalaceOptions } from "./persistence-palace.js";
-export { makeContentPalace } from "./content-palace.js";
-export type { ContentPalace, ContentEntry, ContentMatch, ScannedRecord, ScanPage, Taxonomy, ContentPalaceOptions } from "./content-palace.js";
+// The consolidated sensorium file — the manifest primitive + the shared palace transport +
+// the palace CLIENTS (content/form/persistence) + the unified cap-stack. The palace transport
+// cap (the #has-stack foundation both local stores compose) lives here now.
+export { PalaceHolder, PalaceHolderRegistry, canonicalDirOf } from "./sensorium.js";
+export type { PalaceHolderProc, PalaceHolderSpawn, PalaceFeedCap } from "./sensorium.js";
+export { makePersistencePalace } from "./sensorium.js";
+export type { PersistencePalace, RecordProvenance, PersistencePalaceOptions } from "./sensorium.js";
+export { makeContentPalace } from "./sensorium.js";
+export type { ContentPalace, ContentEntry, ContentMatch, ScannedRecord, ScanPage, Taxonomy, ContentPalaceOptions } from "./sensorium.js";
 export { importGuestPalace } from "./guest-import.js";
 export type { GuestImportResult } from "./guest-import.js";
 export { makeSearchCap } from "./search-cap.js";
 export type { SearchCap, SearchHit, SearchResult, SearchCapOptions } from "./search-cap.js";
 export { makeKgCap } from "./kg-cap.js";
 export type { KgCap, TripleOpts, KgCapOptions } from "./kg-cap.js";
-export { makeMetaCap } from "./meta-cap.js";
-export type { MetaCap, MetaAnnotation, MetaCapOptions } from "./meta-cap.js";
 export { makeGraphCap } from "./graph-cap.js";
 export type { GraphCap, GraphCapOptions } from "./graph-cap.js";
-export { composePalaceCaps } from "./palace-caps.js";
-export type { PalaceCaps, PalaceCapsOptions } from "./palace-caps.js";
+export { composePalaceCaps } from "./sensorium.js";
+export type { PalaceCaps, PalaceCapsOptions } from "./sensorium.js";
 export { makeLaresQuery, openMemorySensorium } from "./lares-query.js";
 export type { LaresQuery, Lens } from "./lares-query.js";
 export { makeEmbedCap } from "./embed-cap.js";
 export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
-export { makeCallerVectorFlush } from "./caller-vector-flush.js";
 export { makeSourceCapture } from "./capture-source.js";
 export type { SourceCapture, SourceCaptureRequest, SourceCaptureResult, SourceCaptureSpawn } from "./capture-source.js";
 export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-channel.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
 export { FileMembershipChannel } from "./file-membership-channel.js";
-export { makeFormPalace } from "./formpalace.js";
+export { makeFormPalace } from "./sensorium.js";
 export type {
   FormPalace, FormPalaceOptions, FormHolderSpawn, FormMetadata, FormStoreResult,
   FormMatch, FormEntry, SerializedBasis,
-} from "./formpalace.js";
+} from "./sensorium.js";
 // P4 — the RRF multi-graph query: fuse the CONTENT (verbatim mempalace), FORM (.formpalace), and
 // later graphs on verbatim_sha by N-ary reciprocal rank fusion (living-grammar-palace#dual-graph).
 export {
   fuseMultiGraph, multiGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
   resolveApertureGrain, apertureWeight, weightByAperture, PARAGRAPH_APERTURE,
   contentKeyOf, contentLeg, formLeg, verbatimShaOf,
-} from "./multi-graph-recall.js";
+} from "./sensorium-recall.js";
 export type {
   MultiGraphHit, MultiGraphOptions, MultiGraphRecallDeps, MultiGraphRecallArgs, MultiGraphRecallResult,
   GraphLeg, GraphItem, ExtraGraph, ApertureWeightOptions, ShaOrGap,
   FormSearchPalace, FormSearchConfig,
-} from "./multi-graph-recall.js";
+} from "./sensorium-recall.js";
 // The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it). The
 // standalone telemetry island is retired; node-daemon-island wires the capture SINK live (from the
 // daemon spawn's optional workerData.telemetry) or leaves the cap inert. The capture core stays

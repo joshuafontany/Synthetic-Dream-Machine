@@ -9,7 +9,7 @@ import { join } from "node:path";
 
 import { afterEach, describe, expect, test } from "vitest";
 
-import { makeContentPalace, type ContentPalace } from "../src/content-palace.js";
+import { makeContentPalace, type ContentPalace } from "../src/sensorium.js";
 import { importGuestPalace } from "../src/guest-import.js";
 
 const TEST_TIMEOUT = 60_000;

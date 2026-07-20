@@ -11,7 +11,7 @@ import { spawn } from "node:child_process";
 import { resolveCaptureSessionSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
 import type { SubagentEdgePair } from "@lararium/tw5";
 
-import { composePalace, type PalaceHolderProc, type PalaceHolderSpawn } from "./palace-holder.js";
+import { composePalace, type PalaceHolderProc, type PalaceHolderSpawn } from "./sensorium.js";
 
 const LABEL = "capture-source";
 

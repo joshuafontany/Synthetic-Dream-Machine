@@ -19,7 +19,7 @@ import {
   PalaceHolderRegistry,
   type PalaceHolderProc,
   type PalaceHolderSpawn,
-} from "../src/palace-holder.js";
+} from "../src/sensorium.js";
 
 /** A fake holder: parses each stdin line and emits an {id, ok, result} reply (per-op handler). */
 function fakeSpawn(handle: (op: string, fields: Record<string, unknown>) => unknown): PalaceHolderSpawn {

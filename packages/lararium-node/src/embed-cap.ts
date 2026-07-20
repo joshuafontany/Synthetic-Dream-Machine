@@ -11,7 +11,7 @@
 
 import { resolveEmbedSpawn } from "@lararium/mempalace";
 
-import { composeEncoder, livePalaceHolderCount, makeServeSpawn, type PalaceHolderSpawn } from "./palace-holder.js";
+import { composeEncoder, livePalaceHolderCount, makeServeSpawn, type PalaceHolderSpawn } from "./sensorium.js";
 
 /** the holder label — palace-less: ONE embed holder per process (the model is the resource). */
 const LABEL = "embed";

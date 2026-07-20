@@ -23,7 +23,7 @@ import { afterEach, describe, expect, test } from "vitest";
 import {
   makeFormPalace, _liveFormHolderCount,
   type FormPalace, type FormHolderSpawn, type SerializedBasis,
-} from "../src/formpalace.js";
+} from "../src/sensorium.js";
 
 const TEST_TIMEOUT = 90_000;
 

@@ -73,10 +73,10 @@ import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool
  *  The user's ONE-plus rotatable pin(s) ride this budget; the surface enforces it. */
 const NODE_WIKI_PIN_BUDGET = 3;
 import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, larContentDir }  from "./vessel-paths.js";
-import { makeFormPalace, type FormPalace }  from "./formpalace.js";
+import { makeFormPalace, type FormPalace }  from "./sensorium.js";
 import { makeRecallHolder, type RecallHolder } from "./recall-holder.js";
-import { makeContentPalace, type ContentPalace } from "./content-palace.js";
-import { multiGraphRecall, makeFormSearch }  from "./multi-graph-recall.js";
+import { makeContentPalace, type ContentPalace } from "./sensorium.js";
+import { multiGraphRecall, makeFormSearch }  from "./sensorium-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { makeChildProcessDocLoadProbe, quarantineDoc, recoverCleanTail } from "./doc-load-probe.js";
 import { loadIdentityArchive } from "./identity-anchors.js";

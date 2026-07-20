@@ -26,7 +26,7 @@ import type { SearchArgs, SearchHit, SearchResult } from "@lararium/mempalace";
 import type { BearingFacets, MoveSkeleton } from "@lararium/tw5/form-layer";
 import { parseBearing, bearingFacets } from "@lararium/tw5/form-layer";
 
-import type { FormMatch, FormPalace, SerializedBasis } from "./formpalace.js";
+import type { FormMatch, FormPalace, SerializedBasis } from "./sensorium.js";
 
 /** RRF damping constant. k=60 is the standard (Cormack et al.) — large enough that top-rank
  *  differences don't dominate, small enough that rank still matters. */

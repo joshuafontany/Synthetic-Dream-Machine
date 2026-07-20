@@ -12,9 +12,9 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/nalu
  */
 
-import { composePalaceCaps, type PalaceCaps } from "./palace-caps.js";
+import { composePalaceCaps, type PalaceCaps } from "./sensorium.js";
 import type { SearchResult } from "./search-cap.js";
-import type { Taxonomy } from "./content-palace.js";
+import type { Taxonomy } from "./sensorium.js";
 import { sensoriumLenses } from "./vessel-paths.js";
 
 /** A lens names a palace entity; the caller maps lens → dir in `lensDirs`. */

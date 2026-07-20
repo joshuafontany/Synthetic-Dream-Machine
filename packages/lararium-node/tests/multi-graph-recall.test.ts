@@ -11,13 +11,13 @@ import { describe, expect, test } from "vitest";
 
 import type { SearchArgs, SearchHit, SearchResult } from "@lararium/mempalace";
 import type { MoveSkeleton, SerializedBasis } from "@lararium/tw5/form-layer";
-import type { FormMatch } from "../src/formpalace.js";
+import type { FormMatch } from "../src/sensorium.js";
 import {
   fuseMultiGraph, multiGraphRecall, buildFormWhere, combineWhere, makeFormSearch, DEFAULT_RRF_K,
   contentLeg, formLeg, resolveApertureGrain, apertureWeight, weightByAperture,
   PARAGRAPH_APERTURE,
   type MultiGraphRecallDeps, type FormSearchPalace, type MultiGraphHit, type GraphLeg,
-} from "../src/multi-graph-recall.js";
+} from "../src/sensorium-recall.js";
 
 const sha = (c: string) => c.repeat(64);
 const SHA_A = sha("a");

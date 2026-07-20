@@ -9,7 +9,7 @@ import { join } from "node:path";
 
 import { afterEach, beforeAll, describe, expect, test } from "vitest";
 
-import { makeContentPalace, type ContentPalace } from "../src/content-palace.js";
+import { makeContentPalace, type ContentPalace } from "../src/sensorium.js";
 import { makeGraphCap, _liveGraphHolderCount, type GraphCap } from "../src/graph-cap.js";
 
 const TEST_TIMEOUT = 60_000;
