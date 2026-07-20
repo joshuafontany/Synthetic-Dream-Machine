@@ -77,6 +77,12 @@ export interface SourceCapture {
   /** Read the landed rejim (rhythm/geology) plane — the derived regimes made askable, or an honest absence
    *  when the plane has never been repoured. Rides the same serialized pipe. */
   readRejim(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
+  /** DETECT-ONLY change-point analysis over the holder's poured content stream — the isomorphic
+   *  `sense_analyze` instrument run THROUGH the holder that owns the store, so it reuses the ONE content
+   *  handle (never a second client). Read-only: it opens no ground-truth and mutates nothing. Boundaries
+   *  report as word indices into the reconstructed stream; `spectral` switches to the embedding-geometry
+   *  surface; `halves` sets the Foote kernel widths. Rides the same serialized pipe. */
+  analyze(request?: { spectral?: boolean; halves?: string; sample?: number }): Promise<Record<string, unknown>>;
   /** The taxonomy over the holder's content store — what the sensorium holds. Rides the serialized pipe. */
   status(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
   /** The fork-DAG rhizome (bitemporal AS-OF `asOf`, else the whole history). Read-only over the pipe. */
@@ -129,6 +135,9 @@ export function makeSourceCapture(
     refresh: async (request) => await p.send("refresh", { ...(request ?? {}) }) as Record<string, unknown>,
     // Read the landed rejim (rhythm/geology) plane — the derived regimes made askable. Rides the pipe.
     readRejim: async (request) => await p.send("read_rejim", { ...(request ?? {}) }) as Record<string, unknown>,
+    // DETECT-ONLY change-point analysis over the holder's content stream — reuses the holder's ONE content
+    // handle (the serve-op passes it into sense_analyze.detect); read-only, mutates nothing. Rides the pipe.
+    analyze: async (request) => await p.send("analyze", { ...(request ?? {}) }) as Record<string, unknown>,
     // The lifecycle + cross-plane serve-ops: the taxonomy read, the fork-DAG read, the kapae/un-kapae
     // branch-mute cascades (mutations, serialized with capture — never a second writer), and the cross-plane
     // witness. Each rides the SAME serialized pipe as capture through the holder that owns the palace.

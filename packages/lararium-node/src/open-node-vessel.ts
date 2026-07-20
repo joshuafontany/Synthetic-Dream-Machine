@@ -724,6 +724,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).sweep(req);
       },
+      analyze: async (input) => {
+        // DETECT-ONLY change-point arms over the poured stream, through the holder that owns the store
+        // (reuses its ONE content handle; blind to any ground-truth — the wall stays uncrossed).
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).analyze(req);
+      },
       refreshDerived: async (input) => {
         // RE-DERIVE the whole derived layer through the holder that owns the store — one command, serialized
         // on the capture pipe (queues between passes, never races the writer). `which` narrows to one.

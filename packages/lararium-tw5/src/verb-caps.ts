@@ -126,6 +126,7 @@ export interface DaemonVerbProvider {
    *  `surface` `all` folds claude+codex+copilot; `project`/`limit` narrow. Idempotent (already-landed turns
    *  skip). `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
   sweep(input: { surface?: string; wing?: string; project?: string; limit?: number; room?: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  analyze(input: { spectral?: boolean; halves?: string; sample?: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
    *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races
    *  the writer. `which` narrows to a single enrichment; `sensoriumRoot` addresses a sensorium (absent → memory). */
@@ -402,6 +403,16 @@ export function captureVerbCap(): CapModule {
           const limit = typeof args["limit"] === "number" ? (args["limit"] as number) : undefined;
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.sweep({ surface, wing, ...(room ? { room } : {}), ...(project ? { project } : {}), ...(limit !== undefined ? { limit } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("analyze", async (args) => {
+          // DETECT-ONLY: the sense_analyze change-point arms run over the poured stream THROUGH the holder
+          // that owns the store (reuses its ONE content handle; no answer key crosses the wall). `spectral`
+          // switches to the embedding-geometry surface; `halves`/`sample` tune the Foote scale prior + span.
+          const spectral = args["spectral"] === true;
+          const halves = typeof args["halves"] === "string" ? (args["halves"] as string) : undefined;
+          const sample = typeof args["sample"] === "number" ? (args["sample"] as number) : undefined;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.analyze({ ...(spectral ? { spectral } : {}), ...(halves ? { halves } : {}), ...(sample !== undefined ? { sample } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("refresh", async (args) => {
           // RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline

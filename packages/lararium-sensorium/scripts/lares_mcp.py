@@ -27,7 +27,7 @@ from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir, deri
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
-LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae")
+LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze")
 
 # The per-plane QUERY DOOR verb — read-only cross-plane interrogation of a 3-plane test-bed sensorium
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
@@ -70,6 +70,8 @@ VERB_SEATS = {
     "kapae": (True, False),      # move-not-delete mute — reversible, trusted
     "un_kapae": (True, False),   # restore — reversible, trusted
     "plane_record": (True, False),      # cross-plane read — reversible, trusted (structure/form fold onto recall --lens)
+    "rejim": (True, False),             # read the landed rhythm/geology (repour rides the reversible refresh) — trusted
+    "analyze": (True, False),           # DETECT-ONLY change-point compute — read-only, mutates nothing → HOTL
     "wiki": (True, False),              # switcher (switch/hold/release/active) — reversible, low-trust, LOCAL residency → HOTL
     # The vault seal-lifecycle tools — a status READ rides HOTL; every MUTATION of the sovereign at-rest
     # seal crosses a trust boundary (it touches identity secret material), so it seats HITL.
@@ -387,6 +389,44 @@ class LaresCoordinator:
         """Restore a muted branch across the sensorium (mirrors `lares worldline un-kapae`)."""
         return wl.cascade_un_kapae(self._worldline, [self._content], branch, tick)
 
+    # ── the rhythm + change-point READS (human-query instruments; read-only) ─────────────────
+
+    def rejim(self, *, repour: bool = False, channel: str = "content") -> dict:
+        """The landed rejim (rhythm/geology) plane made ASKABLE (mirrors `lares sense rejim`) — the nameless
+        regimes the stream's own recurrence holds, or an honest absence until the plane is repoured. `repour`
+        RE-DERIVES from content first (the reversible refresh, reusing THIS holder's ONE content handle — never
+        a second writer), then reads. `channel` names the stream channel a repour reads (default content)."""
+        from rejim_io import read_rejim, repour_rejim, CONTENT
+        if repour:
+            # "content" is the friendly alias for the content-borne (recurrence) channel; any other token
+            # passes through to the detector, which validates it against the poured signals.
+            ch = CONTENT if channel in (None, "content") else channel
+            repour_rejim(self._paths.content, self._paths.rejim, channel=ch, content_store=self._content)
+        geology = read_rejim(self._paths.rejim)
+        if geology is None:
+            return {"repoured": False, "geology": None,
+                    "note": "rejim: never repoured — run `lares sense rejim --repour` (or pass repour=True)"}
+        return {"repoured": True, "geology": geology}
+
+    def analyze(self, *, spectral: bool = False, halves=None, span: int = 6) -> dict:
+        """DETECT-ONLY change-point analysis over this sensorium's poured content stream (mirrors `lares sense
+        analyze`) — the isomorphic `sense_analyze` instrument reads the reconstructed stream word-grained and
+        reports where vocabulary + grammar change HANDS, every cut a word index. Blind to any ground-truth
+        (the answer-key wall stays uncrossed); it never scores, only locates. `spectral` switches to the
+        embedding-geometry surface; `halves` (comma-string or list) sets the Foote kernel widths. REUSES the
+        coordinator's ONE content handle — no second store client opens on the palace."""
+        import sense_analyze
+        if isinstance(halves, str) and halves.strip():
+            halves_t = tuple(int(h) for h in halves.split(",") if h.strip())
+        elif isinstance(halves, (list, tuple)) and halves:
+            halves_t = tuple(int(h) for h in halves)
+        else:
+            halves_t = sense_analyze.DEFAULT_HALVES
+        if spectral:
+            return sense_analyze.spectral(self._palace)
+        res = sense_analyze.detect(self._palace, halves=halves_t, content_store=self._content)
+        return {k: v for k, v in res.items() if not k.startswith("_")}   # drop the in-memory word cache
+
     # ── the per-plane QUERY DOOR (read-only; PLANE_VERBS) ────────────────────────────────────
 
     def _plane_store(self, plane: str):
@@ -615,6 +655,25 @@ def build_mcp(coordinator: LaresCoordinator):
         return _call("un_kapae", sensorium, branch, tick)
 
     @mcp.tool()
+    def rejim(repour: bool = False, channel: str = "content", sensorium: "str | None" = None) -> dict:
+        """Read a sensorium's landed rejim (rhythm/geology) plane — the nameless regimes the stream's own
+        recurrence holds, with the cepat⊥lambat couples — or an honest absence until it is repoured. `repour`
+        RE-DERIVES from content first (the reversible refresh), then reads. Mirrors `lares sense rejim`.
+        `sensorium` names the sensorium (absent → memory)."""
+        return _call("rejim", sensorium, repour=repour, channel=channel)
+
+    @mcp.tool()
+    def analyze(spectral: bool = False, halves: "str | None" = None, span: int = 6,
+                sensorium: "str | None" = None) -> dict:
+        """DETECT-ONLY change-point analysis over a sensorium's poured content stream (mirrors `lares sense
+        analyze`) — the isomorphic detection arms (Foote novelty · sequitur depth+seam · sequitur-MDL ·
+        branching entropy) read the reconstructed stream word-grained and report where the content changes
+        HANDS, every boundary a word index. Blind to any ground-truth (it locates, never scores). `spectral`
+        switches to the embedding-geometry surface; `halves` (comma-separated words, e.g. `4,8,16`) sets the
+        Foote kernel widths. `sensorium` names the sensorium (absent → memory)."""
+        return _call("analyze", sensorium, spectral=spectral, halves=halves, span=span)
+
+    @mcp.tool()
     def plane_record(cid: str, sensorium: "str | None" = None) -> dict:
         """The cross-plane witness: one cid -> presence + payload summary across content,
         structure and form (honest nulls where a plane lacks it). `sensorium` names the sensorium
@@ -694,7 +753,7 @@ class DaemonCoordinator:
     # the palace (content_io · worldline_io · structurepalace_io · form_encoder), serialized with capture so a
     # mutation never races the live writer. A verb the wire does NOT yet carry refuses honestly through
     # `_owed` rather than route to an unknown verb (the wall this surface names, not hides).
-    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record"}
+    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record", "rejim", "analyze"}
 
     def __init__(self, wing: str = "wing_default") -> None:
         self._wing = wing
@@ -813,6 +872,38 @@ class DaemonCoordinator:
         if sensorium_root:
             args["sensoriumRoot"] = sensorium_root
         return uds.output("plane_record", args)
+
+    def rejim(self, *, repour: bool = False, channel: str = "content",
+              sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the rhythm/geology READ through the @daemon `rejim` verb (registry.register("rejim") →
+        # readRejim on the holder that owns the store). `repour` first rides the reversible `refresh` verb
+        # narrowed to the rejim enrichment (which="rejim") — re-derives on the holder's serialized pipe,
+        # never a second writer — then reads the landed plane.
+        args: dict = {}
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        if repour:
+            refresh_args: dict = {"which": "rejim"}
+            if sensorium_root:
+                refresh_args["sensoriumRoot"] = sensorium_root
+            uds.output("refresh", refresh_args)
+        return uds.output("rejim", args)
+
+    def analyze(self, *, spectral: bool = False, halves=None, span: int = 6,
+                sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the DETECT-ONLY change-point read through the @daemon `analyze` verb (registry.register
+        # ("analyze") → the holder's analyze serve-op over the store it owns). Read-only, blind to any
+        # ground-truth (the wall stays uncrossed). The wire names the span `sample`.
+        args: dict = {}
+        if spectral:
+            args["spectral"] = spectral
+        if halves:
+            args["halves"] = halves
+        if span is not None:
+            args["sample"] = span
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("analyze", args)
 
 
 def main() -> None:

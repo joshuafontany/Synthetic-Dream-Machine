@@ -350,14 +350,19 @@ def run_arms(toks: "list[str]", *, halves=DEFAULT_HALVES) -> "tuple[dict, dict |
     return boundaries, grammar, mdl_inferred
 
 
-def detect(sensorium: str, *, halves=DEFAULT_HALVES) -> dict:
+def detect(sensorium: str, *, halves=DEFAULT_HALVES, content_store=None) -> dict:
     """DETECT-ONLY over a poured sensorium: reconstruct its content stream → words → the full arm surface,
     every cut reported as a word position. The arms adapt four segmenters to the one stream — Foote novelty
     (vocabulary turnover), sequitur depth+seam (grammar hierarchy), sequitur-MDL (compression stall), and
     branching entropy (successor unpredictability). Blind to any ground-truth (the wall). Retains the words
-    in-memory for context snippets (not persisted)."""
+    in-memory for context snippets (not persisted).
+
+    `content_store` (optional): reuse an ALREADY-OPEN content handle — the capture holder (or the standalone
+    coordinator) passes its ONE handle so this read never opens a second writing chroma client on the palace
+    (the holder-owns-the-store discipline, mirrored on `rejim_io.repour_rejim`). Absent → open from
+    `sensorium` (the CLI/standalone-tool path)."""
     content = resolve_content(sensorium)
-    stream = _content_stream(ContentStore(content))
+    stream = _content_stream(content_store if content_store is not None else ContentStore(content))
     toks = stream_words(stream)
     boundaries, grammar, mdl_inferred = run_arms(toks, halves=halves)
     return {"sensorium": sensorium, "n_chars": len(stream), "n_words": len(toks),

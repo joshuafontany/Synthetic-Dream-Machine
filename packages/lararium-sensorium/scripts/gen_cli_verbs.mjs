@@ -35,6 +35,12 @@ const CLI_FORMS = {
   worldline: "sense worldline",
   kapae:     "sense worldline kapae",
   un_kapae:  "sense worldline un-kapae",
+  // The human-query INSTRUMENTS — both mirror through the one `sense` door. `rejim` reads the rhythm/geology
+  // plane; `analyze` runs the DETECT-ONLY change-point arms. (`ki`/`couple` stays CLI-native — its H¹
+  // coupling compute lives in TS @lararium/mesh, so no faithful python MCP twin stands; it rides the `sense`
+  // host in the coverage partition, not `cli_forms`.)
+  rejim:     "sense rejim",
+  analyze:   "sense analyze",
   // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
   // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
   wiki:      "wiki switch",

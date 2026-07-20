@@ -359,6 +359,27 @@ class CaptureSessionServer:
         geology = rejim_io.read_rejim(rejim_dir)
         return {"repoured": geology is not None, "geology": geology}
 
+    def analyze(self, req: dict) -> dict:
+        """DETECT-ONLY change-point analysis over THIS holder's poured content stream — the isomorphic
+        `sense_analyze` instrument run through the holder that owns the store, so the compute REUSES the ONE
+        content handle (never a second chroma client). Read-only: it opens no ground-truth (the answer-key
+        wall stays uncrossed) and mutates nothing. `spectral` switches to the embedding-geometry surface;
+        `halves` (comma-string or list) sets the Foote kernel widths; every boundary reports as a word index
+        into the reconstructed stream. Rides the serialized pipe like every other read."""
+        import sense_analyze
+        raw_halves = req.get("halves")
+        if isinstance(raw_halves, str) and raw_halves.strip():
+            halves = tuple(int(h) for h in raw_halves.split(",") if h.strip())
+        elif isinstance(raw_halves, (list, tuple)) and raw_halves:
+            halves = tuple(int(h) for h in raw_halves)
+        else:
+            halves = sense_analyze.DEFAULT_HALVES
+        if req.get("spectral"):
+            sample_n = int(req.get("sample") or 2000)
+            return sense_analyze.spectral(self._paths.root, sample_n=sample_n)
+        res = sense_analyze.detect(self._paths.root, halves=halves, content_store=self._content_store())
+        return {k: v for k, v in res.items() if not k.startswith("_")}   # drop the in-memory word cache
+
     # ── the lifecycle + cross-plane serve-ops (the /mcp DaemonCoordinator routes to these) ─────────
     # Each rides the SAME serialized pipe as capture (run_sidecar dispatch is serial), so a MUTATION never
     # races the live writer — that serialization is WHY the capture holder owns these ops, not a bare store.
@@ -464,6 +485,7 @@ def _serve(sensorium_root: str) -> None:
             "sweep": server.sweep,       # BULK backfill on the holder's warm stream (the routed sweep spine)
             "refresh": server.refresh,   # RE-DERIVE the whole derived layer (rejim · mempalace · worldline)
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
+            "analyze": server.analyze,             # DETECT-ONLY change-points over the holder's content stream
             "status": server.status,               # the taxonomy over the holder's content store
             "worldline": server.worldline,         # the fork-DAG rhizome read (fresh worldline handle)
             "subagent-edges": server.subagent_edges,  # derive spawn/handback edges → worldline-compare's edge feed

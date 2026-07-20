@@ -512,9 +512,11 @@ def test_daemon_routes_the_lifecycle_and_plane_verbs(monkeypatch):
 
 
 def test_daemon_routed_set_names_the_wired_verbs():
-    # the ROUTED set carries the five newly-wired verbs beside recall + pour — the wall the surface once
-    # named is now the routing table it declares.
-    assert DaemonCoordinator.ROUTED == {"recall", "pour", "status", "worldline", "kapae", "un_kapae", "plane_record"}
+    # the ROUTED set carries the wired lifecycle/plane/read verbs beside recall + pour — the routing table
+    # the surface declares. `rejim` reads through the daemon `rejim` verb (repour rides `refresh`); `analyze`
+    # routes to the daemon `analyze` verb (its registry entry lands in the wiki-VM TS build target).
+    assert DaemonCoordinator.ROUTED == {"recall", "pour", "sweep", "status", "worldline", "kapae",
+                                        "un_kapae", "plane_record", "rejim", "analyze"}
 
 
 # ── the sensorium address resolver (name → root; mirrors TS sensoriumDir/sensoriumNames) ──────
@@ -538,3 +540,58 @@ def test_sensorium_address_resolver_falls_to_xdg(monkeypatch, tmp_path):
     monkeypatch.delenv("LAR_ROOT", raising=False)
     monkeypatch.setenv("XDG_DATA_HOME", str(tmp_path))
     assert sensorium_dir("mesh") == os.path.join(str(tmp_path), "lares", "sensoriums", "mesh")
+
+
+# ── the human-query INSTRUMENTS: rejim (rhythm) · analyze (change-points) · the routed analyze wall ──
+
+
+def test_coordinator_rejim_reads_geology_or_honest_absence(tmp_path):
+    # rejim reads the landed rhythm/geology plane; never-repoured → an HONEST absence (never a lie), and a
+    # `repour=True` re-derives from the poured content (reusing the ONE content handle) then reads it back.
+    coord = _coord(tmp_path)
+    coord.pour("claude", _FIXTURE, wing="w")
+    absent = coord.rejim()
+    assert absent["repoured"] is False and absent["geology"] is None      # never repoured — honest absence
+    got = coord.rejim(repour=True)
+    assert got["repoured"] is True
+    g = got["geology"]
+    assert isinstance(g, dict) and "rejim" in g and "stream_chars" in g   # the landed geology schema
+
+
+def test_coordinator_analyze_returns_word_indexed_boundaries(tmp_path):
+    # analyze runs the DETECT-ONLY arms over the poured content stream and returns a boundary map — every cut
+    # a WORD INDEX into the reconstructed stream (the MAUP-free coordinate), the in-memory word cache dropped.
+    coord = _coord(tmp_path)
+    coord.pour("claude", _FIXTURE, wing="w")
+    res = coord.analyze()
+    assert res["n_words"] >= 1 and "boundaries" in res
+    assert "_words" not in res                                            # the word cache never crosses the return
+    n = res["n_words"]
+    for arm, cuts in res["boundaries"].items():
+        assert isinstance(cuts, list)
+        assert all(isinstance(c, int) and 0 <= c <= n for c in cuts), f"{arm}: cut off the word axis"
+
+
+def test_daemon_analyze_routes(monkeypatch):
+    # analyze routes to the daemon `analyze` verb (the detect-only change-point read through the holder that
+    # owns the store); the span rides the wire as `sample`, the addressed root threads through.
+    calls = []
+    monkeypatch.setattr("lares_mcp.uds.output", lambda verb, args: (calls.append((verb, args)), {"ok": True})[1])
+    dc = DaemonCoordinator(wing="w")
+    dc.analyze(spectral=True, span=8, sensorium_root="/root/mesh")
+    assert calls[-1][0] == "analyze"
+    assert calls[-1][1] == {"spectral": True, "sample": 8, "sensoriumRoot": "/root/mesh"}
+
+
+def test_daemon_rejim_routes_and_repour_rides_refresh(monkeypatch):
+    # rejim routes to the daemon `rejim` verb; `repour=True` first rides the reversible `refresh` verb
+    # narrowed to the rejim enrichment (which=rejim), then reads — the addressed root threads through both.
+    calls = []
+    monkeypatch.setattr("lares_mcp.uds.output", lambda verb, args: (calls.append((verb, args)), {"ok": True})[1])
+    dc = DaemonCoordinator(wing="w")
+    dc.rejim()
+    assert calls[-1] == ("rejim", {})                                     # the plane read, routed
+    calls.clear()
+    dc.rejim(repour=True, sensorium_root="/root/mesh")
+    assert calls[0] == ("refresh", {"which": "rejim", "sensoriumRoot": "/root/mesh"})   # repour rides refresh
+    assert calls[1] == ("rejim", {"sensoriumRoot": "/root/mesh"})         # then reads, root threaded
