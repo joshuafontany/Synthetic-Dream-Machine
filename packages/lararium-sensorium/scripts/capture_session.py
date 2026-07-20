@@ -135,6 +135,59 @@ def capture_and_observe(sensorium_root: str, surface: str, pointer: str, *, wing
             "embedder_model": model, "embedder_dim": dim, **summary}
 
 
+def discover_sessions(surfaces=("claude", "codex", "copilot"), *, home: "str | None" = None):
+    """Yield (surface, pointer) for every local operator-AI chat session, path-sorted (deterministic). claude:
+    each project's session `.jsonl` AND every sub-agent transcript under `<session>/subagents/`. codex: each
+    rollout. copilot: the one SQLite store (its source-cap reads every session within). A surface whose root is
+    absent skips silently — a missing tool never fails the sweep."""
+    import glob
+    home = home or os.path.expanduser("~")
+    if "claude" in surfaces:
+        base = os.path.join(home, ".claude", "projects")
+        yield from (("claude", p) for p in sorted(glob.glob(os.path.join(base, "*", "*.jsonl"))))
+        yield from (("claude", p) for p in     # EVERY sub-agent transcript, at any nesting (a spirit's spirit)
+                    sorted(glob.glob(os.path.join(base, "**", "agent-*.jsonl"), recursive=True)))
+    if "codex" in surfaces:
+        yield from (("codex", p) for p in sorted(
+            glob.glob(os.path.join(home, ".codex", "sessions", "**", "rollout-*.jsonl"), recursive=True)))
+    if "copilot" in surfaces:
+        db = os.path.join(home, ".copilot", "session-store.db")
+        if os.path.isfile(db):
+            yield "copilot", db
+
+
+def sweep_sessions(sensorium_root: str, *, surfaces=("claude", "codex", "copilot"),
+                   wing: "str | None" = None, room: str = "conversations",
+                   embed_factory: "Callable | None" = None, on_progress: "Callable | None" = None) -> dict:
+    """Capture/recapture EVERY local operator-AI chat session into the sensorium through ONE holder — the model
+    and store load once and every session rides the same batched pipeline (the store-write + embed batches make
+    a full sweep fast). IDEMPOTENT: is_landed skips already-landed turns, so a re-run is a cheap catch-up and a
+    fresh sensorium a full pour. A per-session failure SKIPS and records to `failed` (fail gracefully on a
+    gradient — one unreadable transcript never aborts the sweep); a SYSTEMIC embedder-floor (ContentFloorError)
+    propagates loud, since a wrong model would poison every session. Returns the sweep summary."""
+    from content_io import ContentFloorError
+    wing = wing or ("wing_" + os.path.basename(os.path.expanduser("~")) or "wing_operator")
+    stream, model, _dim, _paths = compose_memory_stream_sensorium(sensorium_root, embed_factory=embed_factory)
+    totals = {"sensorium": sensorium_root, "wing": wing, "room": room, "embedder_model": model,
+              "sessions": 0, "landed": 0, "skipped": 0, "by_surface": {}, "failed": []}
+    for surface, pointer in discover_sessions(surfaces):
+        try:
+            summary = stream.capture(pointer, surface=surface, wing=wing, room=room)
+        except ContentFloorError:
+            raise                                  # systemic — a wrong embedder poisons every session; fail loud
+        except Exception as exc:  # noqa: BLE001 — one unreadable session never aborts the sweep
+            totals["failed"].append({"surface": surface, "pointer": pointer,
+                                     "error": f"{type(exc).__name__}: {exc}"})
+            continue
+        totals["sessions"] += 1
+        totals["landed"] += int(summary.get("landed", 0))
+        totals["skipped"] += int(summary.get("skipped", 0))
+        totals["by_surface"][surface] = totals["by_surface"].get(surface, 0) + 1
+        if on_progress is not None:
+            on_progress(surface, pointer, summary, totals)
+    return totals
+
+
 @dataclass
 class _DerivedEnricher:
     """One content-DERIVED enrichment the holder keeps fresh on new shards — a name, its coalesce cadence,
@@ -418,12 +471,27 @@ def main() -> None:
     ap.add_argument("--wing", default=None, help="the schema-floor wing")
     ap.add_argument("--room", default="conversations", help="the schema-floor room")
     ap.add_argument("--serve", action="store_true", help="serve serialized source-stream capture over NDJSON stdio")
+    ap.add_argument("--sweep", action="store_true",
+                    help="capture/recapture ALL local operator-AI chat sessions into --sensorium (idempotent)")
+    ap.add_argument("--surfaces", default="claude,codex,copilot",
+                    help="comma-separated surfaces to sweep (default: claude,codex,copilot)")
     args = ap.parse_args()
     if args.serve:
         _serve(args.sensorium)
         return
+    if args.sweep:
+        surfaces = tuple(s.strip() for s in args.surfaces.split(",") if s.strip())
+
+        def _progress(surface, pointer, summary, totals):
+            sys.stderr.write(f"  [{totals['sessions']:>4}] {surface}: {os.path.basename(pointer)} "
+                             f"(+{summary.get('landed', 0)} landed, {summary.get('skipped', 0)} skipped)\n")
+
+        totals = sweep_sessions(args.sensorium, surfaces=surfaces, wing=args.wing,
+                                room=args.room, on_progress=_progress)
+        sys.stdout.write(json.dumps(totals) + "\n")
+        return
     if not args.surface or not args.pointer:
-        ap.error("surface and pointer are required unless --serve")
+        ap.error("surface and pointer are required unless --serve or --sweep")
     # capture_and_observe on the shipping entrypoint: land the content AND build the worldline fork-DAG in
     # one pass (the demux 1b wire reaches the live driver, not just the tests). Codex/copilot land content
     # only; the claude surface also builds the braid beside the palace.
