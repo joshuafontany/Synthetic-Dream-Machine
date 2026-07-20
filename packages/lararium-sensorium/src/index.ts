@@ -5,4 +5,3 @@ export * from "./telemetry-writeback.js";
 export * from "./ffz-enrich.js";
 export * from "./ffz-orchestrator.js";
 export * from "./worldline-kg.js";
-export * from "./worldline-observe.js";

@@ -9,6 +9,7 @@
 import { spawn } from "node:child_process";
 
 import { resolveCaptureSessionSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
+import type { SubagentEdgePair } from "@lararium/tw5";
 
 import { composePalace, type PalaceHolderProc, type PalaceHolderSpawn } from "./palace-holder.js";
 
@@ -87,6 +88,10 @@ export interface SourceCapture {
   cascadeUnKapae(request: { branch: string; tick: number }): Promise<Record<string, unknown>>;
   /** The cross-plane witness: ONE cid → presence across content · structure · form (honest nulls). Read-only. */
   planeRecord(request: { cid: string }): Promise<Record<string, unknown>>;
+  /** Derive a session transcript's spawn/handback edge-DAG — the worldline-COMPARE consumer's edge feed. The
+   *  CRUNCH lives in python (beside the transcript data); this reads the holder's `subagent-edges` serve-op.
+   *  PURE over the transcript (no store touched), but rides the SAME serialized pipe as the rest. */
+  subagentEdges(request: { transcript: string }): Promise<readonly SubagentEdgePair[]>;
   close(): Promise<void>;
 }
 
@@ -132,6 +137,12 @@ export function makeSourceCapture(
     cascadeKapae: async (request) => await p.send("kapae", { ...request }) as Record<string, unknown>,
     cascadeUnKapae: async (request) => await p.send("un_kapae", { ...request }) as Record<string, unknown>,
     planeRecord: async (request) => await p.send("plane_record", { ...request }) as Record<string, unknown>,
+    // The worldline-compare edge feed — the python crunch derives the spawn/handback pairs beside the
+    // transcript data; the serve-op returns `{ pairs }`, honest-empty when the session spawned no spirits.
+    subagentEdges: async (request) => {
+      const r = await p.send("subagent-edges", { ...request }) as { pairs?: readonly SubagentEdgePair[] };
+      return r.pairs ?? [];
+    },
     close: p.close,
   };
 }

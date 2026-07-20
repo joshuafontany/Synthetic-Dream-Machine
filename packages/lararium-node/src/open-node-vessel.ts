@@ -63,7 +63,7 @@ import {
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
 import { resolvePalacePath, orderHandleTurnsToStubs, type HandleTurn } from "@lararium/mempalace";
-import { writebackWing, TelemetryUnavailable, deriveSubagentEdges } from "@lararium/sensorium";
+import { writebackWing, TelemetryUnavailable } from "@lararium/sensorium";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
@@ -744,7 +744,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         return await captureFor(sensoriumRoot).planeRecord(req);
       },
       placeStructurepalaceKapae: (turnKey, ended) => daemonVm.placeStructurepalaceKapae(turnKey, ended),
-      subagentEdges: (transcript) => deriveSubagentEdges(transcript),
+      subagentEdges: async (input) => {
+        // The subagent edge CRUNCH moved to python (beside the transcript data) — route to the holder's
+        // `subagent-edges` serve-op through the SAME sensorium-addressed capture pipe the other verbs use.
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).subagentEdges(req);
+      },
       worldlineCompare: (input) => daemonVm.worldlineCompare(input),
       worldlineTrajectory: (input) => daemonVm.worldlineTrajectory(input),
     };

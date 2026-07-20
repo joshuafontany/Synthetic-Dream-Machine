@@ -1,88 +1,31 @@
 /**
- * subagent-mine — capture tasked-spirit (sub-agent) transcripts DISTINCT from the
- * main agent's verbatim memory, identified by their agent UUID, both sides.
+ * subagent-mine — the tasked-spirit (sub-agent) capture-ROUTING helpers: the naming
+ * convention that files a spirit's turns DISTINCT from the main agent's memory.
  *
- * A spirit's transcript lives at `<session>/subagents/agent-<id>.jsonl` and holds
- * BOTH sides of the exchange — the handoff the main Lares authored (user) and the
- * spirit's work (assistant). mempalace's recursive miner would blur it into the
- * parent wing under the parent's actor (upstream issue #111); our Stop hook stages
- * only the top-level file, dropping it. This router does it right:
+ * A spirit's transcript lives at `<session>/subagents/agent-<id>.jsonl` and holds BOTH
+ * sides of the exchange — the handoff the main Lares authored (user) and the spirit's
+ * work (assistant). These pure builders name where a spirit's turns land:
  *
- *   - DISTINCT: each spirit mines into `wing_<project>__spirits`, never the parent's.
- *   - IDENTIFIED BY UUID: identity rides the worldline handle
- *     `<run>.<agentId>` (`lar_agent_handle`); the stage-name `spirit-<uuid8>` only
- *     labels. No handoff-parsed name ladder (Mask/Spirit markers, role pet-names)
- *     is used.
- *   - BOTH SIDES: mines the whole agent file (the injected exchange assembler pairs
- *     the handoff with the spirit's turns — the SAME reader the capture leg submits).
+ *   - DISTINCT: each spirit files into `wing_<project>__spirits` (spiritsWing), never
+ *     the parent's wing.
+ *   - IDENTIFIED BY UUID: identity rides the worldline handle `<run>.<agentId>`
+ *     (`lar_agent_handle`); the staged basename (spiritStageBasename) only carries the
+ *     provenance tokens buildPatch reads.
  *
- * Every spirit turn lands through the @daemon `capture` verb, into the sovereign plane. Each record
- * carries the `source_file` the capture leg keys on (spiritCaptureSourceFile —
- * `<wing>__spirits/<surface>__<name>__agent-<id>__run-<run>.jsonl`), so provenance never leaks the
- * stage layout. A daemon-down run SUSPENDS; it reaches for no second sink.
- * The child→parent LINK rides `lar_parent_handle` (buildPatch, off the staged basename)
- * + the KG observer (observeSubagentWorldlines, D6) — no post-mine tunnel step exists
- * or is needed.
+ * The `source_file` a spirit turn rides under (spiritCaptureSourceFile) fuses the wing
+ * PREFIX (routing) with the staged basename (provenance) in one string.
+ *
+ * The EDGE-DERIVATION crunch (listSpiritFiles / agentIdOf / runIdOf) + the direct-mine
+ * spool (mineSubagentsForSession) moved to python (worldline_observe.py, beside the
+ * transcript data); the worldline-compare edge feed reads the capture holder's
+ * `subagent-edges` serve-op. These builders stay TS — the node capture leg names its
+ * source_file from them.
  *
  * Meme: lar:///ha.ka.ba/lararium/api/lar-telemetry
  */
 
-import { existsSync, readdirSync, mkdirSync, writeFileSync } from "node:fs";
-import { homedir } from "node:os";
-import { join, basename } from "node:path";
-
-const MP_EXE = process.platform === "win32" ? "mempalace.exe" : "mempalace";
-
 /**
- * The spirit-staging root — SWEPT territory: it lives under the harvest stage
- * (`$XDG_STATE_HOME/lares/harvest-stage/.spirit-stage`, LAR_ROOT-aware), which
- * `lares palace-teardown` enumerates as a target, so staged spirit copies never
- * accumulate as unswept tmpdir() residue. Mirrors vessel-paths' `larStateHome`
- * resolution (that fn sits ABOVE this package in the dep graph — the XDG standard
- * resolves here dependency-free, no value invented).
- */
-function spiritStageRoot(): string {
-  const root = process.env["LAR_ROOT"];
-  const stateHome = root
-    ? join(root, "state")
-    : join(process.env["XDG_STATE_HOME"]?.trim() || join(homedir(), ".local", "state"), "lares");
-  return join(stateHome, "harvest-stage", ".spirit-stage");
-}
-
-/** Resolve the mempalace executable (prefer ~/.local/bin, then PATH). */
-export function resolveMempalaceExe(): string {
-  const local = join(homedir(), ".local", "bin", MP_EXE);
-  return existsSync(local) ? local : "mempalace";
-}
-
-/** The agent id from an `agent-<id>.jsonl` filename. */
-export function agentIdOf(agentFile: string): string {
-  return /^agent-(.+)\.jsonl$/.exec(basename(agentFile))?.[1] ?? "unknown";
-}
-
-/** The worldline run-root for a session transcript — its basename minus `.jsonl`. */
-export function runIdOf(transcriptPath: string): string {
-  return basename(transcriptPath).replace(/\.jsonl$/, "");
-}
-
-/** The `<session>/subagents` directory that holds a session's tasked-spirit transcripts. */
-export function spiritSubagentDir(transcriptPath: string): string {
-  return transcriptPath.replace(/\.jsonl$/, "") + "/subagents";
-}
-
-/** Every `agent-*.jsonl` tasked-spirit transcript for a session (absolute paths), else []. */
-export function listSpiritFiles(transcriptPath: string): string[] {
-  const dir = spiritSubagentDir(transcriptPath);
-  if (!existsSync(dir)) return [];
-  try {
-    return readdirSync(dir).filter((f) => /^agent-.*\.jsonl$/.test(f)).map((f) => join(dir, f));
-  } catch {
-    return [];
-  }
-}
-
-/**
- * The staged spirit BASENAME — ONE build site for BOTH legs (capture + direct mine):
+ * The staged spirit BASENAME — the source_file provenance token:
  * `<surface>__<name>__agent-<id>__run-<run>.jsonl`. The leading `<surface>__` token
  * follows the main-transcript law (`${surface}__…`, runHarvestAll) so `lar_surface`
  * stamps by token instead of defaulting; buildPatch skips it before deriving
@@ -106,88 +49,7 @@ export function spiritCaptureSourceFile(wing: string, name: string, agentId: str
   return `${spiritsWing(wing)}/${spiritStageBasename(name, agentId, runId, surface)}`;
 }
 
-/**
- * The spirit's stage-name — `spirit-<uuid8>`, derived from the agent UUID alone:
- * subagent IDENTITY rides the worldline handle (`<run>.<agentId>` →
- * `lar_agent_handle`), never a mask or pet name — no handoff-parsed name ladder
- * (Mask/Spirit markers, role pet-names) is used. The stage-name
- * only labels; nothing keys on it but the drawer's `lar_agent` display label.
- */
-export function spiritName(agentFile: string): string {
-  return `spirit-${agentIdOf(agentFile).slice(0, 8)}`;
-}
-
 /** The spirits wing derived from a project wing (distinct, never the parent's). */
 export function spiritsWing(wing: string): string {
   return `${wing}__spirits`;
-}
-
-export interface SubagentMineResult {
-  readonly spirits: number;
-  readonly wing: string;
-  readonly mined: Array<{ name: string; agentId: string; drawers: number | string }>;
-}
-
-export interface SubagentMineOptions {
-  /**
-   * The exchange assembler — pairs each user turn with its assistant response(s) into
-   * ONE recall unit (the caller threads lares-cli's `readExchanges`; the SAME reader the
-   * @daemon capture leg submits through, so both legs file identical turn content).
-   */
-  readonly turns: (file: string) => ReadonlyArray<{ readonly text: string }>;
-  readonly mpExe?: string;
-}
-
-/**
- * Stage every tasked-spirit transcript for a session into the project's spirits wing, each labeled
- * `spirit-<uuid8>` (identity rides the worldline handle), capturing both sides. Records carry the
- * capture leg's `source_file` (spiritCaptureSourceFile), so drawer ids stay deterministic
- * (`sha256(source_file)_chunk_index`) and a re-run upserts in place. Returns per-spirit counts.
- */
-export function mineSubagentsForSession(transcriptPath: string, wing: string, opts: SubagentMineOptions): SubagentMineResult {
-  const mpExe = opts.mpExe ?? resolveMempalaceExe();
-  const sw = spiritsWing(wing);
-  // The session IS the worldline run-root; each spirit's lineage-path handle reads
-  // `<run>.<agentId>` (agent-worldline#name). Threaded through the source_file basename
-  // so lar-telemetry's buildPatch can derive lar_agent_handle off it.
-  const runId = basename(transcriptPath).replace(/\.jsonl$/, "");
-  const mined: Array<{ name: string; agentId: string; drawers: number | string }> = [];
-  const dir = transcriptPath.replace(/\.jsonl$/, "") + "/subagents";
-  if (!existsSync(dir)) return { spirits: 0, wing: sw, mined };
-  let files: string[];
-  try {
-    files = readdirSync(dir).filter((f) => /^agent-.*\.jsonl$/.test(f)).map((f) => join(dir, f));
-  } catch { return { spirits: 0, wing: sw, mined }; }
-
-  for (const af of files) {
-    const name = spiritName(af);
-    const agentId = agentIdOf(af);
-    // ONE source_file convention across both legs: the RELATIVE
-    // `<wing>__spirits/<surface>__<name>__agent-<id>__run-<run>.jsonl` the @daemon
-    // capture leg submits. The ndjson spool (a transient batch file under the swept
-    // spirit stage) never enters provenance — the prior convos-mine leg recorded the
-    // ABSOLUTE `.spirit-stage/...` staging path, leaking the stage layout into the
-    // palace and forking the dedup key from the daemon leg's.
-    const src = spiritCaptureSourceFile(wing, name, agentId, runId);
-    // metadata.wing rides EACH record: the direct leg bypasses the node wing-stamp
-    // flush, so the routing must live on the record itself (RFC 002 §2.5 — the
-    // record's own wing wins; the ndjson adapter files it verbatim).
-    const records = opts.turns(af).map((t, i) =>
-      JSON.stringify({ content: t.text, source_file: src, chunk_index: i, metadata: { wing: sw, agent: name } }),
-    );
-    if (records.length === 0) { mined.push({ name, agentId, drawers: 0 }); continue; }
-    const stage = join(spiritStageRoot(), `lar-spirit-${agentId}`);
-    mkdirSync(stage, { recursive: true });
-    const spool = join(stage, `spirit-${agentId}.ndjson`);
-    try { writeFileSync(spool, records.join("\n") + "\n", "utf8"); } catch { mined.push({ name, agentId, drawers: "spool-failed" }); continue; }
-
-    // Every spirit turn lands through the @daemon, into the sovereign plane. A daemon-down run
-    // SUSPENDS — it never reaches for a second write-target.
-    //
-    // Suspended, not lost: the spool stays staged, the transcript is the durable producer-log, and
-    // capture is idempotent on cid, so the next run re-derives this spirit's turns through the daemon.
-    // Crash-safety rides RE-DERIVATION, never a fallback sink.
-    mined.push({ name, agentId, drawers: "suspended-no-daemon" });
-  }
-  return { spirits: mined.length, wing: sw, mined };
 }

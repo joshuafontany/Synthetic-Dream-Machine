@@ -46,6 +46,10 @@ from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
 
 _LOCK_PREFIX = "capture_session_serve"
 
+# The spawn relation the worldline-COMPARE worker matches (mesh/worldline-edge.ts PRED_DELEGATION). The
+# `subagent_edges` serve-op emits this EXACT casing so `worldlineCausalFromEdges` reads the spawn edge.
+_PRED_DELEGATION = "prov:Delegation"
+
 
 def worldline_path(sensorium_root: str) -> str:
     """Derive the worldline capability from the one sensorium root address."""
@@ -376,6 +380,37 @@ class CaptureSessionServer:
         finally:
             store.close()
 
+    def subagent_edges(self, req: dict) -> dict:
+        """Derive a session transcript's spawn/handback edge-DAG — the worldline-COMPARE consumer's edge
+        source, ported off the retired TS `deriveSubagentEdges`. PURE: reads the spirit transcripts under
+        `<session>/subagents/`, writes nothing (no store, no worldline handle) — so it needs no capture.
+
+        REUSES `worldline_observe.derive_subagent_edges` (the SAME crunch `observe_worldline` runs at
+        capture-time), so ONE derivation feeds both the storage path and this compare feed — no second port.
+
+        The run-root reads PLAIN (`run_id_of`, the session basename), NOT the veiled worldline-root: the
+        compare's caller names handles as `<sessionId>.<agentId>` (the retired TS crunch's identity, which
+        the operator's `a`/`b` handles match); the veil rides the worldline_io STORAGE path alone. Each pair
+        matches the TS `SubagentEdgePair` shape exactly:
+          spawn    = {subject: run, predicate: "prov:Delegation", object: handle, turnKey: <first turn uuid>}
+          handback = {subject: run, predicate: "prov:Delegation", object: handle}
+        The edge stays CLOCK-PURE (no valid_from/ended) — `worldlineCausalFromEdges` reads a timestamp only
+        for same-instant sort tie-break, and a set of sibling spirits under ONE run-root carries a
+        timestamp-invariant fork-tree verdict, so the ITC compare answers identically to the retired TS."""
+        from worldline_observe import derive_subagent_edges, run_id_of
+        transcript = str(req.get("transcript") or "")
+        if not transcript:
+            raise ValueError("subagent_edges requires a non-empty transcript pointer")
+        run = run_id_of(transcript)
+        pairs = []
+        for spirit in derive_subagent_edges(transcript, run):
+            spawn = {"subject": run, "predicate": _PRED_DELEGATION, "object": spirit.handle}
+            if spirit.chain:
+                spawn["turnKey"] = spirit.chain[0].uuid   # the spawn anchor = the spirit's first turn uuid
+            handback = {"subject": run, "predicate": _PRED_DELEGATION, "object": spirit.handle}
+            pairs.append({"spawn": spawn, "handback": handback})
+        return {"pairs": pairs}
+
     def kapae(self, req: dict) -> dict:
         """Mute a worldline branch + cascade the mute across THIS holder's content store (move-not-delete;
         `un_kapae` restores). MUTATION — it rides the SAME serialized pipe as capture, so the mute never races
@@ -431,6 +466,7 @@ def _serve(sensorium_root: str) -> None:
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
             "status": server.status,               # the taxonomy over the holder's content store
             "worldline": server.worldline,         # the fork-DAG rhizome read (fresh worldline handle)
+            "subagent-edges": server.subagent_edges,  # derive spawn/handback edges → worldline-compare's edge feed
             "kapae": server.kapae,                 # mute a branch across the content store (serialized mutation)
             "un_kapae": server.un_kapae,           # restore a muted branch (serialized mutation)
             "plane_record": server.plane_record,   # the cross-plane witness (content · structure · form)
