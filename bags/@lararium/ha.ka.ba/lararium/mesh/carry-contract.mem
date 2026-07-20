@@ -49,16 +49,22 @@ exploit the partition window.
 
 !! Kapae ~ the propagating antigen
 
-''Kapae'' (the tombstone-shadow; already a primitive — the worldline-rewind + its lift,
-`kapae`/`un_kapae`) promotes from worldline-rewind to ''identity-antigen''. A banned authn/z
-is Kapae'd into an ''ACTIVE, propagating set'' that rides the always-carried public + infra
-planes. When a Kapae'd presenter pops up, it gets ''Mu'' — not a denial (a denial leaks
-information and opens an argument surface), but //Mu//: unasked, void, //you got what you got,//
-//next question// (the Chapel-Perilous exit, #mu-five-tools). Information-minimal by construction.
+''Kapae'' (the tombstone-shadow; the worldline-rewind + its lift already stand as primitives,
+`kapae`/`un_kapae`) promotes from worldline-rewind to ''identity-antigen''. A ban Kapae's an
+authn/z into an ''ACTIVE, propagating set'' that rides the always-carried public + infra planes.
+A Kapae'd presenter draws ''Mu'' — never a denial (a denial leaks information and opens an
+argument surface), but //Mu//: unasked, void, //you got what you got, next question// (the
+Chapel-Perilous exit, #mu-five-tools). Information-minimal by construction.
 
-''The antigen saturates faster than a lone adversary chases partitions'' — because every
-honest operator is a propagation node //by contract// (#the-three-tiers). The Nexus #has an
-immune system: `NexusRegistryDoc.blocked{}` is its seed, made the quorum-signed, always-carried
+''Mu carries a second gift — indistinguishability.'' The same //Mu// answers ''you have already''
+''received my full updates''. A sync-complete peer and a Kapae'd one draw the IDENTICAL void, so an
+adversary reading the wire cannot tell whether it faces //nothing-more-to-extract// or
+//nothing-more-permitted// — the two collapse to one response, information-theoretically. Mu closes
+the surveillance surface at the same seam it closes the immune one.
+
+''The antigen saturates faster than a lone adversary chases partitions'' — because every honest
+operator carries as a propagation node //by contract// (#the-three-tiers). The Nexus #has an immune
+system: `NexusRegistryDoc.blocked{}` seeds it, drawn forward as the quorum-signed, always-carried
 antibody.
 
 <<~/ahu >>
@@ -97,8 +103,8 @@ Three spaces that never fuse (confirmed across three files; see #edges):
 
 ''The gift: carry may be liberal because the read-floor catches every carry-mistake.'' A
 generous mandatory tier never leaks readable bytes — the crypto is the safety net beneath the
-routing. So #59's identity ring is NOT a second peer-gate (that lives, live, at the
-DaemonAuthGate); it is ''carry-per-the-contract, deny a Kapae'd presenter with Mu.''
+routing. So #59's identity ring stands NOT as a second peer-gate (that lives, live, at the
+DaemonAuthGate); it enforces ''carry-per-the-contract, deny a Kapae'd presenter with Mu.''
 
 <<~/ahu >>
 
@@ -129,7 +135,7 @@ DaemonAuthGate); it is ''carry-per-the-contract, deny a Kapae'd presenter with M
 
 !! The bilateral complement ~ presence-handshake
 
-The cabal ''presence-handshake'' is the immune system's complement, not its fallback. A cabal
+The cabal ''presence-handshake'' completes the immune system, never a fallback. A cabal
 relationship requires both parties to //actively affirm// the shared relationship (artifacts
 wax-stamped; a live handshake, not a static cap). Stop affirming → you are out, //between us//,
 //now// — bilateral revocation, immediate, at the two-party scope (#cabal-place: a cabal is a
