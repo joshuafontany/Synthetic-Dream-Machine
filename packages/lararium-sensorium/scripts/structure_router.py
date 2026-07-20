@@ -64,7 +64,13 @@ _MAX_NODES = 20_000
 #   · a per-sentence CHAR cap bounds the cubic input before it reaches the parser (the dominant fix);
 #   · a wall-clock TIMEOUT is the general backstop — any residual hang falls through to the spaCy tier.
 _MAX_SENT_CHARS = 2_000     # ~400 tokens; above this a "sentence" is layout/data, not prose worth a tree
-_STANZA_TIMEOUT_S = 30      # a legitimate 100k-char parse finishes in seconds; this only catches pathology
+_STANZA_TIMEOUT_S = 60      # a legitimate 100k-char parse finishes in seconds; this only catches pathology
+# PROGRESSIVE BOUNDING — a chat block mixes prose with code / tool-output / sigil runs, and the O(n³)
+# constituency search on those non-prose tails is what blows the timeout. Rather than drop the WHOLE block
+# to the weaker spaCy tier on the first timeout, re-parse with a tighter per-sentence cap: shorter sentences
+# parse far faster, so the block's real prose still lands a CLEAN constituency tree (the tail just truncates
+# harder). Only when even the tightest cap times out does the tier degrade. Maximizes the clean-parse rate.
+_STANZA_CAPS = (_MAX_SENT_CHARS, 600, 200)
 
 
 def _count_nodes(children: list, cap: int) -> int:
@@ -357,29 +363,38 @@ def _prose_stanza(text: str) -> dict | None:
             sys.stderr.write(f"structure_router: stanza unavailable ({type(exc).__name__}) — spaCy tier\n")
             _stanza_nlp = None
             return None
-    try:
-        doc = _call_stanza(_bound_sentences(text[:100_000]))
-        root = {"type": "source_file", "children": []}
-        budget = [_MAX_NODES]
+    clipped = text[:100_000]
+    for cap in _STANZA_CAPS:                 # progressive bounding — stay in the clean tier before degrading
+        try:
+            doc = _call_stanza(_bound_sentences(clipped, cap))
+            root = {"type": "source_file", "children": []}
+            budget = [_MAX_NODES]
 
-        def conv(tree, depth: int) -> dict:
-            # a word leaf (no children) → a content-free token; a phrase/POS node → its label.
-            if not tree.children or depth >= _MAX_DEPTH:
-                return {"type": "token", "children": []}
-            kids = []
-            for c in tree.children:
-                if budget[0] <= 0:
-                    break
-                budget[0] -= 1
-                kids.append(conv(c, depth + 1))
-            return {"type": str(tree.label), "children": kids}
+            def conv(tree, depth: int) -> dict:
+                # a word leaf (no children) → a content-free token; a phrase/POS node → its label.
+                if not tree.children or depth >= _MAX_DEPTH:
+                    return {"type": "token", "children": []}
+                kids = []
+                for c in tree.children:
+                    if budget[0] <= 0:
+                        break
+                    budget[0] -= 1
+                    kids.append(conv(c, depth + 1))
+                return {"type": str(tree.label), "children": kids}
 
-        for sent in doc.sentences:
-            root["children"].append(conv(sent.constituency, 0))
-        return root if root["children"] else None
-    except Exception as exc:  # noqa: BLE001
-        sys.stderr.write(f"structure_router: stanza parse failed ({type(exc).__name__}) — spaCy tier\n")
-        return None
+            for sent in doc.sentences:
+                root["children"].append(conv(sent.constituency, 0))
+            return root if root["children"] else None
+        except TimeoutError:
+            if cap != _STANZA_CAPS[-1]:
+                sys.stderr.write(f"structure_router: stanza timeout at sent-cap {cap} — retry tighter\n")
+                continue                     # a tighter cap parses faster; keep the block in stanza
+            sys.stderr.write("structure_router: stanza timed out at every sent-cap — spaCy tier\n")
+            return None
+        except Exception as exc:  # noqa: BLE001 — stanza broke on this text ⇒ spaCy tier
+            sys.stderr.write(f"structure_router: stanza parse failed ({type(exc).__name__}) — spaCy tier\n")
+            return None
+    return None
 
 
 def _prose_spacy(text: str) -> dict | None:
