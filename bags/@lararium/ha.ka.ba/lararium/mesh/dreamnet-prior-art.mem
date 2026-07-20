@@ -189,7 +189,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Deepening — authenticated media + the authority-pinning trap:''
 * ''`mxc://` authenticated media (MSC3916)'': Matrix retrofitted access control onto media — a client MUST present an auth token to a `/_matrix/client/v1/media` endpoint before the origin homeserver serves the bytes. The retrofit itself testifies to the original sin: `mxc://{server-name}/{media-id}` ''pins content to one authority'' (the naming homeserver) behind an ''opaque, non-hash media-id''. The identifier names //where a server keeps a thing//, never //what the thing is//. Two failure modes follow by construction: the origin homeserver going dark orphans the media, and the opaque id lets no holder verify what it fetched. Matrix's leaked-URL breach (the sin the resolution design cites) traces to the same root — a fetchable URL fused resolution, authorization, and read into one string.
-* ''The DreamNet fix — content-address dissolves the pin'': `cid = BLAKE3(ciphertext)` names //what// the bytes carry, so any holder verifies blind and the naming authority drops out of the identity; a stable logical handle + provider-locality hint replaces `{server-name}` (indirection map, WNFS private-forest), so no origin homeserver holds the media hostage. The three-gate `resolveByCid` chain (may-talk · may-resolve-this-cid · may-read) keeps split what `mxc://` + the leaked-URL fused. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+* ''The DreamNet fix — content-address drops the pin'': `cid = BLAKE3(ciphertext)` names //what// the bytes carry, so any holder verifies blind and the naming authority drops out of the identity; a stable logical handle + provider-locality hint replaces `{server-name}` (indirection map, WNFS private-forest), so no origin homeserver holds the media hostage. The three-gate `resolveByCid` chain (may-talk · may-resolve-this-cid · may-read) keeps split what `mxc://` + the leaked-URL fused. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 
 ---
 
@@ -337,7 +337,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 * ''~16KiB inline threshold'': Bytes below the range-verify granularity ride inline; larger bodies land on the filesystem and stream range-verified.
 
 ''Contrast with DreamNet:''
-* Iroh addresses //plaintext//; DreamNet addresses //ciphertext// (`cid = BLAKE3(ciphertext)`), so an untrusted holder verifies and repairs blind without a confirmation oracle. The content-addressed tier `@cad` (NOT a bag — bytes in the `cid/<hash>` KIND-plane, handles riding the publicity-tiered bags) lifts Iroh's blob/doc split (skinny TW5 handle stores the hash; bytes leave the CRDT), the ~16KiB inline/range-verify boundary, and the BlobTicket `hash + NodeAddr` hint directly. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+* Iroh addresses //plaintext//; DreamNet addresses //ciphertext// (`cid = BLAKE3(ciphertext)`), so an untrusted holder verifies and repairs blind without a confirmation oracle. The content-addressed tier `@cad` (bytes in the `cid/<hash>` KIND-plane, handles riding the publicity-tiered bags) lifts Iroh's blob/doc split (skinny TW5 handle stores the hash; bytes leave the CRDT), the ~16KiB inline/range-verify boundary, and the BlobTicket `hash + NodeAddr` hint directly. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 
 ''Named Patterns:''
 * bao — BLAKE3 verified-streaming format (range proofs)

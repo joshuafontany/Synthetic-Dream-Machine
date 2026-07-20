@@ -26,10 +26,11 @@ written   = "2026-07-19"
 
 ! Content Resolution ~ large bodies leave the CRDT
 
-The mesh once carried every body //inside// the Automerge doc; a 16MB Twain overflowed
-the CRDT and named the law aloud (#51). This meme carries the converged answer: ''the''
+A body large enough to burst the CRDT leaves it — the `cid/` tier holds the bytes, the
+CRDT holds the handle. (#51 named this law when a 16MB Twain overflowed the @daemon
+summons.) This meme carries the converged answer: ''the''
 ''body leaves the doc.'' A skinny TW5 handle stays in the CRDT; the bytes leave for the
-content-addressed `cid/` tier (`@cad` names the tier, never a bag); a `resolveByCid`
+content-addressed `cid/` tier (`@cad` names the content-addressed tier); a `resolveByCid`
 callback walks them home across three gates that ''never fuse''; discovery runs
 ''without a DHT''. The design stands
 ''doubly-grounded'' — two astral-sea research waves (Fathom on CAS/blob mechanics,
@@ -72,9 +73,10 @@ verified in TW5 source — the house adds a resolver, never a fork of the lazy p
 
 <<~ ahu #cad-storage >>
 
-!! Storage ~ `@cad` names a tier, not a bag
+!! Storage ~ `@cad`, the content-addressed tier
 
-''`@cad` dissolves as a bag'' — it names the ''content-addressed TIER'', never a place.
+''`@cad` names the content-addressed TIER'': the ''`cid/` KIND-plane'' holds its bytes,
+the publicity-tiered bags hold its handles.
 The bytes rest in the ''`cid/<hash>` KIND-plane'' (`genesis/cas/`, the canon
 bag-wiki-uri-split, <<~ loulou lar:///ha.ka.ba/lararium/mesh/base-doc >>); the ''handles''
 ride the ''publicity-tiered bags''. The ''three-plane oracle model'' — the grant-graph
@@ -95,9 +97,9 @@ WHO-axis recurring at the blob layer — carries the ruling law: ''the publicity
   engine and genesis blobs by CID
   (<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>).
 
-''The dissolve of the ciphertext-vs-plaintext fork.'' The design once held ONE global
-choice — address every body by ciphertext or by plaintext. The three-plane model dissolves
-it: no global choice, the PLANE sets the mode. And ''even public keeps the gate'' —
+''No global ciphertext-vs-plaintext fork.'' The three-plane model carries no single global
+choice of addressing every body by ciphertext or by plaintext — the ''PLANE sets the mode''.
+And ''even public keeps the gate'' —
 "public" reads as a ''generous anonymous grant'', `pull` ≠ `read`; the three gates
 (#resolve-by-cid) stay intact, publicity only sets how generous gate-2 grows.
 
@@ -111,7 +113,7 @@ disk; a peer MAY opportunistically cache (best-effort, zero obligation). Filecoi
 deal/PoSt/slashing reads as global-ledger/block-height = a global-now trap → avoided.
 
 <<~ confidence Synthesis-Canon 14/20 >> the publicity plane carries the load-bearing
-move: it dissolves the addressing fork into the grant-graph the mesh already runs, so the
+move: it folds the addressing mode into the grant-graph the mesh already runs, so the
 same WHO-axis that tiers a bag tiers its bytes.
 
 <<~/ahu >>
@@ -256,9 +258,9 @@ invents ''only the composition'', never a new primitive.
 
 Four choices ride ahead of the build, each holding for the operator:
 
-* ''① sha256 → BLAKE3 migration.'' Live `genesis/cas/` hashes sha256; range-verifiable
-  lazy-fetch wants `BLAKE3(ciphertext)`. Tiered (BLAKE3 only for federated/range-fetched
-  `@cad`, sha256 stays for locally-rehashed genesis) vs dual-hash transition (#46).
+* ''① sha256 → BLAKE3 — SETTLED via self-describing multihash.'' The algorithm prefix
+  carries the migration in-band (old ids stay parseable, new bodies hash `BLAKE3(ciphertext)`
+  for range-verify); #46 closed it.
 * ''② Convergence-secret custody.'' The per-operator secret must persist AND survive a
   device-add — it rhymes with the recovery keel
   (<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>); re-derivable on
