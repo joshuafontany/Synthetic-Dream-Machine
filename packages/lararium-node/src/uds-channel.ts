@@ -13,6 +13,15 @@
  *   authority  = the invocation's requestedBy → the worker's verify-then-delegate
  *   record     = the CRDT outcome tiddler (unchanged — idempotent, re-queryable)
  *
+ * Content routing (the co-located bypass): the CLI and the daemon worker share ONE
+ * process, so the carriers (tiddler/meme/blob CONTENT in `args`) ride the DIRECT
+ * worker channel (`placeVerb` → postMessage → the worker's volatile invocation),
+ * NEVER the @daemon Automerge doc. @daemon's own doc carries only the VERB-record's
+ * durable OUTCOME/receipt (`@daemon/outcomes/<id>`, written by the dispatcher) — the
+ * command's result, never its content. A remote peer that lacks the shared process
+ * still writes a summons over WS sync (that path keeps content in the CRDT by
+ * necessity — no channel bypasses the network); the co-located path skips it.
+ *
  * Auth (v1): socket perms 0600 (owner-only) gate PRESENCE — only the operator's own
  * uid opens it; the requestedBy did rides the summons for cap-derivation. A signed
  * Ed25519 proof over the socket is the federation/attenuation hardening (follow-on);
@@ -25,7 +34,7 @@ import { existsSync, unlinkSync, chmodSync } from "node:fs";
 import type { DocHandle } from "@automerge/automerge-repo";
 import {
   DAEMON_BAG_ID, AutomergeDocStore, CompositeStore,
-  summon, OUTCOME_URI_PREFIX, type LarDoc,
+  newRequestId, OUTCOME_URI_PREFIX, type LarDoc,
 } from "@lararium/mesh";
 // The adaptive-timeout SERVO (fail on a GRADIENT, never a cliff): a per-verb wait that GROWS with the
 // observed durations and clamps FLOOR..CEIL. The machine-code work stays Python; this is the
@@ -36,6 +45,14 @@ import { adaptiveTimeoutMs, recordMineDuration } from "@lararium/mempalace";
 export interface UdsChannelOptions {
   /** The daemon's warm daemon doc handle (result.daemon.daemonHandle). */
   readonly daemonHandle: DocHandle<LarDoc>;
+  /**
+   * The DIRECT worker channel (result.daemon.placeVerb) — posts the invocation
+   * (verb + `args` CONTENT) straight to the daemon worker over the MessageChannel,
+   * so the carriers reach the dispatcher WITHOUT riding the @daemon Automerge doc.
+   * The worker still writes the durable outcome to `@daemon/outcomes/<id>`, which
+   * this channel awaits via `daemonHandle`.
+   */
+  readonly placeVerb: (o: { verb: string; args: Record<string, unknown>; requestedBy: string; requestId: string }) => void;
   /** Socket path — both sides agree on <dataDir>/lares.sock via the env contract. */
   readonly socketPath: string;
   /** Per-verb await budget (default 30s — recall cold-starts chromadb). */
@@ -60,8 +77,9 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
   // Stale-socket cleanup — bind fails on a leftover path (daemon crash / restart).
   try { if (existsSync(socketPath)) unlinkSync(socketPath); } catch { /* ignore */ }
 
-  // One writable composite over the warm daemon handle — same shape the CLI leaf
-  // builds, but against the daemon's own replica (no Repo, no sync).
+  // One READ-ONLY composite over the warm daemon handle — the channel reads the
+  // durable outcome tiddler back through it (never writes the summons here; the
+  // carriers ride the direct worker channel, off the CRDT).
   const composite = new CompositeStore();
   composite.addLayer({
     bagId:    DAEMON_BAG_ID,
@@ -69,20 +87,22 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
     writable: true,
   });
 
-  // Write the summons into the warm daemon doc; await the durable outcome via the
-  // doc's own change event (the worker dispatches + writes it back). Mirrors the
-  // CLI submitVerb body — minus the network.
+  // Hand the invocation (verb + args CONTENT) to the daemon worker over the DIRECT
+  // MessageChannel (placeVerb → the worker's volatile invocation), then await the
+  // durable outcome via the daemon doc's own change event. The carriers NEVER enter
+  // @daemon's Automerge doc — only the worker-written outcome (@daemon/outcomes/<id>)
+  // lands there. A co-located CLI shares the worker's process, so the CRDT summons
+  // (the remote-peer transport) would be a pointless content-bloating round-trip.
   const runVerb = async (inv: Invocation): Promise<Record<string, unknown>> => {
-    const summonsRecord = summon({
+    const requestId    = inv.requestId ?? newRequestId();
+    const outcomeTitle = `${OUTCOME_URI_PREFIX}${requestId}`;
+
+    opts.placeVerb({
       verb:        inv.verb,
       args:        inv.args ?? {},
       requestedBy: inv.requestedBy,
-      ...(inv.requestId ? { requestId: inv.requestId } : {}),
+      requestId,
     });
-    const requestId    = (summonsRecord.tiddler as Record<string, string>)["request-id"]!;
-    const outcomeTitle = `${OUTCOME_URI_PREFIX}${requestId}`;
-
-    await composite.put(summonsRecord, { kind: "operator-import", sessionId: `lares-uds-${requestId}` });
 
     const readOutcome = async (): Promise<Record<string, unknown> | null> => {
       const event = await composite.get(outcomeTitle);

@@ -144,6 +144,7 @@ async function main(): Promise<void> {
     const hermSocketPath = join(storageDir, "lares.sock");
     const hermUds = startUdsChannel({
       daemonHandle: herm.daemon.daemonHandle,
+      placeVerb:    (o) => herm.daemon.placeVerb(o),
       socketPath:   hermSocketPath,
       onLog: (line) => console.log(`[herm] ${line}`),
     });
@@ -235,6 +236,7 @@ async function main(): Promise<void> {
   const socketPath = join(storageDir, "lares.sock");
   const uds = startUdsChannel({
     daemonHandle: result.daemon.daemonHandle,
+    placeVerb:    (o) => result.daemon.placeVerb(o),
     socketPath,
     onLog: (line) => console.log(`[lararium] ${line}`),
   });
