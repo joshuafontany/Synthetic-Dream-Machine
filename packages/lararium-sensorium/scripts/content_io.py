@@ -202,6 +202,48 @@ class ContentStore:
         return {"cid": raw["cid"], "document": raw["document"] or "", "metadata": raw["metadata"]}
 
     def put(self, cid: str, text: str, embedding: list, metadata: dict) -> dict:
+        """Durable write of ONE record — validate its floors, then upsert. The floor raises land verbatim: a
+        systemic ContentFloorError (dim/model) fails loud, a per-record ValueError (non-finite/schema) rides
+        the caller's poison-guard. Shares its validation with put_many, so a batched write floors identically."""
+        meta = self._validate_put(cid, text, embedding, metadata)
+        mine_busy_retry(lambda: self._col.upsert(ids=[cid], documents=[text], embeddings=[embedding], metadatas=[meta]))
+        return {"cid": cid}
+
+    def put_many(self, records: "list[tuple]") -> dict:
+        """Batch the durable write — the store-side counterpart to the embed batch. Validate EACH record's
+        floors individually (so a per-record poison isolates to itself, exactly as put does), then upsert every
+        VALID record in ONE chroma call instead of one call per record. `records` = [(cid, text, embedding,
+        metadata), …] in order; returns {landed: [cid…] (in input order), failed: [{cid, error}…]}. A SYSTEMIC
+        floor (ContentFloorError — dim/model) raises and fails the whole batch loud (it poisons every record);
+        a per-record data poison drops that ONE record to `failed` and the rest still land. Preserves the
+        per-record poison-guard while amortizing the palace flock and the write across the window."""
+        ids: list = []
+        docs: list = []
+        embs: list = []
+        metas: list = []
+        landed: list = []
+        failed: list = []
+        for cid, text, embedding, metadata in records:
+            try:
+                meta = self._validate_put(cid, text, embedding, metadata)
+            except ContentFloorError:
+                raise                                  # systemic — the batch fails loud, never buries it
+            except ValueError as exc:                  # a per-record poison isolates to itself
+                failed.append({"cid": cid, "error": f"{type(exc).__name__}: {exc}"})
+                continue
+            ids.append(cid)
+            docs.append(text)
+            embs.append(embedding)
+            metas.append(meta)
+            landed.append(cid)
+        if ids:
+            mine_busy_retry(lambda: self._col.upsert(ids=ids, documents=docs, embeddings=embs, metadatas=metas))
+        return {"landed": landed, "failed": failed}
+
+    def _validate_put(self, cid: str, text: str, embedding: list, metadata: dict) -> dict:
+        """Every durable-write floor for one record — the sole validation both put and put_many cross. Returns
+        the validated flat metadata; raises ContentFloorError on a systemic embedder-identity breach (dim/
+        model) and ValueError on a per-record data poison (nested/envelope/missing-key/non-finite/immutable)."""
         meta = metadata or {}
         if not isinstance(meta, dict):
             raise ValueError(f"content put {cid}: metadata must be one flat object")
@@ -259,11 +301,10 @@ class ContentStore:
                     raise ValueError(f"content put {cid}: append-only sensorium (immutable ground) — a committed "
                                      "block's VECTOR cannot be overwritten (same text, different embedding — a silent "
                                      "recall-corrupt); re-embed under the held model or kapae the block")
-        # Idempotent on the cid (a content-hash or a stable target id): a re-put overwrites. The
-        # backend upsert self-takes the palace flock (mine_palace_lock) — hardened — but the flock is
-        # LOCK_NB and RAISES on contention; mine_busy_retry WAITS out a concurrent mempalace write.
-        mine_busy_retry(lambda: self._col.upsert(ids=[cid], documents=[text], embeddings=[embedding], metadatas=[meta]))
-        return {"cid": cid}
+        # Every floor cleared — hand back the validated flat metadata for the caller to upsert (put writes
+        # one; put_many collects the window and writes them together, both self-taking the palace flock via
+        # mine_busy_retry, which WAITS out a concurrent mempalace write on the LOCK_NB flock).
+        return meta
 
     def patch_metadata(self, cid: str, patch: dict) -> dict:
         """Partial metadata write — MERGE `patch` onto the drawer's existing metadata via chroma-native
