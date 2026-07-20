@@ -147,16 +147,9 @@ export { makeSubprocessFlush } from "./capture-flush.js";
 export type { SubprocessFlushOptions } from "./capture-flush.js";
 export { makeCaptureReserve } from "./capture-reserve.js";
 export type { CaptureReserveOptions } from "./capture-reserve.js";
-// makeCaptureEngine + CaptureReserve/CaptureFlush/CaptureAnnotate contracts live in
-// @lararium/mesh (the isomorphic core); the annotate runs IN-VM ($tw.lares.captureAnnotateVm,
-// injected by node-daemon-island) so the package index never pulls the mempalace barrel.
-export { makeNodeCaptureEngine, makeAstSplitFlush, makeFormSplitFlush } from "./node-capture-engine.js";
-export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
 // The shared palace-instance transport cap (the #has-stack foundation both local stores compose).
 export { PalaceHolder, PalaceHolderRegistry, canonicalDirOf } from "./palace-holder.js";
 export type { PalaceHolderProc, PalaceHolderSpawn, PalaceFeedCap } from "./palace-holder.js";
-export { makeStructurePalace } from "./structurepalace.js";
-export type { StructurePalace, StructureEntry, StructureProvenance, HolderSpawn } from "./structurepalace.js";
 export { makePersistencePalace } from "./persistence-palace.js";
 export type { PersistencePalace, RecordProvenance, PersistencePalaceOptions } from "./persistence-palace.js";
 export { makeContentPalace } from "./content-palace.js";

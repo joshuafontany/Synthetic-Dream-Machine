@@ -6,10 +6,7 @@
  * collection keyed by verbatim_sha; the collection is queryable BY form-similarity AND by a metadata
  * where-filter; the verbatim_sha rides as the cross-graph join to the content drawer.
  *
- * The makeFormSplitFlush tests drive a FAKE form palace (no python) — they assert the routing seam:
- * the in-VM `lar_skeleton`/`lar_basis` are consumed + stripped, the join keys stamped.
- *
- * The live tests need the venv python + chromadb; each opens its own temp palace and closes it
+ * These tests need the venv python + chromadb; each opens its own temp palace and closes it
  * (killing the holder) so vitest exits clean. The first encode per holder pays a one-time scorer
  * probe, so timeouts are generous.
  */
@@ -19,7 +16,6 @@ import { mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import type { CaptureRecord } from "@lararium/mesh";
 import { harvestTurnGradient } from "@lararium/mesh";
 import { emitMoveSkeleton, buildConstructiconBasis } from "@lararium/tw5/form-layer";
 import { afterEach, describe, expect, test } from "vitest";
@@ -28,7 +24,6 @@ import {
   makeFormPalace, _liveFormHolderCount,
   type FormPalace, type FormHolderSpawn, type SerializedBasis,
 } from "../src/formpalace.js";
-import { makeFormSplitFlush } from "../src/node-capture-engine.js";
 
 const TEST_TIMEOUT = 90_000;
 
@@ -180,99 +175,4 @@ describe("a sick holder SURFACES its stderr (the ChromaDB-error footgun)", () =>
     ).rejects.toThrow(/PermissionError/);
     await pal.close();
   }, TEST_TIMEOUT);
-});
-
-describe("makeFormSplitFlush — the form routing split (fake palace, no python)", () => {
-  /** A fake FormPalace recording encodeStore calls — no python/chroma. */
-  function fakePalace(): { pal: FormPalace; calls: Parameters<FormPalace["encodeStore"]>[0][] } {
-    const calls: Parameters<FormPalace["encodeStore"]>[0][] = [];
-    const pal: FormPalace = {
-      async encodeStore(input) {
-        calls.push(input);
-        return {
-          key: input.key, dimension: input.basis.dimension, count: 1, conformance: 0.8,
-          slor: { live: false, model: null, reason: "" },
-          form_vector: { indices: [1], values: [1] },
-        };
-      },
-      async query() { return []; },
-      async get() { return null; },
-      async close() { /* noop */ },
-    };
-    return { pal, calls };
-  }
-
-  test("consumes lar_skeleton/lar_basis → stores, strips them, stamps the join keys", async () => {
-    const { pal, calls } = fakePalace();
-    let filed: CaptureRecord[] = [];
-    const split = makeFormSplitFlush(async (b) => { filed = [...b]; return b.length; }, pal);
-
-    const { skeleton, basis } = buildInputs();
-    const rec: CaptureRecord = {
-      content: "Lares (Council): the verb leads",
-      source_file: "nalu://run/1",
-      metadata: {
-        lar_band: "canon", lar_confidence: "Synthesis:11/20", lar_sigils: 8,
-        lar_skeleton: JSON.stringify(skeleton), lar_basis: JSON.stringify(basis),
-      },
-    };
-    const n = await split([rec]);
-    expect(n).toBe(1);
-
-    // The drawer that reached the (external) mempalace: internal form-input fields STRIPPED, joins stamped.
-    const out = filed[0]!;
-    expect(out.metadata!["lar_skeleton"]).toBeUndefined();
-    expect(out.metadata!["lar_basis"]).toBeUndefined();
-    expect(out.metadata!["lar_band"]).toBe("canon"); // sibling metadata untouched
-    const verbatimSha = out.metadata!["lar_verbatim_sha"] as string;
-    expect(verbatimSha).toMatch(/^[0-9a-f]{64}$/);
-    expect(out.metadata!["lar_form_dim"]).toBe(basis.dimension);
-
-    // The form store received the encode call keyed by verbatim_sha, with the derived facets.
-    expect(calls).toHaveLength(1);
-    const c = calls[0]!;
-    expect(c.key).toBe(verbatimSha);
-    expect(c.metadata.verbatim_sha).toBe(verbatimSha);
-    expect(c.metadata.register).toBe("synthesis"); // derived from lar_confidence
-    expect(c.metadata.grammar_layer).toBe("x-memetic"); // lar_sigils > 0
-    expect(c.metadata.struct_hash).toMatch(/^[0-9a-f]{64}$/);
-
-    // The bearing facets ride too — skeleton.bearing.facets stamped onto FormMetadata (the URI
-    // spirit's one-line read). The TURN's operative bearing is the yield's resolved root.
-    expect(c.metadata.bearing_root).toBe("council.fork.named");
-    expect(c.metadata.bearing_w1).toBe("council");
-    expect(c.metadata.bearing_w3).toBe("named");
-    expect(c.metadata.bearing_grade).toBe("canon");
-    expect(c.metadata).toMatchObject(skeleton.bearing.facets); // exactly what the emitter parsed
-  });
-
-  test("a record without lar_skeleton passes straight through (form is best-effort)", async () => {
-    const { pal, calls } = fakePalace();
-    let filed: CaptureRecord[] = [];
-    const split = makeFormSplitFlush(async (b) => { filed = [...b]; return b.length; }, pal);
-    const rec: CaptureRecord = { content: "x", source_file: "s/1", metadata: { lar_band: "raw" } };
-    await split([rec]);
-    expect(filed[0]).toEqual(rec); // untouched
-    expect(calls).toHaveLength(0);
-  });
-
-  test("an encode/store failure never sinks the capture (rides through, internal fields dropped)", async () => {
-    const failing: FormPalace = {
-      async encodeStore() { throw new Error("holder down"); },
-      async query() { return []; }, async get() { return null; }, async close() {},
-    };
-    let filed: CaptureRecord[] = [];
-    const split = makeFormSplitFlush(async (b) => { filed = [...b]; return b.length; }, failing);
-    const { skeleton, basis } = buildInputs();
-    const rec: CaptureRecord = {
-      content: "the verb leads", source_file: "s/1",
-      metadata: { lar_band: "synthesis", lar_skeleton: JSON.stringify(skeleton), lar_basis: JSON.stringify(basis) },
-    };
-    await split([rec]);
-    const out = filed[0]!;
-    expect(out.content).toBe("the verb leads"); // capture conserved
-    expect(out.metadata!["lar_skeleton"]).toBeUndefined(); // internal field dropped even on failure
-    expect(out.metadata!["lar_basis"]).toBeUndefined();
-    expect(out.metadata!["lar_band"]).toBe("synthesis");
-  });
 });
