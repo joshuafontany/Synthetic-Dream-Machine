@@ -5,7 +5,7 @@
  *   - NodeFSStorageAdapter for Automerge repo
  *   - generateOrLoadVesselIdentity / loadVesselSigningSeed (disk keypair)
  *   - writeFileSync for genesis/social-bootstrap.json
- *   - LAR_ROOT / repoRoot for default directory resolution
+ *   - the composable genesis cap (daemonGenesisDir) for default directory resolution
  *
  * All ceremony logic lives in @lararium/keyhive (runFoundingCeremony,
  * runApplyAdmitPayload) and runs identically in browser + mobile vessels.
@@ -22,7 +22,7 @@ import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
   PERSONA_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
-import { repoRoot } from "@lararium/mesh/node";
+import { daemonGenesisDir } from "../lares-config.js";
 import { larDataDir } from "../vessel-paths.js";
 import { persistIdentityAnchors } from "../identity-anchors.js";
 import {
@@ -55,10 +55,11 @@ export interface InitResult {
 }
 
 function defaultDirs(): { storageDir: string; genesisDir: string } {
-  const root = process.env["LAR_ROOT"] ?? repoRoot;   // corpus root (genesis seed)
   return {
-    storageDir: larDataDir(),               // runtime → ~/.lares/.lararium
-    genesisDir: join(root, "genesis"),      // baked seed stays corpus-relative
+    storageDir: larDataDir(),        // runtime → ~/.lares/.lararium
+    // Baked seed rides the composable genesis cap (LAR_GENESIS → ~/.lares/config.json →
+    // repo-relative <corpus>/genesis). Checked-in by default; a no-config boot lands on the repo seed.
+    genesisDir: daemonGenesisDir(),
   };
 }
 

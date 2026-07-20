@@ -23,7 +23,7 @@ import {
   DAEMON_BAG_ID, PERSONA_BAG_ID,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
-import { repoRoot } from "@lararium/mesh/node";
+import { daemonGenesisDir } from "../lares-config.js";
 import { larDataDir } from "../vessel-paths.js";
 import { runDeviceAdmitEdge, type DeviceAdmitPayload } from "@lararium/keyhive";
 import { loadPersonaGroupRootSeed } from "../node-vessel-identity.js";
@@ -43,10 +43,11 @@ export interface DeviceAdmitOptions {
 }
 
 function defaultDirs(): { storageDir: string; genesisDir: string } {
-  const root = process.env["LAR_ROOT"] ?? repoRoot;   // corpus root (genesis seed)
   return {
-    storageDir: larDataDir(),               // runtime → ~/.lares/.lararium
-    genesisDir: join(root, "genesis"),      // baked seed stays corpus-relative
+    storageDir: larDataDir(),        // runtime → ~/.lares/.lararium
+    // Baked seed rides the composable genesis cap (LAR_GENESIS → ~/.lares/config.json →
+    // repo-relative <corpus>/genesis). Checked-in by default; a no-config boot lands on the repo seed.
+    genesisDir: daemonGenesisDir(),
   };
 }
 

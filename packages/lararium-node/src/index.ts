@@ -1,5 +1,5 @@
 export type { CorpusSource } from "./node-host.js";
-export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
+export { LARES_ROOT, REPO_ROOT, bagsRoot, laresMemesRoot } from "./node-host.js";
 export {
   larHome, larDataDir, larIdentityDir, larProjectionDir,
   larHarvestDir, larHarvestStageDir, larRuntimeDir, larStructurePalaceDir, larFormPalaceDir,
@@ -11,6 +11,13 @@ export {
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
 } from "./vessel-paths.js";
 export { atomicWriteFileSync } from "./fs-atomic.js";
+
+// The per-@daemon resource-override reader + the composable daemon resource caps (`~/.lares/config.json`
+// sites bags/genesis/cas away from the repo-relative default; genesis artifacts stay checked-in by default).
+export {
+  loadLaresConfig, laresConfigPath, daemonCorpusRoot, daemonGenesisDir, daemonBagsDir, daemonCasDir,
+} from "./lares-config.js";
+export type { LaresConfig, LaresResourceRoots } from "./lares-config.js";
 
 // The SHEAF-TRUE sensorium primitive — a dir that `#has` fiber-caps (content/structure/form) with
 // bands + coupling as base-caps living IN the manifest. The filetree IS the composition.

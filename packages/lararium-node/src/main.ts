@@ -41,6 +41,7 @@ import { larDataDir }                   from "./vessel-paths.js";
 import type { AutomergeUrl }            from "@automerge/automerge-repo";
 import { join } from "path";
 import { REPO_ROOT }   from "./node-host.js";
+import { loadLaresConfig } from "./lares-config.js";
 
 
 // ---------------------------------------------------------------------------
@@ -53,12 +54,13 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
     const i = args.indexOf(flag);
     return (i !== -1 ? args[i + 1] : undefined) ?? process.env[env] ?? fallback;
   };
+  const cfg        = loadLaresConfig();   // per-@daemon resource overrides (~/.lares/config.json)
   const rootDir    = resolve(get("--root", "LAR_ROOT", REPO_ROOT));   // corpus root (genesis)
   const storageDir = resolve(get("--storage", "LAR_STORAGE", larDataDir()));   // runtime → ~/.lares/.lararium
-  // One genesis law, shared with the CLI env contract: <root>/genesis —
-  // the repo root carries the REAL tracked genesis dir (the symlink and the
-  // package-dir home carry no compatibility path; early alpha keeps none).
-  const genesisDir = resolve(get("--genesis", "LAR_GENESIS", join(rootDir, "genesis")));
+  // The composable genesis cap: --genesis flag → LAR_GENESIS env → ~/.lares/config.json → repo-relative
+  // <rootDir>/genesis. Genesis stays checked-in by default, so a no-config boot lands on the repo's
+  // tracked seed exactly as before; an operator sites it under ~ via config.resources.genesis.
+  const genesisDir = resolve(get("--genesis", "LAR_GENESIS", cfg.resources?.genesis ?? join(rootDir, "genesis")));
   const recipe = (get("--recipe", "LAR_RECIPE", "lararium") === "herm" ? "herm" : "lararium") as NodeRecipe;
   return {
     port:       Number(get("--port", "LAR_PORT", "8080")),

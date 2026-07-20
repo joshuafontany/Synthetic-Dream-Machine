@@ -10,7 +10,7 @@
  *   - reconcileWellKnownTiddlers — runtime oracle tiddler writer
  */
 
-import { repoRoot } from "@lararium/mesh/node";
+import { daemonGenesisDir } from "./lares-config.js";
 import { readFileSync, existsSync }  from "fs";
 import { join }                      from "path";
 import type { Repo, DocHandle }      from "@automerge/automerge-repo";
@@ -39,13 +39,18 @@ import {
 // Genesis bytes source
 // ---------------------------------------------------------------------------
 
-const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
+/** The genesis dir when a caller sites none — resolves through the composable genesis cap
+ *  (`LAR_GENESIS` → `~/.lares/config.json` → repo-relative `<corpus>/genesis`). Genesis stays
+ *  checked-in-by-default, so a no-config boot lands on the repo's tracked seed exactly as before. */
+function defaultGenesisDir(): string {
+  return daemonGenesisDir();
+}
 
 function genesisArtifactPaths(genesisDir?: string): {
   bin: string; sha: string; cid: string; cidEngine: string; cidPlugins: string;
   manifest: string; seed: string; casDir: string;
 } {
-  const root = genesisDir ?? DEFAULT_GENESIS_DIR;
+  const root = genesisDir ?? defaultGenesisDir();
   return {
     bin: join(root, "island.bin"),
     sha: join(root, "island.sha256"),
@@ -128,7 +133,7 @@ export function readGenesisCid(genesisDir?: string): string | undefined {
 const _genesisCid = new Map<string, string | undefined>();
 
 export function GENESIS_CID(genesisDir?: string): string | undefined {
-  const key = genesisDir ?? DEFAULT_GENESIS_DIR;
+  const key = genesisDir ?? defaultGenesisDir();
   if (!_genesisCid.has(key)) _genesisCid.set(key, readGenesisCid(genesisDir));
   return _genesisCid.get(key);
 }
@@ -157,13 +162,13 @@ const _pluginsCid = new Map<string, string | undefined>();
 
 /** The engine content-CID (slow ratchet) — the hearth's stable true-name (G-D3). */
 export function GENESIS_ENGINE_CID(genesisDir?: string): string | undefined {
-  const key = genesisDir ?? DEFAULT_GENESIS_DIR;
+  const key = genesisDir ?? defaultGenesisDir();
   if (!_engineCid.has(key)) _engineCid.set(key, readGenesisEngineCid(genesisDir));
   return _engineCid.get(key);
 }
 /** The plugins content-CID (fast ratchet) — a per-operator composition, never the true-name. */
 export function GENESIS_PLUGINS_CID(genesisDir?: string): string | undefined {
-  const key = genesisDir ?? DEFAULT_GENESIS_DIR;
+  const key = genesisDir ?? defaultGenesisDir();
   if (!_pluginsCid.has(key)) _pluginsCid.set(key, readGenesisPluginsCid(genesisDir));
   return _pluginsCid.get(key);
 }

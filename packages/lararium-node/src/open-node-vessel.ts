@@ -62,6 +62,7 @@ import {
   readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
+import { daemonGenesisDir }               from "./lares-config.js";
 import { resolvePalacePath, orderHandleTurnsToStubs, type HandleTurn } from "@lararium/mempalace";
 import { writebackWing, TelemetryUnavailable } from "@lararium/sensorium";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
@@ -73,10 +74,10 @@ import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool
  *  The user's ONE-plus rotatable pin(s) ride this budget; the surface enforces it. */
 const NODE_WIKI_PIN_BUDGET = 3;
 import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, larContentDir }  from "./vessel-paths.js";
-import { makeFormPalace, type FormPalace }  from "./sensorium.js";
+import { makeFormPalace, type FormPalace, makeStructurePalace, type StructurePalace }  from "./sensorium.js";
 import { makeRecallHolder, type RecallHolder } from "./recall-holder.js";
 import { makeContentPalace, type ContentPalace } from "./sensorium.js";
-import { multiGraphRecall, makeFormSearch }  from "./sensorium-recall.js";
+import { multiGraphRecall, makeFormSearch, makeStructureSearch }  from "./sensorium-recall.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { makeChildProcessDocLoadProbe, quarantineDoc, recoverCleanTail } from "./doc-load-probe.js";
 import { loadIdentityArchive } from "./identity-anchors.js";
@@ -89,7 +90,12 @@ import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vess
 import { DaemonAuthGate }                           from "./daemon-auth-gate.js";
 import { composeLararium, composeHerm, meshPalaceCap, carriageCap, meshSelfSeed, type MeshSelf } from "./node-caps.js";
 
-const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
+/** The genesis dir when a caller sites none — resolves through the composable genesis cap
+ *  (`LAR_GENESIS` → `~/.lares/config.json` → repo-relative `<corpus>/genesis`). Genesis stays
+ *  checked-in-by-default, so a no-config boot lands on the repo's tracked seed exactly as before. */
+function defaultGenesisDir(): string {
+  return daemonGenesisDir();
+}
 
 /** FNV-1a 32-bit over a string → a STABLE non-negative index label. Deterministic per axis-id, so
  *  the SAME axis id maps to the SAME index in EVERY turn's vector — the cross-turn alignment a sparse
@@ -247,7 +253,7 @@ interface NodeBootPrep {
  */
 async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const { hostId, wikiId, storageDir, wss, catalogUrl, onPhase, genesisDir, rootDir: rootDirOpt } = opts;
-  const bootstrapPath = join(genesisDir ?? DEFAULT_GENESIS_DIR, "social-bootstrap.json");
+  const bootstrapPath = join(genesisDir ?? defaultGenesisDir(), "social-bootstrap.json");
   const emit = (p: NodeOpenPhase) => onPhase?.(p);
 
   emit("boot");
@@ -327,6 +333,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // worldline form pre-fetch (makeFormPalace ref-counts per canonical dir → one reference, never a
   // second process). Owned by the form provider impl below; closed implicitly at process exit / idle-reap.
   let recallFormPalace: FormPalace | null = null;
+  // The STRUCTURE recall leg (the 3rd fusion graph) — ref-counts per canonical dir → one reference.
+  let recallStructurePalace: StructurePalace | null = null;
   // SOVEREIGN recall — the house-code content leg (`search_io.py` embeds+searches · `content_io.py`
   // get/scan) over the MEMORY content plane. `lares sense recall` reads through THIS, never the guest
   // mempalace client (that stays the `lares mempalace` sidecar lane) — the sovereign/guest separation.
@@ -684,12 +692,17 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       // content-only. REUSES the recall form holder.
       multiRecall: (legs, args) => {
         recallFormPalace ??= makeFormPalace(larFormPalaceDir());
+        recallStructurePalace ??= makeStructurePalace(larStructurePalaceDir());
         const deriveSkeleton = (q: string) => daemonVm.deriveSkeleton(q);
         const formSearchLeg = makeFormSearch({ query: args["query"] as string, formPalace: recallFormPalace, deriveSkeleton });
+        // The STRUCTURE leg rides the reserved `extraGraphs` slot — the 3rd graph, fused on the shared
+        // verbatim_sha like content+form (a holder fault degrades to []). The N-ary core needs no change.
+        const structureLeg = makeStructureSearch(recallStructurePalace);
         return multiGraphRecall(
           {
             contentSearch: (a: Record<string, unknown>) => legs.contentSearch(a),
             formSearch: async (input: { nResults: number; where?: Record<string, unknown> }) => { try { return await formSearchLeg(input); } catch { return []; } },
+            extraGraphs: [{ name: "structure", search: structureLeg }],
           } as unknown as Parameters<typeof multiGraphRecall>[0],
           args as unknown as Parameters<typeof multiGraphRecall>[1],
         ) as unknown as Promise<Record<string, unknown>>;
