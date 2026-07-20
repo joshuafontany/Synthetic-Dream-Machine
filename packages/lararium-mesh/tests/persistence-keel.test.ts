@@ -9,13 +9,17 @@ import {
   recordTestimony, witness, reentryPrior, admit, maturationMode, WITNESS_POLICY,
   emptyStoreCode, observeClaim, storeCodeFrom, prequentialBits,
   signWitness, verifyWitnessSig, witnessProofBytes, hex,
-  STANDING_FLOOR, STANDING_CEILING, type PersistencePolicy,
+  STANDING_FLOOR, STANDING_CEILING, type PersistencePolicy, type Witness,
 } from "../src/index.js";
 
 const prov = { signer: "vessel-A", frontier: "f0" };
 const born = () => recordTestimony("innovation", [1, 2, 3], prov);
-const vouch = (signer: string, frontier: string, tick?: number) => ({ signer, frontier, polarity: 1 as const, ...(tick !== undefined ? { tick } : {}) });
-const beat = (signer: string, frontier: string) => ({ signer, frontier, polarity: -1 as const });
+// A well-formed PLACEHOLDER 128-hex signature. The standing law is pure distinct-signer arithmetic — it NEVER
+// verifies a signature — so this constant only satisfies the now-mandatory `signature` field while the dial
+// tests count distinct signers. REAL signatures (sign → verify) are exercised in the signature describe-block.
+const PLACEHOLDER_SIG = "0".repeat(128);
+const vouch = (signer: string, frontier: string, tick?: number) => ({ signer, frontier, polarity: 1 as const, signature: PLACEHOLDER_SIG, ...(tick !== undefined ? { tick } : {}) });
+const beat = (signer: string, frontier: string) => ({ signer, frontier, polarity: -1 as const, signature: PLACEHOLDER_SIG });
 
 describe("persistence-keel — the standing law (witness mode)", () => {
   test("born silent at the floor", () => {
@@ -134,8 +138,8 @@ describe("persistence-keel — the witness signature (the string the log carries
   test("FAIL-CLOSED: an unsigned edge, a bad signer key, and a wrong key all read false", async () => {
     signerHex = hex(await ed25519.getPublicKeyAsync(seed));
     const edge = await signWitness({ claimCid, signer: signerHex, frontier: "f1", polarity: 1, sign });
-    // an unsigned edge — the standing law still counts it, but the signature gate denies it
-    expect(await verifyWitnessSig(claimCid, { signer: signerHex, frontier: "f1", polarity: 1 })).toBe(false);
+    // an unsigned edge is MALFORMED: verifyWitnessSig denies it deny-by-default, so it never enters the log
+    expect(await verifyWitnessSig(claimCid, { signer: signerHex, frontier: "f1", polarity: 1 } as Witness)).toBe(false);
     // a signer field that is not raw verifying-key hex → shape guard denies (caller must supply a trusted key)
     expect(await verifyWitnessSig(claimCid, { ...edge, signer: "vessel-A" })).toBe(false);
     // a different, valid key that did not sign this edge

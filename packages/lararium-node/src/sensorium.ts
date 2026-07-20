@@ -42,7 +42,7 @@ import {
   declareSensoriumContract, SHEAF_PLANES, COSHEAF_PLANES,
   canonicalJsonBytes, defaultCryptoProvider, sha256Hex,
   reentryPrior, admit as keelAdmit, storeCodeFrom, observeClaim,
-  WITNESS_POLICY,
+  verifyWitnessSig, WITNESS_POLICY,
 } from "@lararium/mesh";
 import {
   resolveComputeCapEnv, resolveFormEncoderSpawn, resolveContentPalaceSpawn, resolvePersistencePalaceSpawn,
@@ -1128,8 +1128,15 @@ export function makePersistencePalace(dir: string, opts: PersistencePalaceOption
     },
 
     async witness(claimCid: string, edge: Witness): Promise<{ ok: boolean; witnesses: number }> {
+      // THE VERIFY GATE — deny-by-default. Verification lives HERE at the async gate (it holds the claimCid
+      // + the signer's verifying key), so the sync standing dial downstream trusts every edge in the log
+      // without re-checking. An absent or invalid signature NEVER appends — no unsigned path exists.
+      if (!(await verifyWitnessSig(claimCid, edge))) return { ok: false, witnesses: 0 };
       const r = (await p.send("witness", {
+        // The signature rides through so it persists end-to-end; the dumb py store keeps the string as the
+        // owed cross-language fixture (persistence_io must store + return it) — the keel mints and checks it.
         claim_cid: claimCid, signer: edge.signer, frontier: edge.frontier, polarity: edge.polarity,
+        signature: edge.signature,
         ...(edge.tick !== undefined ? { tick: edge.tick } : {}),
       })) as { ok?: boolean; witnesses?: number } | null;
       return { ok: r?.ok ?? false, witnesses: r?.witnesses ?? 0 };

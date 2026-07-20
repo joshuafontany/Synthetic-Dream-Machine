@@ -67,11 +67,11 @@ export interface Witness {
   readonly tick?: number;
   /**
    * The Ed25519 signature (hex) the signer draws over {@link witnessProofBytes} — the CRYPTOGRAPHIC
-   * STRING that turns the `signer` field from a bare claim into a proven vouch/defeat. OPTIONAL for
-   * back-compat: an unsigned edge stays a valid log entry the standing law still counts, but
-   * {@link verifyWitnessSig} refuses it (deny-by-default). Minted by {@link signWitness}.
+   * STRING that turns the `signer` field from a bare claim into a proven vouch/defeat. MANDATORY: a
+   * witness edge WITHOUT it reads malformed and never enters a trusted log — the palace `witness`
+   * gate runs {@link verifyWitnessSig} deny-by-default BEFORE it appends. Minted by {@link signWitness}.
    */
-  readonly signature?: string;
+  readonly signature: string;
 }
 
 /**
@@ -141,11 +141,12 @@ export function witness(t: Testimony, edge: Witness): Testimony {
  * freezes a causal fact — it says nothing about the testimony's LIVE standing, which DERIVES at read from the
  * whole distinct-signer log ({@link reentryPrior}), never from any one signature.
  *
- * OUT OF SCOPE — deliberately: (a) the signature does NOT gate the standing arithmetic. {@link standingUnder}
- * stays signature-blind: it trusts the log it is handed, exactly as wax-stamp's `classifySeal` trusts its
- * injected `verifySig`. A caller admits an edge into the log by running {@link verifyWitnessSig} FIRST
- * (deny-by-default: an absent or bad signature → do not append), so curation happens at the gate, never inside
- * the dial — which is why the unsigned edges the standing-law tests use stay valid. (b) carrying this string
+ * OUT OF SCOPE — deliberately: (a) the standing ARITHMETIC stays signature-agnostic pure math. {@link standingUnder}
+ * counts distinct signers over a log it TRUSTS, exactly as wax-stamp's `classifySeal` trusts its injected
+ * `verifySig` — but that trust is EARNED upstream, never assumed. The palace `witness` gate runs
+ * {@link verifyWitnessSig} deny-by-default on EVERY edge BEFORE it enters the log (a MANDATORY gate, not an
+ * optional courtesy: an absent or bad signature → do not append). So the dial only ever reads verified edges,
+ * and verification lives at the gate, never inside the arithmetic. (b) carrying this string
  * THROUGH the dumb python store (persistence_io) so a re-loaded edge still verifies is an owed cross-language
  * fixture (the parity manifest already names the debt) — the sovereign keel mints and checks the seal; the
  * store need not understand it. (c) WHO may witness (authorization) is the caller's policy, not the
@@ -196,7 +197,9 @@ export async function verifyWitnessSig(
   edge: Witness,
   signerKeyHex: string = edge.signer,
 ): Promise<boolean> {
-  if (edge.signature === undefined) return false;                 // no string → nothing attested → deny
+  // Defensive fail-closed: the type names `signature` mandatory, but an edge RE-LOADED from a py store that
+  // does not yet carry the field arrives without it (the owed cross-language fixture, not back-compat) — deny.
+  if ((edge.signature as string | undefined) === undefined) return false;  // no string → nothing attested → deny
   if (!/^[0-9a-fA-F]{64}$/.test(signerKeyHex)) return false;      // not a 32-byte verifying key
   if (!/^[0-9a-fA-F]{128}$/.test(edge.signature)) return false;   // not a 64-byte signature
   const msg = witnessProofBytes(claimCid, edge);
