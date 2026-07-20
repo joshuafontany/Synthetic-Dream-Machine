@@ -313,8 +313,11 @@ class CaptureSessionServer:
                     sys.stderr.write(f"[sweep] SKIP ephemeral {e['pointer']}: {reason}\n")
                     continue
                 wing = e["wing"] or default_wing
+                cap_kwargs = {"surface": e["surface"], "wing": wing, "room": room}
+                if e.get("session_id"):               # copilot's ONE store narrows to this session
+                    cap_kwargs["session_id"] = e["session_id"]
                 try:
-                    summary = self._stream.capture(e["pointer"], surface=e["surface"], wing=wing, room=room)
+                    summary = self._stream.capture(e["pointer"], **cap_kwargs)
                 except ContentFloorError:
                     raise                          # systemic — a wrong embedder poisons every session; fail loud
                 except Exception as exc:  # noqa: BLE001 — one unreadable session never aborts the sweep

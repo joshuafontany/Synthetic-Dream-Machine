@@ -56,6 +56,9 @@ def _corpus(tmp_path, monkeypatch):
     _mk(pe / "e.jsonl", str(sandbox / "wrk"))
     monkeypatch.setattr(sd, "_CLAUDE_ROOT", str(root))
     monkeypatch.setattr(sd, "_CODEX_ROOT", str(tmp_path / "no-codex"))
+    # neutralize the machine's real copilot sources so the `all` fold sees ONLY this synthetic corpus
+    monkeypatch.setattr(sd, "_COPILOT_CLI_STORE", str(tmp_path / "no-copilot.db"))
+    monkeypatch.setattr(sd, "_COPILOT_VSCODE_WS", ())
     return root
 
 

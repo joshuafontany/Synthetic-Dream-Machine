@@ -11,12 +11,21 @@ Entry = {"pointer": str, "wing": str, "surface": str, "spirit": bool, "session_i
 import os
 import re
 
-from wing_derive import read_codex_cwd, resolve_transcript_wing, wing_from_dir
+from wing_derive import read_codex_cwd, resolve_transcript_wing, scrape_wing, wing_from_dir
 
 _CLAUDE_ROOT = os.path.expanduser("~/.claude/projects")
 _CODEX_ROOT = os.path.expanduser("~/.codex/sessions")
+_COPILOT_CLI_STORE = os.path.expanduser("~/.copilot/session-store.db")
+#: The VS Code workspace-storage roots the Copilot Chat extension keeps its transcripts under.
+_COPILOT_VSCODE_WS = (
+    "~/.vscode-server/data/User/workspaceStorage",
+    "~/.vscode-server-insiders/data/User/workspaceStorage",
+    "~/.config/Code/User/workspaceStorage",
+    "~/.config/Code - Insiders/User/workspaceStorage",
+)
 
 _CODEX_UNSORTED = "wing_codex_unsorted"
+_COPILOT_UNSORTED = "wing_copilot_unsorted"
 _SPIRIT_RE = re.compile(r"^agent-.*\.jsonl$")
 
 
@@ -90,11 +99,55 @@ def discover_codex():
     return out
 
 
-#: The surfaces a full sweep walks when none is named — every local operator-AI chat source that
-#: carries a per-project wing. (Copilot rides its own store lane, threaded per-session at capture.)
-ALL_SURFACES = ("claude", "codex")
+def discover_copilot_cli():
+    """Every session in the Copilot CLI's ONE global SQLite store, each filed under the wing its
+    recorded cwd names (canonical in the `sessions` row). The pointer is the store; the entry carries
+    the native session selector so capture narrows to that one session."""
+    out = []
+    db = _COPILOT_CLI_STORE
+    if not os.path.isfile(db):
+        return out
+    try:
+        from copilot_sqlite_normalize import read_sessions
+        rows = read_sessions(db)
+    except Exception:  # noqa: BLE001 — a broken store reports nothing rather than a partial wing
+        return out
+    for sid, cwd, _turns in rows:
+        if not sid:
+            continue
+        wing = wing_from_dir(cwd) if cwd else _COPILOT_UNSORTED
+        out.append(_entry(db, wing, "copilot", session_id=sid))
+    return out
 
-_DISCOVER = {"claude": discover_claude, "codex": discover_codex}
+
+def discover_copilot_vscode():
+    """Every VS Code Copilot Chat transcript, filed under the wing scraped from its tool-call paths
+    (the transcripts carry no cwd)."""
+    out = []
+    for ws in _COPILOT_VSCODE_WS:
+        wsp = os.path.expanduser(ws)
+        if not os.path.isdir(wsp):
+            continue
+        for h in sorted(os.listdir(wsp)):
+            tdir = os.path.join(wsp, h, "GitHub.copilot-chat", "transcripts")
+            if not os.path.isdir(tdir):
+                continue
+            for name in sorted(f for f in os.listdir(tdir) if f.endswith(".jsonl")):
+                f = os.path.join(tdir, name)
+                out.append(_entry(f, scrape_wing(f) or _COPILOT_UNSORTED, "copilot-vscode"))
+    return out
+
+
+#: The surfaces a full sweep walks when none is named — every local operator-AI chat source on the
+#: machine. Copilot CLI rides its ONE store threaded per-session; the rest are file-backed worldlines.
+ALL_SURFACES = ("claude", "codex", "copilot", "copilot-vscode")
+
+_DISCOVER = {
+    "claude": discover_claude,
+    "codex": discover_codex,
+    "copilot": discover_copilot_cli,
+    "copilot-vscode": discover_copilot_vscode,
+}
 
 
 def discover(surface, *, project=None):
