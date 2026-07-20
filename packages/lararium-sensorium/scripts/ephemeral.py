@@ -1,11 +1,11 @@
-"""ephemeral — the EPHEMERAL skip verdict, the python twin of TS `ephemeral.ts`.
+"""ephemeral — the EPHEMERAL skip verdict for the python capture path.
 
 Witness-spirits, `LAR_ROOT` sandbox runs, and scratch sessions never enter the rhizome. A session
 reads ephemeral when (a) its recorded cwd sits under a recognized scratch root (the OS tmpdir /
 `/tmp` / `<larHome>/.corpus` / a `LAR_ROOT` sandbox), or (b) a `.ephemeral` sibling marker sits beside
 the transcript, or a `.lar-ephemeral` marker sits in the session's recorded cwd. The verdict reads off
 the transcript's CONTENT (grain a + the cwd half of b), so a staged copy carries the same verdict as
-the original. The python bulk sweep reads THIS; the TS capture leg reads `ephemeral.ts` — same gate.
+the original. The TS capture leg reads `ephemeral.ts`; this holds the same gate, so both skip alike.
 """
 import os
 import tempfile

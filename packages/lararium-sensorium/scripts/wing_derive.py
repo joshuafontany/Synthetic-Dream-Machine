@@ -1,10 +1,10 @@
-"""wing_derive — the ONE per-project wing derivation, the python twin of TS `wing-law.ts`.
+"""wing_derive — the ONE per-project wing derivation for the python capture path.
 
 The wing names the AI PROJECT a transcript belongs to, derived from the transcript's RECORDED cwd
 (the rows carry it), never the live payload cwd (it drifts with every agent `cd`). The live ingest
-hook and every TS consumer read `wing-law.ts`; the python bulk sweep reads THIS, producing the SAME
-slug char-for-char, so backfill wings equal live-hook wings by construction. `test_wing_derive.py`
-pins the agreement against the `wing-law.ts` fixtures.
+hook and every TS consumer read the same slug law from `wing-law.ts`; this holds it identically, so a
+swept transcript files under the SAME wing the hook assigns — the two agree by construction, and
+`test_wing_derive.py` guards that agreement against the shared fixtures.
 """
 import json
 import os

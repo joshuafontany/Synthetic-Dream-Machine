@@ -1,5 +1,5 @@
 """guest_harvest — build the GUEST comparator from every harness transcript, through the vendored
-miner's OWN vanilla path. The python twin of TS `mempalace-harvest.ts`.
+miner's OWN vanilla path. The comparator lane lives here; `lares mempalace harvest` shells it.
 
 The comparator holds the clean baseline the memory sensorium measures itself against. Its whole value
 rests on carrying no Lares vocabulary: a store stamped with our own `lar_*` gradient stops measuring
