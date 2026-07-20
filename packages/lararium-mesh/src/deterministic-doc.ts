@@ -18,7 +18,7 @@ import { interpretAsDocumentId, stringifyAutomergeUrl, type AutomergeUrl, type B
 import { from as automergeFrom, save as automergeSave } from "@automerge/automerge";
 import { sha256BytesSync, utf8Bytes } from "./crypto.js";
 import { resolveBootDoc } from "./boot-resolver.js";
-import { CROSSROADS_DOC_URI, nexusHandlesUri } from "./lar-uris.js";
+import { CROSSROADS_DOC_URI, nexusHandlesUri, nexusRegistryUri } from "./lar-uris.js";
 import { emptyLarDoc, type LarDoc } from "./base-doc.js";
 
 /** A fixed actor so every vessel's blank materialization yields byte-identical bytes → they converge, never fork. */
@@ -38,6 +38,17 @@ export function crossroadsDocUrl(nexusPubkey: string): AutomergeUrl {
 /** The Nexus's WHO board URL — deterministic, so every island member resolves the one board with no mint-race. */
 export function whoBoardDocUrl(nexusPubkey: string): AutomergeUrl {
   return deterministicDocUrl(`${nexusHandlesUri(nexusPubkey)}#board`);
+}
+
+/**
+ * The Nexus's Kapae-ANTIGEN board URL — deterministic, so the quorum-signed immune antigen rides the
+ * always-carried public plane every island member resolves alike (carry-contract MANDATORY tier). The
+ * federation gate federates this board like @crossroads + WHO, so the antigen propagates to every honest
+ * carrier by contract — the immune system saturates the connected mesh (bounded by sync-latency, never
+ * instant; siege-resilience #the-honest-edges).
+ */
+export function kapaeAntigenDocUrl(nexusPubkey: string): AutomergeUrl {
+  return deterministicDocUrl(`${nexusRegistryUri(nexusPubkey)}#kapae-antigen`);
 }
 
 /**

@@ -30,7 +30,7 @@ import {
   type DocumentId,
   type PeerId,
 } from "@automerge/automerge-repo";
-import { crossroadsDocUrl, whoBoardDocUrl } from "./deterministic-doc.js";
+import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl } from "./deterministic-doc.js";
 import type { IdentitySlot } from "./identity-slot.js";
 
 /**
@@ -49,10 +49,12 @@ export interface FederationGate {
  *
  * The federatable surface is the per-Nexus PUBLIC boards, addressed
  * deterministically from the confederation (relay-gate) key: the @crossroads
- * public-plane doc + the WHO board. Automerge-repo does NOT auto-follow doc refs
- * (each doc syncs independently under its own sharePolicy verdict), so these
- * board ids are the WHOLE relay surface — no transitive dep-set to chase and
- * ZERO hand-maintenance (the set is a pure function of the gate key).
+ * public-plane doc + the WHO board + the Kapae-ANTIGEN board (the immune antigen
+ * rides the mandatory-carry plane, carry-contract MANDATORY tier). Automerge-repo
+ * does NOT auto-follow doc refs (each doc syncs independently under its own
+ * sharePolicy verdict), so these board ids are the WHOLE relay surface — no
+ * transitive dep-set to chase and ZERO hand-maintenance (the set is a pure
+ * function of the gate key).
  *
  * `extraBoardUrls` admits any further public board a leaf deliberately federates
  * (e.g. a WHERE/mesh board) — passed in by the composing vessel, still
@@ -65,6 +67,7 @@ export class DeterministicFederationGate implements FederationGate {
     const urls: AutomergeUrl[] = [
       crossroadsDocUrl(nexusPubkey),
       whoBoardDocUrl(nexusPubkey),
+      kapaeAntigenDocUrl(nexusPubkey),   // the immune antigen rides the always-carried plane (MANDATORY tier)
       ...extraBoardUrls,
     ];
     this.#federatable = new Set(urls.map((u) => interpretAsDocumentId(u) as DocumentId));
@@ -163,4 +166,72 @@ export async function identityShareDecision(
   const bagUrl = identity.bagUrlForDoc(documentId);
   if (!bagUrl)                  return false;   // doc→bag unresolvable → cannot prove a cap → DENY
   return identity.slot.verifyCapability(bagUrl, identity.ability ?? "read");
+}
+
+/**
+ * AntigenRing — the #59 identity-ring seam the carry-contract enforces: consult the quorum-signed
+ * Kapae-antigen and deny a Kapae'd PRESENTER with Mu. This is NOT a second peer-gate (peer-auth lives,
+ * live, at the DaemonAuthGate) and it is NOT the self-slot capability ring (that stays inert — see the
+ * surfaced fork below). It is a purely ADDITIVE deny path keyed on the PEER, orthogonal to the per-doc
+ * cap barrier.
+ *
+ * `kapaed` is the folded antigen set (kapae-antigen `foldAntigenSet`); `presenterNym` resolves a sync
+ * peerId → the presenter's verifying-key nym, or null when the wire cannot yet name the presenter.
+ */
+export interface AntigenRing {
+  /** The currently-Kapae'd nym set — folded from the quorum-signed, always-carried antigen board. */
+  readonly kapaed: ReadonlySet<string>;
+  /** Resolve a sync peerId → the presenter's ed25519 verifying-key nym, or null when unknown. */
+  presenterNym(peerId: string): string | null;
+}
+
+/**
+ * presenterIsKapaed — does the antigen positively identify this presenter as Kapae'd? PURELY ADDITIVE:
+ * a null ring or an UNRESOLVABLE presenter returns false (NOT a deny) — the antigen only DENIES a
+ * positively-identified Kapae'd presenter; it never opens a new allow path, and it never fail-closed-denies
+ * an unknown peer (deny-by-default for READ already lives at the fed gate + the BeeKEM read-floor). The
+ * fail-closed discipline sits UPSTREAM, in the antigen fold: an unverified entry never reaches `kapaed`.
+ */
+export function presenterIsKapaed(antigen: AntigenRing | null, peerId: string): boolean {
+  if (!antigen) return false;
+  const nym = antigen.presenterNym(peerId);
+  if (nym === null) return false;
+  return antigen.kapaed.has(nym);
+}
+
+/**
+ * carryContractShareDecision — the #59 WIRE: the antigen peer-consult layered AHEAD of the #58
+ * composition. A Kapae'd presenter draws the SAME `false` a caught-up peer draws (no doc crosses, no
+ * denial announced) — that identical `false` IS the Mu the caller emits as the indistinguishable void
+ * (./mu-void): the wire cannot tell nothing-more-permitted from nothing-more-to-extract.
+ *
+ * The layering is ADDITIVE and self-slot-safe:
+ *   1. antigen peer-consult — a Kapae'd presenter → deny (Mu). Adds a deny, never an allow.
+ *   2. the existing #58 `identityShareDecision`, UNCHANGED — the inner self-slot ring stays inert
+ *      (identity = null on the live path) exactly as today; deny-by-default intact.
+ *
+ * ── SURFACED FORK (the #59 self-slot question) ──────────────────────────────
+ * Lighting the INNER self-slot capability ring fully (identity ≠ null) re-introduces the allow-all
+ * regression Ringward found (the self-slot `verifyCapability(bagUrl,"read")` for presenter = self grants
+ * the vessel every one of its own docs, so an over-broad self-slot leaks the private planes to the relay).
+ * This fn does NOT light that ring — it passes `identity` straight through so the self-slot stays inert —
+ * and wires ONLY the antigen-consult that is safe. Making the self-slot inner ring live needs the
+ * main↔worker cap-verify bridge (identityShareDecision's own HONEST BOUND) AND a tightened self-slot that
+ * distinguishes federatable-own from private-own; kept as the open fork.
+ *
+ * Meme: lar:///ha.ka.ba/lararium/mesh/carry-contract#carry-read-contract
+ */
+export async function carryContractShareDecision(
+  relayPeers: ReadonlySet<string>,
+  fedGate:    FederationGate | null,
+  antigen:    AntigenRing | null,
+  identity:   IdentityRing | null,
+  peerId:     string,
+  documentId?: DocumentId,
+): Promise<boolean> {
+  // ANTIGEN peer-consult FIRST — a Kapae'd presenter draws Mu (an in-process island peer never reaches a
+  // relay antigen; the ring's presenterNym returns null for a house member, so this is a no-op there).
+  if (presenterIsKapaed(antigen, peerId)) return false;
+  // Then the #58 composition, UNCHANGED. The self-slot inner ring stays inert (see the surfaced fork).
+  return identityShareDecision(relayPeers, fedGate, identity, peerId, documentId);
 }
