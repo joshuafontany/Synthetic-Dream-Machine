@@ -55,6 +55,54 @@ export function discoverHoldings(root: string): Array<{ holding: string; source:
 }
 
 /**
+ * Feed ONE holding back into its doc — the kind-route (ingest for system bags, CREATE+LOAD
+ * for the rest), lifted out so the whole-store `seedRun` and the targeted single-bag L4
+ * regenesis share ONE spelling of the re-feed. Returns this holding's verdict row.
+ */
+export async function seedHolding(
+  args: ParsedArgs,
+  h: { holding: string; source: string; toBag: string },
+): Promise<SeedHolding> {
+  if (SYSTEM_HOLDINGS.has(h.holding)) {
+    // Infrastructure bags (@lares/@lararium) flow as NAMELESS ENTITIES — no special auto-confirm.
+    // A converged bag submits zero (silent no-op); a bag with genuinely NEW content trips the
+    // ingest gate's "confirmation required" WITHOUT `--yes` — and that is the FEATURE: new infra
+    // content SURFACES for the operator to grade on a gradient (approve → re-run with --yes, or
+    // abort), never silently auto-applied. `--yes` (the operator's relayed approval) passes through.
+    const exitCode = await cmdIngest({
+      command: "ingest",
+      positional: [],
+      options: { ...args.options, source: h.source, to: h.toBag },
+      flags: args.flags,
+    });
+    return { ...h, gesture: "ingest", exitCode };
+  }
+  // LOAD refuses an unregistered bag (cap-denied) — CREATE registers the
+  // catalog-corpus entry first. CREATE converges idempotently (same content
+  // id → same outcome), so every seed run may lead
+  // with it. Applied runs only — a preview mutates nothing.
+  const flags = args.flags["apply"]
+    ? { ...args.flags, yes: true }
+    : { ...args.flags, "dry-run": true };
+  if (args.flags["apply"]) {
+    const createCode = await cmdAct({
+      command: "act",
+      positional: ["CREATE"],
+      options: { ...args.options, bag: h.toBag },
+      flags: { ...args.flags, yes: true },
+    });
+    if (createCode !== 0) return { ...h, gesture: "load", exitCode: createCode };
+  }
+  const exitCode = await cmdAct({
+    command: "act",
+    positional: ["LOAD"],
+    options: { ...args.options, "source-uri": h.source, to: h.toBag },
+    flags,
+  });
+  return { ...h, gesture: "load", exitCode };
+}
+
+/**
  * The core run — one existing gesture per holding, sequential (one island gate, no
  * write contention). Continues past a failing holding (converge what it can); the
  * caller reads per-holding exit codes.
@@ -62,46 +110,7 @@ export function discoverHoldings(root: string): Array<{ holding: string; source:
 export async function seedRun(args: ParsedArgs): Promise<SeedHolding[]> {
   const holdings = discoverHoldings(larRoot());
   const ledger: SeedHolding[] = [];
-  for (const h of holdings) {
-    if (SYSTEM_HOLDINGS.has(h.holding)) {
-      // Infrastructure bags (@lares/@lararium) flow as NAMELESS ENTITIES — no special auto-confirm.
-      // A converged bag submits zero (silent no-op); a bag with genuinely NEW content trips the
-      // ingest gate's "confirmation required" WITHOUT `--yes` — and that is the FEATURE: new infra
-      // content SURFACES for the operator to grade on a gradient (approve → re-run with --yes, or
-      // abort), never silently auto-applied. `--yes` (the operator's relayed approval) passes through.
-      const exitCode = await cmdIngest({
-        command: "ingest",
-        positional: [],
-        options: { ...args.options, source: h.source, to: h.toBag },
-        flags: args.flags,
-      });
-      ledger.push({ ...h, gesture: "ingest", exitCode });
-    } else {
-      // LOAD refuses an unregistered bag (cap-denied) — CREATE registers the
-      // catalog-corpus entry first. CREATE converges idempotently (same content
-      // id → same outcome), so every seed run may lead
-      // with it. Applied runs only — a preview mutates nothing.
-      const flags = args.flags["apply"]
-        ? { ...args.flags, yes: true }
-        : { ...args.flags, "dry-run": true };
-      if (args.flags["apply"]) {
-        const createCode = await cmdAct({
-          command: "act",
-          positional: ["CREATE"],
-          options: { ...args.options, bag: h.toBag },
-          flags: { ...args.flags, yes: true },
-        });
-        if (createCode !== 0) { ledger.push({ ...h, gesture: "load", exitCode: createCode }); continue; }
-      }
-      const exitCode = await cmdAct({
-        command: "act",
-        positional: ["LOAD"],
-        options: { ...args.options, "source-uri": h.source, to: h.toBag },
-        flags,
-      });
-      ledger.push({ ...h, gesture: "load", exitCode });
-    }
-  }
+  for (const h of holdings) ledger.push(await seedHolding(args, h));
   return ledger;
 }
 

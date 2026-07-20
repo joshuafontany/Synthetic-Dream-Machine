@@ -99,6 +99,32 @@ export class SyncedTree {
   }
 
   /**
+   * Forget every observation belonging to ONE bag — the L4 per-bag scalpel. Where
+   * `lares reset` wipes the whole projection dir (the all-bags rebirth), a targeted
+   * single-bag regenesis clears just this bag's carrier keys (`${bagId}\0…`) so its
+   * re-feed reads every carrier as `new` (a surviving watermark would read them all
+   * `unchanged` and leave the freshly-cleared doc empty — the same poison the whole-tree
+   * guard names, scoped down). Returns the count removed. Siblings' observations stay put.
+   */
+  deleteBag(bagId: string): number {
+    const prefix = `${bagId}\0`;
+    let removed = 0;
+    for (const key of [...this.map.keys()]) {
+      if (key.startsWith(prefix)) { this.delete(key); removed++; }
+    }
+    return removed;
+  }
+
+  /** Count the observations one bag still carries — the per-bag virgin assertion the L4
+   *  conductor runs after `deleteBag` (mirrors regenesis's whole-tree zero-check). */
+  countForBag(bagId: string): number {
+    const prefix = `${bagId}\0`;
+    let n = 0;
+    for (const key of this.map.keys()) if (key.startsWith(prefix)) n++;
+    return n;
+  }
+
+  /**
    * R2 rename resolution — given a bag and a carrier's whole-carrier hash, answer the
    * UNIQUE live carrier URI currently observing that exact content in that bag, else
    * null. Null on no match OR an AMBIGUOUS match (>1 live carrier shares the content —

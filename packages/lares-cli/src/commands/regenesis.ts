@@ -27,7 +27,8 @@ import type { ParsedArgs } from "../parse-args.js";
 import { larPort, larRoot, larIdentityDir } from "../env.js";
 import { cmdReset } from "./scripted.js";
 import { cmdWake } from "./wake.js";
-import { seedRun, discoverHoldings } from "./seed.js";
+import { seedRun, seedHolding, discoverHoldings } from "./seed.js";
+import { cmdAct } from "./act.js";
 
 const STEPS = [
   "stop incumbent", "reset --force (store + genesis + projection watermark)",
@@ -36,7 +37,113 @@ const STEPS = [
 
 function step(n: number): string { return `[regenesis ${n + 1}/${STEPS.length}] ${STEPS[n]}`; }
 
+/**
+ * The bags a single-bag regenesis MUST NOT target — the social/registry plane the boot
+ * contract stands on. `discoverHoldings` only ever returns `bags/@*` dirs (@daemon,
+ * @identities, @persona, @groups, @sessions, @catalog/@oracle live on the social plane
+ * with no `bags/` dir), so a name lookup already fences them out; this set is the
+ * belt-and-braces refusal that names WHY, never the primary gate.
+ */
+const PROTECTED_BAGS = new Set([
+  "@daemon", "@identities", "@persona", "@groups", "@sessions", "@catalog", "@oracle",
+]);
+
+/** Resolve `--bag @slug` (or a full `bags/@slug` URI) to the discovered holding it names. */
+function resolveHolding(
+  bagArg: string,
+  holdings: ReturnType<typeof discoverHoldings>,
+): (typeof holdings)[number] | null {
+  const slug = bagArg.startsWith("@") ? bagArg : (bagArg.replace(/\/+$/, "").split("/").pop() ?? bagArg);
+  return holdings.find((h) => h.holding === slug || h.toBag === bagArg) ?? null;
+}
+
+/**
+ * L4 — targeted single-bag regenesis: rebirth ONE bag's doc from its `bags/@slug` disk
+ * canon WITHOUT a full-store wipe and WITHOUT stopping the vessel. The scalpel to
+ * `regenesis`'s sledgehammer: it reaches @daemon / sibling bags / identity / genesis /
+ * the mempalace NOT AT ALL. Three scoped steps, mirroring reset+seed for one holding:
+ *
+ *   1. CLEAR the bag doc   — daemon-side, cap-verified, tombstone-in-place (the doc
+ *                            SURVIVES; no registry repoint, no fresh mint — the re-mint
+ *                            path would rewrite the @catalog/@oracle pointer tiddler and
+ *                            reach the boot contract, out of L4-v1 scope).
+ *   2. clear the watermark — forget just this bag's projection observations (the CLI owns
+ *                            the synced-tree), then ASSERT virgin per-bag (regenesis's
+ *                            zero-check, scoped): a surviving watermark would read every
+ *                            carrier "unchanged" and leave the cleared doc empty.
+ *   3. re-seed one holding — the existing kind-routed seed primitive, this bag only.
+ *
+ * Preview by default; `--force` enacts — the same posture as the whole-store ritual.
+ */
+export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise<number> {
+  const holdings = discoverHoldings(larRoot());
+  const h = resolveHolding(bagArg, holdings);
+  if (!h) {
+    console.error(`[regenesis --bag] "${bagArg}" names no @holding under ${larRoot()}/bags`);
+    console.error(`  known: ${holdings.map((x) => x.holding).join(" · ") || "(none found)"}`);
+    return 3;
+  }
+  if (PROTECTED_BAGS.has(h.holding)) {
+    console.error(`[regenesis --bag] REFUSED: ${h.holding} rides the social/registry plane (the boot contract) — L4 targets bags/@* content bags only.`);
+    return 2;
+  }
+
+  const scopedSteps = [
+    "CLEAR the bag doc (act CLEAR — tombstone-in-place; the doc survives)",
+    "clear the per-bag projection watermark (+ virgin assert)",
+    `re-seed ${h.holding} from ${h.source} (kind-routed)`,
+  ];
+
+  if (!args.flags["force"]) {
+    console.log(`lares regenesis --bag ${h.holding} — targeted single-bag rebirth (preview; pass --force to enact)`);
+    for (let i = 0; i < scopedSteps.length; i++) console.log(`  [L4 ${i + 1}/${scopedSteps.length}] ${scopedSteps[i]}`);
+    console.log(`  UNTOUCHED: @daemon · sibling bags (${holdings.filter((x) => x.holding !== h.holding).map((x) => x.holding).join(" · ") || "(none)"}) · ${larIdentityDir()} (keys) · genesis · the mempalace · the running vessel (never stopped)`);
+    return 0;
+  }
+
+  // ── Enact — the vessel STAYS UP (no stop/wake): every gesture rides the live daemon sock ──
+
+  // 1. CLEAR the bag doc (daemon-side, cap-verified). A daemon-unreachable / cap-denied
+  //    fault surfaces through cmdAct's exit code — re-run once the fault clears (idempotent).
+  console.log(`[L4 1/3] CLEAR ${h.toBag}`);
+  const clearCode = await cmdAct({
+    command: "act", positional: ["CLEAR"],
+    options: { ...args.options, bag: h.toBag },
+    flags: { ...args.flags, yes: true },
+  });
+  if (clearCode !== 0) { console.error("[regenesis --bag] CLEAR failed (daemon down? cap-denied?) — nothing re-seeded; re-run after the fault clears"); return clearCode; }
+
+  // 2. Forget this bag's projection observations, then assert virgin for the bag. The
+  //    CLI owns the synced-tree file; the vessel's projector reacts to the CLEAR by
+  //    dropping the same keys, so this is a backstop + a fail-loud guard against a stale
+  //    watermark that would silently starve the re-feed.
+  console.log(`[L4 2/3] clear watermark for ${h.toBag}`);
+  const { SyncedTree, larProjectionDir } = await import("@lararium/node");
+  const { join } = await import("node:path");
+  const tree = new SyncedTree(join(larProjectionDir(), "synced-tree.json"));
+  const removed = tree.deleteBag(h.toBag);
+  tree.flush();
+  const residual = tree.countForBag(h.toBag);
+  if (residual > 0) {
+    console.error(`[regenesis --bag] REFUSED: ${residual} watermark entr(y/ies) for ${h.toBag} survived the clear — a stale watermark would starve the re-feed. Re-run (the projector settles), or clear projection/synced-tree.json.`);
+    return 1;
+  }
+  console.log(`  forgot ${removed} carrier observation(s); the bag reads virgin`);
+
+  // 3. Re-seed ONE holding — the shared kind-routed primitive, applied.
+  console.log(`[L4 3/3] re-seed ${h.holding}`);
+  const row = await seedHolding({ ...args, flags: { ...args.flags, apply: true, yes: true } }, h);
+  if (row.exitCode !== 0) { console.error(`[regenesis --bag] re-seed ${h.holding} (${row.gesture}) → exit ${row.exitCode}; the doc may sit part-fed — re-run (idempotent)`); return 1; }
+
+  console.log(`[regenesis --bag] ${h.holding} reborn from disk canon — @daemon, siblings, identity, genesis, the mempalace untouched. Witness: \`lares status\`, the bag through the wiki.`);
+  return 0;
+}
+
 export async function cmdRegenesis(args: ParsedArgs): Promise<number> {
+  // The scalpel forks off the sledgehammer on `--bag`: one holding, no stop, no store wipe.
+  const bagArg = args.options["bag"];
+  if (bagArg) return cmdRegenesisBag(args, bagArg);
+
   if (!args.flags["force"]) {
     console.log("lares regenesis — CRDT-layer rebirth from bags/ (preview; pass --force to enact)");
     for (let i = 0; i < STEPS.length; i++) console.log(`  ${step(i)}`);

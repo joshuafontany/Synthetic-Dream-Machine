@@ -45,6 +45,57 @@ describe("synced-tree — observations persist atomically", () => {
   });
 });
 
+describe("synced-tree — deleteBag/countForBag (the L4 per-bag watermark scalpel)", () => {
+  const A = "lar:///ha.ka.ba/bags/@sdm";
+  const B = "lar:///ha.ka.ba/bags/@elyncia";
+  const freshTree = () => new SyncedTree(join(mkdtempSync(join(tmpdir(), "synced-")), "synced-tree.json"), 0);
+
+  test("forgets ONLY the target bag's observations; siblings stay put", () => {
+    const t = freshTree();
+    t.set(syncedTreeKey(A, "lar:///a.b.c"), "h1");
+    t.set(syncedTreeKey(A, "lar:///a.b.d"), "h2");
+    t.set(syncedTreeKey(B, "lar:///x.y.z"), "h3");
+    expect(t.countForBag(A)).toBe(2);
+    expect(t.deleteBag(A)).toBe(2);
+    expect(t.countForBag(A)).toBe(0);
+    expect(t.get(syncedTreeKey(A, "lar:///a.b.c"))).toBeNull();
+    // the sibling bag survives untouched — the scalpel, not the sledgehammer
+    expect(t.countForBag(B)).toBe(1);
+    expect(t.get(syncedTreeKey(B, "lar:///x.y.z"))).toBe("h3");
+  });
+
+  test("the clear persists (a re-read reads the bag virgin, siblings intact)", () => {
+    const dir = mkdtempSync(join(tmpdir(), "synced-"));
+    const p = join(dir, "synced-tree.json");
+    const t = new SyncedTree(p, 0);
+    t.set(syncedTreeKey(A, "lar:///a.b.c"), "h1");
+    t.set(syncedTreeKey(B, "lar:///x.y.z"), "h3");
+    t.deleteBag(A);
+    t.flush();
+    const reread = new SyncedTree(p, 0);
+    expect(reread.countForBag(A)).toBe(0);
+    expect(reread.get(syncedTreeKey(B, "lar:///x.y.z"))).toBe("h3");
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  test("deleteBag on a bag with no observations answers 0 (idempotent)", () => {
+    const t = freshTree();
+    t.set(syncedTreeKey(B, "lar:///x.y.z"), "h3");
+    expect(t.deleteBag(A)).toBe(0);
+    expect(t.countForBag(B)).toBe(1);
+  });
+
+  test("a bag whose id prefixes another is NOT over-matched (NUL boundary)", () => {
+    const t = freshTree();
+    // @sdm and @sdm-history share a textual prefix; the NUL separator keeps them distinct
+    const SDM_HIST = "lar:///ha.ka.ba/bags/@sdm-history";
+    t.set(syncedTreeKey(A, "lar:///a.b.c"), "h1");
+    t.set(syncedTreeKey(SDM_HIST, "lar:///h.i.j"), "h9");
+    expect(t.deleteBag(A)).toBe(1);
+    expect(t.countForBag(SDM_HIST)).toBe(1);   // the prefix-sharing sibling survives
+  });
+});
+
 describe("synced-tree — the R2 content-addressed rename-index", () => {
   const BAG = "lar:///ha.ka.ba/bags/@daemon/notes";
   const OTHER = "lar:///ha.ka.ba/bags/@daemon/other";
