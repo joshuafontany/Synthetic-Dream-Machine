@@ -56,6 +56,20 @@ class ContentStoreLandCap:
     def land(self, cid: str, text: str, vector, metadata: dict) -> None:
         self._store.put(cid, text, vector, metadata or {})
 
+    def land_many(self, records: "list[tuple]") -> dict:
+        """Batch land — delegate to the store's put_many: validate each record's floors, isolate a per-record
+        poison to `failed`, upsert every valid record in ONE call. Returns {landed, failed}; run_pass commits
+        only the landed seqs, so the watermark advances exactly as the per-record land leaves it."""
+        return self._store.put_many([(c, t, v, m or {}) for c, t, v, m in records])
+
+    def land_many_is_consistent(self) -> bool:
+        """The Liskov-safety gate: run_pass BATCHES a fresh-land window through land_many ONLY when this cap's
+        land AND land_many are the un-overridden base methods — so a subclass that hooks land() (a poison
+        injector, a policy overlay) whose meaning land_many would BYPASS reports False and rides the per-record
+        land() path instead. Batch the write, never a divergent decision."""
+        return (type(self).land is ContentStoreLandCap.land
+                and type(self).land_many is ContentStoreLandCap.land_many)
+
     def is_fatal(self, exc: BaseException) -> bool:
         """Whether a land throw MUST abort the pass rather than ride the poison-guard: a SYSTEMIC
         embedder-identity floor (wrong dim/model) poisons EVERY record, so it fails LOUD — never hides
@@ -128,11 +142,48 @@ class Pipeline:
         seen = landed = skipped = relanded = retracted = 0
         failed: list = []
         plane_failed: dict = {p.name: [] for p in self._planes}
+        # A land-cap that CERTIFIES its land/land_many consistency batches the fresh writes: fresh records
+        # buffer, then one put_many lands the window — the store-side counterpart to the embed batch. A cap
+        # that hooks land() reports False (the Liskov-safety gate) and rides the per-record land() path, so a
+        # subclass's land semantics are never bypassed. Batch the WRITE, never a divergent decision.
+        batch_land = (self._land.land_many
+                      if getattr(self._land, "land_many_is_consistent", None) and self._land.land_many_is_consistent()
+                      else None)
+        buf: list = []
+
+        def _flush() -> None:
+            """Land the buffered fresh records in ONE batched write, then advance the drain-ledger per record —
+            EXACTLY the watermark the per-record land leaves: a landed seq commits (planes fan out), a
+            poison-isolated one records to `failed` and stays staged-not-committed (backlog surfaces it). A
+            SYSTEMIC floor raises out of put_many BEFORE any upsert, so nothing half-commits."""
+            nonlocal landed
+            if not buf:
+                return
+            res = batch_land([(r["cid"], r.get("text", ""), self._vector_for(r), r.get("metadata", {}))
+                              for r in buf])
+            done = set(res["landed"])
+            errs = {f["cid"]: f["error"] for f in res["failed"]}
+            for r in buf:
+                if r["cid"] in done:
+                    drain.commit(r["seq"])         # durable after the batch upsert — advance the watermark
+                    landed += 1
+                    self._fan_out(r, plane_failed)
+                else:                              # a per-record poison: leave the seq staged-not-committed
+                    failed.append({"seq": r["seq"], "cid": r["cid"],
+                                   "error": errs.get(r["cid"], "batch: not landed")})
+            buf.clear()
+
         for rec in self._embed_windows(self._source(pointer)):
             seen += 1
             seq, cid = rec["seq"], rec["cid"]
             try:
                 drain.stage(seq, cid)
+                if batch_land is not None and not self._land.is_landed(cid):
+                    buf.append(rec)                # a FRESH record → buffer for the batched land (common path)
+                    if len(buf) >= _EMBED_BATCH:
+                        _flush()
+                    continue
+                _flush()                           # an already-landed (or non-batch) record → flush fresh FIRST (seq order)
                 if self._land.is_landed(cid):
                     # Pay the chain-compare ONLY on an already-landed cid (the common no-divergence path
                     # stays cheap). A held chain (or a non-rewind-aware land-cap) = the re-derivation no-op.
@@ -151,6 +202,7 @@ class Pipeline:
                         retracted += 1
                     self._fan_out(rec, plane_failed)
                     continue
+                # No batch door (a hooked or minimal land-cap) — the per-record fresh land.
                 self._land.land(cid, rec.get("text", ""), self._vector_for(rec), rec.get("metadata", {}))
                 drain.commit(seq)              # advance the watermark AFTER the durable land (accept != land)
                 landed += 1
@@ -164,6 +216,7 @@ class Pipeline:
                 # watermark holds below it and backlog surfaces the stall; record it, carry the pass on.
                 failed.append({"seq": seq, "cid": cid, "error": f"{type(exc).__name__}: {exc}"})
                 continue
+        _flush()   # land the final partial window
         summary = {
             "seen": seen,
             "landed": landed,
