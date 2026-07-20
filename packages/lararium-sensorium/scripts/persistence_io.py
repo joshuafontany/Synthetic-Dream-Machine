@@ -35,7 +35,7 @@ Protocol — NDJSON over stdin/stdout, one JSON object per line (only JSON to st
     -> {"id":3,"op":"get","claim_cid":C}
     <- {"id":3,"ok":true,"result":{ <Testimony> | null }}
 
-    -> {"id":4,"op":"witness","claim_cid":C,"signer":S,"frontier":F,"polarity":1,"tick":N}
+    -> {"id":4,"op":"witness","claim_cid":C,"signer":S,"frontier":F,"polarity":1,"tick":N,"signature":H}
     <- {"id":4,"ok":true,"result":{"ok":true,"witnesses":M}}
 
     -> {"id":5,"op":"neighbors","assertion":[...],"k":16}     # proximity — NEVER the admit gate
@@ -184,7 +184,7 @@ class PersistenceStore:
         mine_busy_retry(lambda: self._col.upsert(ids=[claim_cid], embeddings=[assertion], documents=[document or claim_cid], metadatas=[meta]))
         return {"claim_cid": claim_cid}
 
-    def witness(self, claim_cid: str, signer: str, frontier: str, polarity: int, tick=None) -> dict:
+    def witness(self, claim_cid: str, signer: str, frontier: str, polarity: int, tick=None, signature=None) -> dict:
         raw = self._get_raw(claim_cid)
         if raw is None:
             return {"ok": False, "witnesses": 0}
@@ -196,6 +196,11 @@ class PersistenceStore:
         edge = {"signer": signer, "frontier": frontier, "polarity": 1 if polarity >= 0 else -1}
         if tick is not None:
             edge["tick"] = tick
+        # Round-trip the sovereign keel's ed25519 string so a re-loaded edge still verifies. The store is
+        # dumb — it keeps the string verbatim; the keel mints and checks it. The TS gate rejects an edge
+        # that lacks it, so a fresh witness always carries one; a legacy edge without it fails closed.
+        if signature is not None:
+            edge["signature"] = signature
         log.append(edge)
         if len(log) > WITNESS_CAP:
             # Tombstone-exempt truncation (the Kafka log-compaction rule): a DEFEAT (polarity −1)
@@ -270,7 +275,7 @@ def _build_ops(store: PersistenceStore) -> dict:
         "get": lambda req: store.get(req["claim_cid"]),
         "witness": lambda req: store.witness(
             req["claim_cid"], req.get("signer", ""), req.get("frontier", ""),
-            int(req.get("polarity", 1)), req.get("tick"),
+            int(req.get("polarity", 1)), req.get("tick"), req.get("signature"),
         ),
         "neighbors": lambda req: store.neighbors(req["assertion"], int(req.get("k", 16))),
         "sample": lambda req: store.sample(int(req.get("k", 256)), int(req.get("seed", 4241))),

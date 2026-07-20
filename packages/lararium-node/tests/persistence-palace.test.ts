@@ -15,7 +15,7 @@ import { join } from "node:path";
 
 import { afterEach, beforeAll, describe, expect, test } from "vitest";
 import * as ed25519 from "@noble/ed25519";
-import { signWitness, hex, type Witness } from "@lararium/mesh";
+import { signWitness, verifyWitnessSig, hex, type Witness } from "@lararium/mesh";
 
 import { makePersistencePalace, _livePersistenceHolderCount, type PersistencePalace } from "../src/sensorium.js";
 
@@ -69,6 +69,11 @@ describe("makePersistencePalace (keel ⊕ store, driven live)", () => {
     const re = await pal.reentry(claimCid);
     expect(re!.voice).toBe("spoken");
     expect(re!.standing).toBeGreaterThan(3);               // above the floor
+    // The SIGNATURE survives the round-trip through the dumb py store: get() returns the edge with its
+    // string intact, and it re-verifies off disk — so a re-loaded edge stands proven, not merely present.
+    const reloaded = (await pal.get(claimCid))!.witnesses.at(-1)!;
+    expect(reloaded.signature).toBe(edge.signature);
+    expect(await verifyWitnessSig(claimCid, reloaded)).toBe(true);
   }, TEST_TIMEOUT);
 
   test("frequency-capture defense survives the round-trip: SAME signer 5× stays silent", async () => {
