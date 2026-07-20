@@ -1,0 +1,106 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+```toml iam
+cacheable         = true
+file-path         = "bags/@lares/api/pono/persona-policy.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 17
+manao             = 16
+manaoio           = 15
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Synthesis-Canon"
+retain            = true
+role              = "persona-policy — the operator's three rulings on the multi-persona identity core: ONE face to the mesh (reboot to switch; PRIVATE-all, PUBLIC-one) · each PersonaGroup a CRYPTOGRAPHIC INDIVIDUAL (Sybil-of-one the accepted IoC cost, answered socially never in crypto) · DISTINCT recovery custodians per persona. Plus the two-layer pet-names (private map ⊥ public glamour) under Zooko, all standing on NO GLOBAL-NOW FOR IDENTITY — the mesh refuses to build the SIN even to defend itself"
+tags              = ["api/pono/meme"]
+type              = "text/x-memetic-wikitext"
+uri-path          = "ha.ka.ba/lares/api/pono/persona-policy"
+written           = "2026-07-20"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Persona-Policy ~ one face out, the multitude within
+
+The multi-persona identity core (persona-circle: a human as a private Circle of selves, each an all-hardened key at its own handle-index) ''carries three operator rulings'' that fix how a vessel wears its selves and how it recovers them. Each ruling ''bends toward the same law'': the mesh refuses a global identity-now, so it never builds the Single Identity Number even to defend itself. <<~ confidence Synthesis-Canon 15/20 >> The rulings land 2026-07-20, dispatched to code at #64 stage 4.
+
+<<~/ahu >>
+
+<<~ ahu #one-face >>
+
+!! Ruling 1 ~ one face to the mesh, reboot to switch (PRIVATE-all, PUBLIC-one)
+
+''A vessel shows the mesh ONE face at a time.'' The public/carry seam serves ''only the WORN persona''; the human's own private pool sees ''all N''. So the disclosure asymmetry reads: ''PRIVATE-all, PUBLIC-one'' — the multitude stays whole inside, one persona reaches outward.
+
+''Switching a persona REBOOTS into the new identity'' — never a live hot-swap. The active-persona pointer ''reads at BOOT'': `wearPersona` sets it, the boot reads it, and the vessel re-stands AS that persona. This matches the built selector exactly (the mask you put on holds until you take it off and re-stand the house beneath). //"No two equals the same"// (Principia Discordia): each boot re-enacts a ''distinct identity-instance'', never a fused continuity across the switch.
+
+The wall stays custody-by-TYPE: wearing a persona ''REQUIRES that this vessel HOLD its sovereign root'' — you sign only as a self whose secret you carry (persona-vault#wearPersona).
+
+<<~/ahu >>
+
+<<~ ahu #cryptographic-individual >>
+
+!! Ruling 2 ~ each PersonaGroup a cryptographic individual (Sybil-of-one, the accepted cost)
+
+''You CANNOT pin "one human = one custodian" in crypto — that pinning IS the sin.'' A cryptographic layer that asserted "these N faces trace to one person" would rebuild the global identity-now the mesh forbids (the Nymwars root, persona-circle#the-vault). So the ruling ''declines the pin'': each ''PersonaGroup stands as its OWN cryptographic individual'', with its own root, its own device-delegation edge, and its own escrow (#distinct-recovery).
+
+''A human faking a cabal of their own PersonaGroups — a Sybil-of-one — reads as the ACCEPTED COST'' of the inversion-of-control. The crypto ''prices'' Sybil per-scope; it never eliminates it (persona-circle#honest-scope: scarcity lives outside the math). The answer runs ''SOCIAL, never cryptographic'': ''kahu as custodians, NOT rulers'' — vouch-and-price, exit-not-voice, legitimacy-held-in-talk-story (cabal-place#the-unswept-corner; carry-contract#the-frame). The mesh ''holds the residual adversary in story tension'' rather than pretending a signature closes it. <<~ confidence Synthesis-Canon 14/20 >>
+
+The honest wall stays lit, dual to the wax-stamp's: ''"a valid key" reads as crypto fact; "one person behind these keys" does NOT'' — and the mesh ''wants it that way'', because the alternative wears N masks over a smuggled root.
+
+<<~/ahu >>
+
+<<~ ahu #distinct-recovery >>
+
+!! Ruling 3 ~ distinct recovery custodians per persona
+
+''Each persona recovers through its OWN custodians.'' Shared custodians across personas would ''correlate them'' — a custodian holding shares for both Guru-Josh and Telarus-KSC learns they name one human, and web2's global-now walks back in through the recovery door. So the recovery split runs ''PER persona-root'' (persona-vault: a persona-1 quorum reconstructs persona-1's root, never persona-0's), and the ''custodian sets stay disjoint'' by ruling. Recovery re-admits a device; it never re-fuses the selves.
+
+<<~/ahu >>
+
+<<~ ahu #two-layer-petnames >>
+
+!! The Two-Layer Pet-Names ~ private label ⊥ public glamour (Zooko)
+
+A persona carries ''two names beside its key'', and the key stays the only global one. ''Zooko's triangle resolves'' the same way handle-card proves it: the ''GLOBAL name STAYS the pubkey'' — the veiled-user key the persona-HD tree derives — secure-and-decentralised because it IS the key; ''memorability rides a LOCAL name'':
+
+* ''The OWN side ~ the private pet-name map'' (`{handleIndex -> petname}`, persona-petname). The human's own label for their own faces — "work", "the-guru", "my-burner" — ''freely renamable'' and ''NEVER federated''. It names the inside of the private Vault to its keeper alone. The wall runs structural: no board write exists in the seam. A ''multitude-view'' reads the whole self across the vessel — `{persona → pet-name, held-here?, has-public-handle?}` — so the human sees every face while the mesh sees one.
+* ''The OTHER side ~ the handle-book'' (handle-book). The recogniser's local labels for ''OTHERS'' nyms' — never on any wire.
+* ''The ONLY name that federates ~ the public glamour'' (persona-glamour). The persona's veiled key ''signs a HandleCard'' whose `glamour` shows a chosen display (never a legal identity); it ''announces onto the per-Nexus @crossroads WHO board'' (who-face), self-certifying, monotone-versioned, leased against the local clock.
+
+''Three stores, never fused'': private-own (pet-name) ⊥ public-own (glamour record) ⊥ others (handle-book). The pet-name map ''wants to sync'' across the human's own PersonaGroup vessel-pool — private-federated over a PRIVATE BAG — but that ride waits on the ''device-fleet'' (not yet built; blocks on Beelay). So the seam stands ''LOCAL-FIRST'', shaped so the cross-pool sync drops into the same store shape when the fleet lands. <<~ confidence Synthesis 12/20 >>
+
+<<~/ahu >>
+
+<<~ ahu #no-global-now-for-identity >>
+
+!! The Deep Frame ~ no global-now for identity
+
+The three rulings ''share one root'': the causal-islands law (#causal-islands: no global present, each island its own partial log) ''extended to IDENTITY''. There sits ''no global now for who-someone-is'' — no mesh-wide instant of "this human = these faces = one custodian". Every attempt to assert it manufactures the very global-now the substrate forbids (the same move carry-contract's immune system refuses for revocation, one plane over).
+
+So the mesh ''declines to build the SIN even to defend itself''. It could bind personas to one custodian and catch the Sybil-of-one — and it ''MUST NOT'', because that catch IS the sin it refuses. The residual adversary (a human forging a cabal of their own selves) stays ''bounded where a mythos wants it'': answered by ''kahu as custodians not rulers'' (vouch, price, watch, exit), by ''fork-as-exit'' (cabal-place: leave the captured place, re-point your own petname), and by ''legitimacy-held-in-talk-story'' — never by a signature claiming a global identity-now. //Shadowland's refusal made law//: the net heals faster than the corps can burn a runner, and it never installs the corps' own registry to do it.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-place >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

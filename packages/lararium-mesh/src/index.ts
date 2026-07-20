@@ -14,6 +14,8 @@ export * from "./bag-residency.js";
 export * from "./vessel-identity-core.js";
 export * from "./anchor-store.js";
 export * from "./persona-vault.js";
+export * from "./persona-petname.js";
+export * from "./persona-glamour.js";
 export * from "./recovery-keel-core.js";
 export * from "./capability.js";
 export * from "./crypto.js";

@@ -29,6 +29,9 @@ import {
   type ActivePersonaStore,
   type AnchorStore,
   type IdentityAnchors,
+  type OwnPersonaPetnameStore,
+  type OwnPublicHandleStore,
+  type PersonaPublicHandleRecord,
 } from "@lararium/mesh";
 
 const KEY_RECORD = "vessel-key";
@@ -37,12 +40,16 @@ const KEY_RECORD = "vessel-key";
 // social bootstrap (the founding floor); the persona-multitude stores mirror the node fs vault's
 // per-index files. Every store bumps the DB version together, so a reboot upgrades additively (the
 // device key + bootstrap survive; the new stores appear empty until a persona founds).
-const IDB_VERSION       = 2;
+const IDB_VERSION       = 3;
 const PERSONA_ROOTS_STORE  = "persona-roots";     // per-index persona-root keypairs (self-sovereign secret)
 const PERSONA_ROSTER_STORE = "persona-roster";    // the EXPLICIT held-root record (never a keys()-scan)
 const ACTIVE_PERSONA_STORE = "active-persona";    // the worn-mask pointer (one handle-index)
 const ANCHORS_STORE        = "anchors";           // per-index veiled-Handle anchors (public doc-ids)
 const ANCHOR_ROSTER_STORE  = "anchor-roster";     // the EXPLICIT anchored-index record
+// The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (never federates) + the PUBLIC
+// own-published-face record. Per-index, keyed by `h${N}` like the persona-root slots.
+const PERSONA_PETNAME_STORE      = "persona-petnames";        // handleIndex → the human's PRIVATE label
+const PERSONA_PUBLIC_HANDLE_STORE = "persona-public-handles"; // handleIndex → the vessel's OWN published face
 const ROSTER_RECORD        = "roster";            // the single key both roster stores write under
 const ACTIVE_RECORD        = "active";            // the single key the selector writes under
 
@@ -78,6 +85,10 @@ export function openVesselIdb(idbName: string): Promise<IDBDatabase> {
       if (!db.objectStoreNames.contains(ACTIVE_PERSONA_STORE)) db.createObjectStore(ACTIVE_PERSONA_STORE);
       if (!db.objectStoreNames.contains(ANCHORS_STORE))        db.createObjectStore(ANCHORS_STORE);
       if (!db.objectStoreNames.contains(ANCHOR_ROSTER_STORE))  db.createObjectStore(ANCHOR_ROSTER_STORE);
+      // v3 additive: the two-layer pet-name stores. A v2 DB gains them empty; no persona names until the
+      // human labels one / publishes a glamour.
+      if (!db.objectStoreNames.contains(PERSONA_PETNAME_STORE))       db.createObjectStore(PERSONA_PETNAME_STORE);
+      if (!db.objectStoreNames.contains(PERSONA_PUBLIC_HANDLE_STORE)) db.createObjectStore(PERSONA_PUBLIC_HANDLE_STORE);
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror   = () => reject(req.error);
@@ -98,6 +109,26 @@ export function idbPut(db: IDBDatabase, store: string, key: string, value: unkno
     const tx  = db.transaction(store, "readwrite");
     const req = tx.objectStore(store).put(value, key);
     req.onsuccess = () => resolve();
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+export function idbDelete(db: IDBDatabase, store: string, key: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(store, "readwrite");
+    const req = tx.objectStore(store).delete(key);
+    req.onsuccess = () => resolve();
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+/** Enumerate one store's keys — the per-index roster read the pet-name + public-handle stores ride (each
+ *  keys by `h${N}`, one record per persona, so the key list IS the roster). */
+export function idbKeys(db: IDBDatabase, store: string): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    const tx  = db.transaction(store, "readonly");
+    const req = tx.objectStore(store).getAllKeys();
+    req.onsuccess = () => resolve((req.result as IDBValidKey[]).map(String));
     req.onerror   = () => reject(req.error);
   });
 }
@@ -399,4 +430,91 @@ export async function browserJoineePersonaIndex(idbName = "lares:vessel"): Promi
   if (roots.length > 0) return roots[0];               // a founder with no explicit pointer → its founding root
   const anchored = vault.anchors.list();               // a joinee holds anchors, no root → its admitted index
   return anchored.length > 0 ? anchored[0] : undefined;
+}
+
+// ── The two-layer PET-NAME stores — the browser twins of the node fs stores ──────────────────────────
+//
+// Two DISTINCT IDB stores over the vessel's origin DB (v3 additive), keyed `h${N}` per persona:
+//   · the PRIVATE pet-name map (PERSONA_PETNAME_STORE) — the human's own label, freely renamable, NEVER
+//     federated (persona-petname). The never-federates wall is structural: no board write exists in this
+//     seam. A future device-fleet adapter wraps the SAME shape over a private bag for cross-vessel sync.
+//   · the PUBLIC published-face record (PERSONA_PUBLIC_HANDLE_STORE) — the vessel's memory of its OWN
+//     glamour faces (nym/glamour/version/cardId), so a re-publish advances the monotone lineage
+//     (persona-glamour). Distinct from the pet-name map and from the handle-book (others' nyms).
+
+/** The per-persona IDB key — uniform `h${N}`, mirroring the persona-root slots' spelling. */
+function personaPetnameKey(handleIndex: number): string { return `h${handleIndex}`; }
+
+/** Parse a `h${N}` store key back to its handle-index, or null when it does not fit the shape. */
+function handleIndexFromKey(key: string): number | null {
+  const m = /^h(\d+)$/.exec(key);
+  if (!m) return null;
+  const n = Number(m[1]);
+  return Number.isSafeInteger(n) && n >= 0 ? n : null;
+}
+
+/**
+ * Build the IDB OwnPersonaPetnameStore — the PRIVATE own-persona pet-name map. Keyed `h${N}`, one label per
+ * persona. Holds only the human's own labels; nothing here reaches a board (the never-federates wall).
+ */
+export async function makeBrowserPersonaPetnameStore(idbName = "lares:vessel"): Promise<OwnPersonaPetnameStore> {
+  return {
+    async get(handleIndex) {
+      const db = await openVesselIdb(idbName);
+      const v  = await idbGet<string>(db, PERSONA_PETNAME_STORE, personaPetnameKey(handleIndex));
+      db.close();
+      return typeof v === "string" ? v : undefined;
+    },
+    async set(handleIndex, petname) {
+      const db = await openVesselIdb(idbName);
+      await idbPut(db, PERSONA_PETNAME_STORE, personaPetnameKey(handleIndex), petname);
+      db.close();
+    },
+    async clear(handleIndex) {
+      const db = await openVesselIdb(idbName);
+      await idbDelete(db, PERSONA_PETNAME_STORE, personaPetnameKey(handleIndex));
+      db.close();
+    },
+    async entries() {
+      const db = await openVesselIdb(idbName);
+      const keys = await idbKeys(db, PERSONA_PETNAME_STORE);
+      const pairs: Array<readonly [number, string]> = [];
+      for (const key of keys) {
+        const i = handleIndexFromKey(key);
+        if (i === null) continue;
+        const v = await idbGet<string>(db, PERSONA_PETNAME_STORE, key);
+        if (typeof v === "string") pairs.push([i, v] as const);
+      }
+      db.close();
+      return pairs.sort((a, b) => a[0] - b[0]);
+    },
+  };
+}
+
+/**
+ * Build the IDB OwnPublicHandleStore — the vessel's memory of ITS OWN published glamour faces. Keyed
+ * `h${N}`, one record per persona. Records carry ONLY public data (the veiled nym, the display glamour, the
+ * card lineage), so no seal touches them; they persist so a re-publish keeps advancing the lineage a peer's
+ * HandleBook holds to.
+ */
+export async function makeBrowserPublicHandleStore(idbName = "lares:vessel"): Promise<OwnPublicHandleStore> {
+  return {
+    async load(handleIndex) {
+      const db = await openVesselIdb(idbName);
+      const r  = await idbGet<PersonaPublicHandleRecord>(db, PERSONA_PUBLIC_HANDLE_STORE, personaPetnameKey(handleIndex));
+      db.close();
+      return r ?? null;
+    },
+    async save(record) {
+      const db = await openVesselIdb(idbName);
+      await idbPut(db, PERSONA_PUBLIC_HANDLE_STORE, personaPetnameKey(record.handleIndex), record);
+      db.close();
+    },
+    async list() {
+      const db = await openVesselIdb(idbName);
+      const keys = await idbKeys(db, PERSONA_PUBLIC_HANDLE_STORE);
+      db.close();
+      return keys.map(handleIndexFromKey).filter((n): n is number => n !== null).sort((a, b) => a - b);
+    },
+  };
 }

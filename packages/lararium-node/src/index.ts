@@ -137,6 +137,9 @@ export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistV
 // The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root
 // SET (generateOrLoadPersonaGroupRoot / loadPersonaGroupRootSeed) stays imported directly where consumed.
 export { loadActivePersonaIndex, wearPersona, personaRootExists, listPersonaRoots } from "./node-vessel-identity.js";
+// The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (never federates) + the PUBLIC
+// own-published-face record (persona → @crossroads glamour). Distinct stores, distinct from the handle-book.
+export { makeNodePersonaPetnameStore, makeNodePublicHandleStore } from "./node-vessel-identity.js";
 export { loadLeafIdentity } from "./leaf-identity.js";
 export type { LeafIdentity } from "./leaf-identity.js";
 export { VerbDispatcher, VerbTable } from "@lararium/tw5";

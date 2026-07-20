@@ -57,6 +57,9 @@ import {
   type PersonaVault,
   type ActivePersonaStore,
   type PersonaRoot,
+  type OwnPersonaPetnameStore,
+  type OwnPublicHandleStore,
+  type PersonaPublicHandleRecord,
 } from "@lararium/mesh";
 import { nodeAnchorStore } from "./identity-anchors.js";
 import { nodeRecoveryShareStore } from "./recovery-share-store.js";
@@ -526,4 +529,114 @@ export async function wearPersona(_dataDir: string, handleIndex: number): Promis
  *  written record. A one-persona vessel returns `[0]`; a joinee returns `[]`. */
 export async function listPersonaRoots(_dataDir: string): Promise<number[]> {
   return coreListPersonaRoots(await makeNodeFsPersonaVault());
+}
+
+// ── The two-layer PET-NAME stores — the own-side private label + the own-side public face ────────────
+//
+// Two DISTINCT node fs stores over `<state>/identity` (0o600, outside every substrate wipe), login-scoped
+// like the vault's slots so developers on one machine keep separate identity homes:
+//   · the PRIVATE pet-name map (`.persona-petnames-${login}.json`) — the human's own label for their own
+//     personas, freely renamable, NEVER federated (persona-petname). A future device-fleet adapter wraps
+//     this same shape over a private bag for cross-vessel sync; the local file is the local-first floor.
+//   · the PUBLIC handle record (`.persona-public-handles-${login}.json`) — the vessel's memory of ITS OWN
+//     published glamour faces (index → nym/glamour/version/cardId), so a re-publish advances the monotone
+//     card lineage (persona-glamour). Distinct from the pet-name map and from the handle-book (others' nyms).
+
+/** The private pet-name map filename — login-scoped. */
+function personaPetnameFileName(login: string | null): string {
+  return login ? `.persona-petnames-${login}.json` : ".persona-petnames.json";
+}
+
+/** The public published-face record filename — login-scoped. */
+function personaPublicHandleFileName(login: string | null): string {
+  return login ? `.persona-public-handles-${login}.json` : ".persona-public-handles.json";
+}
+
+/** Read the `{handleIndex -> petname}` map from disk, or {} when none / a torn file reads back. */
+function readPetnameMap(idDir: string, login: string | null): Record<string, string> {
+  const file = join(idDir, personaPetnameFileName(login));
+  if (!existsSync(file)) return {};
+  try {
+    const raw = JSON.parse(readFileSync(file, "utf8")) as { names?: unknown };
+    if (raw.names && typeof raw.names === "object") return raw.names as Record<string, string>;
+  } catch { /* a torn map reads empty — a re-name re-records the label it holds */ }
+  return {};
+}
+
+/** Write the `{handleIndex -> petname}` map to disk (0o600) — the label stays home, never federated. */
+function writePetnameMap(idDir: string, login: string | null, names: Record<string, string>): void {
+  mkdirSync(idDir, { recursive: true });
+  const file = join(idDir, personaPetnameFileName(login));
+  writeFileSync(file, JSON.stringify({ names }, null, 2), { mode: 0o600, encoding: "utf8" });
+  try { chmodSync(file, 0o600); } catch { /* best-effort on a non-POSIX fs */ }
+}
+
+/**
+ * Build the node fs OwnPersonaPetnameStore — the PRIVATE own-persona pet-name map. Login-scoped, 0o600, in
+ * the identity home outside every wipe. The map holds only the human's own labels for their own personas;
+ * nothing here reaches a board (the never-federates wall is structural — no board write exists in this seam).
+ */
+export async function makeNodePersonaPetnameStore(): Promise<OwnPersonaPetnameStore> {
+  const hint  = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const idDir = larIdentityDir();
+  const login = hint.login;
+  return {
+    async get(handleIndex) { return readPetnameMap(idDir, login)[String(handleIndex)]; },
+    async set(handleIndex, petname) {
+      const names = readPetnameMap(idDir, login);
+      names[String(handleIndex)] = petname;
+      writePetnameMap(idDir, login, names);
+    },
+    async clear(handleIndex) {
+      const names = readPetnameMap(idDir, login);
+      delete names[String(handleIndex)];
+      writePetnameMap(idDir, login, names);
+    },
+    async entries() {
+      return Object.entries(readPetnameMap(idDir, login))
+        .map(([k, v]) => [Number(k), v] as const)
+        .filter(([k]) => Number.isSafeInteger(k) && k >= 0)
+        .sort((a, b) => a[0] - b[0]);
+    },
+  };
+}
+
+/** Read the `{handleIndex -> record}` public-face map from disk, or {} when none / a torn file reads back. */
+function readPublicHandleMap(idDir: string, login: string | null): Record<string, PersonaPublicHandleRecord> {
+  const file = join(idDir, personaPublicHandleFileName(login));
+  if (!existsSync(file)) return {};
+  try {
+    const raw = JSON.parse(readFileSync(file, "utf8")) as { handles?: unknown };
+    if (raw.handles && typeof raw.handles === "object") return raw.handles as Record<string, PersonaPublicHandleRecord>;
+  } catch { /* a torn record reads empty — a re-publish re-records the face it holds */ }
+  return {};
+}
+
+/**
+ * Build the node fs OwnPublicHandleStore — the vessel's memory of ITS OWN published glamour faces. Login-
+ * scoped, 0o600. Records carry ONLY public data (the veiled nym, the display glamour, the card lineage), so
+ * no seal touches them — but they stay in the identity home so a re-publish keeps advancing the lineage a
+ * peer's HandleBook holds to.
+ */
+export async function makeNodePublicHandleStore(): Promise<OwnPublicHandleStore> {
+  const hint  = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const idDir = larIdentityDir();
+  const login = hint.login;
+  const file  = join(idDir, personaPublicHandleFileName(login));
+  return {
+    async load(handleIndex) { return readPublicHandleMap(idDir, login)[String(handleIndex)] ?? null; },
+    async save(record) {
+      mkdirSync(idDir, { recursive: true });
+      const handles = readPublicHandleMap(idDir, login);
+      handles[String(record.handleIndex)] = record;
+      writeFileSync(file, JSON.stringify({ handles }, null, 2), { mode: 0o600, encoding: "utf8" });
+      try { chmodSync(file, 0o600); } catch { /* best-effort on a non-POSIX fs */ }
+    },
+    async list() {
+      return Object.keys(readPublicHandleMap(idDir, login))
+        .map(Number)
+        .filter((k) => Number.isSafeInteger(k) && k >= 0)
+        .sort((a, b) => a - b);
+    },
+  };
 }
