@@ -95,11 +95,11 @@ The li face (the pattern) reads through an ''autosegmental'' engine (Goldsmith 1
 
 !! Generalizing ~ sense any li/ki/* flow
 
-The sensorium runs ''~90% modality-invariant'' ~ content=embed · structure=shape-vector · bands=wavelet · form=subpattern-mining are //all// general (the bands literature is EEG, vibration, finance, never text). ''Only the parse is modality-specific'', and the StreamAdapter lifts that seam.
+The sensorium runs ''~90% modality-invariant'' ~ content=embed · structure=shape-vector · form=subpattern-mining are //all// general, and the ki readings (boundary=changepoint · coupling=transfer-entropy · standing=witness-edges) read any stream (that literature is EEG, vibration, finance, never text). ''Only the parse is modality-specific'', and the StreamAdapter lifts that seam.
 
 ''To sense a new li/ki/* flow'' ~ a MUD, a market feed, a DAW, a CI-CD pipeline, an IoT stream ~ write ''one'' StreamAdapter (the modality-specific parse + signal-map); every integrity below applies unchanged:
 
-<<~ranks integrities the-5-plane-read -> the #has-cap-composition -> couple-then-decouple-sovereignty -> the-skeletal-tier-+-association-graph -> the-two-axes-span×channel -> ki-anchoring-integrity-over-instance >>
+<<~ranks integrities the-li-chain-read (content↠structure↠form) -> the-three-ki-readings (boundary·coupling·standing) -> the #has-cap-composition -> couple-then-decouple-sovereignty -> the-skeletal-tier-+-association-graph -> the-two-axes-span×channel -> ki-anchoring-integrity-over-instance >>
 
 The sensorium is not a text tool that generalizes ~ it carries a ''li/ki sensor'' and currently wears a text intake.
 
