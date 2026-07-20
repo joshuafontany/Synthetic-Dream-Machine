@@ -29,6 +29,7 @@ const OUT = join(HERE, "fixtures", "cli-verbs.json");
 // host, no top-level twins. `pour` names the SOVEREIGN capture on both surfaces, never the guest miner.
 const CLI_FORMS = {
   pour:      "sense pour",
+  sweep:     "sense sweep",
   recall:    "sense recall",
   status:    "sense status",
   worldline: "sense worldline",

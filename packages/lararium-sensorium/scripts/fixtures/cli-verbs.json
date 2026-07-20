@@ -38,6 +38,7 @@
   ],
   "mirrored": [
     "pour",
+    "sweep",
     "recall",
     "status",
     "worldline",
@@ -47,6 +48,7 @@
   ],
   "cli_forms": {
     "pour": "sense pour",
+    "sweep": "sense sweep",
     "recall": "sense recall",
     "status": "sense status",
     "worldline": "sense worldline",
