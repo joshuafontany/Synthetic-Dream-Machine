@@ -47,6 +47,7 @@
     "un_kapae",
     "rejim",
     "analyze",
+    "ki",
     "wiki"
   ],
   "cli_forms": {
@@ -59,6 +60,7 @@
     "un_kapae": "sense worldline un-kapae",
     "rejim": "sense rejim",
     "analyze": "sense analyze",
+    "ki": "sense ki",
     "wiki": "wiki switch"
   },
   "mirror_hosts": [

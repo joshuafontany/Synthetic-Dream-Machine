@@ -127,6 +127,7 @@ export interface DaemonVerbProvider {
    *  skip). `sensoriumRoot` addresses a specific sensorium (absent → the memory default). */
   sweep(input: { surface?: string; wing?: string; project?: string; limit?: number; room?: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   analyze(input: { spectral?: boolean; halves?: string; sample?: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  ki(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
    *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races
    *  the writer. `which` narrows to a single enrichment; `sensoriumRoot` addresses a sensorium (absent → memory). */
@@ -413,6 +414,13 @@ export function captureVerbCap(): CapModule {
           const sample = typeof args["sample"] === "number" ? (args["sample"] as number) : undefined;
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.analyze({ ...(spectral ? { spectral } : {}), ...(halves ? { halves } : {}), ...(sample !== undefined ? { sample } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("ki", async (args) => {
+          // The Ki (氣) corpus-coupling verdict — the H¹-gated fuse-or-hold-open over the memetic-wikitext
+          // peers, computed TS-native by the node daemon (the same hull a browser carries). Routed-only:
+          // no python standalone can compute the cohomology, so the twin reaches this daemon verb.
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.ki({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("refresh", async (args) => {
           // RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline
