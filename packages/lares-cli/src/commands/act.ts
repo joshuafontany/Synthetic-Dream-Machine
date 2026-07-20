@@ -126,9 +126,16 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
       console.error(`lares act CREATE: --bag required`);
       return 2;
     }
-    // TODO(name): the plane-signal flag is co-designed with the operator;
-    // `--plane <catalog|oracle>` is a provisional placeholder (default catalog).
-    const plane = args.options["plane"] === "oracle" ? "oracle" : "catalog";
+    // `--plane <catalog|oracle>` names the target oracle plane: catalog = the private user/household
+    // plane (default), oracle = the system/temple plane. The three-plane model's public plane
+    // (@crossroads) is not yet a live `act` target; it joins this set when the public plane wires in.
+    // An unrecognized value errors rather than silently coercing to catalog (a typo would mis-place the bag).
+    const planeOpt = args.options["plane"];
+    if (planeOpt !== undefined && planeOpt !== "catalog" && planeOpt !== "oracle") {
+      console.error(`lares act CREATE: --plane must be "catalog" or "oracle" (got "${planeOpt}")`);
+      return 2;
+    }
+    const plane = planeOpt === "oracle" ? "oracle" : "catalog";
     actionArgs["bag"]   = bag;
     actionArgs["plane"] = plane;
   } else {
