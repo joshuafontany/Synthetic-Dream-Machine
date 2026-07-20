@@ -166,6 +166,34 @@ def test_rewind_retracts_on_the_immutable_ground(tmp_path):
     assert store.get("c-1")["document"] == "b"             # move-not-delete: the committed block stays, muted
     assert res["audit"]["ok"]
 
+# --- the BATCHED land-leg (consistency-gated put_many) ----------------------------------------------
+
+def test_land_many_consistency_gate(tmp_path):
+    # the Liskov-safety gate: a plain cap certifies consistent (land + land_many are the base methods → it
+    # batches); a subclass that HOOKS land() reports False, so run_pass routes it down the per-record land()
+    # path and the override is honored — the trap that broke the first attempt cannot recur.
+    store = cio.ContentStore(str(tmp_path / ".sess"))
+    assert ContentStoreLandCap(store).land_many_is_consistent() is True
+    assert _PoisonLandCap(store, {"c-3"}).land_many_is_consistent() is False
+
+
+def test_batch_path_isolates_a_nonfinite_poison(tmp_path):
+    # the BATCH path itself (a plain, consistent cap) isolates a per-record poison exactly as the scalar path:
+    # a non-finite vector rides `failed` through put_many, its seq stays uncommitted (watermark holds below
+    # it), the tail past it still lands, and the poisoned cid never becomes durable. Caller-vectors (embed
+    # None) carry the poison so it reaches the store's own finite-value floor, not a land() override.
+    store = cio.ContentStore(str(tmp_path / ".sess"))
+    pipe = compose_pipeline(source=lambda recs: recs, land=ContentStoreLandCap(store), embed=None)
+    recs = [{"seq": i, "cid": f"c-{i}", "text": f"turn {i}", "metadata": {"wing": "w", "room": "r"},
+             "vector": [float("nan"), 0.0] if i == 3 else [1.0, 2.0]} for i in range(1, 6)]
+    res = pipe.run_pass(recs)
+    assert [f["cid"] for f in res["failed"]] == ["c-3"]      # the poison isolated to `failed`, batch not aborted
+    assert res["landed"] == 4                                # the other four landed in the batch
+    assert res["watermark"] < 3                              # the frontier HOLDS below the poison at seq 3
+    assert store.get("c-3") is None                          # the poisoned cid never became durable
+    assert store.get("c-4") is not None and store.get("c-5") is not None   # the tail past the poison lands
+
+
 # --- the plane fan-out (RUN-ARC #1 — further planes ride the SAME records) --------------------------
 
 class _RecorderPlane:
