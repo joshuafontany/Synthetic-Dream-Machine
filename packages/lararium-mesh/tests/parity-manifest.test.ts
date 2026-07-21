@@ -166,14 +166,14 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "the parametric chi-squared significance gate over Gaussian-CMI; py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
   },
   {
-    ts: "fisher-rao.ts", py: null, status: "owed-py-twin",
+    ts: "fisher-rao.ts", py: null, status: "ts-concept-witness",
     fixtures: [],
-    note: "the register-simplex flow-lens (Fisher-Rao trajectory geometry); py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+    note: "the register-simplex flow-lens (Fisher-Rao trajectory geometry) — a HULL-NATIVE cap every running vessel (browser/node/tw5) carries locally over its own register trajectory. The browser can't call py, so it lives TS-native by the pono-homes lift; the RUN never recomputes it, so no py twin is owed (the machine-code-runs-py ruling governs the RUN's offline compute, not the per-vessel proprioception caps).",
   },
   {
-    ts: "bures-metric.ts", py: null, status: "owed-py-twin",
+    ts: "bures-metric.ts", py: null, status: "ts-concept-witness",
     fixtures: [],
-    note: "the Bures/quantum-fidelity register-drift step; py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+    note: "the Bures/quantum-fidelity register-drift step — a HULL-NATIVE cap every running vessel carries locally over its own register drift. TS-native by the pono-homes lift (the browser can't call py); the RUN never recomputes it, so no py twin is owed.",
   },
   {
     ts: "temporal-rigidity.ts", py: "ffz_clock.py", status: "witnessed",
@@ -181,9 +181,9 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "ffz_clock.py dominant_period ports temporal-rigidity.dominantPeriod; bound by the clock-recovery fixture (scripts/clock_recovery_fixture.ts imports dominantPeriod; test_ffz_clock.py consumes).",
   },
   {
-    ts: "subspace-track.ts", py: null, status: "owed-py-twin",
+    ts: "subspace-track.ts", py: null, status: "ts-concept-witness",
     fixtures: [],
-    note: "the online GROUSE subspace tracker (the keel's WRITE face); py twin owed at the streaming epic under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+    note: "the online GROUSE subspace tracker (the spectral keel's WRITE face) — a HULL-NATIVE cap: every running vessel updates its own keel's subspace locally. TS-native by the pono-homes lift; the RUN never recomputes it, so no py twin is owed (the numerics parity for the keel rides spectral-keel.ts, which is witnessed).",
   },
   {
     ts: "clock-recovery.ts", py: "ffz_clock.py", status: "witnessed",
