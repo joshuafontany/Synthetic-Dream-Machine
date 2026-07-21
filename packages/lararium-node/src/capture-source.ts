@@ -83,6 +83,10 @@ export interface SourceCapture {
    *  report as word indices into the reconstructed stream; `spectral` switches to the embedding-geometry
    *  surface; `halves` sets the Foote kernel widths. Rides the same serialized pipe. */
   analyze(request?: { spectral?: boolean; halves?: string; sample?: number }): Promise<Record<string, unknown>>;
+  /** The R effective-TE coupling reference (coupling.R RTransferEntropy::calc_ete) over an N-signal `rows`
+   *  matrix → the directional who-leads-whom edges. The py/R twin of `ki`; stateless matrix→verdict, behind
+   *  the causal-island boundary (graceful coupling-skipped when R is absent). Rides the serialized pipe. */
+  coupleR(request?: { rows?: number[][]; names?: string[]; shuffles?: number; nboot?: number; seed?: number; alpha?: number }): Promise<Record<string, unknown>>;
   /** The taxonomy over the holder's content store — what the sensorium holds. Rides the serialized pipe. */
   status(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
   /** The fork-DAG rhizome (bitemporal AS-OF `asOf`, else the whole history). Read-only over the pipe. */
@@ -138,6 +142,10 @@ export function makeSourceCapture(
     // DETECT-ONLY change-point analysis over the holder's content stream — reuses the holder's ONE content
     // handle (the serve-op passes it into sense_analyze.detect); read-only, mutates nothing. Rides the pipe.
     analyze: async (request) => await p.send("analyze", { ...(request ?? {}) }) as Record<string, unknown>,
+
+    // The R effective-TE coupling reference (coupling.R) over the passed signal matrix — the py/R twin of
+    // ki. Stateless (couples `rows`, not the holder's stores); the serve-op shells to Rscript. Rides the pipe.
+    coupleR: async (request) => await p.send("couple_r", { ...(request ?? {}) }) as Record<string, unknown>,
     // The lifecycle + cross-plane serve-ops: the taxonomy read, the fork-DAG read, the kapae/un-kapae
     // branch-mute cascades (mutations, serialized with capture — never a second writer), and the cross-plane
     // witness. Each rides the SAME serialized pipe as capture through the holder that owns the palace.

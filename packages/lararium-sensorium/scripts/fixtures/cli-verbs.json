@@ -52,6 +52,7 @@
     "ki",
     "li",
     "jing",
+    "couple_r",
     "wiki"
   ],
   "cli_forms": {
@@ -67,6 +68,7 @@
     "ki": "sense ki",
     "li": "sense li",
     "jing": "sense jing",
+    "couple_r": "sense couple-r",
     "wiki": "wiki switch"
   },
   "mirror_hosts": [

@@ -359,6 +359,23 @@ class CaptureSessionServer:
         geology = rejim_io.read_rejim(rejim_dir)
         return {"repoured": geology is not None, "geology": geology}
 
+    def couple_r(self, req: dict) -> dict:
+        """The cross-stream COUPLING plane — the R effective-transfer-entropy reference (coupling.R,
+        RTransferEntropy::calc_ete) over an N-signal matrix → the directional who-leads-whom edges. The py/R
+        twin of the TS-hull `ki`: `ki` runs the Gaussian-CMI fuse in the browser-carried hull; this runs the
+        R RTransferEntropy reference behind the causal-island boundary. STATELESS — it couples the passed
+        `rows` matrix (rows=time, cols=signals), never the holder's stores; graceful `coupling-skipped` when
+        R / RTransferEntropy is absent (TE has no python fallback)."""
+        import numpy as np
+        from bands import couple_streams
+        M = np.asarray(req.get("rows") or [], dtype=float)
+        names = req.get("names")
+        return couple_streams(
+            M, names=list(names) if names else None,
+            shuffles=int(req.get("shuffles", 100)), nboot=int(req.get("nboot", 100)),
+            seed=int(req.get("seed", 1)), alpha=float(req.get("alpha", 0.05)),
+        )
+
     def analyze(self, req: dict) -> dict:
         """DETECT-ONLY change-point analysis over THIS holder's poured content stream — the isomorphic
         `sense_analyze` instrument run through the holder that owns the store, so the compute REUSES the ONE
@@ -486,6 +503,7 @@ def _serve(sensorium_root: str) -> None:
             "refresh": server.refresh,   # RE-DERIVE the whole derived layer (rejim · mempalace · worldline)
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
             "analyze": server.analyze,             # DETECT-ONLY change-points over the holder's content stream
+            "couple_r": server.couple_r,           # the R effective-TE coupling reference (coupling.R) — py/R twin of ki
             "status": server.status,               # the taxonomy over the holder's content store
             "worldline": server.worldline,         # the fork-DAG rhizome read (fresh worldline handle)
             "subagent-edges": server.subagent_edges,  # derive spawn/handback edges → worldline-compare's edge feed

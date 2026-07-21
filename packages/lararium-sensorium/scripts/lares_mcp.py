@@ -27,7 +27,7 @@ from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir, deri
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
-LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze", "ki", "li", "jing")
+LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze", "ki", "li", "jing", "couple_r")
 
 # The per-plane QUERY DOOR verb — read-only cross-plane interrogation of a 3-plane test-bed sensorium
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
@@ -75,6 +75,7 @@ VERB_SEATS = {
     "ki": (True, False),                # the Ki coupling verdict — routed read (the TS hull's H¹ fuse) → HOTL
     "li": (True, False),                # the Li gluing verdict — routed read (the TS hull's li-radius + H¹) → HOTL
     "jing": (True, False),              # the Jing (勁) li∘ki square — routed read (the TS hull's round-trip) → HOTL
+    "couple_r": (True, False),          # the R effective-TE coupling reference (coupling.R) — py/R compute, read-only → HOTL
     "wiki": (True, False),              # switcher (switch/hold/release/active) — reversible, low-trust, LOCAL residency → HOTL
     # The vault seal-lifecycle tools — a status READ rides HOTL; every MUTATION of the sovereign at-rest
     # seal crosses a trust boundary (it touches identity secret material), so it seats HITL.
@@ -451,6 +452,19 @@ class LaresCoordinator:
         raise RuntimeError("jing: the coherence verdict is TS-native (the li∘ki square rides @lararium/mesh) — "
                            "reach it via the @daemon (`lares sense jing`), not the standalone python coordinator")
 
+    def couple_r(self, *, rows=None, names=None, shuffles: int = 100, nboot: int = 100,
+                 seed: int = 1, alpha: float = 0.05, **_) -> dict:
+        """The R effective-transfer-entropy coupling reference (coupling.R RTransferEntropy::calc_ete) over an
+        N-signal matrix — the py/R twin of the TS-hull `ki`. UNLIKE ki/li/jing (TS cohomology, routed to the
+        @daemon), this COMPUTES right here: the coupling plane IS the py/R plane (the machine-code-runs-py
+        ruling), behind the causal-island boundary. Stateless matrix→verdict; graceful coupling-skipped when
+        R / RTransferEntropy is absent."""
+        import numpy as np
+        from bands import couple_streams
+        M = np.asarray(rows or [], dtype=float)
+        return couple_streams(M, names=list(names) if names else None,
+                              shuffles=shuffles, nboot=nboot, seed=seed, alpha=alpha)
+
     # ── the per-plane QUERY DOOR (read-only; PLANE_VERBS) ────────────────────────────────────
 
     def _plane_store(self, plane: str):
@@ -723,6 +737,14 @@ def build_mcp(coordinator: LaresCoordinator):
         return _call("jing", sensorium)
 
     @mcp.tool()
+    def couple_r(rows: "list | None" = None, names: "list | None" = None) -> dict:
+        """The R effective-TE coupling reference — coupling.R (RTransferEntropy::calc_ete) over an N-signal
+        `rows` matrix (rows=time, cols=signals) → the directional who-leads-whom edges. The py/R twin of the
+        TS-hull `ki`: this is the coupling PLANE's reference compute, behind the causal-island boundary.
+        `lares sense couple-r --signal <ndjson>` reads the same. Graceful coupling-skipped when R is absent."""
+        return _call("couple_r", rows=rows, names=names)
+
+    @mcp.tool()
     def plane_record(cid: str, sensorium: "str | None" = None) -> dict:
         """The cross-plane witness: one cid -> presence + payload summary across content,
         structure and form (honest nulls where a plane lacks it). `sensorium` names the sensorium
@@ -802,7 +824,7 @@ class DaemonCoordinator:
     # the palace (content_io · worldline_io · structurepalace_io · form_encoder), serialized with capture so a
     # mutation never races the live writer. A verb the wire does NOT yet carry refuses honestly through
     # `_owed` rather than route to an unknown verb (the wall this surface names, not hides).
-    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record", "rejim", "analyze", "ki", "li", "jing"}
+    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record", "rejim", "analyze", "ki", "li", "jing", "couple_r"}
 
     def __init__(self, wing: str = "wing_default") -> None:
         self._wing = wing
@@ -977,6 +999,15 @@ class DaemonCoordinator:
         if sensorium_root:
             args["sensoriumRoot"] = sensorium_root
         return uds.output("jing", args)
+
+    def couple_r(self, *, rows=None, names=None, **kw) -> dict:
+        # Route the R coupling reference to the @daemon `couple-r` verb (registry.register("couple-r") → the
+        # capture_session couple_r serve-op → couple_streams → coupling.R). Stateless matrix→verdict.
+        args: dict = {"rows": rows or [], **({"names": list(names)} if names else {})}
+        for k in ("shuffles", "nboot", "seed", "alpha"):
+            if k in kw and kw[k] is not None:
+                args[k] = kw[k]
+        return uds.output("couple-r", args)
 
 
 def main() -> None:

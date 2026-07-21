@@ -48,6 +48,9 @@ const CLI_FORMS = {
   // `jing` (勁) reads the li∘ki SQUARE — the extend→restrict round-trip over a child-host's lobes (the
   // mesh's who/authority/flow). Same ROUTED-only posture: the cohomology hull is TS, reached via the daemon.
   jing:      "sense jing",
+  // `couple_r` runs the R effective-TE coupling reference (coupling.R) — the py/R twin of `ki`, the machine-
+  // code plane behind the causal-island boundary. Routed to the daemon's py serve-op (Rscript shells there).
+  couple_r:  "sense couple-r",
   // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
   // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
   wiki:      "wiki switch",

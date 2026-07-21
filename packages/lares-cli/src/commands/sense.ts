@@ -34,6 +34,7 @@ import { cmdAnalyze } from "./analyze.js";
 import { cmdKi } from "./ki.js";
 import { cmdLi } from "./li.js";
 import { cmdJing } from "./jing.js";
+import { cmdCoupleR } from "./couple-r.js";
 import { runQuiesce, runResume, runTopology, type DoorScope } from "./mempalace.js";
 
 /**
@@ -96,6 +97,8 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
   cohere:    cmdLi,       // alias — the gluing verdict reads the li-radius + the same H¹ gate
   jing:      cmdJing,     // 勁 — the li∘ki square: does a child-host's grain round-trip with its flow?
   square:    cmdJing,     // alias — the joint read, neither li nor ki
+  "couple-r": cmdCoupleR, // the R effective-TE coupling reference (coupling.R) — the py/R twin of ki, the
+                          // machine-code plane behind the causal-island boundary; compare vs ki for a mismatch
   // Holder lifecycle — the SOVEREIGN parallel of `lares mempalace`, each door scoped to its own island.
   // `status` is already a plane-READ verb (the persistence lens), so the holder TOPOLOGY rides as `holders`.
   quiesce:   cmdSenseQuiesce,

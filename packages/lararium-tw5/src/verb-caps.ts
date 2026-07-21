@@ -136,6 +136,10 @@ export interface DaemonVerbProvider {
    *  round-trip). `sensoriumRoot` addresses a child-hosting sensorium (absent → the mesh default: the
    *  who/authority/flow lobes the node federates onto DreamNet). Coheres ⟺ the round-trip is the identity. */
   jing(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** The R effective-TE coupling reference (coupling.R RTransferEntropy::calc_ete) over an N-signal `rows`
+   *  matrix — the py/R twin of `ki`, computed py-side behind the causal-island boundary. Stateless
+   *  matrix→verdict; graceful coupling-skipped when R is absent. */
+  coupleR(input: { sensoriumRoot?: string; rows?: number[][]; names?: string[]; shuffles?: number; nboot?: number; seed?: number; alpha?: number }): Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
    *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races
    *  the writer. `which` narrows to a single enrichment; `sensoriumRoot` addresses a sensorium (absent → memory). */
@@ -442,6 +446,14 @@ export function captureVerbCap(): CapModule {
           // lobes, computed TS-native by the node daemon. Routed-only: the cohomology rides the TS hull.
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.jing({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("couple-r", async (args) => {
+          // The R effective-TE coupling reference (coupling.R) over the passed signal matrix — the py/R twin
+          // of `ki`, computed py-side behind the causal-island boundary (Rscript shells from the serve-op).
+          const rows = Array.isArray(args["rows"]) ? (args["rows"] as number[][]) : [];
+          const names = Array.isArray(args["names"]) ? (args["names"] as string[]) : undefined;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.coupleR({ rows, ...(names ? { names } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("refresh", async (args) => {
           // RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline

@@ -788,6 +788,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).analyze(req);
       },
+      coupleR: async (input) => {
+        // The R effective-TE coupling reference (coupling.R RTransferEntropy::calc_ete) over the passed
+        // signal matrix — the py/R twin of `ki`, computed py-side behind the causal-island boundary.
+        // Stateless: it couples `rows`, not any store, so the holder is only the pipe to the py serve-op.
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).coupleR(req);
+      },
       ki: async (input) => {
         // The Ki (氣) coupling verdict computed HERE in TS — the H¹-gated fuse over the ADDRESSED sensorium's
         // coupling cap (general: any sensorium that #has coupling.children answers; memory carries none). The
