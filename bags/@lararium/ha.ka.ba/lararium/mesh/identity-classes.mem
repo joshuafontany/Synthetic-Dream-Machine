@@ -1,0 +1,381 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/identity-classes.mem"
+l-space   = "lararium"
+mana      = 15
+manao     = 15
+manaoio   = 14
+namespace = "&#x2695;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "the identity-class topology (USER / OPERATOR / KAHU / HERM) mapped across RUNS · CARRIES · IDENTITY-CLASS (KERI transferable/non-transferable/delegated/none-civic) · RECOVERS — plus READING-B recovery: a RANDOM recovery root authorizes a SIGNED rotation that seats a FRESH operational key and SUPERSEDES the old, never resurrects it. Continuity anchors on the persona-KEL (the identifier prefix), never on the operational private key. Operator-ruled 2026-07-20; the persona-KEL indirection + the reconstruct-vs-attest fork ride ahead of code."
+status    = "proposed"
+tags      = ["mesh/vessel-caps", "mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/founding-runbook", "mesh/charter-chain"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/mesh/identity-classes"
+written   = "2026-07-20"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+! Identity Classes ~ who runs, who carries, who rotates
+
+> Status: PROPOSED — operator-ruled design (2026-07-20). The SUBSTRATE stands (the persona-root
+> signs device-delegation edges; the guardian-card 2-of-3 + recovery-share type-wall + the charter's
+> pre-rotated epoch chain all live). READING-B — recovery ROTATES rather than RESURRECTS — and the
+> persona-KEL indirection it needs ride AHEAD of code.
+
+A vessel wears a `#has`-stack, never a type ([[vessel-caps|lar:///ha.ka.ba/lararium/mesh/vessel-caps]]);
+so an identity-CLASS reads the SAME way — a structural predicate over //what a principal runs, carries,
+and how it recovers//, never a stamped tier. Four points in that space carry names because the mesh
+returns to them: the ''USER'', the ''OPERATOR'', the ''KAHU'', and the ''HERM''. This meme maps them
+across four axes and fixes how each RECOVERS — the axis Reading-B re-cuts.
+
+<<~ ahu #the-four-classes >>
+
+!! The four classes ~ four axes
+
+\procedure ~Class(~Type:"" ~Params:"") ~Class <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Class USER "runs/NO infra (browser-style vessel) carries/short cap-stack · @oracle-read + own mesh-palace · a READ-CAP reaching its OWN operator's private data ACROSS the rhizome (relays blind-transit the ciphertext; the user decrypts) class/KERI non-transferable OR delegated recovers/abandon-and-recreate" >>
+<<~Class OPERATOR "runs/a node vessel carries/MANDATORY tier (@oracle + @crossroads + Kapae) · full VESSEL stack (tuber/bulb) · sovereign @catalog · BLIND-TRANSITS private ciphertext for the mesh (MLS Delivery-Service; carry ⊥ read) class/KERI transferable (its persona-KEL IS a key-event-log) recovers/recovery-root-authorizes-rotation (Reading-B)" >>
+<<~Class KAHU "runs/a node vessel + a seat in the charter k-of-n carries/OPERATOR stack + the charter epoch chain + the steward repair-kit class/transferable, in TWO chains (own persona-KEL + the charter-KEL) recovers/personal (Reading-B) PLUS charter-quorum steward re-seat" >>
+<<~Class HERM "runs/the @daemon keel + own mesh-palace + own refresh clock (semi-autonomous relay) carries/MANDATORY public/infra + BLIND-TRANSIT of private CIPHERTEXT (carry ⊥ read; holds the replica, reads NONE) · NO read-cap on operator-content · NO sovereign @catalog class/NONE-CIVIC (anon self-certifying key; authority rides a wax-sealed carriage contract) recovers/re-established by its operator — no self-recovery of a civic identity it never holds" >>
+
+''The master cut runs AUTHORITY ⊥ FLOW'' (the cap-stack's, #vessel-caps): a USER carries little
+authority and little flow; an OPERATOR carries sovereign authority AND heavy flow; a KAHU adds
+//charter// authority atop the operator's; a HERM carries FLOW (carriage) with ''zero civic
+authority'' — the one class that runs infrastructure yet holds no persona. Authority-to-run and
+authority-to-BE separate cleanly at the Herm: it runs a full immune keel, and it //is// nobody.
+
+''A SECOND cut rides beneath the CARRIES column — TRANSIT ⊥ READ.'' What a vessel RELAYS
+(transit/carriage, `sharePolicy`, advisory) never fuses with what it can DECRYPT (read/cap,
+BeeKEM/CGKA crypto) — the carry-contract's carry ⊥ read law
+([[carry-contract|lar:///ha.ka.ba/lararium/mesh/carry-contract]]#carry-read-contract). So the CARRIES
+column reads on two lanes: the ''transit lane'' (which planes' bytes flow ACROSS this vessel) runs wide,
+and the ''read lane'' (which planes this vessel decrypts) runs narrow. A Herm and a node Lararium both
+BLIND-TRANSIT private ciphertext — they hold the encrypted replica and read NONE of it — while the
+read-cap stays with the authorized decryptor alone. #the-mesh-breathes carries the mechanism.
+
+<<~/ahu >>
+
+<<~ ahu #the-identity-class-ladder >>
+
+!! The KERI ladder ~ transferable ⊥ non-transferable ⊥ delegated ⊥ none-civic
+
+The class-axis reads KERI's identifier taxonomy, and the split draws by ''persistence and accreted
+value'', never by title ([[founding-runbook|lar:///ha.ka.ba/lararium/mesh/founding-runbook]]#identity-classes):
+
+* ''NON-TRANSFERABLE / basic'' (the USER floor) — a single-key identifier that pre-commits NO next
+  key-set, so it ''cannot rotate by construction''. Its "rotation" reads as ''abandon-and-recreate'':
+  mint a fresh identifier, drop the old. Cheap, native, no reserve, no guardians. The un-rotatability
+  IS the property, not a lack.
+* ''TRANSFERABLE'' (the OPERATOR spine) — a pre-rotated, persistent identifier that ''rotates its
+  signing keys while its identifier prefix stays fixed''. Its key-event-log carries the rotation
+  history; the charter's epoch chain reads as exactly this shape one scale up (#the-continuity-anchor).
+* ''DELEGATED'' (the USER's durable option) — an operator root ''delegates a disposable user stream'';
+  durability lives in the ROOT, the leaf stays light and abandonable. A user gains persistence WITHOUT
+  carrying a reserve (KERI delegated identifiers, KID0007). <<~ confidence Synthesis 12/20 >>
+* ''NONE-CIVIC'' (the HERM) — no identifier of persons at all; a self-certifying anon key boots the
+  keel, and the operator's relation to it rides a wax-sealed contract-edge, never a delegated persona
+  (#herm-establishment).
+
+<<~/ahu >>
+
+<<~ ahu #promotion-path >>
+
+!! The promotion path ~ value accretes, the class hardens
+
+An identity ''drifts UP the ladder as it accretes value it cannot cheaply re-mint'' — relationships,
+standing, cabal entanglement (#the-frame carries the cost curve at founding-runbook#the-frame):
+
+<<~moves user/non-transferable -> user/delegated -> operator/transferable on/accreted-value if/cheap-re-mint-no-longer-restores-the-relationships do/harden-the-class-not-the-person >>
+
+* ''non-transferable → delegated'' — the light user, now worth keeping, accepts an operator root's
+  delegation edge: the leaf stays disposable, the root carries the durability. No reserve lands on the
+  user; recovery still reads abandon-and-recreate of the LEAF, re-delegated from the root.
+* ''delegated → transferable'' — the vessel ''promotes'': it mints its OWN persona-KEL (an inception
+  pre-rotation, #the-continuity-anchor), provisions the guardian-card reserve
+  ([[charter-reserve|lar:///ha.ka.ba/lararium/api/charter-reserve]]), and steps off the root's
+  delegation onto its own rotation chain. It becomes operator-class — it now carries the future.
+* ''operator → kahu'' — a charter quorum SEATS the operator's key into the nexus k-of-n
+  ([[charter-chain|lar:///ha.ka.ba/lararium/mesh/charter-chain]]); the operator gains a SECOND chain
+  (the charter-KEL) atop its persona-KEL, and the steward repair-kit
+  ([[siege-resilience|lar:///ha.ka.ba/lararium/mesh/siege-resilience]]#repair-kit).
+
+The default holds: users stay light, operators carry the future — promotion moves by //grown value//,
+never by decree.
+
+<<~/ahu >>
+
+<<~ ahu #herm-establishment >>
+
+!! Herm establishment ~ a contract, not a christening
+
+An operator ''establishes a Herm by signing a Nexus carriage contract from a node vessel'', then leaves
+it semi-autonomous (operator ruling, 2026-07-20). ''No civic identity mints into the Herm'' — only the
+wax-sealed contract/edges:
+
+<<~flows operator-node-vessel -> signs-carriage-contract (wax-sealed PEER/TRANSIT edge, MANDATORY tier) -> Herm-boots-own-@daemon-keel (anon self-cert key + own refresh clock) -> semi-autonomous-relay >>
+
+* the Herm ''boots permissionlessly'' on its own key (#vessel-caps: immune-core ⊕ blind-carriage ⊕
+  public-read) — it asks no blessing to exist;
+* the operator's authority over it rides the ''wax-stamped carriage contract''
+  ([[wax-stamp|lar:///ha.ka.ba/lararium/mesh/charter-chain]]: provenance-of-the-data, not
+  presence-of-a-person) — a frozen causal edge attesting //this operator carriage-contracted this Herm
+  under epoch N//, never a live persona in the Herm;
+* the Herm runs its OWN siege repair-kit at its OWN shrine tier (VSM recursion,
+  #siege-resilience) — ''operational autonomy without civic identity''. It re-keys its soured leylines
+  and heals its torn segments alone, yet holds no recoverable persona-root.
+
+''So the Herm's autonomy and its recovery diverge.'' It self-heals its FLOW (segment repair) but never
+self-recovers an IDENTITY — it holds none. A lost or soured Herm ''re-establishes from its operator'':
+the operator re-signs the carriage contract and the Herm re-genesizes its keel from the bulb
+(the engine-blob it already carries). The contract IS the whole authority relation; re-issuing it IS
+the recovery.
+
+<<~/ahu >>
+
+<<~ ahu #the-mesh-breathes >>
+
+!! The mesh breathes ~ blind-transit of private ciphertext (carry ⊥ read)
+
+''A Nexus breathes: private data flows ACROSS the relay infrastructure to reach its authorized reader,
+and the relays read NONE of it.'' A Herm and a node Lararium both ''BLIND-TRANSIT private ciphertext''
+— they hold the encrypted replica and forward its bytes toward the vessel that carries the read-cap,
+which decrypts it alone. The relay carries; it never reads. This runs the node's canonical role: an
+''MLS Delivery-Service'' — it delivers sealed group traffic, holding no group key.
+
+The safety rests on the ''carry ⊥ read'' law, and it licenses carry to run GENEROUS:
+
+* ''CARRY'' (`sharePolicy`, advisory) — the transit lane. Blind-transit of private ciphertext runs wide:
+  the mesh breathes because relays forward sealed bytes freely.
+* ''READ'' (BeeKEM/CGKA crypto) — the cap lane. A carried-but-uncapped doc reads `Key not found`; the
+  read-floor is a causal-island-local FACT, not a policy (#carry-contract).
+* ''the gift'' — carry may be liberal ''because the read-floor catches every carry-mistake''
+  (carry-contract#carry-read-contract): a generous transit tier never leaks a readable byte, the crypto
+  the safety net beneath the routing. So a relay carrying a plane it must never read breaks no law — it
+  cannot read it.
+
+''This is how a user reaches its own private data remotely.'' A browser vessel of a recognized operator
+stands FAR from the operator's node, yet reaches the operator's private data over the rhizome: the
+relays blind-transit the ciphertext across the mesh, and the user — holding the read-cap by same-operator
+grant (the device-fleet full-sync, already granted) — decrypts at the leaf. ''Transit crosses the whole
+mesh; the read stays at the authorized vessel.''
+
+''Two edges keep the breathing honest.'' <<~ confidence Synthesis-Canon 14/20 >> First, the
+''encrypt-first invariant'': blind-transit stays safe ONLY for what a plane seals for the mesh — a
+cleartext-local plane a relay carried WOULD leak, so the self-slot's private-plane denial guards exactly
+that gap. The discipline that makes the rhizome true reads ''everything that federates, encrypts first'';
+seal it and carry-generous runs unconditionally safe, leave a plane cleartext-federatable and it names the
+one hole. Second, ''content ⊥ metadata'': blind-transit seals what a relay READS, never what it SEES — the
+shape of the flow (who ↔ whom, when, how much) crosses every relay. The mesh breathes ''content''-blind,
+never ''metadata''-blind; traffic-pattern sovereignty rides a separate hardening (mixnets, cover traffic),
+and the residual sits where canon already names it — the GPA-linkability bound, shape-provable only
+(#carry-contract). The choice architecture answers the rest: an operator who wants no relay to even SEE its
+traffic simply does not contract those vessels into a Nexus — privacy rides the choice to contract, never a
+wall built inside one.
+
+<<~/ahu >>
+
+<<~ ahu #self-slot-reconciliation >>
+
+!! Reconciliation ~ the committed self-slot vs the breathing mesh
+
+The committed cross-operator self-slot ''DENIES a cabal-mate the private planes'' (`3f889b04` /
+`7038224b`): a cross-operator presenting a valid self-cert card + a verified V3 proof rides a BOUNDED
+federatable-carry tier — @crossroads + WHO + the Kapae antigen, the MANDATORY tier — and ''every private
+plane (@catalog/@personal/@daemon/home/wikis) → DENIED''; a Kapae'd cross-operator draws Mu.
+
+''No conflict at the READ lane.'' The denial that matters — a cross-operator MUST NOT decrypt another
+operator's private data — stands untouched: the read-cap never crosses, the BeeKEM read-floor gates, and
+the self-slot's own safety note already rests on ''carry ⊥ read'' (`7038224b`: "safety rides the
+DeterministicFederationGate + the BeeKEM read-floor"). A user of the SAME operator gets the read-cap by
+same-operator full-sync (already granted); a cross-operator never does. The self-slot protects the READ,
+and Reading-1's blind-transit touches only the CARRY — orthogonal lanes.
+
+''The fork rides at the CARRY lane — and it reads load-bearing.'' The committed `sharePolicy` denies the
+private planes ''at the CARRY layer'' too: `7038224b` grants a cross-operator ONLY the federatable set,
+so a cross-operator-CLASS relay currently ''carries no private ciphertext at all''. But the breathing
+mesh (#the-mesh-breathes) needs exactly that — a blind relay MUST transit private ciphertext it cannot
+read, or the data never reaches its remote authorized reader across a foreign leg. So the committed
+self-slot ''conflates carry-deny with read-deny for private planes'', and the mesh-breathes role needs
+them split:
+
+\procedure ~Fork(~Type:"" ~Params:"") ~Fork <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Fork SELF-SLOT-A "keep/the committed posture — a cross-operator carries ONLY the federatable set, private ciphertext never transits a foreign relay cost/the mesh does NOT breathe across operator boundaries; a remote same-operator user reaches its private data only over IN-fleet legs, never a cabal-mate's relay" >>
+<<~Fork SELF-SLOT-B "refine/split sharePolicy's private-plane denial into DENY-READ-CAP (keep, absolute) ⊥ ALLOW-CARRY-of-ciphertext-to-a-blind-relay (new) — a cross-operator relay blind-transits sealed private bytes it can never read cost/a new carry-tier between MANDATORY and private-read; the relay holds encrypted replicas of planes it cannot decrypt (storage + the read-floor as the sole guard) gain/the mesh breathes — private data reaches its remote reader across ANY honest leg, carry-generous under the read-floor" >>
+
+<<~ confidence Synthesis 12/20 >> ''The recommendation leans SELF-SLOT-B'', because the mesh-breathes
+role the operator named REQUIRES private ciphertext to cross foreign legs, and carry ⊥ read makes it safe
+by construction — the relay holds bytes it provably cannot read. The refinement stays NARROW: it flips
+the private-plane denial from ''deny-carry-and-read'' to ''deny-read, allow-blind-carry'', and changes
+NOTHING at the read lane the self-slot was built to protect. ''Named as a fork'' because it edits a
+committed security surface (`federation-gate.ts` `classifyCrossOperatorAdmission` +
+`self-slot-share.ts` `selfSlotShareDecision`), and the operator owns that cut.
+
+<<~/ahu >>
+
+<<~ ahu #reading-b-recovery >>
+
+!! Reading-B ~ recovery rotates, it never resurrects
+
+''Today (Reading-A) the persona-root IS the operational signing key'' — persona-vault vends "the
+operator-root that signs edges", and the pinned `signerDid` every peer verifies against reads that
+root's public key (ceremony-core: `signerDid = founderEdge.operatorDid`). Recovery reconstructs the
+EXACT original root from a guardian quorum and re-signs a fresh device's edge with it
+(recovery-core: the reconstructed root == the original). ''The old operational private key returns to
+life'' — and the guardian quorum that rebuilds it holds, transiently, the whole signing authority,
+forever, over anything (the recovery quorum IS the impersonation quorum, admitted as a priced/social
+cost, [[persona-policy|lar:///ha.ka.ba/lares/api/pono/persona-policy]]#cryptographic-individual).
+
+''Operator ruling (2026-07-20):'' a RANDOM recovery root authorizes a SIGNED recovery OPERATION rather
+than resurrects the old operational private key. Recovery ''preserves identity continuity, not
+cryptographic history.'' The move:
+
+<<~moves recovery/reconstruct-then-resurrect-the-op-key -> recovery/attest-then-rotate-a-fresh-op-key on/an-independent-random-recovery-root if/continuity-anchors-on-the-identifier-not-the-key do/supersede-the-old-key-never-revive-it >>
+
+Four parts carry it:
+
+# ''The recovery root rides SEPARATE entropy'' — a random seed independent of the operational
+  (persona-root) signing seed, exactly as the charter reserve's seed rides "a SEPARATE 32-byte CSPRNG
+  seed — NEVER the live signing seed" ([[charter-reserve|lar:///ha.ka.ba/lararium/api/charter-reserve]]).
+  A thief of today's operational key learns ''nothing'' about the recovery authority; a holder of the
+  recovery authority signs ''only rotations'', never content.
+# ''The identifier pre-COMMITS the recovery authority at founding'' — the persona's inception folds a
+  DIGEST of the recovery root's authorized key-set (`charterKeySetHash`, already built), the same
+  pre-rotation KERI commits for the charter (`nextKeyCommit`). The recovery keys never sign until the
+  reveal; a compromise of the operational present cannot forge the recovery future.
+# ''Recovery signs a ROTATION EVENT, not a re-admit of the old key'' — the recovery authority signs an
+  event that (a) reveals against the pre-committed recovery-key digest, (b) SEATS a FRESH operational
+  keypair the recovering vessel just minted, (c) marks the prior operational key retired, (d) hash-links
+  onto the persona-KEL. This reads `rotateCharterEpoch` applied at PERSONA scale
+  ([[wax-stamp|lar:///ha.ka.ba/lararium/mesh/charter-chain]]): reveal-the-pre-commit, seat-the-new-head,
+  arm-the-next.
+# ''The old key SUPERSEDES, never revives'' — the rotation advances the persona-KEL's head past the old
+  operational key; a [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]] on the membership stack shadows its
+  resurrection (evict runs forward-only, #siege-resilience). Post-rotation the fresh operational key sits
+  SOLELY with the recovering vessel — no quorum, no guardian, no recovery root holds it. Continuity
+  survives; the key-history turns over.
+
+<<~ confidence Synthesis 13/20 >> ''Blast-radius, cut:'' Reading-A hands the recovery quorum the
+operational key forever (sign anything). Reading-B hands it exactly ''one rotation'' — it can seat a
+fresh key it does not itself hold, and nothing else. The recovery authority never becomes a content
+signer.
+
+<<~/ahu >>
+
+<<~ ahu #the-continuity-anchor >>
+
+!! The continuity anchor ~ the persona-KEL, not the key
+
+Reading-B ''requires an indirection today's stack lacks''. The Binding Gate pins `signerDid` == the
+operational root's PUBLIC key and verifies every device-edge against that exact value; rotating the
+operational key would break every pin. So continuity ''cannot ride the operational key'' — it must ride
+a STABLE identifier the key rotates BENEATH.
+
+''The persona gets its OWN key-event-log'' — a per-persona epoch chain the SAME shape as the charter's
+(`CharterEpoch` + `verifyCharterChain` + `rotateCharterEpoch` ALREADY form a KEL; the persona-KEL reuses
+the shape at persona scale). The invariant becomes:
+
+* the ''identifier prefix'' — derived from the inception key-set + the pre-rotation commitment — stays
+  FIXED across every rotation (the KERI autonomic-identifier / AID);
+* a device-delegation edge pins the ''identifier'', and edge-verification WALKS the persona-KEL to the
+  ''current'' authoritative operational key (latest-seen head wins, monotone-versioned);
+* a rotation advances the head; the old edges still resolve, because they pinned the invariant
+  identifier, never the rotated key.
+
+<<~ confidence Synthesis 12/20 >> ''So the load-bearing build for Reading-B reads: give each PersonaGroup
+a pre-rotated persona-KEL, and move the pin from the raw operational key to the identifier prefix.''
+This lifts the charter's proven epoch-chain machinery down to persona scale — invent nothing structural,
+re-site what stands (#edges names the code seams).
+
+<<~/ahu >>
+
+<<~ ahu #the-two-forks >>
+
+!! The custody fork ~ reconstruct-then-sign ⊥ threshold-attest
+
+The ruling fixes THAT recovery rotates; it leaves open HOW the recovery authority signs the rotation.
+Two readings, one tradeoff axis — does the recovery authority EVER materialize as a single secret?
+
+''FORK A — reconstruct-then-sign (guardians hold shares of the recovery root).'' The recovery ROOT seed
+splits 2-of-3 across the shared guardian-card slots (mine/device + guardian-A + guardian-B), IDENTICAL
+to the reserve ceremony — only the SECRET changes (the recovery root, never the operational root). At
+recovery, two distinct custodians reconstruct the recovery root TRANSIENTLY, it signs ONE rotation
+event, then zeroizes (`reconstructAndReadmit`'s window-bound, re-aimed at a rotation). ''Reuses the
+entire guardian-card + recovery-share + reconstruct machinery almost unchanged.''
+
+* //Tradeoff//: the recovery root still momentarily assembles as one secret — a transient
+  impersonation-of-the-RECOVERY-authority window survives. It shrinks the blast radius (that secret can
+  ONLY authorize a rotation, never resurrect the op-key or sign content), yet the recovery quorum stays
+  AN impersonation quorum of the recovery authority.
+
+''FORK B — threshold-attest (guardians each SIGN, no reconstruction EVER).'' Each guardian holds their
+OWN independent recovery keypair; inception pre-commits the k-of-n digest of their recovery PUBLIC keys
+(`charterKeySetHash`, the k-of-n cut already flagged in wax-stamp). At recovery, each guardian
+independently SIGNS the rotation event with their own recovery key; the event carries k signatures
+verified against the pre-committed set. ''No secret ever reconstructs — the strictest never-reconstruct.''
+
+* //Tradeoff//: it does NOT reuse Shamir/recovery-share (a genuine k-of-n multisig over the persona-KEL
+  rotation, small but new); it asks each guardian to mint + custody a keypair (heavier than "write down
+  a card"); the rotation event carries k separate signatures. This reads the FROST/TSS direction
+  recovery-core already gestures at ("the seed then never assembles").
+
+<<~ confidence Synthesis-Canon 14/20 >> ''Both satisfy the ruling'' — neither resurrects the operational
+key; that part settled. The fork decides ONLY whether the RECOVERY authority itself ever briefly
+materializes as one secret. The guardian-CARD survives either way — Fork A's card carries a share of the
+recovery root; Fork B's card carries a guardian's recovery public key + a signing prompt. The operator
+picks the axis: ''maximal reuse + a shrunk single-secret window (A)'' vs ''zero single-secret + new
+multisig machinery and heavier guardian onboarding (B)''.
+
+<<~/ahu >>
+
+<<~ ahu #the-honest-edges >>
+
+!! The honest edges (kept lit)
+
+<<~ confidence Synthesis-Canon 14/20 >> Three walls hold this design, and each stays named:
+
+* ''Reading-B needs the persona-KEL indirection BEFORE it can land'' — while the pin reads the raw
+  operational key, no rotation preserves continuity. The indirection (#the-continuity-anchor) gates the
+  whole recovery re-cut; it lifts proven charter machinery, but it lands FIRST.
+* ''"a valid rotation on lineage L" reads as crypto fact; "L is the legitimate person" does NOT'' — the
+  same wall the wax-stamp and persona-policy keep lit. A rotation verifies against the pre-commit; that
+  the recovering party //is// the original human stays higher-order social acceptance, answered by kahu-
+  as-custodians and talk-story, never by a signature (#persona-policy).
+* ''the recovery-root pre-commit inherits the reserve's independence rule'' — the three recovery shares
+  (Fork A) or the three guardian keys (Fork B) MUST sit in three domains that do not fall together
+  (#founding-runbook: the online-identity trap + the co-location trap). A monoculture of custody defeats
+  the rotation before it starts, exactly as correlated compromise defeats the refresh clock
+  (#siege-resilience#cadence).
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/charter-chain >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/charter-reserve >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/guardian-card >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/recovery-keel-core >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
