@@ -78,6 +78,12 @@ export { presenterIsKapaed, carryContractShareDecision, classifyCrossOperatorAdm
 export type { CrossOperatorAdmission } from "./federation-gate.js";
 export { memberCarryShareDecision } from "./federation-gate.js";
 export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
+// The @cad ENCRYPT-ON-CAS primitive — cid = BLAKE3(ciphertext), verify-cap ⊥ read-cap, per-Nexus message-lock.
+export {
+  ciphertextCid, verifyCiphertextCid, deriveMessageKey, sealBodyOnCas, openBodyOnCas,
+  CIPHERTEXT_CID_ALGO, CONVERGENCE_SECRET_LEN,
+} from "./ciphertext-cas.js";
+export type { SealedBody } from "./ciphertext-cas.js";
 // The open-beta federation POSTURE — the outer gate over cross-operator admission (private/open, default private).
 export type { FederationPosture } from "./federation-gate.js";
 export { DEFAULT_FEDERATION_POSTURE, postureGatesCrossOperator, admitCrossOperatorUnderPosture } from "./federation-gate.js";

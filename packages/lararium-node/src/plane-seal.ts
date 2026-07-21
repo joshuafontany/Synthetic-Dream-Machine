@@ -42,3 +42,34 @@ export function makeSealedPlaneSet(sealedDocIds: Iterable<DocumentId>): PlaneSea
     isSealedPlane(documentId: DocumentId): boolean { return sealed.has(documentId); },
   };
 }
+
+/**
+ * THE SEAL-PRODUCER SOCKET — a LIVE, growable sealed-plane registry. The `seal` reads the CURRENT set (so a
+ * body sealed AFTER the sharePolicy closed over `seal` lights the member lane immediately), and `register` is
+ * the ONLY door into that set. The door opens for a docId ONLY as a SIDE-EFFECT of the encrypt-on-CAS installer
+ * (`installSealedBody`) — the same call that content-addresses + encrypts a body. A cleartext body reaches NO
+ * encrypt path, so NOTHING registers it: the load-bearing honesty is that a doc can NEVER self-label sealed, and
+ * a plaintext body can NEVER land in this set. The registry itself encrypts nothing; it only records what the
+ * installer sealed.
+ *
+ * FAIL-CLOSED: empty registry ⇒ `isSealedPlane` is `false` for every doc ⇒ behaves EXACTLY as
+ * `DENY_ALL_PLANE_SEAL` (the read-lane-untouched floor) until the first body seals.
+ */
+export interface SealedPlaneRegistry {
+  /** The oracle the sharePolicy holds — reads the CURRENT sealed set (live; reflects post-open seals). */
+  readonly seal: PlaneSeal;
+  /** Record a docId as sealed. The SOLE caller is the encrypt-on-CAS installer, always AFTER a successful seal. */
+  register(documentId: DocumentId): void;
+  /** How many sealed docIds stand (audit / test). */
+  readonly size: number;
+}
+
+/** Stand a live sealed-plane registry. Empty at birth ⇒ fail-closed (DENY-ALL) until the encrypt path seals a body. */
+export function makeSealedPlaneRegistry(): SealedPlaneRegistry {
+  const sealed = new Set<DocumentId>();
+  return {
+    seal: { isSealedPlane(documentId: DocumentId): boolean { return sealed.has(documentId); } },
+    register(documentId: DocumentId): void { sealed.add(documentId); },
+    get size(): number { return sealed.size; },
+  };
+}

@@ -73,7 +73,7 @@ import { makeAntigenRingHolder } from "./antigen-ring.js";
 import { makePersonaKelRingHolder } from "./persona-kel-ring.js";
 import { makeNexusMembership } from "./nexus-membership.js";
 import { readNexusCharterDoc } from "./nexus-charter-doc.js";
-import { DENY_ALL_PLANE_SEAL } from "./plane-seal.js";
+import { makeSealedPlaneRegistry } from "./plane-seal.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
 
@@ -309,6 +309,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // (fail-closed): the pre-read boot window denies every cross-Nexus foreign operator co-federation. STOOD
   // once the operator's own nym + bags dir are known, below; a live posture-flip re-reads on membership refold.
   let federationPosture: FederationPosture = "private";
+  // THE SEAL-PRODUCER — a LIVE sealed-plane registry, empty at boot (fail-closed: behaves EXACTLY as
+  // DENY-ALL until the encrypt-on-CAS installer seals a body). `sealRegistry.seal` is the oracle the
+  // sharePolicy closes over; the moment `installSealedBody(sealRegistry, …)` seals a @cad body, its docId
+  // registers here AS A SIDE-EFFECT and the member blind-transit lane opens for that ciphertext body. A
+  // cleartext body reaches no encrypt path → never registers → a doc can never self-label sealed.
+  const sealRegistry = makeSealedPlaneRegistry();
   const repo = new Repo({
     storage,
     network: [network],
@@ -342,7 +348,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // planeSeal is DENY-ALL today (the sync wire carries cleartext — no plane is provably sealed), so the
         // member lane stands ready but inert; it opens the moment a sealed plane type (@cad/BeeKEM) registers.
         membership:      nexusMembership,
-        planeSeal:       DENY_ALL_PLANE_SEAL,
+        // THE LIVE SEAL ORACLE — reads the current sealed set (fail-closed empty ⇒ DENY-ALL). A @cad ciphertext
+        // body sealed by `installSealedBody` registers its docId here; the member lane then blind-transits it
+        // (carry the ciphertext, never the read-cap — the read-cap rides the private keyhive lane).
+        planeSeal:       sealRegistry.seal,
         // THE POSTURE OUTER GATE — PRIVATE (default) denies a cross-Nexus (non-member) foreign operator ALL
         // co-federation; OPEN lets a proof-carrying foreign operator reach the public shelf (never a private plane).
         federationPosture,
