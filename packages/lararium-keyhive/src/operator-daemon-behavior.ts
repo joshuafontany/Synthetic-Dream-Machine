@@ -22,6 +22,7 @@ import {
   makeWardAlertReactor,
   makeAddBagReactor, makeRemoveBagReactor, makeEpochBagReactor, makeRotateRecipeReactor,
   makeSwitcherStateReactor,
+  makePersonaStateReactor,
 } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
@@ -115,6 +116,13 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // activation state and this writes the LOCAL, volatile $:/temp/lares/switcher
       // tiddler so the projected switcher re-renders (reactive, never a poll).
       registry.register("switcher-state", makeSwitcherStateReactor(ctx.tw5));
+
+      // persona-state — the @daemon persona surface's IN path: main (which holds the IDB
+      // persona vault) pushes the live multitude-view and this writes the LOCAL, volatile
+      // $:/temp/lares/personas tiddler so the projected surface re-renders. The tiddler
+      // carries the PRIVATE pet-names — it stays in the temp slot, syncing to no bag. A
+      // headless node daemon registers this verb but never receives a push (browser-only).
+      registry.register("persona-state", makePersonaStateReactor(ctx.tw5));
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
       // in @daemon + $:/tags/Alert into the operator's pinned VM.

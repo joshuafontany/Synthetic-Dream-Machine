@@ -162,6 +162,7 @@ export type { CapVerify, RunLocalVerbOptions } from "./verb-local-dispatch.js";
 export { makeDaemonBehavior } from "./daemon-behavior.js";
 export type { DaemonBehaviorOptions } from "./daemon-behavior.js";
 export { seedDaemonUiTiddlers, makeSwitcherStateReactor, DAEMON_UI_TIDDLERS, SWITCHER_STATE_TITLE, LARES_SURFACE_STATE, LARES_SURFACE_TAG } from "./daemon-ui-tiddlers.js";
+export { seedDaemonPersonaTiddlers, makePersonaStateReactor, DAEMON_PERSONA_TIDDLERS, PERSONA_STATE_TITLE } from "./daemon-persona-tiddlers.js";
 
 export { IslandKernel } from "./island-kernel.js";
 export { runSovereignKernel } from "./sovereign-kernel.js";

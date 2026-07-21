@@ -15,7 +15,7 @@
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
 import { makeOperatorDaemonBehavior } from "@lararium/keyhive/operator-daemon-behavior";
-import { mountProjection, seedDaemonUiTiddlers } from "@lararium/tw5";
+import { mountProjection, seedDaemonUiTiddlers, seedDaemonPersonaTiddlers } from "@lararium/tw5";
 
 // The @daemon INHERITS the wiki render cap (hasProjection). Mount its projection DORMANT at island-boot —
 // exactly as a pool wiki mounts its camera — so summoning the @daemon is a pure active-surface gate flip,
@@ -26,5 +26,5 @@ runBrowserSovereignWorker((manifest) =>
     // Born-from-source: paint the @daemon UX widget's CODE tiddlers + open the switcher
     // wrapper as the story's INITIAL content — BEFORE the camera renders, so no
     // story-navigation beat (which would reference `window` in this headless Worker).
-    onBoot: (ctx) => { seedDaemonUiTiddlers(ctx.tw5); return mountProjection(ctx); },
+    onBoot: (ctx) => { seedDaemonUiTiddlers(ctx.tw5); seedDaemonPersonaTiddlers(ctx.tw5); return mountProjection(ctx); },
   }));

@@ -21,6 +21,7 @@ import {
   emptyLarDoc, mutableLarRecord,
   CATALOG_DOC_URI, DAEMON_BAG_ID,
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
+  personaMultitudeView, renameOwnPersona,
   DeterministicFederationGate, identityShareDecision, type FederationGate, type IdentityRing,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, recipeHostFacets, type WikiActivationCap,
@@ -55,8 +56,11 @@ import {
   generateOrLoadBrowserVesselIdentity, loadBrowserSigningSeed,
   generateOrLoadBrowserPersonaRoot, loadBrowserPersonaRootSeed, wearBrowserPersona,
   browserJoineePersonaIndex,
+  listBrowserPersonaRoots, loadBrowserActivePersona,
+  makeBrowserIdbPersonaVault, makeBrowserPersonaPetnameStore,
   openVesselIdb, idbGet, idbPut,
 }                                            from "./browser-vessel-identity.js";
+import { personaPanelStateArgs }             from "./persona-panel-state.js";
 import { BrowserVesselIslandPool }           from "./browser-vessel-island-pool.js";
 
 /** Browser advertises the MINIMAL grant (constrained vessel): a small live-wiki set
@@ -483,6 +487,24 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       requestedBy: "switcher",
     });
   };
+  // Push the live PERSONA multitude INTO the @daemon persona surface (main → local, reactive):
+  // main HOLDS the IDB persona vault, so it reads the multitude-view here + writes it through the
+  // `persona-state` worker verb onto the volatile $:/temp/lares/personas. PRIVATE-all: the view is
+  // built with NO public-handle view, so every persona reads private-only — no glamour federates
+  // off this push. Fired after a mint/wear + on @daemon summon. Fire-and-forget (a lost push self-
+  // heals on the next mint/wear or summon), mirroring pushSwitcherState.
+  const pushPersonaState = async (): Promise<void> => {
+    if (!daemon) return;
+    const vault    = await makeBrowserIdbPersonaVault(idbName);
+    const petnames = await makeBrowserPersonaPetnameStore(idbName);
+    const view     = await personaMultitudeView(vault, petnames);   // no publicView → private-only
+    const active   = await loadBrowserActivePersona(idbName);
+    void daemon.placeVerb({
+      verb:        "persona-state",
+      args:        personaPanelStateArgs(view, active),
+      requestedBy: "persona",
+    });
+  };
   // The materialize-fresh path RELOADS a persisted @oracle intact (find-first) or
   // materializes it fresh — never a merge-into-stale reconcile. No engine
   // CID-diverge merge happens at boot, so this stays false (kept for API parity).
@@ -727,6 +749,50 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         };
       });
 
+      // ── The PERSONA surface (the multitude-of-one door) ─────────────────────────
+      // The isomorphic mirror of the wiki-switcher: main holds the IDB persona vault, so
+      // these verbs DRIVE it (list / mint / wear) and reflect the fresh state into the
+      // @daemon persona surface via pushPersonaState. A projected click routes here exactly
+      // as wiki-switch does (worker delegates the unknown verb to the main registry).
+
+      // persona-refresh — repaint the surface from the live vault (idempotent read + push).
+      registry.register("persona-refresh", async () => {
+        void pushPersonaState();
+        const roster = await listBrowserPersonaRoots(idbName);
+        const active = await loadBrowserActivePersona(idbName);
+        return { verb: "persona-refresh", roster, ...(active !== undefined ? { active } : {}) };
+      });
+
+      // persona-mint — mint a new persona-root at the NEXT index and set its DEFAULT private
+      // pet-name (PRIVATE-all — the label never federates; publishing a public glamour stays a
+      // SEPARATE explicit act, never auto-fired here). The projection round-trip relays clicks,
+      // never typed text, so the mint names the face for the human (renamed off-surface); a
+      // typed rename is not a projected affordance. Next index = max(held) + 1, or 0 when the
+      // vessel holds no root (a joinee founding its first face).
+      registry.register("persona-mint", async () => {
+        const roster = await listBrowserPersonaRoots(idbName);
+        const nextIndex = roster.length ? Math.max(...roster) + 1 : 0;
+        const root = await generateOrLoadBrowserPersonaRoot(idbName, nextIndex);
+        const petnames = await makeBrowserPersonaPetnameStore(idbName);
+        await renameOwnPersona(petnames, nextIndex, `persona-h${nextIndex}`);
+        void pushPersonaState();
+        return { verb: "persona-mint", index: nextIndex, created: root.created };
+      });
+
+      // persona-wear — don the face at `index` (reboot-to-switch, one-face-to-mesh). FAIL CLOSED
+      // on custody: wearBrowserPersona REFUSES when this vessel holds no root at that index (the
+      // custody-by-type wall — sign only as a persona whose sovereign secret this vessel carries).
+      // Wearing moves only the selector pointer; the worker BINDS the worn persona at boot
+      // (browserJoineePersonaIndex feeds openDaemon), so the switch lands on the next reboot —
+      // rebootRequired names that for the app shell (the reboot itself is the caller's act).
+      registry.register("persona-wear", async (args) => {
+        const index = Number(args["index"]);
+        if (!Number.isSafeInteger(index) || index < 0) throw new Error("persona-wear: valid `index` required");
+        await wearBrowserPersona(idbName, index);   // custody-gated — throws when no root held
+        void pushPersonaState();
+        return { verb: "persona-wear", index, rebootRequired: true };
+      });
+
       // wiki-sense (the supervision reads) — the daemon's supervision READ-verbs over the islands this vessel's pool
       // actually holds. The seams ARE the supervision grant: designation resolves through the pool
       // alone (confused-deputy ward — a name outside the pool fails loud at both ends), and the
@@ -892,9 +958,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         args: { slug: surfaceId === DAEMON_SURFACE_ID ? "daemon" : surfaceId },
         requestedBy: "summon",
       });
-      // Summoning the @daemon: seed its switcher list with the live activation state so
-      // the projected widget paints a current list the moment it becomes the surface.
-      if (surfaceId === DAEMON_SURFACE_ID) pushSwitcherState();
+      // Summoning the @daemon: seed its switcher list + persona multitude with the live state so
+      // the projected widgets paint a current view the moment the @daemon becomes the surface.
+      if (surfaceId === DAEMON_SURFACE_ID) { pushSwitcherState(); void pushPersonaState(); }
     },
   };
 }
