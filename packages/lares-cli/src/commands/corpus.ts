@@ -14,8 +14,9 @@
  */
 
 import {
-  runCorpus, openCorpus, queryCorpus, listCorpora,
+  runCorpus, openCorpus, queryCorpus, listCorpora, keepSensorium,
   dissolveCorpus, dissolveAll, reapOrphans, listOrphans,
+  acceptPetName, attachPetName, listPetNames, proposePetName, sensoriumDir, sensoriumNames,
 } from "@lararium/node";
 import { emit } from "../render.js";
 import { renderCommandHelp } from "../command-help.js";
@@ -24,7 +25,7 @@ import type { ParsedArgs } from "../parse-args.js";
 /** `corpus run <path> [-- <analysis>] [--keep] [--name <n>]` — ephemeral-default open/ingest/dissolve. */
 async function runVerb(args: ParsedArgs): Promise<number> {
   const path = args.positional[1];
-  if (!path) { console.error("usage: lares corpus run <path> [-- <analysis>] [--keep]"); return 2; }
+  if (!path) { console.error("usage: lares sensorium run <path> [-- <analysis>] [--keep]"); return 2; }
   const analysis = args.positional.slice(2).join(" ").trim() || undefined;
   const keep = args.flags["keep"] === true;
   const res = await runCorpus({ sourcePath: path, ...(args.options["name"] ? { name: args.options["name"] } : {}), ...(analysis ? { analysis } : {}), keep });
@@ -32,7 +33,7 @@ async function runVerb(args: ParsedArgs): Promise<number> {
     ok: true,
     data: { mode: "run", ...res },
     human: () => {
-      console.log(`lares corpus run — ${res.dissolved ? "DISSOLVED on exit (--rm)" : "KEPT (durable)"}`);
+      console.log(`lares sensorium run — ${res.dissolved ? "DISSOLVED on exit (--rm)" : "RETAINED"}`);
       console.log(`  id:        ${res.id}`);
       console.log(`  drawers:   ${res.drawers}${res.note ? `  (${res.note})` : ""}`);
       console.log(`  structure: ${res.structures} vector(s)`);
@@ -42,7 +43,7 @@ async function runVerb(args: ParsedArgs): Promise<number> {
         console.log(`  analysis: ${res.analysis.hits.length} hit(s)${res.analysis.note ? `  (${res.analysis.note})` : ""}`);
         for (const h of res.analysis.hits.slice(0, 5)) console.log(`    · ${preview(h["text"])}`);
       }
-      if (!res.dissolved) console.log(`\n  → query it:  lares corpus query ${res.id} <keywords>`);
+      if (!res.dissolved) console.log(`\n  → query it:  lares sensorium query ${res.id} <keywords>`);
     },
   });
   return 0;
@@ -51,21 +52,21 @@ async function runVerb(args: ParsedArgs): Promise<number> {
 /** `corpus open <path> [--name <n>]` — spin up + ingest, leave LIVE, print the corpus-id. */
 function openVerb(args: ParsedArgs): number {
   const path = args.positional[1];
-  if (!path) { console.error("usage: lares corpus open <path> [--name <n>]"); return 2; }
+  if (!path) { console.error("usage: lares sensorium open <path> [--name <n>]"); return 2; }
   const { id, dir, manifest } = openCorpus({ sourcePath: path, ...(args.options["name"] ? { name: args.options["name"] } : {}) });
   emit(args, {
     ok: true,
     data: { mode: "open", id, dir, manifest },
     human: () => {
-      console.log(`lares corpus open — LIVE`);
+      console.log(`lares sensorium open — LIVE`);
       console.log(`  id:        ${id}`);
       console.log(`  name:      ${manifest.name}`);
       console.log(`  drawers:   ${manifest.drawers ?? 0}${manifest.note ? `  (${manifest.note})` : ""}`);
       console.log(`  structure: ${manifest.structures ?? 0} vector(s)`);
       console.log(`  bands:     ${manifest.bands ?? 0} lar_ffz cell(s)`);
       console.log(`  form:      ${manifest.forms ?? 0} construction(s)`);
-      console.log(`\n  → query:    lares corpus query ${id} <keywords>`);
-      console.log(`  → dissolve: lares corpus dissolve ${id}`);
+      console.log(`\n  → query:    lares sensorium query ${id} <keywords>`);
+      console.log(`  → dissolve: lares sensorium dissolve ${id}`);
     },
   });
   return 0;
@@ -75,15 +76,15 @@ function openVerb(args: ParsedArgs): number {
 async function queryVerb(args: ParsedArgs): Promise<number> {
   const id = args.positional[1];
   const kw = args.positional.slice(2).join(" ").trim();
-  if (!id || !kw) { console.error("usage: lares corpus query <id> <keywords...>"); return 2; }
+  if (!id || !kw) { console.error("usage: lares sensorium query <id> <keywords...>"); return 2; }
   const res = await queryCorpus(id, kw);
   emit(args, {
     ok: res.found,
-    ...(res.found ? {} : { error: { code: "not-found", message: `no live corpus "${id}"`, hint: "run `lares corpus ls`" } }),
+    ...(res.found ? {} : { error: { code: "not-found", message: `no live sensorium "${id}"`, hint: "run `lares sensorium ls`" } }),
     data: { mode: "query", ...res },
     human: () => {
-      if (!res.found) { console.error(`lares corpus query: no live corpus "${id}" — run \`lares corpus ls\``); return; }
-      console.log(`lares corpus query ${id} — ${res.hits.length} hit(s)${res.note ? `  (${res.note})` : ""}`);
+      if (!res.found) { console.error(`lares sensorium query: no live sensorium "${id}" — run \`lares sensorium ls\``); return; }
+      console.log(`lares sensorium query ${id} — ${res.hits.length} hit(s)${res.note ? `  (${res.note})` : ""}`);
       for (const h of res.hits) console.log(`  · ${preview(h["text"])}`);
     },
   });
@@ -98,12 +99,12 @@ function lsVerb(args: ParsedArgs): number {
     ok: true,
     data: { mode: "ls", corpora: rows, orphans: orphans.length },
     human: () => {
-      if (!rows.length) { console.log("lares corpus ls — (no live corpora)"); }
+      if (!rows.length) { console.log("lares sensorium ls — (no live sensoria)"); }
       else {
-        console.log(`lares corpus ls — ${rows.length} live`);
+        console.log(`lares sensorium ls — ${rows.length} live`);
         for (const m of rows) console.log(`  ${m.id}  ${m.ephemeral ? "[ephemeral]" : "[durable]  "}  ${m.name}  (${m.drawers ?? 0} drawers)`);
       }
-      if (orphans.length) console.log(`\n  ⚠ ${orphans.length} leaked scratch — reap with: lares corpus dissolve --orphans`);
+      if (orphans.length) console.log(`\n  ⚠ ${orphans.length} leaked scratch — reap with: lares sensorium dissolve --orphans`);
     },
   });
   return 0;
@@ -113,22 +114,22 @@ function lsVerb(args: ParsedArgs): number {
 function dissolveVerb(args: ParsedArgs): number {
   if (args.flags["orphans"] === true) {
     const reaped = reapOrphans();
-    emit(args, { ok: true, data: { mode: "dissolve", scope: "orphans", reaped: reaped.length }, human: () => console.log(`lares corpus dissolve --orphans — reaped ${reaped.length} leaked scratch instance(s)`) });
+    emit(args, { ok: true, data: { mode: "dissolve", scope: "orphans", reaped: reaped.length }, human: () => console.log(`lares sensorium dissolve --orphans — reaped ${reaped.length} leaked scratch instance(s)`) });
     return 0;
   }
   if (args.flags["all"] === true) {
     const ids = dissolveAll();
-    emit(args, { ok: true, data: { mode: "dissolve", scope: "all", dissolved: ids }, human: () => console.log(`lares corpus dissolve --all — dissolved ${ids.length} corpus instance(s)`) });
+    emit(args, { ok: true, data: { mode: "dissolve", scope: "all", dissolved: ids }, human: () => console.log(`lares sensorium dissolve --all — dissolved ${ids.length} sensorium instance(s)`) });
     return 0;
   }
   const id = args.positional[1];
-  if (!id) { console.error("usage: lares corpus dissolve <id> | --all | --orphans"); return 2; }
+  if (!id) { console.error("usage: lares sensorium dissolve <id> | --all | --orphans"); return 2; }
   const res = dissolveCorpus(id);
   // Idempotent: an already-gone instance is a no-op success (ok:true).
   emit(args, {
     ok: true,
     data: { mode: "dissolve", scope: "one", ...res },
-    human: () => console.log(res.existed ? `lares corpus dissolve — ${id} dissolved` : `lares corpus dissolve — ${id} already gone (no-op)`),
+    human: () => console.log(res.existed ? `lares sensorium dissolve — ${id} dissolved` : `lares sensorium dissolve — ${id} already gone (no-op)`),
   });
   return 0;
 }
@@ -140,17 +141,71 @@ function preview(text: unknown, n = 160): string {
   return flat.length > n ? flat.slice(0, n) + "…" : flat;
 }
 
-export async function cmdCorpus(args: ParsedArgs): Promise<number> {
+function rootFor(name: string): string | null {
+  return sensoriumNames().includes(name) ? sensoriumDir(name) : null;
+}
+
+function keepVerb(args: ParsedArgs): number {
+  const id = args.positional[1];
+  if (!id) { console.error("usage: lares sensorium keep <id>"); return 2; }
+  const result = keepSensorium(id);
+  emit(args, { ok: result.existed, data: { mode: "keep", ...result }, human: () => console.log(result.existed ? `lares sensorium keep — ${id} is now retained` : `lares sensorium keep: no live sensorium "${id}"`) });
+  return result.existed ? 0 : 3;
+}
+
+function nameVerb(args: ParsedArgs): number {
+  const [sensorium, subject, ...label] = args.positional.slice(1);
+  const root = sensorium ? rootFor(sensorium) : null;
+  if (!root || !subject || !label.length) { console.error("usage: lares sensorium name <sensorium> <subject> <label...>"); return 2; }
+  const entry = attachPetName(root, { subject, label: label.join(" ") });
+  emit(args, { ok: true, data: { entry }, human: () => console.log(`lares sensorium name — ${entry.label} ↦ ${entry.subject}`) });
+  return 0;
+}
+
+function proposeNameVerb(args: ParsedArgs): number {
+  const [sensorium, subject, ...label] = args.positional.slice(1);
+  const root = sensorium ? rootFor(sensorium) : null;
+  const projection = typeof args.options["projection"] === "string" ? args.options["projection"] : "";
+  const evidence = typeof args.options["evidence"] === "string" ? args.options["evidence"].split(",").filter(Boolean) : [];
+  if (!root || !subject || !label.length || !projection) { console.error("usage: lares sensorium propose-name <sensorium> <subject> <label...> --projection <handle> [--evidence ref,ref]"); return 2; }
+  const entry = proposePetName(root, { subject, label: label.join(" "), projection, evidence });
+  emit(args, { ok: true, data: { entry }, human: () => console.log(`lares sensorium propose-name — ${entry.label} awaits acceptance (${entry.id})`) });
+  return 0;
+}
+
+function namesVerb(args: ParsedArgs): number {
+  const root = args.positional[1] ? rootFor(args.positional[1]) : null;
+  if (!root) { console.error("usage: lares sensorium names <sensorium>"); return 2; }
+  const entries = listPetNames(root);
+  emit(args, { ok: true, data: { names: entries }, human: () => entries.length ? entries.forEach((entry) => console.log(`${entry.id}  [${entry.status}]  ${entry.subject}  ${entry.label}`)) : console.log("lares sensorium names — (none)") });
+  return 0;
+}
+
+function acceptNameVerb(args: ParsedArgs): number {
+  const [sensorium, id] = args.positional.slice(1);
+  const root = sensorium ? rootFor(sensorium) : null;
+  if (!root || !id) { console.error("usage: lares sensorium accept-name <sensorium> <proposal-id>"); return 2; }
+  const entry = acceptPetName(root, id);
+  emit(args, { ok: entry !== null, data: { entry }, human: () => console.log(entry ? `lares sensorium accept-name — ${entry.label}` : `lares sensorium accept-name: no proposal "${id}"`) });
+  return entry ? 0 : 3;
+}
+
+export async function cmdSensorium(args: ParsedArgs): Promise<number> {
   const sub = args.positional[0];
-  if (!sub || sub === "help" || args.flags["help"]) { renderCommandHelp("corpus"); return sub ? 0 : 1; }
+  if (!sub || sub === "help" || args.flags["help"]) { renderCommandHelp("sensorium"); return sub ? 0 : 1; }
   switch (sub) {
     case "run":      return await runVerb(args);
     case "open":     return openVerb(args);
     case "query":    return await queryVerb(args);
     case "ls":       return lsVerb(args);
+    case "keep":     return keepVerb(args);
     case "dissolve": return dissolveVerb(args);
+    case "name": return nameVerb(args);
+    case "propose-name": return proposeNameVerb(args);
+    case "names": return namesVerb(args);
+    case "accept-name": return acceptNameVerb(args);
     default:
-      console.error(`lares corpus: unknown subcommand "${sub}".  Run \`lares corpus help\`.`);
+      console.error(`lares sensorium: unknown subcommand "${sub}".  Run \`lares sensorium help\`.`);
       return 2;
   }
 }

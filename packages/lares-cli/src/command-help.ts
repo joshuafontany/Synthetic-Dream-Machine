@@ -22,47 +22,37 @@ export interface CommandHelp {
 }
 
 export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
-  corpus: {
+  sensorium: {
     synopsis:
-      "The ephemeral astral MULTIPALACE — scratch mempalace instances (the `docker run --rm` of memory). " +
+      "The source-neutral sensorium surface. `run` / `open` currently ingest a path into a scratch sensorium. " +
       "`run` is ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit (success OR error). `open` " +
-      "leaves a corpus live to `query` / `sensorium keep` / `dissolve`. Every scratch is leak-proofed: " +
+      "leaves it live to `query` / `keep` / `dissolve`. Every scratch is leak-proofed: " +
       "`dissolve --orphans` reaps anything an interrupted run left behind. Four planes stand over the " +
       "scratch: content · multi-scale-FFZ bands · content-free structure vectors · the corpus's OWN " +
       "grammar (FORM induction, mined blind and MDL-stopped).",
     examples: [
-      "lares corpus run ./notes -- what decisions were made   # open, analyze, dissolve",
-      "lares corpus run ./notes --keep                        # ... but land it durable",
-      "lares corpus open ./src --name myproj                  # spin up + ingest, leave live",
-      "lares corpus query c-abc123 capability model           # search a live corpus",
-      "lares corpus ls                                        # the live corpus sensoria",
+      "lares sensorium run ./notes -- what decisions were made # open, analyze, dissolve",
+      "lares sensorium run ./notes --keep                     # ... but retain it",
+      "lares sensorium open ./src --name myproj               # spin up + ingest, leave live",
+      "lares sensorium query c-abc123 capability model        # search a live sensorium",
+      "lares sensorium ls                                     # live sensoria",
       "lares sensorium keep c-abc123                          # retain ephemeral → durable",
-      "lares corpus dissolve c-abc123                         # remove one (idempotent)",
-      "lares corpus dissolve --orphans                        # reap leaked scratch",
-    ],
-    flags: [
-      "--keep             (run) land the corpus durable instead of dissolving on exit",
-      "--name <n>         (run|open) label the corpus (default: the source basename)",
-      "--all              (dissolve) remove every live corpus",
-      "--orphans          (dissolve) reap leaked scratch (interrupted runs, dead owners)",
-    ],
-    next: ["lares corpus ls", "lares sensorium keep <id>", "lares sense teardown   # the full nuke, incl. .corpus/*"],
-  },
-
-  sensorium: {
-    synopsis:
-      "Source-neutral lifecycle and local pet-name surface. `keep` retains a live ephemeral sensorium. " +
-      "Names attach to a root's discovered cap-stack; a projection may propose one, but an operator accepts it. " +
-      "A name changes neither the root's caps nor its source evidence.",
-    examples: [
-      "lares sensorium keep c-abc123",
+      "lares sensorium dissolve c-abc123                      # remove one (idempotent)",
+      "lares sensorium dissolve --orphans                     # reap leaked scratch",
       "lares sensorium name memory root \"working memory\"",
       "lares sensorium propose-name memory cid:abc \"a turning\" --projection entity-graph --evidence cid:abc,cid:def",
       "lares sensorium names memory",
       "lares sensorium accept-name memory pn-1234",
     ],
-    flags: ["--projection <handle>   (propose-name) the proposing derived projection", "--evidence a,b       (propose-name) local evidence references"],
-    next: ["lares sensorium names memory", "lares sense memory status"],
+    flags: [
+      "--keep             (run) retain the sensorium instead of dissolving on exit",
+      "--name <n>         (run|open) working label (default: the source basename)",
+      "--all              (dissolve) remove every live sensorium",
+      "--orphans          (dissolve) reap leaked scratch (interrupted runs, dead owners)",
+      "--projection <h>   (propose-name) the proposing derived projection",
+      "--evidence a,b     (propose-name) local evidence references",
+    ],
+    next: ["lares sensorium ls", "lares sensorium names memory", "lares sense teardown   # the full nuke, incl. .corpus/*"],
   },
 
   mempalace: {
