@@ -9,7 +9,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   runCorpus, openCorpus, listCorpora, listOrphans, reapOrphans,
-  dissolveCorpus, keepCorpus, corpusStructurePath, corpusBandsCellsPath, corpusFormConstructiconPath,
+  dissolveCorpus, keepSensorium, corpusStructurePath, corpusBandsCellsPath, corpusFormConstructiconPath,
   type CorpusIngest, type CorpusSearch,
 } from "../src/sense-corpus.js";
 import { larCorpusDir, corpusInstanceDir } from "../src/vessel-paths.js";
@@ -115,10 +115,10 @@ describe("orphan reaping", () => {
     expect(listCorpora().map((m) => m.id)).toEqual([durable.id]);
   });
 
-  test("keepCorpus promotes an ephemeral so reaping spares it", () => {
+  test("keepSensorium promotes an ephemeral so reaping spares it", () => {
     // forge an ephemeral with THIS process's pid → alive → spared even before keep
     const live = openCorpus({ sourcePath: src, ingest: fakeIngest, ephemeral: true });
-    keepCorpus(live.id);
+    keepSensorium(live.id);
     expect(listOrphans()).not.toContain(corpusInstanceDir(live.id));
     expect(reapOrphans()).not.toContain(corpusInstanceDir(live.id));
     expect(existsSync(corpusInstanceDir(live.id))).toBe(true);

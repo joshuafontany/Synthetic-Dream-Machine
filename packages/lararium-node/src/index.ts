@@ -96,10 +96,12 @@ export type { JingRead, LobeRoundTrip, ReadJingOptions } from "./sensorium-squar
 
 // The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
 export {
-  newCorpusId, listCorpora, openCorpus, queryCorpus, keepCorpus,
+  newCorpusId, listCorpora, openCorpus, queryCorpus, keepSensorium,
   dissolveCorpus, dissolveAll, listOrphans, reapOrphans, runCorpus,
   corpusTeardownDirs, defaultCorpusIngest, defaultCorpusSearch,
 } from "./sense-corpus.js";
+export { PETNAMES_FILE, listPetNames, attachPetName, proposePetName, acceptPetName } from "./sensorium-petnames.js";
+export type { PetName, OperatorNaming, ProjectionNaming } from "./sensorium-petnames.js";
 export type {
   CorpusLifecycle, CorpusIngest, CorpusSearch, OpenCorpusOptions, OpenCorpusResult,
   QueryCorpusResult, KeepResult, DissolveResult, RunCorpusOptions, RunCorpusResult,

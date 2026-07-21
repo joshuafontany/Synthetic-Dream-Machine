@@ -2,7 +2,7 @@
  * `lares corpus` — the ephemeral astral MULTIPALACE (the `docker run --rm` of memory).
  *
  * A noun-verb tree over scratch mempalace instances under `~/.lares/.corpus/<id>/`: open a corpus,
- * ingest a path, query it, then let it DISSOLVE — or `keep` it durable. `run` is ephemeral-DEFAULT
+ * ingest a path, query it, then let it DISSOLVE — or retain it through `sensorium keep`. `run` is ephemeral-DEFAULT
  * (open → ingest → analyze → dissolve on exit, success OR error); the deep ingest (bands · structure
  * · form) is the documented S1–S3 seam, the lifecycle + store + commands are wired solid in S0.
  *
@@ -14,7 +14,7 @@
  */
 
 import {
-  runCorpus, openCorpus, queryCorpus, listCorpora, keepCorpus,
+  runCorpus, openCorpus, queryCorpus, listCorpora,
   dissolveCorpus, dissolveAll, reapOrphans, listOrphans,
 } from "@lararium/node";
 import { emit } from "../render.js";
@@ -109,20 +109,6 @@ function lsVerb(args: ParsedArgs): number {
   return 0;
 }
 
-/** `corpus keep <id>` — promote an ephemeral corpus to durable. */
-function keepVerb(args: ParsedArgs): number {
-  const id = args.positional[1];
-  if (!id) { console.error("usage: lares corpus keep <id>"); return 2; }
-  const res = keepCorpus(id);
-  emit(args, {
-    ok: res.existed,
-    ...(res.existed ? {} : { error: { code: "not-found", message: `no corpus "${id}"` } }),
-    data: { mode: "keep", ...res },
-    human: () => console.log(res.existed ? `lares corpus keep — ${id} is now durable` : `lares corpus keep: no corpus "${id}"`),
-  });
-  return res.existed ? 0 : 3;
-}
-
 /** `corpus dissolve <id|--all|--orphans>` — idempotent removal (already-gone = ok). */
 function dissolveVerb(args: ParsedArgs): number {
   if (args.flags["orphans"] === true) {
@@ -162,7 +148,6 @@ export async function cmdCorpus(args: ParsedArgs): Promise<number> {
     case "open":     return openVerb(args);
     case "query":    return await queryVerb(args);
     case "ls":       return lsVerb(args);
-    case "keep":     return keepVerb(args);
     case "dissolve": return dissolveVerb(args);
     default:
       console.error(`lares corpus: unknown subcommand "${sub}".  Run \`lares corpus help\`.`);

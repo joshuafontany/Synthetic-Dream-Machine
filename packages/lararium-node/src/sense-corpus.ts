@@ -249,7 +249,7 @@ function setCorpusSensoriumEphemeral(dir: string, ephemeral: boolean): void {
 }
 
 /** Promote an ephemeral corpus to durable (ephemeral:false, pid dropped). */
-export function keepCorpus(id: string): KeepResult {
+export function keepSensorium(id: string): KeepResult {
   const dir = corpusInstanceDir(id);
   const m = existsSync(dir) ? readCorpusRecord(dir) : null;
   if (m === null) return { id, kept: false, existed: false };
@@ -351,7 +351,7 @@ export async function runCorpus(opts: RunCorpusOptions): Promise<RunCorpusResult
   try {
     const analysis = opts.analysis ? await queryCorpus(id, opts.analysis, opts.search ?? defaultCorpusSearch) : undefined;
     if (opts.keep) {
-      keepCorpus(id);
+      keepSensorium(id);
       dissolved = false;
       return { id, drawers: manifest.drawers ?? 0, structures: manifest.structures ?? 0, bands: manifest.bands ?? 0, forms: manifest.forms ?? 0, ...(manifest.note ? { note: manifest.note } : {}), ...(analysis ? { analysis } : {}), dissolved: false };
     }

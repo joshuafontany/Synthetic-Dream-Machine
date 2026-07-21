@@ -26,7 +26,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
     synopsis:
       "The ephemeral astral MULTIPALACE — scratch mempalace instances (the `docker run --rm` of memory). " +
       "`run` is ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit (success OR error). `open` " +
-      "leaves a corpus live to `query` / `keep` / `dissolve`. Every scratch is leak-proofed: " +
+      "leaves a corpus live to `query` / `sensorium keep` / `dissolve`. Every scratch is leak-proofed: " +
       "`dissolve --orphans` reaps anything an interrupted run left behind. Four planes stand over the " +
       "scratch: content · multi-scale-FFZ bands · content-free structure vectors · the corpus's OWN " +
       "grammar (FORM induction, mined blind and MDL-stopped).",
@@ -36,7 +36,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "lares corpus open ./src --name myproj                  # spin up + ingest, leave live",
       "lares corpus query c-abc123 capability model           # search a live corpus",
       "lares corpus ls                                        # the live corpus sensoria",
-      "lares corpus keep c-abc123                             # promote ephemeral → durable",
+      "lares sensorium keep c-abc123                          # retain ephemeral → durable",
       "lares corpus dissolve c-abc123                         # remove one (idempotent)",
       "lares corpus dissolve --orphans                        # reap leaked scratch",
     ],
@@ -46,7 +46,23 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "--all              (dissolve) remove every live corpus",
       "--orphans          (dissolve) reap leaked scratch (interrupted runs, dead owners)",
     ],
-    next: ["lares corpus ls", "lares sense teardown   # the full nuke, incl. .corpus/*"],
+    next: ["lares corpus ls", "lares sensorium keep <id>", "lares sense teardown   # the full nuke, incl. .corpus/*"],
+  },
+
+  sensorium: {
+    synopsis:
+      "Source-neutral lifecycle and local pet-name surface. `keep` retains a live ephemeral sensorium. " +
+      "Names attach to a root's discovered cap-stack; a projection may propose one, but an operator accepts it. " +
+      "A name changes neither the root's caps nor its source evidence.",
+    examples: [
+      "lares sensorium keep c-abc123",
+      "lares sensorium name memory root \"working memory\"",
+      "lares sensorium propose-name memory cid:abc \"a turning\" --projection entity-graph --evidence cid:abc,cid:def",
+      "lares sensorium names memory",
+      "lares sensorium accept-name memory pn-1234",
+    ],
+    flags: ["--projection <handle>   (propose-name) the proposing derived projection", "--evidence a,b       (propose-name) local evidence references"],
+    next: ["lares sensorium names memory", "lares sense memory status"],
   },
 
   mempalace: {

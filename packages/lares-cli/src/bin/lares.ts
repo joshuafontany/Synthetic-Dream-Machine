@@ -41,6 +41,7 @@ import { cmdSense }                   from "../commands/sense.js";
 import { cmdMempalace }               from "../commands/mempalace.js";
 import { cmdHooks }                   from "../commands/hooks.js";
 import { cmdCorpus }                  from "../commands/corpus.js";
+import { cmdSensorium }               from "../commands/sensorium.js";
 import { cmdCleanupDays }             from "../commands/cleanup-days.js";
 import { renderCommandHelp }          from "../command-help.js";
 import {
@@ -82,7 +83,8 @@ const COMMANDS: readonly Command[] = [
   { name: "wing-of",       summary: "Resolve a transcript's per-project WING through the one TS wing law (recorded cwd → wing slug) — the resolver the ingest hook calls first; prints the bare slug on the prose path. `lares wing-of <transcript.jsonl>`. No recorded cwd → not-found (the caller's fallback ladder decides).", handler: cmdWingOf },
   { name: "mempalace",     summary: "THE GUEST COMPARATOR'S DOOR (the sovereign sensorium lives at `lares sense`). `setup` raises the guest ~/.mempalace; `harvest` mines vanilla transcript drawers into it only — no lar_* stamps, no live capture, the clean comparator; `repave` previews or rebuilds it; `status` / `quiesce` / `resume` observe and control live holders and hooks.", handler: cmdMempalace },
   { name: "hooks",         summary: "The hook-lever: `pause` / `resume` / `status` the capture + ingest hooks (a marker file the hook scripts no-op on when paused). Lets a migration/teardown run WITHOUT daemon-spawn contention. `lares mempalace quiesce` pauses AND drains; this is the lever alone.", handler: cmdHooks },
-  { name: "corpus",        summary: "The ephemeral corpus sensorium (the `docker run --rm` of memory): `run <path>` opens→ingests→analyzes→DISSOLVES on exit (`--keep` lands it); `open`/`query`/`ls`/`keep`/`dissolve` manage live scratch corpus sensoria. Leak-proof: `dissolve --orphans` reaps interrupted runs. Run `lares corpus help`.", handler: cmdCorpus },
+  { name: "corpus",        summary: "The ephemeral corpus sensorium (the `docker run --rm` of memory): `run <path>` opens→ingests→analyzes→DISSOLVES on exit (`--keep` retains it); `open`/`query`/`ls`/`dissolve` manage live scratch corpus sensoria. Leak-proof: `dissolve --orphans` reaps interrupted runs. Run `lares corpus help`.", handler: cmdCorpus },
+  { name: "sensorium",     summary: "Source-neutral sensorium lifecycle + local pet-names: `keep <id>` retains a live ephemeral sensorium; `name`, `propose-name`, `names`, and `accept-name` attach or review local labels over a discovered cap-stack.", handler: cmdSensorium },
   { name: "serve",         summary: "Run the lararium node in foreground (no Vite).",                                handler: cmdServe         },
   { name: "dev",           summary: "Run node + Vite app concurrently (full dev experience).",                       handler: cmdDev           },
   { name: "rebuild",       summary: "Identity-safe dep-bump cure: rebuild the genesis engine under current deps, then serve. No wipe, keypair untouched.", handler: cmdRebuild       },
