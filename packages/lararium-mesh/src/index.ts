@@ -153,6 +153,7 @@ export * from "./holder-continuity.js";
 export * from "./anergy-ledger.js";
 export * from "./recovery-seat.js";
 export * from "./wax-stamp.js";
+export * from "./persona-kel.js";
 export * from "./conviction-dial.js";
 export * from "./capture-reading.js";
 export * from "./transfer-entropy.js";

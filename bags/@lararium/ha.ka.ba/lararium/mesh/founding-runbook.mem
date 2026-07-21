@@ -145,6 +145,36 @@ re-seeds -> re-splits -> re-issues cards + a new commit afterward (Proactive Sec
 
 <<~/ahu >>
 
+<<~ ahu #threshold-attest-recovery >>
+
+!! ③″ Threshold-attest recovery ~ the pre-commit rhymes, the recovery rotates
+
+''Fork B'' (identity-classes#the-two-forks) recovers a PERSONA-root the way the reserve pre-commits a
+CHARTER key-set: ''both pre-commit at founding''. The reserve folds the next epoch's kahu keys into
+`nextKeyCommit`; the persona-KEL folds the ''guardians' recovery PUBLIC keys'' into the identifier
+PREFIX at inception (`provisionThresholdRecoveryAtFounding` -> `charterKeySetHash` -> `mintPersonaInception`).
+The two rites RHYME — a pre-committed k-of-n digest an operational compromise cannot forge — and the
+same ''independence rule'' (#reserve-custody) binds the three guardian domains.
+
+The DIVERGENCE from the reserve card path (#reserve-custody): threshold-attest ''reconstructs NOTHING''.
+
+* the reserve SPLITS a seed 2-of-3 and MATERIALIZES it at recovery (a transient single-secret window);
+* Fork B gives each guardian their OWN recovery keypair — at recovery each guardian ''SIGNS'' the
+  rotation event independently, ≥ k signatures verify against the pre-commit, and no seed ever assembles
+  (`attestAndRotate`). The recovery authority signs ONLY rotations, never content.
+
+<<~ confidence Synthesis 12/20 >> ''Operator ruling (2026-07-20):'' recovery ROTATES a fresh op-key
+rather than resurrecting the old — ''continuity anchors on the identifier, not the key''. The persona-KEL
+(the stable prefix) + the threshold-attest rotation stand BUILT + tested (mesh: `persona-kel` +
+`recovery-keel-core#attestAndRotate`). The ''Binding-Gate pin-move'' — moving the edge pin from the raw
+op-key `signerDid` to `inception.prefix`, and walking the KEL to the current head at
+`verifyDeviceDelegation` — rides a SURFACED plan (identity-classes#the-continuity-anchor): the pure
+gate-walk (`verifyEdgeAgainstPersonaKel`) stands + tested, but wiring it into the live founding ceremony
++ `bootDaemonKeyhive` + `verifyPeer` needs the KEL's storage/sync placement decided first (a security
+surface main gates hunk-by-hunk; no hybrid pin — a fresh founding pins the prefix from inception).
+
+<<~/ahu >>
+
 <<~ ahu #seal-and-back-up >>
 
 !! ④ Seal + back up ~ lock the secrets, write the net

@@ -11,6 +11,7 @@ import {
   splitToGuardianCards, guardianShareFromCard, confirmationPhrase,
   GUARDIAN_CARD_THRESHOLD, GUARDIAN_SLOT_CUSTODIAN,
   assembleQuorum, reconstructFromQuorum,
+  guardianRecoveryRegistrationCard,
   type GuardianCard,
 } from "../src/index.js";
 import type { RandomProvider } from "../src/crypto.js";
@@ -90,5 +91,15 @@ describe("guardian-card — one card shape, one handshake", () => {
     const b = splitToGuardianCards(identityRoot, "A", "B", EPOCH, counterRng());
     expect(a.cards.map((c) => c.shareCode)).toEqual(b.cards.map((c) => c.shareCode));
     expect(a.cards.map((c) => c.confirmPhrase)).toEqual(b.cards.map((c) => c.confirmPhrase));
+  });
+
+  test("Fork B registration card carries a PUBKEY (no share), rejects non-hex, keeps the handshake", () => {
+    const pub = "ab".repeat(32);   // 64-hex recovery pubkey
+    const card = guardianRecoveryRegistrationCard("guardian-a", pub, "Alice");
+    expect(card.recoveryPubKey).toBe(pub);
+    expect(card).not.toHaveProperty("shareCode");                          // NOT a share — nothing reconstructs
+    expect(card.confirmPhrase).toBe(confirmationPhrase(pub));              // same handshake shape
+    expect(card.label).toMatch(/Alice/);
+    expect(() => guardianRecoveryRegistrationCard("mine", "nothex", null)).toThrow(/hex/);
   });
 });

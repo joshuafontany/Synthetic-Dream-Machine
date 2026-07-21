@@ -25,6 +25,12 @@ import {
 } from "./recovery-share.js";
 import { splitToGuardianCards, type GuardianCard, type GuardianCardSplit } from "./guardian-card.js";
 import { assertHandleIndex, loadPersonaRootSeed, type PersonaVault } from "./persona-vault.js";
+import { charterKeySetHash } from "./wax-stamp.js";
+import type { QuorumSignature } from "./kapae-antigen.js";
+import {
+  mintPersonaInception, mintPersonaRotation, personaRotationSigningBytes,
+  type PersonaKelEvent, type PersonaRotateResult,
+} from "./persona-kel.js";
 
 /**
  * How a runtime persists the DEVICE recovery-share, keyed by handle-index (one persona's quorum never
@@ -169,4 +175,94 @@ export async function provisionRecoveryCardsAtFounding(
   } finally {
     rootSeed.fill(0);   // the root never lingers after the split
   }
+}
+
+// ── FORK B — THRESHOLD-ATTEST recovery (identity-classes#the-two-forks) ────────────────────────────────
+// The strictest never-reconstruct: each guardian holds their OWN recovery keypair; inception pre-commits
+// the k-of-n DIGEST of their recovery PUBLIC keys; a rotation carries k guardian SIGNATURES verified against
+// that pre-commit. Recovery ROTATES a fresh op-key rather than resurrecting the old (the ruling, 2026-07-20).
+// NOTHING reconstructs — no seed, no share, no `reconstructFromQuorum`. This path shares NOTHING with the
+// Shamir/recovery-share machinery above; it is a genuine k-of-n multisig over the persona-KEL rotation.
+
+/** The default recovery threshold — k in a k-of-n guardian quorum (2-of-3 at founding, the reserve rhyme). */
+export const THRESHOLD_RECOVERY_DEFAULT = 2;
+
+/** What a Fork-B founding provisions: the persona-KEL INCEPTION (the stable identifier prefix) + the
+ *  pre-committed recovery-set digest over the guardians' recovery PUBLIC keys. NO secret splits — the
+ *  guardians already hold their own recovery keypairs; the founding only COMMITS to their public set. */
+export interface ThresholdRecoveryAtFounding {
+  /** The persona-KEL inception event — its `prefix` IS the stable identifier the Binding-Gate pins. */
+  readonly inception:       PersonaKelEvent;
+  /** The pre-committed k-of-n digest of the guardians' recovery pubkeys (folded into the prefix). */
+  readonly recoverySetHash: string;
+  /** k — the quorum threshold committed at founding. */
+  readonly recoveryThreshold: number;
+}
+
+/**
+ * Provision Fork-B recovery at FOUNDING: pre-commit the guardians' recovery PUBLIC keys (their k-of-n
+ * digest) and seat the persona-KEL inception over (founding op-key + that digest). The digest folds into
+ * the identifier prefix, so no attacker incepts a DIFFERENT recovery set under the same identity.
+ *
+ * The recovery keys NEVER sign until a rotation reveals them, so a compromise of the operational present
+ * cannot forge the recovery future (the independence rule — identity-classes#the-honest-edges). The three
+ * guardian keys MUST sit in three domains that do not fall together (the online-identity + co-location
+ * traps); this function commits the set, it does not custody the guardians' secrets (each guardian does).
+ *
+ * ADDITIVE / not-yet-wired: the live founding ceremony still pins the raw op-key `signerDid`; moving the
+ * Binding-Gate pin to `inception.prefix` rides the SURFACED pin-move plan (identity-classes#the-continuity-anchor).
+ */
+export function provisionThresholdRecoveryAtFounding(input: {
+  readonly foundingOpKeyDid:  string;              // "0x"+hex — the founding operational key the inception seats
+  readonly guardianRecoveryKeys: readonly string[]; // the n guardian recovery PUBLIC keys (64-hex each)
+  readonly recoveryThreshold?: number;             // k (default 2-of-3)
+}): ThresholdRecoveryAtFounding {
+  const recoveryThreshold = input.recoveryThreshold ?? THRESHOLD_RECOVERY_DEFAULT;
+  if (input.guardianRecoveryKeys.length < recoveryThreshold) {
+    throw new Error("[recovery-keel-core] fewer guardian recovery keys than the threshold — cannot pre-commit an unmeetable quorum");
+  }
+  const recoverySetHash = charterKeySetHash(input.guardianRecoveryKeys, recoveryThreshold);
+  const inception       = mintPersonaInception(input.foundingOpKeyDid, recoverySetHash);
+  return { inception, recoverySetHash, recoveryThreshold };
+}
+
+/** One guardian's recovery signer — its recovery PUBLIC key + a sign fn over the rotation bytes. The module
+ *  holds NO guardian key; each guardian supplies its own signer (mirrors `signAntigenEntry` / wax-stamp). */
+export interface GuardianRecoverySigner {
+  readonly signer: string;                                   // the guardian's recovery pubkey (64-hex)
+  readonly sign:   (bytes: Uint8Array) => Promise<string>;   // ed25519 sig hex over `personaRotationSigningBytes`
+}
+
+/**
+ * ATTEST-AND-ROTATE — the Reading-B recovery move (identity-classes#reading-b-recovery), replacing
+ * reconstruct-then-resurrect. Gather ≥ k guardian SIGNATURES over the rotation event, verify them against
+ * the pre-committed recovery set, and seat a FRESH operational key via a persona-KEL rotation. The old key
+ * SUPERSEDES (the head advances past it); the caller kapae-shadows its membership resurrection (evict runs
+ * forward-only). NOTHING reconstructs — the guardians each sign independently; no seed or share assembles,
+ * so no transient impersonation-of-the-recovery-authority window opens (the Fork-A tradeoff, closed).
+ *
+ * FAILS CLOSED: fewer than k valid DISTINCT-guardian signatures REFUSE; a signer outside the pre-committed
+ * set does NOT count; a revealed roster whose digest misses the pre-commit REFUSES (mintPersonaRotation).
+ * The `freshOpKeyDid` is the op-key the recovering vessel just minted and holds SOLELY — no quorum, no
+ * guardian, no recovery root ever holds it post-rotation.
+ */
+export async function attestAndRotate(input: {
+  readonly head:                 PersonaKelEvent;                 // the current KEL head
+  readonly freshOpKeyDid:        string;                          // the fresh op-key the recovering vessel minted
+  readonly guardianRecoveryKeys: readonly string[];               // the REVEALED n guardian recovery pubkeys
+  readonly recoveryThreshold:    number;                          // k
+  readonly guardianSigners:      readonly GuardianRecoverySigner[]; // ≥ k independent guardian signers
+}): Promise<PersonaRotateResult> {
+  const bytes = personaRotationSigningBytes(input.head, input.freshOpKeyDid);
+  const rotationSigs: QuorumSignature[] = [];
+  for (const g of input.guardianSigners) {
+    rotationSigs.push({ signer: g.signer, sig: await g.sign(bytes) });
+  }
+  return mintPersonaRotation({
+    head:              input.head,
+    freshOpKeyDid:     input.freshOpKeyDid,
+    recoveryRoster:    input.guardianRecoveryKeys,
+    recoveryThreshold: input.recoveryThreshold,
+    rotationSigs,
+  });
 }

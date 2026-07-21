@@ -117,6 +117,44 @@ export function guardianShareFromCard(card: GuardianCard, recoveryEpoch: number)
   return { bytes: decodeShareBytes(card.shareCode), custodian: card.custodian, recoveryEpoch };
 }
 
+// ── FORK B — the guardian RECOVERY-PUBKEY REGISTRATION card (threshold-attest, identity-classes#the-two-forks)
+// The card SHAPE survives; what it HOLDS changes. Fork A's card carries a SHARE of a reconstructable secret;
+// Fork B's card carries a guardian's recovery PUBLIC key — a registration, never share material. Each guardian
+// mints + custodies their OWN recovery keypair; this card publishes only the PUBLIC key for the founding
+// pre-commit (`provisionThresholdRecoveryAtFounding` folds the k-of-n set into the persona-KEL prefix). No
+// secret ever leaves the guardian — the strictest never-reconstruct.
+
+/** A guardian's recovery-pubkey registration — the Fork-B card. It publishes the guardian's recovery PUBLIC
+ *  key + a confirmation phrase; it carries NO share, so a full read of it reconstructs nothing. */
+export interface GuardianRecoveryRegistration {
+  readonly slot:              GuardianCardSlot;
+  /** The human label ("Recovery-guardian-A (name)"). */
+  readonly label:             string;
+  /** The guardian's recovery PUBLIC key (64-hex) — what the founding pre-commit folds into its k-of-n digest. */
+  readonly recoveryPubKey:    string;
+  /** A short out-of-band confirmation phrase over the pubkey — the same handshake shape as the share card. */
+  readonly confirmPhrase:     string;
+}
+
+/**
+ * Render a guardian's recovery-pubkey registration card (Fork B). Takes the guardian's OWN recovery public
+ * key (the guardian minted the keypair; the private half NEVER reaches this vessel) and produces the
+ * printable registration the operator collects to pre-commit the k-of-n set. Purely additive — the share-
+ * splitting `splitToGuardianCards` path (Fork A / reserve) stands untouched.
+ */
+export function guardianRecoveryRegistrationCard(
+  slot:            GuardianCardSlot,
+  recoveryPubKey:  string,
+  guardianName:    string | null,
+  confirmDomain:   string = GUARDIAN_CONFIRM_DOMAIN,
+): GuardianRecoveryRegistration {
+  if (!/^[0-9a-f]{64}$/.test(recoveryPubKey)) {
+    throw new Error("[guardian-card] recovery pubkey must be 64-char lowercase hex");
+  }
+  const label = slot === "mine" ? "Recovery-guardian mine" : `Recovery-guardian-${slot === "guardian-a" ? "A" : "B"} (${guardianName ?? "unassigned"})`;
+  return { slot, label, recoveryPubKey, confirmPhrase: confirmationPhrase(recoveryPubKey, confirmDomain) };
+}
+
 // ── The confirmation phrase — a short human-verifiable cross-check, distinct per card ─────────────────
 // Derived from a domain-separated hash of the card's share code. A card's own holder already holds the
 // share, so the phrase reveals nothing new to them; it lets the operator confirm out-of-band ("does your
