@@ -65,6 +65,11 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "the H0 li/ki consistency-radius dual; py twin computes, TS re-computes and asserts (sensorium_consistency.py fixture regenerates).",
   },
   {
+    ts: "sensorium-contract.ts", py: null, status: "ts-concept-witness",
+    fixtures: [],
+    note: "portable declarations for a nameless #has cap-stack (order evidence + apertures), platform-blind — node derives one from a rooted manifest, browser/TW5 carry one beside in-memory caps. A TS-side contract shape, no numeric py twin planned.",
+  },
+  {
     ts: "sensorium-fusion.ts", py: "sensorium_fusion.py", status: "witnessed",
     fixtures: ["fixtures/sensorium-fusion-parity.json"],
     note: "the H1 gate over the agreement nerve; py twin computes dimH1/dimH0/R*_sem + the exact H0 consensus, TS asserts (sensorium_fusion.py fixture regenerates; the Chebyshev diffusion dial stays TS-side telemetry around the same P_ker target).",
@@ -80,9 +85,9 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "ONE scalar ARL0 → α → every threshold on both sides; the dialed-threshold fixture remains owed.",
   },
   {
-    ts: "null-harness.ts", py: "spectral_ab.py", status: "owed-fixture",
+    ts: "null-harness.ts", py: null, status: "owed-py-twin",
     fixtures: [],
-    note: "surrogate-null calibration (iid-shuffle + phase-scramble) both sides; the shared-surrogate fixture remains owed.",
+    note: "the self-emergent-threshold engine (surrogate the data, read the (1−α) null quantile). spectral_ab.py retired with the boundary-detector ladder; the surrogate-null pattern now lives inlined in py (aliran.py detect_aliran, ffz_continuous_pour.py null_profile block-shuffle) — a dedicated shared twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
   },
   {
     ts: "ffz-project.ts", py: "worldline_ffz.py", status: "owed-fixture",
