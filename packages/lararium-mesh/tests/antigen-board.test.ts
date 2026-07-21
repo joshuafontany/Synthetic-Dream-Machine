@@ -14,7 +14,7 @@
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import { hex } from "../src/crypto.js";
-import { antigenEntriesFromBoard } from "../src/antigen-board.js";
+import { antigenEntriesFromBoard, writeAntigenEntry, antigenEntryKey } from "../src/antigen-board.js";
 import {
   signAntigenEntry, foldAntigenSet, makeMultiSigQuorumVerifier,
   KAPAE_ANTIGEN_DOMAIN, type KapaeAntigenEntry, type KahuCharterRoster,
@@ -104,5 +104,63 @@ describe("the LIVE pure path — board → fold → carry-contract → Mu", () =
   test("the Mu is byte-indistinguishable — kapae-denied === sync-complete === the frozen void", () => {
     expect(muVoidBytes()).toEqual(muVoidBytes());
     expect(kapaeDeniedVoid()).toEqual(syncCompleteVoid());   // the deny and the caught-up draw the SAME void
+  });
+});
+
+describe("writeAntigenEntry — the RAISE side lands what the reader reads (#65)", () => {
+  const VICTIM = "beadfeed".repeat(8);
+
+  async function liftEntry(nym: string, version: number, seeds = [SEEDS.guru, SEEDS.telarus]): Promise<KapaeAntigenEntry> {
+    const signers = await Promise.all(seeds.map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
+    return signAntigenEntry({ nym, action: "un_kapae", version, charterEpochCid: EPOCH }, signers);
+  }
+
+  test("a written ban ROUND-TRIPS through the reader and FOLDS to Kapae'd against the seated roster", async () => {
+    const doc: LarDoc = { schemaVersion: "0.1", tiddlers: {} };
+    const entry = await banEntry(VICTIM);   // 2-of-3 signed kapae at version 1
+    // writeAntigenEntry mutates a draft exactly as a handle.change would.
+    writeAntigenEntry(doc, entry);
+
+    // The accretive key names the nym AND the version — the reader walks it back byte-for-byte.
+    expect(doc.tiddlers[antigenEntryKey(VICTIM, "kapae", 1)]).toBeDefined();
+    const read = antigenEntriesFromBoard(doc);
+    expect(read).toHaveLength(1);
+    expect(read[0]).toEqual(entry);
+
+    const kapaed = await foldAntigenSet(read, await roster(), verifier);
+    expect(kapaed.has(VICTIM)).toBe(true);
+  });
+
+  test("a lift at a STRICTLY HIGHER version LIFTS; an equal/lower version does NOT (monotone, fail-closed)", async () => {
+    const doc: LarDoc = { schemaVersion: "0.1", tiddlers: {} };
+    writeAntigenEntry(doc, await banEntry(VICTIM));   // ban @ v1
+
+    // A lift at the SAME version ties → the fold keeps Kapae'd (a tie never rolls a ban back).
+    writeAntigenEntry(doc, await liftEntry(VICTIM, 1));
+    expect((await foldAntigenSet(antigenEntriesFromBoard(doc), await roster(), verifier)).has(VICTIM)).toBe(true);
+
+    // Both entries ACCRETE (distinct keys) — the additive CRDT the fold reads.
+    expect(antigenEntriesFromBoard(doc)).toHaveLength(2);
+
+    // A lift at a strictly HIGHER version supersedes → the ban lifts.
+    writeAntigenEntry(doc, await liftEntry(VICTIM, 2));
+    expect((await foldAntigenSet(antigenEntriesFromBoard(doc), await roster(), verifier)).has(VICTIM)).toBe(false);
+
+    // A re-ban at a yet-higher version re-imposes it (monotone both ways).
+    const reban = await signAntigenEntry(
+      { nym: VICTIM, action: "kapae", version: 3, charterEpochCid: EPOCH },
+      await Promise.all([SEEDS.guru, SEEDS.telarus].map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) }))),
+    );
+    writeAntigenEntry(doc, reban);
+    expect((await foldAntigenSet(antigenEntriesFromBoard(doc), await roster(), verifier)).has(VICTIM)).toBe(true);
+  });
+
+  test("a SUB-QUORUM written entry extracts but the FOLD ignores it (1-of-3 never bans)", async () => {
+    const doc: LarDoc = { schemaVersion: "0.1", tiddlers: {} };
+    const lone = await banEntry(VICTIM, [SEEDS.guru]);   // only ONE signer
+    writeAntigenEntry(doc, lone);
+    expect(antigenEntriesFromBoard(doc)).toHaveLength(1);               // extraction is permissive
+    const kapaed = await foldAntigenSet(antigenEntriesFromBoard(doc), await roster(), verifier);
+    expect(kapaed.has(VICTIM)).toBe(false);                             // but the quorum verifier denies
   });
 });

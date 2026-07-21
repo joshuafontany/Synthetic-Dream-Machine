@@ -74,7 +74,7 @@ export type { IdentityRing } from "./federation-gate.js";
 export type { AntigenRing } from "./federation-gate.js";
 export { presenterIsKapaed, carryContractShareDecision } from "./federation-gate.js";
 export * from "./kapae-antigen.js";
-export { antigenEntriesFromBoard } from "./antigen-board.js";
+export { antigenEntriesFromBoard, writeAntigenEntry, antigenEntryKey, ANTIGEN_ENTRY_PREFIX } from "./antigen-board.js";
 export * from "./mu-void.js";
 export * from "./nexus-charter-seed.js";
 export * from "./meme-provider.js";

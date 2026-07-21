@@ -19,13 +19,43 @@
  */
 
 import type { LarDoc } from "./base-doc.js";
-import { tiddlerText } from "./base-doc.js";
+import { mutableLarRecord, tiddlerText } from "./base-doc.js";
 import {
   KAPAE_ANTIGEN_DOMAIN,
   type KapaeAntigenEntry,
   type KapaeAction,
   type QuorumSignature,
 } from "./kapae-antigen.js";
+
+/**
+ * The tiddler-key prefix every antigen entry rides under — so the ban/lift entries namespace apart from a
+ * board's other content and the RAISE path keys them the READER already walks. On the DreamNet plane (the
+ * always-carried immune antigen), not one lararium's `lares` API.
+ */
+export const ANTIGEN_ENTRY_PREFIX = "lar:///ha.ka.ba/dreamnet/kapae-antigen/" as const;
+
+/**
+ * The tiddler key one antigen entry rides under — keyed by nym, ACTION, and version, so every distinct signed
+ * entry ACCRETES (the additive CRDT the fold reads) and NOTHING overwrites a standing entry: a ban@v1 and a
+ * lift@v1 land under DISTINCT keys and BOTH survive, so `foldAntigenSet`'s equivocation guard (a same-version
+ * kapae beats un_kapae) still runs — keying by nym alone (or nym+version) would let a concurrent lift win the
+ * Automerge LWW merge in place and silently roll a ban back. The fold, never the write, adjudicates the winner.
+ */
+export function antigenEntryKey(nym: string, action: KapaeAction, version: number): string {
+  return `${ANTIGEN_ENTRY_PREFIX}${nym}/${action}/${version}`;
+}
+
+/**
+ * Land a signed antigen entry onto a board draft — write it as a namespaced tiddler whose `text` carries the
+ * entry JSON (the EXACT shape `antigenEntriesFromBoard` reads back). Call INSIDE a `handle.change()` callback
+ * (the draft mutates there, exactly as `writeHandleAnnounce` lands a card). The entry's signatures ride inside
+ * the JSON, so re-carrying the tiddler never re-signs it; the fold's quorum verifier decides trust, never this
+ * write. The authority stamp carries the entry's charter epoch — provenance only, never the quorum authority.
+ */
+export function writeAntigenEntry(draft: LarDoc, entry: KapaeAntigenEntry): void {
+  const key = antigenEntryKey(entry.nym, entry.action, entry.version);
+  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(entry) }, entry.charterEpochCid);
+}
 
 /** Coerce one signature-record, or null when a required field is missing / mis-typed (the whole sig drops). */
 function coerceSignature(raw: unknown): QuorumSignature | null {
