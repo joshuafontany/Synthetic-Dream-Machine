@@ -143,8 +143,8 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
       const registry = new VerbTable();
       // Sovereign-worker: the data-plane reactors register HERE, in-worker, over the
       // IslandContext (ctx.composite/ctx.repo) — so they ride the dispatcher's
-      // verify-then-delegate gate FOR FREE (the gate the old main-thread jobRegistry
-      // lacked). Pool-touching reactors command main via ctx.post (daemon:evict-request).
+      // verify-then-delegate gate FOR FREE (a gate a main-thread jobRegistry
+      // lacks). Pool-touching reactors command main via ctx.post (daemon:evict-request).
       opts.wireWorkerVerbs?.(registry, ctx);
       _dispatcher = new VerbDispatcher({
         daemonVm:  tw5,

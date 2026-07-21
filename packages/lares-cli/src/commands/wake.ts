@@ -93,7 +93,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   // py organs import it as code) AND stand up the SOVEREIGN sensorium (content/structure/form/
   // persistence/mesh). Both no-op when already done. Bare `lares wake` only CHECKS.
   //
-  // What this no longer does: stand the GUEST `~/.mempalace`. Booting it from here wrote the store
+  // What this leaves alone: the GUEST `~/.mempalace`. Booting it from here writes the store
   // the comparator ruling reserves as an untouched baseline (RUN-ARC.md:14). The guest is raised
   // deliberately, from its own lane — `lares mempalace setup`.
   let mempalaceSetup: { install: InstallStep[]; palace: PalaceSetupStep[] } | undefined;
@@ -182,8 +182,8 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       // The sd_notify WATCHDOG idiom: a healthy boot that keeps WRITING to the log is making
       // progress, however long the corpus/keyhive replay runs — so extend the window whenever
       // the log grows, and fail only on a genuine STALL (no output for the idle span) or the
-      // absolute ceiling. This replaces the fixed 15s deadline that false-timed a slow-but-live
-      // boot. (The real CPU cost is paced/deferred separately; this stops the watcher lying.)
+      // absolute ceiling. The adaptive window holds a slow-but-live boot instead of false-timing
+      // it at a fixed 15s deadline. (The real CPU cost is paced/deferred separately; this stops the watcher lying.)
       const IDLE_MS = 30_000; // headroom for a silent heavy stretch (Automerge corpus materialize)
       const hardCap = Date.now() + 180_000;
       let idleDeadline = Date.now() + IDLE_MS;

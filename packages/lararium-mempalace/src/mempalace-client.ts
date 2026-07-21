@@ -86,7 +86,7 @@ export interface SearchResult {
   [key: string]: unknown;
 }
 
-/** A content drawer's worldline-relevant facets — the trajectory-stub source (SEAM A). Read off the
+/** A content drawer's worldline-relevant facets — the trajectory-stub source. Read off the
  *  drawer's flat metadata: the EXACT capture `lar_verbatim_sha` (the full-fidelity content↔form join
  *  key, not a transcript-text re-hash) plus the ordering keys. `ffz` (lar_ffz) is the intended
  *  production order address but stays documented-but-unstamped today, so the ordering falls back to
@@ -126,7 +126,7 @@ function compareHandleTurns(a: HandleTurn, b: HandleTurn): number {
 }
 
 /**
- * Order a handle's content-graph turns into worldline trajectory stubs (SEAM A, PURE) — sort by
+ * Order a handle's content-graph turns into worldline trajectory stubs (PURE) — sort by
  * {@link compareHandleTurns}, then assign a 0-based monotonic `tickCounter` as the within-handle
  * happened-before. The worker's `orderTrajectory` re-sorts by `tickCounter` (then verbatimSha), so
  * this assignment IS the path the flow-lens reads. Turns with no verbatim sha are dropped (no join
@@ -301,7 +301,7 @@ export class MempalaceClient {
   }
 
   /**
-   * The thinnest metadata WHERE-filter the read-only sidecar contract permits (SEAM A). The submodule's
+   * The thinnest metadata WHERE-filter the read-only sidecar contract permits. The submodule's
    * `mempalace_list_drawers` exposes only wing/room filters, so an arbitrary flat-scalar metadata
    * equality filter stays APP-LAYER: page `list_drawers` (optionally wing/room-scoped to narrow the
    * scan) and keep the drawers whose `metadata[k]` equals every clause. Read-only — never a write.
@@ -333,7 +333,7 @@ export class MempalaceClient {
   }
 
   /**
-   * Fetch a worldline handle's content-graph turns (SEAM A) — the drawers WHERE `lar_agent_handle =
+   * Fetch a worldline handle's content-graph turns — the drawers WHERE `lar_agent_handle =
    * handle`, each carrying its EXACT capture `lar_verbatim_sha` (the full-fidelity stub source the
    * worker trajectory rides, vs a transcript-text re-hash) plus the order keys. Pass the handle's
    * `wing` to narrow the scan. Returns the raw {@link HandleTurn}s; {@link orderHandleTurnsToStubs}

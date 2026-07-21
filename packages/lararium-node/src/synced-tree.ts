@@ -84,7 +84,7 @@ export class SyncedTree {
   /** Record a projection observation; persistence coalesces per quiet window. */
   set(uri: string, hash: string): void {
     const prev = this.map.get(uri);
-    if (prev !== undefined) this.indexRemove(uri, prev);   // the old content leaves the reverse view
+    if (prev !== undefined) this.indexRemove(uri, prev);   // the prior value leaves the reverse view
     this.map.set(uri, hash);
     this.indexAdd(uri, hash);                              // the new content enters it
     this.schedulePersist();

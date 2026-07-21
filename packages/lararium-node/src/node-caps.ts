@@ -88,10 +88,10 @@ export function flowMapReadFaceCap(deps: {
 // ── the two node cap-stacks ──────────────────────────────────────────────────────────────────────
 
 /**
- * composeLararium — the FULL node, now a REAL granular #has-cap-stack: `composeCoreVessel` wires the
+ * composeLararium — the FULL node, a REAL granular #has-cap-stack: `composeCoreVessel` wires the
  * six core caps (substrate → wikislot → daemon → wiki → pool → mount) the SHARED keel declares — no
- * delegating wrapper. Returns the VesselCoreResult directly (the old `{vessel,core}` wrapper dropped;
- * the caller used only `.core`). Behaviour stays verbatim: the topo-order reproduces the monolith.
+ * delegating wrapper. Returns the VesselCoreResult directly (no `{vessel,core}` wrapper;
+ * the caller reads `.core`). Behaviour stays verbatim: the topo-order reproduces the monolith.
  */
 export const composeLararium = composeCoreVessel;
 

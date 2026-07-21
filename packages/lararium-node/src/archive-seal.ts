@@ -140,11 +140,11 @@ export function sealArchiveBytes(plaintext: SelfSovereignSecret, policy: SealPol
 
 /**
  * Open persisted archive bytes: unseal a sealed envelope, or pass BARE cleartext through
- * (legacy + unconfigured archives). A sealed envelope with no unseal policy (the passphrase
+ * (unconfigured archives). A sealed envelope with no unseal policy (the passphrase
  * went missing) throws — better a loud failure than a silent empty identity.
  */
 export function openArchiveBytes(stored: Uint8Array, policy: SealPolicy = resolveSealPolicy()): Uint8Array {
-  if (!isSealedEnvelope(stored)) return stored; // bare cleartext — legacy / unconfigured
+  if (!isSealedEnvelope(stored)) return stored; // bare cleartext — unconfigured
   const env = decodeEnvelope(stored);
   if (!policy.unseal) {
     throw new Error(

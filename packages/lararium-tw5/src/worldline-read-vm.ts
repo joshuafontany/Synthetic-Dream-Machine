@@ -7,8 +7,8 @@ module-type: startup
  * worldline-read-vm — TW5 startup module: the IN-VM worldline reads (the permainan substrate, the
  * flow-lens foundation), homed in the sovereign daemon worker.
  *
- * The reads moved OFF the node coordinator (the retired `worldline-holder.ts`) and INTO this island
- * VM under strict sovereign-worker primacy — the cap-stack lifts WHOLE, no coordinator carve-out. The
+ * The reads live in this island VM, off the node coordinator,
+ * under strict sovereign-worker primacy — the cap-stack lifts WHOLE, no coordinator carve-out. The
  * worker holds the LIVE ITC registry and runs every read's COMPUTE; the host ships only external data
  * (edges derived from a transcript, form-vector bytes from the python form store the worker can't
  * reach), exactly as the recall query-derive (`query-derive-vm`) ships its query string IN. This is
@@ -101,8 +101,8 @@ export interface WorldlineTrajectoryInput {
 let _causal: WorldlineCausal | null = null;
 
 /**
- * Well 1 — the ITC LIVE-READ. Project the registry from the edge-DAG (HOLD it), then compare. Mirrors
- * the retired holder's `ingestEdges` + `compare`, fused into one read (the registry persists as a side
+ * Well 1 — the ITC LIVE-READ. Project the registry from the edge-DAG (HOLD it), then compare.
+ * `ingestEdges` + `compare` fuse into one read (the registry persists as a side
  * effect). THROWS when either handle is unknown to the registry (the host wraps the helpful error).
  */
 export function computeWorldlineCompare(input: WorldlineCompareInput): { order: ItcOrder } {

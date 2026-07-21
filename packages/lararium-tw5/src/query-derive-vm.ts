@@ -49,8 +49,8 @@ export interface QuerySkeletonDerivation {
 /**
  * The PURE query-derive — the recall twin of the capture annotate's form leg. Mirrors capture
  * EXACTLY: harvest the markers, parse with the full grammar, then {@link emitMoveSkeleton}(harvest,
- * tree) — the meme-ast TREE rides as the graph plane (the structural plane present, the truncation the
- * old node-side deriver suffered now gone). The basis is the LIVE grammar-cache basis (capture pinned
+ * tree) — the meme-ast TREE rides as the graph plane (the structural plane present, untruncated by
+ * the full-grammar parse). The basis is the LIVE grammar-cache basis (capture pinned
  * the stored vectors to this same in-realm grammar). Returns `null` when the query carries no
  * axis-bearing token (a bare `<<~` water opener / no markers) or no basis stands.
  *

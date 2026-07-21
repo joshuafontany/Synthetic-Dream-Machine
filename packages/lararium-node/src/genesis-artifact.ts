@@ -199,8 +199,7 @@ export function hearthTrueName(genesisDir?: string): string | undefined {
 // loadOrMaterializeOracle — the slice-2 boot path (no Automerge-binary seed)
 // ---------------------------------------------------------------------------
 //
-// Retires loadGenesisIsland (island.bin import) AND reconcileIslandFromGenesis (the
-// merge-into-stale anti-pattern). The @oracle is a LIVE CRDT: reload it under the
+// No island.bin import, no merge-into-stale reconcile. The @oracle is a LIVE CRDT: reload it under the
 // deterministic id when persisted, else materialize it FRESH from the plain-data
 // seed (island.genesis.json). One call, no merge.
 

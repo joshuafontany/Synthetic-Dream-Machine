@@ -1,7 +1,7 @@
 /**
- * ws-membership-channel — the LIVE-WS impl of the membership seam (MembershipChannel),
- * the strangler-fig replacement for the file/POST impl. Same interface, real sockets;
- * the swarm ceremony above never learns the transport changed.
+ * ws-membership-channel — the LIVE-WS impl of the membership seam (MembershipChannel)
+ * over real sockets. Same interface as the file/POST impl;
+ * the swarm ceremony above never learns which transport carries it.
  *
  * The relay is DUMB — it re-broadcasts each envelope to every OTHER connected client;
  * the client buffers inbound + filters on poll (addressed-to-me OR broadcast, never

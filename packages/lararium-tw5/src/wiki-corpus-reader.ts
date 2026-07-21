@@ -49,7 +49,7 @@ export function compositeCorpusReader(store: CompositeStore): WikiCorpusReader {
     async docs(): Promise<readonly WikiSenseDoc[]> {
       const entries = await store.entries();
       const docs = entries.map(senseDocOfEntry);
-      // move-not-leak: memo entries for titles no longer resolved die with the read.
+      // move-not-leak: memo entries for titles absent from the read die with it.
       const live = new Set(docs.map((d) => d.title));
       for (const title of memo.keys()) if (!live.has(title)) memo.delete(title);
       return docs;

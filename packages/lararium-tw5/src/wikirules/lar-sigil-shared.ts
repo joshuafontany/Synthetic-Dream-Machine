@@ -66,8 +66,8 @@ export interface CompoundSigilMatch {
 const COMPOUND_OPEN_RE = /<<~\s+(\\?[\w-]+)(?:\s+([^\n]*?))?\s*>>/g;
 
 /**
- * Generic compound-sigil opener. Replaces the former matchAhuOpenAt +
- * matchUriFormSigilAt pair. Child-slot detection uses the grammar registry
+ * Generic compound-sigil opener for the matchAhuOpenAt + matchUriFormSigilAt
+ * forms. Child-slot detection uses the grammar registry
  * rather than hardcoded names, so new slot types (kau, future) require
  * only a TOML [[sigils]] entry with kind="child-slot".
  *

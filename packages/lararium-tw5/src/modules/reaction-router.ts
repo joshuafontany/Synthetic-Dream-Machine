@@ -6,8 +6,8 @@ module-type: startup
 /**
  * reaction-router — TW5 startup module: nalu-driven reaction dispatch.
  *
- * Replaces the inline ReactionEngine.onChangeset() call in lar-wiki-island.ts
- * with nalu-driven wiki.addEventListener("change") dispatch.
+ * Drives reaction dispatch off nalu — wiki.addEventListener("change")
+ * feeds ReactionEngine.onChangeset() for lar-wiki-island.
  *
  * Pipeline (yin-collapse law):
  *   wiki.addTiddler() × N        ← changeset writes accumulate

@@ -7,8 +7,8 @@
  * unpin demotes (the LRU may then evict if pressure rises). residency
  * prints the current pinned / wela / anu snapshot.
  *
- * Phase 1 (C.1): instrumentation only — no eviction yet, so unpin is
- * essentially a no-op outside of stats reporting until C.2 lands.
+ * Instrumentation stage: unpin demotes standing, but the LRU eviction path
+ * stays unwired here, so unpin reports stats without evicting.
  */
 
 import { operatorDid } from "../env.js";

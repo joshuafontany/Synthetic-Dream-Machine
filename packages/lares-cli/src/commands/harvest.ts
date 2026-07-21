@@ -39,7 +39,7 @@ import { runVerb } from "../verb-call.js";
 import { emit, exitFor, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-const HARVEST_DIR = larHarvestDir();   // <state>/harvest — XDG (strangler retired); LAR_ROOT-isolated for staged instances
+const HARVEST_DIR = larHarvestDir();   // <state>/harvest — XDG; LAR_ROOT-isolated for staged instances
 
 /** One harvested turn — the gradient summary, keyed for idempotent dedup. */
 interface HarvestRecord {
@@ -293,10 +293,9 @@ function runWriteback(args: ParsedArgs, wing: string): number {
 }
 
 // The bulk `--all` backfill + guest-comparator discovery/staging/mine now live in PYTHON
-// (session_discovery.py + guest_harvest.py; the sovereign sweep in capture_session.py). The TS
-// discovery/stage/lock machinery — runHarvestAll, the discover* readers, HarvestEntry, stageSourceDir,
-// acquireHarvestAllLock, MP_EXE/COPILOT_SQLITE_NORM — retired here; `lares mempalace harvest` shells
-// the python guest lane, and `lares sense sweep` routes the sovereign lane through the @daemon.
+// (session_discovery.py + guest_harvest.py; the sovereign sweep in capture_session.py). The python
+// guest lane owns discovery/stage/lock; `lares mempalace harvest` shells it, and `lares sense sweep`
+// routes the sovereign lane through the @daemon.
 
 /** Recursively collect `.jsonl` files under a root whose basename passes `match`. */
 function walkJsonl(root: string, match: (name: string) => boolean, depth = 0, out: string[] = []): string[] {

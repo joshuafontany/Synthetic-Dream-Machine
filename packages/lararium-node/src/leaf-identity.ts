@@ -21,7 +21,7 @@ import type { LeafIdentity } from "@lararium/mesh";
 import { loadVesselSigningSeed, loadVesselVerifyingKey, loadVesselCard } from "./node-vessel-identity.js";
 
 // LeafIdentity lifted to platform-blind mesh (both vessels + the isomorphic adapter share it);
-// re-exported here for back-compat with node consumers.
+// re-exported here for node consumers.
 export type { LeafIdentity } from "@lararium/mesh";
 
 /**

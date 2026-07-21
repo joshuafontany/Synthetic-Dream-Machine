@@ -125,8 +125,8 @@ function axisIdToIndex(id: string): number {
  * the worldline-trajectory read joins). The python store keeps the dense embedding internally; the
  * JSON `document` carries the axis activation. The host fetches this node-side (the form store is a
  * node child_process the worker can't reach) and SHIPS it to the in-VM trajectory read. An absent /
- * unparseable document yields null (the worker keeps the turn's TIME slot, form null). Moved here from
- * the retired node-side worldline-holder when the reads lifted into the sovereign worker.
+ * unparseable document yields null (the worker keeps the turn's TIME slot, form null). The node-side
+ * reads live here; the trajectory read itself runs in the sovereign worker.
  *
  * The stored `document` carries `axis_activation` as an axis-ID-KEYED map (`{ "voice:council": 0.9, … }`).
  * Each key IS the axis identity — it MUST determine the sparse index, else two turns whose active-axis
@@ -517,7 +517,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       // it when persisted (operator writes intact), else MATERIALIZE it fresh from
       // the plain-data seed (island.genesis.json). No Automerge-binary boot seed,
       // no merge-into-stale. The catalog @oracle pointer (written by assembleVessel)
-      // is now advisory back-reference, no longer the identity mechanism.
+      // serves as an advisory back-reference, not the identity mechanism.
       const islandHandle = await loadOrMaterializeOracle(repo, genesisDir);
 
       // @lares + @lararium system-bag mint — operator(admin) office, node home

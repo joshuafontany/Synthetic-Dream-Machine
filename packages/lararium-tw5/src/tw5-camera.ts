@@ -1,9 +1,9 @@
 /**
  * tw5-camera.ts — camera mount surface (widget tree mount + teardown).
  *
- * Under unified-nalu (yin-collapse law), the per-camera render loop and
- * per-bag accumulator orchestration retired. The nalu engine inside each
- * wiki owns its own frame-aligned drain; cameras attach via mountCamera()
+ * Under unified-nalu (yin-collapse law), the nalu engine inside each
+ * wiki owns its own frame-aligned drain — it holds the per-bag
+ * accumulation, no per-camera render loop; cameras attach via mountCamera()
  * and react to wiki "change" events naturally.
  *
  * Future multi-wiki visualization (one TW5 engine per camera) composes by

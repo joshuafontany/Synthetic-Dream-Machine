@@ -47,7 +47,7 @@ function flattenTomlValue(
 // parseTaploFields — sync TOML → flat Record.
 //
 // Uses smol-toml. Handles full TOML spec: inline comments, table sections,
-// multi-line strings, typed values. Replaces the hand-rolled parseIamToml.
+// multi-line strings, typed values.
 //
 // On parse error: pushes a diagnostic to warnings and returns {}.
 // The caller still gets a partial result via carrier-text on the parent tiddler.

@@ -5,10 +5,10 @@
  * repo.find() against an URL the local store doesn't yet have doesn't hang
  * boot. Used by both openNodeVessel (wiki VM) and openDaemonVm (daemon VM).
  *
- * The tideline-class boot resolver (resolveBootDoc / StillJoining) now lives in
+ * The tideline-class boot resolver (resolveBootDoc / StillJoining) lives in
  * @lararium/mesh, so the vessel keel (open-vessel-core) can reach it too — mesh
  * cannot import this node package. Re-exported here for the node-side callers
- * that already import it from this module.
+ * that import it from this module.
  */
 
 import type { AutomergeUrl, DocHandle, Repo } from "@automerge/automerge-repo";
@@ -24,7 +24,7 @@ export async function waitHandleLocal<T>(
   fallbackFn: () => DocHandle<T>,
 ): Promise<DocHandle<T>> {
   // automerge-repo 2.6: findWithProgress().whenReady() resolves the handle when
-  // READY and rejects on unavailable (the old progress.handle accessor is gone).
+  // READY and rejects on unavailable.
   // Race local readiness against a short fallback so boot doesn't hang on a doc
   // the local store doesn't have yet.
   const progress = repo.findWithProgress<T>(url);

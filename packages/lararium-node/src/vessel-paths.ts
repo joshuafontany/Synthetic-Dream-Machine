@@ -12,18 +12,17 @@
  *
  * The SENSORIUM consolidation (SHEAF-TRUE): content ← the contentpalace, structure ← the structurepalace,
  * form ← the formpalace, ALL THREE co-located under `<data>/sensoriums/memory/{content,structure,form}`
- * so the filetree IS the composition (sensorium.ts). The lararium OWNS its content plane — the earlier
- * content-cap-home ruling (which kept content external at the guest `~/.mempalace`) was RETIRED by the
- * swarm: the sovereign contentpalace inherits mempalace's exact base schema, and adopting a user's
- * mempalace history runs as a deliberate one-way import Act (`guest-import.ts`), never a runtime
- * binding. bands + coupling are BASE caps — they live in the manifest, never as dirs.
+ * so the filetree IS the composition (sensorium.ts). The lararium OWNS its content plane: the sovereign
+ * contentpalace inherits mempalace's exact base schema, holds content internally under the XDG data dir,
+ * and adopting a user's mempalace history runs as a deliberate one-way import Act (`guest-import.ts`),
+ * never a runtime binding. bands + coupling are BASE caps — they live in the manifest, never as dirs.
  *
  * The mesh federation store lives as its OWN `mesh` SENSORIUM that `#has` three nested child sensoriums
  * (WHO · AUTHORITY · FLOW) under `<data>/sensoriums/mesh`, the children hanging below it. The mesh's own
  * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
  *
- * Every resolver answers the canonical XDG dir deterministically — no legacy `~/.lares` fallback arm
- * remains. The env seams
+ * Every resolver answers the canonical XDG dir deterministically — one canonical home, no `~/.lares`
+ * fallback arm. The env seams
  * (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win.
  *
  * `LAR_ROOT` overrides the home root for ISOLATED instances (the test harness / staged pairs): each
@@ -205,9 +204,9 @@ export function sensoriumLenses(): Record<string, string> {
 }
 
 /** The GUEST mempalace store dir — `MEMPALACE_PALACE_PATH` (override, the relocation lever) else the
- *  upstream-default `~/.mempalace`. NOT a cap of the memory sensorium: the content-cap-home ruling that
- *  once made it the `content` fiber was RETIRED, and the lararium owns its content plane at
- *  {@link larContentDir}. This store is a GUEST — raised deliberately (`lares mempalace setup`), read
+ *  upstream-default `~/.mempalace`. NOT a cap of the memory sensorium: the lararium owns its content
+ *  plane internally at {@link larContentDir}, so this store stays a comparator, never the `content`
+ *  fiber. This store is a GUEST — raised deliberately (`lares mempalace setup`), read
  *  as a comparator, imported FROM (`guest-import.ts`); never bound into at runtime, and never written
  *  by the boot (the S5 comparator ruling). This is the PARENT store (config.json + the `palace/` chroma
  *  dir + entities + locks + the worldline-KG knowledge_graph.sqlite3 that lives INSIDE it). The vendored
@@ -334,7 +333,7 @@ export function larDataDir(): string {
  *  CRDT store while the sovereign root survives untouched — the "share substrate, not
  *  sovereignty" law made a filesystem boundary. `reset` removes only `<state>/projection`
  *  under this same state home, so identity here stays out of the wipe zone. The ONE
- *  identity resolver — node-vessel-identity migrates any legacy location onto it. */
+ *  identity resolver — node-vessel-identity resolves any prior location onto it. */
 export function larIdentityDir(): string {
   return join(larStateHome(), "identity");
 }

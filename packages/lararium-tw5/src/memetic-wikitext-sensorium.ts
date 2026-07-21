@@ -166,8 +166,8 @@ export function sourceCidOf(text: string): string {
     );
   }
   // Canonical algorithm-tagged form (`sha256:<hex>`, agile-digest). The reader side
-  // (`parseDigest`/`digestsEqual`) still accepts the legacy `sha256-<hex>` SRI dash
-  // form, so a stored dash-tagged pin keeps comparing equal across the migration.
+  // (`parseDigest`/`digestsEqual`) also accepts the `sha256-<hex>` SRI dash
+  // form, so a stored dash-tagged pin keeps comparing equal.
   return formatDigest("sha256", sha256HexSync(text));
 }
 
@@ -575,7 +575,7 @@ export function coupleAligned(
   if (children.length >= 2 && ticks.length >= 8) {
     let d0 = 0, d1 = 0;
     for (const t of ticks) { d0 = Math.max(d0, t[0]?.length ?? 0); d1 = Math.max(d1, t[1]?.length ?? 0); }
-    const dims = Math.max(1, Math.min(d0, d1));   // at least dim-0 (a scalar channel keeps the old behavior)
+    const dims = Math.max(1, Math.min(d0, d1));   // at least dim-0 (a scalar channel keeps dim-0 behavior)
     let anyEscalate = false;
     for (let d = 0; d < dims; d++) {
       const x = ticks.map((t) => t[0]?.[d] ?? 0);

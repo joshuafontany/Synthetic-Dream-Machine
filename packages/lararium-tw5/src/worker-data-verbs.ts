@@ -116,9 +116,9 @@ export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: Catalo
   return async () => {
     const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null; kind: string }> = [];
     // User wikis — read the @catalog RECIPE entries `wiki init` actually writes
-    // (`@catalog/recipes/{slug}`), mirroring the system-wiki path below. The old
-    // `@lararium/wikis/` prefix named a pre-plane-split shape nothing writes any
-    // longer, so this read returned zero user wikis (lar-uris.ts #retired-form).
+    // (`@catalog/recipes/{slug}`), mirroring the system-wiki path below. The
+    // `@lararium/wikis/` prefix names a pre-plane-split shape nothing writes,
+    // so that path reads zero user wikis.
     const cat = await catalog.handle();
     const userRecipePrefix = recipeUri("@catalog", "");
     for (const [title, rec] of Object.entries((cat.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>)) {

@@ -17,7 +17,7 @@
  *   CLEAR   enumerate live titles in bag, tombstone each. Effect-log entries
  *           themselves stay intact (the bag's history must persist).
  *   DROP    tombstone every live title in bag (same enumeration as CLEAR) + the
- *           bag-level disposition record marks the bag retired. True bag-removal
+ *           bag-level disposition record marks the bag removed. True bag-removal
  *           from the recipe is a separate operator gesture (recipe edit).
  *   LOAD    external content fetch — not implemented. Handler throws an
  *           explicit "not yet implemented" error so the verb-table registers but
@@ -78,7 +78,7 @@ const renderHash = (text: string): string => tagDigest(sha256HexSync(text));
  * routes a non-memetic carrier through TW5's OWN deserializer registry by
  * content-type — so an engine bump or a hand-rolled deserializer just works, no
  * hardcoded filetype list. Absent → LOAD treats every carrier as memetic
- * (back-compat for hosts without a booted $tw, e.g. unit fakes).
+ * (for hosts without a booted $tw, e.g. unit fakes).
  */
 export interface Tw5Deserializer {
   /** Run TW5's registered deserializer over `text`. `typeOrExt` may be a content-type
@@ -186,8 +186,8 @@ export interface ActionHandlerOptions {
    * Registry reach for **access-based** writes (the edit/action split,
    * `wiki-layer-ontology#write-law`): a residency action whose
    * target/source bag is not a mounted layer resolves it by ACCESS across both
-   * oracle planes — mounted ephemerally for the action, released after. This
-   * retires the daemon's standing system-bag mount: deep-bag writes become
+   * oracle planes — mounted ephemerally for the action, released after. The
+   * daemon holds no standing system-bag mount: deep-bag writes stay
    * explicit, audited, access-scoped events, never a floor re-seated. Absent =
    * composite-only (the wiki island, which holds its own write layer).
    */
@@ -485,7 +485,7 @@ export type CarrierResolver = (cid: string) => Promise<Uint8Array | null>;
 
 /**
  * Resolve a carrier's body to its `text` string. An inline `text` rides straight through
- * (backward-compat). A `textCid` resolves from the corpus CAS via `resolveByCid`, then
+ * A `textCid` resolves from the corpus CAS via `resolveByCid`, then
  * re-verifies `cid == hash(bytes)` — the worker trusts CONTENT, never the host (Island
  * Sovereignty). The body round-trips byte-exact: the gesture staged `utf8Bytes(text)`,
  * so utf8-decoding the resolved bytes reproduces the same string (utf8 text or base64
@@ -1209,7 +1209,7 @@ async function executeClear(action: ClearAction, access: BagAccess): Promise<Rec
 
 async function executeDrop(action: DropAction, access: BagAccess): Promise<Record<string, unknown>> {
   // DROP currently tombstones contents (same as CLEAR) and lets the
-  // effect-record disposition mark the bag retired. True recipe-removal
+  // effect-record disposition mark the bag removed. True recipe-removal
   // is a separate operator gesture (recipe edit / `lares wiki remove-bag`).
   const titles = await listLiveTitlesInBag(access, action.bag);
   const o = origin(action);

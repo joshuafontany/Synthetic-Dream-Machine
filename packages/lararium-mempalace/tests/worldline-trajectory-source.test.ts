@@ -1,5 +1,5 @@
 /**
- * SEAM A — the LIVE content-graph trajectory source. The worldline-trajectory verb's production turn
+ * The LIVE content-graph trajectory source. The worldline-trajectory verb's production turn
  * source is the CONTENT graph: a handle's drawers (WHERE lar_agent_handle = handle), each carrying its
  * EXACT capture `lar_verbatim_sha` (full fidelity, not a transcript-text re-hash). This proves:
  *   - the thin app-layer metadata where-filter (drawersWhere / turnsForHandle) over the read-only

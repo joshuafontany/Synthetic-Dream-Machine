@@ -15,7 +15,7 @@
  *   - wiki content (@<slug>)      → `wikis/{slug}/...`   (projection / output)
  *   - seed/canon (@lares/@lararium/@sdm) → `bags/@NAME/...` (seed / canon)
  * State/runtime bags (@personal/@draft/@temp/@daemon) carry no mirror.
- * A residency MOVE (the canon ACTION verb — the "promotion ceremony" is retired)
+ * A residency MOVE (the canon ACTION verb)
  * that relocates a tiddler between bags has the disk side effect of a file move
  * between surfaces; the git diff IS the operator's signature on the change.
  *
@@ -198,8 +198,8 @@ export class LarDiskProjector {
     // reconcile this carrier root against the CURRENT settled VM state — never an edge that
     // licenses a destructive action off a transient view. The keyed gate debounces per ROOT (not
     // per bag+root) so a MOVE's source-tombstone and destination-add COALESCE into ONE reconcile
-    // that sees the final owner — closing the unlink/write race structurally (the old per-(bag,root)
-    // flush + immediate gone-unlink never coalesced).
+    // that sees the final owner — closing the unlink/write race structurally (a per-(bag,root)
+    // flush + immediate gone-unlink would not coalesce).
     const gate = new KeyedCoalesceGate<string>({
       debounceMs: this.debounceMs,
       // Return the reconcile PROMISE (not void) so the servo can self-clock on its completion +

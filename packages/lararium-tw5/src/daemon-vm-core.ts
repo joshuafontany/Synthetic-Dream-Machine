@@ -212,7 +212,7 @@ export interface DaemonVmCore {
    */
   worldlineTrajectory: (input: DaemonWorldlineTrajectoryInput) => Promise<DaemonWorldlineTrajectoryResult>;
   /**
-   * Host-side inbound-peer verifier (path b) — proxies verify() to the island's
+   * Host-side inbound-peer verifier — proxies verify() to the island's
    * keyhive via daemon:verify-request/result. Common to both vessels.
    */
   authSeam:       AuthVerifierSeam;
@@ -379,7 +379,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
       // Verb OUT-path: a verb-carrying verse-event from the @daemon's own surface
       // (a projected switcher click). Forward it to the vessel's placeVerb bridge.
       // The summon's structured args ride the flat wire as a `verb-args` JSON string;
-      // re-parse it (#48) — no longer the whole flat payload smuggling {uri,verb,fromUri}.
+      // re-parse it (#48) — not the whole flat payload smuggling {uri,verb,fromUri}.
       const verb = typeof ev.payload["verb"] === "string" ? (ev.payload["verb"] as string) : undefined;
       if (verb && _verbEventHandler) {
         const fromUri = typeof ev.payload["fromUri"] === "string" ? (ev.payload["fromUri"] as string) : undefined;

@@ -100,14 +100,14 @@ export function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Pr
   });
 }
 
-// `lares status sensorium` — a legacy alias. The sensorium taxonomy reads through the sense door
+// `lares status sensorium` — an alias. The sensorium taxonomy reads through the sense door
 // (`lares sense status`, which routes to the @daemon's composed content cap); this alias points there
 // rather than opening a second path. Local organ health rides `lares status --palaces`.
 const SENSORIUM_STATUS_REDIRECT =
   "the sensorium taxonomy reads at `lares sense status` (the sovereign door). For local organ health, " +
   "run `lares status --palaces`; for node health, `lares node status`.";
 
-/** `lares status sensorium` (legacy alias) — points at `lares sense status`, the sensorium taxonomy door. */
+/** `lares status sensorium` (alias) — points at `lares sense status`, the sensorium taxonomy door. */
 function cmdSensoriumStatus(args: ParsedArgs): number {
   emit(args, {
     ok: false,

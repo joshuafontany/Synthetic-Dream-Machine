@@ -245,8 +245,8 @@ export type {
   GraphLeg, GraphItem, ExtraGraph, ApertureWeightOptions, ShaOrGap,
   FormSearchPalace, FormSearchConfig,
 } from "./sensorium-recall.js";
-// The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it). The
-// standalone telemetry island is retired; node-daemon-island wires the capture SINK live (from the
+// The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it).
+// node-daemon-island wires the capture SINK live (from the
 // daemon spawn's optional workerData.telemetry) or leaves the cap inert. The capture core stays
 // composable + isomorphic: @lararium/mesh capture-engine + the tw5 `hasCapture` cap; node seams via
 // makeNodeCaptureEngine.

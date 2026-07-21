@@ -1,5 +1,5 @@
 /**
- * Integration (SEAM A) — the LIVE content-graph trajectory source feeds the worker's permainan
+ * Integration — the LIVE content-graph trajectory source feeds the worker's permainan
  * substrate. The worldline-trajectory verb (open-node-vessel) sources its turn stubs from the CONTENT
  * graph (client.turnsForHandle → orderHandleTurnsToStubs) and ships them to the in-VM functor. This
  * proves the COMPOSITION the verb performs, hermetically (no daemon boot): content-graph turns →

@@ -22,8 +22,8 @@
  *
  * A cap's `dir` reads RELATIVE to the sensorium dir when the bytes sit INSIDE it (the consolidated
  * SHEAF-TRUE tree relocates/rsyncs as one), and ABSOLUTE when they sit outside it. The `memory`
- * sensorium now reads FULLY RELATIVE — content joined structure/form inside the tree when the
- * content-cap-home ruling retired (the lararium owns its content plane; a guest `~/.mempalace` is
+ * sensorium reads FULLY RELATIVE — content joins structure/form inside the tree, the
+ * lararium owning its content plane (a guest `~/.mempalace` is
  * imported FROM, never bound to). The absolute form stays live for caps that genuinely sit outside.
  * {@link capDecl} chooses; {@link resolveCapDir} inverts. The manifest thus stays a FAITHFUL snapshot
  * of where the bytes actually are, never a wishful canonical claim.
@@ -141,7 +141,7 @@ export interface SensoriumManifest {
    * part). `halfLife` = the maturation MODE:
    * null = append-only-witness (authority, never cools — the Mempalace) · finite = affinity-
    * maturation (ephemeral exploratory sensoria; standing cools). Absent = the sensorium composes no
-   * persistence cap. ORTHOGONAL to {@link ephemeral} (path-A un-fuse: `ephemeral` stays swept-on-
+   * persistence cap. ORTHOGONAL to {@link ephemeral} (the un-fuse path: `ephemeral` stays swept-on-
    * process-exit; the maturation mode lives HERE in `halfLife`, never overloaded onto the bool).
    */
   readonly persistencePolicy?: PersistencePolicy;

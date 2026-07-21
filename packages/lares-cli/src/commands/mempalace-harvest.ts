@@ -11,7 +11,7 @@
  * and NOTHING else — no `--source lares` (the adapter that declares the twenty `lar_*` fields), no
  * @daemon capture verb, no worldline observer, no telemetry writeback.
  *
- * This is now a THIN coordinator: the discovery, staging, and vanilla mine all live in PYTHON
+ * A THIN coordinator: the discovery, staging, and vanilla mine all live in PYTHON
  * (`packages/lararium-sensorium/scripts/guest_harvest.py`, discovery via the shared
  * `session_discovery.discover_all`). The guest-palace-literal (`~/.mempalace/palace`, never an env
  * override) and the ZERO-`lar_*` wall live THERE, at the boundary that actually writes. This leg only

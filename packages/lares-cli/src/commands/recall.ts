@@ -10,7 +10,7 @@
  *
  *   lares sense recall <keywords...>          semantic search (default)
  *   lares sense recall <kw> --wing <w>        filter to one project wing
- *   lares sense recall <kw> --k <n>           cap results (default 5); --limit stays as a back-compat alias
+ *   lares sense recall <kw> --k <n>           cap results (default 5); --limit stays as an alias
  *   lares sense recall --imago <id>           fetch one imago verbatim
  *   lares sense recall --list [--wing <w>]    list imagines (no query)
  *
@@ -51,7 +51,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   const query   = args.positional.join(" ").trim();
   const imago   = args.options["imago"];
   const wing    = args.options["wing"];
-  // `--k` mirrors the MCP tool arg; `--limit` survives as a back-compat alias (--k wins).
+  // `--k` mirrors the MCP tool arg; `--limit` stays as an alias (--k wins).
   const limit   = args.options["k"] ?? args.options["limit"];
   const wantList = args.flags["list"];
   // The provenance filters (agent · surface) + the block-taxonomy filters (speaker · channel · function)

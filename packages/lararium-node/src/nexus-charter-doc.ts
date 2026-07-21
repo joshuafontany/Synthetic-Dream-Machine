@@ -39,7 +39,7 @@ export function nexusCharterDocPath(bagsDir: string): string {
 const CHARTER_BLOCK_RE = /```json nexus-charter\r?\n([\s\S]*?)\r?\n```/;
 
 /**
- * Coerce a parsed charter-chain payload: `undefined` when absent (the legacy genesis-inception doc), the
+ * Coerce a parsed charter-chain payload: `undefined` when absent (a genesis-inception doc without a charter chain), the
  * sentinel `"torn"` when malformed (which reads the WHOLE doc closed — the parser never guesses a partial
  * pre-rotation lineage into authority), or the typed `CharterEpoch[]` when every epoch's shape holds.
  */

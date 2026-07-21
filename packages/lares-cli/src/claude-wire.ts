@@ -68,9 +68,9 @@ function reapMempalaceMcp(): ClaudeWireStep {
  * Register the LARES MCP seat in the store Claude Code actually reads (~/.claude.json, via
  * `claude mcp add`) — NOT settings.json, which Claude ignores for mcpServers.
  *
- * This is the seat the mempalace MCP used to hold. The harness now reaches memory THROUGH the lares
- * house (recall · recall_structure · recall_form · plane_record · harvest · status · worldline ·
- * kapae) rather than opening a palace of its own. One owner, one writer.
+ * The lares house owns this seat: the harness reaches memory THROUGH it (recall · recall_structure ·
+ * recall_form · plane_record · harvest · status · worldline · kapae) rather than opening a palace of
+ * its own. One owner, one writer.
  *
  * Idempotent by CONVERGENCE, never by presence: an aligned seat passes untouched, a drifted one re-aims
  * at the resolved script. Graceful when the `claude` CLI is absent.
@@ -253,7 +253,7 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
   }
 
   // Memory reaches the harness through the LARES seat, never a palace sidecar of the harness's own.
-  // Reap the old mempalace registration from both stores (the dead settings.json key here, then
+  // Reap any stale mempalace registration from both stores (the dead settings.json key here, then
   // ~/.claude.json via the `claude` CLI), then register the lares MCP in the seat it vacates.
   if (settings.mcpServers !== undefined && settings.mcpServers["mempalace"] !== undefined) {
     delete settings.mcpServers["mempalace"];

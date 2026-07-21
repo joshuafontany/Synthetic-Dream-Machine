@@ -21,7 +21,7 @@ module-type: parser
  * propagates because every memetic-typed tiddler instantiates THIS
  * parser, transclude or not.
  *
- * Deny list is now empty — T-1 landed. lar-sigil (block+inline) claims all
+ * Deny list is empty — lar-sigil (block+inline) claims all
  * <<~ … >> forms; standard TW5 macro rules fire normally for <<macroname>>.
  *
  * Operator override: writing a space-separated rule-name list to

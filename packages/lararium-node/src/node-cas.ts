@@ -56,9 +56,9 @@ export function writeCasEntriesFs(
 
 /**
  * Mirror a genesis artifact's CAS files (genesis/cas/<cid>) into a runtime CAS dir,
- * driven by the manifest — the node face of the byte SOURCE the genesis CRDT no longer
- * carries. The CID a worker later requests is unchanged; only the source of the bytes
- * moved from doc.blobs to genesis/cas/ files. Idempotent (content-addressed). Returns
+ * driven by the manifest — the node face of the byte SOURCE. The manifest names
+ * genesis/cas/ files as the byte source; the CID a worker later requests stays the
+ * same regardless of source. Idempotent (content-addressed). Returns
  * count copied; throws if a manifest-named source file is absent (corrupt genesis).
  */
 export function mirrorGenesisCasFs(

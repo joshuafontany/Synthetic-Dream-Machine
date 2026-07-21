@@ -103,7 +103,7 @@ function _toFields(change: LarTiddlerChange): TW5TiddlerInputFieldsWithTitle {
   //
   // Residency Model — every inbound write annotates `origin-bag` so the
   // operator can answer "which bag does this come from?" at every read
-  // (Anti-pattern #4 defense). The legacy `bag` field stays for outbound
+  // (Anti-pattern #4 defense). The `bag` field stays for outbound
   // write-target override; `origin-bag` carries inbound provenance.
   const fields: TW5TiddlerInputFieldsWithTitle = {
     ...change.record!.tiddler,

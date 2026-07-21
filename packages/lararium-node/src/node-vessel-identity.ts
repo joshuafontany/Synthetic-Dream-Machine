@@ -24,7 +24,7 @@
  *   home BESIDE — never inside — the wiped `<data>/vessel`. No `reset`/`regenesis`/`rebuild`
  *   can reach it (they rmSync the substrate store, not the state home). This realizes the
  *   law below (the key MUST NOT sit inside an Automerge doc storage path) and the
- *   keypair-wipe lesson: a destructive storage verb can no longer reach identity.
+ *   keypair-wipe lesson: a destructive storage verb cannot reach identity.
  *
  * Key file naming (inside the identity dir):
  *   git email configured:  .vessel-key-{email-slug}.json

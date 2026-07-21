@@ -76,7 +76,7 @@ export interface MoveToken {
   /**
    * For a `bearing` token only: the parsed bearing-vector AST this leg carries
    * (aim → the delegated role `to`; yield → the resolved bearing). The RED URI,
-   * descended into its slots — no longer collapsed to a bare presence token.
+   * descended into its slots — not collapsed to a bare presence token.
    */
   readonly bearing?: BearingVector;
 }
