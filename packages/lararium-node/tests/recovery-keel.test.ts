@@ -10,8 +10,8 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import * as ed25519 from "@noble/ed25519";
-import { assembleQuorum, reconstructFromQuorum, decodeShareBytes, verifyDeviceDelegation, type RecoveryShare } from "@lararium/mesh";
-import { splitRootAtFounding, reconstructAndReadmit, provisionRecoveryAtFounding } from "../src/recovery-keel.js";
+import { assembleQuorum, reconstructFromQuorum, decodeShareBytes, guardianShareFromCard, verifyDeviceDelegation, type RecoveryShare } from "@lararium/mesh";
+import { splitRootAtFounding, reconstructAndReadmit, provisionRecoveryAtFounding, provisionRecoveryCardsAtFounding } from "../src/recovery-keel.js";
 import { generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed } from "../src/node-vessel-identity.js";
 import { loadRecoveryDeviceShare } from "../src/recovery-share-store.js";
 
@@ -107,5 +107,53 @@ describe("recovery-keel — founding provision against the real identity store",
     const escrowShare: RecoveryShare = { bytes: decodeShareBytes(escrowCarrier), custodian: "escrow-peer",   recoveryEpoch: 1 };
     const recovered = reconstructFromQuorum(assembleQuorum([codeShare, escrowShare], 2));
     expect([...recovered]).toEqual([...await loadPersonaGroupRootSeed(dataDir)]);
+  });
+});
+
+describe("recovery-keel — identity recovery issues the SHARED guardian cards (reserve-aligned)", () => {
+  const saved: Record<string, string | undefined> = {};
+  const setEnv = (k: string, v: string | undefined): void => { saved[k] = process.env[k]; if (v === undefined) delete process.env[k]; else process.env[k] = v; };
+  let dir: string;
+  beforeEach(() => {
+    dir = mkdtempSync(join(tmpdir(), "lares-reccard-"));
+    setEnv("LAR_ROOT", undefined);
+    setEnv("XDG_STATE_HOME", join(dir, "state"));
+    setEnv("LARES_ARCHIVE_PASSPHRASE", undefined);
+  });
+  afterEach(() => {
+    for (const [k, v] of Object.entries(saved)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; }
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  test("founding: split the minted root into mine + guardian-A/B cards, seal 'mine', recover from the two guardians", async () => {
+    await generateOrLoadPersonaGroupRoot(dir);                       // the founding mint
+    const { cards, mineSealed } = await provisionRecoveryCardsAtFounding(dir, "Ola", "Kai", seededRng(11));
+
+    // The SAME card shape the charter reserve issues: three slots, three distinct custodians, human labels.
+    expect(mineSealed).toBe(true);
+    expect(cards.map((c) => c.slot)).toEqual(["mine", "guardian-a", "guardian-b"]);
+    expect(cards.map((c) => c.custodian)).toEqual(["device", "guardian", "escrow-peer"]);
+    expect(cards.find((c) => c.slot === "guardian-a")!.label).toContain("guardian-A (Ola)");
+    expect(new Set(cards.map((c) => c.confirmPhrase)).size).toBe(3);
+
+    // The "mine" (device) share sealed on THIS device; a lost device recovers from the two GUARDIAN cards.
+    expect(loadRecoveryDeviceShare()?.custodian).toBe("device");
+    const guardianCards = cards.filter((c) => c.slot !== "mine");
+    const quorum = guardianCards.map((c) => guardianShareFromCard(c, 1));
+    const freshVK = freshDeviceKey();
+    const payload = await reconstructAndReadmit(quorum, readmitFields(freshVK));
+
+    // The re-admit edge verifies against the ORIGINAL minted root — reconstruct-to-readmit, unchanged.
+    const rootDid = `0x${Buffer.from(await ed25519.getPublicKeyAsync(await loadPersonaGroupRootSeed(dir))).toString("hex")}`;
+    expect(payload.signerDid).toBe(rootDid);
+    expect(payload.deviceEdge.deviceVerifyingKey).toBe(freshVK);
+    expect((await verifyDeviceDelegation(payload.deviceEdge, rootDid)).ok).toBe(true);
+  });
+
+  test("ONE guardian card alone cannot recover — below threshold (fail closed)", async () => {
+    await generateOrLoadPersonaGroupRoot(dir);
+    const { cards } = await provisionRecoveryCardsAtFounding(dir, "Ola", "Kai", seededRng(11));
+    const one = [guardianShareFromCard(cards.find((c) => c.slot === "guardian-a")!, 1)];
+    await expect(reconstructAndReadmit(one, readmitFields(freshDeviceKey()))).rejects.toThrow(/below threshold/);
   });
 });

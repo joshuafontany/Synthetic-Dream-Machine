@@ -15,6 +15,10 @@
  *     shares reconstruct, and the two guardians recover WITHOUT the operator (the two shares carry DISTINCT
  *     custodian tags, satisfying the ≥2-distinct-custodian quorum wall).
  *
+ * The 2-of-3 card SHAPE + the confirmation handshake live in `guardian-card` — the SHARED primitive personal
+ * identity recovery (recovery-keel-core) issues too, so the guardians who hold a citizen's reserve cards
+ * hold the SAME card shape that helps recover their identity (one pattern integrity, two uses).
+ *
  * A-MULTITUDE-OF-ONE (founding): the operator IS all three kahu, so ONE reserve seed derives the whole
  * next key-set coherently, and Share 1 ("mine") is the operator's — the vessel-sealed copy, the printed
  * card, and any emailed copy all carry the SAME Share 1, so an operator-full-compromise reveals exactly
@@ -26,11 +30,11 @@
 
 import { derivePersonaKeypair, HARDENED_OFFSET } from "./persona-hd.js";
 import { charterKeySetHash } from "./wax-stamp.js";
+import type { RecoveryShare } from "./recovery-share.js";
 import {
-  splitToShares, encodeShareBytes, decodeShareBytes,
-  type RecoveryShare, type CustodianTag,
-} from "./recovery-share.js";
-import { sha256HexSync } from "./crypto.js";
+  splitToGuardianCards, guardianShareFromCard,
+  type GuardianCard, type GuardianCardSlot, type GuardianCardSplit,
+} from "./guardian-card.js";
 import type { RandomProvider } from "./crypto.js";
 
 /** The founding reserve derives THREE next-epoch kahu keypairs (the operator stands all three at founding). */
@@ -101,55 +105,25 @@ export function reserveNextKeyCommit(verifyingKeys: readonly string[], threshold
   return charterKeySetHash(verifyingKeys, threshold);
 }
 
-// ── The three recovery cards — one per custodian slot ────────────────────────────────────────────────
+// ── The three recovery cards — the SHARED guardian-card primitive, one card shape for both keels ──────
+// The reserve issues the SAME "Recovery-card mine + guardian-A/B" shape personal identity recovery issues
+// (guardian-card): mine→device, guardian-a→guardian, guardian-b→escrow-peer. The reserve's names carry
+// through the shared aliases so nexus.ts and the reserve tests read unchanged.
 
-/** Which custodian holds a card. The three slots map to DISTINCT recovery-share custodian tags below. */
-export type ReserveCardSlot = "mine" | "guardian-a" | "guardian-b";
+/** Which custodian holds a reserve card — the shared guardian-card slot. */
+export type ReserveCardSlot = GuardianCardSlot;
 
-/**
- * Slot → recovery-share custodian tag. The three tags stay DISTINCT so EVERY two-share subset — including
- * {guardian-a, guardian-b} — forms a ≥2-distinct-custodian quorum (recovery-share's impersonation-quorum
- * wall). That is exactly the compromise-resistance the keel vows: the guardians recover WITHOUT "mine".
- */
-const SLOT_CUSTODIAN: Record<ReserveCardSlot, CustodianTag> = {
-  "mine":       "device",
-  "guardian-a": "guardian",
-  "guardian-b": "escrow-peer",
-};
+/** A printable reserve recovery card — the shared guardian-card shape. */
+export type ReserveCard = GuardianCard;
 
-/** A printable recovery card the operator places by hand (web3-pure — no cloud/email/API coupling here). */
-export interface ReserveCard {
-  readonly slot:          ReserveCardSlot;
-  /** The human label ("Recovery-card mine" / "Recovery-card guardian-A (name)"). */
-  readonly label:         string;
-  /** The recovery-share custodian tag this card carries (the type-wall identity, not the human label). */
-  readonly custodian:     CustodianTag;
-  /** The transcribable share code — checksummed hex (encodeShareBytes), decode-guarded against a slip. */
-  readonly shareCode:     string;
-  /** A short out-of-band confirmation phrase — distinct per card, the receipt + recovery handshake. */
-  readonly confirmPhrase: string;
-}
-
-/** The founding split's output: the three cards + the raw "mine" share the vessel seals at rest. */
-export interface ReserveSplit {
-  readonly cards:     ReserveCard[];
-  /** The "mine" share (custodian "device") — the ONLY share the vessel persists, sealed. */
-  readonly mineShare: RecoveryShare;
-}
-
-function cardLabel(slot: ReserveCardSlot, guardianA: string | null, guardianB: string | null): string {
-  switch (slot) {
-    case "mine":       return "Recovery-card mine";
-    case "guardian-a": return `Recovery-card guardian-A (${guardianA ?? "unassigned"})`;
-    case "guardian-b": return `Recovery-card guardian-B (${guardianB ?? "unassigned"})`;
-  }
-}
+/** A split's output: the three cards + the raw "mine" share the vessel seals at rest. */
+export type ReserveSplit = GuardianCardSplit;
 
 /**
- * Split the reserve seed 2-of-3 across the three custodian slots and render one card per slot. The "mine"
- * share seals to the vessel (the caller's node adapter does the sealing); the two guardian cards leave the
- * device entirely. Each card carries a checksummed, decode-guarded share code + a distinct confirmation
- * phrase. The seed itself is never returned in a card — only its shares.
+ * Split the reserve seed 2-of-3 into the shared guardian-card shape (mine + guardian-A/B). Delegates to the
+ * shared `splitToGuardianCards` so the reserve and personal identity recovery issue the IDENTICAL card and
+ * handshake. The "mine" share seals to the vessel (the caller's node adapter seals it); the two guardian
+ * cards leave the device. The seed itself is never returned in a card — only its shares.
  */
 export function splitReserveSeed(
   reserveSeed:   Uint8Array,
@@ -158,57 +132,16 @@ export function splitReserveSeed(
   recoveryEpoch: number,
   rng:           RandomProvider,
 ): ReserveSplit {
-  const slots: ReserveCardSlot[] = ["mine", "guardian-a", "guardian-b"];
-  const custodians = slots.map((s) => SLOT_CUSTODIAN[s]);
-  const shares = splitToShares(reserveSeed, RESERVE_THRESHOLD, custodians, recoveryEpoch, rng);
-  const cards: ReserveCard[] = slots.map((slot, i) => {
-    const shareCode = encodeShareBytes(shares[i]!.bytes);
-    return {
-      slot,
-      label:         cardLabel(slot, guardianA, guardianB),
-      custodian:     shares[i]!.custodian,
-      shareCode,
-      confirmPhrase: confirmationPhrase(shareCode),
-    };
-  });
-  return { cards, mineShare: shares[0]! };
+  return splitToGuardianCards(reserveSeed, guardianA, guardianB, recoveryEpoch, rng);
 }
 
 /**
- * Reconstruct a RecoveryShare from a card's printed code — checksum-guarded (decodeShareBytes THROWS on a
- * transcription slip BEFORE a doomed reconstruct). The recovery ceremony feeds two of these to
- * `assembleQuorum` / `reconstructFromQuorum` (recovery-share) to rebuild the reserve seed. FAILS CLOSED:
- * a tampered code, or fewer than two distinct-custodian shares, never reconstructs.
+ * Reconstruct a RecoveryShare from a reserve card's printed code — the shared guardian-card bridge,
+ * checksum-guarded (THROWS on a transcription slip BEFORE a doomed reconstruct). FAILS CLOSED.
  */
 export function reserveShareFromCard(card: ReserveCard, recoveryEpoch: number): RecoveryShare {
-  return { bytes: decodeShareBytes(card.shareCode), custodian: card.custodian, recoveryEpoch };
+  return guardianShareFromCard(card, recoveryEpoch);
 }
 
-// ── The confirmation phrase — a short human-verifiable cross-check, distinct per card ─────────────────
-// Derived from a domain-separated hash of the card's share code. A card's own holder already holds the
-// share, so the phrase reveals nothing new to them; it lets the operator confirm out-of-band ("does your
-// card read heron-amber-tide?") that a guardian holds the RIGHT card before a recovery ceremony trusts it.
-// A tiny self-contained 64-word list keeps this pure-TS (no BIP39/wordlist dependency).
-
-const CONFIRM_WORDS: readonly string[] = [
-  "amber", "anchor", "arbor", "ash", "aster", "birch", "brass", "brook",
-  "cedar", "cinder", "clay", "cliff", "cove", "crane", "crest", "dawn",
-  "delta", "dune", "ember", "fern", "flint", "frost", "gale", "glade",
-  "grove", "harbor", "hazel", "heron", "ivy", "kelp", "lark", "loam",
-  "maple", "marsh", "mesa", "mist", "moss", "oak", "onyx", "opal",
-  "pearl", "pine", "quartz", "reed", "ridge", "river", "sable", "sage",
-  "sand", "shale", "shore", "slate", "spruce", "tide", "topaz", "vale",
-  "vine", "wave", "willow", "wind", "wren", "yarrow", "zephyr", "zinc",
-];
-
-/**
- * A 3-word confirmation phrase over 18 bits (three 6-bit picks) of the share code's digest — distinct per
- * card because each share differs. Deterministic: the same card always reads the same phrase, so the
- * operator and a guardian confirm a match over the phone.
- */
-export function confirmationPhrase(shareCode: string): string {
-  const digest = sha256HexSync(`lar-charter-reserve-confirm/v1|${shareCode}`);
-  const n = Number.parseInt(digest.slice(0, 8), 16) >>> 0;
-  const word = (shift: number): string => CONFIRM_WORDS[(n >>> shift) & 0x3f]!;
-  return `${word(0)}-${word(6)}-${word(12)}`;
-}
+// `confirmationPhrase` — the confirmation handshake — rides the shared `guardian-card` module, exported
+// from the mesh barrel there; the reserve's tests and ceremonies read it through the one shared origin.

@@ -16,7 +16,8 @@ import type { RandomProvider, ReadmissionSecret } from "@lararium/mesh";
 import {
   reconstructAndReadmit as coreReconstructAndReadmit,
   provisionRecoveryAtFounding as coreProvisionRecoveryAtFounding,
-  type RecoveryShare,
+  provisionRecoveryCardsAtFounding as coreProvisionRecoveryCardsAtFounding,
+  type RecoveryShare, type GuardianCard, type RecoveryCardsAtFounding,
 } from "@lararium/mesh";
 import { runReadmitEdge, type ReadmitEdgeInput } from "@lararium/keyhive";
 import type { DeviceAdmitPayload } from "@lararium/keyhive";
@@ -59,4 +60,27 @@ export async function provisionRecoveryAtFounding(
   handleIndex = 0,
 ): Promise<{ recordedCode: string; escrowCarrier: string }> {
   return coreProvisionRecoveryAtFounding(await makeNodeFsPersonaVault(), rng, recoveryEpoch, handleIndex);
+}
+
+export type { GuardianCard, RecoveryCardsAtFounding } from "@lararium/mesh";
+
+/**
+ * Provision identity recovery at founding as the SHARED guardian cards — the pattern-integrity twin of the
+ * charter reserve's card ceremony. Binds the node FS PersonaVault to the core flow: the PersonaGroup root
+ * splits 2-of-3 into "Recovery-card mine + guardian-A/B", the "mine" (device) share seals into the identity
+ * home, and the three cards return for the operator to place BY HAND (web3-pure). The two guardian cards
+ * recover the identity WITHOUT the operator, IDENTICAL in shape to the reserve. Recovery rides the existing
+ * `reconstructAndReadmit` — the reconstruct-to-readmit semantics stay unchanged (canon).
+ */
+export async function provisionRecoveryCardsAtFounding(
+  _dataDir: string,
+  guardianA: string | null,
+  guardianB: string | null,
+  rng: RandomProvider,
+  recoveryEpoch = 1,
+  handleIndex = 0,
+): Promise<RecoveryCardsAtFounding> {
+  return coreProvisionRecoveryCardsAtFounding(
+    await makeNodeFsPersonaVault(), guardianA, guardianB, rng, recoveryEpoch, handleIndex,
+  );
 }

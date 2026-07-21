@@ -23,6 +23,7 @@ import {
   splitToShares, assembleQuorum, reconstructFromQuorum, encodeShareBytes,
   type RecoveryShare, type CustodianTag, type ReadmissionSecret,
 } from "./recovery-share.js";
+import { splitToGuardianCards, type GuardianCard, type GuardianCardSplit } from "./guardian-card.js";
 import { assertHandleIndex, loadPersonaRootSeed, type PersonaVault } from "./persona-vault.js";
 
 /**
@@ -118,6 +119,53 @@ export async function provisionRecoveryAtFounding(
     const shares = splitRootAtFounding(rootSeed, rng, recoveryEpoch);
     vault.recovery.save(handleIndex, shares.deviceShare);
     return { recordedCode: shares.recordedCode, escrowCarrier: shares.escrowCarrier };
+  } finally {
+    rootSeed.fill(0);   // the root never lingers after the split
+  }
+}
+
+/** The founding card issue for personal identity recovery — the three shared guardian cards + a flag that
+ *  the "mine" (device) share sealed on this vessel. The two guardian cards leave the device by hand. */
+export interface RecoveryCardsAtFounding {
+  /** All three cards, the SHARED shape: "Recovery-card mine" + "guardian-A" + "guardian-B". */
+  readonly cards:      GuardianCard[];
+  /** True once the "mine" (device) share seals into the vault's recovery store. */
+  readonly mineSealed: boolean;
+}
+
+/**
+ * Provision identity recovery at FOUNDING as GUARDIAN CARDS — the pattern-integrity twin of the charter
+ * reserve's `splitReserveSeed`. It splits the PersonaGroup root 2-of-3 into the SHARED card shape
+ * (guardian-card: mine→device, guardian-a→guardian, guardian-b→escrow-peer), SEALS the "mine" (device)
+ * share into the vault's recovery store, and returns all three cards — so the operator places "Recovery-card
+ * mine" (its share sealed here) + two guardian cards by hand, IDENTICAL to the reserve ceremony. The
+ * guardians who hold a citizen's reserve cards hold this same card shape for their identity.
+ *
+ * SEMANTICS (per canon, unchanged): the shares reconstruct the root TRANSIENTLY at recovery to sign a
+ * re-admit edge for a FRESH device, then zeroize it (reconstructAndReadmit). The card SHAPE + handshake
+ * share with the reserve; the recovery quorum IS the impersonation quorum (accepted priced/social) exactly
+ * as `provisionRecoveryAtFounding` already stands — this path only re-shapes the surface into cards.
+ *
+ * The two guardian cards recover WITHOUT "mine" (distinct-custodian quorum); one card alone reconstructs
+ * nothing (recovery-share's type wall). The root seed zeroizes the instant it is split.
+ */
+export async function provisionRecoveryCardsAtFounding(
+  vault: PersonaVault,
+  guardianA: string | null,
+  guardianB: string | null,
+  rng: RandomProvider,
+  recoveryEpoch = 1,
+  handleIndex = 0,
+): Promise<RecoveryCardsAtFounding> {
+  assertHandleIndex(handleIndex);
+  if (!vault.recovery) {
+    throw new Error("[recovery-keel-core] this vault provisions no recovery store — cannot seal a device-share");
+  }
+  const rootSeed = await loadPersonaRootSeed(vault, handleIndex);
+  try {
+    const split: GuardianCardSplit = splitToGuardianCards(rootSeed, guardianA, guardianB, recoveryEpoch, rng);
+    vault.recovery.save(handleIndex, split.mineShare);   // seal the "mine" (device) share at rest
+    return { cards: split.cards, mineSealed: true };
   } finally {
     rootSeed.fill(0);   // the root never lingers after the split
   }

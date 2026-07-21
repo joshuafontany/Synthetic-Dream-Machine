@@ -44,7 +44,7 @@ type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTic
    *  passphrase rides the verb args over the owner-only 0600 UDS — the same trust boundary as a CLI arg. */
   vault?: (verb: string, args: Record<string, unknown>) => Promise<Record<string, unknown>>;
 };
-import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof, verifyDeviceDelegation } from "@lararium/mesh";
+import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof, verifyDeviceDelegation, classifyCrossOperatorAdmission } from "@lararium/mesh";
 import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
 import { DaemonEventStore } from "./daemon-event-store.js";
 import { resolveOrMintBinding } from "./resolve-binding.js";
@@ -296,8 +296,22 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         };
       }
 
-      // Neither admin-cap nor a valid edge → the existing denial stands.
-      return { ...verdict, identifier: id, proofVerified };
+      // GATE-WIDENING — CROSS-OPERATOR bounded carriage (carry-contract MANDATORY tier). The peer holds
+      // NEITHER cap=admin@daemon NOR a valid pinned-root device-edge, yet it proved a valid self-certifying
+      // identity (receiveContactCard) and, under enforcement, key-possession (proofVerified — the early
+      // return above already guaranteed it). A DIFFERENT operator identity (a cabal-mate / another kahu)
+      // earns the BOUNDED "cross-operator" class: the node sharePolicy grants it ONLY the deterministically-
+      // federatable public/infra planes (@crossroads/WHO/kapae-antigen), NEVER a private-own plane, NEVER
+      // admin. FAIL-CLOSED on the widened surface — a foreign identity that cannot prove possession draws a
+      // DENY (the classifier gates on proofVerified; the LAR_V3_ALLOW_UNPROVEN escape hatch relaxes the
+      // operator's OWN device fleet above, never a foreign presenter). The #59 antigen draws Mu on a Kapae'd
+      // cross-operator AHEAD, at the sharePolicy.
+      const cross = classifyCrossOperatorAdmission(proofVerified);
+      if (cross.ok) {
+        return { ok: true, identifier: id, proofVerified, reason: cross.reason, peerClass: cross.peerClass };
+      }
+      // No proven possession → the existing capability denial stands (fail-closed).
+      return { ...verdict, identifier: id, proofVerified, reason: verdict.reason ?? cross.reason };
     },
 
     resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] }) => {

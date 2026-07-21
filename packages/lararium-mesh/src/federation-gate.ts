@@ -32,6 +32,7 @@ import {
 } from "@automerge/automerge-repo";
 import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl } from "./deterministic-doc.js";
 import type { IdentitySlot } from "./identity-slot.js";
+import type { PeerClass } from "./island-protocol.js";
 
 /**
  * FederationGate — MAY this document cross to this (relay) peer? DENY-BY-DEFAULT.
@@ -234,4 +235,49 @@ export async function carryContractShareDecision(
   if (presenterIsKapaed(antigen, peerId)) return false;
   // Then the #58 composition, UNCHANGED. The self-slot inner ring stays inert (see the surfaced fork).
   return identityShareDecision(relayPeers, fedGate, identity, peerId, documentId);
+}
+
+/** The admission verdict the GATE-WIDENING hands back for a FOREIGN operator identity. */
+export interface CrossOperatorAdmission {
+  /** True → admit the peer at the bounded federatable-carry tier. */
+  readonly ok: boolean;
+  /** The self-slot class the sharePolicy reads; present only on an `ok` admission. */
+  readonly peerClass?: PeerClass;
+  /** The provenance / denial cause (audit; survives the worker→host boundary). */
+  readonly reason: string;
+}
+
+/**
+ * classifyCrossOperatorAdmission — the GATE-WIDENING decision (carry-contract MANDATORY tier).
+ *
+ * The peer-verify FLOOR runs AHEAD of this (the DaemonAuthGate → verifyPeer chain): a well-formed
+ * self-certifying ContactCard establishes the identity, and the V3 proof-of-possession proves the peer
+ * HOLDS its key. This fn decides the LAST branch — a valid, proof-carrying identity that holds NEITHER
+ * cap=admin@daemon NOR a pinned-root operator device-edge. That peer carries a DIFFERENT operator identity
+ * (a cabal-mate / another kahu), so it earns the BOUNDED "cross-operator" class and NOTHING more: the node
+ * sharePolicy (selfSlotShareDecision) grants it ONLY the deterministically-federatable public/infra planes
+ * (@crossroads / WHO / kapae-antigen), NEVER a private-own plane, NEVER admin. The @crossroads plane reads
+ * world-public-plaintext by design (no keyhive read-cap gates it — the safety is the DeterministicFederationGate
+ * volunteering ONLY the fixed public set + the BeeKEM read-floor beneath every private plane), so the proven
+ * identity IS the admission floor for the mandatory public/infra carriage.
+ *
+ * FAIL-CLOSED — the tighter bound on the WIDENED (foreign) surface: cross-operator carriage REQUIRES a
+ * verified proof-of-possession UNCONDITIONALLY. A caller's `LAR_V3_ALLOW_UNPROVEN` escape hatch relaxes the
+ * operator's OWN device fleet (the admin/edge same-operator branches, adjudicated before this fn), never a
+ * foreign identity — a foreign presenter that cannot prove key-possession draws a DENY here.
+ *
+ * The #59 Kapae antigen runs AHEAD of the carriage, at the sharePolicy — a Kapae'd cross-operator draws Mu
+ * even for a federatable plane; this fn only classifies, it never overrides the antigen.
+ *
+ * Meme: lar:///ha.ka.ba/lararium/mesh/carry-contract#carry-read-contract
+ */
+export function classifyCrossOperatorAdmission(proofVerified: boolean): CrossOperatorAdmission {
+  if (proofVerified) {
+    return {
+      ok: true,
+      peerClass: "cross-operator",
+      reason: "admitted at the cross-operator federatable-carry tier (carry-contract MANDATORY)",
+    };
+  }
+  return { ok: false, reason: "cross-operator carriage requires a verified proof-of-possession" };
 }
