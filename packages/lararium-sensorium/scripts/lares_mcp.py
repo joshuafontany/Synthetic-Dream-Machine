@@ -27,7 +27,7 @@ from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir, deri
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
-LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze", "ki", "li", "jing", "couple_r")
+LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze", "ki", "li", "jing", "couple_r", "forecast", "mismatch")
 
 # The per-plane QUERY DOOR verb — read-only cross-plane interrogation of a 3-plane test-bed sensorium
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
@@ -76,6 +76,8 @@ VERB_SEATS = {
     "li": (True, False),                # the Li gluing verdict — routed read (the TS hull's li-radius + H¹) → HOTL
     "jing": (True, False),              # the Jing (勁) li∘ki square — routed read (the TS hull's round-trip) → HOTL
     "couple_r": (True, False),          # the R effective-TE coupling reference (coupling.R) — py/R compute, read-only → HOTL
+    "forecast": (True, False),          # the R early-warning plane (ews.R) — critical-slowing-down forecast, read-only → HOTL
+    "mismatch": (True, False),          # the ki↔R coupling comparator — read-only, TS-hull ⋈ R diff → HOTL
     "wiki": (True, False),              # switcher (switch/hold/release/active) — reversible, low-trust, LOCAL residency → HOTL
     # The vault seal-lifecycle tools — a status READ rides HOTL; every MUTATION of the sovereign at-rest
     # seal crosses a trust boundary (it touches identity secret material), so it seats HITL.
@@ -465,6 +467,23 @@ class LaresCoordinator:
         return couple_streams(M, names=list(names) if names else None,
                               shuffles=shuffles, nboot=nboot, seed=seed, alpha=alpha)
 
+    def forecast(self, *, rows=None, window: int = 50, nsurr: int = 200, alpha: float = 0.05,
+                 minbands: int = 2, seed: int = 1, **_) -> dict:
+        """The R early-warning plane (ews.R critical-slowing-down forecast) over an N-signal matrix — like
+        couple_r, this COMPUTES py-side (the predictive plane is the R plane). Stateless matrix→verdict."""
+        import numpy as np
+        from bands import forecast_ews
+        M = np.asarray(rows or [], dtype=float)
+        return forecast_ews(M, window=window, n_surr=nsurr, alpha=alpha, min_bands=minbands, seed=seed)
+
+    def mismatch(self, **_) -> dict:
+        """The ki↔R coupling comparator is TS-orchestrated — it runs the TS-hull Gaussian-CMI coupling
+        (@lararium/mesh coupleMesh) beside the R effective-TE (coupling.R) and diffs the directed edges. The
+        TS hull rides the browser-carried @daemon, so this raises: reach it via the @daemon (`lares sense
+        mismatch`), not the standalone python coordinator."""
+        raise RuntimeError("mismatch: the ki↔R comparator is TS-orchestrated (the TS-hull coupling lives in "
+                           "@lararium/mesh) — reach it via the @daemon (`lares sense mismatch`), not standalone")
+
     # ── the per-plane QUERY DOOR (read-only; PLANE_VERBS) ────────────────────────────────────
 
     def _plane_store(self, plane: str):
@@ -745,6 +764,21 @@ def build_mcp(coordinator: LaresCoordinator):
         return _call("couple_r", rows=rows, names=names)
 
     @mcp.tool()
+    def forecast(rows: "list | None" = None) -> dict:
+        """The R early-warning plane — ews.R (critical-slowing-down) over an N-signal `rows` matrix → a
+        fired/WATCH/QUIET forecast of an approaching regime-shift, BEFORE `analyze`'s change-point commits.
+        Computes py-side (the predictive plane is the R plane). `lares sense forecast --signal <ndjson>`."""
+        return _call("forecast", rows=rows)
+
+    @mcp.tool()
+    def mismatch(rows: "list | None" = None, names: "list | None" = None) -> dict:
+        """The ki↔R coupling comparator — run the TS-hull Gaussian-CMI coupling BESIDE the R effective-TE
+        over the SAME `rows` signals and diff the directed edges. A disagreement means the vessel's local
+        coherence read and the R reference part ways on whether two streams couple — the parity check the
+        RUN-arc owed, made live. `lares sense mismatch --signal <ndjson>` reads the same."""
+        return _call("mismatch", rows=rows, names=names)
+
+    @mcp.tool()
     def plane_record(cid: str, sensorium: "str | None" = None) -> dict:
         """The cross-plane witness: one cid -> presence + payload summary across content,
         structure and form (honest nulls where a plane lacks it). `sensorium` names the sensorium
@@ -824,7 +858,7 @@ class DaemonCoordinator:
     # the palace (content_io · worldline_io · structurepalace_io · form_encoder), serialized with capture so a
     # mutation never races the live writer. A verb the wire does NOT yet carry refuses honestly through
     # `_owed` rather than route to an unknown verb (the wall this surface names, not hides).
-    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record", "rejim", "analyze", "ki", "li", "jing", "couple_r"}
+    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record", "rejim", "analyze", "ki", "li", "jing", "couple_r", "forecast", "mismatch"}
 
     def __init__(self, wing: str = "wing_default") -> None:
         self._wing = wing
@@ -1008,6 +1042,21 @@ class DaemonCoordinator:
             if k in kw and kw[k] is not None:
                 args[k] = kw[k]
         return uds.output("couple-r", args)
+
+    def forecast(self, *, rows=None, **kw) -> dict:
+        # Route the R early-warning forecast to the @daemon `forecast` verb (→ capture_session forecast
+        # serve-op → forecast_ews → ews.R). Stateless matrix→verdict.
+        args: dict = {"rows": rows or []}
+        for k in ("window", "nsurr", "alpha", "minbands", "seed"):
+            if k in kw and kw[k] is not None:
+                args[k] = kw[k]
+        return uds.output("forecast", args)
+
+    def mismatch(self, *, rows=None, names=None, **_) -> dict:
+        # Route the ki↔R comparator to the @daemon `mismatch` verb — the daemon runs the TS-hull coupling
+        # (coupleMesh) beside the R couple_r serve-op and diffs. Only the daemon reaches BOTH hulls.
+        args: dict = {"rows": rows or [], **({"names": list(names)} if names else {})}
+        return uds.output("mismatch", args)
 
 
 def main() -> None:

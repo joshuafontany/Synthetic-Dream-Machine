@@ -51,6 +51,10 @@ const CLI_FORMS = {
   // `couple_r` runs the R effective-TE coupling reference (coupling.R) — the py/R twin of `ki`, the machine-
   // code plane behind the causal-island boundary. Routed to the daemon's py serve-op (Rscript shells there).
   couple_r:  "sense couple-r",
+  // `forecast` runs the R early-warning plane (ews.R critical-slowing-down); `mismatch` diffs the TS-hull
+  // ki coupling against the R effective-TE over the same signals — the parity check made a human command.
+  forecast:  "sense forecast",
+  mismatch:  "sense mismatch",
   // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
   // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
   wiki:      "wiki switch",

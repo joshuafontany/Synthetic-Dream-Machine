@@ -359,6 +359,21 @@ class CaptureSessionServer:
         geology = rejim_io.read_rejim(rejim_dir)
         return {"repoured": geology is not None, "geology": geology}
 
+    def forecast(self, req: dict) -> dict:
+        """The PREDICTIVE early-warning plane — `ews.R` (critical-slowing-down forecast) over an N-signal
+        matrix → the fired/WATCH/QUIET verdict, the AC1 + variance Kendall-τ with AR(1)-surrogate p-values,
+        and the multi-band agreement. Forecasts an approaching regime-shift BEFORE `analyze`'s change-point
+        commits. STATELESS — it reads the passed `rows` matrix (rows=time, cols=signals), never the holder's
+        stores; graceful degrade when R / the sidecar is absent."""
+        import numpy as np
+        from bands import forecast_ews
+        M = np.asarray(req.get("rows") or [], dtype=float)
+        return forecast_ews(
+            M, window=int(req.get("window", 50)), n_surr=int(req.get("nsurr", 200)),
+            alpha=float(req.get("alpha", 0.05)), min_bands=int(req.get("minbands", 2)),
+            seed=int(req.get("seed", 1)),
+        )
+
     def couple_r(self, req: dict) -> dict:
         """The cross-stream COUPLING plane — the R effective-transfer-entropy reference (coupling.R,
         RTransferEntropy::calc_ete) over an N-signal matrix → the directional who-leads-whom edges. The py/R
@@ -504,6 +519,7 @@ def _serve(sensorium_root: str) -> None:
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
             "analyze": server.analyze,             # DETECT-ONLY change-points over the holder's content stream
             "couple_r": server.couple_r,           # the R effective-TE coupling reference (coupling.R) — py/R twin of ki
+            "forecast": server.forecast,           # the R early-warning plane (ews.R) — critical-slowing-down forecast
             "status": server.status,               # the taxonomy over the holder's content store
             "worldline": server.worldline,         # the fork-DAG rhizome read (fresh worldline handle)
             "subagent-edges": server.subagent_edges,  # derive spawn/handback edges → worldline-compare's edge feed

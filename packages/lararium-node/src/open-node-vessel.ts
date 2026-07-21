@@ -39,6 +39,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
+  coupleMesh,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
 import { casDirForStorage, mirrorGenesisCasFs } from "./node-cas.js";
@@ -794,6 +795,51 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // Stateless: it couples `rows`, not any store, so the holder is only the pipe to the py serve-op.
         const { sensoriumRoot, ...req } = input;
         return await captureFor(sensoriumRoot).coupleR(req);
+      },
+      forecast: async (input) => {
+        // The R early-warning plane (ews.R critical-slowing-down forecast) over the passed signal matrix —
+        // computed py-side behind the causal-island boundary; the holder is only the pipe to the serve-op.
+        const { sensoriumRoot, ...req } = input;
+        return await captureFor(sensoriumRoot).forecast(req);
+      },
+      mismatch: async (input) => {
+        // The ki↔R comparator — the ONE place that reaches both hulls: run the TS-hull Gaussian-CMI coupling
+        // (coupleMesh) beside the R effective-TE (couple_r) over the SAME signals and diff the directed edges.
+        // A disagreement means the vessel's local read and the R reference part ways on whether streams couple.
+        const rows: number[][] = Array.isArray(input.rows) ? input.rows : [];
+        const width = rows[0]?.length ?? 0;
+        const names: string[] = Array.isArray(input.names) && input.names.length === width
+          ? input.names : Array.from({ length: width }, (_, i) => `s${i}`);
+        // TS side: each column is a child's univariate signal (T×1).
+        const tsCoupling = coupleMesh(names.map((name, i) => ({ name, signal: rows.map((r) => [r[i]!]) })));
+        // R side: the py/R serve-op (graceful skip when R absent).
+        const r = await captureFor(input.sensoriumRoot).coupleR({ rows, names });
+        const rAvailable = r["r_available"] !== false;
+        if (!rAvailable) {
+          return { agree: null, rAvailable, note: "R unavailable — cannot compare (couple-r skipped)", edges: [] };
+        }
+        const rEdges = Array.isArray(r["edges"]) ? (r["edges"] as Array<Record<string, unknown>>) : [];
+        const rHas = (from: string, to: string): boolean => rEdges.some((e) => e["from"] === from && e["to"] === to);
+        const edges: Array<Record<string, unknown>> = [];
+        let agree = true;
+        for (let i = 0; i < names.length; i++) for (let j = 0; j < names.length; j++) {
+          if (i === j) continue;
+          const tsCoupled = (tsCoupling.te[i]?.[j] ?? 0) > 0;
+          const rCoupled = rHas(names[i]!, names[j]!);
+          const edgeAgree = tsCoupled === rCoupled;
+          if (!edgeAgree) agree = false;
+          if (tsCoupled || rCoupled) {
+            edges.push({ from: names[i], to: names[j], ki: tsCoupled, r: rCoupled, agree: edgeAgree,
+                         kiTe: tsCoupling.te[i]?.[j] ?? 0 });
+          }
+        }
+        const disagreements = edges.filter((e) => e["agree"] === false).length;
+        return {
+          agree, rAvailable, edges, disagreements,
+          note: agree
+            ? `ki (Gaussian-CMI) and R (effective-TE) AGREE on all ${edges.length} directed edge(s) — the coupling reads honest`
+            : `MISMATCH — ki and R disagree on ${disagreements} of ${edges.length} directed edge(s); the vessel's local read parts ways from the R reference`,
+        } as unknown as Record<string, unknown>;
       },
       ki: async (input) => {
         // The Ki (氣) coupling verdict computed HERE in TS — the H¹-gated fuse over the ADDRESSED sensorium's

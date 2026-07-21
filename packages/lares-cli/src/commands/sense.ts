@@ -35,6 +35,8 @@ import { cmdKi } from "./ki.js";
 import { cmdLi } from "./li.js";
 import { cmdJing } from "./jing.js";
 import { cmdCoupleR } from "./couple-r.js";
+import { cmdForecast } from "./forecast.js";
+import { cmdMismatch } from "./mismatch.js";
 import { runQuiesce, runResume, runTopology, type DoorScope } from "./mempalace.js";
 
 /**
@@ -99,6 +101,8 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
   square:    cmdJing,     // alias — the joint read, neither li nor ki
   "couple-r": cmdCoupleR, // the R effective-TE coupling reference (coupling.R) — the py/R twin of ki, the
                           // machine-code plane behind the causal-island boundary; compare vs ki for a mismatch
+  forecast:  cmdForecast, // the R early-warning plane (ews.R) — a critical-slowing-down bifurcation forecast
+  mismatch:  cmdMismatch, // the ki↔R comparator — TS-hull Gaussian-CMI ⋈ R effective-TE, "is the coupling honest?"
   // Holder lifecycle — the SOVEREIGN parallel of `lares mempalace`, each door scoped to its own island.
   // `status` is already a plane-READ verb (the persistence lens), so the holder TOPOLOGY rides as `holders`.
   quiesce:   cmdSenseQuiesce,

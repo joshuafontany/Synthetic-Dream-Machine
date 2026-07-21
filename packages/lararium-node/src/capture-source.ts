@@ -87,6 +87,9 @@ export interface SourceCapture {
    *  matrix → the directional who-leads-whom edges. The py/R twin of `ki`; stateless matrix→verdict, behind
    *  the causal-island boundary (graceful coupling-skipped when R is absent). Rides the serialized pipe. */
   coupleR(request?: { rows?: number[][]; names?: string[]; shuffles?: number; nboot?: number; seed?: number; alpha?: number }): Promise<Record<string, unknown>>;
+  /** The R early-warning plane (ews.R critical-slowing-down forecast) over an N-signal `rows` matrix → the
+   *  fired/WATCH/QUIET verdict. Stateless matrix→verdict, behind the causal-island boundary. Rides the pipe. */
+  forecast(request?: { rows?: number[][]; window?: number; nsurr?: number; alpha?: number; minbands?: number; seed?: number }): Promise<Record<string, unknown>>;
   /** The taxonomy over the holder's content store — what the sensorium holds. Rides the serialized pipe. */
   status(request?: Record<string, unknown>): Promise<Record<string, unknown>>;
   /** The fork-DAG rhizome (bitemporal AS-OF `asOf`, else the whole history). Read-only over the pipe. */
@@ -146,6 +149,10 @@ export function makeSourceCapture(
     // The R effective-TE coupling reference (coupling.R) over the passed signal matrix — the py/R twin of
     // ki. Stateless (couples `rows`, not the holder's stores); the serve-op shells to Rscript. Rides the pipe.
     coupleR: async (request) => await p.send("couple_r", { ...(request ?? {}) }) as Record<string, unknown>,
+
+    // The R early-warning plane (ews.R) over the passed signal matrix — the critical-slowing-down forecast.
+    // Stateless (reads `rows`, not the holder's stores); the serve-op shells to Rscript. Rides the pipe.
+    forecast: async (request) => await p.send("forecast", { ...(request ?? {}) }) as Record<string, unknown>,
     // The lifecycle + cross-plane serve-ops: the taxonomy read, the fork-DAG read, the kapae/un-kapae
     // branch-mute cascades (mutations, serialized with capture — never a second writer), and the cross-plane
     // witness. Each rides the SAME serialized pipe as capture through the holder that owns the palace.
