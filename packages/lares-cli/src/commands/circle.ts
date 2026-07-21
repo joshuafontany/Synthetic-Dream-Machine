@@ -11,14 +11,17 @@
  *   list [--to <circle>]         the private follow-view — nyms under the recogniser's OWN names (petname +
  *                                last-seen glamour). No --to lists every circle.
  *
- * NEVER A FEDERATED WRITE. This drives `composeFollow` over the node-fs CircleStore + handle-book — both
- * private files under the identity home, 0o600. No board, announce, or @crossroads seam is reachable here, so
- * a follow leaves NO central trace. Publishing a public glamour stays a SEPARATE, deliberate act (`lares
- * persona` + a who-face publish), never fired here. The default circle is `following` (the primary system
- * circle seedCirclesDoc plants).
+ * NEVER A FEDERATED WRITE. This drives `composeFollow` over the @circles-backed CircleStore (the FOLLOW-GRAPH
+ * daemon verbs — circle-add/circle-remove/circle-list — over the sovereign @circles doc) + the LOCAL handle-
+ * book (the recogniser's private memory, a 0o600 file under the identity home). The membership rides @circles,
+ * a PRIVATE bag the self-slot FLEET-syncs same-operator (a follow lands on ALL the operator's own devices) and
+ * NEVER federates to a stranger. No board, announce, or @crossroads seam is reachable here, so a follow leaves
+ * NO central trace. Publishing a public glamour stays a SEPARATE, deliberate act (`lares persona` + a who-face
+ * publish), never fired here. The default circle is `following` (the primary system circle seedCirclesDoc plants).
  *
  * Fail-closed: following an UNMET nym with no `--card` REFUSES (you cannot name-into-a-circle a handle you
- * have never met) — carry its self-certifying HandleCard to admit it first.
+ * have never met) — carry its self-certifying HandleCard to admit it first. Recognition stays CLIENT-side
+ * (the local handle-book) ahead of the @circles membership write; the handle-book co-move is the open fork.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-two-stacks
  */
@@ -28,7 +31,9 @@ import {
   composeFollow, composeUnfollow, listFollows, FollowRefused,
   type HandleCard,
 } from "@lararium/mesh";
-import { makeNodeCircleStore, loadNodeHandleBook, saveNodeHandleBook } from "@lararium/node";
+import { loadNodeHandleBook, saveNodeHandleBook } from "@lararium/node";
+import { makeDaemonCircleStore } from "../daemon-circle-store.js";
+import { operatorDid } from "../env.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -93,7 +98,7 @@ async function circleAdd(args: ParsedArgs): Promise<number> {
   const cardPath = typeof args.options["card"] === "string" ? args.options["card"] : undefined;
   const card     = cardPath ? readCardFile(cardPath) : undefined;
 
-  const circles = makeNodeCircleStore();
+  const circles = makeDaemonCircleStore(await operatorDid());
   const book    = loadNodeHandleBook();
 
   let result;
@@ -125,7 +130,7 @@ async function circleRemove(args: ParsedArgs): Promise<number> {
   const nym = args.positional[1];
   if (!nym) throw new UsageError("a nym is required (e.g. `lares circle remove <verifying-key-hex> --to following`)");
   const circleId = circleOf(args);
-  const result = await composeUnfollow({ circles: makeNodeCircleStore(), nym, circleId });
+  const result = await composeUnfollow({ circles: makeDaemonCircleStore(await operatorDid()), nym, circleId });
   emit(args, {
     ok: true,
     data: { nym: result.nym, circle: result.circleId, federated: result.federated },
@@ -135,7 +140,7 @@ async function circleRemove(args: ParsedArgs): Promise<number> {
 }
 
 async function circleList(args: ParsedArgs): Promise<number> {
-  const circles = makeNodeCircleStore();
+  const circles = makeDaemonCircleStore(await operatorDid());
   const book    = loadNodeHandleBook();
   const to      = typeof args.options["to"] === "string" ? args.options["to"].trim() : "";
   const circleIds = to.length > 0 ? [to] : [...await circles.circles()];

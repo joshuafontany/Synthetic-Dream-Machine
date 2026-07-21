@@ -1,21 +1,55 @@
 /**
- * circle-command.test.ts — the FOLLOW VERB (`lares circle`) end-to-end over the REAL node-fs stores.
+ * circle-command.test.ts — the FOLLOW VERB (`lares circle`) end-to-end over the @circles SOURCE OF TRUTH.
  *
- * Operator intent: adding to a circle IS the follow, and it leaves NO central trace. The graph + the
- * recogniser's labels live in PRIVATE files under the identity home; nothing reaches @crossroads.
+ * Operator intent: adding to a circle IS the follow. The MEMBERSHIP rides the sovereign @circles doc (via the
+ * FOLLOW-GRAPH daemon verbs — circle-add / circle-remove / circle-list), which fleet-syncs same-operator and
+ * NEVER federates; only the RECOGNITION layer (the handle-book: others' nyms + private petnames) stays LOCAL,
+ * gating an unknown nym fail-closed BEFORE the membership write reaches @circles.
  *
  * Proven:
- *   · `circle add <nym> --card <file> --to following --petname` returns 0 + writes ONLY the local private
- *     files (`.circles-follow.json` + `.handle-book.json`) under the identity home — the never-federated proof
- *     (no board / announce / @crossroads artifact anywhere in the tree),
- *   · `circle list` reads the follow back under the OWN names (petname + last-seen glamour),
- *   · `circle remove` drops the edge locally,
- *   · FAIL-CLOSED — following an UNMET nym with NO --card returns non-zero and writes no graph entry.
+ *   · `circle add <nym> --card --to following --petname` returns 0, dispatches circle-add to the daemon (the
+ *     membership lands in @circles, NOT a local `.circles-follow.json`), and writes ONLY the local handle-book
+ *     — no board / announce / @crossroads artifact anywhere in the tree (never-federates),
+ *   · `circle list` reads the follow back through circle-list (@circles.memberDids) under the OWN names,
+ *   · `circle remove` dispatches circle-remove (drops the @circles edge),
+ *   · FAIL-CLOSED — following an UNMET nym with NO --card returns non-zero AND dispatches NO circle-add.
  */
 import { afterEach, beforeEach, describe, test, expect, vi } from "vitest";
 import { mkdtempSync, rmSync, writeFileSync, existsSync, readFileSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+
+// The @circles doc, mocked at the sock transport: an in-memory follow-graph the circle-* verbs round-trip.
+const h = vi.hoisted(() => ({
+  graph: new Map<string, Set<string>>(),
+  calls: [] as Array<{ verb: string; args: Record<string, unknown> }>,
+}));
+vi.mock("../src/verb-call.js", () => ({
+  DaemonUnreachable: class extends Error {},
+  runVerb: async (verb: string, args: Record<string, unknown>) => {
+    h.calls.push({ verb, args });
+    const circle = String(args["circle"] ?? "");
+    const nym    = String(args["nym"] ?? "");
+    const out: Record<string, unknown> = {};
+    if (verb === "circle-add") {
+      const set = h.graph.get(circle) ?? new Set<string>(); set.add(nym); h.graph.set(circle, set);
+      out["added"] = true; out["members"] = [...set].sort();
+    } else if (verb === "circle-remove") {
+      const set = h.graph.get(circle) ?? new Set<string>(); set.delete(nym); h.graph.set(circle, set);
+      out["removed"] = true; out["members"] = [...set].sort();
+    } else if (verb === "circle-list") {
+      if (circle) out["members"] = [...(h.graph.get(circle) ?? [])].sort();
+      else out["circles"] = [...h.graph.entries()].map(([c, s]) => ({ circle: c, members: [...s].sort() }));
+    }
+    return { status: "done", requestId: "r", results: { summary: { ok: true, output: out } } };
+  },
+}));
+// Stub the operator DID (no vessel key in a bare temp root); keep larIdentityDir real.
+vi.mock("../src/env.js", async (orig) => ({
+  ...(await orig<typeof import("../src/env.js")>()),
+  operatorDid: async () => "0x" + "ab".repeat(32),
+}));
+
 import { cmdCircle } from "../src/commands/circle.js";
 import { larIdentityDir } from "../src/env.js";
 import type { ParsedArgs } from "../src/parse-args.js";
@@ -41,17 +75,19 @@ async function cardFile(dir: string, seedByte: number, glamour: string): Promise
   return { nym, path };
 }
 
-/** Every file under the identity home — the whole persistent footprint of a follow (proves LOCALITY). */
+/** Every file under the identity home — the LOCAL footprint (now only the handle-book, never the graph). */
 function identityFootprint(): string[] {
   const dir = larIdentityDir();
   return existsSync(dir) ? readdirSync(dir).sort() : [];
 }
+const verbsSent = (): string[] => h.calls.map((c) => c.verb);
 
-describe("lares circle — the follow verb, local + traceless", () => {
+describe("lares circle — the follow verb over @circles (fleet-synced, traceless)", () => {
   let root: string;
   beforeEach(() => {
     root = mkdtempSync(join(tmpdir(), "lares-circle-"));
     setEnv("LAR_ROOT", root);
+    h.graph.clear(); h.calls.length = 0;
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "error").mockImplementation(() => {});
   });
@@ -61,41 +97,42 @@ describe("lares circle — the follow verb, local + traceless", () => {
     rmSync(root, { recursive: true, force: true });
   });
 
-  test("add with a card follows LOCALLY — only the private files land, no board write anywhere", async () => {
+  test("add with a card follows: membership → @circles (daemon verb), only the handle-book lands locally", async () => {
     const { nym, path } = await cardFile(root, 3, "Discordia");
     const code = await cmdCircle(circleArgs(["add", nym], { to: "following", card: path, petname: "my-eris" }));
     expect(code).toBe(0);
 
-    // The follow-graph landed under the identity home, and NOTHING else did (no @crossroads / board artifact).
+    // The membership rode the daemon (circle-add), landing in @circles — NOT a local graph file.
+    expect(h.calls).toContainEqual({ verb: "circle-add", args: { circle: "following", nym } });
+    expect(h.graph.get("following")).toContain(nym);
+
+    // LOCAL footprint: ONLY the handle-book (recognition + petname) — no `.circles-follow.json`, no board artifact.
     const foot = identityFootprint();
-    expect(foot).toContain(".circles-follow.json");
     expect(foot).toContain(".handle-book.json");
+    expect(foot).not.toContain(".circles-follow.json");
     expect(foot.some((f) => /crossroad|board|announce|glamour|public/i.test(f))).toBe(false);
 
-    // The private graph holds the edge; the private book holds the label.
-    const graph = JSON.parse(readFileSync(join(larIdentityDir(), ".circles-follow.json"), "utf8"));
-    expect(graph.circles.following).toContain(nym);
     const book = JSON.parse(readFileSync(join(larIdentityDir(), ".handle-book.json"), "utf8"));
     expect(book.records.find((r: { nym: string }) => r.nym === nym)?.petname).toBe("my-eris");
   });
 
-  test("list reads the follow back under the OWN names; remove drops the edge", async () => {
+  test("list reads the follow back from @circles; remove drops the @circles edge", async () => {
     const { nym, path } = await cardFile(root, 7, "TheGuru");
     await cmdCircle(circleArgs(["add", nym], { to: "following", card: path, petname: "guru" }));
 
     expect(await cmdCircle(circleArgs(["list"], { to: "following" }))).toBe(0);
+    expect(verbsSent()).toContain("circle-list");
 
     expect(await cmdCircle(circleArgs(["remove", nym], { to: "following" }))).toBe(0);
-    const graph = JSON.parse(readFileSync(join(larIdentityDir(), ".circles-follow.json"), "utf8"));
-    expect(graph.circles.following ?? []).not.toContain(nym);
+    expect(h.calls).toContainEqual({ verb: "circle-remove", args: { circle: "following", nym } });
+    expect([...(h.graph.get("following") ?? [])]).not.toContain(nym);
   });
 
-  test("FAIL-CLOSED — following an UNMET nym with no --card returns non-zero, writes no edge", async () => {
+  test("FAIL-CLOSED — following an UNMET nym with no --card returns non-zero AND dispatches no circle-add", async () => {
     const code = await cmdCircle(circleArgs(["add", "ab".repeat(32)], { to: "following" }));
     expect(code).not.toBe(0);
-    // No graph entry landed (a torn/absent file reads empty).
-    const file = join(larIdentityDir(), ".circles-follow.json");
-    const graph = existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : { circles: {} };
-    expect(graph.circles.following ?? []).toEqual([]);
+    // Recognition fails CLIENT-side before any membership write — the daemon never saw a follow.
+    expect(verbsSent()).not.toContain("circle-add");
+    expect(h.graph.get("following") ?? new Set()).toEqual(new Set());
   });
 });

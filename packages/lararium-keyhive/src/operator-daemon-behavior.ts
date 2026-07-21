@@ -24,7 +24,9 @@ import {
   makeSwitcherStateReactor,
   makePersonaStateReactor,
   makeCircleStateReactor,
+  makeCircleReactors,
 } from "@lararium/tw5";
+import { CIRCLES_DOC_URI } from "@lararium/mesh";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
@@ -132,6 +134,27 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // syncing to no bag (the never-federates wall). A headless node daemon registers this
       // verb but never receives a push (browser-only).
       registry.register("circle-state", makeCircleStateReactor(ctx.tw5));
+
+      // The FOLLOW-GRAPH verbs — the SOURCE OF TRUTH over the sovereign @circles doc. "Adding to a circle IS
+      // the follow"; circle-add/circle-remove write @circles.memberDids, circle-list reads it back. The daemon
+      // reaches @circles by ACCESS off the @oracle registry (which names CIRCLES_DOC_URI) — access≠load, write-
+      // then-sync. @circles rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator (so a follow
+      // lands on ALL the operator's own devices) and the DeterministicFederationGate NEVER volunteers it to a
+      // cross-operator (@circles is outside its federatable set). A follow writes ONLY @circles — no board seam
+      // is reachable here, the never-federates wall made structural. `ctx.tw5` lets a mutation/list re-render
+      // the @daemon follow surface (a browser paints it; a headless node daemon rests the temp tiddler).
+      if (ctx.oracleUrl) {
+        const oraclePlane = makeCatalogAccessor(ctx.repo, ctx.oracleUrl);
+        const resolveCirclesStore = async () => {
+          const store = await oraclePlane.storeOf(CIRCLES_DOC_URI);
+          if (!store) throw new Error("circle-verb: @circles unresolved — the @oracle registry names no CIRCLES_DOC_URI");
+          return store;
+        };
+        const circleReactors = makeCircleReactors({ resolveStore: resolveCirclesStore, tw5: ctx.tw5 });
+        registry.register("circle-add",    circleReactors.add);
+        registry.register("circle-remove", circleReactors.remove);
+        registry.register("circle-list",   circleReactors.list);
+      }
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
       // in @daemon + $:/tags/Alert into the operator's pinned VM.

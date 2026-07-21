@@ -184,6 +184,12 @@ export {
   makeWardAlertReactor,
 } from "./worker-data-verbs.js";
 export type { ResidencyOpPost } from "./worker-data-verbs.js";
+// The FOLLOW-GRAPH verbs over the sovereign @circles doc (source of truth; PRIVATE, fleet-synced
+// same-operator, NEVER federated). Both vessels register them through the shared operator-daemon-behavior.
+export {
+  makeCircleReactors, makeCircleAddReactor, makeCircleRemoveReactor, makeCircleListReactor,
+} from "./circle-verbs.js";
+export type { CircleVerbOptions, ResolveCirclesStore } from "./circle-verbs.js";
 // Verb-plane reactors (composite/repo-only — pono home is tw5, not node; both vessels hold them).
 export { makeInitWikiReactor, makeOpenWikiReactor }   from "./wiki-mint-handlers.js";
 export { makeDraftReactor, makePruneStaleReactor }    from "./wiki-draft-handlers.js";

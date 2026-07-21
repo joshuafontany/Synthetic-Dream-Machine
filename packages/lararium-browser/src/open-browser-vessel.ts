@@ -37,10 +37,6 @@ import {
 }                                            from "@lararium/mesh";
 import { runBrowserBootInviteSpend }         from "./browser-boot-invite-burn.js";
 import {
-  makeBrowserCircleStore, browserComposeUnfollow, browserListFollows,
-}                                            from "./browser-circle-store.js";
-import { circlePanelStateArgs }              from "./circle-panel-state.js";
-import {
   MemoryTiddlerStore,
   selectActiveWikiSlug,
   loadCatalogCorpora, seedVesselDefaults,
@@ -572,19 +568,14 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   };
   // The default circle the @daemon follow panel paints — the primary system circle seedCirclesDoc plants.
   const CIRCLE_PANEL_DEFAULT = "following";
-  // Push the live FOLLOW-VIEW INTO the @daemon follow surface (main → local, reactive): main HOLDS the IDB
-  // follow-graph, so it reads the follow-view here + writes it through the `circle-state` worker verb onto the
-  // volatile $:/temp/lares/circles. PRIVATE-all: the graph + petnames NEVER federate, so the temp slot syncs
-  // to no bag. Fired after a follow/unfollow + on @daemon summon. Fire-and-forget (a lost push self-heals on
-  // the next follow/unfollow or summon), mirroring pushPersonaState.
-  const pushCircleState = async (circleId = CIRCLE_PANEL_DEFAULT): Promise<void> => {
+  // RENDER the @daemon follow surface FROM the sovereign @circles doc (the follow-graph's SOURCE OF TRUTH). The
+  // daemon WORKER holds @circles by access, so `circle-list` reads the membership there and writes the volatile
+  // $:/temp/lares/circles itself — main only TRIGGERS. @circles is PRIVATE + fleet-synced same-operator (a follow
+  // shows on ALL the operator's own devices) and NEVER federates. Petname/glamour ride blank until the handle-
+  // book co-moves onto @circles (the open fork). Fired on a follow/unfollow + @daemon summon; fire-and-forget.
+  const pushCircleState = (circleId = CIRCLE_PANEL_DEFAULT): void => {
     if (!daemon) return;
-    const follows = await browserListFollows(circleId, idbName);
-    void daemon.placeVerb({
-      verb:        "circle-state",
-      args:        circlePanelStateArgs(circleId, follows),
-      requestedBy: "circle",
-    });
+    void daemon.placeVerb({ verb: "circle-list", args: { circle: circleId }, requestedBy: "circle" });
   };
   // The materialize-fresh path RELOADS a persisted @oracle intact (find-first) or
   // materializes it fresh — never a merge-into-stale reconcile. No engine
@@ -888,30 +879,20 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       });
 
       // ── The FOLLOW surface (the IoC social-graph door) ──────────────────────────
-      // The isomorphic mirror of the persona surface: main holds the IDB follow-graph, so these
-      // verbs DRIVE it (refresh / unfollow) and reflect the fresh state into the @daemon follow
-      // surface via pushCircleState. A projected unfollow click routes here exactly as persona-wear
-      // does. FOLLOWING a NEW nym needs a nym + a self-certifying card (not a projected text field),
-      // so it rides the `lares circle` CLI / the exported browserComposeFollow — never a panel input.
-      // NEVER-FEDERATES: every write lands in the LOCAL IDB circle-graph; no board seam is reachable.
+      // The follow-graph's SOURCE OF TRUTH rides the sovereign @circles doc, held in the daemon WORKER: the
+      // FOLLOW-GRAPH verbs (circle-add / circle-remove / circle-list) live there (registered by the shared
+      // operator-daemon-behavior), reaching @circles by access and writing-then-syncing. @circles is PRIVATE +
+      // fleet-synced same-operator (a follow shows on ALL the operator's own devices) and NEVER federates. A
+      // projected unfollow click carries the row's nym + circle straight to the WORKER `circle-remove` verb
+      // (verse-event → placeVerb → the worker dispatcher, which shadows any main reactor); it self-renders the
+      // surface from @circles. FOLLOWING a NEW nym needs a nym + a self-certifying card (recognition, fail-
+      // closed) — the `lares circle` CLI / the exported composeFollow, never a projected text field.
 
-      // circle-refresh — repaint the follow surface from the live IDB graph (idempotent read + push).
+      // circle-refresh — repaint the follow surface FROM @circles (the worker `circle-list` reads + renders it).
       registry.register("circle-refresh", async (args) => {
         const circleId = String(args["circle"] ?? CIRCLE_PANEL_DEFAULT) || CIRCLE_PANEL_DEFAULT;
-        void pushCircleState(circleId);
-        const members = await makeBrowserCircleStore(idbName).members(circleId);
-        return { verb: "circle-refresh", circle: circleId, count: members.length, federated: false };
-      });
-
-      // circle-remove — the unfollow (kāpae, remove-wins): drop the row's nym from the circle. LOCAL only;
-      // the handle-book memory stays. The panel's unfollow button carries the row's own nym + circle.
-      registry.register("circle-remove", async (args) => {
-        const nym    = String(args["nym"] ?? "");
-        const circleId = String(args["circle"] ?? CIRCLE_PANEL_DEFAULT) || CIRCLE_PANEL_DEFAULT;
-        if (!nym) throw new Error("circle-remove: `nym` required");
-        const result = await browserComposeUnfollow({ idbName, nym, circleId });
-        void pushCircleState(circleId);
-        return { verb: "circle-remove", ...result };
+        pushCircleState(circleId);
+        return { verb: "circle-refresh", circle: circleId, federated: false };
       });
 
       // wiki-sense (the supervision reads) — the daemon's supervision READ-verbs over the islands this vessel's pool
