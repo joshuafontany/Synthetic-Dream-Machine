@@ -76,6 +76,8 @@ export type { IdentityRing } from "./federation-gate.js";
 export type { AntigenRing } from "./federation-gate.js";
 export { presenterIsKapaed, carryContractShareDecision, classifyCrossOperatorAdmission } from "./federation-gate.js";
 export type { CrossOperatorAdmission } from "./federation-gate.js";
+export { memberCarryShareDecision } from "./federation-gate.js";
+export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
 export * from "./kapae-antigen.js";
 export { antigenEntriesFromBoard, writeAntigenEntry, antigenEntryKey, ANTIGEN_ENTRY_PREFIX } from "./antigen-board.js";
 export * from "./mu-void.js";

@@ -237,6 +237,88 @@ export async function carryContractShareDecision(
   return identityShareDecision(relayPeers, fedGate, identity, peerId, documentId);
 }
 
+/**
+ * NexusMembership — the @nexus CONSULT the carry-split gates on: is this cross-operator peer a CONTRACTED
+ * Nexus MEMBER, or a mere STRANGER (a valid identity carrying no contract)?
+ *
+ * The mesh breathes across a Nexus because a MEMBER relay blind-transits sealed ciphertext (carry, never
+ * read); a STRANGER reaches ONLY the public shelf (the federatable set). This consult draws that line — and
+ * it reads the node's OWN @nexus replica (as of last sync; no global now). It is NOT a peer-auth gate (that
+ * lives, live, at the DaemonAuthGate) and NOT a read-cap (the BeeKEM read-floor stays absolute). It answers
+ * ONE question: MEMBER or not.
+ *
+ * FAIL-CLOSED: an unrecognized / unconsultable peer reads `false` (STRANGER) — a node NEVER assumes a peer
+ * is Nexus-pono. A null `NexusMembership` treats EVERY cross-operator STRANGER (public-read only), so a
+ * boot window before the consult stands, or a Nexus with no members-record, denies all sealed carriage.
+ */
+export interface NexusMembership {
+  /** True ONLY when the peer is provably a contracted Nexus member (fail-closed: unknown/unconsultable → false). */
+  isMemberPeer(peerId: string): boolean;
+}
+
+/**
+ * PlaneSeal — the ENCRYPT-FIRST guard on the carry-split: is this plane PROVABLY sealed (BeeKEM ciphertext)
+ * or immutable (content-addressed CID), such that carrying its bytes hands a member NOTHING readable?
+ *
+ * ONLY a provably-sealed / immutable plane may blind-transit. A cleartext-local plane MUST NEVER cross to a
+ * cross-operator — carrying it would leak plaintext, breaching the read-lane denial the split MUST keep
+ * absolute. This oracle is the guard on that gap.
+ *
+ * FAIL-CLOSED: a plane whose seal status the oracle cannot positively affirm reads `false` (deny-carry). A
+ * null `PlaneSeal` deny-carries EVERY plane — the correct floor while no sealed plane type stands (today the
+ * automerge sync wire carries cleartext, so no private plane is provably sealed; the @cad ciphertext-CAS /
+ * BeeKEM-on-wire path is the design-north that will register the first sealed planes here).
+ */
+export interface PlaneSeal {
+  /** True ONLY when the doc's bytes are ciphertext a carrier cannot read (fail-closed: unknown → false → deny-carry). */
+  isSealedPlane(documentId: DocumentId): boolean;
+}
+
+/**
+ * memberCarryShareDecision — the CARRY-SPLIT that lets the mesh breathe across a Nexus (operator-ruled
+ * 2026-07-20). It layers a MEMBER blind-transit lane ATOP the unchanged public floor, so:
+ *
+ *   1. antigen + the federatable-public FLOOR — `carryContractShareDecision`, VERBATIM. A Kapae'd presenter
+ *      draws Mu; the federatable set (@crossroads / WHO / kapae-antigen) crosses to member AND stranger alike;
+ *      an in-process house member full-syncs. This is today's behavior, untouched.
+ *   2. the MEMBER blind-transit — a plane the floor DENIED (a private-own plane) may STILL cross to a peer the
+ *      @nexus consult names a MEMBER, but ONLY when the seal oracle proves it sealed. The member relays the
+ *      CIPHERTEXT it can never read; the read-cap (BeeKEM group key) NEVER crosses this seam — sharePolicy
+ *      governs WHICH docs sync, never key material, so this adds ZERO decrypt path.
+ *
+ * THE THREE DENIALS the split holds absolute (each fail-closed):
+ *   · Kapae'd → Mu (re-checked after the floor so the split never resurrects a banned presenter).
+ *   · STRANGER (or unconsultable peer, or null membership) → public-read only, no sealed carriage.
+ *   · cleartext-local plane (or unknown seal, or null seal) → NEVER carried (the encrypt-first invariant).
+ *
+ * DEGENERATION (the read-lane-untouched proof): with `membership = null` OR `seal = null`, this returns
+ * EXACTLY `carryContractShareDecision(...)` — the carry-split adds a lane, it never widens the floor.
+ *
+ * Meme: lar:///ha.ka.ba/lararium/mesh/carry-contract#carry-read-contract
+ */
+export async function memberCarryShareDecision(
+  relayPeers: ReadonlySet<string>,
+  fedGate:    FederationGate | null,
+  antigen:    AntigenRing | null,
+  identity:   IdentityRing | null,
+  membership: NexusMembership | null,
+  seal:       PlaneSeal | null,
+  peerId:     string,
+  documentId?: DocumentId,
+): Promise<boolean> {
+  // 1. The FLOOR, verbatim — antigen-first (Kapae'd → Mu), then the federatable-public set (#58/#59).
+  const floor = await carryContractShareDecision(relayPeers, fedGate, antigen, identity, peerId, documentId);
+  if (floor) return true;                                   // federatable/public/house already crosses — done
+  // 2. The MEMBER blind-transit lane — additive, over a plane the floor DENIED.
+  if (!membership || !seal)              return false;      // no consult / no seal oracle → fail-closed (stranger)
+  if (presenterIsKapaed(antigen, peerId)) return false;    // a Kapae'd presenter drew Mu at the floor — keep it Mu
+  if (!documentId)                       return false;      // deny-by-default
+  if (!relayPeers.has(peerId))           return false;      // a house member already crossed at the floor
+  if (!membership.isMemberPeer(peerId))  return false;      // STRANGER → public-read only (no sealed carriage)
+  if (!seal.isSealedPlane(documentId))   return false;      // cleartext-local plane → NEVER carried (encrypt-first)
+  return true;                                             // MEMBER + provably-sealed → blind-transit the ciphertext
+}
+
 /** The admission verdict the GATE-WIDENING hands back for a FOREIGN operator identity. */
 export interface CrossOperatorAdmission {
   /** True → admit the peer at the bounded federatable-carry tier. */

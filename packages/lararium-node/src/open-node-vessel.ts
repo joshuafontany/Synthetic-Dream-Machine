@@ -67,9 +67,11 @@ import { daemonGenesisDir }               from "./lares-config.js";
 import { resolvePalacePath, orderHandleTurnsToStubs, type HandleTurn } from "@lararium/mempalace";
 import { writebackWing, TelemetryUnavailable } from "@lararium/sensorium";
 import { LarEventBusImpl, DEFAULT_RINGS, DeterministicFederationGate } from "@lararium/mesh";
-import type { SparseFormVector, WorldlineStubWire, AntigenRing, FederationGate, PeerClass } from "@lararium/mesh";
+import type { SparseFormVector, WorldlineStubWire, AntigenRing, FederationGate, NexusMembership, PeerClass } from "@lararium/mesh";
 import { selfSlotShareDecision } from "./self-slot-share.js";
 import { makeAntigenRingHolder } from "./antigen-ring.js";
+import { makeNexusMembership } from "./nexus-membership.js";
+import { DENY_ALL_PLANE_SEAL } from "./plane-seal.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
 
@@ -296,6 +298,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // below (the nexus pubkey it addresses the federatable planes from). Null keeps the pre-classification
   // boot window inert (no peer gated) — correct: no doc crosses to any WS peer until the gate arms anyway.
   let selfSlotFedGate: FederationGate | null = null;
+  // The @nexus MEMBERSHIP consult — the carry-split's member gate (a cross-operator MEMBER blind-transits a
+  // sealed plane; a STRANGER reaches only the public shelf). Forward-declared (the sharePolicy closes over
+  // it) and STOOD once the operator's own nym is loaded, below. Null keeps every cross-operator STRANGER
+  // (public-read only) through the boot window — the fail-closed default (a node never assumes Nexus-pono).
+  let nexusMembership: NexusMembership | null = null;
   const repo = new Repo({
     storage,
     network: [network],
@@ -324,6 +331,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         peerClass:       peerClassMap.get(peerId),
         selfSlotFedGate,
         antigenRing,
+        // THE CARRY-SPLIT — a cross-operator MEMBER (per the @nexus consult) blind-transits a PROVABLY-sealed
+        // private plane (carry ciphertext, never the read-cap); a STRANGER reaches only the federatable shelf.
+        // planeSeal is DENY-ALL today (the sync wire carries cleartext — no plane is provably sealed), so the
+        // member lane stands ready but inert; it opens the moment a sealed plane type (@cad/BeeKEM) registers.
+        membership:      nexusMembership,
+        planeSeal:       DENY_ALL_PLANE_SEAL,
         peerId,
         documentId: documentId as DocumentId | undefined,
       });
@@ -371,6 +384,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     peerIdentifierMap,
   });
   antigenRing = antigenHolder.ring;
+
+  // Stand the @nexus membership consult now the operator's own verifying key is loaded — the carry-split's
+  // member gate. It reads the SAME `bags/@nexus` charter roster the antigen folds against (the seated-kahu
+  // keys as the conservative provable-member floor; see nexus-membership for the surfaced members-registry
+  // fork) and resolves a peerId → nym off the same proven `peerIdentifierMap`. FAILS CLOSED: an unseated
+  // charter → empty member set → every cross-operator STRANGER (public-read only), never a false member.
+  nexusMembership = makeNexusMembership({
+    bagsDir:           antigenBagsDir,
+    peerIdentifierMap,
+  }).membership;
 
   // Stand the self-slot federation gate now the operator's own verifying key is loaded — the SAME nexus
   // pubkey the antigen board derives from. The gate's federatable surface is a PURE function of that key
