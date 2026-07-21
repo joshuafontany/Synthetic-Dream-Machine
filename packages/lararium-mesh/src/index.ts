@@ -169,6 +169,7 @@ export * from "./sink-flow.js";
 export * from "./partition-monitor.js";
 export * from "./self-coupling.js";
 export * from "./mesh-coupling.js";
+export * from "./te-hodge.js";
 export * from "./who-sensory-seam.js";
 export * from "./sensory-seam.js";
 export * from "./gaussian-cmi.js";

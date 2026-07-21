@@ -25,8 +25,8 @@
  *      wire; no caller may read it as a Lipschitz/metric-distortion guarantee.
  *  (c) THE KI CO-CONSISTENCY IS FOUNDED — {@link kiCoConsistency} is the cosheaf PUSHFORWARD mirror of
  *      this li-radius (Hansen–Ghrist inner-product/adjoint duality: `∂ = δ*`), NOT a cosheaf faked through
- *      a contravariant restriction. It EXTENDS faces UP into a shared coface-stalk (the MODWT-MRA synthesis
- *      is the real extension map) and reads pairwise disagreement on codomain CO-OVERLAPS — the exact dual
+ *      a contravariant restriction. It EXTENDS faces UP into a shared coface-stalk (the TE-flow Hodge
+ *      circulation is the real extension map) and reads pairwise disagreement on codomain CO-OVERLAPS — the exact dual
  *      of the sheaf's restriction + overlap. The old refusal (faking it through a restriction) is dissolved.
  *
  * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
@@ -541,17 +541,18 @@ export function assertSheafPlanes(restrictions: readonly PlaneRestriction[]): vo
 //                     synthesizes up into a shared coface AGREES on the coefficient there.
 //   ki-radius > 0  ⟺  a localizable CO-OBSTRUCTION, keyed to the offending coface.
 //
-// The extension operator is REAL, never faked through a restriction: the bands plane's MODWT-MRA
-// SYNTHESIS (the additive reconstruction `x = ΣD_j + A`) IS the
-// extension — a fine detail band synthesizes UP into a coarse coface (a coarse-block coefficient), and the
-// check reads whether the fine cells AGREE on the coarse coefficient they jointly produce. Under real scale
-// separation every fine band is ZERO-MEAN over a coarse block, so the bands co-extend to the same coarse
-// read (0). A band that LEAKS coarse energy pushes its block coefficient off the others — a co-obstruction
-// localized to that coface. {@link bandSynthesisCoRestrictions} builds this from the MODWT-MRA output.
+// The extension operator is REAL, never faked through a restriction: the coupling plane's directed
+// transfer-entropy FLOW carries a Helmholtz-Hodge decomposition, and its ROTATIONAL part (the circulation
+// around a cycle) IS the extension — the flow synthesizes UP into the triangle cofaces as a per-cycle
+// circulation, and the check reads whether the flow's two Hodge parts AGREE on the circulation they jointly
+// carry there. A flow that reduces to a lead-lag POTENTIAL is curl-free, so both parts read circulation 0 on
+// every triangle and co-extend (0). A residual circulation pushes the rotational part off the gradient's 0 —
+// a co-obstruction localized to that cycle, the irreducible coupling. `teFlowHodgeCoRestrictions` (te-hodge)
+// builds this from a MeshCoupling's TE matrix.
 //
 // The SAME cautions ride (self-dual): (a) value lives in ENGINEERED CO-OVERLAPS — faces with disjoint
 // codomains share no coface, a VACUOUS 0, flagged never false-co-glued; (b) the extensions are
-// NON-LIPSCHITZ (wavelet synthesis is no metric-distortion bound), so the radius reads as a DISAGREEMENT
+// NON-LIPSCHITZ (the circulation is no metric-distortion bound), so the radius reads as a DISAGREEMENT
 // SIGNAL, `signalKind` says so; no caller may read it as a Lipschitz guarantee.
 
 /**
@@ -688,71 +689,4 @@ export function kiCoConsistency(
       ? { note: "no pair shares a coface co-overlap — disjoint flows, a vacuous 0 (caution a)." }
       : {}),
   };
-}
-
-// ── an ENGINEERED co-overlap over the MODWT-MRA synthesis (caution a, the dual made concrete) ──────
-
-/**
- * The MODWT-MRA SYNTHESIS output — the additive multi-resolution decomposition the bands sidecar produces
- * (bands_sidecar.py `modwt_mra`): the detail bands fine→coarse plus the coarse smooth, with the exact
- * reconstruction `x = ΣD_j + A`. This IS the extension operator's substrate — each detail band synthesizes
- * UP into a coarse coface (the {@link bandSynthesisCoRestrictions} builder reuses it, never re-derives it).
- */
-export interface ModwtMra {
-  /** detail bands fine→coarse (D1..Dk); each length N — the maximal-overlap (undecimated) detail bands. */
-  readonly details: readonly (readonly number[])[];
-  /** the coarse smooth A_k (length N) — the coarse coefficient carrier the details must not disturb. */
-  readonly smooth: readonly number[];
-}
-
-export interface BandSynthesisOptions {
-  /** the coarse coface grain — how many samples each coarse block spans (default: ⌈N/4⌉ ⇒ ~4 cofaces). */
-  readonly blockSize?: number;
-  /** weight each band's coface coefficient by `√(energy fraction)` (Parseval scale-weight) — off by default. */
-  readonly energyWeight?: boolean;
-}
-
-/**
- * Build the cosheaf co-restrictions from a REAL MODWT-MRA synthesis — the engineered coface-redundancy
- * (caution a), the dual of {@link stratificationRestrictions}. The coface stalk is the COARSE-block partition
- * `c{0..m}`; each detail band `D{j}` is a FACE that EXTENDS up into every block via the synthesis operator,
- * its per-block value = the coarse read of the band's synthesis over the block (the BLOCK MEAN). Under real
- * scale separation every detail band is ZERO-MEAN over a coarse block, so all bands co-extend to the same
- * coarse coefficient (~0) and the radius is ~0 (they co-extend). A band that LEAKS coarse energy (a nonzero
- * block mean where the others sit at 0) pushes its coefficient off the others and the radius goes positive,
- * localized to the offending block.
- *
- * Returns `{ stalk, coRestrictions }` ready for {@link kiCoConsistency}. With fewer than two detail bands
- * (or an empty signal) the faces share no binding coface and the read is a VACUOUS 0.
- */
-export function bandSynthesisCoRestrictions(mra: ModwtMra, opts: BandSynthesisOptions = {}): {
-  stalk: CofaceStalk; coRestrictions: PlaneCoRestriction[];
-} {
-  const n = mra.smooth.length;
-  const bs = Math.max(1, opts.blockSize ?? Math.max(1, Math.floor(n / 4)));
-  const nBlocks = n === 0 ? 0 : Math.ceil(n / bs);
-  const cofaces = Array.from({ length: nBlocks }, (_, c) => `c${c}`);
-
-  // per-band Parseval energy (variance ≈ detail energy), normalized to the max so weights ride [0,1].
-  const energies = mra.details.map((d) => {
-    if (d.length === 0) return 0;
-    const mean = d.reduce((s, x) => s + x, 0) / d.length;
-    return d.reduce((s, x) => s + (x - mean) * (x - mean), 0) / d.length;
-  });
-  const maxE = Math.max(1e-30, ...energies);
-
-  const coRestrictions: PlaneCoRestriction[] = mra.details.map((band, j) => {
-    const value = new Map<string, number>();
-    const w = opts.energyWeight ? Math.sqrt((energies[j] ?? 0) / maxE) : 1;
-    for (let c = 0; c < nBlocks; c++) {
-      const start = c * bs, end = Math.min(n, start + bs);
-      let sum = 0;
-      for (let t = start; t < end; t++) sum += band[t] ?? 0;
-      const mean = end > start ? sum / (end - start) : 0;   // the coarse read = the block MEAN of the band's synthesis
-      value.set(cofaces[c]!, w * mean);
-    }
-    return { plane: `D${j + 1}`, variance: "cosheaf", value };
-  });
-
-  return { stalk: { cofaces }, coRestrictions };
 }

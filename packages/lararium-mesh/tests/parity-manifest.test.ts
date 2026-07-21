@@ -136,6 +136,11 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "the multivariate Gaussian conditional-TE mesh coupling (the hoike's locked keel); py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
   },
   {
+    ts: "te-hodge.ts", py: null, status: "ts-concept-witness",
+    fixtures: [],
+    note: "the coupling plane's own co-consistency — the Helmholtz-Hodge decomposition of the TE flow, read for its circulation (the irreducible coupling). The cohomology rides the TS hull (browser-carried), so no py twin is planned; witnessed in te-hodge.test.ts.",
+  },
+  {
     ts: "transfer-entropy.ts", py: "coupling.R", status: "owed-fixture",
     fixtures: [],
     note: "the discrete conditional-TE keel; coupling.R (RTransferEntropy effective TE + bootstrap null) carries the sidecar twin — the shared fixture remains owed.",
@@ -189,7 +194,7 @@ const MANIFEST: readonly ParityEntry[] = [
 
 /** The numerics name-pattern the census sweeps — a new organ matching this MUST register above. */
 const NUMERICS_PATTERN =
-  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupling|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics)/;
+  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics)/;
 
 describe("the TS↔py parity manifest (the L4 gate)", () => {
   test("CENSUS — every numerics module in mesh/src registers exactly once", () => {

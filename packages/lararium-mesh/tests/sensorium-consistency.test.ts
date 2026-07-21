@@ -1,15 +1,16 @@
 /**
  * sensorium-consistency — the LI (sheaf) consistency-radius: 0 ⟺ the li-planes GLUE, positive ⟺ a
- * localizable OBSTRUCTION over an ENGINEERED overlap (never a vacuous 0), the ki co-consistency stubbed.
+ * localizable OBSTRUCTION over an ENGINEERED overlap (never a vacuous 0); the ki co-consistency FOUNDED, the
+ * dual read, its co-restrictions now built from the TE-flow Hodge circulation (te-hodge.test.ts).
  */
 
 import { describe, test, expect } from "vitest";
 import {
   cosineDistance, jaccardDistance, treeEditDistance,
   consistencyRadius,
-  kiCoConsistency, bandSynthesisCoRestrictions,
+  kiCoConsistency,
   type PlaneRestriction, type ComparisonStalk, type LabeledTree,
-  type PlaneCoRestriction, type CofaceStalk, type ModwtMra,
+  type PlaneCoRestriction, type CofaceStalk,
 } from "../src/sensorium-consistency.js";
 
 // ── the per-plane native pseudometrics ─────────────────────────────────────────────────────────────
@@ -163,59 +164,5 @@ describe("kiCoConsistency — the ki-radius (the dual of consistencyRadius)", ()
   test("REFUSES a sheaf plane — a static section pushed through an extension map is the mirror corruption", () => {
     const bad: PlaneCoRestriction = { plane: "content", variance: "sheaf", value: coval({ c0: 1 }) };
     expect(() => kiCoConsistency([face("D1", { c0: 1 }), bad], coface3)).toThrow(/cosheaf/i);
-  });
-});
-
-// ── the ENGINEERED co-overlap over a REAL MODWT-MRA synthesis (caution a, the dual made concrete) ───
-
-describe("bandSynthesisCoRestrictions — the MODWT-MRA synthesis as the extension operator", () => {
-  test("scale-separated bands (block-zero-mean) CO-EXTEND ⇒ radius 0", () => {
-    // three detail bands, each an alternating ±1 fluctuation → zero-mean over any even block.
-    const alt = (n: number, sign = 1) => Array.from({ length: n }, (_, i) => sign * (i % 2 === 0 ? 1 : -1));
-    const mra: ModwtMra = {
-      details: [alt(8), alt(8, -1), alt(8)],
-      smooth: Array.from({ length: 8 }, () => 5),   // a genuinely coarse (constant) smooth
-    };
-    const { stalk, coRestrictions } = bandSynthesisCoRestrictions(mra, { blockSize: 4 });
-    expect(stalk.cofaces).toEqual(["c0", "c1"]);
-    expect(coRestrictions.map((r) => r.plane)).toEqual(["D1", "D2", "D3"]);
-    expect(coRestrictions.every((r) => r.variance === "cosheaf")).toBe(true);
-    const k = kiCoConsistency(coRestrictions, stalk);
-    expect(k.vacuous).toBe(false);
-    expect(k.radius).toBeCloseTo(0, 12);
-    expect(k.coExtends).toBe(true);
-  });
-
-  test("a band that LEAKS coarse energy into one block ⇒ radius positive, localized to that coface", () => {
-    const alt = (n: number) => Array.from({ length: n }, (_, i) => (i % 2 === 0 ? 1 : -1));
-    // D3's second block carries a DC offset (+2 everywhere) — it leaks coarse energy into c1.
-    const leaky = [...alt(4), 2, 2, 2, 2];
-    const mra: ModwtMra = {
-      details: [alt(8), alt(8), leaky],
-      smooth: Array.from({ length: 8 }, () => 5),
-    };
-    const { stalk, coRestrictions } = bandSynthesisCoRestrictions(mra, { blockSize: 4 });
-    const k = kiCoConsistency(coRestrictions, stalk);
-    expect(k.radius).toBeGreaterThan(0);
-    expect(k.coExtends).toBe(false);
-    expect(k.offendingCoface).toEqual(["c1"]);
-    expect(k.signalKind).toBe("disagreement-signal");
-  });
-
-  test("a single detail band ⇒ no binding pair ⇒ a VACUOUS 0 (no engineered coface-redundancy)", () => {
-    const mra: ModwtMra = { details: [[1, -1, 1, -1]], smooth: [0, 0, 0, 0] };
-    const { stalk, coRestrictions } = bandSynthesisCoRestrictions(mra, { blockSize: 2 });
-    const k = kiCoConsistency(coRestrictions, stalk);
-    expect(k.vacuous).toBe(true);
-    expect(k.radius).toBe(0);
-    expect(k.coExtends).toBe(false);
-  });
-
-  test("an empty signal ⇒ empty coface stalk ⇒ a VACUOUS 0", () => {
-    const { stalk, coRestrictions } = bandSynthesisCoRestrictions({ details: [], smooth: [] });
-    expect(stalk.cofaces).toEqual([]);
-    const k = kiCoConsistency(coRestrictions, stalk);
-    expect(k.vacuous).toBe(true);
-    expect(k.radius).toBe(0);
   });
 });
