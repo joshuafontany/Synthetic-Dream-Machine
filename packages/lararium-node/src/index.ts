@@ -3,7 +3,7 @@ export { LARES_ROOT, REPO_ROOT, bagsRoot, laresMemesRoot } from "./node-host.js"
 export {
   larHome, larDataDir, larIdentityDir, larProjectionDir,
   larHarvestDir, larHarvestStageDir, larRuntimeDir, larStructurePalaceDir, larFormPalaceDir,
-  larMempalaceDir, larContentDir, larMeshPalaceDir, larCorpusDir, corpusInstanceDir,
+  larMempalaceDir, larContentDir, larMeshPalaceDir, scratchSensoriumDir, scratchSensoriumInstanceDir,
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
   larDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
   memorySensoriumDir, memorySensoriumLenses, sensoriumLenses, sensoriumNames, sensoriumDir,
@@ -94,20 +94,20 @@ export type { PlaneReader, CohereRead, ReadCohereOptions, CohereContext } from "
 export { readJing } from "./sensorium-square.js";
 export type { JingRead, LobeRoundTrip, ReadJingOptions } from "./sensorium-square.js";
 
-// The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
+// The ephemeral astral multipalace lifecycle (the `sensorium` noun-verb tree).
 export {
-  newCorpusId, listCorpora, openCorpus, queryCorpus, keepSensorium,
-  dissolveCorpus, dissolveAll, listOrphans, reapOrphans, runCorpus,
-  corpusTeardownDirs, defaultCorpusIngest, defaultCorpusSearch,
-} from "./sense-corpus.js";
+  newSensoriumId, listSensoria, openSensorium, querySensorium, keepSensorium,
+  dissolveSensorium, dissolveAllSensoria, listOrphans, reapOrphans, runSensorium,
+  sensoriumTeardownDirs, defaultSensoriumIngest, defaultSensoriumSearch,
+} from "./sense-sensorium.js";
 export { PETNAMES_FILE, listPetNames, attachPetName, proposePetName, acceptPetName } from "./sensorium-petnames.js";
 export type { PetName, OperatorNaming, ProjectionNaming } from "./sensorium-petnames.js";
 export type {
-  CorpusLifecycle, CorpusIngest, CorpusSearch, OpenCorpusOptions, OpenCorpusResult,
-  QueryCorpusResult, KeepResult, DissolveResult, RunCorpusOptions, RunCorpusResult,
-} from "./sense-corpus.js";
+  SensoriumLifecycle, SensoriumIngest, SensoriumSearch, OpenSensoriumOptions, OpenSensoriumResult,
+  QuerySensoriumResult, KeepResult, DissolveResult, RunSensoriumOptions, RunSensoriumResult,
+} from "./sense-sensorium.js";
 
-// The stream compose_palace seam — generalize the corpus lifecycle to ANY StreamAdapter's frames.
+// The stream compose_palace seam — generalize the sensorium lifecycle to ANY StreamAdapter's frames.
 export { composeStreamSensorium, defaultStreamPlaneSink } from "./sense-stream.js";
 export type { ComposeStreamOptions } from "./sense-stream.js";
 

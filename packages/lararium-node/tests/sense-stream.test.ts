@@ -1,5 +1,5 @@
 /**
- * sense-stream — node wiring for generic stream sensing. Verifies batch=corpus-run
+ * sense-stream — node wiring for generic stream sensing. Verifies batch=sensorium-run
  * delegation (text-batch over a path) and the direct-signal frame-driver path (a custom sink), both
  * without touching python.
  */
@@ -9,7 +9,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { textStreamAdapter, type PlaneSink, type StreamAdapter, type StreamFrame } from "@lararium/mesh";
 import { composeStreamSensorium } from "../src/sense-stream.js";
-import type { CorpusIngest } from "../src/sense-corpus.js";
+import type { SensoriumIngest } from "../src/sense-sensorium.js";
 
 let dir: string;
 let src: string;
@@ -21,11 +21,11 @@ beforeEach(() => {
 });
 afterEach(() => { try { rmSync(dir, { recursive: true, force: true }); } catch { /* ignore */ } });
 
-describe("composeStreamSensorium — batch = the existing corpus run", () => {
-  test("a text-batch adapter over a path delegates to the corpus ingest", () => {
-    const fakeIngest: CorpusIngest = ({ sourcePath }) => {
-      expect(sourcePath).toBe(src); // the path source threaded through to the corpus run
-      return { drawers: 3, structures: 2, bands: 5, forms: 4, note: "fake-corpus-run" };
+describe("composeStreamSensorium — batch = the existing sensorium run", () => {
+  test("a text-batch adapter over a path delegates to the text-cloud ingest", () => {
+    const fakeIngest: SensoriumIngest = ({ sourcePath }) => {
+      expect(sourcePath).toBe(src); // the path source threaded through to the sensorium run
+      return { drawers: 3, structures: 2, bands: 5, forms: 4, note: "fake-sensorium-run" };
     };
     const out = composeStreamSensorium({
       adapter: textStreamAdapter(),
@@ -40,8 +40,8 @@ describe("composeStreamSensorium — batch = the existing corpus run", () => {
     expect(out.structure).toBe(2); // r.structures
     expect(out.bands).toBe(5); // r.bands
     expect(out.bandsDerived).toBe(true);
-    expect(out.note).toContain("batch=corpus-run");
-    expect(out.note).toContain("fake-corpus-run");
+    expect(out.note).toContain("batch=sensorium-run");
+    expect(out.note).toContain("fake-sensorium-run");
   });
 });
 
@@ -98,7 +98,7 @@ describe("composeStreamSensorium — the direct-signal / custom-sink frame drive
       sensoriumRoot: dir,
       sink,
     });
-    expect(out.content).toBe(3); // routed through the frame driver, not the corpus run
-    expect(out.note).not.toContain("batch=corpus-run");
+    expect(out.content).toBe(3); // routed through the frame driver, not the sensorium run
+    expect(out.note).not.toContain("batch=sensorium-run");
   });
 });

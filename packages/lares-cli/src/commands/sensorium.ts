@@ -1,34 +1,34 @@
 /**
- * `lares corpus` — the ephemeral astral MULTIPALACE (the `docker run --rm` of memory).
+ * `lares sensorium` — the ephemeral astral MULTIPALACE (the `docker run --rm` of memory).
  *
- * A noun-verb tree over scratch mempalace instances under `~/.lares/.corpus/<id>/`: open a corpus,
+ * A noun-verb tree over scratch mempalace instances under `<cache>/scratch/sensoriums/<id>/`: open a sensorium,
  * ingest a path, query it, then let it DISSOLVE — or retain it through `sensorium keep`. `run` is ephemeral-DEFAULT
  * (open → ingest → analyze → dissolve on exit, success OR error); the deep ingest (bands · structure
  * · form) is the documented S1–S3 seam, the lifecycle + store + commands are wired solid in S0.
  *
- * The lifecycle logic lives ONCE in @lararium/node (sense-corpus.ts); this command is a thin
+ * The lifecycle logic lives ONCE in @lararium/node (sense-sensorium.ts); this command is a thin
  * dispatch + render shim. The examples-first help strings here are the SINGLE SOURCE the design meme
  * mirrors (the heleuma docs⇄help drift gate reads this anchor).
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/corpus
+ * Meme: lar:///ha.ka.ba/lares/api/lares/sensorium
  */
 
 import {
-  runCorpus, openCorpus, queryCorpus, listCorpora, keepSensorium,
-  dissolveCorpus, dissolveAll, reapOrphans, listOrphans,
+  runSensorium, openSensorium, querySensorium, listSensoria, keepSensorium,
+  dissolveSensorium, dissolveAllSensoria, reapOrphans, listOrphans,
   acceptPetName, attachPetName, listPetNames, proposePetName, sensoriumDir, sensoriumNames,
 } from "@lararium/node";
 import { emit } from "../render.js";
 import { renderCommandHelp } from "../command-help.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-/** `corpus run <path> [-- <analysis>] [--keep] [--name <n>]` — ephemeral-default open/ingest/dissolve. */
+/** `sensorium run <path> [-- <analysis>] [--keep] [--name <n>]` — ephemeral-default open/ingest/dissolve. */
 async function runVerb(args: ParsedArgs): Promise<number> {
   const path = args.positional[1];
   if (!path) { console.error("usage: lares sensorium run <path> [-- <analysis>] [--keep]"); return 2; }
   const analysis = args.positional.slice(2).join(" ").trim() || undefined;
   const keep = args.flags["keep"] === true;
-  const res = await runCorpus({ sourcePath: path, ...(args.options["name"] ? { name: args.options["name"] } : {}), ...(analysis ? { analysis } : {}), keep });
+  const res = await runSensorium({ sourcePath: path, ...(args.options["name"] ? { name: args.options["name"] } : {}), ...(analysis ? { analysis } : {}), keep });
   emit(args, {
     ok: true,
     data: { mode: "run", ...res },
@@ -49,11 +49,11 @@ async function runVerb(args: ParsedArgs): Promise<number> {
   return 0;
 }
 
-/** `corpus open <path> [--name <n>]` — spin up + ingest, leave LIVE, print the corpus-id. */
+/** `sensorium open <path> [--name <n>]` — spin up + ingest, leave LIVE, print the sensorium id. */
 function openVerb(args: ParsedArgs): number {
   const path = args.positional[1];
   if (!path) { console.error("usage: lares sensorium open <path> [--name <n>]"); return 2; }
-  const { id, dir, manifest } = openCorpus({ sourcePath: path, ...(args.options["name"] ? { name: args.options["name"] } : {}) });
+  const { id, dir, manifest } = openSensorium({ sourcePath: path, ...(args.options["name"] ? { name: args.options["name"] } : {}) });
   emit(args, {
     ok: true,
     data: { mode: "open", id, dir, manifest },
@@ -72,12 +72,12 @@ function openVerb(args: ParsedArgs): number {
   return 0;
 }
 
-/** `corpus query <id> <kw...>` — search one live corpus. */
+/** `sensorium query <id> <kw...>` — search one live sensorium. */
 async function queryVerb(args: ParsedArgs): Promise<number> {
   const id = args.positional[1];
   const kw = args.positional.slice(2).join(" ").trim();
   if (!id || !kw) { console.error("usage: lares sensorium query <id> <keywords...>"); return 2; }
-  const res = await queryCorpus(id, kw);
+  const res = await querySensorium(id, kw);
   emit(args, {
     ok: res.found,
     ...(res.found ? {} : { error: { code: "not-found", message: `no live sensorium "${id}"`, hint: "run `lares sensorium ls`" } }),
@@ -91,9 +91,9 @@ async function queryVerb(args: ParsedArgs): Promise<number> {
   return res.found ? 0 : 3;
 }
 
-/** `corpus ls` — the live corpus sensoria. */
+/** `sensorium ls` — the live sensorium sensoria. */
 function lsVerb(args: ParsedArgs): number {
-  const rows = listCorpora();
+  const rows = listSensoria();
   const orphans = listOrphans();
   emit(args, {
     ok: true,
@@ -110,7 +110,7 @@ function lsVerb(args: ParsedArgs): number {
   return 0;
 }
 
-/** `corpus dissolve <id|--all|--orphans>` — idempotent removal (already-gone = ok). */
+/** `sensorium dissolve <id|--all|--orphans>` — idempotent removal (already-gone = ok). */
 function dissolveVerb(args: ParsedArgs): number {
   if (args.flags["orphans"] === true) {
     const reaped = reapOrphans();
@@ -118,13 +118,13 @@ function dissolveVerb(args: ParsedArgs): number {
     return 0;
   }
   if (args.flags["all"] === true) {
-    const ids = dissolveAll();
+    const ids = dissolveAllSensoria();
     emit(args, { ok: true, data: { mode: "dissolve", scope: "all", dissolved: ids }, human: () => console.log(`lares sensorium dissolve --all — dissolved ${ids.length} sensorium instance(s)`) });
     return 0;
   }
   const id = args.positional[1];
   if (!id) { console.error("usage: lares sensorium dissolve <id> | --all | --orphans"); return 2; }
-  const res = dissolveCorpus(id);
+  const res = dissolveSensorium(id);
   // Idempotent: an already-gone instance is a no-op success (ok:true).
   emit(args, {
     ok: true,

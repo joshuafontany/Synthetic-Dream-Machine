@@ -9,7 +9,7 @@
  *   (a) DERIVED — the session's own recorded cwd (its first-line `cwd`, the same row the wing
  *       law reads) sits under a recognized scratch root: the OS tmpdir / `/tmp` (Claude
  *       scratchpads + tmp sandboxes), a `LAR_ROOT` sandbox (the harness/staged-instance root),
- *       or the corpus-sensorium scratch (`<larHome>/.corpus`). Derive, don't declare — the
+ *       or the sensorium scratch (`<cache>/scratch/sensoriums`). Derive, don't declare — the
  *       designation rides the transcript's own content, never this process's ambience alone
  *       (`LAR_ROOT` names the one sandbox root the deriving process can vouch for).
  *   (b) DECLARED — an explicit marker the operator (or a spawning harness) sets: a
@@ -30,7 +30,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, join, resolve, sep } from "node:path";
-import { larHome } from "@lararium/node";
+import { larCacheHome } from "@lararium/node";
 
 export interface EphemeralVerdict {
   readonly ephemeral: boolean;
@@ -58,7 +58,7 @@ export function transcriptCwd(jsonl: string): string | null {
 
 /** The recognized scratch roots — a session whose recorded cwd sits under one reads ephemeral. */
 export function scratchRoots(): readonly string[] {
-  const roots = [tmpdir(), "/tmp", join(larHome(), ".corpus")];
+  const roots = [tmpdir(), "/tmp", join(larCacheHome(), "scratch", "sensoriums")];
   const larRootEnv = process.env["LAR_ROOT"];
   if (larRootEnv) roots.push(larRootEnv); // a LAR_ROOT sandbox — the isolated-instance tree
   return [...new Set(roots.map((r) => resolve(r)))];

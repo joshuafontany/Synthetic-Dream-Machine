@@ -5,13 +5,13 @@
  * The pure abstraction (the {@link StreamAdapter} / {@link StreamFrame} contract + the
  * {@link composePalace} driver) lives VM-free in @lararium/mesh. THIS module supplies the impure
  * plane bank — the Python sidecars behind the {@link PlaneSink} — and the `composeStreamSensorium` entry
- * that generalizes the ephemeral corpus-sensorium lifecycle to consume frames from any adapter.
+ * that generalizes the ephemeral sensorium lifecycle to consume frames from any adapter.
  *
  * Two paths, by the corpus.md role line ("compose_palace(caps) instantiated EPHEMERALLY over any
  * corpus"):
- *   · BATCH over a PATH source ⇒ the existing corpus run IS the plane application. A text-batch
- *     adapter delegates content · structure · bands · form to {@link defaultCorpusIngest} (the
- *     path-based sidecars are per-file, not per-frame) — "batch = the existing corpus run". The frames
+ *   · BATCH over a PATH source ⇒ the existing sensorium run IS the plane application. A text-batch
+ *     adapter delegates content · structure · bands · form to {@link defaultSensoriumIngest} (the
+ *     path-based sidecars are per-file, not per-frame) — "batch = the existing sensorium run". The frames
  *     are the normalized VIEW that proves the abstraction (verified in @lararium/mesh).
  *   · DIRECT-SIGNAL / LIVE ⇒ the per-plane frame driver over {@link defaultStreamPlaneSink}: the
  *     natively-numeric door — a stream's `signal` frames feed `bands_sidecar analyze --signal` +
@@ -19,7 +19,7 @@
  *     NEXT adapter (a non-text on-box stream) builds against; the content/structure planes on the live
  *     path stay a documented seam (a numeric stream carries neither).
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/corpus#the-caps
+ * Meme: lar:///ha.ka.ba/lares/api/lares/sensorium#the-caps
  */
 
 import { existsSync, writeFileSync, rmSync } from "node:fs";
@@ -28,7 +28,7 @@ import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { resolveBandsSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
 import { composePalace, freeEnergy, forecastEws, type PalaceComposition, type PlaneSink, type StreamAdapter, type StreamFrame } from "@lararium/mesh";
-import { defaultCorpusIngest, type CorpusIngest } from "./sense-corpus.js";
+import { defaultSensoriumIngest, type SensoriumIngest } from "./sense-sensorium.js";
 
 // ── the frame-native signal door — bands + coupling over a raw numeric stream (NDJSON) ────────────
 
@@ -75,13 +75,13 @@ function runSignalSidecar(
  * A leg exists only where the modality genuinely affords it; a leg carried for symmetry is a leg that
  * reports an empty answer as a real one.
  *
- * The bands leg's DERIVED door (text: signal from content embeddings) rides the batch corpus run, NOT
+ * The bands leg's DERIVED door (text: signal from content embeddings) rides the batch sensorium run, NOT
  * this frame sink — so a `derivedFromContent` call returns 0 here (the content path already banded it).
  */
 export function defaultStreamPlaneSink(sensoriumRoot: string): PlaneSink {
   return {
     bands(frames, { derivedFromContent }) {
-      if (derivedFromContent) return 0; // the derived door is the path-based corpus run, not this sink
+      if (derivedFromContent) return 0; // the derived door is the path-based sensorium run, not this sink
       const summary = runSignalSidecar("analyze", frames, sensoriumRoot);
       return summary ? Number(summary["cells"] ?? 0) : 0;
     },
@@ -92,9 +92,9 @@ export function defaultStreamPlaneSink(sensoriumRoot: string): PlaneSink {
   };
 }
 
-// ── the compose_palace entry — generalize the corpus lifecycle to any adapter ─────────────────────
+// ── the compose_palace entry — generalize the sensorium lifecycle to any adapter ─────────────────────
 
-/** A source carrying an on-disk path (the batch-corpus-run fast path reads it). */
+/** A source carrying an on-disk path (the batch-sensorium-run fast path reads it). */
 function pathOf(source: unknown): string | null {
   const p = (source as { path?: unknown } | null)?.path;
   return typeof p === "string" && p.length > 0 ? p : null;
@@ -105,28 +105,28 @@ export interface ComposeStreamOptions<Raw> {
   readonly adapter: StreamAdapter<Raw>;
   /** The raw source the adapter ingests. */
   readonly source: Raw;
-  /** The scratch palace dir the planes fill (a corpus instance dir, or any writable scratch). */
+  /** The scratch palace dir the planes fill (a sensorium instance dir, or any writable scratch). */
   readonly sensoriumRoot: string;
-  /** Override the plane bank (tests inject a fake; default = the batch corpus run or the numeric door). */
+  /** Override the plane bank (tests inject a fake; default = the batch sensorium run or the numeric door). */
   readonly sink?: PlaneSink;
-  /** Override the batch corpus ingest leg (tests inject a no-python fake). */
-  readonly ingest?: CorpusIngest;
+  /** Override the batch text-cloud ingest leg (tests inject a no-python fake). */
+  readonly ingest?: SensoriumIngest;
 }
 
 /**
- * compose_palace over a stream — the generalized corpus lifecycle. BATCH over a path source delegates
- * to the existing corpus run (batch = corpus run); a direct-signal / live adapter (or one with no
+ * compose_palace over a stream — the generalized sensorium lifecycle. BATCH over a path source delegates
+ * to the existing sensorium run (batch = sensorium run); a direct-signal / live adapter (or one with no
  * path) rides the per-plane frame driver over {@link defaultStreamPlaneSink}. An explicit `sink` always
  * takes the frame-driver path (the test + custom-plane seam).
  */
 export function composeStreamSensorium<Raw>(opts: ComposeStreamOptions<Raw>): PalaceComposition {
   const { adapter, source, sensoriumRoot } = opts;
 
-  // BATCH + a path source + no explicit sink ⇒ the existing corpus run IS the plane application.
+  // BATCH + a path source + no explicit sink ⇒ the existing sensorium run IS the plane application.
   const path = pathOf(source);
   if (adapter.mode === "batch" && path && !opts.sink) {
     const frames = adapter.ingest(source); // the normalized VIEW — proves the abstraction + tallies grain
-    const ingest = opts.ingest ?? defaultCorpusIngest;
+    const ingest = opts.ingest ?? defaultSensoriumIngest;
     const r = ingest({ sourcePath: path, sensoriumRoot });
     return {
       modality: adapter.modality,
@@ -137,7 +137,7 @@ export function composeStreamSensorium<Raw>(opts: ComposeStreamOptions<Raw>): Pa
       bands: r.bands,
       coupling: 0, // a text corpus has no cross-stream coupling; the numeric door carries it
       bandsDerived: true, // text's bands rode the content embeddings (the derived door)
-      note: `batch=corpus-run (${frames.length} frames) · ${r.note}`,
+      note: `batch=sensorium-run (${frames.length} frames) · ${r.note}`,
     };
   }
 
@@ -153,7 +153,7 @@ export function composeStreamSensorium<Raw>(opts: ComposeStreamOptions<Raw>): Pa
  * in-process via the {@link freeEnergy} / {@link forecastEws} core (no extra sidecar spawn, the
  * dependency-light hot path). Graceful: a stream with no direct `signal` (text) returns the
  * composition unchanged (the predictive read lives on the numeric door; text's derived-bands
- * read rides the corpus run). sensorium-machina.md #the-py-r-web.
+ * read rides the sensorium run). sensorium-machina.md #the-py-r-web.
  */
 function attachPredictiveRead(comp: PalaceComposition, frames: readonly StreamFrame[]): PalaceComposition {
   const rows = frames.map((f) => Array.from(f.signal)).filter((r) => r.length > 0);

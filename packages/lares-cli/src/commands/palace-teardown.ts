@@ -15,7 +15,7 @@
  *   - memory            <memory>/{content,structure,form,persistence,mempalace} + the harvest watermark/stage
  *   - mesh              <mesh>/{who,authority,flow} (the federation tree)
  *   - memetic-wikitext  <memetic-wikitext>/{formal,informal} (the co-located peers)
- *   - corpus            every ephemeral .corpus/* scratch instance
+ *   - scratch            every ephemeral scratch sensorium instance
  * The in-tree `<memory>/mempalace` (the paved recall projection) tears WITH `memory`; the guest
  * `~/.mempalace` rides its own lane (guestMempalaceOrgan) and is never in this list.
  *
@@ -29,13 +29,13 @@
  *         lares sense teardown memory --confirm   # tear one, leave the rest standing
  *         lares sense teardown --confirm          # remove every group
  *         lares sense teardown --confirm --force  # remove even under live holders
- *   groups: memory · mesh · memetic-wikitext · corpus   (no group = all)
+ *   groups: memory · mesh · memetic-wikitext · scratch   (no group = all)
  */
 
 import { existsSync, rmSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { larHarvestDir, larHarvestStageDir, larPort } from "../env.js";
-import { palaceOrgans, corpusTeardownDirs, memorySensoriumDir } from "@lararium/node";
+import { palaceOrgans, sensoriumTeardownDirs, memorySensoriumDir } from "@lararium/node";
 import { emit, exitFor } from "../render.js";
 import { livePalaceProcs, type PalaceProc } from "../palace-procs.js";
 import { portHolderPids } from "../port-control.js";
@@ -45,7 +45,7 @@ import type { ParsedArgs } from "../parse-args.js";
 interface Target {
   readonly label: string;
   readonly path:  string;
-  /** The teardown SELECTION unit — a sensorium name (`memory` · `mesh` · `memetic-wikitext`) or `corpus`. */
+  /** The teardown SELECTION unit — a sensorium name (`memory` · `mesh` · `memetic-wikitext`) or `scratch`. */
   readonly group: string;
 }
 
@@ -53,13 +53,13 @@ interface Target {
  * The group a target rides under — the sensorium segment beneath `sensoriums/` (`memory` · `mesh` ·
  * `memetic-wikitext`); the AI-sessions pour idempotency (`harvest*`) rides with `memory`, so a memory
  * re-pave clears the watermark that would otherwise SKIP re-poured turns; everything else falls to the
- * `corpus` scratch bucket. Naming a group tears ONLY that group; naming none tears every group.
+ * `scratch` bucket. Naming a group tears ONLY that group; naming none tears every group.
  */
 function targetGroup(path: string): string {
   const m = /[/\\]sensoriums[/\\]([^/\\]+)/.exec(path);
   if (m && m[1]) return m[1];
   if (/[/\\]harvest(-stage)?$/.test(path)) return "memory";
-  return "corpus";
+  return "scratch";
 }
 
 /**
@@ -92,8 +92,8 @@ const ORGAN_LABEL: Readonly<Record<string, string>> = {
  * Resolve the teardown targets — never an ambient default. The PALACE organs come from the SHARED
  * @lararium/node registry (`palaceOrgans`), the SAME list `lares wake --init` stands up (one
  * enumerator, two consumers, can't drift). Teardown adds its own non-palace idempotency targets
- * (the harvest watermark + stage) AND every ephemeral `.corpus/*` scratch instance, so an
- * interrupted `corpus run` can never leak state past a re-pave.
+ * (the harvest watermark + stage) AND every ephemeral scratch sensorium instance, so an
+ * interrupted `sensorium run` can never leak state past a re-pave.
  */
 /** Is `dir` at or beneath `root`? — path-segment safe, never a bare string-prefix match. */
 function isUnder(dir: string, root: string): boolean {
@@ -117,11 +117,11 @@ function resolveTargets(): Target[] {
   const organs = palaceOrgans()
     .filter((o) => !isUnder(o.dir, memRoot))
     .map((o) => ({ label: ORGAN_LABEL[o.name] ?? o.name, path: o.dir }));
-  const corpus = corpusTeardownDirs().map((dir) => ({ label: `corpus scratch instance (${dir.split(/[/\\]/).pop()})`, path: dir }));
+  const scratch = sensoriumTeardownDirs().map((dir) => ({ label: `scratch sensorium instance (${dir.split(/[/\\]/).pop()})`, path: dir }));
   const raw = [
     { label: "memory sensorium (all planes + worldline KG + .worldline + manifest)", path: memRoot },
     ...organs,
-    ...corpus,
+    ...scratch,
     { label: "harvest watermark (lar_hv idempotency)",        path: larHarvestDir() },
     { label: "harvest stage (normalized transcript copies)",  path: larHarvestStageDir() },
   ];

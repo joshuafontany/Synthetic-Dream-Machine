@@ -6,7 +6,7 @@
  *   $XDG_DATA_HOME/lares    (~/.local/share/lares)  — persistent stores: the `memory` SENSORIUM
  *                                                     (content/structure/form) + the vessel substrate.
  *   $XDG_STATE_HOME/lares   (~/.local/state/lares)  — watermarks: harvest + harvest-stage + projection.
- *   $XDG_CACHE_HOME/lares   (~/.cache/lares)        — ephemeral scratch: corpus sensoriums (swept).
+ *   $XDG_CACHE_HOME/lares   (~/.cache/lares)        — ephemeral scratch: sensoriums (swept).
  *   $XDG_CONFIG_HOME/lares  (~/.config/lares)       — config.json.
  *   $XDG_RUNTIME_DIR/lares  (tmpfs, or os.tmpdir()) — transient spool (+ future sockets/locks/pids).
  *
@@ -56,7 +56,7 @@ export function larStateHome(): string {
               : join(process.env["XDG_STATE_HOME"]?.trim() || join(homedir(), ".local", "state"), "lares");
 }
 
-/** $XDG_CACHE_HOME/lares — ephemeral scratch (corpus sensoriums), safe to sweep. */
+/** $XDG_CACHE_HOME/lares — ephemeral scratch (sensoriums), safe to sweep. */
 export function larCacheHome(): string {
   const root = process.env["LAR_ROOT"];
   return root ? join(root, "cache")
@@ -85,7 +85,7 @@ export function larConfigPath(): string {
 /**
  * The ONE mempalace executable resolver (DRY) — prefer the user-installed CLI at `~/.local/bin`
  * (`mempalace.exe` on win32), fall back to the bare name on PATH. Both the palace-organ setup and the
- * corpus-ingest leg resolve the exe through HERE so the win32 spelling + the local-bin preference never
+ * sensorium-ingest leg resolve the exe through HERE so the win32 spelling + the local-bin preference never
  * fork across call sites.
  */
 export function resolveMempalaceExe(): string {
@@ -306,17 +306,17 @@ export function memeticWikitextInformalDir(): string {
   return join(memeticWikitextSensoriumDir(), "informal");
 }
 
-// ── The ephemeral corpus multipalace (scratch sensoriums) ─────────────────────────────────────────
+// ── The ephemeral sensorium multipalace (scratch sensoriums) ─────────────────────────────────────────
 
-/** The scratch-sensorium root — `<cache>/scratch/sensoriums`. Each `lares corpus` run mints a
+/** The scratch-sensorium root — `<cache>/scratch/sensoriums`. Each `lares sensorium` run mints a
  *  dissolvable child instance below it (ephemeral, sweepable; palace-teardown reaps every child). */
-export function larCorpusDir(): string {
+export function scratchSensoriumDir(): string {
   return join(larCacheHome(), "scratch", "sensoriums");
 }
 
-/** The scratch instance dir for one ephemeral corpus-sensorium, by its id, under {@link larCorpusDir}. */
-export function corpusInstanceDir(id: string): string {
-  return join(larCorpusDir(), id);
+/** The scratch instance dir for one ephemeral sensorium, by its id, under {@link scratchSensoriumDir}. */
+export function scratchSensoriumInstanceDir(id: string): string {
+  return join(scratchSensoriumDir(), id);
 }
 
 // ── The vessel substrate (Automerge Repo — NOT a sensorium) ──────────────────────────────────────

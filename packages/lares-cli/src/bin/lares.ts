@@ -40,7 +40,7 @@ import { cmdWingOf }                  from "../commands/wing-of.js";
 import { cmdSense }                   from "../commands/sense.js";
 import { cmdMempalace }               from "../commands/mempalace.js";
 import { cmdHooks }                   from "../commands/hooks.js";
-import { cmdSensorium }               from "../commands/corpus.js";
+import { cmdSensorium }               from "../commands/sensorium.js";
 import { cmdCleanupDays }             from "../commands/cleanup-days.js";
 import { renderCommandHelp }          from "../command-help.js";
 import {
