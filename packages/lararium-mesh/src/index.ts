@@ -147,6 +147,9 @@ export * from "./vouch-dag.js";
 export * from "./dreamnet-admission.js";
 export * from "./handle-card.js";
 export * from "./handle-book.js";
+// The IoC follow — composeFollow braids the three LOCAL stores (handle-book · petname · circle) into one
+// gesture; the CircleStore seam is local-only, so a follow leaves NO central trace (membership-doctrine).
+export * from "./compose-follow.js";
 export * from "./handle-announce.js";
 export * from "./who-face.js";
 export * from "./who-face-cap.js";

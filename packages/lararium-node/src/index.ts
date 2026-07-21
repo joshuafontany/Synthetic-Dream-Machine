@@ -173,6 +173,10 @@ export type { PersonaGroupRoot } from "./node-vessel-identity.js";
 // The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (never federates) + the PUBLIC
 // own-published-face record (persona → @crossroads glamour). Distinct stores, distinct from the handle-book.
 export { makeNodePersonaPetnameStore, makeNodePublicHandleStore } from "./node-vessel-identity.js";
+
+// The IoC follow — the node-fs LOCAL adapters for the private circle-graph + the recogniser's handle-book.
+// Both under the identity home, 0o600, never federated (the `lares circle` door drives them via composeFollow).
+export { makeNodeCircleStore, loadNodeHandleBook, saveNodeHandleBook } from "./node-circle-store.js";
 // The `bags/@nexus` charter DOC adapter — the antigen roster's authority home read/written on disk (#66).
 export {
   readNexusCharterDoc, writeNexusCharterDoc, renderNexusCharterDoc,

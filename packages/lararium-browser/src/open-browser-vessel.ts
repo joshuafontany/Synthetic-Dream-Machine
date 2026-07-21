@@ -33,7 +33,13 @@ import {
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
   type GenesisCasManifest, type GenesisSeed,
+  type BootInvite, type BootInvitePolicy,
 }                                            from "@lararium/mesh";
+import { runBrowserBootInviteSpend }         from "./browser-boot-invite-burn.js";
+import {
+  makeBrowserCircleStore, browserComposeUnfollow, browserListFollows,
+}                                            from "./browser-circle-store.js";
+import { circlePanelStateArgs }              from "./circle-panel-state.js";
 import {
   MemoryTiddlerStore,
   selectActiveWikiSlug,
@@ -178,6 +184,23 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
    * the founder's `@persona` (membership crosses; @daemon stays sovereign-per-vessel).
    */
   admit?:           DeviceAdmitPayload;
+  /**
+   * A carried TRACELESS boot-invite (membership-doctrine #the-invite) — a sealed, single-use capability the
+   * vessel spends ON BOOT to cross into the Nexus. CARRIED, never fetched (a URL fragment / paste / QR that
+   * never reaches a server); verified OFFLINE against the Nexus seal. WITHHOLD-NEVER-FORGE: a garbled / absent
+   * / expired / already-spent invite does NOT throw and does NOT cross — the vessel founds its own group and
+   * stands at the ANON FLOOR (a correct outcome, never an attack). Single-use is burned LOCALLY (IndexedDB;
+   * NO federated burn-registry). ABSENT (with no invite-only policy) → the vessel crosses on the open setting
+   * exactly as today (the relay/who caps compose when a relay is configured).
+   */
+  bootInvite?:      BootInvite | null;
+  /** The boot-invite policy — `invite-only` REQUIRES a sealed unspent in-date invite to cross (else anon
+   *  floor); `open` crosses with no invite. DEFAULT: `invite-only` when a `bootInvite` is carried, else `open`
+   *  (so today's un-gated crossing is unchanged unless the operator opts into the gate). */
+  bootInvitePolicy?: BootInvitePolicy;
+  /** The Nexus pubkey the carried invite seals — the key its `sig` verifies against. Provisioned OUT-OF-BAND.
+   *  DEFAULT: `relayGatePubKey` (the Nexus this vessel crosses into) ?? this vessel's own DID. */
+  inviteNexusPubkey?: string;
   /** URL of the compiled browser daemon island Worker script. */
   daemonWorkerUrl?: URL;
   /** URL of the compiled browser wiki Worker script. */
@@ -219,6 +242,14 @@ export const DAEMON_SURFACE_ID = "@daemon";
 export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, DaemonVmCore> {
   /** True when a genesis update was detected + merged on this boot (browser substrate). */
   engineUpdated: boolean;
+  /**
+   * True → this boot CROSSED into the Nexus (an OPEN policy, or a sealed unspent invite spent this boot).
+   * False → the vessel WITHHELD the crossing and founded its own group at the ANON FLOOR (garbled / absent /
+   * expired / already-spent invite under an invite-only policy). Either way the vessel booted — a withhold is
+   * a correct outcome, never a throw — and on a withhold NO relay/who cap composed, so NO federated record was
+   * written (the traceless proof).
+   */
+  admittedToNexus: boolean;
   /** Relay a main-thread DOM event to the ACTIVE surface (interactivity RETURN leg) — routes to the @daemon or
    *  the pinned wiki by the live active-surface pointer. */
   sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) => void;
@@ -291,6 +322,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     genesisCasManifest, genesisCasBaseUrl,
     daemonWorkerUrl, workerScriptUrl, onProjection, onCoherence, relayUrl, relayGatePubKey,
     meshLeaf, admit,
+    bootInvite, bootInvitePolicy, inviteNexusPubkey,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
 
@@ -399,6 +431,29 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   }
   const social = bootstrap;   // narrowed (defined past this point)
 
+  // ── The TRACELESS boot-invite gate — spend-on-boot, WITHHOLD-NEVER-FORGE ──────────────────────
+  // Decide whether this boot CROSSES into the Nexus. The vessel ALREADY founded its own group above
+  // (the anon floor is the ground, not a competing state) — the invite only lifts it into the crossing.
+  // The policy DEFAULTS to `open` (today's un-gated crossing) unless the operator carries a `bootInvite`
+  // or names an `invite-only` policy; then a sealed, unspent, in-date, Nexus-signed invite is REQUIRED, or
+  // the vessel WITHHOLDS the crossing (garbled/absent/expired/already-spent → anon floor, never a throw).
+  // The nexus the invite seals: `inviteNexusPubkey` ?? the relay's gate key ?? this vessel's own DID. The
+  // single-use burn lands in this island's OWN IndexedDB (NO federated burn-registry). On a WITHHOLD nothing
+  // burns and — because the relay/who caps below gate on `admittedToNexus` — NO federated record is written.
+  const invitePolicy: BootInvitePolicy =
+    bootInvitePolicy ?? (bootInvite ? { kind: "invite-only" } : { kind: "open" });
+  const inviteNexus = inviteNexusPubkey ?? relayGatePubKey ?? operatorDid;
+  const bootVerdict = await runBrowserBootInviteSpend({
+    idbName, nexusPubkey: inviteNexus, invite: bootInvite ?? null, policy: invitePolicy,
+  });
+  const admittedToNexus = bootVerdict.admitted;
+  if (!admittedToNexus) {
+    console.log(
+      `[lararium-browser] boot-invite WITHHELD (${bootVerdict.refusal ?? "no-invite"}) — founding own group at the ` +
+      `anon floor; no crossing, no federated record written (the invite did not arrive, never an attack).`,
+    );
+  }
+
   // ── The spore crossing — the outbound V3 leaf transport (opt-in via relayUrl) ──────────────
   // When a relay URL is given AND a founding card is cached, compose the platform-blind
   // LarWSClientAdapter and add it to the Repo: the browser dials the node's gate, runs the V3
@@ -410,7 +465,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // can admit it at the operator's-own-device tier. gatePubKey is PROVISIONED out-of-band: for a
   // cross-operator crossing pass the NODE's gate key (relayGatePubKey); absent → own DID (the
   // same-operator leaf, prior behavior). An un-admitted anon dials + fails closed.
-  if (relayUrl && social.contactCard) {
+  // Gated on `admittedToNexus`: a WITHHELD boot founds its own group at the anon floor and composes NO relay
+  // adapter (no crossing, no federated sync) — the traceless outcome.
+  if (relayUrl && social.contactCard && admittedToNexus) {
     const leaf: LeafIdentity = {
       contactCard: social.contactCard,
       peerPubKey:  operatorDid,
@@ -513,6 +570,22 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       requestedBy: "persona",
     });
   };
+  // The default circle the @daemon follow panel paints — the primary system circle seedCirclesDoc plants.
+  const CIRCLE_PANEL_DEFAULT = "following";
+  // Push the live FOLLOW-VIEW INTO the @daemon follow surface (main → local, reactive): main HOLDS the IDB
+  // follow-graph, so it reads the follow-view here + writes it through the `circle-state` worker verb onto the
+  // volatile $:/temp/lares/circles. PRIVATE-all: the graph + petnames NEVER federate, so the temp slot syncs
+  // to no bag. Fired after a follow/unfollow + on @daemon summon. Fire-and-forget (a lost push self-heals on
+  // the next follow/unfollow or summon), mirroring pushPersonaState.
+  const pushCircleState = async (circleId = CIRCLE_PANEL_DEFAULT): Promise<void> => {
+    if (!daemon) return;
+    const follows = await browserListFollows(circleId, idbName);
+    void daemon.placeVerb({
+      verb:        "circle-state",
+      args:        circlePanelStateArgs(circleId, follows),
+      requestedBy: "circle",
+    });
+  };
   // The materialize-fresh path RELOADS a persisted @oracle intact (find-first) or
   // materializes it fresh — never a merge-into-stale reconcile. No engine
   // CID-diverge merge happens at boot, so this stays false (kept for API parity).
@@ -571,7 +644,10 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // handle-card (nym = its own key, glamour = display name) and composes whoFaceCap: resolve the island's WHO
   // board through the deterministic @crossroads address, self-announce, layer it writable so the relay syncs.
   // The identity sibling of the carriage leaf above (WHO ⊥ WHERE, the two-key atom). Absent a relay/gate → [].
-  const whoExtraCaps: CapModule[] = (relayUrl && relayGatePubKey) ? await (async () => {
+  // Gated on `admittedToNexus`: a WITHHELD boot announces NO Handle-card on @crossroads (no deliberate publish
+  // rides the withhold path), so it leaves NO federated trace — the ONLY thing that ever federates stays a
+  // glamour the human consciously posts, never a boot side-effect.
+  const whoExtraCaps: CapModule[] = (relayUrl && relayGatePubKey && admittedToNexus) ? await (async () => {
     const nexusPubkey = relayGatePubKey;
     const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "@crossroads");
     const card = await signHandleCard(
@@ -811,6 +887,33 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         return { verb: "persona-wear", index, rebootRequired: true };
       });
 
+      // ── The FOLLOW surface (the IoC social-graph door) ──────────────────────────
+      // The isomorphic mirror of the persona surface: main holds the IDB follow-graph, so these
+      // verbs DRIVE it (refresh / unfollow) and reflect the fresh state into the @daemon follow
+      // surface via pushCircleState. A projected unfollow click routes here exactly as persona-wear
+      // does. FOLLOWING a NEW nym needs a nym + a self-certifying card (not a projected text field),
+      // so it rides the `lares circle` CLI / the exported browserComposeFollow — never a panel input.
+      // NEVER-FEDERATES: every write lands in the LOCAL IDB circle-graph; no board seam is reachable.
+
+      // circle-refresh — repaint the follow surface from the live IDB graph (idempotent read + push).
+      registry.register("circle-refresh", async (args) => {
+        const circleId = String(args["circle"] ?? CIRCLE_PANEL_DEFAULT) || CIRCLE_PANEL_DEFAULT;
+        void pushCircleState(circleId);
+        const members = await makeBrowserCircleStore(idbName).members(circleId);
+        return { verb: "circle-refresh", circle: circleId, count: members.length, federated: false };
+      });
+
+      // circle-remove — the unfollow (kāpae, remove-wins): drop the row's nym from the circle. LOCAL only;
+      // the handle-book memory stays. The panel's unfollow button carries the row's own nym + circle.
+      registry.register("circle-remove", async (args) => {
+        const nym    = String(args["nym"] ?? "");
+        const circleId = String(args["circle"] ?? CIRCLE_PANEL_DEFAULT) || CIRCLE_PANEL_DEFAULT;
+        if (!nym) throw new Error("circle-remove: `nym` required");
+        const result = await browserComposeUnfollow({ idbName, nym, circleId });
+        void pushCircleState(circleId);
+        return { verb: "circle-remove", ...result };
+      });
+
       // wiki-sense (the supervision reads) — the daemon's supervision READ-verbs over the islands this vessel's pool
       // actually holds. The seams ARE the supervision grant: designation resolves through the pool
       // alone (confused-deputy ward — a name outside the pool fails loud at both ends), and the
@@ -960,6 +1063,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase:            "live",
     engineUpdated,
+    admittedToNexus,
     // The return-leg routes to whichever surface is LIVE-active (read the pointer, never a captured value —
     // the seat routes the next event to whatever holds focus). @daemon → its own worker; else the pinned wiki.
     sendDomEvent: (renderId, eventType, fields) =>
@@ -978,7 +1082,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       });
       // Summoning the @daemon: seed its switcher list + persona multitude with the live state so
       // the projected widgets paint a current view the moment the @daemon becomes the surface.
-      if (surfaceId === DAEMON_SURFACE_ID) { pushSwitcherState(); void pushPersonaState(); }
+      if (surfaceId === DAEMON_SURFACE_ID) { pushSwitcherState(); void pushPersonaState(); void pushCircleState(); }
     },
   };
 }

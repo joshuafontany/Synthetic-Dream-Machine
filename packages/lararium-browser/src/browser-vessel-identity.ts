@@ -40,7 +40,7 @@ const KEY_RECORD = "vessel-key";
 // social bootstrap (the founding floor); the persona-multitude stores mirror the node fs vault's
 // per-index files. Every store bumps the DB version together, so a reboot upgrades additively (the
 // device key + bootstrap survive; the new stores appear empty until a persona founds).
-const IDB_VERSION       = 3;
+const IDB_VERSION       = 4;
 const PERSONA_ROOTS_STORE  = "persona-roots";     // per-index persona-root keypairs (self-sovereign secret)
 const PERSONA_ROSTER_STORE = "persona-roster";    // the EXPLICIT held-root record (never a keys()-scan)
 const ACTIVE_PERSONA_STORE = "active-persona";    // the worn-mask pointer (one handle-index)
@@ -50,6 +50,10 @@ const ANCHOR_ROSTER_STORE  = "anchor-roster";     // the EXPLICIT anchored-index
 // own-published-face record. Per-index, keyed by `h${N}` like the persona-root slots.
 const PERSONA_PETNAME_STORE      = "persona-petnames";        // handleIndex → the human's PRIVATE label
 const PERSONA_PUBLIC_HANDLE_STORE = "persona-public-handles"; // handleIndex → the vessel's OWN published face
+// v4 additive stores (all causal-island-LOCAL, never federated):
+export const BOOT_INVITE_BURN_STORE = "boot-invite-burned";  // burned invite-id → 1 (single-use, local burn)
+export const CIRCLE_STORE           = "circles-follow";      // circleId → nym[] (the IoC follow-graph, private)
+export const HANDLE_BOOK_STORE      = "handle-book";         // "snapshot" → HandleBookSnapshot (others' nyms + labels)
 const ROSTER_RECORD        = "roster";            // the single key both roster stores write under
 const ACTIVE_RECORD        = "active";            // the single key the selector writes under
 
@@ -89,6 +93,12 @@ export function openVesselIdb(idbName: string): Promise<IDBDatabase> {
       // human labels one / publishes a glamour.
       if (!db.objectStoreNames.contains(PERSONA_PETNAME_STORE))       db.createObjectStore(PERSONA_PETNAME_STORE);
       if (!db.objectStoreNames.contains(PERSONA_PUBLIC_HANDLE_STORE)) db.createObjectStore(PERSONA_PUBLIC_HANDLE_STORE);
+      // v4 additive: the traceless boot-invite's LOCAL burn-set (browser twin of node's boot-invite-burned
+      // ledger) + the IoC follow's private stores (circle-graph + handle-book). All causal-island-LOCAL —
+      // none federate. A v3 DB gains them empty; nothing is spent/followed until the vessel acts.
+      if (!db.objectStoreNames.contains(BOOT_INVITE_BURN_STORE)) db.createObjectStore(BOOT_INVITE_BURN_STORE);
+      if (!db.objectStoreNames.contains(CIRCLE_STORE))           db.createObjectStore(CIRCLE_STORE);
+      if (!db.objectStoreNames.contains(HANDLE_BOOK_STORE))      db.createObjectStore(HANDLE_BOOK_STORE);
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror   = () => reject(req.error);

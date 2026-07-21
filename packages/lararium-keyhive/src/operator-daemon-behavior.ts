@@ -23,6 +23,7 @@ import {
   makeAddBagReactor, makeRemoveBagReactor, makeEpochBagReactor, makeRotateRecipeReactor,
   makeSwitcherStateReactor,
   makePersonaStateReactor,
+  makeCircleStateReactor,
 } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
@@ -123,6 +124,14 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // carries the PRIVATE pet-names — it stays in the temp slot, syncing to no bag. A
       // headless node daemon registers this verb but never receives a push (browser-only).
       registry.register("persona-state", makePersonaStateReactor(ctx.tw5));
+
+      // circle-state — the @daemon follow surface's IN path: main (which holds the IDB
+      // follow-graph) pushes the live follow-view for a circle and this writes the LOCAL,
+      // volatile $:/temp/lares/circles tiddler so the projected surface re-renders. The
+      // tiddler carries the PRIVATE follow-graph + petnames — it stays in the temp slot,
+      // syncing to no bag (the never-federates wall). A headless node daemon registers this
+      // verb but never receives a push (browser-only).
+      registry.register("circle-state", makeCircleStateReactor(ctx.tw5));
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
       // in @daemon + $:/tags/Alert into the operator's pinned VM.

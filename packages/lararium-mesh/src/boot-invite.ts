@@ -27,7 +27,8 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-invite
  */
 
-import { canonicalJsonBytes, hex } from "./crypto.js";
+import * as ed25519 from "@noble/ed25519";
+import { canonicalJsonBytes, hex, hexToBytes } from "./crypto.js";
 
 /** The domain a boot-invite signs over. A signature is meaningless without the domain it was made in. */
 export const BOOT_INVITE_DOMAIN = "lar-boot-invite/v1" as const;
@@ -75,6 +76,17 @@ export async function signBootInvite(
 /** A stable fingerprint of an invite — the LOCAL burn key, so one invite spends exactly once on this island. */
 export function bootInviteId(inv: BootInvite): string {
   return hex(bootInviteBytes(inv));
+}
+
+/**
+ * The ready-made OFFLINE seal verifier — an Ed25519 check over @noble/ed25519 (browser-shippable, the same
+ * library the handle-card and antigen seals ride). Pass it as `decideBootInvite.verify` from EITHER platform:
+ * the browser needs no node crypto and no added dep, and the node burn may adopt it too. False on any
+ * malformed input — a torn signature reads as withhold, never a throw.
+ */
+export async function verifyBootInviteSig(bytes: Uint8Array, sigHex: string, keyHex: string): Promise<boolean> {
+  try { return await ed25519.verifyAsync(hexToBytes(sigHex), bytes, hexToBytes(keyHex)); }
+  catch { return false; }
 }
 
 /** How the boot answers "may this vessel cross into the alpha?". The operator turns it — code never bakes it in. */
