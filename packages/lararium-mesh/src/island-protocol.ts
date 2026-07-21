@@ -494,6 +494,22 @@ export interface DaemonMsg_VerifyRequest {
   edge?: DeviceDelegationTiddler;
 }
 
+/**
+ * PeerClass — how the admitted inbound peer relates to THIS operator's identity, the signal the
+ * node sharePolicy reads to arm the federatable-own/private-own self-slot split.
+ *   · "same-operator" — the peer proved it carries THIS operator's identity: it holds cap=admin on
+ *     @daemon (only this operator's PersonaGroup does), OR it presented a device-delegation edge that
+ *     chains to this hearth's PINNED persona-root (signerDid). Either proof binds the peer to the
+ *     operator's own device-fleet → it keeps FULL device sync (every private plane crosses).
+ *   · "cross-operator" — the peer carries a DIFFERENT operator identity (a cabal-mate / another kahu):
+ *     it reaches ONLY the deterministically-federatable-own planes, never a private-own plane.
+ *
+ * FAIL-CLOSED law: the CLASS a verdict cannot positively vouch as same-operator is `undefined` here;
+ * the sharePolicy treats an absent/unresolved class as the STRICTER cross-operator class. Only the two
+ * unforgeable proofs above (admin@daemon · pinned-root device-edge) earn "same-operator".
+ */
+export type PeerClass = "same-operator" | "cross-operator";
+
 /** Island → vessel: the keyhive verdict for a verify-request. */
 export interface DaemonMsg_VerifyResult {
   schema_version: ProtocolVersion;
@@ -510,6 +526,12 @@ export interface DaemonMsg_VerifyResult {
    * Advisory until the enforcement flip (D) folds it into `ok`.
    */
   proofVerified?: boolean;
+  /**
+   * The peer's relation to this operator's identity (#the self-slot split). Set only on an `ok` verdict
+   * that PROVES same-operator (admin@daemon or a pinned-root device-edge). Absent → the host fails closed
+   * to cross-operator (federatable-own planes only). See PeerClass.
+   */
+  peerClass?: PeerClass;
 }
 
 // ---------------------------------------------------------------------------
@@ -1122,6 +1144,7 @@ export function mkDaemonVerifyResult(opts: {
   identifier?:    string;
   reason?:        string;
   proofVerified?: boolean;
+  peerClass?:     PeerClass;
 }): DaemonMsg_VerifyResult {
   const msg: DaemonMsg_VerifyResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
@@ -1132,6 +1155,7 @@ export function mkDaemonVerifyResult(opts: {
   if (opts.identifier    !== undefined) msg.identifier    = opts.identifier;
   if (opts.reason        !== undefined) msg.reason        = opts.reason;
   if (opts.proofVerified !== undefined) msg.proofVerified = opts.proofVerified;
+  if (opts.peerClass     !== undefined) msg.peerClass     = opts.peerClass;
   return msg;
 }
 
@@ -1314,5 +1338,5 @@ export interface AuthVerifierSeam {
     proof?: AuthProofWire,
     /** OPTIONAL device-delegation edge (Seam B) — admits an operator-device-admitted peer. */
     edge?: DeviceDelegationTiddler,
-  ): Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }>;
+  ): Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean; peerClass?: PeerClass }>;
 }

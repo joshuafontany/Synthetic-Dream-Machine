@@ -24,11 +24,12 @@ import {
 
 // ── Stub AuthVerifierSeam ─────────────────────────────────────────────────────
 
-type StubVerifyResult = { ok: true } | { ok: false; reason: string };
+type StubVerifyResult = { ok: true; peerClass?: "same-operator" | "cross-operator" } | { ok: false; reason: string };
 
 // Mirrors the daemon island's verify-proxy: an `ok` verdict carries the peer's
 // Identifier hex (receiveContactCard's id), which the gate keys its sharePolicy
-// map on; a denial carries only the reason.
+// map on, PLUS the self-slot PeerClass the keyholder vouches; a denial carries
+// only the reason.
 function makeStubSeam(opts: {
   receiveResult: { id: string };
   verifyResult:  StubVerifyResult;
@@ -36,7 +37,7 @@ function makeStubSeam(opts: {
   return {
     async verify() {
       return opts.verifyResult.ok
-        ? { ok: true, identifier: opts.receiveResult.id }
+        ? { ok: true, identifier: opts.receiveResult.id, ...(opts.verifyResult.peerClass ? { peerClass: opts.verifyResult.peerClass } : {}) }
         : { ok: false, reason: opts.verifyResult.reason };
     },
   };
@@ -194,6 +195,36 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
     // socket is in clients set after auth
     expect(gate.clients.size).toBe(1);
 
+    ws.close();
+  });
+
+  test("a same-operator verdict surfaces via getClassForSocket (the self-slot signal reaches the sharePolicy)", async () => {
+    const connectionSeen = new Promise<void>((resolve) => gate.once("connection", () => resolve()));
+    gate.arm(makeStubSeam({ receiveResult: { id: "0xaabbcc" }, verifyResult: { ok: true, peerClass: "same-operator" } }));
+
+    const ws   = await connect(serverInfo.port);
+    const chal = await nextMessage(ws) as { nonce: string };
+    ws.send(JSON.stringify(mkLarAuth("valid-card-json", chal.nonce, "stub-sig")));
+    await nextMessage(ws);          // auth-ok
+    await connectionSeen;
+
+    const admitted = [...gate.clients][0]!;
+    expect(gate.getClassForSocket(admitted)).toBe("same-operator");
+    ws.close();
+  });
+
+  test("a verdict with NO peerClass surfaces undefined (fail-closed → cross-operator at the sharePolicy)", async () => {
+    const connectionSeen = new Promise<void>((resolve) => gate.once("connection", () => resolve()));
+    gate.arm(makeStubSeam({ receiveResult: { id: "0xaabbcc" }, verifyResult: { ok: true } }));
+
+    const ws   = await connect(serverInfo.port);
+    const chal = await nextMessage(ws) as { nonce: string };
+    ws.send(JSON.stringify(mkLarAuth("valid-card-json", chal.nonce, "stub-sig")));
+    await nextMessage(ws);          // auth-ok
+    await connectionSeen;
+
+    const admitted = [...gate.clients][0]!;
+    expect(gate.getClassForSocket(admitted)).toBeUndefined();
     ws.close();
   });
 

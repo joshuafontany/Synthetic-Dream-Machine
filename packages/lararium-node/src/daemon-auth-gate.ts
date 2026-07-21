@@ -46,7 +46,7 @@ import {
   mkLarChallenge, mkLarAuthOk, mkLarAuthDenied, isLarAuthMsg,
   DAEMON_BAG_ID,
 } from "@lararium/mesh";
-import type { AuthVerifierSeam } from "@lararium/mesh";
+import type { AuthVerifierSeam, PeerClass } from "@lararium/mesh";
 
 const AUTH_TIMEOUT_MS       = 5_000;
 const MAX_PENDING           = 50;     // max concurrent unauthenticated connections
@@ -77,6 +77,10 @@ export class DaemonAuthGate extends EventEmitter {
   private _pending = 0;
   /** socket → Keyhive Identifier hex (set on successful auth). */
   private readonly socketToIdentifier = new WeakMap<WebSocket, string>();
+  /** socket → the self-slot PeerClass the keyholder vouched (#the self-slot split). Set on a
+   *  same-operator admit; ABSENT for any admit the worker could not positively vouch — the
+   *  sharePolicy reads that absence as the stricter cross-operator class (fail-closed). */
+  private readonly socketToClass = new WeakMap<WebSocket, PeerClass>();
 
   constructor(realWss: WSSType) {
     super();
@@ -106,6 +110,16 @@ export class DaemonAuthGate extends EventEmitter {
     return this.socketToIdentifier.get(socket);
   }
 
+  /**
+   * Look up the self-slot PeerClass the keyholder vouched for an authenticated socket. Call it
+   * (deferred one microtask, ALONGSIDE getIdentifierForSocket) from the "peer-candidate" listener to
+   * key the sharePolicy's class map. `undefined` — the worker admitted the peer but could not positively
+   * vouch it same-operator — reads as the stricter cross-operator class at the sharePolicy (fail-closed).
+   */
+  getClassForSocket(socket: WebSocket): PeerClass | undefined {
+    return this.socketToClass.get(socket);
+  }
+
   private async _handleConnection(socket: WebSocket, req: unknown): Promise<void> {
     if (!this.armed) {
       this._deny(socket, WS_CLOSE_NOT_READY, "vessel not ready");
@@ -124,7 +138,7 @@ export class DaemonAuthGate extends EventEmitter {
     this._send(socket, mkLarChallenge(nonce, gatePubKey));
 
     const result = await new Promise<
-      { ok: true; identHex: string } | { ok: false; reason: string }
+      { ok: true; identHex: string; peerClass?: PeerClass } | { ok: false; reason: string }
     >((resolve) => {
       const timer = setTimeout(
         () => { socket.off("close", onClose); resolve({ ok: false, reason: "auth timeout" }); },
@@ -188,7 +202,8 @@ export class DaemonAuthGate extends EventEmitter {
           if (!verdict.ok || !verdict.identifier) {
             resolve({ ok: false, reason: verdict.reason ?? (verdict.ok ? "verify-proxy returned no identifier" : "insufficient capability") });
           } else {
-            resolve({ ok: true, identHex: verdict.identifier });
+            // Carry the self-slot class the keyholder vouched (absent → cross-operator at the gate).
+            resolve({ ok: true, identHex: verdict.identifier, ...(verdict.peerClass !== undefined ? { peerClass: verdict.peerClass } : {}) });
           }
         } catch (err) {
           resolve({
@@ -211,6 +226,7 @@ export class DaemonAuthGate extends EventEmitter {
     }
 
     this.socketToIdentifier.set(socket, result.identHex);
+    if (result.peerClass !== undefined) this.socketToClass.set(socket, result.peerClass);
     this._send(socket, mkLarAuthOk());
     this.clients.add(socket);
     socket.once("close", () => this.clients.delete(socket));

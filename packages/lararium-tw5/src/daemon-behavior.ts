@@ -32,6 +32,7 @@ import {
   type DaemonMsg_WorldlineTrajectoryRequest,
   type AuthProofWire,
   type DeviceDelegationTiddler,
+  type PeerClass,
   type BatchMode,
   type Verb,
   type CapabilityVerifier,
@@ -220,7 +221,7 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
 
       if (type === "daemon:verify-request") {
         const msg = raw as DaemonMsg_VerifyRequest;
-        const answer: Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }> = opts.verifyPeer
+        const answer: Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean; peerClass?: PeerClass }> = opts.verifyPeer
           ? opts.verifyPeer(msg.cardBytes, msg.bagUrl, msg.access, msg.proof, msg.edge)
           : Promise.resolve({ ok: false, reason: "no verifyPeer configured" });
         answer
@@ -229,6 +230,9 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
             ...(r.identifier ? { identifier: r.identifier } : {}),
             ...(r.reason ? { reason: r.reason } : {}),
             ...(r.proofVerified !== undefined ? { proofVerified: r.proofVerified } : {}),
+            // Forward the self-slot class VERBATIM — the worker owns the classification (only it holds
+            // the cap-verify + the pinned-root edge check). The host fails closed on an absent class.
+            ...(r.peerClass !== undefined ? { peerClass: r.peerClass } : {}),
           })))
           .catch((err: unknown) => post(mkDaemonVerifyResult({
             requestId: msg.requestId, ok: false, reason: err instanceof Error ? err.message : String(err),

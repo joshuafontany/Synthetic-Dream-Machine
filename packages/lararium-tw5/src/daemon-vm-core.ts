@@ -407,6 +407,8 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
         ...(msg.identifier ? { identifier: msg.identifier } : {}),
         ...(msg.reason ? { reason: msg.reason } : {}),
         ...(msg.proofVerified !== undefined ? { proofVerified: msg.proofVerified } : {}),
+        // The self-slot class rides the seam's return unchanged — the gate reads it off authSeam.verify.
+        ...(msg.peerClass !== undefined ? { peerClass: msg.peerClass } : {}),
       });
       return;
     }

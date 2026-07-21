@@ -65,8 +65,9 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { daemonGenesisDir }               from "./lares-config.js";
 import { resolvePalacePath, orderHandleTurnsToStubs, type HandleTurn } from "@lararium/mempalace";
 import { writebackWing, TelemetryUnavailable } from "@lararium/sensorium";
-import { LarEventBusImpl, DEFAULT_RINGS, carryContractShareDecision } from "@lararium/mesh";
-import type { SparseFormVector, WorldlineStubWire, AntigenRing } from "@lararium/mesh";
+import { LarEventBusImpl, DEFAULT_RINGS, DeterministicFederationGate } from "@lararium/mesh";
+import type { SparseFormVector, WorldlineStubWire, AntigenRing, FederationGate, PeerClass } from "@lararium/mesh";
+import { selfSlotShareDecision } from "./self-slot-share.js";
 import { makeAntigenRingHolder } from "./antigen-ring.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
@@ -268,12 +269,20 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const authGate = new DaemonAuthGate(wss);
   const network  = new ListeningWSServerAdapter(authGate as unknown as typeof wss);
   const peerIdentifierMap = new Map<string, string>();
+  // The self-slot CLASS map — peerId → the class the keyholder vouched at admission. Populated in the
+  // SAME microtask as peerIdentifierMap so that by the time the outer admission gate sees a peer in
+  // peerIdentifierMap (its admit condition), the class is already keyed — no read-before-set window for
+  // an admitted same-operator peer. A WS peer absent here (or present-but-not-same-operator) reads as the
+  // stricter cross-operator class at the sharePolicy (fail-closed).
+  const peerClassMap = new Map<string, PeerClass>();
   network.on("peer-candidate", ({ peerId }: { peerId: string }) => {
     queueMicrotask(() => {
       const socket = (network.sockets as Record<string, unknown>)[peerId];
       if (socket) {
         const identHex = authGate.getIdentifierForSocket(socket as Parameters<typeof authGate.getIdentifierForSocket>[0]);
         if (identHex) peerIdentifierMap.set(peerId, identHex);
+        const cls = authGate.getClassForSocket(socket as Parameters<typeof authGate.getClassForSocket>[0]);
+        if (cls) peerClassMap.set(peerId, cls);
       }
     });
   });
@@ -281,10 +290,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // over it) and STOOD once the operator's own nym (its Nexus key) is loaded, below. A null ring denies
   // nobody (a denylist's absence = no bans), so the boot window before the ring stands is correctly inert.
   let antigenRing: AntigenRing | null = null;
-  // A shared frozen empty set — the node has no per-doc relay gate (an admitted WS peer full-syncs), so
-  // `carryContractShareDecision` runs with no relay ring + no fed gate + inert self-slot: the antigen
-  // consult is the WHOLE additive layer it adds over the peer-admission gate below.
-  const NO_RELAY_PEERS: ReadonlySet<string> = new Set<string>();
+  // The self-slot FEDERATION gate — the federatable-own/private-own classifier for a CROSS-OPERATOR peer.
+  // Forward-declared (the sharePolicy closes over it) and STOOD once the operator's own nym is loaded,
+  // below (the nexus pubkey it addresses the federatable planes from). Null keeps the pre-classification
+  // boot window inert (no peer gated) — correct: no doc crosses to any WS peer until the gate arms anyway.
+  let selfSlotFedGate: FederationGate | null = null;
   const repo = new Repo({
     storage,
     network: [network],
@@ -304,11 +314,18 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       // OUTER peer-admission gate (unchanged): a WS peer that never passed the DaemonAuthGate is not in
       // `peerIdentifierMap` → deny; an in-process island peer (no WS socket) is a house member → admit.
       if (wsSocket && !peerIdentifierMap.has(peerId)) return false;
-      // The #59 carry-contract, layered over the admitted set: a Kapae'd presenter draws Mu (the identical
-      // `false` a caught-up peer draws — mu-void). fed gate null + empty relay ring keep the admitted-peer
-      // full-sync semantics unchanged; the self-slot inner ring stays inert (identity = null — the
-      // federatable-own/private-own split is NOT provably safe on this seam yet, see antigen-ring notes).
-      return carryContractShareDecision(NO_RELAY_PEERS, null, antigenRing, null, peerId, documentId as DocumentId | undefined);
+      // THE SELF-SLOT SPLIT — federatable-own vs private-own, keyed on the class the keyholder vouched
+      // (selfSlotShareDecision holds the whole law + fail-closed default). A same-operator WS peer and
+      // every in-process island peer full-sync; a cross-operator/unclassified WS peer reaches only the
+      // deterministically-federatable planes; the antigen draws Mu on a Kapae'd presenter regardless.
+      return selfSlotShareDecision({
+        hasWsSocket:     !!wsSocket,
+        peerClass:       peerClassMap.get(peerId),
+        selfSlotFedGate,
+        antigenRing,
+        peerId,
+        documentId: documentId as DocumentId | undefined,
+      });
     },
   });
   emit("repo-open");
@@ -353,6 +370,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     peerIdentifierMap,
   });
   antigenRing = antigenHolder.ring;
+
+  // Stand the self-slot federation gate now the operator's own verifying key is loaded — the SAME nexus
+  // pubkey the antigen board derives from. The gate's federatable surface is a PURE function of that key
+  // (@crossroads · WHO · kapae-antigen board — deny-by-default for every other doc), so a cross-operator
+  // peer reaches exactly the always-carried public/infra planes and nothing private. No hand-maintained
+  // allow-list; the private planes (@catalog/@personal/@daemon/home/wikis) fall outside the set → DENY.
+  selfSlotFedGate = new DeterministicFederationGate(operatorIdentity.verifyingKey);
 
   // ── Main-resident residency MECHANISM (sovereign-worker: policy in the worker,
   //    mechanism here). onEvict commands the pool via the forward `vmManager` ref. ──

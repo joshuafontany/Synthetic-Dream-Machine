@@ -250,8 +250,13 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // ADMIN-CAP PATH (unchanged): a satisfied capability admits directly. Under `enforce`
       // the early return above already guaranteed proofVerified, so this admits on cap + a
       // verified proof-of-possession exactly as before.
+      //
+      // SELF-SLOT CLASS: cap=admin on @daemon is held ONLY by this operator's own PersonaGroup (the
+      // founding delegates admin to personaGroupAgentIdHex; no foreign operator ever earns it). So an
+      // admin admit PROVES same-operator — the peer keeps full device sync. This is an UNFORGEABLE
+      // signal: a cross-operator cannot manufacture an admin@daemon grant it was never delegated.
       if (verdict.ok) {
-        return { ...verdict, identifier: id, proofVerified };
+        return { ...verdict, identifier: id, proofVerified, peerClass: "same-operator" as const };
       }
 
       // SEAM B — OPERATOR DEVICE-DELEGATION PATH (additive). The peer holds NO cap=admin, but a
@@ -276,7 +281,12 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
           // Admitted at the operator's-own-device tier — equivalent flow to admin (it IS the
           // operator's delegated device). `reason` carries the provenance (survives the worker→host
           // boundary; the gate ignores it on an ok verdict but it aids audit).
-          return { ok: true, identifier: id, proofVerified, reason: "admitted via operator device-delegation" };
+          //
+          // SELF-SLOT CLASS: the edge chains to signerDid — THIS hearth's pinned persona-root — and
+          // binds to the exact identity that proved key-possession. A cross-operator cannot forge an
+          // edge signed by a root it never holds, so a verified pinned-root edge PROVES same-operator
+          // (the operator's own device fleet, a distinct device key under one operator identity).
+          return { ok: true, identifier: id, proofVerified, reason: "admitted via operator device-delegation", peerClass: "same-operator" as const };
         }
         return {
           ok: false, identifier: id, proofVerified,
