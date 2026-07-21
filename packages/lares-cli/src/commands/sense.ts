@@ -32,6 +32,7 @@ import { cmdMeta } from "./meta.js";
 import { cmdRejim } from "./rejim.js";
 import { cmdAnalyze } from "./analyze.js";
 import { cmdKi } from "./ki.js";
+import { cmdLi } from "./li.js";
 import { runQuiesce, runResume, runTopology, type DoorScope } from "./mempalace.js";
 
 /**
@@ -84,11 +85,14 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
   flow:      cmdFlow,
   meta:      cmdMeta,
   // The human-query INSTRUMENTS over the poured sensorium — rhythm (rejim), change-points (analyze), and
-  // the Ki coupling verdict (ki/couple). rejim + analyze read/compute; ki is TS-native (no daemon).
+  // the Ki coupling verdict (ki/couple) and the Li gluing verdict (li/cohere) — the cosheaf ⊥ sheaf
+  // dual. rejim + analyze read/compute; ki + li read TS-native (no daemon; the H¹ hull lives in @mesh).
   rejim:     cmdRejim,
   analyze:   cmdAnalyze,
   ki:        cmdKi,
   couple:    cmdKi,       // alias — the coupling verdict reads the same H¹ gate
+  li:        cmdLi,
+  cohere:    cmdLi,       // alias — the gluing verdict reads the li-radius + the same H¹ gate
   // Holder lifecycle — the SOVEREIGN parallel of `lares mempalace`, each door scoped to its own island.
   // `status` is already a plane-READ verb (the persistence lens), so the holder TOPOLOGY rides as `holders`.
   quiesce:   cmdSenseQuiesce,

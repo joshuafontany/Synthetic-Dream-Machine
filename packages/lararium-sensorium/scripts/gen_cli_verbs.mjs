@@ -42,6 +42,9 @@ const CLI_FORMS = {
   rejim:     "sense rejim",
   analyze:   "sense analyze",
   ki:        "sense ki",
+  // `li` reads the H¹-gated li-radius (gluing) verdict — the sheaf twin of `ki`. Same ROUTED-only posture:
+  // the cohomology compute lives in TS @lararium/mesh, so the tool reaches the node daemon's compute.
+  li:        "sense li",
   // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
   // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
   wiki:      "wiki switch",

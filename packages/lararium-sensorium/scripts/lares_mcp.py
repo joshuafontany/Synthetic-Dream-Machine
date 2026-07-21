@@ -27,7 +27,7 @@ from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir, deri
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
-LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze", "ki")
+LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze", "ki", "li")
 
 # The per-plane QUERY DOOR verb — read-only cross-plane interrogation of a 3-plane test-bed sensorium
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
@@ -73,6 +73,7 @@ VERB_SEATS = {
     "rejim": (True, False),             # read the landed rhythm/geology (repour rides the reversible refresh) — trusted
     "analyze": (True, False),           # DETECT-ONLY change-point compute — read-only, mutates nothing → HOTL
     "ki": (True, False),                # the Ki coupling verdict — routed read (the TS hull's H¹ fuse) → HOTL
+    "li": (True, False),                # the Li gluing verdict — routed read (the TS hull's li-radius + H¹) → HOTL
     "wiki": (True, False),              # switcher (switch/hold/release/active) — reversible, low-trust, LOCAL residency → HOTL
     # The vault seal-lifecycle tools — a status READ rides HOTL; every MUTATION of the sovereign at-rest
     # seal crosses a trust boundary (it touches identity secret material), so it seats HITL.
@@ -435,6 +436,13 @@ class LaresCoordinator:
         raise RuntimeError("ki: the coupling verdict is TS-native (the H¹ cohomology lives in @lararium/mesh) — "
                            "reach it via the @daemon (`lares sense ki`), not the standalone python coordinator")
 
+    def li(self, **_) -> dict:
+        """The Li (理) gluing verdict is TS-native — the Robinson li-radius and the H¹ cohomology live in
+        @lararium/mesh, the hull a browser carries. A python STANDALONE can't compute it, so this raises:
+        reach it through the node daemon (`lares sense li`, or the routed MCP with the @daemon up)."""
+        raise RuntimeError("li: the gluing verdict is TS-native (the li-radius + H¹ cohomology live in @lararium/mesh) — "
+                           "reach it via the @daemon (`lares sense li`), not the standalone python coordinator")
+
     # ── the per-plane QUERY DOOR (read-only; PLANE_VERBS) ────────────────────────────────────
 
     def _plane_store(self, plane: str):
@@ -690,6 +698,15 @@ def build_mcp(coordinator: LaresCoordinator):
         return _call("ki", sensorium)
 
     @mcp.tool()
+    def li(sensorium: "str | None" = None) -> dict:
+        """The Li (理) gluing verdict — do the ADDRESSED sensorium's sheaf planes GLUE (H¹ fuse) or hold
+        open a genuine cocycle, and does a global section stand? TS-native (the li-radius + cohomology hull
+        the browser carries) — routed to the node daemon; no python standalone computes it. The default
+        single-stream cover reads as a nested-cover PLUMBING witness (flagged), never health. `lares sense
+        li` reads the same verdict."""
+        return _call("li", sensorium)
+
+    @mcp.tool()
     def plane_record(cid: str, sensorium: "str | None" = None) -> dict:
         """The cross-plane witness: one cid -> presence + payload summary across content,
         structure and form (honest nulls where a plane lacks it). `sensorium` names the sensorium
@@ -769,7 +786,7 @@ class DaemonCoordinator:
     # the palace (content_io · worldline_io · structurepalace_io · form_encoder), serialized with capture so a
     # mutation never races the live writer. A verb the wire does NOT yet carry refuses honestly through
     # `_owed` rather than route to an unknown verb (the wall this surface names, not hides).
-    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record", "rejim", "analyze", "ki"}
+    ROUTED = {"recall", "pour", "sweep", "status", "worldline", "kapae", "un_kapae", "plane_record", "rejim", "analyze", "ki", "li"}
 
     def __init__(self, wing: str = "wing_default") -> None:
         self._wing = wing
@@ -928,6 +945,14 @@ class DaemonCoordinator:
         if sensorium_root:
             args["sensoriumRoot"] = sensorium_root
         return uds.output("ki", args)
+
+    def li(self, *, sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the Li gluing verdict to the @daemon `li` verb (registry.register("li") → the node's TS
+        # readCohere, the li-radius + H¹-gated fuse). Routed-only: the cohomology lives in the hull, not python.
+        args: dict = {}
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("li", args)
 
 
 def main() -> None:

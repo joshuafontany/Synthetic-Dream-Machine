@@ -33,6 +33,8 @@
     "heleuma",
     "normalize",
     "vault",
+    "persona",
+    "nexus",
     "device-admit",
     "invite-send",
     "invite-receive"
@@ -48,6 +50,7 @@
     "rejim",
     "analyze",
     "ki",
+    "li",
     "wiki"
   ],
   "cli_forms": {
@@ -61,6 +64,7 @@
     "rejim": "sense rejim",
     "analyze": "sense analyze",
     "ki": "sense ki",
+    "li": "sense li",
     "wiki": "wiki switch"
   },
   "mirror_hosts": [
@@ -98,6 +102,8 @@
     "heleuma",
     "normalize",
     "vault",
+    "persona",
+    "nexus",
     "device-admit",
     "invite-send",
     "invite-receive"

@@ -76,6 +76,7 @@ const NODE_WIKI_PIN_BUDGET = 3;
 import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, larContentDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace, makeStructurePalace, type StructurePalace }  from "./sensorium.js";
 import { readCoupling } from "./sensorium-coupling.js";
+import { readCohere } from "./sensorium-cohere.js";
 import { makeRecallHolder, type RecallHolder } from "./recall-holder.js";
 import { makeContentPalace, type ContentPalace } from "./sensorium.js";
 import { multiGraphRecall, makeFormSearch, makeStructureSearch }  from "./sensorium-recall.js";
@@ -737,6 +738,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // MCP `ki` tool reaches this daemon verb (routed-only; no python standalone computes the cohomology).
         const root = input?.sensoriumRoot ?? memorySensoriumDir();
         return readCoupling(root) as unknown as Record<string, unknown>;
+      },
+      li: async (input) => {
+        // The Li (理) gluing verdict computed HERE in TS — the Robinson li-radius + H¹-gated fuse over the
+        // ADDRESSED sensorium's OWN sheaf planes (general: any sensorium with ≥2 sheaf planes answers). The
+        // default single-stream cover glues a nested-cover PLUMBING witness (flagged), never a health verdict.
+        const root = input?.sensoriumRoot ?? memorySensoriumDir();
+        return readCohere(root) as unknown as Record<string, unknown>;
       },
       refreshDerived: async (input) => {
         // RE-DERIVE the whole derived layer through the holder that owns the store — one command, serialized

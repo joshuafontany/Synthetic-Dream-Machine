@@ -128,6 +128,10 @@ export interface DaemonVerbProvider {
   sweep(input: { surface?: string; wing?: string; project?: string; limit?: number; room?: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   analyze(input: { spectral?: boolean; halves?: string; sample?: number; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   ki(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** The Li (理) gluing verdict — the Robinson li-radius + H¹-gated fuse over the sensorium's OWN sheaf
+   *  planes. `sensoriumRoot` addresses a specific sensorium (absent → the memory default). The default
+   *  single-stream cover reads as a nested-cover PLUMBING witness (flagged), never a health verdict. */
+  li(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
    *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races
    *  the writer. `which` narrows to a single enrichment; `sensoriumRoot` addresses a sensorium (absent → memory). */
@@ -421,6 +425,13 @@ export function captureVerbCap(): CapModule {
           // no python standalone can compute the cohomology, so the twin reaches this daemon verb.
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.ki({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("li", async (args) => {
+          // The Li (理) gluing verdict — the li-radius + H¹-gated fuse-or-hold-open over the sensorium's OWN
+          // sheaf planes, computed TS-native by the node daemon (the same hull a browser carries). Routed-only:
+          // no python standalone can compute the cohomology, so the twin reaches this daemon verb.
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.li({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("refresh", async (args) => {
           // RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline
