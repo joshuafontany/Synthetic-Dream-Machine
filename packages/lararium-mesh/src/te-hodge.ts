@@ -21,6 +21,14 @@
  * `s = div / n` (the graph Laplacian of K_n acts as `n·s` on the mean-zero divergence, and the net flow's
  * divergence is mean-zero by antisymmetry). On K_n there is no harmonic part — the residual is pure curl.
  *
+ * WHAT THIS READS, PRECISELY: on the complete graph the circulation is LOCAL curl (`im δ¹`), cohomologically
+ * TRIVIAL (`H¹ = ker Δ₁ = 0` — the filled clique complex of K_n is contractible; Jiang–Lim–Yao–Ye 2011,
+ * arXiv:0811.1067; Lim, SIAM Review 2020, arXiv:1507.05379). So the read certifies the COUPLING signal — the
+ * flow content NO lead-lag potential explains — NOT a topological cocycle. A genuine harmonic `H¹` would need
+ * an INCOMPLETE flow graph (some triangles unfilled, `ker Δ₁ ≠ 0`) and a projection onto `ker Δ₁`; that is a
+ * separate reading, and it stays a DIFFERENT obstruction from the li∘ki cross-cover square's sheaf `H¹` (a
+ * different complex — the cover nerve — with sheaf coefficients). This organ never certifies that square.
+ *
  * The circulation around each triangle `(i,j,k)` is `w(i,j) + w(j,k) + w(k,i)` (the gradient telescopes to
  * 0 around any cycle). {@link teFlowHodgeCoRestrictions} carries the two Hodge parts as cosheaf faces over
  * the triangle cofaces — the gradient face reads circulation 0 everywhere (a theorem), the rotational face
