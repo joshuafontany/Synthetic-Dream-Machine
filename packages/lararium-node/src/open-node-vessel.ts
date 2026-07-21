@@ -74,10 +74,11 @@ import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool
 /** Node advertises a few rotatable wiki pins BESIDES @daemon (resource-rich vessel).
  *  The user's ONE-plus rotatable pin(s) ride this budget; the surface enforces it. */
 const NODE_WIKI_PIN_BUDGET = 3;
-import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, larContentDir }  from "./vessel-paths.js";
+import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, meshSensoriumDir, larContentDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace, makeStructurePalace, type StructurePalace }  from "./sensorium.js";
 import { readCoupling } from "./sensorium-coupling.js";
 import { readCohere } from "./sensorium-cohere.js";
+import { readJing } from "./sensorium-square.js";
 import { makeRecallHolder, type RecallHolder } from "./recall-holder.js";
 import { makeContentPalace, type ContentPalace } from "./sensorium.js";
 import { multiGraphRecall, makeFormSearch, makeStructureSearch }  from "./sensorium-recall.js";
@@ -776,6 +777,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // default single-stream cover glues a nested-cover PLUMBING witness (flagged), never a health verdict.
         const root = input?.sensoriumRoot ?? memorySensoriumDir();
         return readCohere(root) as unknown as Record<string, unknown>;
+      },
+      jing: async (input) => {
+        // The Jing (勁) coherence verdict computed HERE in TS — the li∘ki square over the ADDRESSED
+        // child-host's lobes: EXTEND them to a reconciled self (ki fuse), RESTRICT back (li), read the
+        // round-trip. Bare reads the MESH (who/authority/flow — the DreamNet-serving load-bearing host).
+        const root = input?.sensoriumRoot ?? meshSensoriumDir();
+        return readJing(root) as unknown as Record<string, unknown>;
       },
       refreshDerived: async (input) => {
         // RE-DERIVE the whole derived layer through the holder that owns the store — one command, serialized

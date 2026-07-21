@@ -45,6 +45,9 @@ const CLI_FORMS = {
   // `li` reads the H¹-gated li-radius (gluing) verdict — the sheaf twin of `ki`. Same ROUTED-only posture:
   // the cohomology compute lives in TS @lararium/mesh, so the tool reaches the node daemon's compute.
   li:        "sense li",
+  // `jing` (勁) reads the li∘ki SQUARE — the extend→restrict round-trip over a child-host's lobes (the
+  // mesh's who/authority/flow). Same ROUTED-only posture: the cohomology hull is TS, reached via the daemon.
+  jing:      "sense jing",
   // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
   // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
   wiki:      "wiki switch",

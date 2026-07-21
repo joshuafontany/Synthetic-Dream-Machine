@@ -88,6 +88,12 @@ export type {
 export { readCohere, readCohereAcrossContexts, coveragePlaneReader } from "./sensorium-cohere.js";
 export type { PlaneReader, CohereRead, ReadCohereOptions, CohereContext } from "./sensorium-cohere.js";
 
+// The JING read — the li∘ki SQUARE over a child-hosting sensorium's cover (the mesh's who/authority/flow
+// lobes): EXTEND the lobes to a reconciled self (ki `fuse`), RESTRICT it back (li), read the round-trip.
+// Coheres ⟺ the node's grain and flow round-trip to the identity — the joint the two legs cannot see alone.
+export { readJing } from "./sensorium-square.js";
+export type { JingRead, LobeRoundTrip, ReadJingOptions } from "./sensorium-square.js";
+
 // The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
 export {
   newCorpusId, listCorpora, openCorpus, queryCorpus, keepCorpus,

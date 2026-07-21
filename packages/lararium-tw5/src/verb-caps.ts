@@ -132,6 +132,10 @@ export interface DaemonVerbProvider {
    *  planes. `sensoriumRoot` addresses a specific sensorium (absent → the memory default). The default
    *  single-stream cover reads as a nested-cover PLUMBING witness (flagged), never a health verdict. */
   li(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
+  /** The Jing (勁) coherence verdict — the li∘ki square over a child-host's lobes (extend→restrict
+   *  round-trip). `sensoriumRoot` addresses a child-hosting sensorium (absent → the mesh default: the
+   *  who/authority/flow lobes the node federates onto DreamNet). Coheres ⟺ the round-trip is the identity. */
+  jing(input: { sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
    *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races
    *  the writer. `which` narrows to a single enrichment; `sensoriumRoot` addresses a sensorium (absent → memory). */
@@ -432,6 +436,12 @@ export function captureVerbCap(): CapModule {
           // no python standalone can compute the cohomology, so the twin reaches this daemon verb.
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.li({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("jing", async (args) => {
+          // The Jing (勁) coherence verdict — the li∘ki square (extend→restrict round-trip) over a child-host's
+          // lobes, computed TS-native by the node daemon. Routed-only: the cohomology rides the TS hull.
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.jing({ ...(sensoriumRoot ? { sensoriumRoot } : {}) });
         });
         registry.register("refresh", async (args) => {
           // RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline

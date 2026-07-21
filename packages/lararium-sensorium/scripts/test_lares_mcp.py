@@ -515,9 +515,10 @@ def test_daemon_routed_set_names_the_wired_verbs():
     # the ROUTED set carries the wired lifecycle/plane/read verbs beside recall + pour — the routing table
     # the surface declares. `rejim` reads through the daemon `rejim` verb (repour rides `refresh`); `analyze`
     # routes to the daemon `analyze` verb (its registry entry lands in the wiki-VM TS build target). `ki` and
-    # `li` route to the TS hull's cohomology (the cosheaf coupling ⊥ sheaf gluing dual) — no python compute.
+    # `li`/`jing` route to the TS hull's cohomology (the cosheaf coupling ⊥ sheaf gluing dual, and their
+    # li∘ki square) — no python compute; the cohomology rides the browser-carried hull.
     assert DaemonCoordinator.ROUTED == {"recall", "pour", "sweep", "status", "worldline", "kapae",
-                                        "un_kapae", "plane_record", "rejim", "analyze", "ki", "li"}
+                                        "un_kapae", "plane_record", "rejim", "analyze", "ki", "li", "jing"}
 
 
 # ── the sensorium address resolver (name → root; mirrors TS sensoriumDir/sensoriumNames) ──────
