@@ -82,6 +82,12 @@ export type {
   ChildRestriction, CouplingChildRead, CouplingRead, ReadCouplingOptions,
 } from "./sensorium-coupling.js";
 
+// The li-radius (H⁰ gluing) READER — the sheaf twin: glue a sensorium's OWN sheaf planes over a shared
+// cid stalk through the Robinson radius AND the H¹ gate. Cover-agnostic (the boundary, not the codomain):
+// the default single-stream cover reads as a nested-cover PLUMBING witness, a live-boundary reader certifies.
+export { readCohere, coveragePlaneReader } from "./sensorium-cohere.js";
+export type { PlaneReader, CohereRead, ReadCohereOptions } from "./sensorium-cohere.js";
+
 // The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
 export {
   newCorpusId, listCorpora, openCorpus, queryCorpus, keepCorpus,
@@ -135,11 +141,18 @@ export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-a
 
 export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
 // The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root
-// SET (generateOrLoadPersonaGroupRoot / loadPersonaGroupRootSeed) stays imported directly where consumed.
+// SET mints/loads the operator-root the `lares persona` door drives (founder-side custody).
 export { loadActivePersonaIndex, wearPersona, personaRootExists, listPersonaRoots } from "./node-vessel-identity.js";
+export { generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed } from "./node-vessel-identity.js";
+export type { PersonaGroupRoot } from "./node-vessel-identity.js";
 // The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (never federates) + the PUBLIC
 // own-published-face record (persona → @crossroads glamour). Distinct stores, distinct from the handle-book.
 export { makeNodePersonaPetnameStore, makeNodePublicHandleStore } from "./node-vessel-identity.js";
+// The `bags/@nexus` charter DOC adapter — the antigen roster's authority home read/written on disk (#66).
+export {
+  readNexusCharterDoc, writeNexusCharterDoc, renderNexusCharterDoc,
+  nexusCharterDocPath, nexusCharterDocRelPath, NEXUS_BAG,
+} from "./nexus-charter-doc.js";
 export { loadLeafIdentity } from "./leaf-identity.js";
 export type { LeafIdentity } from "./leaf-identity.js";
 export { VerbDispatcher, VerbTable } from "@lararium/tw5";

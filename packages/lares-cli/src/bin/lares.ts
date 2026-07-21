@@ -49,6 +49,8 @@ import {
 } from "../commands/scripted.js";
 import { cmdDeviceAdmit, cmdInviteSend, cmdInviteReceive } from "../commands/ceremony.js";
 import { cmdVault }                    from "../commands/vault.js";
+import { cmdPersona }                  from "../commands/persona.js";
+import { cmdNexus }                    from "../commands/nexus.js";
 import { freshBuildGate, FRESH_BUILD_COMMANDS } from "../build-freshness.js";
 
 type Handler = (args: ParsedArgs) => Promise<number>;
@@ -92,6 +94,8 @@ const COMMANDS: readonly Command[] = [
   { name: "heleuma",       summary: "Audit / scaffold load-bearing source-file memes. Pass --write to scaffold.",    handler: cmdHeleuma       },
   { name: "normalize",     summary: "Canonicalize a meme carrier's framing (embeds the iam namespace into the SOH) so the round-trip laws hold. `--check` reports drift without writing (CI/pre-commit).", handler: cmdNormalize     },
   { name: "vault",         summary: "At-rest seal LIFECYCLE for the sovereign secret carriers (keyhive archive + recovery share): `status` shows the seal state (--check probes a passphrase → split-KEK detection); `seal` seals cleartext carriers under a new passphrase; `rotate` re-seals old→new; `export <path>` writes a passphrase-SEALED backup (--force overwrites); `repair` cures a split-KEK. DAEMON-FIRST: mutating verbs route through the daemon when up (so its in-memory policy moves with the carriers — no un-rotate), direct file op when down. The passphrase never touches argv/history — no-echo TTY prompt (double-entry for a new pass) or LARES_ARCHIVE_PASSPHRASE(+_NEW)+--yes.", handler: cmdVault },
+  { name: "persona",       summary: "The PLURALITY-PONO identity multitude (#66): `new <index> --name '<displayName>'` mints/loads the persona-root at that handle-index (fail-closed via assertHandleIndex) and sets its PRIVATE pet-name; `wear <index>` switches the active persona (reboot-to-switch, one face to the mesh); `list` prints the private multitude (held indices + active marker + pet-names). Drives the founder-side node core; a joinee receives a root by admit, never mints here.", handler: cmdPersona },
+  { name: "nexus",         summary: "The Nexus founding-kahu ROSTER — the Kapae immune antigen's authority home (#66). `nexus charter seat` seats the held personas' ed25519 VERIFYING keys (read from the vault, never the seed; matched to founding-kahu names by pet-name) into the bags/@nexus charter DOC + establishes a genesis charter-epoch, FAIL-CLOSED (a quorum-short roster leaves the antigen inert); `nexus charter show` reads the roster + quorum verdict.", handler: cmdNexus },
   { name: "device-admit",  summary: "Admit a new vessel into your operator PersonaGroup (produces an admit payload via runDeviceAdmit; QR/NFC/LAN transport pending).",    handler: cmdDeviceAdmit  },
   { name: "invite-send",   summary: "Invite another operator into the Nexus MeshCabal (DreamNet founding ceremony — not yet implemented).",  handler: cmdInviteSend   },
   { name: "invite-receive",summary: "Receive and apply a Nexus MeshCabal invitation (DreamNet — not yet implemented).",                      handler: cmdInviteReceive },

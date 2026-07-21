@@ -1,8 +1,9 @@
 /**
- * nexus-charter-seed — the DATA seed for the founding kahu quorum (operator-ruled 2026-07-20). This is a
- * config seed, NOT library logic: `kapae-antigen`'s pure fold/verify take a `KahuCharterRoster` as a
- * parameter, and this file names the ONE concrete roster the founding Nexus seats. It carries the three
- * founding PersonaGroups + a 2-of-3 threshold, and it FAILS CLOSED until the operator binds real keys.
+ * nexus-charter-seed — the founding kahu quorum + the ROSTER-FROM-DOC read (operator-ruled 2026-07-20).
+ * The `bags/@nexus` charter DOC is the AUTHORITY HOME (data-as-authority): the operator SEATS the roster
+ * into that doc, and the pure `kapae-antigen` fold/verify read it back through here. This file names the
+ * founding quorum's SHAPE (three PersonaGroups, 2-of-3) and folds a loaded doc into the `KahuCharterRoster`
+ * the antigen consumes — FAILING CLOSED whenever the doc is absent, unseated, or short of a quorum.
  *
  * THE FOUNDING QUORUM — three founding kahu cryptographic-individuals (persona-policy: each PersonaGroup
  * a cryptographic individual), 2-of-3:
@@ -10,31 +11,58 @@
  *   · "Telarus, KSC"
  *   · "The Lindwyrm"
  *
- * KEYS UNBOUND BY DESIGN. A kahu's ed25519 verifying key is that PersonaGroup's own root-derived key —
- * it MUST be seated by the operator, never invented here. With keys unbound, `foundingRoster` yields an
- * empty key-set: any threshold ≥ 1 fails, so the multi-sig verifier IGNORES every antigen entry until
- * the operator seats the real keys. That is the correct fail-closed floor — the immune system stays
- * inert (never allow-all) until the founding quorum is cryptographically real.
+ * THE DOC IS THE AUTHORITY. `foundingRoster`/`rosterFromCharterDoc` read a loaded `NexusCharterDoc`, never
+ * a hardcoded key-set. Each kahu's ed25519 verifying key is that PersonaGroup's own root-derived key — the
+ * operator SEATS it into the doc from the vault (`lares nexus charter seat`), never invents it here. An
+ * absent doc, an unseated doc, or a doc short of `threshold` seated keys folds to an EMPTY key-set: any
+ * threshold ≥ 1 fails, so the multi-sig verifier IGNORES every antigen entry. That is the correct
+ * fail-closed floor — the immune system stays inert (never allow-all) until the founding quorum is
+ * cryptographically real in the doc.
  *
- * SURFACED FORK (placement): this seats the roster as a typed CODE seed. The operator MAY instead prefer
- * a bags/@nexus charter DOC (data the wax-stamp epoch-chain roots on) as the authority home; the pure
- * library consumes a `KahuCharterRoster` either way, so this seam moves without touching antigen logic.
- *
- * Platform-blind: rides ./kapae-antigen types only. NO node: imports.
+ * Platform-blind: rides ./kapae-antigen types + ./crypto only. NO node: imports (the DISK read/write of
+ * the doc lives in the node adapter `nexus-charter-doc`, which hands a parsed `NexusCharterDoc` in here).
  * Meme: lar:///ha.ka.ba/lararium/mesh/carry-contract#the-honest-edges
  */
 
 import type { KahuCharterRoster } from "./kapae-antigen.js";
+import { sha256HexSync, canonicalJson } from "./crypto.js";
 
-/** One founding kahu — a display name + its ed25519 verifying key (UNBOUND until the operator seats it). */
-export interface FoundingKahu {
+/** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
+export const NEXUS_CHARTER_DOC_KIND = "lar-nexus-charter/v1" as const;
+
+/** The charter doc's stable lar: bearing (names the doc; grants nothing — lar: NAMES, never fetches). */
+export const NEXUS_CHARTER_URI = "lar:///nexus.charter.seats" as const;
+
+/** The charter doc's uri-path — its siting inside the `bags/@nexus` residency (carrierBaseRelPath form). */
+export const NEXUS_CHARTER_URI_PATH = "ha.ka.ba/nexus/charter/founding-roster" as const;
+
+/** One founding kahu — a display name + its ed25519 verifying key (null while unseated: the fail-closed floor). */
+export interface NexusCharterKahu {
   readonly displayName:  string;
-  /** The PersonaGroup's ed25519 verifying-key hex, or null while unseated (the fail-closed floor). */
+  /** The PersonaGroup's ed25519 verifying-key hex (64 chars), or null while the operator has not seated it. */
   readonly verifyingKey: string | null;
 }
 
-/** The three founding kahu PersonaGroups (operator-ruled). Keys UNBOUND — the operator seats each one. */
-export const FOUNDING_KAHU: readonly FoundingKahu[] = [
+/**
+ * The APPROVED roster the antigen reads — the exact data the `bags/@nexus` charter doc carries. The node
+ * adapter parses the doc off disk into this shape and hands it here; the DOC is the authority home, this
+ * type its in-memory face.
+ */
+export interface NexusCharterDoc {
+  readonly kind:            typeof NEXUS_CHARTER_DOC_KIND;
+  /** k — the quorum threshold a valid antigen act carries (2-of-3 at founding). */
+  readonly threshold:       number;
+  /** The charter epoch the antigen roots on — a genesis inception content-address, or null while unestablished. */
+  readonly charterEpochCid: string | null;
+  /** The founding kahu, each seated (verifyingKey set) or unseated (null). */
+  readonly kahu:            readonly NexusCharterKahu[];
+}
+
+/** Legacy alias — one founding kahu named by display + its (unbound-until-seated) key. */
+export type FoundingKahu = NexusCharterKahu;
+
+/** The three founding kahu PersonaGroups (operator-ruled) — the SCAFFOLD names an empty charter doc seats. */
+export const FOUNDING_KAHU: readonly NexusCharterKahu[] = [
   { displayName: "Guru Joshua Fontany", verifyingKey: null },
   { displayName: "Telarus, KSC",        verifyingKey: null },
   { displayName: "The Lindwyrm",        verifyingKey: null },
@@ -43,20 +71,63 @@ export const FOUNDING_KAHU: readonly FoundingKahu[] = [
 /** k — the founding threshold. 2 of the 3 founding kahu sign a valid antigen (ban/lift) act. */
 export const FOUNDING_QUORUM_THRESHOLD = 2 as const;
 
-/**
- * Build the founding `KahuCharterRoster` for a given charter epoch. Filters to SEATED keys only, so an
- * unseated founding set yields an empty roster that FAILS CLOSED (the verifier ignores every entry). Pass
- * the nexus-charter epoch's `epochCid` (the wax-stamp epoch the antigen roots on).
- */
-export function foundingRoster(charterEpochCid: string): KahuCharterRoster {
-  const keys = FOUNDING_KAHU
-    .map((k) => k.verifyingKey)
-    .filter((k): k is string => typeof k === "string" && k.length > 0);
-  return { keys, threshold: FOUNDING_QUORUM_THRESHOLD, charterEpochCid };
+/** A hex verifying key reads seated only at the exact ed25519 length — a stray/short value never seats. */
+function isSeatedKey(key: string | null): key is string {
+  return typeof key === "string" && /^[0-9a-f]{64}$/i.test(key);
 }
 
-/** Does the founding roster carry enough SEATED keys to raise a valid quorum? False while keys stay unbound. */
-export function foundingQuorumSeated(): boolean {
-  const seated = FOUNDING_KAHU.filter((k) => typeof k.verifyingKey === "string" && k.verifyingKey.length > 0);
-  return seated.length >= FOUNDING_QUORUM_THRESHOLD;
+/** The seated verifying keys a doc carries (ascending, de-duped) — the ONLY keys a quorum ever counts. */
+export function seatedCharterKeys(doc: NexusCharterDoc | null): string[] {
+  if (!doc || doc.kind !== NEXUS_CHARTER_DOC_KIND) return [];
+  return [...new Set(doc.kahu.map((k) => k.verifyingKey).filter(isSeatedKey).map((k) => k.toLowerCase()))].sort();
+}
+
+/**
+ * The GENESIS charter-epoch inception content-address — a deterministic hash BOUND to the seated key-set +
+ * threshold (KERI genesis inception: the epoch IS its authorized key-set). Recomputed each seat while the
+ * roster forms; at founding no antigen entry exists yet, so a re-derivation strands nothing. This is a
+ * single-epoch inception, NOT the full pre-rotated wax-stamp epoch-chain (that + `lares rotate-root` is a
+ * follow-on: it needs the next epoch's keys in offline custody before this epoch ever seals).
+ */
+export function genesisCharterEpochCid(seatedKeys: readonly string[], threshold: number): string {
+  const keys = [...seatedKeys].map((k) => k.toLowerCase()).sort();
+  return `epoch0-${sha256HexSync(canonicalJson({ kind: NEXUS_CHARTER_DOC_KIND, keys, threshold }))}`;
+}
+
+/**
+ * Fold a loaded charter doc into the `KahuCharterRoster` the antigen verifies against. FAILS CLOSED: an
+ * absent doc, a wrong-kind doc, or a doc with no established charter epoch yields an EMPTY key-set +
+ * empty epoch, so the multi-sig verifier's `keys.length < threshold` and epoch-match guards both deny.
+ * Only a doc carrying a real charter epoch AND seated keys raises a live roster.
+ */
+export function rosterFromCharterDoc(doc: NexusCharterDoc | null): KahuCharterRoster {
+  const threshold = doc && Number.isInteger(doc.threshold) && doc.threshold >= 1 ? doc.threshold : FOUNDING_QUORUM_THRESHOLD;
+  const epoch = doc && typeof doc.charterEpochCid === "string" ? doc.charterEpochCid : "";
+  if (epoch.length === 0) return { keys: [], threshold, charterEpochCid: "" };   // no epoch → nothing roots → deny
+  return { keys: seatedCharterKeys(doc), threshold, charterEpochCid: epoch };
+}
+
+/**
+ * The founding `KahuCharterRoster` read from the seated charter DOC (the antigen's roster source). An
+ * unseated / absent doc yields an empty roster that FAILS CLOSED (the verifier ignores every entry). This
+ * repoints the founding roster onto the doc — the doc IS the authority home, evergreen.
+ */
+export function foundingRoster(doc: NexusCharterDoc | null): KahuCharterRoster {
+  return rosterFromCharterDoc(doc);
+}
+
+/** Does the seated doc carry a live quorum? True only with an established epoch AND ≥ threshold seated keys. */
+export function foundingQuorumSeated(doc: NexusCharterDoc | null): boolean {
+  const r = rosterFromCharterDoc(doc);
+  return r.charterEpochCid.length > 0 && r.keys.length >= r.threshold;
+}
+
+/** The UNSEATED scaffold doc — the three founding names, every key null, no epoch. The seat command's floor. */
+export function emptyFoundingCharterDoc(): NexusCharterDoc {
+  return {
+    kind:            NEXUS_CHARTER_DOC_KIND,
+    threshold:       FOUNDING_QUORUM_THRESHOLD,
+    charterEpochCid: null,
+    kahu:            FOUNDING_KAHU.map((k) => ({ displayName: k.displayName, verifyingKey: null })),
+  };
 }

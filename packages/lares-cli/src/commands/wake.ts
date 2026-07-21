@@ -22,6 +22,7 @@ import { loadVesselVerifyingKey } from "@lararium/node";
 import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
 import { setupSensorium, type PalaceSetupStep } from "../setup-sensorium.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
+import { FOUNDING_KAHU } from "@lararium/mesh";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
 import { wireCopilotHome, type CopilotWireResult } from "../copilot-wire.js";
@@ -230,6 +231,16 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //     the node isn't up (verbatim-always / recall-eventual).
   const recall = nodeUp ? await recallIntoWake() : undefined;
 
+  // 2c. The founding NEXT-STEP hint — after --install mints the founder (h0), flow the operator onward
+  //     to the remaining founding kahu. Persona-minting SEPARATES from the founder-mint: `wake --install`
+  //     mints only h0; each further kahu stands through its OWN deliberate `lares persona new` act, then
+  //     `lares nexus charter seat` seats the quorum the immune antigen reads. Surfaced only under standup.
+  const foundingHint: string[] | undefined = founding === undefined ? undefined : [
+    `Founder persona h0 stands ("${FOUNDING_KAHU[0]?.displayName ?? "Guru Joshua Fontany"}").`,
+    ...FOUNDING_KAHU.slice(1).map((k, i) => `Add the next kahu: lares persona new ${i + 1} --name '${k.displayName}'`),
+    `Then seat the 2-of-3 quorum: lares nexus charter seat`,
+  ];
+
   // 3. Emit the live-delta frame (dual output). Graceful: never hard-fail the wake.
   const ok = integration.ok && nodeUp;
   emit(args, {
@@ -240,6 +251,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       mempalace: { ok: integration.ok, checks: integration.checks },
       ...(mempalaceSetup !== undefined ? { mempalaceSetup } : {}),
       ...(founding !== undefined ? { founding } : {}),
+      ...(foundingHint !== undefined ? { foundingHint } : {}),
       ...(claude !== undefined ? { claude } : {}),
       ...(codex !== undefined ? { codex } : {}),
       ...(copilot !== undefined ? { copilot } : {}),
@@ -265,6 +277,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       if (founding !== undefined) {
         console.log("  founding (--install):");
         for (const s of founding) console.log(`    ${s.action.padEnd(6)} ${s.step}: ${s.detail}`);
+      }
+      if (foundingHint !== undefined) {
+        console.log("  next — stand the founding kahu quorum:");
+        for (const h of foundingHint) console.log(`    → ${h}`);
       }
       if (claude !== undefined) {
         console.log(`  claude (--claude): ${claude.changed ? "wired" : "already wired"}${claude.backedUp ? " (settings.json backed up)" : ""}`);
