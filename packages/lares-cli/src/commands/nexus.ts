@@ -27,8 +27,10 @@ import {
   readNexusCharterDoc, writeNexusCharterDoc, nexusCharterDocPath,
   listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore,
   runNexusKapae, runNexusKapaeList, NexusKapaeError,
+  runNexusAdmit, runNexusAcceptCarriage, runNexusMembersList, NexusAdmitError,
   sealReserveMineShare, writeCharterReserveState, readCharterReserveState,
 } from "@lararium/node";
+import { federationPostureFromDoc, type FederationPosture } from "@lararium/mesh";
 import {
   emptyFoundingCharterDoc, rosterFromCharterDoc, foundingQuorumSeated, charterChainHead,
   ownPersonaPetname, genesisCharterEpoch, rotateCharterEpoch, charterKeySetHash,
@@ -43,12 +45,17 @@ import type { ParsedArgs } from "../parse-args.js";
 class UsageError extends Error {}
 
 function usage(): void {
-  console.error("usage: lares nexus <charter | kapae | un_kapae>");
+  console.error("usage: lares nexus <charter | kapae | un_kapae | admit | revoke | members | accept-carriage | posture>");
   console.error("");
   console.error("  charter <seat | rotate | commit | show>   the founding-kahu roster + pre-rotated epoch chain");
   console.error("  kapae <nym> [--reason <text>]             raise a quorum-signed ban on a presenter nym");
   console.error("  kapae --list                              read the currently-Kapae'd set (the fold)");
   console.error("  un_kapae <nym>                            mint a quorum-signed lift at a higher version");
+  console.error("  admit <operator-pubkey> [--contract <hex>] admit a contracted operator (quorum + contract-in)");
+  console.error("  revoke <operator-pubkey>                  revoke a member (quorum-only)");
+  console.error("  members --list                            read the currently-admitted member set (the fold)");
+  console.error("  accept-carriage [--index N]               (joining operator) mint the 'accepts carriage' contract-in");
+  console.error("  posture [private | open]                  read / flip the cross-Nexus federation posture");
 }
 
 function charterUsage(): void {
@@ -70,14 +77,175 @@ function charterUsage(): void {
 export async function cmdNexus(args: ParsedArgs): Promise<number> {
   const verb = args.positional[0];
   switch (verb) {
-    case "charter":  return await cmdCharter(args);
-    case "kapae":    return await cmdKapae(args);
-    case "un_kapae": return await cmdUnKapae(args);
+    case "charter":         return await cmdCharter(args);
+    case "kapae":           return await cmdKapae(args);
+    case "un_kapae":        return await cmdUnKapae(args);
+    case "admit":           return await cmdAdmit(args, "admit");
+    case "revoke":          return await cmdAdmit(args, "revoke");
+    case "members":         return await cmdMembers(args);
+    case "accept-carriage": return await cmdAcceptCarriage(args);
+    case "posture":         return await cmdPosture(args);
     default:
       if (verb) console.error(`lares nexus: unknown verb "${verb}"`);
       usage();
       return 2;
   }
+}
+
+/**
+ * `lares nexus admit <operator-pubkey> [--contract <hex>]` writes a quorum-signed + contract-in admit onto the
+ * members board; `lares nexus revoke <operator-pubkey>` writes a quorum-signed revoke. FAIL CLOSED: an unseated
+ * charter, sub-quorum, or (for admit) a missing/invalid operator contract-in REFUSES and writes nothing.
+ */
+async function cmdAdmit(args: ParsedArgs, action: "admit" | "revoke"): Promise<number> {
+  const nym = args.positional[1];
+  if (!nym) {
+    console.error(`usage: lares nexus ${action} <operator-pubkey>${action === "admit" ? " [--contract <hex>]" : ""}`);
+    return 2;
+  }
+  try {
+    const contractSig = action === "admit" ? args.options["contract"] : undefined;
+    const r = await runNexusAdmit({ action, nym, ...(contractSig ? { contractSig } : {}), bagsDir: larBagsDir() });
+    emit(args, {
+      ok: true,
+      data: {
+        action: r.action, nym: r.nym, version: r.version, priorVersion: r.priorVersion,
+        charterEpochCid: r.charterEpochCid, threshold: r.threshold, signers: r.signers,
+        contractIn: r.contractIn, boardUrl: r.boardUrl, memberNow: r.memberNow,
+      },
+      human: () => {
+        const verb = action === "admit" ? "ADMITTED" : "REVOKED";
+        console.log(`nexus ${action} → ${verb} ${nym.slice(0, 16)}… (version ${r.version}${r.priorVersion !== null ? `, superseding ${r.priorVersion}` : ""})`);
+        console.log(`  signed by:   ${r.signers.length} of ${r.threshold} required founding-kahu roots`);
+        for (const s of r.signers) console.log(`    ${s.slice(0, 16)}…`);
+        if (action === "admit") console.log(`  contract-in: ${r.contractIn === "self" ? "self-signed (held persona)" : "supplied token"}`);
+        console.log(`  epoch:       ${r.charterEpochCid}`);
+        console.log(`  board:       ${r.boardUrl}`);
+        console.log(`  enforced:    ${r.memberNow ? "MEMBER (a cross-operator under this nym co-federates / blind-transits sealed planes)" : "NOT a member (a standing revoke or higher entry supersedes)"}`);
+      },
+    });
+    return 0;
+  } catch (err) {
+    const msg  = err instanceof Error ? err.message : String(err);
+    const code = err instanceof NexusAdmitError ? "refused" : "error";
+    emit(args, { ok: false, error: { code, message: msg }, human: () => console.error(`lares nexus ${action}: ${msg}`) });
+    return exitFor("error");
+  }
+}
+
+/** `lares nexus members --list` folds the currently-admitted operator member set off the members board. */
+async function cmdMembers(args: ParsedArgs): Promise<number> {
+  if (!args.flags["list"]) {
+    console.error("usage: lares nexus members --list");
+    return 2;
+  }
+  try {
+    const r = await runNexusMembersList({ bagsDir: larBagsDir() });
+    emit(args, {
+      ok: true,
+      data: {
+        charterEpochCid: r.charterEpochCid || null, threshold: r.threshold,
+        seatedKeys: r.seatedKeys, members: r.members, entries: r.entries,
+      },
+      human: () => {
+        console.log(`nexus members — the members-registry board fold:`);
+        console.log(`  epoch:      ${r.charterEpochCid || "(unseated — the registry stays inert)"}`);
+        console.log(`  quorum:     ${r.threshold}-of-N · seated keys: ${r.seatedKeys}`);
+        console.log(`  members (${r.members.length}):`);
+        for (const n of r.members) console.log(`    ${n}`);
+        if (r.members.length === 0) console.log(`    (none contracted — the seated kahu remain the floor)`);
+        console.log(`  board entries (${r.entries.length}):`);
+        for (const e of r.entries) console.log(`    ${e.action.padEnd(6)} v${e.version}  ${e.nym.slice(0, 16)}…  (${e.signers} sig${e.contractIn ? ", contract-in" : ""})`);
+      },
+    });
+    return 0;
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    emit(args, { ok: false, error: { code: "error", message: msg }, human: () => console.error(`lares nexus members --list: ${msg}`) });
+    return exitFor("error");
+  }
+}
+
+/**
+ * `lares nexus accept-carriage [--index N]` — run by the JOINING operator on their OWN vessel: mint the
+ * "accepts carriage" contract-in token the kahu supply to `nexus admit --contract <hex>`. The consent-first
+ * seal (track contracts, never identities): the operator signs its pubkey + the charter epoch, nothing more.
+ */
+async function cmdAcceptCarriage(args: ParsedArgs): Promise<number> {
+  const idxRaw = args.options["index"];
+  const handleIndex = idxRaw !== undefined ? Number.parseInt(idxRaw, 10) : 0;
+  if (!Number.isInteger(handleIndex) || handleIndex < 0) {
+    console.error(`--index must be a non-negative integer (got "${idxRaw}")`);
+    return 2;
+  }
+  try {
+    const r = await runNexusAcceptCarriage({ handleIndex, bagsDir: larBagsDir() });
+    emit(args, {
+      ok: true,
+      data: { nym: r.nym, charterEpochCid: r.charterEpochCid, contractSig: r.contractSig },
+      human: () => {
+        console.log(`nexus accept-carriage — signed the 'accepts carriage' contract-in (persona index ${handleIndex}):`);
+        console.log(`  your nym:     ${r.nym}`);
+        console.log(`  epoch:        ${r.charterEpochCid}`);
+        console.log(`  contract-sig: ${r.contractSig}`);
+        console.log(`  hand this to a founding kahu:  lares nexus admit ${r.nym} --contract ${r.contractSig}`);
+      },
+    });
+    return 0;
+  } catch (err) {
+    const msg  = err instanceof Error ? err.message : String(err);
+    const code = err instanceof NexusAdmitError ? "refused" : "error";
+    emit(args, { ok: false, error: { code, message: msg }, human: () => console.error(`lares nexus accept-carriage: ${msg}`) });
+    return exitFor("error");
+  }
+}
+
+/**
+ * `lares nexus posture [private | open]` — read or flip the per-Nexus federation posture on the @nexus charter
+ * doc. Default PRIVATE (a Nexus develops in isolation); OPEN lets cross-Nexus foreign operators co-federate the
+ * PUBLIC planes (never a private plane). No arg reads the current posture.
+ */
+async function cmdPosture(args: ParsedArgs): Promise<number> {
+  const bagsDir = larBagsDir();
+  const want = args.positional[1];
+  const doc = readNexusCharterDoc(bagsDir);
+  if (want === undefined) {
+    const posture = federationPostureFromDoc(doc);
+    emit(args, {
+      ok: true,
+      data: { posture, present: doc !== null },
+      human: () => {
+        console.log(`nexus federation posture: ${posture}${doc ? "" : "  (no charter doc — default)"}`);
+        console.log(posture === "private"
+          ? `  PRIVATE — cross-Nexus foreign operators are denied co-federation; only same-Nexus members co-federate.`
+          : `  OPEN — cross-Nexus foreign operators co-federate the PUBLIC planes (never a private plane).`);
+      },
+    });
+    return 0;
+  }
+  if (want !== "private" && want !== "open") {
+    console.error(`usage: lares nexus posture [private | open]   (got "${want}")`);
+    return 2;
+  }
+  if (!doc) {
+    emit(args, { ok: false, error: { code: "refused", message: "no @nexus charter doc — run `lares nexus charter seat` before setting a posture" }, human: () => console.error("lares nexus posture: no charter doc — seat the charter first") });
+    return exitFor("error");
+  }
+  const posture: FederationPosture = want;
+  const next = { ...doc, federationPosture: posture };
+  const path = writeNexusCharterDoc(bagsDir, next);
+  emit(args, {
+    ok: true,
+    data: { posture, path },
+    human: () => {
+      console.log(`nexus federation posture → ${posture.toUpperCase()} (written ${path})`);
+      console.log(posture === "open"
+        ? `  the Nexus now co-federates the PUBLIC planes with cross-Nexus foreign operators (private planes stay sealed).`
+        : `  the Nexus keeps to itself — only same-Nexus members co-federate (the fail-closed default).`);
+      console.log(`  NOTE: a running node reads the posture as-of-boot; bounce it (or await the refresh hook) to apply a live flip.`);
+    },
+  });
+  return 0;
 }
 
 async function cmdCharter(args: ParsedArgs): Promise<number> {
@@ -386,6 +554,7 @@ async function charterShow(args: ParsedArgs): Promise<number> {
       console.log(`  head epoch: ${roster.charterEpochCid || "(unestablished)"}`);
       console.log(`  rotation:   ${head && head.nextKeyCommit.length > 0 ? "ARMED" : "UNARMED"}`);
       console.log(`  quorum:     ${quorum ? "STANDS (roster live)" : "SHORT (fail-closed — antigen inert)"}`);
+      console.log(`  posture:    ${federationPostureFromDoc(doc)} (cross-Nexus federation — default private)`);
       const reserve = readCharterReserveState();
       console.log(`  reserve:    ${reserve ? `commit ${reserve.nextKeyCommit.slice(0, 16)}… (epoch ${reserve.reserveEpoch}, guardians ${reserve.guardianA ?? "unassigned"}/${reserve.guardianB ?? "unassigned"})` : "(none — run `lares nexus charter reserve` to custody the pre-rotation)"}`);
     },

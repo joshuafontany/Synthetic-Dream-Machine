@@ -30,7 +30,7 @@ import {
   type DocumentId,
   type PeerId,
 } from "@automerge/automerge-repo";
-import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl, personaKelBoardDocUrl } from "./deterministic-doc.js";
+import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl, personaKelBoardDocUrl, membersDocUrl } from "./deterministic-doc.js";
 import type { IdentitySlot } from "./identity-slot.js";
 import type { PeerClass } from "./island-protocol.js";
 
@@ -68,7 +68,8 @@ export class DeterministicFederationGate implements FederationGate {
     const urls: AutomergeUrl[] = [
       crossroadsDocUrl(nexusPubkey),
       whoBoardDocUrl(nexusPubkey),
-      kapaeAntigenDocUrl(nexusPubkey),   // the immune antigen rides the always-carried plane (MANDATORY tier)
+      kapaeAntigenDocUrl(nexusPubkey),   // the immune antigen (DENY-twin) rides the always-carried plane (MANDATORY tier)
+      membersDocUrl(nexusPubkey),        // the operator members-registry (ALLOW-twin) — quorum-signed contracts, MANDATORY tier
       personaKelBoardDocUrl(nexusPubkey), // the persona-KEL board — PUBLIC identifier→head mapping (federates once)
       ...extraBoardUrls,
     ];
@@ -363,4 +364,65 @@ export function classifyCrossOperatorAdmission(proofVerified: boolean): CrossOpe
     };
   }
   return { ok: false, reason: "cross-operator carriage requires a verified proof-of-possession" };
+}
+
+/**
+ * FederationPosture — a per-Nexus stance toward FOREIGN operators (cross-Nexus peers), read as-of-last-sync off
+ * the @nexus charter doc. A Nexus develops in ISOLATION until the operator flips it open, so the default is
+ * PRIVATE (fail-closed: an absent / unreadable posture reads PRIVATE — see `federationPostureFromDoc`).
+ *
+ *   · private — the node co-federates with SAME-Nexus operators only (members of THIS charter). A cross-Nexus
+ *     peer — a valid, proof-carrying FOREIGN operator that this Nexus never admitted — is denied co-federation
+ *     entirely (not even the public shelf crosses to it). The Nexus keeps to itself.
+ *   · open    — cross-Nexus peers co-federate the PUBLIC planes: the existing bounded public/infra carry
+ *     (@crossroads / WHO / kapae-antigen / members) crosses to any proof-carrying foreign operator.
+ *
+ * The posture governs the CARRY of the PUBLIC surface to FOREIGN operators. It NEVER opens a private plane: the
+ * BeeKEM read-floor + the self-slot's private-plane denial hold absolute in BOTH postures. Open widens WHO may
+ * carry the public shelf; it never widens WHAT crosses.
+ */
+export type FederationPosture = "private" | "open";
+
+/** The fail-closed default — a Nexus develops in isolation until the operator opens it. */
+export const DEFAULT_FEDERATION_POSTURE: FederationPosture = "private";
+
+/**
+ * The OUTER posture gate over a cross-operator admission: MAY a proof-carrying foreign operator co-federate the
+ * public shelf, given this Nexus's posture and whether that operator is a contracted member of THIS charter?
+ *
+ *   · open    → yes (any proof-carrying foreign operator co-federates the public shelf; membership is irrelevant
+ *               to the public tier — a stranger still reaches ONLY the federatable set, never a private plane).
+ *   · private → yes ONLY when the operator is a SAME-Nexus MEMBER; a non-member cross-Nexus peer → NO.
+ *
+ * Fail-closed direction: private + non-member denies. The posture reads PRIVATE by default, so an unconfigured
+ * Nexus denies every foreign operator until the operator both opens it AND (for the sealed lane) contracts them.
+ */
+export function postureGatesCrossOperator(posture: FederationPosture, isNexusMember: boolean): boolean {
+  if (posture === "open") return true;
+  return isNexusMember;   // private: same-Nexus members only
+}
+
+/**
+ * admitCrossOperatorUnderPosture — COMPOSE the posture (outer) with `classifyCrossOperatorAdmission` (inner). The
+ * classify FLOOR still requires a verified proof-of-possession (a foreign presenter that cannot prove key-possession
+ * draws a DENY, unconditionally). The posture then gates whether that proven foreign operator co-federates at all:
+ * under PRIVATE it must also be a SAME-Nexus member; under OPEN the classify verdict passes straight through.
+ *
+ * A denial names its cause for audit. NEVER opens a private plane — an `ok` verdict still earns ONLY the bounded
+ * cross-operator federatable-carry tier the classifier grants; the read-floor and the self-slot denial are untouched.
+ */
+export function admitCrossOperatorUnderPosture(args: {
+  readonly proofVerified: boolean;
+  readonly posture:       FederationPosture;
+  readonly isNexusMember: boolean;
+}): CrossOperatorAdmission {
+  const floor = classifyCrossOperatorAdmission(args.proofVerified);
+  if (!floor.ok) return floor;   // no proven possession → deny (fail-closed), regardless of posture
+  if (postureGatesCrossOperator(args.posture, args.isNexusMember)) {
+    return { ...floor, reason: `${floor.reason} · posture=${args.posture}` };
+  }
+  return {
+    ok: false,
+    reason: `posture=private denies a cross-Nexus (non-member) foreign operator co-federation`,
+  };
 }

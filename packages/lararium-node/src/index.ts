@@ -149,6 +149,21 @@ export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-a
 export { runNexusKapae, runNexusKapaeList, NexusKapaeError } from "./commands/nexus-kapae.js";
 export type { NexusKapaeOptions, NexusKapaeResult, NexusKapaeListResult } from "./commands/nexus-kapae.js";
 
+// The operator MEMBERS-registry RAISE side (Build-2) — the founding kahu writes a quorum-signed + contract-in
+// admit/revoke onto the members board (the antigen's ALLOW-twin); `accept-carriage` mints the operator contract-in.
+export { runNexusAdmit, runNexusAcceptCarriage, runNexusMembersList, NexusAdmitError } from "./commands/nexus-admit.js";
+export type { NexusAdmitOptions, NexusAdmitResult, NexusMembersListResult } from "./commands/nexus-admit.js";
+
+// The traceless BOOT-INVITE burn (Build-2) — mint a sealed single-use invite; decide + spend-on-boot LOCALLY.
+export {
+  runBootInviteMint, runBootInviteSpend, readBurnSet, isBurned, burn as burnBootInvite,
+  bootInviteBurnPath, bootInviteId,
+} from "./boot-invite-burn.js";
+
+// The @nexus MEMBERSHIP consult holder (Build-2) — the carry-split's member gate: kahu floor ∪ folded members{}.
+export { makeNexusMembership } from "./nexus-membership.js";
+export type { NexusMembershipHolder } from "./nexus-membership.js";
+
 export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
 // The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root
 // SET mints/loads the operator-root the `lares persona` door drives (founder-side custody).

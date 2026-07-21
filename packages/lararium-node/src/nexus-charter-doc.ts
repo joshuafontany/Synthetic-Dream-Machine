@@ -89,8 +89,12 @@ function coerceCharterDoc(parsed: unknown): NexusCharterDoc | null {
       verifyingKey: typeof vk === "string" && vk.length > 0 ? vk : null,
     });
   }
+  // The federation posture reads only the exact literal "open"; anything else (absent, torn, unrecognized) folds
+  // to PRIVATE downstream via `federationPostureFromDoc` — a torn posture must never silently open the mesh.
+  const posture = p["federationPosture"] === "open" ? ("open" as const) : undefined;
   const base: NexusCharterDoc = { kind: NEXUS_CHARTER_DOC_KIND, threshold: p["threshold"] as number, charterEpochCid, kahu };
-  return chain === undefined ? base : { ...base, charterChain: chain };
+  const withChain = chain === undefined ? base : { ...base, charterChain: chain };
+  return posture === undefined ? withChain : { ...withChain, federationPosture: posture };
 }
 
 /**

@@ -27,6 +27,7 @@
 import type { KahuCharterRoster } from "./kapae-antigen.js";
 import { sha256HexSync, canonicalJson } from "./crypto.js";
 import { type CharterEpoch, verifyCharterChain, charterKeySetHash } from "./wax-stamp.js";
+import { type FederationPosture, DEFAULT_FEDERATION_POSTURE } from "./federation-gate.js";
 
 /** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
 export const NEXUS_CHARTER_DOC_KIND = "lar-nexus-charter/v1" as const;
@@ -64,6 +65,12 @@ export interface NexusCharterDoc {
   readonly charterChain?:   readonly CharterEpoch[];
   /** The founding kahu, each seated (verifyingKey set) or unseated (null). */
   readonly kahu:            readonly NexusCharterKahu[];
+  /**
+   * The per-Nexus federation POSTURE toward FOREIGN operators (read as-of-last-sync). Absent → PRIVATE
+   * (fail-closed: a Nexus develops in isolation until the operator opens it). `federationPostureFromDoc`
+   * reads it. Governs cross-Nexus CARRY of the public shelf only; it never opens a private plane.
+   */
+  readonly federationPosture?: FederationPosture;
 }
 
 /** Legacy alias — one founding kahu named by display + its (unbound-until-seated) key. */
@@ -127,6 +134,15 @@ export function rosterFromCharterDoc(doc: NexusCharterDoc | null): KahuCharterRo
   const epoch = doc && typeof doc.charterEpochCid === "string" ? doc.charterEpochCid : "";
   if (epoch.length === 0) return empty;                                             // no epoch → nothing roots → deny
   return { keys, threshold, charterEpochCid: epoch };
+}
+
+/**
+ * Read the federation posture off a charter doc — FAIL CLOSED to PRIVATE. An absent doc, an absent field, or any
+ * value but the exact literal `"open"` reads PRIVATE (a Nexus develops in isolation until the operator explicitly
+ * opens it; a torn / unrecognized posture must never silently open the mesh). Read as-of-last-sync — no global now.
+ */
+export function federationPostureFromDoc(doc: NexusCharterDoc | null): FederationPosture {
+  return doc?.federationPosture === "open" ? "open" : DEFAULT_FEDERATION_POSTURE;
 }
 
 /** The pre-rotated chain's head epoch, or null when no chain stands established (legacy / unseated doc). */

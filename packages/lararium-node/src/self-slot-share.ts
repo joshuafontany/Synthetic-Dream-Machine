@@ -25,8 +25,8 @@
  * Meme: lar:///ha.ka.ba/lararium/node/self-slot-share
  */
 import type { DocumentId } from "@automerge/automerge-repo";
-import { carryContractShareDecision, memberCarryShareDecision } from "@lararium/mesh";
-import type { AntigenRing, FederationGate, NexusMembership, PeerClass, PlaneSeal } from "@lararium/mesh";
+import { carryContractShareDecision, memberCarryShareDecision, postureGatesCrossOperator } from "@lararium/mesh";
+import type { AntigenRing, FederationGate, FederationPosture, NexusMembership, PeerClass, PlaneSeal } from "@lararium/mesh";
 
 /** A same-operator peer + every in-process island peer ride this empty relay ring → shared freely. */
 const NO_RELAY_PEERS: ReadonlySet<string> = new Set<string>();
@@ -45,6 +45,18 @@ export interface SelfSlotShareInput {
   readonly membership: NexusMembership | null;
   /** The plane-seal oracle — only a PROVABLY-sealed plane blind-transits. Null → deny-carry, fail-closed. */
   readonly planeSeal: PlaneSeal | null;
+  /**
+   * The per-Nexus federation POSTURE (read as-of-last-sync off the @nexus charter doc). Governs cross-Nexus
+   * carry of the PUBLIC shelf to a FOREIGN (non-member) operator: PRIVATE denies it entirely (only a SAME-Nexus
+   * member co-federates); OPEN lets any proof-carrying foreign operator reach the public shelf. It NEVER touches
+   * a private plane — those stay sealed by the read-floor + the self-slot denial in BOTH postures.
+   *
+   * This pure mechanism defaults OPEN when omitted (policy-neutral: the code never bakes the legitimacy answer,
+   * mirroring `decideCabalJoin`), AND — because the posture only ever gates the world-public shelf — an omitted
+   * default can leak nothing private. The FAIL-CLOSED live default (PRIVATE) is set by the NODE caller
+   * (`open-node-vessel` reads the charter doc, defaulting private); every live sharePolicy call supplies it.
+   */
+  readonly federationPosture?: FederationPosture;
   readonly peerId: string;
   /** The doc under decision; `undefined` (a gated relay peer with no doc id) → deny-by-default. */
   readonly documentId: DocumentId | undefined;
@@ -59,6 +71,15 @@ export async function selfSlotShareDecision(input: SelfSlotShareInput): Promise<
   // Gate a WS peer the worker did NOT positively vouch same-operator (cross-operator OR unclassified).
   const gateThisPeer = input.hasWsSocket && input.peerClass !== "same-operator";
   if (gateThisPeer) {
+    // THE POSTURE OUTER GATE (open-beta toggle). Under PRIVATE, a cross-Nexus foreign operator that is NOT a
+    // SAME-Nexus member is denied co-federation ENTIRELY — not even the public shelf crosses. Under OPEN, any
+    // proof-carrying foreign operator reaches the public shelf (the prior bounded carry). The posture never opens
+    // a private plane; it only gates WHO may carry the world-public surface. Defaults OPEN when omitted (the pure
+    // mechanism stays policy-neutral + can leak nothing private); the live node caller supplies the fail-closed
+    // PRIVATE default it read off the charter doc.
+    const posture  = input.federationPosture ?? "open";
+    const isMember = input.membership?.isMemberPeer(input.peerId) ?? false;
+    if (!postureGatesCrossOperator(posture, isMember)) return false;   // private + non-member → deny all (Mu-shaped false)
     // FAIL-CLOSED at the boot edge: a gated peer whose federatable classifier has not yet stood gets a
     // DenyAllGate floor — the federatable floor reads nothing crossable (`carryContractShareDecision` reads
     // a null fed gate as "same-operator relay → full sync", a DIFFERENT case, so a gated peer MUST never

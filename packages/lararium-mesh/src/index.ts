@@ -78,8 +78,16 @@ export { presenterIsKapaed, carryContractShareDecision, classifyCrossOperatorAdm
 export type { CrossOperatorAdmission } from "./federation-gate.js";
 export { memberCarryShareDecision } from "./federation-gate.js";
 export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
+// The open-beta federation POSTURE — the outer gate over cross-operator admission (private/open, default private).
+export type { FederationPosture } from "./federation-gate.js";
+export { DEFAULT_FEDERATION_POSTURE, postureGatesCrossOperator, admitCrossOperatorUnderPosture } from "./federation-gate.js";
 export * from "./kapae-antigen.js";
 export { antigenEntriesFromBoard, writeAntigenEntry, antigenEntryKey, ANTIGEN_ENTRY_PREFIX } from "./antigen-board.js";
+// The operator MEMBERS-registry — the Kapae-antigen's ALLOW-twin (members{} ⊥ blocked{}); contracts, never identities.
+export * from "./membership-registry.js";
+export { membershipEntriesFromBoard, writeMembershipEntry, membershipEntryKey, MEMBERS_ENTRY_PREFIX } from "./members-board.js";
+// The TRACELESS boot-invite — a sealed single-use capability spent-on-boot; no voucher, no board record.
+export * from "./boot-invite.js";
 export {
   personaKelEventsFromBoard, personaKelChainsFromBoard, personaKelChainForPrefix,
   writePersonaKelEvent, personaKelEntryKey, PERSONA_KEL_ENTRY_PREFIX,

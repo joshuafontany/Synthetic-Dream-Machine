@@ -52,6 +52,18 @@ export function kapaeAntigenDocUrl(nexusPubkey: string): AutomergeUrl {
 }
 
 /**
+ * The Nexus's operator MEMBERS-registry board URL — deterministic, so the quorum-signed members{} ALLOW-set
+ * rides the always-carried public plane every island member resolves alike (carry-contract MANDATORY tier).
+ * The ALLOW-twin of `kapaeAntigenDocUrl` (members{} ⊥ blocked{}), a sibling under the same `nexusRegistryUri`.
+ * The federation gate federates this board like @crossroads + WHO + the antigen, so an admit propagates to
+ * every honest carrier and the carry-split's member gate reads a live set — bounded by sync-latency, never a
+ * global now. It carries operator CONTRACTS only (pubkey + charter-epoch + accepts-carriage), never a user.
+ */
+export function membersDocUrl(nexusPubkey: string): AutomergeUrl {
+  return deterministicDocUrl(`${nexusRegistryUri(nexusPubkey)}#members`);
+}
+
+/**
  * The Nexus's PERSONA-KEL board URL — deterministic, so the per-Nexus key-event-log board (every persona's
  * PUBLIC KEL head/events) rides the always-carried plane every island member resolves alike. A sibling of the
  * WHO board (both derive from `nexusHandlesUri` — the public WHO face), because the KEL PUBLICLY advertises
