@@ -17,6 +17,7 @@ export * from "./persona-vault.js";
 export * from "./persona-petname.js";
 export * from "./persona-glamour.js";
 export * from "./recovery-keel-core.js";
+export * from "./charter-reserve.js";
 export * from "./capability.js";
 export * from "./crypto.js";
 export * from "./agile-digest.js";

@@ -27,11 +27,14 @@ import {
   readNexusCharterDoc, writeNexusCharterDoc, nexusCharterDocPath,
   listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore,
   runNexusKapae, runNexusKapaeList, NexusKapaeError,
+  sealReserveMineShare, writeCharterReserveState, readCharterReserveState,
 } from "@lararium/node";
 import {
   emptyFoundingCharterDoc, rosterFromCharterDoc, foundingQuorumSeated, charterChainHead,
   ownPersonaPetname, genesisCharterEpoch, rotateCharterEpoch, charterKeySetHash,
-  type NexusCharterDoc, type NexusCharterKahu, type CharterEpoch,
+  generateReserveSeed, deriveReserveKeySet, reserveNextKeyCommit, splitReserveSeed,
+  RESERVE_THRESHOLD, RESERVE_KAHU_COUNT, defaultCryptoProvider,
+  type NexusCharterDoc, type NexusCharterKahu, type CharterEpoch, type ReserveCard,
 } from "@lararium/mesh";
 import { larBagsDir, larDataDir } from "../env.js";
 import { emit, exitFor } from "../render.js";
@@ -57,6 +60,11 @@ function charterUsage(): void {
   console.error("          --next-key-commit <digest-of-the-FOLLOWING-key-set>");
   console.error("  commit  compute a key-set commitment digest:  --keys <k1,k2,...> --threshold <k>");
   console.error("  show    read the current founding-kahu roster + chain head + quorum verdict");
+  console.error("  reserve [refresh|show]                     custody the pre-rotation's NEXT key-set:");
+  console.error("          reserve         forge one reserve seed, derive the 3 next keys HARDENED, print the");
+  console.error("                          --next-key-commit + the 3 recovery cards   [--guardian-a --guardian-b]");
+  console.error("          reserve refresh re-seed + re-derive + re-issue the cards + print a NEW commit");
+  console.error("          reserve show    the reserve state (commit present, guardians, share sealed)");
 }
 
 export async function cmdNexus(args: ParsedArgs): Promise<number> {
@@ -76,10 +84,11 @@ async function cmdCharter(args: ParsedArgs): Promise<number> {
   const sub = args.positional[1];
   try {
     switch (sub) {
-      case "seat":   return await charterSeat(args);
-      case "rotate": return await charterRotate(args);
-      case "commit": return charterCommit(args);
-      case "show":   return await charterShow(args);
+      case "seat":    return await charterSeat(args);
+      case "rotate":  return await charterRotate(args);
+      case "commit":  return charterCommit(args);
+      case "show":    return await charterShow(args);
+      case "reserve": return await cmdCharterReserve(args);
       default:
         if (sub) console.error(`lares nexus charter: unknown sub-verb "${sub}"`);
         charterUsage();
@@ -377,6 +386,155 @@ async function charterShow(args: ParsedArgs): Promise<number> {
       console.log(`  head epoch: ${roster.charterEpochCid || "(unestablished)"}`);
       console.log(`  rotation:   ${head && head.nextKeyCommit.length > 0 ? "ARMED" : "UNARMED"}`);
       console.log(`  quorum:     ${quorum ? "STANDS (roster live)" : "SHORT (fail-closed — antigen inert)"}`);
+      const reserve = readCharterReserveState();
+      console.log(`  reserve:    ${reserve ? `commit ${reserve.nextKeyCommit.slice(0, 16)}… (epoch ${reserve.reserveEpoch}, guardians ${reserve.guardianA ?? "unassigned"}/${reserve.guardianB ?? "unassigned"})` : "(none — run `lares nexus charter reserve` to custody the pre-rotation)"}`);
+    },
+  });
+  return 0;
+}
+
+// ── The charter reserve keel — custody the pre-rotation's NEXT key-set ────────────────────────────────
+//
+// The reserve seed is forged IN MEMORY, derives the three next-epoch kahu keys HARDENED (SLIP-0010, off a
+// SEPARATE seed — never the live signing seed), and Shamir-splits 2-of-3 into three cards. The vessel keeps
+// only Share 1 ("mine"), SEALED; the seed NEVER lands on disk (zeroized the instant the split returns).
+
+async function cmdCharterReserve(args: ParsedArgs): Promise<number> {
+  const op = args.positional[2];
+  switch (op) {
+    case undefined:
+    case "provision": return await charterReserveProvision(args, "provision");
+    case "refresh":   return await charterReserveProvision(args, "refresh");
+    case "show":      return await charterReserveShow(args);
+    default:
+      console.error(`lares nexus charter reserve: unknown op "${op}" (expected refresh | show | <none>)`);
+      return 2;
+  }
+}
+
+/** Emit the three cards + the seat instruction — shared by provision and refresh. */
+function reserveCardsEmission(
+  args: ParsedArgs,
+  data: Record<string, unknown>,
+  cards: readonly ReserveCard[],
+  nextKeyCommit: string,
+  humanHead: () => void,
+): void {
+  emit(args, {
+    ok: true,
+    data,
+    human: () => {
+      humanHead();
+      console.log(``);
+      console.log(`  Place these THREE cards by hand (web3-pure — no cloud/email/API coupling):`);
+      for (const c of cards) {
+        console.log(`    ── ${c.label} ──`);
+        console.log(`       share code:   ${c.shareCode}`);
+        console.log(`       confirm:      ${c.confirmPhrase}   (read out-of-band to verify the card)`);
+      }
+      console.log(``);
+      console.log(`  "mine" seals on THIS vessel; a printed/emailed copy of "mine" carries the SAME share —`);
+      console.log(`  an operator-full-compromise reveals ONE share → nothing. The two guardian cards recover`);
+      console.log(`  WITHOUT you; any TWO of the three rebuild the reserve.`);
+      console.log(``);
+      console.log(`  Arm the pre-rotation:  lares nexus charter seat --next-key-commit ${nextKeyCommit}`);
+    },
+  });
+}
+
+async function charterReserveProvision(args: ParsedArgs, mode: "provision" | "refresh"): Promise<number> {
+  const guardianA = args.options["guardian-a"] ?? null;
+  const guardianB = args.options["guardian-b"] ?? null;
+
+  // The reserve epoch advances on refresh; founding provision seats epoch 1. A refresh with no prior state
+  // still seats epoch 1 (nothing to advance) — surfaced in the human head below.
+  const prior = readCharterReserveState();
+  const reserveEpoch = mode === "refresh" ? (prior?.reserveEpoch ?? 0) + 1 : 1;
+
+  // Read the charter chain to name the reconciliation route (below) — this command NEVER mutates the charter.
+  const doc = readNexusCharterDoc(larBagsDir());
+  const chainDepth = doc?.charterChain?.length ?? 0;
+
+  const rng = defaultCryptoProvider;
+  const reserveSeed = generateReserveSeed(rng);
+  try {
+    const { verifyingKeys } = await deriveReserveKeySet(reserveSeed, reserveEpoch);
+    const nextKeyCommit = reserveNextKeyCommit(verifyingKeys);      // charterKeySetHash(3 keys, threshold 2)
+    const { cards, mineShare } = splitReserveSeed(reserveSeed, guardianA, guardianB, reserveEpoch, rng);
+
+    // Seal ONLY the "mine" share; record the PUBLIC state (commit + guardians). The seed reaches neither.
+    sealReserveMineShare(mineShare);
+    writeCharterReserveState({
+      reserveEpoch, nextKeyCommit, threshold: RESERVE_THRESHOLD, kahuCount: RESERVE_KAHU_COUNT,
+      guardianA, guardianB, mineShareSealed: true, issuedAt: new Date().toISOString(),
+    });
+
+    // The refresh reconciliation FORK — named, never auto-resolved (the seated pre-commitment is frozen
+    // into its epochCid; a reserve refresh cannot retro-fit a sealed head).
+    const reconcile = mode === "provision"
+      ? null
+      : chainDepth <= 1
+        ? "re-commit-before-seal"   // genesis-only (unrotated): re-run `seat --next-key-commit` to re-mint genesis
+        : "full-rotation";          // rotated: the CURRENT reserve keys reveal at the pending rotate; this commit arms the FOLLOWING epoch
+
+    reserveCardsEmission(
+      args,
+      {
+        mode, reserveEpoch, nextKeyCommit, threshold: RESERVE_THRESHOLD, kahuCount: RESERVE_KAHU_COUNT,
+        guardianA, guardianB, chainDepth, reconcile,
+        cards: cards.map((c) => ({ slot: c.slot, label: c.label, custodian: c.custodian, shareCode: c.shareCode, confirmPhrase: c.confirmPhrase })),
+      },
+      cards,
+      nextKeyCommit,
+      () => {
+        if (mode === "provision") {
+          console.log(`nexus charter reserve — forged the pre-rotation's next key-set (reserve epoch ${reserveEpoch}).`);
+          console.log(`  the reserve seed lived IN MEMORY only; the vessel keeps one SEALED share, never the seed.`);
+        } else {
+          console.log(`nexus charter reserve REFRESH — re-seeded + re-derived (reserve epoch ${reserveEpoch}).`);
+          console.log(`  new --next-key-commit: ${nextKeyCommit}`);
+          if (reconcile === "re-commit-before-seal") {
+            console.log(`  RECONCILE (chain depth ${chainDepth}, genesis-only/unrotated): re-run`);
+            console.log(`    lares nexus charter seat --next-key-commit ${nextKeyCommit}`);
+            console.log(`  — a genesis re-mint is permitted BEFORE the first rotate (the pre-committed keys never signed yet).`);
+          } else {
+            console.log(`  RECONCILE (chain depth ${chainDepth}, ALREADY rotated): the CURRENT reserve keys must reveal`);
+            console.log(`  at the pending \`rotate\` FIRST (a sealed head's pre-commitment is frozen into its epochCid).`);
+            console.log(`  This new commit arms the FOLLOWING epoch — supply it at the NEXT:`);
+            console.log(`    lares nexus charter rotate --next-key-commit ${nextKeyCommit}`);
+          }
+        }
+      },
+    );
+    return 0;
+  } finally {
+    reserveSeed.fill(0);   // the reserve seed never lands on disk, and never lingers past the split
+  }
+}
+
+async function charterReserveShow(args: ParsedArgs): Promise<number> {
+  const state = readCharterReserveState();
+  emit(args, {
+    ok: true,
+    data: state
+      ? {
+          present: true, reserveEpoch: state.reserveEpoch, nextKeyCommit: state.nextKeyCommit,
+          threshold: state.threshold, kahuCount: state.kahuCount,
+          guardianA: state.guardianA, guardianB: state.guardianB,
+          mineShareSealed: state.mineShareSealed, issuedAt: state.issuedAt,
+        }
+      : { present: false },
+    human: () => {
+      if (!state) {
+        console.log(`no charter reserve — run \`lares nexus charter reserve\` to custody the pre-rotation's next key-set.`);
+        return;
+      }
+      console.log(`nexus charter reserve:`);
+      console.log(`  commit:     ${state.nextKeyCommit}   (${state.threshold}-of-${state.kahuCount})`);
+      console.log(`  epoch:      ${state.reserveEpoch}   (issued ${state.issuedAt})`);
+      console.log(`  guardians:  A=${state.guardianA ?? "unassigned"}  B=${state.guardianB ?? "unassigned"}`);
+      console.log(`  mine share: ${state.mineShareSealed ? "SEALED on this vessel" : "NOT sealed"}`);
+      console.log(`  (the seed and the full share-set are NEVER shown — only the public commit + labels)`);
     },
   });
   return 0;
