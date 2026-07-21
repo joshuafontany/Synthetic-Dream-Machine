@@ -17,7 +17,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { join }                         from "path";
 import type { Server }                  from "node:http";
-import type { DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
+import type { DocHandle, AutomergeUrl, DocumentId } from "@automerge/automerge-repo";
 import { Repo }                         from "@automerge/automerge-repo";
 import { DurableNodeFSStorageAdapter } from "./durable-storage-adapter.js";
 import { NodeWSServerAdapter }          from "@automerge/automerge-repo-network-websocket";
@@ -65,8 +65,9 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { daemonGenesisDir }               from "./lares-config.js";
 import { resolvePalacePath, orderHandleTurnsToStubs, type HandleTurn } from "@lararium/mempalace";
 import { writebackWing, TelemetryUnavailable } from "@lararium/sensorium";
-import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
-import type { SparseFormVector, WorldlineStubWire } from "@lararium/mesh";
+import { LarEventBusImpl, DEFAULT_RINGS, carryContractShareDecision } from "@lararium/mesh";
+import type { SparseFormVector, WorldlineStubWire, AntigenRing } from "@lararium/mesh";
+import { makeAntigenRingHolder } from "./antigen-ring.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
 
@@ -275,6 +276,14 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       }
     });
   });
+  // The #59 antigen ring — the live Kapae-immune consult. Forward-declared here (the sharePolicy closes
+  // over it) and STOOD once the operator's own nym (its Nexus key) is loaded, below. A null ring denies
+  // nobody (a denylist's absence = no bans), so the boot window before the ring stands is correctly inert.
+  let antigenRing: AntigenRing | null = null;
+  // A shared frozen empty set — the node has no per-doc relay gate (an admitted WS peer full-syncs), so
+  // `carryContractShareDecision` runs with no relay ring + no fed gate + inert self-slot: the antigen
+  // consult is the WHOLE additive layer it adds over the peer-admission gate below.
+  const NO_RELAY_PEERS: ReadonlySet<string> = new Set<string>();
   const repo = new Repo({
     storage,
     network: [network],
@@ -289,9 +298,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // run a gate). Both are the same seam at two resolutions — the V5 KeyhiveIdentitySlot
     // composes verifyCapability(docUrl, ability) as the INNER ring here (per-doc caps
     // behind the per-peer admission), matching the browser's FederationGate call site.
-    sharePolicy: async (peerId) => {
+    sharePolicy: async (peerId, documentId) => {
       const wsSocket = (network.sockets as Record<string, unknown> | undefined)?.[peerId];
-      return wsSocket ? peerIdentifierMap.has(peerId) : true;
+      // OUTER peer-admission gate (unchanged): a WS peer that never passed the DaemonAuthGate is not in
+      // `peerIdentifierMap` → deny; an in-process island peer (no WS socket) is a house member → admit.
+      if (wsSocket && !peerIdentifierMap.has(peerId)) return false;
+      // The #59 carry-contract, layered over the admitted set: a Kapae'd presenter draws Mu (the identical
+      // `false` a caught-up peer draws — mu-void). fed gate null + empty relay ring keep the admitted-peer
+      // full-sync semantics unchanged; the self-slot inner ring stays inert (identity = null — the
+      // federatable-own/private-own split is NOT provably safe on this seam yet, see antigen-ring notes).
+      return carryContractShareDecision(NO_RELAY_PEERS, null, antigenRing, null, peerId, documentId as DocumentId | undefined);
     },
   });
   emit("repo-open");
@@ -321,6 +337,21 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // ── Operator identity (node-held) ──────────────────────────────────────────
   const operatorIdentity = await generateOrLoadVesselIdentity(storageDir);
   const operatorSeed     = await loadVesselSigningSeed(storageDir);
+
+  // ── The #59 antigen ring — STOOD now the operator's own verifying key is loaded ─────────────
+  // The node IS the confederation anchor: its own gate key IS its Nexus key (the same key browsers
+  // pass as relayGatePubKey, and the deterministic antigen-board id is a pure function of it). The
+  // holder resolves the always-carried antigen board, folds the quorum-signed bans against the
+  // founding-kahu roster read off `bags/@nexus` (LAR_BAGS ?? <root>/bags), and re-folds on every board
+  // change. FAILS CLOSED: an unseated charter → empty roster → nothing Kapae'd (no quorum, no bans).
+  const antigenBagsDir = process.env["LAR_BAGS"] ?? join(rootDirOpt ?? repoRoot, "bags");
+  const antigenHolder = makeAntigenRingHolder({
+    repo,
+    nexusPubkey:       operatorIdentity.verifyingKey,
+    bagsDir:           antigenBagsDir,
+    peerIdentifierMap,
+  });
+  antigenRing = antigenHolder.ring;
 
   // ── Main-resident residency MECHANISM (sovereign-worker: policy in the worker,
   //    mechanism here). onEvict commands the pool via the forward `vmManager` ref. ──
