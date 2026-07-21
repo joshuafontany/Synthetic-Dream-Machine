@@ -74,6 +74,7 @@ import { makePersonaKelRingHolder } from "./persona-kel-ring.js";
 import { makeNexusMembership } from "./nexus-membership.js";
 import { readNexusCharterDoc } from "./nexus-charter-doc.js";
 import { makeSealedPlaneRegistry } from "./plane-seal.js";
+import type { NexusConvergenceKeyring } from "./nexus-convergence-keyring.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
 
@@ -315,6 +316,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // registers here AS A SIDE-EFFECT and the member blind-transit lane opens for that ciphertext body. A
   // cleartext body reaches no encrypt path → never registers → a doc can never self-label sealed.
   const sealRegistry = makeSealedPlaneRegistry();
+  // THE PER-NEXUS CONVERGENCE KEYRING — the SOURCE the @cad seal message-locks against (fork-② = A2, operator-
+  // ruled 2026-07-21). Forward-declared null and STOOD once the operator's own nym + the charter epoch are known:
+  // the private-lane admission handoff (the SAME lane the read-caps ride, below) delivers the `{epoch → secret}`
+  // keyring; `makeNexusConvergenceKeyring(entries)` stands it here. A null keyring keeps the boot window — and any
+  // member never handed a keyring — FAIL-CLOSED: `installSealedBody` reads `keyring.current()`, which throws on an
+  // absent/empty keyring, so the body stays local/unsealed (never a plaintext body registered sealed). The
+  // custody + distribution of that keyring over the private lane is the admission seam this name marks; it does
+  // NOT stand a Nexus-scope CGKA group (the exporter north-star, deferred — see nexus-convergence-keyring.ts).
+  let nexusConvergenceKeyring: NexusConvergenceKeyring | null = null;
+  void nexusConvergenceKeyring;   // named seam — the live admission-delivery wiring lands with the seal call site
   const repo = new Repo({
     storage,
     network: [network],

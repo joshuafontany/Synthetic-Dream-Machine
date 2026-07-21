@@ -25,13 +25,16 @@ import {
 import { sealBodyOnCas, parseDigest, hexToBytes, type SealedBody } from "@lararium/mesh";
 import { writeCasEntriesFs } from "./node-cas.js";
 import type { SealedPlaneRegistry } from "./plane-seal.js";
+import type { NexusEpochSecret } from "./nexus-convergence-keyring.js";
 
-/** The outcome of sealing one body @cad — the public verify-cap (cid + docId) and the caller-kept read-cap. */
+/** The outcome of sealing one body @cad — the public verify-cap (cid + docId + epoch) and the caller-kept read-cap. */
 export interface InstalledSealedBody {
   /** `blake3:<hex>` — the ciphertext content-address a relay recomputes secret-free (verify-cap). */
   readonly cid: string;
   /** The Automerge docId derived from the cid — the sealed-plane key the member lane gates on. */
   readonly docId: DocumentId;
+  /** The charter epoch this body sealed under — the sidecar a reader looks the keyring secret up by. */
+  readonly epoch: number;
   /** The message-locked read-cap (32 bytes) — rides the PRIVATE keyhive lane, NEVER the relay. */
   readonly readCap: Uint8Array;
 }
@@ -57,17 +60,20 @@ export function docIdForCiphertextCid(cid: string): DocumentId {
  * @param registry    the live sealed-plane registry the vessel sharePolicy holds (`registry.seal`).
  * @param casDir      the fs `cid/` CAS dir (casDirForStorage — the SAME dir a worker resolveByCid reads).
  * @param plaintext   the body bytes leaving the CRDT.
- * @param nexusSecret the injected 32-byte per-Nexus convergence secret (fail-closed if absent/mis-sized upstream).
+ * @param epochSecret the CURRENT per-Nexus convergence `{epoch, secret}` (from `keyring.current()`). The caller
+ *                    with NO keyring MUST NOT reach here — `keyring.current()` throws on empty (fail-closed), so
+ *                    the body stays local/unsealed. The seal message-locks to `secret`; the `epoch` records the
+ *                    sidecar so a reader looks the matching keyring secret up. The epoch NEVER enters the cid.
  */
 export function installSealedBody(
   registry:    SealedPlaneRegistry,
   casDir:      string,
   plaintext:   Uint8Array,
-  nexusSecret: Uint8Array,
+  epochSecret: NexusEpochSecret,
 ): InstalledSealedBody {
-  const sealed: SealedBody = sealBodyOnCas(plaintext, nexusSecret);   // throws fail-closed on a bad/absent secret
+  const sealed: SealedBody = sealBodyOnCas(plaintext, epochSecret.secret);   // throws fail-closed on a bad/absent secret
   writeCasEntriesFs([{ cid: sealed.cid, bytes: sealed.ciphertext }], casDir);
   const docId = docIdForCiphertextCid(sealed.cid);
-  registry.register(docId);                                          // THE SIDE-EFFECT — only the encrypt path reaches here
-  return { cid: sealed.cid, docId, readCap: sealed.readCap };
+  registry.register(docId, epochSecret.epoch);                       // THE SIDE-EFFECT (set + epoch sidecar together)
+  return { cid: sealed.cid, docId, epoch: epochSecret.epoch, readCap: sealed.readCap };
 }

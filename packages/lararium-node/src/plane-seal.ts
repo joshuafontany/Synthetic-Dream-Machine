@@ -58,18 +58,34 @@ export function makeSealedPlaneSet(sealedDocIds: Iterable<DocumentId>): PlaneSea
 export interface SealedPlaneRegistry {
   /** The oracle the sharePolicy holds — reads the CURRENT sealed set (live; reflects post-open seals). */
   readonly seal: PlaneSeal;
-  /** Record a docId as sealed. The SOLE caller is the encrypt-on-CAS installer, always AFTER a successful seal. */
-  register(documentId: DocumentId): void;
+  /**
+   * Record a docId as sealed AT a named charter epoch — the SOLE caller is the encrypt-on-CAS installer, always
+   * AFTER a successful seal. The `sealEpoch` is the SIDECAR: it names WHICH per-Nexus convergence epoch sealed the
+   * body, so a reader looks up the matching keyring secret. The epoch NEVER enters the cid (the cid stays pure
+   * `BLAKE3(ciphertext)`, an immutable content-address); it rides beside the sealed set as a per-doc annotation.
+   */
+  register(documentId: DocumentId, sealEpoch: number): void;
+  /** The charter epoch a sealed body sealed under, or `undefined` for an unsealed / unknown doc (fail-closed read). */
+  epochFor(documentId: DocumentId): number | undefined;
   /** How many sealed docIds stand (audit / test). */
   readonly size: number;
 }
 
-/** Stand a live sealed-plane registry. Empty at birth ⇒ fail-closed (DENY-ALL) until the encrypt path seals a body. */
+/**
+ * Stand a live sealed-plane registry. Empty at birth ⇒ fail-closed (DENY-ALL) until the encrypt path seals a body.
+ * The seal-set and the epoch sidecar move together: `register` adds both, so a docId is NEVER in the sealed set
+ * without a known seal epoch (a reader that finds a sealed doc always finds its epoch).
+ */
 export function makeSealedPlaneRegistry(): SealedPlaneRegistry {
   const sealed = new Set<DocumentId>();
+  const epochOf = new Map<DocumentId, number>();
   return {
     seal: { isSealedPlane(documentId: DocumentId): boolean { return sealed.has(documentId); } },
-    register(documentId: DocumentId): void { sealed.add(documentId); },
+    register(documentId: DocumentId, sealEpoch: number): void {
+      sealed.add(documentId);
+      epochOf.set(documentId, sealEpoch);
+    },
+    epochFor(documentId: DocumentId): number | undefined { return epochOf.get(documentId); },
     get size(): number { return sealed.size; },
   };
 }

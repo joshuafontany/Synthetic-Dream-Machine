@@ -81,9 +81,17 @@ export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
 // The @cad ENCRYPT-ON-CAS primitive — cid = BLAKE3(ciphertext), verify-cap ⊥ read-cap, per-Nexus message-lock.
 export {
   ciphertextCid, verifyCiphertextCid, deriveMessageKey, sealBodyOnCas, openBodyOnCas,
-  CIPHERTEXT_CID_ALGO, CONVERGENCE_SECRET_LEN,
+  CIPHERTEXT_CID_ALGO, CONVERGENCE_SECRET_LEN, require32,
 } from "./ciphertext-cas.js";
 export type { SealedBody } from "./ciphertext-cas.js";
+// The @cad REMOTE TRANSIT leg — DHT-free discovery + secret-free BLAKE3(bytes)==cid verify (verify-cap ⊥ read-cap).
+export {
+  wantHave, have, dontHave, wantBlock, block,
+  fetchCidOverTransit, makeCidResolver,
+} from "./cas-transit.js";
+export type {
+  CasHolder, CasTransitMessage, CasTransitTransport, LocalCasRead, LocalCasCache,
+} from "./cas-transit.js";
 // The open-beta federation POSTURE — the outer gate over cross-operator admission (private/open, default private).
 export type { FederationPosture } from "./federation-gate.js";
 export { DEFAULT_FEDERATION_POSTURE, postureGatesCrossOperator, admitCrossOperatorUnderPosture } from "./federation-gate.js";

@@ -60,8 +60,12 @@ export interface SealedBody {
   readonly readCap: Uint8Array;
 }
 
-/** Guard a 32-byte secret / read-cap — a stray width never seals (fail-closed at the boundary). */
-function require32(bytes: Uint8Array, what: string): Uint8Array {
+/**
+ * Guard a 32-byte secret / read-cap — a stray width never seals (fail-closed at the boundary). Exported so a
+ * per-Nexus convergence keyring guards every epoch secret through the ONE width-check the seal itself trusts
+ * (a single fail-closed boundary, never two drifting copies).
+ */
+export function require32(bytes: Uint8Array, what: string): Uint8Array {
   if (!(bytes instanceof Uint8Array) || bytes.length !== CONVERGENCE_SECRET_LEN) {
     throw new TypeError(`ciphertext-cas: ${what} MUST be exactly ${CONVERGENCE_SECRET_LEN} bytes, got ${bytes?.length}`);
   }

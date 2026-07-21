@@ -79,6 +79,15 @@ export function runSovereignWorker(
     // Resolve by content-address: the runtime CID plane first (engine/plugin bytes), then the
     // corpus CAS (staged carrier bodies). The caller re-verifies cid==hash(bytes), so a two-dir
     // lookup never widens trust.
+    //
+    // THE REMOTE @cad TRANSIT LEG composes AROUND this local read at the DAEMON/RELAY tier, not here: a
+    // sovereign WORKER holds no member↔relay transport, so its resolver stays deliberately LOCAL-FIRST
+    // (the innermost layer). Where a transport DOES stand (the daemon), wrap this local read with
+    // `makeCidResolver(localRead, casTransitTransport, cacheWriteThrough)` (@lararium/mesh): a local miss
+    // fetches over transit (DHT-free discovery via the bag-tracker) and MANDATORY-re-verifies
+    // BLAKE3(bytes)==cid before caching write-through — a body that fails verify never caches, never
+    // returns. Absent a transport the leg degenerates to exactly this local read (fail-closed: a miss is
+    // a miss, never an unverified body).
     resolveByCid: async (cid) => {
       const runtime = casDir ? readCasBlobFromFs(cid, casDir) : null;
       if (runtime) return runtime;
