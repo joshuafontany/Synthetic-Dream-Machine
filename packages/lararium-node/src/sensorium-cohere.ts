@@ -166,3 +166,76 @@ export function readCohere(sensoriumDir: string, opts: ReadCohereOptions = {}): 
     consistency, fusion, ...nestedFlag, note: witness,
   };
 }
+
+/** One context of the SAME plane — a pass, an island, a policy — that a live-boundary read glues against. */
+export interface CohereContext {
+  /** the context handle (a working pet-name — "daydream", "deep-dream", island B); it labels the face. */
+  readonly context: string;
+  /** where this context's sensorium dir sits. */
+  readonly sensoriumDir: string;
+}
+
+/**
+ * Glue ONE plane across TWO OR MORE CONTEXTS — the LIVE-boundary read the single-stream cover cannot give.
+ * The canonical use is the dream-pass comparison: a daydream ⊥ deep-dream re-encoding of the SAME cids,
+ * each a re-reading of one plane under a different policy, glued to ask whether they still agree. Because
+ * the faces read the same plane from GENUINELY DIFFERENT contexts (not one stream's nested planes), the
+ * li-radius CAN obstruct — a divergence means one pass drifted from the shared ground, localized to the
+ * cids where they split. The read carries NO nested-cover flag: this IS the boundary the flag asks for.
+ *
+ * The eventual home of this cross-context glue is the DreamNet-mesh FEDERATION tier — the same organ reads
+ * a plane across two Lararia once "what is a mesh record" is settled; here it rides two local passes first.
+ * Fewer than two readable contexts ⇒ honest insufficient, never a fabricated glue.
+ */
+export function readCohereAcrossContexts(
+  plane: string, contexts: readonly CohereContext[], opts: ReadCohereOptions = {},
+): CohereRead {
+  const reader = opts.planeReader ?? coveragePlaneReader;
+  const facePlanes: { plane: string; read: boolean }[] = [];
+  const restrictions: PlaneRestriction[] = [];
+
+  for (const ctx of contexts) {
+    const manifest = readManifest(ctx.sensoriumDir);
+    const faceName = `${plane}@${ctx.context}`;
+    if (manifest === null || planeVariance(manifest, plane) !== "sheaf") {
+      facePlanes.push({ plane: faceName, read: false });
+      continue;
+    }
+    const dir = capDir(ctx.sensoriumDir, manifest, plane) ?? resolveCapDir(ctx.sensoriumDir, plane);
+    const r = reader({ plane, capDir: dir, manifest });
+    // relabel to the context face so two readings of the SAME plane stand as distinct sections.
+    facePlanes.push({ plane: faceName, read: r !== null });
+    if (r !== null) restrictions.push({ plane: faceName, variance: "sheaf", value: r.value });
+  }
+
+  const sensorium = `${plane} × ${contexts.map((c) => c.context).join(" ⋈ ")}`;
+  if (restrictions.length < 2) {
+    return {
+      sensorium, planes: facePlanes, readable: restrictions.length, sharedUnits: 0,
+      consistency: null, fusion: null,
+      note: `insufficient readable contexts (${restrictions.length}/${contexts.length}) for a live-boundary glue`,
+    };
+  }
+
+  const units = new Set<string>();
+  for (const r of restrictions) for (const u of r.value.keys()) units.add(u);
+  const seen = new Map<string, number>();
+  for (const r of restrictions) for (const u of r.value.keys()) seen.set(u, (seen.get(u) ?? 0) + 1);
+  let sharedUnits = 0;
+  for (const c of seen.values()) if (c >= 2) sharedUnits++;
+
+  const stalk: ComparisonStalk = { units: [...units] };
+  const consistency = consistencyRadius(restrictions, stalk);
+  const fusion: FuseResult = fuse({ restrictions, stalk }, opts);
+
+  // the li-radius carries the gluing verdict; the H¹ gate only fires an irreducible cocycle at ≥3 contexts.
+  const note = sharedUnits === 0
+    ? `${restrictions.length} contexts glue over NO shared cid (disjoint) — a vacuous read`
+    : consistency.glues
+      ? `${restrictions.length} contexts of "${plane}" GLUE (radius 0) over ${sharedUnits} shared cid(s) — the passes agree`
+      : fusion.verdict === "hold-open"
+        ? `${restrictions.length} contexts of "${plane}" hold open (H¹=${fusion.obstruction.dimH1}, cost ${fusion.obstruction.cost.toFixed(3)}) — irreducible drift, route to Talk-Story`
+        : `${restrictions.length} contexts of "${plane}" DIVERGE (radius ${consistency.radius.toFixed(3)}) over ${sharedUnits} shared cid(s) — a pass drifted (reconcilable), review`;
+
+  return { sensorium, planes: facePlanes, readable: restrictions.length, sharedUnits, consistency, fusion, note };
+}

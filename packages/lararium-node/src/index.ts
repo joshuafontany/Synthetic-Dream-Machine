@@ -85,8 +85,8 @@ export type {
 // The li-radius (H⁰ gluing) READER — the sheaf twin: glue a sensorium's OWN sheaf planes over a shared
 // cid stalk through the Robinson radius AND the H¹ gate. Cover-agnostic (the boundary, not the codomain):
 // the default single-stream cover reads as a nested-cover PLUMBING witness, a live-boundary reader certifies.
-export { readCohere, coveragePlaneReader } from "./sensorium-cohere.js";
-export type { PlaneReader, CohereRead, ReadCohereOptions } from "./sensorium-cohere.js";
+export { readCohere, readCohereAcrossContexts, coveragePlaneReader } from "./sensorium-cohere.js";
+export type { PlaneReader, CohereRead, ReadCohereOptions, CohereContext } from "./sensorium-cohere.js";
 
 // The ephemeral astral multipalace lifecycle (the `corpus` noun-verb tree).
 export {

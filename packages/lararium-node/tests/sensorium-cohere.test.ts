@@ -11,7 +11,7 @@ import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { buildSensoriumManifest, writeManifest } from "../src/sensorium.js";
-import { readCohere, type PlaneReader } from "../src/sensorium-cohere.js";
+import { readCohere, readCohereAcrossContexts, type PlaneReader, type CohereContext } from "../src/sensorium-cohere.js";
 import type { PlaneRestriction } from "@lararium/mesh";
 
 let root: string;
@@ -119,5 +119,53 @@ describe("readCohere — the li-radius + H¹ gate over a sensorium's sheaf plane
     const read = readCohere(join(root, "nope"));
     expect(read.consistency).toBeNull();
     expect(read.sensorium).toBe("(no-manifest)");
+  });
+});
+
+describe("readCohereAcrossContexts — the dream-pass live boundary (same plane, two contexts)", () => {
+  /** Stamp two context sensoria, each declaring `content` as a sheaf cap over a nested store dir. */
+  function stampPasses(): { a: CohereContext; b: CohereContext } {
+    const mk = (name: string): CohereContext => {
+      const dir = join(root, name);
+      mkdirSync(join(dir, "content"), { recursive: true });
+      writeManifest(dir, buildSensoriumManifest(dir, {
+        sensorium: name, lar: `lar:///ha.ka.ba/test/${name}`,
+        caps: { content: { absDir: join(dir, "content"), engine: "content", variance: "sheaf" } },
+      }));
+      return { context: name, sensoriumDir: dir };
+    };
+    return { a: mk("daydream"), b: mk("deep-dream") };
+  }
+
+  test("two passes that AGREE on the plane GLUE (radius 0) — no nested-cover flag, a live boundary", () => {
+    const { a, b } = stampPasses();
+    for (const cid of ["ab01", "cd02"]) { stampDoc(root, join("daydream", "content"), cid); stampDoc(root, join("deep-dream", "content"), cid); }
+    const read = readCohereAcrossContexts("content", [a, b]);   // default coverage reader — both cover the same cids
+    expect(read.readable).toBe(2);
+    expect(read.sharedUnits).toBe(2);
+    expect(read.consistency!.glues).toBe(true);
+    expect(read.dependenceRisk).toBeUndefined();   // a live boundary, never nested
+    expect(read.note).toMatch(/GLUE/);
+  });
+
+  test("two passes that DIVERGE on the plane obstruct (radius > 0) — one pass drifted from the ground", () => {
+    const { a, b } = stampPasses();
+    // a custom reader gives the SAME cid different salience across the two passes — a genuine drift.
+    const byContext: Record<string, number> = { daydream: 0.3, "deep-dream": 0.9 };
+    const planeReader: PlaneReader = ({ manifest }) =>
+      ({ plane: "content", variance: "sheaf", value: new Map([["ab01", byContext[manifest.sensorium] ?? 0]]) });
+    const read = readCohereAcrossContexts("content", [a, b], { planeReader });
+    expect(read.readable).toBe(2);
+    expect(read.consistency!.glues).toBe(false);
+    expect(read.consistency!.radius).toBeCloseTo(0.6, 6);
+    expect(read.note).toMatch(/DIVERGE|drift/);
+  });
+
+  test("fewer than two readable contexts → insufficient, never a fabricated glue", () => {
+    const { a } = stampPasses();
+    const read = readCohereAcrossContexts("content", [a, { context: "ghost", sensoriumDir: join(root, "nope") }]);
+    expect(read.readable).toBeLessThan(2);
+    expect(read.consistency).toBeNull();
+    expect(read.note).toMatch(/insufficient/);
   });
 });
