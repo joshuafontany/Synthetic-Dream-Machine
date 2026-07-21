@@ -28,6 +28,7 @@ import {
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
   whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
+  personaKelBoardDocUrl, personaKelChainForPrefix,
   type CapModule,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
@@ -89,8 +90,11 @@ interface BrowserBootstrap extends VesselBootstrap {
   personaGroupDocIdHex:   string;
   personaGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
-  /** The signer DID the Binding Gate pins the edge to — self-DID for an anon (self-signed). */
+  /** The signer DID — provenance only (the founding op-key = the persona-KEL inception op-key). */
   signerDid:             string;
+  /** The persona-KEL identifier PREFIX (AID) the Binding Gate PINS — stable across every op-key rotation.
+   *  The gate walks the per-Nexus KEL board to this prefix's current head and verifies the edge against it. */
+  personaKelPrefix:      string;
   /** This vessel's self-signed device-delegation edge — the public binding the Binding Gate verifies. */
   deviceEdge:            DeviceDelegationTiddler;
   /** Cached self-certifying ContactCard JSON (founding) — the leaf identity for the V3 peer gate. */
@@ -349,6 +353,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       operatorVerifyingKey: operatorIdentity.verifyingKey,
       operatorDisplayName:  displayName ?? "Browser Operator",
       payload:              admit,
+      // This vessel's own gate key IS its Nexus key — the local KEL board it seeds the founder's inception onto.
+      nexusPubkey: operatorIdentity.verifyingKey,
     });
     bootstrap = {
       identitiesUrl: a.identitiesUrl, circlesUrl: a.circlesUrl, sessionsUrl: a.sessionsUrl,
@@ -356,10 +362,10 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       personaGroupDocIdHex: admit.personaGroupDocIdHex,
       personaGroupAgentIdHex: admit.personaGroupAgentIdHex,
       meshCabalDocIdHex: admit.meshCabalDocIdHex,
-      // The PINNED signer and the SIGNED edge ride from the payload, never from this vessel: an admitted
+      // The PINNED identifier and the SIGNED edge ride from the payload, never from this vessel: an admitted
       // leaf presents a binding it could not have written for itself, and that is the whole difference
-      // between joining a group and declaring one.
-      signerDid: admit.signerDid, deviceEdge: admit.deviceEdge,
+      // between joining a group and declaring one. The gate walks the KEL prefix to the current head.
+      signerDid: admit.signerDid, personaKelPrefix: admit.personaKelPrefix, deviceEdge: admit.deviceEdge,
       contactCard: a.contactCardJson,
     };
     bootKeyWrites.bootstrap = bootstrap;
@@ -380,11 +386,13 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // (signerSeed == operatorSeed) survives ONLY as an explicit named floor tier, never the default.
       signerSeed,
       hearthTrueName: "",          // hearth-agnostic: an anon is not yet bound to a place; it binds on upgrade
+      // This vessel's own gate key IS its Nexus key — the per-Nexus KEL board the founding seats the inception on.
+      nexusPubkey: operatorIdentity.verifyingKey,
     });
     bootstrap = {
       identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, daemonUrl: f.daemonUrl, personaUrl: f.personaUrl,
       personaGroupDocIdHex: f.personaGroupDocIdHex, personaGroupAgentIdHex: f.personaGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
-      signerDid: f.signerDid, deviceEdge: f.founderEdge,
+      signerDid: f.signerDid, personaKelPrefix: f.personaKelPrefix, deviceEdge: f.founderEdge,
       contactCard: f.contactCardJson,
     };
     bootKeyWrites.bootstrap = bootstrap;
@@ -656,6 +664,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       if (wornPersona !== undefined && wornPersona !== FOUNDING_PERSONA_INDEX) {
         console.log(`[lararium-browser] worker boots on worn persona h${wornPersona} (binding from bootstrap)`);
       }
+      // THE PERSONA-KEL PIN — the continuity anchor the Binding Gate walks. Read the pinned identifier's
+      // seq-sorted key-event-log from this vessel's OWN per-Nexus KEL board (its gate key IS its Nexus key),
+      // against the LOCAL replica "as of last sync" (no-global-now). FAIL-CLOSED: a chain the replica does not
+      // carry HALTS the boot (never a global lookup, never a fall-through to the raw signer pin).
+      const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(operatorIdentity.verifyingKey), "@persona-kel");
+      const personaKelChain = personaKelChainForPrefix(kelBoard.doc(), social.personaKelPrefix);
+      if (!personaKelChain || personaKelChain.length === 0) {
+        throw new Error(`[lararium-browser] persona-KEL chain for ${social.personaKelPrefix.slice(0, 20)}… absent from the local board — the Binding Gate cannot reach a head (fail-closed).`);
+      }
       const daemonAuth = {
         seed: operatorSeed, operatorVerifyingKey: operatorIdentity.verifyingKey,
         personaGroupDocIdHex: social.personaGroupDocIdHex,
@@ -666,9 +683,10 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares,
           slot.wikiBagId, slot.draftBagId,
         ],
-        // The WORN persona-root's binding (founder-signed): signerDid pins the root, deviceEdge is the
-        // signed device→hearth edge. From the single bootstrap (see the per-persona fork above).
+        // The WORN persona-root's binding (founder-signed): the gate pins personaKel.prefix and walks the KEL
+        // to the current head; deviceEdge is the signed device→hearth edge. From the single bootstrap.
         signerDid: social.signerDid,
+        personaKel: { prefix: social.personaKelPrefix, chain: personaKelChain },
         deviceEdge: social.deviceEdge,
       };
       // The engine's plugin-tiddler CIDs — the worker pulls them by CID from OPFS (the breath

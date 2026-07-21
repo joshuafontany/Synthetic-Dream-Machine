@@ -19,8 +19,9 @@ import { describe, test, expect, beforeAll } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import {
-  type LarDoc,
+  type LarDoc, type PersonaKelEvent,
   CompositeStore, AutomergeDocStore, DAEMON_BAG_ID,
+  materializeSharedLarDoc, personaKelBoardDocUrl, personaKelChainForPrefix,
 } from "@lararium/mesh";
 import {
   KeyhiveProvider, DaemonEventStore, bootDaemonKeyhive, runFoundingCeremony,
@@ -55,7 +56,13 @@ beforeAll(async () => {
     operatorDisplayName:  "Test Operator",
     signerSeed: SEED,          // self-signed (signerDid == deviceDid) for the test founder
     hearthTrueName: "",         // hearth-agnostic in the unit test
+    nexusPubkey: verifyingKey,  // this vessel's own gate key IS its Nexus key
   });
+
+  // Read the persona-KEL chain the founding seated on the per-Nexus board — the Binding Gate walks it.
+  const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(verifyingKey), "@persona-kel");
+  const kelChain = personaKelChainForPrefix(kelBoard.doc(), cer.personaKelPrefix);
+  if (!kelChain) throw new Error("founding seated no persona-KEL chain");
 
   // Build the daemon composite the worker's onEa would receive in ctx.
   const daemonHandle = await repo.find<LarDoc>(cer.daemonUrl as AutomergeUrl);
@@ -75,6 +82,7 @@ beforeAll(async () => {
       meshCabalDocIdHex:     cer.meshCabalDocIdHex,
       registerBags:          [DAEMON_BAG_ID],
       signerDid:             cer.signerDid,
+      personaKel:            { prefix: cer.personaKelPrefix, chain: kelChain },
       deviceEdge:            cer.founderEdge,
     },
   };
@@ -104,6 +112,20 @@ describe("bootDaemonKeyhive", () => {
     await expect(bootDaemonKeyhive({
       ...founded.bootArgs,
       deviceEdge: { ...founded.bootArgs.deviceEdge, signature: "00".repeat(64) },
+    })).rejects.toThrow(/Binding Gate/);
+  });
+
+  test("HALTs on an empty persona-KEL chain (the pin cannot reach a head, fail-closed)", async () => {
+    await expect(bootDaemonKeyhive({
+      ...founded.bootArgs,
+      personaKel: { prefix: founded.bootArgs.personaKel.prefix, chain: [] as PersonaKelEvent[] },
+    })).rejects.toThrow(/Binding Gate/);
+  });
+
+  test("HALTs when the local chain does not head the pinned identifier (no-global-now deny)", async () => {
+    await expect(bootDaemonKeyhive({
+      ...founded.bootArgs,
+      personaKel: { prefix: "persona-not-the-founded-one", chain: founded.bootArgs.personaKel.chain },
     })).rejects.toThrow(/Binding Gate/);
   });
 });

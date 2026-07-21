@@ -48,9 +48,11 @@ export function parseAdmitCarriage(carriage: string): DeviceAdmitPayload | null 
   const p = payload as Record<string, unknown>;
   if (p["kind"] !== ADMIT_KIND) return null;
   // The BINDING is the joinee's whole authority, so a payload missing any of it gets refused HERE rather
-  // than half-applied downstream. `runApplyAdmitPayload` fails closed on the same three fields; this only
-  // moves the refusal to the door, where the carriage can still be re-carried.
+  // than half-applied downstream. `runApplyAdmitPayload` fails closed on the same fields; this only moves
+  // the refusal to the door, where the carriage can still be re-carried. The persona-KEL PREFIX is part of
+  // that authority now — the joinee's Binding Gate pins it and walks the KEL to the head.
   if (typeof p["signerDid"] !== "string" || !p["signerDid"]) return null;
+  if (typeof p["personaKelPrefix"] !== "string" || !p["personaKelPrefix"]) return null;
   if (typeof p["hearthTrueName"] !== "string" || !p["hearthTrueName"]) return null;
   if (!p["deviceEdge"] || typeof p["deviceEdge"] !== "object") return null;
   return payload as DeviceAdmitPayload;

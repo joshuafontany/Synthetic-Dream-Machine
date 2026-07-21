@@ -37,7 +37,7 @@ import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
   BAG_IDS, slugFromUri, verbArgsFromPayload, registerCrossroadsInOracle,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
-  SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
+  SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
   coupleMesh,
 }                                       from "@lararium/mesh";
@@ -70,6 +70,7 @@ import { LarEventBusImpl, DEFAULT_RINGS, DeterministicFederationGate } from "@la
 import type { SparseFormVector, WorldlineStubWire, AntigenRing, FederationGate, NexusMembership, PeerClass } from "@lararium/mesh";
 import { selfSlotShareDecision } from "./self-slot-share.js";
 import { makeAntigenRingHolder } from "./antigen-ring.js";
+import { makePersonaKelRingHolder } from "./persona-kel-ring.js";
 import { makeNexusMembership } from "./nexus-membership.js";
 import { DENY_ALL_PLANE_SEAL } from "./plane-seal.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
@@ -663,6 +664,21 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       throw new Error(`[lararium] DreamNet binding (signer pin + device edge) missing from daemon doc — run \`lares init\`.`);
     }
     const deviceEdge = edgeRecord.tiddler as unknown as DeviceDelegationTiddler;
+    // THE PERSONA-KEL PIN — the continuity anchor the Binding Gate walks. Read the pinned identifier PREFIX
+    // from @daemon (the pin's root of trust), then read its seq-sorted key-event-log from the per-Nexus KEL
+    // board — this node's OWN gate key IS its Nexus key. The read runs against the LOCAL replica "as of last
+    // sync" (no-global-now); FAIL-CLOSED — a missing prefix OR a chain the local replica does not carry HALTS
+    // the boot (never a global lookup, never a fall-through to the raw signer pin).
+    const personaKelPrefix = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_KEL_PREFIX_TIDDLER]) ?? null;
+    if (!personaKelPrefix) {
+      throw new Error(`[lararium] DreamNet binding (persona-KEL prefix) missing from daemon doc — run \`lares init\`.`);
+    }
+    const kelHolder = makePersonaKelRingHolder({ repo, nexusPubkey: operatorIdentity.verifyingKey });
+    await kelHolder.ready;
+    const personaKelChain = kelHolder.chainForPrefix(personaKelPrefix);
+    if (!personaKelChain || personaKelChain.length === 0) {
+      throw new Error(`[lararium] persona-KEL chain for the pinned identifier ${personaKelPrefix.slice(0, 20)}… absent from the local board replica — the Binding Gate cannot reach a head (fail-closed).`);
+    }
     // Register the per-Nexus @crossroads into @oracle (isomorphic with the browser). The node IS the
     // confederation anchor, so its own gate key IS its Nexus key — the same key browsers pass as
     // relayGatePubKey — so node + its browser leaves resolve the identical @crossroads. The @daemon core
@@ -694,6 +710,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         ...catalogNamedBags(assembly.catalogHandle),
       ],
       signerDid,
+      personaKel: { prefix: personaKelPrefix, chain: personaKelChain },
       deviceEdge,
       ...(archiveBytes ? { archiveBytes } : {}),
     };

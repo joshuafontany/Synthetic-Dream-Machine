@@ -8,7 +8,7 @@
 import { describe, test, expect } from "vitest";
 import { generateKeyPairSync } from "node:crypto";
 import * as ed25519 from "@noble/ed25519";
-import { splitToShares, assembleQuorum, reconstructFromQuorum, verifyDeviceDelegation } from "@lararium/mesh";
+import { splitToShares, assembleQuorum, reconstructFromQuorum, verifyDeviceDelegation, personaPrefixOf } from "@lararium/mesh";
 import { runReadmitEdge } from "@lararium/keyhive";
 
 /** The lost citizen's PersonaGroup root (the "become you" atom). */
@@ -40,10 +40,14 @@ describe("recovery keel — quorum → reconstruct → re-admit a fresh device",
     expect([...reconstructedRoot]).toEqual([...ROOT]);   // the recovered root === the original
 
     // Layer 3: the reconstructed root signs a FRESH device's re-admit edge (admit ceremony, signer swapped).
+    // In Fork-A reconstruct the op-key does NOT rotate — the reconstructed root IS the KEL head — so the
+    // re-admit carries the persona's stable inception prefix over (root op-key + unarmed recovery-commit).
     const freshVK = freshDeviceKey();
+    const rootDidPin = `0x${Buffer.from(await ed25519.getPublicKeyAsync(ROOT)).toString("hex")}`;
     const payload = await runReadmitEdge({
       reconstructedRoot,
       joineeVerifyingKey: freshVK,
+      personaKelPrefix: personaPrefixOf(rootDidPin, ""),
       hearthTrueName: PLACE,
       personaGroupDocIdHex: "aa".repeat(32),
       personaGroupAgentIdHex: "bb".repeat(32),

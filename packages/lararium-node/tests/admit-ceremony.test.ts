@@ -49,6 +49,7 @@ async function found() {
     operatorDisplayName:  "The Strandbeest Shrine",
     signerSeed:           FOUNDER_SEED,
     hearthTrueName:       "",
+    nexusPubkey:          verifyingKey,
   });
   return { repo, f, verifyingKey };
 }
@@ -63,6 +64,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     const payload = await runDeviceAdmitEdge({
       signerSeed:         FOUNDER_SEED,
       joineeVerifyingKey: joineeKey,
+      personaKelPrefix:   founder.f.personaKelPrefix,
       hearthTrueName:     founder.f.hearthTrueName ?? "bafyHearth",
       personaGroupDocIdHex:   founder.f.personaGroupDocIdHex,
       personaGroupAgentIdHex: founder.f.personaGroupAgentIdHex,
@@ -85,6 +87,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
       operatorVerifyingKey: joineeKey,
       operatorDisplayName:  "Ichi",
       payload:              carried,
+      nexusPubkey:          joineeKey,
     });
 
     // ── BOUND. The joinee pins the FOUNDER's signer — the whole difference between joining a group and
@@ -110,6 +113,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     const base = await runDeviceAdmitEdge({
       signerSeed:             FOUNDER_SEED,
       joineeVerifyingKey:     joineeKey,
+      personaKelPrefix:       founder.f.personaKelPrefix,
       hearthTrueName:         "bafyHearth",
       personaGroupDocIdHex:   founder.f.personaGroupDocIdHex,
       personaGroupAgentIdHex: founder.f.personaGroupAgentIdHex,
@@ -122,7 +126,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     const joineeRepo = new Repo({ sharePolicy: async () => true });
     const applied = await runApplyAdmitPayload({
       repo: joineeRepo, operatorSeed: JOINEE_SEED, operatorVerifyingKey: joineeKey,
-      operatorDisplayName: "Ichi", payload,
+      operatorDisplayName: "Ichi", payload, nexusPubkey: joineeKey,
     });
 
     const handle = await joineeRepo.find(applied.daemonUrl as AutomergeUrl);
@@ -138,6 +142,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
       const payload = await runDeviceAdmitEdge({
         signerSeed:         FOUNDER_SEED,
         joineeVerifyingKey: joineeKey,
+        personaKelPrefix:   founder.f.personaKelPrefix,
         hearthTrueName:     "bafyHearth",
         personaGroupDocIdHex:   founder.f.personaGroupDocIdHex,
         personaGroupAgentIdHex: founder.f.personaGroupAgentIdHex,
@@ -177,6 +182,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
       operatorSeed:         JOINEE_SEED,
       operatorVerifyingKey: joineeKey,
       operatorDisplayName:  "Ichi",
+      nexusPubkey:          joineeKey,
       payload: {
         kind: "device-admit/v1",
         signerDid: "",                       // ← the binding is hollow

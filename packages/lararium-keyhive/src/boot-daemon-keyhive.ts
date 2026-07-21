@@ -21,7 +21,7 @@
 
 import { KeyhiveProvider } from "./keyhive-provider.js";
 import type { CapabilityProviderInitOpts } from "./capability-provider.js";
-import { verifyDeviceDelegation, type DeviceDelegationTiddler } from "@lararium/mesh";
+import { verifyEdgeAgainstPersonaKel, type DeviceDelegationTiddler, type PersonaKelEvent } from "@lararium/mesh";
 
 export interface BootDaemonKeyhiveInput {
   /** 32-byte operator signing seed (delivered to the worker via the manifest). */
@@ -38,9 +38,18 @@ export interface BootDaemonKeyhiveInput {
   readonly meshCabalDocIdHex: string;
   /** Writable bag URIs to register so `verify`/`delegate` resolve (lar: URIs). */
   readonly registerBags: readonly string[];
-  /** The PINNED signer DID — the Binding Gate verifies the edge against THIS (self for an anon, a
-   *  granting root for a delegated/operator vessel). */
+  /** The PINNED signer DID — provenance ONLY (the founding op-key = the KEL inception op-key). The Binding
+   *  Gate NO LONGER pins this; it pins `personaKel.prefix` and walks the KEL to the current head (no hybrid —
+   *  accepting both a raw op-key pin AND the prefix would open a downgrade). */
   readonly signerDid: string;
+  /** The persona-KEL PIN + the LOCAL-replica chain the gate walks (identity-classes#the-continuity-anchor).
+   *  `prefix` is the stable identifier (AID) read from @daemon (the pin's root of trust); `chain` is the
+   *  seq-sorted key-event-log the caller read from its per-Nexus KEL board replica "as of last sync". The gate
+   *  asserts `chain[0].prefix === prefix`, walks to the current authoritative head op-key (structural + every
+   *  rotation quorum verified), and verifies the edge against THAT head — a rotated key still binds a fresh
+   *  edge; a superseded key rejects. FAIL-CLOSED: an absent / broken / unreachable-head chain HALTS the boot
+   *  (never a global lookup — a not-yet-synced replica simply denies). */
+  readonly personaKel: { readonly prefix: string; readonly chain: readonly PersonaKelEvent[] };
   /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free binding. */
   readonly deviceEdge: DeviceDelegationTiddler;
   /** OPTIONAL prior-identity Archive (a previous `exportArchive()`), persisted encrypted-at-rest. A joinee
@@ -85,14 +94,20 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
     );
   }
 
-  // THE BINDING GATE — the canon identity path. The vessel's signed device-delegation edge,
-  // verified against the PINNED signer (self for an anon, a granting root for a delegated/operator
-  // vessel). The edge IS the binding: a self-contained signed (vessel × hearthTrueName) proof that
-  // rides public CRDT state — no Beelay, no encrypted-graph walk. Fail-closed: verify returns
-  // {ok:false} on bad signature / expiry / unpinned signer, and we HALT.
-  const binding = await verifyDeviceDelegation(input.deviceEdge, input.signerDid, { now: Date.now() });
+  // THE BINDING GATE — the canon identity path, now on the PERSONA-KEL PIN (the continuity anchor). The
+  // vessel's signed device-delegation edge verifies against the CURRENT head op-key the pinned identifier
+  // (`personaKel.prefix`) resolves to on the local KEL replica — the op-key rotates BENEATH a fixed prefix
+  // (Reading-B recovery), so continuity rides the log, never a frozen key. The edge IS the binding: a
+  // self-contained signed (vessel × hearthTrueName) proof over public CRDT state — no Beelay, no
+  // encrypted-graph walk. FAIL-CLOSED and HALT on: a chain whose genesis prefix mismatches the pin (a
+  // mis-threaded log), an unreachable / broken / below-quorum head, or an edge that does not chain to the head.
+  const { prefix, chain } = input.personaKel;
+  if (chain.length === 0 || chain[0]!.prefix !== prefix) {
+    throw new Error(`[daemon-keyhive] Binding Gate: persona-KEL pin/chain mismatch — the local chain does not head the pinned identifier ${prefix.slice(0, 20)}…`);
+  }
+  const binding = await verifyEdgeAgainstPersonaKel(input.deviceEdge, chain, { now: Date.now() });
   if (!binding.ok) {
-    throw new Error(`[daemon-keyhive] Binding Gate: device-delegation edge failed verification against the pinned signer. ${binding.reason ?? ""}`);
+    throw new Error(`[daemon-keyhive] Binding Gate: device-delegation edge failed verification against the persona-KEL head op-key. ${binding.reason ?? ""}`);
   }
   // Bind-check: the edge MUST delegate to THIS vessel's key (designation carries authority —
   // a valid edge for a DIFFERENT vessel is not authority for this one).

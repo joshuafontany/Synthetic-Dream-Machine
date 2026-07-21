@@ -52,6 +52,18 @@ export function kapaeAntigenDocUrl(nexusPubkey: string): AutomergeUrl {
 }
 
 /**
+ * The Nexus's PERSONA-KEL board URL — deterministic, so the per-Nexus key-event-log board (every persona's
+ * PUBLIC KEL head/events) rides the always-carried plane every island member resolves alike. A sibling of the
+ * WHO board (both derive from `nexusHandlesUri` — the public WHO face), because the KEL PUBLICLY advertises
+ * which op-key currently heads each identifier; the PRIVATE keys / recovery-commit stay in the @persona bag.
+ * The federation gate federates this board like @crossroads + WHO, so a rotation propagates to every honest
+ * carrier and a stranger walks the identifier→head mapping cold — bounded by sync-latency, never a global now.
+ */
+export function personaKelBoardDocUrl(nexusPubkey: string): AutomergeUrl {
+  return deterministicDocUrl(`${nexusHandlesUri(nexusPubkey)}#persona-kel`);
+}
+
+/**
  * Find the shared doc if it's already present (a prior boot or a synced peer), else materialize a blank one
  * UNDER the deterministic id. Uses hearth-private patience (the @oracle materialize path's choice): a missing
  * doc is the legitimate first boot — the anchor materializes rather than waiting a long mesh-delivery window.

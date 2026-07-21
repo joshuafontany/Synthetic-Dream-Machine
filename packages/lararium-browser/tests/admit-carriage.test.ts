@@ -14,6 +14,7 @@ import type { DeviceAdmitPayload } from "@lararium/keyhive";
 const PAYLOAD = {
   kind: ADMIT_KIND,
   signerDid: "0xf00dcafe",
+  personaKelPrefix: "persona-abc123",
   deviceEdge: { title: "edge", deviceKey: "0xdeadbeef", sig: "0xabc123" },
   hearthTrueName: "bafyEngineCid",
   personaGroupDocIdHex: "aa11",
@@ -57,7 +58,7 @@ describe("the carried admission", () => {
     // signerDid · deviceEdge · hearthTrueName ARE the joinee's whole authority. runApplyAdmitPayload fails
     // closed on the same three; refusing here keeps the carriage re-carryable instead of half-writing a
     // daemon doc (the confused-deputy hole).
-    for (const missing of ["signerDid", "hearthTrueName", "deviceEdge"] as const) {
+    for (const missing of ["signerDid", "personaKelPrefix", "hearthTrueName", "deviceEdge"] as const) {
       const partial = { ...PAYLOAD } as Record<string, unknown>;
       delete partial[missing];
       const carriage = toAdmitCarriage(partial as unknown as DeviceAdmitPayload);

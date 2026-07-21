@@ -1,6 +1,6 @@
 // @lararium/keyhive — capability layer wrapping @keyhive/keyhive (Ink & Switch concap, pre-alpha).
 
-import type { DeviceDelegationTiddler } from "@lararium/mesh";
+import type { DeviceDelegationTiddler, PersonaKelEvent } from "@lararium/mesh";
 
 export type {
   CapabilityProvider, CapabilityProviderInitOpts,
@@ -65,8 +65,16 @@ export type { ForkCabalPlaceOpts } from "./fork-place-ceremony.js";
  */
 export interface DeviceAdmitPayload {
   readonly kind:                   "device-admit/v1";
-  /** The PINNED signer DID — the joinee's Binding Gate verifies its edge against THIS. */
+  /** The PINNED signer DID — provenance (the founder's persona-KEL inception op-key). The joinee's Binding
+   *  Gate pins `personaKelPrefix` and walks the KEL to the head; the signer-DID is no longer the pin. */
   readonly signerDid:              string;
+  /** The founder's persona-KEL identifier PREFIX (AID) the joinee PINS — the joinee's own device edge chains
+   *  to whatever op-key currently heads this identifier (the founder's persona-root, until a Reading-B rotation). */
+  readonly personaKelPrefix:       string;
+  /** The founder's persona-KEL chain SNAPSHOT (as of admit) — the joinee seeds its LOCAL KEL board from it so
+   *  its very first boot walks to a head WITHOUT waiting on a federated sync (no-global-now: local seed, never
+   *  a global lookup). Absent on older payloads → the joinee relies on the federated board (fail-closed until sync). */
+  readonly personaKelChain?:       readonly PersonaKelEvent[];
   /** The signed root→joinee device-delegation edge (the founder's signer signs the joinee's
    *  vessel key × hearthTrueName) — the joinee's binding, verified at its Binding Gate. No Beelay. */
   readonly deviceEdge:             DeviceDelegationTiddler;

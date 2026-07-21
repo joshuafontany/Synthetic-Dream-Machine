@@ -121,6 +121,7 @@ describe("the Model-A fix — the founding mints a DISTINCT persona-root as the 
       operatorDisplayName: "Test Operator",
       signerSeed,
       hearthTrueName: "",
+      nexusPubkey: device.verifyingKey,
     });
 
     // signerDid = "0x" + <signer verifying-key hex>. The persona-root SIGNS, so it is the root's DID —
@@ -146,7 +147,7 @@ describe("the Model-A fix — the founding mints a DISTINCT persona-root as the 
     await wearBrowserPersona(name, 0);
     await runFoundingCeremony({
       repo, operatorSeed, operatorVerifyingKey: device.verifyingKey,
-      operatorDisplayName: "Op", signerSeed: signer0, hearthTrueName: "",
+      operatorDisplayName: "Op", signerSeed: signer0, hearthTrueName: "", nexusPubkey: device.verifyingKey,
     });
 
     // The multitude grows: mint h1 and WEAR it. The worker-reach selector (browserJoineePersonaIndex)

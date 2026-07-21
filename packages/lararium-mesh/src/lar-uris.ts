@@ -415,6 +415,10 @@ export const SIGNER_DID_TIDDLER            = `${PERSONA_BAG_ID}/binding/signer-d
 export const HEARTH_TRUE_NAME_TIDDLER      = `${PERSONA_BAG_ID}/hearth/true-name`;
 /** Persona oracle tiddler: this vessel's OWN signed device-delegation edge (signer→vessel) — the public binding the Binding Gate verifies. */
 export const DEVICE_DELEGATION_SELF_TIDDLER = `${PERSONA_BAG_ID}/delegation/self`;
+/** Persona oracle tiddler: the persona-KEL identifier PREFIX (AID) the Binding Gate PINS — stable across every
+ *  op-key rotation. The gate walks the per-Nexus KEL board to this prefix's current head op-key and verifies
+ *  the device edge against THAT head (Reading-B continuity); the raw signer-DID is provenance only. */
+export const PERSONA_KEL_PREFIX_TIDDLER     = `${PERSONA_BAG_ID}/binding/persona-kel-prefix`;
 
 // ── @personal / @draft binding tiddler prefixes ───────────────────────────
 // The (PersonaGroup × recipe-fingerprint) → docUrl bindings live as tiddlers

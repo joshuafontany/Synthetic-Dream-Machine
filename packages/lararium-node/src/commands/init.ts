@@ -126,6 +126,8 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
       operatorVerifyingKey: operatorIdentity.verifyingKey,
       operatorDisplayName:  operatorIdentity.displayName ?? "operator",
       payload,
+      // The joinee's own gate key IS its Nexus key — the local KEL board it seeds the founder's inception onto.
+      nexusPubkey: operatorIdentity.verifyingKey,
     });
 
     const bootstrapPlugin = makeBootstrapPlugin(
@@ -173,7 +175,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   const {
     identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
     personaGroupDocIdHex, meshCabalDocIdHex, personaGroupAgentIdHex, contactCardJson,
-    signerDid,
+    signerDid, personaKelPrefix,
   } = await runFoundingCeremony({
     repo,
     operatorSeed,
@@ -181,6 +183,8 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     operatorDisplayName:  operatorIdentity.displayName ?? "operator",
     signerSeed,
     hearthTrueName,
+    // This node's own gate key IS its Nexus key — the per-Nexus KEL board the founding seats the inception on.
+    nexusPubkey: operatorIdentity.verifyingKey,
   });
 
   // Cache the operator ContactCard for the light leaf-identity path — a CLI/agent
@@ -206,6 +210,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   console.log(`  PersonaGroup  ${personaGroupDocIdHex.slice(0, 20)}…`);
   console.log(`  MeshCabal    ${meshCabalDocIdHex.slice(0, 20)}…`);
   console.log(`  operator-root ${signerDid.slice(0, 20)}…`);
+  console.log(`  persona-KEL   ${personaKelPrefix.slice(0, 20)}…  (the pinned identifier the Binding Gate walks)`);
   console.log(`  hearth-name   ${hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);
   console.log("[lares init] done — Nexus node ready. Start with: lares dev");
 

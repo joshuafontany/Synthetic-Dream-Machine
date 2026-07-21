@@ -30,7 +30,7 @@ import {
   type DocumentId,
   type PeerId,
 } from "@automerge/automerge-repo";
-import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl } from "./deterministic-doc.js";
+import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl, personaKelBoardDocUrl } from "./deterministic-doc.js";
 import type { IdentitySlot } from "./identity-slot.js";
 import type { PeerClass } from "./island-protocol.js";
 
@@ -69,6 +69,7 @@ export class DeterministicFederationGate implements FederationGate {
       crossroadsDocUrl(nexusPubkey),
       whoBoardDocUrl(nexusPubkey),
       kapaeAntigenDocUrl(nexusPubkey),   // the immune antigen rides the always-carried plane (MANDATORY tier)
+      personaKelBoardDocUrl(nexusPubkey), // the persona-KEL board — PUBLIC identifier→head mapping (federates once)
       ...extraBoardUrls,
     ];
     this.#federatable = new Set(urls.map((u) => interpretAsDocumentId(u) as DocumentId));

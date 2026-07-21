@@ -80,6 +80,10 @@ export { memberCarryShareDecision } from "./federation-gate.js";
 export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
 export * from "./kapae-antigen.js";
 export { antigenEntriesFromBoard, writeAntigenEntry, antigenEntryKey, ANTIGEN_ENTRY_PREFIX } from "./antigen-board.js";
+export {
+  personaKelEventsFromBoard, personaKelChainsFromBoard, personaKelChainForPrefix,
+  writePersonaKelEvent, personaKelEntryKey, PERSONA_KEL_ENTRY_PREFIX,
+} from "./persona-kel-board.js";
 export * from "./mu-void.js";
 export * from "./nexus-charter-seed.js";
 export * from "./meme-provider.js";

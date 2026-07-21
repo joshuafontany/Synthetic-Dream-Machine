@@ -55,6 +55,7 @@
 
 import type { AuthProofWire } from "./auth-wire.js";
 import type { DeviceDelegationTiddler } from "./device-delegation.js";
+import type { PersonaKelEvent } from "./persona-kel.js";
 import type { WorldlineEdgeTriple, WorldlineEdgeClose } from "./worldline-edge.js";
 import type { SparseFormVector } from "./worldline-trajectory.js";
 
@@ -194,8 +195,15 @@ export interface IslandMsg_Manifest {
     meshCabalDocIdHex:     string;
     /** Writable bag URIs to register so verify/delegate resolve (lar: URIs). */
     registerBags:          readonly string[];
-    /** The PINNED signer DID — the Binding Gate verifies the device edge against THIS (self for an anon). */
+    /** The PINNED signer DID — provenance only (the founding op-key = the KEL inception op-key). The Binding
+     *  Gate no longer PINS this; it pins `personaKel.prefix` and walks the KEL to the current head (no hybrid). */
     signerDid:             string;
+    /** The persona-KEL PIN + the LOCAL-replica chain the worker walks. `prefix` is the stable identifier (AID)
+     *  read from @daemon (the pin's root of trust); `chain` is the seq-sorted key-event-log the MAIN thread read
+     *  from its per-Nexus KEL board replica "as of last sync" (no-global-now). The Binding Gate asserts
+     *  `chain[0].prefix === prefix`, walks to the current head op-key, and verifies the edge against THAT head —
+     *  fail-closed on an absent/broken chain (never a global lookup). */
+    personaKel:            { readonly prefix: string; readonly chain: readonly PersonaKelEvent[] };
     /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free binding. */
     deviceEdge:            DeviceDelegationTiddler;
     /** A prior keyhive Archive (from the identity home) — the restore FLOOR keyhive inits from before

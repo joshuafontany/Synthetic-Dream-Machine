@@ -39,10 +39,12 @@ import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID,
   PERSONA_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
-  SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER,
+  SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER,
   CAP_EVENT_TAG,
   seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc, seedPersonaDoc,
   buildDeviceDelegation, type DeviceDelegationTiddler,
+  mintPersonaInception, personaKelBoardDocUrl, writePersonaKelEvent, materializeSharedLarDoc,
+  type PersonaKelEvent,
 } from "@lararium/mesh";
 
 // A device-delegation edge's expiry is a generous replay BACKSTOP only — the
@@ -76,6 +78,10 @@ export interface FoundingCeremonyInput {
   /** The hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName).
    *  REQUIRED: a founding with no place to bind to is no founding. */
   hearthTrueName:      string;
+  /** The Nexus pubkey (this node's own gate key) the per-Nexus persona-KEL board derives from. The founding
+   *  seats the KEL INCEPTION onto that board so the very first boot walks the identifier→head mapping locally.
+   *  REQUIRED: a founding that seats no inception leaves the Binding Gate with no head to walk (it fails closed). */
+  nexusPubkey:         string;
 }
 
 export interface FoundingCeremonyResult {
@@ -92,9 +98,12 @@ export interface FoundingCeremonyResult {
   /** The operator's self-certifying ContactCard JSON, minted once during the
    *  ceremony. The caller caches it for the light leaf-identity path (OP-AP5). */
   contactCardJson:       string;
-  /** The PINNED signer DID ("0x"+hex) the Binding Gate verifies the edge against — self for an anon,
-   *  a granting root for a delegated/operator vessel. */
+  /** The PINNED signer DID ("0x"+hex) — provenance (the founding op-key = the KEL inception op-key). The
+   *  Binding Gate pins `personaKelPrefix` instead and walks the KEL to the current head (no raw-pin hybrid). */
   signerDid:       string;
+  /** The persona-KEL identifier PREFIX (AID) the Binding Gate PINS — stable across every op-key rotation.
+   *  Its inception seats the founding op-key; a later Reading-B rotation advances the head beneath it. */
+  personaKelPrefix:      string;
   /** This vessel's OWN signed device-delegation edge (signer→vessel) — the public binding
    *  (vessel × hearthTrueName). */
   founderEdge:           DeviceDelegationTiddler;
@@ -205,9 +214,31 @@ export async function runFoundingCeremony(
     boundEpoch:         0,                            // genesis lease epoch (effectiveLeaseEpoch starts at 0)
   });
   const signerDid = founderEdge.operatorDid;
+
+  // ── The persona-KEL INCEPTION — the continuity anchor (identity-classes#the-continuity-anchor) ──
+  // Seat seq-0 over the founding op-key (== signerDid, the edge's operatorDid). The identifier PREFIX derives
+  // from (founding op-key + the recovery-set pre-commit); it stays FIXED across every future Reading-B rotation,
+  // so the Binding Gate pins the PREFIX and the op-key rotates beneath it. Recovery arms UNARMED here (empty
+  // pre-commit): the live founding gathers no guardians, so no rotation can attest yet — arming rides the
+  // separate recovery-keel wiring (provisionThresholdRecoveryAtFounding). The pin-move stands regardless: an
+  // unarmed inception still walks to a head, and at inception the head IS signerDid (zero behavior change today).
+  const inception       = mintPersonaInception(signerDid, "");
+  const personaKelPrefix = inception.prefix;
+  // Seat the inception onto the per-Nexus KEL board (deterministic id) so the very first boot walks the
+  // identifier→head mapping from its OWN local replica — no advertisement, no mint-race (materialize converges
+  // on byte-identical blank bytes). The board federates once (DeterministicFederationGate).
+  const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(input.nexusPubkey), "@persona-kel");
+  kelBoard.change((draft) => writePersonaKelEvent(draft, inception));
+
   daemonHandle.change((doc) => {
     doc.tiddlers[SIGNER_DID_TIDDLER] = {
       tiddler: { title: SIGNER_DID_TIDDLER, text: signerDid, kind: "operator-root-did" },
+      meta: { authority: "lares-init" },
+    };
+    // The PINNED identifier — the pin's root of trust (the operator's own sovereign @daemon home). The boot
+    // path reads THIS prefix, threads it beside the local KEL chain, and the worker asserts chain[0].prefix === it.
+    doc.tiddlers[PERSONA_KEL_PREFIX_TIDDLER] = {
+      tiddler: { title: PERSONA_KEL_PREFIX_TIDDLER, text: personaKelPrefix, kind: "persona-kel-prefix" },
       meta: { authority: "lares-init" },
     };
     doc.tiddlers[HEARTH_TRUE_NAME_TIDDLER] = {
@@ -240,6 +271,7 @@ export async function runFoundingCeremony(
     meshCabalDocIdHex:     meshCabal.docIdHex,
     contactCardJson,
     signerDid,
+    personaKelPrefix,
     founderEdge,
   };
 }
@@ -253,6 +285,12 @@ export interface DeviceAdmitEdgeInput {
   signerSeed:             Uint8Array;
   /** The joinee's raw Ed25519 verifying-key hex (64, lowercase) — the delegate (its PUBLIC key). */
   joineeVerifyingKey:     string;
+  /** The founder's persona-KEL identifier PREFIX (AID) the joinee PINS — REQUIRED (the joinee's Binding Gate
+   *  walks the KEL to the head; a founding always seats an inception, so a prefix always stands). */
+  personaKelPrefix:       string;
+  /** The founder's persona-KEL chain SNAPSHOT — the joinee seeds its LOCAL board from it (immediate boot, no
+   *  sync wait). Optional: absent → the joinee relies on the federated board (fail-closed until sync). */
+  personaKelChain?:       readonly PersonaKelEvent[];
   /** The hearth true-name (engine CID) the joinee binds TO. */
   hearthTrueName:         string;
   /** Founder sentinel oracle IDs — carried through for the founding sentinel + future affiliation layer. */
@@ -280,6 +318,11 @@ export async function runDeviceAdmitEdge(
   if (!/^[0-9a-f]{64}$/.test(input.joineeVerifyingKey)) {
     throw new Error("[ceremony] runDeviceAdmitEdge: joineeVerifyingKey must be 64-char lowercase hex");
   }
+  // Fail-closed: the joinee's Binding Gate PINS this prefix — a payload with no pin would admit a vessel that
+  // then boots with nothing to walk. A founding always seats an inception, so a prefix is always available.
+  if (typeof input.personaKelPrefix !== "string" || input.personaKelPrefix.length === 0) {
+    throw new Error("[ceremony] runDeviceAdmitEdge: personaKelPrefix required — the joinee pins the founder's persona-KEL identifier");
+  }
   const issuedAt  = new Date().toISOString();
   const expiresAt = new Date(Date.now() + EDGE_BACKSTOP_MS).toISOString();
   const deviceEdge = await buildDeviceDelegation({
@@ -293,6 +336,8 @@ export async function runDeviceAdmitEdge(
   return {
     kind:                   "device-admit/v1",
     signerDid:              deviceEdge.operatorDid,
+    personaKelPrefix:       input.personaKelPrefix,
+    ...(input.personaKelChain ? { personaKelChain: input.personaKelChain } : {}),
     deviceEdge,
     hearthTrueName:         input.hearthTrueName,
     personaGroupDocIdHex:   input.personaGroupDocIdHex,
@@ -318,6 +363,9 @@ export interface ApplyAdmitInput {
   operatorVerifyingKey: string;
   operatorDisplayName:  string;
   payload:              DeviceAdmitPayload;
+  /** The joinee's own Nexus pubkey (its gate key) — the per-Nexus KEL board the joinee seeds the founder's
+   *  inception snapshot onto, so its LOCAL boot walks to a head with no sync wait (no-global-now). */
+  nexusPubkey:          string;
 }
 
 export interface ApplyAdmitResult {
@@ -343,9 +391,11 @@ export async function runApplyAdmitPayload(
   const { repo, operatorSeed, operatorVerifyingKey, operatorDisplayName, payload } = input;
 
   // Fail-closed: the binding is the joinee's whole authority — a missing field MUST halt,
-  // never write a half-bound daemon doc (the confused-deputy / mycelium-PCD hole).
-  if (!payload.signerDid || !payload.deviceEdge || !payload.hearthTrueName) {
-    throw new Error("[ceremony] runApplyAdmitPayload: payload lacks signerDid/deviceEdge/hearthTrueName — refusing to admit.");
+  // never write a half-bound daemon doc (the confused-deputy / mycelium-PCD hole). The persona-KEL PREFIX
+  // is part of that authority now: the joinee's Binding Gate pins it, so a payload with no pin would admit a
+  // vessel that boots with nothing to walk (a fail-closed halt) — refuse it here, precisely, instead.
+  if (!payload.signerDid || !payload.deviceEdge || !payload.hearthTrueName || !payload.personaKelPrefix) {
+    throw new Error("[ceremony] runApplyAdmitPayload: payload lacks signerDid/deviceEdge/hearthTrueName/personaKelPrefix — refusing to admit.");
   }
 
   const identitiesHandle = seedIdentitiesDoc(repo);
@@ -389,7 +439,24 @@ export async function runApplyAdmitPayload(
       tiddler: { title: DEVICE_DELEGATION_SELF_TIDDLER, ...payload.deviceEdge },
       meta: { authority: "lares-init-admit" },
     };
+    // The PINNED identifier — the joinee's Binding Gate walks THIS to the current head op-key (the founder's
+    // persona-root, until a Reading-B rotation). The raw signer-DID above stays for provenance only.
+    doc.tiddlers[PERSONA_KEL_PREFIX_TIDDLER] = {
+      tiddler: { title: PERSONA_KEL_PREFIX_TIDDLER, text: payload.personaKelPrefix, kind: "persona-kel-prefix" },
+      meta: { authority: "lares-init-admit" },
+    };
   });
+
+  // Seed the joinee's LOCAL KEL board from the founder's chain snapshot (when the payload carried it), so the
+  // joinee's very first boot walks the identifier→head mapping from its OWN replica — no wait on a federated
+  // sync of the founder's board (no-global-now: a local seed, never a global lookup). Absent snapshot → the
+  // joinee relies on the federated board and boots only once it has synced the founder's inception (fail-closed).
+  if (payload.personaKelChain && payload.personaKelChain.length > 0) {
+    const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(input.nexusPubkey), "@persona-kel");
+    kelBoard.change((draft) => {
+      for (const event of payload.personaKelChain!) writePersonaKelEvent(draft, event);
+    });
+  }
 
   // Write sentinel oracle tiddlers.
   daemonHandle.change((doc) => {

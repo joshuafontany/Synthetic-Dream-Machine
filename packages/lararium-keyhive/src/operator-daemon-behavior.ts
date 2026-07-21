@@ -44,7 +44,7 @@ type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTic
    *  passphrase rides the verb args over the owner-only 0600 UDS — the same trust boundary as a CLI arg. */
   vault?: (verb: string, args: Record<string, unknown>) => Promise<Record<string, unknown>>;
 };
-import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof, verifyDeviceDelegation, classifyCrossOperatorAdmission } from "@lararium/mesh";
+import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof, verifyEdgeAgainstPersonaKel, classifyCrossOperatorAdmission } from "@lararium/mesh";
 import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
 import { DaemonEventStore } from "./daemon-event-store.js";
 import { resolveOrMintBinding } from "./resolve-binding.js";
@@ -185,6 +185,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         meshCabalDocIdHex:     daemonAuth.meshCabalDocIdHex,
         registerBags:          daemonAuth.registerBags,
         signerDid:       daemonAuth.signerDid,
+        personaKel:            daemonAuth.personaKel,
         deviceEdge:            daemonAuth.deviceEdge,
         ...(daemonAuth.archiveBytes ? { archiveBytes: daemonAuth.archiveBytes } : {}),
       });
@@ -263,29 +264,30 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // device the operator admitted carries the signed root→device edge. Admit it at the
       // operator's-own-device tier IFF the edge verifies AND binds to THIS proven identity.
       //
-      // MANDATORY PIN (confused-deputy cure): the edge MUST chain to signerDid — the hearth's
-      // pinned PersonaGroup root (daemonAuth.signerDid, the same root the Binding Gate pins in
-      // bootDaemonKeyhive). An unpinned edge NEVER admits; an absent signerDid is a HARD ERROR,
-      // not a skip. The presenter binding (`edge.deviceDid === id`) ties the operator's grant to
-      // the exact identity that just proved possession of its key (proofVerified, above) — a
-      // device-admitted peer STILL proves it holds its key; the edge only adds the operator's
-      // delegation, it never weakens the V3 proof.
+      // MANDATORY PIN (confused-deputy cure), now on the PERSONA-KEL: the operator's own device edge MUST
+      // chain to the CURRENT head op-key the hearth's pinned identifier (`daemonAuth.personaKel.prefix`)
+      // resolves to — the same continuity anchor the Binding Gate walks in bootDaemonKeyhive. Walking the
+      // KEL (not a frozen op-key) means a device re-issued under a rotated head still admits, and a device
+      // edge signed by a SUPERSEDED op-key rejects. An absent / mis-pinned KEL is a HARD ERROR, not a skip.
+      // The presenter binding (`edge.deviceDid === id`) ties the operator's grant to the exact identity that
+      // just proved possession of its key (proofVerified, above) — a device-admitted peer STILL proves it
+      // holds its key; the edge only adds the operator's delegation, it never weakens the V3 proof.
       if (edge) {
-        const signerDid = daemonAuth.signerDid;
-        if (typeof signerDid !== "string" || signerDid.length === 0) {
-          return { ok: false, identifier: id, proofVerified, reason: "device-delegation: no pinned signerDid in scope — refusing to admit on an unpinned edge" };
+        const kel = daemonAuth.personaKel;
+        if (!kel || kel.chain.length === 0 || kel.chain[0]!.prefix !== kel.prefix) {
+          return { ok: false, identifier: id, proofVerified, reason: "device-delegation: no pinned persona-KEL in scope — refusing to admit on an unpinned edge" };
         }
-        const delegation    = await verifyDeviceDelegation(edge, signerDid, { now: Date.now() });
+        const delegation    = await verifyEdgeAgainstPersonaKel(edge, kel.chain, { now: Date.now() });
         const deviceMatches = edge.deviceDid === id;
         if (delegation.ok && deviceMatches && proofVerified) {
           // Admitted at the operator's-own-device tier — equivalent flow to admin (it IS the
           // operator's delegated device). `reason` carries the provenance (survives the worker→host
           // boundary; the gate ignores it on an ok verdict but it aids audit).
           //
-          // SELF-SLOT CLASS: the edge chains to signerDid — THIS hearth's pinned persona-root — and
-          // binds to the exact identity that proved key-possession. A cross-operator cannot forge an
-          // edge signed by a root it never holds, so a verified pinned-root edge PROVES same-operator
-          // (the operator's own device fleet, a distinct device key under one operator identity).
+          // SELF-SLOT CLASS: the edge chains to the persona-KEL head op-key — THIS hearth's pinned
+          // identifier's current authority — and binds to the exact identity that proved key-possession. A
+          // cross-operator cannot forge an edge chaining to a KEL it never heads, so a verified head-chained
+          // edge PROVES same-operator (the operator's own device fleet, a distinct device key under one identity).
           return { ok: true, identifier: id, proofVerified, reason: "admitted via operator device-delegation", peerClass: "same-operator" as const };
         }
         return {

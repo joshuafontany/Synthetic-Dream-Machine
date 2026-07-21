@@ -20,13 +20,14 @@ import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import {
-  DAEMON_BAG_ID, PERSONA_BAG_ID,
+  DAEMON_BAG_ID, PERSONA_BAG_ID, PERSONA_KEL_PREFIX_TIDDLER,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  personaKelBoardDocUrl, personaKelChainForPrefix, materializeSharedLarDoc,
 } from "@lararium/mesh";
 import { daemonGenesisDir } from "../lares-config.js";
 import { larDataDir } from "../vessel-paths.js";
 import { runDeviceAdmitEdge, type DeviceAdmitPayload } from "@lararium/keyhive";
-import { loadPersonaGroupRootSeed } from "../node-vessel-identity.js";
+import { loadPersonaGroupRootSeed, loadVesselVerifyingKey } from "../node-vessel-identity.js";
 import { GENESIS_ENGINE_CID } from "../genesis-artifact.js";
 
 export type { DeviceAdmitPayload } from "@lararium/keyhive";
@@ -107,6 +108,22 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
     throw new Error(`[lares device-admit] PersonaGroup agent ID missing from daemon doc — run \`lares init --force\`.`);
   }
 
+  // The founder's persona-KEL PREFIX (the identifier the joinee will pin) + the chain SNAPSHOT off the
+  // founder's own per-Nexus KEL board (its gate key IS its Nexus key). The joinee seeds the snapshot into its
+  // local board so it boots to a head with no sync wait (no-global-now). Fail-closed: a founding always seats
+  // an inception, so a prefix + a chain always stand — their absence names a torn founding, refuse to admit.
+  const kelPrefixEntry = tiddlerMap[PERSONA_KEL_PREFIX_TIDDLER] as Record<string,unknown> | undefined;
+  const personaKelPrefix = (kelPrefixEntry?.["tiddler"] as Record<string,unknown> | undefined)?.["text"] as string | null ?? null;
+  if (!personaKelPrefix) {
+    throw new Error(`[lares device-admit] persona-KEL prefix missing from daemon doc — run \`lares init --force\`.`);
+  }
+  const founderNexusKey = await loadVesselVerifyingKey(storageDir);
+  const kelBoard   = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(founderNexusKey), "@persona-kel");
+  const personaKelChain = personaKelChainForPrefix(kelBoard.doc(), personaKelPrefix);
+  if (!personaKelChain || personaKelChain.length === 0) {
+    throw new Error(`[lares device-admit] persona-KEL chain for ${personaKelPrefix.slice(0, 20)}… absent from the local board — run \`lares init --force\`.`);
+  }
+
   await repo.flush();
 
   // The founder's PersonaGroup ROOT signs the joinee's edge (the upgrade event). The root seed
@@ -122,6 +139,8 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const payload = await runDeviceAdmitEdge({
     signerSeed,
     joineeVerifyingKey: opts.joineeVerifyingKey.toLowerCase(),
+    personaKelPrefix,
+    personaKelChain,
     hearthTrueName,
     personaGroupDocIdHex,
     personaGroupAgentIdHex,

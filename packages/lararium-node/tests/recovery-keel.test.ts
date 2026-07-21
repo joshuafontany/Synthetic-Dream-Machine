@@ -4,13 +4,13 @@
  * two custodians {recorded-code, escrow} to re-admit a fresh device — whose edge verifies against the
  * original pinned root. The device-share (dead with the device) is never the recovery path.
  */
-import { afterEach, beforeEach, describe, test, expect } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, test, expect } from "vitest";
 import { generateKeyPairSync } from "node:crypto";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import * as ed25519 from "@noble/ed25519";
-import { assembleQuorum, reconstructFromQuorum, decodeShareBytes, guardianShareFromCard, verifyDeviceDelegation, type RecoveryShare } from "@lararium/mesh";
+import { assembleQuorum, reconstructFromQuorum, decodeShareBytes, guardianShareFromCard, verifyDeviceDelegation, personaPrefixOf, type RecoveryShare } from "@lararium/mesh";
 import { splitRootAtFounding, reconstructAndReadmit, provisionRecoveryAtFounding, provisionRecoveryCardsAtFounding } from "../src/recovery-keel.js";
 import { generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed } from "../src/node-vessel-identity.js";
 import { loadRecoveryDeviceShare } from "../src/recovery-share-store.js";
@@ -32,8 +32,16 @@ const freshDeviceKey = (): string => {
   const { publicKey } = generateKeyPairSync("ed25519");
   return Buffer.from((publicKey.export({ format: "jwk" }) as { x: string }).x, "base64url").toString("hex");
 };
+// The persona's stable inception prefix over (root op-key + unarmed recovery-commit). In Fork-A reconstruct
+// the op-key does NOT rotate, so the reconstructed root IS the KEL head and this is the identifier the
+// re-admit carries. Computed once (async pubkey derivation) before the suite runs.
+let ROOT_PREFIX = "";
+beforeAll(async () => {
+  const pk = await ed25519.getPublicKeyAsync(ROOT);
+  ROOT_PREFIX = personaPrefixOf(`0x${Buffer.from(pk).toString("hex")}`, "");
+});
 const readmitFields = (joineeVerifyingKey: string) => ({
-  joineeVerifyingKey, hearthTrueName: PLACE,
+  joineeVerifyingKey, personaKelPrefix: ROOT_PREFIX, hearthTrueName: PLACE,
   personaGroupDocIdHex: "aa".repeat(32), personaGroupAgentIdHex: "bb".repeat(32),
   meshCabalDocIdHex: "cc".repeat(32), syncUrl: null,
 });
