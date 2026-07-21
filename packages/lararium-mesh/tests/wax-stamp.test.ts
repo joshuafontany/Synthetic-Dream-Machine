@@ -9,6 +9,8 @@ import * as ed25519 from "@noble/ed25519";
 import {
   verifyCharterChain, classifySeal, detectDuplicity,
   mintWaxStamp, verifyWaxStampSig, singleKeySetHash,
+  charterKeySetHash, charterEpochCidOf, mintCharterEpoch,
+  genesisCharterEpoch, rotateCharterEpoch,
   type CharterEpoch, type WaxStamp,
 } from "../src/wax-stamp.js";
 
@@ -108,5 +110,66 @@ describe("wax-stamp R1 — a no-membership reader verifies provenance from the P
     }
     // A key-set hash is one-way: the reader cannot recover WHO holds the key, only verify a presented one.
     expect(CHARTER[2]!.keySetHash).not.toContain(k2.pub);   // the hash reveals nothing of the key itself
+  });
+});
+
+describe("charter-epoch CHAIN minter — pre-rotation seat + rotate ceremony (#68)", () => {
+  const K = (n: number): string[] => [`${n}${"a".repeat(63)}`, `${n}${"b".repeat(63)}`];   // a 2-key set, distinct per epoch
+  const GEN = K(1), E1 = K(2), E2 = K(3);
+  const commit1 = charterKeySetHash(GEN, 2);   // note: GEN's own digest, for a self-consistency check
+
+  test("charterKeySetHash is order-blind + threshold-bound; charterEpochCidOf is tamper-evident", () => {
+    expect(charterKeySetHash(GEN, 2)).toBe(charterKeySetHash([...GEN].reverse(), 2));   // order-blind
+    expect(charterKeySetHash(GEN, 2)).not.toBe(charterKeySetHash(GEN, 1));              // threshold-bound
+    const f = { epoch: 0, keySetHash: "k0", nextKeyCommit: "k1", prevEpochCid: null };
+    expect(charterEpochCidOf(f)).toBe(mintCharterEpoch(f).epochCid);
+    expect(charterEpochCidOf({ ...f, nextKeyCommit: "TAMPERED" })).not.toBe(charterEpochCidOf(f));  // a flip moves the cid
+  });
+
+  test("genesis seats sequence 0 with null prev; a valid rotate ACCEPTS + the chain verifies", () => {
+    // seat: genesis pre-commits epoch1's key-set (E1).
+    const g = genesisCharterEpoch(GEN, 2, charterKeySetHash(E1, 2));
+    expect(g.epoch).toBe(0);
+    expect(g.prevEpochCid).toBeNull();
+    expect(g.keySetHash).toBe(charterKeySetHash(GEN, 2));
+    expect(verifyCharterChain([g])).toBe(true);
+
+    // rotate: reveal E1 (matches the commitment), pre-commit E2 → epoch1 hash-links to genesis.
+    const r = rotateCharterEpoch(g, E1, 2, charterKeySetHash(E2, 2));
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.epoch.epoch).toBe(1);
+    expect(r.epoch.prevEpochCid).toBe(g.epochCid);
+    expect(r.epoch.keySetHash).toBe(charterKeySetHash(E1, 2));
+    const chain: CharterEpoch[] = [g, r.epoch];
+    expect(verifyCharterChain(chain)).toBe(true);   // seat→rotate round-trip verifies whole
+  });
+
+  test("a mismatched reveal REFUSES (fail-closed): the revealed key-set is not the pre-committed one", () => {
+    const g = genesisCharterEpoch(GEN, 2, charterKeySetHash(E1, 2));   // committed E1
+    const r = rotateCharterEpoch(g, E2, 2, charterKeySetHash(K(4), 2)); // but reveal E2 → mismatch
+    expect(r.ok).toBe(false);
+    if (r.ok) return;
+    expect(r.reason).toMatch(/reveal mismatch/);
+  });
+
+  test("an UNARMED head (no pre-commitment) REFUSES rotation — nothing was committed to verify", () => {
+    const g = genesisCharterEpoch(GEN, 2, "");   // rotation unarmed
+    const r = rotateCharterEpoch(g, E1, 2, charterKeySetHash(E2, 2));
+    expect(r.ok).toBe(false);
+    if (r.ok) return;
+    expect(r.reason).toMatch(/unarmed/);
+  });
+
+  test("a broken prev-link REFUSES at chain-verify (a forged successor cannot splice in)", () => {
+    const g = genesisCharterEpoch(GEN, 2, charterKeySetHash(E1, 2));
+    const r = rotateCharterEpoch(g, E1, 2, charterKeySetHash(E2, 2));
+    if (!r.ok) throw new Error("rotate should have accepted");
+    const forged = mintCharterEpoch({ ...r.epoch, prevEpochCid: "WRONG-PREV" });   // re-mint with a broken link
+    expect(verifyCharterChain([g, forged])).toBe(false);
+    // and a forged reveal (keySetHash not pre-committed) fails the pre-rotation guard even with a good link
+    const forgedKeys = mintCharterEpoch({ epoch: 1, keySetHash: charterKeySetHash(K(9), 2), nextKeyCommit: "x", prevEpochCid: g.epochCid });
+    expect(verifyCharterChain([g, forgedKeys])).toBe(false);
+    void commit1;
   });
 });

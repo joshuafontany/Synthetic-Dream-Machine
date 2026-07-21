@@ -14,8 +14,11 @@ import * as ed from "@noble/ed25519";
 import { hex } from "../src/crypto.js";
 import {
   rosterFromCharterDoc, foundingRoster, foundingQuorumSeated, genesisCharterEpochCid,
-  emptyFoundingCharterDoc, NEXUS_CHARTER_DOC_KIND, type NexusCharterDoc,
+  charterChainHead, emptyFoundingCharterDoc, NEXUS_CHARTER_DOC_KIND, type NexusCharterDoc,
 } from "../src/nexus-charter-seed.js";
+import {
+  genesisCharterEpoch, rotateCharterEpoch, charterKeySetHash, mintCharterEpoch, type CharterEpoch,
+} from "../src/wax-stamp.js";
 import { signAntigenEntry, foldAntigenSet, isKapaed, makeMultiSigQuorumVerifier } from "../src/kapae-antigen.js";
 
 const pubOf = (seed: Uint8Array) => ed.getPublicKeyAsync(seed).then(hex);
@@ -100,6 +103,64 @@ describe("rosterFromCharterDoc — a seated doc raises a LIVE antigen roster", (
       signers,
     );
     expect(isKapaed(VICTIM, await foldAntigenSet([entry], roster, verifier))).toBe(false);
+  });
+});
+
+describe("rosterFromCharterDoc — the PRE-ROTATED CHAIN roots the antigen on the verified HEAD (#68)", () => {
+  /** A seated doc carrying a pre-rotated chain: genesis over `seedsA`, rotated to `seedsB` if supplied. */
+  async function chainedDoc(seedsA: Uint8Array[], seedsB?: Uint8Array[]): Promise<NexusCharterDoc> {
+    const keysA = await Promise.all(seedsA.map(pubOf));
+    const nextCommit = seedsB ? charterKeySetHash(await Promise.all(seedsB.map(pubOf)), 2) : "";
+    const g = genesisCharterEpoch(keysA, 2, nextCommit);
+    let chain: CharterEpoch[] = [g];
+    let keys = keysA;
+    if (seedsB) {
+      keys = await Promise.all(seedsB.map(pubOf));
+      const r = rotateCharterEpoch(g, keys, 2, "");
+      if (!r.ok) throw new Error(`rotate failed: ${r.reason}`);
+      chain = [g, r.epoch];
+    }
+    const kahu = keys.map((vk, i) => ({ displayName: ["Guru Joshua Fontany", "Telarus, KSC", "The Lindwyrm"][i]!, verifyingKey: vk }));
+    const head = chain[chain.length - 1]!;
+    return { kind: NEXUS_CHARTER_DOC_KIND, threshold: 2, charterEpochCid: head.epochCid, charterChain: chain, kahu };
+  }
+
+  test("a chain-rooted genesis doc raises a live roster on the head epoch + verifies a real quorum entry", async () => {
+    const doc = await chainedDoc([SEEDS.guru, SEEDS.telarus, SEEDS.lindwyrm]);
+    const roster = rosterFromCharterDoc(doc);
+    expect(roster.keys.length).toBe(3);
+    expect(roster.charterEpochCid).toBe(charterChainHead(doc)!.epochCid);
+    expect(foundingQuorumSeated(doc)).toBe(true);
+
+    const signers = await Promise.all([SEEDS.guru, SEEDS.telarus].map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
+    const entry = await signAntigenEntry({ nym: VICTIM, action: "kapae", version: 1, charterEpochCid: roster.charterEpochCid }, signers);
+    expect(isKapaed(VICTIM, await foldAntigenSet([entry], roster, verifier))).toBe(true);
+  });
+
+  test("after a valid rotate, the roster roots on epoch1's head (the seat→rotate round-trip)", async () => {
+    const doc = await chainedDoc([SEEDS.guru, SEEDS.telarus], [SEEDS.lindwyrm, SEEDS.guru]);
+    const head = charterChainHead(doc)!;
+    expect(head.epoch).toBe(1);
+    expect(rosterFromCharterDoc(doc).charterEpochCid).toBe(head.epochCid);
+    expect(foundingQuorumSeated(doc)).toBe(true);
+  });
+
+  test("a BROKEN chain fails closed to the empty (inert) roster", async () => {
+    const doc = await chainedDoc([SEEDS.guru, SEEDS.telarus]);
+    const head = doc.charterChain![0]!;
+    const tampered: NexusCharterDoc = { ...doc, charterChain: [mintCharterEpoch({ ...head, prevEpochCid: "forged" })] };
+    expect(rosterFromCharterDoc(tampered).keys).toEqual([]);           // genesis with a non-null prev → broken lineage
+    expect(foundingQuorumSeated(tampered)).toBe(false);
+  });
+
+  test("a chain HEAD unbound to the seated key-set fails closed (the seated keys don't hash to head.keySetHash)", async () => {
+    const doc = await chainedDoc([SEEDS.guru, SEEDS.telarus]);
+    // Swap one seated key for a stranger — the head's keySetHash no longer covers the seated set.
+    const stranger = "f".repeat(64);
+    const kahu = doc.kahu.map((k, i) => (i === 0 ? { ...k, verifyingKey: stranger } : k));
+    const unbound: NexusCharterDoc = { ...doc, kahu };
+    expect(rosterFromCharterDoc(unbound).keys).toEqual([]);
+    expect(foundingQuorumSeated(unbound)).toBe(false);
   });
 });
 

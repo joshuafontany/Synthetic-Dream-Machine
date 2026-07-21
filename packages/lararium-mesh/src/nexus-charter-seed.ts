@@ -26,6 +26,7 @@
 
 import type { KahuCharterRoster } from "./kapae-antigen.js";
 import { sha256HexSync, canonicalJson } from "./crypto.js";
+import { type CharterEpoch, verifyCharterChain, charterKeySetHash } from "./wax-stamp.js";
 
 /** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
 export const NEXUS_CHARTER_DOC_KIND = "lar-nexus-charter/v1" as const;
@@ -52,8 +53,15 @@ export interface NexusCharterDoc {
   readonly kind:            typeof NEXUS_CHARTER_DOC_KIND;
   /** k — the quorum threshold a valid antigen act carries (2-of-3 at founding). */
   readonly threshold:       number;
-  /** The charter epoch the antigen roots on — a genesis inception content-address, or null while unestablished. */
+  /** The charter epoch the antigen roots on — the pre-rotated chain's HEAD epochCid, or null while unestablished. */
   readonly charterEpochCid: string | null;
+  /**
+   * The pre-rotated, hash-linked charter-epoch CHAIN (KERI): genesis at index 0, head at the end. Present
+   * once `lares nexus charter seat` establishes it; a `rotate` ceremony appends. Absent on the legacy
+   * genesis-inception path (the antigen then roots on `charterEpochCid` directly). A PRESENT chain MUST
+   * verify AND its head MUST bind the seated key-set, or the roster reads empty (fail-closed).
+   */
+  readonly charterChain?:   readonly CharterEpoch[];
   /** The founding kahu, each seated (verifyingKey set) or unseated (null). */
   readonly kahu:            readonly NexusCharterKahu[];
 }
@@ -102,9 +110,29 @@ export function genesisCharterEpochCid(seatedKeys: readonly string[], threshold:
  */
 export function rosterFromCharterDoc(doc: NexusCharterDoc | null): KahuCharterRoster {
   const threshold = doc && Number.isInteger(doc.threshold) && doc.threshold >= 1 ? doc.threshold : FOUNDING_QUORUM_THRESHOLD;
+  const keys = seatedCharterKeys(doc);
+  const empty: KahuCharterRoster = { keys: [], threshold, charterEpochCid: "" };
+
+  // Pre-rotation chain path: a present chain MUST verify its whole lineage AND its HEAD must bind the
+  // seated key-set — either failure folds to the empty (inert) roster. The antigen then roots on the
+  // cryptographically-verified chain HEAD, never a bare stored string.
+  if (doc?.charterChain && doc.charterChain.length > 0) {
+    if (!verifyCharterChain(doc.charterChain)) return empty;                        // broken lineage → deny
+    const head = doc.charterChain[doc.charterChain.length - 1]!;
+    if (head.keySetHash !== charterKeySetHash(keys, threshold)) return empty;       // head unbound to seated keys → deny
+    return { keys, threshold, charterEpochCid: head.epochCid };
+  }
+
+  // Legacy genesis-inception path: root directly on the stored epoch cid.
   const epoch = doc && typeof doc.charterEpochCid === "string" ? doc.charterEpochCid : "";
-  if (epoch.length === 0) return { keys: [], threshold, charterEpochCid: "" };   // no epoch → nothing roots → deny
-  return { keys: seatedCharterKeys(doc), threshold, charterEpochCid: epoch };
+  if (epoch.length === 0) return empty;                                             // no epoch → nothing roots → deny
+  return { keys, threshold, charterEpochCid: epoch };
+}
+
+/** The pre-rotated chain's head epoch, or null when no chain stands established (legacy / unseated doc). */
+export function charterChainHead(doc: NexusCharterDoc | null): CharterEpoch | null {
+  const chain = doc?.charterChain;
+  return chain && chain.length > 0 ? chain[chain.length - 1]! : null;
 }
 
 /**

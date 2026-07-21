@@ -1,18 +1,26 @@
 /**
- * `lares nexus charter {seat | show}` — the operator's door to the founding-kahu ROSTER, the Kapae immune
- * antigen's authority home (#66). The roster lives as data-as-authority in the `bags/@nexus` charter DOC;
- * `seat` mints/updates it from the vault, `show` reads it back. The pure antigen fold/verify reads this
- * same doc through `foundingRoster`.
+ * `lares nexus charter {seat | rotate | commit | show}` — the operator's door to the founding-kahu ROSTER
+ * and its PRE-ROTATED, hash-linked charter-epoch CHAIN (TUF ≈ KERI), the Kapae immune antigen's authority
+ * home (#68). The roster lives as data-as-authority in the `bags/@nexus` charter DOC; the antigen roots on
+ * the chain's HEAD epoch. The pure antigen fold/verify reads this same doc through `foundingRoster`.
  *
- *   seat   read each held persona's ed25519 VERIFYING key from the vault (NEVER the signing seed), match it
- *          to a founding-kahu display name by PRIVATE pet-name, and write the seated roster + a genesis
- *          charter-epoch inception into the doc. FAILS CLOSED: a kahu with no matching held persona stays
- *          unseated; a quorum-short roster establishes no epoch (the antigen stays inert).
- *   show   the current roster state — seated/unseated kahu, threshold, charter epoch, quorum verdict.
+ *   seat    read each held persona's ed25519 VERIFYING key from the vault (NEVER the signing seed), match it
+ *           to a founding-kahu display name by PRIVATE pet-name, and establish the GENESIS epoch (sequence 0)
+ *           bound to the seated key-set + an operator-supplied PRE-ROTATION commitment (`--next-key-commit`)
+ *           to the next epoch's keys. FAILS CLOSED: a kahu with no matching held persona stays unseated; a
+ *           quorum-short roster establishes no epoch (the antigen stays inert); a chain already ADVANCED past
+ *           genesis refuses re-seat (rotate advances it, never a silent re-genesis).
+ *   rotate  advance the chain: the operator has provisioned the pre-committed next key-set into the vault;
+ *           rotate REVEALS it, verifies its digest matches the head's `nextKeyCommit` (FAIL CLOSED on
+ *           mismatch), seats it as the new head, hash-linked to the prior epoch, and pre-commits the
+ *           following key-set (`--next-key-commit`). A broken reveal writes nothing.
+ *   commit  compute a key-set commitment digest (`charterKeySetHash`) from a comma-separated `--keys` set +
+ *           `--threshold`, so the operator produces the `--next-key-commit` value OFFLINE from the next
+ *           epoch's verifying keys, holding the next SIGNING seeds in offline custody.
+ *   show    the current roster state — seated/unseated kahu, threshold, chain head epoch, quorum verdict.
  *
- * The CHARTER EPOCH is a genesis inception content-address bound to the seated key-set (KERI genesis) — NOT
- * the full pre-rotated wax-stamp epoch-chain (a surfaced follow-on: it needs the next epoch's keys in
- * offline custody + a `lares rotate-root` ceremony before this epoch ever seals).
+ * The pre-rotation is the recovery keel: stealing today's council keys cannot forge tomorrow's charter,
+ * because each epoch pre-commits a digest of the NEXT epoch's keys before those keys ever sign.
  */
 
 import {
@@ -20,8 +28,9 @@ import {
   listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore,
 } from "@lararium/node";
 import {
-  emptyFoundingCharterDoc, genesisCharterEpochCid, rosterFromCharterDoc, foundingQuorumSeated,
-  ownPersonaPetname, type NexusCharterDoc, type NexusCharterKahu,
+  emptyFoundingCharterDoc, rosterFromCharterDoc, foundingQuorumSeated, charterChainHead,
+  ownPersonaPetname, genesisCharterEpoch, rotateCharterEpoch, charterKeySetHash,
+  type NexusCharterDoc, type NexusCharterKahu, type CharterEpoch,
 } from "@lararium/mesh";
 import { larBagsDir, larDataDir } from "../env.js";
 import { emit, exitFor } from "../render.js";
@@ -30,10 +39,14 @@ import type { ParsedArgs } from "../parse-args.js";
 class UsageError extends Error {}
 
 function usage(): void {
-  console.error("usage: lares nexus charter <seat | show>");
+  console.error("usage: lares nexus charter <seat | rotate | commit | show>");
   console.error("");
-  console.error("  seat   seat the held personas' verifying keys into the bags/@nexus charter doc (by pet-name)");
-  console.error("  show   read the current founding-kahu roster + quorum verdict");
+  console.error("  seat    establish the GENESIS epoch from the held personas' verifying keys (by pet-name)");
+  console.error("          + a pre-rotation commitment:  --next-key-commit <digest>");
+  console.error("  rotate  reveal the pre-committed next key-set (now in the vault) + advance the chain:");
+  console.error("          --next-key-commit <digest-of-the-FOLLOWING-key-set>");
+  console.error("  commit  compute a key-set commitment digest:  --keys <k1,k2,...> --threshold <k>");
+  console.error("  show    read the current founding-kahu roster + chain head + quorum verdict");
 }
 
 export async function cmdNexus(args: ParsedArgs): Promise<number> {
@@ -41,8 +54,10 @@ export async function cmdNexus(args: ParsedArgs): Promise<number> {
   const sub = args.positional[1];
   try {
     switch (sub) {
-      case "seat": return await charterSeat(args);
-      case "show": return await charterShow(args);
+      case "seat":   return await charterSeat(args);
+      case "rotate": return await charterRotate(args);
+      case "commit": return charterCommit(args);
+      case "show":   return await charterShow(args);
       default:
         if (sub) console.error(`lares nexus charter: unknown sub-verb "${sub}"`);
         usage();
@@ -59,12 +74,18 @@ export async function cmdNexus(args: ParsedArgs): Promise<number> {
 /** normalize a display/pet-name for matching — trimmed, case-folded (a pet-name is a private human label). */
 const norm = (s: string): string => s.trim().toLowerCase();
 
-async function charterSeat(args: ParsedArgs): Promise<number> {
-  const bagsDir = larBagsDir();
-  const dataDir = larDataDir();
-  const doc = readNexusCharterDoc(bagsDir) ?? emptyFoundingCharterDoc();
+/** normalize a commitment/key hex — trimmed, lower-cased (the digest surface stays canonical lowercase hex). */
+const normHex = (s: string | undefined): string => (s ?? "").trim().toLowerCase();
 
-  // Read the vault: each held persona's PUBLIC verifying key (never the seed) + its private pet-name.
+/**
+ * Seat each kahu's verifying key from the vault by PRIVATE pet-name match. FAIL CLOSED: no match keeps the
+ * doc's existing key (never invents, never unseats). A verifying key that is not in the vault can never be
+ * seated — only vault reads flow in. Returns the updated kahu + the seated verifying keys (the CURRENT
+ * key-set: at genesis the founding keys, at rotate the revealed next key-set the operator provisioned).
+ */
+async function seatKahuFromVault(
+  doc: NexusCharterDoc, dataDir: string,
+): Promise<{ kahu: NexusCharterKahu[]; seatedKeys: string[] }> {
   const held = await listPersonaRoots(dataDir);
   const petnames = await makeNodePersonaPetnameStore();
   const byPetname = new Map<string, string>();   // normalized pet-name → verifying key hex
@@ -74,39 +95,61 @@ async function charterSeat(args: ParsedArgs): Promise<number> {
     const root = await generateOrLoadPersonaGroupRoot(dataDir, index);   // loads a held root; never mints here
     byPetname.set(norm(petname), root.verifyingKey);
   }
-
-  // Seat each kahu from a pet-name match. FAIL CLOSED: no match keeps the doc's existing key (never invents,
-  // never unseats). A verifying key that is not in the vault can never be seated — only vault reads flow in.
   const kahu: NexusCharterKahu[] = doc.kahu.map((k) => {
     const matched = byPetname.get(norm(k.displayName));
     return { displayName: k.displayName, verifyingKey: matched ?? k.verifyingKey };
   });
-
   const seatedKeys = kahu.map((k) => k.verifyingKey).filter((v): v is string => typeof v === "string" && v.length > 0);
-  // Establish the genesis charter epoch only once a quorum is seatable — below threshold, no epoch roots.
-  const charterEpochCid = seatedKeys.length >= doc.threshold
-    ? genesisCharterEpochCid(seatedKeys, doc.threshold)
-    : null;
+  return { kahu, seatedKeys };
+}
 
-  const next: NexusCharterDoc = { kind: doc.kind, threshold: doc.threshold, charterEpochCid, kahu };
+async function charterSeat(args: ParsedArgs): Promise<number> {
+  const bagsDir = larBagsDir();
+  const dataDir = larDataDir();
+  const doc = readNexusCharterDoc(bagsDir) ?? emptyFoundingCharterDoc();
+
+  // FAIL CLOSED: a chain already advanced PAST genesis is never silently re-genesied — a re-seat would
+  // strand every antigen entry rooted on a rotated head. The operator advances a live chain via `rotate`.
+  if (doc.charterChain && doc.charterChain.length > 1) {
+    throw new UsageError("the charter chain has already ROTATED past genesis — advance it with `lares nexus charter rotate`, never re-seat");
+  }
+
+  const { kahu, seatedKeys } = await seatKahuFromVault(doc, dataDir);
+  const nextKeyCommit = normHex(args.options["next-key-commit"]);
+
+  // Establish the genesis epoch only once a quorum is seatable — below threshold, no epoch roots (inert).
+  let charterChain: CharterEpoch[] | undefined;
+  let charterEpochCid: string | null = null;
+  if (seatedKeys.length >= doc.threshold) {
+    const genesis = genesisCharterEpoch(seatedKeys, doc.threshold, nextKeyCommit);
+    charterChain = [genesis];
+    charterEpochCid = genesis.epochCid;
+  }
+
+  const next: NexusCharterDoc = charterChain
+    ? { kind: doc.kind, threshold: doc.threshold, charterEpochCid, charterChain, kahu }
+    : { kind: doc.kind, threshold: doc.threshold, charterEpochCid, kahu };
   const path = writeNexusCharterDoc(bagsDir, next);
   const quorum = foundingQuorumSeated(next);
+  const armed = Boolean(charterChain) && nextKeyCommit.length > 0;
 
   emit(args, {
     ok: true,
     data: {
       path, threshold: next.threshold, charterEpochCid, quorumSeated: quorum,
+      rotationArmed: armed, nextKeyCommit: nextKeyCommit || null,
       kahu: kahu.map((k) => ({ displayName: k.displayName, seated: Boolean(k.verifyingKey), verifyingKey: k.verifyingKey })),
     },
     human: () => {
-      console.log(`nexus charter seated → ${path}`);
+      console.log(`nexus charter seated (genesis epoch) → ${path}`);
       for (const k of kahu) {
         console.log(`  ${k.verifyingKey ? "seated  " : "UNSEATED"} ${k.displayName}${k.verifyingKey ? `  ${k.verifyingKey.slice(0, 16)}…` : ""}`);
       }
       console.log(`  threshold:  ${next.threshold} of ${kahu.length}`);
-      console.log(`  epoch:      ${charterEpochCid ?? "(unestablished — seat a quorum first)"}`);
+      console.log(`  epoch0:     ${charterEpochCid ?? "(unestablished — seat a quorum first)"}`);
       if (quorum) {
-        console.log(`  quorum STANDS — the antigen now reads a live roster.`);
+        console.log(`  quorum STANDS — the antigen now reads a live roster rooted on the genesis epoch.`);
+        console.log(`  rotation:   ${armed ? "ARMED (next key-set pre-committed)" : "UNARMED — supply --next-key-commit <digest> to arm pre-rotation"}`);
       } else {
         const missing = kahu.filter((k) => !k.verifyingKey).map((k) => `"${k.displayName}"`);
         console.log(`  quorum SHORT (fail-closed; the antigen stays inert). Unseated: ${missing.join(", ") || "(none)"}`);
@@ -117,11 +160,92 @@ async function charterSeat(args: ParsedArgs): Promise<number> {
   return 0;
 }
 
+async function charterRotate(args: ParsedArgs): Promise<number> {
+  const bagsDir = larBagsDir();
+  const dataDir = larDataDir();
+  const doc = readNexusCharterDoc(bagsDir);
+  const head = charterChainHead(doc);
+  if (!doc || !head) {
+    throw new UsageError("no genesis charter chain to rotate — establish one with `lares nexus charter seat` first");
+  }
+
+  // REVEAL: the operator has provisioned the pre-committed next key-set into the vault; seating from the
+  // vault reads it back. The revealed key-set becomes the new head's authorized quorum.
+  const { kahu, seatedKeys } = await seatKahuFromVault(doc, dataDir);
+  if (seatedKeys.length < doc.threshold) {
+    throw new UsageError(`the revealed key-set is short of the ${doc.threshold}-of-${doc.kahu.length} quorum (seated ${seatedKeys.length}) — provision the next personas before rotating`);
+  }
+  const nextKeyCommit = normHex(args.options["next-key-commit"]);
+
+  // FAIL CLOSED: a revealed key-set whose digest does not match the head's pre-commitment REFUSES, and
+  // writes nothing. A stolen current key-set cannot forge a successor it never pre-committed.
+  const result = rotateCharterEpoch(head, seatedKeys, doc.threshold, nextKeyCommit);
+  if (!result.ok) {
+    emit(args, {
+      ok: false,
+      error: { code: "error", message: `rotation REFUSED (fail-closed): ${result.reason}` },
+      human: () => {
+        console.error(`nexus charter rotate REFUSED (fail-closed): ${result.reason}`);
+        console.error(`  the chain stays at epoch ${head.epoch}; nothing written.`);
+      },
+    });
+    return exitFor("error");
+  }
+
+  const charterChain: CharterEpoch[] = [...(doc.charterChain ?? []), result.epoch];
+  const charterEpochCid = result.epoch.epochCid;
+  const next: NexusCharterDoc = { kind: doc.kind, threshold: doc.threshold, charterEpochCid, charterChain, kahu };
+  const path = writeNexusCharterDoc(bagsDir, next);
+  const armed = nextKeyCommit.length > 0;
+
+  emit(args, {
+    ok: true,
+    data: {
+      path, epoch: result.epoch.epoch, charterEpochCid, prevEpochCid: result.epoch.prevEpochCid,
+      chainDepth: charterChain.length, rotationArmed: armed, nextKeyCommit: nextKeyCommit || null,
+      quorumSeated: foundingQuorumSeated(next),
+    },
+    human: () => {
+      console.log(`nexus charter ROTATED → epoch ${result.epoch.epoch} (chain depth ${charterChain.length}) → ${path}`);
+      console.log(`  reveal VERIFIED against the prior epoch's pre-commitment.`);
+      console.log(`  head epoch: ${charterEpochCid}`);
+      console.log(`  prev link:  ${result.epoch.prevEpochCid}`);
+      console.log(`  rotation:   ${armed ? "ARMED (next key-set pre-committed)" : "UNARMED — the next rotate refuses until you supply --next-key-commit"}`);
+    },
+  });
+  return 0;
+}
+
+function charterCommit(args: ParsedArgs): number {
+  const raw = args.options["keys"];
+  if (!raw) throw new UsageError("provide the next epoch's verifying keys: --keys <k1,k2,...> [--threshold <k>]");
+  const keys = raw.split(",").map((k) => k.trim().toLowerCase()).filter((k) => k.length > 0);
+  if (keys.length === 0) throw new UsageError("no keys supplied to --keys");
+  const thRaw = args.options["threshold"];
+  const threshold = thRaw !== undefined ? Number.parseInt(thRaw, 10) : keys.length;
+  if (!Number.isInteger(threshold) || threshold < 1) throw new UsageError(`--threshold must be a positive integer (got "${thRaw}")`);
+  const digest = charterKeySetHash(keys, threshold);
+
+  emit(args, {
+    ok: true,
+    data: { digest, keys: keys.length, threshold },
+    human: () => {
+      console.log(`key-set commitment digest (${keys.length} keys, ${threshold}-of-${keys.length}):`);
+      console.log(`  ${digest}`);
+      console.log(`  supply it as:  lares nexus charter {seat|rotate} --next-key-commit ${digest}`);
+      console.log(`  hold the matching SIGNING seeds in offline custody until the rotate ceremony reveals them.`);
+    },
+  });
+  return 0;
+}
+
 async function charterShow(args: ParsedArgs): Promise<number> {
   const bagsDir = larBagsDir();
   const doc = readNexusCharterDoc(bagsDir);
   const roster = rosterFromCharterDoc(doc);
   const quorum = foundingQuorumSeated(doc);
+  const head = charterChainHead(doc);
+  const chainDepth = doc?.charterChain?.length ?? 0;
 
   emit(args, {
     ok: true,
@@ -130,6 +254,8 @@ async function charterShow(args: ParsedArgs): Promise<number> {
       present: doc !== null,
       threshold: roster.threshold,
       charterEpochCid: roster.charterEpochCid || null,
+      chainDepth,
+      rotationArmed: head ? head.nextKeyCommit.length > 0 : false,
       seatedKeys: roster.keys.length,
       quorumSeated: quorum,
       kahu: (doc?.kahu ?? []).map((k) => ({ displayName: k.displayName, seated: Boolean(k.verifyingKey) })),
@@ -143,7 +269,9 @@ async function charterShow(args: ParsedArgs): Promise<number> {
       console.log(`nexus charter (${nexusCharterDocPath(bagsDir)}):`);
       for (const k of doc.kahu) console.log(`  ${k.verifyingKey ? "seated  " : "UNSEATED"} ${k.displayName}`);
       console.log(`  threshold:  ${roster.threshold} · seated keys: ${roster.keys.length}`);
-      console.log(`  epoch:      ${roster.charterEpochCid || "(unestablished)"}`);
+      console.log(`  chain:      ${chainDepth > 0 ? `${chainDepth} epoch(s), head at seq ${chainDepth - 1}` : "(none — legacy/unestablished)"}`);
+      console.log(`  head epoch: ${roster.charterEpochCid || "(unestablished)"}`);
+      console.log(`  rotation:   ${head && head.nextKeyCommit.length > 0 ? "ARMED" : "UNARMED"}`);
       console.log(`  quorum:     ${quorum ? "STANDS (roster live)" : "SHORT (fail-closed — antigen inert)"}`);
     },
   });

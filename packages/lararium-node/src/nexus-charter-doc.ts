@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import {
   NEXUS_CHARTER_DOC_KIND, NEXUS_CHARTER_URI, NEXUS_CHARTER_URI_PATH,
-  type NexusCharterDoc, type NexusCharterKahu,
+  type NexusCharterDoc, type NexusCharterKahu, type CharterEpoch,
 } from "@lararium/mesh";
 
 /** The `@nexus` residency-bag name — the holding slot the charter doc sites under. */
@@ -38,6 +38,35 @@ export function nexusCharterDocPath(bagsDir: string): string {
 /** The fenced machine-readable roster block the body carries — extracted whole on read, re-emitted on write. */
 const CHARTER_BLOCK_RE = /```json nexus-charter\r?\n([\s\S]*?)\r?\n```/;
 
+/**
+ * Coerce a parsed charter-chain payload: `undefined` when absent (the legacy genesis-inception doc), the
+ * sentinel `"torn"` when malformed (which reads the WHOLE doc closed — the parser never guesses a partial
+ * pre-rotation lineage into authority), or the typed `CharterEpoch[]` when every epoch's shape holds.
+ */
+function coerceCharterChain(raw: unknown): CharterEpoch[] | "torn" | undefined {
+  if (raw === undefined || raw === null) return undefined;
+  if (!Array.isArray(raw)) return "torn";
+  const chain: CharterEpoch[] = [];
+  for (const item of raw) {
+    if (typeof item !== "object" || item === null) return "torn";
+    const e = item as Record<string, unknown>;
+    if (!Number.isInteger(e["epoch"]))            return "torn";
+    if (typeof e["epochCid"]      !== "string")   return "torn";
+    if (typeof e["keySetHash"]    !== "string")   return "torn";
+    if (typeof e["nextKeyCommit"] !== "string")   return "torn";
+    const prev = e["prevEpochCid"];
+    if (prev !== null && typeof prev !== "string") return "torn";
+    chain.push({
+      epoch:         e["epoch"] as number,
+      epochCid:      e["epochCid"] as string,
+      keySetHash:    e["keySetHash"] as string,
+      nextKeyCommit: e["nextKeyCommit"] as string,
+      prevEpochCid:  (prev ?? null) as string | null,
+    });
+  }
+  return chain;
+}
+
 /** Coerce an unknown parsed payload into a `NexusCharterDoc`, or null when it fails the shape/kind guards. */
 function coerceCharterDoc(parsed: unknown): NexusCharterDoc | null {
   if (typeof parsed !== "object" || parsed === null) return null;
@@ -47,6 +76,8 @@ function coerceCharterDoc(parsed: unknown): NexusCharterDoc | null {
   if (!Array.isArray(p["kahu"])) return null;
   const epoch = p["charterEpochCid"];
   const charterEpochCid = typeof epoch === "string" && epoch.length > 0 ? epoch : null;
+  const chain = coerceCharterChain(p["charterChain"]);
+  if (chain === "torn") return null;                                // a torn chain reads the whole doc closed
   const kahu: NexusCharterKahu[] = [];
   for (const raw of p["kahu"]) {
     if (typeof raw !== "object" || raw === null) return null;      // a torn member reads the whole doc closed
@@ -58,7 +89,8 @@ function coerceCharterDoc(parsed: unknown): NexusCharterDoc | null {
       verifyingKey: typeof vk === "string" && vk.length > 0 ? vk : null,
     });
   }
-  return { kind: NEXUS_CHARTER_DOC_KIND, threshold: p["threshold"] as number, charterEpochCid, kahu };
+  const base: NexusCharterDoc = { kind: NEXUS_CHARTER_DOC_KIND, threshold: p["threshold"] as number, charterEpochCid, kahu };
+  return chain === undefined ? base : { ...base, charterChain: chain };
 }
 
 /**
@@ -79,6 +111,8 @@ export function readNexusCharterDoc(bagsDir: string): NexusCharterDoc | null {
 /** Render the charter doc as a house-form `.mem` carrier — iam frame + prose + the machine-readable block. */
 export function renderNexusCharterDoc(doc: NexusCharterDoc): string {
   const seated = doc.kahu.filter((k) => k.verifyingKey).length;
+  const chainDepth = doc.charterChain?.length ?? 0;
+  const chainLine = chainDepth > 0 ? ` · pre-rotated chain: ${chainDepth} epoch(s), head at seq ${chainDepth - 1}` : "";
   const block = JSON.stringify(doc, null, 2);
   return `<<~ ? -> ${NEXUS_CHARTER_URI} >>
 \`\`\`toml iam
@@ -98,7 +132,7 @@ role      = "the APPROVED founding-kahu roster — data-as-authority for the Kap
 
 The APPROVED roster the Kapae immune antigen reads. A ban/lift act carries ${doc.threshold}-of-${doc.kahu.length} founding-kahu signatures, rooted on the charter epoch below. Each kahu's key is that PersonaGroup's own root-derived verifying key, seated from the vault by \`lares nexus charter seat\` — never invented. An unseated key reads null, and the antigen stays inert until a quorum stands.
 
-Seated: ${seated}/${doc.kahu.length} · threshold ${doc.threshold} · epoch ${doc.charterEpochCid ?? "(unestablished — seat a quorum)"}
+Seated: ${seated}/${doc.kahu.length} · threshold ${doc.threshold} · epoch ${doc.charterEpochCid ?? "(unestablished — seat a quorum)"}${chainLine}
 
 \`\`\`json nexus-charter
 ${block}

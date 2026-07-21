@@ -16,6 +16,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   emptyFoundingCharterDoc, genesisCharterEpochCid, rosterFromCharterDoc, foundingQuorumSeated,
+  genesisCharterEpoch, charterKeySetHash, charterChainHead,
   renameOwnPersona, ownPersonaPetname, type NexusCharterDoc, type NexusCharterKahu,
 } from "@lararium/mesh";
 import {
@@ -81,6 +82,37 @@ describe("nexus-charter-doc — disk round-trip, fail-closed", () => {
     writeNexusCharterDoc(bags, emptyFoundingCharterDoc());
     writeFileSync(path, "```json nexus-charter\n{ \"kind\": \"something-else\", \"threshold\": 2, \"kahu\": [] }\n```\n", "utf8");
     expect(readNexusCharterDoc(bags)).toBeNull();
+  });
+
+  test("a pre-rotated CHAIN doc round-trips through disk + roots the roster on the head epoch (#68)", () => {
+    const keys = ["a".repeat(64), "b".repeat(64)];
+    const genesis = genesisCharterEpoch(keys, 2, charterKeySetHash(["c".repeat(64), "d".repeat(64)], 2));
+    const doc: NexusCharterDoc = {
+      kind: "lar-nexus-charter/v1", threshold: 2,
+      charterEpochCid: genesis.epochCid,
+      charterChain: [genesis],
+      kahu: [
+        { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
+        { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },
+        { displayName: "The Lindwyrm",        verifyingKey: null },
+      ],
+    };
+    writeNexusCharterDoc(bags, doc);
+    const back = readNexusCharterDoc(bags);
+    expect(back).toEqual(doc);                                          // the chain survives disk byte-faithful
+    expect(charterChainHead(back)!.epoch).toBe(0);
+    expect(rosterFromCharterDoc(back).charterEpochCid).toBe(genesis.epochCid);   // antigen roots on the head
+    expect(foundingQuorumSeated(back)).toBe(true);
+  });
+
+  test("a TORN chain block reads null (never a partial pre-rotation lineage into authority)", () => {
+    const path = nexusCharterDocPath(bags);
+    writeNexusCharterDoc(bags, emptyFoundingCharterDoc());
+    writeFileSync(path,
+      "```json nexus-charter\n" +
+      JSON.stringify({ kind: "lar-nexus-charter/v1", threshold: 2, kahu: [], charterChain: [{ epoch: 0, epochCid: "e0" }] }) +
+      "\n```\n", "utf8");
+    expect(readNexusCharterDoc(bags)).toBeNull();                        // an epoch missing keySetHash/nextKeyCommit → torn → closed
   });
 });
 
