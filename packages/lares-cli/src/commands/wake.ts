@@ -231,14 +231,16 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //     the node isn't up (verbatim-always / recall-eventual).
   const recall = nodeUp ? await recallIntoWake() : undefined;
 
-  // 2c. The founding NEXT-STEP hint — after --install mints the founder (h0), flow the operator onward
-  //     to the remaining founding kahu. Persona-minting SEPARATES from the founder-mint: `wake --install`
-  //     mints only h0; each further kahu stands through its OWN deliberate `lares persona new` act, then
-  //     `lares nexus charter seat` seats the quorum the immune antigen reads. Surfaced only under standup.
+  // 2c. The founding NEXT-STEP hint — naming EVERY kahu rides its OWN deliberate `lares persona new <i>
+  //     --name` act, THREE SYMMETRIC commands. The founder-mint (h0) SIGNS the founding bind at standup, so
+  //     `persona new 0` LOADS that pre-standing operator-root idempotently and sets its PRIVATE pet-name;
+  //     `new 1`/`new 2` mint the remaining kahu. The seat joins persona→kahu BY pet-name, so all three names
+  //     MUST land before `lares nexus charter seat` seats the 2-of-3 quorum the immune antigen reads.
+  //     Surfaced only under standup.
   const foundingHint: string[] | undefined = founding === undefined ? undefined : [
-    `Founder persona h0 stands ("${FOUNDING_KAHU[0]?.displayName ?? "Guru Joshua Fontany"}").`,
-    ...FOUNDING_KAHU.slice(1).map((k, i) => `Add the next kahu: lares persona new ${i + 1} --name '${k.displayName}'`),
-    `Then seat the 2-of-3 quorum: lares nexus charter seat`,
+    `Founder persona h0 stands as the operator-root — its root signs the founding bind; \`persona new 0\` names it (idempotent — loads the founder, sets its pet-name).`,
+    ...FOUNDING_KAHU.map((k, i) => `lares persona new ${i} --name '${k.displayName}'`),
+    `Then seat the 2-of-3 quorum from the named personas: lares nexus charter seat`,
   ];
 
   // 3. Emit the live-delta frame (dual output). Graceful: never hard-fail the wake.

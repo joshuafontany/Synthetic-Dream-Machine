@@ -32,7 +32,7 @@ function usage(): void {
   console.error("  wear <index>                switch the active persona (reboot-to-switch — one face to the mesh)");
   console.error("  list                        the private multitude — held indices, active marker, pet-names");
   console.error("");
-  console.error("  founding sequence: lares persona new 1 --name 'Telarus, KSC'  ·  lares persona new 2 --name 'The Lindwyrm'");
+  console.error("  founding sequence (three symmetric commands): lares persona new 0 --name 'Guru Joshua Fontany'  ·  new 1 --name 'Telarus, KSC'  ·  new 2 --name 'The Lindwyrm'  →  lares nexus charter seat");
 }
 
 /** Parse a positional handle-index, fail-closed to a clean usage error (assertHandleIndex range mirrored). */
@@ -124,7 +124,7 @@ async function personaList(args: ParsedArgs): Promise<number> {
     data: { active: active ?? null, personas: rows },
     human: () => {
       if (rows.length === 0) {
-        console.log("no personas held — mint the founder with `lares wake --install`, then add kahu via `lares persona new <index> --name '…'`.");
+        console.log("no personas held — stand the founder with `lares wake --install`, then NAME every kahu (three symmetric commands): `lares persona new 0/1/2 --name '…'` (new 0 loads+names the founder).");
         return;
       }
       console.log("personas (the private multitude):");

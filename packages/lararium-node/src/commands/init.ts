@@ -154,10 +154,12 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   // ── Founding ceremony path ───────────────────────────────────────────────
   const operatorSeed = await loadVesselSigningSeed(storageDir);
 
-  // The binding: the per-vessel key (operatorSeed) is the DEVICE; the PersonaGroup ROOT
-  // signs the edge that binds it to the hearth true-name. Founder-only — mint/load the
-  // root + its seed, and read the hearth true-name (engine CID). A founding with no place
-  // to bind to is no founding, so both are required (pono — we are the first node).
+  // The binding: the per-vessel key (operatorSeed) is the DEVICE; the PersonaGroup ROOT (persona h0)
+  // signs the edge that binds it to the hearth true-name — that root's DID becomes the PINNED signerDid
+  // peers verify the founding edge (and every admit-time device-delegation) against. Founder-only, so the
+  // founding STANDS h0's root here; a founding with no operator-root to bind through is no founding.
+  // `lares persona new 0 --name '<kahu>'` then LOADS this same root idempotently and sets its private
+  // pet-name — the first of the three symmetric persona-new commands, the founder pre-standing.
   await generateOrLoadPersonaGroupRoot(storageDir);
   const signerSeed = await loadPersonaGroupRootSeed(storageDir);
   const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
