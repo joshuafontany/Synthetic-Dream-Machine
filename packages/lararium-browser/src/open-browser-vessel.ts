@@ -404,7 +404,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // LarWSClientAdapter and add it to the Repo: the browser dials the node's gate, runs the V3
   // handshake on the socket, and — on a passing verdict — syncs shared docs (the second spore).
   // FLOW ⊥ AUTHORITY: this is pure authority+sync; the nalu servo / ea-backpressure rides later.
-  // NOTE: the gate admits a peer holding cap=admin on the node's @daemon, OR (Seam B) one the
+  // NOTE: the gate admits a peer holding cap=admin on the node's @daemon, OR one the
   // operator device-admitted that carries a valid device-delegation edge pinned to the node's
   // hearth root. The leaf rides its own device edge (social.deviceEdge) so the in-worker keyholder
   // can admit it at the operator's-own-device tier. gatePubKey is PROVISIONED out-of-band: for a

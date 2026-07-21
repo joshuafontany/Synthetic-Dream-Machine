@@ -1,7 +1,7 @@
 /**
- * SEAM-B WITNESS — the device-delegation admission path, witnessed behaviorally.
+ * DEVICE-DELEGATION ADMISSION WITNESS — the operator's-own-device admission path, witnessed behaviorally.
  *
- * Commit "lar:///tiered-gate.seam-B" added a branch to `verifyPeer`
+ * The daemon gate's device-delegation branch in `verifyPeer`
  * (operator-daemon-behavior.ts): a peer presenting a valid device-delegation edge
  * — PINNED to the hearth root (signerDid), bound to THIS proven identity
  * (edge.deviceDid === id), carrying a verified V3 proof-of-possession — is
@@ -21,9 +21,9 @@
  * Enforcement stays ON (LAR_V3_ALLOW_UNPROVEN cleared) so case 4 (no proof → deny)
  * is meaningful.
  *
- *   pnpm exec tsx packages/lararium-keyhive/probes/seam-b-admission.ts
+ *   pnpm exec tsx packages/lararium-keyhive/probes/device-delegation-admission.ts
  *
- * Meme: lar:///ha.ka.ba/lararium/keyhive/seam-b-admission
+ * Meme: lar:///ha.ka.ba/lararium/keyhive/device-delegation-admission
  */
 
 import {
@@ -144,7 +144,7 @@ let failures = 0;
 function check(name: string, pass: boolean, verdict: DaemonMsg_VerifyResult): void {
   const tag = pass ? "PASS" : "FAIL";
   if (!pass) failures++;
-  console.log(`[seam-b] ${tag} — ${name}`);
+  console.log(`[delegation-admit] ${tag} — ${name}`);
   console.log(`           verdict: ok=${verdict.ok} proofVerified=${verdict.proofVerified ?? "—"} reason=${JSON.stringify(verdict.reason ?? null)}`);
 }
 
@@ -181,7 +181,7 @@ async function main(): Promise<void> {
   try {
     await behavior.onEa(ctx);
   } catch (err) {
-    console.log(`[seam-b] (onEa partial — keyhive booted before a downstream stub threw: ${err instanceof Error ? err.message : String(err)})`);
+    console.log(`[delegation-admit] (onEa partial — keyhive booted before a downstream stub threw: ${err instanceof Error ? err.message : String(err)})`);
   }
 
   // ── The peer: the operator's SECOND device — its OWN per-vessel key (anti-pono to share the seed). ──
@@ -192,10 +192,10 @@ async function main(): Promise<void> {
   const cardBytes = await peer.contactCard();   // gate's kh.receiveContactCard → id = "0x"+peerVk
   const goodProof = await mintProof(peerSeed, peerVk, operatorVk, DAEMON_BAG);
 
-  console.log("[seam-b] =========================================================");
-  console.log("[seam-b] witnessing verifyPeer's Seam-B branch (REAL committed closure)");
-  console.log(`[seam-b] gate operatorVk=0x${operatorVk.slice(0, 12)}…  peer id=0x${peerVk.slice(0, 12)}…`);
-  console.log("[seam-b] =========================================================");
+  console.log("[delegation-admit] =========================================================");
+  console.log("[delegation-admit] witnessing verifyPeer's device-delegation branch (REAL committed closure)");
+  console.log(`[delegation-admit] gate operatorVk=0x${operatorVk.slice(0, 12)}…  peer id=0x${peerVk.slice(0, 12)}…`);
+  console.log("[delegation-admit] =========================================================");
 
   // CASE 1 — ADMIT: edge signed by the pinned root, bound to the presenter, valid proof.
   // THE CAP-WALL DISSOLVES.
@@ -236,13 +236,13 @@ async function main(): Promise<void> {
   // Best-effort teardown of whatever onEa wired.
   try { await behavior.onHooAnu(ctx); } catch { /* best-effort */ }
 
-  console.log("[seam-b] =========================================================");
+  console.log("[delegation-admit] =========================================================");
   if (failures === 0) {
-    console.log("[seam-b] ALL 4 CASES PASS — the device-delegation admission seam holds.");
+    console.log("[delegation-admit] ALL 4 CASES PASS — the device-delegation admission seam holds.");
   } else {
-    console.log(`[seam-b] ${failures} CASE(S) FAILED.`);
+    console.log(`[delegation-admit] ${failures} CASE(S) FAILED.`);
     process.exit(1);
   }
 }
 
-main().catch((err) => { console.error("[seam-b] FATAL:", err); process.exit(1); });
+main().catch((err) => { console.error("[delegation-admit] FATAL:", err); process.exit(1); });

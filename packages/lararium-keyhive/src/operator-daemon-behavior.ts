@@ -260,7 +260,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         return { ...verdict, identifier: id, proofVerified, peerClass: "same-operator" as const };
       }
 
-      // SEAM B — OPERATOR DEVICE-DELEGATION PATH (additive). The peer holds NO cap=admin, but a
+      // OPERATOR DEVICE-DELEGATION PATH (additive). The peer holds NO cap=admin, but a
       // device the operator admitted carries the signed root→device edge. Admit it at the
       // operator's-own-device tier IFF the edge verifies AND binds to THIS proven identity.
       //

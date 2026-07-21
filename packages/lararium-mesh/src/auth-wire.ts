@@ -74,7 +74,7 @@ export interface LarAuthMsg {
   /** Peer timestamp the signature commits to (the verifier recomputes the proof with it). */
   ts?:         string;
   /**
-   * OPTIONAL device-delegation edge (Seam B). A peer the operator device-admitted carries the
+   * OPTIONAL device-delegation edge. A peer the operator device-admitted carries the
    * signed root→device edge so the gate can admit it on the operator's-own-device path even
    * absent a cap=admin grant. Untrusted CRDT input — the worker verifies it against the PINNED
    * hearth root (verifyDeviceDelegation); a peer that sends none behaves exactly as before.
@@ -301,7 +301,7 @@ export async function buildAuthResponse(parts: {
   aud:         string;
   ts:          string;
   sign:        (bytes: Uint8Array) => Promise<string> | string;
-  /** OPTIONAL device-delegation edge ridden alongside the proof (Seam B). */
+  /** OPTIONAL device-delegation edge ridden alongside the proof. */
   edge?:       DeviceDelegationTiddler;
 }): Promise<LarAuthMsg> {
   const proof = authProofBytes({
@@ -345,7 +345,7 @@ export interface PeerHandshake {
   aud:         string;
   /** Ed25519 sign over bytes → hex (operator signer / Signer.trySign). */
   sign:        (bytes: Uint8Array) => Promise<string> | string;
-  /** OPTIONAL device-delegation edge (Seam B) — a device-admitted leaf rides its edge to the gate. */
+  /** OPTIONAL device-delegation edge — a device-admitted leaf rides its edge to the gate. */
   edge?:       DeviceDelegationTiddler;
   /** Clock for the response timestamp (default: now, ISO). */
   now?:        () => string;
@@ -391,6 +391,6 @@ export interface LeafIdentity {
   peerPubKey:  string;
   /** Bare-Ed25519 signer over the operator seed → hex. No keyhive. */
   sign:        (bytes: Uint8Array) => Promise<string>;
-  /** OPTIONAL device-delegation edge (Seam B) — a device-admitted leaf presents its edge to admit. */
+  /** OPTIONAL device-delegation edge — a device-admitted leaf presents its edge to admit. */
   edge?:       DeviceDelegationTiddler;
 }

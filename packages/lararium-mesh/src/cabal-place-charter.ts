@@ -11,7 +11,7 @@
  * read-face (content-addressed snapshot + signed pointer, fetch-CORS, anon-read);
  * THIS cut adds NO gate-loosening. It makes a CONTENT decision: it declares WHAT a
  * cabal-place publishes PUBLICLY (its charter — veil-public) vs holds MEMBERS-ONLY
- * (its substrate + roster — private, behind the Seam-B membership / Keyhive CGKA),
+ * (its substrate + roster — private, behind the Keyhive CGKA membership),
  * and wires the charter to the existing read-face's served projection.
  *
  * THE BOUNDARY (the veil-public SET, #the-veil-public-set below):
@@ -107,7 +107,7 @@ export interface CabalPlacePublishState {
  * THE VEIL-PUBLIC SET — the named, referenceable boundary (a pattern integrity, not
  * folklore). Canon's "shared charter, read-scope": a cabal-place's CHARTER is
  * veil-public (served by the read-face, anon-readable via fetch-CORS); its SUBSTRATE
- * and ROSTER are members-only (private, behind the Seam-B membership / Keyhive CGKA).
+ * and ROSTER are members-only (private, behind the Keyhive CGKA membership).
  *
  * Reference this const to reason about the boundary; the membrane below ENFORCES it.
  */
@@ -121,7 +121,7 @@ export const CABAL_PLACE_VEIL_PUBLIC_SET = {
     "foundedAt",
     "memberCount", // coarse + explicitly-published only — never derived from roster
   ],
-  /** NEVER crosses the membrane — held behind membership (CGKA / Seam-B). */
+  /** NEVER crosses the membrane — held behind membership (Keyhive CGKA). */
   membersOnly: [
     "substrate content",
     "member roster",
