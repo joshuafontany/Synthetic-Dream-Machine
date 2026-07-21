@@ -31,15 +31,18 @@ written   = "2026-07-20"
 
 <<~ ahu #the-rite >>
 
-!! The rite ~ six movements
+!! The rite ~ six movements, then the growing
 
-The founding moves through six movements, each closing before the next opens:
+The founding moves through six movements, each closing before the next opens — then the LIVE node
+GROWS into a Nexus on the operator's word:
 
-<<~loops ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ regenesis -> LIVE >>
+<<~loops ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ regenesis -> LIVE -> ⊕ grow >>
 
 ''Clear'' pares the vessel to void · ''found'' stands the device + the three kahu · ''reserve''
 forges the pre-rotation's future-key custody · ''seal-and-back-up'' locks the secrets at rest +
-writes a recoverable copy · ''regenesis'' re-seeds the content from `bags/` · ''LIVE'' serves.
+writes a recoverable copy · ''regenesis'' re-seeds the content from `bags/` · ''LIVE'' serves ·
+''grow'' opens the Nexus, contracts fellow operators, and welcomes users at the anon floor
+(#grow-the-nexus).
 
 <<~/ahu >>
 
@@ -206,6 +209,50 @@ lares status                                        # LIVE — the node serves; 
 
 <<~/ahu >>
 
+<<~ ahu #grow-the-nexus >>
+
+!! ⑦ Grow ~ open the Nexus, contract operators, welcome users
+
+The LIVE node stands ''sovereign-island by default'' (`federationPosture: private`). It GROWS on the
+operator's word, holding the ''membership doctrine'' at every step — ''track operator CONTRACTS, never
+user IDENTITIES'' (#membership-doctrine). Nothing here stands up a user table.
+
+''Open the beta'' — flip the Nexus from private-island to co-federating the public planes into the
+super-mesh (never a private plane; the read-floor holds in both postures):
+
+```
+lares nexus posture open                            # co-federate the public shelf; a node bounce applies it
+```
+
+''Contract a fellow operator'' — a two-sided wax-sealed handshake (the joining operator accepts
+carriage; the kahu-quorum counter-signs). The entry carries ''operator-pubkey + accepts-carriage +
+charter-epoch, and nothing more''; a contracted operator relays the mesh's sealed traffic + carries the
+Kapae immune antigen:
+
+```
+lares nexus accept-carriage                          # the joining operator signs "I accept carriage"
+lares nexus admit <operator-pubkey>                  # ≥k kahu counter-sign the wax-sealed MembershipEntry
+lares nexus members --list                           # the contracted operators — never the users
+```
+
+''Welcome a user'' — a user needs no contract and leaves NO roster trace. Through invite-only alpha a
+sealed BURNABLE boot-invite gates the boot (spent-on-boot, no who-invited-whom edge); a garbled or
+absent invite founds a vessel at the ''anon floor''. A user builds their OWN social graph — a follow is
+a LOCAL write to the private `@circles` doc that fleet-syncs every one of their vessels and NEVER
+touches the wire (#identity-classes, the recognition layer is the human's one window on the crypto):
+
+```
+lares circle add <nym> --to following --petname '<your-name-for-them>'   # a private, never-federated follow
+```
+
+''What crosses vs what stays'': a contracted operator BLIND-TRANSITS sealed CIPHERTEXT bodies for the
+mesh (carry ⊥ read — the relay verifies `BLAKE3==cid` holding NO secret, the body sealed under the
+per-Nexus convergence salt, fetched DHT-free); the read-cap crosses for no one; a private plane never
+leaves the PersonaGroup's own fleet. The mesh breathes over immutable bodies while a stranger — every
+500-year GPA — cannot confirm who-holds-what.
+
+<<~/ahu >>
+
 <<~ ahu #the-frame >>
 
 !! The frame ~ why compromise-resistance rides early
@@ -244,6 +291,8 @@ the root). The default holds — users stay light; operators carry the future.
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/charter-chain >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 
 <<~/ahu >>
 
