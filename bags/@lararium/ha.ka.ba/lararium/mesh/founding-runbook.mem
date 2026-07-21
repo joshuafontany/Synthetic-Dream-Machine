@@ -1,0 +1,222 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/founding-runbook.mem"
+l-space   = "lararium"
+mana      = 15
+manao     = 15
+manaoio   = 14
+namespace = "&#x2695;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "the go-live founding rite: the exact CLI sequence that clears a vessel fresh-from-void, stands the three founding kahu, forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes the content, and goes LIVE. Carries the reserve-custody independence rule + the recovery-cost frame (bake compromise-resistance early, full-pave stays the cheap net until the fleet accretes) + the operator-transferable/user-non-transferable identity-class split. Operator-ruled 2026-07-20."
+status    = "proposed"
+tags      = ["mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/charter-chain"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/mesh/founding-runbook"
+written   = "2026-07-20"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+! The Founding Runbook ~ the go-live rite
+
+> A woken operator runs this rite to stand a node fresh-from-void, found the three-kahu
+> quorum, arm the charter's pre-rotation, and go live. Each step reads as its own verb; the
+> irreversible one wears a warning. The rite runs top to bottom once — a re-run re-founds.
+
+<<~ ahu #the-rite >>
+
+!! The rite ~ six movements
+
+The founding moves through six movements, each closing before the next opens:
+
+<<~loops ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ regenesis -> LIVE >>
+
+''Clear'' pares the vessel to void · ''found'' stands the device + the three kahu · ''reserve''
+forges the pre-rotation's future-key custody · ''seal-and-back-up'' locks the secrets at rest +
+writes a recoverable copy · ''regenesis'' re-seeds the content from `bags/` · ''LIVE'' serves.
+
+<<~/ahu >>
+
+<<~ ahu #clear >>
+
+!! ① Clear ~ pare to void (⚠ irreversible)
+
+A fresh-from-void founding discards the prior identity. ''Back the old identity up FIRST'' — the
+vault seals nothing until movement ④, so a raw copy carries the only net before the nuke:
+
+```
+lares status                                        # confirm the identity-home path
+cp -r ~/.local/state/lares/identity ~/founding-backup-PRIOR   # the only pre-nuke net
+lares hooks pause                                   # still the capture/ingest hooks during the pave
+```
+
+Then clear. ''⚠ The next line destroys the prior persona-roots + the keyhive archive — it does not
+undo.'' A vessel that carries nothing worth keeping (the bootstrap case) crosses it freely:
+
+```
+rm -rf ~/.local/state/lares/identity                # ⚠ IRREVERSIBLE: the fresh-from-void cut
+lares reset --force                                 # pave the vessel store (the identity home now stands empty)
+```
+
+<<~/ahu >>
+
+<<~ ahu #found >>
+
+!! ② Found ~ stand the device + the three kahu
+
+`wake --install` stands the device/vessel identity + the daemon + the founder persona-root h0
+(h0's root signs the founding bind that peers pin — it MUST pre-exist). The three kahu then stand
+as ''three symmetric commands'', each naming its persona so the charter's pet-name join matches all
+three (name h0 too — an unnamed founder strands itself out of its own charter):
+
+```
+lares wake --install                                # stands the stack + the founder root h0
+lares persona new 0 --name 'Guru Joshua Fontany'    # loads + names the pre-standing founder
+lares persona new 1 --name 'Telarus, KSC'
+lares persona new 2 --name 'The Lindwyrm'
+lares persona list                                  # confirm h0/h1/h2 stand, all named
+```
+
+<<~/ahu >>
+
+<<~ ahu #reserve >>
+
+!! ③ Reserve ~ forge the pre-rotation's future
+
+The charter pre-rotates (a compromised present key-set cannot forge the future,
+[[charter-chain|lar:///ha.ka.ba/lararium/mesh/charter-chain]]), so `seat` needs a
+`--next-key-commit`. `reserve` forges the next epoch's key-set from a ''separate CSPRNG reserve
+seed'' (hardened SLIP-0010, never the live signing seed), prints the public commit, splits the seed
+Shamir ''2-of-3'', seals Share 1 on the vessel, and zeroizes the seed — the vessel keeps only Share
+1 + the public commit, never the seed:
+
+```
+lares nexus charter reserve --guardian-a '<name>' --guardian-b '<name>'
+    # → prints --next-key-commit + THREE cards (each: a checksummed share code + a confirm phrase),
+    #   seals 'Recovery-card mine' (Share 1) on the vessel, zeroizes the seed
+```
+
+Place the three cards by hand (#reserve-custody). Then seat the roster + arm the pre-rotation, and
+read the quorum verdict:
+
+```
+lares nexus charter seat --next-key-commit <the printed commit>   # seats h0/h1/h2 → 2-of-3, epoch0 armed
+lares nexus charter show                            # the quorum STANDS + the chain head reads armed
+```
+
+<<~/ahu >>
+
+<<~ ahu #reserve-custody >>
+
+!! ③′ Reserve custody ~ the independence rule
+
+A single Shamir share reveals ''nothing''; any ''two'' reconstruct the reserve seed. So the whole
+scheme rests on one rule:
+
+> ''The three shares MUST sit in three domains that do not fall together.'' No single realistic
+> breach, theft, or fire may reach two of them.
+
+The compromise-resistant layout keeps every operator copy as the ''same'' Share 1:
+
+* ''Share 1 (your domain)'' — the vessel + 'Recovery-card mine' (print AND/OR email); all one share,
+  one domain. An adversary who owns your whole digital life reads ''one'' share -> nothing.
+* ''Share 2'' — 'Recovery-card guardian-A' (a trusted person, or an independent physical place; a
+  cabalmate takes it as they launch, via `reserve refresh`).
+* ''Share 3'' — 'Recovery-card guardian-B' (a second independent domain).
+
+Two correlation traps hide inside "lots of options": the ''online-identity trap'' (GitHub AND a
+cloud both behind one email/password-manager count as ONE domain — put at most one share there) and
+the ''co-location trap'' (a thumb drive AND a printout in the same drawer die in one fire — spread
+the offline shares across places). The card's ''confirmation phrase'' rides out-of-band (in person, a
+call) — it confirms the right person holds the right share, and it becomes the handshake when a
+guardian hands the share back at recovery.
+
+<<~ confidence Synthesis-Canon 14/20 >> The math then holds three ways: ''compromise'' (you fully
+owned -> one share -> safe); ''loss'' (you lose vessel + card -> two guardians rebuild without you);
+''rotation'' (your share + one guardian). A recovery materializes the seed, so `reserve refresh`
+re-seeds -> re-splits -> re-issues cards + a new commit afterward (Proactive Secret Sharing,
+[[siege-resilience|lar:///ha.ka.ba/lararium/mesh/siege-resilience]]).
+
+<<~/ahu >>
+
+<<~ ahu #seal-and-back-up >>
+
+!! ④ Seal + back up ~ lock the secrets, write the net
+
+Set the at-rest passphrase (a no-echo TTY double-entry — a typo self-locks), which seals the keyhive
+archive + the recovery/reserve shares. Then write a passphrase-sealed backup to safe media:
+
+```
+lares vault seal                                    # no-echo TTY, double-entry; seals the carriers at rest
+lares vault export ~/founding-backup.sealed         # a passphrase-SEALED backup (--force overwrites)
+lares vault status                                  # confirm the seal state
+```
+
+<<~/ahu >>
+
+<<~ ahu #regenesis-live >>
+
+!! ⑤ Regenesis + ⑥ LIVE ~ re-seed the content, serve
+
+Regenesis rebirths the CRDT content from `bags/` (identity now stands preserved — the reset lives
+inside regenesis, and the identity home rides outside every wipe). Resume the hooks, and the node
+serves:
+
+```
+lares regenesis --force                             # stop → reset store → re-bake genesis → wake → seed --apply
+lares hooks resume                                  # re-arm capture/ingest
+lares status                                        # LIVE — the node serves; the quorum + charter stand
+```
+
+<<~/ahu >>
+
+<<~ ahu #the-frame >>
+
+!! The frame ~ why compromise-resistance rides early
+
+Recovery cost climbs with the fleet. While a vessel stands as a-multitude-of-one (one laptop-node +
+a browser), a compromise costs a ''full-pave + a fresh DID-multitude'' — cheap, nothing accreted. Once
+vessel-fleets and cabalmate personaGroups entangle around an operator, the identity carries
+relationships no cheap re-mint restores. So the rite ''bakes compromise-resistance in while it costs
+nothing to get wrong'', and leans on cheap full-pave as the bootstrap net. The reserve's two guardian
+slots stand ''unassigned'' until cabalmates launch, then fill via `reserve refresh` — the seed grows
+from a-multitude-of-one, hardening as the cabal arrives.
+
+<<~/ahu >>
+
+<<~ ahu #identity-classes >>
+
+!! Identity classes ~ who carries the reserve at all
+
+The reserve burden rides ''operator-class'' identities alone (KERI transferable — persistent,
+rotatable, they operate node vessels; the charter epoch chain reads as a key-event-log). Browser-only
+''users'' (ephemeral, short cap-stacks, no charter role) carry NO reserve — they ride KERI
+non-transferable/basic identifiers, and their "rotation" reads as ''abandon-and-recreate'', cheap and
+native. <<~ confidence Synthesis 12/20 >> The line draws by persistence/value, not by title: a user
+vessel that accretes lasting value drifts toward transferable, held either by promoting that vessel
+or by delegated identifiers (the operator root delegates to disposable user streams, durability in
+the root). The default holds — users stay light; operators carry the future.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/charter-chain >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
