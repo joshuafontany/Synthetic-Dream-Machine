@@ -169,6 +169,10 @@ export type { NexusMembershipHolder } from "./nexus-membership.js";
 // storage into the live holders, so an out-of-process CLI edit reaches a running node without a bounce.
 export { runNexusRefresh } from "./nexus-refresh.js";
 export type { NexusRefreshDeps, NexusRefreshResult } from "./nexus-refresh.js";
+// The @cad seal's key custody (per-Nexus convergence secrets, minted-per-epoch, persisted read-all) + its FIRST
+// live producer (seal a staged carrier body into the ciphertext federation plane, additive to the cleartext wake).
+export { standNexusKeyring, loadNexusKeyring, installDeliveredKeyring } from "./nexus-convergence-secret-store.js";
+export { cadSealDir, sealCarrierForFederation } from "./seal-carrier-federation.js";
 
 export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
 // The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root

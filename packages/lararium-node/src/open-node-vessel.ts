@@ -66,7 +66,7 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { daemonGenesisDir }               from "./lares-config.js";
 import { resolvePalacePath, orderHandleTurnsToStubs, type HandleTurn } from "@lararium/mempalace";
 import { writebackWing, TelemetryUnavailable } from "@lararium/sensorium";
-import { LarEventBusImpl, DEFAULT_RINGS, DeterministicFederationGate, federationPostureFromDoc } from "@lararium/mesh";
+import { LarEventBusImpl, DEFAULT_RINGS, DeterministicFederationGate, federationPostureFromDoc, charterChainHead, utf8Bytes } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire, AntigenRing, FederationGate, FederationPosture, NexusMembership, PeerClass } from "@lararium/mesh";
 import { selfSlotShareDecision } from "./self-slot-share.js";
 import { makeAntigenRingHolder } from "./antigen-ring.js";
@@ -76,6 +76,10 @@ import { runNexusRefresh } from "./nexus-refresh.js";
 import { readNexusCharterDoc } from "./nexus-charter-doc.js";
 import { makeSealedPlaneRegistry } from "./plane-seal.js";
 import type { NexusConvergenceKeyring } from "./nexus-convergence-keyring.js";
+import { standNexusKeyring } from "./nexus-convergence-secret-store.js";
+import { cadSealDir, sealCarrierForFederation } from "./seal-carrier-federation.js";
+import { makeBagTracker } from "./bag-tracker.js";
+import { readCasBlobFromFs } from "./node-cas.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
 
@@ -435,7 +439,19 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // Read the federation POSTURE off the @nexus charter doc (as-of-last-sync). Default PRIVATE (fail-closed):
   // a cross-Nexus foreign operator co-federates ONLY when the operator flips the Nexus open. A live flip needs
   // a re-read (surfaced gap — boot-time read for alpha; the CLI `lares nexus posture` edits the doc).
-  federationPosture = federationPostureFromDoc(readNexusCharterDoc(antigenBagsDir));
+  const charterDocForBoot = readNexusCharterDoc(antigenBagsDir);
+  federationPosture = federationPostureFromDoc(charterDocForBoot);
+
+  // STAND THE @cad CONVERGENCE KEYRING — the @cad seal's key source, minted for THIS vessel's charter-head epoch
+  // (genesis = 0 when unseated) and persisted local (read-all). This fills the forward-declared seam: the vessel
+  // now HOLDS a keyring, so the seal producer (`cad-seal`) can message-lock a carrier body's ciphertext. It seals
+  // the vessel's OWN staged bodies for the FEDERATION plane; STAGE-2 admission delivery hands this keyring to a
+  // joinee so a member reads too. FAIL-CLOSED elsewhere holds: absent this stand, `keyring.current()` throws and
+  // the seal producer keeps a body cleartext-local (never plaintext sealed).
+  const charterHeadEpoch = charterChainHead(charterDocForBoot)?.epoch ?? 0;
+  nexusConvergenceKeyring = standNexusKeyring({ charterEpoch: charterHeadEpoch });
+  // The relay-side discovery index the seal producer announces a sealed cid onto (DHT-free; hint → peers → tracker).
+  const casBagTracker = makeBagTracker();
 
   // Stand the self-slot federation gate now the operator's own verifying key is loaded — the SAME nexus
   // pubkey the antigen board derives from. The gate's federatable surface is a PURE function of that key
@@ -1063,6 +1079,39 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         setPosture:  (p) => { federationPosture = p; },
       });
       return { verb: "nexus-refresh", ...r };
+    });
+
+    // cad-seal — the @cad seal's FIRST live producer. Seal a carrier body's PLAINTEXT into the ciphertext
+    // federation plane (a distinct `cad/` tier), ADDITIVELY: the cleartext-local corpus CAS the wake reads stays
+    // untouched. The body arrives as a staged `cid` (resolved cleartext from the corpus CAS) or inline `text`.
+    // The seal registers the ciphertext docId into the live sealRegistry → the member blind-transit lane opens
+    // for exactly that body; a member reads NOTHING (carry ⊥ read — the read-cap rides the keyring, never here).
+    // FAIL-CLOSED: no keyring (an empty stand) → `keyring.current()` throws → the body stays cleartext-local only.
+    registry.register("cad-seal", async (args) => {
+      const keyring = nexusConvergenceKeyring;
+      if (!keyring) throw new Error("cad-seal: no convergence keyring on this vessel — cannot seal (the body stays cleartext-local)");
+      const cid  = typeof args["cid"]  === "string" ? (args["cid"]  as string) : "";
+      const text = typeof args["text"] === "string" ? (args["text"] as string) : "";
+      let plaintext: Uint8Array;
+      if (cid) {
+        const bytes = readCasBlobFromFs(cid, casDirForStorage(storageDir));   // the SAME cleartext corpus CAS the CLI staged to
+        if (!bytes) throw new Error(`cad-seal: no staged carrier body at cid ${cid} in the corpus CAS`);
+        plaintext = bytes;
+      } else if (text) {
+        plaintext = utf8Bytes(text);
+      } else {
+        throw new Error("cad-seal: `cid` (a staged carrier) or `text` (an inline body) required");
+      }
+      const installed = sealCarrierForFederation({
+        registry:  sealRegistry,
+        cadDir:    cadSealDir(storageDir),
+        plaintext,
+        keyring,
+        tracker:   casBagTracker,
+        self:      operatorIdentity.verifyingKey,
+      });
+      // Return the PUBLIC verify-cap only (cid + docId + epoch) — the read-cap NEVER crosses this boundary.
+      return { verb: "cad-seal", cid: installed.cid, docId: installed.docId, epoch: installed.epoch, sealed: sealRegistry.seal.isSealedPlane(installed.docId) };
     });
 
     // ── The wiki-SWITCHER surface (the FACE over the activation cap) ──────────────

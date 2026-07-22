@@ -168,6 +168,9 @@ export * from "./handle-carriage.js";
 // choreography + its carried QR envelopes. A photographed tabletop stays inert; the join writes per-vessel only.
 export * from "./persona-admit.js";
 export * from "./persona-admit-carriage.js";
+// STAGE 2 (A1-①): the per-Nexus convergence keyring delivered to a joinee at admission via a sealed envelope
+// (the persona-admit sealed-box shape). An admitted device opens it + reads sealed bodies; a carry-only peer cannot.
+export * from "./keyring-envelope.js";
 // The IoC follow — composeFollow braids the three LOCAL stores (handle-book · petname · circle) into one
 // gesture; the CircleStore seam is local-only, so a follow leaves NO central trace (membership-doctrine).
 export * from "./compose-follow.js";
