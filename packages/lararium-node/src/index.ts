@@ -173,6 +173,13 @@ export type { NexusRefreshDeps, NexusRefreshResult } from "./nexus-refresh.js";
 // live producer (seal a staged carrier body into the ciphertext federation plane, additive to the cleartext wake).
 export { standNexusKeyring, loadNexusKeyring, installDeliveredKeyring } from "./nexus-convergence-secret-store.js";
 export { cadSealDir, sealCarrierForFederation } from "./seal-carrier-federation.js";
+// The @cad WIRE CONSUMER — a member carries a sealed body peer-to-peer over the request-response hop, gated by the
+// member blind-transit lane; a stranger / Kapae'd presenter draws Mu (byte-identical to caught-up satiety).
+export {
+  serveCasWire, decideAndServeWantBlock, fetchSealedCidOverWire, muWireBytes,
+  CAS_WANT_BLOCK, CAS_BLOCK, CAS_MU,
+} from "./cas-wire.js";
+export type { CasWireServerDeps, CasWireFetch } from "./cas-wire.js";
 
 export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
 // The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root
