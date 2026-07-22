@@ -16,7 +16,7 @@
 import {
   runSensorium, openSensorium, querySensorium, listSensoria, keepSensorium,
   dissolveSensorium, dissolveAllSensoria, reapOrphans, listOrphans,
-  acceptPetName, attachPetName, listPetNames, proposePetName, sensoriumDir, sensoriumNames,
+  acceptPetName, attachPetName, listPetNames, migrateManifest, proposePetName, sensoriumDir, sensoriumNames,
 } from "@lararium/node";
 import { emit } from "../render.js";
 import { renderCommandHelp } from "../command-help.js";
@@ -190,6 +190,15 @@ function acceptNameVerb(args: ParsedArgs): number {
   return entry ? 0 : 3;
 }
 
+function migrateVerb(args: ParsedArgs): number {
+  const name = args.positional[1];
+  const root = name ? rootFor(name) : null;
+  if (!root) { console.error("usage: lares sensorium migrate <sensorium>"); return 2; }
+  const manifest = migrateManifest(root);
+  emit(args, { ok: manifest !== null, data: { manifest }, human: () => console.log(manifest ? `lares sensorium migrate — ${name} stands at schema ${manifest.schema}` : `lares sensorium migrate: no manifest for "${name}"`) });
+  return manifest ? 0 : 3;
+}
+
 export async function cmdSensorium(args: ParsedArgs): Promise<number> {
   const sub = args.positional[0];
   if (!sub || sub === "help" || args.flags["help"]) { renderCommandHelp("sensorium"); return sub ? 0 : 1; }
@@ -204,6 +213,7 @@ export async function cmdSensorium(args: ParsedArgs): Promise<number> {
     case "propose-name": return proposeNameVerb(args);
     case "names": return namesVerb(args);
     case "accept-name": return acceptNameVerb(args);
+    case "migrate": return migrateVerb(args);
     default:
       console.error(`lares sensorium: unknown subcommand "${sub}".  Run \`lares sensorium help\`.`);
       return 2;

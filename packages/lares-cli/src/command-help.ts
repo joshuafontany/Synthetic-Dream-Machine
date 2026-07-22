@@ -43,6 +43,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "lares sensorium propose-name memory cid:abc \"a turning\" --projection entity-graph --evidence cid:abc,cid:def",
       "lares sensorium names memory",
       "lares sensorium accept-name memory pn-1234",
+      "lares sensorium migrate memory                         # write the rooted v1 declaration",
     ],
     flags: [
       "--keep             (run) retain the sensorium instead of dissolving on exit",

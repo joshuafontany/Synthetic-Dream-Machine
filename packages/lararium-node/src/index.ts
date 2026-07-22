@@ -25,7 +25,7 @@ export type { LaresConfig, LaresResourceRoots, LaresVesselState } from "./lares-
 export {
   SENSORIUM_SCHEMA, SENSORIUM_MANIFEST, manifestPath, capDecl, resolveCapDir, capDir, planeVariance, sensoriumContract,
   SHEAF_PLANES, COSHEAF_PLANES,
-  buildSensoriumManifest, readManifest, writeManifest,
+  buildSensoriumManifest, readManifest, migrateManifest, writeManifest,
 } from "./sensorium.js";
 export type {
   CapDecl, SensoriumChild, SensoriumCoupling, SensoriumBands, SensoriumManifest, SensoriumOrder, BuildSensoriumOptions,
