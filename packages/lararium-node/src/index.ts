@@ -183,6 +183,23 @@ export { makeNodePersonaPetnameStore, makeNodePublicHandleStore } from "./node-v
 // The IoC follow — the node-fs LOCAL adapters for the private circle-graph + the recogniser's handle-book.
 // Both under the identity home, 0o600, never federated (the `lares circle` door drives them via composeFollow).
 export { makeNodeCircleStore, loadNodeHandleBook, saveNodeHandleBook } from "./node-circle-store.js";
+// The persona-admission PER-VESSEL multitude-view (never fleet-syncs) + the airgapped ceremony's consume-once
+// pending state — the node-fs local store the `lares persona admit` door drives.
+export {
+  recordAdmittedPersona, listAdmittedPersonas, isPersonaAdmitted,
+  stashEnrollmentSecret, takeEnrollmentSecret, peekEnrollmentSecrets, stashSentMemo, takeSentMemo, clearPersonaAdmitPending,
+} from "./node-persona-admit-store.js";
+// QR transport — GENERATE a scannable carriage QR (terminal / PNG / SVG / matrix, ECC H) + DECODE a still PNG
+// through an injected decoder seam (the headless node scanner + the browser camera both plug in behind it).
+export {
+  qrCarriageToTerminal, qrCarriageToPngBuffer, qrCarriageToSvg, qrCarriageMatrix,
+  pngToImageData, decodeQrPng, HANDSHAKE_QR_ECC,
+} from "./qr-transport.js";
+export type { QrImageDecoder } from "./qr-transport.js";
+// The airgapped persona-admission ORCHESTRATION — the 5 flow functions the `lares persona admit` CLI thin-wraps
+// (mint/seal/open/ack composing the ceremony + the per-vessel store + the QR render).
+export { offerAdmitFlow, grantAdmitFlow, openAdmitFlow, acceptAdmitFlow, makeLocalPersonaKelHeadResolver } from "./persona-admit-flow.js";
+export type { HopRender } from "./persona-admit-flow.js";
 // The `bags/@nexus` charter DOC adapter — the antigen roster's authority home read/written on disk (#66).
 export {
   readNexusCharterDoc, writeNexusCharterDoc, renderNexusCharterDoc,

@@ -19,6 +19,7 @@ import {
   makeNodePersonaPetnameStore,
 } from "@lararium/node";
 import { renameOwnPersona, ownPersonaPetname, HANDLE_INDEX_CEILING } from "@lararium/mesh";
+import { cmdPersonaAdmit } from "./persona-admit-cmd.js";
 import { larDataDir } from "../env.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -31,6 +32,7 @@ function usage(): void {
   console.error("  new <index> --name <name>   mint/load the persona-root at <index> + set its private pet-name");
   console.error("  wear <index>                switch the active persona (reboot-to-switch — one face to the mesh)");
   console.error("  list                        the private multitude — held indices, active marker, pet-names");
+  console.error("  admit <offer|grant|open|accept|list>   airgapped device-to-device persona hand-off (QR 3-hop)");
   console.error("");
   console.error("  founding sequence (three symmetric commands): lares persona new 0 --name 'Guru Joshua Fontany'  ·  new 1 --name 'Telarus, KSC'  ·  new 2 --name 'The Lindwyrm'  →  lares nexus charter seat");
 }
@@ -50,9 +52,10 @@ export async function cmdPersona(args: ParsedArgs): Promise<number> {
   if (!sub) { usage(); return 2; }
   try {
     switch (sub) {
-      case "new":  return await personaNew(args);
-      case "wear": return await personaWear(args);
-      case "list": return await personaList(args);
+      case "new":   return await personaNew(args);
+      case "wear":  return await personaWear(args);
+      case "list":  return await personaList(args);
+      case "admit": return await cmdPersonaAdmit(args);
       default:
         console.error(`lares persona: unknown sub-verb "${sub}"`);
         usage();

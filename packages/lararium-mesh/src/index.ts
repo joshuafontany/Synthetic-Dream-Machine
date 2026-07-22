@@ -164,6 +164,10 @@ export * from "./handle-book.js";
 // The card-arrival front door — decode a carried (paste / QR / URL-fragment) HandleCard so a follow can admit
 // an unmet nym WITHOUT the CLI's `--card <file>` (the card arrives as data, boot-invite posture).
 export * from "./handle-carriage.js";
+// The type-blind PERSONA-ADMISSION ceremony (airgapped device-to-device persona handoff) — the 3-hop ECDH-sealed
+// choreography + its carried QR envelopes. A photographed tabletop stays inert; the join writes per-vessel only.
+export * from "./persona-admit.js";
+export * from "./persona-admit-carriage.js";
 // The IoC follow — composeFollow braids the three LOCAL stores (handle-book · petname · circle) into one
 // gesture; the CircleStore seam is local-only, so a follow leaves NO central trace (membership-doctrine).
 export * from "./compose-follow.js";
