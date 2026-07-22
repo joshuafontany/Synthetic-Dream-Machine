@@ -72,6 +72,7 @@ import { selfSlotShareDecision } from "./self-slot-share.js";
 import { makeAntigenRingHolder } from "./antigen-ring.js";
 import { makePersonaKelRingHolder } from "./persona-kel-ring.js";
 import { makeNexusMembership } from "./nexus-membership.js";
+import { runNexusRefresh } from "./nexus-refresh.js";
 import { readNexusCharterDoc } from "./nexus-charter-doc.js";
 import { makeSealedPlaneRegistry } from "./plane-seal.js";
 import type { NexusConvergenceKeyring } from "./nexus-convergence-keyring.js";
@@ -421,12 +422,15 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // charter → empty member set → every cross-operator STRANGER (public-read only), never a false member.
   // Fold the members BOARD (repo + nexusPubkey) atop the kahu floor — this LIGHTS SELF-SLOT-B: a general
   // contracted operator (members{}, not a kahu) now reads MEMBER, so the carry-split's member lane names it.
-  nexusMembership = makeNexusMembership({
+  // Keep the HOLDER (not just its `.membership` consult): the `nexus-refresh` main verb calls its
+  // `refoldWithBoard` to re-fold the member union against an out-of-process CLI board write.
+  const nexusMembershipHolder = makeNexusMembership({
     bagsDir:           antigenBagsDir,
     peerIdentifierMap,
     repo,
     nexusPubkey:       operatorIdentity.verifyingKey,
-  }).membership;
+  });
+  nexusMembership = nexusMembershipHolder.membership;
 
   // Read the federation POSTURE off the @nexus charter doc (as-of-last-sync). Default PRIVATE (fail-closed):
   // a cross-Nexus foreign operator co-federates ONLY when the operator flips the Nexus open. A live flip needs
@@ -1040,6 +1044,26 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       });
     });
     registry.register("residency", makeResidencyStatsReactor({ residency }));
+
+    // nexus-refresh — the LIVE-refold of the three @nexus authorities the boot read once: the federation
+    // POSTURE (a disk-charter re-read → reassigns the sharePolicy's live `federationPosture`), the antigen
+    // Kapae'd DENY set, and the contracted MEMBER set (both re-folded off freshly-materialized boards). The
+    // seam an OUT-OF-PROCESS CLI edit (`lares nexus posture` / `kapae` / `admit`, each writing its own repo)
+    // needs to reach this running node — NodeFS carries no cross-process change bus, so a peer's WS-sync
+    // refold never fires for a same-operator CLI write beside it. DISTINCT from the worldline `kapae`
+    // branch-mute; this touches the mesh immune/federation surface, never a worldline branch.
+    registry.register("nexus-refresh", async () => {
+      const r = await runNexusRefresh({
+        storageDir,
+        bagsDir:     antigenBagsDir,
+        nexusPubkey: operatorIdentity.verifyingKey,
+        antigen:     antigenHolder,
+        membership:  nexusMembershipHolder,
+        // Reassign the live posture the sharePolicy closure reads each call (fail-closed PRIVATE on a torn read).
+        setPosture:  (p) => { federationPosture = p; },
+      });
+      return { verb: "nexus-refresh", ...r };
+    });
 
     // ── The wiki-SWITCHER surface (the FACE over the activation cap) ──────────────
     // The LIVE chokepoint (distinct from boot-time `open-wiki`): a reference ACTIVATES

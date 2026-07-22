@@ -29,6 +29,7 @@
 import { readFileSync } from "node:fs";
 import {
   composeFollow, composeUnfollow, listFollows, FollowRefused,
+  parseHandleCardCarriage,
   type HandleCard,
 } from "@lararium/mesh";
 import { loadNodeHandleBook, saveNodeHandleBook } from "@lararium/node";
@@ -47,11 +48,15 @@ function usage(): void {
   console.error("");
   console.error("  add <nym> --to <circle> [--petname <label>] [--card <file.json>]");
   console.error("                              follow: recognise the nym + add it to the circle (LOCAL only)");
+  console.error("  card <carriage | @file | -> seed the handle-book from a carried HandleCard (paste / QR /");
+  console.error("                              #card=… fragment / stdin) — TOFU-admit a nym so a later `add`");
+  console.error("                              needs no --card");
   console.error("  remove <nym> --to <circle>  unfollow: drop the nym from the circle");
   console.error("  list [--to <circle>]        the private follow-view (petname + last-seen glamour)");
   console.error("");
   console.error(`  the graph is PRIVATE and NEVER federates; default circle = "${DEFAULT_CIRCLE}".`);
-  console.error("  an unmet nym needs --card <file.json> (its self-certifying HandleCard) to admit it (TOFU).");
+  console.error("  an unmet nym needs its self-certifying HandleCard admitted first — either `circle card <paste>`");
+  console.error("  (ahead of time) or `add … --card <file.json>` (inline).");
 }
 
 /** Read the `--to <circle>` option, defaulting to the primary follow circle. */
@@ -75,6 +80,7 @@ export async function cmdCircle(args: ParsedArgs): Promise<number> {
   try {
     switch (sub) {
       case "add":    return await circleAdd(args);
+      case "card":   return await circleCard(args);
       case "remove": return await circleRemove(args);
       case "list":   return await circleList(args);
       default:
@@ -121,6 +127,55 @@ async function circleAdd(args: ParsedArgs): Promise<number> {
       console.log(`followed ${result.petname ? `"${result.petname}"` : nym.slice(0, 16) + "…"} into circle "${result.circleId}".`);
       console.log(`  the follow is PRIVATE and LOCAL — nothing reached @crossroads (no central trace).`);
       if (!result.petname) console.log(`  name it for yourself with --petname '<label>' (private; never federates).`);
+    },
+  });
+  return 0;
+}
+
+/** Read the carriage argument for `circle card`: a bare string, `@<path>` (a file), or `-` (stdin). The bytes
+ *  ride verbatim to the decoder, which shapes them; the handle-book verifies. WITHHOLD-not-forge: a read fault
+ *  reads as a usage error, never a crash. */
+function readCarriageArg(raw: string): string {
+  if (raw === "-") {
+    try { return readFileSync(0, "utf8"); }   // fd 0 = stdin (a piped paste)
+    catch (err) { throw new UsageError(`cannot read the carriage from stdin: ${err instanceof Error ? err.message : String(err)}`); }
+  }
+  if (raw.startsWith("@")) {
+    const path = raw.slice(1);
+    try { return readFileSync(path, "utf8"); }
+    catch (err) { throw new UsageError(`cannot read the carriage file "${path}": ${err instanceof Error ? err.message : String(err)}`); }
+  }
+  return raw;
+}
+
+/**
+ * `lares circle card <carriage | @file | ->` — the CARD-ARRIVAL front door. Decode a carried, self-certifying
+ * HandleCard (a paste, a QR scan, a `#card=…` URL fragment, or stdin) and INGEST it into the local handle-book
+ * (TOFU / monotone reader rule). A pure LOCAL recognition write — nothing crosses the wire. Afterward the nym is
+ * KNOWN, so `lares circle add <nym> --to <circle>` follows it WITHOUT carrying `--card`.
+ *
+ * Fail-closed: a garbled / absent / wrong-domain carriage refuses (the card did not arrive — re-carry it); a card
+ * whose signature or lineage the book rejects refuses with the book's named verdict. Neither ever half-admits.
+ */
+async function circleCard(args: ParsedArgs): Promise<number> {
+  const raw = args.positional[1];
+  if (!raw) throw new UsageError("a carriage is required (e.g. `lares circle card '#card=<base64url>'`, `@card.txt`, or `-` for stdin)");
+  const card = parseHandleCardCarriage(readCarriageArg(raw));
+  if (!card) throw new UsageError("no self-certifying HandleCard in the carriage — the card did not arrive (re-carry a `#card=<base64url>` token).");
+
+  const book    = loadNodeHandleBook();
+  const verdict = await book.ingest(card);
+  if (!verdict.ok) throw new UsageError(`handle-card refused (${verdict.reject}) — the book holds this nym to its own lineage (anti-rollback / anti-fork).`);
+  saveNodeHandleBook(book);   // persist the recogniser's memory — the nym is now known, ready to follow
+
+  const rec = book.get(card.nym);
+  emit(args, {
+    ok: true,
+    data: { nym: card.nym, version: card.version, glamour: card.glamour ?? null, petname: rec?.petname ?? null, recognized: true },
+    human: () => {
+      console.log(`admitted ${card.glamour ? `"${card.glamour}" ` : ""}${card.nym.slice(0, 16)}… into the handle-book (v${card.version}, TOFU).`);
+      console.log(`  now follow it locally:  lares circle add ${card.nym} --to ${DEFAULT_CIRCLE}`);
+      console.log(`  the admission is PRIVATE and LOCAL — nothing reached the wire.`);
     },
   });
   return 0;

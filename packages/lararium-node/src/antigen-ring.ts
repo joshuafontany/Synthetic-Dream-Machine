@@ -48,6 +48,12 @@ export interface AntigenRingHolder {
   readonly ring: AntigenRing;
   /** Re-read the board entries + charter roster and re-fold the Kapae'd set. Idempotent; safe to call any time. */
   refold(): Promise<void>;
+  /** Re-fold the Kapae'd set against an EXTERNALLY-materialized antigen board (fresh storage bytes) + the disk
+   *  charter roster. The live-refresh path: an OUT-OF-PROCESS board write (the `lares nexus kapae` CLI writes
+   *  through its OWN repo) never reaches this holder's cached handle — NodeFS carries no cross-process change
+   *  bus — so the refresh caller materializes the board on a throwaway repo and hands the fresh doc here. Swaps
+   *  the Kapae'd set whole; a fold fault leaves the prior set standing (fail-closed: never widens the denylist). */
+  refoldWithBoard(boardDoc: LarDoc | undefined): Promise<void>;
   /** Detach the board-doc change listener (graceful shutdown). */
   dispose(): void;
 }
@@ -85,15 +91,21 @@ export function makeAntigenRingHolder(opts: {
     presenterNym,
   };
 
-  const refold = async (): Promise<void> => {
-    // The board doc (may be null before the async resolve lands, or on a resolve fault) → no entries.
-    const entries = antigenEntriesFromBoard(boardHandle?.doc());
-    // The roster is the disk charter DOC (the authority home) — an absent / unseated doc folds empty (inert).
+  // Fold the Kapae'd set against a SUPPLIED board doc + the disk charter roster — the one fold body both the
+  // live handle-change refold (its own cached board) and the out-of-process refresh (a freshly-materialized
+  // board) share. An absent / unseated charter folds empty (inert); a lowercased set never misses a case match.
+  const foldBoard = async (boardDoc: LarDoc | undefined): Promise<void> => {
+    const entries = antigenEntriesFromBoard(boardDoc);
     const roster  = foundingRoster(readNexusCharterDoc(bagsDir));
     const folded  = await foldAntigenSet(entries, roster, verifier);
-    // Normalize to lowercase so a nym's case can never silently miss a match against a resolved presenter.
     kapaed = new Set<string>([...folded].map((k) => k.toLowerCase()));
   };
+
+  // The live refold reads THIS holder's own cached board handle (the WS-sync path: a peer's ban propagates
+  // over the relay, fires the handle change, and re-folds). May run before the async resolve lands → no entries.
+  const refold = (): Promise<void> => foldBoard(boardHandle?.doc());
+  // The out-of-process refresh path: fold a board the caller materialized fresh off storage (see the interface).
+  const refoldWithBoard = (boardDoc: LarDoc | undefined): Promise<void> => foldBoard(boardDoc);
 
   // Resolve (or materialize) the always-carried antigen board under its deterministic id, wire the refold
   // to its change stream, and do the first fold. Best-effort: a resolve/fold fault leaves the empty set
@@ -113,6 +125,7 @@ export function makeAntigenRingHolder(opts: {
   return {
     ring,
     refold,
+    refoldWithBoard,
     dispose(): void {
       if (boardHandle && onChange) boardHandle.off("change", onChange);
       boardHandle = null;

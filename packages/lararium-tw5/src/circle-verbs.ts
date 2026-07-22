@@ -2,10 +2,20 @@
  * circle-verbs — the FOLLOW-GRAPH daemon verbs over the sovereign @circles doc.
  *
  * "Adding to a circle IS the follow" (social-seed). The follow-graph's SOURCE OF TRUTH rides the @circles
- * Automerge bag — `memberDids` per circle tiddler — a PRIVATE bag the self-slot FLEET-syncs same-operator
- * (so a follow lands on ALL the operator's own devices, matching @catalog) and the DeterministicFederationGate
- * NEVER volunteers to a cross-operator (@circles sits OUTSIDE its federatable set). One graph, every device of
- * the one human, no stranger — "the only surface human eyes have on the crypto layer" for friends + wanderers.
+ * Automerge bag — a PER-NYM CRDT-set on each circle tiddler — a PRIVATE bag the self-slot FLEET-syncs
+ * same-operator (so a follow lands on ALL the operator's own devices, matching @catalog) and the
+ * DeterministicFederationGate NEVER volunteers to a cross-operator (@circles sits OUTSIDE its federatable set).
+ * One graph, every device of the one human, no stranger — "the only surface human eyes have on the crypto
+ * layer" for friends + wanderers.
+ *
+ * THE PER-NYM CRDT-SET (no whole-field clobber). Membership rides as INDIVIDUAL per-nym fields, never one
+ * space-joined `memberDids` register: a follow stamps `mbr+:<nym>` = now, an unfollow stamps `mbr-:<nym>` = now.
+ * A nym reads PRESENT iff it carries an add stamp AND no remove stamp strictly supersedes it (remove-WINS on a
+ * tie). Because a concurrent follow and unfollow touch DIFFERENT keys (add vs remove of the SAME nym) — and two
+ * follows of DIFFERENT nyms touch different keys entirely — the Automerge field-merge keeps BOTH edits: no add
+ * a fleet-mate made off-device is ever lost to a whole-field last-writer-wins. A legacy `memberDids` (seeded by
+ * cold-boot, or an older doc) reads as a baseline add, superseded by any real remove — so an old graph folds in
+ * cleanly without a migration write.
  *
  * These reactors run IN the daemon worker (verify-then-delegate gated), reaching @circles by ACCESS (the
  * @oracle registry names it) and writing-then-syncing — access≠load, never a mounted render layer. A follow
@@ -38,29 +48,66 @@ export interface CircleVerbOptions {
   readonly tw5?: TW5Engine;
 }
 
-/** memberDids rides as a SPACE-SEPARATED nym set (readCircleTiddler's shape). Parse → deduped, sorted. */
-function parseMembers(raw: unknown): string[] {
-  if (typeof raw !== "string") return [];
-  return [...new Set(raw.split(/\s+/).map((s) => s.trim()).filter(Boolean))].sort();
-}
-
-/** Serialize a nym set back to the memberDids field — deduped + sorted, so two devices converge on one string. */
-function serializeMembers(members: readonly string[]): string {
-  return [...new Set(members)].sort().join(" ");
-}
+/** The per-nym follow stamp: `mbr+:<nym>` holds the add timestamp (a nym joined the circle at this instant). */
+const MEMBER_ADD_PREFIX = "mbr+:";
+/** The per-nym unfollow stamp: `mbr-:<nym>` holds the remove timestamp (a nym left; remove-wins on a tie). */
+const MEMBER_RM_PREFIX = "mbr-:";
+/** A legacy add-timestamp baseline — a nym present only via the old space-joined `memberDids` sorts below any
+ *  real ISO remove stamp, so a later unfollow always supersedes it (a lexicographic floor, never a real time). */
+const LEGACY_ADD_BASELINE = "";
 
 function strArg(args: Record<string, unknown>, key: string): string {
   return typeof args[key] === "string" ? (args[key] as string).trim() : "";
 }
 
-/** The circle tiddler's mutable field bag (title + arbitrary string fields). */
+/** The circle tiddler's mutable field bag (title + arbitrary fields, incl. the per-nym stamps). */
 type CircleFields = Record<string, unknown>;
 
-/** Read one circle's record + its parsed membership from @circles. */
-async function readCircle(store: LarTiddlerStore, circle: string): Promise<{ record: LarTiddlerRecord | null; members: string[] }> {
+/** Parse a LEGACY space-joined `memberDids` register into its nym set — the back-compat read only (seeds +
+ *  older docs still carry it; the reactors never write it). Deduped, filtered. */
+function parseLegacyMembers(raw: unknown): string[] {
+  if (typeof raw !== "string") return [];
+  return [...new Set(raw.split(/\s+/).map((s) => s.trim()).filter(Boolean))];
+}
+
+/**
+ * Fold a circle tiddler's fields into the PRESENT nym set — the per-nym CRDT read. Each nym carries an add
+ * timestamp (the max of its `mbr+:` stamp and, for a legacy member, the baseline) and a remove timestamp (its
+ * `mbr-:` stamp). A nym is PRESENT iff it has an add stamp AND its remove stamp does not supersede it
+ * (`addedAt > removedAt`) — so remove WINS on a tie, and a strictly-later re-follow resurrects it. Sorted, so
+ * two devices reading the same merged doc converge on one ordering.
+ */
+export function foldMembers(fields: CircleFields): string[] {
+  const added   = new Map<string, string>();
+  const removed = new Map<string, string>();
+  for (const nym of parseLegacyMembers(fields["memberDids"])) {
+    if (!added.has(nym)) added.set(nym, LEGACY_ADD_BASELINE);
+  }
+  for (const [key, value] of Object.entries(fields)) {
+    if (typeof value !== "string") continue;
+    if (key.startsWith(MEMBER_ADD_PREFIX)) {
+      const nym = key.slice(MEMBER_ADD_PREFIX.length);
+      const cur = added.get(nym);
+      if (cur === undefined || value > cur) added.set(nym, value);
+    } else if (key.startsWith(MEMBER_RM_PREFIX)) {
+      const nym = key.slice(MEMBER_RM_PREFIX.length);
+      const cur = removed.get(nym);
+      if (cur === undefined || value > cur) removed.set(nym, value);
+    }
+  }
+  const present: string[] = [];
+  for (const [nym, addedAt] of added) {
+    const removedAt = removed.get(nym);
+    if (removedAt === undefined || addedAt > removedAt) present.push(nym);
+  }
+  return present.sort();
+}
+
+/** Read one circle's record + its folded present membership from @circles. */
+async function readCircle(store: LarTiddlerStore, circle: string): Promise<{ record: LarTiddlerRecord | null; fields: CircleFields; members: string[] }> {
   const record = await store.get(circleTiddlerUri(circle));
   const fields = (record?.tiddler ?? {}) as CircleFields;
-  return { record, members: parseMembers(fields["memberDids"]) };
+  return { record, fields, members: foldMembers(fields) };
 }
 
 /** Render the @daemon follow surface FROM the @circles membership (positional fields the surface iterates by
@@ -94,11 +141,12 @@ export function makeCircleAddReactor(opts: CircleVerbOptions): VerbReactor {
     if (!circle) throw new Error("circle-add: `circle` is required");
     if (!nym)    throw new Error("circle-add: `nym` is required");
     const store = await opts.resolveStore();
-    const { record, members: prev } = await readCircle(store, circle);
+    const { fields: prevFields, members: prev } = await readCircle(store, circle);
     const added   = !prev.includes(nym);
-    const members = [...prev, nym].sort();
     const now     = new Date().toISOString();
-    const prevFields = (record?.tiddler ?? {}) as CircleFields;
+    // Stamp ONLY this nym's add key — every OTHER member field rides through untouched (the `...prevFields`
+    // spread re-asserts them, so the whole-record merge never drops a fleet-mate's key). A re-follow sets a
+    // fresh, strictly-later add stamp that supersedes any standing remove — the fold reads it present again.
     const next: LarTiddlerRecord = {
       tiddler: {
         ...prevFields,
@@ -107,11 +155,12 @@ export function makeCircleAddReactor(opts: CircleVerbOptions): VerbReactor {
         displayName: (typeof prevFields["displayName"] === "string" && prevFields["displayName"]) || circle,
         kind:        (typeof prevFields["kind"] === "string" && prevFields["kind"]) || "Circle",
         createdAt:   (typeof prevFields["createdAt"] === "string" && prevFields["createdAt"]) || now,
-        memberDids:  serializeMembers(members),
+        [`${MEMBER_ADD_PREFIX}${nym}`]: now,
       } as LarTiddlerRecord["tiddler"],
       meta: { authority: "lares-verb" },
     };
     await store.put(next, { kind: "lares-verb", requestId: `circle-add-${now}-${nym.slice(0, 8)}` });
+    const members = foldMembers(next.tiddler as CircleFields);
     renderCircle(opts.tw5, circle, members);
     return { verb: "circle-add", circle, nym, members, added, federated: false };
   };
@@ -128,16 +177,20 @@ export function makeCircleRemoveReactor(opts: CircleVerbOptions): VerbReactor {
     if (!circle) throw new Error("circle-remove: `circle` is required");
     if (!nym)    throw new Error("circle-remove: `nym` is required");
     const store = await opts.resolveStore();
-    const { record, members: prev } = await readCircle(store, circle);
+    const { record, fields: prevFields, members: prev } = await readCircle(store, circle);
     const removed = prev.includes(nym);
-    const members = prev.filter((m) => m !== nym);
-    if (removed && record) {
+    // Stamp this nym's REMOVE key whenever the circle EXISTS — even if the local view reads the nym absent — so
+    // the tombstone outranks a concurrent add a fleet-mate made off-device that this replica has not yet merged
+    // (remove-wins). An absent circle stays uncreated (nothing to unfollow). Only this one key is touched.
+    let members = prev.filter((m) => m !== nym);
+    if (record) {
       const now = new Date().toISOString();
       const next: LarTiddlerRecord = {
-        tiddler: { ...(record.tiddler as CircleFields), title: circleTiddlerUri(circle), memberDids: serializeMembers(members) } as LarTiddlerRecord["tiddler"],
+        tiddler: { ...prevFields, title: circleTiddlerUri(circle), [`${MEMBER_RM_PREFIX}${nym}`]: now } as LarTiddlerRecord["tiddler"],
         meta: { authority: "lares-verb" },
       };
       await store.put(next, { kind: "lares-verb", requestId: `circle-remove-${now}-${nym.slice(0, 8)}` });
+      members = foldMembers(next.tiddler as CircleFields);
     }
     renderCircle(opts.tw5, circle, members);
     return { verb: "circle-remove", circle, nym, members, removed, federated: false };

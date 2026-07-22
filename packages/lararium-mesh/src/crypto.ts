@@ -262,6 +262,37 @@ export function cidV1Sha256(content: Uint8Array): string {
   return cidV1Sha256FromHex(sha256HexBytesSync(content));
 }
 
+/** Encode bytes as base64url (RFC-4648 §5), no padding — isomorphic, no Buffer. The carriage form a HandleCard
+ *  (or any small self-certifying capability) rides for a paste / QR / URL-fragment hand-off. */
+export function base64UrlEncode(bytes: Uint8Array): string {
+  return base64UrlNoPad(bytes);
+}
+
+/**
+ * Decode base64url back to bytes — the inverse of {@link base64UrlEncode}, tolerant of a carried string: it
+ * IGNORES every char outside the base64url alphabet (a `#card=` prefix, whitespace from a paste, `=` padding, a
+ * trailing newline), so a hand-carried token decodes without pre-trimming. Length-invalid tail bits are dropped
+ * (a `& 0xff` guards each emitted byte), so a truncated paste yields a short buffer the caller's JSON parse then
+ * rejects — never a throw here (WITHHOLD-not-forge: a garbled carriage means the card DID NOT ARRIVE).
+ */
+export function base64UrlDecode(s: string): Uint8Array {
+  const A = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  const lookup = new Int16Array(128).fill(-1);
+  for (let i = 0; i < A.length; i++) lookup[A.charCodeAt(i)] = i;
+  const out: number[] = [];
+  let buffer = 0;
+  let bits = 0;
+  for (let i = 0; i < s.length; i++) {
+    const code = s.charCodeAt(i);
+    const v = code < 128 ? lookup[code]! : -1;
+    if (v < 0) continue;                       // skip padding / whitespace / fragment prefix chars
+    buffer = (buffer << 6) | v;
+    bits += 6;
+    if (bits >= 8) { bits -= 8; out.push((buffer >> bits) & 0xff); }
+  }
+  return Uint8Array.from(out);
+}
+
 /** base64url (RFC-4648 §5), no padding — isomorphic, no Buffer. */
 function base64UrlNoPad(bytes: Uint8Array): string {
   const A = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";

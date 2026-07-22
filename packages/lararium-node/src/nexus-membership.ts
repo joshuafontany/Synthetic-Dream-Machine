@@ -60,6 +60,12 @@ export interface NexusMembershipHolder {
   refresh(): void;
   /** Re-read the kahu floor AND re-fold the members board, swapping the union whole. No-op board when unwired. */
   refold(): Promise<void>;
+  /** Re-fold the member union against an EXTERNALLY-materialized members board (fresh storage bytes) + the disk
+   *  charter (kahu floor). The live-refresh path: an OUT-OF-PROCESS admit/revoke (the `lares nexus admit` CLI
+   *  writes through its OWN repo) never reaches this holder's cached handle — NodeFS carries no cross-process
+   *  change bus — so the refresh caller materializes the board on a throwaway repo and hands the fresh doc here.
+   *  Swaps the union whole; a fold fault leaves the prior union standing (fail-closed: never a false member). */
+  refoldWithBoard(boardDoc: LarDoc | undefined): Promise<void>;
   /** Detach the members-board change listener (graceful shutdown). */
   dispose(): void;
 }
@@ -121,19 +127,27 @@ export function makeNexusMembership(opts: {
     members = kahuFloor();
   };
 
-  const refold = async (): Promise<void> => {
-    const board   = await ensureBoard();   // resolve the board first (lazy, once) — no null-board false miss
-    // The charter DOC is the authority home; an absent / unseated doc folds empty (inert) AND yields an empty floor.
+  // Fold the member union (kahu floor ∪ members{}) against a SUPPLIED board doc + the disk charter — the one
+  // fold body both the live handle-change refold (its own cached board) and the out-of-process refresh (a
+  // freshly-materialized board) share. An absent / unseated charter folds empty (inert) AND yields an empty
+  // floor; a lowercased union never silently misses a case match.
+  const foldBoard = async (boardDoc: LarDoc | undefined): Promise<void> => {
     const doc     = readNexusCharterDoc(bagsDir);
     const roster  = foundingRoster(doc);
     const floor   = new Set<string>(seatedCharterKeys(doc).map((k) => k.toLowerCase()));
-    const entries = membershipEntriesFromBoard(board?.doc());
+    const entries = membershipEntriesFromBoard(boardDoc);
     const folded  = await foldMembershipSet(entries, roster);
-    // Union: kahu floor ∪ members{}. Normalize to lowercase so a nym's case can never silently miss a match.
     const union = new Set<string>(floor);
     for (const n of folded) union.add(n.toLowerCase());
     members = union;
   };
+
+  const refold = async (): Promise<void> => {
+    const board = await ensureBoard();   // resolve the board first (lazy, once) — no null-board false miss
+    await foldBoard(board?.doc());       // the live WS-sync path folds THIS holder's own cached board handle
+  };
+  // The out-of-process refresh path: fold a board the caller materialized fresh off storage (see the interface).
+  const refoldWithBoard = (boardDoc: LarDoc | undefined): Promise<void> => foldBoard(boardDoc);
 
   // First floor read (synchronous), then — when wired — resolve the members board + first fold asynchronously.
   members = kahuFloor();
@@ -158,6 +172,7 @@ export function makeNexusMembership(opts: {
     membership,
     refresh,
     refold,
+    refoldWithBoard,
     dispose(): void {
       if (boardHandle && onChange) boardHandle.off("change", onChange);
       boardHandle = null;

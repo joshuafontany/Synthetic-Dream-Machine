@@ -165,6 +165,10 @@ export {
 // The @nexus MEMBERSHIP consult holder (Build-2) — the carry-split's member gate: kahu floor ∪ folded members{}.
 export { makeNexusMembership } from "./nexus-membership.js";
 export type { NexusMembershipHolder } from "./nexus-membership.js";
+// The `nexus-refresh` LIVE-refold seam — re-reads the disk posture + re-folds the antigen / members boards from
+// storage into the live holders, so an out-of-process CLI edit reaches a running node without a bounce.
+export { runNexusRefresh } from "./nexus-refresh.js";
+export type { NexusRefreshDeps, NexusRefreshResult } from "./nexus-refresh.js";
 
 export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
 // The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root
