@@ -32,7 +32,7 @@
  */
 
 import { spawn } from "node:child_process";
-import { existsSync, readFileSync, realpathSync, statSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { isAbsolute, join, relative, resolve } from "node:path";
 import type {
   PersistencePolicy, SensoriumContract, SensoriumOrderEvidence, Variance,
@@ -357,25 +357,6 @@ export function readManifest(sensoriumDir: string): SensoriumManifest | null {
   const p = manifestPath(sensoriumDir);
   if (!existsSync(p)) return null;
   return parseSensoriumManifest(JSON.parse(readFileSync(p, "utf8")));
-}
-
-export function migrateManifest(sensoriumDir: string): SensoriumManifest | null {
-  const p = manifestPath(sensoriumDir);
-  if (!existsSync(p)) return null;
-  const raw = JSON.parse(readFileSync(p, "utf8")) as Record<string, unknown>;
-  if (raw.schema === SENSORIUM_SCHEMA) return parseSensoriumManifest(raw);
-  if (raw.schema !== undefined) throw new Error(`sensorium manifest: schema needs ${SENSORIUM_SCHEMA}`);
-  const candidate = {
-    ...raw,
-    schema: SENSORIUM_SCHEMA,
-    bands: raw.bands ?? {},
-    coupling: raw.coupling ?? { children: [] },
-    ephemeral: raw.ephemeral ?? false,
-    created: raw.created ?? statSync(p).mtime.toISOString(),
-  };
-  const manifest = parseSensoriumManifest(candidate);
-  atomicWriteFileSync(p, JSON.stringify({ ...raw, ...manifest }, null, 2) + "\n");
-  return manifest;
 }
 
 /** Write a sensorium manifest atomically (write-temp-then-rename) so a reader/crash never tears it. */
