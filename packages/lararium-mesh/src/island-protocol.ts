@@ -682,6 +682,7 @@ export type VesselToIslandMsg =
   | DaemonMsg_ResidencyOpResult
   | WikiMsg_PlaceVerb
   | WikiMsg_DomEvent
+  | WikiMsg_DomInput
   | WikiMsg_SensoriumSignal;
 
 // ── Island → vessel ──────────────────────────────────────────────────────────
@@ -788,6 +789,50 @@ export interface WikiMsg_DomEvent {
 }
 
 /**
+ * The bound a relayed TEXT value carries: characters, counted, refused above the line.
+ *
+ * A tiddler body runs long, so the bound sits well above a paragraph and well below a payload that
+ * could stall the island thread or bloat its CRDT in one keystroke. It reads as a real edit surface's
+ * ceiling, not a token limit — a phone typing prose never meets it, and a paste of a novel does.
+ */
+export const DOM_INPUT_MAX_CHARS = 65_536;
+
+/**
+ * Read a relayed input value, or REFUSE it.
+ *
+ * Returns the string when it stands within the bound, `null` otherwise — fail-closed, one number, one
+ * site. Both the send seam (which throws, because an over-long send names a caller bug) and the island
+ * door (which drops, because an over-long arrival names an untrusted sender) read this same function.
+ */
+export function boundedDomInputValue(v: unknown): string | null {
+  if (typeof v !== "string") return null;
+  if (v.length > DOM_INPUT_MAX_CHARS) return null;
+  return v;
+}
+
+/**
+ * Vessel → wiki island: a TEXT-carrying DOM event — the input leg of the interactivity RETURN.
+ *
+ * WHY A SIBLING KIND, and never a wider `fields`. `WikiMsg_DomEvent.fields` states an explicit
+ * primitives-only allowlist (GP-2). Loosening it to `string` would widen EVERY relayed event at once:
+ * a click would silently gain the right to carry arbitrary text under an arbitrary key, and no reader
+ * of the click path could tell by looking that it no longer holds. The text instead rides its own kind,
+ * with ONE named field, ONE type, and ONE explicit bound — so the click path keeps its primitives-only
+ * guarantee legible, and the text path carries a guarantee a reader can check in a single line.
+ *
+ * The island applies `value` to the resolved node before invoking TW5's own stored handler, so TW5's
+ * edit widgets read what a human typed exactly where they read a local keystroke.
+ */
+export interface WikiMsg_DomInput {
+  schema_version: ProtocolVersion;
+  type:           "wiki:dom-input";
+  renderId:       string;
+  eventType:      string;
+  /** The field's whole current value, bounded by DOM_INPUT_MAX_CHARS. Never a diff, never a keycode. */
+  value:          string;
+}
+
+/**
  * Island → vessel: wiki-scope verb result.
  *
  * Sent by a wiki island's dispatch behavior after completing a verb whose result
@@ -848,7 +893,11 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "structurepalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const)
+  // The text bound holds AT THE ISLAND DOOR — the one gate every island message passes (the sovereign
+  // kernel's listen). Refusing here means no behavior, no cap, and no TW5 handler ever sees an unbounded
+  // string: an over-long arrival vanishes exactly as a malformed one does, and the island keeps running.
+  if (v.type === "wiki:dom-input" && boundedDomInputValue((v as Record<string, unknown>)["value"]) === null) return false;
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "structurepalace:kapae", "daemon:derive-skeleton-request", "daemon:worldline-compare-request", "daemon:worldline-trajectory-request", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event", "wiki:dom-input"] as const)
     .includes(v.type as Exclude<VesselToIslandMsg["type"], SensoriumSignalType>) || isSensoriumSignalType(v.type);
 }
 
@@ -1297,6 +1346,33 @@ export function mkWikiDomEvent(opts: {
     renderId: opts.renderId,
     eventType: opts.eventType,
     fields: opts.fields,
+  };
+}
+
+/**
+ * Build the text-carrying relay message, REFUSING an over-long value at the send seam.
+ *
+ * This throw names a caller bug (a main thread relaying more than an edit surface may hold), and it
+ * fires where the stack still points at the offending call. The island door refuses the same value
+ * again on arrival — the two checks read one function, so the bound cannot drift between them.
+ */
+export function mkWikiDomInput(opts: {
+  renderId: string;
+  eventType: string;
+  value: string;
+}): WikiMsg_DomInput {
+  const value = boundedDomInputValue(opts.value);
+  if (value === null) {
+    throw new Error(
+      `[island-protocol] wiki:dom-input refused — a relayed value carries at most ${DOM_INPUT_MAX_CHARS} characters`,
+    );
+  }
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "wiki:dom-input",
+    renderId: opts.renderId,
+    eventType: opts.eventType,
+    value,
   };
 }
 

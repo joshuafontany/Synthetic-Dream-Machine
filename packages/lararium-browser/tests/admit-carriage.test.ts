@@ -7,7 +7,7 @@
  * tested this way — it would need a server, a reachable issuer, and a moment at which both were true.
  */
 import { describe, test, expect } from "vitest";
-import { parseAdmitCarriage, toAdmitCarriage, ADMIT_KIND } from "../src/admit-carriage.js";
+import { parseAdmitCarriage, parseAdmitPaste, formatAdmitCommand, toAdmitCarriage, ADMIT_KIND } from "../src/admit-carriage.js";
 import type { DeviceAdmitPayload } from "@lararium/keyhive";
 
 /** A payload shaped like the founder's root signs — fixed bytes, so the test is a constant. */
@@ -69,5 +69,45 @@ describe("the carried admission", () => {
   test("an EMPTY binding field refuses as hard as a missing one", () => {
     const hollow = toAdmitCarriage({ ...PAYLOAD, signerDid: "" } as unknown as DeviceAdmitPayload);
     expect(parseAdmitCarriage(hollow)).toBeNull();
+  });
+});
+
+/**
+ * The PASTE door — the human path. Reading the vessel key out of a devtools console and hand-editing a
+ * URL fragment works for one operator at one laptop; a family standing at four phones needs the page to
+ * say its own key and to take the admission back as a paste. These tests pin that door's tolerance
+ * (whatever form the human happens to hold) AGAINST its refusals (the kind-check and binding-field gate
+ * stay one parser deep — the paste door never becomes a looser second entrance).
+ */
+describe("the pasted admission", () => {
+  test("every form a human arrives holding carries the SAME payload", () => {
+    const carriage = toAdmitCarriage(PAYLOAD);
+    const bare     = carriage.slice("#admit=".length);
+    expect(parseAdmitPaste(carriage)).toEqual(PAYLOAD);                                  // the CLI's line
+    expect(parseAdmitPaste(`  ${carriage}\n`)).toEqual(PAYLOAD);                         // with chat whitespace
+    expect(parseAdmitPaste(`http://192.168.1.42:5173/?relay=ws://x/ws${carriage}`)).toEqual(PAYLOAD);
+    expect(parseAdmitPaste(bare)).toEqual(PAYLOAD);                                      // label rubbed off
+    expect(parseAdmitPaste(JSON.stringify(PAYLOAD, null, 2))).toEqual(PAYLOAD);          // the CLI's stdout
+  });
+
+  test("the paste door refuses exactly what the carriage door refuses — no looser entrance", () => {
+    expect(parseAdmitPaste("")).toBeNull();
+    expect(parseAdmitPaste("   \n ")).toBeNull();
+    expect(parseAdmitPaste("hello there, here is the admit")).toBeNull();
+    expect(parseAdmitPaste("{ not json")).toBeNull();
+    // Wrong kind, and an incomplete binding — through the JSON door as through the carriage door.
+    expect(parseAdmitPaste(JSON.stringify({ ...PAYLOAD, kind: "nexus-invite/v1" }))).toBeNull();
+    const partial = { ...PAYLOAD } as Record<string, unknown>;
+    delete partial["deviceEdge"];
+    expect(parseAdmitPaste(JSON.stringify(partial))).toBeNull();
+  });
+
+  test("the on-screen command names the key in the ONE form the node accepts", () => {
+    const hex = "a".repeat(64);
+    expect(formatAdmitCommand(hex)).toBe(`lares device-admit --joinee-key ${hex}`);
+    // A `0x`-decorated or upper-cased key produces a command the node REFUSES (64-char lowercase hex
+    // only), with the human standing at a different device — so the vessel strips the decoration here.
+    expect(formatAdmitCommand(`0x${hex.toUpperCase()}`)).toBe(`lares device-admit --joinee-key ${hex}`);
+    expect(formatAdmitCommand(` ${hex} `)).toBe(`lares device-admit --joinee-key ${hex}`);
   });
 });

@@ -24,7 +24,7 @@ import {
   mkManifest,
   mkTeardown,
   mkWikiPlaceVerb,
-  mkWikiDomEvent,
+  mkWikiDomEvent, mkWikiDomInput,
   mkSensoriumSignal,
 } from "./island-protocol.js";
 import type { SensoriumSignalType } from "./island-protocol.js";
@@ -402,6 +402,18 @@ export class VesselIslandPoolCore {
     const slot = this._slots.get(wikiId);
     if (!slot || slot.temperature === "anu") return;
     slot.worker.post(mkWikiDomEvent(ev));
+  }
+
+  /** Relay a main-thread TEXT event to the wiki island — the input leg of the RETURN. Same drop-honest
+   *  fire-and-forget as placeWikiEvent; `mkWikiDomInput` refuses a value past the bound at this seam,
+   *  and the island door refuses it again on arrival. */
+  placeWikiInput(
+    wikiId: string,
+    ev: { renderId: string; eventType: string; value: string },
+  ): void {
+    const slot = this._slots.get(wikiId);
+    if (!slot || slot.temperature === "anu") return;
+    slot.worker.post(mkWikiDomInput(ev));
   }
 
   /** Post one sensorium read-signal INTO a live island — the daemon's supervision read ridden

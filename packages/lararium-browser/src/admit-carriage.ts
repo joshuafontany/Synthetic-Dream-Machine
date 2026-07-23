@@ -58,6 +58,49 @@ export function parseAdmitCarriage(carriage: string): DeviceAdmitPayload | null 
   return payload as DeviceAdmitPayload;
 }
 
+/**
+ * Take a carriage a HUMAN pasted, in whichever of its forms they had to hand.
+ *
+ * The CLI prints two things and a browser shows a third, so a human arrives holding any of: the whole
+ * `#admit=…` line, a URL that ends in one, the bare base64url token with the `admit=` rubbed off by a
+ * chat client, or the pretty-printed JSON payload written to stdout. Every one of them carries the SAME
+ * signed capability; refusing four of the five would make the human retype bytes they already hold.
+ *
+ * The recognition stays one function deep: each form normalizes to a carriage string and goes through
+ * `parseAdmitCarriage` — so the kind-check and the binding-field refusal live in exactly one place, and a
+ * paste never reaches a second, looser door. Returns null on anything it cannot read; a typo fails soft.
+ */
+export function parseAdmitPaste(text: string): DeviceAdmitPayload | null {
+  const trimmed = text.trim();
+  if (!trimmed) return null;
+  const direct = parseAdmitCarriage(trimmed);
+  if (direct) return direct;
+  // The JSON the CLI writes to stdout — re-encoded into a carriage so ONE parser adjudicates it.
+  if (trimmed.startsWith("{")) {
+    try {
+      return parseAdmitCarriage(toAdmitCarriage(JSON.parse(trimmed) as DeviceAdmitPayload));
+    } catch {
+      return null;
+    }
+  }
+  // A bare token: the `admit=` rubbed off in transit. Re-attach the label and re-read.
+  if (/^[A-Za-z0-9_-]+$/.test(trimmed)) return parseAdmitCarriage(`#admit=${trimmed}`);
+  return null;
+}
+
+/**
+ * Write the exact line the operator runs on the NODE to admit the vessel that shows it.
+ *
+ * The vessel is the only place its own key exists, so the vessel says it — as the command, not as a fact
+ * the human must assemble. The key rides as 64-char lowercase hex with no `0x`: that is the one form
+ * `runDeviceAdmitEdge` accepts, and a decorated key produces a command that fails at the node with the
+ * human standing at a different device.
+ */
+export function formatAdmitCommand(verifyingKey: string): string {
+  const hex = verifyingKey.trim().replace(/^0x/i, "").toLowerCase();
+  return `lares device-admit --joinee-key ${hex}`;
+}
+
 /** Encode a payload into the carriage form the CLI prints and a vessel reads. The round-trip inverse. */
 export function toAdmitCarriage(payload: DeviceAdmitPayload): string {
   const json = JSON.stringify(payload);

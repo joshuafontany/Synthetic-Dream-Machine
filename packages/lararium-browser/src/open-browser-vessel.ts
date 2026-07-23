@@ -249,6 +249,10 @@ export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPoo
   /** Relay a main-thread DOM event to the ACTIVE surface (interactivity RETURN leg) — routes to the @daemon or
    *  the pinned wiki by the live active-surface pointer. */
   sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) => void;
+  /** The RETURN leg's TEXT half — a relayed input/change carrying the field's whole bounded value, routed
+   *  to whichever surface holds focus exactly as the click leg routes. Its own message kind, so the click
+   *  channel keeps its primitives-only allowlist. */
+  sendDomInput: (renderId: string, eventType: string, value: string) => void;
   /** The uniform pin-selector: flip which VM owns the singleton #projection sink. DAEMON_SURFACE_ID summons the
    *  @daemon; a wiki slug surfaces that wiki. LIVE (synchronous gate flip); the durable @daemon/active-wiki
    *  marker persists fire-and-forget, consulted only at next cold boot ("live process state is the boundary"). */
@@ -1051,6 +1055,10 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       activeSurfaceId === DAEMON_SURFACE_ID
         ? daemon.sendDomEvent(renderId, eventType, fields)
         : vmManager.placeWikiEvent(slotActiveWikiId, { renderId, eventType, fields }),
+    sendDomInput: (renderId, eventType, value) =>
+      activeSurfaceId === DAEMON_SURFACE_ID
+        ? daemon.sendDomInput(renderId, eventType, value)
+        : vmManager.placeWikiInput(slotActiveWikiId, { renderId, eventType, value }),
     // The uniform pin-selector: flip the live gate synchronously (mount-then-flip — @daemon + the pinned wiki
     // are already mounted), then persist the choice fire-and-forget to @daemon/active-wiki (read only at next
     // cold boot). No reboot — an active-surface change is a projection-gate flip, not a manifest rebuild.

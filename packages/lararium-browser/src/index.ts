@@ -41,4 +41,4 @@ export type {
   BrowserDaemonVmOptions,
   BrowserVerbTable, VerbReactor, BrowserVerbPlacementRequest,
 } from "./open-browser-daemon-vm.js";
-export { parseAdmitCarriage, toAdmitCarriage, ADMIT_KIND } from "./admit-carriage.js";
+export { parseAdmitCarriage, parseAdmitPaste, formatAdmitCommand, toAdmitCarriage, ADMIT_KIND } from "./admit-carriage.js";

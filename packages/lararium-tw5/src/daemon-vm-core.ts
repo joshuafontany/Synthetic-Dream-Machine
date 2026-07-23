@@ -43,7 +43,7 @@ import {
   isIslandToVesselMsg,
   CROSSROADS_DOC_URI,
   verbArgsFromPayload,
-  mkWikiDomEvent,
+  mkWikiDomEvent, mkWikiDomInput,
   type IslandMsg_Event,
   type VesselWorkerHandle,
   type Repo,
@@ -272,6 +272,13 @@ export interface DaemonVmCore {
    * interactivity, never synchronous default-action arbitration (the async law the causal-island house runs).
    */
   sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) => void;
+  /**
+   * The projection RETURN-leg's TEXT half — a relayed input/change carrying the field's whole current
+   * value, bounded at the protocol seam. It rides its OWN message kind so the click channel above keeps
+   * its primitives-only allowlist; the worker writes the value onto the resolved node and runs TW5's own
+   * handler, so an edit widget saves exactly as it saves a local keystroke.
+   */
+  sendDomInput: (renderId: string, eventType: string, value: string) => void;
   /**
    * Verb OUT-path for the @daemon's OWN surface — the twin of a pool wiki's worker.event→placeVerb
    * bridge. A DOM click in the projected @daemon writes a verb-carrying summon tiddler; its reaction-router
@@ -623,6 +630,8 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     },
     sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) =>
       worker.post(mkWikiDomEvent({ renderId, eventType, fields })),
+    sendDomInput: (renderId: string, eventType: string, value: string) =>
+      worker.post(mkWikiDomInput({ renderId, eventType, value })),
     shutdown: async (budgetMs = 10_000): Promise<void> => {
       // Post teardown, await the island's teardown:ack (it flushes its docs +
       // capture state before acking). On timeout (jammed worker) terminate anyway.

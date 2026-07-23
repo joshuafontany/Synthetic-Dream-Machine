@@ -29,8 +29,10 @@
  */
 
 import { createServer }  from "http";
+import { networkInterfaces }             from "os";
 import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
+import { deriveReachFaces, wsUrlForOrigin, crossingUrl, type InterfaceTable } from "./lan-address.js";
 import { openNodeVessel, openNodeHerm, type NodeRecipe } from "./open-node-vessel.js";
 import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
@@ -89,6 +91,17 @@ async function main(): Promise<void> {
   const seedLabel = process.env["LAR_SEED"];
   const meshSelf = deriveMeshSelf(publicUrl, peers, seedLabel ? { label: seedLabel } : {});
 
+  // The reach-faces this vessel answers on. The listen below binds 0.0.0.0, so the vessel answers on
+  // every interface the host holds; the banner names them all. A phone on the house network reads a
+  // LAN line and types it; `localhost` on that phone names the phone. LAR_APP_PORT names where the
+  // static app answers (the vite dev server by default) — the app and the relay ride the SAME host.
+  const appPort = Number.parseInt(process.env["LAR_APP_PORT"] ?? "5173", 10);
+  const reachFaces = deriveReachFaces({
+    port,
+    declaredUrl: process.env["LAR_PUBLIC_URL"] ?? null,
+    interfaces:  networkInterfaces() as unknown as InterfaceTable,
+  });
+
   // WS server — path-scoped to /ws only. Non-WS requests get no handler (socket destroyed
   // by the upgrade gate below). No HTTP surface — catalog URL advertised via stdout.
   const httpServer = createServer();
@@ -114,7 +127,8 @@ async function main(): Promise<void> {
     throw err;
   });
   httpServer.listen(port, () => {
-    console.log(`[lararium] WS relay on :${port}  (ws://localhost:${port}/ws)`);
+    console.log(`[lararium] WS relay on :${port} — every interface answers:`);
+    for (const f of reachFaces) console.log(`[lararium]   ${wsUrlForOrigin(f.origin)}   (${f.kind})`);
   });
 
   // ── Herm (Lares Viales) — the wiki-LESS wayfarer cap-stack: @daemon immune core + a served
@@ -140,7 +154,7 @@ async function main(): Promise<void> {
     console.log(`[herm] oracle:    ${herm.oracleDocUrl}`);
     console.log(`[herm] daemon:    ${herm.daemon.daemonHandle.url}`);
     console.log(`[herm] FLOW-map read-face: GET /oracle/pointer · /oracle/<cid>.bin`);
-    console.log(`[herm] ws:        ws://localhost:${port}/ws`);
+    for (const f of reachFaces) console.log(`[herm] ws:        ${wsUrlForOrigin(f.origin)}   (${f.kind})`);
 
     // Co-located UDS verb-channel for the local `lares` CLI (the @daemon answers).
     const hermSocketPath = join(storageDir, "lares.sock");
@@ -196,7 +210,8 @@ async function main(): Promise<void> {
   console.log(`[lararium] oracle:   ${result.oracleDocUrl ?? "(none)"}`);
   console.log(`[lararium] lararium: ${result.larariumDocUrl ?? "(none)"}`);
   console.log(`[lararium] daemon:   ${result.daemon.daemonHandle.url}`);
-  console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.oracleDocUrl ?? result.catalogHandleUrl ?? ""}`);
+  const bootDocFragment = result.oracleDocUrl ?? result.catalogHandleUrl ?? "";
+  for (const f of reachFaces) console.log(`[lararium] ws:       ${wsUrlForOrigin(f.origin)}#${bootDocFragment}   (${f.kind})`);
 
   // THE CROSSING, spoken aloud. A leaf's V3 proof commits to the GATE'S key, and the leaf must hold that
   // key OUT-OF-BAND — the challenge carries it on the wire, but trusting it there would let any relay
@@ -209,9 +224,11 @@ async function main(): Promise<void> {
   // The load is idempotent — the same identity the gate armed with, read back, never a second one.
   const gateIdentity = await generateOrLoadVesselIdentity(storageDir);
   console.log(`[lararium] gate key: ${gateIdentity.verifyingKey}`);
-  console.log("[lararium] browser crossing:");
-  console.log(`[lararium]   http://localhost:5173/?relay=ws://localhost:${port}/ws&gate=${gateIdentity.verifyingKey}`);
-  console.log("[lararium]   (a leaf still needs an ADMIT — `lares device-admit --joinee-key <the leaf's key>`)");
+  console.log("[lararium] browser crossing — open one of these on the device that crosses:");
+  for (const f of reachFaces) {
+    console.log(`[lararium]   ${crossingUrl({ host: f.host, appPort, wsUrl: wsUrlForOrigin(f.origin), gateKey: gateIdentity.verifyingKey })}   (${f.kind})`);
+  }
+  console.log("[lararium]   (a leaf still needs an ADMIT — the leaf's page shows its own key + the `lares device-admit` line to run here)");
 
   // The @oracle read-only PUBLIC substrate (the Two-Faced Substrate's content-addressed
   // floor) — served over THIS http server: GET /oracle/pointer · /oracle/<cid>.bin.

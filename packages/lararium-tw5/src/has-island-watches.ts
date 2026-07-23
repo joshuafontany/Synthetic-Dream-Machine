@@ -12,10 +12,10 @@
 
 import { startEngineWatch } from "./engine-watch.js";
 import { startRecipeWatch } from "./recipe-watch.js";
-import { dispatchProjectedEvent } from "./tw5-projection.js";
+import { dispatchProjectedEvent, dispatchProjectedInput } from "./tw5-projection.js";
 import type { IslandCap } from "./island-caps.js";
 import type { IslandContext } from "./island-context.js";
-import type { WikiMsg_DomEvent } from "@lararium/mesh";
+import { boundedDomInputValue, type WikiMsg_DomEvent, type WikiMsg_DomInput } from "@lararium/mesh";
 
 /** `#has` engine-epoch drift watch — self-writes the engine-waiting alert when a new genesis
  *  merges into the live @lararium doc under this running island (alert-only; reboot adopts). */
@@ -40,10 +40,22 @@ export function hasProjection(onBoot?: (ctx: IslandContext) => (() => void) | un
     name: "wiki-projection",
     onEa: (ctx) => onBoot?.(ctx),
     onSignal(type: string, raw: unknown): boolean {
-      if (type !== "wiki:dom-event") return false;
-      const ev = raw as WikiMsg_DomEvent;
-      dispatchProjectedEvent(ev.renderId, ev.eventType, ev.fields);
-      return true;
+      if (type === "wiki:dom-event") {
+        const ev = raw as WikiMsg_DomEvent;
+        dispatchProjectedEvent(ev.renderId, ev.eventType, ev.fields);
+        return true;
+      }
+      // The TEXT leg rides its OWN kind, so the click path above keeps its primitives-only allowlist
+      // legible. The bound re-reads here as well as at the island door: this cap CLAIMS the message
+      // (returns true) either way, so a refused value ends as a drop rather than falling through to a
+      // cap that never expected text.
+      if (type === "wiki:dom-input") {
+        const ev = raw as WikiMsg_DomInput;
+        const value = boundedDomInputValue(ev.value);
+        if (value !== null) dispatchProjectedInput(ev.renderId, ev.eventType, value);
+        return true;
+      }
+      return false;
     },
   };
 }

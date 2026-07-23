@@ -44,6 +44,10 @@ interface RidNode {
   attributes: Record<string, string | undefined>;
   setAttribute(name: string, value: string): void;
   _larListeners?: { type: string; handler: (ev: unknown) => void }[];
+  /** The field's live text. TW5's edit widgets read `domNodes[0].value`, so the input leg writes it here. */
+  value?: string;
+  selectionStart?: number;
+  selectionEnd?: number;
 }
 const ridMap = new Map<string, RidNode>();
 let ridSeq = 0;
@@ -51,7 +55,7 @@ let ridSeq = 0;
 /** Patch the fake-element prototype once per worker (the RETURN-leg capability the fakedom platform
  *  lacks): restore listener-storage + render-id stamping + the two reads TW5's click handler makes
  *  on the now-live node (getBoundingClientRect, hasAttribute). role = capability ≠ platform. */
-function patchFakeElementForEvents(fakeDoc: { createElement(t: string): RidNode }): void {
+export function patchFakeElementForEvents(fakeDoc: { createElement(t: string): RidNode }): void {
   const proto = Object.getPrototypeOf(fakeDoc.createElement("div")) as Record<string, unknown>;
   if (proto["_larEventsPatched"]) return;
   proto["_larEventsPatched"] = true;
@@ -70,6 +74,39 @@ function patchFakeElementForEvents(fakeDoc: { createElement(t: string): RidNode 
   proto["hasAttribute"] = function (this: RidNode, name: string): boolean {
     return this.attributes[name] !== undefined;
   };
+  // The caret verbs an edit widget calls on the node it just read. They mean nothing on a fake element
+  // (the caret lives in the real DOM the main thread paints), and TW5 calls them unconditionally — so
+  // they answer, and answer harmlessly, rather than throwing mid-handler and swallowing the edit.
+  proto["focus"]             = function (): void { /* the caret sits main-side */ };
+  proto["blur"]              = function (): void { /* likewise */ };
+  proto["select"]            = function (): void { /* likewise */ };
+  proto["setSelectionRange"] = function (this: RidNode, start: number, end: number): void {
+    this.selectionStart = start; this.selectionEnd = end;
+  };
+}
+
+/**
+ * Dispatch a relayed TEXT event: write the value onto the resolved node, then run TW5's own handler.
+ *
+ * TW5's edit widgets read `this.domNodes[0].value` inside their input handler — they never read the
+ * event. So the value lands on the NODE first, and the handler that follows reads it exactly where it
+ * reads a local keystroke: `saveChanges` fires, the tiddler writes, the wiki changes, the projection
+ * re-renders. TW5 never learns the keystroke crossed a thread.
+ *
+ * The caret rides to the end of the written value, because the main thread holds the real caret and the
+ * fake node holds none — a widget that reads a selection reads a coherent one rather than a stale one.
+ *
+ * A miss (an unknown render-id) drops silently: it names a stale frame, never an error (Hiatus).
+ */
+export function dispatchProjectedInput(renderId: string, eventType: string, value: string): void {
+  const el = ridMap.get(renderId);
+  if (!el) return;
+  el.value = value;
+  el.selectionStart = el.selectionEnd = value.length;
+  const ev = { type: eventType, target: el, currentTarget: el, preventDefault() {}, stopPropagation() {} };
+  for (const l of el._larListeners ?? []) {
+    if (l.type === eventType) l.handler(ev);
+  }
 }
 
 /**

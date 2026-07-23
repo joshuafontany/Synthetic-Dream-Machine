@@ -32,6 +32,37 @@
       #phases .phase::before { content: "→ "; color: #3fb950; }
       .ok { color: #3fb950; } .warn { color: #d29922; } .err { color: #f85149; }
       .veil { color: #d2a8ff; }
+
+      /* The admit surface carries a THUMB. Every tap target clears 44px, the paste box holds 16px type
+         (below that, mobile Safari zooms the page on focus), and the rows stack once the viewport
+         narrows past a phone's width. The page states this vessel's own key, because this vessel is the
+         only place that key exists — the operator cannot admit a stranger it cannot name. */
+      .copyrow { display: flex; gap: 0.5rem; align-items: stretch; padding: 0.3rem 0; flex-wrap: wrap; }
+      .copyrow .val {
+        flex: 1 1 14rem; min-width: 0; padding: 0.55rem 0.7rem; border-radius: 8px;
+        border: 1px solid #21262d; background: #0d1117; color: #c9d1d9;
+        font: inherit; font-size: 0.92rem; word-break: break-all; user-select: all; -webkit-user-select: all;
+      }
+      button {
+        min-height: 44px; padding: 0 0.9rem; border-radius: 8px; border: 1px solid #30363d;
+        background: #1b2029; color: #c9d1d9; font: inherit; font-size: 0.9rem; cursor: pointer;
+      }
+      button:hover:not(:disabled) { background: #232a35; }
+      button:disabled { opacity: 0.45; cursor: default; }
+      .admit { padding: 0.2rem 1rem 1rem; }
+      .admit label { display: block; color: #768390; font-size: 0.82rem; padding: 0.5rem 0 0.35rem; }
+      #admit-paste {
+        width: 100%; box-sizing: border-box; min-height: 5.5rem; resize: vertical;
+        padding: 0.6rem 0.7rem; border-radius: 8px; border: 1px solid #21262d;
+        background: #0d1117; color: #c9d1d9; font-family: inherit; font-size: 16px;
+      }
+      #admit-apply { width: 100%; margin-top: 0.6rem; }
+      #admit-status { padding-top: 0.5rem; font-size: 0.88rem; min-height: 1.3rem; }
+      @media (max-width: 560px) {
+        main { margin: 2vh auto; }
+        .row { flex-direction: column; gap: 0; }
+        .row .k { min-width: 0; font-size: 0.8rem; }
+      }
     </style>
   </head>
   <body>
@@ -48,6 +79,27 @@
         <h2>vessel</h2>
         <div class="rows" id="vessel">
           <div class="row"><span class="k">status</span><span class="v" id="status">starting…</span></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>identity &amp; admit</h2>
+        <div class="rows">
+          <div class="copyrow">
+            <span class="val" id="vessel-key">…</span>
+            <button id="copy-key" type="button">copy key</button>
+          </div>
+          <div class="copyrow">
+            <span class="val" id="admit-cmd">…</span>
+            <button id="copy-cmd" type="button">copy command</button>
+          </div>
+        </div>
+        <div class="admit">
+          <label for="admit-paste">paste the admit the node printed (the <code>#admit=…</code> line, its URL, or the JSON)</label>
+          <textarea id="admit-paste" rows="4" spellcheck="false" autocapitalize="off" autocorrect="off"
+                    placeholder="#admit=…"></textarea>
+          <button id="admit-apply" type="button">admit this vessel</button>
+          <div id="admit-status"></div>
         </div>
       </section>
 
