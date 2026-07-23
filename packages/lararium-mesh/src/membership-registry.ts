@@ -33,6 +33,7 @@
 import * as ed25519 from "@noble/ed25519";
 import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
 import type { QuorumSignature, KahuCharterRoster } from "./kapae-antigen.js";
+import { quorumEntryBytes } from "./quorum-entry.js";
 
 /** The domain a MembershipEntry's quorum signs over — a signature is meaningless without its domain. */
 export const MEMBERSHIP_ENTRY_DOMAIN = "lar-membership-entry/v1" as const;
@@ -74,17 +75,16 @@ export interface MembershipEntry {
   readonly contractSig?:    QuorumSignature;
 }
 
-/** The canonical bytes the KAHU QUORUM signs over — everything but the signatures + the contract sig. */
+/**
+ * The canonical bytes the KAHU QUORUM signs over — everything but the signatures + the contract sig.
+ * Composes the shared quorum-entry image at the MEMBERSHIP domain; that domain keeps a membership signature
+ * un-presentable on the antigen board (`quorum-entry.ts`). The operator's accepts-carriage token signs
+ * SEPARATE bytes (`carriageContractBytes`) and stays a distinct, board-local gate.
+ */
 export function membershipEntryBytes(
   entry: Omit<MembershipEntry, "signatures" | "contractSig">,
 ): Uint8Array {
-  return canonicalJsonBytes({
-    kind:            entry.kind,
-    nym:             entry.nym,
-    action:          entry.action,
-    version:         entry.version,
-    charterEpochCid: entry.charterEpochCid,
-  });
+  return quorumEntryBytes(entry);
 }
 
 /**

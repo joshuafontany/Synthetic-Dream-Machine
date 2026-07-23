@@ -41,10 +41,8 @@
  */
 
 import { x25519 } from "@noble/curves/ed25519.js";
-import { xchacha20poly1305 } from "@noble/ciphers/chacha.js";
-import { hkdf } from "@noble/hashes/hkdf.js";
-import { sha256 } from "@noble/hashes/sha2.js";
 import * as ed25519 from "@noble/ed25519";
+import { sealToRecipient, openFromSender } from "./sealed-box.js";
 import {
   hex, hexToBytes, utf8Bytes, canonicalJsonBytes, webGetRandomValues,
   base64UrlEncode, base64UrlDecode,
@@ -55,11 +53,15 @@ export const PERSONA_ENROLL_DOMAIN = "lar-persona-enroll/v1" as const;
 export const PERSONA_GRANT_DOMAIN  = "lar-persona-grant/v1" as const;
 export const PERSONA_SEALED_DOMAIN = "lar-persona-sealed-grant/v1" as const;
 export const PERSONA_JOIN_DOMAIN   = "lar-persona-join/v1" as const;
-/** The HKDF `info` string — domain-separates THIS seal's key-derivation from every other X25519 use. */
-const HKDF_INFO = utf8Bytes("lar-persona-admit/v1/grant-seal");
+/**
+ * The HKDF `info` string — domain-separates THIS seal's key-derivation from every other X25519 use.
+ * `/v2` names the salt widening: the shared `sealed-box` primitive binds the pubkey PAIR ahead of the two
+ * challenges (a strict superset of the prior salt), so a v1 and a v2 peer derive different keys and fail closed
+ * rather than mis-open. The version carries that break in the open, never as a mystery.
+ */
+const HKDF_INFO = utf8Bytes("lar-persona-admit/v2/grant-seal");
 /** A nonce (challenge) rides 16 bytes; the AEAD nonce rides XChaCha's 24. */
 const CHALLENGE_LEN = 16;
-const AEAD_NONCE_LEN = 24;
 const NYM_RE = /^[0-9a-f]{64}$/;
 
 /** A signer over raw bytes → an ed25519 signature hex (the `ed25519SignerFromSeed` shape; the module holds no key). */
@@ -157,10 +159,13 @@ export interface SentGrantMemo {
   readonly grantSig:   string;
 }
 
-/** Derive the seal key from the ECDH shared secret, salted by both challenges (order fixed: B then A). */
-function deriveSealKey(shared: Uint8Array, nonceB: string, nonceA: string): Uint8Array {
-  const salt = new Uint8Array([...hexToBytes(nonceB), ...hexToBytes(nonceA)]);
-  return hkdf(sha256, shared, salt, HKDF_INFO, 32);
+/**
+ * The session challenges this seal salts with, order fixed (B then A) — appended after the pubkey pair the shared
+ * `sealed-box` primitive always binds. They pin the derivation to THIS enrollment, so even a repeated ephemeral key
+ * derives a fresh seal key.
+ */
+function grantSaltParts(nonceB: string, nonceA: string): readonly Uint8Array[] {
+  return [hexToBytes(nonceB), hexToBytes(nonceA)];
 }
 
 /**
@@ -199,20 +204,20 @@ export async function sealPersonaGrant(args: {
   const grantSig = await args.personaSigner(canonicalJsonBytes(transcript));
 
   // ECDH-seal to B's ephemeral pubkey with A's OWN fresh ephemeral (ephemeral↔ephemeral — no static A key rides).
-  const senderSecret = x25519.utils.randomSecretKey();
-  const senderEphemeralPubkey = hex(x25519.getPublicKey(senderSecret));
-  const shared = x25519.getSharedSecret(senderSecret, hexToBytes(offer.ephemeralPubkey));
-  const key = deriveSealKey(shared, offer.nonceB, nonceA);
-  const aeadNonceBytes = webGetRandomValues(new Uint8Array(AEAD_NONCE_LEN));
-  const ciphertext = xchacha20poly1305(key, aeadNonceBytes).encrypt(canonicalJsonBytes({ transcript, grantSig }));
+  const box = sealToRecipient({
+    recipientPub: hexToBytes(offer.ephemeralPubkey),
+    plaintext:    canonicalJsonBytes({ transcript, grantSig }),
+    info:         HKDF_INFO,
+    extraSalt:    grantSaltParts(offer.nonceB, nonceA),
+  });
 
   const sealed: SealedGrant = {
     kind: PERSONA_SEALED_DOMAIN,
-    senderEphemeralPubkey,
-    aeadNonce: hex(aeadNonceBytes),
+    senderEphemeralPubkey: hex(box.senderEphemeralPub),
+    aeadNonce: hex(box.aeadNonce),
     nonceA,
     expiry,
-    ciphertext: base64UrlEncode(ciphertext),   // base64url — the dense encoding that keeps the grant a single QR
+    ciphertext: base64UrlEncode(box.ciphertext),   // base64url — the dense encoding that keeps the grant a single QR
   };
   return { sealed, sent: { transcript, grantSig } };
 }
@@ -257,13 +262,20 @@ export async function openPersonaGrant(args: {
   // Complete the ECDH with B's on-device ephemeral secret + decrypt. A wrong key / tamper / a photographed QR
   // opened without the ephemeral secret all fail the AEAD here — the one gate a captured tabletop cannot pass.
   let body: { transcript: GrantTranscript; grantSig: string };
+  const DECRYPT_REFUSED = "decrypt-failed — the sealed grant did not open (wrong session, tampered, or a photograph without the ephemeral secret)";
   try {
-    const shared = x25519.getSharedSecret(secret.ephemeralSecret, hexToBytes(sealed.senderEphemeralPubkey));
-    const key = deriveSealKey(shared, secret.nonceB, sealed.nonceA);
-    const plaintext = xchacha20poly1305(key, hexToBytes(sealed.aeadNonce)).decrypt(base64UrlDecode(sealed.ciphertext));
+    const plaintext = openFromSender({
+      recipientSecret:    secret.ephemeralSecret,
+      senderEphemeralPub: hexToBytes(sealed.senderEphemeralPubkey),
+      aeadNonce:          hexToBytes(sealed.aeadNonce),
+      ciphertext:         base64UrlDecode(sealed.ciphertext),
+      info:               HKDF_INFO,
+      extraSalt:          grantSaltParts(secret.nonceB, sealed.nonceA),
+    });
+    if (!plaintext) return { ok: false, reason: DECRYPT_REFUSED };   // the box withheld — one reason for every cause
     body = JSON.parse(new TextDecoder().decode(plaintext)) as { transcript: GrantTranscript; grantSig: string };
   } catch {
-    return { ok: false, reason: "decrypt-failed — the sealed grant did not open (wrong session, tampered, or a photograph without the ephemeral secret)" };
+    return { ok: false, reason: DECRYPT_REFUSED };   // a malformed carriage draws the SAME refusal
   }
 
   const t = body?.transcript;

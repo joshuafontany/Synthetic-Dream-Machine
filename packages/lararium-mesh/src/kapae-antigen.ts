@@ -20,7 +20,8 @@
  */
 
 import * as ed25519 from "@noble/ed25519";
-import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
+import { hexToBytes } from "./crypto.js";
+import { quorumEntryBytes } from "./quorum-entry.js";
 
 /** The domain a Kapae-antigen entry signs over — a signature is meaningless without its domain. */
 export const KAPAE_ANTIGEN_DOMAIN = "lar-kapae-antigen/v1" as const;
@@ -70,15 +71,13 @@ export interface KahuCharterRoster {
   readonly charterEpochCid: string;
 }
 
-/** The canonical bytes an antigen entry signs over — everything but the signatures. Sorted-key stable. */
+/**
+ * The canonical bytes an antigen entry signs over — everything but the signatures. Sorted-key stable.
+ * Composes the shared quorum-entry image at the ANTIGEN domain; that domain keeps an antigen signature
+ * un-presentable on the members board (`quorum-entry.ts`).
+ */
 export function antigenEntryBytes(entry: Omit<KapaeAntigenEntry, "signatures">): Uint8Array {
-  return canonicalJsonBytes({
-    kind:            entry.kind,
-    nym:             entry.nym,
-    action:          entry.action,
-    version:         entry.version,
-    charterEpochCid: entry.charterEpochCid,
-  });
+  return quorumEntryBytes(entry);
 }
 
 /**

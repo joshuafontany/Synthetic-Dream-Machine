@@ -22,15 +22,17 @@
  */
 
 import { x25519 } from "@noble/curves/ed25519.js";
-import { xchacha20poly1305 } from "@noble/ciphers/chacha.js";
-import { hkdf } from "@noble/hashes/hkdf.js";
-import { sha256 } from "@noble/hashes/sha2.js";
-import { hex, hexToBytes, utf8Bytes, canonicalJsonBytes, webGetRandomValues, base64UrlEncode, base64UrlDecode } from "./crypto.js";
+import { hex, hexToBytes, utf8Bytes, canonicalJsonBytes, base64UrlEncode, base64UrlDecode } from "./crypto.js";
+import { sealToRecipient, openFromSender } from "./sealed-box.js";
 
 export const KEYRING_ENVELOPE_DOMAIN = "lar-keyring-envelope/v1" as const;
-/** The HKDF `info` — domain-separates THIS delivery's key-derivation from every other X25519 use. */
-const HKDF_INFO = utf8Bytes("lar-keyring-envelope/v1");
-const AEAD_NONCE_LEN = 24;
+/**
+ * The HKDF `info` — domain-separates THIS delivery's key-derivation from every other X25519 use, and above all from
+ * the persona-admit grant seal (both protocols run between the same device pair at admission, so one shared `info`
+ * would let their key material fuse). `/v2` names the move onto the shared `sealed-box` primitive, which salts with
+ * pubkey BYTES rather than hex strings — that also retires a hex-case hazard the string salt carried.
+ */
+const HKDF_INFO = utf8Bytes("lar-keyring-envelope/v2");
 
 /** One epoch's secret in the delivered set — the integer epoch + its 32-byte salt as hex. */
 export interface KeyringEntryWire {
@@ -49,30 +51,22 @@ export interface KeyringEnvelope {
   readonly ciphertext:            string;
 }
 
-/** Derive the seal key from the ECDH shared secret, salted by BOTH pubkeys (bind the derivation to the pair). */
-function deriveKey(shared: Uint8Array, senderPubHex: string, recipientPubHex: string): Uint8Array {
-  const salt = new Uint8Array([...hexToBytes(senderPubHex), ...hexToBytes(recipientPubHex)]);
-  return hkdf(sha256, shared, salt, HKDF_INFO, 32);
-}
-
 /**
  * Seal the `{epoch → secret}` keyring to a joinee's X25519 recipient pubkey — an ephemeral-sender sealed box.
  * Only the holder of the matching recipient SECRET opens it; a photograph / a non-recipient reads nothing.
+ * THROWS on a malformed recipient (the shared primitive's law) — sealing to nobody must never read as delivery.
  */
 export function sealKeyringEnvelope(entries: readonly KeyringEntryWire[], recipientX25519Pubkey: string): KeyringEnvelope {
-  const senderSecret = x25519.utils.randomSecretKey();
-  const senderEphemeralPubkey = hex(x25519.getPublicKey(senderSecret));
-  const shared = x25519.getSharedSecret(senderSecret, hexToBytes(recipientX25519Pubkey));
-  const key = deriveKey(shared, senderEphemeralPubkey, recipientX25519Pubkey.toLowerCase());
-  const aeadNonceBytes = webGetRandomValues(new Uint8Array(AEAD_NONCE_LEN));
-  const ciphertext = xchacha20poly1305(key, aeadNonceBytes).encrypt(
-    canonicalJsonBytes({ entries: entries.map((e) => ({ epoch: e.epoch, secretHex: e.secretHex.toLowerCase() })) }),
-  );
+  const box = sealToRecipient({
+    recipientPub: hexToBytes(recipientX25519Pubkey),
+    plaintext:    canonicalJsonBytes({ entries: entries.map((e) => ({ epoch: e.epoch, secretHex: e.secretHex.toLowerCase() })) }),
+    info:         HKDF_INFO,
+  });
   return {
     kind: KEYRING_ENVELOPE_DOMAIN,
-    senderEphemeralPubkey,
-    aeadNonce: hex(aeadNonceBytes),
-    ciphertext: base64UrlEncode(ciphertext),
+    senderEphemeralPubkey: hex(box.senderEphemeralPub),
+    aeadNonce: hex(box.aeadNonce),
+    ciphertext: base64UrlEncode(box.ciphertext),
   };
 }
 
@@ -82,11 +76,17 @@ export function sealKeyringEnvelope(entries: readonly KeyringEntryWire[], recipi
  */
 export function openKeyringEnvelope(envelope: KeyringEnvelope, recipientX25519Secret: Uint8Array): KeyringEntryWire[] | null {
   if (envelope?.kind !== KEYRING_ENVELOPE_DOMAIN) return null;
-  const recipientPub = hex(x25519.getPublicKey(recipientX25519Secret));
   try {
-    const shared = x25519.getSharedSecret(recipientX25519Secret, hexToBytes(envelope.senderEphemeralPubkey));
-    const key = deriveKey(shared, envelope.senderEphemeralPubkey, recipientPub);
-    const plaintext = xchacha20poly1305(key, hexToBytes(envelope.aeadNonce)).decrypt(base64UrlDecode(envelope.ciphertext));
+    // The shared primitive salts with pubkey BYTES and derives the recipient pubkey from the secret itself, so a
+    // hex-case difference in the carried sender key can no longer reach the derivation.
+    const plaintext = openFromSender({
+      recipientSecret:    recipientX25519Secret,
+      senderEphemeralPub: hexToBytes(envelope.senderEphemeralPubkey),
+      aeadNonce:          hexToBytes(envelope.aeadNonce),
+      ciphertext:         base64UrlDecode(envelope.ciphertext),
+      info:               HKDF_INFO,
+    });
+    if (!plaintext) return null;   // wrong recipient / tampered / no secret → the keyring DID NOT ARRIVE
     const parsed = JSON.parse(new TextDecoder().decode(plaintext)) as { entries?: unknown };
     if (!Array.isArray(parsed.entries)) return null;
     const out: KeyringEntryWire[] = [];

@@ -51,6 +51,24 @@ describe("keyring-envelope — the sealed delivery round-trip", () => {
       rmSync(founderDir, { recursive: true, force: true });
     }
   });
+
+  test("an UPPERCASE-hex carriage still opens — the salt binds pubkey BYTES, so hex case cannot reach the derivation", () => {
+    const joinee = mintKeyringRecipient();
+    const entries = [{ epoch: 0, secretHex: "ab".repeat(32) }];
+    const envelope = sealKeyringEnvelope(entries, joinee.recipientPubkey.toUpperCase());
+
+    // The sender key carried back UPPERCASED — a hex-string salt would derive a different key and withhold here.
+    const shouted = { ...envelope, senderEphemeralPubkey: envelope.senderEphemeralPubkey.toUpperCase() };
+    const opened = openKeyringEnvelope(shouted, joinee.recipientSecret);
+    expect(opened).not.toBeNull();
+    expect(opened![0]!.secretHex).toBe(entries[0]!.secretHex);
+  });
+
+  test("sealing to a MALFORMED recipient THROWS — addressing nobody must never read as delivery", () => {
+    const entries = [{ epoch: 0, secretHex: "cd".repeat(32) }];
+    expect(() => sealKeyringEnvelope(entries, "00")).toThrow();                 // too short
+    expect(() => sealKeyringEnvelope(entries, "ab".repeat(40))).toThrow();      // too long
+  });
 });
 
 describe("keyring-delivery — CARRY ⊥ READ end-to-end", () => {
