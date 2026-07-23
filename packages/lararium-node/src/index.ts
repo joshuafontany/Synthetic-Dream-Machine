@@ -279,6 +279,10 @@ export type { EmbedCap, EmbedResult, EmbedCapOptions } from "./embed-cap.js";
 export { makeSourceCapture } from "./capture-source.js";
 export type { SourceCapture, SourceCaptureRequest, SourceCaptureResult, SourceCaptureSpawn } from "./capture-source.js";
 export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-channel.js";
+// The AUTHENTICATED live-WS membership transport — Ed25519 proof-of-possession binds each envelope's `from` to a
+// proven key (no impersonation of the cas-wire member gate), reusing the DaemonAuthGate's own challenge/verify.
+export { startAuthenticatedMembershipRelay, AuthenticatedWSMembershipChannel } from "./authenticated-membership-relay.js";
+export type { AuthenticatedMembershipRelay } from "./authenticated-membership-relay.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
 export { FileMembershipChannel } from "./file-membership-channel.js";
 export { makeFormPalace } from "./sensorium.js";
