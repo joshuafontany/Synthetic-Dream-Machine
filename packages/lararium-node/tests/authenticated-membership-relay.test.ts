@@ -15,8 +15,10 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import * as ed from "@noble/ed25519";
+import WS, { type RawData } from "ws";
 import {
   DeterministicFederationGate, openBodyOnCas, utf8Bytes, hex,
+  authProofBytes, ed25519SignerFromSeed,
   type AntigenRing, type NexusMembership, type MembershipChannel, type MembershipEnvelope,
 } from "@lararium/mesh";
 import { standNexusKeyring } from "../src/nexus-convergence-secret-store.js";
@@ -128,5 +130,86 @@ describe("authenticated-membership-relay — cas-wire over a live authenticated 
     const ch = await AuthenticatedWSMembershipChannel.connect(`ws://127.0.0.1:${relay.port}`, goodSeed);
     expect(ch).toBeInstanceOf(AuthenticatedWSMembershipChannel);
     ch.close();
+  }, 15_000);
+
+  test("a STALE proof is refused — the relay leg enforces the same freshness window the daemon leg does", async () => {
+    const gateSeed = new Uint8Array(32).fill(11);
+    relay = await startAuthenticatedMembershipRelay(gateSeed);
+    const peerSeed = new Uint8Array(32).fill(12);
+    const peerPubKey = await pubOf(peerSeed);
+
+    // Hand-drive the handshake so the proof can carry a `ts` well outside the freshness window.
+    const closed = await new Promise<number>((resolve) => {
+      const raw = new WS(`ws://127.0.0.1:${relay!.port}`);
+      raw.on("message", (data: RawData) => {
+        const frame = JSON.parse(data.toString()) as { t: string; nonce?: string; gatePubKey?: string };
+        if (frame.t !== "challenge") return;
+        void (async () => {
+          const ts = new Date(Date.now() - 10 * 60_000).toISOString();   // ten minutes stale
+          const sig = await ed25519SignerFromSeed(peerSeed)(
+            authProofBytes({ nonce: frame.nonce!, gatePubKey: frame.gatePubKey!, peerPubKey, aud: "lar-membership-relay/v1", ts }),
+          );
+          raw.send(JSON.stringify({ t: "auth", peerPubKey, ts, sig }));
+        })();
+      });
+      raw.on("close", (code: number) => resolve(code));
+    });
+    expect(closed).toBe(4003);   // a validly-SIGNED but stale proof still fails closed
+  }, 15_000);
+
+  test("concurrent auth frames on ONE socket cannot race the binding — the attempt latches once", async () => {
+    const gateSeed = new Uint8Array(32).fill(13);
+    relay = await startAuthenticatedMembershipRelay(gateSeed);
+    const seedA = new Uint8Array(32).fill(14);
+    const seedB = new Uint8Array(32).fill(15);
+    const keyA = await pubOf(seedA);
+    const keyB = await pubOf(seedB);
+
+    // An OBSERVER peer reads the stamped `from` — the relay broadcasts to other clients, never back to the sender.
+    const observerSeed = new Uint8Array(32).fill(16);
+    const observerKey = await pubOf(observerSeed);
+    const observer = await AuthenticatedWSMembershipChannel.connect(`ws://127.0.0.1:${relay.port}`, observerSeed);
+
+    // One socket sends TWO valid proofs (different keys) back to back. Only the FIRST may bind.
+    const raw = new WS(`ws://127.0.0.1:${relay.port}`);
+    try {
+      await new Promise<void>((resolve) => {
+        raw.on("message", (data: RawData) => {
+          const frame = JSON.parse(data.toString()) as { t: string; nonce?: string; gatePubKey?: string };
+          if (frame.t === "challenge") {
+            void (async () => {
+              // Pre-sign BOTH proofs, then send them in the SAME tick — awaiting between sends would let the first
+              // verify finish and close the window, and the race would never surface.
+              const frames: string[] = [];
+              for (const [seed, key] of [[seedA, keyA], [seedB, keyB]] as const) {
+                const ts = new Date().toISOString();
+                const sig = await ed25519SignerFromSeed(seed)(
+                  authProofBytes({ nonce: frame.nonce!, gatePubKey: frame.gatePubKey!, peerPubKey: key, aud: "lar-membership-relay/v1", ts }),
+                );
+                frames.push(JSON.stringify({ t: "auth", peerPubKey: key, ts, sig }));
+              }
+              for (const f of frames) raw.send(f);
+            })();
+          } else if (frame.t === "auth-ok") {
+            // Probe only AFTER both proofs have had time to verify — otherwise the first binding is read before a
+            // racing second one could overwrite it, and the check would pass even with the latch removed.
+            setTimeout(() => {
+              raw.send(JSON.stringify({ t: "env", env: { kind: "probe", from: "forged", to: observerKey, payload: {} } }));
+              resolve();
+            }, 250);
+          }
+        });
+        raw.on("error", () => resolve());
+      });
+
+      let seen: MembershipEnvelope | undefined;
+      for (let i = 0; i < 40 && !seen; i++) { const r = await observer.poll(observerKey); if (r.length) seen = r[0]!; else await sleep(10); }
+      // Exactly one auth attempt bound, and it was the FIRST — the second proof never re-bound the socket.
+      expect(seen?.from).toBe(keyA);
+      expect(seen?.from).not.toBe(keyB);
+    } finally {
+      raw.close();
+      observer.close();
+    }
   }, 15_000);
 });

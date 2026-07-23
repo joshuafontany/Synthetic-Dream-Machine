@@ -62,6 +62,10 @@ export function startAuthenticatedMembershipRelay(gateSeed: Uint8Array, port = 0
     return await new Promise<AuthenticatedMembershipRelay>((resolve) => {
       const wss = new WebSocketServer({ port });
       const proven = new WeakMap<WebSocket, string>();   // socket → its PROVEN verifying key (the only `from` it may send)
+      // A socket latches its auth attempt SYNCHRONOUSLY. `proven` only fills after an async verify, so gating on it
+      // alone would let concurrent `auth` frames all pass and the last-verified proof win the binding. One attempt
+      // per socket, decided once — a peer that wants a different key opens a different connection.
+      const authLatched = new WeakSet<WebSocket>();
 
       wss.on("connection", (sock: WebSocket) => {
         const nonce = hex(webGetRandomValues(new Uint8Array(32)));
@@ -72,10 +76,15 @@ export function startAuthenticatedMembershipRelay(gateSeed: Uint8Array, port = 0
           let frame: RelayFrame;
           try { frame = JSON.parse(asText(data)) as RelayFrame; } catch { return; }
 
-          if (frame.t === "auth" && !proven.has(sock)) {
+          if (frame.t === "auth" && !authLatched.has(sock)) {
+            authLatched.add(sock);   // latch BEFORE the await — a second auth frame on this socket never races in
             void (async () => {
+              // `now` rides REQUIRED here: it enforces the same freshness window the daemon leg enforces, so a proof
+              // harvested off one connection cannot be presented later on another. The per-socket nonce already
+              // bounds replay within a connection; the window bounds it ACROSS connections too.
               const v = await verifyAuthProof({
                 nonce, gatePubKey, peerPubKey: frame.peerPubKey, aud: MEMBERSHIP_AUD, ts: frame.ts, sig: frame.sig,
+                now: Date.now(),
               });
               if (!v.ok) { try { sock.close(4003, v.reason ?? "auth failed"); } catch { /* closed */ } return; }
               proven.set(sock, frame.peerPubKey.toLowerCase());   // this socket speaks ONLY as this proven key
