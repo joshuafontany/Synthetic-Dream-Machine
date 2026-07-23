@@ -107,7 +107,13 @@ describe("pono grammar boundary", () => {
       // It tests parser RESILIENCE, never blesses the grammar surface as canonical. (Operator: redirect
       // if you'd rather route recovery through a blessed surface.)
       .filter((f) => !f.endsWith("meme-resilient.test.ts"))
-      .filter((f) => /src\/meme-ast|collectEvents|buildMemeAst|parseMemeText/.test(readFileSync(f, "utf8")))
+      .filter((f) => {
+        // The boundary guards the RUNTIME grammar surface — reaching past a blessed entry point to
+        // drive the compile layer directly. A `import type` of a rule SHAPE binds no runtime surface
+        // and blesses nothing, so it crosses no boundary; a value import or a direct call does.
+        const src = readFileSync(f, "utf8").replace(/^\s*import\s+type\s+[^;]*?;$/gm, "");
+        return /src\/meme-ast|collectEvents|buildMemeAst|parseMemeText/.test(src);
+      })
       .map((f) => relative(ROOT, f));
 
     expect(offenders).toEqual([]);

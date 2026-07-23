@@ -41,6 +41,9 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
     const names = palaceOrgans().map((o) => o.name);
     expect(names).toEqual([
       "contentpalace", "structurepalace", "formpalace", "persistencepalace",
+      // The memory sensorium's IN-TREE mempalace cap store — a sovereign plane like its peers, standing
+      // inside the lararium's own tree. It carries the guest's NAME and none of its location.
+      "mempalace",
       "meshpalace",
       "mesh:who", "mesh:who:persistence",
       "mesh:authority", "mesh:authority:persistence",
@@ -54,8 +57,11 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
   test("the GUEST ~/.mempalace never enters the sovereign registry (the comparator ruling)", () => {
     // `wake --init` stands ONLY what the lararium owns. Standing the guest from the boot wrote the
     // very comparator the RUN arc measures against (RUN-ARC.md:14). It rides its own lane now.
-    expect(palaceOrgans().map((o) => o.name)).not.toContain("mempalace");
+    // The ruling discriminates by LOCATION, never by name: the sovereign registry carries an in-tree
+    // organ that shares the guest's name, so asserting on the name alone would read the wrong thing.
+    // Every sovereign dir sits inside the lararium's own tree; the guest's does not.
     expect(palaceOrgans().map((o) => o.dir)).not.toContain(larMempalaceDir());
+    for (const organ of palaceOrgans()) expect(organ.dir.startsWith(home)).toBe(true);
 
     // …and the guest lane still enumerates it, so `lares mempalace` can raise it deliberately.
     const guest = guestMempalaceOrgan();
@@ -129,10 +135,12 @@ describe("setupPalaceOrgans — wire-once / detect-existing idempotency", () => 
       expect(step.ran).toBe(true);
       expect(existsSync(palaceOrgans().find((o) => o.name === name)!.dir)).toBe(true);
     }
-    // THE COMPARATOR RULING (RUN-ARC.md:14): the boot never writes the guest. No step names it, and
-    // ~/.mempalace stays untouched on disk — no config, no dir conjured by standing the sensorium.
-    expect(first.find((s) => s.step === "mempalace")).toBeUndefined();
+    // THE COMPARATOR RULING (RUN-ARC.md:14): the boot never writes the GUEST — the ruling names a
+    // LOCATION, never a name. A sovereign in-tree organ shares the guest's name and stands freely; the
+    // guest's own dir stays untouched on disk, no config and no dir conjured by standing the sensorium.
     expect(existsSync(join(mempalace, "config.json"))).toBe(false);
+    expect(existsSync(mempalace) && readdirSync(mempalace).length > 0).toBe(false);
+    expect(palaceOrgans().find((o) => o.name === "mempalace")!.dir.startsWith(home)).toBe(true);
     // the sensorium manifests stamped on the FIRST pass (memory + the four mesh + the three memetic-wikitext)
     for (const step of [
       "memory:manifest", "mesh:manifest", "mesh:who:manifest", "mesh:authority:manifest", "mesh:flow:manifest",

@@ -7,7 +7,7 @@
 import { describe, expect, it, afterEach } from "vitest";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { sessionEphemeral, scratchRoots, transcriptCwd, partitionEphemeral } from "../src/ephemeral.js";
 
 const cleanups: string[] = [];
@@ -54,10 +54,26 @@ describe("grain (a) — derived: the recorded cwd under a scratch root", () => {
     expect(sessionEphemeral(t).ephemeral).toBe(false);
   });
 
-  it("scratchRoots carries tmpdir + /tmp + the corpus scratch (and LAR_ROOT only when set)", () => {
+  it("scratchRoots carries tmpdir + /tmp + the sensorium scratch (and LAR_ROOT only when set)", () => {
+    // The sensorium scratch sits in the CACHE home — ephemeral by siting, safe to sweep — so a session
+    // recorded there reads ephemeral without any marker.
     const roots = scratchRoots();
     expect(roots).toContain("/tmp");
-    expect(roots.some((r) => r.endsWith(".corpus"))).toBe(true);
+    expect(roots.some((r) => r.endsWith(join("scratch", "sensoriums")))).toBe(true);
+  });
+
+  it("a LAR_ROOT sandbox joins the scratch roots only while it is set", () => {
+    const prior = process.env["LAR_ROOT"];
+    try {
+      delete process.env["LAR_ROOT"];
+      const without = scratchRoots();
+      process.env["LAR_ROOT"] = "/tmp/lar-sandbox-probe";
+      const withRoot = scratchRoots();
+      expect(withRoot.length).toBeGreaterThanOrEqual(without.length);
+      expect(withRoot).toContain(resolve("/tmp/lar-sandbox-probe"));
+    } finally {
+      if (prior === undefined) delete process.env["LAR_ROOT"]; else process.env["LAR_ROOT"] = prior;
+    }
   });
 });
 

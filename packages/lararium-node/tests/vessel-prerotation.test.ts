@@ -7,19 +7,40 @@
  * key that has no KEL never fakes one (an already-signed key can't gain the guarantee).
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtempSync, readdirSync, readFileSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir } from "node:os";
 import { createHash } from "node:crypto";
 import { generateOrLoadVesselIdentity } from "../src/node-vessel-identity.js";
+import { larIdentityDir } from "../src/vessel-paths.js";
 
 const freshDataDir = (): string => join(mkdtempSync(join(tmpdir(), "lares-prerot-")), ".lararium");
-const idDirOf = (dataDir: string): string => join(dirname(dataDir), ".lararium-identity");
+/**
+ * The identity sits at `<state>/identity` under the XDG state home — BESIDE the wiped `<data>/vessel`,
+ * never inside it, so a substrate verb reforges the CRDT store while the sovereign root survives. The
+ * dir therefore answers to `larIdentityDir()`, never to the data dir handed in.
+ */
+const idDirOf = (_dataDir: string): string => larIdentityDir();
 const find = (idDir: string, prefix: string): string | undefined =>
   readdirSync(idDir).find((f) => f.startsWith(prefix));
 
 describe("vessel-identity pre-rotation commitment (KERI n hook)", () => {
+  // `LAR_ROOT` reroots every lares home at once, so minting a key here never reaches the operator's own
+  // identity — the test writes and wipes an isolated state home of its own.
+  let larRoot: string;
+  let priorRoot: string | undefined;
+  beforeEach(() => {
+    priorRoot = process.env["LAR_ROOT"];
+    larRoot = mkdtempSync(join(tmpdir(), "lares-prerot-root-"));
+    process.env["LAR_ROOT"] = larRoot;
+  });
+  afterEach(() => {
+    if (priorRoot === undefined) delete process.env["LAR_ROOT"];
+    else process.env["LAR_ROOT"] = priorRoot;
+    rmSync(larRoot, { recursive: true, force: true });
+  });
+
   it("commits the next-key digest at GENERATION (before first use)", async () => {
     const dataDir = freshDataDir();
     try {

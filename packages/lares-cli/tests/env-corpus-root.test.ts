@@ -10,7 +10,7 @@ import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { join } from "node:path";
 import {
   resolveLarRoot, repoPresetEnabled,
-  larRoot, larBagsDir, larWikisDir, larGenesisDir, larCasDir, larBootstrapPath,
+  larRoot, larBagsDir, larWikisDir, larGenesisDir, larCasDir, larBootstrapPath, larDataDir,
 } from "../src/env.js";
 
 const REPO = "/tmp/fake-repo";
@@ -49,14 +49,24 @@ describe("composable resource caps — independent siting off the corpus root", 
   beforeEach(() => { for (const k of KEYS) saved[k] = process.env[k]; process.env["LAR_ROOT"] = "/corpus"; });
   afterEach(() => { for (const k of KEYS) { if (saved[k] === undefined) delete process.env[k]; else process.env[k] = saved[k]!; } });
 
-  test("each resource derives off the corpus root when unset", () => {
+  test("each CORPUS resource derives off the corpus root when unset", () => {
     for (const k of ["LAR_BAGS", "LAR_WIKIS", "LAR_GENESIS", "LAR_CAS"]) delete process.env[k];
     expect(larRoot()).toBe("/corpus");
     expect(larBagsDir()).toBe(join("/corpus", "bags"));
     expect(larWikisDir()).toBe(join("/corpus", "wikis"));
     expect(larGenesisDir()).toBe(join("/corpus", "genesis"));
-    expect(larCasDir()).toBe(join("/corpus", "cas"));
     expect(larBootstrapPath()).toBe(join("/corpus", "genesis", "social-bootstrap.json"));
+  });
+
+  test("the CAS roots off the VESSEL-STATE home, never the corpus — it carries state, not corpus", () => {
+    // The CAS holds runtime vessel state whose blobs rebuild from the `bags/` carriers at each seed, so
+    // it stays OUT of the tracked tree that `bags`/`wikis`/`genesis` sit in. A corpus root must not drag
+    // it along; only its own override moves it.
+    for (const k of ["LAR_BAGS", "LAR_WIKIS", "LAR_GENESIS", "LAR_CAS"]) delete process.env[k];
+    expect(larCasDir()).toBe(join(larDataDir(), "cas"));
+    // It sits BESIDE the store under the vessel-state home, never as a sibling of bags/wikis/genesis.
+    expect(larCasDir()).not.toBe(join("/corpus", "cas"));
+    expect(larCasDir().startsWith(larDataDir())).toBe(true);
   });
 
   test("each resource overrides INDEPENDENTLY on its own env var", () => {

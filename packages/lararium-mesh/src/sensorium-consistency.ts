@@ -465,7 +465,11 @@ function supOverPairs(
     }
   }
 
-  return { radius, vacuous: !anyBinding, pairs, bindingLoci: [...bindingLoci] };
+  // The binding loci name a SET — WHERE the obstruction binds, never an order it bound in. Spilling the
+  // set raw would carry the pair-iteration order into the reading, so two faces that find the SAME loci
+  // report different arrays and compare unequal. Sorting names one canonical order, so a locus reading
+  // stays comparable across every face that computes it.
+  return { radius, vacuous: !anyBinding, pairs, bindingLoci: [...bindingLoci].sort() };
 }
 
 /**

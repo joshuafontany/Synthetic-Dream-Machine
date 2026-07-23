@@ -48,7 +48,10 @@ function randManifest(u: () => number, sensoriumDir: string) {
     const inside = u() < 0.5;
     caps[name] = {
       absDir: inside ? join(sensoriumDir, name) : join(tmpdir(), `outside-${name}-${Math.floor(u() * 1e6)}`),
-      engine: ["mempalace", "structurepalace", "formpalace", ""][Math.floor(u() * 4)]!,
+      // Every engine names a real one: the manifest contract requires a non-empty engine, so an empty
+      // one describes a manifest that can be built but never read back — outside the well-formed space
+      // this generator explores.
+      engine: ["mempalace", "structurepalace", "formpalace", "persistencepalace"][Math.floor(u() * 4)]!,
       variance,
     };
     wanted[name] = variance;

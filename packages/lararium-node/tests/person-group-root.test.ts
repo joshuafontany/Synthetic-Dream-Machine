@@ -8,7 +8,7 @@
  * surfaces founder-only and throws when absent.
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtempSync, readdirSync, rmSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir } from "node:os";
@@ -17,13 +17,30 @@ import {
   loadPersonaGroupRootSeed,
   generateOrLoadVesselIdentity,
 } from "../src/node-vessel-identity.js";
+import { larIdentityDir } from "../src/vessel-paths.js";
 
 const freshDataDir = (): string => join(mkdtempSync(join(tmpdir(), "lares-pgroot-")), ".lararium");
-const idDirOf = (dataDir: string): string => join(dirname(dataDir), ".lararium-identity");
+/** The identity dir answers to `larIdentityDir()` — `<state>/identity`, beside the wiped `<data>/vessel`. */
+const idDirOf = (_dataDir: string): string => larIdentityDir();
 const find = (idDir: string, prefix: string): string | undefined =>
   readdirSync(idDir).find((f) => f.startsWith(prefix));
 
 describe("PersonaGroup-root custody (operator-root capability — genesis Phase 0.2)", () => {
+  // `LAR_ROOT` reroots every lares home, so a mint here never reads or writes the operator's OWN root
+  // key — a founder-only capability must never be touched by a test run.
+  let larRoot: string;
+  let priorRoot: string | undefined;
+  beforeEach(() => {
+    priorRoot = process.env["LAR_ROOT"];
+    larRoot = mkdtempSync(join(tmpdir(), "lares-pgroot-root-"));
+    process.env["LAR_ROOT"] = larRoot;
+  });
+  afterEach(() => {
+    if (priorRoot === undefined) delete process.env["LAR_ROOT"];
+    else process.env["LAR_ROOT"] = priorRoot;
+    rmSync(larRoot, { recursive: true, force: true });
+  });
+
   it("mints a fresh root into the wipe-safe sibling dir, NOT the .lararium wipe zone", async () => {
     const dataDir = freshDataDir();
     try {
