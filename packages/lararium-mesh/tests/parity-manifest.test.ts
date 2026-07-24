@@ -70,6 +70,11 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "portable declarations for a nameless #has cap-stack (order evidence + apertures), platform-blind — node derives one from a rooted manifest, browser/TW5 carry one beside in-memory caps. A TS-side contract shape, no numeric py twin planned.",
   },
   {
+    ts: "sensorium-lifecycle.ts", py: null, status: "ts-concept-witness",
+    fixtures: [],
+    note: "the sensorium lifecycle-state reducer (pioneer→hardening→durable→tombstone): deriveLifecycle (lossless reader-default) + nextLifecycle (pure survivor-age transition) — platform-blind state LOGIC, not numerics; the reconciler runs it node-side over manifests, the RUN never recomputes it, so no py twin is planned.",
+  },
+  {
     ts: "sensorium-fusion.ts", py: "sensorium_fusion.py", status: "witnessed",
     fixtures: ["fixtures/sensorium-fusion-parity.json"],
     note: "the H1 gate over the agreement nerve; py twin computes dimH1/dimH0/R*_sem + the exact H0 consensus, TS asserts (sensorium_fusion.py fixture regenerates; the Chebyshev diffusion dial stays TS-side telemetry around the same P_ker target).",
