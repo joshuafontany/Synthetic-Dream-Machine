@@ -143,7 +143,17 @@ const MANIFEST: readonly ParityEntry[] = [
   {
     ts: "te-hodge.ts", py: null, status: "ts-concept-witness",
     fixtures: [],
-    note: "the coupling plane's own co-consistency — the Helmholtz-Hodge decomposition of the TE flow, read for its circulation (the irreducible coupling). The cohomology rides the TS hull (browser-carried), so no py twin is planned; witnessed in te-hodge.test.ts.",
+    note: "the coupling plane's own co-consistency — the Helmholtz-Hodge decomposition of the TE flow, read for its circulation (the irreducible coupling), plus the incomplete-graph HodgeRank (genuine harmonic H¹ via CG on L₀ + the triangle up-Laplacian). The cohomology rides the TS hull (browser-carried), so no py twin is planned; witnessed in te-hodge.test.ts.",
+  },
+  {
+    ts: "rank-te.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the ordinal/symbolic transfer-entropy escalation (Bandt-Pompe patterns + Staniek-Lehnert symbolic TE) the linearity-gate routes to when the Gaussian read under-reads a nonlinear coupling; sibling of gaussian-cmi/linearity-gate, so a py/R symbolic-TE twin is owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
+  },
+  {
+    ts: "rank-consensus.ts", py: null, status: "ts-concept-witness",
+    fixtures: [],
+    note: "pure combinatorial rank-aggregation (Borda + Kemeny/Kendall-tau median over the five 0-20 ladders) — a hull-native primitive like numerics.ts; no offline-RUN compute, so no py twin is planned.",
   },
   {
     ts: "transfer-entropy.ts", py: "coupling.R", status: "owed-fixture",
@@ -199,7 +209,7 @@ const MANIFEST: readonly ParityEntry[] = [
 
 /** The numerics name-pattern the census sweeps — a new organ matching this MUST register above. */
 const NUMERICS_PATTERN =
-  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics)/;
+  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics|rank-te|rank-consensus)/;
 
 describe("the TS↔py parity manifest (the L4 gate)", () => {
   test("CENSUS — every numerics module in mesh/src registers exactly once", () => {
