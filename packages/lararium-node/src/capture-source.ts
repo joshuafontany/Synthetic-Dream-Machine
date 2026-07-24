@@ -83,6 +83,10 @@ export interface SourceCapture {
    *  report as word indices into the reconstructed stream; `spectral` switches to the embedding-geometry
    *  surface; `halves` sets the Foote kernel widths. Rides the same serialized pipe. */
   analyze(request?: { spectral?: boolean; halves?: string; sample?: number }): Promise<Record<string, unknown>>;
+  /** The RHYTHM plane — per-signal multi-scale phase/amplitude decomposition (rhythm_phase.phase_encode) over
+   *  an N-signal `rows` matrix → a JSON-safe summary per signal (n, band scales, the dominant band). Stateless
+   *  matrix→verdict; the full per-position encoding stays py-side. Rides the serialized pipe. */
+  phase(request?: { rows?: number[][]; names?: string[] }): Promise<Record<string, unknown>>;
   /** The R effective-TE coupling reference (coupling.R RTransferEntropy::calc_ete) over an N-signal `rows`
    *  matrix → the directional who-leads-whom edges. The py/R twin of `ki`; stateless matrix→verdict, behind
    *  the causal-island boundary (graceful coupling-skipped when R is absent). Rides the serialized pipe. */
@@ -145,6 +149,8 @@ export function makeSourceCapture(
     // DETECT-ONLY change-point analysis over the holder's content stream — reuses the holder's ONE content
     // handle (the serve-op passes it into sense_analyze.detect); read-only, mutates nothing. Rides the pipe.
     analyze: async (request) => await p.send("analyze", { ...(request ?? {}) }) as Record<string, unknown>,
+    // The RHYTHM plane — rhythm_phase.phase_encode over the passed signal matrix (a JSON-safe summary rides back).
+    phase: async (request) => await p.send("phase", { ...(request ?? {}) }) as Record<string, unknown>,
 
     // The R effective-TE coupling reference (coupling.R) over the passed signal matrix — the py/R twin of
     // ki. Stateless (couples `rows`, not the holder's stores); the serve-op shells to Rscript. Rides the pipe.

@@ -391,6 +391,30 @@ class CaptureSessionServer:
             seed=int(req.get("seed", 1)), alpha=float(req.get("alpha", 0.05)),
         )
 
+    def phase(self, req: dict) -> dict:
+        """The RHYTHM plane — decouple each signal into MODWT detail bands and read its per-position
+        phase/amplitude/lock (rhythm_phase.phase_encode) over an N-signal `rows` matrix (rows=time,
+        cols=signals). STATELESS — it reads the passed matrix, never the holder's stores. The full
+        per-position encoding array stays py-side (too bulky for the wire); the wire carries a JSON-safe
+        SUMMARY per signal (n, the 2^j band scales, the dominant band the signal most carries)."""
+        import numpy as np
+        from rhythm_phase import phase_encode
+        M = np.asarray(req.get("rows") or [], dtype=float)
+        if M.ndim == 1:
+            M = M.reshape(-1, 1)
+        ncol = int(M.shape[1]) if M.ndim == 2 else 0
+        raw_names = req.get("names")
+        labels = list(raw_names) if raw_names and len(raw_names) == ncol else [f"s{i}" for i in range(ncol)]
+        signals = []
+        for i in range(ncol):
+            enc = phase_encode(M[:, i])
+            row = {"name": labels[i], "n": int(enc["n"]),
+                   "scales": [int(s) for s in enc["scales"]], "dominant": enc["dominant"]}
+            if enc.get("note"):
+                row["note"] = enc["note"]
+            signals.append(row)
+        return {"signals": signals, "n_signals": ncol}
+
     def analyze(self, req: dict) -> dict:
         """DETECT-ONLY change-point analysis over THIS holder's poured content stream — the isomorphic
         `sense_analyze` instrument run through the holder that owns the store, so the compute REUSES the ONE
@@ -518,6 +542,7 @@ def _serve(sensorium_root: str) -> None:
             "refresh": server.refresh,   # RE-DERIVE the whole derived layer (rejim · mempalace · worldline)
             "read_rejim": server.read_rejim,       # read the landed rejim geology — the plane made askable
             "analyze": server.analyze,             # DETECT-ONLY change-points over the holder's content stream
+            "phase": server.phase,                 # the RHYTHM plane — per-position phase/amplitude decomposition (rhythm_phase)
             "couple_r": server.couple_r,           # the R effective-TE coupling reference (coupling.R) — py/R twin of ki
             "forecast": server.forecast,           # the R early-warning plane (ews.R) — critical-slowing-down forecast
             "status": server.status,               # the taxonomy over the holder's content store

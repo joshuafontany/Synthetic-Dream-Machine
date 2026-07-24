@@ -27,7 +27,7 @@ from sensorium import sensorium_paths, read_stream_manifest, sensorium_dir, deri
 
 # The lifecycle-floor verbs the MCP surface mirrors from the `lares` CLI. Each name reads identically on
 # both surfaces (the isomorphism contract); a parity test asserts the two sets agree.
-LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze", "ki", "li", "jing", "couple_r", "forecast", "mismatch")
+LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "un_kapae", "rejim", "analyze", "ki", "li", "jing", "couple_r", "forecast", "mismatch", "flow")
 
 # The per-plane QUERY DOOR verb — read-only cross-plane interrogation of a 3-plane test-bed sensorium
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
@@ -78,6 +78,7 @@ VERB_SEATS = {
     "couple_r": (True, False),          # the R effective-TE coupling reference (coupling.R) — py/R compute, read-only → HOTL
     "forecast": (True, False),          # the R early-warning plane (ews.R) — critical-slowing-down forecast, read-only → HOTL
     "mismatch": (True, False),          # the ki↔R coupling comparator — read-only, TS-hull ⋈ R diff → HOTL
+    "flow": (True, False),              # the pet-named composed cap-stack runner — read-only compute, routed → HOTL
     "wiki": (True, False),              # switcher (switch/hold/release/active) — reversible, low-trust, LOCAL residency → HOTL
     # The vault seal-lifecycle tools — a status READ rides HOTL; every MUTATION of the sovereign at-rest
     # seal crosses a trust boundary (it touches identity secret material), so it seats HITL.
@@ -484,6 +485,14 @@ class LaresCoordinator:
         raise RuntimeError("mismatch: the ki↔R comparator is TS-orchestrated (the TS-hull coupling lives in "
                            "@lararium/mesh) — reach it via the @daemon (`lares sense mismatch`), not standalone")
 
+    def flow(self, **_) -> dict:
+        """The pet-named composed-flow RUNNER is TS-orchestrated — it looks a flow's cap-stack up and runs
+        each step routed by hull (crystallize + the coupleMesh capstone ride the TS hull; phase rides the py
+        serve-op; mismatch reaches both hulls). Only the @daemon reaches every hull, so this raises: reach it
+        via the @daemon (`lares flow <petname>`), not the standalone python coordinator."""
+        raise RuntimeError("flow: the composed-flow runner is TS-orchestrated (it routes cap-steps across "
+                           "both hulls) — reach it via the @daemon (`lares flow <petname>`), not standalone")
+
     # ── the per-plane QUERY DOOR (read-only; PLANE_VERBS) ────────────────────────────────────
 
     def _plane_store(self, plane: str):
@@ -779,6 +788,18 @@ def build_mcp(coordinator: LaresCoordinator):
         return _call("mismatch", rows=rows, names=names)
 
     @mcp.tool()
+    def flow(petname: "str | None" = None, target: "list | None" = None,
+             signal: "list | None" = None, names: "list | None" = None,
+             sensorium: "str | None" = None) -> dict:
+        """The pet-named COMPOSED-FLOW surface — one tool, N flows (the anti-verb-sprawl door). Bare (no
+        `petname`) lists the flow-set (crystal · rhythm · couple) with their cap-stacks. `petname` + a
+        `signal` matrix (rows=time, cols=signals; `names` labels the columns) RUNS that flow: the @daemon
+        looks its cap-stack up and runs each step routed by hull, threading each outcome to the next. New
+        capability arrives as a new FLOW, never another raw verb. `lares flow <petname> --signal <ndjson>`
+        reads the same. Explicit signal for now — auto-extraction from a poured `target` is owed."""
+        return _call("flow", sensorium, petname=petname, targets=target, rows=signal, names=names)
+
+    @mcp.tool()
     def plane_record(cid: str, sensorium: "str | None" = None) -> dict:
         """The cross-plane witness: one cid -> presence + payload summary across content,
         structure and form (honest nulls where a plane lacks it). `sensorium` names the sensorium
@@ -1057,6 +1078,24 @@ class DaemonCoordinator:
         # (coupleMesh) beside the R couple_r serve-op and diffs. Only the daemon reaches BOTH hulls.
         args: dict = {"rows": rows or [], **({"names": list(names)} if names else {})}
         return uds.output("mismatch", args)
+
+    def flow(self, *, petname=None, targets=None, rows=None, names=None,
+             sensorium_root: "str | None" = None, **_) -> dict:
+        # Route the composed-flow runner to the @daemon `flow` verb — the daemon looks the pet-named cap-stack
+        # up (flowSeedByPetname) and runs each step routed by hull. Bare (no petname) lists the flow-set. Only
+        # the daemon reaches both hulls, so every flow routes here. Explicit signal for now (auto-extraction owed).
+        args: dict = {}
+        if petname:
+            args["petname"] = petname
+        if targets:
+            args["targets"] = list(targets)
+        if rows:
+            args["rows"] = rows
+        if names:
+            args["names"] = list(names)
+        if sensorium_root:
+            args["sensoriumRoot"] = sensorium_root
+        return uds.output("flow", args)
 
 
 def main() -> None:

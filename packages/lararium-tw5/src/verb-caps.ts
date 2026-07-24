@@ -147,6 +147,11 @@ export interface DaemonVerbProvider {
    *  effective-TE (couple_r) over the SAME `rows` signals and diff the directed edges. The daemon is the one
    *  place that reaches both hulls; a disagreement is the parity check the RUN-arc owed, made live. */
   mismatch(input: { sensoriumRoot?: string; rows?: number[][]; names?: string[] }): Promise<Record<string, unknown>>;
+  /** THE FLOW RUNNER — run a PET-NAMED composed cap-stack (crystal · rhythm · couple) against an explicit
+   *  `rows` signal, routing each cap-step by hull (crystallize/couple TS · phase py · mismatch daemon). Bare
+   *  (no `petname`) lists the flow-set. The anti-verb-sprawl surface: new capability arrives as a new FLOW,
+   *  never another raw verb. `targets` ride as provenance; auto-extraction from a poured target stays owed. */
+  flow(input: { petname?: string; rows?: number[][]; names?: string[]; targets?: string[]; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
    *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races
    *  the writer. `which` narrows to a single enrichment; `sensoriumRoot` addresses a sensorium (absent → memory). */
@@ -476,6 +481,23 @@ export function captureVerbCap(): CapModule {
           const names = Array.isArray(args["names"]) ? (args["names"] as string[]) : undefined;
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
           return await daemon.mismatch({ rows, ...(names ? { names } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) });
+        });
+        registry.register("flow", async (args) => {
+          // THE FLOW RUNNER verb — run a pet-named composed cap-stack (crystal · rhythm · couple) against an
+          // explicit signal, routing each cap-step by hull. Bare (no petname) lists the flow-set. The anti-
+          // verb-sprawl surface: new capability arrives as a new FLOW, never another raw verb.
+          const petname = typeof args["petname"] === "string" ? (args["petname"] as string) : undefined;
+          const rows = Array.isArray(args["rows"]) ? (args["rows"] as number[][]) : undefined;
+          const names = Array.isArray(args["names"]) ? (args["names"] as string[]) : undefined;
+          const targets = Array.isArray(args["targets"]) ? (args["targets"] as string[]) : undefined;
+          const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
+          return await daemon.flow({
+            ...(petname ? { petname } : {}),
+            ...(rows ? { rows } : {}),
+            ...(names ? { names } : {}),
+            ...(targets ? { targets } : {}),
+            ...(sensoriumRoot ? { sensoriumRoot } : {}),
+          });
         });
         registry.register("refresh", async (args) => {
           // RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline

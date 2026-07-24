@@ -228,6 +228,22 @@ def test_parity_inventory_three_way(tmp_path):
     assert mirror_hosts.isdisjoint(not_yet)
 
 
+def test_flow_verb_mirrors_end_to_end(tmp_path):
+    """The pet-named composed-flow surface — ONE `flow` verb/tool mirroring across all three sides (the
+    anti-verb-sprawl surface: N flows behind one verb, never a verb per instrument). Guards the whole
+    mirror at once: the MCP tool exists, seats HOTL (read-only routed compute), and lands on the real
+    top-level CLI host `flow` (its own command, not a `sense` sub-verb)."""
+    assert "flow" in LIFECYCLE_VERBS                     # the MCP anchor carries it
+    assert "flow" in VERB_SEATS and seat_of("flow") == "HOTL"   # read-only routed compute → HOTL
+    assert "flow" in _mcp_tool_names(tmp_path)           # the tool registered on the surface
+    with open(_CLI_VERBS, encoding="utf-8") as f:
+        inv = json.load(f)
+    assert "flow" in inv["verbs"]                        # a real top-level CLI command
+    assert inv["cli_forms"].get("flow") == "flow"        # hosts its own mirror (top-level, no sub-verb)
+    assert "flow" in inv["mirror_hosts"]                 # the coverage partition names it a host
+    assert "flow" not in inv["not_yet_mirrored"]         # mirrored today, not awaiting
+
+
 # ── the plane reads: `recall --lens structure/form` (folded) + the plane_record cross-plane witness ──
 
 

@@ -55,6 +55,10 @@ const CLI_FORMS = {
   // ki coupling against the R effective-TE over the same signals — the parity check made a human command.
   forecast:  "sense forecast",
   mismatch:  "sense mismatch",
+  // `flow` runs a pet-named COMPOSED cap-stack (crystal · rhythm · couple) against an explicit signal —
+  // the anti-verb-sprawl surface. A REAL top-level CLI command (`lares flow`), so it hosts its OWN mirror
+  // (not a `sense` sub-verb); the daemon routes each cap-step by hull (crystallize/couple TS · phase py).
+  flow:      "flow",
   // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
   // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
   wiki:      "wiki switch",

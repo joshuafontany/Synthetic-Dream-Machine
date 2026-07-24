@@ -17,6 +17,7 @@
     "node",
     "cleanup-days",
     "sense",
+    "flow",
     "wing-of",
     "mempalace",
     "hooks",
@@ -56,6 +57,7 @@
     "couple_r",
     "forecast",
     "mismatch",
+    "flow",
     "wiki"
   ],
   "cli_forms": {
@@ -74,9 +76,11 @@
     "couple_r": "sense couple-r",
     "forecast": "sense forecast",
     "mismatch": "sense mismatch",
+    "flow": "flow",
     "wiki": "wiki switch"
   },
   "mirror_hosts": [
+    "flow",
     "sense",
     "wiki"
   ],

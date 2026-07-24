@@ -15,7 +15,7 @@
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
 import { makeOperatorDaemonBehavior } from "@lararium/keyhive/operator-daemon-behavior";
-import { mountProjection, seedDaemonUiTiddlers, seedDaemonPersonaTiddlers, seedDaemonCircleTiddlers } from "@lararium/tw5";
+import { mountProjection, seedDaemonUiTiddlers, seedDaemonPersonaTiddlers, seedDaemonCircleTiddlers, seedDaemonFlowTiddlers } from "@lararium/tw5";
 
 // The @daemon INHERITS the wiki render cap (hasProjection). Mount its projection DORMANT at island-boot —
 // exactly as a pool wiki mounts its camera — so summoning the @daemon is a pure active-surface gate flip,
@@ -26,5 +26,9 @@ runBrowserSovereignWorker((manifest) =>
     // Born-from-source: paint the @daemon UX widget's CODE tiddlers + open the switcher
     // wrapper as the story's INITIAL content — BEFORE the camera renders, so no
     // story-navigation beat (which would reference `window` in this headless Worker).
-    onBoot: (ctx) => { seedDaemonUiTiddlers(ctx.tw5); seedDaemonPersonaTiddlers(ctx.tw5); seedDaemonCircleTiddlers(ctx.tw5); return mountProjection(ctx); },
+    // seedDaemonFlowTiddlers lands the pet-named FLOW tiddlers into the @daemon bag beside the UI seeds — the
+    // one isomorphic seed site. (The headless NODE daemon carries no projection onBoot, so a node-only deploy
+    // seeds no flow tiddlers YET; the runner still runs every flow from FLOW_SEEDS in code. When a node-side
+    // @daemon-bag seed hook lands, seedDaemonFlowTiddlers rides it too.)
+    onBoot: (ctx) => { seedDaemonUiTiddlers(ctx.tw5); seedDaemonPersonaTiddlers(ctx.tw5); seedDaemonCircleTiddlers(ctx.tw5); seedDaemonFlowTiddlers(ctx.tw5); return mountProjection(ctx); },
   }));

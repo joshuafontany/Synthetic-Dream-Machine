@@ -39,7 +39,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
-  coupleMesh,
+  coupleMesh, crystallize,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
 import { casDirForStorage, mirrorGenesisCasFs } from "./node-cas.js";
@@ -85,6 +85,7 @@ import { loadLeafIdentity } from "./leaf-identity.js";
 import { readCasBlobFromFs } from "./node-cas.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
+import { runFlow } from "./flow-run.js";
 
 /** Node advertises a few rotatable wiki pins BESIDES @daemon (resource-rich vessel).
  *  The user's ONE-plus rotatable pin(s) ride this budget; the surface enforces it. */
@@ -948,6 +949,72 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         ) as unknown as Promise<Record<string, unknown>>;
       },
     };
+    // The ki↔R comparator body, extracted so BOTH the `mismatch` verb and the `flow` runner's mismatch
+    // cap-step reuse it: run the TS-hull Gaussian-CMI coupling (coupleMesh) beside the R effective-TE
+    // (couple_r serve-op) over the SAME signals and diff the directed edges. The daemon is the one seat
+    // that reaches both hulls, so the diff lands here and nowhere else.
+    const computeMismatch = async (rows: number[][], namesIn: string[] | undefined, root?: string): Promise<Record<string, unknown>> => {
+      const width = rows[0]?.length ?? 0;
+      const names: string[] = namesIn && namesIn.length === width
+        ? namesIn : Array.from({ length: width }, (_, i) => `s${i}`);
+      // TS side: each column is a child's univariate signal (T×1).
+      const tsCoupling = coupleMesh(names.map((name, i) => ({ name, signal: rows.map((r) => [r[i]!]) })));
+      // R side: the py/R serve-op (graceful skip when R absent).
+      const r = await captureFor(root).coupleR({ rows, names });
+      const rAvailable = r["r_available"] !== false;
+      if (!rAvailable) {
+        return { agree: null, rAvailable, note: "R unavailable — cannot compare (couple-r skipped)", edges: [] };
+      }
+      const rEdges = Array.isArray(r["edges"]) ? (r["edges"] as Array<Record<string, unknown>>) : [];
+      const rHas = (from: string, to: string): boolean => rEdges.some((e) => e["from"] === from && e["to"] === to);
+      const edges: Array<Record<string, unknown>> = [];
+      let agree = true;
+      for (let i = 0; i < names.length; i++) for (let j = 0; j < names.length; j++) {
+        if (i === j) continue;
+        const tsCoupled = (tsCoupling.te[i]?.[j] ?? 0) > 0;
+        const rCoupled = rHas(names[i]!, names[j]!);
+        const edgeAgree = tsCoupled === rCoupled;
+        if (!edgeAgree) agree = false;
+        if (tsCoupled || rCoupled) {
+          edges.push({ from: names[i], to: names[j], ki: tsCoupled, r: rCoupled, agree: edgeAgree,
+                       kiTe: tsCoupling.te[i]?.[j] ?? 0 });
+        }
+      }
+      const disagreements = edges.filter((e) => e["agree"] === false).length;
+      return {
+        agree, rAvailable, edges, disagreements,
+        note: agree
+          ? `ki (Gaussian-CMI) and R (effective-TE) AGREE on all ${edges.length} directed edge(s) — the coupling reads honest`
+          : `MISMATCH — ki and R disagree on ${disagreements} of ${edges.length} directed edge(s); the vessel's local read parts ways from the R reference`,
+      } as unknown as Record<string, unknown>;
+    };
+
+    // The TS-hull coupleMesh capstone over an N-signal matrix (each column a child's univariate signal) —
+    // whiten→couple→gate in one call. The `flow` couple cap-step reads it; the reading zeroes non-significant
+    // edges (so a surviving `te[i][j] > 0` names a directed, significance-clean coupling).
+    const coupleSignal = (rows: number[][], names: string[]): Record<string, unknown> => {
+      const c = coupleMesh(names.map((name, i) => ({ name, signal: rows.map((r) => [r[i]!]) })));
+      return c as unknown as Record<string, unknown>;
+    };
+
+    // The crystallize cap-step over an explicit signal: fold the matrix into occurrences — each cell a
+    // (stratum=column, ordinal=row, strength=value) attestation — and read whether the pattern FIXES into
+    // shared grammar (born ACROSS the columns/strata ⊕ its recurrence rhythm re-locks). A lone column never
+    // crystallizes (single-stratum → zero cross-stratum drive), the honest floor.
+    const crystallizeSignal = (rows: number[][], names: string[]): Record<string, unknown> => {
+      type Occ = { stratum: string; ordinal: number; strength: number };
+      const occ: Occ[] = [];
+      for (let t = 0; t < rows.length; t++) {
+        for (let i = 0; i < names.length; i++) occ.push({ stratum: names[i]!, ordinal: t, strength: rows[t]![i]! });
+      }
+      const verdict = crystallize<Occ>(occ, {
+        stratumOf:  (o) => o.stratum,
+        ordinalOf:  (o) => o.ordinal,
+        strengthOf: (o) => o.strength,
+      });
+      return verdict as unknown as Record<string, unknown>;
+    };
+
     const daemonImpl: DaemonVerbProvider = {
       captureSource: async (input) => {
         const { sensoriumRoot, ...req } = input;
@@ -979,43 +1046,34 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         return await captureFor(sensoriumRoot).forecast(req);
       },
       mismatch: async (input) => {
-        // The ki↔R comparator — the ONE place that reaches both hulls: run the TS-hull Gaussian-CMI coupling
-        // (coupleMesh) beside the R effective-TE (couple_r) over the SAME signals and diff the directed edges.
-        // A disagreement means the vessel's local read and the R reference part ways on whether streams couple.
+        // The ki↔R comparator — the ONE place that reaches both hulls (extracted to computeMismatch so the
+        // `flow` runner reuses the same diff). A disagreement means the vessel's local read and the R
+        // reference part ways on whether streams couple.
         const rows: number[][] = Array.isArray(input.rows) ? input.rows : [];
-        const width = rows[0]?.length ?? 0;
-        const names: string[] = Array.isArray(input.names) && input.names.length === width
-          ? input.names : Array.from({ length: width }, (_, i) => `s${i}`);
-        // TS side: each column is a child's univariate signal (T×1).
-        const tsCoupling = coupleMesh(names.map((name, i) => ({ name, signal: rows.map((r) => [r[i]!]) })));
-        // R side: the py/R serve-op (graceful skip when R absent).
-        const r = await captureFor(input.sensoriumRoot).coupleR({ rows, names });
-        const rAvailable = r["r_available"] !== false;
-        if (!rAvailable) {
-          return { agree: null, rAvailable, note: "R unavailable — cannot compare (couple-r skipped)", edges: [] };
-        }
-        const rEdges = Array.isArray(r["edges"]) ? (r["edges"] as Array<Record<string, unknown>>) : [];
-        const rHas = (from: string, to: string): boolean => rEdges.some((e) => e["from"] === from && e["to"] === to);
-        const edges: Array<Record<string, unknown>> = [];
-        let agree = true;
-        for (let i = 0; i < names.length; i++) for (let j = 0; j < names.length; j++) {
-          if (i === j) continue;
-          const tsCoupled = (tsCoupling.te[i]?.[j] ?? 0) > 0;
-          const rCoupled = rHas(names[i]!, names[j]!);
-          const edgeAgree = tsCoupled === rCoupled;
-          if (!edgeAgree) agree = false;
-          if (tsCoupled || rCoupled) {
-            edges.push({ from: names[i], to: names[j], ki: tsCoupled, r: rCoupled, agree: edgeAgree,
-                         kiTe: tsCoupling.te[i]?.[j] ?? 0 });
-          }
-        }
-        const disagreements = edges.filter((e) => e["agree"] === false).length;
-        return {
-          agree, rAvailable, edges, disagreements,
-          note: agree
-            ? `ki (Gaussian-CMI) and R (effective-TE) AGREE on all ${edges.length} directed edge(s) — the coupling reads honest`
-            : `MISMATCH — ki and R disagree on ${disagreements} of ${edges.length} directed edge(s); the vessel's local read parts ways from the R reference`,
-        } as unknown as Record<string, unknown>;
+        const names = Array.isArray(input.names) ? input.names : undefined;
+        return await computeMismatch(rows, names, input.sensoriumRoot);
+      },
+      flow: async (input) => {
+        // THE FLOW RUNNER — look the pet-named cap-stack up (flowSeedByPetname) and run each step routed by
+        // hull. The daemon is the one seat that reaches both hulls, so it wires every instrument's handle:
+        // crystallize + the coupleMesh capstone (TS), phase (the py rhythm serve-op), mismatch (the ki↔R
+        // comparator). Explicit signal for now; auto-extraction from a poured target stays owed.
+        const root = typeof input.sensoriumRoot === "string" ? input.sensoriumRoot : undefined;
+        return await runFlow(
+          {
+            crystallize: (rows, names) => crystallizeSignal(rows, names),
+            couple:      (rows, names) => coupleSignal(rows, names),
+            phase:       (rows, names, r) => captureFor(r).phase({ rows, names }),
+            mismatch:    (rows, names, r) => computeMismatch(rows, names, r),
+          },
+          {
+            ...(typeof input.petname === "string" ? { petname: input.petname } : {}),
+            ...(Array.isArray(input.rows) ? { rows: input.rows } : {}),
+            ...(Array.isArray(input.names) ? { names: input.names } : {}),
+            ...(Array.isArray(input.targets) ? { targets: input.targets } : {}),
+            ...(root ? { sensoriumRoot: root } : {}),
+          },
+        );
       },
       ki: async (input) => {
         // The Ki (氣) coupling verdict computed HERE in TS — the H¹-gated fuse over the ADDRESSED sensorium's
