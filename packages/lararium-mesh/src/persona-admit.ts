@@ -135,6 +135,14 @@ export interface GrantTranscript {
   readonly nonceB:         string;   // echoes the offer — binds this grant to THIS enrollment
   readonly nonceA:         string;   // fresh — A's own anti-replay
   readonly expiry:         number;   // grant validity (epoch-ms)
+  /**
+   * OPTIONAL — a lowercase-hex sha256 that COMMITS the persona signature to a sibling payload the grant CARRIES
+   * out-of-band (the STAGE-2 convergence-keyring envelope: a read-key gating who reads every sealed body). The
+   * digest rides IN the signed transcript, so a substituted / stripped sibling breaks the binding at the receiver;
+   * mesh stays decoupled from the node convergence secret — only this opaque digest string crosses. Omitted →
+   * the grant commits to no sibling, and the receiver installs none (a fragment arriving unbound is an injection).
+   */
+  readonly keyringSealDigest?: string;
 }
 
 /** The sealed grant QR#2 carries: A's ephemeral pubkey + the AEAD frame + the sealed {transcript, grantSig}. */
@@ -179,6 +187,12 @@ export async function sealPersonaGrant(args: {
   readonly offer:         EnrollmentOffer;
   readonly personaRef:    PersonaRef;
   readonly personaSigner: AdmitSigner;   // signs under personaRef.verifyingKey (the persona-prefix op-key)
+  /**
+   * OPTIONAL commitment — a lowercase-hex sha256 over an out-of-band sibling payload the caller CARRIES with this
+   * grant (the convergence-keyring envelope). Folded INTO the transcript BEFORE signing, so the persona signature
+   * covers it; a receiver that opens the grant then binds the arriving sibling to this digest. Omitted → no commit.
+   */
+  readonly keyringSealDigest?: string;
   readonly expiryMs?:     number;        // default: inherit the offer's remaining window (capped by it)
   readonly now?:          number;
 }): Promise<{ sealed: SealedGrant; sent: SentGrantMemo }> {
@@ -200,6 +214,9 @@ export async function sealPersonaGrant(args: {
     nonceB:         offer.nonceB,
     nonceA,
     expiry,
+    // Fold the sibling commitment in BEFORE signing when present; omit it otherwise, so a keyring-free grant keeps
+    // the exact canonical byte-image it always signed (canonicalJson sorts keys, so placement here is immaterial).
+    ...(args.keyringSealDigest ? { keyringSealDigest: args.keyringSealDigest.toLowerCase() } : {}),
   };
   const grantSig = await args.personaSigner(canonicalJsonBytes(transcript));
 

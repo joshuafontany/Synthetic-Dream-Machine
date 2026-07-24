@@ -329,8 +329,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // absent/empty keyring, so the body stays local/unsealed (never a plaintext body registered sealed). The
   // custody + distribution of that keyring over the private lane is the admission seam this name marks; it does
   // NOT stand a Nexus-scope CGKA group (the exporter north-star, deferred — see nexus-convergence-keyring.ts).
+  // The admission-delivery wiring RIDES THE PERSISTED STORE: `openAdmitFlow` (persona-admit) opens the founder's
+  // sealed keyring envelope and `installDeliveredKeyring` writes the founder's `{epoch → secret}` set into THIS
+  // vessel's identity home AUTHORITATIVELY (the delivered secret supersedes a self-minted phantom). `standNexusKeyring`
+  // below reads that persisted set FIRST (minting only an absent head epoch), so the delivered keyring becomes the
+  // one BOTH `cad-seal` (the seal producer) and any keyring-read path resolve — every path threads this ONE variable.
+  // NO-GLOBAL-NOW: an admission that lands out-of-process reaches THIS running vessel at its next stand of the store.
   let nexusConvergenceKeyring: NexusConvergenceKeyring | null = null;
-  void nexusConvergenceKeyring;   // named seam — the live admission-delivery wiring lands with the seal call site
   const repo = new Repo({
     storage,
     network: [network],

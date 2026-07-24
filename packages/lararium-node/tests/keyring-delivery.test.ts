@@ -14,12 +14,15 @@ import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import * as ed from "@noble/ed25519";
 import {
   sealKeyringEnvelope, openKeyringEnvelope, mintKeyringRecipient,
   verifyCiphertextCid, openBodyOnCas,
-  utf8Bytes, hex,
+  ed25519SignerFromSeed, utf8Bytes, base64UrlEncode, hex,
+  type PersonaRef,
 } from "@lararium/mesh";
 import { standNexusKeyring, installDeliveredKeyring, loadNexusKeyring } from "../src/nexus-convergence-secret-store.js";
+import { offerAdmitFlow, grantAdmitFlow, openAdmitFlow } from "../src/persona-admit-flow.js";
 import { cadSealDir, sealCarrierForFederation } from "../src/seal-carrier-federation.js";
 import { makeSealedPlaneRegistry } from "../src/plane-seal.js";
 import { readCasBlobFromFs } from "../src/node-cas.js";
@@ -123,5 +126,127 @@ describe("keyring-delivery — CARRY ⊥ READ end-to-end", () => {
     // The stranger's OWN epoch-0 secret differs from the founder's → its re-derived read-cap does NOT open the body.
     const strangerCap = readCapForEpoch(BODY, installed.epoch, strangerKeyring);
     expect([...openBodyOnCas(ciphertext, strangerCap)]).not.toEqual([...BODY]);
+  });
+});
+
+describe("keyring-delivery — a founder ADMITS a joinee through the persona-admit ceremony; the joinee reads the founder's body", () => {
+  // The exact gap: every vessel self-mints its OWN convergence secret at boot, so a joinee cannot read a founder-
+  // sealed @cad body. THIS proves the admission carrier (persona-admit) delivers the founder's keyring on the SAME
+  // grant carriage, the joinee ADOPTS it (the delivered secret supersedes the self-minted phantom), and it READS.
+  const A_PERSONA_SEED = new Uint8Array(32).fill(11);
+  const B_DEVICE_SEED  = new Uint8Array(32).fill(22);
+  const PREFIX = "EpersonaAID_keyring_01";
+  const pubOf = (s: Uint8Array) => ed.getPublicKeyAsync(s).then(hex);
+
+  let aStore: string, bStore: string;         // the persona-admit stores (enrollment secret / sent memo)
+  let founderId: string, joineeId: string;    // the identity homes where the convergence secrets live
+  let storageDir: string;                     // the @cad ciphertext tier
+  beforeEach(() => {
+    aStore    = mkdtempSync(join(tmpdir(), "lares-kr-astore-"));
+    bStore    = mkdtempSync(join(tmpdir(), "lares-kr-bstore-"));
+    founderId = mkdtempSync(join(tmpdir(), "lares-kr-fid-"));
+    joineeId  = mkdtempSync(join(tmpdir(), "lares-kr-jid-"));
+    storageDir = mkdtempSync(join(tmpdir(), "lares-kr-store2-"));
+  });
+  afterEach(() => {
+    for (const d of [aStore, bStore, founderId, joineeId, storageDir]) rmSync(d, { recursive: true, force: true });
+  });
+
+  test("a self-minted joinee, admitted, adopts the founder's keyring on the grant carriage and reads the sealed body", async () => {
+    const personaKey = await pubOf(A_PERSONA_SEED);
+    const deviceKey  = await pubOf(B_DEVICE_SEED);
+    const personaRef: PersonaRef = { prefix: PREFIX, verifyingKey: personaKey };
+    const personaSigner = ed25519SignerFromSeed(A_PERSONA_SEED);
+    const deviceSigner  = ed25519SignerFromSeed(B_DEVICE_SEED);
+    const resolveHeadOpKey = (p: string): string | null => (p === PREFIX ? personaKey : null);
+
+    // The FOUNDER stands its Nexus keyring + seals a carrier body @cad under it.
+    const founderKeyring = standNexusKeyring({ charterEpoch: 0, dir: founderId });
+    const registry = makeSealedPlaneRegistry();
+    const cadDir = cadSealDir(storageDir);
+    const installed = sealCarrierForFederation({ registry, cadDir, plaintext: BODY, keyring: founderKeyring });
+    const ciphertext = readCasBlobFromFs(installed.cid, cadDir)!;
+
+    // THE GAP MADE CONCRETE: the JOINEE self-mints its own PHANTOM secret at first boot (a Nexus-of-one). It
+    // differs from the founder's, so the joinee re-derives the WRONG read-cap and CANNOT read the founder's body.
+    const phantom = standNexusKeyring({ charterEpoch: 0, dir: joineeId });
+    expect(hex(phantom.forEpoch(0)!)).not.toBe(hex(founderKeyring.forEpoch(0)!));
+    const phantomCap = readCapForEpoch(BODY, installed.epoch, phantom);
+    expect([...openBodyOnCas(ciphertext, phantomCap)]).not.toEqual([...BODY]);   // the pre-admission joinee is blind
+
+    // ── ADMISSION: the 3-hop persona-admit ceremony, the founder's keyring riding the SAME grant carriage. ──
+    const offer = await offerAdmitFlow({ deviceVerifyingKey: deviceKey, dir: bStore });
+    const grant = await grantAdmitFlow({
+      offerCarriage: offer.carriage, personaRef, personaSigner, dir: aStore, founderKeyringDir: founderId,
+    });
+    if ("error" in grant) throw new Error(grant.error);
+    expect(grant.keyringDelivered).toBe(true);
+    expect(grant.carriage).toContain("&keyring=");           // the keyring rode the grant carriage as a sibling
+    expect(grant.carriage.startsWith("#grant=")).toBe(true); // the mesh grant carriage stayed verbatim
+
+    const opened = await openAdmitFlow({
+      grantCarriage: grant.carriage, resolveHeadOpKey, deviceSigner, dir: bStore, keyringInstallDir: joineeId,
+    });
+    if ("error" in opened) throw new Error(opened.error);
+    expect(opened.keyringEpochs).toBe(founderKeyring.epochs.length);
+
+    // ── THE JOINEE'S STORE now holds the FOUNDER's secret — the self-minted phantom is superseded. ──
+    const adopted = loadNexusKeyring(joineeId)!;
+    expect(hex(adopted.forEpoch(0)!)).toBe(hex(founderKeyring.forEpoch(0)!));
+
+    // ── AND the admitted joinee READS the founder-sealed @cad body (the exact thing that fails without delivery). ──
+    const readCap = readCapForEpoch(BODY, installed.epoch, adopted);
+    expect([...openBodyOnCas(ciphertext, readCap)]).toEqual([...BODY]);
+  });
+
+  test("a MITM who SUBSTITUTES the keyring fragment is REJECTED — the signed digest binds the delivery", async () => {
+    const personaKey = await pubOf(A_PERSONA_SEED);
+    const deviceKey  = await pubOf(B_DEVICE_SEED);
+    const personaRef: PersonaRef = { prefix: PREFIX, verifyingKey: personaKey };
+    const personaSigner = ed25519SignerFromSeed(A_PERSONA_SEED);
+    const deviceSigner  = ed25519SignerFromSeed(B_DEVICE_SEED);
+    const resolveHeadOpKey = (p: string): string | null => (p === PREFIX ? personaKey : null);
+
+    // The founder holds a keyring; the JOINEE self-mints its own phantom (the "stays on its own" baseline).
+    standNexusKeyring({ charterEpoch: 0, dir: founderId });
+    const phantom = standNexusKeyring({ charterEpoch: 0, dir: joineeId });
+    const phantomSecretHex = hex(phantom.forEpoch(0)!);
+
+    // A GENUINE offer → grant (the founder folds the keyring digest into the SIGNED transcript).
+    const offer = await offerAdmitFlow({ deviceVerifyingKey: deviceKey, dir: bStore });
+    const grant = await grantAdmitFlow({
+      offerCarriage: offer.carriage, personaRef, personaSigner, dir: aStore, founderKeyringDir: founderId,
+    });
+    if ("error" in grant) throw new Error(grant.error);
+    expect(grant.carriage).toContain("&keyring=");
+
+    // ── THE ACTIVE MITM: seal the ATTACKER's OWN keyring to the joinee's PUBLIC ephemeral pubkey (it rode the
+    //    offer) and SWAP that token into the carriage, leaving the genuine SIGNED grant intact. ──
+    const attackerId = mkdtempSync(join(tmpdir(), "lares-kr-attacker-"));
+    try {
+      const attackerKeyring = standNexusKeyring({ charterEpoch: 0, dir: attackerId });
+      const attackerSecretHex = hex(attackerKeyring.forEpoch(0)!);
+      const attackerEntries = attackerKeyring.epochs.map((epoch) => ({ epoch, secretHex: hex(attackerKeyring.forEpoch(epoch)!) }));
+      const attackerEnvelope = sealKeyringEnvelope(attackerEntries, offer.offer.ephemeralPubkey);   // sealed to the PUBLIC key
+      const attackerToken = base64UrlEncode(utf8Bytes(JSON.stringify(attackerEnvelope)));
+      const tampered = grant.carriage.replace(/&keyring=[A-Za-z0-9_-]+/, `&keyring=${attackerToken}`);
+      expect(tampered).not.toBe(grant.carriage);            // the swap really changed the carriage
+      expect(tampered).toContain(`&keyring=${attackerToken}`);
+
+      // The joinee opens the tampered carriage: the grant still verifies, but the keyring digest does NOT match the
+      // swapped token → the attacker keyring is REFUSED (keyringEpochs 0), and the join still records honestly.
+      const opened = await openAdmitFlow({
+        grantCarriage: tampered, resolveHeadOpKey, deviceSigner, dir: bStore, keyringInstallDir: joineeId,
+      });
+      if ("error" in opened) throw new Error(opened.error);
+      expect(opened.keyringEpochs).toBe(0);                 // the substituted keyring did NOT install
+
+      // The joinee's store STAYS on its own phantom — it never adopted the attacker's secret (confidentiality held).
+      const held = loadNexusKeyring(joineeId)!;
+      expect(hex(held.forEpoch(0)!)).toBe(phantomSecretHex);
+      expect(hex(held.forEpoch(0)!)).not.toBe(attackerSecretHex);
+    } finally {
+      rmSync(attackerId, { recursive: true, force: true });
+    }
   });
 });

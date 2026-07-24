@@ -89,9 +89,12 @@ export function loadNexusKeyring(dir?: string): NexusConvergenceKeyring | null {
 
 /**
  * Install a keyring DELIVERED at admission (the opened `KeyringEnvelope` entries) into THIS vessel's local store —
- * the joinee's path (STAGE 2). Merges the delivered `{epoch → secret}` set with any already held (read-all; a
- * delivered epoch NEVER overwrites a held one — a per-epoch secret is immutable, so a duplicate epoch is skipped,
- * never a silent last-wins that could desync a reader). The joinee, now holding the keyring, READS sealed bodies.
+ * the joinee's path (STAGE 2). The founder ADMITTING the joinee holds the Nexus's source-of-truth secrets (A2:
+ * "DISTRIBUTED to each member"), so a DELIVERED epoch is AUTHORITATIVE: it OVERWRITES any secret this vessel holds
+ * for that epoch. A joinee self-mints a PHANTOM secret at first boot (a Nexus-of-one that seals only bodies no
+ * peer can read); adopting the founder's Nexus at a consented admission RETIRES that phantom for the delivered
+ * epochs, so the joinee re-derives the SAME read-cap the founder sealed under and READS the founder's body. Held
+ * epochs the delivery does NOT carry SURVIVE (read-all — a member keeps every past epoch it legitimately holds).
  * FAIL-CLOSED: a malformed entry (bad width / negative epoch) is refused before the whole install lands.
  */
 export function installDeliveredKeyring(
@@ -100,12 +103,13 @@ export function installDeliveredKeyring(
 ): NexusConvergenceKeyring {
   const d = idDirOf(dir);
   const byEpoch = new Map<number, NexusEpochSecret>();
-  for (const e of readStored(d)) byEpoch.set(e.epoch, e);
+  for (const e of readStored(d)) byEpoch.set(e.epoch, e);   // the held set (self-minted phantoms + any prior delivery)
   for (const e of delivered) {
     if (!Number.isInteger(e.epoch) || e.epoch < 0 || !/^[0-9a-f]{64}$/.test(e.secretHex)) {
       throw new TypeError(`installDeliveredKeyring: malformed delivered entry at epoch ${e.epoch} — refusing the install (fail-closed)`);
     }
-    if (!byEpoch.has(e.epoch)) byEpoch.set(e.epoch, { epoch: e.epoch, secret: hexToBytes(e.secretHex) });
+    // The founder's delivered secret WINS — it names the Nexus's real epoch secret, so it supersedes a phantom.
+    byEpoch.set(e.epoch, { epoch: e.epoch, secret: hexToBytes(e.secretHex) });
   }
   const merged = [...byEpoch.values()].sort((a, b) => a.epoch - b.epoch);
   writeStored(d, merged);
