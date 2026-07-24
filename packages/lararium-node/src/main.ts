@@ -156,6 +156,20 @@ async function main(): Promise<void> {
     console.log(`[herm] FLOW-map read-face: GET /oracle/pointer · /oracle/<cid>.bin`);
     for (const f of reachFaces) console.log(`[herm] ws:        ${wsUrlForOrigin(f.origin)}   (${f.kind})`);
 
+    // The CARRIAGE CROSSROADS (Socket B) — announced when a relay port rode the config (LAR_HERM_RELAY_PORT).
+    // The operator hands a family hearth the `ws://` URL + the gate key to dial this crossroads. Absent → no line.
+    // The relay binds its OWN port (SEPARATE from the /ws read-face port) on the same host every face names.
+    if (herm.carriageRelayPort !== null) {
+      const relayPort = herm.carriageRelayPort;
+      console.log(`[herm] carriage crossroads (Socket B) — hearths dial this to carry sealed @cad bodies:`);
+      console.log(`[herm]   gate key: ${herm.carriageRelayGatePubKey}`);
+      for (const f of reachFaces) {
+        const scheme = f.origin.startsWith("https") ? "wss" : "ws";
+        const bareHost = f.host.replace(/:\d+$/, "");
+        console.log(`[herm]   dial → ${scheme}://${bareHost}:${relayPort}   (${f.kind})`);
+      }
+    }
+
     // Co-located UDS verb-channel for the local `lares` CLI (the @daemon answers).
     const hermSocketPath = join(storageDir, "lares.sock");
     const hermUds = startUdsChannel({

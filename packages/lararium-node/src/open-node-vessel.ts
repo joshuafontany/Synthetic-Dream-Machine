@@ -80,6 +80,7 @@ import { standNexusKeyring } from "./nexus-convergence-secret-store.js";
 import { cadSealDir, sealCarrierForFederation } from "./seal-carrier-federation.js";
 import { makeBagTracker } from "./bag-tracker.js";
 import { startCarriageServeLoop, type CarriageServeLoop } from "./carriage-serve-loop.js";
+import { startCarriageRelay, resolveRelayGateSeed, type CarriageRelay } from "./carriage-relay.js";
 import { maybeStartNexusClientDial, type NexusClientDial } from "./nexus-client-dial.js";
 import { loadLeafIdentity } from "./leaf-identity.js";
 import { readCasBlobFromFs } from "./node-cas.js";
@@ -225,6 +226,16 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   carriageRelayUrl?: string;
   /** The carriage serve-loop poll cadence (ms) — how promptly a member's want-block draws a serve turn. */
   carriagePollIntervalMs?: number;
+  /** STAND a carriage relay (Socket B, ciphertext CROSSROADS) so a family's hearths dial THIS vessel to carry sealed
+   *  @cad bodies between each other — the Herm's Lares-Viales role (a running Herm IS a crossroads). The port the
+   *  relay BINDS (0 → an OS-assigned free port; a Pi deployment pins a stable one). ABSENT (and `LAR_HERM_RELAY_PORT`
+   *  unset) → NO relay socket stands, boot behaves exactly as today (provably inert). SEPARATE from `carriageRelayUrl`
+   *  (that DIALS a relay as a client; this STANDS one as the crossroads). */
+  standCarriageRelayPort?: number;
+  /** The relay's gate seed hex (32 bytes) — a dialing hearth binds its proof-of-possession to this key's PUBLIC half.
+   *  ABSENT → derived from the vessel's OWN identity seed (stable across restarts, so hearths keep dialing the same
+   *  key). NEVER a fresh random per boot. Only read when `standCarriageRelayPort` (or its env) is set. */
+  standCarriageRelayGateSeedHex?: string;
   /** The peer node's `/ws` URL (Socket A, cleartext CRDT) this vessel DIALS to sync — the same-operator device
    *  breath. ABSENT (and `LAR_JOIN_SYNC` unset) → NO client adapter mounts, NO dial, zero change (provably inert). */
   joinSyncUrl?: string;
@@ -254,6 +265,12 @@ export interface NodeHermResult {
   catalogHandleUrl: string;
   larariumDocUrl:   string | null;
   phase:            "live";
+  /** The bound port the STOOD carriage relay (Socket B crossroads) listens on — `null` when no relay was configured
+   *  (inert). The operator hands a hearth `ws://<host>:<port>` from this. */
+  carriageRelayPort:       number | null;
+  /** The stood carriage relay's gate verifying-key hex — the key a dialing hearth binds its proof to (out-of-band).
+   *  `null` when no relay was configured. The operator hands a hearth this alongside the URL. */
+  carriageRelayGatePubKey: string | null;
   /** Tear down the read-face + the daemon island, then the composed vessel (reverse build order). */
   dispose:          () => Promise<void>;
 }
@@ -270,6 +287,10 @@ interface NodeBootPrep {
   /** The carriage serve-loop (Socket B) — present ONLY when a carriage-relay URL was configured; else null (inert).
    *  The two vessel entry-points fold its `stop()` into their teardown so no timer / socket leaks past close. */
   carriageLoop:     CarriageServeLoop | null;
+  /** The STOOD carriage relay (Socket B CROSSROADS) — present ONLY when a relay port was configured; else null
+   *  (inert). A running crossroads a family's hearths dial to carry sealed @cad bodies between each other. The two
+   *  vessel entry-points fold its `close()` into their teardown so no WS server / peer socket leaks past close. */
+  carriageRelay:    CarriageRelay | null;
   /** The client dial-out (Socket A) — present ONLY when a peer sync URL + gate key were configured; else null
    *  (inert). The two vessel entry-points fold its `stop()` into teardown so no client socket leaks past close. */
   nexusDial:        NexusClientDial | null;
@@ -513,6 +534,25 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         onLog:        (line) => console.log(`[carriage] ${line}`),
       })
     : null;
+
+  // ── The CARRIAGE relay (Socket B, ciphertext CROSSROADS) — INERT until a relay port rides the config ─────────
+  // A running crossroads a family's HEARTHS dial (`ws://<host>:<port>`) to carry sealed @cad bodies between each
+  // other — the Herm's Lares-Viales role. The relay CARRIES opaque ciphertext envelopes, stamps each `from` with the
+  // sender's PROVEN Ed25519 key, and holds the DHT-free bag-tracker HINT index — it reads NO plaintext, holds NO
+  // read-cap / keyring / roster (carry ⊥ read ⊥ contract), so a compromised crossroads leaks nothing. Its gate seed
+  // derives from the vessel's OWN identity seed (or a configured seed) — STABLE across restarts, NEVER fresh-random,
+  // so hearths keep dialing the same key. This CROSSROADS (a stood WS server) SEPARATES from both the Automerge `/ws`
+  // relay (Socket A, cleartext CRDT) and the client-side carriage serve-loop dial above. ABSENT the port → this
+  // branch never runs, so no socket opens and boot behaves exactly as it did before (provably inert).
+  const relayPortRaw = opts.standCarriageRelayPort ?? process.env["LAR_HERM_RELAY_PORT"];
+  const relayPort = relayPortRaw !== undefined && relayPortRaw !== "" ? Number(relayPortRaw) : null;
+  const relayGateSeed = resolveRelayGateSeed(operatorSeed, opts.standCarriageRelayGateSeedHex ?? process.env["LAR_HERM_RELAY_SEED"]);
+  const carriageRelay: CarriageRelay | null = relayPort !== null && !Number.isNaN(relayPort)
+    ? await startCarriageRelay({ gateSeed: relayGateSeed, port: relayPort })
+    : null;
+  if (carriageRelay) {
+    console.log(`[carriage] crossroads relay standing — ws://<host>:${carriageRelay.port} · gate ${carriageRelay.gatePubKey}`);
+  }
 
   // ── The CLIENT dial-out (Socket A, cleartext CRDT) — INERT until a peer sync URL + gate key ride the config ──
   // When configured, the vessel mounts a `LarWSClientAdapter` carrying the operator's OWN leaf identity onto the
@@ -1443,7 +1483,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   };
 
   return {
-    repo, catalogHandle, operatorSeed, residency, carriageLoop, nexusDial, emit, orchestration,
+    repo, catalogHandle, operatorSeed, residency, carriageLoop, carriageRelay, nexusDial, emit, orchestration,
     openDaemon, wireVerbs, afterDaemon,
     daemonVm:         () => daemonVm,
     eventBus:         () => eventBus,
@@ -1493,7 +1533,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     eventBus: p.eventBus(),
     // Graceful shutdown tears the pool down AND stops the carriage serve-loop (Socket B) + the client dial-out
     // (Socket A) — each a no-op when none stood — so no timer / client socket leaks past close.
-    stopTick: () => { void result.pool.disposeAll(); void p.carriageLoop?.stop(); p.nexusDial?.stop(); },
+    stopTick: () => { void result.pool.disposeAll(); void p.carriageRelay?.close(); void p.carriageLoop?.stop(); p.nexusDial?.stop(); },
   };
 }
 
@@ -1535,8 +1575,11 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     catalogHandleUrl: p.catalogHandle.url,
     larariumDocUrl:   herm.assembly.larariumHandle?.url ?? null,
     phase:            "live",
+    carriageRelayPort:       p.carriageRelay?.port ?? null,
+    carriageRelayGatePubKey: p.carriageRelay?.gatePubKey ?? null,
     dispose: async () => {
-      await p.carriageLoop?.stop();   // stop Socket B first (a no-op when none stood) — no timer / socket leaks
+      await p.carriageRelay?.close();  // tear the crossroads down first (a no-op when none stood) — no WS server leak
+      await p.carriageLoop?.stop();   // stop Socket B serve-loop (a no-op when none stood) — no timer / socket leaks
       p.nexusDial?.stop();            // stop the client dial-out (Socket A) — a no-op when none stood
       await p.daemonVm().shutdown();
       await herm.vessel.dispose();   // reverse build order → read-face disposes (clears the HTTP handler)
