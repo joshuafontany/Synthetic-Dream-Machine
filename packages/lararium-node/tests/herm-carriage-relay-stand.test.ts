@@ -29,7 +29,7 @@ import * as ed from "@noble/ed25519";
 import { WebSocket } from "ws";
 import {
   DeterministicFederationGate, openBodyOnCas, verifyCiphertextCid, utf8Bytes, hex,
-  type AntigenRing, type NexusMembership, type MembershipChannel, type MembershipEnvelope,
+  type MembershipChannel, type MembershipEnvelope,
 } from "@lararium/mesh";
 import { standNexusKeyring } from "../src/nexus-convergence-secret-store.js";
 import { cadSealDir, sealCarrierForFederation } from "../src/seal-carrier-federation.js";
@@ -38,19 +38,11 @@ import { CAS_WANT_BLOCK, CAS_BLOCK, CAS_MU, muWireBytes, type CasWireServerDeps 
 import { AuthenticatedWSMembershipChannel } from "../src/authenticated-membership-relay.js";
 import { startCarriageRelay, resolveRelayGateSeed, type CarriageRelay } from "../src/carriage-relay.js";
 import { startCarriageServeLoop, type CarriageServeLoop } from "../src/carriage-serve-loop.js";
+import { membershipOf, antigenOf, bytesFromPayload } from "./cas-test-setup.js";
 
 const BODY = utf8Bytes("a family body one hearth seals and another carries over the Herm's crossroads");
 const pubOf = (seed: Uint8Array): Promise<string> => ed.getPublicKeyAsync(seed).then(hex);
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
-
-const membershipOf = (members: Iterable<string>): NexusMembership => {
-  const set = new Set(members);
-  return { isMemberPeer: (p) => set.has(p) };
-};
-const antigenOf = (kapaed: Iterable<string>): AntigenRing => ({ kapaed: new Set(kapaed), presenterNym: (p) => p });
-
-const bytesFromPayload = (env: MembershipEnvelope): Uint8Array =>
-  Uint8Array.from(Object.values((env.payload as { bytes?: Record<string, number> }).bytes ?? {}));
 
 async function fetchOverCarriage(args: {
   channel: MembershipChannel; requester: string; holderAddr: string; cid: string;

@@ -18,43 +18,16 @@
  * confirmation, proven in keyring-delivery.test). The CARRY + Mu below hold regardless; the read uses the per-body cap.
  */
 import { describe, test, expect } from "vitest";
-import { mkdtempSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
 import {
   DeterministicFederationGate, InMemoryMembershipChannel, openBodyOnCas, utf8Bytes,
-  type AntigenRing, type NexusMembership,
 } from "@lararium/mesh";
-import { standNexusKeyring } from "../src/nexus-convergence-secret-store.js";
-import { cadSealDir, sealCarrierForFederation } from "../src/seal-carrier-federation.js";
 import { makeSealedPlaneRegistry } from "../src/plane-seal.js";
 import { serveCasWire, decideAndServeWantBlock, fetchSealedCidOverWire, muWireBytes, type CasWireServerDeps } from "../src/cas-wire.js";
+import { membershipOf, antigenOf, sealABody } from "./cas-test-setup.js";
 
 const NEXUS_PUBKEY = "a1b2c3d4e5f6a7b8";
 const HOLDER = "holder-vessel";
 const BODY = utf8Bytes("the sealed carrier body a member blind-transits over the wire");
-
-/** A membership stub — a peerId is a MEMBER iff it sits in the set (production: nexus-membership fold). */
-function membershipOf(members: Iterable<string>): NexusMembership {
-  const set = new Set(members);
-  return { isMemberPeer: (peerId) => set.has(peerId) };
-}
-/** An antigen stub — peerId IS its own nym here; a nym in `kapaed` draws Mu (production: quorum-signed fold). */
-function antigenOf(kapaed: Iterable<string>): AntigenRing {
-  const set = new Set(kapaed);
-  return { kapaed: set, presenterNym: (peerId) => peerId };
-}
-
-function sealABody() {
-  const storageDir = mkdtempSync(join(tmpdir(), "lares-caswire-store-"));
-  const idDir = mkdtempSync(join(tmpdir(), "lares-caswire-id-"));
-  const registry = makeSealedPlaneRegistry();
-  const keyring = standNexusKeyring({ charterEpoch: 0, dir: idDir });
-  const cadDir = cadSealDir(storageDir);
-  const installed = sealCarrierForFederation({ registry, cadDir, plaintext: BODY, keyring });
-  const cleanup = () => { rmSync(storageDir, { recursive: true, force: true }); rmSync(idDir, { recursive: true, force: true }); };
-  return { registry, cadDir, installed, cleanup };
-}
 
 function serverDepsFor(reg: ReturnType<typeof makeSealedPlaneRegistry>, cadDir: string, members: string[], kapaed: string[]): CasWireServerDeps {
   return {
@@ -68,7 +41,7 @@ function serverDepsFor(reg: ReturnType<typeof makeSealedPlaneRegistry>, cadDir: 
 
 describe("cas-wire — E1b member-blind-transit (carry ⊥ read over the hop)", () => {
   test("an admitted MEMBER carries + reads; a carry-only peer verifies but reads nothing; a non-member draws Mu", async () => {
-    const { registry, cadDir, installed, cleanup } = sealABody();
+    const { registry, cadDir, installed, cleanup } = sealABody(BODY);
     try {
       const channel = new InMemoryMembershipChannel();
       const deps = serverDepsFor(registry, cadDir, ["member-peer"], []);
@@ -92,7 +65,7 @@ describe("cas-wire — E1b member-blind-transit (carry ⊥ read over the hop)", 
   });
 
   test("a member carrying the ciphertext without the read-cap holds only ciphertext (verify-cap ⊥ read-cap)", async () => {
-    const { registry, cadDir, installed, cleanup } = sealABody();
+    const { registry, cadDir, installed, cleanup } = sealABody(BODY);
     try {
       const channel = new InMemoryMembershipChannel();
       const deps = serverDepsFor(registry, cadDir, ["member-peer"], []);
@@ -106,7 +79,7 @@ describe("cas-wire — E1b member-blind-transit (carry ⊥ read over the hop)", 
 
 describe("cas-wire — E1a Kapae-Mu (denial ≡ satiety, byte-identical)", () => {
   test("a Kapae'd presenter and a nothing-to-serve peer draw IDENTICAL void bytes; un_kapae restores the carry", async () => {
-    const { registry, cadDir, installed, cleanup } = sealABody();
+    const { registry, cadDir, installed, cleanup } = sealABody(BODY);
     try {
       // "member-peer" is a MEMBER but Kapae'd; "member-2" is a clean member.
       const kapaedDeps = serverDepsFor(registry, cadDir, ["member-peer", "member-2"], ["member-peer"]);
@@ -133,7 +106,7 @@ describe("cas-wire — E1a Kapae-Mu (denial ≡ satiety, byte-identical)", () =>
   });
 
   test("serveCasWire answers pending want-blocks over the channel (the real hop, deliver-once)", async () => {
-    const { registry, cadDir, installed, cleanup } = sealABody();
+    const { registry, cadDir, installed, cleanup } = sealABody(BODY);
     try {
       const channel = new InMemoryMembershipChannel();
       const deps = serverDepsFor(registry, cadDir, ["member-peer"], []);

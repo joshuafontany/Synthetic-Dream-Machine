@@ -19,7 +19,7 @@ import WS, { type RawData } from "ws";
 import {
   DeterministicFederationGate, openBodyOnCas, utf8Bytes, hex,
   authProofBytes, ed25519SignerFromSeed,
-  type AntigenRing, type NexusMembership, type MembershipChannel, type MembershipEnvelope,
+  type MembershipChannel, type MembershipEnvelope,
 } from "@lararium/mesh";
 import { standNexusKeyring } from "../src/nexus-convergence-secret-store.js";
 import { cadSealDir, sealCarrierForFederation } from "../src/seal-carrier-federation.js";
@@ -29,19 +29,11 @@ import {
   startAuthenticatedMembershipRelay, AuthenticatedWSMembershipChannel,
   type AuthenticatedMembershipRelay,
 } from "../src/authenticated-membership-relay.js";
+import { membershipOf, antigenOf } from "./cas-test-setup.js";
 
 const BODY = utf8Bytes("the sealed carrier body a member blind-transits over a real authenticated socket");
 const pubOf = (seed: Uint8Array) => ed.getPublicKeyAsync(seed).then(hex);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-const membershipOf = (members: Iterable<string>): NexusMembership => {
-  const set = new Set(members);
-  return { isMemberPeer: (p) => set.has(p) };
-};
-const antigenOf = (kapaed: Iterable<string>): AntigenRing => {
-  const set = new Set(kapaed);
-  return { kapaed: set, presenterNym: (p) => p };
-};
 
 /** Drive one fetch over the async WS hop: the requester offers a want-block; the holder serves a turn (retried
  *  until the async socket delivers it); the requester polls for the response. Returns the response envelope. */
