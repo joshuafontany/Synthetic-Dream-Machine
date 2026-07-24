@@ -283,6 +283,12 @@ export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-chann
 // proven key (no impersonation of the cas-wire member gate), reusing the DaemonAuthGate's own challenge/verify.
 export { startAuthenticatedMembershipRelay, AuthenticatedWSMembershipChannel } from "./authenticated-membership-relay.js";
 export type { AuthenticatedMembershipRelay } from "./authenticated-membership-relay.js";
+// The CARRIAGE relay capability (Socket B) — the authenticated transport + the DHT-free bag-tracker, one service;
+// and the vessel-side serve-loop that carries a sealed @cad body to members (inert until a relay URL is configured).
+export { startCarriageRelay } from "./carriage-relay.js";
+export type { CarriageRelay } from "./carriage-relay.js";
+export { startCarriageServeLoop } from "./carriage-serve-loop.js";
+export type { CarriageServeLoop, CarriageServeLoopConfig } from "./carriage-serve-loop.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
 export { FileMembershipChannel } from "./file-membership-channel.js";
 export { makeFormPalace } from "./sensorium.js";

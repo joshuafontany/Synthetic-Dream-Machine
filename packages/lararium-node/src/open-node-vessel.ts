@@ -79,6 +79,7 @@ import type { NexusConvergenceKeyring } from "./nexus-convergence-keyring.js";
 import { standNexusKeyring } from "./nexus-convergence-secret-store.js";
 import { cadSealDir, sealCarrierForFederation } from "./seal-carrier-federation.js";
 import { makeBagTracker } from "./bag-tracker.js";
+import { startCarriageServeLoop, type CarriageServeLoop } from "./carriage-serve-loop.js";
 import { readCasBlobFromFs } from "./node-cas.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
@@ -216,6 +217,11 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   meshSelf?: MeshSelf;
   /** Carriage pull cadence (ms) — tuning, kept separate from membership. */
   pullIntervalMs?: number;
+  /** The CARRIAGE-relay URL (Socket B, ciphertext) the vessel dials to serve sealed @cad bodies to members.
+   *  ABSENT (and `LAR_CARRIAGE_RELAY` unset) → NO carriage socket opens, NO serve-loop stands (provably inert). */
+  carriageRelayUrl?: string;
+  /** The carriage serve-loop poll cadence (ms) — how promptly a member's want-block draws a serve turn. */
+  carriagePollIntervalMs?: number;
 }
 
 export interface NodeVesselResult extends VesselResult<VesselIslandPool, DaemonVmCore> {
@@ -249,6 +255,9 @@ interface NodeBootPrep {
   catalogHandle:    DocHandle<LarDoc>;
   operatorSeed:     Uint8Array;
   residency:        BagResidencyManager;
+  /** The carriage serve-loop (Socket B) — present ONLY when a carriage-relay URL was configured; else null (inert).
+   *  The two vessel entry-points fold its `stop()` into their teardown so no timer / socket leaks past close. */
+  carriageLoop:     CarriageServeLoop | null;
   emit:             (p: NodeOpenPhase) => void;
   /** The full-node orchestration (keel + every VM closure) the shared cap composer walks. */
   orchestration:    VesselOrchestration<VesselIslandPool>;
@@ -464,6 +473,31 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // peer reaches exactly the always-carried public/infra planes and nothing private. No hand-maintained
   // allow-list; the private planes (@catalog/@personal/@daemon/home/wikis) fall outside the set → DENY.
   selfSlotFedGate = new DeterministicFederationGate(operatorIdentity.verifyingKey);
+
+  // ── The CARRIAGE serve-loop (Socket B, ciphertext) — INERT until a carriage-relay URL rides the config ──────
+  // When configured, the vessel dials the carriage relay over an authenticated WS channel (proving `operatorSeed`)
+  // and serves members' want-blocks for sealed @cad bodies on a poll interval. The gate stays `serveCasWire`'s own
+  // `memberCarryShareDecision` VERBATIM: a proven MEMBER over a provably-sealed plane carries the ciphertext; a
+  // STRANGER / non-member / Kapae'd draws byte-identical Mu. Carry ⊥ read — the read-cap never rides this seam.
+  // Socket B stays SEPARATE from the Automerge `/ws` relay (Socket A): cleartext CRDT never routes through here.
+  // ABSENT the URL → this branch never runs, so no socket opens and boot behaves exactly as it did before.
+  const carriageRelayUrl = opts.carriageRelayUrl ?? process.env["LAR_CARRIAGE_RELAY"] ?? null;
+  const carriageLoop: CarriageServeLoop | null = carriageRelayUrl
+    ? startCarriageServeLoop({
+        relayUrl:     carriageRelayUrl,
+        operatorSeed,
+        serverAddr:   operatorIdentity.verifyingKey,
+        deps: {
+          cadDir:     cadSealDir(storageDir),
+          seal:       sealRegistry.seal,
+          membership: nexusMembership,
+          antigen:    antigenRing,
+          fedGate:    selfSlotFedGate,
+        },
+        ...(opts.carriagePollIntervalMs !== undefined ? { pollIntervalMs: opts.carriagePollIntervalMs } : {}),
+        onLog:        (line) => console.log(`[carriage] ${line}`),
+      })
+    : null;
 
   // ── Main-resident residency MECHANISM (sovereign-worker: policy in the worker,
   //    mechanism here). onEvict commands the pool via the forward `vmManager` ref. ──
@@ -1311,7 +1345,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   };
 
   return {
-    repo, catalogHandle, operatorSeed, residency, emit, orchestration,
+    repo, catalogHandle, operatorSeed, residency, carriageLoop, emit, orchestration,
     openDaemon, wireVerbs, afterDaemon,
     daemonVm:         () => daemonVm,
     eventBus:         () => eventBus,
@@ -1359,7 +1393,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase: "live",
     eventBus: p.eventBus(),
-    stopTick: () => { void result.pool.disposeAll(); },
+    // Graceful shutdown tears the pool down AND stops the carriage serve-loop (a no-op when none stood) — the
+    // interval clears + Socket B closes, so no timer / socket leaks past close.
+    stopTick: () => { void result.pool.disposeAll(); void p.carriageLoop?.stop(); },
   };
 }
 
@@ -1402,6 +1438,7 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     larariumDocUrl:   herm.assembly.larariumHandle?.url ?? null,
     phase:            "live",
     dispose: async () => {
+      await p.carriageLoop?.stop();   // stop Socket B first (a no-op when none stood) — no timer / socket leaks
       await p.daemonVm().shutdown();
       await herm.vessel.dispose();   // reverse build order → read-face disposes (clears the HTTP handler)
     },
