@@ -119,6 +119,43 @@ def ewma_predict(x: np.ndarray, alpha: float = 0.3) -> np.ndarray:
     return pred
 
 
+def signed_innovation(signal, alpha: float = 0.3) -> list[list[float]]:
+    """The WHITENING reduction — the py twin of mesh/signed-innovation.ts `signedInnovation`.
+
+    Reduce a continuous vector series (rows = time, cols = dims) to its per-dimension SIGNED
+    one-step innovation `ε = actual − predicted`, the EWMA forecast subtracted column-wise. The
+    same residual {@link plane_pc} computes as `err = obs − pred` — here KEPT signed and exposed
+    as whitened output, never squared into surprise. The first frame carries no history, so its
+    innovation reads 0. `alpha` matches the sensorium predictor's smoothing (0.3).
+
+    This IS the correct TE prewhitening (Behrendt 2022): an autocorrelated child collapses to its
+    small white increments while the SIGN survives, so a real directed coupling the raw series
+    inflates stays legible after the reduction."""
+    X = np.asarray(signal, dtype=float)
+    if X.size == 0:
+        return []
+    if X.ndim == 1:
+        X = X.reshape(-1, 1)
+    t, dims = X.shape
+    resids = np.zeros_like(X)
+    for d in range(dims):
+        pred = ewma_predict(X[:, d], alpha=alpha).reshape(-1)
+        resids[:, d] = X[:, d] - pred  # signed residual; first frame → 0 (pred[0] = x[0])
+    return resids.tolist()
+
+
+def whiten_child(child: dict, alpha: float = 0.3) -> dict:
+    """Reduce ONE child ({"name", "signal"}) to its signed-innovation signal — the py twin of
+    mesh/signed-innovation.ts `whitenChild`. The name rides through; the signal whitens."""
+    return {"name": child.get("name"), "signal": signed_innovation(child.get("signal", []), alpha)}
+
+
+def whiten_children(children, alpha: float = 0.3) -> list[dict]:
+    """Whiten every child — the standard pre-coupling reduction across the mesh's children (the py
+    twin of mesh/signed-innovation.ts `whitenChildren`)."""
+    return [whiten_child(c, alpha) for c in children]
+
+
 def ar1_fit_predict(x: np.ndarray) -> tuple[np.ndarray, int]:
     """AR(1) one-step prediction: fit `x[t] ≈ a·x[t-1] + b` by least squares per column, then
     predict. Returns (predictions, n_params). A short/degenerate column falls back to the
@@ -389,6 +426,14 @@ def cmd_objective(args) -> None:
     sys.stdout.write(json.dumps(out) + "\n")
 
 
+def cmd_whiten(args) -> None:
+    """Reduce an NDJSON signal to its signed-innovation (whitened) matrix → JSON. The WHITENING
+    cap's standalone face — the pre-coupling reduction, sign kept, first frame 0."""
+    X = _load_signal(args.signal)
+    out = signed_innovation(X, alpha=args.alpha)
+    sys.stdout.write(json.dumps({"n": len(out), "innovation": out}) + "\n")
+
+
 def cmd_selftest(args) -> None:
     """A synthetic check (no fixture): a PREDICTABLE signal (a smooth ramp+sine) earns high
     precision / low surprise; NOISE earns ~neutral precision / high surprise. Confirms the
@@ -434,6 +479,11 @@ def main() -> None:
     o.add_argument("--model", default="ewma", choices=["ewma", "ar1"])
     o.add_argument("--alpha", type=float, default=0.3)
     o.set_defaults(fn=cmd_objective)
+
+    w = sub.add_parser("whiten", help="reduce an NDJSON signal to its signed-innovation (whitened) matrix → JSON")
+    w.add_argument("--signal", required=True, help="NDJSON signal file, or - for stdin")
+    w.add_argument("--alpha", type=float, default=0.3, help="EWMA smoothing coefficient")
+    w.set_defaults(fn=cmd_whiten)
 
     s = sub.add_parser("selftest", help="synthetic predictable-vs-noise check (no fixture)")
     s.set_defaults(fn=cmd_selftest)

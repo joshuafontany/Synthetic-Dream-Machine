@@ -14,8 +14,11 @@
 # graceful skip (coupling has NO python fallback — TE is the R plane, never fatal).
 #
 #   in : {"op":"couple","matrix":[[..],[..],..],"lx":1,"ly":1,"shuffles":100,
-#          "nboot":100,"q":0.1,"quantiles":[5,95],"seed":1,"names":["a","b",..]}
+#          "nboot":100,"q":0.1,"quantiles":[5,95],"seed":1,"names":["a","b",..],
+#          "whiten":false,"alpha":0.3}
 #          matrix rows = time steps, cols = SIGNALS (mirrors bands_ecp.R's row=observation).
+#          whiten:true → Surface-A: each signal reduces to its signed EWMA innovation before
+#          calc_ete (the TE prewhitening); whiten:false (default) → Surface-B: couples RAW.
 #   out: {"ok":true,"engine":"RTransferEntropy-calc_ete","n_signals":K,
 #          "names":[..],"ete":[[KxK]],"te":[[KxK]],"pval":[[KxK]],"nboot":N}
 #          ete/te/pval diagonals are null (-1); ete[i][j] reads i→j (row leads col).
@@ -84,6 +87,31 @@ quants   <- if (!is.null(req$quantiles)) as.numeric(unlist(req$quantiles)) else 
 seed0    <- if (!is.null(req$seed)) as.integer(req$seed) else 1L
 nm       <- if (!is.null(req$names)) as.character(unlist(req$names)) else paste0("s", seq_len(K))
 if (length(nm) != K) nm <- paste0("s", seq_len(K))
+
+# WHITENING pre-step (Surface-A) — the R twin of mesh/signed-innovation.ts + predictive_coding.py.
+# coupling.R couples RAW by default (Surface-B); a `whiten:true` request reduces each signal to its
+# signed one-step EWMA innovation ε = actual − predicted BEFORE calc_ete, so the effective TE reads
+# the NEW information a source carries, never the self-inertia a self-predictable target inflates
+# (Behrendt 2022: raw TE fails on autocorrelated targets). The reduction stays byte-identical to the
+# TS/py kernel: predict-before-update, the first frame opens at 0, the sign survives.
+ewma_innovation <- function(x, alpha) {
+  n <- length(x)
+  if (n <= 1) return(numeric(n))       # no history → no innovation
+  pred <- numeric(n)
+  s <- x[1]
+  pred[1] <- s                          # first frame predicts itself → residual 0
+  for (t in 2:n) {
+    pred[t] <- s                        # predict from the state BEFORE seeing x[t]
+    s <- (1 - alpha) * s + alpha * x[t] # UPDATE the running forecast with the observation
+  }
+  x - pred                              # signed residual; the whitened signal
+}
+do_whiten <- if (!is.null(req$whiten)) isTRUE(req$whiten) else FALSE
+alpha_w   <- if (!is.null(req$alpha)) as.numeric(req$alpha) else 0.3
+if (do_whiten) {
+  M <- apply(M, 2L, function(col) ewma_innovation(col, alpha_w))  # per-column, cols preserved
+  if (!is.matrix(M)) M <- matrix(M, ncol = K)
+}
 
 # calc_te (raw transfer entropy) — the permutation-null STATISTIC. calc_ete (effective TE,
 # shuffle-bias-corrected) — the reported EFFECT SIZE. The p-value tests the observed te
