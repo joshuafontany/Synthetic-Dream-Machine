@@ -31,7 +31,7 @@ INPUT  (one request object):
         ],
         "graph": [                          #   PlaceholderNode[] (recursive)
           {"kind": "sigil", "sigilName": "loulou", "family": "relation",
-           "attrKeys": ["uri"], "recoveredAs": null, "confidence": 18,
+           "attrKeys": ["uri"], "recoveredAs": null, "standing": 18,
            "content": "_", "children": [ ... ]},
           ...
         ],
@@ -69,8 +69,8 @@ OUTPUT  (the caller-vector for the base's "form" collection):
         "axis_activation": {"sigil:loulou": 0.91, ...},      # the profile
         "ngram_features": {"uni:voice:council": 1,
                            "bi:voice:council|ward:sword": 1, ...},
-        "trajectory": {"confidence": {"mean":..,"std":..,"min":..,"max":..,
-                                      "first":..,"last":..,"slope":..}, ...},
+        "trajectory": {"standing": {"mean":..,"std":..,"min":..,"max":..,
+                                     "first":..,"last":..,"slope":..}, ...},
         "slor": {"live": true, "model": "distilgpt2", "reason": ""}
       }
     }
@@ -283,12 +283,13 @@ def _lower_layer(layer: str | None) -> str | None:
 
 
 # ---------------------------------------------------------------------------
-# structural-match — t-norm of the placeholdered-graph node confidences
+# structural-match — t-norm of the placeholdered-graph node standing
 # ---------------------------------------------------------------------------
 
-# A node carrying neither confidence nor a recovery rung reads as a CLEAN
-# construction → membership ~1.0. A `recoveredAs` rung with no graded confidence
-# reads degraded; a `water` kind reads strongly degraded.
+# A node carrying neither standing nor a recovery rung reads as a CLEAN
+# construction → membership ~1.0. A `recoveredAs` rung with no graded standing
+# reads degraded; a `water` kind reads strongly degraded. `standing` names the
+# BACKWARD-earned recovery/manifestation measure (never a forward confidence vow).
 _RECOVERED_DEFAULT = 0.5
 _WATER_DEFAULT = 0.2
 
@@ -296,10 +297,10 @@ _WATER_DEFAULT = 0.2
 def _node_membership(node: dict) -> float:
     """One placeholdered-graph node → its [0,1] structural membership.
 
-    A graded `confidence` (0..20) divides to [0,1]; absent that, a recovered /
+    A graded `standing` (0..20) divides to [0,1]; absent that, a recovered /
     water node degrades; a pristine node reads clean (1.0).
     """
-    conf = node.get("confidence")
+    conf = node.get("standing")
     if isinstance(conf, (int, float)):
         return _clamp01(float(conf) / 20.0)
     kind = node.get("kind")
@@ -355,7 +356,7 @@ def _walk_graph(graph, fn) -> None:
 def _collect_memberships(skeleton: dict, axis_by_id: dict[str, dict]) -> dict[str, list[float]]:
     """Per-axis list of structural memberships from BOTH planes of the skeleton.
 
-    The GRAPH contributes graded node confidences (the manifestation); the linear
+    The GRAPH contributes graded node standing (the manifestation); the linear
     STREAM contributes clean-marker memberships (1.0) for any token already
     carrying a basis axisId (Route A: the marker emitted faithfully).
     """
@@ -526,12 +527,12 @@ def _stats(series: list[float]) -> dict | None:
     }
 
 
-def _confidence_series(graph) -> list[float]:
-    """Per-node confidence in pre-order traversal — the manifestation curve."""
+def _standing_series(graph) -> list[float]:
+    """Per-node standing in pre-order traversal — the manifestation curve."""
     series: list[float] = []
 
     def _visit(node: dict) -> None:
-        conf = node.get("confidence")
+        conf = node.get("standing")
         if isinstance(conf, (int, float)):
             series.append(float(conf))
 
@@ -541,10 +542,10 @@ def _confidence_series(graph) -> list[float]:
 
 def _trajectory(skeleton: dict, curves: dict | None) -> dict:
     traj: dict[str, dict] = {}
-    conf = _confidence_series(skeleton.get("graph") or [])
+    conf = _standing_series(skeleton.get("graph") or [])
     s = _stats(conf)
     if s is not None:
-        traj["confidence"] = s
+        traj["standing"] = s
     if curves:
         for name in ("aperture", "oodaha"):
             series = curves.get(name)

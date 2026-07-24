@@ -55,7 +55,7 @@ def make_basis():
     return {"axes": axes, "index": index, "dimension": len(axes)}
 
 
-def make_skeleton(loulou_confidence=18):
+def make_skeleton(loulou_standing=18):
     """A clean turn: aim · voice · hud(orient) · loulou edge · ward(sword) · yield."""
     stream = [
         {"kind": "bearing", "token": "aim", "axisId": "sigil:lares", "offset": -1},
@@ -75,7 +75,7 @@ def make_skeleton(loulou_confidence=18):
             "sigilName": "loulou",
             "family": "relation",
             "attrKeys": ["uri"],
-            "confidence": loulou_confidence,
+            "standing": loulou_standing,
             "content": "_",
             "children": [
                 {"kind": "text", "content": "_", "children": []},
@@ -138,8 +138,8 @@ def test_tnorm_product_and_min():
 
 
 def test_node_membership_grades_and_degrades():
-    assert fe._node_membership({"confidence": 20}) == 1.0
-    assert fe._node_membership({"confidence": 10}) == pytest.approx(0.5)
+    assert fe._node_membership({"standing": 20}) == 1.0
+    assert fe._node_membership({"standing": 10}) == pytest.approx(0.5)
     assert fe._node_membership({"kind": "water"}) == fe._WATER_DEFAULT
     assert fe._node_membership({"recoveredAs": "augment"}) == fe._RECOVERED_DEFAULT
     assert fe._node_membership({"kind": "text"}) == 1.0  # pristine
@@ -149,7 +149,7 @@ def test_sanction_independent_and_clamped():
     """Memberships stay INDEPENDENT (no softmax → they need not sum to 1) and each
     rides in [0,1]."""
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=20)
+    sk = make_skeleton(loulou_standing=20)
     res = fe.encode_form(sk, basis, scorer=FakeScorer(1.0))
     act = res["axis_activation"]
     assert all(0.0 <= v <= 1.0 for v in act.values())
@@ -164,7 +164,7 @@ def test_sanction_independent_and_clamped():
 def test_slor_factor_floored_never_annihilates():
     """A SLOR of 0.0 must NOT zero the vector — the factor floors at SLOR_FACTOR_FLOOR."""
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=20)
+    sk = make_skeleton(loulou_standing=20)
     res = fe.encode_form(sk, basis, scorer=FakeScorer(0.0))
     # clean structural (1.0) × floored slor (0.5) × neutral entrenchment (1.0).
     assert res["axis_activation"]["voice:council"] == pytest.approx(fe.SLOR_FACTOR_FLOOR)
@@ -174,7 +174,7 @@ def test_slor_factor_floored_never_annihilates():
 def test_fallback_drops_slor_factor():
     """A dead scorer → SLOR factor dropped (1.0); sanction = structural × entrenchment."""
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=20)
+    sk = make_skeleton(loulou_standing=20)
     res = fe.encode_form(sk, basis, scorer=DeadScorer())
     assert res["slor"]["live"] is False
     assert "ImportError" in res["slor"]["reason"]
@@ -195,7 +195,7 @@ def test_entrenchment_normalizes_log():
 
 def test_entrenchment_modulates_sanction():
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=20)
+    sk = make_skeleton(loulou_standing=20)
     res = fe.encode_form(
         sk, basis, scorer=FakeScorer(1.0), entrenchment={"sigil:loulou": 100, "voice:council": 1}
     )
@@ -210,7 +210,7 @@ def test_entrenchment_floor_keeps_reservoir():
     ENTRENCHMENT_FLOOR toehold (the evolvability-reservoir canon: never prune a
     well-formed-but-rare construction)."""
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=20)
+    sk = make_skeleton(loulou_standing=20)
     # ward:sword is absent from the table → would be 0.0 without the floor.
     res = fe.encode_form(
         sk, basis, scorer=FakeScorer(1.0), entrenchment={"sigil:loulou": 100}
@@ -226,17 +226,17 @@ def test_entrenchment_floor_keeps_reservoir():
 
 
 def test_degraded_leaf_lights_parent_and_lower_layer():
-    """A degraded sigil:loulou (low confidence) must light its parent family axis
+    """A degraded sigil:loulou (low standing) must light its parent family axis
     AND the grammar-layer beneath it — degradation falls upward + down the tower,
     never hard-faults."""
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=4)  # 4/20 = 0.2 → heavily degraded
+    sk = make_skeleton(loulou_standing=4)  # 4/20 = 0.2 → heavily degraded
     degraded = fe.encode_form(sk, basis, scorer=FakeScorer(1.0), prop_fraction=0.5)
     act = degraded["axis_activation"]
 
     # The clean contrast: same turn, pristine loulou.
     clean = fe.encode_form(
-        make_skeleton(loulou_confidence=20), basis, scorer=FakeScorer(1.0), prop_fraction=0.5
+        make_skeleton(loulou_standing=20), basis, scorer=FakeScorer(1.0), prop_fraction=0.5
     )["axis_activation"]
 
     # loulou is degraded but still present.
@@ -256,7 +256,7 @@ def test_degraded_leaf_lights_parent_and_lower_layer():
 
 def test_clean_leaf_does_not_propagate():
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=20)  # clean → no degradation
+    sk = make_skeleton(loulou_standing=20)  # clean → no degradation
     res = fe.encode_form(sk, basis, scorer=FakeScorer(1.0), prop_fraction=0.5)
     act = res["axis_activation"]
     # family:relation is bound DIRECTLY by the clean loulou node (1.0) — but gets
@@ -307,12 +307,12 @@ def test_trajectory_stats():
 
 def test_trajectory_over_skeleton_and_curves():
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=18)
+    sk = make_skeleton(loulou_standing=18)
     res = fe.encode_form(
         sk, basis, scorer=FakeScorer(1.0), curves={"aperture": [10, 11, 13], "oodaha": [3, 4]}
     )
     traj = res["trajectory"]
-    assert traj["confidence"]["first"] == 18.0  # the one graded node
+    assert traj["standing"]["first"] == 18.0  # the one graded node
     assert traj["aperture"]["slope"] > 0
     assert traj["oodaha"]["mean"] == pytest.approx(3.5)
 
@@ -349,7 +349,7 @@ def test_turn_conformance_partial_frame():
 
 def test_end_to_end_sparse_vector_shape():
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=18)
+    sk = make_skeleton(loulou_standing=18)
     res = fe.encode_form(sk, basis, scorer=FakeScorer(0.8))
 
     fv = res["form_vector"]
@@ -368,7 +368,7 @@ def test_end_to_end_sparse_vector_shape():
 
 def test_l2_normalization():
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=18)
+    sk = make_skeleton(loulou_standing=18)
     res = fe.encode_form(sk, basis, scorer=FakeScorer(1.0), l2=True)
     vals = res["form_vector"]["values"]
     norm = math.sqrt(sum(v * v for v in vals))
@@ -400,7 +400,7 @@ def test_real_scorer_end_to_end():
     """A real scorer threaded through encode_form yields a live (or fallback) flag
     and a non-collapsed vector either way."""
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=18)
+    sk = make_skeleton(loulou_standing=18)
     sc = fe.SlorScorer()
     res = fe.encode_form(sk, basis, scorer=sc)
     assert isinstance(res["slor"]["live"], bool)
@@ -526,7 +526,7 @@ def test_encode_store_wire_end_to_end(tmp_path):
     holder = {"scorer": FakeScorer(1.0), "store": None, "palace": palace}
     out = io.StringIO()
     basis = make_basis()
-    sk = make_skeleton(loulou_confidence=18)
+    sk = make_skeleton(loulou_standing=18)
     req = {
         "id": 1, "op": "encode_store", "key": SHA_A,
         "skeleton": sk, "basis": basis,
