@@ -166,6 +166,11 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "pure combinatorial rank-aggregation (Borda + Kemeny/Kendall-tau median over the five 0-20 ladders) — a hull-native primitive like numerics.ts; no offline-RUN compute, so no py twin is planned.",
   },
   {
+    ts: "crystallization.ts", py: null, status: "ts-concept-witness",
+    fixtures: [],
+    note: "the memetic crystallization cap (a pattern STANDS = born-across-strata ⊕ rigid) — an ORCHESTRATION over a tunable lens: it groups occurrences by a coordinate and routes them into nucleate (birth) + temporalRigidity (re-lock), adding no numerical kernel of its own. The reused gates carry their own parity; no independent statistic to cross-validate, so no py twin is planned.",
+  },
+  {
     ts: "transfer-entropy.ts", py: "coupling.R", status: "owed-fixture",
     fixtures: [],
     note: "the discrete conditional-TE keel; coupling.R (RTransferEntropy effective TE + bootstrap null) carries the sidecar twin — the shared fixture remains owed.",
@@ -219,7 +224,7 @@ const MANIFEST: readonly ParityEntry[] = [
 
 /** The numerics name-pattern the census sweeps — a new organ matching this MUST register above. */
 const NUMERICS_PATTERN =
-  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupl|self-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics|rank-te|rank-consensus)/;
+  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupl|self-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics|rank-te|rank-consensus|crystallization)/;
 
 describe("the TS↔py parity manifest (the L4 gate)", () => {
   test("CENSUS — every numerics module in mesh/src registers exactly once", () => {

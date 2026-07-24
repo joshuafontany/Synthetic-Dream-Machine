@@ -211,6 +211,7 @@ export * from "./temporal-rigidity.js";
 export * from "./clock-recovery.js";
 export * from "./sink.js";
 export * from "./sink-class.js";
+export * from "./crystallization.js";
 export * from "./commit-dial.js";
 export * from "./purple-minter.js";
 export * from "./spectral-keel.js";
