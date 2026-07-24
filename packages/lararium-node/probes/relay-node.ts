@@ -1,7 +1,7 @@
 /**
- * relay-node — the membership RELAY service entrypoint: a dumb broadcast relay the swarm
- * vessels connect to (WSMembershipChannel). The strangler-fig WS transport for the swarm
- * — one relay container, the vessels dial it; the ceremony crosses live sockets.
+ * relay-node — the Herm's OPEN membership-relay entrypoint: a blind broadcast crossroads the swarm
+ * vessels dial (WSMembershipChannel). The Herm's carriage reads NOTHING — it routes opaque ceremony
+ * envelopes (contact-card / admit / invite) over live sockets; one relay, the vessels dial it.
  *
  * Env: LAR_RELAY_PORT (default 8090).
  * Run: LAR_RELAY_PORT=8090 pnpm exec tsx packages/lararium-node/probes/relay-node.ts

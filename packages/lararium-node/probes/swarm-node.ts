@@ -14,7 +14,8 @@
  *
  * Discovery rides the channel (a re-broadcast INVITE) — no shared place file — so it works
  * for the persistent file channel AND the ephemeral WS channel (a late/reconnecting joiner
- * catches a later invite). file/POST first; the WS relay-service is the strangler-fig swap.
+ * catches a later invite). file/POST serves a shared-dir swarm, the WS relay-service serves live sockets —
+ * two live forms of the Herm's OPEN ceremony carriage behind one seam, chosen by env.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
  */

@@ -1,12 +1,11 @@
 /**
- * membership-channel — the STRANGLER-FIG SEAM the WHO-plane ceremony crosses.
+ * membership-channel — the seam the WHO-plane ceremony crosses (the Herm's OPEN ceremony transport).
  *
  * The membership ceremony (contact-card exchange · join-request · admit · invite) is
- * bidirectional; the transport under it is swappable. This interface is the fig's trunk:
- *   · Impl-1 — file/POST (FileMembershipChannel, node-side): ships the swarm witness NOW.
- *   · Impl-2 — live-WS (over lar-ws-client-adapter): drops in behind THIS SAME interface
- *     later, and the file impl is then retired — the strangler-fig replacement, no swarm
- *     test rewritten. The seam is why the swap costs nothing above it.
+ * bidirectional; the transport under it is swappable. This interface is the trunk both live impls ride:
+ *   · Impl-1 — file/POST (FileMembershipChannel, node-side): the Herm's ceremony carriage over a shared dir.
+ *   · Impl-2 — live-WS (over lar-ws-client-adapter): the same carriage over live sockets, behind THIS SAME
+ *     interface — chosen by deployment, not a migration. The seam is why either transport costs nothing above it.
  *
  * The channel carries OPAQUE ceremony envelopes — it never interprets the payload (a
  * contact card, an admit payload, an invite token). Routing only: address vessel→vessel

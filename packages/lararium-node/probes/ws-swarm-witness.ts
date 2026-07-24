@@ -1,8 +1,8 @@
 /**
- * WS-SWARM WITNESS — the strangler-fig cut-over: the SAME swarm ceremony that crossed a
- * file channel now crosses LIVE WebSockets, over real sockets, real Keyhive. The seam
- * (MembershipChannel) is unchanged; only the impl swapped file → WS. If this passes, the
- * live-WS replacement the operator ruled is proven, and the file impl can retire.
+ * WS-SWARM WITNESS — the swarm ceremony over the Herm's OPEN membership relay: the SAME ceremony that
+ * crosses a file channel crosses LIVE WebSockets here, over real sockets, real Keyhive. The seam
+ * (MembershipChannel) holds one shape; the file and WS impls are both live forms of the Herm's blind
+ * ceremony carriage, chosen by deployment. This witnesses the WS impl across real sockets.
  *
  *   relay (in-process WebSocketServer) ← founder · vessel-B · vessel-C (each a WS client)
  *
