@@ -141,9 +141,14 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "the multivariate Gaussian conditional-TE mesh coupling (the hoike's locked keel); py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
   },
   {
+    ts: "signed-innovation.ts", py: null, status: "owed-py-twin",
+    fixtures: [],
+    note: "the WHITENING cap — a preprocessing transform, NOT a coupling estimator (the two cap-stacks were conflated under one hold; separated here). Reduces each child to its signed EWMA innovation ε = actual − predicted, the correct TE prewhitening (Behrendt 2022: raw TE fails on self-predictable targets). Composes sensorium-pc; its py twin's KERNEL already lives in predictive_coding.py (the signed residual ε = obs − pred, there squared into surprise) — the owed twin only EXPOSES it as whitened-children output (RUN-ARC debt pool). It gates the whiten-or-not CHOICE, not the coupling: Surface-A = whitened coupling (whiten→couple), Surface-B = raw coupling. Surface-A parity ADDITIONALLY owes the R pipeline a whitening pre-step (coupling.R couples RAW); Surface-B rides mesh-coupling ↔ coupling.R already. The two surfaces compose — whitened-minus-raw reads how much apparent coupling is self-inertia (a force-multiplier comparator, a future cap).",
+  },
+  {
     ts: "mesh-couple.ts", py: null, status: "ts-concept-witness",
     fixtures: [],
-    note: "the coupling CAPSTONE — ONE call composing the locked coupling floors in order (signed-innovation whiten → mesh-coupling-mv couple → cmi-significance gate → the MeshCoupling verdict), consumed by windowed-coupling + the node-side reader. Composition, not numerics (like spectral-keel-cap): each composed floor carries its own parity, and the RUN diffs the coupling RESULT (coupleMesh ↔ coupling.R via the mismatch comparator), so no standalone py twin is planned. (signed-innovation's own parity stance stays surfaced-pending — owed-py-twin vs ts-concept-witness turns on whether coupling.R should prewhiten.)",
+    note: "the coupling CAPSTONE — ONE call composing the locked coupling floors in order (signed-innovation whiten → mesh-coupling-mv couple → cmi-significance gate → the MeshCoupling verdict), consumed by windowed-coupling + the node-side reader. Composition, not numerics (like spectral-keel-cap): each composed floor carries its own parity, and the RUN diffs the coupling RESULT (coupleMesh ↔ coupling.R via the mismatch comparator), so no standalone py twin is planned. (The whiten pre-step rides its own row — signed-innovation.ts, owed-py-twin: two cap-stacks, separated. Surface-A/whitened parity there also names the R-pipeline whitening debt.)",
   },
   {
     ts: "self-coupling.ts", py: null, status: "ts-concept-witness",
@@ -224,7 +229,7 @@ const MANIFEST: readonly ParityEntry[] = [
 
 /** The numerics name-pattern the census sweeps — a new organ matching this MUST register above. */
 const NUMERICS_PATTERN =
-  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupl|self-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics|rank-te|rank-consensus|crystallization)/;
+  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupl|self-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics|rank-te|rank-consensus|crystallization|signed-innovation)/;
 
 describe("the TS↔py parity manifest (the L4 gate)", () => {
   test("CENSUS — every numerics module in mesh/src registers exactly once", () => {
