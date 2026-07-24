@@ -47,6 +47,8 @@ import { hasCapture } from "./has-capture.js";
 import { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 import type { IslandCap } from "./island-caps.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
+import type { RunnableHulls } from "@lararium/mesh";
+import { seedDaemonProtocol } from "./daemon-protocol-seed.js";
 
 export interface DaemonBehaviorOptions {
   /** A ready verifier (e.g. tests, or a host-provided one). */
@@ -106,6 +108,13 @@ export interface DaemonBehaviorOptions {
   makeCaptureEngine?: (post: CapturePost, ctx: IslandContext) => CaptureEngine;
   /** the capture cap's server tick (ms); default 50. */
   captureTickMs?: number;
+  /**
+   * The vessel's runnable hulls — when present, makeDaemonBehavior runs the ONE cap-gated protocol seed
+   * ({@link seedDaemonProtocol}) in `onEa`, so neither boot entry re-seeds (the isomorphic seed lift). A
+   * ts-only vessel (browser) passes HULLS_TS_ONLY → crystal alone; a full node vessel passes HULLS_FULL →
+   * all three flows. ABSENT → no seed (a non-operator makeDaemonBehavior caller keeps its old behavior).
+   */
+  runnableHulls?: RunnableHulls;
 }
 
 export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBehavior {
@@ -137,6 +146,10 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
     name: "daemon-dispatch",
     async onEa(ctx: IslandContext) {
       const { tw5, composite, post } = ctx;
+      // The ONE cap-gated @daemon protocol seed (the isomorphic seed lift): Ui+Persona+Circle+Flow, once,
+      // on the hook BOTH boots reach — so neither entry re-seeds. Gated on `runnableHulls` (absent → skip,
+      // preserving old behavior for non-operator callers). Idempotent (each seed setTiddler-overwrites).
+      if (opts.runnableHulls) seedDaemonProtocol(tw5, opts.runnableHulls);
       // Resolve the verifier: the async factory (bootDaemonKeyhive over the daemon
       // composite) wins; else a ready verifier; else none (delegated-verb path).
       const verifier = opts.verifierFactory ? await opts.verifierFactory(ctx) : opts.verifier;

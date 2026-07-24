@@ -15,7 +15,8 @@
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
 import { makeOperatorDaemonBehavior } from "@lararium/keyhive/operator-daemon-behavior";
-import { mountProjection, seedDaemonUiTiddlers, seedDaemonPersonaTiddlers, seedDaemonCircleTiddlers, seedDaemonFlowTiddlers } from "@lararium/tw5";
+import { mountProjection } from "@lararium/tw5";
+import { HULLS_TS_ONLY } from "@lararium/mesh";
 
 // The @daemon INHERITS the wiki render cap (hasProjection). Mount its projection DORMANT at island-boot —
 // exactly as a pool wiki mounts its camera — so summoning the @daemon is a pure active-surface gate flip,
@@ -23,12 +24,10 @@ import { mountProjection, seedDaemonUiTiddlers, seedDaemonPersonaTiddlers, seedD
 // frames ride onProjection to the boot; the boot's active-surface gate decides whether they paint #projection.
 runBrowserSovereignWorker((manifest) =>
   makeOperatorDaemonBehavior(manifest, {
-    // Born-from-source: paint the @daemon UX widget's CODE tiddlers + open the switcher
-    // wrapper as the story's INITIAL content — BEFORE the camera renders, so no
-    // story-navigation beat (which would reference `window` in this headless Worker).
-    // seedDaemonFlowTiddlers lands the pet-named FLOW tiddlers into the @daemon bag beside the UI seeds — the
-    // one isomorphic seed site. (The headless NODE daemon carries no projection onBoot, so a node-only deploy
-    // seeds no flow tiddlers YET; the runner still runs every flow from FLOW_SEEDS in code. When a node-side
-    // @daemon-bag seed hook lands, seedDaemonFlowTiddlers rides it too.)
-    onBoot: (ctx) => { seedDaemonUiTiddlers(ctx.tw5); seedDaemonPersonaTiddlers(ctx.tw5); seedDaemonCircleTiddlers(ctx.tw5); seedDaemonFlowTiddlers(ctx.tw5); return mountProjection(ctx); },
+    // THE ISOMORPHIC SEED LIFT: the @daemon protocol seed (Ui+Persona+Circle+Flow) no longer lives here —
+    // makeDaemonBehavior runs the ONE cap-gated seedDaemonProtocol in onEa, so both boots seed from one
+    // site (the two-site wart + the node-onBoot asymmetry this file once flagged are gone). This ts-only
+    // browser vessel passes HULLS_TS_ONLY → it seeds crystal alone. onBoot drops to the projection mount.
+    onBoot: (ctx) => mountProjection(ctx),
+    runnableHulls: HULLS_TS_ONLY,
   }));

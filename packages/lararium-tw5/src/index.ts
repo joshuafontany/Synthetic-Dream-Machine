@@ -165,6 +165,7 @@ export { seedDaemonUiTiddlers, makeSwitcherStateReactor, DAEMON_UI_TIDDLERS, SWI
 export { seedDaemonPersonaTiddlers, makePersonaStateReactor, DAEMON_PERSONA_TIDDLERS, PERSONA_STATE_TITLE } from "./daemon-persona-tiddlers.js";
 export { seedDaemonCircleTiddlers, makeCircleStateReactor, DAEMON_CIRCLE_TIDDLERS, CIRCLE_STATE_TITLE } from "./daemon-circle-tiddlers.js";
 export { seedDaemonFlowTiddlers } from "./daemon-flow-tiddlers.js";
+export { seedDaemonProtocol } from "./daemon-protocol-seed.js";
 
 export { IslandKernel } from "./island-kernel.js";
 export { runSovereignKernel } from "./sovereign-kernel.js";

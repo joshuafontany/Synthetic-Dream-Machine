@@ -38,7 +38,7 @@ import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from 
  *  `persistArchive` — the Boundary-1 inversion: keyhive stays fs-blind, so NODE injects the writer that
  *  lands `keyhive.exportArchive()` bytes in the sovereign identity home. Consumed HERE (never forwarded to
  *  makeDaemonBehavior). Absent (a browser vessel with no fs) → the archive floor simply never persists. */
-type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs" | "onBoot"> & {
+type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs" | "onBoot" | "runnableHulls"> & {
   persistArchive?: (bytes: Uint8Array) => void | Promise<void>;
   /** `vault` — the SAME Boundary-1 inversion for the at-rest seal LIFECYCLE (#60): keyhive stays
    *  fs-blind, so NODE injects the handler that seals/rotates/exports the identity-home carriers and
