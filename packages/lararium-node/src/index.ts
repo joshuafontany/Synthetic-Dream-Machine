@@ -289,6 +289,8 @@ export { startCarriageRelay } from "./carriage-relay.js";
 export type { CarriageRelay } from "./carriage-relay.js";
 export { startCarriageServeLoop } from "./carriage-serve-loop.js";
 export type { CarriageServeLoop, CarriageServeLoopConfig } from "./carriage-serve-loop.js";
+export { startNexusClientDial, maybeStartNexusClientDial } from "./nexus-client-dial.js";
+export type { NexusClientDial, NexusClientDialConfig, NexusClientDialInput } from "./nexus-client-dial.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";
 export { FileMembershipChannel } from "./file-membership-channel.js";
 export { makeFormPalace } from "./sensorium.js";

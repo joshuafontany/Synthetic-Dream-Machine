@@ -32,7 +32,7 @@ import { createServer }  from "http";
 import { networkInterfaces }             from "os";
 import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
-import { deriveReachFaces, wsUrlForOrigin, crossingUrl, type InterfaceTable } from "./lan-address.js";
+import { deriveReachFaces, wsUrlForOrigin, crossingUrl, appOriginForFace, type InterfaceTable } from "./lan-address.js";
 import { openNodeVessel, openNodeHerm, type NodeRecipe } from "./open-node-vessel.js";
 import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
@@ -226,9 +226,18 @@ async function main(): Promise<void> {
   console.log(`[lararium] gate key: ${gateIdentity.verifyingKey}`);
   console.log("[lararium] browser crossing — open one of these on the device that crosses:");
   for (const f of reachFaces) {
-    console.log(`[lararium]   ${crossingUrl({ host: f.host, appPort, wsUrl: wsUrlForOrigin(f.origin), gateKey: gateIdentity.verifyingKey })}   (${f.kind})`);
+    console.log(`[lararium]   ${crossingUrl({ appOrigin: appOriginForFace(f, appPort), wsUrl: wsUrlForOrigin(f.origin), gateKey: gateIdentity.verifyingKey })}   (${f.kind})`);
   }
   console.log("[lararium]   (a leaf still needs an ADMIT — the leaf's page shows its own key + the `lares device-admit` line to run here)");
+
+  // The CLIENT dial-out (Socket A) — announced when a peer sync URL rides the config (the same-operator device
+  // breath: this vessel DIALS a peer node's /ws carrying the operator's own identity). Read inside the vessel;
+  // announced here so the operator sees it. Absent → no dial, no line.
+  const joinSync = process.env["LAR_JOIN_SYNC"];
+  if (joinSync) {
+    const joinGate = process.env["LAR_JOIN_GATE"];
+    console.log(`[lararium] nexus dial-out → ${joinSync}${joinGate ? "" : "   (no LAR_JOIN_GATE — fail-closed to inert; a gate-less dial cannot bind the anti-relay proof)"}`);
+  }
 
   // The @oracle read-only PUBLIC substrate (the Two-Faced Substrate's content-addressed
   // floor) — served over THIS http server: GET /oracle/pointer · /oracle/<cid>.bin.

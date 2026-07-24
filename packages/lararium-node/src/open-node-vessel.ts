@@ -80,6 +80,8 @@ import { standNexusKeyring } from "./nexus-convergence-secret-store.js";
 import { cadSealDir, sealCarrierForFederation } from "./seal-carrier-federation.js";
 import { makeBagTracker } from "./bag-tracker.js";
 import { startCarriageServeLoop, type CarriageServeLoop } from "./carriage-serve-loop.js";
+import { maybeStartNexusClientDial, type NexusClientDial } from "./nexus-client-dial.js";
+import { loadLeafIdentity } from "./leaf-identity.js";
 import { readCasBlobFromFs } from "./node-cas.js";
 import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
@@ -222,6 +224,15 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   carriageRelayUrl?: string;
   /** The carriage serve-loop poll cadence (ms) — how promptly a member's want-block draws a serve turn. */
   carriagePollIntervalMs?: number;
+  /** The peer node's `/ws` URL (Socket A, cleartext CRDT) this vessel DIALS to sync — the same-operator device
+   *  breath. ABSENT (and `LAR_JOIN_SYNC` unset) → NO client adapter mounts, NO dial, zero change (provably inert). */
+  joinSyncUrl?: string;
+  /** The DIALED peer's gate verifying-key hex — the gate-binding the outbound V3 proof commits to (out-of-band,
+   *  NEVER trusted from the wire). REQUIRED alongside `joinSyncUrl`; absent → fail-closed to inert (no dial). */
+  joinGatePubKey?: string;
+  /** OPTIONAL island/doc URL the dial-out `repo.find()`s once mounted — consumes the device-admit payload's
+   *  `islandDocUrl`. Absent → the vessel syncs only docs it already knows. */
+  joinDocUrl?: string;
 }
 
 export interface NodeVesselResult extends VesselResult<VesselIslandPool, DaemonVmCore> {
@@ -258,6 +269,9 @@ interface NodeBootPrep {
   /** The carriage serve-loop (Socket B) — present ONLY when a carriage-relay URL was configured; else null (inert).
    *  The two vessel entry-points fold its `stop()` into their teardown so no timer / socket leaks past close. */
   carriageLoop:     CarriageServeLoop | null;
+  /** The client dial-out (Socket A) — present ONLY when a peer sync URL + gate key were configured; else null
+   *  (inert). The two vessel entry-points fold its `stop()` into teardown so no client socket leaks past close. */
+  nexusDial:        NexusClientDial | null;
   emit:             (p: NodeOpenPhase) => void;
   /** The full-node orchestration (keel + every VM closure) the shared cap composer walks. */
   orchestration:    VesselOrchestration<VesselIslandPool>;
@@ -498,6 +512,32 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         onLog:        (line) => console.log(`[carriage] ${line}`),
       })
     : null;
+
+  // ── The CLIENT dial-out (Socket A, cleartext CRDT) — INERT until a peer sync URL + gate key ride the config ──
+  // When configured, the vessel mounts a `LarWSClientAdapter` carrying the operator's OWN leaf identity onto the
+  // running Repo and DIALS the peer node's `/ws`, so a same-operator second device syncs the private planes both
+  // ways (the peer's gate vouches it `same-operator`; `selfSlotShareDecision` opens full sync). The dial rides the
+  // Automerge `/ws` relay (Socket A) — the SAME transport the server adapter answers on, SEPARATE from the carriage
+  // relay (Socket B). REAL crypto: the outbound proof binds to the peer's gate key (out-of-band, never the wire) and
+  // carries the operator's own identity, never a forged one. ABSENT the config → no adapter, no dial, no change.
+  const joinSyncUrl    = opts.joinSyncUrl    ?? process.env["LAR_JOIN_SYNC"] ?? null;
+  const joinGatePubKey = opts.joinGatePubKey ?? process.env["LAR_JOIN_GATE"] ?? null;
+  const joinDocUrl     = opts.joinDocUrl     ?? process.env["LAR_JOIN_DOC"]  ?? null;
+  // The operator's OWN light leaf identity (cached ContactCard + bare-Ed25519 signer). A missing card (never
+  // `lares init`-ed) → skip the dial rather than crash the boot (fail-open to inert; a dial needs a real card).
+  let nexusDial: NexusClientDial | null = null;
+  if (joinSyncUrl) {
+    try {
+      const leafIdentity = await loadLeafIdentity(storageDir);
+      nexusDial = maybeStartNexusClientDial({
+        repo, syncUrl: joinSyncUrl, gatePubKey: joinGatePubKey, identity: leafIdentity,
+        ...(joinDocUrl ? { docUrl: joinDocUrl } : {}),
+        onLog: (line) => console.log(`[nexus-join] ${line}`),
+      });
+    } catch (e) {
+      console.log(`[nexus-join] dial-out skipped — leaf identity unavailable (run \`lares init\`): ${e instanceof Error ? e.message : String(e)}`);
+    }
+  }
 
   // ── Main-resident residency MECHANISM (sovereign-worker: policy in the worker,
   //    mechanism here). onEvict commands the pool via the forward `vmManager` ref. ──
@@ -1345,7 +1385,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   };
 
   return {
-    repo, catalogHandle, operatorSeed, residency, carriageLoop, emit, orchestration,
+    repo, catalogHandle, operatorSeed, residency, carriageLoop, nexusDial, emit, orchestration,
     openDaemon, wireVerbs, afterDaemon,
     daemonVm:         () => daemonVm,
     eventBus:         () => eventBus,
@@ -1393,9 +1433,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase: "live",
     eventBus: p.eventBus(),
-    // Graceful shutdown tears the pool down AND stops the carriage serve-loop (a no-op when none stood) — the
-    // interval clears + Socket B closes, so no timer / socket leaks past close.
-    stopTick: () => { void result.pool.disposeAll(); void p.carriageLoop?.stop(); },
+    // Graceful shutdown tears the pool down AND stops the carriage serve-loop (Socket B) + the client dial-out
+    // (Socket A) — each a no-op when none stood — so no timer / client socket leaks past close.
+    stopTick: () => { void result.pool.disposeAll(); void p.carriageLoop?.stop(); p.nexusDial?.stop(); },
   };
 }
 
@@ -1439,6 +1479,7 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     phase:            "live",
     dispose: async () => {
       await p.carriageLoop?.stop();   // stop Socket B first (a no-op when none stood) — no timer / socket leaks
+      p.nexusDial?.stop();            // stop the client dial-out (Socket A) — a no-op when none stood
       await p.daemonVm().shutdown();
       await herm.vessel.dispose();   // reverse build order → read-face disposes (clears the HTTP handler)
     },

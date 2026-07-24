@@ -103,11 +103,27 @@ export function wsUrlForOrigin(origin: string): string {
 }
 
 /**
- * Build the crossing URL a leaf opens: the app host, the relay it dials, and the GATE key its V3 proof
- * commits to. The relay rides the SAME host the app came from — a phone that loaded the app over a LAN
- * address cannot dial `localhost`, which on that phone names the phone.
+ * The APP origin a reach-face advertises — where the browser loads the static app from.
+ *
+ * A DECLARED face (LAR_PUBLIC_URL) serves the app at its OWN name over its OWN scheme: an operator who set
+ * `https://enyalios.home.amorphousdreams.net` fronts BOTH the app and the relay behind ONE reverse proxy
+ * that terminates TLS, so the app rides that https origin directly — no separate app port. A loopback / LAN
+ * face has no proxy: the static app answers on the dev/app port at the same host over http. So the declared
+ * origin advertises the app over `https` (and its relay over `wss`, via wsUrlForOrigin), while the local
+ * faces keep today's `http://host:appPort` behaviour unchanged.
  */
-export function crossingUrl(opts: { host: string; appPort: number; wsUrl: string; gateKey: string }): string {
-  const appHost = opts.host.replace(/:\d+$/, "");
-  return `http://${appHost}:${opts.appPort}/?relay=${opts.wsUrl}&gate=${opts.gateKey}`;
+export function appOriginForFace(face: ReachFace, appPort: number): string {
+  if (face.kind === "declared") return face.origin.replace(/\/+$/, "");   // proxy serves the app at this name too
+  const host = face.host.replace(/:\d+$/, "");                            // drop the relay port; the app rides appPort
+  return `http://${host}:${appPort}`;
+}
+
+/**
+ * Build the crossing URL a leaf opens: the app origin, the relay it dials, and the GATE key its V3 proof
+ * commits to. The relay rides the SAME name the app came from — a phone that loaded the app over a LAN
+ * address cannot dial `localhost` (which on that phone names the phone), and a browser on a TLS name cannot
+ * dial a `ws://` relay from an `https://` page (mixed content), so a declared face carries `wss` throughout.
+ */
+export function crossingUrl(opts: { appOrigin: string; wsUrl: string; gateKey: string }): string {
+  return `${opts.appOrigin.replace(/\/+$/, "")}/?relay=${opts.wsUrl}&gate=${opts.gateKey}`;
 }
