@@ -326,6 +326,18 @@ A fresh browser spore dials in along one of ''three distinct crossings'', each c
 
 ''The keystone (PROPOSED, unbuilt):'' a ''tiered verdict in the keyholder worker'' — the gate reads the dialing spore and returns one of ''veil · PersonaGroup · owner'', routing each crossing to its right door (the split-gate made operational). The earlier single DENIED verdict read as a fused gate; the tiered verdict dissolves it. <<~ confidence Synthesis 12/20 >> the matrix stands ruled; the tiered keyholder-worker verdict awaits build and witness.
 
+!!! The split-gate stands concrete ~ one mechanism per door
+
+Each door of the tiered gate now names a built mechanism, so the abstract split runs on real code:
+
+* ''WHO · read-door'' — a bag declares its read-scope as self-describing TIGHTEN-ONLY data (<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>: `VEIL ⊂ PERSONAGROUP ⊂ CONTRACT ⊂ PUBLIC`), and the gate enforces `declared ∧ structural-floor` — a declaration only ever tightens below what the crypto permits. The four tiers ARE the WHO-axis read-scope made into a datum.
+* ''INFRA · relay-forward door'' — an authenticated membership relay carries sealed envelopes carry ⊥ read: it stamps each envelope with the sender's proven key and reads nothing (<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>). The read-cap NEVER rides this door; it arrives on the WHO door as a keyring delivered at admission, bound into the persona-signed grant (cap-tier#keyring-delivery). A ''standing relay'' is this door stood always-on — a carry-only cap, MANDATORY-infra, never a reader.
+* ''SOCIAL admin-sync door'' — same-operator vessels join through the device-admit PersonaGroup edge (full private sync); a cross-operator hearth joins by a quorum-signed members-registry contract, never the admin door (<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>). Two sovereign hearths on one LAN CONTRACT; they never merge.
+
+''The browser clears the WHO/INFRA doors only from a secure context'' — `crypto.subtle` + OPFS demand `https`/`localhost`, so a phone reaches the doors through a DNS-01 trusted name on the kahu domain, not a bare LAN IP (<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>).
+
+''The one door not yet stood LIVE in a vessel:'' the relay-forward CARRIAGE loop (`serveCasWire` over the authenticated relay). Every piece — seal producer, member gate, relay, discovery, keyring — stands built and green in isolation; no running vessel yet assembles the serving loop. So cross-operator SEALED sync stays fail-closed until that loop lands — correctly denying a private plane it cannot yet carry, never a bug. <<~ confidence Synthesis-Canon 14/20 >> the split-gate is ruled and its doors built; the live carriage loop is the one owed assembly, and the whole family breath waits on that single wiring.
+
 <<~ ward ? · "the relay-forward gate admits by lease + cost" — the crossing-cost calibration (siege-gate, Sybil-filter) stays an open design, carried with the veil/lease economy at lararium-identity#the-veil; the gate build follows this canon. >>
 
 <<~/ahu >>
@@ -393,6 +405,13 @@ The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''st
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu#network-ring >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#five-scale >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/network-edge >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu >>
