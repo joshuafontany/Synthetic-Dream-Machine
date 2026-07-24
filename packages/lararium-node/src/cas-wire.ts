@@ -40,6 +40,12 @@ import { readCasBlobFromFs } from "./node-cas.js";
 export const CAS_WANT_BLOCK = "cas-want-block" as const;
 export const CAS_BLOCK      = "cas-block" as const;
 export const CAS_MU         = "cas-mu" as const;
+/** The DISCOVERY announce leg (RE-SHARE): a holder broadcasts `cas-have(cid)`; a member asks `cas-want-have(cid)`.
+ *  The relay SNIFFS `cas-have` into its DHT-free bag-tracker (cid → holders), so discovery answers from a live
+ *  index. The tracker stays a HINT — a member re-verifies `verifyCiphertextCid` on every fetched byte (verify-cap
+ *  ⊥ read-cap), so the announce never becomes an authority on the bytes, only on WHERE to ask. */
+export const CAS_HAVE       = "cas-have" as const;
+export const CAS_WANT_HAVE  = "cas-want-have" as const;
 
 /** The carry-lane gate + the served bytes the server composes on each request. */
 export interface CasWireServerDeps {

@@ -37,6 +37,8 @@ import {
   type DaemonCapDeps, type VesselDaemonVm,
 } from "@lararium/tw5";
 import { mountFlowMapReadFace, type OracleReadFace } from "./oracle-read-face.js";
+import { mountBulbReadFace } from "./bulb-read-face.js";
+import type { BulbArtifact } from "./bulb.js";
 
 /**
  * RE-EXPORT the isomorphic carriage symbols from `@lararium/mesh` so existing node-side importers
@@ -60,6 +62,7 @@ export const CAP = {
   meshpalace: CARRIAGE_CAP.meshpalace,
   carriage:   CARRIAGE_CAP.carriage,
   readFace:   "read-face",
+  bulb:       "bulb",
 } as const;
 
 // ── the node-ONLY cap: the http read-face that serves the @meshpalace FLOW-map ─────────────────────
@@ -85,6 +88,24 @@ export function flowMapReadFaceCap(deps: {
   };
 }
 
+// ── the node-ONLY BULB cap: the held cold-boot snapshot served by cid over the PUBLIC read-face ─────
+
+/** bulb — HOLD a cold-boot snapshot (genesis seed + CAS + bootstrap, epoch-PINNED) and serve it by cid over the
+ *  HTTP floor (`/bulb/*`), ALL-PUBLIC, alongside the FLOW-map read-face. A stranger pulls it + kindles their OWN
+ *  sovereign hearth (serve FIRE, never KEY). Requires substrate only (it reads the held artifact, mints nothing). */
+export function bulbCap(deps: {
+  httpServer: Server; bulb: BulbArtifact; signerSeed: Uint8Array; storageDir: string; onLog?: (line: string) => void;
+}): CapModule {
+  return {
+    id: CAP.bulb, requires: [CAP.substrate],
+    build: async () => mountBulbReadFace({
+      httpServer: deps.httpServer, bulb: deps.bulb, signerSeed: deps.signerSeed, storageDir: deps.storageDir,
+      ...(deps.onLog ? { onLog: deps.onLog } : {}),
+    }),
+    dispose: (face) => (face as OracleReadFace).dispose(),
+  };
+}
+
 // ── the two node cap-stacks ──────────────────────────────────────────────────────────────────────
 
 /**
@@ -106,6 +127,9 @@ export interface HermStackDeps extends DaemonCapDeps {
    *  re-ranks by proximity + drifts r. Absent → a leaf that only carries what it pulls (no carriage dials). */
   readonly meshSelf?:      MeshSelf;
   readonly pullIntervalMs?: number;
+  /** The HELD bulb this Herm serves by cid over the public floor. Absent → no `/bulb/*` face (a Herm with no
+   *  genesis to hand). Present → a stranger pulls it + kindles their OWN sovereign hearth (serve fire, never key). */
+  readonly bulb?:          BulbArtifact;
   readonly onLog?:         (line: string) => void;
 }
 
@@ -149,6 +173,12 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
       httpServer: d.httpServer, signerSeed: d.signerSeed, storageDir: d.storageDir,
       ...(d.onLog ? { onLog: d.onLog } : {}),
     }),
+    // The BULB face rides the SAME public floor (a distinct `/bulb/` prefix) — present only when the Herm HOLDS a
+    // bulb to hand. All-public boot material on the OPEN path; never the @cad carriage (bulb ⊥ stolon, ledger #1).
+    ...(d.bulb ? [bulbCap({
+      httpServer: d.httpServer, bulb: d.bulb, signerSeed: d.signerSeed, storageDir: d.storageDir,
+      ...(d.onLog ? { onLog: d.onLog } : {}),
+    })] : []),
   ]);
   return {
     vessel,

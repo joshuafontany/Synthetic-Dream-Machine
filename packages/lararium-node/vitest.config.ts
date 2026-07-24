@@ -37,6 +37,9 @@ const heavy = [
   "tests/live-wire-node-crossing.test.ts",
   "tests/daemon-auth-gate.test.ts",
   "tests/authenticated-membership-relay.test.ts",
+  "tests/carriage-heal-reconnect.test.ts",
+  "tests/carriage-reshare-sniff.test.ts",
+  "tests/bulb-kindle.test.ts",
   // nested worker_threads islands booting the full TW5 kernel off dist
   "tests/blob-sovereignty.test.ts",
   "tests/event-routing.test.ts",

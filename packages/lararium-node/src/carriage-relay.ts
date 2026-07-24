@@ -21,11 +21,12 @@
  */
 
 import * as ed from "@noble/ed25519";
-import { hex } from "@lararium/mesh";
+import { hex, type MembershipEnvelope } from "@lararium/mesh";
 import {
   startAuthenticatedMembershipRelay,
   type AuthenticatedMembershipRelay,
 } from "./authenticated-membership-relay.js";
+import { CAS_HAVE } from "./cas-wire.js";
 import { makeBagTracker, type BagTracker } from "./bag-tracker.js";
 
 /** A running carriage relay — the authenticated transport, its bound port, and the DHT-free discovery index. */
@@ -60,9 +61,32 @@ export function resolveRelayGateSeed(operatorSeed: Uint8Array, seedHex?: string 
  */
 export function startCarriageRelay(cfg: { gateSeed: Uint8Array; port?: number }): Promise<CarriageRelay> {
   return (async (): Promise<CarriageRelay> => {
-    const relay: AuthenticatedMembershipRelay = await startAuthenticatedMembershipRelay(cfg.gateSeed, cfg.port ?? 0);
-    const gatePubKey = hex(await ed.getPublicKeyAsync(cfg.gateSeed));
     const tracker = makeBagTracker();
+    // Per-holder cid set — so a DEPARTED holder's every announced cid prunes at once (the tracker forgets by
+    // {cid, holder}, holding no holder→cids reverse index; this sniff-local map supplies it, tracker unchanged).
+    const heldByHolder = new Map<string, Set<string>>();
+
+    // The RE-SHARE sniff: a PROVEN peer's `cas-have(cid)` announce lands `cid → holder` in the bag-tracker FROM
+    // THE WIRE (the leg that stood empty). A departure prunes every cid that holder announced. The tracker stays
+    // a HINT — a member re-verifies `verifyCiphertextCid` on the fetched bytes, so a stale/hostile hint is caught.
+    const relay: AuthenticatedMembershipRelay = await startAuthenticatedMembershipRelay(cfg.gateSeed, cfg.port ?? 0, {
+      onEnvelope: (env: MembershipEnvelope) => {
+        if (env.kind !== CAS_HAVE) return;                                  // only the announce leg feeds discovery
+        const cid = typeof (env.payload as { cid?: unknown })?.cid === "string" ? (env.payload as { cid: string }).cid : "";
+        if (!cid) return;
+        tracker.note(cid, env.from);                                        // env.from is the relay-PROVEN key (never spoofable)
+        let held = heldByHolder.get(env.from);
+        if (!held) { held = new Set<string>(); heldByHolder.set(env.from, held); }
+        held.add(cid);
+      },
+      onLeave: (from: string) => {
+        const held = heldByHolder.get(from);
+        if (!held) return;
+        for (const cid of held) tracker.forget(cid, from);                  // prune every cid this holder announced
+        heldByHolder.delete(from);
+      },
+    });
+    const gatePubKey = hex(await ed.getPublicKeyAsync(cfg.gateSeed));
     return {
       port: relay.port,
       gatePubKey,

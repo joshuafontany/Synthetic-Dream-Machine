@@ -73,6 +73,9 @@ import { makeAntigenRingHolder } from "./antigen-ring.js";
 import { makePersonaKelRingHolder } from "./persona-kel-ring.js";
 import { makeNexusMembership } from "./nexus-membership.js";
 import { runNexusRefresh } from "./nexus-refresh.js";
+import { rollLeaseEpochOnBoard } from "./lease-rekey.js";
+import { listSealedCids } from "./cas-reshare.js";
+import { readBulbArtifact, type BulbArtifact } from "./bulb.js";
 import { readNexusCharterDoc } from "./nexus-charter-doc.js";
 import { makeSealedPlaneRegistry } from "./plane-seal.js";
 import type { NexusConvergenceKeyring } from "./nexus-convergence-keyring.js";
@@ -294,6 +297,9 @@ interface NodeBootPrep {
   /** The client dial-out (Socket A) — present ONLY when a peer sync URL + gate key were configured; else null
    *  (inert). The two vessel entry-points fold its `stop()` into teardown so no client socket leaks past close. */
   nexusDial:        NexusClientDial | null;
+  /** The HELD bulb (genesis seed + CAS + bootstrap, epoch-PINNED) this vessel can serve over the public floor —
+   *  null when the genesis is absent. A Herm serves it by cid so a stranger kindles their OWN sovereign hearth. */
+  bulb:             BulbArtifact | null;
   emit:             (p: NodeOpenPhase) => void;
   /** The full-node orchestration (keel + every VM closure) the shared cap composer walks. */
   orchestration:    VesselOrchestration<VesselIslandPool>;
@@ -492,6 +498,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const charterDocForBoot = readNexusCharterDoc(antigenBagsDir);
   federationPosture = federationPostureFromDoc(charterDocForBoot);
 
+  // Read the HELD bulb off the genesis dir, EPOCH-PINNED to the charter chain-head — the ALL-PUBLIC cold-boot
+  // snapshot a Herm serves so a stranger kindles their OWN sovereign hearth (serve fire, never key). Null when the
+  // genesis is absent (nothing to hand). Read once at boot; the corm-lease pointer re-issues on the read-face breath.
+  const bulb: BulbArtifact | null = readBulbArtifact(genesisDir ?? defaultGenesisDir(), charterDocForBoot?.charterEpochCid ?? null);
+
   // STAND THE @cad CONVERGENCE KEYRING — the @cad seal's key source, minted for THIS vessel's charter-head epoch
   // (genesis = 0 when unseated) and persisted local (read-all). This fills the forward-declared seam: the vessel
   // now HOLDS a keyring, so the seal producer (`cad-seal`) can message-lock a carrier body's ciphertext. It seals
@@ -531,6 +542,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
           fedGate:    selfSlotFedGate,
         },
         ...(opts.carriagePollIntervalMs !== undefined ? { pollIntervalMs: opts.carriagePollIntervalMs } : {}),
+        // HEAL — on a RE-connect after a drop, re-fold the antigen + members boards + posture the vessel read
+        // as-of-its-last-sync (a peer's bans/admits that landed during the partition). The SAME refold the
+        // `nexus-refresh` verb runs; here it fires automatically when the carriage transport re-dials.
+        onReconnect:  async () => {
+          await runNexusRefresh({
+            storageDir, bagsDir: antigenBagsDir, nexusPubkey: operatorIdentity.verifyingKey,
+            antigen: antigenHolder, membership: nexusMembershipHolder,
+            setPosture: (p) => { federationPosture = p; },
+          });
+        },
         onLog:        (line) => console.log(`[carriage] ${line}`),
       })
     : null;
@@ -1258,6 +1279,30 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       return { verb: "nexus-refresh", ...r };
     });
 
+    // nexus-rekey — the immune keel's RE-KEY tooth at the Herm's OWN tier: roll a resource's LEASE EPOCH
+    // forward on the live @daemon board, staling every grant bound below the new epoch. It writes the
+    // CALLER's OWN per-writer slot only (a MAX-REGISTER, never a bare scalar — the Automerge-LWW backward-drop
+    // hazard), so two hearths rekeying the same resource concurrently both climb, never drop. This is the
+    // NON-RENEWAL half of revocation (a lease stales; it never re-derives a secret) — targeted key-material
+    // rotation rides keyhive CGKA, NEVER this lease. A live board write → the roll rides WS-sync to replicas.
+    registry.register("nexus-rekey", async (args) => {
+      const resource = typeof args["resource"] === "string" ? (args["resource"] as string) : "";
+      if (!resource) throw new Error("nexus-rekey: `resource` required (the lease resource id to roll)");
+      const r = rollLeaseEpochOnBoard(await readDaemonDoc(), resource, operatorIdentity.verifyingKey);
+      return { verb: "nexus-rekey", ...r };
+    });
+
+    // nexus-reshare — the immune keel's RE-SHARE tooth: re-announce every sealed body this hearth HOLDS over the
+    // carriage, so a relay that PRUNED this holder on a drop re-learns `cid → holder` FROM THE WIRE. The held set =
+    // the @cad ciphertext tier on disk (cid-named files); the announce carries a HINT (where to ask), never the
+    // bytes (a member re-verifies `verifyCiphertextCid`). The PUBLIC FLOOR re-announce rides the read-face's own Ea
+    // breath (the signed monotone pointer re-issues each TTL/2), so a static floor never reads stale — no extra verb.
+    registry.register("nexus-reshare", async () => {
+      const cids = listSealedCids(cadSealDir(storageDir));
+      const announced = carriageLoop ? await carriageLoop.announce(cids) : 0;
+      return { verb: "nexus-reshare", held: cids.length, announced, carriage: carriageLoop !== null };
+    });
+
     // cad-seal — the @cad seal's FIRST live producer. Seal a carrier body's PLAINTEXT into the ciphertext
     // federation plane (a distinct `cad/` tier), ADDITIVELY: the cleartext-local corpus CAS the wake reads stays
     // untouched. The body arrives as a staged `cid` (resolved cleartext from the corpus CAS) or inline `text`.
@@ -1483,7 +1528,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   };
 
   return {
-    repo, catalogHandle, operatorSeed, residency, carriageLoop, carriageRelay, nexusDial, emit, orchestration,
+    repo, catalogHandle, operatorSeed, residency, carriageLoop, carriageRelay, nexusDial, bulb, emit, orchestration,
     openDaemon, wireVerbs, afterDaemon,
     daemonVm:         () => daemonVm,
     eventBus:         () => eventBus,
@@ -1560,6 +1605,8 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     storageDir:  opts.storageDir,
     ...(opts.meshSelf ? { meshSelf: opts.meshSelf } : {}),
     ...(opts.pullIntervalMs !== undefined ? { pullIntervalMs: opts.pullIntervalMs } : {}),
+    // Serve the HELD bulb by cid over the public floor (the OPEN path) — present only when the genesis stands.
+    ...(p.bulb ? { bulb: p.bulb } : {}),
     onLog:       (line) => console.log(`[herm] ${line}`),
   });
   p.emit("vessel-ready");

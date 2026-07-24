@@ -182,6 +182,9 @@ export {
 export type { CasWireServerDeps, CasWireFetch } from "./cas-wire.js";
 
 export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
+// The reach-face helpers — every http origin a vessel answers on + the ws:// dial each yields. Re-used by the
+// `lares herm` stand-up verb to print the carriage crossroads' dial URLs (host from the face, the relay's own port).
+export { deriveReachFaces, wsUrlForOrigin, type ReachFace, type InterfaceTable } from "./lan-address.js";
 // The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root
 // SET mints/loads the operator-root the `lares persona` door drives (founder-side custody).
 export { loadActivePersonaIndex, wearPersona, personaRootExists, listPersonaRoots } from "./node-vessel-identity.js";
@@ -289,6 +292,20 @@ export { startCarriageRelay } from "./carriage-relay.js";
 export type { CarriageRelay } from "./carriage-relay.js";
 export { startCarriageServeLoop } from "./carriage-serve-loop.js";
 export type { CarriageServeLoop, CarriageServeLoopConfig } from "./carriage-serve-loop.js";
+// The immune keel's RE-KEY (roll a lease epoch, per-writer-slot max-register) + RE-SHARE (list held sealed bodies
+// to re-announce) teeth at the Herm's own tier — the `nexus-rekey` / `nexus-reshare` daemon verbs' cores.
+export { rollLeaseEpochOnBoard } from "./lease-rekey.js";
+export type { LeaseRekeyResult } from "./lease-rekey.js";
+export { listSealedCids } from "./cas-reshare.js";
+// The BULB cap — the HELD cold-boot snapshot (genesis seed + CAS + bootstrap, epoch-PINNED), content-addressed +
+// served by cid over the public floor; and the `lares kindle <herm-url>` cold path that pulls it + kindles a NEW
+// SOVEREIGN hearth (the device mints its OWN key — serve fire, never key). All-public OPEN path (bulb ⊥ stolon).
+export { buildBulb, assembleBulb, readBulbArtifact, BULB_MANIFEST_FORMAT } from "./bulb.js";
+export type { BulbArtifact, BulbBlob, BulbManifest } from "./bulb.js";
+export { mountBulbReadFace } from "./bulb-read-face.js";
+export { bulbCap } from "./node-caps.js";
+export { pullBulb, kindleFromBulb, httpBulbTransport } from "./kindle.js";
+export type { BulbPullTransport, KindleResult } from "./kindle.js";
 export { startNexusClientDial, maybeStartNexusClientDial } from "./nexus-client-dial.js";
 export type { NexusClientDial, NexusClientDialConfig, NexusClientDialInput } from "./nexus-client-dial.js";
 export type { MembershipRelay } from "./ws-membership-channel.js";

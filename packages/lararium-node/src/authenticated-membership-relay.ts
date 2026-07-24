@@ -49,6 +49,18 @@ export interface AuthenticatedMembershipRelay {
 }
 
 /**
+ * The relay's SNIFF observer — the RE-SHARE leg. `onEnvelope` fires for every PROVEN, `from`-stamped envelope the
+ * relay carries, so a composing layer (carriage-relay) can pick the `cas-have` announces and learn `cid → holder`
+ * FROM THE WIRE into its bag-tracker. `onLeave` fires when a proven socket drops, so the tracker PRUNES that holder
+ * (an offline holder never lingers). The relay stays AGNOSTIC to the cas vocabulary — it just surfaces the proven
+ * envelopes + departures; the tracker stays a HINT (a member re-verifies every fetched byte). Absent → no sniff.
+ */
+export interface RelayAnnounceObserver {
+  readonly onEnvelope?: (env: MembershipEnvelope) => void;
+  readonly onLeave?:    (from: string) => void;
+}
+
+/**
  * Start an authenticated membership relay. Each connecting socket runs the Ed25519 proof-of-possession: the relay
  * challenges (fresh nonce + its own gate key), the peer signs `authProofBytes`, the relay `verifyAuthProof`s it and
  * binds socket → proven key. Thereafter it re-broadcasts each peer's envelopes — but STAMPS `from` with the proven
@@ -56,7 +68,11 @@ export interface AuthenticatedMembershipRelay {
  *
  * @param gateSeed the relay's 32-byte Ed25519 seed — its gate key rides the challenge as the proof-binding.
  */
-export function startAuthenticatedMembershipRelay(gateSeed: Uint8Array, port = 0): Promise<AuthenticatedMembershipRelay> {
+export function startAuthenticatedMembershipRelay(
+  gateSeed: Uint8Array,
+  port = 0,
+  observer?: RelayAnnounceObserver,
+): Promise<AuthenticatedMembershipRelay> {
   return (async () => {
     const gatePubKey = hex(await ed.getPublicKeyAsync(gateSeed));
     return await new Promise<AuthenticatedMembershipRelay>((resolve) => {
@@ -71,6 +87,10 @@ export function startAuthenticatedMembershipRelay(gateSeed: Uint8Array, port = 0
         const nonce = hex(webGetRandomValues(new Uint8Array(32)));
         const send = (f: RelayFrame) => { try { sock.send(JSON.stringify(f)); } catch { /* closed */ } };
         send({ t: "challenge", nonce, gatePubKey });
+
+        // On departure, surface the proven holder so the tracker PRUNES it (an offline holder never lingers). Fires
+        // only for a socket that reached auth-ok (a proven key), so an un-authenticated flap prunes nothing.
+        sock.on("close", () => { const k = proven.get(sock); if (k) observer?.onLeave?.(k); });
 
         sock.on("message", (data: RawData) => {
           let frame: RelayFrame;
@@ -99,6 +119,9 @@ export function startAuthenticatedMembershipRelay(gateSeed: Uint8Array, port = 0
             // STAMP `from` with the proven key — a forged `from` is overwritten, never trusted. The relay never
             // reads the opaque payload (ciphertext + verify-cap only ride it).
             const stamped: MembershipEnvelope = { ...frame.env, from: provenKey };
+            // Surface the PROVEN-stamped envelope to the sniff observer (the carriage picks `cas-have` announces
+            // into its bag-tracker). The relay itself stays agnostic — it forwards + surfaces, never interprets.
+            observer?.onEnvelope?.(stamped);
             const out = JSON.stringify({ t: "env", env: stamped } satisfies RelayFrame);
             for (const client of wss.clients) {
               if (client !== sock && client.readyState === WebSocket.OPEN && proven.has(client)) client.send(out);
@@ -132,13 +155,25 @@ export class AuthenticatedWSMembershipChannel implements MembershipChannel {
   // so a poll that drains it empty before a response arrives cannot orphan the handler's later pushes.
   private constructor(private readonly ws: WebSocket, private readonly inbox: MembershipEnvelope[]) {}
 
-  /** Connect + complete the proof-of-possession handshake. Resolves once the relay returns `auth-ok`. */
-  static connect(url: string, peerSeed: Uint8Array): Promise<AuthenticatedWSMembershipChannel> {
+  /**
+   * Connect + complete the proof-of-possession handshake. Resolves once the relay returns `auth-ok`.
+   *
+   * `onClose` fires when a LIVE (post-auth-ok) channel's socket drops — the seam a reconnecting dialer watches
+   * to re-dial + re-fold its board (a Herm's HEAL tooth). A drop BEFORE auth-ok rejects the pending connect
+   * instead, so a dialer reschedules on it too (never hangs a half-open dial). Both settle exactly once.
+   */
+  static connect(
+    url: string,
+    peerSeed: Uint8Array,
+    opts?: { readonly onClose?: () => void },
+  ): Promise<AuthenticatedWSMembershipChannel> {
     return new Promise((resolve, reject) => {
       const ws = new WebSocket(url);
       const inbox: MembershipEnvelope[] = [];
       let channel: AuthenticatedWSMembershipChannel | null = null;
-      ws.on("error", (err: Error) => reject(err));
+      let settled = false;   // the connect promise settles ONCE; the post-settle close routes to onClose
+      ws.on("error", (err: Error) => { if (!settled) { settled = true; reject(err); } });
+      ws.on("close", () => { if (!settled) { settled = true; reject(new Error("socket closed before auth-ok")); } else opts?.onClose?.(); });
       ws.on("message", (data: RawData) => {
         let frame: RelayFrame;
         try { frame = JSON.parse(asText(data)) as RelayFrame; } catch { return; }
@@ -152,6 +187,7 @@ export class AuthenticatedWSMembershipChannel implements MembershipChannel {
             ws.send(JSON.stringify({ t: "auth", peerPubKey, ts, sig } satisfies RelayFrame));
           })();
         } else if (frame.t === "auth-ok") {
+          settled = true;
           channel = new AuthenticatedWSMembershipChannel(ws, inbox);
           resolve(channel);
         } else if (frame.t === "env") {
