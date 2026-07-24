@@ -38,6 +38,10 @@ import { cmdCoupleR } from "./couple-r.js";
 import { cmdForecast } from "./forecast.js";
 import { cmdMismatch } from "./mismatch.js";
 import { runQuiesce, runResume, runTopology, type DoorScope } from "./mempalace.js";
+import {
+  cmdSenseRoster, cmdSenseInspect, cmdSenseReconcile, cmdSenseBuild,
+  cmdSensePromote, cmdSenseRetire, cmdSenseUnRetire, cmdSensePurge,
+} from "./sense-lifecycle.js";
 
 /**
  * The SOVEREIGN door onto a sensorium island's lifecycle — the parallel of the guest
@@ -108,6 +112,17 @@ const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | nu
   quiesce:   cmdSenseQuiesce,
   resume:    cmdSenseResume,
   holders:   cmdSenseHolders,
+  // The DURABLE sensorium lifecycle door (E1.2·E2.*·E5) — run DIRECT over manifest.json (no store holder,
+  // no daemon). Reads + the reversible re-settle run HOTL; promote/retire/purge seat HITL (need --approve,
+  // the TS mirror of the approval cap). The MCP three-way mirror is a deferred ahead-of-surface allowance.
+  roster:      cmdSenseRoster,
+  inspect:     cmdSenseInspect,
+  reconcile:   cmdSenseReconcile,
+  build:       cmdSenseBuild,
+  promote:     cmdSensePromote,
+  retire:      cmdSenseRetire,
+  "un-retire": cmdSenseUnRetire,
+  purge:       cmdSensePurge,
 };
 
 export async function cmdSense(args: ParsedArgs): Promise<number> {

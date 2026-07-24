@@ -56,6 +56,15 @@ WIKI_VERBS = ("wiki",)
 # rides the operator's own hand, never an MCP client's.
 VAULT_VERBS = ("vault_status", "vault_seal", "vault_rotate", "vault_export")
 
+# The DURABLE sensorium LIFECYCLE sub-verbs — roster · inspect · reconcile · build · promote · retire ·
+# un-retire · purge — ship CLI-DIRECT today (lares sense <verb>, over manifest.json; no store holder, no
+# daemon). Their MCP three-way mirror is DEFERRED as a NAMED ahead-of-surface allowance (like PLANE_VERBS
+# / VAULT_VERBS ride ahead of their CLI forms): the house-consistent routed executor for these lands in
+# open-node-vessel.ts (registry.register(...), the ki/li/couple_r pattern), so the mirror waits on that
+# TS-hull registration rather than forcing a python reducer-fork. Until then these carry NO MCP tool and
+# NO VERB_SEATS entry here — the CLI is the whole surface, and the parity fixture reads them as
+# sense-sub-verbs (never top-level commands), so the three-way inventory stays balanced.
+
 # The reversibility×trust GRID: each verb declares (reversible, trust_crossing). The seat follows —
 # HOTL (reversible AND trusted) runs on the operator's loop, no pause; HITL (irreversible OR trust-
 # crossing) blocks for the operator's hand. One grid across both surfaces (CLI + MCP). The @daemon holds
