@@ -150,7 +150,8 @@ export interface DaemonVerbProvider {
   /** THE FLOW RUNNER — run a PET-NAMED composed cap-stack (crystal · rhythm · couple) against an explicit
    *  `rows` signal, routing each cap-step by hull (crystallize/couple TS · phase py · mismatch daemon). Bare
    *  (no `petname`) lists the flow-set. The anti-verb-sprawl surface: new capability arrives as a new FLOW,
-   *  never another raw verb. `targets` ride as provenance; auto-extraction from a poured target stays owed. */
+   *  never another raw verb. A `--target` without a signal auto-extracts one from the target's child streams
+   *  (feature-gated: the projector runs now, empty until the re-pour lands child signals). */
   flow(input: { petname?: string; rows?: number[][]; names?: string[]; targets?: string[]; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
   /** RE-DERIVE the sensorium's whole derived layer (rejim rhythm · mempalace projection · worldline slots) in
    *  ONE command, THROUGH the serialized capture holder — so it queues between capture passes and never races

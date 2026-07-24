@@ -106,6 +106,13 @@ export type { PlaneReader, CohereRead, ReadCohereOptions, CohereContext } from "
 export { readJing } from "./sensorium-square.js";
 export type { JingRead, LobeRoundTrip, ReadJingOptions } from "./sensorium-square.js";
 
+// The auto-extraction PROJECTOR — read a poured target's child streams into a ChildSignalMV[] signal-matrix
+// (the couple_r/mismatch/flow shape), the time-series twin of the salience sidecar. Feature-gated: the
+// STRUCTURE lands now, the default reader reads a `signal.json` sidecar the re-pour lands per child; absent
+// (every real sensorium today) ⇒ the honest empty matrix, the surface names the calibration data-wait.
+export { extractSignalFromTarget, defaultChildSignalReader, CHILD_SIGNAL_SIDECAR } from "./sensorium-signal.js";
+export type { ChildSignalReader, SignalExtraction, ExtractSignalOptions } from "./sensorium-signal.js";
+
 // The ephemeral astral multipalace lifecycle (the `sensorium` noun-verb tree).
 export {
   newSensoriumId, listSensoria, openSensorium, querySensorium, keepSensorium,

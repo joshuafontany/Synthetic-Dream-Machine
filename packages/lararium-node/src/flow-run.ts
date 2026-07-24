@@ -13,9 +13,11 @@
  *     three re-derivations
  *   - mismatch (daemon)       → the existing ki↔R comparator (the TS-hull coupleMesh ⋈ the R reference)
  *
- * SIGNAL. Explicit for now — the runner reads the passed `rows` matrix (mirrors the mismatch verb's
- * `--signal`). The auto-extraction of a signal FROM a live poured sensorium (the `targets`) stays OWED: a
- * flow that STREAMS fills coupling.children itself; here `targets` ride as provenance only (reserved-empty).
+ * SIGNAL. The runner reads the passed `rows` matrix (mirrors the mismatch verb's `--signal`) OR, when a
+ * target sensorium rides without an explicit signal, AUTO-EXTRACTS one from the target's child streams via
+ * the injected `extractSignal` projector ({@link ../sensorium-signal}). Feature-gated: the projector STRUCTURE
+ * runs now; today every real target reads an empty matrix (no child lands a signal.json yet), so the runner
+ * names the calibration data-wait — the re-pour that lands child streams fills it, no code change.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
@@ -32,6 +34,10 @@ export interface FlowRunDeps {
   phase:       (rows: number[][], names: string[], root?: string) => Promise<Record<string, unknown>>;
   /** mismatch (daemon) — the ki↔R honesty check, the one op that reaches both hulls. */
   mismatch:    (rows: number[][], names: string[], root?: string) => Promise<Record<string, unknown>>;
+  /** the auto-extraction PROJECTOR (feature-gated) — project a poured target's child streams into a
+   *  signal-matrix when no explicit `--signal` rides. Absent (the calibration data-wait) returns empty
+   *  rows + a note; the runner then names the owed calibration rather than couple an empty matrix. */
+  extractSignal?: (root: string) => { rows: number[][]; names: string[]; note: string };
 }
 
 /** A flow invocation — a pet-name, an explicit signal, and the targets it reads (provenance for now). */
@@ -67,20 +73,32 @@ export async function runFlow(deps: FlowRunDeps, input: FlowRunInput): Promise<R
   const seed = flowSeedByPetname(input.petname);
   if (!seed) return { error: `unknown flow '${input.petname}'`, ...listFlows() };
 
-  const rows = Array.isArray(input.rows) ? input.rows : [];
+  let rows = Array.isArray(input.rows) ? input.rows : [];
+  let names = Array.isArray(input.names) ? input.names : [];
+
+  // AUTO-EXTRACTION (feature-gated): no explicit signal but a target sensorium named → project its child
+  // streams into a matrix. Lands a real signal when the target's children carry one (the re-pour fills them);
+  // returns empty + a note when the calibration awaits, so the runner names the wait rather than fabricating.
+  let extractNote: string | undefined;
+  if (rows.length === 0 && input.sensoriumRoot && deps.extractSignal) {
+    const ex = deps.extractSignal(input.sensoriumRoot);
+    extractNote = ex.note;
+    if (ex.rows.length > 0) { rows = ex.rows; if (ex.names.length) names = ex.names; }
+  }
+
   const width = rows[0]?.length ?? 0;
-  const names = Array.isArray(input.names) && input.names.length === width
-    ? input.names
-    : Array.from({ length: width }, (_, i) => `s${i}`);
+  names = names.length === width ? names : Array.from({ length: width }, (_, i) => `s${i}`);
   const capStack = seed.capStack.map(stepLabel);
   const targetsField = input.targets && input.targets.length ? { targets: input.targets } : {};
 
-  // A flow needs an explicit signal for now — auto-extraction from a poured `target` is OWED. Name the
-  // wall (reserved-empty coupling.children) rather than run an instrument over an empty matrix.
+  // Still no signal — name the owed calibration (the extraction note when a target was projected, else the
+  // pass-a-signal hint) rather than run an instrument over an empty matrix.
   if (rows.length === 0) {
     return {
       flow: seed.petname, arity: seed.arity, capStack, ...targetsField,
-      note: "no signal — pass --signal <ndjson>; auto-extraction from a poured target is owed (reserved-empty)",
+      note: extractNote
+        ? `no signal — auto-extract from the target: ${extractNote}`
+        : "no signal — pass --signal <ndjson>, or --target a poured sensorium to auto-extract its child streams",
       steps: [], outcome: null,
     };
   }

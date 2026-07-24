@@ -99,6 +99,7 @@ import { makeFormPalace, type FormPalace, makeStructurePalace, type StructurePal
 import { readCoupling } from "./sensorium-coupling.js";
 import { readCohere } from "./sensorium-cohere.js";
 import { readJing } from "./sensorium-square.js";
+import { extractSignalFromTarget } from "./sensorium-signal.js";
 import {
   rosterSensoria, inspectSensorium, buildEphemeralSensorium, promoteSensorium,
   retireSensorium, unRetireSensorium, purgeSensorium, reconcileSensorium, reconcileAllSensoria,
@@ -1080,6 +1081,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       return verdict as unknown as Record<string, unknown>;
     };
 
+    // AUTO-EXTRACTION (feature-gated): when a coupling verb rides a target sensorium but no explicit signal,
+    // project the target's child streams into a matrix (extractSignalFromTarget). Empty today on every real
+    // sensorium (no child lands a signal.json until the re-pour) → the verb sees empty rows and answers its
+    // own honest no-signal, never fabricating a matrix. An explicit signal always wins (never overridden).
+    const signalOrExtract = (rows: number[][], names: string[] | undefined, root?: string): { rows: number[][]; names?: string[] } => {
+      if (rows.length > 0 || !root) return { rows, ...(names ? { names } : {}) };
+      const ex = extractSignalFromTarget(root);
+      return { rows: ex.rows, ...(ex.names.length ? { names: ex.names } : {}) };
+    };
+
     const daemonImpl: DaemonVerbProvider = {
       captureSource: async (input) => {
         const { sensoriumRoot, ...req } = input;
@@ -1101,8 +1112,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // The R effective-TE coupling reference (coupling.R RTransferEntropy::calc_ete) over the passed
         // signal matrix — the py/R twin of `ki`, computed py-side behind the causal-island boundary.
         // Stateless: it couples `rows`, not any store, so the holder is only the pipe to the py serve-op.
-        const { sensoriumRoot, ...req } = input;
-        return await captureFor(sensoriumRoot).coupleR(req);
+        // AUTO-EXTRACT when a target rides without a signal (feature-gated; empty until the re-pour lands it).
+        const { sensoriumRoot, rows, names, ...req } = input;
+        const src = signalOrExtract(Array.isArray(rows) ? rows : [], names, sensoriumRoot);
+        return await captureFor(sensoriumRoot).coupleR({ ...req, rows: src.rows, ...(src.names ? { names: src.names } : {}) });
       },
       forecast: async (input) => {
         // The R early-warning plane (ews.R critical-slowing-down forecast) over the passed signal matrix —
@@ -1114,15 +1127,18 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // The ki↔R comparator — the ONE place that reaches both hulls (extracted to computeMismatch so the
         // `flow` runner reuses the same diff). A disagreement means the vessel's local read and the R
         // reference part ways on whether streams couple.
+        // AUTO-EXTRACT when a target rides without a signal (feature-gated; empty until the re-pour lands it).
         const rows: number[][] = Array.isArray(input.rows) ? input.rows : [];
         const names = Array.isArray(input.names) ? input.names : undefined;
-        return await computeMismatch(rows, names, input.sensoriumRoot);
+        const src = signalOrExtract(rows, names, input.sensoriumRoot);
+        return await computeMismatch(src.rows, src.names, input.sensoriumRoot);
       },
       flow: async (input) => {
         // THE FLOW RUNNER — look the pet-named cap-stack up (flowSeedByPetname) and run each step routed by
         // hull. The daemon is the one seat that reaches both hulls, so it wires every instrument's handle:
         // crystallize + the coupleMesh capstone (TS), phase (the py rhythm serve-op), mismatch (the ki↔R
-        // comparator). Explicit signal for now; auto-extraction from a poured target stays owed.
+        // comparator), and the auto-extraction projector (a target's child streams → a signal-matrix,
+        // feature-gated: empty until the re-pour lands child signals).
         const root = typeof input.sensoriumRoot === "string" ? input.sensoriumRoot : undefined;
         return await runFlow(
           {
@@ -1130,6 +1146,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
             couple:      (rows, names) => coupleSignal(rows, names),
             phase:       (rows, names, r) => captureFor(r).phase({ rows, names }),
             mismatch:    (rows, names, r) => computeMismatch(rows, names, r),
+            extractSignal: (r) => { const ex = extractSignalFromTarget(r); return { rows: ex.rows, names: ex.names, note: ex.note }; },
           },
           {
             ...(typeof input.petname === "string" ? { petname: input.petname } : {}),

@@ -816,7 +816,8 @@ def build_mcp(coordinator: LaresCoordinator):
         `signal` matrix (rows=time, cols=signals; `names` labels the columns) RUNS that flow: the @daemon
         looks its cap-stack up and runs each step routed by hull, threading each outcome to the next. New
         capability arrives as a new FLOW, never another raw verb. `lares flow <petname> --signal <ndjson>`
-        reads the same. Explicit signal for now — auto-extraction from a poured `target` is owed."""
+        reads the same. A `target` without a `signal` auto-extracts one from the target's child streams
+        (feature-gated: the projector runs now, empty until the re-pour lands child signals)."""
         return _call("flow", sensorium, petname=petname, targets=target, rows=signal, names=names)
 
     @mcp.tool()
@@ -1177,7 +1178,8 @@ class DaemonCoordinator:
              sensorium_root: "str | None" = None, **_) -> dict:
         # Route the composed-flow runner to the @daemon `flow` verb — the daemon looks the pet-named cap-stack
         # up (flowSeedByPetname) and runs each step routed by hull. Bare (no petname) lists the flow-set. Only
-        # the daemon reaches both hulls, so every flow routes here. Explicit signal for now (auto-extraction owed).
+        # the daemon reaches both hulls, so every flow routes here. A target without a signal auto-extracts
+        # one from the target's child streams (feature-gated: empty until the re-pour lands child signals).
         args: dict = {}
         if petname:
             args["petname"] = petname
