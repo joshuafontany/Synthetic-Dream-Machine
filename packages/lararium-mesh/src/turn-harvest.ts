@@ -368,8 +368,8 @@ export function harvestTurnGradient(text: string): TurnHarvest {
   let confidence: number;
 
   if (bearing) {
-    // Start from the bearing's own drift gauge, corroborate with the HUD body.
-    confidence = bearing.confidence;
+    // Start from the bearing's own drift standing, corroborate with the HUD body.
+    confidence = bearing.standing;
     if (huds.length > 0) confidence = clamp(confidence + 1, 0, 18);
     if (voices.length > 0) confidence = clamp(confidence + 1, 0, 18);
     if (confidences.length > 0) confidence = clamp(confidence + 1, 0, 20);

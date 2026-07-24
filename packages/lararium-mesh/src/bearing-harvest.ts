@@ -14,13 +14,20 @@
  *
  * Three laws, all load-bearing:
  *  - Graceful degradation: a dropped frame or a drifted (two-/four-term) URI
- *    yields a low-confidence Bearing, never a throw. `harvest` returns null only
- *    when no frame appears at all — that absence is itself signal downstream.
+ *    yields a low-standing Bearing, never a throw. `harvest` returns null only
+ *    when no frame appears at all — that absence itself signals downstream.
  *  - Verbatim, never normalized: URIs come back exactly as written.
  *    Canonicalization happens only later, at promotion to canon.
- *  - Drift is the keeper's gauge: confidence grades DOWN as the frame drifts,
- *    so the operator can read the node's drift over time. The node cannot read
- *    its own.
+ *  - Drift measures the keeper's gauge: `standing` grades DOWN as the frame
+ *    drifts, so the operator reads the node's drift over time. The node cannot
+ *    read its own.
+ *
+ * STANDING, never confidence: this gauge REPORTS how cleanly the frame parsed —
+ * it rides BACKWARD from the evidence (the drift penalties grade it down). A
+ * confidence rides FORWARD as a vow the node makes before a claim; a standing
+ * rides backward as a measure the parse earns. This dial earns backward, so it
+ * carries `standing`. The harvested forward vows keep the `confidence` name (they
+ * live in turn-harvest's `ConfidenceSignal`).
  */
 
 export interface Bearing {
@@ -28,18 +35,19 @@ export interface Bearing {
   aimUri: string | null;
   /** Raw yield payload, or null if no yield frame. */
   yieldUri: string | null;
-  /** 0..20 (the house Maybe-Logic continuum), low = drifted. Grades DOWN; a clean frame reads canon-high, a drifted one falls to provisional. */
-  confidence: number;
+  /** 0..20 (the house Maybe-Logic continuum), low = drifted. Grades DOWN; a clean frame reads canon-high, a drifted one falls to provisional. STANDING (backward-earned from parse cleanliness), never a forward confidence vow. */
+  standing: number;
   /** e.g. ["arity:2"], ["session-form"], ["frame:no-yield"], ["root:unparsed"]. */
   driftFlags: string[];
 }
 
 /**
- * Confidence bands on the 0..20 Maybe-Logic continuum (low = drifted). The bands
+ * Standing bands on the 0..20 Maybe-Logic continuum (low = drifted). The bands
  * land on the house register ladder: clean → canon (17-20), the drift grades →
  * provisional-synthesis / provisional (1-8). Tunable; thresholds deferred to in-flight tuning.
+ * STANDING, never confidence — the parse earns these backward.
  */
-export const BEARING_CONFIDENCE = {
+export const BEARING_STANDING = {
   clean: 18, // both frames, primary root is 3-term → canon band
   arityDrift: 8, // a root broke the 3-term arity law → provisional-synthesis
   partialFrame: 6, // only one of aim/yield present → provisional-synthesis
@@ -51,7 +59,7 @@ const YIELD_RE = /<<~\s*lares\s+yield\s+([\s\S]*?)>>/i;
 const LAR_URI_RE = /lar:\/\/\S+/;
 
 export function isDrifted(b: Bearing): boolean {
-  return b.confidence < BEARING_CONFIDENCE.clean;
+  return b.standing < BEARING_STANDING.clean;
 }
 
 /**
@@ -105,35 +113,35 @@ export function harvest(text: string): Bearing | null {
   const yieldUri = yieldM ? (yieldM[1] ?? "").trim() : null;
 
   const driftFlags: string[] = [];
-  let confidence: number = BEARING_CONFIDENCE.clean;
+  let standing: number = BEARING_STANDING.clean;
 
   if (!aimM) {
     driftFlags.push("frame:no-aim");
-    confidence = Math.min(confidence, BEARING_CONFIDENCE.partialFrame);
+    standing = Math.min(standing, BEARING_STANDING.partialFrame);
   }
   if (!yieldM) {
     driftFlags.push("frame:no-yield");
-    confidence = Math.min(confidence, BEARING_CONFIDENCE.partialFrame);
+    standing = Math.min(standing, BEARING_STANDING.partialFrame);
   }
 
   const probe = primaryUri(aimUri) ?? primaryUri(yieldUri);
   if (probe === null) {
     driftFlags.push("root:unparsed");
-    confidence = Math.min(confidence, BEARING_CONFIDENCE.rootUnparsed);
+    standing = Math.min(standing, BEARING_STANDING.rootUnparsed);
   } else {
     const { root, sessionForm } = splitRoot(probe);
     if (sessionForm) driftFlags.push("session-form");
     if (root === null) {
       driftFlags.push("root:unparsed");
-      confidence = Math.min(confidence, BEARING_CONFIDENCE.rootUnparsed);
+      standing = Math.min(standing, BEARING_STANDING.rootUnparsed);
     } else {
       const arity = root.split(".").length;
       if (arity !== 3) {
         driftFlags.push(`arity:${arity}`);
-        confidence = Math.min(confidence, BEARING_CONFIDENCE.arityDrift);
+        standing = Math.min(standing, BEARING_STANDING.arityDrift);
       }
     }
   }
 
-  return { aimUri, yieldUri, confidence, driftFlags };
+  return { aimUri, yieldUri, standing, driftFlags };
 }
