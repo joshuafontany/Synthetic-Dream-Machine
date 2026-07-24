@@ -13,16 +13,21 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/flow
  */
 
-import { FLOW_SEEDS, buildFlowTiddler } from "@lararium/mesh";
+import { enactableFlows, buildFlowTiddler, HULLS_TS_ONLY, type RunnableHulls } from "@lararium/mesh";
 import type { TW5Engine } from "./tw5-vm.js";
 
 /** A stable seed timestamp — the flow tiddlers ride the cache-stable boot, so they carry a FIXED marker,
  *  never a wall-clock stamp (a Date.now() would break the deterministic genesis quine). */
 const FLOW_SEED_STAMP = "seed";
 
-/** Seed the FLOW tiddlers into the live @daemon wiki. `authority` names the writer (defaults to the seed). */
-export function seedDaemonFlowTiddlers(tw5: TW5Engine, authority = "lararium-seed"): void {
-  for (const seed of FLOW_SEEDS) {
+/** Seed the FLOW tiddlers this vessel CAN ENACT into the live @daemon wiki — cap-gated by `runnableHulls`
+ *  (a ts-only vessel seeds crystal; a full node vessel seeds all three). The seeded set IS the vessel's
+ *  advertised enactable-list: a personagroup peer reads it to know which flows to delegate here, and which
+ *  to run itself (delegation rides the Verb `aud` narrowing). `authority` names the writer. */
+export function seedDaemonFlowTiddlers(
+  tw5: TW5Engine, runnableHulls: RunnableHulls = HULLS_TS_ONLY, authority = "lararium-seed",
+): void {
+  for (const seed of enactableFlows(runnableHulls)) {
     const t = buildFlowTiddler(seed, authority, FLOW_SEED_STAMP);
     tw5.setTiddler({
       title:     t.title,

@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import {
   FLOW_SEEDS, flowSeedByPetname, buildFlowTiddler, parseCapStack, flowUri,
+  flowIsEnactable, enactableFlows, HULLS_TS_ONLY, HULLS_FULL,
   type FlowTiddler,
 } from "../src/flow.js";
 import { DAEMON_BAG_ID } from "../src/lar-uris.js";
@@ -39,6 +40,16 @@ describe("flow — pet-named cap-stacks that kill verb sprawl", () => {
     expect(t.bag).toBe(DAEMON_BAG_ID);
     expect(t.authority).toBe("did:key:zTest");
     expect(t.petname).toBe("crystal");
+  });
+
+  test("cap-gating — a vessel seeds/advertises only the flows its hulls can enact", () => {
+    // ts-only vessel (browser) → crystal enacts (all-ts); rhythm (py) + couple (daemon) do NOT
+    expect(flowIsEnactable(flowSeedByPetname("crystal")!, HULLS_TS_ONLY)).toBe(true);
+    expect(flowIsEnactable(flowSeedByPetname("rhythm")!, HULLS_TS_ONLY)).toBe(false);   // a py step
+    expect(flowIsEnactable(flowSeedByPetname("couple")!, HULLS_TS_ONLY)).toBe(false);   // a daemon step
+    expect(enactableFlows(HULLS_TS_ONLY).map((f) => f.petname)).toEqual(["crystal"]);
+    // a full (node) vessel reaches py + daemon → it enacts every seed
+    expect(enactableFlows(HULLS_FULL).map((f) => f.petname).sort()).toEqual(["couple", "crystal", "rhythm"]);
   });
 
   test("parseCapStack round-trips both storage shapes (JSON array + compact TW5 list)", () => {

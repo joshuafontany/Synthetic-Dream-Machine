@@ -147,3 +147,27 @@ export function parseCapStack(raw: unknown): CapStep[] {
 export function flowSeedByPetname(petname: string): FlowSeed | undefined {
   return FLOW_SEEDS.find((f) => f.petname === petname);
 }
+
+// ── cap-gating — a vessel seeds/advertises only the flows it can ENACT ───────────────────────
+
+/** The hulls a vessel can run. `ts` rides every vessel (hull-native); `py`/`daemon` ride only a
+ *  vessel that reaches py/R compute (a node vessel). Named where it is known — a #has cap, not a
+ *  presupposed schema (Fork-2). */
+export type RunnableHulls = readonly CapHull[];
+
+/** A ts-only vessel (browser / TW5 VM) — it can run the hull-native cap-steps, never py/R. */
+export const HULLS_TS_ONLY: RunnableHulls = ["ts"];
+/** A full vessel (node) — it reaches both hulls, so it enacts py/R compute + daemon orchestration. */
+export const HULLS_FULL: RunnableHulls = ["ts", "py", "daemon"];
+
+/** A vessel ENACTS a flow iff it can run EVERY hull its cap-stack names — a flow with one py step
+ *  never enacts on a ts-only vessel. This is what a personagroup peer reads to know it must delegate. */
+export function flowIsEnactable(flow: FlowSeed, runnableHulls: RunnableHulls): boolean {
+  return flow.capStack.every((step) => runnableHulls.includes(step.hull));
+}
+
+/** The flows a vessel with these hulls can enact — its cap-gated SEED-set AND its advertised list
+ *  (what a peer may ask it to run). A ts-only vessel seeds crystal; a node vessel seeds all three. */
+export function enactableFlows(runnableHulls: RunnableHulls): FlowSeed[] {
+  return FLOW_SEEDS.filter((f) => flowIsEnactable(f, runnableHulls));
+}
