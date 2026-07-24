@@ -33,6 +33,7 @@ import {
 import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl, personaKelBoardDocUrl, membersDocUrl } from "./deterministic-doc.js";
 import type { IdentitySlot } from "./identity-slot.js";
 import type { PeerClass } from "./island-protocol.js";
+import { type CapTierRing, resolveTierForDoc, tierPermitsRelayPeer } from "./cap-tier.js";
 
 /**
  * FederationGate — MAY this document cross to this (relay) peer? DENY-BY-DEFAULT.
@@ -425,4 +426,61 @@ export function admitCrossOperatorUnderPosture(args: {
     ok: false,
     reason: `posture=private denies a cross-Nexus (non-member) foreign operator co-federation`,
   };
+}
+
+/**
+ * capTierShareDecision — the DECLARED-TIER TIGHTENING layered ATOP `memberCarryShareDecision`. The bag's
+ * self-describing cap-tier (cap-tier.ts) refines WHO holds the read-cap, and it may only ever TIGHTEN the
+ * structural verdict — never loosen it. So this fn wraps the whole carry-split and ANDs a pure tier
+ * predicate over its `true`:
+ *
+ *   1. the STRUCTURAL floor — `memberCarryShareDecision`, VERBATIM. Its deny stands ABSOLUTE: a tier can
+ *      never resurrect a doc the structure denied (the keystone runs one direction only). If the base says
+ *      `false`, this says `false`.
+ *   2. the DECLARED-TIER tighten — over a doc the base ALLOWED to a RELAY peer, the bag's resolved tier
+ *      (`resolveTier(declared ∧ structuralFloor)`) may still WITHDRAW it: a bag structurally-PUBLIC that
+ *      DECLARES itself PERSONAGROUP drops out of a stranger's crossing; a bag resolving to VEIL crosses to
+ *      no relay peer at all. `tierPermitsRelayPeer` reads the resolved tier against the peer's membership.
+ *
+ * ── THE SAFETY KEYSTONE (proven in cap-tier.test) ────────────────────────────────────────────────
+ * Because `resolveTierForDoc` returns a tier ≤ the STRUCTURAL floor, and the base verdict already encodes
+ * that floor, this layer can only ADD a deny — it is mechanically impossible for a declared datum to grant
+ * a doc MORE openness than `memberCarryShareDecision` already permits. A bag that DECLARES itself PUBLIC but
+ * whose structural floor is PERSONAGROUP resolves to PERSONAGROUP and never reaches a stranger.
+ *
+ * DEGENERATION (the read-lane-untouched proof): with `capTiers = null`, this returns EXACTLY
+ * `memberCarryShareDecision(...)` — the tier layer adds tightening, it never widens the floor, and it stays
+ * INERT until a bag actually carries the datum.
+ *
+ * ── HONEST BOUND (the not-yet-wired seam) ────────────────────────────────────────────────────────
+ * The `CapTierRing`'s `floor` oracle IS wired on the live path (it reads the SAME federatable-set + seal
+ * oracles the carry-split consults — see cap-tier.ts `structuralFloorFor`). The `declared` source is the
+ * SEAM not yet lit: no @daemon recipe / BagTiddler carries a `capTier` datum in the tree TODAY, so a live
+ * `declaredTierForDoc` returns null for every doc → the floor governs → zero behavior change. Lighting it
+ * needs the recipe surface to seat the datum + a doc→bag resolver over the bag registry (the same bridge
+ * `identityShareDecision`'s bound names). This fn is that seam's tested socket; it never fakes a verdict.
+ *
+ * Meme: lar:///ha.ka.ba/lararium/mesh/cap-tier
+ */
+export async function capTierShareDecision(
+  relayPeers: ReadonlySet<string>,
+  fedGate:    FederationGate | null,
+  antigen:    AntigenRing | null,
+  identity:   IdentityRing | null,
+  membership: NexusMembership | null,
+  seal:       PlaneSeal | null,
+  capTiers:   CapTierRing | null,
+  peerId:     string,
+  documentId?: DocumentId,
+): Promise<boolean> {
+  // 1. The STRUCTURAL floor, verbatim. Its deny is absolute — a tier never loosens it.
+  const base = await memberCarryShareDecision(relayPeers, fedGate, antigen, identity, membership, seal, peerId, documentId);
+  if (!base)                    return false;   // structural deny stands (tier tightens only, never loosens)
+  if (!capTiers)                return true;    // no declared-tier ring → the base verdict is whole (inert seam)
+  if (!relayPeers.has(peerId))  return true;    // in-process house member — tier not consulted (full sync)
+  if (!documentId)              return true;    // base allowed a no-doc case (house member) — nothing to tighten
+  // 2. The DECLARED-TIER tighten — resolve declared ∧ structuralFloor, then AND the pure peer predicate.
+  const resolved = resolveTierForDoc(capTiers, documentId);
+  const isMember = membership ? membership.isMemberPeer(peerId) : false;
+  return tierPermitsRelayPeer(resolved, isMember);   // can only DENY where the base said allow
 }

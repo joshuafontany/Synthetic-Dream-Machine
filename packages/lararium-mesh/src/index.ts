@@ -76,8 +76,15 @@ export type { IdentityRing } from "./federation-gate.js";
 export type { AntigenRing } from "./federation-gate.js";
 export { presenterIsKapaed, carryContractShareDecision, classifyCrossOperatorAdmission } from "./federation-gate.js";
 export type { CrossOperatorAdmission } from "./federation-gate.js";
-export { memberCarryShareDecision } from "./federation-gate.js";
+export { memberCarryShareDecision, capTierShareDecision } from "./federation-gate.js";
 export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
+// The bag's sharing-posture as SELF-DESCRIBING DATA — the 4-tier total order + the tighten-only keystone.
+export type { CapTier, TierFloorOracle, DeclaredTierSource, CapTierRing } from "./cap-tier.js";
+export {
+  CAP_TIER_ORDER, DEFAULT_CAP_TIER, capTierRank, parseCapTier, meetCapTier, resolveTier,
+  refineBagTierWithTiddlers, mayDeclareTier, mayDeclassify, structuralFloorFor, resolveTierForDoc,
+  tierPermitsRelayPeer,
+} from "./cap-tier.js";
 // The @cad ENCRYPT-ON-CAS primitive — cid = BLAKE3(ciphertext), verify-cap ⊥ read-cap, per-Nexus message-lock.
 export {
   ciphertextCid, verifyCiphertextCid, deriveMessageKey, sealBodyOnCas, openBodyOnCas,

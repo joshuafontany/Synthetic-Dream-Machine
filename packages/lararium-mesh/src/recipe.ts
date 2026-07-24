@@ -49,6 +49,16 @@ export interface BagTiddler {
   readonly readPolicy:  string;
   /** Write-access policy expression. Default: "private" for root docs; "public" for wiki draft bags. */
   readonly writePolicy: string;
+  /**
+   * The bag's DECLARED cap-tier — the SELF-DESCRIBING sharing-posture datum the quine speaks (cap-tier.ts).
+   * ONE question, WHO holds the read-cap, as the chain VEIL ⊂ PERSONAGROUP ⊂ CONTRACT ⊂ PUBLIC. This datum
+   * only DECLARES; the federation gate ENFORCES `declared ∧ structural-floor` (`capTierShareDecision`), so a
+   * bag may only ever self-TIGHTEN below its crypto floor — a declared PUBLIC on a sealed-floor bag resolves
+   * to the sealed tier, never PUBLIC. Absent / torn → VEIL (fail-closed; `parseCapTier`). A per-tiddler
+   * refinement (a tiddler's own `capTier` field) may tighten a bag further via the taint-meet, never loosen
+   * it. This is the bag-level DEFAULT the recipe surface carries.
+   */
+  readonly capTier?:    import("./cap-tier.js").CapTier;
   /** ISO 8601 creation / last-update timestamp. */
   readonly updatedAt:   string;
   /** Authority that created this descriptor. */
