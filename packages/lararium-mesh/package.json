@@ -68,6 +68,10 @@
       "import": "./dist/linearity-gate.js",
       "types": "./dist/linearity-gate.d.ts"
     },
+    "./rank-te": {
+      "import": "./dist/rank-te.js",
+      "types": "./dist/rank-te.d.ts"
+    },
     "./mesh-coupling": {
       "import": "./dist/mesh-coupling.js",
       "types": "./dist/mesh-coupling.d.ts"

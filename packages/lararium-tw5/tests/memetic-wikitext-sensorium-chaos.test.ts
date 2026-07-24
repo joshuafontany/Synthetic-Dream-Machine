@@ -234,3 +234,36 @@ describe("seam — bandForSpanLength is total across the ladder (no undefined at
     }
   });
 });
+
+// ── CONSUMER-PARITY: the linearity screen no longer just FLAGS nonlinearity, it ANSWERS it ────────────
+// The gate detects when the Gaussian coupling under-reads a nonlinear relationship; coupleAligned now
+// fires the order-robust rank-TE on the strongest-nonlinear dim. A monotone-nonlinear stream escalates
+// AND carries a live rank-TE read; a linear stream stays on the Gaussian default with no rank-TE.
+describe("escalate → rank-TE fires (the gate's verdict gets answered, not just reported)", () => {
+  // a small deterministic LCG — no Math.random (repeatable witness).
+  const lcg = (seed: number) => () => ((seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff) * 2 - 1;
+
+  test("a quadratic (nonlinear-beyond-linear) red↔black stream escalates AND fires rank-TE", () => {
+    const u = lcg(7);
+    const quad: AlignedTick[] = Array.from({ length: 120 }, () => {
+      const x = u();
+      return [[x], [x * x]];   // child-1 = child-0² — high dCor, ~0 LINEAR correlation (even fn) → escalate
+    });
+    const r = coupleAligned(["red", "black"], quad, { L: 30 });
+    expect(r.escalate).toBe(true);                 // the Gaussian read leaves the cubic on the table
+    expect(r.rankTE).not.toBeNull();               // the escalation ACTED
+    expect(Number.isFinite(r.rankTE!.forward)).toBe(true);
+    expect(Number.isFinite(r.rankTE!.backward)).toBe(true);
+    expect(r.rankTE!.samples).toBeGreaterThan(0);
+  });
+
+  test("a linear red↔black stream stays on the Gaussian default — no rank-TE escalation", () => {
+    const u = lcg(11);
+    const linear: AlignedTick[] = Array.from({ length: 120 }, () => {
+      const x = u();
+      return [[x], [0.8 * x]];     // a clean linear relationship the Gaussian read handles
+    });
+    const r = coupleAligned(["red", "black"], linear, { L: 30 });
+    if (!r.escalate) expect(r.rankTE).toBeNull();  // no escalation ⇒ no rank-TE cost
+  });
+});

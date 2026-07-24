@@ -36,6 +36,7 @@ import { collectEvents } from "./meme-ast/index.js";
 import { type MeshCoupling } from "@lararium/mesh/mesh-coupling";
 import { windowInit, windowPush, windowLengthFor, type WindowConfig, type WindowState } from "@lararium/mesh/windowed-coupling";
 import { linearityGate, type LinearityReading } from "@lararium/mesh/linearity-gate";
+import { rankTransferEntropy } from "@lararium/mesh/rank-te";
 import { ffzMembershipAddress, ffzTruncate, type FfzCells, type FfzBand } from "@lararium/mesh/ffz-project";
 import { sha256HexSync } from "@lararium/mesh/crypto";
 import { formatDigest } from "@lararium/mesh/agile-digest";
@@ -514,8 +515,24 @@ export interface AlignedCouplingRead {
   readonly ticks: number;
   /** the Tier-0 linearity screen on the primary coupling channel (null when too few ticks / <2 children). */
   readonly linearity: LinearityReading | null;
-  /** the screen's verdict: the Gaussian read leaves nonlinear signal on the table → escalate to KSG. */
+  /** the screen's verdict: the Gaussian read leaves nonlinear signal on the table → escalate to rank-TE. */
   readonly escalate: boolean;
+  /** the escalation ACTED: order-robust rank-TE (bits, both directions) on the strongest-nonlinear dim,
+   * or null when the screen stayed linear. This is the read the Gaussian coupling under-reads — the gate
+   * no longer just flags nonlinearity, it answers it. */
+  readonly rankTE: RankEscalation | null;
+}
+
+/** The escalation's answer — directed symbolic (rank) transfer entropy where the Gaussian read fell short. */
+export interface RankEscalation {
+  /** rank-TE (bits) child-0 → child-1 on the representative dim (the steering red drives the black). */
+  readonly forward: number;
+  /** rank-TE (bits) child-1 → child-0. */
+  readonly backward: number;
+  /** the shared dim the escalation read — the max-dCorGap representative. */
+  readonly dim: number;
+  /** usable symbol transitions the estimate stood on. */
+  readonly samples: number;
 }
 
 /**
@@ -572,6 +589,7 @@ export function coupleAligned(
   // shared dim; escalate if ANY dim escalates; report the dim carrying the STRONGEST nonlinear-beyond-
   // linear signal (max dCorGap) as the representative reading. Never trust the Gaussian read past this.
   let linearity: LinearityReading | null = null;
+  let repX: number[] = [], repY: number[] = [], repDim = 0;   // the representative dim's streams, kept for the escalation
   if (children.length >= 2 && ticks.length >= 8) {
     let d0 = 0, d1 = 0;
     for (const t of ticks) { d0 = Math.max(d0, t[0]?.length ?? 0); d1 = Math.max(d1, t[1]?.length ?? 0); }
@@ -582,14 +600,26 @@ export function coupleAligned(
       const y = ticks.map((t) => t[1]?.[d] ?? 0);
       const r = linearityGate(x, y, opts.linearity ?? {});
       anyEscalate = anyEscalate || r.escalate;
-      // keep the strongest nonlinear-beyond-linear reading (max dCorGap) as the representative one.
-      if (linearity === null || r.dCorGap > linearity.dCorGap) linearity = r;
+      // keep the strongest nonlinear-beyond-linear reading (max dCorGap) as the representative one,
+      // and its streams — the escalation reads the dim that most escapes the Gaussian.
+      if (linearity === null || r.dCorGap > linearity.dCorGap) { linearity = r; repX = x; repY = y; repDim = d; }
     }
     // the representative reading carries the OR-of-dims escalate verdict, not just its own dim's.
     if (linearity !== null && anyEscalate !== linearity.escalate) linearity = { ...linearity, escalate: anyEscalate };
   }
 
-  return { coupling, warming, filled, resets, ticks: ticks.length, linearity, escalate: linearity?.escalate ?? false };
+  // ACT on the verdict — the gate no longer just flags nonlinearity, it answers it. When the screen
+  // escalates, read the order-robust rank-TE (both directions) on the representative dim: symbolic TE
+  // reads ORDER not magnitude, so it recovers the monotone-nonlinear / heavy-tailed coupling the Gaussian
+  // read leaves on the table. Skipped on a linear screen (no cost when the Gaussian default suffices).
+  let rankTE: RankEscalation | null = null;
+  if (linearity?.escalate && repX.length >= 8) {
+    const fwd = rankTransferEntropy(repX, repY);
+    const bwd = rankTransferEntropy(repY, repX);
+    rankTE = { forward: fwd.te, backward: bwd.te, dim: repDim, samples: fwd.samples };
+  }
+
+  return { coupling, warming, filled, resets, ticks: ticks.length, linearity, escalate: linearity?.escalate ?? false, rankTE };
 }
 
 // ── STRATUM scale: FFZ Pulse-grain ticks from one text ──────────────────────────────────────────────
