@@ -41,7 +41,7 @@ const SEVERITY_RANK: Readonly<Record<DiagnosticSeverity, number>> = {
  * ingesting a lossy render. Every recovery sits below that line, because a recovery keeps the
  * text: the driver stands an unplaceable construct back up verbatim in an Error node, and grades
  * how far it fell. `warning` marks a construct the grammar could not place; `info` marks one it
- * repaired at lower confidence. Refusing a recovery would drop the bytes to protect the grammar,
+ * repaired at lower standing. Refusing a recovery would drop the bytes to protect the grammar,
  * which inverts what the membrane exists to do.
  */
 export function severityOf(failure: ParseFailure): DiagnosticSeverity {

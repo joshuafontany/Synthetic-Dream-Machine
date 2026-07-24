@@ -64,7 +64,7 @@ export interface SigilRule {
   defaultFamily?: string;
   defaultPropagation?: string;
   // Self-defined failure-gradient (graceful-parsing#sigil-self-defined-gradient): how THIS sigil
-  // declares it degrades when left unclosed — "water" (inert, low confidence — don't fabricate a
+  // declares it degrades when left unclosed — "water" (inert, low standing — don't fabricate a
   // frame) vs the default "repaired" (force-close marked, recovered). The resilient driver reads it;
   // the structure still never breaks. (First rung of the #has recovery cap-stack.)
   recoverAs?: "water" | "repaired";
@@ -107,9 +107,10 @@ export interface MemeAstBase {
   pos:   number;
   raw:   string;
   // Resilient-parsing gradient (graceful-parsing#sigil-self-defined-gradient): set ONLY on a node the
-  // driver recovered — a clean parse omits both (full confidence, no recovery). `confidence` rides the
-  // 0..20 aperture ladder; `recoveredAs` names the rung the cascade reached.
-  confidence?:  number;
+  // driver recovered — a clean parse omits both (full standing, no recovery). `standing` rides the
+  // 0..20 aperture ladder as a BACKWARD-earned measure (how cleanly the span recovered, scored after
+  // the parse — never a forward vow); `recoveredAs` names the rung the cascade reached.
+  standing?:    number;
   recoveredAs?: "water" | "repaired" | "missing";
 }
 
@@ -244,7 +245,8 @@ export interface DynamicNode extends MemeAstBase {
 // The driver emits this when a span cannot parse cleanly, INSTEAD of silently
 // dropping or force-closing it. It carries the verbatim span (lossless — the tree
 // stays full-fidelity); `recoveredAs` names the rung (water/repaired/missing) and
-// `confidence` (0..20) grades how cleanly the construct manifested.
+// `standing` (0..20) grades how cleanly the construct manifested (a backward-earned
+// recovery measure, scored after the parse — never a forward vow).
 // ---------------------------------------------------------------------------
 
 export interface ErrorNode extends MemeAstBase {

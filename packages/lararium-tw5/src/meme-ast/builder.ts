@@ -257,17 +257,17 @@ export function buildMemeAst(
   // failed match, so the clean parse is untouched (the soundness invariant).
   const errorNode = (
     pos: number, raw: string, content: string,
-    reason: string, recoveredAs: "water" | "repaired" | "missing", confidence: number,
+    reason: string, recoveredAs: "water" | "repaired" | "missing", standing: number,
   ): ErrorNode => {
     failures.push({ pos, raw, reason, recoveredAs });
-    return { kind: "Error", pos, raw, content, reason, recoveredAs, confidence };
+    return { kind: "Error", pos, raw, content, reason, recoveredAs, standing };
   };
   const markRecovered = (
     node: MemeAstNode, recoveredAs: "water" | "repaired" | "missing",
-    confidence: number, reason: string, sigilName?: string,
+    standing: number, reason: string, sigilName?: string,
   ): MemeAstNode => {
     node.recoveredAs = recoveredAs;
-    node.confidence  = confidence;
+    node.standing    = standing;
     const f: ParseFailure = { pos: node.pos, raw: node.raw, reason, recoveredAs };
     if (sigilName !== undefined) f.sigilName = sigilName;
     failures.push(f);
@@ -327,7 +327,7 @@ export function buildMemeAst(
     if (frame.sigilName === "ahu") ahuStack.pop();
     // RECOVER: an unclosed frame at EOF — force-close it, but mark recovered + record (never the old
     // silent "confidently-incorrect tree"). The sigil MAY self-declare its posture via `recoverAs`:
-    // "water" (inert, conf 2) vs the default "repaired" (recovered, conf 9). The structure never breaks.
+    // "water" (inert, standing 2) vs the default "repaired" (recovered, standing 9). The structure never breaks.
     const declared = grammar?.sigils.find((s) => s.name === frame.sigilName)?.recoverAs;
     const recoveredAs = declared ?? "repaired";
     root.push(markRecovered(

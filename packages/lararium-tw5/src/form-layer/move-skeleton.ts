@@ -14,7 +14,7 @@
  *      already harvested.
  *  (b) the PLACEHOLDERED GRAPH — the meme-ast tree with every leaf content
  *      blanked to `_`, keeping kind · sigilName · attrs-KEYS · recoveredAs ·
- *      confidence — the structure without the words.
+ *      standing — the structure without the words.
  *
  * Both are PURE: the harvest + tree go in, the skeleton comes out. No store, no
  * ChromaDB, no Python, no network. The form-vector encoder (P2) plugs in
@@ -89,7 +89,7 @@ const CONTENT_PLACEHOLDER = "_";
 
 /**
  * A meme-ast node with its leaf content blanked. Structure (kind · sigilName ·
- * family · slot · phase · attrs-KEYS · recoveredAs · confidence) survives; every
+ * family · slot · phase · attrs-KEYS · recoveredAs · standing) survives; every
  * word becomes `_`. The graph keeps the SHAPE the turn enacted, never the prose.
  */
 export interface PlaceholderNode {
@@ -108,8 +108,8 @@ export interface PlaceholderNode {
   readonly attrKeys?: readonly string[];
   /** The resilient-recovery rung, when the node was recovered. */
   readonly recoveredAs?: string;
-  /** The 0..20 manifestation confidence, when graded. */
-  readonly confidence?: number;
+  /** The 0..20 manifestation standing, when graded — a backward-earned recovery measure, never a forward vow. */
+  readonly standing?: number;
   /** Every leaf content blanked to `_`. */
   readonly content: typeof CONTENT_PLACEHOLDER;
   readonly children: readonly PlaceholderNode[];
@@ -379,7 +379,7 @@ function placeholderNode(node: MemeAstNode): PlaceholderNode {
 
   // The resilient-recovery gradient — kept (graceful-parsing).
   if (typeof node.recoveredAs === "string") out.recoveredAs = node.recoveredAs;
-  if (typeof node.confidence === "number") out.confidence = node.confidence;
+  if (typeof node.standing === "number") out.standing = node.standing;
 
   return out;
 }

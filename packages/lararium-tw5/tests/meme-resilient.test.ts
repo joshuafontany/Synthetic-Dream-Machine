@@ -33,16 +33,16 @@ describe("meme-ast resilient recovery", () => {
   test("an unclosed frame force-closes marked `repaired` + recorded, never silently", () => {
     const r = parseMemeText(URI, "<<~ ahu #x >>\n\nunclosed body to EOF");
     expect(r.failures.some((f) => f.reason === "unclosed-frame")).toBe(true);
-    const ahu = r.nodes.find((n) => n.kind === "Ahu") as { recoveredAs?: string; confidence?: number } | undefined;
+    const ahu = r.nodes.find((n) => n.kind === "Ahu") as { recoveredAs?: string; standing?: number } | undefined;
     expect(ahu).toBeDefined();
     expect(ahu!.recoveredAs).toBe("repaired");
-    expect(ahu!.confidence).toBe(9);
+    expect(ahu!.standing).toBe(9);
     expect(JSON.stringify(ahu)).toContain("unclosed body"); // the valid content inside still parsed
   });
 
   test("a sigil self-declares its degradation posture via recoverAs (water, not the default repaired)", () => {
     // The driver consults the per-sigil `recoverAs` for an unclosed frame. Here `ahu` declares "water"
-    // → inert (confidence 2); without a declaration it defaults to "repaired" (confidence 9, above).
+    // → inert (standing 2); without a declaration it defaults to "repaired" (standing 9, above).
     const grammar = { sigils: [{
       name: "ahu", kind: "context", recoverAs: "water",
       openPattern: "<<~\\s*ahu\\s+(#[\\w-]+)\\s*>>",
@@ -50,10 +50,10 @@ describe("meme-ast resilient recovery", () => {
     }], families: [] } as unknown as GrammarRules;
     const r = parseMemeText(URI, "<<~ ahu #x >>\n\nbody to EOF", grammar);
     const recovered = r.nodes.find((n) => (n as { recoveredAs?: string }).recoveredAs) as
-      { recoveredAs?: string; confidence?: number } | undefined;
+      { recoveredAs?: string; standing?: number } | undefined;
     expect(recovered).toBeDefined();
     expect(recovered!.recoveredAs).toBe("water");  // the sigil's OWN declared posture, not the default
-    expect(recovered!.confidence).toBe(2);
+    expect(recovered!.standing).toBe(2);
   });
 
   test("a novel sigil form is graded `missing` (the partial rung), not dropped to water", () => {
@@ -62,9 +62,9 @@ describe("meme-ast resilient recovery", () => {
     const r = parseMemeText(URI, "before <<~ aperture(0->20) >> after");
     expect(r.failures.some((f) => f.reason === "partial-form:aperture")).toBe(true);
     const node = r.nodes.find((n) => (n as { recoveredAs?: string }).recoveredAs === "missing") as
-      { recoveredAs?: string; confidence?: number; sigilName?: string; raw?: string } | undefined;
+      { recoveredAs?: string; standing?: number; sigilName?: string; raw?: string } | undefined;
     expect(node).toBeDefined();
-    expect(node!.confidence).toBe(13);          // the partial band, above repaired(9) and water(2)
+    expect(node!.standing).toBe(13);          // the partial band, above repaired(9) and water(2)
     expect(node!.sigilName).toBe("aperture");   // the sigil survives as recognized, not text
     expect(node!.raw).toContain("aperture(0->20)"); // lossless
   });
@@ -73,7 +73,7 @@ describe("meme-ast resilient recovery", () => {
 // ---------------------------------------------------------------------------
 // The recovery rungs, read onto the severity ladder core TiddlyWiki closes over.
 // A `missing` construct loses the author's meaning; `water` keeps the bytes and drops
-// their sense; `repaired` keeps both at lower confidence.
+// their sense; `repaired` keeps both at lower standing.
 // ---------------------------------------------------------------------------
 
 import { failuresToDiagnostics, gradeOf, severityOf, membraneDiagnostic } from "../src/meme-ast/diagnostics.js";

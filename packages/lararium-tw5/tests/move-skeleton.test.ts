@@ -228,7 +228,7 @@ describe("placeholderTree — leaf content blanked, structure kept", () => {
     expect(blob).not.toContain("88");
   });
 
-  test("the resilient gradient (recoveredAs · confidence) is carried through", () => {
+  test("the resilient gradient (recoveredAs · standing) is carried through", () => {
     const errored: MemeAstNode = {
       kind: "Error",
       pos: 0,
@@ -236,11 +236,11 @@ describe("placeholderTree — leaf content blanked, structure kept", () => {
       content: "broken span verbatim",
       reason: "unclosed-frame",
       recoveredAs: "water",
-      confidence: 3,
+      standing: 3,
     } as unknown as MemeAstNode;
     const node = placeholderTree([errored])[0]!;
     expect(node.recoveredAs).toBe("water");
-    expect(node.confidence).toBe(3);
+    expect(node.standing).toBe(3);
     expect(node.content).toBe("_");
     expect(JSON.stringify(node)).not.toContain("verbatim");
   });
