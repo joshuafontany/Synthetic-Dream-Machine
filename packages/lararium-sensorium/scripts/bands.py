@@ -1217,7 +1217,7 @@ def _slaving_gain(prior: np.ndarray, target: np.ndarray,
 
         reliability = var(target) / (var(target) + var(residual))
 
-    This is `20·g/(1+g)` (the π↔confidence map) with `g = var(target)/var(residual)`, but formed
+    This is `20·g/(1+g)` (the π↔band map) with `g = var(target)/var(residual)`, but formed
     WITHOUT ever taking the ratio `g` first — so no absolute `_EPS` floor on a vanishing residual,
     no scale-blind blowup, and no silent saturation (#crucible-tested 2026-07-01). As `var(resid)→0`,
     `reliability→1` (standing→20) smoothly, at ANY scale, because both terms carry the same units.

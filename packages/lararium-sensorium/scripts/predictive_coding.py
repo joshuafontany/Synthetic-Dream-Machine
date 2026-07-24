@@ -177,7 +177,7 @@ def plane_pc(obs, model: str = "ewma", alpha: float = 0.3,
     PRECISION the gain `π`: a supplied `confidence` SETS it top-down (π = confidence/(20−conf));
               else it is ESTIMATED bottom-up as the relative precision π = var(baseline_ε) /
               var(model_ε) (how much `g` beat predict-previous), expressed back as a
-              confidence band. The residual is STANDARDIZED (z = ε/σ_obs) so π·z² is
+              STANDING band (measured, never a vow). The residual is STANDARDIZED (z = ε/σ_obs) so π·z² is
               dimensionless and cross-plane comparable.
     UPDATE    the generative model has already absorbed each observation online (EWMA state /
               the AR fit) — the loop closes.
