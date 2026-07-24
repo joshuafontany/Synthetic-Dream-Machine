@@ -54,7 +54,7 @@ interface HarvestRecord {
   readonly sidechain: boolean;
   /** In-transcript parent message uuid (the turn DAG), or null at a root. */
   readonly parentUuid: string | null;
-  readonly confidence: number;
+  readonly standing: number;
   readonly band: string;
   readonly recordRaw: boolean;
   readonly aim: string | null;
@@ -450,7 +450,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       const rec: HarvestRecord = {
         ts: turn.ts, wing, session: turn.session, turn: key, role: turn.role,
         agentId: turn.agentId, sidechain: turn.sidechain, parentUuid: turn.parentUuid,
-        confidence: h.confidence, band: h.band, recordRaw: h.recordRaw,
+        standing: h.standing, band: h.band, recordRaw: h.recordRaw,
         aim: h.bearing?.aimUri ?? null, yieldUri: h.bearing?.yieldUri ?? null,
         voices: h.voices.map((v) => (v.role ? `${v.name} (${v.role})` : v.name)),
         confidences: h.confidences.map((c) => ({ register: c.register, value: c.value })),

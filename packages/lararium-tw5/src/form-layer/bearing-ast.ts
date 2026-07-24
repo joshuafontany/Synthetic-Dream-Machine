@@ -84,19 +84,19 @@ export interface BearingVector {
   readonly arity: number;
   /** the conformance grade. */
   readonly grade: BearingGrade;
-  /** 0..20 drift gauge (low = drifted), mirroring bearing-harvest's BEARING_CONFIDENCE seeds. */
-  readonly confidence: number;
+  /** 0..20 drift gauge the parse EARNS backward (low = drifted), mirroring bearing-harvest's BEARING_STANDING seeds. */
+  readonly standing: number;
   /** drift flags, in the bearing-harvest vocabulary (`arity:N`, `session-form`, `root:unparsed`). */
   readonly driftFlags: readonly string[];
 }
 
 /**
- * Drift gauge seeds on the 0..20 Maybe-Logic continuum. These MIRROR
- * bearing-harvest's BEARING_CONFIDENCE (the arity-drift signal that is the seed
- * for this AST). Kept LOCAL — bearing-ast stays self-contained and VM-safe,
- * importing no runtime value across the package boundary.
+ * Drift-gauge STANDING seeds on the 0..20 Maybe-Logic continuum — a backward-earned
+ * gauge, never a forward vow. These MIRROR bearing-harvest's BEARING_STANDING (the
+ * arity-drift signal that seeds this AST). Kept LOCAL — bearing-ast stays
+ * self-contained and VM-safe, importing no runtime value across the package boundary.
  */
-export const BEARING_GRADE_CONFIDENCE = {
+export const BEARING_GRADE_STANDING = {
   /** a clean 3-term root → canon band */
   canon: 18,
   /** the 3-term arity law broke → provisional-synthesis */
@@ -167,7 +167,7 @@ function unparsed(raw: string): BearingVector {
     fragment: null,
     arity: 0,
     grade: "unparsed",
-    confidence: BEARING_GRADE_CONFIDENCE.rootUnparsed,
+    standing: BEARING_GRADE_STANDING.rootUnparsed,
     driftFlags: ["root:unparsed"],
   };
 }
@@ -235,7 +235,7 @@ export function parseBearing(uriRaw: string): BearingVector {
       fragment,
       arity: 0,
       grade: "unparsed",
-      confidence: BEARING_GRADE_CONFIDENCE.rootUnparsed,
+      standing: BEARING_GRADE_STANDING.rootUnparsed,
       driftFlags: [...driftFlags, "root:unparsed"],
     };
   }
@@ -250,13 +250,13 @@ export function parseBearing(uriRaw: string): BearingVector {
   };
 
   let grade: BearingGrade;
-  let confidence: number;
+  let standing: number;
   if (arity === 3) {
     grade = "canon";
-    confidence = BEARING_GRADE_CONFIDENCE.canon;
+    standing = BEARING_GRADE_STANDING.canon;
   } else {
     grade = "degraded";
-    confidence = BEARING_GRADE_CONFIDENCE.arityDrift;
+    standing = BEARING_GRADE_STANDING.arityDrift;
     driftFlags.push(`arity:${arity}`);
   }
 
@@ -270,7 +270,7 @@ export function parseBearing(uriRaw: string): BearingVector {
     fragment,
     arity,
     grade,
-    confidence,
+    standing,
     driftFlags,
   };
 }

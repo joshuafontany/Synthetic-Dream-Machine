@@ -103,9 +103,9 @@ export interface TurnHarvest {
   readonly sigilCount: number;
   /** Count of `<<~` openers that did NOT classify — the water, panic-synced. */
   readonly waterCount: number;
-  /** Overall 0..20 gradient confidence (low = drifted / sparse structure). */
-  readonly confidence: number;
-  /** The band {@link confidence} lands in. */
+  /** Overall 0..20 gradient standing — the parse earns it BACKWARD (low = drifted / sparse structure). */
+  readonly standing: number;
+  /** The band {@link standing} lands in. */
   readonly band: HarvestBand;
   readonly driftFlags: readonly string[];
   /** Below the floor: abstain on structure, but keep the raw source. */
@@ -113,7 +113,7 @@ export interface TurnHarvest {
 }
 
 /**
- * Confidence floor (0..20). At or above, a turn's structure harvests; below, the
+ * Standing floor (0..20). At or above, a turn's structure harvests; below, the
  * turn abstains on structure (`recordRaw`) and the raw source is kept for a later
  * pass. The operator's rule: work the gradient down to here, no further.
  */
@@ -126,10 +126,10 @@ export const HARVEST_BANDS = {
   provisional: HARVEST_FLOOR, // the play register, down to the floor
 } as const;
 
-export function harvestBand(confidence: number): HarvestBand {
-  if (confidence >= HARVEST_BANDS.canon) return "canon";
-  if (confidence >= HARVEST_BANDS.synthesis) return "synthesis";
-  if (confidence >= HARVEST_BANDS.provisional) return "provisional";
+export function harvestBand(standing: number): HarvestBand {
+  if (standing >= HARVEST_BANDS.canon) return "canon";
+  if (standing >= HARVEST_BANDS.synthesis) return "synthesis";
+  if (standing >= HARVEST_BANDS.provisional) return "provisional";
   return "raw";
 }
 
@@ -236,7 +236,7 @@ export function harvestTurnGradient(text: string): TurnHarvest {
     others: [],
     sigilCount: 0,
     waterCount: 0,
-    confidence: 0,
+    standing: 0,
     band: "raw",
     driftFlags: ["empty"],
     recordRaw: true,
@@ -363,41 +363,41 @@ export function harvestTurnGradient(text: string): TurnHarvest {
 
   const sigilCount = classifiedSigils;
 
-  // --- overall confidence on the gradient ---
+  // --- overall standing on the gradient (the parse EARNS it backward) ---
   const driftFlags: string[] = [...(bearing?.driftFlags ?? [])];
-  let confidence: number;
+  let standing: number;
 
   if (bearing) {
     // Start from the bearing's own drift standing, corroborate with the HUD body.
-    confidence = bearing.standing;
-    if (huds.length > 0) confidence = clamp(confidence + 1, 0, 18);
-    if (voices.length > 0) confidence = clamp(confidence + 1, 0, 18);
-    if (confidences.length > 0) confidence = clamp(confidence + 1, 0, 20);
+    standing = bearing.standing;
+    if (huds.length > 0) standing = clamp(standing + 1, 0, 18);
+    if (voices.length > 0) standing = clamp(standing + 1, 0, 18);
+    if (confidences.length > 0) standing = clamp(standing + 1, 0, 20);
   } else {
     driftFlags.push("frame:none");
     if (specialized + bearingSigils > 0) {
       // Structure without an aim/yield frame — degraded but real.
-      confidence = 8;
-      if (voices.length > 0) confidence = clamp(confidence + 1, 0, 12);
+      standing = 8;
+      if (voices.length > 0) standing = clamp(standing + 1, 0, 12);
     } else if (voices.length > 0) {
       // A Voice surfaced in prose, no sigils — partial.
-      confidence = 6;
+      standing = 6;
     } else {
       // All prose, no structure — below the floor; keep raw.
-      confidence = 2;
+      standing = 2;
     }
   }
 
   // Water drags the gauge: mostly-unrecognized openers read as drift.
   if (waterCount > 0) {
     driftFlags.push(`water:${waterCount}`);
-    if (sigilCount === 0) confidence = Math.min(confidence, HARVEST_FLOOR);
-    else if (waterCount >= sigilCount) confidence = clamp(confidence - 2, 0, 20);
+    if (sigilCount === 0) standing = Math.min(standing, HARVEST_FLOOR);
+    else if (waterCount >= sigilCount) standing = clamp(standing - 2, 0, 20);
   }
   if (voices.length > 0) driftFlags.push(`voices:${voices.length}`);
   if (confidences.length > 1) driftFlags.push(`confidence-multi:${confidences.length}`);
 
-  const band = harvestBand(confidence);
+  const band = harvestBand(standing);
   return {
     bearing,
     voices,
@@ -409,9 +409,9 @@ export function harvestTurnGradient(text: string): TurnHarvest {
     others,
     sigilCount,
     waterCount,
-    confidence,
+    standing,
     band,
     driftFlags,
-    recordRaw: confidence < HARVEST_FLOOR,
+    recordRaw: standing < HARVEST_FLOOR,
   };
 }

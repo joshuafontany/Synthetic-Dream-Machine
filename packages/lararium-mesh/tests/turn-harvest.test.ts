@@ -75,7 +75,7 @@ describe("clean turn — harvests with confidence", () => {
   });
 
   test("lands in the canon band, no raw fallback", () => {
-    expect(h.confidence).toBeGreaterThanOrEqual(13);
+    expect(h.standing).toBeGreaterThanOrEqual(13);
     expect(h.band).toBe("canon");
     expect(h.recordRaw).toBe(false);
     expect(h.waterCount).toBe(0);
@@ -137,7 +137,7 @@ describe("missing grammar — all prose, no sigils → record raw", () => {
   test("abstains on structure but never drops the source", () => {
     expect(h.bearing).toBeNull();
     expect(h.sigilCount).toBe(0);
-    expect(h.confidence).toBeLessThan(HARVEST_FLOOR);
+    expect(h.standing).toBeLessThan(HARVEST_FLOOR);
     expect(h.band).toBe("raw");
     expect(h.recordRaw).toBe(true);
     expect(h.driftFlags).toContain("frame:none");

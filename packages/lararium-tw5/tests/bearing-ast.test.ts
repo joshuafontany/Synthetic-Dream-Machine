@@ -54,7 +54,7 @@ describe("parseBearing — local form (authority-less)", () => {
 
   test("a clean 3-term root grades canon", () => {
     expect(bv.grade).toBe("canon");
-    expect(bv.confidence).toBe(18);
+    expect(bv.standing).toBe(18);
     expect(bv.driftFlags).toEqual([]);
   });
 });
@@ -108,7 +108,7 @@ describe("parseBearing — graceful arity grading (never throws)", () => {
     expect(bv.grade).toBe("degraded");
     expect(bv.arity).toBe(2);
     expect(bv.driftFlags).toContain("arity:2");
-    expect(bv.confidence).toBe(8);
+    expect(bv.standing).toBe(8);
     // still fully readable
     expect(bv.root.w1).toBe("two");
     expect(bv.root.w2).toBe("terms");

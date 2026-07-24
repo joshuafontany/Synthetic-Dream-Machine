@@ -51,7 +51,7 @@ export type {
   BearingFacets,
 } from "./bearing-ast.js";
 export {
-  BEARING_GRADE_CONFIDENCE,
+  BEARING_GRADE_STANDING,
   parseBearing,
   parseBearingPayload,
   linearizeBearing,
