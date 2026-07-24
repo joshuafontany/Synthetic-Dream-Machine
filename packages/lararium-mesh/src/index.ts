@@ -44,6 +44,7 @@ export * from "./stamp-filter.js";
 export * from "./mirror-paths.js";
 export * from "./tiddler-store.js";
 export * from "./recipe.js";
+export * from "./flow.js";
 export { bagStackFromRec } from "./bag-stack-from-rec.js";
 export * from "./composite-store.js";
 export * from "./sensorium-consistency.js";

@@ -287,6 +287,12 @@ export function parseMeshScale(s: string | null | undefined): MeshScale | undefi
  *  SOVEREIGN-per-vessel: this vessel's own control-plane, never shared across vessels. */
 export const DAEMON_BAG_ID    = bagUri("daemon");
 
+/** e.g. flowUri("crystal") → "lar:///ha.ka.ba/lararium/daemon/flows/crystal" — a Flow's
+ *  pet-name IS its address: a callable, composed cap-stack tiddler in the @daemon bag. */
+export function flowUri(petname: string): string {
+  return `${DAEMON_BAG_ID}/flows/${petname}`;
+}
+
 /** Persona bag id — the operator's veiled-identity `@persona` bag (the PersonaGroup).
  *  Carries the Shadowtalk veiled True-name; the membership-sync surface that crosses the
  *  operator's vessels (vs `@daemon`, which stays sovereign-per-vessel). Founded alongside
