@@ -1,0 +1,134 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/secure-context >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/secure-context.mem"
+hydrate   = true
+l-space   = "lararium"
+mana      = 15
+manao     = 15
+manaoio   = 14
+namespace = "&#x2695;"
+register  = "Synthesis"
+retain    = true
+role      = "the browser vessel's SECURE-CONTEXT WALL and the path through it: crypto.subtle + OPFS demand https/localhost, so a family phone on http://192.168.x.x cannot mint a key → the vessel never boots (dragging the relay to wss://). The prior-art answer — a Let's Encrypt DNS-01 wildcard on the KAHU-OWNED domain + split-horizon DNS, ZERO per-device install. SPLIT device-key TOFU (who-syncs) from real-cert TLS (the padlock). Cert-renewal = the one island-able web2 bridge. FEDERATION = TWO layers: CA-trusted NAMES for the human glass ⊥ self-certifying KEY-DERIVED identities for the cross-kahu spine. Researched (two-lens swarm converged 2026-07-23), NOT built."
+status    = "proposed"
+tags      = ["mesh/cap-tier", "mesh/carry-contract", "api/pono/lararium-identity", "api/pono/causal-islands", "api/pono/persona-circle"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/mesh/secure-context"
+written   = "2026-07-23"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Secure Context ~ the browser vessel's crypto wall and the DNS-01 path that clears it
+
+> Status: PROPOSED — researched (a two-lens swarm converged 2026-07-23: an infrastructure/cert lens and a
+> human-onboarding lens landed independently on the same shape). NOT built. The recommended path reshapes
+> the founding runbook.
+
+<<~ confidence Synthesis 13/20 >> A browser grants `crypto.subtle` and OPFS ''only in a secure context'' — `https://` with a browser-trusted cert, or `localhost`. A family phone reaching a home node at `http://192.168.x.x` gets ''none'' of them, so the vessel cannot mint its identity key and never boots. The way through does not weaken the wall — it ''earns a trusted https origin on the LAN'' through a cert the phone already trusts, with ''zero per-device install''.
+
+<<~/ahu >>
+
+<<~ ahu #the-wall >>
+
+!! The wall ~ why a LAN IP over http cannot boot a vessel
+
+The browser vessel mints its sovereign key via `crypto.subtle.generateKey({name:"Ed25519"})` and rests state in OPFS — both ''secure-context-gated''. `localhost` earns the exemption; `http://192.168.1.x:5173` from a phone does not, so `crypto.subtle` reads `undefined` and the key never mints. The wall ''cascades'': an `https://` page cannot open a `ws://` socket (mixed content), so clearing it for the app drags the membership relay to `wss://` too. One trusted origin lights all three at once.
+
+<<~/ahu >>
+
+<<~ ahu #split-auth-from-tls >>
+
+!! Split auth from TLS ~ two concerns the CA question fuses
+
+The move that dissolves the wall: ''split the two concerns.'' AUTHENTICATION (who may sync) stays on the ''device-key TOFU'' the mesh already holds — the Tailnet-Lock shape: each device mints its own keypair, admission is human-gated by physical co-presence, ≥2 household devices co-sign so no single device is the trust root, and every admit fires a household-visible join event (instantly revocable). TLS (the padlock + the secure-context boot) rides a ''separate real cert''. They compose: device-key TOFU for who-syncs, a publicly-trusted cert for the browser's trust store, and ''the family installs nothing''.
+
+<<~/ahu >>
+
+<<~ ahu #why-dns-01 >>
+
+!! Why DNS-01 ~ the only challenge that never reaches inward, the only wildcard
+
+Given a kahu owns a domain, a ''Let's Encrypt DNS-01 wildcard'' `*.home.kahu.tld` pointed at LAN IPs by ONE split-horizon resolver (AdGuard Home / dnsmasq / Pi-hole the router advertises) clears the wall. DNS-01 proves control by writing a TXT record via the DNS-provider API — ''the only ACME challenge that never needs the validation server to reach the CGNAT'd box'', and the only one that issues a ''wildcard''. Let's Encrypt already sits in every phone's root store, so `https://freyja.home.kahu.tld` is a genuine secure context with ''zero device steps''. The CA-install alternative is HOSTILE to a non-technical family — iOS needs two disjoint trust journeys, Android 7+ apps ignore user-installed CAs outright — so never route a family through it.
+
+<<~/ahu >>
+
+<<~ ahu #the-web2-bridge >>
+
+!! The web2 bridge ~ renewal is the only internet-touching moment
+
+<<~ confidence Synthesis 13/20 >> DNS-01 needs the internet ''only at issuance / renewal (~every 60d), never at serve time'' — a minted cert serves the LAN for its full validity with the home internet fully down. So the causal-island law falls out clean (#causal-islands): ''cert-renewal IS the one declared web2 bridge'' — alarm it, retry it, tolerate a lapse; only a renewal that fails for the ''entire'' validity window breaks trust. The ''zero-internet sovereign fallback'' = a name-constrained local CA (RFC 5280 constraints bind it to `*.home.kahu.tld`, so a leaked root cannot MITM `bank.com`) — it issues offline forever, at the cost of the per-device install tax the DNS-01 path avoids.
+
+<<~/ahu >>
+
+<<~ ahu #two-federation-layers >>
+
+!! Two federation layers ~ CA-names for the glass, key-derived identities for the spine
+
+<<~ confidence Synthesis 13/20 >> Both research lenses converged on a ''two-layer'' federation split, and it rhymes with what the mesh already is:
+
+* ''CA-trusted NAMES for the human browser glass'' — the concession the browser forces at the human surface; a family phone trusts a public CA, so the padlock rides a real cert.
+* ''Self-certifying KEY-DERIVED identities for the cross-kahu mesh SPINE'' — libp2p's PeerID (a multihash of the pubkey), Yggdrasil's key-derived address, Mazières' SFS self-certifying names. No DNS, no CA: the handshake proves the far key hashes to the name you dialed.
+
+The spine layer is already the mesh's native posture — ''our identities ARE keys'' (#lararium-identity, #publish-a-face). Matrix and ActivityPub lean on public PKI at their federation boundary; the mesh keeps the CA only where a browser demands it, and carries the cross-kahu boundary on key-derived identity.
+
+<<~/ahu >>
+
+<<~ ahu #admit-inertness >>
+
+!! Admit inertness ~ SAS, not a proximity radio
+
+The QR admit ceremony (#persona-circle) stays ''photograph-inert by construction'': the offer QR carries only an ephemeral pubkey + nonce, the grant is ECDH-sealed to a secret that never leaves the joinee, and the keyring rides bound into the persona-signed transcript (#cap-tier, #keyring-delivery). ''Under camera-to-screen, nothing more is needed'' — the single-use-nonce + freshness window + who-scans-whom already carry it.
+
+<<~ confidence Synthesis 12/20 >> FIDO caBLE leans on a ''BLE proximity gate'' ONLY because its QR bootstraps a tunnel-SERVER relay (the QR is not the channel) — so a photographed / remote QR could drive auth from afar, and BLE re-adds the proximity the relay threw away. ''Our QR is the channel'', so the property BLE restores was never lost; and BLE runs beacon-relayable (~150m) and platform-broken for our surfaces (no Web Bluetooth on Safari/Firefox/iOS; no Web NFC on any desktop/home-node). ''The one residual'' — an active relay over a MODIFIABLE channel (the admit surface accepts paste; a relayed 3-hop to a distant victim) — wants a ''short-authentication-string'' (SAS), never a radio: derive a short compare (Vaudenay CRYPTO-2005; Matrix/Signal) by HKDF over material already in the signed transcript — ''bind it to the TRANSCRIPT HASH, not raw DH'', or a same-DH-different-payload substitution slips under it — render ~5-7 emoji / 3×4-digit, one human glance, gated to the relayed case only. Zero new dependency, web3-native. Skip rotating-QR (nonce+expiry already banks it) and NFC (Android-only). ''NOT built'' — a flagged follow; the SAS length + whether the relayed path stays in-scope read as operator rulings.
+
+<<~/ahu >>
+
+<<~ ahu #groundings >>
+
+!! Groundings ~ the falsifiable rhymes
+
+| Rhyme | Grounds | Field |
+|---|---|---|
+| ''Tailscale Tailnet Lock'' — new nodes locked out until an existing signing node co-signs, ≥2 signers, no central CA | the device-key TOFU auth layer, structure-for-structure | overlay-network trust |
+| ''Let's Encrypt DNS-01 wildcard'' + split-horizon DNS | the zero-install trusted-origin path; TXT-via-API never reaches inward, the only wildcard | web PKI / ACME |
+| ''libp2p PeerID · Yggdrasil · SFS'' (Mazières) self-certifying names | the key-derived spine identity — names ARE keys, no CA at the boundary | distributed systems |
+| ''RFC 5280 Name Constraints'' | the sovereign fallback CA bounded to `*.home.kahu.tld` — a leaked root cannot MITM the world | X.509 |
+| ''Vaudenay SAS'' (CRYPTO 2005); Matrix cross-signing emoji; Signal safety numbers | the relayed-channel residual: a short human compare over the signed ECDH transcript kills an active MITM, ≈2^−k independent of compute | applied cryptography |
+| ''FIDO caBLE proximity'' | the anti-pattern: BLE's rationale is coupled to a tunnel-server relay our airgapped QR does not have — borrow the threat-model clarity, NOT the radio | authentication UX |
+
+''The honest guard:'' the prior art illuminates the ''path'' (DNS-01, TOFU, SAS) but the mesh borrows only what survives its own law — the runtime cloud control plane a Tailscale-style overlay assumes is a ''web2 bridge behind a causal-island boundary'' (#web3-only-lares), never a core dependency. Take the DNS-01 zero-install, the co-sign TOFU, the SAS compare; leave the coordination server at the island edge.
+
+<<~/ahu >>
+
+<<~ ahu #provenance >>
+
+!! Provenance ~ RESEARCHED, not built
+
+This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert ∪ human-onboarding) converged 2026-07-23; NO code stands behind it yet. ''Build implication, named'': the relay's `wss://` origin must bind to the configured DNS name — the device-reach banner already derives reachable URLs, so extending it to honor a configured `LAR_PUBLIC_URL = https://name.kahu.tld` + the wss origin is the seam. ''Uncertain, flagged'': installed-PWA / Android-WebView TLS behavior; a phone forcing encrypted DNS (DoH) past the split-horizon answer (the likeliest papercut); whether OPFS / `crypto.subtle` degrade gracefully across a cert-renewal ''lapse'' or hard-fail the vessel mid-session (worth a deliberate expiry test).
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#publish-a-face >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/federation >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

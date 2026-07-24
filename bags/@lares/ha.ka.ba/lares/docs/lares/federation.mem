@@ -147,7 +147,9 @@ lares wake --admit admit.json      # idempotent join-standup
 
 A joining vessel proves itself on every boot through three keyhive gates: its DID matches its key (A), its Individual is a member of the PersonaGroup (B), and the PersonaGroup is a member of the Nexus MeshCabal (C). Under Model A all three pass because the vessel //is// the same operator. Under Model B, gate B fails until the new key is delegated in — which is why Model B waits on the contact-card exchange.
 
-A vessel never joins by pulling a repo; it joins by receiving — deliberately, out-of-band — what the founder hands it. The public clone carries the house; the operator carries the key.
+A vessel never joins by pulling a repo; it joins by receiving — deliberately, out-of-band — what the founder hands it. The public clone carries the house; the operator carries the key. The founder hands more than the delegation: the ''`@cad` read-key rides the admission grant'', sealed to the joinee's ephemeral recipient and ''bound by a digest into the persona-signed transcript'' — the joinee installs it only on a signature-covered match, superseding its self-minted phantom, so same-Nexus members read each other's sealed bodies (<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier#keyring-delivery >>).
+
+A ''browser'' vessel meets one more gate before any of this — the ''secure-context wall'': `crypto.subtle` + OPFS demand `https`/`localhost`, so a phone on `http://192.168.x.x` cannot mint its key. A DNS-01 wildcard on the kahu-owned domain clears it with zero per-device install (<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>).
 
 <<~/ahu >>
 

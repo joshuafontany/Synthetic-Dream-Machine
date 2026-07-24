@@ -97,7 +97,9 @@ Three spaces that never fuse (confirmed across three files; see #edges):
 * ''CARRY'' (`sharePolicy`, advisory) — //what I volunteer to a peer//. Open routing for
   friendly users = carry generously.
 * ''READ'' (BeeKEM/CGKA crypto) — //what a peer can decrypt//. A causal-island-local FACT, not
-  a policy: a carried-but-uncapped doc reads `Key not found`.
+  a policy: a carried-but-uncapped doc reads `Key not found`. The bag ''declares'' its read-tier as a
+  self-describing datum (#cap-tier), and the gate ''meets'' that declaration against the crypto floor —
+  the declaration tightens who reads, never loosens below what the seal permits.
 * ''CONTRACT'' (this meme) — the grant ledger + the carry posture, causal-island-local, bilateral,
   never global.
 
@@ -176,6 +178,8 @@ cannot.
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/federation >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>
 
 <<~/ahu >>
 
