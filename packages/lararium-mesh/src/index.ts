@@ -256,6 +256,8 @@ export * from "./credit-gate.js";
 
 export * from "./merge-gate.js";
 
+export * from "./sensorium-lifecycle.js";
+
 export * from "./store-integrity.js";
 export * from "./archive-envelope.js";
 export * from "./ingest-tolerant.js";

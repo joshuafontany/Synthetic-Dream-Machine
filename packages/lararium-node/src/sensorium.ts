@@ -43,6 +43,7 @@ import {
   canonicalJsonBytes, defaultCryptoProvider, sha256Hex,
   reentryPrior, admit as keelAdmit, storeCodeFrom, observeClaim,
   verifyWitnessSig, WITNESS_POLICY,
+  deriveLifecycle, isLifecycleState, type SensoriumLifecycleState,
 } from "@lararium/mesh";
 import {
   resolveComputeCapEnv, resolveFormEncoderSpawn, resolveContentPalaceSpawn, resolvePersistencePalaceSpawn,
@@ -155,6 +156,14 @@ export interface SensoriumManifest {
   readonly apertures?: Readonly<Record<string, string>>;
   /** does this sensorium's bytes live in ephemeral scratch (swept-on-exit), or durable store? */
   readonly ephemeral: boolean;
+  /**
+   * BASE cap — the DECLARED lifecycle STATE a reconciler drives (pioneer → hardening → durable, then a
+   * judged tombstone). A manifest with no declared value reads one DERIVED from `ephemeral`+`halfLife`
+   * ({@link deriveLifecycle}) — lossless migration, zero disk edit until the next write. The graduated
+   * state ladder rides the DURABLE manifest here; the binary `ephemeral` bool of the scratch leak-record
+   * (sense-sensorium.ts `sensorium.json`) stays its own `docker run --rm` concern.
+   */
+  readonly lifecycle: SensoriumLifecycleState;
   /** ISO-8601 mint time. */
   readonly created: string;
 }
@@ -222,6 +231,10 @@ export function parseSensoriumManifest(value: unknown): SensoriumManifest {
   if (typeof raw.ephemeral !== "boolean") {
     throw new Error("sensorium manifest: ephemeral needs a boolean");
   }
+  // The lifecycle reader-default: a declared state stands; an absent/unknown one re-derives from
+  // ephemeral+halfLife, so a manifest that predates the field reads a lifecycle with zero disk edit.
+  const halfLife = persistence ? (persistence.halfLife as number | null) : undefined;
+  const lifecycle = isLifecycleState(raw.lifecycle) ? raw.lifecycle : deriveLifecycle(raw.ephemeral, halfLife);
   return {
     schema: SENSORIUM_SCHEMA,
     sensorium: nonEmptyString(raw.sensorium, "sensorium"),
@@ -233,6 +246,7 @@ export function parseSensoriumManifest(value: unknown): SensoriumManifest {
     ...(persistence ? { persistencePolicy: { halfLife: persistence.halfLife as number | null } } : {}),
     ...(contract.apertures ? { apertures: contract.apertures } : {}),
     ephemeral: raw.ephemeral,
+    lifecycle,
     created,
   };
 }
@@ -323,6 +337,9 @@ export interface BuildSensoriumOptions {
    */
   readonly apertures?: Readonly<Record<string, string>>;
   readonly ephemeral?: boolean;
+  /** the DECLARED lifecycle state; absent → derived from ephemeral+halfLife ({@link deriveLifecycle}).
+   *  A fresh `build --ephemeral` passes `pioneer`; most mints let it derive. */
+  readonly lifecycle?: SensoriumLifecycleState;
   /** override the mint time (tests); defaults to now. */
   readonly created?: string;
 }
@@ -348,6 +365,7 @@ export function buildSensoriumManifest(sensoriumDir: string, opts: BuildSensoriu
     ...(opts.persistencePolicy ? { persistencePolicy: opts.persistencePolicy } : {}),
     ...(opts.apertures ? { apertures: opts.apertures } : {}),
     ephemeral: opts.ephemeral ?? false,
+    lifecycle: opts.lifecycle ?? deriveLifecycle(opts.ephemeral ?? false, opts.persistencePolicy?.halfLife),
     created: opts.created ?? new Date().toISOString(),
   };
 }
