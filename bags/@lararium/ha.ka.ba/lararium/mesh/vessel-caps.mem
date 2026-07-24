@@ -120,6 +120,17 @@ A Herm ''boots permissionlessly'' (its own self-certifying key, anon — no bles
 
 ''Retire-residue (attractor).'' An earlier draft named the Herm a ''minimal serve-carry process'' — a stripped pipe serving the public FLOW-map and forwarding bytes, with no `@daemon` and no engine. That picture ''superseded'': a pipe grows no immune function, so a mesh of pipes cannot repair itself under siege. The current model keeps the figure (minimal, blind-carriage, public-read) and ''adds the keel'' — the @daemon + mesh-palace immune core — so the floor defends itself at every tier.
 
+!!! The Herm under the sealed-sharing model ~ the blind carriage made concrete
+
+The `#has {rhizome}` carriage now names ''built code'' (the sealed-sharing model, #cap-tier, #carry-contract). ''The carriage is dumb — the node is not:'' the WAYFARER runs the immune keel, but its CARRIAGE reads nothing by construction. Made concrete:
+
+* ''`rhizome.forward` = the authenticated carriage relay'' — it runs an Ed25519 proof-of-possession handshake, STAMPS every envelope's `from` with the sender's PROVEN key (a forged `from` never crosses), moves sealed `@cad` ciphertext (`cid = BLAKE3(ciphertext)`, verify-cap ⊥ read-cap), and reads NOTHING. "sealed mana along the leylines" now reads literal: the disclosure membrane at the wire (#lares-viales) made code. A ''standing relay'' is this cap stood always-on — the Herm's whole reason to sit at the crossroads.
+* ''custody ⊥ findability = the bag-tracker'' (#the-seam) — a tuber announces //"I hold cid X"// into the Herm's DHT-free `cid → holders` hint index; any rhizome serves the hint. The Herm holds the HINT, never the read-cap; a fetcher re-verifies `BLAKE3(bytes)==cid` itself, so the hint stays a hint, never an authority on the bytes.
+* ''the Herm decides WHO-CONNECTS, never WHO-READS.'' The read-scope it never holds is the cap-tier chain (`VEIL ⊂ PERSONAGROUP ⊂ CONTRACT ⊂ PUBLIC`, #cap-tier); the Herm carries every tier's ciphertext and holds a read-cap for NONE. The member-carry gate + the read-scope live in the SERVED vessels (the cas-wire serve side), never the wayfarer. The connect gate is near-open — proof-of-possession today, the lease + rate + cost-to-vouch anti-Sybil economy the future layer (#the-relay-floor names it open).
+* ''two sockets stay two'' (#dreamnet-architecture gate-model) — the Herm is a Socket-B carriage relay (sealed `@cad` envelopes); it NEVER carries the cleartext Automerge `/ws` doc sync (Socket A). Carry ⊥ read holds at the transport because the two never cross.
+
+''The Raspberry-Pi relay.'' The Herm's thinned `#has`-stack — `rhizome` (the carriage relay) ⊕ `tuber`-scoped-to-the-immune-@daemon ⊕ public-`read` — runs on a Raspberry-Pi-class box: a family stands one at the crossroads and it carries sealed mana between hearths, reading none of it, defending its own segment (re-key · evict · heal · re-share), and kindling a cold hearth from its bulb. Built: the carriage-relay cap + the headless entrypoint (`3ac128e5`); the thinned-keel Herm vessel + its `lares herm` / `lares relay` stand-up is the code owed.
+
 <<~/ahu >>
 
 <<~ ahu #the-seam >>
