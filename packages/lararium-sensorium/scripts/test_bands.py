@@ -574,8 +574,8 @@ def test_slaving_reads_order_parameter():
     strongest = max(sm["pairs"], key=lambda p: p["topdown_gain"])
     assert strongest["topdown_gain"] > 1.5 and abs(strongest["bottomup_r"]) > 0.2
     assert strongest["circular"] is True
-    # the gain reads as a confidence (0..20 via the π↔confidence map)
-    assert 0.0 <= strongest["topdown_confidence"] <= 20.0
+    # the signal-fraction reads as a STANDING band (0..20, measured — never a vowed confidence)
+    assert 0.0 <= strongest["slaving_reliability"] <= 20.0
 
 
 def test_slaving_graceful_single_band():
@@ -676,8 +676,8 @@ def test_slaving_gain_confidence_not_silently_saturated():
     # slaving_leg's readout matches: finite, bounded, from the fraction.
     sl = bs.slaving_leg(bs.modwt_mra(np.sin(2 * np.pi * t / 16.0)))
     for pair in sl["pairs"]:
-        assert np.isfinite(pair["topdown_confidence"])
-        assert pair["topdown_confidence"] <= 20.0 + 1e-9
+        assert np.isfinite(pair["slaving_reliability"])
+        assert pair["slaving_reliability"] <= 20.0 + 1e-9
         assert np.isfinite(pair["topdown_gain"])
 
 

@@ -8,7 +8,7 @@ import { describe, test, expect } from "vitest";
 import {
   CONFIDENCE_MAX,
   confidenceToPrecision,
-  precisionToConfidence,
+  precisionToStanding,
   ewmaPredict,
   ar1FitPredict,
   modelComplexity,
@@ -28,10 +28,10 @@ import {
 describe("precision = confidence-as-gain", () => {
   test("conf → π → conf round-trips; 10/20 is the neutral gain 1", () => {
     for (const conf of [0, 5, 10, 15, 19]) {
-      expect(precisionToConfidence(confidenceToPrecision(conf))).toBeCloseTo(conf, 6);
+      expect(precisionToStanding(confidenceToPrecision(conf))).toBeCloseTo(conf, 6);
     }
     expect(confidenceToPrecision(10)).toBeCloseTo(1, 9);
-    expect(precisionToConfidence(1)).toBeCloseTo(10, 9);
+    expect(precisionToStanding(1)).toBeCloseTo(10, 9);
     expect(CONFIDENCE_MAX).toBe(20);
   });
 
@@ -89,18 +89,20 @@ describe("the predict→error→precision→update loop", () => {
     expect(rp.output).not.toEqual(predictable);
   });
 
-  test("bottom-up confidence tracks predictability", () => {
-    const cp = planePc(predictable, { model: "ar1" }).estConfidence;
-    const cn = planePc(noise, { model: "ar1" }).estConfidence;
+  test("bottom-up standing tracks predictability", () => {
+    const cp = planePc(predictable, { model: "ar1" }).standing;
+    const cn = planePc(noise, { model: "ar1" }).standing;
     expect(cp).toBeGreaterThan(14);
     expect(cn).toBeGreaterThan(8);
     expect(cp).toBeGreaterThan(cn);
+    // a plane with no vow carries confidence null — a measured value never wears the vow's name
+    expect(planePc(predictable, { model: "ar1" }).confidence).toBeNull();
   });
 
   test("a top-down confidence VOW SETS the gain that weights ε²", () => {
     const neutral = planePc(noise, { model: "ewma" });
     const vowed = planePc(noise, { model: "ewma", confidence: 18 });
-    expect(vowed.confidenceSource).toBe("vow");
+    expect(vowed.confidence).toBeCloseTo(18, 9);
     expect(vowed.precision).toBeCloseTo(confidenceToPrecision(18), 9);
     expect(vowed.surprise).toBeGreaterThan(neutral.surprise); // π = confidence WIRED
     expect(planePc(noise, { model: "ewma", confidence: 2 }).surprise).toBeLessThan(neutral.surprise);

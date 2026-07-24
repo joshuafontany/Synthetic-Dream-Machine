@@ -35,7 +35,8 @@ sets it top-down by attention):
 
   · BOTTOM-UP (estimate) — from the errors: a relative precision `π = var(baseline) /
     var(model)` (how much the model beat a trivial predict-previous baseline), expressed as
-    a confidence band via `conf = 20·π/(1+π)` (π=1 ⇒ neutral 10/20; π→∞ ⇒ 20/20).
+    a STANDING band via `standing = 20·π/(1+π)` (π=1 ⇒ neutral 10/20; π→∞ ⇒ 20/20). This
+    measured self-report reads as STANDING, never confidence — confidence is only ever vowed.
   · TOP-DOWN (vow) — a supplied `confidence N/20` SETS the gain: `π = N/(20−N)` (the odds
     form; 10/20 ⇒ gain 1, 15/20 ⇒ gain 3, →20 ⇒ →∞). An attention/confidence vow thus
     modulates how hard a plane's error pushes on F.
@@ -84,10 +85,12 @@ def confidence_to_precision(confidence: float) -> float:
     return c / (_CONF_MAX - c)
 
 
-def precision_to_confidence(precision: float) -> float:
-    """A bottom-up precision ESTIMATE (≥0) expressed as a confidence band (0..20):
-    `conf = 20·π/(1+π)`. The exact inverse of {@link confidence_to_precision}; π=1 ⇒ 10/20
-    (neutral), π→∞ ⇒ 20/20. This is how a plane REPORTS trust in its own prediction."""
+def precision_to_standing(precision: float) -> float:
+    """A bottom-up precision ESTIMATE (≥0) expressed as a STANDING band (0..20):
+    `standing = 20·π/(1+π)`. The arithmetic inverse of {@link confidence_to_precision};
+    π=1 ⇒ 10/20 (neutral), π→∞ ⇒ 20/20. STANDING, never confidence: a plane REPORTS this
+    trust from its own errors (backward-earned), so it MUST NOT wear the confidence name —
+    confidence rides FORWARD as a vow, standing rides backward as a measured self-report."""
     p = max(0.0, float(precision))
     return _CONF_MAX * p / (1.0 + p)
 
@@ -180,7 +183,8 @@ def plane_pc(obs, model: str = "ewma", alpha: float = 0.3,
               the AR fit) — the loop closes.
 
     A `warmup` count of opening frames is excluded from the surprise (no history to predict
-    from). Returns the loop's read: pred, error, precision (gain), confidence (0..20),
+    from). Returns the loop's read: pred, error, precision (gain), confidence (the forward
+    vow or None), standing (0..20, the measured self-report),
     surprise = π·mean(z²), complexity (bits), output = π·z (the precision-weighted residual
     the plane EMITS instead of the raw feature), and n / n_params. Graceful on an empty /
     single-frame plane (surprise 0)."""
@@ -190,7 +194,7 @@ def plane_pc(obs, model: str = "ewma", alpha: float = 0.3,
     n = X.shape[0]
     if n == 0:
         return {"n": 0, "surprise": 0.0, "complexity": 0.0, "precision": 0.0,
-                "confidence": 0.0, "error": [], "output": [], "model": model,
+                "confidence": None, "standing": 0.0, "error": [], "output": [], "model": model,
                 "note": "pc-skipped: empty plane"}
 
     # PREDICT + implicit UPDATE (the generative model)
@@ -215,22 +219,22 @@ def plane_pc(obs, model: str = "ewma", alpha: float = 0.3,
 
     # BOTTOM-UP self-report: the ESTIMATED precision = variance-explained, `π̂ = 1/mean(z²)`
     # (R²-related: π̂→∞ as the model nears perfect, π̂≈1 when it does no better than the mean,
-    # π̂<1 when worse). Expressed as the confidence the plane REPORTS in its own prediction.
+    # π̂<1 when worse). Expressed as the plane's STANDING — the trust it REPORTS from its own
+    # errors. STANDING, never confidence: a measured backward-earned dial never wears the vow's name.
     est_precision = 1.0 / (msz + _EPS)
-    est_confidence = precision_to_confidence(est_precision)
+    est_standing = precision_to_standing(est_precision)
 
     # THE GAIN π that weights ε² in F: a top-down confidence VOW SETS it (attention); ABSENT a
     # vow the gain stays NEUTRAL (1) — the error speaks for itself, un-modulated — while the
-    # plane still REPORTS its estimated confidence. Both directions ride the one π↔confidence
-    # map (precision = confidence-as-gain), so a vow of N/20 pushes the plane's error N-hard on F.
+    # plane still REPORTS its measured standing. The vow rides the π↔confidence map (precision =
+    # confidence-as-gain), so a vow of N/20 pushes the plane's error N-hard on F; standing never
+    # touches the gain (a plane cannot vote itself louder by reporting its own good fit).
     if confidence is not None:
         gain = confidence_to_precision(confidence)
-        conf_out = float(np.clip(confidence, 0.0, _CONF_MAX))
-        conf_src = "vow"
+        vow = float(np.clip(confidence, 0.0, _CONF_MAX))
     else:
         gain = 1.0
-        conf_out = est_confidence
-        conf_src = "estimate"
+        vow = None
 
     # SURPRISE = π · mean(z²) — the precision-weighted prediction-error energy (the plane's
     # contribution to F's accuracy term). A DETECTION is what the model failed to predict.
@@ -245,10 +249,9 @@ def plane_pc(obs, model: str = "ewma", alpha: float = 0.3,
         "model": model,
         "n_params": n_params,
         "precision": gain,               # the gain that weights ε² in F (= confidence-as-gain)
-        "confidence": conf_out,          # the confidence the plane carries (vow or estimate)
-        "confidence_source": conf_src,
+        "confidence": vow,               # the FORWARD vow that set the gain, or None — never computed
         "est_precision": est_precision,  # the bottom-up variance-explained self-report
-        "est_confidence": est_confidence,
+        "standing": est_standing,        # the measured backward-earned trust (band 0..20), always present
         "surprise": surprise,
         "complexity": complexity,
         "mean_sq_z": msz,
@@ -290,8 +293,7 @@ def free_energy(planes: dict, model: str = "ewma", alpha: float = 0.3,
         per_plane[name] = {
             "surprise": r["surprise"], "complexity": r["complexity"],
             "precision": r["precision"], "confidence": r["confidence"],
-            "confidence_source": r.get("confidence_source"),
-            "est_confidence": r.get("est_confidence"), "mean_sq_z": r.get("mean_sq_z"),
+            "standing": r.get("standing"), "mean_sq_z": r.get("mean_sq_z"),
             "n": r["n"], "model": r["model"], "n_params": r.get("n_params", 0),
         }
         accuracy += r["surprise"]
@@ -400,12 +402,12 @@ def cmd_selftest(args) -> None:
     vow = plane_pc(noise, model="ar1", confidence=18.0)  # a top-down high-confidence vow
     fe = free_energy({"predictable": predictable, "noise": noise})
     report = {
-        "predictable_est_confidence": rp["est_confidence"],
-        "noise_est_confidence": rn["est_confidence"],
+        "predictable_est_standing": rp["standing"],
+        "noise_est_standing": rn["standing"],
         # the loop EMITS prediction-error surprise (not raw features): predictable < noise
         "predictable_lower_surprise": rp["surprise"] < rn["surprise"],
         # variance-explained self-report is higher on the forecastable stream
-        "predictable_higher_est_confidence": rp["est_confidence"] > rn["est_confidence"],
+        "predictable_higher_est_standing": rp["standing"] > rn["standing"],
         # π = confidence-as-gain WIRED: an 18/20 vow pushes the plane's error harder on F
         "vow_raises_surprise": vow["surprise"] > rn["surprise"],
         "vow_precision_is_gain": abs(vow["precision"] - confidence_to_precision(18.0)) < 1e-9,

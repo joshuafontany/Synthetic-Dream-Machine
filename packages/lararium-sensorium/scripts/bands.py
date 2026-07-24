@@ -1220,7 +1220,7 @@ def _slaving_gain(prior: np.ndarray, target: np.ndarray,
     This is `20·g/(1+g)` (the π↔confidence map) with `g = var(target)/var(residual)`, but formed
     WITHOUT ever taking the ratio `g` first — so no absolute `_EPS` floor on a vanishing residual,
     no scale-blind blowup, and no silent saturation (#crucible-tested 2026-07-01). As `var(resid)→0`,
-    `reliability→1` (confidence→20) smoothly, at ANY scale, because both terms carry the same units.
+    `reliability→1` (standing→20) smoothly, at ANY scale, because both terms carry the same units.
 
     The `gain` (var-ratio, kept for the reporting/threshold surface) is floored RELATIVELY —
     `var(resid) ≥ _EPS_REL·var(target)` — so it stays finite AND scale-invariant (caps at
@@ -1280,9 +1280,10 @@ def slaving_leg(mra: dict, warmup: int = 1) -> dict:
                 if m > 8 and np.std(cu) > _EPS and np.std(fe) > _EPS else 0.0)
         pairs.append({
             "order_parameter": names[j + 1], "enslaved": names[j],
-            # confidence from the BOUNDED signal-fraction directly (20·reliability), never the
+            # STANDING from the BOUNDED signal-fraction directly (20·reliability), never the
             # ratio-gain through _to_conf — so it is scale-invariant and never silently saturates.
-            "topdown_gain": gain, "topdown_confidence": 20.0 * reliability,
+            # A measured reliability reads as STANDING, never confidence (confidence is only vowed).
+            "topdown_gain": gain, "slaving_reliability": 20.0 * reliability,
             "topdown_r": tr, "bottomup_r": bu_r,
             "circular": bool(gain > 1.2 and abs(bu_r) > 0.2),
         })
@@ -1290,7 +1291,7 @@ def slaving_leg(mra: dict, warmup: int = 1) -> dict:
     return {
         "pairs": pairs, "levels": levels,
         "note": (f"slaving: {strongest['order_parameter']}→{strongest['enslaved']} "
-                 f"gain {strongest['topdown_gain']:.2f} (conf {strongest['topdown_confidence']:.1f})"
+                 f"gain {strongest['topdown_gain']:.2f} (standing {strongest['slaving_reliability']:.1f})"
                  if strongest else "slaving: no pairs"),
     }
 

@@ -89,14 +89,15 @@ export function confidenceToPrecision(confidence: number): number {
 }
 
 /**
- * A bottom-up precision ESTIMATE (≥0) expressed as a confidence band (0..20). Written in the
+ * A bottom-up precision ESTIMATE (≥0) expressed as a STANDING band (0..20). Written in the
  * BOUNDED COMPLEMENTARY form `20·(1 − 1/(1+π))` — algebraically the signal-fraction `20·π/(1+π)`
  * but numerically robust: at `π→∞`, `1/(1+∞) = 0` ⇒ `20` EXACTLY (the naive `π/(1+π)` would form
- * `Inf/Inf ⇒ NaN`). The exact inverse of {@link confidenceToPrecision}; π=1 ⇒ 10/20 (neutral),
+ * `Inf/Inf ⇒ NaN`). The arithmetic inverse of {@link confidenceToPrecision}; π=1 ⇒ 10/20 (neutral),
  * π→∞ ⇒ 20/20. An `isFinite` guard returns the ceiling for a non-finite π (Defect 3 fix,
- * #crucible-tested). How a plane REPORTS trust in its own prediction.
+ * #crucible-tested). STANDING, never confidence: a plane REPORTS this trust from its own errors
+ * (backward-earned) — confidence rides FORWARD as a vow, standing rides backward as a measure.
  */
-export function precisionToConfidence(precision: number): number {
+export function precisionToStanding(precision: number): number {
   const p = Math.max(0, precision);
   if (!Number.isFinite(p)) return CONFIDENCE_MAX; // π→∞ ⇒ 20/20 exactly (no Inf/Inf ⇒ NaN)
   return CONFIDENCE_MAX * (1 - 1 / (1 + p));
@@ -272,11 +273,10 @@ export interface PlaneRead {
   readonly nParams: number;
   /** the GAIN π that weights ε² in F (= confidence-as-gain). */
   readonly precision: number;
-  /** the confidence the plane carries (the vow, or the bottom-up estimate). */
-  readonly confidence: number;
-  readonly confidenceSource: "vow" | "estimate";
-  /** the bottom-up variance-explained self-report, always exposed. */
-  readonly estConfidence: number;
+  /** the FORWARD vow that SET the gain, or null — never computed (confidence rides forward only). */
+  readonly confidence: number | null;
+  /** the bottom-up variance-explained self-report (band 0..20), always exposed — STANDING, not confidence. */
+  readonly standing: number;
   /** surprise = π · mean(z²) — the precision-weighted-error part of the accuracy term. */
   readonly surprise: number;
   /** the `−½ ln π` log-precision penalty (FIX 1) — the interior-optimum term; 0 at gain 1. */
@@ -302,8 +302,8 @@ export interface PlanePcOptions {
 /**
  * ONE plane's predictive-coding loop. Emits the SURPRISE (prediction-error energy), not the raw
  * features. Precision = confidence-as-gain, wired both ways: a `confidence` vow SETS the gain,
- * else the plane REPORTS a bottom-up variance-explained confidence and the gain stays neutral
- * (1) — the error un-modulated. Graceful (surprise 0) on an empty / single-frame plane.
+ * else confidence stays null and the plane REPORTS a bottom-up variance-explained STANDING while
+ * the gain stays neutral (1) — the error un-modulated. Graceful (surprise 0) on an empty plane.
  */
 export function planePc(
   obs: readonly number[] | readonly (readonly number[])[],
@@ -315,7 +315,7 @@ export function planePc(
   const M = asMatrix(obs);
   const n = M.length;
   if (n === 0) {
-    return { n: 0, model, nParams: 0, precision: 0, confidence: 0, confidenceSource: "estimate", estConfidence: 0, surprise: 0, logPrecisionPenalty: 0, complexity: 0, complexityKL: 0, meanSqZ: 0, output: [] };
+    return { n: 0, model, nParams: 0, precision: 0, confidence: null, standing: 0, surprise: 0, logPrecisionPenalty: 0, complexity: 0, complexityKL: 0, meanSqZ: 0, output: [] };
   }
   const dims = M[0]!.length;
 
@@ -357,23 +357,20 @@ export function planePc(
   const meanSqZ = count > 0 ? sumSq / count / Math.max(1, dims) : 0;
   const complexityKL = klSum / Math.max(1, dims);
 
-  // BOTTOM-UP self-report: variance-explained precision π̂ = 1/mean(z²), as a confidence band.
+  // BOTTOM-UP self-report: variance-explained precision π̂ = 1/mean(z²), as a STANDING band.
   const estPrecision = 1 / (meanSqZ + EPS);
-  const estConfidence = precisionToConfidence(estPrecision);
+  const standing = precisionToStanding(estPrecision);
 
-  // THE GAIN π: a top-down vow SETS it; absent, the gain stays neutral (1) and the plane
-  // reports its estimated confidence. Both ride the one π↔confidence map (precision-as-gain).
+  // THE GAIN π: a top-down vow SETS it; absent, the gain stays neutral (1) and confidence is null
+  // (never computed — the plane still REPORTS its measured standing, which never touches the gain).
   let gain: number;
-  let confidence: number;
-  let confidenceSource: "vow" | "estimate";
+  let confidence: number | null;
   if (opts.confidence != null) {
     gain = confidenceToPrecision(opts.confidence);
     confidence = Math.min(Math.max(opts.confidence, 0), CONFIDENCE_MAX);
-    confidenceSource = "vow";
   } else {
     gain = 1;
-    confidence = estConfidence;
-    confidenceSource = "estimate";
+    confidence = null;
   }
 
   const surprise = gain * meanSqZ; // π · mean(z²) — the precision-weighted error
@@ -383,7 +380,7 @@ export function planePc(
   const complexity = modelComplexity(nParams, n);
   const output = outAgg.map((z) => (gain * z) / Math.max(1, dims));
 
-  return { n, model, nParams, precision: gain, confidence, confidenceSource, estConfidence, surprise, logPrecisionPenalty, complexity, complexityKL, meanSqZ, output };
+  return { n, model, nParams, precision: gain, confidence, standing, surprise, logPrecisionPenalty, complexity, complexityKL, meanSqZ, output };
 }
 
 // ── the free-energy objective F = Σ ½(π·ε² − ln π) + Σ KL[q‖p] over the planes ──────────────
@@ -399,7 +396,7 @@ export interface FreeEnergy {
   readonly precisionPenalty: number;
   /** the complexity term, `Σ KL[q‖p]` to the named per-plane priors (FIX 2). */
   readonly complexity: number;
-  readonly perPlane: Record<string, { surprise: number; logPrecisionPenalty: number; complexity: number; priorKind: PriorKind; precision: number; confidence: number; confidenceSource: "vow" | "estimate"; n: number }>;
+  readonly perPlane: Record<string, { surprise: number; logPrecisionPenalty: number; complexity: number; priorKind: PriorKind; precision: number; confidence: number | null; standing: number; n: number }>;
 }
 
 export interface FreeEnergyOptions {
@@ -456,7 +453,7 @@ export function freeEnergy(
       planeComplexity = opts.formComplexityBits;
       priorKind = "mdl-coding";
     }
-    perPlane[name] = { surprise: r.surprise, logPrecisionPenalty: r.logPrecisionPenalty, complexity: planeComplexity, priorKind, precision: r.precision, confidence: r.confidence, confidenceSource: r.confidenceSource, n: r.n };
+    perPlane[name] = { surprise: r.surprise, logPrecisionPenalty: r.logPrecisionPenalty, complexity: planeComplexity, priorKind, precision: r.precision, confidence: r.confidence, standing: r.standing, n: r.n };
     accuracy += r.surprise;
     precisionPenalty += r.logPrecisionPenalty;
     complexity += planeComplexity;

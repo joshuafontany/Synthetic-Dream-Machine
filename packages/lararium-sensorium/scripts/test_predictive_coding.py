@@ -29,14 +29,15 @@ import predictive_coding as pc
 # ── the π ↔ confidence map — precision IS confidence-as-gain ────────────────────────────────
 
 
-def test_precision_confidence_bijection():
-    """`conf → π → conf` round-trips; the anchor points hold (10/20 ⇒ neutral gain 1)."""
-    for conf in (0.0, 5.0, 10.0, 15.0, 19.0):
-        pi = pc.confidence_to_precision(conf)
-        back = pc.precision_to_confidence(pi)
-        assert back == pytest.approx(conf, abs=1e-6)
+def test_precision_standing_bijection():
+    """`band → π → band` round-trips; the anchor points hold (10/20 ⇒ neutral gain 1). The map
+    is one arithmetic bijection; the DIRECTION names the ontology — vow forward, standing back."""
+    for band in (0.0, 5.0, 10.0, 15.0, 19.0):
+        pi = pc.confidence_to_precision(band)
+        back = pc.precision_to_standing(pi)
+        assert back == pytest.approx(band, abs=1e-6)
     assert pc.confidence_to_precision(10.0) == pytest.approx(1.0)   # neutral vow ⇒ gain 1
-    assert pc.precision_to_confidence(1.0) == pytest.approx(10.0)   # gain 1 ⇒ neutral confidence
+    assert pc.precision_to_standing(1.0) == pytest.approx(10.0)     # gain 1 ⇒ neutral standing
     # monotone: a higher confidence vow buys a higher gain
     assert pc.confidence_to_precision(15.0) > pc.confidence_to_precision(10.0)
 
@@ -83,17 +84,19 @@ def test_loop_emits_surprise_predictable_below_noise():
     assert not np.allclose(np.asarray(rp["output"]).ravel(), predictable)
 
 
-def test_est_confidence_tracks_predictability():
-    """The bottom-up (variance-explained) confidence is HIGH on a forecastable stream and
-    ~neutral (≈10/20) on noise — the plane's honest self-report."""
+def test_est_standing_tracks_predictability():
+    """The bottom-up (variance-explained) STANDING is HIGH on a forecastable stream and
+    ~neutral (≈10/20) on noise — the plane's honest self-report, never named confidence."""
     t = np.arange(200)
     predictable = np.sin(2 * np.pi * t / 40.0) + t * 0.01
     noise = np.random.default_rng(2).normal(0, 1, 200)
-    cp = pc.plane_pc(predictable, model="ar1")["est_confidence"]
-    cn = pc.plane_pc(noise, model="ar1")["est_confidence"]
+    cp = pc.plane_pc(predictable, model="ar1")["standing"]
+    cn = pc.plane_pc(noise, model="ar1")["standing"]
     assert cp > 15.0
     assert 8.0 < cn < 12.0
     assert cp > cn
+    # a plane with NO vow carries confidence None — a measured value never wears the vow's name
+    assert pc.plane_pc(predictable, model="ar1")["confidence"] is None
 
 
 # ── PRECISION = CONFIDENCE-AS-GAIN is wired (top-down vow) ───────────────────────────────────
@@ -105,7 +108,7 @@ def test_confidence_vow_sets_the_gain():
     noise = np.random.default_rng(3).normal(0, 1, 200)
     neutral = pc.plane_pc(noise, model="ewma")                       # gain 1
     vowed = pc.plane_pc(noise, model="ewma", confidence=18.0)        # gain = 18/(20−18) = 9
-    assert vowed["confidence_source"] == "vow"
+    assert vowed["confidence"] == pytest.approx(18.0)                # the vow rides the confidence field
     assert vowed["precision"] == pytest.approx(pc.confidence_to_precision(18.0))
     assert vowed["surprise"] > neutral["surprise"]                   # π = confidence WIRED
     # a LOW vow discounts the error
@@ -175,7 +178,7 @@ def test_cli_selftest():
     assert r.returncode == 0, r.stderr
     rep = json.loads(r.stdout.strip().splitlines()[-1])
     assert rep["predictable_lower_surprise"] is True
-    assert rep["predictable_higher_est_confidence"] is True
+    assert rep["predictable_higher_est_standing"] is True
     assert rep["vow_raises_surprise"] is True
     assert rep["F_has_complexity_term"] is True
 

@@ -5,7 +5,7 @@
  * fixes landed (one relative constant `EPS_REL` governs the precision floor AND the confidence
  * cap), so they now ASSERT the cure. See each block.
  *
- *   D1 (FIXED)  precisionToConfidence(∞) ⇒ 20 EXACTLY — the complementary form `20·(1−1/(1+π))`
+ *   D1 (FIXED)  precisionToStanding(∞) ⇒ 20 EXACTLY — the complementary form `20·(1−1/(1+π))`
  *       makes `1/(1+∞)=0`, never `Inf/Inf ⇒ NaN`, and an isFinite guard returns the ceiling.
  *   D2 (FIXED)  settlePrecision is the CLOSED FORM `π* = 1/(ε̄²+EPS_REL)` — exact for every ε̄²,
  *       no gradient-flow stall; the relative floor caps a near-noiseless plane at PI_MAX instead
@@ -13,7 +13,7 @@
  */
 import { describe, test, expect } from "vitest";
 import {
-  precisionToConfidence,
+  precisionToStanding,
   optimalPrecision,
   settlePrecision,
   vfePrecisionTerm,
@@ -21,20 +21,20 @@ import {
   freeEnergy,
 } from "../src/index.js";
 
-describe("D1 FIXED: precisionToConfidence(∞) ⇒ 20 exactly (complementary form + isFinite guard)", () => {
-  test("precisionToConfidence(Infinity) returns the 20/20 ceiling — NOT NaN", () => {
+describe("D1 FIXED: precisionToStanding(∞) ⇒ 20 exactly (complementary form + isFinite guard)", () => {
+  test("precisionToStanding(Infinity) returns the 20/20 ceiling — NOT NaN", () => {
     // 20·(1−1/(1+π)) with π=Inf ⇒ 20·(1−0) = 20, and the isFinite guard returns the ceiling.
-    expect(precisionToConfidence(Infinity)).toBe(20);
+    expect(precisionToStanding(Infinity)).toBe(20);
     // A finite-but-overflowing precision (past Number.MAX_VALUE ⇒ Inf) also lands on the ceiling.
-    expect(precisionToConfidence(1e308 * 10)).toBe(20);
+    expect(precisionToStanding(1e308 * 10)).toBe(20);
   });
 
   test("a LARGE finite precision saturates cleanly (the ceiling holds below ∞)", () => {
     // The internal loop never exceeds ~1/EPS = 1e9, so in-loop it stays finite — the break needs
     // an externally-supplied Inf. Confirm the finite ceiling is well-behaved.
-    expect(precisionToConfidence(1e9)).toBeGreaterThan(19.999999);
-    expect(precisionToConfidence(1e9)).toBeLessThanOrEqual(20);
-    expect(Number.isFinite(precisionToConfidence(1e300))).toBe(true);
+    expect(precisionToStanding(1e9)).toBeGreaterThan(19.999999);
+    expect(precisionToStanding(1e9)).toBeLessThanOrEqual(20);
+    expect(Number.isFinite(precisionToStanding(1e300))).toBe(true);
   });
 });
 

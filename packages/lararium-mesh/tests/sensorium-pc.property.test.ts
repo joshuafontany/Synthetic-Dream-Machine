@@ -123,7 +123,7 @@ describe("logPrecisionPenalty — inert at gain 1 (bottom-up estimate), lit only
       const sig = Array.from({ length: n }, () => (u() - 0.5) * (1 + u() * 100));
       const r = planePc(sig, u() < 0.5 ? { model: "ewma" } : { model: "ar1" });
       expect(r.precision).toBe(1);
-      expect(r.confidenceSource).toBe("estimate");
+      expect(r.confidence).toBeNull(); // no vow ⇒ confidence null (standing carries the measure)
       expect(Math.abs(r.logPrecisionPenalty)).toBe(0); // exactly inert (±0 both accepted)
     }
   });
@@ -135,7 +135,7 @@ describe("logPrecisionPenalty — inert at gain 1 (bottom-up estimate), lit only
       const sig = Array.from({ length: n }, () => (u() - 0.5) * 4);
       const conf = 11 + u() * 8; // > 10 ⇒ gain > 1 ⇒ penalty < 0 (regularizing)
       const r = planePc(sig, { confidence: conf });
-      expect(r.confidenceSource).toBe("vow");
+      expect(r.confidence).toBeCloseTo(conf, 9); // the vow rides the confidence field
       expect(r.logPrecisionPenalty).toBeLessThan(1e-12);
     }
   });
