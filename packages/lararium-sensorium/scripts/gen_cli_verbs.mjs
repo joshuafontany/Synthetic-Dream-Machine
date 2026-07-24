@@ -62,6 +62,18 @@ const CLI_FORMS = {
   // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
   // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
   wiki:      "wiki switch",
+  // The DURABLE sensorium-lifecycle sub-verbs — each mirrors `lares sense <verb>` (the one `sense` door),
+  // routed over the @daemon wire to the pure manifest.json reducer. Reads + reversible re-settle seat HOTL;
+  // promote·retire·purge carry HITL (the operator-approval capability, the twin of the CLI's `--approve`).
+  // `un_retire` (a py identifier) spells the CLI form `sense un-retire`, twinning un_kapae's shape.
+  roster:    "sense roster",
+  inspect:   "sense inspect",
+  build:     "sense build",
+  reconcile: "sense reconcile",
+  promote:   "sense promote",
+  retire:    "sense retire",
+  un_retire: "sense un-retire",
+  purge:     "sense purge",
 };
 // The CLI TOP-LEVEL verbs that HOST a mirror — DERIVED from the cli_forms value-heads (single source,
 // never drifts): `sensorium status` → sensorium, `worldline kapae` → worldline, harvest → harvest. The

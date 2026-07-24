@@ -15,8 +15,10 @@
  *   lares sense un-retire <name>               move-not-delete restore of the prior state
  *   lares sense purge    <name> --approve      the irreversible byte GC (tombstone-only)
  *
- * The MCP three-way mirror for these sub-verbs is DEFERRED (a named ahead-of-surface allowance) — its
- * house-consistent routed executor lands in open-node-vessel.ts; the CLI-direct door carries no such tie.
+ * The MCP three-way mirror for these sub-verbs LANDS now: each mirrors as an @mcp.tool routing over the
+ * @daemon wire to the house-consistent executor in open-node-vessel.ts (the pure manifest.json reducers,
+ * the ki/li/couple_r pattern). The seat gates BOTH surfaces — the CLI's `--approve` (guardHitl below) and
+ * the MCP tool's guard_hitl are the SAME reversibility×trust grid, so an HITL verb refuses on either door.
  *
  * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#sensorium-lifecycle
  */

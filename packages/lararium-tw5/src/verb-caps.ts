@@ -185,6 +185,27 @@ export interface DaemonVerbProvider {
   worldlineCompare(input: DaemonWorldlineCompareInput): Promise<{ order: string }>;
   /** Well 3 + Well 4 — a handle's worldline-ordered form-vector path (+ optional null baseline). */
   worldlineTrajectory(input: DaemonWorldlineTrajectoryInput): Promise<DaemonWorldlineTrajectoryResult>;
+  // ── the DURABLE sensorium-lifecycle verbs — pure manifest.json reducers (no store holder), routed over
+  //    the wire so the MCP surface mirrors the CLI `lares sense <verb>` three-way. The reversibility×trust
+  //    seat gates each: reads + reversible re-settle run HOTL; promote·retire·purge cross HITL (an operator-
+  //    approval capability, the surface twin of the CLI's `--approve`). ──
+  /** ROSTER — every sensorium + its lifecycle facet (a read; HOTL). */
+  senseRoster(): Promise<Record<string, unknown>>;
+  /** INSPECT one sensorium's manifest facets by name (a read; HOTL). Throws when the name has no manifest. */
+  senseInspect(input: { name: string }): Promise<Record<string, unknown>>;
+  /** BUILD a fresh EPHEMERAL pioneer (agent self-service; a retire undoes it → HOTL). Refuses a name-collision. */
+  senseBuild(input: { name: string; halfLife?: number }): Promise<Record<string, unknown>>;
+  /** RECONCILE — re-settle one sensorium (by `name`) or `all` against evidence (idempotent, reversible → HOTL). */
+  senseReconcile(input: { name?: string; all?: boolean }): Promise<Record<string, unknown>>;
+  /** PROMOTE — climb a rung (in-place field-flip; `storeSwap` re-points an alias, gated). A designed one-way
+   *  commitment → HITL: `approve` carries the operator-approval capability, else it refuses. */
+  sensePromote(input: { name: string; approve?: unknown; storeSwap?: string }): Promise<Record<string, unknown>>;
+  /** RETIRE — a JUDGED tombstone recording MUSTIE `grounds` (NO byte-delete; move-not-delete). → HITL. */
+  senseRetire(input: { name: string; grounds?: unknown; approve?: unknown }): Promise<Record<string, unknown>>;
+  /** UN-RETIRE — restore a tombstoned sensorium to its prior state (move-not-delete; reversible → HOTL). */
+  senseUnRetire(input: { name: string }): Promise<Record<string, unknown>>;
+  /** PURGE — the irreversible byte GC (tombstone-only; explicit HITL). `approve` carries the reclaim authority. */
+  sensePurge(input: { name: string; approve?: unknown }): Promise<Record<string, unknown>>;
 }
 
 /** telemetry provider — the lar_* writeback membrane. The impl owns the whole writeback +
@@ -566,6 +587,48 @@ export function captureVerbCap(): CapModule {
           const ended = typeof args["ended"] === "string" && args["ended"] ? (args["ended"] as string) : undefined;
           daemon.placeStructurepalaceKapae(turnKey, ended);
           return { ok: true, kapae: true, turnKey };
+        });
+        // ── the DURABLE sensorium-lifecycle sub-verbs — each mirrors `lares sense <verb>` and routes to the
+        //    pure manifest.json reducer on the daemon. The reversibility×trust seat lives in the executor
+        //    (guardHitl): promote·retire·purge REFUSE without the operator-approval capability. ──
+        registry.register("roster", async () => await daemon.senseRoster());
+        registry.register("inspect", async (args) => {
+          const name = typeof args["name"] === "string" ? (args["name"] as string) : "";
+          if (!name) throw new Error("inspect: args.name (a non-empty string) required");
+          return await daemon.senseInspect({ name });
+        });
+        registry.register("build", async (args) => {
+          const name = typeof args["name"] === "string" ? (args["name"] as string) : "";
+          if (!name) throw new Error("build: args.name (a non-empty string) required");
+          const halfLife = typeof args["halfLife"] === "number" ? (args["halfLife"] as number) : undefined;
+          return await daemon.senseBuild({ name, ...(halfLife !== undefined ? { halfLife } : {}) });
+        });
+        registry.register("reconcile", async (args) => {
+          const all = args["all"] === true;
+          const name = typeof args["name"] === "string" ? (args["name"] as string) : undefined;
+          if (!all && !name) throw new Error("reconcile: args.name (a non-empty string) or args.all required");
+          return await daemon.senseReconcile({ ...(all ? { all } : {}), ...(name ? { name } : {}) });
+        });
+        registry.register("promote", async (args) => {
+          const name = typeof args["name"] === "string" ? (args["name"] as string) : "";
+          if (!name) throw new Error("promote: args.name (a non-empty string) required");
+          const storeSwap = typeof args["storeSwap"] === "string" ? (args["storeSwap"] as string) : undefined;
+          return await daemon.sensePromote({ name, approve: args["approve"], ...(storeSwap ? { storeSwap } : {}) });
+        });
+        registry.register("retire", async (args) => {
+          const name = typeof args["name"] === "string" ? (args["name"] as string) : "";
+          if (!name) throw new Error("retire: args.name (a non-empty string) required");
+          return await daemon.senseRetire({ name, grounds: args["grounds"], approve: args["approve"] });
+        });
+        registry.register("un-retire", async (args) => {
+          const name = typeof args["name"] === "string" ? (args["name"] as string) : "";
+          if (!name) throw new Error("un-retire: args.name (a non-empty string) required");
+          return await daemon.senseUnRetire({ name });
+        });
+        registry.register("purge", async (args) => {
+          const name = typeof args["name"] === "string" ? (args["name"] as string) : "";
+          if (!name) throw new Error("purge: args.name (a non-empty string) required");
+          return await daemon.sensePurge({ name, approve: args["approve"] });
         });
       };
     },

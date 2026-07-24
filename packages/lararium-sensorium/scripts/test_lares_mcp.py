@@ -10,7 +10,8 @@ import os
 
 import pytest
 
-from lares_mcp import (LIFECYCLE_VERBS, PLANE_VERBS, WIKI_VERBS, VAULT_VERBS, VERB_SEATS, DaemonCoordinator,
+from lares_mcp import (LIFECYCLE_VERBS, PLANE_VERBS, WIKI_VERBS, VAULT_VERBS, SENSE_LIFECYCLE_VERBS,
+                       VERB_SEATS, DaemonCoordinator,
                        LaresCoordinator, build_mcp, guard_hitl, seat_of)
 from worldline_veil import veiled_root
 
@@ -164,15 +165,40 @@ def test_hitl_gate_blocks_without_approval():
     guard_hitl("teardown", approval="operator-granted-cap")  # the same cap unblocks the store teardown
 
 
+def test_sense_lifecycle_verbs_carry_their_real_seats():
+    # the DURABLE sensorium-lifecycle sub-verbs carry the REAL reversibility×trust seats (the TS twin of
+    # mesh LIFECYCLE_SEATS), not a blanket HOTL — reads + reversible re-settle/restore/build run HOTL; the
+    # in-loop-human graduation (promote) and judged deaccession (retire) cross HITL, as does purge.
+    for v in SENSE_LIFECYCLE_VERBS:
+        assert v in VERB_SEATS, f"sense-lifecycle verb {v!r} rides UNSEATED"
+    for v in ("roster", "inspect", "build", "reconcile", "un_retire"):
+        assert seat_of(v) == "HOTL"        # reads + reversible moves run on the operator's loop
+    for v in ("promote", "retire", "purge"):
+        assert seat_of(v) == "HITL"        # graduation · deaccession · byte-GC need the operator's hand
+
+
+def test_sense_lifecycle_hitl_gate_blocks_without_approval():
+    # the surface twin of the CLI's `--approve`: an HITL sense-lifecycle verb refuses without an operator-
+    # approval capability, and the @daemon-granted cap unblocks it (E5 — the gate holds on the MCP surface).
+    guard_hitl("roster")                   # HOTL read passes freely
+    guard_hitl("build")                    # HOTL self-service build passes freely
+    guard_hitl("un_retire")                # HOTL reversible restore passes freely
+    for v in ("promote", "retire"):
+        with pytest.raises(PermissionError):
+            guard_hitl(v)                  # HITL blocks without approval
+        guard_hitl(v, approval="operator-granted-cap")   # the cap unblocks it
+
+
 def _mcp_tool_names(tmp_path):
     mcp = build_mcp(_coord(tmp_path))
     return {t.name for t in asyncio.run(mcp.list_tools())}
 
 
 def test_mcp_tools_mirror_the_cli_lifecycle_verbs(tmp_path):
-    # the /mcp tool-set equals the declared lifecycle verb-set PLUS the per-plane query-door verbs,
-    # name-for-name (the growth floor).
-    assert _mcp_tool_names(tmp_path) == set(LIFECYCLE_VERBS) | set(PLANE_VERBS) | set(WIKI_VERBS) | set(VAULT_VERBS)
+    # the /mcp tool-set equals the declared lifecycle verb-set PLUS the per-plane query-door verbs, the
+    # vault seal-lifecycle, and the DURABLE sensorium-lifecycle sub-verbs — name-for-name (the growth floor).
+    assert _mcp_tool_names(tmp_path) == (set(LIFECYCLE_VERBS) | set(PLANE_VERBS) | set(WIKI_VERBS)
+                                         | set(VAULT_VERBS) | set(SENSE_LIFECYCLE_VERBS))
 
 
 def test_recall_tool_args_are_isomorphic_with_the_recall_api(tmp_path):

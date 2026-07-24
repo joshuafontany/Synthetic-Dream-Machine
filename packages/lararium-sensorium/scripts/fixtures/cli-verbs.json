@@ -59,7 +59,15 @@
     "forecast",
     "mismatch",
     "flow",
-    "wiki"
+    "wiki",
+    "roster",
+    "inspect",
+    "build",
+    "reconcile",
+    "promote",
+    "retire",
+    "un_retire",
+    "purge"
   ],
   "cli_forms": {
     "pour": "sense pour",
@@ -78,7 +86,15 @@
     "forecast": "sense forecast",
     "mismatch": "sense mismatch",
     "flow": "flow",
-    "wiki": "wiki switch"
+    "wiki": "wiki switch",
+    "roster": "sense roster",
+    "inspect": "sense inspect",
+    "build": "sense build",
+    "reconcile": "sense reconcile",
+    "promote": "sense promote",
+    "retire": "sense retire",
+    "un_retire": "sense un-retire",
+    "purge": "sense purge"
   },
   "mirror_hosts": [
     "flow",

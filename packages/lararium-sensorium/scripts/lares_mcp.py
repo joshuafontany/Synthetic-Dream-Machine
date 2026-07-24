@@ -56,14 +56,16 @@ WIKI_VERBS = ("wiki",)
 # rides the operator's own hand, never an MCP client's.
 VAULT_VERBS = ("vault_status", "vault_seal", "vault_rotate", "vault_export")
 
-# The DURABLE sensorium LIFECYCLE sub-verbs — roster · inspect · reconcile · build · promote · retire ·
-# un-retire · purge — ship CLI-DIRECT today (lares sense <verb>, over manifest.json; no store holder, no
-# daemon). Their MCP three-way mirror is DEFERRED as a NAMED ahead-of-surface allowance (like PLANE_VERBS
-# / VAULT_VERBS ride ahead of their CLI forms): the house-consistent routed executor for these lands in
-# open-node-vessel.ts (registry.register(...), the ki/li/couple_r pattern), so the mirror waits on that
-# TS-hull registration rather than forcing a python reducer-fork. Until then these carry NO MCP tool and
-# NO VERB_SEATS entry here — the CLI is the whole surface, and the parity fixture reads them as
-# sense-sub-verbs (never top-level commands), so the three-way inventory stays balanced.
+# The DURABLE sensorium LIFECYCLE sub-verbs — roster · inspect · build · reconcile · promote · retire ·
+# un-retire · purge. Each mirrors `lares sense <verb>` (CLI-direct over manifest.json) three-way now: an
+# @mcp.tool routes over the @daemon wire to the house-consistent routed executor in open-node-vessel.ts
+# (the ki/li/couple_r pattern — pure manifest.json reducers, no store holder), and the CLI form rides the
+# one `sense` door. UNLIKE the HOTL LIFECYCLE_VERBS, these carry the REAL reversibility×trust seats: the
+# reads + reversible re-settle run HOTL; promote·retire·purge cross HITL (an operator-approval capability,
+# the surface twin of the CLI's `--approve`), so an irreversible verb gates the SAME on both surfaces.
+# un-retire spells `un_retire` here (a python identifier) → the CLI form `sense un-retire`, twinning the
+# un_kapae → `worldline un-kapae` shape.
+SENSE_LIFECYCLE_VERBS = ("roster", "inspect", "build", "reconcile", "promote", "retire", "un_retire", "purge")
 
 # The reversibility×trust GRID: each verb declares (reversible, trust_crossing). The seat follows —
 # HOTL (reversible AND trusted) runs on the operator's loop, no pause; HITL (irreversible OR trust-
@@ -104,6 +106,15 @@ VERB_SEATS = {
     "attach": (True, True),      # admit a guest sensorium — TRUST-CROSSING → HITL
     "release": (False, False),   # let a guest sensorium GO (drops its handle) — IRREVERSIBLE → HITL
     "reconcile": (True, False),  # re-settle a sensorium against its source — reversible, trusted → HOTL
+    # The DURABLE sensorium-lifecycle sub-verbs (SENSE_LIFECYCLE_VERBS) — the TS twin of mesh LIFECYCLE_SEATS,
+    # so an HITL verb refuses on BOTH surfaces. Reads + reversible re-settle/restore/build run HOTL; the
+    # in-loop-human graduation (promote) and judged deaccession (retire) carry HITL, as does purge above.
+    "roster": (True, False),     # read every sensorium's lifecycle — reversible, trusted → HOTL
+    "inspect": (True, False),    # read one sensorium's manifest facets — reversible, trusted → HOTL
+    "build": (True, False),      # mint an ephemeral pioneer (a retire undoes it) — reversible, trusted → HOTL
+    "un_retire": (True, False),  # restore a tombstoned sensorium (move-not-delete) — reversible, trusted → HOTL
+    "promote": (False, False),   # climb a rung — a designed one-way commitment → HITL
+    "retire": (False, False),    # a judged deaccession (undoable only by un-retire) → HITL
 }
 
 
@@ -862,6 +873,80 @@ def build_mcp(coordinator: LaresCoordinator):
         rides the verb args over the owner-only 0600 UDS to the @daemon — the SAME trust boundary as a CLI
         argument on the operator's own machine — and MCP reaches ONLY the daemon, never a local store."""
         return uds.output("vault-export", {"passphrase": passphrase, "dest": dest, "force": force})
+
+    # ── the DURABLE sensorium-lifecycle sub-verbs — each mirrors `lares sense <verb>` and routes over the
+    #    @daemon wire to the pure manifest.json reducer in open-node-vessel.ts. The reads + reversible
+    #    re-settle run HOTL; promote·retire·purge gate HITL right here (guard_hitl, the surface twin of the
+    #    CLI's `--approve`) BEFORE routing, and the daemon executor re-checks the seat (E5, both surfaces). ──
+
+    @mcp.tool()
+    def roster() -> dict:
+        """ROSTER — every durable sensorium + its lifecycle facet (state · caps · half-life · retirement).
+        Mirrors `lares sense roster`. A read (HOTL). Routes over the @daemon wire."""
+        return uds.output("roster", {})
+
+    @mcp.tool()
+    def inspect(name: str) -> dict:
+        """INSPECT one sensorium's full manifest facets (caps · coupling · apertures · retirement) by name.
+        Mirrors `lares sense inspect <name>`. A read (HOTL)."""
+        return uds.output("inspect", {"name": name})
+
+    @mcp.tool()
+    def build(name: str, half_life: "int | None" = None) -> dict:
+        """BUILD a fresh EPHEMERAL pioneer sensorium (agent self-service; a retire undoes it → HOTL). Refuses
+        a name-collision LOUD. Mirrors `lares sense build <name> --ephemeral`; `half_life` tunes the hardening
+        decay (default the house floor)."""
+        args: dict = {"name": name}
+        if half_life is not None:
+            args["halfLife"] = half_life
+        return uds.output("build", args)
+
+    @mcp.tool()
+    def reconcile(name: "str | None" = None, all: bool = False) -> dict:
+        """RECONCILE — re-settle one sensorium (`name`) or every sensorium (`all`) against its evidence
+        (idempotent; the pure reducer writes only on change). Reversible re-settle → HOTL. Mirrors
+        `lares sense reconcile <name> | --all`."""
+        if not all and not name:
+            raise ValueError("reconcile: pass a sensorium `name` or `all=True`")
+        args: dict = {}
+        if all:
+            args["all"] = True
+        if name:
+            args["name"] = name
+        return uds.output("reconcile", args)
+
+    @mcp.tool()
+    def promote(name: str, approve: bool = False, store_swap: "str | None" = None) -> dict:
+        """PROMOTE a sensorium one rung (in-place field-flip: pioneer→hardening→durable). A designed one-way
+        commitment → HITL: `approve` MUST carry the operator-approval capability, else it refuses (the surface
+        twin of `lares sense promote <name> --approve`). `store_swap` re-points an alias (gated OFF)."""
+        guard_hitl("promote", approve or None)
+        args: dict = {"name": name, "approve": approve}
+        if store_swap:
+            args["storeSwap"] = store_swap
+        return uds.output("promote", args)
+
+    @mcp.tool()
+    def retire(name: str, grounds: str, approve: bool = False) -> dict:
+        """RETIRE a sensorium — a JUDGED tombstone recording the MUSTIE `grounds` (NO byte-delete; un-retire
+        restores). → HITL: `approve` MUST carry the operator-approval capability (twin of `lares sense retire
+        <name> --grounds <g> --approve`). Refuses LOUD without a valid ground."""
+        guard_hitl("retire", approve or None)
+        return uds.output("retire", {"name": name, "grounds": grounds, "approve": approve})
+
+    @mcp.tool()
+    def un_retire(name: str) -> dict:
+        """UN-RETIRE — restore a tombstoned sensorium to the state it stood at before the retire (pure
+        move-not-delete; the bytes never left). Reversible → HOTL. Mirrors `lares sense un-retire <name>`."""
+        return uds.output("un-retire", {"name": name})
+
+    @mcp.tool()
+    def purge(name: str, approve: bool = False) -> dict:
+        """PURGE — the irreversible byte GC (tombstone-only; refuses a live sensorium — retire it first).
+        → HITL: `approve` MUST carry the operator-approval capability (twin of `lares sense purge <name>
+        --approve`). This is the one verb that removes bytes; every other lifecycle verb moves-not-deletes."""
+        guard_hitl("purge", approve or None)
+        return uds.output("purge", {"name": name, "approve": approve})
 
     return mcp
 

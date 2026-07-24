@@ -39,7 +39,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
-  coupleMesh, crystallize,
+  coupleMesh, crystallize, guardHitl,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
 import { casDirForStorage, mirrorGenesisCasFs } from "./node-cas.js";
@@ -94,11 +94,15 @@ import { runFlow } from "./flow-run.js";
 /** Node advertises a few rotatable wiki pins BESIDES @daemon (resource-rich vessel).
  *  The user's ONE-plus rotatable pin(s) ride this budget; the surface enforces it. */
 const NODE_WIKI_PIN_BUDGET = 3;
-import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, meshSensoriumDir, larContentDir }  from "./vessel-paths.js";
+import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, meshSensoriumDir, larContentDir, sensoriumDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace, makeStructurePalace, type StructurePalace }  from "./sensorium.js";
 import { readCoupling } from "./sensorium-coupling.js";
 import { readCohere } from "./sensorium-cohere.js";
 import { readJing } from "./sensorium-square.js";
+import {
+  rosterSensoria, inspectSensorium, buildEphemeralSensorium, promoteSensorium,
+  retireSensorium, unRetireSensorium, purgeSensorium, reconcileSensorium, reconcileAllSensoria,
+} from "./sensorium-lifecycle-verbs.js";
 import { makeRecallHolder, type RecallHolder } from "./recall-holder.js";
 import { makeContentPalace, type ContentPalace } from "./sensorium.js";
 import { multiGraphRecall, makeFormSearch, makeStructureSearch }  from "./sensorium-recall.js";
@@ -1203,6 +1207,45 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       },
       worldlineCompare: (input) => daemonVm.worldlineCompare(input),
       worldlineTrajectory: (input) => daemonVm.worldlineTrajectory(input),
+      // ── the DURABLE sensorium-lifecycle executors ─────────────────────────────────────────────────
+      // These route over manifest.json alone (no store holder, no captureFor) — the SAME pure verb
+      // functions the CLI-direct door drives, now reachable over the @daemon wire so the MCP surface
+      // mirrors the CLI three-way. The reversibility×trust seat rides guardHitl (the mesh grid): an
+      // HITL verb (promote·retire·purge) REFUSES without an operator-approval capability — the surface
+      // twin of the CLI's `--approve`, so an irreversible verb crosses the SAME gate on both surfaces.
+      senseRoster: async () => ({ sensoria: rosterSensoria() }),
+      senseInspect: async (input) => {
+        const insp = inspectSensorium(input.name);
+        if (!insp) throw new Error(`no sensorium named '${input.name}'`);
+        return insp as unknown as Record<string, unknown>;
+      },
+      senseBuild: async (input) => buildEphemeralSensorium(
+        input.name, input.halfLife !== undefined ? { halfLife: input.halfLife } : {},
+      ) as unknown as Record<string, unknown>,
+      senseReconcile: async (input) => {
+        // --all re-settles every sensorium; else one by name (the pure reducer writes only on change).
+        if (input.all) return { all: reconcileAllSensoria() } as unknown as Record<string, unknown>;
+        if (!input.name) throw new Error("reconcile wants a sensorium name (or all)");
+        return reconcileSensorium(sensoriumDir(input.name)) as unknown as Record<string, unknown>;
+      },
+      sensePromote: async (input) => {
+        // in-loop human graduation — one-way by intent → HITL. The gate mirrors the CLI's requireApprove.
+        guardHitl("promote", input.approve);
+        return promoteSensorium(
+          input.name, input.storeSwap ? { storeSwapTarget: input.storeSwap } : {},
+        ) as unknown as Record<string, unknown>;
+      },
+      senseRetire: async (input) => {
+        // a JUDGED deaccession (grounds required; move-not-delete) → HITL. The gate mirrors requireApprove.
+        guardHitl("retire", input.approve);
+        return retireSensorium(input.name, input.grounds) as unknown as Record<string, unknown>;
+      },
+      senseUnRetire: async (input) => unRetireSensorium(input.name) as unknown as Record<string, unknown>,
+      sensePurge: async (input) => {
+        // the irreversible byte GC → HITL. purgeSensorium ITSELF guardHitls (defense-in-depth) and refuses
+        // a live sensorium (only a tombstone GCs), so the approval rides through as the reclaim authority.
+        return purgeSensorium(input.name, input.approve) as unknown as Record<string, unknown>;
+      },
     };
     const telemetryImpl: TelemetryProvider = {
       writeback: (wing, opts) => {
