@@ -141,6 +141,16 @@ const MANIFEST: readonly ParityEntry[] = [
     note: "the multivariate Gaussian conditional-TE mesh coupling (the hoike's locked keel); py twin owed under the machine-code-runs-py ruling (RUN-ARC debt pool).",
   },
   {
+    ts: "mesh-couple.ts", py: null, status: "ts-concept-witness",
+    fixtures: [],
+    note: "the coupling CAPSTONE — ONE call composing the locked coupling floors in order (signed-innovation whiten → mesh-coupling-mv couple → cmi-significance gate → the MeshCoupling verdict), consumed by windowed-coupling + the node-side reader. Composition, not numerics (like spectral-keel-cap): each composed floor carries its own parity, and the RUN diffs the coupling RESULT (coupleMesh ↔ coupling.R via the mismatch comparator), so no standalone py twin is planned. (signed-innovation's own parity stance stays surfaced-pending — owed-py-twin vs ts-concept-witness turns on whether coupling.R should prewhiten.)",
+  },
+  {
+    ts: "self-coupling.ts", py: null, status: "ts-concept-witness",
+    fixtures: [],
+    note: "the SELF as the coupling READ-OUT (IIT exclusion — the thin surface outside the five senses), pure-arithmetic Bayesian Causal Inference (Körding: pCommonCause posterior + reliability-weighted cross-sense bind) over the coupling substrate. A HULL-NATIVE proprioception cap every running vessel carries locally over its own coupling read (like fisher-rao/bures/subspace); the RUN never recomputes it, so no py twin is owed. Witnessed in self-coupling.test.ts.",
+  },
+  {
     ts: "te-hodge.ts", py: null, status: "ts-concept-witness",
     fixtures: [],
     note: "the coupling plane's own co-consistency — the Helmholtz-Hodge decomposition of the TE flow, read for its circulation (the irreducible coupling), plus the incomplete-graph HodgeRank (genuine harmonic H¹ via CG on L₀ + the triangle up-Laplacian). The cohomology rides the TS hull (browser-carried), so no py twin is planned; witnessed in te-hodge.test.ts.",
@@ -209,7 +219,7 @@ const MANIFEST: readonly ParityEntry[] = [
 
 /** The numerics name-pattern the census sweeps — a new organ matching this MUST register above. */
 const NUMERICS_PATTERN =
-  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics|rank-te|rank-consensus)/;
+  /^(sensorium-|spectral-|ffz-|null-harness|arl-dial|synthetic-drift|persistence-keel|worldline-clock|windowed-coupling|linearity-gate|mesh-coupl|self-coupling|te-hodge|transfer-entropy|change-point|gaussian-cmi|cmi-significance|fisher-rao|bures-metric|temporal-rigidity|subspace-track|clock-recovery|capture-reading|numerics|rank-te|rank-consensus)/;
 
 describe("the TS↔py parity manifest (the L4 gate)", () => {
   test("CENSUS — every numerics module in mesh/src registers exactly once", () => {
