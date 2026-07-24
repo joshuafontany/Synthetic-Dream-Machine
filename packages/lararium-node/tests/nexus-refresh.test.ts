@@ -26,6 +26,16 @@ import { makeNexusMembership } from "../src/nexus-membership.js";
 import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
 import { runNexusRefresh } from "../src/nexus-refresh.js";
 
+/**
+ * Let any storage-backed Repo's armed trailing save land before the temp dir goes. Automerge's
+ * StorageSource arms an asyncThrottle (saveDebounceRate, default 100ms) on every materialized doc;
+ * neither repo.flush() nor repo.shutdown() cancels that armed timer. A refresh mints + disposes a
+ * throwaway storage repo internally, so the test cannot reach that timer — it waits past the debounce
+ * window (the timer's deadline ≤ arm+100ms strictly precedes this 200ms deadline, so the timer heap
+ * fires it first even under worker starvation) so the trailing write lands on a LIVE dir. Drain, then delete.
+ */
+const drainStorageThrottle = (): Promise<void> => new Promise((r) => setTimeout(r, 200));
+
 const SEEDS = [new Uint8Array(32).fill(1), new Uint8Array(32).fill(2), new Uint8Array(32).fill(3)];
 const VICTIM_SEED = new Uint8Array(32).fill(9);
 const signerOf = (seed: Uint8Array) => (bytes: Uint8Array) => ed.signAsync(bytes, seed).then(hex);
@@ -63,7 +73,7 @@ describe("nexus-refresh — POSTURE re-read (D2)", () => {
   let bags: string;
   let storage: string;
   beforeEach(() => { bags = mkdtempSync(join(tmpdir(), "lares-refresh-bags-")); storage = mkdtempSync(join(tmpdir(), "lares-refresh-store-")); });
-  afterEach(() => { rmSync(bags, { recursive: true, force: true }); rmSync(storage, { recursive: true, force: true }); });
+  afterEach(async () => { await drainStorageThrottle(); rmSync(bags, { recursive: true, force: true }); rmSync(storage, { recursive: true, force: true }); });
 
   test("an out-of-process posture flip to OPEN is picked up by a refresh (the setter fires with open)", async () => {
     const keys = await Promise.all(SEEDS.map(pubOf));
@@ -99,7 +109,7 @@ describe("nexus-refresh — out-of-process BOARD write (E2)", () => {
   let bags: string;
   let storage: string;
   beforeEach(() => { bags = mkdtempSync(join(tmpdir(), "lares-refresh-bags-")); storage = mkdtempSync(join(tmpdir(), "lares-refresh-store-")); });
-  afterEach(() => { rmSync(bags, { recursive: true, force: true }); rmSync(storage, { recursive: true, force: true }); });
+  afterEach(async () => { await drainStorageThrottle(); rmSync(bags, { recursive: true, force: true }); rmSync(storage, { recursive: true, force: true }); });
 
   test("a ban written through a SEPARATE repo → cold holder misses it → refresh re-folds → Mu", async () => {
     const keys    = await Promise.all(SEEDS.map(pubOf));
@@ -120,6 +130,7 @@ describe("nexus-refresh — out-of-process BOARD write (E2)", () => {
       const ban    = await banEntry(victim, charter.charterEpochCid!);
       board.change((d) => { d.tiddlers["ban:victim"] = mutableLarRecord("ban:victim", { text: JSON.stringify(ban) }, "test"); });
       await writer.flush();
+      await writer.shutdown();   // dispose the CLI's throwaway writer whole — the ban bytes stay on disk, no repo lingers
 
       // The cold holder STILL misses it (its cached in-memory board never saw the out-of-process write).
       await holders.antigen.refold();

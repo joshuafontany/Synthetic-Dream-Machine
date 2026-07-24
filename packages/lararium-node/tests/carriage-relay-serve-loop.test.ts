@@ -54,12 +54,16 @@ const antigenOf = (kapaed: Iterable<string>): AntigenRing => {
 const bytesFromPayload = (env: MembershipEnvelope): Uint8Array =>
   Uint8Array.from(Object.values((env.payload as { bytes?: Record<string, number> }).bytes ?? {}));
 
-/** A requester hearth: offer a want-block to the holder, then poll for the running serve-loop's answer. */
+/** A requester hearth: offer a want-block to the holder, then poll for the running serve-loop's answer.
+ *  Polls to a wall-clock DEADLINE, not a fixed iteration count — the serve-loop's answer reliably lands, but
+ *  under a saturated box (many test workers at once) the WS round-trip + 25ms poll cadence can outrun a short
+ *  budget. The 15s deadline sits inside every caller's 20s test timeout: await-the-condition, never a fixed nap. */
 async function fetchOverCarriage(args: {
-  channel: MembershipChannel; requester: string; holderAddr: string; cid: string;
+  channel: MembershipChannel; requester: string; holderAddr: string; cid: string; budgetMs?: number;
 }): Promise<MembershipEnvelope | null> {
   await args.channel.offer({ kind: CAS_WANT_BLOCK, from: args.requester, to: args.holderAddr, payload: { cid: args.cid } });
-  for (let i = 0; i < 60; i++) {
+  const deadline = Date.now() + (args.budgetMs ?? 15_000);
+  while (Date.now() < deadline) {
     const responses = await args.channel.poll(args.requester);
     if (responses.length > 0) return responses[0]!;
     await sleep(25);
@@ -230,7 +234,8 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
 
     // stop() clears the timer + closes the channel — the holder no longer serves, so a fresh want-block draws NOTHING.
     await loop.stop();
-    const afterStop = await fetchOverCarriage({ channel: memberCh, requester: memberKey, holderAddr: holderKey, cid: installed.cid });
+    // A negative-absence check: a short budget suffices to confirm the down loop stays silent (no answer ever comes).
+    const afterStop = await fetchOverCarriage({ channel: memberCh, requester: memberKey, holderAddr: holderKey, cid: installed.cid, budgetMs: 2_000 });
     expect(afterStop).toBeNull();   // no timer polls, no socket carries — the serve-loop is truly down (no leak)
   }, 20_000);
 });

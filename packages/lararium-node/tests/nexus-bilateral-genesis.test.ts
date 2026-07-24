@@ -57,9 +57,13 @@ beforeEach(() => {
   rootB = mkdtempSync(join(tmpdir(), "lares-hearth-B-"));
   priorLarRoot = process.env["LAR_ROOT"];
 });
-afterEach(() => {
+afterEach(async () => {
   if (priorLarRoot === undefined) delete process.env["LAR_ROOT"];
   else process.env["LAR_ROOT"] = priorLarRoot;
+  // Drain, then delete: a storage-backed Repo arms an uncancelable asyncThrottle (saveDebounceRate) trailing
+  // save on materialize; a rmSync ahead of that timer draws an ENOENT unhandled rejection that bleeds across
+  // the run. Wait past the debounce (deadline ≤ arm+100ms < this 200ms) so the write lands on a live dir.
+  await new Promise((r) => setTimeout(r, 200));
   rmSync(rootA, { recursive: true, force: true });
   rmSync(rootB, { recursive: true, force: true });
 });

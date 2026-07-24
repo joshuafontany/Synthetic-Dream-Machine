@@ -165,6 +165,10 @@ describe("B1 — the production client dial-out mounts onto a live Repo and cros
     for (const d of dials.splice(0)) { try { d.stop(); } catch { /* already down */ } }
     for (const v of vessels) { try { await v.close(); } catch { /* already down */ } }
     vessels = [];
+    // Drain, then delete: repo.shutdown() flushes but does NOT cancel the StorageSource's armed asyncThrottle
+    // (saveDebounceRate) trailing sync-state/incremental save; a rmSync ahead of that timer draws an ENOENT
+    // unhandled rejection. Wait past the debounce (deadline ≤ arm+100ms < this 200ms) so the write lands live.
+    await new Promise((r) => setTimeout(r, 200));
     for (const d of dirs.splice(0)) { try { rmSync(d, { recursive: true, force: true }); } catch { /* gone */ } }
   });
 

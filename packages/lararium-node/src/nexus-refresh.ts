@@ -89,6 +89,10 @@ export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefr
       memberEntries:  membershipEntriesFromBoard(membersDoc).length,
     };
   } finally {
-    await repo.flush().catch(() => { /* best-effort — a read-only throwaway repo has nothing to persist */ });
+    // Dispose the throwaway repo whole — flush its docs AND disconnect its subsystems, so no Repo, no
+    // network seam, and no storage-throttle timer outlives the call. (repo.flush() alone leaves the
+    // StorageSource's armed asyncThrottle trailing-save pending; a caller that removes the storage dir
+    // before it fires draws an ENOENT. shutdown() flushes then tears the subsystems down.)
+    await repo.shutdown().catch(() => { /* best-effort — a read-only throwaway repo has nothing to persist */ });
   }
 }
