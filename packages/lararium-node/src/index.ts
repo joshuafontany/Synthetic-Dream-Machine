@@ -32,6 +32,18 @@ export type {
   Variance,
 } from "./sensorium.js";
 
+// The DURABLE sensorium lifecycle CAPS — roster/inspect/reconcile/build/promote/retire/un-retire/purge,
+// run direct over the manifest declaration (the mesh reducer + manifest-file I/O; no store holder). The
+// gated store-swap + daemon-loop cadence + hardening signal ride here too, feature-gated OFF (stable ground).
+export {
+  rosterSensoria, inspectSensorium, reconcileSensorium, reconcileAllSensoria, runReconcileCadence,
+  buildEphemeralSensorium, promoteSensorium, retireSensorium, unRetireSensorium, purgeSensorium,
+  readSensoriumAliases, resolveSensoriumTarget, DEFAULT_HARDENING_HALFLIFE,
+} from "./sensorium-lifecycle-verbs.js";
+export type {
+  LifecycleRow, ReconcileResult, BuildResult, PromoteResult, RetireResult, UnRetireResult, PurgeResult,
+} from "./sensorium-lifecycle-verbs.js";
+
 // The LI (sheaf) CONSISTENCY-RADIUS — the Robinson li-disagreement signal over content/structure/form
 // (0 ⟺ they glue; positive ⟺ a localizable obstruction), PAIRED with the KI (cosheaf) co-consistency —
 // the PUSHFORWARD mirror over bands/coupling (0 ⟺ the flows co-extend; positive ⟺ a localizable

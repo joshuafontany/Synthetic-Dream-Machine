@@ -44,6 +44,7 @@ import {
   reentryPrior, admit as keelAdmit, storeCodeFrom, observeClaim,
   verifyWitnessSig, WITNESS_POLICY,
   deriveLifecycle, isLifecycleState, type SensoriumLifecycleState,
+  parseRetirementRecord, type RetirementRecord,
 } from "@lararium/mesh";
 import {
   resolveComputeCapEnv, resolveFormEncoderSpawn, resolveContentPalaceSpawn, resolvePersistencePalaceSpawn,
@@ -164,6 +165,12 @@ export interface SensoriumManifest {
    * (sense-sensorium.ts `sensorium.json`) stays its own `docker run --rm` concern.
    */
   readonly lifecycle: SensoriumLifecycleState;
+  /**
+   * BASE cap (optional) — the recorded RETIREMENT (a judged tombstone): the MUSTIE grounds, when, and
+   * the state to restore on un-retire (move-not-delete). Present only when `lifecycle === "tombstone"`;
+   * a live sensorium carries none. The bytes never delete on retire — only the explicit HITL `purge` GCs.
+   */
+  readonly retirement?: RetirementRecord;
   /** ISO-8601 mint time. */
   readonly created: string;
 }
@@ -235,6 +242,7 @@ export function parseSensoriumManifest(value: unknown): SensoriumManifest {
   // ephemeral+halfLife, so a manifest that predates the field reads a lifecycle with zero disk edit.
   const halfLife = persistence ? (persistence.halfLife as number | null) : undefined;
   const lifecycle = isLifecycleState(raw.lifecycle) ? raw.lifecycle : deriveLifecycle(raw.ephemeral, halfLife);
+  const retirement = parseRetirementRecord(raw.retirement);
   return {
     schema: SENSORIUM_SCHEMA,
     sensorium: nonEmptyString(raw.sensorium, "sensorium"),
@@ -247,6 +255,7 @@ export function parseSensoriumManifest(value: unknown): SensoriumManifest {
     ...(contract.apertures ? { apertures: contract.apertures } : {}),
     ephemeral: raw.ephemeral,
     lifecycle,
+    ...(retirement ? { retirement } : {}),
     created,
   };
 }

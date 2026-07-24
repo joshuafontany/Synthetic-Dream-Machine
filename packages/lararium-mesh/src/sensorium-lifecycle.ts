@@ -94,3 +94,121 @@ export function nextLifecycle(state: SensoriumLifecycleState, evidence: Lifecycl
   if (state === "hardening") return "durable";
   return state;                                  // durable is the ladder top — it holds
 }
+
+/**
+ * The operator FIELD-FLIP promote (F4, the active promote): climb ONE rung up the ladder outright —
+ * pioneer → hardening → durable. Distinct from {@link nextLifecycle} (the traffic-gated reconcile): a
+ * human promote FORCES the next rung, no survivor-age needed. Identity-preserving by construction — the
+ * caller flips the manifest field in place, the dir/cid never move (recall stays unbroken). `durable`
+ * holds (ladder top); `tombstone` never promotes (a retired sensorium re-enters only via un-retire).
+ */
+export function promoteState(state: SensoriumLifecycleState): SensoriumLifecycleState {
+  if (state === "pioneer") return "hardening";
+  if (state === "hardening") return "durable";
+  return state; // durable top-of-ladder, or tombstone (never promotes) — both hold
+}
+
+// ── MUSTIE grounds — the JUDGED-retire rubric (recorded, never a silent GC) ───────────────────────────
+
+/**
+ * The MUSTIE deaccession grounds (the library-science rubric, narrowed to a sensorium): a retire RECORDS
+ * one of these, so a tombstone always carries WHY it was judged. No byte-delete rides a retire (the bytes
+ * GC later only through the explicit HITL `purge`; causal-islands: move-not-delete).
+ *   superseded          — a newer pour stands in its place.
+ *   irrelevant-to-recall — no recall traffic reaches it.
+ *   elsewhere-recoverable — its content re-derives from a content-hash held elsewhere.
+ */
+export const MUSTIE_GROUNDS = ["superseded", "irrelevant-to-recall", "elsewhere-recoverable"] as const;
+export type MustieGround = (typeof MUSTIE_GROUNDS)[number];
+
+/** Does a raw value name a MUSTIE ground? (a retire refuses loud without one). */
+export function isMustieGround(value: unknown): value is MustieGround {
+  return typeof value === "string" && (MUSTIE_GROUNDS as readonly string[]).includes(value);
+}
+
+/** The recorded retirement — the grounds + when + the state to restore on un-retire (move-not-delete). */
+export interface RetirementRecord {
+  readonly grounds: MustieGround;
+  readonly retiredAt: string;
+  /** the lifecycle state the sensorium stood at BEFORE the tombstone — un-retire restores it. */
+  readonly priorState: SensoriumLifecycleState;
+}
+
+/** Validate a raw retirement record; `null` when it does not parse (an absent/garbled record reads none). */
+export function parseRetirementRecord(value: unknown): RetirementRecord | null {
+  if (!value || typeof value !== "object") return null;
+  const r = value as Record<string, unknown>;
+  if (!isMustieGround(r.grounds)) return null;
+  if (typeof r.retiredAt !== "string" || !r.retiredAt) return null;
+  const prior = isLifecycleState(r.priorState) ? r.priorState : "durable";
+  return { grounds: r.grounds, retiredAt: r.retiredAt, priorState: prior };
+}
+
+// ── the moded-autonomy seat grid (the TS mirror of the python VERB_SEATS) ─────────────────────────────
+
+/**
+ * The reversibility×trust GRID for the lifecycle verbs — the TS twin of the python `VERB_SEATS`
+ * (lares_mcp.py), so an HITL verb refuses on BOTH surfaces (E5). Each entry is `[reversible,
+ * trust_crossing]`; the seat follows: HOTL when reversible AND trusted, else HITL (the operator's hand).
+ * The action-class read (Sheridan/Parasuraman adjustable autonomy):
+ *   roster·inspect·reconcile·un-retire → HOTL  (out-of-loop reads + the reversible re-settle/restore)
+ *   build                              → HOTL  (agent self-service, cattle-not-pets; a retire undoes it)
+ *   promote·retire                     → HITL  (in-loop human: graduation is a designed one-way
+ *                                               commitment; a retire is a judged deaccession)
+ *   purge                              → HITL  (irreversible byte GC — explicit-only, no auto-reclaim)
+ */
+export const LIFECYCLE_SEATS: Readonly<Record<string, readonly [boolean, boolean]>> = {
+  roster:     [true, false],
+  inspect:    [true, false],
+  reconcile:  [true, false],
+  build:      [true, false],
+  "un-retire":[true, false],
+  promote:    [false, false], // graduation is a designed one-way commitment (hard-to-reverse by intent)
+  retire:     [false, false], // a judged deaccession (undoable only by an explicit un-retire)
+  purge:      [false, false], // irreversible byte reclaim
+};
+
+/** HOTL when a verb runs reversible AND trusted; HITL (needs the operator's hand) otherwise. */
+export function seatOf(verb: string): "HOTL" | "HITL" {
+  const seat = LIFECYCLE_SEATS[verb];
+  if (!seat) return "HITL"; // an unknown verb seats conservatively — HITL by default
+  const [reversible, trustCrossing] = seat;
+  return reversible && !trustCrossing ? "HOTL" : "HITL";
+}
+
+/** Gate a verb by its seat: a HOTL verb passes freely; an HITL verb needs a truthy operator-approval
+ *  capability. Throws when an HITL verb rides without one — the TS mirror of python `guard_hitl` (E5). */
+export function guardHitl(verb: string, approval?: unknown): void {
+  if (seatOf(verb) === "HITL" && !approval) {
+    const seat = LIFECYCLE_SEATS[verb];
+    const why = seat && !seat[0] ? "irreversible" : "trust-crossing";
+    throw new Error(`${verb} sits HITL (${why}) — an operator-approval capability is required; a reversible verb (e.g. reconcile) needs none.`);
+  }
+}
+
+// ── feature gates — capability present, signal/path unflipped ("there and unused") ────────────────────
+
+/**
+ * The lifecycle feature GATES — the not-yet-active paths ship as STABLE GROUND now, gated OFF, never
+ * deferred (the no-lean-in-early-alpha discipline; the re-pour waits on stable ground, not the reverse).
+ * Only a gate's real DATA-signal calibration waits on real recall traffic; its PLUMBING lands now.
+ *   daemonLoopReconcile — the onHooAnu k8s-style continuous-reconcile cadence (F5's later path). OFF →
+ *                         reconcile stays on-demand only; ON → the cadence reconciles every sensorium.
+ *   storeSwapPromote    — the Sanity-style alias-indirection store-swap promote (F4's other path). OFF →
+ *                         promote is the in-place field-flip; ON → `promote --store-swap` re-points an alias.
+ *   hardeningSignalWired — the survivor-age SIGNAL feed (real recall-traffic → survivorAge). OFF →
+ *                         survivorAge reads 0 (a reconcile never promotes); ON → traffic tenures a stage.
+ *                         This gate's ON-calibration is the one genuine data-wait (F2/F6); the wiring is here.
+ */
+export interface LifecycleGates {
+  readonly daemonLoopReconcile: boolean;
+  readonly storeSwapPromote: boolean;
+  readonly hardeningSignalWired: boolean;
+}
+
+/** The default gate posture — every not-yet-active path OFF (stable ground, unused until flipped). */
+export const LIFECYCLE_GATES_DEFAULT: LifecycleGates = {
+  daemonLoopReconcile: false,
+  storeSwapPromote: false,
+  hardeningSignalWired: false,
+};
