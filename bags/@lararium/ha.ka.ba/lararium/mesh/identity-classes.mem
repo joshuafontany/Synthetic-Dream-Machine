@@ -11,7 +11,7 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the identity-class topology (USER / OPERATOR / KAHU / HERM) mapped across RUNS · CARRIES · IDENTITY-CLASS (KERI transferable/non-transferable/delegated/none-civic) · RECOVERS — plus READING-B recovery: a RANDOM recovery root authorizes a SIGNED rotation that seats a FRESH operational key and SUPERSEDES the old, never resurrects it. Continuity anchors on the persona-KEL (the identifier prefix), never on the operational private key. Operator-ruled 2026-07-20; the persona-KEL indirection + the reconstruct-vs-attest fork ride ahead of code."
+role      = "the identity-class topology (USER / OPERATOR / KAHU / HERM) mapped across RUNS · CARRIES · IDENTITY-CLASS (KERI transferable/non-transferable/delegated/none-civic) · RECOVERS — plus READING-B recovery: a RANDOM recovery root authorizes a SIGNED rotation that seats a FRESH operational key and SUPERSEDES the old, never resurrects it. Continuity anchors on the persona-KEL (the identifier prefix), never on the operational private key. Operator-ruled 2026-07-20; the persona-KEL indirection + the reconstruct-vs-attest fork ride ahead of code. HERM refined (operator ruling): a Herm holds a PLACE DID (a somewhere — addressable, vouchable) and NO operator DID — no local human key rests at a crossroads to steal; being-as-place ⊥ being-as-person."
 status    = "proposed"
 tags      = ["mesh/vessel-caps", "mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/founding-runbook", "mesh/charter-chain"]
 type      = "text/x-memetic-wikitext"
@@ -45,13 +45,16 @@ across four axes and fixes how each RECOVERS — the axis Reading-B re-cuts.
 <<~Class USER "runs/NO infra (browser-style vessel) carries/short cap-stack · @oracle-read + own mesh-palace · a READ-CAP reaching its OWN operator's private data ACROSS the rhizome (relays blind-transit the ciphertext; the user decrypts) class/KERI non-transferable OR delegated recovers/abandon-and-recreate" >>
 <<~Class OPERATOR "runs/a node vessel carries/MANDATORY tier (@oracle + @crossroads + Kapae) · full VESSEL stack (tuber/bulb) · sovereign @catalog · BLIND-TRANSITS private ciphertext for the mesh (MLS Delivery-Service; carry ⊥ read) class/KERI transferable (its persona-KEL IS a key-event-log) recovers/recovery-root-authorizes-rotation (Reading-B)" >>
 <<~Class KAHU "runs/a node vessel + a seat in the charter k-of-n carries/OPERATOR stack + the charter epoch chain + the steward repair-kit class/transferable, in TWO chains (own persona-KEL + the charter-KEL) recovers/personal (Reading-B) PLUS charter-quorum steward re-seat" >>
-<<~Class HERM "runs/the @daemon keel + own mesh-palace + own refresh clock (semi-autonomous relay) carries/MANDATORY public/infra + BLIND-TRANSIT of private CIPHERTEXT (carry ⊥ read; holds the replica, reads NONE) · NO read-cap on operator-content · NO sovereign @catalog class/NONE-CIVIC (anon self-certifying key; authority rides a wax-sealed carriage contract) recovers/re-established by its operator — no self-recovery of a civic identity it never holds" >>
+<<~Class HERM "runs/the @daemon keel + own mesh-palace + own refresh clock (semi-autonomous relay) carries/MANDATORY public/infra + BLIND-TRANSIT of private CIPHERTEXT (carry ⊥ read; holds the replica, reads NONE) · NO read-cap on operator-content · NO sovereign @catalog class/NONE-CIVIC — holds a PLACE DID (the self-certifying key names a SOMEWHERE: addressable, vouchable, carriage-contractable) and NO operator DID (no human key rests at a crossroads to steal); authority rides a wax-sealed carriage contract recovers/re-established by its operator — no self-recovery of a civic identity it never holds" >>
 
 ''The master cut runs AUTHORITY ⊥ FLOW'' (the cap-stack's, #vessel-caps): a USER carries little
 authority and little flow; an OPERATOR carries sovereign authority AND heavy flow; a KAHU adds
 //charter// authority atop the operator's; a HERM carries FLOW (carriage) with ''zero civic
 authority'' — the one class that runs infrastructure yet holds no persona. Authority-to-run and
-authority-to-BE separate cleanly at the Herm: it runs a full immune keel, and it //is// nobody.
+authority-to-BE separate cleanly at the Herm: it runs a full immune keel, and it //is// no ONE — yet
+it //is// a SOMEWHERE. A Herm holds a ''PLACE DID'' and ''NO operator DID'' (operator ruling): the
+crossroads earns a name it can be addressed and vouched by, while ''no local human key rests there to
+steal''. ''Being-as-place ⊥ being-as-person'' — the Herm carries the first and never the second.
 
 ''A SECOND cut rides beneath the CARRIES column — TRANSIT ⊥ READ.'' What a vessel RELAYS
 (transit/carriage, `sharePolicy`, advisory) never fuses with what it can DECRYPT (read/cap,
@@ -81,9 +84,10 @@ value'', never by title ([[founding-runbook|lar:///ha.ka.ba/lararium/mesh/foundi
 * ''DELEGATED'' (the USER's durable option) — an operator root ''delegates a disposable user stream'';
   durability lives in the ROOT, the leaf stays light and abandonable. A user gains persistence WITHOUT
   carrying a reserve (KERI delegated identifiers, KID0007). <<~ confidence Synthesis 12/20 >>
-* ''NONE-CIVIC'' (the HERM) — no identifier of persons at all; a self-certifying anon key boots the
-  keel, and the operator's relation to it rides a wax-sealed contract-edge, never a delegated persona
-  (#herm-establishment).
+* ''NONE-CIVIC'' (the HERM) — no identifier of ''persons'' at all. The self-certifying key that boots
+  the keel stands as the Herm's ''PLACE DID'' — a somewhere, not a someone — and ''never an operator
+  DID'': a crossroads holds no human key for a passer-by to steal. The operator's relation to it rides
+  a wax-sealed contract-edge, never a delegated persona (#herm-establishment).
 
 <<~/ahu >>
 
@@ -121,7 +125,7 @@ An operator ''establishes a Herm by signing a Nexus carriage contract from a nod
 it semi-autonomous (operator ruling, 2026-07-20). ''No civic identity mints into the Herm'' — only the
 wax-sealed contract/edges:
 
-<<~flows operator-node-vessel -> signs-carriage-contract (wax-sealed PEER/TRANSIT edge, MANDATORY tier) -> Herm-boots-own-@daemon-keel (anon self-cert key + own refresh clock) -> semi-autonomous-relay >>
+<<~flows operator-node-vessel -> signs-carriage-contract (wax-sealed PEER/TRANSIT edge, MANDATORY tier) -> Herm-boots-own-@daemon-keel (self-cert PLACE DID + own refresh clock) -> semi-autonomous-relay >>
 
 * the Herm ''boots permissionlessly'' on its own key (#vessel-caps: immune-core ⊕ blind-carriage ⊕
   public-read) — it asks no blessing to exist;
