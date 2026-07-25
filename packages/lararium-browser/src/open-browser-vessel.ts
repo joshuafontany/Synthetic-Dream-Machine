@@ -164,7 +164,7 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
    * The relay gate's verifying-key hex — the gate-binding the V3 proof commits to (anti-relay;
    * known OUT-OF-BAND, NEVER trusted from the wire). For a cross-operator crossing this is the
    * NODE daemon's gate key (so the proof clears against the node's own key). Absent → defaults to
-   * this vessel's own operatorDid (the same-operator leaf, the prior behavior — back-compat).
+   * this vessel's own verifying key (the same-operator leaf, the prior behavior — back-compat).
    */
   relayGatePubKey?: string;
   /**
@@ -359,9 +359,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   emit("repo-open");
 
   // ── Keypair (WebCrypto substrate) + founding (the personaGroup capability) ───
-  const operatorIdentity = await generateOrLoadBrowserVesselIdentity(idbName, displayName);
+  const vesselIdentity = await generateOrLoadBrowserVesselIdentity(idbName, displayName);
   const operatorSeed     = await loadBrowserSigningSeed(idbName);
-  const operatorDid      = operatorIdentity.verifyingKey;
+  const vesselVerifyingKey      = vesselIdentity.verifyingKey;
 
   const bootKeys = await readBootKeys(idbName);
   const bootKeyWrites: BootKeyWrites = {};
@@ -382,11 +382,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     const a = await runApplyAdmitPayload({
       repo,
       operatorSeed,
-      operatorVerifyingKey: operatorIdentity.verifyingKey,
+      operatorVerifyingKey: vesselIdentity.verifyingKey,
       operatorDisplayName:  displayName ?? "Browser Operator",
       payload:              admit,
       // This vessel's own gate key IS its Nexus key — the local KEL board it seeds the founder's inception onto.
-      nexusPubkey: operatorIdentity.verifyingKey,
+      nexusPubkey: vesselIdentity.verifyingKey,
     });
     bootstrap = {
       identitiesUrl: a.identitiesUrl, circlesUrl: a.circlesUrl, sessionsUrl: a.sessionsUrl,
@@ -412,14 +412,14 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     await wearBrowserPersona(idbName, FOUNDING_PERSONA_INDEX);   // the selector points at the founded root
     const f = await runFoundingCeremony({
       repo, operatorSeed,
-      operatorVerifyingKey: operatorIdentity.verifyingKey,
+      operatorVerifyingKey: vesselIdentity.verifyingKey,
       operatorDisplayName:  displayName ?? "Browser Operator",
       // The persona-root SIGNS (signerDid == the root DID, DISTINCT from deviceDid). The self-signed anon
       // (signerSeed == operatorSeed) survives ONLY as an explicit named floor tier, never the default.
       signerSeed,
       hearthTrueName: "",          // hearth-agnostic: an anon is not yet bound to a place; it binds on upgrade
       // This vessel's own gate key IS its Nexus key — the per-Nexus KEL board the founding seats the inception on.
-      nexusPubkey: operatorIdentity.verifyingKey,
+      nexusPubkey: vesselIdentity.verifyingKey,
     });
     bootstrap = {
       identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, daemonUrl: f.daemonUrl, personaUrl: f.personaUrl,
@@ -442,7 +442,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // burns and — because the relay/who caps below gate on `admittedToNexus` — NO federated record is written.
   const invitePolicy: BootInvitePolicy =
     bootInvitePolicy ?? (bootInvite ? { kind: "invite-only" } : { kind: "open" });
-  const inviteNexus = inviteNexusPubkey ?? relayGatePubKey ?? operatorDid;
+  const inviteNexus = inviteNexusPubkey ?? relayGatePubKey ?? vesselVerifyingKey;
   const bootVerdict = await runBrowserBootInviteSpend({
     idbName, nexusPubkey: inviteNexus, invite: bootInvite ?? null, policy: invitePolicy,
   });
@@ -470,12 +470,12 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   if (relayUrl && social.contactCard && admittedToNexus) {
     const leaf: LeafIdentity = {
       contactCard: social.contactCard,
-      peerPubKey:  operatorDid,
+      peerPubKey:  vesselVerifyingKey,
       sign:        ed25519SignerFromSeed(operatorSeed),
       ...(social.deviceEdge ? { edge: social.deviceEdge } : {}),
     };
     const relayAdapter = new LarWSClientAdapter({
-      url: relayUrl, identity: leaf, aud: DAEMON_BAG_ID, gatePubKey: relayGatePubKey ?? operatorDid,
+      url: relayUrl, identity: leaf, aud: DAEMON_BAG_ID, gatePubKey: relayGatePubKey ?? vesselVerifyingKey,
     });
     // Tag the relay ring: every peer reached through this adapter enters `relayPeers`, so the
     // sharePolicy gates them while the in-process island peers keep sharing freely. Listeners
@@ -627,7 +627,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         // no selfEndpoint — a leaf is not dial-able (the endpoint-absent leaf↔full tier)
         selfCoord: leaf.coord,
         ...(meshLeaf.maxFanout !== undefined ? { maxFanout: meshLeaf.maxFanout } : {}),
-        nodeSeedHex: operatorDid,   // the per-vessel cadence seed (browser-safe hex string, no Buffer)
+        nodeSeedHex: vesselVerifyingKey,   // the per-vessel cadence seed (browser-safe hex string, no Buffer)
         onLog: (l) => console.log(`[lararium-browser] ${l}`),
       }),
     ];
@@ -646,7 +646,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     const nexusPubkey = relayGatePubKey;
     const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "@crossroads");
     const card = await signHandleCard(
-      { nym: operatorDid, glamour: displayName ?? "Anon", version: 1, prev: null,
+      { nym: vesselVerifyingKey, glamour: displayName ?? "Anon", version: 1, prev: null,
         expiry: Date.now() + 30 * 24 * 3_600_000, standing: null },
       ed25519SignerFromSeed(operatorSeed),
     );
@@ -703,7 +703,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       const sel = selectActiveWikiSlug(wikiId, undefined);
       slotActiveWikiId = sel.slug;
       activeSurfaceId  = sel.slug;   // the pinned wiki owns #projection at boot; summon flips it live
-      const facets = recipeHostFacets(slugFromUri(sel.slug), operatorDid);
+      const facets = recipeHostFacets(slugFromUri(sel.slug), vesselVerifyingKey);
       return {
         activeWikiId: sel.slug, wikiSlug: facets.wikiSlug,
         wikiKey: facets.wikiKey, wikiBagId: facets.wikiBagId,
@@ -739,13 +739,13 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // seq-sorted key-event-log from this vessel's OWN per-Nexus KEL board (its gate key IS its Nexus key),
       // against the LOCAL replica "as of last sync" (no-global-now). FAIL-CLOSED: a chain the replica does not
       // carry HALTS the boot (never a global lookup, never a fall-through to the raw signer pin).
-      const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(operatorIdentity.verifyingKey), "@persona-kel");
+      const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(vesselIdentity.verifyingKey), "@persona-kel");
       const personaKelChain = personaKelChainForPrefix(kelBoard.doc(), social.personaKelPrefix);
       if (!personaKelChain || personaKelChain.length === 0) {
         throw new Error(`[lararium-browser] persona-KEL chain for ${social.personaKelPrefix.slice(0, 20)}… absent from the local board — the Binding Gate cannot reach a head (fail-closed).`);
       }
       const daemonAuth = {
-        seed: operatorSeed, operatorVerifyingKey: operatorIdentity.verifyingKey,
+        seed: operatorSeed, operatorVerifyingKey: vesselIdentity.verifyingKey,
         personaGroupDocIdHex: social.personaGroupDocIdHex,
         personaGroupAgentIdHex: social.personaGroupAgentIdHex,
         meshCabalDocIdHex: social.meshCabalDocIdHex,
@@ -1026,7 +1026,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
     afterLive: ({ wikiHandle }) => {
       // Presence — ephemeral, does not travel via CRDT.
-      wikiHandle.broadcast({ did: operatorDid, ts: Date.now() });
+      wikiHandle.broadcast({ did: vesselVerifyingKey, ts: Date.now() });
       // Boot DEMOTED to a pin (browser gradient): the @daemon surface stays always-live
       // on its own; the home wiki registers in the ONE collector as a PINNED `wiki` grain
       // (the single rotatable pin this constrained vessel grants besides @daemon).
