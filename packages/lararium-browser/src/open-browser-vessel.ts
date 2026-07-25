@@ -1025,8 +1025,10 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     },
 
     afterLive: ({ wikiHandle }) => {
-      // Presence — ephemeral, does not travel via CRDT.
-      wikiHandle.broadcast({ did: vesselVerifyingKey, ts: Date.now() });
+      // Presence — ephemeral, does not travel via CRDT. The PLACE announces itself, never a face:
+      // being-as-place costs nothing civic, so a vessel key is the right thing to be seen by here.
+      // Carried in the canonical DID form (`0x` + verifying key) so the field holds what it names.
+      wikiHandle.broadcast({ did: `0x${vesselVerifyingKey}`, ts: Date.now() });
       // Boot DEMOTED to a pin (browser gradient): the @daemon surface stays always-live
       // on its own; the home wiki registers in the ONE collector as a PINNED `wiki` grain
       // (the single rotatable pin this constrained vessel grants besides @daemon).
