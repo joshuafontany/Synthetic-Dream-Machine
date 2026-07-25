@@ -303,10 +303,13 @@ the shape at persona scale). The invariant becomes:
 * a rotation advances the head; the old edges still resolve, because they pinned the invariant
   identifier, never the rotated key.
 
-<<~ confidence Synthesis 12/20 >> ''So the load-bearing build for Reading-B reads: give each PersonaGroup
+<<~ confidence Synthesis-Canon 16/20 >> ''The load-bearing build for Reading-B read: give each PersonaGroup
 a pre-rotated persona-KEL, and move the pin from the raw operational key to the identifier prefix.''
-This lifts the charter's proven epoch-chain machinery down to persona scale — invent nothing structural,
-re-site what stands (#edges names the code seams).
+''BUILT'' — `persona-kel` mints the inception, derives the prefix, advances rotations hash-linked, and
+verifies a chain; `boot-daemon-keyhive`'s Binding Gate pins the prefix and resolves the head. It lifted
+the charter's proven epoch-chain machinery down to persona scale — invent nothing structural, re-site
+what stands (#edges names the code seams). ''The same lift now runs OUTWARD'', to the two sites still
+binding a raw key: the antigen's ban-nym and the handle-card's face-nym (#the-honest-edges).
 
 <<~/ahu >>
 
@@ -355,9 +358,17 @@ multisig machinery and heavier guardian onboarding (B)''.
 
 <<~ confidence Synthesis-Canon 14/20 >> Three walls hold this design, and each stays named:
 
-* ''Reading-B needs the persona-KEL indirection BEFORE it can land'' — while the pin reads the raw
-  operational key, no rotation preserves continuity. The indirection (#the-continuity-anchor) gates the
-  whole recovery re-cut; it lifts proven charter machinery, but it lands FIRST.
+* ''The persona-KEL indirection STANDS — this wall came down'' (corrected; it read as an open gate long
+  after it closed, and a stale wall misroutes every reader who trusts it). The Binding Gate ''pins the
+  identifier PREFIX'' and walks the local KEL replica to its ''current head op-key''
+  (`boot-daemon-keyhive` — a genesis-prefix mismatch, a broken or below-quorum head, or an edge that
+  fails to chain each HALT fail-closed; `ceremony-core` records //"no raw-pin hybrid"//). So continuity
+  ''rides the log, never a frozen key'', and Reading-B's rotation no longer waits on anything.
+  ''What the indirection has NOT yet reached'' — two sites still bind a RAW key where a prefix belongs,
+  and each carries a live consequence: the ''antigen'' bans a presenter `nym` (so a lawful rotation
+  ''sheds the ban''), and a ''handle-card'' names a bare key as its `nym` (so a face carries no chain to
+  break — hence no burn). Re-siting the KEL to both reads as the same lift persona-KEL itself performed
+  on the charter machinery: //it invents nothing structural, it re-sites what stands//.
 * ''"a valid rotation on lineage L" reads as crypto fact; "L is the legitimate person" does NOT'' — the
   same wall the wax-stamp and persona-policy keep lit. A rotation verifies against the pre-commit; that
   the recovering party //is// the original human stays higher-order social acceptance, answered by kahu-
