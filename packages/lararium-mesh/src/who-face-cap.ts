@@ -4,7 +4,7 @@
  * The identity sibling of meshPalaceCap: where the carriage cap wires the @meshpalace FLOW-map (WHERE to
  * dial), this wires the per-Nexus WHO board (WHO a veiled-user is) — the two-key atom's two planes, two caps.
  * A vessel composing this cap resolves its Nexus's WHO board through @crossroads (the public plane),
- * self-announces its own handle-card onto it, and layers the board WRITABLE so the relay syncs it. Pulling
+ * layers the board WRITABLE so the relay syncs it, and NEVER announces a face of its own. Pulling
  * peers' cards into a HandleBook rides the returned component's `ingest`.
  *
  * Isomorphic and platform-blind, exactly like meshPalaceCap: a browser vessel composes the very same cap a
@@ -44,18 +44,15 @@ export interface WhoFaceComponent {
 }
 
 /**
- * whoFaceCap — resolve the Nexus's WHO board through @crossroads, self-announce this vessel's card onto it,
- * layer it writable (so the relay syncs it), and expose an ingest. `crossroadsHandle` is the resolved public
- * plane; `nexusPubkey` scopes the board to one causal island; `card` is the vessel's own announced Handle.
+ * whoFaceCap — resolve the Nexus's WHO board through @crossroads, layer it writable (so the relay syncs it),
+ * and expose `ingest` (recognition) + `announce` (disclosure). It takes NO card and publishes NOTHING:
+ * composing a cap is binding, and binding never announces. `crossroadsHandle` is the resolved public plane;
+ * `nexusPubkey` scopes the board to one causal island.
  */
 export function whoFaceCap(deps: {
   repo: Repo;
   crossroadsHandle: DocHandle<LarDoc>;
   nexusPubkey: string;
-  /** OPTIONAL. Present ⇒ this card announces at compose-time (the legacy self-announce). ABSENT ⇒ the
-   *  vessel resolves and READS the board while publishing nothing, and a holder announces later through
-   *  the component's `announce`. Absent reads as the pono default: disclosure rides a deliberate act. */
-  card?: HandleCard;
   residency?: BagResidencyManager;
 }): CapModule {
   return {
@@ -69,9 +66,8 @@ export function whoFaceCap(deps: {
         (url) => (url
           ? deps.repo.find<LarDoc>(url as AutomergeUrl)
           : materializeSharedLarDoc(deps.repo, whoBoardDocUrl(deps.nexusPubkey), "who-board")),
-        "who-face-self-announce",
+        "who-face-resolve",
       );
-      if (deps.card) announceToWhoFace(board, deps.card);   // only when a caller deliberately supplied one
       const bagId = nexusHandlesUri(deps.nexusPubkey);
       assembly.composite.addLayer({
         bagId, store: new AutomergeDocStore(board, bagId), writable: true, defaultWritable: true,

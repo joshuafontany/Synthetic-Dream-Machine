@@ -1,9 +1,9 @@
 /**
  * who-face-cap.test.ts — the isomorphic WHO-plane cap, through the real compose engine.
  *
- * Proven: composing whoFaceCap resolves the Nexus's WHO board through @crossroads, self-announces the
- * vessel's card, layers the board into the substrate composite (writable, so a relay syncs it), and exposes
- * an ingest that recognises what's on the board. This is the vessel-boot unit both node and browser compose.
+ * Proven: composing whoFaceCap resolves the Nexus's WHO board through @crossroads, layers it into the
+ * substrate composite (writable, so a relay syncs it), announces NOTHING, and exposes an ingest that
+ * recognises what's on the board. This is the vessel-boot unit both node and browser compose.
  */
 import { describe, test, expect } from "vitest";
 import { Repo, type DocHandle } from "@automerge/automerge-repo";
@@ -36,14 +36,14 @@ function substrateStub(composite: CompositeStore): CapModule {
 describe("whoFaceCap — the isomorphic WHO-plane vessel cap", () => {
   // Binding-the-vessels ⊥ announcing-the-identity: composing the cap must never publish a face. A vessel
   // resolves the board to RECOGNISE peers; disclosure rides a deliberate holder act, never a boot side-effect.
-  test("composed WITHOUT a card: recognition works, the board carries NO face of ours", { timeout: 15_000 }, async () => {
+  test("composing publishes NOTHING — announce() is the only way a face lands", { timeout: 15_000 }, async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const crossroads = repo.create<LarDoc>(emptyLarDoc());
     const composite = new CompositeStore();
 
     const v = await composeVessel([
       substrateStub(composite),
-      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS }),   // no card — the pono default
+      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS }),
     ]);
     const who = v.get<WhoFaceComponent>(WHO_FACE_CAP)!;
 
@@ -65,19 +65,19 @@ describe("whoFaceCap — the isomorphic WHO-plane vessel cap", () => {
     await v.dispose();
   });
 
-  test("composing it resolves the board, self-announces the card, and layers the board writable", { timeout: 15_000 }, async () => {
+  test("composing it resolves the board and layers it writable; an announced card then reads back", { timeout: 15_000 }, async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const crossroads = repo.create<LarDoc>(emptyLarDoc());
     const composite = new CompositeStore();
-    const card = await publish(FASTJACK_SEED, "FastJack");
 
     const v = await composeVessel([
       substrateStub(composite),
-      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS, card }),
+      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS }),
     ]);
     const who = v.get<WhoFaceComponent>(WHO_FACE_CAP)!;
+    who.announce(await publish(FASTJACK_SEED, "FastJack"));   // the holder's deliberate act
 
-    // self-announced: ingesting the board recognises this vessel's own Handle
+    // announced: ingesting the board recognises the Handle this holder published
     const book = new HandleBook();
     await who.ingest(book);
     expect(book.get(await pubOf(FASTJACK_SEED))?.card.glamour).toBe("FastJack");
@@ -92,17 +92,16 @@ describe("whoFaceCap — the isomorphic WHO-plane vessel cap", () => {
   test("a second vessel on the SAME nexus resolves the SAME board — one shared island board", { timeout: 15_000 }, async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const crossroads = repo.create<LarDoc>(emptyLarDoc());
-    const cardA = await publish(FASTJACK_SEED, "FastJack");
-    const cardB = await publish(new Uint8Array(32).fill(22), "Dodger");
-
     // vessel A composes, then vessel B composes over the SAME @crossroads
     const vA = await composeVessel([substrateStub(new CompositeStore()),
-      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS, card: cardA })]);
+      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS })]);
     const vB = await composeVessel([substrateStub(new CompositeStore()),
-      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS, card: cardB })]);
+      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS })]);
 
     const whoA = vA.get<WhoFaceComponent>(WHO_FACE_CAP)!;
     const whoB = vB.get<WhoFaceComponent>(WHO_FACE_CAP)!;
+    whoA.announce(await publish(FASTJACK_SEED, "FastJack"));
+    whoB.announce(await publish(new Uint8Array(32).fill(22), "Dodger"));
     expect(whoB.handle.url).toBe(whoA.handle.url);   // both resolved the one shared island board
 
     await vA.dispose(); await vB.dispose();
