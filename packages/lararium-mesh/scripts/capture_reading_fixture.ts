@@ -18,10 +18,10 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 import { concentration, captureReading, type CaptureDials } from "../src/capture-reading.js";
-import type { CabalPlaceMaintenanceProvenance, MaintainerStanding } from "../src/cabal-place-clock.js";
+import type { CabalRealmMaintenanceProvenance, MaintainerStanding } from "../src/cabal-realm-clock.js";
 
 /** A minimal provenance carrying only what the reading consumes — maintainers' epochs. */
-function clockOf(epochs: readonly number[]): CabalPlaceMaintenanceProvenance {
+function clockOf(epochs: readonly number[]): CabalRealmMaintenanceProvenance {
   const maintainers = epochs
     .map((epoch, i): MaintainerStanding => ({ keyHash: `k${i}`, epoch } as MaintainerStanding))
     .sort((a, b) => b.epoch - a.epoch);
@@ -34,7 +34,7 @@ function clockOf(epochs: readonly number[]): CabalPlaceMaintenanceProvenance {
     trailingEpoch,
     spread: effectiveEpoch - trailingEpoch,
     leadingCount: maintainers.filter((m) => m.epoch === effectiveEpoch).length,
-  } as CabalPlaceMaintenanceProvenance;
+  } as CabalRealmMaintenanceProvenance;
 }
 
 const DIALS: CaptureDials = { beta: 0.8, rho: 0.05, supply: 1000, alpha: 0.9 };

@@ -16,7 +16,7 @@
 #
 # Usage:  tools/civic-witness.sh
 # The 3-hop mesh + partition family rides its own longer witness: tools/herm-mesh-partition.mjs.
-# Meme:  lar:///ha.ka.ba/lares/api/pono/the-veil-ladder + cabal-place + browser-crossing
+# Meme:  lar:///ha.ka.ba/lares/api/pono/the-veil-ladder + cabal-realm + browser-crossing
 
 set -u
 PASS=0; FAIL=0; FAILED=""

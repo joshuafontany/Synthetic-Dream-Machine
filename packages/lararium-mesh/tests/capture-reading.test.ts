@@ -5,18 +5,18 @@
 import { describe, test, expect } from "vitest";
 import {
   captureReading, concentration,
-  cabalPlaceMaintenanceProvenance, cabalPlaceLeaseSlot, alphaFromHalfLife,
-  type CabalPlace, type CaptureDials,
+  cabalRealmMaintenanceProvenance, cabalRealmLeaseSlot, alphaFromHalfLife,
+  type CabalRealm, type CaptureDials,
 } from "../src/index.js";
 
-const PLACE: CabalPlace = {
+const PLACE: CabalRealm = {
   placeDocIdHex: "0xplace", placeAgentIdHex: "0xagent",
   substrateUrl: "automerge:s", genesisUri: "lar:///crossroads.cabal.gathers",
 };
 function clockOf(standing: Record<string, number>) {
   const m = new Map<string, string>();
-  for (const [w, e] of Object.entries(standing)) m.set(cabalPlaceLeaseSlot(PLACE.placeDocIdHex, w), String(e));
-  return cabalPlaceMaintenanceProvenance(PLACE, m);
+  for (const [w, e] of Object.entries(standing)) m.set(cabalRealmLeaseSlot(PLACE.placeDocIdHex, w), String(e));
+  return cabalRealmMaintenanceProvenance(PLACE, m);
 }
 const DIALS: CaptureDials = { beta: 0.6, rho: 0.001, supply: 1000, alpha: alphaFromHalfLife(10) };
 

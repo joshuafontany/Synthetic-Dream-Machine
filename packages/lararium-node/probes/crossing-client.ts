@@ -27,7 +27,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { Repo, type AutomergeUrl, type DocHandle } from "@automerge/automerge-repo";
 import { LarWSClientAdapter, ed25519SignerFromSeed } from "@lararium/mesh";
-import { KeyhiveProvider, InMemoryEventStore, foundCabalPlace } from "@lararium/keyhive";
+import { KeyhiveProvider, InMemoryEventStore, foundCabalRealm } from "@lararium/keyhive";
 import type { LeafIdentity } from "../src/leaf-identity.js";
 
 const AUD = "lar:///ha.ka.ba/bags/@daemon";
@@ -80,7 +80,7 @@ async function attemptCrossing(identity: LeafIdentity, aud: string, gatePubKey: 
 async function foundStandaloneFloor(seed: Uint8Array): Promise<void> {
   const provider = new KeyhiveProvider();
   await provider.init({ seed, eventStore: new InMemoryEventStore() });
-  const place = await foundCabalPlace(provider, "lar:///anon.floor.stands/denied-but-whole", "automerge:anon-floor-substrate");
+  const place = await foundCabalRealm(provider, "lar:///anon.floor.stands/denied-but-whole", "automerge:anon-floor-substrate");
   console.log(`[crossing-client] (anon) ✓ denied at the gate, yet WHOLE — founded own island place=${place.placeDocIdHex.slice(0, 12)}…`);
   await provider.dispose();
 }

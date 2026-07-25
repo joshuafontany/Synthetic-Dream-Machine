@@ -10,7 +10,7 @@ mesh-telemetry analyses run where all machine-code runs — py — with the TS a
 Parity: packages/lararium-mesh/scripts/capture_reading_fixture.ts generates the fixture;
 test_capture_reading.py consumes it as plain data and asserts agreement.
 
-Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
 """
 from __future__ import annotations
 

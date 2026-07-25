@@ -1,6 +1,6 @@
 /**
  * swarm-node — a container (or local) entrypoint that joins a mesh swarm: found a shared
- * cabal-place (founder) or join it (joiner), the membership ceremony crossing the seam.
+ * cabal-realm (founder) or join it (joiner), the membership ceremony crossing the seam.
  * CHANNEL-AGNOSTIC (the seam's payoff): file/POST over a shared dir, OR live-WS to a relay
  * — chosen by env, the ceremony identical above the seam. REAL Keyhive.
  *
@@ -17,12 +17,12 @@
  * catches a later invite). file/POST serves a shared-dir swarm, the WS relay-service serves live sockets —
  * two live forms of the Herm's OPEN ceremony carriage behind one seam, chosen by env.
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { KeyhiveProvider, InMemoryEventStore, foundCabalPlace, joinCabalPlace, cabalPlaceRoster } from "@lararium/keyhive";
+import { KeyhiveProvider, InMemoryEventStore, foundCabalRealm, joinCabalRealm, cabalRealmRoster } from "@lararium/keyhive";
 import { MEMBERSHIP_BROADCAST, type MembershipChannel } from "@lararium/mesh";
 import { FileMembershipChannel } from "../src/file-membership-channel.js";
 import { WSMembershipChannel } from "../src/ws-membership-channel.js";
@@ -67,7 +67,7 @@ async function openChannel(): Promise<MembershipChannel> {
 }
 
 async function runFounder(channel: MembershipChannel, provider: KeyhiveProvider): Promise<void> {
-  const place = await foundCabalPlace(provider, PLACE_URI, "automerge:docker-swarm-substrate");
+  const place = await foundCabalRealm(provider, PLACE_URI, "automerge:docker-swarm-substrate");
   console.log(`[swarm-node] FOUNDER founded place=${place.placeDocIdHex.slice(0, 12)}… via ${TRANSPORT}, expecting ${String(EXPECT)} joiners`);
   const invite = { kind: "invite", from: "founder", to: MEMBERSHIP_BROADCAST, payload: { placeDocIdHex: place.placeDocIdHex, genesisUri: PLACE_URI } };
 
@@ -77,7 +77,7 @@ async function runFounder(channel: MembershipChannel, provider: KeyhiveProvider)
     for (const c of await channel.poll("founder")) {
       if (c.kind !== "contact-card" || admitted.has(c.from)) continue;
       const { id } = await provider.receiveContactCard(new Uint8Array(Buffer.from(c.payload as string, "base64")));
-      await joinCabalPlace(provider, place, id);
+      await joinCabalRealm(provider, place, id);
       admitted.set(c.from, id);
       await channel.offer({ kind: "admit", from: "founder", to: c.from, payload: { memberIdHex: id } });
       console.log(`[swarm-node] FOUNDER admitted ${c.from} (${id.slice(0, 12)}…) — ${String(admitted.size)}/${String(EXPECT)}`);
@@ -85,7 +85,7 @@ async function runFounder(channel: MembershipChannel, provider: KeyhiveProvider)
     await sleep(500);
   }
 
-  const roster = await cabalPlaceRoster(provider, place, [...admitted.values()]);
+  const roster = await cabalRealmRoster(provider, place, [...admitted.values()]);
   if (DIR) writeFileSync(join(DIR, "roster.json"), JSON.stringify({ count: roster.length, members: roster }));
   if (roster.length === EXPECT) {
     console.log(`[swarm-node] FOUNDER ✓ roster=${String(roster.length)}/${String(EXPECT)} — the swarm formed across containers.`);

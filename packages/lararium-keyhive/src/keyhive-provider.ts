@@ -471,7 +471,7 @@ export class KeyhiveProvider implements CapabilityProvider {
    * serves a `delegate()`-tracked delegationId; a sentinel member added via
    * `addSentinelMember` produces no such id, so it needs this audience+doc path.
    *
-   * CONVERGENT-REMOVAL (canon cabal-place#the-tie-break — "malice rides Keyhive
+   * CONVERGENT-REMOVAL (canon cabal-realm#the-tie-break — "malice rides Keyhive
    * convergent-removal, never the counter"): `retain_all_other_members=true`
    * revokes ONLY this audience, leaving the rest intact; the REVOKED events fire
    * into the event_handler/EventStore and converge across replicas (eventual, per

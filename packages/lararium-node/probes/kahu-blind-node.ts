@@ -9,7 +9,7 @@
  * decrypt — it was never a member, so no key exists for it. The KAHU carries the verdict.
  *
  * Env: LAR_KAHU_ROLE (citizen|kahu) · LAR_KAHU_SHARED (req, shared volume)
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place#the-seal · project_civic_scale_capability_models
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm#the-seal · project_civic_scale_capability_models
  */
 
 import { KeyhiveProvider, InMemoryEventStore } from "@lararium/keyhive";

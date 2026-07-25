@@ -6,7 +6,7 @@
  * content-addressed identity + epoch they cannot follow), and each vessel RE-POINTS its
  * own petname to the fork. The captured shell cools alone.
  *
- * Canon: cabal-place#the-unswept-corner (fork-as-exit PRIMARY; the Steem→Hive
+ * Canon: cabal-realm#the-unswept-corner (fork-as-exit PRIMARY; the Steem→Hive
  * airdrop-exclusion made native). Two moves, both cheap (Hirschman: exit disciplines a
  * captor only while forking stays cheap):
  *   · EXCLUDE BY OMISSION — the fork is a NEW place; the captors are simply never added
@@ -20,11 +20,11 @@
  * This floor is pure MODEL (survivor computation · re-point · continuity link); the actual
  * founding of the fresh place rides the Keyhive ceremony (fork-place-ceremony.ts).
  *
- * Platform-blind: rides ./cabal-place only. NO node: imports.
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Platform-blind: rides ./cabal-realm only. NO node: imports.
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
-import type { CabalPlace } from "./cabal-place.js";
+import type { CabalRealm } from "./cabal-realm.js";
 
 /**
  * A fork of a captured place — a fresh place-identity carrying the legitimate maintainers,
@@ -34,7 +34,7 @@ export interface PlaceFork {
   /** CONTINUITY — the captured place this forked FROM (legitimacy re-anchors via it). */
   readonly forkedFromDocIdHex: string;
   /** The fork — a fresh place identity the captors cannot follow. */
-  readonly newPlace: CabalPlace;
+  readonly newPlace: CabalRealm;
   /** The legitimate maintainers carried across into the fork. */
   readonly survivors: readonly string[];
   /** The captors — named for the record; NEVER added to the fork (excluded by omission). */

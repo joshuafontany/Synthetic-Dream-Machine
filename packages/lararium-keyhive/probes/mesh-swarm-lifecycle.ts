@@ -1,6 +1,6 @@
 /**
  * MESH-SWARM LIFECYCLE WITNESS — multiple DIFFERENT PersonaGroups (different humans)
- * found + join a SHARED cabal-place, the membership ceremony crossing a real FILE
+ * found + join a SHARED cabal-realm, the membership ceremony crossing a real FILE
  * channel between separate vessels. REAL Keyhive, no mocks.
  *
  * This is the swarm test the operator ruled: file/POST FIRST (ship it fast), the channel
@@ -10,7 +10,7 @@
  * Docker the same seam becomes a shared volume / HTTP-POST; the ceremony never knows.
  *
  * The drift (the WHO-plane crossing the transport, at last):
- *   1. FOUND    — the founder founds a shared multi-human cabal-place.
+ *   1. FOUND    — the founder founds a shared multi-human cabal-realm.
  *   2. INVITE   — founder BROADCASTS an invite over the channel; both joiners receive it.
  *   3. CONTACT  — each joiner offers its contact-card over the channel → the founder.
  *   4. ADMIT    — founder receives each card, joins it (real Keyhive), acks over channel.
@@ -20,16 +20,16 @@
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/mesh-swarm-lifecycle.ts
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
 import { mkdirSync, writeFileSync, readdirSync, readFileSync, rmSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
-import { foundCabalPlace, joinCabalPlace, cabalPlaceRoster } from "../src/cabal-place-ceremony.js";
+import { foundCabalRealm, joinCabalRealm, cabalRealmRoster } from "../src/cabal-realm-ceremony.js";
 import {
-  cabalPlaceMaintenanceProvenance, cabalPlaceLeaseSlot,
+  cabalRealmMaintenanceProvenance, cabalRealmLeaseSlot,
   MEMBERSHIP_BROADCAST,
   type MembershipChannel, type MembershipEnvelope,
 } from "@lararium/mesh";
@@ -90,8 +90,8 @@ async function main(): Promise<void> {
   const vesselC = await makeJoiner(0xc0);
 
   // ── STAGE 1 — FOUND the shared place ──────────────────────────────────────────
-  const place = await foundCabalPlace(founder, PLACE_URI, SUBSTRATE, { leaseWriterId: "founder", leaseSlots });
-  stage("1 FOUND — the founder founds a shared multi-human cabal-place",
+  const place = await foundCabalRealm(founder, PLACE_URI, SUBSTRATE, { leaseWriterId: "founder", leaseSlots });
+  stage("1 FOUND — the founder founds a shared multi-human cabal-realm",
     place.placeDocIdHex.length > 0, `place=${place.placeDocIdHex.slice(0, 12)}…`);
 
   // ── STAGE 2 — INVITE broadcast over the channel ───────────────────────────────
@@ -119,7 +119,7 @@ async function main(): Promise<void> {
   for (const c of cards) {
     const bytes = new Uint8Array(Buffer.from(c.payload as string, "base64"));
     const { id } = await founder.receiveContactCard(bytes);
-    await joinCabalPlace(founder, place, id);                       // real Keyhive membership
+    await joinCabalRealm(founder, place, id);                       // real Keyhive membership
     admitted[c.from] = id;
     await channel.offer({ kind: "admit", from: "founder", to: c.from, payload: { memberIdHex: id } });
   }
@@ -130,15 +130,15 @@ async function main(): Promise<void> {
 
   // ── STAGE 5 — ROSTER holds all three DIFFERENT PersonaGroups ──────────────────
   const idB = admitted["vessel-B"] ?? "", idC = admitted["vessel-C"] ?? "";
-  const roster = await cabalPlaceRoster(founder, place, [idB, idC]);
+  const roster = await cabalRealmRoster(founder, place, [idB, idC]);
   stage("5 ROSTER — the shared place's real Keyhive roster holds both joined PersonaGroups",
     roster.length === 2 && roster.includes(idB) && roster.includes(idC),
     `roster=${roster.length} (cross-channel membership witnessed)`);
 
   // ── STAGE 6 — the clock reads a MULTI-human place: the spread MEANS something ──
-  leaseSlots.set(cabalPlaceLeaseSlot(place.placeDocIdHex, idB), "20");   // B out-feeds
-  leaseSlots.set(cabalPlaceLeaseSlot(place.placeDocIdHex, idC), "2");
-  const clock = cabalPlaceMaintenanceProvenance(place, leaseSlots);
+  leaseSlots.set(cabalRealmLeaseSlot(place.placeDocIdHex, idB), "20");   // B out-feeds
+  leaseSlots.set(cabalRealmLeaseSlot(place.placeDocIdHex, idC), "2");
+  const clock = cabalRealmMaintenanceProvenance(place, leaseSlots);
   stage("6 CLOCK — on a multi-human place the spread is a REAL capture signal (vs the me's immunity)",
     clock.maintainerCount === 3 && clock.spread >= 18 && clock.leadingCount === 1,
     `maintainers=${clock.maintainerCount} spread=${clock.spread} — here it MEANS capture`);

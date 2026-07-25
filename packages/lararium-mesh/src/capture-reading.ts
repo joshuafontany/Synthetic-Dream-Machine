@@ -5,11 +5,11 @@
  * the operator's ceiling β — it never RULES a place captured (which-fork-is-real is
  * non-computable; the operator reads, the members decide — the-veil-ladder#the-bounds).
  *
- * Platform-blind: composes ./cabal-place-clock + ./conviction-dial. NO node: imports.
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Platform-blind: composes ./cabal-realm-clock + ./conviction-dial. NO node: imports.
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
-import type { CabalPlaceMaintenanceProvenance } from "./cabal-place-clock.js";
+import type { CabalRealmMaintenanceProvenance } from "./cabal-realm-clock.js";
 import { captureThreshold } from "./conviction-dial.js";
 
 /** The operator's capture dials — β the named ceiling, the rest the curve's shape. Fairness settings. */
@@ -41,7 +41,7 @@ export interface CaptureReading {
  * maintenance in one hand → r near 1 (the visible capture shape); broadly co-maintained →
  * r low. An unfed place reads 0. Complements the clock's spread/leadingCount with the SHARE.
  */
-export function concentration(clock: CabalPlaceMaintenanceProvenance): number {
+export function concentration(clock: CabalRealmMaintenanceProvenance): number {
   let total = 0, leader = 0;
   for (const m of clock.maintainers) {
     total += m.epoch;
@@ -54,7 +54,7 @@ export function concentration(clock: CabalPlaceMaintenanceProvenance): number {
  * Read the capture posture — compose the clock's concentration with the dial's convex curve.
  * VERDICT-FREE: the operator sets β and reads where the place sits; the reading never rules.
  */
-export function captureReading(clock: CabalPlaceMaintenanceProvenance, dials: CaptureDials): CaptureReading {
+export function captureReading(clock: CabalRealmMaintenanceProvenance, dials: CaptureDials): CaptureReading {
   const r = concentration(clock);
   return {
     concentration: r,

@@ -15,12 +15,12 @@
  * If a captor can still reach the fork, fork-as-exit does not hold — surface it.
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/fork-place-lifecycle.ts
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
-import { foundCabalPlace, joinCabalPlace, cabalPlaceRoster } from "../src/cabal-place-ceremony.js";
-import { forkCabalPlace } from "../src/fork-place-ceremony.js";
+import { foundCabalRealm, joinCabalRealm, cabalRealmRoster } from "../src/cabal-realm-ceremony.js";
+import { forkCabalRealm } from "../src/fork-place-ceremony.js";
 import { repointToFork } from "@lararium/mesh";
 
 const PLACE_URI = "lar:///crossroads.cabal.gathers/captured";
@@ -48,18 +48,18 @@ async function main(): Promise<void> {
   }
 
   // ── STAGE 1 — FOUND the captured place, join two survivors + a captor ───────────
-  const place = await foundCabalPlace(legit, PLACE_URI, SUBSTRATE);
+  const place = await foundCabalRealm(legit, PLACE_URI, SUBSTRATE);
   const survivorA = await member(0xa1);
   const survivorB = await member(0xb2);
   const captor    = await member(0xcc);
-  await joinCabalPlace(legit, place, survivorA);
-  await joinCabalPlace(legit, place, survivorB);
-  await joinCabalPlace(legit, place, captor);
-  const oldRoster = await cabalPlaceRoster(legit, place, [survivorA, survivorB, captor]);
+  await joinCabalRealm(legit, place, survivorA);
+  await joinCabalRealm(legit, place, survivorB);
+  await joinCabalRealm(legit, place, captor);
+  const oldRoster = await cabalRealmRoster(legit, place, [survivorA, survivorB, captor]);
   stage("1 CAPTURED — the place holds two survivors + a captor", oldRoster.length === 3, `roster=${oldRoster.length}`);
 
   // ── STAGE 2 — FORK excluding the captor ────────────────────────────────────────
-  const fork = await forkCabalPlace(legit, place, oldRoster, [captor]);
+  const fork = await forkCabalRealm(legit, place, oldRoster, [captor]);
   stage("2 FORK — a fresh place forks, the captor excluded by omission",
     fork.newPlace.placeDocIdHex.length > 0 &&
     fork.newPlace.placeDocIdHex !== place.placeDocIdHex &&
@@ -67,7 +67,7 @@ async function main(): Promise<void> {
     `fork=${fork.newPlace.placeDocIdHex.slice(0, 10)}… survivors=${fork.survivors.length}`);
 
   // ── STAGE 3 — the fork's real roster = the survivors ONLY ───────────────────────
-  const forkRoster = await cabalPlaceRoster(legit, fork.newPlace, [survivorA, survivorB, captor]);
+  const forkRoster = await cabalRealmRoster(legit, fork.newPlace, [survivorA, survivorB, captor]);
   stage("3 ROSTER — the fork's real Keyhive roster carries the survivors, not the captor",
     forkRoster.length === 2 && forkRoster.includes(survivorA) && forkRoster.includes(survivorB) && !forkRoster.includes(captor),
     `fork-roster=${forkRoster.length} hasCaptor=${forkRoster.includes(captor)}`);

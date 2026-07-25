@@ -8,7 +8,7 @@
  *
  * THE DIAL, NOT A WALL. The cost of crossing runs MARGINAL, never absolute: a fixed toll reads too cheap
  * for a funded attacker and too dear for an honest newcomer. So this carries a POLICY the operator sets,
- * never a legitimacy answer baked into the code — `cabalPlaceJoinGate` was fenced for exactly that reason,
+ * never a legitimacy answer baked into the code — `cabalRealmJoinGate` was fenced for exactly that reason,
  * and the fence holds: the answer arrives as a parameter, and the operator turns it.
  *
  *   invite-only — signal-2 REQUIRED. The DreamNet's opening setting: no invite, no crossing.
@@ -44,7 +44,7 @@ export type CabalJoinPolicy =
 export const DREAMNET_JOIN_POLICY: CabalJoinPolicy = { kind: "invite-only" };
 
 /**
- * A signed invitation into a cabal-place. The VOUCHER stakes their own standing on it — a referral's
+ * A signed invitation into a cabal-realm. The VOUCHER stakes their own standing on it — a referral's
  * misbehavior decays the voucher's invite-capacity (co-pay, slashing-by-revocation), so every voucher is a
  * sentinel over the one they let in. That is why the voucher's DID rides in the clear: an invite nobody can
  * attribute is an invite nobody can be held to.

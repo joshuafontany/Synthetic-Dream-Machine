@@ -5,16 +5,16 @@
  * itself (body + environment).
  *
  * A "me" composes as a single-principal
- * cabal-place — the SAME place machinery (cabal-place.ts), with the multi-principal
+ * cabal-realm — the SAME place machinery (cabal-realm.ts), with the multi-principal
  * complexity DEGENERATE to trivial because there is ONE ordering authority: you.
  *   · COMPOSITION (Circle = who is me) ⊥ the optional shared substrate (the place).
- *   · The cabal-place tie-break (BeeKEM blank-on-merge) orders CONCURRENT DIFFERENT-
+ *   · The cabal-realm tie-break (BeeKEM blank-on-merge) orders CONCURRENT DIFFERENT-
  *     principal ops — a me-place has no different principals, so it never engages.
  *   · The capture-clock detects a minority out-feeding a majority — you cannot capture
  *     your OWN me, so a me-place is capture-immune by construction.
  *   · The legitimacy gate (persistence≠legitimacy) dissolves — there is no contested
  *     authority to be legitimate ABOUT.
- * So the "me" reuses the cabal-place keel with the hard parts collapsed to nothing.
+ * So the "me" reuses the cabal-realm keel with the hard parts collapsed to nothing.
  * This module proves that degeneracy is load-bearing (test it with the infrastructure).
  *
  * "One Persona at a time takes the blame" — at any moment EXACTLY ONE PersonaGroup is
@@ -26,12 +26,12 @@
  * PersonaGroup — the slice-of-human, never the human). The me-Circle itself is the
  * human's private constellation: NO global self, disclosed edge-by-edge.
  *
- * Platform-blind: rides ./cabal-place only. NO node: imports.
+ * Platform-blind: rides ./cabal-realm only. NO node: imports.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle
  */
 
-import type { CabalPlace } from "./cabal-place.js";
+import type { CabalRealm } from "./cabal-realm.js";
 
 /**
  * A persona in the me-constellation — a handle-Circle (PersonaGroup) the human holds,
@@ -47,12 +47,12 @@ export interface ConstellationPersona {
 
 /**
  * The "me" — a single-principal place where the human's personas overlap. Wraps a
- * cabal-place (the shared substrate the personas overlap in) and adds the constellation
+ * cabal-realm (the shared substrate the personas overlap in) and adds the constellation
  * + the one-at-a-time accountability + the single ordering authority.
  */
 export interface MeCircle {
-  /** The shared substrate the personas overlap in — a cabal-place, single-principal. */
-  readonly mePlace: CabalPlace;
+  /** The shared substrate the personas overlap in — a cabal-realm, single-principal. */
+  readonly mePlace: CabalRealm;
   /** The ONE ordering authority — the human's me-key, hex. Every persona answers to it. */
   readonly principalHex: string;
   /** The overlapping personas (handle-Circles). The closure of the human's constellation. */
@@ -62,7 +62,7 @@ export interface MeCircle {
 }
 
 /** Found an empty me-Circle over a single-principal place. Born with no personas, none active. */
-export function foundMeCircle(mePlace: CabalPlace, principalHex: string): MeCircle {
+export function foundMeCircle(mePlace: CabalRealm, principalHex: string): MeCircle {
   return { mePlace, principalHex, constellation: [], activeHandleHex: null };
 }
 
@@ -118,7 +118,7 @@ export function withActivePersona(me: MeCircle, handleHex: string): MeCircle {
 
 /**
  * THE SINGLE-PRINCIPAL DEGENERACY — the load-bearing claim. A me-place needs NONE of
- * the cabal-place's multi-principal machinery, because every persona answers to the one
+ * the cabal-realm's multi-principal machinery, because every persona answers to the one
  * principal:
  *   · tieBreakEngaged   — false: no concurrent DIFFERENT-principal ops to order.
  *   · captureImmune     — true:  you cannot out-maintain (capture) your own me.

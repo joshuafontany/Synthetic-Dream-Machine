@@ -1,7 +1,7 @@
 # docker-compose.kahu.yml — the civic-custody CROWN (S1): a KAHU node running public infrastructure
 # HOLDS a citizen's sealed content, yet CANNOT read it. Custody ⊥ materialization; the node is an MLS
 # Delivery Service, never an Auth root. The whole civic vow — "runs the temple, cannot read the
-# confession" — made a container exit code (cabal-place#the-seal · civic_scale_capability_models).
+# confession" — made a container exit code (cabal-realm#the-seal · civic_scale_capability_models).
 #
 #   kahu-citizen  seals private content into its OWN bag, reads it back, hands the KAHU the ciphertext.
 #   kahu-node     holds + relays the bytes (full store access) and MUST FAIL to decrypt — never a member.

@@ -1,35 +1,35 @@
 /**
- * cabal-place-clock — the capture-CLOCK reads a place's maintenance provenance from its
+ * cabal-realm-clock — the capture-CLOCK reads a realm's maintenance provenance from its
  * lease slots: who feeds it, how deep each has rolled, and the SPREAD (a minority far
  * ahead = the visible capture signal). Verdict-free: it surfaces numbers, never a
  * "captured" judgement (the threshold is the operator's calibration seat).
  */
 import { describe, test, expect } from "vitest";
 import {
-  cabalPlaceMaintenanceProvenance,
-  cabalPlaceLeaseSlot,
-  type CabalPlace,
+  cabalRealmMaintenanceProvenance,
+  cabalRealmLeaseSlot,
+  type CabalRealm,
 } from "../src/index.js";
 
-const PLACE: CabalPlace = {
+const PLACE: CabalRealm = {
   placeDocIdHex:   "0xplace_under_watch",
   placeAgentIdHex: "0xplace_agent",
   substrateUrl:    "automerge:place-substrate",
   genesisUri:      "lar:///crossroads.cabal.gathers/watched",
 };
 
-/** Build a lease-slot map for a place from {writerId: epoch} pairs (the real slot URIs). */
-function slotsFor(place: CabalPlace, standing: Record<string, number>): Map<string, string> {
+/** Build a lease-slot map for a realm from {writerId: epoch} pairs (the real slot URIs). */
+function slotsFor(place: CabalRealm, standing: Record<string, number>): Map<string, string> {
   const m = new Map<string, string>();
   for (const [writerId, epoch] of Object.entries(standing)) {
-    m.set(cabalPlaceLeaseSlot(place.placeDocIdHex, writerId), String(epoch));
+    m.set(cabalRealmLeaseSlot(place.placeDocIdHex, writerId), String(epoch));
   }
   return m;
 }
 
-describe("cabalPlaceMaintenanceProvenance — the capture-clock", () => {
+describe("cabalRealmMaintenanceProvenance — the capture-clock", () => {
   test("an unfed place reads no maintainers, effective 0, spread 0", () => {
-    const p = cabalPlaceMaintenanceProvenance(PLACE, new Map());
+    const p = cabalRealmMaintenanceProvenance(PLACE, new Map());
     expect(p.maintainerCount).toBe(0);
     expect(p.effectiveEpoch).toBe(0);
     expect(p.trailingEpoch).toBe(0);
@@ -39,7 +39,7 @@ describe("cabalPlaceMaintenanceProvenance — the capture-clock", () => {
   });
 
   test("reports each maintainer's standing, sorted leaders-first", () => {
-    const p = cabalPlaceMaintenanceProvenance(PLACE, slotsFor(PLACE, { alice: 3, bob: 7, carol: 5 }));
+    const p = cabalRealmMaintenanceProvenance(PLACE, slotsFor(PLACE, { alice: 3, bob: 7, carol: 5 }));
     expect(p.maintainerCount).toBe(3);
     expect(p.maintainers.map((m) => m.writerId)).toEqual(["bob", "carol", "alice"]);
     expect(p.effectiveEpoch).toBe(7);
@@ -50,7 +50,7 @@ describe("cabalPlaceMaintenanceProvenance — the capture-clock", () => {
 
   test("THE CAPTURE SIGNAL is VISIBLE — a minority far ahead reads as a large spread + small leading set", () => {
     // One writer out-feeds an apathetic majority: it rolls deep while the rest stall.
-    const p = cabalPlaceMaintenanceProvenance(
+    const p = cabalRealmMaintenanceProvenance(
       PLACE,
       slotsFor(PLACE, { captor: 40, m1: 2, m2: 2, m3: 1, m4: 3 }),
     );
@@ -66,7 +66,7 @@ describe("cabalPlaceMaintenanceProvenance — the capture-clock", () => {
   });
 
   test("a co-maintained place reads a wide leading set + small spread (the healthy shape)", () => {
-    const p = cabalPlaceMaintenanceProvenance(PLACE, slotsFor(PLACE, { a: 9, b: 9, c: 9, d: 8 }));
+    const p = cabalRealmMaintenanceProvenance(PLACE, slotsFor(PLACE, { a: 9, b: 9, c: 9, d: 8 }));
     expect(p.effectiveEpoch).toBe(9);
     expect(p.spread).toBe(1);
     expect(p.leadingCount).toBe(3);   // three of four at the front — broadly held
@@ -74,12 +74,12 @@ describe("cabalPlaceMaintenanceProvenance — the capture-clock", () => {
 
   test("filters foreign slots (another place's lease) and skips malformed values", () => {
     const slots = slotsFor(PLACE, { alice: 4 });
-    // A different place's slot must NOT count.
-    const other: CabalPlace = { ...PLACE, placeDocIdHex: "0xsome_other_place" };
-    slots.set(cabalPlaceLeaseSlot(other.placeDocIdHex, "intruder"), "99");
-    // A malformed value in THIS place's namespace must be skipped, not crash.
-    slots.set(cabalPlaceLeaseSlot(PLACE.placeDocIdHex, "broken"), "not-a-number");
-    const p = cabalPlaceMaintenanceProvenance(PLACE, slots);
+    // A different realm's slot must NOT count.
+    const other: CabalRealm = { ...PLACE, placeDocIdHex: "0xsome_other_place" };
+    slots.set(cabalRealmLeaseSlot(other.placeDocIdHex, "intruder"), "99");
+    // A malformed value in THIS realm's namespace must be skipped, not crash.
+    slots.set(cabalRealmLeaseSlot(PLACE.placeDocIdHex, "broken"), "not-a-number");
+    const p = cabalRealmMaintenanceProvenance(PLACE, slots);
     expect(p.maintainerCount).toBe(1);
     expect(p.maintainers[0]).toEqual({ writerId: "alice", epoch: 4 });
     expect(p.effectiveEpoch).toBe(4);  // the foreign 99 did not leak in

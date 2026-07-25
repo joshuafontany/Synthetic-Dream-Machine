@@ -1,7 +1,7 @@
 /**
  * wax-stamp (CIV-5) — the guild's public-plane PROVENANCE keel: does a posted artifact trace to the
  * CURRENT charter, a PAST charter (authentic, just older), or a SPOOF? Provenance of the DATA, never
- * presence of a person — the public-plane DUAL of the private predicate-key (cabal-place#the-wax-stamp).
+ * presence of a person — the public-plane DUAL of the private predicate-key (cabal-realm#the-wax-stamp).
  * The membership handshake answers presence, live + peer-to-peer; the wax-stamp answers provenance,
  * public + on the data. Orthogonal.
  *

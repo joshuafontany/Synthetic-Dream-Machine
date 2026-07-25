@@ -6,12 +6,12 @@
 import { describe, test, expect } from "vitest";
 import {
   forkSurvivors, forkGenesisUri, repointToFork,
-  type CabalPlace, type PlaceFork,
+  type CabalRealm, type PlaceFork,
 } from "../src/index.js";
 
 const OLD_ROSTER = ["0xsurvivor_a", "0xsurvivor_b", "0xcaptor"];
 
-const FORK_PLACE: CabalPlace = {
+const FORK_PLACE: CabalRealm = {
   placeDocIdHex:   "0xfork_place",
   placeAgentIdHex: "0xfork_agent",
   substrateUrl:    "automerge:place-substrate-fork",

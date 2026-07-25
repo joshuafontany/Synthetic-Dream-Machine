@@ -1,16 +1,16 @@
 /**
- * cabal-place-charter — the PUBLIC face of a cabal-place: its CHARTER, the only
+ * cabal-realm-charter — the PUBLIC face of a cabal-realm: its CHARTER, the only
  * thing that ever crosses the read-face wire. A pure disclosure MEMBRANE (mirrors
  * mesh-palace's `snapshotPublicFlowMap`): drop-private, keep-public.
  *
- * Canon: lar:///ha.ka.ba/lares/api/pono/cabal-place#the-place (NAMED-not-ruled —
- * "the place's identity is content-addressed; the name grants no authority" — though
+ * Canon: lar:///ha.ka.ba/lares/api/pono/cabal-realm#the-realm (NAMED-not-ruled —
+ * "the realm's identity is content-addressed; the name grants no authority" — though
  * it does leak metadata; see THE VEIL INVARIANT below)
  * + lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture ("cabalGroup = shared
  * charter, read-scope"). The read/veil tier ALREADY EXISTS as the @oracle
  * read-face (content-addressed snapshot + signed pointer, fetch-CORS, anon-read);
  * THIS cut adds NO gate-loosening. It makes a CONTENT decision: it declares WHAT a
- * cabal-place publishes PUBLICLY (its charter — veil-public) vs holds MEMBERS-ONLY
+ * cabal-realm publishes PUBLICLY (its charter — veil-public) vs holds MEMBERS-ONLY
  * (its substrate + roster — private, behind the Keyhive CGKA membership),
  * and wires the charter to the existing read-face's served projection.
  *
@@ -21,7 +21,7 @@
  *                    lease slots + the epoch keys. NEVER crosses the membrane.
  *
  * THE VEIL INVARIANT (in-process CORRECTNESS, NOT a privacy guarantee):
- * `projectCabalPlaceCharter` reads ONLY the public fields of its input and
+ * `projectCabalRealmCharter` reads ONLY the public fields of its input and
  * constructs a literal naming ONLY charter fields. The members-only data (roster /
  * substrate content) rides the SAME input bag yet is structurally unreachable in the
  * output — the membrane never references it, so a roster or substrate content CANNOT
@@ -30,88 +30,88 @@
  * leaks version / activity / membership-change timing — Pfitzmann-Hansen) and at the
  * members-only STORE (its own sync + access patterns), never inside the projector.
  *
- * Platform-blind: rides ./cabal-place + ./oracle-substrate + automerge only. NO
+ * Platform-blind: rides ./cabal-realm + ./oracle-substrate + automerge only. NO
  * node: imports.
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
 import { from as automergeFrom } from "@automerge/automerge";
 import { exportOracleSnapshot, type OracleSnapshot } from "./oracle-substrate.js";
-import type { CabalPlace } from "./cabal-place.js";
+import type { CabalRealm } from "./cabal-realm.js";
 
 /**
- * A cabal-place's CHARTER — its PUBLIC face, the only projection that ever crosses
+ * A cabal-realm's CHARTER — its PUBLIC face, the only projection that ever crosses
  * the read-face wire. Every field here is DELIBERATELY PUBLIC; the type carries NO
  * substrate content and NO member identities (#the-veil-public-set).
  */
-export interface CabalPlaceCharter {
-  /** DELIBERATELY PUBLIC — the place's content-addressed NAME (its sentinel DocId,
-   *  hex). Canon #the-place: knowing it grants nothing (NAMED-not-ruled), so it is
-   *  safe to publish; it is the address a peer needs to find + verify the place. */
+export interface CabalRealmCharter {
+  /** DELIBERATELY PUBLIC — the realm's content-addressed NAME (its sentinel DocId,
+   *  hex). Canon #the-realm: knowing it grants nothing (NAMED-not-ruled), so it is
+   *  safe to publish; it is the address a peer needs to find + verify the realm. */
   readonly placeDocIdHex: string;
-  /** DELIBERATELY PUBLIC — the place's semantic lar: bearing (its label in l-space).
+  /** DELIBERATELY PUBLIC — the realm's semantic lar: bearing (its label in l-space).
    *  An address, never a credential (lar: NAMES, it does not fetch). */
   readonly genesisUri: string;
-  /** DELIBERATELY PUBLIC — a human-facing title, when the place chooses to advertise
-   *  one. Omitted when unset (a place may stay name-only). */
+  /** DELIBERATELY PUBLIC — a human-facing title, when the realm chooses to advertise
+   *  one. Omitted when unset (a realm may stay name-only). */
   readonly title?: string;
   /** DELIBERATELY PUBLIC — a short public description / purpose line, when set. */
   readonly description?: string;
-  /** DELIBERATELY PUBLIC — coarse founding time (ms epoch), when the place chooses to
+  /** DELIBERATELY PUBLIC — coarse founding time (ms epoch), when the realm chooses to
    *  advertise it. A single public timestamp; carries no per-member information. */
   readonly foundedAt?: number;
   /** DELIBERATELY PUBLIC, BUT GUARDED — a coarse, explicitly-published member count.
    *  DISCLOSURE HAZARD: a raw count can leak faction size and (worse) enable a
    *  membership-DELTA inference — watching the figure tick reveals a join/leave. So
-   *  the membrane NEVER derives this from the roster; it crosses ONLY when the place
+   *  the membrane NEVER derives this from the roster; it crosses ONLY when the realm
    *  EXPLICITLY publishes a coarse figure, and the conservative default OMITS it
    *  entirely. The roster itself stays members-only no matter what (#the-veil). */
   readonly memberCount?: number;
 }
 
 /**
- * The deliberately-published PUBLIC META a place advertises in its charter — the
+ * The deliberately-published PUBLIC META a realm advertises in its charter — the
  * optional descriptive fields beyond the structural name+bearing. Separate from the
- * place's private state by design: only what a place CHOOSES to surface lives here.
+ * realm's private state by design: only what a realm CHOOSES to surface lives here.
  */
-export interface CabalPlacePublicMeta {
+export interface CabalRealmPublicMeta {
   readonly title?:       string;
   readonly description?: string;
   readonly foundedAt?:   number;
-  /** A coarse, explicitly-published figure ONLY (see CabalPlaceCharter.memberCount).
+  /** A coarse, explicitly-published figure ONLY (see CabalRealmCharter.memberCount).
    *  Leave undefined — the conservative default — to publish no count at all. */
   readonly memberCount?: number;
 }
 
 /**
- * The membrane's INPUT — everything the publishing vessel holds about the place,
+ * The membrane's INPUT — everything the publishing vessel holds about the realm,
  * PUBLIC and MEMBERS-ONLY together. The membrane's job is to keep ONLY the public
  * subset. The members-only fields ride here precisely so the membrane can PROVE it
  * drops them (the roster/substrate sit in the bag; the output never names them).
  */
-export interface CabalPlacePublishState {
-  /** The place itself — its public name (placeDocIdHex) + bearing (genesisUri). */
-  readonly place: CabalPlace;
-  /** What the place CHOOSES to advertise (optional descriptive fields). */
-  readonly meta?: CabalPlacePublicMeta;
+export interface CabalRealmPublishState {
+  /** The realm itself — its public name (placeDocIdHex) + bearing (genesisUri). */
+  readonly place: CabalRealm;
+  /** What the realm CHOOSES to advertise (optional descriptive fields). */
+  readonly meta?: CabalRealmPublicMeta;
   /** MEMBERS-ONLY — the member roster (identity hexes). MUST NOT cross the membrane.
    *  Present here only so the veil can be witnessed to hold. */
   readonly roster?: readonly string[];
-  /** MEMBERS-ONLY — the place's substrate content (the shared doc the members
+  /** MEMBERS-ONLY — the realm's substrate content (the shared doc the members
    *  maintain). MUST NOT cross the membrane. Present here only as a veil witness. */
   readonly substrateContent?: unknown;
 }
 
 /**
  * THE VEIL-PUBLIC SET — the named, referenceable boundary (a pattern integrity, not
- * folklore). Canon's "shared charter, read-scope": a cabal-place's CHARTER is
+ * folklore). Canon's "shared charter, read-scope": a cabal-realm's CHARTER is
  * veil-public (served by the read-face, anon-readable via fetch-CORS); its SUBSTRATE
  * and ROSTER are members-only (private, behind the Keyhive CGKA membership).
  *
  * Reference this const to reason about the boundary; the membrane below ENFORCES it.
  */
-export const CABAL_PLACE_VEIL_PUBLIC_SET = {
+export const CABAL_REALM_VEIL_PUBLIC_SET = {
   /** Crosses the read-face wire — anon-readable. */
   veilPublic: [
     "placeDocIdHex",
@@ -131,7 +131,7 @@ export const CABAL_PLACE_VEIL_PUBLIC_SET = {
 } as const;
 
 /**
- * The PURE membrane — project a place's full publish-state to its CHARTER, the
+ * The PURE membrane — project a realm's full publish-state to its CHARTER, the
  * veil-public face. Mirrors `publicFlowMap`/`snapshotPublicFlowMap`: keep-public,
  * drop-private. It reads ONLY `state.place` (name + bearing) and `state.meta` (the
  * deliberately-published descriptive fields); it NEVER references `state.roster` or
@@ -140,9 +140,9 @@ export const CABAL_PLACE_VEIL_PUBLIC_SET = {
  * Optional fields stay omitted (never `undefined`-valued) so the charter loads
  * cleanly into Automerge and serializes deterministically.
  */
-export function projectCabalPlaceCharter(state: CabalPlacePublishState): CabalPlaceCharter {
+export function projectCabalRealmCharter(state: CabalRealmPublishState): CabalRealmCharter {
   const { place, meta } = state;          // NB: roster + substrateContent deliberately NOT destructured
-  const charter: { -readonly [K in keyof CabalPlaceCharter]: CabalPlaceCharter[K] } = {
+  const charter: { -readonly [K in keyof CabalRealmCharter]: CabalRealmCharter[K] } = {
     placeDocIdHex: place.placeDocIdHex,
     genesisUri:    place.genesisUri,
   };
@@ -159,7 +159,7 @@ export function projectCabalPlaceCharter(state: CabalPlacePublishState): CabalPl
  * RANDOM actor, which lands in the saved bytes — two loads of the SAME charter would
  * then hash differently. Pinning the actor makes the snapshot bytes a PURE function
  * of the charter content, so the cid is a true content address (stable until the
- * place's published meta changes — exactly what a content-addressed read-face wants).
+ * realm's published meta changes — exactly what a content-addressed read-face wants).
  */
 const CHARTER_ACTOR_ID = "00000000000000000000000000000000" as const;
 
@@ -169,27 +169,27 @@ const CHARTER_ACTOR_ID = "00000000000000000000000000000000" as const;
  * uses — load the plain charter into a fixed-actor Automerge doc, export by content
  * hash. Deterministic: the same charter yields the same cid.
  */
-export function cabalPlaceCharterSnapshot(charter: CabalPlaceCharter): Promise<OracleSnapshot> {
+export function cabalRealmCharterSnapshot(charter: CabalRealmCharter): Promise<OracleSnapshot> {
   // Automerge rejects `undefined` values + the readonly interface; the charter
-  // already omits unset keys (projectCabalPlaceCharter), so this clone is total.
+  // already omits unset keys (projectCabalRealmCharter), so this clone is total.
   return exportOracleSnapshot(automergeFrom({ ...charter }, CHARTER_ACTOR_ID));
 }
 
 /**
  * The read-face wiring helper — produce the `exportSnapshot` membrane variant that
- * serves ONLY a place's charter. Hand it straight to the node-side read-face:
+ * serves ONLY a realm's charter. Hand it straight to the node-side read-face:
  *
- *   mountOracleReadFace({ …, exportSnapshot: cabalPlaceCharterExporter(state) })
+ *   mountOracleReadFace({ …, exportSnapshot: cabalRealmCharterExporter(state) })
  *
  * The read-face calls it on each change with the live doc; the charter is STATIC
  * public meta, so the exporter ignores that arg and re-snapshots the charter (the
- * cid stays stable until the place's published meta changes; the read-face's
+ * cid stays stable until the realm's published meta changes; the read-face's
  * ea-breath keeps the pointer fresh). ONLY the charter ever crosses the wire — the
  * substrate + roster never enter this path.
  */
-export function cabalPlaceCharterExporter(
-  state: CabalPlacePublishState,
+export function cabalRealmCharterExporter(
+  state: CabalRealmPublishState,
 ): (doc?: unknown) => Promise<OracleSnapshot> {
-  const charter = projectCabalPlaceCharter(state);
-  return (_doc?: unknown) => cabalPlaceCharterSnapshot(charter);
+  const charter = projectCabalRealmCharter(state);
+  return (_doc?: unknown) => cabalRealmCharterSnapshot(charter);
 }

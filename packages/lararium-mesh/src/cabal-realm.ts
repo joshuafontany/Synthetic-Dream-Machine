@@ -1,18 +1,18 @@
 /**
- * cabal-place — the platform-blind mesh FLOOR for a CabalGroup modeled as a
- * virtual PLACE: named-not-ruled (content-addressed), LIVED by its own
+ * cabal-realm — the platform-blind mesh FLOOR for a CabalGroup modeled as a
+ * virtual REALM: named-not-ruled (content-addressed), LIVED by its own
  * epoch-lease, DISSOLVED by cooling to anu when the members stop feeding it.
  *
- * Canon: lar:///ha.ka.ba/lares/api/pono/cabal-place — "a hearth beside, not a
+ * Canon: lar:///ha.ka.ba/lares/api/pono/cabal-realm — "a hearth beside, not a
  * category above." A group is not a container you are IN (a noun, a
  * membership-list needing a root admitter) but a thing you continuously DO (a
- * verb): members do not BELONG to the cabal, they MAINTAIN it. The place is
+ * verb): members do not BELONG to the cabal, they MAINTAIN it. The realm is
  * defined by the relationships and dissolves if they break.
  *
  * THIS CUT (Epic 2, cut 1) — PURE COMPOSITION of the EXISTING primitives only:
- *   · epoch-lease.ts      — the place's OWN liveness lease (coordinator-free
- *                           max-register), keyed by the place's sentinel DocId.
- *   · bag-residency.ts    — the place's substrate doc cools to anu when unfed;
+ *   · epoch-lease.ts      — the realm's OWN liveness lease (coordinator-free
+ *                           max-register), keyed by the realm's sentinel DocId.
+ *   · bag-residency.ts    — the realm's substrate doc cools to anu when unfed;
  *                           feeding it (touch / hoʻowela) keeps it alive.
  * It builds the seam and NOTHING more. It does NOT call Keyhive, does NOT run
  * the found/join/evict CGKA ceremony, and does NOT bake any legitimacy answer.
@@ -30,57 +30,57 @@
  *
  * THE UNSWEPT CORNER (canon #the-unswept-corner) — persistence ≠ legitimacy.
  * Soft-state rewards whoever keeps feeding, NOT who legitimately holds the
- * place; a small hostile faction can out-maintain an apathetic majority. The
+ * realm; a small hostile faction can out-maintain an apathetic majority. The
  * cure (a quorum-of-vouchers / fork-and-leave) stays the operator's OPEN seam.
  * The join seam below is INERT by design — it bakes no legitimacy signal.
  *
  * Platform-blind: rides ./epoch-lease + ./bag-residency only. NO node: imports.
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
 import { leaseEpochSlotUri } from "./epoch-lease.js";
 import type { BagResidencyManager, ResidencyTemperature } from "./bag-residency.js";
 
 /**
- * A cabal-place — a virtual PLACE three primitives co-define:
- *   · a Keyhive SENTINEL identity (the place's content-addressed name — a
- *     docId/agentId pair; knowing it grants no authority — #the-place NAMED-not-ruled
+ * A cabal-realm — a virtual REALM three primitives co-define:
+ *   · a Keyhive SENTINEL identity (the realm's content-addressed name — a
+ *     docId/agentId pair; knowing it grants no authority — #the-realm NAMED-not-ruled
  *     — though it does leak metadata via the public pointer).
  *     THIS CUT only TYPES this half — it does not mint or call Keyhive.
  *   · an Automerge SUBSTRATE doc (the shared content that the members maintain
  *     and that COOLS to anu when unfed — the residency-tracked half).
- *   · a semantic lar: LABEL (genesisUri — the place's bearing in l-space).
+ *   · a semantic lar: LABEL (genesisUri — the realm's bearing in l-space).
  */
-export interface CabalPlace {
-  /** The place's Keyhive sentinel DocId, hex — the content-addressed NAME, used
-   *  as the lease resourceId. Knowing it grants no authority (#the-place). */
+export interface CabalRealm {
+  /** The realm's Keyhive sentinel DocId, hex — the content-addressed NAME, used
+   *  as the lease resourceId. Knowing it grants no authority (#the-realm). */
   readonly placeDocIdHex: string;
-  /** The place's Keyhive sentinel AgentId, hex — the membership-graph anchor a
+  /** The realm's Keyhive sentinel AgentId, hex — the membership-graph anchor a
    *  later cut (cut 2, gated) ties the CGKA ceremony to. Inert here. */
   readonly placeAgentIdHex: string;
   /** The Automerge substrate doc URL — the shared content that cools to anu when
    *  the members stop feeding it (the LIVED / DISSOLVED half). */
   readonly substrateUrl: string;
-  /** The place's semantic lar: bearing — its label in l-space (#the-place). */
+  /** The realm's semantic lar: bearing — its label in l-space (#the-realm). */
   readonly genesisUri: string;
 }
 
 /**
- * The place's LIVENESS lease slot a single writer owns — = the epoch-lease slot
- * keyed by the place's sentinel DocId as the resourceId. Coordinator-free
- * max-register (effectiveLeaseEpoch = max over slots); the place's own
+ * The realm's LIVENESS lease slot a single writer owns — = the epoch-lease slot
+ * keyed by the realm's sentinel DocId as the resourceId. Coordinator-free
+ * max-register (effectiveLeaseEpoch = max over slots); the realm's own
  * collective-maintenance heartbeat, NOT an authority epoch (#the-tie-break).
  */
-export function cabalPlaceLeaseSlot(placeDocIdHex: string, writerId: string): string {
+export function cabalRealmLeaseSlot(placeDocIdHex: string, writerId: string): string {
   return leaseEpochSlotUri(placeDocIdHex, writerId);
 }
 
 /**
- * The place's liveness, read FROM the residency temperature of its substrate:
+ * The realm's liveness, read FROM the residency temperature of its substrate:
  *   · wela ("hot")  → "alive"      — fed, humming.
  *   · anu  ("cold") → "dissolved"  — cooled, unfed; re-warmable, never deleted
- *                                    (#the-place DISSOLVED-by-cooling).
+ *                                    (#the-realm DISSOLVED-by-cooling).
  *
  * "cooling" rides the type as the future intermediate, but the residency engine
  * exposes only the two settled states through its public surface (the `warm`
@@ -89,25 +89,25 @@ export function cabalPlaceLeaseSlot(placeDocIdHex: string, writerId: string): st
  * derivable states only; a higher layer that can observe an in-flight cool may
  * report "cooling" itself. Keeping it a pure total function of the public tier.
  */
-export type CabalPlaceLiveness = "alive" | "cooling" | "dissolved";
+export type CabalRealmLiveness = "alive" | "cooling" | "dissolved";
 
-export function deriveCabalPlaceLiveness(temp: ResidencyTemperature): CabalPlaceLiveness {
+export function deriveCabalRealmLiveness(temp: ResidencyTemperature): CabalRealmLiveness {
   return temp === "wela" ? "alive" : "dissolved";
 }
 
 /**
- * Feed the place — member maintenance warms its substrate (touch / hoʻowela),
+ * Feed the realm — member maintenance warms its substrate (touch / hoʻowela),
  * keeping it alive and resetting its cooling clock. This is the "commoning" that
- * defines the place: drop it and the place cools to anu and dissolves.
+ * defines the realm: drop it and the realm cools to anu and dissolves.
  *
  * WHAT member-activity COUNTS as a feed (a post, a sync, a presence pulse, and
  * how it composes with P2 "benefit ∝ maintenance") stays a higher-layer wiring
  * choice (P2/P4, canon #governance) — NOT decided here. This seam only carries
  * the warming through to the residency engine.
  */
-export function feedCabalPlace(
+export function feedCabalRealm(
   mgr: BagResidencyManager,
-  place: CabalPlace,
+  place: CabalRealm,
 ): Promise<void> {
   return mgr.touch(place.substrateUrl);
 }
@@ -123,6 +123,6 @@ export function feedCabalPlace(
  * — a baked-in answer would close the unswept corner silently and wrong. The
  * actual Keyhive admission ceremony (found/join/evict CGKA) is cut 2, gated.
  */
-export function cabalPlaceJoinGate(joinerIdentityHex: string): string {
+export function cabalRealmJoinGate(joinerIdentityHex: string): string {
   return joinerIdentityHex;
 }

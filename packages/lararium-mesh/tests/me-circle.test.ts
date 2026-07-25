@@ -1,17 +1,17 @@
 /**
  * me-circle — the "me" as a single-principal place where Personas overlap, one takes
  * the blame at a time, and the multi-principal complexity degenerates to trivial.
- * Tests the operator's ruling is load-bearing on the model floor (the real cabal-place
+ * Tests the operator's ruling is load-bearing on the model floor (the real cabal-realm
  * machinery is exercised in the keyhive lifecycle probe).
  */
 import { describe, test, expect } from "vitest";
 import {
   foundMeCircle, contractPersona, releasePersona, activePersona, withActivePersona,
   meCircleDegeneracy,
-  type CabalPlace, type MeCircle,
+  type CabalRealm, type MeCircle,
 } from "../src/index.js";
 
-const ME_PLACE: CabalPlace = {
+const ME_PLACE: CabalRealm = {
   placeDocIdHex:   "0xme_place",
   placeAgentIdHex: "0xme_agent",
   substrateUrl:    "automerge:me-substrate",

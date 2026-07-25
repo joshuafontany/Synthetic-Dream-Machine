@@ -7,7 +7,7 @@
  * Pairs with WSMembershipChannel behind the same seam: file/POST rides the shared-volume,
  * no-relay-service deployed path; the live-WS relay rides the relay-served path.
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
 import { mkdirSync, writeFileSync, readdirSync, readFileSync } from "node:fs";

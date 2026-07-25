@@ -9,7 +9,7 @@
  *
  * Env: LAR_CARRIAGE_RELAY_PORT (default 8091) · LAR_CARRIAGE_GATE_SEED (64-hex; a fresh random seed mints if unset).
  * Run: LAR_CARRIAGE_RELAY_PORT=8091 pnpm exec tsx packages/lararium-node/probes/carriage-relay-node.ts
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place#carriage
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm#carriage
  */
 
 import { randomBytes } from "node:crypto";

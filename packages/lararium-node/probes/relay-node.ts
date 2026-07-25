@@ -5,7 +5,7 @@
  *
  * Env: LAR_RELAY_PORT (default 8090).
  * Run: LAR_RELAY_PORT=8090 pnpm exec tsx packages/lararium-node/probes/relay-node.ts
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
 import { startMembershipRelay } from "../src/ws-membership-channel.js";

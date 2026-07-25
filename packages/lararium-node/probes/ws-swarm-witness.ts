@@ -12,10 +12,10 @@
  *
  * Run: pnpm exec tsx packages/lararium-node/probes/ws-swarm-witness.ts
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-place
+ * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
-import { KeyhiveProvider, InMemoryEventStore, foundCabalPlace, joinCabalPlace, cabalPlaceRoster } from "@lararium/keyhive";
+import { KeyhiveProvider, InMemoryEventStore, foundCabalRealm, joinCabalRealm, cabalRealmRoster } from "@lararium/keyhive";
 import { MEMBERSHIP_BROADCAST } from "@lararium/mesh";
 import { startMembershipRelay, WSMembershipChannel } from "../src/ws-membership-channel.js";
 
@@ -47,7 +47,7 @@ async function main(): Promise<void> {
   await vesselC.init({ seed: new Uint8Array(32).fill(0xc0), eventStore: new InMemoryEventStore() });
 
   // ── STAGE 1 — FOUND the shared place (local Keyhive; no channel needed) ─────────
-  const place = await foundCabalPlace(founder, "lar:///crossroads.cabal.gathers/ws-swarm", "automerge:ws-swarm-substrate");
+  const place = await foundCabalRealm(founder, "lar:///crossroads.cabal.gathers/ws-swarm", "automerge:ws-swarm-substrate");
   stage("1 FOUND — shared place founded, three WS clients live on the relay", place.placeDocIdHex.length > 0,
     `relay=:${String(relay.port)} place=${place.placeDocIdHex.slice(0, 10)}…`);
 
@@ -72,10 +72,10 @@ async function main(): Promise<void> {
   const admitted: string[] = [];
   for (const c of cards) {
     const { id } = await founder.receiveContactCard(new Uint8Array(Buffer.from(c.payload as string, "base64")));
-    await joinCabalPlace(founder, place, id);
+    await joinCabalRealm(founder, place, id);
     admitted.push(id);
   }
-  const roster = await cabalPlaceRoster(founder, place, admitted);
+  const roster = await cabalRealmRoster(founder, place, admitted);
   stage("4 ADMIT+ROSTER — the ceremony crossed LIVE WS; real Keyhive roster holds both PersonaGroups",
     roster.length === 2, `roster=${roster.length}`);
 
