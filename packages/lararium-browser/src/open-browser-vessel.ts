@@ -27,7 +27,7 @@ import {
   BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, recipeHostFacets, type WikiActivationCap,
   meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
   materializeGenesisIsland,
-  whoFaceCap, signHandleCard, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
+  whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
   personaKelBoardDocUrl, personaKelChainForPrefix,
   type CapModule,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
@@ -633,24 +633,22 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     ];
   })() : [];
 
-  // ── The WHO plane as a LEAF — announce this vessel's Handle on the per-Nexus @crossroads board ──
+  // ── The WHO plane as a LEAF — RESOLVE the per-Nexus @crossroads board; announce NOTHING ──
   // Networked only: the board needs the relay to sync, and the confederation key (relayGatePubKey) scopes the
-  // causal island so a human's two vessels resolve the SAME board. The vessel mints its self-certifying
-  // handle-card (nym = its own key, glamour = display name) and composes whoFaceCap: resolve the island's WHO
-  // board through the deterministic @crossroads address, self-announce, layer it writable so the relay syncs.
-  // The identity sibling of the carriage leaf above (WHO ⊥ WHERE, the two-key atom). Absent a relay/gate → [].
-  // Gated on `admittedToNexus`: a WITHHELD boot announces NO Handle-card on @crossroads (no deliberate publish
-  // rides the withhold path), so it leaves NO federated trace — the ONLY thing that ever federates stays a
-  // glamour the human consciously posts, never a boot side-effect.
+  // causal island so a human's two vessels resolve the SAME board. Boot composes whoFaceCap with NO card: it
+  // resolves the island's WHO board through the deterministic @crossroads address and layers it writable so
+  // the relay syncs, giving this vessel RECOGNITION (it reads every peer's card) while publishing none of its
+  // own. The identity sibling of the carriage leaf above (WHO ⊥ WHERE, the two-key atom). No relay/gate → [].
+  //
+  // NO BOOT-TIME FACE, by construction rather than by gate. Canon never collapses binding-the-vessels into
+  // announcing-the-identity, so publishing rides a deliberate holder act through the component's `announce` —
+  // the ONLY thing that ever federates stays a glamour the human consciously posts, never a boot side-effect.
+  // (A boot-minted card also had to name SOME key, and the only key at hand is this vessel's own — publishing
+  // it would put the substrate key on the social board, the one co-surface the two-key atom forbids.)
   const whoExtraCaps: CapModule[] = (relayUrl && relayGatePubKey && admittedToNexus) ? await (async () => {
     const nexusPubkey = relayGatePubKey;
     const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "@crossroads");
-    const card = await signHandleCard(
-      { nym: vesselVerifyingKey, glamour: displayName ?? "Anon", version: 1, prev: null,
-        expiry: Date.now() + 30 * 24 * 3_600_000, standing: null },
-      ed25519SignerFromSeed(operatorSeed),
-    );
-    return [whoFaceCap({ repo, crossroadsHandle, nexusPubkey, card, residency })];
+    return [whoFaceCap({ repo, crossroadsHandle, nexusPubkey, residency })];
   })() : [];
 
   const result = await composeBrowser<BrowserVesselIslandPool>({

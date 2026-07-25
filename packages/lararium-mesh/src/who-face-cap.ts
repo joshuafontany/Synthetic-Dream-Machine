@@ -32,10 +32,15 @@ export const WHO_FACE_CAP = "who-face" as const;
 /** The substrate cap-id this cap layers into — a WIRE-STRING matched by VALUE (mesh can't import CORE_CAP). */
 const SUBSTRATE_CAP_ID = "substrate";
 
-/** The WHO board handle + an ingest that pulls its current cards into a recogniser's book. */
+/** The WHO board handle, an ingest that pulls its current cards into a recogniser's book, and the
+ *  DELIBERATE announce. Resolving the board (recognition) and announcing a face (disclosure) stand as
+ *  TWO acts — canon never collapses binding-the-vessels into announcing-the-identity, so a vessel may
+ *  compose this cap, read every peer's card, and publish nothing. */
 export interface WhoFaceComponent {
   readonly handle: DocHandle<LarDoc>;
   readonly ingest: (book: HandleBook, now?: number) => Promise<Map<string, CardVerdict>>;
+  /** Publish a card onto the board — a deliberate act the holder chooses, NEVER a boot side-effect. */
+  readonly announce: (card: HandleCard) => void;
 }
 
 /**
@@ -47,7 +52,10 @@ export function whoFaceCap(deps: {
   repo: Repo;
   crossroadsHandle: DocHandle<LarDoc>;
   nexusPubkey: string;
-  card: HandleCard;
+  /** OPTIONAL. Present ⇒ this card announces at compose-time (the legacy self-announce). ABSENT ⇒ the
+   *  vessel resolves and READS the board while publishing nothing, and a holder announces later through
+   *  the component's `announce`. Absent reads as the pono default: disclosure rides a deliberate act. */
+  card?: HandleCard;
   residency?: BagResidencyManager;
 }): CapModule {
   return {
@@ -63,7 +71,7 @@ export function whoFaceCap(deps: {
           : materializeSharedLarDoc(deps.repo, whoBoardDocUrl(deps.nexusPubkey), "who-board")),
         "who-face-self-announce",
       );
-      announceToWhoFace(board, deps.card);   // the vessel announces its own Handle onto the board
+      if (deps.card) announceToWhoFace(board, deps.card);   // only when a caller deliberately supplied one
       const bagId = nexusHandlesUri(deps.nexusPubkey);
       assembly.composite.addLayer({
         bagId, store: new AutomergeDocStore(board, bagId), writable: true, defaultWritable: true,
@@ -72,6 +80,7 @@ export function whoFaceCap(deps: {
       return {
         handle: board,
         ingest: (book: HandleBook, now?: number) => ingestAnnounceDoc(book, board.doc()!, now),
+        announce: (card: HandleCard) => announceToWhoFace(board, card),
       };
     },
   };

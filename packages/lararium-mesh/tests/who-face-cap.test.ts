@@ -34,6 +34,37 @@ function substrateStub(composite: CompositeStore): CapModule {
 }
 
 describe("whoFaceCap — the isomorphic WHO-plane vessel cap", () => {
+  // Binding-the-vessels ⊥ announcing-the-identity: composing the cap must never publish a face. A vessel
+  // resolves the board to RECOGNISE peers; disclosure rides a deliberate holder act, never a boot side-effect.
+  test("composed WITHOUT a card: recognition works, the board carries NO face of ours", { timeout: 15_000 }, async () => {
+    const repo = new Repo({ sharePolicy: async () => true });
+    const crossroads = repo.create<LarDoc>(emptyLarDoc());
+    const composite = new CompositeStore();
+
+    const v = await composeVessel([
+      substrateStub(composite),
+      whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS }),   // no card — the pono default
+    ]);
+    const who = v.get<WhoFaceComponent>(WHO_FACE_CAP)!;
+
+    // the board resolved and layered (recognition intact) …
+    expect(tiddlerText(crossroads.doc()?.tiddlers?.[nexusHandlesUri(NEXUS)])).toBe(who.handle.url);
+    expect(composite.layerIds).toContain(nexusHandlesUri(NEXUS));
+
+    // … and NOTHING of ours published: an ingest finds no face at all
+    const book = new HandleBook();
+    await who.ingest(book);
+    expect(book.get(await pubOf(FASTJACK_SEED))).toBeUndefined();
+
+    // the deliberate act — and ONLY then does a face land
+    who.announce(await publish(FASTJACK_SEED, "FastJack"));
+    const after = new HandleBook();
+    await who.ingest(after);
+    expect(after.get(await pubOf(FASTJACK_SEED))?.card.glamour).toBe("FastJack");
+
+    await v.dispose();
+  });
+
   test("composing it resolves the board, self-announces the card, and layers the board writable", { timeout: 15_000 }, async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const crossroads = repo.create<LarDoc>(emptyLarDoc());
