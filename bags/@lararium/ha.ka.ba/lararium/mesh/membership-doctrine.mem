@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "the membership doctrine — the privacy invariant of the whole public-facing mesh: the Nexus tracks operator CONTRACTS, never user IDENTITIES. An operator contract carries pubkey + accepts-carriage + charter-epoch and NOTHING more; users SOFT-ATTACH and leave no roster trace; invites are sealed BURNABLE capabilities spent-on-boot that leave no record. We choose to not have the user table. Operator-ruled 2026-07-21."
 status    = "proposed"
-tags      = ["mesh/carry-contract", "mesh/identity-classes", "api/pono/persona-policy", "api/pono/cabal-place", "api/pono/causal-islands"]
+tags      = ["mesh/carry-contract", "mesh/identity-classes", "api/pono/persona-policy", "api/pono/cabal-realm", "api/pono/causal-islands"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/membership-doctrine"
 written   = "2026-07-21"
@@ -93,9 +93,9 @@ a record the Nexus KEEPS.'' The general invite manufactures ''no social graph.''
 
 ''The reputation-cost braid'' — the idea that an invite rides on the inviter's reputation as a cost
 (Sybil-resistance, accountability) — reserves to the ''Cabal tier'', never the general invite: a
-cabal is a bilateral verb two operators actively DO (#cabal-place), and a reputation-priced admission
+cabal is a bilateral verb two operators actively DO (#cabal-realm), and a reputation-priced admission
 lives THERE, where the graph is already mutual + consented, not on the traceless general invite.
-(Confirm scope against #cabal-place / admission-price — a 2a scout settles it.)
+(Confirm scope against #cabal-realm / admission-price — a 2a scout settles it.)
 
 <<~/ahu >>
 
@@ -134,7 +134,7 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-place >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
 <<~/ahu >>

@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "the carry-contract: revocation reframed as an IMMUNE SYSTEM (no firewall exists in no-global-now). Kapae = the propagating antigen riding the always-carried public/infra planes; a Kapae'd authn/z gets MU. Three carry tiers — MANDATORY (operator↔kahu: @oracle+@crossroads+Kapae, always) · BILATERAL (operator↔operator: cabal/shared) · PRIVATE (home). Carry ⊥ read ⊥ contract; carry-generous is safe because the BeeKEM read-floor makes every carry-mistake unreadable. Operator-ruled 2026-07-20; substrate built, the contract design-intent."
 status    = "proposed"
-tags      = ["mesh/dreamnet-architecture", "mesh/oracle-governance", "mesh/siege-resilience", "api/pono/cabal-place", "api/pono/causal-islands"]
+tags      = ["mesh/dreamnet-architecture", "mesh/oracle-governance", "mesh/siege-resilience", "api/pono/cabal-realm", "api/pono/causal-islands"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/carry-contract"
 written   = "2026-07-20"
@@ -140,7 +140,7 @@ DaemonAuthGate); it enforces ''carry-per-the-contract, deny a Kapae'd presenter 
 The cabal ''presence-handshake'' completes the immune system, never a fallback. A cabal
 relationship requires both parties to //actively affirm// the shared relationship (artifacts
 wax-stamped; a live handshake, not a static cap). Stop affirming → you are out, //between us//,
-//now// — bilateral revocation, immediate, at the two-party scope (#cabal-place: a cabal is a
+//now// — bilateral revocation, immediate, at the two-party scope (#cabal-realm: a cabal is a
 verb you DO, dissolving to `anu` when unfed). ''Two scopes, two mechanisms, one immune response'':
 Kapae revokes mesh-wide and fast; the handshake revokes bilaterally and instantly.
 
@@ -172,7 +172,7 @@ cannot.
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-place >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/federation >>
