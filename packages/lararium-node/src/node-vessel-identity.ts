@@ -7,17 +7,23 @@
  *   - did:key derivation happens in the TW5 VM (cold-boot-ceremony module)
  *   - displayName derives from `git config user.name` — local truth, no network call
  *
- * Identity capabilities (#has-stack ontology — a nameless entity carries a stack of
- * capabilities, never a numbered plane): this keypair is the VESSEL's own signing
- * capability, the user×vessel bond. The OPERATOR identity is a DISTINCT capability —
- * the PersonaGroup root that delegates membership to a user's vessels. TODAY the two
- * CONFLATE: one key is COPIED across a user's vessels (Model A) and the IdentityTiddler
- * brands it `kind="operator"`. Model A is a TEMPORARY stopgap — the copy-the-key
- * antipattern; the target mints a DISTINCT key per vessel, delegated into the
- * PersonaGroup by a signed edge (the delegation IS the relationship — the vessel's stack
- * #has the edge). The behavioral vessel/operator-root split is held for the genesis
- * refactor. See lar:///ha.ka.ba/lares/docs/lares/federation
- * (Model A/B) and the #has-stack ontology (api/pono/has-stack-ontology).
+ * The TRUE NAME MODEL — three parts that bind without merging (#has-stack ontology: a
+ * nameless entity carries a stack of capabilities, never a numbered plane):
+ *   · the VESSEL key — THIS file's keypair — belongs to the PLACE. Founding mints it
+ *     per-install off the local CSPRNG; it NEVER travels to another vessel. It names a
+ *     *somewhere*, and it signs only AS ITSELF.
+ *   · the PERSONA ROOT — the PersonaGroup root, custodied further down this file — belongs
+ *     to the HUMAN. A DISTINCT key in its own slot: never derived from the vessel seed,
+ *     never the same bytes, never copied outward.
+ *   · the DELEGATION EDGE binds the two without collapsing them. The persona root signs
+ *     "Operator O delegates to Device D AT PLACE P" (mesh/device-delegation, v2), and
+ *     `hearthTrueName` carries P — the hearth's True Name. The edge IS the relationship;
+ *     the vessel's stack #has it.
+ *
+ * Why the split carries weight: one key copied across a user's vessels presents the SAME
+ * collector to every verifier, so a single bit links every self. Holding vessel apart from
+ * persona is what makes the veil → PersonaGroup → Handle architecture implementable at all.
+ * See lar:///ha.ka.ba/lares/docs/lares/federation and api/pono/has-stack-ontology.
  *
  * Storage law — identity lives OUTSIDE the wipe zone:
  *   the keypair + card persist to `<state>/identity` (`larIdentityDir`), in the XDG state

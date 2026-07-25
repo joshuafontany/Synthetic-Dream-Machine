@@ -22,14 +22,18 @@
  * At t=0, founding operator's PersonaGroup is the only MeshCabal member.
  * invite-send adds co-operators. The MeshCabal grows; this path never re-runs.
  *
- * Identity planes (5-scale): the seed mints the Vessel Individual = Plane 0
- * (device-vessel, the user×vessel bond); the PersonaGroup = Plane 1 (the OPERATOR,
- * a group of vessels). TODAY one seed is SHARED across a user's vessels (Model A —
- * a temporary stopgap, the copy-the-key antipattern); the target mints a DISTINCT
- * per-vessel seed delegated into the PersonaGroup by a signed edge. runDeviceAdmitAccept
- * sketches that path (Model B) but waits on encrypted-content transport (Beelay,
- * Rust-only) — to be stood in temporarily behind a swap surface. See
- * lar:///ha.ka.ba/lares/docs/lares/federation.
+ * The TRUE NAME MODEL the ceremony enacts — two DISTINCT keys, one signed edge:
+ *   · `operatorSeed` carries the VESSEL's own key — the PLACE's key, minted per-install,
+ *     never copied to another vessel. It mints the Vessel Individual and inits Keyhive.
+ *   · `signerSeed` carries the PERSONA ROOT — the HUMAN's key, a separate slot the founder
+ *     custodies. It ONLY signs; it never inits Keyhive.
+ *   · `buildDeviceDelegation` binds them without merging them: the persona root signs
+ *     "Operator O delegates to Device D AT PLACE P", where `hearthTrueName` names P — the
+ *     hearth's True Name. Peers pin the root and verify that edge offline.
+ * `runDeviceAdmitEdge` carries the same shape outward: the founder's root signs a joinee's
+ * OWN vessel key into the PersonaGroup, so no seed ever crosses the wire. A single key
+ * copied across vessels would present one collector to every verifier and link every self —
+ * the split is what the veil rests on. See lar:///ha.ka.ba/lares/docs/lares/federation.
  *
  * Meme: lar:///ha.ka.ba/lararium/keyhive/ceremony-core
  */

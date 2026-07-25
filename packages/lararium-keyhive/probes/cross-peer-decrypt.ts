@@ -1,8 +1,8 @@
 /**
  * CROSS-PEER-DECRYPT PROBE — the decisive test the crossing rests on.
  *
- * The question the crossing rests on: can a DISTINCT-IDENTITY joinee (Model B — its own per-device key, NOT a
- * sibling of the founder's identity) decrypt a group's content having received ONLY PUBLIC bytes — the
+ * The question the crossing rests on: can a DISTINCT-IDENTITY joinee (the True Name Model — its OWN per-vessel
+ * key, NOT a copy of the founder's) decrypt a group's content having received ONLY PUBLIC bytes — the
  * delegation, the CGKA ops, the Encrypted blob — with NO secret in transit (no prekey-secret install, no
  * archive, no `*Keyed` application secret)?
  *
@@ -60,7 +60,7 @@ async function publicEventsFor(kh: KH.Keyhive, agent: KH.Agent): Promise<unknown
 
 async function main(): Promise<void> {
   const founder = await makePeer("founder", 1);
-  const device  = await makePeer("device", 100);   // DISTINCT identity — Model B
+  const device  = await makePeer("device", 100);   // DISTINCT identity — its own per-vessel key
 
   // Introduce: founder learns the device, device learns the founder.
   const founderCard = await founder.contactCard();
@@ -113,7 +113,7 @@ async function main(): Promise<void> {
     const ok = text === new TextDecoder().decode(PLAINTEXT);
     console.log(`[probe] ★★ device.tryDecrypt ${ok ? "SUCCEEDED" : "returned WRONG bytes"}: "${text.slice(0, 40)}…"`);
     if (ok) {
-      console.log(`[probe] VERDICT: SEALED-BOX REDUNDANT for Model B — the joinee decrypted from PUBLIC bytes + its own prekey secret alone.`);
+      console.log(`[probe] VERDICT: SEALED-BOX REDUNDANT for a distinct-key joinee — it decrypted from PUBLIC bytes + its own prekey secret alone.`);
       process.exit(0);
     }
     console.log(`[probe] VERDICT: decrypt returned wrong plaintext — investigate content_ref / doc association.`);
