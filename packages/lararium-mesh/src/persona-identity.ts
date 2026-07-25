@@ -8,9 +8,9 @@
  *     · vessel-key       — the device/substrate identity. DEVICE-MINTED on its
  *                          own device, the private half never leaving
  *                          (vessel-identity-core). It is NEVER derived from the
- *                          persona seed — deriving it would be the Model-A
- *                          copy-the-key antipattern that dissolves per-device
- *                          revocation (Veilid/SSB).
+ *                          persona seed — deriving it would collapse the two
+ *                          into the copy-the-key antipattern that dissolves
+ *                          per-device revocation (Veilid/SSB).
  *     · veiled-user-key  — the sovereign pseudonym presented through the veil.
  *                          The persona side: it AND the whole persona
  *                          constellation derive from ONE seed via ed25519
@@ -186,7 +186,7 @@ export interface TwoKeyAtom {
 
 /**
  * assembleTwoKeyAtom — pair the DEVICE-MINTED vessel verifyingKey (passed in,
- * NEVER derived from the seed — the Model-A guard) with the derived veiled-user
+ * NEVER derived from the seed — the no-copied-key guard) with the derived veiled-user
  * verifyingKey at the named persona path.
  *
  * The vessel key passes straight through unchanged; only the veiled-user key

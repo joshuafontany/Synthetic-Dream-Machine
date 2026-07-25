@@ -8,8 +8,8 @@
  *
  * The load-bearing claims:
  *   · a multitude of two DISTINCT roots persists + rosters over IDB, and wearing gates on custody-by-type;
- *   · the founding mints a DISTINCT persona-root as the edge SIGNER (signerDid != deviceDid) — the Model-A
- *     self-sign is gone, replaced by the two-key atom (device inits keyhive; persona-root signs the edge);
+ *   · the founding mints a DISTINCT persona-root as the edge SIGNER (signerDid != deviceDid) — the
+ *     self-sign floor is gone, replaced by the two-key atom (device inits keyhive; persona-root signs the edge);
  *   · a fresh browser founds ONE persona (not the self-signed floor), and the worn root selects which
  *     binding feeds the worker;
  *   · a joinee (no root) reads its persona through the anchor, never a root it lacks.
@@ -98,7 +98,7 @@ describe("the browser persona multitude over IndexedDB", () => {
   });
 });
 
-describe("the Model-A fix — the founding mints a DISTINCT persona-root as the edge signer", () => {
+describe("the True Name Model — the founding mints a DISTINCT persona-root as the edge signer", () => {
   let repo: Repo | null = null;
   afterEach(async () => { await repo?.shutdown(); repo = null; });
 

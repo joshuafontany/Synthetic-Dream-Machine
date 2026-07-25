@@ -176,7 +176,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     };
 
     // Documents carry the CGKA predecessor key chain, so a LATER-admitted device derives the doc key by
-    // replaying events (the multi-vessel admit path / Model-B) — replayable access, the right default for
+    // replaying events (the multi-vessel admit path — each vessel its OWN key) — replayable access, the right default for
     // one operator's own device swarm (threat model = the operator's devices). keyhive fixes this behavior;
     // it retains secrecy of concurrent and future chunks without a per-init forward-secrecy toggle.
     //

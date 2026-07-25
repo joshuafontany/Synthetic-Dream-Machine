@@ -2,7 +2,7 @@
  * persona-identity — the persona master-seed lifecycle + the two-key atom.
  *
  * Witnesses: the generate-or-load-then-persist control flow, deterministic
- * veiled-user-key derivation, the two-key atom assembly, and the Model-A guard —
+ * veiled-user-key derivation, the two-key atom assembly, and the no-copied-key guard —
  * the vessel-key passes through BYTE-IDENTICAL, never derived from the seed.
  */
 
@@ -105,7 +105,7 @@ describe("deriveVeiledUserKey — deterministic + unlinkable-by-distinctness", (
   });
 });
 
-describe("assembleTwoKeyAtom — two-key atom + the Model-A guard", () => {
+describe("assembleTwoKeyAtom — two-key atom + the no-copied-key guard", () => {
   const seed = fakeRandomBytes(PERSONA_SEED_BYTES);
   const vesselVerifyingKey = "11".repeat(32); // a device-minted public key, passed in
 
