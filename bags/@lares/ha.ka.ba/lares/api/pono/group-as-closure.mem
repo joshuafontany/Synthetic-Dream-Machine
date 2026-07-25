@@ -130,6 +130,17 @@ The closure model carries directly onto the existing identity architecture
 * ''PersonaGroup = a closure over vessels.'' One operator's N device-vessels resolve as
   the reciprocal-edge closure of per-vessel delegation edges — never a roster doc a single
   vessel owns. The device-admit ceremony adds an edge; it instantiates no central object.
+* ''ONE PRIMITIVE, not two kinds — the Circle and the Cabal run the same closure.'' A
+  handle-Circle (a human's own vessels) and a cabal-realm (mates mutually holding a charter)
+  differ in ''what the edges name'' — a `handle ↔ DID` binding versus a maintenance/charter
+  edge — and in ''how many ordering authorities'' the closure spans. Nothing else. Both
+  resolve as the reciprocal-edge fan, evaluated locally, instantiating no central object
+  (`persona-circle`: //"a Circle IS what mutual bindings declare"//; `cabal-realm`:
+  //"authority is the closure of mutual maintenance edges"//). The single ⊥ multi principal
+  count names no KIND difference — it decides exactly one thing: whether a ''tie-break'' is
+  owed (single-principal takes none, //you// standing as the one ordering authority;
+  multi-principal takes a kahu the closure constitutes for itself, or accept-and-heal).
+  Read them as ''one primitive parameterised'', never as two ontological tiers.
 * ''Plurality = one human → many personas.'' A quorum across //personas// (not bodies)
   enacts Plurality Pono at the credential layer: the operator's multitudes each sign their
   own chain, and a threshold across them carries a decision the way the Voice house carries
