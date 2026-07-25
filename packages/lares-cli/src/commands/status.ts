@@ -14,7 +14,7 @@
  * `lares status --palaces` keeps the palace-organ health table (a third, distinct local view).
  */
 
-import { larRoot, larDataDir, larPort } from "../env.js";
+import { larRoot, larDataDir, larPort, vesselDid } from "../env.js";
 import { stopIncumbent } from "../port-control.js";
 import { udsAvailable } from "../local-connector.js";
 import { existsSync, statSync, readdirSync } from "node:fs";
@@ -230,12 +230,11 @@ async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
     try {
       const { summaryOutput } = await import("../verb-result.js");
       const { runVerb } = await import("../verb-call.js");
-      const { loadVesselVerifyingKey } = await import("@lararium/node");
       // One line over the sock (the lares↔lararium binding). Cheap probe; any failure
       // falls through silently — `lares status` never errors. The residency verb is
-      // cap-gated, so it needs the real operator did (a non-did requestedBy cap-errors
-      // quietly).
-      const did = "0x" + (await loadVesselVerifyingKey(larDataDir()));
+      // cap-gated, so it needs the real VESSEL did (a non-did requestedBy cap-errors
+      // quietly) — the Place is what asks.
+      const did = await vesselDid();
       const r = await runVerb("residency", {}, did, { timeoutMs: 2000 });
       if (r.status === "done") {
         const stats   = summaryOutput(r) ?? {};

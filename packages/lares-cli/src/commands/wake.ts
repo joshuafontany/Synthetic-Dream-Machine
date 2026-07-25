@@ -13,12 +13,11 @@ import { existsSync, mkdirSync, openSync, readFileSync, statSync } from "node:fs
 import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
-import { larRoot, larBootstrapPath, larDataDir, larCasDir } from "../env.js";
+import { larRoot, larBootstrapPath, larDataDir, larCasDir, vesselDid } from "../env.js";
 import { udsAvailable } from "../local-connector.js";
 import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
-import { loadVesselVerifyingKey } from "@lararium/node";
 import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
 import { setupSensorium, type PalaceSetupStep } from "../setup-sensorium.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
@@ -54,7 +53,7 @@ interface WakeRecall {
 async function recallIntoWake(): Promise<WakeRecall> {
   const wing = wakeWing();
   let did: string;
-  try { did = "0x" + (await loadVesselVerifyingKey(larDataDir())); }
+  try { did = await vesselDid(); }
   catch { return { ok: false, wing, note: "no operator identity" }; }
   try {
     // One cold sidecar start can take ~8s; after that the @daemon pool is warm and

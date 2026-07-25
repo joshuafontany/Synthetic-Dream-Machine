@@ -68,7 +68,7 @@ export function makePruneStaleReactor(opts: PruneStaleOptions): VerbReactor {
     const daysThreshold = numberArg(args, "daysThreshold", 7);
 
     const draftBagId = wikiDraftBagUri(slug);
-    const did = await opts.operatorDid();
+    const did = await opts.vesselDid();
     const draftKey = wikiDraftDocKey(slug, did);
     const draftOracle = await opts.composite.get(draftKey);
     if (!draftOracle || typeof draftOracle.tiddler.text !== "string") {

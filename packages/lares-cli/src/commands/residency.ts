@@ -11,7 +11,7 @@
  * stays unwired here, so unpin reports stats without evicting.
  */
 
-import { operatorDid } from "../env.js";
+import { vesselDid } from "../env.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -54,7 +54,7 @@ export async function cmdResidency(_args: ParsedArgs): Promise<number> {
   // UDS fast path, WS fallback (the lares↔lararium binding).
   let r;
   try {
-    r = await runVerb("residency", {}, await operatorDid());
+    r = await runVerb("residency", {}, await vesselDid());
   } catch (err) {
     console.error(`lares: ${err instanceof Error ? err.message : String(err)}`);
     console.error("  Start the daemon with `lares serve` and try again.");
@@ -91,7 +91,7 @@ async function runResidencyCommand(name: string, args: Record<string, unknown>):
   // UDS fast path, WS fallback (the lares↔lararium binding).
   let r;
   try {
-    r = await runVerb(name, args, await operatorDid());
+    r = await runVerb(name, args, await vesselDid());
   } catch (err) {
     console.error(`lares: ${err instanceof Error ? err.message : String(err)}`);
     console.error("  Start the daemon with `lares serve` and try again.");

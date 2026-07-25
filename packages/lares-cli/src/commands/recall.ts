@@ -28,17 +28,13 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/lararium-memory#shared-mesh
  */
 
-import { loadVesselVerifyingKey } from "@lararium/node";
 import { TIMEOUT_CEIL_MS } from "@lararium/mempalace";
-import { larDataDir } from "../env.js";
+import { vesselDid } from "../env.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-async function operatorDid(): Promise<string> {
-  return "0x" + (await loadVesselVerifyingKey(larDataDir()));
-}
 
 /** One-line preview of a verbatim hit/drawer body: collapse whitespace, clip. */
 function preview(text: unknown, n = 180): string {
@@ -84,7 +80,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
 
   let did: string;
   try {
-    did = await operatorDid();
+    did = await vesselDid();
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares sense recall: ${msg}`) });

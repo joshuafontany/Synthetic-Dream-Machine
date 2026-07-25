@@ -207,7 +207,7 @@ export { deriveReachFaces, wsUrlForOrigin, type ReachFace, type InterfaceTable }
 // The active-persona selector — "put on a mask" at the identity layer (Plurality Pono). The persona-root
 // SET mints/loads the operator-root the `lares persona` door drives (founder-side custody).
 export { loadActivePersonaIndex, wearPersona, personaRootExists, listPersonaRoots } from "./node-vessel-identity.js";
-export { generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed } from "./node-vessel-identity.js";
+export { generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed, loadPersonaGroupRootVerifyingKey } from "./node-vessel-identity.js";
 export type { PersonaGroupRoot } from "./node-vessel-identity.js";
 // The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (never federates) + the PUBLIC
 // own-published-face record (persona → @crossroads glamour). Distinct stores, distinct from the handle-book.

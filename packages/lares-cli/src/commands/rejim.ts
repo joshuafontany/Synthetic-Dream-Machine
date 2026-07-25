@@ -15,9 +15,8 @@
  * Meme: lar:///ha.ka.ba/lararium/sensorium/rejim-io
  */
 
-import { loadVesselVerifyingKey } from "@lararium/node";
 import { TIMEOUT_CEIL_MS } from "@lararium/mempalace";
-import { larDataDir } from "../env.js";
+import { vesselDid } from "../env.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { emit, exitFor } from "../render.js";
@@ -30,7 +29,7 @@ export async function cmdRejim(args: ParsedArgs): Promise<number> {
 
   let did: string;
   try {
-    did = "0x" + (await loadVesselVerifyingKey(larDataDir()));
+    did = await vesselDid();
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares sense rejim: ${msg}`) });

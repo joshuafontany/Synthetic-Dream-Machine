@@ -34,7 +34,7 @@ import type { ParsedArgs } from "../parse-args.js";
 import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { udsAvailable, udsSocketPath } from "../local-connector.js";
-import { larRoot, operatorDid } from "../env.js";
+import { larRoot, vesselDid } from "../env.js";
 import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngest, recordLandedPacks, applyConfirmedRenames, type PendingDeletion } from "../ingest-core.js";
 
 const DEFAULT_DEBOUNCE_MS = 400;   // twillm's field-tested trailing window
@@ -82,7 +82,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
   // the sock; the daemon holds the warm replica, so the watcher holds nothing.
   let did = "";
   if (apply) {
-    try { did = await operatorDid(); } catch (err) {
+    try { did = await vesselDid(); } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       emit(args, { ok: false, error: msg, human: () => console.error(`lares watch: ${msg}`) });
       return 3;

@@ -13,7 +13,7 @@
  *   epoch <url>                   — DXOS-style snapshot-restart; bounds history
  */
 
-import { operatorDid } from "../env.js";
+import { vesselDid } from "../env.js";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";
@@ -28,7 +28,7 @@ export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
     console.error("usage: lares bag epoch <bag-url>");
     return 2;
   }
-  const did = await operatorDid();
+  const did = await vesselDid();
   let r;
   try {
     // UDS fast path, WS fallback (the lares↔lararium binding).

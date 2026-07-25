@@ -14,18 +14,13 @@
 
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
-import { loadVesselVerifyingKey } from "@lararium/node";
-import { larDataDir } from "../env.js";
+import { vesselDid } from "../env.js";
 import { summaryOutput } from "../verb-result.js";
 import { OUTCOME_URI_PREFIX } from "@lararium/mesh";
 import { runVerb } from "../verb-call.js";
 import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-async function operatorDid(): Promise<string> {
-  // The env-contract data dir (LAR_ROOT/.lararium) — where the operator key lives.
-  return "0x" + (await loadVesselVerifyingKey(larDataDir()));
-}
 
 export async function cmdDraft(args: ParsedArgs): Promise<number> {
   const tiddler = args.positional[0];
@@ -38,7 +33,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
 
   let did: string;
   try {
-    did = await operatorDid();
+    did = await vesselDid();
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: msg, human: () => console.error(`lares draft: ${msg}`) });

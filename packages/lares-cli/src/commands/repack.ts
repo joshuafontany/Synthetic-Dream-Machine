@@ -15,7 +15,7 @@
 
 import { writeFileSync } from "node:fs";
 import { extname } from "node:path";
-import { larRoot, operatorDid } from "../env.js";
+import { larRoot, vesselDid } from "../env.js";
 import { runVerb } from "../verb-call.js";
 import { summaryOutput } from "../verb-result.js";
 import { emit, exitFor } from "../render.js";
@@ -47,7 +47,7 @@ export async function cmdRepack(args: ParsedArgs): Promise<number> {
   const packPath = uri.slice("lar:///".length) + extname(source);
 
   let did: string;
-  try { did = await operatorDid(); } catch (err) {
+  try { did = await vesselDid(); } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares repack: ${msg}`) });
     return exitFor("not-found");

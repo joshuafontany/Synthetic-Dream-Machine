@@ -33,8 +33,7 @@ import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { join, extname, resolve, relative, sep } from "node:path";
 import { statSync, readdirSync, readFileSync, existsSync } from "node:fs";
-import { loadVesselVerifyingKey } from "@lararium/node";
-import { larDataDir } from "../env.js";
+import { vesselDid } from "../env.js";
 import { readCarrierText } from "../ingest-core.js";
 import { stageBodyToCas, carrierCasFlagged } from "../cas-stage.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId, OUTCOME_URI_PREFIX } from "@lararium/mesh";
@@ -43,9 +42,6 @@ import { runVerb } from "../verb-call.js";
 import { emit, wantsJson, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-async function operatorDid(): Promise<string> {
-  return "0x" + (await loadVesselVerifyingKey(larDataDir()));
-}
 
 /**
  * The loci title a LOADed file carries — used when the file is NOT a memetic
@@ -217,7 +213,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
 
   let did: string;
   try {
-    did = await operatorDid();
+    did = await vesselDid();
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares act: ${msg}`) });

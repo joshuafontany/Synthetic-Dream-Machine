@@ -21,7 +21,7 @@ import type { ParsedArgs } from "../parse-args.js";
 import { emit, wantsJson, exitFor } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { OUTCOME_URI_PREFIX } from "@lararium/mesh";
-import { larRoot, operatorDid } from "../env.js";
+import { larRoot, vesselDid } from "../env.js";
 import { openSyncedTree, scanSource, candidatesOf, submitIngest, recordLandedPacks, applyConfirmedRenames } from "../ingest-core.js";
 import { carrierNeedsTag, tagBlobs } from "../tag-blobs.js";
 
@@ -120,7 +120,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
 
   // ── submit — hashes travel WITH the content ────────────────────────────
   let did: string;
-  try { did = await operatorDid(); } catch (err) {
+  try { did = await vesselDid(); } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares ingest: ${msg}`) });
     return exitFor("not-found");

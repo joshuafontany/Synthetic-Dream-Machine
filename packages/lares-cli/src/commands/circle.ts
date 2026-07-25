@@ -34,7 +34,7 @@ import {
 } from "@lararium/mesh";
 import { loadNodeHandleBook, saveNodeHandleBook } from "@lararium/node";
 import { makeDaemonCircleStore } from "../daemon-circle-store.js";
-import { operatorDid } from "../env.js";
+import { vesselDid } from "../env.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -104,7 +104,7 @@ async function circleAdd(args: ParsedArgs): Promise<number> {
   const cardPath = typeof args.options["card"] === "string" ? args.options["card"] : undefined;
   const card     = cardPath ? readCardFile(cardPath) : undefined;
 
-  const circles = makeDaemonCircleStore(await operatorDid());
+  const circles = makeDaemonCircleStore(await vesselDid());
   const book    = loadNodeHandleBook();
 
   let result;
@@ -185,7 +185,7 @@ async function circleRemove(args: ParsedArgs): Promise<number> {
   const nym = args.positional[1];
   if (!nym) throw new UsageError("a nym is required (e.g. `lares circle remove <verifying-key-hex> --to following`)");
   const circleId = circleOf(args);
-  const result = await composeUnfollow({ circles: makeDaemonCircleStore(await operatorDid()), nym, circleId });
+  const result = await composeUnfollow({ circles: makeDaemonCircleStore(await vesselDid()), nym, circleId });
   emit(args, {
     ok: true,
     data: { nym: result.nym, circle: result.circleId, federated: result.federated },
@@ -195,7 +195,7 @@ async function circleRemove(args: ParsedArgs): Promise<number> {
 }
 
 async function circleList(args: ParsedArgs): Promise<number> {
-  const circles = makeDaemonCircleStore(await operatorDid());
+  const circles = makeDaemonCircleStore(await vesselDid());
   const book    = loadNodeHandleBook();
   const to      = typeof args.options["to"] === "string" ? args.options["to"].trim() : "";
   const circleIds = to.length > 0 ? [to] : [...await circles.circles()];

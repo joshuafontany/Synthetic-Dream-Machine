@@ -20,7 +20,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
-import { larDataDir, loadVesselVerifyingKey, runtimeCasOverride } from "@lararium/node";
+import { larDataDir, loadVesselVerifyingKey, loadPersonaGroupRootVerifyingKey, runtimeCasOverride } from "@lararium/node";
 
 // The vessel runtime-state resolvers — defined once in @lararium/node, surfaced here.
 export {
@@ -61,7 +61,7 @@ export function resolveLarRoot(opts: {
 /**
  * CORPUS/resource root — the base each @daemon sites EXPLICITLY (bags · wikis · genesis derive off
  * it unless independently overridden). LAR_ROOT sites it; the named repo dev-preset opts the checkout
- * in; unconfigured throws a CLEAN error (mirroring operatorDid — no silent global-tree fallback).
+ * in; unconfigured throws a CLEAN error (mirroring vesselDid — no silent global-tree fallback).
  * The vessel STATE roots separately, in the home (see larHome).
  */
 export function larRoot(): string {
@@ -112,15 +112,47 @@ export function larPort(): number {
   return Number(process.env["LAR_PORT"] ?? 8080);
 }
 
+// ── The two DIDs a vessel speaks — the True Name Model, held apart ────────────────────────────────
+// The PLACE and the HUMAN carry DISTINCT keys, bound by a signed delegation edge that never merges
+// them (mesh/device-delegation v2; node-vessel-identity states the invariant in full):
+//   · vesselDid()      — the PLACE's own key, minted per-install, NEVER copied to another vessel.
+//                        Every wire call presents THIS one: the Place is what asks.
+//   · personaRootDid() — the HUMAN's PersonaGroup root, a distinct slot the founder custodies. It
+//                        SIGNS delegation edges; it never rides a verb request.
+// A single key copied across a user's vessels would present one collector to every verifier — one bit
+// linking every self. Naming the two apart is what keeps the veil implementable.
+
 /**
- * The operator's DID (0x + verifying key) from the instance's key file.
+ * The VESSEL's DID (0x + verifying key) from this install's key file — the PLACE's own name, the
+ * `requested-by` every cap-gated verb carries.
+ *
  * Throws a CLEAN error when absent — a placeholder string would only fail later as
  * "bad hex length" inside capability verification. No fallbacks.
  */
-export async function operatorDid(): Promise<string> {
+export async function vesselDid(): Promise<string> {
   try {
     return "0x" + (await loadVesselVerifyingKey(larDataDir()));
   } catch {
-    throw new Error(`no operator key under ${larDataDir()} — run \`lares init\` (or point LAR_ROOT at an initialized instance)`);
+    throw new Error(`no vessel key under ${larDataDir()} — run \`lares init\` (or point LAR_ROOT at an initialized instance)`);
   }
+}
+
+/**
+ * The PERSONA ROOT's DID (0x + verifying key) at `handleIndex` — the HUMAN this vessel delegates
+ * through, the identifier peers PIN to verify the vessel's delegation edge offline. Reads the
+ * PersonaGroup root; it NEVER falls back to the vessel key (that fallback would be the conflation
+ * itself) and it never mints — a read stands no sovereign key up.
+ *
+ * Throws a CLEAN error when this vessel custodies no root there: a joinee holds the founder's public
+ * DID plus a signed edge instead of a root, and an unfounded vessel holds neither.
+ */
+export async function personaRootDid(handleIndex = 0): Promise<string> {
+  const vk = await loadPersonaGroupRootVerifyingKey(larDataDir(), handleIndex).catch(() => undefined);
+  if (!vk) {
+    throw new Error(
+      `no persona root h${handleIndex} under ${larDataDir()} — this vessel custodies no operator root ` +
+      `(found with \`lares init\`, or read the pinned signer DID an admit payload carried)`,
+    );
+  }
+  return "0x" + vk;
 }

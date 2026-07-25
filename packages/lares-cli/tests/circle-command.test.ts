@@ -44,10 +44,10 @@ vi.mock("../src/verb-call.js", () => ({
     return { status: "done", requestId: "r", results: { summary: { ok: true, output: out } } };
   },
 }));
-// Stub the operator DID (no vessel key in a bare temp root); keep larIdentityDir real.
+// Stub the VESSEL DID (no vessel key in a bare temp root); keep larIdentityDir real.
 vi.mock("../src/env.js", async (orig) => ({
   ...(await orig<typeof import("../src/env.js")>()),
-  operatorDid: async () => "0x" + "ab".repeat(32),
+  vesselDid: async () => "0x" + "ab".repeat(32),
 }));
 
 import { cmdCircle } from "../src/commands/circle.js";

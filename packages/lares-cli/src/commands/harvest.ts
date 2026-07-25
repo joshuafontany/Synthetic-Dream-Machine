@@ -31,7 +31,7 @@ import { basename, join } from "node:path";
 import { harvestTurnGradient, detectGoneTurns, liveKeysForRewind, type KeyedBranchNode } from "@lararium/mesh";
 import { TIMEOUT_CEIL_MS } from "@lararium/mempalace";
 import { writebackWing, resolveLociIo, kapaeTurn, KgUnavailable, isoWholeSeconds } from "@lararium/sensorium";
-import { larRoot, larHarvestDir, operatorDid } from "../env.js";
+import { larRoot, larHarvestDir, vesselDid } from "../env.js";
 import { wingFromDir } from "../wing-law.js";
 import { partitionEphemeral } from "../ephemeral.js";
 import { atomicWriteFileSync } from "@lararium/node";
@@ -503,7 +503,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       }
       // Legs 2+3 — route each gone turn's rewind to the @daemon's warm holder (fire-and-forget).
       let did = "";
-      try { did = await operatorDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
+      try { did = await vesselDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
       let structurepalace = 0;
       const fired = await Promise.allSettled(
         gone.map((turnKey) => runVerb("structurepalace-kapae", { turnKey, ended }, did, { timeoutMs: 5000 })),
@@ -561,7 +561,7 @@ export async function cmdSweep(args: ParsedArgs): Promise<number> {
   const limitRaw = typeof args.options["limit"] === "string" ? Number(args.options["limit"]) : undefined;
   const limit = limitRaw !== undefined && !Number.isNaN(limitRaw) ? limitRaw : undefined;
   let did = "";
-  try { did = await operatorDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
+  try { did = await vesselDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
   const r = await runVerb("sweep", {
     surface, wing,
     ...(project ? { project } : {}),
@@ -617,7 +617,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   }
 
   let did = "";
-  try { did = await operatorDid(); } catch { /* the daemon still owns the routing boundary */ }
+  try { did = await vesselDid(); } catch { /* the daemon still owns the routing boundary */ }
   const sessionId = typeof args.options["session-id"] === "string" ? args.options["session-id"] : undefined;
   const passes: Array<Record<string, unknown>> = [];
   const failures: Array<{ pointer: string; error: string }> = [];

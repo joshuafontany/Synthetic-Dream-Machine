@@ -20,7 +20,7 @@ import {
   exportSealedArchive, repairSplitKek, weakPassphraseWarning,
   ARCHIVE_PASSPHRASE_ENV,
 } from "@lararium/node";
-import { operatorDid } from "../env.js";
+import { vesselDid } from "../env.js";
 import { runVerb } from "../verb-call.js";
 import { udsAvailable } from "../local-connector.js";
 import { summaryOutput } from "../verb-result.js";
@@ -105,7 +105,7 @@ async function routed(
   direct: () => Record<string, unknown>,
 ): Promise<{ output: Record<string, unknown>; via: "daemon" | "direct" }> {
   if (daemonUp) {
-    const did = await operatorDid();
+    const did = await vesselDid();
     const r = await runVerb(verb, vargs, did, { timeoutMs: 30_000 });
     if (r.status === "error") throw new Error(r.errorMessage ?? "verb failed");
     return { output: summaryOutput(r) ?? {}, via: "daemon" };

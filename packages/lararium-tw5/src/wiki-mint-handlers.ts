@@ -30,7 +30,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
       throw new Error(`invalid slug: "${slug}" (no slashes or spaces)`);
     }
 
-    const did = await opts.operatorDid();
+    const did = await opts.vesselDid();
     const wikiKey = wikiBagUri(slug);            // canon (bags/@{slug}); identity rides wikis/@{slug}
     const draftBagId = wikiDraftBagUri(slug);
     const draftKey = wikiDraftDocKey(slug, did);

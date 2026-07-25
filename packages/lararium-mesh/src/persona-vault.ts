@@ -143,6 +143,28 @@ export async function loadPersonaRootSeed(vault: PersonaVault, handleIndex = 0):
 }
 
 /**
+ * loadPersonaRootVerifyingKey — read the PersonaGroup-root's PUBLIC verifying key at `handleIndex`
+ * WITHOUT minting. The persona root names the HUMAN; the vessel key names the PLACE. A caller that
+ * wants to SHOW which human a vessel delegates through reads this one — never `generateOrLoadPersonaRoot`,
+ * which would stand a sovereign key up as a side effect of a read.
+ *
+ * Returns undefined when this vessel holds no root at that index — a joinee holds none (it carries the
+ * founder's public DID plus a signed edge instead), and a vessel before founding holds none either.
+ */
+export async function loadPersonaRootVerifyingKey(
+  vault: PersonaVault,
+  handleIndex = 0,
+): Promise<string | undefined> {
+  assertHandleIndex(handleIndex);
+  const existing = await vault.rootSlot(handleIndex).load();
+  if (!existing) return undefined;
+  if (existing.verifyingKey.length !== 64) {
+    throw new Error(`[persona-vault] malformed verifyingKey at persona-root h${handleIndex}`);
+  }
+  return existing.verifyingKey;
+}
+
+/**
  * listPersonaRoots — the persona ROSTER, ascending: every handle-index this vessel HOLDS a root for. A
  * one-persona vessel returns `[0]`; a multitude-of-one returns `[0, 1, …]`; a joinee returns `[]`. Reads
  * the store's OWN explicit record — no dir-scan.

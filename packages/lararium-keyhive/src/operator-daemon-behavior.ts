@@ -174,8 +174,8 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // Every other daemon verb reaches USER registry data in @catalog (wiki oracles,
       // recipes) via the accessor over ctx.repo/ctx.catalogUrl — access≠load. The daemon
       // recipe NEVER loads @catalog as tiddlers. All ride the verify-then-delegate gate.
-      // operatorDid matches the old main reactors exactly ("0x"+operatorVerifyingKey) so
-      // draft keys never drift.
+      // vesselDid matches the old main reactors exactly ("0x"+operatorVerifyingKey) so
+      // draft keys never drift — the Place is what asks, never the persona root.
       if (ctx.catalogUrl) {
         const catalog = makeCatalogAccessor(ctx.repo, ctx.catalogUrl);
         // System plane (@oracle) accessor — list-wikis reads system wiki-recipes
@@ -186,7 +186,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
           repo:        ctx.repo,
           catalog,
           rootDir:     "",
-          operatorDid: async () => "0x" + daemonAuth.operatorVerifyingKey,
+          vesselDid: async () => "0x" + daemonAuth.operatorVerifyingKey,
           registerBag: registerBagCap,
         };
         registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));

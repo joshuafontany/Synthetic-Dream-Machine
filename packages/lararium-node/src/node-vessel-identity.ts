@@ -54,6 +54,7 @@ import {
   signingSeedFromHex,
   generateOrLoadPersonaRoot,
   loadPersonaRootSeed,
+  loadPersonaRootVerifyingKey,
   wearPersona as coreWearPersona,
   loadActivePersona as coreLoadActivePersona,
   personaRootExists as corePersonaRootExists,
@@ -511,6 +512,19 @@ export async function generateOrLoadPersonaGroupRoot(_dataDir: string, handleInd
  */
 export async function loadPersonaGroupRootSeed(_dataDir: string, handleIndex = 0): Promise<Uint8Array> {
   return loadPersonaRootSeed(await makeNodeFsPersonaVault(), handleIndex);
+}
+
+/**
+ * Read the PersonaGroup-root's PUBLIC verifying key at `handleIndex` — the HUMAN's face, distinct from
+ * `loadVesselVerifyingKey` (the PLACE's face). Reads only; it never mints, so a caller that merely wants to
+ * SHOW the persona root cannot stand one up by accident. Reads undefined when this vessel holds no root
+ * there (a joinee pins the founder's DID + a signed edge instead of custodying a root).
+ */
+export async function loadPersonaGroupRootVerifyingKey(
+  _dataDir: string,
+  handleIndex = 0,
+): Promise<string | undefined> {
+  return loadPersonaRootVerifyingKey(await makeNodeFsPersonaVault(), handleIndex);
 }
 
 /** True when this vessel HOLDS a persona-root at `handleIndex` (founder-side custody). A joinee holds none. */

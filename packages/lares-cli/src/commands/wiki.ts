@@ -15,7 +15,7 @@
  *   prune-stale              — surface stale drafts for residency-action-or-prune
  */
 
-import { operatorDid } from "../env.js";
+import { vesselDid } from "../env.js";
 import { emit } from "../render.js";
 import { summaryOutput, type SubmitResult, type SubmitOptions } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
@@ -40,7 +40,7 @@ async function call(
 }
 
 export async function cmdWikiList(_args: ParsedArgs): Promise<number> {
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("list-wikis", {}, did);
   if (r.status === "error") {
     console.error(`list failed: ${r.errorMessage ?? "unknown"}`);
@@ -76,7 +76,7 @@ export async function cmdWikiInit(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki init <slug>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("init-wiki", { slug }, did);
   if (r.status === "error") {
     const msg = r.errorMessage ?? "unknown";
@@ -107,7 +107,7 @@ export async function cmdWikiOpen(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki open <slug>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("open-wiki", { slug }, did);
   if (r.status === "error") {
     console.error(`open failed: ${r.errorMessage ?? "unknown"}`);
@@ -127,7 +127,7 @@ export async function cmdWikiSync(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki sync <slug>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("sync-wiki", { slug }, did, { timeoutMs: 30_000 });
   if (r.status === "error") {
     console.error(`sync failed: ${r.errorMessage ?? "unknown"}`);
@@ -155,7 +155,7 @@ export async function cmdWikiPin(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki pin <slug>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("pin-wiki", { slug }, did);
   if (r.status === "error") {
     console.error(`pin failed: ${r.errorMessage ?? "unknown"}`);
@@ -177,7 +177,7 @@ export async function cmdWikiUnpin(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki unpin <slug>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("unpin-wiki", { slug }, did);
   if (r.status === "error") {
     console.error(`unpin failed: ${r.errorMessage ?? "unknown"}`);
@@ -201,7 +201,7 @@ export async function cmdWikiSwitch(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki switch <slug>");
     return 2;
   }
-  const did = await operatorDid();
+  const did = await vesselDid();
   const r = await call("wiki-switch", { slug }, did, { timeoutMs: 30_000 });
   if (r.status === "error") {
     console.error(`switch failed: ${r.errorMessage ?? "unknown"}`);
@@ -229,7 +229,7 @@ export async function cmdWikiHold(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki hold <slug>");
     return 2;
   }
-  const did = await operatorDid();
+  const did = await vesselDid();
   const r = await call("wiki-hold", { slug }, did, { timeoutMs: 30_000 });
   if (r.status === "error") {
     console.error(`hold failed: ${r.errorMessage ?? "unknown"}`);
@@ -252,7 +252,7 @@ export async function cmdWikiRelease(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki release <slug>");
     return 2;
   }
-  const did = await operatorDid();
+  const did = await vesselDid();
   const r = await call("wiki-release", { slug }, did);
   if (r.status === "error") {
     console.error(`release failed: ${r.errorMessage ?? "unknown"}`);
@@ -269,7 +269,7 @@ export async function cmdWikiRelease(args: ParsedArgs): Promise<number> {
 
 /** `lares wiki active` — the live switcher state: which wikis run now + which are held. */
 export async function cmdWikiActive(args: ParsedArgs): Promise<number> {
-  const did = await operatorDid();
+  const did = await vesselDid();
   const r = await call("wiki-active", {}, did);
   if (r.status === "error") {
     console.error(`active failed: ${r.errorMessage ?? "unknown"}`);
@@ -298,7 +298,7 @@ export async function cmdWikiAddBag(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki add-bag <slug> <bag-uri>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("add-bag", { slug, bagUrl }, did);
   if (r.status === "error") {
     const msg = r.errorMessage ?? "unknown";
@@ -329,7 +329,7 @@ export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki remove-bag <slug> <bag-uri>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("remove-bag", { slug, bagUrl }, did);
   if (r.status === "error") {
     console.error(`remove-bag failed: ${r.errorMessage ?? "unknown"}`);
@@ -361,7 +361,7 @@ export async function cmdWikiEpoch(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki epoch <slug> <bag-url>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
   if (r.status === "error") {
     console.error(`wiki epoch failed: ${r.errorMessage ?? "unknown"}`);
@@ -384,7 +384,7 @@ export async function cmdWikiRotateRecipe(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki rotate-recipe <slug>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
   if (r.status === "error") {
     console.error(`rotate-recipe failed: ${r.errorMessage ?? "unknown"}`);
@@ -412,7 +412,7 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const daysOpt = args.options["days"];
-  const did     = await operatorDid();
+  const did     = await vesselDid();
   const cmdArgs: Record<string, unknown> = { slug };
   if (daysOpt) cmdArgs["daysThreshold"] = Number(daysOpt);
   const r = await call("prune-stale", cmdArgs, did);
@@ -461,7 +461,7 @@ export async function cmdWikiResolve(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki resolve <tiddler-uri>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("resolve", { tiddler }, did);
   if (r.status === "error") {
     console.error(`resolve failed: ${r.errorMessage ?? "unknown"}`);
@@ -517,7 +517,7 @@ export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki which <tiddler-uri>");
     return 2;
   }
-  const did    = await operatorDid();
+  const did    = await vesselDid();
   const r = await call("where", { tiddler }, did);
   if (r.status === "error") {
     console.error(`which failed: ${r.errorMessage ?? "unknown"}`);

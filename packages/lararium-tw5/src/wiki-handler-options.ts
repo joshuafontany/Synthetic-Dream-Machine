@@ -25,7 +25,9 @@ export interface WikiHandlerOptions {
 export interface WikiMintHandlerOptions {
   readonly repo:        Repo;
   readonly catalog:     CatalogAccessor;
-  readonly operatorDid: () => Promise<string> | string;
+  /** The VESSEL's DID (`0x`+verifying key) — the PLACE that asks. Distinct from the persona
+   *  root (the human), which signs delegation edges and never rides a verb request. */
+  readonly vesselDid: () => Promise<string> | string;
   readonly rootDir:     string;
   /**
    * Register a freshly-minted wiki bag's Keyhive Document + delegate admin —
