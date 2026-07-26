@@ -119,7 +119,7 @@ describe("the True Name Model — the founding mints a DISTINCT persona-root as 
       operatorSeed,
       operatorVerifyingKey: device.verifyingKey,
       operatorDisplayName: "Test Operator",
-      signerSeed,
+      binding: { mode: "self-stood", signerSeed },
       hearthTrueName: "",
       nexusPubkey: device.verifyingKey,
     });
@@ -147,7 +147,7 @@ describe("the True Name Model — the founding mints a DISTINCT persona-root as 
     await wearBrowserPersona(name, 0);
     await runFoundingCeremony({
       repo, operatorSeed, operatorVerifyingKey: device.verifyingKey,
-      operatorDisplayName: "Op", signerSeed: signer0, hearthTrueName: "", nexusPubkey: device.verifyingKey,
+      operatorDisplayName: "Op", binding: { mode: "self-stood", signerSeed: signer0 }, hearthTrueName: "", nexusPubkey: device.verifyingKey,
     });
 
     // The multitude grows: mint h1 and WEAR it. The worker-reach selector (browserJoineePersonaIndex)

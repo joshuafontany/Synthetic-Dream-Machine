@@ -47,7 +47,7 @@ async function found() {
     operatorSeed:         FOUNDER_SEED,
     operatorVerifyingKey: verifyingKey,
     operatorDisplayName:  "The Strandbeest Shrine",
-    signerSeed:           FOUNDER_SEED,
+    binding: { mode: "self-stood", signerSeed: FOUNDER_SEED },
     hearthTrueName:       "",
     nexusPubkey:          verifyingKey,
   });

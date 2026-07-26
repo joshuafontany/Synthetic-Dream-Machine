@@ -181,7 +181,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     operatorSeed,
     operatorVerifyingKey: operatorIdentity.verifyingKey,
     operatorDisplayName:  operatorIdentity.displayName ?? "operator",
-    signerSeed,
+    binding: { mode: "self-stood", signerSeed },
     hearthTrueName,
     // This node's own gate key IS its Nexus key — the per-Nexus KEL board the founding seats the inception on.
     nexusPubkey: operatorIdentity.verifyingKey,

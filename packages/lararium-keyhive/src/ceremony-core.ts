@@ -67,6 +67,34 @@ import type { DeviceAdmitPayload } from "./index.js";
 // Founding ceremony
 // ---------------------------------------------------------------------------
 
+/**
+ * How a founding binds its device to its hearth — the two modes, made explicit rather than inferred.
+ *
+ * SELF-STOOD carries a seed that SIGNS: the vessel builds its own device-delegation and seats a fresh
+ * persona-KEL inception. It never inits Keyhive with that seed (the per-vessel key stays the Individual).
+ *
+ * CONTRACTED carries no seed at all. A trusted operator, already contracted with the kahu, signed the edge
+ * on THEIR vessel; this one carries the edge, the pinned identifier prefix, and the operator's KEL chain.
+ * The chain rides ALONG because the Binding Gate walks it from the LOCAL replica — a vessel that founded
+ * without it would boot fail-closed with no head to reach, waiting on a federation it cannot yet perform.
+ * Carried, never fetched: a crossroads that holds no human key also holds no way to go ask for one.
+ */
+export type FoundingBinding =
+  | {
+      readonly mode:       "self-stood";
+      /** The 32-byte seed that SIGNS the edge — a persona root, or the vessel's own for an anon. */
+      readonly signerSeed: Uint8Array;
+    }
+  | {
+      readonly mode:             "contracted";
+      /** The edge the contracting operator signed elsewhere — this vessel holds it, never the seed behind it. */
+      readonly edge:             DeviceDelegationTiddler;
+      /** The identifier PREFIX the Binding Gate pins — the contracting operator's, not this vessel's. */
+      readonly personaKelPrefix: string;
+      /** That operator's KEL, carried so the first boot walks prefix→head off its own replica. */
+      readonly personaKelChain:  readonly PersonaKelEvent[];
+    };
+
 export interface FoundingCeremonyInput {
   repo:                Repo;
   /** The PER-VESSEL device signing seed — inits Keyhive (this vessel IS the Individual). */
@@ -75,10 +103,9 @@ export interface FoundingCeremonyInput {
   operatorVerifyingKey: string;
   /** Display name for the device identity tiddler. */
   operatorDisplayName:  string;
-  /** The SIGNER 32-byte seed — SIGNS the device-delegation edge. For an anon this IS the vessel's
-   *  own seed (self-signed; signerDid == deviceDid); for a delegated/operator vessel it is a granting
-   *  root. It NEVER inits Keyhive (the per-vessel key stays the Individual). REQUIRED: every founding binds. */
-  signerSeed: Uint8Array;
+  /** HOW this founding binds its device — the two modes `vessel-standing` names. REQUIRED: every
+   *  founding binds, and the mode says whether this vessel signs its own binding or carries one. */
+  binding: FoundingBinding;
   /** The hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName).
    *  REQUIRED: a founding with no place to bind to is no founding. */
   hearthTrueName:      string;
@@ -207,16 +234,32 @@ export async function runFoundingCeremony(
   // Self-signed when signerSeed == the vessel seed (an anon: signerDid == deviceDid); root-signed
   // when a granting root delegates (known-user / operator). The cap-TIER is a DERIVED read over the
   // edge's lease-freshness — the boundEpoch below is the decay hook — never a stamped field.
-  const edgeIssuedAt  = new Date().toISOString();
-  const edgeExpiresAt = new Date(Date.now() + EDGE_BACKSTOP_MS).toISOString();
-  const founderEdge = await buildDeviceDelegation({
-    operatorSeed:       input.signerSeed,   // the root SIGNS
-    deviceVerifyingKey: operatorVerifyingKey,        // the per-vessel device is the delegate
-    hearthTrueName:     input.hearthTrueName,         // the place this binds TO
-    issuedAt:           edgeIssuedAt,
-    expiresAt:          edgeExpiresAt,
-    boundEpoch:         0,                            // genesis lease epoch (effectiveLeaseEpoch starts at 0)
-  });
+  const founderEdge = input.binding.mode === "self-stood"
+    ? await buildDeviceDelegation({
+        operatorSeed:       input.binding.signerSeed,  // the root SIGNS
+        deviceVerifyingKey: operatorVerifyingKey,      // the per-vessel device is the delegate
+        hearthTrueName:     input.hearthTrueName,      // the place this binds TO
+        issuedAt:           new Date().toISOString(),
+        expiresAt:          new Date(Date.now() + EDGE_BACKSTOP_MS).toISOString(),
+        boundEpoch:         0,                         // genesis lease epoch (effectiveLeaseEpoch starts at 0)
+      })
+    // CONTRACTED — the edge arrived signed. This vessel binds under a root it does not hold, so it
+    // verifies what it carries rather than trusting the hand that carried it: the edge MUST name THIS
+    // device, and MUST bind the hearth this founding stands at. A bundle for another vessel or another
+    // hearth REFUSES here, where a founding can still be abandoned cleanly.
+    : (() => {
+        const e = input.binding.edge;
+        if (e.deviceVerifyingKey.toLowerCase() !== operatorVerifyingKey.toLowerCase()) {
+          throw new Error(
+            "[founding] contracted edge names a different device — it delegates to " +
+            `${e.deviceVerifyingKey.slice(0, 16)}…, this vessel holds ${operatorVerifyingKey.slice(0, 16)}….`,
+          );
+        }
+        if (e.hearthTrueName !== input.hearthTrueName) {
+          throw new Error("[founding] contracted edge binds a different hearth true-name — refusing to found under it.");
+        }
+        return e;
+      })();
   const signerDid = founderEdge.operatorDid;
 
   // ── The persona-KEL INCEPTION — the continuity anchor (identity-classes#the-continuity-anchor) ──
@@ -226,13 +269,22 @@ export async function runFoundingCeremony(
   // pre-commit): the live founding gathers no guardians, so no rotation can attest yet — arming rides the
   // separate recovery-keel wiring (provisionThresholdRecoveryAtFounding). The pin-move stands regardless: an
   // unarmed inception still walks to a head, and at inception the head IS signerDid (zero behavior change today).
-  const inception       = mintPersonaInception(signerDid, "");
-  const personaKelPrefix = inception.prefix;
+  // SELF-STOOD mints its own inception. CONTRACTED mints NONE — the contracting operator's identifier
+  // already stands, and minting a second one here would fork the very continuity the pin exists to hold.
+  const seatedEvents: readonly PersonaKelEvent[] = input.binding.mode === "self-stood"
+    ? [mintPersonaInception(signerDid, "")]
+    : input.binding.personaKelChain;
+  const personaKelPrefix = input.binding.mode === "self-stood"
+    ? seatedEvents[0]!.prefix
+    : input.binding.personaKelPrefix;
+  if (seatedEvents.length === 0 || seatedEvents.some((e) => e.prefix !== personaKelPrefix)) {
+    throw new Error("[founding] the carried KEL is empty or names a prefix other than the pinned one — refusing to found on a chain the Binding Gate could not walk.");
+  }
   // Seat the inception onto the per-Nexus KEL board (deterministic id) so the very first boot walks the
   // identifier→head mapping from its OWN local replica — no advertisement, no mint-race (materialize converges
   // on byte-identical blank bytes). The board federates once (DeterministicFederationGate).
   const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(input.nexusPubkey), "@persona-kel");
-  kelBoard.change((draft) => writePersonaKelEvent(draft, inception));
+  kelBoard.change((draft) => { for (const e of seatedEvents) writePersonaKelEvent(draft, e); });
 
   daemonHandle.change((doc) => {
     doc.tiddlers[SIGNER_DID_TIDDLER] = {

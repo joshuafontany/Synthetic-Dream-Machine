@@ -416,7 +416,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       operatorDisplayName:  displayName ?? "Browser Operator",
       // The persona-root SIGNS (signerDid == the root DID, DISTINCT from deviceDid). The self-signed anon
       // (signerSeed == operatorSeed) survives ONLY as an explicit named floor tier, never the default.
-      signerSeed,
+      binding: { mode: "self-stood", signerSeed },
       hearthTrueName: "",          // hearth-agnostic: an anon is not yet bound to a place; it binds on upgrade
       // This vessel's own gate key IS its Nexus key — the per-Nexus KEL board the founding seats the inception on.
       nexusPubkey: vesselIdentity.verifyingKey,

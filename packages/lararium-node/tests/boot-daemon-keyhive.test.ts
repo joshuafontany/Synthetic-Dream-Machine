@@ -54,7 +54,7 @@ beforeAll(async () => {
     repo, operatorSeed: SEED,
     operatorVerifyingKey: verifyingKey,
     operatorDisplayName:  "Test Operator",
-    signerSeed: SEED,          // self-signed (signerDid == deviceDid) for the test founder
+    binding: { mode: "self-stood", signerSeed: SEED },          // self-signed (signerDid == deviceDid) for the test founder
     hearthTrueName: "",         // hearth-agnostic in the unit test
     nexusPubkey: verifyingKey,  // this vessel's own gate key IS its Nexus key
   });

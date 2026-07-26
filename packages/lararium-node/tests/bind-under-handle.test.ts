@@ -61,7 +61,7 @@ describe("two vessels bind under one Handle", () => {
     const founderKey = await pubOf(FOUNDER_SEED);
     const cer = await runFoundingCeremony({
       repo: founderRepo, operatorSeed: FOUNDER_SEED, operatorVerifyingKey: founderKey,
-      operatorDisplayName: "Founder", signerSeed: FOUNDER_SEED, hearthTrueName: "", nexusPubkey: founderKey,
+      operatorDisplayName: "Founder", binding: { mode: "self-stood", signerSeed: FOUNDER_SEED }, hearthTrueName: "", nexusPubkey: founderKey,
     });
     const pg = { docIdHex: cer.personaGroupDocIdHex, agentIdHex: cer.personaGroupAgentIdHex };
     const { keyhive: founder } = await bootOver(founderRepo, cer.daemonUrl, FOUNDER_SEED, founderKey, pg, cer.meshCabalDocIdHex, cer.signerDid, cer.personaKelPrefix, cer.founderEdge);
