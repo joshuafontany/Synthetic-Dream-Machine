@@ -96,6 +96,39 @@ export interface VerbSpec {
 /** The surfaces standing today. A projection names its own; nothing here forbids a third. */
 export const VERB_SURFACE = { cli: "cli", agent: "agent" } as const;
 
+/** What any table's entry must tell a projection about itself. */
+export interface SurfaceDeclared {
+  readonly surfaces?: readonly string[];
+  readonly signs?:    boolean;
+}
+
+/**
+ * PROJECT any declaring table onto one surface — the four decisions, held in ONE place.
+ *
+ * Two tables stand (the CLI's commands run in-process at a terminal; the daemon's verbs route through the
+ * VM into a vessel) and they must not merge — but the RULES for reading them must, or the two projections
+ * drift on exactly the questions that matter: what an undeclared entry defaults to, whether a key-holding
+ * act may execute, and what order a face renders in. Written twice, those answers diverge silently.
+ *
+ *   · an entry declaring nothing reaches `cli` alone — nothing reaches an agent until a hand declares it
+ *   · `executableOnly` drops key-holding acts, so an agent face cannot reach one by accident
+ *   · the result sorts by name, so a consuming face renders without re-deriving an order
+ */
+export function projectOntoSurface<T>(
+  items: readonly T[],
+  read: (item: T) => (SurfaceDeclared & { readonly name: string }) | undefined,
+  surface: string,
+  executableOnly = false,
+): readonly T[] {
+  return items
+    .map((item) => ({ item, d: read(item) }))
+    .filter((e): e is { item: T; d: SurfaceDeclared & { name: string } } => e.d !== undefined)
+    .filter((e) => (e.d.surfaces ?? [VERB_SURFACE.cli]).includes(surface))
+    .filter((e) => !(executableOnly && e.d.signs === true))
+    .sort((a, b) => a.d.name.localeCompare(b.d.name))
+    .map((e) => e.item);
+}
+
 export class VerbTable {
   private readonly handlers = new Map<string, VerbReactor>();
   private readonly specs    = new Map<string, VerbSpec>();
@@ -131,11 +164,10 @@ export class VerbTable {
    * per-vessel allowlist to maintain and none to fall out of date. A Herm exposes less than a hearth
    * because it composed less, and nobody wrote that down anywhere.
    */
-  project(surface: string): readonly { readonly verb: string; readonly spec: VerbSpec }[] {
-    return this.list()
-      .map((verb) => ({ verb, spec: this.specs.get(verb) }))
-      .filter((e): e is { verb: string; spec: VerbSpec } =>
-        e.spec !== undefined && e.spec.surfaces.includes(surface));
+  project(surface: string, executableOnly = false): readonly { readonly verb: string; readonly spec: VerbSpec }[] {
+    const rows = this.list().map((verb) => ({ verb, spec: this.specs.get(verb) }));
+    return projectOntoSurface(rows, (r) => r.spec ? { ...r.spec, name: r.verb } : undefined, surface, executableOnly)
+      .filter((r): r is { verb: string; spec: VerbSpec } => r.spec !== undefined);
   }
 
   /**
@@ -144,7 +176,7 @@ export class VerbTable {
    * accident, and reaching one takes a deliberate call to `project` plus a deliberate compose-only path.
    */
   projectExecutable(surface: string): readonly { readonly verb: string; readonly spec: VerbSpec }[] {
-    return this.project(surface).filter((e) => e.spec.signs !== true);
+    return this.project(surface, true);
   }
 }
 

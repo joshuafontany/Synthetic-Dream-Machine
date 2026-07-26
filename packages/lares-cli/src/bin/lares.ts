@@ -54,11 +54,10 @@ import { cmdVault }                    from "../commands/vault.js";
 import { cmdPersona }                  from "../commands/persona.js";
 import { cmdCabal }                    from "../commands/cabal.js";
 import { cmdEdge }                     from "../commands/edge.js";
-import { cmdSurface }                  from "../commands/surface.js";
 import { cmdCircle }                   from "../commands/circle.js";
 import { cmdNexus }                    from "../commands/nexus.js";
 import { freshBuildGate, FRESH_BUILD_COMMANDS } from "../build-freshness.js";
-import { VERB_SURFACE } from "@lararium/tw5";
+import { VERB_SURFACE, projectOntoSurface } from "@lararium/tw5";
 
 type Handler = (args: ParsedArgs) => Promise<number>;
 
@@ -103,11 +102,8 @@ export interface SurfaceEntry {
  * cannot, or the reverse. So the declaration lives beside the handler, once.
  */
 export function projectCommands(surface: string, executableOnly = false): readonly SurfaceEntry[] {
-  return COMMANDS
-    .filter((c) => (c.surfaces ?? [VERB_SURFACE.cli]).includes(surface))
-    .filter((c) => !(executableOnly && c.signs === true))
-    .map((c) => ({ name: c.name, summary: c.summary, signs: c.signs === true }))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  return projectOntoSurface(COMMANDS, (c) => c, surface, executableOnly)
+    .map((c) => ({ name: c.name, summary: c.summary, signs: c.signs === true }));
 }
 
 const COMMANDS: readonly Command[] = [
@@ -148,7 +144,6 @@ const COMMANDS: readonly Command[] = [
   { name: "persona",       summary: "The PLURALITY-PONO identity multitude (#66): `new <index> --name '<displayName>'` mints/loads the persona-root at that handle-index (fail-closed via assertHandleIndex) and sets its PRIVATE pet-name; `wear <index>` switches the active persona (reboot-to-switch, one face to the mesh); `list` prints the private multitude (held indices + active marker + pet-names). Drives the founder-side node core; a joinee receives a root by admit, never mints here.", handler: cmdPersona, signs: true /* mints persona roots */ },
   { name: "circle",        summary: "The FOLLOW VERB — the INVERSION-OF-CONTROL social graph. `add <nym> --to <circle> [--petname <label>] [--card <file>]` recognises a nym (already-known, or TOFU-admits a carried self-certifying HandleCard) + optionally sets its PRIVATE local label + adds it to the circle (adding to a circle IS the follow); `remove <nym> --to <circle>` unfollows; `list [--to <circle>]` reads the private follow-view (petname + last-seen glamour). The graph is PRIVATE and LOCAL — nothing reaches @crossroads, no central trace. Publishing a public glamour stays a separate, deliberate act. Fail-closed: following an unmet nym needs `--card`.", handler: cmdCircle },
   { name: "cabal",         summary: "The JOIN AXIS — a mutual-hold relation with a cabal-realm, orthogonal to the CARRIAGE contract `nexus contract` writes. `cabal vouch <joiner-nym> --place <realm-doc-id> [--expires <iso>] [--as <root-index>]` stakes ONE held face's OWN standing on one joiner, onto the Nexus vouch board — no kahu quorum, because a vouch is one hand's own stake, not a steward act. It ADMITS NOBODY: a vouch is signal-2 on the lineage the admission price walks, and the cost is paid at the moment of vouching, since a voucher's score SPLITS across everyone they vouch for. Re-vouching the same joiner stays ONE edge — re-minting never buys out-degree.", handler: cmdCabal, signs: true /* a vouch STAKES the voucher's own standing */ },
-  { name: "surface",       summary: "Read what a projection exposes, from the ONE command table — so a second surface never keeps a second catalogue. `surface [<name>]` lists the verbs declaring that surface (default `cli`); `--executable` drops the key-holding ones; `--json` emits the shape another face consumes. An agent surface builds from the executable view, so it cannot reach a signing act by accident: reaching one takes the full projection plus a deliberate compose-only path, where the agent renders the artifact and the operator\u2019s hand signs it.", handler: cmdSurface },
   { name: "edge",          summary: "Set one RELATIONSHIP aside, or take the marker back down \u2014 the k\u0101pae raised over an EDGE rather than over a party. `edge kapae <edge-id> --epoch <e>` shadows that relation; `edge un-kapae <edge-id> --epoch <e>` re-admits it as a deliberate signed act. Scoped under `edge` to mirror `nexus kapae`/`nexus un_kapae` and stay apart from them: that pair shadows a PRESENTER under a kahu quorum, this pair shadows one RELATIONSHIP under whichever key holds it. Setting a relation aside says NOTHING about either end \u2014 the vessel keeps standing, the face keeps standing, only that relation stops counting. A raised marker WINS a same-version tie, so an eviction never quietly reverses when a partition heals. The write asserts no authority: it signs with a named persona root, and whether that root holds the edge gets decided by whichever reader consults the shadow.", handler: cmdEdge, signs: true /* a kapae act signs over a relationship */ },
   { name: "nexus",         summary: "The Nexus founding-kahu ROSTER + its PRE-ROTATED charter-epoch chain (TUF≈KERI) — the Kapae immune antigen's authority home (#68). `nexus charter seat` seats the held personas' ed25519 VERIFYING keys (read from the vault, never the seed; matched by pet-name) + establishes the genesis epoch with a `--next-key-commit` pre-rotation; `nexus charter rotate` reveals the pre-committed next key-set + advances the chain (FAIL-CLOSED on reveal mismatch); `nexus charter commit --keys` computes a commitment digest; `nexus charter show` reads the roster, chain head, + quorum verdict. `nexus kapae <nym> [--reason]` RAISES a quorum-signed ban onto the always-carried antigen board (a banned presenter draws Mu); `nexus kapae --list` folds the currently-Kapae'd set; `nexus un_kapae <nym>` mints a quorum-signed lift at a strictly higher version (FAIL-CLOSED: a sub-quorum or unseated charter REFUSES, writing nothing).", handler: cmdNexus, signs: true /* quorum-signs admits, kapae and charter acts */ },
   { name: "device-admit",  summary: "Admit a new vessel into your operator PersonaGroup (produces an admit payload via runDeviceAdmit; QR/NFC/LAN transport pending).",    handler: cmdDeviceAdmit, signs: true /* signs a device-delegation edge */ },
@@ -163,12 +158,31 @@ const COMMANDS: readonly Command[] = [
  */
 export const COMMAND_NAMES: readonly string[] = COMMANDS.map((c) => c.name);
 
-function printHelp(): void {
+/**
+ * The global help IS the surface projection — a face reading the one table, never a second catalogue.
+ *
+ * `lares help --surface <name>` reads another face's projection; `--executable` drops the key-holding acts
+ * an agent surface may compose and must never run; `--json` emits the shape another face consumes. Folding
+ * these here rather than into a verb of their own keeps the CLI from spending a command on describing
+ * commands.
+ */
+function printHelp(surface: string = VERB_SURFACE.cli, executableOnly = false): void {
+  const shown = projectCommands(surface, executableOnly);
   console.log("lares — operator CLI for the Lares lararium stack\n");
   console.log("Usage:  lares <command> [args...]\n");
+  if (surface !== VERB_SURFACE.cli || executableOnly) {
+    console.log(`Surface: ${surface}${executableOnly ? " (executable — key-holding acts withheld)" : ""}`);
+  }
+  if (shown.length === 0) {
+    console.log(`\nNo verbs project onto "${surface}" — a surface exposes what asked to be exposed.\n`);
+    return;
+  }
   console.log("Commands:");
-  for (const c of COMMANDS) {
-    console.log(`  ${c.name.padEnd(14)} ${c.summary}`);
+  for (const c of shown) {
+    console.log(`  ${c.signs ? "✍ " : "  "}${c.name.padEnd(14)} ${c.summary}`);
+  }
+  if (shown.some((c) => c.signs)) {
+    console.log("\n  ✍ = holds a key. An agent surface may compose these and MUST NOT execute them.");
   }
   console.log(`  ${"help".padEnd(14)} Show this message.\n`);
   console.log("Global flags:");
@@ -183,7 +197,15 @@ export async function dispatch(argv: readonly string[]): Promise<number> {
   const args = parseArgs(argv);
   // Global help: bare `lares`, `lares help`, or `lares --help` (no command).
   if (args.command === null || args.command === "help" || (args.flags["help"] && !COMMANDS.some((c) => c.name === args.command))) {
-    printHelp();
+    const surface = args.options["surface"] ?? VERB_SURFACE.cli;
+    const execOnly = args.flags["executable"] === true;
+    if (args.flags["json"] === true) {
+      // The shape another face consumes — `signs` rides even in the executable view (where it always reads
+      // false), so a reader never infers the flag's absence from a filter it did not run.
+      console.log(JSON.stringify({ ok: true, data: { surface, executable: execOnly, entries: projectCommands(surface, execOnly) } }));
+      return 0;
+    }
+    printHelp(surface, execOnly);
     return args.command === null ? 1 : 0;
   }
   const cmd = COMMANDS.find((c) => c.name === args.command);

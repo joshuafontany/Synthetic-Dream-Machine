@@ -18,7 +18,7 @@ describe("the table projects onto surfaces it declares", () => {
     const cli = projectCommands("cli");
     expect(cli.length).toBeGreaterThan(35);
     expect(cli.map((e) => e.name)).toContain("wake");
-    expect(cli.map((e) => e.name)).toContain("surface");
+    expect(cli.map((e) => e.name)).toContain("nexus");
   });
 
   // The default carries a RULE rather than a convenience: nothing reaches an agent until a hand declares it.
