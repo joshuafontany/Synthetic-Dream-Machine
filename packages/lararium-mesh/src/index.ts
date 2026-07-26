@@ -167,6 +167,7 @@ export * from "./persona-identity.js";
 export * from "./cabal-realm.js";
 export * from "./cabal-invite.js";
 export * from "./vouch-board.js";
+export * from "./dyad.js";
 export * from "./lineage-rank.js";
 export * from "./admission-price.js";
 export * from "./vouch-dag.js";
