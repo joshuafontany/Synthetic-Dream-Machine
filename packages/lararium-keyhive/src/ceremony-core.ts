@@ -25,8 +25,9 @@
  * The TRUE NAME MODEL the ceremony enacts — two DISTINCT keys, one signed edge:
  *   · `operatorSeed` carries the VESSEL's own key — the PLACE's key, minted per-install,
  *     never copied to another vessel. It mints the Vessel Individual and inits Keyhive.
- *   · `signerSeed` carries the PERSONA ROOT — the HUMAN's key, a separate slot the founder
- *     custodies. It ONLY signs; it never inits Keyhive.
+ *   · `binding` carries the PERSONA ROOT's authority — the HUMAN's side. A SELF-STOOD binding holds
+ *     that root's seed, which ONLY signs and never inits Keyhive; a CONTRACTED binding holds no seed
+ *     at all, carrying instead an edge some other operator already signed.
  *   · `buildDeviceDelegation` binds them without merging them: the persona root signs
  *     "Operator O delegates to Device D AT PLACE P", where `hearthTrueName` names P — the
  *     hearth's True Name. Peers pin the root and verify that edge offline.
@@ -229,11 +230,12 @@ export async function runFoundingCeremony(
     };
   });
 
-  // ── The binding edge (the ONE TRUE PATH): the signer SIGNS (vessel × hearthTrueName) ──
-  // The signer seed only signs — it NEVER inits Keyhive (the per-vessel key stays the Individual).
-  // Self-signed when signerSeed == the vessel seed (an anon: signerDid == deviceDid); root-signed
-  // when a granting root delegates (known-user / operator). The cap-TIER is a DERIVED read over the
-  // edge's lease-freshness — the boundEpoch below is the decay hook — never a stamped field.
+  // ── The binding edge: (vessel × hearthTrueName), SIGNED here or CARRIED in ──
+  // A held seed only ever SIGNS — it never inits Keyhive (the per-vessel key stays the Individual).
+  // Self-signed when that seed IS the vessel's own (an anon: signerDid == deviceDid); root-signed when
+  // a granting root delegates (known-user / operator); and CARRIED when the vessel holds no root to
+  // sign with at all. The cap-TIER stays a DERIVED read over the edge's lease-freshness — the
+  // boundEpoch below is the decay hook — never a stamped field, whichever way the edge arrived.
   const founderEdge = input.binding.mode === "self-stood"
     ? await buildDeviceDelegation({
         operatorSeed:       input.binding.signerSeed,  // the root SIGNS
