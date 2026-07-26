@@ -11,7 +11,7 @@
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import { hex } from "../src/crypto.js";
-import { carriageEntriesFromBoard, writeCarriageEntry, membershipEntryKey } from "../src/carriage-board.js";
+import { carriageEntriesFromBoard, writeCarriageEntry, carriageEntryKey } from "../src/carriage-board.js";
 import { signCarriageQuorum, signCarriageContract, CARRIAGE_ENTRY_DOMAIN } from "../src/carriage-registry.js";
 import { mutableLarRecord, type LarDoc } from "../src/base-doc.js";
 
@@ -60,7 +60,7 @@ describe("members-board — write/read roundtrip + fail-closed extraction", () =
     const board = emptyBoard();
     // A forged tiddler carrying a valid-shaped entry PLUS an extra "email" — the coercer copies the floor alone.
     const smuggled = { ...entry, email: "who@example.com", displayName: "Real Name" };
-    const key = membershipEntryKey(entry.nym, entry.action, entry.version);
+    const key = carriageEntryKey(entry.nym, entry.action, entry.version);
     board.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(smuggled) }, EPOCH);
     const read = carriageEntriesFromBoard(board);
     expect(read).toHaveLength(1);

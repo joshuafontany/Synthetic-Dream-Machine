@@ -71,6 +71,17 @@ export function carriageDocUrl(nexusPubkey: string): AutomergeUrl {
  * The federation gate federates this board like @crossroads + WHO, so a rotation propagates to every honest
  * carrier and a stranger walks the identifier→head mapping cold — bounded by sync-latency, never a global now.
  */
+/**
+ * The Nexus's VOUCH board URL — deterministic, so every vessel folds the lineage from the SAME issued
+ * invites. Sibling to the carriage + antigen boards under one nexus-pubkey: carriage says who carries,
+ * antigen says who stands banned, and this says WHO VOUCHED FOR WHOM — the seed-rooted DAG the admission
+ * price walks. A vouch is board-tracked precisely because it is attributable (cabal-invite names its
+ * voucher in the clear); the TRACELESS boot-invite has no board and must never gain one.
+ */
+export function vouchBoardDocUrl(nexusPubkey: string): AutomergeUrl {
+  return deterministicDocUrl(`${nexusRegistryUri(nexusPubkey)}#vouch`);
+}
+
 export function personaKelBoardDocUrl(nexusPubkey: string): AutomergeUrl {
   return deterministicDocUrl(`${nexusHandlesUri(nexusPubkey)}#persona-kel`);
 }
