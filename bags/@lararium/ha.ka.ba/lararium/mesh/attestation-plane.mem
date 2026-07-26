@@ -1,0 +1,204 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/attestation-plane.mem"
+l-space   = "lararium"
+mana      = 14
+manao     = 14
+manaoio   = 13
+register  = "Synthesis"
+retain    = true
+role      = "OPERATOR-APPROVED design intent for the attestation plane: how a Nexus co-signs a public Handle, and grants a scarce host-scoped sidecar nym, WITHOUT the attestor becoming a registrar. Six rulings — the severability+render law, fleet-span telemetry, attestor-separated-from-host (kahu HOST, contracted operators ATTEST), governance split from infra duty, an append-only log with a named obliged watcher, and the sidecar held as a lease. Drawn from five research sweeps over NIP-05, AT Proto, WebPKI/CT, Sovrin, eIDAS, ENS/Namecoin/Handshake, and the fediverse."
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/mesh/attestation-plane"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #the-seat >>
+
+! The Attestation Plane ~ where the registrar seat hides
+
+''The registrar seat never appears in a spec.'' Five research sweeps across every comparable system found
+it three times, and never once in a protocol document:
+
+* in ''Nostr'' it appeared as a '''checkmark''' — NIP-05 states the severability law outright ("clients must
+  always follow public keys, not NIP-05 addresses"), and clients drew a badge anyway. The spec held; the
+  render policy captured. Nostr was then OFFERED the CA-shaped chain (NIP-85) and REFUSED it.
+* in ''Bluesky'' it appeared as an '''AppView allowlist''' — any domain may serve as a handle, and 98.9% took
+  the default; `did:web` sat fully specified at six accounts in five million. Then Verification arrived, and
+  nine months later a verified `@icegov` became the third most-blocked account on the service.
+* in ''Mastodon'' it appeared as a '''login prompt on the server suspending you''' — `Move` must issue FROM
+  the old host, signed by the old key, while logged in.
+
+<<~ confidence Synthesis-Canon 15/20 >> ''Therefore the kahu co-signature does not carry the risk. The
+CLIENT'S RENDER POLICY and the EXIT PROOF carry it.'' Spec both as tightly as resolution gets spec'd.
+
+''The frame beneath it'' — Zooko's triangle, resolved by Stiegler's petname split. The '''key''' runs global
+and unforgeable; the '''nickname''' (the glamour) runs memorable and NON-UNIQUE by design; the '''petname'''
+runs local and belongs to the reader. A sidecar nym asks for the fourth thing the triangle forbids — globally
+unique, human-meaningful, AND decentralized — so it MUST pay in an attestor, a price, or a host. The rulings
+below decide which, and keep the payment reversible.
+
+''The compressed law from the sweeps:'' a namespace that removes the attestor and keeps the registry (ENS,
+Namecoin, Handshake) finds price rate-limits and never adjudicates — ENS settled its own flagship dispute in
+a US federal court for ~$1.05M and now petitions ICANN. A namespace that removes the registry and keeps the
+attestor (the fediverse) finds judgment works locally and arbitrarily, and no name survives leaving. ''Each
+bought what the other lacks; neither bought both.'' The third position — bind the name to a KEY THE HOLDER
+KEEPS and attach claims as separate, revocable, logged attestation EDGES — stays unoccupied, and this stack
+already stands closest to it.
+
+<<~/ahu >>
+
+<<~ ahu #the-six >>
+
+!! The Six Rulings (operator, 2026-07-26)
+
+!!! 1 · The severability + render law rides in the CLIENT SPEC
+
+''EDGE, NEVER BADGE.'' A sidecar nym renders WITH ITS ATTRIBUTOR VISIBLE — `@nym@kowloon.<nexus>` shown ''as
+attested by X'' reads as provenance; a bare check reads as a verdict. Spritely names this the ''edge name''
+(`Alyssa ⇒ Jane Nym`); a name that appears to come from nowhere has already become a registrar's.
+
+''SEVERABILITY, normative:'' a sidecar address that stops resolving MUST drop the label and MUST NOT alter
+the graph. The durable identity sits BENEATH the name — losing an address costs a convenience, never a self.
+Both NIP-05 and AT Proto wrote this law and BOTH survived provider risk because of it.
+
+The dyad renders this natively: a dyad already names vessel × veil, so ''everything renders with its edge
+visible'' reads as a property of the ontology rather than a rule bolted onto it.
+
+!!! 2 · Instrument the multi-Nexus FLEET SPAN from day one
+
+''If a decentralization argument depends on users exercising an option, measure the exercise rate or stop
+making the argument.'' The most-refuted claim across every sweep: Bluesky opened custom domains to all and
+98.9% stayed on the default; Handshake reserved ~80,000 names free for rights-holders and ~7.5% ever claimed.
+
+The measurable here reads: ''what fraction of humans hold dyads across MORE THAN ONE Nexus?'' `fleetSpan`
+computes it per fleet. A fleet gathered on one vessel — or inside one Nexus — provides no continuity when
+that place dies or turns hostile, so the span IS the exit right, measured.
+
+''No retroactive baseline exists anywhere in the field'' (nobody has re-measured Bluesky since April 2024).
+Instrument at founding or lose the baseline permanently.
+
+<<~ confidence Synthesis 11/20 >> ''OPEN (operator):'' a cross-Nexus rate eventually requires different kahu
+groups to SHARE TELEMETRY — which wants its own consent shape, since a naive share would correlate the very
+fleets the infra layer keeps un-correlatable.
+
+!!! 3 · The attestor stands SEPARATE from the host
+
+''RULED, and inverted from the obvious arrangement: the kahu HOST; the Nexus's CONTRACTED OPERATORS ATTEST.''
+The hand holding the infrastructure power does NOT hold the blessing power. Precedent: ICANN's 1999
+registry/registrar split broke the Network Solutions monopoly by forcing exactly this separation.
+
+Why it matters more than hygiene — ''whoever RESOLVES holds final say regardless of who attests.'' OpenNIC
+voted 13–2 to drop `.bit`, and a namespace with no attestor at all got adjudicated by the only party who
+could still say no. Adjudication relocates; it never vanishes. Keeping the resolving hand and the attesting
+hand apart is free today and impossible later.
+
+''The guild vouch law holds here too'' — an attesting operator stakes its own standing, and the lineage
+prices concentration among attestors exactly as it prices it among vouchers (`admission-on-a-lineage`).
+
+!!! 4 · Governance splits from infra duty
+
+''Sovrin died of this, with no adversary at all'' — 10 Stewards (2017) → 60+ (2019) → 1, dissolved 2025-05-21.
+Its own post-mortem names the cause: "limited involvement from the Steward community in governance has placed
+a heavy burden on the Trustees." ''It bundled governance duty onto unpaid infrastructure operators; the
+governance half went unperformed first, and authority pooled in whoever kept showing up.''
+
+A kahu-cabal carrying both roles inherits that failure. ''SPLIT THEM OR FUND THEM.''
+
+<<~ confidence Synthesis 11/20 >> ''OPEN (operator):'' plans point at the Open Collective platform as the
+funding-and-accountability seam.
+
+!!! 5 · An append-only attestation log, with a NAMED OBLIGED WATCHER
+
+Certificate Transparency stands as the strongest positive result in the whole sweep: it ''splits issuance
+AUTHORITY from issuance VISIBILITY, then makes visibility a condition of the certificate functioning at
+all.'' The CA keeps its job and loses its privacy. Receipts: Symantec 2015 (23 misissued certs became 187),
+Ayer's 2017 audit (100+ the CA never self-reported).
+
+So kahu-plane attestations publish to an append-only log the attestor does not control, monitorable by any
+Nexus.
+
+''THE WATCHER IS NOT OPTIONAL.'' CT's one real hole — split views — has a specified cure (gossip) with "next
+to no deployment in the wild" since 2015. ''A log with no obliged watcher protects nobody.'' Name who must
+watch, or the log becomes the failure rather than the fix.
+
+''THE ORDERING RIDES AN EPOCH, NEVER A TIMESTAMP'' (operator correction). CT scopes distrust "by SCT date",
+which asserts a global instant — un-pono under no-global-now. The value survives the clock: what the
+timestamp bought reads as non-repudiable ORDERING, surgical SCOPING, and third-party WITNESS, and all three
+want a ''witnessed partial order'' rather than a shared now. So: ''distrust everything bound at or after
+charter-epoch E'' — a content-addressed link in the hash-linked chain, locally verifiable by walking it.
+Liveness reads stay LOCAL (`persona-admit`: "no global now; read against a local clock"); ordering rides the
+chain. The instrument therefore stands mostly BUILT — `charterChain`, `charterEpochCid`, `boundEpoch`,
+persona-KEL `seq`, HandleCard `version`/`prev` already carry it.
+
+''OPEN:'' an attestation issued BETWEEN epochs wants a rule — the chain orders epochs, not the acts inside one.
+
+!!! 6 · The sidecar rides as a LEASE
+
+<<~ confidence Provisional-Synthesis 7/20 >> ''APPROVED IN PRINCIPLE ONLY — this rung awaits unpacking and
+carries no RULED language yet.''
+
+''Rent gates the flood, never the claim.'' Three price points across four orders of magnitude produced one
+outcome: Namecoin at ~free yielded 28 non-squatted names with real content out of 196,023; ENS at $5–640/yr
+saw only 22% of names ever set a record; Handshake's burned Vickrey bids produced 11M+ TLDs nobody resolves.
+''Never let anyone argue rent decides WHO DESERVES a name.''
+
+What rent measurably DOES buy reads as ''garbage collection'' — 1.17M ENS names expired that nobody wanted,
+against 241K contested. That recirculation suits a rival good, which the sidecar address is and which every
+other capture-answer in this stack (fork-as-exit, the capture clock) assumes away.
+
+''ONE HARD RULE ALREADY EARNED:'' expiry MUST kill RESOLUTION in the same act it kills the grant. ENS keeps
+resolution live past expiry and 2,633 payments landed with strangers who dropcaught a lapsed name. ''A rental
+namespace whose expiry does not invalidate resolution converts forgetfulness into theft.''
+
+''AND THE CAUTION THE LEASE CARRIES:'' the sweeps' cross-cut finding reads — in both failed models the name
+bound to a ''rented substrate'' (an on-chain rental contract, a hostname) and never to a key the holder keeps.
+So the lease stays right for RECIRCULATION and wrong as IDENTITY. It composes here only while the severability
+boundary (#1) holds absolutely: ''lease the address, never the self.''
+
+<<~/ahu >>
+
+<<~ ahu #what-stays-open >>
+
+!! What Stays Open
+
+* ''What does a sanction TARGET?'' The dyad model makes the ladder's targets precise for the first time —
+  sanctioning a dyad (this human on this device), a veil, a vessel (all its faces), or a fleet run as four
+  different acts with four different blast radii. The antigen bans a nym; WHICH one? Ostrom P5 (graduated
+  sanctions) reads violated while the board runs binary, and the fediverse measured the cost (of 1,807
+  instances only 20.1% publish a blocklist; 46.4% of those state a reason; no appeals machinery anywhere).
+* ''What is the unit of COLLECTIVE CHOICE?'' Ostrom P3 reads violated — a 2-of-3 signing quorum makes
+  operators rule-takers. Keyed to vessels, a human with five vessels casts five votes. Keyed to the Handle,
+  only public faces vote. Keyed to the fleet, membership must prove WITHOUT linking the dyads.
+* ''The rival good.'' Fork-as-exit assumes a NON-RIVAL good ("exit disciplines a captor only while forking
+  stays cheap" — `fork-place`); a host-scoped address does not fork. Ruling #6 gestures at the lease as the
+  answer and awaits unpacking.
+* ''Exit may COMFORT rather than discipline.'' Hirschman's lazy monopoly: a volunteer cabal running
+  infrastructure it wanted anyway loses little when critics depart, and cheap forking plus portable identity
+  produces exactly the mobility asymmetry that lets a core purchase internal peace by shedding its critics.
+  Candidate cure, unruled: a clean fork emits a signed public ''reasoned notice of departure'', so exit
+  transmits voice instead of draining it.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-siege-gate >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-price >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/alignment-layer >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
