@@ -195,3 +195,46 @@ export function fleetsOf(
 export function fleetSpan(fleet: readonly DyadRecord[]): number {
   return new Set(fleet.map((d) => normalizeDid(d.ref.vesselDid))).size;
 }
+
+// ── The fleet LABEL store — what `fleetUnderPetname` reads ────────────────────────────────────────────────
+//
+// TWO LABELS, TWO OBJECTS, and they do not collapse. `OwnPersonaPetnameStore` labels a VEIL — one face,
+// keyed by its handle-index ("my work face"). This labels a DYAD — one relationship ("gather this one into
+// my work fleet"). A human who gathers only whole faces will see the two agree; a human who gathers CERTAIN
+// relationships across faces needs the finer key, and the model admits that gathering, so the store must too.
+//
+// PRIVATE AND LOCAL, like its sibling. The label carries no authority, never federates, and never crosses a
+// wire — it holds the human's own map of themselves, which a captured vessel must not spill.
+
+/** How a runtime persists the human's PRIVATE fleet labels — a `{dyadId -> petname}` map, freely renamable. */
+export interface DyadPetnameStore {
+  get(dyadId: string): Promise<string | undefined>;
+  set(dyadId: string, petname: string): Promise<void>;
+  clear(dyadId: string): Promise<void>;
+  /** Every labelled relationship — `[dyadId, petname]` pairs. */
+  entries(): Promise<ReadonlyArray<readonly [string, string]>>;
+}
+
+/** Gather one relationship into a named fleet. A blank label REFUSES rather than silently erasing one. */
+export async function gatherDyad(store: DyadPetnameStore, id: string, petname: string): Promise<void> {
+  const trimmed = petname.trim();
+  if (trimmed.length === 0) {
+    throw new Error("gatherDyad: a blank label names no fleet — use `ungatherDyad` to drop one.");
+  }
+  await store.set(id, trimmed);
+}
+
+/** Drop a relationship out of its fleet. The dyad survives, ungathered — never deleted by losing a label. */
+export async function ungatherDyad(store: DyadPetnameStore, id: string): Promise<void> {
+  await store.clear(id);
+}
+
+/**
+ * Snapshot the labels into the pure resolver `fleetUnderPetname`/`fleetsOf` take. Reading the whole map ONCE
+ * keeps the closures synchronous and side-effect-free, so a fleet stays a computation over data the caller
+ * already holds rather than a lookup that could fail halfway through and yield half a fleet.
+ */
+export async function dyadPetnameResolver(store: DyadPetnameStore): Promise<(id: string) => string | undefined> {
+  const map = new Map(await store.entries());
+  return (id: string) => map.get(id);
+}

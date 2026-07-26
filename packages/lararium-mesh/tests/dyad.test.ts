@@ -12,6 +12,7 @@ import { describe, test, expect } from "vitest";
 import {
   dyadId, dyadSlotKey, dyadFromEdge, writeDyad, dyadsFromDoc,
   dyadsOfVeil, dyadsOnVessel, fleetUnderPetname, fleetsOf, fleetSpan,
+  gatherDyad, ungatherDyad, dyadPetnameResolver,
   emptyLarDoc, type DyadRecord, type LarDoc,
 } from "../src/index.js";
 import type { DeviceDelegationTiddler } from "../src/device-delegation.js";
@@ -157,5 +158,61 @@ describe("the fleet evaluates as a closure and stores nothing", () => {
     expect(fleetSpan(fleetUnderPetname(all, "me", petnameOf))).toBe(2);
     expect(fleetSpan(fleetUnderPetname(all, "masked", petnameOf))).toBe(1);
     expect(fleetSpan([])).toBe(0);
+  });
+});
+
+describe("the fleet LABEL store — what supplies the closure's resolver", () => {
+  /** A store standing in for the platform seam (node fs / browser IDB). */
+  function memStore() {
+    const m = new Map<string, string>();
+    return {
+      map: m,
+      get: async (id: string) => m.get(id),
+      set: async (id: string, p: string) => void m.set(id, p),
+      clear: async (id: string) => void m.delete(id),
+      entries: async () => [...m.entries()] as ReadonlyArray<readonly [string, string]>,
+    };
+  }
+
+  const work = dyadFromEdge(edge(VESSEL_A, VEIL_WORK));
+  const away = dyadFromEdge(edge(VESSEL_B, VEIL_WORK));
+
+  test("gathering labels a relationship, and the resolver feeds the closure end-to-end", async () => {
+    const store = memStore();
+    await gatherDyad(store, work.dyadId, "  me  ");     // trimmed on the way in
+    await gatherDyad(store, away.dyadId, "me");
+
+    const resolve = await dyadPetnameResolver(store);
+    const fleet = fleetUnderPetname([work, away], "me", resolve);
+    expect(fleet).toHaveLength(2);
+    expect(fleetSpan(fleet)).toBe(2);
+  });
+
+  test("a BLANK label refuses rather than silently erasing a gathering", async () => {
+    const store = memStore();
+    await gatherDyad(store, work.dyadId, "me");
+    await expect(gatherDyad(store, work.dyadId, "   ")).rejects.toThrow(/blank label/);
+    expect(await store.get(work.dyadId)).toBe("me");    // the label survived the refusal
+  });
+
+  test("ungathering drops the LABEL and never the relationship", async () => {
+    const store = memStore();
+    await gatherDyad(store, work.dyadId, "me");
+    await ungatherDyad(store, work.dyadId);
+
+    const resolve = await dyadPetnameResolver(store);
+    expect(fleetUnderPetname([work], "me", resolve)).toEqual([]);   // out of the fleet …
+    expect(dyadsFromDoc(docOf([work]))).toHaveLength(1);            // … and still a dyad
+  });
+
+  // The resolver snapshots ONCE, so a fleet computes over data the caller already holds rather than a
+  // lookup that could fail halfway and hand back half a fleet.
+  test("the resolver reads a SNAPSHOT — a later write cannot change a fleet mid-computation", async () => {
+    const store = memStore();
+    await gatherDyad(store, work.dyadId, "me");
+    const resolve = await dyadPetnameResolver(store);
+
+    await gatherDyad(store, away.dyadId, "me");                     // written AFTER the snapshot
+    expect(fleetUnderPetname([work, away], "me", resolve)).toHaveLength(1);
   });
 });
