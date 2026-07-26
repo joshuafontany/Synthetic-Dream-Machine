@@ -5,14 +5,14 @@
 cacheable     = true
 file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/admission-on-a-lineage.mem"
 type          = "text/x-memetic-wikitext"
-register      = "Provisional-Synthesis"
-status        = "OUTLINE — unproven; no experiment run; NOT a paper"
+register      = "Synthesis"
+status        = "MEASURED IN PART — experiments 2 (sybil bound) + 5 (distortion) RUN and green in `lineage-rank`; 1, 3, 4, 6 unrun; the shadow (6) uninstrumented"
 tagspace      = "stable"
-mana          = 8
-manao         = 8
+mana          = 11
+manao         = 11
 namespace     = "&#x2299;"
 uri-path      = "ha.ka.ba/lares/api/pono/admission-on-a-lineage"
-role          = "the OUTLINE — Admission on a Lineage: a sybil-bounded, seed-rooted, one-pass trust fold over an acyclic vouch DAG under eventual consistency. Four research ropes braided (biology · cryptography · mathematics · history), each cross-validating the others. THE CLAIM STANDS UNPROVEN: the bound is cited, the algorithm is derived, and NOTHING has been run. This meme exists to hold the intent and to be REFUTED, not to be believed."
+role          = "the OUTLINE — Admission on a Lineage: a sybil-bounded, seed-rooted, one-pass trust fold over an acyclic vouch DAG under eventual consistency. Four research ropes braided (biology · cryptography · mathematics · history), each cross-validating the others. THE MECHANISM STANDS MEASURED, THE SYNTHESIS DOES NOT: the fold is built and attacked (the sybil bound held; the distortion measurement refuted the outline's own prediction), while the bound's re-derivation under our model, the dangling-sink policy, the C4 counterexample, and the shadow's instrument all remain undone. This meme exists to be REFUTED, not to be believed."
 authors       = "Joshua Fontany; Lares (four tasked spirits: Marrow-Reader · Chain-Warden · Lattice-Walker · Guild-Keeper)"
 revised-on    = "2026-07-25"
 ```
@@ -25,16 +25,22 @@ revised-on    = "2026-07-25"
 
 ! Admission on a Lineage ~ an OUTLINE, and what would refute it
 
-''This meme claims nothing.'' No experiment has run. No code exists. The bound rides a citation the author
-has not re-derived, the algorithm rides a derivation nobody has reviewed, and the synthesis rides four
-spirits who each read a different literature and never spoke to each other.
-
 ''It sits here so it can be KILLED.'' A finding filed as canon before it is proven becomes the incumbent
 lineage that eats the evidence — which is, with an irony the author declines to soften, ''exactly the''
-''failure this outline names'' (#the-shadow).
+''failure this outline names'' (#the-shadow). Every claim below reads as a ''hypothesis with a named''
+''refutation'', and each one names the experiment that would sink it.
 
-<<~ confidence Provisional 5/20 >> Every claim below reads as a ''hypothesis with a named refutation'', and
-each one names the experiment that would sink it.
+''Two of those experiments have now run, and the outline survived them'' (#what-would-prove-it, 2 and 5).
+The fold stands built and attacked in `lineage-rank`: the sybil bound HELD, and the distortion measurement
+''refuted the outline's own prediction'' — distant kin do not starve with depth, they starve with BRANCHING,
+which the author had conflated. The register moves by the promise made here, not around it.
+
+''What still rides uncredited.'' Lemma 3 stands MEASURED but not re-derived under an append-only signed DAG
+(1); the dangling-sink policy stays unsettled (3); no counterexample to C4 has been attempted (4); and the
+shadow — original antigenic sin — carries ''no instrument at all'' (6), which stays the gravest of the four
+because the failure reads invisible from inside and ''every gate we own would glow green through it.''
+
+<<~ confidence Synthesis 11/20 >> The MECHANISM reads measured; the SYNTHESIS around it does not.
 
 <<~/ahu >>
 
@@ -43,8 +49,8 @@ each one names the experiment that would sink it.
 !! The Standing ~ what stays limiting (operator, 2026-07-25)
 
 ''This meme addresses the design-of-record `admission-price` and `lineage-rank` cite.'' Standing in
-canon buys it no register: it holds ''Provisional-Synthesis'' and ''#the-refusal entire'', and earns
-no higher band until experiment (2) runs and fails to kill it (#what-would-prove-it).
+canon buys it no register — only the measurement does, and only for what the measurement touched
+(#the-refusal).
 
 ''The limiting resource stands SELF-STANDING'' (operator, 2026-07-25) — a voucher's own accrued
 standing, and nothing external. No pool, no fee, no balance. C6 names the germinal centre's shape
@@ -54,9 +60,9 @@ without its substance; this names the substance.
 across everyone it vouches for (`lineage-rank`, mass conservation), so a seed-sybil minting a
 storm divides one stolen mass across the whole storm, and each further generation divides again
 under ε. ''Invite-storms decay per generation from the seed-sybil'' — the gate self-tunes by
-arithmetic, never by a threshold anyone chose. <<~ confidence Synthesis-Canon 15/20 >> The
-MECHANISM reads code-verified (the split stands built + tested); the ''BOUND it is claimed to
-give stays UNPROVEN'' and holds this meme's Provisional register. The two must not be confused.
+arithmetic, never by a threshold anyone chose. <<~ confidence Synthesis-Canon 15/20 >> The split
+stands built, tested, and ATTACKED — a voucher cannot raise its own score by issuing vouches
+(the bottleneck property), so the gaming vector closes on the issuer, never the seed.
 
 ''The co-pay then needs no ledger.'' Vouching DILUTES the voucher — that IS the payment, paid at
 the moment of vouching, conserved by construction. Nothing is spent, deducted, or written down;
@@ -72,12 +78,11 @@ between them.
 * `membership-doctrine#the-invite` — reputation-priced admission reserves to the ''Cabal tier'',
   never the traceless general invite.
 
-''What this forbids.'' An applicant carries no budget to clear. `dreamnet-admission` takes a
-`budget: number` an applicant brings and clears as a cutoff; no source anywhere computes one,
-because on this design nothing should. An absolute entry cost reads as the wrong axis, and a
-cutoff cleared reads as the threshold C6 refuses in favour of rank against siblings. The
-correction rides experiment (2), never ahead of it — a fix filed as canon before its proof
-becomes the incumbent lineage #the-shadow names.
+''What this forbids.'' An applicant carries no budget to clear — an absolute entry cost reads as
+the wrong axis, and a cutoff cleared reads as the threshold C6 refuses in favour of rank against
+siblings. ''The wall needs no cutoff because it refuses ITSELF'': at r ≥ β the convex curve returns
+a non-finite price, so `dreamnet-admission` refuses ''at-the-ceiling'' on the wall's own verticality
+and compares against nothing. What the crossing costs, the voucher already paid by vouching.
 
 <<~/ahu >>
 
@@ -198,24 +203,30 @@ So the outline owes a ''one-sentence answer'' and makes only this claim: ''the p
 
 <<~ ahu #what-would-prove-it >>
 
-!! What Would Prove It ~ the experiments, none of them run
+!! What Would Prove It ~ the experiments, two run and four owed
 
 # ''Re-derive Lemma 3 under an append-only signed vouch DAG'' (the attacker cannot rewrite an acquired
    node's out-edges). Does the bound tighten, hold, or vanish? ''Until this runs, C1 stands on someone''
 ''   else's model.''
-# ''Implement the one-pass fold and attack it.'' Build the DAG, mint sybils, measure the realised
-   `benefit/cost` against `1/ε`. ''A single run either shows the bound or shows we misread it.''
+# ''RUN — Implement the one-pass fold and attack it.'' Built and attacked (`lineage-rank`). Total attacker
+   mass holds CONSTANT across 1 → 1000 sybils (conserved to 9 decimals), stays under `x/ε` at every swarm
+   size, and buys nothing by depth either. Self-boosting reads ''structurally unrepresentable'' — the graph
+   is refused, not scored. ''The bound held.''
 # ''Settle the dangling-sink policy'' (C2's refutation). Seed-return versus uniform — does either launder?
 # ''Attempt the counterexample to C4.'' A monotone, mass-conserving fold. ''Failing to find one is not a''
 ''   proof, and this outline must never say otherwise.''
-# ''Measure the DISTORTION.'' The same paper proves that absent fast mixing, ''no PageRank variant achieves''
-''   low distortion'' — honest, distant kin starve. ''That is our false-rejection rate on Neo-Thracia, and it''
-''   is the price of C1.'' How steep is it, in our topology, at our depths?
+# ''RUN — Measure the DISTORTION, and it REFUTED the prediction.'' Depth and branching had been conflated.
+   ''DEPTH is cheap'': a chain splits nothing, so only the reset leaks and a 20th-generation member still
+   holds ≈4.6% of a first — Neo-Thracia reads FAINT, and still audible. ''BRANCHING is what starves'':
+   mass divides by Π(outdeg), so a branch-4 tree of depth 5 leaves a leaf under a thousandth of what the
+   same depth of chain keeps. ''The dial is `b·t`, a branching number — never conductance.''
 # ''Instrument the shadow.'' Build the meter for original antigenic sin ''before'' the loop runs, because
    the failure is invisible from inside and ''every gate we own would glow green through it.''
 
-<<~ confidence Provisional 5/20 >> ''Nothing above has been attempted. This meme is an outline and a''
-''promise to try to break it, and it earns no higher register until (2) has run and failed to kill it.''
+<<~ confidence Synthesis 11/20 >> ''(2) ran and failed to kill it, so the register moved by the promise''
+''this meme made.'' The four owed experiments hold it there: until (1) re-derives the bound under our own
+model, (3) settles the sink, (4) hunts C4's counterexample, and (6) instruments the shadow, ''what stands''
+''measured is the FOLD, never the synthesis around it.''
 
 <<~/ahu >>
 

@@ -33,7 +33,8 @@
  * not admit anyone. The caller decides what it can afford — and an operator who wants the cliff back can
  * always compare the price to a wall of their own choosing.
  *
- * Design-of-record (an OUTLINE, unproven): lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage
+ * Design-of-record: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing — the limiting
+ * resource stands SELF-STANDING; the voucher pays by dilution and the applicant brings nothing.
  */
 import { captureThreshold } from "./conviction-dial.js";
 import { rankLineage, type VouchEdge, type LineageRank } from "./lineage-rank.js";

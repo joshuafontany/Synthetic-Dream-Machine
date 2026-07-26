@@ -36,7 +36,8 @@
  * low distortion. Honest kin far from the seed starve toward zero. That is a false-REJECTION rate, it is the
  * cost of the bound, and a mesh cut off for centuries pays it in full.
  *
- * Design-of-record: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage (an OUTLINE, unproven).
+ * Design-of-record: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage — the FOLD stands measured here
+ * (sybil bound held; distortion refuted its own prediction), the synthesis around it does not.
  */
 
 /** A vouch: `voucher` staked its standing on `joiner`. The edge is the object; the identity is free. */

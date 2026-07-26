@@ -30,13 +30,15 @@ import {
   decideCabalJoin, type CabalInvite, type CabalJoinPolicy, type JoinRefusal,
 } from "./cabal-invite.js";
 import { priceAdmission, type AdmissionDials, type AdmissionPrice } from "./admission-price.js";
-import { canonicalIdentity } from "./vouch-dag.js";
+import {
+  canonicalIdentity, vouchDagFromInvites, type CappedVouch, type VouchKeyResolver,
+} from "./vouch-dag.js";
 import type { VouchEdge } from "./lineage-rank.js";
 
 /** Why a crossing did not clear — the invite gate's own refusals, plus the one the price wall raises. */
 export type AdmissionRefusal =
-  | JoinRefusal      // the structural gate refused (no-invite / wrong-place / wrong-joiner / expired / bad-signature)
-  | "unaffordable";  // the invite cleared, but the priced crossing exceeds what the applicant brought
+  | JoinRefusal         // the structural gate refused (no-invite / wrong-place / wrong-joiner / expired / bad-signature)
+  | "at-the-ceiling";   // the invite cleared, but the vouching cluster sits at β — the convex wall stands vertical
 
 export interface AdmissionVerdict {
   /** The crossing cleared BOTH gates. */
@@ -52,10 +54,15 @@ export interface AdmissionVerdict {
 /**
  * Admit a joiner to a DreamNet place — the whole gate, both signals.
  *
- * The `budget` is what the applicant brought to pay; the caller owns where it comes from (a stake, a burn, a
- * standing balance). A crossing clears iff the invite gate admits AND the priced crossing sits within budget.
+ * THE APPLICANT BRINGS NOTHING. There is no budget, balance, or fee to clear — the limiting resource stands
+ * SELF-STANDING, and the cost falls on the VOUCHER, paid by dilution the moment they vouch (a voucher's score
+ * splits across everyone it vouches for, so vouching spends the only thing it can spend: its own standing).
+ * A crossing therefore clears iff the invite gate admits AND the convex wall has not gone vertical.
+ *
  * An `open` policy skips the invite requirement but STILL prices — open means "no invite needed", never
- * "free": the convex wall keeps pricing the cartel out whichever way the invite dial is set.
+ * "free": the wall keeps pricing the cartel out whichever way the invite dial is set.
+ *
+ * Meme: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing
  */
 export async function admitToDreamnet(args: {
   readonly policy:            CabalJoinPolicy;
@@ -72,8 +79,6 @@ export async function admitToDreamnet(args: {
   readonly applicant:         string;
   /** The operator's fairness settings — arrived, never chosen here. */
   readonly dials:             AdmissionDials;
-  /** What the applicant brought to pay. The crossing clears only if the price sits within it. */
-  readonly budget:            number;
 }): Promise<AdmissionVerdict> {
   // Signal-2 first: cheap, offline, and it names its own refusal where a price cannot.
   const structural = await decideCabalJoin({
@@ -102,10 +107,71 @@ export async function admitToDreamnet(args: {
     dials:     args.dials,
   });
 
-  if (price.price > args.budget) {
+  // The wall refuses ITSELF. At r ≥ β the convex curve returns a non-finite price — not a large number to
+  // compare against something, an actual wall. No budget rides here because the applicant brings none: the
+  // cost falls on the VOUCHER, paid by dilution at the moment of vouching, and a cluster that has vouched
+  // its way to the ceiling prices its next crossing at infinity whatever anyone brought.
+  if (!Number.isFinite(price.price)) {
     return voucher
-      ? { admitted: false, refusal: "unaffordable", voucherDid: voucher, price }
-      : { admitted: false, refusal: "unaffordable", price };
+      ? { admitted: false, refusal: "at-the-ceiling", voucherDid: voucher, price }
+      : { admitted: false, refusal: "at-the-ceiling", price };
   }
   return voucher ? { admitted: true, voucherDid: voucher, price } : { admitted: true, price };
+}
+
+/** A verdict that also reports what the per-voucher cap turned away while folding the lineage. */
+export interface LineageAdmission extends AdmissionVerdict {
+  /** Edges the cap refused, in arrival order — the attack-edge budget made VISIBLE, never silently short. */
+  readonly capped: readonly CappedVouch[];
+}
+
+/**
+ * Admit on a lineage — the whole crossing from the ISSUED INVITES, cap and all.
+ *
+ * `admitToDreamnet` takes `edges` already folded, which leaves a caller free to assemble them by hand. That
+ * hand-assembly SKIPS the per-voucher cap, and the cap is not a convenience: it is the choke that bounds the
+ * mass any single hand injects into the lineage. A gate whose choke depends on the caller remembering to run
+ * it has no choke. So this seam takes the invites THEMSELVES and folds them here, where the cap cannot be
+ * left out — the same designation-carries-authority discipline the rest of the mesh holds.
+ *
+ * What the fold turned away rides back in `capped` rather than vanishing, so a caller reads the budget it
+ * spent instead of trusting a graph that came back quietly shorter than the invites it handed in.
+ *
+ * Platform-blind, like everything here: node and browser compose the identical seam.
+ * Meme: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing
+ */
+export async function admitOnLineage(args: {
+  readonly policy:            CabalJoinPolicy;
+  readonly placeDocIdHex:     string;
+  readonly joinerIdentityHex: string;
+  /** The invite THIS applicant presents — the structural signal-2. */
+  readonly invite:            CabalInvite | null;
+  readonly now:               Date;
+  readonly verify:            (bytes: Uint8Array, sigHex: string, voucherDid: string) => Promise<boolean>;
+  /** Every invite the place has issued — the lineage's raw material, folded here and never before. */
+  readonly issued:            readonly CabalInvite[];
+  readonly seed:              string;
+  readonly applicant:         string;
+  readonly dials:             AdmissionDials;
+  /** The choke on any one hand's out-degree. Absent → uncapped, which is a DELIBERATE operator turn. */
+  readonly maxVouchesPerVoucher?: number;
+  readonly vouchKeyOf?:       VouchKeyResolver;
+}): Promise<LineageAdmission> {
+  const dag = vouchDagFromInvites(args.issued, {
+    ...(args.vouchKeyOf !== undefined ? { vouchKeyOf: args.vouchKeyOf } : {}),
+    ...(args.maxVouchesPerVoucher !== undefined ? { maxVouchesPerVoucher: args.maxVouchesPerVoucher } : {}),
+  });
+  const verdict = await admitToDreamnet({
+    policy:            args.policy,
+    placeDocIdHex:     args.placeDocIdHex,
+    joinerIdentityHex: args.joinerIdentityHex,
+    invite:            args.invite,
+    now:               args.now,
+    verify:            args.verify,
+    edges:             dag.edges,
+    seed:              args.seed,
+    applicant:         args.applicant,
+    dials:             args.dials,
+  });
+  return { ...verdict, capped: dag.capped };
 }

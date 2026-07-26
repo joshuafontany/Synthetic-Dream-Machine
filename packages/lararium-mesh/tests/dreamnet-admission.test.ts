@@ -2,9 +2,11 @@
  * dreamnet-admission.test.ts — the seam admits on BOTH signals, and refuses at the first gate that fails.
  *
  * Four claims, four groups: the structural gate refuses BEFORE any price is walked (invite-only, no invite);
- * a valid invite that prices within budget CROSSES; a valid invite priced ABOVE budget refuses as
- * unaffordable while still naming the voucher (the co-pay stands); and `open` policy skips the invite but
- * still PRICES — open is not free.
+ * a valid invite CROSSES and names the voucher (the co-pay stands); a cluster AT THE CEILING refuses on the
+ * wall's own verticality; and `open` policy skips the invite but still PRICES — open is not free.
+ *
+ * THE APPLICANT BRINGS NOTHING. No budget rides here: the cost falls on the voucher by dilution, and the
+ * convex wall refuses ITSELF by returning a non-finite price at r ≥ β. There is nothing to compare against.
  */
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
@@ -27,8 +29,12 @@ const JOINER = "b".repeat(64);
 const NOW = new Date("2026-07-14T00:00:00Z");
 const LATER = "2026-08-01T00:00:00Z";
 
-/** Dials loose enough that a well-rooted applicant prices cheap; the tests move budget, not dials. */
+/** Dials loose enough that a well-rooted applicant prices cheap — β sits far above any cluster here. */
 const DIALS: AdmissionDials = { epsilon: 0.15, beta: 0.9, rho: 1, supply: 1, alpha: 0.5 };
+
+/** The SAME dials with the capture ceiling pulled UNDER a lone voucher's share — the wall goes vertical.
+ *  Only β moves: the refusal must come from the operator's ceiling, never from a different lineage. */
+const TIGHT: AdmissionDials = { ...DIALS, beta: 0.2 };
 
 async function invite(over: Partial<{ place: string; joiner: string; expiresAt: string }> = {}) {
   return signCabalInvite({
@@ -44,14 +50,14 @@ describe("the seam runs BOTH signals, structural first", () => {
     const v = await admitToDreamnet({
       policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: null, now: NOW, verify,
-      edges: [], seed: "s", applicant: JOINER, dials: DIALS, budget: Infinity,
+      edges: [], seed: "s", applicant: JOINER, dials: DIALS,
     });
     expect(v.admitted).toBe(false);
     expect(v.refusal).toBe("no-invite");
     expect(v.price).toBeUndefined();   // the price wall never ran — the invite gate spoke first
   });
 
-  test("a valid invite priced within budget CROSSES, and names the voucher for the co-pay", async () => {
+  test("a valid invite CROSSES on a real lineage, and names the voucher for the co-pay", async () => {
     const voucherDid = await pubOf(VOUCHER_SEED);
     // a two-edge lineage: seed → voucher → joiner, so the joiner carries a real rank and prices cheap
     const edges: VouchEdge[] = [
@@ -61,25 +67,32 @@ describe("the seam runs BOTH signals, structural first", () => {
     const v = await admitToDreamnet({
       policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: await invite(), now: NOW, verify,
-      edges, seed: "s", applicant: JOINER, dials: DIALS, budget: Infinity,
+      edges, seed: "s", applicant: JOINER, dials: DIALS,
     });
     expect(v.admitted).toBe(true);
     expect(v.voucherDid).toBe(voucherDid);
     expect(v.price?.rank).toBeGreaterThan(0);
+    expect(Number.isFinite(v.price!.price)).toBe(true);   // below the ceiling the wall stays passable
   });
 
-  test("a valid invite priced ABOVE budget refuses as unaffordable — the voucher still stands", async () => {
+  test("a cluster AT THE CEILING refuses on the wall's own verticality — the voucher still stands", async () => {
     const voucherDid = await pubOf(VOUCHER_SEED);
+    // The SAME lineage that crossed above, priced against a ceiling pulled under the voucher's share. The
+    // refusal must arrive as a non-finite price — an actual wall — not as a large number losing a comparison.
+    const edges: VouchEdge[] = [
+      { voucher: "s", joiner: voucherDid },
+      { voucher: voucherDid, joiner: JOINER },
+    ];
     const v = await admitToDreamnet({
       policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: await invite(), now: NOW, verify,
-      // unranked applicant → prices at the bar itself; a zero budget cannot clear it
-      edges: [], seed: "s", applicant: JOINER, dials: DIALS, budget: 0,
+      edges, seed: "s", applicant: JOINER, dials: TIGHT,
     });
     expect(v.admitted).toBe(false);
-    expect(v.refusal).toBe("unaffordable");
-    expect(v.voucherDid).toBe(voucherDid);   // the co-pay is still attributable
-    expect(v.price).toBeDefined();
+    expect(v.refusal).toBe("at-the-ceiling");
+    expect(v.voucherDid).toBe(voucherDid);                 // the co-pay is still attributable
+    expect(v.price!.concentration).toBeGreaterThanOrEqual(TIGHT.beta);
+    expect(Number.isFinite(v.price!.price)).toBe(false);   // the wall itself, not a threshold anyone set
   });
 });
 
@@ -88,20 +101,24 @@ describe("open policy skips the invite but STILL prices", () => {
     const v = await admitToDreamnet({
       policy: { kind: "open" }, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: null, now: NOW, verify,
-      edges: [], seed: "s", applicant: JOINER, dials: DIALS, budget: Infinity,
+      edges: [], seed: "s", applicant: JOINER, dials: DIALS,
     });
     expect(v.admitted).toBe(true);
     expect(v.voucherDid).toBeUndefined();       // open — no vouch, so no co-pay
     expect(v.price?.concentration).toBe(0);     // empty cluster reads dispersed, never captured
   });
 
-  test("open policy still refuses a crossing priced above budget — open is not free", async () => {
+  // Open drops the INVITE requirement and nothing else. With no voucher the cluster reads empty, so
+  // concentration is 0 and the wall stays passable — open cannot be walked into a capture, because there is
+  // no cluster to concentrate. The pricing still RUNS, and that is what keeps open from meaning free.
+  test("open policy prices every crossing — the wall runs even with no invite to gate it", async () => {
     const v = await admitToDreamnet({
       policy: { kind: "open" }, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: null, now: NOW, verify,
-      edges: [], seed: "s", applicant: JOINER, dials: DIALS, budget: 0,
+      edges: [], seed: "s", applicant: JOINER, dials: TIGHT,
     });
-    expect(v.admitted).toBe(false);
-    expect(v.refusal).toBe("unaffordable");
+    expect(v.price).toBeDefined();               // priced, always — never skipped under open
+    expect(v.price!.concentration).toBe(0);      // no voucher → no cluster → dispersed, never captured
+    expect(v.admitted).toBe(true);
   });
 });
