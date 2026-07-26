@@ -240,6 +240,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     `Founder persona h0 stands as the operator-root — its root signs the founding bind; \`persona new 0\` names it (idempotent — loads the founder, sets its pet-name).`,
     ...FOUNDING_KAHU.map((k, i) => `lares persona new ${i} --name '${k.displayName}'`),
     `Then seat the 2-of-3 quorum from the named personas: lares nexus charter seat`,
+    `(These three name the founding KAHU QUORUM, never a limit on faces — this vessel's own slot ceiling rides LAR_PERSONA_SLOTS.)`,
   ];
 
   // 3. Emit the live-delta frame (dual output). Graceful: never hard-fail the wake.

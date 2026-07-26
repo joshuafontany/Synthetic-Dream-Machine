@@ -18,7 +18,10 @@ import {
   generateOrLoadPersonaGroupRoot, wearPersona, listPersonaRoots, loadActivePersonaIndex,
   makeNodePersonaPetnameStore,
 } from "@lararium/node";
-import { renameOwnPersona, ownPersonaPetname, HANDLE_INDEX_CEILING } from "@lararium/mesh";
+import {
+  renameOwnPersona, ownPersonaPetname, HANDLE_INDEX_CEILING,
+  refuseSlot, personaSlotCeiling, type VesselClass,
+} from "@lararium/mesh";
 import { cmdPersonaAdmit } from "./persona-admit-cmd.js";
 import { larDataDir } from "../env.js";
 import { emit, exitFor } from "../render.js";
@@ -37,12 +40,37 @@ function usage(): void {
   console.error("  founding sequence (three symmetric commands): lares persona new 0 --name 'Guru Joshua Fontany'  ·  new 1 --name 'Telarus, KSC'  ·  new 2 --name 'The Lindwyrm'  →  lares nexus charter seat");
 }
 
-/** Parse a positional handle-index, fail-closed to a clean usage error (assertHandleIndex range mirrored). */
+/**
+ * This vessel's persona-slot ceiling. A hearth or leaf carries an operator dial; a Herm carries none and
+ * never reaches here, because a faceless vessel stands CONTRACTED and mints no root through this verb at all.
+ * `LAR_PERSONA_SLOTS` is that dial — a human holds a multitude, and the code decides no part of how large.
+ */
+function vesselCeiling(): { cls: VesselClass; declared: number | undefined } {
+  const raw = process.env["LAR_PERSONA_SLOTS"];
+  return { cls: "hearth", declared: raw === undefined ? undefined : Number(raw) };
+}
+
+/**
+ * Parse a positional handle-index, fail-closed to a clean usage error. TWO bounds ride here and they mean
+ * different things: the derivation's own range (structural — no dial reaches past SLIP-0010's hardened
+ * ceiling) and THIS VESSEL's slot ceiling (an operator turn, raisable, and the refusal says so).
+ */
 function parseIndex(raw: string | undefined): number {
   if (raw === undefined) throw new UsageError("a handle-index is required (e.g. `lares persona new 1 --name '…'`)");
   const n = Number(raw);
   if (!Number.isSafeInteger(n) || n < 0 || n >= HANDLE_INDEX_CEILING) {
     throw new UsageError(`handle-index out of range: "${raw}" (expected 0 ≤ n < 0x80000000)`);
+  }
+  const { cls, declared } = vesselCeiling();
+  const refusal = refuseSlot(cls, n, declared);
+  if (refusal === "faceless-by-class") {
+    throw new UsageError("this vessel holds no human face by class — a crossroads stands contracted, never self-stood.");
+  }
+  if (refusal === "past-ceiling") {
+    throw new UsageError(
+      `handle-index ${n} sits at or past this vessel's slot ceiling (${personaSlotCeiling(cls, declared)}) — ` +
+      "raise it with LAR_PERSONA_SLOTS if this device should carry more faces.",
+    );
   }
   return n;
 }
