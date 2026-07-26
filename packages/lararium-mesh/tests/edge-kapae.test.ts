@@ -16,7 +16,8 @@ import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
   signEdgeKapae, edgeKapaeBytes, edgeKapaeKey, writeEdgeKapae, edgeKapaeActsFromBoard,
-  foldEdgeKapae, edgeShadowed, verifiedShadowSet, emptyLarDoc, type EdgeKapae,
+  foldEdgeKapae, edgeShadowed, verifiedShadowSet, shadowSetFromBoard, edgeKapaeBoardDocUrl,
+  emptyLarDoc, type EdgeKapae,
 } from "../src/index.js";
 import { hex, hexToBytes } from "../src/crypto.js";
 
@@ -128,5 +129,47 @@ describe("an unverified act carries no authority", () => {
     const key = edgeKapaeKey("edge-1", true, 0);
     doc.tiddlers[key] = { id: key, tiddler: { text: JSON.stringify(bad) } } as never;
     expect(edgeKapaeActsFromBoard(doc)).toEqual([]);
+  });
+});
+
+describe("the board — where a shadow becomes RAISABLE, not merely readable", () => {
+  test("★ the board round-trips: raise, read back, fold, and the shadow stands ★", async () => {
+    const authority = await pubOf(A_SEED);
+    const doc = emptyLarDoc();
+    writeEdgeKapae(doc, await act("edge-1", true, 1, A_SEED));
+
+    const shadowed = await shadowSetFromBoard(doc, () => authority, verify);
+    expect(edgeShadowed("edge-1", shadowed)).toBe(true);
+  });
+
+  test("a later LOWER on the board takes it back down — a deliberate gesture, and it lands", async () => {
+    const authority = await pubOf(A_SEED);
+    const doc = emptyLarDoc();
+    writeEdgeKapae(doc, await act("edge-1", true,  1, A_SEED));
+    writeEdgeKapae(doc, await act("edge-1", false, 2, A_SEED));
+
+    expect((await shadowSetFromBoard(doc, () => authority, verify)).size).toBe(0);
+    expect(Object.keys(doc.tiddlers)).toHaveLength(2);   // and BOTH acts survive as the record
+  });
+
+  test("★ a forged LOWER written straight onto the board cannot free the edge ★", async () => {
+    const authority = await pubOf(A_SEED);
+    const doc = emptyLarDoc();
+    writeEdgeKapae(doc, await act("edge-1", true,  1, A_SEED));
+    writeEdgeKapae(doc, await act("edge-1", false, 2, B_SEED));   // B has no authority over edge-1
+
+    expect(edgeShadowed("edge-1", await shadowSetFromBoard(doc, () => authority, verify))).toBe(true);
+  });
+
+  // The honest floor: an absent board means nothing was set aside, never that everything is permitted.
+  // The readers that consult this still verify every edge they admit, so an empty shadow set opens nothing.
+  test("an ABSENT board yields no shadows, which reads as a floor rather than a permission", async () => {
+    expect((await shadowSetFromBoard(null, () => "x", verify)).size).toBe(0);
+    expect((await shadowSetFromBoard(emptyLarDoc(), () => "x", verify)).size).toBe(0);
+  });
+
+  test("the board address derives deterministically per Nexus, and differs across them", () => {
+    expect(edgeKapaeBoardDocUrl("aa".repeat(16))).toBe(edgeKapaeBoardDocUrl("aa".repeat(16)));
+    expect(edgeKapaeBoardDocUrl("aa".repeat(16))).not.toBe(edgeKapaeBoardDocUrl("bb".repeat(16)));
   });
 });

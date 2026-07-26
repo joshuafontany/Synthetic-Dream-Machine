@@ -64,14 +64,6 @@ export function carriageDocUrl(nexusPubkey: string): AutomergeUrl {
 }
 
 /**
- * The Nexus's PERSONA-KEL board URL — deterministic, so the per-Nexus key-event-log board (every persona's
- * PUBLIC KEL head/events) rides the always-carried plane every island member resolves alike. A sibling of the
- * WHO board (both derive from `nexusHandlesUri` — the public WHO face), because the KEL PUBLICLY advertises
- * which op-key currently heads each identifier; the PRIVATE keys / recovery-commit stay in the @persona bag.
- * The federation gate federates this board like @crossroads + WHO, so a rotation propagates to every honest
- * carrier and a stranger walks the identifier→head mapping cold — bounded by sync-latency, never a global now.
- */
-/**
  * The Nexus's VOUCH board URL — deterministic, so every vessel folds the lineage from the SAME issued
  * invites. Sibling to the carriage + antigen boards under one nexus-pubkey: carriage says who carries,
  * antigen says who stands banned, and this says WHO VOUCHED FOR WHOM — the seed-rooted DAG the admission
@@ -82,6 +74,26 @@ export function vouchBoardDocUrl(nexusPubkey: string): AutomergeUrl {
   return deterministicDocUrl(`${nexusRegistryUri(nexusPubkey)}#vouch`);
 }
 
+/**
+ * The Nexus's EDGE-KĀPAE board URL — deterministic, so every vessel folds the same shadows. The fifth
+ * sibling under one nexus-pubkey: carriage says who carries, antigen who stands banned, vouch who vouched
+ * for whom, KEL who a persona is over time — and this one says WHICH RELATIONSHIPS STAND SET ASIDE.
+ *
+ * A shadow federates precisely because a raised marker must reach the peers who would otherwise re-admit;
+ * unlike a revocation LIST it carries no negative fact about any party, only a mark over one edge.
+ */
+export function edgeKapaeBoardDocUrl(nexusPubkey: string): AutomergeUrl {
+  return deterministicDocUrl(`${nexusRegistryUri(nexusPubkey)}#edge-kapae`);
+}
+
+/**
+ * The Nexus's PERSONA-KEL board URL — deterministic, so the per-Nexus key-event-log board (every persona's
+ * PUBLIC KEL head/events) rides the always-carried plane every island member resolves alike. A sibling of the
+ * WHO board (both derive from `nexusHandlesUri` — the public WHO face), because the KEL PUBLICLY advertises
+ * which op-key currently heads each identifier; the PRIVATE keys / recovery-commit stay in the @persona bag.
+ * The federation gate federates this board like @crossroads + WHO, so a rotation propagates to every honest
+ * carrier and a stranger walks the identifier→head mapping cold — bounded by sync-latency, never a global now.
+ */
 export function personaKelBoardDocUrl(nexusPubkey: string): AutomergeUrl {
   return deterministicDocUrl(`${nexusHandlesUri(nexusPubkey)}#persona-kel`);
 }

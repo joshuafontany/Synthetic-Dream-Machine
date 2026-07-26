@@ -177,3 +177,22 @@ export async function verifiedShadowSet(
   }));
   return foldEdgeKapae(acts.filter((_, i) => verdicts[i] === true));
 }
+
+/**
+ * Read a board and hand back the shadows that STAND — extract, verify, fold, in the one call a caller wants.
+ *
+ * Exposing only this shape keeps the unverified fold out of reach: `foldEdgeKapae` decides standing, so a
+ * caller who reached it with raw board acts would let anyone lower anyone's shadow. Designation carries
+ * authority here too — `authorityFor` names which key may act on an edge, so a hand cannot set aside a
+ * relationship that was never theirs.
+ *
+ * An absent board yields NO shadows, which reads as the honest floor rather than a permissive one: nothing
+ * set aside means nothing set aside, and the readers that consult this still verify every edge they admit.
+ */
+export async function shadowSetFromBoard(
+  doc: LarDoc | undefined | null,
+  authorityFor: (edgeId: string) => string | undefined,
+  verify: (bytes: Uint8Array, sigHex: string, signerDid: string) => Promise<boolean>,
+): Promise<Set<string>> {
+  return verifiedShadowSet(edgeKapaeActsFromBoard(doc), authorityFor, verify);
+}
