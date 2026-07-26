@@ -7,24 +7,24 @@
  *
  * ── THE TWO FOUNDING MODES ───────────────────────────────────────────────────────────────────────────────
  * SELF-STOOD — the vessel MINTS a persona root and signs its own device-delegation with it. A human's own
- * hearth or leaf: they are present, they hold their own face, they bind their own device.
+ * hearth or leaf: they stand present, they hold their own face, they bind their own device.
  *
  * CONTRACTED — the vessel mints NO root. A trusted operator, already contracted with the kahu, signs the
- * device-delegation ELSEWHERE and the vessel carries only the EDGE. This is bind-by-edge in its purest case:
+ * device-delegation ELSEWHERE and the vessel carries only the EDGE. This enacts bind-by-edge in its purest case:
  * such a vessel cannot cheat by holding a seed, because it never holds one.
  *
- * A Herm stands CONTRACTED, always, and that is a law rather than a setting. A crossroads holds no local
+ * A Herm stands CONTRACTED, always, and that holds as law rather than as setting. A crossroads holds no local
  * human keys to steal — so its legitimacy runs kahu quorum → the operator's carriage contract → the
  * operator's persona root signing its edge, and it holds a Place DID and nothing of anybody's person.
  *
  * ── WHY THE SLOT CEILING IS PART OF THE SAME ANSWER ──────────────────────────────────────────────────────
  * The Herm's ceiling reads 0 STRUCTURALLY: no dial raises it, because raising it would put a human's key on
- * a crossroads, which is the one thing the class exists to prevent. Every other class carries an operator
+ * a crossroads, the one thing the class exists to prevent. Every other class carries an operator
  * DIAL — a human holds a multitude, and the code has no business deciding how large a multitude may be.
  *
- * The default bounds a device that has not been told otherwise; it is an OPERATIONAL bound (each root
+ * The default bounds a device that has not been told otherwise; it bounds OPERATION (each root
  * implies a vault slot, a KEL, and sync traffic), never a legitimacy signal, so unlike the admission dials
- * it may safely carry one. Raising it is an operator turn; it can never raise a Herm.
+ * it may safely carry one. Raising it rides an operator turn; it can never raise a Herm.
  *
  * Platform-blind: rides ./persona-vault's index ceiling only. NO node: imports.
  * Meme: lar:///ha.ka.ba/lararium/mesh/identity-classes
@@ -34,11 +34,11 @@ import { HANDLE_INDEX_CEILING } from "./persona-vault.js";
 
 /**
  * What a vessel stands AS. Not a device type — a hearth and a leaf differ by device-gated caps, never by
- * class, and both hold human faces. The Herm is the one genuinely distinct standing: faceless by law.
+ * class, and both hold human faces. The Herm holds the one genuinely distinct standing: faceless by law.
  */
 export type VesselClass = "hearth" | "leaf" | "herm";
 
-/** How a vessel came to stand — see the header; a Herm is always `contracted`. */
+/** How a vessel came to stand — see the header; a Herm always stands `contracted`. */
 export type FoundingMode = "self-stood" | "contracted";
 
 /**
@@ -59,12 +59,12 @@ export const DEFAULT_PERSONA_SLOT_CEILING = 8;
 /**
  * How many persona roots this vessel may hold.
  *
- * A HERM READS 0 AND NO ARGUMENT CHANGES IT — the declared ceiling is ignored rather than clamped, because
- * a clamp invites the reading that a large enough number would win. Nothing wins: the class is faceless.
+ * A HERM READS 0 AND NO ARGUMENT CHANGES IT — the ceiling IGNORES its argument rather than clamping it, because
+ * a clamp invites the reading that a large enough number would win. Nothing wins: the class stands faceless.
  *
  * Every other class reads the operator's declared ceiling, or the default when they have declared none. A
  * torn or nonsensical declaration falls back to the default rather than to zero: a mis-typed config must not
- * silently lock a human out of their own faces (that failure is not safety, it is a lockout).
+ * silently lock a human out of their own faces (that failure grants no safety, it locks a human out).
  */
 export function personaSlotCeiling(cls: VesselClass, declaredCeiling?: number): number {
   if (cls === "herm") return 0;

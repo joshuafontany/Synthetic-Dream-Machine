@@ -1,27 +1,27 @@
 /**
  * vouch-board — the DOC face of the JOIN axis: the issued `CabalInvite`s a place has minted, from which the
- * seed-rooted lineage is folded. Sibling to `carriage-board` (who carries) and `antigen-board` (who stands
+ * seed-rooted lineage folds. Sibling to `carriage-board` (who carries) and `antigen-board` (who stands
  * banned) under one nexus-pubkey; this board answers WHO VOUCHED FOR WHOM.
  *
- * A vouch is board-tracked precisely BECAUSE it is attributable — a cabal-invite names its `voucherDid` in
- * the clear, and an invite nobody can attribute is an invite nobody can be held to. The TRACELESS boot-invite
- * is the deliberate contrast: it names no voucher, manufactures no social graph, and must NEVER gain a board.
+ * A vouch RIDES a board precisely because it carries attribution — a cabal-invite names its `voucherDid` in
+ * the clear, and an invite nobody can attribute holds nobody to anything. The TRACELESS boot-invite
+ * draws the deliberate contrast: it names no voucher, manufactures no social graph, and must NEVER gain a board.
  *
- * ── THE VERIFY IS NOT OPTIONAL, AND THAT IS WHY THERE IS NO UNVERIFIED READ ──────────────────────────────
+ * ── THE VERIFY RIDES MANDATORY, WHICH IS WHY NO UNVERIFIED READ EXISTS ───────────────────────────────────
  * `vouchDagFromInvites` states its precondition plainly: the invites arrive ALREADY VERIFIED. A reader that
- * handed back whatever tiddlers a board carried would break that precondition silently — and the break is not
- * cosmetic: every invite that reaches the DAG becomes a VOUCH EDGE, so anyone able to write the board could
- * mint unbounded lineage mass and price their own crossing to nothing. The carriage board can afford a
+ * handed back whatever tiddlers a board carried would break that precondition silently — and the break cuts
+ * deeper than cosmetics: every invite reaching the DAG becomes a VOUCH EDGE, so anyone able to write the
+ * board could mint unbounded lineage mass and price their own crossing to nothing. The carriage board can afford a
  * permissive extractor because its forgeries die at a quorum fold downstream; a vouch has no such second gate.
  *
- * So this module exposes ONE read, and it takes a verifier. There is deliberately no `invitesFromBoard()`
- * beside it to reach for by mistake — designation carries authority, the same discipline the rest of the mesh
- * holds. A signature that does not verify against the `voucherDid` the invite itself names is DROPPED, and a
+ * So this module exposes ONE read, and that read takes a verifier. No `invitesFromBoard()` stands beside it
+ * to reach for by mistake — designation carries authority, the same discipline the rest of the mesh
+ * holds. A signature that fails against the `voucherDid` the invite itself names DROPS, and a
  * dropped invite reads as one that never arrived (withhold, never forge).
  *
  * STORAGE CONVENTION (mirrors carriage-board): each invite rides ONE tiddler whose `text` carries the invite
  * JSON. Keyed by place/voucher/joiner, so distinct vouchers vouching the SAME joiner accrete as the distinct
- * edges they are, while one voucher re-issuing to one joiner stays idempotent — a voucher cannot inflate its
+ * edges they carry, while one voucher re-issuing to one joiner stays idempotent — a voucher cannot inflate its
  * own out-degree by re-minting, which would otherwise dilute its other children for free.
  *
  * Platform-blind: rides ./base-doc + ./cabal-invite only. NO node: imports — the repo resolution of the board
@@ -48,7 +48,7 @@ export function vouchEntryKey(placeDocIdHex: string, voucherDid: string, joinerI
 /**
  * Land a signed invite onto a board draft — the EXACT shape `verifiedVouchesFromBoard` reads back. Call
  * INSIDE a `handle.change()` callback. The signature rides inside the JSON, so re-carrying never re-signs;
- * this write adjudicates nothing, exactly as the read trusts nothing it has not verified.
+ * this write adjudicates nothing, exactly as the read trusts nothing it has yet to verify.
  */
 export function writeVouch(draft: LarDoc, invite: CabalInvite): void {
   const key = vouchEntryKey(invite.placeDocIdHex, invite.voucherDid, invite.joinerIdentityHex);
@@ -76,11 +76,11 @@ function coerceInvite(parsed: unknown): CabalInvite | null {
 
 /**
  * Every invite the board carries WHOSE SIGNATURE VERIFIES against the voucherDid it names — the only read,
- * because an unverified vouch is an unbounded one (see the header). A torn, foreign, or forged tiddler is
- * dropped in silence: it means the invite did not arrive, never that an attack occurred.
+ * because an unverified vouch grants unbounded mass (see the header). A torn, foreign, or forged tiddler
+ * DROPS in silence: it means the invite did not arrive, never that an attack occurred.
  *
  * `place` scopes the fold to one cabal-realm, so a board carrying several places' vouches yields only the
- * lineage of the place being crossed — an invite into somewhere else is not evidence here.
+ * lineage of the place being crossed — an invite into somewhere else evidences nothing here.
  *
  * The result feeds `vouchDagFromInvites` with its precondition already satisfied.
  */
@@ -101,7 +101,7 @@ export async function verifiedVouchesFromBoard(
     if (invite !== null && invite.placeDocIdHex === place) candidates.push(invite);
   }
   // Verify each against the voucher the invite ITSELF names — a forged tiddler naming a real voucher fails
-  // here, and one naming a key it does hold is simply that voucher's own edge, which is the honest reading.
+  // here, and one naming a key it does hold simply carries that voucher's own edge, the honest reading.
   const verdicts = await Promise.all(candidates.map((inv) => {
     const { sig: _sig, ...unsigned } = inv;
     return verify(cabalInviteBytes(unsigned), inv.sig, inv.voucherDid).catch(() => false);

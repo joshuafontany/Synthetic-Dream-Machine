@@ -3,13 +3,13 @@
  * write side: one held face stakes its OWN standing on one joiner, onto the Nexus vouch board.
  *
  * THE CONTRAST WITH `nexus contract`. Contracting a vessel into carriage needs the kahu quorum AND the
- * joiner's own consent — a Nexus may not conscript, and no single kahu seats a carrier alone. A vouch is the
+ * joiner's own consent — a Nexus may not conscript, and no single kahu seats a carrier alone. A vouch runs the
  * other axis entirely: ONE hand, its OWN standing, no steward asked. The two relations run orthogonal — a
  * human may contract without joining, join without contracting, hold both, or neither.
  *
- * IT ADMITS NOBODY. A vouch is signal-2 on the lineage and grants nothing by itself; the crossing prices it
- * later. The cost is already paid at the moment of vouching: the voucher's score SPLITS across everyone they
- * vouch for, so each vouch dilutes the hand that made it. That is the whole payment, and it needs no ledger.
+ * IT ADMITS NOBODY. A vouch rides as signal-2 on the lineage and grants nothing by itself; the crossing prices it
+ * later. The vouching itself already paid the cost: the voucher's score SPLITS across everyone they
+ * vouch for, so each vouch dilutes the hand that made it. That carries the whole payment, and it needs no ledger.
  */
 
 import { runCabalVouch, CabalVouchError } from "@lararium/node";

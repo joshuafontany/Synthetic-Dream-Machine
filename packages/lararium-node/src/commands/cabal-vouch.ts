@@ -3,14 +3,14 @@
  *
  * THE CONTRAST WITH CARRIAGE, AND WHY IT NEEDS NO QUORUM. `nexus-contract` writes a CONTRACT and therefore
  * needs the kahu quorum plus the joiner's own consent — a Nexus cannot conscript a vessel into carrying, and
- * no single kahu may seat one alone. A vouch is the opposite shape: it is ONE hand staking ITS OWN standing,
+ * no single kahu may seat one alone. A vouch inverts that shape: ONE hand stakes ITS OWN standing,
  * attributable by construction, and it grants nothing by itself. So it takes no quorum and asks no steward.
  * The cost lands on the voucher automatically — their score SPLITS across everyone they vouch for, so the act
- * of vouching dilutes them, which is the whole payment and needs no ledger to collect.
+ * of vouching dilutes them, which carries the whole payment and needs no ledger to collect.
  *
- * WHAT IT DOES NOT DO. It admits nobody. A vouch is signal-2 on the lineage; the crossing itself runs through
+ * WHAT IT DOES NOT DO. It admits nobody. A vouch rides as signal-2 on the lineage; the crossing itself runs through
  * `admitOnLineage`, which folds this board and prices the applicant. Minting a vouch for someone who never
- * crosses costs the voucher their dilution and buys them nothing — which is the intended asymmetry.
+ * crosses costs the voucher their dilution and buys them nothing — the intended asymmetry.
  *
  * FAIL CLOSED: an unknown persona root, a malformed joiner nym, an expiry already past, or a signature that
  * does not read back off the board REFUSES before anything lands. Never write a vouch the fold would drop.
@@ -37,11 +37,11 @@ const NYM_RE = /^[0-9a-f]{64}$/;
 export class CabalVouchError extends Error {}
 
 export interface CabalVouchOptions {
-  /** The joiner this vouch names. A vouch is never bearer — it binds to one identity. */
+  /** The joiner this vouch names. A vouch never rides bearer — it binds to one identity. */
   readonly joiner:      string;
-  /** The cabal-realm this vouch crosses INTO. A vouch is never a general pass. */
+  /** The cabal-realm this vouch crosses INTO. A vouch never grants a general pass. */
   readonly place:       string;
-  /** ISO-8601. Absent → 30 days out; a vouch that never expires is a key left under a mat. */
+  /** ISO-8601. Absent → 30 days out; a vouch that never expires leaves a key under a mat. */
   readonly expiresAt?:  string;
   /** WHICH held persona root vouches — the human's own face. Absent → the first held root. */
   readonly handleIndex?: number;
@@ -69,7 +69,7 @@ function defaultExpiry(now: number): string {
  * Mint one vouch and land it on the Nexus's vouch board.
  *
  * `now` rides as a parameter rather than a read of the wall clock, because a causal island holds no global
- * now and a test must be able to stand at a chosen instant.
+ * now and a test must stand at a chosen instant.
  */
 export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): Promise<CabalVouchResult> {
   const storageDir = opts.storageDir ?? larDataDir();
@@ -100,7 +100,7 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
   }
 
   // The vault may hold a root it cannot surface a key for (a torn or half-written slot). Refuse rather than
-  // vouch under a face nobody can verify — an unverifiable voucher is a vouch the board's read would drop.
+  // vouch under a face nobody can verify — an unverifiable voucher yields a vouch the board's read drops.
   const voucherDid = await loadPersonaGroupRootVerifyingKey(storageDir, handleIndex);
   if (!voucherDid || !NYM_RE.test(voucherDid.toLowerCase())) {
     throw new CabalVouchError(`persona root ${handleIndex} surfaces no usable verifying key — nothing to stake.`);
@@ -129,8 +129,8 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
     handle.change((d) => writeVouch(d, invite));
     await repo.flush();
 
-    // NEVER leave a vouch the fold would drop. Read it BACK through the verifying read — the only read there
-    // is — so a vouch that cannot survive extraction refuses loudly here instead of silently vouching for
+    // NEVER leave a vouch the fold would drop. Read it BACK through the verifying read — the only read that
+    // stands — so a vouch that cannot survive extraction refuses loudly here instead of silently vouching for
     // nobody. The same discipline `nexus-contract` runs before it writes a dead admit.
     const after = await verifiedVouchesFromBoard(handle.doc(), place, verify);
     const landed = after.some((i: CabalInvite) =>
