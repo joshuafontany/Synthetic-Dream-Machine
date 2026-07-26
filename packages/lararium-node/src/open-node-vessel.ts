@@ -36,6 +36,7 @@ import {
   ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, CROSSROADS_DOC_URI, recipeHostFacets,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
   BAG_IDS, slugFromUri, verbArgsFromPayload, registerCrossroadsInOracle,
+  whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
@@ -291,6 +292,9 @@ interface NodeBootPrep {
   repo:             Repo;
   catalogHandle:    DocHandle<LarDoc>;
   operatorSeed:     Uint8Array;
+  /** This vessel's own gate key — the node ANCHORS its confederation, so its gate key doubles as the Nexus
+   *  key its browser leaves pass as relayGatePubKey. Every per-Nexus board (WHO, KEL, antigen) scopes to it. */
+  nexusPubkey:      string;
   residency:        BagResidencyManager;
   /** The carriage serve-loop (Socket B) — present ONLY when a carriage-relay URL was configured; else null (inert).
    *  The two vessel entry-points fold its `stop()` into their teardown so no timer / socket leaks past close. */
@@ -1588,7 +1592,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   };
 
   return {
-    repo, catalogHandle, operatorSeed, residency, carriageLoop, carriageRelay, nexusDial, bulb, emit, orchestration,
+    repo, catalogHandle, operatorSeed, nexusPubkey: operatorIdentity.verifyingKey,
+    residency, carriageLoop, carriageRelay, nexusDial, bulb, emit, orchestration,
     openDaemon, wireVerbs, afterDaemon,
     daemonVm:         () => daemonVm,
     eventBus:         () => eventBus,
@@ -1607,7 +1612,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // A Lararium is a hearth that is ALSO a first-class mesh-node: when self-announce params are supplied,
   // it composes the carriage (meshpalace + carriage) ALONGSIDE the wiki-full core — it carries + navigates
   // the FLOW-map for its own routing (carry-without-reserve; no second read-face, no @oracle conflict).
-  const extraCaps = opts.meshSelf ? [
+  const carriageCaps = opts.meshSelf ? [
     meshPalaceCap({
       repo: p.repo, ...(p.residency ? { residency: p.residency } : {}),
       selfCoord: opts.meshSelf.coord,
@@ -1622,6 +1627,23 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       onLog: (l) => console.log(`[lararium] ${l}`),
     }),
   ] : [];
+
+  // ── The WHO plane at the ANCHOR — resolve this island's own board; announce NOTHING ──
+  // The identity twin of the browser leaf's whoFaceCap, the SAME cap composed by the SAME contract: the node
+  // anchors the confederation, so its gate key scopes the board its leaves resolve, and both vessels layer the
+  // one @crossroads-advertised doc. The node already REGISTERS @crossroads into @oracle for its leaves to find;
+  // composing here makes it RESOLVE that board too, so a hearth RECOGNISES the peers it federates with instead
+  // of carrying a WHO plane it can only advertise. Unconditional — an anchor always holds its own island key
+  // (unlike a leaf, which needs a relay + gate before any board can sync).
+  //
+  // NO BOOT-TIME FACE: the cap takes no card and publishes nothing. Binding the vessel never announces the
+  // identity; disclosure rides the component's deliberate `announce`, and the only key at boot would be this
+  // vessel's substrate key — the one co-surface the two-key atom forbids on a social board.
+  const crossroadsHandle = await materializeSharedLarDoc(p.repo, crossroadsDocUrl(p.nexusPubkey), "@crossroads");
+  const extraCaps = [
+    ...carriageCaps,
+    whoFaceCap({ repo: p.repo, crossroadsHandle, nexusPubkey: p.nexusPubkey, residency: p.residency }),
+  ];
   const result = await composeLararium<VesselIslandPool>(p.orchestration, extraCaps);
 
   return {
