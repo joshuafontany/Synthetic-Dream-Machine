@@ -184,7 +184,7 @@ describe("persona-glamour — the persona-index → HandleCard wire (#64 stage 4
     // The record's cardId is the card's content id (its `prev` target on the next publish).
     expect(record.cardId).toBe(await handleCardId({
       kind: card.kind, nym: card.nym, glamour: card.glamour, version: card.version, prev: card.prev,
-      expiry: card.expiry, standing: card.standing,
+      expiry: card.expiry, standing: card.standing, fleetProof: card.fleetProof,
     }));
   });
 
@@ -204,12 +204,12 @@ describe("persona-glamour — the persona-index → HandleCard wire (#64 stage 4
     expect(second.version).toBe(2);
     expect(second.prev).toBe(await handleCardId({
       kind: first.kind, nym: first.nym, glamour: first.glamour, version: first.version, prev: first.prev,
-      expiry: first.expiry, standing: first.standing,
+      expiry: first.expiry, standing: first.standing, fleetProof: first.fleetProof,
     }));
     // A recogniser tracking the first card ACCEPTS the second as a genuine update (not a rollback/fork).
     const firstId = await handleCardId({
       kind: first.kind, nym: first.nym, glamour: first.glamour, version: first.version, prev: first.prev,
-      expiry: first.expiry, standing: first.standing,
+      expiry: first.expiry, standing: first.standing, fleetProof: first.fleetProof,
     });
     const verdict = await acceptHandleUpdate(second, {
       expectedNym: first.nym, highWaterVersion: first.version, lastCardId: firstId, now: 25,

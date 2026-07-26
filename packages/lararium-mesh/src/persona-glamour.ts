@@ -28,7 +28,7 @@ import type { DocHandle } from "@automerge/automerge-repo";
 import { deriveVeiledUserKey } from "./persona-identity.js";
 import { assertHandleIndex } from "./persona-vault.js";
 import {
-  signHandleCard, handleCardId, type HandleCard,
+  signHandleCard, handleCardId, type HandleCard, type FleetProof,
 } from "./handle-card.js";
 import { ed25519SignerFromSeed } from "./auth-wire.js";
 import { hexToBytes } from "./crypto.js";
@@ -103,6 +103,8 @@ export async function mintPersonaGlamour(opts: {
   contextIndex?: number;
   ttlMs?: number;
   standing?: string | null;
+  /** The root-signed edge binding this face to its fleet, minted where the root lives. */
+  fleetProof?: FleetProof | null;
 }): Promise<MintedGlamour> {
   assertHandleIndex(opts.handleIndex);
   const glamour = opts.glamour.trim();
@@ -128,6 +130,9 @@ export async function mintPersonaGlamour(opts: {
       prev,
       expiry:   opts.now + (opts.ttlMs ?? DEFAULT_GLAMOUR_TTL_MS),
       standing: opts.standing ?? null,
+      // Absent unless the caller minted an edge on the vessel holding the ROOT — an unbound face publishes
+      // honestly and claims no fleet. Binding stays a deliberate act, exactly as announcing does.
+      fleetProof: opts.fleetProof ?? null,
     },
     ed25519SignerFromSeed(hexToBytes(veiled.signingKey)),
   );

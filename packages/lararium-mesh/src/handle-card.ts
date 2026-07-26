@@ -52,28 +52,114 @@ export interface HandleCard {
   readonly expiry:   number;
   /** OPTIONAL content-address of the handle's reputation thread (the signed vouches/annotations). */
   readonly standing: string | null;
+  /**
+   * OPTIONAL proof that this face speaks for a FLEET — a delegation edge the persona root signed over this
+   * nym. Absent → the card certifies only itself, which stays a complete and honest card; a face that
+   * claims no fleet claims nothing false. Present → a recogniser walks nym → root in one extra verify.
+   */
+  readonly fleetProof: FleetProof | null;
   /** ed25519 signature over the card's canonical content, by the key in `nym`. */
   readonly sig:      string;
 }
 
-/** The content a card signs over — everything but the signature. Canonical, so one face yields one sig. */
+/**
+ * The delegation edge binding a published face to the fleet it speaks for.
+ *
+ * WHY A SIGNATURE RATHER THAN A CONVENTION. Without it, a public name and a fleet agree only because the
+ * same human happened to mint both — nothing stops a stranger publishing a card that claims someone else's
+ * fleet. One Ed25519 signature by the root converts that convention into a proof a cold recogniser checks
+ * offline: no directory, no clock, no lookup.
+ *
+ * WHAT IT DECLINES TO CARRY, and why the privacy holds. No device key appears here, and no member list.
+ * A recogniser learns that the named root vouched for this face and NOTHING about which devices the fleet
+ * gathers — because the card never carries them. The property rests on what stays unpublished rather than
+ * on any proof system, which keeps the whole instrument two signature-verifies wide.
+ *
+ * THE EPOCH ORDERS IT, NEVER A TIMESTAMP. The binding roots on a charter-epoch — a content-addressed link
+ * in a hash chain, walkable from a local replica. A wall-clock reading here would assert a global instant
+ * that a causal island cannot hold.
+ */
+export interface FleetProof {
+  /** The persona root that signed this edge — the fleet's public identifier. */
+  readonly rootDid: string;
+  /** The charter-epoch this binding roots on. An ORDER, never an instant. */
+  readonly epoch:   string;
+  /** ed25519 over `fleetProofBytes`, by `rootDid`. */
+  readonly sig:     string;
+}
+
+/**
+ * The bytes a fleet-proof signs. It covers the NYM it speaks for, so the edge cannot lift off one card and
+ * land on another, and the EPOCH it roots on, so a recogniser scopes it the way the antigen scopes an entry.
+ */
+export function fleetProofBytes(nym: string, rootDid: string, epoch: string): Uint8Array {
+  return canonicalJsonBytes({ kind: "lar-fleet-proof/v1", nym, rootDid, epoch });
+}
+
+/**
+ * The card's IDENTITY content — everything that makes this face THIS face.
+ *
+ * `expiry` rides OUTSIDE it, exactly as oracle-substrate keeps a lease out of a pointer's identity: a
+ * renewal (same face, fresh expiry) must keep the SAME card id so the `prev` lineage stays stable across
+ * heartbeats rather than forking on every beat.
+ */
+export function handleCardIdBytes(card: Omit<HandleCard, "sig" | "expiry">): Uint8Array {
+  return canonicalJsonBytes({
+    kind:       card.kind,
+    nym:        card.nym,
+    glamour:    card.glamour,
+    version:    card.version,
+    prev:       card.prev,
+    standing:   card.standing,
+    fleetProof: card.fleetProof,
+  });
+}
+
+/**
+ * The content a card SIGNS over — its identity PLUS the lease.
+ *
+ * IDENTITY AND SIGNATURE ANSWER DIFFERENT QUESTIONS, so they cover different bytes. Leaving `expiry` out of
+ * the identity keeps a lineage stable; leaving it out of the SIGNATURE would let anyone extend anyone's
+ * lease by editing a number the signer never covered. One function cannot serve both, so two do.
+ */
 export function handleCardBytes(card: Omit<HandleCard, "sig">): Uint8Array {
   return canonicalJsonBytes({
-    kind:     card.kind,
-    nym:      card.nym,
-    glamour:  card.glamour,
-    version:  card.version,
-    prev:     card.prev,
-    standing: card.standing,
-    // `expiry` rides OUTSIDE the signed identity, exactly as oracle-substrate keeps it out of the pointer
-    // identity: a lease renewal (same face, fresh expiry, new sig) must keep the SAME card identity so the
-    // lineage stays stable across heartbeats. Freshness is a separate, locally-checked concern.
+    identity: hex(handleCardIdBytes(card)),
+    expiry:   card.expiry,
   });
 }
 
 /** The card's IDENTITY — its content hash, the `prev` target and the recogniser's stable handle for it. */
 export function handleCardId(card: Omit<HandleCard, "sig">): Promise<string> {
-  return Promise.resolve(hex(handleCardBytes(card)));
+  return Promise.resolve(hex(handleCardIdBytes(card)));
+}
+
+/**
+ * Mint the delegation edge — run on the vessel holding the persona ROOT, never on the one publishing.
+ * The root signs the nym; the nym then signs the card carrying that signature. No circle: the root covers
+ * only the nym-and-epoch, so it may sign before the card exists.
+ */
+export async function signFleetProof(
+  args: { readonly nym: string; readonly rootDid: string; readonly epoch: string },
+  sign: (bytes: Uint8Array) => Promise<string>,
+): Promise<FleetProof> {
+  return { rootDid: args.rootDid, epoch: args.epoch, sig: await sign(fleetProofBytes(args.nym, args.rootDid, args.epoch)) };
+}
+
+/**
+ * Does this card PROVE it speaks for the fleet it names? Two Ed25519 verifies and nothing else — no lookup,
+ * no clock, no pairing.
+ *
+ * A card carrying NO proof reads `false` here without reading dishonest: an unbound face claims no fleet, so
+ * it fails no claim. A caller distinguishes "unbound" from "refuted" by checking `fleetProof` for absence.
+ */
+export async function verifyFleetProof(
+  card: HandleCard,
+  verify: (bytes: Uint8Array, sigHex: string, signerDid: string) => Promise<boolean>,
+): Promise<boolean> {
+  const p = card.fleetProof;
+  if (!p || !p.rootDid || !p.sig || !p.epoch) return false;
+  return verify(fleetProofBytes(card.nym, p.rootDid, p.epoch), p.sig, p.rootDid).catch(() => false);
 }
 
 /** Sign a handle-card. The caller supplies the handle's own signer; this module holds no key. */
