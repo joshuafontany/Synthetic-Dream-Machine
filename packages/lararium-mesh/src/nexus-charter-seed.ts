@@ -28,6 +28,7 @@ import type { KahuCharterRoster } from "./kapae-antigen.js";
 import { sha256HexSync, canonicalJson } from "./crypto.js";
 import { type CharterEpoch, verifyCharterChain, charterKeySetHash } from "./wax-stamp.js";
 import { type FederationPosture, DEFAULT_FEDERATION_POSTURE } from "./federation-gate.js";
+import { type CabalJoinPolicy, DREAMNET_JOIN_POLICY } from "./cabal-invite.js";
 
 /** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
 export const NEXUS_CHARTER_DOC_KIND = "lar-nexus-charter/v1" as const;
@@ -71,6 +72,13 @@ export interface NexusCharterDoc {
    * reads it. Governs cross-Nexus CARRY of the public shelf only; it never opens a private plane.
    */
   readonly federationPosture?: FederationPosture;
+  /**
+   * The per-Nexus STRANGER-ADMISSION dial (read as-of-last-sync). Absent → INVITE-ONLY (fail-closed: a place
+   * demands signal-2 until the operator opens it). `joinPolicyFromDoc` reads it. Governs whether a STRANGER
+   * must carry an invite to cross — orthogonal to `federationPosture`, which governs whether a FOREIGN
+   * OPERATOR carries the public shelf. Opening one never opens the other, and neither opens a private plane.
+   */
+  readonly joinPolicy?:        CabalJoinPolicy;
 }
 
 /** Legacy alias — one founding kahu named by display + its (unbound-until-seated) key. */
@@ -143,6 +151,19 @@ export function rosterFromCharterDoc(doc: NexusCharterDoc | null): KahuCharterRo
  */
 export function federationPostureFromDoc(doc: NexusCharterDoc | null): FederationPosture {
   return doc?.federationPosture === "open" ? "open" : DEFAULT_FEDERATION_POSTURE;
+}
+
+/**
+ * Read the stranger-admission policy off a charter doc — FAIL CLOSED to INVITE-ONLY. An absent doc, an absent
+ * field, or any value but the exact literal `"open"` reads invite-only, so a torn or unrecognized dial can never
+ * silently drop the invite requirement. Read as-of-last-sync — no global now.
+ *
+ * This puts the turn where cabal-invite says it belongs: the operator turns it, per Nexus, on the charter the
+ * kahu quorum signs — never a constant the code carries. Open drops the INVITE requirement only; the crossing
+ * still prices (admission-price), so `open` reads "no invite needed", never "free".
+ */
+export function joinPolicyFromDoc(doc: NexusCharterDoc | null): CabalJoinPolicy {
+  return doc?.joinPolicy?.kind === "open" ? { kind: "open" } : DREAMNET_JOIN_POLICY;
 }
 
 /** The pre-rotated chain's head epoch, or null when no chain stands established (legacy / unseated doc). */
