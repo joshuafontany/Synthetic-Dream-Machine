@@ -35,9 +35,9 @@ import * as ed from "@noble/ed25519";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
-  hex, genesisCharterEpochCid, foundingRoster, foldMembershipSet, isMember,
-  membershipEntryBytes, signMembershipQuorum, ed25519SignerFromSeed,
-  type NexusCharterDoc, type KahuCharterRoster, type MembershipEntry,
+  hex, genesisCharterEpochCid, foundingRoster, foldCarriageSet, holdsCarriage,
+  carriageEntryBytes, signCarriageQuorum, ed25519SignerFromSeed,
+  type NexusCharterDoc, type KahuCharterRoster, type CarriageEntry,
 } from "@lararium/mesh";
 import {
   generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot,
@@ -46,7 +46,7 @@ import {
 import { larDataDir } from "../src/vessel-paths.js";
 import { writeNexusCharterDoc, readNexusCharterDoc } from "../src/nexus-charter-doc.js";
 import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
-import { makeNexusMembership } from "../src/nexus-membership.js";
+import { makeNexusMembership } from "../src/nexus-carriage.js";
 
 let rootA: string;
 let rootB: string;
@@ -118,14 +118,14 @@ function hexToBytes(h: string): Uint8Array {
 }
 
 /**
- * The REVERTED count — `membershipEntryCounts` with the contract-in check DROPPED (quorum alone, exactly as a
+ * The REVERTED count — `carriageEntryCounts` with the contract-in check DROPPED (quorum alone, exactly as a
  * REVOKE counts). This models "revert the fix": if an admit counted on its kahu quorum WITHOUT the operator's
  * own consent, a Nexus could conscript. Verifies ≥ threshold distinct roster signatures over the entry bytes.
  */
-async function countsQuorumOnly(entry: MembershipEntry, roster: KahuCharterRoster): Promise<boolean> {
+async function countsQuorumOnly(entry: CarriageEntry, roster: KahuCharterRoster): Promise<boolean> {
   if (entry.charterEpochCid !== roster.charterEpochCid) return false;
   const rosterKeys = new Set(roster.keys.map((k) => k.toLowerCase()));
-  const bytes = membershipEntryBytes({
+  const bytes = carriageEntryBytes({
     kind: entry.kind, nym: entry.nym, action: entry.action,
     version: entry.version, charterEpochCid: entry.charterEpochCid,
   });
@@ -185,8 +185,8 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
         ]),
       });
       await holder.refold();
-      expect(holder.membership.isMemberPeer("peer-b")).toBe(true);        // A folds B IN
-      expect(holder.membership.isMemberPeer("peer-stranger")).toBe(false);
+      expect(holder.membership.holdsCarriagePeer("peer-b")).toBe(true);        // A folds B IN
+      expect(holder.membership.holdsCarriagePeer("peer-stranger")).toBe(false);
       holder.dispose();
 
       const list = await runNexusMembersList({ bagsDir: A.bags });
@@ -201,7 +201,7 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
         peerIdentifierMap: new Map<string, string>([["peer-a", `prefix:${A.operatorNym}`]]),
       });
       await holder.refold();
-      expect(holder.membership.isMemberPeer("peer-a")).toBe(true);        // B folds A IN
+      expect(holder.membership.holdsCarriagePeer("peer-a")).toBe(true);        // B folds A IN
       holder.dispose();
 
       const list = await runNexusMembersList({ bagsDir: B.bags });
@@ -237,15 +237,15 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
         const r = await generateOrLoadPersonaGroupRoot(dir, i);
         return { signer: r.verifyingKey, sign: ed25519SignerFromSeed(await loadPersonaGroupRootSeed(dir, i)) };
       }));
-      const conscript: MembershipEntry = await signMembershipQuorum(
+      const conscript: CarriageEntry = await signCarriageQuorum(
         { nym: unconsented, action: "admit", version: 1, charterEpochCid: rosterA.charterEpochCid },
         signers,
         undefined,   // NO contract-in
       );
 
       // REAL fold — the contract-in guard IGNORES the unconsented admit: NOT a member (no conscription).
-      const real = await foldMembershipSet([conscript], rosterA);
-      expect(isMember(unconsented, real)).toBe(false);
+      const real = await foldCarriageSet([conscript], rosterA);
+      expect(holdsCarriage(unconsented, real)).toBe(false);
 
       // REVERTED fold — drop `verifyContractIn` (quorum alone) → the SAME entry conscripts the operator to
       // MEMBER. The no-conscription refusal FAILS once the guard is bypassed, which is exactly its load.

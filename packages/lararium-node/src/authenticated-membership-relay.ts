@@ -2,7 +2,7 @@
  * authenticated-membership-relay — the LIVE-WS `MembershipChannel` transport with REAL Ed25519 auth, so the
  * cas-wire member gate reads a PROVEN peer identity, never a self-asserted one.
  *
- * WHY AUTH BINDS TO THE ENVELOPE `from`. cas-wire's `memberCarryShareDecision` gates the sealed-body carry on the
+ * WHY AUTH BINDS TO THE ENVELOPE `from`. cas-wire's `carrierShareDecision` gates the sealed-body carry on the
  * requester's peer id (the envelope `from`). A DUMB re-broadcast relay lets a peer CLAIM any `from`, so a stranger
  * could name a member's id and be served the ciphertext. Carry ⊥ read bounds that (a stranger reads nothing without
  * the read-cap), but the member lane's carry-restriction wants a PROVEN id. This relay closes that: a connecting

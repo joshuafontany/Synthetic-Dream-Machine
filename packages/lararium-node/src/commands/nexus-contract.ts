@@ -2,7 +2,7 @@
  * runNexusContract / runNexusAcceptCarriage / runNexusMembersList — the RAISE side of the operator MEMBERS-registry
  * (the Kapae-antigen's ALLOW-twin). The founding kahu WRITE a quorum-signed `admit` / `revoke` onto the
  * always-carried members BOARD; the READER (`members-board`) + the consult (`nexus-membership`,
- * `memberCarryShareDecision`) fold it. This is the writer they were missing — the mirror of `runNexusKapae`.
+ * `carrierShareDecision`) fold it. This is the writer they were missing — the mirror of `runNexusKapae`.
  *
  * TWO WAX-SEALS ride an ADMIT (membership-doctrine):
  *   · the OPERATOR's own "accepts carriage" contract-sig (the contract-in). Either the joining operator produced
@@ -28,10 +28,10 @@
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
-  membershipEntriesFromBoard, writeMembershipEntry, signMembershipQuorum, signCarriageContract,
-  membershipEntryCounts, foldMembershipSet, isMember, foundingRoster,
-  membersDocUrl, materializeSharedLarDoc, ed25519SignerFromSeed,
-  type MembershipAction, type MembershipEntry, type KahuCharterRoster, type QuorumSignature,
+  carriageEntriesFromBoard, writeCarriageEntry, signCarriageQuorum, signCarriageContract,
+  carriageEntryCounts, foldCarriageSet, holdsCarriage, foundingRoster,
+  carriageDocUrl, materializeSharedLarDoc, ed25519SignerFromSeed,
+  type CarriageAction, type CarriageEntry, type KahuCharterRoster, type QuorumSignature,
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
 import { readNexusCharterDoc } from "../nexus-charter-doc.js";
@@ -47,7 +47,7 @@ const NYM_RE = /^[0-9a-f]{64}$/;
 export class NexusContractError extends Error {}
 
 export interface NexusContractOptions {
-  readonly action:     MembershipAction;
+  readonly action:     CarriageAction;
   readonly nym:        string;
   /** The joining operator's "accepts carriage" contract-sig hex (from `nexus accept-carriage`). Admit only;
    *  optional when the vessel holds the nym's own persona seed (multitude-of-one self-sign). */
@@ -58,7 +58,7 @@ export interface NexusContractOptions {
 }
 
 export interface NexusContractResult {
-  readonly action:          MembershipAction;
+  readonly action:          CarriageAction;
   readonly nym:             string;
   readonly version:         number;
   readonly priorVersion:    number | null;
@@ -162,19 +162,19 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
   }
 
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
-  const boardUrl    = membersDocUrl(nexusPubkey);
+  const boardUrl    = carriageDocUrl(nexusPubkey);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   try {
     const handle = await materializeSharedLarDoc(repo, boardUrl, "@members-registry");
 
-    const priorVersion = maxVersionForNym(membershipEntriesFromBoard(handle.doc()), nym);
+    const priorVersion = maxVersionForNym(carriageEntriesFromBoard(handle.doc()), nym);
     const version      = (priorVersion ?? 0) + 1;
 
     const signers = await Promise.all(selected.map(async (s) => ({
       signer: s.verifyingKey,
       sign:   ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, s.handleIndex)),
     })));
-    const entry: MembershipEntry = await signMembershipQuorum(
+    const entry: CarriageEntry = await signCarriageQuorum(
       { nym, action: opts.action, version, charterEpochCid: roster.charterEpochCid },
       signers,
       contract?.contractSig,
@@ -182,7 +182,7 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
 
     // NEVER write an entry the fold would ignore — self-verify it COUNTS against the live roster (a dead admit
     // would read as enforced while granting nothing). This catches a bad supplied contract-sig BEFORE the write.
-    if (!(await membershipEntryCounts(entry, roster))) {
+    if (!(await carriageEntryCounts(entry, roster))) {
       throw new NexusContractError(
         opts.action === "admit"
           ? "refusing to write: the signed admit does not COUNT (the kahu quorum or the operator contract-in failed to verify against the seated roster)."
@@ -190,11 +190,11 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
       );
     }
 
-    handle.change((d) => writeMembershipEntry(d, entry));
+    handle.change((d) => writeCarriageEntry(d, entry));
     await repo.flush();
 
-    const folded    = await foldMembershipSet(membershipEntriesFromBoard(handle.doc()), roster);
-    const memberNow = isMember(nym, folded);
+    const folded    = await foldCarriageSet(carriageEntriesFromBoard(handle.doc()), roster);
+    const memberNow = holdsCarriage(nym, folded);
 
     return {
       action: opts.action, nym, version, priorVersion,
@@ -236,7 +236,7 @@ export interface NexusMembersListResult {
   readonly seatedKeys:      number;
   /** The currently-admitted member nyms (folded + quorum + contract-in verified against the seated roster). */
   readonly members:         readonly string[];
-  readonly entries:         ReadonlyArray<{ nym: string; action: MembershipAction; version: number; signers: number; contractIn: boolean }>;
+  readonly entries:         ReadonlyArray<{ nym: string; action: CarriageAction; version: number; signers: number; contractIn: boolean }>;
 }
 
 /** Read the currently-admitted member set + the raw board entries (the `--list` fold). Read-only; FAILS CLOSED
@@ -248,9 +248,9 @@ export async function runNexusMembersList(opts: { bagsDir: string; storageDir?: 
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   try {
-    const handle  = await materializeSharedLarDoc(repo, membersDocUrl(nexusPubkey), "@members-registry");
-    const entries = membershipEntriesFromBoard(handle.doc());
-    const folded  = await foldMembershipSet(entries, roster);
+    const handle  = await materializeSharedLarDoc(repo, carriageDocUrl(nexusPubkey), "@members-registry");
+    const entries = carriageEntriesFromBoard(handle.doc());
+    const folded  = await foldCarriageSet(entries, roster);
     return {
       charterEpochCid: roster.charterEpochCid,
       threshold:       roster.threshold,
@@ -266,7 +266,7 @@ export async function runNexusMembersList(opts: { bagsDir: string; storageDir?: 
 }
 
 /** The highest `version` any board entry carries for `nym`, or null when the nym has no standing entry. */
-function maxVersionForNym(entries: readonly MembershipEntry[], nym: string): number | null {
+function maxVersionForNym(entries: readonly CarriageEntry[], nym: string): number | null {
   let max: number | null = null;
   for (const e of entries) {
     if (e.nym.toLowerCase() !== nym) continue;

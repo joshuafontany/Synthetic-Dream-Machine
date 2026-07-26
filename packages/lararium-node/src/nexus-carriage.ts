@@ -1,10 +1,11 @@
 /**
- * nexus-membership — the node holder that answers the @nexus MEMBER-vs-STRANGER consult on the live
- * sharePolicy path (the carry-split's member gate).
+ * nexus-carriage — the node holder that answers the @nexus CARRIER-vs-STRANGER consult on the live
+ * sharePolicy path (the carry-split's carriage gate). "Carrier" names a contracted vessel, never a
+ * Cabal member — the two relations run orthogonal (carriage-registry).
  *
  * The mesh breathes across a Nexus because a cross-operator the @nexus names a MEMBER blind-transits a
  * sealed private plane (carry the ciphertext, never the read-cap); a STRANGER reaches only the public shelf.
- * This holder stands the `NexusMembership` the node's `memberCarryShareDecision` consults, reading the
+ * This holder stands the `NexusMembership` the node's `carrierShareDecision` consults, reading the
  * node's OWN @nexus replica (as of last sync; no global now — never a global truth).
  *
  * THE MEMBER SET = the seated-KAHU floor ∪ the folded operator MEMBERS-registry (members{}). Two sources,
@@ -13,7 +14,7 @@
  *     Every seated kahu IS a contracted member (a strict subset), so it stands even when the members board is
  *     empty / unsynced — the conservative floor that never over-grants.
  *   · the MEMBERS-registry — the quorum-signed, contract-in members{} board (the antigen's ALLOW-twin), folded
- *     through `foldMembershipSet` against the SAME charter roster the antigen folds against. A general contracted
+ *     through `foldCarriageSet` against the SAME charter roster the antigen folds against. A general contracted
  *     operator (not a kahu) reads MEMBER off THIS source — which is what LIGHTS SELF-SLOT-B: the carry-split's
  *     member gate now names contracted operators, not kahu alone, so a contracted peer would blind-transit a
  *     sealed plane the moment a sealed plane type registers (planeSeal is DENY-ALL today; the lane stands ready).
@@ -43,9 +44,9 @@ import type { NexusMembership, LarDoc } from "@lararium/mesh";
 import {
   seatedCharterKeys,
   foundingRoster,
-  foldMembershipSet,
-  membershipEntriesFromBoard,
-  membersDocUrl,
+  foldCarriageSet,
+  carriageEntriesFromBoard,
+  carriageDocUrl,
   materializeSharedLarDoc,
 } from "@lararium/mesh";
 import { readNexusCharterDoc } from "./nexus-charter-doc.js";
@@ -54,7 +55,7 @@ import { readNexusCharterDoc } from "./nexus-charter-doc.js";
 const NYM_RE = /^[0-9a-f]{64}$/;
 
 export interface NexusMembershipHolder {
-  /** The live consult the node sharePolicy passes to `memberCarryShareDecision`. */
+  /** The live consult the node sharePolicy passes to `carrierShareDecision`. */
   readonly membership: NexusMembership;
   /** Re-read the kahu floor off disk (idempotent; safe any time). Does NOT touch the members board. */
   refresh(): void;
@@ -106,7 +107,7 @@ export function makeNexusMembership(opts: {
     if (boardHandle) return Promise.resolve(boardHandle);
     if (!repo || !nexusPubkey) return Promise.resolve(null);
     if (!boardResolve) {
-      boardResolve = materializeSharedLarDoc(repo, membersDocUrl(nexusPubkey), "@members-registry")
+      boardResolve = materializeSharedLarDoc(repo, carriageDocUrl(nexusPubkey), "@members-registry")
         .then((handle) => {
           boardHandle = handle;
           onChange = () => { void refold(); };
@@ -135,8 +136,8 @@ export function makeNexusMembership(opts: {
     const doc     = readNexusCharterDoc(bagsDir);
     const roster  = foundingRoster(doc);
     const floor   = new Set<string>(seatedCharterKeys(doc).map((k) => k.toLowerCase()));
-    const entries = membershipEntriesFromBoard(boardDoc);
-    const folded  = await foldMembershipSet(entries, roster);
+    const entries = carriageEntriesFromBoard(boardDoc);
+    const folded  = await foldCarriageSet(entries, roster);
     const union = new Set<string>(floor);
     for (const n of folded) union.add(n.toLowerCase());
     members = union;
@@ -161,7 +162,7 @@ export function makeNexusMembership(opts: {
   };
 
   const membership: NexusMembership = {
-    isMemberPeer(peerId: string): boolean {
+    holdsCarriagePeer(peerId: string): boolean {
       const nym = memberNym(peerId);
       if (nym === null) return false;                      // fail-closed: an unresolvable peer is never a member
       return members.has(nym);

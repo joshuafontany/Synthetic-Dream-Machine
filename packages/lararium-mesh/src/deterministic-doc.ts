@@ -59,8 +59,8 @@ export function kapaeAntigenDocUrl(nexusPubkey: string): AutomergeUrl {
  * every honest carrier and the carry-split's member gate reads a live set — bounded by sync-latency, never a
  * global now. It carries operator CONTRACTS only (pubkey + charter-epoch + accepts-carriage), never a user.
  */
-export function membersDocUrl(nexusPubkey: string): AutomergeUrl {
-  return deterministicDocUrl(`${nexusRegistryUri(nexusPubkey)}#members`);
+export function carriageDocUrl(nexusPubkey: string): AutomergeUrl {
+  return deterministicDocUrl(`${nexusRegistryUri(nexusPubkey)}#carriage`);
 }
 
 /**

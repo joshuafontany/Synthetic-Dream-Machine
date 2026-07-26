@@ -16,9 +16,9 @@ import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import { hex } from "../src/crypto.js";
 import {
-  signMembershipQuorum, signCarriageContract, membershipEntryBytes, foldMembershipSet, isMember,
-  MEMBERSHIP_ENTRY_DOMAIN, type MembershipEntry, type QuorumSignature,
-} from "../src/membership-registry.js";
+  signCarriageQuorum, signCarriageContract, carriageEntryBytes, foldCarriageSet, holdsCarriage,
+  CARRIAGE_ENTRY_DOMAIN, type CarriageEntry, type QuorumSignature,
+} from "../src/carriage-registry.js";
 import type { KahuCharterRoster } from "../src/kapae-antigen.js";
 
 const EPOCH = "epoch-cid-genesis";
@@ -45,14 +45,14 @@ async function contractIn(seed: Uint8Array, epoch = EPOCH): Promise<QuorumSignat
   return signCarriageContract(nym, epoch, signerOf(seed));
 }
 
-async function admitEntry(over: Partial<Pick<MembershipEntry, "action" | "version" | "charterEpochCid">> = {},
+async function admitEntry(over: Partial<Pick<CarriageEntry, "action" | "version" | "charterEpochCid">> = {},
                           kahu: Uint8Array[] = [SEEDS.guru, SEEDS.telarus],
                           contract: QuorumSignature | undefined = undefined,
-                          joinerSeed: Uint8Array = SEEDS.joiner): Promise<MembershipEntry> {
+                          joinerSeed: Uint8Array = SEEDS.joiner): Promise<CarriageEntry> {
   const nym     = await pubOf(joinerSeed);
   const signers = await Promise.all(kahu.map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
   const cs      = contract ?? (over.action === "revoke" ? undefined : await contractIn(joinerSeed, over.charterEpochCid ?? EPOCH));
-  return signMembershipQuorum(
+  return signCarriageQuorum(
     { nym, action: over.action ?? "admit", version: over.version ?? 1, charterEpochCid: over.charterEpochCid ?? EPOCH },
     signers, cs,
   );
@@ -62,15 +62,15 @@ describe("the members fold — admit needs BOTH the kahu quorum AND the operator
   test("2-of-3 kahu + contract-in → the nym reads MEMBER", async () => {
     const r = await roster();
     const nym = await pubOf(SEEDS.joiner);
-    const set = await foldMembershipSet([await admitEntry()], r);
-    expect(isMember(nym, set)).toBe(true);
+    const set = await foldCarriageSet([await admitEntry()], r);
+    expect(holdsCarriage(nym, set)).toBe(true);
   });
 
   test("SUB-QUORUM (one kahu) → ignored, never a member", async () => {
     const r = await roster();
     const nym = await pubOf(SEEDS.joiner);
-    const set = await foldMembershipSet([await admitEntry({}, [SEEDS.guru])], r);
-    expect(isMember(nym, set)).toBe(false);
+    const set = await foldCarriageSet([await admitEntry({}, [SEEDS.guru])], r);
+    expect(holdsCarriage(nym, set)).toBe(false);
   });
 
   test("admit with NO contract-in → ignored (a Nexus cannot conscript an operator)", async () => {
@@ -78,9 +78,9 @@ describe("the members fold — admit needs BOTH the kahu quorum AND the operator
     const nym = await pubOf(SEEDS.joiner);
     // A perfectly-quorum'd admit, but the operator never signed 'accepts carriage'.
     const entry = await admitEntry({}, [SEEDS.guru, SEEDS.telarus], undefined, SEEDS.joiner);
-    const noContract: MembershipEntry = { ...entry, contractSig: undefined };
-    const set = await foldMembershipSet([noContract], r);
-    expect(isMember(nym, set)).toBe(false);
+    const noContract: CarriageEntry = { ...entry, contractSig: undefined };
+    const set = await foldCarriageSet([noContract], r);
+    expect(holdsCarriage(nym, set)).toBe(false);
   });
 
   test("admit with a FORGED contract-in (someone else's signature) → ignored", async () => {
@@ -90,29 +90,29 @@ describe("the members fold — admit needs BOTH the kahu quorum AND the operator
     const forged = await contractIn(SEEDS.stranger);
     const misattributed: QuorumSignature = { signer: nym, sig: forged.sig };   // wrong sig under the joiner's nym
     const entry = await admitEntry({}, [SEEDS.guru, SEEDS.telarus], misattributed);
-    const set = await foldMembershipSet([entry], r);
-    expect(isMember(nym, set)).toBe(false);
+    const set = await foldCarriageSet([entry], r);
+    expect(holdsCarriage(nym, set)).toBe(false);
   });
 
   test("a non-roster kahu signer does not pad the quorum", async () => {
     const r = await roster();
     const nym = await pubOf(SEEDS.joiner);
-    const set = await foldMembershipSet([await admitEntry({}, [SEEDS.guru, SEEDS.stranger])], r);
-    expect(isMember(nym, set)).toBe(false);
+    const set = await foldCarriageSet([await admitEntry({}, [SEEDS.guru, SEEDS.stranger])], r);
+    expect(holdsCarriage(nym, set)).toBe(false);
   });
 
   test("an admit on the WRONG charter epoch is ignored", async () => {
     const r = await roster();
     const nym = await pubOf(SEEDS.joiner);
-    const set = await foldMembershipSet([await admitEntry({ charterEpochCid: "some-other-epoch" })], r);
-    expect(isMember(nym, set)).toBe(false);
+    const set = await foldCarriageSet([await admitEntry({ charterEpochCid: "some-other-epoch" })], r);
+    expect(holdsCarriage(nym, set)).toBe(false);
   });
 
   test("an unbound (empty-key) roster fails closed", async () => {
     const empty: KahuCharterRoster = { keys: [], threshold: 2, charterEpochCid: EPOCH };
     const nym = await pubOf(SEEDS.joiner);
-    const set = await foldMembershipSet([await admitEntry()], empty);
-    expect(isMember(nym, set)).toBe(false);
+    const set = await foldCarriageSet([await admitEntry()], empty);
+    expect(holdsCarriage(nym, set)).toBe(false);
   });
 });
 
@@ -122,8 +122,8 @@ describe("revoke — kahu quorum only, monotone, fail-closed equivocation", () =
     const nym = await pubOf(SEEDS.joiner);
     const admit  = await admitEntry({ action: "admit",  version: 1 });
     const revoke = await admitEntry({ action: "revoke", version: 2 });
-    const set = await foldMembershipSet([admit, revoke], r);
-    expect(isMember(nym, set)).toBe(false);
+    const set = await foldCarriageSet([admit, revoke], r);
+    expect(holdsCarriage(nym, set)).toBe(false);
   });
 
   test("a same-version admit/revoke tie stays NON-member (a tie never grants membership)", async () => {
@@ -131,8 +131,8 @@ describe("revoke — kahu quorum only, monotone, fail-closed equivocation", () =
     const nym = await pubOf(SEEDS.joiner);
     const admit  = await admitEntry({ action: "admit",  version: 5 });
     const revoke = await admitEntry({ action: "revoke", version: 5 });
-    expect(isMember(nym, await foldMembershipSet([admit, revoke], r))).toBe(false);
-    expect(isMember(nym, await foldMembershipSet([revoke, admit], r))).toBe(false);   // order-independent
+    expect(holdsCarriage(nym, await foldCarriageSet([admit, revoke], r))).toBe(false);
+    expect(holdsCarriage(nym, await foldCarriageSet([revoke, admit], r))).toBe(false);   // order-independent
   });
 
   test("a stale revoke (lower version) cannot roll back a fresher admit", async () => {
@@ -140,8 +140,8 @@ describe("revoke — kahu quorum only, monotone, fail-closed equivocation", () =
     const nym = await pubOf(SEEDS.joiner);
     const revoke = await admitEntry({ action: "revoke", version: 1 });
     const admit  = await admitEntry({ action: "admit",  version: 2 });
-    const set = await foldMembershipSet([revoke, admit], r);
-    expect(isMember(nym, set)).toBe(true);
+    const set = await foldCarriageSet([revoke, admit], r);
+    expect(holdsCarriage(nym, set)).toBe(true);
   });
 });
 
@@ -149,7 +149,7 @@ describe("TRACK CONTRACTS, NEVER IDENTITIES — the signed payload is the operat
   test("the signed bytes carry ONLY pubkey · action · version · charter-epoch — no identity field", async () => {
     const nym = await pubOf(SEEDS.joiner);
     const decoded = JSON.parse(new TextDecoder().decode(
-      membershipEntryBytes({ kind: MEMBERSHIP_ENTRY_DOMAIN, nym, action: "admit", version: 1, charterEpochCid: EPOCH }),
+      carriageEntryBytes({ kind: CARRIAGE_ENTRY_DOMAIN, nym, action: "admit", version: 1, charterEpochCid: EPOCH }),
     )) as Record<string, unknown>;
     // Exactly the floor keys — nothing that could name a human.
     expect(Object.keys(decoded).sort()).toEqual(["action", "charterEpochCid", "kind", "nym", "version"]);

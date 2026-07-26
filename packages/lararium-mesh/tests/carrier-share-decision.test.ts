@@ -16,7 +16,7 @@ import { describe, test, expect } from "vitest";
 import { interpretAsDocumentId, stringifyAutomergeUrl, type BinaryDocumentId, type DocumentId } from "@automerge/automerge-repo";
 import { randomBytes } from "node:crypto";
 import {
-  DeterministicFederationGate, carryContractShareDecision, memberCarryShareDecision,
+  DeterministicFederationGate, carryContractShareDecision, carrierShareDecision,
   type AntigenRing, type NexusMembership, type PlaneSeal,
 } from "../src/federation-gate.js";
 import { crossroadsDocUrl } from "../src/deterministic-doc.js";
@@ -34,13 +34,13 @@ const MEMBER_PEER   = "peer-member";
 const STRANGER_PEER = "peer-stranger";
 const relayPeers = new Set([MEMBER_PEER, STRANGER_PEER]);
 
-const membership: NexusMembership = { isMemberPeer: (peerId) => peerId === MEMBER_PEER };
+const membership: NexusMembership = { holdsCarriagePeer: (peerId) => peerId === MEMBER_PEER };
 const seal: PlaneSeal = { isSealedPlane: (docId) => docId === SEALED_PLANE };
 
 const decide = (
   peerId: string, documentId: DocumentId | undefined,
   m: NexusMembership | null = membership, s: PlaneSeal | null = seal, antigen: AntigenRing | null = null,
-) => memberCarryShareDecision(relayPeers, fedGate, antigen, null, m, s, peerId, documentId);
+) => carrierShareDecision(relayPeers, fedGate, antigen, null, m, s, peerId, documentId);
 
 describe("the floor is untouched — federatable/public crosses to member AND stranger", () => {
   test("a MEMBER reaches the federatable board", async () => { expect(await decide(MEMBER_PEER, CROSSROADS)).toBe(true); });
@@ -85,14 +85,14 @@ describe("READ-LANE UNTOUCHED — degenerates EXACTLY to carryContractShareDecis
   ];
   test("membership = null → identical to the pre-split decision (no lane opens)", async () => {
     for (const [peer, doc] of cells) {
-      const split = await memberCarryShareDecision(relayPeers, fedGate, null, null, null, seal, peer, doc);
+      const split = await carrierShareDecision(relayPeers, fedGate, null, null, null, seal, peer, doc);
       const base  = await carryContractShareDecision(relayPeers, fedGate, null, null, peer, doc);
       expect(split).toBe(base);
     }
   });
   test("seal = null → identical to the pre-split decision (nothing provably sealed → no lane)", async () => {
     for (const [peer, doc] of cells) {
-      const split = await memberCarryShareDecision(relayPeers, fedGate, null, null, membership, null, peer, doc);
+      const split = await carrierShareDecision(relayPeers, fedGate, null, null, membership, null, peer, doc);
       const base  = await carryContractShareDecision(relayPeers, fedGate, null, null, peer, doc);
       expect(split).toBe(base);
     }

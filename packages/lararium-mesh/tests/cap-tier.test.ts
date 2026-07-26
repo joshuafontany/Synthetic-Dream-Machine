@@ -160,7 +160,7 @@ const relayGate = new DeterministicFederationGate(NEXUS);
 const STRANGER = "peer-stranger";
 const MEMBER = "peer-member";
 const relayPeers = new Set<string>([STRANGER, MEMBER]);
-const membership: NexusMembership = { isMemberPeer: (p) => p === MEMBER };
+const membership: NexusMembership = { holdsCarriagePeer: (p) => p === MEMBER };
 
 /** A floor oracle + declared source over a synthetic public docId, so the tighten is observable at the seam. */
 function ringDeclaring(docId: string, declared: CapTier | null): CapTierRing {
@@ -173,7 +173,7 @@ function ringDeclaring(docId: string, declared: CapTier | null): CapTierRing {
 const noSeal: PlaneSeal = { isSealedPlane: () => false };
 
 describe("capTierShareDecision — the gate consults the declared tier, TIGHTEN-ONLY", () => {
-  // A real federatable docId so `memberCarryShareDecision` says PUBLIC-cross; then the declared tier withdraws.
+  // A real federatable docId so `carrierShareDecision` says PUBLIC-cross; then the declared tier withdraws.
   // The @crossroads public board is deterministically addressed from the nexus key (the gate federates it).
   const crossroadsId = interpretAsDocumentId(crossroadsDocUrl(NEXUS)) as DocumentId;
 

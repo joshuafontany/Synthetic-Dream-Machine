@@ -15,7 +15,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import * as ed from "@noble/ed25519";
 import { hex, genesisCharterEpochCid, type NexusCharterDoc } from "@lararium/mesh";
-import { makeNexusMembership } from "../src/nexus-membership.js";
+import { makeNexusMembership } from "../src/nexus-carriage.js";
 import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
 
 // Three founding kahu — fixed seeds → deterministic keys. The seated keys ARE the member floor.
@@ -54,28 +54,28 @@ describe("the provable-member floor — a seated-kahu peer reads MEMBER, all els
     ]);
     const { membership } = makeNexusMembership({ bagsDir: bags, peerIdentifierMap: peerMap });
 
-    expect(membership.isMemberPeer("peer-kahu")).toBe(true);
-    expect(membership.isMemberPeer("peer-kahu-upper")).toBe(true);
-    expect(membership.isMemberPeer("peer-stranger")).toBe(false);
-    expect(membership.isMemberPeer("peer-malformed")).toBe(false);
-    expect(membership.isMemberPeer("peer-absent")).toBe(false);   // unauthenticated → not named → STRANGER
+    expect(membership.holdsCarriagePeer("peer-kahu")).toBe(true);
+    expect(membership.holdsCarriagePeer("peer-kahu-upper")).toBe(true);
+    expect(membership.holdsCarriagePeer("peer-stranger")).toBe(false);
+    expect(membership.holdsCarriagePeer("peer-malformed")).toBe(false);
+    expect(membership.holdsCarriagePeer("peer-absent")).toBe(false);   // unauthenticated → not named → STRANGER
   });
 
   test("FAIL CLOSED — no charter on disk → empty member set → every cross-operator STRANGER", async () => {
     const keys    = await Promise.all(SEEDS.map(pubOf));
     const peerMap = new Map<string, string>([["peer-kahu", `prefix:${keys[0]!}`]]);
     const { membership } = makeNexusMembership({ bagsDir: bags, peerIdentifierMap: peerMap });   // bags empty
-    expect(membership.isMemberPeer("peer-kahu")).toBe(false);
+    expect(membership.holdsCarriagePeer("peer-kahu")).toBe(false);
   });
 
   test("refresh swaps the member set when the charter seats", async () => {
     const keys    = await Promise.all(SEEDS.map(pubOf));
     const peerMap = new Map<string, string>([["peer-kahu", `prefix:${keys[0]!}`]]);
     const holder  = makeNexusMembership({ bagsDir: bags, peerIdentifierMap: peerMap });
-    expect(holder.membership.isMemberPeer("peer-kahu")).toBe(false);   // unseated → STRANGER
+    expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(false);   // unseated → STRANGER
 
     writeNexusCharterDoc(bags, await seatedCharter(keys));
     holder.refresh();
-    expect(holder.membership.isMemberPeer("peer-kahu")).toBe(true);    // seated → MEMBER
+    expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(true);    // seated → MEMBER
   });
 });

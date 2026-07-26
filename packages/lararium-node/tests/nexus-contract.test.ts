@@ -4,7 +4,7 @@
  *
  * Proven, against a SYNTHETIC seated roster on a temp LAR_ROOT (real vessel identity, real founder persona-roots,
  * a real Automerge board on disk):
- *   · the full loop ADMIT → board → read → fold → isMember — a 2-of-3 signed + contract-in admit lands on the
+ *   · the full loop ADMIT → board → read → fold → holdsCarriage — a 2-of-3 signed + contract-in admit lands on the
  *     always-carried members board and folds the operator nym to MEMBER (the a-multitude-of-one self-contract),
  *   · a REVOKE at a higher version drops membership,
  *   · a SUB-QUORUM admit REFUSES (nothing written),
@@ -26,7 +26,7 @@ import { generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot, loadVesse
 import { larDataDir } from "../src/vessel-paths.js";
 import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
 import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
-import { makeNexusMembership } from "../src/nexus-membership.js";
+import { makeNexusMembership } from "../src/nexus-carriage.js";
 
 let root: string;
 let priorLarRoot: string | undefined;
@@ -61,7 +61,7 @@ function seatCharter(keys: string[], threshold = 2): void {
 }
 
 describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
-  it("ADMIT (self-contract) → board → fold → isMember: a 2-of-3 held-root admit contracts the operator", async () => {
+  it("ADMIT (self-contract) → board → fold → holdsCarriage: a 2-of-3 held-root admit contracts the operator", async () => {
     await generateOrLoadVesselIdentity(larDataDir());
     // The vessel holds 4 persona-roots: 0-2 are the founding kahu; 3 is the joining operator it self-contracts.
     const roots = await Promise.all([0, 1, 2, 3].map((i) => generateOrLoadPersonaGroupRoot(larDataDir(), i)));
@@ -160,9 +160,9 @@ describe("the members{} ∪ kahu-floor UNION — the sharePolicy member gate (SE
     const holder = makeNexusMembership({ bagsDir: bagsDir(), peerIdentifierMap: peerMap, repo, nexusPubkey });
     await holder.refold();   // fold the members board atop the kahu floor
 
-    expect(holder.membership.isMemberPeer("peer-kahu")).toBe(true);      // kahu floor
-    expect(holder.membership.isMemberPeer("peer-joiner")).toBe(true);    // members{} — the light that flips SELF-SLOT-B
-    expect(holder.membership.isMemberPeer("peer-foreign")).toBe(false);  // fail-closed stranger
+    expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(true);      // kahu floor
+    expect(holder.membership.holdsCarriagePeer("peer-joiner")).toBe(true);    // members{} — the light that flips SELF-SLOT-B
+    expect(holder.membership.holdsCarriagePeer("peer-foreign")).toBe(false);  // fail-closed stranger
     holder.dispose();
   });
 
@@ -175,7 +175,7 @@ describe("the members{} ∪ kahu-floor UNION — the sharePolicy member gate (SE
     const peerMap = new Map<string, string>([["peer-kahu", `prefix:${roots[0]!.verifyingKey.toLowerCase()}`]]);
     const holder = makeNexusMembership({ bagsDir: bagsDir(), peerIdentifierMap: peerMap, repo, nexusPubkey });
     await holder.refold();
-    expect(holder.membership.isMemberPeer("peer-kahu")).toBe(false);   // no charter, no board → nobody member
+    expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(false);   // no charter, no board → nobody member
     holder.dispose();
   });
 });

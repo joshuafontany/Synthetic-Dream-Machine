@@ -77,7 +77,7 @@ export type { IdentityRing } from "./federation-gate.js";
 export type { AntigenRing } from "./federation-gate.js";
 export { presenterIsKapaed, carryContractShareDecision, classifyCrossOperatorAdmission } from "./federation-gate.js";
 export type { CrossOperatorAdmission } from "./federation-gate.js";
-export { memberCarryShareDecision, capTierShareDecision } from "./federation-gate.js";
+export { carrierShareDecision, capTierShareDecision } from "./federation-gate.js";
 export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
 // The bag's sharing-posture as SELF-DESCRIBING DATA — the 4-tier total order + the tighten-only keystone.
 export type { CapTier, TierFloorOracle, DeclaredTierSource, CapTierRing } from "./cap-tier.js";
@@ -108,8 +108,8 @@ export * from "./sealed-box.js";
 export * from "./kapae-antigen.js";
 export { antigenEntriesFromBoard, writeAntigenEntry, antigenEntryKey, ANTIGEN_ENTRY_PREFIX } from "./antigen-board.js";
 // The operator MEMBERS-registry — the Kapae-antigen's ALLOW-twin (members{} ⊥ blocked{}); contracts, never identities.
-export * from "./membership-registry.js";
-export { membershipEntriesFromBoard, writeMembershipEntry, membershipEntryKey, MEMBERS_ENTRY_PREFIX } from "./members-board.js";
+export * from "./carriage-registry.js";
+export { carriageEntriesFromBoard, writeCarriageEntry, membershipEntryKey, MEMBERS_ENTRY_PREFIX } from "./carriage-board.js";
 // The TRACELESS boot-invite — a sealed single-use capability spent-on-boot; no voucher, no board record.
 export * from "./boot-invite.js";
 export {

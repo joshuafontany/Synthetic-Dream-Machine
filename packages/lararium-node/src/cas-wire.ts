@@ -7,7 +7,7 @@
  * the SAME interface, so the wire logic here never changes. A member `want-block(cid)`s a holder; the holder
  * answers a `cas-block` (the ciphertext) or `cas-mu` (the void).
  *
- * THE GATE (carry ⊥ read ⊥ contract). On a `want-block`, the server consults `memberCarryShareDecision` over the
+ * THE GATE (carry ⊥ read ⊥ contract). On a `want-block`, the server consults `carrierShareDecision` over the
  * cid's docId (`docIdForCiphertextCid`): a proven Nexus MEMBER over a PROVABLY-sealed plane opens the carry lane
  * and the server serves the CIPHERTEXT; a STRANGER, a NON-member, or a KAPAE'd presenter draws Mu. The server
  * serves ciphertext only — the read-cap NEVER rides this seam (it stays on the private keyring), so a member
@@ -28,7 +28,7 @@
  */
 
 import {
-  memberCarryShareDecision, muVoidBytes, verifyCiphertextCid,
+  carrierShareDecision, muVoidBytes, verifyCiphertextCid,
   type MembershipChannel,
   type AntigenRing, type FederationGate, type NexusMembership, type PlaneSeal,
 } from "@lararium/mesh";
@@ -75,7 +75,7 @@ export async function decideAndServeWantBlock(
   const docId: DocumentId = docIdForCiphertextCid(cid);
   // The carry-lane gate: a proven MEMBER over a PROVABLY-sealed plane, not Kapae'd. A relay peer is gated (in the
   // relayPeers set); a STRANGER / non-member / Kapae'd draws `false` — the SAME `false` a caught-up peer draws.
-  const mayCarry = await memberCarryShareDecision(
+  const mayCarry = await carrierShareDecision(
     new Set<string>([peerId]),   // the requester is a gated relay peer
     deps.fedGate,                // the sealed docId is not federatable → the floor denies → the member lane decides
     deps.antigen,                // a Kapae'd presenter → Mu

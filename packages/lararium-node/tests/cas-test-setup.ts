@@ -66,7 +66,7 @@ export const bytesFromPayload = (env: MembershipEnvelope): Uint8Array =>
 /** A membership stub — a peerId is a MEMBER iff it sits in the set (production: the nexus-membership fold). */
 export const membershipOf = (members: Iterable<string>): NexusMembership => {
   const set = new Set(members);
-  return { isMemberPeer: (peerId) => set.has(peerId) };
+  return { holdsCarriagePeer: (peerId) => set.has(peerId) };
 };
 
 /** An antigen stub — a peerId IS its own nym here; a nym in `kapaed` draws Mu (production: the quorum-signed fold). */

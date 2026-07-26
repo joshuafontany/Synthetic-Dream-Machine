@@ -6,7 +6,7 @@
  * SIDE-EFFECT — registers the body's docId into the live `SealedPlaneRegistry`. That side-effect IS the
  * seal-producer: a docId reaches the sealed set ONLY through a successful encrypt+CAS-write, so a cleartext body
  * can NEVER register (no plaintext door), and a doc can NEVER self-label sealed. The member blind-transit lane
- * (`memberCarryShareDecision`) opens for exactly the docIds this installer sealed.
+ * (`carrierShareDecision`) opens for exactly the docIds this installer sealed.
  *
  * verify-cap ⊥ read-cap: the relay serves + verifies the ciphertext secret-free (`verifyCiphertextCid`); the
  * read-cap (messageKey) the installer returns rides the PRIVATE keyhive lane and NEVER crosses to the relay.

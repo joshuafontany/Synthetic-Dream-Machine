@@ -182,8 +182,8 @@ export {
 } from "./boot-invite-burn.js";
 
 // The @nexus MEMBERSHIP consult holder (Build-2) — the carry-split's member gate: kahu floor ∪ folded members{}.
-export { makeNexusMembership } from "./nexus-membership.js";
-export type { NexusMembershipHolder } from "./nexus-membership.js";
+export { makeNexusMembership } from "./nexus-carriage.js";
+export type { NexusMembershipHolder } from "./nexus-carriage.js";
 // The `nexus-refresh` LIVE-refold seam — re-reads the disk posture + re-folds the antigen / members boards from
 // storage into the live holders, so an out-of-process CLI edit reaches a running node without a bounce.
 export { runNexusRefresh } from "./nexus-refresh.js";

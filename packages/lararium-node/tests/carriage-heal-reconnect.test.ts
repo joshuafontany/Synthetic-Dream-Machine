@@ -58,7 +58,7 @@ function startHandshakeRelay(): Promise<{
 
 const inertDeps = (): CasWireServerDeps => ({
   cadDir: "/nonexistent-cad", seal: makeSealedPlaneRegistry().seal,
-  membership: { isMemberPeer: () => false }, antigen: { kapaed: new Set(), presenterNym: (p) => p },
+  membership: { holdsCarriagePeer: () => false }, antigen: { kapaed: new Set(), presenterNym: (p) => p },
   fedGate: new DeterministicFederationGate("00".repeat(8)),
 });
 

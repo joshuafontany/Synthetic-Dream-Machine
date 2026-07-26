@@ -127,7 +127,7 @@ describe("house members + boot edge", () => {
 // A membership consult that names ONLY MEMBER_PEER a member; a seal oracle that marks ONLY SEALED_PLANE sealed.
 const MEMBER_PEER  = "member-cross-peer";
 const STRANGER_PEER = "stranger-cross-peer";
-const membership: NexusMembership = { isMemberPeer: (peerId) => peerId === MEMBER_PEER };
+const membership: NexusMembership = { holdsCarriagePeer: (peerId) => peerId === MEMBER_PEER };
 const SEALED_PLANE   = randomDocId();   // a private-own plane the seal oracle proves sealed (ciphertext)
 const CLEARTEXT_PLANE = randomDocId();  // a private-own plane the seal oracle CANNOT prove sealed (plaintext)
 const planeSeal: PlaneSeal = { isSealedPlane: (docId) => docId === SEALED_PLANE };
@@ -182,7 +182,7 @@ describe("the read-lane stays absolute — a Kapae'd MEMBER draws Mu even for a 
     kapaed: new Set(["beef".repeat(16)]),
     presenterNym: (peerId) => (peerId === kapaedMember ? "beef".repeat(16) : null),
   };
-  const memberIncludingKapaed: NexusMembership = { isMemberPeer: (peerId) => peerId === kapaedMember };
+  const memberIncludingKapaed: NexusMembership = { holdsCarriagePeer: (peerId) => peerId === kapaedMember };
 
   test("a banned MEMBER cannot blind-transit even a sealed plane (Kapae stays ahead of the carry-split)", async () => {
     const verdict = await selfSlotShareDecision({

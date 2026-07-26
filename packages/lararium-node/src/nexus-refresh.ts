@@ -28,13 +28,13 @@
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
-  materializeSharedLarDoc, kapaeAntigenDocUrl, membersDocUrl,
-  antigenEntriesFromBoard, membershipEntriesFromBoard,
+  materializeSharedLarDoc, kapaeAntigenDocUrl, carriageDocUrl,
+  antigenEntriesFromBoard, carriageEntriesFromBoard,
   federationPostureFromDoc, type FederationPosture,
 } from "@lararium/mesh";
 import { readNexusCharterDoc } from "./nexus-charter-doc.js";
 import type { AntigenRingHolder } from "./antigen-ring.js";
-import type { NexusMembershipHolder } from "./nexus-membership.js";
+import type { NexusMembershipHolder } from "./nexus-carriage.js";
 
 export interface NexusRefreshDeps {
   /** The Automerge storage dir the running node + the CLI writers both bind (the shared on-disk substrate). */
@@ -76,7 +76,7 @@ export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefr
   const repo = new Repo({ storage: new NodeFSStorageAdapter(deps.storageDir) });
   try {
     const antigenBoard = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(deps.nexusPubkey), "@kapae-antigen");
-    const membersBoard = await materializeSharedLarDoc(repo, membersDocUrl(deps.nexusPubkey), "@members-registry");
+    const membersBoard = await materializeSharedLarDoc(repo, carriageDocUrl(deps.nexusPubkey), "@members-registry");
     const antigenDoc = antigenBoard.doc();
     const membersDoc = membersBoard.doc();
     // Fold the fresh boards into the live holders. Each swaps its set whole; a fold fault throws BEFORE the
@@ -86,7 +86,7 @@ export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefr
     return {
       posture,
       antigenEntries: antigenEntriesFromBoard(antigenDoc).length,
-      memberEntries:  membershipEntriesFromBoard(membersDoc).length,
+      memberEntries:  carriageEntriesFromBoard(membersDoc).length,
     };
   } finally {
     // Dispose the throwaway repo whole — flush its docs AND disconnect its subsystems, so no Repo, no

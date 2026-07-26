@@ -210,11 +210,11 @@ export function resolveTierForDoc(ring: CapTierRing, documentId: string): CapTie
  * This is a pure TIGHTENING predicate: the gate ANDs it with the structural verdict, and because the
  * resolved tier is ≤ the structural floor, it can only ever ADD a deny, never an allow.
  */
-export function tierPermitsRelayPeer(resolved: CapTier, isMemberPeer: boolean): boolean {
+export function tierPermitsRelayPeer(resolved: CapTier, holdsCarriagePeer: boolean): boolean {
   switch (resolved) {
     case "public":       return true;
-    case "contract":     return isMemberPeer;
-    case "personagroup": return isMemberPeer;
+    case "contract":     return holdsCarriagePeer;
+    case "personagroup": return holdsCarriagePeer;
     case "veil":         return false;
   }
 }

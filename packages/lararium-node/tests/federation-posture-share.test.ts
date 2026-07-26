@@ -28,7 +28,7 @@ const PRIVATE_LIKE = docIdOf(stringifyAutomergeUrl({ documentId: new Uint8Array(
 
 const MEMBER_PEER  = "member-peer";
 const FOREIGN_PEER = "foreign-peer";
-const membership: NexusMembership = { isMemberPeer: (p) => p === MEMBER_PEER };
+const membership: NexusMembership = { holdsCarriagePeer: (p) => p === MEMBER_PEER };
 
 const decide = (posture: "private" | "open", peerId: string, documentId: DocumentId) =>
   selfSlotShareDecision({

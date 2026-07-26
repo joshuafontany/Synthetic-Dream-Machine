@@ -30,7 +30,7 @@ import {
   type DocumentId,
   type PeerId,
 } from "@automerge/automerge-repo";
-import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl, personaKelBoardDocUrl, membersDocUrl } from "./deterministic-doc.js";
+import { crossroadsDocUrl, whoBoardDocUrl, kapaeAntigenDocUrl, personaKelBoardDocUrl, carriageDocUrl } from "./deterministic-doc.js";
 import type { IdentitySlot } from "./identity-slot.js";
 import type { PeerClass } from "./island-protocol.js";
 import { type CapTierRing, resolveTierForDoc, tierPermitsRelayPeer } from "./cap-tier.js";
@@ -70,7 +70,7 @@ export class DeterministicFederationGate implements FederationGate {
       crossroadsDocUrl(nexusPubkey),
       whoBoardDocUrl(nexusPubkey),
       kapaeAntigenDocUrl(nexusPubkey),   // the immune antigen (DENY-twin) rides the always-carried plane (MANDATORY tier)
-      membersDocUrl(nexusPubkey),        // the operator members-registry (ALLOW-twin) — quorum-signed contracts, MANDATORY tier
+      carriageDocUrl(nexusPubkey),        // the operator members-registry (ALLOW-twin) — quorum-signed contracts, MANDATORY tier
       personaKelBoardDocUrl(nexusPubkey), // the persona-KEL board — PUBLIC identifier→head mapping (federates once)
       ...extraBoardUrls,
     ];
@@ -256,7 +256,7 @@ export async function carryContractShareDecision(
  */
 export interface NexusMembership {
   /** True ONLY when the peer is provably a contracted Nexus member (fail-closed: unknown/unconsultable → false). */
-  isMemberPeer(peerId: string): boolean;
+  holdsCarriagePeer(peerId: string): boolean;
 }
 
 /**
@@ -278,7 +278,7 @@ export interface PlaneSeal {
 }
 
 /**
- * memberCarryShareDecision — the CARRY-SPLIT that lets the mesh breathe across a Nexus (operator-ruled
+ * carrierShareDecision — the CARRY-SPLIT that lets the mesh breathe across a Nexus (operator-ruled
  * 2026-07-20). It layers a MEMBER blind-transit lane ATOP the unchanged public floor, so:
  *
  *   1. antigen + the federatable-public FLOOR — `carryContractShareDecision`, VERBATIM. A Kapae'd presenter
@@ -299,7 +299,7 @@ export interface PlaneSeal {
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/carry-contract#carry-read-contract
  */
-export async function memberCarryShareDecision(
+export async function carrierShareDecision(
   relayPeers: ReadonlySet<string>,
   fedGate:    FederationGate | null,
   antigen:    AntigenRing | null,
@@ -317,7 +317,7 @@ export async function memberCarryShareDecision(
   if (presenterIsKapaed(antigen, peerId)) return false;    // a Kapae'd presenter drew Mu at the floor — keep it Mu
   if (!documentId)                       return false;      // deny-by-default
   if (!relayPeers.has(peerId))           return false;      // a house member already crossed at the floor
-  if (!membership.isMemberPeer(peerId))  return false;      // STRANGER → public-read only (no sealed carriage)
+  if (!membership.holdsCarriagePeer(peerId))  return false;      // STRANGER → public-read only (no sealed carriage)
   if (!seal.isSealedPlane(documentId))   return false;      // cleartext-local plane → NEVER carried (encrypt-first)
   return true;                                             // MEMBER + provably-sealed → blind-transit the ciphertext
 }
@@ -429,12 +429,12 @@ export function admitCrossOperatorUnderPosture(args: {
 }
 
 /**
- * capTierShareDecision — the DECLARED-TIER TIGHTENING layered ATOP `memberCarryShareDecision`. The bag's
+ * capTierShareDecision — the DECLARED-TIER TIGHTENING layered ATOP `carrierShareDecision`. The bag's
  * self-describing cap-tier (cap-tier.ts) refines WHO holds the read-cap, and it may only ever TIGHTEN the
  * structural verdict — never loosen it. So this fn wraps the whole carry-split and ANDs a pure tier
  * predicate over its `true`:
  *
- *   1. the STRUCTURAL floor — `memberCarryShareDecision`, VERBATIM. Its deny stands ABSOLUTE: a tier can
+ *   1. the STRUCTURAL floor — `carrierShareDecision`, VERBATIM. Its deny stands ABSOLUTE: a tier can
  *      never resurrect a doc the structure denied (the keystone runs one direction only). If the base says
  *      `false`, this says `false`.
  *   2. the DECLARED-TIER tighten — over a doc the base ALLOWED to a RELAY peer, the bag's resolved tier
@@ -445,11 +445,11 @@ export function admitCrossOperatorUnderPosture(args: {
  * ── THE SAFETY KEYSTONE (proven in cap-tier.test) ────────────────────────────────────────────────
  * Because `resolveTierForDoc` returns a tier ≤ the STRUCTURAL floor, and the base verdict already encodes
  * that floor, this layer can only ADD a deny — it is mechanically impossible for a declared datum to grant
- * a doc MORE openness than `memberCarryShareDecision` already permits. A bag that DECLARES itself PUBLIC but
+ * a doc MORE openness than `carrierShareDecision` already permits. A bag that DECLARES itself PUBLIC but
  * whose structural floor is PERSONAGROUP resolves to PERSONAGROUP and never reaches a stranger.
  *
  * DEGENERATION (the read-lane-untouched proof): with `capTiers = null`, this returns EXACTLY
- * `memberCarryShareDecision(...)` — the tier layer adds tightening, it never widens the floor, and it stays
+ * `carrierShareDecision(...)` — the tier layer adds tightening, it never widens the floor, and it stays
  * INERT until a bag actually carries the datum.
  *
  * ── HONEST BOUND (the not-yet-wired seam) ────────────────────────────────────────────────────────
@@ -474,13 +474,13 @@ export async function capTierShareDecision(
   documentId?: DocumentId,
 ): Promise<boolean> {
   // 1. The STRUCTURAL floor, verbatim. Its deny is absolute — a tier never loosens it.
-  const base = await memberCarryShareDecision(relayPeers, fedGate, antigen, identity, membership, seal, peerId, documentId);
+  const base = await carrierShareDecision(relayPeers, fedGate, antigen, identity, membership, seal, peerId, documentId);
   if (!base)                    return false;   // structural deny stands (tier tightens only, never loosens)
   if (!capTiers)                return true;    // no declared-tier ring → the base verdict is whole (inert seam)
   if (!relayPeers.has(peerId))  return true;    // in-process house member — tier not consulted (full sync)
   if (!documentId)              return true;    // base allowed a no-doc case (house member) — nothing to tighten
   // 2. The DECLARED-TIER tighten — resolve declared ∧ structuralFloor, then AND the pure peer predicate.
   const resolved = resolveTierForDoc(capTiers, documentId);
-  const isMember = membership ? membership.isMemberPeer(peerId) : false;
-  return tierPermitsRelayPeer(resolved, isMember);   // can only DENY where the base said allow
+  const holdsCarriage = membership ? membership.holdsCarriagePeer(peerId) : false;
+  return tierPermitsRelayPeer(resolved, holdsCarriage);   // can only DENY where the base said allow
 }

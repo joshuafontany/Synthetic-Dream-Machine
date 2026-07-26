@@ -15,7 +15,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 import {
-  DeterministicFederationGate, carryContractShareDecision, memberCarryShareDecision,
+  DeterministicFederationGate, carryContractShareDecision, carrierShareDecision,
   verifyCiphertextCid, parseDigest, CONVERGENCE_SECRET_LEN,
   type NexusMembership,
 } from "@lararium/mesh";
@@ -27,7 +27,7 @@ const NX = "abcdef0123456789";
 const fedGate = new DeterministicFederationGate(NX);
 const MEMBER = "peer-member", STRANGER = "peer-stranger";
 const relayPeers = new Set([MEMBER, STRANGER]);
-const membership: NexusMembership = { isMemberPeer: (p) => p === MEMBER };
+const membership: NexusMembership = { holdsCarriagePeer: (p) => p === MEMBER };
 const casDir = mkdtempSync(join(tmpdir(), "lar-cad-seal-"));
 const epochSecret: NexusEpochSecret = { epoch: 3, secret: new Uint8Array(randomBytes(CONVERGENCE_SECRET_LEN)) };
 
@@ -44,9 +44,9 @@ describe("the seal-producer registers a sealed body AS A SIDE-EFFECT and lights 
     expect(installed.epoch).toBe(epochSecret.epoch);
     expect(registry.epochFor(installed.docId)).toBe(epochSecret.epoch);
 
-    // The member lane — the read-cap is NOT among memberCarryShareDecision's arguments (structurally cannot cross).
-    expect(await memberCarryShareDecision(relayPeers, fedGate, null, null, membership, registry.seal, MEMBER, installed.docId)).toBe(true);
-    expect(await memberCarryShareDecision(relayPeers, fedGate, null, null, membership, registry.seal, STRANGER, installed.docId)).toBe(false);
+    // The member lane — the read-cap is NOT among carrierShareDecision's arguments (structurally cannot cross).
+    expect(await carrierShareDecision(relayPeers, fedGate, null, null, membership, registry.seal, MEMBER, installed.docId)).toBe(true);
+    expect(await carrierShareDecision(relayPeers, fedGate, null, null, membership, registry.seal, STRANGER, installed.docId)).toBe(false);
 
     // The ciphertext rests in CAS and verifies SECRET-FREE (the relay's blind check).
     expect(parseDigest(installed.cid).algo).toBe("blake3");             // fork-① tagged address
@@ -62,7 +62,7 @@ describe("the seal-producer registers a sealed body AS A SIDE-EFFECT and lights 
     // There is no register door but installSealedBody; a plaintext docId derived by any means stays absent.
     const fakeDocId = docIdForCiphertextCid("blake3:" + "aa".repeat(32));
     expect(registry.seal.isSealedPlane(fakeDocId)).toBe(false);
-    expect(await memberCarryShareDecision(relayPeers, fedGate, null, null, membership, registry.seal, MEMBER, fakeDocId)).toBe(false);
+    expect(await carrierShareDecision(relayPeers, fedGate, null, null, membership, registry.seal, MEMBER, fakeDocId)).toBe(false);
   });
 });
 
@@ -72,7 +72,7 @@ describe("READ-LANE UNTOUCHED — an empty registry degenerates EXACTLY to the p
     const someDoc = docIdForCiphertextCid("blake3:" + "bc".repeat(32));
     const cells: ReadonlyArray<readonly [string, typeof someDoc]> = [[MEMBER, someDoc], [STRANGER, someDoc]];
     for (const [peer, doc] of cells) {
-      const split = await memberCarryShareDecision(relayPeers, fedGate, null, null, membership, registry.seal, peer, doc);
+      const split = await carrierShareDecision(relayPeers, fedGate, null, null, membership, registry.seal, peer, doc);
       const base  = await carryContractShareDecision(relayPeers, fedGate, null, null, peer, doc);
       expect(split).toBe(base);
     }

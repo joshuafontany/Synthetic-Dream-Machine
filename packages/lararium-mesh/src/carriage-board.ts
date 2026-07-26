@@ -1,15 +1,15 @@
 /**
- * members-board — the DOC face of the operator MEMBERS-registry: extract `MembershipEntry`s out of the
- * always-carried members BOARD (a `LarDoc` under `membersDocUrl`, deterministic-doc). The pure fold/verify
- * (membership-registry `foldMembershipSet`) reads the entries this extractor surfaces; the
+ * carriage-board — the DOC face of the operator CARRIAGE-registry: extract `CarriageEntry`s out of the
+ * always-carried carriage BOARD (a `LarDoc` under `carriageDocUrl`, deterministic-doc). The pure fold/verify
+ * (carriage-registry `foldCarriageSet`) reads the entries this extractor surfaces; the
  * DeterministicFederationGate federates the board so every honest carrier holds the same entries — the
  * ALLOW-twin of the antigen board, sibling to it under the same nexus-pubkey (members{} ⊥ blocked{}).
  *
  * STORAGE CONVENTION (mirrors antigen-board): each membership entry rides ONE tiddler whose `text` carries the
- * entry's JSON (`MembershipEntry`). The extractor walks every tiddler, parses its text, and keeps only the
+ * entry's JSON (`CarriageEntry`). The extractor walks every tiddler, parses its text, and keeps only the
  * ones that structurally coerce to an entry — a foreign / torn / non-membership tiddler is SKIPPED, never
  * guessed. Extraction is permissive on purpose: it never adjudicates trust (an entry it surfaces still faces
- * the kahu quorum + contract-in verify in `foldMembershipSet`, which IGNORES anything that does not count). So
+ * the kahu quorum + contract-in verify in `foldCarriageSet`, which IGNORES anything that does not count). So
  * a malformed or forged entry that slips through extraction costs nothing — it dies at the fold. FAIL CLOSED
  * end-to-end: an absent / empty board surfaces NO entries, the fold yields the empty member set, and NOBODY
  * reads member (the conservative floor: no registry → the seated-kahu union is all that remains).
@@ -26,10 +26,10 @@
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, tiddlerText } from "./base-doc.js";
 import {
-  MEMBERSHIP_ENTRY_DOMAIN,
-  type MembershipEntry,
-  type MembershipAction,
-} from "./membership-registry.js";
+  CARRIAGE_ENTRY_DOMAIN,
+  type CarriageEntry,
+  type CarriageAction,
+} from "./carriage-registry.js";
 import type { QuorumSignature } from "./kapae-antigen.js";
 
 /**
@@ -42,22 +42,22 @@ export const MEMBERS_ENTRY_PREFIX = "lar:///ha.ka.ba/dreamnet/members-registry/"
 /**
  * The tiddler key one membership entry rides under — keyed by nym, ACTION, and version, so every distinct
  * signed entry ACCRETES (the additive CRDT the fold reads) and NOTHING overwrites a standing entry: an admit@v1
- * and a revoke@v1 land under DISTINCT keys and BOTH survive, so `foldMembershipSet`'s equivocation guard (a
+ * and a revoke@v1 land under DISTINCT keys and BOTH survive, so `foldCarriageSet`'s equivocation guard (a
  * same-version revoke drops membership) still runs — keying by nym alone would let a concurrent admit win the
  * Automerge LWW merge in place and silently resurrect a revoked member. The fold, never the write, adjudicates.
  */
-export function membershipEntryKey(nym: string, action: MembershipAction, version: number): string {
+export function membershipEntryKey(nym: string, action: CarriageAction, version: number): string {
   return `${MEMBERS_ENTRY_PREFIX}${nym}/${action}/${version}`;
 }
 
 /**
  * Land a signed membership entry onto a board draft — write it as a namespaced tiddler whose `text` carries the
- * entry JSON (the EXACT shape `membershipEntriesFromBoard` reads back). Call INSIDE a `handle.change()` callback.
+ * entry JSON (the EXACT shape `carriageEntriesFromBoard` reads back). Call INSIDE a `handle.change()` callback.
  * The signatures + contract-sig ride inside the JSON, so re-carrying the tiddler never re-signs it; the fold's
  * quorum + contract-in verify decide trust, never this write. The stamp carries the entry's charter epoch —
  * provenance only, never the quorum authority.
  */
-export function writeMembershipEntry(draft: LarDoc, entry: MembershipEntry): void {
+export function writeCarriageEntry(draft: LarDoc, entry: CarriageEntry): void {
   const key = membershipEntryKey(entry.nym, entry.action, entry.version);
   draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(entry) }, entry.charterEpochCid);
 }
@@ -70,11 +70,11 @@ function coerceSignature(raw: unknown): QuorumSignature | null {
   return { signer: s["signer"], sig: s["sig"] };
 }
 
-/** A parsed board payload reads a membership entry only at the exact `MembershipEntry` FLOOR shape — else null. */
-function coerceMembershipEntry(parsed: unknown): MembershipEntry | null {
+/** A parsed board payload reads a membership entry only at the exact `CarriageEntry` FLOOR shape — else null. */
+function coerceCarriageEntry(parsed: unknown): CarriageEntry | null {
   if (typeof parsed !== "object" || parsed === null) return null;
   const p = parsed as Record<string, unknown>;
-  if (p["kind"] !== MEMBERSHIP_ENTRY_DOMAIN) return null;                    // not a membership tiddler → skip
+  if (p["kind"] !== CARRIAGE_ENTRY_DOMAIN) return null;                    // not a membership tiddler → skip
   if (typeof p["nym"] !== "string" || p["nym"].length === 0) return null;   // no member nym → skip
   const action = p["action"];
   if (action !== "admit" && action !== "revoke") return null;               // unknown action → skip
@@ -97,10 +97,10 @@ function coerceMembershipEntry(parsed: unknown): MembershipEntry | null {
   }
   // Copy the FLOOR fields ALONE — any extra field a forged tiddler smuggled in is dropped here, never carried
   // into the folded record (track contracts, never identities).
-  const entry: MembershipEntry = {
-    kind:            MEMBERSHIP_ENTRY_DOMAIN,
+  const entry: CarriageEntry = {
+    kind:            CARRIAGE_ENTRY_DOMAIN,
     nym:             p["nym"],
-    action:          action as MembershipAction,
+    action:          action as CarriageAction,
     version:         p["version"] as number,
     charterEpochCid: p["charterEpochCid"],
     signatures,
@@ -111,18 +111,18 @@ function coerceMembershipEntry(parsed: unknown): MembershipEntry | null {
 /**
  * Extract every well-formed membership entry the board `LarDoc` carries. A torn / foreign / non-membership
  * tiddler is skipped. An absent doc surfaces the empty list (fail-closed: no entries → no members). The caller
- * folds the result through `foldMembershipSet` (the kahu quorum + contract-in decide trust, not this reader).
+ * folds the result through `foldCarriageSet` (the kahu quorum + contract-in decide trust, not this reader).
  */
-export function membershipEntriesFromBoard(doc: LarDoc | undefined | null): MembershipEntry[] {
+export function carriageEntriesFromBoard(doc: LarDoc | undefined | null): CarriageEntry[] {
   const tiddlers = doc?.tiddlers;
   if (!tiddlers) return [];
-  const entries: MembershipEntry[] = [];
+  const entries: CarriageEntry[] = [];
   for (const record of Object.values(tiddlers)) {
     const text = tiddlerText(record);
     if (text === null) continue;
     let parsed: unknown;
     try { parsed = JSON.parse(text); } catch { continue; }   // a non-JSON tiddler is not a membership entry
-    const entry = coerceMembershipEntry(parsed);
+    const entry = coerceCarriageEntry(parsed);
     if (entry !== null) entries.push(entry);
   }
   return entries;

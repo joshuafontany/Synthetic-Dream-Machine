@@ -22,7 +22,7 @@ import {
   type KapaeAntigenEntry, type NexusCharterDoc, type FederationPosture,
 } from "@lararium/mesh";
 import { makeAntigenRingHolder } from "../src/antigen-ring.js";
-import { makeNexusMembership } from "../src/nexus-membership.js";
+import { makeNexusMembership } from "../src/nexus-carriage.js";
 import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
 import { runNexusRefresh } from "../src/nexus-refresh.js";
 

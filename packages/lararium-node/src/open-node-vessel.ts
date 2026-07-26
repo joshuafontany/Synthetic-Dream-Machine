@@ -72,7 +72,7 @@ import type { SparseFormVector, WorldlineStubWire, AntigenRing, FederationGate, 
 import { selfSlotShareDecision } from "./self-slot-share.js";
 import { makeAntigenRingHolder } from "./antigen-ring.js";
 import { makePersonaKelRingHolder } from "./persona-kel-ring.js";
-import { makeNexusMembership } from "./nexus-membership.js";
+import { makeNexusMembership } from "./nexus-carriage.js";
 import { runNexusRefresh } from "./nexus-refresh.js";
 import { rollLeaseEpochOnBoard } from "./lease-rekey.js";
 import { listSealedCids } from "./cas-reshare.js";
@@ -535,7 +535,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // ── The CARRIAGE serve-loop (Socket B, ciphertext) — INERT until a carriage-relay URL rides the config ──────
   // When configured, the vessel dials the carriage relay over an authenticated WS channel (proving `vesselSeed`)
   // and serves members' want-blocks for sealed @cad bodies on a poll interval. The gate stays `serveCasWire`'s own
-  // `memberCarryShareDecision` VERBATIM: a proven MEMBER over a provably-sealed plane carries the ciphertext; a
+  // `carrierShareDecision` VERBATIM: a proven MEMBER over a provably-sealed plane carries the ciphertext; a
   // STRANGER / non-member / Kapae'd draws byte-identical Mu. Carry ⊥ read — the read-cap never rides this seam.
   // Socket B stays SEPARATE from the Automerge `/ws` relay (Socket A): cleartext CRDT never routes through here.
   // ABSENT the URL → this branch never runs, so no socket opens and boot behaves exactly as it did before.

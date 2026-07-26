@@ -25,7 +25,7 @@
  * Meme: lar:///ha.ka.ba/lararium/node/self-slot-share
  */
 import type { DocumentId } from "@automerge/automerge-repo";
-import { carryContractShareDecision, memberCarryShareDecision, postureGatesCrossOperator } from "@lararium/mesh";
+import { carryContractShareDecision, carrierShareDecision, postureGatesCrossOperator } from "@lararium/mesh";
 import type { AntigenRing, FederationGate, FederationPosture, NexusMembership, PeerClass, PlaneSeal } from "@lararium/mesh";
 
 /** A same-operator peer + every in-process island peer ride this empty relay ring → shared freely. */
@@ -78,8 +78,8 @@ export async function selfSlotShareDecision(input: SelfSlotShareInput): Promise<
     // mechanism stays policy-neutral + can leak nothing private); the live node caller supplies the fail-closed
     // PRIVATE default it read off the charter doc.
     const posture  = input.federationPosture ?? "open";
-    const isMember = input.membership?.isMemberPeer(input.peerId) ?? false;
-    if (!postureGatesCrossOperator(posture, isMember)) return false;   // private + non-member → deny all (Mu-shaped false)
+    const holdsCarriage = input.membership?.holdsCarriagePeer(input.peerId) ?? false;
+    if (!postureGatesCrossOperator(posture, holdsCarriage)) return false;   // private + non-member → deny all (Mu-shaped false)
     // FAIL-CLOSED at the boot edge: a gated peer whose federatable classifier has not yet stood gets a
     // DenyAllGate floor — the federatable floor reads nothing crossable (`carryContractShareDecision` reads
     // a null fed gate as "same-operator relay → full sync", a DIFFERENT case, so a gated peer MUST never
@@ -88,7 +88,7 @@ export async function selfSlotShareDecision(input: SelfSlotShareInput): Promise<
     // STRANGER reaches only the federatable floor; a Kapae'd presenter draws Mu regardless. The self-slot
     // INNER capability ring stays inert (identity = null) — the carry-split rides carriage, never a read-cap.
     const fedGate: FederationGate = input.selfSlotFedGate ?? new DenyAllGate();
-    return memberCarryShareDecision(
+    return carrierShareDecision(
       new Set<string>([input.peerId]),
       fedGate,
       input.antigenRing,

@@ -6,7 +6,7 @@
  * INERT UNTIL CONFIGURED. The vessel starts NO loop when no relay URL rides the config — the caller gates the whole
  * thing, so an unconfigured boot opens zero carriage socket and changes zero behaviour (additive, off by default).
  *
- * CARRY ⊥ READ. The loop serves CIPHERTEXT + the void ONLY, gated by `serveCasWire`'s `memberCarryShareDecision`
+ * CARRY ⊥ READ. The loop serves CIPHERTEXT + the void ONLY, gated by `serveCasWire`'s `carrierShareDecision`
  * (a proven MEMBER over a provably-sealed plane carries; a STRANGER / non-member / Kapae'd draws byte-identical Mu).
  * The read-cap NEVER rides this seam — it arrives via the keyring at admission, on the private lane.
  *

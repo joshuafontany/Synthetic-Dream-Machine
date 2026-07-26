@@ -1,12 +1,18 @@
 /**
- * membership-registry — the operator MEMBERS-registry: the Kapae-antigen's ALLOW-twin. Where the antigen
- * folds a quorum-signed DENY set (who stands banned), this folds a quorum-signed ALLOW set (who stands a
- * contracted Nexus member). Same CRDT shape (monotone/additive, highest-version-per-nym, same-version
+ * carriage-registry — the operator CARRIAGE-registry: the Kapae-antigen's ALLOW-twin. Where the antigen
+ * folds a quorum-signed DENY set (who stands banned), this folds a quorum-signed ALLOW set (which vessels
+ * CARRY for this Nexus).
+ *
+ * IT RECORDS A CONTRACT, NEVER A BELONGING. An entry here answers "does this vessel carry for us?" — the
+ * infrastructure relation a human's PersonaGroup contracts with a kahu Cabal. It says NOTHING about whether
+ * that human JOINED any Cabal; joining is a mutual hold on the realm's authority graph (cabal-realm), an
+ * orthogonal axis. A human may contract without joining, join without contracting, hold both, or neither.
+ * Reading a carriage entry as belonging reads it exactly backwards. Same CRDT shape (monotone/additive, highest-version-per-nym, same-version
  * fail-closed), same quorum authority (≥ k founding-kahu signatures rooted on the charter epoch), and it
- * FAILS CLOSED at every seam. `blocked{}` ⊥ `members{}` (carry-contract): a nym may sit in either, neither,
+ * FAILS CLOSED at every seam. `blocked{}` ⊥ `carriage{}`: a nym may sit in either, neither,
  * or — pathologically — both (the antigen still draws Mu; a ban outranks a membership at enforcement).
  *
- * TRACK CONTRACTS, NEVER IDENTITIES (membership-doctrine). A MembershipEntry carries the operator-contract
+ * TRACK CONTRACTS, NEVER IDENTITIES (membership-doctrine). A CarriageEntry carries the operator-contract
  * FLOOR and nothing above it: the operator's PUBKEY (the nym), the CHARTER-EPOCH it roots on, and — for an
  * admit — proof the operator SIGNED "I accept carriage" (the `contractSig`). NO name, NO email, NO device
  * list, NO behavior. A user NEVER lands here — this registry names contracting OPERATORS only; a user
@@ -35,8 +41,8 @@ import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
 import type { QuorumSignature, KahuCharterRoster } from "./kapae-antigen.js";
 import { quorumEntryBytes } from "./quorum-entry.js";
 
-/** The domain a MembershipEntry's quorum signs over — a signature is meaningless without its domain. */
-export const MEMBERSHIP_ENTRY_DOMAIN = "lar-membership-entry/v1" as const;
+/** The domain a CarriageEntry's quorum signs over — a signature is meaningless without its domain. */
+export const CARRIAGE_ENTRY_DOMAIN = "lar-carriage-entry/v1" as const;
 
 /** The domain the operator's OWN "accepts carriage" contract-token signs over — DISTINCT from the entry
  *  domain, and version-INDEPENDENT: the operator consents to carriage-under-this-epoch ONCE, and a kahu
@@ -44,7 +50,7 @@ export const MEMBERSHIP_ENTRY_DOMAIN = "lar-membership-entry/v1" as const;
 export const CARRIAGE_CONTRACT_DOMAIN = "lar-carriage-contract/v1" as const;
 
 /** A steward act on the members set: ADMIT an operator into carriage, or REVOKE it. Monotone per-nym. */
-export type MembershipAction = "admit" | "revoke";
+export type CarriageAction = "admit" | "revoke";
 
 /**
  * One entry in the members set — a quorum-signed admit or revoke of ONE operator nym. Monotone/additive
@@ -55,17 +61,17 @@ export type MembershipAction = "admit" | "revoke";
  * (`contractSig`), and NOTHING else the antigen entry does not also carry. No identity of the human behind
  * the key ever rides here.
  */
-export interface MembershipEntry {
-  readonly kind:            typeof MEMBERSHIP_ENTRY_DOMAIN;
+export interface CarriageEntry {
+  readonly kind:            typeof CARRIAGE_ENTRY_DOMAIN;
   /** The contracting operator's ed25519 verifying-key hex — the member nym (an operator pubkey, never a doc). */
   readonly nym:             string;
   /** ADMIT the operator into carriage, or REVOKE it. */
-  readonly action:          MembershipAction;
+  readonly action:          CarriageAction;
   /** Monotone per-nym: a later steward act supersedes an earlier one; a stale entry cannot roll it back. */
   readonly version:         number;
   /** The nexus-charter epoch this quorum act roots on (the wax-stamp epoch-chain — CharterEpoch.epochCid). */
   readonly charterEpochCid: string;
-  /** ≥ threshold distinct founding-kahu signatures over `membershipEntryBytes` — the steward quorum. */
+  /** ≥ threshold distinct founding-kahu signatures over `carriageEntryBytes` — the steward quorum. */
   readonly signatures:      readonly QuorumSignature[];
   /**
    * The OPERATOR's OWN signature over `carriageContractBytes({ nym, charterEpochCid })` — the contract-in.
@@ -81,8 +87,8 @@ export interface MembershipEntry {
  * un-presentable on the antigen board (`quorum-entry.ts`). The operator's accepts-carriage token signs
  * SEPARATE bytes (`carriageContractBytes`) and stays a distinct, board-local gate.
  */
-export function membershipEntryBytes(
-  entry: Omit<MembershipEntry, "signatures" | "contractSig">,
+export function carriageEntryBytes(
+  entry: Omit<CarriageEntry, "signatures" | "contractSig">,
 ): Uint8Array {
   return quorumEntryBytes(entry);
 }
@@ -101,20 +107,20 @@ export function carriageContractBytes(parts: { nym: string; charterEpochCid: str
 }
 
 /**
- * Verify a k-of-n founding-kahu quorum over a MembershipEntry — the SAME k-of-n multi-signature the antigen's
+ * Verify a k-of-n founding-kahu quorum over a CarriageEntry — the SAME k-of-n multi-signature the antigen's
  * `makeMultiSigQuorumVerifier` runs, re-applied at the membership domain (that antigen verifier stays
  * UNCHANGED for the antigen). Guards, each fail-closed: a non-roster signer never counts; a signer counted
  * twice counts once; a signature that does not verify over the entry bytes does not count; the entry MUST root
  * on the roster's charter epoch. An unbound / short roster meets no threshold → false.
  */
-async function verifyMembershipQuorum(entry: MembershipEntry, roster: KahuCharterRoster): Promise<boolean> {
-  if (entry.kind !== MEMBERSHIP_ENTRY_DOMAIN)             return false;
+async function verifyMembershipQuorum(entry: CarriageEntry, roster: KahuCharterRoster): Promise<boolean> {
+  if (entry.kind !== CARRIAGE_ENTRY_DOMAIN)             return false;
   if (roster.threshold < 1)                              return false;
   if (roster.keys.length < roster.threshold)             return false;   // unbound / short roster → deny
   if (entry.charterEpochCid !== roster.charterEpochCid)  return false;   // roots on an unknown epoch → deny
 
   const rosterKeys = new Set(roster.keys.map((k) => k.toLowerCase()));
-  const bytes      = membershipEntryBytes(entry);
+  const bytes      = carriageEntryBytes(entry);
   const counted    = new Set<string>();
   for (const s of entry.signatures) {
     const signer = s.signer.toLowerCase();
@@ -135,7 +141,7 @@ async function verifyMembershipQuorum(entry: MembershipEntry, roster: KahuCharte
  * version-independent carriage-token bytes — each reads false (the admit then does NOT count). A Nexus can
  * never manufacture this seal: only the operator holding the nym's seed can produce it.
  */
-async function verifyContractIn(entry: MembershipEntry): Promise<boolean> {
+async function verifyContractIn(entry: CarriageEntry): Promise<boolean> {
   const cs = entry.contractSig;
   if (!cs) return false;
   if (cs.signer.toLowerCase() !== entry.nym.toLowerCase()) return false;   // the seal MUST be the operator's own
@@ -150,26 +156,26 @@ async function verifyContractIn(entry: MembershipEntry): Promise<boolean> {
  * short is ignored, never guessed into membership. Exported so a WRITER can self-verify before landing an entry
  * (never write an entry the fold would ignore — a written-but-dead admit reads as enforced while granting nothing).
  */
-export async function membershipEntryCounts(entry: MembershipEntry, roster: KahuCharterRoster): Promise<boolean> {
+export async function carriageEntryCounts(entry: CarriageEntry, roster: KahuCharterRoster): Promise<boolean> {
   if (!(await verifyMembershipQuorum(entry, roster))) return false;
   if (entry.action === "revoke") return true;
   return verifyContractIn(entry);   // admit → the operator must have signed "accepts carriage"
 }
 
 /**
- * Sign a MembershipEntry's KAHU QUORUM — collect ≥ threshold of these into an entry's `signatures`. The
+ * Sign a CarriageEntry's KAHU QUORUM — collect ≥ threshold of these into an entry's `signatures`. The
  * module holds no key; each kahu supplies its own signer (mirrors the antigen's `signAntigenEntry`).
  */
-export async function signMembershipQuorum(
-  parts: Omit<MembershipEntry, "kind" | "signatures" | "contractSig">,
+export async function signCarriageQuorum(
+  parts: Omit<CarriageEntry, "kind" | "signatures" | "contractSig">,
   signers: ReadonlyArray<{ readonly signer: string; readonly sign: (bytes: Uint8Array) => Promise<string> }>,
   contractSig?: QuorumSignature,
-): Promise<MembershipEntry> {
-  const unsigned = { ...parts, kind: MEMBERSHIP_ENTRY_DOMAIN } as Omit<MembershipEntry, "signatures" | "contractSig">;
-  const bytes = membershipEntryBytes(unsigned);
+): Promise<CarriageEntry> {
+  const unsigned = { ...parts, kind: CARRIAGE_ENTRY_DOMAIN } as Omit<CarriageEntry, "signatures" | "contractSig">;
+  const bytes = carriageEntryBytes(unsigned);
   const signatures: QuorumSignature[] = [];
   for (const s of signers) signatures.push({ signer: s.signer, sig: await s.sign(bytes) });
-  const entry: MembershipEntry = { ...unsigned, signatures };
+  const entry: CarriageEntry = { ...unsigned, signatures };
   return contractSig ? { ...entry, contractSig } : entry;
 }
 
@@ -194,17 +200,17 @@ export async function signCarriageContract(
  * FAIL CLOSED on equivocation: an `admit` and a `revoke` at the SAME version leave the nym a NON-member (a tie
  * never grants membership — the more-restrictive `revoke` wins, mirroring the antigen's kapae-beats-un_kapae).
  *
- * The result is a plain nym set — the enforcement seam (nexus-membership → memberCarryShareDecision) unions it
+ * The result is a plain nym set — the enforcement seam (nexus-membership → carrierShareDecision) unions it
  * with the seated-kahu floor and reads it to decide MEMBER vs STRANGER.
  */
-export async function foldMembershipSet(
-  entries: Iterable<MembershipEntry>,
+export async function foldCarriageSet(
+  entries: Iterable<CarriageEntry>,
   roster: KahuCharterRoster,
 ): Promise<ReadonlySet<string>> {
   // Per nym, the winning counted entry: highest version; on a version tie, `revoke` beats `admit`.
-  const winner = new Map<string, { version: number; action: MembershipAction }>();
+  const winner = new Map<string, { version: number; action: CarriageAction }>();
   for (const entry of entries) {
-    if (!(await membershipEntryCounts(entry, roster))) continue;   // uncounted → ignored, never trusted
+    if (!(await carriageEntryCounts(entry, roster))) continue;   // uncounted → ignored, never trusted
     const nym = entry.nym.toLowerCase();
     const cur = winner.get(nym);
     if (cur === undefined || entry.version > cur.version) {
@@ -219,6 +225,6 @@ export async function foldMembershipSet(
 }
 
 /** Does this operator nym stand a contracted member in the folded members set? */
-export function isMember(nym: string, memberSet: ReadonlySet<string>): boolean {
+export function holdsCarriage(nym: string, memberSet: ReadonlySet<string>): boolean {
   return memberSet.has(nym.toLowerCase());
 }
