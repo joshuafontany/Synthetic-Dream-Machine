@@ -172,6 +172,8 @@ export type { NexusKapaeOptions, NexusKapaeResult, NexusKapaeListResult } from "
 
 // The operator MEMBERS-registry RAISE side (Build-2) — the founding kahu writes a quorum-signed + contract-in
 // admit/revoke onto the members board (the antigen's ALLOW-twin); `accept-carriage` mints the operator contract-in.
+export { runCabalVouch, CabalVouchError } from "./commands/cabal-vouch.js";
+export type { CabalVouchOptions, CabalVouchResult } from "./commands/cabal-vouch.js";
 export { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "./commands/nexus-contract.js";
 export type { NexusContractOptions, NexusContractResult, NexusMembersListResult } from "./commands/nexus-contract.js";
 

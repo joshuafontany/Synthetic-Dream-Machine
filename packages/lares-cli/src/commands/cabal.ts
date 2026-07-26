@@ -1,0 +1,67 @@
+/**
+ * `lares cabal vouch <joiner-nym> --place <realm-doc-id> [--expires <iso>] [--as <n>]` — the JOIN axis's
+ * write side: one held face stakes its OWN standing on one joiner, onto the Nexus vouch board.
+ *
+ * THE CONTRAST WITH `nexus contract`. Contracting a vessel into carriage needs the kahu quorum AND the
+ * joiner's own consent — a Nexus may not conscript, and no single kahu seats a carrier alone. A vouch is the
+ * other axis entirely: ONE hand, its OWN standing, no steward asked. The two relations run orthogonal — a
+ * human may contract without joining, join without contracting, hold both, or neither.
+ *
+ * IT ADMITS NOBODY. A vouch is signal-2 on the lineage and grants nothing by itself; the crossing prices it
+ * later. The cost is already paid at the moment of vouching: the voucher's score SPLITS across everyone they
+ * vouch for, so each vouch dilutes the hand that made it. That is the whole payment, and it needs no ledger.
+ */
+
+import { runCabalVouch, CabalVouchError } from "@lararium/node";
+import type { ParsedArgs } from "../parse-args.js";
+
+function usage(): number {
+  console.error("usage: lares cabal <vouch>");
+  console.error("");
+  console.error("  vouch <joiner-nym> --place <realm-doc-id> [--expires <iso8601>] [--as <root-index>]");
+  console.error("        stake YOUR standing on a joiner crossing into that realm. Dilutes you, admits nobody.");
+  return 2;
+}
+
+/** `lares cabal …` — the JOIN-axis door. */
+export async function cmdCabal(args: ParsedArgs): Promise<number> {
+  switch (args.positional[0]) {
+    case "vouch": return await cmdVouch(args);
+    default:      return usage();
+  }
+}
+
+async function cmdVouch(args: ParsedArgs): Promise<number> {
+  const joiner = args.positional[1];
+  const place  = args.options["place"];
+  if (!joiner || !place) {
+    console.error("usage: lares cabal vouch <joiner-nym> --place <realm-doc-id> [--expires <iso8601>] [--as <root-index>]");
+    return 2;
+  }
+  const asRaw = args.options["as"];
+  const handleIndex = asRaw === undefined ? undefined : Number(asRaw);
+  if (handleIndex !== undefined && !Number.isInteger(handleIndex)) {
+    console.error(`--as expects a persona-root index, got "${asRaw}"`);
+    return 2;
+  }
+
+  try {
+    const r = await runCabalVouch({
+      joiner, place,
+      ...(args.options["expires"] !== undefined ? { expiresAt: args.options["expires"] } : {}),
+      ...(handleIndex !== undefined ? { handleIndex } : {}),
+    });
+    console.log(r.reMinted ? "RE-VOUCHED (one edge, not two)" : "VOUCHED");
+    console.log(`  voucher:   ${r.voucherDid}`);
+    console.log(`  joiner:    ${r.joiner}`);
+    console.log(`  place:     ${r.place}`);
+    console.log(`  expires:   ${r.expiresAt}`);
+    console.log(`  board:     ${r.boardUrl}`);
+    // The number that matters to the voucher: their standing now splits this many ways.
+    console.log(`  out-degree: ${r.outDegree}  (your standing now splits ${r.outDegree} way${r.outDegree === 1 ? "" : "s"})`);
+    return 0;
+  } catch (err) {
+    if (err instanceof CabalVouchError) { console.error(`refused: ${err.message}`); return 1; }
+    throw err;
+  }
+}
