@@ -29,6 +29,7 @@ import { sha256HexSync, canonicalJson } from "./crypto.js";
 import { type CharterEpoch, verifyCharterChain, charterKeySetHash } from "./wax-stamp.js";
 import { type FederationPosture, DEFAULT_FEDERATION_POSTURE } from "./federation-gate.js";
 import { type CabalJoinPolicy, DEFAULT_JOIN_POLICY } from "./cabal-invite.js";
+import type { AdmissionDials } from "./admission-price.js";
 
 /** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
 export const NEXUS_CHARTER_DOC_KIND = "lar-nexus-charter/v1" as const;
@@ -79,6 +80,17 @@ export interface NexusCharterDoc {
    * OPERATOR carries the public shelf. Opening one never opens the other, and neither opens a private plane.
    */
   readonly joinPolicy?:        CabalJoinPolicy;
+  /**
+   * The per-Nexus ADMISSION DIALS the crossing prices against — ε (the lineage reset, THE closed↔open dial),
+   * β (the named this-is-capture ceiling), ρ + S (the curve's shape and supply), α (decay, from a half-life).
+   *
+   * DELIBERATELY WITHOUT A DEFAULT, and that is the whole point. A posture and a join-policy each have a
+   * SAFE fail-closed value, so each carries one. A fairness dial has none: any number invented here would be
+   * a legitimacy signal baked into code, which is exactly the unswept corner canon forbids closing silently.
+   * Absent → `admissionDialsFromDoc` yields null and the crossing REFUSES, so the operator's unmade choice
+   * reads as an unmade choice rather than as somebody's guess quietly enforced.
+   */
+  readonly admissionDials?:    AdmissionDials;
 }
 
 /** Legacy alias — one founding kahu named by display + its (unbound-until-seated) key. */
@@ -164,6 +176,30 @@ export function federationPostureFromDoc(doc: NexusCharterDoc | null): Federatio
  */
 export function joinPolicyFromDoc(doc: NexusCharterDoc | null): CabalJoinPolicy {
   return doc?.joinPolicy?.kind === "open" ? { kind: "open" } : DEFAULT_JOIN_POLICY;
+}
+
+/**
+ * Read the admission dials off a charter doc — yielding NULL when the operator has not seated them, and
+ * never a guess. Every dial must read as a finite number in its own admissible range, or the whole set reads
+ * absent: a half-seated fairness setting is not a partial answer, it is a different policy nobody chose.
+ *
+ *   ε ∈ (0,1)  the lineage reset — high keeps trust tight to the seed, low opens it
+ *   β ∈ (0,1)  the capture ceiling — the convex wall goes vertical as a cluster nears it
+ *   ρ, S  > 0  the curve's shape and supply
+ *   α ∈ (0,1]  decay — derived from a half-life via `alphaFromHalfLife`, never hand-picked
+ *
+ * A caller that gets null MUST refuse the crossing rather than substitute anything. Read as-of-last-sync.
+ */
+export function admissionDialsFromDoc(doc: NexusCharterDoc | null): AdmissionDials | null {
+  const d = doc?.admissionDials;
+  if (!d || typeof d !== "object") return null;
+  const unit = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v) && v > 0 && v < 1;
+  const pos  = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v) && v > 0;
+  if (!unit(d.epsilon) || !unit(d.beta)) return null;
+  if (!pos(d.rho) || !pos(d.supply)) return null;
+  if (!(typeof d.alpha === "number" && Number.isFinite(d.alpha) && d.alpha > 0 && d.alpha <= 1)) return null;
+  // Copy the FLOOR fields alone — an extra field smuggled onto the doc never reaches the pricing.
+  return { epsilon: d.epsilon, beta: d.beta, rho: d.rho, supply: d.supply, alpha: d.alpha };
 }
 
 /** The pre-rotated chain's head epoch, or null when no chain stands established (legacy / unseated doc). */
