@@ -1,5 +1,5 @@
 /**
- * nexus-admit.test.ts — the RAISE side of the operator MEMBERS-registry (Build-2), end-to-end through the node
+ * nexus-contract.test.ts — the CONTRACT side of the operator MEMBERS-registry, end-to-end through the node
  * command, and the members{} ∪ kahu-floor UNION the sharePolicy member gate reads.
  *
  * Proven, against a SYNTHETIC seated roster on a temp LAR_ROOT (real vessel identity, real founder persona-roots,
@@ -25,7 +25,7 @@ import { hex, genesisCharterEpochCid, type NexusCharterDoc } from "@lararium/mes
 import { generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot, loadVesselVerifyingKey } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
 import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
-import { runNexusAdmit, runNexusAcceptCarriage, runNexusMembersList, NexusAdmitError } from "../src/commands/nexus-admit.js";
+import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
 import { makeNexusMembership } from "../src/nexus-membership.js";
 
 let root: string;
@@ -68,7 +68,7 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     seatCharter(roots.slice(0, 3).map((r) => r.verifyingKey));
     const joinerNym = roots[3]!.verifyingKey.toLowerCase();
 
-    const res = await runNexusAdmit({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
+    const res = await runNexusContract({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
     expect(res.version).toBe(1);
     expect(res.signers).toHaveLength(2);       // exactly the 2-of-3 quorum
     expect(res.contractIn).toBe("self");       // multitude-of-one: the vessel held the joiner's seed
@@ -87,7 +87,7 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
 
     // The joiner mints its 'accepts carriage' token (index 3 on this same vessel stands in for the joiner's vessel).
     const token = await runNexusAcceptCarriage({ handleIndex: 3, bagsDir: bagsDir() });
-    const res = await runNexusAdmit({ action: "admit", nym: token.nym, contractSig: token.contractSig, bagsDir: bagsDir() });
+    const res = await runNexusContract({ action: "admit", nym: token.nym, contractSig: token.contractSig, bagsDir: bagsDir() });
     expect(res.contractIn).toBe("supplied");
     expect(res.memberNow).toBe(true);
   });
@@ -98,8 +98,8 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     seatCharter(roots.slice(0, 3).map((r) => r.verifyingKey));
     const joinerNym = roots[3]!.verifyingKey.toLowerCase();
 
-    await runNexusAdmit({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
-    const rev = await runNexusAdmit({ action: "revoke", nym: joinerNym, bagsDir: bagsDir() });
+    await runNexusContract({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
+    const rev = await runNexusContract({ action: "revoke", nym: joinerNym, bagsDir: bagsDir() });
     expect(rev.version).toBe(2);
     expect(rev.memberNow).toBe(false);
 
@@ -115,8 +115,8 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     seatCharter([held.verifyingKey, s1, s2]);
     const joiner = hex(await ed.getPublicKeyAsync(new Uint8Array(32).fill(9)));
 
-    await expect(runNexusAdmit({ action: "admit", nym: joiner, contractSig: "00".repeat(64), bagsDir: bagsDir() }))
-      .rejects.toBeInstanceOf(NexusAdmitError);
+    await expect(runNexusContract({ action: "admit", nym: joiner, contractSig: "00".repeat(64), bagsDir: bagsDir() }))
+      .rejects.toBeInstanceOf(NexusContractError);
     const list = await runNexusMembersList({ bagsDir: bagsDir() });
     expect(list.entries).toHaveLength(0);
   });
@@ -124,8 +124,8 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
   it("UNSEATED charter REFUSES", async () => {
     await generateOrLoadVesselIdentity(larDataDir());
     await generateOrLoadPersonaGroupRoot(larDataDir(), 0);
-    await expect(runNexusAdmit({ action: "admit", nym: "ab".repeat(32), contractSig: "00".repeat(64), bagsDir: bagsDir() }))
-      .rejects.toBeInstanceOf(NexusAdmitError);
+    await expect(runNexusContract({ action: "admit", nym: "ab".repeat(32), contractSig: "00".repeat(64), bagsDir: bagsDir() }))
+      .rejects.toBeInstanceOf(NexusContractError);
   });
 
   it("admit for a NON-HELD nym with NO --contract REFUSES (no conscription — WAX-SEALS-ONLY)", async () => {
@@ -133,8 +133,8 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     const roots = await Promise.all([0, 1, 2].map((i) => generateOrLoadPersonaGroupRoot(larDataDir(), i)));
     seatCharter(roots.map((r) => r.verifyingKey));
     const foreign = hex(await ed.getPublicKeyAsync(new Uint8Array(32).fill(42)));   // not a held persona
-    await expect(runNexusAdmit({ action: "admit", nym: foreign, bagsDir: bagsDir() }))
-      .rejects.toBeInstanceOf(NexusAdmitError);   // no contract-in obtainable → refuse
+    await expect(runNexusContract({ action: "admit", nym: foreign, bagsDir: bagsDir() }))
+      .rejects.toBeInstanceOf(NexusContractError);   // no contract-in obtainable → refuse
   });
 });
 
@@ -147,7 +147,7 @@ describe("the members{} ∪ kahu-floor UNION — the sharePolicy member gate (SE
     const joinerNym = roots[3]!.verifyingKey.toLowerCase();
 
     // Contract-in + admit the non-kahu operator onto the board.
-    await runNexusAdmit({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
+    await runNexusContract({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
 
     // Stand the membership holder over the SAME store (its own replica, as-of-last-sync) + the SAME board.
     const nexusPubkey = await loadVesselVerifyingKey(larDataDir());

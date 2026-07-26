@@ -11,12 +11,12 @@
  *   1. the JOINING operator signs "I accept carriage" bound to the OTHER hearth's charter epoch
  *      (`runNexusAcceptCarriage`) — consent the peer can never manufacture (only the joiner holds the seed),
  *   2. the OTHER hearth's kahu quorum WRITES that operator's nym onto ITS OWN members registry
- *      (`runNexusAdmit`, quorum ∪ the supplied contract-in, self-verified to COUNT before the board write).
+ *      (`runNexusContract`, quorum ∪ the supplied contract-in, self-verified to COUNT before the board write).
  *
  * Proven end-to-end, off the real verbs on real Automerge boards:
  *   · hearth A's `nexus-membership` fold names B a MEMBER, AND hearth B's fold names A a MEMBER — BOTH sides
  *     fold the OTHER operator in, each off its own local replica (no-global-now), a stranger reads STRANGER,
- *   · NO CONSCRIPTION: `runNexusAdmit` REFUSES an admit for an operator that has not signed consent (no token,
+ *   · NO CONSCRIPTION: `runNexusContract` REFUSES an admit for an operator that has not signed consent (no token,
  *     seed not held) — the members-registry is not the antigen; a Nexus never conscripts an operator,
  *   · REVERT-VERIFY the no-conscription bite: a quorum-signed admit that LACKS the contract-in (the entry the
  *     command refuses to mint) folds to a NON-member under the real guard, but a fold with the contract-in
@@ -45,7 +45,7 @@ import {
 } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
 import { writeNexusCharterDoc, readNexusCharterDoc } from "../src/nexus-charter-doc.js";
-import { runNexusAdmit, runNexusAcceptCarriage, runNexusMembersList, NexusAdmitError } from "../src/commands/nexus-admit.js";
+import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
 import { makeNexusMembership } from "../src/nexus-membership.js";
 
 let rootA: string;
@@ -156,7 +156,7 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
     expect(tokenF.charterEpochCid).toBe(A.epoch);  // bound to the OTHER hearth's charter epoch (the wax-stamp)
 
     const admitF = await asRoot(rootA, () =>
-      runNexusAdmit({ action: "admit", nym: B.operatorNym, contractSig: tokenF.contractSig, bagsDir: A.bags }));
+      runNexusContract({ action: "admit", nym: B.operatorNym, contractSig: tokenF.contractSig, bagsDir: A.bags }));
     expect(admitF.contractIn).toBe("supplied");            // the joiner's out-of-band consent, not a self-sign
     expect(admitF.charterEpochCid).toBe(A.epoch);          // the entry binds A's epoch cid (provenance)
     expect(admitF.signers).toHaveLength(2);                // exactly the 2-of-3 founding-kahu quorum
@@ -168,7 +168,7 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
     expect(tokenJ.charterEpochCid).toBe(B.epoch);
 
     const admitJ = await asRoot(rootB, () =>
-      runNexusAdmit({ action: "admit", nym: A.operatorNym, contractSig: tokenJ.contractSig, bagsDir: B.bags }));
+      runNexusContract({ action: "admit", nym: A.operatorNym, contractSig: tokenJ.contractSig, bagsDir: B.bags }));
     expect(admitJ.contractIn).toBe("supplied");
     expect(admitJ.memberNow).toBe(true);
 
@@ -216,8 +216,8 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
     // A nym A neither holds nor received a carriage token for — the members-registry is NOT the antigen.
     const unconsented = hex(await ed.getPublicKeyAsync(new Uint8Array(32).fill(200)));
     await asRoot(rootA, async () => {
-      await expect(runNexusAdmit({ action: "admit", nym: unconsented, bagsDir: A.bags }))
-        .rejects.toBeInstanceOf(NexusAdmitError);   // no contract-in obtainable → fail-closed, no board write
+      await expect(runNexusContract({ action: "admit", nym: unconsented, bagsDir: A.bags }))
+        .rejects.toBeInstanceOf(NexusContractError);   // no contract-in obtainable → fail-closed, no board write
       const list = await runNexusMembersList({ bagsDir: A.bags });
       expect(list.entries).toHaveLength(0);         // nothing written
     });
@@ -231,7 +231,7 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
       const rosterA = foundingRoster(readNexusCharterDoc(A.bags));
       const dir = larDataDir();
 
-      // Hand-build the entry `runNexusAdmit` REFUSES to mint: a valid 2-of-3 kahu quorum over an admit that
+      // Hand-build the entry `runNexusContract` REFUSES to mint: a valid 2-of-3 kahu quorum over an admit that
       // carries NO operator contract-in (bypassing the command's `resolveContractIn` gate outright).
       const signers = await Promise.all([0, 1].map(async (i) => {
         const r = await generateOrLoadPersonaGroupRoot(dir, i);

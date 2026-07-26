@@ -1,7 +1,7 @@
 /**
  * admit-on-lineage — the crossing folded from the ISSUED INVITES, so the per-voucher cap cannot be skipped.
  *
- * `admitToDreamnet` takes pre-folded edges; a caller assembling them by hand silently loses the choke that
+ * `admitToPlace` takes pre-folded edges; a caller assembling them by hand silently loses the choke that
  * bounds any one hand's injection into the lineage. This seam takes the invites themselves. What matters:
  * the cap BITES here, what it turned away comes back VISIBLE, and with nothing capped the seam agrees
  * exactly with the manual path — so folding here costs no behaviour, it only removes a way to get it wrong.
@@ -11,7 +11,7 @@
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
-  admitOnLineage, admitToDreamnet, signCabalInvite, vouchDagFromInvites, DREAMNET_JOIN_POLICY,
+  admitOnLineage, admitToPlace, signCabalInvite, vouchDagFromInvites, DEFAULT_JOIN_POLICY,
   type AdmissionDials, type CabalInvite,
 } from "../src/index.js";
 import { hex, hexToBytes } from "../src/crypto.js";
@@ -45,7 +45,7 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
     )];
 
     const v = await admitOnLineage({
-      policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: issued[0]!, now: NOW, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
       maxVouchesPerVoucher: 2,
@@ -61,12 +61,12 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
     const issued = [await inviteTo(JOINER), await inviteTo("c".repeat(64))];
 
     const viaSeam = await admitOnLineage({
-      policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: issued[0]!, now: NOW, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
     });
-    const byHand = await admitToDreamnet({
-      policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+    const byHand = await admitToPlace({
+      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: issued[0]!, now: NOW, verify,
       edges: vouchDagFromInvites(issued).edges,
       seed: voucherDid, applicant: JOINER, dials: DIALS,
@@ -85,7 +85,7 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
     const issued = [await inviteTo("c".repeat(64)), await inviteTo(JOINER)];
 
     const v = await admitOnLineage({
-      policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: issued[1]!, now: NOW, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
       maxVouchesPerVoucher: 1,

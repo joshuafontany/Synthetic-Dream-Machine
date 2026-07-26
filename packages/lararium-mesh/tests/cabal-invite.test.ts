@@ -13,7 +13,7 @@ import { describe, test, expect } from "vitest";
 import * as ed25519 from "@noble/ed25519";
 import {
   signCabalInvite, decideCabalJoin, cabalInviteBytes,
-  CABAL_INVITE_DOMAIN, DREAMNET_JOIN_POLICY,
+  CABAL_INVITE_DOMAIN, DEFAULT_JOIN_POLICY,
   type CabalInvite,
 } from "../src/cabal-invite.js";
 import { hex, hexToBytes } from "../src/crypto.js";
@@ -39,7 +39,7 @@ async function mint(over: Partial<CabalInvite> = {}): Promise<CabalInvite> {
   return { ...inv, ...over };
 }
 
-const decide = (invite: CabalInvite | null, now = NOW, policy = DREAMNET_JOIN_POLICY) =>
+const decide = (invite: CabalInvite | null, now = NOW, policy = DEFAULT_JOIN_POLICY) =>
   decideCabalJoin({ policy, placeDocIdHex: PLACE, joinerIdentityHex: JOINER, invite, now, verify });
 
 describe("the DreamNet opens invite-only", () => {
@@ -67,7 +67,7 @@ describe("the DreamNet opens invite-only", () => {
   test("an invite is NEVER BEARER — a stolen one names its thief and refuses them", async () => {
     const stolen = await mint();                       // signed for JOINER, valid, unexpired
     const v = await decideCabalJoin({
-      policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE,
+      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE,
       joinerIdentityHex: "ee".repeat(16),              // ← a different joiner presents it
       invite: stolen, now: NOW, verify,
     });

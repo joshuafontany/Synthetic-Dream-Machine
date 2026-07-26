@@ -40,8 +40,9 @@ export type CabalJoinPolicy =
   /** Signal-1 suffices: a capability alone admits. The open-protocol setting. */
   | { readonly kind: "open" };
 
-/** The DreamNet's opening setting, per the operator's ruling. Invite-only first; open protocol later. */
-export const DREAMNET_JOIN_POLICY: CabalJoinPolicy = { kind: "invite-only" };
+/** The FAIL-CLOSED default a place falls back to when its charter seats no dial — invite-only, signal-2
+ *  required. Each Nexus turns its own (`joinPolicyFromDoc`); this names no mesh-wide setting. */
+export const DEFAULT_JOIN_POLICY: CabalJoinPolicy = { kind: "invite-only" };
 
 /**
  * A signed invitation into a cabal-realm. The VOUCHER stakes their own standing on it — a referral's

@@ -1,5 +1,5 @@
 /**
- * dreamnet-admission.test.ts — the seam admits on BOTH signals, and refuses at the first gate that fails.
+ * place-admission.test.ts — the seam admits on BOTH signals, and refuses at the first gate that fails.
  *
  * Four claims, four groups: the structural gate refuses BEFORE any price is walked (invite-only, no invite);
  * a valid invite CROSSES and names the voucher (the co-pay stands); a cluster AT THE CEILING refuses on the
@@ -11,7 +11,7 @@
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
-  admitToDreamnet, signCabalInvite, DREAMNET_JOIN_POLICY,
+  admitToPlace, signCabalInvite, DEFAULT_JOIN_POLICY,
   type AdmissionDials, type VouchEdge,
 } from "../src/index.js";
 import { hex, hexToBytes } from "../src/crypto.js";
@@ -47,8 +47,8 @@ async function invite(over: Partial<{ place: string; joiner: string; expiresAt: 
 
 describe("the seam runs BOTH signals, structural first", () => {
   test("invite-only with no invite refuses at the structural gate — no price is walked", async () => {
-    const v = await admitToDreamnet({
-      policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+    const v = await admitToPlace({
+      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: null, now: NOW, verify,
       edges: [], seed: "s", applicant: JOINER, dials: DIALS,
     });
@@ -64,8 +64,8 @@ describe("the seam runs BOTH signals, structural first", () => {
       { voucher: "s", joiner: voucherDid },
       { voucher: voucherDid, joiner: JOINER },
     ];
-    const v = await admitToDreamnet({
-      policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+    const v = await admitToPlace({
+      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: await invite(), now: NOW, verify,
       edges, seed: "s", applicant: JOINER, dials: DIALS,
     });
@@ -83,8 +83,8 @@ describe("the seam runs BOTH signals, structural first", () => {
       { voucher: "s", joiner: voucherDid },
       { voucher: voucherDid, joiner: JOINER },
     ];
-    const v = await admitToDreamnet({
-      policy: DREAMNET_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+    const v = await admitToPlace({
+      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: await invite(), now: NOW, verify,
       edges, seed: "s", applicant: JOINER, dials: TIGHT,
     });
@@ -98,7 +98,7 @@ describe("the seam runs BOTH signals, structural first", () => {
 
 describe("open policy skips the invite but STILL prices", () => {
   test("no invite, open policy — the crossing prices with an empty (dispersed) cluster", async () => {
-    const v = await admitToDreamnet({
+    const v = await admitToPlace({
       policy: { kind: "open" }, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: null, now: NOW, verify,
       edges: [], seed: "s", applicant: JOINER, dials: DIALS,
@@ -112,7 +112,7 @@ describe("open policy skips the invite but STILL prices", () => {
   // concentration is 0 and the wall stays passable — open cannot be walked into a capture, because there is
   // no cluster to concentrate. The pricing still RUNS, and that is what keeps open from meaning free.
   test("open policy prices every crossing — the wall runs even with no invite to gate it", async () => {
-    const v = await admitToDreamnet({
+    const v = await admitToPlace({
       policy: { kind: "open" }, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: null, now: NOW, verify,
       edges: [], seed: "s", applicant: JOINER, dials: TIGHT,

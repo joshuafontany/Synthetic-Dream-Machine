@@ -27,7 +27,7 @@ import {
   readNexusCharterDoc, writeNexusCharterDoc, nexusCharterDocPath,
   listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore,
   runNexusKapae, runNexusKapaeList, NexusKapaeError,
-  runNexusAdmit, runNexusAcceptCarriage, runNexusMembersList, NexusAdmitError,
+  runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError,
   sealReserveMineShare, writeCharterReserveState, readCharterReserveState,
 } from "@lararium/node";
 import { federationPostureFromDoc, type FederationPosture } from "@lararium/mesh";
@@ -45,13 +45,13 @@ import type { ParsedArgs } from "../parse-args.js";
 class UsageError extends Error {}
 
 function usage(): void {
-  console.error("usage: lares nexus <charter | kapae | un_kapae | admit | revoke | members | accept-carriage | posture>");
+  console.error("usage: lares nexus <charter | kapae | un_kapae | contract | revoke | members | accept-carriage | posture>");
   console.error("");
   console.error("  charter <seat | rotate | commit | show>   the founding-kahu roster + pre-rotated epoch chain");
   console.error("  kapae <nym> [--reason <text>]             raise a quorum-signed ban on a presenter nym");
   console.error("  kapae --list                              read the currently-Kapae'd set (the fold)");
   console.error("  un_kapae <nym>                            mint a quorum-signed lift at a higher version");
-  console.error("  admit <operator-pubkey> [--contract <hex>] admit a contracted operator (quorum + contract-in)");
+  console.error("  contract <operator-pubkey> [--sig <hex>]  seat a vessel at the CONTRACT cap-tier (quorum + contract-in)");
   console.error("  revoke <operator-pubkey>                  revoke a member (quorum-only)");
   console.error("  members --list                            read the currently-admitted member set (the fold)");
   console.error("  accept-carriage [--index N]               (joining operator) mint the 'accepts carriage' contract-in");
@@ -80,8 +80,8 @@ export async function cmdNexus(args: ParsedArgs): Promise<number> {
     case "charter":         return await cmdCharter(args);
     case "kapae":           return await cmdKapae(args);
     case "un_kapae":        return await cmdUnKapae(args);
-    case "admit":           return await cmdAdmit(args, "admit");
-    case "revoke":          return await cmdAdmit(args, "revoke");
+    case "contract":        return await cmdContract(args, "admit");
+    case "revoke":          return await cmdContract(args, "revoke");
     case "members":         return await cmdMembers(args);
     case "accept-carriage": return await cmdAcceptCarriage(args);
     case "posture":         return await cmdPosture(args);
@@ -93,19 +93,19 @@ export async function cmdNexus(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares nexus admit <operator-pubkey> [--contract <hex>]` writes a quorum-signed + contract-in admit onto the
+ * `lares nexus contract <operator-pubkey> [--sig <hex>]` writes a quorum-signed + contract-in admit onto the
  * members board; `lares nexus revoke <operator-pubkey>` writes a quorum-signed revoke. FAIL CLOSED: an unseated
  * charter, sub-quorum, or (for admit) a missing/invalid operator contract-in REFUSES and writes nothing.
  */
-async function cmdAdmit(args: ParsedArgs, action: "admit" | "revoke"): Promise<number> {
+async function cmdContract(args: ParsedArgs, action: "admit" | "revoke"): Promise<number> {
   const nym = args.positional[1];
   if (!nym) {
-    console.error(`usage: lares nexus ${action} <operator-pubkey>${action === "admit" ? " [--contract <hex>]" : ""}`);
+    console.error(`usage: lares nexus ${action === "admit" ? "contract" : action} <operator-pubkey>${action === "admit" ? " [--sig <hex>]" : ""}`);
     return 2;
   }
   try {
-    const contractSig = action === "admit" ? args.options["contract"] : undefined;
-    const r = await runNexusAdmit({ action, nym, ...(contractSig ? { contractSig } : {}), bagsDir: larBagsDir() });
+    const contractSig = action === "admit" ? (args.options["sig"] ?? args.options["contract"]) : undefined;
+    const r = await runNexusContract({ action, nym, ...(contractSig ? { contractSig } : {}), bagsDir: larBagsDir() });
     emit(args, {
       ok: true,
       data: {
@@ -127,7 +127,7 @@ async function cmdAdmit(args: ParsedArgs, action: "admit" | "revoke"): Promise<n
     return 0;
   } catch (err) {
     const msg  = err instanceof Error ? err.message : String(err);
-    const code = err instanceof NexusAdmitError ? "refused" : "error";
+    const code = err instanceof NexusContractError ? "refused" : "error";
     emit(args, { ok: false, error: { code, message: msg }, human: () => console.error(`lares nexus ${action}: ${msg}`) });
     return exitFor("error");
   }
@@ -168,7 +168,7 @@ async function cmdMembers(args: ParsedArgs): Promise<number> {
 
 /**
  * `lares nexus accept-carriage [--index N]` — run by the JOINING operator on their OWN vessel: mint the
- * "accepts carriage" contract-in token the kahu supply to `nexus admit --contract <hex>`. The consent-first
+ * "accepts carriage" contract-in token the kahu supply to `nexus contract --sig <hex>`. The consent-first
  * seal (track contracts, never identities): the operator signs its pubkey + the charter epoch, nothing more.
  */
 async function cmdAcceptCarriage(args: ParsedArgs): Promise<number> {
@@ -188,13 +188,13 @@ async function cmdAcceptCarriage(args: ParsedArgs): Promise<number> {
         console.log(`  your nym:     ${r.nym}`);
         console.log(`  epoch:        ${r.charterEpochCid}`);
         console.log(`  contract-sig: ${r.contractSig}`);
-        console.log(`  hand this to a founding kahu:  lares nexus admit ${r.nym} --contract ${r.contractSig}`);
+        console.log(`  hand this to a founding kahu:  lares nexus contract ${r.nym} --sig ${r.contractSig}`);
       },
     });
     return 0;
   } catch (err) {
     const msg  = err instanceof Error ? err.message : String(err);
-    const code = err instanceof NexusAdmitError ? "refused" : "error";
+    const code = err instanceof NexusContractError ? "refused" : "error";
     emit(args, { ok: false, error: { code, message: msg }, human: () => console.error(`lares nexus accept-carriage: ${msg}`) });
     return exitFor("error");
   }

@@ -172,8 +172,8 @@ export type { NexusKapaeOptions, NexusKapaeResult, NexusKapaeListResult } from "
 
 // The operator MEMBERS-registry RAISE side (Build-2) — the founding kahu writes a quorum-signed + contract-in
 // admit/revoke onto the members board (the antigen's ALLOW-twin); `accept-carriage` mints the operator contract-in.
-export { runNexusAdmit, runNexusAcceptCarriage, runNexusMembersList, NexusAdmitError } from "./commands/nexus-admit.js";
-export type { NexusAdmitOptions, NexusAdmitResult, NexusMembersListResult } from "./commands/nexus-admit.js";
+export { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "./commands/nexus-contract.js";
+export type { NexusContractOptions, NexusContractResult, NexusMembersListResult } from "./commands/nexus-contract.js";
 
 // The traceless BOOT-INVITE burn (Build-2) — mint a sealed single-use invite; decide + spend-on-boot LOCALLY.
 export {

@@ -1,5 +1,5 @@
 /**
- * runNexusAdmit / runNexusAcceptCarriage / runNexusMembersList — the RAISE side of the operator MEMBERS-registry
+ * runNexusContract / runNexusAcceptCarriage / runNexusMembersList — the RAISE side of the operator MEMBERS-registry
  * (the Kapae-antigen's ALLOW-twin). The founding kahu WRITE a quorum-signed `admit` / `revoke` onto the
  * always-carried members BOARD; the READER (`members-board`) + the consult (`nexus-membership`,
  * `memberCarryShareDecision`) fold it. This is the writer they were missing — the mirror of `runNexusKapae`.
@@ -44,9 +44,9 @@ import {
 const NYM_RE = /^[0-9a-f]{64}$/;
 
 /** A REFUSAL the CLI renders as a clean fail-closed message (never a stack, never a partial write). */
-export class NexusAdmitError extends Error {}
+export class NexusContractError extends Error {}
 
-export interface NexusAdmitOptions {
+export interface NexusContractOptions {
   readonly action:     MembershipAction;
   readonly nym:        string;
   /** The joining operator's "accepts carriage" contract-sig hex (from `nexus accept-carriage`). Admit only;
@@ -57,7 +57,7 @@ export interface NexusAdmitOptions {
   readonly storageDir?: string;
 }
 
-export interface NexusAdmitResult {
+export interface NexusContractResult {
   readonly action:          MembershipAction;
   readonly nym:             string;
   readonly version:         number;
@@ -76,7 +76,7 @@ export interface NexusAdmitResult {
 function seatedRosterOrRefuse(bagsDir: string): KahuCharterRoster {
   const roster = foundingRoster(readNexusCharterDoc(bagsDir));
   if (roster.charterEpochCid.length === 0 || roster.keys.length < roster.threshold) {
-    throw new NexusAdmitError(
+    throw new NexusContractError(
       "no seated founding-kahu quorum to root an admit on — run `lares nexus charter seat` first (the members-registry stays inert until a quorum stands).",
     );
   }
@@ -104,7 +104,7 @@ async function selectHeldQuorumSigners(
     if (candidates.length >= roster.threshold) break;
   }
   if (candidates.length < roster.threshold) {
-    throw new NexusAdmitError(
+    throw new NexusContractError(
       `sub-quorum REFUSED (fail-closed): the vessel holds ${candidates.length} seated persona-root(s), but a valid membership act carries ${roster.threshold} distinct founding-kahu signatures. ` +
       `A real cabal collects the missing signature(s) from the other founding kahu (a collect-signatures ceremony, unbuilt).`,
     );
@@ -119,7 +119,7 @@ async function selectHeldQuorumSigners(
  * Neither → REFUSE (never admit an operator that has not consented to carriage).
  */
 async function resolveContractIn(
-  opts: NexusAdmitOptions, storageDir: string, nym: string, charterEpochCid: string,
+  opts: NexusContractOptions, storageDir: string, nym: string, charterEpochCid: string,
 ): Promise<{ contractSig: QuorumSignature; how: "supplied" | "self" }> {
   if (opts.contractSig) {
     return { contractSig: { signer: nym, sig: opts.contractSig.trim().toLowerCase() }, how: "supplied" };
@@ -133,7 +133,7 @@ async function resolveContractIn(
     );
     return { contractSig, how: "self" };
   }
-  throw new NexusAdmitError(
+  throw new NexusContractError(
     "admit REFUSED (fail-closed): no operator contract-in. The joining operator must sign 'accepts carriage' " +
     "(`lares nexus accept-carriage` on their vessel) and supply the token via --contract, OR this vessel must " +
     "hold the admitted persona's own seed. A Nexus never conscripts an operator into carriage.",
@@ -145,11 +145,11 @@ async function resolveContractIn(
  * founding persona-roots (plus, for admit, the operator's contract-in) and LAND it on the always-carried members
  * board. FAILS CLOSED before any write. The lift/re-admit rides a STRICTLY HIGHER version than any standing entry.
  */
-export async function runNexusAdmit(opts: NexusAdmitOptions): Promise<NexusAdmitResult> {
+export async function runNexusContract(opts: NexusContractOptions): Promise<NexusContractResult> {
   const storageDir = opts.storageDir ?? larDataDir();
   const nym        = opts.nym.trim().toLowerCase();
   if (!NYM_RE.test(nym)) {
-    throw new NexusAdmitError(`"${opts.nym}" is not a valid operator nym — expected a 64-hex ed25519 verifying key.`);
+    throw new NexusContractError(`"${opts.nym}" is not a valid operator nym — expected a 64-hex ed25519 verifying key.`);
   }
 
   const roster   = seatedRosterOrRefuse(opts.bagsDir);
@@ -183,7 +183,7 @@ export async function runNexusAdmit(opts: NexusAdmitOptions): Promise<NexusAdmit
     // NEVER write an entry the fold would ignore — self-verify it COUNTS against the live roster (a dead admit
     // would read as enforced while granting nothing). This catches a bad supplied contract-sig BEFORE the write.
     if (!(await membershipEntryCounts(entry, roster))) {
-      throw new NexusAdmitError(
+      throw new NexusContractError(
         opts.action === "admit"
           ? "refusing to write: the signed admit does not COUNT (the kahu quorum or the operator contract-in failed to verify against the seated roster)."
           : "refusing to write: the signed revoke does not verify against the seated roster (fail-closed).",
@@ -211,7 +211,7 @@ export async function runNexusAdmit(opts: NexusAdmitOptions): Promise<NexusAdmit
 /**
  * Mint the operator's "accepts carriage" contract-sig — run by the JOINING operator on its OWN vessel. Reads the
  * held persona seed at `handleIndex`, signs the version-independent carriage token for the current charter epoch,
- * and returns the token hex the kahu supply to `runNexusAdmit({ contractSig })`. FAIL CLOSED: an unseated charter
+ * and returns the token hex the kahu supply to `runNexusContract({ contractSig })`. FAIL CLOSED: an unseated charter
  * has no epoch to bind consent to → REFUSE.
  */
 export async function runNexusAcceptCarriage(opts: {
@@ -220,7 +220,7 @@ export async function runNexusAcceptCarriage(opts: {
   const storageDir = opts.storageDir ?? larDataDir();
   const roster     = foundingRoster(readNexusCharterDoc(opts.bagsDir));
   if (roster.charterEpochCid.length === 0) {
-    throw new NexusAdmitError("no seated charter epoch to bind carriage consent to — the Nexus must seat its charter first.");
+    throw new NexusContractError("no seated charter epoch to bind carriage consent to — the Nexus must seat its charter first.");
   }
   const root = await generateOrLoadPersonaGroupRoot(storageDir, opts.handleIndex);
   const nym  = root.verifyingKey.toLowerCase();

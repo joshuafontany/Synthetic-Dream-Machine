@@ -28,7 +28,7 @@ import type { KahuCharterRoster } from "./kapae-antigen.js";
 import { sha256HexSync, canonicalJson } from "./crypto.js";
 import { type CharterEpoch, verifyCharterChain, charterKeySetHash } from "./wax-stamp.js";
 import { type FederationPosture, DEFAULT_FEDERATION_POSTURE } from "./federation-gate.js";
-import { type CabalJoinPolicy, DREAMNET_JOIN_POLICY } from "./cabal-invite.js";
+import { type CabalJoinPolicy, DEFAULT_JOIN_POLICY } from "./cabal-invite.js";
 
 /** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
 export const NEXUS_CHARTER_DOC_KIND = "lar-nexus-charter/v1" as const;
@@ -163,7 +163,7 @@ export function federationPostureFromDoc(doc: NexusCharterDoc | null): Federatio
  * still prices (admission-price), so `open` reads "no invite needed", never "free".
  */
 export function joinPolicyFromDoc(doc: NexusCharterDoc | null): CabalJoinPolicy {
-  return doc?.joinPolicy?.kind === "open" ? { kind: "open" } : DREAMNET_JOIN_POLICY;
+  return doc?.joinPolicy?.kind === "open" ? { kind: "open" } : DEFAULT_JOIN_POLICY;
 }
 
 /** The pre-rotated chain's head epoch, or null when no chain stands established (legacy / unseated doc). */
