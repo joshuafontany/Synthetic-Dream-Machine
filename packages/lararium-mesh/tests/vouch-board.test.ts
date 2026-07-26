@@ -13,7 +13,7 @@ import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
   writeVouch, verifiedVouchesFromBoard, vouchEntryKey,
-  signCabalInvite, vouchDagFromInvites, emptyLarDoc, type CabalInvite, type LarDoc,
+  signCabalInvite, vouchDagFromInvites, vouchEdgeId, emptyLarDoc, type CabalInvite, type LarDoc,
 } from "../src/index.js";
 import { hex, hexToBytes } from "../src/crypto.js";
 
@@ -93,5 +93,34 @@ describe("vouch-board — an unverified vouch is an unbounded one", () => {
   test("an absent board yields NO lineage — fail-closed, never an empty-means-open read", async () => {
     expect(await verifiedVouchesFromBoard(null, PLACE, verify)).toEqual([]);
     expect(await verifiedVouchesFromBoard(emptyLarDoc(), PLACE, verify)).toEqual([]);
+  });
+});
+
+describe("a withdrawn vouch stands aside, and its mass leaves the lineage", () => {
+  test("★ a shadowed vouch drops though its signature verifies ★", async () => {
+    const kept  = await vouch(ALICE, "b".repeat(64));
+    const gone  = await vouch(ALICE, "c".repeat(64));
+    const board = boardOf([kept, gone]);
+
+    expect(await verifiedVouchesFromBoard(board, PLACE, verify)).toHaveLength(2);
+    const stood = await verifiedVouchesFromBoard(board, PLACE, verify, new Set([vouchEdgeId(gone)]));
+    expect(stood.map((i) => i.joinerIdentityHex)).toEqual([kept.joinerIdentityHex]);
+  });
+
+  // The lineage price walks these edges, so a withdrawn vouch must stop lending its mass — otherwise
+  // standing a voucher deliberately took back would keep discounting a crossing forever.
+  test("the withdrawn edge leaves the DAG the price walks", async () => {
+    const kept = await vouch(ALICE, "b".repeat(64));
+    const gone = await vouch(ALICE, "c".repeat(64));
+    const stood = await verifiedVouchesFromBoard(boardOf([kept, gone]), PLACE, verify,
+      new Set([vouchEdgeId(gone)]));
+    expect(vouchDagFromInvites(stood).edges).toHaveLength(1);
+  });
+
+  test("the edge id binds place, voucher AND joiner — a shadow never spills onto a sibling", async () => {
+    const a = await vouch(ALICE, "b".repeat(64));
+    const b = await vouch(BOB,   "b".repeat(64));          // same joiner, different voucher
+    const c = await vouch(ALICE, "b".repeat(64), OTHER);   // same pair, different place
+    expect(new Set([vouchEdgeId(a), vouchEdgeId(b), vouchEdgeId(c)]).size).toBe(3);
   });
 });

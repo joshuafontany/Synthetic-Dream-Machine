@@ -282,3 +282,34 @@ describe("membership binds at the DYAD grain", () => {
     expect(stood.map(dyadAgentDid)).toEqual([VEIL_WORK]);
   });
 });
+
+describe("a kāpae over the relationship stands aside a VALID edge", () => {
+  test("★ a shadowed dyad drops though its binding verifies perfectly ★", async () => {
+    const work = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED);
+    const away = await bound(VESSEL_B, VEIL_AWAY, ROOT_ME_SEED);
+
+    // no shadow → both stand
+    expect(await verifiedFleetOfGroup([work, away], GROUP_ME, bverify)).toHaveLength(2);
+
+    // the marker goes up over ONE relationship; its signature stays as valid as it ever was
+    const shadowed = new Set([work.dyadId]);
+    const stood = await verifiedFleetOfGroup([work, away], GROUP_ME, bverify, shadowed);
+    expect(stood.map((d) => d.dyadId)).toEqual([away.dyadId]);
+  });
+
+  // The difference from an expiry, stated: an expired edge simply no longer stands and a fresh one replaces
+  // it; a SET-ASIDE edge stays aside, so re-presenting the same relationship cannot resurrect it.
+  test("re-presenting the SAME relationship cannot walk back under the shadow", async () => {
+    const work  = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED);
+    const again = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED, "epoch1-bbb");   // fresh edge, later epoch
+    expect(again.dyadId).toBe(work.dyadId);                                        // same relationship
+    expect(await verifiedFleetOfGroup([again], GROUP_ME, bverify, new Set([work.dyadId]))).toEqual([]);
+  });
+
+  test("the shadow scopes to ONE relationship — a sibling on the same vessel stands untouched", async () => {
+    const work = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED);
+    const play = await bound(VESSEL_A, VEIL_PLAY, ROOT_ME_SEED);
+    const stood = await verifiedFleetOfGroup([work, play], GROUP_ME, bverify, new Set([work.dyadId]));
+    expect(stood.map(dyadAgentDid)).toEqual([VEIL_PLAY]);
+  });
+});

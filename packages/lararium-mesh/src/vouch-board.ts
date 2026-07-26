@@ -32,6 +32,23 @@
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, tiddlerText } from "./base-doc.js";
 import { CABAL_INVITE_DOMAIN, cabalInviteBytes, type CabalInvite } from "./cabal-invite.js";
+import { sha256HexSync, canonicalJson } from "./crypto.js";
+
+/**
+ * The relationship id a vouch presents to the kāpae plane — the voucher→joiner edge inside one place.
+ *
+ * A voucher WITHDRAWING a vouch raises a shadow over this id. That reads differently from an EXPIRY: an
+ * expired vouch simply no longer stands and a fresh one may replace it, while a withdrawn one stays set
+ * aside, so re-minting the same edge cannot resurrect the standing it once carried.
+ */
+export function vouchEdgeId(invite: CabalInvite): string {
+  return sha256HexSync(canonicalJson({
+    kind: "lar-vouch-edge/v1",
+    placeDocIdHex:     invite.placeDocIdHex,
+    voucherDid:        invite.voucherDid,
+    joinerIdentityHex: invite.joinerIdentityHex,
+  }));
+}
 
 /** The tiddler-key prefix every issued vouch rides under — on the DreamNet plane, namespaced apart. */
 export const VOUCH_ENTRY_PREFIX = "lar:///ha.ka.ba/dreamnet/vouch-registry/" as const;
@@ -88,6 +105,7 @@ export async function verifiedVouchesFromBoard(
   doc: LarDoc | undefined | null,
   place: string,
   verify: (bytes: Uint8Array, sigHex: string, voucherDid: string) => Promise<boolean>,
+  shadowed: ReadonlySet<string> = new Set(),
 ): Promise<CabalInvite[]> {
   const tiddlers = doc?.tiddlers;
   if (!tiddlers) return [];                                            // absent board → no lineage, fail-closed
@@ -106,5 +124,8 @@ export async function verifiedVouchesFromBoard(
     const { sig: _sig, ...unsigned } = inv;
     return verify(cabalInviteBytes(unsigned), inv.sig, inv.voucherDid).catch(() => false);
   }));
-  return candidates.filter((_, i) => verdicts[i] === true);
+  // A withdrawn vouch drops even when its signature verifies — a voucher who sets a vouch aside removes the
+  // MASS it lent to the lineage, which the price walks. Leaving it standing would let withdrawn standing keep
+  // discounting a crossing forever.
+  return candidates.filter((c, i) => verdicts[i] === true && !shadowed.has(vouchEdgeId(c)));
 }

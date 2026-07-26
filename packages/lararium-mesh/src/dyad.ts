@@ -264,8 +264,12 @@ export async function verifiedFleetOfGroup(
   dyads: readonly DyadRecord[],
   groupRootDid: LarDid,
   verify: (bytes: Uint8Array, sigHex: string, signerDid: LarDid) => Promise<boolean>,
+  shadowed: ReadonlySet<string> = new Set(),
 ): Promise<DyadRecord[]> {
-  const claimed = fleetOfGroup(dyads, groupRootDid);
+  // A SHADOWED relationship stands aside before any signature runs. The edge it presents may verify
+  // perfectly — a valid edge set aside stays set aside, which is the whole difference between a kāpae and
+  // an expiry. Checking here rather than after keeps a raised marker unconditional.
+  const claimed = fleetOfGroup(dyads, groupRootDid).filter((d) => !shadowed.has(d.dyadId));
   const verdicts = await Promise.all(claimed.map((d) =>
     verify(dyadBindingBytes(d.ref, d.binding!.groupRootDid, d.binding!.epoch), d.binding!.sig, d.binding!.groupRootDid)
       .catch(() => false)));
