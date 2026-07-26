@@ -58,6 +58,7 @@ import { cmdSurface }                  from "../commands/surface.js";
 import { cmdCircle }                   from "../commands/circle.js";
 import { cmdNexus }                    from "../commands/nexus.js";
 import { freshBuildGate, FRESH_BUILD_COMMANDS } from "../build-freshness.js";
+import { VERB_SURFACE } from "@lararium/tw5";
 
 type Handler = (args: ParsedArgs) => Promise<number>;
 
@@ -66,13 +67,19 @@ interface Command {
   readonly summary:     string;
   readonly handler:     Handler;
   /**
-   * Which projections MAY expose this command. Absent → `["cli"]`, and that default carries a rule rather
-   * than a convenience: nothing reaches an AGENT surface until a hand declares it. A surface exposes what
-   * asked to be exposed, so growing the agent face stays a deliberate act per verb.
+   * Which projections MAY expose this command — named from the SHARED `VERB_SURFACE` vocabulary the daemon
+   * verb-plane also reads, so the two tables can never drift apart on what a surface is CALLED.
+   *
+   * The tables stay separate on purpose: a CLI command runs in-process at a terminal, a daemon verb routes
+   * through the VM into a vessel, and collapsing them would conflate two planes. Only the VOCABULARY unifies.
+   *
+   * Absent → `[VERB_SURFACE.cli]`, and that default carries a rule rather than a convenience: nothing
+   * reaches an AGENT surface until a hand declares it. Growing the agent face stays a deliberate act per verb.
    */
   readonly surfaces?:   readonly string[];
   /**
-   * TRUE when running this command HOLDS A KEY — it mints, signs, seals, or stakes.
+   * TRUE when running this command HOLDS A KEY — it mints, signs, seals, or stakes. Carries the SAME
+   * meaning as `VerbSpec.signs` on the daemon plane, deliberately worded once and referenced here.
    *
    * An agent surface may render such a command and compose its arguments; it MUST NEVER execute one. The
    * signing hand stays the human's, which is why `lares surface --executable` drops these even from a
@@ -97,7 +104,7 @@ export interface SurfaceEntry {
  */
 export function projectCommands(surface: string, executableOnly = false): readonly SurfaceEntry[] {
   return COMMANDS
-    .filter((c) => (c.surfaces ?? ["cli"]).includes(surface))
+    .filter((c) => (c.surfaces ?? [VERB_SURFACE.cli]).includes(surface))
     .filter((c) => !(executableOnly && c.signs === true))
     .map((c) => ({ name: c.name, summary: c.summary, signs: c.signs === true }))
     .sort((a, b) => a.name.localeCompare(b.name));
