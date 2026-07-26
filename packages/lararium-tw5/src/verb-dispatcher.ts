@@ -66,19 +66,86 @@ export type VerbReactor = (
   context: VerbContext,
 ) => Promise<Record<string, unknown>>;
 
+/**
+ * What a verb tells the SURFACES about itself — the metadata a projection needs, held beside the handler
+ * rather than in a second list somewhere.
+ *
+ * A surface that keeps its own catalogue drifts from the plane it claims to expose, and drift of that kind
+ * never announces itself: it shows up as a verb an agent can reach and a human cannot, or the reverse. So a
+ * verb declares its surfaces HERE, once, and every projection reads that declaration.
+ */
+export interface VerbSpec {
+  /** One line, shown by whichever surface renders it. */
+  readonly summary: string;
+  /**
+   * Which projections MAY expose this verb. Held open-ended on purpose — a CLI and an agent surface are the
+   * two standing today, and a wiki face or a remote face costs a string rather than a redesign.
+   */
+  readonly surfaces: readonly string[];
+  /**
+   * TRUE when performing this verb HOLDS A KEY.
+   *
+   * An agent surface may COMPOSE such an act into a presentable artifact and MUST NEVER execute it: the
+   * signing hand stays the human's. The pattern already runs twice in this house — `nexus accept-carriage`
+   * mints a token a human carries to a kahu, and a persona grant stays inert until a live human opens it.
+   * Marking it here turns that convention into something a projection can enforce.
+   */
+  readonly signs?: boolean;
+}
+
+/** The surfaces standing today. A projection names its own; nothing here forbids a third. */
+export const VERB_SURFACE = { cli: "cli", agent: "agent" } as const;
+
 export class VerbTable {
   private readonly handlers = new Map<string, VerbReactor>();
+  private readonly specs    = new Map<string, VerbSpec>();
 
-  register(verbName: string, handler: VerbReactor): void {
+  /**
+   * Register a verb, optionally declaring what the surfaces should know about it.
+   *
+   * The spec stays OPTIONAL so a verb may exist without reaching any surface — an internally-routed act is
+   * a legitimate thing, and forcing every one of them to declare a summary would invite meaningless ones.
+   * An undeclared verb simply projects nowhere, which reads as the honest default: a surface exposes what
+   * asked to be exposed, never everything it can see.
+   */
+  register(verbName: string, handler: VerbReactor, spec?: VerbSpec): void {
     if (this.handlers.has(verbName)) {
       throw new Error(`[verb-dispatcher] duplicate handler for "${verbName}"`);
     }
     this.handlers.set(verbName, handler);
+    if (spec) this.specs.set(verbName, spec);
   }
 
   get(verbName: string): VerbReactor | undefined { return this.handlers.get(verbName); }
   has(verbName: string): boolean { return this.handlers.has(verbName); }
   list(): readonly string[] { return [...this.handlers.keys()].sort(); }
+
+  /** What a verb declared, or undefined when it declared nothing. */
+  spec(verbName: string): VerbSpec | undefined { return this.specs.get(verbName); }
+
+  /**
+   * PROJECT the plane onto one surface — the verbs that declared it, in a stable order.
+   *
+   * This reads over what the vessel actually COMPOSED. A verb whose provider cap never composed never
+   * registered, so it cannot project — capability-degradation reaching the surface for free, with no
+   * per-vessel allowlist to maintain and none to fall out of date. A Herm exposes less than a hearth
+   * because it composed less, and nobody wrote that down anywhere.
+   */
+  project(surface: string): readonly { readonly verb: string; readonly spec: VerbSpec }[] {
+    return this.list()
+      .map((verb) => ({ verb, spec: this.specs.get(verb) }))
+      .filter((e): e is { verb: string; spec: VerbSpec } =>
+        e.spec !== undefined && e.spec.surfaces.includes(surface));
+  }
+
+  /**
+   * The verbs a surface may EXECUTE, as against merely compose. Identical to `project` except that
+   * key-holding acts drop out — so an agent surface built from this cannot reach a signing verb even by
+   * accident, and reaching one takes a deliberate call to `project` plus a deliberate compose-only path.
+   */
+  projectExecutable(surface: string): readonly { readonly verb: string; readonly spec: VerbSpec }[] {
+    return this.project(surface).filter((e) => e.spec.signs !== true);
+  }
 }
 
 export interface VerbDispatcherOptions {
