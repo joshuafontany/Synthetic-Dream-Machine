@@ -152,11 +152,6 @@ export function foldEdgeKapae(acts: readonly EdgeKapae[]): Set<string> {
   return shadowed;
 }
 
-/** Does a shadow stand over this relationship? */
-export function edgeShadowed(edgeId: string, shadowed: ReadonlySet<string>): boolean {
-  return shadowed.has(edgeId);
-}
-
 /**
  * Verify then fold, in one pass — the shape a caller wants, and the one that cannot skip the check.
  *

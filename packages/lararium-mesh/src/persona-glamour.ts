@@ -28,8 +28,9 @@ import type { DocHandle } from "@automerge/automerge-repo";
 import { deriveVeiledUserKey } from "./persona-identity.js";
 import { assertHandleIndex } from "./persona-vault.js";
 import {
-  signHandleCard, handleCardId, type HandleCard, type FleetProof,
+  signHandleCard, handleCardId, type HandleCard,
 } from "./handle-card.js";
+import type { DelegationEdge } from "./delegation-edge.js";
 import { ed25519SignerFromSeed } from "./auth-wire.js";
 import { hexToBytes } from "./crypto.js";
 import { announceToWhoFace } from "./who-face.js";
@@ -104,7 +105,7 @@ export async function mintPersonaGlamour(opts: {
   ttlMs?: number;
   standing?: string | null;
   /** The root-signed edge binding this face to its fleet, minted where the root lives. */
-  fleetProof?: FleetProof | null;
+  fleetProof?: DelegationEdge | null;
 }): Promise<MintedGlamour> {
   assertHandleIndex(opts.handleIndex);
   const glamour = opts.glamour.trim();

@@ -44,7 +44,10 @@
 
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, tiddlerText } from "./base-doc.js";
-import { sha256HexSync, canonicalJson, canonicalJsonBytes } from "./crypto.js";
+import { sha256HexSync, canonicalJson } from "./crypto.js";
+import {
+  signDelegationEdge, verifyDelegationEdge, DELEGATION_DOMAIN, type DelegationEdge,
+} from "./delegation-edge.js";
 import type { DeviceDelegationTiddler, LarDid } from "./device-delegation.js";
 
 /** The domain a dyad id hashes under — so an id never collides with another content-address in the tree. */
@@ -81,51 +84,23 @@ export interface DyadRecord {
    * ambient state supplies the authority. This carries its own authority instead: the group root SIGNED this
    * exact relationship at a named epoch, so a verifier needs the edge and the root DID and nothing else.
    */
-  readonly binding: DyadBinding | null;
+  readonly binding: DelegationEdge | null;
 }
 
 /**
- * The group root's signature over ONE relationship — designation carrying authority.
- *
- * WHAT A FOREIGN VERIFIER NEEDS: this edge and the group's root DID. No roster, no replica of the membership
- * graph, no directory, no clock. That matters beyond convenience — the whole membership-CRDT family buys
- * convergence by replicating the op graph to every member, which hands each of them the roster AND the
- * device-to-human linkage. A presented edge hands over neither.
- *
- * REVOCATION RIDES THE EPOCH, POSITIVELY. A binding names the epoch it roots on; advancing the group's epoch
- * leaves a stale edge behind without anyone delivering a negative fact. Every scheme that instead depends on
- * a revocation MESSAGE arriving — CRLs, OCSP, PGP revocation, UCAN's own concession — fails in the partition
- * that motivates it.
+ * The subject a dyad-binding covers — BOTH ends of the relationship, so an edge cannot lift off one dyad
+ * and land on another. Named once so the mint and the verify can never disagree about what got signed.
  */
-export interface DyadBinding {
-  /** The group root that signed this edge — the fleet's public identifier, and all a verifier needs. */
-  readonly groupRootDid: LarDid;
-  /** The epoch this binding roots on. An ORDER, never an instant — a causal island holds no global now. */
-  readonly epoch:        string;
-  /** ed25519 over `dyadBindingBytes`, by `groupRootDid`. */
-  readonly sig:          string;
+export function dyadBindingSubject(ref: DyadRef): Record<string, string> {
+  return { vesselDid: normalizeDid(ref.vesselDid), veilDid: normalizeDid(ref.veilDid) };
 }
 
-/**
- * The bytes a binding signs. It covers BOTH ends of the relationship, so an edge cannot lift off one dyad
- * and land on another, and the epoch it roots on, so a verifier scopes it the way the antigen scopes an entry.
- */
-export function dyadBindingBytes(ref: DyadRef, groupRootDid: LarDid, epoch: string): Uint8Array {
-  return canonicalJsonBytes({
-    kind:         "lar-dyad-binding/v1",
-    vesselDid:    normalizeDid(ref.vesselDid),
-    veilDid:      normalizeDid(ref.veilDid),
-    groupRootDid: normalizeDid(groupRootDid),
-    epoch,
-  });
-}
-
-/** Mint the edge — run where the group ROOT lives, never on the vessel presenting it. */
-export async function signDyadBinding(
+/** Mint the edge gathering a relationship into a fleet — run where the group ROOT lives. */
+export function signDyadBinding(
   ref: DyadRef, groupRootDid: LarDid, epoch: string,
   sign: (bytes: Uint8Array) => Promise<string>,
-): Promise<DyadBinding> {
-  return { groupRootDid, epoch, sig: await sign(dyadBindingBytes(ref, groupRootDid, epoch)) };
+): Promise<DelegationEdge> {
+  return signDelegationEdge(DELEGATION_DOMAIN.dyadBinding, dyadBindingSubject(ref), groupRootDid, epoch, sign);
 }
 
 /** Lowercase a DID once, so two spellings of one key never derive two ids. */
@@ -155,7 +130,7 @@ export function dyadSlotKey(id: string): string {
  * than accepting one alongside it, because two sources for one fact eventually disagree, and the signed one
  * must win. An edge names its operator (the veil that signed) and its device (the vessel that carries).
  */
-export function dyadFromEdge(edge: DeviceDelegationTiddler, binding: DyadBinding | null = null): DyadRecord {
+export function dyadFromEdge(edge: DeviceDelegationTiddler, binding: DelegationEdge | null = null): DyadRecord {
   const ref: DyadRef = { vesselDid: edge.deviceDid, veilDid: edge.operatorDid };
   return { kind: DYAD_ID_DOMAIN, dyadId: dyadId(ref), ref, edge, binding };
 }
@@ -180,11 +155,11 @@ function coerceDyad(parsed: unknown): DyadRecord | null {
   if (e["kind"] !== "device-delegation") return null;
   if (typeof e["operatorDid"] !== "string" || typeof e["deviceDid"] !== "string") return null;
   const b = p["binding"];
-  let binding: DyadBinding | null = null;
+  let binding: DelegationEdge | null = null;
   if (typeof b === "object" && b !== null) {
     const x = b as Record<string, unknown>;
-    if (typeof x["groupRootDid"] === "string" && typeof x["epoch"] === "string" && typeof x["sig"] === "string") {
-      binding = { groupRootDid: x["groupRootDid"], epoch: x["epoch"], sig: x["sig"] };
+    if (typeof x["signer"] === "string" && typeof x["epoch"] === "string" && typeof x["sig"] === "string") {
+      binding = { signer: x["signer"], epoch: x["epoch"], sig: x["sig"] };
     }
   }
   const record = dyadFromEdge(edge as unknown as DeviceDelegationTiddler, binding);
@@ -210,20 +185,6 @@ export function dyadsFromDoc(doc: LarDoc | undefined | null): DyadRecord[] {
   return out;
 }
 
-/**
- * The identifier the GROUP binds when it gathers this relationship.
- *
- * The veil key already reads UNIQUE per vessel×veil by the infra law, so the relationship already holds an
- * identifier of its own — no fresh key material buys what the model already carries. Binding at THIS grain
- * rather than at the vessel's carries three consequences the vessel grain cannot:
- *   · two faces on one device gather INDEPENDENTLY, so a human may bring one and withhold the other
- *   · verifying one face's membership reveals NOTHING about the device beneath it
- *   · a compromised vessel exposes the relationships admitted to it, never the fleet's whole roster
- */
-export function dyadAgentDid(record: DyadRecord): LarDid {
-  return record.ref.veilDid;
-}
-
 /** The dyads one VESSEL carries across every veil — a place's faces. */
 export function dyadsOnVessel(dyads: readonly DyadRecord[], vesselDid: LarDid): DyadRecord[] {
   const want = normalizeDid(vesselDid);
@@ -243,7 +204,7 @@ export function dyadsOnVessel(dyads: readonly DyadRecord[], vesselDid: LarDid): 
 export function fleetOfGroup(dyads: readonly DyadRecord[], groupRootDid: LarDid): DyadRecord[] {
   const want = normalizeDid(groupRootDid);
   if (want.length === 0) return [];
-  return dyads.filter((d) => d.binding && normalizeDid(d.binding.groupRootDid) === want);
+  return dyads.filter((d) => d.binding && normalizeDid(d.binding.signer) === want);
 }
 
 /**
@@ -271,24 +232,8 @@ export async function verifiedFleetOfGroup(
   // an expiry. Checking here rather than after keeps a raised marker unconditional.
   const claimed = fleetOfGroup(dyads, groupRootDid).filter((d) => !shadowed.has(d.dyadId));
   const verdicts = await Promise.all(claimed.map((d) =>
-    verify(dyadBindingBytes(d.ref, d.binding!.groupRootDid, d.binding!.epoch), d.binding!.sig, d.binding!.groupRootDid)
-      .catch(() => false)));
+    verifyDelegationEdge(DELEGATION_DOMAIN.dyadBinding, dyadBindingSubject(d.ref), d.binding, verify)));
   return claimed.filter((_, i) => verdicts[i] === true);
-}
-
-/**
- * Every fleet these dyads bind into, as `personaGroupId -> dyads`. The same closure, run once across all
- * bindings — it still computes, and still stores nothing.
- */
-export function fleetsOf(dyads: readonly DyadRecord[]): Map<string, DyadRecord[]> {
-  const out = new Map<string, DyadRecord[]>();
-  for (const d of dyads) {
-    if (!d.binding) continue;                    // unbound stays ungathered
-    const root = normalizeDid(d.binding.groupRootDid);
-    const bucket = out.get(root);
-    if (bucket) bucket.push(d); else out.set(root, [d]);
-  }
-  return out;
 }
 
 export function fleetSpan(fleet: readonly DyadRecord[]): number {

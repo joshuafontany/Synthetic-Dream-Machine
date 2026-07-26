@@ -13,9 +13,9 @@ import * as ed from "@noble/ed25519";
 import { hex, hexToBytes } from "../src/crypto.js";
 import {
   dyadId, dyadSlotKey, dyadFromEdge, writeDyad, dyadsFromDoc,
-  dyadsOnVessel, fleetOfGroup, fleetsOf, fleetSpan,
+  dyadsOnVessel, fleetOfGroup, fleetSpan,
   nameFleet, unnameFleet, fleetPetnameResolver,
-  dyadAgentDid, verifiedFleetOfGroup, signDyadBinding, dyadBindingBytes,
+  verifiedFleetOfGroup, signDyadBinding, dyadBindingSubject, delegationBytes, DELEGATION_DOMAIN,
   emptyLarDoc, type DyadRecord, type LarDoc,
 } from "../src/index.js";
 import type { DeviceDelegationTiddler } from "../src/device-delegation.js";
@@ -187,7 +187,7 @@ describe("the fleet closes over a PRESENTED EDGE, never over a pointer", () => {
   test("an UNBOUND dyad joins no fleet — absence never reads as default membership", async () => {
     const loose = dyadFromEdge(edge(VESSEL_B, VEIL_PLAY));
     expect(loose.binding).toBeNull();
-    expect(fleetsOf([loose]).size).toBe(0);
+    expect(await verifiedFleetOfGroup([loose], GROUP_ME, bverify)).toEqual([]);
     expect(await verifiedFleetOfGroup([loose], GROUP_ME, bverify)).toEqual([]);
   });
 
@@ -203,13 +203,18 @@ describe("the fleet closes over a PRESENTED EDGE, never over a pointer", () => {
     expect(fleetSpan(await verifiedFleetOfGroup([work, away], GROUP_ME, bverify))).toBe(2);
   });
 
-  test("the binding bytes cover both ends, the root AND the epoch", () => {
+  // One primitive now signs both this and the fleet-proof, so the DOMAIN carries the separation an edge
+  // minted for one purpose must never verify at another.
+  test("the binding bytes cover both ends, the root, the epoch AND the domain", () => {
     const r = { vesselDid: VESSEL_A, veilDid: VEIL_WORK };
-    const a = hex(dyadBindingBytes(r, "root1", "e1"));
-    expect(a).not.toBe(hex(dyadBindingBytes({ ...r, vesselDid: VESSEL_B }, "root1", "e1")));
-    expect(a).not.toBe(hex(dyadBindingBytes({ ...r, veilDid: VEIL_PLAY }, "root1", "e1")));
-    expect(a).not.toBe(hex(dyadBindingBytes(r, "root2", "e1")));
-    expect(a).not.toBe(hex(dyadBindingBytes(r, "root1", "e2")));
+    const D = DELEGATION_DOMAIN.dyadBinding;
+    const a = hex(delegationBytes(D, dyadBindingSubject(r), "root1", "e1"));
+    expect(a).not.toBe(hex(delegationBytes(D, dyadBindingSubject({ ...r, vesselDid: VESSEL_B }), "root1", "e1")));
+    expect(a).not.toBe(hex(delegationBytes(D, dyadBindingSubject({ ...r, veilDid: VEIL_PLAY }), "root1", "e1")));
+    expect(a).not.toBe(hex(delegationBytes(D, dyadBindingSubject(r), "root2", "e1")));
+    expect(a).not.toBe(hex(delegationBytes(D, dyadBindingSubject(r), "root1", "e2")));
+    // and an edge minted under the OTHER domain never matches
+    expect(a).not.toBe(hex(delegationBytes(DELEGATION_DOMAIN.fleetProof, dyadBindingSubject(r), "root1", "e1")));
   });
 });
 
@@ -269,9 +274,9 @@ describe("membership binds at the DYAD grain", () => {
   test("the agent identifier reads the VEIL, so each relationship binds on its own", () => {
     const work = dyadFromEdge(edge(VESSEL_A, VEIL_WORK));
     const play = dyadFromEdge(edge(VESSEL_A, VEIL_PLAY));
-    expect(dyadAgentDid(work)).toBe(VEIL_WORK);
+    expect(work.ref.veilDid).toBe(VEIL_WORK);
     // two faces on ONE device carry DIFFERENT identifiers — which is what makes them separable
-    expect(dyadAgentDid(work)).not.toBe(dyadAgentDid(play));
+    expect(work.ref.veilDid).not.toBe(play.ref.veilDid);
     expect(work.ref.vesselDid).toBe(play.ref.vesselDid);
   });
 
@@ -279,7 +284,7 @@ describe("membership binds at the DYAD grain", () => {
     const work = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED);          // the root signed this one
     const play = dyadFromEdge(edge(VESSEL_A, VEIL_PLAY));                 // and never signed this one
     const stood = await verifiedFleetOfGroup([work, play], GROUP_ME, bverify);
-    expect(stood.map(dyadAgentDid)).toEqual([VEIL_WORK]);
+    expect(stood.map((d) => d.ref.veilDid)).toEqual([VEIL_WORK]);
   });
 });
 
@@ -310,6 +315,6 @@ describe("a kāpae over the relationship stands aside a VALID edge", () => {
     const work = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED);
     const play = await bound(VESSEL_A, VEIL_PLAY, ROOT_ME_SEED);
     const stood = await verifiedFleetOfGroup([work, play], GROUP_ME, bverify, new Set([work.dyadId]));
-    expect(stood.map(dyadAgentDid)).toEqual([VEIL_PLAY]);
+    expect(stood.map((d) => d.ref.veilDid)).toEqual([VEIL_PLAY]);
   });
 });

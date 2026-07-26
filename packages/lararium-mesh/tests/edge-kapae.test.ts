@@ -16,7 +16,7 @@ import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
   signEdgeKapae, edgeKapaeBytes, edgeKapaeKey, writeEdgeKapae, edgeKapaeActsFromBoard,
-  foldEdgeKapae, edgeShadowed, verifiedShadowSet, shadowSetFromBoard, edgeKapaeBoardDocUrl,
+  foldEdgeKapae, verifiedShadowSet, shadowSetFromBoard, edgeKapaeBoardDocUrl,
   emptyLarDoc, type EdgeKapae,
 } from "../src/index.js";
 import { hex, hexToBytes } from "../src/crypto.js";
@@ -70,8 +70,8 @@ describe("mutual revocation converges without a winner", () => {
     const bOut = await act("edge-A", true, 1, B_SEED);   // B shadows A's edge, concurrently
 
     const shadowed = foldEdgeKapae([aOut, bOut]);
-    expect(edgeShadowed("edge-A", shadowed)).toBe(true);
-    expect(edgeShadowed("edge-B", shadowed)).toBe(true);
+    expect(shadowed.has("edge-A")).toBe(true);
+    expect(shadowed.has("edge-B")).toBe(true);
     // No tiebreak ran, because none was needed — two edges, two shadows, no contention between them.
     expect(shadowed.size).toBe(2);
   });
@@ -139,7 +139,7 @@ describe("the board — where a shadow becomes RAISABLE, not merely readable", (
     writeEdgeKapae(doc, await act("edge-1", true, 1, A_SEED));
 
     const shadowed = await shadowSetFromBoard(doc, () => authority, verify);
-    expect(edgeShadowed("edge-1", shadowed)).toBe(true);
+    expect(shadowed.has("edge-1")).toBe(true);
   });
 
   test("a later LOWER on the board takes it back down — a deliberate gesture, and it lands", async () => {
@@ -158,7 +158,7 @@ describe("the board — where a shadow becomes RAISABLE, not merely readable", (
     writeEdgeKapae(doc, await act("edge-1", true,  1, A_SEED));
     writeEdgeKapae(doc, await act("edge-1", false, 2, B_SEED));   // B has no authority over edge-1
 
-    expect(edgeShadowed("edge-1", await shadowSetFromBoard(doc, () => authority, verify))).toBe(true);
+    expect((await shadowSetFromBoard(doc, () => authority, verify)).has("edge-1")).toBe(true);
   });
 
   // The honest floor: an absent board means nothing was set aside, never that everything is permitted.

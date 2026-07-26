@@ -17,7 +17,7 @@ import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
   signHandleCard, signFleetProof, verifyFleetProof, verifyHandleCard,
-  handleCardId, handleCardBytes, fleetProofBytes, type HandleCard,
+  handleCardId, handleCardBytes, fleetProofSubject, delegationBytes, DELEGATION_DOMAIN, type HandleCard,
 } from "../src/index.js";
 import { hex, hexToBytes } from "../src/crypto.js";
 
@@ -124,10 +124,14 @@ describe("identity and signature answer different questions, so they cover diffe
     expect(await handleCardId(bound)).not.toBe(await handleCardId(unbound));
   });
 
-  test("the proof bytes bind nym, root AND epoch together", async () => {
-    const a = hex(fleetProofBytes("nym1", "root1", "e1"));
-    expect(a).not.toBe(hex(fleetProofBytes("nym2", "root1", "e1")));
-    expect(a).not.toBe(hex(fleetProofBytes("nym1", "root2", "e1")));
-    expect(a).not.toBe(hex(fleetProofBytes("nym1", "root1", "e2")));
+  // One primitive now signs this AND the dyad binding, so the DOMAIN carries the separation: an edge
+  // minted to bind a FACE must never verify as one binding a RELATIONSHIP.
+  test("the proof bytes bind nym, root, epoch AND the domain", () => {
+    const D = DELEGATION_DOMAIN.fleetProof;
+    const a = hex(delegationBytes(D, fleetProofSubject("nym1"), "root1", "e1"));
+    expect(a).not.toBe(hex(delegationBytes(D, fleetProofSubject("nym2"), "root1", "e1")));
+    expect(a).not.toBe(hex(delegationBytes(D, fleetProofSubject("nym1"), "root2", "e1")));
+    expect(a).not.toBe(hex(delegationBytes(D, fleetProofSubject("nym1"), "root1", "e2")));
+    expect(a).not.toBe(hex(delegationBytes(DELEGATION_DOMAIN.dyadBinding, fleetProofSubject("nym1"), "root1", "e1")));
   });
 });

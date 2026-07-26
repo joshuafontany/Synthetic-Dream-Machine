@@ -25,6 +25,9 @@
  * Design-of-record: lar:///ha.ka.ba/lares/api/pono/persona-circle#the-vault (publication model).
  */
 import { canonicalJsonBytes, hex, hexToBytes } from "./crypto.js";
+import {
+  signDelegationEdge, verifyDelegationEdge, DELEGATION_DOMAIN, type DelegationEdge,
+} from "./delegation-edge.js";
 import * as ed25519 from "@noble/ed25519";
 
 /** The domain a card signs over. A signature is meaningless without the domain it was made in. */
@@ -57,44 +60,11 @@ export interface HandleCard {
    * nym. Absent → the card certifies only itself, which stays a complete and honest card; a face that
    * claims no fleet claims nothing false. Present → a recogniser walks nym → root in one extra verify.
    */
-  readonly fleetProof: FleetProof | null;
+  readonly fleetProof: DelegationEdge | null;
   /** ed25519 signature over the card's canonical content, by the key in `nym`. */
   readonly sig:      string;
 }
 
-/**
- * The delegation edge binding a published face to the fleet it speaks for.
- *
- * WHY A SIGNATURE RATHER THAN A CONVENTION. Without it, a public name and a fleet agree only because the
- * same human happened to mint both — nothing stops a stranger publishing a card that claims someone else's
- * fleet. One Ed25519 signature by the root converts that convention into a proof a cold recogniser checks
- * offline: no directory, no clock, no lookup.
- *
- * WHAT IT DECLINES TO CARRY, and why the privacy holds. No device key appears here, and no member list.
- * A recogniser learns that the named root vouched for this face and NOTHING about which devices the fleet
- * gathers — because the card never carries them. The property rests on what stays unpublished rather than
- * on any proof system, which keeps the whole instrument two signature-verifies wide.
- *
- * THE EPOCH ORDERS IT, NEVER A TIMESTAMP. The binding roots on a charter-epoch — a content-addressed link
- * in a hash chain, walkable from a local replica. A wall-clock reading here would assert a global instant
- * that a causal island cannot hold.
- */
-export interface FleetProof {
-  /** The persona root that signed this edge — the fleet's public identifier. */
-  readonly rootDid: string;
-  /** The charter-epoch this binding roots on. An ORDER, never an instant. */
-  readonly epoch:   string;
-  /** ed25519 over `fleetProofBytes`, by `rootDid`. */
-  readonly sig:     string;
-}
-
-/**
- * The bytes a fleet-proof signs. It covers the NYM it speaks for, so the edge cannot lift off one card and
- * land on another, and the EPOCH it roots on, so a recogniser scopes it the way the antigen scopes an entry.
- */
-export function fleetProofBytes(nym: string, rootDid: string, epoch: string): Uint8Array {
-  return canonicalJsonBytes({ kind: "lar-fleet-proof/v1", nym, rootDid, epoch });
-}
 
 /**
  * The card's IDENTITY content — everything that makes this face THIS face.
@@ -138,28 +108,35 @@ export function handleCardId(card: Omit<HandleCard, "sig">): Promise<string> {
  * Mint the delegation edge — run on the vessel holding the persona ROOT, never on the one publishing.
  * The root signs the nym; the nym then signs the card carrying that signature. No circle: the root covers
  * only the nym-and-epoch, so it may sign before the card exists.
+/**
+ * The subject a fleet-proof covers — the nym the root vouched for. Named once so the mint and the verify
+ * can never disagree about what got signed.
  */
-export async function signFleetProof(
+export function fleetProofSubject(nym: string): Record<string, string> {
+  return { nym };
+}
+
+/** Mint the edge binding a face to its fleet — run where the persona ROOT lives, never where it publishes. */
+export function signFleetProof(
   args: { readonly nym: string; readonly rootDid: string; readonly epoch: string },
   sign: (bytes: Uint8Array) => Promise<string>,
-): Promise<FleetProof> {
-  return { rootDid: args.rootDid, epoch: args.epoch, sig: await sign(fleetProofBytes(args.nym, args.rootDid, args.epoch)) };
+): Promise<DelegationEdge> {
+  return signDelegationEdge(
+    DELEGATION_DOMAIN.fleetProof, fleetProofSubject(args.nym), args.rootDid, args.epoch, sign);
 }
 
 /**
- * Does this card PROVE it speaks for the fleet it names? Two Ed25519 verifies and nothing else — no lookup,
- * no clock, no pairing.
+ * Does this card PROVE it speaks for the fleet it names? One Ed25519 verify beside the card's own.
  *
- * A card carrying NO proof reads `false` here without reading dishonest: an unbound face claims no fleet, so
- * it fails no claim. A caller distinguishes "unbound" from "refuted" by checking `fleetProof` for absence.
+ * A card carrying NO proof reads false without reading dishonest: an unbound face claims no fleet, so it
+ * fails no claim. A caller distinguishes unbound from refuted by checking `fleetProof` for absence.
  */
-export async function verifyFleetProof(
+export function verifyFleetProof(
   card: HandleCard,
   verify: (bytes: Uint8Array, sigHex: string, signerDid: string) => Promise<boolean>,
 ): Promise<boolean> {
-  const p = card.fleetProof;
-  if (!p || !p.rootDid || !p.sig || !p.epoch) return false;
-  return verify(fleetProofBytes(card.nym, p.rootDid, p.epoch), p.sig, p.rootDid).catch(() => false);
+  return verifyDelegationEdge(
+    DELEGATION_DOMAIN.fleetProof, fleetProofSubject(card.nym), card.fleetProof, verify);
 }
 
 /** Sign a handle-card. The caller supplies the handle's own signer; this module holds no key. */
