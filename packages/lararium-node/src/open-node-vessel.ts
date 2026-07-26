@@ -1677,7 +1677,16 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     throw new Error("[lararium] openNodeHerm requires opts.httpServer (the FLOW-map read-face serves over it)");
   }
   const p = await prepareNodeBoot(opts);
+  // ── The WHO plane at a WAYFARER — recognition for a vessel that holds no face to lose ──
+  // A Herm carries a Place DID and NO persona: there are no local human keys to steal at a crossroads. That
+  // makes it the vessel with the least to risk and the most to gain from the board — it already recognises
+  // BANS (the antigen ring rides its carriage), so reading the WHO plane completes the pair: it recognises
+  // the presenters those bans name. The cap cannot betray the asymmetry, because it holds no card to publish.
+  const hermCrossroads = await materializeSharedLarDoc(p.repo, crossroadsDocUrl(p.nexusPubkey), "@crossroads");
   const herm = await composeHerm({
+    extraCaps: [whoFaceCap({
+      repo: p.repo, crossroadsHandle: hermCrossroads, nexusPubkey: p.nexusPubkey, residency: p.residency,
+    })],
     keel:        p.orchestration.keel,
     openDaemon:  p.openDaemon,
     wireVerbs:   p.wireVerbs,

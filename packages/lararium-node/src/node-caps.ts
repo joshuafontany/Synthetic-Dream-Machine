@@ -130,6 +130,10 @@ export interface HermStackDeps extends DaemonCapDeps {
   /** The HELD bulb this Herm serves by cid over the public floor. Absent → no `/bulb/*` face (a Herm with no
    *  genesis to hand). Present → a stranger pulls it + kindles their OWN sovereign hearth (serve fire, never key). */
   readonly bulb?:          BulbArtifact;
+  /** Role caps composed ALONGSIDE the wayfarer stack — the same channel `composeCoreVessel` opens to the
+   *  hearth and the leaf, so all three vessels differ ONLY by what their opener passes, never by a forked
+   *  cap list. A parity gap can then only ever read as an extraCaps gap. */
+  readonly extraCaps?:     readonly CapModule[];
   readonly onLog?:         (line: string) => void;
 }
 
@@ -179,6 +183,7 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
       httpServer: d.httpServer, bulb: d.bulb, signerSeed: d.signerSeed, storageDir: d.storageDir,
       ...(d.onLog ? { onLog: d.onLog } : {}),
     })] : []),
+    ...(d.extraCaps ?? []),
   ]);
   return {
     vessel,
