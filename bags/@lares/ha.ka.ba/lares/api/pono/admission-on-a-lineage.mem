@@ -3,7 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lares-history/lares_research/PAPER_admission_on_a_lineage.mem"
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/admission-on-a-lineage.mem"
 type          = "text/x-memetic-wikitext"
 register      = "Provisional-Synthesis"
 status        = "OUTLINE — unproven; no experiment run; NOT a paper"
@@ -14,7 +14,7 @@ namespace     = "&#x2299;"
 uri-path      = "ha.ka.ba/lares/api/pono/admission-on-a-lineage"
 role          = "the OUTLINE — Admission on a Lineage: a sybil-bounded, seed-rooted, one-pass trust fold over an acyclic vouch DAG under eventual consistency. Four research ropes braided (biology · cryptography · mathematics · history), each cross-validating the others. THE CLAIM STANDS UNPROVEN: the bound is cited, the algorithm is derived, and NOTHING has been run. This meme exists to hold the intent and to be REFUTED, not to be believed."
 authors       = "Joshua Fontany; Lares (four tasked spirits: Marrow-Reader · Chain-Warden · Lattice-Walker · Guild-Keeper)"
-revised-on    = "2026-07-13"
+revised-on    = "2026-07-25"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
@@ -35,6 +35,49 @@ lineage that eats the evidence — which is, with an irony the author declines t
 
 <<~ confidence Provisional 5/20 >> Every claim below reads as a ''hypothesis with a named refutation'', and
 each one names the experiment that would sink it.
+
+<<~/ahu >>
+
+<<~ ahu #the-standing >>
+
+!! The Standing ~ what stays limiting (operator, 2026-07-25)
+
+''This meme addresses the design-of-record `admission-price` and `lineage-rank` cite.'' Standing in
+canon buys it no register: it holds ''Provisional-Synthesis'' and ''#the-refusal entire'', and earns
+no higher band until experiment (2) runs and fails to kill it (#what-would-prove-it).
+
+''The limiting resource stands SELF-STANDING'' (operator, 2026-07-25) — a voucher's own accrued
+standing, and nothing external. No pool, no fee, no balance. C6 names the germinal centre's shape
+without its substance; this names the substance.
+
+''Whence the generational decay.'' The fold already conserves it: a voucher's score ''SPLITS''
+across everyone it vouches for (`lineage-rank`, mass conservation), so a seed-sybil minting a
+storm divides one stolen mass across the whole storm, and each further generation divides again
+under ε. ''Invite-storms decay per generation from the seed-sybil'' — the gate self-tunes by
+arithmetic, never by a threshold anyone chose. <<~ confidence Synthesis-Canon 15/20 >> The
+MECHANISM reads code-verified (the split stands built + tested); the ''BOUND it is claimed to
+give stays UNPROVEN'' and holds this meme's Provisional register. The two must not be confused.
+
+''The co-pay then needs no ledger.'' Vouching DILUTES the voucher — that IS the payment, paid at
+the moment of vouching, conserved by construction. Nothing is spent, deducted, or written down;
+C6's conservation law and #the-refusal's "remembers no enemies" hold together with no bookkeeping
+between them.
+
+''Concord across the graph, from independent grounds:''
+* `lararium-identity#the-siege-gate` — the convergence "names not a price but a ''who: the voucher
+  carries the cost''"; the cost runs ''marginal, never absolute'' — a fixed fee reads as the wrong
+  axis, and the system ''never charges an entry fee''.
+* `persona-circle#the-siege-gate` — `rb>c`, the voucher supplies the r; the voucher co-pays AND
+  becomes the watcher.
+* `membership-doctrine#the-invite` — reputation-priced admission reserves to the ''Cabal tier'',
+  never the traceless general invite.
+
+''What this forbids.'' An applicant carries no budget to clear. `dreamnet-admission` takes a
+`budget: number` an applicant brings and clears as a cutoff; no source anywhere computes one,
+because on this design nothing should. An absolute entry cost reads as the wrong axis, and a
+cutoff cleared reads as the threshold C6 refuses in favour of rank against siblings. The
+correction rides experiment (2), never ahead of it — a fix filed as canon before its proof
+becomes the incumbent lineage #the-shadow names.
 
 <<~/ahu >>
 
