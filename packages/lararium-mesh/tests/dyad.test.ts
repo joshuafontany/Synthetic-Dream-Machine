@@ -11,8 +11,8 @@
 import { describe, test, expect } from "vitest";
 import {
   dyadId, dyadSlotKey, dyadFromEdge, writeDyad, dyadsFromDoc,
-  dyadsOfVeil, dyadsOnVessel, fleetUnderPetname, fleetsOf, fleetSpan,
-  gatherDyad, ungatherDyad, dyadPetnameResolver,
+  dyadsOnVessel, fleetOfGroup, fleetsOf, fleetSpan,
+  nameFleet, unnameFleet, fleetPetnameResolver,
   emptyLarDoc, type DyadRecord, type LarDoc,
 } from "../src/index.js";
 import type { DeviceDelegationTiddler } from "../src/device-delegation.js";
@@ -21,6 +21,9 @@ const VESSEL_A = "0xaa".padEnd(66, "1");
 const VESSEL_B = "0xbb".padEnd(66, "2");
 const VEIL_WORK = "0xcc".padEnd(66, "3");
 const VEIL_PLAY = "0xdd".padEnd(66, "4");
+const VEIL_AWAY = "0xee".padEnd(66, "5");   // a DIFFERENT veil key — a veil never spans vessels
+const GROUP_ME     = "persona-group-me";
+const GROUP_MASKED = "persona-group-masked";
 
 /** An edge shaped as the delegation builder produces one — only the fields a dyad reads matter here. */
 function edge(vesselDid: string, veilDid: string): DeviceDelegationTiddler {
@@ -83,14 +86,17 @@ describe("N dyads live on ONE vessel", () => {
     expect(dyadsFromDoc(docOf([d, d]))).toHaveLength(1);
   });
 
-  test("the two projections read the two axes", () => {
+  // Only ONE projection reads at this layer. A veil key never spans vessels, so "this face's other places"
+  // asks a question the infra layer refuses to answer — which is the unlinkability the layer exists for.
+  // Gathering across places belongs one layer up, to the PersonaGroup binding.
+  test("a vessel's faces read off the infra layer; a face's other places do NOT", () => {
     const all = [
       dyadFromEdge(edge(VESSEL_A, VEIL_WORK)),
       dyadFromEdge(edge(VESSEL_A, VEIL_PLAY)),
-      dyadFromEdge(edge(VESSEL_B, VEIL_WORK)),
+      dyadFromEdge(edge(VESSEL_B, VEIL_AWAY)),
     ];
-    expect(dyadsOfVeil(all, VEIL_WORK)).toHaveLength(2);      // one face, two places
     expect(dyadsOnVessel(all, VESSEL_A)).toHaveLength(2);     // one place, two faces
+    expect(dyadsOnVessel(all, VESSEL_B)).toHaveLength(1);
   });
 });
 
@@ -120,48 +126,51 @@ describe("the signature outranks the label", () => {
   });
 });
 
-describe("the fleet evaluates as a closure and stores nothing", () => {
-  const work = dyadFromEdge(edge(VESSEL_A, VEIL_WORK));
-  const play = dyadFromEdge(edge(VESSEL_A, VEIL_PLAY));
-  const away = dyadFromEdge(edge(VESSEL_B, VEIL_WORK));
-  const all  = [work, play, away];
+describe("the fleet closes over the BINDING, never over a label", () => {
+  const work = dyadFromEdge(edge(VESSEL_A, VEIL_WORK), GROUP_ME);
+  const away = dyadFromEdge(edge(VESSEL_B, VEIL_AWAY), GROUP_ME);
+  const play = dyadFromEdge(edge(VESSEL_A, VEIL_PLAY), GROUP_MASKED);
+  const loose = dyadFromEdge(edge(VESSEL_B, VEIL_PLAY));            // bound to nothing
+  const all = [work, away, play, loose];
 
-  // The human's OWN private labels do the gathering — never a key. So a fleet may span faces, and the
-  // gathering belongs to the reader alone; nothing on any doc names it.
-  const labels = new Map([[work.dyadId, "me"], [away.dyadId, "me"], [play.dyadId, "masked"]]);
-  const petnameOf = (id: string) => labels.get(id);
-
-  test("gathers by the CHOSEN label, across faces and across vessels", () => {
-    const me = fleetUnderPetname(all, "me", petnameOf);
+  test("★ the group gathers locally-unique dyads across vessels — the bridge the infra layer refuses ★", () => {
+    const me = fleetOfGroup(all, GROUP_ME);
     expect(me).toHaveLength(2);
+    // two DIFFERENT veil keys on two different vessels, gathered by the group's keys alone
+    expect(new Set(me.map((d) => d.ref.veilDid))).toEqual(new Set([VEIL_WORK, VEIL_AWAY]));
     expect(new Set(me.map((d) => d.ref.vesselDid))).toEqual(new Set([VESSEL_A, VESSEL_B]));
-
-    const masked = fleetUnderPetname(all, "masked", petnameOf);
-    expect(masked).toHaveLength(1);
-    expect(masked[0]!.ref.veilDid).toBe(VEIL_PLAY);   // a different face, deliberately a different fleet
   });
 
-  test("an UNLABELLED dyad joins no fleet — absence never reads as a default membership", () => {
-    const lonely = dyadFromEdge(edge(VESSEL_B, VEIL_PLAY));
-    expect(fleetUnderPetname([...all, lonely], "me", petnameOf)).toHaveLength(2);
-    expect(fleetsOf([...all, lonely], petnameOf).size).toBe(2);
-    expect([...fleetsOf([...all, lonely], petnameOf).keys()].sort()).toEqual(["masked", "me"]);
+  test("a second group on the SAME vessel stays a separate fleet", () => {
+    expect(fleetOfGroup(all, GROUP_MASKED)).toHaveLength(1);
+    expect(fleetOfGroup(all, GROUP_MASKED)[0]!.ref.veilDid).toBe(VEIL_PLAY);
   });
 
-  test("an empty or blank label gathers nothing rather than everything", () => {
-    expect(fleetUnderPetname(all, "", petnameOf)).toEqual([]);
-    expect(fleetUnderPetname(all, "   ", petnameOf)).toEqual([]);
+  test("an UNBOUND dyad joins no fleet — absence never reads as default membership", () => {
+    expect(fleetsOf(all).size).toBe(2);
+    expect([...fleetsOf(all).values()].flat()).not.toContain(loose);
   });
 
-  // The number that decides whether exit means anything: a fleet on one vessel dies with that vessel.
+  test("a blank group gathers nothing rather than everything", () => {
+    expect(fleetOfGroup(all, "")).toEqual([]);
+    expect(fleetOfGroup(all, "   ")).toEqual([]);
+  });
+
   test("fleetSpan counts DISTINCT vessels — the reach that makes leaving cheap", () => {
-    expect(fleetSpan(fleetUnderPetname(all, "me", petnameOf))).toBe(2);
-    expect(fleetSpan(fleetUnderPetname(all, "masked", petnameOf))).toBe(1);
+    expect(fleetSpan(fleetOfGroup(all, GROUP_ME))).toBe(2);
+    expect(fleetSpan(fleetOfGroup(all, GROUP_MASKED))).toBe(1);
     expect(fleetSpan([])).toBe(0);
+  });
+
+  test("a forged record naming a group it never joined stays a CLAIM — the pointer carries no authority", () => {
+    // Nothing here can stop a record naming a group; the binding's authority sits in the group's own
+    // sentinel membership. This test pins the honest limit rather than pretending the pointer verifies.
+    const forged = dyadFromEdge(edge(VESSEL_B, VEIL_PLAY), GROUP_ME);
+    expect(fleetOfGroup([...all, forged], GROUP_ME)).toHaveLength(3);
   });
 });
 
-describe("the fleet LABEL store — what supplies the closure's resolver", () => {
+describe("the fleet NAME store — usable, and never a membership", () => {
   /** A store standing in for the platform seam (node fs / browser IDB). */
   function memStore() {
     const m = new Map<string, string>();
@@ -174,45 +183,38 @@ describe("the fleet LABEL store — what supplies the closure's resolver", () =>
     };
   }
 
-  const work = dyadFromEdge(edge(VESSEL_A, VEIL_WORK));
-  const away = dyadFromEdge(edge(VESSEL_B, VEIL_WORK));
+  const work = dyadFromEdge(edge(VESSEL_A, VEIL_WORK), GROUP_ME);
+  const away = dyadFromEdge(edge(VESSEL_B, VEIL_AWAY), GROUP_ME);
 
-  test("gathering labels a relationship, and the resolver feeds the closure end-to-end", async () => {
+  test("a fleet reads back under the human's own name", async () => {
     const store = memStore();
-    await gatherDyad(store, work.dyadId, "  me  ");     // trimmed on the way in
-    await gatherDyad(store, away.dyadId, "me");
-
-    const resolve = await dyadPetnameResolver(store);
-    const fleet = fleetUnderPetname([work, away], "me", resolve);
-    expect(fleet).toHaveLength(2);
-    expect(fleetSpan(fleet)).toBe(2);
+    await nameFleet(store, GROUP_ME, "  my crew  ");                // trimmed on the way in
+    const resolve = await fleetPetnameResolver(store);
+    expect(resolve(GROUP_ME)).toBe("my crew");
+    expect(fleetSpan(fleetOfGroup([work, away], GROUP_ME))).toBe(2);
   });
 
-  test("a BLANK label refuses rather than silently erasing a gathering", async () => {
+  test("★ RENAMING moves a label and never a membership ★", async () => {
     const store = memStore();
-    await gatherDyad(store, work.dyadId, "me");
-    await expect(gatherDyad(store, work.dyadId, "   ")).rejects.toThrow(/blank label/);
-    expect(await store.get(work.dyadId)).toBe("me");    // the label survived the refusal
+    await nameFleet(store, GROUP_ME, "my crew");
+    await nameFleet(store, GROUP_ME, "the other one");
+    expect(fleetOfGroup([work, away], GROUP_ME)).toHaveLength(2);   // untouched by the rename
   });
 
-  test("ungathering drops the LABEL and never the relationship", async () => {
+  test("a BLANK name refuses rather than silently erasing one", async () => {
     const store = memStore();
-    await gatherDyad(store, work.dyadId, "me");
-    await ungatherDyad(store, work.dyadId);
-
-    const resolve = await dyadPetnameResolver(store);
-    expect(fleetUnderPetname([work], "me", resolve)).toEqual([]);   // out of the fleet …
-    expect(dyadsFromDoc(docOf([work]))).toHaveLength(1);            // … and still a dyad
+    await nameFleet(store, GROUP_ME, "my crew");
+    await expect(nameFleet(store, GROUP_ME, "   ")).rejects.toThrow(/blank label/);
+    expect(await store.get(GROUP_ME)).toBe("my crew");
   });
 
-  // The resolver snapshots ONCE, so a fleet computes over data the caller already holds rather than a
-  // lookup that could fail halfway and hand back half a fleet.
-  test("the resolver reads a SNAPSHOT — a later write cannot change a fleet mid-computation", async () => {
+  test("UNNAMING drops the label and the fleet SURVIVES — the binding decides, not the name", async () => {
     const store = memStore();
-    await gatherDyad(store, work.dyadId, "me");
-    const resolve = await dyadPetnameResolver(store);
+    await nameFleet(store, GROUP_ME, "my crew");
+    await unnameFleet(store, GROUP_ME);
 
-    await gatherDyad(store, away.dyadId, "me");                     // written AFTER the snapshot
-    expect(fleetUnderPetname([work, away], "me", resolve)).toHaveLength(1);
+    const resolve = await fleetPetnameResolver(store);
+    expect(resolve(GROUP_ME)).toBeUndefined();                      // nameless …
+    expect(fleetOfGroup([work, away], GROUP_ME)).toHaveLength(2);   // … and still a fleet
   });
 });

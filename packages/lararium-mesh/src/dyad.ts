@@ -2,22 +2,31 @@
  * dyad — the vessel×veil RELATIONSHIP, made first-class.
  *
  * A dyad names neither a place nor a person: it names ONE HUMAN'S RELATIONSHIP WITH ONE DEVICE. That reading
- * carries the whole model. A vessel-key names the PLACE and stays singular per install; a veil-key names a
- * FACE and a human holds many; the dyad names what stands BETWEEN them, and a single vessel holds N of them.
+ * carries the whole model. A vessel-key names the PLACE; a veil-key names a face AS HELD ON THAT PLACE; the
+ * dyad names what stands BETWEEN them, and a single vessel holds N of them.
+ *
+ * THE VEIL KEY STAYS LOCAL. Every vessel×veil pair reads UNIQUE at the infra layer — a veil key never spans
+ * devices, so no infra-layer key ever links one human's places to each other. Nothing at this layer can be
+ * correlated into a person, which is exactly the property the layer exists to hold.
  *
  * WHY THE RELATIONSHIP RATHER THAN EITHER PARTY. Bind identity to a vessel and a human loses themselves when
  * a device dies. Bind it to a veil alone and the vessel carrying it stays anonymous to the model. The dyad
  * holds both ends without merging them — the two-key atom's edge, given a name of its own.
  *
- * ── THE FLEET RIDES AS A CLOSURE, NEVER AS A STORED GROUP ────────────────────────────────────────────────
- * A PersonaGroup gathers a FLEET of dyads under one internal pet-name the human chose. It gathers by that
- * chosen label rather than by any key, so a human may group dyads across faces, and the grouping stays
- * theirs. Per `group-as-closure`, the fleet EVALUATES AS A QUERY and never instantiates: nothing stores a
- * fleet object that could be seized, forged, or synced. `fleetUnderPetname` runs that query.
+ * ── THE PERSONA BRIDGES LOCAL INFRA TO THE SOCIAL LAYER, INTERNAL FIRST ─────────────────────────────────
+ * Because infra keys correlate to nothing, SOMETHING must gather a human's places back together — and that
+ * something belongs one layer up, where the human stands rather than the machine. The PersonaGroup holds its
+ * OWN keys and BINDS the locally-unique dyads into one fleet. The binding runs cryptographic (the group's
+ * sentinel membership in the authority graph), never a label anyone could assert.
  *
- * The label stays PRIVATE and LOCAL — the reader's own name for their own relationships. A public Handle
- * rides separately as an OPTIONAL public pet-name over a fleet; the internal label never crosses a wire, so
- * a captured vessel spills the dyads admitted TO IT and never the human's map of themselves.
+ * THREE NAMES, THREE JOBS, and none substitutes for another:
+ *   · the BINDING — the PersonaGroup's keys, which make the fleet a fact rather than a claim
+ *   · the INTERNAL name — one usable label over that group, private and local, for the human alone
+ *   · the HANDLE — an OPTIONAL public pet-name over the same group, and the only one that ever federates
+ *
+ * Per `group-as-closure`, the fleet EVALUATES AS A QUERY over that binding and never instantiates: nothing
+ * stores a fleet object to seize, forge, or sync. The internal name never crosses a wire, so a captured
+ * vessel spills the dyads admitted TO IT and never the human's map of themselves.
  *
  * ── WHAT A DYAD ID DOES AND DOES NOT REVEAL ─────────────────────────────────────────────────────────────
  * The id content-addresses the ordered pair, so two parties knowing both keys derive the identical id while
@@ -59,6 +68,12 @@ export interface DyadRecord {
   readonly ref:       DyadRef;
   /** The device-delegation the veil signed over this vessel — what makes the relationship real. */
   readonly edge:      DeviceDelegationTiddler;
+  /**
+   * The PersonaGroup this dyad binds INTO, or null while it stands unbound. A POINTER only: the binding's
+   * authority lives in the group's sentinel membership, never in this record. A record naming a group it
+   * holds no membership in claims a fleet rather than joining one, so a reader that matters re-checks.
+   */
+  readonly personaGroupId: string | null;
 }
 
 /** Lowercase a DID once, so two spellings of one key never derive two ids. */
@@ -88,9 +103,9 @@ export function dyadSlotKey(id: string): string {
  * than accepting one alongside it, because two sources for one fact eventually disagree, and the signed one
  * must win. An edge names its operator (the veil that signed) and its device (the vessel that carries).
  */
-export function dyadFromEdge(edge: DeviceDelegationTiddler): DyadRecord {
+export function dyadFromEdge(edge: DeviceDelegationTiddler, personaGroupId: string | null = null): DyadRecord {
   const ref: DyadRef = { vesselDid: edge.deviceDid, veilDid: edge.operatorDid };
-  return { kind: DYAD_ID_DOMAIN, dyadId: dyadId(ref), ref, edge };
+  return { kind: DYAD_ID_DOMAIN, dyadId: dyadId(ref), ref, edge, personaGroupId };
 }
 
 /**
@@ -112,7 +127,9 @@ function coerceDyad(parsed: unknown): DyadRecord | null {
   const e = edge as Record<string, unknown>;
   if (e["kind"] !== "device-delegation") return null;
   if (typeof e["operatorDid"] !== "string" || typeof e["deviceDid"] !== "string") return null;
-  const record = dyadFromEdge(edge as unknown as DeviceDelegationTiddler);
+  const group = typeof p["personaGroupId"] === "string" && p["personaGroupId"].length > 0
+    ? p["personaGroupId"] : null;
+  const record = dyadFromEdge(edge as unknown as DeviceDelegationTiddler, group);
   // A slot claiming an id its own edge does not produce reads as torn — drop it rather than trust the label
   // over the signature. The id costs nothing to recompute, so nothing excuses trusting the stored one.
   if (typeof p["dyadId"] === "string" && p["dyadId"] !== record.dyadId) return null;
@@ -135,12 +152,6 @@ export function dyadsFromDoc(doc: LarDoc | undefined | null): DyadRecord[] {
   return out;
 }
 
-/** The dyads one VEIL holds across every vessel — a face's reach. */
-export function dyadsOfVeil(dyads: readonly DyadRecord[], veilDid: LarDid): DyadRecord[] {
-  const want = normalizeDid(veilDid);
-  return dyads.filter((d) => normalizeDid(d.ref.veilDid) === want);
-}
-
 /** The dyads one VESSEL carries across every veil — a place's faces. */
 export function dyadsOnVessel(dyads: readonly DyadRecord[], vesselDid: LarDid): DyadRecord[] {
   const want = normalizeDid(vesselDid);
@@ -148,93 +159,77 @@ export function dyadsOnVessel(dyads: readonly DyadRecord[], vesselDid: LarDid): 
 }
 
 /**
- * THE FLEET — the closure a PersonaGroup names, evaluated here and never stored.
+ * THE FLEET — the closure the PersonaGroup binding names, evaluated here and never stored.
  *
- * The human labels relationships; the dyads carrying one label form the fleet. Grouping runs off that CHOSEN
- * label rather than off any key, so a human may gather dyads across faces and the gathering stays theirs
- * alone. `petnameOf` reads the caller's own private store, which is why no fleet object exists to seize.
+ * It gathers by the GROUP, because the group's keys are what make a fleet a fact. A label gathers nothing:
+ * anyone can write a label, and a fleet assembled from labels would let a forged record walk into a human's
+ * own map of themselves. The binding decides membership; the internal name only makes it usable.
  *
- * An unlabelled dyad belongs to no fleet — absence of a label reads as an ungathered relationship, never as
+ * An UNBOUND dyad joins no fleet — absence of a binding reads as a relationship not yet gathered, never as
  * membership in a default group.
  */
-export function fleetUnderPetname(
-  dyads: readonly DyadRecord[],
-  petname: string,
-  petnameOf: (dyadId: string) => string | undefined,
-): DyadRecord[] {
-  const want = petname.trim();
+export function fleetOfGroup(dyads: readonly DyadRecord[], personaGroupId: string): DyadRecord[] {
+  const want = personaGroupId.trim();
   if (want.length === 0) return [];
-  return dyads.filter((d) => petnameOf(d.dyadId)?.trim() === want);
+  return dyads.filter((d) => d.personaGroupId === want);
 }
 
 /**
- * Every fleet the human has gathered, as `petname -> dyads`. A convenience over the same closure — it still
- * computes, still stores nothing, and still reads only the caller's own labels.
+ * Every fleet these dyads bind into, as `personaGroupId -> dyads`. The same closure, run once across all
+ * bindings — it still computes, and still stores nothing.
  */
-export function fleetsOf(
-  dyads: readonly DyadRecord[],
-  petnameOf: (dyadId: string) => string | undefined,
-): Map<string, DyadRecord[]> {
+export function fleetsOf(dyads: readonly DyadRecord[]): Map<string, DyadRecord[]> {
   const out = new Map<string, DyadRecord[]>();
   for (const d of dyads) {
-    const label = petnameOf(d.dyadId)?.trim();
-    if (!label) continue;                       // ungathered stays ungathered
-    const bucket = out.get(label);
-    if (bucket) bucket.push(d); else out.set(label, [d]);
+    if (!d.personaGroupId) continue;             // unbound stays ungathered
+    const bucket = out.get(d.personaGroupId);
+    if (bucket) bucket.push(d); else out.set(d.personaGroupId, [d]);
   }
   return out;
 }
 
-/**
- * How many DISTINCT vessels a fleet spans — the number that decides whether exit means anything.
- *
- * A fleet gathered entirely on one vessel provides no continuity when that vessel dies or turns hostile; the
- * same fleet spread across several provides it without asking anyone's permission. Exit disciplines a holder
- * only while leaving stays cheap, and leaving stays cheap only while the fleet reaches past one place.
- */
 export function fleetSpan(fleet: readonly DyadRecord[]): number {
   return new Set(fleet.map((d) => normalizeDid(d.ref.vesselDid))).size;
 }
 
 // ── The fleet LABEL store — what `fleetUnderPetname` reads ────────────────────────────────────────────────
 //
-// TWO LABELS, TWO OBJECTS, and they do not collapse. `OwnPersonaPetnameStore` labels a VEIL — one face,
-// keyed by its handle-index ("my work face"). This labels a DYAD — one relationship ("gather this one into
-// my work fleet"). A human who gathers only whole faces will see the two agree; a human who gathers CERTAIN
-// relationships across faces needs the finer key, and the model admits that gathering, so the store must too.
+// THE NAME SITS ON THE GROUP, NEVER ON THE BINDING. The PersonaGroup's keys decide WHICH dyads belong; this
+// store only makes that fleet addressable to the human who holds it ("my work fleet"). Renaming moves a label
+// and never a membership — which is the whole reason the two stay apart. Its sibling
+// `OwnPersonaPetnameStore` labels a veil on one vessel; this labels a fleet across them.
 //
 // PRIVATE AND LOCAL, like its sibling. The label carries no authority, never federates, and never crosses a
 // wire — it holds the human's own map of themselves, which a captured vessel must not spill.
 
-/** How a runtime persists the human's PRIVATE fleet labels — a `{dyadId -> petname}` map, freely renamable. */
-export interface DyadPetnameStore {
-  get(dyadId: string): Promise<string | undefined>;
-  set(dyadId: string, petname: string): Promise<void>;
-  clear(dyadId: string): Promise<void>;
-  /** Every labelled relationship — `[dyadId, petname]` pairs. */
+/** How a runtime persists the human's PRIVATE fleet names — a `{personaGroupId -> petname}` map. */
+export interface FleetPetnameStore {
+  get(personaGroupId: string): Promise<string | undefined>;
+  set(personaGroupId: string, petname: string): Promise<void>;
+  clear(personaGroupId: string): Promise<void>;
+  /** Every named fleet — `[personaGroupId, petname]` pairs. */
   entries(): Promise<ReadonlyArray<readonly [string, string]>>;
 }
 
-/** Gather one relationship into a named fleet. A blank label REFUSES rather than silently erasing one. */
-export async function gatherDyad(store: DyadPetnameStore, id: string, petname: string): Promise<void> {
+/** Name a fleet. A blank label REFUSES rather than silently erasing one; naming never alters membership. */
+export async function nameFleet(store: FleetPetnameStore, personaGroupId: string, petname: string): Promise<void> {
   const trimmed = petname.trim();
   if (trimmed.length === 0) {
-    throw new Error("gatherDyad: a blank label names no fleet — use `ungatherDyad` to drop one.");
+    throw new Error("nameFleet: a blank label names no fleet — use `unnameFleet` to drop one.");
   }
-  await store.set(id, trimmed);
+  await store.set(personaGroupId, trimmed);
 }
 
-/** Drop a relationship out of its fleet. The dyad survives, ungathered — never deleted by losing a label. */
-export async function ungatherDyad(store: DyadPetnameStore, id: string): Promise<void> {
-  await store.clear(id);
+/** Drop a fleet's private name. The fleet SURVIVES, unnamed — the binding decides membership, not the label. */
+export async function unnameFleet(store: FleetPetnameStore, personaGroupId: string): Promise<void> {
+  await store.clear(personaGroupId);
 }
 
 /**
- * Snapshot the labels into the pure resolver `fleetUnderPetname`/`fleetsOf` take. Reading the whole map ONCE
- * keeps the closures synchronous and side-effect-free, so a fleet stays a computation over data the caller
- * already holds rather than a lookup that could fail halfway through and yield half a fleet.
+ * Snapshot the names once, so rendering a set of fleets stays synchronous and side-effect-free rather than a
+ * lookup that could fail halfway through and leave half of them nameless.
  */
-export async function dyadPetnameResolver(store: DyadPetnameStore): Promise<(id: string) => string | undefined> {
+export async function fleetPetnameResolver(store: FleetPetnameStore): Promise<(personaGroupId: string) => string | undefined> {
   const map = new Map(await store.entries());
   return (id: string) => map.get(id);
 }
