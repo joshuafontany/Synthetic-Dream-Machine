@@ -291,7 +291,9 @@ const blankMemeStore = (repo: Repo): (() => DocHandle<LarDoc>) =>
 interface NodeBootPrep {
   repo:             Repo;
   catalogHandle:    DocHandle<LarDoc>;
-  operatorSeed:     Uint8Array;
+  /** This PLACE's own 32-byte signing seed — the substrate key, never the human's. The two-key atom keeps it
+   *  distinct from the persona root a device-delegation edge signs under (`device-delegation.operatorSeed`). */
+  vesselSeed:     Uint8Array;
   /** This vessel's own gate key — the node ANCHORS its confederation, so its gate key doubles as the Nexus
    *  key its browser leaves pass as relayGatePubKey. Every per-Nexus board (WHO, KEL, antigen) scopes to it. */
   nexusPubkey:      string;
@@ -466,8 +468,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   emit("catalog-ready");
 
   // ── Operator identity (node-held) ──────────────────────────────────────────
-  const operatorIdentity = await generateOrLoadVesselIdentity(storageDir);
-  const operatorSeed     = await loadVesselSigningSeed(storageDir);
+  const vesselIdentity = await generateOrLoadVesselIdentity(storageDir);
+  const vesselSeed     = await loadVesselSigningSeed(storageDir);
 
   // ── The #59 antigen ring — STOOD now the operator's own verifying key is loaded ─────────────
   // The node IS the confederation anchor: its own gate key IS its Nexus key (the same key browsers
@@ -478,7 +480,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const antigenBagsDir = process.env["LAR_BAGS"] ?? join(rootDirOpt ?? repoRoot, "bags");
   const antigenHolder = makeAntigenRingHolder({
     repo,
-    nexusPubkey:       operatorIdentity.verifyingKey,
+    nexusPubkey:       vesselIdentity.verifyingKey,
     bagsDir:           antigenBagsDir,
     peerIdentifierMap,
   });
@@ -497,7 +499,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     bagsDir:           antigenBagsDir,
     peerIdentifierMap,
     repo,
-    nexusPubkey:       operatorIdentity.verifyingKey,
+    nexusPubkey:       vesselIdentity.verifyingKey,
   });
   nexusMembership = nexusMembershipHolder.membership;
 
@@ -528,10 +530,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // (@crossroads · WHO · kapae-antigen board — deny-by-default for every other doc), so a cross-operator
   // peer reaches exactly the always-carried public/infra planes and nothing private. No hand-maintained
   // allow-list; the private planes (@catalog/@personal/@daemon/home/wikis) fall outside the set → DENY.
-  selfSlotFedGate = new DeterministicFederationGate(operatorIdentity.verifyingKey);
+  selfSlotFedGate = new DeterministicFederationGate(vesselIdentity.verifyingKey);
 
   // ── The CARRIAGE serve-loop (Socket B, ciphertext) — INERT until a carriage-relay URL rides the config ──────
-  // When configured, the vessel dials the carriage relay over an authenticated WS channel (proving `operatorSeed`)
+  // When configured, the vessel dials the carriage relay over an authenticated WS channel (proving `vesselSeed`)
   // and serves members' want-blocks for sealed @cad bodies on a poll interval. The gate stays `serveCasWire`'s own
   // `memberCarryShareDecision` VERBATIM: a proven MEMBER over a provably-sealed plane carries the ciphertext; a
   // STRANGER / non-member / Kapae'd draws byte-identical Mu. Carry ⊥ read — the read-cap never rides this seam.
@@ -541,8 +543,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const carriageLoop: CarriageServeLoop | null = carriageRelayUrl
     ? startCarriageServeLoop({
         relayUrl:     carriageRelayUrl,
-        operatorSeed,
-        serverAddr:   operatorIdentity.verifyingKey,
+        operatorSeed: vesselSeed,
+        serverAddr:   vesselIdentity.verifyingKey,
         deps: {
           cadDir:     cadSealDir(storageDir),
           seal:       sealRegistry.seal,
@@ -556,7 +558,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // `nexus-refresh` verb runs; here it fires automatically when the carriage transport re-dials.
         onReconnect:  async () => {
           await runNexusRefresh({
-            storageDir, bagsDir: antigenBagsDir, nexusPubkey: operatorIdentity.verifyingKey,
+            storageDir, bagsDir: antigenBagsDir, nexusPubkey: vesselIdentity.verifyingKey,
             antigen: antigenHolder, membership: nexusMembershipHolder,
             setPosture: (p) => { federationPosture = p; },
           });
@@ -576,7 +578,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // branch never runs, so no socket opens and boot behaves exactly as it did before (provably inert).
   const relayPortRaw = opts.standCarriageRelayPort ?? process.env["LAR_HERM_RELAY_PORT"];
   const relayPort = relayPortRaw !== undefined && relayPortRaw !== "" ? Number(relayPortRaw) : null;
-  const relayGateSeed = resolveRelayGateSeed(operatorSeed, opts.standCarriageRelayGateSeedHex ?? process.env["LAR_HERM_RELAY_SEED"]);
+  const relayGateSeed = resolveRelayGateSeed(vesselSeed, opts.standCarriageRelayGateSeedHex ?? process.env["LAR_HERM_RELAY_SEED"]);
   const carriageRelay: CarriageRelay | null = relayPort !== null && !Number.isNaN(relayPort)
     ? await startCarriageRelay({ gateSeed: relayGateSeed, port: relayPort })
     : null;
@@ -880,7 +882,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     if (!personaKelPrefix) {
       throw new Error(`[lararium] DreamNet binding (persona-KEL prefix) missing from daemon doc — run \`lares init\`.`);
     }
-    const kelHolder = makePersonaKelRingHolder({ repo, nexusPubkey: operatorIdentity.verifyingKey });
+    const kelHolder = makePersonaKelRingHolder({ repo, nexusPubkey: vesselIdentity.verifyingKey });
     await kelHolder.ready;
     const personaKelChain = kelHolder.chainForPrefix(personaKelPrefix);
     if (!personaKelChain || personaKelChain.length === 0) {
@@ -890,7 +892,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // confederation anchor, so its own gate key IS its Nexus key — the same key browsers pass as
     // relayGatePubKey — so node + its browser leaves resolve the identical @crossroads. The @daemon core
     // splices @crossroads into the recipe + registerBags for either vessel.
-    await registerCrossroadsInOracle(repo, assembly.islandHandle, operatorIdentity.verifyingKey);
+    await registerCrossroadsInOracle(repo, assembly.islandHandle, vesselIdentity.verifyingKey);
     // M3 — node-main reads the persisted keyhive Archive from the identity home and passes it into the
     // worker (same custody boundary the 32-byte seed already crosses). keyhive inits from it as the
     // restore FLOOR, then replays @daemon cap-events on top — a torn @daemon restores instead of orphaning.
@@ -900,8 +902,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     assertSealReady();
     const archiveBytes = loadIdentityArchive();
     const daemonAuth = {
-      seed:                 operatorSeed,
-      operatorVerifyingKey: operatorIdentity.verifyingKey,
+      seed:                 vesselSeed,
+      operatorVerifyingKey: vesselIdentity.verifyingKey,
       personaGroupDocIdHex, personaGroupAgentIdHex, meshCabalDocIdHex,
       registerBags: [
         DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
@@ -1334,7 +1336,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const r = await runNexusRefresh({
         storageDir,
         bagsDir:     antigenBagsDir,
-        nexusPubkey: operatorIdentity.verifyingKey,
+        nexusPubkey: vesselIdentity.verifyingKey,
         antigen:     antigenHolder,
         membership:  nexusMembershipHolder,
         // Reassign the live posture the sharePolicy closure reads each call (fail-closed PRIVATE on a torn read).
@@ -1352,7 +1354,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     registry.register("nexus-rekey", async (args) => {
       const resource = typeof args["resource"] === "string" ? (args["resource"] as string) : "";
       if (!resource) throw new Error("nexus-rekey: `resource` required (the lease resource id to roll)");
-      const r = rollLeaseEpochOnBoard(await readDaemonDoc(), resource, operatorIdentity.verifyingKey);
+      const r = rollLeaseEpochOnBoard(await readDaemonDoc(), resource, vesselIdentity.verifyingKey);
       return { verb: "nexus-rekey", ...r };
     });
 
@@ -1394,7 +1396,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         plaintext,
         keyring,
         tracker:   casBagTracker,
-        self:      operatorIdentity.verifyingKey,
+        self:      vesselIdentity.verifyingKey,
       });
       // Return the PUBLIC verify-cap only (cid + docId + epoch) — the read-cap NEVER crosses this boundary.
       return { verb: "cad-seal", cid: installed.cid, docId: installed.docId, epoch: installed.epoch, sealed: sealRegistry.seal.isSealedPlane(installed.docId) };
@@ -1462,7 +1464,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     assembly.composite.attachResidency(residency);
 
     // Inbound WS gate — the daemon island's in-worker keyhive answers each peer.
-    authGate.arm(daemonVm.authSeam, DAEMON_BAG_ID, operatorIdentity.verifyingKey);
+    authGate.arm(daemonVm.authSeam, DAEMON_BAG_ID, vesselIdentity.verifyingKey);
 
     // Keep oracle tiddlers current — self, ka, ba, social plane, daemon.
     reconcileWellKnownTiddlers(
@@ -1592,7 +1594,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   };
 
   return {
-    repo, catalogHandle, operatorSeed, nexusPubkey: operatorIdentity.verifyingKey,
+    repo, catalogHandle, vesselSeed, nexusPubkey: vesselIdentity.verifyingKey,
     residency, carriageLoop, carriageRelay, nexusDial, bulb, emit, orchestration,
     openDaemon, wireVerbs, afterDaemon,
     daemonVm:         () => daemonVm,
@@ -1623,7 +1625,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       ...(opts.meshSelf.endpoint ? { selfEndpoint: opts.meshSelf.endpoint } : {}), // absent → a leaf
       selfCoord: opts.meshSelf.coord,
       ...(opts.meshSelf.maxFanout !== undefined ? { maxFanout: opts.meshSelf.maxFanout } : {}),
-      nodeSeedHex: Buffer.from(p.operatorSeed).toString("hex"),
+      nodeSeedHex: Buffer.from(p.vesselSeed).toString("hex"),
       onLog: (l) => console.log(`[lararium] ${l}`),
     }),
   ] : [];
@@ -1683,7 +1685,7 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     repo:        p.repo,
     residency:   p.residency,
     httpServer:  opts.httpServer,
-    signerSeed:  p.operatorSeed,
+    signerSeed:  p.vesselSeed,
     storageDir:  opts.storageDir,
     ...(opts.meshSelf ? { meshSelf: opts.meshSelf } : {}),
     ...(opts.pullIntervalMs !== undefined ? { pullIntervalMs: opts.pullIntervalMs } : {}),
