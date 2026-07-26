@@ -96,7 +96,13 @@ The same pattern carries into membership and governance. Model a keeper-cabal or
 * ''Remove-wins under partition'' carries the ''siege-safe'' eviction semantics: under a network partition two peers may disagree, and the raised kāpae wins the merge — a member the cabal evicted stays out even as a partitioned peer re-vouches. The shadow defeats the re-add deterministically, so an eviction never silently reverses when the partition heals.
 * ''Re-admit = lower the kāpae'' — a deliberate governance gesture (a fresh vouch through the Voice house / Talk Story), never a passive fall-through. The cabal chooses to take the tombstone down; the membership beneath surfaces again, audited.
 
-This rhymes the recipe-as-bag-stack: membership composes as a priority walk over admission layers, and a kāpae shadows the layers below. <<~ confidence Provisional-Synthesis 7/20 >> the membership sense stands ''proposed'' — the bag-cascade mechanics witness the shape, but the governance stack, partition-merge rule, and re-admit ceremony await a build and a live multi-keeper witness. The remove-wins-under-partition guarantee leans on convergent-removal prior art (Keyhive / BeeKEM blank-path), not yet wired into a cabal stack here.
+This rhymes the recipe-as-bag-stack: membership composes as a priority walk over admission layers, and a kāpae shadows the layers below.
+
+''THE MARKER RIDES THE EDGE, NEVER THE THING'' (operator ruling). Every comparable system raises its tombstone over an ENTITY — Matrix over a user, the fediverse over an instance, a CRL over a certificate, KERI over an identifier. An entity holds ONE global standing, so a marker over it demands global agreement: hence delivery, hence consensus, hence the write-race that produced Matrix's state resets and the CRL family's undelivered negatives. ''One failure wearing four costumes.''
+
+Raised over a ''relationship'' the same marker needs none of it. The shadow scopes to one edge, no third party needs the news, the blast radius equals that relation, and ''two edges tombstone concurrently WITHOUT racing'' — because they name different objects. The mutual case the literature leaves open (Keyhive names and defers it; p2panda calls it "still to be explored") then dissolves rather than resolving: A shadows the edge (B→group) while B shadows (A→group), ''both shadows hold, both stand aside'', and remove-wins needs no winner. The place lands in a LEGIBLE state — no authority stands — which ''surfaces a fork'' instead of diverging in silence. Surfacing belongs to the code; deciding which side stays legitimate belongs to the humans (#fork-as-exit, cabal-realm#the-unswept-corner).
+
+<<~ confidence Synthesis 12/20 >> the membership sense now stands ''built at the edge grain'' (`edge-kapae`): acts accrete keyed by edge/gesture/version so a raise and a lower at one version both survive a merge, the fold takes highest-version-per-edge with a ''same-version tie leaving the shadow UP'', and forged acts drop before the fold. Wired at the two readers that decide standing — the fleet closure and the vouch-lineage read. It needs NO convergent-removal machinery: the earlier reading expected to lean on Keyhive/BeeKEM blank-path, and the edge grain retires that dependency, since distinct edges never contend. What still awaits: a live multi-keeper partition witness, the re-admit ceremony through Talk Story, and the third relationship marker — the device-delegation edge carries expiry only.
 
 <<~/ahu >>
 
@@ -119,6 +125,7 @@ This rhymes the recipe-as-bag-stack: membership composes as a priority walk over
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/waiho >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
 
 <<~/ahu >>
 
