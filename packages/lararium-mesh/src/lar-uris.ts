@@ -340,8 +340,8 @@ export function sessionEventLogUri(sessionId: string): string {
 }
 
 /** deviceDelegationUri(opDid, devDid) → "…/bags/@identities/{opDid}/devices/{devDid}" */
-export function deviceDelegationUri(operatorDid: string, deviceDid: string): string {
-  return `${IDENTITIES_DOC_URI}/${encodeURIComponent(operatorDid)}/devices/${encodeURIComponent(deviceDid)}`;
+export function deviceDelegationUri(personaRootDid: string, deviceDid: string): string {
+  return `${IDENTITIES_DOC_URI}/${encodeURIComponent(personaRootDid)}/devices/${encodeURIComponent(deviceDid)}`;
 }
 
 /** nexusTrustUri("abcdef…") → "…/bags/@identities/trust/nexus/abcdef…" */

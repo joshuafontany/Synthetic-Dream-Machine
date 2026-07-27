@@ -16,7 +16,7 @@
  *
  * Canonical signed string (domain + version tagged for separation; every field strict-
  * charset so no `|` can shift a boundary):
- *   lar-device-delegation/v2|{operatorDid}|{deviceDid}|{deviceVerifyingKey}|{hearthTrueName}|{issuedAt}|{expiresAt}|{boundEpoch}
+ *   lar-device-delegation/v2|{personaRootDid}|{deviceDid}|{deviceVerifyingKey}|{hearthTrueName}|{issuedAt}|{expiresAt}|{boundEpoch}
  *
  * Trust rides the SIGNATURE + the PINNED root, never a doc's write-ACL (confused-deputy
  * guard). Hardened against untrusted input: never throws on
@@ -46,7 +46,7 @@ export type LarDid = string;
 export interface DeviceDelegationTiddler {
   readonly kind:                "device-delegation";
   /** "0x"+hex — the operator root that SIGNED this edge; the verifier checks against it AND the pin. */
-  readonly operatorDid:         LarDid;
+  readonly personaRootDid:         LarDid;
   /** "0x"+hex — the delegate vessel (MUST equal "0x"+deviceVerifyingKey). */
   readonly deviceDid:           LarDid;
   /** raw 32-byte Ed25519 verifying-key hex (64, lowercase) of the delegate vessel. */
@@ -71,12 +71,12 @@ const verifyingKeyFromDid = (did: string): string => (did.startsWith("0x") ? did
 
 type ProofFields = Pick<
   DeviceDelegationTiddler,
-  "operatorDid" | "deviceDid" | "deviceVerifyingKey" | "hearthTrueName" | "issuedAt" | "expiresAt" | "boundEpoch"
+  "personaRootDid" | "deviceDid" | "deviceVerifyingKey" | "hearthTrueName" | "issuedAt" | "expiresAt" | "boundEpoch"
 >;
 
 function delegationProofBytes(d: ProofFields): Uint8Array {
   return new TextEncoder().encode(
-    `${DEVICE_DELEGATION_DOMAIN}|${d.operatorDid}|${d.deviceDid}|${d.deviceVerifyingKey}|${d.hearthTrueName}|${d.issuedAt}|${d.expiresAt}|${d.boundEpoch}`,
+    `${DEVICE_DELEGATION_DOMAIN}|${d.personaRootDid}|${d.deviceDid}|${d.deviceVerifyingKey}|${d.hearthTrueName}|${d.issuedAt}|${d.expiresAt}|${d.boundEpoch}`,
   );
 }
 
@@ -87,7 +87,7 @@ function delegationProofBytes(d: ProofFields): Uint8Array {
  */
 function fieldError(d: Partial<DeviceDelegationTiddler>): string | null {
   if (d.kind !== "device-delegation")                            return "not a device-delegation";
-  if (typeof d.operatorDid !== "string" || !DID_RE.test(d.operatorDid))                 return "operatorDid not 0x+32-byte lowercase hex";
+  if (typeof d.personaRootDid !== "string" || !DID_RE.test(d.personaRootDid))                 return "personaRootDid not 0x+32-byte lowercase hex";
   if (typeof d.deviceVerifyingKey !== "string" || !VK_RE.test(d.deviceVerifyingKey))    return "deviceVerifyingKey not 32-byte lowercase hex";
   if (typeof d.deviceDid !== "string" || d.deviceDid !== didFromVerifyingKey(d.deviceVerifyingKey)) return "deviceDid not bound to deviceVerifyingKey";
   if (typeof d.hearthTrueName !== "string" || !TRUE_NAME_RE.test(d.hearthTrueName))                       return "hearthTrueName has illegal characters";
@@ -99,22 +99,22 @@ function fieldError(d: Partial<DeviceDelegationTiddler>): string | null {
 }
 
 /**
- * Mint a signed device-delegation edge. The operator's 32-byte seed signs; operatorDid
- * derives from that same seed (self-attribution). `issuedAt`/`expiresAt`/`hearthTrueName` are
+ * Mint a signed device-delegation edge. The PERSONA ROOT's 32-byte seed signs, and personaRootDid
+ * derives from that same seed (self-attribution) — the group's key, never the device's. `issuedAt`/`expiresAt`/`hearthTrueName` are
  * caller-supplied (pure, no ambient clock). Throws on malformed inputs — it is the
  * controlled minter, never fed untrusted data.
  */
 export async function buildDeviceDelegation(args: {
-  operatorSeed:       Uint8Array; // operator root 32-byte Ed25519 seed (the signer)
+  personaRootSeed:    Uint8Array; // the PERSONA ROOT's 32-byte Ed25519 seed — the HUMAN's side, and the signer
   deviceVerifyingKey: string;     // raw Ed25519 verifying-key hex (64, lowercase) of the delegate
   hearthTrueName:            string;     // hearth true-name (genesis CID), or "" if place-agnostic
   issuedAt:           string;     // ISO-8601
   expiresAt:          string;     // ISO-8601 — replay backstop (generous is fine; the epoch is the authority)
   boundEpoch:         number;     // the per-resource lease epoch this grant binds to (non-negative integer)
 }): Promise<DeviceDelegationTiddler> {
-  const operatorDid = didFromVerifyingKey(hex(await ed25519.getPublicKeyAsync(args.operatorSeed)));
+  const personaRootDid = didFromVerifyingKey(hex(await ed25519.getPublicKeyAsync(args.personaRootSeed)));
   const fields: ProofFields = {
-    operatorDid,
+    personaRootDid,
     deviceDid:          didFromVerifyingKey(args.deviceVerifyingKey),
     deviceVerifyingKey: args.deviceVerifyingKey,
     hearthTrueName:            args.hearthTrueName,
@@ -125,7 +125,7 @@ export async function buildDeviceDelegation(args: {
   const candidate = { kind: "device-delegation" as const, ...fields, signature: "0".repeat(128) };
   const err = fieldError(candidate);
   if (err) throw new Error(`[device-delegation] cannot mint: ${err}`);
-  const signature = hex(await ed25519.signAsync(delegationProofBytes(fields), args.operatorSeed));
+  const signature = hex(await ed25519.signAsync(delegationProofBytes(fields), args.personaRootSeed));
   return { ...candidate, signature };
 }
 
@@ -154,7 +154,7 @@ export async function verifyDeviceDelegation(
   if (typeof expectedOperatorDid !== "string" || !DID_RE.test(expectedOperatorDid)) {
     return { ok: false, reason: "expectedOperatorDid not 0x+32-byte lowercase hex" };
   }
-  if (edge.operatorDid !== expectedOperatorDid) {
+  if (edge.personaRootDid !== expectedOperatorDid) {
     return { ok: false, reason: "operator is not the pinned root" };
   }
 
@@ -184,7 +184,7 @@ export async function verifyDeviceDelegation(
     const ok = await ed25519.verifyAsync(
       hexToBytes(edge.signature),
       delegationProofBytes(edge),
-      hexToBytes(verifyingKeyFromDid(edge.operatorDid)),
+      hexToBytes(verifyingKeyFromDid(edge.personaRootDid)),
       { zip215: false },
     );
     return ok ? { ok: true } : { ok: false, reason: "signature mismatch" };

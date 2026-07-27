@@ -109,16 +109,16 @@ describe("the True Name Model — the founding mints a DISTINCT persona-root as 
     // The exact subsequence open-browser-vessel runs on FOUND: device key inits keyhive; a distinct
     // persona-root signs the edge; the vessel wears the founded root.
     const device = await generateOrLoadBrowserVesselIdentity(name, "Test Operator");
-    const operatorSeed = await loadBrowserSigningSeed(name);
+    const vesselSeed = await loadBrowserSigningSeed(name);
     const root = await generateOrLoadBrowserPersonaRoot(name, 0);
     const signerSeed = await loadBrowserPersonaRootSeed(name, 0);
     await wearBrowserPersona(name, 0);
 
     const f = await runFoundingCeremony({
       repo,
-      operatorSeed,
-      operatorVerifyingKey: device.verifyingKey,
-      operatorDisplayName: "Test Operator",
+      vesselSeed,
+      vesselVerifyingKey: device.verifyingKey,
+      vesselDisplayName: "Test Operator",
       binding: { mode: "self-stood", signerSeed },
       hearthTrueName: "",
       nexusPubkey: device.verifyingKey,
@@ -128,7 +128,7 @@ describe("the True Name Model — the founding mints a DISTINCT persona-root as 
     // DISTINCT from the device DID. The self-signed floor (signerDid == deviceDid) is gone.
     expect(f.signerDid).toBe(`0x${root.verifyingKey}`);
     expect(f.signerDid).not.toBe(`0x${device.verifyingKey}`);
-    expect(f.founderEdge.operatorDid).toBe(f.signerDid);      // the edge chains to the root
+    expect(f.founderEdge.personaRootDid).toBe(f.signerDid);      // the edge chains to the root
     expect(f.founderEdge.deviceDid).toBe(`0x${device.verifyingKey}`);  // the delegate is the device
 
     // A fresh browser founds ONE persona, worn.
@@ -141,13 +141,13 @@ describe("the True Name Model — the founding mints a DISTINCT persona-root as 
     repo = new Repo({ sharePolicy: async () => true });
 
     const device = await generateOrLoadBrowserVesselIdentity(name, "Op");
-    const operatorSeed = await loadBrowserSigningSeed(name);
+    const vesselSeed = await loadBrowserSigningSeed(name);
     await generateOrLoadBrowserPersonaRoot(name, 0);
     const signer0 = await loadBrowserPersonaRootSeed(name, 0);
     await wearBrowserPersona(name, 0);
     await runFoundingCeremony({
-      repo, operatorSeed, operatorVerifyingKey: device.verifyingKey,
-      operatorDisplayName: "Op", binding: { mode: "self-stood", signerSeed: signer0 }, hearthTrueName: "", nexusPubkey: device.verifyingKey,
+      repo, vesselSeed, vesselVerifyingKey: device.verifyingKey,
+      vesselDisplayName: "Op", binding: { mode: "self-stood", signerSeed: signer0 }, hearthTrueName: "", nexusPubkey: device.verifyingKey,
     });
 
     // The multitude grows: mint h1 and WEAR it. The worker-reach selector (browserJoineePersonaIndex)

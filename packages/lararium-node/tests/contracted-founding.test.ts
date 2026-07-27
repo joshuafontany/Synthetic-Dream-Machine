@@ -26,23 +26,23 @@ const pubOf = (s: Uint8Array) => ed.getPublicKeyAsync(s).then(hex);
 /** What the contracting operator hands over: the signed edge, the pinned prefix, and their KEL. */
 async function bundleFor(deviceVerifyingKey: string, hearthTrueName = HEARTH) {
   const edge = await buildDeviceDelegation({
-    operatorSeed:       OPERATOR_SEED,          // the OPERATOR signs, elsewhere
+    personaRootSeed:       OPERATOR_SEED,          // the OPERATOR signs, elsewhere
     deviceVerifyingKey,
     hearthTrueName,
     issuedAt:  new Date("2026-07-20T00:00:00Z").toISOString(),
     expiresAt: new Date("2027-07-20T00:00:00Z").toISOString(),
     boundEpoch: 0,
   });
-  const inception: PersonaKelEvent = mintPersonaInception(edge.operatorDid, "");
+  const inception: PersonaKelEvent = mintPersonaInception(edge.personaRootDid, "");
   return { edge, personaKelPrefix: inception.prefix, personaKelChain: [inception] as const };
 }
 
 async function found(binding: Parameters<typeof runFoundingCeremony>[0]["binding"], deviceKey: string) {
   return runFoundingCeremony({
     repo: new Repo({ sharePolicy: async () => true }),
-    operatorSeed: HERM_SEED,
-    operatorVerifyingKey: deviceKey,
-    operatorDisplayName: "herm",
+    vesselSeed: HERM_SEED,
+    vesselVerifyingKey: deviceKey,
+    vesselDisplayName: "herm",
     binding,
     hearthTrueName: HEARTH,
     nexusPubkey: deviceKey,
@@ -58,7 +58,7 @@ describe("a contracted founding carries its binding instead of signing it", () =
 
     // the pin names the CONTRACTING operator, never this faceless vessel
     expect(f.personaKelPrefix).toBe(b.personaKelPrefix);
-    expect(f.signerDid).toBe(b.edge.operatorDid);
+    expect(f.signerDid).toBe(b.edge.personaRootDid);
     expect(f.signerDid).not.toBe(`0x${deviceKey}`);
   });
 
@@ -72,7 +72,7 @@ describe("a contracted founding carries its binding instead of signing it", () =
     const carried   = await bundleFor(deviceKey);
 
     const self = await found({ mode: "self-stood", signerSeed: OPERATOR_SEED }, deviceKey);
-    expect(self.signerDid).toBe(carried.edge.operatorDid);
+    expect(self.signerDid).toBe(carried.edge.personaRootDid);
     expect(self.personaKelPrefix).toBe(carried.personaKelPrefix);   // one root, one identifier
 
     // a carried chain of TWO events founds and keeps the same pinned prefix

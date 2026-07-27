@@ -381,7 +381,7 @@ export async function runPeerHandshake(h: PeerHandshake): Promise<{ ok: boolean;
 /**
  * LeafIdentity — the LIGHT sovereign identity a leaf actor carries to the peer gate: a cached
  * self-certifying ContactCard + a bare-Ed25519 signer (no keyhive). Platform-blind: the node loads
- * it from disk (`loadLeafIdentity`), the browser builds it from its operatorSeed + founding card.
+ * it from disk (`loadLeafIdentity`), the browser builds it from its own device seed + founding card.
  * Lifted here (from node) so both vessels — and the isomorphic LarWSClientAdapter — share one core.
  */
 export interface LeafIdentity {

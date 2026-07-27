@@ -49,10 +49,10 @@ export interface CarriageServeLoop {
 
 /** What the serve-loop dials with + answers over. */
 export interface CarriageServeLoopConfig {
-  /** The carriage relay URL (`ws://<host>:<port>`) — the vessel dials it and proves possession of `operatorSeed`. */
+  /** The carriage relay URL (`ws://<host>:<port>`) — the vessel dials it and proves possession of `vesselSeed`. */
   readonly relayUrl:        string;
   /** The vessel's 32-byte Ed25519 seed — its PROVEN key stamps every envelope it offers. */
-  readonly operatorSeed:    Uint8Array;
+  readonly vesselSeed:    Uint8Array;
   /** This vessel's own membership address (its verifying-key hex) — the addr members want-block against. */
   readonly serverAddr:      string;
   /** The cas-wire serve deps (cadDir + the seal / membership / antigen / fedGate rings) — the carry-lane gate. */
@@ -114,7 +114,7 @@ export function startCarriageServeLoop(cfg: CarriageServeLoopConfig): CarriageSe
     if (stopped) return;
     const attempt = ++dials;
     try {
-      const ch = await AuthenticatedWSMembershipChannel.connect(cfg.relayUrl, cfg.operatorSeed, { onClose: onDrop });
+      const ch = await AuthenticatedWSMembershipChannel.connect(cfg.relayUrl, cfg.vesselSeed, { onClose: onDrop });
       if (stopped) { ch.close(); return; }              // stopped mid-connect → close the fresh channel, no timer
       channel = ch;
       timer = setInterval(tick, interval);

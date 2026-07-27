@@ -51,9 +51,9 @@ beforeAll(async () => {
 
   // Found a real operator into the in-memory repo (host pre-spawn step).
   const cer = await runFoundingCeremony({
-    repo, operatorSeed: SEED,
-    operatorVerifyingKey: verifyingKey,
-    operatorDisplayName:  "Test Operator",
+    repo, vesselSeed: SEED,
+    vesselVerifyingKey: verifyingKey,
+    vesselDisplayName:  "Test Operator",
     binding: { mode: "self-stood", signerSeed: SEED },          // self-signed (signerDid == deviceDid) for the test founder
     hearthTrueName: "",         // hearth-agnostic in the unit test
     nexusPubkey: verifyingKey,  // this vessel's own gate key IS its Nexus key
@@ -76,7 +76,7 @@ beforeAll(async () => {
     verifyingKey, eventStore,
     bootArgs: {
       seed: SEED, eventStore,
-      operatorVerifyingKey:  verifyingKey,
+      vesselVerifyingKey:  verifyingKey,
       personaGroupDocIdHex:   cer.personaGroupDocIdHex,
       personaGroupAgentIdHex: cer.personaGroupAgentIdHex,
       meshCabalDocIdHex:     cer.meshCabalDocIdHex,
@@ -104,7 +104,7 @@ describe("bootDaemonKeyhive", () => {
 
   test("HALTs on identity drift (Gate A)", async () => {
     await expect(bootDaemonKeyhive({
-      ...founded.bootArgs, operatorVerifyingKey: "deadbeefdeadbeef",
+      ...founded.bootArgs, vesselVerifyingKey: "deadbeefdeadbeef",
     })).rejects.toThrow(/Gate A/);
   });
 

@@ -49,8 +49,8 @@ export interface CarriageRelay {
  * restarts, so a family's hearths keep dialing the same crossroads (NEVER a fresh random per boot). The one seam the
  * boot's relay-standing gate reads for its seed.
  */
-export function resolveRelayGateSeed(operatorSeed: Uint8Array, seedHex?: string | null): Uint8Array {
-  return seedHex && seedHex.length > 0 ? Uint8Array.from(Buffer.from(seedHex, "hex")) : operatorSeed;
+export function resolveRelayGateSeed(vesselSeed: Uint8Array, seedHex?: string | null): Uint8Array {
+  return seedHex && seedHex.length > 0 ? Uint8Array.from(Buffer.from(seedHex, "hex")) : vesselSeed;
 }
 
 /**

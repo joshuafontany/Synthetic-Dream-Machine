@@ -58,9 +58,9 @@ async function fetchOverCarriage(args: {
 
 /** The EXACT boot gate: a relay stands ONLY when a port rides the config, on the resolved (stable) gate seed. */
 function bootRelayGate(cfg: {
-  operatorSeed: Uint8Array; relayPort: number | null; gateSeedHex?: string;
+  vesselSeed: Uint8Array; relayPort: number | null; gateSeedHex?: string;
 }): Promise<CarriageRelay | null> {
-  const seed = resolveRelayGateSeed(cfg.operatorSeed, cfg.gateSeedHex);
+  const seed = resolveRelayGateSeed(cfg.vesselSeed, cfg.gateSeedHex);
   return cfg.relayPort !== null && !Number.isNaN(cfg.relayPort)
     ? startCarriageRelay({ gateSeed: seed, port: cfg.relayPort })
     : Promise.resolve(null);
@@ -92,7 +92,7 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
   }
 
   test("STANDS + CARRIES: a member dials the Herm's crossroads + reads a sealed body; a stranger draws byte-identical Mu", async () => {
-    // The Herm's OWN identity seed (in the boot this is `operatorSeed`, loaded from store → stable across restarts).
+    // The Herm's OWN identity seed (in the boot this is `vesselSeed`, loaded from store → stable across restarts).
     const hermSeed    = new Uint8Array(32).fill(11);
     const holderSeed  = new Uint8Array(32).fill(12);
     const memberSeed  = new Uint8Array(32).fill(13);
@@ -108,7 +108,7 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
     };
 
     // ── THE HERM STANDS THE CROSSROADS — the boot gate on the Herm's own identity seed (port 0 → OS-assigned). ──
-    relay = await bootRelayGate({ operatorSeed: hermSeed, relayPort: 0 });
+    relay = await bootRelayGate({ vesselSeed: hermSeed, relayPort: 0 });
     expect(relay).not.toBeNull();
     expect(relay!.port).toBeGreaterThan(0);
     expect(relay!.gatePubKey).toBe(await pubOf(hermSeed));   // the crossroads' gate key IS the Herm's own key
@@ -116,7 +116,7 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
     const url = `ws://127.0.0.1:${relay!.port}`;
 
     // A holder hearth serves its sealed body over the Herm's crossroads; two requester hearths dial the same URL.
-    loops.push(startCarriageServeLoop({ relayUrl: url, operatorSeed: holderSeed, serverAddr: holderKey, deps, pollIntervalMs: 25 }));
+    loops.push(startCarriageServeLoop({ relayUrl: url, vesselSeed: holderSeed, serverAddr: holderKey, deps, pollIntervalMs: 25 }));
     const memberCh = await AuthenticatedWSMembershipChannel.connect(url, memberSeed);
     const strangerCh = await AuthenticatedWSMembershipChannel.connect(url, strangerSeed);
     channels.push(memberCh, strangerCh);
@@ -139,11 +139,11 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
     const hermSeed = new Uint8Array(32).fill(21);
 
     // UNCONFIGURED (no port): the EXACT boot ternary stands NO relay — an un-configured Herm behaves as today.
-    const inert = await bootRelayGate({ operatorSeed: hermSeed, relayPort: null });
+    const inert = await bootRelayGate({ vesselSeed: hermSeed, relayPort: null });
     expect(inert).toBeNull();
 
     // CONFIGURED: the SAME gate with a port stands exactly one crossroads a hearth can dial.
-    relay = await bootRelayGate({ operatorSeed: hermSeed, relayPort: 0 });
+    relay = await bootRelayGate({ vesselSeed: hermSeed, relayPort: 0 });
     expect(relay).not.toBeNull();
     const url = `ws://127.0.0.1:${relay!.port}`;
     const dialed = await new Promise<boolean>((resolve) => {
@@ -186,7 +186,7 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
 
   test("CLEAN TEARDOWN: close() stops the crossroads — a dial after close cannot connect (no leaked WS server)", async () => {
     const hermSeed = new Uint8Array(32).fill(41);
-    const stood = await bootRelayGate({ operatorSeed: hermSeed, relayPort: 0 });
+    const stood = await bootRelayGate({ vesselSeed: hermSeed, relayPort: 0 });
     expect(stood).not.toBeNull();
     const url = `ws://127.0.0.1:${stood!.port}`;
 

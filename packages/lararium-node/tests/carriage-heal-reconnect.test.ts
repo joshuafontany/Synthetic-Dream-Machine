@@ -77,7 +77,7 @@ describe("carriage HEAL — the serve-loop re-dials after a drop and re-folds th
     let reconnects = 0;
 
     const loop = startCarriageServeLoop({
-      relayUrl: url, operatorSeed: new Uint8Array(32).fill(9), serverAddr: "holder",
+      relayUrl: url, vesselSeed: new Uint8Array(32).fill(9), serverAddr: "holder",
       deps: inertDeps(), pollIntervalMs: 25, reconnectDelayMs: 100,
       onReconnect: () => { reconnects += 1; },   // the board re-fold — asserted below
     });
@@ -106,7 +106,7 @@ describe("carriage HEAL — the serve-loop re-dials after a drop and re-folds th
     relays.push(relay);
     const url = `ws://127.0.0.1:${relay.port}`;
     const loop = startCarriageServeLoop({
-      relayUrl: url, operatorSeed: new Uint8Array(32).fill(10), serverAddr: "holder",
+      relayUrl: url, vesselSeed: new Uint8Array(32).fill(10), serverAddr: "holder",
       deps: inertDeps(), pollIntervalMs: 25, reconnectDelayMs: 100,
     });
     for (let i = 0; i < 60 && relay.connections() < 1; i++) await sleep(25);

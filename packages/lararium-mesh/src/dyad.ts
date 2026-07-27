@@ -131,7 +131,13 @@ export function dyadSlotKey(id: string): string {
  * must win. An edge names its operator (the veil that signed) and its device (the vessel that carries).
  */
 export function dyadFromEdge(edge: DeviceDelegationTiddler, binding: DelegationEdge | null = null): DyadRecord {
-  const ref: DyadRef = { vesselDid: edge.deviceDid, veilDid: edge.operatorDid };
+  // UNSETTLED, and left visible rather than decided here: a device-delegation is signed by the PERSONA
+  // ROOT (`ceremony-core` passes the binding's signer seed), so what this reads as the dyad's veil is
+  // today the root. Those differ sharply in the model — a veil key stays LOCAL and unique per vessel while
+  // a root SPANS them — so if the edge truly binds root→device it names no veil at all, and the dyad's
+  // local key sits somewhere this function cannot see. Naming it correctly waits on that ruling; naming it
+  // confidently WRONG would cost more than the ambiguity does.
+  const ref: DyadRef = { vesselDid: edge.deviceDid, veilDid: edge.personaRootDid };
   return { kind: DYAD_ID_DOMAIN, dyadId: dyadId(ref), ref, edge, binding };
 }
 
@@ -153,7 +159,7 @@ function coerceDyad(parsed: unknown): DyadRecord | null {
   if (typeof edge !== "object" || edge === null) return null;
   const e = edge as Record<string, unknown>;
   if (e["kind"] !== "device-delegation") return null;
-  if (typeof e["operatorDid"] !== "string" || typeof e["deviceDid"] !== "string") return null;
+  if (typeof e["personaRootDid"] !== "string" || typeof e["deviceDid"] !== "string") return null;
   const b = p["binding"];
   let binding: DelegationEdge | null = null;
   if (typeof b === "object" && b !== null) {

@@ -360,7 +360,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
   // ── Keypair (WebCrypto substrate) + founding (the personaGroup capability) ───
   const vesselIdentity = await generateOrLoadBrowserVesselIdentity(idbName, displayName);
-  const operatorSeed     = await loadBrowserSigningSeed(idbName);
+  const vesselSeed     = await loadBrowserSigningSeed(idbName);
   const vesselVerifyingKey      = vesselIdentity.verifyingKey;
 
   const bootKeys = await readBootKeys(idbName);
@@ -381,9 +381,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     // It fails closed on a missing binding field: a half-bound daemon doc is the confused-deputy hole.
     const a = await runApplyAdmitPayload({
       repo,
-      operatorSeed,
-      operatorVerifyingKey: vesselIdentity.verifyingKey,
-      operatorDisplayName:  displayName ?? "Browser Operator",
+      vesselSeed,
+      vesselVerifyingKey: vesselIdentity.verifyingKey,
+      vesselDisplayName:  displayName ?? "Browser Operator",
       payload:              admit,
       // This vessel's own gate key IS its Nexus key — the local KEL board it seeds the founder's inception onto.
       nexusPubkey: vesselIdentity.verifyingKey,
@@ -403,7 +403,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     bootKeyWrites.bootstrap = bootstrap;
   } else if (!bootstrap) {
     // FOUND. No admit — the vessel raises its own PersonaGroup and founds its FIRST persona (never the
-    // self-signed floor). The two-key atom: the DEVICE key (operatorSeed) inits keyhive as the Individual;
+    // self-signed floor). The two-key atom: the DEVICE key (vesselSeed) inits keyhive as the Individual;
     // a DISTINCT PersonaGroup ROOT signs the device-delegation edge. Mint that root founder-side (root-on-
     // founder), load its seed as the signer, and WEAR it — mirroring node's `lares init` (init.ts: mint
     // generateOrLoadPersonaGroupRoot → loadPersonaGroupRootSeed → runFoundingCeremony{signerSeed}).
@@ -411,11 +411,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     const signerSeed = await loadBrowserPersonaRootSeed(idbName, FOUNDING_PERSONA_INDEX);
     await wearBrowserPersona(idbName, FOUNDING_PERSONA_INDEX);   // the selector points at the founded root
     const f = await runFoundingCeremony({
-      repo, operatorSeed,
-      operatorVerifyingKey: vesselIdentity.verifyingKey,
-      operatorDisplayName:  displayName ?? "Browser Operator",
+      repo, vesselSeed,
+      vesselVerifyingKey: vesselIdentity.verifyingKey,
+      vesselDisplayName:  displayName ?? "Browser Operator",
       // The persona-root SIGNS (signerDid == the root DID, DISTINCT from deviceDid). The self-signed anon
-      // (signerSeed == operatorSeed) survives ONLY as an explicit named floor tier, never the default.
+      // (signerSeed == vesselSeed) survives ONLY as an explicit named floor tier, never the default.
       binding: { mode: "self-stood", signerSeed },
       hearthTrueName: "",          // hearth-agnostic: an anon is not yet bound to a place; it binds on upgrade
       // This vessel's own gate key IS its Nexus key — the per-Nexus KEL board the founding seats the inception on.
@@ -471,7 +471,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     const leaf: LeafIdentity = {
       contactCard: social.contactCard,
       peerPubKey:  vesselVerifyingKey,
-      sign:        ed25519SignerFromSeed(operatorSeed),
+      sign:        ed25519SignerFromSeed(vesselSeed),
       ...(social.deviceEdge ? { edge: social.deviceEdge } : {}),
     };
     const relayAdapter = new LarWSClientAdapter({
@@ -743,7 +743,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         throw new Error(`[lararium-browser] persona-KEL chain for ${social.personaKelPrefix.slice(0, 20)}… absent from the local board — the Binding Gate cannot reach a head (fail-closed).`);
       }
       const daemonAuth = {
-        seed: operatorSeed, operatorVerifyingKey: vesselIdentity.verifyingKey,
+        seed: vesselSeed, vesselVerifyingKey: vesselIdentity.verifyingKey,
         personaGroupDocIdHex: social.personaGroupDocIdHex,
         personaGroupAgentIdHex: social.personaGroupAgentIdHex,
         meshCabalDocIdHex: social.meshCabalDocIdHex,

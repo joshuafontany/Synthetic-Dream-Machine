@@ -8,7 +8,7 @@
  *
  * The four vessel-specific seams the caller provides:
  *   repo         — Automerge Repo backed by any StorageAdapter
- *   operatorSeed — 32-byte Ed25519 seed from any secure store
+ *   vesselSeed — the PLACE's own 32-byte Ed25519 seed, from any secure store
  *   (founding ceremony also needs verifyingKey + displayName for identity tiddler)
  *
  * The result types carry all minted data; the caller decides where to persist
@@ -23,7 +23,7 @@
  * invite-send adds co-operators. The MeshCabal grows; this path never re-runs.
  *
  * The TRUE NAME MODEL the ceremony enacts — two DISTINCT keys, one signed edge:
- *   · `operatorSeed` carries the VESSEL's own key — the PLACE's key, minted per-install,
+ *   · `vesselSeed` carries the PLACE's own key — minted per-install,
  *     never copied to another vessel. It mints the Vessel Individual and inits Keyhive.
  *   · `binding` carries the PERSONA ROOT's authority — the HUMAN's side. A SELF-STOOD binding holds
  *     that root's seed, which ONLY signs and never inits Keyhive; a CONTRACTED binding holds no seed
@@ -99,11 +99,11 @@ export type FoundingBinding =
 export interface FoundingCeremonyInput {
   repo:                Repo;
   /** The PER-VESSEL device signing seed — inits Keyhive (this vessel IS the Individual). */
-  operatorSeed:        Uint8Array;
+  vesselSeed:        Uint8Array;
   /** Hex-encoded 32-byte Ed25519 verifying key of the per-vessel device — the delegate. */
-  operatorVerifyingKey: string;
+  vesselVerifyingKey: string;
   /** Display name for the device identity tiddler. */
-  operatorDisplayName:  string;
+  vesselDisplayName:  string;
   /** HOW this founding binds its device — the two modes `vessel-standing` names. REQUIRED: every
    *  founding binds, and the mode says whether this vessel signs its own binding or carries one. */
   binding: FoundingBinding;
@@ -151,7 +151,7 @@ export interface FoundingCeremonyResult {
 export async function runFoundingCeremony(
   input: FoundingCeremonyInput,
 ): Promise<FoundingCeremonyResult> {
-  const { repo, operatorSeed, operatorVerifyingKey, operatorDisplayName } = input;
+  const { repo, vesselSeed, vesselVerifyingKey, vesselDisplayName } = input;
 
   const identitiesHandle = seedIdentitiesDoc(repo);
   const circlesHandle    = seedCirclesDoc(repo);
@@ -161,7 +161,7 @@ export async function runFoundingCeremony(
   const personaHandle     = seedPersonaDoc(repo);
 
   // Write operator identity + circles tiddlers
-  const ceremonyTiddlers = buildCeremonyTiddlers(operatorVerifyingKey, operatorDisplayName);
+  const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
   for (const t of ceremonyTiddlers) {
     if (t.bag === IDENTITIES_DOC_URI) {
       identitiesHandle.change((doc) => {
@@ -181,7 +181,7 @@ export async function runFoundingCeremony(
   // ── Keyhive founding ceremony ──────────────────────────────────────────────
   const keyhive = new KeyhiveProvider();
   const store   = new InMemoryEventStore();
-  await keyhive.init({ seed: operatorSeed, eventStore: store });
+  await keyhive.init({ seed: vesselSeed, eventStore: store });
 
   const vesselIdentifierHex = await keyhive.vesselIdentifierHex();
 
@@ -238,8 +238,8 @@ export async function runFoundingCeremony(
   // boundEpoch below is the decay hook — never a stamped field, whichever way the edge arrived.
   const founderEdge = input.binding.mode === "self-stood"
     ? await buildDeviceDelegation({
-        operatorSeed:       input.binding.signerSeed,  // the root SIGNS
-        deviceVerifyingKey: operatorVerifyingKey,      // the per-vessel device is the delegate
+        personaRootSeed:    input.binding.signerSeed,  // the root SIGNS
+        deviceVerifyingKey: vesselVerifyingKey,      // the per-vessel device is the delegate
         hearthTrueName:     input.hearthTrueName,      // the place this binds TO
         issuedAt:           new Date().toISOString(),
         expiresAt:          new Date(Date.now() + EDGE_BACKSTOP_MS).toISOString(),
@@ -251,10 +251,10 @@ export async function runFoundingCeremony(
     // hearth REFUSES here, where a founding can still be abandoned cleanly.
     : (() => {
         const e = input.binding.edge;
-        if (e.deviceVerifyingKey.toLowerCase() !== operatorVerifyingKey.toLowerCase()) {
+        if (e.deviceVerifyingKey.toLowerCase() !== vesselVerifyingKey.toLowerCase()) {
           throw new Error(
             "[founding] contracted edge names a different device — it delegates to " +
-            `${e.deviceVerifyingKey.slice(0, 16)}…, this vessel holds ${operatorVerifyingKey.slice(0, 16)}….`,
+            `${e.deviceVerifyingKey.slice(0, 16)}…, this vessel holds ${vesselVerifyingKey.slice(0, 16)}….`,
           );
         }
         if (e.hearthTrueName !== input.hearthTrueName) {
@@ -262,10 +262,10 @@ export async function runFoundingCeremony(
         }
         return e;
       })();
-  const signerDid = founderEdge.operatorDid;
+  const signerDid = founderEdge.personaRootDid;
 
   // ── The persona-KEL INCEPTION — the continuity anchor (identity-classes#the-continuity-anchor) ──
-  // Seat seq-0 over the founding op-key (== signerDid, the edge's operatorDid). The identifier PREFIX derives
+  // Seat seq-0 over the founding op-key (== signerDid, the edge's personaRootDid). The identifier PREFIX derives
   // from (founding op-key + the recovery-set pre-commit); it stays FIXED across every future Reading-B rotation,
   // so the Binding Gate pins the PREFIX and the op-key rotates beneath it. Recovery arms UNARMED here (empty
   // pre-commit): the live founding gathers no guardians, so no rotation can attest yet — arming rides the
@@ -384,7 +384,7 @@ export async function runDeviceAdmitEdge(
   const issuedAt  = new Date().toISOString();
   const expiresAt = new Date(Date.now() + EDGE_BACKSTOP_MS).toISOString();
   const deviceEdge = await buildDeviceDelegation({
-    operatorSeed:       input.signerSeed,          // the founder's PersonaGroup root SIGNS
+    personaRootSeed:    input.signerSeed,          // the founder's PersonaGroup root SIGNS
     deviceVerifyingKey: input.joineeVerifyingKey,  // the joinee's vessel key is the delegate
     hearthTrueName:     input.hearthTrueName,
     issuedAt,
@@ -393,7 +393,7 @@ export async function runDeviceAdmitEdge(
   });
   return {
     kind:                   "device-admit/v1",
-    signerDid:              deviceEdge.operatorDid,
+    signerDid:              deviceEdge.personaRootDid,
     personaKelPrefix:       input.personaKelPrefix,
     ...(input.personaKelChain ? { personaKelChain: input.personaKelChain } : {}),
     deviceEdge,
@@ -417,9 +417,9 @@ export interface ApplyAdmitInput {
    *  the founding path mints one and the admit path did not, so an admitted vessel came up with no card
    *  and could never present itself at a gate. The card is the vessel's OWN identity, never the founder's;
    *  the admit supplies the BINDING, and the vessel supplies the SELF. */
-  operatorSeed:         Uint8Array;
-  operatorVerifyingKey: string;
-  operatorDisplayName:  string;
+  vesselSeed:         Uint8Array;
+  vesselVerifyingKey: string;
+  vesselDisplayName:  string;
   payload:              DeviceAdmitPayload;
   /** The joinee's own Nexus pubkey (its gate key) — the per-Nexus KEL board the joinee seeds the founder's
    *  inception snapshot onto, so its LOCAL boot walks to a head with no sync wait (no-global-now). */
@@ -446,7 +446,7 @@ export interface ApplyAdmitResult {
 export async function runApplyAdmitPayload(
   input: ApplyAdmitInput,
 ): Promise<ApplyAdmitResult> {
-  const { repo, operatorSeed, operatorVerifyingKey, operatorDisplayName, payload } = input;
+  const { repo, vesselSeed, vesselVerifyingKey, vesselDisplayName, payload } = input;
 
   // Fail-closed: the binding is the joinee's whole authority — a missing field MUST halt,
   // never write a half-bound daemon doc (the confused-deputy / mycelium-PCD hole). The persona-KEL PREFIX
@@ -464,7 +464,7 @@ export async function runApplyAdmitPayload(
   // (the membership-sync foundation). Older payloads without it fall back to a fresh local seed.
   const personaUrl = payload.personaUrl ?? (seedPersonaDoc(repo).url as string);
 
-  const ceremonyTiddlers = buildCeremonyTiddlers(operatorVerifyingKey, operatorDisplayName);
+  const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
   for (const t of ceremonyTiddlers) {
     if (t.bag === IDENTITIES_DOC_URI) {
       identitiesHandle.change((doc) => {
@@ -560,7 +560,7 @@ export async function runApplyAdmitPayload(
   // cardless vessel cannot speak at a gate at all. The founding path minted one and this path did not,
   // which is why an admitted vessel could be perfectly bound and still never dial.
   const keyhive = new KeyhiveProvider();
-  await keyhive.init({ seed: operatorSeed, eventStore: new InMemoryEventStore() });
+  await keyhive.init({ seed: vesselSeed, eventStore: new InMemoryEventStore() });
   const contactCardJson = new TextDecoder().decode(await keyhive.contactCard());
   await keyhive.dispose();
 

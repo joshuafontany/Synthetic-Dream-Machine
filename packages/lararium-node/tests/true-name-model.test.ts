@@ -82,18 +82,18 @@ describe("the True Name Model — vessel, persona root, and the edge that binds 
     const issuedAt  = new Date().toISOString();
     const expiresAt = new Date(Date.now() + 86_400_000).toISOString();
     const edge = await buildDeviceDelegation({
-      operatorSeed:       signerSeed,          // the HUMAN's root signs
+      personaRootSeed:       signerSeed,          // the HUMAN's root signs
       deviceVerifyingKey: vesselKey,           // the PLACE's key delegates
       hearthTrueName:     HEARTH_TRUE_NAME,    // the place this binds TO
       issuedAt, expiresAt, boundEpoch: 0,
     });
 
     // The edge chains to the persona root, delegates the vessel, and names the hearth.
-    expect(edge.operatorDid).toBe(`0x${personaRoot.verifyingKey}`);
+    expect(edge.personaRootDid).toBe(`0x${personaRoot.verifyingKey}`);
     expect(edge.deviceDid).toBe(`0x${vesselKey}`);
     expect(edge.hearthTrueName).toBe(HEARTH_TRUE_NAME);
     // Never the self-signed floor: signer and delegate stand apart.
-    expect(edge.operatorDid).not.toBe(edge.deviceDid);
+    expect(edge.personaRootDid).not.toBe(edge.deviceDid);
 
     // A peer pinning the persona root clears it.
     await expect(verifyDeviceDelegation(edge, `0x${personaRoot.verifyingKey}`, { now: Date.now() }))
@@ -109,7 +109,7 @@ describe("the True Name Model — vessel, persona root, and the edge that binds 
     const issuedAt  = new Date().toISOString();
     const expiresAt = new Date(Date.now() + 86_400_000).toISOString();
     const edge = await buildDeviceDelegation({
-      operatorSeed: signerSeed, deviceVerifyingKey: vesselKey,
+      personaRootSeed: signerSeed, deviceVerifyingKey: vesselKey,
       hearthTrueName: HEARTH_TRUE_NAME, issuedAt, expiresAt, boundEpoch: 0,
     });
 

@@ -122,9 +122,9 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     const admitSeed = await loadVesselSigningSeed(storageDir);
     const { contactCardJson, identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl } = await runApplyAdmitPayload({
       repo,
-      operatorSeed: admitSeed,
-      operatorVerifyingKey: operatorIdentity.verifyingKey,
-      operatorDisplayName:  operatorIdentity.displayName ?? "operator",
+      vesselSeed: admitSeed,
+      vesselVerifyingKey: operatorIdentity.verifyingKey,
+      vesselDisplayName:  operatorIdentity.displayName ?? "operator",
       payload,
       // The joinee's own gate key IS its Nexus key — the local KEL board it seeds the founder's inception onto.
       nexusPubkey: operatorIdentity.verifyingKey,
@@ -154,9 +154,9 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   }
 
   // ── Founding ceremony path ───────────────────────────────────────────────
-  const operatorSeed = await loadVesselSigningSeed(storageDir);
+  const vesselSeed = await loadVesselSigningSeed(storageDir);
 
-  // The binding: the per-vessel key (operatorSeed) is the DEVICE; the PersonaGroup ROOT (persona h0)
+  // The binding: the per-vessel key (vesselSeed) is the DEVICE; the PersonaGroup ROOT (persona h0)
   // signs the edge that binds it to the hearth true-name — that root's DID becomes the PINNED signerDid
   // peers verify the founding edge (and every admit-time device-delegation) against. Founder-only, so the
   // founding STANDS h0's root here; a founding with no operator-root to bind through is no founding.
@@ -178,9 +178,9 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     signerDid, personaKelPrefix,
   } = await runFoundingCeremony({
     repo,
-    operatorSeed,
-    operatorVerifyingKey: operatorIdentity.verifyingKey,
-    operatorDisplayName:  operatorIdentity.displayName ?? "operator",
+    vesselSeed,
+    vesselVerifyingKey: operatorIdentity.verifyingKey,
+    vesselDisplayName:  operatorIdentity.displayName ?? "operator",
     binding: { mode: "self-stood", signerSeed },
     hearthTrueName,
     // This node's own gate key IS its Nexus key — the per-Nexus KEL board the founding seats the inception on.

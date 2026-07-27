@@ -47,7 +47,7 @@ async function bootOver(repo: Repo, daemonUrl: string, s: Uint8Array, verifyingK
   if (!chain) throw new Error(`no persona-KEL chain for ${personaKelPrefix} on this vessel's board`);
   return bootDaemonKeyhive({
     seed: s, eventStore: new DaemonEventStore({ daemon: composite }),
-    operatorVerifyingKey: verifyingKey,
+    vesselVerifyingKey: verifyingKey,
     personaGroupDocIdHex: pg.docIdHex, personaGroupAgentIdHex: pg.agentIdHex, meshCabalDocIdHex: mesh,
     registerBags: [DAEMON_BAG_ID], signerDid, personaKel: { prefix: personaKelPrefix, chain },
     deviceEdge: deviceEdge as never,
@@ -60,8 +60,8 @@ describe("two vessels bind under one Handle", () => {
     const founderRepo = new Repo({ sharePolicy: async () => true });
     const founderKey = await pubOf(FOUNDER_SEED);
     const cer = await runFoundingCeremony({
-      repo: founderRepo, operatorSeed: FOUNDER_SEED, operatorVerifyingKey: founderKey,
-      operatorDisplayName: "Founder", binding: { mode: "self-stood", signerSeed: FOUNDER_SEED }, hearthTrueName: "", nexusPubkey: founderKey,
+      repo: founderRepo, vesselSeed: FOUNDER_SEED, vesselVerifyingKey: founderKey,
+      vesselDisplayName: "Founder", binding: { mode: "self-stood", signerSeed: FOUNDER_SEED }, hearthTrueName: "", nexusPubkey: founderKey,
     });
     const pg = { docIdHex: cer.personaGroupDocIdHex, agentIdHex: cer.personaGroupAgentIdHex };
     const { keyhive: founder } = await bootOver(founderRepo, cer.daemonUrl, FOUNDER_SEED, founderKey, pg, cer.meshCabalDocIdHex, cer.signerDid, cer.personaKelPrefix, cer.founderEdge);
@@ -93,8 +93,8 @@ describe("two vessels bind under one Handle", () => {
     // Joinee applies the payload (writes the membership to its own @daemon), then BOOTS restoring its Archive.
     const joineeRepo = new Repo({ sharePolicy: async () => true });
     const applied = await runApplyAdmitPayload({
-      repo: joineeRepo, operatorSeed: JOINEE_SEED, operatorVerifyingKey: joineeKey,
-      operatorDisplayName: "Joinee", payload, nexusPubkey: joineeKey,
+      repo: joineeRepo, vesselSeed: JOINEE_SEED, vesselVerifyingKey: joineeKey,
+      vesselDisplayName: "Joinee", payload, nexusPubkey: joineeKey,
     });
     const { keyhive: joinee } = await bootOver(joineeRepo, applied.daemonUrl, JOINEE_SEED, joineeKey,
       { docIdHex: payload.personaGroupDocIdHex, agentIdHex: payload.personaGroupAgentIdHex }, payload.meshCabalDocIdHex,

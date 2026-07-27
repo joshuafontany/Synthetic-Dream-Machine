@@ -65,7 +65,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
   if (!daemonAuth) return makeDaemonBehavior({ ...daemonExtra });
 
   let kh: KeyhiveProvider | null = null;
-  let mintedByHex = daemonAuth.operatorVerifyingKey;
+  let mintedByHex = daemonAuth.vesselVerifyingKey;
 
   return makeDaemonBehavior({
     ...daemonExtra, // the vessel-injected telemetry capture SINK flows through (idempotent cap → live)
@@ -174,7 +174,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // Every other daemon verb reaches USER registry data in @catalog (wiki oracles,
       // recipes) via the accessor over ctx.repo/ctx.catalogUrl — access≠load. The daemon
       // recipe NEVER loads @catalog as tiddlers. All ride the verify-then-delegate gate.
-      // vesselDid matches the old main reactors exactly ("0x"+operatorVerifyingKey) so
+      // vesselDid matches the old main reactors exactly ("0x"+vesselVerifyingKey) so
       // draft keys never drift — the Place is what asks, never the persona root.
       if (ctx.catalogUrl) {
         const catalog = makeCatalogAccessor(ctx.repo, ctx.catalogUrl);
@@ -186,7 +186,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
           repo:        ctx.repo,
           catalog,
           rootDir:     "",
-          vesselDid: async () => "0x" + daemonAuth.operatorVerifyingKey,
+          vesselDid: async () => "0x" + daemonAuth.vesselVerifyingKey,
           registerBag: registerBagCap,
         };
         registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));
@@ -211,7 +211,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       const { keyhive, did } = await bootDaemonKeyhive({
         seed:                  daemonAuth.seed,
         eventStore:            new DaemonEventStore({ daemon: ctx.composite }),
-        operatorVerifyingKey:  daemonAuth.operatorVerifyingKey,
+        vesselVerifyingKey:  daemonAuth.vesselVerifyingKey,
         personaGroupDocIdHex:   daemonAuth.personaGroupDocIdHex,
         personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex,
         meshCabalDocIdHex:     daemonAuth.meshCabalDocIdHex,
@@ -242,7 +242,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // worker — the only place that holds BOTH the gate's own key and the peer's
       // real key — checks the relayed signature. Conservative-caller law: derive
       // both pubkeys from TRUSTED sources, never the wire.
-      //   gatePubKey = this gate's OWN verifying key (operatorVerifyingKey) — so a
+      //   gatePubKey = this gate's OWN verifying key (vesselVerifyingKey) — so a
       //     proof signed for a different gate fails here (anti-relay).
       //   peerPubKey = the raw ed25519 key, the suffix of the card-derived
       //     Identifier hex (the same relationship bootDaemonKeyhive Gate A relies on:

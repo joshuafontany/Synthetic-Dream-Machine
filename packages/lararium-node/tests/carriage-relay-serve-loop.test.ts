@@ -106,7 +106,7 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
     const url = `ws://127.0.0.1:${relay.port}`;
 
     // The HOLDER hearth runs the serve-loop (B3): it dials + auto-answers want-blocks — no hand-driven serve turn.
-    loops.push(startCarriageServeLoop({ relayUrl: url, operatorSeed: holderSeed, serverAddr: holderKey, deps, pollIntervalMs: 25 }));
+    loops.push(startCarriageServeLoop({ relayUrl: url, vesselSeed: holderSeed, serverAddr: holderKey, deps, pollIntervalMs: 25 }));
 
     // Two requester hearths, each its OWN authenticated channel (its proven key stamps every offer).
     const memberCh = await AuthenticatedWSMembershipChannel.connect(url, memberSeed);
@@ -146,7 +146,7 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
     };
     relay = await startCarriageRelay({ gateSeed: holderSeed });
     const url = `ws://127.0.0.1:${relay.port}`;
-    loops.push(startCarriageServeLoop({ relayUrl: url, operatorSeed: holderSeed, serverAddr: holderKey, deps: bypassedDeps, pollIntervalMs: 25 }));
+    loops.push(startCarriageServeLoop({ relayUrl: url, vesselSeed: holderSeed, serverAddr: holderKey, deps: bypassedDeps, pollIntervalMs: 25 }));
     const memberCh = await AuthenticatedWSMembershipChannel.connect(url, memberSeed);
     channels.push(memberCh);
 
@@ -176,7 +176,7 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
       // UNCONFIGURED (no URL): the vessel gate `url ? start : null` stands NO loop — the exact ternary the boot uses.
       const unconfiguredUrl: string | null = null;
       const inertLoop: CarriageServeLoop | null = unconfiguredUrl
-        ? startCarriageServeLoop({ relayUrl: unconfiguredUrl, operatorSeed: seed, serverAddr: "x", deps })
+        ? startCarriageServeLoop({ relayUrl: unconfiguredUrl, vesselSeed: seed, serverAddr: "x", deps })
         : null;
       expect(inertLoop).toBeNull();
       await sleep(200);
@@ -184,7 +184,7 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
 
       // CONFIGURED: the SAME gate with a URL stands the loop → exactly one dial lands.
       const liveLoop: CarriageServeLoop | null = url
-        ? startCarriageServeLoop({ relayUrl: url, operatorSeed: seed, serverAddr: "x", deps, pollIntervalMs: 25 })
+        ? startCarriageServeLoop({ relayUrl: url, vesselSeed: seed, serverAddr: "x", deps, pollIntervalMs: 25 })
         : null;
       expect(liveLoop).not.toBeNull();
       for (let i = 0; i < 40 && connections === 0; i++) await sleep(25);
@@ -192,7 +192,7 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
 
       // stop() resolves cleanly even against a half-open relay that never completes the handshake (no hang, no throw).
       await liveLoop!.stop();
-      const early = startCarriageServeLoop({ relayUrl: url, operatorSeed: seed, serverAddr: "x", deps });
+      const early = startCarriageServeLoop({ relayUrl: url, vesselSeed: seed, serverAddr: "x", deps });
       await early.stop();
     } finally {
       for (const s of sockets) { try { s.close(); } catch { /* down */ } }
@@ -212,7 +212,7 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
     };
     relay = await startCarriageRelay({ gateSeed: holderSeed });
     const url = `ws://127.0.0.1:${relay.port}`;
-    const loop = startCarriageServeLoop({ relayUrl: url, operatorSeed: holderSeed, serverAddr: holderKey, deps, pollIntervalMs: 25 });
+    const loop = startCarriageServeLoop({ relayUrl: url, vesselSeed: holderSeed, serverAddr: holderKey, deps, pollIntervalMs: 25 });
     const memberCh = await AuthenticatedWSMembershipChannel.connect(url, memberSeed);
     channels.push(memberCh);
 

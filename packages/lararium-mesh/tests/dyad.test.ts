@@ -45,15 +45,21 @@ beforeAll(async () => {
   GROUP_MASKED = await ed.getPublicKeyAsync(ROOT_MASKED_SEED).then(hex);
 });
 
-/** An edge shaped as the delegation builder produces one — only the fields a dyad reads matter here. */
+/**
+ * An edge shaped as the delegation builder produces one.
+ *
+ * TYPED, NEVER CAST. An `as unknown as` here once let this fixture keep a field the interface had already
+ * renamed, so the suite went green against a shape that no longer existed — a witness attesting to a
+ * vanished world. Holding the real type means tsc catches the next rename instead of the tests hiding it.
+ */
 function edge(vesselDid: string, veilDid: string): DeviceDelegationTiddler {
   return {
     kind: "device-delegation",
-    operatorDid: veilDid, deviceDid: vesselDid,
+    personaRootDid: veilDid, deviceDid: vesselDid,
     deviceVerifyingKey: vesselDid.slice(2), hearthTrueName: "bafyHearth",
     issuedAt: "2026-07-20T00:00:00Z", expiresAt: "2027-07-20T00:00:00Z",
-    boundEpoch: 0, sig: "00".repeat(64),
-  } as unknown as DeviceDelegationTiddler;
+    boundEpoch: "0", signature: "00".repeat(128),
+  };
 }
 
 function docOf(records: readonly DyadRecord[]): LarDoc {

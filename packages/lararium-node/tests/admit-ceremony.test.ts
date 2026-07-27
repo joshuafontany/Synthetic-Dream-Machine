@@ -44,9 +44,9 @@ async function found() {
   const verifyingKey = await pubOf(FOUNDER_SEED);
   const f = await runFoundingCeremony({
     repo,
-    operatorSeed:         FOUNDER_SEED,
-    operatorVerifyingKey: verifyingKey,
-    operatorDisplayName:  "The Strandbeest Shrine",
+    vesselSeed:         FOUNDER_SEED,
+    vesselVerifyingKey: verifyingKey,
+    vesselDisplayName:  "The Strandbeest Shrine",
     binding: { mode: "self-stood", signerSeed: FOUNDER_SEED },
     hearthTrueName:       "",
     nexusPubkey:          verifyingKey,
@@ -83,9 +83,9 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     const joineeRepo = new Repo({ sharePolicy: async () => true });
     const applied = await runApplyAdmitPayload({
       repo:                 joineeRepo,
-      operatorSeed:         JOINEE_SEED,
-      operatorVerifyingKey: joineeKey,
-      operatorDisplayName:  "Ichi",
+      vesselSeed:         JOINEE_SEED,
+      vesselVerifyingKey: joineeKey,
+      vesselDisplayName:  "Ichi",
       payload:              carried,
       nexusPubkey:          joineeKey,
     });
@@ -125,8 +125,8 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
 
     const joineeRepo = new Repo({ sharePolicy: async () => true });
     const applied = await runApplyAdmitPayload({
-      repo: joineeRepo, operatorSeed: JOINEE_SEED, operatorVerifyingKey: joineeKey,
-      operatorDisplayName: "Ichi", payload, nexusPubkey: joineeKey,
+      repo: joineeRepo, vesselSeed: JOINEE_SEED, vesselVerifyingKey: joineeKey,
+      vesselDisplayName: "Ichi", payload, nexusPubkey: joineeKey,
     });
 
     const handle = await joineeRepo.find(applied.daemonUrl as AutomergeUrl);
@@ -156,7 +156,7 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
 
     // THE BINDING is a constant of the seeds — the signer, the delegate, the hearth. Two mints agree.
     expect(a.signerDid).toBe(b.signerDid);
-    expect(a.deviceEdge.operatorDid).toBe(b.deviceEdge.operatorDid);
+    expect(a.deviceEdge.personaRootDid).toBe(b.deviceEdge.personaRootDid);
     expect(a.deviceEdge.deviceVerifyingKey).toBe(b.deviceEdge.deviceVerifyingKey);
     expect(a.deviceEdge.hearthTrueName).toBe(b.deviceEdge.hearthTrueName);
 
@@ -179,9 +179,9 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     // vessel that believes it holds a delegation nobody signed.
     await expect(runApplyAdmitPayload({
       repo,
-      operatorSeed:         JOINEE_SEED,
-      operatorVerifyingKey: joineeKey,
-      operatorDisplayName:  "Ichi",
+      vesselSeed:         JOINEE_SEED,
+      vesselVerifyingKey: joineeKey,
+      vesselDisplayName:  "Ichi",
       nexusPubkey:          joineeKey,
       payload: {
         kind: "device-admit/v1",

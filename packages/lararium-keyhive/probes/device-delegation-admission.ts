@@ -50,19 +50,19 @@ const ISSUED     = "2026-06-24T00:00:00.000Z";
 const EXPIRES    = "2026-12-31T00:00:00.000Z";
 
 /** Derive the raw ed25519 verifying-key hex of a seed via the mesh minter
- *  (operatorDid = "0x"+vk) — no direct @noble dependency in this dir. */
+ *  (personaRootDid = "0x"+vk) — no direct @noble dependency in this dir. */
 async function vkOfSeed(seed: Uint8Array): Promise<string> {
   const e = await buildDeviceDelegation({
-    operatorSeed: seed, deviceVerifyingKey: "00".repeat(32),
+    personaRootSeed: seed, deviceVerifyingKey: "00".repeat(32),
     hearthTrueName: "", issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 1,
   });
-  return e.operatorDid.slice(2);
+  return e.personaRootDid.slice(2);
 }
 
 /** Mint a real signed device-delegation edge: `signerSeed` (root) → device `deviceVk`. */
 async function mintEdge(signerSeed: Uint8Array, deviceVk: string): Promise<DeviceDelegationTiddler> {
   return buildDeviceDelegation({
-    operatorSeed: signerSeed, deviceVerifyingKey: deviceVk,
+    personaRootSeed: signerSeed, deviceVerifyingKey: deviceVk,
     hearthTrueName: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 1,
   });
 }
@@ -160,7 +160,7 @@ async function main(): Promise<void> {
 
   const daemonAuth: NonNullable<IslandMsg_Manifest["daemonAuth"]> = {
     seed:                   daemonSeed,
-    operatorVerifyingKey:   operatorVk,
+    vesselVerifyingKey:   operatorVk,
     personaGroupDocIdHex:   "11".repeat(32), // unread by boot (affiliation left the boot path)
     personaGroupAgentIdHex: "22".repeat(32),
     meshCabalDocIdHex:      "33".repeat(32),

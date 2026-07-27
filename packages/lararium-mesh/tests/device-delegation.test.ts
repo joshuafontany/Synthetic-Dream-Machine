@@ -19,7 +19,7 @@ const opDidP = vkOf(opSeed).then((vk) => `0x${vk}`);
 
 async function mint(boundEpoch = 5): Promise<DeviceDelegationTiddler> {
   return buildDeviceDelegation({
-    operatorSeed: opSeed,
+    personaRootSeed: opSeed,
     deviceVerifyingKey: await vkOf(devSeed),
     hearthTrueName: PLACE,
     issuedAt: ISSUED,
@@ -39,7 +39,7 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
     // attacker mints their OWN edge under their OWN root: internally valid, but not the pin.
     const attackerSeed = new Uint8Array(32).fill(13);
     const attackerEdge = await buildDeviceDelegation({
-      operatorSeed: attackerSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
+      personaRootSeed: attackerSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
     });
     const res = await verifyDeviceDelegation(attackerEdge, await opDidP); // pin = the REAL operator
     expect(res.ok).toBe(false);
@@ -68,17 +68,17 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
 
   it("NEVER throws on malformed/undefined fields (untrusted CRDT input)", async () => {
     const edge = await mint();
-    // operatorDid undefined would have thrown in v1 (startsWith on non-string) — must now fail loud.
-    await expect(verifyDeviceDelegation({ ...edge, operatorDid: undefined as unknown as string }, await opDidP)).resolves.toMatchObject({ ok: false });
+    // personaRootDid undefined would have thrown in v1 (startsWith on non-string) — must now fail loud.
+    await expect(verifyDeviceDelegation({ ...edge, personaRootDid: undefined as unknown as string }, await opDidP)).resolves.toMatchObject({ ok: false });
     await expect(verifyDeviceDelegation({ ...edge, signature: "deadbeef" }, await opDidP)).resolves.toMatchObject({ ok: false });
     await expect(verifyDeviceDelegation({ ...edge, issuedAt: 12345 as unknown as string }, await opDidP)).resolves.toMatchObject({ ok: false });
   });
 
-  it("rejects non-canonical operatorDid (no 0x / uppercase)", async () => {
+  it("rejects non-canonical personaRootDid (no 0x / uppercase)", async () => {
     const edge = await mint();
     const vkUpper = (await vkOf(opSeed)).toUpperCase();
-    expect((await verifyDeviceDelegation({ ...edge, operatorDid: vkUpper }, await opDidP)).ok).toBe(false); // missing 0x
-    expect((await verifyDeviceDelegation({ ...edge, operatorDid: `0x${vkUpper}` }, await opDidP)).ok).toBe(false); // uppercase
+    expect((await verifyDeviceDelegation({ ...edge, personaRootDid: vkUpper }, await opDidP)).ok).toBe(false); // missing 0x
+    expect((await verifyDeviceDelegation({ ...edge, personaRootDid: `0x${vkUpper}` }, await opDidP)).ok).toBe(false); // uppercase
   });
 
   it("enforces the freshness window when `now` is supplied", async () => {
@@ -94,7 +94,7 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
 
   it("rejects an edge with an illegal-character hearthTrueName at mint", async () => {
     await expect(buildDeviceDelegation({
-      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: "evil|injection", issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
+      personaRootSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: "evil|injection", issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
     })).rejects.toThrow(/hearthTrueName/);
   });
 
@@ -118,7 +118,7 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
 
   it("rejects a non-numeric boundEpoch at mint", async () => {
     await expect(buildDeviceDelegation({
-      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: -1,
+      personaRootSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: -1,
     })).rejects.toThrow(/boundEpoch/);
   });
 });

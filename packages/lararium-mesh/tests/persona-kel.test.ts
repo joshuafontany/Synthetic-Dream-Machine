@@ -191,10 +191,10 @@ describe("persona-kel — the gate-walk (pin-move mechanism, pure)", () => {
 
     // Founding edge: opA delegates to vesselX. It chains to the inception head (opA).
     const foundingEdge = await buildDeviceDelegation({
-      operatorSeed: SEEDS.opA, deviceVerifyingKey: await pubOf(SEEDS.vesselX),
+      personaRootSeed: SEEDS.opA, deviceVerifyingKey: await pubOf(SEEDS.vesselX),
       hearthTrueName: "", issuedAt, expiresAt, boundEpoch: 0,
     });
-    expect(foundingEdge.operatorDid).toBe(foundingOpKeyDid);
+    expect(foundingEdge.personaRootDid).toBe(foundingOpKeyDid);
     const g1 = await verifyEdgeAgainstPersonaKel(foundingEdge, [inception], { now });
     expect(g1.ok).toBe(true);
     expect(g1.headOpKey).toBe(foundingOpKeyDid);
@@ -209,7 +209,7 @@ describe("persona-kel — the gate-walk (pin-move mechanism, pure)", () => {
 
     // The recovering vessel re-issues its device edge under the FRESH op-key opB → still verifies.
     const rotatedEdge = await buildDeviceDelegation({
-      operatorSeed: SEEDS.opB, deviceVerifyingKey: await pubOf(SEEDS.vesselY),
+      personaRootSeed: SEEDS.opB, deviceVerifyingKey: await pubOf(SEEDS.vesselY),
       hearthTrueName: "", issuedAt, expiresAt, boundEpoch: 0,
     });
     const g2v = await verifyEdgeAgainstPersonaKel(rotatedEdge, chain, { now });

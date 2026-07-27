@@ -292,7 +292,7 @@ interface NodeBootPrep {
   repo:             Repo;
   catalogHandle:    DocHandle<LarDoc>;
   /** This PLACE's own 32-byte signing seed — the substrate key, never the human's. The two-key atom keeps it
-   *  distinct from the persona root a device-delegation edge signs under (`device-delegation.operatorSeed`). */
+   *  distinct from the persona root a device-delegation edge signs under (`device-delegation.vesselSeed`). */
   vesselSeed:     Uint8Array;
   /** This vessel's own gate key — the node ANCHORS its confederation, so its gate key doubles as the Nexus
    *  key its browser leaves pass as relayGatePubKey. Every per-Nexus board (WHO, KEL, antigen) scopes to it. */
@@ -543,7 +543,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const carriageLoop: CarriageServeLoop | null = carriageRelayUrl
     ? startCarriageServeLoop({
         relayUrl:     carriageRelayUrl,
-        operatorSeed: vesselSeed,
+        vesselSeed: vesselSeed,
         serverAddr:   vesselIdentity.verifyingKey,
         deps: {
           cadDir:     cadSealDir(storageDir),
@@ -903,7 +903,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     const archiveBytes = loadIdentityArchive();
     const daemonAuth = {
       seed:                 vesselSeed,
-      operatorVerifyingKey: vesselIdentity.verifyingKey,
+      vesselVerifyingKey: vesselIdentity.verifyingKey,
       personaGroupDocIdHex, personaGroupAgentIdHex, meshCabalDocIdHex,
       registerBags: [
         DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,

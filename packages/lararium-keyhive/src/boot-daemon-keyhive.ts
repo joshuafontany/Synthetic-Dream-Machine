@@ -29,7 +29,7 @@ export interface BootDaemonKeyhiveInput {
   /** Cap-event store — DaemonEventStore over the daemon CompositeStore in-island. */
   readonly eventStore: CapabilityProviderInitOpts["eventStore"];
   /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
-  readonly operatorVerifyingKey: string;
+  readonly vesselVerifyingKey: string;
   /** PersonaGroup sentinel Document id hex — legacy sentinel target (the Binding Gate superseded it). */
   readonly personaGroupDocIdHex: string;
   /** PersonaGroup agent id hex — Gate C membership subject. */
@@ -87,10 +87,10 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
   const did = await keyhive.whoami();
 
   // Gate A — keyhive identity MUST match the operator's persisted verifying key.
-  if (!did.endsWith(input.operatorVerifyingKey)) {
+  if (!did.endsWith(input.vesselVerifyingKey)) {
     throw new Error(
       `[daemon-keyhive] Gate A: identity drift — whoami=${did.slice(0, 18)}… ` +
-      `does not match verifyingKey=${input.operatorVerifyingKey.slice(0, 16)}…`,
+      `does not match verifyingKey=${input.vesselVerifyingKey.slice(0, 16)}…`,
     );
   }
 
@@ -111,10 +111,10 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
   }
   // Bind-check: the edge MUST delegate to THIS vessel's key (designation carries authority —
   // a valid edge for a DIFFERENT vessel is not authority for this one).
-  if (input.deviceEdge.deviceVerifyingKey !== input.operatorVerifyingKey) {
+  if (input.deviceEdge.deviceVerifyingKey !== input.vesselVerifyingKey) {
     throw new Error(
       `[daemon-keyhive] Binding Gate: edge delegates to ${input.deviceEdge.deviceVerifyingKey.slice(0, 16)}…, ` +
-      `not this vessel ${input.operatorVerifyingKey.slice(0, 16)}…`,
+      `not this vessel ${input.vesselVerifyingKey.slice(0, 16)}…`,
     );
   }
 
