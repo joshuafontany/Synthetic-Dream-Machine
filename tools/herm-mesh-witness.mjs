@@ -50,14 +50,26 @@ for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
   const carriesNeedle = last.ok && last.dials.some((b) => b.includes(NEEDLE));
 
   if (carriesNeedle) {
-    console.log(`✓ WITNESS: "${NEEDLE}" crossed the chain, cryptographically verified at each hop:`);
+    // SAY WHAT GOT CHECKED, never more. The gate above verifies the LAST hop and reads the earlier ones
+    // for report — so a banner claiming "verified at each hop" overclaims whenever an earlier hop comes
+    // back UNVERIFIED, which it did on real runs. The last-hop gate stands SOUND for the crossing claim
+    // (relay-2 can only carry a dial that reached it), but an earlier hop reading UNVERIFIED names
+    // HOST-REACHABILITY, never chain integrity — the hops talk to each other over the container network,
+    // which no host fetch observes. Two different facts; the banner now keeps them apart.
+    const unverified = reads.filter((r) => !r.ok);
+    console.log(`✓ WITNESS: "${NEEDLE}" reached the LAST hop, cryptographically verified there:`);
     for (const r of reads) {
-      const mark = r.ok ? `${r.dials.length} dials` : `UNVERIFIED (${r.reason})`;
+      const mark = r.ok ? `${r.dials.length} dials` : `UNVERIFIED from host (${r.reason})`;
       const has = r.ok && r.dials.some((b) => b.includes(NEEDLE)) ? " ← carries the dial" : "";
       console.log(`    ${r.hop.name}  cid=${(r.cid ?? "—").slice(0, 12)}…  ${mark}${has}`);
     }
     console.log("  the mesh-palace is a mesh across the astral space — the map relayed blind, three hops,");
     console.log("  the pointer signed, the snapshot hash-matched, the dial decoded.");
+    if (unverified.length > 0) {
+      console.log(`  BOUND: ${unverified.length} earlier hop(s) answered no HOST fetch, so this run verified`);
+      console.log("  the crossing at the last hop ALONE. The dial arriving there proves it crossed; it does");
+      console.log("  NOT prove each hop served the host. Read the unverified marks as reachability, not fault.");
+    }
     process.exit(0);
   }
 
