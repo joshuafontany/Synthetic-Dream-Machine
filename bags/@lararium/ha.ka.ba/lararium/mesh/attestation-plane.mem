@@ -102,6 +102,17 @@ hand apart is free today and impossible later.
 ''The guild vouch law holds here too'' — an attesting operator stakes its own standing, and the lineage
 prices concentration among attestors exactly as it prices it among vouchers (`admission-on-a-lineage`).
 
+''THE METER RIDES THE STANDING PRIMITIVES'' (operator-approved, 2026-07-26). Attestation concentration reads
+through `vouchConcentration` (one cluster's share of the lineage's whole mass) fed to the convex wall that goes
+vertical at the operator's ceiling β — the SAME arithmetic that prices a vouching cartel out as it forms, and
+the same refusal to let any authority NAME one. Only a provenance reader wants writing; the mathematics stands.
+
+''PLURALITY NAMES THE PROXY; INDEPENDENCE NAMES THE PROPERTY.'' Ten attestors forming one clique read as one
+attestor wearing ten masks — canon says as much in the neighbouring register: "mandatory vouching IS a root
+admitter wearing N masks." So the ceiling meters CONCENTRATION rather than counting heads, and it self-tunes as
+a Nexus grows where a fixed number never would. <<~ confidence Synthesis 11/20 >> What independence measure
+survives contact with a real social graph stays genuinely open, and rides research rather than a guess.
+
 !!! 4 · Governance splits from infra duty
 
 ''Sovrin died of this, with no adversary at all'' — 10 Stewards (2017) → 60+ (2019) → 1, dissolved 2025-05-21.
@@ -112,7 +123,7 @@ governance half went unperformed first, and authority pooled in whoever kept sho
 A kahu-cabal carrying both roles inherits that failure. ''SPLIT THEM OR FUND THEM.''
 
 <<~ confidence Synthesis 11/20 >> ''OPEN (operator):'' plans point at the Open Collective platform as the
-funding-and-accountability seam.
+funding-and-accountability shore.
 
 !!! 5 · An append-only attestation log, with a NAMED OBLIGED WATCHER
 
@@ -176,9 +187,25 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
 * ''What is the unit of COLLECTIVE CHOICE?'' Ostrom P3 reads violated — a 2-of-3 signing quorum makes
   operators rule-takers. Keyed to vessels, a human with five vessels casts five votes. Keyed to the Handle,
   only public faces vote. Keyed to the fleet, membership must prove WITHOUT linking the dyads.
-* ''The rival good.'' Fork-as-exit assumes a NON-RIVAL good ("exit disciplines a captor only while forking
-  stays cheap" — `fork-place`); a host-scoped address does not fork. Ruling #6 gestures at the lease as the
-  answer and awaits unpacking.
+* ''The rival good — RULED (operator, 2026-07-26).'' A fork that walks away with vessels ''pays in socially
+  managed resources.'' Everything the mesh reaches OUTWARD to — the first two public DNS namespaces
+  `*.elyncia.net` and `*.amorphousdreams.net` among them — rides an Open Collective, held socially rather than
+  cryptographically. A fork leaving those behind ''accepts that cost'' and re-founds equivalent capability
+  ''as a new place.''
+
+  ''THE ISOMORPHISM CARRIES IT.'' A fork that leaves the leased resources falls back to a ''local rhizome''
+  exactly as a vessel-veil identity falls back to the ''anon floor'' — same law, two planes. Nothing is seized
+  and nothing is destroyed; the departing party simply arrives holding what it brought, which reads as the
+  honest reading of leaving rather than a penalty imposed on it. The lease chain stands pono: a leased resource
+  never becomes a possession, so losing it on the way out costs a capability and never a self.
+
+  So "who holds the zone after a split" ''wants no cryptographic answer and can have none'' — it names a
+  registrar account and a legal person, which sits OUTSIDE what this stack governs. The design's part reads:
+  make the sidecar structurally cheap to lose (severable · leased · identity surviving it whole), so a fork's
+  question shrinks from "who owns the name" to "who stands up a resolver."
+
+  ''CHOOSING WHICH FAILURE TO ACCEPT, never whether to fail'' — and the choosing runs at every scale: kahu,
+  operator, user.
 * ''Exit may COMFORT rather than discipline.'' Hirschman's lazy monopoly: a volunteer cabal running
   infrastructure it wanted anyway loses little when critics depart, and cheap forking plus portable identity
   produces exactly the mobility asymmetry that lets a core purchase internal peace by shedding its critics.
