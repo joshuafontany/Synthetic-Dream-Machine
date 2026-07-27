@@ -1,6 +1,6 @@
-# docker-compose.swarm-ws.yml — the DEPLOYED swarm over LIVE-WS (the strangler-fig swap).
+# docker-compose.swarm-ws.yml — the DEPLOYED swarm over LIVE-WS (the same shore, WS form).
 # Same vessels, same ceremony as docker-compose.swarm.yml — but the membership channel is
-# now a live WebSocket RELAY container the vessels dial, NOT a shared volume. The seam made
+# now a live WebSocket RELAY container the vessels dial, NOT a shared volume. The shore made
 # the swap a one-env change (LAR_SWARM_RELAY instead of LAR_SWARM_DIR).
 #
 #   relay    (relay-node)  a dumb broadcast membership relay on :8090

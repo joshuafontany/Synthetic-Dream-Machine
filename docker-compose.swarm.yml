@@ -1,7 +1,7 @@
 # docker-compose.swarm.yml — the DEPLOYED WHO-plane swarm: different PersonaGroups found +
 # join a SHARED cabal-realm across REAL containers, the membership ceremony crossing a FILE
-# channel over a shared VOLUME (file/POST first; the live-WS relay-service is the strangler-
-# fig follow). Each vessel is its own container + its own Keyhive identity.
+# channel over a shared VOLUME (file/POST here; the live-WS relay-service rides the SAME shore,
+# chosen by deployment). Each vessel is its own container + its own Keyhive identity.
 #
 #   founder  (LAR_SWARM_ROLE=founder)  founds the place, admits the joiners, writes roster.json
 #   vessel-b (joiner) ─┐  offer contact-card over /swarm/channel → await admit
