@@ -117,11 +117,11 @@ export interface FoundedCabalRealm {
  * FOUND a cabal-realm AND its veil-public CHARTER in one act — the founding that
  * gives the realm its public face. Mints the sentinel + substrate + lease
  * (foundCabalRealm, unchanged) and ALSO projects the realm's charter through the
- * pure disclosure membrane (mesh/projectCabalRealmCharter): the charter carries
+ * pure disclosure shore (mesh/projectCabalRealmCharter): the charter carries
  * ONLY the realm's content-addressed name + bearing + whatever the founder CHOOSES
  * to advertise (`meta` — title / description / foundedAt; an empty meta founds a
  * name-only realm). The members-only substrate + roster NEVER enter the charter —
- * structurally, the membrane reads only {realm, meta} (canon #the-veil-public-set).
+ * structurally, the shore reads only {realm, meta} (canon #the-veil-public-set).
  *
  * `foundedAt` rides `meta` so the founder stamps the founding MOMENT from its own
  * runtime clock (the ceremony stays a deterministic, clock-free function — a test
@@ -138,7 +138,7 @@ export async function foundCabalRealmWithCharter(
   opts:         FoundCabalRealmOpts = {},
 ): Promise<FoundedCabalRealm> {
   const place = await foundCabalRealm(provider, uri, substrateUrl, opts);
-  // The membrane reads ONLY {realm, meta}; no roster exists yet at founding, and
+  // The shore reads ONLY {realm, meta}; no roster exists yet at founding, and
   // none could cross even if it did (#the-veil — projectCabalRealmCharter proof).
   const charter = projectCabalRealmCharter({ place, meta });
   return { place, charter };
@@ -159,7 +159,7 @@ export async function joinCabalRealm(
   place:               CabalRealm,
   memberIdentifierHex: string,
 ): Promise<void> {
-  const gated = cabalRealmJoinGate(memberIdentifierHex);   // INERT seam — no legitimacy baked
+  const gated = cabalRealmJoinGate(memberIdentifierHex);   // INERT shore — no legitimacy baked
   await provider.addSentinelMember(gated, place.placeDocIdHex);
 }
 

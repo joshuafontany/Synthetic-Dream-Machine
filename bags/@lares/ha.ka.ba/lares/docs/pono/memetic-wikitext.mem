@@ -150,7 +150,7 @@ TW5 docs show `{{MyTiddler||Template}}` generating a `TiddlerWidget` containing 
 ''2c. Hard vs soft transclusion maps to visible vs latent meme-edge distinction.''
 TW5 distinguishes hard transclusions (detectable by superficial WikiText inspection) from soft transclusions (hidden in procedures, variables, or dynamically generated widgets). The visible vs latent meme-edge distinction has direct TW5 precedent.
 
-''2d. Recursion and self-reference form a documented error seam.''
+''2d. Recursion and self-reference form a documented error shore.''
 TW5 defines `{{!!text}}` as a "Recursive transclusion error" and treats indirect cycles as the same class of failure. Memetic sigils need to define direct and indirect recursion failures explicitly: self-targeting `ahu`, recursive wrapper re-entry, and cyclic `kahea` graphs.
 
 ''2e. Cascades stack as first-match rules — `kahea -> cascade` runs native.''

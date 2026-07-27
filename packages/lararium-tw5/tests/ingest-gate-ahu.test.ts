@@ -10,7 +10,7 @@
  * vanished on the next projection).
  *
  * Two locks:
- *   1. the membrane round-trips a slash-path slot body whole (deserializer fix);
+ *   1. the shore round-trips a slash-path slot body whole (deserializer fix);
  *   2. an edit inside such a slot reads as CHANGED, never canonical-equivalent
  *      (the gate never no-ops a framing change).
  */
@@ -27,7 +27,7 @@ const BOOT = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/pono/cabal-realm.me
 const URI  = "lar:///ha.ka.ba/lares/api/pono/cabal-realm";
 const sha = (s: string) => createHash("sha256").update(s, "utf8").digest("hex");
 
-/** Canonical render of a carrier through the membrane, records → text. */
+/** Canonical render of a carrier through the shore, records → text. */
 function renderOf(text: string): string {
   const map = new Map(memeticWikitextDeserializer(text, { title: URI }).map((r) => [String(r.title), r] as const));
   return expandMemeRefs((t) => map.get(t), URI) ?? "";

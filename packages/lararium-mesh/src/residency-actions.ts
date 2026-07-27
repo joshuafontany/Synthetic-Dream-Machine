@@ -192,7 +192,7 @@ export interface IngestCarrier {
   readonly syncedHash: string | null;
   /** The carrier's file extension (".mem" / ".tid" / ".json" / ".md" …) as the
    *  gesture read it from disk. The island routes by it: a memetic carrier (SOH
-   *  heading / `.mem`) decomposes at the memetic membrane; any other legal TW5
+   *  heading / `.mem`) decomposes at the memetic shore; any other legal TW5
    *  filetype rides TW5's OWN deserializer registry, keyed by this extension.
    *  Absent → the island treats the carrier as memetic (back-compat). */
   readonly ext?:       string;

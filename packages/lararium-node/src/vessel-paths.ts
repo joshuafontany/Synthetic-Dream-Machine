@@ -22,7 +22,7 @@
  * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
  *
  * Every resolver answers the canonical XDG dir deterministically — one canonical home, no `~/.lares`
- * fallback arm. The env seams
+ * fallback arm. The env shores
  * (`LAR_ROOT`, `MEMPALACE_PALACE_PATH`) are preserved and win.
  *
  * `LAR_ROOT` overrides the home root for ISOLATED instances (the test harness / staged pairs): each

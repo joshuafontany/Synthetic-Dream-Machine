@@ -1,13 +1,13 @@
 /**
- * qr-transport.test.ts — QR GENERATION (deterministic, ECC H) + the still-image DECODE seam (pluggable).
+ * qr-transport.test.ts — QR GENERATION (deterministic, ECC H) + the still-image DECODE shore (pluggable).
  *
  * Proven:
  *   · GEN is deterministic + ECC H — the same carriage yields the same module matrix,
  *   · the PNG renders the matrix FAITHFULLY — each module's centre pixel matches the matrix bit (a real scanner
  *     would read it back), so GEN fidelity holds without bundling a scanner,
- *   · the DECODE SEAM plumbs bytes → RGBA (pngjs) → the injected decoder → text (a no-read / torn PNG → null).
+ *   · the DECODE SHORE plumbs bytes → RGBA (pngjs) → the injected decoder → text (a no-read / torn PNG → null).
  *
- * The REAL headless QR decode (jsQR) is the injectable decoder this seam takes — surfaced as a dep decision,
+ * The REAL headless QR decode (jsQR) is the injectable decoder this shore takes — surfaced as a dep decision,
  * not bundled here (see qr-transport.ts).
  */
 import { describe, test, expect } from "vitest";
@@ -17,7 +17,7 @@ import {
 
 const CARRIAGE = "#grant=eyJraW5kIjoibGFyLXBlcnNvbmEtc2VhbGVkLWdyYW50L3YxIn0";
 
-describe("qr-transport — GEN + the decode seam", () => {
+describe("qr-transport — GEN + the decode shore", () => {
   test("GEN is deterministic and ECC-H (same carriage → same matrix)", () => {
     const a = qrCarriageMatrix(CARRIAGE);
     const b = qrCarriageMatrix(CARRIAGE);
@@ -46,7 +46,7 @@ describe("qr-transport — GEN + the decode seam", () => {
     }
   });
 
-  test("the DECODE SEAM plumbs bytes → RGBA → injected decoder → text; a torn PNG → null", async () => {
+  test("the DECODE SHORE plumbs bytes → RGBA → injected decoder → text; a torn PNG → null", async () => {
     const png = await qrCarriageToPngBuffer(CARRIAGE);
     // An injected decoder that (standing in for jsQR) recovers the carriage from a well-formed image.
     const fakeDecoder = (rgba: Uint8ClampedArray, w: number, h: number): string | null =>

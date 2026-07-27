@@ -46,7 +46,7 @@ export interface CarriageRelay {
 /**
  * Resolve the relay's gate seed the way a vessel boot does: a configured 32-byte hex seed when one rides the config,
  * else the vessel's OWN identity seed. Deterministic in BOTH arms — the same inputs yield the same gate key across
- * restarts, so a family's hearths keep dialing the same crossroads (NEVER a fresh random per boot). The one seam the
+ * restarts, so a family's hearths keep dialing the same crossroads (NEVER a fresh random per boot). The one shore the
  * boot's relay-standing gate reads for its seed.
  */
 export function resolveRelayGateSeed(vesselSeed: Uint8Array, seedHex?: string | null): Uint8Array {

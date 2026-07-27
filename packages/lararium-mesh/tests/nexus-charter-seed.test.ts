@@ -1,5 +1,5 @@
 /**
- * nexus-charter-seed.test — the ROSTER-FROM-DOC read, FAIL-CLOSED at every unseated seam (#66).
+ * nexus-charter-seed.test — the ROSTER-FROM-DOC read, FAIL-CLOSED at every unseated shore (#66).
  *
  * Proven:
  *   · a null / absent doc folds to the EMPTY roster (the antigen ignores every entry),

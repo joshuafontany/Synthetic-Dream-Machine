@@ -1,10 +1,10 @@
 /**
- * file-membership-channel — the FILE/POST impl of the membership seam (MembershipChannel),
+ * file-membership-channel — the FILE/POST impl of the membership shore (MembershipChannel),
  * node-side. Envelopes ride as JSON files in a shared directory; a per-recipient seen-set
  * gives deliver-once. Cross-PROCESS by construction (the files are the shared state; each
  * process keeps its own seen-set) — a shared Docker VOLUME makes it cross-CONTAINER.
  *
- * Pairs with WSMembershipChannel behind the same seam: file/POST rides the shared-volume,
+ * Pairs with WSMembershipChannel behind the same shore: file/POST rides the shared-volume,
  * no-relay-service deployed path; the live-WS relay rides the relay-served path.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm

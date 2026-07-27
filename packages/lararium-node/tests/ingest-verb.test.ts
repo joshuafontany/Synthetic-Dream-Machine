@@ -2,7 +2,7 @@
  * ingest-verb.test.ts — the INGEST verb (island side): the Confluence gate composed
  * with replace-by-group apply, riding the summons/outcome record-pair physics.
  *
- * Driven by the live boot meme (real carrier, real membrane). The verb:
+ * Driven by the live boot meme (real carrier, real shore). The verb:
  *   - computes currentRenderHash from the merge seat (the island's only hash)
  *   - runs decideIngest (echo-noop · refuse · canonical-equivalent · ingest · conflict)
  *   - on ingest: lands fresh records, tombstones vanished group members
@@ -159,13 +159,13 @@ describe("INGEST — the gate composed with replace-by-group", () => {
     expect(await liveGroup(composite)).toEqual(before);
   });
 
-  test("refuse: a carrier the membrane cannot round-trip applies nothing and carries warnings", async () => {
+  test("refuse: a carrier the shore cannot round-trip applies nothing and carries warnings", async () => {
     const composite = makeComposite();
     await seedBoot(composite);
     const before = await liveGroup(composite);
 
     // The known refusal class: an unclosed fence that swallows the closer
-    // (the membrane's degraded-carrier surfacing, found live 2026-06-11).
+    // (the shore's degraded-carrier surfacing, found live 2026-06-11).
     const broken = source.replace("<<~ &#x0003; >>", "```js\nunclosed fence\n<<~ &#x0003; >>");
     const table = new VerbTable();
     registerActionReactors(table, { composite });

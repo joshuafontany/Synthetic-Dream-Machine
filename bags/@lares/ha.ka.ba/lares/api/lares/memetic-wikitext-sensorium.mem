@@ -171,7 +171,7 @@ disjoint-match island-scan over STORED bytes — holds as a ''TS functor'' sensi
 that reader stays a first-class TS home. The ''ki stream-processing'' — the windowed-coupling model, the
 bands and coupling gates that breathe over the aligned-tick stream — runs ''py/R'' per-stream, the
 FFZ-aligned gate firing py-side, and TS stands as the coordinator that drives it. The WAVE holds
-identically across the TS/py membrane: the li-reader on one bank, the ki-model on the other, one shape.
+identically across the TS/py shore: the li-reader on one bank, the ki-model on the other, one shape.
 
 <<~/ahu >>
 

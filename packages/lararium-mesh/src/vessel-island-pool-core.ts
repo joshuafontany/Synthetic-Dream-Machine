@@ -223,7 +223,7 @@ export class VesselIslandPoolCore {
    * references. Returns true when the grain is live after the call.
    *
    * A grain never mounted here (no retained spec) needs its spec resolved by the
-   * CALLER first (the resolver's spec-resolution seam) — `ensureWiki` re-mounts a
+   * CALLER first (the resolver's spec-resolution shore) — `ensureWiki` re-mounts a
    * KNOWN grain; it does not invent a spec. Absent a retained spec it returns false
    * (the caller resolves the spec, then calls `mountWiki`).
    */
@@ -405,7 +405,7 @@ export class VesselIslandPoolCore {
   }
 
   /** Relay a main-thread TEXT event to the wiki island — the input leg of the RETURN. Same drop-honest
-   *  fire-and-forget as placeWikiEvent; `mkWikiDomInput` refuses a value past the bound at this seam,
+   *  fire-and-forget as placeWikiEvent; `mkWikiDomInput` refuses a value past the bound at this shore,
    *  and the island door refuses it again on arrival. */
   placeWikiInput(
     wikiId: string,
@@ -484,7 +484,7 @@ export class VesselIslandPoolCore {
     return this._mountSpecs.has(wikiId);
   }
 
-  /** TEACH the pool a grain's mount spec WITHOUT mounting it — the resolver's seam
+  /** TEACH the pool a grain's mount spec WITHOUT mounting it — the resolver's shore
    *  for a never-opened wiki (resolveWikiSpec). Once taught, `ensureWiki` (and so
    *  the collector's onHydrate) can activate it exactly like a reactivated grain,
    *  through the single-flight latch. A no-op once the grain is already known, so a

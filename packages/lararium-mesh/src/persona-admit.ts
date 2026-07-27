@@ -261,7 +261,7 @@ export type GrantVerdict =
  *   · nonce_B echoes B's own offer (binds to THIS enrollment — no cross-offer replay),
  *   · nonce_A + expiry match the cleartext frame (the cleartext that keyed the seal cannot lie about the signed body),
  *   · the grant is in-date and targets B's own vessel.
- * FAIL-CLOSED at every seam: a decrypt failure (wrong key / tamper / a photograph opened without the ephemeral
+ * FAIL-CLOSED at every shore: a decrypt failure (wrong key / tamper / a photograph opened without the ephemeral
  * secret) returns `{ ok:false }`, never a throw — the grant DID NOT ARRIVE.
  */
 export async function openPersonaGrant(args: {

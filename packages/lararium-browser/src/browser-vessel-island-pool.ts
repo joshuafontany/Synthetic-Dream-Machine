@@ -8,7 +8,7 @@
  * Browser inherits the residency model by subtraction; `pinned` is honored the
  * moment a finite hotCap creates eviction pressure.
  *
- * No storage seam: each browser island owns its IndexedDB partition keyed by
+ * No storage shore: each browser island owns its IndexedDB partition keyed by
  * its wiki URI (set inside the island kernel), so the host returns undefined.
  *
  * Meme: lar:///ha.ka.ba/lararium/browser/browser-vessel-island-pool

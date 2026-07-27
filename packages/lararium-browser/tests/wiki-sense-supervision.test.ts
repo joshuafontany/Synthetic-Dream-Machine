@@ -105,12 +105,12 @@ describe("wiki-sense supervision reads — browser tier (real worker wire)", () 
       .toThrow(/no live island/);
   });
 
-  test("proof-federate refuses typed — the membrane Act stays the operator's", async () => {
+  test("proof-federate refuses typed — the shore Act stays the operator's", async () => {
     const s = await standSupervised();
     expect(s.proofFederate(ISLAND_A)).toEqual({
       status:   "operator-gated",
-      awaits:   "membrane-Act",
-      crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure membrane)",
+      awaits:   "shore-Act",
+      crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure shore)",
       island:   ISLAND_A,
     });
   });

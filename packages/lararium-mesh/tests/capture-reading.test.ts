@@ -1,5 +1,5 @@
 /**
- * capture-reading — the clock↔dial seam: a place's maintenance concentration read onto the
+ * capture-reading — the clock↔dial shore: a place's maintenance concentration read onto the
  * convex capture curve toward β. Verdict-FREE: it surfaces where the place sits, never rules.
  */
 import { describe, test, expect } from "vitest";

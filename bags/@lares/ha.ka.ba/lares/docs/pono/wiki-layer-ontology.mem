@@ -151,7 +151,7 @@ Every boundary a lararium holds reads as a ''causal-island shore'' (`causal-isla
 * ''plane ↔ plane'' — a bag's pointer crosses `@catalog` (user) ⇄ `@oracle` (system) by an admin `MOVE` that sets a new meshwise surface. ''Plane membership stays mutable, never hardcoded'' — composability across planes holds first-class; the split scopes by //role//, never by a frozen plane.
 * ''host ↔ lararium'' //(deferred horizon)// — a lararium may embed as a ''guest'' causal island inside a host that owns its own integration layer (UE5.6/6+ Verse / SceneGraph; MUDlet's Lua object-model). The guest never assumes it sits at the top, never claims a global now across the shore.
 
-''The law.'' A shore crosses ONLY by a deliberate, audited residency `MOVE` carrying `change-id` and landing an effect record — never a synchronous bridge, never a shared-now coupling, never a silent drift. Each side stays authoritative for its own state. ''Do not overconstrain a shore:'' the surface and crossing contract stays ''host-agnostic'' — a projection surface reads as disk today, a SceneGraph node or a MUD buffer tomorrow, with no surface-kind baked in. Design the seam; build no host adapter until a real host arrives.
+''The law.'' A shore crosses ONLY by a deliberate, audited residency `MOVE` carrying `change-id` and landing an effect record — never a synchronous bridge, never a shared-now coupling, never a silent drift. Each side stays authoritative for its own state. ''Do not overconstrain a shore:'' the surface and crossing contract stays ''host-agnostic'' — a projection surface reads as disk today, a SceneGraph node or a MUD buffer tomorrow, with no surface-kind baked in. Design the shore; build no host adapter until a real host arrives.
 
 <<~/ahu >>
 

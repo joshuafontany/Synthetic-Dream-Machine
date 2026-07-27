@@ -156,7 +156,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     const store  = KH.CiphertextStore.newInMemory();
 
     const handler = (event: unknown): void => {
-      // Fire-and-forget persistence. Errors get swallowed at this seam —
+      // Fire-and-forget persistence. Errors get swallowed at this shore —
       // the EventStore impl logs its own failures.
       const e = event as KH.Event;
       try {
@@ -594,7 +594,7 @@ export class KeyhiveProvider implements CapabilityProvider {
     return result;
   }
 
-  /** CIV-2b seam — before an op resolves a bag's Document, materialize its island if boot deferred it.
+  /** CIV-2b shore — before an op resolves a bag's Document, materialize its island if boot deferred it.
    *  A noop for a resident island; the "first access" that turns a deferred foreign island live. */
   private async ensureIsland(docIdHex: string): Promise<void> {
     await this.materializeIsland(docIdHex);

@@ -5,7 +5,7 @@ Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes (P2 of the
 phased plan). This module COMPUTES the fuzzy-membership / sanction-degree FORM
 vector; the mempalace base merely STORES it as a caller-supplied vector for the
 "form" collection. It is the Lares-specific integration, never the base layer —
-the seam ruling (living-grammar-palace#phased-plan): "the @daemon COMPUTES the
+the shore ruling (living-grammar-palace#phased-plan): "the @daemon COMPUTES the
 Lares-specifics and hands the base caller-vectors; the base STORES · SERVES · FUSES".
 
 The CONTINUOUS plane of the two planes. The DISCRETE plane (the constructicon

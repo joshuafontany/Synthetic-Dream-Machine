@@ -41,7 +41,7 @@ export interface WorldlineCausal {
   readonly stamps: Readonly<Record<string, ItcStamp>>;
 }
 
-/** The seam a frontier is appended on — the handle stays rigid, the frontier rides after this mark. */
+/** The shore a frontier is appended on — the handle stays rigid, the frontier rides after this mark. */
 const FRONTIER_SEP = "@";
 
 /**
@@ -84,7 +84,7 @@ export function stampKey(handle: string, stamp: ItcStamp): string {
 /**
  * Split a composite key back into its rigid handle (everything before the LAST `@`). A lineage-path
  * handle carries no `@` of its own (dotted form: `run.child`); the frontier suffix always does, so the
- * LAST `@` is the seam. A key with no `@` reads as a bare handle (defensive).
+ * LAST `@` is the shore. A key with no `@` reads as a bare handle (defensive).
  */
 export function handleFromKey(key: string): string {
   const at = key.lastIndexOf(FRONTIER_SEP);

@@ -1,7 +1,7 @@
 /**
  * binary-projection — a binary filetype (image/PDF) lands as RAW bytes on disk.
  *
- * The carrier holds base64 text (the tiddler `text` field); the render seam marks
+ * The carrier holds base64 text (the tiddler `text` field); the render shore marks
  * `encoding: "base64"`; the projector DECODES it and writes the real bytes, so a
  * `.png` on disk opens as an image — not as its base64 text. The Synced-tree
  * observation still hashes the base64 string (the carrier form), so the echo gate

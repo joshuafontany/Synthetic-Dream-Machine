@@ -1,5 +1,5 @@
 /**
- * wiki-coherence-indicator (browser tier) — the coherence projection's DOM-SINK witness, the ONLY platform seam.
+ * wiki-coherence-indicator (browser tier) — the coherence projection's DOM-SINK witness, the ONLY platform shore.
  *
  * The platform-blind organ (@lararium/tw5 projectCoherenceIndicator) shaped the frame; this witnesses
  * the DOM write that renders it — a real Chromium `document`, a real host element. The assertions:

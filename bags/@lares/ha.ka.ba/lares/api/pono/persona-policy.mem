@@ -36,7 +36,7 @@ The multi-persona identity core (persona-circle: a human as a private Circle of 
 
 !! Ruling 1 ~ one face to the mesh, reboot to switch (PRIVATE-all, PUBLIC-one)
 
-''A vessel shows the mesh ONE face at a time.'' The public/carry seam serves ''only the WORN persona''; the human's own private pool sees ''all N''. So the disclosure asymmetry reads: ''PRIVATE-all, PUBLIC-one'' — the multitude stays whole inside, one persona reaches outward.
+''A vessel shows the mesh ONE face at a time.'' The public/carry shore serves ''only the WORN persona''; the human's own private pool sees ''all N''. So the disclosure asymmetry reads: ''PRIVATE-all, PUBLIC-one'' — the multitude stays whole inside, one persona reaches outward.
 
 ''Switching a persona REBOOTS into the new identity'' — never a live hot-swap. The active-persona pointer ''reads at BOOT'': `wearPersona` sets it, the boot reads it, and the vessel re-stands AS that persona. This matches the built selector exactly (the mask you put on holds until you take it off and re-stand the house beneath). //"No two equals the same"// (Principia Discordia): each boot re-enacts a ''distinct identity-instance'', never a fused continuity across the switch.
 
@@ -70,11 +70,11 @@ The honest wall stays lit, dual to the wax-stamp's: ''"a valid key" reads as cry
 
 A persona carries ''two names beside its key'', and the key stays the only global one. ''Zooko's triangle resolves'' the same way handle-card proves it: the ''GLOBAL name STAYS the pubkey'' — the veiled-user key the persona-HD tree derives — secure-and-decentralised because it IS the key; ''memorability rides a LOCAL name'':
 
-* ''The OWN side ~ the private pet-name map'' (`{handleIndex -> petname}`, persona-petname). The human's own label for their own faces — "work", "the-guru", "my-burner" — ''freely renamable'' and ''NEVER federated''. It names the inside of the private Vault to its keeper alone. The wall runs structural: no board write exists in the seam. A ''multitude-view'' reads the whole self across the vessel — `{persona → pet-name, held-here?, has-public-handle?}` — so the human sees every face while the mesh sees one.
+* ''The OWN side ~ the private pet-name map'' (`{handleIndex -> petname}`, persona-petname). The human's own label for their own faces — "work", "the-guru", "my-burner" — ''freely renamable'' and ''NEVER federated''. It names the inside of the private Vault to its keeper alone. The wall runs structural: no board write exists in the shore. A ''multitude-view'' reads the whole self across the vessel — `{persona → pet-name, held-here?, has-public-handle?}` — so the human sees every face while the mesh sees one.
 * ''The OTHER side ~ the handle-book'' (handle-book). The recogniser's local labels for ''OTHERS'' nyms' — never on any wire.
 * ''The ONLY name that federates ~ the public glamour'' (persona-glamour). The persona's veiled key ''signs a HandleCard'' whose `glamour` shows a chosen display (never a legal identity); it ''announces onto the per-Nexus @crossroads WHO board'' (who-face), self-certifying, monotone-versioned, leased against the local clock.
 
-''Three stores, never fused'': private-own (pet-name) ⊥ public-own (glamour record) ⊥ others (handle-book). The pet-name map ''wants to sync'' across the human's own PersonaGroup vessel-pool — private-federated over a PRIVATE BAG — but that ride waits on the ''device-fleet'' (not yet built; blocks on Beelay). So the seam stands ''LOCAL-FIRST'', shaped so the cross-pool sync drops into the same store shape when the fleet lands. <<~ confidence Synthesis 12/20 >>
+''Three stores, never fused'': private-own (pet-name) ⊥ public-own (glamour record) ⊥ others (handle-book). The pet-name map ''wants to sync'' across the human's own PersonaGroup vessel-pool — private-federated over a PRIVATE BAG — but that ride waits on the ''device-fleet'' (not yet built; blocks on Beelay). So the shore stands ''LOCAL-FIRST'', shaped so the cross-pool sync drops into the same store shape when the fleet lands. <<~ confidence Synthesis 12/20 >>
 
 <<~/ahu >>
 

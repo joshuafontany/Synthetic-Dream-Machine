@@ -263,7 +263,7 @@ async function bootVessel(): Promise<void> {
   // link), and the stash answers when no fragment stands.
   const admit = takeAdmitFromLocation() ?? takeStashedAdmit();
   // A local boot and a CROSSED boot look identical from the outside: both render, both say "ready". So
-  // the vessel names which one it just performed. A seam nobody can see is a seam nobody watches, and an
+  // the vessel names which one it just performed. A shore nobody can see is a shore nobody watches, and an
   // absent crossing that reports nothing reads exactly like a crossing that worked.
   if (relayUrl) {
     console.log(`[vessel] CROSSING → ${relayUrl}`);

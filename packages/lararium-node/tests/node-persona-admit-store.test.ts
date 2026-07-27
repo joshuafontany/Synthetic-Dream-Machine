@@ -4,7 +4,7 @@
  *
  * Proven:
  *   · NEVER-SYNCS (structural) — the view rides a LOCAL 0o600 file under the identity home; the module imports
- *     no Repo / bag / board seam, so nothing it writes can reach the wire,
+ *     no Repo / bag / board shore, so nothing it writes can reach the wire,
  *   · record → list round-trips; a re-admission at a LATER expiry supersedes, a STALE one never rolls it back,
  *   · CONSUME-ONCE — a stashed enrollment secret / sent memo is returned exactly once, then dropped (a secret
  *     never lingers past the one hop it enables); a second take reads null.

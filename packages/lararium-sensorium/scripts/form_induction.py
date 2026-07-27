@@ -834,7 +834,7 @@ def induce_forest(forest: list, *, min_support: int = _DEFAULT_MIN_SUPPORT,
     return {"forms": forms, "summary": summary}
 
 
-# ── the LLM-names-LAST seam (downstream of the loop, never inside it) ─────────────────
+# ── the LLM-names-LAST shore (downstream of the loop, never inside it) ─────────────────
 
 
 def label_constructicon(forms: list, namer=None) -> list:

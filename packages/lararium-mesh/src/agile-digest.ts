@@ -1,6 +1,6 @@
 /**
  * agile-digest — the algorithm-tagged content-digest grammar (`algorithm:hex`,
- * multihash-style), the migration seam that lets a stored bare-hex `sha256`
+ * multihash-style), the migration shore that lets a stored bare-hex `sha256`
  * digest COEXIST with a future tagged scheme — no flag-day, no mass re-key.
  *
  * The stack already content-addresses (crypto.ts `carrierHash`, `cidV1Sha256`,
@@ -14,7 +14,7 @@
  *                       `algo-hex` (SRI/`sourceCidOf` form) reads TAGGED.
  *   - `digestsEqual`  — normalizes BOTH sides to `(algo, hex)` and compares, so a
  *                       stored bare `ab…` equals a freshly-computed `sha256:ab…`.
- *                       THIS is the dual-read seam: readers route their
+ *                       THIS is the dual-read shore: readers route their
  *                       `stored === computed` checks through it and stay correct
  *                       across the tag boundary.
  *   - `formatDigest`  — emits the canonical tagged form `algo:hex`.
@@ -118,7 +118,7 @@ export function tagDigest(digest: string): string {
 }
 
 /**
- * THE DUAL-READ SEAM. Two digests name the SAME content iff they carry the same
+ * THE DUAL-READ SHORE. Two digests name the SAME content iff they carry the same
  * algorithm and the same hex — regardless of whether either side rode bare
  * (implicit sha256) or tagged. A stored bare `ab…` therefore equals a computed
  * `sha256:ab…`, which is exactly what lets readers widen to accept-both BEFORE any

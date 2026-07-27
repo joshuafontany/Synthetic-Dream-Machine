@@ -71,7 +71,7 @@ describe("formatDigest / tagDigest", () => {
   });
 });
 
-describe("digestsEqual — THE DUAL-READ SEAM", () => {
+describe("digestsEqual — THE DUAL-READ SHORE", () => {
   test("a stored bare hex equals a freshly-computed tagged digest", () => {
     // The no-flag-day guarantee: today's all-bare store compares equal to a
     // tomorrow-tagged producer.

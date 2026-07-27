@@ -12,7 +12,7 @@ manaoio   = 16
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "THE undefined-network-edge doctrine — how a local-first causal-island mesh connects, crosses, and admits at an edge no census reaches. Grounds the second-spore / federation frontier in a 4-spirit convergence (Erdős/random-graph · network-edge SOTA · biology · physics/social): the edge connects as a PHASE TRANSITION reasoned PROBABILISTICALLY; the crossing is the weak-tie/anastomosis carried cheap+optimistic; membership is admit-then-test-then-SEVER at the seam via distributed challenge + per-edge anergy; dependence is a buildable resource; the lease is a pheromone. Adopt Beelay/Iroh/Keyhive; invent the admission semantics."
+role      = "THE undefined-network-edge doctrine — how a local-first causal-island mesh connects, crosses, and admits at an edge no census reaches. Grounds the second-spore / federation frontier in a 4-spirit convergence (Erdős/random-graph · network-edge SOTA · biology · physics/social): the edge connects as a PHASE TRANSITION reasoned PROBABILISTICALLY; the crossing is the weak-tie/anastomosis carried cheap+optimistic; membership is admit-then-test-then-SEVER at the shore via distributed challenge + per-edge anergy; dependence is a buildable resource; the lease is a pheromone. Adopt Beelay/Iroh/Keyhive; invent the admission semantics."
 tags      = ["api/pono/meme", "api/lararium"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/api/network-edge"
@@ -71,21 +71,21 @@ The second spore — two sovereign islands meeting and syncing for the first tim
 * ''Granovetter's strength of weak ties'' — //all bridges are weak ties.// A ''strong'' tie cannot bridge (triadic closure would merge the clusters it spans). The first-meeting crossing is the low-weight, high-structural-value conduit of ''non-redundant'' state. ''Protect and proliferate the weak crossings'' — they, not the dense intra-island mesh, decide whether the whole connects.
 * ''Hyphal anastomosis'' (fungal) — two hyphae meet tip-to-tip and ''fuse'' into one continuous network, exploring first through thin ''conidial anastomosis tubes (CATs)'' before commitment. The crossing exists //for// the merge; many local fusions become one shared interior with no center.
 
-''Transferable:'' make the first crossing ''cheap and optimistic'' — fuse on contact (a thin exploratory feeler first), and place the cost //after// the merge, at the seam.
+''Transferable:'' make the first crossing ''cheap and optimistic'' — fuse on contact (a thin exploratory feeler first), and place the cost //after// the merge, at the shore.
 
 <<~/ahu >>
 
 <<~ ahu #membership >>
 
-!! Membership ~ admit-then-test-then-SEVER at the seam
+!! Membership ~ admit-then-test-then-SEVER at the shore
 
-Biology inverts authenticate-then-admit. ''Hyphal anastomosis + vegetative incompatibility'' folds crossing AND membership-gate into one mechanism: two mycelia ''fuse first'', then ''vegetative incompatibility'' triggers a //localized programmed cell death// that kills the fusion seam if they mismatch — recognition ''distributed across `het` loci'' (≈6–11 polymorphic challenge-points, no registry); fuse-and-stay only if matched at every locus (same ''vegetative compatibility group''). The gate evolved against ''somatic parasitism'' (freeloaders draining the network) and ''mycovirus'' transmission riding the fusion — //precisely the veil/vouch threat model.//
+Biology inverts authenticate-then-admit. ''Hyphal anastomosis + vegetative incompatibility'' folds crossing AND membership-gate into one mechanism: two mycelia ''fuse first'', then ''vegetative incompatibility'' triggers a //localized programmed cell death// that kills the fusion shore if they mismatch — recognition ''distributed across `het` loci'' (≈6–11 polymorphic challenge-points, no registry); fuse-and-stay only if matched at every locus (same ''vegetative compatibility group''). The gate evolved against ''somatic parasitism'' (freeloaders draining the network) and ''mycovirus'' transmission riding the fusion — //precisely the veil/vouch threat model.//
 
-<<~moves crossing -> fuse-on-contact then/challenge-at-the-seam reject/SEVER-the-local-junction never/ban-the-peer >>
+<<~moves crossing -> fuse-on-contact then/challenge-at-the-shore reject/SEVER-the-local-junction never/ban-the-peer >>
 
 ''The build pattern (biologically literal, and = BeeKEM "blank the tree path"):''
 # ''Admit optimistically'' — fuse on contact (cheap weak-tie crossing).
-# ''Test at the seam'' — mutual challenge across ''distributed'' identity-points (`het` loci ↔ the immune ''repertoire''; no central friend-list — "self" is the ''negative space'' clonal-deletion leaves; cheap ''PAMP''-style signature-gates before expensive vouching; ''danger-model'' context-gating — tolerate the unknown until it co-presents an alarm).
+# ''Test at the shore'' — mutual challenge across ''distributed'' identity-points (`het` loci ↔ the immune ''repertoire''; no central friend-list — "self" is the ''negative space'' clonal-deletion leaves; cheap ''PAMP''-style signature-gates before expensive vouching; ''danger-model'' context-gating — tolerate the unknown until it co-presents an alarm).
 # ''Reject by SEVERING the junction'' — kill the //fused edge//, not the peer (''anergy, not ban'' — biologically literal per-edge revocation). A non-match harms neither island; it kills the channel between them.
 # ''Memory'' — a vouched/burned crossing leaves a faster, cheaper secondary response (the decaying lease that ''re-arms faster'' on a known peer).
 

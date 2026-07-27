@@ -102,7 +102,7 @@ export interface CapabilityProvider extends CapabilityVerifier {
    *  memory on first access. Boot loads the self slice eagerly (CIV-2) and DEFERS every held/foreign
    *  island; this pulls just that island's own deferred events (CIV-3 per-island `list`) and ingests them.
    *  Noops when the island is already resident (self slice, N=1 default, or a prior materialization) — so
-   *  it stays cheap and idempotent to re-call. Called automatically at each island-access seam. */
+   *  it stays cheap and idempotent to re-call. Called automatically at each island-access shore. */
   materializeIsland(islandId: string): Promise<{ ingested: number; skipped: number }>;
 
   /** Tear down. Frees WASM resources. */

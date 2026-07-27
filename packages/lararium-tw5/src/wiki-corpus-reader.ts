@@ -1,11 +1,11 @@
 /**
- * wiki-corpus-reader — the corpus-reader SEAM the perceiver hull consumes. Each reader yields the
+ * wiki-corpus-reader — the corpus-reader SHORE the perceiver hull consumes. Each reader yields the
  * WHOLE tiddler as an open field record ({@link WikiSenseDoc} — operator law: title = pet-name key
  * only, `text` = one field among many, unknown fields flow untouched) plus a change subscription.
  *
  * PONO-HOME LAW (operator): a wiki that RUNS as a TW5 VM senses itself IN-VM — the WikiSenseIndexer
  * + `wikisense` filter operator shipped in the plugin blob carry that beat; no host-side reader
- * doubles it. THIS seam serves the wikis that hold NO VM: {@link compositeCorpusReader} stands the
+ * doubles it. THIS shore serves the wikis that hold NO VM: {@link compositeCorpusReader} stands the
  * hull over a composite-store island (resolved, kāpae-honored, causal-stamped — heads/changeId/bagId
  * ride through as provenance).
  *
@@ -15,14 +15,14 @@
 import type { CompositeStore, CompositeEntry } from "@lararium/mesh";
 import { deriveDocStalk, senseBodyOf, type DocStalk, type WikiSenseDoc } from "./wiki-sense-fold.js";
 
-/** The seam ONE perceiver hull consumes — whole-record docs + a change pulse. Read-only. */
+/** The shore ONE perceiver hull consumes — whole-record docs + a change pulse. Read-only. */
 export interface WikiCorpusReader {
   /** the corpus as sensed entities — WHOLE open records, causal-stamped where the face carries stamps. */
   docs(): Promise<readonly WikiSenseDoc[]>;
   /** change subscription — fires when the corpus moves; returns the unsubscribe. */
   subscribe(listener: () => void): () => void;
   /** OPTIONAL per-title stalk supplier — a reader with its own cache law fills foldCorpus's stalkOf
-   *  seam (the composite face memos per changeId; the VM face rides getCacheForTiddler instead). */
+   *  shore (the composite face memos per changeId; the VM face rides getCacheForTiddler instead). */
   stalkOf?: (doc: WikiSenseDoc) => DocStalk;
 }
 
@@ -39,7 +39,7 @@ export function senseDocOfEntry(e: CompositeEntry): WikiSenseDoc {
   };
 }
 
-/** Stand the seam over one VM-less wiki island's composite — resolved, kāpae-honored, causal-stamped.
+/** Stand the shore over one VM-less wiki island's composite — resolved, kāpae-honored, causal-stamped.
  *  Carries a PER-TITLE stalk memo keyed on the entry's changeId (the causal stamp): a refold after
  *  one write re-derives ONE stalk, not the whole corpus — the composite face's warm-refold cure
  *  (the VM face already rides TW5's getCacheForTiddler for the same law). */

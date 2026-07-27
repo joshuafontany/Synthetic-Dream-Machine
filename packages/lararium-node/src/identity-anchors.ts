@@ -17,8 +17,8 @@ import { atomicWriteFileSync } from "./fs-atomic.js";
 import { readIdentityAnchors, type AnchorStore, type IdentityAnchors } from "@lararium/mesh";
 import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignSecret, ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 
-// The IdentityAnchors SHAPE + the AnchorStore seam lift to @lararium/mesh (platform-blind); this node
-// adapter implements the fs seam. Re-exported so existing importers keep their spelling.
+// The IdentityAnchors SHAPE + the AnchorStore shore lift to @lararium/mesh (platform-blind); this node
+// adapter implements the fs shore. Re-exported so existing importers keep their spelling.
 export type { IdentityAnchors } from "@lararium/mesh";
 
 // PLURALITY PONO at the identity layer: a vessel that WEARS several personas anchors EACH to its OWN
@@ -87,7 +87,7 @@ let _warnedCleartext = false;
  * Secrets-at-rest (G1): the bytes carry RAW prekey secret material, so the write SEALS them
  * when a key source is configured — an AES-256-GCM envelope keyed by a scrypt-derived
  * passphrase (`LARES_ARCHIVE_PASSPHRASE`), the WSL2-safe default; the OS-keychain leg rides a
- * detection-gated seam (`archive-seal`). With no key source the archive stays 0o600 CLEARTEXT
+ * detection-gated shore (`archive-seal`). With no key source the archive stays 0o600 CLEARTEXT
  * (strict parity with the signing seed beside it — no new exposure), warned once so the state
  * never hides. The recovery keel is device RE-ADMISSION, not this at-rest seal — sealing is
  * hygiene / defense-in-depth.
@@ -141,7 +141,7 @@ export function listAnchoredPersonas(): number[] {
   return readAnchorRoster();
 }
 
-/** The node fs AnchorStore — the seam the PersonaVault carries. `save` records the index into the
+/** The node fs AnchorStore — the shore the PersonaVault carries. `save` records the index into the
  *  explicit roster; `list` reads it back. Anchors carry public doc-ids, so no seal touches this store. */
 export const nodeAnchorStore: AnchorStore = {
   load: (handleIndex) => loadIdentityAnchors(handleIndex),

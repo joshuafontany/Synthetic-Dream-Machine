@@ -22,11 +22,11 @@
  *     away a real disagreement. `surfaceDisagreement` emits a disagreement-SURFACING move (never a reconcile
  *     move), carrying the reconciliation cost `R*_sem = log₂ dim H¹` (Thomas–Chen).
  *
- * ── SEAMS held open, NOT wired (per the S3 charge) ────────────────────────────────────────────────────
+ * ── SHORES held open, NOT wired (per the S3 charge) ────────────────────────────────────────────────────
  *
  *   γ  defaults to 1 (the C-only floor). A later ARL₀→β would dial the epistemic/empowerment weight; this
- *      module leaves that seam untouched.
- *   τ  defaults to 1 — a SELECTION-margin seam (a close call between the top two verbs flags for review). It
+ *      module leaves that shore untouched.
+ *   τ  defaults to 1 — a SELECTION-margin shore (a close call between the top two verbs flags for review). It
  *      does NOT gate the py `VERB_SEATS` HITL surface, which stays the house's kept HITL question, distinct
  *      from selection.
  *
@@ -259,7 +259,7 @@ export function scoreEfe(
 
 // ── B-3: selection ──────────────────────────────────────────────────────────────────────────────────
 
-/** The selection read — the argmin verb, the full ranking, the top-two margin, and the review seam. */
+/** The selection read — the argmin verb, the full ranking, the top-two margin, and the review shore. */
 export interface EfeSelection {
   /** the min-EFE verb the selector picked. */
   readonly chosen: EfeScore;
@@ -267,7 +267,7 @@ export interface EfeSelection {
   readonly ranked: readonly EfeScore[];
   /** the EFE gap between the chosen and the runner-up (Infinity when a single verb stood). */
   readonly margin: number;
-  /** the τ review seam — `margin < τ` flags a close call for review (NOT the py VERB_SEATS HITL gate). */
+  /** the τ review shore — `margin < τ` flags a close call for review (NOT the py VERB_SEATS HITL gate). */
   readonly needsReview: boolean;
 }
 
@@ -275,7 +275,7 @@ export interface EfeSelection {
  * B-3 — select the min-EFE verb (argmin). Score every verb, rank ascending, and read the top-two margin. The
  * reversibility of each verb rides its own {@link EfeScore.reversible} (derived `sign(optionLoss)`), so an
  * irreversible verb (option-collapsing, high optionLoss) sinks in the ranking without a declared veto. The τ
- * margin seam flags a close call for review — it steers no selection and gates no HITL surface.
+ * margin shore flags a close call for review — it steers no selection and gates no HITL surface.
  */
 export function efeSelect(
   planeReads: Readonly<Record<string, readonly number[]>>,

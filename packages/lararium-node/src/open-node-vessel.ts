@@ -389,7 +389,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // keyring; `makeNexusConvergenceKeyring(entries)` stands it here. A null keyring keeps the boot window — and any
   // member never handed a keyring — FAIL-CLOSED: `installSealedBody` reads `keyring.current()`, which throws on an
   // absent/empty keyring, so the body stays local/unsealed (never a plaintext body registered sealed). The
-  // custody + distribution of that keyring over the private lane is the admission seam this name marks; it does
+  // custody + distribution of that keyring over the private lane is the admission shore this name marks; it does
   // NOT stand a Nexus-scope CGKA group (the exporter north-star, deferred — see nexus-convergence-keyring.ts).
   // The admission-delivery wiring RIDES THE PERSISTED STORE: `openAdmitFlow` (persona-admit) opens the founder's
   // sealed keyring envelope and `installDeliveredKeyring` writes the founder's `{epoch → secret}` set into THIS
@@ -409,7 +409,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     //
     // V5 SYMMETRY: this WS ring gates at the PEER (gate-passed vs not); the browser
     // leaf gates at the DOC (a deny-by-default FederationGate, since a leaf cannot
-    // run a gate). Both are the same seam at two resolutions — the V5 KeyhiveIdentitySlot
+    // run a gate). Both are the same shore at two resolutions — the V5 KeyhiveIdentitySlot
     // composes verifyCapability(docUrl, ability) as the INNER ring here (per-doc caps
     // behind the per-peer admission), matching the browser's FederationGate call site.
     sharePolicy: async (peerId, documentId) => {
@@ -515,7 +515,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const bulb: BulbArtifact | null = readBulbArtifact(genesisDir ?? defaultGenesisDir(), charterDocForBoot?.charterEpochCid ?? null);
 
   // STAND THE @cad CONVERGENCE KEYRING — the @cad seal's key source, minted for THIS vessel's charter-head epoch
-  // (genesis = 0 when unseated) and persisted local (read-all). This fills the forward-declared seam: the vessel
+  // (genesis = 0 when unseated) and persisted local (read-all). This fills the forward-declared shore: the vessel
   // now HOLDS a keyring, so the seal producer (`cad-seal`) can message-lock a carrier body's ciphertext. It seals
   // the vessel's OWN staged bodies for the FEDERATION plane; STAGE-2 admission delivery hands this keyring to a
   // joinee so a member reads too. FAIL-CLOSED elsewhere holds: absent this stand, `keyring.current()` throws and
@@ -536,7 +536,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // When configured, the vessel dials the carriage relay over an authenticated WS channel (proving `vesselSeed`)
   // and serves members' want-blocks for sealed @cad bodies on a poll interval. The gate stays `serveCasWire`'s own
   // `carrierShareDecision` VERBATIM: a proven MEMBER over a provably-sealed plane carries the ciphertext; a
-  // STRANGER / non-member / Kapae'd draws byte-identical Mu. Carry ⊥ read — the read-cap never rides this seam.
+  // STRANGER / non-member / Kapae'd draws byte-identical Mu. Carry ⊥ read — the read-cap never rides this shore.
   // Socket B stays SEPARATE from the Automerge `/ws` relay (Socket A): cleartext CRDT never routes through here.
   // ABSENT the URL → this branch never runs, so no socket opens and boot behaves exactly as it did before.
   const carriageRelayUrl = opts.carriageRelayUrl ?? process.env["LAR_CARRIAGE_RELAY"] ?? null;
@@ -1328,7 +1328,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // nexus-refresh — the LIVE-refold of the three @nexus authorities the boot read once: the federation
     // POSTURE (a disk-charter re-read → reassigns the sharePolicy's live `federationPosture`), the antigen
     // Kapae'd DENY set, and the contracted MEMBER set (both re-folded off freshly-materialized boards). The
-    // seam an OUT-OF-PROCESS CLI edit (`lares nexus posture` / `kapae` / `admit`, each writing its own repo)
+    // shore an OUT-OF-PROCESS CLI edit (`lares nexus posture` / `kapae` / `admit`, each writing its own repo)
     // needs to reach this running node — NodeFS carries no cross-process change bus, so a peer's WS-sync
     // refold never fires for a same-operator CLI write beside it. DISTINCT from the worldline `kapae`
     // branch-mute; this touches the mesh immune/federation surface, never a worldline branch.
@@ -1464,7 +1464,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     assembly.composite.attachResidency(residency);
 
     // Inbound WS gate — the daemon island's in-worker keyhive answers each peer.
-    authGate.arm(daemonVm.authSeam, DAEMON_BAG_ID, vesselIdentity.verifyingKey);
+    authGate.arm(daemonVm.authShore, DAEMON_BAG_ID, vesselIdentity.verifyingKey);
 
     // Keep oracle tiddlers current — self, ka, ba, social plane, daemon.
     reconcileWellKnownTiddlers(

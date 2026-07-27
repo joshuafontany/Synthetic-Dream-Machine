@@ -39,7 +39,7 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       const syncedTree = new SyncedTree(join(larProjectionDir(), "synced-tree.json"));   // runtime → ~/.lares
       const projector = new LarDiskProjector({
         mirrors,
-        // The ONE render seam: a carrier projects back to ITS OWN filetype
+        // The ONE render shore: a carrier projects back to ITS OWN filetype
         // (memetic → `.mem`; `.tid`/`.json`/`.md`/content-type → its native file
         // + a `.meta` sidecar). The VM registry decides type + bytes; the
         // projector only sites them.

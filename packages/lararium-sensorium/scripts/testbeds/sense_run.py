@@ -26,7 +26,7 @@ from boundary_score import hinge_test, make_truth, remap, score, tolerances_for
 
 
 def line_word_offsets(lines: "list[str]") -> "tuple[list[int], int]":
-    """The word index at which each line opens, plus the total word count — the line→word seam, crossed once
+    """The word index at which each line opens, plus the total word count — the line→word shore, crossed once
     here rather than subtly wrong in every caller. Per-line tokenization sums to the whole-stream tokenization
     (stream_words splits on all whitespace), so offs[L] is exactly the word position of line L's first word."""
     offs, t = [], 0

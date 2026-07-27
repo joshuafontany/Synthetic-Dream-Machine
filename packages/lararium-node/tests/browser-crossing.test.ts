@@ -2,12 +2,12 @@
  * browser-crossing.test.ts — the browser↔node auth crossing, end to end at the wire.
  *
  * The two halves each had a test; the WIRING BETWEEN them did not. daemon-auth-gate.test proves the
- * real DaemonAuthGate against a STUB seam; lar-ws-client-adapter.test proves the real browser-shaped
+ * real DaemonAuthGate against a STUB shore; lar-ws-client-adapter.test proves the real browser-shaped
  * LarWSClientAdapter + real verifyAuthProof against a MOCK gate. This composes all the real pieces:
  *
  *   real DaemonAuthGate  ←ws←  real LarWSClientAdapter (light Ed25519 leaf, the browser's shape)
  *          │
- *   a real AuthVerifierSeam that runs verifyAuthProof (V3 Ed25519 proof-of-possession) AND the
+ *   a real AuthVerifierShore that runs verifyAuthProof (V3 Ed25519 proof-of-possession) AND the
  *   CAPABILITY decision — is this leaf ADMITTED to the @daemon bag? — the real barrier a browser hits.
  *
  * It proves the crossing the scout found unproven: an ADMITTED leaf crosses the armed gate (the gate
@@ -24,7 +24,7 @@ import { createServer, type Server } from "node:http";
 import { generateKeyPairSync } from "node:crypto";
 import { WebSocketServer } from "ws";
 import { verifyAuthProof, ed25519SignerFromSeed, LarWSClientAdapter } from "@lararium/mesh";
-import type { AuthVerifierSeam } from "@lararium/mesh";
+import type { AuthVerifierShore } from "@lararium/mesh";
 import { Repo, type PeerId } from "@automerge/automerge-repo";
 import { NodeWSServerAdapter } from "@automerge/automerge-repo-network-websocket";
 import { DaemonAuthGate } from "../src/daemon-auth-gate.js";
@@ -51,11 +51,11 @@ function makeLeaf(): { identity: LeafIdentity; pub: string } {
 }
 
 /**
- * The real seam the gate arms with: it runs the REAL V3 Ed25519 proof check, then the CAPABILITY
+ * The real shore the gate arms with: it runs the REAL V3 Ed25519 proof check, then the CAPABILITY
  * decision — a leaf crosses only if its key sits in the admitted set (the daemon-bag grant). A valid
  * proof is necessary but NOT sufficient; the un-admitted anon leaf is turned away here.
  */
-function makeCapabilitySeam(opts: { gatePubKey: string; admitted: ReadonlySet<string> }): AuthVerifierSeam {
+function makeCapabilityShore(opts: { gatePubKey: string; admitted: ReadonlySet<string> }): AuthVerifierShore {
   return {
     async verify(cardBytes, bagUrl, _access, proof) {
       if (!proof) return { ok: false, reason: "V3 proof required" };
@@ -113,7 +113,7 @@ describe("browser↔node crossing — real gate · real Ed25519 · real capabili
     const { identity, pub } = makeLeaf();
 
     const connectionSeen = new Promise<void>((resolve) => harness!.gate.once("connection", () => resolve()));
-    harness.gate.arm(makeCapabilitySeam({ gatePubKey: gatePub, admitted: new Set([pub]) }), AUD, gatePub);
+    harness.gate.arm(makeCapabilityShore({ gatePubKey: gatePub, admitted: new Set([pub]) }), AUD, gatePub);
 
     adapter = new LarWSClientAdapter({ url: `ws://127.0.0.1:${harness.port}`, identity, aud: AUD, gatePubKey: gatePub });
     adapter.connect("browser-leaf" as PeerId);
@@ -130,7 +130,7 @@ describe("browser↔node crossing — real gate · real Ed25519 · real capabili
     let crossed = false;
     harness.gate.once("connection", () => { crossed = true; });
     // admitted set is EMPTY — the leaf's proof will verify, but it holds no @daemon grant.
-    harness.gate.arm(makeCapabilitySeam({ gatePubKey: gatePub, admitted: new Set() }), AUD, gatePub);
+    harness.gate.arm(makeCapabilityShore({ gatePubKey: gatePub, admitted: new Set() }), AUD, gatePub);
 
     adapter = new LarWSClientAdapter({ url: `ws://127.0.0.1:${harness.port}`, identity, aud: AUD, gatePubKey: gatePub });
     adapter.connect("anon-leaf" as PeerId);
@@ -150,7 +150,7 @@ describe("browser↔node crossing — real gate · real Ed25519 · real capabili
     let crossed = false;
     harness.gate.once("connection", () => { crossed = true; });
     // The claimed key IS admitted — so only the signature check can turn this leaf away.
-    harness.gate.arm(makeCapabilitySeam({ gatePubKey: gatePub, admitted: new Set([claimed.pub]) }), AUD, gatePub);
+    harness.gate.arm(makeCapabilityShore({ gatePubKey: gatePub, admitted: new Set([claimed.pub]) }), AUD, gatePub);
 
     const identity: LeafIdentity = {
       contactCard: JSON.stringify({ peerPubKey: claimed.pub }),
@@ -209,7 +209,7 @@ function standNodeRepo(opts: { gatePubKey: string; admitted: ReadonlySet<string>
         return wsSocket ? peerIdentifierMap.has(peerId) : true;
       },
     });
-    gate.arm(makeCapabilitySeam({ gatePubKey: opts.gatePubKey, admitted: opts.admitted }), AUD, opts.gatePubKey);
+    gate.arm(makeCapabilityShore({ gatePubKey: opts.gatePubKey, admitted: opts.admitted }), AUD, opts.gatePubKey);
     http.listen(0, "127.0.0.1", () => {
       const addr = http.address();
       if (!addr || typeof addr === "string") { reject(new Error("bad address")); return; }

@@ -15,7 +15,7 @@
  * A pattern crossing ONLY one stratum yields ONE plane → the gate's `(effectivePlanes − 1)` factor zeroes the
  * drive → never born. So single-coordinate frequency can NEVER crystallize; only cross-stratum agreement can.
  *
- * WHY NO OUTPUT-CORRELATION COLLAPSE (the seam vs the Sink). The Sink passes `planeCorrelation` so DERIVED
+ * WHY NO OUTPUT-CORRELATION COLLAPSE (the shore vs the Sink). The Sink passes `planeCorrelation` so DERIVED
  * detectors reading one signal collapse to ~1 effective plane. This lens does the OPPOSITE on purpose: its
  * strata name genuinely DISTINCT speakers/streams (different roles, different captures), so two strata moving
  * in lockstep read as the STRONGEST crystallization — real cross-speaker consensus — not a derived echo. The

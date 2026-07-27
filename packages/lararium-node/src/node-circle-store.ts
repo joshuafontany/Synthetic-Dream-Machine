@@ -5,7 +5,7 @@
  * "Adding to a circle IS the follow; the graph never federates; private to the owning node" (social-seed).
  * This holds the node twins of the browser IDB stores: the follow-graph is a private JSON file, the same
  * local-first posture as the persona-petname store beside it. The never-federates wall is STRUCTURAL — no
- * board write exists in either seam; a future device-fleet adapter wraps the SAME `CircleStore` shape over a
+ * board write exists in either shore; a future device-fleet adapter wraps the SAME `CircleStore` shape over a
  * PRIVATE bag for cross-vessel sync, and the interface never moves.
  *
  * The three identity stores stay distinct here as everywhere: the handle-book (others' nyms + the

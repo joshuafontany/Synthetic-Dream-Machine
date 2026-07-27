@@ -67,7 +67,7 @@ homogeneous-trust (those devices already hold `admin` on `@daemon`, so marginal 
 
 ''Axis 2 — Scale.'' Membership nests as Keyhive groups-within-groups on the ''SOCIAL axis'':
 `Individual ⊂ PersonaGroup ⊂ Cabal`. Each social ring forms a causal island with a ''cryptographic''
-''membrane'' — the Keyhive delegation chain carries the join-rule. ''Delegation tops at the Cabal''
+''shore'' — the Keyhive delegation chain carries the join-rule. ''Delegation tops at the Cabal''
 (2026-06-29 cohere); above it the mesh scales on the orthogonal ''INFRA axis'' — `Nexus` and
 `DreamNet` join by ''treaty / mutual-carriage contract'' (who relays whose sealed bytes), never by
 delegation-up, a relay carrying without reading
@@ -111,7 +111,7 @@ private mesh of households rather than a public broadcast medium.)
 ''Visibility gate'': ALL six conditions must hold for a meme to federate across an edge island.
 Stage band is a UX annotation — NOT a gate condition.
 
-''Membrane law'' (Scale axis): joining a ''social'' ring (≤ Cabal) requires a capability delegation
+''Shore law'' (Scale axis): joining a ''social'' ring (≤ Cabal) requires a capability delegation
 from that ring's Keyhive group. The delegation chain functions as the join-rule for the SOCIAL axis;
 no central admission authority stands. ''Above the Cabal the INFRA axis takes over'' — `Nexus` and
 `DreamNet` join by ''treaty / mutual-carriage contract'', never delegation-up (2026-06-29 cohere →
@@ -172,7 +172,7 @@ implication-rule  = "ordered-except-pull"
 # ── Axis 2 — SCALE (membership nesting; Keyhive group composition) ──────────
 # SOCIAL rings (WHO axis) — delegation tops at the cabal:
 scale-social  = ["individual", "persona-group", "cabal"]
-membrane-rule = "delegation-chain-is-the-join-rule"   # SOCIAL rings (≤ cabal) only — each = a causal island membrane
+shore-rule = "delegation-chain-is-the-join-rule"   # SOCIAL rings (≤ cabal) only — each = a causal island shore
 # INFRA scaling (FLOW axis) — neighborhood/city/nexus/dreamnet join by TREATY / mutual-carriage, NOT delegation-up
 # (cohere 2026-06-29 → dreamnet-architecture#two-axis-topology). Retire-residue of the old single rope below:
 scale-lattice = ["individual", "persona-group", "cabal", "neighborhood", "city", "nexus", "dreamnet"]

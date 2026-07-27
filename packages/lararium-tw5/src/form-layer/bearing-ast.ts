@@ -9,7 +9,7 @@
  * MAY parse the slots; only a foreign agent must treat it as an opaque name).
  * It descends the URI into a queryable bearing-vector AST.
  *
- * Four research seams shape it:
+ * Four research shores shape it:
  *  - Tennison (opaque ≠ unreadable) — the licence to parse our own scheme's slots.
  *  - Ranganathan PMEST — the 3 root-terms are a FIXED-ORDER facet notation; each
  *    (w1/heading · w2/angle · w3/dynamic) is its own queryable axis.

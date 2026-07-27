@@ -118,7 +118,7 @@ export interface LarWriteOptions {
 }
 
 // ---------------------------------------------------------------------------
-// Canonical record ↔ TW5 input seam
+// Canonical record ↔ TW5 input shore
 // ---------------------------------------------------------------------------
 
 export function toLarTiddlerRecord(

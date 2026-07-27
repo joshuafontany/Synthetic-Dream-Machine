@@ -1,4 +1,4 @@
-"""test_loci — the loci/imago spatial-schema seam wraps the nakama drawer-store as its first schema.
+"""test_loci — the loci/imago spatial-schema shore wraps the nakama drawer-store as its first schema.
 
   · open_loci returns the nakama-drawer schema by default; an unknown schema refuses loudly.
   · the concrete schema delegates STRAIGHT to the nakama palace API (behave-close law) — locus_store
@@ -27,7 +27,7 @@ def test_unknown_schema_refuses_loud():
 
 
 def test_locus_store_delegates_straight_to_the_nakama_palace_api(monkeypatch):
-    # behave-close law: locus_store returns EXACTLY what the nakama's get_collection returns — the seam
+    # behave-close law: locus_store returns EXACTLY what the nakama's get_collection returns — the shore
     # wraps the vocabulary, never a divergent store. Inject a fake nakama palace module and witness the
     # call reaches it verbatim (palace path + the skip-identity flag the sovereign read uses).
     calls = {}

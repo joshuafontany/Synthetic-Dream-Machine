@@ -1,8 +1,8 @@
 /**
  * swarm-node — a container (or local) entrypoint that joins a mesh swarm: found a shared
- * cabal-realm (founder) or join it (joiner), the membership ceremony crossing the seam.
- * CHANNEL-AGNOSTIC (the seam's payoff): file/POST over a shared dir, OR live-WS to a relay
- * — chosen by env, the ceremony identical above the seam. REAL Keyhive.
+ * cabal-realm (founder) or join it (joiner), the membership ceremony crossing the shore.
+ * CHANNEL-AGNOSTIC (the shore's payoff): file/POST over a shared dir, OR live-WS to a relay
+ * — chosen by env, the ceremony identical above the shore. REAL Keyhive.
  *
  * Env:
  *   LAR_SWARM_ROLE   founder | joiner          (default joiner)
@@ -15,7 +15,7 @@
  * Discovery rides the channel (a re-broadcast INVITE) — no shared place file — so it works
  * for the persistent file channel AND the ephemeral WS channel (a late/reconnecting joiner
  * catches a later invite). file/POST serves a shared-dir swarm, the WS relay-service serves live sockets —
- * two live forms of the Herm's OPEN ceremony carriage behind one seam, chosen by env.
+ * two live forms of the Herm's OPEN ceremony carriage behind one shore, chosen by env.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */

@@ -1,5 +1,5 @@
 /**
- * pack-projection-suppress — SEAM 2, the loop-stopper. A tiddler that belongs to
+ * pack-projection-suppress — SHORE 2, the loop-stopper. A tiddler that belongs to
  * a PACK (its title rides in `$:/config/OriginalTiddlerPaths`) NEVER self-projects:
  * its bytes live inside the pack file (`foo.json`). Without the suppress, a dropped
  * `foo.json` (members A·B·C) explodes into three per-member files on projection,

@@ -2,7 +2,7 @@
  * tw5-projection — the projection-nalu, render-side twin of the capture-nalu.
  *
  * The BROWSER twin of the node disk projector (island-behaviors.ts `onBoot`): same
- * `makeWikiBehavior({ onBoot })` capability seam, same render-then-emit shape — node emits
+ * `makeWikiBehavior({ onBoot })` capability shore, same render-then-emit shape — node emits
  * rendered state TO FS, the browser emits it TO THE MAIN THREAD. role = capability ≠ platform.
  *
  * The island's TW5 engine lives in the Worker (§9), so the cameras live here: render the story

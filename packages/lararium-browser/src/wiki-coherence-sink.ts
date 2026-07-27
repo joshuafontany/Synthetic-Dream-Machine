@@ -1,5 +1,5 @@
 /**
- * wiki-coherence-sink — the platform SEAM of the coherence projection: the DOM write.
+ * wiki-coherence-sink — the platform SHORE of the coherence projection: the DOM write.
  *
  * The ONLY DOM-touching half of the coherence-nalu. The platform-blind organ
  * (@lararium/tw5 wiki-coherence-projection) reads the radius and shapes the frame; this applies that

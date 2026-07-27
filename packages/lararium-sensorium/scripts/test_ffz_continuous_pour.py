@@ -99,7 +99,7 @@ def test_annotations_ride_outside_the_signals():
     text = _fixture_text(3)
     n_frames = len(_frames(text, pieces=3))
     out = pour_ticks(iter(_frames(text, pieces=3)))
-    assert len(out["annotations"]["wa"]) == n_frames - 1   # one join per frame seam
+    assert len(out["annotations"]["wa"]) == n_frames - 1   # one join per frame shore
     assert out["annotations"]["work"] == []                # one stream, no work join
     assert len(out["annotations"]["line"]) == text.count("\n")
 

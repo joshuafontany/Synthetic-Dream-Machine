@@ -3,7 +3,7 @@
  *
  * TW5 filters, promotion ceremonies, Node disk projection, and future vessels all
  * need the same answer for "where would this canonical artifact surface in a
- * compatibility mirror?"  Mesh owns that seam; runtimes only ask.
+ * compatibility mirror?"  Mesh owns that shore; runtimes only ask.
  */
 
 import { LARARIUM_DOC_URI, LARES_DOC_URI, LAR_PREFIX } from "./lar-uris.js";

@@ -152,7 +152,7 @@ describe("tierPermitsRelayPeer — the holder-set chain at the wire", () => {
   });
 });
 
-// ── The GATE WIRING — the keystone enforced end-to-end at the sharePolicy seam ──────────────────────
+// ── The GATE WIRING — the keystone enforced end-to-end at the sharePolicy shore ──────────────────────
 const NEXUS = "a".repeat(64);
 const relayGate = new DeterministicFederationGate(NEXUS);
 // The @crossroads public board is in the federatable set — grab its documentId via the gate's own membership.
@@ -162,7 +162,7 @@ const MEMBER = "peer-member";
 const relayPeers = new Set<string>([STRANGER, MEMBER]);
 const membership: NexusMembership = { holdsCarriagePeer: (p) => p === MEMBER };
 
-/** A floor oracle + declared source over a synthetic public docId, so the tighten is observable at the seam. */
+/** A floor oracle + declared source over a synthetic public docId, so the tighten is observable at the shore. */
 function ringDeclaring(docId: string, declared: CapTier | null): CapTierRing {
   return {
     floor:    { isPublicPlane: (d) => d === docId, isSealedPlane: () => false },

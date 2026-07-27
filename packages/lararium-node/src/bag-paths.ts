@@ -85,7 +85,7 @@ function splitHash(s: string): [string, string | null] {
  * The siting function (lar-uri #five-planes) — the ONE URI → disk-path map: every
  * carrier lives at its FULL uri-path inside its holding bag's mirror (directory =
  * residency, interior path = the name, whole). This returns the path up to (but
- * NOT including) the filetype extension — the render seam owns the extension
+ * NOT including) the filetype extension — the render shore owns the extension
  * (`.mem` for memetic, TW5's chosen extension for a native filetype), so both
  * filetypes site at the SAME `<uri-path>` and only the extension differs.
  *

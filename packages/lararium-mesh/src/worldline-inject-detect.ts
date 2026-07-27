@@ -25,7 +25,7 @@
  * that signal, tested against the transcript SHAPE.
  *
  * PURE / IO-free: classification takes raw jsonl lines (strings); the fs walk + the KG persist stay
- * node-side (worldline-observe's seam), which composes these functions over real transcript files.
+ * node-side (worldline-observe's shore), which composes these functions over real transcript files.
  *
  * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#attribution
  */

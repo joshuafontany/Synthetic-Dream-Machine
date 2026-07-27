@@ -2,7 +2,7 @@
  * sovereign-kernel — the platform-blind OTP gen_island lifecycle.
  *
  * ONE kernel both vessels run. Node and browser do NOT each implement a
- * lifecycle; they each COMPOSE this one flow with a small host seam. The seam
+ * lifecycle; they each COMPOSE this one flow with a small host shore. The shore
  * is what *remains* after subtracting the identical skeleton from the two prior
  * mirror files (sovereign-island-model.ts ⇆ browser-sovereign-island-model.ts):
  * a data descriptor of four capability-pieces, not an OO platform interface.
@@ -28,9 +28,9 @@
  *   Write routing happens via the in-wiki cascade
  *   (`lar:///ha.ka.ba/lararium/config/bag-paths`), not by behavior config.
  *
- * ## The host seam (composition, not adaptation)
+ * ## The host shore (composition, not adaptation)
  *
- *   IslandHostSeam carries the platform divergence as DATA + resolver fns:
+ *   IslandHostShore carries the platform divergence as DATA + resolver fns:
  *     - post     : transport out (node parentPort.postMessage / browser self.postMessage)
  *     - listen   : transport in  (node parentPort.on / browser self.addEventListener)
  *     - storage  : Repo storage adapter for this manifest (nodefs / IndexedDB / memory)
@@ -73,9 +73,9 @@ import { makeCatalogAccessor } from "./catalog-accessor.js";
 import { installLazyResolver } from "./lazy-resolver.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
-// ── The host seam — platform divergence as composition ──────────────────────
+// ── The host shore — platform divergence as composition ──────────────────────
 
-export interface IslandHostSeam {
+export interface IslandHostShore {
   /** Transport out: post a message to the vessel. */
   post(msg: IslandToVesselMsg): void;
   /** Transport in: register the inbound message listener. */
@@ -101,7 +101,7 @@ export interface IslandHostSeam {
 const BREATH_INTERVAL_MS = 1_000;
 
 export function runSovereignKernel(
-  host: IslandHostSeam,
+  host: IslandHostShore,
   behaviorOrFactory: IslandBehavior | ((manifest: IslandMsg_Manifest) => IslandBehavior),
   opts?: { breathEveryMs?: number },
 ): void {
@@ -423,9 +423,9 @@ export function runSovereignKernel(
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, oracleUrl: msg.grants.islandUrl, engine, recipe: msg.recipe, ...(host.resolveByCid ? { resolveByCid: host.resolveByCid } : {}) };
     // Read-side skinny-handle rehydration: answer TW5's own `lazyLoad` event (fired when
     // `getTiddlerText` meets a bodyless `_is_skinny` tiddler) by pulling the body from the corpus
-    // CAS through the SAME resolveByCid seam the kernel already rides for engine/plugin blobs. The
+    // CAS through the SAME resolveByCid shore the kernel already rides for engine/plugin blobs. The
     // splice runs through the guarded nalu rail, so a rehydrated body never echoes back to the CRDT
-    // (content-resolution.mem #tw5-seam). Off when the island exposes no CAS resolver.
+    // (content-resolution.mem #tw5-shore). Off when the island exposes no CAS resolver.
     if (host.resolveByCid) _lazyUnsub = installLazyResolver(tw5, host.resolveByCid);
     tick("behavior");
     await behavior.onEa(_ctx);

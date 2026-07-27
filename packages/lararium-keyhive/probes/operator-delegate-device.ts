@@ -15,7 +15,7 @@
  *      Hypothesis: operator generates a Document or Group, addMember()s
  *      the device's Individual (or Agent) to it.
  *   4. How are Keyhive events serialized for transport?
- *      Hypothesis: ingestEventsBytes / eventsForAgent are the seam.
+ *      Hypothesis: ingestEventsBytes / eventsForAgent are the shore.
  *   5. Bundle / startup time — how long does init() take cold?
  *   6. Any glaring panics, missing methods, or surprises?
  *

@@ -110,7 +110,7 @@ record as an optional stake weight, but only as a separable dimension defaulting
 vouch=0 and the reputation read never shadows every grant. Both still invert to the user — the peers sign
 their own edges, and no registry holds them.
 
-<<~ confidence Synthesis-Canon 14/20 >> The inversion runs pure but for ONE seam: the multi-principal
+<<~ confidence Synthesis-Canon 14/20 >> The inversion runs pure but for ONE shore: the multi-principal
 key-handover inside a CabalGroup. A single-principal me-Circle (your own devices) needs no tie-break — you
 hold the one ordering authority. A CabalGroup of several humans constitutes the smallest ordering seat for
 itself (an elected kahu, or accept-and-heal) — the one place a Circle stands up a thin constitutional core,

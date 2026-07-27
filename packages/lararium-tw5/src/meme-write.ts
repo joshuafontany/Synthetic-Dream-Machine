@@ -1,10 +1,10 @@
 /**
- * meme-write — disk export of memes: the recompose seam.
+ * meme-write — disk export of memes: the recompose shore.
  *
  * Architecture (carrier-whole at rest):
  *   `exportMemeText` routes through `expandMemeRefs` (deserializer.ts) — the
  *   recompose inverse the doctrine names (disk-projection#granularity). The
- *   membrane module owns BOTH directions: ingest decomposes a carrier into
+ *   shore module owns BOTH directions: ingest decomposes a carrier into
  *   parent + ahu-child records; export splices every `<<~ kahea ahu #slot >>`
  *   marker back into its child's definition form and reassembles the whole
  *   carrier envelope. One meme, one file — a child change re-flushes its
@@ -13,7 +13,7 @@
  *   No per-node markdown-meme template renders each record to its own file;
  *   the HTML templates serve the live story river, and the projection-snapshot
  *   mode gets built fresh when a consumer exists. The carrier definition form
- *   recomposes in the membrane (expandMemeRefs, also on $tw.lares), where
+ *   recomposes in the shore (expandMemeRefs, also on $tw.lares), where
  *   the round-trip harness proves parse∘render ≡ records. Wikifying the
  *   text field cannot carry byte-fidelity: `\rules` does not propagate
  *   through `<$transclude>` (memetic-parser.ts, Jermolene #6712), and the
@@ -68,7 +68,7 @@ export interface CarrierFile {
 
 /**
  * Render a carrier root back to ITS OWN filetype — the projection reciprocal of
- * the ingest membrane. A memetic-wikitext carrier recomposes through
+ * the ingest shore. A memetic-wikitext carrier recomposes through
  * `expandMemeRefs` and sites as `.mem` (children spliced whole); ANY other TW5
  * filetype rides TW5's own native file-info cascade (`makeTw5FileInfo`), so a
  * `.tid`/`.json`/`.md`/content-type record projects back as its native file
@@ -104,7 +104,7 @@ export function exportCarrierFile(tw5: TW5Engine, memeUri: string): CarrierFile 
   }
 
   const type = typeof fields["type"] === "string" ? (fields["type"] as string) : "";
-  // Memetic carriers keep the membrane recompose + the `.mem` extension: their
+  // Memetic carriers keep the shore recompose + the `.mem` extension: their
   // ahu children live as separate records and MUST splice back whole (a native
   // file-info pass would emit only the parent's rewritten text). Absent/blank
   // type on a memetic-decomposed carrier still routes here (the recompose

@@ -14,7 +14,7 @@ describe("mu-void — one void, two reasons, indistinguishable", () => {
     const sync  = new TextEncoder().encode(JSON.stringify(syncCompleteVoid()));
     const kapae = new TextEncoder().encode(JSON.stringify(kapaeDeniedVoid()));
     expect(Array.from(kapae)).toEqual(Array.from(sync));
-    // and via the canonical wire form the seam actually emits
+    // and via the canonical wire form the shore actually emits
     expect(Array.from(muVoidBytes())).toEqual(Array.from(sync));
   });
 

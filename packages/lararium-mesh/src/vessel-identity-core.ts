@@ -3,7 +3,7 @@
  *
  * The generate-or-load-then-persist skeleton repeats across every vessel identity:
  * the node device key, the node PersonaGroup root, the browser device key. It
- * collapses here. Each platform supplies two seams —
+ * collapses here. Each platform supplies two shores —
  *
  *   · KeypairCrypto — how this runtime mints + hex-encodes an Ed25519 pair
  *     (node generateKeyPairSync; browser WebCrypto subtle),

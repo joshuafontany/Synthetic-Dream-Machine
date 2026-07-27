@@ -1,5 +1,5 @@
 /**
- * federation-gate.test.ts — the deny-by-default relay-share seam (#49 OPTION R).
+ * federation-gate.test.ts — the deny-by-default relay-share shore (#49 OPTION R).
  *
  * Proven:
  *   - DeterministicFederationGate federates ONLY the per-Nexus public boards

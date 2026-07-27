@@ -35,6 +35,6 @@ Prefer reviewing the generator or source module first, then rebuild.
 - Tiddlers are the CRDT atoms. A bag is an Automerge document containing
   tiddlers; a wiki is a TW5 VM view over a recipe of those bags.
 - Integration tests should prove import/decompose/promote behavior through real
-  VM and daemon surfaces. Package unit tests should keep narrow seams fast.
+  VM and daemon surfaces. Package unit tests should keep narrow shores fast.
 - Sync, VM pooling, and multi-wiki/shared-bag behavior remain active design
   pressure. Harden tests before large refactors.

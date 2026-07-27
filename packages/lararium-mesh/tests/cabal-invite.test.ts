@@ -91,7 +91,7 @@ describe("the DreamNet opens invite-only", () => {
     // is precisely the mesh where a stale vouch does the most damage.
   });
 
-  test("THE DIAL TURNS — the same seam, opened, admits without a vouch and changes no code", async () => {
+  test("THE DIAL TURNS — the same shore, opened, admits without a vouch and changes no code", async () => {
     const open = await decide(null, NOW, { kind: "open" });
     expect(open.admitted).toBe(true);
     // Invite-only and open protocol are two SETTINGS of one dial, not two implementations. That is what

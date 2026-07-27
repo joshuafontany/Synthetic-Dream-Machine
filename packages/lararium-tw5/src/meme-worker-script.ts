@@ -19,7 +19,7 @@
  *   { id, type: "filterTiddlers", expr: string }  → { id, ok: true, result: string[] }
  *   { id, type: "renderMeme",     uri: string }   → { id, ok: true, result: string | null }
  *
- * This is the isomorphic peer-symmetry seam: same message protocol whether the
+ * This is the isomorphic peer-symmetry shore: same message protocol whether the
  * host is a node server or a browser tab. No loadRecords, no renderCarrier.
  *
  * Schema: lar:///ha.ka.ba/lares/api/lararium/schema/meme-worker-script

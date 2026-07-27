@@ -1,5 +1,5 @@
 /**
- * lazy-resolver — the READ side of the skinny handle (content-resolution.mem #tw5-seam).
+ * lazy-resolver — the READ side of the skinny handle (content-resolution.mem #tw5-shore).
  *
  * The write side (LOAD → `landSkinnyHandle`) lands a SKINNY HANDLE in the CRDT: an oversized
  * body leaves the doc for the `cid/` CAS tier, and the tiddler that stands in the wiki carries
@@ -22,14 +22,14 @@
  * here. A PENDING (CAS miss) or an integrity fault leaves the handle skinny — "loading" holds,
  * a later render re-fires and re-tries; the body is never faked.
  *
- * Meme: lar:///ha.ka.ba/lararium/mesh/content-resolution#tw5-seam
+ * Meme: lar:///ha.ka.ba/lararium/mesh/content-resolution#tw5-shore
  */
 
 import { sha256HexBytesSync, cidFromUri } from "@lararium/mesh";
 import type { TW5Engine } from "./tw5-vm.js";
 import type { LaresTw5Extension } from "./types/lares-globals.js";
 
-/** A carrier body resolver over the corpus CAS — the fs-less worker's seam onto the
+/** A carrier body resolver over the corpus CAS — the fs-less worker's shore onto the
  *  process-shared byte plane (the kernel's `host.resolveByCid`). */
 export type CarrierResolver = (cid: string) => Promise<Uint8Array | null>;
 

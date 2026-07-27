@@ -1,6 +1,6 @@
 /**
  * cabal-realm-charter — the PUBLIC face of a cabal-realm: its CHARTER, the only
- * thing that ever crosses the read-face wire. A pure disclosure MEMBRANE (mirrors
+ * thing that ever crosses the read-face wire. A pure disclosure SHORE (mirrors
  * mesh-palace's `snapshotPublicFlowMap`): drop-private, keep-public.
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/cabal-realm#the-realm (NAMED-not-ruled —
@@ -18,13 +18,13 @@
  *   · VEIL-PUBLIC  — the CHARTER: a small, content-addressed name + bearing + a
  *                    few deliberately-published descriptive fields. Anon-readable.
  *   · MEMBERS-ONLY — the substrate CONTENT + the member ROSTER + the liveness
- *                    lease slots + the epoch keys. NEVER crosses the membrane.
+ *                    lease slots + the epoch keys. NEVER crosses the shore.
  *
  * THE VEIL INVARIANT (in-process CORRECTNESS, NOT a privacy guarantee):
  * `projectCabalRealmCharter` reads ONLY the public fields of its input and
  * constructs a literal naming ONLY charter fields. The members-only data (roster /
  * substrate content) rides the SAME input bag yet is structurally unreachable in the
- * output — the membrane never references it, so a roster or substrate content CANNOT
+ * output — the shore never references it, so a roster or substrate content CANNOT
  * leak through THIS function. That kills the accidental roster-in-output bug. It is
  * NOT a guarantee against an adversary, who lives on the WIRE (the signed pointer
  * leaks version / activity / membership-change timing — Pfitzmann-Hansen) and at the
@@ -64,7 +64,7 @@ export interface CabalRealmCharter {
   /** DELIBERATELY PUBLIC, BUT GUARDED — a coarse, explicitly-published member count.
    *  DISCLOSURE HAZARD: a raw count can leak faction size and (worse) enable a
    *  membership-DELTA inference — watching the figure tick reveals a join/leave. So
-   *  the membrane NEVER derives this from the roster; it crosses ONLY when the realm
+   *  the shore NEVER derives this from the roster; it crosses ONLY when the realm
    *  EXPLICITLY publishes a coarse figure, and the conservative default OMITS it
    *  entirely. The roster itself stays members-only no matter what (#the-veil). */
   readonly memberCount?: number;
@@ -85,9 +85,9 @@ export interface CabalRealmPublicMeta {
 }
 
 /**
- * The membrane's INPUT — everything the publishing vessel holds about the realm,
- * PUBLIC and MEMBERS-ONLY together. The membrane's job is to keep ONLY the public
- * subset. The members-only fields ride here precisely so the membrane can PROVE it
+ * The shore's INPUT — everything the publishing vessel holds about the realm,
+ * PUBLIC and MEMBERS-ONLY together. The shore's job is to keep ONLY the public
+ * subset. The members-only fields ride here precisely so the shore can PROVE it
  * drops them (the roster/substrate sit in the bag; the output never names them).
  */
 export interface CabalRealmPublishState {
@@ -95,11 +95,11 @@ export interface CabalRealmPublishState {
   readonly place: CabalRealm;
   /** What the realm CHOOSES to advertise (optional descriptive fields). */
   readonly meta?: CabalRealmPublicMeta;
-  /** MEMBERS-ONLY — the member roster (identity hexes). MUST NOT cross the membrane.
+  /** MEMBERS-ONLY — the member roster (identity hexes). MUST NOT cross the shore.
    *  Present here only so the veil can be witnessed to hold. */
   readonly roster?: readonly string[];
   /** MEMBERS-ONLY — the realm's substrate content (the shared doc the members
-   *  maintain). MUST NOT cross the membrane. Present here only as a veil witness. */
+   *  maintain). MUST NOT cross the shore. Present here only as a veil witness. */
   readonly substrateContent?: unknown;
 }
 
@@ -109,7 +109,7 @@ export interface CabalRealmPublishState {
  * veil-public (served by the read-face, anon-readable via fetch-CORS); its SUBSTRATE
  * and ROSTER are members-only (private, behind the Keyhive CGKA membership).
  *
- * Reference this const to reason about the boundary; the membrane below ENFORCES it.
+ * Reference this const to reason about the boundary; the shore below ENFORCES it.
  */
 export const CABAL_REALM_VEIL_PUBLIC_SET = {
   /** Crosses the read-face wire — anon-readable. */
@@ -121,7 +121,7 @@ export const CABAL_REALM_VEIL_PUBLIC_SET = {
     "foundedAt",
     "memberCount", // coarse + explicitly-published only — never derived from roster
   ],
-  /** NEVER crosses the membrane — held behind membership (Keyhive CGKA). */
+  /** NEVER crosses the shore — held behind membership (Keyhive CGKA). */
   membersOnly: [
     "substrate content",
     "member roster",
@@ -131,7 +131,7 @@ export const CABAL_REALM_VEIL_PUBLIC_SET = {
 } as const;
 
 /**
- * The PURE membrane — project a realm's full publish-state to its CHARTER, the
+ * The PURE shore — project a realm's full publish-state to its CHARTER, the
  * veil-public face. Mirrors `publicFlowMap`/`snapshotPublicFlowMap`: keep-public,
  * drop-private. It reads ONLY `state.place` (name + bearing) and `state.meta` (the
  * deliberately-published descriptive fields); it NEVER references `state.roster` or
@@ -176,7 +176,7 @@ export function cabalRealmCharterSnapshot(charter: CabalRealmCharter): Promise<O
 }
 
 /**
- * The read-face wiring helper — produce the `exportSnapshot` membrane variant that
+ * The read-face wiring helper — produce the `exportSnapshot` shore variant that
  * serves ONLY a realm's charter. Hand it straight to the node-side read-face:
  *
  *   mountOracleReadFace({ …, exportSnapshot: cabalRealmCharterExporter(state) })

@@ -6,7 +6,7 @@
  * that resolves, on that phone, to the phone itself. The vessel knows its own interfaces; it says them.
  *
  * Everything here stays PURE — it takes the interface table as an argument and returns strings. The IO
- * (calling `os.networkInterfaces()`, printing the banner) lives at the boot seam in main.ts. That split
+ * (calling `os.networkInterfaces()`, printing the banner) lives at the boot shore in main.ts. That split
  * lets the whole derivation run under a fixed interface table in a test, with no host to depend on.
  *
  * `LAR_PUBLIC_URL` leads when the operator sets it: a declared reach-face names what the OPERATOR made

@@ -215,7 +215,7 @@ export async function grantAdmitFlow(args: {
 /**
  * HOP 3 (B): read A's sealed grant, try to open it against EACH pending enrollment (B cannot know which offer a
  * grant answers until one decrypts), verify against the persona PREFIX head, consume the matching secret, RECORD
- * the join into THIS vessel's multitude-view, mint + render the ACK (QR#3). Fail-closed at every seam.
+ * the join into THIS vessel's multitude-view, mint + render the ACK (QR#3). Fail-closed at every shore.
  */
 export async function openAdmitFlow(args: {
   readonly grantCarriage:    string;

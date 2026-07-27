@@ -39,7 +39,7 @@ import sys
 BED_SCHEMA = 1
 
 #: record-unit rules the pour ENGINE speaks today; declared-but-unpoured units
-#: refuse loud at pour time with the seam named (honest scope, never a stub).
+#: refuse loud at pour time with the shore named (honest scope, never a stub).
 _POURABLE_UNITS = {"file"}
 _DECLARED_UNITS = {"file", "turn", "tiddler", "module"}
 
@@ -207,7 +207,7 @@ def pour(m: dict, *, twin: bool = False) -> dict:
     if unpourable:
         raise SystemExit(f"bed_manifest: REFUSED — record units {sorted(unpourable)} stand "
                          "declared but the pour engine speaks only 'file' today; the "
-                         "turn/tiddler/module seams land with their own engines")
+                         "turn/tiddler/module shores land with their own engines")
     files, tally = resolve_flow(m)
     # Every bed lands in the ONE sensorium roster the node governs: XDG
     # <data>/sensoriums/<bed>, resolved from the bed NAME (the address carries

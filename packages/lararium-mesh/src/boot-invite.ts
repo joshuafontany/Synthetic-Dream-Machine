@@ -23,7 +23,7 @@
  *
  * Platform-blind: rides ./crypto only. NO node: imports — the LOCAL spent-set (the burn) lives in the boot host
  * (node: boot-invite-burn; browser: an IndexedDB/localStorage sibling), which this module consults through an
- * injected `isSpent` seam and never reaches itself.
+ * injected `isSpent` shore and never reaches itself.
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-invite
  */
 

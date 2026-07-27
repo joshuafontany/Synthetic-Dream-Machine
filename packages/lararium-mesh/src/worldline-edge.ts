@@ -11,7 +11,7 @@
  * survives rewind/fork) and a valid_from.
  *
  * These functions build the triple DESCRIPTORS only — pure, bundle-able, no IO. The node-side
- * seam (lararium-mempalace/worldline-kg.ts) writes them through the mempalace KG API
+ * shore (lararium-mempalace/worldline-kg.ts) writes them through the mempalace KG API
  * (`kg_add` / `kg_invalidate`). The in-memory ITC verdict stays the live causal read; the KG
  * is the durable, re-derivable projection (nuke-and-pave + re-harvest, #time).
  *
@@ -55,7 +55,7 @@ export interface WorldlineEdgeClose {
 }
 
 export interface EdgeOpts {
-  /** ISO valid_from; defaults applied by the caller/seam, never fabricated here. */
+  /** ISO valid_from; defaults applied by the caller/shore, never fabricated here. */
   readonly validFrom?: string;
   /** The turn-DAG key (the C-cut handoff key). */
   readonly turnKey?: string;

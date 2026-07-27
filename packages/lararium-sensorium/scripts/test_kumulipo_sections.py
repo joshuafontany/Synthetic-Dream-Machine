@@ -1,6 +1,6 @@
 """Tests — the Kumulipo wa-sectioner + Kalakaua extractor + the sectioned corpus cap.
 
-Synthetic mini-memes carry the seams (envelope · #source-text · wa markers · appendix);
+Synthetic mini-memes carry the shores (envelope · #source-text · wa markers · appendix);
 two gated tests witness the REAL triple's section counts when the library stands local.
 """
 from __future__ import annotations
@@ -109,7 +109,7 @@ notes prose mentioning CHANT ONE forms
     return _ENVELOPE_HEAD + body + _ENVELOPE_TAIL
 
 
-# ── the extraction seam ──────────────────────────────────────────────────────────────────
+# ── the extraction shore ──────────────────────────────────────────────────────────────────
 
 
 def test_source_text_span_balances_nested_ahu():
@@ -180,9 +180,9 @@ def test_beckwith_yields_two_sources_and_notes_never_mint_sections():
     assert k_wrapped["sections"] == k["sections"]
 
 
-def test_beckwith_missing_seam_fails_loud():
-    text = _ENVELOPE_HEAD + "no appendix seams here\n" + _ENVELOPE_TAIL
-    with pytest.raises(ValueError, match="appendix seams"):
+def test_beckwith_missing_shore_fails_loud():
+    text = _ENVELOPE_HEAD + "no appendix shores here\n" + _ENVELOPE_TAIL
+    with pytest.raises(ValueError, match="appendix shores"):
         section_corpus_file("kumulipo-beckwith.md", text, extract=False)
 
 

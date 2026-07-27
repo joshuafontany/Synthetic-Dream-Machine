@@ -30,7 +30,7 @@ export interface ActivationResidency {
 }
 
 /** The pool surface the cap reads (VesselIslandPoolCore): liveness + spec knowledge,
- *  plus the register-spec seam the unknown-grain resolver teaches through. */
+ *  plus the register-spec shore the unknown-grain resolver teaches through. */
 export interface ActivationPool {
   has(wikiId: string): boolean;
   knowsSpec(wikiId: string): boolean;

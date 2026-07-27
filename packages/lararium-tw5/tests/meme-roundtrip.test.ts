@@ -2,7 +2,7 @@
  * meme-roundtrip — the canonical-form law's harness proof (guarantee 3):
  * parse∘render ≡ records, proven, never asserted.
  *
- * The membrane module owns both directions (carrier-whole at rest):
+ * The shore module owns both directions (carrier-whole at rest):
  *   ingest  — memeticWikitextDeserializer: carrier → parent + ahu children
  *   export  — expandMemeRefs: records → whole recomposed carrier
  *

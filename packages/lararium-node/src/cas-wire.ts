@@ -10,14 +10,14 @@
  * THE GATE (carry ⊥ read ⊥ contract). On a `want-block`, the server consults `carrierShareDecision` over the
  * cid's docId (`docIdForCiphertextCid`): a proven Nexus MEMBER over a PROVABLY-sealed plane opens the carry lane
  * and the server serves the CIPHERTEXT; a STRANGER, a NON-member, or a KAPAE'd presenter draws Mu. The server
- * serves ciphertext only — the read-cap NEVER rides this seam (it stays on the private keyring), so a member
+ * serves ciphertext only — the read-cap NEVER rides this shore (it stays on the private keyring), so a member
  * carries what it may not be able to read (carry ⊥ read), and the requester re-verifies `BLAKE3(ciphertext)==cid`
  * SECRET-FREE (verify-cap) before trusting a byte.
  *
  * MU BYTE-INDISTINGUISHABILITY (denial ≡ satiety). The server draws the IDENTICAL `muVoidBytes()` for BOTH a
  * DENIED presenter (non-member / Kapae'd) AND a NOTHING-TO-SERVE peer (the cid is not held / already caught up).
  * An adversary reading the wire cannot tell "you are banned" from "there is nothing here" — the void closes the
- * surveillance seam at the same stroke it closes the immune one. A successful carry (`cas-block`) is naturally
+ * surveillance shore at the same stroke it closes the immune one. A successful carry (`cas-block`) is naturally
  * different bytes — the indistinguishability is between DENY and CAUGHT-UP, never between deny and a served body.
  *
  * NO-GLOBAL-NOW: the antigen the gate consults is a local replica read as-of-last-sync — a partitioned peer sees

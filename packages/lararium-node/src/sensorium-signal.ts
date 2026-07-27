@@ -73,7 +73,7 @@ function coerceSeries(raw: unknown): number[][] | null {
 /**
  * The DEFAULT per-child signal reader — read `<childDir>/signal.json` as the child's time-series. Absent /
  * malformed / empty ⇒ `null` (the child drops; graceful, never fabricated). The signal name is the child's
- * `sensorium` role. This is the feature-gate seam: the sidecar fills at the re-pour; until then it reads null.
+ * `sensorium` role. This is the feature-gate shore: the sidecar fills at the re-pour; until then it reads null.
  */
 export const defaultChildSignalReader: ChildSignalReader = ({ child, childDir }) => {
   const p = join(childDir, CHILD_SIGNAL_SIDECAR);

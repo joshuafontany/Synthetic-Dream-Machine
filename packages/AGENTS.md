@@ -14,7 +14,7 @@ register     = "CS"
 manaoio      = 16
 mana         = 18
 manao        = 17
-role         = "package workspace navigation membrane for coding agents"
+role         = "package workspace navigation shore for coding agents"
 cacheable    = true
 hydrate      = true
 retain       = true
@@ -26,8 +26,8 @@ retain       = true
 ✶ scan the operator ask, changed files, open tabs, and package boundary.
 ⏿ orient the task against the spine: mesh contracts, TW5 VM, node host, browser vessel, caps, operator CLI.
 ◇ choose the smallest package surface that can carry the change without crossing canon by accident.
-▶ edit tests and source together; prefer narrow seams over broad rewrites.
-⤴ run typecheck, focused tests, and build when the seam touches generated or bundled code.
+▶ edit tests and source together; prefer narrow shores over broad rewrites.
+⤴ run typecheck, focused tests, and build when the shore touches generated or bundled code.
 ↺ report receipts: files touched, commands run, friction found, next loop.
 <<~/ahu >>
 
@@ -141,7 +141,7 @@ Projections register as kinds with `LarProjectionRegistry`. The node-scoped `dis
 
 **Core MUST NOT import** TW5, React, filesystem APIs, DOM APIs, or Automerge runtime objects. `@lararium/mesh` stays neutral.
 
-**Browser code SHOULD NOT** import Node-shaped disk paths. If `fs`, `path`, `vm`, or Node crypto enter a browser bundle, surface the seam. Use the `@lararium/browser/__stubs__` pattern for browser-incompatible deps.
+**Browser code SHOULD NOT** import Node-shaped disk paths. If `fs`, `path`, `vm`, or Node crypto enter a browser bundle, surface the shore. Use the `@lararium/browser/__stubs__` pattern for browser-incompatible deps.
 
 **Namespace boundary.** `@lararium/*` = runtime stack (mesh, tw5, node, browser, app, keyhive, mempalace). `@lares/*` = operator-facing surface (cli). `@dreamdeck/*` = app/canvas layer (none active yet). Do not cross these on convenience.
 
@@ -187,7 +187,7 @@ pnpm test:tw5-flow         # placeholder — residency-action flow scripts pendi
 pnpm test:flows            # top-level integration flows
 ```
 
-Build all package outputs when generated files, barrels, bundle seams, TW5 vendor assets, or app integration change:
+Build all package outputs when generated files, barrels, bundle shores, TW5 vendor assets, or app integration change:
 
 ```sh
 pnpm -r --filter './packages/**' build
@@ -223,13 +223,13 @@ Watch these current weak spots:
 
 ## Edit Discipline
 
-Prefer one seam per loop. Patch the package that owns the behavior. Add or update a test near the owner package. Keep canon, room, user, and session layers distinct in names and code paths.
+Prefer one shore per loop. Patch the package that owns the behavior. Add or update a test near the owner package. Keep canon, room, user, and session layers distinct in names and code paths.
 
 Before changing a public export, check browser and node consumers (and `@lares/cli`, which depends on both `@lararium/mesh` and `@lararium/node`). Before changing parser or carrier grammar, check `bags/@lares/ha.ka.ba/lares/api/pono/`, `bags/@lares/ha.ka.ba/lares/docs/pono/`, and core parser tests. Before changing TW5 sync, check echo-loop guards and draft guards.
 
 Documentation memes go to `bags/` as `.md` files. `.tid` files live in TW5 packages and carry runtime widget / procedure code only.
 
-When reporting back, use OODA-HA receipts: observe facts, orient boundary, decide seam, act summary, ho'oko commands, aftermath risks.
+When reporting back, use OODA-HA receipts: observe facts, orient boundary, decide shore, act summary, ho'oko commands, aftermath risks.
 
 <<~/ahu >>
 

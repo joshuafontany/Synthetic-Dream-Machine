@@ -7,8 +7,8 @@
  *     so the redundancy buys scan reliability. Pure `qrcode` (soldair, MIT): canvas-free, no node-gyp, offline.
  *   · DECODE (still image, no camera) — the node daemon has no camera, so it decodes a STILL image: a PNG's
  *     bytes → RGBA via `pngjs` (pure-JS, no node-gyp) → an INJECTED matrix decoder → the carriage string. The
- *     decoder is a SEAM (`QrImageDecoder`), NOT a hard dependency, so this module ships no scanner engine of its
- *     own — the node headless decoder + the browser camera decoder both plug in behind the same seam.
+ *     decoder is a SHORE (`QrImageDecoder`), NOT a hard dependency, so this module ships no scanner engine of its
+ *     own — the node headless decoder + the browser camera decoder both plug in behind the same shore.
  *
  * ── SURFACED (dep decision, not silently taken) ──────────────────────────────────────────────────────────
  * The approved SCAN dep, nimiq `qr-scanner`, owns the BROWSER camera + a Web Worker + the DOM — it cannot run
@@ -56,9 +56,9 @@ export async function qrCarriageToTerminalResilient(carriage: string): Promise<R
   return { qr: "", ecc: null, oversized: true };
 }
 
-/** A still-image QR decoder seam — given RGBA bytes + dimensions, return the decoded text, or null on no-read.
+/** A still-image QR decoder shore — given RGBA bytes + dimensions, return the decoded text, or null on no-read.
  *  The node adapter plugs `jsQR`-shaped decode here; the browser adapter plugs its camera decoder. NO engine
- *  is bundled by this module — the seam keeps the scanner dependency the caller's, injected choice. */
+ *  is bundled by this module — the shore keeps the scanner dependency the caller's, injected choice. */
 export type QrImageDecoder = (rgba: Uint8ClampedArray, width: number, height: number) => string | null;
 
 /** Render a carriage as a terminal QR (a tabletop hand-off) — ECC H. */

@@ -5,7 +5,7 @@
  * synced "all my faces" record would be almost a global-now-of-the-self, and a captured vessel must spill only
  * the faces actually admitted TO IT. So this rides a LOCAL 0o600 JSON file under the identity home — never an
  * Automerge bag, never a board. The never-syncs wall is STRUCTURAL: no bag/relay/board write exists in this
- * seam, exactly as the circle-follow graph + the handle-book beside it. Separation is composed by WHERE a key is
+ * shore, exactly as the circle-follow graph + the handle-book beside it. Separation is composed by WHERE a key is
  * admitted, never dissolved by a convenience sync.
  *
  * TWO surfaces:

@@ -360,7 +360,7 @@ export function residualComponentEvents(
 // ── the keel handle: the frozen anchor + its verbs (project now; track/freeze + ocap facets ride later) ──
 
 export interface KeelOpts extends Omit<BoundaryOpts, "directed"> {
-  /** The involution seam (orientation, never a verb flag): "smooth" keeps the Laplacian bottom-k boundary
+  /** The involution shore (orientation, never a verb flag): "smooth" keeps the Laplacian bottom-k boundary
    *  (default, current behavior). A future sharp/Fisher end bakes −L so its top-k lands as bottom-k — one
    *  selection under a sign flip, resolved at build, invisible to project/track. */
   readonly select?: "smooth";

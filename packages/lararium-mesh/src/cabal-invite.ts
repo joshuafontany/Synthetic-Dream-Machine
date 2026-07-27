@@ -12,7 +12,7 @@
  * and the fence holds: the answer arrives as a parameter, and the operator turns it.
  *
  *   invite-only — signal-2 REQUIRED. The DreamNet's opening setting: no invite, no crossing.
- *   open        — signal-1 suffices. A later setting, and the same seam.
+ *   open        — signal-1 suffices. A later setting, and the same shore.
  *
  * REFUSAL IS ANERGY, NEVER A BAN. A joiner without a vouch does not get destroyed, blacklisted, or
  * remembered as an enemy — it STAYS AT THE FLOOR, hyporesponsive, free to re-present later WITH a vouch.

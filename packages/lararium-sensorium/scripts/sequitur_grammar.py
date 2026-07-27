@@ -97,7 +97,7 @@ class Symbol:
         return True
 
     def substitute(self, r: "Rule") -> None:
-        """Swap this digram for one reference to r, then re-check the seam the swap just created."""
+        """Swap this digram for one reference to r, then re-check the shore the swap just created."""
         g = self._g
         prev = self.prev
         self.next.delete()
@@ -267,7 +267,7 @@ class Sequitur:
     def top_spans(self) -> "list[tuple[int, int, int]]":
         """(start, end, rule-index) of each TOP-LEVEL symbol, in terminal coordinates.
 
-        Where one long top-level block ends and another opens, the grammar drew a seam nobody asked for.
+        Where one long top-level block ends and another opens, the grammar drew a shore nobody asked for.
         """
         spans, pos = [], 0
         for s in self.S.body():

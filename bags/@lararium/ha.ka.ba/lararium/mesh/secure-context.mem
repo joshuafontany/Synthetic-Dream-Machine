@@ -112,7 +112,7 @@ The QR admit ceremony (#persona-circle) stays ''photograph-inert by construction
 
 !! Provenance ~ RESEARCHED, not built
 
-This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert ∪ human-onboarding) converged 2026-07-23; NO code stands behind it yet. ''Build implication, named'': the relay's `wss://` origin must bind to the configured DNS name — the device-reach banner already derives reachable URLs, so extending it to honor a configured `LAR_PUBLIC_URL = https://name.kahu.tld` + the wss origin is the seam. ''Uncertain, flagged'': installed-PWA / Android-WebView TLS behavior; a phone forcing encrypted DNS (DoH) past the split-horizon answer (the likeliest papercut); whether OPFS / `crypto.subtle` degrade gracefully across a cert-renewal ''lapse'' or hard-fail the vessel mid-session (worth a deliberate expiry test).
+This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert ∪ human-onboarding) converged 2026-07-23; NO code stands behind it yet. ''Build implication, named'': the relay's `wss://` origin must bind to the configured DNS name — the device-reach banner already derives reachable URLs, so extending it to honor a configured `LAR_PUBLIC_URL = https://name.kahu.tld` + the wss origin is the shore. ''Uncertain, flagged'': installed-PWA / Android-WebView TLS behavior; a phone forcing encrypted DNS (DoH) past the split-horizon answer (the likeliest papercut); whether OPFS / `crypto.subtle` degrade gracefully across a cert-renewal ''lapse'' or hard-fail the vessel mid-session (worth a deliberate expiry test).
 
 <<~/ahu >>
 

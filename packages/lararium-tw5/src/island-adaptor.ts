@@ -1,5 +1,5 @@
 /**
- * island-adaptor — TS membrane between CompositeStore and the wiki's nalu engine.
+ * island-adaptor — TS shore between CompositeStore and the wiki's nalu engine.
  *
  * Narrowed role under the yin-collapse law (nalu.md):
  *   - inbound (projection)  → forward LarTiddlerChange → $tw.lares.enqueueNalu()

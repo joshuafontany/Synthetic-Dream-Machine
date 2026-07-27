@@ -3,7 +3,7 @@
  * worldline edge-DAG.
  *
  * Reads the mempalace knowledge graph READ-ONLY (`<palace>/knowledge_graph.sqlite3`,
- * `mode=ro` — never a write, never through the python membrane): the `lares-worldline`
+ * `mode=ro` — never a write, never through the python shore): the `lares-worldline`
  * adapter rows worldline-kg.ts projects — `prov:Delegation` (spawn → handback interval,
  * `source_drawer_id` = the spawn turn key) and `prov:Communication` (mid-flight inject).
  * Joins each node with the BEARING INDEX (`<state>/harvest/<wing>.ndjson`, the

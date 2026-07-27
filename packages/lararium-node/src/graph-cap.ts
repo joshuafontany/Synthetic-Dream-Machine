@@ -32,7 +32,7 @@ export interface GraphCap {
   close(): Promise<void>;
 }
 
-/** Test seam alias: how the holder process is produced (defaults to the python helper). */
+/** Test shore alias: how the holder process is produced (defaults to the python helper). */
 export type GraphHolderSpawn = PalaceHolderSpawn;
 
 /** Default holder spawn: the venv-aware python running `graph_io.py serve --palace <dir>`. */
@@ -41,7 +41,7 @@ const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveGraphSpawn);
 export interface GraphCapOptions {
   /** per-call RPC timeout (ms); default 30s. */
   readonly timeoutMs?: number;
-  /** test seam: override how the holder process is produced. */
+  /** test shore: override how the holder process is produced. */
   readonly spawn?: GraphHolderSpawn;
 }
 

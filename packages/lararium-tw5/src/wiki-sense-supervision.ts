@@ -5,7 +5,7 @@
  * re-implements no perceiver verb; it correlates asks with answers across the worker wire.
  *
  * THE CONFUSED-DEPUTY WARD (house law, the recurring bug): every ask NAMES its target island and
- * the authority RIDES THE DESIGNATION — the supervisor resolves the name ONLY through the seams the
+ * the authority RIDES THE DESIGNATION — the supervisor resolves the name ONLY through the shores the
  * vessel granted it (the island channels the daemon legitimately supervises), never through ambient
  * or default resolution. A request naming an island outside that grant FAILS LOUD, and a frame
  * arriving from an island other than the one asked never settles the ask.
@@ -17,7 +17,7 @@
  * effect-record ledger idiom (a tagged tiddler under `<bag>/ledger/proof/<event-id>`); its "when"
  * rides the causal heads alone (no wall clock; no global now).
  *
- * PROOF-FEDERATE stays UNBUILT: crossing the disclosure membrane (mesh-palace) reads as a
+ * PROOF-FEDERATE stays UNBUILT: crossing the disclosure shore (mesh-palace) reads as a
  * federation Act the OPERATOR gates — {@link WikiSenseFederateRefusal} answers honestly, typed,
  * mirroring the wiki-sensorium cap's couple() refusal.
  *
@@ -52,15 +52,15 @@ const ASK_TIMEOUT_MS = 10_000;
  *  older records delete forward on write (the ledger stays a bounded ring, never a landfill). */
 const PROOF_RING = 32;
 
-// ── the seams (the vessel's grant — designation carries the authority) ──────────────────────────────
+// ── the shores (the vessel's grant — designation carries the authority) ──────────────────────────────
 
 /**
  * What the vessel grants the supervisor: the ONLY way it reaches an island. `supervises` answers the
  * designation check; `sendSignal` posts into the designated island and MUST itself fail loud when the
- * designation names no live supervised island (the pool's placeSensoriumSignal does). No seam here
+ * designation names no live supervised island (the pool's placeSensoriumSignal does). No shore here
  * resolves a default island — an ask without a legitimate designation goes nowhere.
  */
-export interface WikiSenseSeams {
+export interface WikiSenseShores {
   supervises(designation: string): boolean;
   sendSignal(
     designation: string,
@@ -212,18 +212,18 @@ export function parseProofRecord(fields: Record<string, unknown>): WikiSenseProo
   };
 }
 
-// ── the federate refusal (the membrane stays closed until the operator turns it) ────────────────────
+// ── the federate refusal (the shore stays closed until the operator turns it) ────────────────────
 
 /**
  * The proof-federate answer while the crossing stays operator-gated — a typed refusal naming the
- * membrane Act it awaits. Local proof-hold reads self-sovereign; letting a proof CROSS to peers
- * rides the disclosure membrane (mesh-palace crossesMembrane), a federation Act the operator gates.
+ * shore Act it awaits. Local proof-hold reads self-sovereign; letting a proof CROSS to peers
+ * rides the disclosure shore (mesh-palace crossesShore), a federation Act the operator gates.
  */
 export interface WikiSenseFederateRefusal {
   readonly status: "operator-gated";
-  readonly awaits: "membrane-Act";
+  readonly awaits: "shore-Act";
   /** The crossing this refusal holds shut: the daemon's local proof ledger -> the peer FLOW-map. */
-  readonly crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure membrane)";
+  readonly crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure shore)";
   /** The island the un-granted ask named (the designation echoes back for the audit trail). */
   readonly island: string;
 }
@@ -262,12 +262,12 @@ interface PendingAsk {
 }
 
 /**
- * Stand the supervisor over the vessel's seams. Read-only end to end: it sends only the wiki-sensorium
+ * Stand the supervisor over the vessel's shores. Read-only end to end: it sends only the wiki-sensorium
  * cap's read signals and consumes only the frames they answer with; the sole write it ever performs lands the
- * proof record in the daemon's OWN store (local, self-sovereign — nothing crosses the membrane).
+ * proof record in the daemon's OWN store (local, self-sovereign — nothing crosses the shore).
  */
 export function createWikiSenseSupervisor(
-  seams: WikiSenseSeams,
+  shores: WikiSenseShores,
   opts: WikiSenseSupervisorOptions = {},
 ): WikiSenseSupervisor {
   const timeoutMs = opts.timeoutMs ?? ASK_TIMEOUT_MS;
@@ -301,7 +301,7 @@ export function createWikiSenseSupervisor(
   ): Promise<unknown> {
     // THE WARD: the designation must sit inside the daemon's supervision grant — no ambient
     // resolution, no default island, and the miss surfaces NAMED (fail loud, never fall through).
-    if (!seams.supervises(island)) {
+    if (!shores.supervises(island)) {
       return Promise.reject(new Error(
         `[wiki-sense] ${signal} names "${island}" — an island this daemon does not supervise; ` +
         `the designation carries the authority (no ambient resolution, fail loud)`,
@@ -319,9 +319,9 @@ export function createWikiSenseSupervisor(
         timer,
       });
       try {
-        // the seam re-wards at the mechanism (a live-island check races the mount/unmount log —
+        // the shore re-wards at the mechanism (a live-island check races the mount/unmount log —
         // both ends fail loud, never silently reroute).
-        seams.sendSignal(island, { signal, requestId, ...(args ? { args } : {}) });
+        shores.sendSignal(island, { signal, requestId, ...(args ? { args } : {}) });
       } catch (err) {
         const p = pending.get(requestId);
         p?.reject(err instanceof Error ? err : new Error(String(err)));
@@ -371,12 +371,12 @@ export function createWikiSenseSupervisor(
     },
 
     proofFederate(island: string): WikiSenseFederateRefusal {
-      // the honest refusal: crossing the disclosure membrane reads as a federation Act the
+      // the honest refusal: crossing the disclosure shore reads as a federation Act the
       // OPERATOR gates — this surface never builds it, never fakes it (the cap's couple() discipline).
       return {
         status:   "operator-gated",
-        awaits:   "membrane-Act",
-        crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure membrane)",
+        awaits:   "shore-Act",
+        crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure shore)",
         island,
       };
     },

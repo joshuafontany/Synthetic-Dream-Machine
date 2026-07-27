@@ -103,7 +103,7 @@ describe("persona-kel — threshold-attest rotation (Fork B, NOTHING reconstruct
     for (const s of res.event.rotationSigs) expect(guardianRecoveryKeys).toContain(s.signer);
     expect(res.event.recoveryRoster).toEqual(guardianRecoveryKeys);
     // The guardians signed the SAME bytes the event binds — an independent recompute matches, proving the
-    // attestation rode signatures alone (no reconstruction seam exists to assemble a secret).
+    // attestation rode signatures alone (no reconstruction shore exists to assemble a secret).
     const bytes = personaRotationSigningBytes(inception, freshOpKeyDid);
     for (const s of res.event.rotationSigs) {
       expect(await ed.verifyAsync(hexToBytes(s.sig), bytes, hexToBytes(s.signer))).toBe(true);

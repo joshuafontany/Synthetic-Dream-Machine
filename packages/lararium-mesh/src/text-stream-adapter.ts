@@ -30,7 +30,7 @@ import type { NestedTree, StreamAdapter, StreamFrame } from "./stream-adapter.js
 
 /** A text source — the raw an adapter run ingests. `text` is mandatory; `path`/`kind` aid the parse. */
 export interface TextSource {
-  /** The corpus text (already read; the node seam reads a path into this). */
+  /** The corpus text (already read; the node shore reads a path into this). */
   readonly text: string;
   /** The originating path, when the text came from a file (routes the parse kind by extension). */
   readonly path?: string;
@@ -43,13 +43,13 @@ export interface TextAdapterConfig {
   /**
    * Split a corpus into chunks (the content grain). Default: blank-line PARAGRAPH split — a stable,
    * dependency-free grain that reproduces the corpus's per-chunk content plane. NOT byte-identical to
-   * `mempalace mine`'s chunker (that lives python-side); the node seam delegates a batch run to the
+   * `mempalace mine`'s chunker (that lives python-side); the node shore delegates a batch run to the
    * real chunker (batch = corpus run) — this default serves the pure/in-memory + live paths.
    */
   readonly chunk?: (text: string) => string[];
   /**
    * Parse one chunk to a content-free shape tree (the structure plane's front door). Injected by the
-   * node seam (structure_router). Absent ⇒ frames carry no `structure` and the structure plane derives
+   * node shore (structure_router). Absent ⇒ frames carry no `structure` and the structure plane derives
    * downstream from the source path. Returns null when the chunk's kind has no parser (graceful).
    */
   readonly parse?: (chunk: string, kind?: string) => NestedTree | null;

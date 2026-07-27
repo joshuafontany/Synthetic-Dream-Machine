@@ -431,7 +431,7 @@ export interface PalaceHolderProc {
   kill(): void;
 }
 
-/** Test seam: produce the holder process for a canonical palace dir (defaults to a python helper). */
+/** Test shore: produce the holder process for a canonical palace dir (defaults to a python helper). */
 export type PalaceHolderSpawn = (canonicalDir: string) => PalaceHolderProc;
 
 /** The resolved spawn inputs a python `serve` holder needs (the shape StructurePalaceSpawn / FormEncoderSpawn share). */
@@ -459,7 +459,7 @@ export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn, opts: { r
     if (!scriptPresent) throw new Error(`serve helper missing at ${script}`);
     // PYTHONPATH=submoduleRoot makes `import mempalace` resolve (it is not pip-installed); the venv
     // python supplies chromadb. `python script.py` sets sys.path[0] to the SCRIPT dir, so PYTHONPATH
-    // is the seam that reaches the submodule package.
+    // is the shore that reaches the submodule package.
     // The GPU compute cap (LD_LIBRARY_PATH → CUDA runtime libs + the device hint): the `serve` holder
     // opens its chroma collection, which builds the default onnxruntime embedder — and onnxruntime-gpu
     // HARD-fails to import (`libcudart.so.NN`) without the CUDA libs on the loader path. resolveComputeCapEnv
@@ -718,7 +718,7 @@ export function livePalaceHolderCount(label: string): number {
  *
  * The full DreamNet peer-federation wiring (the @meshpalace AutomergeDocStore FLOW-map,
  * mesh-memegraph, manaoio, the read-face wire) is a SEPARATE, larger mesh-domain piece and
- * is NOT implemented here. This interface only names the seam so the shape is ready.
+ * is NOT implemented here. This interface only names the shore so the shape is ready.
  */
 export interface PalaceFeedCap {
   /** Pull the next batch of source records (e.g. ≥meme drawers off the @meshpalace doc) to index. */
@@ -813,7 +813,7 @@ export interface ContentPalace {
   close(): Promise<void>;
 }
 
-/** Test seam alias: how the holder process is produced (defaults to the python helper). */
+/** Test shore alias: how the holder process is produced (defaults to the python helper). */
 export type ContentHolderSpawn = PalaceHolderSpawn;
 
 /** Default holder spawn: the venv-aware python running `content_io.py serve --palace <dir>`. */
@@ -822,7 +822,7 @@ const defaultContentHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveConte
 export interface ContentPalaceOptions {
   /** per-call RPC timeout (ms); default 30s (covers the one-time chroma open on first call). */
   readonly timeoutMs?: number;
-  /** test seam: override how the holder process is produced (defaults to the python helper). */
+  /** test shore: override how the holder process is produced (defaults to the python helper). */
   readonly spawn?: ContentHolderSpawn;
 }
 
@@ -993,7 +993,7 @@ export interface FormPalace {
   close(): Promise<void>;
 }
 
-/** Test seam alias: how the holder process is produced (defaults to the python helper). */
+/** Test shore alias: how the holder process is produced (defaults to the python helper). */
 export type FormHolderSpawn = PalaceHolderSpawn;
 
 /** Default holder spawn: the venv-aware python running `form_encoder.py serve --palace <dir>`. */
@@ -1002,7 +1002,7 @@ const defaultFormHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveFormEnco
 export interface FormPalaceOptions {
   /** per-call RPC timeout (ms); default 60s (covers the one-time chroma open + first encode). */
   readonly timeoutMs?: number;
-  /** test seam: override how the holder process is produced (defaults to the python helper). */
+  /** test shore: override how the holder process is produced (defaults to the python helper). */
   readonly spawn?: FormHolderSpawn;
 }
 
@@ -1107,7 +1107,7 @@ const defaultStructureHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveStr
 export interface StructurePalaceOptions {
   /** per-call RPC timeout (ms); default 60s (covers the one-time chroma open). */
   readonly timeoutMs?: number;
-  /** test seam: override how the holder process is produced (defaults to the python helper). */
+  /** test shore: override how the holder process is produced (defaults to the python helper). */
   readonly spawn?: PalaceHolderSpawn;
 }
 
@@ -1201,7 +1201,7 @@ const defaultPersistenceHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveP
 export interface PersistencePalaceOptions {
   /** per-call RPC timeout (ms); default 30s (covers the one-time chroma open on first call). */
   readonly timeoutMs?: number;
-  /** test seam: override how the holder process is produced (defaults to the python helper). */
+  /** test shore: override how the holder process is produced (defaults to the python helper). */
   readonly spawn?: PalaceHolderSpawn;
 }
 

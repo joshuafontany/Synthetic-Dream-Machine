@@ -15,7 +15,7 @@
  *
  * The PUBLIC read-face rides the Two-Faced Substrate (oracle-substrate): an
  * immutable content-addressed snapshot + a signed monotone pointer. The
- * disclosure membrane (`publicFlowMap`) filters the doc to only the coarse,
+ * disclosure shore (`publicFlowMap`) filters the doc to only the coarse,
  * public, FLOW-plane tiddlers BEFORE the snapshot crosses to peers — so the map
  * federates where the private territory never could.
  *
@@ -442,8 +442,8 @@ export function hermCanRead(uri: string): boolean {
   return HERM_READABLE_BAGS.has(bag);                            // the waymarks — yes
 }
 
-// ── The disclosure membrane ────────────────────────────────────────────────
-// Only PUBLIC, COARSE, FLOW-plane tiddlers cross to peers. The membrane is the
+// ── The disclosure shore ────────────────────────────────────────────────
+// Only PUBLIC, COARSE, FLOW-plane tiddlers cross to peers. The shore is the
 // map/territory boundary made into a filter: dial-records + routing slots are
 // the coarse public FLOW-map; vessel held-caps stay local unless explicitly
 // expressed. A record is public when it carries `scale = "cabal" | "nexus" |
@@ -451,7 +451,7 @@ export function hermCanRead(uri: string): boolean {
 
 const PUBLIC_SCALES: readonly MeshScale[] = ["cabal", "nexus", "dreamnet"];
 
-function crossesMembrane(rec: LarTiddlerRecord): boolean {
+function crossesShore(rec: LarTiddlerRecord): boolean {
   const kind = strField(rec, "kind");
   if (kind === "route") return true;                       // routing coords are coarse public by design
   if (kind === "dial") {
@@ -463,13 +463,13 @@ function crossesMembrane(rec: LarTiddlerRecord): boolean {
 
 /**
  * Project the mesh-palace doc to its public FLOW-map — the coarse subset that
- * crosses the disclosure membrane. The result is a `LarDoc` ready to snapshot;
+ * crosses the disclosure shore. The result is a `LarDoc` ready to snapshot;
  * the private territory (vessel-local dial-records, held caps) never enters it.
  */
 export function publicFlowMap(doc: LarDoc): LarDoc {
   const tiddlers: Record<string, LarTiddlerRecord> = {};
   for (const [title, rec] of Object.entries(doc.tiddlers)) {
-    if (crossesMembrane(rec)) tiddlers[title] = rec;
+    if (crossesShore(rec)) tiddlers[title] = rec;
   }
   return { schemaVersion: doc.schemaVersion, tiddlers };
 }
@@ -499,7 +499,7 @@ function loadDoc(d: LarDoc): Doc<Record<string, unknown>> {
   return automergeFrom(d as unknown as Record<string, unknown>, FLOW_MAP_ACTOR_ID);
 }
 
-/** Snapshot a mesh-palace doc's PUBLIC FLOW-map (membrane applied) as a content-addressed read-face. */
+/** Snapshot a mesh-palace doc's PUBLIC FLOW-map (shore applied) as a content-addressed read-face. */
 export function snapshotPublicFlowMap(palaceDoc: LarDoc): Promise<OracleSnapshot> {
   return exportOracleSnapshot(loadDoc(publicFlowMap(palaceDoc)));
 }
@@ -556,7 +556,7 @@ export class MeshPalace {
   vessels(): VesselCapStack[] { return vesselCapStacks(this.current()); }
   routes():  RoutingSlot[]    { return routingSlots(this.current()); }
 
-  /** The public projection — only what crosses the disclosure membrane (coarse FLOW). */
+  /** The public projection — only what crosses the disclosure shore (coarse FLOW). */
   publicProjection(): MeshPalaceDoc { return publicFlowMap(this.current()); }
 
   /** Export the public FLOW-map as a content-addressed snapshot (the read-face). */

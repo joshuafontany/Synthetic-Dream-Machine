@@ -60,7 +60,7 @@ identical ground may keep equivalent MDL grammars that differ at the margin; wit
 one process the grammar re-settles identically, the replacement law holds regardless,
 and the as_of provenance never varies (it keys to the ground).
 
-THE DAYDREAM SEAM (named, out of scope): daydream carries the READ-cheap concurrent
+THE DAYDREAM SHORE (named, out of scope): daydream carries the READ-cheap concurrent
 reflection — it reads the Dream store's read face (get/scan + dream-manifest.json)
 alongside the eidetic planes and writes nothing; deep-dream (this pass) stays the one
 WRITE-expensive re-pass. A future daydream verb rides these same stores through their
@@ -299,7 +299,7 @@ def consolidate_coherence(planes: dict, *, tolerance: float, loci_cap: int) -> d
         "dim_h1": obs["dimH1"],
         "r_sem": obs["cost"],
         "kind": obs["kind"],
-        # capped list + the uncapped total beside it — a capped seam always names how
+        # capped list + the uncapped total beside it — a capped shore always names how
         # much it holds back (three planes yield 3 pairs; bigger fleets outgrow the cap).
         "pairs": [{"a": p["a"], "b": p["b"], "distance": p["distance"]}
                   for p in h0["pairs"]][:loci_cap],

@@ -39,7 +39,7 @@ sub-memes; this carries the keel + the meme map.
    (machine · disk · relay · canon read) but MUST NOT share sovereignty (replica · heap ·
    storage scope · keys · log · "now"). Boundary = mutable state, not hardware.
 # ''Isomorphism by composition.'' A vessel composes from sovereign pieces (a recipe),
-   native-first resolution, seams derived by SUBTRACTION. Web2 ports/adapters/DI towers =
+   native-first resolution, shores derived by SUBTRACTION. Web2 ports/adapters/DI towers =
    un-pono. Proof = behavioral conformance, not type-conformance. ([[feedback_isomorphism_by_composition]])
 # ''Same structure, differing capabilities (Ink & Switch).'' Node and browser differ
    ONLY in capabilities, never in structure. The capability set GROWS — init/PersonaGroup/
@@ -91,9 +91,9 @@ sub-memes; this carries the keel + the meme map.
 @lares/core        — voice house · mu · syad · law-of-5s · OODA-HA · e-prime · lar-URI (noosphere-boot)
   └ @lararium/mesh  — SUBSTRATE keel, VM-FREE: CompositeStore · AutomergeDocStore · MemeProvider ·
                       island-protocol · island-repo · BagResidencyManager · CapabilityVerifier ·
-                      AuthVerifierSeam · auth-wire (V3) · open-vessel-core (assembleVessel) ·
+                      AuthVerifierShore · auth-wire (V3) · open-vessel-core (assembleVessel) ·
                       VesselIslandPoolCore · causal-island · crypto · lar-uris · base-doc
-     └ @lararium/tw5 — VM-in-Worker: runSovereignKernel+IslandHostSeam · openAdminVmCore+AdminVmHost ·
+     └ @lararium/tw5 — VM-in-Worker: runSovereignKernel+IslandHostShore · openAdminVmCore+AdminVmHost ·
                        IslandAdaptor · tw5-vm · admin-behavior · verb-dispatcher · vessel-steps (mountPrimaryWiki)
         └ @lararium/keyhive — identity/capability: KeyhiveProvider · bootAdminKeyhive (Gates A/B/C) ·
                               resolveOrMintBinding · ceremony-core · operator-admin-behavior
@@ -143,7 +143,7 @@ substrate atoms + the capability pieces they hold. ([[open-vessel|lar:///ha.ka.b
   difference holds legitimately; it never branches the core.
 * ''Capability pieces'' ride as recipe pieces a vessel MAY hold (inbound peering · disk/OPFS
   mirror · corpus · resident verbs · residency sweeper · founding/PersonaGroup/genesis). Wired
-  on node today, structurally browser-composable; the seam stays OPEN on both substrates.
+  on node today, structurally browser-composable; the shore stays OPEN on both substrates.
 * ''Role'' (relay/leaf/keeper) names the capability pieces a vessel CURRENTLY holds — a
   growing set, never a platform identity. A node MAY run thin; a browser MAY grow heavy. The
   full cap-stack model — role names the ''expressed'' cap-set (hold-vs-express), the five caps in
@@ -161,12 +161,12 @@ observes outcome convergence; V3-authenticated; renders prose↔JSON by audience
 
 !! The Proven Collapse Pattern (how isomorphism actually lands)
 
-Extract the identical skeleton into a CORE; leave platform divergence as a small seam of
+Extract the identical skeleton into a CORE; leave platform divergence as a small shore of
 injected closures (never `if(platform)`, never a class tower). Already done one level down
 and load-bearing:
 
 * `openAdminVmCore` + `AdminVmHost` (admin-vm pair — both inject `spawnWorker`/`newSyncChannel`).
-* `runSovereignKernel` + `IslandHostSeam` (island kernel — post/listen/storage/ready).
+* `runSovereignKernel` + `IslandHostShore` (island kernel — post/listen/storage/ready).
 * `VesselIslandPoolCore` + `VesselIslandHost` (pool — in mesh, zero tw5 dep).
 * `open-vessel-core` (assembleVessel + mountWikiSlot) — the vessel-keel collapse,
   LANDED in mesh, not-yet-wired: the two factories migrate onto it (test-gated). The
@@ -178,7 +178,7 @@ and load-bearing:
 
 !! Open Drift to Reconcile (named, so it stops resurfacing)
 
-The model converges; these seams stay open and SHOULD reconcile (not re-debate):
+The model converges; these shores stay open and SHOULD reconcile (not re-debate):
 
 # ''Stub memes vs load-bearing code'' — recipe / resolver / capability / lar-uris /
    tiddler-store memes sit at mana 3 (TODO) while their code carries load. Fill them or fold

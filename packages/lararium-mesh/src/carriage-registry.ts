@@ -9,7 +9,7 @@
  * orthogonal axis. A human may contract without joining, join without contracting, hold both, or neither.
  * Reading a carriage entry as belonging reads it exactly backwards. Same CRDT shape (monotone/additive, highest-version-per-nym, same-version
  * fail-closed), same quorum authority (≥ k founding-kahu signatures rooted on the charter epoch), and it
- * FAILS CLOSED at every seam. `blocked{}` ⊥ `carriage{}`: a nym may sit in either, neither,
+ * FAILS CLOSED at every shore. `blocked{}` ⊥ `carriage{}`: a nym may sit in either, neither,
  * or — pathologically — both (the antigen still draws Mu; a ban outranks a membership at enforcement).
  *
  * TRACK CONTRACTS, NEVER IDENTITIES (membership-doctrine). A CarriageEntry carries the operator-contract
@@ -26,7 +26,7 @@
  * A REVOKE needs the steward quorum only (an uncooperative member cannot veto its own removal), mirroring
  * the antigen's `un_kapae`.
  *
- * FAIL CLOSED, every seam: an entry whose kahu quorum does not verify is IGNORED; an admit missing / carrying
+ * FAIL CLOSED, every shore: an entry whose kahu quorum does not verify is IGNORED; an admit missing / carrying
  * a bad `contractSig` is IGNORED (never a member); an entry rooting on an unknown charter epoch is IGNORED; a
  * same-version admit/revoke tie stays a NON-member (a tie never grants membership — the more-restrictive act
  * wins, exactly as a kapae beats an un_kapae). An unbound (empty-key) roster meets no threshold → nobody reads
@@ -200,7 +200,7 @@ export async function signCarriageContract(
  * FAIL CLOSED on equivocation: an `admit` and a `revoke` at the SAME version leave the nym a NON-member (a tie
  * never grants membership — the more-restrictive `revoke` wins, mirroring the antigen's kapae-beats-un_kapae).
  *
- * The result is a plain nym set — the enforcement seam (nexus-membership → carrierShareDecision) unions it
+ * The result is a plain nym set — the enforcement shore (nexus-membership → carrierShareDecision) unions it
  * with the seated-kahu floor and reads it to decide MEMBER vs STRANGER.
  */
 export async function foldCarriageSet(

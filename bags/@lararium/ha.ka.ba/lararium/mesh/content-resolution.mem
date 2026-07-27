@@ -39,7 +39,7 @@ Meridian on federated capability) INDEPENDENTLY re-derived what the `@oracle`
 (<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>) canon already held.
 
 > Status: PROPOSED — design-north, NOT built. The #51 hotfix (eager CAS staging +
-> `resolveByCid` seam) ships step 1; this meme carries the persistent-external north
+> `resolveByCid` shore) ships step 1; this meme carries the persistent-external north
 > ahead of the code.
 
 <<~/ahu >>
@@ -52,21 +52,21 @@ The overflow named the law: a body large enough to burst the CRDT ''must leave i
 CRDT carries convergence and causal order well; it carries megabytes badly, and every peer
 that syncs the doc pays the whole weight. So the design ''splits docs from blobs'' — the
 doc keeps small, mutable, causal metadata; the bytes move to a content-addressed store the
-doc merely //points at//. #51 births the seam; the north sits here, at the persistent
+doc merely //points at//. #51 births the shore; the north sits here, at the persistent
 external body.
 
 <<~/ahu >>
 
-<<~ ahu #tw5-seam >>
+<<~ ahu #tw5-shore >>
 
-!! The TW5 seam ~ ride the lazy engine, never fork it
+!! The TW5 shore ~ ride the lazy engine, never fork it
 
 TW5 ''already built the lazy engine'' — the design supplies only the resolver. A carrier
 body becomes a ''skinny handle'': `_is_skinny` marks it, and `getTiddlerText` fires
 `dispatchEvent("lazyLoad", title)` and returns null ("loading") at `wiki.js:1485`. The
 syncer sits under this house's hand, so the house answers that one event with the resolver.
 The `_canonical_uri` variant (`wiki.js:1078`, parse-time, per-parser) carries the media-src
-case. <<~ confidence Synthesis-Canon 14/20 >> the seam rides TW5's own machinery
+case. <<~ confidence Synthesis-Canon 14/20 >> the shore rides TW5's own machinery
 verified in TW5 source — the house adds a resolver, never a fork of the lazy path.
 
 <<~/ahu >>

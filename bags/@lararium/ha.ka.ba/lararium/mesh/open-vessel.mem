@@ -11,7 +11,7 @@ manao       = 16
 manaoio     = 14
 register    = "Synthesis"
 retain      = true
-role        = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations; openVesselCore owns the sequence, VesselHostSeam injects substrate atoms; role rides as a capability bundle, never a platform"
+role        = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations; openVesselCore owns the sequence, VesselHostShore injects substrate atoms; role rides as a capability bundle, never a platform"
 source-file = "packages/lararium-mesh/src/open-vessel-core.ts"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
@@ -32,7 +32,7 @@ drift (see #drift).
 
 A vessel composes from ''sovereign web3-protocol participations'' — it never reads as
 an application with platform branches. The factory derives by SUBTRACTION: the lines
-that differ between the working hosts name the seam, and nothing else earns one
+that differ between the working hosts name the shore, and nothing else earns one
 (Rule-of-Three). The core holds zero platform code; no `if (platform)` enters it.
 
 !!! Same structure, differing capabilities (Ink & Switch)
@@ -51,7 +51,7 @@ loading, residency — SHALL become composable in the browser. The design theref
 treats no capability as structurally node-bound: each rides as a piece any vessel MAY
 compose once it holds the capability, never an `isNode`/`isBrowser` fork and never a
 permanently-absent slot. A capability absent today reads as //not-yet-held//, never
-//cannot-hold//. The seam for every such piece stays open on both substrates.
+//cannot-hold//. The shore for every such piece stays open on both substrates.
 
 <<~/ahu >>
 

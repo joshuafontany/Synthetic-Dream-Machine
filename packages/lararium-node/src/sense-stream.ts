@@ -15,9 +15,9 @@
  *     are the normalized VIEW that proves the abstraction (verified in @lararium/mesh).
  *   · DIRECT-SIGNAL / LIVE ⇒ the per-plane frame driver over {@link defaultStreamPlaneSink}: the
  *     natively-numeric door — a stream's `signal` frames feed `bands_sidecar analyze --signal` +
- *     `couple --signal` (the NDJSON contract) DIRECTLY, no corpus, no chroma. This is the seam the
+ *     `couple --signal` (the NDJSON contract) DIRECTLY, no corpus, no chroma. This is the shore the
  *     NEXT adapter (a non-text on-box stream) builds against; the content/structure planes on the live
- *     path stay a documented seam (a numeric stream carries neither).
+ *     path stay a documented shore (a numeric stream carries neither).
  *
  * Meme: lar:///ha.ka.ba/lares/api/lares/sensorium#the-caps
  */
@@ -117,7 +117,7 @@ export interface ComposeStreamOptions<Raw> {
  * compose_palace over a stream — the generalized sensorium lifecycle. BATCH over a path source delegates
  * to the existing sensorium run (batch = sensorium run); a direct-signal / live adapter (or one with no
  * path) rides the per-plane frame driver over {@link defaultStreamPlaneSink}. An explicit `sink` always
- * takes the frame-driver path (the test + custom-plane seam).
+ * takes the frame-driver path (the test + custom-plane shore).
  */
 export function composeStreamSensorium<Raw>(opts: ComposeStreamOptions<Raw>): PalaceComposition {
   const { adapter, source, sensoriumRoot } = opts;
@@ -142,7 +142,7 @@ export function composeStreamSensorium<Raw>(opts: ComposeStreamOptions<Raw>): Pa
   }
 
   // DIRECT-SIGNAL / LIVE / custom-sink ⇒ the per-plane frame driver (the numeric door + documented
-  // live seam for content/structure).
+  // live shore for content/structure).
   const comp = composePalace(adapter, source, opts.sink ?? defaultStreamPlaneSink(sensoriumRoot));
   return attachPredictiveRead(comp, adapter.ingest(source));
 }

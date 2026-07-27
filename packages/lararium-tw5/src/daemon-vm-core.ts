@@ -5,12 +5,12 @@
  * skeleton from open-daemon-vm.ts (node) ⇆ open-browser-daemon-vm.ts (browser):
  * composite wiring, MessageChannel sync, ea-promise + breath watchdog, the delegation
  * loop, manifest delivery, placeVerb/mountMainVerbs/dispose. The platform
- * divergence remains as a two-member host seam (spawnWorker + newSyncChannel);
+ * divergence remains as a two-member host shore (spawnWorker + newSyncChannel);
  * the resolved daemon doc handle is passed in by the caller (the two platforms
  * resolve it with genuinely different strategies — node merge-on-late-arrival,
  * browser find-or-create — so that stays a wrapper concern, not the core's).
  *
- * Node-only capability proxies (authSeam, resolveBinding) compose ON TOP via a
+ * Node-only capability proxies (authShore, resolveBinding) compose ON TOP via a
  * second listener on the exposed `worker` handle — they are node-ahead surface,
  * not duplication, so the core stays free of them.
  *
@@ -50,7 +50,7 @@ import {
   type DocHandle,
   type LarDoc,
   type WikiRecipe,
-  type AuthVerifierSeam,
+  type AuthVerifierShore,
   type IslandStorageConfig,
   type IslandMsg_Manifest,
   type IslandGrants,
@@ -130,7 +130,7 @@ const EA_STALL_TIMEOUT_MS = 3 * EA_SILENCE_TIMEOUT_MS;
 /** The MessagePort type, borrowed through the mesh manifest (no DOM-lib dep). */
 type VesselMessagePort = IslandMsg_Manifest["syncPort"];
 
-/** The two-member daemon-VM host seam — platform divergence as composition. */
+/** The two-member daemon-VM host shore — platform divergence as composition. */
 export interface DaemonVmHost {
   spawnWorker(scriptUrl: URL): VesselWorkerHandle;
   newSyncChannel(): { mainPort: VesselMessagePort; syncPort: VesselMessagePort };
@@ -215,7 +215,7 @@ export interface DaemonVmCore {
    * Host-side inbound-peer verifier — proxies verify() to the island's
    * keyhive via daemon:verify-request/result. Common to both vessels.
    */
-  authSeam:       AuthVerifierSeam;
+  authShore:       AuthVerifierShore;
   /**
    * Resolve (or mint+delegate) the operator's @personal/@draft binding pair for
    * a recipe fingerprint — runs island-side where keyhive lives. Common surface.
@@ -274,7 +274,7 @@ export interface DaemonVmCore {
   sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) => void;
   /**
    * The projection RETURN-leg's TEXT half — a relayed input/change carrying the field's whole current
-   * value, bounded at the protocol seam. It rides its OWN message kind so the click channel above keeps
+   * value, bounded at the protocol shore. It rides its OWN message kind so the click channel above keeps
    * its primitives-only allowlist; the worker writes the value onto the resolved node and runs TW5's own
    * handler, so an edit widget saves exactly as it saves a local keystroke.
    */
@@ -414,7 +414,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
         ...(msg.identifier ? { identifier: msg.identifier } : {}),
         ...(msg.reason ? { reason: msg.reason } : {}),
         ...(msg.proofVerified !== undefined ? { proofVerified: msg.proofVerified } : {}),
-        // The self-slot class rides the seam's return unchanged — the gate reads it off authSeam.verify.
+        // The self-slot class rides the shore's return unchanged — the gate reads it off authShore.verify.
         ...(msg.peerClass !== undefined ? { peerClass: msg.peerClass } : {}),
       });
       return;
@@ -538,7 +538,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   // then post; node omits ready → a short timeout proceeds. Deferred (not awaited) so the
   // synchronous return holds — workerEa resolves once the worker boots off this manifest.
   // ISOMORPHIC @crossroads: the @daemon renders the public oracle plane on ANY vessel (node or browser). One
-  // seam, both wrappers funnel through here — so splice @crossroads into the recipe (resolves via @oracle's
+  // shore, both wrappers funnel through here — so splice @crossroads into the recipe (resolves via @oracle's
   // pointer, or skips gracefully when a vessel hasn't registered it) + registerBags (so keyhive can access it).
   // Writing the @oracle pointer rides the vessel boot (registerCrossroadsInOracle), keyed by the nexus the
   // vessel belongs to — that value differs (a node's own key vs a browser's relay key), the @daemon code does not.
@@ -569,7 +569,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     mountMainVerbs: (registry: VerbTable) => {
       _registry = registry;
     },
-    authSeam: {
+    authShore: {
       verify: (cardBytes, bagUrl, access, proof, edge) =>
         askIsland("verify", (requestId) => mkDaemonVerifyRequest({
           requestId, cardBytes, bagUrl, access,

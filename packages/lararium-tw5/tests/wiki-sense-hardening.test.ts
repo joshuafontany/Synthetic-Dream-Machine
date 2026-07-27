@@ -108,8 +108,8 @@ describe("the ask-wire fails loud on BOTH ends", () => {
       const island = "lar:///ha.ka.ba/bags/@sense-err";
 
       const errAsk = supervisor.cohere(island);
-      expect(supervisor.acceptFrame(island, { requestId: sent[0]!.requestId, error: "the fold blew a seam" })).toBe(true);
-      await expect(errAsk).rejects.toThrow(/the fold blew a seam/);
+      expect(supervisor.acceptFrame(island, { requestId: sent[0]!.requestId, error: "the fold blew a shore" })).toBe(true);
+      await expect(errAsk).rejects.toThrow(/the fold blew a shore/);
 
       const nullAsk = supervisor.cohere(island);
       expect(supervisor.acceptFrame(island, { requestId: sent[1]!.requestId, result: "null" })).toBe(true);

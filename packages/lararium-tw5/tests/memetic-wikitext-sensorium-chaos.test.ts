@@ -3,7 +3,7 @@
  *
  * The sensorium END-TO-END, attacked: the reader (stratify → skeletal tier + typed association multigraph)
  * → the planes (content/structure/form via stratificationRestrictions) → the consistency-radius → the
- * coupling (coupleAligned / readKiStratum / readKiCorpus). The SEAMS between the four T2 landings.
+ * coupling (coupleAligned / readKiStratum / readKiCorpus). The SHORES between the four T2 landings.
  *
  * TWO invariants under fire:
  *   1. GRACEFUL-DEGRADE, NEVER THROW — malformed/degenerate input degrades to a well-formed empty/partial
@@ -209,7 +209,7 @@ describe("REGRESSION — the ragged-first-tick false-sovereign (dJoint mis-deriv
 
 // ── VARIANCE MIS-ROUTE — a cosheaf plane must NEVER leak into the sheaf consistency-radius ─────────────
 
-describe("seam — variance mis-route: a cosheaf plane leaking into the sheaf radius is REJECTED loudly", () => {
+describe("shore — variance mis-route: a cosheaf plane leaking into the sheaf radius is REJECTED loudly", () => {
   test("consistencyRadius throws when handed a cosheaf (ki) plane — no silent corruption", () => {
     const leaked: PlaneRestriction[] = [
       { plane: "content", variance: "sheaf", value: new Map([["s0", 0.5]]) },
@@ -227,7 +227,7 @@ describe("seam — variance mis-route: a cosheaf plane leaking into the sheaf ra
 
 // ── a sanity guard on bandForSpanLength across the whole ladder (no NaN / undefined at the edges) ──────
 
-describe("seam — bandForSpanLength is total across the ladder (no undefined at any length)", () => {
+describe("shore — bandForSpanLength is total across the ladder (no undefined at any length)", () => {
   test("every non-negative length maps to a real band", () => {
     for (const len of [0, 1, 39, 40, 41, 119, 400, 1199, 1200, 100000]) {
       expect(["Pulse", "Beat", "Measure", "Arc", "Theme"]).toContain(bandForSpanLength(len));

@@ -1,7 +1,7 @@
 /**
  * runInit — Node adapter: one-time social-plane bootstrap for a new Lararium node.
  *
- * Node-specific seams (only these belong here):
+ * Node-specific shores (only these belong here):
  *   - NodeFSStorageAdapter for Automerge repo
  *   - generateOrLoadVesselIdentity / loadVesselSigningSeed (disk keypair)
  *   - writeFileSync for genesis/social-bootstrap.json

@@ -176,7 +176,7 @@ describe("circle-verbs — the per-nym follow-graph over @circles", () => {
     await add({ circle: "following", nym: NYM_A }, CTX);
     await remove({ circle: "following", nym: NYM_B }, CTX);
 
-    // Every title the reactors ever wrote sits under the @circles prefix — no board seam is reachable.
+    // Every title the reactors ever wrote sits under the @circles prefix — no board shore is reachable.
     for (const title of store._snapshot().keys()) {
       expect(title.startsWith(CIRCLES_DOC_URI)).toBe(true);
       expect(title).not.toContain("crossroads");

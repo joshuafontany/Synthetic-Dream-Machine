@@ -10,7 +10,7 @@
  * runs. NO NEW MACHINERY — this THREADS the existing pieces: derive the veiled key → mint the card → hand it
  * to `announceToWhoFace`.
  *
- * ONE FACE TO THE MESH (persona-policy#one-face). A vessel WEARS one persona at a time; the public/carry seam
+ * ONE FACE TO THE MESH (persona-policy#one-face). A vessel WEARS one persona at a time; the public/carry shore
  * serves only the WORN persona. This module mints the worn persona's glamour — the human's own private pool
  * sees all N (persona-petname's multitude-view), but the mesh sees the one federated face.
  *
@@ -69,7 +69,7 @@ export interface PersonaPublicHandleRecord {
 /**
  * How a runtime persists the vessel's OWN published faces — keyed by handle-index, ONE record per persona.
  * DISTINCT from the pet-name map (private, never federates) and the handle-book (others' nyms). A platform
- * supplies the seam (node fs JSON / browser IDB), mirroring the vault's other stores.
+ * supplies the shore (node fs JSON / browser IDB), mirroring the vault's other stores.
  */
 export interface OwnPublicHandleStore {
   /** Read a persona's published-face record, or null when the vessel has federated no glamour for it. */
@@ -174,7 +174,7 @@ export async function publishPersonaGlamour(opts: {
 }
 
 /**
- * publicHandleViewOf — adapt an OwnPublicHandleStore to the multitude-view's read seam (persona-petname).
+ * publicHandleViewOf — adapt an OwnPublicHandleStore to the multitude-view's read shore (persona-petname).
  * Lets `personaMultitudeView` answer "does this persona federate a face, and what does it show?" over the
  * public store WITHOUT the private pet-name map ever importing it — the two stores stay distinct.
  */

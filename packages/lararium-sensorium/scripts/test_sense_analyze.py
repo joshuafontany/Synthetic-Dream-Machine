@@ -1,7 +1,7 @@
 """test_sense_analyze — the isomorphic instrument, DETECT-ONLY over a poured sensorium's stream.
 
   · Foote finds a PLANTED vocabulary boundary in a raw stream (MAUP-free — no lines, the detection works
-    off the word stream and the right scale lands on the seam).
+    off the word stream and the right scale lands on the shore).
   · detect() reads a POURED sensorium: pour once, point the instrument, read the reconstructed stream.
 
     PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_sense_analyze.py -q
@@ -28,21 +28,21 @@ def _stub_embed_factory(dim=4, model="stub/4"):
 
 
 def test_foote_finds_a_planted_vocabulary_boundary():
-    # two vocab regions, one planted seam at word ~300; the right Foote scale lands a cut ON it — detection
+    # two vocab regions, one planted shore at word ~300; the right Foote scale lands a cut ON it — detection
     # off the WORD STREAM, no line grain, so it reads any poured stream the same way.
     rng = random.Random(1)
     sea = " ".join(rng.choice(["wave", "tide", "shore", "salt", "deep", "reef", "foam", "current"]) for _ in range(300))
     sky = " ".join(rng.choice(["cloud", "star", "wind", "dawn", "light", "sky", "moon", "drift"]) for _ in range(300))
     toks = sa.stream_words(sea + " " + sky)
     cuts = sa.foote_sweep(toks, (16, 32, 64))
-    # SOME scale lands a boundary within 15 words of the planted seam (the wide kernels nail it near-exactly)
+    # SOME scale lands a boundary within 15 words of the planted shore (the wide kernels nail it near-exactly)
     near = [p for arm in cuts.values() for p in arm if abs(p - 300) <= 15]
     assert near, f"no Foote scale found the planted boundary at ~300; cuts={cuts}"
 
 
 def test_detect_reads_a_poured_sensorium_stream(tmp_path):
     # pour the claude fixture into a sensorium, then POINT the instrument at its root — it reconstructs the
-    # content stream (the same read rejim uses) and runs the sweep. The pour-then-point seam, end to end.
+    # content stream (the same read rejim uses) and runs the sweep. The pour-then-point shore, end to end.
     from capture_session import capture_and_observe
     os.environ["LAR_WORLDLINE_SALT"] = "sense-analyze-witness"
     root = str(tmp_path / ".mem")
@@ -54,7 +54,7 @@ def test_detect_reads_a_poured_sensorium_stream(tmp_path):
 
 def test_sequitur_and_entropy_arms_land_a_planted_boundary():
     # a grammar/vocabulary regime change at word 200; the adapted arms report WORD positions (owner=identity,
-    # no line fold-back). At least one grammar arm and one entropy arm land a cut near the seam.
+    # no line fold-back). At least one grammar arm and one entropy arm land a cut near the shore.
     a = ("the cat sat on the mat and the cat ran ".split()) * 20
     b = ("a bird flew over a hill then a bird dove ".split()) * 20
     toks = a + b
@@ -101,24 +101,24 @@ def test_spectral_control_beats_null_on_structured_vectors():
 
 
 def test_detect_runs_the_full_arm_surface():
-    # detect() over a stream carries every adapted arm — Foote scales, sequitur depth+seam, sequitur-mdl, and
+    # detect() over a stream carries every adapted arm — Foote scales, sequitur depth+shore, sequitur-mdl, and
     # the branching-entropy depths — each keyed in the boundary surface, each a list of word positions.
     a = ("alpha beta gamma delta epsilon ".split()) * 60
     b = ("one two three four five six seven ".split()) * 60
     words = a + b
     # drive detect() off an in-memory stream — patch the store door + stream read so no pour is needed
-    seam = " ".join(words)
+    shore = " ".join(words)
     orig_store, orig_stream, orig_resolve = sa.ContentStore, sa._content_stream, sa.resolve_content
     sa.resolve_content = lambda _s: "/dev/null/content"
     sa.ContentStore = lambda _c: None
-    sa._content_stream = lambda _store: seam
+    sa._content_stream = lambda _store: shore
     try:
         res = sa.detect("synthetic", halves=(16, 32, 64))
     finally:
         sa.ContentStore, sa._content_stream, sa.resolve_content = orig_store, orig_stream, orig_resolve
     arms = res["boundaries"]
     assert any(a.startswith("foote-") for a in arms)
-    assert "sequitur-depth" in arms and "sequitur-seam" in arms
+    assert "sequitur-depth" in arms and "sequitur-shore" in arms
     assert "sequitur-mdl" in arms
     assert "branch-h1" in arms and "branch-h2" in arms
     assert all(isinstance(p, int) for cuts in arms.values() for p in cuts)   # every cut a plain-int position

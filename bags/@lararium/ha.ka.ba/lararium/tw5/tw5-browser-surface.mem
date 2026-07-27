@@ -8,7 +8,7 @@ l-space     = "lararium"
 mana        = 17
 register    = "Synthesis-Canon"
 retain      = true
-role        = "Named adapter boundary: the ONE file allowed to hold DOM/RootTemplate references in the lararium-browser seam"
+role        = "Named adapter boundary: the ONE file allowed to hold DOM/RootTemplate references in the lararium-browser shore"
 source-file = "packages/lararium-tw5/src/tw5-browser-surface.ts"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lararium/tw5/tw5-browser-surface"
@@ -37,7 +37,7 @@ these types without an explicit entry in `deletion-map.md`.
 * Island authority boot or lifecycle.
 * Automerge or sync state.
 * Any TW5Engine state beyond reading `engine.$tw`.
-* Any seam that crosses the worker boundary.
+* Any shore that crosses the worker boundary.
 
 ''RootTemplate status:''
 

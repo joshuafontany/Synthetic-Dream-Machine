@@ -90,7 +90,7 @@ export async function fetchGenesisCasToOpfs(
 }
 
 /** Read content-addressed bytes by CID from the OPFS CAS. Null if absent/unavailable.
- *  This IS the worker's resolveByCid seam (OPFS origin-shared, no IPC). */
+ *  This IS the worker's resolveByCid shore (OPFS origin-shared, no IPC). */
 export async function readCasBlobFromOpfs(cid: string): Promise<Uint8Array | null> {
   try {
     const root  = await navigator.storage.getDirectory();

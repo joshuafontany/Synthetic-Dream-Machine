@@ -74,7 +74,7 @@ export interface CoalesceGateOptions {
   readonly windowMs: number;
   /** the crest — snapshot the live SOURCE and deliver it to the SINK. `rev` is monotone. */
   readonly onFlush: (rev: number) => void;
-  /** timer seam (deterministic tests); defaults to setTimeout / clearTimeout. */
+  /** timer shore (deterministic tests); defaults to setTimeout / clearTimeout. */
   readonly setTimer?: (fn: () => void, ms: number) => TimerHandle;
   readonly clearTimer?: (h: TimerHandle) => void;
 }
@@ -144,7 +144,7 @@ export interface KeyedCoalesceGateOptions<K> {
   /** the crest for one key — reconcile/snapshot the live source for `key` against the sink. With a
    *  `servo`, return the reconcile PROMISE so the gate can self-clock + measure its true cost. */
   readonly onFlush: (key: K) => void | Promise<void>;
-  /** timer seam (deterministic tests); defaults to setTimeout / clearTimeout. */
+  /** timer shore (deterministic tests); defaults to setTimeout / clearTimeout. */
   readonly setTimer?: (fn: () => void, ms: number) => TimerHandle;
   readonly clearTimer?: (h: TimerHandle) => void;
   /** OPT-IN self-regulation (the reconcile gate only — NOT a display gate). When present, the gate

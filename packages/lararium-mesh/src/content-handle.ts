@@ -7,7 +7,7 @@
  * shard (image/audio/text/binary — no memetic-wikitext wrapper) rests as a `cid/` CAS blob,
  * and the tiddler that stands in the CRDT becomes a SKINNY HANDLE: it names the body by
  * content-address + integrity, marks itself `_is_skinny`, and carries NO `text`. The read-side
- * `lazyLoad` resolver (TW5 `getTiddlerText` seam) rehydrates it on render — a later leg.
+ * `lazyLoad` resolver (TW5 `getTiddlerText` shore) rehydrates it on render — a later leg.
  *
  * Publicity-plane addressing: the public plane (@crossroads) rides a foreign-verifiable
  * `ni://` multihash (RFC-6920) — a stranger fetches AND verifies with no local context. The

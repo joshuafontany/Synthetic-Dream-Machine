@@ -8,7 +8,7 @@
  *
  * CARRY ⊥ READ. The loop serves CIPHERTEXT + the void ONLY, gated by `serveCasWire`'s `carrierShareDecision`
  * (a proven MEMBER over a provably-sealed plane carries; a STRANGER / non-member / Kapae'd draws byte-identical Mu).
- * The read-cap NEVER rides this seam — it arrives via the keyring at admission, on the private lane.
+ * The read-cap NEVER rides this shore — it arrives via the keyring at admission, on the private lane.
  *
  * CLEAN LIFECYCLE. The connect runs fire-and-forget with a caught rejection (a down relay never blocks or crashes
  * the boot); once `auth-ok` lands, an interval polls. `stop()` latches the loop shut, clears the timer, and closes

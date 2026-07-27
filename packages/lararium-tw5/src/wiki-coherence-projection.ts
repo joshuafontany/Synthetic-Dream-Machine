@@ -8,7 +8,7 @@
  *     → forward-pass (projectCoherenceIndicator, PURE — a `radius reading → indicator frame` map)
  *     → NALU (a COALESCE {@link CoalesceGate} — newest-wins, a burst of wikistore changes collapses
  *             to one re-read; intermediates fade, a projection not a WAL)
- *     → SINK (a DOM coherence indicator — the ONLY platform seam; it lives in @lararium/browser,
+ *     → SINK (a DOM coherence indicator — the ONLY platform shore; it lives in @lararium/browser,
  *             swapped per platform, `role = capability ≠ platform`).
  *
  * Where tw5-projection carries the RENDERED story river (HTML+CSS), this carries the sensorium's
@@ -18,7 +18,7 @@
  *
  * THE ORGAN STAYS PLATFORM-BLIND. {@link projectCoherenceIndicator} touches no DOM — it maps a
  * radius reading to an indicator frame. {@link wireCoherenceProjection} owns only the gate and two
- * injected seams (read the source, emit the frame). The DOM write swaps in at the sink alone.
+ * injected shores (read the source, emit the frame). The DOM write swaps in at the sink alone.
  *
  * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-coherence-projection
  */
@@ -113,15 +113,15 @@ export function projectCoherenceIndicator(reading: ConsistencyRadius): Coherence
   };
 }
 
-/** The seams a coherence projector injects — the SOURCE read and the frame EMIT, plus the gate window. */
-export interface CoherenceProjectionSeams {
+/** The shores a coherence projector injects — the SOURCE read and the frame EMIT, plus the gate window. */
+export interface CoherenceProjectionShores {
   /** SOURCE: read the wiki's current consistency radius (async — the adapter folds the live store). */
   readonly read: () => Promise<ConsistencyRadius>;
   /** deliver a coalesced frame toward the main-thread sink; `rev` rides monotone so a stale frame drops. */
   readonly emit: (frame: CoherenceIndicatorFrame, rev: number) => void;
   /** the coalesce window (ms); defaults to {@link COHERENCE_COALESCE_MS}. */
   readonly windowMs?: number;
-  /** timer seam (deterministic tests); forwarded to the {@link CoalesceGate}. */
+  /** timer shore (deterministic tests); forwarded to the {@link CoalesceGate}. */
   readonly setTimer?: (fn: () => void, ms: number) => ReturnType<typeof setTimeout>;
   readonly clearTimer?: (h: ReturnType<typeof setTimeout>) => void;
 }
@@ -135,30 +135,30 @@ export interface CoherenceProjector {
 }
 
 /**
- * PLATFORM-BLIND WIRING — hold a {@link CoalesceGate} over the injected read/emit seams. Each `mark()`
+ * PLATFORM-BLIND WIRING — hold a {@link CoalesceGate} over the injected read/emit shores. Each `mark()`
  * arms one coalesced flush; at the crest the gate re-reads the SOURCE lazily (a burst collapsed to one
  * read), projects the indicator, and emits it with the gate's monotone `rev`. The async read rides
  * fire-and-forget: a read that resolves out of order carries its own older `rev`, so the main-thread
  * sink drops it (the coalesce ordering guarantee's main-thread half).
  */
-export function wireCoherenceProjection(seams: CoherenceProjectionSeams): CoherenceProjector {
+export function wireCoherenceProjection(shores: CoherenceProjectionShores): CoherenceProjector {
   let disposed = false;
   const gate = new CoalesceGate({
-    windowMs: seams.windowMs ?? COHERENCE_COALESCE_MS,
+    windowMs: shores.windowMs ?? COHERENCE_COALESCE_MS,
     onFlush: (rev) => {
-      seams.read()
+      shores.read()
         .then((reading) => {
           // a read resolving past dispose() emits nothing — the projector's teardown holds.
           if (disposed) return;
-          seams.emit(projectCoherenceIndicator(reading), rev);
+          shores.emit(projectCoherenceIndicator(reading), rev);
         })
         .catch((err) => {
           // a failed read DROPS its frame and names the fault — never an unhandled rejection.
           console.warn(`[wiki-coherence-projection] the consistency read failed — frame ${rev} dropped:`, err);
         });
     },
-    ...(seams.setTimer ? { setTimer: seams.setTimer } : {}),
-    ...(seams.clearTimer ? { clearTimer: seams.clearTimer } : {}),
+    ...(shores.setTimer ? { setTimer: shores.setTimer } : {}),
+    ...(shores.clearTimer ? { clearTimer: shores.clearTimer } : {}),
   });
   return {
     mark: () => gate.mark(),

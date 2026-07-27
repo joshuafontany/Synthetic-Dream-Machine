@@ -3,7 +3,7 @@
  *
  * Doctrine (lives here — the old CRYPTO.md pointer dangled and drops):
  *   - Lararium defines needs; it does not implement primitives.
- *   - Portable code depends on this module's seams, never on Node crypto or hand-rolled code.
+ *   - Portable code depends on this module's shores, never on Node crypto or hand-rolled code.
  *   - Callers must supply canonical bytes, never raw objects.
  *
  * Two digest paths, both platform-blind, both full-hex sha256 (the single-cid-gate isomorphism):
@@ -11,7 +11,7 @@
  *     @noble/hashes/sha2 directly — audited, zero-dep, browser-shippable. The live runtime
  *     digest: tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
  *     memetic-wikitext reader's sourceCidOf all carry it.
- *   - The ASYNC seam (sha256Hex(bytes, provider) over CryptoProvider/SubtleCrypto) stays the
+ *   - The ASYNC shore (sha256Hex(bytes, provider) over CryptoProvider/SubtleCrypto) stays the
  *     home for callers that INJECT their digest (auditability, HSM/worker routing) or
  *     already live async.
  */
@@ -150,7 +150,7 @@ export async function sha256Hex(bytes: Uint8Array, provider: DigestProvider): Pr
  * @noble/hashes/sha2 serves as the platform-blind SYNC digest — it ships to browser runtimes and
  * already carries tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
  * memetic-wikitext reader's sourceCidOf. Reach for sha256Hex(bytes, provider) instead only where a
- * caller INJECTS its digest (the CryptoProvider seam: auditability, HSM/worker routing) or already
+ * caller INJECTS its digest (the CryptoProvider shore: auditability, HSM/worker routing) or already
  * lives async. Both paths produce the same full-hex sha256 (the single-cid-gate isomorphism).
  */
 export function sha256BytesSync(bytes: Uint8Array): Uint8Array {
@@ -171,7 +171,7 @@ export function sha256HexBytesSync(bytes: Uint8Array): string {
  * @noble/hashes/sha2 serves as the platform-blind SYNC digest — it ships to browser runtimes and
  * already carries tw5's action-handler render-hash, persona-hd, genesis-doc, and the tw5
  * memetic-wikitext reader's sourceCidOf. Reach for sha256Hex(bytes, provider) instead only where a
- * caller INJECTS its digest (the CryptoProvider seam: auditability, HSM/worker routing) or already
+ * caller INJECTS its digest (the CryptoProvider shore: auditability, HSM/worker routing) or already
  * lives async. Both paths produce the same full-hex sha256 (the single-cid-gate isomorphism).
  */
 export function sha256HexSync(text: string): string {
@@ -180,7 +180,7 @@ export function sha256HexSync(text: string): string {
 
 /**
  * The carrier observation hash the Confluence echo gate keys on — the SAME digest on
- * every side of the disk membrane (the ingest gesture's `diskHash`, the
+ * every side of the disk shore (the ingest gesture's `diskHash`, the
  * projector's Synced-tree value, the in-VM gate's current/candidate render). It
  * folds the `.meta` sidecar in, because `.meta` holds LIVE metadata for a
  * bag/wiki entity: an edit to a carrier's FIELDS alone must read as CHANGED and

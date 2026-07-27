@@ -23,7 +23,7 @@
  * next key-set coherently, and Share 1 ("mine") is the operator's — the vessel-sealed copy, the printed
  * card, and any emailed copy all carry the SAME Share 1, so an operator-full-compromise reveals exactly
  * ONE share → nothing. (CABAL-SCALE evolution surfaced to the operator: each kahu holding their OWN reserve
- * seed splits this seam per-kahu; the founding one-seed case sits at handleIndex 0 of that generalization.)
+ * seed splits this shore per-kahu; the founding one-seed case sits at handleIndex 0 of that generalization.)
  *
  * Meme: lar:///ha.ka.ba/lararium/api/charter-reserve
  */

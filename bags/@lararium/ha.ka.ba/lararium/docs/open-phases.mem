@@ -10,7 +10,7 @@ manao         = 17
 manaoio       = 16
 register      = "Synthesis-Canon"
 retain        = true
-role          = "lararium boot open-phase sequence, authority envelope modes, keyhive promotion seam"
+role          = "lararium boot open-phase sequence, authority envelope modes, keyhive promotion shore"
 source-symbol = "LarariumOpenPhase LarariumAuthorityEnvelope"
 status-date   = "2026-04-30"
 type          = "text/x-memetic-wikitext"
@@ -86,7 +86,7 @@ fields = ["offset: number"]
 kind   = "error"
 fields = ["message: string"]
 
-# LarariumAuthorityEnvelope — session envelope for live protocol seams
+# LarariumAuthorityEnvelope — session envelope for live protocol shores
 # Only local-dev executes today; keyhive is a type-only socket
 [[authority-modes]]
 mode   = "local-dev"
@@ -98,7 +98,7 @@ mode   = "keyhive"
 fields = ["graph: unknown", "peer?: string", "group?: string", "document?: string"]
 status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
-# Keyhive promotion seam law:
+# Keyhive promotion shore law:
 # Canon crossing must NOT mutate lares/ directly from a live edit path.
 # Submit proposal → Keyhive membership/capability check → review/signature receipt
 # → projection/write-back worker materializes canon.

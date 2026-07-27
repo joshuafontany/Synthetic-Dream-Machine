@@ -65,7 +65,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
       // Native TW5 filetype deserialization for LOAD — resolved lazily through the
       // island's live $tw at action time (post-boot), so LOAD lands every legal TW5
       // filetype via TW5's own registry. The memetic carriers stay on their own path.
-      // resolveByCid rides in from the IslandContext (the kernel's host CAS seam) so a
+      // resolveByCid rides in from the IslandContext (the kernel's host CAS shore) so a
       // handle-only carrier (a `textCid`, no inline `text`) resolves island-side — without
       // it a skinny body throws "no resolveByCid" and never lands. Absent on a memory-storage
       // island (no CAS dir); the ingest path faults loud there rather than fabricating a body.

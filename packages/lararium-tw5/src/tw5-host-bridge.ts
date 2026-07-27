@@ -121,7 +121,7 @@ function makeDeniedFsShim(): Record<string, unknown> {
 }
 
 /**
- * HeadlessBootEnv — the composable seam of the headless-island TW5 boot.
+ * HeadlessBootEnv — the composable shore of the headless-island TW5 boot.
  *
  * NOT a platform interface that node/browser "implement": it is exactly what
  * remains after subtracting the identical boot skeleton from the two runtimes —
@@ -265,7 +265,7 @@ function neutralizeNodeBootAuthority(instance: TW5Instance): void {
  * startup, info, plugins, story) RUN — building `$tw.wiki` with no DOM and no render. The
  * engine stays byte-identical; we only inject the kernel's irreducible capabilities (the WASI
  * law) and neutralize the two platform tails the kernel calls unconditionally. A thin, named
- * seam — the rest of the surface belongs to injected/shadowing tiddlers. (`avaktavya`: the
+ * shore — the rest of the surface belongs to injected/shadowing tiddlers. (`avaktavya`: the
  * third predication, neither-A-nor-B held as a first-class standpoint.)
  */
 function configureIslandRuntime(instance: TW5Instance, engineCid?: string): void {
@@ -325,8 +325,8 @@ export async function prepareHostBootInstance(
     // === globalThis. Completes the window/require/vm/path/fs synthetics this
     // module already presents — the last missing Node-ism the browser must supply.
     (globalThis as Record<string, unknown>)["global"] ??= globalThis;
-    // The browser vessel's TW5-platform capability seam (role = capability ≠ platform, the
-    // isomorphic-worker-VM law — cf. makeCaptureEngine's CaptureFlush/Reserve seams). The
+    // The browser vessel's TW5-platform capability shore (role = capability ≠ platform, the
+    // isomorphic-worker-VM law — cf. makeCaptureEngine's CaptureFlush/Reserve shores). The
     // kernel's module-execute sandbox (boot.js §execute) runs each module global-scoped via
     // `new Function`, so its bare `process`/`Buffer`/`global` references resolve to globalThis,
     // NOT the boot eval's processArg. The island injects them here — not detected, supplied —

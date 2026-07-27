@@ -1,5 +1,5 @@
 /**
- * nexus-refresh — the LIVE-refold seam behind the `nexus-refresh` daemon verb.
+ * nexus-refresh — the LIVE-refold shore behind the `nexus-refresh` daemon verb.
  *
  * A running node reads three authorities off the `bags/@nexus` charter + the always-carried antigen / members
  * boards: the federation POSTURE, the Kapae'd DENY set, and the contracted MEMBER set. All three settle at boot
@@ -19,8 +19,8 @@
  *
  * NO-GLOBAL-NOW: the refresh reads THIS node's own storage as-of-now — never a global truth of who is banned or
  * admitted. It re-reads a local replica the operator's own CLI just wrote beside it; a peer's change still rides
- * the WS-sync refold, not this seam. TRACK-CONTRACTS-NEVER-IDENTITIES holds unchanged — the boards carry operator
- * pubkey nyms + quorum seals only, and this seam reads them, never a user.
+ * the WS-sync refold, not this shore. TRACK-CONTRACTS-NEVER-IDENTITIES holds unchanged — the boards carry operator
+ * pubkey nyms + quorum seals only, and this shore reads them, never a user.
  *
  * Meme: lar:///ha.ka.ba/lararium/node/nexus-refresh
  */
@@ -90,7 +90,7 @@ export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefr
     };
   } finally {
     // Dispose the throwaway repo whole — flush its docs AND disconnect its subsystems, so no Repo, no
-    // network seam, and no storage-throttle timer outlives the call. (repo.flush() alone leaves the
+    // network shore, and no storage-throttle timer outlives the call. (repo.flush() alone leaves the
     // StorageSource's armed asyncThrottle trailing-save pending; a caller that removes the storage dir
     // before it fires draws an ENOENT. shutdown() flushes then tears the subsystems down.)
     await repo.shutdown().catch(() => { /* best-effort — a read-only throwaway repo has nothing to persist */ });

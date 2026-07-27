@@ -2,7 +2,7 @@
  * herm-carriage-relay-stand.test.ts — WAVE 1 of the full-pono Herm: a Herm STANDS the carriage crossroads
  * (Socket B) so a family's hearths dial IT to carry sealed @cad bodies between each other.
  *
- * This proves the boot's relay-STANDING seam (the server side), the complement to carriage-relay-serve-loop.test.ts
+ * This proves the boot's relay-STANDING shore (the server side), the complement to carriage-relay-serve-loop.test.ts
  * (which proves the vessel's serve-loop client side against a free-standing relay):
  *   · STANDS + CARRIES — the Herm-boot gate stands `startCarriageRelay` on its resolved gate seed; a HOLDER hearth
  *     serves over it and a MEMBER hearth dials the Herm's `ws://` URL, carries the ciphertext, re-verifies
@@ -10,14 +10,14 @@
  *   · STRANGER draws Mu — a non-member dialing the SAME crossroads draws byte-identical Mu (denial ≡ satiety),
  *   · INERT — the EXACT boot gate (`relayPort !== null ? startCarriageRelay : null`) stands ZERO sockets when no
  *     relay port rides the config and ONE when it does (an un-configured Herm behaves as today),
- *   · STABLE IDENTITY — `resolveRelayGateSeed` (the seam the boot reads) yields the SAME gate key across restarts
+ *   · STABLE IDENTITY — `resolveRelayGateSeed` (the shore the boot reads) yields the SAME gate key across restarts
  *     from the Herm's own identity seed, a DIFFERENT one from a pinned seed hex, and NEVER a fresh random,
  *   · CLEAN TEARDOWN — `close()` stops the crossroads: a dial after close cannot connect (no leaked WS server).
  *
  * The full openNodeHerm boot (genesis + identity + read-face) stays outside this headless proof — here the boot's
  * relay-standing gate + seed-resolution run VERBATIM (`resolveRelayGateSeed` + the `startCarriageRelay` ternary),
  * and every crypto piece is REAL (Ed25519 proof-of-possession, the @cad seal, secret-free verify). What only a Pi /
- * two-OS-process crossing proves: a stable bound port surviving a real process restart, the LAN secure-context seam.
+ * two-OS-process crossing proves: a stable bound port surviving a real process restart, the LAN secure-context shore.
  *
  * Gate: lar:///ha.ka.ba/lararium/node/herm-carriage-relay-stand
  */

@@ -291,7 +291,7 @@ export async function verifyAuthProof(parts: {
  * V3 integration runs live: runPeerHandshake (lar-ws-client-adapter) boots the
  * signer and runs challenge→response before Automerge sync; the gate
  * (daemon-auth-gate) issues gatePubKey on lar:challenge and verifies this sig via
- * the worker seam (verifyAuthProof).
+ * the worker shore (verifyAuthProof).
  */
 export async function buildAuthResponse(parts: {
   contactCard: string;
@@ -324,7 +324,7 @@ export async function buildAuthResponse(parts: {
 }
 
 /**
- * PeerHandshake — the seam the platform-blind handshake composes over. NOT an
+ * PeerHandshake — the shore the platform-blind handshake composes over. NOT an
  * adapter tower: a small data descriptor + injected functions. The TRANSPORT
  * (recv/send) injects per platform (node isomorphic-ws · browser WebSocket); the
  * IDENTITY (contactCard/peerPubKey/sign) injects from the isomorphic keyhive

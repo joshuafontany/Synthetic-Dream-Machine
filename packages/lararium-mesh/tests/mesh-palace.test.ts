@@ -5,7 +5,7 @@
  *   - each record kind (dial · vessel cap-stack · routing slot) round-trips
  *     through a LarDoc tiddler, and decode never throws (returns null);
  *   - hold ≠ express (a vessel advertises only its lit wire-caps);
- *   - the disclosure membrane keeps only the coarse public FLOW (dial@public +
+ *   - the disclosure shore keeps only the coarse public FLOW (dial@public +
  *     routes), dropping the private territory (vessel-local dials, held caps);
  *   - the public FLOW-map publishes as a content-addressed snapshot (rehash
  *     verifies; a tamper is a different name) — the Two-Faced read-face.
@@ -93,7 +93,7 @@ describe("mesh-palace records round-trip", () => {
   });
 });
 
-describe("the disclosure membrane", () => {
+describe("the disclosure shore", () => {
   test("keeps coarse public FLOW, drops the private territory", () => {
     const publicDial: DialEntry  = { bearing: "lar:///ha.ka.ba/bags/@oracle",  verifyingKeyHex: "b".repeat(64), endpoint: "ws://relay/1", scale: "dreamnet" };
     const localDial:  DialEntry  = { bearing: "lar:///ha.ka.ba/bags/@daemon",  verifyingKeyHex: "c".repeat(64), endpoint: "ws://local/2" }; // no scale → local

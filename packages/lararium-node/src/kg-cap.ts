@@ -44,7 +44,7 @@ export interface KgCap {
   close(): Promise<void>;
 }
 
-/** Test seam alias: how the holder process is produced (defaults to the python helper). */
+/** Test shore alias: how the holder process is produced (defaults to the python helper). */
 export type KgHolderSpawn = PalaceHolderSpawn;
 
 /** Default holder spawn: the venv-aware python running `kg_io.py serve --palace <dir>`. */
@@ -53,7 +53,7 @@ const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveKgSpawn);
 export interface KgCapOptions {
   /** per-call RPC timeout (ms); default 30s. */
   readonly timeoutMs?: number;
-  /** test seam: override how the holder process is produced. */
+  /** test shore: override how the holder process is produced. */
   readonly spawn?: KgHolderSpawn;
 }
 

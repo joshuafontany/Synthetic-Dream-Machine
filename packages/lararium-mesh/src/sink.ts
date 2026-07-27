@@ -13,7 +13,7 @@
  * The clock drives the rest (C1): recoverClock({rhythm}) recovers the beat ONCE; that beat sizes the
  * supersaturation window, and rides into temporalRigidity as knownPeriod so the base period gets detected a
  * single time — clock + rigidity read ONE beat. nucleate({support, planeSignals, arrivalRate, planeCorrelation})
- * decides birth; temporalRigidity decides standing. The seam the QA named — a shared candidate noun bridging
+ * decides birth; temporalRigidity decides standing. The shore the QA named — a shared candidate noun bridging
  * the scalar gate and the array-signal rigidity — closes here: every organ reads projections of ONE event-log.
  *
  * A constant (plane, agreement)-only feed carries NO first-difference rhythm → holdover → it never STANDS as

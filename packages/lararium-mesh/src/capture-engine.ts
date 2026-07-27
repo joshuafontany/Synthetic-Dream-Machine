@@ -1,26 +1,26 @@
 /**
  * capture-engine — the ISOMORPHIC telemetry-VM worker: a self-regulating DUAL-FAMILY cell.
- * The pure capture core, composed from injected substrate seams; the SAME cell runs in every
- * vessel, only the seams differ by capability (role = capability ≠ platform).
+ * The pure capture core, composed from injected substrate shores; the SAME cell runs in every
+ * vessel, only the shores differ by capability (role = capability ≠ platform).
  *
  * BOTH gate families ride this ONE substrate (the projection-nalu pattern integrity — the neuron
  * that is graded on its dendrites AND spiking on its axon):
  *   - IN = accumulate (the axon) — {@link CaptureNalu}: every raw turn conserved, WAL-backed,
  *     batch-flushed to the SINK on the server tick.
  *   - OUT = coalesce (the dendrite) — a {@link CoalesceGate} projecting live engine state: a
- *     burst of changes collapses to ONE frame via the injected `post` seam (the twin of `flush`),
+ *     burst of changes collapses to ONE frame via the injected `post` shore (the twin of `flush`),
  *     newest wins, intermediates fade (a dropped intermediate is correct, not a loss).
  *   - SELF-REGULATION (the breathing threshold) — the `flush` is timed; when a `servo` is
  *     composed, each flush nudges the gate toward a latency set-point (gate-tuning's adaptGate),
  *     so the IN threshold tracks load instead of holding a guess. The cell servos ITSELF — no
  *     external valve (the subak rhyme: local-first regulation).
  *
- * Per-vessel seams:
+ * Per-vessel shores:
  *   node daemon  : flush=spawn(mine --source ndjson) · reserve=fs-WAL  · post=parentPort
  *   browser spore: flush=idb/relay               · reserve=idb-WAL · post=main-thread
  *   cli          : flush=relay-to-daemon         · reserve=fs-WAL  · post=relay
  *
- * Add a vessel = implement the seams, never rewrite the cell. Pure: zero substrate imports (no
+ * Add a vessel = implement the shores, never rewrite the cell. Pure: zero substrate imports (no
  * node:fs, no child_process) — `now`/timers are universal globals, injectable for tests.
  *
  * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#isomorphic-telemetry-vm
@@ -52,12 +52,12 @@ export interface CaptureFrame {
   readonly rev: number;
 }
 
-/** The OUT sink seam — the projection-nalu twin of `flush`. Deliver a coalesced stats frame to
+/** The OUT sink shore — the projection-nalu twin of `flush`. Deliver a coalesced stats frame to
  *  the vessel's surface (node: parentPort; browser: the main thread). role = capability ≠
  *  platform. Absent = no OUT projection (Null-Object). */
 export type CapturePost = (frame: CaptureFrame) => void;
 
-/** One LANDED turn — reported by {@link CaptureEngineSeams.onLand} the instant a flush confirms it
+/** One LANDED turn — reported by {@link CaptureEngineShores.onLand} the instant a flush confirms it
  *  durable. `turnKey` = the producer's idempotency key (the CLI's `.capture-state.json` key); a turn
  *  captured without one lands with `turnKey` undefined. This is the land-owned watermark's raw event:
  *  the CLI (or any consumer) advances its per-key watermark on THIS, never on the accept/enqueue ack. */
@@ -67,7 +67,7 @@ export interface LandedTurn {
   readonly contentHash: string;
 }
 
-/** The LAND-signal seam (ACCUMULATE, never coalesce — a land must NEVER drop): fires the batch's
+/** The LAND-signal shore (ACCUMULATE, never coalesce — a land must NEVER drop): fires the batch's
  *  landed turns after a flush confirms them durable. The node vessel writes the capture-state
  *  watermark off this (drain owns the watermark); absent = no land reporting (Null-Object). */
 export type OnLand = (landed: readonly LandedTurn[]) => void;
@@ -117,8 +117,8 @@ export interface CaptureReserve {
   compact(): Promise<void>;
 }
 
-/** The vessel-supplied seams that specialize the isomorphic cell. */
-export interface CaptureEngineSeams {
+/** The vessel-supplied shores that specialize the isomorphic cell. */
+export interface CaptureEngineShores {
   readonly reserve: CaptureReserve;
   readonly flush: CaptureFlush;
   readonly annotate: CaptureAnnotate;
@@ -137,12 +137,12 @@ export interface CaptureEngineSeams {
   /** the derivation (the SLOW loop): when present, periodically re-anchor the gate from measured
    *  cost/rate (EBQ + Little's Law). Composes with `servo` as a two-loop controller. Absent → none. */
   readonly derive?: CaptureDerive;
-  /** timer seam for the OUT coalesce gate (deterministic tests). */
+  /** timer shore for the OUT coalesce gate (deterministic tests). */
   readonly outTimer?: {
     readonly setTimer: (fn: () => void, ms: number) => TimerHandle;
     readonly clearTimer: (h: TimerHandle) => void;
   };
-  /** digest seam for the sink-side dedup + chunk identity (deterministic tests). Default: the
+  /** digest shore for the sink-side dedup + chunk identity (deterministic tests). Default: the
    *  platform Web Crypto provider — isomorphic, no substrate import. */
   readonly digest?: DigestProvider;
 }
@@ -189,18 +189,18 @@ export interface CaptureEngine {
   kapaeAst?(turnKey: string, ended?: string): Promise<void>;
 }
 
-/** Compose the self-regulating dual-family cell from a vessel's substrate seams. */
-export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
-  const { reserve, annotate } = seams;
-  const now = seams.now ?? (() => Date.now());
-  let gate = seams.gate ?? PONO_FLUSH_GATE;
+/** Compose the self-regulating dual-family cell from a vessel's substrate shores. */
+export function makeCaptureEngine(shores: CaptureEngineShores): CaptureEngine {
+  const { reserve, annotate } = shores;
+  const now = shores.now ?? (() => Date.now());
+  let gate = shores.gate ?? PONO_FLUSH_GATE;
   let live = true;
 
   // SINK-SIDE DEDUP — the island's own log. Keyed `source \0 turnKey` (else `source \0 #hash`),
   // valued by the content hash: a resubmit with the SAME key+hash acks idempotently; the same
   // turnKey with NEW content (an exchange that grew its answer) re-lands and upserts (the
   // deterministic chunk id keeps it ONE drawer). Seeded from the WAL replay, grown per append.
-  const digest = seams.digest ?? defaultCryptoProvider;
+  const digest = shores.digest ?? defaultCryptoProvider;
   const seen = new Map<string, string>();
   let enqueueTail: Promise<void> = Promise.resolve();
 
@@ -231,49 +231,49 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
   // (adaptGate). The derive tick REPLACES the servo step that flush — the derivation IS the update.
   const measuredFlush: CaptureFlush = async (batch) => {
     const t0 = now();
-    const filed = await seams.flush(batch); // a throw PROPAGATES → both loops skipped (a failed flush
+    const filed = await shores.flush(batch); // a throw PROPAGATES → both loops skipped (a failed flush
     // is a fast-fail, not a latency signal; the nalu's own backoff/dead-letter is the failure response)
     const observedLatencyMs = now() - t0;
 
     // LAND confirmed — the flush returned without throwing, so this batch is durable. Fire the land
     // signal (accumulate: every land reported, none dropped). This is the ONLY site that reports a
     // land; a throw above skips it entirely (the turn stays staged, no land fires — accept≠land).
-    if (seams.onLand) {
+    if (shores.onLand) {
       const landed: LandedTurn[] = [];
       for (const rec of batch) {
         const m = landMeta.get(rec);
         if (m) landed.push(m);
       }
-      if (landed.length) seams.onLand(landed);
+      if (landed.length) shores.onLand(landed);
     }
 
-    if (seams.derive) {
+    if (shores.derive) {
       ewmaCostMs = costSamples === 0 ? observedLatencyMs : COST_EWMA_ALPHA * observedLatencyMs + (1 - COST_EWMA_ALPHA) * ewmaCostMs;
       costSamples++;
       flushesSinceDerive++;
     }
 
     if (
-      seams.derive &&
-      flushesSinceDerive >= (seams.derive.everyFlushes ?? 16) &&
-      costSamples >= (seams.derive.minSamples ?? 4)
+      shores.derive &&
+      flushesSinceDerive >= (shores.derive.everyFlushes ?? 16) &&
+      costSamples >= (shores.derive.minSamples ?? 4)
     ) {
       // SLOW loop — re-anchor the gate from measured cost/rate (EBQ + Little's Law).
       const elapsedMs = Math.max(1, now() - windowStartMs);
       gate = deriveGate({
         flushCostMs: ewmaCostMs,
-        holdingCostPerMs: seams.derive.holdingCostPerMs,
+        holdingCostPerMs: shores.derive.holdingCostPerMs,
         arrivalPerMs: arrivals / elapsedMs,
-        ...(seams.derive.maxLatencyMs !== undefined ? { maxLatencyMs: seams.derive.maxLatencyMs } : {}),
-        ...(seams.derive.burstFactor !== undefined ? { burstFactor: seams.derive.burstFactor } : {}),
+        ...(shores.derive.maxLatencyMs !== undefined ? { maxLatencyMs: shores.derive.maxLatencyMs } : {}),
+        ...(shores.derive.burstFactor !== undefined ? { burstFactor: shores.derive.burstFactor } : {}),
       });
       nalu.setGate(gate);
       flushesSinceDerive = 0;
       arrivals = 0;
       windowStartMs = now();
-    } else if (seams.servo) {
+    } else if (shores.servo) {
       // FAST loop — nudge depth toward the latency set-point between derivations (AIMD).
-      gate = adaptGate(gate, observedLatencyMs, seams.servo.targetLatencyMs, seams.servo.maxStep);
+      gate = adaptGate(gate, observedLatencyMs, shores.servo.targetLatencyMs, shores.servo.maxStep);
       nalu.setGate(gate); // efferent: the threshold breathes toward the latency set-point
     }
     return filed;
@@ -291,12 +291,12 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
 
   // OUT family (coalesce) — the projection-nalu twin: mark on every source-move, snapshot at the
   // crest, deliver via the injected `post`. Null-Object when no vessel surface listens.
-  const outGate = seams.post
+  const outGate = shores.post
     ? new CoalesceGate({
-        windowMs: seams.outWindowMs ?? 50,
-        onFlush: (rev) => seams.post?.({ stats: nalu.stats(), gate, rev }),
-        ...(seams.outTimer
-          ? { setTimer: seams.outTimer.setTimer, clearTimer: seams.outTimer.clearTimer }
+        windowMs: shores.outWindowMs ?? 50,
+        onFlush: (rev) => shores.post?.({ stats: nalu.stats(), gate, rev }),
+        ...(shores.outTimer
+          ? { setTimer: shores.outTimer.setTimer, clearTimer: shores.outTimer.clearTimer }
           : {}),
       })
     : null;

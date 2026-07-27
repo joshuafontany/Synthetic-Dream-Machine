@@ -1,7 +1,7 @@
 /**
  * LarWSClientAdapter — the V3 peer transport for a sovereign LEAF actor (platform-blind).
  *
- * The stock `WebSocketClientAdapter` opens its socket and immediately speaks Automerge — no seam for
+ * The stock `WebSocketClientAdapter` opens its socket and immediately speaks Automerge — no shore for
  * a pre-sync handshake. This subclass interposes the lar:challenge → lar:auth → verdict handshake
  * (operator-peer #actor-parity) on the SAME socket the gate authenticates, THEN hands that
  * authenticated socket to the parent's Automerge machinery. It mirrors the server side, where

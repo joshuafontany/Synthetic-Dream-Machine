@@ -17,7 +17,7 @@ export function nodeWorkerHandle(w: Worker): VesselWorkerHandle {
 }
 
 /** The node island-host parts shared by the daemon VM and the pool: a worker_threads
- *  MessageChannel port pair (the host seam types ports as the global MessagePort), and a
+ *  MessageChannel port pair (the host shore types ports as the global MessagePort), and a
  *  worker_threads Worker spawned + wrapped as a VesselWorkerHandle. */
 export function nodeNewSyncChannel(): { mainPort: MessagePort; syncPort: MessagePort } {
   const { port1, port2 } = new MessageChannel();

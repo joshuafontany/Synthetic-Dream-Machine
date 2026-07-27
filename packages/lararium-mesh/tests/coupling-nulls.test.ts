@@ -42,7 +42,7 @@ describe("S0 · circularShiftSource — the BIVARIATE null preserves source dyna
     for (let t = 1; t < 400; t++) series.push(0.7 * series[t - 1]! + g()); // strongly autocorrelated
     const ac0 = lag1Autocorr(series);
     const acS = lag1Autocorr(circularShiftSource(series, makeRng(42), { minShift: 20 }));
-    // one wrap-seam in 400 points perturbs the estimate only slightly — the autocorrelation SURVIVES.
+    // one wrap-shore in 400 points perturbs the estimate only slightly — the autocorrelation SURVIVES.
     expect(Math.abs(acS - ac0)).toBeLessThan(0.05);
     expect(acS).toBeGreaterThan(0.5); // and stays strongly correlated (iid-shuffle would drop it to ≈0)
   });

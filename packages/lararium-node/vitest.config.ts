@@ -43,7 +43,7 @@ const heavy = [
   // nested worker_threads islands booting the full TW5 kernel off dist
   "tests/blob-sovereignty.test.ts",
   "tests/event-routing.test.ts",
-  "tests/federation-seam.test.ts",
+  "tests/federation-shore.test.ts",
   "tests/m3-breathing.test.ts",
   "tests/repo-in-island.test.ts",
   "tests/vessel-island-pool.test.ts",

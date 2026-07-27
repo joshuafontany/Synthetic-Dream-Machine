@@ -8,7 +8,7 @@
  * Handle. The vessel WEARS one at a time (signs/acts as it) and MAY switch — "put on a mask".
  *
  * The vault VENDS the existing per-index KeypairStore (vessel-identity-core) — it never reinvents keypair
- * persistence. It aggregates the four seams a multi-persona vessel needs:
+ * persistence. It aggregates the four shores a multi-persona vessel needs:
  *   · rootSlot(handleIndex) — the KeypairStore for ONE persona-root (the operator-root that signs edges),
  *   · selector              — which persona the vessel currently wears,
  *   · anchors               — the veiled-Handle sentinel anchors (public),
@@ -44,7 +44,7 @@ export interface ActivePersonaStore {
 }
 
 /**
- * The aggregate persona identity store. A platform supplies the four seams + the roster reads; the core
+ * The aggregate persona identity store. A platform supplies the four shores + the roster reads; the core
  * runs the lifecycle over them. `recovery` reads null when the vessel provisions no device recovery-share.
  */
 export interface PersonaVault {
@@ -209,5 +209,5 @@ export async function loadActivePersona(vault: PersonaVault): Promise<number | u
 }
 
 // generateOrLoadKeypair rides the same skeleton one layer down (the device key). Re-exported for adapters
-// that build both a device-key store and a persona vault from the same seams.
+// that build both a device-key store and a persona vault from the same shores.
 export { generateOrLoadKeypair };

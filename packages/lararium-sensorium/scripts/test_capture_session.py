@@ -67,7 +67,7 @@ def test_w1_5b_second_pass_is_idempotent(tmp_path):
 
 
 def test_serve_holder_keeps_capture_in_python_and_rederives_idempotently(tmp_path):
-    # This is the daemon-facing seam: it accepts a pointer descriptor, not a turn payload.  One
+    # This is the daemon-facing shore: it accepts a pointer descriptor, not a turn payload.  One
     # warm Python holder parses and lands the source; a second request skips the same three CIDs.
     server = CaptureSessionServer(str(tmp_path / ".mem"), embed_factory=_stub_embed_factory())
     req = {"surface": "claude", "pointer": CLAUDE, "wing": "wing_proj", "room": "conversations"}

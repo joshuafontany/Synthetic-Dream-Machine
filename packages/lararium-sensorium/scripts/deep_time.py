@@ -1,4 +1,4 @@
-"""deep_time — the deep-time seams the machina crosses on a centuries-long mesh run.
+"""deep_time — the deep-time shores the machina crosses on a centuries-long mesh run.
 
 Two hedges live here, each a SINGLE named home so a 500-year drift never scatters the intent
 across the codebase:
@@ -44,10 +44,10 @@ def island_local_now(*, millis: bool = False, z: bool = False) -> str:
 
 
 def content_hash(data: bytes) -> str:
-    """The content-address / identity hash seam — the algorithm's SINGLE home (hash-agility).
+    """The content-address / identity hash shore — the algorithm's SINGLE home (hash-agility).
 
     TODAY returns EXACTLY `hashlib.sha256(data).hexdigest()`, BYTE-IDENTICAL, so every existing
     content address stays valid. A future roll swaps the algorithm HERE (adding a new-algo path)
-    while old sha256 addresses keep resolving — the seam that lets the hash move without breaking
+    while old sha256 addresses keep resolving — the shore that lets the hash move without breaking
     a centuries-old store."""
     return hashlib.sha256(data).hexdigest()

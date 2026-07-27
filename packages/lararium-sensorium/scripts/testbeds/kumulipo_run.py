@@ -66,7 +66,7 @@ def frames_from_lines(lines: "list[str]", stream: str = "kumulipo"):
 def line_offsets(lines: "list[str]") -> "list[int]":
     """Tick offset at which each line opens — the map from the character stream back to line numbers.
 
-    The instrument speaks in TICKS; the answer key speaks in LINES. The scoring crosses that seam here,
+    The instrument speaks in TICKS; the answer key speaks in LINES. The scoring crosses that shore here,
     once, rather than in every caller getting it subtly wrong.
     """
     out, t = [], 0

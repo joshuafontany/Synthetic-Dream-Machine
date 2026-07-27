@@ -1,5 +1,5 @@
 /**
- * browser-sovereign-island-model — browser host seam for the sovereign kernel.
+ * browser-sovereign-island-model — browser host shore for the sovereign kernel.
  *
  * The lifecycle itself lives in @lararium/tw5 `runSovereignKernel` — ONE flow
  * both vessels compose. This file supplies only the browser platform pieces:
@@ -10,7 +10,7 @@
  *                 top-level await in this ES-module Worker completes before the
  *                 kernel fires it, so the vessel may send a manifest only after.
  *
- * Divergence is COMPOSITION (which pieces the seam resolves), not an OO
+ * Divergence is COMPOSITION (which pieces the shore resolves), not an OO
  * platform interface. See feedback_isomorphism_by_composition.
  *
  * ## VM Pool alignment
@@ -25,19 +25,19 @@
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb";
 import {
   runSovereignKernel,
-  type IslandHostSeam,
+  type IslandHostShore,
 } from "@lararium/tw5";
 import { mkReady } from "@lararium/mesh";
 import type { IslandMsg_Manifest, IslandToVesselMsg } from "@lararium/mesh";
 import type { IslandBehavior } from "@lararium/tw5";
 import { readCasBlobFromOpfs } from "./browser-genesis.js";
 
-// ── runBrowserSovereignWorker — browser host seam over the shared kernel ────
+// ── runBrowserSovereignWorker — browser host shore over the shared kernel ────
 
 export function runBrowserSovereignWorker(
   behaviorOrFactory: IslandBehavior | ((manifest: IslandMsg_Manifest) => IslandBehavior),
 ): void {
-  const host: IslandHostSeam = {
+  const host: IslandHostShore = {
     post:    (msg: IslandToVesselMsg) => self.postMessage(msg),
     listen:  (onMessage) => self.addEventListener("message", (e: MessageEvent) => onMessage(e.data)),
     storage: (msg) => new IndexedDBStorageAdapter(msg.wikiUri),

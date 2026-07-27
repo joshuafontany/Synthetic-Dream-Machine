@@ -16,7 +16,7 @@
  * so a wrong item leaves the pathway (dead-letter) before the point of no return. The cost is honest
  * — a validation step buys fidelity at a throughput price (named, not free).
  *
- * PURE: functions over (item, licensed-set, validate-seam). The caller draws `licensed` from the
+ * PURE: functions over (item, licensed-set, validate-shore). The caller draws `licensed` from the
  * drain's committed keys and routes each verdict (commit → the single writer · dead-letter → the
  * ERAD sink · skip → nothing). Meme: lar:///ha.ka.ba/lararium/mesh/merge-gate ·
  * api/projection-nalu (the accumulate family's merge point).
@@ -30,7 +30,7 @@ export interface MergeItem<E> {
   readonly embedded: E;
 }
 
-/** The proofread seam — run BEFORE the irreversible commit; a reject exits to the dead-letter lane. */
+/** The proofread shore — run BEFORE the irreversible commit; a reject exits to the dead-letter lane. */
 export type Validate<E> = (m: MergeItem<E>) => { readonly ok: true } | { readonly ok: false; readonly reason: string };
 
 /** The merge verdict — the caller routes by kind. Exactly one of three outcomes; nothing drops. */

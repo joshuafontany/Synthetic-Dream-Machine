@@ -1,5 +1,5 @@
 /**
- * nexus-refresh.test.ts — the LIVE-refold seam (D2 posture-flip + E2 out-of-process board write).
+ * nexus-refresh.test.ts — the LIVE-refold shore (D2 posture-flip + E2 out-of-process board write).
  *
  * Proven:
  *   · POSTURE — an out-of-process `nexus posture open` disk write, then a refresh, reassigns the live posture

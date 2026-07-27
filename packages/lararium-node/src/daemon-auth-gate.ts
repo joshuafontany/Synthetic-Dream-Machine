@@ -13,8 +13,8 @@
  *        OR   lar:auth-denied + ws.close(4003)
  *
  * The gate starts "disarmed" — all connections are rejected with 4503 until
- * arm() is called with the daemon island's AuthVerifierSeam and the daemon bag URL.
- * The host holds no keyhive after Stage 1; the seam proxies each verify to the
+ * arm() is called with the daemon island's AuthVerifierShore and the daemon bag URL.
+ * The host holds no keyhive after Stage 1; the shore proxies each verify to the
  * daemon island, which answers from its in-worker keyhive and returns the peer's
  * Identifier hex for the sharePolicy map. arm() is called once the daemon VM lives.
  *
@@ -46,7 +46,7 @@ import {
   mkLarChallenge, mkLarAuthOk, mkLarAuthDenied, isLarAuthMsg,
   DAEMON_BAG_ID,
 } from "@lararium/mesh";
-import type { AuthVerifierSeam, PeerClass } from "@lararium/mesh";
+import type { AuthVerifierShore, PeerClass } from "@lararium/mesh";
 
 const AUTH_TIMEOUT_MS       = 5_000;
 const MAX_PENDING           = 50;     // max concurrent unauthenticated connections
@@ -56,7 +56,7 @@ const WS_CLOSE_NOT_READY     = 4503;
 const WS_CLOSE_RATE_LIMITED  = 4429;
 
 interface ArmedState {
-  seam:        AuthVerifierSeam;
+  shore:        AuthVerifierShore;
   daemonBagUrl: string;
   /** The gate's verifying-key hex, emitted in lar:challenge as the gate-binding
    *  the peer's V3 proof commits to. Omitted → no gate-binding advertised. */
@@ -92,12 +92,12 @@ export class DaemonAuthGate extends EventEmitter {
   }
 
   /**
-   * Arm the gate with the daemon island's verify seam and the daemon bag URL.
+   * Arm the gate with the daemon island's verify shore and the daemon bag URL.
    * Call once the daemon VM lives (its in-worker keyhive answers verify-proxy
    * queries). Connections arriving before arm() are rejected with 4503.
    */
-  arm(seam: AuthVerifierSeam, daemonBagUrl: string = DAEMON_BAG_ID, gatePubKey?: string): void {
-    this.armed = { seam, daemonBagUrl, ...(gatePubKey ? { gatePubKey } : {}) };
+  arm(shore: AuthVerifierShore, daemonBagUrl: string = DAEMON_BAG_ID, gatePubKey?: string): void {
+    this.armed = { shore, daemonBagUrl, ...(gatePubKey ? { gatePubKey } : {}) };
   }
 
   /**
@@ -132,7 +132,7 @@ export class DaemonAuthGate extends EventEmitter {
     }
 
     this._pending++;
-    const { seam, daemonBagUrl, gatePubKey } = this.armed;
+    const { shore, daemonBagUrl, gatePubKey } = this.armed;
 
     const nonce = randomBytes(32).toString("hex");
     this._send(socket, mkLarChallenge(nonce, gatePubKey));
@@ -193,7 +193,7 @@ export class DaemonAuthGate extends EventEmitter {
           // device-delegation edge rides through untouched — the gate
           // never adjudicates it; the in-worker keyholder verifies it against the
           // PINNED hearth root.
-          const verdict = await seam.verify(cardBytes, daemonBagUrl, "admin", proof, parsed.edge);
+          const verdict = await shore.verify(cardBytes, daemonBagUrl, "admin", proof, parsed.edge);
 
           // ENFORCEMENT (V3 step D): the keyholder worker already folded the proof
           // check into `verdict.ok` (it returns ok only on capability AND a verified

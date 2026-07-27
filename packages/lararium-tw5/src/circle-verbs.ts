@@ -19,7 +19,7 @@
  *
  * These reactors run IN the daemon worker (verify-then-delegate gated), reaching @circles by ACCESS (the
  * @oracle registry names it) and writing-then-syncing — access≠load, never a mounted render layer. A follow
- * writes ONLY @circles; NO @crossroads / board / announce seam is reachable here, so the graph never federates
+ * writes ONLY @circles; NO @crossroads / board / announce shore is reachable here, so the graph never federates
  * by SHAPE. The ONE federated surface stays the glamour a human DELIBERATELY publishes — a separate act.
  *
  * The recognition layer (the handle-book: others' nyms + private petnames) stays LOCAL for now — a follow of

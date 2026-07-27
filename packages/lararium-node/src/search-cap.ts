@@ -59,7 +59,7 @@ export interface SearchCap {
   close(): Promise<void>;
 }
 
-/** Test seam alias: how the holder process is produced (defaults to the python helper). */
+/** Test shore alias: how the holder process is produced (defaults to the python helper). */
 export type SearchHolderSpawn = PalaceHolderSpawn;
 
 /** Default holder spawn: the venv-aware python running `search_io.py serve --palace <dir>`. */
@@ -68,7 +68,7 @@ const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveSearchSpawn)
 export interface SearchCapOptions {
   /** per-call RPC timeout (ms); default 120s — the first search loads the embedding model. */
   readonly timeoutMs?: number;
-  /** test seam: override how the holder process is produced. */
+  /** test shore: override how the holder process is produced. */
   readonly spawn?: SearchHolderSpawn;
 }
 

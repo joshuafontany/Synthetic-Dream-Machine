@@ -6,7 +6,7 @@
  *   - Browser vessel (lararium-browser wraps it with IndexedDB + WebCrypto keypair)
  *   - Mobile vessel (any future vessel with its own storage adapter)
  *
- * The four vessel-specific seams the caller provides:
+ * The four vessel-specific shores the caller provides:
  *   repo         — Automerge Repo backed by any StorageAdapter
  *   vesselSeed — the PLACE's own 32-byte Ed25519 seed, from any secure store
  *   (founding ceremony also needs verifyingKey + displayName for identity tiddler)

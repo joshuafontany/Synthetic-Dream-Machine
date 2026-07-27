@@ -45,7 +45,7 @@ describe("hasCapture — the capture cap inside a causal island", () => {
     vi.advanceTimersByTime(120);
     expect(f.calls.tick).toBeGreaterThanOrEqual(2);
 
-    // the OUT post seam emits a coalesced telemetry:frame through ctx.post
+    // the OUT post shore emits a coalesced telemetry:frame through ctx.post
     f.firePost()!({ stats: { depth: 3, failures: 0, spilled: 0, deadLettered: 0 }, gate: { depth: 8, maxWaitMs: 2000, maxDepth: 64, maxRetries: 5, backoffBaseMs: 100, backoffMaxMs: 5000 }, rev: 1 });
     expect(posted).toHaveLength(1);
     const frame = posted[0] as { listenable: string; payload: Record<string, number> };

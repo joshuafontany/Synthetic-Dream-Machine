@@ -1,5 +1,5 @@
 /**
- * sovereign-island-model — Node.js host seam for the sovereign island kernel.
+ * sovereign-island-model — Node.js host shore for the sovereign island kernel.
  *
  * The lifecycle itself lives in @lararium/tw5 `runSovereignKernel` — ONE flow
  * both vessels compose. This file supplies only the node platform pieces:
@@ -8,7 +8,7 @@
  *                 or in-memory when no storage config is present
  *   - ready     : omitted — the node worker has no WASM-load handshake
  *
- * Divergence is COMPOSITION (which pieces the seam resolves), not an OO
+ * Divergence is COMPOSITION (which pieces the shore resolves), not an OO
  * platform interface. See feedback_isomorphism_by_composition.
  *
  * ## VM Pool alignment
@@ -25,7 +25,7 @@ import { join } from "node:path";
 import { DurableNodeFSStorageAdapter } from "./durable-storage-adapter.js";
 import {
   runSovereignKernel,
-  type IslandHostSeam,
+  type IslandHostShore,
 } from "@lararium/tw5";
 import type {
   StorageAdapterInterface,
@@ -42,7 +42,7 @@ function _buildStorage(cfg: IslandStorageConfig | undefined): StorageAdapterInte
   return undefined;
 }
 
-// ── runSovereignWorker — node host seam over the shared kernel ──────────────
+// ── runSovereignWorker — node host shore over the shared kernel ──────────────
 
 export function runSovereignWorker(
   behaviorOrFactory: IslandBehavior | ((manifest: IslandMsg_Manifest) => IslandBehavior),
@@ -69,7 +69,7 @@ export function runSovereignWorker(
   const corpusCasDir: string | null =
     process.env["LAR_CAS"] ?? (process.env["LAR_ROOT"] ? join(process.env["LAR_ROOT"], "cas") : null);
 
-  const host: IslandHostSeam = {
+  const host: IslandHostShore = {
     post:    (msg: IslandToVesselMsg) => port.postMessage(msg),
     listen:  (onMessage) => port.on("message", onMessage),
     storage: (msg) => {

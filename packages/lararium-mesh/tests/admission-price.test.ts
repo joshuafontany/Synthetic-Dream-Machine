@@ -88,7 +88,7 @@ describe("THE STABILISER — the cartel gets priced out of itself as it forms", 
 
   test("★ at the operator's ceiling the wall goes VERTICAL — capture is unreachable by the curve ★", () => {
     // Ogilvie: "the admission gate and the cartel are the SAME MACHINE". So the machine must make the cartel
-    // At r ≥ β the 1Hive curve returns Infinity — not a large number, an ACTUAL wall. The seam refuses
+    // At r ≥ β the 1Hive curve returns Infinity — not a large number, an ACTUAL wall. The shore refuses
     // on that non-finiteness alone (`at-the-ceiling`); it compares the price against nothing.
     const everyone = ["founder", "a", "b", "a1", "a2", "b1", "b1x", "c"];
     const p = priceAdmission({ seed: "founder", edges: EDGES, applicant: "newcomer", cluster: everyone,

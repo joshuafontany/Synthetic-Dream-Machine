@@ -1,5 +1,5 @@
 /**
- * kapae-antigen.test.ts — the quorum-verified immune antigen, DENY-BY-DEFAULT at every seam.
+ * kapae-antigen.test.ts — the quorum-verified immune antigen, DENY-BY-DEFAULT at every shore.
  *
  * Proven:
  *   · a 2-of-3 quorum (two distinct founding kahu sign) VERIFIES → the nym stands Kapae'd,

@@ -8,7 +8,7 @@
  *      carries the gate's monotone rev, teardown drops an armed flush.
  *
  * The organ shapes the SAME frame the browser DOM sink renders; the SINK (DOM write) is the only
- * platform seam, witnessed in the browser tier. One hull, differ by grant not hull.
+ * platform shore, witnessed in the browser tier. One hull, differ by grant not hull.
  *
  * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-coherence-projection
  */
@@ -64,7 +64,7 @@ describe("projectCoherenceIndicator — the PURE radius → frame organ", () => 
   });
 });
 
-/** A manual timer seam: capture the armed callback, fire it on demand (deterministic coalesce). */
+/** A manual timer shore: capture the armed callback, fire it on demand (deterministic coalesce). */
 function manualProjector(read: () => Promise<ConsistencyRadius>) {
   const frames: Array<CoherenceIndicatorFrame & { rev: number }> = [];
   let pending: (() => void) | null = null;

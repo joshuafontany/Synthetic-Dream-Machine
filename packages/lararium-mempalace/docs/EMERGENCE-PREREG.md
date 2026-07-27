@@ -223,7 +223,7 @@ at matched size in the harness's history).
 **bed-pidgin-sessions** — the AI session transcripts as the CASUAL/pidgin
 register: records = turns carrying their ordinals, worldline = turn-sequence
 REAL. The ground fork (WAL vs drawer store) stands HELD at the operator in
-the manifest; the pour engine's turn-unit seam stands named-unbuilt. The
+the manifest; the pour engine's turn-unit shore stands named-unbuilt. The
 bed pours only after both resolve.
 
 - Template character: pidgin templates skew OPERATIONAL — tool-call JSON
@@ -239,7 +239,7 @@ bed pours only after both resolve.
 **bed-tw5-docs** (the .tid documentation corpus — the grammar-growth shelf)
 and **bed-tw5-full** (the whole submodule minus counted exclusions — the C5
 scale bed, a foreign fifteen-year corpus). The tiddler/module record-unit
-seams stand named-unbuilt; the spatial-vs-git-worldline fork rides each
+shores stand named-unbuilt; the spatial-vs-git-worldline fork rides each
 manifest HELD at the operator.
 
 - tw5-docs: kept templates skew TW5-wikitext forms (heading runs, list

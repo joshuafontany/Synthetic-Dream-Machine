@@ -143,7 +143,7 @@ export function idbKeys(db: IDBDatabase, store: string): Promise<string[]> {
   });
 }
 
-// ── Platform seams for the shared keypair lifecycle (vessel-identity-core) ──────
+// ── Platform shores for the shared keypair lifecycle (vessel-identity-core) ──────
 // The browser mints via WebCrypto (Ed25519 subtle) and persists the keypair to
 // IndexedDB. The core (mesh) owns the generate-or-load control flow over these.
 // base64urlToHex stays browser-local — it decodes a WebCrypto JWK field via
@@ -246,7 +246,7 @@ export async function loadBrowserSigningSeed(idbName = "lares:vessel"): Promise<
 // a SET of roots keyed by handle-index, WEARS one at a time, and MAY switch.
 //
 // The isomorphic control flow (generate/load/wear/custody-refuse/roster) lives platform-blind in mesh's
-// persona-vault; THIS adapter supplies the browser seams: per-index IDB keypair slots, a JSON active-
+// persona-vault; THIS adapter supplies the browser shores: per-index IDB keypair slots, a JSON active-
 // persona selector, the anchor store, and (SURFACED) a NULL recovery store. The at-rest guard stays HERE
 // (custody-by-type) — but the browser holds no seal for self-sovereign secrets yet, so each root persists
 // cleartext exactly as the device key does (see idbKeypairSlot).
@@ -299,7 +299,7 @@ function idbActivePersonaStore(idbName: string): ActivePersonaStore {
 /**
  * The IDB AnchorStore — over a PRIMED in-memory snapshot.
  *
- * SURFACED FORK (core-shape mismatch, resolved adapter-side): the mesh `AnchorStore` seam is SYNCHRONOUS
+ * SURFACED FORK (core-shape mismatch, resolved adapter-side): the mesh `AnchorStore` shore is SYNCHRONOUS
  * (`load`/`save`/`list` return values, not Promises) — it was shaped around node's sync fs. IndexedDB is
  * fundamentally async, so the browser cannot read it synchronously mid-call. Rather than churn the core to
  * async (which would force node's sync fs stores async too, across the whole identity surface), this
@@ -447,7 +447,7 @@ export async function browserJoineePersonaIndex(idbName = "lares:vessel"): Promi
 // Two DISTINCT IDB stores over the vessel's origin DB (v3 additive), keyed `h${N}` per persona:
 //   · the PRIVATE pet-name map (PERSONA_PETNAME_STORE) — the human's own label, freely renamable, NEVER
 //     federated (persona-petname). The never-federates wall is structural: no board write exists in this
-//     seam. A future device-fleet adapter wraps the SAME shape over a private bag for cross-vessel sync.
+//     shore. A future device-fleet adapter wraps the SAME shape over a private bag for cross-vessel sync.
 //   · the PUBLIC published-face record (PERSONA_PUBLIC_HANDLE_STORE) — the vessel's memory of its OWN
 //     glamour faces (nym/glamour/version/cardId), so a re-publish advances the monotone lineage
 //     (persona-glamour). Distinct from the pet-name map and from the handle-book (others' nyms).

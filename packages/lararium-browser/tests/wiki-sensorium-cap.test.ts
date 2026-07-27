@@ -4,7 +4,7 @@
  * Runs the IDENTICAL hull as tw5/tests/wiki-sensorium-cap.test.ts — the SAME
  * `runWikiSensoriumWitness()` from `@lararium/tw5`, here inside a real Chromium harness. The core
  * assertions match the node tier line-for-line: cohere flips glue↔obstruct through both mesh organs,
- * form-recall finds the shingle-sharing neighbor, the TextEmbedder seam carries a real semantic tier
+ * form-recall finds the shingle-sharing neighbor, the TextEmbedder shore carries a real semantic tier
  * (the deterministic letter-frequency fixture — no model, no COOP/COEP commitment), and couple
  * refuses honestly. node ≡ browser on this verdict extends the island-isomorphism to the wiki-sensorium cap —
  * one hull, two substrates, differ by grant not hull.
@@ -33,7 +33,7 @@ describe("hasWikiSensorium — browser tier", () => {
     expect(w.formRecall.form[0]!.title).toBe("canon-b");
   });
 
-  test("the semantic seam carries a real tier when filled — and reads null when empty", async () => {
+  test("the semantic shore carries a real tier when filled — and reads null when empty", async () => {
     const w = await runWikiSensoriumWitness();
     expect(w.bareRecall.semantic).toBeNull();
     expect(w.semanticRecall.semantic).not.toBeNull();

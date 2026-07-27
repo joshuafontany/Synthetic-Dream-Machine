@@ -20,7 +20,7 @@
  * between surfaces; the git diff IS the operator's signature on the change.
  *
  * Projection law (Fontany-Fuller-Zelenka):
- *   Disk projection RENDERS, never string-copies. The ONE render seam
+ *   Disk projection RENDERS, never string-copies. The ONE render shore
  *   (`carrierFileFn`, the VM's `exportCarrierFile`) hands back the carrier's own
  *   filetype: a memetic carrier recomposes to `.mem` (expandMemeRefs over its
  *   group), any other TW5 filetype rides the file-info cascade to its native
@@ -54,7 +54,7 @@ export interface LarDiskProjectorOptions {
   /** Bag mirrors. Bags absent from this list never write to disk. */
   readonly mirrors: readonly BagMirrorConfig[];
   /**
-   * Render a carrier-root URI to ITS OWN filetype — the ONE render seam. A
+   * Render a carrier-root URI to ITS OWN filetype — the ONE render shore. A
    * memetic carrier recomposes to `.mem`; any other TW5 filetype rides the VM's
    * file-info cascade to its native file (+ a `.meta` sidecar where the type
    * needs one). The VM registry decides type + bytes for both; the projector
@@ -282,7 +282,7 @@ export class LarDiskProjector {
 
   /**
    * Resolve a carrier's confined on-disk file(s) within ONE mirror — the
-   * native-aware seam globs the actual `<stem><ext>` (+ `.meta`) so a
+   * native-aware shore globs the actual `<stem><ext>` (+ `.meta`) so a
    * `.tid`/`.md`/`.json` carrier resolves its real files (the ruling: the
    * extension varies); the memetic fallback resolves the single `.mem` path.
    * Returns null to SKIP (unresolvable name, or a ward refusal already surfaced);
@@ -343,7 +343,7 @@ export class LarDiskProjector {
     // text/x-memetic-wikitext — arrives with the migration wave.)
     if (isEffectRecordUri(tiddlerUri)) return;
 
-    // Site the carrier by its own filetype — ONE render seam. The VM registry
+    // Site the carrier by its own filetype — ONE render shore. The VM registry
     // hands back the chosen extension + bytes + any `.meta` sidecar, so a
     // memetic carrier sites `.mem` and a `.tid`/`.json`/`.md` record projects
     // back as its OWN file. The VM decides the type; the projector only sites.

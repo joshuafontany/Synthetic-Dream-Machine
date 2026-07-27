@@ -37,12 +37,12 @@ const SEVERITY_RANK: Readonly<Record<DiagnosticSeverity, number>> = {
  * The ladder, stated once.
  *
  * `error` names the one fault that costs the operator their bytes: a carrier that stops
- * round-tripping no longer says what their hands left, so the membrane refuses it rather than
+ * round-tripping no longer says what their hands left, so the shore refuses it rather than
  * ingesting a lossy render. Every recovery sits below that line, because a recovery keeps the
  * text: the driver stands an unplaceable construct back up verbatim in an Error node, and grades
  * how far it fell. `warning` marks a construct the grammar could not place; `info` marks one it
  * repaired at lower standing. Refusing a recovery would drop the bytes to protect the grammar,
- * which inverts what the membrane exists to do.
+ * which inverts what the shore exists to do.
  */
 export function severityOf(failure: ParseFailure): DiagnosticSeverity {
   return severityOfRung(failure.recoveredAs);
@@ -65,16 +65,16 @@ export function severityOfRung(rung: RecoveryRung): DiagnosticSeverity {
   }
 }
 
-/** The membrane's fault: the carrier stopped round-tripping, so ingesting it would lose the bytes. */
-export const MEMBRANE_FAULT_CODE = "membrane-round-trip";
+/** The shore's fault: the carrier stopped round-tripping, so ingesting it would lose the bytes. */
+export const SHORE_FAULT_CODE = "shore-round-trip";
 
-export function membraneDiagnostic(message: string, sourceLength: number): MemeDiagnostic {
+export function shoreDiagnostic(message: string, sourceLength: number): MemeDiagnostic {
   return {
     from:     0,
     to:       sourceLength,
     severity: "error",
     source:   MEMETIC_SOURCE,
-    code:     MEMBRANE_FAULT_CODE,
+    code:     SHORE_FAULT_CODE,
     message,
   };
 }

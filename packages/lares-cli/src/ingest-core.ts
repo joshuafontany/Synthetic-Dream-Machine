@@ -4,12 +4,12 @@
  *
  * Two legs live here; the third leg lives on the island:
  *   scan  — walk source for .md carriers, derive each uri by the loci law,
- *           NFC-assert at the membrane, hash, diff disk-hash vs synced-hash
+ *           NFC-assert at the shore, hash, diff disk-hash vs synced-hash
  *   submit — pack NEW+CHANGED carriers (hashes riding with the text) into one
  *            INGEST verb; the island's gate supplies currentRenderHash (leg 3)
  *
  * The gesture holds the disk grant and the Synced tree; the island holds
- * neither (readiness reads local on both sides of the membrane). A watcher is
+ * neither (readiness reads local on both sides of the shore). A watcher is
  * just this gesture fired on a settle instead of on an operator keystroke.
  *
  * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff
@@ -103,7 +103,7 @@ export function listCarriers(source: string): string[] | null {
     .map((f) => join(source, f))
     .filter((f) => { try { return statSync(f).isFile(); } catch { return false; } })
     // A `.meta` sidecar carries a content file's fields — it lands WITH that
-    // file at the membrane, never as a standalone carrier.
+    // file at the shore, never as a standalone carrier.
     .filter((f) => !f.endsWith(".meta"));
 }
 
@@ -154,7 +154,7 @@ export function scanFiles(
       else skipped.push(file);
       continue;
     }
-    // The NFC membrane assertion (spec: memetic-wikitext #carrier-bytes) — foreign
+    // The NFC shore assertion (spec: memetic-wikitext #carrier-bytes) — foreign
     // TEXT bytes first walk in HERE; non-NFC refuses loudly, never enters. A binary
     // carrier rides base64 (pure ASCII), so the NFC law does not touch it.
     if (!binary && text !== text.normalize("NFC")) {

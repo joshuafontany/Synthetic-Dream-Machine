@@ -8,7 +8,7 @@
  * (@catalog, @personal, @draft, wikis, corpus bags) stay home, only the public
  * federation surface crosses.
  *
- * This gate names that decision behind ONE narrow, deny-by-default seam, shaped
+ * This gate names that decision behind ONE narrow, deny-by-default shore, shaped
  * deliberately like `IdentitySlot.verifyCapability(docUrl, "read")`: the alpha
  * allow-set fork and the V5 capability-check fork are the SAME gate at two
  * capability resolutions — the deterministic allow-set IS a degenerate cap set.
@@ -20,7 +20,7 @@
  * planes' random 16-byte document ids give effective confidentiality against a
  * peer that cannot guess an id. TRUE crypto read-control — denying a *guessed*
  * id and hiding the bytes — is the V5 KeyhiveIdentitySlot / BeeKEM path, out of
- * this seam's scope. This gate IS that seam's alpha socket.
+ * this shore's scope. This gate IS that shore's alpha socket.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/federation-gate
  */
@@ -139,7 +139,7 @@ export interface IdentityRing {
  * ── HONEST BOUND (the #58 wiring gap this fn is the socket for) ──────────────
  * This fn ENFORCES a genuine capability check ONLY where a live `IdentityRing`
  * is passed — i.e. where a slot backed by a REAL provider AND a doc→bag resolver
- * are both in scope at the sharePolicy seam. TODAY neither vessel has that at its
+ * are both in scope at the sharePolicy shore. TODAY neither vessel has that at its
  * main-thread sharePolicy: the live KeyhiveProvider runs INSIDE the daemon-island
  * worker (bootDaemonKeyhive over the worker composite), and the bag↔docId registry
  * lives there too — the founding ceremony DISPOSES its transient provider before
@@ -147,9 +147,9 @@ export interface IdentityRing {
  * the live factory path. So both vessels pass `identity = null` and this degenerates
  * EXACTLY to federationShareDecision (zero behavior change, deny-by-default intact).
  * Making the inner ring LIVE needs the main↔worker cap-verify bridge (the async
- * `daemon:verify-request` seam the node peer-gate already uses) + a docId→bagUrl
+ * `daemon:verify-request` shore the node peer-gate already uses) + a docId→bagUrl
  * resolver over the worker's bag registry — a SEPARATE thread. This fn is that
- * seam's tested socket; it never fakes a verdict.
+ * shore's tested socket; it never fakes a verdict.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/identity-share-decision
  */
@@ -173,7 +173,7 @@ export async function identityShareDecision(
 }
 
 /**
- * AntigenRing — the #59 identity-ring seam the carry-contract enforces: consult the quorum-signed
+ * AntigenRing — the #59 identity-ring shore the carry-contract enforces: consult the quorum-signed
  * Kapae-antigen and deny a Kapae'd PRESENTER with Mu. This is NOT a second peer-gate (peer-auth lives,
  * live, at the DaemonAuthGate) and it is NOT the self-slot capability ring (that stays inert — see the
  * surfaced fork below). It is a purely ADDITIVE deny path keyed on the PEER, orthogonal to the per-doc
@@ -286,7 +286,7 @@ export interface PlaneSeal {
  *      an in-process house member full-syncs. This is today's behavior, untouched.
  *   2. the MEMBER blind-transit — a plane the floor DENIED (a private-own plane) may STILL cross to a peer the
  *      @nexus consult names a MEMBER, but ONLY when the seal oracle proves it sealed. The member relays the
- *      CIPHERTEXT it can never read; the read-cap (BeeKEM group key) NEVER crosses this seam — sharePolicy
+ *      CIPHERTEXT it can never read; the read-cap (BeeKEM group key) NEVER crosses this shore — sharePolicy
  *      governs WHICH docs sync, never key material, so this adds ZERO decrypt path.
  *
  * THE THREE DENIALS the split holds absolute (each fail-closed):
@@ -452,13 +452,13 @@ export function admitCrossOperatorUnderPosture(args: {
  * `carrierShareDecision(...)` — the tier layer adds tightening, it never widens the floor, and it stays
  * INERT until a bag actually carries the datum.
  *
- * ── HONEST BOUND (the not-yet-wired seam) ────────────────────────────────────────────────────────
+ * ── HONEST BOUND (the not-yet-wired shore) ────────────────────────────────────────────────────────
  * The `CapTierRing`'s `floor` oracle IS wired on the live path (it reads the SAME federatable-set + seal
  * oracles the carry-split consults — see cap-tier.ts `structuralFloorFor`). The `declared` source is the
- * SEAM not yet lit: no @daemon recipe / BagTiddler carries a `capTier` datum in the tree TODAY, so a live
+ * SHORE not yet lit: no @daemon recipe / BagTiddler carries a `capTier` datum in the tree TODAY, so a live
  * `declaredTierForDoc` returns null for every doc → the floor governs → zero behavior change. Lighting it
  * needs the recipe surface to seat the datum + a doc→bag resolver over the bag registry (the same bridge
- * `identityShareDecision`'s bound names). This fn is that seam's tested socket; it never fakes a verdict.
+ * `identityShareDecision`'s bound names). This fn is that shore's tested socket; it never fakes a verdict.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/cap-tier
  */
@@ -476,7 +476,7 @@ export async function capTierShareDecision(
   // 1. The STRUCTURAL floor, verbatim. Its deny is absolute — a tier never loosens it.
   const base = await carrierShareDecision(relayPeers, fedGate, antigen, identity, membership, seal, peerId, documentId);
   if (!base)                    return false;   // structural deny stands (tier tightens only, never loosens)
-  if (!capTiers)                return true;    // no declared-tier ring → the base verdict is whole (inert seam)
+  if (!capTiers)                return true;    // no declared-tier ring → the base verdict is whole (inert shore)
   if (!relayPeers.has(peerId))  return true;    // in-process house member — tier not consulted (full sync)
   if (!documentId)              return true;    // base allowed a no-doc case (house member) — nothing to tighten
   // 2. The DECLARED-TIER tighten — resolve declared ∧ structuralFloor, then AND the pure peer predicate.

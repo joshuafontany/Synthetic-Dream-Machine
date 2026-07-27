@@ -1,5 +1,5 @@
 /**
- * membership-channel — the strangler-fig seam the WHO-plane ceremony crosses. Tests the
+ * membership-channel — the shore the WHO-plane ceremony crosses. Tests the
  * reference (in-memory) impl's routing contract: address vessel→vessel, deliver-once,
  * broadcast-to-others, never-to-self. The file/WS impls must satisfy the same contract.
  */

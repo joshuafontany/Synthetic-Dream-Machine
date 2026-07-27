@@ -1,7 +1,7 @@
 /**
  * browser-verb-island.mjs — browser island gate fixture for the verb→event flow.
  *
- * Pono e2e at the browser TRANSPORT seam. Proves a verb-bearing tiddler synced
+ * Pono e2e at the browser TRANSPORT shore. Proves a verb-bearing tiddler synced
  * into a browser island surfaces as IslandMsg_Event{verb} at the
  * BrowserVesselIslandPool boundary — in a real Chromium Web Worker, over a real
  * MessageChannel + CRDT sync — without a full TW5-in-worker bundle.

@@ -5,7 +5,7 @@
  * Proven:
  *   · KEYRING CUSTODY — standNexusKeyring mints the charter-head epoch's secret, persists it read-all, and is
  *     idempotent (a re-stand re-reads, mints nothing); a later epoch appends (read-all across epochs),
- *   · THE PRODUCER — sealCarrierForFederation runs installSealedBody (a production seam, not a test fixture) →
+ *   · THE PRODUCER — sealCarrierForFederation runs installSealedBody (a production shore, not a test fixture) →
  *     the SealedPlaneRegistry entry appears → the member blind-transit lane opens for that docId,
  *   · VERIFY-CAP ⊥ READ-CAP — the ciphertext's cid is BLAKE3(ciphertext): verifyCiphertextCid holds SECRET-FREE
  *     (no keyring); a carry-only holder cannot read (a wrong read-cap decrypts to garbage, not the plaintext),
@@ -68,7 +68,7 @@ describe("seal-carrier-federation — the seal's first producer (additive)", () 
     const keyring  = standNexusKeyring({ charterEpoch: 0, dir: idDir });
     const cadDir   = cadSealDir(storageDir);
 
-    // THE PRODUCER — a production seam (not a test's own installSealedBody call).
+    // THE PRODUCER — a production shore (not a test's own installSealedBody call).
     const installed = sealCarrierForFederation({ registry, cadDir, plaintext: BODY, keyring, tracker, self: "self-holder" });
 
     // The member blind-transit lane opens for exactly this body's docId.

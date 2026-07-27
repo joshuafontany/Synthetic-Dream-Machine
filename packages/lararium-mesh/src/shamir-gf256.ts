@@ -9,7 +9,7 @@
  * defect but the Camenisch-Lysyanskaya invariant itself: any path that recovered from fewer than t
  * shares would BE an impersonation quorum. No crypto restores a secret from nothing.
  *
- * Rides the RandomProvider seam (crypto.ts) — injectable, so tests pin a deterministic RNG and no
+ * Rides the RandomProvider shore (crypto.ts) — injectable, so tests pin a deterministic RNG and no
  * `node:` import leaks in. Byte-wise: the secret's k bytes become k independent GF(256) sharings over
  * shared x-coordinates; a share is {x: 1..n, ys: k bytes}.
  */

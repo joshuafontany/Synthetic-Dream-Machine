@@ -17,7 +17,7 @@
  * The gate is driven by an IDENTITY-render congruence (the native-carrier shape the
  * action-handler uses): deserialize → the record, render → the disk join, ∅ structure,
  * never graded. That isolates the proof to the DIGEST tag behavior alone — the render
- * membrane never colors the result.
+ * shore never colors the result.
  */
 
 import { describe, test, expect } from "vitest";

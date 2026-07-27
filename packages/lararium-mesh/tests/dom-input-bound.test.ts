@@ -29,7 +29,7 @@ describe("the bounded text leg", () => {
     }
   });
 
-  test("the send seam throws on an over-long value, where the stack still names the caller", () => {
+  test("the send shore throws on an over-long value, where the stack still names the caller", () => {
     expect(() => mkWikiDomInput({ renderId: "1", eventType: "input", value: "x".repeat(DOM_INPUT_MAX_CHARS + 1) }))
       .toThrow(/at most/);
     expect(mkWikiDomInput({ renderId: "1", eventType: "input", value: "hi" })).toEqual({

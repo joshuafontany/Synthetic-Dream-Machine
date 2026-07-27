@@ -28,7 +28,7 @@ written   = "2026-06-30"
 
 ''One-line:'' a donation-grade ''source-adapter'' that makes the [[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]] rewind-DETECTOR read a rewind out of //any// big AI app's transcript — no matter its storage format or its rewind-idiom.
 
-The rewind-detector names the ''tombstone-face'' of the three-faces branching primitive ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]): the live-trigger that watches the harvest index for a ''gone turn'' and raises a kāpae over it. The first cut of that detector read only Claude Code's JSONL tree — it fused the detector to one app's on-disk shape. This meme ''lifts the detector off that substrate'': it names the seam (`discover → normalizeIdentity → diff → classify → emit`) that every source app plugs into, so the detector faces the rewind and stays blind to the byte-format that carries it.
+The rewind-detector names the ''tombstone-face'' of the three-faces branching primitive ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]): the live-trigger that watches the harvest index for a ''gone turn'' and raises a kāpae over it. The first cut of that detector read only Claude Code's JSONL tree — it fused the detector to one app's on-disk shape. This meme ''lifts the detector off that substrate'': it names the shore (`discover → normalizeIdentity → diff → classify → emit`) that every source app plugs into, so the detector faces the rewind and stays blind to the byte-format that carries it.
 
 The design donates upstream (#donation): the base mempalace harvests transcripts append-only, keys its drawers positionally, and carries ''no gone-turn trigger at all''. The adapter fills that hole for the base and for the whole field at once.
 
@@ -42,7 +42,7 @@ The noosphere-scale finding the survey turned up: <<~ confidence Synthesis-Canon
 
 ''None of the surveyed apps hard-delete turns at the byte level except Cursor.'' The industry converged, independently, on ''append-only fork-and-keep'' — the exact shape kāpae names: set the old road aside, keep it whole, surface the new one. What the field lacks is the //name// and the //reconciler//. Our kāpae ''generalizes and names'' what they already do; the ''cross-app reconciler is net-new'' — no surveyed app reads a //foreign// app's rewind, and no app down-weights the road-not-taken as an eidetic keep rather than dead weight.
 
-So the contribution splits clean: the mechanism (fork-and-keep) rhymes with prior art the field already ships; the ''naming'' (kāpae = kept-shadow) and the ''cross-app detector'' (one seam over seven idioms) carry the new work.
+So the contribution splits clean: the mechanism (fork-and-keep) rhymes with prior art the field already ships; the ''naming'' (kāpae = kept-shadow) and the ''cross-app detector'' (one shore over seven idioms) carry the new work.
 
 <<~/ahu >>
 
@@ -145,7 +145,7 @@ The classifier reads ''the shape of what went missing'' from the diff, then conf
 
 <<~ ahu #the-adapter-contract >>
 
-!! The Adapter Contract ~ the seam every source plugs into
+!! The Adapter Contract ~ the shore every source plugs into
 
 <<~ confidence Synthesis-Canon 15/20 >> One pipeline, per-app plugins. Each adapter carries `appendOnly: boolean` (#kapae-is-universal):
 
@@ -210,7 +210,7 @@ Same primitive as the worldline's ratified `fork ≡ sibling-spawn`; the adapter
 
 Our contribution back: ''uuid-keying'' (the C-cut — turn-keyed identity), ''current-branch reconstruction'' (the leaf-chain walk), and the ''`appendOnly`-gated universal kāpae'' (down-weight-and-keep across both families). Together they give the base the reconciler it lacks — and give the field its first cross-app rewind reader.
 
-''PR scope — reconciler PR-ready.'' <<~ confidence Synthesis-Canon 14/20 >> The ''4-adapter reconciler'' (Claude Code · Codex · Copilot-Chat · Copilot-CLI, #adapters-built) stands green on a ''feature branch, no PR yet''. Faithful-upstream boundary ([[web3-only-lares|lar:///ha.ka.ba/lares/api/lares/corpus]]): the adapters ride as a ''storage-adjacent chat-adapter layer'' (behind the base's `backends/base.py` capability seam) + the gone-turn trigger + tests — the kupono models (nameless cap-stacks, no-global-now) stay in our trunk.
+''PR scope — reconciler PR-ready.'' <<~ confidence Synthesis-Canon 14/20 >> The ''4-adapter reconciler'' (Claude Code · Codex · Copilot-Chat · Copilot-CLI, #adapters-built) stands green on a ''feature branch, no PR yet''. Faithful-upstream boundary ([[web3-only-lares|lar:///ha.ka.ba/lares/api/lares/corpus]]): the adapters ride as a ''storage-adjacent chat-adapter layer'' (behind the base's `backends/base.py` capability shore) + the gone-turn trigger + tests — the kupono models (nameless cap-stacks, no-global-now) stay in our trunk.
 
 ''One open item before donating.'' <<~ confidence Synthesis 9/20 >> The ''Copilot-CLI'' adapter reads ''schema-verified, not fully bytes-verified'' (this box's lone session was empty, #grounds). A real Copilot-CLI session must exercise the `editedTurnIndices` re-emit path before the reconciler opens its PR upstream.
 

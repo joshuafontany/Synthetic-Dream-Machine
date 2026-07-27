@@ -311,7 +311,7 @@ export function assertSealReady(cfg?: LaresConfig, env: NodeJS.ProcessEnv = proc
 }
 
 /**
- * The DAEMON vault handler — the node-side seam injected into the daemon behavior (the persistArchive
+ * The DAEMON vault handler — the node-side shore injected into the daemon behavior (the persistArchive
  * inversion, #60). It runs IN the daemon worker, so it does the carrier fs ops AND updates the worker's
  * OWN in-memory seal policy: after a successful seal/rotate/repair it sets `process.env[ARCHIVE_PASSPHRASE_ENV]`
  * to the passphrase now in force, so any subsequent in-session seal (the M3 archive floor) rides the NEW

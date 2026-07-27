@@ -1,8 +1,8 @@
 /**
- * worldline-kg — the node seam projecting worldline edges onto the mempalace KG.
+ * worldline-kg — the node shore projecting worldline edges onto the mempalace KG.
  *
  * Two layers:
- *   1. HERMETIC (always runs): a fake `exec` proves the args + NDJSON the seam builds.
+ *   1. HERMETIC (always runs): a fake `exec` proves the args + NDJSON the shore builds.
  *   2. INTEGRATION (skipped when python/mempalace absent): the REAL kg_io.py against a temp
  *      palace — spawn→Delegation, inject→Communication, handback→close, kapae→close + history kept.
  */
@@ -75,8 +75,8 @@ describe("worldline-kg arg/NDJSON building (fake exec)", () => {
     expect(c.args).toEqual([resolveKgIo(), "--palace", "/tmp/palaceX", "kapae", "--turn-key", "t1", "--ended", "2026-06-29"]);
   });
 
-  test("the MEMBRANE truncates ms ISO to whole seconds on EVERY temporal seam (valid_from / ended / kapae)", () => {
-    // The whole-second law lives in the membrane now — no caller can forward a ms ISO past it.
+  test("the SHORE truncates ms ISO to whole seconds on EVERY temporal shore (valid_from / ended / kapae)", () => {
+    // The whole-second law lives in the shore now — no caller can forward a ms ISO past it.
     calls.length = 0;
     persistWorldlineEdges([delegationEdge("run", "run.child", { validFrom: "2026-06-29T00:00:00.123Z", turnKey: "t1" })], opts);
     expect(JSON.parse((calls[0]!.ndjson ?? "").trim()).valid_from).toBe("2026-06-29T00:00:00Z");
@@ -197,20 +197,20 @@ describe.skipIf(!PY)("worldline-kg ↔ real mempalace KG (integration)", () => {
     }
   });
 
-  test("a MILLISECOND ISO rides the membrane into the KG — the row LANDS whole-second, zero traceback", () => {
+  test("a MILLISECOND ISO rides the shore into the KG — the row LANDS whole-second, zero traceback", () => {
     if (!kgImportable) return; // mempalace not importable in this env — treat as skip
     const dir = mkdtempSync(join(tmpdir(), "lar-wl-kg-ms-"));
     const palace = join(dir, "palace");
     mkdirSync(palace, { recursive: true });
     const opts = { palacePath: palace };
     try {
-      // SPAWN with a transcript-grade ms timestamp — pre-membrane this raised a sanitize traceback.
+      // SPAWN with a transcript-grade ms timestamp — pre-shore this raised a sanitize traceback.
       const added = persistWorldlineEdges(
         [delegationEdge("run", "run.child", { validFrom: "2026-06-29T00:00:56.789Z", turnKey: "spawn-turn" })],
         opts,
       );
       expect(added.added).toBe(1);
-      // CLOSE with a ms `ended` — the handback leg crosses the same membrane law.
+      // CLOSE with a ms `ended` — the handback leg crosses the same shore law.
       const closed = closeWorldlineEdges([handbackClose("run", "run.child", "2026-06-29T02:00:01.234Z")], opts);
       expect(closed.invalidated).toBe(1);
       const rows = dump(palace);

@@ -25,7 +25,7 @@ export interface SensoriumContract {
   readonly apertures?: Readonly<Record<string, string>>;
 }
 
-/** Build a normalized contract and refuse malformed evidence at the shared seam. */
+/** Build a normalized contract and refuse malformed evidence at the shared shore. */
 export function declareSensoriumContract(input: SensoriumContract): SensoriumContract {
   const has = [...new Set(input.has)];
   if (has.some((cap) => typeof cap !== "string" || !cap)) {

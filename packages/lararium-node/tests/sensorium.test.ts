@@ -30,7 +30,7 @@ describe("sensorium manifest — SHEAF-TRUE shape", () => {
         },
         bands: { grain: "wavelet" },
       });
-      expect(m.has["content"]!.dir).toBe(legacyContent);   // absolute (strangler window)
+      expect(m.has["content"]!.dir).toBe(legacyContent);   // absolute (the content root rides its own cap)
       expect(m.has["structure"]!.dir).toBe("structure");    // relative (consolidated)
       expect(m.has["form"]!.dir).toBe("form");
       // base caps carry NO dir — they live in the manifest structure only

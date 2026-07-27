@@ -62,7 +62,7 @@ export function loadRecoveryDeviceShare(handleIndex = 0): RecoveryShare | null {
   return { bytes: { x: j.x, ys: new Uint8Array(j.ys) }, custodian: j.custodian, recoveryEpoch: j.recoveryEpoch };
 }
 
-/** The node sealed RecoveryShareStore — the seam the PersonaVault carries. The SEAL stays here (custody
+/** The node sealed RecoveryShareStore — the shore the PersonaVault carries. The SEAL stays here (custody
  *  by TYPE: only the vessel's OWN sovereign device-share reaches `asSelfSovereignSecret`); the mesh core
  *  never sees seal policy. */
 export const nodeRecoveryShareStore: RecoveryShareStore = {

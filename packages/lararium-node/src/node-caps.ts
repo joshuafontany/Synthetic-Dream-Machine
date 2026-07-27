@@ -67,7 +67,7 @@ export const CAP = {
 
 // ── the node-ONLY cap: the http read-face that serves the @meshpalace FLOW-map ─────────────────────
 
-/** read-face — serves the @meshpalace PUBLIC FLOW-map over the HTTP server (the disclosure membrane
+/** read-face — serves the @meshpalace PUBLIC FLOW-map over the HTTP server (the disclosure shore
  *  at the wire). Requires substrate + meshpalace (the doc it projects). Disposes the HTTP face. */
 export function flowMapReadFaceCap(deps: {
   httpServer: Server; signerSeed: Uint8Array; storageDir: string; onLog?: (line: string) => void;

@@ -1,5 +1,5 @@
 /**
- * capture-reading — the clock↔dial seam: compose the capture-CLOCK's maintenance provenance
+ * capture-reading — the clock↔dial shore: compose the capture-CLOCK's maintenance provenance
  * with the conviction-DIAL's 1Hive threshold curve into a legible, VERDICT-FREE capture
  * posture. It surfaces WHERE a place's power-concentration sits on the convex curve toward
  * the operator's ceiling β — it never RULES a place captured (which-fork-is-real is

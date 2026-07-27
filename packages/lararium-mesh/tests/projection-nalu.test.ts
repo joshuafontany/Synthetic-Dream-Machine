@@ -1,7 +1,7 @@
 /**
  * projection-nalu — the COALESCE-family gate (the DOM projection's gate, extracted). A burst of
  * marks within the window collapses to ONE flush; the newest snapshot wins, intermediates fade;
- * rev is monotone. Deterministic via the injected timer seam. (The accumulate sibling — CaptureNalu
+ * rev is monotone. Deterministic via the injected timer shore. (The accumulate sibling — CaptureNalu
  * — is covered in capture-engine.test.ts.)
  */
 
@@ -11,7 +11,7 @@ import { CoalesceGate, KeyedCoalesceGate, CaptureNalu } from "../src/index.js";
 
 type Fire = (() => void) | null;
 
-/** A manual timer seam: capture the armed callback, fire it on demand. */
+/** A manual timer shore: capture the armed callback, fire it on demand. */
 function manualGate(onFlush: (rev: number) => void) {
   let pending: Fire = null;
   let cleared = false;

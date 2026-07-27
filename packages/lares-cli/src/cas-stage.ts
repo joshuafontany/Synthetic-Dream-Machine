@@ -1,5 +1,5 @@
 /**
- * cas-stage — the operator gesture's CAS staging seam.
+ * cas-stage — the operator gesture's CAS staging shore.
  *
  * A verb NEVER inlines a body. The disk/fetch-holding gesture stages each carrier body
  * to the corpus CAS (content-addressed, hex sha256) and rides the verb with a skinny

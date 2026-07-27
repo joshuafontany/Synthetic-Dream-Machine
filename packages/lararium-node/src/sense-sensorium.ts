@@ -117,7 +117,7 @@ export function listSensoria(): SensoriumLifecycle[] {
     .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 }
 
-// ── the ingest seam (THIN for S0; the deep bands/structure/form caps land S1–S3) ──────────────────
+// ── the ingest shore (THIN for S0; the deep bands/structure/form caps land S1–S3) ──────────────────
 
 /** The pluggable Python-owned pointer ingest leg. */
 export type SensoriumIngest = (args: { sourcePath: string; sensoriumRoot: string; ephemeral?: boolean }) => { drawers: number; structures: number; bands: number; forms: number; note: string };
@@ -167,7 +167,7 @@ export interface OpenSensoriumOptions {
   readonly name?: string;
   /** ephemeral (a `run`, dissolves on exit) vs durable (an `open`, stays live). Default false (open). */
   readonly ephemeral?: boolean;
-  /** test/override seam: the ingest leg (defaults to {@link defaultSensoriumIngest}). */
+  /** test/override shore: the ingest leg (defaults to {@link defaultSensoriumIngest}). */
   readonly ingest?: SensoriumIngest;
 }
 
@@ -307,7 +307,7 @@ export interface RunSensoriumOptions extends Omit<OpenSensoriumOptions, "ephemer
   readonly analysis?: string;
   /** --keep: retain the sensorium (promote to durable) instead of dissolving on exit. Default false. */
   readonly keep?: boolean;
-  /** test/override seam: the search leg (defaults to {@link defaultSensoriumSearch}). */
+  /** test/override shore: the search leg (defaults to {@link defaultSensoriumSearch}). */
   readonly search?: SensoriumSearch;
 }
 

@@ -17,7 +17,7 @@
  * DEVICE-FLEET (SURFACED, not blocking). A human's own PersonaGroup rides several of their own vessels; the
  * pet-name map WANTS to sync across that private vessel-pool, private-federated over a PRIVATE BAG in the
  * PersonaGroup. That cross-pool sync rides the device-fleet, which is not yet built (blocks on Beelay). So
- * the seam stays LOCAL-FIRST: the store persists per-vessel today, and a future federated adapter wraps the
+ * the shore stays LOCAL-FIRST: the store persists per-vessel today, and a future federated adapter wraps the
  * same `OwnPersonaPetnameStore` shape over a private bag — the interface never moves, the sync drops in.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-policy
@@ -27,7 +27,7 @@ import { assertHandleIndex, type PersonaVault } from "./persona-vault.js";
 
 /**
  * How a runtime persists the human's PRIVATE own-persona pet-names — a `{handleIndex -> petname}` map,
- * freely renamable, NEVER federated. A platform supplies the seam (node fs JSON / browser IDB), mirroring
+ * freely renamable, NEVER federated. A platform supplies the shore (node fs JSON / browser IDB), mirroring
  * the PersonaVault's own selector/anchor stores; a later device-fleet adapter wraps this same shape over a
  * private bag for cross-vessel sync (see the module header).
  */

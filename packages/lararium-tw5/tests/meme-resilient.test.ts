@@ -76,7 +76,7 @@ describe("meme-ast resilient recovery", () => {
 // their sense; `repaired` keeps both at lower standing.
 // ---------------------------------------------------------------------------
 
-import { failuresToDiagnostics, gradeOf, severityOf, membraneDiagnostic } from "../src/meme-ast/diagnostics.js";
+import { failuresToDiagnostics, gradeOf, severityOf, shoreDiagnostic } from "../src/meme-ast/diagnostics.js";
 import type { ParseFailure } from "../src/meme-ast/types.js";
 
 describe("the recovery gradient reads onto the core severity ladder", () => {
@@ -110,6 +110,6 @@ describe("the recovery gradient reads onto the core severity ladder", () => {
   });
 
   test("only a carrier that stopped round-tripping grades error", () => {
-    expect(gradeOf([membraneDiagnostic("the fence mask lost a span", 100)])).toBe("error");
+    expect(gradeOf([shoreDiagnostic("the fence mask lost a span", 100)])).toBe("error");
   });
 });

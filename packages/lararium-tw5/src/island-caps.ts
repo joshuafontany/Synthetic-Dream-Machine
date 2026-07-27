@@ -11,7 +11,7 @@
  * Each island breathes like a cell (the metaphor, not the noun): IN = accumulate (the axon —
  * hasCapture / the wiki nalu), OUT = coalesce (the dendrite — hasProjection). Dispatch (hasDispatch)
  * is the third, non-gate channel; self-regulation rides inside the family it tunes. role =
- * capability ≠ platform: a cap injects its substrate seam, never imports it — the same stack
+ * capability ≠ platform: a cap injects its substrate shore, never imports it — the same stack
  * composes on node, browser, or any vessel.
  *
  * A cap contributes any of the three lifecycle hooks; composeIsland folds them:

@@ -1,12 +1,12 @@
 /**
- * anchor-store — the veiled-Handle's sentinel-anchor SEAM (platform-blind).
+ * anchor-store — the veiled-Handle's sentinel-anchor SHORE (platform-blind).
  *
  * A vessel binds to its veiled Handle through three sentinel ids the founding ceremony mints off
  * keyhive's CSPRNG — unreproducible from any seed. Those ids live OUTSIDE the wiped substrate so a
  * rebirth reforges the store while re-reading the SAME anchors, and the Handle survives the substrate.
  *
  * The core owns only the SHAPE + the roster contract; the platform supplies HOW it persists. Anchors
- * carry PUBLIC doc-ids — no secret material rides here, so no seal touches this seam. (The at-rest
+ * carry PUBLIC doc-ids — no secret material rides here, so no seal touches this shore. (The at-rest
  * seal governs the keyhive ARCHIVE, a distinct node-adapter concern; the core never sees seal policy.)
  *
  * PLURALITY PONO at the identity layer: a vessel that wears several personas anchors EACH to its OWN

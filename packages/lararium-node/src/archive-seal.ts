@@ -10,12 +10,12 @@
  * key-encryption-key derives from an operator PASSPHRASE via scrypt (pure node:crypto,
  * survives a reboot — the WSL2-safe default, since an OS keychain there can land the KEK in
  * the kernel's in-memory keyutils cache and brick the identity on reboot). The OS-keychain
- * leg rides a named, detection-gated seam (`detectSecretService`) that stays inert until the
+ * leg rides a named, detection-gated shore (`detectSecretService`) that stays inert until the
  * `@napi-rs/keyring` binding lands — it NEVER silently degrades to weak key handling.
  *
  * HONEST FALLBACK: with no passphrase configured, the archive stays CLEARTEXT (bare bytes,
  * unchanged behaviour) with a one-time warning — a random key stored beside the ciphertext
- * would be obfuscation posing as isolation, so the seam refuses it rather than fake safety.
+ * would be obfuscation posing as isolation, so the shore refuses it rather than fake safety.
  *
  * The RECOVERY keel is device RE-ADMISSION (mint a fresh device key, re-admit through the
  * mesh/group — the Ink&Switch/Fission model), not this at-rest seal. Sealing is hygiene.
@@ -76,14 +76,14 @@ export interface SealPolicy {
  * so the resolver never trusts a keychain that might be the non-persistent keyutils cache.
  */
 export function detectSecretService(): boolean {
-  // Seam: a real probe checks `DBUS_SESSION_BUS_ADDRESS` owns `org.freedesktop.secrets` AND a
+  // Shore: a real probe checks `DBUS_SESSION_BUS_ADDRESS` owns `org.freedesktop.secrets` AND a
   // write→read→delete keychain sentinel returns. Inert until the binding is a dependency.
   return false;
 }
 
 /**
  * Resolve the seal policy. Keychain first WHEN a persistent Secret Service is detected (the
- * seam — inert today); else the passphrase path when `LARES_ARCHIVE_PASSPHRASE` is set; else
+ * shore — inert today); else the passphrase path when `LARES_ARCHIVE_PASSPHRASE` is set; else
  * cleartext (honest, unchanged). A fresh scrypt salt rides every seal (stored in the envelope),
  * so re-derivation stays self-contained and no IV/salt ever repeats.
  */

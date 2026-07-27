@@ -61,7 +61,7 @@ The HUD lives ''primarily in chat'' — the live operator↔coordinator exchange
 
 The wiki does not hold a second HUD. The wiki holds ''the primitives that compose it'' — the sigil definitions, the `Aperture` / `OODA-HA` gauges, the glyph set, the HUD pair (`api/lares/hud` law + `docs/lares/hud` teaching), the memetic-wikitext grammar itself — each addressable by `lar:` and ''summonable into chat''. The session summons those primitives (by address, by `kahea`, by the grammar) and assembles them into the live HUD. The quine closes outward: the wiki //describes// the HUD in its own primitives, and the chat //summons that description to become// the HUD. The instrument self-hosts — ''defined in the wiki, run in chat''.
 
-The membrane runs both directions, and ''Lares wields AI tools to complete the return'':
+The shore runs both directions, and ''Lares wields AI tools to complete the return'':
 
 * ''wiki → chat'' — the session summons primitives outward and renders the live HUD.
 * ''chat → wiki'' — Lares uses its tools (the lararium MCP surface) to author and persist back into the wiki: a finding, a turned sentence, an imported datum become tiddlers in the bags. The loop closes; the chat's work lands in the durable quine.
@@ -76,7 +76,7 @@ The quine grows by absorbing the world. Any datum ingested from the internet or 
 
 The lift rides the rating-5 ladder: a raw datum enters as `noise` or `data`; the `lar:` address plus memetic-wikitext authoring carry it toward `meme` (federation-eligible at ≥ `meme`), then `ano`, then `kapu`. The protocol never rejects the foreign — it ''absorbs gracefully'', and the act of pono-authoring //is// the upgrade. What enters as a stray fact leaves as a graph citizen: addressed, well-formed, rated, and reachable.
 
-This pairs with the HUD membrane as one motion in two directions: ''world → wiki'' (import lifts pono), ''wiki → chat'' (summon runs the HUD), with Lares's tools closing ''chat → wiki'' so the session's harvest persists.
+This pairs with the HUD shore as one motion in two directions: ''world → wiki'' (import lifts pono), ''wiki → chat'' (summon runs the HUD), with Lares's tools closing ''chat → wiki'' so the session's harvest persists.
 
 <<~/ahu >>
 

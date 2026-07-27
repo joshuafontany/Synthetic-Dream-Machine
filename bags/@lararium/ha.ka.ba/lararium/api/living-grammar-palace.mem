@@ -478,7 +478,7 @@ A ''meshpalace'' reads as a mempalace ''fed-by-the-Automerge-doc'' — DreamNet 
 content palace whose feed cap drains the federated CRDT instead of the local transcript. It rides as a
 THIRD `FeedCap` on the nameless palace body (#palace-instance): `[FlockSingleton, AutomergeFeedCap, …]`.
 Design-only here — the parallel DreamNet session owns the Automerge internals ([[genesis-doc|lar:///ha.ka.ba/lararium/mesh/genesis-doc]],
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>); this meme names only the seam
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>); this meme names only the shore
 (a feed cap), never the mesh mechanism.
 
 <<~/ahu >>
@@ -502,7 +502,7 @@ Design-only here — the parallel DreamNet session owns the Automerge internals 
 The plan runs additive: each phase ships standing alone, the pure tiers (P1·P2) first, the daemon-
 collapse (P5) after the form-vector proves its shape, the learned encoder (P7) last.
 
-''The seam bends here'' (operator ruling, 2026-06-29). The //generic// store-tech descends into the
+''The shore bends here'' (operator ruling, 2026-06-29). The //generic// store-tech descends into the
 ''mempalace submodule'' — the base layer, donated upstream to the nakama: N-collection support,
 caller-supplied vectors, the RRF fuse, the embedding hook (nomic · late-chunking · Matryoshka), the
 daemon-singleton flock (the orphan-pile-up fix the first such contribution). The multi-store complexity
@@ -727,7 +727,7 @@ storage fork (#three-registers), which name reconciliations, not re-designs.
 
 !! Ground and Readings ~ one ground, a lattice of readings, the chain as spine
 
-* ''The GROUND'' ~ verbatim bytes + position: the identity partition, what every reading reads; append-only — ground never carries derived (`rederive` walks it; the annotate-seam law holds it).
+* ''The GROUND'' ~ verbatim bytes + position: the identity partition, what every reading reads; append-only — ground never carries derived (`rederive` walks it; the annotate-shore law holds it).
 * ''The SHAPE READING'' ~ the expression-variance quotient: the canonical parse shape + structural hash. Its live instrument: the AST-hash collision rate + subsample entropy curve read whether the quotient coarsens or canonicalizes — the plane-carriage figure speaks through that measurement.
 * ''The IDIOM READING'' ~ recurrence-of-shape templates, MDL-priced. It claims recurrence, never meaning: constructions pair form with MEANING and cross-cut shape (Goldberg/Croft — one shape hosts many constructions; one construction spans shapes), so meaning-level regularity rides other members.
 * ''The MEANING BRAID'' ~ three strata, three warrants: DECLARED (registry fiat) · ENACTED (witnessed execution) · USED (bit-priced distribution — the vMF reading that prices admission and serves semantic recall). It rides a SECOND lattice axis: the Equitz–Cover admission test holds it off the chain, because cross-shape synonymy never factors through the shape hash.

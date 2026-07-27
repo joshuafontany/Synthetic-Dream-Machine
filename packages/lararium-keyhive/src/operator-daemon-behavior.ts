@@ -30,7 +30,7 @@ import { CIRCLES_DOC_URI } from "@lararium/mesh";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
-/** Vessel-injected daemon seam the platform entry supplies (node folds the telemetry capture SINK here; a
+/** Vessel-injected daemon shore the platform entry supplies (node folds the telemetry capture SINK here; a
  *  browser/node entry folds the projection `onBoot` mount so the @daemon inherits the wiki render cap).
  *  Forwarded straight to makeDaemonBehavior — the @daemon always carries the caps; this makes them live.
  *  Absent → the cap stays inert (sink not wired / no projection mount).
@@ -140,7 +140,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // reaches @circles by ACCESS off the @oracle registry (which names CIRCLES_DOC_URI) — access≠load, write-
       // then-sync. @circles rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator (so a follow
       // lands on ALL the operator's own devices) and the DeterministicFederationGate NEVER volunteers it to a
-      // cross-operator (@circles is outside its federatable set). A follow writes ONLY @circles — no board seam
+      // cross-operator (@circles is outside its federatable set). A follow writes ONLY @circles — no board shore
       // is reachable here, the never-federates wall made structural. `ctx.tw5` lets a mutation/list re-render
       // the @daemon follow surface (a browser paints it; a headless node daemon rests the temp tiddler).
       if (ctx.oracleUrl) {

@@ -118,7 +118,7 @@ async function main(): Promise<void> {
   // ── STAGE 3b — VEIL HOLDS IN A REAL FOUNDING ───────────────────────────────────
   // Project a charter from a publish-state carrying the LIVE keyhive member ids + a
   // secret substrate payload — the exact bag a real served charter would be built
-  // from once the realm has members. The membrane must drop BOTH, in the output AND
+  // from once the realm has members. The shore must drop BOTH, in the output AND
   // in the serialized snapshot bytes (the wire form a peer actually pulls).
   const SECRET = "SECRET-SUBSTRATE-PAYLOAD-must-not-cross";
   const withRoster = projectCabalRealmCharter({

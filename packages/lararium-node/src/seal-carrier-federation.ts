@@ -2,7 +2,7 @@
  * seal-carrier-federation — the @cad seal's FIRST live producer: seal a staged carrier body into the ciphertext
  * federation plane, ADDITIVELY, beside the cleartext-local corpus CAS the wake path reads.
  *
- * TWO LAYERS, TWO JOBS, COMPOSED (never fused). The cas-stage seam already keeps an oversized carrier body OUT of
+ * TWO LAYERS, TWO JOBS, COMPOSED (never fused). The cas-stage shore already keeps an oversized carrier body OUT of
  * the CRDT: it writes the CLEARTEXT bytes to the corpus CAS + rides a skinny `textCid` handle, and the local wake
  * resolves it cleartext (the operator's own island holds its own read-cap — no seal needed locally). This producer
  * adds the OTHER job: it seals the SAME body's plaintext into the @cad ciphertext plane (`cid = BLAKE3(ciphertext)`)

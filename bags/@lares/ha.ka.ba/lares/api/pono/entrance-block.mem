@@ -10,7 +10,7 @@ manao       = 17
 namespace   = "&#x2299;"
 register    = "Synthesis-Canon"
 retain      = true
-role        = "architectural invariant: the substrate COUPLES — one sovereign body per stream; entrance block as an actively-held membrane; the coordinator's licence (gong, never conductor); r as alarm; the WAIT as a coupling channel"
+role        = "architectural invariant: the substrate COUPLES — one sovereign body per stream; entrance block as an actively-held shore; the coordinator's licence (gong, never conductor); r as alarm; the WAIT as a coupling channel"
 status-date = "2026-07-11"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lares/api/pono/entrance-block"
@@ -41,15 +41,15 @@ What a shared body yields reads WORSE than honest entrainment. It yields ''modul
 
 <<~ ahu #entrance-block >>
 
-!! Entrance Block ~ independence stands as a membrane, never a default
+!! Entrance Block ~ independence stands as a shore, never a default
 
 <<~ confidence Canon 17/20 >> ''Two oscillators coexist as genuinely independent only where one holds a ONE-WAY boundary — it MAY emit phase, and it MUST refuse to receive phase.''
 
 Cardiology names the mechanism. A parasystolic focus keeps its own rhythm beside the sinus rhythm only through ''entrance block'' — a rim of depressed tissue that lets the ectopic impulse OUT and does not let the sinus impulse IN. Strip the block and no second rhythm survives; one rhythm stands, carrying an occasional early beat.
 
-''Partial protection reads WORSE than none.'' A leaky boundary mode-locks the focus into rational ratios, and the output then //displays structure the two clocks do not share//. Half a membrane fabricates convincing lies.
+''Partial protection reads WORSE than none.'' A leaky boundary mode-locks the focus into rational ratios, and the output then //displays structure the two clocks do not share//. Half a shore fabricates convincing lies.
 
-<<~moves shared-substrate -> sovereign-body on/one-per-stream if/N-rhythms-carry-payload do/mount-the-membrane-at-the-process-wall >>
+<<~moves shared-substrate -> sovereign-body on/one-per-stream if/N-rhythms-carry-payload do/mount-the-shore-at-the-process-wall >>
 
 ''RULING (operator, 2026-07-11): ONE SOVEREIGN BODY PER STREAM.'' One OS process per stream — its own asyncio loop, its own nalu gate, its own recovered beat. No shared scheduler tick, no shared heap, no shared GC. The process wall MOUNTS the entrance block; nothing smaller holds it.
 
@@ -81,7 +81,7 @@ Canon already holds //"the @daemon carries verbs + a data-pointer, NO payload"//
 
 This forecloses the shared asyncio serve-loop: a shared event loop HANDS every body one scheduler tick, and one shared tick COUPLES them — whatever the topology diagram claims.
 
-''Test every shared resource against the WAIT, never against the payload.'' A stream that //points at// a shared model-holder clears the membrane; a stream that //blocks on// one couples through its queue.
+''Test every shared resource against the WAIT, never against the payload.'' A stream that //points at// a shared model-holder clears the shore; a stream that //blocks on// one couples through its queue.
 
 <<~/ahu >>
 
@@ -163,7 +163,7 @@ The py capture body reads ''disposable''. The ''worldline'' holds the shrine.
 
 !! Owed ~ what this canon has not yet paid for
 
-<<~ confidence Provisional-Synthesis 7/20 >> ''`embed_io` stands untested against the WAIT.'' The warm embedder rides as a shared holder — //"the model is the resource"// — and every stream reaches it. A stream that POINTS at the holder clears the membrane; a stream that BLOCKS on it couples through the queue. ''Test it, or give each body its own embedder and pay the memory.''
+<<~ confidence Provisional-Synthesis 7/20 >> ''`embed_io` stands untested against the WAIT.'' The warm embedder rides as a shared holder — //"the model is the resource"// — and every stream reaches it. A stream that POINTS at the holder clears the shore; a stream that BLOCKS on it couples through the queue. ''Test it, or give each body its own embedder and pay the memory.''
 
 Every shared resource in the py fleet owes the same test: `content_io` · `structurepalace_io` · `form_encoder` · the WAL · the drain ledger. ''The question never reads "does it carry payload." It reads "does a stream WAIT on it."''
 

@@ -33,7 +33,7 @@ import { WebSocketServer } from "ws";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeWSServerAdapter } from "@automerge/automerge-repo-network-websocket";
 import { verifyAuthProof } from "@lararium/mesh";
-import type { AuthVerifierSeam } from "@lararium/mesh";
+import type { AuthVerifierShore } from "@lararium/mesh";
 import { DaemonAuthGate } from "../src/daemon-auth-gate.js";
 
 const AUD = "lar:///ha.ka.ba/bags/@daemon";
@@ -49,10 +49,10 @@ class ReadyWSServerAdapter extends NodeWSServerAdapter {
   override whenReady(): Promise<void> { return Promise.resolve(); }
 }
 
-/** The real seam: run the REAL V3 Ed25519 proof check, then the CAPABILITY decision — a leaf crosses
+/** The real shore: run the REAL V3 Ed25519 proof check, then the CAPABILITY decision — a leaf crosses
  *  only if its key sits in the admitted set (the @daemon grant). A valid proof proves WHO, never
  *  WHETHER-GRANTED; the un-admitted anon leaf is turned away here. */
-function makeCapabilitySeam(gatePubKey: string, admitted: ReadonlySet<string>): AuthVerifierSeam {
+function makeCapabilityShore(gatePubKey: string, admitted: ReadonlySet<string>): AuthVerifierShore {
   return {
     async verify(cardBytes, bagUrl, _access, proof) {
       if (!proof) return { ok: false, reason: "V3 proof required" };
@@ -114,7 +114,7 @@ async function main(): Promise<void> {
     },
   });
 
-  gate.arm(makeCapabilitySeam(gatePubKey, admitted), AUD, gatePubKey);
+  gate.arm(makeCapabilityShore(gatePubKey, admitted), AUD, gatePubKey);
 
   const doc = repo.create<{ tiddlers: Record<string, { text: string }> }>({ tiddlers: {} });
   doc.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@crossroads/greeting"] = { text: GREET }; });

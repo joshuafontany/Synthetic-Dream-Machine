@@ -427,7 +427,7 @@ So @oracle wears ''two faces'', joined by a publish-bridge:
 <<~Substrate LiveStream "holds/THE END-GOAL above the floor — real-time append-streaming (Hypercore: read-only by keypair even while live, the property Automerge-sync lacks) ~ DEFERRED; the orichalcum-bandwidth luxury, offered when mana allows, falling to the snapshot floor when not (the faerie-game broadcast)" >>
 <<~Substrate Substrate >>
 
-''The honest seam'' (named, not papered): anti-equivocation runs ''detect-not-prevent'' — a single-publisher @oracle with no cross-island gossip gets solid rollback + freshness, but cannot //prove// the publisher held one constitution for every reader until a second island compares notes. Inherent to no-global-now; the many test lararia spawning here stand as exactly the second islands that activate the proof.
+''The honest shore'' (named, not papered): anti-equivocation runs ''detect-not-prevent'' — a single-publisher @oracle with no cross-island gossip gets solid rollback + freshness, but cannot //prove// the publisher held one constitution for every reader until a second island compares notes. Inherent to no-global-now; the many test lararia spawning here stand as exactly the second islands that activate the proof.
 
 ''The honest limit'' — this buys read-only ONLY for the PUBLIC plane. Private/encrypted bags, forward-secrecy on revocation, per-change invariants a peer verifies without trusting the relay keep Keyhive/Beelay's seat (#four-port-swap).
 
@@ -531,7 +531,7 @@ architecture's task: anchor it at the contract, never re-invent it.
 
 !! The Four-Port Swap Surface
 
-The temporary build hides behind four ports, drawn at Keyhive/Beelay's own seams, so the
+The temporary build hides behind four ports, drawn at Keyhive/Beelay's own shores, so the
 real stack slots in piecewise:
 
 <<~ranks port identity ~ vessel keypair, opaque pubkey -> capabilities ~ signed delegation edges (→ Keyhive groups) -> group-keying ~ sealed-box wrap + rotate (→ BeeKEM CGKA) -> transport ~ Automerge sync over our relay (→ Beelay sedimentree) >>

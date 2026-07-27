@@ -55,7 +55,7 @@ def derive_cid(source_file: str, chunk_index: int) -> str:
     binding. Capture rides py-side HERE now (the earlier TS `drawerCid`/`caller-vector-flush.ts` bare-
     basename keying retired), so THIS gate owns the session-qualification and no cross-surface parity fork
     stands open. The hash routes through deep_time.content_hash — the ONE content-address/identity-hash home
-    (hash-agility seam); today still sha256, BYTE-IDENTICAL, so every existing cid stays valid."""
+    (hash-agility shore); today still sha256, BYTE-IDENTICAL, so every existing cid stays valid."""
     src_hash = content_hash(source_file.encode("utf-8"))
     return f"{src_hash}_{chunk_index}"
 

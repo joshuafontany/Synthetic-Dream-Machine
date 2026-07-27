@@ -25,7 +25,7 @@
  * with the derived veiled-user verifyingKey).
  *
  * Platform-blind: rides ./persona-hd + ./crypto only. NO node: imports. The
- * randomness arrives through an injected `randomBytes` seam (platform supplies
+ * randomness arrives through an injected `randomBytes` shore (platform supplies
  * globalThis.crypto.getRandomValues) — NEVER a hardcoded crypto source.
  *
  * DEFER (a later cut — NOT built here): advanced seed CUSTODY + RECOVERY (DKMS,
@@ -90,13 +90,13 @@ export interface PersonaSeedStore {
  * generateOrLoadPersonaSeed — the persona master-seed lifecycle.
  *
  * Loads the existing seed; failing that, generates a fresh 32-byte seed through
- * the injected `randomBytes` seam, PERSISTS it BEFORE returning (mirroring
+ * the injected `randomBytes` shore, PERSISTS it BEFORE returning (mirroring
  * generateOrLoadKeypair's persist-before-return control flow, so any layer
  * keying off the seed runs strictly AFTER it reaches durable storage), and
  * reports whether THIS call minted it (`created`).
  *
  * `randomBytes` MUST source platform CSPRNG bytes (the platform supplies
- * globalThis.crypto.getRandomValues) — the seam never hardcodes a crypto source.
+ * globalThis.crypto.getRandomValues) — the shore never hardcodes a crypto source.
  */
 export async function generateOrLoadPersonaSeed(
   store: PersonaSeedStore,

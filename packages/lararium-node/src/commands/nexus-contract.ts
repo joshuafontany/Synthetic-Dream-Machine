@@ -15,7 +15,7 @@
  * TRACK CONTRACTS, NEVER IDENTITIES: the writer takes an operator PUBKEY nym + (for admit) a carriage contract-sig.
  * No name / email / device / behavior is read, asked, or written — the FLOOR alone lands on the board.
  *
- * FAIL CLOSED, at every seam (mirrors nexus-kapae):
+ * FAIL CLOSED, at every shore (mirrors nexus-kapae):
  *   · an unseated / quorum-short charter → REFUSE (nothing to root a quorum on); no board write.
  *   · fewer than `threshold` HELD persona-roots that sit IN the seated roster → REFUSE; no sub-quorum entry.
  *   · an admit with no valid contract-in → REFUSE; never write a conscripted member.

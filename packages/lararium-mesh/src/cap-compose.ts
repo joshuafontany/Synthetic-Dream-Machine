@@ -1,6 +1,6 @@
 /**
  * cap-compose — the composable-keel engine: a vessel = a #has-cap-stack (DECLARE) composed by a
- * transient capability-routing root (WIRE). Declare ⊥ wire, the same seam as INFRA⊥WHO / map⊥territory.
+ * transient capability-routing root (WIRE). Declare ⊥ wire, the same shore as INFRA⊥WHO / map⊥territory.
  *
  * The `#has-cap-stack` is an ECS declaration — a flat, dependency-blind set of cap-modules a vessel
  * HAS (what it *is*). It carries no edges (the retired-typed-edge ruling holds). Each cap-MODULE

@@ -77,9 +77,9 @@ Seven axes guided each system comparison:
 
 <<~ ahu #highest-value-table >>
 
-!! Highest-Value Prior Art by Spec Seam
+!! Highest-Value Prior Art by Spec Shore
 
-| Seam | Best prior art |
+| Shore | Best prior art |
 |---|---|
 | Nearest lineage | TiddlyWiki |
 | Strict inclusion processing | XInclude |

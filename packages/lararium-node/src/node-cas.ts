@@ -82,7 +82,7 @@ export function mirrorGenesisCasFs(
 }
 
 /** Read content-addressed bytes by CID from the fs CAS. Null if absent. This IS
- *  the worker's `resolveByCid` seam (filesystem process-shared, no IPC). */
+ *  the worker's `resolveByCid` shore (filesystem process-shared, no IPC). */
 export function readCasBlobFromFs(cid: string, casDir: string): Uint8Array | null {
   try {
     const path = join(casDir, cid);

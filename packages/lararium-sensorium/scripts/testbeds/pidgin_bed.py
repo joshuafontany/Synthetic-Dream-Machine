@@ -47,7 +47,7 @@ grammar produces throughout its span. Exactly what `decued` strips, and every ru
      ride inside user text (`<system-reminder>`, `<ide_opened_file>`, `<result>`). Inner text survives whole.
   2. CODE FENCES — a line that holds only ``` (with an optional language word).
   3. THE READ-TOOL LINE GUTTER — a leading `NNN→` or `NNN⇥`. The tool INJECTS it; no grammar produces it.
-  4. BLANK LINES — a blank line at a seam announces the seam by convention.
+  4. BLANK LINES — a blank line at a shore announces the shore by convention.
 
 WHAT WE DELIBERATELY LEAVE IN, so an adversary need not find it for us:
   · The shell text, file paths, tracebacks and ANSI-free tool output inside a `tool_result`. That IS the

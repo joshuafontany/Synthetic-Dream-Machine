@@ -119,12 +119,12 @@ ENDPOINT_LAMBDAS = (0.0, 1.0)
 BLACK_BASE_KIND = "markdown"
 
 
-# ── the channel split (the mechanical seam) ───────────────────────────────────────────────
+# ── the channel split (the mechanical shore) ───────────────────────────────────────────────
 
 
 def strip_red(text: str) -> str:
     """The BLACK channel of a memetic-wikitext text: every sharktooth token removed, all
-    other bytes kept in place. The seam mirrors the sigil parser exactly — parse_sigils
+    other bytes kept in place. The shore mirrors the sigil parser exactly — parse_sigils
     reads tokens as nodes and inter-token spans as text leaves, so red (the tokens) and
     black (this remainder) complement with nothing dropped and nothing doubled."""
     return _TOKEN_RE.sub("", text)

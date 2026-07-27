@@ -1,12 +1,12 @@
 /**
- * mu-void — the ONE indistinguishable response the carry seam draws for BOTH "you are caught up"
+ * mu-void — the ONE indistinguishable response the carry shore draws for BOTH "you are caught up"
  * (sync-complete) AND "you are Kapae'd" (denied). Information-minimal by construction: an adversary
  * reading the wire cannot tell nothing-more-to-extract from nothing-more-permitted, because the two
  * paths return BYTE-IDENTICAL Mu (RAW's Chapel-Perilous exit — unasked, void, next question).
  *
  * A Kapae'd presenter draws Mu, NEVER a denial: a denial leaks information (it confirms the ban, names
- * the antigen, opens an argument surface). Mu closes the surveillance seam at the same stroke it closes
- * the immune one. This module is the wire-level artifact of that indistinguishability + the seam a test
+ * the antigen, opens an argument surface). Mu closes the surveillance shore at the same stroke it closes
+ * the immune one. This module is the wire-level artifact of that indistinguishability + the shore a test
  * pins byte-for-byte (mu-void.test.ts).
  *
  * Platform-blind: rides ./crypto only. NO node: imports.
@@ -23,7 +23,7 @@ export interface MuVoid {
   readonly kind: typeof MU_VOID_DOMAIN;
 }
 
-/** Why the seam drew Mu — an INTERNAL discriminant only; it NEVER reaches the wire (that is the point). */
+/** Why the shore drew Mu — an INTERNAL discriminant only; it NEVER reaches the wire (that is the point). */
 export type MuReason = "sync-complete" | "kapae-denied";
 
 /** Mint the void — one frozen value, so every draw is the SAME void whatever the internal reason. */
@@ -36,13 +36,13 @@ export function muVoidBytes(): Uint8Array {
   return canonicalJsonBytes(muVoid());
 }
 
-/** The void's canonical JSON — the string form for a text seam. Both reasons MUST yield this string. */
+/** The void's canonical JSON — the string form for a text shore. Both reasons MUST yield this string. */
 export function muVoidJson(): string {
   return canonicalJson(muVoid());
 }
 
 /**
- * The carry seam's response — BOTH reasons collapse to one byte-identical void. The `_reason` conditions
+ * The carry shore's response — BOTH reasons collapse to one byte-identical void. The `_reason` conditions
  * NOTHING about the output; it rides only as an internal label so a call site reads self-documenting.
  * This is the indistinguishability, expressed as code: the branch on reason CANNOT alter the response.
  */

@@ -83,7 +83,7 @@ describe("disk ward — refusal signal (the alert chain's first link)", () => {
     const refusals: Array<{ bagId: string; uri: string; reason: string }> = [];
     const projector = new LarDiskProjector({
       mirrors: [{ bagId: "@lares", mirrorRoot: "/srv/lar/bags/@lares" }],
-      // The ONE render seam — the ward still guards a malicious title: the path
+      // The ONE render shore — the ward still guards a malicious title: the path
       // derives from the URI (`carrierBaseRelPath`), so a `../`-laden title
       // escapes the root and the confinement ward refuses it.
       carrierFileFn: async () => ({ ext: ".mem", body: "never-rendered" }),

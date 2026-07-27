@@ -83,7 +83,7 @@ CLOCK PURITY + STREAMING: the tick ordinal indexes everything; no wall-clock tou
 every random draw seeds explicitly. The tick loop consumes FRAMES in sequence (an iterator with
 per-stream seq — the StreamAdapter shape real-time media will speak); the carried state spans
 one character, a 12-char gram tail, and the recurrence channel's bounded recency table. THE
-BATCH SEAM, surfaced honestly: MODWT-MRA here runs as a batch over the collected signal. An
+BATCH SHORE, surfaced honestly: MODWT-MRA here runs as a batch over the collected signal. An
 à-trous MODWT admits a causal streaming form with a per-level lag of (filter_len − 1)·2^(j−1)
 ticks; the media era needs that port — named here, not built.
 

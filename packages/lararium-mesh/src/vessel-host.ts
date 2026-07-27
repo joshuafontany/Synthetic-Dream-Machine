@@ -30,12 +30,12 @@ export interface VesselWorkerHandle {
   terminate(): void;
 }
 
-// ── VesselIslandHost — the pool's platform seam ──────────────────────────────
+// ── VesselIslandHost — the pool's platform shore ──────────────────────────────
 //
 // Everything platform-specific the pool needs, as composition: worker spawn,
 // sync-channel creation, per-wiki storage. `awaitReady` flags the browser ES-
 // module worker's WASM-load handshake (node omits it). Held capabilities
-// (mainRepo, diskMirrorGrant, hotCap) ride pool config, not this seam.
+// (mainRepo, diskMirrorGrant, hotCap) ride pool config, not this shore.
 
 export interface VesselIslandHost {
   /** Spawn a fresh island worker (closes over the platform worker URL). */

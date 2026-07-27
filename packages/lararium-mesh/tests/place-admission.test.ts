@@ -1,5 +1,5 @@
 /**
- * place-admission.test.ts — the seam admits on BOTH signals, and refuses at the first gate that fails.
+ * place-admission.test.ts — the shore admits on BOTH signals, and refuses at the first gate that fails.
  *
  * Four claims, four groups: the structural gate refuses BEFORE any price is walked (invite-only, no invite);
  * a valid invite CROSSES and names the voucher (the co-pay stands); a cluster AT THE CEILING refuses on the
@@ -45,7 +45,7 @@ async function invite(over: Partial<{ place: string; joiner: string; expiresAt: 
   }, signer(VOUCHER_SEED));
 }
 
-describe("the seam runs BOTH signals, structural first", () => {
+describe("the shore runs BOTH signals, structural first", () => {
   test("invite-only with no invite refuses at the structural gate — no price is walked", async () => {
     const v = await admitToPlace({
       policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,

@@ -72,7 +72,7 @@ For incremental sync (peer-to-peer, not full state shipment), Keyhive exposes:
 - `kh.eventHashesForAgent(agent)` → Array<hash>
 - `kh.pendingEventHashes()` → Set<hash>
 
-This is the seam for our admin-doc storage: persist the archive (or the event log) as tiddlers under `lar:///ha.ka.ba/lararium/@admin/cap/...`. **D.4 design recommendation:** store events one-per-tiddler keyed by hash; reconstruct via `ingestEventsBytes` on daemon boot. Avoids serializing/deserializing the whole archive on every change.
+This is the shore for our admin-doc storage: persist the archive (or the event log) as tiddlers under `lar:///ha.ka.ba/lararium/@admin/cap/...`. **D.4 design recommendation:** store events one-per-tiddler keyed by hash; reconstruct via `ingestEventsBytes` on daemon boot. Avoids serializing/deserializing the whole archive on every change.
 
 ## Q5 — Bundle / startup time
 

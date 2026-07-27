@@ -203,7 +203,7 @@ export interface ActionHandlerOptions {
   readonly registerBag?: (bagUrl: string) => Promise<void>;
   /**
    * Resolve a carrier body by content-address (hex sha256) from the corpus CAS —
-   * the fs-less worker's seam onto the process-shared byte plane. A verb NEVER
+   * the fs-less worker's shore onto the process-shared byte plane. A verb NEVER
    * inlines a body: LOAD/INGEST carriers ride a `textCid`, and the handler resolves
    * it HERE, re-verifying `cid == hash(bytes)` (content-addressed trust, not host
    * trust — sovereignty-safe). Exposed from the kernel's `resolveByCid` host callback
@@ -480,7 +480,7 @@ async function executeAction(action: ResidencyAction, access: BagAccess, tw5?: T
 }
 
 /** Resolve a carrier body by content-address from the corpus CAS (the fs-less worker's
- *  seam). Verbs ride references, never bodies. */
+ *  shore). Verbs ride references, never bodies. */
 export type CarrierResolver = (cid: string) => Promise<Uint8Array | null>;
 
 /**
@@ -499,7 +499,7 @@ async function resolveCarrierText(
   const cid = carrier.textCid;
   const label = carrier.uri ?? carrier.title ?? "(carrier)";
   if (!cid) throw new Error(`carrier ${label} carries neither text nor textCid — a verb rides one body reference`);
-  if (!resolveByCid) throw new Error(`carrier ${label} rides textCid ${cid} but this island exposes no resolveByCid (no corpus CAS seam)`);
+  if (!resolveByCid) throw new Error(`carrier ${label} rides textCid ${cid} but this island exposes no resolveByCid (no corpus CAS shore)`);
   const bytes = await resolveByCid(cid);
   if (!bytes) throw new Error(`carrier ${label}: CAS blob ${cid} absent — stage the body before submitting the verb`);
   const got = sha256HexBytesSync(bytes);
@@ -560,7 +560,7 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
  * LOAD — land operator-supplied carriers into toBag. The island never fetches:
  * the operator gesture (which holds the disk grant) sends content WITH the
  * verb; `sourceUri` rides as audit provenance only. Each carrier decomposes at
- * the memetic-wikitext membrane (FFZ: parent + ahu-slot children), and every
+ * the memetic-wikitext shore (FFZ: parent + ahu-slot children), and every
  * resulting record lands under the action's fresh changeId.
  */
 /**
@@ -625,7 +625,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
       throw new Error(`carrier ${carrier.title ?? "(carrier)"}: body ${carrier.size ?? carrierText.length}B would inline oversized — a verb rides a reference, never a body (flag _lar_cas or stage the body to CAS)`);
     }
     // Route by content: a memetic-wikitext carrier (SOH heading) decomposes at the
-    // membrane via the direct memetic deserializer; any other legal TW5 filetype
+    // shore via the direct memetic deserializer; any other legal TW5 filetype
     // lands through TW5's OWN deserializer registry, resolved from its extension.
     // Absent a native resolver (no booted $tw), every carrier falls back to memetic.
     let fieldsList: Array<Record<string, unknown>>;
@@ -767,7 +767,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
     const groupTitles = all.filter((t) => t === uri || t.startsWith(`${uri}#`) || t.startsWith(`${uri}/`));
 
     // Route by content, mirroring LOAD: a memetic carrier (SOH heading / no
-    // native bridge) decomposes at the membrane through the Confluence gate; ANY other
+    // native bridge) decomposes at the shore through the Confluence gate; ANY other
     // legal TW5 filetype rides TW5's OWN deserializer registry, keyed by its
     // extension. The registry — not a CLI-side reimplementation — owns the
     // filetype routing; the island hands the bytes to it.

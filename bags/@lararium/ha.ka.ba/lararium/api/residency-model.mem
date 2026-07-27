@@ -118,7 +118,7 @@ Per-verb args:
 | `CLEAR` / `DROP` | `bag` |
 | `LOAD` | `source-uri` (provenance), `to-bag`, `change-id` (mints fresh), `carriers` (the content) |
 
-''LOAD runs carrier-borne (implemented 2026-06-10).'' Islands never fetch — web3-only law: the operator gesture (which holds the disk grant, node-side `lares act LOAD`) reads the source and sends content WITH the verb as `carriers: [{title?, text}]`; `source-uri` rides as audit provenance only. Each carrier decomposes at the memetic-wikitext membrane (FFZ: parent + ahu-slot children via the deserializer) and every record lands under the action's fresh change-id, audited by the standard `accession` effect record. A LOAD with no carriers refuses loudly. First live use fed the @lares hearth its own boot meme: 17 records (parent + 16 ahu children).
+''LOAD runs carrier-borne (implemented 2026-06-10).'' Islands never fetch — web3-only law: the operator gesture (which holds the disk grant, node-side `lares act LOAD`) reads the source and sends content WITH the verb as `carriers: [{title?, text}]`; `source-uri` rides as audit provenance only. Each carrier decomposes at the memetic-wikitext shore (FFZ: parent + ahu-slot children via the deserializer) and every record lands under the action's fresh change-id, audited by the standard `accession` effect record. A LOAD with no carriers refuses loudly. First live use fed the @lares hearth its own boot meme: 17 records (parent + 16 ahu children).
 
 Source: `packages/lararium-mesh/src/residency-actions.ts`. Tests: `packages/lararium-mesh/tests/residency-actions.test.ts` (50 cases, including the change-id preservation gate that defends Anti-pattern #1).
 
@@ -180,7 +180,7 @@ Any implementation of this model MUST hold all five:
 
 !! The non-residency tier — verbs that ride the rail, not the coordinate space
 
-The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/DROP) are SPARQL-Update set-algebra over `(title × bag)`; ''INGEST'' was the first to break that frame — a disk→records membrane gesture (three-way diff, replace-by-group, NFC), with no SPARQL analog, riding the same VERB → SUMMONS → OUTCOME rail with the same `withEffectRecord` audit + cap-gate. The tier is open: a verb belongs here when it carries an operator gesture through the rail + audit + authority machinery, even if it moves no tiddler between bags.
+The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/DROP) are SPARQL-Update set-algebra over `(title × bag)`; ''INGEST'' was the first to break that frame — a disk→records shore gesture (three-way diff, replace-by-group, NFC), with no SPARQL analog, riding the same VERB → SUMMONS → OUTCOME rail with the same `withEffectRecord` audit + cap-gate. The tier is open: a verb belongs here when it carries an operator gesture through the rail + audit + authority machinery, even if it moves no tiddler between bags.
 
 !!! RECONCILE — fold a newer engine forward (operator ruling, 2026-06-15)
 

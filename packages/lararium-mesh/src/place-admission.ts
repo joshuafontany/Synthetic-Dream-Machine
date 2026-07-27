@@ -1,5 +1,5 @@
 /**
- * place-admission — the SEAM that admits INTO A PLACE, composing the two signals into one verdict.
+ * place-admission — the SHORE that admits INTO A PLACE, composing the two signals into one verdict.
  *
  * It gates ONE place (`placeDocIdHex`), never the super-mesh: a crossing cleared here buys standing in the
  * cabal-realm that priced it, and nothing beyond. DreamNet is what places federate INTO, never a thing
@@ -135,13 +135,13 @@ export interface LineageAdmission extends AdmissionVerdict {
  * `admitToPlace` takes `edges` already folded, which leaves a caller free to assemble them by hand. That
  * hand-assembly SKIPS the per-voucher cap, and the cap is not a convenience: it is the choke that bounds the
  * mass any single hand injects into the lineage. A gate whose choke depends on the caller remembering to run
- * it has no choke. So this seam takes the invites THEMSELVES and folds them here, where the cap cannot be
+ * it has no choke. So this shore takes the invites THEMSELVES and folds them here, where the cap cannot be
  * left out — the same designation-carries-authority discipline the rest of the mesh holds.
  *
  * What the fold turned away rides back in `capped` rather than vanishing, so a caller reads the budget it
  * spent instead of trusting a graph that came back quietly shorter than the invites it handed in.
  *
- * Platform-blind, like everything here: node and browser compose the identical seam.
+ * Platform-blind, like everything here: node and browser compose the identical shore.
  * Meme: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing
  */
 export async function admitOnLineage(args: {

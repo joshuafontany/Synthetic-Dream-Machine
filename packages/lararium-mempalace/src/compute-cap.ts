@@ -76,7 +76,7 @@ export function hasGpuComputeCap(python: string | null): boolean {
   return detectCudaLibDirs(python).length > 0;
 }
 
-/** Test seam: drop the cached probe so a test can re-resolve. */
+/** Test shore: drop the cached probe so a test can re-resolve. */
 export function _resetComputeCapCache(): void {
   _cudaLibDirs = undefined;
 }

@@ -1,5 +1,5 @@
 /**
- * recovery-keel (node) — the founding-split + recover-readmit flows, wired to node seams.
+ * recovery-keel (node) — the founding-split + recover-readmit flows, wired to node shores.
  *
  * The recovery FLOWS live in @lararium/mesh (recovery-keel-core) — platform-blind, over the crypto
  * primitives already in mesh. THIS adapter binds them to the two node-only edges the core cannot hold:
@@ -51,7 +51,7 @@ export async function reconstructAndReadmit(
  *
  * PER-PERSONA: a vessel wearing several personas provisions recovery per persona-root. (POLICY fork
  * surfaced to the operator: whether N personas on ONE disk constitute distinct-enough custodians is NOT
- * decided here; the seam splits so either resolution stands.)
+ * decided here; the shore splits so either resolution stands.)
  */
 export async function provisionRecoveryAtFounding(
   _dataDir: string,

@@ -97,7 +97,7 @@ def _lar_data_home() -> str:
 
 def sensorium_dir(name: str) -> str:
     """Turn a sensorium NAME into its root — `<data>/sensoriums/<name>` — mirroring TS `sensoriumDir`
-    (vessel-paths.ts). The one seam a `lares sense <sensorium>` / MCP `sensorium=` address crosses to
+    (vessel-paths.ts). The one shore a `lares sense <sensorium>` / MCP `sensorium=` address crosses to
     reach a target root; `memory` resolves the same dir the memory default names."""
     return os.path.join(_lar_data_home(), "sensoriums", name)
 
@@ -170,7 +170,7 @@ def compose_sensorium_contract(contributions) -> dict:
 
     A cap adds names and may witness order or apertures.  Two caps may repeat a
     witness, but they may not disagree about one entity's order or one aperture
-    provider.  This mirrors the Mesh composition seam before a Python driver
+    provider.  This mirrors the Mesh composition shore before a Python driver
     persists its rooted manifest.
     """
     normalized = [declare_sensorium_contract(**contribution) for contribution in contributions]

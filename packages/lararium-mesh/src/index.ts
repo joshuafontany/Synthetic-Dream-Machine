@@ -167,6 +167,7 @@ export * from "./persona-identity.js";
 export * from "./cabal-realm.js";
 export * from "./cabal-invite.js";
 export * from "./vouch-board.js";
+export * from "./independence-reading.js";
 export * from "./delegation-edge.js";
 export * from "./dyad.js";
 export * from "./edge-kapae.js";
@@ -187,7 +188,7 @@ export * from "./persona-admit-carriage.js";
 // (the persona-admit sealed-box shape). An admitted device opens it + reads sealed bodies; a carry-only peer cannot.
 export * from "./keyring-envelope.js";
 // The IoC follow — composeFollow braids the three LOCAL stores (handle-book · petname · circle) into one
-// gesture; the CircleStore seam is local-only, so a follow leaves NO central trace (membership-doctrine).
+// gesture; the CircleStore shore is local-only, so a follow leaves NO central trace (membership-doctrine).
 export * from "./compose-follow.js";
 export * from "./handle-announce.js";
 export * from "./who-face.js";
@@ -232,8 +233,8 @@ export * from "./partition-monitor.js";
 export * from "./self-coupling.js";
 export * from "./mesh-coupling.js";
 export * from "./te-hodge.js";
-export * from "./who-sensory-seam.js";
-export * from "./sensory-seam.js";
+export * from "./who-sensory-shore.js";
+export * from "./sensory-shore.js";
 export * from "./gaussian-cmi.js";
 export * from "./bures-metric.js";
 export * from "./fisher-rao.js";

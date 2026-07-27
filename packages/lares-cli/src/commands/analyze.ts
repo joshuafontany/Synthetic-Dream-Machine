@@ -1,6 +1,6 @@
 /**
  * `lares sense analyze` — DETECT-ONLY change-point analysis over the sensorium's poured content stream.
- * The isomorphic `sense_analyze` instrument (Foote novelty · sequitur depth+seam · sequitur-MDL · branching
+ * The isomorphic `sense_analyze` instrument (Foote novelty · sequitur depth+shore · sequitur-MDL · branching
  * entropy) reads the reconstructed stream word-grained and reports WHERE the content changes hands — every
  * boundary a word index. Blind to any ground-truth (the answer-key wall stays uncrossed): it LOCATES, never
  * scores. A read-only compute, no cache — it runs on demand and returns.

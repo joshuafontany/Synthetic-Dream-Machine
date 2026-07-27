@@ -17,7 +17,7 @@ import {
   type IslandToVesselMsg,
   type IslandMsg_Manifest,
 } from "@lararium/mesh";
-import { runSovereignKernel, type IslandHostSeam } from "../src/sovereign-kernel.js";
+import { runSovereignKernel, type IslandHostShore } from "../src/sovereign-kernel.js";
 import type { IslandBehavior } from "../src/island-context.js";
 
 const WIKI = "lar:///ha.ka.ba/bags/@test/wiki";
@@ -37,7 +37,7 @@ describe("runSovereignKernel — breath emission during mount", () => {
     const posted: IslandToVesselMsg[] = [];
     let deliver: ((raw: unknown) => void) | null = null;
 
-    const host: IslandHostSeam = {
+    const host: IslandHostShore = {
       post:    (msg) => posted.push(msg),
       listen:  (h)   => { deliver = h; },
       storage: ()    => undefined,

@@ -30,7 +30,7 @@ DETERMINISM (clock purity): every draw rides random.Random seeded from
 RNG anywhere; the same seed regenerates the same bytes, so the fixtures commit and re-derive.
 
 ANTI-MARKER GUARD: a generated line matching ANY sectioner marker grammar (era heading,
-CHANT line, KA WA line, appendix seam) re-draws, then mangles as a last resort — babble
+CHANT line, KA WA line, appendix shore) re-draws, then mangles as a last resort — babble
 never mints a section boundary the real carrier lacks.
 
 Usage (writes the two fixture memes; deterministic, re-runnable):

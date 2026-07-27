@@ -34,7 +34,7 @@ const DEFAULT_ENQUEUE_SIGNAL = "telemetry:place-verb";
 const KAPAE_SIGNAL = "structurepalace:kapae";
 
 export interface CaptureCapOptions {
-  /** Build the capture engine given the OUT-frame `post` seam (the cap wires it to `ctx.post`).
+  /** Build the capture engine given the OUT-frame `post` shore (the cap wires it to `ctx.post`).
    *  The vessel supplies flush/reserve/annotate/servo (node: makeNodeCaptureEngine). OPTIONAL —
    *  absent = the cap is carried but INERT (the sink is not wired; a valid resting state). */
   readonly makeEngine?: (post: CapturePost, ctx: IslandContext) => CaptureEngine;

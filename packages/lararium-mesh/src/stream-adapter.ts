@@ -5,7 +5,7 @@
  * The sensorium is ~90% modality-INVARIANT. Its planes — content=embed · structure=shape-vector ·
  * bands=MODWT+ecp · form=induction · coupling=RTransferEntropy — read numeric vectors, nested shape
  * trees, and text; NONE of them know "this came from a text corpus". Only the INTAKE (text →
- * tree-sitter / stanza) is text-specific. This module lifts that seam: a {@link StreamAdapter}
+ * tree-sitter / stanza) is text-specific. This module lifts that shore: a {@link StreamAdapter}
  * supplies ONLY the intake (raw → {@link StreamFrame}s); the shared CORE ({@link composePalace})
  * routes each frame's populated slots to the matching plane.
  *

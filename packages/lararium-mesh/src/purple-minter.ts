@@ -117,7 +117,7 @@ export function mintPurpleSink(
   // the basin anchor stays frozen at its FIRST member. Under a drifting stream that anchor goes stale, so a
   // late member can fall outside radius of it and FALSE-SPLIT. True accretion (moving the basin toward its
   // members — a registry.accrete(vector, petName) centroid update) rides the online WRITE pass. The `nearest`
-  // /`record` interface already carries the seam; grow slots in without a shape change.
+  // /`record` interface already carries the shore; grow slots in without a shape change.
 
   // GAP (KA-4, deferred): the caller-side reaction-graph bridging-edge stays UNBUILT — the ring closes as
   // returned data (`planes`), not yet as a Ki-graph node. Wire mint → reaction-graph in a follow-up.

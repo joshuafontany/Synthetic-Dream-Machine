@@ -14,7 +14,7 @@
  *                           max-register), keyed by the realm's sentinel DocId.
  *   · bag-residency.ts    — the realm's substrate doc cools to anu when unfed;
  *                           feeding it (touch / hoʻowela) keeps it alive.
- * It builds the seam and NOTHING more. It does NOT call Keyhive, does NOT run
+ * It builds the shore and NOTHING more. It does NOT call Keyhive, does NOT run
  * the found/join/evict CGKA ceremony, and does NOT bake any legitimacy answer.
  *
  * TWO-EPOCH DISTINCTION (canon #the-tie-break) — do not fuse these:
@@ -31,8 +31,8 @@
  * THE UNSWEPT CORNER (canon #the-unswept-corner) — persistence ≠ legitimacy.
  * Soft-state rewards whoever keeps feeding, NOT who legitimately holds the
  * realm; a small hostile faction can out-maintain an apathetic majority. The
- * cure (a quorum-of-vouchers / fork-and-leave) stays the operator's OPEN seam.
- * The join seam below is INERT by design — it bakes no legitimacy signal.
+ * cure (a quorum-of-vouchers / fork-and-leave) stays the operator's OPEN shore.
+ * The join shore below is INERT by design — it bakes no legitimacy signal.
  *
  * Platform-blind: rides ./epoch-lease + ./bag-residency only. NO node: imports.
  *
@@ -102,7 +102,7 @@ export function deriveCabalRealmLiveness(temp: ResidencyTemperature): CabalRealm
  *
  * WHAT member-activity COUNTS as a feed (a post, a sync, a presence pulse, and
  * how it composes with P2 "benefit ∝ maintenance") stays a higher-layer wiring
- * choice (P2/P4, canon #governance) — NOT decided here. This seam only carries
+ * choice (P2/P4, canon #governance) — NOT decided here. This shore only carries
  * the warming through to the residency engine.
  */
 export function feedCabalRealm(
@@ -113,12 +113,12 @@ export function feedCabalRealm(
 }
 
 /**
- * The JOIN seam — INERT. A joiner presents an identity; today this passes it
+ * The JOIN shore — INERT. A joiner presents an identity; today this passes it
  * THROUGH unchanged and does nothing else.
  *
  * INERT BY DESIGN: the Ostrom-P1 cost-dial / capture-answer (the voucher quorum,
  * fork-and-leave — the legitimacy signal beyond raw maintenance) mounts HERE in
- * a later cut. That is the operator's OPEN seam (canon #the-unswept-corner:
+ * a later cut. That is the operator's OPEN shore (canon #the-unswept-corner:
  * persistence ≠ legitimacy). Do NOT bake a legitimacy signal into this function
  * — a baked-in answer would close the unswept corner silently and wrong. The
  * actual Keyhive admission ceremony (found/join/evict CGKA) is cut 2, gated.

@@ -126,9 +126,9 @@ kept sibling-bug: `pnpm dev` / node-pkg `"dev": "tsx src/main.ts"` share the sam
 
 <<~ ahu #watcher-talk-story >>
 
-!! Talk-story to the next instance — the file-watcher seams
+!! Talk-story to the next instance — the file-watcher shores
 
-''✓ FLOOR CLOSED BY MOʻOLELO 2026-06-14'' (operator ratified; one web spirit + the nine-spirit shelf §6 behind it). The five seams resolved:
+''✓ FLOOR CLOSED BY MOʻOLELO 2026-06-14'' (operator ratified; one web spirit + the nine-spirit shelf §6 behind it). The five shores resolved:
 * ''Spine:'' scan is truth for //state//; events are the only source of //identity// (Loro movable-tree CRDT shows a scan can't recover a rename — hash-re-link is best-effort identity recovery, never a guarantee). The watcher = a debounced waker over an authoritative periodic full-scan. (Dissolves Q2 settle, Q4 backstop cadence, Q5 one-watcher-N-bags.)
 * ''Q1 deletion → tombstone:'' tombstone only after a path stays absent across one full settled scan AND a ''~60s delete-grace window'' (Syncthing's field value — longer than the ~400ms edit debounce, so a paired add can arrive). PLUS a ''mass-delete magnitude brake keyed to a FRACTION of the bag's carriers'' (operator-set): a settle proposing tombstones above the fraction SUSPENDS and surfaces, never auto-propagates (Unison `confirmbigdel` / Nextcloud). The delete decision is ''durable per-path'' (Nextcloud #7450 thrash guard).
 * ''Q3 rename:'' within the delete-grace window, a fresh add whose disk-hash == a pending-delete's last-projected-synced-hash IS a rename → re-link the record — but ''only on a UNIQUE hash match'' (collision among identical-content carriers → fall back to tombstone+create, never guess; git/rclone discipline). Two-tier: exact-hash re-link always on; fuzzy similarity bounded/optional later.
@@ -153,18 +153,18 @@ When the floor closes, fold the rulings back into build 4 above, then the formal
 The floor opened and SUSPENDED — the operator rebooted before steering it. Its telling, kept whole for you to resume:
 
 ```
-<<~ talk-story #watcher-seams ground:"build 4 first cut (ingest-core + lares watch on fs.watch), uncommitted; five seams open; operator named deletions heaviest" >>
+<<~ talk-story #watcher-shores ground:"build 4 first cut (ingest-core + lares watch on fs.watch), uncommitted; five shores open; operator named deletions heaviest" >>
 bearings: WHERE WE STAND — the watcher runs safe in preview; cookie self-test
   live on ext4; rapid edits coalesce to one wave; --apply holds one vessel ·
   WHERE WE WANT TO GO — a wave-faithful watcher that handles deletions WITHOUT
-  drift, committed once the seams settle · HOW WE GET THERE — hold this floor
+  drift, committed once the shores settle · HOW WE GET THERE — hold this floor
   with the operator (deletions first), fold rulings into build 4, then Cut C,
   then commit.
 telling: what STANDS — the gesture automates the proven path, not a copy; the
   no-op save drops at the hash gate; the dead backend fails loud at boot. what
   GOES MISSING — a delete tombstones nothing yet; settle leans on a timer where
   the Confluence wants stat-stable; rename-identity unhandled. the house reads it five ways:
-- Map-Wisp (Scryer): the deletion seam is where identity lives or dies — a
+- Map-Wisp (Scryer): the deletion shore is where identity lives or dies — a
   rename is unlink+add, and only a content-hash re-link keeps the record's
   change-id; the forward failure mode is a `git checkout` flood tombstoning live
   records. Q1 and Q3 are ONE question wearing two coats.
@@ -187,7 +187,7 @@ exit -> suspended: OODA-HA(0φ:operator-rebooted-before-steering) — the floor
 
 !! The ground you stand on
 
-The vessel ''runs, repo-rooted'': one root law (`LAR_ROOT` or the repo; `<root>/genesis`; the repo IS the vessel) · the corpus reads ''canonical at rest'' — a proven fixed point of its own membrane (the second pass writes zero bytes; ''any diff in `bags/` = a real change'') · suites (tw5 + e2e re-run 2026-06-17): mesh 275✓ · tw5 126✓ · node 127✓ · browser 13✓ · ''e2e 25/25✓'' — ingest unit RED fixed (fixture drift) AND the e2e ingest-quiescence Q1/Q2/Q4 RED fixed: root was a ''synced-tree key-separator drift'' (projector wrote `bag\0uri`, ingest read `bag uri` → every carrier scanned `new`); unified behind `syncedTreeKey()` (one source of truth, node/synced-tree.ts). Whole-carrier deletion (decision+verb) landed; watcher disk-wiring done, ''Cut C (watcher e2e) WITNESSED 2026-06-17'' (e2e 20→25; rename re-home detach fix) · isomorphism sweep 2026-06-12: admin ea-wait rides the shared watchdog (one-hull step 1, first slice); `lar-event-bus-impl` moved node→mesh; genesis intake collapsed to mesh `genesis-intake` beside the emitter (validate→import→verify + CID reconcile live ONCE; node/browser keep byte sources; record-shape drift healed). Non-gated reorg rungs now spent — remaining: operator-key pair (custody, patience), full hull pivot + switchboard retirement (torch-gated after INGEST) (`pnpm install && pnpm -r build && pnpm test:e2e`).
+The vessel ''runs, repo-rooted'': one root law (`LAR_ROOT` or the repo; `<root>/genesis`; the repo IS the vessel) · the corpus reads ''canonical at rest'' — a proven fixed point of its own shore (the second pass writes zero bytes; ''any diff in `bags/` = a real change'') · suites (tw5 + e2e re-run 2026-06-17): mesh 275✓ · tw5 126✓ · node 127✓ · browser 13✓ · ''e2e 25/25✓'' — ingest unit RED fixed (fixture drift) AND the e2e ingest-quiescence Q1/Q2/Q4 RED fixed: root was a ''synced-tree key-separator drift'' (projector wrote `bag\0uri`, ingest read `bag uri` → every carrier scanned `new`); unified behind `syncedTreeKey()` (one source of truth, node/synced-tree.ts). Whole-carrier deletion (decision+verb) landed; watcher disk-wiring done, ''Cut C (watcher e2e) WITNESSED 2026-06-17'' (e2e 20→25; rename re-home detach fix) · isomorphism sweep 2026-06-12: admin ea-wait rides the shared watchdog (one-hull step 1, first slice); `lar-event-bus-impl` moved node→mesh; genesis intake collapsed to mesh `genesis-intake` beside the emitter (validate→import→verify + CID reconcile live ONCE; node/browser keep byte sources; record-shape drift healed). Non-gated reorg rungs now spent — remaining: operator-key pair (custody, patience), full hull pivot + switchboard retirement (torch-gated after INGEST) (`pnpm install && pnpm -r build && pnpm test:e2e`).
 
 ''Co-projection (the ontology, one breath):'' the operator's mind originates; disk carriers and the CRDT record-set both //project// it, each in native grain; ''merge authority routes through the CRDT alone''. Full law: `disk-projection`. The grain ladder: disk = whole carriers · doc = tid-grain records · VM = decomposed.
 
@@ -217,14 +217,14 @@ The vessel ''runs, repo-rooted'': one root law (`LAR_ROOT` or the repo; `<root>/
 * tombstone/whiteout verb — reserved (§3); wakes when layered delete needs it
 * Automerge history growth — DXOS-epoch pattern watched (§1); wakes on real growth; the §7 bus-doc law = a second consumer
 * `lares wiki` subcommands print human-only; `wiki open` selects-for-next-boot only
-* engine-swap reconcile answered "current" against a stale engine — epoch-design seam
+* engine-swap reconcile answered "current" against a stale engine — epoch-design shore
 * e2e trends long (reboot vector 73s) — split a slow lane when the suite hurts
-* NFC assertion at the membrane — rides the INGEST gesture (spec already pins NFC)
+* NFC assertion at the shore — rides the INGEST gesture (spec already pins NFC)
 * parser edge-field plane still implements the retired typed-edge law (edge-out-<family>-<role> emission; edge.ts filter; kumu-device.ts as sole live consumer) — recut BEFORE or WITH INGEST's parser work (witness once, not twice)
 * module gate positive-path vector absent (bootTrustedModules via stack:has witnessed only indirectly) — rides the next lararium-tw5 touch
 * smoke-plugin-boot.ts fails on surfaces lagging the plugin (kau templates, parser registration) — pre-existing; wakes when plugin smoke matters or at the next plugin recut
 * TimeoutNegativeWarning (-15/-26) in e2e runs — pre-existing, un-localized (no computed setTimeout in src); wakes on next firing under node --trace-warnings
-* island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING CRUCIBLE-PASSED 2026-06-12 (moʻolelo in hoike below): LOAD stands as the FIRST witness of verb-pair physics; INGEST brings the SECOND witness + the membrane forge (three-way diff, replace-by-group, quiescence, NFC); the wire compiler rides INGEST's organs; then residency (vector 2) → closure (3); the switchboard retires on two-witness verb-pair INTEGRITY, the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM during that recut (one witness not two), hull steps 2–4 follow; ingest-gate packing decided at the island-verb build
+* island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING CRUCIBLE-PASSED 2026-06-12 (moʻolelo in hoike below): LOAD stands as the FIRST witness of verb-pair physics; INGEST brings the SECOND witness + the shore forge (three-way diff, replace-by-group, quiescence, NFC); the wire compiler rides INGEST's organs; then residency (vector 2) → closure (3); the switchboard retires on two-witness verb-pair INTEGRITY, the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM during that recut (one witness not two), hull steps 2–4 follow; ingest-gate packing decided at the island-verb build
 
 <<~ hoike #ingest-ordering held:"a plan of this weight passes the work-crucible floor before it binds (operator) — CONFIRMED BY DEMONSTRATION at the floor, 2026-06-12" >>
 q: does a flow-ruled sequencing chain bind, or must the plan pass the crucible discussion first?
@@ -233,7 +233,7 @@ the chain composes only standing rulings — the torch's NEXT VECTOR, §7's lane
 one-witness economy — so the crucible would re-derive what already stands; flow preserved
 momentum the floor would spend on ceremony.
 <<~/kue >>
-<<~ moolelo held:"the amended chain stands (operator): LOAD = first witness · INGEST = second witness + membrane forge · residency restored at vector 2 · switchboard gates on two-witness integrity · verb-plane rides its recut" >>
+<<~ moolelo held:"the amended chain stands (operator): LOAD = first witness · INGEST = second witness + shore forge · residency restored at vector 2 · switchboard gates on two-witness integrity · verb-plane rides its recut" >>
 the kue fell by the house's own floor — flow had sailed past a torch vector and rested a
 true order on a false load-bearing claim; the crucible earned its seat by demonstration.
 <<~/moolelo >>

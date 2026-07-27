@@ -66,7 +66,7 @@ export const VERB_GROUP = {
 // ── PROVIDER interfaces — EXACTLY the node call-set each verb body reaches ─────────────────────────
 
 /** The pooled mempalace READ client face the recall verb drives inside a `withClient` scope (the
- *  three read ops; the verbatim PLACE-memory membrane). */
+ *  three read ops; the verbatim PLACE-memory shore). */
 export interface RecallClient {
   getImago(imagoId: string): Promise<Record<string, unknown>>;
   search(args: Record<string, unknown>): Promise<Record<string, unknown>>;
@@ -209,7 +209,7 @@ export interface DaemonVerbProvider {
   sensePurge(input: { name: string; approve?: unknown }): Promise<Record<string, unknown>>;
 }
 
-/** telemetry provider — the lar_* writeback membrane. The impl owns the whole writeback +
+/** telemetry provider — the lar_* writeback shore. The impl owns the whole writeback +
  *  TelemetryUnavailable→Error translation node-side (the class is node-only), returning the verb's
  *  exact `{ wing, ...result }` shape. */
 export interface TelemetryProvider {
@@ -298,7 +298,7 @@ async function filteredList(
   };
 }
 
-/** recall — the mempalace READ membrane (semantic-search | list | get | multi-graph fuse). Requires
+/** recall — the mempalace READ shore (semantic-search | list | get | multi-graph fuse). Requires
  *  the mempalace read-client + the form store (the dual fuse). */
 export function recallVerbCap(): CapModule {
   return {
@@ -384,7 +384,7 @@ export function recallVerbCap(): CapModule {
   };
 }
 
-/** lar-telemetry — the mempalace WRITE membrane (the lar_* gradient writeback). Requires the
+/** lar-telemetry — the mempalace WRITE shore (the lar_* gradient writeback). Requires the
  *  telemetry writeback provider. */
 export function telemetryVerbCap(): CapModule {
   return {

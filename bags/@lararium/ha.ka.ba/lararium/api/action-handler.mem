@@ -11,7 +11,7 @@ manaoio     = 15
 namespace   = "&#x0950; &#x0901;"
 register    = "Synthesis"
 retain      = true
-role        = "source-of-truth: the Residency Model ACTION verb handler family — six verbs, withEffectRecord wrapping, cap-gate law, dispatch seam (Sprint 5)"
+role        = "source-of-truth: the Residency Model ACTION verb handler family — six verbs, withEffectRecord wrapping, cap-gate law, dispatch shore (Sprint 5)"
 source-file = "packages/lararium-tw5/src/action-handler.ts"
 status      = "approved"
 status-date = "2026-06-01"
@@ -33,7 +33,7 @@ The operator-facing residency gesture surface. Six ACTION verbs dispatch through
 
 Source of truth: `packages/lararium-tw5/src/action-handler.ts`. Handlers run
 ''wiki-scope inside the TW5 VM'' (not `@lararium/node`) — registered via
-`@lararium/node`'s `island-behaviors.ts`, invoked through the dispatch seam,
+`@lararium/node`'s `island-behaviors.ts`, invoked through the dispatch shore,
 operated from the CLI by `lares act`.
 
 <<~/ahu >>
@@ -88,7 +88,7 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''neve
 
 <<~ ahu #dispatch >>
 
-!! Dispatch Seam
+!! Dispatch Shore
 
 ```
 lares act <VERB> …            ← @lares/cli/src/commands/act.ts (operator surface)

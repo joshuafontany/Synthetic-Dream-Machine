@@ -77,7 +77,7 @@ export interface IngestOps<R = TiddlerFields> {
 /**
  * The memetic-wikitext ops — the DEFAULT congruence. `decideIngest` reads these
  * when a caller passes no `ops`, so the memetic callers (and their vectors) run
- * unchanged: deserialize through the parser + membrane on the shared diagnostics
+ * unchanged: deserialize through the parser + shore on the shared diagnostics
  * channel, render through `expandMemeRefs`, guard fidelity on the ahu slot-set.
  */
 export const memeticIngestOps: IngestOps<TiddlerFields> = {
@@ -133,7 +133,7 @@ export function decideIngest<R = TiddlerFields>(
     return { kind: "noop", reason: "disk-matches-synced" };
   }
 
-  // 2 — the gradient gate. The family's deserialize reports the parse + membrane
+  // 2 — the gradient gate. The family's deserialize reports the parse + shore
   // faults on one diagnostics channel; the gate reads a grade rather than sniffing a
   // synthesised tiddler title. It refuses at `error`, the one fault that costs the
   // operator their bytes: a carrier that stopped round-tripping. Every recovery grades
@@ -150,12 +150,12 @@ export function decideIngest<R = TiddlerFields>(
   }
   const canonicalText = congruence.render(uri, records);
   if (canonicalText === "") {
-    return { kind: "refuse", warnings: [`${uri}: membrane produced no canonical render`], diagnostics };
+    return { kind: "refuse", warnings: [`${uri}: shore produced no canonical render`], diagnostics };
   }
 
   // 3 — canonical-equivalence gate: the edit changed framing only.
   // The NOOP rests on ONE trust — that render(parse(disk)) faithfully carries
-  // every byte the disk holds. A LOSSY membrane breaks that trust: a structural
+  // every byte the disk holds. A LOSSY shore breaks that trust: a structural
   // slot the disk declares that the render drops (the ahu-drop — a slash-path kahea
   // ref the recompose once clipped) makes render(parse(disk)) collapse toward the
   // stale current render, so an edit INSIDE the dropped slot reads as "framing

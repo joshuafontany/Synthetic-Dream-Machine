@@ -8,7 +8,7 @@
  *   recall(query) — LOCAL-FIRST tiddler recall over the planes that exist today: title match (content
  *                   floor) · sigil-head match (structure, the memetic-wikitext reader's strata) · shingle-Jaccard
  *                   neighbors (form) · plus an OPTIONAL semantic tier behind the injectable
- *                   {@link TextEmbedder} seam (cosine flat-scan; no model dependency — the COOP/COEP
+ *                   {@link TextEmbedder} shore (cosine flat-scan; no model dependency — the COOP/COEP
  *                   deployment fork stays the operator's).
  *   couple()      — answers honestly UNBUILT: the cross-island coupling read awaits the mesh-of-wikis
  *                   fork (readKiCorpus over FFZ-aligned cells across islands); this verb never fakes it.
@@ -16,8 +16,8 @@
  * PONO-HOME LAW (operator): a wiki that RUNS as a TW5 VM senses itself IN-VM — the plugin blob's
  * WikiSenseIndexer + `wikisense` filter operator carry that beat natively. THIS cap serves the
  * wikis that hold NO VM: {@link createWikiSensorium} stands the hull over a composite-store island
- * through the {@link WikiCorpusReader} seam ({@link createWikiSensoriumOverReader} takes any
- * reader). Every doc crosses the seam as its WHOLE open field record (operator law — title =
+ * through the {@link WikiCorpusReader} shore ({@link createWikiSensoriumOverReader} takes any
+ * reader). Every doc crosses the shore as its WHOLE open field record (operator law — title =
  * pet-name key, no set schema); the fold math lives ONCE in wiki-sense-fold.ts — shipped in the
  * plugin as a library tiddler — so the in-VM beat and the composite beat agree by construction.
  *
@@ -62,12 +62,12 @@ const WIKI_SENSORIUM_CAP: SensoriumContract = {
   has: ["content", "structure", "form", "coupling"],
 };
 
-// ── the semantic SEAM (an interface, never a dependency) ────────────────────────────────────────────
+// ── the semantic SHORE (an interface, never a dependency) ────────────────────────────────────────────
 
 /**
- * The injectable semantic-tier seam — an async batch text-embedder. The cap DEFINES the shape and calls
+ * The injectable semantic-tier shore — an async batch text-embedder. The cap DEFINES the shape and calls
  * it when present; it never imports a model (transformers.js / COOP-COEP stays the operator's fork).
- * Browser scale (< 50k vectors) rides a flat cosine scan, so no index rides behind this seam either.
+ * Browser scale (< 50k vectors) rides a flat cosine scan, so no index rides behind this shore either.
  */
 export type TextEmbedder = (texts: readonly string[]) => Promise<readonly Float32Array[]>;
 
@@ -98,7 +98,7 @@ export interface WikiRecallResult {
   readonly structure: readonly WikiRecallHit[];
   /** shingle-sharing neighbors of `likeTitle`, scored by Jaccard SIMILARITY (1 − jaccardDistance). */
   readonly form: readonly WikiRecallHit[];
-  /** cosine-ranked bodies against `text` — null when NO embedder rides the seam (the tier stays honest-absent). */
+  /** cosine-ranked bodies against `text` — null when NO embedder rides the shore (the tier stays honest-absent). */
   readonly semantic: readonly WikiRecallHit[] | null;
 }
 
@@ -129,7 +129,7 @@ export interface WikiSensoriumHandle extends WikiSensorium {
 }
 
 export interface WikiSensoriumOptions {
-  /** fills the semantic seam; absent = recall's semantic tier reads null (honest absence, no fallback). */
+  /** fills the semantic shore; absent = recall's semantic tier reads null (honest absence, no fallback). */
   readonly embedder?: TextEmbedder;
 }
 
@@ -145,7 +145,7 @@ export function createWikiSensoriumOverReader(
   let cached: Promise<CorpusFold> | null = null;
   // the log moved → the memo dies with the snapshot it summarized (never a stale read past a write).
   const unsub = reader.subscribe(() => { cached = null; });
-  // the reader's own stalk supplier (per-title memo / cache law) fills foldCorpus's seam when present.
+  // the reader's own stalk supplier (per-title memo / cache law) fills foldCorpus's shore when present.
   const fold = (): Promise<CorpusFold> =>
     (cached ??= reader.docs().then((docs) => foldCorpus(docs, reader.stalkOf)));
 
@@ -165,7 +165,7 @@ export function createWikiSensoriumOverReader(
       const structure = query.sigilHead !== undefined ? structureTier(f, query.sigilHead, limit) : [];
       const form = query.likeTitle !== undefined ? formTier(f, query.likeTitle, limit) : [];
 
-      // semantic — the seam-gated tier: ONE batch embed (query + every body), then a flat cosine scan.
+      // semantic — the shore-gated tier: ONE batch embed (query + every body), then a flat cosine scan.
       // No embedder ⇒ null (the tier reads honest-absent, never a degraded fallback ranking).
       let semantic: WikiRecallHit[] | null = null;
       if (opts.embedder && query.text !== undefined && query.text.length > 0 && f.docs.length > 0) {
@@ -319,8 +319,8 @@ export function hasWikiSensorium(opts: WikiSensoriumOptions = {}): IslandCap {
 // ── the cross-tier witness (one hull, run identically on node AND in a browser worker) ──────────────
 
 /**
- * The deterministic seam-witness embedder — 26-dim letter-frequency vectors. A WITNESS FIXTURE proving
- * the {@link TextEmbedder} seam carries a real semantic tier end-to-end; it stands in for no model
+ * The deterministic shore-witness embedder — 26-dim letter-frequency vectors. A WITNESS FIXTURE proving
+ * the {@link TextEmbedder} shore carries a real semantic tier end-to-end; it stands in for no model
  * (the model fork stays the operator's). A query equal to a doc's body lands cosine 1 on that doc.
  */
 export const letterFrequencyEmbedder: TextEmbedder = async (texts) =>
@@ -341,7 +341,7 @@ export interface WikiSensoriumWitness {
   readonly obstruct: WikiCoherenceVerdict;
   /** form recall seeded on canon-a — expects canon-b top (they share the recurring phrase). */
   readonly formRecall: WikiRecallResult;
-  /** recall WITHOUT an embedder — expects semantic:null (the seam honestly absent). */
+  /** recall WITHOUT an embedder — expects semantic:null (the shore honestly absent). */
   readonly bareRecall: WikiRecallResult;
   /** recall WITH the letter-frequency embedder, query = plain's own body — expects plain cosine-top. */
   readonly semanticRecall: WikiRecallResult;

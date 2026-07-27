@@ -22,7 +22,7 @@
  * config + these hooks, and the shared body wires the rest. Isomorphism-by-composition.
  *
  * Home: tw5 (not mesh) — resolveWikiSpec calls buildWikiMountSpec, which lives in tw5; the layer
- * law forbids mesh importing tw5. Both vessels already import tw5, so this seam sits below both.
+ * law forbids mesh importing tw5. Both vessels already import tw5, so this shore sits below both.
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/vessel-residency-wiring
  */
@@ -88,7 +88,7 @@ export interface VesselResidencyConfig {
 /** The now-live pieces `wireToPool` composes over — supplied inside the vessel's makePool, once
  *  the pool + daemon + genesis assembly stand. */
 export interface WireToPoolArgs {
-  /** The sovereign daemon core — carries resolveBinding (for the resolver) + the residency/alert seams. */
+  /** The sovereign daemon core — carries resolveBinding (for the resolver) + the residency/alert shores. */
   daemon: DaemonVmCore;
   /** The live island pool — the activation cap reads it + the alert delivery places verbs into it. */
   pool: ActivationPool & VesselResidencyPool & {

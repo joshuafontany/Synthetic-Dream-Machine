@@ -1,8 +1,8 @@
 /**
  * flow-map-read-face — a Herm serves its public FLOW-map over real HTTP, and the disclosure
- * membrane holds AT THE WIRE: only the coarse public projection crosses; the private territory
+ * shore holds AT THE WIRE: only the coarse public projection crosses; the private territory
  * (vessel-local dial-records) never leaves. Proves serve → pull → verify end-to-end on localhost,
- * and witnesses the additive read-face refactor (the membrane export variant).
+ * and witnesses the additive read-face refactor (the shore export variant).
  * Canon: lar:///ha.ka.ba/lararium/mesh/vessel-caps#lares-viales
  */
 
@@ -20,8 +20,8 @@ import { mountFlowMapReadFace } from "../src/oracle-read-face.js";
 
 const SEED = new Uint8Array(32).fill(7); // a fixed, valid ed25519 seed (deterministic)
 
-describe("the FLOW-map read-face — a Herm serves the public projection, membrane at the wire", () => {
-  test("serve → pull round-trips, and the membrane drops the private territory", async () => {
+describe("the FLOW-map read-face — a Herm serves the public projection, shore at the wire", () => {
+  test("serve → pull round-trips, and the shore drops the private territory", async () => {
     const repo = new Repo({ sharePolicy: async () => true });
 
     // a mesh-palace doc: one PUBLIC dial (dreamnet scale, crosses) + one vessel-LOCAL dial (no scale, stays).

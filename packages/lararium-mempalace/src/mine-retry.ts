@@ -10,7 +10,7 @@
  * durability — WAL re-queue, honest "mine-failed" — owns it).
  *
  * Thunk-based (inject the closure, not an interface): each caller owns its own exe resolution,
- * argv, options, and test seam; this module owns ONLY the busy-detect + backoff + retry loop.
+ * argv, options, and test shore; this module owns ONLY the busy-detect + backoff + retry loop.
  *
  * The `*WithServo` variants COMPOSE the self-tuning timeout servo (mine-timeout) ON TOP of the
  * busy-retry: each attempt runs under an adaptive `timeout` (the thunk passes it to execFileSync),

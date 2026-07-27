@@ -3,7 +3,7 @@
  *
  * The operator ruling: the follow-graph rides the sovereign @circles Automerge doc, PRIVATE-but-fleet-synced
  * (matching @catalog) — a follow shows on ALL the operator's OWN devices, and NEVER on anyone else's. This
- * holds that posture structurally at the sharePolicy seam, no vessel booted:
+ * holds that posture structurally at the sharePolicy shore, no vessel booted:
  *
  *   · @circles is a PRIVATE bag: its random doc id sits OUTSIDE the DeterministicFederationGate's fixed
  *     federatable set {crossroads · who · kapae-antigen · members · persona-KEL}. A cross-operator peer is

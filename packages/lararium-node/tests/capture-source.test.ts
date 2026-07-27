@@ -1,4 +1,4 @@
-/** This Python AI-session seam transports descriptors only, never a session turn body. */
+/** This Python AI-session shore transports descriptors only, never a session turn body. */
 import { EventEmitter } from "node:events";
 
 import { afterEach, describe, expect, test } from "vitest";
@@ -60,7 +60,7 @@ describe("makeSourceCapture", () => {
     opened.push(capture);
     await capture.capture({
       surface: "claude", pointer: "/sessions/session.jsonl", wing: "wing_proj",
-      turnText: "this payload must not cross the descriptor seam",
+      turnText: "this payload must not cross the descriptor shore",
     } as SourceCaptureRequest);
     expect(seen[1]).toEqual({
       op: "capture",

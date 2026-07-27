@@ -1,5 +1,5 @@
 /**
- * ffz-orchestrator — the FFZ node-side FLUID-BAND pipeline (the last live seam).
+ * ffz-orchestrator — the FFZ node-side FLUID-BAND pipeline (the last live shore).
  *
  * Arc + Pulse stamp at CAPTURE (the in-VM annotate, live). The fluid bands — Measure
  * (topic-shift) and Theme (thread cluster) — have no embedder at the capture site, so
@@ -40,7 +40,7 @@
  *   degradation stays graceful: an absent reader (or a session that joins nothing) drops the
  *   run back to the planes present, never breaking the N=1/N=2 paths.
  *
- * Lives BESIDE telemetry-writeback.ts (the other `lar_*` write membrane): one boundary,
+ * Lives BESIDE telemetry-writeback.ts (the other `lar_*` write shore): one boundary,
  * the dependency points node/cli → mempalace, never the reverse.
  *
  * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock · lar:///ha.ka.ba/@lararium/api/living-grammar-palace#unification
@@ -72,7 +72,7 @@ import { mineWithServo } from "@lararium/mempalace";
 import { TIMEOUT_KILL_SIGNAL } from "@lararium/mempalace";
 
 // ───────────────────────────────────────────────────────────────────────────
-// Types — the seam shapes (the python I/O is INJECTED, so the run tests pure).
+// Types — the shore shapes (the python I/O is INJECTED, so the run tests pure).
 // ───────────────────────────────────────────────────────────────────────────
 
 /** One drawer's stored-vector readback record (a row of `loci_io.py embeddings`). */
@@ -93,7 +93,7 @@ export interface DrawerVector {
    * OPTIONAL multi-plane per-step DRIFT signals `[content, form, structure, …]` (higher =
    * more drift on that plane). Present ⇒ the {@link quorumStep} 3-plane servo fuses them; absent
    * ⇒ {@link quorumStep} at N=1 over the content drift derived from `embedding`. The quorum
-   * degrades gracefully to the planes present — the form/structure feed seam (today: unfed → N=1).
+   * degrades gracefully to the planes present — the form/structure feed shore (today: unfed → N=1).
    */
   readonly planes?: readonly number[];
   /**
@@ -152,7 +152,7 @@ export type PatchWriter = (
   patches: ReadonlyArray<{ readonly id: string; readonly patch: Record<string, string | number> }>,
 ) => number;
 
-/** The injected I/O seams. */
+/** The injected I/O shores. */
 export interface OrchestrateDeps {
   readonly readEmbeddings: EmbeddingsReader;
   /** Optional — absent ⇒ Theme stays porous (Measure + Beat still stamp). */
@@ -163,10 +163,10 @@ export interface OrchestrateDeps {
    */
   readonly readFormVectors?: FormVectorReader;
   /**
-   * Optional — absent ⇒ the structure plane never engages (1 or 2 planes per the form seam).
+   * Optional — absent ⇒ the structure plane never engages (1 or 2 planes per the form shore).
    * Present (and a session joins it) ⇒ the structure plane rides as the last plane, the quorum
    * runs at N=3 when the form plane is also present (content · form · structure), or N=2 (content
-   * · structure) when form is absent. Mirrors {@link readFormVectors} — the seam, not new math.
+   * · structure) when form is absent. Mirrors {@link readFormVectors} — the shore, not new math.
    */
   readonly readStructureVectors?: StructureVectorReader;
   readonly writePatches: PatchWriter;
@@ -418,7 +418,7 @@ export function deriveMeasureLabels(
 /**
  * The orchestrator run — read vectors, run the Measure servo per session + the Theme
  * cluster over the wing, overlay the fluid bands onto each drawer's `lar_ffz`, write back.
- * PURE but for the three injected seams ({@link OrchestrateDeps}). Deterministic + idempotent.
+ * PURE but for the three injected shores ({@link OrchestrateDeps}). Deterministic + idempotent.
  */
 export function orchestrateWing(
   wing: string,
@@ -521,7 +521,7 @@ export function orchestrateWing(
 }
 
 // ───────────────────────────────────────────────────────────────────────────
-// The default python-backed seams (loci_io.py — the substrate boundary).
+// The default python-backed shores (loci_io.py — the substrate boundary).
 // ───────────────────────────────────────────────────────────────────────────
 
 interface PyContext {
@@ -678,7 +678,7 @@ export function pythonPatchWriter(
 }
 
 /**
- * The LIVE run — wire the python-backed seams and orchestrate a wing on its Arc-close.
+ * The LIVE run — wire the python-backed shores and orchestrate a wing on its Arc-close.
  * Throws {@link TelemetryUnavailable} when the python substrate is absent (the caller
  * renders a clean error, as telemetry-writeback does).
  */

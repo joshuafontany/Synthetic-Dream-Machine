@@ -7,7 +7,7 @@
  *
  * so every surviving edge is a SIGNIFICANT, phantom-guarded, innovation-based directed coupling,
  * and non-significant edges are zeroed (never read as coupling). This is
- * the surface the node-side reader and the sensory-seam call; nothing downstream re-derives it.
+ * the surface the node-side reader and the sensory-shore call; nothing downstream re-derives it.
  *
  * Platform-blind: composes ./signed-innovation + ./mesh-coupling-mv + ./cmi-significance.
  * Meme: lar:///ha.ka.ba/lararium/mesh/flow

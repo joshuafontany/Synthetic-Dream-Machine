@@ -1,5 +1,5 @@
 /**
- * sensory-seam — the generic child-clasp: any child turns events into frames via a signal map;
+ * sensory-shore — the generic child-clasp: any child turns events into frames via a signal map;
  * corroborate + the two-signal read compose unchanged. Instantiated for authority and flow.
  */
 import { describe, test, expect } from "vitest";
@@ -19,7 +19,7 @@ const CORROBORATES_AUTH: MeshCoupling = {
   sovereign: false, phantomGuarded: true,
 };
 
-describe("sensory-seam — one clasp, three children", () => {
+describe("sensory-shore — one clasp, three children", () => {
   test("the GENERIC adapter maps any event to a frame (signal + optional content)", () => {
     interface E extends SensedEvent { readonly v: number; readonly name?: string }
     const a = childStreamAdapter<E>("test", (e) => [e.v], (e) => e.name);

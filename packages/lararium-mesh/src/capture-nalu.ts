@@ -74,7 +74,7 @@ export const PONO_FLUSH_GATE: FlushGate = {
 
 /**
  * Drains a batch to its memory-home and returns the count filed; THROWS to signal the
- * batch failed (CaptureNalu re-queues with backoff). ONE verb — the isomorphic seam: a
+ * batch failed (CaptureNalu re-queues with backoff). ONE verb — the isomorphic shore: a
  * node vessel composes it from an NDJSON spool + `mine --source ndjson`, a browser vessel
  * from an IndexedDB write or a relay-send. CaptureNalu never knows which substrate filed
  * the batch (role = capability ≠ platform).

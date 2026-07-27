@@ -19,7 +19,7 @@
  * NO-GLOBAL-NOW: a peer's membership + Kapae status the cas-wire gate reads is a local replica as-of-last-sync — this
  * transport proves WHO a peer is, never adjudicates membership (that stays the cas-wire gate's local read).
  *
- * Node-side (the transport branch); the `MembershipChannel` seam + the file impl stay platform-blind.
+ * Node-side (the transport branch); the `MembershipChannel` shore + the file impl stay platform-blind.
  * Meme: lar:///ha.ka.ba/lararium/node/authenticated-membership-relay
  */
 
@@ -158,7 +158,7 @@ export class AuthenticatedWSMembershipChannel implements MembershipChannel {
   /**
    * Connect + complete the proof-of-possession handshake. Resolves once the relay returns `auth-ok`.
    *
-   * `onClose` fires when a LIVE (post-auth-ok) channel's socket drops — the seam a reconnecting dialer watches
+   * `onClose` fires when a LIVE (post-auth-ok) channel's socket drops — the shore a reconnecting dialer watches
    * to re-dial + re-fold its board (a Herm's HEAL tooth). A drop BEFORE auth-ok rejects the pending connect
    * instead, so a dialer reschedules on it too (never hangs a half-open dial). Both settle exactly once.
    */

@@ -2,7 +2,7 @@
  * browser-persona-panel.test.ts — the @daemon persona surface's data flow, over REAL IndexedDB.
  *
  * The panel is projection-rendered (a worker+camera boot vitest-browser can't easily drive), so
- * these tests stand the SEAMS the panel rides: the vessel-side mint→list→wear round-trip against
+ * these tests stand the SHORES the panel rides: the vessel-side mint→list→wear round-trip against
  * the browser persona vault (exactly the sequence the persona-mint / persona-refresh / persona-wear
  * main-verbs orchestrate), the custody-by-type FAIL-CLOSED on wearing an unheld root, and the
  * pure panel-state shaping (personaPanelStateArgs) the `persona-state` worker verb writes.

@@ -43,13 +43,13 @@ The `BrowserAuthorityPool` manages worker lifecycle. It holds warm authorities
 keyed by wiki URI. It does not expose internal worker handles to callers.
 Callers acquire a `BrowserAuthorityLease` and return it. The pool decides what to keep warm.
 
-''BV-4 — Plugin membrane defines the TW5-content boundary.''
+''BV-4 — Plugin shore defines the TW5-content boundary.''
 TW5-native rendering content (tiddlers, startup modules, page-chrome fragments)
 lives inside the compiled plugin blob. Host TS carries no TW5 page chrome.
 The island reads the plugin blob bytes from the `@lararium` CRDT doc after Repo sync —
 no blob bytes transfer in the manifest. `coreHash` identifies the blob; the mesh delivers it.
 
-''BV-5 — Projection adapters mark edges, not seams.''
+''BV-5 — Projection adapters mark edges, not shores.''
 Adapters translate worker-produced render inputs into host surfaces (HTML, canvas, HUD).
 They carry no sovereign state. They translate; they do not own.
 
@@ -65,7 +65,7 @@ Each island authority runs its own rAF drain loop (or `setTimeout` fallback in e
 ''BV-8 — RootTemplate supplies source material, not constitutional authority.''
 `$:/core/ui/RootTemplate` and `$:/core/ui/PageTemplate` name prior art.
 The Lararium browser vessel owns its root/frame contract.
-Any surviving reference to these tiddlers must live inside the plugin membrane
+Any surviving reference to these tiddlers must live inside the plugin shore
 or behind the named adapter boundary in `tw5-browser-surface.ts`.
 
 ''BV-9 — Sovereign Worker boot requires `Content-Security-Policy: worker-src 'self'`.''
@@ -97,7 +97,7 @@ Three packages carry the browser vessel. Responsibility divides cleanly.
 | `@lararium/tw5` | TW5 engine wrapper, content-addressed boot artifacts, plugin build pipeline, projection-neutral render interfaces | Browser frame logic, IndexedDB, island spawn code, pool orchestration |
 | `@lararium/browser` | Browser vessel open/close, island pool orchestration, IndexedDB and local persistence, sync transport ownership, host frame manager, hot/admin wiki swap, browser-side projection adapters, browser plugin blob generation | Node-only APIs, piscina, filesystem, any server-side auth surface |
 
-The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki-worker.ts`, and the `BrowserAuthorityPool` implementation (S0–S3 landed; §8 gate closed). The open seam for S9 S4: real boot path — `IndexedDBStorageAdapter` per island Worker Repo, WebCrypto-derived operator keypair, `runFoundingCeremony` + `runApplyAdmitPayload` from `@lararium/keyhive`, presence via `broadcast()`. Island Sovereignty Law §1–§8 all hold gate proofs. New code enters by passing the migration allowlist check.
+The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki-worker.ts`, and the `BrowserAuthorityPool` implementation (S0–S3 landed; §8 gate closed). The open shore for S9 S4: real boot path — `IndexedDBStorageAdapter` per island Worker Repo, WebCrypto-derived operator keypair, `runFoundingCeremony` + `runApplyAdmitPayload` from `@lararium/keyhive`, presence via `broadcast()`. Island Sovereignty Law §1–§8 all hold gate proofs. New code enters by passing the migration allowlist check.
 
 <<~/ahu >>
 

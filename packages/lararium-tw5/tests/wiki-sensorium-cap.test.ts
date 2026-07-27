@@ -4,8 +4,8 @@
  * The SAME hull runs here and in the browser tier (browser/tests/wiki-sensorium-cap.test.ts):
  * `runWikiSensoriumWitness()` stands the consistency keystone's fixture islands and drives every perceiver verb —
  * cohere (glue + seeded obstruction, both organs), form-recall (shingle-Jaccard neighbors), the
- * semantic seam (the deterministic letter-frequency embedder — no model), and couple's honest
- * unbuilt refusal. This tier ALSO witnesses the node-reachable seams: the content/structure recall
+ * semantic shore (the deterministic letter-frequency embedder — no model), and couple's honest
+ * unbuilt refusal. This tier ALSO witnesses the node-reachable shores: the content/structure recall
  * tiers, the volatile memo's change-invalidation, and the island-cap signal surface.
  *
  * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
@@ -64,7 +64,7 @@ describe("hasWikiSensorium — node tier", () => {
     if (plain) expect(canonB.score).toBeGreaterThan(plain.score);
   });
 
-  test("the semantic seam carries a real tier when filled — and reads null when empty", async () => {
+  test("the semantic shore carries a real tier when filled — and reads null when empty", async () => {
     const w = await runWikiSensoriumWitness();
     // no embedder → the tier stays honest-absent, never a degraded fallback.
     expect(w.bareRecall.semantic).toBeNull();
@@ -115,7 +115,7 @@ describe("hasWikiSensorium — node tier", () => {
   test("the island cap claims the three verb signals and posts SENSORIUM_FRAME answers", async () => {
     const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-cap", GLUE_SEEDS);
     const posted: Array<Record<string, unknown>> = [];
-    // a minimal island context — only the seams this cap touches (composite · post · wikiUri).
+    // a minimal island context — only the shores this cap touches (composite · post · wikiUri).
     const ctx = {
       composite: island,
       wikiUri: "lar:///ha.ka.ba/bags/@sensorium-cap",

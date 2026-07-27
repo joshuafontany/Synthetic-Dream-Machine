@@ -105,7 +105,7 @@ IS the //liveness// coupling below.
 
 !! Steward SOURCE → Public READ Projection
 
-The board governs through a ''projection seam'', never a single writable doc:
+The board governs through a ''projection shore'', never a single writable doc:
 
 * ''The SOURCE'' — a ''threshold-signed steward source'' the keeper-cabal-quorum holds.
   The cap-tier lives in ''WHO-CAN-SIGN-THE-SOURCE'', never in a write-cap on the published
@@ -116,7 +116,7 @@ The board governs through a ''projection seam'', never a single writable doc:
   projection against the steward signatures; they never write the published surface.
 
 ''NOT one cap-tiered doc (MUST-NOT).'' A single doc with a write-cap names a ''single''
-''point of capture'' — steal the cap, own the board. The projection-nalu seam dissolves
+''point of capture'' — steal the cap, own the board. The projection-nalu shore dissolves
 that: a sovereign SOURCE → gated wave → public SINK, the read plane carrying no write
 authority at all
 (<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>). ''Users read the''

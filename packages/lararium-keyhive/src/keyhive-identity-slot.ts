@@ -30,12 +30,12 @@
  *     Until then it enforces at runtime only where a call site chooses to invoke
  *     it — construction alone gates nothing.
  *   · TRUE read-confidentiality — denying a *guessed* doc id and hiding the
- *     bytes at rest — is BeeKEM (Keyhive's encryption layer), not this seam.
+ *     bytes at rest — is BeeKEM (Keyhive's encryption layer), not this shore.
  *     This slot gates the sharePolicy ACCESS decision; it does not encrypt.
  *   · verifyDelegation trusts the audience the token NAMES (see its doc): it
  *     confirms that named audience genuinely holds the cap via accessForDoc, but
  *     does not cryptographically bind the *presenter* to the token. Presenter↔
- *     token binding is the WASM sync-time membership proof, not this seam.
+ *     token binding is the WASM sync-time membership proof, not this shore.
  *
  * Meme: lar:///ha.ka.ba/lararium/keyhive/identity-slot
  */
@@ -63,7 +63,7 @@ interface KeyhiveTokenPayload {
   readonly bagUrl:       string;
   readonly access:       CapabilityAccess;
   /** Absolute expiry (epoch ms) if the caller passed expiresIn; else null.
-   *  NOTE (seam): the provider's DelegateArgs carries no expiry, so expiry is
+   *  NOTE (shore): the provider's DelegateArgs carries no expiry, so expiry is
    *  token-advisory only — verifyDelegation enforces it, the crypto layer does
    *  not. Real time-boxing waits on a provider expiry surface. */
   readonly expiresAtMs:  number | null;
@@ -136,7 +136,7 @@ export class KeyhiveIdentitySlot implements IdentitySlot {
    * accessForDoc. A forged token naming an audience never delegated (or since
    * revoked) returns false; only a genuinely-held delegation clears.
    *
-   * SEAM (surfaced, not faked): this trusts the audience the token NAMES. The
+   * SHORE (surfaced, not faked): this trusts the audience the token NAMES. The
    * provider surface exposes no token→presenter resolution, so this cannot
    * cryptographically bind the presenting peer to the token — that binding is
    * the WASM sync-time membership proof. It never returns a bare `true`: every

@@ -29,7 +29,7 @@ export function hasRecipeWatch(): IslandCap {
 }
 
 /**
- * `#has` wiki-projection — the OUT=coalesce render (the `onBoot` seam mounts it: node disk / browser DOM)
+ * `#has` wiki-projection — the OUT=coalesce render (the `onBoot` shore mounts it: node disk / browser DOM)
  * plus the interactivity RETURN leg (a relayed main-thread DOM event → TW5's native handler). ANY TW5 VM
  * island composes this to become surfaceable — the @daemon inherits the SAME cap the pinned wiki carries, so
  * "pin the daemon" and "pin any wiki" ride one path (it's all the same VM under the hood). role = capability

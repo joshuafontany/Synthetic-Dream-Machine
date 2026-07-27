@@ -56,7 +56,7 @@ export interface ProbeOptions {
 }
 
 /**
- * The isomorphic load-probe seam. A platform supplies ONE implementation — the node
+ * The isomorphic load-probe shore. A platform supplies ONE implementation — the node
  * daemon a child_process boundary, a browser vessel a Worker boundary — and the shared
  * keel depends only on this method.
  */

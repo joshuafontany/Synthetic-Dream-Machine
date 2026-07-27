@@ -4,10 +4,10 @@
  * channel between separate vessels. REAL Keyhive, no mocks.
  *
  * This is the swarm test the operator ruled: file/POST FIRST (ship it fast), the channel
- * a strangler-fig SEAM (MembershipChannel) so live-WS drops in later untouched-above.
- * Here the seam's impl is FileMembershipChannel — envelopes as JSON files in a shared
+ * the MembershipChannel SHORE — file/POST rides below it here, live-WS drops in untouched-above.
+ * Here the shore's impl is FileMembershipChannel — envelopes as JSON files in a shared
  * dir (the two-vessel e2e's admit.json move, generalized to N vessels + broadcast). In
- * Docker the same seam becomes a shared volume / HTTP-POST; the ceremony never knows.
+ * Docker the same shore becomes a shared volume / HTTP-POST; the ceremony never knows.
  *
  * The drift (the WHO-plane crossing the transport, at last):
  *   1. FOUND    — the founder founds a shared multi-human cabal-realm.
@@ -34,7 +34,7 @@ import {
   type MembershipChannel, type MembershipEnvelope,
 } from "@lararium/mesh";
 
-// ── FileMembershipChannel — the file/POST impl behind the seam (strangler-fig cut 1). ──
+// ── FileMembershipChannel — the file/POST impl behind the shore — one of two live forms, chosen by deployment. ──
 // Envelopes ride as JSON files in a shared dir; per-recipient seen-set = deliver-once.
 class FileMembershipChannel implements MembershipChannel {
   private seq = 0;
@@ -105,7 +105,7 @@ async function main(): Promise<void> {
 
   // ── STAGE 3 — CONTACT: each joiner offers its contact-card → the founder ───────
   // The contact-card is BINARY (UTF-8 bytes); a file/POST channel carries JSON, so the
-  // sender base64-encodes it (the real channel's binary-safety burden, not the seam's).
+  // sender base64-encodes it (the real channel's binary-safety burden, not the shore's).
   const b64 = (u: Uint8Array): string => Buffer.from(u).toString("base64");
   await channel.offer({ kind: "contact-card", from: "vessel-B", to: "founder", payload: b64(await vesselB.contactCard()) });
   await channel.offer({ kind: "contact-card", from: "vessel-C", to: "founder", payload: b64(await vesselC.contactCard()) });
@@ -149,7 +149,7 @@ async function main(): Promise<void> {
   console.log("[swarm] =========================================================");
   if (failures === 0) {
     console.log("[swarm] ALL STAGES PASS — the WHO-plane crossed the transport: different");
-    console.log("[swarm] PersonaGroups joined a shared place through a file channel (seam ready for WS).");
+    console.log("[swarm] PersonaGroups joined a shared place through a file channel (shore ready for WS).");
   } else {
     console.log(`[swarm] ${failures} STAGE(S) FAILED.`);
     process.exit(1);

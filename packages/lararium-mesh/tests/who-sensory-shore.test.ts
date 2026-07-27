@@ -1,5 +1,5 @@
 /**
- * who-sensory-seam — the clasp of WHO-plane ⊥ WHO sensorium. Emit (events→frames), consume
+ * who-sensory-shore — the clasp of WHO-plane ⊥ WHO sensorium. Emit (events→frames), consume
  * (→ SignalPattern), corroborate (Signal-2 = a mesh-coupling R-edge into who). The immune-read's
  * two-signal danger-model, now sourced from real perception.
  */
@@ -25,7 +25,7 @@ const QUIET: MeshCoupling = {
   sovereign: true, phantomGuarded: true,
 };
 
-describe("who-sensory-seam — the two halves clasp", () => {
+describe("who-sensory-shore — the two halves clasp", () => {
   test("EMIT: WHO events → frames (signal = [rep, rung, linkAge]; content = petname)", () => {
     const events: WhoEvent[] = [
       { kind: "rep", subject: "0xa", seq: 0, rep: 12, rungLevel: 1, linkAge: 3, petname: "wanderer" },

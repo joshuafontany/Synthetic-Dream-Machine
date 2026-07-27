@@ -47,7 +47,7 @@ export class SyncedTree {
    *
    * DERIVED, never persisted: rebuilt from `map` on load, so the on-disk format stays
    * byte-identical (no migration) and a torn/absent tree degrades to fresh-adoption
-   * exactly as before. The hash normalizes through `tagDigest` (the agile-digest seam),
+   * exactly as before. The hash normalizes through `tagDigest` (the agile-digest shore),
    * so a STORED bare-hex value and a freshly-tagged query land on the SAME index key.
    */
   private byHash = new Map<string, Set<string>>();

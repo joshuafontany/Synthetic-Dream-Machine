@@ -1,10 +1,10 @@
 /**
  * `lares sense recall` — read the verbatim PLACE memory (mempalace) THROUGH the @daemon
- * seat (Option D, the read membrane).
+ * seat (Option D, the read shore).
  *
  * The CLI never touches mempalace directly: it submits a `recall` verb-summons to
  * the running daemon, whose main-thread handler reaches the read-only sidecar and
- * returns hits. The membrane crosses the causal-island shore AT the seat — the
+ * returns hits. The shore crosses the causal-island shore AT the seat — the
  * same web3-only path every other `lares` verb rides (capability-bearing summons,
  * never a session).
  *

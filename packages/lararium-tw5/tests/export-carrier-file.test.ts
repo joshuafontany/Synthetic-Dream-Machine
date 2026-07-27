@@ -88,7 +88,7 @@ describe.skipIf(!coreBlobPresent)("exportCarrierFile — native filetype project
     expect(file).not.toBeNull();
     expect(file!.ext).toBe(".mem");
     expect(file!.metaBody).toBeUndefined();
-    // the SOH carrier envelope surfaces — the membrane recompose ran
+    // the SOH carrier envelope surfaces — the shore recompose ran
     expect(file!.body).toContain("&#x0001;");
   });
 

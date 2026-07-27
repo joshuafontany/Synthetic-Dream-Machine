@@ -14,7 +14,7 @@
  * `makeOperatorDaemonBehavior`, drive its `onEa` (which boots a REAL keyhive via
  * `verifierFactory` → `bootDaemonKeyhive`, setting the closure's `kh`/`mintedByHex`),
  * then route a real `daemon:verify-request` through `onSignal` — the SAME path the
- * host AuthVerifierSeam uses. The verdict returns via `ctx.post`. Real keyhive
+ * host AuthVerifierShore uses. The verdict returns via `ctx.post`. Real keyhive
  * (WASM), real ed25519 edges (buildDeviceDelegation), real V3 proofs
  * (buildAuthResponse + ed25519SignerFromSeed). The verifier is NEVER mocked.
  *
@@ -72,7 +72,7 @@ async function mintEdge(signerSeed: Uint8Array, deviceVk: string): Promise<Devic
  *  (LarWSClientAdapter: buildAuthResponse over ed25519SignerFromSeed). */
 async function mintProof(peerSeed: Uint8Array, peerVk: string, gateVk: string, aud: string): Promise<AuthProofWire> {
   const auth = await buildAuthResponse({
-    contactCard: "",                    // unused by the seam (cardBytes carries identity)
+    contactCard: "",                    // unused by the shore (cardBytes carries identity)
     nonce:       "ab".repeat(32),
     gatePubKey:  gateVk,
     peerPubKey:  peerVk,
@@ -86,7 +86,7 @@ async function mintProof(peerSeed: Uint8Array, peerVk: string, gateVk: string, a
 /** A minimal IslandContext — only what `onEa` touches: verifierFactory's event-store
  *  backing (composite.listVisible/get), the VerbDispatcher.start subscriptions (tw5
  *  wiki listeners + composite.subscribe), and `post` (the verdict sink). Cast like the
- *  worldline-read-vm test's fakeCtx — the seam reads a small, named slice. */
+ *  worldline-read-vm test's fakeCtx — the shore reads a small, named slice. */
 function makeFakeCtx(posted: unknown[]): IslandContext {
   const noopUnsub = () => {};
   return {
@@ -238,7 +238,7 @@ async function main(): Promise<void> {
 
   console.log("[delegation-admit] =========================================================");
   if (failures === 0) {
-    console.log("[delegation-admit] ALL 4 CASES PASS — the device-delegation admission seam holds.");
+    console.log("[delegation-admit] ALL 4 CASES PASS — the device-delegation admission shore holds.");
   } else {
     console.log(`[delegation-admit] ${failures} CASE(S) FAILED.`);
     process.exit(1);

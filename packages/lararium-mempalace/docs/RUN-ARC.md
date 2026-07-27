@@ -36,7 +36,7 @@ The TS spine (`bifurcation-bench.ts`, `sensorium-efe.ts`, `sensorium-fusion.ts` 
 - the **`efeGate` H¹-first fork**: H¹=0 → `efeSelect` (min expected-free-energy verb) · H¹≠0 → surface-disagreement (`R*_sem = log₂ dim H¹` the reconciliation cost).
 - the **ΔF-over-structural-null** recipe: ΔF = F(fitted) − F(null); comparative ΔF is non-vacuous where absolute F is not (the FEP-vacuity pre-emption).
 - the **surrogate-null significance** protocol + **"each trace names the null that destroys ITS OWN structure"** discipline (H¹→jitter, ΔF→raw-F-shuffle, complexity→symbol-shuffle).
-- **optionLoss = Σ(ln π_after − ln π_baseline)** = the empowerment term (reversibility derived, not a boolean grid); γ=1 C-only floor, seam for ARL₀→β; τ never gates the py `VERB_SEATS` HITL surface.
+- **optionLoss = Σ(ln π_after − ln π_baseline)** = the empowerment term (reversibility derived, not a boolean grid); γ=1 C-only floor, shore for ARL₀→β; τ never gates the py `VERB_SEATS` HITL surface.
 
 ## What already stands in py (inherit cleanly)
 
@@ -170,7 +170,7 @@ cid-correspondence null · a triple-overlap/nesting drift-detector fixture that 
      structureless `text` node. Sigils wrap; prose fills (augment-and-wrap, never replace). Without this
      every sigil-less document shared ONE structural hash — the degenerate view that made the skip look
      like the safer choice.
-   - `_drawers` stamps `lar_kind = memetic-wikitext` on every AI-surface drawer (one seam, three surfaces),
+   - `_drawers` stamps `lar_kind = memetic-wikitext` on every AI-surface drawer (one shore, three surfaces),
      so a chat turn never needs a file extension to be recognized as text.
    - `parse_to_tree(None, …)` still returns None: an unlabelled BYTE BLOB carries no grammar and must not
      be force-read as prose. The gradient rides the STAMP, not a blanket fallback.

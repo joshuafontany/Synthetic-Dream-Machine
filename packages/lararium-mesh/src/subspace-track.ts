@@ -9,7 +9,7 @@
  *
  * This rides BESIDE the batch files on PLAIN ARRAYS (U0, deflate — row-major n×k, matching projectBoundary's
  * Wstar/trivialColumns) — it imports nothing from directed-boundary or boundary-residual, so the deferred M4
- * collapse renames those without touching this source (the strangler repoints one witness import, never this
+ * collapse renames those without touching this source (a rename repoints one witness import, never this
  * file). Runtime hand-rolled (no proven JS GROUSE exists; the kernel runs a few vector ops): GROUSE rank-1
  * geodesic step (a per-frame rotation BOUNDED by the arc θ = step·arctan(‖r‖/‖w‖) ≤ step·π/2) toward the
  * innovation + Gram-Schmidt re-orthonormalize — Balzano, Nowak & Recht 2010 (arXiv:1006.4046); Oja 1982

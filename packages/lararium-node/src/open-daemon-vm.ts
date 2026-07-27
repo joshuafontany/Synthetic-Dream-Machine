@@ -8,7 +8,7 @@
  *   - daemonHandle  : waitHandleLocal (merge-on-late-arrival strategy)
  *   - recipe       : built here from libraryBags; storage = nodefs dir
  *
- * Node-ahead capability proxies (authSeam verify-proxy, resolveBinding) compose
+ * Node-ahead capability proxies (authShore verify-proxy, resolveBinding) compose
  * on top via a second listener on the core's exposed worker handle — they are
  * node-only surface the browser has not built yet, not duplication.
  *
@@ -96,7 +96,7 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
     spawnWorker:    (url) => nodeSpawnWorker(url),
   };
 
-  // The wrapper IS the seam — host pieces + recipe/storage + merge-on-arrival daemonHandle;
+  // The wrapper IS the shore — host pieces + recipe/storage + merge-on-arrival daemonHandle;
   // the lifecycle and the whole result surface (DaemonVmCore) live once in the core.
   return openDaemonVmCore(host, {
     repo, daemonHandle, personaHandle, recipe, grants, coreHash,

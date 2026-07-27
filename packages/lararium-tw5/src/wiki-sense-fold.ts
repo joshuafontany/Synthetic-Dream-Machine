@@ -19,7 +19,7 @@ module-type: library
  * `text` rides as one field among many; unknown fields flow through untouched (has-stack clause 4:
  * no fixed enum of blessed caps). The current plane lenses read title+text; the fold hands the
  * whole record through so field-aware lenses (tags, plugin-type, has-stack edges) compose later
- * WITHOUT a seam change.
+ * WITHOUT a shore change.
  *
  * THE HULL RUNS PLATFORM-BLIND and store-blind: no node builtins, no store imports — the fold
  * takes docs, never a store.
@@ -36,7 +36,7 @@ import type { TW5Wiki, TW5Tiddler } from "./types/tiddlywiki.js";
 import { collectEvents } from "./meme-ast/index.js";
 import { stratify } from "./memetic-wikitext-sensorium.js";
 
-// ── the sensed entity — the WHOLE open record crosses the seam ──────────────────────────────────────
+// ── the sensed entity — the WHOLE open record crosses the shore ──────────────────────────────────────
 
 /** One sensed entity — the whole tiddler, an open field record. Title keys; it never schemas. */
 export interface WikiSenseDoc {
@@ -57,7 +57,7 @@ export function senseBodyOf(fields: Readonly<Record<string, unknown>>): string {
   return typeof text === "string" ? text : "";
 }
 
-// ── the per-title lenses (the CURRENT plane math — title+text; the seam carries more) ───────────────
+// ── the per-title lenses (the CURRENT plane math — title+text; the shore carries more) ───────────────
 
 /** The shingle width the form lens mines — a small char k-gram, cheap and deterministic. */
 export const FORM_SHINGLE_K = 6;
@@ -135,7 +135,7 @@ export interface CorpusFold {
 }
 
 /**
- * Fold a corpus of sensed entities. `stalkOf` seams the per-title derivation so a caller with its
+ * Fold a corpus of sensed entities. `stalkOf` shores the per-title derivation so a caller with its
  * own cache law (the VM indexer's `getCacheForTiddler`) supplies cached stalks; absent, the fold
  * derives fresh.
  */

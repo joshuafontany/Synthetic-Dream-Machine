@@ -1,9 +1,9 @@
 /**
- * sensory-seam — the GENERIC child-clasp, generalizing who-sensory-seam to any mesh child
+ * sensory-shore — the GENERIC child-clasp, generalizing who-sensory-shore to any mesh child
  * sensorium. One pattern, instantiated three ways (who · authority · flow): a child turns its
  * events into the sensorium's frames via a modality-specific signal (+ optional content) map;
  * corroboration + the two-signal immune read are already target-parameterized (immune-read /
- * who-sensory-seam), so they compose unchanged.
+ * who-sensory-shore), so they compose unchanged.
  *
  * Each child's SIGNAL is its own domain's numerics — the bands + coupling planes read them, and
  * `mesh-coupling` couples the three streams (phantom-guarded). Content (a name) rides the
@@ -16,7 +16,7 @@
 import type { StreamAdapter, StreamFrame } from "./stream-adapter.js";
 import { immuneReadPattern, type SignalPattern, type ImmuneDials, type ImmuneResponse } from "./immune-read.js";
 import { type MeshCoupling } from "./mesh-coupling.js";
-import { neighborCorroborates } from "./who-sensory-seam.js";
+import { neighborCorroborates } from "./who-sensory-shore.js";
 
 /** The minimal shape any child sensorium's event carries (a per-stream ordering key; no global now). */
 export interface SensedEvent {

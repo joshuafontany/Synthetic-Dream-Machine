@@ -132,7 +132,7 @@ function keyFileName(login: string | null): string {
   return login ? `.vessel-key-${login}.json` : ".vessel-key.json";
 }
 
-// ── Platform seams for the shared keypair lifecycle (vessel-identity-core) ────
+// ── Platform shores for the shared keypair lifecycle (vessel-identity-core) ────
 // node mints via the local CSPRNG (generateKeyPairSync) and persists each keypair
 // as a 0o600 JSON file in the wipe-zone-sibling identity dir, stamping the git
 // email hint. The core (mesh) owns the generate-or-load control flow over these.
@@ -385,7 +385,7 @@ export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array
 //     holding a signed edge from this root — membership is a capability the stack #has, not a plane.
 //
 // The isomorphic control flow (generate/load/wear/custody-refuse/roster) lives in @lararium/mesh's
-// persona-vault — platform-blind. THIS adapter supplies the node seams: per-index 0o600 KeypairStore
+// persona-vault — platform-blind. THIS adapter supplies the node shores: per-index 0o600 KeypairStore
 // slots in `<state>/identity` (outside every `reset`/`rebuild` wipe), a JSON active-persona selector,
 // the anchor store, and the sealed recovery-share store. The SEAL stays in this adapter — the core
 // never sees plaintext seal policy (custody-by-TYPE: each root is the vessel's OWN sovereign secret).
@@ -594,7 +594,7 @@ function writePetnameMap(idDir: string, login: string | null, names: Record<stri
 /**
  * Build the node fs OwnPersonaPetnameStore — the PRIVATE own-persona pet-name map. Login-scoped, 0o600, in
  * the identity home outside every wipe. The map holds only the human's own labels for their own personas;
- * nothing here reaches a board (the never-federates wall is structural — no board write exists in this seam).
+ * nothing here reaches a board (the never-federates wall is structural — no board write exists in this shore).
  */
 export async function makeNodePersonaPetnameStore(): Promise<OwnPersonaPetnameStore> {
   const hint  = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));

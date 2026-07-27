@@ -62,7 +62,7 @@ def stream_words(stream: str) -> "list[str]":
 
 
 def _rank_peaks(strength: np.ndarray, k: int, nms: int) -> "list[int]":
-    """The k strongest positions, no two within `nms` — a burst around one seam must not harvest k slots.
+    """The k strongest positions, no two within `nms` — a burst around one shore must not harvest k slots.
     `nms` derives from k and the length (never from a look at the answer)."""
     order = np.argsort(-strength)
     out: list[int] = []
@@ -111,7 +111,7 @@ def foote_sweep(toks: "list[str]", halves, k: int = K_CUTS) -> dict:
 
 def sequitur_arms(toks: "list[str]", k: int = K_CUTS) -> dict:
     """Induce the SEQUITUR grammar once over the whole stream, read two boundary signals off its hierarchy —
-    the DEPTH CLIFF (|Δ nesting-depth|, where the grammar's reach changes hands) and the SEAM (the ends of the
+    the DEPTH CLIFF (|Δ nesting-depth|, where the grammar's reach changes hands) and the SHORE (the ends of the
     longest top-level spans, where one repeated structure yields to the next). Adapted to the stream machina:
     the induced positions ARE word positions (no line owner to fold back through), so they report as-is."""
     g = induce(toks)
@@ -119,19 +119,19 @@ def sequitur_arms(toks: "list[str]", k: int = K_CUTS) -> dict:
     d = np.asarray(depths, dtype=np.float64)
     n = len(d)
     if n == 0:
-        return {"sequitur-depth": [], "sequitur-seam": [], "_grammar": None}
+        return {"sequitur-depth": [], "sequitur-shore": [], "_grammar": None}
     nms = max(1, n // (2 * k))
     cliff = np.abs(np.diff(d, prepend=d[0]))
     depth_idx = sorted(_rank_peaks(cliff, k, nms))
-    seam_idx: list[int] = []
+    shore_idx: list[int] = []
     for _len, e in sorted(((e - s, e) for s, e, _r in g.top_spans()), reverse=True):
-        if 0 < e < n and all(abs(e - j) >= nms for j in seam_idx):
-            seam_idx.append(e)
-        if len(seam_idx) == k:
+        if 0 < e < n and all(abs(e - j) >= nms for j in shore_idx):
+            shore_idx.append(e)
+        if len(shore_idx) == k:
             break
     grammar = {"rules": len(g.rules()), "size": g.grammar_size(),
                "mean_depth": round(float(d.mean()), 3), "max_depth": int(d.max())}
-    return {"sequitur-depth": depth_idx, "sequitur-seam": sorted(seam_idx), "_grammar": grammar}
+    return {"sequitur-depth": depth_idx, "sequitur-shore": sorted(shore_idx), "_grammar": grammar}
 
 
 def mdl_growth(toks: "list[str]") -> np.ndarray:
@@ -353,7 +353,7 @@ def run_arms(toks: "list[str]", *, halves=DEFAULT_HALVES) -> "tuple[dict, dict |
 def detect(sensorium: str, *, halves=DEFAULT_HALVES, content_store=None) -> dict:
     """DETECT-ONLY over a poured sensorium: reconstruct its content stream → words → the full arm surface,
     every cut reported as a word position. The arms adapt four segmenters to the one stream — Foote novelty
-    (vocabulary turnover), sequitur depth+seam (grammar hierarchy), sequitur-MDL (compression stall), and
+    (vocabulary turnover), sequitur depth+shore (grammar hierarchy), sequitur-MDL (compression stall), and
     branching entropy (successor unpredictability). Blind to any ground-truth (the wall). Retains the words
     in-memory for context snippets (not persisted).
 

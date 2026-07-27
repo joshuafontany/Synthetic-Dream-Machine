@@ -1,7 +1,7 @@
 /**
  * cabal-realm — the platform-blind mesh FLOOR for a CabalGroup-as-REALM.
  *
- * Proves the cut-1 composition seam: the realm's liveness lease keys by its
+ * Proves the cut-1 composition shore: the realm's liveness lease keys by its
  * sentinel DocId (deterministic, DocId-keyed), liveness derives purely from the
  * substrate's residency temperature, feeding warms the substrate (alive), and
  * the join gate stays INERT (identity passes through unchanged — the

@@ -220,7 +220,7 @@ The Helmholtz-machine **wake-sleep algorithm**, term for term: **deep-dream (sle
 ### ENACTED — the concept-witness (S0–S3, synthetic; 2026-07-05)
 
 All three predictions above were **built + witnessed on a seeded synthetic corpus** in the enact-flow (a TS **concept-witness**, `packages/lararium-node/probes/bifurcation-bench.ts` + `src/sensorium-efe.ts`):
-- **(a)** = the **H¹-gated EFE keystone** — `scoreEfe`/`efeSelect`/`efeGate`; `EFE = pragmatic (KL to the C-vector = operator set-point) + γ·epistemic + γ·optionLoss`; reversibility DERIVED from `optionLoss` (not a boolean grid); γ=1 C-only floor, seam for ARL₀→β.
+- **(a)** = the **H¹-gated EFE keystone** — `scoreEfe`/`efeSelect`/`efeGate`; `EFE = pragmatic (KL to the C-vector = operator set-point) + γ·epistemic + γ·optionLoss`; reversibility DERIVED from `optionLoss` (not a boolean grid); γ=1 C-only floor, shore for ARL₀→β.
 - **(b)** = **H¹ as an order-parameter** on the Bench (`cohomologyObstruction` → `dim H¹`, `R*_sem = log₂ dim H¹`).
 - **(bonus)** = **the co-jump** — four order-parameters (complexity-entropy · ΔF · H¹ · the EFE gate-flip) bifurcate on one ARL₀→α axis, with surrogate-null significance bands; the **EFE gate-flip co-jumps at the exact rung H¹ leaves 0**.
 

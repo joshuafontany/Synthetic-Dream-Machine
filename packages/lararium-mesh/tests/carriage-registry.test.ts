@@ -1,6 +1,6 @@
 /**
  * membership-registry.test.ts — the operator MEMBERS-registry (the Kapae-antigen's ALLOW-twin), FAIL-CLOSED
- * at every seam and holding the three Build-2 doctrine invariants.
+ * at every shore and holding the three Build-2 doctrine invariants.
  *
  * Proven:
  *   · a 2-of-3 kahu quorum + the operator's contract-in → the nym reads MEMBER (admit),

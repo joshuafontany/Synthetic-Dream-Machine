@@ -34,7 +34,7 @@
  * the triangle cofaces — the gradient face reads circulation 0 everywhere (a theorem), the rotational face
  * reads the actual curl — so {@link kiCoConsistency} co-extends (radius 0) exactly when the flow is
  * curl-free (a pure lead-lag potential, no irreducible coupling), and localizes any residual circulation to
- * the offending triangle. Drop-in for the retired MODWT-MRA co-restriction seam, zero call-site change.
+ * the offending triangle. Drop-in for the retired MODWT-MRA co-restriction shore, zero call-site change.
  *
  * Whether the convergence this reads estimates one real quantity (inflationary) or grows wherever any
  * instrument imposes structure (deflationary) stays LIVE — this organ files the flow's parts by what they

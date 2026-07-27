@@ -1,11 +1,11 @@
 /**
- * membership-channel — the seam the WHO-plane ceremony crosses (the Herm's OPEN ceremony transport).
+ * membership-channel — the shore the WHO-plane ceremony crosses (the Herm's OPEN ceremony transport).
  *
  * The membership ceremony (contact-card exchange · join-request · admit · invite) is
  * bidirectional; the transport under it is swappable. This interface is the trunk both live impls ride:
  *   · Impl-1 — file/POST (FileMembershipChannel, node-side): the Herm's ceremony carriage over a shared dir.
  *   · Impl-2 — live-WS (over lar-ws-client-adapter): the same carriage over live sockets, behind THIS SAME
- *     interface — chosen by deployment, not a migration. The seam is why either transport costs nothing above it.
+ *     interface — chosen by deployment, not a migration. The shore is why either transport costs nothing above it.
  *
  * The channel carries OPAQUE ceremony envelopes — it never interprets the payload (a
  * contact card, an admit payload, an invite token). Routing only: address vessel→vessel
@@ -33,7 +33,7 @@ export interface MembershipEnvelope {
 export const MEMBERSHIP_BROADCAST = "*";
 
 /**
- * The membership channel — the swappable seam. `offer` sends toward `env.to`; `poll`
+ * The membership channel — the swappable shore. `offer` sends toward `env.to`; `poll`
  * drains the envelopes addressed to a recipient (plus broadcasts), each delivered once.
  * A file/POST impl and a live-WS impl both satisfy exactly this; the ceremony above
  * never knows which carries it.

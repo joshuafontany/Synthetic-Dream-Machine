@@ -5,7 +5,7 @@
  * (wiki-sense-fold.ts — the ONE math, whose pono home ships in the plugin blob) into per-tiddler
  * LI (sheaf) plane readings, then runs the Robinson {@link consistencyRadius} over the ENGINEERED
  * cross-plane stalk. The cheapest planes sense end-to-end — structure ⊥ form — leaving content
- * (embeddings) to the perceiver's semantic seam.
+ * (embeddings) to the perceiver's semantic shore.
  *
  * THE HULL RUNS PLATFORM-BLIND: pure organs only, so the SAME hull stands on node AND in a
  * browser worker. The islands differ by GRANT (which bags each mounts), never by hull; that single
@@ -28,7 +28,7 @@ import { MemoryTiddlerStore } from "./memory-store.js";
 import { foldCorpus, corpusPlanes } from "./wiki-sense-fold.js";
 import { senseDocOfEntry } from "./wiki-corpus-reader.js";
 
-// ── the per-tiddler plane readings (structure ⊥ form; content rides the perceiver's seam) ──────────
+// ── the per-tiddler plane readings (structure ⊥ form; content rides the perceiver's shore) ──────────
 
 /** One tiddler's SNAPSHOT reading — its two LI-plane saliences plus the causal stamp it read as-of. */
 export interface WikiTiddlerReading {

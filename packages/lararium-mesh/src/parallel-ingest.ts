@@ -20,7 +20,7 @@
  *     orphans), and the run rejects with the first error (structured concurrency's black-box rule).
  *
  * PURE of IO: the `embed` (parallel expensive stage) and `commit` (single-writer sink through the
- * @daemon gate) are INJECTED seams — the real ones wire to the embedder + the store; tests inject
+ * @daemon gate) are INJECTED shores — the real ones wire to the embedder + the store; tests inject
  * fakes. `clock` is injected too (default Date.now) so the dial is deterministic under test.
  *
  * KAPPA: the SAME runtime serves live capture AND recovery/harvest — recovery is just this run fed
@@ -41,8 +41,8 @@ export interface IngestItem<P> {
   readonly payload: P;
 }
 
-/** The injected seams. `embed` runs parallel (expensive); `commit` runs serial (the sovereign gate). */
-export interface IngestSeams<P, E> {
+/** The injected shores. `embed` runs parallel (expensive); `commit` runs serial (the sovereign gate). */
+export interface IngestShores<P, E> {
   /** the parallel expensive stage — payload → embedded (content-embed · structure · form). */
   readonly embed: (item: IngestItem<P>) => Promise<E>;
   /** the SINGLE-WRITER sink — commit the embedded record through the @daemon gate to the store. */
@@ -95,16 +95,16 @@ function serialLane(): { run: <T>(fn: () => Promise<T>) => Promise<T> } {
  */
 export async function runParallelIngest<P, E>(
   items: readonly IngestItem<P>[],
-  seams: IngestSeams<P, E>,
+  shores: IngestShores<P, E>,
 ): Promise<IngestResult> {
-  const clock = seams.clock ?? Date.now;
-  const validate: Validate<E> = seams.validate ?? (() => ({ ok: true }));
+  const clock = shores.clock ?? Date.now;
+  const validate: Validate<E> = shores.validate ?? (() => ({ ok: true }));
   const collectedDL: DeadLetter[] = [];
-  const deadLetterSink = seams.deadLetter ?? ((dl: DeadLetter) => { collectedDL.push(dl); });
+  const deadLetterSink = shores.deadLetter ?? ((dl: DeadLetter) => { collectedDL.push(dl); });
   const lane = serialLane();
   const licensed = new Set<string>();               // consumed-license registry (the drain's committed keys)
   let drain: DrainLedger = emptyDrain();
-  let dial = seams.dial ?? makeDial();
+  let dial = shores.dial ?? makeDial();
   let cursor = 0;
   let committed = 0, deadLettered = 0, skipped = 0;
   let firstError: unknown = null;
@@ -113,13 +113,13 @@ export async function runParallelIngest<P, E>(
   const processOne = async (item: IngestItem<P>): Promise<void> => {
     drain = stage(drain, { seq: item.seq, key: item.key });
     const t0 = clock();
-    const embedded = await seams.embed(item);        // PARALLEL (expensive)
+    const embedded = await shores.embed(item);        // PARALLEL (expensive)
     dial = observe(dial, clock() - t0);              // latency → AIMD dial
     // THE MERGE GATE (serial, single-writer) — validate · consume-license · order · dead-letter.
     await lane.run(async () => {
       const verdict = mergeGate({ seq: item.seq, key: item.key, embedded }, licensed, validate);
       if (verdict.kind === "commit") {
-        await seams.commit(embedded, item);          // the irreversible step, AFTER the proofread
+        await shores.commit(embedded, item);          // the irreversible step, AFTER the proofread
         licensed.add(item.key);                      // consume the license (once)
         committed++;
       } else if (verdict.kind === "dead-letter") {
@@ -138,7 +138,7 @@ export async function runParallelIngest<P, E>(
   // credit). This ties admission to PROVEN drain (the credit-gate law), curing the one-sided AIMD
   // bullwhip: if commits stall, the backlog grows, credits fall, and the producer sheds — the
   // receiver pacing the sender. The dial's `limit` is the slow-discovered ceiling; credits are the
-  // fast per-cycle governor. (In-process, uncommitted tracks in-flight; across the @daemon seam the
+  // fast per-cycle governor. (In-process, uncommitted tracks in-flight; across the @daemon shore the
   // credit source is already the drain's true committed-progress, network-ring-ready.)
   while ((cursor < items.length && firstError === null) || active.size > 0) {
     while (cursor < items.length && canAdmit(dial.limit, backlog(drain).length) && firstError === null) {

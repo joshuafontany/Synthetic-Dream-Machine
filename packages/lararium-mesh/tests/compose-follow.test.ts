@@ -5,7 +5,7 @@
  * Proven:
  *   · composeFollow RECOGNISES a nym (TOFU-admits a carried card, or requires an already-known nym), SETS the
  *     private petname on the handle-book, and ADDS the nym to the LOCAL circle — three local writes, one call,
- *   · NEVER-FEDERATES — the only seams composeFollow touches are the HandleBook (I/O-free) + an injected
+ *   · NEVER-FEDERATES — the only shores composeFollow touches are the HandleBook (I/O-free) + an injected
  *     CircleStore (local); a spy CircleStore records the ONLY writes, and NOTHING else is reachable. The result
  *     reads `federated:false` at the type level,
  *   · FAIL-CLOSED — following an UNMET nym with no card REFUSES (FollowRefused/unknown-nym), and a card whose

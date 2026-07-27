@@ -2,7 +2,7 @@
  * tag-blobs — the CAS opt-in writer behind `lares ingest --tag-blobs`.
  *
  * `lares ingest` already scans a bag and weighs every carrier's size + media
- * family (exactly the knowledge a blob-readiness verdict needs). This seam turns
+ * family (exactly the knowledge a blob-readiness verdict needs). This shore turns
  * that verdict into a WRITE: for each carrier that would hit the ungated-large-inline
  * wall at regenesis (a verb rides a reference, never a body), it stamps the opt-in
  * `_lar_cas` flag so the body externalizes to CAS on the next INGEST.
@@ -17,7 +17,7 @@
  * A meme whose body chunks across many small ahus (a MIND-BUNDLE, no single blob-ahu)
  * — or one whose blob-ahu carries no `toml iam` fence to stamp, or whose largeness
  * splits across more than one ahu — REPORTS rather than mutates. When the shape reads
- * ambiguous the seam reports and leaves the canon untouched, never guess-and-mutate.
+ * ambiguous the shore reports and leaves the canon untouched, never guess-and-mutate.
  *
  * Detection reuses the in-tree readiness law verbatim (never re-derives it):
  * `carrierCasFlagged` (already opted in?), `casBackstopFires` + `isOversizedBody` +

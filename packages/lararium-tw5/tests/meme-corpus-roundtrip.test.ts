@@ -8,7 +8,7 @@
  * Three assertions per carrier (the lens laws, Foster–Pierce lineage —
  * parse/render as a bidirectional lens, these as its round-trip laws):
  *   1. single closer — the render emits exactly one ETX (doubling = the
- *      masked-closer degraded state; the membrane also warns on it now);
+ *      masked-closer degraded state; the shore also warns on it now);
  *   2. idempotent — render(parse(render(x))) === render(x);
  *   3. content-whole — outside iam framing, blank-line margins, and the
  *      law-mandated sigil normalizations (spacing; STX/ETX insertion per

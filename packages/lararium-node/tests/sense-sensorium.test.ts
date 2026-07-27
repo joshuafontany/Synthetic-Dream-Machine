@@ -125,9 +125,9 @@ describe("orphan reaping", () => {
   });
 });
 
-describe("the S2 structure plane — the parse-router seam", () => {
+describe("the S2 structure plane — the parse-router shore", () => {
   test("a router-less ingest GRACEFULLY structure-skips (content plane unaffected)", async () => {
-    // a seam that mimics a host with no python/router: drawers filed, 0 structures, skip note.
+    // a shore that mimics a host with no python/router: drawers filed, 0 structures, skip note.
     const skipIngest: SensoriumIngest = () => ({ drawers: 1, structures: 0, bands: 0, forms: 0, note: "mined → 1 drawers · structure-skipped: no router/python · bands-skipped: no sidecar/python" });
     const res = await runSensorium({ sourcePath: src, ingest: skipIngest });
     expect(res.structures).toBe(0);
@@ -139,7 +139,7 @@ describe("the S2 structure plane — the parse-router seam", () => {
   });
 
   test("the structure sub-palace lives UNDER the corpus dir (swept on dissolve)", () => {
-    // a seam that writes a marker into the structure cap, proving it nests under the root.
+    // a shore that writes a marker into the structure cap, proving it nests under the root.
     const writingIngest: SensoriumIngest = ({ sensoriumRoot }) => {
       const sdir = sensoriumStructurePath(sensoriumRoot);
       mkdirSync(sdir, { recursive: true });
@@ -153,7 +153,7 @@ describe("the S2 structure plane — the parse-router seam", () => {
   });
 
   // Opt-in end-to-end: the REAL defaultSensoriumIngest over a code/markdown dir, exercised through the
-  // public openSensorium seam. Skips unless RUN_CORPUS_E2E=1 (it needs the venv python + tree-sitter +
+  // public openSensorium shore. Skips unless RUN_CORPUS_E2E=1 (it needs the venv python + tree-sitter +
   // chroma). When it runs, it proves `sensorium run`-shaped ingest produces structure vectors.
   const e2e = process.env["RUN_CORPUS_E2E"] === "1" ? test : test.skip;
   e2e("defaultSensoriumIngest's structure leg files vectors over real source", () => {
@@ -165,7 +165,7 @@ describe("the S2 structure plane — the parse-router seam", () => {
   });
 });
 
-describe("the S1 bands plane — the multi-scale FFZ seam", () => {
+describe("the S1 bands plane — the multi-scale FFZ shore", () => {
   test("a sidecar-less ingest GRACEFULLY bands-skips (content/structure planes unaffected)", async () => {
     const skipIngest: SensoriumIngest = () => ({ drawers: 2, structures: 1, bands: 0, forms: 0, note: "mined → 2 drawers · structure: 1 vectors · bands-skipped: no sidecar/python" });
     const res = await runSensorium({ sourcePath: src, ingest: skipIngest });
@@ -177,7 +177,7 @@ describe("the S1 bands plane — the multi-scale FFZ seam", () => {
   });
 
   test("the bands leg files adaptive lar_ffz cells the manifest + result thread through", () => {
-    // a seam that writes the bands-cells NDJSON (proving the path nests under the corpus dir)
+    // a shore that writes the bands-cells NDJSON (proving the path nests under the corpus dir)
     const bandsIngest: SensoriumIngest = ({ sensoriumRoot }) => {
       writeFileSync(sensoriumBandsCellsPath(sensoriumRoot), JSON.stringify({ lar_ffz: "corpus/0.0.0.0.0", register: "Canon" }) + "\n");
       return { drawers: 4, structures: 3, bands: 12, forms: 0, note: "bands: 2 cuts · 1 Canon / 1 Provisional" };
@@ -190,7 +190,7 @@ describe("the S1 bands plane — the multi-scale FFZ seam", () => {
   });
 });
 
-describe("the S3 form plane — the blind-induction seam", () => {
+describe("the S3 form plane — the blind-induction shore", () => {
   test("a sidecar-less ingest GRACEFULLY form-skips (content/structure/bands planes unaffected)", async () => {
     const skipIngest: SensoriumIngest = () => ({ drawers: 2, structures: 1, bands: 3, forms: 0, note: "mined → 2 drawers · structure: 1 vectors · bands: 3 cells · form-skipped: no sidecar/python" });
     const res = await runSensorium({ sourcePath: src, ingest: skipIngest });
@@ -203,7 +203,7 @@ describe("the S3 form plane — the blind-induction seam", () => {
   });
 
   test("the form leg files the constructicon the manifest + result thread through", () => {
-    // a seam that writes the constructicon NDJSON (proving the path nests under the corpus dir)
+    // a shore that writes the constructicon NDJSON (proving the path nests under the corpus dir)
     const formIngest: SensoriumIngest = ({ sensoriumRoot }) => {
       writeFileSync(sensoriumFormConstructiconPath(sensoriumRoot), JSON.stringify({ struct_hash: "abc", origin: "tree", seq: ["ahu_block", "sigil_name"], support: 5 }) + "\n");
       return { drawers: 6, structures: 5, bands: 4, forms: 7, note: "form: 7 constructions from 5 structures" };

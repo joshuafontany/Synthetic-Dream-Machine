@@ -51,7 +51,7 @@ export type {
   CoherenceIndicatorFrame,
   CoherenceStatus,
   CoherenceProjector,
-  CoherenceProjectionSeams,
+  CoherenceProjectionShores,
 } from "./wiki-coherence-projection.js";
 export {
   createWikiSensorium,
@@ -92,7 +92,7 @@ export {
   LARES_PROOF_RECORD_TAG,
 } from "./wiki-sense-supervision.js";
 export type {
-  WikiSenseSeams,
+  WikiSenseShores,
   WikiSenseSupervisor,
   WikiSenseSupervisorOptions,
   WikiSenseCohereReading,
@@ -170,7 +170,7 @@ export { seedDaemonRosterTiddlers, DAEMON_ROSTER_TIDDLERS, ROSTER_STATE_TITLE, L
 
 export { IslandKernel } from "./island-kernel.js";
 export { runSovereignKernel } from "./sovereign-kernel.js";
-export type { IslandHostSeam } from "./sovereign-kernel.js";
+export type { IslandHostShore } from "./sovereign-kernel.js";
 export { mountSocialPlane, addSubstrateLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki, buildWikiMountSpec } from "./vessel-steps.js";
 export type { ResolveBagHandle, SocialPlaneUrls, SocialPlaneHandles, PrimaryMountPool, BindingResolver, PrimaryMountInputs } from "./vessel-steps.js";
 export { makeVesselResidency } from "./vessel-residency-wiring.js";

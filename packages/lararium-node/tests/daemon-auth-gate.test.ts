@@ -3,9 +3,9 @@
  *
  * Tests the pre-Automerge lar:challenge / lar:auth / lar:auth-ok wire exchange
  * using a real WebSocket server, raw WebSocket client connections, and a stub
- * AuthVerifierSeam. No Automerge-repo, no TW5, no filesystem.
+ * AuthVerifierShore. No Automerge-repo, no TW5, no filesystem.
  *
- * Post Stage 1 the host holds no keyhive — the gate arms with an AuthVerifierSeam
+ * Post Stage 1 the host holds no keyhive — the gate arms with an AuthVerifierShore
  * that proxies to the daemon island, which does receiveContactCard + verify
  * in-worker and returns the verdict plus the peer's Identifier hex.
  *
@@ -16,13 +16,13 @@ import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { createServer }                               from "node:http";
 import { WebSocketServer, WebSocket }                 from "ws";
 import { DaemonAuthGate }                              from "../src/daemon-auth-gate.js";
-import type { AuthVerifierSeam, AuthProofWire }       from "@lararium/mesh";
+import type { AuthVerifierShore, AuthProofWire }       from "@lararium/mesh";
 import {
   isLarChallengeMsg, isLarAuthOkMsg, isLarAuthDeniedMsg,
   mkLarAuth,
 } from "@lararium/mesh";
 
-// ── Stub AuthVerifierSeam ─────────────────────────────────────────────────────
+// ── Stub AuthVerifierShore ─────────────────────────────────────────────────────
 
 type StubVerifyResult = { ok: true; peerClass?: "same-operator" | "cross-operator" } | { ok: false; reason: string };
 
@@ -30,10 +30,10 @@ type StubVerifyResult = { ok: true; peerClass?: "same-operator" | "cross-operato
 // Identifier hex (receiveContactCard's id), which the gate keys its sharePolicy
 // map on, PLUS the self-slot PeerClass the keyholder vouches; a denial carries
 // only the reason.
-function makeStubSeam(opts: {
+function makeStubShore(opts: {
   receiveResult: { id: string };
   verifyResult:  StubVerifyResult;
-}): AuthVerifierSeam {
+}): AuthVerifierShore {
   return {
     async verify() {
       return opts.verifyResult.ok
@@ -43,16 +43,16 @@ function makeStubSeam(opts: {
   };
 }
 
-// Capturing seam — records the proof + access the gate relays, so we can assert
+// Capturing shore — records the proof + access the gate relays, so we can assert
 // the V3 plumbing (gate forwards {nonce, sig, ts} to the keyholder worker).
-function makeCapturingSeam(id = "0xaabbcc"): {
-  seam: AuthVerifierSeam;
+function makeCapturingShore(id = "0xaabbcc"): {
+  shore: AuthVerifierShore;
   calls: Array<{ bagUrl: string; access: string; proof?: AuthProofWire }>;
 } {
   const calls: Array<{ bagUrl: string; access: string; proof?: AuthProofWire }> = [];
   return {
     calls,
-    seam: {
+    shore: {
       async verify(_cardBytes, bagUrl, access, proof) {
         calls.push({ bagUrl, access, ...(proof ? { proof } : {}) });
         return { ok: true, identifier: id };
@@ -157,7 +157,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
   });
 
   test("armed gate sends lar:challenge on connect", async () => {
-    gate.arm(makeStubSeam({
+    gate.arm(makeStubShore({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));
@@ -177,7 +177,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
       gate.once("connection", () => resolve());
     });
 
-    gate.arm(makeStubSeam({
+    gate.arm(makeStubShore({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));
@@ -200,7 +200,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
 
   test("a same-operator verdict surfaces via getClassForSocket (the self-slot signal reaches the sharePolicy)", async () => {
     const connectionSeen = new Promise<void>((resolve) => gate.once("connection", () => resolve()));
-    gate.arm(makeStubSeam({ receiveResult: { id: "0xaabbcc" }, verifyResult: { ok: true, peerClass: "same-operator" } }));
+    gate.arm(makeStubShore({ receiveResult: { id: "0xaabbcc" }, verifyResult: { ok: true, peerClass: "same-operator" } }));
 
     const ws   = await connect(serverInfo.port);
     const chal = await nextMessage(ws) as { nonce: string };
@@ -215,7 +215,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
 
   test("a verdict with NO peerClass surfaces undefined (fail-closed → cross-operator at the sharePolicy)", async () => {
     const connectionSeen = new Promise<void>((resolve) => gate.once("connection", () => resolve()));
-    gate.arm(makeStubSeam({ receiveResult: { id: "0xaabbcc" }, verifyResult: { ok: true } }));
+    gate.arm(makeStubShore({ receiveResult: { id: "0xaabbcc" }, verifyResult: { ok: true } }));
 
     const ws   = await connect(serverInfo.port);
     const chal = await nextMessage(ws) as { nonce: string };
@@ -229,7 +229,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
   });
 
   test("insufficient capability → lar:auth-denied + close(4003)", async () => {
-    gate.arm(makeStubSeam({
+    gate.arm(makeStubShore({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: false, reason: "no admin grant" },
     }));
@@ -248,7 +248,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
   });
 
   test("wrong nonce → lar:auth-denied + close(4003)", async () => {
-    gate.arm(makeStubSeam({
+    gate.arm(makeStubShore({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));
@@ -266,7 +266,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
   });
 
   test("sending non-auth message → lar:auth-denied + close(4003)", async () => {
-    gate.arm(makeStubSeam({
+    gate.arm(makeStubShore({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));
@@ -284,8 +284,8 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
   });
 
   test("V3: armed with a gatePubKey, the challenge advertises it (gate-binding)", async () => {
-    const { seam } = makeCapturingSeam();
-    gate.arm(seam, "lar:///ha.ka.ba/bags/@daemon", "deadbeef".repeat(8));
+    const { shore } = makeCapturingShore();
+    gate.arm(shore, "lar:///ha.ka.ba/bags/@daemon", "deadbeef".repeat(8));
 
     const ws  = await connect(serverInfo.port);
     const msg = await nextMessage(ws) as { nonce: string; gatePubKey?: string };
@@ -296,9 +296,9 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
     ws.close();
   });
 
-  test("V3: a lar:auth with sig+ts relays the proof {nonce, sig, ts} to the seam", async () => {
-    const { seam, calls } = makeCapturingSeam();
-    gate.arm(seam, "lar:///ha.ka.ba/bags/@daemon", "00".repeat(32));
+  test("V3: a lar:auth with sig+ts relays the proof {nonce, sig, ts} to the shore", async () => {
+    const { shore, calls } = makeCapturingShore();
+    gate.arm(shore, "lar:///ha.ka.ba/bags/@daemon", "00".repeat(32));
 
     const ws   = await connect(serverInfo.port);
     const chal = await nextMessage(ws) as { nonce: string };
@@ -314,8 +314,8 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
   });
 
   test("V3: a legacy lar:auth without ts relays NO proof (back-compat)", async () => {
-    const { seam, calls } = makeCapturingSeam();
-    gate.arm(seam); // no gatePubKey, legacy posture
+    const { shore, calls } = makeCapturingShore();
+    gate.arm(shore); // no gatePubKey, legacy posture
 
     const ws   = await connect(serverInfo.port);
     const chal = await nextMessage(ws) as { nonce: string };
@@ -330,7 +330,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
   });
 
   test("clients set decrements when authenticated connection closes", async () => {
-    gate.arm(makeStubSeam({
+    gate.arm(makeStubShore({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));

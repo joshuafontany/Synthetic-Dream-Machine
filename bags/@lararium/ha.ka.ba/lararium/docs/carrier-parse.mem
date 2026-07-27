@@ -9,7 +9,7 @@ mana          = 17
 manao         = 17
 manaoio       = 17
 register      = "Synthesis-Canon"
-role          = "design doc: carrier ingress membrane — text-in, records + diagnostics out (deserializeCarrier)"
+role          = "design doc: carrier ingress shore — text-in, records + diagnostics out (deserializeCarrier)"
 source        = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
 source-symbol = "deserializeCarrier"
 status-date   = "2026-04-30"
@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lararium/docs/carrier-parse"
 
 <<~ ahu #ooda-ha >>
 
-✶ carrier text arrives at the membrane; normalize bytes (strip a leading BOM, fold CR into LF).
+✶ carrier text arrives at the shore; normalize bytes (strip a leading BOM, fold CR into LF).
 ⏿ orient: does an SOH sentinel frame a carrier? `MemeStreamParser` scans for carrier-open/close events across single-meme, multi-meme, and partial input.
 ◇ decide: each carrier-close routes through `splitMemeToTiddlers`; a bare doc (no SOH framing) falls through to a verbatim-body split.
 ▶ split ahu slots recursively into child tiddlers, rewrite each block to a `<<~ kahea ahu #slot >>` reference in the parent, and grade the parse via `parseMemeText().failures`.
@@ -34,9 +34,9 @@ uri-path      = "ha.ka.ba/lararium/docs/carrier-parse"
 
 !! Contract
 
-`deserializeCarrier(text, fields)` gates all carrier ingress, returning `{ records: TiddlerFields[]; diagnostics: MemeDiagnostic[] }`. It delegates the split to `memeticWikitextDeserializer` (the TW5 `tiddlerdeserializer` export) and lifts synthesised parse-warning tiddlers onto the shared diagnostics contract, so a caller reads a grade rather than sniffing a title. Isomorphic — no `fs`, no `path`, no `window`; the host passes text, the membrane returns typed records.
+`deserializeCarrier(text, fields)` gates all carrier ingress, returning `{ records: TiddlerFields[]; diagnostics: MemeDiagnostic[] }`. It delegates the split to `memeticWikitextDeserializer` (the TW5 `tiddlerdeserializer` export) and lifts synthesised parse-warning tiddlers onto the shared diagnostics contract, so a caller reads a grade rather than sniffing a title. Isomorphic — no `fs`, no `path`, no `window`; the host passes text, the shore returns typed records.
 
-The membrane marks the causal-island boundary (spec: TW5 VM). `memeticWikitextDeserializer` uses `parseMemeText` and `MemeStreamParser` (both TW5-independent) to fold one carrier into a parent tiddler plus N ahu-slot children. Decomposition law begins here: non-TW5 adaptation stops at this membrane.
+The shore marks the causal-island boundary (spec: TW5 VM). `memeticWikitextDeserializer` uses `parseMemeText` and `MemeStreamParser` (both TW5-independent) to fold one carrier into a parent tiddler plus N ahu-slot children. Decomposition law begins here: non-TW5 adaptation stops at this shore.
 
 <<~/ahu >>
 
@@ -54,7 +54,7 @@ export function deserializeCarrier(
   for (const record of records) {
     if (!String(record.title ?? "").includes("/parse-warning/")) continue;
     for (const line of String(record.text ?? "").split("\n")) {
-      if (line.trim()) diagnostics.push(membraneDiagnostic(line.trim(), text.length));
+      if (line.trim()) diagnostics.push(shoreDiagnostic(line.trim(), text.length));
     }
   }
   return { records, diagnostics };

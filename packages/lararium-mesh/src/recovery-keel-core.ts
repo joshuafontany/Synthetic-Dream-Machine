@@ -8,7 +8,7 @@
  * enforces this at the TYPE wall — a single-custodian set can never construct a Quorum).
  *
  * The crypto primitives already sit in mesh (recovery-share: splitToShares / assembleQuorum /
- * reconstructFromQuorum / encodeShareBytes). Only the FLOW lifts here, over two injected seams:
+ * reconstructFromQuorum / encodeShareBytes). Only the FLOW lifts here, over two injected shores:
  *   · the PersonaVault — supplies the root seed to split + the sealed device-share store,
  *   · the readmit runner — the keyhive edge-signing step, injected because keyhive DEPENDS ON mesh
  *     (mesh importing keyhive would cycle). The core reconstructs the branded ReadmissionSecret and hands
@@ -35,7 +35,7 @@ import {
 /**
  * How a runtime persists the DEVICE recovery-share, keyed by handle-index (one persona's quorum never
  * reconstructs another's root). The device-share is share material of the PersonaGroup root — self-only
- * secret — so the platform SEALS it at rest; the seal lives in the adapter, never in this core seam.
+ * secret — so the platform SEALS it at rest; the seal lives in the adapter, never in this core shore.
  */
 export interface RecoveryShareStore {
   /** Read the device-share for ONE persona, or null when none has landed. */
@@ -108,7 +108,7 @@ export async function reconstructAndReadmit<Readmit, Payload>(
  * PER-PERSONA: a vessel wearing several personas provisions recovery per persona — each root splits into
  * its own 2-of-3 quorum and seals its own device-share, keyed by handle-index. (POLICY fork surfaced to
  * the operator: whether N personas on ONE disk constitute distinct-enough custodians for a real quorum is
- * NOT decided here; this splits the seam so either resolution stands.)
+ * NOT decided here; this splits the shore so either resolution stands.)
  */
 export async function provisionRecoveryAtFounding(
   vault: PersonaVault,

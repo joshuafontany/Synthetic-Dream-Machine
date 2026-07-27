@@ -1,5 +1,5 @@
 /**
- * Capability protocol — provider-neutral authority seam.
+ * Capability protocol — provider-neutral authority shore.
  *
  * Mesh owns the shape. Adapters prove it.
  * Keyhive, local-dev stubs, future UCAN/CAIP/EIP-712 bridges, and job

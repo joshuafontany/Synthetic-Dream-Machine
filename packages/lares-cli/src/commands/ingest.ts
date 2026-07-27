@@ -4,7 +4,7 @@
  *   lares ingest --source <dir|file> --to <bagUri> [--apply] [--yes]
  *
  * The gesture holds the disk grant and the Synced tree (the island holds
- * neither — readiness reads local on both sides of the membrane):
+ * neither — readiness reads local on both sides of the shore):
  *   scan      walk source for .md carriers; derive each uri by the loci law
  *   diff      disk-hash vs synced-hash per carrier (the cheap two legs)
  *   preview   (default) print NEW / UNCHANGED / CHANGED; submit nothing

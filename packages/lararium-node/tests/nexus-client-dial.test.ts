@@ -27,7 +27,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { WebSocketServer } from "ws";
 import { verifyAuthProof, ed25519SignerFromSeed } from "@lararium/mesh";
-import type { AuthVerifierSeam, LeafIdentity } from "@lararium/mesh";
+import type { AuthVerifierShore, LeafIdentity } from "@lararium/mesh";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeWSServerAdapter } from "@automerge/automerge-repo-network-websocket";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
@@ -53,8 +53,8 @@ function makeNodeIdentity(): { identity: LeafIdentity; seed: Uint8Array; pub: st
   return { seed, pub, identity: { contactCard: JSON.stringify({ peerPubKey: pub }), peerPubKey: pub, sign: ed25519SignerFromSeed(seed) } };
 }
 
-/** The real seam a vessel's gate arms with: real V3 proof check, then the admitted-set capability decision. */
-function makeCapabilitySeam(gatePubKey: string, admitted: ReadonlySet<string>): AuthVerifierSeam {
+/** The real shore a vessel's gate arms with: real V3 proof check, then the admitted-set capability decision. */
+function makeCapabilityShore(gatePubKey: string, admitted: ReadonlySet<string>): AuthVerifierShore {
   return {
     async verify(cardBytes, bagUrl, _access, proof) {
       if (!proof) return { ok: false, reason: "V3 proof required" };
@@ -112,7 +112,7 @@ function standServerVessel(opts: { storageDir: string; gatePubKey: string; admit
       },
     });
 
-    gate.arm(makeCapabilitySeam(opts.gatePubKey, opts.admitted), AUD, opts.gatePubKey);
+    gate.arm(makeCapabilityShore(opts.gatePubKey, opts.admitted), AUD, opts.gatePubKey);
 
     http.listen(0, "127.0.0.1", () => {
       const addr = http.address();

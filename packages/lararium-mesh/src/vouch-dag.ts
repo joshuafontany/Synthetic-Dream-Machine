@@ -2,7 +2,7 @@
  * vouch-dag — fold issued invites into the seed-rooted vouch DAG the lineage price walks.
  *
  * THE FEEDER. `admission-price` prices a crossing against a vouch DAG; nothing produced that DAG from the
- * invites the mesh actually issues. This is the seam: an accepted `CabalInvite` IS a directed edge
+ * invites the mesh actually issues. This is the shore: an accepted `CabalInvite` IS a directed edge
  * (voucher → joiner), and a run of them folds into the `VouchEdge[]` that `rankLineage` scores. Each
  * admission adds an edge, so the graph the NEXT admission prices against is the trace of every crossing
  * before it.

@@ -8,7 +8,7 @@
  *   - daemonHandle  : find-or-create strategy
  *
  * The browser vessel does not yet wire the node-ahead capability proxies
- * (authSeam, resolveBinding); when it needs them they compose the same way —
+ * (authShore, resolveBinding); when it needs them they compose the same way —
  * a second listener on the core's exposed worker handle.
  *
  * Boot ordering: workerEa resolves only after the daemon island sends "ea".
@@ -95,7 +95,7 @@ export async function openBrowserDaemonVm(
     spawnWorker:    browserSpawnWorker,
   };
 
-  // The wrapper IS the seam — host pieces + find-or-create daemonHandle; the lifecycle and the
+  // The wrapper IS the shore — host pieces + find-or-create daemonHandle; the lifecycle and the
   // whole result surface (DaemonVmCore) live once in the core. Return it directly, no re-spread.
   return openDaemonVmCore(host, {
     repo, daemonHandle, personaHandle, recipe, grants, coreHash,

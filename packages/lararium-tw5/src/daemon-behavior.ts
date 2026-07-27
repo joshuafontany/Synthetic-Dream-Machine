@@ -54,7 +54,7 @@ export interface DaemonBehaviorOptions {
   /** A ready verifier (e.g. tests, or a host-provided one). */
   verifier?: CapabilityVerifier;
   /**
-   * Projection mount seam — the @daemon INHERITS the wiki's render cap (hasProjection). When the worker
+   * Projection mount shore — the @daemon INHERITS the wiki's render cap (hasProjection). When the worker
    * entry supplies onBoot (mountProjection), the @daemon becomes a surfaceable wiki like any other: the user
    * pins it to render, the same path any wiki takes (it's the same TW5 VM under the hood). Absent → the cap
    * stays inert (the @daemon runs headless, its historical resting state). role = capability ≠ platform.
@@ -70,7 +70,7 @@ export interface DaemonBehaviorOptions {
    */
   verifierFactory?: (ctx: IslandContext) => Promise<CapabilityVerifier>;
   /**
-   * Inbound-peer verification for the host's AuthVerifierSeam (path b). The host
+   * Inbound-peer verification for the host's AuthVerifierShore (path b). The host
    * has no keyhive after Stage 1, so it posts `daemon:verify-request` and the
    * daemon worker answers here. Opaque by design — peer verification needs
    * `receiveContactCard` (a @lararium/keyhive method, not in mesh), so the
@@ -101,7 +101,7 @@ export interface DaemonBehaviorOptions {
   /**
    * The telemetry capture SINK (node: makeNodeCaptureEngine wired to the palace). Every @daemon
    * ALWAYS carries the capture cap (idempotent — tending the bound operator's session-capture is a
-   * daemon duty); this seam, when wired, makes it LIVE. Absent → the cap stays inert (sink not
+   * daemon duty); this shore, when wired, makes it LIVE. Absent → the cap stays inert (sink not
    * wired, a valid resting state). The two-loop config (servo + derive) lives inside the engine the
    * vessel builds. role = capability ≠ platform — tw5 never imports the node sink.
    */
@@ -358,7 +358,7 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
   // cap (FLOW plane — the bound operator's session-capture duty). dispatch onEa runs first (LIFO
   // teardown stops it last); the capture cap tears down first (final flush, then dispose). The
   // capture cap stays a DISTINCT #has unit — it never gates authz; the master cut holds at the cap
-  // seam, not the worker. Inert when no sink is wired (makeCaptureEngine absent) — every @daemon
+  // shore, not the worker. Inert when no sink is wired (makeCaptureEngine absent) — every @daemon
   // carries the cap; whether it breathes depends on a wired sink + feed.
   return composeIsland([
     dispatchCap,

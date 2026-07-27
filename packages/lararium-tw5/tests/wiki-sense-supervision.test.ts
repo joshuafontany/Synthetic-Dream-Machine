@@ -20,7 +20,7 @@ import {
   proofRecordUri,
   isProofRecordUri,
 } from "../src/wiki-sense-supervision.js";
-import type { WikiSenseSupervisor, WikiSenseSeams } from "../src/wiki-sense-supervision.js";
+import type { WikiSenseSupervisor, WikiSenseShores } from "../src/wiki-sense-supervision.js";
 import { hasWikiSensorium, SENSORIUM_FRAME } from "../src/wiki-sensorium-cap.js";
 import { buildFixtureIsland, GLUE_SEEDS } from "../src/wiki-store-adapter.js";
 import { MemoryTiddlerStore } from "../src/memory-store.js";
@@ -33,7 +33,7 @@ const STRANGER = "lar:///ha.ka.ba/bags/@sense-unsupervised";
 
 /** One supervised island behind an in-process channel wearing the wire's message shape. */
 interface ChannelHarness {
-  seams: WikiSenseSeams;
+  shores: WikiSenseShores;
   /** binds the supervisor the frames route back to (the vessel's onWorkerEvent leg). */
   bind(supervisor: WikiSenseSupervisor): void;
   /** re-route frames as if they arrived from a different island (the return-leg ward probe). */
@@ -64,7 +64,7 @@ async function standChannel(designations: readonly string[]): Promise<ChannelHar
   }
 
   return {
-    seams: {
+    shores: {
       supervises: (designation) => caps.has(designation),
       sendSignal: (designation, msg) => {
         const c = caps.get(designation);
@@ -95,7 +95,7 @@ describe("wiki-sense supervision reads — node tier", () => {
   test("a cohere read flows daemon→island→back and holds the PROOF in the daemon's own store", async () => {
     const harness = await standChannel([ISLAND_A]);
     const proofStore = new MemoryTiddlerStore("lar:///ha.ka.ba/bags/@daemon");
-    const supervisor = createWikiSenseSupervisor(harness.seams, { proofStore });
+    const supervisor = createWikiSenseSupervisor(harness.shores, { proofStore });
     harness.bind(supervisor);
     try {
       const reading = await supervisor.cohere(ISLAND_A, { hold: true });
@@ -131,7 +131,7 @@ describe("wiki-sense supervision reads — node tier", () => {
 
   test("recall rides the same supervised surface — all the cap's tiers answer unchanged", async () => {
     const harness = await standChannel([ISLAND_A]);
-    const supervisor = createWikiSenseSupervisor(harness.seams);
+    const supervisor = createWikiSenseSupervisor(harness.shores);
     harness.bind(supervisor);
     try {
       const result = await supervisor.recall(ISLAND_A, { likeTitle: "canon-a" });
@@ -146,7 +146,7 @@ describe("wiki-sense supervision reads — node tier", () => {
 
   test("an ask naming an UN-supervised island FAILS LOUD — designation carries the authority", async () => {
     const harness = await standChannel([ISLAND_A]);
-    const supervisor = createWikiSenseSupervisor(harness.seams);
+    const supervisor = createWikiSenseSupervisor(harness.shores);
     harness.bind(supervisor);
     try {
       await expect(supervisor.cohere(STRANGER)).rejects.toThrow(/does not supervise/);
@@ -159,7 +159,7 @@ describe("wiki-sense supervision reads — node tier", () => {
 
   test("a frame from the WRONG island never settles the ask — the return-leg ward", async () => {
     const harness = await standChannel([ISLAND_A, ISLAND_B]);
-    const supervisor = createWikiSenseSupervisor(harness.seams, { timeoutMs: 60 });
+    const supervisor = createWikiSenseSupervisor(harness.shores, { timeoutMs: 60 });
     harness.bind(supervisor);
     try {
       // every frame now claims to arrive from ISLAND_B; the ask names ISLAND_A → nothing settles.
@@ -173,7 +173,7 @@ describe("wiki-sense supervision reads — node tier", () => {
 
   test("a proof-hold without a daemon store fails loud — never a silent drop", async () => {
     const harness = await standChannel([ISLAND_A]);
-    const supervisor = createWikiSenseSupervisor(harness.seams);   // no proofStore
+    const supervisor = createWikiSenseSupervisor(harness.shores);   // no proofStore
     harness.bind(supervisor);
     try {
       await expect(supervisor.cohere(ISLAND_A, { hold: true })).rejects.toThrow(/no proofStore/);
@@ -183,15 +183,15 @@ describe("wiki-sense supervision reads — node tier", () => {
     }
   });
 
-  test("proof-federate refuses typed — the membrane Act stays the operator's", async () => {
+  test("proof-federate refuses typed — the shore Act stays the operator's", async () => {
     const harness = await standChannel([ISLAND_A]);
-    const supervisor = createWikiSenseSupervisor(harness.seams);
+    const supervisor = createWikiSenseSupervisor(harness.shores);
     harness.bind(supervisor);
     try {
       expect(supervisor.proofFederate(ISLAND_A)).toEqual({
         status:   "operator-gated",
-        awaits:   "membrane-Act",
-        crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure membrane)",
+        awaits:   "shore-Act",
+        crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure shore)",
         island:   ISLAND_A,
       });
     } finally {

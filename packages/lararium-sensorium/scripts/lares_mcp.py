@@ -33,7 +33,7 @@ LIFECYCLE_VERBS = ("pour", "sweep", "recall", "status", "worldline", "kapae", "u
 # (content · structure · form, one cid keying all three planes; corpus_testbed/plane_fanout land it).
 # The per-plane READS (structure · form) fold onto `recall --lens <plane>` — the plane rides as a
 # parameter, so only the cross-plane WITNESS keeps its own verb here.
-# THE PARITY SEAM: this rides the MCP surface AHEAD of its CLI spelling — the CLI form + the cli-verbs
+# THE PARITY SHORE: this rides the MCP surface AHEAD of its CLI spelling — the CLI form + the cli-verbs
 # fixture grow with the projector arc, so the parity test carries it as a NAMED allowance
 # (mcp_tools − PLANE_VERBS mirrors the fixture) until the CLI catches up.
 PLANE_VERBS = ("plane_record",)
@@ -630,7 +630,7 @@ class LaresCoordinator:
     def plane_record(self, cid: str) -> dict:
         """The cross-plane witness read: ONE cid → its presence + payload summary across content ·
         structure · form, honest nulls where a plane lacks the record. READ-only — it witnesses
-        co-presence and scores nothing. THE COHERE SEAM: cross-plane AGREEMENT (cohere) lands its
+        co-presence and scores nothing. THE COHERE SHORE: cross-plane AGREEMENT (cohere) lands its
         organs with the projector arc; this verb stays the bare 3-plane witness until then.
 
         The witness itself lives in `plane_query` (neutral, no circular import) — this coordinator holds
@@ -652,7 +652,7 @@ def build_mcp(coordinator: LaresCoordinator):
 
     mcp = FastMCP("lares")
 
-    # The addressed-sensorium seam: an AI names a sensorium; the tool resolves the name to its root and
+    # The addressed-sensorium shore: an AI names a sensorium; the tool resolves the name to its root and
     # threads it up the @daemon cap-ladder (the routed recall/capture/refresh verbs pick the holder by
     # root). Absent → the memory default. A standalone coordinator binds ONE palace at construction, so a
     # name resolving to a DIFFERENT root refuses rather than reading the wrong store; the routed router
@@ -752,7 +752,7 @@ def build_mcp(coordinator: LaresCoordinator):
     def analyze(spectral: bool = False, halves: "str | None" = None, span: int = 6,
                 sensorium: "str | None" = None) -> dict:
         """DETECT-ONLY change-point analysis over a sensorium's poured content stream (mirrors `lares sense
-        analyze`) — the isomorphic detection arms (Foote novelty · sequitur depth+seam · sequitur-MDL ·
+        analyze`) — the isomorphic detection arms (Foote novelty · sequitur depth+shore · sequitur-MDL ·
         branching entropy) read the reconstructed stream word-grained and report where the content changes
         HANDS, every boundary a word index. Blind to any ground-truth (it locates, never scores). `spectral`
         switches to the embedding-geometry surface; `halves` (comma-separated words, e.g. `4,8,16`) sets the

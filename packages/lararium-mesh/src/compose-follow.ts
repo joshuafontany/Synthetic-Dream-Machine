@@ -8,9 +8,9 @@
  * NOTHING crosses to @crossroads. The ONLY federated surface a human ever presents stays the glamour they
  * DELIBERATELY publish (who-face / handle-announce) — a separate, conscious act this module never performs.
  *
- * NEVER-FEDERATES, STRUCTURALLY. The proof is not a runtime check but the SHAPE of the seams: composeFollow
+ * NEVER-FEDERATES, STRUCTURALLY. The proof is not a runtime check but the SHAPE of the shores: composeFollow
  * consumes a HandleBook (pure, I/O-free, holds no key and touches no network) and a `CircleStore` (a LOCAL
- * membership store — node-fs / IDB / a future PRIVATE-bag adapter). No board, announce, or @crossroads seam
+ * membership store — node-fs / IDB / a future PRIVATE-bag adapter). No board, announce, or @crossroads shore
  * is injectable here, so no follow can reach the wire. `FollowResult.federated` reads the literal `false` —
  * the type says the follow left no central trace. A user leaves no roster entry; the graph stays home.
  *
@@ -28,10 +28,10 @@ import type { HandleBook } from "./handle-book.js";
 import type { HandleCard, CardVerdict } from "./handle-card.js";
 
 /**
- * A vessel's LOCAL circle-membership store — the IoC social graph's persistence seam. "Adding to a circle IS
+ * A vessel's LOCAL circle-membership store — the IoC social graph's persistence shore. "Adding to a circle IS
  * the follow", so the graph lives HERE and never federates: a node-fs JSON file, an IDB store, or a future
  * PRIVATE-bag adapter, all private to the owning node. The interface holds ONLY local reads/writes — no board
- * write exists on it, which is the never-federates wall made structural (mirroring persona-petname's seam).
+ * write exists on it, which is the never-federates wall made structural (mirroring persona-petname's shore).
  */
 export interface CircleStore {
   /** Add a nym to a circle — the follow. Idempotent (a re-add is a no-op). LOCAL only. */

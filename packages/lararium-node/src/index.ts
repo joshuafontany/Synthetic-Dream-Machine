@@ -126,7 +126,7 @@ export type {
   QuerySensoriumResult, KeepResult, DissolveResult, RunSensoriumOptions, RunSensoriumResult,
 } from "./sense-sensorium.js";
 
-// The stream compose_palace seam — generalize the sensorium lifecycle to ANY StreamAdapter's frames.
+// The stream compose_palace shore — generalize the sensorium lifecycle to ANY StreamAdapter's frames.
 export { composeStreamSensorium, defaultStreamPlaneSink } from "./sense-stream.js";
 export type { ComposeStreamOptions } from "./sense-stream.js";
 
@@ -188,7 +188,7 @@ export {
 // The @nexus MEMBERSHIP consult holder (Build-2) — the carry-split's member gate: kahu floor ∪ folded members{}.
 export { makeNexusMembership } from "./nexus-carriage.js";
 export type { NexusMembershipHolder } from "./nexus-carriage.js";
-// The `nexus-refresh` LIVE-refold seam — re-reads the disk posture + re-folds the antigen / members boards from
+// The `nexus-refresh` LIVE-refold shore — re-reads the disk posture + re-folds the antigen / members boards from
 // storage into the live holders, so an out-of-process CLI edit reaches a running node without a bounce.
 export { runNexusRefresh } from "./nexus-refresh.js";
 export type { NexusRefreshDeps, NexusRefreshResult } from "./nexus-refresh.js";
@@ -227,7 +227,7 @@ export {
   stashEnrollmentSecret, takeEnrollmentSecret, peekEnrollmentSecrets, stashSentMemo, takeSentMemo, clearPersonaAdmitPending,
 } from "./node-persona-admit-store.js";
 // QR transport — GENERATE a scannable carriage QR (terminal / PNG / SVG / matrix, ECC H) + DECODE a still PNG
-// through an injected decoder seam (the headless node scanner + the browser camera both plug in behind it).
+// through an injected decoder shore (the headless node scanner + the browser camera both plug in behind it).
 export {
   qrCarriageToTerminal, qrCarriageToPngBuffer, qrCarriageToSvg, qrCarriageMatrix,
   pngToImageData, decodeQrPng, HANDSHAKE_QR_ECC,
@@ -353,5 +353,5 @@ export type {
 // The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it).
 // node-daemon-island wires the capture SINK live (from the
 // daemon spawn's optional workerData.telemetry) or leaves the cap inert. The capture core stays
-// composable + isomorphic: @lararium/mesh capture-engine + the tw5 `hasCapture` cap; node seams via
+// composable + isomorphic: @lararium/mesh capture-engine + the tw5 `hasCapture` cap; node shores via
 // makeNodeCaptureEngine.

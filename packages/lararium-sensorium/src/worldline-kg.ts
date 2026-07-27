@@ -1,12 +1,12 @@
 /**
- * worldline-kg — the NODE seam that projects worldline edges onto the mempalace
+ * worldline-kg — the NODE shore that projects worldline edges onto the mempalace
  * knowledge graph. The durable twin of the in-memory ITC registry (mesh/worldline-clock):
  * spawn/inject persist as prov triples, handback closes the spawn interval, kapae closes a
  * retracted turn's edges (rewind = set-aside, never erase).
  *
  * It CALLS the mempalace KG API through OUR `scripts/kg_io.py` (which calls the vendored
  * KnowledgeGraph.add_triple / .invalidate) via the SAME execFileSync idiom telemetry-writeback
- * uses for loci_io.py — the established node→mempalace write membrane. We never spawn a write
+ * uses for loci_io.py — the established node→mempalace write shore. We never spawn a write
  * MCP client (the node's MempalaceClient is read-only by contract) and never edit the submodule.
  *
  * The KG is a RE-DERIVABLE projection: the transcripts are the source of truth, so a wiped or
@@ -45,7 +45,7 @@ export interface WorldlineKgOptions {
  * `sanitize_iso_temporal` accepts only `YYYY-MM-DD` / `YYYY-MM-DDTHH:MM:SSZ` (canonical UTC,
  * no fractional part), while Claude transcripts stamp millisecond ISO (`…:56.789Z`). Un-truncated,
  * a ms value raises one traceback per record and the edge never lands. Pure string cut — a non-ISO
- * or already-whole value passes through untouched. THE MEMBRANE OWNS THIS LAW: every temporal
+ * or already-whole value passes through untouched. THE SHORE OWNS THIS LAW: every temporal
  * value below (valid_from / ended) rides through it, so no caller can forward a ms ISO past here.
  */
 export function isoWholeSeconds(ts: string): string {

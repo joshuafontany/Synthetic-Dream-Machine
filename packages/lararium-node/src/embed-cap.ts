@@ -30,7 +30,7 @@ export interface EmbedCap {
   close(): Promise<void>;
 }
 
-/** Test seam alias: how the holder process is produced (defaults to the palace-less python helper). */
+/** Test shore alias: how the holder process is produced (defaults to the palace-less python helper). */
 export type EmbedHolderSpawn = PalaceHolderSpawn;
 
 /** Default holder spawn: the venv-aware python running `embed_io.py serve` (NO --palace). */
@@ -39,7 +39,7 @@ const defaultHolderSpawn: PalaceHolderSpawn = makeServeSpawn(resolveEmbedSpawn, 
 export interface EmbedCapOptions {
   /** per-call RPC timeout (ms); default 120s — the FIRST embed may load (or download) the model. */
   readonly timeoutMs?: number;
-  /** test seam: override how the holder process is produced. */
+  /** test shore: override how the holder process is produced. */
   readonly spawn?: EmbedHolderSpawn;
 }
 

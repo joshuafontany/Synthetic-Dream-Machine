@@ -12,7 +12,7 @@
  *   · INERT: the vessel's `url ? startCarriageServeLoop(...) : null` gate opens EXACTLY one socket when configured
  *     and ZERO when not, and `stop()` clears the timer + closes the socket cleanly (no leak, safe before connect).
  *
- * The full two-OS-process crossing (reconnection after a drop, the WSL2 secure-context seam) stays outside this
+ * The full two-OS-process crossing (reconnection after a drop, the WSL2 secure-context shore) stays outside this
  * headless proof — here every crypto piece is REAL (Ed25519 proof-of-possession, the @cad seal, secret-free verify).
  *
  * Gate: lar:///ha.ka.ba/lararium/node/carriage-relay-serve-loop

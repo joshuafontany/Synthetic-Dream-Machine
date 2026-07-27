@@ -45,7 +45,7 @@ Two stacks, orthogonal, crossing at the one entity that roots both — the ''ves
         ▲                                              lararium         #has {relay} ALWAYS
    vessel-key                                          (the relay floor; family builds up)
         └───────────────►  [ VESSEL ]  ◄──────────────────┘
-                           the one seam
+                           the one shore
                                 ▲
                            relay capability
                            passes mana along the leyline · CANNOT read the stream
@@ -153,7 +153,7 @@ The "neighborhood shrine" framing: a place that carries local ritual, local know
 
 A lararium hosts an ''operator'' (sovereign — founds the lararium, holds the founding key) plus N ''users'' who ride it (family, teammates, ''ephemeral test users''). A user carries a veiled persona, a lease-decaying membership, and read scoped by the cabal — carried by the host's relay, but never sovereign over the lararium. Admission runs ''admit-then-sever'': optimistic on contact, the edge cut (per-edge anergy) if it sours, never the peer banned wholesale.
 
-''The operator standing rides the INFRA axis (runs-infrastructure), never a WHO rung'' (#two-axis-topology) — it surfaces in this WHO section only because hosting meets membership at the seam (#the-seam). The sovereign's own //read// standing still rides a veiled persona like any other vessel; sovereignty over the box and a place on the social graph stay two coordinates.
+''The operator standing rides the INFRA axis (runs-infrastructure), never a WHO rung'' (#two-axis-topology) — it surfaces in this WHO section only because hosting meets membership at the shore (#the-shore). The sovereign's own //read// standing still rides a veiled persona like any other vessel; sovereignty over the box and a place on the social graph stay two coordinates.
 
 !!! plurality ~ many handles × many cap-stacks
 
@@ -161,16 +161,16 @@ One human carries ''many Handles'' (personaGroups on the WHO axis) crossed with 
 
 <<~/ahu >>
 
-<<~ ahu #the-seam >>
+<<~ ahu #the-shore >>
 
-!! The Seam — Where the Axes Cross
+!! The Shore — Where the Axes Cross
 
 The two axes stay orthogonal, yet they touch at exactly two points:
 
 # ''The vessel.'' It roots a `vessel-key` (bottom of the SOCIAL axis) //and// anchors a transport endpoint (on the INFRA axis). One entity, two memberships.
 # ''The invite.'' An invited user gains ''read'' via cabal membership (SOCIAL) //and// ''reach'' via the inviter's nexus relays (INFRA). The invite couples the axes without fusing them — read and carriage arrive through separate gates.
 
-The law of the seam: ''membership decides read; the nexus decides reach.'' A cabal's members may ride //any// nexus's leylines; carriage never implies sight, and sight never implies carriage.
+The law of the shore: ''membership decides read; the nexus decides reach.'' A cabal's members may ride //any// nexus's leylines; carriage never implies sight, and sight never implies carriage.
 
 <<~/ahu >>
 
@@ -226,7 +226,7 @@ Two tiers cross the read/sealed cut:
 
 A byte-blob that dwarfs the doc ''must not ride the Automerge CRDT'' — a 16MB library file, an image, an audio body bloats every replica and every sync. So the large body ''leaves the doc and rides the blob floor'': the tiddler shrinks to a ''skinny handle'' (a stable logical name + a provider-locality hint), and the bytes resolve ''on demand'' off the content-addressed tier `@cad` — its bytes in the `cid/<hash>` KIND-plane (`genesis/cas`; `cid = BLAKE3(ciphertext)`, so an untrusted holder verifies, pins, and repairs blind, never the key), its handles riding the publicity-tiered bags (public `@crossroads` plaintext · private `@catalog` ciphertext · system `@oracle`). TW5's own lazy engine fires the fetch (`_is_skinny → lazyLoad`); the syncer answers with `resolveByCid`. ''Only bytes leave; the small logical-name→cid indirection map stays in the doc.''
 
-''This rides the INFRA/FLOW axis whole.'' A resolved body travels as ''blind carriage of content-addressed ciphertext'' — the relay carries the sealed blob without reading it, exactly the relay-floor cut (#the-relay-floor): `#has {forward}` · `#has-NOT {read, decrypt}`. Content-resolution adds no new plane; it ''extends the sealed tier'' above with a fetch-on-demand seam.
+''This rides the INFRA/FLOW axis whole.'' A resolved body travels as ''blind carriage of content-addressed ciphertext'' — the relay carries the sealed blob without reading it, exactly the relay-floor cut (#the-relay-floor): `#has {forward}` · `#has-NOT {read, decrypt}`. Content-resolution adds no new plane; it ''extends the sealed tier'' above with a fetch-on-demand shore.
 
 ''Three gates, never fused'' — and the separation ''preserves the two-axis orthogonality'' this whole meme keeps (#gate-model): (1) ''transport'' — may-this-peer-carry, the relay-forward gate (INFRA · FLOW); (2) ''content-cap'' — may-this-identity-resolve-THIS-cid, a `#has` cap scoped `{peer × address}` (still FLOW — it gates //carriage of a specific blob//, never sight); (3) ''read'' — may-they-decrypt, CGKA/BeeKEM on the cabal read-set (SOCIAL · WHO). The node ''routes and verifies ciphertext, never decrypts'' — the Delivery-Service-never-Auth-root keel. Fuse the three and WHO leaks into FLOW (the Matrix leaked-URL sin); split them and the axes stay orthogonal through the fetch. <<~ confidence Synthesis 12/20 >> the composition stands design-north; the detail — the resolve chain to PENDING, discovery-without-a-DHT, the two revocation modes — lives whole at the edge below.
 

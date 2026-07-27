@@ -348,8 +348,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // The live KeyhiveProvider runs INSIDE the daemon-island worker (bootDaemonKeyhive
   // over the worker composite); the founding ceremony DISPOSES its transient provider
   // before returning, so NO provider — and no bag↔docId registry — reaches this
-  // main-thread seam synchronously. Arming this ring needs the async main↔worker
-  // cap-verify bridge (the `daemon:verify-request` seam node's peer-gate already uses)
+  // main-thread shore synchronously. Arming this ring needs the async main↔worker
+  // cap-verify bridge (the `daemon:verify-request` shore node's peer-gate already uses)
   // + a docId→bagUrl resolver over the worker's registry — a SEPARATE thread (#58-b).
   const identityRing: IdentityRing | null = null;
   const repo = new Repo({
@@ -898,7 +898,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       });
 
       // wiki-sense (the supervision reads) — the daemon's supervision READ-verbs over the islands this vessel's pool
-      // actually holds. The seams ARE the supervision grant: designation resolves through the pool
+      // actually holds. The shores ARE the supervision grant: designation resolves through the pool
       // alone (confused-deputy ward — a name outside the pool fails loud at both ends), and the
       // proof-hold writes into the daemon's OWN @daemon layer (local, self-sovereign). The daemon
       // worker reaches these verbs over its existing delegate loop.

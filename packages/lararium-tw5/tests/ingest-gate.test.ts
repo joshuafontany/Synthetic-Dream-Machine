@@ -1,6 +1,6 @@
 /**
  * ingest-gate — vectors for the three-way decision (Confluence triangle), driven
- * by the live boot meme: real carrier, real membrane, no vessel.
+ * by the live boot meme: real carrier, real shore, no vessel.
  *
  * The five branches under proof:
  *   noop/disk-matches-synced · refuse · noop/canonical-equivalent ·
@@ -22,7 +22,7 @@ const URI  = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
 
 const sha = (s: string) => createHash("sha256").update(s, "utf8").digest("hex");
 
-/** Canonical render of arbitrary carrier text through the membrane. */
+/** Canonical render of arbitrary carrier text through the shore. */
 function renderOf(text: string, uri: string): string {
   const records = memeticWikitextDeserializer(text, { title: uri });
   const map = new Map(records.map((r) => [String(r.title), r] as const));

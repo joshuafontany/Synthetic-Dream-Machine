@@ -3,7 +3,7 @@
  *
  * The PRIVATE own-persona label map + the PUBLIC own-published-face record, over the origin's REAL
  * IndexedDB — no mock, no fake-indexeddb. The isomorphic logic (rename/multitude-view/glamour-mint) is
- * proven platform-blind in @lararium/mesh; THIS stands the browser seams round-trip + the never-federates
+ * proven platform-blind in @lararium/mesh; THIS stands the browser shores round-trip + the never-federates
  * wall over the SAME mesh core the node fs stores ride.
  */
 import { describe, test, expect, afterEach } from "vitest";

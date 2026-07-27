@@ -24,13 +24,13 @@
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
  *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
  *      hot slot and calls `mainPort.close()` in its teardown path. No exceptions.
- *   8. Federation seam — when a grant carries a non-empty AutomergeUrl, two obligations
+ *   8. Federation shore — when a grant carries a non-empty AutomergeUrl, two obligations
  *      activate. Vessel: the vessel MUST wire the `MessageChannelNetworkAdapter(mainPort)` on the
  *      vessel Repo before delivering `manifest`, so the CRDT graph reaches the island-side Repo
  *      automatically. Island-side: the island MUST call `repo.find(docUrl).whenReady()` and await
  *      readiness before seeding TW5 and declaring `ea`. Failure on either side leaves the island
  *      holding a disconnected doc; the slot MUST transition to disposed within HANDSHAKE_TIMEOUT_MS.
- *      Gate proof: `federation-seam.test.ts` (node, pure Repo — vessel→island + island→vessel) +
+ *      Gate proof: `federation-shore.test.ts` (node, pure Repo — vessel→island + island→vessel) +
 *                  `browser-repo-in-island.test.ts` test 2 (browser pool, docUrl non-null path).
  *      When this law holds, two vessels sharing a bag converge without any explicit sync call —
  *      the archipelago forms the moment the AutomergeUrl crosses the boundary.
@@ -473,7 +473,7 @@ export interface DaemonMsg_VerbResult {
 // Auth verify proxy (isomorphic-vessel epic, Stage 1+2)
 // ---------------------------------------------------------------------------
 // Keyhive lives in the daemon island after Stage 1, but inbound untrusted peers
-// land on the HOST transport (node WS server). The host's AuthVerifierSeam asks
+// land on the HOST transport (node WS server). The host's AuthVerifierShore asks
 // the island to verify each peer; the island answers via its keyhive. Path (b).
 
 /** Vessel → island: verify an inbound peer's capability. Host has no keyhive. */
@@ -801,7 +801,7 @@ export const DOM_INPUT_MAX_CHARS = 65_536;
  * Read a relayed input value, or REFUSE it.
  *
  * Returns the string when it stands within the bound, `null` otherwise — fail-closed, one number, one
- * site. Both the send seam (which throws, because an over-long send names a caller bug) and the island
+ * site. Both the send shore (which throws, because an over-long send names a caller bug) and the island
  * door (which drops, because an over-long arrival names an untrusted sender) read this same function.
  */
 export function boundedDomInputValue(v: unknown): string | null {
@@ -1350,7 +1350,7 @@ export function mkWikiDomEvent(opts: {
 }
 
 /**
- * Build the text-carrying relay message, REFUSING an over-long value at the send seam.
+ * Build the text-carrying relay message, REFUSING an over-long value at the send shore.
  *
  * This throw names a caller bug (a main thread relaying more than an edit surface may hold), and it
  * fires where the stack still points at the offending call. The island door refuses the same value
@@ -1406,13 +1406,13 @@ export function mkWikiVerbResult(opts: {
 }
 
 
-// ── AuthVerifierSeam — host-side verify proxy (path b) ─────────────────────
+// ── AuthVerifierShore — host-side verify proxy (path b) ─────────────────────
 //
 // The host transport (node WS gate) holds no keyhive after Stage 1; it asks the
 // daemon island to verify each inbound peer (the DaemonMsg_VerifyRequest/Result
 // pair above) and keys its sharePolicy map off the returned `identifier`. Node
 // binds this to DaemonAuthGate; the browser leaves it unbound (no inbound peer yet).
-export interface AuthVerifierSeam {
+export interface AuthVerifierShore {
   verify(
     cardBytes: Uint8Array,
     bagUrl: string,

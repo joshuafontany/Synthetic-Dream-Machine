@@ -13,7 +13,7 @@
  * volatile temp store — injects as `tempStore`, so mesh holds zero tw5 dep.
  *
  * NO `if (platform)` enters here. A capability the recipe omits simply does not run.
- * The seam for every capability stays open on both substrates so the browser SHALL
+ * The shore for every capability stays open on both substrates so the browser SHALL
  * grow into init/PersonaGroup/genesis/corpus/residency.
  */
 
@@ -56,7 +56,7 @@ export interface VesselRecipe {
   /** The volatile @temp store (a LarTiddlerStore — node/browser pass MemoryTiddlerStore). */
   tempStore:     () => LarTiddlerStore;
 
-  // ── capability pieces (absent = not-yet-held; the seam stays open) ──
+  // ── capability pieces (absent = not-yet-held; the shore stays open) ──
   loadCorpora?:  (composite: CompositeStore) => Promise<void>;
   /** L1/L2: probe a social-plane doc's load in a disposable boundary AHEAD of the live
    *  repo materializing it. Absent = skip the probe (the doc resolves straight through —

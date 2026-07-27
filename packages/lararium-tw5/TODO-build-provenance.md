@@ -253,7 +253,7 @@ Ink-Clerk records inline here:
 - What shipped (file list, format versions bumped)
 - Which package exported what
 - Whether P3 produced a defer or a stub
-- Any friction found (timeouts, barrel seam issues, tw5 CLI edge cases)
+- Any friction found (timeouts, barrel shore issues, tw5 CLI edge cases)
 
 Do not create a separate changelog file — update this sprint doc in place.
 

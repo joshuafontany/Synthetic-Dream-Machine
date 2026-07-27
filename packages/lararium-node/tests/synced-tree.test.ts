@@ -147,7 +147,7 @@ describe("synced-tree — the R2 content-addressed rename-index", () => {
     expect(t.renameSourceUri(BAG, h)).toBeNull();
   });
 
-  test("tag-agnostic — a stored BARE hex resolves against a freshly TAGGED query (agile seam)", () => {
+  test("tag-agnostic — a stored BARE hex resolves against a freshly TAGGED query (agile shore)", () => {
     const t = freshTree();
     const bareHex = "a".repeat(64);                        // a pre-agile stored value
     t.set(syncedTreeKey(BAG, "lar:///a.b.c"), bareHex);

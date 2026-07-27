@@ -1,7 +1,7 @@
 /**
- * capture-engine — the isomorphic telemetry-VM worker over injected seams: enqueue
+ * capture-engine — the isomorphic telemetry-VM worker over injected shores: enqueue
  * annotates a raw turn forward + write-ahead-logs it; tick flushes via the injected flush;
- * recover replays the reserve on boot (open sessions survive a restart). Pure — stub seams.
+ * recover replays the reserve on boot (open sessions survive a restart). Pure — stub shores.
  */
 
 import { describe, expect, test } from "vitest";
@@ -51,7 +51,7 @@ function stubReserve() {
   };
 }
 
-describe("makeCaptureEngine — isomorphic worker over injected seams", () => {
+describe("makeCaptureEngine — isomorphic worker over injected shores", () => {
   test("enqueue annotates + write-ahead-logs; tick flushes the annotated record", async () => {
     const r = stubReserve();
     const flushed: CaptureRecord[][] = [];
@@ -74,12 +74,12 @@ describe("makeCaptureEngine — isomorphic worker over injected seams", () => {
 
   test("recover replays the reserve on boot (open sessions survive a restart)", async () => {
     const r = stubReserve();
-    const seams = { reserve: r.reserve, flush: async () => 0, annotate: () => ({}), gate: GATE };
-    const a = makeCaptureEngine(seams);
+    const shores = { reserve: r.reserve, flush: async () => 0, annotate: () => ({}), gate: GATE };
+    const a = makeCaptureEngine(shores);
     await a.enqueue("a", "x/1");
     await a.enqueue("b", "x/2");
 
-    const rebooted = makeCaptureEngine(seams); // fresh engine, same reserve = a reboot
+    const rebooted = makeCaptureEngine(shores); // fresh engine, same reserve = a reboot
     expect(await rebooted.recover()).toBe(2);
     expect(rebooted.stats().depth).toBe(2);
   });
@@ -151,7 +151,7 @@ describe("makeCaptureEngine — isomorphic worker over injected seams", () => {
     expect(frames.at(-1)?.gate.depth).toBe(6);
   });
 
-  test("no post seam = no OUT projection (Null-Object); the IN family runs unchanged", async () => {
+  test("no post shore = no OUT projection (Null-Object); the IN family runs unchanged", async () => {
     const r = stubReserve();
     const flushed: number[] = [];
     const engine = makeCaptureEngine({

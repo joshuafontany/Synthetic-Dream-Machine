@@ -1,5 +1,5 @@
 /**
- * telemetry-writeback — the lar-telemetry projection core (the WRITE membrane).
+ * telemetry-writeback — the lar-telemetry projection core (the WRITE shore).
  *
  * Reads mempalace drawers needing telemetry (the `lar_hv` gate), runs the
  * sovereign gradient reader over each (`harvestTurnGradient` — the turn's

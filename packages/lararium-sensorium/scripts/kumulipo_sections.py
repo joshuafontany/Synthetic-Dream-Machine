@@ -32,10 +32,10 @@ from __future__ import annotations
 import os
 import re
 
-# ── the #source-text carrier (the extraction seam) ──────────────────────────────────────
+# ── the #source-text carrier (the extraction shore) ──────────────────────────────────────
 # The house wraps a witness meme's bare text in ONE `<<~ ahu #source-text >> … <<~/ahu >>`
 # block; envelope matter (doctype, iam TOML, #meme-header, #provenance, #edges) rides
-# outside it. Extraction takes the block's interior — the cleanest mechanical seam the
+# outside it. Extraction takes the block's interior — the cleanest mechanical shore the
 # wrapping reserves for the source text.
 
 _SOURCE_TEXT_OPEN_RE = re.compile(r"^\s*<<~\s*ahu\s+#source-text\b")
@@ -96,7 +96,7 @@ _LILI_POST_RE = re.compile(r"^##\s+Kalakaua and Liliuokalani")
 _CHANT_RE = re.compile(
     r"^CHANT (?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE"
     r"|THIRTEEN|FOURTEEN|FIFTEEN|SIXTEEN)\s*$")
-# The appendix seams inside the Beckwith carrier.
+# The appendix shores inside the Beckwith carrier.
 _KALAKAUA_HEAD_RE = re.compile(r"^##\s+The Kalakaua Text\b")
 _NOTES_HEAD_RE = re.compile(r"^##\s+Textual Notes\b")
 
@@ -156,7 +156,7 @@ def _require_span(lines: list, basename: str) -> tuple:
     span = source_text_span(lines)
     if span is None:
         raise ValueError(f"kumulipo_sections: {basename!r} carries no balanced "
-                         "<<~ ahu #source-text >> block — the extraction seam stands broken")
+                         "<<~ ahu #source-text >> block — the extraction shore stands broken")
     return span
 
 
@@ -184,7 +184,7 @@ def _section_beckwith(text: str, *, extract: bool) -> tuple:
     kal_i = _find(lines, _KALAKAUA_HEAD_RE, s0, s1)
     notes_i = _find(lines, _NOTES_HEAD_RE, kal_i if kal_i >= 0 else s0, s1)
     if kal_i < 0 or notes_i < 0:
-        raise ValueError("kumulipo_sections: the Beckwith carrier lost its appendix seams "
+        raise ValueError("kumulipo_sections: the Beckwith carrier lost its appendix shores "
                          "(## The Kalakaua Text / ## Textual Notes) — refusing a blind cut")
     lo, hi = (s0, s1) if extract else (0, len(lines))
     beckwith = _split(lines, (lo, kal_i), _CHANT_RE, post=(notes_i, hi))

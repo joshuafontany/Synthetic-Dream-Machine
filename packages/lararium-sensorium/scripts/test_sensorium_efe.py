@@ -1,7 +1,7 @@
 """test_sensorium_efe — the py EFE keystone holds its contract.
 
 Guards the scorer's three terms, the DERIVED reversibility (sign of the option-loss,
-never a declared grid), the argmin selection + margin seam, and the H1-first gate fork.
+never a declared grid), the argmin selection + margin shore, and the H1-first gate fork.
 """
 import math
 

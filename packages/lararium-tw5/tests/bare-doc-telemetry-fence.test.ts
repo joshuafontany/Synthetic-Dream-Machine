@@ -1,5 +1,5 @@
 /**
- * bare-doc-telemetry-fence — two 2026-07-01 membrane rulings under test:
+ * bare-doc-telemetry-fence — two 2026-07-01 shore rulings under test:
  *
  *   1. BARE-DOC BODY-CENTERING (3d7238ec): a no-carrier doc (no SOH, no STX)
  *      parses as ALL BODY, and the recompose centers its content between the

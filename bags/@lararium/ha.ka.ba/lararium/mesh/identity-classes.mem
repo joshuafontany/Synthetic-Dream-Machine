@@ -308,7 +308,7 @@ a pre-rotated persona-KEL, and move the pin from the raw operational key to the 
 ''BUILT'' — `persona-kel` mints the inception, derives the prefix, advances rotations hash-linked, and
 verifies a chain; `boot-daemon-keyhive`'s Binding Gate pins the prefix and resolves the head. It lifted
 the charter's proven epoch-chain machinery down to persona scale — invent nothing structural, re-site
-what stands (#edges names the code seams). ''The same lift now runs OUTWARD'', to the two sites still
+what stands (#edges names the code shores). ''The same lift now runs OUTWARD'', to the two sites still
 binding a raw key: the antigen's ban-nym and the handle-card's face-nym (#the-honest-edges).
 
 <<~/ahu >>

@@ -9,7 +9,7 @@
  *
  * Pure + isomorphic: text in, Bearing out — no I/O, no store, no sidecar. The
  * read leg (mempalace sidecar) and the write leg (composite.put / LOAD) live
- * elsewhere; this is the membrane-crossing parse, and it runs in node or
+ * elsewhere; this is the shore-crossing parse, and it runs in node or
  * browser alike.
  *
  * Three laws, all load-bearing:

@@ -13,7 +13,7 @@ module-type: tiddlerdeserializer
  * Parsing MUST happen inside the TW5 VM on live clients (FFZ invariant).
  * This file is the causal-island boundary: text/x-memetic-wikitext enters,
  * TiddlerFields[] (parent + ahu-slot children) leave.
- * Non-TW5 adaptation stops at this membrane; decomposition law begins here.
+ * Non-TW5 adaptation stops at this shore; decomposition law begins here.
  *
  * Uses parseMemeText() from @lararium/tw5/meme-ast — isomorphic, no TW5 dep.
  *
@@ -38,12 +38,12 @@ import {
   composeSlotPath,
 } from "./meme-ast/ahu-scan.js";
 import { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
-// The fence-mask law surfaces through the membrane: consumers (tests, the
+// The fence-mask law surfaces through the shore: consumers (tests, the
 // projector layer) read quoted-sigil semantics from HERE, never from
 // meme-ast internals (vm-grammar-boundary law).
 export { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
 import { parseTaploFields } from "./toml-ast.js";
-import { membraneDiagnostic } from "./meme-ast/diagnostics.js";
+import { shoreDiagnostic } from "./meme-ast/diagnostics.js";
 import type { MemeDiagnostic } from "./meme-ast/diagnostics.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
 import { parseMemeText } from "./meme-ast/parse.js";
@@ -608,7 +608,7 @@ export function splitBodyTiddler(
 //
 // Doctrine (disk-projection#granularity): every path back to disk MUST route
 // through the recompose inverse (`expandMemeRefs` / `exportMemeText`). This
-// function inverts the incoming membrane transform above: it reads the
+// function inverts the incoming shore transform above: it reads the
 // parent's normalized records, splices each `<<~ kahea ahu #slot >>` marker
 // back into its child's full definition form (recursively), and reassembles
 // the carrier envelope (prologue · SOH · preamble · iam · header · STX ·
@@ -624,7 +624,7 @@ export function splitBodyTiddler(
 //      by assertion.
 //
 // Pure function over a fields reader: no I/O, no TW5 dependency — the same
-// membrane module owns both directions, so the harness proves the pair.
+// shore module owns both directions, so the harness proves the pair.
 // ---------------------------------------------------------------------------
 
 export type FieldsReader = (title: string) => TiddlerFields | undefined;
@@ -660,7 +660,7 @@ const IAM_DENY: ReadonlySet<string> = new Set([
 // wiki-edit stamping created would surface in the projection diff — the
 // operator's signature surface — not silently). `source-file` re-emits
 // for the same reason: 71 doc memes author it to name the TS source they
-// document; the membrane path stamps it nowhere.
+// document; the shore path stamps it nowhere.
 
 // Children additionally drop ingest-stamped coordinates: `uri-path` is
 // derived from the title, and `file-path` on a child is the burned
@@ -810,7 +810,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   out += "<<~ &#x0002; >>\n\n";
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
   out += "\n\n<<~ &#x0003; >>\n\n<<~ &#x0004; -> ? >>\n";
-  // The EOT→postamble seam normalizes to a stable fixed point: the EOT line
+  // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;
   // trailing closer).
@@ -819,7 +819,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
 }
 
 // ---------------------------------------------------------------------------
-// The membrane's receipt, on the shared channel
+// The shore's receipt, on the shared channel
 // ---------------------------------------------------------------------------
 
 /**
@@ -837,7 +837,7 @@ export function deserializeCarrier(
   for (const record of records) {
     if (!String(record.title ?? "").includes("/parse-warning/")) continue;
     for (const line of String(record.text ?? "").split("\n")) {
-      if (line.trim()) diagnostics.push(membraneDiagnostic(line.trim(), text.length));
+      if (line.trim()) diagnostics.push(shoreDiagnostic(line.trim(), text.length));
     }
   }
   return { records, diagnostics };

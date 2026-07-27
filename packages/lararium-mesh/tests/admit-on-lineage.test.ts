@@ -2,8 +2,8 @@
  * admit-on-lineage — the crossing folded from the ISSUED INVITES, so the per-voucher cap cannot be skipped.
  *
  * `admitToPlace` takes pre-folded edges; a caller assembling them by hand silently loses the choke that
- * bounds any one hand's injection into the lineage. This seam takes the invites themselves. What matters:
- * the cap BITES here, what it turned away comes back VISIBLE, and with nothing capped the seam agrees
+ * bounds any one hand's injection into the lineage. This shore takes the invites themselves. What matters:
+ * the cap BITES here, what it turned away comes back VISIBLE, and with nothing capped the shore agrees
  * exactly with the manual path — so folding here costs no behaviour, it only removes a way to get it wrong.
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing
@@ -56,11 +56,11 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
     expect(v.admitted).toBe(true);                          // the applicant rode one of the KEPT edges
   });
 
-  test("uncapped, the seam agrees EXACTLY with folding by hand then admitting", async () => {
+  test("uncapped, the shore agrees EXACTLY with folding by hand then admitting", async () => {
     const voucherDid = await pubOf(VOUCHER_SEED);
     const issued = [await inviteTo(JOINER), await inviteTo("c".repeat(64))];
 
-    const viaSeam = await admitOnLineage({
+    const viaShore = await admitOnLineage({
       policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
       invite: issued[0]!, now: NOW, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
@@ -72,11 +72,11 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
       seed: voucherDid, applicant: JOINER, dials: DIALS,
     });
 
-    expect(viaSeam.admitted).toBe(byHand.admitted);
-    expect(viaSeam.voucherDid).toBe(byHand.voucherDid);
-    expect(viaSeam.price?.rank).toBe(byHand.price?.rank);
-    expect(viaSeam.price?.concentration).toBe(byHand.price?.concentration);
-    expect(viaSeam.capped).toHaveLength(0);                 // nothing choked → nothing hidden
+    expect(viaShore.admitted).toBe(byHand.admitted);
+    expect(viaShore.voucherDid).toBe(byHand.voucherDid);
+    expect(viaShore.price?.rank).toBe(byHand.price?.rank);
+    expect(viaShore.price?.concentration).toBe(byHand.price?.concentration);
+    expect(viaShore.capped).toHaveLength(0);                 // nothing choked → nothing hidden
   });
 
   test("a capped-away applicant is UNRANKED, never refused — the choke prices, it does not ban", async () => {

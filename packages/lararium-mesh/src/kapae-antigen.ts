@@ -2,12 +2,12 @@
  * kapae-antigen — the Nexus immune system's ANTIGEN: a quorum-signed, monotone/additive set of
  * Kapae (ban) / un_kapae (lift) entries that rides the always-carried public planes. A Kapae'd
  * presenter draws Mu (never a denial — see ./mu-void); this module DECIDES who currently stands
- * Kapae'd, and it FAILS CLOSED at every seam.
+ * Kapae'd, and it FAILS CLOSED at every shore.
  *
  * THE ANTIGEN IS QUORUM-SIGNED — or it becomes a censorship weapon. A lone node MUST NOT Kapae a
  * peer (an adversary would then ban a Nexus' legit users). A ban/lift is a THRESHOLD steward act:
  * ≥ k distinct founding-kahu signatures over the entry, rooted on the nexus-charter's epoch. The
- * verification rides an INJECTED seam (`QuorumVerifier`) so the real threshold-sign drops in via
+ * verification rides an INJECTED shore (`QuorumVerifier`) so the real threshold-sign drops in via
  * dependency inversion; a MISSING verifier denies (`denyingQuorumVerifier`), never trusts.
  *
  * FAIL CLOSED, three ways: an entry whose quorum-signature does not verify is IGNORED (never
@@ -81,7 +81,7 @@ export function antigenEntryBytes(entry: Omit<KapaeAntigenEntry, "signatures">):
 }
 
 /**
- * The quorum-verify SEAM — the injected door the real threshold-sign drops into. `verifyQuorum`
+ * The quorum-verify SHORE — the injected door the real threshold-sign drops into. `verifyQuorum`
  * answers "does this entry carry a valid ≥ k quorum for this roster?". FAIL CLOSED: a null/missing
  * verifier denies at the call site; a verifier that cannot decide returns false. Never allow-all.
  */
@@ -157,7 +157,7 @@ export async function signAntigenEntry(
  * entry; a nym stands Kapae'd iff that winner's action is `kapae`. Fail-closed on equivocation: a
  * `kapae` and an `un_kapae` at the SAME version both stay Kapae'd (a tie never lifts a ban).
  *
- * The result is a plain nym set — the enforcement seam (./federation-gate carryContractShareDecision)
+ * The result is a plain nym set — the enforcement shore (./federation-gate carryContractShareDecision)
  * reads it to deny a Kapae'd presenter with Mu.
  */
 export async function foldAntigenSet(

@@ -1,7 +1,7 @@
 /**
- * who-sensory-seam — the CLASP where the WHO-plane (agency) meets the WHO sensorium (perception).
+ * who-sensory-shore — the CLASP where the WHO-plane (agency) meets the WHO sensorium (perception).
  * The two halves of the self, joined on the parallel session's StreamAdapter + sensorium
- * foundations, through THREE message-shapes (the signal-seam contract):
+ * foundations, through THREE message-shapes (the signal-shore contract):
  *
  *   ① EMIT     — WHO-plane events → sensorium frames (whoStreamAdapter). The ladder/immune ops
  *                emit WhoEvents; the sensorium's bands/content planes sense them.
@@ -83,7 +83,7 @@ export function neighborCorroborates(coupling: MeshCoupling, threshold: number, 
 }
 
 /**
- * THE WHO IMMUNE READ — the full two-signal danger-model on the seam: Signal-1 (the actor's own
+ * THE WHO IMMUNE READ — the full two-signal danger-model on the shore: Signal-1 (the actor's own
  * threat-pattern) AND Signal-2 (a neighbor's R-coupling into who). Anergize only when BOTH fire —
  * the autoimmunity guard, now sourced from real perception. Default = tolerate.
  */

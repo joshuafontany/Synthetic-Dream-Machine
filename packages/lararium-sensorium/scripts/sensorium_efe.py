@@ -12,13 +12,13 @@ energy organ the H1 gate keys:
        verb spends (the empowerment term); REVERSIBILITY derives as sign(optionLoss),
        never a declared boolean grid;
   B-3  selection: efe_select argmin, ranked ascending, top-two margin, the tau review
-       seam (never the py VERB_SEATS HITL gate).
+       shore (never the py VERB_SEATS HITL gate).
 
 THE KEYSTONE GATE (BxC): efe_gate reads H1 FIRST (sensorium_fusion), then forks —
 H1 = 0 -> efe_select (a global EFE stands well-posed) · H1 != 0 -> surface_disagreement
 carrying R*_sem = log2(dim H1) (a SURFACING move, never a reconcile).
 
-Seams held open exactly as the TS holds them: gamma defaults 1 (the C-only floor; a later
+Shores held open exactly as the TS holds them: gamma defaults 1 (the C-only floor; a later
 ARL0->beta dials it) · tau defaults 1 (a selection-margin flag, gating nothing).
 
 Arithmetic runs PURE python float64 in the TS statement order (the sensorium-pc AR(1)
@@ -206,7 +206,7 @@ def score_efe(plane_reads: dict, verb: dict, c: dict, *, gamma: float = 1.0,
 def efe_select(plane_reads: dict, verbs: list, c: dict, *, gamma: float = 1.0,
                preference_variance: float = 1.0, tau: float = 1.0) -> dict:
     """B-3 — argmin over the verbs' EFE scores; ranked ascending; the top-two margin
-    flags a close call for review (the tau seam steers no selection)."""
+    flags a close call for review (the tau shore steers no selection)."""
     if not verbs:
         raise ValueError("sensorium_efe: efe_select needs at least one verb to score.")
     ranked = sorted((score_efe(plane_reads, v, c, gamma=gamma,
@@ -321,7 +321,7 @@ def _fixture_cases() -> dict:
     for verb in _FIXTURE_VERBS:
         s = score_efe(plane_reads, verb, c_vec)
         score_cases.append({"verb": verb, "expected": s})
-    # a per-plane override + a non-default gamma / preference variance exercise the seams
+    # a per-plane override + a non-default gamma / preference variance exercise the shores
     uneven = {"verb": "uneven", "scale": 1, "shift": 0.5,
               "perPlane": {"structure": {"precisionGain": 4.0, "shift": -0.25}}}
     score_cases.append({"verb": uneven, "gamma": 0.5, "preferenceVariance": 2.0,

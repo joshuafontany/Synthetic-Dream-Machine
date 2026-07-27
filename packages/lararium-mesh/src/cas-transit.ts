@@ -88,7 +88,7 @@ export async function fetchCidOverTransit(
   return null;                                             // dont-have everywhere → explicit fail-closed miss
 }
 
-/** A local CAS read: the bytes for a cid held on THIS island, or `null` on a local miss (the existing seam). */
+/** A local CAS read: the bytes for a cid held on THIS island, or `null` on a local miss (the existing shore). */
 export type LocalCasRead = (cid: string) => Uint8Array | null | Promise<Uint8Array | null>;
 /** A local CAS write-through: cache a REMOTELY-fetched, ALREADY-VERIFIED body so the next read is local. */
 export type LocalCasCache = (cid: string, bytes: Uint8Array) => void | Promise<void>;

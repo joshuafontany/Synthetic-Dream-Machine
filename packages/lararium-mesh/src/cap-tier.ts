@@ -140,7 +140,7 @@ export function mayDeclassify(from: CapTier, to: CapTier, isOperatorRoot: boolea
  * the crypto structure permits, read off the SAME oracles the carry-split already consults:
  *   · a doc in the deterministically-federatable public set → PUBLIC (a stranger reads it foreign-legible).
  *   · a provably-sealed plane (ciphertext a carrier cannot read) → CONTRACT (the fleet∪cabal member-carry
- *     ceiling; a PERSONAGROUP refinement rides ATOP as a declared tightening — the wire seam cannot itself
+ *     ceiling; a PERSONAGROUP refinement rides ATOP as a declared tightening — the wire shore cannot itself
  *     split fleet from cabal, so CONTRACT is the honest structural ceiling of the sealed lane).
  *   · everything else — a cleartext-local plane → VEIL (nothing crosses in the clear).
  *
@@ -178,7 +178,7 @@ export interface DeclaredTierSource {
 }
 
 /**
- * CapTierRing — the SEAM the gate consults: a declared-tier source ∧ a structural-floor oracle. Pure and
+ * CapTierRing — the SHORE the gate consults: a declared-tier source ∧ a structural-floor oracle. Pure and
  * deny-by-default at the edges. `resolveTierForDoc` is the keystone applied per-doc: `resolveTier(declared
  * ?? floor, floor)` — a null declaration degenerates to the floor (no tightening), a present declaration can
  * only tighten below it.
@@ -200,10 +200,10 @@ export function resolveTierForDoc(ring: CapTierRing, documentId: string): CapTie
 }
 
 /**
- * tierPermitsRelayPeer — does a RESOLVED tier let THIS relay peer hold the read-cap? The pure share-seam
+ * tierPermitsRelayPeer — does a RESOLVED tier let THIS relay peer hold the read-cap? The pure share-shore
  * translation of the holder-set chain:
  *   · PUBLIC                 → any relay peer (the world holds the read-cap).
- *   · CONTRACT / PERSONAGROUP → a MEMBER peer only (the fleet∪cabal / fleet holder-set; the wire seam
+ *   · CONTRACT / PERSONAGROUP → a MEMBER peer only (the fleet∪cabal / fleet holder-set; the wire shore
  *                               cannot split fleet from cabal, so both member-tiers read "member peer").
  *   · VEIL                    → NO relay peer (nothing crosses a vessel boundary in the clear).
  *

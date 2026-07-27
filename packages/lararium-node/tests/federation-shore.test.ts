@@ -1,5 +1,5 @@
 /**
- * federation-seam.test.ts — §8 archipelago gate (node-level pure Repo proof).
+ * federation-shore.test.ts — §8 archipelago gate (node-level pure Repo proof).
  *
  * Proves: two in-process Repos joined by a MessageChannel converge on the same
  * Automerge doc without any manifest payload, routeChangeset, or pool machinery.
@@ -18,14 +18,14 @@
  * Gate proof: this file (node, pure Repo) +
  *             browser-repo-in-island.test.ts test 2 (browser pool).
  *
- * Meme: lar:///ha.ka.ba/lararium/node/federation-seam
+ * Meme: lar:///ha.ka.ba/lararium/node/federation-shore
  */
 
 import { describe, test, expect } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 
-describe("§8 federation seam — docUrl non-null, two Repos, one MessageChannel", () => {
+describe("§8 federation shore — docUrl non-null, two Repos, one MessageChannel", () => {
 
   test("vessel doc change reaches island Repo via CRDT — no manifest payload", async () => {
     const { port1, port2 } = new MessageChannel();

@@ -1,7 +1,7 @@
 /**
  * The gate carries a gradient.
  *
- * The membrane refuses only where a carrier stops round-tripping, since that alone loses the
+ * The shore refuses only where a carrier stops round-tripping, since that alone loses the
  * operator's bytes. A recovery keeps them: the driver stands the text back up and grades how far
  * it fell. So every decision the gate returns now carries the parser's diagnostics as a receipt,
  * and a caller reads the grade rather than a synthesised tiddler title.

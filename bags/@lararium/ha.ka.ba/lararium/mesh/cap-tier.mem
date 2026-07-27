@@ -12,7 +12,7 @@ manaoio   = 15
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the bag's sealing-posture as SELF-DESCRIBING TIGHTEN-ONLY data: WHO holds the read-cap, named as a chain by set-inclusion VEIL{vessel}⊂PERSONAGROUP{fleet}⊂CONTRACT{fleet∪cabal}⊂PUBLIC{world}. The SAFETY KEYSTONE — the datum only DECLARES, the gate ENFORCES declared∧structural-floor (the taint-meet toward more-restrictive), so a self-describing quine can only ever self-TIGHTEN, mechanically never self-loosen. PERSONAGROUP & CONTRACT ride ONE mechanism (keyring-delivery to a recipient set); the member read-cap delivers AUTHENTICATED (bound into the persona-signed grant). Declassification = an operator-root robust-declassification one-way ratchet. Isomorphic to FederationPosture by composition. Operator-ruled 2026-07-21; built 66594fae + 30cdd087; the floor wired live, the declared-source a defined-but-unlit seam."
+role      = "the bag's sealing-posture as SELF-DESCRIBING TIGHTEN-ONLY data: WHO holds the read-cap, named as a chain by set-inclusion VEIL{vessel}⊂PERSONAGROUP{fleet}⊂CONTRACT{fleet∪cabal}⊂PUBLIC{world}. The SAFETY KEYSTONE — the datum only DECLARES, the gate ENFORCES declared∧structural-floor (the taint-meet toward more-restrictive), so a self-describing quine can only ever self-TIGHTEN, mechanically never self-loosen. PERSONAGROUP & CONTRACT ride ONE mechanism (keyring-delivery to a recipient set); the member read-cap delivers AUTHENTICATED (bound into the persona-signed grant). Declassification = an operator-root robust-declassification one-way ratchet. Isomorphic to FederationPosture by composition. Operator-ruled 2026-07-21; built 66594fae + 30cdd087; the floor wired live, the declared-source a defined-but-unlit shore."
 status    = "proposed"
 tags      = ["mesh/carry-contract", "mesh/content-resolution", "mesh/membership-doctrine", "mesh/secure-context", "api/pono/lararium-identity", "api/pono/orichalcum-capabilities", "api/pono/causal-islands"]
 type      = "text/x-memetic-wikitext"
@@ -30,7 +30,7 @@ written   = "2026-07-23"
 
 > Status: PROPOSED — operator-ruled (2026-07-21), the CORE built (`66594fae` `cap-tier.ts`; `30cdd087`
 > authenticated keyring delivery). The floor stands wired live; the declared-source rides a defined-but-
-> unlit seam. The //model// awaits a post-swarm hoike.
+> unlit shore. The //model// awaits a post-swarm hoike.
 
 <<~ confidence Synthesis-Canon 15/20 >> A bag answers ''one question'' about its sealing — WHO holds the read-cap — and the answer rides as a ''chain by set-inclusion'': VEIL{this-vessel} ⊂ PERSONAGROUP{your-fleet} ⊂ CONTRACT{your-fleet ∪ a-cabal} ⊂ PUBLIC{world}. The bag ''declares'' its tier as self-describing data; the gate ''enforces'' the meet of that declaration against the crypto floor — so a declaration ''only ever tightens'', mechanically never loosens. The whole model turns on that one asymmetry.
 
@@ -76,7 +76,7 @@ The tier rides as a ''declared datum'' the @daemon recipe carries (a bag-level d
 
 * ''The high-water-mark cascade'' — `refineBagTierWithTiddlers` folds the bag default under `meet` with every per-tiddler refinement: a bag reads only as shareable as its ''least-shareable tiddler''. A tiddler declaring PUBLIC inside a PERSONAGROUP bag leaves the bag PERSONAGROUP.
 * ''META-CAP ≥ declared cap'' — `mayDeclareTier`: the write-cap that SETS a bag's tier datum must sit at-least-as-restrictive as the tier it declares. You cannot publicly-editably declare a private bag's tier (attenuation-only, the ocap discipline of #orichalcum-capabilities).
-* ''The gate adds a deny, never an allow'' — `capTierShareDecision` wraps `memberCarryShareDecision` verbatim; the structural base-deny stands ABSOLUTE (a tier never resurrects a doc the structure denied), and the tier predicate ANDs only over the base's `true`. With no declared datum it degenerates EXACTLY to the base — an inert seam.
+* ''The gate adds a deny, never an allow'' — `capTierShareDecision` wraps `memberCarryShareDecision` verbatim; the structural base-deny stands ABSOLUTE (a tier never resurrects a doc the structure denied), and the tier predicate ANDs only over the base's `true`. With no declared datum it degenerates EXACTLY to the base — an inert shore.
 
 The keystone reads back through the code: revert the meet to take the more-OPEN and nine tests fall, the gate withdrawal among them.
 
@@ -126,10 +126,10 @@ The model reads as a real pattern integrity because independent fields under the
 This meme stands ''PROPOSED'' (crucible-before-binding). The CORE is built: `66594fae` (`mesh/cap-tier.ts` — the 4-tier total order + the keystone + the high-water-mark cascade + `mayDeclareTier`/`mayDeclassify`), `30cdd087` (the authenticated keyring delivery). ''Honest bounds, kept lit'':
 
 * The ''structural FLOOR'' is wired live — `structuralFloorFor` reads the SAME federatable-set + sealed-plane oracles the carry-split already consults (a federatable plane floors at PUBLIC, a provably-sealed plane at CONTRACT, else VEIL).
-* The ''declared SOURCE'' rides a defined-but-UNLIT seam — no @daemon recipe carries a `capTier` datum in the tree yet, so a live `declaredTierForDoc` returns null for every doc → the floor governs → zero behavior change. Lighting it needs the recipe-write path + a doc→bag resolver.
-* ''PERSONAGROUP and CONTRACT collapse to "member peer" at the wire'' — the wire seam cannot itself split fleet from cabal, so CONTRACT reads as the honest structural ceiling of the sealed lane and a PERSONAGROUP refinement rides atop as a declared tightening.
+* The ''declared SOURCE'' rides a defined-but-UNLIT shore — no @daemon recipe carries a `capTier` datum in the tree yet, so a live `declaredTierForDoc` returns null for every doc → the floor governs → zero behavior change. Lighting it needs the recipe-write path + a doc→bag resolver.
+* ''PERSONAGROUP and CONTRACT collapse to "member peer" at the wire'' — the wire shore cannot itself split fleet from cabal, so CONTRACT reads as the honest structural ceiling of the sealed lane and a PERSONAGROUP refinement rides atop as a declared tightening.
 
-Deferred with clean seams (not built): the TW5 `$:/tags/CapTierFilter` ordered-cascade rendering, the remote-vessel-edits-the-@daemon-recipe UX, the CLI/browser surfaces.
+Deferred with clean shores (not built): the TW5 `$:/tags/CapTierFilter` ordered-cascade rendering, the remote-vessel-edits-the-@daemon-recipe UX, the CLI/browser surfaces.
 
 <<~/ahu >>
 

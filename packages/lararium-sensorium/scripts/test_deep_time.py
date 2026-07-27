@@ -1,6 +1,6 @@
-"""test_deep_time — the deep-time seams stay BYTE-IDENTICAL to the raw forms they centralize.
+"""test_deep_time — the deep-time shores stay BYTE-IDENTICAL to the raw forms they centralize.
 
-Two hedges, each a single home; both MUST match the pre-seam output byte-for-byte so existing
+Two hedges, each a single home; both MUST match the pre-shore output byte-for-byte so existing
 records (manifests, content addresses) stay consistent across a centuries-long run.
 
     PYTHONPATH=mempalace ./.venv/bin/python -m pytest packages/lararium-sensorium/scripts/test_deep_time.py -q
@@ -31,7 +31,7 @@ def test_content_hash_is_byte_identical_to_bare_sha256():
 
 def test_routed_identity_hash_callers_stay_byte_pinned():
     # Every content-ADDRESS/identity site routed through content_hash MUST stay byte-identical —
-    # a drift orphans stored addresses/keys. These pins lock the hash-agility seam's callers:
+    # a drift orphans stored addresses/keys. These pins lock the hash-agility shore's callers:
     # derive_cid (the canonical cid), the corpus worldline root, the constructicon key, and the
     # structure-palace structural key (which also mirrors the TS crypto.canonicalJson byte-for-byte).
     from capture_sources import derive_cid

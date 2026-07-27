@@ -1,5 +1,5 @@
 /**
- * ffz-orchestrator — the FFZ node-side fluid-band pipeline (integration, injected seams).
+ * ffz-orchestrator — the FFZ node-side fluid-band pipeline (integration, injected shores).
  *
  * A synthetic session → the orchestrator reads vectors → runs the Measure servo (+ Theme
  * cluster + Beat) → the drawers gain Measure (+ Theme/Beat) cells in `lar_ffz`. Proven:
@@ -317,7 +317,7 @@ describe("deriveMeasureLabels — the form plane (N=2 quorum)", () => {
     expect(r.conflicts).toBe(0);
   });
 
-  test("1-plane behavior IDENTICAL when no form reader is wired (absent-seam parity)", () => {
+  test("1-plane behavior IDENTICAL when no form reader is wired (absent-shore parity)", () => {
     const { recs } = session((c) => hot(c >= 5 ? 1 : 0, 8), (c) => (c >= 5 ? 1 : 0));
     const withForm = deriveMeasureLabels(recs); // no formBySha
     expect(withForm.planes).toBe(1);
@@ -465,7 +465,7 @@ describe("deriveMeasureLabels — the structure plane (N=3 quorum)", () => {
     expect(r.planes).toBe(2);
   });
 
-  test("1/2-plane paths IDENTICAL when no structure reader is wired (absent-seam parity)", () => {
+  test("1/2-plane paths IDENTICAL when no structure reader is wired (absent-shore parity)", () => {
     const { recs, form } = session3((c) => hot(c >= 5 ? 1 : 0, 8), (c) => (c >= 5 ? 1 : 0), (c) => (c >= 5 ? 1 : 0));
     const twoPlane = deriveMeasureLabels(recs, {}, form); // no structBySha
     expect(twoPlane.planes).toBe(2);

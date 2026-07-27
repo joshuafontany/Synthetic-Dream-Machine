@@ -1,7 +1,7 @@
 /**
  * tag-blobs.test.ts — the `lares ingest --tag-blobs` writer proof.
  *
- * The seam stamps the CAS opt-in flag for carriers that would hit the ungated-large-inline
+ * The shore stamps the CAS opt-in flag for carriers that would hit the ungated-large-inline
  * wall at regenesis: a `<file>.meta` sidecar for a standalone file, `_lar_cas = "yes"` on
  * the dominant blob-ahu's iam fence for a meme. A mind-bundle meme (body across many small
  * ahus), an ambiguous split (>1 large ahu), a blob-ahu with no iam fence, and an

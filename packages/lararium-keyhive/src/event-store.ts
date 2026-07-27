@@ -34,7 +34,7 @@ export interface EventStore {
   put(rec: EventRecord): Promise<void>;
   /** Read stored events. Order doesn't matter — Keyhive resolves causality. Pass `islandId` to
    *  fetch just ONE island's slice (its own events PLUS the cross-cutting unattributed ones, which
-   *  every island must co-load) — the seam boot-flatness (CIV-2) draws on to hydrate self-only and
+   *  every island must co-load) — the shore boot-flatness (CIV-2) draws on to hydrate self-only and
    *  materialize a peer's island lazily on connect. Absent → every stored event, as before. */
   list(islandId?: string): Promise<readonly EventRecord[]>;
   /** Optional bulk operation; the tiddler-backed store batches writes. */

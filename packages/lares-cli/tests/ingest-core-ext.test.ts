@@ -1,5 +1,5 @@
 /**
- * ingest-core-ext — the READ seam carries every filetype + its extension.
+ * ingest-core-ext — the READ shore carries every filetype + its extension.
  *
  * The scan lists ALL real files (a `.meta` sidecar rides with its content file,
  * never a carrier of its own) and stamps each row's `ext`, so the island routes
@@ -28,7 +28,7 @@ function seed(): { root: string; bagDir: string } {
   return { root, bagDir };
 }
 
-describe("ingest-core READ seam — filetype-native listing + ext carry", () => {
+describe("ingest-core READ shore — filetype-native listing + ext carry", () => {
   test("listCarriers lists every real file and skips the .meta sidecar", () => {
     const { root: r } = seed();
     const files = listCarriers(join(r, "bags", "@x"))!;

@@ -2,7 +2,7 @@
  * browser-circle-panel.test.ts — the @daemon follow surface's data flow, over REAL IndexedDB.
  *
  * The panel is projection-rendered (a worker+camera boot vitest-browser can't easily drive), so these tests
- * stand the SEAMS the panel rides: the vessel-side follow→list→unfollow round-trip against the IDB
+ * stand the SHORES the panel rides: the vessel-side follow→list→unfollow round-trip against the IDB
  * circle-graph + handle-book (exactly what the circle-refresh / circle-remove main-verbs orchestrate), the
  * never-federates proof (the graph stays in the vessel's OWN IDB), and the pure panel-state shaping
  * (circlePanelStateArgs) the `circle-state` worker verb writes.

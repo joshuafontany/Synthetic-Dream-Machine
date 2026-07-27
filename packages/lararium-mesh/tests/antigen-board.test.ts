@@ -95,7 +95,7 @@ describe("the LIVE pure path — board → fold → carry-contract → Mu", () =
       presenterNym: (peerId) => (peerId === "peer-victim" ? VICTIM : peerId === "peer-clean" ? CLEAN : null),
     };
     const noRelay = new Set<string>();
-    // The node seam's exact call: no relay ring, no fed gate, self-slot inert (identity null).
+    // The node shore's exact call: no relay ring, no fed gate, self-slot inert (identity null).
     expect(await carryContractShareDecision(noRelay, null, ring, null, "peer-victim", undefined)).toBe(false); // Mu
     expect(await carryContractShareDecision(noRelay, null, ring, null, "peer-clean",  undefined)).toBe(true);  // admitted
     expect(await carryContractShareDecision(noRelay, null, ring, null, "peer-unknown", undefined)).toBe(true); // unresolved → not denied

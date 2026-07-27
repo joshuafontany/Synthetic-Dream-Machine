@@ -1,6 +1,6 @@
 /**
  * worldline-edge — the pure prov-triple builders (spawn → Delegation, inject → Communication,
- * handback → close). Descriptors only; the node seam (lararium-mempalace/worldline-kg) writes them.
+ * handback → close). Descriptors only; the node shore (lararium-mempalace/worldline-kg) writes them.
  */
 import { describe, test, expect } from "vitest";
 import {

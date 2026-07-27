@@ -1,10 +1,10 @@
 /**
  * runNexusKapae / runNexusKapaeList — the RAISE side of the Kapae immune antigen (#65): the founding kahu
  * WRITES a quorum-signed ban (`kapae`) or lift (`un_kapae`) onto the always-carried antigen BOARD, and reads
- * the currently-Kapae'd set back. The READER (`antigen-board`) + the ENFORCE seam (`antigen-ring`,
+ * the currently-Kapae'd set back. The READER (`antigen-board`) + the ENFORCE shore (`antigen-ring`,
  * `carryContractShareDecision`) already stand; this is the writer they were missing.
  *
- * Node-specific seams (only these belong here):
+ * Node-specific shores (only these belong here):
  *   - Repo + NodeFSStorageAdapter over the vessel store (the offline board-doc access, mirroring device-admit)
  *   - readNexusCharterDoc off `bags/@nexus` (the roster's authority home) → foundingRoster
  *   - listPersonaRoots / generateOrLoadPersonaGroupRoot / loadPersonaGroupRootSeed (founder-held signing seeds)
@@ -13,7 +13,7 @@
  * The signing, the quorum SHAPE, the fold/verify, and the board tiddler shape stay in @lararium/mesh
  * (platform-blind). This adapter carries no crypto and no ban policy — it composes the mesh primitives.
  *
- * FAIL CLOSED, at every seam:
+ * FAIL CLOSED, at every shore:
  *   - an unseated / quorum-short charter → REFUSE (nothing to root a quorum on); no board write.
  *   - fewer than `threshold` HELD persona-roots that sit IN the seated roster → REFUSE; no sub-quorum entry.
  *   - an entry that does not verify against the seated roster → REFUSE; never write an unverifiable ban.

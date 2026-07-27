@@ -1,6 +1,6 @@
 /**
  * WS-SWARM WITNESS — the swarm ceremony over the Herm's OPEN membership relay: the SAME ceremony that
- * crosses a file channel crosses LIVE WebSockets here, over real sockets, real Keyhive. The seam
+ * crosses a file channel crosses LIVE WebSockets here, over real sockets, real Keyhive. The shore
  * (MembershipChannel) holds one shape; the file and WS impls are both live forms of the Herm's blind
  * ceremony carriage, chosen by deployment. This witnesses the WS impl across real sockets.
  *
@@ -29,7 +29,7 @@ const b64 = (u: Uint8Array): string => Buffer.from(u).toString("base64");
 
 async function main(): Promise<void> {
   console.log("[ws-swarm] =========================================================");
-  console.log("[ws-swarm] the swarm ceremony over LIVE WebSockets (strangler-fig cut-over)");
+  console.log("[ws-swarm] the swarm ceremony over LIVE WebSockets (the Herm's OPEN carriage, WS form)");
   console.log("[ws-swarm] =========================================================");
 
   const relay = await startMembershipRelay(0);
@@ -86,7 +86,7 @@ async function main(): Promise<void> {
   console.log("[ws-swarm] =========================================================");
   if (failures === 0) {
     console.log("[ws-swarm] ALL STAGES PASS — the swarm ceremony crossed LIVE WebSockets.");
-    console.log("[ws-swarm] Strangler-fig cut-over proven: same seam, file → WS, the file impl can retire.");
+    console.log("[ws-swarm] The shore holds: one ceremony, file/POST and live-WS both below it, chosen by deployment.");
   } else {
     console.log(`[ws-swarm] ${failures} STAGE(S) FAILED.`);
     process.exit(1);

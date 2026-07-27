@@ -11,7 +11,7 @@ manaoio   = 17
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "TS membrane between CompositeStore and the wiki's in-process nalu engine — forwards CRDT-remote changes, owns outbound saveTiddler/deleteTiddler, delegates apply-time echo guard to $tw.lares.isApplyingNalu"
+role      = "TS shore between CompositeStore and the wiki's in-process nalu engine — forwards CRDT-remote changes, owns outbound saveTiddler/deleteTiddler, delegates apply-time echo guard to $tw.lares.isApplyingNalu"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/api/island-adaptor"
@@ -23,12 +23,12 @@ uri-path  = "ha.ka.ba/lararium/api/island-adaptor"
 
 !! Identity
 
-`IslandAdaptor` provides the narrow TS membrane between `CompositeStore` and the wiki.
+`IslandAdaptor` provides the narrow TS shore between `CompositeStore` and the wiki.
 It implements `MemeProjection` (inbound) and exposes `saveTiddler` / `deleteTiddler` (outbound).
 It does NOT implement the TW5 `syncadaptor` module contract — `$tw.syncer` does not run.
 
 Under the yin-collapse law (lar:///ha.ka.ba/lares/api/pono/nalu), the wiki IS the
-reactive engine. The adaptor's responsibility collapsed to membrane work that TW5 cannot
+reactive engine. The adaptor's responsibility collapsed to shore work that TW5 cannot
 do from inside itself: subscribing to the CompositeStore projection bus, filtering own
 echoes, resolving cross-bag tombstones across recipe layers, and routing outbound TW5
 edits to `store.put` / `store.tombstone`.
@@ -57,7 +57,7 @@ No accumulator. No `flushAll`. The wiki's nalu engine owns the queue and the dra
 
 !! Invariants
 
-''I-1 Echo filter at the membrane.''
+''I-1 Echo filter at the shore.''
 `onUriChanged` returns immediately when `change.origin.kind === "tw-local"` and
 `origin.instanceId === this.instanceId`. Own writes never re-enter the queue.
 

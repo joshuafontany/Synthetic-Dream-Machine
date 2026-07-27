@@ -3,7 +3,7 @@
  *
  * INGEST/LOAD carriers carry a corpus-CAS `textCid` (a skinny content-address), never
  * an inline body. The daemon-side handler resolves the ref via `resolveByCid` — the
- * fs-less worker's seam onto the process-shared byte plane — re-verifies cid==hash(bytes),
+ * fs-less worker's shore onto the process-shared byte plane — re-verifies cid==hash(bytes),
  * then runs the Confluence gate on the resolved body and lands it in the TARGET bag.
  *
  * This is what keeps an oversized carrier (a whole book) OUT of the @daemon command doc,
@@ -65,7 +65,7 @@ function ingestArgsByRef(cid: string, diskText: string): Record<string, unknown>
 describe("INGEST by reference — summons lean, body resolved + landed", () => {
   test("an inline-sized carrier: the summons carries NO body inline, yet the body resolves + lands", async () => {
     // A ~500KB body — under the 1 MiB skinny threshold, so it resolves + lands inline; the
-    // point is that NONE of it rides the verb args (the transport seam). The >1 MiB handle
+    // point is that NONE of it rides the verb args (the transport shore). The >1 MiB handle
     // path is proven in the Stage 2 suite below.
     const body = "The Adventures of a very long corpus.\n".repeat(13_000);
     expect(body.length).toBeGreaterThan(400_000);
@@ -92,7 +92,7 @@ describe("INGEST by reference — summons lean, body resolved + landed", () => {
     expect(carriers[0]!["decision"]).toBe("ingest");
 
     // The whole body transited the reference path and landed in the target bag's per-carrier
-    // field (the membrane normalizes a trailing newline — a decompose detail, not a transport
+    // field (the shore normalizes a trailing newline — a decompose detail, not a transport
     // loss): the landed record carries the full corpus.
     const landed = (await composite.resolveAll(URI)).find((e) => e.bagId === BAG)!.record;
     const landedText = String(landed.tiddler["text"] ?? "");
@@ -116,7 +116,7 @@ describe("INGEST by reference — summons lean, body resolved + landed", () => {
   });
 
   test("absent resolver: a textCid carrier faults loud rather than landing a body-less record", async () => {
-    const body = "needs the seam";
+    const body = "needs the shore";
     const args = ingestArgsByRef(cidOf(body), body);
     const composite = makeComposite();
     const table = new VerbTable();

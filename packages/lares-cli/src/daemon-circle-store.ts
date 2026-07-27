@@ -1,7 +1,7 @@
 /**
  * daemon-circle-store — the @circles-backed CircleStore adapter (the follow-graph's SOURCE OF TRUTH).
  *
- * The CircleStore seam composeFollow consumes (mesh/compose-follow). Where the node-fs adapter wrote a LOCAL
+ * The CircleStore shore composeFollow consumes (mesh/compose-follow). Where the node-fs adapter wrote a LOCAL
  * private JSON file (Build 2a — per-device, never fleet-synced), THIS adapter drives the daemon FOLLOW-GRAPH
  * verbs (circle-add / circle-remove / circle-list) over the pono sock: the follow lands in the sovereign
  * @circles Automerge doc, which the self-slot FLEET-syncs to the operator's OWN device fleet (PRIVATE-but-

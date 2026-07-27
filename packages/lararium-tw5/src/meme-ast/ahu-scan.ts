@@ -100,7 +100,7 @@ export function findTopLevelAhuBlocks(text: string): AhuBlock[] {
  * across the whole text — skipping quoted (fenced/inline-code) sigils and the
  * structural CONTROL_SLOTS (which carry no addressable body). The gate reads
  * this to guard its canonical-equivalence NOOP: a slot the disk declares that
- * the round-trip render drops names a LOSSY membrane, never a cosmetic edit —
+ * the round-trip render drops names a LOSSY shore, never a cosmetic edit —
  * so a dropped slot MUST NOT read as canonical-equivalent (the ahu-drop guard).
  */
 export function collectAhuSlots(text: string): Set<string> {

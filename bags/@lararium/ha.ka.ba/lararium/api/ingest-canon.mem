@@ -45,7 +45,7 @@ The golden path for getting //any// chat session + its telemetry into the palace
 <<~Lock 3-exchange-grain "the DRAWER = the exchange pair (Q+A) — the self-contained recall unit. The producer assembles pairs → one CaptureRecord per pair. (per-message gradient bearing-index stays a SEPARATE artifact, not a drawer)" >>
 <<~Lock 4-writeback-demoted "writeback NEVER runs per-ingest — ONLY on a deriver-version bump (lar_hv + HARVEST_VERSION in lockstep), as a one-shot version-gated backfill across wings. its sole legitimate role: re-derive lar_* from stored content without re-ingesting" >>
 <<~Lock 5-writeback-lock "the writeback IS a writer → it MUST take the SAME mine_palace_lock the mine holds (chroma's get→update is no single SQLite transaction; SQLITE_BUSY guards a statement, not a read-modify-write → lost-update risk). on busy → retry. THE one real code change beyond producer unification" >>
-<<~Lock 6-transport "transport is a FLUSH detail under the one path: daemon-SEAM when concurrent (live), DIRECT fresh-process + busy-retry when sole bulk writer (isolated backfill). one isomorphic CaptureFlush verb, two transports" >>
+<<~Lock 6-transport "transport is a FLUSH detail under the one path: daemon-SHORE when concurrent (live), DIRECT fresh-process + busy-retry when sole bulk writer (isolated backfill). one isomorphic CaptureFlush verb, two transports" >>
 <<~Lock 7-idempotency "content-key watermark (sha of exchange text, NOT uuid) = re-ingest is a no-op + survives across surfaces; mempalace source_file dedup backs it. version-gate (lar_hv) governs re-derivation, ORTHOGONAL" >>
 <<~Lock 8-busy-is-retryable "the palace lock is the cross-process coordination — a held lock (MineAlreadyRunning) is a BUSY signal (= SQLITE_BUSY), not an error; every writer retries with backoff+jitter. live+bulk coexist through the one lock (verified: 0 failures, pave 33619)" >>
 <<~Lock 9-one-runtime "ONE RUNTIME — the @daemon TW5 VM is the SOLE ingest + gradient runtime. DROP every outside-VM path: turn-harvest.ts/harvestTurnGradient RETIRES (no regex shadow, no VM-free projection, no fallback), no CLI-side annotate, no daemon-down direct-mine. Verbatim-always rides the DURABLE TRANSCRIPT (harness-written, always on disk) REPLAYED through the VM when it wakes — never an outside-VM mine. One grammar, one runtime, no fork to keep in lockstep" >>
@@ -64,7 +64,7 @@ engine parses TURNS, not just documents. (2) ''the VM gradient module'' (larariu
 `$tw.wiki.parseText` flow (TW5's parser + our `<<~` overlay wikirule) → the FULL TW5+memetic parse
 tree (host wikitext typed + sigils typed) → walk + GRADE the sigil nodes (complete=high, drifted/
 unclosed=low; the grade-on-a-gradient) → the graded tree + an `envelope` provenance node (surface/
-handles/sidechain/ffz). Serializable + re-hydrates natively as the engine's own parse tree. (3) ''wire the cap→VM seam'' — thread `ctx.tw5` to the annotate; the cap calls the VM
+handles/sidechain/ffz). Serializable + re-hydrates natively as the engine's own parse tree. (3) ''wire the cap→VM shore'' — thread `ctx.tw5` to the annotate; the cap calls the VM
 module (annotate is sync, `parseMemeText` sync in-worker). (4) ''drawer-write'' — `buildPatch` →
 `lar_ast = JSON.stringify(graded AST + envelope)` + `lar_hv`; DROP the flat `lar_*`; rewrite
 `LAR_SCHEMA` (adapter.py) to declare only `lar_hv`+`lar_ast`; bump `LAR_HV` 6→7 (lockstep
@@ -94,7 +94,7 @@ no flat-index duplication survives. (`CaptureRecord` type · `ndjson.py` adapter
 > exchange pair (Q+A), the self-contained recall unit. IDEMPOTENT by content-hash watermark;
 > RE-DERIVED only on a lar_hv/HARVEST_VERSION bump (the writeback's sole role — schema-evolution
 > backfill, never per-ingest ELT). The writeback is a writer: it takes the SAME mine_palace_lock the
-> mine holds. Transport is a flush detail: daemon-seam when concurrent, direct+busy-retry when sole.
+> mine holds. Transport is a flush detail: daemon-shore when concurrent, direct+busy-retry when sole.
 
 <<~/ahu >>
 

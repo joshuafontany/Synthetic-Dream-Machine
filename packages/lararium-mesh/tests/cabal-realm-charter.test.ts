@@ -1,9 +1,9 @@
 /**
- * cabal-realm-charter — the VEIL-PUBLIC membrane.
+ * cabal-realm-charter — the VEIL-PUBLIC shore.
  *
  * Proves the disclosure boundary (canon #the-realm "shared charter, read-scope"):
  *   · the CHARTER is veil-public — name + bearing + deliberately-published meta.
- *   · the SUBSTRATE + ROSTER are members-only — they NEVER cross the membrane,
+ *   · the SUBSTRATE + ROSTER are members-only — they NEVER cross the shore,
  *     even when handed to it in the same input bag (the veil holds, structurally).
  *   · the charter round-trips its public fields + serializes deterministically.
  *
@@ -39,7 +39,7 @@ const FULL_STATE: CabalRealmPublishState = {
   substrateContent: SECRET_SUBSTRATE,
 };
 
-describe("projectCabalRealmCharter — the veil-public membrane", () => {
+describe("projectCabalRealmCharter — the veil-public shore", () => {
   test("keeps ONLY the charter fields — name, bearing, published meta", () => {
     const charter = projectCabalRealmCharter(FULL_STATE);
     expect(charter).toEqual({

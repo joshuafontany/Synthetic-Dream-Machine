@@ -225,7 +225,7 @@ describe("the fleet closes over a PRESENTED EDGE, never over a pointer", () => {
 });
 
 describe("the fleet NAME store — usable, and never a membership", () => {
-  /** A store standing in for the platform seam (node fs / browser IDB). */
+  /** A store standing in for the platform shore (node fs / browser IDB). */
   function memStore() {
     const m = new Map<string, string>();
     return {

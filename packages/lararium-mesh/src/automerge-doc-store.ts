@@ -1,3 +1,22 @@
+/**
+ * AutomergeDocStore — the one LarTiddlerStore for every vessel: the SHORE where LarDoc meaning
+ * crosses into Automerge's medium.
+ *
+ * What crosses unchanged is the store SHAPE: browser, Node, and worker vessels all instantiate this
+ * directly, and platform differences (IndexedDB vs fs vs memory) live in the Repo's storage/network
+ * adapters — never in the store. Relay-as-vessel doctrine. The medium varies; the shape does not.
+ *
+ * LarDoc alignment (M24): the Automerge doc carries a `tiddlers` submap.
+ *   doc.tiddlers[title] = LarTiddlerRecord
+ *
+ * Automerge patches arrive with path = ["tiddlers", title, fieldName]. AutomergeDocStore strips the
+ * leading "tiddlers" segment before handing patches to MemeProvider so the provider stays
+ * path-agnostic — the foreign medium's addressing stops at this shore and never travels inward.
+ *
+ * FPI-3 (synergy): same mutation/subscription API runs on every vessel.
+ * Local-first Ideal 1 (fast): get/listVisible read from the in-memory doc.
+ */
+
 import type { DocHandle } from "@automerge/automerge-repo";
 import { getHeads as automergeGetHeads } from "@automerge/automerge";
 import type { LarTiddlerRecord, LarTiddlerStore, LarTiddlerChange, ChangeOrigin } from "./tiddler-store.js";
@@ -16,23 +35,6 @@ type MutableLarTiddlerRecord = {
   };
 };
 
-/**
- * AutomergeDocStore — the one LarTiddlerStore for every vessel.
- *
- * Browser, Node, and worker vessels all instantiate this directly.
- * Platform differences (IndexedDB vs fs vs memory) live in the Repo's
- * storage/network adapters — never in the store. Relay-as-vessel doctrine.
- *
- * LarDoc alignment (M24): the Automerge doc carries a `tiddlers` submap.
- *   doc.tiddlers[title] = LarTiddlerRecord
- *
- * Automerge patches arrive with path = ["tiddlers", title, fieldName].
- * AutomergeDocStore strips the leading "tiddlers" segment before handing
- * patches to MemeProvider so the provider stays path-agnostic.
- *
- * FPI-3 (synergy): same mutation/subscription API runs on every vessel.
- * Local-first Ideal 1 (fast): get/listVisible read from the in-memory doc.
- */
 function _contentEquals(cur: LarTiddlerRecord, rec: LarTiddlerRecord): boolean {
   return JSON.stringify(cur) === JSON.stringify(rec);
 }

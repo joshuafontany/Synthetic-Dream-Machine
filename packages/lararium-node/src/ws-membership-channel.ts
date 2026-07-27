@@ -1,5 +1,5 @@
 /**
- * ws-membership-channel — the LIVE-WS impl of the membership seam (MembershipChannel)
+ * ws-membership-channel — the LIVE-WS impl of the membership shore (MembershipChannel)
  * over real sockets. Same interface as the file/POST impl;
  * the swarm ceremony above never learns which transport carries it.
  *
@@ -9,7 +9,7 @@
  * invite) — NOT Automerge sync — so this carries NONE of the anti-relay sync gate
  * (the cap-wall); it is a plain message relay.
  *
- * Node-side (the transport branch); the seam + the file impl stay platform-blind.
+ * Node-side (the transport branch); the shore + the file impl stay platform-blind.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */

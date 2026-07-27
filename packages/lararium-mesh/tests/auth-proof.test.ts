@@ -63,7 +63,7 @@ describe("buildAuthResponse (V3 peer half)", () => {
 });
 
 describe("runPeerHandshake (platform-blind V3 peer half)", () => {
-  function seam(incoming: unknown[]) {
+  function shore(incoming: unknown[]) {
     const queue = [...incoming];
     const sent: LarAuthMsg[] = [];
     return {
@@ -78,7 +78,7 @@ describe("runPeerHandshake (platform-blind V3 peer half)", () => {
   }
 
   test("challenge → signed lar:auth → auth-ok ⇒ { ok: true }", async () => {
-    const s = seam([mkLarChallenge("n1"), mkLarAuthOk()]);
+    const s = shore([mkLarChallenge("n1"), mkLarAuthOk()]);
     const r = await runPeerHandshake(s);
     expect(r.ok).toBe(true);
     expect(s.sent).toHaveLength(1);
@@ -88,12 +88,12 @@ describe("runPeerHandshake (platform-blind V3 peer half)", () => {
   });
 
   test("auth-denied ⇒ { ok:false, reason }", async () => {
-    const s = seam([mkLarChallenge("n1"), mkLarAuthDenied("insufficient cap")]);
+    const s = shore([mkLarChallenge("n1"), mkLarAuthDenied("insufficient cap")]);
     expect(await runPeerHandshake(s)).toEqual({ ok: false, reason: "insufficient cap" });
   });
 
   test("wrong first message ⇒ rejects before sending anything", async () => {
-    const s = seam([mkLarAuthOk()]);
+    const s = shore([mkLarAuthOk()]);
     const r = await runPeerHandshake(s);
     expect(r.ok).toBe(false);
     expect(s.sent).toHaveLength(0);

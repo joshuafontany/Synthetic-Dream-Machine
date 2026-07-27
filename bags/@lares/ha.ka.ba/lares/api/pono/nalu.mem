@@ -88,7 +88,7 @@ main-thread-fed worker_thread, nor even a standalone island — the `#has captur
 CARRIES the cap (tending the operator's session-capture is a daemon duty); its sink (the
 `mine --source ndjson` flush) and feed (the producers) may be unwired, and that inert state is a
 valid resting point — `role = capability ≠ platform`, the cap distinct so the FLOW capture never
-gates the daemon's AUTHORITY dispatch (the master cut holds at the cap seam). The main thread
+gates the daemon's AUTHORITY dispatch (the master cut holds at the cap shore). The main thread
 carries no data-plane. And every gate ''breathes'': the threshold self-regulates per family —
 accumulate shrinks its batch depth under load, the variable-cost reconcile coalesce GROWS its
 window, the display coalesce stays frame-pinned (the projection-nalu #servo + #cells law: role =
@@ -98,7 +98,7 @@ physics ≠ uniformity).
 shore) and the ''CRDT⟷TW5 projection-nalu'' stay ''sovereign TS'' — a first-class TS home, where much of
 the projection tech lives. The ''capture / stream nalu-gate'' re-homes ''py-side'': the stream sensorium's
 gate runs in py/R per-stream, and the TS coordinator drives it — feeding the py gate, consuming its crests.
-The wave shape holds identically across the TS/py membrane — collect-then-flush on either bank, the
+The wave shape holds identically across the TS/py shore — collect-then-flush on either bank, the
 substrate the water, the nalu the pattern.
 
 ''The invariant:'' The nalu is not one tiddler change. It is the atomic delivery
@@ -141,7 +141,7 @@ itself has no sigil; the `\tick` sigil hooks into the nalu.
 !! Yin-Collapse Law
 
 ''Law:'' The TW5 wiki (`$tw.wiki`) IS the primary synchronous reactive engine.
-The TS layer is the minimal membrane around it — only what TW5 cannot do from inside.
+The TS layer is the minimal shore around it — only what TW5 cannot do from inside.
 
 ''Landed architecture (2026-05-30):''
 
@@ -154,7 +154,7 @@ The TS layer is the minimal membrane around it — only what TW5 cannot do from 
 │  TW5: SharktoothSigil      ← grammar as tiddlers     │
 │  TW5: Reaction tiddlers    ← bindings as tiddler data│
 ├─────────────────────────────────────────────────────┤
-│  TS:  IslandAdaptor        ← membrane: forward + echo│
+│  TS:  IslandAdaptor        ← shore: forward + echo│
 │  TS:  AutomergeDocStore    ← Automerge CRDT          │
 │  TS:  CompositeStore       ← recipe layer stack       │
 │  TS:  VesselIslandPool     ← multi-island coordination│
@@ -168,7 +168,7 @@ The TS layer is the minimal membrane around it — only what TW5 cannot do from 
 * `reaction-router` — `wiki.addEventListener("change")` listener that fires `tm-verse-event`
   for `lar:` tiddlers whose papalohe bindings name a listenable
 
-''TS-side membrane (irreducible — TW5 cannot do these):''
+''TS-side shore (irreducible — TW5 cannot do these):''
 * `AutomergeDocStore` — CRDT, patch subscription, MemeProvider fan-out
 * `IslandAdaptor` — forward `LarTiddlerChange` → `$tw.lares.enqueueNalu`, filter own
   echoes, resolve cross-bag tombstones, route outbound saveTiddler/deleteTiddler

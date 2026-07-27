@@ -16,7 +16,7 @@ token counts, but destroys cross-line recurrence) flattens it to noise. The sign
 across lines — exactly what the placebo null removes — never mere line shape (which the placebo
 holds fixed by construction).
 
-CLOCK PURITY + THE SEAM, surfaced: the event ordinal = the line's position in chant order; no
+CLOCK PURITY + THE SHORE, surfaced: the event ordinal = the line's position in chant order; no
 wall-clock touches any path. The gate API expects drift/cohesion telemetry from a live pipeline;
 this probe feeds it a text-derived cohesion series instead — an ADAPTATION AT THE SIGNAL, never at
 the guards: recover_clock and SchmittLock run at their default thresholds, unweakened. A lock here
@@ -25,7 +25,7 @@ static-corpus-null guard stays intact, and the probe REPORTS holdover as honestl
 
 STREAM SHAPE: one stream per sensorium (bed) — the domain corpus end-to-end in its natural order,
 work by work (logical sources sorted), chant order (the sectioner's chunk ordinals) within each.
-Each logical source ALSO reads as its own segment, so a seam artifact at a work/rendering boundary
+Each logical source ALSO reads as its own segment, so a shore artifact at a work/rendering boundary
 stays visible rather than silently blended.
 
 Usage (the mempalace venv):
@@ -138,7 +138,7 @@ def stream_lock(signal: list, *, window: int = 128, stride: int = 8) -> dict:
 
 def probe_root(root: str, *, window: int = 128, stride: int = 8) -> dict:
     """One sensorium's probe: the whole-corpus stream reading + a per-logical-source
-    segment reading (each rendering in its own chant order), so a seam artifact at a
+    segment reading (each rendering in its own chant order), so a shore artifact at a
     work boundary stays visible."""
     records = chant_order_records(root)
     by_source: dict = {}

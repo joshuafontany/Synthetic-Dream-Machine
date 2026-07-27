@@ -67,7 +67,7 @@ describe("generateOrLoadPersonaSeed — lifecycle", () => {
     expect(Array.from(res.seed)).toEqual(Array.from(seed));
   });
 
-  test("rejects a randomBytes seam that returns the wrong length", async () => {
+  test("rejects a randomBytes shore that returns the wrong length", async () => {
     const store = memSeedStore();
     await expect(generateOrLoadPersonaSeed(store, () => new Uint8Array(16))).rejects.toThrow(
       /32 bytes/,

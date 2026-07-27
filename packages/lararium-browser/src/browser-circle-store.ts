@@ -5,7 +5,7 @@
  * The browser twins of the node-fs circle/handle-book stores. "Adding to a circle IS the follow; the graph
  * never federates; private to the owning node" (social-seed) — here the graph is an IndexedDB store, the same
  * local-first posture as the persona-petname store beside it. The never-federates wall is STRUCTURAL: no board
- * write exists in either seam. A future device-fleet adapter wraps the SAME `CircleStore` shape over a PRIVATE
+ * write exists in either shore. A future device-fleet adapter wraps the SAME `CircleStore` shape over a PRIVATE
  * bag for cross-vessel sync; the interface never moves.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-two-stacks

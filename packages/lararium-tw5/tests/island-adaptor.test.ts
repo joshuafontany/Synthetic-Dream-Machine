@@ -1,5 +1,5 @@
 /**
- * IslandAdaptor — unit tests for the narrowed TS membrane between the
+ * IslandAdaptor — unit tests for the narrowed TS shore between the
  * CompositeStore and the wiki's nalu engine.
  *
  * Under unified-nalu (yin-collapse law), the adaptor's job collapsed to:

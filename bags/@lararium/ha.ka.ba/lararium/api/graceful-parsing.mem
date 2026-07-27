@@ -94,7 +94,7 @@ HTML and DESTROY widget invocation. parse5 governs the HTML LAYER, never the lay
   TW5's own `parseTag`/`parseAttribute` (resilient-recursive-descent, preserving the extensions) — NOT a
   parse5 swap. (Reconciliation + prior art under research: spirit a871269a.)
 
-''Sanitize seam (CRITICAL) — allowlist tree-walk IN the transform, NOT DOMPurify.'' A spec parser parses
+''Sanitize shore (CRITICAL) — allowlist tree-walk IN the transform, NOT DOMPurify.'' A spec parser parses
 `<script>`/`onerror=`/`javascript:`/`<iframe srcdoc>` faithfully → XSS surface. DOMPurify needs a real
 DOM/`window` (not Worker-safe; `isomorphic-dompurify` drags jsdom = heavy + a 2nd redundant parser). The
 parse5→TW5 transform ALREADY walks every node → fold an allowlist sanitizer into that one walk (tag
@@ -159,7 +159,7 @@ hybrid (B) is unsound, not just lossy). The three driver changes (`core/.../rule
 `"true"` · `{{indirect}}` · `{{{filtered}}}` · `<<macro>>` · `((mvv))` · `` `substituted` `` ·
 unquoted) ride verbatim. MUST keep byte-exact: per-attr `start/end`; element `openTagStart/openTagEnd/
 closeTagStart/closeTagEnd/rule:"html"/orderedAttributes` (set in `html.js parse()` :44-85, asserted
-`test-wikitext-parser.js:26-106`). Confidence seam: clean = `recoveredAs` absent / 20 · resynced =
+`test-wikitext-parser.js:26-106`). Confidence shore: clean = `recoveredAs` absent / 20 · resynced =
 `recoveredAs:"repaired"` mid · verbatim-wrapped = `recoveredAs:"water"` raw (water ships first).
 
 ''PRIOR ART (the field hand-writes the tag grammar + delegates values — exactly option A):'' MDX's
@@ -193,7 +193,7 @@ click-to-edit live-update path).
 ''ERROR-SURFACING — TWO channels (operator: TW5 messages the user via `$:/alert` + system tags):''
 (1) IN-PLACE — the inline `tc-error` span at the failure site (the gradient, in-render); (2) USER-
 NOTIFICATION — a `$:/tags/Alert` tiddler so the user //knows// a degradation occurred (TW5's native
-dismissible alert, same channel as the reboot-alert seam). CAVEAT: NEVER raise `$:/alert` from inside
+dismissible alert, same channel as the reboot-alert shore). CAVEAT: NEVER raise `$:/alert` from inside
 `renderChildren` (mutating the wiki during render risks a re-render loop) — collect render-errors
 in-render, raise the alert OUT-of-render (a hook/sweep, eventual-send), per the reboot-alert discipline.
 
@@ -330,7 +330,7 @@ ship (a catch + downgrade vs the per-construct repair tail). This is already `la
 recovery-set, re-parse) ONLY per-construct, ONLY where the fix is UNAMBIGUOUS and FREQUENT — an
 unclosed `}}}` / `<<~ >>` is a safe insert; a broken table row is a risky guess that stays water. A
 repaired node carries `recoveredAs: "repaired"` at MID (synthesis) confidence — honestly weaker than a
-clean parse, honestly stronger than water. The `Error` node's `recoveredAs` field is the seam: `"water"`
+clean parse, honestly stronger than water. The `Error` node's `recoveredAs` field is the shore: `"water"`
 ships now, `"repaired"` lands per-construct later. The gradient stays truthful end to end: clean=canon
 · repaired=synthesis · water=raw.
 
@@ -386,7 +386,7 @@ weaker — ocap) · resumable-vs-abortive tagged per rung (effect-handler discip
 abort = inert) · the gradient as DATA, the cascade in ONE driver · clean path free of defensive tangle
 ("let it crash" into the driver).
 
-''THE BUILD (seams, grounded file:line):'' SigilRule type +failure fields (`types.ts:53-66`) ·
+''THE BUILD (shores, grounded file:line):'' SigilRule type +failure fields (`types.ts:53-66`) ·
 grammar-cache reads `lar-recover-*` / the `#has` cap-stack (`grammar-cache.ts:88-103`) · the three
 hardcoded builder recovery points consult the gradient (orphan-close `builder.ts:255-264`, unclosed
 force-close `:277-281`, unknown-sigil Dynamic `:123/:215`) · scanner per-sigil error-accumulation

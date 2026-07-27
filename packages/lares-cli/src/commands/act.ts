@@ -162,7 +162,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
         .filter((f) => !f.endsWith(".meta"));
       // The feed lands BOTH memetic-wikitext memes AND every other legal TW5
       // filetype: each carrier rides its text + a loci title + its extension, and
-      // the island routes by content (an SOH heading → the memetic membrane; else
+      // the island routes by content (an SOH heading → the memetic shore; else
       // TW5's own deserializer registry, keyed by extension). Only an empty /
       // whitespace-only file is skipped — it holds no carrier and would reject the
       // whole batch (the validator forbids an empty-text carrier). A binary
@@ -178,7 +178,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
           return true;
         })
         .map(({ f, text, binary }) => {
-          // Pair a `.meta` sidecar so a content filetype keeps its fields at the membrane.
+          // Pair a `.meta` sidecar so a content filetype keeps its fields at the shore.
           let meta: string | undefined;
           try { if (existsSync(f + ".meta")) meta = readFileSync(f + ".meta", "utf8"); } catch { /* none */ }
           // Opt-in CAD (content-resolution.mem): a small un-flagged body rides INLINE; a flagged

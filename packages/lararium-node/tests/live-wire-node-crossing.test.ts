@@ -28,7 +28,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { WebSocketServer } from "ws";
 import { verifyAuthProof, ed25519SignerFromSeed, LarWSClientAdapter } from "@lararium/mesh";
-import type { AuthVerifierSeam } from "@lararium/mesh";
+import type { AuthVerifierShore } from "@lararium/mesh";
 import { Repo, type PeerId } from "@automerge/automerge-repo";
 import { NodeWSServerAdapter } from "@automerge/automerge-repo-network-websocket";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
@@ -56,11 +56,11 @@ function makeNodeIdentity(): { identity: LeafIdentity; seed: Uint8Array; pub: st
 }
 
 /**
- * The real seam a vessel's gate arms with: it runs the REAL V3 Ed25519 proof check, then the CAPABILITY
+ * The real shore a vessel's gate arms with: it runs the REAL V3 Ed25519 proof check, then the CAPABILITY
  * decision — a peer crosses only when its key sits in the admitted set (the daemon-bag grant). A valid
  * proof proves WHO, never WHETHER-GRANTED; an un-admitted node is turned away here.
  */
-function makeCapabilitySeam(gatePubKey: string, admitted: ReadonlySet<string>): AuthVerifierSeam {
+function makeCapabilityShore(gatePubKey: string, admitted: ReadonlySet<string>): AuthVerifierShore {
   return {
     async verify(cardBytes, bagUrl, _access, proof) {
       if (!proof) return { ok: false, reason: "V3 proof required" };
@@ -149,7 +149,7 @@ function standNodeVessel(opts: VesselOpts): Promise<Vessel> {
       },
     });
 
-    gate.arm(makeCapabilitySeam(opts.gatePubKey, opts.admitted), AUD, opts.gatePubKey);
+    gate.arm(makeCapabilityShore(opts.gatePubKey, opts.admitted), AUD, opts.gatePubKey);
 
     http.listen(0, "127.0.0.1", () => {
       const addr = http.address();

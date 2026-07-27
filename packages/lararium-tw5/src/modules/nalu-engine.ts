@@ -23,7 +23,7 @@ module-type: startup
  *
  * Position in the stack:
  *
- *   TS membrane (irreducible — Automerge, network, crypto, storage)
+ *   TS shore (irreducible — Automerge, network, crypto, storage)
  *     AutomergeDocStore.handle.on("change") → MemeProvider → projection bus
  *     bridge projection forwards LarTiddlerChange → $tw.lares.enqueueNalu()
  *   ───────────────────────────────────────────────────────────────────────

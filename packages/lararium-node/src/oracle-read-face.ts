@@ -56,7 +56,7 @@ export async function mountOracleReadFace(args: {
   readonly signerSeed:   Uint8Array;
   readonly storageDir:   string;
   readonly onLog?:       (line: string) => void;
-  /** Export fn — defaults to exportOracleSnapshot (the raw doc). A FLOW-map serve passes a membrane
+  /** Export fn — defaults to exportOracleSnapshot (the raw doc). A FLOW-map serve passes a shore
    *  variant (snapshotPublicFlowMap) so ONLY the public projection ever crosses the wire. */
   readonly exportSnapshot?: (doc: unknown) => Promise<OracleSnapshot>;
 }): Promise<OracleReadFace> {
@@ -160,7 +160,7 @@ export async function mountOracleReadFace(args: {
 
 /**
  * Mount a vessel's PUBLIC FLOW-map (the mesh-palace projection) as a read-face. The disclosure
- * membrane applies BEFORE the snapshot (snapshotPublicFlowMap), so only coarse public FLOW crosses
+ * shore applies BEFORE the snapshot (snapshotPublicFlowMap), so only coarse public FLOW crosses
  * the wire — the private territory never leaves. A Herm serves this as its sole substrate (at
  * `/oracle/`); a peer pulls it with the same `pullAndVerifyOracle`. The Lares Viales floor on the wire.
  */
