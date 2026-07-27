@@ -55,6 +55,12 @@ export interface CabalVouchResult {
   readonly expiresAt:   string;
   readonly boardUrl:    string;
   /** The voucher's out-degree AFTER this vouch — what they have now split their standing across. */
+  /**
+   * How many edges THIS REPLICA can see under `voucherDid`, right now — never how many exist. A sibling
+   * replica may hold edges this one has not synced, so the dilution a voucher actually carries reads at
+   * or above this number. Reported so a human sees what they just spent, never as a total (vouch-board's
+   * no-completeness invariant: a count presented as total makes a withheld tie legible as a withheld tie).
+   */
   readonly outDegree:   number;
   /** True when this vouch replaced the voucher's own prior vouch for the SAME joiner (one edge, not two). */
   readonly reMinted:    boolean;

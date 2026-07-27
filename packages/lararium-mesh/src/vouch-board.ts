@@ -24,6 +24,19 @@
  * edges they carry, while one voucher re-issuing to one joiner stays idempotent — a voucher cannot inflate its
  * own out-degree by re-minting, which would otherwise dilute its other children for free.
  *
+ * ── INVARIANT: NO READ HERE MAY EVER CLAIM COMPLETENESS ──────────────────────────────────────────────
+ * Under no-global-now a replica reads only as-of-its-last-sync, so a tie WITHHELD and a tie merely UNSYNCED
+ * generate identically. That equivalence does load-bearing work rather than merely describing a limitation:
+ * a custodian who declines to write a tie performs no detectable act, because nobody can distinguish the
+ * absence from ordinary partition. Every trust network that survived hostile pressure kept that discretion —
+ * to enter a false record, refuse a true one, or silently fail to write — and a board that vouched for its
+ * own completeness would hand it away in one sentence.
+ *
+ * So: no read in this module, and nothing built on one, may report a count as TOTAL, a set as COMPLETE, or a
+ * board as current "as of epoch N". `verifiedVouchesFromBoard` hands back what THIS replica happens to hold
+ * and vows nothing whatever about what exists. The property costs nothing to keep and cannot be recovered
+ * once spent — a single completeness claim anywhere downstream makes refusal legible again, everywhere.
+ *
  * Platform-blind: rides ./base-doc + ./cabal-invite only. NO node: imports — the repo resolution of the board
  * handle lives in the node holder, which hands a read `LarDoc` in.
  * Meme: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing

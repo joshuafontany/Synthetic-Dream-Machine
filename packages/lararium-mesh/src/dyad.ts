@@ -16,7 +16,8 @@
  * THE DEEPER READING (operator ruling, 2026-07-26): IDENTITY ALWAYS NAMES A RELATIONSHIP, NEVER A THING.
  * That holds outside this codebase too — every pet-name a human uses names a relation they stand in, and the
  * "thing" underneath reads as an inference nobody ever verifies. So the dyad does not JOIN two identities;
- * the dyad IS the identity, and vessel and veil name its two ends.
+ * the dyad ENACTS the identity-relationship (as all identity functions as relationship-functor), and vessel
+ * and veil name its two ends.
  *
  * ── THE PERSONA BRIDGES LOCAL INFRA TO THE SOCIAL LAYER, INTERNAL FIRST ─────────────────────────────────
  * Because infra keys correlate to nothing, SOMETHING must gather a human's places back together — and that
