@@ -57,8 +57,9 @@ async function cmdVouch(args: ParsedArgs): Promise<number> {
     console.log(`  place:     ${r.place}`);
     console.log(`  expires:   ${r.expiresAt}`);
     console.log(`  board:     ${r.boardUrl}`);
-    // The number that matters to the voucher: their standing now splits this many ways.
-    console.log(`  out-degree: ${r.outDegree}  (your standing now splits ${r.outDegree} way${r.outDegree === 1 ? "" : "s"})`);
+    // The number that matters to the voucher — stated as a FLOOR, because it counts what this replica has
+    // synced. A peer may hold edges we have not seen, so real dilution reads at or above this.
+    console.log(`  out-degree: ${r.outDegree}  (this replica sees your standing split ${r.outDegree} way${r.outDegree === 1 ? "" : "s"} — a peer may hold more)`);
     return 0;
   } catch (err) {
     if (err instanceof CabalVouchError) { console.error(`refused: ${err.message}`); return 1; }

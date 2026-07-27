@@ -151,9 +151,12 @@ async function cmdMembers(args: ParsedArgs): Promise<number> {
         console.log(`nexus members — the members-registry board fold:`);
         console.log(`  epoch:      ${r.charterEpochCid || "(unseated — the registry stays inert)"}`);
         console.log(`  quorum:     ${r.threshold}-of-N · seated keys: ${r.seatedKeys}`);
-        console.log(`  members (${r.members.length}):`);
+        // "as of last sync" rides the label, never the reader's assumption. An EMPTY fold especially: a
+        // definite "none contracted" is a claim ordinary partition can manufacture, and a human told a
+        // negative as fact acts on it.
+        console.log(`  members (${r.members.length} as of last sync):`);
         for (const n of r.members) console.log(`    ${n}`);
-        if (r.members.length === 0) console.log(`    (none contracted — the seated kahu remain the floor)`);
+        if (r.members.length === 0) console.log(`    (none this replica has synced — a peer may hold members; the seated kahu remain the floor)`);
         console.log(`  board entries (${r.entries.length}):`);
         for (const e of r.entries) console.log(`    ${e.action.padEnd(6)} v${e.version}  ${e.nym.slice(0, 16)}…  (${e.signers} sig${e.contractIn ? ", contract-in" : ""})`);
       },
