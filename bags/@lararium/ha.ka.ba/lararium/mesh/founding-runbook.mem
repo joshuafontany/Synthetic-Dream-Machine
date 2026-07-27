@@ -11,8 +11,9 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the go-live founding rite: the exact CLI sequence that clears a vessel fresh-from-void, stands the three founding kahu, forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes the content, and goes LIVE. Carries the reserve-custody independence rule + the recovery-cost frame (bake compromise-resistance early, full-pave stays the cheap net until the fleet accretes) + the operator-transferable/user-non-transferable identity-class split. Operator-ruled 2026-07-20."
+role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27."
 status    = "proposed"
+revised-on = "2026-07-27"
 tags      = ["mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/charter-chain"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/founding-runbook"
@@ -31,24 +32,69 @@ written   = "2026-07-20"
 
 <<~ ahu #the-rite >>
 
-!! The rite ~ six movements, then the growing
+!! The rite ~ rehearsed first, then the six movements, then the growing
 
-The founding moves through six movements, each closing before the next opens — then the LIVE node
-GROWS into a Nexus on the operator's word:
+<<~loops ⓪ rehearse -> ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ regenesis -> LIVE -> ⚲ crossroads -> ⊕ grow >>
 
-<<~loops ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ regenesis -> LIVE -> ⊕ grow >>
+''Rehearse'' runs the whole rite in containers, disposably, until it bores (#rehearse) · ''clear''
+pares the vessel to void · ''found'' stands the device + the three kahu · ''reserve'' forges the
+pre-rotation's future-key custody · ''seal-and-back-up'' locks the secrets at rest + writes a
+recoverable copy · ''regenesis'' re-seeds the content from `bags/` · ''LIVE'' serves ·
+''crossroads'' stands a Herm where a family needs one (#crossroads) · ''grow'' opens the Nexus,
+contracts fellow operators, and welcomes users at the anon floor (#grow-the-nexus).
 
-''Clear'' pares the vessel to void · ''found'' stands the device + the three kahu · ''reserve''
-forges the pre-rotation's future-key custody · ''seal-and-back-up'' locks the secrets at rest +
-writes a recoverable copy · ''regenesis'' re-seeds the content from `bags/` · ''LIVE'' serves ·
-''grow'' opens the Nexus, contracts fellow operators, and welcomes users at the anon floor
-(#grow-the-nexus).
+''THE RITE RUNS IN TWO BRANCHES, and they want opposite virtues'' (operator ruling, 2026-07-27).
+A ''REHEARSAL'' founding runs in containers, disposably, as many times as it takes — cheapness IS
+the point and nothing stands worth backing up. A ''KEEPER'' founding runs once, on the real hearth,
+irreversibly. ''Movements ②–⑨ read the same in both''; the branches part at ① and at what a failure
+COSTS. Every rehearsal therefore doubles as a dress rehearsal of the keeper — same commands, same
+order, disposable stakes — which stops the keeper from ever being a first take.
+
+''Read this rite as the operator-instruction source.'' Each movement names its branch, its exact
+commands, and its precondition, so a reader (human or agent) can answer //what do I run next// from
+the vessel's current state rather than from memory (#agent-seed).
+
+<<~/ahu >>
+
+<<~ ahu #rehearse >>
+
+!! ⓪ Rehearse ~ run it in a box until it bores (the REHEARSAL branch opens here)
+
+''A ceremony nobody has performed carries no evidence, only intent.'' This rite stood `proposed` and
+unrun while the code beneath it moved for a week — so the first movement stands one that costs
+nothing to repeat. The harness already stands: `docker-compose.mesh.yml` founds ''real'' identities
+in containers (`tools/lararium-container-boot.sh` — //founds its OWN identity, then composeHerm//)
+with two Herm relays on a shared network.
+
+```
+docker compose -f docker-compose.mesh.yml up --abort-on-container-exit   # found, in a box
+tools/herm-mesh-witness.sh                                               # witness the crossroads carry
+docker compose -f docker-compose.mesh.yml down -v                        # THE CLEAR — no backup, nothing kept
+```
+
+''The burn IS the clear, and that inverts the danger.'' Where the keeper branch opens on the most
+destructive command in the house, the rehearsal branch opens on one whose whole virtue reads
+//repeatable//. Run it until the sequence bores; ''boredom names the readiness the keeper needs''.
+
+''What a rehearsal proves that a test cannot.'' The suites prove every property in-process, authored
+by the same hand that wrote the code — the field has never disagreed. A container founding lets
+sockets be rude, disks be real, and a drop actually drop: it stands the cheapest ''outside island''
+available (#the-frame). Deliberately in scope here: remote CAS transit to a holder that is not this
+process, bilateral genesis across two sovereign hearths, the Herm's re-key/re-share/heal teeth, and
+reconnection after a real drop.
+
+''The rehearsal amends this meme; this meme does not predict the rehearsal.'' Where a run contradicts
+a movement below, ''the run wins'' and the movement gets rewritten — the rite earns `status = live`
+only after a rehearsal completes end-to-end without an amendment.
 
 <<~/ahu >>
 
 <<~ ahu #clear >>
 
-!! ① Clear ~ pare to void (⚠ irreversible)
+!! ① Clear ~ pare to void (⚠ irreversible — the KEEPER branch)
+
+''Branch check first.'' A REHEARSAL never reaches this movement — its clear rides `compose down -v`
+(#rehearse) and it keeps nothing. What follows governs the ''KEEPER'' founding alone.
 
 A fresh-from-void founding discards the prior identity. ''Back the old identity up FIRST'' — the
 vault seals nothing until movement ④, so a raw copy carries the only net before the nuke:
@@ -85,6 +131,33 @@ lares persona new 1 --name 'Telarus, KSC'
 lares persona new 2 --name 'The Lindwyrm'
 lares persona list                                  # confirm h0/h1/h2 stand, all named
 ```
+
+''THIS MOVEMENT WRITES THE SELF-STOOD PATH, and a second path stands beside it'' (True Name Model,
+2026-07-25). `FoundingBinding` names two modes as a union rather than inferring one from an optional
+field:
+
+* ''SELF-STOOD'' — the vessel carries a seed that SIGNS: it mints its own persona root and signs its
+  own device-delegation, seating a fresh persona-KEL inception. The sequence above. A human's own
+  hearth or leaf, present and binding their own device.
+* ''CONTRACTED'' — the vessel mints ''NO root''. A trusted operator, already contracted with the
+  kahu, signs the edge on THEIR vessel; this one carries only the ''EDGE'', the pinned identifier
+  prefix, and that operator's KEL chain (carried, never fetched — a vessel holding no human key also
+  holds no way to go ask for one). ''It seats no inception'': the contracting operator's identifier
+  already stands, and minting a second would fork the very continuity the pin exists to hold.
+
+''BIND BY EDGE, NEVER BY SEED.'' A key COPIED between vessels //is// the collector — presented to
+every verifier it meets, it links every self beneath any policy written above it.
+
+''⚠ ONE WORD, TWO SENSES — hold them apart.'' This rite uses ''contracted'' in both meanings and they
+never coincide: a ''CONTRACTED FOUNDING'' (this movement) names HOW a vessel came to stand; a
+''CARRIAGE-CONTRACTED OPERATOR'' (#grow-the-nexus) names an operator who agreed to CARRY for a Nexus.
+A self-stood hearth may be carriage-contracted; a contracted-founding Herm carries without ever
+holding a civic identity. ''Founding-mode ⊥ carriage-contract.''
+
+''A HERM STANDS CONTRACTED ALWAYS, as law rather than setting'' — its legitimacy runs kahu quorum →
+the operator's carriage contract → that operator's persona root signing its edge. Bind-by-edge in its
+purest case: ''such a vessel cannot cheat by holding a seed, because it never holds one.'' Its persona
+ceiling reads 0 and no argument raises it (faceless-by-class). See #crossroads.
 
 <<~/ahu >>
 
@@ -209,9 +282,40 @@ lares status                                        # LIVE — the node serves; 
 
 <<~/ahu >>
 
+<<~ ahu #crossroads >>
+
+!! ⚲ Crossroads ~ stand a Herm where the family needs one (OPTIONAL, after LIVE)
+
+A family whose hearths sit behind different networks wants a ''standing'' place to meet. The Herm
+(Lares Viales) stands that crossroads: a ''wiki-LESS wayfarer'' composed up from granular caps —
+substrate + the @daemon immune keel + a writable @meshpalace FLOW-map + the read-face that serves it.
+''NO wiki, NO pool.'' Pi-deployable.
+
+```
+lares herm --port 8080 --relay-port 8090            # the http FLOW-map face + the crossroads WS port
+                                                    # prints the dial URL(s) + the gate pubkey
+```
+
+''The gate seed pins, and that matters across restarts.'' Absent `--relay-seed`, it derives from this
+Herm's OWN identity — stable across reboots, so a family's hearths keep dialing the same key and
+''never a fresh random per boot''.
+
+''What a Herm holds and what it refuses.'' It carries a ''PLACE DID'' and ''NO operator DID'': the
+crossroads earns a name it can be addressed and vouched by, while ''no local human key rests there to
+steal''. It runs a full immune keel (it recognises Kapae bans and draws Mu) yet ''reads nothing'' —
+carry ⊥ read holds absolutely; it holds the ciphertext replica and decrypts none of it. It founds
+CONTRACTED (#found), so it holds no seed to leak.
+
+''The boundary reads STRUCTURAL, never a flag.'' A Herm that gains a persona cap ''stops reading as a
+Herm'' — it composes into an operator-class vessel and the nothing-to-steal property leaves with the
+absent cap that carried it. `composable-keel`'s //absence = un-routed authority// makes that a fact
+about the stack, not a rule a later bug could flip.
+
+<<~/ahu >>
+
 <<~ ahu #grow-the-nexus >>
 
-!! ⑦ Grow ~ open the Nexus, contract operators, welcome users
+!! ⊕ Grow ~ open the Nexus, contract operators, welcome users
 
 The LIVE node stands ''sovereign-island by default'' (`federationPosture: private`). It GROWS on the
 operator's word, holding the ''membership doctrine'' at every step — ''track operator CONTRACTS, never
@@ -231,9 +335,18 @@ Kapae immune antigen:
 
 ```
 lares nexus accept-carriage                          # the joining operator signs "I accept carriage"
-lares nexus admit <operator-pubkey>                  # ≥k kahu counter-sign the wax-sealed MembershipEntry
-lares nexus members --list                           # the contracted operators — never the users
+lares nexus admit <operator-pubkey>                  # ≥k kahu counter-sign the wax-sealed CarriageEntry
+lares nexus members --list                           # the carriage-contracted operators — never the users
 ```
+
+''⚠ THE OPERATOR SURFACE STANDS SPLIT HERE, and the ruling belongs to the operator.'' The 2026-07-25
+rename carried `isMember → holdsCarriage`, `MembershipEntry → CarriageEntry`, and the board's own
+address (`#members → #carriage`) — because //the board that recorded contracts called everyone a
+member//, and a reader taking it as //is this human one of us// read it exactly backwards. That rename
+reached the signing domain and the doc address; it ''stopped at the CLI''. So `nexus members` and
+`nexus accept-carriage` now stand side by side on the one surface a human types. Either spelling may
+hold as canon; ''the SPLIT may not''. Weld-test first — a CLI verb name carries no signing domain and
+no doc address, so this reads as a free move.
 
 ''Welcome a user'' — a user needs no contract and leaves NO roster trace. Through invite-only alpha a
 sealed BURNABLE boot-invite gates the boot (spent-on-boot, no who-invited-whom edge); a garbled or
@@ -279,6 +392,55 @@ native. <<~ confidence Synthesis 12/20 >> The line draws by persistence/value, n
 vessel that accretes lasting value drifts toward transferable, held either by promoting that vessel
 or by delegated identifiers (the operator root delegates to disposable user streams, durability in
 the root). The default holds — users stay light; operators carry the future.
+
+<<~/ahu >>
+
+<<~ ahu #agent-seed >>
+
+!! The agent seed ~ how a reader answers //what do I run next//
+
+''This rite serves as the operator-instruction SOURCE'' (operator charge, 2026-07-27). A reader —
+human at a prompt, or an agent through the MCP — should resolve the next command from ''the vessel's
+current state'', never from memory or from a guess about which movement stands done.
+
+''THE SURFACE SURVEY, and the gap it names.'' The two operator surfaces do NOT cover the same ground:
+
+* the ''CLI'' stands ''40 verbs'', and carries the WHOLE founding surface — `wake` · `init` ·
+  `reset` · `persona` · `nexus` · `herm` · `device-admit` · `invite-send`/`invite-receive` ·
+  `cabal` · `edge` · `vault` · `circle` · `regenesis`.
+* the ''MCP'' stands ''30 tools'', and carries almost none of it — its ground reads
+  sensorium/analysis/memory (`li` · `ki` · `jing` · `pour` · `couple_r` · `forecast` · `mismatch` ·
+  `plane_record` · `sweep` · `rejim` · `worldline` · `recall` · `analyze`) plus `vault_*`, `wiki`,
+  `status`, `flow`, `reconcile`, `kapae`/`un_kapae`, and the roster/promote/retire family.
+
+''NOT ONE founding verb crosses to the MCP.'' An agent working through that surface can read, recall,
+and analyze — and stands ''structurally blind'' to the entire civic/identity rite.
+
+''THE PONO SHAPE READS GUIDANCE, NEVER EXECUTION.'' The cure is emphatically NOT to mirror the
+founding verbs into the MCP: a surface an agent drives should never reach `reset --force`, mint a
+persona root, or seat a kahu. ''Executing the rite belongs to the operator's own hand.'' What the
+agent surface owes instead:
+
+# ''READ the rite'' — resolve the movement matching the vessel's state, and return its exact commands
+  as ''text for a human to run'', with its branch (REHEARSAL ⊥ KEEPER) named.
+# ''READ the state'' — which movements already closed (does an identity home stand? do h0/h1/h2 stand
+  named? does a charter epoch stand? does a reserve stand? does the node serve?).
+# ''NAME the branch and the cost'' — a ⚠ irreversible movement MUST surface as irreversible, and the
+  rehearsal alternative MUST surface beside it, because a reader who does not know a cheap path exists
+  will take the expensive one.
+# ''REFUSE to act.'' The guidance surface returns instructions; the operator runs them.
+
+''The seed response, in shape'' (never a template — the frame holds, the words never):
+
+> //You stand at movement ② (found): an identity home stands, no personas seated. Branch: REHEARSAL
+> (containers) — nothing here costs anything to redo. Run: `lares persona new 0 --name '<name>'`…
+> Next after that: ③ reserve. ⚠ Movement ① on the KEEPER branch destroys prior roots and does not
+> undo — you are not on that branch.//
+
+''Honest bound.'' No such tool stands built, and this meme asserts none. The survey above reads off
+the live surfaces (2026-07-27); the shape reads as a proposal awaiting the operator's word, and it
+waits behind the first rehearsal — a guidance surface built before anyone has run the rite would
+teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
