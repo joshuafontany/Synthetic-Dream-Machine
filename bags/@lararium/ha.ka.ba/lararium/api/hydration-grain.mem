@@ -60,7 +60,16 @@ The candidate: a ''bag snapshot'' — a quick-load skinny path standing BEFORE t
 
 ''This does NOT resurrect the cut `warm` tier, and the distinction runs on a different axis.'' `warm` (mahana) fell because it kept a ''live actor'': a suspended Worker still holds its heap, so warm never shed the memory the model exists to bound (residency-tiers#warm-cut). A snapshot proposes ''data, never an actor'' — no Worker, no materialized Automerge doc. ''Actor-axis ⊥ data-axis.'' A design killed on one says nothing about the other.
 
-''The gate still governs.'' residency-tiers#third-tier-gate admits a third tier ONLY when BOTH hold: ''(a)'' a //measured// resume-latency problem under real focus-rotation, AND ''(b)'' a definition that genuinely sheds memory. A snapshot plausibly satisfies ''(b)''. ''(a) stands unmeasured'' — and this meme asserts no latency problem it has not measured.
+''The two axes drawn — the bag grain occupies only its DIAGONAL.'' Reading actor ⊥ data as a grid rather than a ladder makes the `warm` result structural rather than merely observed:
+
+|  | ''actor: none'' | ''actor: live'' |
+|''data: none''| `anu` — stands | — |
+|''data: partial''| ''the SNAPSHOT candidate'' — a cell the model has never occupied | — |
+|''data: full''| — | `wela` — stands · `warm` — CUT (a suspended Worker holds the heap) |
+
+`warm` moved along the ''actor'' axis and never touched the ''data'' axis, so it could not shed by construction — the cut reads as a consequence of where it sat, not as a measurement that happened to disappoint. A snapshot moves along the ''data'' axis with the actor absent, which is why the one says nothing about the other.
+
+''The gate still governs.'' residency-tiers#third-tier-gate admits a third tier ONLY when BOTH hold: ''(a)'' a //measured// resume-latency problem under real focus-rotation, AND ''(b)'' a definition that genuinely sheds memory. The grid strengthens the ''(b)'' reading — an unoccupied (partial-data, no-actor) cell sheds by its position, not by hope. ''(a) stands unmeasured'' — and this meme asserts no latency problem it has not measured.
 
 <<~/ahu >>
 
@@ -71,7 +80,7 @@ The candidate: a ''bag snapshot'' — a quick-load skinny path standing BEFORE t
 Any snapshot design MUST satisfy these; none of them awaits research.
 
 # ''PROJECTION, NEVER A SECOND AUTHORITY.'' The disk-projection law holds `bags/` as canon and every derived surface as a ''render, never a copy''. A snapshot reads as a projection of the CRDT; ''the CRDT stays the source of truth''.
-# ''RE-DERIVABLE, OR IT DROPS.'' The dyad rule generalizes: //two sources for one fact eventually disagree, and the signed one MUST win// — a stored value that fails to re-derive from its own authority ''DROPS on read''. A snapshot MUST carry a staleness check (Automerge `getHeads()` names the obvious anchor) and MUST fall through to the CRDT when it cannot prove itself current.
+# ''RE-DERIVABLE, OR IT DROPS.'' The dyad rule generalizes: //two sources for one fact eventually disagree, and the signed one MUST win// — a stored value that fails to re-derive from its own authority ''DROPS on read''. A snapshot MUST carry a staleness check and MUST fall through to the CRDT when it cannot prove itself current. Automerge `getHeads()` names the obvious anchor — but the house already holds a ''causal-island-correct'' one: `composite-store` stamps each record's `changeId` //"so a snapshot reader knows AS-OF-WHICH-log it read (no global now)"//. A staleness check phrased as heads-equality quietly asks for a global now; one phrased as //as-of-which-log// does not. ''Start the design from the discipline already standing.''
 # ''STORE FINE, INDEX COARSE'' (grain-law). A snapshot serves as a COARSE index over a FINE store; the grain it picks becomes an ANALYSIS parameter, and ''the unit manufactures the finding'' (MAUP). A snapshot grain chosen for convenience will distort what reads off it.
 # ''THE FAST PATH MUST NOT BYPASS THE GATE.'' ''The sharpest trap.'' Reads through the CRDT cross `sharePolicy` / the cap-tier floor / the antigen ring. A snapshot that serves bytes ''around'' those shores becomes a disclosure hole wearing a performance costume. Any snapshot MUST ride the SAME gate as the hydrated read, or it MUST NOT exist.
 # ''READ-ONLY.'' A snapshot MUST NOT accept writes. The write path stays the CRDT's alone; a writable cache re-opens the merge semantics the CRDT exists to own.
@@ -87,6 +96,7 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 # ''PRIOR ART.'' How do comparable systems stand a cheap read before an expensive materialization? Candidate ground to survey, not to assume: Automerge's own load/compression path and its known large-document costs (this tree already met one at the regenesis fault); Yjs state-vectors; TiddlyWiki's `getSkinnyTiddlers` sync contract; CouchDB/PouchDB `_all_docs` ⊥ `include_docs`; git's commit-graph and packed-refs as cheap indices over an object store; materialized views and covering indexes; the bfcache lineage residency-tiers#third-tier-gate already names.
 # ''GOLDEN PRINCIPLES.'' Which invariants do those systems converge on, and which of the five above do they sharpen or contradict? Convergence across independent designs carries evidential weight (the paper's own construct-validity move).
 # ''ANTIPATTERN TRAPS.'' Name the known failures BEFORE the design: cache/source divergence with no detector; the snapshot silently becoming the write path; a fast path that skips authorization; a staleness window that violates local-first read-your-writes; a snapshot format that welds a schema before the founding does.
+# ''NAME IT BEFORE THE RESEARCH, NOT AFTER.'' `snapshot` already carries ~102 uses in this tree — loudest as ''the bulb'' (//a snapshot carrying its own next generation//), plus the FLOW-map publisher, vessel identity, and store-integrity. ''None of them names a bag-level read-view'', which confirms the rung stands empty — and means shipping this rung as "snapshot" would collide with a live myth. A research arm that writes "snapshot" throughout will bake the collision into its own findings. Pick the word at the START of the arm, run the weld test on it (signing domains · deterministic doc addresses · `uri-path`), and note that a name reading foreign from inside may still be the one an arriving reader knows.
 
 ''Measurement rides alongside.'' The third-tier gate's clause (a) demands a //measured// problem. The research MUST return either a measurement plan or an honest statement that no latency problem stands demonstrated — ''and if none does, the pono outcome reads: build nothing''.
 
