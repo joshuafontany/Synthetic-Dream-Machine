@@ -595,7 +595,7 @@ export interface DaemonMsg_EvictResult {
 
 /**
  * Island → vessel: the worker commands a residency-state op on the main-resident
- * BagResidencyManager (sovereign-worker: the worker holds the keyhive-gated POLICY,
+ * BagStowage (sovereign-worker: the worker holds the keyhive-gated POLICY,
  * the manager + its LRU/reachability MECHANISM stays at the resource/main). The
  * worker's residency verbs (pin/unpin/register-cold) post this fire-and-forget — the
  * grant records as policy; main executes. (`residency` stats — a read — stays main

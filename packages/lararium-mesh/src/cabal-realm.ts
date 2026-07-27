@@ -40,7 +40,7 @@
  */
 
 import { leaseEpochSlotUri } from "./epoch-lease.js";
-import type { BagResidencyManager, ResidencyTemperature } from "./bag-residency.js";
+import type { BagStowage, ResidencyTemperature } from "./bag-residency.js";
 
 /**
  * A cabal-realm — a virtual REALM three primitives co-define:
@@ -85,7 +85,7 @@ export function cabalRealmLeaseSlot(placeDocIdHex: string, writerId: string): st
  * "cooling" rides the type as the future intermediate, but the residency engine
  * exposes only the two settled states through its public surface (the `warm`
  * middle tier was CUT, and the transient `evicting`
- * flag stays private to BagResidencyManager). So this pure function maps the two
+ * flag stays private to BagStowage). So this pure function maps the two
  * derivable states only; a higher layer that can observe an in-flight cool may
  * report "cooling" itself. Keeping it a pure total function of the public tier.
  */
@@ -106,7 +106,7 @@ export function deriveCabalRealmLiveness(temp: ResidencyTemperature): CabalRealm
  * the warming through to the residency engine.
  */
 export function feedCabalRealm(
-  mgr: BagResidencyManager,
+  mgr: BagStowage,
   place: CabalRealm,
 ): Promise<void> {
   return mgr.touch(place.substrateUrl);

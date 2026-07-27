@@ -17,7 +17,7 @@
  * Real lifecycle, not green-units: the sentinel is a real Keyhive Document, the
  * members are independent KeyhiveProvider instances introduced by contact card, the
  * eviction is a real REVOKED tombstone, the cooling/warming rides the real
- * BagResidencyManager, the lease rolls through the real max-register.
+ * BagStowage, the lease rolls through the real max-register.
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/cabal-realm-lifecycle.ts
  *
@@ -29,7 +29,7 @@ import {
   foundCabalRealmWithCharter, joinCabalRealm, evictMember, cabalRealmRoster, cabalRealmLiveness,
 } from "../src/cabal-realm-ceremony.js";
 import {
-  BagResidencyManager,
+  BagStowage,
   cabalRealmLeaseSlot,
   feedCabalRealm,
   effectiveLeaseEpoch,
@@ -59,7 +59,7 @@ async function main(): Promise<void> {
   await founder.init({ seed: new Uint8Array(32).fill(0x11), eventStore: new InMemoryEventStore() });
 
   // The liveness instruments from cut 1's floor.
-  const residency  = new BagResidencyManager({ idleMs: 1 });   // 1ms idle so a sweep cools fast
+  const residency  = new BagStowage({ idleMs: 1 });   // 1ms idle so a sweep cools fast
   const leaseSlots = new Map<string, string>();
 
   // ── STAGE 1 — FOUND (realm + its veil-public charter, born together) ────────────

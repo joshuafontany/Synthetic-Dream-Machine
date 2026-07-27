@@ -106,7 +106,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         ...(ctx.resolveByCid ? { resolveByCid: ctx.resolveByCid } : {}),
       });
       // Residency mutators (pin/unpin/register-cold) — gated in-worker; they command the
-      // main-resident BagResidencyManager via daemon:residency-op (ctx.post). `residency`
+      // main-resident BagStowage via daemon:residency-op (ctx.post). `residency`
       // stats (a read) stays main pending the askMain research.
       registry.register("pin",           makePinReactor(ctx.post));
       registry.register("unpin",         makeUnpinReactor(ctx.post));

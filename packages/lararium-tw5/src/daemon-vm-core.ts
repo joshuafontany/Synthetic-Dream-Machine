@@ -246,7 +246,7 @@ export interface DaemonVmCore {
   onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
   /**
    * Register the residency-op MECHANISM: the worker commands pin/unpin/register-cold
-   * (daemon:residency-op, keyhive-gated policy); main routes here to the BagResidencyManager
+   * (daemon:residency-op, keyhive-gated policy); main routes here to the BagStowage
    * (which stays at the resource). Set after the manager exists. Absent → fail closed.
    */
   onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
@@ -473,7 +473,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
 
     if (raw.type === "daemon:residency-op") {
       // Sovereign-worker: the worker's residency verb (pin/unpin/register-cold) granted
-      // policy; main executes the mechanism on the BagResidencyManager. Ack regardless.
+      // policy; main executes the mechanism on the BagStowage. Ack regardless.
       const msg = raw as DaemonMsg_ResidencyOp;
       const run = _residencyHandler
         ? _residencyHandler(msg.op, msg.bagId, msg.reason)

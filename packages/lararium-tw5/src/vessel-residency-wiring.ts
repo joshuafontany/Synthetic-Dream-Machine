@@ -5,7 +5,7 @@
  * per-vessel VesselIslandHost). This collapses the WIRING that stood around the pool twice —
  * near byte-identical in open-node-vessel.ts and open-browser-vessel.ts:
  *
- *   A. the BagResidencyManager construction (onHydrate → ensureWiki; onEvict → unmountWiki),
+ *   A. the BagStowage construction (onHydrate → ensureWiki; onEvict → unmountWiki),
  *   B. resolveWikiSpec (the UNKNOWN-grain branch: read a wiki's canon-doc off @catalog),
  *   C. makeWikiActivationCap (activation-on-reference, the vessel's grant point),
  *   D. the sovereign-worker residency binding (daemon onEvictRequest / onResidencyOp),
@@ -28,7 +28,7 @@
  */
 
 import {
-  BagResidencyManager,
+  BagStowage,
   makeWikiActivationCap,
   slugFromUri, wikiBagUri, tiddlerText,
   DEFAULT_HOT_CAP, DEFAULT_IDLE_MS, DEFAULT_SWEEP_INTERVAL_MS,
@@ -104,7 +104,7 @@ export interface WireToPoolArgs {
 
 /** The factory's product: the collector (built now) + the pool-wiring continuation (run in makePool). */
 export interface VesselResidency {
-  residency: BagResidencyManager;
+  residency: BagStowage;
   /** Wire the activation cap + daemon binding + alert delivery once the pool + daemon stand.
    *  Returns the activation-on-reference cap the vessel's verb plane reads. */
   wireToPool(args: WireToPoolArgs): WikiActivationCap;
@@ -126,7 +126,7 @@ export function makeVesselResidency(
   //    authority for reachability + eviction (the pool never self-evicts). wiki grains heat by
   //    re-mounting (onHydrate → ensureWiki) and cool by unmounting (onEvict → unmountWiki); the
   //    cool NARRATION rides the vessel hook (node speaks, browser stays silent). ──
-  const residency = new BagResidencyManager({
+  const residency = new BagStowage({
     hotCap:          config.hotCap ?? DEFAULT_HOT_CAP,
     typeCaps:        { wiki: config.wikiActivationCap },
     idleMs:          config.idleMs ?? DEFAULT_IDLE_MS,

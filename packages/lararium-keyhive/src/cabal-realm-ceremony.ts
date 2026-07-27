@@ -46,7 +46,7 @@ import {
   projectCabalRealmCharter,
   type CabalRealm,
   type CabalRealmLiveness,
-  type BagResidencyManager,
+  type BagStowage,
   type CabalRealmPublicMeta,
   type CabalRealmCharter,
 } from "@lararium/mesh";
@@ -64,7 +64,7 @@ import type { KeyhiveProvider } from "./keyhive-provider.js";
  *                  caller passes a Map so the floor stays storage-blind.
  */
 export interface FoundCabalRealmOpts {
-  readonly residency?:     BagResidencyManager;
+  readonly residency?:     BagStowage;
   readonly leaseWriterId?: string;
   readonly leaseSlots?:    Map<string, string>;
 }
@@ -207,7 +207,7 @@ export async function cabalRealmRoster(
  * substrate reads anu → "dissolved").
  */
 export function cabalRealmLiveness(
-  residency: BagResidencyManager,
+  residency: BagStowage,
   place:     CabalRealm,
 ): CabalRealmLiveness {
   return deriveCabalRealmLiveness(residency.tier(place.substrateUrl) ?? "anu");

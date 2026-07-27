@@ -8,7 +8,7 @@
  * substrate (the ONLY divergence): IndexedDB storage, WebCrypto keys, founding-via-ceremony
  * (vs node's lares-init), Web Worker spawn, NO WS-server inbound gate (a browser cannot
  * listen on a socket), genesis-via-bytes/IDB/OPFS/peer. Capabilities held in common: the
- * BagResidencyManager mechanism, corpus loading, the verb plane, presence.
+ * BagStowage mechanism, corpus loading, the verb plane, presence.
  *
  * Genesis REQUIRED (no coreless boot). The not-yet-held axis sits at anon↔keeper
  * (PersonaGroup/admin), not genesis — see project-sovereign-worker-model.

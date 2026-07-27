@@ -19,7 +19,7 @@ import {
   type CabalRealm,
 } from "../src/cabal-realm.js";
 import { leaseEpochSlotUri } from "../src/epoch-lease.js";
-import { BagResidencyManager } from "../src/bag-residency.js";
+import { BagStowage } from "../src/bag-residency.js";
 
 const PLACE: CabalRealm = {
   placeDocIdHex:   "0xdoc_aaa",
@@ -59,7 +59,7 @@ describe("deriveCabalRealmLiveness — pure read off the residency temperature",
 
 describe("feedCabalRealm — member maintenance warms the substrate (commoning)", () => {
   test("touch heats the substrate to wela → the place reads alive", async () => {
-    const mgr = new BagResidencyManager();
+    const mgr = new BagStowage();
     mgr.registerCold(PLACE.substrateUrl);
     expect(mgr.tier(PLACE.substrateUrl)).toBe("anu");           // unfed → cold
     expect(deriveCabalRealmLiveness(mgr.tier(PLACE.substrateUrl)!)).toBe("dissolved");

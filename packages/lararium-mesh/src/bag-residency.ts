@@ -1,13 +1,21 @@
 /**
- * Bag residency — the thermal residency engine for one vessel's bags.
+ * Bag residency — how a vessel STOWS what it carries (`BagStowage`).
  *
- * The residency runtime and the federation-authority doctrine share no types,
- * functions, or imports, so each stands in its own file. This module carries the
- * live, widely-imported residency engine; the authority/edge-island doctrine lives
- * in causal-island-authority.ts.
+ * Stowage names the discipline this module performs: a vessel decides what rides to hand and what
+ * strikes down into the hold, and re-arranges that as the voyage runs. Cargo wanted soon stows
+ * accessible; cargo for the last port goes deep. Here a touched grain rides hot, an idle one cools,
+ * and the caps bound how much stays broken out at once — the same discipline under its own name.
  *
- * Model: a two-state thermal axis in ʻōlelo Hawaiʻi — wela (hot) / anu (cold) —
- * plus an orthogonal pin flag. The `warm` middle tier was cut.
+ * `bag` carries TW5's meaning unchanged (bags + recipes, the upstream house's own load-bearing
+ * myth), so a reader arriving from TiddlyWiki reads this surface without translation.
+ *
+ * The stowage runtime and the federation-authority doctrine share no types, functions, or imports,
+ * so each stands in its own file. This module carries the live, widely-imported engine; the
+ * authority/edge-island doctrine lives in causal-island-authority.ts.
+ *
+ * Model: a two-state thermal axis in ʻōlelo Hawaiʻi — wela (hot) / anu (cold) — plus an orthogonal
+ * pin flag. The `warm` (mahana) middle tier stands cut: a suspended Worker still holds its heap, so
+ * warm never shed the memory this model exists to bound.
  *
  * Canon: lar:///ha.ka.ba/lararium/api/residency-tiers
  */
@@ -88,7 +96,7 @@ export const DEFAULT_IDLE_MS = 300_000;
 /** Default sweeper tick interval (ms). 30 s. */
 export const DEFAULT_SWEEP_INTERVAL_MS = 30_000;
 
-export interface BagResidencyManagerOptions {
+export interface BagStowageOptions {
   /** Soft cap on unpinned-wela (live) `bag`-grain count. Default 32. Pinned grains
    *  are exempt and do not count against the cap. This is the `bag`-type dial; other
    *  grain types override it via `typeCaps`. */
@@ -128,7 +136,7 @@ interface ResidencyState {
 }
 
 /**
- * BagResidencyManager — owns the residency state for one vessel's bags.
+ * BagStowage — owns the residency state for one vessel's bags.
  *
  * Single-map model: every known bag carries a `ResidencyState`
  * (temperature + orthogonal pin flag). Temperature moves wela ↔ anu
@@ -139,7 +147,7 @@ interface ResidencyState {
  * referencing island (`deriveBagTemperature`); this manager records and bounds
  * that derived state plus the LRU/idle sweeper that frees handles.
  */
-export class BagResidencyManager {
+export class BagStowage {
   private readonly _bags = new Map<BagUrl, ResidencyState>();
   private readonly hotCap:          number;
   private readonly typeCaps:        Readonly<Record<string, number>>;
@@ -153,7 +161,7 @@ export class BagResidencyManager {
   private sweeperTimer:             ReturnType<typeof setInterval> | null = null;
   private sweepInFlight = false;
 
-  constructor(opts: BagResidencyManagerOptions = {}) {
+  constructor(opts: BagStowageOptions = {}) {
     this.hotCap          = opts.hotCap          ?? DEFAULT_HOT_CAP;
     this.typeCaps        = opts.typeCaps        ?? {};
     this.idleMs          = opts.idleMs          ?? DEFAULT_IDLE_MS;

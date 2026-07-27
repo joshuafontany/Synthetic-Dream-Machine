@@ -24,7 +24,7 @@ import type { HandleCard, CardVerdict } from "./handle-card.js";
 import { nexusHandlesUri } from "./lar-uris.js";
 import { type LarDoc } from "./base-doc.js";
 import type { VesselCoreAssembly } from "./open-vessel-core.js";
-import type { BagResidencyManager } from "./bag-residency.js";
+import type { BagStowage } from "./bag-residency.js";
 
 /** The WHO-plane cap-id — a vessel's #has-cap-stack names it to wire identity federation. */
 export const WHO_FACE_CAP = "who-face" as const;
@@ -53,7 +53,7 @@ export function whoFaceCap(deps: {
   repo: Repo;
   crossroadsHandle: DocHandle<LarDoc>;
   nexusPubkey: string;
-  residency?: BagResidencyManager;
+  residency?: BagStowage;
 }): CapModule {
   return {
     id: WHO_FACE_CAP, requires: [SUBSTRATE_CAP_ID],

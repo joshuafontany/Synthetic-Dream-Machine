@@ -1,7 +1,7 @@
 /**
  * wiki-activation.test.ts — the activation-on-reference CAP over the ONE collector.
  *
- * Wires makeWikiActivationCap the way a vessel does: a real BagResidencyManager
+ * Wires makeWikiActivationCap the way a vessel does: a real BagStowage
  * (per-grain-type dials) driving a real VesselIslandPoolCore through onHydrate
  * (→ ensureWiki) / onEvict (→ unmountWiki). Proves the whole F2+F3 loop — a
  * reference reactivates a cold KNOWN grain; a never-opened grain refuses without
@@ -10,7 +10,7 @@
 
 import { describe, test, expect } from "vitest";
 import { VesselIslandPoolCore } from "../src/vessel-island-pool-core.js";
-import { BagResidencyManager } from "../src/bag-residency.js";
+import { BagStowage } from "../src/bag-residency.js";
 import { makeWikiActivationCap } from "../src/wiki-activation.js";
 import { mkEa, mkTeardownAck } from "../src/island-protocol.js";
 import type { VesselIslandHost, VesselWorkerHandle } from "../src/vessel-host.js";
@@ -47,7 +47,7 @@ function countingHost(): { host: VesselIslandHost; spawns: () => number } {
 function makeVesselTrio(wikiCap: number, resolveSpec?: (id: string) => Promise<WikiMountSpec | null>) {
   const { host, spawns } = countingHost();
   const pool = new VesselIslandPoolCore({ host });
-  const residency = new BagResidencyManager({
+  const residency = new BagStowage({
     typeCaps: { wiki: wikiCap },
     onHydrate: async (id, t) => { if (t === "wiki") await pool.ensureWiki(id); },
     onEvict:   async (id, t) => { if (t === "wiki") await pool.unmountWiki(id); },

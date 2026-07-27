@@ -27,7 +27,7 @@ import {
   composeVessel, type CapModule, type ComposedVessel,
   type MeshPalaceDoc,
   type VesselRecipe, type VesselCoreAssembly,
-  type BagResidencyManager,
+  type BagStowage,
   // ── the lifted carriage machinery, now mesh-floor (re-exported below) ──
   CARRIAGE_CAP,
   meshPalaceCap, carriageCap, meshSelfSeed, type MeshSelf, type MeshPalaceComponent,
@@ -119,7 +119,7 @@ export const composeLararium = composeCoreVessel;
 export interface HermStackDeps extends DaemonCapDeps {
   readonly keel:           VesselRecipe;
   readonly repo:           Repo;
-  readonly residency?:     BagResidencyManager;
+  readonly residency?:     BagStowage;
   readonly httpServer:     Server;
   readonly signerSeed:     Uint8Array;
   readonly storageDir:     string;

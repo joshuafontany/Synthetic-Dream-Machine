@@ -3,7 +3,7 @@
  *
  * A thin RECIPE over the composable-keel engine. Node supplies the platform atoms (NodeFS storage,
  * WS relay + DaemonAuthGate, worker_threads pool) and the capability pieces it holds (the inbound
- * gate, the corpus loader, the residual pool/repo verbs, the main-resident BagResidencyManager
+ * gate, the corpus loader, the residual pool/repo verbs, the main-resident BagStowage
  * mechanism). `prepareNodeBoot` builds those atoms + the keel + the boot closures ONCE; the two boot
  * entry-points compose the right #has-cap-stack over them:
  *   - openNodeVessel → composeLararium (the FULL node: substrate → daemon → wiki → pool → live).
@@ -39,7 +39,7 @@ import {
   whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
-  ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
+  ENGINE_CORE_ID, BagStowage, pluginCidsFromIslandBlobs,
   coupleMesh, crystallize, guardHitl,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
@@ -297,7 +297,7 @@ interface NodeBootPrep {
   /** This vessel's own gate key — the node ANCHORS its confederation, so its gate key doubles as the Nexus
    *  key its browser leaves pass as relayGatePubKey. Every per-Nexus board (WHO, KEL, antigen) scopes to it. */
   nexusPubkey:      string;
-  residency:        BagResidencyManager;
+  residency:        BagStowage;
   /** The carriage serve-loop (Socket B) — present ONLY when a carriage-relay URL was configured; else null (inert).
    *  The two vessel entry-points fold its `stop()` into their teardown so no timer / socket leaks past close. */
   carriageLoop:     CarriageServeLoop | null;

@@ -20,7 +20,7 @@
  */
 
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
-import { BagResidencyManager, deriveBagTemperature } from "../src/bag-residency.js";
+import { BagStowage, deriveBagTemperature } from "../src/bag-residency.js";
 
 const A = "automerge:aaa";
 const B = "automerge:bbb";
@@ -38,9 +38,9 @@ describe("deriveBagTemperature — reachability from a live island (S11.4)", () 
   });
 });
 
-describe("BagResidencyManager — pin as orthogonal flag", () => {
+describe("BagStowage — pin as orthogonal flag", () => {
   test("registerCold lands a known-but-unloaded bag at anu, unpinned", () => {
-    const m = new BagResidencyManager();
+    const m = new BagStowage();
     m.registerCold(A);
     expect(m.has(A)).toBe(true);
     expect(m.tier(A)).toBe("anu");
@@ -49,7 +49,7 @@ describe("BagResidencyManager — pin as orthogonal flag", () => {
 
   test("pin an anu bag → wela + pinned, onHydrate fires once", async () => {
     const hydrated: string[] = [];
-    const m = new BagResidencyManager({ onHydrate: async (u) => { hydrated.push(u); } });
+    const m = new BagStowage({ onHydrate: async (u) => { hydrated.push(u); } });
     m.registerCold(A);
     await m.pin(A, "boot:test");
     expect(m.tier(A)).toBe("wela");     // temperature, NOT "pinned"
@@ -59,7 +59,7 @@ describe("BagResidencyManager — pin as orthogonal flag", () => {
 
   test("pin an already-wela bag does not re-hydrate", async () => {
     const hydrated: string[] = [];
-    const m = new BagResidencyManager({ onHydrate: async (u) => { hydrated.push(u); } });
+    const m = new BagStowage({ onHydrate: async (u) => { hydrated.push(u); } });
     await m.touch(A);            // anu → wela, hydrate #1
     await m.pin(A);             // already wela — no second hydrate
     expect(hydrated).toEqual([A]);
@@ -67,7 +67,7 @@ describe("BagResidencyManager — pin as orthogonal flag", () => {
   });
 
   test("unpin clears the flag but keeps the bag wela", async () => {
-    const m = new BagResidencyManager();
+    const m = new BagStowage();
     await m.pin(A);
     expect(m.tier(A)).toBe("wela");
     m.unpin(A);
@@ -76,10 +76,10 @@ describe("BagResidencyManager — pin as orthogonal flag", () => {
   });
 });
 
-describe("BagResidencyManager — touch / hydration (hoʻowela)", () => {
+describe("BagStowage — touch / hydration (hoʻowela)", () => {
   test("touch an unknown bag creates it wela and hydrates", async () => {
     const hydrated: string[] = [];
-    const m = new BagResidencyManager({ onHydrate: async (u) => { hydrated.push(u); } });
+    const m = new BagStowage({ onHydrate: async (u) => { hydrated.push(u); } });
     await m.touch(A);
     expect(m.tier(A)).toBe("wela");
     expect(hydrated).toEqual([A]);
@@ -87,17 +87,17 @@ describe("BagResidencyManager — touch / hydration (hoʻowela)", () => {
 
   test("touch a wela bag does not re-hydrate", async () => {
     const hydrated: string[] = [];
-    const m = new BagResidencyManager({ onHydrate: async (u) => { hydrated.push(u); } });
+    const m = new BagStowage({ onHydrate: async (u) => { hydrated.push(u); } });
     await m.touch(A);            // hydrate #1
     await m.touch(A);           // already wela — no hydrate
     expect(hydrated).toEqual([A]);
   });
 });
 
-describe("BagResidencyManager — cool() hoʻoanu (wela → anu)", () => {
+describe("BagStowage — cool() hoʻoanu (wela → anu)", () => {
   test("cool calls onEvict and drops to anu", async () => {
     const evicted: string[] = [];
-    const m = new BagResidencyManager({ onEvict: async (u) => { evicted.push(u); } });
+    const m = new BagStowage({ onEvict: async (u) => { evicted.push(u); } });
     await m.touch(A);
     expect(await m.cool(A)).toBe(true);
     expect(m.tier(A)).toBe("anu");
@@ -105,14 +105,14 @@ describe("BagResidencyManager — cool() hoʻoanu (wela → anu)", () => {
   });
 
   test("evict is an alias for cool", async () => {
-    const m = new BagResidencyManager();
+    const m = new BagStowage();
     await m.touch(A);
     expect(await m.evict(A)).toBe(true);
     expect(m.tier(A)).toBe("anu");
   });
 
   test("cool refuses a pinned bag", async () => {
-    const m = new BagResidencyManager();
+    const m = new BagStowage();
     await m.pin(A);
     expect(await m.cool(A)).toBe(false);
     expect(m.tier(A)).toBe("wela");
@@ -120,7 +120,7 @@ describe("BagResidencyManager — cool() hoʻoanu (wela → anu)", () => {
 
   test("cool refuses a mid-sync bag (#358 invariant)", async () => {
     const evicted: string[] = [];
-    const m = new BagResidencyManager({ onEvict: async (u) => { evicted.push(u); } });
+    const m = new BagStowage({ onEvict: async (u) => { evicted.push(u); } });
     await m.touch(A);
     m.setSyncActive(A, true);
     expect(await m.cool(A)).toBe(false);
@@ -129,7 +129,7 @@ describe("BagResidencyManager — cool() hoʻoanu (wela → anu)", () => {
   });
 
   test("cool is a no-op on an already-anu bag", async () => {
-    const m = new BagResidencyManager();
+    const m = new BagStowage();
     m.registerCold(A);
     expect(await m.cool(A)).toBe(false);
     expect(m.tier(A)).toBe("anu");
@@ -139,7 +139,7 @@ describe("BagResidencyManager — cool() hoʻoanu (wela → anu)", () => {
   // concurrent touch must not clobber the now-live bag to anu.
   test("cool aborts if the bag is touched during the onEvict await (TOCTOU)", async () => {
     const evicted: string[] = [];
-    const m: BagResidencyManager = new BagResidencyManager({
+    const m: BagStowage = new BagStowage({
       onEvict: async (u) => {
         evicted.push(u);
         await m.touch(u);          // a concurrent read lands mid-evict
@@ -153,10 +153,10 @@ describe("BagResidencyManager — cool() hoʻoanu (wela → anu)", () => {
   });
 });
 
-describe("BagResidencyManager — enforceCap (bounds unpinned wela)", () => {
+describe("BagStowage — enforceCap (bounds unpinned wela)", () => {
   test("touch past hotCap cools the oldest unpinned bag to anu", async () => {
     const evicted: string[] = [];
-    const m = new BagResidencyManager({ hotCap: 2, onEvict: async (u) => { evicted.push(u); } });
+    const m = new BagStowage({ hotCap: 2, onEvict: async (u) => { evicted.push(u); } });
     await m.touch(A);
     await m.touch(B);
     await m.touch(C);                  // resident would be 3 > cap 2
@@ -168,7 +168,7 @@ describe("BagResidencyManager — enforceCap (bounds unpinned wela)", () => {
 
   test("pinned bags are exempt and do not count against the cap", async () => {
     const evicted: string[] = [];
-    const m = new BagResidencyManager({ hotCap: 1, onEvict: async (u) => { evicted.push(u); } });
+    const m = new BagStowage({ hotCap: 1, onEvict: async (u) => { evicted.push(u); } });
     await m.pin(A);                    // pinned wela — uncounted
     await m.touch(B);                  // unpinned resident: 1, == cap, ok
     expect(m.tier(A)).toBe("wela");
@@ -177,13 +177,13 @@ describe("BagResidencyManager — enforceCap (bounds unpinned wela)", () => {
   });
 });
 
-describe("BagResidencyManager — per-grain-type caps (F2 one-collector dials)", () => {
+describe("BagStowage — per-grain-type caps (F2 one-collector dials)", () => {
   const W1 = "lar:///wiki/one", W2 = "lar:///wiki/two", W3 = "lar:///wiki/three";
 
   test("a wiki flood evicts wikis at the wiki cap, never a live bag", async () => {
     const evicted: Array<{ url: string; type: string }> = [];
     // ONE collector: bag cap 2, wiki cap 1. The two dials bound independently.
-    const m = new BagResidencyManager({
+    const m = new BagStowage({
       hotCap: 2, typeCaps: { wiki: 1 },
       onEvict: async (u, t) => { evicted.push({ url: u, type: t }); },
     });
@@ -205,7 +205,7 @@ describe("BagResidencyManager — per-grain-type caps (F2 one-collector dials)",
 
   test("bags overflow their own cap without touching wikis", async () => {
     const evicted: Array<{ url: string; type: string }> = [];
-    const m = new BagResidencyManager({
+    const m = new BagStowage({
       hotCap: 1, typeCaps: { wiki: 4 },
       onEvict: async (u, t) => { evicted.push({ url: u, type: t }); },
     });
@@ -217,13 +217,13 @@ describe("BagResidencyManager — per-grain-type caps (F2 one-collector dials)",
   });
 });
 
-describe("BagResidencyManager — sweepOnce single-stage idle cooling", () => {
+describe("BagStowage — sweepOnce single-stage idle cooling", () => {
   beforeEach(() => vi.useFakeTimers());
   afterEach(() => vi.useRealTimers());
 
   test("wela idle > idleMs cools to anu", async () => {
     const idleMs = 1000;
-    const m = new BagResidencyManager({ idleMs });
+    const m = new BagStowage({ idleMs });
     await m.touch(A);                  // lastTouched = t0
     vi.advanceTimersByTime(idleMs + 1);
     const r = await m.sweepOnce();
@@ -233,7 +233,7 @@ describe("BagResidencyManager — sweepOnce single-stage idle cooling", () => {
 
   test("sweeper never cools a pinned bag", async () => {
     const idleMs = 1000;
-    const m = new BagResidencyManager({ idleMs });
+    const m = new BagStowage({ idleMs });
     await m.pin(A);
     vi.advanceTimersByTime(idleMs * 3);
     const r = await m.sweepOnce();
@@ -243,7 +243,7 @@ describe("BagResidencyManager — sweepOnce single-stage idle cooling", () => {
 
   test("sweeper never cools a mid-sync bag", async () => {
     const idleMs = 1000;
-    const m = new BagResidencyManager({ idleMs });
+    const m = new BagStowage({ idleMs });
     await m.touch(A);
     m.setSyncActive(A, true);
     vi.advanceTimersByTime(idleMs * 3);
@@ -253,9 +253,9 @@ describe("BagResidencyManager — sweepOnce single-stage idle cooling", () => {
   });
 });
 
-describe("BagResidencyManager — stats", () => {
+describe("BagStowage — stats", () => {
   test("reports pinned / wela / anuCount / hotCap, buckets disjoint", async () => {
-    const m = new BagResidencyManager({ hotCap: 8 });
+    const m = new BagStowage({ hotCap: 8 });
     await m.pin(A, "boot");      // pinned-wela
     await m.touch(B);            // unpinned wela
     m.registerCold(C);          // anu

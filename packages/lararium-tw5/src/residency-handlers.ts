@@ -3,20 +3,20 @@
  * residency control: pin, unpin, residency (stats).
  *
  * Operators invoke these via `lares pin <url>` / `lares unpin <url>` /
- * `lares residency`. Each handler closes over the BagResidencyManager
+ * `lares residency`. Each handler closes over the BagStowage
  * the daemon constructs at boot.
  */
 
 import type { VerbReactor } from "./verb-dispatcher.js";
-import type { BagResidencyManager } from "@lararium/mesh";
+import type { BagStowage } from "@lararium/mesh";
 
 export interface ResidencyHandlerOptions {
-  readonly residency: BagResidencyManager;
+  readonly residency: BagStowage;
 }
 
 // pin / unpin / register-cold RELOCATED to @lararium/tw5 (worker-data-verbs) — they run
 // in the daemon worker (sovereign-worker, verify-then-delegate gated) and command this
-// main-resident BagResidencyManager via daemon:residency-op. Only the `residency` stats
+// main-resident BagStowage via daemon:residency-op. Only the `residency` stats
 // READ stays main (the manager lives here); the askMain research decides its eventual home.
 
 export function makeResidencyStatsReactor(opts: ResidencyHandlerOptions): VerbReactor {

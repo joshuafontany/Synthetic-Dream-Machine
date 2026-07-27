@@ -25,7 +25,7 @@ import { pullAndVerifyOracle } from "./oracle-read-client.js";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
 import type { LarDoc } from "./base-doc.js";
 import type { VesselCoreAssembly } from "./open-vessel-core.js";
-import type { BagResidencyManager } from "./bag-residency.js";
+import type { BagStowage } from "./bag-residency.js";
 
 /**
  * The carriage cap-ids. A vessel's #has-cap-stack names these to wire the @meshpalace FLOW-map + carriage.
@@ -45,7 +45,7 @@ export interface MeshPalaceComponent { readonly handle: DocHandle<MeshPalaceDoc>
 
 /** meshpalace — a writable @meshpalace AutomergeDocStore layer (the vessel's own public FLOW-map) +
  *  a residency pin. Requires substrate (the composite to layer into). */
-export function meshPalaceCap(deps: { repo: Repo; residency?: BagResidencyManager; seed?: readonly DialEntry[]; selfCoord?: Coord }): CapModule {
+export function meshPalaceCap(deps: { repo: Repo; residency?: BagStowage; seed?: readonly DialEntry[]; selfCoord?: Coord }): CapModule {
   return {
     id: CARRIAGE_CAP.meshpalace, requires: [SUBSTRATE_CAP_ID],
     build: async (resolve) => {

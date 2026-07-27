@@ -262,7 +262,7 @@ export class VesselIslandPoolCore {
       );
     }
 
-    // No self-eviction here: the ONE residency collector (BagResidencyManager +
+    // No self-eviction here: the ONE residency collector (BagStowage +
     // per-grain-type dials) owns reachability + the wiki cap. It evicts the LRU wiki
     // through onEvict → unmountWiki as it drives activation, so the pool stays a pure
     // mount mechanism — one authority, no second collector. `pinned` still rides the

@@ -59,7 +59,7 @@ export interface CompositeLayer {
 }
 
 /** Minimal residency-touch shape — kept structural so composite-store
- *  doesn't depend on the BagResidencyManager class directly (avoids
+ *  doesn't depend on the BagStowage class directly (avoids
  *  circular imports). The daemon binds it via attachResidency(). */
 export interface ResidencyTouch {
   touch(bagUrl: string): Promise<void> | void;

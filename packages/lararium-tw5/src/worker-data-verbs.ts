@@ -9,7 +9,7 @@
  *  - READS (where · resolve · list-wikis) — read the worker's OWN synced replica
  *    (ctx.composite over syncPort); zero round-trip to main.
  *  - MUTATORS (pin · unpin · register-cold) — gate in-worker, then COMMAND the
- *    main-resident BagResidencyManager fire-and-forget via daemon:residency-op (policy
+ *    main-resident BagStowage fire-and-forget via daemon:residency-op (policy
  *    decides in the worker; the main mechanism executes).
  * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
@@ -50,7 +50,7 @@ function residencyVerb(op: "pin" | "unpin" | "register-cold", post: ResidencyOpP
     if (!bagId) throw new Error("args.url is required");
     const reason = typeof args["reason"] === "string" ? args["reason"] : undefined;
     post(mkDaemonResidencyOp({ requestId: `resop-${++_opSeq}`, op, bagId, ...(reason !== undefined ? { reason } : {}) }));
-    // Policy granted in-worker (keyhive-gated); main's BagResidencyManager executes.
+    // Policy granted in-worker (keyhive-gated); main's BagStowage executes.
     return { url: bagId, op, commanded: true, ...(reason !== undefined ? { reason } : {}) };
   };
 }
@@ -149,7 +149,7 @@ export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: Catalo
 
 // ── Whole-wiki residency policy (pin-wiki / unpin-wiki) — worker-ward ──────────
 // Pure policy: read the recipe (USER registry data in @catalog, via the accessor —
-// access≠load), walk its bag-stack, COMMAND main's BagResidencyManager per bag via
+// access≠load), walk its bag-stack, COMMAND main's BagStowage per bag via
 // daemon:residency-op (the mechanism stays at the resource — the manager is pool-driven
 // bookkeeping). No live composite layer mutation, so unlike add-bag/remove-bag these
 // move cleanly.

@@ -22,7 +22,7 @@
 
 import type { WikiMountSpec } from "./wiki-recipe.js";
 
-/** The residency collector surface the cap heats a grain through (BagResidencyManager). */
+/** The residency collector surface the cap heats a grain through (BagStowage). */
 export interface ActivationResidency {
   touch(url: string, grainType?: string): Promise<void>;
   pin(url: string, reason?: string, grainType?: string): Promise<void>;
