@@ -83,6 +83,30 @@ available (#the-frame). Deliberately in scope here: remote CAS transit to a hold
 process, bilateral genesis across two sovereign hearths, the Herm's re-key/re-share/heal teeth, and
 reconnection after a real drop.
 
+''FIRST RUN — 2026-07-27, and the rite amends itself as promised.'' Three cycles ran. ''2 green, 1 red.''
+What the field said, recorded here because the run outranks the document:
+
+# ''THE RITE'S OWN INSTRUMENTS OVERCLAIMED — twice, and neither failure reaches a test suite.'' The
+  cycle runner declared `cycles green: 1/1` while BOTH witnesses failed (a bash `if` without `else`
+  yields 0, so the status read the branch and never the command). The carry witness printed
+  //verified at each hop// while a hop read UNVERIFIED (its gate checks the LAST hop alone). Both cured;
+  the runner now ''proves its own detector'' before trusting a cycle, and refuses to proceed when a
+  forced failure fails to register. ''A verdict MUST state its own scope, or a green measures the
+  instrument's silence.''
+# ''AN INTERMITTENT FAIL-CLOSED BINDING GATE, ~1 cold founding in 3.'' `herm-relay-2` exits 1 with
+  //persona-KEL chain for the pinned identifier … absent from the local board replica — the Binding
+  Gate cannot reach a head (fail-closed)//. A second identical run stands all four vessels clean. ''A
+  RACE, never a structural break'' — precisely the class one test run cannot see and a repeated
+  rehearsal does. Surfaced, deliberately undiagnosed: the Binding Gate sits in live work, and
+  #found already names this failure shape as the cost of founding without a carried chain.
+# ''WHAT PASSED, and it matters.'' On a healthy mesh the announced dial crosses source → relay-1 →
+  relay-2 with the pointer signed, the snapshot hash-matched and the dial DECODED; and the partition
+  witness confirms relay-2 keeps advancing after relay-1 is CUT — federation riding carried dials,
+  never a hardcoded peer list.
+
+''The rite therefore does NOT yet earn `status = live`.'' One movement stands amended (this one), and a
+red cycle stands unexplained. ''Boredom has not arrived.''
+
 ''The rehearsal amends this meme; this meme does not predict the rehearsal.'' Where a run contradicts
 a movement below, ''the run wins'' and the movement gets rewritten — the rite earns `status = live`
 only after a rehearsal completes end-to-end without an amendment.
