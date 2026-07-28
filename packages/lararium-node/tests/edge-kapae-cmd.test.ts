@@ -17,6 +17,7 @@ import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
   hex, hexToBytes, edgeKapaeBoardDocUrl, materializeSharedLarDoc,
   edgeKapaeActsFromBoard, shadowSetFromBoard,
+  noChainHeld,
 } from "@lararium/mesh";
 import {
   generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot,
@@ -53,7 +54,9 @@ async function boardState(authority: string) {
   const handle = await materializeSharedLarDoc(
     repo, edgeKapaeBoardDocUrl(await loadVesselVerifyingKey(larDataDir())), "@edge-kapae");
   const acts     = edgeKapaeActsFromBoard(handle.doc());
-  const shadowed = await shadowSetFromBoard(handle.doc(), () => authority, verify);
+  // This harness holds no charter chain, and declares it rather than omitting the argument —
+  // so the fold orders on version alone, which is exactly what these witnesses exercise.
+  const shadowed = await shadowSetFromBoard(handle.doc(), () => authority, verify, noChainHeld);
   await repo.flush();
   return { acts, shadowed };
 }

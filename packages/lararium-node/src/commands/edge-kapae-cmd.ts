@@ -27,6 +27,8 @@ import {
   edgeKapaeBoardDocUrl, materializeSharedLarDoc, ed25519SignerFromSeed, hexToBytes,
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
+import { readNexusCharterDoc } from "../nexus-charter-doc.js";
+import { daemonBagsDir } from "../lares-config.js";
 import {
   listPersonaRoots, loadPersonaGroupRootSeed, loadPersonaGroupRootVerifyingKey, loadVesselVerifyingKey,
 } from "../node-vessel-identity.js";
@@ -106,7 +108,13 @@ export async function runEdgeKapae(opts: EdgeKapaeOptions): Promise<EdgeKapaeRes
     // Read the act BACK through the verifying fold, under this signer as the edge's authority. A caller
     // learns whether the shadow now STANDS rather than merely whether a tiddler landed — and an act that
     // cannot survive its own extraction refuses loudly here instead of sitting on the board doing nothing.
-    const shadowed = await shadowSetFromBoard(handle.doc(), () => signerDid, verify);
+    // The chain that orders the act. A command deciding whether a shadow STANDS holds the chain that
+    // orders standing — epoch outranks version, and nobody runs ahead of an epoch not yet minted.
+    const chain = readNexusCharterDoc(daemonBagsDir())?.charterChain ?? [];
+    const rank  = new Map(chain.map((e) => [e.epochCid, e.epoch]));
+    const shadowed = await shadowSetFromBoard(
+      handle.doc(), () => signerDid, verify, (cid) => rank.get(cid) ?? null,
+    );
     return { edgeId, raised: opts.raised, version, epoch, signerDid, boardUrl, shadowStands: shadowed.has(edgeId) };
   } finally {
     await repo.flush().catch(() => { /* best-effort final flush */ });

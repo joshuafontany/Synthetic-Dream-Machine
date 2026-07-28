@@ -136,11 +136,20 @@ export function edgeKapaeActsFromBoard(doc: LarDoc | undefined | null): EdgeKapa
  * converging as the winner on reconnect. That grab is unanswerable in a scalar and trivial against a chain —
  * nobody runs ahead of an epoch that has not been minted. Epoch outranks version; version orders within one.
  *
- * It arrives INJECTED, like `verify` and `authorityFor`, because this module holds no chain and must not.
+ * It arrives INJECTED and REQUIRED, like `verify` and `authorityFor` — this module holds no chain and must
+ * not, and a fold that decides standing may not silently fall back to a scalar when nobody hands it one.
+ * A reader holding no chain says so explicitly (`noChainHeld`) rather than by omitting an argument.
  * An unknown epoch ranks BELOW every known one (`-1`), so an act rooting on a chain the reader cannot walk
  * never lowers a shadow raised on one it can — fail-closed, matching the antigen's treatment of the same case.
  */
 export type EpochOrder = (epochCid: string) => number | null;
+
+/**
+ * The declaration a reader makes when it holds no chain to walk — every epoch reads unknown, so the fold
+ * orders on version alone and the ceiling grab stands open. Named rather than defaulted, because a caller
+ * that cannot order epochs should SAY it at the call site where a reviewer will see it.
+ */
+export const noChainHeld: EpochOrder = () => null;
 
 /**
  * Fold the acts into the set of SHADOWED edges — the projection the whole pattern rests on.
@@ -153,8 +162,8 @@ export type EpochOrder = (epochCid: string) => number | null;
  * Every act arrives VERIFIED — the caller checks signatures before folding, because this fold decides
  * standing and an unverified act would let anyone lower anyone's shadow.
  */
-export function foldEdgeKapae(acts: readonly EdgeKapae[], epochOrder?: EpochOrder): Set<string> {
-  const rank = (a: EdgeKapae): number => (epochOrder ? epochOrder(a.epoch) ?? -1 : 0);
+export function foldEdgeKapae(acts: readonly EdgeKapae[], epochOrder: EpochOrder): Set<string> {
+  const rank = (a: EdgeKapae): number => epochOrder(a.epoch) ?? -1;
   const best = new Map<string, EdgeKapae>();
   for (const a of acts) {
     const prior = best.get(a.edgeId);
@@ -182,7 +191,7 @@ export async function verifiedShadowSet(
   acts: readonly EdgeKapae[],
   authorityFor: (edgeId: string) => string | undefined,
   verify: (bytes: Uint8Array, sigHex: string, signerDid: string) => Promise<boolean>,
-  epochOrder?: EpochOrder,
+  epochOrder: EpochOrder,
 ): Promise<Set<string>> {
   const verdicts = await Promise.all(acts.map(async (a) => {
     const signer = authorityFor(a.edgeId);
@@ -208,7 +217,7 @@ export async function shadowSetFromBoard(
   doc: LarDoc | undefined | null,
   authorityFor: (edgeId: string) => string | undefined,
   verify: (bytes: Uint8Array, sigHex: string, signerDid: string) => Promise<boolean>,
-  epochOrder?: EpochOrder,
+  epochOrder: EpochOrder,
 ): Promise<Set<string>> {
   return verifiedShadowSet(edgeKapaeActsFromBoard(doc), authorityFor, verify, epochOrder);
 }

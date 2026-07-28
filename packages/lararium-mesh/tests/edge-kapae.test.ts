@@ -16,7 +16,7 @@ import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
   signEdgeKapae, edgeKapaeBytes, edgeKapaeKey, writeEdgeKapae, edgeKapaeActsFromBoard,
-  foldEdgeKapae, verifiedShadowSet, shadowSetFromBoard, edgeKapaeBoardDocUrl,
+  foldEdgeKapae, verifiedShadowSet, shadowSetFromBoard, edgeKapaeBoardDocUrl, type EpochOrder,
   emptyLarDoc, type EdgeKapae,
 } from "../src/index.js";
 import { hex, hexToBytes } from "../src/crypto.js";
@@ -24,6 +24,8 @@ import { hex, hexToBytes } from "../src/crypto.js";
 const A_SEED = new Uint8Array(32).fill(11);   // admin A
 const B_SEED = new Uint8Array(32).fill(12);   // admin B
 const EPOCH  = "epoch0-aaa";
+/** The chain these witnesses walk — one minted epoch, so they order WITHIN it, which is what they test. */
+const ONE: EpochOrder = (e) => (e === EPOCH ? 0 : null);
 
 const signer = (s: Uint8Array) => (b: Uint8Array) => ed.signAsync(b, s).then(hex);
 const pubOf  = (s: Uint8Array) => ed.getPublicKeyAsync(s).then(hex);
@@ -38,20 +40,20 @@ describe("remove-wins — the asymmetry that carries the guarantee", () => {
     const raise = await act("edge-1", true,  1, A_SEED);
     const lower = await act("edge-1", false, 1, B_SEED);
     // both orders, because a merge offers no canonical one
-    expect(foldEdgeKapae([raise, lower]).has("edge-1")).toBe(true);
-    expect(foldEdgeKapae([lower, raise]).has("edge-1")).toBe(true);
+    expect(foldEdgeKapae([raise, lower], ONE).has("edge-1")).toBe(true);
+    expect(foldEdgeKapae([lower, raise], ONE).has("edge-1")).toBe(true);
   });
 
   test("a HIGHER-version lower does take the shadow down — deliberate, and it supersedes", async () => {
     const raise = await act("edge-1", true,  1, A_SEED);
     const lower = await act("edge-1", false, 2, A_SEED);
-    expect(foldEdgeKapae([raise, lower]).has("edge-1")).toBe(false);
+    expect(foldEdgeKapae([raise, lower], ONE).has("edge-1")).toBe(false);
   });
 
   test("a STALE act cannot roll a standing decision back", async () => {
     const lower = await act("edge-1", false, 3, A_SEED);
     const stale = await act("edge-1", true,  1, A_SEED);
-    expect(foldEdgeKapae([lower, stale]).has("edge-1")).toBe(false);
+    expect(foldEdgeKapae([lower, stale], ONE).has("edge-1")).toBe(false);
   });
 
   test("the board keys by edge, GESTURE and version, so a raise and a lower BOTH survive the merge", async () => {
@@ -60,7 +62,7 @@ describe("remove-wins — the asymmetry that carries the guarantee", () => {
     writeEdgeKapae(doc, await act("edge-1", false, 1, B_SEED));
     expect(Object.keys(doc.tiddlers)).toHaveLength(2);          // nothing overwrote anything
     expect(edgeKapaeKey("edge-1", true, 1)).not.toBe(edgeKapaeKey("edge-1", false, 1));
-    expect(foldEdgeKapae(edgeKapaeActsFromBoard(doc)).has("edge-1")).toBe(true);
+    expect(foldEdgeKapae(edgeKapaeActsFromBoard(doc), ONE).has("edge-1")).toBe(true);
   });
 });
 
@@ -69,7 +71,7 @@ describe("mutual revocation converges without a winner", () => {
     const aOut = await act("edge-B", true, 1, A_SEED);   // A shadows B's edge
     const bOut = await act("edge-A", true, 1, B_SEED);   // B shadows A's edge, concurrently
 
-    const shadowed = foldEdgeKapae([aOut, bOut]);
+    const shadowed = foldEdgeKapae([aOut, bOut], ONE);
     expect(shadowed.has("edge-A")).toBe(true);
     expect(shadowed.has("edge-B")).toBe(true);
     // No tiebreak ran, because none was needed — two edges, two shadows, no contention between them.
@@ -79,7 +81,7 @@ describe("mutual revocation converges without a winner", () => {
   test("two DIFFERENT edges never contend — the whole reason the thing-grained systems raced", async () => {
     const one = await act("edge-1", true, 1, A_SEED);
     const two = await act("edge-2", true, 1, B_SEED);
-    const shadowed = foldEdgeKapae([one, two]);
+    const shadowed = foldEdgeKapae([one, two], ONE);
     expect([...shadowed].sort()).toEqual(["edge-1", "edge-2"]);
   });
 });
@@ -90,20 +92,20 @@ describe("an unverified act carries no authority", () => {
     const raise  = await act("edge-1", true,  1, A_SEED);
     const forged = await act("edge-1", false, 2, B_SEED);   // B signs a lower over A's edge
 
-    const shadowed = await verifiedShadowSet([raise, forged], () => authority, verify);
+    const shadowed = await verifiedShadowSet([raise, forged], () => authority, verify, ONE);
     expect(shadowed.has("edge-1")).toBe(true);              // the forgery dropped; the shadow held
   });
 
   test("an act on an edge with NO known authority drops", async () => {
     const raise = await act("edge-1", true, 1, A_SEED);
-    expect((await verifiedShadowSet([raise], () => undefined, verify)).size).toBe(0);
+    expect((await verifiedShadowSet([raise], () => undefined, verify, ONE)).size).toBe(0);
   });
 
   test("a tampered field breaks the signature — the bytes bind edge, gesture, version and epoch", async () => {
     const authority = await pubOf(A_SEED);
     const raise = await act("edge-1", true, 1, A_SEED);
     const moved: EdgeKapae = { ...raise, edgeId: "edge-2" };
-    expect((await verifiedShadowSet([moved], () => authority, verify)).size).toBe(0);
+    expect((await verifiedShadowSet([moved], () => authority, verify, ONE)).size).toBe(0);
 
     const a = hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 1, epoch: "x" }));
     expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: false, version: 1, epoch: "x" })));
@@ -120,7 +122,7 @@ describe("an unverified act carries no authority", () => {
     } as never;
     expect(edgeKapaeActsFromBoard(doc)).toHaveLength(1);
     expect(edgeKapaeActsFromBoard(null)).toEqual([]);
-    expect(foldEdgeKapae([]).size).toBe(0);
+    expect(foldEdgeKapae([], ONE).size).toBe(0);
   });
 
   test("a version below one refuses — a monotone counter starts where the law starts it", async () => {
@@ -138,7 +140,7 @@ describe("the board — where a shadow becomes RAISABLE, not merely readable", (
     const doc = emptyLarDoc();
     writeEdgeKapae(doc, await act("edge-1", true, 1, A_SEED));
 
-    const shadowed = await shadowSetFromBoard(doc, () => authority, verify);
+    const shadowed = await shadowSetFromBoard(doc, () => authority, verify, ONE);
     expect(shadowed.has("edge-1")).toBe(true);
   });
 
@@ -148,7 +150,7 @@ describe("the board — where a shadow becomes RAISABLE, not merely readable", (
     writeEdgeKapae(doc, await act("edge-1", true,  1, A_SEED));
     writeEdgeKapae(doc, await act("edge-1", false, 2, A_SEED));
 
-    expect((await shadowSetFromBoard(doc, () => authority, verify)).size).toBe(0);
+    expect((await shadowSetFromBoard(doc, () => authority, verify, ONE)).size).toBe(0);
     expect(Object.keys(doc.tiddlers)).toHaveLength(2);   // and BOTH acts survive as the record
   });
 
@@ -158,14 +160,14 @@ describe("the board — where a shadow becomes RAISABLE, not merely readable", (
     writeEdgeKapae(doc, await act("edge-1", true,  1, A_SEED));
     writeEdgeKapae(doc, await act("edge-1", false, 2, B_SEED));   // B has no authority over edge-1
 
-    expect((await shadowSetFromBoard(doc, () => authority, verify)).has("edge-1")).toBe(true);
+    expect((await shadowSetFromBoard(doc, () => authority, verify, ONE)).has("edge-1")).toBe(true);
   });
 
   // The honest floor: an absent board means nothing was set aside, never that everything is permitted.
   // The readers that consult this still verify every edge they admit, so an empty shadow set opens nothing.
   test("an ABSENT board yields no shadows, which reads as a floor rather than a permission", async () => {
-    expect((await shadowSetFromBoard(null, () => "x", verify)).size).toBe(0);
-    expect((await shadowSetFromBoard(emptyLarDoc(), () => "x", verify)).size).toBe(0);
+    expect((await shadowSetFromBoard(null, () => "x", verify, ONE)).size).toBe(0);
+    expect((await shadowSetFromBoard(emptyLarDoc(), () => "x", verify, ONE)).size).toBe(0);
   });
 
   test("the board address derives deterministically per Nexus, and differs across them", () => {
@@ -187,7 +189,7 @@ describe("the epoch bounds the ceiling grab a scalar cannot", () => {
     const order = chain({ e1: 1, e2: 2 });
     // Version alone hands the edge to the grab; the chain refuses it, because nobody runs ahead of an
     // epoch that has not been minted.
-    expect(foldEdgeKapae([grab, raise]).has("edge-9")).toBe(false);           // scalar: the grab wins
+    expect(foldEdgeKapae([grab, raise], ONE).has("edge-9")).toBe(false);           // scalar: the grab wins
     expect(foldEdgeKapae([grab, raise], order).has("edge-9")).toBe(true);     // chain: it does not
     expect(foldEdgeKapae([raise, grab], order).has("edge-9")).toBe(true);     // and order of arrival never matters
   });
