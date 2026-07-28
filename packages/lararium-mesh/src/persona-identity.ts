@@ -18,11 +18,14 @@
  *                          SLIP-0010 — structurally immune to the xpub-linkage
  *                          trap). Recover the seed → re-derive the constellation.
  *
- * This file carries the persona master-seed lifecycle (one seed per human, may
- * live on several of the human's own devices), the path convention naming the
- * persona tree, the veiled-user-key derivation, and the two-key atom assembly
- * (pairing the DEVICE-MINTED vessel verifyingKey — passed in, never derived —
- * with the derived veiled-user verifyingKey).
+ * This file carries the persona TREE: the path convention, the veiled-user-key
+ * derivation, and the per-circle scope-pseudonym that extends it one level.
+ *
+ * RETIRED FROM HERE, and where each went:
+ *   · the seed LIFECYCLE  → `persona-vault` holds the live root machinery.
+ *   · the two-key ATOM    → `dyad` holds it, and holds it as a RELATION rather than
+ *     as a struct of two public keys. That difference carries the ruling: identity
+ *     ENACTS a relationship, so the pair was never the thing — the hold between them was.
  *
  * Platform-blind: rides ./persona-hd + ./crypto only. NO node: imports. The
  * randomness arrives through an injected `randomBytes` shore (platform supplies
@@ -70,48 +73,6 @@ export interface PersonaPath {
 /** Build the RAW path tuple for `derivePersonaKeypair` from a PersonaPath. */
 export function personaPathIndices(handleIndex: number, contextIndex: number): readonly number[] {
   return [handleIndex, contextIndex];
-}
-
-/**
- * How a runtime persists the human's ONE persona master seed.
- *
- * Distinct from KeypairStore (vessel-identity-core): that slot holds a
- * device-minted vessel keypair; THIS slot holds the human's constellation root,
- * one per human (which may live on several of the human's own devices).
- */
-export interface PersonaSeedStore {
-  /** Load the persisted seed, or undefined when the slot is empty. */
-  load(): Promise<Uint8Array | undefined>;
-  /** Persist a freshly generated seed into the slot. */
-  save(seed: Uint8Array): Promise<void>;
-}
-
-/**
- * generateOrLoadPersonaSeed — the persona master-seed lifecycle.
- *
- * Loads the existing seed; failing that, generates a fresh 32-byte seed through
- * the injected `randomBytes` shore, PERSISTS it BEFORE returning (mirroring
- * generateOrLoadKeypair's persist-before-return control flow, so any layer
- * keying off the seed runs strictly AFTER it reaches durable storage), and
- * reports whether THIS call minted it (`created`).
- *
- * `randomBytes` MUST source platform CSPRNG bytes (the platform supplies
- * globalThis.crypto.getRandomValues) — the shore never hardcodes a crypto source.
- */
-export async function generateOrLoadPersonaSeed(
-  store: PersonaSeedStore,
-  randomBytes: (n: number) => Uint8Array,
-): Promise<{ seed: Uint8Array; created: boolean }> {
-  const existing = await store.load();
-  if (existing) return { seed: existing, created: false };
-  const fresh = randomBytes(PERSONA_SEED_BYTES);
-  if (fresh.length !== PERSONA_SEED_BYTES) {
-    throw new TypeError(
-      `generateOrLoadPersonaSeed: randomBytes must return ${PERSONA_SEED_BYTES} bytes, got ${fresh.length}`,
-    );
-  }
-  await store.save(fresh);
-  return { seed: fresh, created: true };
 }
 
 /**
@@ -171,36 +132,3 @@ export async function deriveCircleScopedKey(
   return derivePersonaKeypair(seed, [handleIndex, contextIndex, circleScopeIndex(circleDocIdHex)]);
 }
 
-/**
- * The two PUBLIC keys of a `vessel~veil` binding (canon #the-atom).
- *
- * The two halves NEVER co-surface as secrets — this carries only the public
- * verifying keys, the pair an observer of one join may see.
- */
-export interface TwoKeyAtom {
-  /** The device-minted vessel verifying key (substrate identity). */
-  vesselVerifyingKey: string;
-  /** The derived veiled-user verifying key (persona / sovereignty). */
-  veiledUserVerifyingKey: string;
-}
-
-/**
- * assembleTwoKeyAtom — pair the DEVICE-MINTED vessel verifyingKey (passed in,
- * NEVER derived from the seed — the no-copied-key guard) with the derived veiled-user
- * verifyingKey at the named persona path.
- *
- * The vessel key passes straight through unchanged; only the veiled-user key
- * descends from the seed.
- */
-export async function assembleTwoKeyAtom(
-  vesselVerifyingKey: string,
-  seed: Uint8Array,
-  handleIndex: number,
-  contextIndex: number,
-): Promise<TwoKeyAtom> {
-  const veiled = await deriveVeiledUserKey(seed, handleIndex, contextIndex);
-  return {
-    vesselVerifyingKey,
-    veiledUserVerifyingKey: veiled.verifyingKey,
-  };
-}
