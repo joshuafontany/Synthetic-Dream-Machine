@@ -54,14 +54,13 @@ export interface CabalVouchResult {
   readonly place:       string;
   readonly expiresAt:   string;
   readonly boardUrl:    string;
-  /** The voucher's out-degree AFTER this vouch — what they have now split their standing across. */
   /**
-   * How many edges THIS REPLICA can see under `voucherDid`, right now — never how many exist. A sibling
+   * The FLOOR on this voucher's out-degree — how many edges THIS REPLICA can see, never how many exist. A sibling
    * replica may hold edges this one has not synced, so the dilution a voucher actually carries reads at
    * or above this number. Reported so a human sees what they just spent, never as a total (vouch-board's
    * no-completeness invariant: a count presented as total makes a withheld tie legible as a withheld tie).
    */
-  readonly outDegree:   number;
+  readonly outDegreeFloor: number;
   /** True when this vouch replaced the voucher's own prior vouch for the SAME joiner (one edge, not two). */
   readonly reMinted:    boolean;
 }
@@ -145,8 +144,8 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
       throw new CabalVouchError("refusing silently: the vouch did not read back off the board through the verifying read.");
     }
 
-    const outDegree = vouchDagFromInvites(after).edges.filter((e) => e.voucher === voucherDid).length;
-    return { voucherDid, joiner, place, expiresAt, boardUrl, outDegree, reMinted };
+    const outDegreeFloor = vouchDagFromInvites(after).edges.filter((e) => e.voucher === voucherDid).length;
+    return { voucherDid, joiner, place, expiresAt, boardUrl, outDegreeFloor, reMinted };
   } finally {
     await repo.flush().catch(() => { /* best-effort final flush */ });
   }

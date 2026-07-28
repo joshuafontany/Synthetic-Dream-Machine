@@ -65,7 +65,7 @@ describe("runCabalVouch — the vouch lands, verified, and dilutes the hand that
     const r = await runCabalVouch({ joiner: JOINER, place: PLACE, expiresAt: LATER }, NOW);
 
     expect(r.voucherDid).toBe(await loadPersonaGroupRootVerifyingKey(larDataDir(), 0));
-    expect(r.outDegree).toBe(1);
+    expect(r.outDegreeFloor).toBe(1);
     expect(r.reMinted).toBe(false);
 
     const onBoard = await boardVouches();
@@ -76,14 +76,14 @@ describe("runCabalVouch — the vouch lands, verified, and dilutes the hand that
 
   it("out-degree GROWS with a distinct joiner and does NOT with a re-mint — re-minting buys no branching", async () => {
     const first = await runCabalVouch({ joiner: JOINER, place: PLACE, expiresAt: LATER }, NOW);
-    expect(first.outDegree).toBe(1);
+    expect(first.outDegreeFloor).toBe(1);
 
     const second = await runCabalVouch({ joiner: OTHER, place: PLACE, expiresAt: LATER }, NOW);
-    expect(second.outDegree).toBe(2);            // a real second edge — the voucher's mass now splits two ways
+    expect(second.outDegreeFloor).toBe(2);            // a real second edge — the voucher's mass now splits two ways
 
     const again = await runCabalVouch({ joiner: JOINER, place: PLACE, expiresAt: LATER }, NOW);
     expect(again.reMinted).toBe(true);
-    expect(again.outDegree).toBe(2);             // STILL two — a re-mint is one edge, never a free dilution
+    expect(again.outDegreeFloor).toBe(2);             // STILL two — a re-mint is one edge, never a free dilution
 
     const dag = vouchDagFromInvites(await boardVouches());
     expect(dag.edges).toHaveLength(2);
