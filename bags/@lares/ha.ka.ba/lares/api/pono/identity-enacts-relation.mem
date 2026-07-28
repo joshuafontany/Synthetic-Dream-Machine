@@ -1,0 +1,176 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>
+```toml iam
+cacheable     = false
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/identity-enacts-relation.mem"
+l-space       = "stable"
+mana          = 11
+manao         = 11
+manaoio       = 11
+register      = "Synthesis"
+retain        = true
+revision-note = "minted 2026-07-28 — PROVISIONAL. Holds the identity-as-relation model as it stood after the four-day research arc: the constructor, the declared partition, declaration ⊥ gauge, fluid-not-frozen rank, and the vocabulary. Operator-ruled parts marked RULED; the rest reads PROPOSED and unbuilt"
+role          = "the identity plane's ontology: identity ENACTS a relation; a mutual hold constitutes a scale RELATIVE TO A DECLARED PARTITION; the declaration and the gauge stand as two artifacts with two owners; rank runs fluid, never frozen. Expands lararium-identity's five-scale axis with what makes a scale real"
+tags          = ["api/pono/meme"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Identity Enacts a Relation ~ what makes a scale real
+
+> ''PROVISIONAL.'' The spine below carries operator rulings; the instruments carry research and no code. Six weak joints named at #crucible. Nothing here has met a founded vessel.
+
+''The brief, operator-stated:'' this system exists ''for those groups that need shelter against empire.'' That re-weights every question downstream — the recently-arrived case reads as the acceptance test rather than a caveat, categorisation risk reads as THE threat rather than one of several, and //no frozen rank// names a survival property rather than a taste.
+
+''RULED.'' Identity ENACTS a relationship; it never names a thing. The identity functor returns a relationship-functor. //Layers of identity, no "an identity."// A thing-model — one global identity per human, resolvable now by anyone — IS the census, and serves only empire. Humans stay fuzzy beneath whatever pinned real-world name they carry; that pin never travels inward and never leaks outward.
+
+<<~/ahu >>
+
+<<~ ahu #the-constructor >>
+
+!! The Constructor ~ a mutual hold makes the next scale
+
+''RULED.'' A mutual hold (`hoʻokipa`) at scale N constitutes an entity at scale N+1. One constructor, all the way up — and nothing else in the model makes a new scale.
+
+`hoʻokipa` reads causative of `kipa` (to visit) and runs ''one-directional by grammar'': the host causes a visit. One firing = a visit. ''Two opposed firings'' = belonging. Reciprocity is not stipulated by the model; the morphology requires it.
+
+''Two regimes, one constructor.'' Below the person the hold binds ONE principal's instruments (vessel-key ⊗ veil-key; dyad ⊗ dyad) — one hand at both ends, which the model's own Sybil definition would otherwise call fake reciprocity. At and above the person it binds distinct loci of cost. ''The gauge distinguishes them'' — it correctly reads low below the seam — so the model needs one arrow, not two.
+
+''RULED — the top does not close.'' DreamNet stands as the FIELD Nexuses found //within//, never a constructed rung. The reason is arithmetic rather than taste: ''a closed top would be the thing that can act alone over everything.'' A closed top is an empire. Recognition edges across the mesh therefore stay NON-TRANSITIVE and refuse closure — and non-transitivity is what keeps a hostile Nexus from riding an inherited edge into a house.
+
+<<~/ahu >>
+
+<<~ ahu #declared-partition >>
+
+!! The Declared Partition ~ there is no partition-free fact
+
+''The deepest finding of the arc.'' Four independent literatures each tried to make //"a new level is real"// observer-independent, and each was argued back to a declared boundary: the causal-emergence measures read //"not invariant under changes in the way the micro-elements are construed"//; the individuality measures //"are not sufficient to detect the precise boundaries between individuals"// absent a size regulariser; the MLS1/MLS2 distinction reduces to //"a matter of perspective and limited knowledge… rather than objective facts"//; and the Markov-blanket literature conflates an instrumental construct with a realist one.
+
+''So a scale exists RELATIVE TO A DECLARATION of who counts'' — and the declaration is an ACT, by a NAMED party, at COST, and REVISABLE.
+
+That reads constructive rather than defeatist. Testing Ostrom's eight principles across 91 studies, the two best-supported in the whole corpus are exactly this separation: ''1A, clearly defined boundaries'' (p < 0.0001) and ''4B, monitors accountable to the appropriators'' (odds ratio 11.7, the highest in the table). Principle 8, nested enterprises — this stack's own ladder shape — scored WEAKEST (p = 0.065).
+
+''Budget the engineering on making the declaration honest and expensive, never on making the gauge clever.''
+
+<<~/ahu >>
+
+<<~ ahu #two-artifacts >>
+
+!! Two Artifacts, Two Owners
+
+|!  |! the DECLARATION |! the GAUGE |
+| answers | who counts | does the declared thing act |
+| form | a `lar:` name + roster, signed | non-aggregativity over emitted behaviour |
+| owner | a named declarer bearing `kuleana` | a party that did NOT declare |
+| decays | no — an act | yes |
+| moves | sets the FLOOR | only ever LIFTS |
+
+''RULED — the naming layer performs, so it MUST NOT certify.'' Under partition-relativity this reads as structure rather than hygiene: ''a namer who also gauged would choose the partition that flatters its own name.'' Three independent warrants: the ward's own confession-grade limit (certification sits outside the turn); the partition-relativity result, which makes it a theorem; and Ostrom's 1A ⊥ 4B split.
+
+''Observed live'' — a tasked spirit wrote its scouts' findings into existence before any scout reported, caught itself on re-reading its own transcript, and named the lesson: //"I named five findings into existence and my own naming read back to me as evidence. If a spirit does that to itself in one session, a mesh will do it at scale."//
+
+''A declaration MUST name its mechanisms.'' Partition a well-mixed population arbitrarily and the Price equation reports the groups as maximally individual — pure artefact. The cure: //"group-level covariance can only be interpreted as higher-level selection when that covariance is maintained by individuating mechanisms."// A declaration naming no mechanism produces noise, never standing.
+
+<<~/ahu >>
+
+<<~ ahu #the-gauge >>
+
+!! The Gauge ~ can this entity dispose of you alone
+
+''One predicate, three proofs, no shared citation:'' a real higher-scale entity carries state that is not a projection, sum, or average of any single member's state. Rosas et al. Lemma 1(ii) — //"cannot have emergent behaviour if it can be perfectly predicted from a single variable"// — computable as `Ψ = I(V_t;V_t') − Σ_j I(X_t^j;V_t')` from a time series alone. List & Pettit's Theorem 1, where a group escapes dictatorship only by holding judgments no member holds. Doulcier et al.'s ''non-aggregativity''.
+
+Ψ reads SUFFICIENT, never necessary — it convicts a nominal group reliably and acquits a real one weakly. ''That polarity runs the right way'': a Sybil-detector that does not fire on a genuine sparse hold.
+
+''Its real job.'' Not //is this ontologically real// but ''can this entity act alone against what it holds'' — because a nominal group CAN act alone, so being held by one is identical to being held by a person. ''The gauge measures CAPTURE-RISK.''
+
+''Entropy over the roster is DEAD.'' A Sybil raises it — a Cabal of one minting eight faces scores maximal entropy and passes. The standard decentralisation triple (entropy, Gini, Nakamoto) is roster-based and Sybil-blind by construction. //A roster you write; a Ψ you earn.//
+
+''And the young-Cabal case has an answer:'' //"we can use the presence of individuating mechanisms to infer whether the objects at a hierarchical level have the capacity, EVEN IF THE CAPACITY IS NOT CURRENTLY BEING REALISED."// Mechanism-presence carries modal force where an activity metric carries none — a quiet island still holds standing.
+
+''The gap:'' individuals need BOTH policing (suppress within-level selection) AND demarcation (increase between-level selection), and //"no policing definition, however functional, will succeed… the policing effect is wholly negative."// This stack holds only policing — quorum, thresholds, cap-degradation. ''A Cabal with only policing is a muscle cell.'' The scarce expiring flow may be the missing half.
+
+<<~/ahu >>
+
+<<~ ahu #rank >>
+
+!! Rank ~ fluid, never frozen
+
+''RULED.'' Frozen rank forbidden; fluid rank permitted. ''A total order over persons needs a global now; a partial order does not.'' Prestige hierarchies run domain-specific and therefore weakly transitive — so `kūlana` MUST NOT be a global scalar.
+
+''Six entities English fuses into one word:'' ORDER (partial) · GRADIENT (steepness) · REPUTATION (an estimate ''with its variance'') · ROLE (licensed capability) · DEBT (dischargeable) · CATEGORY (ascribed — the one to forbid).
+
+''Freezing has two structural causes'', both scale-invariant: no priced, published, third-party-funded EXIT; and any class able to occupy only one side of a relation. But note the warning: Rome PUBLISHED a full statutory exit ladder and Justinian records that //"our laws were full of them, but there was no practical experience of them"// — five centuries, unwalked. Guild numbers say why: masters' sons paid 43% of the stranger fee across 245 guilds, and the mean mastership fee ran 276 days of a labourer's wages. ''Publication achieves nothing; the price sorts.''
+
+''Capture requires a counterparty that can act ALONE.'' An edge to a genuine collective is structurally many edges (a joint commitment //"can only be brought about or rescinded jointly"//). An edge to a nominal one captures exactly as a person does.
+
+''If decay is built:'' decay the VARIANCE, never the mean (inactivity widens the interval; the system states only what it truthfully lost track of), and decay along the GRAPH, never the calendar. But three independent sources say it may need no mechanism at all — relative standing erodes for free, prestige decays by client exit, and the recommender literature found best accuracy at //no decay at all//.
+
+<<~/ahu >>
+
+<<~ ahu #admission >>
+
+!! Admission ~ tolerance, never detection
+
+''No observable separates deferred reciprocity from fake.'' Proven twice from literatures that never cite each other: without a logically centralised authority Sybil attacks stay always possible except under //"extreme and unrealistic assumptions"//; and every graph defence reduces to local community detection, with accuracy falling to random as modularity rises (r = −0.81 across eight real graphs). ''A Sybil detector IS a refugee detector, measured.''
+
+''So the crossing never adjudicates the ontology. It bounds the reach.'' An unverified hold receives a DEGRADED cap-stack — entry free, reach bounded, caps composing upward. That is `capability-degradation-by-composition`, already built, finally pointed at the thing it was shaped for.
+
+''The receiver-side cap is the only lever with measured success.'' Bounding the giver failed three times (a system capping every giver's daily votes runs Gini 0.976 on reputation received). Both low-concentration systems bound the RECEIVER. And cumulative advantage runs on prestige, not merit — seeding ONE award to randomly-chosen contributors produced 12/100 further awards against 2/100 controls, with //"no greater productivity"//. ''One gift begets six.''
+
+''Do not render running totals.'' The count carries the concentration; the act does not.
+
+''And subordination is the HOST's payment.'' Every historical case where admission required expropriating a NAMED incumbent lacked routine peacetime machinery; where no incumbent claim existed, standing machinery ran for centuries. ''So prevent the claim from forming rather than clearing it later'' — a collective's admission forms no person-edge, because the admitter did not act as a giver. What a Nexus wants members FOR stands open and unanswered.
+
+<<~/ahu >>
+
+<<~ ahu #vocabulary >>
+
+!! The Vocabulary
+
+Seated: `hoʻokipa` the constructor · `kūlana` position/standing/reputation (**kū** stand + //-lana//; the unmarked `kulana` means to wobble — the standing and the wobbling from one root) · `pau` where validity ends, expressed as a position · `maka` the trace (face·presence·sight; inert, unpointered, ''untraversable'') · `kuleana` the stake (Hohfeldian — right AND burden, arriving together, which is why it cannot be taken anonymously) · `hoʻokupu` the offering laid down at a place.
+
+Provisional (operator, 2026-07-28): `pili` — cling/adhere/''pertain'', one verb where English needs three, with ''`wehe i ka pili`: to sever BY OPENING'' · `wā` — an interval in time OR space, undifferentiated, the position primitive with no clock installed · `kaona` — the inner theme governing how each surface part reads, which is this house's classifier channel, and ''contested by design''.
+
+''Refused:'' `kauā`, `mōkai` (a hereditary untouchable caste drawn on for human sacrifice; opprobrium marked in the dictionary entry; slur-use within living memory). ''Flagged:'' reading `kapu`⊥`noa` as clean demarcated/undemarcated strips a class hierarchy and a gendered degradation and keeps the tidy half — not false, ''partial in a direction that flatters the borrower.''
+
+<<~/ahu >>
+
+<<~ ahu #crucible >>
+
+!! Six Weak Joints ~ what a crucible must break
+
+# ''The gauge may not separate anything at this data volume.'' Ψ stands untested on a signed act-log. One run — a real multi-member hold against a synthetic Cabal-of-one — answers this AND the two-regimes claim, which predicts Ψ ≈ 0 for a dyad.
+# ''The declarer has no cost model'' beyond "their own gauge answers for it."
+# ''Decay has no rate'' — and may need none. The derivation method exists if wanted: name the horizon at which standing should read as uninformative as a stranger's, invert the variance-growth law.
+# ''The conversion act is unnamed and unbuilt.'' `hānai` does NOT do it — it redistributes children inside an existing kin net and cannot reach a party outside the kin graph, which is precisely the party a guest-conversion exists for.
+# ''`maka`'s untraversability is unproven'' — break-entropy unstated, and witness ⊥ authentication still conflated.
+# ''Two regimes, one gauge'' reads elegant, and the elegance is the risk vector: segmentary lineage theory died because its beauty made users stop checking whether the named units ever acted.
+
+''Standing uncured:'' standing computed from standing drifts from merit and then LOCKS (three literatures, no cure). Enforcement earns standing (cost-infliction that benefits the group reads as prestige), which is the kahu-ossification path with a measured mechanism attached.
+
+''Two unowned seams:'' the ''Hodge harmonic'' in a partitioned mesh — the dismissal covers RANDOM graphs, and partition scars are non-random, so //a standing gradient every island agrees on locally, closing into a loop no island can see// may be the substrate's own signature; and the first ''concentration measurement'' for a non-transferable expiring allowance anywhere.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >> — the five scales, the vessel key, the delegation edge, the lease, the siege-gate, the lineage fold. This meme expands its axis with //what makes a scale real//; it replaces nothing there.
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+
+''Corrections ledger'' — seven things built during this arc and then overturned, each with the evidence: held at `.claude` memory `identity-arc-reversals`. Read it before rebuilding any of them; every one looked right when written.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
