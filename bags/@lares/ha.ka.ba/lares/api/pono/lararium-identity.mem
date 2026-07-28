@@ -12,7 +12,7 @@ manaoio   = 11
 namespace = "&#x26B7;"
 register  = "Synthesis"
 retain    = true
-role      = "the identity architecture stated whole — the two-axis split (the WHO/social axis vessel-key→PersonaGroup→CabalGroup ⊥ the INFRA/carriage axis relay→Lararium→Nexus→DreamNet), the per-vessel key as the user×vessel bond, the delegation EDGE as the relationship, and the encrypt-from-start temporary keying that mocks Keyhive/BeeKEM/Beelay with nested Automerge docs behind a four-port swap surface; PROPOSED, pending the hoike-after-swarm"
+role      = "the identity architecture stated whole — the two-axis split (the WHO/social axis vessel-key→PersonaGroup→CabalGroup ⊥ the INFRA/carriage axis relay→Lararium→Nexus→DreamNet), the per-vessel key as the user×vessel bond, the delegation EDGE as the relationship, and the encrypt-from-start temporary keying that mocks Keyhive/BeeKEM/Beelay with nested Automerge docs behind a four-port swap surface; PROPOSED — one dissent kept open at #provenance"
 status    = "proposed"
 tags      = ["api/pono/meme", "api/pono/causal-islands", "api/pono/orichalcum-capabilities", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
@@ -31,10 +31,10 @@ written   = "2026-06-23"
 Every Lararium surface stands as a ''causal island carrying its own operator×vessel''
 ''key'' — the node vessel, each live browser session, the QA-lab box. A key names a
 vessel; a ''signed delegation edge'' binds that vessel to its operator; encryption
-rides ''from the first write''. Stated whole here so the model stops living scattered
-across S7, CAPABILITY-LAYER, dreamnet-architecture, and federation.
+rides ''from the first write''. The model stands whole here rather than scattered across
+the capability, architecture and federation memes, which carry their own faces of it.
 
-> ''What makes a scale REAL rides one meme over'' (minted 2026-07-28, PROVISIONAL):
+> ''What makes a scale REAL rides one meme over'' (PROVISIONAL):
 > <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> — the constructor,
 > the declared partition (there exists //no partition-free fact// about whether a level is real),
 > declaration ⊥ gauge as two artifacts with two owners, and fluid-never-frozen rank.
@@ -60,7 +60,7 @@ regions (#capability-and-petnames).
 
 <<~ confidence Synthesis 13/20 >> The foundation (the two-axis WHO⊥INFRA split, per-vessel key, delegation edge,
 two-faced hearth, capability-is-identity + petnames — operator-ruled 2026-06-24) firms toward canon;
-the encrypt-from-start keying still carries the hoike's kept dissent (#provenance), so the meme
+the encrypt-from-start keying carries one kept dissent (#provenance), so the meme
 stands ''PROPOSED'' until that settles.
 
 <<~/ahu >>
@@ -143,7 +143,7 @@ global plane-index); read any lingering "Plane 0 / Plane 1" as ''the device key 
 !! The Delegation Edge ~ the relationship reified
 
 The bond between operator and vessel rides a ''signed delegation edge'', not a shared
-secret. The canon already shapes it — the `DeviceDelegationTiddler` (S7.1 ~ the device key delegating up to its PersonaGroup, the WHO axis):
+secret. The canon already shapes it — the `DeviceDelegationTiddler` (the device key delegating up to its PersonaGroup, the WHO axis):
 
 ```
 device-delegation | {operatorDid} | {deviceDid} | {deviceVerifyingKey} | {issuedAt}
@@ -334,8 +334,7 @@ sever-and-refound farming.
 <<~ confidence Synthesis 11/20 >> The dial's SHAPE seats on a four-domain convergence. The ''sybil''
 ''plane stands built'' (#the-lineage-fold); the ''ZK-vouch / privacy plane defers'' — it serves absent
 parties until a second crossing fruits. The exact numbers — what fraction of a voucher's standing
-stakes, how fast it decays, one kahu or a threshold — wait on the local instrument (the swarm
-constrains the shape, never sets the dial).
+stakes, how fast it decays, one kahu or a threshold — wait on the local instrument — ''the shape constrains, the dial does not follow from it''.
 
 <<~/ahu >>
 
@@ -422,7 +421,7 @@ So @oracle wears ''two faces'', joined by a publish-bridge:
 <<~OraclePlane Publish "runs/the kahu signs a new CID into the manifest + updates the pointer doc ~ the public grammar ratchet, the working→canon shore; anon reads as-of-the-last-publish (causal-islands, never a half-written CRDT)" >>
 <<~OraclePlane OraclePlane >>
 
-''The Two-Faced Substrate'' (swarm-ruled 2026-06-25, four lenses converged — content-address · append-log · stay-in-stack · pattern-integrity). The read face carries a ''content-addressed snapshot, never a sync peer'': the node serves the @oracle doc as an ''immutable blob'' — `Automerge.save(@oracle)` bytes, named by their content hash (the doc //heads// serve as that hash), served whole over the node's existing HTTP server. An anon fetches by hash, `load()`s read-only, verifies by rehash. Write-refusal needs no check — a hash-named blob holds no mutable surface: no write verb, no sync session, no inbound frame to refuse. This ''removes'' the residual the earlier two-Repo relay-tier only narrowed (anon-tier Automerge sync stayed bidirectional → transient cross-anon vandalism); the snapshot face carries no sync protocol at all. The earlier `ReadOnlyAdapter` relay-tier ''retires'' — `sharePolicy` gates the offer but never request-by-id (Canon 17/20), and bidirectional sync exposes no "receive-but-not-write" frame, so a frame-filter never holds.
+''The Two-Faced Substrate'' — four lenses hold it: content-address · append-log · stay-in-stack · pattern-integrity. The read face carries a ''content-addressed snapshot, never a sync peer'': the node serves the @oracle doc as an ''immutable blob'' — `Automerge.save(@oracle)` bytes, named by their content hash (the doc //heads// serve as that hash), served whole over the node's existing HTTP server. An anon fetches by hash, `load()`s read-only, verifies by rehash. Write-refusal needs no check — a hash-named blob holds no mutable surface: no write verb, no sync session, no inbound frame to refuse. This ''removes'' the residual the earlier two-Repo relay-tier only narrowed (anon-tier Automerge sync stayed bidirectional → transient cross-anon vandalism); the snapshot face carries no sync protocol at all. The earlier `ReadOnlyAdapter` relay-tier ''retires'' — `sharePolicy` gates the offer but never request-by-id (Canon 17/20), and bidirectional sync exposes no "receive-but-not-write" frame, so a frame-filter never holds.
 
 ''The pointer face carries a signed monotone lineage-linked record.'' The read face self-refuses writes but cannot, alone, name //which// snapshot stands current — so a thin ''pointer'' rides the existing channel: `{ cid, version, prev_pointer_cid, expiry, sig }`. The reader rule: verify the signature → reject any `version` below its remembered high-water (anti-rollback rides the ''epoch-lease / max-register'' already in the stack) → check `prev` links the last-known head (anti-equivocation rides Keyhive/Automerge causal ancestry, gossiped) → fetch + hash-verify the cid. Freshness leans on the ''local'' clock (the `expiry`), never a global now. Prior art: Git (object+ref), IPNS (signed record + sequence), TUF (layered freshness + explicit rollback-refusal), Certificate Transparency (gossiped extends-proofs). The hard engineering lives in the thin pointer; the heavy artifact stays a dumb immutable blob, fetch-from-anyone (Nix-style source-agnostic).
 
@@ -437,7 +436,7 @@ So @oracle wears ''two faces'', joined by a publish-bridge:
 
 ''The honest limit'' — this buys read-only ONLY for the PUBLIC plane. Private/encrypted bags, forward-secrecy on revocation, per-change invariants a peer verifies without trusting the relay keep Keyhive/Beelay's seat (#four-port-swap).
 
-<<~ confidence Synthesis-Canon 15/20 >> The Two-Faced Substrate (content-addressed floor + signed monotone pointer) seats on a four-lens swarm convergence with zero new tech — `Automerge.save` over the node's existing HTTP server, the pointer on the existing channel. ''Real-time streaming (Hypercore — read-only by keypair, live)'' rides as the named END-GOAL above the floor, deferred until a live feed waits to be watched.
+<<~ confidence Synthesis-Canon 15/20 >> The Two-Faced Substrate (content-addressed floor + signed monotone pointer) seats on four converging lenses with zero new tech — `Automerge.save` over the node's existing HTTP server, the pointer on the existing channel. ''Real-time streaming (Hypercore — read-only by keypair, live)'' rides as the named END-GOAL above the floor, deferred until a live feed waits to be watched.
 
 <<~/ahu >>
 
@@ -502,7 +501,7 @@ a signed delegation edge + a wrapped DEK into the nested docs; the vessel ''sync
 ''handles concurrent grants for free'' — the very job BeeKEM exists to solve, met by the
 substrate we run.
 
-''The amendments the hoike forced'' (#provenance): the DEK rides ''two-level'' — a
+''Two amendments ride the keying'' (#provenance): the DEK rides ''two-level'' — a
 group/epoch key //wraps// a ''stable per-doc content DEK''; data encrypts under the content
 DEK (so a later BeeKEM swap ''re-wraps only'', never re-encrypts the corpus). Each vessel
 holds ''two keys'' — Ed25519 (identity/sign) + X25519 (KEM/seal), cross-certified — never
@@ -542,15 +541,14 @@ real stack slots in piecewise:
 
 <<~ranks port identity ~ vessel keypair, opaque pubkey -> capabilities ~ signed delegation edges (→ Keyhive groups) -> group-keying ~ sealed-box wrap + rotate (→ BeeKEM CGKA) -> transport ~ Automerge sync over our relay (→ Beelay sedimentree) >>
 
-''Honest posture (the hoike's spine).'' This layer has ''no forward-secrecy and no''
+''Honest posture.'' This layer has ''no forward-secrecy and no''
 ''retroactive revocation'' — and on an append-only CRDT that fact ''IS the security posture'',
 not a tradeoff to mitigate. A leaked vessel key reads ''all history it was ever granted'',
 permanently: the old wrapped DEKs and old ciphertext persist in the log (Automerge never
 deletes), so no rotation reaches back to destroy them. ''Rotation buys future writes only'' —
 never claim "rotate-on-loss" heals the past. The honest forward lever is ''epoch group-key''
 ''rotation'' (BeeKEM, when its JS binding lands — FS on //future// chunks only); the retroactive-FS
-gap stays a ''documented invariant''. A neg-entropy swarm (2026-06-23) ''refuted two tempting''
-''escapes'': ''puncturable encryption'' is a single-holder tool that does not fit a replicated-key
+gap stays a ''documented invariant''. Two tempting escapes stand ''refuted'': ''puncturable encryption'' is a single-holder tool that does not fit a replicated-key
 mesh (one replica puncturing leaves the others + backups open; no-global-now makes "all replicas
 punctured" unprovable), and ''threshold does not touch the encryption-history gap at all''. Root
 rotation/recovery rides ''KERI-style pre-rotation'' + ''Kintsugi-style'' guardian-threshold
