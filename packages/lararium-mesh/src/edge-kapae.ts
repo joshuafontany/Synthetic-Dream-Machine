@@ -129,6 +129,20 @@ export function edgeKapaeActsFromBoard(doc: LarDoc | undefined | null): EdgeKapa
 }
 
 /**
+ * Ranks an act's epoch against the chain a reader holds — higher reads later, `null` reads unknown.
+ *
+ * WHY THE FOLD TAKES ONE. Version alone is an unbounded scalar standing in for a position, so a hand may
+ * simply name a larger number: one act at an absurd version wins every future fold, mintable under partition,
+ * converging as the winner on reconnect. That grab is unanswerable in a scalar and trivial against a chain —
+ * nobody runs ahead of an epoch that has not been minted. Epoch outranks version; version orders within one.
+ *
+ * It arrives INJECTED, like `verify` and `authorityFor`, because this module holds no chain and must not.
+ * An unknown epoch ranks BELOW every known one (`-1`), so an act rooting on a chain the reader cannot walk
+ * never lowers a shadow raised on one it can — fail-closed, matching the antigen's treatment of the same case.
+ */
+export type EpochOrder = (epochCid: string) => number | null;
+
+/**
  * Fold the acts into the set of SHADOWED edges — the projection the whole pattern rests on.
  *
  * Highest version per edge wins, and a SAME-VERSION TIE LEAVES THE SHADOW UP. That asymmetry carries the
@@ -139,12 +153,17 @@ export function edgeKapaeActsFromBoard(doc: LarDoc | undefined | null): EdgeKapa
  * Every act arrives VERIFIED — the caller checks signatures before folding, because this fold decides
  * standing and an unverified act would let anyone lower anyone's shadow.
  */
-export function foldEdgeKapae(acts: readonly EdgeKapae[]): Set<string> {
+export function foldEdgeKapae(acts: readonly EdgeKapae[], epochOrder?: EpochOrder): Set<string> {
+  const rank = (a: EdgeKapae): number => (epochOrder ? epochOrder(a.epoch) ?? -1 : 0);
   const best = new Map<string, EdgeKapae>();
   for (const a of acts) {
     const prior = best.get(a.edgeId);
-    if (!prior || a.version > prior.version) { best.set(a.edgeId, a); continue; }
-    // SAME version, opposing gestures → the raise holds. A tie never re-admits.
+    if (!prior) { best.set(a.edgeId, a); continue; }
+    const ra = rank(a), rp = rank(prior);
+    // EPOCH FIRST — a position on a chain nobody can run ahead of. Version only breaks a same-epoch tie.
+    if (ra !== rp) { if (ra > rp) best.set(a.edgeId, a); continue; }
+    if (a.version > prior.version) { best.set(a.edgeId, a); continue; }
+    // SAME epoch AND version, opposing gestures → the raise holds. A tie never re-admits.
     if (a.version === prior.version && a.raised) best.set(a.edgeId, a);
   }
   const shadowed = new Set<string>();
@@ -163,6 +182,7 @@ export async function verifiedShadowSet(
   acts: readonly EdgeKapae[],
   authorityFor: (edgeId: string) => string | undefined,
   verify: (bytes: Uint8Array, sigHex: string, signerDid: string) => Promise<boolean>,
+  epochOrder?: EpochOrder,
 ): Promise<Set<string>> {
   const verdicts = await Promise.all(acts.map(async (a) => {
     const signer = authorityFor(a.edgeId);
@@ -170,7 +190,7 @@ export async function verifiedShadowSet(
     const { sig: _s, ...unsigned } = a;
     return verify(edgeKapaeBytes(unsigned), a.sig, signer).catch(() => false);
   }));
-  return foldEdgeKapae(acts.filter((_, i) => verdicts[i] === true));
+  return foldEdgeKapae(acts.filter((_, i) => verdicts[i] === true), epochOrder);
 }
 
 /**
@@ -188,6 +208,7 @@ export async function shadowSetFromBoard(
   doc: LarDoc | undefined | null,
   authorityFor: (edgeId: string) => string | undefined,
   verify: (bytes: Uint8Array, sigHex: string, signerDid: string) => Promise<boolean>,
+  epochOrder?: EpochOrder,
 ): Promise<Set<string>> {
-  return verifiedShadowSet(edgeKapaeActsFromBoard(doc), authorityFor, verify);
+  return verifiedShadowSet(edgeKapaeActsFromBoard(doc), authorityFor, verify, epochOrder);
 }
