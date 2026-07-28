@@ -21,6 +21,16 @@
  *     admit — it means the invite DID NOT ARRIVE, and the vessel then founds its OWN group and stands at the anon
  *     floor (a correct outcome, never an attack; a human's typo must not read as a breach).
  *
+ * ── AUTHN ⊥ AUTHZ, AND THE EXPIRY SITS ON THE WRONG SIDE (operator ruling) ────────────────────────────
+ * A signature does not expire. What bounds a capability is not its token's age but the SCOPE of the act it
+ * authorizes — a specific space, a specific deed, spent once. This invite already carries that scope: it
+ * binds to ONE nexus and spends SINGLE-USE, and those two facts do the work the wall-clock `expiresAt` was
+ * hired for. The clock adds nothing the binding lacks, and it adds a dependency on an instant that a device
+ * owner sets freely — more freely still if they operate the box, since skew is a testing FEATURE there.
+ *
+ * The expiry therefore reads as DEBT, not design. Retiring it wants the scope stated explicitly enough to
+ * stand alone; until then it rides, named.
+ *
  * Platform-blind: rides ./crypto only. NO node: imports — the LOCAL spent-set (the burn) lives in the boot host
  * (node: boot-invite-burn; browser: an IndexedDB/localStorage sibling), which this module consults through an
  * injected `isSpent` shore and never reaches itself.

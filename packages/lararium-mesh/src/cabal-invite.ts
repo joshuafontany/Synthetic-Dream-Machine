@@ -22,6 +22,15 @@
  * THE INVITE IS CARRIED, NEVER FETCHED. A member signs it; it verifies on its own; a carrier may withhold
  * it and can never forge it. It therefore crosses any channel — and needs no reachable issuer, which is
  * what makes an invite usable in a mesh that has been cut off for five hundred years.
+ * ── THE LEASE ASKS A TENDING QUESTION AND A CLOCK ANSWERS A DIFFERENT ONE ─────────────────────────────
+ * The comment below states the intent exactly: a vouch lapses so it can be withdrawn from a mesh the
+ * voucher can no longer reach. That question reads WHETHER THE VOUCHER STILL TENDS THIS — and a calendar
+ * cannot tell a hand that feeds its vouch daily from one that abandoned it, since both age identically.
+ *
+ * The honest instrument decays along the GRAPH: has this voucher acted since. A wall clock stands in for
+ * it, and stands in badly — worse because a device owner sets that clock freely, and an operator more
+ * freely still. Held as DEBT, named here so the next hand sees the substitution rather than inheriting it.
+ *
  */
 import { canonicalJsonBytes, hex } from "./crypto.js";
 

@@ -31,7 +31,17 @@ import { hex, hexToBytes } from "./crypto.js";
 export const DEVICE_DELEGATION_DOMAIN = "lar-device-delegation/v2" as const;
 
 /** Clock drift tolerance for the freshness window (matches the V3 auth-proof posture / UCAN ±60s). */
-export const DELEGATION_CLOCK_DRIFT_MS = 60_000;
+/**
+ * The clock-skew tolerance the freshness check falls back on — PRIVATE, and it stays private because
+ * exporting it would advertise a shared-clock assumption as public API. A drift constant reconciles two
+ * clocks, and this mesh holds no global now to reconcile them TOWARD: a device clock reads freely settable
+ * by its user and more freely by its operator, so the skew arrives on purpose as often as by accident.
+ *
+ * It survives here as an honest DEBT rather than a design. The freshness question this bounds — how far
+ * back may a replay reach — wants a POSITION a verifier can walk (the signer's own KEL sequence), never an
+ * instant two parties must agree on. Until that lands, the tolerance stays, unexported, and named.
+ */
+const DELEGATION_CLOCK_DRIFT_MS = 60_000;
 
 const DID_RE  = /^0x[0-9a-f]{64}$/;       // "0x" + raw 32-byte Ed25519 verifying-key hex, lowercase
 const VK_RE   = /^[0-9a-f]{64}$/;          // raw 32-byte verifying-key hex, lowercase
