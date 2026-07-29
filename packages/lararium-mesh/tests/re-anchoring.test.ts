@@ -72,6 +72,12 @@ describe("the attestor set carries no threshold — the reader decides", () => {
     expect((await verifiedAttestors(rev, verify)).sort()).toEqual((await verifiedAttestors(r, verify)).sort());
   });
 
+  test("an attestor's mark holds a key and a signature — and carries no weight, role or rank", async () => {
+    // A mark that could carry a role would let a minter grade its own witnesses. The shape refuses it.
+    const r = await record("e1", [7]);
+    expect(Object.keys(r.attestors[0]!).sort()).toEqual(["attestor", "sig"]);
+  });
+
   test("a FORGED mark drops and the record still stands — a forgery never strengthens, never breaks", async () => {
     const r = await record("e1", [7, 8]);
     const forged: ReAnchoring = {
@@ -112,6 +118,10 @@ describe("the record refuses what the ruling forbids", () => {
     const key = reAnchoringKey(DWELLER, REALM, "e1");
     doc.tiddlers[key] = { id: key, tiddler: { title: key, text: JSON.stringify(smuggled) } } as never;
     const back = reAnchoringsFromBoard(doc)[0]!;
+    // The EXACT key-set, asserted — because naming forbidden fields only guards the ones already imagined,
+    // and the field that arrives is the one nobody predicted. This is the belt; the named refusals below are
+    // the suspenders. (`carriage-board` holds the same pair for the same reason.)
+    expect(Object.keys(back).sort()).toEqual(["attestors", "dweller", "epoch", "kind", "realm"]);
     expect(back).not.toHaveProperty("method");
     expect(back).not.toHaveProperty("quorum");
   });
