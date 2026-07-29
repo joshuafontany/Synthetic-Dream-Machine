@@ -198,12 +198,12 @@ export function openSensorium(opts: OpenSensoriumOptions): OpenSensoriumResult {
 
 // ── query (read leg) ──────────────────────────────────────────────────────────────────────────────
 
-/** The pluggable search leg — query a scratch palace dir (defaults to the read-only sidecar client). */
+/** The pluggable search leg — query a scratch palace dir (defaults to the read-only holder client). */
 export type SensoriumSearch = (args: { sensoriumRoot: string; query: string; limit: number }) => Promise<{ hits: Array<Record<string, unknown>>; note?: string }>;
 
 export const defaultSensoriumSearch: SensoriumSearch = async ({ sensoriumRoot, query, limit }) => {
-  const { python, submoduleRoot, sidecarPresent } = resolveMempalaceSpawn();
-  if (!python || !sidecarPresent) return { hits: [], note: "query-skipped: no python sidecar" };
+  const { python, submoduleRoot, holderPresent } = resolveMempalaceSpawn();
+  if (!python || !holderPresent) return { hits: [], note: "query-skipped: no python holder" };
   const client = new MempalaceClient({ submoduleRoot, palacePath: join(sensoriumRoot, "content"), python });
   try {
     const res = await client.search({ query, limit });

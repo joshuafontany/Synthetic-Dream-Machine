@@ -283,11 +283,11 @@ async function main(): Promise<void> {
     onLog: (line) => console.log(`[lararium] ${line}`),
   });
 
-  // Pre-warm the mempalace read sidecar so the FIRST recall / recall-into-wake skips
+  // Pre-warm the mempalace read holder so the FIRST recall / recall-into-wake skips
   // the ~8s cold chromadb start (the pool then stays warm for the daemon's life).
   // Background + best-effort: never blocks boot, never fails it if mempalace is absent.
   void getMempalaceClient().then(
-    () => console.log("[lararium] mempalace sidecar pre-warmed"),
+    () => console.log("[lararium] mempalace holder pre-warmed"),
     (e) => console.log(`[lararium] mempalace pre-warm skipped: ${e instanceof Error ? e.message : String(e)}`),
   );
 
