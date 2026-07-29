@@ -6,11 +6,25 @@
  * SOVEREIGN ORGANS ONLY. Every organ this registry stands lives inside the lararium's own tree. Each
  * sensorium `#has` an IN-TREE `mempalace` cap (see {@link materializeMemorySensorium}) — a CURATED
  * memory store the node writes into "from the inside" (an AI's authored memories about that stream,
- * given a structured home). Adopting the in-tree mempalace RETIRES the external guest `~/.mempalace`
- * install: with no external store there is nothing to bind to and nothing to silently fall back onto,
- * so the content-cap-home / never-bound / confused-deputy hazards dissolve at the root. (The guest-lane
- * machinery below — {@link initGuestMempalace}, {@link guestMempalaceOrgan} — retires in the follow-on
- * subtraction; the in-tree mempalace supersedes it.)
+ * given a structured home).
+ *
+ * THE IN-TREE MEMPALACE RETIRES THE BINDING, NEVER THE COEXISTENCE (operator ruling, 2026-07-29).
+ * Read the scope exactly, because the two readings differ by a whole capability:
+ *   · RETIRED — every DEPENDENCY on an external `~/.mempalace`. The sovereign organs bind only in-tree,
+ *     so nothing silently falls back onto a guest store and the content-cap-home / never-bound /
+ *     confused-deputy hazards dissolve at the root.
+ *   · KEPT — the capability to ACCEPT a guest install that already stands. `~/.mempalace` holds its own
+ *     sovereignty as a SEPARATE capability the House may take up; when it does, the House owns the
+ *     chat → sensorium → palace lifecycle, and it never writes into the guest tree or reads the guest's
+ *     config (see `@lararium/mempalace` sidecar-cap: the House DECLARES its policy so it inherits none).
+ *
+ * So {@link initGuestMempalace} and {@link guestMempalaceOrgan} STAND — they carry the accept-lane, not
+ * a fallback. A subtraction aimed at "the guest lane" MUST cut the binding and leave the accept-cap
+ * whole; cutting both would delete a capability the operator holds by ruling.
+ *
+ * The sensoriums are PEERS of a guest install, never satellites of it: `memory` · `mesh` ·
+ * `memetic-wikitext` each carry a content palace, and the `memory` one does the job an upstream
+ * install does.
  *
  * The memory sensorium's own planes (the astral palaces made filesystem):
  *   - contentpalace     <memory>/content    — the LARARIUM-OWNED verbatim content plane (li/sheaf).
