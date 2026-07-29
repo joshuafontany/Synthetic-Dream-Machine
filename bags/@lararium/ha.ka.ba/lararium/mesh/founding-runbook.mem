@@ -34,14 +34,22 @@ written   = "2026-07-20"
 
 !! The rite ~ rehearsed first, then the six movements, then the growing
 
-<<~loops ⓪ rehearse -> ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ regenesis -> LIVE -> ⚲ crossroads -> ⊕ grow >>
+<<~loops ⓪ rehearse -> ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ regenesis -> LIVE -> ⚲ crossroads -> ⊕ grow -> ⊛ gather -> ⊙ feed -> ⊘ dwell >>
 
 ''Rehearse'' runs the whole rite in containers, disposably, until it bores (#rehearse) · ''clear''
 pares the vessel to void · ''found'' stands the device + the three kahu · ''reserve'' forges the
 pre-rotation's future-key custody · ''seal-and-back-up'' locks the secrets at rest + writes a
 recoverable copy · ''regenesis'' re-seeds the content from `bags/` · ''LIVE'' serves ·
 ''crossroads'' stands a Herm where a family needs one (#crossroads) · ''grow'' opens the Nexus,
-contracts fellow operators, and welcomes users at the anon floor (#grow-the-nexus).
+contracts fellow operators, and welcomes users at the anon floor (#grow-the-nexus) · ''gather'' brings the
+operator's own vessels in as contracted leaves (#gather-the-fleet) · ''feed'' lays the first offering, which
+IS the realm's founding (#feed-the-realm) · ''dwell'' seats a second operator IN the realm rather than
+merely carrying for it (#dwell).
+
+''The last three movements run AFTER LIVE and never gate it'' — and they carry different readiness. ⊛ Gather
+runs today on built verbs. ⊙ Feed names an OWED surface over machinery that already stands. ⊘ Dwell holds a
+built vouch and a crossing that REFUSES until the operator seats the admission dials — and its conversion act
+stays un-modelled by ruling, so no command there may name a quorum, a waiting period, or a test.
 
 ''THE RITE RUNS IN TWO BRANCHES, and they want opposite virtues'' (operator ruling, 2026-07-27).
 A ''REHEARSAL'' founding runs in containers, disposably, as many times as it takes — cheapness IS
@@ -389,6 +397,73 @@ mesh (carry ⊥ read — the relay verifies `BLAKE3==cid` holding NO secret, the
 per-Nexus convergence salt, fetched DHT-free); the read-cap crosses for no one; a private plane never
 leaves the PersonaGroup's own fleet. The mesh breathes over immutable bodies while a stranger — every
 500-year GPA — cannot confirm who-holds-what.
+
+<<~/ahu >>
+
+<<~ ahu #gather-the-fleet >>
+
+!! ⊛ Gather ~ the operator's own vessels join the standing fleet (after LIVE)
+
+A laptop browser, a phone, a tablet. Each stands as a ''LEAF, CONTRACTED'' — it mints its own vessel key on-device and receives a signed delegation EDGE from the vessel that already holds the persona root. It mints ''NO root of its own''. `BIND BY EDGE, NEVER BY SEED`, movement ② names the mode; this walks it.
+
+''On the standing hearth'' — mint the admit payload for the joining device, under the persona root that will hold it:
+
+```
+lares device-admit --as 0                            # signs a device-delegation edge; writes the payload
+```
+
+''On the joining vessel'' — stand the stack and apply the payload (own keypair, same group):
+
+```
+lares wake --admit <payload-file>                    # joins the existing PersonaGroup; mints its OWN vessel key
+lares persona list                                   # the same roots, reached through a new vessel
+```
+
+''A browser vessel differs by device-gated caps, never by class'' — the isomorphic architecture stands the same cap-stack and composes fewer of them (`identity-classes`). Transport for the payload (QR / NFC / LAN) stays pending; a file over any channel the operator already trusts works today.
+
+''What this does NOT add: DEPTH.'' Every vessel here binds ''one principal's instruments''. Below the phase change the gauge reads the realm nominal, and correctly — a fleet is REACH, never dwelling. The realm's standing moves when a second locus of cost begins to dwell, never when a fourth device arrives.
+
+<<~/ahu >>
+
+<<~ ahu #feed-the-realm >>
+
+!! ⊙ Feed ~ the first offering IS the realm's founding (after LIVE)
+
+''A realm mints no DID and hosts on no machine'', so nothing gets created — it begins when someone feeds it and would cease if feeding stopped (`cabal-realm#verb-not-noun`). ''The vessel is FOUNDED; the realm is FED.''
+
+The machinery stands built (`feedCabalRealm`, the epoch-lease slot, `deriveCabalRealmLiveness` reading //alive · cooling · dissolved//) and ''carries no CLI verb''. Until one lands, the rite goes LIVE with the realm it was founded as a seed of never having begun.
+
+''OWED — the smallest honest surface'', and it wants no new machinery:
+
+```
+lares cabal feed --place <realm-doc-id>              # OWED: lay the first offering; the realm begins
+lares cabal realm --place <realm-doc-id>             # OWED: liveness (alive/cooling/dissolved) + who feeds
+```
+
+The second reads the capture-clock the model already argues for — ''who feeds the realm and since when'', verdict-free, so a majority SEES a minority out-feeding them while exit stays cheap (`cabal-realm#the-unswept-corner`).
+
+<<~/ahu >>
+
+<<~ ahu #dwell >>
+
+!! ⊘ Dwell ~ a second operator joins the REALM (design before commands)
+
+''Carriage and dwelling ride ORTHOGONAL axes.'' ⊕ Grow contracts carriage — who relays whose sealed bytes — and seats no dweller. A contracted operator may dwell in no realm at all; a dweller may carry nothing.
+
+''What stands built on the join axis'' (the JOIN ⊥ CONTRACT law, `admission-on-a-lineage`):
+
+```
+lares cabal vouch <joiner-nym> --place <realm-doc-id> [--as <root-index>]
+                                                     # one held face stakes its OWN standing. Admits NOBODY.
+```
+
+A vouch rides as signal-2 on the lineage; the crossing prices it later, and the cost already landed — the voucher's score SPLITS across everyone they vouch for.
+
+''AND THE CROSSING ITSELF REFUSES TODAY, correctly.'' `admissionDials` fail closed to null, so a founded Nexus admits nobody until the operator seats ε · β · ρ · S · α. That reads as an unmade choice standing visible rather than somebody's guess quietly enforced — and the numbers stay ''an open design seat'', never a default this rite may supply.
+
+''What CANNOT be written here, by ruling.'' The conversion act — a fed guest re-anchoring from host to realm — stays ''UN-MODELLED'' (`the-thing-event#unmodelled`). The mesh may record ''THAT a re-anchoring happened''; it must not hold what made it valid. A configurable rite would still be this stack's rite with someone else's values poured in, so no command here may name a quorum, a waiting period, a franchise, or a test. ''Each realm supplies its own.''
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/first-realm-arc >>
 
 <<~/ahu >>
 
