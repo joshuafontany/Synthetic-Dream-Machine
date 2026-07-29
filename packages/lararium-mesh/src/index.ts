@@ -171,6 +171,7 @@ export * from "./independence-reading.js";
 export * from "./delegation-edge.js";
 export * from "./dyad.js";
 export * from "./edge-kapae.js";
+export * from "./re-anchoring.js";
 export * from "./lineage-rank.js";
 export * from "./admission-price.js";
 export * from "./vouch-dag.js";
