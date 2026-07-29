@@ -8,7 +8,7 @@
 
 import { spawn } from "node:child_process";
 
-import { resolveCaptureSessionSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
+import { resolveCaptureSessionSpawn, resolveSidecarCapEnv } from "@lararium/mempalace";
 import type { SubagentEdgePair } from "@lararium/tw5";
 
 import { composePalace, type PalaceHolderProc, type PalaceHolderSpawn } from "./sensorium.js";
@@ -122,7 +122,7 @@ function defaultSpawn(sensoriumRoot: string): SourceCaptureSpawn {
     const env = {
       ...process.env,
       PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""),
-      ...resolveComputeCapEnv(python),
+      ...resolveSidecarCapEnv(python),
     };
     return spawn(python, [script, "--serve", "--sensorium", sensoriumRoot], {
       cwd: submoduleRoot, env, stdio: ["pipe", "pipe", "pipe"],

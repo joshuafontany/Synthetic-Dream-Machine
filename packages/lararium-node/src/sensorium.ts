@@ -47,7 +47,7 @@ import {
   parseRetirementRecord, type RetirementRecord,
 } from "@lararium/mesh";
 import {
-  resolveComputeCapEnv, resolveFormEncoderSpawn, resolveContentPalaceSpawn, resolvePersistencePalaceSpawn,
+  resolveSidecarCapEnv, resolveFormEncoderSpawn, resolveContentPalaceSpawn, resolvePersistencePalaceSpawn,
   resolveStructurePalaceSpawn,
 } from "@lararium/mempalace";
 import type { MoveSkeleton, ConstructiconBasis, BearingFacets } from "@lararium/tw5/form-layer";
@@ -464,7 +464,7 @@ export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn, opts: { r
     // opens its chroma collection, which builds the default onnxruntime embedder — and onnxruntime-gpu
     // HARD-fails to import (`libcudart.so.NN`) without the CUDA libs on the loader path. resolveComputeCapEnv
     // walks torch's bundled nvidia wheels; absent (the QA box) it adds only the device hint and degrades to CPU.
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveSidecarCapEnv(python) };
     // A palace-less holder (the embed cap) serves `serve` with NO --palace: the model is the
     // resource, not a store dir; `canonicalDir` is only the registry KEY, never passed to python.
     const argv = opts.palaceless ? [script, "serve"] : [script, "serve", "--palace", canonicalDir];

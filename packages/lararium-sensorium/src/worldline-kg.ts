@@ -23,7 +23,7 @@ import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
 import { rewindThenFork, type WorldlineEdgeTriple, type WorldlineEdgeClose, type RewindThenForkResult } from "@lararium/mesh";
 import { resolveMempalacePython } from "@lararium/mempalace";
-import { resolveComputeCapEnv } from "@lararium/mempalace";
+import { resolveSidecarCapEnv } from "@lararium/mempalace";
 import { memorySensoriumDir } from "@lararium/mempalace/xdg-base";
 
 /** Raised when python / `kg_io.py` are absent — the caller renders a clean error. */
@@ -76,7 +76,7 @@ function resolve(opts: WorldlineKgOptions): Resolved {
       // + the GPU compute cap (LD_LIBRARY_PATH + device hint): kg_io itself opens only the KG sqlite,
       // but it shares the mempalace interpreter with the chroma sidecars — carry the cap uniformly so a
       // cold @daemon restart never trips onnxruntime-gpu's `libcudart` import. Degrades to CPU when absent.
-      const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(bin) };
+      const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveSidecarCapEnv(bin) };
       return execFileSync(bin, [...args], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 28, encoding: "utf8" });
     });
   const py = opts.python ?? resolveMempalacePython() ?? "";

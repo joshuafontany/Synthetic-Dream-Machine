@@ -25,7 +25,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } fr
 import { join, resolve } from "node:path";
 import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { resolveMempalaceSpawn, MempalaceClient, resolveComputeCapEnv, resolveCorpusCaptureSpawn } from "@lararium/mempalace";
+import { resolveMempalaceSpawn, MempalaceClient, resolveSidecarCapEnv, resolveCorpusCaptureSpawn } from "@lararium/mempalace";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import { scratchSensoriumDir, scratchSensoriumInstanceDir } from "./vessel-paths.js";
 
@@ -147,7 +147,7 @@ export const defaultSensoriumIngest: SensoriumIngest = ({ sourcePath, sensoriumR
   if (!python || !scriptPresent) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: "ingest-skipped: no corpus capture pipe (lares wake --install)" };
   if (!existsSync(sourcePath)) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: `ingest-skipped: source absent (${sourcePath})` };
   try {
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveSidecarCapEnv(python) };
     const out = execFileSync(python, [script, "--sensorium", sensoriumRoot, "--source", sourcePath, "--wing", "wing_corpus", ...(ephemeral ? ["--ephemeral"] : [])], {
       cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 300_000,
     });
@@ -242,7 +242,7 @@ function setSensoriumEphemeral(dir: string, ephemeral: boolean): void {
   if (!existsSync(manifestPath)) return;
   const { python, script, submoduleRoot, scriptPresent } = resolveCorpusCaptureSpawn();
   if (!python || !scriptPresent) return;
-  const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveComputeCapEnv(python) };
+  const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveSidecarCapEnv(python) };
   execFileSync(python, [script, "--sensorium", dir, "--set-ephemeral", String(ephemeral)], {
     cwd: submoduleRoot, env, maxBuffer: 1 << 20, encoding: "utf8", timeout: 30_000,
   });

@@ -17,7 +17,7 @@ import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
 import { resolveMempalacePython } from "@lararium/mempalace";
 import { memorySensoriumDir } from "@lararium/mempalace/xdg-base";
-import { resolveComputeCapEnv } from "@lararium/mempalace";
+import { resolveSidecarCapEnv } from "@lararium/mempalace";
 
 /** The per-run enrichment report the py leg prints (worldline_ffz.py enrich). */
 export interface FfzEnrichReport {
@@ -56,7 +56,7 @@ export function runFfzEnrich(sensorium?: string): FfzEnrichReport {
   const pyEnv = {
     ...process.env,
     PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""),
-    ...resolveComputeCapEnv(PY),
+    ...resolveSidecarCapEnv(PY),
   };
   const out = execFileSync(PY, [script, "enrich", "--sensorium", root], {
     encoding: "utf8", maxBuffer: 1 << 26, env: pyEnv,

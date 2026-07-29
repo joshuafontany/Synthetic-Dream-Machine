@@ -9,7 +9,7 @@
  */
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
-import { resolveCaptureSessionSpawn, resolveComputeCapEnv } from "@lararium/mempalace";
+import { resolveCaptureSessionSpawn, resolveSidecarCapEnv } from "@lararium/mempalace";
 import { composePalace, type PalaceHolderProc, type PalaceHolderSpawn } from "./sensorium.js";
 
 const LABEL = "recall-holder";
@@ -30,7 +30,7 @@ function defaultSpawn(sensoriumRoot: string): PalaceHolderSpawn {
     const env = {
       ...process.env,
       PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""),
-      ...resolveComputeCapEnv(python),
+      ...resolveSidecarCapEnv(python),
     };
     return spawn(python, [script, "--serve", "--sensorium", sensoriumRoot], {
       cwd: submoduleRoot, env, stdio: ["pipe", "pipe", "pipe"],
