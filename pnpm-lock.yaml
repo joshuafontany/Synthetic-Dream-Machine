@@ -140,6 +140,10 @@ importers:
       '@lararium/tw5':
         specifier: workspace:*
         version: link:../lararium-tw5
+    devDependencies:
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(@types/node@26.1.1)(@vitest/browser-playwright@4.1.10)(vite@8.1.4(@types/node@26.1.1)(esbuild@0.28.1)(tsx@4.23.0))
 
   packages/lararium-mempalace:
     dependencies:

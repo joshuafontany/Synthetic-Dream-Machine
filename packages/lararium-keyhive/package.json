@@ -2,7 +2,7 @@
   "name": "@lararium/keyhive",
   "version": "0.1.0",
   "private": true,
-  "description": "Keyhive (Ink & Switch concap) integration for the Lares stack — capability layer + probes against pre-alpha @keyhive/keyhive WASM bindings.",
+  "description": "Keyhive (Ink & Switch concap) integration for the Lares stack \u2014 capability layer + probes against pre-alpha @keyhive/keyhive WASM bindings.",
   "type": "module",
   "exports": {
     ".": {
@@ -19,11 +19,15 @@
   "scripts": {
     "prebuild": "node ../../tools/clean-output.mjs dist",
     "build": "tsc -p tsconfig.build.json",
-    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
+    "test": "vitest run"
   },
   "dependencies": {
     "@keyhive/keyhive": "0.1.0-alpha.6",
     "@lararium/mesh": "workspace:*",
     "@lararium/tw5": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.10"
   }
 }
