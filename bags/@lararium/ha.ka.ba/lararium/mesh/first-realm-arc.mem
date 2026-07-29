@@ -1,0 +1,96 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/first-realm-arc >>
+```toml iam
+cacheable     = false
+file-path     = "bags/@lararium/ha.ka.ba/lararium/mesh/first-realm-arc.mem"
+l-space       = "stable"
+mana          = 12
+manao         = 12
+manaoio       = 11
+register      = "Synthesis"
+retain        = true
+revision-note = "the founding ARC the runbook's command-sequence does not carry: one vessel, one realm fed, a fleet gathered, a second operator founding their own and then DWELLING IN the first. Names the three stretches where the runbook stops and the code does not yet reach"
+role          = "the first realm's founding arc, end to end — what gets founded, what gets FED, what joins, and in which order. Distinguishes the four different joins that all read as //joining// in plain speech and run as four different acts in the model"
+tags          = ["api/pono/meme"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lararium/mesh/first-realm-arc"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! The First Realm Arc ~ founded, fed, gathered, joined
+
+The founding runbook carries the ''command sequence'' for standing one vessel (<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>). This carries the ''arc'' — what happens across several vessels, several operators, and however long the months take, in an order the model constrains rather than convenience chooses.
+
+''The shape, stated once:'' a node vessel stands as the first seed of the first Cabal-realm of the first Nexus, ''in'' the field called the DreamNet — never founding that field, because a Nexus that founded the DreamNet would stand as the thing that can act alone over everything (`identity-enacts-relation#the-constructor`). The base runs down into the dark and terminates in no founder standing outside the series.
+
+<<~/ahu >>
+
+<<~ ahu #the-four-joins >>
+
+!! Four different acts, all called //joining// in plain speech
+
+Ordinary speech fuses these. The model runs them as four distinct acts with four different costs, and conflating any two produces a wrong build:
+
+|! plain speech |! the act |! what it moves |! built? |
+| //my phone joins// | a leaf ''CONTRACTED'' into a standing fleet | one delegation edge, signed elsewhere; the leaf mints NO root | the mode is named; the walk is not |
+| //another operator joins the mesh// | a ''carriage contract'' — wax-sealed, kahu-quorum counter-signed | who relays whose sealed bytes; carry ⊥ read | BUILT (`nexus accept-carriage` · `nexus admit`) |
+| //someone joins the realm// | ''DWELLING'' — the first `hoʻokipa`, and the `nohopapa` it deposits | standing in a realm; nothing on the carriage plane | the machinery stands (`feedCabalRealm`); the verb does not |
+| //a stranger joins// | a crossing priced at the lineage gate, or a boot-invite at the anon floor | reach, never membership; refusal leaves the party at the floor | BUILT (`admitOnLineage` · `boot-invite`) |
+
+''The one that matters most reads THIRD.'' Carriage and dwelling run on ''orthogonal axes'' — a contracted operator carries sealed traffic and may dwell in no realm at all; a dweller deposits `papa` and may carry nothing. The runbook's ⊕ Grow covers carriage and says nothing about dwelling, which reads as the largest gap in the rite rather than an omission in its prose.
+
+<<~/ahu >>
+
+<<~ ahu #the-arc >>
+
+!! The arc, in order
+
+''① The vessel stands.'' The runbook's ⓪–⑥, rehearsed first in containers until it bores, then once on the keeper. Three founding PersonaGroups seat the charter at 2-of-3.
+
+> ''Name what the founding actually produces, so nobody later reads it as more.'' Three PersonaGroups held by ONE human means one locus of cost at both ends of every hold. The gauge reads that realm ''nominal'' — Ψ ≈ 0, no non-aggregativity, a realm that can act alone against what it holds — and reads it correctly. That costs nothing, because ''the gauge only ever lifts'': the declaration carries the floor and depth accrues later. A founding that gauged deep on day one would name a broken instrument.
+>
+> And the quorum: three keys on one machine make a quorum ''cryptographically real and not real as a check'' — no independent hand can refuse. Record it as the honest founding state, so a later reader never mistakes a seated quorum for a distributed one.
+
+''② The realm gets FED.'' A realm mints no DID and hosts on no machine; there is nothing to create. It begins when someone feeds it, and it would cease if feeding stopped — //there is no commons without commoning// (`cabal-realm#verb-not-noun`). ''The first offering IS the founding of the realm'', never a step after it. The vessel is founded; the Cabal is fed.
+
+''③ The fleet gathers.'' The operator's own device-vessels — a laptop browser, a phone, a tablet — join the standing fleet as ''CONTRACTED'' leaves: each mints its own vessel key on-device, and the persona root signs a delegation EDGE into it from the vessel that already holds the root. ''BIND BY EDGE, NEVER BY SEED'' — a key copied between vessels //is// the collector.
+
+> These add ''no locus of cost''. Below the phase change, holds bind one principal's instruments; the gauge still reads the realm nominal, and correctly. A fleet is reach, never depth.
+
+''④ A second operator founds their own.'' Same rite, their own hearth, their own PersonaGroups, their own charter. ''Independent genesis'' — no shared root, no descent from the first Nexus, and rejoining the mesh later reads as ''RECOGNITION of a foreign chain'', never reconciliation of a forked one (`identity-enacts-relation`).
+
+''⑤ They dwell in the first realm.'' Here the arc reaches what the code does not: a second operator ''dwelling in'' the ADC realm rather than merely carrying for it. Two distinct loci of cost holding each other — the first genuine `hoʻokipa` in the system, the first hold the gauge can read as non-aggregative, and the first `papa` deposited by anyone but the founder.
+
+<<~/ahu >>
+
+<<~ ahu #what-the-runbook-lacks >>
+
+!! Three stretches the rite does not walk
+
+The runbook stands ''Synthesis-Canon and complete for what it covers''. These sit outside it rather than wrong within it:
+
+# ''The fleet join'' (arc ③). Movement ② names the CONTRACTED founding mode and walks only the SELF-STOOD path. A leaf admitted into a standing fleet mints no root and carries only the edge — the mode is ruled (`vessel-standing`), the commands are not written, and a browser vessel differs from a node vessel by device-gated caps rather than by class.
+# ''The realm feeding'' (arc ②). No movement names the first offering. `feedCabalRealm` stands built and unwalked, and the rite goes LIVE without the realm it was founded as a seed of ever beginning.
+# ''The dwelling join'' (arc ⑤). ⊕ Grow contracts carriage and welcomes users at the anon floor. Neither act seats a dweller. This one wants ''design before commands'' — the conversion act stays UN-MODELLED by ruling (`the-thing-event#unmodelled`), so what the mesh may hold is ''that a re-anchoring happened'', never what made it valid.
+
+''And one naming law belongs here before the first place is named.'' `cabal` names the SCALE, never a required word in anyone's name. This realm carries the word by its founders' choice; a Siletz realm, an ʻohana realm, a Blacksky realm name themselves in their own tongue and lose nothing structural by it.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
