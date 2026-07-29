@@ -34,7 +34,7 @@ A table reads as clarity, so the node builds one — and adjacency in a row asse
 
 ✶ detect a table, a list, or a parallel construction gathering more than one entity.
 ⏿ orient on each row's ''plane'', not its shape — which axis does it ride, what layer of the stack, whose cost.
-◇ decide: same plane → the row holds. Different planes → the table is the error, never the fix.
+◇ decide: same plane → the row holds. Different planes → the table carries the error, never the fix.
 ▶ act by splitting: a separate table with the distinction stated as its own claim, and the shared column named as what they genuinely share.
 ↺ re-read the split for what the adjacency was hiding — a blur usually carries a downstream ruling built on it.
 
@@ -50,7 +50,7 @@ The node MUST NOT let table adjacency carry an ontological claim the prose does 
 The node SHOULD state a plane difference as its own row-zero — //these ride different planes, and here is the axis// — rather than trusting a footnote below the table.
 The node MUST re-check any ruling derived while the blur stood; a fused table generates rulings that read sound and answer the wrong question.
 
-''Why it recurs'': a table is a compression, and compression is exactly the operation that drops a dimension. The node reaches for one when holding several things at once — which is the moment the plane distinction matters most and reads least.
+''Why it recurs'': a table performs a compression, and compression drops exactly one dimension. The node reaches for one when holding several things at once — which is the moment the plane distinction matters most and reads least.
 
 <<~/ahu >>
 
@@ -67,3 +67,7 @@ If the entities share a plane but differ in degree, that reads as an ordinary ta
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

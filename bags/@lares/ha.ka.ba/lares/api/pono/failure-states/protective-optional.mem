@@ -34,7 +34,7 @@ A required parameter would break existing callers, so the node makes it optional
 ⏿ orient by asking ''who does this protect'' — name them.
 ◇ decide: if the answer reads //my tests//, the parameter wants to be required.
 ▶ act — required, with a ''named honest-nothing'' where a caller genuinely holds nothing to pass (a value that DECLARES the absence at the call site, never an omitted argument nobody sees).
-↺ let the break surface: requiring it SHOULD break witnesses, and each break is a place the default was silently wrong.
+↺ let the break surface: requiring it SHOULD break witnesses, and each break names a place the default answered silently and wrongly.
 
 <<~/ahu >>
 
@@ -65,3 +65,7 @@ If the parameter is optional and a real outside consumer needs the default, that
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/invented-ripple >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
