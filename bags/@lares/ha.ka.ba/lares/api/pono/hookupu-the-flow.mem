@@ -73,10 +73,22 @@ What it lacks is exactly three: ''no allowance · no expiry · no anonymity''. A
 
 ''The anonymity trade, and its resolution. Most reaction systems show who reacted. Anonymous giving kills the //I saw you didn't plug my post// coercion and breaks reciprocal boost-rings at the root (you cannot verify a partner reciprocated) — but it removes the gratitude loop, and gratitude is what turns one-sided `hoʻokipa` into the mutual kind. The resolution: ''the host FEELS the giving without TRACKING it'' — the count at the place rises, the giver stays unnamed. So mutuality happens ''at the place, never between persons'', which is federate-at-the-place-layer arriving in the UI, and it keeps `maka` and `hoʻokupu` under one law: //a trace of what happened here, carrying no pointer to who//.
 
-''Three kinds, three identity tiers, and they line up'' (`identity-enacts-relation`, `cap-tier`):
+''TWO PLUS ONE, never three of a kind'' (`identity-enacts-relation`, `cap-tier`). A `maka` is not a kind of `hoʻokupu` — it rides a different plane and a different scarcity, and flattening them into one row loses the distinction that matters:
+
+|! |! `maka` |! `hoʻokupu` |
+| plane | ''infra'' — vessel~veil | ''social'' — persona and above |
+| authored | ''no'' — a byproduct of having been | ''yes'' — a chosen act |
+| scarce by | ''physics'' — one body, one place, one moment | ''design'' — a bounded allowance |
+| witnesses | //a presence stood here// | //someone chose to give here// |
+| costs | nothing to leave | your allowance |
+
+''One is expensive by physics and cheap by design; the other runs the opposite.'' You cannot forge having been somewhere; you can trivially forge caring about it. So `maka` reads as ''substrate'' — and as the only anti-Sybil anchor surviving this stack's own constraints, since presence is non-fungible, non-transferable, and unforgeable ''without being attributable'', which is the trap every other anchor walked into. It records a ''correlation, never a property'', which is precisely why it cannot be walked.
+
+''And `maka` carries NO disclosure dial.'' It sits below the phase change, on the plane where nothing dwells and nothing accrues, so there is no persona to attach a Handle to. It reads anonymous ''at every scale, permanently, structurally'' — not by policy, and not by a setting anyone could turn. The dial exists only above the phase change, where there is something to disclose.
+
+So the giving tier alone splits, and there the tiers line up:
 
 |! kind |! rides |! says |
-| `maka` — passive | the vessel~veil dyad | a presence stood here |
 | `hoʻokupu`, anon | the PersonaGroup, internally | someone gave here |
 | `hoʻokupu`, Handled | the Handle @crossroads | this one gave here |
 
@@ -90,7 +102,7 @@ Not coincidence: the Handle already reads as ''the only one that ever federates'
 
 !! Open
 
-* ''Publicity reads SCALE-RELATIVE'' — a `hoʻokupu` named at your realm is anonymous at the Nexus unless carried up deliberately, which is the `lar:` law arriving socially: a name at one place does not federate unless announced. Open: whether ''place-visible but not Handle-federated'' reads as a fourth kind or a property of the third. It sits exactly where the conversion act lives.
+* ''Publicity reads SCALE-RELATIVE for the GIVING tier only'' — a `hoʻokupu` named at your realm is anonymous at the Nexus unless carried up deliberately, which is the `lar:` law arriving socially: a name at one place does not federate unless announced. Open: whether ''place-visible but not Handle-federated'' reads as a fourth kind or a property of the third. It sits exactly where the conversion act lives.
 * ''Recognition aimed at the periphery can EXPEL it'' — unfloored rewards drove less-active contributors away, while a quality floor followed by RANDOM allocation held them (+20% retention at month one, +13% at quarter four). ''Floor, then lottery.''
 * ''Prior art, and how it died'': demurrage currencies solved hoarding and left transferability intact — a leaking estate stays an estate — and one such scheme was shut by a national bank, which is categorisation risk in its plainest form.
 
