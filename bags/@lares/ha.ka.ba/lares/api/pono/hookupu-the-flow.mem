@@ -53,13 +53,45 @@ And cumulative advantage runs on ''prestige, not merit'', proven under randomisa
 
 <<~/ahu >>
 
+<<~ ahu #the-glyph >>
+
+!! The Glyph ~ the form, and where it sits
+
+''The existing social-graph schema already holds most of the properties'', which reads as prior art rather than coincidence. A reaction is already ''non-transferable'' (nobody sends you their reactions), already attached to a ''place'' rather than sent to a person, already intangible, and already ''socially bounded'' — people sense overuse, which is a real scarcity enforced by reading.
+
+What it lacks is exactly three: ''no allowance · no expiry · no anonymity''. And the gap matters where it matters most: ''a social bound reads a human and cannot read a farm.'' Five hundred tablets never feel embarrassed. So the technical bound is not a belt over the social suspenders — it is ''the half that survives automation'', while the social half is what makes people want to spend well.
+
+''THE GLYPH IS THE DOMAIN.'' Prestige hierarchies run ''domain-specific'', which is why they stay weakly transitive and why `kūlana` must never read as a global scalar. An emoji is a domain marker people already read fluently — 🔥 and 🙏 and 👀 mean different things, and being 🔥-regarded differs from being 🙏-regarded without anyone being taught. ''So the form supplies per-domain standing with no taxonomy invented and nobody asked to pick a category.'' The partial order falls out because the domains never totalise.
+
+''AND THE FORM ALREADY CARRIES THE RECEIVER-SIDE CAP.'' One glyph of a kind per person per post — you cannot stack five 🙏 on one thing. That is the per-recipient saturation the concentration findings name as the only lever with measured success, sitting in a UX convention nobody chose for that reason.
+
+''WHERE IT SITS: OUTSIDE THE THREAD.'' A reaction ''inside'' a thread becomes a speech act — it argues, competes with comments, addresses a person. A `hoʻokupu` ''outside'' the thread lays down at the place and replies to nobody. That is the word's semantics rendered as geometry: an offering set at the threshold, never placed on the table. It preserves ''spend-ON, never give-TO'' visually, where a rule would have to be remembered — and it refuses to nest, thread, or accumulate into conversation. It stays a margin. A shore.
+
+''THE SEAT, and it already exists.'' The DreamDeck feed architecture specs a ''JackPoint / Shadowtalk-style archive where a primary narrator posts and named handles annotate inline'', with a Kowloon / ActivityPub thread as the live social view. That is the surface a `hoʻokupu` sits ''outside'' of — the annotation layer holds speech, and the glyph rides the margin beside it, replying to nobody. Two channels, one page: ''inline handles SPEAK; margin glyphs GIVE.'' <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
+
+''What still lacks a seat'' — the ALLOWANCE. The glyph has a home (the margin) and the giving has a home (the place), but nothing renders ''what a person holds and what they have left this turn''. That surface reads as unbuilt and unspecced, and it wants care: a visible balance is a stock rendered, and the finding says ''do not render running totals''. So the allowance may want showing as a ''pool that refills'' rather than a number that counts — the glowing-pills form rather than a ledger line. Named here as the open UX question rather than guessed at.
+
+''The anonymity trade, and its resolution. Most reaction systems show who reacted. Anonymous giving kills the //I saw you didn't plug my post// coercion and breaks reciprocal boost-rings at the root (you cannot verify a partner reciprocated) — but it removes the gratitude loop, and gratitude is what turns one-sided `hoʻokipa` into the mutual kind. The resolution: ''the host FEELS the giving without TRACKING it'' — the count at the place rises, the giver stays unnamed. So mutuality happens ''at the place, never between persons'', which is federate-at-the-place-layer arriving in the UI, and it keeps `maka` and `hoʻokupu` under one law: //a trace of what happened here, carrying no pointer to who//.
+
+''Three kinds, three identity tiers, and they line up'' (`identity-enacts-relation`, `cap-tier`):
+
+|! kind |! rides |! says |
+| `maka` — passive | the vessel~veil dyad | a presence stood here |
+| `hoʻokupu`, anon | the PersonaGroup, internally | someone gave here |
+| `hoʻokupu`, Handled | the Handle @crossroads | this one gave here |
+
+Not coincidence: the Handle already reads as ''the only one that ever federates''. So the public giving tier IS the federating tier, and the other two stay local by construction. ''What the Handle buys is the capacity to be held responsible'' — and therefore to hold anything requiring responsibility: monitor, host, declarer, seat. The best-supported principle in the whole institutional corpus is //monitors accountable to the appropriators// (odds ratio 11.7), and ''you cannot be an accountable monitor anonymously''. Which is `kuleana` doing what the dictionary says: right and burden arriving together, on the same name.
+
+''The pattern integrity, and it has a very good record:'' voters anonymous, officials named. ''Anonymous participation is FULL participation, minus office.'' A public Handle is the price of office, paid voluntarily. The refugee, the watched, the person under an empire's eye participates completely and holds no seat — and that also dissolves the −50% volume problem, since the loss was measured where people had ONE mode. Offer both and the volumes add rather than trade.
+
+<<~/ahu >>
+
 <<~ ahu #open >>
 
 !! Open
 
-* ''Anonymity costs half the volume'' (−50% to −59% measured) and cures ''retaliation locks'', never concentration. Three attention kinds ride the three identity layers — passive trace (`maka`) · anonymous offering · Handle-attested offering — and publicity reads ''scale-relative'': named at your layer, anonymous one rung out.
+* ''Publicity reads SCALE-RELATIVE'' — a `hoʻokupu` named at your realm is anonymous at the Nexus unless carried up deliberately, which is the `lar:` law arriving socially: a name at one place does not federate unless announced. Open: whether ''place-visible but not Handle-federated'' reads as a fourth kind or a property of the third. It sits exactly where the conversion act lives.
 * ''Recognition aimed at the periphery can EXPEL it'' — unfloored rewards drove less-active contributors away, while a quality floor followed by RANDOM allocation held them (+20% retention at month one, +13% at quarter four). ''Floor, then lottery.''
-* The receiver-side cap may already ride the emoji form: one glyph per person per post is a per-recipient saturation nobody chose for that reason.
 * ''Prior art, and how it died'': demurrage currencies solved hoarding and left transferability intact — a leaking estate stays an estate — and one such scheme was shut by a national bank, which is categorisation risk in its plainest form.
 
 <<~/ahu >>
