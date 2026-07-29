@@ -373,7 +373,11 @@ def _write_stream_manifest_unlocked(paths: SensoriumPaths, *, name: str, lar: st
         "has": {**declared_has, **owned_has},
         "order": {"projector": order.projector, "basis": order.basis},
         "persistencePolicy": manifest.get("persistencePolicy", {"halfLife": None}),
-        "bands": manifest.get("bands", {"grain": "membership", "computed": "sidecar"}),
+        # `computed` names WHERE the band values come from, and the data flows through our own code
+        # into the sensorium — so it reads "capture", matching what the TS half already writes for this
+        # same slot. The word "sidecar" names ONE thing (the upstream install at ~/.mempalace) and never
+        # a value we compute ourselves.
+        "bands": manifest.get("bands", {"grain": "membership", "computed": "capture"}),
         "coupling": manifest.get("coupling", {"children": []}),
         "ephemeral": ephemeral,
         "created": created or island_local_now(millis=True, z=True),
