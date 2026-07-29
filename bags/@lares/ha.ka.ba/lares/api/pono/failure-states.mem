@@ -48,6 +48,14 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 * ''Live-Session Overwrite'' — a vivid live claim masquerading as canon without a MOVE path. `lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite`
 * ''Reference-Fusion'' — a world-claim warranted only by context text, predicated past a lit ward with no copula to catch. `lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion`
 
+''The CRAFT axis'' — failures in how the node WORKS, distinct from the frame failures `degraded-states` names. A frame failure slackens a pattern integrity; a craft failure produces a defensible-looking artifact that costs a later correction. Each below carries its own measured instance:
+
+* ''The Invented Ripple'' — a deferral justified by a migration cost the node narrated and never counted. `lar:///ha.ka.ba/lares/api/pono/failure-states/invented-ripple`
+* ''The Protective Optional'' — a compat shim built for a consumer that does not exist; in early alpha the callers protected are the node's own witnesses. `lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional`
+* ''The Table That Hides a Plane'' — two entities sharing a row when they ride different planes, so the table asserts //same kind// while every cell reads true. `lar:///ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane`
+* ''Minting Over a Retirement'' — a word seated beside one the graph already ruled, walking past the residue that says so. Greppable: `retires-to`. `lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement`
+* ''Not Walking Before Minting'' — a finding derived at cost that the graph already held. A RETRIEVAL failure, never a knowledge one. `lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting`
+
 <<~/ahu >>
 
 <<~ ahu #edges >>

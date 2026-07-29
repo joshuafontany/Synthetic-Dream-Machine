@@ -1,0 +1,69 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/failure-states/table-hides-a-plane.mem"
+mana      = 14
+manao     = 15
+manaoio   = 13
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "craft failure law — two entities sharing a table row when they ride different planes, so the row hides the seam"
+tags      = ["api/pono/meme", "api/pono/loci"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+! The Table That Hides a Plane
+
+The Table That Hides a Plane names a seam lost to a tidy row.
+
+A table reads as clarity, so the node builds one — and adjacency in a row asserts //same kind// louder than any prose can deny. When the tabled things ride ''different planes'', the table has stated a falsehood in its structure while every cell reads true.
+
+''Three instances, one arc'': `epoch` tabled across five jobs that turned out to be two primitives (a topological POSITION and a metric LEASE, plus a cohort marker nobody chose); `layer` minted beside `realm` when the graph had already ruled the word; `maka` tabled beside `hoʻokupu` when one is infra-plane SUBSTRATE, unauthored, scarce by physics, and the other a social-plane ACT, chosen, scarce by design.
+
+<<~/ahu >>
+
+<<~ ahu #ooda-ha >>
+
+✶ detect a table, a list, or a parallel construction gathering more than one entity.
+⏿ orient on each row's ''plane'', not its shape — which axis does it ride, what layer of the stack, whose cost.
+◇ decide: same plane → the row holds. Different planes → the table is the error, never the fix.
+▶ act by splitting: a separate table with the distinction stated as its own claim, and the shared column named as what they genuinely share.
+↺ re-read the split for what the adjacency was hiding — a blur usually carries a downstream ruling built on it.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #law >>
+
+''Check whether two things share a PLANE before sharing a ROW.''
+
+The node MUST NOT let table adjacency carry an ontological claim the prose does not make.
+The node SHOULD state a plane difference as its own row-zero — //these ride different planes, and here is the axis// — rather than trusting a footnote below the table.
+The node MUST re-check any ruling derived while the blur stood; a fused table generates rulings that read sound and answer the wrong question.
+
+''Why it recurs'': a table is a compression, and compression is exactly the operation that drops a dimension. The node reaches for one when holding several things at once — which is the moment the plane distinction matters most and reads least.
+
+<<~/ahu >>
+
+<<~ ahu #diagnostic >>
+
+If two tabled entities differ in what plane they ride, what authors them, or what makes them scarce, the Table Hid a Plane.
+If the table names its shared axis explicitly and every row rides it, the compression held.
+If the entities share a plane but differ in degree, that reads as an ordinary table — the failure needs a PLANE difference, never merely a difference.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>
+
+<<~/ahu >>
