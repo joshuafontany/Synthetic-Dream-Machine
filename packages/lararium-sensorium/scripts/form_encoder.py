@@ -103,7 +103,7 @@ from collections import Counter
 # to gate their POSIX skip markers. A linter reads them as unused — it cannot see a cross-module
 # attribute read — so they carry the mark that says otherwise. Cutting them takes the skip markers with
 # them, and the serve tests then FAIL on a platform they mean to skip.
-from sidecar_caps import (
+from holder_caps import (
     _fcntl,  # noqa: F401 — read as `fe._fcntl` by the serve tests' POSIX skipif
     _select,  # noqa: F401 — read as `fe._select` by the idle-reap tests' skipif
     acquire_serve_lock,
@@ -111,7 +111,7 @@ from sidecar_caps import (
     make_dispatch,
     mine_busy_retry,
     release_lock,
-    run_sidecar,
+    run_holder,
     serve_lock_path,
     serve_loop,
 )
@@ -876,7 +876,7 @@ class FormPalaceStore:
 
 
 # ---------------------------------------------------------------------------
-# serve cap-stack (composed from sidecar_caps — one holder per palace)
+# serve cap-stack (composed from holder_caps — one holder per palace)
 # ---------------------------------------------------------------------------
 
 IDLE_TTL_ENV = "FORM_ENCODER_IDLE_TTL"
@@ -1029,7 +1029,7 @@ def _serve(palace: str | None, preload: bool) -> None:
     # palace is bound — an encode-only holder needs no store lock, so require_lock keys
     # on the palace presence). build_dispatch runs only AFTER the lock, mirroring
     # structurepalace_io's reap-don't-pile invariant.
-    run_sidecar(
+    run_holder(
         palace=palace,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=build_dispatch,

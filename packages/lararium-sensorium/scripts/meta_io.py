@@ -33,7 +33,7 @@ from mempalace.miner import _extract_entities_for_metadata, detect_hall
 # the operator's wiki-tuned taxonomy supersedes it (bridged the same way `detect_hall` bridges above).
 from mempalace.convo_miner import detect_convo_room
 
-from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
+from holder_caps import idle_ttl_seconds, make_dispatch, run_holder
 
 IDLE_TTL_ENV = "META_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
@@ -162,7 +162,7 @@ def _build_ops(m: MetaModel) -> dict:
 
 def _serve(annotators=None) -> None:
     model = MetaModel(annotators)
-    run_sidecar(
+    run_holder(
         palace=None,   # palace-less: pure transform, the config is the only resource
         lock_prefix="meta_serve",
         build_dispatch=lambda: make_dispatch(_build_ops(model)),

@@ -69,7 +69,7 @@ from mempalace.palace import get_collection
 # to gate their POSIX skip markers. A linter reads them as unused — it cannot see a cross-module
 # attribute read — so they carry the mark that says otherwise. Cutting them takes the skip markers with
 # them, and the serve tests then FAIL on a platform they mean to skip.
-from sidecar_caps import (
+from holder_caps import (
     ReverseIndex,
     _fcntl,  # noqa: F401 — read as `ap._fcntl` by the serve tests' POSIX skipif
     _select,  # noqa: F401 — read as `ap._select` by the idle-reap tests' skipif
@@ -79,7 +79,7 @@ from sidecar_caps import (
     mine_busy_retry,
     read_stored_embeddings,
     release_lock,
-    run_sidecar,
+    run_holder,
     serve_lock_path,
     serve_loop,
 )
@@ -567,7 +567,7 @@ def _serve(palace_path: str) -> None:
     # Compose: the serve root acquires the per-palace singleton BEFORE build_dispatch
     # opens the ChromaDB collection, so a refused second holder never opens a client
     # to fight the per-palace mine lock (the reap-don't-pile invariant, OS-enforced).
-    run_sidecar(
+    run_holder(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch(_build_ops(StructurePalaceStore(palace_path))),

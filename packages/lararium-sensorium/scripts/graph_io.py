@@ -18,7 +18,7 @@ from mempalace.palace import get_collection
 from mempalace.palace_graph import build_graph, find_tunnels, graph_stats, traverse
 from mempalace.hallways import compute_hallways_for_wing, list_hallways
 
-from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
+from holder_caps import idle_ttl_seconds, make_dispatch, run_holder
 
 IDLE_TTL_ENV = "GRAPH_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
@@ -65,7 +65,7 @@ def _build_ops(g: Graph) -> dict:
 
 
 def _serve(palace_path: str) -> None:
-    run_sidecar(
+    run_holder(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch(_build_ops(Graph(palace_path))),

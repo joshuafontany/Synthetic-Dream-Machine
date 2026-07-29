@@ -211,7 +211,7 @@ def test_guard_raise_crosses_the_wire(tmp_path):
     # make_dispatch, never a crash and never a Python exception escaping (JSON-legal str error).
     import io
     import json
-    from sidecar_caps import make_dispatch
+    from holder_caps import make_dispatch
     store = cio.ContentStore(str(tmp_path / ".wire"), required_keys={"wing", "room"}, expected_dim=3)
     dispatch = make_dispatch(cio._build_ops(store))
 

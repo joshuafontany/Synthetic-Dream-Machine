@@ -75,7 +75,7 @@ def _rederive_bands(root: str) -> dict:
 
 def rederive_bands(root: str) -> dict:
     """Rebuild band output under the exclusive rooted mutation lease."""
-    from sidecar_caps import root_mutation
+    from holder_caps import root_mutation
 
     with root_mutation(root, exclusive=True):
         return _rederive_bands(root)
@@ -176,7 +176,7 @@ def rederive(root: str, *, min_support: int = 2, max_forms: int = 64,
              bands: bool = False) -> dict:
     """Rebuild selected derived planes without overlapping a capture pass."""
     from sensorium import sensorium_paths
-    from sidecar_caps import root_mutation
+    from holder_caps import root_mutation
 
     root = sensorium_paths(root).root
     if not planes and not bands:

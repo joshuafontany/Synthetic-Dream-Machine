@@ -17,7 +17,7 @@ import inspect
 
 from lares_mcp import LaresCoordinator
 from sensorium import sensorium_paths
-from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
+from holder_caps import idle_ttl_seconds, make_dispatch, run_holder
 
 _LOCK_PREFIX = "recall_session_serve"
 
@@ -85,7 +85,7 @@ class RecallServer:
 def _serve(sensorium_root: str, wing: str = "wing_default") -> None:
     """Serve one serialized read pipe over NDJSON stdio — recall + status, the coordinator's read face."""
     server = RecallServer(sensorium_root, wing=wing)
-    run_sidecar(
+    run_holder(
         palace=server._paths.content,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch({

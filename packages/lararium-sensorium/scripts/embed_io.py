@@ -26,7 +26,7 @@ import argparse
 
 from mempalace.embedding import current_model_name, get_embedding_function
 
-from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
+from holder_caps import idle_ttl_seconds, make_dispatch, run_holder
 
 IDLE_TTL_ENV = "EMBED_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
@@ -60,7 +60,7 @@ def _build_ops(e: Embedder) -> dict:
 
 
 def _serve() -> None:
-    run_sidecar(
+    run_holder(
         palace=None,   # encode-only: no store, no per-palace lock (the model IS the resource)
         lock_prefix="embed_serve",
         build_dispatch=lambda: make_dispatch(_build_ops(Embedder())),

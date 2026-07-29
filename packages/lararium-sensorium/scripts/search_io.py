@@ -25,7 +25,7 @@ import argparse
 
 from mempalace.searcher import search_memories
 
-from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
+from holder_caps import idle_ttl_seconds, make_dispatch, run_holder
 
 IDLE_TTL_ENV = "SEARCH_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
@@ -127,7 +127,7 @@ def _build_ops(s: Searcher) -> dict:
 
 
 def _serve(palace_path: str) -> None:
-    run_sidecar(
+    run_holder(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch(_build_ops(Searcher(palace_path))),

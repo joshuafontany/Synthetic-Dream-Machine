@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-"""sidecar_caps — the composition foundation for the mempalace Python sidecars.
+"""holder_caps — the composition foundation for the mempalace-backed Python HOLDERS.
 
-NOT a base class to subclass. A LIBRARY OF CAPABILITIES (caps) that a sidecar
-COMPOSES. Each sidecar (loci_io · structurepalace_io · form_encoder · kg_io) is a
+A HOLDER runs one plane of one sensorium: it consumes mempalace as a library, speaks NDJSON on
+stdin/stdout, and holds a palace open for the node. The word "sidecar" names ONE thing in this
+house — the upstream install at ~/.mempalace, a separate capability the House may accept — so the
+processes we stand ourselves carry their own name (operator ruling, 2026-07-29).
+
+NOT a base class to subclass. A LIBRARY OF CAPABILITIES (caps) that a holder
+COMPOSES. Each holder (loci_io · structurepalace_io · form_encoder · kg_io) is a
 NAMELESS entity whose identity IS its cap-stack — the set of caps it #has, fused
 with the OPS it declares. The caps live here as free functions + one small
-composition root; a sidecar imports the caps it needs, declares its ops as a
+composition root; a holder imports the caps it needs, declares its ops as a
 plain dict (verb → handler), and calls the root that wires the caps around them.
 
-  entity (sidecar)  =  the caps it #has  +  the ops it declares
+  entity (holder)   =  the caps it #has  +  the ops it declares
   component (cap)    =  one reusable behavior (free function / closure)
-  composition root   =  make_dispatch · run_sidecar · serve_loop (wire, never own)
+  composition root   =  make_dispatch · run_holder · serve_loop (wire, never own)
 
-This is ECS (entity=sidecar, component=cap) fused with ocap dependency-injection
+This is ECS (entity=holder, component=cap) fused with ocap dependency-injection
 (the script HANDS the caps its store/handlers; the caps never reach back). No god
 base-class, no inheritance tower, no central registry — isomorphism by
 composition, not interface.
@@ -26,7 +31,7 @@ Serve:     serve_lock_path / acquire_serve_lock /
            acquire_root_lock / release_lock        — singleton and short rooted flock holds
            idle_ttl_seconds                       — env-read idle-reap TTL
            serve_loop                             — the raw-fd NDJSON loop + idle-reap
-           run_sidecar                            — the serve composition root
+           run_holder                            — the serve composition root
 
 The serve caps form the HEAVY shared machinery (structurepalace_io + form_encoder #has
 the full serve stack); the batch CLIs (loci_io + kg_io) #has only the lighter
@@ -139,7 +144,7 @@ def make_dispatch(ops: dict):
     """Wire an OPS REGISTRY (``{op: handler(req) -> result}``) into an NDJSON
     request handler ``dispatch(req, out)``.
 
-    The registry IS the sidecar's #has-stack made literal. ``dispatch`` looks the
+    The registry IS the holder's #has-stack made literal. ``dispatch`` looks the
     op up, runs the handler, and writes the ``{id, ok, result}`` / ``{id, ok,
     error}`` envelope — never crashing the serve loop on a handler error."""
 
@@ -173,9 +178,9 @@ def mine_busy_retry(fn, attempts: int = 6, base_ms: float = 100.0):
     `MineAlreadyRunning` rather than waiting. This wraps a write so the busy lock WAITS (exponential
     backoff + full jitter, ~6 tries ≈ 3s) and only surfaces the error if the lock stays wedged — the
     same discipline the mempalace CLI's own mine-retry uses. MineAlreadyRunning imported lazily so a
-    sidecar with no mempalace on its path still loads sidecar_caps."""
+    holder with no mempalace on its path still loads holder_caps."""
     try:
-        from mempalace.palace import MineAlreadyRunning  # lazy: not every sidecar imports mempalace
+        from mempalace.palace import MineAlreadyRunning  # lazy: not every holder imports mempalace
     except Exception:  # noqa: BLE001 — no mempalace on the path → nothing to retry, run bare
         return fn()
     import random
@@ -241,7 +246,7 @@ def serve_lock_path(palace_path: str, prefix: str) -> str:
     The lock must live with the palace it protects, never under the guest
     comparator (``~/.mempalace``).  A sovereign content holder otherwise
     creates comparator state merely by opening, and a comparator cleanup can
-    break an unrelated sensorium holder.  ``prefix`` names the sidecar
+    break an unrelated sensorium holder.  ``prefix`` names the holder
     cap-stack identity; the canonical-path digest makes aliases share one
     flock slot.
     """
@@ -417,7 +422,7 @@ def serve_loop(dispatch, in_fd: int, out, *, idle_ttl: float, on_idle=None) -> N
 
 
 # ---------------------------------------------------------------------------
-# serve composition root — wire flock-singleton + serve-loop around a sidecar
+# serve composition root — wire flock-singleton + serve-loop around a holder
 # ---------------------------------------------------------------------------
 
 
@@ -440,7 +445,7 @@ def _arm_parent_death_signal() -> None:
         pass  # non-Linux / no libc — fall back to the stdin-EOF + idle-ttl lifetime
 
 
-def run_sidecar(
+def run_holder(
     *,
     palace,
     lock_prefix: str,
@@ -453,7 +458,7 @@ def run_sidecar(
     on_idle=None,
 ) -> None:
     """The serve composition root: acquire the per-palace singleton, then (only if
-    held) wire the sidecar's ops into the serve loop, then release.
+    held) wire the holder's ops into the serve loop, then release.
 
     ``build_dispatch`` is a zero-arg callable the SIDECAR supplies — it opens its
     store(s)/scorer and returns the ``dispatch(req, out)`` handler. It runs ONLY

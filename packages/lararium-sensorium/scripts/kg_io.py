@@ -42,7 +42,7 @@ from mempalace.knowledge_graph import KnowledgeGraph, DEFAULT_KG_PATH
 # NDJSON-reader + path caps; the SERVE holder (the /mcp lares KG surface) #has the full
 # serve stack (loop/flock/idle-reap) + the read ops (query/timeline/stats). Both CONSUME
 # the one KnowledgeGraph — read+write+serve parity, their code behind the boundary.
-from sidecar_caps import canonical_path, read_ndjson_records, idle_ttl_seconds, make_dispatch, run_sidecar
+from holder_caps import canonical_path, read_ndjson_records, idle_ttl_seconds, make_dispatch, run_holder
 
 ADAPTER_NAME = "lares-worldline"
 IDLE_TTL_ENV = "KG_IDLE_TTL"
@@ -111,7 +111,7 @@ def _build_ops(k):
 
 
 def cmd_serve(args):
-    run_sidecar(
+    run_holder(
         palace=args.palace,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch(_build_ops(Kg(args.palace))),

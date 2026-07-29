@@ -4,7 +4,7 @@ NON-MEMORY targeted content: arbitrary target corpora (Twain · TiddlyWiki5 · t
 Discordian Catma · any ingest target) that are NOT the operator's session-memory (the mempalace).
 
 Caller-vector by design — uniform with structurepalace_io / persistence_io (skip-identity, the
-embedding arrives ON the wire, no model load) — so it composes the SHARED sidecar_caps serve
+embedding arrives ON the wire, no model load) — so it composes the SHARED holder_caps serve
 foundation AND fits the parallel-ingest single-writer split (embed fans out upstream; this commits
 the caller's vector). The text rides the `document` slot; the caller's dense vector is the embedding.
 
@@ -33,11 +33,11 @@ import math
 from chromadb.errors import NotFoundError
 from mempalace.palace import get_collection
 
-from sidecar_caps import (
+from holder_caps import (
     idle_ttl_seconds,
     make_dispatch,
     mine_busy_retry,
-    run_sidecar,
+    run_holder,
 )
 
 IDLE_TTL_ENV = "CONTENT_IDLE_TTL"
@@ -547,9 +547,9 @@ def _serve(palace_path: str, required_keys: "set[str] | None" = None, expected_d
            expected_model: "str | None" = None, append_only: bool = False,
            collection_name: "str | None" = None) -> None:
     # The guards ride optional kwargs into the store built inside the dispatch closure — so
-    # run_sidecar is untouched, and the session-memory contract reaches the RPC face (the QA #1
+    # run_holder is untouched, and the session-memory contract reaches the RPC face (the QA #1
     # fix: the coordinator's resolveMemoryContentSpawn passes the flags; a generic corpus omits them).
-    run_sidecar(
+    run_holder(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch(_build_ops(ContentStore(palace_path, required_keys=required_keys, expected_dim=expected_dim, expected_model=expected_model, append_only=append_only, collection_name=collection_name))),

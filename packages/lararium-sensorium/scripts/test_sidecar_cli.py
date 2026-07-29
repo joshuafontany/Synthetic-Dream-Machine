@@ -2,7 +2,7 @@
 
 These spawn the script EXACTLY as the TS callers do (same subcommands, same
 request/response JSON, same serve protocol) and assert the byte-stable contract —
-the load-bearing check that the composition refactor (importing sidecar_caps at
+the load-bearing check that the composition refactor (importing holder_caps at
 launch) left every CLI surface intact:
 
   loci_io     export --wing W  ·  apply PATCHFILE      (telemetry-writeback.ts)

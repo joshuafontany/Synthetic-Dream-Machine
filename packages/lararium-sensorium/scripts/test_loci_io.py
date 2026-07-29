@@ -1,6 +1,6 @@
 """Tests for loci_io — the two readers COMPOSE the shared store-readback cap.
 
-The cap (read_stored_embeddings) lives in sidecar_caps and is tested there; here we
+The cap (read_stored_embeddings) lives in holder_caps and is tested there; here we
 prove the two call sites compose it correctly: the CONTENT reader (cmd_embeddings)
 SORTS by (source_file, chunk_index, id) and the FORM reader (cmd_form_embeddings)
 dumps FLAT (native order, keyed by verbatim_sha). No ChromaDB — the collection is a

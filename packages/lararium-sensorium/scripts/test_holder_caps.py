@@ -1,8 +1,8 @@
-"""Unit tests for sidecar_caps — the composition foundation.
+"""Unit tests for holder_caps — the composition foundation.
 
 The caps COMPOSE (no inheritance): a dummy ops-registry wires through make_dispatch;
 a missing op fails clean (never crashes the loop); the flock-singleton still holds
-per-palace; the idle-reap still bounds; run_sidecar refuses a second holder WITHOUT
+per-palace; the idle-reap still bounds; run_holder refuses a second holder WITHOUT
 building the sidecar's dispatch (the reap-don't-pile invariant). Run under the
 mempalace venv (though these touch no ChromaDB):
 
@@ -17,7 +17,7 @@ import threading
 
 import pytest
 
-import sidecar_caps as sc
+import holder_caps as sc
 
 _posix_flock = pytest.mark.skipif(
     sc._fcntl is None, reason="serve.lock singleton relies on POSIX fcntl.flock"
@@ -327,7 +327,7 @@ def test_serve_loop_handles_then_exits_on_eof():
 
 
 # ---------------------------------------------------------------------------
-# run_sidecar — composition root; refuses a 2nd holder without building dispatch
+# run_holder — composition root; refuses a 2nd holder without building dispatch
 # ---------------------------------------------------------------------------
 
 
@@ -339,7 +339,7 @@ def test_run_sidecar_refuses_second_holder_without_building(tmp_path, monkeypatc
     held = sc.acquire_serve_lock(palace, "demo")
     assert held is not None
     try:
-        sc.run_sidecar(
+        sc.run_holder(
             palace=palace,
             lock_prefix="demo",
             build_dispatch=lambda: built.append(1) or (lambda req, o: None),
@@ -348,7 +348,7 @@ def test_run_sidecar_refuses_second_holder_without_building(tmp_path, monkeypatc
         )
     finally:
         sc.release_lock(held)
-    assert built == [], "run_sidecar built the dispatch despite the singleton being held"
+    assert built == [], "run_holder built the dispatch despite the singleton being held"
 
 
 def test_run_sidecar_encode_only_skips_lock_and_runs(tmp_path):
@@ -359,7 +359,7 @@ def test_run_sidecar_encode_only_skips_lock_and_runs(tmp_path):
     built = []
 
     def _run():
-        sc.run_sidecar(
+        sc.run_holder(
             palace=None,
             lock_prefix="demo",
             build_dispatch=lambda: built.append(1)

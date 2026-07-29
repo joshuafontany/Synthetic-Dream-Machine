@@ -20,7 +20,7 @@ import tempfile
 import content_io as cio
 from capture_stream import ContentStoreLandCap, Pipeline
 from deep_time import island_local_now
-from sidecar_caps import acquire_root_lock, release_lock, root_mutation
+from holder_caps import acquire_root_lock, release_lock, root_mutation
 
 
 @dataclass(frozen=True)

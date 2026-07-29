@@ -34,7 +34,7 @@ from mempalace.palace import get_collection  # direct, for the FORM store (a pla
 # This batch CLI's cap-stack is light: it #has the shared NDJSON record reader and
 # the store-readback cap (no serve loop / flock / idle-reap — those belong to the
 # persistent serve sidecars). FORM_COLLECTION is the shared form-store name.
-from sidecar_caps import FORM_COLLECTION, read_ndjson_records, read_stored_embeddings
+from holder_caps import FORM_COLLECTION, read_ndjson_records, read_stored_embeddings
 
 """The palace this process writes — named by `--palace`, never defaulted.
 

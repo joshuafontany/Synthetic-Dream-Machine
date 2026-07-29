@@ -58,11 +58,11 @@ import os
 import sqlite3
 from contextlib import contextmanager
 
-from sidecar_caps import (
+from holder_caps import (
     canonical_path,
     idle_ttl_seconds,
     make_dispatch,
-    run_sidecar,
+    run_holder,
 )
 
 # The three rhizome relations — each stored CAUSE -> EFFECT so happened-before reads as reachability.
@@ -96,7 +96,7 @@ class WorldlineStore:
     def __init__(self, palace_path: str) -> None:
         os.makedirs(os.path.expanduser(palace_path), exist_ok=True)
         # MULTI-WRITER HARDENING. The `serve` path takes a per-palace flock singleton
-        # (sidecar_caps.acquire_serve_lock), so through the sidecar there is exactly one writer. But
+        # (holder_caps.acquire_serve_lock), so through the sidecar there is exactly one writer. But
         # capture_session.py constructs this store DIRECTLY, in-process, bypassing the sidecar — so
         # N concurrent harness sessions put N processes on this one file. Default sqlite settings
         # (rollback journal, implicit transactions) turn `add_edge`'s check-then-insert guards into
@@ -508,7 +508,7 @@ def _build_ops(store: WorldlineStore) -> dict:
 
 
 def _serve(palace_path: str) -> None:
-    run_sidecar(
+    run_holder(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch(_build_ops(WorldlineStore(palace_path))),

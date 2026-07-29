@@ -53,15 +53,15 @@ import json
 from chromadb.errors import NotFoundError
 from mempalace.palace import get_collection
 
-# The serve cap-stack this sidecar #has, composed from the shared foundation. `run_sidecar` IS the
+# The serve cap-stack this sidecar #has, composed from the shared foundation. `run_holder` IS the
 # composition root — it holds the flock-singleton, the idle-reap, and the NDJSON serve-loop inside
 # itself, so this module names only what it calls. An import list that recites the whole stack while
 # calling one entry point declares caps the code does not hold, and the recital reads as the contract.
-from sidecar_caps import (
+from holder_caps import (
     idle_ttl_seconds,
     make_dispatch,
     mine_busy_retry,
-    run_sidecar,
+    run_holder,
 )
 
 # Cap the witness-log so a hot testimony cannot grow one record without bound — the log stays
@@ -286,7 +286,7 @@ def _serve(palace_path: str, expected_dim: "int | None" = None, expected_model: 
     # Compose: the serve root acquires the per-palace singleton BEFORE build_dispatch opens the
     # ChromaDB collection (the reap-don't-pile invariant, OS-enforced). expected_dim / expected_model
     # (unset = off) arm the two halves of the embedder-identity floor.
-    run_sidecar(
+    run_holder(
         palace=palace_path,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch(_build_ops(

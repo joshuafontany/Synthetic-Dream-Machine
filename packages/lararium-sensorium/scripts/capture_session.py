@@ -41,7 +41,7 @@ from typing import Callable, Iterator
 from capture_sources import Record, SourceCap, resolve_source
 from sensorium import (compose_content_land, compose_persistence_cap, compose_stream_sensorium,
                        derived_views, sensorium_paths, write_stream_manifest, OrderCap)
-from sidecar_caps import idle_ttl_seconds, make_dispatch, run_sidecar
+from holder_caps import idle_ttl_seconds, make_dispatch, run_holder
 
 
 _LOCK_PREFIX = "capture_session_serve"
@@ -437,7 +437,7 @@ class CaptureSessionServer:
         return {k: v for k, v in res.items() if not k.startswith("_")}   # drop the in-memory word cache
 
     # ── the lifecycle + cross-plane serve-ops (the /mcp DaemonCoordinator routes to these) ─────────
-    # Each rides the SAME serialized pipe as capture (run_sidecar dispatch is serial), so a MUTATION never
+    # Each rides the SAME serialized pipe as capture (run_holder dispatch is serial), so a MUTATION never
     # races the live writer — that serialization is WHY the capture holder owns these ops, not a bare store.
 
     def status(self, req: dict) -> dict:
@@ -532,7 +532,7 @@ def _serve(sensorium_root: str) -> None:
     enrichment (rejim rhythm + worldline membership slots) on the serve loop's idle beat — each capture marks
     the cadences, and quiet, settled ground fires the re-derivations."""
     server = CaptureSessionServer(sensorium_root)
-    run_sidecar(
+    run_holder(
         palace=server._paths.content,
         lock_prefix=_LOCK_PREFIX,
         build_dispatch=lambda: make_dispatch({
