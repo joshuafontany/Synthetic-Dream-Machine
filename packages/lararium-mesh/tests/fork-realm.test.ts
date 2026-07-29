@@ -1,12 +1,12 @@
 /**
- * fork-place — fork-as-exit, the capture-answer's escape half. Tests the model floor:
+ * fork-realm — fork-as-exit, the capture-answer's escape half. Tests the model floor:
  * survivor computation (exclude-by-omission), the fork bearing, and the Zooko re-point.
  * The real-Keyhive fork (the captors structurally locked out) rides the lifecycle probe.
  */
 import { describe, test, expect } from "vitest";
 import {
   forkSurvivors, forkGenesisUri, repointToFork,
-  type CabalRealm, type PlaceFork,
+  type CabalRealm, type RealmFork,
 } from "../src/index.js";
 
 const OLD_ROSTER = ["0xsurvivor_a", "0xsurvivor_b", "0xcaptor"];
@@ -17,14 +17,14 @@ const FORK_PLACE: CabalRealm = {
   substrateUrl:    "automerge:place-substrate-fork",
   genesisUri:      "lar:///crossroads.cabal.gathers/place/fork",
 };
-const fork: PlaceFork = {
+const fork: RealmFork = {
   forkedFromDocIdHex: "0xcaptured_place",
   newPlace: FORK_PLACE,
   survivors: ["0xsurvivor_a", "0xsurvivor_b"],
   excluded: ["0xcaptor"],
 };
 
-describe("fork-place — fork-as-exit", () => {
+describe("fork-realm — fork-as-exit", () => {
   test("survivors = the old roster minus the captors (exclude by omission)", () => {
     const s = forkSurvivors(OLD_ROSTER, ["0xcaptor"]);
     expect(s).toEqual(["0xsurvivor_a", "0xsurvivor_b"]);

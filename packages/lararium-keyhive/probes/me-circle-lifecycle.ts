@@ -27,7 +27,7 @@
  */
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
-import { foundCabalRealm, joinCabalRealm, evictMember, cabalRealmRoster } from "../src/cabal-realm-ceremony.js";
+import { foundCabalRealm, openDwelling, dwellersHolding } from "../src/cabal-realm-ceremony.js";
 import {
   foundMeCircle, contractPersona, releasePersona, activePersona, withActivePersona,
   meCircleDegeneracy, cabalRealmMaintenanceProvenance, cabalRealmLeaseSlot,
@@ -70,7 +70,7 @@ async function main(): Promise<void> {
     const s = new KeyhiveProvider();
     await s.init({ seed: new Uint8Array(32).fill(fill), eventStore: new InMemoryEventStore() });
     const { id } = await human.receiveContactCard(await s.contactCard());
-    await joinCabalRealm(human, mePlace, id);                 // real Keyhive membership
+    await openDwelling(human, mePlace, id);                 // real Keyhive membership
     return petname !== undefined ? { handleHex: id, petname } : { handleHex: id };
   }
   const joshua   = await makeSlice(0xa1, "Joshua Fontany");
@@ -84,7 +84,7 @@ async function main(): Promise<void> {
     `active=${activePersona(me)?.petname}`);
 
   // ── STAGE 3 — the real Keyhive roster holds all three ───────────────────────────
-  const roster = await cabalRealmRoster(human, mePlace, [joshua.handleHex, engineer.handleHex, veiled.handleHex]);
+  const roster = await dwellersHolding(human, mePlace, [joshua.handleHex, engineer.handleHex, veiled.handleHex]);
   stage("3 ROSTER — the me-place's real Keyhive roster holds all three slices",
     roster.length === 3, `roster=${roster.length}`);
 
@@ -117,8 +117,10 @@ async function main(): Promise<void> {
     `clock.spread=${clock.spread} captureImmune=${d.captureImmune} tieBreak=${d.tieBreakEngaged}`);
 
   // ── STAGE 7 — RELEASE a slice (kāpae); the blame passes on ───────────────────────
-  await evictMember(human, mePlace, engineer.handleHex);     // real convergent-removal
-  me = releasePersona(me, engineer.handleHex);               // and from the constellation
+  // A me-circle runs SINGLE-PRINCIPAL, so releasing a slice needs no eviction and never did: the human
+  // stops standing under that face. `releasePersona` carries the whole act — the constellation shrinks and
+  // the sentinel dwelling simply stops being exercised. No hostile hand exists here to shadow a relation.
+  me = releasePersona(me, engineer.handleHex);
   stage("7 RELEASE — kāpae drops the active slice; the blame passes to a remaining face",
     me.constellation.length === 2 && me.activeHandleHex !== engineer.handleHex && me.activeHandleHex !== null,
     `size=${me.constellation.length} active=${activePersona(me)?.petname ?? "(veiled)"}`);

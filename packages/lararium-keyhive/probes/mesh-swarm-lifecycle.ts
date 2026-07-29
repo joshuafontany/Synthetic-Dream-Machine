@@ -27,7 +27,7 @@ import { mkdirSync, writeFileSync, readdirSync, readFileSync, rmSync } from "fs"
 import { join } from "path";
 import { tmpdir } from "os";
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
-import { foundCabalRealm, joinCabalRealm, cabalRealmRoster } from "../src/cabal-realm-ceremony.js";
+import { foundCabalRealm, openDwelling, dwellersHolding } from "../src/cabal-realm-ceremony.js";
 import {
   cabalRealmMaintenanceProvenance, cabalRealmLeaseSlot,
   MEMBERSHIP_BROADCAST,
@@ -119,7 +119,7 @@ async function main(): Promise<void> {
   for (const c of cards) {
     const bytes = new Uint8Array(Buffer.from(c.payload as string, "base64"));
     const { id } = await founder.receiveContactCard(bytes);
-    await joinCabalRealm(founder, place, id);                       // real Keyhive membership
+    await openDwelling(founder, place, id);                       // real Keyhive membership
     admitted[c.from] = id;
     await channel.offer({ kind: "admit", from: "founder", to: c.from, payload: { memberIdHex: id } });
   }
@@ -130,7 +130,7 @@ async function main(): Promise<void> {
 
   // ── STAGE 5 — ROSTER holds all three DIFFERENT PersonaGroups ──────────────────
   const idB = admitted["vessel-B"] ?? "", idC = admitted["vessel-C"] ?? "";
-  const roster = await cabalRealmRoster(founder, place, [idB, idC]);
+  const roster = await dwellersHolding(founder, place, [idB, idC]);
   stage("5 ROSTER — the shared place's real Keyhive roster holds both joined PersonaGroups",
     roster.length === 2 && roster.includes(idB) && roster.includes(idC),
     `roster=${roster.length} (cross-channel membership witnessed)`);

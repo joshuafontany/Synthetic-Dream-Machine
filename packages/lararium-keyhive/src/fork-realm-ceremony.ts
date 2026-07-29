@@ -1,5 +1,5 @@
 /**
- * fork-place-ceremony — FORK a captured cabal-realm over real Keyhive: found a FRESH
+ * fork-realm-ceremony — FORK a captured cabal-realm over real Keyhive: found a FRESH
  * sentinel place, carry ONLY the survivors into it, leave the captors on the dead shell.
  * The escape half of the capture-answer (canon cabal-realm#the-unswept-corner).
  *
@@ -7,13 +7,13 @@
  * hold no key to the fork — cleaner + stronger than convergent-removal (which evicts from
  * a place you keep; a fork is a place you leave). The survivors must already be KNOWN
  * agents to `provider` (they were members of the old place, so their contact cards are
- * in-scope — mirrors joinCabalRealm's precondition).
+ * in-scope — mirrors openDwelling's precondition).
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
-import { forkSurvivors, forkGenesisUri, type CabalRealm, type PlaceFork } from "@lararium/mesh";
-import { foundCabalRealm, joinCabalRealm } from "./cabal-realm-ceremony.js";
+import { forkSurvivors, forkGenesisUri, type CabalRealm, type RealmFork } from "@lararium/mesh";
+import { foundCabalRealm, openDwelling } from "./cabal-realm-ceremony.js";
 import type { KeyhiveProvider } from "./keyhive-provider.js";
 
 export interface ForkCabalRealmOpts {
@@ -25,23 +25,25 @@ export interface ForkCabalRealmOpts {
 
 /**
  * FORK `oldPlace`, excluding `excludeHexes` (the captors). Founds a fresh sentinel place,
- * joins the survivors (old roster minus captors) to it, and returns the PlaceFork with the
+ * joins the survivors (old roster minus captors) to it, and returns the RealmFork with the
  * continuity link. The captors are structurally absent — they were never added, so they
  * hold no membership key to the fork.
  */
 export async function forkCabalRealm(
   provider:     KeyhiveProvider,
   oldPlace:     CabalRealm,
-  oldRoster:    readonly string[],
+  oldDwellers:    readonly string[],
   excludeHexes: readonly string[],
   opts:         ForkCabalRealmOpts = {},
-): Promise<PlaceFork> {
-  const survivors = forkSurvivors(oldRoster, excludeHexes);
+): Promise<RealmFork> {
+  const survivors = forkSurvivors(oldDwellers, excludeHexes);
   const newUri = opts.newUri ?? forkGenesisUri(oldPlace.genesisUri);
   const substrateUrl = opts.substrateUrl ?? `${oldPlace.substrateUrl}-fork`;
 
   const newPlace = await foundCabalRealm(provider, newUri, substrateUrl);
-  for (const s of survivors) await joinCabalRealm(provider, newPlace, s);   // captors NOT in this set
+  // EXCLUDE BY OMISSION — the survivors open dwellings in the fresh realm and the captors are simply
+  // never opened. No eviction exists to run, because a realm holds no container to be put out of.
+  for (const s of survivors) await openDwelling(provider, newPlace, s);
 
   return { forkedFromDocIdHex: oldPlace.placeDocIdHex, newPlace, survivors, excluded: [...excludeHexes] };
 }

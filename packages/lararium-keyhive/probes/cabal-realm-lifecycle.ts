@@ -26,8 +26,9 @@
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
 import {
-  foundCabalRealmWithCharter, joinCabalRealm, evictMember, cabalRealmRoster, cabalRealmLiveness,
+  foundCabalRealmWithCharter, openDwelling, dwellersHolding, cabalRealmLiveness,
 } from "../src/cabal-realm-ceremony.js";
+import { forkCabalRealm } from "../src/fork-realm-ceremony.js";
 import {
   BagStowage,
   cabalRealmLeaseSlot,
@@ -103,14 +104,14 @@ async function main(): Promise<void> {
   }
   const memberA = await makeMember(0xa1);
   const memberB = await makeMember(0xb2);
-  await joinCabalRealm(founder, place, memberA);
-  await joinCabalRealm(founder, place, memberB);
+  await openDwelling(founder, place, memberA);
+  await openDwelling(founder, place, memberB);
   stage("2 JOIN — two members added through the INERT join gate",
     memberA !== memberB,
     `A=${memberA.slice(0, 14)}… B=${memberB.slice(0, 14)}…`);
 
   // ── STAGE 3 — roster holds BOTH ────────────────────────────────────────────────
-  const roster0 = await cabalRealmRoster(founder, place, [memberA, memberB]);
+  const roster0 = await dwellersHolding(founder, place, [memberA, memberB]);
   stage("3 ROSTER — both members present in the doc-roster",
     roster0.length === 2 && roster0.includes(memberA) && roster0.includes(memberB),
     `roster=${roster0.length}`);
@@ -164,15 +165,21 @@ async function main(): Promise<void> {
     residency.tier(SUBSTRATE_URL) === "wela" && livenessWarm === "alive",
     `tier=${residency.tier(SUBSTRATE_URL)} liveness=${livenessWarm}`);
 
-  // ── STAGE 7 — EVICT one member (convergent revoke) ─────────────────────────────
-  await evictMember(founder, place, memberA);
-  stage("7 EVICT — convergent-removal fired on member A", true, `dropped ${memberA.slice(0, 14)}…`);
+  // ── STAGE 7 — a hostile hand cannot EVICT; the realm holds no container ────────
+  // The party-level eviction was torn out with the container model that licensed it. What stands in its
+  // place: a FORK that excludes BY OMISSION. The survivors open dwellings in a fresh realm and the excluded
+  // are simply never opened — no revocation, no tombstone, nothing to converge or contend.
+  const fork = await forkCabalRealm(founder, place, [memberA, memberB], [memberA], { newUri: `${PLACE_URI}-fork` });
+  stage("7 FORK — the survivors carry the realm on; the excluded are never opened",
+    fork.survivors.length === 1 && fork.survivors.includes(memberB) && !fork.survivors.includes(memberA),
+    `survivors=${fork.survivors.length} carriedB=${fork.survivors.includes(memberB)}`);
 
-  // ── STAGE 8 — roster SHRANK to one ─────────────────────────────────────────────
-  const roster1 = await cabalRealmRoster(founder, place, [memberA, memberB]);
-  stage("8 ROSTER — shrank to one; evicted A gone, B retained",
-    roster1.length === 1 && !roster1.includes(memberA) && roster1.includes(memberB),
-    `roster=${roster1.length} hasA=${roster1.includes(memberA)} hasB=${roster1.includes(memberB)}`);
+  // ── STAGE 8 — the FORK holds B and never held A; the OLD realm is untouched ────
+  const forkHolds = await dwellersHolding(founder, fork.newPlace, [memberA, memberB]);
+  const oldHolds  = await dwellersHolding(founder, place, [memberA, memberB]);
+  stage("8 DWELLINGS — fork holds B alone; the old realm still holds both, unharmed",
+    forkHolds.length === 1 && forkHolds.includes(memberB) && oldHolds.length === 2,
+    `fork=${forkHolds.length} old=${oldHolds.length} — a fork LEAVES a realm rather than emptying it`);
 
   await founder.dispose();
 

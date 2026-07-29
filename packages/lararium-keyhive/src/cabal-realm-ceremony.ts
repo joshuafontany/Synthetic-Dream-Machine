@@ -25,7 +25,7 @@
  *     See keyhive-provider.ts init `false`). This module never touches it (it rides
  *     the provider's init choice).
  *   · membership = the Keyhive DOC-ROSTER — a LIST verified per-member against the
- *     sentinel (cabalRealmRoster below), NOT the closure-query of canon
+ *     sentinel (dwellersHolding below), NOT the closure-query of canon
  *     #RULED-by-the-closure. The closure ("evaluated as a query, never instantiated")
  *     is a later cut.
  *
@@ -145,56 +145,51 @@ export async function foundCabalRealmWithCharter(
 }
 
 /**
- * JOIN a member to a cabal-realm — route the joiner identity through the INERT
- * cabalRealmJoinGate (pass-through; bakes no legitimacy — #the-unswept-corner), then
- * add it as a member of the realm's sentinel Document (the CGKA group-key add / the
- * maintenance edge of canon #verb-not-noun).
+ * OPEN a dwelling — grant one party access to the realm's sentinel, which is the SUBSTRATE half of dwelling.
  *
- * `memberIdentifierHex` must already be a KNOWN Keyhive agent to `provider` (the
- * caller exchanges contact cards first — receiveContactCard); addSentinelMember's
- * getAgent throws otherwise. Fail-loud: an unknown member never silently no-ops.
+ * WHAT THIS DOES AND DOES NOT DO. It opens the door; it deposits no standing. Dwelling accrues by the acts a
+ * party takes once inside (`nohopapa` — the settling that maintaining deposits), and this ceremony holds none
+ * of that: no depth, no rank, no roster entry. A party who opens a dwelling and never acts has exactly the
+ * standing they arrived with, which is the model behaving correctly rather than a gap in this function.
+ *
+ * THE GATE STAYS INERT, deliberately. `cabalRealmJoinGate` bakes no legitimacy — a gate that computed it would
+ * BECOME the captured object (`cabal-realm#the-unswept-corner`). Whatever conversion rite a realm runs before
+ * opening a dwelling stays that realm's own and never reaches this layer (`the-thing-event#unmodelled`).
+ *
+ * NO CLOSING PAIR EXISTS, and that reads as the design. A party-level eviction was torn out: a realm holds no
+ * container to be put out of, so nothing can be evicted FROM one. Dwelling ends when the dwelling stops, and a
+ * hostile hand shadows the RELATION (`edge-kapae`) rather than the party. Where captors must be left behind
+ * wholesale, a fork excludes BY OMISSION — the survivors open dwellings in a fresh realm and the captors are
+ * simply never opened (`fork-realm-ceremony`).
+ *
+ * The caller introduces the party as a known Keyhive agent (receiveContactCard) first — this ceremony assumes
+ * an in-scope agent, mirroring the founding.
  */
-export async function joinCabalRealm(
+export async function openDwelling(
   provider:            KeyhiveProvider,
   place:               CabalRealm,
-  memberIdentifierHex: string,
+  dwellerIdentifierHex: string,
 ): Promise<void> {
-  const gated = cabalRealmJoinGate(memberIdentifierHex);   // INERT shore — no legitimacy baked
+  const gated = cabalRealmJoinGate(dwellerIdentifierHex);   // INERT shore — no legitimacy baked
   await provider.addSentinelMember(gated, place.placeDocIdHex);
 }
 
 /**
- * EVICT a member from a cabal-realm — convergent-removal on the realm's sentinel
- * Document (canon #the-tie-break: "malice rides Keyhive convergent-removal, never
- * the counter"). retain_all_other_members=true revokes ONLY this member; the
- * REVOKED tombstone converges across replicas (eventual, per concap).
+ * CHECK which named candidates hold a dwelling — each verified against the sentinel, those holding access
+ * returned. It answers "does this one hold" and NEVER "who holds", which is the distinction the name carries.
  *
- * `memberIdentifierHex` = the audience to drop (its known-agent Identifier hex).
+ * INVERSION OF CONTROL, and it rides in the signature. The caller supplies the candidates; this reads no
+ * membership list because none exists to read. The provider exposes a per-agent access check alone, so a
+ * dwelling reads as VERIFIED-ON-ASK, never enumerated — no roster to seize, no list to delete, and no count
+ * that could be presented as total. A realm's dwellers are a closure evaluated as a query, never instantiated.
  */
-export async function evictMember(
-  provider:            KeyhiveProvider,
-  place:               CabalRealm,
-  memberIdentifierHex: string,
-): Promise<void> {
-  await provider.revokeSentinelMember(memberIdentifierHex, place.placeDocIdHex);
-}
-
-/**
- * READ the realm's membership = the Keyhive DOC-ROSTER, as a LIST: each candidate
- * verified against the sentinel via accessForDoc, those that hold access returned.
- *
- * NOT the closure-query (canon #RULED-by-the-closure — "evaluated as a query, never
- * instantiated") — that mutual-maintenance-edge closure is a LATER CUT. The provider
- * exposes only a per-agent access check, so membership reads as a verified roster of
- * KNOWN candidates, never an enumerate-all over the graph.
- */
-export async function cabalRealmRoster(
+export async function dwellersHolding(
   provider:          KeyhiveProvider,
   place:             CabalRealm,
-  candidateMemberHexes: readonly string[],
+  candidateDwellerHexes: readonly string[],
 ): Promise<string[]> {
   const held: string[] = [];
-  for (const hex of candidateMemberHexes) {
+  for (const hex of candidateDwellerHexes) {
     const v = await provider.verifySentinelMembership(hex, place.placeDocIdHex);
     if (v.ok) held.push(hex);
   }

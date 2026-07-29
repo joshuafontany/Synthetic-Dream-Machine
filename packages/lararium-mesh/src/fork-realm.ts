@@ -1,5 +1,5 @@
 /**
- * fork-place — FORK-AS-EXIT, the capture-answer's ESCAPE half (pairs the capture-CLOCK's
+ * fork-realm — FORK-AS-EXIT, the capture-answer's ESCAPE half (pairs the capture-CLOCK's
  * sight). When persistence ≠ legitimacy bites — a hostile minority out-maintains an
  * apathetic majority and holds a captured place — the legitimate maintainers carry the
  * place's life into a FRESH place that STRUCTURALLY EXCLUDES the captors (a new
@@ -18,7 +18,7 @@
  * fork that preserves the pre-capture membership inherits the default legitimacy.
  *
  * This floor is pure MODEL (survivor computation · re-point · continuity link); the actual
- * founding of the fresh place rides the Keyhive ceremony (fork-place-ceremony.ts).
+ * founding of the fresh place rides the Keyhive ceremony (fork-realm-ceremony.ts).
  *
  * Platform-blind: rides ./cabal-realm only. NO node: imports.
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
@@ -30,7 +30,7 @@ import type { CabalRealm } from "./cabal-realm.js";
  * A fork of a captured place — a fresh place-identity carrying the legitimate maintainers,
  * the captors structurally absent, linked to the old place for continuity.
  */
-export interface PlaceFork {
+export interface RealmFork {
   /** CONTINUITY — the captured place this forked FROM (legitimacy re-anchors via it). */
   readonly forkedFromDocIdHex: string;
   /** The fork — a fresh place identity the captors cannot follow. */
@@ -45,9 +45,9 @@ export interface PlaceFork {
  * Compute the survivor set a fork carries — the old roster MINUS the captors. The captors
  * are excluded by omission (never added to the fresh place), not by removal.
  */
-export function forkSurvivors(oldRoster: readonly string[], excludeHexes: readonly string[]): string[] {
+export function forkSurvivors(oldDwellers: readonly string[], excludeHexes: readonly string[]): string[] {
   const ex = new Set(excludeHexes);
-  return oldRoster.filter((m) => !ex.has(m));
+  return oldDwellers.filter((m) => !ex.has(m));
 }
 
 /**
@@ -64,6 +64,6 @@ export function forkGenesisUri(oldGenesisUri: string): string {
  * consensus). A pointer at the captured place moves to the fork; any other pointer is left
  * untouched. A captor's pointer stays on the dead shell (it is not in the fork).
  */
-export function repointToFork(currentPlaceDocIdHex: string, fork: PlaceFork): string {
+export function repointToFork(currentPlaceDocIdHex: string, fork: RealmFork): string {
   return currentPlaceDocIdHex === fork.forkedFromDocIdHex ? fork.newPlace.placeDocIdHex : currentPlaceDocIdHex;
 }

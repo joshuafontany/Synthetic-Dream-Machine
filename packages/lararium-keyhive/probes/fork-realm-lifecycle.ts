@@ -14,13 +14,13 @@
  *
  * If a captor can still reach the fork, fork-as-exit does not hold — surface it.
  *
- * Run: pnpm exec tsx packages/lararium-keyhive/probes/fork-place-lifecycle.ts
+ * Run: pnpm exec tsx packages/lararium-keyhive/probes/fork-realm-lifecycle.ts
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
-import { foundCabalRealm, joinCabalRealm, cabalRealmRoster } from "../src/cabal-realm-ceremony.js";
-import { forkCabalRealm } from "../src/fork-place-ceremony.js";
+import { foundCabalRealm, openDwelling, dwellersHolding } from "../src/cabal-realm-ceremony.js";
+import { forkCabalRealm } from "../src/fork-realm-ceremony.js";
 import { repointToFork } from "@lararium/mesh";
 
 const PLACE_URI = "lar:///crossroads.cabal.gathers/captured";
@@ -29,13 +29,13 @@ const SUBSTRATE = "automerge:captured-place-substrate";
 let failures = 0;
 function stage(name: string, ok: boolean, detail = ""): void {
   if (!ok) failures++;
-  console.log(`[fork-place] ${ok ? "PASS" : "FAIL"} — ${name}${detail ? `  (${detail})` : ""}`);
+  console.log(`[fork-realm] ${ok ? "PASS" : "FAIL"} — ${name}${detail ? `  (${detail})` : ""}`);
 }
 
 async function main(): Promise<void> {
-  console.log("[fork-place] =========================================================");
-  console.log("[fork-place] fork-as-exit witness — the captor locked out (REAL keyhive)");
-  console.log("[fork-place] =========================================================");
+  console.log("[fork-realm] =========================================================");
+  console.log("[fork-realm] fork-as-exit witness — the captor locked out (REAL keyhive)");
+  console.log("[fork-realm] =========================================================");
 
   const legit = new KeyhiveProvider();   // a legitimate maintainer — it holds the forking authority
   await legit.init({ seed: new Uint8Array(32).fill(0x11), eventStore: new InMemoryEventStore() });
@@ -52,14 +52,14 @@ async function main(): Promise<void> {
   const survivorA = await member(0xa1);
   const survivorB = await member(0xb2);
   const captor    = await member(0xcc);
-  await joinCabalRealm(legit, place, survivorA);
-  await joinCabalRealm(legit, place, survivorB);
-  await joinCabalRealm(legit, place, captor);
-  const oldRoster = await cabalRealmRoster(legit, place, [survivorA, survivorB, captor]);
-  stage("1 CAPTURED — the place holds two survivors + a captor", oldRoster.length === 3, `roster=${oldRoster.length}`);
+  await openDwelling(legit, place, survivorA);
+  await openDwelling(legit, place, survivorB);
+  await openDwelling(legit, place, captor);
+  const oldDwellers = await dwellersHolding(legit, place, [survivorA, survivorB, captor]);
+  stage("1 CAPTURED — the place holds two survivors + a captor", oldDwellers.length === 3, `roster=${oldDwellers.length}`);
 
   // ── STAGE 2 — FORK excluding the captor ────────────────────────────────────────
-  const fork = await forkCabalRealm(legit, place, oldRoster, [captor]);
+  const fork = await forkCabalRealm(legit, place, oldDwellers, [captor]);
   stage("2 FORK — a fresh place forks, the captor excluded by omission",
     fork.newPlace.placeDocIdHex.length > 0 &&
     fork.newPlace.placeDocIdHex !== place.placeDocIdHex &&
@@ -67,7 +67,7 @@ async function main(): Promise<void> {
     `fork=${fork.newPlace.placeDocIdHex.slice(0, 10)}… survivors=${fork.survivors.length}`);
 
   // ── STAGE 3 — the fork's real roster = the survivors ONLY ───────────────────────
-  const forkRoster = await cabalRealmRoster(legit, fork.newPlace, [survivorA, survivorB, captor]);
+  const forkRoster = await dwellersHolding(legit, fork.newPlace, [survivorA, survivorB, captor]);
   stage("3 ROSTER — the fork's real Keyhive roster carries the survivors, not the captor",
     forkRoster.length === 2 && forkRoster.includes(survivorA) && forkRoster.includes(survivorB) && !forkRoster.includes(captor),
     `fork-roster=${forkRoster.length} hasCaptor=${forkRoster.includes(captor)}`);
@@ -90,14 +90,14 @@ async function main(): Promise<void> {
 
   await legit.dispose();
 
-  console.log("[fork-place] =========================================================");
+  console.log("[fork-realm] =========================================================");
   if (failures === 0) {
-    console.log("[fork-place] ALL STAGES PASS — fork-as-exit holds: the survivors escape,");
-    console.log("[fork-place] the captor keeps only the dead shell. Capture is survivable.");
+    console.log("[fork-realm] ALL STAGES PASS — fork-as-exit holds: the survivors escape,");
+    console.log("[fork-realm] the captor keeps only the dead shell. Capture is survivable.");
   } else {
-    console.log(`[fork-place] ${failures} STAGE(S) FAILED — fork-as-exit does not hold.`);
+    console.log(`[fork-realm] ${failures} STAGE(S) FAILED — fork-as-exit does not hold.`);
     process.exit(1);
   }
 }
 
-main().catch((err) => { console.error("[fork-place] FATAL:", err); process.exit(1); });
+main().catch((err) => { console.error("[fork-realm] FATAL:", err); process.exit(1); });

@@ -49,11 +49,11 @@ export type {
 
 export {
   foundCabalRealm, foundCabalRealmWithCharter,
-  joinCabalRealm, evictMember, cabalRealmRoster, cabalRealmLiveness,
+  openDwelling, dwellersHolding, cabalRealmLiveness,
 } from "./cabal-realm-ceremony.js";
 export type { FoundCabalRealmOpts, FoundedCabalRealm } from "./cabal-realm-ceremony.js";
-export { forkCabalRealm } from "./fork-place-ceremony.js";
-export type { ForkCabalRealmOpts } from "./fork-place-ceremony.js";
+export { forkCabalRealm } from "./fork-realm-ceremony.js";
+export type { ForkCabalRealmOpts } from "./fork-realm-ceremony.js";
 
 /**
  * DeviceAdmitPayload — isomorphic wire type for the same-operator vessel
