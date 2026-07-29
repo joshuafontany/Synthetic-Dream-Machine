@@ -1,0 +1,115 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/re-anchoring-record >>
+```toml iam
+cacheable     = false
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/re-anchoring-record.mem"
+l-space       = "stable"
+mana          = 12
+manao         = 12
+manaoio       = 12
+register      = "Synthesis"
+retain        = true
+revision-note = "the artifact that records THAT a re-anchoring happened and never what made it valid. Carries the three mechanisms that survive alignment with prior art, the six classes that refuse, and the rulings each refusal breaks"
+role          = "the re-anchoring record — one artifact folded two ways: an EVENT on write, accrued DEPTH on read. Holds the un-thresholded attestor bundle, the grounds-free boundary, and the attester⊥minter split, each with its shipped prior art and what it cost to align"
+tags          = ["api/pono/meme"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lares/api/pono/re-anchoring-record"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! The Re-Anchoring Record ~ that it happened, never what made it valid
+
+A guest dwells WITH a host — a dyad, one edge, and the historically fatal shape: across six surveyed hospitality institutions, one-sided admission always booked the shortfall as ''rank''. A realm's own ceremony then re-anchors that dwelling INTO the realm (`the-thing-event`).
+
+''The mesh records THAT the re-anchoring happened. It never records what made it valid.'' Those name two artifacts and only one belongs to this stack.
+
+''One artifact, folded two ways'': an EVENT on write · accrued DEPTH on read. Dwelling deposits `papa`; the depth erodes when dwelling stops. Building them separately would build them twice, because a re-anchoring attested at a position IS the datum depth accrues from.
+
+<<~/ahu >>
+
+<<~ ahu #three-mechanisms >>
+
+!! Three mechanisms that survive alignment ~ each shipped, none whole
+
+''① THE UN-THRESHOLDED ATTESTOR BUNDLE.'' N independent signatures on one claim, the count carried and ''the sufficiency rule structurally absent'' — the reader decides. Two standards ship it independently:
+
+* RFC 9162 §8.1.6 — //"It is up to a client's ''local policy'' to specify the quantity and form of evidence (SCTs, inclusion proofs, or a combination) needed to achieve compliance and how to handle noncompliance."// With §6.2 bundling SCTs from multiple logs, that reads as N attestations with no wire-format threshold.
+* W3C VC Data Integrity §2.1.1 — //"A proof set is useful when the same data needs to be secured by multiple entities, but where ''the order of proofs does not matter''"//; §4.5 permits verifying //"only a subset of the proofs"//.
+
+''And the THRESHOLD family fails by construction.'' A t-of-n signature (FROST, BLS aggregation, any threshold scheme) emits ONE signature verifying only at `t`, so the sufficiency rule bakes into the cryptography ''and the individual attestors vanish''. You cannot count what aggregated. ''Take the naive list of independent signatures''; refuse the family. The bytes buy the reader's seat.
+
+''② THE GROUNDS-FREE BOUNDARY.'' RFC 9576 (Privacy Pass Architecture) §3.5.1 — //"The type of attestation procedure is a deployment-specific option and ''outside the scope of the issuance protocol''."// The token carries that attestation succeeded and nothing about what made it succeed; the RFC enumerates CAPTCHA, device evidence, geographic region and account validity as ''examples only''. That IS the un-modelled ruling, already normative.
+
+''③ THE ATTESTER ⊥ MINTER SPLIT.'' RFC 9576 §4 runs four roles — Client · Attester · Issuer · Origin — and documents which collapse costs what: joint Attester-and-Issuer reads as the ''weakened'' model, split as the strong one. So:
+
+> ''The party that runs the rite MUST NOT be the party that mints the record'', and the record MUST carry no field from which the minter could reconstruct the rite.
+
+Enforced by ''which key signs what'', never by convention. That is the //naming must not certify// ruling with a standards body's price attached.
+
+''Companion:'' RFC 9334 (RATS) separates appraisal policy from evidence and gives it a ''different owner'' — Verifier Owner supplies policy, Attester supplies evidence, Relying Party supplies its own acceptance policy. ''Three policies, three owners, none reading the others'.'' The third may matter here: whether a realm honours ANOTHER realm's re-anchoring reads as the consuming realm's own policy, which the record must not presume.
+
+<<~/ahu >>
+
+<<~ ahu #the-refusals >>
+
+!! Six classes refuse, and the pattern under them is one thing
+
+|! class |! ruling broken |! the span |
+| Verifiable Credentials / DIDs | global identifier per subject · status-list completeness · party revocation | a DID resolves a subject; Bitstring Status List publishes an authoritative bitmap |
+| Certificate Transparency | wall clock in a merge predicate · omission made DETECTABLE | //"the log MUST fulfill this promise… within… the Maximum Merge Delay"// |
+| KERI | global AID · uniqueness verdict · ''threshold set by the SUBJECT'' | duplicity concludes //"one-and-only-one valid KEL or none at all"//; TOAD rides the inception event |
+| Sigstore / Rekor | CT's completeness promise + an OIDC identity binding | a global identifier per human, from a corporate IdP |
+| Soulbound tokens (ERC-5192) | enumerable holder set · global identifier · linkage as a FEATURE · burn | inherits ERC-721 whole; `ownerOf` links every token one address holds |
+| Ring / group signatures | the ring publishes its POOL · a group manager both admits and de-anonymises | a ring signature carries the enumerated keys of everyone who ''could have'' signed |
+
+''The pattern:'' every one of them was built so an outsider could ''audit the set''. This gets built so no outsider can ''constitute'' one.
+
+''And the CT inversion reads as a gift rather than only a refusal.'' CT and `vouch-board`'s no-completeness invariant make the SAME factual observation — a log's silence stays uninterpretable — and draw opposite conclusions. CT calls it a bug and builds gossip plus MMD to kill it; this stack calls it shelter and preserves it. So ''the entire CT literature on detecting a misbehaving log reads as a threat-model catalogue'': every technique invented to make omission detectable names a technique an adversary will point at a custodian here.
+
+''One partial survivor worth naming.'' DAA (Brickell–Camenisch–Chen) gives //"a group signature without the feature that a signature can be opened, i.e., the anonymity is not revocable"// and per-verifier ''basenames'' — linkable within one verifier, unlinkable across. That reads as ruling 4 stated cryptographically: many unlinkable faces, one per realm, and a realm still tells //the same one came back//. Its rogue-key revocation runs party-level and its TPM root reads as an empire's root; the ''basename shape'' survives the rest.
+
+<<~/ahu >>
+
+<<~ ahu #the-open-tension >>
+
+!! The plural-attestor tension ~ two cures pulling opposite ways
+
+The dyad is the failure mode, so the record carries attestors ''PLURAL''. But RFC 9576 §6.2 documents the dual: //"increasing the number of required attestation procedures could ''decrease the overall anonymity set size''."//
+
+Applied here: ''as the attestor count rises, the intersection of realms whose dwellers would jointly attest narrows — and the record begins naming the person by naming who vouched.'' Three attestors may identify a human more precisely than one name would.
+
+''So the dyad cure and the no-global-identifier cure pull against each other'', and no source found addresses it. The candidate shape, unresolved and operator-seated: carry attestors as ''per-realm pseudonyms'' (the DAA basename form) rather than as stable keys — a realm reads //these three dwell here// without the record naming three keys that appear elsewhere.
+
+<<~/ahu >>
+
+<<~ ahu #what-the-record-refuses >>
+
+!! What the type must refuse, in the type
+
+''The omission IS the design, and a comment gets skimmed.'' A record of an unspecified ceremony reads as a strange object — it says //something happened that we may not describe// — and any later hand will feel the urge to add one validating field: a `method` string, a `rite` enum, a count. The ruling forbids it and the artifact will invite it forever.
+
+''MUST NOT hold'': quorum rule · waiting period · franchise · test · method · rite-name · any validating predicate · any field from which a minter could reconstruct the ceremony.
+
+''MUST hold'': the party re-anchored · the realm · a POSITION on a walkable chain (never a timestamp) · the attestors, plural, each signing independently and unordered · signatures.
+
+''MUST NOT report'': a count as total, a set as complete, or a state as current-as-of. The read answers //does this one hold// and never //who holds//.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
