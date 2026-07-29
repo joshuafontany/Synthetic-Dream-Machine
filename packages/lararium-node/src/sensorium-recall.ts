@@ -513,7 +513,7 @@ export interface MultiGraphRecallDeps {
 }
 
 export interface MultiGraphRecallArgs {
-  /** the recall query (keywords / a question) — embedded by the content sidecar. */
+  /** the recall query (keywords / a question) — embedded by the content holder. */
   readonly query: string;
   /** content-graph wing scope (mempalace wing). */
   readonly wing?: string;

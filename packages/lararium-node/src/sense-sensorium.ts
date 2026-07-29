@@ -45,24 +45,24 @@ export interface SensoriumLifecycle {
   readonly ephemeral: boolean;
   /** the owning process pid (ephemeral only) — `reapOrphans` spares an ephemeral whose pid still lives. */
   readonly pid?: number;
-  /** drawers filed by the ingest stub (0 when the sidecar was unavailable). */
+  /** drawers filed by the ingest stub (0 when the holder was unavailable). */
   readonly drawers?: number;
   /** structure-plane vectors filed by the parse-router (S2): one per file the router could parse
    *  (code · markdown · wikitext · json · toml · memetic-wikitext · prose). 0 ⇒ structure-skipped
    *  (no router / no parser for the corpus's kinds) — the content plane still stands. */
   readonly structures?: number;
-  /** bands-plane adaptive lar_ffz cells the multi-scale FFZ sidecar filed (S1): one per content
+  /** bands-plane adaptive lar_ffz cells the multi-scale FFZ holder filed (S1): one per content
    *  chunk, a five-band aperture address (Theme.Arc.Measure.Beat.Pulse) with a reproduced/fragile
    *  repro_grade from the resampling gate (a hardened-math witness — the wiki, not the sensorium,
-   *  runs the data→meme promotion). 0 ⇒ bands-skipped (no sidecar / R / too few vectors) —
+   *  runs the data→meme promotion). 0 ⇒ bands-skipped (no holder / R / too few vectors) —
    *  the content + structure planes still stand. */
   readonly bands?: number;
-  /** form-plane constructions the induction sidecar surfaced (S3): the corpus's OWN grammar,
+  /** form-plane constructions the induction holder surfaced (S3): the corpus's OWN grammar,
    *  induced BLIND over the accumulated structures (TreeMiner + PrefixSpan/BIDE + ΔP, MDL-stopped)
-   *  and keyed by structural hash. 0 ⇒ form-skipped (no sidecar / no structures / nothing that pays
+   *  and keyed by structural hash. 0 ⇒ form-skipped (no holder / no structures / nothing that pays
    *  its description-length) — the content + structure + bands planes still stand. */
   readonly forms?: number;
-  /** an ingest note (e.g. "ingest-skipped: no python sidecar"). */
+  /** an ingest note (e.g. "ingest-skipped: no corpus capture pipe"). */
   readonly note?: string;
 }
 
@@ -182,7 +182,7 @@ export function openSensorium(opts: OpenSensoriumOptions): OpenSensoriumResult {
   const id = newSensoriumId();
   const dir = scratchSensoriumInstanceDir(id);
   mkdirSync(dir, { recursive: true });
-  // Python runs from the sidecar root; an absolute source pointer keeps the caller's cwd out of capture.
+  // Python runs from the mempalace submodule root; an absolute source pointer keeps the caller's cwd out of capture.
   const sourcePath = resolve(opts.sourcePath);
   const name = opts.name ?? (opts.sourcePath.replace(/[/\\]+$/, "").split(/[/\\]/).pop() || id);
   const ephemeral = opts.ephemeral ?? false;
@@ -316,9 +316,9 @@ export interface RunSensoriumResult {
   readonly drawers: number;
   /** structure-plane vectors the parse-router filed (S2); 0 ⇒ structure-skipped. */
   readonly structures: number;
-  /** bands-plane adaptive lar_ffz cells the multi-scale FFZ sidecar filed (S1); 0 ⇒ bands-skipped. */
+  /** bands-plane adaptive lar_ffz cells the multi-scale FFZ holder filed (S1); 0 ⇒ bands-skipped. */
   readonly bands: number;
-  /** form-plane constructions the induction sidecar surfaced (S3); 0 ⇒ form-skipped. */
+  /** form-plane constructions the induction holder surfaced (S3); 0 ⇒ form-skipped. */
   readonly forms: number;
   readonly note?: string;
   readonly analysis?: QuerySensoriumResult;

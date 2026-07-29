@@ -5,7 +5,7 @@
  * The DISCRETE plane of the two-planes form-capture: P0 pins the constructicon
  * basis (the grammar-SEED axes); P1 emits the move-skeleton (the linear marker
  * stream + the placeholdered graph). Both pure — they meet the store at a later
- * phase. The form-vector encoder (P2, the Python sidecar) plugs in downstream of
+ * phase. The form-vector encoder (P2, the Python holder) plugs in downstream of
  * {@link emitMoveSkeleton}, indexing its tokens against {@link buildConstructiconBasis}.
  */
 

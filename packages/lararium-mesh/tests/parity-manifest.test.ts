@@ -188,7 +188,7 @@ const MANIFEST: readonly ParityEntry[] = [
   {
     ts: "change-point.ts", py: null, status: "owed-py-twin",
     fixtures: [],
-    note: "the mean+variance regime-shift detector; the py side detects via BOCPD (bands_sidecar.py) — a different estimator, so a direct twin stays owed (RUN-ARC debt pool).",
+    note: "the mean+variance regime-shift detector; the py side detects via BOCPD (bands.py) — a different estimator, so a direct twin stays owed (RUN-ARC debt pool).",
   },
   {
     ts: "gaussian-cmi.ts", py: null, status: "owed-py-twin",

@@ -3,11 +3,11 @@
  * locked keel: Gaussian-CMI / conditional-Granger). For jointly-Gaussian variables the conditional
  * mutual information has a closed form in covariance log-determinants, and Transfer Entropy equals
  * a conditional MI (Barnett-Barrett-Seth 2009: TE = GC/2 for Gaussians). So this needs NO kNN, NO
- * sidecar, NO discretization — just covariances — and is reliable at N ≳ 10-20 × d_joint, INSIDE a
+ * holder, NO discretization — just covariances — and is reliable at N ≳ 10-20 × d_joint, INSIDE a
  * short mesh window. The signed-innovation reduction feeding it already linearizes the residual,
  * so the Gaussian read carries the second-order structure natively.
  *
- * Escalation to KSG-multivariate (nonlinear coupling) rides the IDTxl sidecar behind a linearity
+ * Escalation to KSG-multivariate (nonlinear coupling) rides the IDTxl holder behind a linearity
  * gate — NOT here. This file is the dependency-light default the whole mesh couples through.
  *
  * Vectors are CONTINUOUS real-valued (the wire contract) — never discretized (that would be the

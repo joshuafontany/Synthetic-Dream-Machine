@@ -397,7 +397,7 @@ export function writeManifest(sensoriumDir: string, m: SensoriumManifest): void 
 /**
  * palace-holder — the SHARED palace-instance transport cap (the @daemon's TS side).
  *
- * The nameless palace-instance model, one level up from the python sidecar-caps collapse
+ * The nameless palace-instance model, one level up from the python holder-caps collapse
  * (b18235f6): a palace client = its #has-stack of caps composed at a root, NOT a bespoke
  * holder per store with copy-pasted serve machinery. This module IS the one cap every
  * local palace-instance #has — the NDJSON line-RPC transport over a persistent python
@@ -411,7 +411,7 @@ export function writeManifest(sensoriumDir: string, m: SensoriumManifest): void 
  * Each store (structurepalace · formpalace) then #has only its own OP SURFACE — a thin typed
  * facade of `holder.send(op, fields)` calls — and nothing of the transport machinery.
  *
- * The honest grain (NOT a god base-class — the sidecar 2-shapes lesson carried up): the
+ * The honest grain (NOT a god base-class — the holder 2-shapes lesson carried up): the
  * two LOCAL stores split by op-surface, but BOTH ride the identical transport, so the
  * transport collapses to ONE file while the op-surfaces stay distinct. A third shape, the
  * MESHPALACE, would compose this SAME transport plus a SOURCE-FEED cap (see {@link PalaceFeedCap})
@@ -659,7 +659,7 @@ export class PalaceHolderRegistry {
 
 /**
  * A COMPOSED HOLDER — the send/close handle onto one held line-RPC subprocess. The shape every
- * cap that rides a python holder returns (palace store · encoder · a future consume-sidecar).
+ * cap that rides a python holder returns (palace store · encoder · a future consume-holder).
  */
 export interface ComposedHolder {
   /** issue one line-RPC to the holder (the op-surface's single verb). */
@@ -902,7 +902,7 @@ export function _liveContentHolderCount(): number {
  * `encode_store`/`query`/`filter`/`get` over the python form-encoder holder. DISTINCT from
  * structurepalace (per-turn form-vectors keyed by verbatim_sha vs per-structure AST drawers keyed by
  * structural hash, no AST payload stored here) but riding the IDENTICAL transport cap — two
- * op-surface shapes, one transport, no god base-class (the sidecar 2-shapes lesson, one up).
+ * op-surface shapes, one transport, no god base-class (the holder 2-shapes lesson, one up).
  *
  * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
  */
@@ -1012,7 +1012,7 @@ export interface FormPalaceOptions {
  * `close()` releases this reference and kills the process when the last reference closes.
  */
 export function makeFormPalace(dir: string, opts: FormPalaceOptions = {}): FormPalace {
-  // Compose the SHARED transport cap; layer only the form op-surface below (the sidecar-2-shapes ward).
+  // Compose the SHARED transport cap; layer only the form op-surface below (the holder-2-shapes ward).
   const p = composePalace(LABEL_FORM, dir, opts.spawn ?? defaultFormHolderSpawn, opts.timeoutMs ?? 60_000);
 
   return {

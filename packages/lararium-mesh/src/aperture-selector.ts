@@ -42,8 +42,8 @@
  *
  * GAUSSIAN ONLY — the readout is exact for a linear-Gaussian band model and an honest APPROXIMATION
  * elsewhere. A non-Gaussian / strongly-nonlinear band is the marked HORIZON (escalation to a
- * KSG/kernel estimator rides the sidecar, not here). The fit is a THIN cap: it fits `(A_k, Σ_k)` by
- * one multivariate least-squares pass and reads the spectra — no iteration, no sidecar, no deps.
+ * KSG/kernel estimator rides the holder, not here). The fit is a THIN cap: it fits `(A_k, Σ_k)` by
+ * one multivariate least-squares pass and reads the spectra — no iteration, no holder, no deps.
  *
  * Platform-blind, pure. Meme: lar:///ha.ka.ba/lares/api/pono/scale-architecture (the EI-selection
  * north-star, here BUILT) · lar:///ha.ka.ba/lares/api/pono/sensorium-machina#the-py-r-web

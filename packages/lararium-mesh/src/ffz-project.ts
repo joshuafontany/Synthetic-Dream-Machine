@@ -808,8 +808,8 @@ export function quorumStep(
 //
 // SCOPE FLAG: the cluster-COMPUTE (graph community-detection — CPM-Leiden via
 // python-igraph, label-propagation delta for the incremental case) is a DEFERRED
-// follow-up: python-igraph/leidenalg are NOT installed in the sidecar venv (only
-// networkx + numpy), so a fresh cluster sidecar is out of scope for this pass.
+// follow-up: python-igraph/leidenalg are NOT installed in the holder venv (only
+// networkx + numpy), so a fresh cluster holder is out of scope for this pass.
 // Built here: the ARC-CLOSE trigger predicate + the MDL/modularity ACCEPT guard
 // (pure), so the compute drops straight into a standing scaffold when added. The
 // Theme cell is a community LABEL local to THIS store — NEVER cross-vessel.

@@ -1,10 +1,10 @@
 /**
  * compute-cap — the OPTIONAL GPU compute cap for the multipalace, resolved-never-ambient.
  *
- * The content embedder (mempalace's all-MiniLM / embeddinggemma, ONNX) and the torch sidecars
+ * The content embedder (mempalace's all-MiniLM / embeddinggemma, ONNX) and the torch holders
  * run FAR faster on an NVIDIA card — but a card is a CAP the box #has, never a dependency. This
  * box (an RTX 2070 Super) composes it; the QA-lab lararium (a separate, card-less box) does not.
- * The SAME nameless sidecars stand at both scales; only the resolved env differs.
+ * The SAME nameless holders stand at both scales; only the resolved env differs.
  *
  * TWO env facets compose the cap:
  *   1. `LD_LIBRARY_PATH` — onnxruntime-gpu HARD-fails to import without the CUDA runtime libs
@@ -55,7 +55,7 @@ export function detectCudaLibDirs(python: string | null): string[] {
 }
 
 /**
- * The env additions that compose the GPU compute cap for a python sidecar spawn. Merge onto the
+ * The env additions that compose the GPU compute cap for a python holder spawn. Merge onto the
  * base spawn env. Empty of a device hint only if the operator already pinned one; empty of
  * `LD_LIBRARY_PATH` when no CUDA libs are present (the QA box).
  */

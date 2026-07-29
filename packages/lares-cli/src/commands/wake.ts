@@ -56,7 +56,7 @@ async function recallIntoWake(): Promise<WakeRecall> {
   try { did = await vesselDid(); }
   catch { return { ok: false, wing, note: "no operator identity" }; }
   try {
-    // One cold sidecar start can take ~8s; after that the @daemon pool is warm and
+    // One cold holder start can take ~8s; after that the @daemon pool is warm and
     // recall is sub-second. Give the first wake room; warm wakes return instantly.
     const r = await runVerb("recall", { wing, limit: 5 }, did, { timeoutMs: 9000 });
     if (r.status !== "done") return { ok: false, wing, note: r.errorMessage ?? "recall error" };
@@ -104,7 +104,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   // 1b. The AI-SURFACE SEATS — every harness reaches the memory sensorium through the same lares seat.
   //     `--init` stands the WHOLE house, so it tends EVERY surface: each wire converges on the RESOLVED
   //     spawn (aligned passes untouched · drifted re-aims · absent wires), which keeps running them on
-  //     every init both safe AND load-bearing — a seat aimed at a moved sidecar script otherwise stays
+  //     every init both safe AND load-bearing — a seat aimed at a moved holder script otherwise stays
   //     shut while its wire reports success, and only re-aiming heals it. A single surface flag still
   //     targets that one alone; every wire stays graceful when its tool sits un-installed here.
   const initAll = args.flags["init"] === true;

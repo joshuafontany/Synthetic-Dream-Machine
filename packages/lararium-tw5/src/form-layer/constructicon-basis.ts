@@ -22,7 +22,7 @@
  * noosphere-boot is their source-of-truth, not a .tid. The sigil + family axes
  * derive from a `GrammarRules` the caller supplies (the @daemon loads it from
  * its TW5 VM via grammar-cache; tests construct it). The basis stays the
- * grammar-SEED side of the two-planes — no store, no vector, no sidecar.
+ * grammar-SEED side of the two-planes — no store, no vector, no holder.
  *
  * Pure + isomorphic: no fs/path/DOM imports; runs in node, browser, the @daemon
  * VM alike.

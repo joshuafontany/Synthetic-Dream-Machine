@@ -48,7 +48,7 @@
  *
  * PORT-STATUS — this organ stands the CONCEPT-WITNESS + the TS↔py parity oracle; the production H¹
  * compute ports to py (the RUN arc). py counterparts EXIST: `predictive_coding.py` (the F primitive) +
- * `bands_sidecar.py`. OWED in py: THIS H¹ gate · the EFE keystone · the bench strands.
+ * `bands.py`. OWED in py: THIS H¹ gate · the EFE keystone · the bench strands.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested
  */

@@ -1,20 +1,20 @@
 /**
  * sense-stream — the node wiring for sensing stream frames through a rooted sensorium.
- * ANY {@link StreamAdapter}'s frames, backed by the real corpus sidecars.
+ * ANY {@link StreamAdapter}'s frames, backed by the real corpus holders.
  *
  * The pure abstraction (the {@link StreamAdapter} / {@link StreamFrame} contract + the
  * {@link composePalace} driver) lives VM-free in @lararium/mesh. THIS module supplies the impure
- * plane bank — the Python sidecars behind the {@link PlaneSink} — and the `composeStreamSensorium` entry
+ * plane bank — the Python holders behind the {@link PlaneSink} — and the `composeStreamSensorium` entry
  * that generalizes the ephemeral sensorium lifecycle to consume frames from any adapter.
  *
  * Two paths, by the corpus.md role line ("compose_palace(caps) instantiated EPHEMERALLY over any
  * corpus"):
  *   · BATCH over a PATH source ⇒ the existing sensorium run IS the plane application. A text-batch
  *     adapter delegates content · structure · bands · form to {@link defaultSensoriumIngest} (the
- *     path-based sidecars are per-file, not per-frame) — "batch = the existing sensorium run". The frames
+ *     path-based holders are per-file, not per-frame) — "batch = the existing sensorium run". The frames
  *     are the normalized VIEW that proves the abstraction (verified in @lararium/mesh).
  *   · DIRECT-SIGNAL / LIVE ⇒ the per-plane frame driver over {@link defaultStreamPlaneSink}: the
- *     natively-numeric door — a stream's `signal` frames feed `bands_sidecar analyze --signal` +
+ *     natively-numeric door — a stream's `signal` frames feed `bands analyze --signal` +
  *     `couple --signal` (the NDJSON contract) DIRECTLY, no corpus, no chroma. This is the shore the
  *     NEXT adapter (a non-text on-box stream) builds against; the content/structure planes on the live
  *     path stay a documented shore (a numeric stream carries neither).
@@ -41,11 +41,11 @@ function writeSignalNdjson(frames: readonly StreamFrame[], sensoriumRoot: string
 }
 
 /**
- * Run one `bands_sidecar` verb over a frame-signal NDJSON (the direct numeric door). Returns the last
- * JSON summary object, or null when the sidecar is absent / faults (graceful — the plane skips). The
+ * Run one `bands` verb over a frame-signal NDJSON (the direct numeric door). Returns the last
+ * JSON summary object, or null when the holder is absent / faults (graceful — the plane skips). The
  * NDJSON temp is always swept.
  */
-function runSignalSidecar(
+function runSignalHolder(
   verb: "analyze" | "couple",
   frames: readonly StreamFrame[],
   sensoriumRoot: string,
@@ -62,7 +62,7 @@ function runSignalSidecar(
     const last = lines[lines.length - 1];
     return last ? (JSON.parse(last) as Record<string, unknown>) : null;
   } catch {
-    return null; // graceful: the numeric door skips when the sidecar / R is absent or faults
+    return null; // graceful: the numeric door skips when the holder / R is absent or faults
   } finally {
     try { rmSync(ndjson, { force: true }); } catch { /* best effort */ }
   }
@@ -82,11 +82,11 @@ export function defaultStreamPlaneSink(sensoriumRoot: string): PlaneSink {
   return {
     bands(frames, { derivedFromContent }) {
       if (derivedFromContent) return 0; // the derived door is the path-based sensorium run, not this sink
-      const summary = runSignalSidecar("analyze", frames, sensoriumRoot);
+      const summary = runSignalHolder("analyze", frames, sensoriumRoot);
       return summary ? Number(summary["cells"] ?? 0) : 0;
     },
     coupling(frames) {
-      const summary = runSignalSidecar("couple", frames, sensoriumRoot);
+      const summary = runSignalHolder("couple", frames, sensoriumRoot);
       return summary ? Number(summary["edges"] ?? 0) : 0;
     },
   };
@@ -150,7 +150,7 @@ export function composeStreamSensorium<Raw>(opts: ComposeStreamOptions<Raw>): Pa
 /**
  * Attach the sensorium's PREDICTIVE read to a numeric-door composition — the free-energy
  * objective F = Σ π·ε² + complexity and the critical-slowing-down forecast — computed NATIVELY
- * in-process via the {@link freeEnergy} / {@link forecastEws} core (no extra sidecar spawn, the
+ * in-process via the {@link freeEnergy} / {@link forecastEws} core (no extra holder spawn, the
  * dependency-light hot path). Graceful: a stream with no direct `signal` (text) returns the
  * composition unchanged (the predictive read lives on the numeric door; text's derived-bands
  * read rides the sensorium run). sensorium-machina.md #the-py-r-web.

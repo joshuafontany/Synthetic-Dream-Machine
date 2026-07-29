@@ -86,7 +86,7 @@ export function coupleMesh(children: readonly ChildSignalMV[], opts: CoupleMeshO
 // every stratum's holes carry the SAME constant (0), so independent strata read as synchronized and
 // the gate passes a phantom edge. This is the un-densified footgun the gappy-stress test trips.
 //
-// Tier-1 densify reuses the in-tree MODWT-MRA move (bands_sidecar.py modwt_mra — the sparse per-chunk
+// Tier-1 densify reuses the in-tree MODWT-MRA move (bands.py modwt_mra — the sparse per-chunk
 // signal → a whole-axis continuous-coefficient series on ONE grid): a presence-weighted à-trous
 // (undecimated / stationary-wavelet, Holschneider) approximation fills each hole from the stratum's
 // OWN nearby observed samples, NEVER a shared constant. So each densified stratum becomes a continuous

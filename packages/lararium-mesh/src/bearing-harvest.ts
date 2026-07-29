@@ -7,7 +7,7 @@
  * `lar:` URIs naming the turn's bearing. This module scans a verbatim message
  * for those sigils and returns a {@link Bearing}.
  *
- * Pure + isomorphic: text in, Bearing out — no I/O, no store, no sidecar. The
+ * Pure + isomorphic: text in, Bearing out — no I/O, no store, no holder. The
  * read leg (mempalace sidecar) and the write leg (composite.put / LOAD) live
  * elsewhere; this is the shore-crossing parse, and it runs in node or
  * browser alike.

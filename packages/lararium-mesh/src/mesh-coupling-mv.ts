@@ -6,7 +6,7 @@
  * common-driver phantom for any N, not just three).
  *
  * This is the default path; the discrete-symbol `coupleMeshChildren` stays as the dependency-light
- * hot-path read, and KSG-multivariate (nonlinear escalation) rides the IDTxl sidecar behind a
+ * hot-path read, and KSG-multivariate (nonlinear escalation) rides the IDTxl holder behind a
  * linearity gate — neither is here. The wire carries continuous reals; discretization never touches
  * this path (it would break the Gaussian covariance the same way it breaks kNN geometry).
  *

@@ -704,7 +704,7 @@ export function ffzAlignTicks(formal: readonly FfzCell[], informal: readonly Ffz
  * Read the CORPUS-scale KI: the formal↔informal directed coupling of the two peer sub-sensoria, aligned
  * on a SHARED FFZ address (never ordinal index — two unrelated texts share no ordinal axis; only the
  * rhythmic clock makes them comparable). The SAME runtime as the stratum scale, one grain up — the
- * fractal made literal. The FfzCell streams come from the bands sidecar / worldline clock upstream.
+ * fractal made literal. The FfzCell streams come from the bands holder / worldline clock upstream.
  */
 export function readKiCorpus(
   formal: readonly FfzCell[], informal: readonly FfzCell[], opts: CoupleAlignedOptions & { band?: number } = {},

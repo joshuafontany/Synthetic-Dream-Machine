@@ -1,6 +1,6 @@
 /**
  * linearity-gate — the Tier-0 cheap screen that decides whether the Gaussian coupling default is
- * leaving nonlinear signal on the table, and the heavy KSG-multivariate sidecar should be paid for.
+ * leaving nonlinear signal on the table, and the heavy KSG-multivariate holder should be paid for.
  * Two near-free signals from what the Gaussian fit already computes:
  *
  *   · the dCor − |Pearson| GAP — distance correlation sees linear AND nonlinear dependence, Pearson

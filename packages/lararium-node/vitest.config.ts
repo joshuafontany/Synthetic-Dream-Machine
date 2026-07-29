@@ -55,9 +55,9 @@ export default defineConfig({
   resolve: { alias },
   test: {
     // The host oversubscribes under default per-core parallelism: dozens of these files each spawn their OWN
-    // heavy child — a WebSocketServer, a nested worker_threads TW5 island, or a live Python+chroma sidecar — ON
+    // heavy child — a WebSocketServer, a nested worker_threads TW5 island, or a live Python+chroma holder — ON
     // TOP of vitest's worker-per-core pool, so peak concurrency runs far past the core count and starves. A
-    // starved find() races to "unavailable", a nested import reds ERR_MODULE_NOT_FOUND, a python sidecar times
+    // starved find() races to "unavailable", a nested import reds ERR_MODULE_NOT_FOUND, a python holder times
     // out — a DIFFERENT set each run. Capping the pool holds total concurrency (workers + their children) near
     // the core budget; paired with the serial `heavy` project below, no resource storm ever stands.
     maxWorkers: 4,

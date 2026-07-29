@@ -21,7 +21,7 @@
  * and keeps MULTIPLE in-turn signals as an offset-anchored set, never collapsed.
  *
  * Pure + isomorphic: text in, a {@link TurnHarvest} out — no I/O, no store, no
- * sidecar, no LLM in the parse path. The expensive salvage tier (an LLM reading
+ * holder, no LLM in the parse path. The expensive salvage tier (an LLM reading
  * the residue) lives downstream, behind a causal-island boundary, so harvested
  * signal enters the stack as deterministic facts.
  */

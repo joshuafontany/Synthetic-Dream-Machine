@@ -83,7 +83,7 @@ export function captureAnnotate(
     //    Emit the move-skeleton (P1) + the constructicon basis (P0) and ride them along as
     //    `lar_skeleton` + `lar_basis`. The node-side FORM split (makeFormSplitFlush) consumes them
     //    into the form-vector store and STRIPS them — they never reach the content drawer. The
-    //    Python encode+store can't run in-VM, so the heavy lift crosses to the node sidecar; only
+    //    Python encode+store can't run in-VM, so the heavy lift crosses to the node holder; only
     //    the cheap, grammar-bound emission lives here. Best-effort: never sinks the harvest/AST.
     const skeleton = emitMoveSkeleton(harvest, result.nodes);
     const skJson = JSON.stringify(skeleton);

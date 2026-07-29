@@ -5,7 +5,7 @@ turns a detector's fires, scored against human ground-truth labels, into a
 Signal-Detection `(d′, criterion)` estimate, a bootstrap confidence interval, the
 **KUE-1 verdict**, and the rater-reliability that backs the labels.
 
-Pure **stdlib + numpy** — no scipy (absent in the sidecar venv; `z`/`Φ` come from
+Pure **stdlib + numpy** — no scipy (absent in the holder venv; `z`/`Φ` come from
 `statistics.NormalDist`), no palace, no detector, no sampler, no human in the
 loop. Every result is deterministic and unit-testable.
 

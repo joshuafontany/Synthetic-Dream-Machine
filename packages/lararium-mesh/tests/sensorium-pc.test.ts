@@ -1,7 +1,7 @@
 /**
  * sensorium-pc — the native predictive-coding core: predict→error→precision→update, the
  * free-energy objective F = Σ π·ε² + complexity, and the critical-slowing-down forecast leg.
- * The pure TS twin of predictive_coding.py + bands_sidecar.forecast_ews (sensorium-machina.md
+ * The pure TS twin of predictive_coding.py + bands.forecast_ews (sensorium-machina.md
  * #the-py-r-web), verified dependency-free.
  */
 import { describe, test, expect } from "vitest";

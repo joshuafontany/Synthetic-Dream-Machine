@@ -16,7 +16,7 @@
  *     skips turns already harvested; re-runs and resumes are no-ops. The harvest
  *     index is append-only NDJSON keyed by turn uuid.
  *
- * No sidecar, no LLM in the parse path — pure local read + the isomorphic parser.
+ * No holder, no LLM in the parse path — pure local read + the isomorphic parser.
  * The mempalace DRAWER leg (verbatim semantic search) stays the convos mine; this
  * is the BEARING leg (the navigational structure the stream already authored).
  *

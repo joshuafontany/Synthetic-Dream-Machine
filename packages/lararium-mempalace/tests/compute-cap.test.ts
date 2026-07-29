@@ -1,6 +1,6 @@
 /**
  * compute-cap — the OPTIONAL GPU cap composes when present, degrades to a bare device hint when
- * absent. The SAME nameless sidecars stand at both scales (this card box + the QA-lab box).
+ * absent. The SAME nameless holders stand at both scales (this card box + the QA-lab box).
  */
 
 import { describe, test, expect, beforeEach, afterEach } from "vitest";
@@ -49,7 +49,7 @@ describe("resolveComputeCapEnv — the cap composes or degrades", () => {
 });
 
 /**
- * Restart-safety (P0) — the DURABLE @daemon sidecars (loci_io · structurepalace_io · form_encoder ·
+ * Restart-safety (P0) — the DURABLE @daemon holders (loci_io · structurepalace_io · form_encoder ·
  * kg_io · the read recall MCP client) each open a chroma collection that builds the default
  * onnxruntime embedder. The premise CHANGED: the GPU `ld.so.conf` + `onnxruntime-gpu` now put the CUDA
  * runtime on the SYSTEM linker path, so a BARE `import onnxruntime` — the exact path a cold daemon

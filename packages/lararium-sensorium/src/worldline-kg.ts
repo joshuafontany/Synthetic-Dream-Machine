@@ -74,7 +74,7 @@ function resolve(opts: WorldlineKgOptions): Resolved {
       // sets sys.path[0] to the SCRIPT dir, so PYTHONPATH=submoduleRoot makes `import mempalace` resolve.
       const submoduleRoot = join(repoRoot, "mempalace");
       // + the GPU compute cap (LD_LIBRARY_PATH + device hint): kg_io itself opens only the KG sqlite,
-      // but it shares the mempalace interpreter with the chroma sidecars — carry the cap uniformly so a
+      // but it shares the mempalace interpreter with the chroma holders — carry the cap uniformly so a
       // cold @daemon restart never trips onnxruntime-gpu's `libcudart` import. Degrades to CPU when absent.
       const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveHolderCapEnv(bin) };
       return execFileSync(bin, [...args], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 28, encoding: "utf8" });

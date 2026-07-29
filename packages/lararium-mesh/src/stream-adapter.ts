@@ -83,11 +83,11 @@ export interface StreamAdapter<Raw = unknown> {
   ingest(raw: Raw): StreamFrame[];
 }
 
-// ── The plane bank — the injected impurity boundary (the sidecars live behind it) ────────────────
+// ── The plane bank — the injected impurity boundary (the holders live behind it) ────────────────
 
 /**
  * The PLANE BANK — the injected appliers the CORE routes frames to. This is the impurity boundary
- * (the caller injects `hash` the same way): the node/CLI caller wires the real python sidecars (content
+ * (the caller injects `hash` the same way): the node/CLI caller wires the real python holders (content
  * embed · structurepalace encoder · bands MODWT+ecp · RTransferEntropy coupling); a test wires a fake.
  * Each leg is OPTIONAL — an absent leg means that plane is skipped (graceful, like the corpus caps).
  * Each returns the count it filed (drawers · structure vectors · bands cells · coupling edges).
@@ -201,7 +201,7 @@ function signalWidth(frames: readonly StreamFrame[]): number {
  *     content frames (text door — bands reads the content embeddings the content plane just filed)
  *   · coupling: only a MULTIVARIATE signal (≥2 columns) affords a directional lead-lag matrix
  *
- * Pure + synchronous (the plane sidecars run `execFileSync` behind the sink, matching corpus sensing);
+ * Pure + synchronous (the plane holders run `execFileSync` behind the sink, matching corpus sensing);
  * an absent sink leg skips its plane gracefully.
  */
 export function composePalace<Raw>(
