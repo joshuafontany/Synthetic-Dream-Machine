@@ -1,5 +1,5 @@
 /**
- * spawn-resolve — resolve HOW to spawn the read-only mempalace sidecar from a
+ * spawn-resolve — resolve HOW to spawn the read-only mempalace MCP holder from a
  * daemon host (the @daemon seat).
  *
  * Option D, the read shore: the @daemon host reaches mempalace THROUGH the
@@ -86,15 +86,15 @@ export interface MempalaceSpawn {
   readonly submoduleRoot: string;
   /** The resolved venv-aware interpreter, or null when none holds mempalace. */
   readonly python: string | null;
-  /** Whether the sidecar entry file exists under submoduleRoot. */
-  readonly sidecarPresent: boolean;
+  /** Whether the holder entry file exists under submoduleRoot. */
+  readonly holderPresent: boolean;
 }
 
-/** Resolve everything MempalaceClient needs to spawn the read-only sidecar. */
+/** Resolve everything MempalaceClient needs to spawn the read-only holder. */
 export function resolveMempalaceSpawn(): MempalaceSpawn {
   const submoduleRoot = join(repoRoot, "mempalace");
-  const sidecarPresent = existsSync(join(submoduleRoot, "mempalace", "mcp_server.py"));
-  return { submoduleRoot, python: resolveMempalacePython(), sidecarPresent };
+  const holderPresent = existsSync(join(submoduleRoot, "mempalace", "mcp_server.py"));
+  return { submoduleRoot, python: resolveMempalacePython(), holderPresent };
 }
 
 /**

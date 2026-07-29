@@ -2,15 +2,15 @@ import { describe, it, expect, afterEach } from "vitest";
 import { fileURLToPath } from "node:url";
 import { MempalaceClient } from "../src/mempalace-client.js";
 
-const FAKE_SIDECAR = fileURLToPath(new URL("./fixtures/fake-sidecar.mjs", import.meta.url));
+const FAKE_HOLDER = fileURLToPath(new URL("./fixtures/fake-holder.mjs", import.meta.url));
 
 function newClient(): MempalaceClient {
-  // Drive the real client against a node fake sidecar — exercises spawn,
+  // Drive the real client against a node fake holder — exercises spawn,
   // NDJSON framing, handshake, id correlation, and the double-parse.
-  return new MempalaceClient({ submoduleRoot: process.cwd(), command: "node", args: [FAKE_SIDECAR] });
+  return new MempalaceClient({ submoduleRoot: process.cwd(), command: "node", args: [FAKE_HOLDER] });
 }
 
-describe("mempalace-client (read leg, against a fake NDJSON sidecar)", () => {
+describe("mempalace-client (read leg, against a fake NDJSON holder)", () => {
   let client: MempalaceClient;
   afterEach(async () => {
     await client?.stop();

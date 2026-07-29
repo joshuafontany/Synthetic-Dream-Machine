@@ -4,7 +4,7 @@ The Lares boot **entry point**, as a Claude Code plugin.
 
 On every `SessionStart`, the hook runs `lares wake`, which:
 
-- **checks** (and, with `lares wake --install`, installs) the mempalace integration — submodule, the `@lararium/mempalace` package, the python sidecar deps, the recall plugin;
+- **checks** (and, with `lares wake --install`, installs) the mempalace integration — submodule, the `@lararium/mempalace` package, the python holder deps, the recall plugin;
 - **ensures the live Lararium node is up** — attach if healthy, start detached if down (idempotent; never a restart);
 - **emits a live-delta hydration frame** into the session.
 

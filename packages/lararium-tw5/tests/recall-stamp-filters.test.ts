@@ -3,7 +3,7 @@
  * already stores (voice · band · agent · surface · drift), composed with the
  * semantic query (overfetch + post-filter, honest counts) and the list (exact
  * lar_* metadata). Driven through the REAL recallVerbCap over a fake
- * RecallClient — the whole verb body runs, only the sidecar is stubbed.
+ * RecallClient — the whole verb body runs, only the holder is stubbed.
  */
 import { describe, test, expect } from "vitest";
 import {
@@ -27,7 +27,7 @@ const CANON_TURN = [
   "<<~ lares yield lar:///council.fork.named/z -> ? >>",
 ].join("\n");
 
-/** Fake sidecar hits: two codex, one claude (the claude one carries the Voice frame). */
+/** Fake holder hits: two codex, one claude (the claude one carries the Voice frame). */
 const HITS = [
   { text: "plain codex turn", source_path: "/stage/codex__run-cdx-1.jsonl", similarity: 0.9 },
   { text: CANON_TURN, source_path: "/stage/claude__run-cl-1.jsonl", similarity: 0.8 },
@@ -83,7 +83,7 @@ describe("recall verb — stamp filters over the search", () => {
     expect(results.every((h) => String(h["source_path"]).includes("codex__"))).toBe(true);
     expect(out["scanned"]).toBe(3);
     expect(out["matched"]).toBe(2);
-    expect(client.lastSearchLimit).toBe(25); // ×5 floor — the overfetch actually reached the sidecar
+    expect(client.lastSearchLimit).toBe(25); // ×5 floor — the overfetch actually reached the holder
   });
 
   test("--voice filters by the gradient re-read; a no-match returns an HONEST empty", async () => {

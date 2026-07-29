@@ -1,8 +1,8 @@
 /**
  * mempalace-client — the READ LEG. A node-only, read-only MCP client that
  * speaks JSON-RPC over stdio (NDJSON, one object per line) to the pinned
- * mempalace Python sidecar. It calls only read tools (list_drawers / get_drawer)
- * — never a write — honoring the read-only sidecar contract.
+ * mempalace Python holder. It calls only read tools (list_drawers / get_drawer)
+ * — never a write — honoring the read-only holder contract.
  *
  * Crosses the causal-island boundary once: a separate process, a separate log.
  * The client only ever knows "as of my last sync."
@@ -14,13 +14,13 @@ import { resolveHolderCapEnv } from "./holder-cap.js";
 export interface MempalaceClientOptions {
   /** <repo>/mempalace — the spawn cwd so `python -m mempalace.mcp_server` resolves the package. */
   submoduleRoot: string;
-  /** Optional --palace path; defaults to the sidecar's own config. */
+  /** Optional --palace path; defaults to the holder's own config. */
   palacePath?: string;
   /** Python interpreter; default "python3". */
   python?: string;
   /** Override the spawn command (testing — e.g. "node"). */
   command?: string;
-  /** Override the spawn args (testing — e.g. a fake-sidecar script). */
+  /** Override the spawn args (testing — e.g. a fake-holder script). */
   args?: string[];
   /** Per-call timeout; default 15000ms. */
   timeoutMs?: number;
@@ -56,7 +56,7 @@ export interface ListDrawersArgs {
 }
 
 export interface SearchArgs {
-  /** Keywords or a question ONLY — max 250 chars (the sidecar embeds this verbatim). */
+  /** Keywords or a question ONLY — max 250 chars (the holder embeds this verbatim). */
   query: string;
   wing?: string;
   room?: string;
@@ -172,11 +172,11 @@ export class MempalaceClient {
     this.onLog = options.onLog;
   }
 
-  /** Spawn the sidecar and complete the MCP handshake. Throws if initialize fails/times out. */
+  /** Spawn the holder and complete the MCP handshake. Throws if initialize fails/times out. */
   async start(): Promise<void> {
     const command = this.commandOverride ?? this.python;
     const args = this.argsOverride ?? this.defaultArgs();
-    // + the GPU compute cap on the DURABLE recall read path: the sidecar opens its chroma collection
+    // + the GPU compute cap on the DURABLE recall read path: the holder opens its chroma collection
     // (default onnxruntime embedder) on boot, which HARD-fails to import onnxruntime-gpu without the
     // CUDA runtime libs on LD_LIBRARY_PATH. resolveComputeCapEnv threads them (torch's bundled nvidia
     // wheels) + the device hint; absent (the QA box) the embedder degrades to CPU on its own. When the
@@ -197,7 +197,7 @@ export class MempalaceClient {
       this.stderrTail = (this.stderrTail + chunk).slice(-4096);
       if (this.onLog) this.onLog(chunk.replace(/\n+$/, ""));
     });
-    proc.on("exit", (code) => this.rejectAll(this.withStderr(new Error(`mempalace sidecar exited (code ${code ?? "null"})`))));
+    proc.on("exit", (code) => this.rejectAll(this.withStderr(new Error(`mempalace holder exited (code ${code ?? "null"})`))));
     proc.on("error", (err: Error) => this.rejectAll(this.withStderr(err)));
 
     await this.request("initialize", {
@@ -242,7 +242,7 @@ export class MempalaceClient {
   }
 
   private send(obj: unknown): void {
-    if (!this.proc?.stdin) throw new Error("mempalace sidecar not started");
+    if (!this.proc?.stdin) throw new Error("mempalace holder not started");
     this.proc.stdin.write(JSON.stringify(obj) + "\n");
   }
 
@@ -254,7 +254,7 @@ export class MempalaceClient {
    *  path surfaces the REAL ChromaDB error, never a bare timeout/exit). No tail → the error unchanged. */
   private withStderr(err: Error): Error {
     const tail = this.stderrTail.trim();
-    if (tail) err.message = `${err.message}\n  sidecar stderr: ${tail}`;
+    if (tail) err.message = `${err.message}\n  holder stderr: ${tail}`;
     return err;
   }
 
@@ -301,7 +301,7 @@ export class MempalaceClient {
   }
 
   /**
-   * The thinnest metadata WHERE-filter the read-only sidecar contract permits. The submodule's
+   * The thinnest metadata WHERE-filter the read-only holder contract permits. The submodule's
    * `mempalace_list_drawers` exposes only wing/room filters, so an arbitrary flat-scalar metadata
    * equality filter stays APP-LAYER: page `list_drawers` (optionally wing/room-scoped to narrow the
    * scan) and keep the drawers whose `metadata[k]` equals every clause. Read-only — never a write.
@@ -359,7 +359,7 @@ export class MempalaceClient {
   }
 
   /** Semantic recall — read-only `mempalace_search`. Returns verbatim hits with
-   *  similarity/distance. The query carries ONLY keywords (the sidecar embeds it). */
+   *  similarity/distance. The query carries ONLY keywords (the holder embeds it). */
   search(args: SearchArgs): Promise<SearchResult> {
     const payload: Record<string, unknown> = { query: args.query };
     if (args.wing !== undefined) payload["wing"] = args.wing;
@@ -369,7 +369,7 @@ export class MempalaceClient {
     return this.callTool("mempalace_search", payload) as Promise<SearchResult>;
   }
 
-  /** True while the sidecar process is spawned and has not exited — for pooling. */
+  /** True while the holder process is spawned and has not exited — for pooling. */
   isAlive(): boolean {
     return this.proc !== null && this.proc.exitCode === null && this.proc.signalCode === null && !this.proc.killed;
   }

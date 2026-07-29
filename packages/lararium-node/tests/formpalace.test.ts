@@ -2,7 +2,7 @@
  * formpalace — the living-grammar FORM store (the two-planes form-capture's CONTINUOUS plane,
  * encoded). End-to-end over a REAL temp-dir form palace reached through the python `form_encoder.py`
  * holder: a turn flows harvest → emitMoveSkeleton (P1) → buildConstructiconBasis (P0) → serialize →
- * the form-encoder sidecar (encode, P2) → a sparse form-vector densified + STORED in the "form"
+ * the form-encoder holder (encode, P2) → a sparse form-vector densified + STORED in the "form"
  * collection keyed by verbatim_sha; the collection is queryable BY form-similarity AND by a metadata
  * where-filter; the verbatim_sha rides as the cross-graph join to the content drawer.
  *
@@ -66,7 +66,7 @@ afterEach(async () => {
 });
 
 describe("makeFormPalace — the form-graph wired end-to-end (live python + chroma)", () => {
-  test("a turn flows skeleton → sidecar → form-vector → stored, queryable, verbatim_sha-joined", async () => {
+  test("a turn flows skeleton → holder → form-vector → stored, queryable, verbatim_sha-joined", async () => {
     const pal = openPalace(await palaceDir());
     const { skeleton, basis } = buildInputs();
 

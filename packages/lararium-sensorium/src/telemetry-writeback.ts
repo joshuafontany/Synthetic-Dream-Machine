@@ -55,7 +55,7 @@ export class TelemetryUnavailable extends Error {}
  */
 export function writebackWing(wing: string, opts: { limit?: number } = {}): WritebackResult {
   const PY = resolveMempalacePython();
-  if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
+  if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the holder deps (`lares wake --install`)");
   const LOCI_IO = resolveLociIo();
   if (!existsSync(LOCI_IO)) throw new TelemetryUnavailable(`loci_io.py missing at ${LOCI_IO}`);
 

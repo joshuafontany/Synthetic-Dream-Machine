@@ -455,7 +455,7 @@ export interface ResolvedServeSpawn {
 export function makeServeSpawn(resolveSpawn: () => ResolvedServeSpawn, opts: { readonly palaceless?: boolean } = {}): PalaceHolderSpawn {
   return (canonicalDir: string): PalaceHolderProc => {
     const { python, script, submoduleRoot, scriptPresent } = resolveSpawn();
-    if (!python) throw new Error("no python holds mempalace — create ~/.venv and install the sidecar (`lares wake --install`)");
+    if (!python) throw new Error("no python holds mempalace — create ~/.venv and install the holder deps (`lares wake --install`)");
     if (!scriptPresent) throw new Error(`serve helper missing at ${script}`);
     // PYTHONPATH=submoduleRoot makes `import mempalace` resolve (it is not pip-installed); the venv
     // python supplies chromadb. `python script.py` sets sys.path[0] to the SCRIPT dir, so PYTHONPATH

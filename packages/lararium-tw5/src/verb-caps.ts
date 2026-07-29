@@ -81,7 +81,7 @@ export interface RecalledTrajectoryStub {
 }
 
 /** mempalace provider — the verbatim PLACE-memory reach (read-client scope + the trajectory-stub
- *  source). The impl owns the pooled sidecar + the `orderHandleTurnsToStubs` ordering, node-side. */
+ *  source). The impl owns the pooled holder + the `orderHandleTurnsToStubs` ordering, node-side. */
 export interface MempalaceProvider {
   /** Run `fn` against a warm pooled read-client (the `withMempalace` scope). */
   withClient<T>(fn: (client: RecallClient) => Promise<T>): Promise<T>;
@@ -236,7 +236,7 @@ export function telemetryProviderCap(impl: TelemetryProvider): CapModule {
 // ── VERB-GROUP caps — declare the providers they route, register their verb(s) over the resolved impls ─
 
 /** Search-path stamp filtering: OVERFETCH the semantic search (×5, floor 25, cap 100 — the
- *  sidecar's own limit ceiling), post-filter each hit ({@link hitPassesStampFilters}: exact
+ *  holder's own limit ceiling), post-filter each hit ({@link hitPassesStampFilters}: exact
  *  source-derived surface/agent + the sovereign gradient re-read for voice/band/drift — the
  *  search wire carries no drawer metadata and no turn key to join on), then cut to the caller's
  *  limit. Honest counts ride out: `scanned` (pre-filter) + `matched` (post-filter, pre-cut). */
@@ -339,7 +339,7 @@ export function recallVerbCap(): CapModule {
           // The addressed sensorium (from `lares sense <sensorium> recall`) — picks that sensorium's recall
           // holder up the cap ladder (absent → the memory default).
           const sensoriumRoot = typeof args["sensoriumRoot"] === "string" ? (args["sensoriumRoot"] as string) : undefined;
-          // Warm pooled sidecar (started once, reused, self-healing) — recall stays sub-second after the
+          // Warm pooled holder (started once, reused, self-healing) — recall stays sub-second after the
           // first cold start; this makes recall-into-wake fast.
           return mp.withClient(async (client) => {
             if (imagoId) return { mode: "imago", imago: await client.getImago(imagoId) };

@@ -3,7 +3,7 @@
  * source is the CONTENT graph: a handle's drawers (WHERE lar_agent_handle = handle), each carrying its
  * EXACT capture `lar_verbatim_sha` (full fidelity, not a transcript-text re-hash). This proves:
  *   - the thin app-layer metadata where-filter (drawersWhere / turnsForHandle) over the read-only
- *     sidecar (paged list_drawers + client-side metadata equality), against a fake NDJSON sidecar;
+ *     holder (paged list_drawers + client-side metadata equality), against a fake NDJSON holder;
  *   - the pure order→stubs functor (orderHandleTurnsToStubs) — the within-handle happened-before;
  *   - graceful empty when a handle has no drawers.
  */
@@ -11,7 +11,7 @@ import { describe, it, expect, afterEach } from "vitest";
 import { fileURLToPath } from "node:url";
 import { MempalaceClient, orderHandleTurnsToStubs, type HandleTurn } from "../src/mempalace-client.js";
 
-const FAKE = fileURLToPath(new URL("./fixtures/fake-sidecar-handle.mjs", import.meta.url));
+const FAKE = fileURLToPath(new URL("./fixtures/fake-holder-handle.mjs", import.meta.url));
 
 function newClient(): MempalaceClient {
   return new MempalaceClient({ submoduleRoot: process.cwd(), command: "node", args: [FAKE] });
@@ -50,7 +50,7 @@ describe("orderHandleTurnsToStubs — the pure order→stubs functor", () => {
   });
 });
 
-describe("turnsForHandle — the live content-graph where-filter (fake NDJSON sidecar)", () => {
+describe("turnsForHandle — the live content-graph where-filter (fake NDJSON holder)", () => {
   let client: MempalaceClient;
   afterEach(async () => { await client?.stop(); });
 

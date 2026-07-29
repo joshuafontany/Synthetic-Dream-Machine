@@ -8,7 +8,7 @@
  * remembered.
  *
  * The composer caps BOTH shores: the House's own NDJSON holders under @lararium/sensorium's scripts,
- * and the read-only spawn of the guest mempalace sidecar. Each opens a store through the mempalace
+ * and the read-only spawn of the guest mempalace holder. Each opens a store through the mempalace
  * library, so each answers to the same declared policy.
  *
  * ── THE WRITE-ROUTING CAP, and why the House declares it ────────────────────────────────────────────

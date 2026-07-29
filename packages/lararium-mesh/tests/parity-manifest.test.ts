@@ -138,7 +138,7 @@ const MANIFEST: readonly ParityEntry[] = [
   {
     ts: "mesh-coupling.ts", py: "coupling.R", status: "owed-fixture",
     fixtures: [],
-    note: "the directed coupling matrix over child sensoria; coupling.R (RTransferEntropy calc_ete pairwise matrix) carries the sidecar twin — the shared fixture remains owed.",
+    note: "the directed coupling matrix over child sensoria; coupling.R (RTransferEntropy calc_ete pairwise matrix) carries the R-leg twin — the shared fixture remains owed.",
   },
   {
     ts: "mesh-coupling-mv.ts", py: null, status: "owed-py-twin",
@@ -183,7 +183,7 @@ const MANIFEST: readonly ParityEntry[] = [
   {
     ts: "transfer-entropy.ts", py: "coupling.R", status: "owed-fixture",
     fixtures: [],
-    note: "the discrete conditional-TE keel; coupling.R (RTransferEntropy effective TE + bootstrap null) carries the sidecar twin — the shared fixture remains owed.",
+    note: "the discrete conditional-TE keel; coupling.R (RTransferEntropy effective TE + bootstrap null) carries the R-leg twin — the shared fixture remains owed.",
   },
   {
     ts: "change-point.ts", py: null, status: "owed-py-twin",

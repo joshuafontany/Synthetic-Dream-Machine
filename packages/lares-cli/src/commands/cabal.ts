@@ -1,5 +1,5 @@
 /**
- * `lares cabal vouch <joiner-nym> --place <realm-doc-id> [--expires <iso>] [--as <n>]` — the JOIN axis's
+ * `lares cabal vouch <joiner-nym> --realm <realm-doc-id> [--expires <iso>] [--as <n>]` — the JOIN axis's
  * write side: one held face stakes its OWN standing on one joiner, onto the Nexus vouch board.
  *
  * THE CONTRAST WITH `nexus contract`. Contracting a vessel into carriage needs the kahu quorum AND the
@@ -18,7 +18,7 @@ import type { ParsedArgs } from "../parse-args.js";
 function usage(): number {
   console.error("usage: lares cabal <vouch>");
   console.error("");
-  console.error("  vouch <joiner-nym> --place <realm-doc-id> [--expires <iso8601>] [--as <root-index>]");
+  console.error("  vouch <joiner-nym> --realm <realm-doc-id> [--expires <iso8601>] [--as <root-index>]");
   console.error("        stake YOUR standing on a joiner crossing into that realm. Dilutes you, admits nobody.");
   return 2;
 }
@@ -33,9 +33,9 @@ export async function cmdCabal(args: ParsedArgs): Promise<number> {
 
 async function cmdVouch(args: ParsedArgs): Promise<number> {
   const joiner = args.positional[1];
-  const place  = args.options["place"];
-  if (!joiner || !place) {
-    console.error("usage: lares cabal vouch <joiner-nym> --place <realm-doc-id> [--expires <iso8601>] [--as <root-index>]");
+  const realm  = args.options["realm"];
+  if (!joiner || !realm) {
+    console.error("usage: lares cabal vouch <joiner-nym> --realm <realm-doc-id> [--expires <iso8601>] [--as <root-index>]");
     return 2;
   }
   const asRaw = args.options["as"];
@@ -47,14 +47,14 @@ async function cmdVouch(args: ParsedArgs): Promise<number> {
 
   try {
     const r = await runCabalVouch({
-      joiner, place,
+      joiner, realm,
       ...(args.options["expires"] !== undefined ? { expiresAt: args.options["expires"] } : {}),
       ...(handleIndex !== undefined ? { handleIndex } : {}),
     });
     console.log(r.reMinted ? "RE-VOUCHED (one edge, not two)" : "VOUCHED");
     console.log(`  voucher:   ${r.voucherDid}`);
     console.log(`  joiner:    ${r.joiner}`);
-    console.log(`  place:     ${r.place}`);
+    console.log(`  realm:     ${r.realm}`);
     console.log(`  expires:   ${r.expiresAt}`);
     console.log(`  board:     ${r.boardUrl}`);
     // The number that matters to the voucher — stated as a FLOOR, because it counts what this replica has

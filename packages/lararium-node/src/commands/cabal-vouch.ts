@@ -40,7 +40,7 @@ export interface CabalVouchOptions {
   /** The joiner this vouch names. A vouch never rides bearer — it binds to one identity. */
   readonly joiner:      string;
   /** The cabal-realm this vouch crosses INTO. A vouch never grants a general pass. */
-  readonly place:       string;
+  readonly realm:       string;
   /** ISO-8601. Absent → 30 days out; a vouch that never expires leaves a key under a mat. */
   readonly expiresAt?:  string;
   /** WHICH held persona root vouches — the human's own face. Absent → the first held root. */
@@ -51,7 +51,7 @@ export interface CabalVouchOptions {
 export interface CabalVouchResult {
   readonly voucherDid:  string;
   readonly joiner:      string;
-  readonly place:       string;
+  readonly realm:       string;
   readonly expiresAt:   string;
   readonly boardUrl:    string;
   /**
@@ -79,13 +79,13 @@ function defaultExpiry(now: number): string {
 export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): Promise<CabalVouchResult> {
   const storageDir = opts.storageDir ?? larDataDir();
   const joiner     = opts.joiner.trim().toLowerCase();
-  const place      = opts.place.trim().toLowerCase();
+  const realm      = opts.realm.trim().toLowerCase();
 
   if (!NYM_RE.test(joiner)) {
     throw new CabalVouchError(`"${opts.joiner}" is not a valid joiner nym — expected a 64-hex ed25519 verifying key.`);
   }
-  if (!NYM_RE.test(place)) {
-    throw new CabalVouchError(`"${opts.place}" is not a valid place — expected a 64-hex cabal-realm doc id.`);
+  if (!NYM_RE.test(realm)) {
+    throw new CabalVouchError(`"${opts.realm}" is not a valid realm — expected a 64-hex cabal-realm doc id.`);
   }
 
   const expiresAt = opts.expiresAt ?? defaultExpiry(now);
@@ -116,7 +116,7 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
 
   const seed   = await loadPersonaGroupRootSeed(storageDir, handleIndex);
   const invite = await signCabalInvite(
-    { placeDocIdHex: place, joinerIdentityHex: joiner, voucherDid, expiresAt },
+    { realmDocIdHex: realm, joinerIdentityHex: joiner, voucherDid, expiresAt },
     ed25519SignerFromSeed(seed),
   );
 
@@ -128,7 +128,7 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
   try {
     const handle = await materializeSharedLarDoc(repo, boardUrl, "@vouch-registry");
 
-    const before   = await verifiedVouchesFromBoard(handle.doc(), place, verify);
+    const before   = await verifiedVouchesFromBoard(handle.doc(), realm, verify);
     const reMinted = before.some((i) => i.voucherDid === voucherDid && i.joinerIdentityHex === joiner);
 
     handle.change((d) => writeVouch(d, invite));
@@ -137,7 +137,7 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
     // NEVER leave a vouch the fold would drop. Read it BACK through the verifying read — the only read that
     // stands — so a vouch that cannot survive extraction refuses loudly here instead of silently vouching for
     // nobody. The same discipline `nexus-contract` runs before it writes a dead admit.
-    const after = await verifiedVouchesFromBoard(handle.doc(), place, verify);
+    const after = await verifiedVouchesFromBoard(handle.doc(), realm, verify);
     const landed = after.some((i: CabalInvite) =>
       i.voucherDid === voucherDid && i.joinerIdentityHex === joiner && i.sig === invite.sig);
     if (!landed) {
@@ -145,7 +145,7 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
     }
 
     const outDegreeFloor = vouchDagFromInvites(after).edges.filter((e) => e.voucher === voucherDid).length;
-    return { voucherDid, joiner, place, expiresAt, boardUrl, outDegreeFloor, reMinted };
+    return { voucherDid, joiner, realm, expiresAt, boardUrl, outDegreeFloor, reMinted };
   } finally {
     await repo.flush().catch(() => { /* best-effort final flush */ });
   }

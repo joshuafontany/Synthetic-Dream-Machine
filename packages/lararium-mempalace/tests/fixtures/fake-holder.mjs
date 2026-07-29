@@ -1,4 +1,4 @@
-// Fake mempalace MCP sidecar — speaks the NDJSON JSON-RPC subset the client
+// Fake mempalace MCP holder — speaks the NDJSON JSON-RPC subset the client
 // uses, so the read leg is witnessed end-to-end without mempalace's Python deps.
 // One verbatim drawer carries a real lares aim/yield frame, so the harvest path
 // is exercised against a true-shaped payload.

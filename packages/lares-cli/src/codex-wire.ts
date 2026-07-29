@@ -1,7 +1,7 @@
 /**
  * codex-wire — `lares wake --codex`: wire the LARES MCP seat (memory through the lares house) and
  * the Lares session-ingest hook into the OpenAI Codex CLI home (~/.codex/config.toml). A stale
- * mempalace MCP block is reaped in the same pass — a harness holding its own palace sidecar reaches
+ * mempalace MCP block is reaped in the same pass — a harness holding its own palace holder reaches
  * past the node into the store, and N writers on one Chroma index is what corrupts it.
  *
  * Codex reads TOML:
@@ -51,7 +51,7 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
   const steps: CodexWireStep[] = [];
   const append: string[] = [];
 
-  // 1a. Reap a stale mempalace MCP block — a harness holding its own palace sidecar reaches PAST the
+  // 1a. Reap a stale mempalace MCP block — a harness holding its own palace holder reaches PAST the
   //     node into the store (N sessions, N writers, one Chroma index). The lares seat replaces it.
   if (toml.includes(MEMPALACE_MCP_KEY)) {
     toml = stripTomlSection(toml, MEMPALACE_MCP_KEY);
@@ -67,7 +67,7 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
     steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" });
   } else {
     // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
-    // package that moves its sidecar) otherwise sits drifted forever while the wire reports it present —
+    // package that moves its holder) otherwise sits drifted forever while the wire reports it present —
     // the door stays shut, the health line stays green. A drifted section strips, then re-aims below.
     const seatStands = toml.includes(LARES_MCP_KEY);
     const aligned = seatStands

@@ -3,7 +3,7 @@
  * seat (Option D, the read shore).
  *
  * The CLI never touches mempalace directly: it submits a `recall` verb-summons to
- * the running daemon, whose main-thread handler reaches the read-only sidecar and
+ * the running daemon, whose main-thread handler reaches the read-only holder and
  * returns hits. The shore crosses the causal-island shore AT the seat — the
  * same web3-only path every other `lares` verb rides (capability-bearing summons,
  * never a session).
@@ -87,7 +87,7 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
     return exitFor("not-found");
   }
 
-  // Co-located UDS fast path, WS fallback (the lares↔lararium binding). The sidecar
+  // Co-located UDS fast path, WS fallback (the lares↔lararium binding). The holder
   // cold-starts chromadb + embeds the query — give it room beyond the 10s default;
   // recall is read-only, so a generous budget costs nothing.
   let result;

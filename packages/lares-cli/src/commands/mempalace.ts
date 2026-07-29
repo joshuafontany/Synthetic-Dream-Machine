@@ -18,7 +18,7 @@
  *
  * Verbs:
  *   setup                raise the guest standalone: `mempalace init` + pin hooks.auto_save=false
- *   status               live table: every daemon/sidecar/mine/hook-leg + its SPAWNER
+ *   status               live table: every daemon/holder/mine/hook-leg + its SPAWNER
  *   quiesce [--hold]     graceful stop-the-world: pause hooks → drain daemons → confirm zero
  *   resume               un-pause the hooks (the warm daemon re-spawns lazily on next use)
  *
@@ -85,7 +85,7 @@ function snapshot(): PalaceProc[] {
 
 const KIND_TAG: Readonly<Record<ProcKind, string>> = {
   "write-daemon":  "DAEMON ",
-  "read-sidecar":  "SIDECAR",
+  "read-holder":   "HOLDER ",
   "one-shot-mine": "MINE   ",
   "chroma":        "CHROMA ",
   "node-vessel":   "VESSEL ",
@@ -421,7 +421,7 @@ function printHelp(): void {
   console.log("  repave [--confirm]  the RITE: quiesce → verify → tear → stand → harvest. Idempotent; a rite");
   console.log("                      that dies halfway re-runs from the top. Preview by default. REFUSES while");
   console.log("                      anything holds the store, or while the worldline KG still sits inside it.");
-  console.log("  status              live topology: every daemon/sidecar/mine/hook-leg + its SPAWNER");
+  console.log("  status              live topology: every daemon/holder/mine/hook-leg + its SPAWNER");
   console.log("  quiesce [--hold]    graceful stop-the-world: pause hooks → drain daemons → confirm zero");
   console.log("  resume              un-pause the hooks (the warm daemon re-spawns lazily on next use)");
   console.log("\n  superset: ANY other subverb passes through to the vendored CLI against the guest palace —");

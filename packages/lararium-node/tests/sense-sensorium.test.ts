@@ -18,7 +18,7 @@ let home: string;
 let savedRoot: string | undefined;
 let src: string;
 
-/** A no-python ingest stub — the lifecycle tests never touch the sidecar. */
+/** A no-python ingest stub — the lifecycle tests never touch the holder. */
 const fakeIngest: SensoriumIngest = () => ({ drawers: 3, structures: 2, bands: 5, forms: 4, note: "fake-ingest" });
 
 beforeEach(() => {
@@ -128,7 +128,7 @@ describe("orphan reaping", () => {
 describe("the S2 structure plane — the parse-router shore", () => {
   test("a router-less ingest GRACEFULLY structure-skips (content plane unaffected)", async () => {
     // a shore that mimics a host with no python/router: drawers filed, 0 structures, skip note.
-    const skipIngest: SensoriumIngest = () => ({ drawers: 1, structures: 0, bands: 0, forms: 0, note: "mined → 1 drawers · structure-skipped: no router/python · bands-skipped: no sidecar/python" });
+    const skipIngest: SensoriumIngest = () => ({ drawers: 1, structures: 0, bands: 0, forms: 0, note: "mined → 1 drawers · structure-skipped: no router/python · bands-skipped: no holder/python" });
     const res = await runSensorium({ sourcePath: src, ingest: skipIngest });
     expect(res.structures).toBe(0);
     expect(res.bands).toBe(0);
@@ -166,8 +166,8 @@ describe("the S2 structure plane — the parse-router shore", () => {
 });
 
 describe("the S1 bands plane — the multi-scale FFZ shore", () => {
-  test("a sidecar-less ingest GRACEFULLY bands-skips (content/structure planes unaffected)", async () => {
-    const skipIngest: SensoriumIngest = () => ({ drawers: 2, structures: 1, bands: 0, forms: 0, note: "mined → 2 drawers · structure: 1 vectors · bands-skipped: no sidecar/python" });
+  test("a holder-less ingest GRACEFULLY bands-skips (content/structure planes unaffected)", async () => {
+    const skipIngest: SensoriumIngest = () => ({ drawers: 2, structures: 1, bands: 0, forms: 0, note: "mined → 2 drawers · structure: 1 vectors · bands-skipped: no holder/python" });
     const res = await runSensorium({ sourcePath: src, ingest: skipIngest });
     expect(res.bands).toBe(0);
     expect(res.drawers).toBe(2);
@@ -191,8 +191,8 @@ describe("the S1 bands plane — the multi-scale FFZ shore", () => {
 });
 
 describe("the S3 form plane — the blind-induction shore", () => {
-  test("a sidecar-less ingest GRACEFULLY form-skips (content/structure/bands planes unaffected)", async () => {
-    const skipIngest: SensoriumIngest = () => ({ drawers: 2, structures: 1, bands: 3, forms: 0, note: "mined → 2 drawers · structure: 1 vectors · bands: 3 cells · form-skipped: no sidecar/python" });
+  test("a holder-less ingest GRACEFULLY form-skips (content/structure/bands planes unaffected)", async () => {
+    const skipIngest: SensoriumIngest = () => ({ drawers: 2, structures: 1, bands: 3, forms: 0, note: "mined → 2 drawers · structure: 1 vectors · bands: 3 cells · form-skipped: no holder/python" });
     const res = await runSensorium({ sourcePath: src, ingest: skipIngest });
     expect(res.forms).toBe(0);
     expect(res.drawers).toBe(2);

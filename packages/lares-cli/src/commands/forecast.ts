@@ -2,10 +2,10 @@
  * `lares sense forecast` — the R early-warning plane: `ews.R` (critical-slowing-down) over an N-signal
  * matrix → a fired / WATCH / QUIET forecast of an approaching regime-shift, read BEFORE `analyze`'s
  * change-point commits. Computed py-side behind the causal-island boundary (the predictive plane is the R
- * plane), the sibling of `couple-r` — both surface the R sidecars on the `lares` door.
+ * plane), the sibling of `couple-r` — both surface the R legs on the `lares` door.
  *
  * The signal rides `--signal <path>` — an NDJSON matrix, one JSON array per line (rows=time, cols=signals).
- * Graceful degrade when R / the sidecar is absent.
+ * Graceful degrade when R / the leg is absent.
  *
  *   lares sense forecast --signal series.ndjson
  *

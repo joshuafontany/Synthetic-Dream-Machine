@@ -32,7 +32,7 @@
  *       aspirational (its conditional independence fails during coupling, #crucible-tested); the
  *       temporal-KL is honestly flagged as a stand-in, not faked into a coupling KL.
  *
- * The heavy predictive-coding nets + the R early-warning route live behind the python/R sidecars
+ * The heavy predictive-coding nets + the R early-warning route live behind the python holders + the R leg
  * (predictive_coding.py · bands.forecast_ews) across the causal-island boundary; THIS
  * module is the pure, numpy-free twin that keeps the online loop dependency-light and puts the
  * ONE load-bearing mapping — precision = the confidence register (0..20) read as a GAIN — where

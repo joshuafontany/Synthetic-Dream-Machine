@@ -6,7 +6,7 @@
  * ordered full-fidelity stubs → the mesh-pure Turn→Trajectory functor → a sensible move-space path,
  * with the form-vector join hitting on the EXACT content-graph verbatim_sha.
  *
- * The sidecar I/O + the where-filter are witnessed in @lararium/mempalace's
+ * The holder I/O + the where-filter are witnessed in @lararium/mempalace's
  * worldline-trajectory-source.test.ts; this composes the downstream legs that ride in the verb.
  */
 import { describe, it, expect } from "vitest";

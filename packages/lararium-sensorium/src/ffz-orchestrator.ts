@@ -537,7 +537,7 @@ interface PyContext {
 /** Resolve the python + loci_io.py + PYTHONPATH (mirrors telemetry-writeback's setup). */
 function pyContext(): PyContext {
   const PY = resolveMempalacePython();
-  if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
+  if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the holder deps (`lares wake --install`)");
   const LOCI_IO = resolveLociIo();
   if (!existsSync(LOCI_IO)) throw new TelemetryUnavailable(`loci_io.py missing at ${LOCI_IO}`);
   const submoduleRoot = join(repoRoot, "mempalace");
@@ -622,7 +622,7 @@ export function pythonFormEmbeddingsReader(_wing: string): Map<string, readonly 
  */
 export function pythonStructureEmbeddingsReader(_wing: string): Map<string, readonly number[]> {
   const { python: PY, script: STRUCTUREPALACE_IO, scriptPresent, submoduleRoot } = resolveStructurePalaceSpawn();
-  if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
+  if (!PY) throw new TelemetryUnavailable("no python holds mempalace — create ~/.venv and pip install the holder deps (`lares wake --install`)");
   if (!scriptPresent) throw new TelemetryUnavailable(`structurepalace_io.py missing at ${STRUCTUREPALACE_IO}`);
   const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
   // NAME the plane — an unpassed --palace reaches the pre-XDG scatter (empty after the home-move), and

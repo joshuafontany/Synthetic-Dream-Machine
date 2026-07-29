@@ -11,7 +11,7 @@
  *                                              — a CROSS-chunk property, not producible per chunk)
  *
  * `modality:"text"`, `mode:"batch"` — a finite corpus, all frames at once. This reproduces the
- * corpus sensorium's content · structure · bands planes through the new abstraction; the actual sidecars
+ * corpus sensorium's content · structure · bands planes through the new abstraction; the actual holders
  * ride the injected {@link PlaneSink} (a batch run delegates to the existing corpus pipeline —
  * sense-stream.ts in @lararium/node).
  *

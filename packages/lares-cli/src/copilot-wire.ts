@@ -1,7 +1,7 @@
 /**
  * copilot-wire — `lares wake --copilot`: wire the LARES MCP seat (memory through the lares house)
  * and the Lares session-ingest hook into the GitHub Copilot CLI home (~/.copilot/). A stale mempalace
- * MCP entry is reaped in the same pass — a harness holding its own palace sidecar reaches past the
+ * MCP entry is reaped in the same pass — a harness holding its own palace holder reaches past the
  * node into the store, and N writers on one Chroma index is what corrupts it.
  *
  * Copilot CLI (GA 2026-02) reads JSON config, like Claude:
@@ -54,7 +54,7 @@ export function wireCopilotHome(opts: { home?: string } = {}): CopilotWireResult
   let changed = false;
 
   // 1. The MCP seat → ~/.copilot/mcp-config.json. Reap a stale `mempalace` entry (a harness holding
-  //    its own palace sidecar reaches PAST the node into the store) and register the LARES seat in
+  //    its own palace holder reaches PAST the node into the store) and register the LARES seat in
   //    its place — recall/harvest/status/worldline over the memory sensorium, through the lares house.
   const mcpPath = join(dir, "mcp-config.json");
   const cfg = readJson<McpConfig>(mcpPath, {});
@@ -74,7 +74,7 @@ export function wireCopilotHome(opts: { home?: string } = {}): CopilotWireResult
     steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" });
   } else {
     // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
-    // package that moves its sidecar) otherwise sits drifted forever while the wire reports it present —
+    // package that moves its holder) otherwise sits drifted forever while the wire reports it present —
     // the door stays shut, the health line stays green. Re-aim whenever the registered command/args drift.
     const seat = servers["lares"] as { command?: string; args?: readonly string[] } | undefined;
     const aligned = seat !== undefined && seat.command === laresMcp.command

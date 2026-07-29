@@ -83,11 +83,11 @@ export function wireVscode(opts: { home?: string } = {}): VscodeWireResult {
     const servers = (cfg.servers ??= {});
     let dirty = false;
 
-    // A harness holding its own palace sidecar reaches PAST the node into the store.
+    // A harness holding its own palace holder reaches PAST the node into the store.
     if (servers["mempalace"] !== undefined) { delete servers["mempalace"]; dirty = true; }
 
     // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
-    // package that moves its sidecar) otherwise sits drifted forever while the wire reports it present —
+    // package that moves its holder) otherwise sits drifted forever while the wire reports it present —
     // the door stays shut, the health line stays green. Re-aim whenever the registered command/args drift.
     const seat = servers["lares"] as { command?: string; args?: readonly string[] } | undefined;
     const aligned = seat !== undefined && seat.command === laresMcp.command

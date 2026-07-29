@@ -38,7 +38,7 @@ export interface RawProc {
  */
 export type ProcKind =
   | "write-daemon"   // python -m mempalace.daemon serve --palace <p>   (the warm singleton)
-  | "read-sidecar"   // python -m mempalace.mcp_server / mempalace-mcp  (recall MCP)
+  | "read-holder"    // python -m mempalace.mcp_server / mempalace-mcp  (recall MCP)
   | "one-shot-mine"  // mempalace … mine …                             (a direct/handoff mine)
   | "chroma"         // chromadb / chroma run                          (the vector backend)
   | "node-vessel"    // the lararium node daemon holding the WS port
@@ -57,7 +57,7 @@ interface KindMeta {
 
 export const KIND_META: Readonly<Record<ProcKind, KindMeta>> = {
   "write-daemon":  { holdsStore: true,  mintsDaemons: false, label: "write-daemon (warm singleton)" },
-  "read-sidecar":  { holdsStore: true,  mintsDaemons: false, label: "recall MCP sidecar" },
+  "read-holder":   { holdsStore: true,  mintsDaemons: false, label: "recall MCP holder" },
   "one-shot-mine": { holdsStore: true,  mintsDaemons: false, label: "one-shot mine" },
   "chroma":        { holdsStore: true,  mintsDaemons: false, label: "chroma backend" },
   "node-vessel":   { holdsStore: false, mintsDaemons: false, label: "lararium node (WS port)" },
@@ -135,7 +135,7 @@ export function parseProcTable(raw: string): RawProc[] {
 
 /**
  * The kind of a command line, or null when it is not a palace-integration process.
- * Order is load-bearing: the daemon `serve` and the MCP sidecar must be caught
+ * Order is load-bearing: the daemon `serve` and the MCP holder must be caught
  * BEFORE the generic `mempalace … mine` / `mempalace` matchers, and the bash hook
  * wrapper BEFORE its `lares capture/subagents` children (a `bash …-hook.sh` line
  * also mentions neither — it is its own kind).
@@ -145,7 +145,7 @@ export function classifyKind(args: string): ProcKind | null {
   if (/lares-mempalace-ingest-hook/.test(args)) return "ingest-hook";
   // mempalace python module invocations.
   if (/mempalace\.daemon\b.*\bserve\b|\bdaemon\.py\b.*\bserve\b/.test(args)) return "write-daemon";
-  if (/mempalace[._-]mcp(_server)?|mempalace\.mcp_server|mempalace-mcp/.test(args)) return "read-sidecar";
+  if (/mempalace[._-]mcp(_server)?|mempalace\.mcp_server|mempalace-mcp/.test(args)) return "read-holder";
   // The sovereign serialized capture writer — capture_session.py --serve holds the content palace singleton.
   if (/capture_session\.py.*--serve/.test(args)) return "capture-holder";
   // A `mempalace … mine …` (console script, `-m mempalace … mine`, or a direct mine).
@@ -261,7 +261,7 @@ function readProcTable(): RawProc[] {
 }
 
 /**
- * The live palace topology — every mempalace daemon / recall sidecar / one-shot
+ * The live palace topology — every mempalace daemon / recall holder / one-shot
  * mine / chroma / `lares` hook-leg + ingest-hook, plus the node vessel (the WS-port
  * holder), each with its SPAWNER. `vesselPids` is passed in by the caller (it owns
  * the OS port-table read via port-control, avoiding a dep cycle).
@@ -288,7 +288,7 @@ export function isUnderPath(dir: string, root: string): boolean {
 
 /**
  * Does this proc belong to ONE island's holder set, keyed by its store PATH? A
- * store-HOLDER (write-daemon · recall sidecar · one-shot mine · chroma · capture
+ * store-HOLDER (write-daemon · recall holder · one-shot mine · chroma · capture
  * holder) pins an absolute store path — `serves` carries it — so it counts only
  * when that path sits UNDER `root`. The daemon-MINTING legs (the ingest hook +
  * `lares capture/subagents/telemetry`) carry a WING, not a path, and mint the

@@ -8,7 +8,7 @@
  * for those sigils and returns a {@link Bearing}.
  *
  * Pure + isomorphic: text in, Bearing out — no I/O, no store, no holder. The
- * read leg (mempalace sidecar) and the write leg (composite.put / LOAD) live
+ * read leg (the mempalace holder) and the write leg (composite.put / LOAD) live
  * elsewhere; this is the shore-crossing parse, and it runs in node or
  * browser alike.
  *

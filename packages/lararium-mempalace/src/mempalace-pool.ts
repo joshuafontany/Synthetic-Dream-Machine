@@ -23,8 +23,8 @@ let starting: Promise<MempalaceClient> | null = null;
 
 async function open(): Promise<MempalaceClient> {
   const spawn = resolveMempalaceSpawn();
-  if (!spawn.sidecarPresent) throw new Error("mempalace submodule absent — run `lares wake --install`");
-  if (!spawn.python) throw new Error("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
+  if (!spawn.holderPresent) throw new Error("mempalace submodule absent — run `lares wake --install`");
+  if (!spawn.python) throw new Error("no python holds mempalace — create ~/.venv and pip install the holder deps (`lares wake --install`)");
   const client = new MempalaceClient({
     submoduleRoot: spawn.submoduleRoot,
     python: spawn.python,
@@ -35,7 +35,7 @@ async function open(): Promise<MempalaceClient> {
   return client;
 }
 
-/** The warm, reused read-client. Starts the sidecar lazily; restarts it if dead. */
+/** The warm, reused read-client. Starts the holder lazily; restarts it if dead. */
 export async function getMempalaceClient(): Promise<MempalaceClient> {
   if (pooled && pooled.isAlive()) return pooled;
   pooled = null; // dead/absent — drop it, restart below
@@ -48,7 +48,7 @@ export async function getMempalaceClient(): Promise<MempalaceClient> {
   return starting;
 }
 
-/** Drop the pooled client (e.g. after a sidecar death) so the next get restarts it. */
+/** Drop the pooled client (e.g. after a holder death) so the next get restarts it. */
 export async function resetMempalaceClient(): Promise<void> {
   const c = pooled;
   pooled = null;
@@ -57,7 +57,7 @@ export async function resetMempalaceClient(): Promise<void> {
 }
 
 /**
- * Run a read against the warm client; on a sidecar-death error, reset + retry ONCE
+ * Run a read against the warm client; on a holder-death error, reset + retry ONCE
  * with a fresh client. Callers get warm-fast reads without handling lifecycle.
  */
 export async function withMempalace<T>(fn: (client: MempalaceClient) => Promise<T>): Promise<T> {

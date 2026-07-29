@@ -8,7 +8,7 @@ import {
 // a Claude session (pid 100) fires the ingest hook (200), which spawns a `lares
 // capture` leg (300) + a `lares subagents` leg (310); the capture mine hands off to
 // a warm write-daemon (400, reparented to init after the client exits), and a recall
-// MCP sidecar (500) + a chroma backend (510) + the node vessel (600) run alongside.
+// MCP holder (500) + a chroma backend (510) + the node vessel (600) run alongside.
 const PS_FIXTURE = `
   100     1    02:14:03 claude
   200   100       00:03 bash /home/joshu/Synthetic-Dream-Machine/packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh
@@ -50,9 +50,9 @@ describe("classifyKind", () => {
   it("catches daemon serve BEFORE the generic mempalace/mine matcher", () => {
     expect(classifyKind("python -m mempalace.daemon serve --palace /p")).toBe("write-daemon");
   });
-  it("catches the recall MCP sidecar", () => {
-    expect(classifyKind("python -m mempalace.mcp_server --palace /p")).toBe("read-sidecar");
-    expect(classifyKind("/home/j/.local/bin/mempalace-mcp")).toBe("read-sidecar");
+  it("catches the recall MCP holder", () => {
+    expect(classifyKind("python -m mempalace.mcp_server --palace /p")).toBe("read-holder");
+    expect(classifyKind("/home/j/.local/bin/mempalace-mcp")).toBe("read-holder");
   });
   it("catches a one-shot mine", () => {
     expect(classifyKind("mempalace --palace /p mine --source ndjson /tmp/b")).toBe("one-shot-mine");
@@ -80,7 +80,7 @@ describe("classifyPalaceProcs", () => {
     expect(pids).toEqual([200, 300, 310, 400, 500, 510, 600]);
     const kinds = procs.map((p) => p.kind).sort();
     expect(kinds).toEqual(
-      ["capture-job", "chroma", "ingest-hook", "node-vessel", "read-sidecar", "subagents-job", "write-daemon"],
+      ["capture-job", "chroma", "ingest-hook", "node-vessel", "read-holder", "subagents-job", "write-daemon"],
     );
   });
 
@@ -122,7 +122,7 @@ describe("classifyPalaceProcs", () => {
 
 describe("KIND_META coverage", () => {
   it("every ProcKind classifyKind can emit has metadata", () => {
-    for (const k of ["write-daemon", "read-sidecar", "one-shot-mine", "chroma", "node-vessel", "ingest-hook", "capture-job", "subagents-job", "telemetry-job"] as const) {
+    for (const k of ["write-daemon", "read-holder", "one-shot-mine", "chroma", "node-vessel", "ingest-hook", "capture-job", "subagents-job", "telemetry-job"] as const) {
       expect(KIND_META[k]).toBeDefined();
     }
   });

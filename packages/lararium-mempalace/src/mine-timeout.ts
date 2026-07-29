@@ -24,7 +24,7 @@
 export const TIMEOUT_EWMA_ALPHA = 0.2;
 /** headroom multiple over the observed mean duration (K · ewma, before the clamp). */
 export const TIMEOUT_K = 4;
-/** floor — never false-kill a normal mine (a cold mine + model/sidecar load runs long). */
+/** floor — never false-kill a normal mine (a cold mine + model/holder load runs long). */
 export const TIMEOUT_FLOOR_MS = 15_000;
 /** ceiling — a hang dies within this, never 9 h. Sized so a LARGE honest mine fits beneath it: a
  *  756-transcript wing legitimately runs many minutes, and a ceiling that cannot hold the biggest

@@ -14,7 +14,7 @@ import { repoRoot } from "@lararium/mesh/node";
 import { resolveMempalacePython } from "@lararium/mempalace";
 
 const MEMPALACE_DIR = join(repoRoot, "mempalace");
-const MEMPALACE_SIDECAR = join(MEMPALACE_DIR, "mempalace", "mcp_server.py");
+const MEMPALACE_HOLDER_ENTRY = join(MEMPALACE_DIR, "mempalace", "mcp_server.py");
 const MEMPALACE_PKG = join(repoRoot, "packages", "lararium-mempalace");
 const MEMPALACE_PLUGIN = join(MEMPALACE_DIR, ".claude-plugin", "plugin.json");
 
@@ -40,7 +40,7 @@ export interface IntegrationReport {
 export function checkMempalaceIntegration(): IntegrationReport {
   const checks: IntegrationCheck[] = [];
 
-  const submoduleOk = existsSync(MEMPALACE_SIDECAR);
+  const submoduleOk = existsSync(MEMPALACE_HOLDER_ENTRY);
   checks.push({
     name: "submodule",
     ok: submoduleOk,
@@ -56,8 +56,8 @@ export function checkMempalaceIntegration(): IntegrationReport {
 
   // find_spec does NOT execute the module (no heavy chromadb import) — wake-cheap.
   const py = resolvePython();
-  let sidecarOk = false;
-  let sidecarDetail = "no python (python3/python/py) on PATH — install Python to reach the sidecar";
+  let holderOk = false;
+  let holderDetail = "no python (python3/python/py) on PATH — install Python to reach the holder";
   if (py !== null) {
     try {
       const probe = spawnSync(
@@ -66,16 +66,16 @@ export function checkMempalaceIntegration(): IntegrationReport {
         { cwd: MEMPALACE_DIR, timeout: 10_000 },
       );
       if (probe.error === undefined) {
-        sidecarOk = probe.status === 0;
-        sidecarDetail = sidecarOk
+        holderOk = probe.status === 0;
+        holderDetail = holderOk
           ? `${py} -m mempalace.mcp_server importable`
-          : "sidecar deps absent — `lares wake --install` (pip install -e ./mempalace)";
+          : "holder deps absent — `lares wake --install` (pip install -e ./mempalace)";
       }
     } catch {
       /* leave the not-found default */
     }
   }
-  checks.push({ name: "sidecar-deps", ok: sidecarOk, detail: sidecarDetail });
+  checks.push({ name: "holder-deps", ok: holderOk, detail: holderDetail });
 
   const pluginOk = existsSync(MEMPALACE_PLUGIN);
   checks.push({
@@ -100,10 +100,10 @@ export interface InstallStep {
 export function installMempalaceIntegration(): InstallStep[] {
   const steps: InstallStep[] = [];
 
-  if (!existsSync(MEMPALACE_SIDECAR)) {
+  if (!existsSync(MEMPALACE_HOLDER_ENTRY)) {
     try {
       execFileSync("git", ["submodule", "update", "--init", "mempalace"], { cwd: repoRoot, stdio: "pipe", timeout: 120_000 });
-      steps.push({ step: "submodule-init", ran: true, ok: existsSync(MEMPALACE_SIDECAR), detail: "git submodule update --init mempalace" });
+      steps.push({ step: "submodule-init", ran: true, ok: existsSync(MEMPALACE_HOLDER_ENTRY), detail: "git submodule update --init mempalace" });
     } catch (e) {
       steps.push({ step: "submodule-init", ran: true, ok: false, detail: errText(e) });
     }
@@ -117,9 +117,9 @@ export function installMempalaceIntegration(): InstallStep[] {
     return steps;
   }
 
-  let sidecarOk = false;
+  let holderOk = false;
   try {
-    sidecarOk =
+    holderOk =
       spawnSync(py, ["-c", "import importlib.util as u,sys; sys.exit(0 if u.find_spec('chromadb') else 1)"], {
         cwd: MEMPALACE_DIR,
         timeout: 10_000,
@@ -127,7 +127,7 @@ export function installMempalaceIntegration(): InstallStep[] {
   } catch {
     /* fall through to install */
   }
-  if (!sidecarOk) {
+  if (!holderOk) {
     try {
       execFileSync(py, ["-m", "pip", "install", "-e", "."], { cwd: MEMPALACE_DIR, stdio: "pipe", timeout: 600_000 });
       steps.push({ step: "pip-install", ran: true, ok: true, detail: `${py} -m pip install -e ./mempalace` });
@@ -135,7 +135,7 @@ export function installMempalaceIntegration(): InstallStep[] {
       steps.push({ step: "pip-install", ran: true, ok: false, detail: errText(e).slice(0, 160) });
     }
   } else {
-    steps.push({ step: "pip-install", ran: false, ok: true, detail: "sidecar deps already importable" });
+    steps.push({ step: "pip-install", ran: false, ok: true, detail: "holder deps already importable" });
   }
 
   return steps;

@@ -3,7 +3,7 @@
  * harness auto-wakes on SessionStart and auto-keeps verbatim memory on Stop/SessionEnd) and register
  * the LARES MCP seat in ~/.claude.json (so recall reaches the memory sensorium THROUGH the lares
  * house). Any stale `mempalace` MCP registration is reaped in the same pass — a harness holding its
- * own palace sidecar reaches past the node into the store, and N sessions on one Chroma index is the
+ * own palace holder reaches past the node into the store, and N sessions on one Chroma index is the
  * contention that truncated the HNSW segment.
  *
  * Pono shape: a DEEP MERGE that PRESERVES everything already in settings.json (the
@@ -46,7 +46,7 @@ async function acquireLock(lockPath: string): Promise<void> {
 }
 
 /**
- * Reap a stale `mempalace` MCP from ~/.claude.json. A harness holding its own palace sidecar reaches
+ * Reap a stale `mempalace` MCP from ~/.claude.json. A harness holding its own palace holder reaches
  * PAST the node into the store — N sessions, N writers, one Chroma index. The `lares` seat below
  * replaces it; this removes what an older wiring left, so the decouple heals on the next wake.
  */
@@ -85,7 +85,7 @@ function registerLaresMcp(): ClaudeWireStep {
     return { item: "mcp:lares", action: "missing-script", detail: "`claude` CLI not found — cannot register the lares seat" };
   }
   // A registration STANDING never proves it points ANYWHERE real. Presence-idempotence lets a moved
-  // sidecar script leave this seat aimed at a deleted file while the wire reports success — the harness
+  // holder script leave this seat aimed at a deleted file while the wire reports success — the harness
   // door shuts silently and every `wake --init` after it skips the cure. So converge on the RESOLVED
   // spawn, never on mere presence: a seat whose command/script drifts from what resolves now gets
   // RE-POINTED (remove → re-add), and an aligned seat passes untouched.
@@ -252,7 +252,7 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
     steps.push({ item: "cleanupPeriodDays", action: "present", detail: low ? `${String(cur)} days (below floor — raise with \`lares cleanup-days\`)` : `${String(cur)} days` });
   }
 
-  // Memory reaches the harness through the LARES seat, never a palace sidecar of the harness's own.
+  // Memory reaches the harness through the LARES seat, never a palace holder of the harness's own.
   // Reap any stale mempalace registration from both stores (the dead settings.json key here, then
   // ~/.claude.json via the `claude` CLI), then register the lares MCP in the seat it vacates.
   if (settings.mcpServers !== undefined && settings.mcpServers["mempalace"] !== undefined) {

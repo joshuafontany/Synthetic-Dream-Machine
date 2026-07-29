@@ -1,4 +1,4 @@
-// Fake mempalace MCP sidecar for SHORE A — serves a small drawer set with FLAT lar_* metadata so the
+// Fake mempalace MCP holder for SHORE A — serves a small drawer set with FLAT lar_* metadata so the
 // content-graph where-filter (turnsForHandle / drawersWhere) is witnessed end-to-end without the
 // Python deps. `mempalace_list_drawers` honors wing + offset/limit pagination (the client pages it).
 let buf = "";
