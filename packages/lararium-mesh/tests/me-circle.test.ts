@@ -1,5 +1,5 @@
 /**
- * me-circle — the "me" as a single-principal place where Personas overlap, one takes
+ * me-circle — the "me" as a single-principal realm where Personas overlap, one takes
  * the blame at a time, and the multi-principal complexity degenerates to trivial.
  * Tests the operator's ruling is load-bearing on the model floor (the real cabal-realm
  * machinery is exercised in the keyhive lifecycle probe).
@@ -11,9 +11,9 @@ import {
   type CabalRealm, type MeCircle,
 } from "../src/index.js";
 
-const ME_PLACE: CabalRealm = {
-  placeDocIdHex:   "0xme_place",
-  placeAgentIdHex: "0xme_agent",
+const ME_REALM: CabalRealm = {
+  realmDocIdHex:   "0xme_realm",
+  realmAgentIdHex: "0xme_agent",
   substrateUrl:    "automerge:me-substrate",
   genesisUri:      "lar:///me.constellation.overlaps/josh",
 };
@@ -24,9 +24,9 @@ const JOSHUA = { handleHex: "0xhandle_joshua",  petname: "Joshua Fontany" };
 const ENGINEER = { handleHex: "0xhandle_engineer", petname: "Sr. Engineer Josh" };
 const VEILED   = { handleHex: "0xhandle_veiled" };   // a slice that stays veiled (no petname)
 
-function me(): MeCircle { return foundMeCircle(ME_PLACE, PRINCIPAL); }
+function me(): MeCircle { return foundMeCircle(ME_REALM, PRINCIPAL); }
 
-describe("me-circle — a single-principal place where personas overlap", () => {
+describe("me-circle — a single-principal realm where personas overlap", () => {
   test("founds empty — no personas, no one holds the blame yet", () => {
     const m = me();
     expect(m.constellation).toEqual([]);

@@ -19,7 +19,7 @@ import {
 import { hex, hexToBytes } from "../src/crypto.js";
 
 const VOUCHER_SEED = new Uint8Array(32).fill(3);
-const PLACE = "aa".repeat(16);
+const REALM = "aa".repeat(16);
 const JOINER = "bb".repeat(16);
 const NOW = new Date("2026-07-13T00:00:00.000Z");
 const LATER = new Date("2027-01-01T00:00:00.000Z");
@@ -31,7 +31,7 @@ const verify = async (bytes: Uint8Array, sigHex: string, voucherDid: string) =>
 async function mint(over: Partial<CabalInvite> = {}): Promise<CabalInvite> {
   const voucherDid = hex(await ed25519.getPublicKeyAsync(VOUCHER_SEED));
   const inv = await signCabalInvite({
-    placeDocIdHex:     PLACE,
+    realmDocIdHex:     REALM,
     joinerIdentityHex: JOINER,
     voucherDid,
     expiresAt:         "2026-08-13T00:00:00.000Z",
@@ -40,7 +40,7 @@ async function mint(over: Partial<CabalInvite> = {}): Promise<CabalInvite> {
 }
 
 const decide = (invite: CabalInvite | null, now = NOW, policy = DEFAULT_JOIN_POLICY) =>
-  decideCabalJoin({ policy, placeDocIdHex: PLACE, joinerIdentityHex: JOINER, invite, now, verify });
+  decideCabalJoin({ policy, realmDocIdHex: REALM, joinerIdentityHex: JOINER, invite, now, verify });
 
 describe("the DreamNet opens invite-only", () => {
   test("a vouched joiner crosses — and the VOUCHER is named, because the co-pay needs someone to charge", async () => {
@@ -58,7 +58,7 @@ describe("the DreamNet opens invite-only", () => {
     // Anergy, not a ban: the joiner stays at the floor and may re-present LATER, with a vouch. A refusal
     // that says nothing is a refusal that teaches nothing, and the applicant re-presents blind forever.
     expect((await decide(null)).refusal).toBe("no-invite");
-    expect((await decide(await mint({ placeDocIdHex: "cc".repeat(16) }))).refusal).toBe("wrong-place");
+    expect((await decide(await mint({ realmDocIdHex: "cc".repeat(16) }))).refusal).toBe("wrong-realm");
     expect((await decide(await mint({ joinerIdentityHex: "dd".repeat(16) }))).refusal).toBe("wrong-joiner");
     expect((await decide(await mint(), LATER)).refusal).toBe("expired");
     expect((await decide(await mint({ sig: "00".repeat(64) }))).refusal).toBe("bad-signature");
@@ -67,7 +67,7 @@ describe("the DreamNet opens invite-only", () => {
   test("an invite is NEVER BEARER — a stolen one names its thief and refuses them", async () => {
     const stolen = await mint();                       // signed for JOINER, valid, unexpired
     const v = await decideCabalJoin({
-      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE,
+      policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM,
       joinerIdentityHex: "ee".repeat(16),              // ← a different joiner presents it
       invite: stolen, now: NOW, verify,
     });

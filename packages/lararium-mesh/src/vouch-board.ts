@@ -1,5 +1,5 @@
 /**
- * vouch-board — the DOC face of the JOIN axis: the issued `CabalInvite`s a place has minted, from which the
+ * vouch-board — the DOC face of the JOIN axis: the issued `CabalInvite`s a realm has minted, from which the
  * seed-rooted lineage folds. Sibling to `carriage-board` (who carries) and `antigen-board` (who stands
  * banned) under one nexus-pubkey; this board answers WHO VOUCHED FOR WHOM.
  *
@@ -20,7 +20,7 @@
  * dropped invite reads as one that never arrived (withhold, never forge).
  *
  * STORAGE CONVENTION (mirrors carriage-board): each invite rides ONE tiddler whose `text` carries the invite
- * JSON. Keyed by place/voucher/joiner, so distinct vouchers vouching the SAME joiner accrete as the distinct
+ * JSON. Keyed by realm/voucher/joiner, so distinct vouchers vouching the SAME joiner accrete as the distinct
  * edges they carry, while one voucher re-issuing to one joiner stays idempotent — a voucher cannot inflate its
  * own out-degree by re-minting, which would otherwise dilute its other children for free.
  *
@@ -48,7 +48,7 @@ import { CABAL_INVITE_DOMAIN, cabalInviteBytes, type CabalInvite } from "./cabal
 import { sha256HexSync, canonicalJson } from "./crypto.js";
 
 /**
- * The relationship id a vouch presents to the kāpae plane — the voucher→joiner edge inside one place.
+ * The relationship id a vouch presents to the kāpae plane — the voucher→joiner edge inside one realm.
  *
  * A voucher WITHDRAWING a vouch raises a shadow over this id. That reads differently from an EXPIRY: an
  * expired vouch simply no longer stands and a fresh one may replace it, while a withdrawn one stays set
@@ -57,7 +57,7 @@ import { sha256HexSync, canonicalJson } from "./crypto.js";
 export function vouchEdgeId(invite: CabalInvite): string {
   return sha256HexSync(canonicalJson({
     kind: "lar-vouch-edge/v1",
-    placeDocIdHex:     invite.placeDocIdHex,
+    realmDocIdHex:     invite.realmDocIdHex,
     voucherDid:        invite.voucherDid,
     joinerIdentityHex: invite.joinerIdentityHex,
   }));
@@ -67,12 +67,12 @@ export function vouchEdgeId(invite: CabalInvite): string {
 export const VOUCH_ENTRY_PREFIX = "lar:///ha.ka.ba/dreamnet/vouch-registry/" as const;
 
 /**
- * The tiddler key one vouch rides under. Place + voucher + joiner: two vouchers vouching one joiner land on
+ * The tiddler key one vouch rides under. Realm + voucher + joiner: two vouchers vouching one joiner land on
  * DISTINCT keys and both survive (two real edges), while one voucher re-issuing to one joiner lands on the
  * SAME key and stays one edge — re-minting must never buy out-degree.
  */
-export function vouchEntryKey(placeDocIdHex: string, voucherDid: string, joinerIdentityHex: string): string {
-  return `${VOUCH_ENTRY_PREFIX}${placeDocIdHex}/${voucherDid}/${joinerIdentityHex}`;
+export function vouchEntryKey(realmDocIdHex: string, voucherDid: string, joinerIdentityHex: string): string {
+  return `${VOUCH_ENTRY_PREFIX}${realmDocIdHex}/${voucherDid}/${joinerIdentityHex}`;
 }
 
 /**
@@ -81,8 +81,8 @@ export function vouchEntryKey(placeDocIdHex: string, voucherDid: string, joinerI
  * this write adjudicates nothing, exactly as the read trusts nothing it has yet to verify.
  */
 export function writeVouch(draft: LarDoc, invite: CabalInvite): void {
-  const key = vouchEntryKey(invite.placeDocIdHex, invite.voucherDid, invite.joinerIdentityHex);
-  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(invite) }, invite.placeDocIdHex);
+  const key = vouchEntryKey(invite.realmDocIdHex, invite.voucherDid, invite.joinerIdentityHex);
+  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(invite) }, invite.realmDocIdHex);
 }
 
 /** A parsed payload reads as an invite only at the exact FLOOR shape — else null. Extra fields are dropped. */
@@ -90,13 +90,13 @@ function coerceInvite(parsed: unknown): CabalInvite | null {
   if (typeof parsed !== "object" || parsed === null) return null;
   const p = parsed as Record<string, unknown>;
   if (p["kind"] !== CABAL_INVITE_DOMAIN) return null;                  // not a vouch tiddler → skip
-  for (const field of ["placeDocIdHex", "joinerIdentityHex", "voucherDid", "expiresAt", "sig"]) {
+  for (const field of ["realmDocIdHex", "joinerIdentityHex", "voucherDid", "expiresAt", "sig"]) {
     const v = p[field];
     if (typeof v !== "string" || v.length === 0) return null;          // any missing/torn field → skip whole
   }
   return {
     kind:              CABAL_INVITE_DOMAIN,
-    placeDocIdHex:     p["placeDocIdHex"] as string,
+    realmDocIdHex:     p["realmDocIdHex"] as string,
     joinerIdentityHex: p["joinerIdentityHex"] as string,
     voucherDid:        p["voucherDid"] as string,
     expiresAt:         p["expiresAt"] as string,
@@ -109,14 +109,14 @@ function coerceInvite(parsed: unknown): CabalInvite | null {
  * because an unverified vouch grants unbounded mass (see the header). A torn, foreign, or forged tiddler
  * DROPS in silence: it means the invite did not arrive, never that an attack occurred.
  *
- * `place` scopes the fold to one cabal-realm, so a board carrying several places' vouches yields only the
- * lineage of the place being crossed — an invite into somewhere else evidences nothing here.
+ * `realm` scopes the fold to one cabal-realm, so a board carrying several realms' vouches yields only the
+ * lineage of the realm being crossed — an invite into somewhere else evidences nothing here.
  *
  * The result feeds `vouchDagFromInvites` with its precondition already satisfied.
  */
 export async function verifiedVouchesFromBoard(
   doc: LarDoc | undefined | null,
-  place: string,
+  realm: string,
   verify: (bytes: Uint8Array, sigHex: string, voucherDid: string) => Promise<boolean>,
   shadowed: ReadonlySet<string> = new Set(),
 ): Promise<CabalInvite[]> {
@@ -129,7 +129,7 @@ export async function verifiedVouchesFromBoard(
     let parsed: unknown;
     try { parsed = JSON.parse(text); } catch { continue; }             // a non-JSON tiddler is not a vouch
     const invite = coerceInvite(parsed);
-    if (invite !== null && invite.placeDocIdHex === place) candidates.push(invite);
+    if (invite !== null && invite.realmDocIdHex === realm) candidates.push(invite);
   }
   // Verify each against the voucher the invite ITSELF names — a forged tiddler naming a real voucher fails
   // here, and one naming a key it does hold simply carries that voucher's own edge, the honest reading.

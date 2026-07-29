@@ -1,19 +1,19 @@
 /**
- * place-admission — the SHORE that admits INTO A PLACE, composing the two signals into one verdict.
+ * realm-admission — the SHORE that admits INTO A REALM, composing the two signals into one verdict.
  *
- * It gates ONE place (`placeDocIdHex`), never the super-mesh: a crossing cleared here buys standing in the
- * cabal-realm that priced it, and nothing beyond. DreamNet is what places federate INTO, never a thing
+ * It gates ONE realm (`realmDocIdHex`), never the super-mesh: a crossing cleared here buys standing in the
+ * cabal-realm that priced it, and nothing beyond. DreamNet is what realms federate INTO, never a thing
  * anyone is admitted TO.
  *
  * The two gates stand apart and complete: `cabal-invite` answers the STRUCTURAL question (does a licensed
- * member vouch for this joiner, into THIS place, unexpired?) and `admission-price` answers the MARGINAL one
+ * member vouch for this joiner, into THIS realm, unexpired?) and `admission-price` answers the MARGINAL one
  * (what does this crossing cost, given the applicant's lineage rank and the vouching cluster's
  * concentration?). Admission runs both, in that order, and reports the FIRST that refuses.
  *
  * WHY THE INVITE COMES FIRST. The structural check is cheap, offline, and decisive: no invite under an
  * invite-only policy ends the crossing before any lineage is walked. Pricing an applicant nobody vouched for
  * would compute a number no one can pay and call it a refusal — the invite gate says the same thing sooner,
- * and names WHY (no-invite / wrong-place / wrong-joiner / expired / bad-signature) where a bare price cannot.
+ * and names WHY (no-invite / wrong-realm / wrong-joiner / expired / bad-signature) where a bare price cannot.
  *
  * WHY THE VOUCHER ANCHORS THE PRICE. The invite already names the voucher who staked their standing; that
  * same voucher IS the cluster whose concentration the convex wall reads. So the two gates share one fact —
@@ -41,7 +41,7 @@ import type { VouchEdge } from "./lineage-rank.js";
 
 /** Why a crossing did not clear — the invite gate's own refusals, plus the one the price wall raises. */
 export type AdmissionRefusal =
-  | JoinRefusal         // the structural gate refused (no-invite / wrong-place / wrong-joiner / expired / bad-signature)
+  | JoinRefusal         // the structural gate refused (no-invite / wrong-realm / wrong-joiner / expired / bad-signature)
   | "at-the-ceiling";   // the invite cleared, but the vouching cluster sits at β — the convex wall stands vertical
 
 export interface AdmissionVerdict {
@@ -56,7 +56,7 @@ export interface AdmissionVerdict {
 }
 
 /**
- * Admit a joiner to a DreamNet place — the whole gate, both signals.
+ * Admit a joiner to a DreamNet realm — the whole gate, both signals.
  *
  * THE APPLICANT BRINGS NOTHING. There is no budget, balance, or fee to clear — the limiting resource stands
  * SELF-STANDING, and the cost falls on the VOUCHER, paid by dilution the moment they vouch (a voucher's score
@@ -68,9 +68,9 @@ export interface AdmissionVerdict {
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing
  */
-export async function admitToPlace(args: {
+export async function admitToRealm(args: {
   readonly policy:            CabalJoinPolicy;
-  readonly placeDocIdHex:     string;
+  readonly realmDocIdHex:     string;
   readonly joinerIdentityHex: string;
   readonly invite:            CabalInvite | null;
   readonly now:               Date;
@@ -87,7 +87,7 @@ export async function admitToPlace(args: {
   // Signal-2 first: cheap, offline, and it names its own refusal where a price cannot.
   const structural = await decideCabalJoin({
     policy:            args.policy,
-    placeDocIdHex:     args.placeDocIdHex,
+    realmDocIdHex:     args.realmDocIdHex,
     joinerIdentityHex: args.joinerIdentityHex,
     invite:            args.invite,
     now:               args.now,
@@ -132,7 +132,7 @@ export interface LineageAdmission extends AdmissionVerdict {
 /**
  * Admit on a lineage — the whole crossing from the ISSUED INVITES, cap and all.
  *
- * `admitToPlace` takes `edges` already folded, which leaves a caller free to assemble them by hand. That
+ * `admitToRealm` takes `edges` already folded, which leaves a caller free to assemble them by hand. That
  * hand-assembly SKIPS the per-voucher cap, and the cap is not a convenience: it is the choke that bounds the
  * mass any single hand injects into the lineage. A gate whose choke depends on the caller remembering to run
  * it has no choke. So this shore takes the invites THEMSELVES and folds them here, where the cap cannot be
@@ -146,13 +146,13 @@ export interface LineageAdmission extends AdmissionVerdict {
  */
 export async function admitOnLineage(args: {
   readonly policy:            CabalJoinPolicy;
-  readonly placeDocIdHex:     string;
+  readonly realmDocIdHex:     string;
   readonly joinerIdentityHex: string;
   /** The invite THIS applicant presents — the structural signal-2. */
   readonly invite:            CabalInvite | null;
   readonly now:               Date;
   readonly verify:            (bytes: Uint8Array, sigHex: string, voucherDid: string) => Promise<boolean>;
-  /** Every invite the place has issued — the lineage's raw material, folded here and never before. */
+  /** Every invite the realm has issued — the lineage's raw material, folded here and never before. */
   readonly issued:            readonly CabalInvite[];
   readonly seed:              string;
   readonly applicant:         string;
@@ -165,9 +165,9 @@ export async function admitOnLineage(args: {
     ...(args.vouchKeyOf !== undefined ? { vouchKeyOf: args.vouchKeyOf } : {}),
     ...(args.maxVouchesPerVoucher !== undefined ? { maxVouchesPerVoucher: args.maxVouchesPerVoucher } : {}),
   });
-  const verdict = await admitToPlace({
+  const verdict = await admitToRealm({
     policy:            args.policy,
-    placeDocIdHex:     args.placeDocIdHex,
+    realmDocIdHex:     args.realmDocIdHex,
     joinerIdentityHex: args.joinerIdentityHex,
     invite:            args.invite,
     now:               args.now,

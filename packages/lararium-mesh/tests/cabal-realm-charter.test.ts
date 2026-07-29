@@ -21,9 +21,9 @@ import {
 } from "../src/index.js";
 import { load as automergeLoad } from "@automerge/automerge";
 
-const PLACE: CabalRealm = {
-  placeDocIdHex:   "0xdoc_aaa",
-  placeAgentIdHex: "0xagent_aaa",
+const REALM: CabalRealm = {
+  realmDocIdHex:   "0xdoc_aaa",
+  realmAgentIdHex: "0xagent_aaa",
   substrateUrl:    "automerge:cabal-substrate-aaa",
   genesisUri:      "lar:///crossroads.fed.holds/cabal/aaa",
 };
@@ -33,7 +33,7 @@ const SECRET_ROSTER = ["0xmember_alice", "0xmember_bob", "0xmember_carol"];
 const SECRET_SUBSTRATE = { topSecret: "the members' shared content", note: "0xmember_alice posted here" };
 
 const FULL_STATE: CabalRealmPublishState = {
-  place:  PLACE,
+  realm:  REALM,
   meta:   { title: "The Crossroads", description: "a district hearth", foundedAt: 1_700_000_000_000 },
   roster: SECRET_ROSTER,
   substrateContent: SECRET_SUBSTRATE,
@@ -43,8 +43,8 @@ describe("projectCabalRealmCharter — the veil-public shore", () => {
   test("keeps ONLY the charter fields — name, bearing, published meta", () => {
     const charter = projectCabalRealmCharter(FULL_STATE);
     expect(charter).toEqual({
-      placeDocIdHex: PLACE.placeDocIdHex,
-      genesisUri:    PLACE.genesisUri,
+      realmDocIdHex: REALM.realmDocIdHex,
+      genesisUri:    REALM.genesisUri,
       title:         "The Crossroads",
       description:   "a district hearth",
       foundedAt:     1_700_000_000_000,
@@ -59,7 +59,7 @@ describe("projectCabalRealmCharter — the veil-public shore", () => {
     expect(keys).not.toContain("roster");
     expect(keys).not.toContain("substrateContent");
     expect(keys).not.toContain("substrateUrl");   // the substrate address stays private too
-    expect(keys).not.toContain("placeAgentIdHex"); // the membership-graph anchor stays private
+    expect(keys).not.toContain("realmAgentIdHex"); // the membership-graph anchor stays private
     expect(keys).not.toContain("memberCount");     // never DERIVED from the roster
 
     // No members-only VALUE crosses — scan the whole serialized charter for any
@@ -79,14 +79,14 @@ describe("projectCabalRealmCharter — the veil-public shore", () => {
   test("a coarse, EXPLICITLY-published count crosses (opt-in only)", () => {
     const charter = projectCabalRealmCharter({
       ...FULL_STATE,
-      meta: { ...FULL_STATE.meta, memberCount: 5 },  // place chooses to advertise a coarse figure
+      meta: { ...FULL_STATE.meta, memberCount: 5 },  // realm chooses to advertise a coarse figure
     });
     expect(charter.memberCount).toBe(5);
   });
 
-  test("a name-only place projects just name + bearing (optional meta omitted)", () => {
-    const charter = projectCabalRealmCharter({ place: PLACE });
-    expect(charter).toEqual({ placeDocIdHex: PLACE.placeDocIdHex, genesisUri: PLACE.genesisUri });
+  test("a name-only realm projects just name + bearing (optional meta omitted)", () => {
+    const charter = projectCabalRealmCharter({ realm: REALM });
+    expect(charter).toEqual({ realmDocIdHex: REALM.realmDocIdHex, genesisUri: REALM.genesisUri });
     // No undefined-valued keys (so it loads cleanly into Automerge).
     expect(Object.values(charter).every((v) => v !== undefined)).toBe(true);
   });
@@ -97,8 +97,8 @@ describe("cabalRealmCharterSnapshot — content-addressed + deterministic", () =
     const charter = projectCabalRealmCharter(FULL_STATE);
     const snap = await cabalRealmCharterSnapshot(charter);
     const restored = automergeLoad<Record<string, unknown>>(snap.bytes);
-    expect(restored.placeDocIdHex).toBe(PLACE.placeDocIdHex);
-    expect(restored.genesisUri).toBe(PLACE.genesisUri);
+    expect(restored.realmDocIdHex).toBe(REALM.realmDocIdHex);
+    expect(restored.genesisUri).toBe(REALM.genesisUri);
     expect(restored.title).toBe("The Crossroads");
   });
 
@@ -119,13 +119,13 @@ describe("cabalRealmCharterSnapshot — content-addressed + deterministic", () =
     expect(bytes).not.toContain("topSecret");
     expect(bytes).not.toContain("the members' shared content");
     // The public name + bearing DO survive.
-    expect(bytes).toContain(PLACE.placeDocIdHex);
+    expect(bytes).toContain(REALM.realmDocIdHex);
   });
 });
 
 describe("CABAL_REALM_VEIL_PUBLIC_SET — the named boundary (pattern integrity)", () => {
   test("witnesses the veil-public set: charter public, substrate + roster private", () => {
-    expect(CABAL_REALM_VEIL_PUBLIC_SET.veilPublic).toContain("placeDocIdHex");
+    expect(CABAL_REALM_VEIL_PUBLIC_SET.veilPublic).toContain("realmDocIdHex");
     expect(CABAL_REALM_VEIL_PUBLIC_SET.veilPublic).toContain("genesisUri");
     expect(CABAL_REALM_VEIL_PUBLIC_SET.membersOnly).toContain("member roster");
     expect(CABAL_REALM_VEIL_PUBLIC_SET.membersOnly).toContain("substrate content");

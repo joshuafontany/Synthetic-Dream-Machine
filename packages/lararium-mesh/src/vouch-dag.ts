@@ -102,7 +102,7 @@ export interface VouchDag {
  * keeps a voucher's FIRST N vouches and turns the rest away into `capped`, so a caller reads exactly what the
  * budget dropped rather than trusting a silently shorter graph.
  *
- * The invites arrive already verified — `decideCabalJoin` / `admitToPlace` gate them; this fold assumes a
+ * The invites arrive already verified — `decideCabalJoin` / `admitToRealm` gate them; this fold assumes a
  * clean signed set and only shapes it into edges.
  */
 export function vouchDagFromInvites(

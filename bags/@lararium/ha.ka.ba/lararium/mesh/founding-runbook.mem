@@ -436,8 +436,8 @@ The machinery stands built (`feedCabalRealm`, the epoch-lease slot, `deriveCabal
 ''OWED — the smallest honest surface'', and it wants no new machinery:
 
 ```
-lares cabal feed --place <realm-doc-id>              # OWED: lay the first offering; the realm begins
-lares cabal realm --place <realm-doc-id>             # OWED: liveness (alive/cooling/dissolved) + who feeds
+lares cabal feed --realm <realm-doc-id>              # OWED: lay the first offering; the realm begins
+lares cabal liveness --realm <realm-doc-id>          # OWED: liveness (alive/cooling/dissolved) + who feeds
 ```
 
 The second reads the capture-clock the model already argues for — ''who feeds the realm and since when'', verdict-free, so a majority SEES a minority out-feeding them while exit stays cheap (`cabal-realm#the-unswept-corner`).
@@ -453,7 +453,7 @@ The second reads the capture-clock the model already argues for — ''who feeds 
 ''What stands built on the join axis'' (the JOIN ⊥ CONTRACT law, `admission-on-a-lineage`):
 
 ```
-lares cabal vouch <joiner-nym> --place <realm-doc-id> [--as <root-index>]
+lares cabal vouch <joiner-nym> --realm <realm-doc-id> [--as <root-index>]
                                                      # one held face stakes its OWN standing. Admits NOBODY.
 ```
 

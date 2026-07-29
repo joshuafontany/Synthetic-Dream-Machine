@@ -11,15 +11,15 @@ import {
 
 const OLD_ROSTER = ["0xsurvivor_a", "0xsurvivor_b", "0xcaptor"];
 
-const FORK_PLACE: CabalRealm = {
-  placeDocIdHex:   "0xfork_place",
-  placeAgentIdHex: "0xfork_agent",
-  substrateUrl:    "automerge:place-substrate-fork",
-  genesisUri:      "lar:///crossroads.cabal.gathers/place/fork",
+const FORK_REALM: CabalRealm = {
+  realmDocIdHex:   "0xfork_realm",
+  realmAgentIdHex: "0xfork_agent",
+  substrateUrl:    "automerge:realm-substrate-fork",
+  genesisUri:      "lar:///crossroads.cabal.gathers/realm/fork",
 };
 const fork: RealmFork = {
-  forkedFromDocIdHex: "0xcaptured_place",
-  newPlace: FORK_PLACE,
+  forkedFromDocIdHex: "0xcaptured_realm",
+  newRealm: FORK_REALM,
   survivors: ["0xsurvivor_a", "0xsurvivor_b"],
   excluded: ["0xcaptor"],
 };
@@ -37,22 +37,22 @@ describe("fork-realm — fork-as-exit", () => {
   });
 
   test("the fork bearing rides a /fork path segment — the three-term ROOT stays intact", () => {
-    expect(forkGenesisUri("lar:///crossroads.cabal.gathers/place")).toBe("lar:///crossroads.cabal.gathers/place/fork");
+    expect(forkGenesisUri("lar:///crossroads.cabal.gathers/realm")).toBe("lar:///crossroads.cabal.gathers/realm/fork");
     // trailing slash tolerated
-    expect(forkGenesisUri("lar:///crossroads.cabal.gathers/place/")).toBe("lar:///crossroads.cabal.gathers/place/fork");
+    expect(forkGenesisUri("lar:///crossroads.cabal.gathers/realm/")).toBe("lar:///crossroads.cabal.gathers/realm/fork");
   });
 
-  test("a vessel re-points ONLY its pointer at the captured place; other pointers untouched", () => {
-    // a survivor sitting on the captured place moves to the fork
-    expect(repointToFork("0xcaptured_place", fork)).toBe("0xfork_place");
+  test("a vessel re-points ONLY its pointer at the captured realm; other pointers untouched", () => {
+    // a survivor sitting on the captured realm moves to the fork
+    expect(repointToFork("0xcaptured_realm", fork)).toBe("0xfork_realm");
     // a pointer elsewhere is left alone (idempotent for non-matching)
-    expect(repointToFork("0xsome_other_place", fork)).toBe("0xsome_other_place");
+    expect(repointToFork("0xsome_other_realm", fork)).toBe("0xsome_other_realm");
     // the fork's own id re-points to itself (already there → unchanged, not the old id)
-    expect(repointToFork("0xfork_place", fork)).toBe("0xfork_place");
+    expect(repointToFork("0xfork_realm", fork)).toBe("0xfork_realm");
   });
 
-  test("continuity link — the fork records the place it forked FROM (legitimacy re-anchor)", () => {
-    expect(fork.forkedFromDocIdHex).toBe("0xcaptured_place");
-    expect(fork.newPlace.placeDocIdHex).not.toBe(fork.forkedFromDocIdHex);   // a FRESH identity
+  test("continuity link — the fork records the realm it forked FROM (legitimacy re-anchor)", () => {
+    expect(fork.forkedFromDocIdHex).toBe("0xcaptured_realm");
+    expect(fork.newRealm.realmDocIdHex).not.toBe(fork.forkedFromDocIdHex);   // a FRESH identity
   });
 });

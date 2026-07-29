@@ -73,13 +73,13 @@ export interface CabalRealmMaintenanceProvenance {
  * calibrates what they mean.
  */
 export function cabalRealmMaintenanceProvenance(
-  place:      CabalRealm,
+  realm:      CabalRealm,
   leaseSlots: ReadonlyMap<string, string>,
 ): CabalRealmMaintenanceProvenance {
-  const prefix = leaseEpochPrefix(place.placeDocIdHex);
+  const prefix = leaseEpochPrefix(realm.realmDocIdHex);
   const maintainers: MaintainerStanding[] = [];
   for (const [slotUri, value] of leaseSlots) {
-    if (!slotUri.startsWith(prefix)) continue;            // a foreign place's slot
+    if (!slotUri.startsWith(prefix)) continue;            // a foreign realm's slot
     const epoch = Number(value);
     if (!Number.isInteger(epoch)) continue;               // a malformed slot value
     const writerId = decodeURIComponent(slotUri.slice(prefix.length));

@@ -1,15 +1,15 @@
 /**
- * FORK-PLACE LIFECYCLE WITNESS — fork-as-exit over REAL Keyhive: a captured place is
+ * FORK-REALM LIFECYCLE WITNESS — fork-as-exit over REAL Keyhive: a captured realm is
  * forked into a fresh one that STRUCTURALLY LOCKS OUT the captor. No mocks.
  *
  * The drift:
- *   1. FOUND a place, join two survivors + one captor (the hostile out-maintainer).
+ *   1. FOUND a realm, join two survivors + one captor (the hostile out-maintainer).
  *   2. old roster = 3 (the captured state).
- *   3. FORK excluding the captor → a fresh sentinel place, the survivors carried in.
+ *   3. FORK excluding the captor → a fresh sentinel realm, the survivors carried in.
  *   4. the fork's real Keyhive roster = the two survivors ONLY.
  *   5. THE LOCKOUT — the captor holds NO membership in the fork (verifySentinelMembership
  *      fails); it is not on the roster; it keeps only the dead shell.
- *   6. CONTINUITY — the fork records forkedFrom = the captured place (legitimacy re-anchor),
+ *   6. CONTINUITY — the fork records forkedFrom = the captured realm (legitimacy re-anchor),
  *      and a survivor re-points its pointer old→fork (Zooko).
  *
  * If a captor can still reach the fork, fork-as-exit does not hold — surface it.
@@ -23,8 +23,8 @@ import { foundCabalRealm, openDwelling, dwellersHolding } from "../src/cabal-rea
 import { forkCabalRealm } from "../src/fork-realm-ceremony.js";
 import { repointToFork } from "@lararium/mesh";
 
-const PLACE_URI = "lar:///crossroads.cabal.gathers/captured";
-const SUBSTRATE = "automerge:captured-place-substrate";
+const REALM_URI = "lar:///crossroads.cabal.gathers/captured";
+const SUBSTRATE = "automerge:captured-realm-substrate";
 
 let failures = 0;
 function stage(name: string, ok: boolean, detail = ""): void {
@@ -47,44 +47,44 @@ async function main(): Promise<void> {
     return id;
   }
 
-  // ── STAGE 1 — FOUND the captured place, join two survivors + a captor ───────────
-  const place = await foundCabalRealm(legit, PLACE_URI, SUBSTRATE);
+  // ── STAGE 1 — FOUND the captured realm, join two survivors + a captor ───────────
+  const realm = await foundCabalRealm(legit, REALM_URI, SUBSTRATE);
   const survivorA = await member(0xa1);
   const survivorB = await member(0xb2);
   const captor    = await member(0xcc);
-  await openDwelling(legit, place, survivorA);
-  await openDwelling(legit, place, survivorB);
-  await openDwelling(legit, place, captor);
-  const oldDwellers = await dwellersHolding(legit, place, [survivorA, survivorB, captor]);
-  stage("1 CAPTURED — the place holds two survivors + a captor", oldDwellers.length === 3, `roster=${oldDwellers.length}`);
+  await openDwelling(legit, realm, survivorA);
+  await openDwelling(legit, realm, survivorB);
+  await openDwelling(legit, realm, captor);
+  const oldDwellers = await dwellersHolding(legit, realm, [survivorA, survivorB, captor]);
+  stage("1 CAPTURED — the realm holds two survivors + a captor", oldDwellers.length === 3, `roster=${oldDwellers.length}`);
 
   // ── STAGE 2 — FORK excluding the captor ────────────────────────────────────────
-  const fork = await forkCabalRealm(legit, place, oldDwellers, [captor]);
-  stage("2 FORK — a fresh place forks, the captor excluded by omission",
-    fork.newPlace.placeDocIdHex.length > 0 &&
-    fork.newPlace.placeDocIdHex !== place.placeDocIdHex &&
+  const fork = await forkCabalRealm(legit, realm, oldDwellers, [captor]);
+  stage("2 FORK — a fresh realm forks, the captor excluded by omission",
+    fork.newRealm.realmDocIdHex.length > 0 &&
+    fork.newRealm.realmDocIdHex !== realm.realmDocIdHex &&
     fork.survivors.length === 2 && !fork.survivors.includes(captor),
-    `fork=${fork.newPlace.placeDocIdHex.slice(0, 10)}… survivors=${fork.survivors.length}`);
+    `fork=${fork.newRealm.realmDocIdHex.slice(0, 10)}… survivors=${fork.survivors.length}`);
 
   // ── STAGE 3 — the fork's real roster = the survivors ONLY ───────────────────────
-  const forkRoster = await dwellersHolding(legit, fork.newPlace, [survivorA, survivorB, captor]);
+  const forkRoster = await dwellersHolding(legit, fork.newRealm, [survivorA, survivorB, captor]);
   stage("3 ROSTER — the fork's real Keyhive roster carries the survivors, not the captor",
     forkRoster.length === 2 && forkRoster.includes(survivorA) && forkRoster.includes(survivorB) && !forkRoster.includes(captor),
     `fork-roster=${forkRoster.length} hasCaptor=${forkRoster.includes(captor)}`);
 
   // ── STAGE 4 — THE LOCKOUT: the captor holds no key to the fork ──────────────────
-  const captorInFork = await legit.verifySentinelMembership(captor, fork.newPlace.placeDocIdHex);
-  const survivorInFork = await legit.verifySentinelMembership(survivorA, fork.newPlace.placeDocIdHex);
+  const captorInFork = await legit.verifySentinelMembership(captor, fork.newRealm.realmDocIdHex);
+  const survivorInFork = await legit.verifySentinelMembership(survivorA, fork.newRealm.realmDocIdHex);
   stage("4 LOCKOUT — the captor has NO membership in the fork; a survivor does",
     captorInFork.ok === false && survivorInFork.ok === true,
     `captor.ok=${captorInFork.ok} survivorA.ok=${survivorInFork.ok}`);
 
   // ── STAGE 5 — CONTINUITY + the Zooko re-point ──────────────────────────────────
-  const survivorRepoint = repointToFork(place.placeDocIdHex, fork);        // a survivor moves old→fork
+  const survivorRepoint = repointToFork(realm.realmDocIdHex, fork);        // a survivor moves old→fork
   const captorRepoint = repointToFork("0xcaptor_only_knows_old", fork);    // the captor's other pointer is untouched
-  stage("5 CONTINUITY — fork links to the captured place; a survivor re-points old→fork",
-    fork.forkedFromDocIdHex === place.placeDocIdHex &&
-    survivorRepoint === fork.newPlace.placeDocIdHex &&
+  stage("5 CONTINUITY — fork links to the captured realm; a survivor re-points old→fork",
+    fork.forkedFromDocIdHex === realm.realmDocIdHex &&
+    survivorRepoint === fork.newRealm.realmDocIdHex &&
     captorRepoint === "0xcaptor_only_knows_old",
     `forkedFrom=${fork.forkedFromDocIdHex.slice(0, 10)}… repoint→${survivorRepoint.slice(0, 10)}…`);
 

@@ -80,8 +80,8 @@ async function attemptCrossing(identity: LeafIdentity, aud: string, gatePubKey: 
 async function foundStandaloneFloor(seed: Uint8Array): Promise<void> {
   const provider = new KeyhiveProvider();
   await provider.init({ seed, eventStore: new InMemoryEventStore() });
-  const place = await foundCabalRealm(provider, "lar:///anon.floor.stands/denied-but-whole", "automerge:anon-floor-substrate");
-  console.log(`[crossing-client] (anon) ✓ denied at the gate, yet WHOLE — founded own island place=${place.placeDocIdHex.slice(0, 12)}…`);
+  const realm = await foundCabalRealm(provider, "lar:///anon.floor.stands/denied-but-whole", "automerge:anon-floor-substrate");
+  console.log(`[crossing-client] (anon) ✓ denied at the gate, yet WHOLE — founded own island realm=${realm.realmDocIdHex.slice(0, 12)}…`);
   await provider.dispose();
 }
 

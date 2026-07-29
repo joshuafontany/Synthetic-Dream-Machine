@@ -46,13 +46,13 @@ async function main(): Promise<void> {
   const vesselC = new KeyhiveProvider();
   await vesselC.init({ seed: new Uint8Array(32).fill(0xc0), eventStore: new InMemoryEventStore() });
 
-  // ── STAGE 1 — FOUND the shared place (local Keyhive; no channel needed) ─────────
-  const place = await foundCabalRealm(founder, "lar:///crossroads.cabal.gathers/ws-swarm", "automerge:ws-swarm-substrate");
-  stage("1 FOUND — shared place founded, three WS clients live on the relay", place.placeDocIdHex.length > 0,
-    `relay=:${String(relay.port)} place=${place.placeDocIdHex.slice(0, 10)}…`);
+  // ── STAGE 1 — FOUND the shared realm (local Keyhive; no channel needed) ─────────
+  const realm = await foundCabalRealm(founder, "lar:///crossroads.cabal.gathers/ws-swarm", "automerge:ws-swarm-substrate");
+  stage("1 FOUND — shared realm founded, three WS clients live on the relay", realm.realmDocIdHex.length > 0,
+    `relay=:${String(relay.port)} realm=${realm.realmDocIdHex.slice(0, 10)}…`);
 
   // ── STAGE 2 — INVITE broadcast over LIVE WS ────────────────────────────────────
-  await founderCh.offer({ kind: "invite", from: "founder", to: MEMBERSHIP_BROADCAST, payload: { placeDocIdHex: place.placeDocIdHex } });
+  await founderCh.offer({ kind: "invite", from: "founder", to: MEMBERSHIP_BROADCAST, payload: { realmDocIdHex: realm.realmDocIdHex } });
   await settle();
   const invB = await bCh.poll("vessel-B");
   const invC = await cCh.poll("vessel-C");
@@ -72,10 +72,10 @@ async function main(): Promise<void> {
   const admitted: string[] = [];
   for (const c of cards) {
     const { id } = await founder.receiveContactCard(new Uint8Array(Buffer.from(c.payload as string, "base64")));
-    await joinCabalRealm(founder, place, id);
+    await joinCabalRealm(founder, realm, id);
     admitted.push(id);
   }
-  const roster = await cabalRealmRoster(founder, place, admitted);
+  const roster = await cabalRealmRoster(founder, realm, admitted);
   stage("4 ADMIT+ROSTER — the ceremony crossed LIVE WS; real Keyhive roster holds both PersonaGroups",
     roster.length === 2, `roster=${roster.length}`);
 

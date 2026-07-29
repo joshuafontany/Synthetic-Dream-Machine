@@ -55,10 +55,10 @@ import type { BagStowage, ResidencyTemperature } from "./bag-residency.js";
 export interface CabalRealm {
   /** The realm's Keyhive sentinel DocId, hex — the content-addressed NAME, used
    *  as the lease resourceId. Knowing it grants no authority (#the-realm). */
-  readonly placeDocIdHex: string;
+  readonly realmDocIdHex: string;
   /** The realm's Keyhive sentinel AgentId, hex — the membership-graph anchor a
    *  later cut (cut 2, gated) ties the CGKA ceremony to. Inert here. */
-  readonly placeAgentIdHex: string;
+  readonly realmAgentIdHex: string;
   /** The Automerge substrate doc URL — the shared content that cools to anu when
    *  the members stop feeding it (the LIVED / DISSOLVED half). */
   readonly substrateUrl: string;
@@ -72,8 +72,8 @@ export interface CabalRealm {
  * max-register (effectiveLeaseEpoch = max over slots); the realm's own
  * collective-maintenance heartbeat, NOT an authority epoch (#the-tie-break).
  */
-export function cabalRealmLeaseSlot(placeDocIdHex: string, writerId: string): string {
-  return leaseEpochSlotUri(placeDocIdHex, writerId);
+export function cabalRealmLeaseSlot(realmDocIdHex: string, writerId: string): string {
+  return leaseEpochSlotUri(realmDocIdHex, writerId);
 }
 
 /**
@@ -107,9 +107,9 @@ export function deriveCabalRealmLiveness(temp: ResidencyTemperature): CabalRealm
  */
 export function feedCabalRealm(
   mgr: BagStowage,
-  place: CabalRealm,
+  realm: CabalRealm,
 ): Promise<void> {
-  return mgr.touch(place.substrateUrl);
+  return mgr.touch(realm.substrateUrl);
 }
 
 /**

@@ -1,7 +1,7 @@
 /**
  * admit-on-lineage — the crossing folded from the ISSUED INVITES, so the per-voucher cap cannot be skipped.
  *
- * `admitToPlace` takes pre-folded edges; a caller assembling them by hand silently loses the choke that
+ * `admitToRealm` takes pre-folded edges; a caller assembling them by hand silently loses the choke that
  * bounds any one hand's injection into the lineage. This shore takes the invites themselves. What matters:
  * the cap BITES here, what it turned away comes back VISIBLE, and with nothing capped the shore agrees
  * exactly with the manual path — so folding here costs no behaviour, it only removes a way to get it wrong.
@@ -11,7 +11,7 @@
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
-  admitOnLineage, admitToPlace, signCabalInvite, vouchDagFromInvites, DEFAULT_JOIN_POLICY,
+  admitOnLineage, admitToRealm, signCabalInvite, vouchDagFromInvites, DEFAULT_JOIN_POLICY,
   type AdmissionDials, type CabalInvite,
 } from "../src/index.js";
 import { hex, hexToBytes } from "../src/crypto.js";
@@ -22,7 +22,7 @@ const verify = (bytes: Uint8Array, sigHex: string, voucherDid: string) =>
   ed.verifyAsync(hexToBytes(sigHex), bytes, hexToBytes(voucherDid)).catch(() => false);
 
 const VOUCHER_SEED = new Uint8Array(32).fill(7);
-const PLACE  = "a".repeat(64);
+const REALM  = "a".repeat(64);
 const JOINER = "b".repeat(64);
 const NOW    = new Date("2026-07-14T00:00:00Z");
 const LATER  = "2026-08-01T00:00:00Z";
@@ -31,7 +31,7 @@ const DIALS: AdmissionDials = { epsilon: 0.15, beta: 0.9, rho: 1, supply: 1, alp
 /** An invite from the one voucher to whoever — the raw material the lineage folds from. */
 async function inviteTo(joiner: string): Promise<CabalInvite> {
   return signCabalInvite({
-    placeDocIdHex: PLACE, joinerIdentityHex: joiner,
+    realmDocIdHex: REALM, joinerIdentityHex: joiner,
     voucherDid: await pubOf(VOUCHER_SEED), expiresAt: LATER,
   }, signer(VOUCHER_SEED));
 }
@@ -45,7 +45,7 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
     )];
 
     const v = await admitOnLineage({
-      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+      policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
       invite: issued[0]!, now: NOW, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
       maxVouchesPerVoucher: 2,
@@ -61,12 +61,12 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
     const issued = [await inviteTo(JOINER), await inviteTo("c".repeat(64))];
 
     const viaShore = await admitOnLineage({
-      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+      policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
       invite: issued[0]!, now: NOW, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
     });
-    const byHand = await admitToPlace({
-      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+    const byHand = await admitToRealm({
+      policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
       invite: issued[0]!, now: NOW, verify,
       edges: vouchDagFromInvites(issued).edges,
       seed: voucherDid, applicant: JOINER, dials: DIALS,
@@ -85,7 +85,7 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
     const issued = [await inviteTo("c".repeat(64)), await inviteTo(JOINER)];
 
     const v = await admitOnLineage({
-      policy: DEFAULT_JOIN_POLICY, placeDocIdHex: PLACE, joinerIdentityHex: JOINER,
+      policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
       invite: issued[1]!, now: NOW, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
       maxVouchesPerVoucher: 1,

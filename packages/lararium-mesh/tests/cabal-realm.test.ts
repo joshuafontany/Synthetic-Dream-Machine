@@ -21,30 +21,30 @@ import {
 import { leaseEpochSlotUri } from "../src/epoch-lease.js";
 import { BagStowage } from "../src/bag-residency.js";
 
-const PLACE: CabalRealm = {
-  placeDocIdHex:   "0xdoc_aaa",
-  placeAgentIdHex: "0xagent_aaa",
+const REALM: CabalRealm = {
+  realmDocIdHex:   "0xdoc_aaa",
+  realmAgentIdHex: "0xagent_aaa",
   substrateUrl:    "automerge:cabal-substrate-aaa",
   genesisUri:      "lar:///crossroads.fed.holds/cabal/aaa",
 };
 
-describe("cabalRealmLeaseSlot — the place's liveness lease, DocId-keyed", () => {
+describe("cabalRealmLeaseSlot — the realm's liveness lease, DocId-keyed", () => {
   test("deterministic + = the epoch-lease slot keyed by the sentinel DocId", () => {
-    expect(cabalRealmLeaseSlot(PLACE.placeDocIdHex, "writer-1"))
-      .toBe(cabalRealmLeaseSlot(PLACE.placeDocIdHex, "writer-1"));
-    expect(cabalRealmLeaseSlot(PLACE.placeDocIdHex, "writer-1"))
-      .toBe(leaseEpochSlotUri(PLACE.placeDocIdHex, "writer-1"));
+    expect(cabalRealmLeaseSlot(REALM.realmDocIdHex, "writer-1"))
+      .toBe(cabalRealmLeaseSlot(REALM.realmDocIdHex, "writer-1"));
+    expect(cabalRealmLeaseSlot(REALM.realmDocIdHex, "writer-1"))
+      .toBe(leaseEpochSlotUri(REALM.realmDocIdHex, "writer-1"));
   });
 
-  test("keyed by docId — different places → different slots", () => {
+  test("keyed by docId — different realms → different slots", () => {
     const a = cabalRealmLeaseSlot("0xdoc_aaa", "w");
     const b = cabalRealmLeaseSlot("0xdoc_bbb", "w");
     expect(a).not.toBe(b);
   });
 
-  test("keyed by writer — different writers → distinct slots under one place", () => {
-    expect(cabalRealmLeaseSlot(PLACE.placeDocIdHex, "w1"))
-      .not.toBe(cabalRealmLeaseSlot(PLACE.placeDocIdHex, "w2"));
+  test("keyed by writer — different writers → distinct slots under one realm", () => {
+    expect(cabalRealmLeaseSlot(REALM.realmDocIdHex, "w1"))
+      .not.toBe(cabalRealmLeaseSlot(REALM.realmDocIdHex, "w2"));
   });
 });
 
@@ -58,16 +58,16 @@ describe("deriveCabalRealmLiveness — pure read off the residency temperature",
 });
 
 describe("feedCabalRealm — member maintenance warms the substrate (commoning)", () => {
-  test("touch heats the substrate to wela → the place reads alive", async () => {
+  test("touch heats the substrate to wela → the realm reads alive", async () => {
     const mgr = new BagStowage();
-    mgr.registerCold(PLACE.substrateUrl);
-    expect(mgr.tier(PLACE.substrateUrl)).toBe("anu");           // unfed → cold
-    expect(deriveCabalRealmLiveness(mgr.tier(PLACE.substrateUrl)!)).toBe("dissolved");
+    mgr.registerCold(REALM.substrateUrl);
+    expect(mgr.tier(REALM.substrateUrl)).toBe("anu");           // unfed → cold
+    expect(deriveCabalRealmLiveness(mgr.tier(REALM.substrateUrl)!)).toBe("dissolved");
 
-    await feedCabalRealm(mgr, PLACE);                            // hoʻowela
+    await feedCabalRealm(mgr, REALM);                            // hoʻowela
 
-    expect(mgr.tier(PLACE.substrateUrl)).toBe("wela");          // fed → hot
-    expect(deriveCabalRealmLiveness(mgr.tier(PLACE.substrateUrl)!)).toBe("alive");
+    expect(mgr.tier(REALM.substrateUrl)).toBe("wela");          // fed → hot
+    expect(deriveCabalRealmLiveness(mgr.tier(REALM.substrateUrl)!)).toBe("alive");
   });
 });
 

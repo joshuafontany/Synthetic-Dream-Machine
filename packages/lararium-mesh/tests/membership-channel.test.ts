@@ -39,7 +39,7 @@ describe("InMemoryMembershipChannel — the deliver-once routing contract", () =
 
   test("broadcast reaches every OTHER participant once, never the sender", async () => {
     const ch = new InMemoryMembershipChannel();
-    await ch.offer(env("invite", "founder", MEMBERSHIP_BROADCAST, { place: "cabal" }));
+    await ch.offer(env("invite", "founder", MEMBERSHIP_BROADCAST, { realm: "cabal" }));
     expect(await ch.poll("bob")).toHaveLength(1);
     expect(await ch.poll("carol")).toHaveLength(1);
     expect(await ch.poll("founder")).toHaveLength(0);   // not to self

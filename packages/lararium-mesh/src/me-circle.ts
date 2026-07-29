@@ -1,17 +1,17 @@
 /**
- * me-circle — the "me" as a SINGLE-PRINCIPAL PLACE: a place in l-space where a human's
+ * me-circle — the "me" as a SINGLE-PRINCIPAL REALM: a locus in l-space where a human's
  * multiple Personas (handle-Circles / PersonaGroups) OVERLAP, where ONE Persona takes
  * the blame at a time, and which the embodied human carries through space-time with
  * itself (body + environment).
  *
  * A "me" composes as a single-principal
- * cabal-realm — the SAME place machinery (cabal-realm.ts), with the multi-principal
+ * cabal-realm — the SAME realm machinery (cabal-realm.ts), with the multi-principal
  * complexity DEGENERATE to trivial because there is ONE ordering authority: you.
- *   · COMPOSITION (Circle = who is me) ⊥ the optional shared substrate (the place).
+ *   · COMPOSITION (Circle = who is me) ⊥ the optional shared substrate (the realm).
  *   · The cabal-realm tie-break (BeeKEM blank-on-merge) orders CONCURRENT DIFFERENT-
- *     principal ops — a me-place has no different principals, so it never engages.
+ *     principal ops — a me-realm has no different principals, so it never engages.
  *   · The capture-clock detects a minority out-feeding a majority — you cannot capture
- *     your OWN me, so a me-place is capture-immune by construction.
+ *     your OWN me, so a me-realm is capture-immune by construction.
  *   · The legitimacy gate (persistence≠legitimacy) dissolves — there is no contested
  *     authority to be legitimate ABOUT.
  * So the "me" reuses the cabal-realm keel with the hard parts collapsed to nothing.
@@ -35,7 +35,7 @@ import type { CabalRealm } from "./cabal-realm.js";
 
 /**
  * A persona in the me-constellation — a handle-Circle (PersonaGroup) the human holds,
- * overlapping in the me-place. The petname is the DISCLOSURE pole: present = known
+ * overlapping in the me-realm. The petname is the DISCLOSURE pole: present = known
  * (surfaced for this slice-of-human), absent = veiled (name⊥).
  */
 export interface ConstellationPersona {
@@ -46,13 +46,13 @@ export interface ConstellationPersona {
 }
 
 /**
- * The "me" — a single-principal place where the human's personas overlap. Wraps a
+ * The "me" — a single-principal realm where the human's personas overlap. Wraps a
  * cabal-realm (the shared substrate the personas overlap in) and adds the constellation
  * + the one-at-a-time accountability + the single ordering authority.
  */
 export interface MeCircle {
   /** The shared substrate the personas overlap in — a cabal-realm, single-principal. */
-  readonly mePlace: CabalRealm;
+  readonly meRealm: CabalRealm;
   /** The ONE ordering authority — the human's me-key, hex. Every persona answers to it. */
   readonly principalHex: string;
   /** The overlapping personas (handle-Circles). The closure of the human's constellation. */
@@ -61,9 +61,9 @@ export interface MeCircle {
   readonly activeHandleHex: string | null;
 }
 
-/** Found an empty me-Circle over a single-principal place. Born with no personas, none active. */
-export function foundMeCircle(mePlace: CabalRealm, principalHex: string): MeCircle {
-  return { mePlace, principalHex, constellation: [], activeHandleHex: null };
+/** Found an empty me-Circle over a single-principal realm. Born with no personas, none active. */
+export function foundMeCircle(meRealm: CabalRealm, principalHex: string): MeCircle {
+  return { meRealm, principalHex, constellation: [], activeHandleHex: null };
 }
 
 /**
@@ -73,7 +73,7 @@ export function foundMeCircle(mePlace: CabalRealm, principalHex: string): MeCirc
  * FIRST persona contracted becomes active by default (someone must take the blame).
  *
  * Single-principal: no tie-break, no admission gate — you are the authority over your
- * own slices, so contracting is your free act. (A MULTI-principal place would route
+ * own slices, so contracting is your free act. (A MULTI-principal realm would route
  * this through the Keyhive ceremony + the inert gate; a me does not.)
  */
 export function contractPersona(me: MeCircle, persona: ConstellationPersona): MeCircle {
@@ -117,7 +117,7 @@ export function withActivePersona(me: MeCircle, handleHex: string): MeCircle {
 }
 
 /**
- * THE SINGLE-PRINCIPAL DEGENERACY — the load-bearing claim. A me-place needs NONE of
+ * THE SINGLE-PRINCIPAL DEGENERACY — the load-bearing claim. A me-realm needs NONE of
  * the cabal-realm's multi-principal machinery, because every persona answers to the one
  * principal:
  *   · tieBreakEngaged   — false: no concurrent DIFFERENT-principal ops to order.

@@ -1,8 +1,8 @@
 /**
  * capture-reading — the clock↔dial shore: compose the capture-CLOCK's maintenance provenance
  * with the conviction-DIAL's 1Hive threshold curve into a legible, VERDICT-FREE capture
- * posture. It surfaces WHERE a place's power-concentration sits on the convex curve toward
- * the operator's ceiling β — it never RULES a place captured (which-fork-is-real is
+ * posture. It surfaces WHERE a realm's power-concentration sits on the convex curve toward
+ * the operator's ceiling β — it never RULES a realm captured (which-fork-is-real is
  * non-computable; the operator reads, the members decide — the-veil-ladder#the-bounds).
  *
  * Platform-blind: composes ./cabal-realm-clock + ./conviction-dial. NO node: imports.
@@ -32,14 +32,14 @@ export interface CaptureReading {
   readonly headroom: number;
   /** The 1Hive convex resistance bar at this concentration (→ Infinity as r nears β). */
   readonly curveBar: number;
-  /** r ≥ β — the place sits AT/over the operator's ceiling. A reading, NOT a verdict of capture. */
+  /** r ≥ β — the realm sits AT/over the operator's ceiling. A reading, NOT a verdict of capture. */
   readonly atCeiling: boolean;
 }
 
 /**
  * The concentration r — the leading maintainer's share of total maintenance-epochs. All
  * maintenance in one hand → r near 1 (the visible capture shape); broadly co-maintained →
- * r low. An unfed place reads 0. Complements the clock's spread/leadingCount with the SHARE.
+ * r low. An unfed realm reads 0. Complements the clock's spread/leadingCount with the SHARE.
  */
 export function concentration(clock: CabalRealmMaintenanceProvenance): number {
   let total = 0, leader = 0;
@@ -52,7 +52,7 @@ export function concentration(clock: CabalRealmMaintenanceProvenance): number {
 
 /**
  * Read the capture posture — compose the clock's concentration with the dial's convex curve.
- * VERDICT-FREE: the operator sets β and reads where the place sits; the reading never rules.
+ * VERDICT-FREE: the operator sets β and reads where the realm sits; the reading never rules.
  */
 export function captureReading(clock: CabalRealmMaintenanceProvenance, dials: CaptureDials): CaptureReading {
   const r = concentration(clock);

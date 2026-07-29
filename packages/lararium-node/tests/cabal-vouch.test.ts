@@ -28,7 +28,7 @@ import { runCabalVouch, CabalVouchError } from "../src/commands/cabal-vouch.js";
 let root: string;
 let priorLarRoot: string | undefined;
 
-const PLACE  = "a".repeat(64);
+const REALM  = "a".repeat(64);
 const JOINER = "b".repeat(64);
 const OTHER  = "c".repeat(64);
 const NOW    = Date.parse("2026-07-14T00:00:00Z");
@@ -41,7 +41,7 @@ beforeEach(async () => {
   root = mkdtempSync(join(tmpdir(), "lares-vouch-"));
   priorLarRoot = process.env["LAR_ROOT"];
   process.env["LAR_ROOT"] = root;
-  await generateOrLoadVesselIdentity(larDataDir());   // the PLACE's key — scopes the board
+  await generateOrLoadVesselIdentity(larDataDir());   // the REALM's key — scopes the board
   await generateOrLoadPersonaGroupRoot(larDataDir()); // the HUMAN's face — the hand that stakes
 });
 afterEach(async () => {
@@ -52,17 +52,17 @@ afterEach(async () => {
 });
 
 /** Read the board back the way any consumer must — through the verifying read. */
-async function boardVouches(place = PLACE) {
+async function boardVouches(realm = REALM) {
   const repo   = new Repo({ storage: new NodeFSStorageAdapter(larDataDir()) });
   const handle = await materializeSharedLarDoc(repo, vouchBoardDocUrl(await loadVesselVerifyingKey(larDataDir())), "@vouch-registry");
-  const out    = await verifiedVouchesFromBoard(handle.doc(), place, verify);
+  const out    = await verifiedVouchesFromBoard(handle.doc(), realm, verify);
   await repo.flush();
   return out;
 }
 
 describe("runCabalVouch — the vouch lands, verified, and dilutes the hand that made it", () => {
   it("mints a vouch that reads back through the VERIFYING read, signed by the held face", async () => {
-    const r = await runCabalVouch({ joiner: JOINER, place: PLACE, expiresAt: LATER }, NOW);
+    const r = await runCabalVouch({ joiner: JOINER, realm: REALM, expiresAt: LATER }, NOW);
 
     expect(r.voucherDid).toBe(await loadPersonaGroupRootVerifyingKey(larDataDir(), 0));
     expect(r.outDegreeFloor).toBe(1);
@@ -75,13 +75,13 @@ describe("runCabalVouch — the vouch lands, verified, and dilutes the hand that
   });
 
   it("out-degree GROWS with a distinct joiner and does NOT with a re-mint — re-minting buys no branching", async () => {
-    const first = await runCabalVouch({ joiner: JOINER, place: PLACE, expiresAt: LATER }, NOW);
+    const first = await runCabalVouch({ joiner: JOINER, realm: REALM, expiresAt: LATER }, NOW);
     expect(first.outDegreeFloor).toBe(1);
 
-    const second = await runCabalVouch({ joiner: OTHER, place: PLACE, expiresAt: LATER }, NOW);
+    const second = await runCabalVouch({ joiner: OTHER, realm: REALM, expiresAt: LATER }, NOW);
     expect(second.outDegreeFloor).toBe(2);            // a real second edge — the voucher's mass now splits two ways
 
-    const again = await runCabalVouch({ joiner: JOINER, place: PLACE, expiresAt: LATER }, NOW);
+    const again = await runCabalVouch({ joiner: JOINER, realm: REALM, expiresAt: LATER }, NOW);
     expect(again.reMinted).toBe(true);
     expect(again.outDegreeFloor).toBe(2);             // STILL two — a re-mint is one edge, never a free dilution
 
@@ -91,34 +91,34 @@ describe("runCabalVouch — the vouch lands, verified, and dilutes the hand that
 
   it("REFUSES to vouch for itself — self-boosting is unrepresentable on a lineage", async () => {
     const self = (await loadPersonaGroupRootVerifyingKey(larDataDir(), 0))!;
-    await expect(runCabalVouch({ joiner: self, place: PLACE, expiresAt: LATER }, NOW))
+    await expect(runCabalVouch({ joiner: self, realm: REALM, expiresAt: LATER }, NOW))
       .rejects.toThrow(CabalVouchError);
     expect(await boardVouches()).toHaveLength(0);   // and nothing landed
   });
 
   it("REFUSES an already-past expiry — a vouch that arrives expired vouches for nobody", async () => {
-    await expect(runCabalVouch({ joiner: JOINER, place: PLACE, expiresAt: "2020-01-01T00:00:00Z" }, NOW))
+    await expect(runCabalVouch({ joiner: JOINER, realm: REALM, expiresAt: "2020-01-01T00:00:00Z" }, NOW))
       .rejects.toThrow(CabalVouchError);
     expect(await boardVouches()).toHaveLength(0);
   });
 
-  it("REFUSES a malformed joiner or place, and an unheld persona root — before anything is written", async () => {
-    await expect(runCabalVouch({ joiner: "nope", place: PLACE }, NOW)).rejects.toThrow(CabalVouchError);
-    await expect(runCabalVouch({ joiner: JOINER, place: "nope" }, NOW)).rejects.toThrow(CabalVouchError);
-    await expect(runCabalVouch({ joiner: JOINER, place: PLACE, handleIndex: 99 }, NOW)).rejects.toThrow(CabalVouchError);
+  it("REFUSES a malformed joiner or realm, and an unheld persona root — before anything is written", async () => {
+    await expect(runCabalVouch({ joiner: "nope", realm: REALM }, NOW)).rejects.toThrow(CabalVouchError);
+    await expect(runCabalVouch({ joiner: JOINER, realm: "nope" }, NOW)).rejects.toThrow(CabalVouchError);
+    await expect(runCabalVouch({ joiner: JOINER, realm: REALM, handleIndex: 99 }, NOW)).rejects.toThrow(CabalVouchError);
     expect(await boardVouches()).toHaveLength(0);
   });
 
-  it("scopes to the place it names — a vouch elsewhere is not this realm's lineage", async () => {
-    await runCabalVouch({ joiner: JOINER, place: PLACE, expiresAt: LATER }, NOW);
-    await runCabalVouch({ joiner: OTHER,  place: "d".repeat(64), expiresAt: LATER }, NOW);
+  it("scopes to the realm it names — a vouch elsewhere is not this realm's lineage", async () => {
+    await runCabalVouch({ joiner: JOINER, realm: REALM, expiresAt: LATER }, NOW);
+    await runCabalVouch({ joiner: OTHER,  realm: "d".repeat(64), expiresAt: LATER }, NOW);
 
-    expect(await boardVouches(PLACE)).toHaveLength(1);
+    expect(await boardVouches(REALM)).toHaveLength(1);
     expect(await boardVouches("d".repeat(64))).toHaveLength(1);
   });
 
   it("defaults the expiry rather than minting an immortal vouch", async () => {
-    const r = await runCabalVouch({ joiner: JOINER, place: PLACE }, NOW);
+    const r = await runCabalVouch({ joiner: JOINER, realm: REALM }, NOW);
     expect(Date.parse(r.expiresAt)).toBeGreaterThan(NOW);
     expect(Date.parse(r.expiresAt)).toBeLessThanOrEqual(NOW + 31 * 24 * 60 * 60 * 1000);
   });

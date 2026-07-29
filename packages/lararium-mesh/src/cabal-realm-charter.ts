@@ -49,7 +49,7 @@ export interface CabalRealmCharter {
   /** DELIBERATELY PUBLIC — the realm's content-addressed NAME (its sentinel DocId,
    *  hex). Canon #the-realm: knowing it grants nothing (NAMED-not-ruled), so it is
    *  safe to publish; it is the address a peer needs to find + verify the realm. */
-  readonly placeDocIdHex: string;
+  readonly realmDocIdHex: string;
   /** DELIBERATELY PUBLIC — the realm's semantic lar: bearing (its label in l-space).
    *  An address, never a credential (lar: NAMES, it does not fetch). */
   readonly genesisUri: string;
@@ -91,8 +91,8 @@ export interface CabalRealmPublicMeta {
  * drops them (the roster/substrate sit in the bag; the output never names them).
  */
 export interface CabalRealmPublishState {
-  /** The realm itself — its public name (placeDocIdHex) + bearing (genesisUri). */
-  readonly place: CabalRealm;
+  /** The realm itself — its public name (realmDocIdHex) + bearing (genesisUri). */
+  readonly realm: CabalRealm;
   /** What the realm CHOOSES to advertise (optional descriptive fields). */
   readonly meta?: CabalRealmPublicMeta;
   /** MEMBERS-ONLY — the member roster (identity hexes). MUST NOT cross the shore.
@@ -114,7 +114,7 @@ export interface CabalRealmPublishState {
 export const CABAL_REALM_VEIL_PUBLIC_SET = {
   /** Crosses the read-face wire — anon-readable. */
   veilPublic: [
-    "placeDocIdHex",
+    "realmDocIdHex",
     "genesisUri",
     "title",
     "description",
@@ -133,7 +133,7 @@ export const CABAL_REALM_VEIL_PUBLIC_SET = {
 /**
  * The PURE shore — project a realm's full publish-state to its CHARTER, the
  * veil-public face. Mirrors `publicFlowMap`/`snapshotPublicFlowMap`: keep-public,
- * drop-private. It reads ONLY `state.place` (name + bearing) and `state.meta` (the
+ * drop-private. It reads ONLY `state.realm` (name + bearing) and `state.meta` (the
  * deliberately-published descriptive fields); it NEVER references `state.roster` or
  * `state.substrateContent`, so those are structurally unreachable in the output.
  *
@@ -141,10 +141,10 @@ export const CABAL_REALM_VEIL_PUBLIC_SET = {
  * cleanly into Automerge and serializes deterministically.
  */
 export function projectCabalRealmCharter(state: CabalRealmPublishState): CabalRealmCharter {
-  const { place, meta } = state;          // NB: roster + substrateContent deliberately NOT destructured
+  const { realm, meta } = state;          // NB: roster + substrateContent deliberately NOT destructured
   const charter: { -readonly [K in keyof CabalRealmCharter]: CabalRealmCharter[K] } = {
-    placeDocIdHex: place.placeDocIdHex,
-    genesisUri:    place.genesisUri,
+    realmDocIdHex: realm.realmDocIdHex,
+    genesisUri:    realm.genesisUri,
   };
   if (meta?.title       !== undefined) charter.title       = meta.title;
   if (meta?.description !== undefined) charter.description = meta.description;

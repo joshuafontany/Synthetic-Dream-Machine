@@ -84,9 +84,9 @@ export async function foundCabalRealm(
   opts:         FoundCabalRealmOpts = {},
 ): Promise<CabalRealm> {
   const sentinel = await provider.createSentinelDoc(uri);
-  const place: CabalRealm = {
-    placeDocIdHex:   sentinel.docIdHex,
-    placeAgentIdHex: sentinel.agentIdHex,
+  const realm: CabalRealm = {
+    realmDocIdHex:   sentinel.docIdHex,
+    realmAgentIdHex: sentinel.agentIdHex,
     substrateUrl,
     genesisUri:      uri,
   };
@@ -96,11 +96,11 @@ export async function foundCabalRealm(
 
   // Register this writer's liveness lease slot at genesis epoch 0 (max-register).
   if (opts.leaseWriterId && opts.leaseSlots) {
-    const slot = cabalRealmLeaseSlot(place.placeDocIdHex, opts.leaseWriterId);
+    const slot = cabalRealmLeaseSlot(realm.realmDocIdHex, opts.leaseWriterId);
     if (!opts.leaseSlots.has(slot)) opts.leaseSlots.set(slot, "0");
   }
 
-  return place;
+  return realm;
 }
 
 /**
@@ -109,7 +109,7 @@ export async function foundCabalRealm(
  * veil-public face (the only projection that ever crosses the read-face wire).
  */
 export interface FoundedCabalRealm {
-  readonly place:   CabalRealm;
+  readonly realm:   CabalRealm;
   readonly charter: CabalRealmCharter;
 }
 
@@ -137,11 +137,11 @@ export async function foundCabalRealmWithCharter(
   meta:         CabalRealmPublicMeta = {},
   opts:         FoundCabalRealmOpts = {},
 ): Promise<FoundedCabalRealm> {
-  const place = await foundCabalRealm(provider, uri, substrateUrl, opts);
+  const realm = await foundCabalRealm(provider, uri, substrateUrl, opts);
   // The shore reads ONLY {realm, meta}; no roster exists yet at founding, and
   // none could cross even if it did (#the-veil — projectCabalRealmCharter proof).
-  const charter = projectCabalRealmCharter({ place, meta });
-  return { place, charter };
+  const charter = projectCabalRealmCharter({ realm, meta });
+  return { realm, charter };
 }
 
 /**
@@ -167,11 +167,11 @@ export async function foundCabalRealmWithCharter(
  */
 export async function openDwelling(
   provider:            KeyhiveProvider,
-  place:               CabalRealm,
+  realm:               CabalRealm,
   dwellerIdentifierHex: string,
 ): Promise<void> {
   const gated = cabalRealmJoinGate(dwellerIdentifierHex);   // INERT shore — no legitimacy baked
-  await provider.addSentinelMember(gated, place.placeDocIdHex);
+  await provider.addSentinelMember(gated, realm.realmDocIdHex);
 }
 
 /**
@@ -185,12 +185,12 @@ export async function openDwelling(
  */
 export async function dwellersHolding(
   provider:          KeyhiveProvider,
-  place:             CabalRealm,
+  realm:             CabalRealm,
   candidateDwellerHexes: readonly string[],
 ): Promise<string[]> {
   const held: string[] = [];
   for (const hex of candidateDwellerHexes) {
-    const v = await provider.verifySentinelMembership(hex, place.placeDocIdHex);
+    const v = await provider.verifySentinelMembership(hex, realm.realmDocIdHex);
     if (v.ok) held.push(hex);
   }
   return held;
@@ -203,7 +203,7 @@ export async function dwellersHolding(
  */
 export function cabalRealmLiveness(
   residency: BagStowage,
-  place:     CabalRealm,
+  realm:     CabalRealm,
 ): CabalRealmLiveness {
-  return deriveCabalRealmLiveness(residency.tier(place.substrateUrl) ?? "anu");
+  return deriveCabalRealmLiveness(residency.tier(realm.substrateUrl) ?? "anu");
 }

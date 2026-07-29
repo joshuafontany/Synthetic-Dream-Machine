@@ -5,20 +5,20 @@
  * capture-clock) with the multi-principal complexity DEGENERATE to trivial.
  *
  * The drift:
- *   1. The HUMAN founds a me-place (foundCabalRealm) + wraps it in a MeCircle.
+ *   1. The HUMAN founds a me-realm (foundCabalRealm) + wraps it in a MeCircle.
  *   2. CONTRACT three of the human's own PersonaGroups (slices) — each a known Keyhive
- *      agent joined to the me-place AND added to the constellation. First takes the blame.
- *   3. The me-place's roster (real Keyhive) holds all three; one persona is accountable.
+ *      agent joined to the me-realm AND added to the constellation. First takes the blame.
+ *   3. The me-realm's roster (real Keyhive) holds all three; one persona is accountable.
  *   4. SWITCH the blame to another slice (free — single-principal).
  *   5. PROMOTE a veiled slice → known (re-contract with a petname — the disclosure dial).
  *   6. THE DEGENERACY (the load-bearing proof): one persona out-feeds the others (rolls
  *      its lease deep). The capture-clock RUNS and reports a large spread — exactly the
- *      shape that signals capture on a MULTI-human place. But this is a ME: every face
+ *      shape that signals capture on a MULTI-human realm. But this is a ME: every face
  *      is the one principal, so meCircleDegeneracy reads captureImmune — you cannot
  *      capture your own me. Same machinery, collapsed meaning.
  *   7. RELEASE a slice (kāpae) — the blame passes on.
  *
- * If the single-principal place STRAINS the cabal-realm machinery (a tie-break engages,
+ * If the single-principal realm STRAINS the cabal-realm machinery (a tie-break engages,
  * a join is refused, the clock can't read it), the ruling does not hold — surface it.
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/me-circle-lifecycle.ts
@@ -35,7 +35,7 @@ import {
 } from "@lararium/mesh";
 
 const ME_URI       = "lar:///me.constellation.overlaps/josh";
-const ME_SUBSTRATE = "automerge:me-place-substrate-probe";
+const ME_SUBSTRATE = "automerge:me-realm-substrate-probe";
 
 let failures = 0;
 function stage(name: string, ok: boolean, detail = ""): void {
@@ -45,7 +45,7 @@ function stage(name: string, ok: boolean, detail = ""): void {
 
 async function main(): Promise<void> {
   console.log("[me-circle] =========================================================");
-  console.log("[me-circle] single-principal me-place witness (REAL keyhive, no mocks)");
+  console.log("[me-circle] single-principal me-realm witness (REAL keyhive, no mocks)");
   console.log("[me-circle] =========================================================");
 
   // ── The HUMAN — the one ordering authority over their own constellation. ────────
@@ -54,14 +54,14 @@ async function main(): Promise<void> {
 
   const leaseSlots = new Map<string, string>();
 
-  // ── STAGE 1 — FOUND the me-place + wrap in a MeCircle ───────────────────────────
-  const mePlace = await foundCabalRealm(human, ME_URI, ME_SUBSTRATE, {
+  // ── STAGE 1 — FOUND the me-realm + wrap in a MeCircle ───────────────────────────
+  const meRealm = await foundCabalRealm(human, ME_URI, ME_SUBSTRATE, {
     leaseWriterId: "principal", leaseSlots,
   });
-  let me: MeCircle = foundMeCircle(mePlace, "0x" + mePlace.placeAgentIdHex.slice(0, 16));
-  stage("1 FOUND — a me-place founds as a single-principal cabal-realm",
-    mePlace.placeDocIdHex.length > 0 && me.constellation.length === 0 && me.activeHandleHex === null,
-    `place=${mePlace.placeDocIdHex.slice(0, 12)}…`);
+  let me: MeCircle = foundMeCircle(meRealm, "0x" + meRealm.realmAgentIdHex.slice(0, 16));
+  stage("1 FOUND — a me-realm founds as a single-principal cabal-realm",
+    meRealm.realmDocIdHex.length > 0 && me.constellation.length === 0 && me.activeHandleHex === null,
+    `realm=${meRealm.realmDocIdHex.slice(0, 12)}…`);
 
   // ── STAGE 2 — CONTRACT three slices of the one human ────────────────────────────
   // Each slice (PersonaGroup) is a holdable agent the human knows (contact-card); the
@@ -70,7 +70,7 @@ async function main(): Promise<void> {
     const s = new KeyhiveProvider();
     await s.init({ seed: new Uint8Array(32).fill(fill), eventStore: new InMemoryEventStore() });
     const { id } = await human.receiveContactCard(await s.contactCard());
-    await openDwelling(human, mePlace, id);                 // real Keyhive membership
+    await openDwelling(human, meRealm, id);                 // real Keyhive membership
     return petname !== undefined ? { handleHex: id, petname } : { handleHex: id };
   }
   const joshua   = await makeSlice(0xa1, "Joshua Fontany");
@@ -84,8 +84,8 @@ async function main(): Promise<void> {
     `active=${activePersona(me)?.petname}`);
 
   // ── STAGE 3 — the real Keyhive roster holds all three ───────────────────────────
-  const roster = await dwellersHolding(human, mePlace, [joshua.handleHex, engineer.handleHex, veiled.handleHex]);
-  stage("3 ROSTER — the me-place's real Keyhive roster holds all three slices",
+  const roster = await dwellersHolding(human, meRealm, [joshua.handleHex, engineer.handleHex, veiled.handleHex]);
+  stage("3 ROSTER — the me-realm's real Keyhive roster holds all three slices",
     roster.length === 3, `roster=${roster.length}`);
 
   // ── STAGE 4 — SWITCH the blame (free — single-principal) ─────────────────────────
@@ -105,11 +105,11 @@ async function main(): Promise<void> {
 
   // ── STAGE 6 — THE DEGENERACY: the clock runs, the spread is NOT capture ──────────
   // One slice out-feeds the others (rolls its lease deep) — the exact shape that signals
-  // capture on a multi-HUMAN place. Roll the slots:
-  leaseSlots.set(cabalRealmLeaseSlot(mePlace.placeDocIdHex, joshua.handleHex),   "30");
-  leaseSlots.set(cabalRealmLeaseSlot(mePlace.placeDocIdHex, engineer.handleHex), "2");
-  leaseSlots.set(cabalRealmLeaseSlot(mePlace.placeDocIdHex, veiled.handleHex),   "1");
-  const clock = cabalRealmMaintenanceProvenance(mePlace, leaseSlots);
+  // capture on a multi-HUMAN realm. Roll the slots:
+  leaseSlots.set(cabalRealmLeaseSlot(meRealm.realmDocIdHex, joshua.handleHex),   "30");
+  leaseSlots.set(cabalRealmLeaseSlot(meRealm.realmDocIdHex, engineer.handleHex), "2");
+  leaseSlots.set(cabalRealmLeaseSlot(meRealm.realmDocIdHex, veiled.handleHex),   "1");
+  const clock = cabalRealmMaintenanceProvenance(meRealm, leaseSlots);
   const d = meCircleDegeneracy(me);
   stage("6 DEGENERACY — the capture-clock runs + shows a spread, yet the me is capture-IMMUNE",
     clock.spread >= 28 && clock.leadingCount === 1 &&   // the clock sees the lopsided shape...
@@ -129,10 +129,10 @@ async function main(): Promise<void> {
 
   console.log("[me-circle] =========================================================");
   if (failures === 0) {
-    console.log("[me-circle] ALL STAGES PASS — the 'me' is load-bearing: a single-principal place,");
+    console.log("[me-circle] ALL STAGES PASS — the 'me' is load-bearing: a single-principal realm,");
     console.log("[me-circle] the cabal-realm machinery reused, the multi-principal complexity collapsed.");
   } else {
-    console.log(`[me-circle] ${failures} STAGE(S) FAILED — the single-principal place STRAINS the machinery.`);
+    console.log(`[me-circle] ${failures} STAGE(S) FAILED — the single-principal realm STRAINS the machinery.`);
     process.exit(1);
   }
 }

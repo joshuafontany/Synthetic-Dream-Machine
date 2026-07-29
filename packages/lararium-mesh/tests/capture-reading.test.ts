@@ -1,6 +1,6 @@
 /**
- * capture-reading — the clock↔dial shore: a place's maintenance concentration read onto the
- * convex capture curve toward β. Verdict-FREE: it surfaces where the place sits, never rules.
+ * capture-reading — the clock↔dial shore: a realm's maintenance concentration read onto the
+ * convex capture curve toward β. Verdict-FREE: it surfaces where the realm sits, never rules.
  */
 import { describe, test, expect } from "vitest";
 import {
@@ -9,14 +9,14 @@ import {
   type CabalRealm, type CaptureDials,
 } from "../src/index.js";
 
-const PLACE: CabalRealm = {
-  placeDocIdHex: "0xplace", placeAgentIdHex: "0xagent",
+const REALM: CabalRealm = {
+  realmDocIdHex: "0xrealm", realmAgentIdHex: "0xagent",
   substrateUrl: "automerge:s", genesisUri: "lar:///crossroads.cabal.gathers",
 };
 function clockOf(standing: Record<string, number>) {
   const m = new Map<string, string>();
-  for (const [w, e] of Object.entries(standing)) m.set(cabalRealmLeaseSlot(PLACE.placeDocIdHex, w), String(e));
-  return cabalRealmMaintenanceProvenance(PLACE, m);
+  for (const [w, e] of Object.entries(standing)) m.set(cabalRealmLeaseSlot(REALM.realmDocIdHex, w), String(e));
+  return cabalRealmMaintenanceProvenance(REALM, m);
 }
 const DIALS: CaptureDials = { beta: 0.6, rho: 0.001, supply: 1000, alpha: alphaFromHalfLife(10) };
 
@@ -27,7 +27,7 @@ describe("capture-reading — the clock meets the convex curve", () => {
     expect(concentration(clockOf({ a: 9, b: 9, c: 9 }))).toBeCloseTo(1 / 3, 6);              // dispersed
   });
 
-  test("a DISPERSED place: positive headroom, below the ceiling, a FINITE resistance bar", () => {
+  test("a DISPERSED realm: positive headroom, below the ceiling, a FINITE resistance bar", () => {
     const r = captureReading(clockOf({ a: 9, b: 9, c: 9 }), DIALS);
     expect(r.atCeiling).toBe(false);
     expect(r.headroom).toBeGreaterThan(0);              // β − r > 0
@@ -35,7 +35,7 @@ describe("capture-reading — the clock meets the convex curve", () => {
     expect(r.ceiling).toBe(0.6);
   });
 
-  test("a CAPTURE-SHAPED place: concentration over β → at the ceiling, negative headroom", () => {
+  test("a CAPTURE-SHAPED realm: concentration over β → at the ceiling, negative headroom", () => {
     const r = captureReading(clockOf({ captor: 40, m1: 2, m2: 1 }), DIALS);
     expect(r.concentration).toBeGreaterThan(0.6);
     expect(r.atCeiling).toBe(true);                     // r ≥ β — a READING, not a verdict

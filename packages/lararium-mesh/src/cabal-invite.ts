@@ -1,5 +1,5 @@
 /**
- * cabal-invite — the SECOND SIGNAL, and the dial that decides whether a place demands it.
+ * cabal-invite — the SECOND SIGNAL, and the dial that decides whether a realm demands it.
  *
  * A DreamNet grows from spores in a hostile field (lar:///…/lararium-identity #the-siege-gate). A
  * capability alone reads as SIGNAL-1: cheap, and forgeable at scale by anyone who can mint keys. The
@@ -38,7 +38,7 @@ import { canonicalJsonBytes, hex } from "./crypto.js";
 export const CABAL_INVITE_DOMAIN = "lar-cabal-invite/v1" as const;
 
 /**
- * How a place answers "may this joiner cross?".
+ * How a realm answers "may this joiner cross?".
  *
  * The operator turns this. The code never decides it — a legitimacy signal baked into a function closes
  * the unswept corner silently, and wrong.
@@ -49,7 +49,7 @@ export type CabalJoinPolicy =
   /** Signal-1 suffices: a capability alone admits. The open-protocol setting. */
   | { readonly kind: "open" };
 
-/** The FAIL-CLOSED default a place falls back to when its charter seats no dial — invite-only, signal-2
+/** The FAIL-CLOSED default a realm falls back to when its charter seats no dial — invite-only, signal-2
  *  required. Each Nexus turns its own (`joinPolicyFromDoc`); this names no mesh-wide setting. */
 export const DEFAULT_JOIN_POLICY: CabalJoinPolicy = { kind: "invite-only" };
 
@@ -61,8 +61,8 @@ export const DEFAULT_JOIN_POLICY: CabalJoinPolicy = { kind: "invite-only" };
  */
 export interface CabalInvite {
   readonly kind:        typeof CABAL_INVITE_DOMAIN;
-  /** The place this invite crosses INTO. An invite is never a general pass. */
-  readonly placeDocIdHex: string;
+  /** The realm this invite crosses INTO. An invite is never a general pass. */
+  readonly realmDocIdHex: string;
   /** The joiner this invite names. An invite is never bearer — a stolen one names its thief. */
   readonly joinerIdentityHex: string;
   /** The VOUCHER: an already-licensed member, staking their standing. Attributable by construction. */
@@ -77,7 +77,7 @@ export interface CabalInvite {
 export function cabalInviteBytes(parts: Omit<CabalInvite, "sig">): Uint8Array {
   return canonicalJsonBytes({
     kind:              parts.kind,
-    placeDocIdHex:     parts.placeDocIdHex,
+    realmDocIdHex:     parts.realmDocIdHex,
     joinerIdentityHex: parts.joinerIdentityHex,
     voucherDid:        parts.voucherDid,
     expiresAt:         parts.expiresAt,
@@ -96,7 +96,7 @@ export async function signCabalInvite(
 /** Why a crossing was refused. A refusal names itself, so a joiner knows what would change the answer. */
 export type JoinRefusal =
   | "no-invite"          // invite-only, and none was presented
-  | "wrong-place"        // the invite names a different place
+  | "wrong-realm"        // the invite names a different realm
   | "wrong-joiner"       // the invite names someone else — an invite is never bearer
   | "expired"            // the vouch lapsed; standing decays unless fed
   | "bad-signature";     // nobody licensed vouched for this
@@ -110,7 +110,7 @@ export interface JoinVerdict {
 }
 
 /**
- * THE GATE. Decide whether a joiner crosses into a place.
+ * THE GATE. Decide whether a joiner crosses into a realm.
  *
  * Verification is OFFLINE and needs no clock beyond the one the caller hands in: `verify` checks the
  * signature, `now` bounds the lease. Nothing here reaches a network, and nothing asks an authority — an
@@ -121,7 +121,7 @@ export interface JoinVerdict {
  */
 export async function decideCabalJoin(args: {
   readonly policy:            CabalJoinPolicy;
-  readonly placeDocIdHex:     string;
+  readonly realmDocIdHex:     string;
   readonly joinerIdentityHex: string;
   readonly invite:            CabalInvite | null;
   readonly now:               Date;
@@ -135,10 +135,10 @@ export async function decideCabalJoin(args: {
   const inv = args.invite;
   if (!inv || inv.kind !== CABAL_INVITE_DOMAIN) return { admitted: false, refusal: "no-invite" };
 
-  // An invite crosses into ONE place and names ONE joiner. Both checks run BEFORE the signature, because
+  // An invite crosses into ONE realm and names ONE joiner. Both checks run BEFORE the signature, because
   // a signature over the wrong subject is a valid signature and an invalid admission — verifying first
   // would let a real invite for someone else read as proof.
-  if (inv.placeDocIdHex !== args.placeDocIdHex) return { admitted: false, refusal: "wrong-place" };
+  if (inv.realmDocIdHex !== args.realmDocIdHex) return { admitted: false, refusal: "wrong-realm" };
   if (inv.joinerIdentityHex !== args.joinerIdentityHex) return { admitted: false, refusal: "wrong-joiner" };
 
   // The lease. Standing decays unless fed; an invite is a vouch with a shelf life, and a vouch that never

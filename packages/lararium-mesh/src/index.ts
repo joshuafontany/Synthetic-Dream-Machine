@@ -175,7 +175,7 @@ export * from "./re-anchoring.js";
 export * from "./lineage-rank.js";
 export * from "./admission-price.js";
 export * from "./vouch-dag.js";
-export * from "./place-admission.js";
+export * from "./realm-admission.js";
 export * from "./handle-card.js";
 export * from "./handle-book.js";
 // The card-arrival front door — decode a carried (paste / QR / URL-fragment) HandleCard so a follow can admit

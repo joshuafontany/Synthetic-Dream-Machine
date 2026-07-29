@@ -12,7 +12,7 @@
  *   LAR_SWARM_SEED   hex byte for the seed     (default 01; each vessel distinct)
  *   LAR_SWARM_EXPECT founder: joiners to await (default 2)
  *
- * Discovery rides the channel (a re-broadcast INVITE) — no shared place file — so it works
+ * Discovery rides the channel (a re-broadcast INVITE) — no shared realm file — so it works
  * for the persistent file channel AND the ephemeral WS channel (a late/reconnecting joiner
  * catches a later invite). file/POST serves a shared-dir swarm, the WS relay-service serves live sockets —
  * two live forms of the Herm's OPEN ceremony carriage behind one shore, chosen by env.
@@ -35,7 +35,7 @@ const DIR = envOf("LAR_SWARM_DIR");
 const ID = envOf("LAR_SWARM_ID", ROLE);
 const SEED = Number.parseInt(envOf("LAR_SWARM_SEED", "01"), 16) & 0xff;
 const EXPECT = Number.parseInt(envOf("LAR_SWARM_EXPECT", "2"), 10);
-const PLACE_URI = envOf("LAR_SWARM_PLACE", "lar:///crossroads.cabal.gathers/docker-swarm");
+const REALM_URI = envOf("LAR_SWARM_REALM", "lar:///crossroads.cabal.gathers/docker-swarm");
 const ROOT = envOf("LAR_SWARM_ROOT");   // a founded .lararium dataDir → use its REAL identity (else a test key)
 const TRANSPORT = RELAY ? `ws ${RELAY}` : `file ${DIR}`;
 
@@ -67,9 +67,9 @@ async function openChannel(): Promise<MembershipChannel> {
 }
 
 async function runFounder(channel: MembershipChannel, provider: KeyhiveProvider): Promise<void> {
-  const place = await foundCabalRealm(provider, PLACE_URI, "automerge:docker-swarm-substrate");
-  console.log(`[swarm-node] FOUNDER founded place=${place.placeDocIdHex.slice(0, 12)}… via ${TRANSPORT}, expecting ${String(EXPECT)} joiners`);
-  const invite = { kind: "invite", from: "founder", to: MEMBERSHIP_BROADCAST, payload: { placeDocIdHex: place.placeDocIdHex, genesisUri: PLACE_URI } };
+  const realm = await foundCabalRealm(provider, REALM_URI, "automerge:docker-swarm-substrate");
+  console.log(`[swarm-node] FOUNDER founded realm=${realm.realmDocIdHex.slice(0, 12)}… via ${TRANSPORT}, expecting ${String(EXPECT)} joiners`);
+  const invite = { kind: "invite", from: "founder", to: MEMBERSHIP_BROADCAST, payload: { realmDocIdHex: realm.realmDocIdHex, genesisUri: REALM_URI } };
 
   const admitted = new Map<string, string>();
   for (let i = 0; i < 240 && admitted.size < EXPECT; i++) {
@@ -77,7 +77,7 @@ async function runFounder(channel: MembershipChannel, provider: KeyhiveProvider)
     for (const c of await channel.poll("founder")) {
       if (c.kind !== "contact-card" || admitted.has(c.from)) continue;
       const { id } = await provider.receiveContactCard(new Uint8Array(Buffer.from(c.payload as string, "base64")));
-      await joinCabalRealm(provider, place, id);
+      await joinCabalRealm(provider, realm, id);
       admitted.set(c.from, id);
       await channel.offer({ kind: "admit", from: "founder", to: c.from, payload: { memberIdHex: id } });
       console.log(`[swarm-node] FOUNDER admitted ${c.from} (${id.slice(0, 12)}…) — ${String(admitted.size)}/${String(EXPECT)}`);
@@ -85,7 +85,7 @@ async function runFounder(channel: MembershipChannel, provider: KeyhiveProvider)
     await sleep(500);
   }
 
-  const roster = await cabalRealmRoster(provider, place, [...admitted.values()]);
+  const roster = await cabalRealmRoster(provider, realm, [...admitted.values()]);
   if (DIR) writeFileSync(join(DIR, "roster.json"), JSON.stringify({ count: roster.length, members: roster }));
   if (roster.length === EXPECT) {
     console.log(`[swarm-node] FOUNDER ✓ roster=${String(roster.length)}/${String(EXPECT)} — the swarm formed across containers.`);

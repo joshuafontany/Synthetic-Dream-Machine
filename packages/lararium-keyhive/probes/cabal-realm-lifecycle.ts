@@ -39,7 +39,7 @@ import {
   cabalRealmCharterSnapshot,
 } from "@lararium/mesh";
 
-const PLACE_URI    = "lar:///crossroads.cabal.gathers/probe-place";
+const REALM_URI    = "lar:///crossroads.cabal.gathers/probe-realm";
 const SUBSTRATE_URL = "automerge:cabal-realm-substrate-probe";
 const WRITER_ID    = "founder-vessel";
 
@@ -67,26 +67,26 @@ async function main(): Promise<void> {
   // A fixed foundedAt so the founding stays deterministic (a live founder passes its
   // own Date.now(); the ceremony itself reads no clock).
   const FOUNDED_AT = 1_700_000_000_000;
-  const { place, charter } = await foundCabalRealmWithCharter(
-    founder, PLACE_URI, SUBSTRATE_URL,
-    { title: "Probe Place", description: "a cabal-realm founded by the witness", foundedAt: FOUNDED_AT },
+  const { realm, charter } = await foundCabalRealmWithCharter(
+    founder, REALM_URI, SUBSTRATE_URL,
+    { title: "Probe Realm", description: "a cabal-realm founded by the witness", foundedAt: FOUNDED_AT },
     { residency, leaseWriterId: WRITER_ID, leaseSlots },
   );
-  const slot = cabalRealmLeaseSlot(place.placeDocIdHex, WRITER_ID);
+  const slot = cabalRealmLeaseSlot(realm.realmDocIdHex, WRITER_ID);
   stage("1 FOUND — sentinel minted, substrate registered cold, lease slot at genesis 0",
-    place.placeDocIdHex.length > 0 &&
-    place.placeAgentIdHex.length > 0 &&
+    realm.realmDocIdHex.length > 0 &&
+    realm.realmAgentIdHex.length > 0 &&
     residency.tier(SUBSTRATE_URL) === "anu" &&
     leaseSlots.get(slot) === "0",
-    `doc=${place.placeDocIdHex.slice(0, 16)}… tier=${residency.tier(SUBSTRATE_URL)} epoch=${leaseSlots.get(slot)}`);
+    `doc=${realm.realmDocIdHex.slice(0, 16)}… tier=${residency.tier(SUBSTRATE_URL)} epoch=${leaseSlots.get(slot)}`);
 
   // ── STAGE 1b — CHARTER (the founding founds the realm's veil-public face) ───────
   const charterKeys = Object.keys(charter);
   stage("1b CHARTER — founding founds the veil-public charter (name+bearing+meta; NO roster/substrate keys)",
-    charter.placeDocIdHex === place.placeDocIdHex &&
-    charter.genesisUri === PLACE_URI &&
+    charter.realmDocIdHex === realm.realmDocIdHex &&
+    charter.genesisUri === REALM_URI &&
     charter.foundedAt === FOUNDED_AT &&
-    charter.title === "Probe Place" &&
+    charter.title === "Probe Realm" &&
     !charterKeys.includes("roster") &&
     !charterKeys.includes("substrateContent") &&
     !charterKeys.includes("memberCount"),     // never auto-disclosed
@@ -104,14 +104,14 @@ async function main(): Promise<void> {
   }
   const memberA = await makeMember(0xa1);
   const memberB = await makeMember(0xb2);
-  await openDwelling(founder, place, memberA);
-  await openDwelling(founder, place, memberB);
+  await openDwelling(founder, realm, memberA);
+  await openDwelling(founder, realm, memberB);
   stage("2 JOIN — two members added through the INERT join gate",
     memberA !== memberB,
     `A=${memberA.slice(0, 14)}… B=${memberB.slice(0, 14)}…`);
 
   // ── STAGE 3 — roster holds BOTH ────────────────────────────────────────────────
-  const roster0 = await dwellersHolding(founder, place, [memberA, memberB]);
+  const roster0 = await dwellersHolding(founder, realm, [memberA, memberB]);
   stage("3 ROSTER — both members present in the doc-roster",
     roster0.length === 2 && roster0.includes(memberA) && roster0.includes(memberB),
     `roster=${roster0.length}`);
@@ -123,8 +123,8 @@ async function main(): Promise<void> {
   // in the serialized snapshot bytes (the wire form a peer actually pulls).
   const SECRET = "SECRET-SUBSTRATE-PAYLOAD-must-not-cross";
   const withRoster = projectCabalRealmCharter({
-    place,
-    meta: { title: "Probe Place", foundedAt: FOUNDED_AT },
+    realm,
+    meta: { title: "Probe Realm", foundedAt: FOUNDED_AT },
     roster: roster0,                              // the REAL member ids (memberA, memberB)
     substrateContent: { secret: SECRET, note: `${memberA} posted here` },
   });
@@ -136,7 +136,7 @@ async function main(): Promise<void> {
     outJson.includes(SECRET) || wireBytes.includes(SECRET);
   stage("3b VEIL — charter over the LIVE roster + secret leaks NEITHER (output + snapshot bytes)",
     !leaked &&
-    withRoster.placeDocIdHex === place.placeDocIdHex &&   // the public name still crosses
+    withRoster.realmDocIdHex === realm.realmDocIdHex &&   // the public name still crosses
     snap.cid.length === 64,                                // a real content-addressed snapshot
     `roster=${roster0.length} secret-in-wire=${wireBytes.includes(SECRET)} cid=${snap.cid.slice(0, 12)}…`);
 
@@ -150,33 +150,33 @@ async function main(): Promise<void> {
 
   // ── STAGE 5 — STARVE + cool to anu (dissolved) ─────────────────────────────────
   // First warm it (so there is something to cool), then starve: a sweep past idleMs cools it.
-  await feedCabalRealm(residency, place);                 // alive for a beat
+  await feedCabalRealm(residency, realm);                 // alive for a beat
   await new Promise((r) => setTimeout(r, 5));             // exceed idleMs (1ms)
   await residency.sweepOnce();                            // hoʻoanu — cools the unfed substrate
-  const livenessCold = cabalRealmLiveness(residency, place);
-  stage("5 STARVE — unfed substrate cooled to anu, place reads dissolved",
+  const livenessCold = cabalRealmLiveness(residency, realm);
+  stage("5 STARVE — unfed substrate cooled to anu, realm reads dissolved",
     residency.tier(SUBSTRATE_URL) === "anu" && livenessCold === "dissolved",
     `tier=${residency.tier(SUBSTRATE_URL)} liveness=${livenessCold}`);
 
   // ── STAGE 6 — RE-WARM (alive) ──────────────────────────────────────────────────
-  await feedCabalRealm(residency, place);                 // hoʻowela — the members feed it again
-  const livenessWarm = cabalRealmLiveness(residency, place);
-  stage("6 RE-WARM — fed substrate warms to wela, place reads alive",
+  await feedCabalRealm(residency, realm);                 // hoʻowela — the members feed it again
+  const livenessWarm = cabalRealmLiveness(residency, realm);
+  stage("6 RE-WARM — fed substrate warms to wela, realm reads alive",
     residency.tier(SUBSTRATE_URL) === "wela" && livenessWarm === "alive",
     `tier=${residency.tier(SUBSTRATE_URL)} liveness=${livenessWarm}`);
 
   // ── STAGE 7 — a hostile hand cannot EVICT; the realm holds no container ────────
   // The party-level eviction was torn out with the container model that licensed it. What stands in its
-  // place: a FORK that excludes BY OMISSION. The survivors open dwellings in a fresh realm and the excluded
+  // realm: a FORK that excludes BY OMISSION. The survivors open dwellings in a fresh realm and the excluded
   // are simply never opened — no revocation, no tombstone, nothing to converge or contend.
-  const fork = await forkCabalRealm(founder, place, [memberA, memberB], [memberA], { newUri: `${PLACE_URI}-fork` });
+  const fork = await forkCabalRealm(founder, realm, [memberA, memberB], [memberA], { newUri: `${REALM_URI}-fork` });
   stage("7 FORK — the survivors carry the realm on; the excluded are never opened",
     fork.survivors.length === 1 && fork.survivors.includes(memberB) && !fork.survivors.includes(memberA),
     `survivors=${fork.survivors.length} carriedB=${fork.survivors.includes(memberB)}`);
 
   // ── STAGE 8 — the FORK holds B and never held A; the OLD realm is untouched ────
-  const forkHolds = await dwellersHolding(founder, fork.newPlace, [memberA, memberB]);
-  const oldHolds  = await dwellersHolding(founder, place, [memberA, memberB]);
+  const forkHolds = await dwellersHolding(founder, fork.newRealm, [memberA, memberB]);
+  const oldHolds  = await dwellersHolding(founder, realm, [memberA, memberB]);
   stage("8 DWELLINGS — fork holds B alone; the old realm still holds both, unharmed",
     forkHolds.length === 1 && forkHolds.includes(memberB) && oldHolds.length === 2,
     `fork=${forkHolds.length} old=${oldHolds.length} — a fork LEAVES a realm rather than emptying it`);

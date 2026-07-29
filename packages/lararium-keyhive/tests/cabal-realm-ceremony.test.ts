@@ -49,20 +49,20 @@ describe("founding mints a NAME and warms nothing", () => {
     const residency  = new BagStowage({ idleMs: 1 });
     const leaseSlots = new Map<string, string>();
 
-    const place = await foundCabalRealm(founder, URI, SUBSTRATE,
+    const realm = await foundCabalRealm(founder, URI, SUBSTRATE,
       { residency, leaseWriterId: WRITER, leaseSlots });
 
-    expect(place.placeDocIdHex.length).toBeGreaterThan(0);
-    expect(place.genesisUri).toBe(URI);
+    expect(realm.realmDocIdHex.length).toBeGreaterThan(0);
+    expect(realm.genesisUri).toBe(URI);
     expect(residency.tier(SUBSTRATE)).toBe("anu");
-    expect(leaseSlots.get(cabalRealmLeaseSlot(place.placeDocIdHex, WRITER))).toBe("0");
+    expect(leaseSlots.get(cabalRealmLeaseSlot(realm.realmDocIdHex, WRITER))).toBe("0");
   });
 
   test("a bare founding touches NOTHING outside itself — every side-effect rides an opt", async () => {
     const founder   = await founderVessel();
     const residency = new BagStowage({ idleMs: 1 });
-    const place     = await foundCabalRealm(founder, URI, SUBSTRATE);   // no opts
-    expect(place.placeDocIdHex.length).toBeGreaterThan(0);
+    const realm     = await foundCabalRealm(founder, URI, SUBSTRATE);   // no opts
+    expect(realm.realmDocIdHex.length).toBeGreaterThan(0);
     // The residency never heard of this substrate, because nothing asked it to.
     expect(residency.tier(SUBSTRATE)).toBeNull();
   });
@@ -73,30 +73,30 @@ describe("founding mints a NAME and warms nothing", () => {
     const founder = await founderVessel();
     const a = await foundCabalRealm(founder, URI, SUBSTRATE);
     const b = await foundCabalRealm(founder, URI, SUBSTRATE);
-    expect(a.placeDocIdHex).not.toBe(b.placeDocIdHex);
+    expect(a.realmDocIdHex).not.toBe(b.realmDocIdHex);
   });
 });
 
 describe("the charter carries the veil-public face and refuses the rest", () => {
   test("★ the charter holds name · bearing · chosen meta — and NO key through which a roster could cross ★", async () => {
     const founder = await founderVessel();
-    const { place, charter } = await foundCabalRealmWithCharter(
+    const { realm, charter } = await foundCabalRealmWithCharter(
       founder, URI, SUBSTRATE,
       { title: "Test Realm", description: "founded by the suite", foundedAt: FOUNDED_AT },
     );
-    expect(charter.placeDocIdHex).toBe(place.placeDocIdHex);
+    expect(charter.realmDocIdHex).toBe(realm.realmDocIdHex);
     expect(charter.genesisUri).toBe(URI);
     expect(charter.foundedAt).toBe(FOUNDED_AT);
     // The EXACT key-set, asserted — naming forbidden fields guards only the ones already imagined, and the
     // field that arrives is the one nobody predicted.
     expect(Object.keys(charter).sort())
-      .toEqual(["description", "foundedAt", "genesisUri", "placeDocIdHex", "title"]);
+      .toEqual(["description", "foundedAt", "genesisUri", "realmDocIdHex", "title"]);
   });
 
   test("an EMPTY meta founds a NAME-ONLY realm — advertising stays the founder's choice", async () => {
     const founder = await founderVessel();
     const { charter } = await foundCabalRealmWithCharter(founder, URI, SUBSTRATE);
-    expect(Object.keys(charter).sort()).toEqual(["genesisUri", "placeDocIdHex"]);
+    expect(Object.keys(charter).sort()).toEqual(["genesisUri", "realmDocIdHex"]);
   });
 
   test("the substrate URL never crosses into the charter — carry ⊥ read holds at the founding", async () => {
@@ -111,10 +111,10 @@ describe("opening a dwelling opens a DOOR and deposits no standing", () => {
     // `nohopapa` accrues from the acts a party takes inside. This ceremony holds none of it — no depth, no
     // rank, no roster entry — and the absence reads as the model behaving, never as a gap here.
     const founder = await founderVessel();
-    const place   = await foundCabalRealm(founder, URI, SUBSTRATE);
+    const realm   = await foundCabalRealm(founder, URI, SUBSTRATE);
     const party   = await knownParty(founder, 0xa1);
 
-    const opened = await openDwelling(founder, place, party);
+    const opened = await openDwelling(founder, realm, party);
     expect(opened).toBeUndefined();      // nothing hands back — no receipt, no rank, no standing
   });
 
@@ -136,30 +136,30 @@ describe("the read answers does-this-one-hold, never who-holds", () => {
     // INVERSION OF CONTROL, and it rides in the signature: no membership list exists to read, so a
     // dwelling reads VERIFIED-ON-ASK. No roster to seize, and no count presentable as a total.
     const founder = await founderVessel();
-    const place   = await foundCabalRealm(founder, URI, SUBSTRATE);
+    const realm   = await foundCabalRealm(founder, URI, SUBSTRATE);
     const a = await knownParty(founder, 0xa1);
     const b = await knownParty(founder, 0xb2);
-    await openDwelling(founder, place, a);
-    await openDwelling(founder, place, b);
+    await openDwelling(founder, realm, a);
+    await openDwelling(founder, realm, b);
 
-    expect((await dwellersHolding(founder, place, [a, b])).sort()).toEqual([a, b].sort());
+    expect((await dwellersHolding(founder, realm, [a, b])).sort()).toEqual([a, b].sort());
     // b holds a dwelling; asking about a alone reports a alone. The unnamed holder stays unnamed.
-    expect(await dwellersHolding(founder, place, [a])).toEqual([a]);
+    expect(await dwellersHolding(founder, realm, [a])).toEqual([a]);
   });
 
   test("a candidate who holds NO dwelling drops from the answer, and the answer stays an answer", async () => {
     const founder = await founderVessel();
-    const place   = await foundCabalRealm(founder, URI, SUBSTRATE);
+    const realm   = await foundCabalRealm(founder, URI, SUBSTRATE);
     const dweller  = await knownParty(founder, 0xa1);
     const stranger = await knownParty(founder, 0xc3);
-    await openDwelling(founder, place, dweller);
-    expect(await dwellersHolding(founder, place, [dweller, stranger])).toEqual([dweller]);
+    await openDwelling(founder, realm, dweller);
+    expect(await dwellersHolding(founder, realm, [dweller, stranger])).toEqual([dweller]);
   });
 
   test("asking about NOBODY reads as absence, never as a verdict about the realm", async () => {
     const founder = await founderVessel();
-    const place   = await foundCabalRealm(founder, URI, SUBSTRATE);
-    expect(await dwellersHolding(founder, place, [])).toEqual([]);
+    const realm   = await foundCabalRealm(founder, URI, SUBSTRATE);
+    expect(await dwellersHolding(founder, realm, [])).toEqual([]);
   });
 });
 
@@ -167,17 +167,17 @@ describe("liveness reads the feeding, never the founding", () => {
   test("★ an unfed realm reads DISSOLVED, and the first offering brings it ALIVE ★", async () => {
     const founder   = await founderVessel();
     const residency = new BagStowage({ idleMs: 1 });
-    const place     = await foundCabalRealm(founder, URI, SUBSTRATE, { residency });
+    const realm     = await foundCabalRealm(founder, URI, SUBSTRATE, { residency });
 
-    expect(cabalRealmLiveness(residency, place)).toBe("dissolved");
-    await feedCabalRealm(residency, place);
-    expect(cabalRealmLiveness(residency, place)).toBe("alive");
+    expect(cabalRealmLiveness(residency, realm)).toBe("dissolved");
+    await feedCabalRealm(residency, realm);
+    expect(cabalRealmLiveness(residency, realm)).toBe("alive");
   });
 
   test("a realm the residency never heard of reads DISSOLVED — an unknown substrate never reads alive", async () => {
     const founder = await founderVessel();
-    const place   = await foundCabalRealm(founder, URI, SUBSTRATE);   // no residency opt
-    expect(cabalRealmLiveness(new BagStowage({ idleMs: 1 }), place)).toBe("dissolved");
+    const realm   = await foundCabalRealm(founder, URI, SUBSTRATE);   // no residency opt
+    expect(cabalRealmLiveness(new BagStowage({ idleMs: 1 }), realm)).toBe("dissolved");
   });
 });
 
@@ -192,12 +192,12 @@ describe("a fork leaves rather than evicts", () => {
 
     const fork = await forkCabalRealm(founder, old, [keepA, keepB, captor], [captor]);
 
-    expect(fork.forkedFromDocIdHex).toBe(old.placeDocIdHex);
-    expect(fork.newPlace.placeDocIdHex).not.toBe(old.placeDocIdHex);
+    expect(fork.forkedFromDocIdHex).toBe(old.realmDocIdHex);
+    expect(fork.newRealm.realmDocIdHex).not.toBe(old.realmDocIdHex);
     expect(fork.survivors.sort()).toEqual([keepA, keepB].sort());
     expect(fork.excluded).toEqual([captor]);
     // The captor holds no key to the fork — never added, so nothing had to be taken away.
-    expect(await dwellersHolding(founder, fork.newPlace, [keepA, keepB, captor])).not.toContain(captor);
+    expect(await dwellersHolding(founder, fork.newRealm, [keepA, keepB, captor])).not.toContain(captor);
   });
 
   test("★ the argument ORDER pins here — dwellers then excludes, and a swap empties the fork ★", async () => {
@@ -215,7 +215,7 @@ describe("a fork leaves rather than evicts", () => {
     expect(swapped.survivors).toEqual([]);
   });
 
-  test("the old shell stands UNTOUCHED — a fork leaves a place rather than editing it", async () => {
+  test("the old shell stands UNTOUCHED — a fork leaves a realm rather than editing it", async () => {
     const founder = await founderVessel();
     const old     = await foundCabalRealm(founder, URI, SUBSTRATE);
     const captor  = await knownParty(founder, 0xf0);
@@ -232,12 +232,12 @@ describe("a fork leaves rather than evicts", () => {
     const founder = await founderVessel();
     const old     = await foundCabalRealm(founder, URI, SUBSTRATE);
     const derived = await forkCabalRealm(founder, old, [], []);
-    expect(derived.newPlace.genesisUri).toContain(URI);
-    expect(derived.newPlace.substrateUrl).toBe(`${SUBSTRATE}-fork`);
+    expect(derived.newRealm.genesisUri).toContain(URI);
+    expect(derived.newRealm.substrateUrl).toBe(`${SUBSTRATE}-fork`);
 
     const named: CabalRealm = (await forkCabalRealm(founder, old, [], [], {
       newUri: "lar:///exodus.fresh.stands/named-fork", substrateUrl: "automerge:named-fork",
-    })).newPlace;
+    })).newRealm;
     expect(named.genesisUri).toBe("lar:///exodus.fresh.stands/named-fork");
     expect(named.substrateUrl).toBe("automerge:named-fork");
   });
