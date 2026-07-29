@@ -61,7 +61,7 @@ text always renders" IS the never-fail floor, TW5-native, no dep. parse5 had ZER
 and bloated the plugin ~252 KB. Removed: `lar-html5-tag.ts`, its test, and the `parse5` dep. The
 //lesson// stays in canon; the //scaffold// is gone. The original "HTML5-era behaviours" goal (modern
 attribute grammar, foreign content, custom elements) is re-homed to ''improving `html.js` directly in''
-''the fork we now own'' (a future feature-branch), NOT a parse5 sidecar (which couldn't touch the live
+''the fork we now own'' (a future feature-branch), NOT a parse5 parser bolted alongside (which couldn't touch the live
 rule anyway — it flattens `{{}}`/`<<>>`). The real graceful-on-a-gradient work landed at RENDER (the
 opt-in render+refresh boundary, fork `672ed9600`). The parse5 prose below is kept for the record only.
 

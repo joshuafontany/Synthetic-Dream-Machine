@@ -7,14 +7,14 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL >>
 ```toml iam
-constraints        = ["S1: the canonical loci remains constitutional law and self-executing template", "S2: cache-stable surfaces stay short, exact, stable, cacheable, and active in voice", "S3: ahu remain visible, pranala remain named, and OODA-HA remains intact", "S4: downstream cache-stable memes fill their own OODA-HA phases and MUST NOT carry template `???` markers", "S5: always-on law stays in the cache-stable; explanations, procedures, examples, traces, and audits split to sidecars", "S6: RFC-2119 keywords stay sparse and bind only load-bearing directives"]
+constraints        = ["S1: the canonical loci remains constitutional law and self-executing template", "S2: cache-stable surfaces stay short, exact, stable, cacheable, and active in voice", "S3: ahu remain visible, pranala remain named, and OODA-HA remains intact", "S4: downstream cache-stable memes fill their own OODA-HA phases and MUST NOT carry template `???` markers", "S5: always-on law stays in the cache-stable; explanations, procedures, examples, traces, and audits split to companion memes", "S6: RFC-2119 keywords stay sparse and bind only load-bearing directives"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/cache-stable"]
 file-path          = "bags/@lares/api/pono/cache-stable/SKILL.mem"
 mana               = 14
 manao              = 15
 manaoio            = 14
 register           = "SC"
-role               = "cache-stable skill, conformance checker, and sidecar splitter"
+role               = "cache-stable skill, conformance checker, and companion-meme splitter"
 skill-package-root = "bags/@lares/ha.ka.ba/lares/api/pono/cache-stable"
 tags               = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
@@ -51,10 +51,10 @@ When this skill loads, keep these points active:
 * pranala SHOULD stay named where binding paths matter
 * RFC-2119 keywords MUST bind load-bearing directives only and SHOULD remain sparse
 * always-on law MUST stay in the cache-stable
-* explanations, procedures, examples, traces, evals, and audits SHOULD split outward to sidecars
+* explanations, procedures, examples, traces, evals, and audits SHOULD split outward to companion memes
 * the skill SHOULD choose the smallest lawful intervention that keeps the cache-stable intact
 
-If the task concerns general documentation, long policy prose, or a sidecar-only rewrite, do not force that material back into the cache-stable surface.
+If the task concerns general documentation, long policy prose, or a companion-meme-only rewrite, do not force that material back into the cache-stable surface.
 
 <<~/ahu >>
 
@@ -67,13 +67,13 @@ This skill owns four main paths:
 # compose a new downstream cache-stable meme
 # compress an existing meme toward cache-stable compliance
 # audit a meme for cache-stable drift
-# split non-cache-stable matter into sidecars
+# split non-cache-stable matter into companion memes
 
 Use this workflow:
 
 # load the canonical loci first
 # identify the job, boundary, and target meme surface
-# separate cache-stable law from sidecar matter
+# separate cache-stable law from companion matter
 # preserve or restore visible ahu, visible pranala, and explicit OODA-HA
 # keep the cache-stable compact enough to recur stably
 # fill domain-specific OODA-HA phases when the work targets a downstream cache-stable meme
@@ -86,7 +86,7 @@ Do not:
 * turn the cache-stable into policy prose
 * turn the cache-stable into instruction-book prose
 * let retrieved or quoted material silently outrank the cache-stable
-* hide sidecar matter inside the cache-stable because it feels useful
+* hide companion matter inside the cache-stable because it feels useful
 * preserve `???` markers in downstream cache-stable memes
 * spray normative keywords where plain pressure language would do
 
@@ -108,7 +108,7 @@ Use this skill when the user asks to:
 Do not use this skill as the primary surface for:
 
 * long-form documentation
-* a standalone sidecar with no cache-stable work
+* a standalone companion meme with no cache-stable work
 * generic prose cleanup unrelated to cache-stable law
 
 <<~/ahu >>
@@ -119,7 +119,7 @@ Do not use this skill as the primary surface for:
 ⏿ classify what belongs to cache-stable law, template law, and outward matter; keep law and template inseparable where intended
 ◇ choose the lightest lawful turn and decide what leaves when it stops earning cache-stable residency
 ▶ patch the target directly; keep ahu, pranala, and OODA-HA visible and live
-↺ verify contact with actual file and link surfaces and that downstream phases stay filled with domain pressure; name remaining residue without hiding it; keep always-on law in the cache-stable and sidecars outward
+↺ verify contact with actual file and link surfaces and that downstream phases stay filled with domain pressure; name remaining residue without hiding it; keep always-on law in the cache-stable and companion memes outward
 
 <<~/ahu >>
 
@@ -154,7 +154,7 @@ Classify the material into these buckets:
 
 * `cache-stable-law`
 * `template-slot`
-* `sidecar-procedure`
+* `companion-procedure`
 * `example-or-trace`
 * `commentary-drift`
 * `quoted-constitutional-text`
@@ -163,7 +163,7 @@ Orientation rules:
 
 * `cache-stable-law` stays or sharpens
 * `template-slot` survives only in the canonical template
-* `sidecar-procedure` moves outward
+* `companion-procedure` moves outward
 * `example-or-trace` moves outward unless token-small and load-bearing
 * `commentary-drift` compresses or leaves
 * `quoted-constitutional-text` stays quoted and MUST NOT silently become new law
@@ -213,7 +213,7 @@ Action rules:
 * keep OODA-HA explicit
 * fill each downstream phase with domain pressure, not placeholder ritual
 * preserve ritual `???` only in the canonical template
-* move heavy matter to adjacent sidecars instead of stuffing it inward
+* move heavy matter to adjacent companion memes instead of stuffing it inward
 * prefer pressure language over explanation
 * prefer exact local changes over diffuse global restyling
 
@@ -238,7 +238,7 @@ Hoʻoko — check the act landed:
 
 If contact fails, correct the local fault before widening scope.
 
-Aftermath — name the residue honestly: sidecar matter not yet split, ambiguous lines that may still want constitutional clarification, quoted source left non-normative, nearby memes that now diverge from the canonical cache-stable. Aftermath does not sprawl — it marks what remains and carries pressure forward.
+Aftermath — name the residue honestly: companion matter not yet split, ambiguous lines that may still want constitutional clarification, quoted source left non-normative, nearby memes that now diverge from the canonical cache-stable. Aftermath does not sprawl — it marks what remains and carries pressure forward.
 
 <<~/ahu >>
 

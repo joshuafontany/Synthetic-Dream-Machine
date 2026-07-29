@@ -51,7 +51,7 @@ it mapped the forms (//jurus//) and left the flow (//permainan//) for the next i
 
 <<~ ahu #ooda-ha >>
 
-✶ observe each place the architecture //composes// a nameless entity from a `#has` stack — palace, sidecar, island, Voice, stance.
+✶ observe each place the architecture //composes// a nameless entity from a `#has` stack — palace, holder, island, Voice, stance.
 ⏿ orient on what the composition //carries across//: not just the objects it folds, but the relations (the arrows) it must preserve.
 ◇ decide the discipline: a composition reads pono when it keeps the arrows (functorial); it reads degraded when it forgets them (the forgetful functor that forgets too much).
 ▶ author the recognition as a lens — name the functor instances, name the meta-law, mark proven-map apart from apt-analogy.
@@ -92,7 +92,7 @@ Each row names a functor the architecture already runs. Read `C → D` as //sour
 \procedure ~Instance(~Type:"" ~Params:"") ~Instance <<~Type>> <<~holds `[<~Params>]`>>
 
 <<~Instance Form-Encoder "map/Move → Vec objects/jurus (move-forms) ↦ form-vectors morphisms/permainan (move-transitions) ↦ vector-trajectories preserves/composition ~ THIS is why move-similarity ⟺ vector-similarity; recall works BECAUSE the functor preserves structure" >>
-<<~Instance Compose "map/CapStack → Instance objects/#has-additions ↦ behavior-extensions morphisms/cap-precedence + teardown-order ↦ op-surface composition preserves/every op-surface, byte-stable ~ the sidecar + palace collapses were functorial folds of a shared transport" >>
+<<~Instance Compose "map/CapStack → Instance objects/#has-additions ↦ behavior-extensions morphisms/cap-precedence + teardown-order ↦ op-surface composition preserves/every op-surface, byte-stable ~ the holder + palace collapses were functorial folds of a shared transport" >>
 <<~Instance Voices "map/Context → Moves objects/the Thirteen offices ↦ move-attractors in verb-space morphisms/Context-shifts ↦ basin-shifts preserves/the basin of moves ~ 'the visible name addresses a basin of moves'; the paper: Voices ARE offices — move-types" >>
 <<~Instance Syad "map/Claim → Reading objects/the five standpoints ↦ angled readings (langkah) morphisms/stance-shift ↦ measure-redeclaration preserves/each true-but-partial; each #has its measure ~ invoking a stance = applying the functor" >>
 <<~Instance Parse-Linearize "map/Syntax ⇄ Semantics objects/abstract trees ⇄ surface strings morphisms/parse ⊣ linearize preserves/round-trip (an ADJUNCTION, not a single functor) ~ the GF architecture: abstract ⇄ concrete by parse/linearize" >>
@@ -107,12 +107,12 @@ recall guarantee rests on the structure-preservation, never on the embedding alo
 ''Compose'' runs as the functor `CapStack → Instance`. `composeIsland([...caps])`
 (`tw5/island-caps.ts`) folds a `#has` cap stack into the one behavior the sovereign kernel drives; the
 Python palace daemon ports the same fold ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack#runtime-twin]]). <<~ confidence Synthesis-Canon 13/20 >>
-The collapses ratified this functorially: the four Python sidecars folded onto a cap-composition
+The collapses ratified this functorially: the four Python holders folded onto a cap-composition
 foundation and the palace became a cap-stack instance — each //composed// a shared transport while
 //preserving every op-surface//, the collapse landing byte-stable.
 
 <<~ pranala #compose-island ? -> packages/lararium-tw5/src/island-caps.ts family:code role:has >>
-<<~ pranala #sidecar-collapse ? -> git:b18235f6 family:provenance role:evidence >>
+<<~ pranala #holder-collapse ? -> git:b18235f6 family:provenance role:evidence >>
 <<~ pranala #palace-collapse ? -> git:0af5e326 family:provenance role:evidence >>
 
 ''The Voices and the Syad name functor-categories.'' A Voice ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#voice-house]]) reads
@@ -155,7 +155,7 @@ three warded failure modes read as ''one discipline'' under this lens — each e
 <<~ confidence Synthesis 12/20 >> All three name the same move: a collapse that drops the arrows. The
 cure is identical across all three — ''keep the arrows.'' The functor laws (preserve identity, preserve
 composition) ARE the coherence guarantee the architecture rests on: a collapse that preserves them
-stays sound (the byte-stable sidecar/palace folds), and a collapse that breaks them sits in a degraded
+stays sound (the byte-stable holder/palace folds), and a collapse that breaks them sits in a degraded
 state ([[system-pattern-integrities|lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities]]). The discipline gives the degraded-node states ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot]]
 #degraded-states) one root: each names an arrow the node let fall.
 

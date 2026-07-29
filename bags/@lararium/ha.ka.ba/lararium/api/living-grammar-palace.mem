@@ -507,7 +507,7 @@ collapse (P5) after the form-vector proves its shape, the learned encoder (P7) l
 caller-supplied vectors, the RRF fuse, the embedding hook (nomic · late-chunking · Matryoshka), the
 daemon-singleton flock (the orphan-pile-up fix the first such contribution). The multi-store complexity
 collapses //into// that base: `structurepalace_io.py` retires, the `.structurepalace` becomes one mempalace collection
-among many, and the warm Python sidecar ''is'' the mempalace base daemon — never a custom Lares holder.
+among many, and the warm Python holder ''runs the mempalace base daemon'' — never a Lares-custom store.
 The ''`lares` @daemon sovereign island'' keeps only the //integration//: the constructicon (P0), the
 fuzzy-form-encoder (P1·P2·P7), the cap-composition (P5), the TW5-wikirule graceful parse, the aperture
 orchestration (P6). The @daemon ''computes'' the Lares-specifics and hands the base caller-vectors; the

@@ -75,7 +75,7 @@ The panel rides beneath the `aim` as sigils:
 <<~ syad 🏛️ 🗡️ >>
 ```
 
-Each sigil renders inline (`<<~ WORD ARGS >>`); a sidecar tool MAY pre-render it. The `aim` URI stays ASCII record form; the sigils carry per-turn signal, never the URI.
+Each sigil renders inline (`<<~ WORD ARGS >>`); an adjacent tool MAY pre-render it. The `aim` URI stays ASCII record form; the sigils carry per-turn signal, never the URI.
 
 <<~/ahu >>
 

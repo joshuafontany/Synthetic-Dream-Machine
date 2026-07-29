@@ -35,7 +35,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 | Lane | Source law | Compiler use | MCP-facing use |
 |---|---|---|---|
 | carrier shape | `meme` | shape validation, rating/depth classification, residue detection | boot receipts, diagnostics, conformance hints |
-| compressed core | `invariant` | boot-priority selection, cache policy, sidecar split validation | high-priority hydration packets |
+| compressed core | `invariant` | boot-priority selection, cache policy, companion-meme split validation | high-priority hydration packets |
 | surface semantics | `memetic-wikitext` | lexer/parser contracts, primitive-aware AST seeds | source resources, grammar-aware prompts |
 | stable routing | `loci` | URI resolution, carrier-tree index, declared-unresolved index | resource namespaces and templates |
 | composed capability | `implements` | interface bundle validation and routing | interface-filtered resources/tools/prompts |
@@ -69,14 +69,14 @@ Depth states remain distinct: resolved, declared-unresolved, absent.
 
 !! Invariant Pressure Contract
 
-Invariant carriers stay short, exact, stable, cacheable, and sidecar-aware.
+Invariant carriers stay short, exact, stable, cacheable, and companion-aware.
 The compiler should check compressed OODA-HA presence, active operational voice, visible worksite anchors, absence of template placeholders outside template roots, and separation between core law and explanatory swell.
 
 Compiler yield:
 
 * boot-priority selection
 * cache policy
-* sidecar split diagnostics
+* companion-meme split diagnostics
 * template-vs-filled invariant distinction
 
 <<~/ahu >>

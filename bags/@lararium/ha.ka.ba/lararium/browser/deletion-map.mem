@@ -50,7 +50,7 @@ touching the browser vessel surface. Four classifications:
 
 | Export | Class | Note |
 |---|---|---|
-| `mountPanel` | Quarantine | Re-exported from browser-surface sidecar. Should eventually export only the rewritten adapter version. |
+| `mountPanel` | Quarantine | Re-exported from the `tw5-browser-surface.ts` module. Should eventually export only the rewritten adapter version. |
 | `setPalette` | Constitutional | Fine to re-export from `@lararium/browser` instead; `@lararium/tw5` can keep it as isomorphic helper. |
 | `setBootSplash` | Constitutional | Same as `setPalette`. |
 | `mountCamera`, `CameraMount` | Constitutional | Isomorphic. No DOM dependency. Central to the projection contract. |

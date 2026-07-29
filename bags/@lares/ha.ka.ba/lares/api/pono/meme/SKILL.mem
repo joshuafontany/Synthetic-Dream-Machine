@@ -16,7 +16,7 @@ manao              = 17
 manaoio            = 14
 register           = "Synthesis-Canon"
 retain             = true
-role               = "meme operational skill — composition, audit, conformance check, and lawful sidecar split"
+role               = "meme operational skill — composition, audit, conformance check, and lawful companion-meme split"
 skill-package-root = "packages/lares-core/memes/api/pono/meme"
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
@@ -62,7 +62,7 @@ Working order:
 # detect required shape first
 # classify optional depth separately
 # identify which outward type laws the carrier really satisfies
-# tighten the parent before creating sidecars
+# tighten the parent before creating companion memes
 # verify that the result still reads as one coherent meme
 
 Do not:

@@ -42,7 +42,7 @@ Two laws bound everything below:
 A sensorium composes as a **nameless entity #has a cap-stack** — never a typed hierarchy. `compose_sensorium(source, land, embed, [worldline])`. **[BUILT: `sensorium.py`.]**
 
 ### 3.1 · The Li planes (three) — content ⊥ structure ⊥ form
-The *what* of a memory, factored into three orthogonal stores: **content** (the text/vectors — `content_io`, chroma), **structure** (the AST/shape — `structurepalace_io`), **form** (the induced schema — `form_encoder`). Each a caller-vector sidecar over the shared `sidecar_caps` NDJSON floor. **[BUILT.]**
+The *what* of a memory, factored into three orthogonal stores: **content** (the text/vectors — `content_io`, chroma), **structure** (the AST/shape — `structurepalace_io`), **form** (the induced schema — `form_encoder`). Each a caller-vector holder over the shared `holder_caps` NDJSON floor. **[BUILT.]**
 
 ### 3.2 · The Ki bindings — resonance across the Li planes
 The *coupling* between planes and across worldlines. **A Ki binding *is* a coupling-read**: when two traces (or two worldlines' rhythms) cohere, `coupleMesh`/`self-coupling` report P(common-cause) — reversible, χ²-gated, phantom-guarded — **never an entrainment**. The nameless entities the machina hunts surface *here*, as cross-plane resonances, not as pre-stamped labels. **[BUILT: mesh coupling primitives. DESIGNED: the Ki-as-standing-readout wiring.]**
@@ -128,7 +128,7 @@ Only worldlines above a **transition-density floor** get their own clock (a stat
 
 ## 7 · The py/R split & the three instruments
 
-- **py/R** owns the realtime streams: the capture-engine, the per-worldline FFZ gates, the null-harness, the EM, the online DtACI/ADWIN, the Li/Ki sidecars. R-tools run the READ-mode reflective replay (daydream).
+- **py/R** owns the realtime streams: the capture-engine, the per-worldline FFZ gates, the null-harness, the EM, the online DtACI/ADWIN, the Li/Ki holders. R-tools run the READ-mode reflective replay (daydream).
 - **TS `@daemon`** coordinates the fleet across the causal-island shore — spawn/supervise/point, verbs + a data-pointer, **no payload**; keeps its sovereign wiki/CRDT island.
 - **Three instruments** (corpus-grounded): the Automerge-causal clock (TS, ordering) ⊥ the **epoch-lease ratchet** (a liveness max-register — NOT a clock, a monotonic lease) ⊥ the FFZ-rhythm clock (py/R, cadence) — causal-islands, no shared now. Axis-1 **e breathes the rate** (`e^(−t/λ)` lease/decay); the **e-decay wire-vs-palace** fork (a dial carries the FFZ lease in the CRDT, or the meshpalace ages its own drawers) stays open (§9).
 - **The DAG**: roll-own `worldline_io` (local, single-writer, no-federate), grown toward **ITC** for fork-sound causality — **not** py-automerge (that earns its weight only on cross-node concurrent-writer convergence, which the no-federate ruling designs out).

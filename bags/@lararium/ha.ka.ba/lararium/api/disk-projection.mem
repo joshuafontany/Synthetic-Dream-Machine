@@ -75,7 +75,7 @@ The projector enforces this structurally: ''a bag absent from the mirror list ne
 | ''memetic corpus'' | ''`@lararium`'' | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | ''`bags/` seed (tracked)'' | kahu / Cabal (#kahu) | git |
 | ''runtime system island'' | ''`@oracle`'' | engine BLOBs · the ''system'' bag→doc ''oracle'' pointers (`@oracle`/`@lararium`/`@lares`) · the ''system wiki-recipes'' · `genesis-cid` · descriptors | built (deterministic genesis) | ''none — rides the mesh'' (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#epoch-handlers) |
 
-''Why `@oracle` carries no disk mirror.'' Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`), riding the content-addressed ''CAS plane'' — fetched ''by CID'' and served through the public read-face (`GET /oracle/<cid>.bin`), never the CRDT doc (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-cas-substrate >>). Like `@daemon`, it rides the CRDT mesh — federated ''read-only'' to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, is the gitignored runtime sidecar (matching `genesis/social-bootstrap.json`), never the `bags/` seed surface.
+''Why `@oracle` carries no disk mirror.'' Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`), riding the content-addressed ''CAS plane'' — fetched ''by CID'' and served through the public read-face (`GET /oracle/<cid>.bin`), never the CRDT doc (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-cas-substrate >>). Like `@daemon`, it rides the CRDT mesh — federated ''read-only'' to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, is the gitignored runtime artifact (matching `genesis/social-bootstrap.json`), never the `bags/` seed surface.
 
 ''Why `@lararium` stays a seed bag.'' The engine self-docs are authored prose — the same disk-leaning seed kind as `@lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
 
@@ -96,7 +96,7 @@ It carries ''no disk mirror.'' Rationale:
 * ''Disk is per-device; @personal is cross-device.'' It follows the operator across their devices through the admin-doc / Keyhive CRDT mesh, not through a disk artifact. Projecting it to disk would conflate the two and invite divergence.
 * ''It still appears in the projection.'' A `wikis/{slug}/` projection renders from the live, recipe-resolved view — and the recipe composes `@personal`'s view-state into that view. So the operator's ordering and folds //show up// in the projected wiki without `@personal` itself ever touching disk.
 
-A future debug-only sidecar projection MAY be added behind an explicit flag; it MUST NOT be the default.
+A future debug-only disk projection MAY be added behind an explicit flag; it MUST NOT be the default.
 
 <<~/ahu >>
 

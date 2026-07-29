@@ -10,7 +10,7 @@ manao     = 14
 manaoio   = 13
 register  = "Synthesis"
 retain    = true
-role      = "OPERATOR-APPROVED design intent for the attestation plane: how a Nexus co-signs a public Handle, and grants a scarce host-scoped sidecar nym, WITHOUT the attestor becoming a registrar. Six rulings — the severability+render law, fleet-span telemetry, attestor-separated-from-host (kahu HOST, contracted operators ATTEST), governance split from infra duty, an append-only log with a named obliged watcher, and the sidecar held as a lease. Drawn from five research sweeps over NIP-05, AT Proto, WebPKI/CT, Sovrin, eIDAS, ENS/Namecoin/Handshake, and the fediverse."
+role      = "OPERATOR-APPROVED design intent for the attestation plane: how a Nexus co-signs a public Handle, and grants a scarce host-scoped nym, WITHOUT the attestor becoming a registrar. Six rulings — the severability+render law, fleet-span telemetry, attestor-separated-from-host (kahu HOST, contracted operators ATTEST), governance split from infra duty, an append-only log with a named obliged watcher, and the host-scoped nym held as a lease. Drawn from five research sweeps over NIP-05, AT Proto, WebPKI/CT, Sovrin, eIDAS, ENS/Namecoin/Handshake, and the fediverse."
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/attestation-plane"
 ```
@@ -40,7 +40,7 @@ CLIENT'S RENDER POLICY and the EXIT PROOF carry it.'' Spec both as tightly as re
 
 ''The frame beneath it'' — Zooko's triangle, resolved by Stiegler's petname split. The '''key''' runs global
 and unforgeable; the '''nickname''' (the glamour) runs memorable and NON-UNIQUE by design; the '''petname'''
-runs local and belongs to the reader. A sidecar nym asks for the fourth thing the triangle forbids — globally
+runs local and belongs to the reader. A host-scoped nym asks for the fourth thing the triangle forbids — globally
 unique, human-meaningful, AND decentralized — so it MUST pay in an attestor, a price, or a host. The rulings
 below decide which, and keep the payment reversible.
 
@@ -60,11 +60,11 @@ already stands closest to it.
 
 !!! 1 · The severability + render law rides in the CLIENT SPEC
 
-''EDGE, NEVER BADGE.'' A sidecar nym renders WITH ITS ATTRIBUTOR VISIBLE — `@nym@kowloon.<nexus>` shown ''as
+''EDGE, NEVER BADGE.'' A host-scoped nym renders WITH ITS ATTRIBUTOR VISIBLE — `@nym@kowloon.<nexus>` shown ''as
 attested by X'' reads as provenance; a bare check reads as a verdict. Spritely names this the ''edge name''
 (`Alyssa ⇒ Jane Nym`); a name that appears to come from nowhere has already become a registrar's.
 
-''SEVERABILITY, normative:'' a sidecar address that stops resolving MUST drop the label and MUST NOT alter
+''SEVERABILITY, normative:'' a host-scoped address that stops resolving MUST drop the label and MUST NOT alter
 the graph. The durable identity sits BENEATH the name — losing an address costs a convenience, never a self.
 Both NIP-05 and AT Proto wrote this law and BOTH survived provider risk because of it.
 
@@ -150,7 +150,7 @@ persona-KEL `seq`, HandleCard `version`/`prev` already carry it.
 
 ''OPEN:'' an attestation issued BETWEEN epochs wants a rule — the chain orders epochs, not the acts inside one.
 
-!!! 6 · The sidecar rides as a LEASE
+!!! 6 · The host-scoped nym rides as a LEASE
 
 <<~ confidence Provisional-Synthesis 7/20 >> ''APPROVED IN PRINCIPLE ONLY — this rung awaits unpacking and
 carries no RULED language yet.''
@@ -161,8 +161,8 @@ saw only 22% of names ever set a record; Handshake's burned Vickrey bids produce
 ''Never let anyone argue rent decides WHO DESERVES a name.''
 
 What rent measurably DOES buy reads as ''garbage collection'' — 1.17M ENS names expired that nobody wanted,
-against 241K contested. That recirculation suits a rival good, which the sidecar address is and which every
-other capture-answer in this stack (fork-as-exit, the capture clock) assumes away.
+against 241K contested. That recirculation suits a rival good — the host-scoped address rides as exactly that,
+and every other capture-answer in this stack (fork-as-exit, the capture clock) assumes it away.
 
 ''ONE HARD RULE ALREADY EARNED:'' expiry MUST kill RESOLUTION in the same act it kills the grant. ENS keeps
 resolution live past expiry and 2,633 payments landed with strangers who dropcaught a lapsed name. ''A rental
@@ -201,7 +201,7 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
 
   So "who holds the zone after a split" ''wants no cryptographic answer and can have none'' — it names a
   registrar account and a legal person, which sits OUTSIDE what this stack governs. The design's part reads:
-  make the sidecar structurally cheap to lose (severable · leased · identity surviving it whole), so a fork's
+  make the host-scoped nym structurally cheap to lose (severable · leased · identity surviving it whole), so a fork's
   question shrinks from "who owns the name" to "who stands up a resolver."
 
   ''CHOOSING WHICH FAILURE TO ACCEPT, never whether to fail'' — and the choosing runs at every scale: kahu,

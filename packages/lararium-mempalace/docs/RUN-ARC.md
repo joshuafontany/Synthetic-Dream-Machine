@@ -10,7 +10,7 @@
 > coarsenings, never a product — so **dim H¹ = 0 by construction at plane
 > boundaries and the H¹-gated EFE keystone certifies nothing there** (H¹ keeps
 > its seat at federation boundaries only) — and **bands dissolved into the
-> stored li address** (`ffz_address`; `bands_sidecar`'s MODWT spine and the
+> stored li address** (`ffz_address`; `bands.py`'s MODWT spine and the
 > subharmonic ladder retired with it). The independence-of-planes discipline,
 > the S5 ruling, the null protocols, and the bed order all still stand. Bed
 > re-runs now answer to `EMERGENCE-PREREG.md` in this directory.
@@ -42,7 +42,7 @@ The TS spine (`bifurcation-bench.ts`, `sensorium-efe.ts`, `sensorium-fusion.ts` 
 
 - `predictive_coding.py` — the perception F (the ΔF/EFE base).
 - `spectral_geometry.py` — Li-spectral-embedding, H⁰; `spectral_ab.py` — the honest positive-control + hubness/intrinsic-dim diagnostics; `spectral_parity.py` — the py→TS fixture-bridge precedent.
-- `bands_sidecar.py` — the multi-scale projector.
+- `bands.py` — the multi-scale projector.
 - **The C1b→C5-hardened capture-engine** (413 green): veiled worldline-root, poison-guard (fatal-split), the correctly-qualified `derive_cid`, degrade-on-a-gradient. This is the clean py foundation the RUN rides.
 
 ## What is OWED in py (build — the arc)

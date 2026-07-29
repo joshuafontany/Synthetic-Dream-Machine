@@ -219,9 +219,9 @@ cause. The sensorium ''detects''; it never intervenes.
 
 !!! What RETIRES, named so a reader recognizes the dead reading
 
-<<~ranks retired bands-as-frequency ~ a BANDPASS reports where ENERGY AT ITS SCALE concentrates; a CHANGE-POINT reports where the GENERATING REGIME turns over. We asked a periodicity instrument a change-point question — a CATEGORY ERROR, never a tuning failure (`kumulipo_boundary.py`: the two-stage MODWT found the chant's BEAT at band C7, ~10,240 ticks against a measured wā gap of ~9,400 — and its crest placement scored ''recall 0.06'') -> the-PLL ~ retired with the ladder it locked -> the-subharmonic-band-ladder ~ a band defined by HOW MANY ticks of a fundamental it spans ''IS A COUNT'' — the Hox anti-pattern, where position IS the content and a prefix cannot be lopped ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) -> the-wavelet-SPINE-and-SERVO ~ `bands_sidecar`'s MODWT-MRA D1..D5 mapping and its EWT/ssqueezepy boundary-nudge retire with the ladder they served; a wavelet fed a LOCAL ABRUPT CHANGE answers with SPURIOUS LOW-FREQUENCY POWER — a period the signal never held (Hochman, Alpert et al., *J. Appl. Meteor. Climatol.* 58(9), 2019, doi 10.1175/JAMC-D-18-0331.1) -> li=STORED / ki=COMPUTED ~ the storage cut (#the-re-cut) >>
+<<~ranks retired bands-as-frequency ~ a BANDPASS reports where ENERGY AT ITS SCALE concentrates; a CHANGE-POINT reports where the GENERATING REGIME turns over. We asked a periodicity instrument a change-point question — a CATEGORY ERROR, never a tuning failure (`kumulipo_boundary.py`: the two-stage MODWT found the chant's BEAT at band C7, ~10,240 ticks against a measured wā gap of ~9,400 — and its crest placement scored ''recall 0.06'') -> the-PLL ~ retired with the ladder it locked -> the-subharmonic-band-ladder ~ a band defined by HOW MANY ticks of a fundamental it spans ''IS A COUNT'' — the Hox anti-pattern, where position IS the content and a prefix cannot be lopped ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) -> the-wavelet-SPINE-and-SERVO ~ `bands.py`'s MODWT-MRA D1..D5 mapping and its EWT/ssqueezepy boundary-nudge retire with the ladder they served; a wavelet fed a LOCAL ABRUPT CHANGE answers with SPURIOUS LOW-FREQUENCY POWER — a period the signal never held (Hochman, Alpert et al., *J. Appl. Meteor. Climatol.* 58(9), 2019, doi 10.1175/JAMC-D-18-0331.1) -> li=STORED / ki=COMPUTED ~ the storage cut (#the-re-cut) >>
 
-''What SURVIVES of `bands_sidecar`:'' its ''TREE'' layer (the `ecp::e.divisive` nested changepoint
+''What SURVIVES of `bands.py`:'' its ''TREE'' layer (the `ecp::e.divisive` nested changepoint
 hierarchy — coarse cuts parenting fine, which IS the membership tree, handed over for free) and its
 ''GATE'' layer (the bootstrap/jackknife ''reproduction grade'' — an un-witnessed boundary NEVER reads
 reproduced). The SIGNAL layer survives re-pointed: the per-chunk ''cosine-drift'' over content embeddings
@@ -234,14 +234,14 @@ reads as a ''boundary'' signal, exactly as the FFZ meme specified in June — //
 !! The py + R derived web ~ what runs, what survives
 
 ''The machina homes py-side; R crosses a causal-island boundary for the three things R owns better.''
-Each R sidecar rides the `drawer_io` NDJSON contract — one request on stdin, one response on stdout — and
+Each R leg rides the `drawer_io` NDJSON contract — one request on stdin, one response on stdout — and
 ''every one of them degrades gracefully'': a missing R never faults the run.
 
-\procedure ~Sidecar(~Type:"" ~Params:"") ~Sidecar <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~RLeg(~Type:"" ~Params:"") ~RLeg <<~Type>> <<~holds `[<~Params>]`>>
 
-<<~Sidecar bands_ecp.R "owns/`ecp::e.divisive` — nonparametric, MULTIVARIATE, DIVISIVE hierarchical changepoints (Matteson & James 2014); the discovery ORDER is the nested tree verdict/SURVIVES, PROMOTED — it stops serving a frequency ladder and becomes the BOUNDARY plane's tree engine, which is what it always was fallback/`ruptures` Binseg / KernelCPD-rbf (incremental-Binseg order IS a divisive hierarchy)" >>
-<<~Sidecar coupling.R "owns/`RTransferEntropy::calc_ete` — the effective (bias-corrected) TRANSFER ENTROPY, directional, model-free, with a bootstrap source-permutation null verdict/SURVIVES — the one irreducibly-ki plane's one engine fallback/NONE, by design: coupling has no python fallback, so an absent R yields the HONEST ZERO, never a fabricated edge" >>
-<<~Sidecar ews.R "owns/`earlywarnings::generic_ews` — rolling lag-1-AC / variance / skewness + Kendall-τ trends; `surrogates_ews` supplies the ARMA-null false-positive guard verdict/SURVIVES, RE-SEATED — critical-slowing-down forecasts the APPROACH of a regime turn, which reads as a BOUNDARY-approach instrument, never a per-band one; it now runs on the ONE cohesion signal, and the per-band framing retires with the ladder fallback/native numpy estimators" >>
+<<~RLeg bands_ecp.R "owns/`ecp::e.divisive` — nonparametric, MULTIVARIATE, DIVISIVE hierarchical changepoints (Matteson & James 2014); the discovery ORDER is the nested tree verdict/SURVIVES, PROMOTED — it stops serving a frequency ladder and becomes the BOUNDARY plane's tree engine, which is what it always was fallback/`ruptures` Binseg / KernelCPD-rbf (incremental-Binseg order IS a divisive hierarchy)" >>
+<<~RLeg coupling.R "owns/`RTransferEntropy::calc_ete` — the effective (bias-corrected) TRANSFER ENTROPY, directional, model-free, with a bootstrap source-permutation null verdict/SURVIVES — the one irreducibly-ki plane's one engine fallback/NONE, by design: coupling has no python fallback, so an absent R yields the HONEST ZERO, never a fabricated edge" >>
+<<~RLeg ews.R "owns/`earlywarnings::generic_ews` — rolling lag-1-AC / variance / skewness + Kendall-τ trends; `surrogates_ews` supplies the ARMA-null false-positive guard verdict/SURVIVES, RE-SEATED — critical-slowing-down forecasts the APPROACH of a regime turn, which reads as a BOUNDARY-approach instrument, never a per-band one; it now runs on the ONE cohesion signal, and the per-band framing retires with the ladder fallback/native numpy estimators" >>
 
 ''Py-side, the standing organs:'' `plane_capacity` (the ceiling gate, #li) · `ffz_address` (the grain,
 #the-grain) · `form_induction` (the `l(G)` ledger) · `persistence_io` + `persistence-keel.ts` (the arrow,

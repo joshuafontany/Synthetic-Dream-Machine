@@ -106,7 +106,7 @@ A live MCP server answers the remaining live-resolution tension. Intended shape:
 
 * define minimal metadata the MCP server needs per meme
 * decide whether `meme-type` remains a required caller hint or becomes server-discoverable
-* decide how child items advertise canonical sidecars while preserving the stable parent filepath rule
+* decide how child items advertise canonical companion memes while preserving the stable parent filepath rule
 * define failure surfaces for unresolved `lar:` URIs in a live resolver
 * define how canon MOVE depends on live resolver trust, uptime, and cache semantics
 

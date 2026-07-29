@@ -16,7 +16,7 @@ manao              = 16
 manaoio            = 14
 register           = "Synthesis-Canon"
 retain             = true
-role               = "guest-grammar operational skill — admission audit, hana shaping, and sidecar split discipline"
+role               = "guest-grammar operational skill — admission audit, hana shaping, and companion-meme split discipline"
 skill-package-root = "packages/lares-core/memes/api/pono/guest-grammar"
 tags               = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
@@ -178,7 +178,7 @@ When writing or revising:
 * keep the parent compact
 * keep guest admission explicit
 * keep `hana` block structure crisp
-* move full canonical forms and fixtures into sidecars
+* move full canonical forms and fixtures into companion memes
 * keep ownership lines short and load-bearing
 * link the split surfaces with `loulou`
 
@@ -219,7 +219,7 @@ Hoʻoko — before closing, check:
 Aftermath — close by naming:
 
 * what stayed in the parent
-* what left for the sidecars
+* what left for the companion memes
 * whether the target region now counts as not admitted, admitted but degraded, or admitted and bounded
 * which next change would improve the region honestly
 * what still lacks a lawful downstream home
