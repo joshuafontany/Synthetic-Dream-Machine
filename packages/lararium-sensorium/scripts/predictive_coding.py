@@ -45,7 +45,7 @@ The residual is STANDARDIZED (`z = ε/σ_obs`) before weighting, so `π·z²` is
 and the planes' surprises sum into one comparable F across content · structure · bands ·
 form · coupling.
 
-Faces (loci_io-style NDJSON over stdio, the established sidecar contract):
+Faces (loci_io-style NDJSON over stdio, the established holder contract):
   * the library: ewma_predict · ar1_fit_predict · plane_pc · free_energy · the π↔confidence
     map (pure, dependency-light — numpy only; the VERIFY surface)
   * `pc       --signal <file|-> [--model ewma|ar1] [--confidence N]` → one plane's loop:
@@ -367,7 +367,7 @@ def free_energy(planes: dict, model: str = "ewma", alpha: float = 0.3,
 
 def _load_signal(path: str) -> np.ndarray:
     """Load an N×P signal matrix from an NDJSON file/stdin (bare number · list · {"vector"} ·
-    {"value"} per line) — the same intake as bands_sidecar._load_signal."""
+    {"value"} per line) — the same intake as bands._load_signal."""
     rows = []
     src = sys.stdin if path == "-" else open(path)
     try:

@@ -1,10 +1,10 @@
 #!/usr/bin/env Rscript
-# ews.R — the THIN R sidecar for the PREDICTIVE bands leg's early-warning-signals route
+# ews.R — the THIN R leg for the PREDICTIVE bands cap's early-warning-signals route
 # (sensorium-machina.md #the-py-r-web, the dynamical-systems leg).
 #
 # The causal-island boundary made crossable for what R's `earlywarnings` owns: `generic_ews`
 # (rolling lag-1-AC / variance / skewness + their Kendall-τ trends) and `surrogates_ews` (the
-# ARMA-null false-positive guard → a p-value on the trend). The python `bands_sidecar._ews_R`
+# ARMA-null false-positive guard → a p-value on the trend). The python `bands._ews_R`
 # calls this WHEN earlywarnings is installed; a missing R / missing earlywarnings degrades to
 # the native numpy estimators (never fatal), exactly like bands_ecp.R → ruptures.
 #

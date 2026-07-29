@@ -4,7 +4,7 @@
 corpus.md #the-form-induction. The COARSEST of the corpus planes (Content ↠ Structure
 ↠ FORM — the chain of coarsenings; bands dissolved into the stored address). Where
 `form_encoder.py` scores a turn against a KNOWN constructicon
-(the fuzzy-membership plane, P2 of living-grammar-palace), THIS sidecar LEARNS the
+(the fuzzy-membership plane, P2 of living-grammar-palace), THIS holder LEARNS the
 constructicon a corpus never told us it had — the nameless learner: miners surface the
 shape, description-length keeps only what pays, and the LLM names LAST (never inside the
 loop).
@@ -47,7 +47,7 @@ THE LLM STAYS OUT of the induction loop. `induce` surfaces + selects the templat
 labelling / merging is a documented DOWNSTREAM step (`label_constructicon`, a namer the
 caller supplies AFTER mining) — that ordering is what honors the nameless discipline.
 
-Protocol — a BATCH CLI (mirrors structure_router / bands_sidecar, not a serve holder):
+Protocol — a BATCH CLI (mirrors structure_router / bands, not a serve holder):
   induce --structure <structureDir> [--out <path>] [--min-support N] [--max-forms N]
       -> NDJSON: one {form} line per surfaced template, then a final {summary} line on
          stdout. --out mirrors the template lines to a file (the corpus's constructicon).

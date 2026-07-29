@@ -13,7 +13,7 @@ Four faces proven, all chroma-free (pure signal in, bands verdict out):
 
 Run under the mempalace venv:
     ~/.venv/bin/python -m pytest \
-        packages/lararium-sensorium/scripts/test_bands_sidecar.py -q
+        packages/lararium-sensorium/scripts/test_bands.py -q
 """
 import json
 import shutil
@@ -222,7 +222,7 @@ def test_cohesion_signal_drift():
     assert sig[30, 0] > 0.5 and sig[60, 0] > 0.5
 
 
-# ── COUPLE — the cross-stream transfer-entropy lead-lag plane (R sidecar coupling.R) ────────
+# ── COUPLE — the cross-stream transfer-entropy lead-lag plane (R leg coupling.R) ────────
 
 
 def _lead_lag_fixture(seed=1, n=600, noise=0.2):
@@ -324,7 +324,7 @@ def test_cli_couple_stdin():
 
 
 def test_r_availability_flag():
-    """The stack reports whether the R ecp sidecar is reachable (Rscript on PATH) — the
+    """The stack reports whether the R ecp leg is reachable (Rscript on PATH) — the
     degrade-to-ruptures signal the coordinator flags."""
     E = _blocks()
     out = bs.run_stack(E, n_boot=10)

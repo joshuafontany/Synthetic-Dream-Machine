@@ -27,7 +27,7 @@ prefix code on the li side. The wavelet/EWT/scalogram functions below
 (modwt_mra · ewt_servo · ridges) stand as an UNSEATED shelf — callable,
 tested, canon-retired; a future aperture may re-summon them by name.
 
-loci_io-style NDJSON over stdio (the established sidecar contract). Faces:
+loci_io-style NDJSON over stdio (the established holder contract). Faces:
   * the library: cohesion_signal · modwt_mra · ewt_servo · changepoint_tree ·
     stability_gate · ffz_cells (pure, chroma-free — the VERIFY surface)
   * `decompose --signal <file|-> [--planes N]`  → the full stack over a raw signal
@@ -315,7 +315,7 @@ def bocpd_changepoints(signal: np.ndarray, hazard_lambda: float) -> list[int]:
         return []
 
 
-# ── TREE — ecp::e.divisive (R sidecar) → nested changepoint tree; ruptures fallback ───────
+# ── TREE — ecp::e.divisive (R leg) → nested changepoint tree; ruptures fallback ───────
 
 
 def _r_available() -> bool:
@@ -323,9 +323,9 @@ def _r_available() -> bool:
 
 
 def _ecp_divisive_R(matrix: np.ndarray, min_size: int, sig_lvl: float) -> list[int] | None:
-    """Invoke the thin R sidecar (bands_ecp.R) → `ecp::e.divisive` over the multivariate
+    """Invoke the thin R leg (bands_ecp.R) → `ecp::e.divisive` over the multivariate
     drift matrix. Returns the ORDERED changepoint indices (0-based, coarse→fine — the
-    divisive discovery order IS the hierarchy) or None when R / the sidecar / ecp is
+    divisive discovery order IS the hierarchy) or None when R / the leg / ecp is
     unavailable (⇒ the caller falls to the ruptures path). loci_io-style: one NDJSON
     request on stdin, one NDJSON response on stdout."""
     if not _r_available():
@@ -415,16 +415,16 @@ def _variance_split(M: np.ndarray, max_cuts: int, min_size: int) -> list[int]:
     return order
 
 
-# ── COUPLE — RTransferEntropy::calc_ete (R sidecar) → the cross-stream lead-lag plane ─────
+# ── COUPLE — RTransferEntropy::calc_ete (R leg) → the cross-stream lead-lag plane ─────
 
 
 def _couple_ete_R(matrix: np.ndarray, lx: int = 1, ly: int = 1, shuffles: int = 100,
                   nboot: int = 100, seed: int = 1, names: list[str] | None = None,
                   q: float = 0.1, quantiles: tuple[int, int] = (5, 95)) -> dict | None:
-    """Invoke the thin R sidecar (coupling.R) → `RTransferEntropy::calc_ete` over the N-signal
+    """Invoke the thin R leg (coupling.R) → `RTransferEntropy::calc_ete` over the N-signal
     matrix (rows=time, cols=signals) → the pairwise DIRECTIONAL effective-transfer-entropy
     matrix (ete[i][j] = flow i→j) + a source-permutation bootstrap p-value matrix. Returns the
-    parsed verdict dict, or None when R / the sidecar / RTransferEntropy is unavailable (⇒ the
+    parsed verdict dict, or None when R / the leg / RTransferEntropy is unavailable (⇒ the
     caller degrades to a graceful skip — coupling has NO python fallback, TE is the R plane).
     loci_io-style: one NDJSON request on stdin, one NDJSON response on stdout."""
     if not _r_available():
@@ -465,7 +465,7 @@ def couple_streams(matrix: np.ndarray, lx: int = 1, ly: int = 1, shuffles: int =
     """The cross-stream COUPLING plane (corpus.md #the-bands, the sensorium's who-leads-whom).
 
     `RTransferEntropy::calc_ete` over the N-signal matrix → the directional effective-transfer-
-    entropy matrix + bootstrap p-values (the R sidecar coupling.R). On top of the raw matrices
+    entropy matrix + bootstrap p-values (the R leg coupling.R). On top of the raw matrices
     this adds the READ the coordinator wants: per ORDERED pair a NET flow (ete[i→j] − ete[j→i],
     the lead-lag) and a SIGNIFICANT-edge list (p ≤ alpha). Rscript never DECIDES — it computes
     the ete/p matrices; the leader read is a pure arithmetic projection here. GRACEFUL: R absent
@@ -516,13 +516,13 @@ def couple_streams(matrix: np.ndarray, lx: int = 1, ly: int = 1, shuffles: int =
     }
 
 
-# ── TREE — ecp::e.divisive (R sidecar) → nested changepoint tree; ruptures fallback (cont.) ─
+# ── TREE — ecp::e.divisive (R leg) → nested changepoint tree; ruptures fallback (cont.) ─
 
 
 def changepoint_tree(matrix: np.ndarray, max_cuts: int, min_size: int = 2,
                      sig_lvl: float = 0.05) -> dict:
     """The multivariate nested changepoint tree (coarse cuts parent fine cuts). Tries the R
-    `ecp::e.divisive` sidecar first (nonparametric, native-divisive), falls to ruptures
+    `ecp::e.divisive` leg first (nonparametric, native-divisive), falls to ruptures
     Binseg-rbf, then a variance split. Returns {"order": [cut indices, coarse→fine],
     "engine": <name>}."""
     order = _ecp_divisive_R(matrix, min_size, sig_lvl)
@@ -870,7 +870,7 @@ def surrogate_pvalue(x: np.ndarray, window: int, indicator: str = "ar1",
 
 
 def _ews_R(x: np.ndarray, window: int) -> dict | None:
-    """Route to the R `earlywarnings` sidecar (ews.R → generic_ews + surrogates_ews) when the
+    """Route to the R `earlywarnings` leg (ews.R → generic_ews + surrogates_ews) when the
     package is installed. Returns the parsed verdict or None (⇒ the native estimators run).
     Graceful, exactly like `_ecp_divisive_R` — R / earlywarnings absent is never fatal."""
     if not _r_available():

@@ -1,13 +1,13 @@
 #!/usr/bin/env Rscript
-# bands_ecp.R — the THIN R sidecar for the bands cap's TREE layer (corpus.md #the-bands).
+# bands_ecp.R — the THIN R leg for the bands cap's TREE layer (corpus.md #the-bands).
 #
 # The causal-island boundary made crossable for the ONE thing R owns better than python:
 # `ecp::e.divisive` — nonparametric, MULTIVARIATE, divisive hierarchical changepoint
 # detection (Matteson & James 2014). The divisive discovery ORDER is the nested tree
 # (coarse cuts found before fine), which the python side maps onto the aperture bands.
 #
-# drawer_io-style NDJSON over stdio (the established sidecar contract): ONE request object
-# on stdin, ONE response object on stdout. The python `bands_sidecar._ecp_divisive_R` calls
+# drawer_io-style NDJSON over stdio (the established holder contract): ONE request object
+# on stdin, ONE response object on stdout. The python `bands._ecp_divisive_R` calls
 # this; a missing R / missing ecp degrades to the ruptures python path (never fatal).
 #
 #   in : {"op":"e_divisive","matrix":[[..],[..],..],"min_size":2,"sig_lvl":0.05}

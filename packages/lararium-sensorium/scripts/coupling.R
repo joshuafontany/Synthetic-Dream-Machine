@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-# coupling.R — the THIN R sidecar for the sensorium's CROSS-STREAM COUPLING plane.
+# coupling.R — the THIN R leg for the sensorium's CROSS-STREAM COUPLING plane.
 #
 # The causal-island boundary made crossable for the OTHER thing R owns better than python:
 # `RTransferEntropy::calc_ete` — the effective (bias-corrected, Shannon) TRANSFER ENTROPY,
@@ -8,9 +8,9 @@
 # Bootstrap p-values ride alongside — a source-permutation null (break i's temporal tie to
 # j, recompute TE) certifies each directed edge (the coupling plane's convergence gate).
 #
-# drawer_io-style NDJSON over stdio (the established sidecar contract, twin of bands_ecp.R):
+# drawer_io-style NDJSON over stdio (the established holder contract, twin of bands_ecp.R):
 # ONE request object on stdin, ONE response object on stdout. The python
-# `bands_sidecar._couple_ete_R` calls this; a missing R / RTransferEntropy degrades to a
+# `bands._couple_ete_R` calls this; a missing R / RTransferEntropy degrades to a
 # graceful skip (coupling has NO python fallback — TE is the R plane, never fatal).
 #
 #   in : {"op":"couple","matrix":[[..],[..],..],"lx":1,"ly":1,"shuffles":100,
