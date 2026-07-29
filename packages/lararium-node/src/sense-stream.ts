@@ -26,7 +26,7 @@ import { existsSync, writeFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { resolveBandsSpawn, resolveSidecarCapEnv } from "@lararium/mempalace";
+import { resolveBandsSpawn, resolveHolderCapEnv } from "@lararium/mempalace";
 import { composePalace, freeEnergy, forecastEws, type PalaceComposition, type PlaneSink, type StreamAdapter, type StreamFrame } from "@lararium/mesh";
 import { defaultSensoriumIngest, type SensoriumIngest } from "./sense-sensorium.js";
 
@@ -54,7 +54,7 @@ function runSignalSidecar(
   if (!python || !scriptPresent || frames.length === 0) return null;
   const ndjson = writeSignalNdjson(frames, sensoriumRoot);
   try {
-    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveSidecarCapEnv(python) };
+    const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveHolderCapEnv(python) };
     const out = execFileSync(python, [script, verb, "--signal", ndjson], {
       cwd: submoduleRoot, env, maxBuffer: 1 << 30, encoding: "utf8", timeout: 300_000,
     });

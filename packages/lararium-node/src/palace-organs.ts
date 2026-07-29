@@ -16,7 +16,7 @@
  *   · KEPT — the capability to ACCEPT a guest install that already stands. `~/.mempalace` holds its own
  *     sovereignty as a SEPARATE capability the House may take up; when it does, the House owns the
  *     chat → sensorium → palace lifecycle, and it never writes into the guest tree or reads the guest's
- *     config (see `@lararium/mempalace` sidecar-cap: the House DECLARES its policy so it inherits none).
+ *     config (see `@lararium/mempalace` holder-cap: the House DECLARES its policy so it inherits none).
  *
  * So {@link initGuestMempalace} and {@link guestMempalaceOrgan} STAND — they carry the accept-lane, not
  * a fallback. A subtraction aimed at "the guest lane" MUST cut the binding and leave the accept-cap

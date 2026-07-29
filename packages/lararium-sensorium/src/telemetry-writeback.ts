@@ -28,7 +28,7 @@ import { repoRoot } from "@lararium/mesh/node";
 import { isoWholeSeconds } from "./worldline-kg.js";
 import { resolveMempalacePython } from "@lararium/mempalace";
 import { memorySensoriumContentDir } from "@lararium/mempalace/xdg-base";
-import { resolveSidecarCapEnv } from "@lararium/mempalace";
+import { resolveHolderCapEnv } from "@lararium/mempalace";
 import { mineWithServo } from "@lararium/mempalace";
 import { TIMEOUT_KILL_SIGNAL } from "@lararium/mempalace";
 
@@ -67,7 +67,7 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
   // + the GPU compute cap: loci_io opens a chroma collection (default onnxruntime embedder), which
   // HARD-fails to import onnxruntime-gpu without the CUDA runtime libs on LD_LIBRARY_PATH. Cap absent
   // (the QA box) ⇒ only the device hint rides and the embedder degrades to CPU. (Restart-safety P0.)
-  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveSidecarCapEnv(PY) };
+  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveHolderCapEnv(PY) };
   // The telemetry describes the drawers the capture path landed, so it writes where they LIVE —
   // the sovereign content plane. NAMED, never defaulted: loci_io refuses an unnamed palace.
   const palace = memorySensoriumContentDir();
@@ -140,7 +140,7 @@ export function stampKapaeSalience(verbatimShas: readonly string[], ended?: stri
   const palace = memorySensoriumContentDir();
   const endedIso = isoWholeSeconds(ended ?? new Date().toISOString());
   const submoduleRoot = join(repoRoot, "mempalace");
-  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveSidecarCapEnv(PY) };
+  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveHolderCapEnv(PY) };
   const pf = join(tmpdir(), `lar-kapae-salience-${process.pid}-${Date.now()}.ndjson`);
   writeFileSync(pf, verbatimShas.map((s) => JSON.stringify({ verbatim_sha: s, ended: endedIso })).join("\n") + "\n");
   try {

@@ -1,17 +1,21 @@
 /**
- * sidecar-cap — the ONE env-cap composer every mempalace sidecar spawn wears.
+ * holder-cap — the ONE env-cap composer every mempalace-backed python spawn wears.
  *
- * A sidecar spawn carries CAPS the same way a vessel does: each cap contributes env, the spawn spreads
- * them, and a spawn that forgets one runs under-capped. Eleven spawn sites already spread the GPU
+ * A holder spawn carries CAPS the same way a vessel does: each cap contributes env, the spawn spreads
+ * them, and a spawn that forgets one runs under-capped. Eleven spawn sites spread the GPU
  * compute cap individually; this composes the full set behind ONE name, so a NEW spawn site reaches for
- * `resolveSidecarCapEnv` and gets every cap the House declares — never the subset whoever wrote it
+ * `resolveHolderCapEnv` and gets every cap the House declares — never the subset whoever wrote it
  * remembered.
+ *
+ * The composer caps BOTH shores: the House's own NDJSON holders under @lararium/sensorium's scripts,
+ * and the read-only spawn of the guest mempalace sidecar. Each opens a store through the mempalace
+ * library, so each answers to the same declared policy.
  *
  * ── THE WRITE-ROUTING CAP, and why the House declares it ────────────────────────────────────────────
  * mempalace resolves its write route down a seven-rung ladder (docs/write-routing-policy.md). Rungs 4-6
  * read the GUEST config file at `~/.mempalace/config.json` — a store the House does not own. So a House
  * that declares NOTHING inherits the guest install's policy the day one appears: a cross-boundary read
- * the sidecar model exists to refuse.
+ * the peer boundary exists to refuse.
  *
  * The env rungs sit ABOVE every config rung, so DECLARING cures it whole. The House declares.
  *
@@ -42,11 +46,11 @@ import { resolveComputeCapEnv } from "./compute-cap.js";
 /** The env var mempalace reads at rung 2 of its routing ladder — above every config-file rung. */
 export const WRITE_ROUTING_ENV = "MEMPALACE_WRITE_ROUTING" as const;
 
-/** The policy the House declares for its own sensorium sidecars. See the module note for the reasoning. */
+/** The policy the House declares for its own sensorium holders. See the module note for the reasoning. */
 export const HOUSE_WRITE_ROUTING = "require" as const;
 
 /**
- * The write-routing cap — DECLARE the House's policy so the sidecar never inherits the guest's.
+ * The write-routing cap — DECLARE the House's policy so a holder never inherits the guest's.
  * Honors an operator override (an exported value wins); otherwise declares {@link HOUSE_WRITE_ROUTING}.
  */
 export function resolveWriteRoutingEnv(): Record<string, string> {
@@ -56,9 +60,9 @@ export function resolveWriteRoutingEnv(): Record<string, string> {
 }
 
 /**
- * Every cap a mempalace sidecar spawn wears, composed. Spread this onto the spawn env — reaching for it
- * by this one name KEEPS a new spawn site from running under-capped.
+ * Every cap a mempalace-backed python spawn wears, composed. Spread this onto the spawn env — reaching
+ * for it by this one name KEEPS a new spawn site from running under-capped.
  */
-export function resolveSidecarCapEnv(python: string | null): Record<string, string> {
+export function resolveHolderCapEnv(python: string | null): Record<string, string> {
   return { ...resolveComputeCapEnv(python), ...resolveWriteRoutingEnv() };
 }

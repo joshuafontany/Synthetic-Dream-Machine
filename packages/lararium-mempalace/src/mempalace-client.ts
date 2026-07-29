@@ -9,7 +9,7 @@
  */
 
 import { spawn, type ChildProcess } from "node:child_process";
-import { resolveSidecarCapEnv } from "./sidecar-cap.js";
+import { resolveHolderCapEnv } from "./holder-cap.js";
 
 export interface MempalaceClientOptions {
   /** <repo>/mempalace — the spawn cwd so `python -m mempalace.mcp_server` resolves the package. */
@@ -183,7 +183,7 @@ export class MempalaceClient {
     // spawn is overridden for tests, the cap probes the override command harmlessly (bad path ⇒ []).
     const proc = spawn(command, args, {
       cwd: this.submoduleRoot,
-      env: { ...process.env, ...resolveSidecarCapEnv(command) },
+      env: { ...process.env, ...resolveHolderCapEnv(command) },
       stdio: ["pipe", "pipe", "pipe"],
     });
     this.proc = proc;

@@ -98,8 +98,8 @@ export function resolveMempalaceSpawn(): MempalaceSpawn {
 }
 
 /**
- * The resolved inputs ANY sensorium sidecar spawn needs — the ONE shape every sidecar shares,
- * a `serve` holder (structurepalace · form_encoder) OR a batch sidecar (structure_router · bands_sidecar
+ * The resolved inputs ANY sensorium holder spawn needs — the ONE shape every holder shares,
+ * a `serve` holder (structurepalace · form_encoder) OR a batch holder (structure_router · bands
  * · form_induction): the venv-aware python, the helper SCRIPT (CODE at the repo root under
  * @lararium/sensorium's scripts, never LAR_ROOT), the mempalace `submoduleRoot` (spawn cwd + PYTHONPATH
  * so `import mempalace` resolves the nakama), and whether the script is present on disk. This resolver
@@ -107,22 +107,22 @@ export function resolveMempalaceSpawn(): MempalaceSpawn {
  * Structurally identical to
  * `@lararium/node`'s `ResolvedServeSpawn` — the callers destructure, never type-annotate.
  */
-export interface SidecarSpawn {
+export interface ResolvedHolderSpawn {
   readonly python: string | null;
   readonly script: string;
   readonly submoduleRoot: string;
   readonly scriptPresent: boolean;
 }
 
-/** Resolve a {@link SidecarSpawn} for a script under `packages/lararium-sensorium/scripts/`.
- *  ONE body; each named resolver below binds its own `scriptFile` — the only per-sidecar divergence. */
-function resolveSidecarSpawn(scriptFile: string): SidecarSpawn {
+/** Resolve a {@link ResolvedHolderSpawn} for a script under `packages/lararium-sensorium/scripts/`.
+ *  ONE body; each named resolver below binds its own `scriptFile` — the only per-holder divergence. */
+function resolveHolderSpawn(scriptFile: string): ResolvedHolderSpawn {
   const submoduleRoot = join(repoRoot, "mempalace");
   const script = join(repoRoot, "packages", "lararium-sensorium", "scripts", scriptFile);
   return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
 }
 
-// The five sidecars name themselves by their one divergent bit — the script file. The `*Spawn`
+// Each holder names itself by its one divergent bit — the script file. The `*Spawn`
 // type aliases keep each holder's declared surface stable (callers destructure the shared shape).
 
 /**
@@ -134,91 +134,91 @@ function resolveSidecarSpawn(scriptFile: string): SidecarSpawn {
  * The seat `lares wake --claude/--codex/--copilot/--vscode` registers: a harness reaches memory
  * THROUGH the lares house, never around it into a palace of its own. One owner per palace.
  */
-export type LaresMcpSpawn = SidecarSpawn;
+export type LaresMcpSpawn = ResolvedHolderSpawn;
 export function resolveLaresMcpSpawn(): LaresMcpSpawn {
-  return resolveSidecarSpawn("lares_mcp.py");
+  return resolveHolderSpawn("lares_mcp.py");
 }
 
 /** `structurepalace_io.py` — the persistent NDJSON `serve` holder for the `.structurepalace` AST store. */
-export type StructurePalaceSpawn = SidecarSpawn;
+export type StructurePalaceSpawn = ResolvedHolderSpawn;
 export function resolveStructurePalaceSpawn(): StructurePalaceSpawn {
-  return resolveSidecarSpawn("structurepalace_io.py");
+  return resolveHolderSpawn("structurepalace_io.py");
 }
 
 /** `form_encoder.py` — the persistent NDJSON `serve` holder for the living-grammar FORM store. */
-export type FormEncoderSpawn = SidecarSpawn;
+export type FormEncoderSpawn = ResolvedHolderSpawn;
 export function resolveFormEncoderSpawn(): FormEncoderSpawn {
-  return resolveSidecarSpawn("form_encoder.py");
+  return resolveHolderSpawn("form_encoder.py");
 }
 
 /** `persistence_io.py` — the persistent NDJSON `serve` holder for a PersistencePalace (testimony) store. */
-export type PersistencePalaceSpawn = SidecarSpawn;
+export type PersistencePalaceSpawn = ResolvedHolderSpawn;
 export function resolvePersistencePalaceSpawn(): PersistencePalaceSpawn {
-  return resolveSidecarSpawn("persistence_io.py");
+  return resolveHolderSpawn("persistence_io.py");
 }
 
 /** `content_io.py` — the persistent NDJSON `serve` holder for a CONTENT store (non-memory targeted content). */
-export type ContentPalaceSpawn = SidecarSpawn;
+export type ContentPalaceSpawn = ResolvedHolderSpawn;
 export function resolveContentPalaceSpawn(): ContentPalaceSpawn {
-  return resolveSidecarSpawn("content_io.py");
+  return resolveHolderSpawn("content_io.py");
 }
 
 /** `capture_session.py` — the Python-owned source-stream capture holder. */
-export type CaptureSessionSpawn = SidecarSpawn;
+export type CaptureSessionSpawn = ResolvedHolderSpawn;
 export function resolveCaptureSessionSpawn(): CaptureSessionSpawn {
-  return resolveSidecarSpawn("capture_session.py");
+  return resolveHolderSpawn("capture_session.py");
 }
 
 /** `capture_corpus.py` — the Python-owned rooted static-corpus pointer pipe. */
-export type CorpusCaptureSpawn = SidecarSpawn;
+export type CorpusCaptureSpawn = ResolvedHolderSpawn;
 export function resolveCorpusCaptureSpawn(): CorpusCaptureSpawn {
-  return resolveSidecarSpawn("capture_corpus.py");
+  return resolveHolderSpawn("capture_corpus.py");
 }
 
 /** `embed_io.py` — the palace-less EMBED holder (text→vector), consuming the mempalace embedder. */
-export type EmbedSpawn = SidecarSpawn;
+export type EmbedSpawn = ResolvedHolderSpawn;
 export function resolveEmbedSpawn(): EmbedSpawn {
-  return resolveSidecarSpawn("embed_io.py");
+  return resolveHolderSpawn("embed_io.py");
 }
 
 /** `search_io.py` — the SEARCH holder, consuming mempalace's hybrid `search_memories` over a palace. */
-export type SearchSpawn = SidecarSpawn;
+export type SearchSpawn = ResolvedHolderSpawn;
 export function resolveSearchSpawn(): SearchSpawn {
-  return resolveSidecarSpawn("search_io.py");
+  return resolveHolderSpawn("search_io.py");
 }
 
 /** `kg_io.py serve` — the KG holder, consuming mempalace's KnowledgeGraph (read+write) over a palace. */
-export type KgSpawn = SidecarSpawn;
+export type KgSpawn = ResolvedHolderSpawn;
 export function resolveKgSpawn(): KgSpawn {
-  return resolveSidecarSpawn("kg_io.py");
+  return resolveHolderSpawn("kg_io.py");
 }
 
 /** `meta_io.py` — the palace-less META-MODEL holder (content→entities+hall), consuming their extractors. */
-export type MetaSpawn = SidecarSpawn;
+export type MetaSpawn = ResolvedHolderSpawn;
 export function resolveMetaSpawn(): MetaSpawn {
-  return resolveSidecarSpawn("meta_io.py");
+  return resolveHolderSpawn("meta_io.py");
 }
 
 /** `graph_io.py serve` — the GRAPH holder, consuming mempalace palace_graph + hallways over a palace. */
-export type GraphSpawn = SidecarSpawn;
+export type GraphSpawn = ResolvedHolderSpawn;
 export function resolveGraphSpawn(): GraphSpawn {
-  return resolveSidecarSpawn("graph_io.py");
+  return resolveHolderSpawn("graph_io.py");
 }
 
 /** `structure_router.py` — the corpus STRUCTURE-plane parse router (batch, once per ingest). */
-export type StructureRouterSpawn = SidecarSpawn;
+export type StructureRouterSpawn = ResolvedHolderSpawn;
 export function resolveStructureRouterSpawn(): StructureRouterSpawn {
-  return resolveSidecarSpawn("structure_router.py");
+  return resolveHolderSpawn("structure_router.py");
 }
 
-/** `bands_sidecar.py` — the corpus BANDS-plane multi-scale FFZ (batch, after content+structure). */
-export type BandsSpawn = SidecarSpawn;
+/** `bands.py` — the corpus BANDS-plane multi-scale FFZ (batch, after content+structure). */
+export type BandsSpawn = ResolvedHolderSpawn;
 export function resolveBandsSpawn(): BandsSpawn {
-  return resolveSidecarSpawn("bands.py");
+  return resolveHolderSpawn("bands.py");
 }
 
 /** `form_induction.py` — the corpus FORM-plane BLIND grammar induction (batch, after structure). */
-export type FormInductionSpawn = SidecarSpawn;
+export type FormInductionSpawn = ResolvedHolderSpawn;
 export function resolveFormInductionSpawn(): FormInductionSpawn {
-  return resolveSidecarSpawn("form_induction.py");
+  return resolveHolderSpawn("form_induction.py");
 }
