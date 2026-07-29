@@ -1,0 +1,104 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+```toml iam
+cacheable     = true
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/shelter-against-empire.mem"
+hydrate       = true
+l-space       = "stable"
+mana          = 16
+manao         = 16
+manaoio       = 16
+register      = "Synthesis-Canon"
+retain        = true
+revision-note = "the standing brief. Operator-stated and load-bearing: this infrastructure exists for groups that need shelter against empire. Every trade downstream re-weights against it"
+role          = "the WHY the rest of the graph reasons toward. Names who this serves, what empire does structurally, and the three design consequences that follow — the recently-arrived case as ACCEPTANCE TEST, categorisation as THE threat, and fluid-not-frozen rank as a survival property"
+tags          = ["api/pono/meme", "api/pono/loci"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lares/api/pono/shelter-against-empire"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #the-brief >>
+
+! Shelter Against Empire ~ the brief the graph reasons toward
+
+''RULED, operator-stated:'' this system exists ''for those groups that need shelter against empire.''
+
+Not a value the design also holds. ''The optimum every other trade is measured against'' — and a meme that reasons without it will reason correctly toward the wrong answer, with nothing in the reasoning to show the error.
+
+Named, because a brief that names nobody protects nobody: ''kanaka maoli'' and the Hawaiian kingdom groups · the ''Pacific Northwest tribes'' (Siletz among them) · ''Discordians'' keeping their own commons · the ''Kowloon'' walled-city crews · ''Blacksky'' and the communities holding their own moderation. Each already holds its own rites, its own reckoning of who belongs, and its own long practice of holding people the state declined to hold. ''This stack does not supply that. It tries to build something their practice can inhabit without being flattened by it.''
+
+<<~/ahu >>
+
+<<~ ahu #what-empire-does >>
+
+!! What empire does, structurally
+
+Strip the costume and empire runs ''three moves'', each answerable in architecture:
+
+''It insists on a GLOBAL NOW.'' One register, one present tense, one authoritative answer to //who is this//, resolvable by anyone from outside. A census is exactly that claim. Every identity model that pins one human to one resolvable identity has already built it, whatever it intends — which is why this stack rules that ''identity ENACTS a relationship and never names a thing''.
+
+''It makes a CATEGORY, then acts on the category.'' The historical record reads plainly: harm arrived through a legible category with a nameable custodian, and the ''contents'' of the record mattered less than its ''existence''. A hawala network moving $140M a year across 40 countries was destroyed on an accusation later found baseless — the contents were innocent, were eventually known innocent, and eleven years passed. So ''categorisation risk reads as THE threat'', never one among several, and every anchor this stack considers gets priced against it first.
+
+''It FREEZES the ladder.'' Not by ranking — societies rank — but by making rank ''total, immobile, and inheritable''. A total order over persons requires something like a global now to maintain; a partial order does not. And the record is unambiguous about who dies when the ladder freezes: four independent cases, one line, always at ''has local standing / does not''. Bulgaria, March 1943 — one state, one law, one month: inside the old borders ~48,000 saved; in the newly occupied territories all 11,343 deported, ''twelve survived''.
+
+''Which is why //no frozen rank// names a survival property and not a taste'', and why the ''recently-arrived case reads as this design's acceptance test'' rather than as a caveat appended to it.
+
+<<~/ahu >>
+
+<<~ ahu #the-myth >>
+
+!! The myth ~ what the fiction encodes
+
+The Elyncia frame carries the architecture, and it carries it as ''specification rather than decoration''.
+
+''The Necrospire broke the world and Web 2 with it.'' What returned was not a restored network but ''a new lattice built from the bones of the old'' — flexing across reality fractures, surviving resonance collapses, holding no single node whose loss ends it. The empire that fell had a capital province, a primary node, and a communications spine. ''It fell because it had those things.''
+
+''A Lar binds to a PLACE, never to a family.'' If the family moved, the Lar stayed. So a lararium holds an address and no roster of persons — and that is the anti-census encoded at the level of what a node ''is''.
+
+''Lararia stabilize through use'' — //offerings, repeated gestures, negotiated rites, and everyday interactions gradually tune each node//. A fed node hums; a neglected one flickers. That is `nohopapa` in the fiction's own words, and it names the reason nothing here persists by decree.
+
+''Palimpsests, never unified designs'' — //no single continuous cultural source underlies it… each shrine represents a local synthesis: layered, adaptive// — and elements //accumulate, refract, and sometimes conflict//. A stack that shipped one rite for everyone would be a unified design, which the myth already refuses (see `the-thing-event#unmodelled`).
+
+''And the Gaia parallel needs no drawing out.'' Kingdoms overthrown and their language nearly ended; peoples enrolled, counted, and relocated by registry; networks shut on unproven accusation; platforms that hold the membership list and can delete it by deleting a row. The fiction sets it five centuries after a collapse so the shape reads clearly — and the shape is 2026's, not 4326's.
+
+<<~/ahu >>
+
+<<~ ahu #consequences >>
+
+!! What follows, in the design
+
+* ''The recently-arrived case is the ACCEPTANCE TEST.'' Any structure safest for its long-settled members and hardest on its newest ''fails'', however elegant. The conversion act (`the-thing-event`) exists to answer this and stands unbuilt — that reads as the largest open thing in the design, and it is open because it matters, never because it was forgotten.
+* ''Categorisation gets priced before attribution.'' Attribution harms individuals; categorisation ends institutions. Any anchor that makes a seat unmintable also makes it attributable — the trap the anti-Sybil work kept walking into — and the mesh's answer runs ''tolerance, never detection'': bound the reach, never adjudicate who is real. A Sybil detector IS a refugee detector, and that reads as measured rather than argued.
+* ''Fluid rank, never frozen.'' Standing decays, erodes, re-earns. Nothing holds still — for founder and newcomer alike — so no list survives long enough to become a census.
+* ''No global now, at every shore.'' In and out. A wall clock reads as an unreliable witness; a position on a walkable chain reads as the honest instrument.
+* ''No container, therefore no wall.'' A realm ''mints no DID and hosts on no single machine''; a layer cannot be deleted by anyone not dwelling in it. There is no row to delete, and no platform seat from which to delete it.
+* ''The rites belong to the communities.'' The mesh supplies `nohopapa` — that dwelling deposits, that depth is real, that unfed erodes. ''Each layer supplies its own thing-event.''
+
+<<~/ahu >>
+
+<<~ ahu #the-honest-limit >>
+
+!! The honest limit
+
+''No architecture supplies standing no community offered.'' A refugee's held-ness runs only as portable as the layers willing to attest it, and that names the actual social condition rather than a gap awaiting a build.
+
+And the deeper limit, stated so nobody has to rediscover it: ''every failure in the historical survey ran legal or administrative, not cryptographic.'' Registers were repurposed by their lawful custodians under changed management. So the cryptographic layer buys ''time and cost'', which is worth buying — Denmark's warning bought 7,500 lives — and it does not buy safety. ''What buys safety is having no seizable object, no nameable category, and no list that holds still.''
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

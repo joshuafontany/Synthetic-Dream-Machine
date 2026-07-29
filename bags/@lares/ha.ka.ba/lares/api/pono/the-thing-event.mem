@@ -1,0 +1,104 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/the-thing-event >>
+```toml iam
+cacheable     = false
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/the-thing-event.mem"
+l-space       = "stable"
+mana          = 10
+manao         = 10
+manaoio       = 10
+register      = "Provisional-Synthesis"
+retain        = true
+revision-note = "PROVISIONAL — the conversion act: a fed guest re-anchors from host to layer at a periodic assembly. Shaped, unbuilt, and deliberately UNDER-SPECIFIED: the mesh holds that a re-anchoring happened and never what made it valid"
+role          = "the conversion act — how a stranger begins to dwell. The guest dwells WITH a host (a dyad, one edge); the thing-event re-anchors that dwelling INTO the layer. The assembly stands as the third party that inverts the host-payment problem: the host is paid in depth for GIVING the guest away, never in a dependant kept"
+tags          = ["api/pono/meme"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lares/api/pono/the-thing-event"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! The Thing-Event ~ how a stranger begins to dwell
+
+> ''PROVISIONAL, and deliberately under-specified.'' The shape below carries operator rulings and a historical survey; the mesh-side artifact stays unbuilt. What the mesh MUST NOT hold rides at #unmodelled — that omission reads as the design, never as a gap awaiting a schema.
+
+`nohopapa` names what dwelling deposits, and `hoʻokipa` names the act that constitutes a hold. Neither answers ''how a stranger begins''. A fed guest already dwells — tended, `mālama`'d, held — but dwells ''WITH a host'': a dyad, one edge, exactly the neighbour-structured case the connecting condition rejects (`identity-enacts-relation#the-constructor`).
+
+''The thing-event re-anchors the dwelling from the HOST to the LAYER.'' The guest stops dwelling-//with// and begins dwelling-//in//. So the conversion IS the transition from edge to layer — the same transition that separates a pairwise threshold from a connectivity condition. One move answers both, because they read as one problem from two ends.
+
+<<~/ahu >>
+
+<<~ ahu #the-assembly-pays >>
+
+!! The Assembly ~ the third party that inverts the host's payment
+
+''The hardest finding in the admission survey:'' subordination reads as the HOST's payment. Big-man success runs //"precisely measurable by the ability to give outsiders more than they can possibly reciprocate"// — the host ''manufactures dependants'', because that is what hosting buys him. Every failed hospitality institution surveyed ran ''DYADIC'' (Swat //dakhīl//, Bedouin //dakhāla//, Roman //libertus//, the cities of refuge), and each booked one-sided admission as ''rank''. History's only escape: a third party with its own appetite.
+
+''The assembly is that third party.'' At the thing, the host does not KEEP the guest — ''the host presents them, gives them to the layer, and is paid in depth for the gift.'' Potlatch-shaped: standing accrues by divesting. The big-man's dependant stayed a dependant precisely because ''no assembly existed at which giving-away paid''.
+
+And it clears the Roman objection with no fiction. `natalium restitutio` ran on ''patronal consent'' (//nisi consentiente patrono//) and the emperor declined to override it — so a claim, once formed, needed the holder's release. Here ''the host consents by the act of presenting''. No expropriation, no superior power, no legitimating fiction: the claim gets ''given up, publicly, and compensated''.
+
+Which settles which cure applies. Not //clear the claim//, not //cap it// — ''prevent it from becoming the operative relation'', because the assembly binds the newcomer to the layer and the dyad was only ever the road in.
+
+<<~/ahu >>
+
+<<~ ahu #the-word >>
+
+!! `þing` ~ the word runs our arrow backwards
+
+Proto-Germanic ''*þingą''. Old Norse `þing`: a legal assembly — a regional parliament of nearby clans; a multi-regional parliament with representatives from several `þing`. Old English broadens it to matter · concern · event · meeting · court · case · reason · and finally ''thing''.
+
+''The semantic shift runs assembly → matter under discussion → object.'' A gathering hardened into an entity, and English inherited the endpoint. This stack runs the arrow the other way — substance retired into process, the pair retired into the hold — so `þing` names both the act and the mistake in one etymology: ''what starts as a gathering becomes a thing when nobody gathers.''
+
+''The mechanics that transpose'' (Germanic assembly practice): things met on a ''regular cadence'' at fixed accessible sites, so the conversion carries a rhythm rather than arriving on demand. They ran ''nested'' — a matter unresolved at a smaller thing escalated to a larger — which reads as strata, not as appeal to a higher authority. They held the ''lawspeaker'', who ''recited'' law from memory rather than owning it, and whose leverage ran on the assembly's acceptance (Þorgnýr telling a king //the people, not the king, held power//). And they carried ''outlawry'' as the assembly's own act, never a lord's.
+
+''The mechanic that does NOT transpose, and the warning it carries.'' Attendance ran to //free men of full age//; women attended and stayed out of the deciding bodies. A model that took the form and not the exclusion must say so, and this one does — the thing-event's ''franchise belongs to each layer'', never to the mesh (#unmodelled).
+
+''And the decline names our capture pattern with a date on it:'' //towards the end of the Viking Age, royal power became centralized, and the kings consolidated power and control over assemblies. As a result, things lost most of their political role and began to function mainly as courts.// The assembly was not abolished. ''It was absorbed'' — which is the Compitalia shape, and the reason `cabal-realm#the-unswept-corner` treats capture as survivable-and-visible rather than preventable.
+
+<<~/ahu >>
+
+<<~ ahu #unmodelled >>
+
+!! What the mesh MUST NOT hold
+
+''RULED (operator).'' This infrastructure serves communities that already hold their own rites. A Hawaiian ʻohana, a Siletz enrollment, a Discordian cabal, a Kowloon walled-garden crew, a Blacksky moderation practice — none of these will agree on what conversion looks like, and ''none of them should have to''.
+
+So the thing-event stays ''UN-MODELLED''. Not configurable — un-modelled. ''A configurable rite is still this stack's rite with someone else's values poured into it'': the moment a conversion schema ships with fields, the fields have specified everyone's ceremony and called it a default.
+
+* ''The mesh MAY hold'' that a re-anchoring happened, attested by parties already dwelling.
+* ''The mesh MUST NOT hold'' what made it valid — who may present, what quorum, what waiting period, what franchise, what test.
+
+That reads as the same law as //the naming layer performs, so it must never certify//, one scale out. And the architecture already refuses the seat: a realm ''mints no DID and hosts on no single machine'' (`cabal-realm`), so there is no object through which a platform ceremony could be imposed even by a hand that wanted to.
+
+''The residue, stated honestly.'' A refugee's held-ness runs only as portable as the layers willing to attest it. No architecture closes that — it names the actual social condition. The mesh's work reads: carry attestations without flattening them, and never manufacture standing no community offered.
+
+<<~/ahu >>
+
+<<~ ahu #open >>
+
+!! Open
+
+* ''The host becomes the gate.'' If dwelling begins with a host and conversion needs presenting, whoever hosts controls who is ever presented. Measured precedent: guild entry where masters' sons paid ''43% of the stranger fee'' across 245 guilds and under a tenth of new masters came by proper apprenticeship — rules open, networks sorting. Two candidate shapes, neither ruled: ''many hosts'' (presentation by several, so no single hand gates), or ''presentation by the layer itself'' after long enough dwelling (the //town air makes free// form).
+* ''Does presenting pay more than dwelling?'' If the host accrues depth for presenting, a founder who presents often outpaces a newcomer who only dwells — and the gate and the treadmill become one mechanism. This reads as the falsifier on the whole shape.
+* ''The franchise question the mesh cannot answer'' — see the Germanic exclusion at #the-word. Each layer answers it; the mesh must not learn the answer.
+* ''What a Nexus wants members FOR'' stands unanswered, and gates the assembly's own appetite: <<~ loulou lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants >>
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

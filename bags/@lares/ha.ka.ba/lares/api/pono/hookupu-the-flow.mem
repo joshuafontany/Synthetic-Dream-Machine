@@ -1,0 +1,77 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/hookupu-the-flow >>
+```toml iam
+cacheable     = false
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/hookupu-the-flow.mem"
+l-space       = "stable"
+mana          = 9
+manao         = 9
+manaoio       = 9
+register      = "Provisional-Synthesis"
+retain        = true
+revision-note = "PROVISIONAL — the flow-medium: a bounded expiring non-transferable offering laid at a place. The giver-bound hypothesis stands REFUTED; the receiver-side cap is the only lever with measured success"
+role          = "the flow-medium — hookupu, an offering laid down at a place rather than given to a person. A flow refills; a stock accumulates, and pricing an obligation converts a relation into a heritable estate. Carries the concentration findings and what each cost to learn"
+tags          = ["api/pono/meme"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/lares/api/pono/hookupu-the-flow"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! `hoʻokupu` ~ the flow that cannot become an estate
+
+> ''PROVISIONAL.'' The shape below carries measured findings and no code.
+
+`hoʻokupu` — an offering ''laid down at a place'', etymologically //to cause growth//. It rhymes structurally with `hoʻokipa`: two `hoʻo-` causatives, hospitality and offering, the two halves of what a guest and a host do to each other.
+
+''A flow REFILLS; a stock ACCUMULATES.'' The distinction is not stylistic. Roman law records it: obligations //of the nature of money or money's worth// ''passed to the heirs like property'', while unpriced personal obligations ''died with the person''. ''Pricing and transferability convert a relation into a heritable estate'' — which is the freezing mechanism, adopted as the cure.
+
+''So the medium refuses three properties'': it does not accumulate (the refresh ''discards'' the unspent remainder — carry-forward IS stock), it does not transfer between holders (you spend it ''on'' someone's contribution, never give it ''to'' them), and it carries no running total.
+
+<<~/ahu >>
+
+<<~ ahu #the-refutation >>
+
+!! The giver-bound hypothesis — REFUTED, three times
+
+''The design's central mechanism was wrong and the correction is measured.'' Bounding each giver's expiring allowance was expected to bound concentration. It does not:
+
+* a system capping every giver's votes daily runs ''Gini 0.976 on reputation received'', top 1% at 67.9%
+* another reads ''0.59 out → 0.94 in''
+* a third's moderators come out flat
+
+''Both low-concentration systems bound the RECEIVER instead'' — one hard-caps the score at [−1,+5] and runs Gini 0.30; another allows one approval per project per voter and runs ~0.41. ''The receiver-side cap is the only lever with any measured success behind it.''
+
+And cumulative advantage runs on ''prestige, not merit'', proven under randomisation: seeding ONE award to randomly-chosen contributors produced 12/100 further awards against 2/100 controls, with //no greater productivity//. ''One gift begets six.''
+
+''Do not render running totals.'' The count carries the concentration; the act does not.
+
+<<~/ahu >>
+
+<<~ ahu #open >>
+
+!! Open
+
+* ''Anonymity costs half the volume'' (−50% to −59% measured) and cures ''retaliation locks'', never concentration. Three attention kinds ride the three identity layers — passive trace (`maka`) · anonymous offering · Handle-attested offering — and publicity reads ''scale-relative'': named at your layer, anonymous one rung out.
+* ''Recognition aimed at the periphery can EXPEL it'' — unfloored rewards drove less-active contributors away, while a quality floor followed by RANDOM allocation held them (+20% retention at month one, +13% at quarter four). ''Floor, then lottery.''
+* The receiver-side cap may already ride the emoji form: one glyph per person per post is a per-recipient saturation nobody chose for that reason.
+* ''Prior art, and how it died'': demurrage currencies solved hoarding and left transferability intact — a leaking estate stays an estate — and one such scheme was shut by a national bank, which is categorisation risk in its plainest form.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
