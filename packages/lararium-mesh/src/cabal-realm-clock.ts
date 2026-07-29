@@ -30,6 +30,7 @@
  */
 
 import { leaseEpochPrefix, effectiveLeaseEpoch } from "./epoch-lease.js";
+import { tiddlerText, type LarDoc } from "./base-doc.js";
 import type { CabalRealm } from "./cabal-realm.js";
 
 /** One maintainer's standing — the writer and how deep it has rolled the realm's lease. */
@@ -73,10 +74,14 @@ export interface CabalRealmMaintenanceProvenance {
  * calibrates what they mean.
  */
 export function cabalRealmMaintenanceProvenance(
-  realm:      CabalRealm,
+  realm:      CabalRealm | string,
   leaseSlots: ReadonlyMap<string, string>,
 ): CabalRealmMaintenanceProvenance {
-  const prefix = leaseEpochPrefix(realm.realmDocIdHex);
+  // The read wants ONE thing from the realm — its doc id. A reader that holds only the id (a vessel asked
+  // about a realm it does not itself dwell in) may pass the hex, and a caller holding the whole realm may
+  // pass that. Narrowing the demand rather than demanding the whole shape for one field.
+  const realmDocIdHex = typeof realm === "string" ? realm : realm.realmDocIdHex;
+  const prefix = leaseEpochPrefix(realmDocIdHex);
   const maintainers: MaintainerStanding[] = [];
   for (const [slotUri, value] of leaseSlots) {
     if (!slotUri.startsWith(prefix)) continue;            // a foreign realm's slot
@@ -100,4 +105,39 @@ export function cabalRealmMaintenanceProvenance(
     spread: effectiveEpoch - trailingEpoch,
     leadingCount,
   };
+}
+
+/**
+ * Gather a realm's per-writer lease slots OFF A BOARD — the doc→map bridge the clock's pure read wants.
+ *
+ * The slots ride as tiddlers under the realm's lease prefix, each holding one writer's epoch as text. This
+ * scans a board replica for them and hands back the map. It reads whatever the supplied doc HOLDS and never
+ * asks where the doc came from: the caller chooses the board, because which board carries a realm's feeding
+ * decides who can SEE it, and that choice belongs above this line.
+ */
+export function realmLeaseSlotsFromBoard(doc: LarDoc, realmDocIdHex: string): Map<string, string> {
+  const prefix = leaseEpochPrefix(realmDocIdHex);
+  const slots  = new Map<string, string>();
+  for (const [key, record] of Object.entries(doc.tiddlers ?? {})) {
+    if (!key.startsWith(prefix)) continue;
+    const value = tiddlerText(record);
+    if (typeof value === "string") slots.set(key, value);
+  }
+  return slots;
+}
+
+/**
+ * Read a realm's maintenance provenance straight off a board replica — the composed capture-clock read.
+ *
+ * WHAT A READER MAY CONCLUDE, and it stays narrow. This reports the feeding THIS REPLICA has synced. A
+ * maintainer whose roll has not arrived reads as absent, and a realm nobody here has synced reads as unfed
+ * — indistinguishable from a realm nobody feeds. Under no-global-now those two generate identically, so the
+ * numbers name a local sighting and never a total (the same no-completeness invariant `vouch-board` holds).
+ *
+ * It still reports NO liveness verdict. Deriving //alive// or //dissolved// from these epochs would need a
+ * rate at which unfed standing erodes, and no rate stands seated — a verdict here would be this layer
+ * inventing the operator's calibration and presenting it as a reading.
+ */
+export function realmMaintenanceFromBoard(doc: LarDoc, realmDocIdHex: string): CabalRealmMaintenanceProvenance {
+  return cabalRealmMaintenanceProvenance(realmDocIdHex, realmLeaseSlotsFromBoard(doc, realmDocIdHex));
 }
