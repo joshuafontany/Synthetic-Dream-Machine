@@ -38,7 +38,7 @@ measure self-consistency:
       McGraw, K. O., & Wong, S. P. (1996). Forming inferences about some
       intraclass correlation coefficients. Psychological Methods, 1(1), 30-46.
 
-stdlib + numpy only (no scipy in the sidecar venv).
+stdlib + numpy only (no scipy in the holder venv).
 """
 
 from __future__ import annotations

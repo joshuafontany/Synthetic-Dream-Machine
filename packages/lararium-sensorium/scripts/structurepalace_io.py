@@ -62,7 +62,7 @@ import sys
 
 from mempalace.palace import get_collection
 
-# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON serve-loop ·
+# The serve cap-stack this holder #has — flock-singleton · idle-reap · NDJSON serve-loop ·
 # ops-dispatch · the serve composition root — composed from the shared foundation, never inherited.
 #
 # `_fcntl`/`_select` re-export so the serve tests read them as MODULE ATTRIBUTES (`ap._fcntl is None`)
@@ -96,7 +96,7 @@ PROVENANCE_CAP = 64
 IDLE_TTL_ENV = "STRUCTUREPALACE_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
 
-# The sidecar's identity in the lock namespace — its per-palace singleton prefix.
+# The holder's identity in the lock namespace — its per-palace singleton prefix.
 _LOCK_PREFIX = "structurepalace_serve"
 
 
@@ -538,7 +538,7 @@ class StructurePalaceStore:
         return {**res, "turn_key": turn_key}
 
 
-# --- the OPS this sidecar declares (its #has-stack made literal) -------------
+# --- the OPS this holder declares (its #has-stack made literal) -------------
 # Each op is a handler(req) -> result, bound to one open store. The shared
 # make_dispatch wraps them in the NDJSON {id, ok, result|error} envelope.
 
@@ -558,7 +558,7 @@ def _build_ops(store: StructurePalaceStore) -> dict:
 
 
 def _serve_loop(store: StructurePalaceStore, in_fd: int, out) -> None:
-    """Wire this sidecar's ops into the shared NDJSON serve-loop cap (raw-fd read +
+    """Wire this holder's ops into the shared NDJSON serve-loop cap (raw-fd read +
     idle-reap). The TTL reads fresh from the env so a test/operator can override it."""
     serve_loop(make_dispatch(_build_ops(store)), in_fd, out, idle_ttl=_idle_ttl_seconds())
 

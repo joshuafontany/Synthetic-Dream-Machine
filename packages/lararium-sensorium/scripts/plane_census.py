@@ -26,7 +26,7 @@ import sqlite3
 import sys
 
 # The record count lives on the METADATA segment: every stored record lands a
-# metadata row, while vectors ride the HNSW sidecar dir and leave the VECTOR
+# metadata row, while vectors ride the HNSW index dir and leave the VECTOR
 # segment's sqlite count at zero. Counting VECTOR here would report an honest
 # store as empty — the exact failure this organ exists to catch.
 _CENSUS_SQL = """

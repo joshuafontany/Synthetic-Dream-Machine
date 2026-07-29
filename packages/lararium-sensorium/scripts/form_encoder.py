@@ -96,7 +96,7 @@ import math
 import sys
 from collections import Counter
 
-# The serve cap-stack this sidecar #has — flock-singleton · idle-reap · NDJSON serve-loop ·
+# The serve cap-stack this holder #has — flock-singleton · idle-reap · NDJSON serve-loop ·
 # ops-dispatch · the serve composition root — composed from the shared foundation, never inherited.
 #
 # `_fcntl`/`_select` re-export so the serve tests read them as MODULE ATTRIBUTES (`fe._fcntl is None`)
@@ -882,7 +882,7 @@ class FormPalaceStore:
 IDLE_TTL_ENV = "FORM_ENCODER_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
 
-# The sidecar's identity in the lock namespace — its per-palace singleton prefix.
+# The holder's identity in the lock namespace — its per-palace singleton prefix.
 _LOCK_PREFIX = "form_encoder_serve"
 
 
@@ -903,7 +903,7 @@ def _idle_ttl_seconds() -> float:
 
 
 # ---------------------------------------------------------------------------
-# the OPS this sidecar declares (its #has-stack made literal)
+# the OPS this holder declares (its #has-stack made literal)
 # ---------------------------------------------------------------------------
 
 
@@ -985,7 +985,7 @@ def _op_query(req: dict, holder: dict) -> dict:
 
 
 def _build_ops(holder: dict) -> dict:
-    """The verb → handler registry — this sidecar's #has-stack made literal. Each
+    """The verb → handler registry — this holder's #has-stack made literal. Each
     handler closes over the warm ``holder`` (scorer + store, both lazily opened)."""
     return {
         "ping": lambda req: _op_ping(req, holder),
@@ -1007,7 +1007,7 @@ def _handle_request(req: dict, holder: dict, out) -> None:
 
 
 def _serve_loop(holder: dict, in_fd: int, out) -> None:
-    """Wire this sidecar's ops into the shared NDJSON serve-loop cap (raw-fd read +
+    """Wire this holder's ops into the shared NDJSON serve-loop cap (raw-fd read +
     idle-reap). The TTL reads fresh from the env so a test/operator can override it."""
     serve_loop(make_dispatch(_build_ops(holder)), in_fd, out, idle_ttl=_idle_ttl_seconds())
 

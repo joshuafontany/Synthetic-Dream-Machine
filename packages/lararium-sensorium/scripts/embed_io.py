@@ -4,7 +4,7 @@ embedder. It CONSUMES `mempalace.embedding.get_embedding_function` (does NOT rei
 vectors are byte-COMPATIBLE with the mempalace chroma store BY CONSTRUCTION (same config-selected
 model, same 384-dim, same L2-norm, same cosine space) and upstream embed releases flow back through
 the submodule. The web3-only law holds: their web2 code runs behind the causal-island boundary (this
-sidecar); the lares stack proper speaks only the dumb NDJSON `embed` op.
+holder); the lares stack proper speaks only the dumb NDJSON `embed` op.
 
 This is the EMBED half of the single-writer split — the embed fans out here (parallel, stateless),
 `content_io.put` commits the caller-vector (serial). A PALACE-LESS encode-only holder: the model

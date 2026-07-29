@@ -50,7 +50,7 @@ a cell is empty) so the estimator stays smooth and unbiased across the range:
   Computers, 27(1), 46-51.
 
 z / Phi come from the standard library (statistics.NormalDist) so the kernel
-carries no scipy dependency — numpy is present in the sidecar venv, scipy is not.
+carries no scipy dependency — numpy is present in the holder venv, scipy is not.
 """
 
 from __future__ import annotations

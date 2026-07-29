@@ -460,7 +460,7 @@ def run_holder(
     """The serve composition root: acquire the per-palace singleton, then (only if
     held) wire the holder's ops into the serve loop, then release.
 
-    ``build_dispatch`` is a zero-arg callable the SIDECAR supplies — it opens its
+    ``build_dispatch`` is a zero-arg callable the HOLDER supplies — it opens its
     store(s)/scorer and returns the ``dispatch(req, out)`` handler. It runs ONLY
     after the lock is held, so a refused second holder never opens a store (the
     reap-don't-pile invariant). When ``palace is None`` (an encode-only holder) the

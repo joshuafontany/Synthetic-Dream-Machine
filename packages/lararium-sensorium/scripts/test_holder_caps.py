@@ -3,11 +3,11 @@
 The caps COMPOSE (no inheritance): a dummy ops-registry wires through make_dispatch;
 a missing op fails clean (never crashes the loop); the flock-singleton still holds
 per-palace; the idle-reap still bounds; run_holder refuses a second holder WITHOUT
-building the sidecar's dispatch (the reap-don't-pile invariant). Run under the
+building the holder's dispatch (the reap-don't-pile invariant). Run under the
 mempalace venv (though these touch no ChromaDB):
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-sensorium/scripts/test_sidecar_caps.py -q
+        packages/lararium-sensorium/scripts/test_holder_caps.py -q
 """
 
 import io
@@ -200,7 +200,7 @@ def test_serve_lock_belongs_to_its_palace_not_the_guest_comparator(tmp_path):
 
 @_posix_flock
 def test_singleton_independent_per_prefix(tmp_path, monkeypatch):
-    """Two DIFFERENT sidecars (prefixes) over the SAME palace dir each hold their own
+    """Two DIFFERENT holders (prefixes) over the SAME palace dir each hold their own
     singleton — the prefix names the entity in the lock namespace."""
     monkeypatch.setenv("HOME", str(tmp_path))
     p = str(tmp_path / "shared")
@@ -332,7 +332,7 @@ def test_serve_loop_handles_then_exits_on_eof():
 
 
 @_posix_flock
-def test_run_sidecar_refuses_second_holder_without_building(tmp_path, monkeypatch):
+def test_run_holder_refuses_second_holder_without_building(tmp_path, monkeypatch):
     monkeypatch.setenv("HOME", str(tmp_path))
     palace = str(tmp_path / "palace")
     built = []
@@ -351,7 +351,7 @@ def test_run_sidecar_refuses_second_holder_without_building(tmp_path, monkeypatc
     assert built == [], "run_holder built the dispatch despite the singleton being held"
 
 
-def test_run_sidecar_encode_only_skips_lock_and_runs(tmp_path):
+def test_run_holder_encode_only_skips_lock_and_runs(tmp_path):
     """palace=None (an encode-only holder): no lock taken, the loop still runs (EOF)."""
     r, w = os.pipe()
     out = io.StringIO()

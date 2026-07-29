@@ -96,8 +96,8 @@ class WorldlineStore:
     def __init__(self, palace_path: str) -> None:
         os.makedirs(os.path.expanduser(palace_path), exist_ok=True)
         # MULTI-WRITER HARDENING. The `serve` path takes a per-palace flock singleton
-        # (holder_caps.acquire_serve_lock), so through the sidecar there is exactly one writer. But
-        # capture_session.py constructs this store DIRECTLY, in-process, bypassing the sidecar — so
+        # (holder_caps.acquire_serve_lock), so through the holder there is exactly one writer. But
+        # capture_session.py constructs this store DIRECTLY, in-process, bypassing the holder — so
         # N concurrent harness sessions put N processes on this one file. Default sqlite settings
         # (rollback journal, implicit transactions) turn `add_edge`'s check-then-insert guards into
         # a TOCTOU race: two writers each pass the cycle- and fork-guards, then both INSERT, and the

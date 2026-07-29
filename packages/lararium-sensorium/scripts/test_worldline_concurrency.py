@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """test_worldline_concurrency — the guards must hold under N CONCURRENT PROCESSES.
 
-The `serve` path takes a per-palace flock singleton, so through the sidecar there is one writer and
+The `serve` path takes a per-palace flock singleton, so through the holder there is one writer and
 the guards are trivially safe. But `capture_session.py` constructs `WorldlineStore` DIRECTLY,
 in-process — so N live harness sessions put N OS processes on one `worldline.sqlite3`. Under default
 sqlite settings `add_edge`'s cycle- and fork-guards are check-then-act: both writers pass a guard the

@@ -33,7 +33,7 @@ from mempalace.palace import get_collection  # direct, for the FORM store (a pla
 
 # This batch CLI's cap-stack is light: it #has the shared NDJSON record reader and
 # the store-readback cap (no serve loop / flock / idle-reap — those belong to the
-# persistent serve sidecars). FORM_COLLECTION is the shared form-store name.
+# persistent serve holders). FORM_COLLECTION is the shared form-store name.
 from holder_caps import FORM_COLLECTION, read_ndjson_records, read_stored_embeddings
 
 """The palace this process writes — named by `--palace`, never defaulted.
@@ -206,7 +206,7 @@ def cmd_cluster(args):
     orchestrator applies the ffzAcceptRecluster MDL/modularity guard over this `modularity`.
 
     SCOPE: networkx + numpy ride the venv (igraph/leidenalg do NOT); this uses the deterministic
-    Clauset-Newman-Moore greedy modularity, the in-scope community-detection the sidecar holds."""
+    Clauset-Newman-Moore greedy modularity, the in-scope community-detection the holder holds."""
     import networkx as nx
     import numpy as np
 

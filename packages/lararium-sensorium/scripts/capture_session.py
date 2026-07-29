@@ -364,7 +364,7 @@ class CaptureSessionServer:
         matrix → the fired/WATCH/QUIET verdict, the AC1 + variance Kendall-τ with AR(1)-surrogate p-values,
         and the multi-band agreement. Forecasts an approaching regime-shift BEFORE `analyze`'s change-point
         commits. STATELESS — it reads the passed `rows` matrix (rows=time, cols=signals), never the holder's
-        stores; graceful degrade when R / the sidecar is absent."""
+        stores; graceful degrade when R / the leg is absent."""
         import numpy as np
         from bands import forecast_ews
         M = np.asarray(req.get("rows") or [], dtype=float)

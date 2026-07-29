@@ -53,7 +53,7 @@ import json
 from chromadb.errors import NotFoundError
 from mempalace.palace import get_collection
 
-# The serve cap-stack this sidecar #has, composed from the shared foundation. `run_holder` IS the
+# The serve cap-stack this holder #has, composed from the shared foundation. `run_holder` IS the
 # composition root — it holds the flock-singleton, the idle-reap, and the NDJSON serve-loop inside
 # itself, so this module names only what it calls. An import list that recites the whole stack while
 # calling one entry point declares caps the code does not hold, and the recital reads as the contract.

@@ -20,7 +20,7 @@ _PY = sys.executable  # the venv interpreter running pytest (has chroma)
 
 def _serve(palace: str) -> subprocess.Popen:
     env = dict(os.environ)
-    # the serve sidecar imports mempalace.palace — PYTHONPATH must carry the vendored package
+    # the serve holder imports mempalace.palace — PYTHONPATH must carry the vendored package
     repo = os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPTS)))
     env["PYTHONPATH"] = os.path.join(repo, "mempalace") + os.pathsep + env.get("PYTHONPATH", "")
     return subprocess.Popen(

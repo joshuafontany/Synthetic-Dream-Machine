@@ -1,4 +1,4 @@
-"""CLI round-trips proving each refactored sidecar's launched interface is unchanged.
+"""CLI round-trips proving each refactored holder's launched interface is unchanged.
 
 These spawn the script EXACTLY as the TS callers do (same subcommands, same
 request/response JSON, same serve protocol) and assert the byte-stable contract —
@@ -13,7 +13,7 @@ launch) left every CLI surface intact:
 Run under the mempalace venv:
 
     PYTHONPATH=<repo>/mempalace ~/.venv/bin/python -m pytest \
-        packages/lararium-sensorium/scripts/test_sidecar_cli.py -q
+        packages/lararium-sensorium/scripts/test_holder_cli.py -q
 """
 
 import json
