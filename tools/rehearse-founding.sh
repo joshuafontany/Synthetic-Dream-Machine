@@ -16,7 +16,7 @@
 #   · CARRY      the source Herm's announced dial crosses source → relay-1 → relay-2, DECODED and
 #                signature-verified at each hop (herm-mesh-witness.mjs — a plaintext grep of the
 #                Automerge-saved snapshot could never match, so the witness reads through a real client).
-#   · PARTITION  relay-1 is CUT. relay-2's only configured peer dies, yet its pointer keeps ADVANCING
+#   · PARTITION  the harness CUTS relay-1. relay-2's only configured peer dies, yet its pointer ADVANCES
 #                while still carrying the dial — proving it learned the source's endpoint from the
 #                carried dial and now pulls DIRECTLY. Federation rides carried dials, never a
 #                hardcoded peer list. Then relay-1 returns and the mesh restores.
@@ -61,9 +61,10 @@ burn() {  # burn — the rehearsal's clear. Idempotent: a mesh that never stood 
 step() {  # step <label> <log> <command...> — run, capture, report, return the command's exit code
   #
   # CAPTURE THE STATUS BEFORE ANY BRANCH. An `if cmd; then …; fi` whose condition FAILS and carries no
-  # `else` yields status 0 for the whole statement, so a `$?` read AFTER it reports the IF, never the
-  # command — which turns a failing step into a silent pass. This runner shipped that bug on its first
-  # flight: both witnesses failed and it declared `cycles green: 1/1`. Run, capture, THEN branch.
+  # `else` yields status 0 for the WHOLE STATEMENT, so a `$?` read after it reports the IF and never the
+  # command — a failing step then returns 0, `|| ok=0` never fires, and the cycle reads GREEN while its
+  # witnesses fail. Run, capture, THEN branch; `self_test` below keeps that law enforced rather than
+  # merely written.
   local label="$1" log="$2"; shift 2
   printf "   %-26s " "$label"
   local t0 t1 ec

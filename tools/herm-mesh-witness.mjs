@@ -63,7 +63,7 @@ for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
       const has = r.ok && r.dials.some((b) => b.includes(NEEDLE)) ? " ← carries the dial" : "";
       console.log(`    ${r.hop.name}  cid=${(r.cid ?? "—").slice(0, 12)}…  ${mark}${has}`);
     }
-    console.log("  the mesh-palace is a mesh across the astral space — the map relayed blind, three hops,");
+    console.log("  the mesh-palace MESHES across the astral space — the map relayed blind, three hops,");
     console.log("  the pointer signed, the snapshot hash-matched, the dial decoded.");
     if (unverified.length > 0) {
       console.log(`  BOUND: ${unverified.length} earlier hop(s) answered no HOST fetch, so this run verified`);

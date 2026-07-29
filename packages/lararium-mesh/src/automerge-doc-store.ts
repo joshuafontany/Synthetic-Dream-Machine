@@ -2,7 +2,7 @@
  * AutomergeDocStore — the one LarTiddlerStore for every vessel: the SHORE where LarDoc meaning
  * crosses into Automerge's medium.
  *
- * What crosses unchanged is the store SHAPE: browser, Node, and worker vessels all instantiate this
+ * The store SHAPE crosses unchanged: browser, Node, and worker vessels all instantiate this
  * directly, and platform differences (IndexedDB vs fs vs memory) live in the Repo's storage/network
  * adapters — never in the store. Relay-as-vessel doctrine. The medium varies; the shape does not.
  *
