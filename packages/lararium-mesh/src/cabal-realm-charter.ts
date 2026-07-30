@@ -23,10 +23,10 @@
  * THE VEIL INVARIANT (in-process CORRECTNESS, NOT a privacy guarantee):
  * `projectCabalRealmCharter` reads ONLY the public fields of its input and
  * constructs a literal naming ONLY charter fields. The members-only data (roster /
- * substrate content) rides the SAME input bag yet is structurally unreachable in the
+ * substrate content) rides the SAME input bag yet stays structurally unreachable in the
  * output — the shore never references it, so a roster or substrate content CANNOT
- * leak through THIS function. That kills the accidental roster-in-output bug. It is
- * NOT a guarantee against an adversary, who lives on the WIRE (the signed pointer
+ * leak through THIS function. That kills the accidental roster-in-output bug. It guarantees
+ * NOTHING against an adversary, who lives on the WIRE (the signed pointer
  * leaks version / activity / membership-change timing — Pfitzmann-Hansen) and at the
  * members-only STORE (its own sync + access patterns), never inside the projector.
  *
@@ -42,13 +42,13 @@ import type { CabalRealm } from "./cabal-realm.js";
 
 /**
  * A cabal-realm's CHARTER — its PUBLIC face, the only projection that ever crosses
- * the read-face wire. Every field here is DELIBERATELY PUBLIC; the type carries NO
+ * the read-face wire. Every field here rides DELIBERATELY PUBLIC; the type carries NO
  * substrate content and NO member identities (#the-veil-public-set).
  */
 export interface CabalRealmCharter {
   /** DELIBERATELY PUBLIC — the realm's content-addressed NAME (its sentinel DocId,
-   *  hex). Canon #the-realm: knowing it grants nothing (NAMED-not-ruled), so it is
-   *  safe to publish; it is the address a peer needs to find + verify the realm. */
+   *  hex). Canon #the-realm: knowing it grants nothing (NAMED-not-ruled), so publishing it
+   *  costs nothing; it carries the address a peer needs to find + verify the realm. */
   readonly realmDocIdHex: string;
   /** DELIBERATELY PUBLIC — the realm's semantic lar: bearing (its label in l-space).
    *  An address, never a credential (lar: NAMES, it does not fetch). */
@@ -86,7 +86,7 @@ export interface CabalRealmPublicMeta {
 
 /**
  * The shore's INPUT — everything the publishing vessel holds about the realm,
- * PUBLIC and MEMBERS-ONLY together. The shore's job is to keep ONLY the public
+ * PUBLIC and MEMBERS-ONLY together. The shore keeps ONLY the public
  * subset. The members-only fields ride here precisely so the shore can PROVE it
  * drops them (the roster/substrate sit in the bag; the output never names them).
  */
@@ -96,7 +96,7 @@ export interface CabalRealmPublishState {
   /** What the realm CHOOSES to advertise (optional descriptive fields). */
   readonly meta?: CabalRealmPublicMeta;
   /** MEMBERS-ONLY — the member roster (identity hexes). MUST NOT cross the shore.
-   *  Present here only so the veil can be witnessed to hold. */
+   *  Present here only so a witness can watch the veil hold. */
   readonly roster?: readonly string[];
   /** MEMBERS-ONLY — the realm's substrate content (the shared doc the members
    *  maintain). MUST NOT cross the shore. Present here only as a veil witness. */
@@ -105,9 +105,9 @@ export interface CabalRealmPublishState {
 
 /**
  * THE VEIL-PUBLIC SET — the named, referenceable boundary (a pattern integrity, not
- * folklore). Canon's "shared charter, read-scope": a cabal-realm's CHARTER is
+ * folklore). Canon's "shared charter, read-scope": a cabal-realm's CHARTER rides
  * veil-public (served by the read-face, anon-readable via fetch-CORS); its SUBSTRATE
- * and ROSTER are members-only (private, behind the Keyhive CGKA membership).
+ * and ROSTER stay members-only (private, behind the Keyhive CGKA membership).
  *
  * Reference this const to reason about the boundary; the shore below ENFORCES it.
  */
@@ -135,7 +135,7 @@ export const CABAL_REALM_VEIL_PUBLIC_SET = {
  * veil-public face. Mirrors `publicFlowMap`/`snapshotPublicFlowMap`: keep-public,
  * drop-private. It reads ONLY `state.realm` (name + bearing) and `state.meta` (the
  * deliberately-published descriptive fields); it NEVER references `state.roster` or
- * `state.substrateContent`, so those are structurally unreachable in the output.
+ * `state.substrateContent`, so those stay structurally unreachable in the output.
  *
  * Optional fields stay omitted (never `undefined`-valued) so the charter loads
  * cleanly into Automerge and serializes deterministically.
@@ -158,7 +158,7 @@ export function projectCabalRealmCharter(state: CabalRealmPublishState): CabalRe
  * A FIXED Automerge actorId for charter loads. Automerge's default `from` mints a
  * RANDOM actor, which lands in the saved bytes — two loads of the SAME charter would
  * then hash differently. Pinning the actor makes the snapshot bytes a PURE function
- * of the charter content, so the cid is a true content address (stable until the
+ * of the charter content, so the cid carries a true content address (stable until the
  * realm's published meta changes — exactly what a content-addressed read-face wants).
  */
 const CHARTER_ACTOR_ID = "00000000000000000000000000000000" as const;
@@ -171,7 +171,7 @@ const CHARTER_ACTOR_ID = "00000000000000000000000000000000" as const;
  */
 export function cabalRealmCharterSnapshot(charter: CabalRealmCharter): Promise<OracleSnapshot> {
   // Automerge rejects `undefined` values + the readonly interface; the charter
-  // already omits unset keys (projectCabalRealmCharter), so this clone is total.
+  // already omits unset keys (projectCabalRealmCharter), so this clone runs total.
   return exportOracleSnapshot(automergeFrom({ ...charter }, CHARTER_ACTOR_ID));
 }
 
@@ -181,7 +181,7 @@ export function cabalRealmCharterSnapshot(charter: CabalRealmCharter): Promise<O
  *
  *   mountOracleReadFace({ …, exportSnapshot: cabalRealmCharterExporter(state) })
  *
- * The read-face calls it on each change with the live doc; the charter is STATIC
+ * The read-face calls it on each change with the live doc; the charter stands STATIC
  * public meta, so the exporter ignores that arg and re-snapshots the charter (the
  * cid stays stable until the realm's published meta changes; the read-face's
  * ea-breath keeps the pointer fresh). ONLY the charter ever crosses the wire — the

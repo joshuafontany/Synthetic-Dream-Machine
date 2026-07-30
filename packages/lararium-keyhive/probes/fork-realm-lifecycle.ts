@@ -1,5 +1,5 @@
 /**
- * FORK-REALM LIFECYCLE WITNESS — fork-as-exit over REAL Keyhive: a captured realm is
+ * FORK-REALM LIFECYCLE WITNESS — fork-as-exit over REAL Keyhive: a captured realm gets
  * forked into a fresh one that STRUCTURALLY LOCKS OUT the captor. No mocks.
  *
  * The drift:
@@ -8,7 +8,7 @@
  *   3. FORK excluding the captor → a fresh sentinel realm, the survivors carried in.
  *   4. the fork's real Keyhive roster = the two survivors ONLY.
  *   5. THE LOCKOUT — the captor holds NO membership in the fork (verifySentinelMembership
- *      fails); it is not on the roster; it keeps only the dead shell.
+ *      fails); it holds no place on the roster; it keeps only the dead shell.
  *   6. CONTINUITY — the fork records forkedFrom = the captured realm (legitimacy re-anchor),
  *      and a survivor re-points its pointer old→fork (Zooko).
  *

@@ -2,8 +2,8 @@
  * cabal-realm-charter — the VEIL-PUBLIC shore.
  *
  * Proves the disclosure boundary (canon #the-realm "shared charter, read-scope"):
- *   · the CHARTER is veil-public — name + bearing + deliberately-published meta.
- *   · the SUBSTRATE + ROSTER are members-only — they NEVER cross the shore,
+ *   · the CHARTER rides veil-public — name + bearing + deliberately-published meta.
+ *   · the SUBSTRATE + ROSTER stay members-only — they NEVER cross the shore,
  *     even when handed to it in the same input bag (the veil holds, structurally).
  *   · the charter round-trips its public fields + serializes deterministically.
  *
@@ -63,7 +63,7 @@ describe("projectCabalRealmCharter — the veil-public shore", () => {
     expect(keys).not.toContain("memberCount");     // never DERIVED from the roster
 
     // No members-only VALUE crosses — scan the whole serialized charter for any
-    // secret marker. The roster identities + substrate content must be absent.
+    // secret marker. The roster identities + substrate content must stay absent.
     const wire = JSON.stringify(charter);
     for (const member of SECRET_ROSTER) expect(wire).not.toContain(member);
     expect(wire).not.toContain("topSecret");
@@ -71,7 +71,7 @@ describe("projectCabalRealmCharter — the veil-public shore", () => {
   });
 
   test("never derives memberCount from the roster — count omitted by default", () => {
-    // A roster of 3 is present in the input, yet NO count crosses (conservative default).
+    // A roster of 3 rides the input, yet NO count crosses (conservative default).
     const charter = projectCabalRealmCharter(FULL_STATE);
     expect(charter.memberCount).toBeUndefined();
   });
@@ -129,7 +129,7 @@ describe("CABAL_REALM_VEIL_PUBLIC_SET — the named boundary (pattern integrity)
     expect(CABAL_REALM_VEIL_PUBLIC_SET.veilPublic).toContain("genesisUri");
     expect(CABAL_REALM_VEIL_PUBLIC_SET.membersOnly).toContain("member roster");
     expect(CABAL_REALM_VEIL_PUBLIC_SET.membersOnly).toContain("substrate content");
-    // The two faces share nothing — no field is both public and members-only.
+    // The two faces share nothing — no field rides both public and members-only.
     const overlap = CABAL_REALM_VEIL_PUBLIC_SET.veilPublic.filter(
       (f) => (CABAL_REALM_VEIL_PUBLIC_SET.membersOnly as readonly string[]).includes(f),
     );

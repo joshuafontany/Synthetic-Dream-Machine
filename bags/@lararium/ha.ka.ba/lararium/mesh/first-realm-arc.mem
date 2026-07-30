@@ -38,7 +38,7 @@ The founding runbook carries the ''command sequence'' for standing one vessel (<
 Ordinary speech fuses these. The model runs them as four distinct acts with four different costs, and conflating any two produces a wrong build:
 
 |! plain speech |! the act |! what it moves |! built? |
-| //my phone joins// | a leaf ''CONTRACTED'' into a standing fleet | one delegation edge, signed elsewhere; the leaf mints NO root | the mode is named; the walk is not |
+| //my phone joins// | a leaf ''CONTRACTED'' into a standing fleet | one delegation edge, signed elsewhere; the leaf mints NO root | named, never walked |
 | //another operator joins the mesh// | a ''carriage contract'' — wax-sealed, kahu-quorum counter-signed | who relays whose sealed bytes; carry ⊥ read | BUILT (`nexus accept-carriage` · `nexus admit`) |
 | //someone joins the realm// | ''DWELLING'' — the first `hoʻokipa`, and the `nohopapa` it deposits | standing in a realm; nothing on the carriage plane | the machinery stands (`feedCabalRealm`); the verb does not |
 | //a stranger joins// | a crossing priced at the lineage gate, or a boot-invite at the anon floor | reach, never membership; refusal leaves the party at the floor | BUILT (`admitOnLineage` · `boot-invite`) |
@@ -57,11 +57,11 @@ Ordinary speech fuses these. The model runs them as four distinct acts with four
 >
 > And the quorum: three keys on one machine make a quorum ''cryptographically real and not real as a check'' — no independent hand can refuse. Record it as the honest founding state, so a later reader never mistakes a seated quorum for a distributed one.
 
-''② The realm gets FED.'' A realm mints no DID and hosts on no machine; there is nothing to create. It begins when someone feeds it, and it would cease if feeding stopped — //there is no commons without commoning// (`cabal-realm#verb-not-noun`). ''The first offering IS the founding of the realm'', never a step after it. The vessel is founded; the Cabal is fed.
+''② The realm gets FED.'' A realm mints no DID and hosts on no machine; nothing stands to create. It begins when someone feeds it, and it would cease if feeding stopped — //there is no commons without commoning// (`cabal-realm#verb-not-noun`). ''The first offering IS the founding of the realm'', never a step after it. The vessel is founded; the Cabal is fed.
 
 ''③ The fleet gathers.'' The operator's own device-vessels — a laptop browser, a phone, a tablet — join the standing fleet as ''CONTRACTED'' leaves: each mints its own vessel key on-device, and the persona root signs a delegation EDGE into it from the vessel that already holds the root. ''BIND BY EDGE, NEVER BY SEED'' — a key copied between vessels //is// the collector.
 
-> These add ''no locus of cost''. Below the phase change, holds bind one principal's instruments; the gauge still reads the realm nominal, and correctly. A fleet is reach, never depth.
+> These add ''no locus of cost''. Below the phase change, holds bind one principal's instruments; the gauge still reads the realm nominal, and correctly. A fleet buys reach, never depth.
 
 ''④ A second operator founds their own.'' Same rite, their own hearth, their own PersonaGroups, their own charter. ''Independent genesis'' — no shared root, no descent from the first Nexus, and rejoining the mesh later reads as ''RECOGNITION of a foreign chain'', never reconciliation of a forked one (`identity-enacts-relation`).
 
@@ -75,11 +75,11 @@ Ordinary speech fuses these. The model runs them as four distinct acts with four
 
 The runbook stands ''Synthesis-Canon and complete for what it covers''. These sit outside it rather than wrong within it:
 
-# ''The fleet join'' (arc ③). Movement ② names the CONTRACTED founding mode and walks only the SELF-STOOD path. A leaf admitted into a standing fleet mints no root and carries only the edge — the mode is ruled (`vessel-standing`), the commands are not written, and a browser vessel differs from a node vessel by device-gated caps rather than by class.
+# ''The fleet join'' (arc ③). Movement ② names the CONTRACTED founding mode and walks only the SELF-STOOD path. A leaf admitted into a standing fleet mints no root and carries only the edge — the ruling stands (`vessel-standing`), the commands stay unwritten, and a browser vessel differs from a node vessel by device-gated caps rather than by class.
 # ''The realm feeding'' (arc ②). No movement names the first offering. `feedCabalRealm` stands built and unwalked, and the rite goes LIVE without the realm it was founded as a seed of ever beginning.
 # ''The dwelling join'' (arc ⑤). ⊕ Grow contracts carriage and welcomes users at the anon floor. Neither act seats a dweller. This one wants ''design before commands'' — the conversion act stays UN-MODELLED by ruling (`the-thing-event#unmodelled`), so what the mesh may hold is ''that a re-anchoring happened'', never what made it valid.
 
-''And one naming law belongs here before the first realm is named.'' `cabal` names the SCALE, never a required word in anyone's name. This realm carries the word by its founders' choice; a Siletz realm, an ʻohana realm, a Blacksky realm name themselves in their own tongue and lose nothing structural by it.
+''And one naming law belongs here before anyone names the first realm.'' `cabal` names the SCALE, never a required word in anyone's name. This realm carries the word by its founders' choice; a Siletz realm, an ʻohana realm, a Blacksky realm name themselves in their own tongue and lose nothing structural by it.
 
 <<~/ahu >>
 

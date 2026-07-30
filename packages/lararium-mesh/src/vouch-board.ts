@@ -34,7 +34,7 @@
  *
  * So: no read in this module, and nothing built on one, may report a count as TOTAL, a set as COMPLETE, or a
  * board as current "as of epoch N". `verifiedVouchesFromBoard` hands back what THIS replica happens to hold
- * and vows nothing whatever about what exists. The property costs nothing to keep and cannot be recovered
+ * and vows nothing whatever about what exists. The property costs nothing to keep and no later hand recovers it
  * once spent — a single completeness claim anywhere downstream makes refusal legible again, everywhere.
  *
  * Platform-blind: rides ./base-doc + ./cabal-invite only. NO node: imports — the repo resolution of the board
@@ -110,7 +110,7 @@ function coerceInvite(parsed: unknown): CabalInvite | null {
  * DROPS in silence: it means the invite did not arrive, never that an attack occurred.
  *
  * `realm` scopes the fold to one cabal-realm, so a board carrying several realms' vouches yields only the
- * lineage of the realm being crossed — an invite into somewhere else evidences nothing here.
+ * lineage of the realm the applicant crosses — an invite into somewhere else evidences nothing here.
  *
  * The result feeds `vouchDagFromInvites` with its precondition already satisfied.
  */

@@ -2,7 +2,7 @@
  * vouch-dag.test.ts — the feeder canonicalises every endpoint, connects a lineage across the DID/raw split,
  * caps the attack edge, and never severs a principal into two vertices.
  *
- * The load-bearing claim is the canonicalisation one: a joiner admitted under a raw-hex identity, who later
+ * The load-bearing claim rides canonicalisation: a joiner admitted under a raw-hex identity, who later
  * vouches under the SAME key wearing a `0x` DID form, must read as ONE vertex — otherwise the lineage
  * detaches from the seed and the score collapses. The rest guards the out-degree cap and the resolver.
  */
@@ -86,7 +86,7 @@ describe("the out-degree cap bounds the attack edge, and surfaces what it drops"
     const { edges, capped } = vouchDagFromInvites(invites, { maxVouchesPerVoucher: 2 });
     expect(edges).toHaveLength(2);
     expect(capped).toHaveLength(2);
-    // conservation: every issued invite is either an edge or a capped record, never vanished
+    // conservation: every issued invite lands as an edge or a capped record, never vanishes
     expect(edges.length + capped.length).toBe(invites.length);
   });
 

@@ -2,11 +2,11 @@
  * cabal-vouch — one hand stakes its own standing, end-to-end through the node.
  *
  * Proven against a real vessel identity and real persona roots on a temp LAR_ROOT: a vouch lands on the
- * board and reads back through the VERIFYING read (the only read there is), a voucher's out-degree grows
+ * board and reads back through the VERIFYING read (the only read that stands), a voucher's out-degree grows
  * with each distinct joiner and NOT with re-minting, and every fail-closed shore refuses before writing.
  *
- * What this deliberately does NOT assert: that anyone was admitted. A vouch grants nothing on its own —
- * it is signal-2 on the lineage, and the crossing runs elsewhere (`admitOnLineage`).
+ * What this deliberately does NOT assert: that the vouch admitted anyone. A vouch grants nothing on its
+ * own — it rides as signal-2 on the lineage, and the crossing runs elsewhere (`admitOnLineage`).
  */
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";

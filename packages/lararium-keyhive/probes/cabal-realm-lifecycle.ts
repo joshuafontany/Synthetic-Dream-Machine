@@ -14,9 +14,9 @@
  *   7. EVICT one member (convergent revokeSentinelMember)
  *   8. re-verify the roster SHRANK to one (the evicted member lost access)
  *
- * Real lifecycle, not green-units: the sentinel is a real Keyhive Document, the
- * members are independent KeyhiveProvider instances introduced by contact card, the
- * eviction is a real REVOKED tombstone, the cooling/warming rides the real
+ * Real lifecycle, not green-units: the sentinel stands a real Keyhive Document, the
+ * members ride as independent KeyhiveProvider instances introduced by contact card, the
+ * cooling/warming rides the real
  * BagStowage, the lease rolls through the real max-register.
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/cabal-realm-lifecycle.ts
@@ -93,7 +93,7 @@ async function main(): Promise<void> {
     `keys=[${charterKeys.join(",")}]`);
 
   // ── STAGE 2 — JOIN two members ─────────────────────────────────────────────────
-  // Each member is an independent vessel; the founder must KNOW it as an agent first
+  // Each member stands an independent vessel; the founder must KNOW it as an agent first
   // (contact-card exchange), mirroring the founding ceremony's in-scope agents.
   async function makeMember(fill: number): Promise<string> {
     const m = new KeyhiveProvider();
@@ -118,7 +118,7 @@ async function main(): Promise<void> {
 
   // ── STAGE 3b — VEIL HOLDS IN A REAL FOUNDING ───────────────────────────────────
   // Project a charter from a publish-state carrying the LIVE keyhive member ids + a
-  // secret substrate payload — the exact bag a real served charter would be built
+  // secret substrate payload — the exact bag a real served charter would draw
   // from once the realm has members. The shore must drop BOTH, in the output AND
   // in the serialized snapshot bytes (the wire form a peer actually pulls).
   const SECRET = "SECRET-SUBSTRATE-PAYLOAD-must-not-cross";
@@ -149,7 +149,7 @@ async function main(): Promise<void> {
     `${eff0} → ${eff1}`);
 
   // ── STAGE 5 — STARVE + cool to anu (dissolved) ─────────────────────────────────
-  // First warm it (so there is something to cool), then starve: a sweep past idleMs cools it.
+  // First warm it (so a sweep has something to cool), then starve: a sweep past idleMs cools it.
   await feedCabalRealm(residency, realm);                 // alive for a beat
   await new Promise((r) => setTimeout(r, 5));             // exceed idleMs (1ms)
   await residency.sweepOnce();                            // hoʻoanu — cools the unfed substrate
@@ -166,15 +166,15 @@ async function main(): Promise<void> {
     `tier=${residency.tier(SUBSTRATE_URL)} liveness=${livenessWarm}`);
 
   // ── STAGE 7 — a hostile hand cannot EVICT; the realm holds no container ────────
-  // The party-level eviction was torn out with the container model that licensed it. What stands in its
+  // The party-level eviction left with the container model that licensed it. What stands in its
   // realm: a FORK that excludes BY OMISSION. The survivors open dwellings in a fresh realm and the excluded
-  // are simply never opened — no revocation, no tombstone, nothing to converge or contend.
+  // never get opened one — no revocation, no tombstone, nothing to converge or contend.
   const fork = await forkCabalRealm(founder, realm, [memberA, memberB], [memberA], { newUri: `${REALM_URI}-fork` });
   stage("7 FORK — the survivors carry the realm on; the excluded are never opened",
     fork.survivors.length === 1 && fork.survivors.includes(memberB) && !fork.survivors.includes(memberA),
     `survivors=${fork.survivors.length} carriedB=${fork.survivors.includes(memberB)}`);
 
-  // ── STAGE 8 — the FORK holds B and never held A; the OLD realm is untouched ────
+  // ── STAGE 8 — the FORK holds B and never held A; the OLD realm stands untouched ────
   const forkHolds = await dwellersHolding(founder, fork.newRealm, [memberA, memberB]);
   const oldHolds  = await dwellersHolding(founder, realm, [memberA, memberB]);
   stage("8 DWELLINGS — fork holds B alone; the old realm still holds both, unharmed",

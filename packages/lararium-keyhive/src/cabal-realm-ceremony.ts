@@ -6,25 +6,25 @@
  * This GENERALIZES the one-off MeshCabal founding block in
  * ceremony-core.ts (~line 161 — createSentinelDoc(MESH_CABAL_SENTINEL_URI) +
  * addSentinelMember) into a primitive any number of cabal-realms re-enact: a
- * realm is FOUNDED by minting its sentinel Document identity, JOINED by adding a
- * member to that sentinel, EVICTED by convergent-removal. The mesh floor carries
+ * realm FOUNDS by minting its sentinel Document identity and takes a dweller by
+ * adding them to that sentinel. The mesh floor carries
  * the LIVENESS (lease + residency); this carries the AUTHORITY graph (Keyhive).
  *
  * DESIGN CONSTRAINTS:
- *   · DOCUMENT-now, not Group. Keyhive's Group is the semantically-correct vehicle
- *     for a membership cabal, but GroupId has a private constructor in alpha (no
+ *   · DOCUMENT-now, not Group. Keyhive's Group carries the semantically-correct shape
+ *     for a membership cabal, but GroupId holds a private constructor in alpha (no
  *     round-trip from stored bytes), so it cannot persist hex-in-tiddler. Document
- *     (public DocumentId ctor) is the working skeleton AND partly architecturally
- *     correct — canon #the-realm names the realm by its content-addressed *doc*
+ *     (public DocumentId ctor) supplies the working skeleton AND lands partly
+ *     correct architecturally — canon #the-realm names the realm by its content-addressed *doc*
  *     identity. The Group subduction stands unbuilt (provider NOTE ~line 281).
  *   · forward_secrecy STAYS false — a deliberate THREAT-MODEL CHOICE, not an
  *     architectural impossibility (BeeKEM the substrate DOES keep
- *     FS against a passive adversary; the FS is forgone one layer up, at Keyhive's
+ *     FS against a passive adversary; the FS falls away one layer up, at Keyhive's
  *     whole-DOCUMENT-access — a current member reads the whole doc, so per-chunk FS
  *     buys little, and replayable access lets a later-admitted device derive the key.
  *     See keyhive-provider.ts init `false`). This module never touches it (it rides
  *     the provider's init choice).
- *   · membership = the Keyhive DOC-ROSTER — a LIST verified per-member against the
+ *   · membership rides the Keyhive DOC-ROSTER — a LIST verified per-member against the
  *     sentinel (dwellersHolding below), NOT the closure-query of canon
  *     #RULED-by-the-closure. The closure ("evaluated as a query, never instantiated")
  *     stands unbuilt.
@@ -33,8 +33,8 @@
  * The join routes through cabalRealmJoinGate (INERT — the Ostrom-P1 voucher/capture
  * answer mounts there when the operator seats it; #the-unswept-corner stays OPEN). The
  * introduction of a member as a known Keyhive agent (receiveContactCard) stays the
- * CALLER's job — mirrors the founding ceremony, whose vessel/PersonaGroup agents are
- * already in-scope before addSentinelMember.
+ * CALLER's job — mirrors the founding ceremony, whose vessel/PersonaGroup agents
+ * already stand in-scope before addSentinelMember.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
@@ -60,7 +60,7 @@ import type { KeyhiveProvider } from "./keyhive-provider.js";
  *   · leaseWriterId + leaseSlots — REGISTER this writer's liveness lease slot
  *                  (cabalRealmLeaseSlot) at genesis epoch 0 in the provided
  *                  coordinator-free max-register backing store. In production the
- *                  backing store is a set of @daemon lease-epoch tiddlers; here the
+ *                  backing store holds a set of @daemon lease-epoch tiddlers; here the
  *                  caller passes a Map so the floor stays storage-blind.
  */
 export interface FoundCabalRealmOpts {
@@ -91,7 +91,7 @@ export async function foundCabalRealm(
     genesisUri:      uri,
   };
 
-  // The substrate is born COLD — it warms only when the members feed it.
+  // The substrate begins COLD — it warms only when the members feed it.
   if (opts.residency) opts.residency.registerCold(substrateUrl);
 
   // Register this writer's liveness lease slot at genesis epoch 0 (max-register).
@@ -125,7 +125,7 @@ export interface FoundedCabalRealm {
  *
  * `foundedAt` rides `meta` so the founder stamps the founding MOMENT from its own
  * runtime clock (the ceremony stays a deterministic, clock-free function — a test
- * passes a fixed value, a live founding passes Date.now()). The returned charter is
+ * passes a fixed value, a live founding passes Date.now()). The returned charter stands
  * publish-ready: hand it to mesh/cabalRealmCharterExporter to serve it through the
  * existing @oracle read-face. This founds the charter; SERVING it (mounting the
  * read-face) stays the caller's separate act.
@@ -145,22 +145,23 @@ export async function foundCabalRealmWithCharter(
 }
 
 /**
- * OPEN a dwelling — grant one party access to the realm's sentinel, which is the SUBSTRATE half of dwelling.
+ * OPEN a dwelling — grant one party access to the realm's sentinel, which carries the SUBSTRATE half of dwelling.
  *
  * WHAT THIS DOES AND DOES NOT DO. It opens the door; it deposits no standing. Dwelling accrues by the acts a
  * party takes once inside (`nohopapa` — the settling that maintaining deposits), and this ceremony holds none
  * of that: no depth, no rank, no roster entry. A party who opens a dwelling and never acts has exactly the
- * standing they arrived with, which is the model behaving correctly rather than a gap in this function.
+ * standing they arrived with, which reads as the model behaving correctly rather than as a gap in this function.
  *
  * THE GATE STAYS INERT, deliberately. `cabalRealmJoinGate` bakes no legitimacy — a gate that computed it would
  * BECOME the captured object (`cabal-realm#the-unswept-corner`). Whatever conversion rite a realm runs before
  * opening a dwelling stays that realm's own and never reaches this layer (`the-thing-event#unmodelled`).
  *
- * NO CLOSING PAIR EXISTS, and that reads as the design. A party-level eviction was torn out: a realm holds no
- * container to be put out of, so nothing can be evicted FROM one. Dwelling ends when the dwelling stops, and a
+ * NO CLOSING PAIR EXISTS, and that reads as the design. This module holds no party-level eviction: a realm
+ * holds no container a party could be put out of, so no eviction reaches one. Dwelling ends when the
+ * dwelling stops, and a
  * hostile hand shadows the RELATION (`edge-kapae`) rather than the party. Where captors must be left behind
- * wholesale, a fork excludes BY OMISSION — the survivors open dwellings in a fresh realm and the captors are
- * simply never opened (`fork-realm-ceremony`).
+ * wholesale, a fork excludes BY OMISSION — the survivors open dwellings in a fresh realm and no hand ever
+ * opens the captors one (`fork-realm-ceremony`).
  *
  * The caller introduces the party as a known Keyhive agent (receiveContactCard) first — this ceremony assumes
  * an in-scope agent, mirroring the founding.
@@ -176,12 +177,12 @@ export async function openDwelling(
 
 /**
  * CHECK which named candidates hold a dwelling — each verified against the sentinel, those holding access
- * returned. It answers "does this one hold" and NEVER "who holds", which is the distinction the name carries.
+ * returned. It answers "does this one hold" and NEVER "who holds", which marks the distinction the name carries.
  *
  * INVERSION OF CONTROL, and it rides in the signature. The caller supplies the candidates; this reads no
  * membership list because none exists to read. The provider exposes a per-agent access check alone, so a
  * dwelling reads as VERIFIED-ON-ASK, never enumerated — no roster to seize, no list to delete, and no count
- * that could be presented as total. A realm's dwellers are a closure evaluated as a query, never instantiated.
+ * that could be presented as total. A realm's dwellers ride as a closure evaluated on ask, never instantiated.
  */
 export async function dwellersHolding(
   provider:          KeyhiveProvider,

@@ -3,9 +3,9 @@
  * found + join a SHARED cabal-realm, the membership ceremony crossing a real FILE
  * channel between separate vessels. REAL Keyhive, no mocks.
  *
- * This is the swarm test the operator ruled: file/POST FIRST (ship it fast), the channel
+ * This runs the swarm test the operator ruled: file/POST FIRST (ship it fast), the channel
  * the MembershipChannel SHORE — file/POST rides below it here, live-WS drops in untouched-above.
- * Here the shore's impl is FileMembershipChannel — envelopes as JSON files in a shared
+ * Here the shore runs FileMembershipChannel — envelopes as JSON files in a shared
  * dir (the two-vessel e2e's admit.json move, generalized to N vessels + broadcast). In
  * Docker the same shore becomes a shared volume / HTTP-POST; the ceremony never knows.
  *
@@ -15,7 +15,7 @@
  *   3. CONTACT  — each joiner offers its contact-card over the channel → the founder.
  *   4. ADMIT    — founder receives each card, joins it (real Keyhive), acks over channel.
  *   5. ROSTER   — the realm's real Keyhive roster holds all THREE different PersonaGroups.
- *   6. CLOCK    — the capture-clock reads a MULTI-human realm: here the spread is
+ *   6. CLOCK    — the capture-clock reads a MULTI-human realm: here the spread reads
  *                 MEANINGFUL (different principals) — the contrast to the me's immunity.
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/mesh-swarm-lifecycle.ts
@@ -104,7 +104,7 @@ async function main(): Promise<void> {
     `B=${invB.length} C=${invC.length}`);
 
   // ── STAGE 3 — CONTACT: each joiner offers its contact-card → the founder ───────
-  // The contact-card is BINARY (UTF-8 bytes); a file/POST channel carries JSON, so the
+  // The contact-card carries BINARY (UTF-8 bytes); a file/POST channel carries JSON, so the
   // sender base64-encodes it (the real channel's binary-safety burden, not the shore's).
   const b64 = (u: Uint8Array): string => Buffer.from(u).toString("base64");
   await channel.offer({ kind: "contact-card", from: "vessel-B", to: "founder", payload: b64(await vesselB.contactCard()) });

@@ -45,7 +45,7 @@ describe("fork-realm — fork-as-exit", () => {
   test("a vessel re-points ONLY its pointer at the captured realm; other pointers untouched", () => {
     // a survivor sitting on the captured realm moves to the fork
     expect(repointToFork("0xcaptured_realm", fork)).toBe("0xfork_realm");
-    // a pointer elsewhere is left alone (idempotent for non-matching)
+    // a pointer elsewhere stays alone (idempotent for non-matching)
     expect(repointToFork("0xsome_other_realm", fork)).toBe("0xsome_other_realm");
     // the fork's own id re-points to itself (already there → unchanged, not the old id)
     expect(repointToFork("0xfork_realm", fork)).toBe("0xfork_realm");

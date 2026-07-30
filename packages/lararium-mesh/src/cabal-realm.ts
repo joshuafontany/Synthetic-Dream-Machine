@@ -4,10 +4,10 @@
  * epoch-lease, DISSOLVED by cooling to anu when the members stop feeding it.
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/cabal-realm — "a hearth beside, not a
- * category above." A group is not a container you are IN (a noun, a
- * membership-list needing a root admitter) but a thing you continuously DO (a
- * verb): members do not BELONG to the cabal, they MAINTAIN it. The realm is
- * defined by the relationships and dissolves if they break.
+ * category above." A group never holds you the way a container does (a noun, a
+ * membership-list needing a root admitter); it runs as a thing you continuously DO
+ * (a verb): members do not BELONG to the cabal, they MAINTAIN it. The relationships
+ * define the realm, and it dissolves when they break.
  *
  * THIS MODULE COMPOSES EXISTING PRIMITIVES and mints none of its own:
  *   · epoch-lease.ts      — the realm's OWN liveness lease (coordinator-free
@@ -32,7 +32,7 @@
  * Soft-state rewards whoever keeps feeding, NOT who legitimately holds the
  * realm; a small hostile faction can out-maintain an apathetic majority. The
  * cure (a quorum-of-vouchers / fork-and-leave) stays the operator's OPEN shore.
- * The join shore below is INERT by design — it bakes no legitimacy signal.
+ * The join shore below stays INERT by design — it bakes no legitimacy signal.
  *
  * Platform-blind: rides ./epoch-lease + ./bag-residency only. NO node: imports.
  *
@@ -84,7 +84,7 @@ export function cabalRealmLeaseSlot(realmDocIdHex: string, writerId: string): st
  *
  * "cooling" rides the type as the future intermediate, but the residency engine
  * exposes only the two settled states through its public surface (the `warm`
- * middle tier was CUT, and the transient `evicting`
+ * middle tier never landed, and the transient `evicting`
  * flag stays private to BagStowage). So this pure function maps the two
  * derivable states only; a higher layer that can observe an in-flight cool may
  * report "cooling" itself. Keeping it a pure total function of the public tier.
@@ -97,7 +97,7 @@ export function deriveCabalRealmLiveness(temp: ResidencyTemperature): CabalRealm
 
 /**
  * Feed the realm — member maintenance warms its substrate (touch / hoʻowela),
- * keeping it alive and resetting its cooling clock. This is the "commoning" that
+ * keeping it alive and resetting its cooling clock. This enacts the "commoning" that
  * defines the realm: drop it and the realm cools to anu and dissolves.
  *
  * WHAT member-activity COUNTS as a feed (a post, a sync, a presence pulse, and
@@ -118,7 +118,7 @@ export function feedCabalRealm(
  *
  * INERT BY DESIGN: the Ostrom-P1 cost-dial / capture-answer (the voucher quorum,
  * fork-and-leave — the legitimacy signal beyond raw maintenance) mounts HERE in
- * elsewhere. That is the operator's OPEN shore (canon #the-unswept-corner:
+ * elsewhere. That stays the operator's OPEN shore (canon #the-unswept-corner:
  * persistence ≠ legitimacy). Do NOT bake a legitimacy signal into this function
  * — a baked-in answer would close the unswept corner silently and wrong. The
  * actual Keyhive admission ceremony (found/join/evict CGKA) stays gated.

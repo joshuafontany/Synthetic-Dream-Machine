@@ -23,7 +23,7 @@
  *                  canonical packages/ or wikis/ paths.
  *
  * Bootstrap:
- *   The catalog Automerge URL is printed to stdout on boot.
+ *   The boot prints the catalog Automerge URL to stdout.
  *   Browser vessels read it from location.hash on first visit, cache to
  *   localStorage for offline return visits.
  */
@@ -82,8 +82,8 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
 async function main(): Promise<void> {
   const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl, recipe } = parseArgs();
 
-  // Mesh standing — derived ONCE for either cap-stack (was duplicated across the herm + lararium
-  // branches). Every vessel is a node on the routing chart: LAR_PUBLIC_URL = its REACHABLE http
+  // Mesh standing — derived ONCE for either cap-stack, shared by the herm + lararium
+  // branches. Every vessel stands a node on the routing chart: LAR_PUBLIC_URL = its REACHABLE http
   // read-face (the self-peering key, advertised in its dial), LAR_PEERS = bootstrap base URLs,
   // LAR_SEED = its dial label (else hash-derived); LAR_RADIUS = its carriage standing r.
   const publicUrl = process.env["LAR_PUBLIC_URL"] ?? `http://localhost:${port}`;
@@ -118,7 +118,7 @@ async function main(): Promise<void> {
 
   // Fail-fast on a busy port — the supervised vessel never manages its siblings
   // (12-factor / island sovereignty). A clean message, not an unhandled 'error'
-  // crash; `lares reconcile` is the verb that stops the incumbent.
+  // crash; `lares reconcile` stops the incumbent.
   httpServer.on("error", (err: NodeJS.ErrnoException) => {
     if (err.code === "EADDRINUSE") {
       console.error(`[lararium] port ${port} is already in use — a vessel is already running. Use \`lares reconcile\` to restart it, or free the port.`);
@@ -201,7 +201,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  // A Lararium is also a first-class mesh-node: it carries the FLOW-map (meshpalace+carriage) from the SAME
+  // A Lararium also stands a first-class mesh-node: it carries the FLOW-map (meshpalace+carriage) from the SAME
   // derived meshSelf — a hearth that navigates the mesh, not a destination beside the roads.
   const result = await openNodeVessel({
     hostId:     "lararium-node",
@@ -229,13 +229,13 @@ async function main(): Promise<void> {
 
   // THE CROSSING, spoken aloud. A leaf's V3 proof commits to the GATE'S key, and the leaf must hold that
   // key OUT-OF-BAND — the challenge carries it on the wire, but trusting it there would let any relay
-  // impersonate the gate (the anti-relay guarantee), so the wire copy is not a source. A leaf that never
+  // impersonate the gate (the anti-relay guarantee), so the wire copy sources nothing. A leaf that never
   // received the key binds its proof to its OWN did, the gate recomputes against its own, and the proof
-  // fails closed. That refusal is correct, and it looks exactly like a broken socket: dial, deny, re-dial.
+  // fails closed. That refusal reads correct, and it looks exactly like a broken socket: dial, deny, re-dial.
   //
   // The gate arms with this vessel's operator verifying key, so this vessel already HOLDS the one thing a
   // crossing leaf cannot obtain for itself. Printing it turns an unperformable ritual into an instruction.
-  // The load is idempotent — the same identity the gate armed with, read back, never a second one.
+  // The load runs idempotent — the same identity the gate armed with, read back, never a second one.
   const gateIdentity = await generateOrLoadVesselIdentity(storageDir);
   console.log(`[lararium] gate key: ${gateIdentity.verifyingKey}`);
   console.log("[lararium] browser crossing — open one of these on the device that crosses:");
@@ -285,15 +285,15 @@ async function main(): Promise<void> {
 
   // Pre-warm the mempalace read holder so the FIRST recall / recall-into-wake skips
   // the ~8s cold chromadb start (the pool then stays warm for the daemon's life).
-  // Background + best-effort: never blocks boot, never fails it if mempalace is absent.
+  // Background + best-effort: never blocks boot, never fails it when mempalace stands absent.
   void getMempalaceClient().then(
     () => console.log("[lararium] mempalace holder pre-warmed"),
     (e) => console.log(`[lararium] mempalace pre-warm skipped: ${e instanceof Error ? e.message : String(e)}`),
   );
 
   // ── Graceful, DURABLE shutdown (flush-then-force) ────────────────────────────
-  // A bare process.exit() (or a SIGKILL escalation when the handler is too slow)
-  // while an island is writing DESYNCS the actively-written doc — the recurring
+  // A bare process.exit() (or a SIGKILL escalation when the handler runs too slow)
+  // while an island writes DESYNCS the actively-written doc — the recurring
   // "@working never arrived over syncPort" gap. The reliable path:
   //   1. stop new inbound work (uds + http + read-face),
   //   2. flush the MAIN replica FIRST — the guaranteed durable floor for every doc
@@ -302,14 +302,14 @@ async function main(): Promise<void> {
   //      partition, incl. @working, before it acks),
   //   4. tear down the daemon island gracefully (it flushes its docs + capture WAL),
   //   5. flush MAIN again to capture anything that synced during teardown.
-  // A hard budget guards the whole sequence: if a worker is jammed in keyhive WASM
+  // A hard budget guards the whole sequence: if a worker jams in keyhive WASM
   // and never acks, the force-timer fires — but ONLY after step 2 has already made
   // the synced state durable (flush-then-force, never force-before-flush).
   //
   // The budget MUST beat the incumbent-stopper's grace window: `lares reconcile`
   // (port-control.stopIncumbent) sends SIGTERM, polls for ~8s, then SIGKILLs. So
-  // the whole graceful sequence has to FLUSH AND EXIT under 8s, else the SIGKILL we
-  // are trying to avoid lands anyway. Default 6s leaves margin; the per-island
+  // the whole graceful sequence has to FLUSH AND EXIT under 8s, else the SIGKILL it
+  // exists to avoid lands anyway. Default 6s leaves margin; the per-island
   // handshakes resolve in <1s when responsive, and the force-timer caps a jam.
   const SHUTDOWN_BUDGET_MS  = Number(process.env["LAR_SHUTDOWN_BUDGET_MS"] ?? 6_000);
   const DAEMON_SHUTDOWN_MS  = Math.max(1_000, Math.floor(SHUTDOWN_BUDGET_MS / 2));

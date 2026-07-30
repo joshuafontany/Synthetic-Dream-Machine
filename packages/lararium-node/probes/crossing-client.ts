@@ -2,16 +2,16 @@
  * crossing-client — the BROWSER half of the containerized crossing, ROLE-DRIVEN so one probe proves
  * the whole gate contract across a real network hop. A browser-shaped leaf (a light Ed25519 identity +
  * LarWSClientAdapter, the shape lararium-browser dials with) attempts the crossing under a role; its
- * EXIT CODE is the verdict (0 = the gate did the right thing).
+ * The EXIT CODE carries the verdict (0 = the gate did the right thing).
  *
  * Roles (LAR_CROSS_ROLE), each a civic-protocol invariant:
  *   admitted  (X1/X5) an admitted leaf CROSSES + syncs the doc both ways → the breath.
- *   anon      (X2/A1) a valid leaf with NO grant is DENIED, then founds its OWN island standalone —
+ *   anon      (X2/A1) the gate DENIES a valid leaf with NO grant, which then founds its OWN island standalone —
  *                     denied ≠ broken; the anon floor persists (veil-ladder#the-base-model).
- *   impostor  (X3)    a leaf that CLAIMS an admitted key but SIGNS with a different seed is DENIED —
- *                     WHO is proven by possession, never claim (V3 proof-of-possession).
- *   wrong-bind(X4)    a leaf binding the WRONG audience is DENIED — a proof is bound to {gate, aud};
- *                     it must not cross a gate/aud it was not minted for (audience-binding).
+ *   impostor  (X3)    the gate DENIES a leaf that CLAIMS an admitted key but SIGNS with a different seed —
+ *                     possession proves WHO, never a claim (V3 proof-of-possession).
+ *   wrong-bind(X4)    the gate DENIES a leaf binding the WRONG audience — a proof binds to {gate, aud}
+ *                     and must not cross a gate/aud nobody minted it for (audience-binding).
  *
  * A DENIAL reads as "the crossing never syncs within the window" (the gate closes 4003); a CROSS reads
  * as the doc arriving. Each role asserts the outcome it must produce.
@@ -122,7 +122,7 @@ async function main(): Promise<void> {
     process.exit(0);
   }
 
-  // Every non-admitted role MUST be denied. A crossing that syncs is a security failure.
+  // The gate MUST deny every non-admitted role. A crossing that syncs names a security failure.
   try { adapter.disconnect(); } catch { /* not connected */ }
   await repo.shutdown();
   if (outcome === "synced") {

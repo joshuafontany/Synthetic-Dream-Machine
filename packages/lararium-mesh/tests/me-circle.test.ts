@@ -1,8 +1,8 @@
 /**
  * me-circle — the "me" as a single-principal realm where Personas overlap, one takes
  * the blame at a time, and the multi-principal complexity degenerates to trivial.
- * Tests the operator's ruling is load-bearing on the model floor (the real cabal-realm
- * machinery is exercised in the keyhive lifecycle probe).
+ * Tests that the operator's ruling carries load on the model floor (the keyhive lifecycle
+ * probe exercises the real cabal-realm machinery).
  */
 import { describe, test, expect } from "vitest";
 import {

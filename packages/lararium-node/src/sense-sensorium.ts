@@ -3,12 +3,12 @@
  *
  * Each `lares sensorium run|open` mints a rooted scratch sensorium under `<cache>/scratch/sensoriums/<id>/`.
  * Python's corpus pointer pipe owns content, structure, form, worldline, and bands beneath that root. A `run`
- * is ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit, success OR error. An `open`
+ * runs ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit, success OR error. An `open`
  * leaves it live (a durable-until-dissolved instance) for later `query` / `keep` / `dissolve`.
  *
  * Leak-proofing: every instance carries a `sensorium.json` LIFECYCLE record ({id, ephemeral, pid, …}). An
- * ephemeral instance that outlives its run process is, by definition, leaked — `reapOrphans` removes
- * every ephemeral instance whose owning pid is dead (and every record-less dir), so an interrupted run
+ * ephemeral instance that outlives its run process has leaked, by definition — `reapOrphans` removes
+ * every ephemeral instance whose owning pid has died (and every record-less dir), so an interrupted run
  * can never leave scratch behind. `palace-teardown` ALSO enumerates `.sensorium/*` for the nuke path.
  *
  * THE MANIFEST SPLIT (the sheaf-true reader must never misparse the leak-record): the lifecycle record
@@ -329,7 +329,7 @@ export interface RunSensoriumResult {
 /**
  * The `docker run --rm` gesture: open an EPHEMERAL sensorium, (optionally) analyze it, then DISSOLVE on
  * exit — success OR error (the try/finally guarantee). `--keep` lands it durable instead. A hard
- * interrupt (SIGINT/crash) between open and the finally is caught by the process-exit guard wired
+ * interrupt (SIGINT/crash) between open and the finally hits the process-exit guard wired
  * here, so the scratch never leaks even on a kill.
  */
 export async function runSensorium(opts: RunSensoriumOptions): Promise<RunSensoriumResult> {

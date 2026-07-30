@@ -189,7 +189,7 @@ export * from "./persona-admit-carriage.js";
 // (the persona-admit sealed-box shape). An admitted device opens it + reads sealed bodies; a carry-only peer cannot.
 export * from "./keyring-envelope.js";
 // The IoC follow — composeFollow braids the three LOCAL stores (handle-book · petname · circle) into one
-// gesture; the CircleStore shore is local-only, so a follow leaves NO central trace (membership-doctrine).
+// gesture; the CircleStore shore stays local-only, so a follow leaves NO central trace (membership-doctrine).
 export * from "./compose-follow.js";
 export * from "./handle-announce.js";
 export * from "./who-face.js";

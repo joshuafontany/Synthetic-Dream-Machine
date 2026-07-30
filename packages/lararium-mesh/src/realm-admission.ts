@@ -2,16 +2,16 @@
  * realm-admission — the SHORE that admits INTO A REALM, composing the two signals into one verdict.
  *
  * It gates ONE realm (`realmDocIdHex`), never the super-mesh: a crossing cleared here buys standing in the
- * cabal-realm that priced it, and nothing beyond. DreamNet is what realms federate INTO, never a thing
- * anyone is admitted TO.
+ * cabal-realm that priced it, and nothing beyond. DreamNet names what realms federate INTO, never a thing
+ * anyone crosses into by admission.
  *
  * The two gates stand apart and complete: `cabal-invite` answers the STRUCTURAL question (does a licensed
  * member vouch for this joiner, into THIS realm, unexpired?) and `admission-price` answers the MARGINAL one
  * (what does this crossing cost, given the applicant's lineage rank and the vouching cluster's
  * concentration?). Admission runs both, in that order, and reports the FIRST that refuses.
  *
- * WHY THE INVITE COMES FIRST. The structural check is cheap, offline, and decisive: no invite under an
- * invite-only policy ends the crossing before any lineage is walked. Pricing an applicant nobody vouched for
+ * WHY THE INVITE COMES FIRST. The structural check runs cheap, offline, and decisive: no invite under an
+ * invite-only policy ends the crossing before anything walks the lineage. Pricing an applicant nobody vouched for
  * would compute a number no one can pay and call it a refusal — the invite gate says the same thing sooner,
  * and names WHY (no-invite / wrong-realm / wrong-joiner / expired / bad-signature) where a bare price cannot.
  *
@@ -58,13 +58,13 @@ export interface AdmissionVerdict {
 /**
  * Admit a joiner to a DreamNet realm — the whole gate, both signals.
  *
- * THE APPLICANT BRINGS NOTHING. There is no budget, balance, or fee to clear — the limiting resource stands
+ * THE APPLICANT BRINGS NOTHING. No budget, balance, or fee stands to clear — the limiting resource sits
  * SELF-STANDING, and the cost falls on the VOUCHER, paid by dilution the moment they vouch (a voucher's score
  * splits across everyone it vouches for, so vouching spends the only thing it can spend: its own standing).
  * A crossing therefore clears iff the invite gate admits AND the convex wall has not gone vertical.
  *
  * An `open` policy skips the invite requirement but STILL prices — open means "no invite needed", never
- * "free": the wall keeps pricing the cartel out whichever way the invite dial is set.
+ * "free": the wall keeps pricing the cartel out whichever way the operator sets the invite dial.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing
  */
@@ -98,7 +98,7 @@ export async function admitToRealm(args: {
   }
 
   // The invite's voucher IS the cluster the convex wall reads. Under `open` there may be no voucher; then the
-  // cluster is empty, which reads as dispersed (concentration 0), never as captured — absence is not evidence.
+  // cluster stands empty, which reads as dispersed (concentration 0), never as captured — absence carries no evidence.
   // The voucher rides raw from the invite and the applicant from the caller; both must read in the SAME
   // canonical space as the feeder's edges, or the price walks a graph they never touch (vouch-dag).
   const voucher = structural.voucherDid;   // present under invite-only, absent under `open`
@@ -133,7 +133,7 @@ export interface LineageAdmission extends AdmissionVerdict {
  * Admit on a lineage — the whole crossing from the ISSUED INVITES, cap and all.
  *
  * `admitToRealm` takes `edges` already folded, which leaves a caller free to assemble them by hand. That
- * hand-assembly SKIPS the per-voucher cap, and the cap is not a convenience: it is the choke that bounds the
+ * hand-assembly SKIPS the per-voucher cap, and the cap buys no convenience: it CHOKES the
  * mass any single hand injects into the lineage. A gate whose choke depends on the caller remembering to run
  * it has no choke. So this shore takes the invites THEMSELVES and folds them here, where the cap cannot be
  * left out — the same designation-carries-authority discipline the rest of the mesh holds.

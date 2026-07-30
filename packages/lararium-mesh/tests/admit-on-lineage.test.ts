@@ -1,5 +1,5 @@
 /**
- * admit-on-lineage — the crossing folded from the ISSUED INVITES, so the per-voucher cap cannot be skipped.
+ * admit-on-lineage — the crossing folded from the ISSUED INVITES, so no caller skips the per-voucher cap.
  *
  * `admitToRealm` takes pre-folded edges; a caller assembling them by hand silently loses the choke that
  * bounds any one hand's injection into the lineage. This shore takes the invites themselves. What matters:

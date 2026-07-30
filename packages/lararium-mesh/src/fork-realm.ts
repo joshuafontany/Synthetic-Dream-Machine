@@ -9,15 +9,15 @@
  * Canon: cabal-realm#the-unswept-corner (fork-as-exit PRIMARY; the Steem→Hive
  * airdrop-exclusion made native). Two moves, both cheap (Hirschman: exit disciplines a
  * captor only while forking stays cheap):
- *   · EXCLUDE BY OMISSION — the fork is a NEW realm; the captors are simply never added
+ *   · EXCLUDE BY OMISSION — the fork stands a NEW realm; no hand ever adds the captors
  *     to it (cleaner than convergent-removal, which evicts from a realm you KEEP; a fork
- *     is a realm you LEAVE). They hold the dead shell, not the living fork.
+ *     names a realm you LEAVE). They hold the dead shell, not the living fork.
  *   · RE-POINT (Zooko) — each vessel updates its OWN local realm-pointer old→new. The id
- *     changing is the FEATURE: no global consensus, no admitter re-anchors the name.
+ *     changing carries the FEATURE: no global consensus, no admitter re-anchors the name.
  * Legitimacy re-anchors via CONTINUITY (Vitalik #1): the fork records forkedFrom, so the
  * fork that preserves the pre-capture membership inherits the default legitimacy.
  *
- * This floor is pure MODEL (survivor computation · re-point · continuity link); the actual
+ * This floor holds pure MODEL (survivor computation · re-point · continuity link); the actual
  * founding of the fresh realm rides the Keyhive ceremony (fork-realm-ceremony.ts).
  *
  * Platform-blind: rides ./cabal-realm only. NO node: imports.
@@ -43,7 +43,7 @@ export interface RealmFork {
 
 /**
  * Compute the survivor set a fork carries — the old roster MINUS the captors. The captors
- * are excluded by omission (never added to the fresh realm), not by removal.
+ * drop out by omission (no hand ever adds them to the fresh realm), never by removal.
  */
 export function forkSurvivors(oldDwellers: readonly string[], excludeHexes: readonly string[]): string[] {
   const ex = new Set(excludeHexes);
@@ -53,7 +53,7 @@ export function forkSurvivors(oldDwellers: readonly string[], excludeHexes: read
 /**
  * Derive a fork's lar: bearing from the captured realm's genesis — a `/fork` path segment
  * (the three-term ROOT stays intact; the fork rides a path refinement). The realm's true
- * identity is its fresh content-addressed sentinel, not this bearing (lar: NAMES).
+ * identity rides its fresh content-addressed sentinel, not this bearing (lar: NAMES).
  */
 export function forkGenesisUri(oldGenesisUri: string): string {
   return `${oldGenesisUri.replace(/\/+$/, "")}/fork`;
@@ -61,8 +61,8 @@ export function forkGenesisUri(oldGenesisUri: string): string {
 
 /**
  * A vessel RE-POINTS its own local realm-pointer to the fork (the Zooko move — local, no
- * consensus). A pointer at the captured realm moves to the fork; any other pointer is left
- * untouched. A captor's pointer stays on the dead shell (it is not in the fork).
+ * consensus). A pointer at the captured realm moves to the fork; every other pointer stays
+ * untouched. A captor's pointer sits on the dead shell (it never entered the fork).
  */
 export function repointToFork(currentRealmDocIdHex: string, fork: RealmFork): string {
   return currentRealmDocIdHex === fork.forkedFromDocIdHex ? fork.newRealm.realmDocIdHex : currentRealmDocIdHex;

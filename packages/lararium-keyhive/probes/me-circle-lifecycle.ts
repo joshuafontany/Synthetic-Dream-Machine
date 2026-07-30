@@ -8,18 +8,18 @@
  *   1. The HUMAN founds a me-realm (foundCabalRealm) + wraps it in a MeCircle.
  *   2. CONTRACT three of the human's own PersonaGroups (slices) — each a known Keyhive
  *      agent joined to the me-realm AND added to the constellation. First takes the blame.
- *   3. The me-realm's roster (real Keyhive) holds all three; one persona is accountable.
+ *   3. The me-realm's roster (real Keyhive) holds all three; one persona carries the blame.
  *   4. SWITCH the blame to another slice (free — single-principal).
  *   5. PROMOTE a veiled slice → known (re-contract with a petname — the disclosure dial).
  *   6. THE DEGENERACY (the load-bearing proof): one persona out-feeds the others (rolls
  *      its lease deep). The capture-clock RUNS and reports a large spread — exactly the
- *      shape that signals capture on a MULTI-human realm. But this is a ME: every face
- *      is the one principal, so meCircleDegeneracy reads captureImmune — you cannot
+ *      shape that signals capture on a MULTI-human realm. But a ME runs otherwise: every
+ *      face resolves to the one principal, so meCircleDegeneracy reads captureImmune — you cannot
  *      capture your own me. Same machinery, collapsed meaning.
  *   7. RELEASE a slice (kāpae) — the blame passes on.
  *
  * If the single-principal realm STRAINS the cabal-realm machinery (a tie-break engages,
- * a join is refused, the clock can't read it), the ruling does not hold — surface it.
+ * a join refuses, the clock can't read it), the ruling does not hold — surface it.
  *
  * Run: pnpm exec tsx packages/lararium-keyhive/probes/me-circle-lifecycle.ts
  *
@@ -64,8 +64,8 @@ async function main(): Promise<void> {
     `realm=${meRealm.realmDocIdHex.slice(0, 12)}…`);
 
   // ── STAGE 2 — CONTRACT three slices of the one human ────────────────────────────
-  // Each slice (PersonaGroup) is a holdable agent the human knows (contact-card); the
-  // human contracts only their OWN slices — that is what makes it single-principal.
+  // Each slice (PersonaGroup) stands a holdable agent the human knows (contact-card); the
+  // human contracts only their OWN slices — which keeps it single-principal.
   async function makeSlice(fill: number, petname?: string): Promise<{ handleHex: string; petname?: string }> {
     const s = new KeyhiveProvider();
     await s.init({ seed: new Uint8Array(32).fill(fill), eventStore: new InMemoryEventStore() });
@@ -103,7 +103,7 @@ async function main(): Promise<void> {
     promoted?.petname === "Guru Josh" && me.constellation.length === 3,
     `petname=${promoted?.petname} size=${me.constellation.length}`);
 
-  // ── STAGE 6 — THE DEGENERACY: the clock runs, the spread is NOT capture ──────────
+  // ── STAGE 6 — THE DEGENERACY: the clock runs, the spread names NO capture ──────────
   // One slice out-feeds the others (rolls its lease deep) — the exact shape that signals
   // capture on a multi-HUMAN realm. Roll the slots:
   leaseSlots.set(cabalRealmLeaseSlot(meRealm.realmDocIdHex, joshua.handleHex),   "30");
@@ -119,7 +119,7 @@ async function main(): Promise<void> {
   // ── STAGE 7 — RELEASE a slice (kāpae); the blame passes on ───────────────────────
   // A me-circle runs SINGLE-PRINCIPAL, so releasing a slice needs no eviction and never did: the human
   // stops standing under that face. `releasePersona` carries the whole act — the constellation shrinks and
-  // the sentinel dwelling simply stops being exercised. No hostile hand exists here to shadow a relation.
+  // the dweller simply stops exercising the sentinel. No hostile hand exists here to shadow a relation.
   me = releasePersona(me, engineer.handleHex);
   stage("7 RELEASE — kāpae drops the active slice; the blame passes to a remaining face",
     me.constellation.length === 2 && me.activeHandleHex !== engineer.handleHex && me.activeHandleHex !== null,

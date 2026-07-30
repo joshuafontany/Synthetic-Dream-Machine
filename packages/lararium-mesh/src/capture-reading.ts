@@ -2,8 +2,8 @@
  * capture-reading — the clock↔dial shore: compose the capture-CLOCK's maintenance provenance
  * with the conviction-DIAL's 1Hive threshold curve into a legible, VERDICT-FREE capture
  * posture. It surfaces WHERE a realm's power-concentration sits on the convex curve toward
- * the operator's ceiling β — it never RULES a realm captured (which-fork-is-real is
- * non-computable; the operator reads, the members decide — the-veil-ladder#the-bounds).
+ * the operator's ceiling β — it never RULES a realm captured (no computation settles
+ * which fork reads real; the operator reads, the members decide — the-veil-ladder#the-bounds).
  *
  * Platform-blind: composes ./cabal-realm-clock + ./conviction-dial. NO node: imports.
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm

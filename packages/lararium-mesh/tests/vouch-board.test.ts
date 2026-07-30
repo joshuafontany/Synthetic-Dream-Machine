@@ -2,7 +2,7 @@
  * vouch-board — the JOIN axis's board, and the reason its only read verifies.
  *
  * Every invite that reaches the lineage becomes a VOUCH EDGE, and a vouch has no second gate downstream the
- * way a carriage entry has its quorum fold. So the load-bearing test here is the FORGERY DROP: a well-formed
+ * way a carriage entry has its quorum fold. So the load-bearing test here drives the FORGERY DROP: a well-formed
  * tiddler naming a real voucher with a signature that does not verify must never become mass. The rest —
  * accretion of distinct vouchers, idempotence of one voucher re-minting, realm-scoping — guards the shape of
  * the DAG the price walks.

@@ -2,7 +2,7 @@
  * cabal-realm-clock — the capture-CLOCK reads a realm's maintenance provenance from its
  * lease slots: who feeds it, how deep each has rolled, and the SPREAD (a minority far
  * ahead = the visible capture signal). Verdict-free: it surfaces numbers, never a
- * "captured" judgement (the threshold is the operator's calibration seat).
+ * "captured" judgement (the threshold sits in the operator's calibration seat).
  */
 import { describe, test, expect } from "vitest";
 import {

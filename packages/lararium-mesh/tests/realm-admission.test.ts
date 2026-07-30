@@ -1,12 +1,12 @@
 /**
  * realm-admission.test.ts — the shore admits on BOTH signals, and refuses at the first gate that fails.
  *
- * Four claims, four groups: the structural gate refuses BEFORE any price is walked (invite-only, no invite);
+ * Four claims, four groups: the structural gate refuses BEFORE anything walks the price (invite-only, no invite);
  * a valid invite CROSSES and names the voucher (the co-pay stands); a cluster AT THE CEILING refuses on the
- * wall's own verticality; and `open` policy skips the invite but still PRICES — open is not free.
+ * wall's own verticality; and `open` policy skips the invite but still PRICES — open never means free.
  *
  * THE APPLICANT BRINGS NOTHING. No budget rides here: the cost falls on the voucher by dilution, and the
- * convex wall refuses ITSELF by returning a non-finite price at r ≥ β. There is nothing to compare against.
+ * convex wall refuses ITSELF by returning a non-finite price at r ≥ β. Nothing stands to compare against.
  */
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
@@ -109,8 +109,8 @@ describe("open policy skips the invite but STILL prices", () => {
   });
 
   // Open drops the INVITE requirement and nothing else. With no voucher the cluster reads empty, so
-  // concentration is 0 and the wall stays passable — open cannot be walked into a capture, because there is
-  // no cluster to concentrate. The pricing still RUNS, and that is what keeps open from meaning free.
+  // concentration reads 0 and the wall stays passable — nobody walks open into a capture, because no cluster
+  // stands to concentrate. The pricing still RUNS, and that keeps open from meaning free.
   test("open policy prices every crossing — the wall runs even with no invite to gate it", async () => {
     const v = await admitToRealm({
       policy: { kind: "open" }, realmDocIdHex: REALM, joinerIdentityHex: JOINER,

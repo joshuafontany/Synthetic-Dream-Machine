@@ -3,12 +3,12 @@
  *
  * A DreamNet grows from spores in a hostile field (lar:///…/lararium-identity #the-siege-gate). A
  * capability alone reads as SIGNAL-1: cheap, and forgeable at scale by anyone who can mint keys. The
- * VOUCH is signal-2, and it is gatekept by an already-licensed member — `rb > c`, the voucher supplying
- * the `r`. Two signals, because one is what a Sybil flood already has.
+ * VOUCH rides as signal-2, gatekept by an already-licensed member — `rb > c`, the voucher supplying
+ * the `r`. Two signals, because a Sybil flood already holds one.
  *
  * THE DIAL, NOT A WALL. The cost of crossing runs MARGINAL, never absolute: a fixed toll reads too cheap
  * for a funded attacker and too dear for an honest newcomer. So this carries a POLICY the operator sets,
- * never a legitimacy answer baked into the code — `cabalRealmJoinGate` was fenced for exactly that reason,
+ * never a legitimacy answer baked into the code — `cabalRealmJoinGate` stands fenced for exactly that reason,
  * and the fence holds: the answer arrives as a parameter, and the operator turns it.
  *
  *   invite-only — signal-2 REQUIRED. The DreamNet's opening setting: no invite, no crossing.
@@ -16,12 +16,12 @@
  *
  * REFUSAL IS ANERGY, NEVER A BAN. A joiner without a vouch does not get destroyed, blacklisted, or
  * remembered as an enemy — it STAYS AT THE FLOOR, hyporesponsive, free to re-present later WITH a vouch.
- * Fail-closed reads stay-at-the-floor. That is what lets an agent survive a hostile field long enough for
+ * Fail-closed reads stay-at-the-floor. That lets an agent survive a hostile field long enough for
  * someone to vouch for it.
  *
  * THE INVITE IS CARRIED, NEVER FETCHED. A member signs it; it verifies on its own; a carrier may withhold
- * it and can never forge it. It therefore crosses any channel — and needs no reachable issuer, which is
- * what makes an invite usable in a mesh that has been cut off for five hundred years.
+ * it and can never forge it. It therefore crosses any channel — and needs no reachable issuer, which keeps
+ * an invite usable in a mesh cut off for five hundred years.
  * ── THE LEASE ASKS A TENDING QUESTION AND A CLOCK ANSWERS A DIFFERENT ONE ─────────────────────────────
  * The comment below states the intent exactly: a vouch lapses so it can be withdrawn from a mesh the
  * voucher can no longer reach. That question reads WHETHER THE VOUCHER STILL TENDS THIS — and a calendar
@@ -55,9 +55,9 @@ export const DEFAULT_JOIN_POLICY: CabalJoinPolicy = { kind: "invite-only" };
 
 /**
  * A signed invitation into a cabal-realm. The VOUCHER stakes their own standing on it — a referral's
- * misbehavior decays the voucher's invite-capacity (co-pay, slashing-by-revocation), so every voucher is a
- * sentinel over the one they let in. That is why the voucher's DID rides in the clear: an invite nobody can
- * attribute is an invite nobody can be held to.
+ * misbehavior decays the voucher's invite-capacity (co-pay, slashing-by-revocation), so every voucher stands
+ * sentinel over the one they let in. Hence the voucher's DID rides in the clear: an invite nobody can
+ * attribute binds nobody.
  */
 export interface CabalInvite {
   readonly kind:        typeof CABAL_INVITE_DOMAIN;
@@ -112,9 +112,9 @@ export interface JoinVerdict {
 /**
  * THE GATE. Decide whether a joiner crosses into a realm.
  *
- * Verification is OFFLINE and needs no clock beyond the one the caller hands in: `verify` checks the
+ * Verification runs OFFLINE and needs no clock beyond the one the caller hands in: `verify` checks the
  * signature, `now` bounds the lease. Nothing here reaches a network, and nothing asks an authority — an
- * invite that needed its issuer to be REACHABLE would be useless in an isolated mesh, which is the only
+ * invite that needed a REACHABLE issuer would fail in an isolated mesh, which names the only
  * kind of mesh that ever really needs one.
  *
  * `verify` MUST come from the caller: this module holds no trust root and never decides which keys count.
@@ -136,13 +136,13 @@ export async function decideCabalJoin(args: {
   if (!inv || inv.kind !== CABAL_INVITE_DOMAIN) return { admitted: false, refusal: "no-invite" };
 
   // An invite crosses into ONE realm and names ONE joiner. Both checks run BEFORE the signature, because
-  // a signature over the wrong subject is a valid signature and an invalid admission — verifying first
+  // a signature over the wrong subject still verifies cleanly and still admits wrongly — verifying first
   // would let a real invite for someone else read as proof.
   if (inv.realmDocIdHex !== args.realmDocIdHex) return { admitted: false, refusal: "wrong-realm" };
   if (inv.joinerIdentityHex !== args.joinerIdentityHex) return { admitted: false, refusal: "wrong-joiner" };
 
-  // The lease. Standing decays unless fed; an invite is a vouch with a shelf life, and a vouch that never
-  // lapses cannot be withdrawn from a mesh the voucher can no longer reach.
+  // The lease. Standing decays unless fed; an invite carries a vouch with a shelf life, and a vouch that
+  // never lapses leaves the voucher no way to withdraw it from a mesh they can no longer reach.
   const exp = Date.parse(inv.expiresAt);
   if (!Number.isFinite(exp) || exp <= args.now.getTime()) return { admitted: false, refusal: "expired" };
 

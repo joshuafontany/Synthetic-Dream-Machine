@@ -6,24 +6,24 @@
  *
  * A "me" composes as a single-principal
  * cabal-realm — the SAME realm machinery (cabal-realm.ts), with the multi-principal
- * complexity DEGENERATE to trivial because there is ONE ordering authority: you.
- *   · COMPOSITION (Circle = who is me) ⊥ the optional shared substrate (the realm).
+ * complexity DEGENERATE to trivial because a single ordering authority holds: you.
+ *   · COMPOSITION (the Circle names who counts as me) ⊥ the optional shared substrate (the realm).
  *   · The cabal-realm tie-break (BeeKEM blank-on-merge) orders CONCURRENT DIFFERENT-
  *     principal ops — a me-realm has no different principals, so it never engages.
  *   · The capture-clock detects a minority out-feeding a majority — you cannot capture
- *     your OWN me, so a me-realm is capture-immune by construction.
- *   · The legitimacy gate (persistence≠legitimacy) dissolves — there is no contested
- *     authority to be legitimate ABOUT.
+ *     your OWN me, so a me-realm resists capture by construction.
+ *   · The legitimacy gate (persistence≠legitimacy) dissolves — no contested authority
+ *     stands for legitimacy to attach to.
  * So the "me" reuses the cabal-realm keel with the hard parts collapsed to nothing.
- * This module proves that degeneracy is load-bearing (test it with the infrastructure).
+ * This module proves the degeneracy carries load (test it with the infrastructure).
  *
- * "One Persona at a time takes the blame" — at any moment EXACTLY ONE PersonaGroup is
+ * "One Persona at a time takes the blame" — at any moment EXACTLY ONE PersonaGroup stands
  * ACTIVE / accountable (the Voice-house pattern: one Voice surfaces, named). Switching
- * is FREE — single-principal, you are the authority over your own slices.
+ * costs NOTHING — single-principal, you hold the authority over your own slices.
  *
  * The DISCLOSURE dial rides per-persona (composition⊥disclosure): a constellation
  * persona may sit VEILED (no petname) or KNOWN (a petname surfaced for that
- * PersonaGroup — the slice-of-human, never the human). The me-Circle itself is the
+ * PersonaGroup — the slice-of-human, never the human). The me-Circle itself carries the
  * human's private constellation: NO global self, disclosed edge-by-edge.
  *
  * Platform-blind: rides ./cabal-realm only. NO node: imports.
@@ -35,7 +35,7 @@ import type { CabalRealm } from "./cabal-realm.js";
 
 /**
  * A persona in the me-constellation — a handle-Circle (PersonaGroup) the human holds,
- * overlapping in the me-realm. The petname is the DISCLOSURE pole: present = known
+ * overlapping in the me-realm. The petname carries the DISCLOSURE pole: present = known
  * (surfaced for this slice-of-human), absent = veiled (name⊥).
  */
 export interface ConstellationPersona {
@@ -73,7 +73,7 @@ export function foundMeCircle(meRealm: CabalRealm, principalHex: string): MeCirc
  * FIRST persona contracted becomes active by default (someone must take the blame).
  *
  * Single-principal: no tie-break, no admission gate — you are the authority over your
- * own slices, so contracting is your free act. (A MULTI-principal realm would route
+ * own slices, so contracting runs as your free act. (A MULTI-principal realm would route
  * this through the Keyhive ceremony + the inert gate; a me does not.)
  */
 export function contractPersona(me: MeCircle, persona: ConstellationPersona): MeCircle {

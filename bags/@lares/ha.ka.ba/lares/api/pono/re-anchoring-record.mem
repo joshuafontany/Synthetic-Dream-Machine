@@ -50,7 +50,7 @@ A guest dwells WITH a host — a dyad, one edge, and the historically fatal shap
 
 > ''The party that runs the rite MUST NOT be the party that mints the record'', and the record MUST carry no field from which the minter could reconstruct the rite.
 
-Enforced by ''which key signs what'', never by convention. That is the //naming must not certify// ruling with a standards body's price attached.
+Enforced by ''which key signs what'', never by convention. That restates the //naming must not certify// ruling with a standards body's price attached.
 
 ''Companion:'' RFC 9334 (RATS) separates appraisal policy from evidence and gives it a ''different owner'' — Verifier Owner supplies policy, Attester supplies evidence, Relying Party supplies its own acceptance policy. ''Three policies, three owners, none reading the others'.'' The third may matter here: whether a realm honours ANOTHER realm's re-anchoring reads as the consuming realm's own policy, which the record must not presume.
 
@@ -58,7 +58,7 @@ Enforced by ''which key signs what'', never by convention. That is the //naming 
 
 <<~ ahu #the-refusals >>
 
-!! Six classes refuse, and the pattern under them is one thing
+!! Six classes refuse, and one pattern runs under them all
 
 |! class |! ruling broken |! the span |
 | Verifiable Credentials / DIDs | global identifier per subject · status-list completeness · party revocation | a DID resolves a subject; Bitstring Status List publishes an authoritative bitmap |
@@ -68,7 +68,7 @@ Enforced by ''which key signs what'', never by convention. That is the //naming 
 | Soulbound tokens (ERC-5192) | enumerable holder set · global identifier · linkage as a FEATURE · burn | inherits ERC-721 whole; `ownerOf` links every token one address holds |
 | Ring / group signatures | the ring publishes its POOL · a group manager both admits and de-anonymises | a ring signature carries the enumerated keys of everyone who ''could have'' signed |
 
-''The pattern:'' every one of them was built so an outsider could ''audit the set''. This gets built so no outsider can ''constitute'' one.
+''The pattern:'' someone built every one of them so an outsider could ''audit the set''. This gets built so no outsider can ''constitute'' one.
 
 ''And the CT inversion reads as a gift rather than only a refusal.'' CT and `vouch-board`'s no-completeness invariant make the SAME factual observation — a log's silence stays uninterpretable — and draw opposite conclusions. CT calls it a bug and builds gossip plus MMD to kill it; this stack calls it shelter and preserves it. So ''the entire CT literature on detecting a misbehaving log reads as a threat-model catalogue'': every technique invented to make omission detectable names a technique an adversary will point at a custodian here.
 

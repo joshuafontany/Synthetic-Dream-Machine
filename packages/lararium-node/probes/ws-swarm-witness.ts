@@ -1,13 +1,13 @@
 /**
  * WS-SWARM WITNESS — the swarm ceremony over the Herm's OPEN membership relay: the SAME ceremony that
  * crosses a file channel crosses LIVE WebSockets here, over real sockets, real Keyhive. The shore
- * (MembershipChannel) holds one shape; the file and WS impls are both live forms of the Herm's blind
+ * (MembershipChannel) holds one shape; the file and WS impls both run live forms of the Herm's blind
  * ceremony carriage, chosen by deployment. This witnesses the WS impl across real sockets.
  *
  *   relay (in-process WebSocketServer) ← founder · vessel-B · vessel-C (each a WS client)
  *
  * The ceremony: found → INVITE (broadcast) → CONTACT (cards over WS) → ADMIT (real
- * Keyhive join) → ROSTER. Envelopes are opaque routing payloads, NOT Automerge sync — so
+ * Keyhive join) → ROSTER. Envelopes ride as opaque routing payloads, NOT Automerge sync — so
  * this carries none of the anti-relay cap-wall; a plain message relay suffices.
  *
  * Run: pnpm exec tsx packages/lararium-node/probes/ws-swarm-witness.ts
