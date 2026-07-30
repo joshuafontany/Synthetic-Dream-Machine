@@ -35,9 +35,21 @@ exclude = [
 ]
 
 [tool.pytest.ini_options]
+# WHERE THE PYTHON SUITES ACTUALLY LIVE. The sensorium holders keep their tests beside the modules
+# they exercise (flat-import idiom — `import holder_caps`, no package prefix), so the suite root sits
+# at the scripts directory rather than under a `tests/` tree. Naming a path that holds no test file
+# makes `pytest` collect ZERO and exit 0, which reads exactly like a green run.
 testpaths = [
-    "tests",
-    "lares/lararium_mcp/tests"
+    "packages/lararium-sensorium/scripts",
+]
+# COLLECTION MUST NOT DEPEND ON THE INVOKER'S SHELL. The holders consume the vendored mempalace as a
+# library, so 28 modules raise `ModuleNotFoundError: No module named 'mempalace'` at import time and
+# pytest reports them as collection ERRORS — 679 tests gathered instead of 944. An operator who had
+# exported PYTHONPATH saw the full set; one who had not saw a smaller suite pass green, and nothing
+# on the wire distinguished the two. Declaring the path here makes the count a property of the REPO.
+pythonpath = [
+    "mempalace",
+    "packages/lararium-sensorium/scripts",
 ]
 norecursedirs = [
     ".git",
