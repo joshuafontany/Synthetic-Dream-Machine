@@ -16,9 +16,19 @@ import LARES_MEMETIC_WIKITEXT_PLUGIN from "../plugins/lares-memetic-wikitext.jso
 import { TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME } from "../src/generated-tw5-version.js";
 
 const CORE_PATH = path.join(TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME);
-const coreBlobPresent = existsSync(CORE_PATH);
+/**
+ * The vendored TW5 core is a GITIGNORED BUILD ARTIFACT, so a fresh clone — and CI's `test` job, which runs
+ * `pnpm -r test` with no build step — sees it absent. An anonymous `skipIf` there drops this suite at exit 0,
+ * indistinguishable from a green run. The skip now NAMES itself and its cure in the reporter line, following
+ * `lararium-node/tests/blob-sovereignty.test.ts:35-44`.
+ */
+const coreBlobSkip = existsSync(CORE_PATH)
+  ? false
+  : `TW5 core blob absent at ${CORE_PATH} — run: pnpm --filter @lararium/tw5 build:tw5-vendor`;
 
-describe.skipIf(!coreBlobPresent)("exportCarrierFile — native filetype projection", () => {
+describe.skipIf(coreBlobSkip)(
+  `exportCarrierFile — native filetype projection${coreBlobSkip ? ` [SKIPPED: ${coreBlobSkip}]` : ""}`,
+() => {
   let engine: TW5Engine;
 
   beforeAll(async () => {

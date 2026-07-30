@@ -8,15 +8,17 @@
  *   · an entry rooting on the WRONG charter epoch is ignored,
  *   · `denyingQuorumVerifier` (the fail-closed default) ignores EVERYTHING,
  *   · an `un_kapae` at a STRICTLY HIGHER version lifts a ban; a same-version tie STAYS Kapae'd,
- *   · an unbound (empty-key) roster fails closed.
+ *   · an unbound (empty-key) roster fails closed,
+ *   · the DOMAIN separates: the same act at another board's domain signs different bytes, a quorum raised
+ *     here does not verify there, and the verifier refuses a foreign-domain entry however well it signs.
  */
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
-import { hex } from "../src/crypto.js";
+import { hex, hexToBytes } from "../src/crypto.js";
 import {
   signAntigenEntry, antigenEntryBytes, foldAntigenSet, isKapaed,
   makeMultiSigQuorumVerifier, denyingQuorumVerifier,
-  KAPAE_ANTIGEN_DOMAIN, type KapaeAntigenEntry, type KahuCharterRoster,
+  type KapaeAntigenEntry, type KahuCharterRoster,
 } from "../src/kapae-antigen.js";
 
 const EPOCH = "epoch-cid-genesis";
@@ -133,9 +135,38 @@ describe("foldAntigenSet — monotone lift + fail-closed equivocation", () => {
 });
 
 describe("antigenEntryBytes — canonical + domain", () => {
-  test("the domain rides the signed bytes", async () => {
+  // The claim this describe carries is SEPARATION, not presence. An earlier version of the test below read
+  // `expect(e.kind).toBe(KAPAE_ANTIGEN_DOMAIN)` plus a `toContain` over the bytes — both sides of both assertions
+  // reading the same constant, so a domain fused with the carriage board's would have passed unmoved. The full
+  // cross-board proof (a real signature refusing on the sibling board, both live verifiers rejecting a foreign
+  // domain) rides `tests/quorum-entry.test.ts`; what stays here is the antigen-local half of it.
+
+  test("the domain SEPARATES the image — the same act at another domain signs different bytes", async () => {
     const e = await banEntry();
-    expect(e.kind).toBe(KAPAE_ANTIGEN_DOMAIN);
-    expect(new TextDecoder().decode(antigenEntryBytes(e))).toContain(KAPAE_ANTIGEN_DOMAIN);
+    const own     = antigenEntryBytes(e);
+    const foreign = antigenEntryBytes({ ...e, kind: "lar-some-other-board/v1" } as unknown as Omit<KapaeAntigenEntry, "signatures">);
+    // Not "the string appears" — the byte-image MOVES. That is what makes a signature un-presentable elsewhere.
+    expect(hex(foreign)).not.toBe(hex(own));
+  });
+
+  test("a quorum raised on the antigen does NOT verify against another board's image of the same act", async () => {
+    const e = await banEntry();
+    const foreignBytes = antigenEntryBytes({ ...e, kind: "lar-some-other-board/v1" } as unknown as Omit<KapaeAntigenEntry, "signatures">);
+    const s = e.signatures[0]!;
+    // Positive control — the signature is genuinely good on its own board.
+    expect(await ed.verifyAsync(hexToBytes(s.sig), antigenEntryBytes(e), hexToBytes(s.signer))).toBe(true);
+    expect(await ed.verifyAsync(hexToBytes(s.sig), foreignBytes, hexToBytes(s.signer))).toBe(false);
+  });
+
+  test("the verifier REFUSES a foreign-domain entry even when its quorum signs perfectly over its own bytes", async () => {
+    const r = await roster();
+    const act = { nym: VICTIM, action: "kapae" as const, version: 1, charterEpochCid: EPOCH, kind: "lar-some-other-board/v1" };
+    const bytes = antigenEntryBytes(act as unknown as Omit<KapaeAntigenEntry, "signatures">);
+    const signatures = await Promise.all([SEEDS.guru, SEEDS.telarus].map(async (seed) => ({
+      signer: await pubOf(seed), sig: await signerOf(seed)(bytes),
+    })));
+    // A flawless 2-of-3 quorum on the WRONG board. Deleting `kapae-antigen.ts:116` makes this read Kapae'd.
+    const set = await foldAntigenSet([{ ...act, signatures } as unknown as KapaeAntigenEntry], r, verifier);
+    expect(isKapaed(VICTIM, set)).toBe(false);
   });
 });

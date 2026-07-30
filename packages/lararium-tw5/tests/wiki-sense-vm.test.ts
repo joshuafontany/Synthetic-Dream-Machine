@@ -28,7 +28,15 @@ import { createWikiSensorium } from "../src/wiki-sensorium-cap.js";
 import { summarizeCoherence, type WikiCoherenceSummary } from "../src/wiki-sense-fold.js";
 
 const CORE_PATH = path.join(TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME);
-const coreBlobPresent = existsSync(CORE_PATH);
+/**
+ * The vendored TW5 core is a GITIGNORED BUILD ARTIFACT, so a fresh clone — and CI's `test` job, which runs
+ * `pnpm -r test` with no build step — sees it absent. An anonymous `skipIf` there drops this suite at exit 0,
+ * indistinguishable from a green run. The skip now NAMES itself and its cure in the reporter line, following
+ * `lararium-node/tests/blob-sovereignty.test.ts:35-44`.
+ */
+const coreBlobSkip = existsSync(CORE_PATH)
+  ? false
+  : `TW5 core blob absent at ${CORE_PATH} — run: pnpm --filter @lararium/tw5 build:tw5-vendor`;
 
 /** The obstruct seed, stated locally: sigil-rich (structure 1) yet corpus-novel body (form 0). */
 const ORNATE_NOVEL: FixtureTiddler = {
@@ -46,7 +54,9 @@ async function compositeSummary(bagId: string, seeds: readonly FixtureTiddler[])
   }
 }
 
-describe.skipIf(!coreBlobPresent)("wiki-sense — the VM-native beat (real TW5 boot)", () => {
+describe.skipIf(coreBlobSkip)(
+  `wiki-sense — the VM-native beat (real TW5 boot)${coreBlobSkip ? ` [SKIPPED: ${coreBlobSkip}]` : ""}`,
+() => {
   let engine: TW5Engine;
 
   beforeAll(async () => {
@@ -142,11 +152,3 @@ describe.skipIf(!coreBlobPresent)("wiki-sense — the VM-native beat (real TW5 b
     }
   }, 30_000);
 });
-
-if (!coreBlobPresent) {
-  // the honest suspension: the witness needs the vendored core blob (a build artifact).
-  // eslint-disable-next-line no-console
-  console.warn(
-    `[wiki-sense-vm] SKIPPED — core blob absent at ${CORE_PATH}; run: pnpm --filter @lararium/tw5 build:tw5-vendor`,
-  );
-}

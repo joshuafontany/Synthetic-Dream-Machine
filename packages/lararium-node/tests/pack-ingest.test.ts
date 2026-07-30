@@ -22,7 +22,15 @@ import LARES_MEMETIC_WIKITEXT_PLUGIN from "../../lararium-tw5/plugins/lares-meme
 import { TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME } from "../../lararium-tw5/src/generated-tw5-version.js";
 
 const CORE = path.join(TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME);
-const corePresent = existsSync(CORE);
+/**
+ * The vendored TW5 core is a GITIGNORED BUILD ARTIFACT, so a fresh clone — and CI's `test` job, which runs
+ * `pnpm -r test` with no build step — sees it absent. An anonymous `skipIf` there drops this suite at exit 0,
+ * indistinguishable from a green run. The skip now NAMES itself and its cure in the reporter line, following
+ * `lararium-node/tests/blob-sovereignty.test.ts:35-44`.
+ */
+const coreBlobSkip = existsSync(CORE)
+  ? false
+  : `TW5 core blob absent at ${CORE} — run: pnpm --filter @lararium/tw5 build:tw5-vendor`;
 const URI  = "lar:///ha.ka.ba/lares/api/native/bundle";
 const BAG  = "lar:///ha.ka.ba/bags/@lares";
 const PACK = "ha.ka.ba/lares/api/native/bundle.json";      // the disk mirror-relative pack path
@@ -63,7 +71,9 @@ async function liveTitle(composite: CompositeStore, title: string) {
   return (await composite.resolveAll(title)).some((e) => e.bagId === BAG && !e.record.meta?.["tombstone"]);
 }
 
-describe.skipIf(!corePresent)("pack ingest — a .json bundle lands members + records provenance aside", () => {
+describe.skipIf(coreBlobSkip)(
+  `pack ingest — a .json bundle lands members + records provenance aside${coreBlobSkip ? ` [SKIPPED: ${coreBlobSkip}]` : ""}`,
+() => {
   let engine: TW5Engine;
   beforeAll(async () => {
     engine = new TW5Engine();

@@ -3,12 +3,13 @@
  *
  * Two layers:
  *   1. HERMETIC (always runs): a fake `exec` proves the args + NDJSON the shore builds.
- *   2. INTEGRATION (skipped when python/mempalace absent): the REAL kg_io.py against a temp
- *      palace — spawn→Delegation, inject→Communication, handback→close, kapae→close + history kept.
+ *   2. INTEGRATION: the REAL kg_io.py against a temp palace — spawn→Delegation, inject→Communication,
+ *      handback→close, kapae→close + history kept. When python or the mempalace submodule is absent the
+ *      suite SKIPS BY NAME, reason in the reporter line; it never returns early and reports passed.
  */
-import { describe, test, expect, beforeAll } from "vitest";
+import { describe, test, expect } from "vitest";
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, rmSync, mkdirSync, readFileSync } from "node:fs";
+import { mkdtempSync, rmSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -122,23 +123,46 @@ describe("worldline-kg arg/NDJSON building (fake exec)", () => {
 
 // ── 2. INTEGRATION — real kg_io.py against a temp palace ─────────────────────
 const PY = resolveMempalacePython();
-// repoRoot = three levels up from this test (packages/lararium-mempalace/tests → repo).
+// repoRoot = three levels up from this test (packages/lararium-sensorium/tests → repo).
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const SUBMODULE = join(REPO_ROOT, "mempalace");
-let kgImportable = false;
-beforeAll(() => {
-  if (!PY) return;
+
+/**
+ * WHY THE PROBE RIDES MODULE SCOPE AND NOT A `beforeAll`.
+ *
+ * These two tests carry the ONLY proof that the worldline shore writes bi-temporal rows into the real mempalace
+ * knowledge graph. They used to open with `if (!kgImportable) return;` under a comment reading "treat as skip" —
+ * but a bare `return` from a test body reports PASSED, never skipped. Demonstrated: run this file against a tree
+ * with the `mempalace` submodule absent and it reports `8 passed`, byte-identical in shape to a run where the
+ * integration genuinely executed. CI checks out with `submodules: false`, so that was not a hypothetical — it was
+ * every CI run this repo has had.
+ *
+ * A probe in `beforeAll` cannot gate a `describe`, because the describe body is collected first. So the probe runs
+ * HERE, at module load, and the reason it produces rides the suite title. The idiom follows
+ * `lararium-node/tests/blob-sovereignty.test.ts:35-44` — a skip in the reporter is visible and names its own cure;
+ * a silent return is neither.
+ */
+function integrationSkipReason(): string | false {
+  if (!PY) return "no mempalace python interpreter resolved — the KG integration needs the vendored venv";
+  if (!existsSync(SUBMODULE)) {
+    return `mempalace submodule absent at ${SUBMODULE} — run: git submodule update --init mempalace`;
+  }
   try {
     execFileSync(PY, ["-c", "import mempalace.knowledge_graph"], {
       cwd: SUBMODULE,
       env: { ...process.env, PYTHONPATH: SUBMODULE },
       stdio: "ignore",
     });
-    kgImportable = true;
-  } catch { kgImportable = false; }
-});
+  } catch {
+    return "`import mempalace.knowledge_graph` failed — run: git submodule update --init mempalace, then pip install -e mempalace";
+  }
+  return false;
+}
+const skipReason = integrationSkipReason();
 
-describe.skipIf(!PY)("worldline-kg ↔ real mempalace KG (integration)", () => {
+describe.skipIf(skipReason)(
+  `worldline-kg ↔ real mempalace KG (integration)${skipReason ? ` [SKIPPED: ${skipReason}]` : ""}`,
+() => {
   /** Dump (predicate, valid_from, valid_to, source_drawer_id) rows for assertion. */
   function dump(palace: string): Array<[string, string | null, string | null, string | null]> {
     const code =
@@ -154,7 +178,6 @@ describe.skipIf(!PY)("worldline-kg ↔ real mempalace KG (integration)", () => {
   }
 
   test("spawn→Delegation · inject→Communication · handback→close · kapae→close (history kept)", () => {
-    if (!kgImportable) return; // mempalace not importable in this env — treat as skip
     const dir = mkdtempSync(join(tmpdir(), "lar-wl-kg-"));
     const palace = join(dir, "palace");
     mkdirSync(palace, { recursive: true });
@@ -198,7 +221,6 @@ describe.skipIf(!PY)("worldline-kg ↔ real mempalace KG (integration)", () => {
   });
 
   test("a MILLISECOND ISO rides the shore into the KG — the row LANDS whole-second, zero traceback", () => {
-    if (!kgImportable) return; // mempalace not importable in this env — treat as skip
     const dir = mkdtempSync(join(tmpdir(), "lar-wl-kg-ms-"));
     const palace = join(dir, "palace");
     mkdirSync(palace, { recursive: true });
