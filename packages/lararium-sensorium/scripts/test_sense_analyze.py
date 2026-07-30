@@ -40,11 +40,14 @@ def test_foote_finds_a_planted_vocabulary_boundary():
     assert near, f"no Foote scale found the planted boundary at ~300; cuts={cuts}"
 
 
-def test_detect_reads_a_poured_sensorium_stream(tmp_path):
+def test_detect_reads_a_poured_sensorium_stream(tmp_path, monkeypatch):
     # pour the claude fixture into a sensorium, then POINT the instrument at its root — it reconstructs the
     # content stream (the same read rejim uses) and runs the sweep. The pour-then-point shore, end to end.
     from capture_session import capture_and_observe
-    os.environ["LAR_WORLDLINE_SALT"] = "sense-analyze-witness"
+    # monkeypatch, never a bare set: this ran as `os.environ[...] = ...` and leaked the salt into
+    # every later test in the process. Latent only because `test_worldline_veil` defends itself
+    # with `delenv` — a defence living in the victim rather than the source.
+    monkeypatch.setenv("LAR_WORLDLINE_SALT", "sense-analyze-witness")
     root = str(tmp_path / ".mem")
     capture_and_observe(root, "claude", CLAUDE, wing="w", embed_factory=_stub_embed_factory())
     res = sa.detect(root, halves=(4, 8, 16))

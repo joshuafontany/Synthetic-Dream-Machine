@@ -39,14 +39,25 @@ exclude = [
 # they exercise (flat-import idiom — `import holder_caps`, no package prefix), so the suite root sits
 # at the scripts directory rather than under a `tests/` tree. Naming a path that holds no test file
 # makes `pytest` collect ZERO and exit 0, which reads exactly like a green run.
+# The grammar fold's host-py suites sit beside their own holder, the same flat-import idiom one
+# package over. Unlisted, they ran only when someone named the path by hand, which made the
+# collected total a floor rather than a count.
 testpaths = [
     "packages/lararium-sensorium/scripts",
+    "packages/tree-sitter-memetic-wikitext/host-py",
 ]
 # COLLECTION MUST NOT DEPEND ON THE INVOKER'S SHELL. The holders consume the vendored mempalace as a
 # library, so 28 modules raise `ModuleNotFoundError: No module named 'mempalace'` at import time and
 # pytest reports them as collection ERRORS — 679 tests gathered instead of 944. An operator who had
 # exported PYTHONPATH saw the full set; one who had not saw a smaller suite pass green, and nothing
 # on the wire distinguished the two. Declaring the path here makes the count a property of the REPO.
+#
+# THE SAME LAW STOPS AT THE PROCESS BOUNDARY, and does not cross it. `pythonpath` is a pytest-ini
+# setting: it prepends to THIS process's `sys.path` and never touches the `PYTHONPATH` env var, so a
+# suite that spawns the real CLI as a child hands it an environment with no path at all. Do not try
+# to fix that by writing `PYTHONPATH` from a `pytest_configure` hook — doing so costs three tests at
+# collection (`test_capture_corpus.py` stops resolving `holder_caps`), reproducible on a clean tree.
+# The cure belongs at each spawn; `test_loci_io.py::_child_env` carries the worked one.
 pythonpath = [
     "mempalace",
     "packages/lararium-sensorium/scripts",

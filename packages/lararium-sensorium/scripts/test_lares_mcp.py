@@ -84,12 +84,39 @@ def _live_turn_keys(coord):
 
 
 def test_pour_refuses_unwired_shaping_args(tmp_path):
-    # B2 footgun: all/writeback/dry_run ride the deferred cap-wire — they must REFUSE, never silently
+    # B2 footgun: writeback/dry_run ride the deferred cap-wire — they must REFUSE, never silently
     # ignore (dry_run=True would otherwise LAND for real on the append-only ground).
+    #
+    # `all` NO LONGER BELONGS HERE. It stopped refusing when it was wired onto the sweep spine
+    # (lares_mcp.py:234 — "No refusal where the CLI works"), and this assertion was not updated, so
+    # the loop below drove a REAL `sweep("all")` on every run. That sweep resolves
+    # `session_discovery`'s HOME-rooted corpus, which on the operator's own box means 1912 claude
+    # sessions + 146 codex, 1.6 GB, read and re-poured into a tmp palace — a guard that mined the
+    # operator's entire chat history and read, from outside, as a hang. It never surfaced because
+    # the whole file auto-marks `slow` and deselects by default. See `test_pour_all_routes_to_sweep`
+    # below for the contract `all` actually carries now.
     coord = _coord(tmp_path)
-    for kwargs in ({"all": True}, {"writeback": True}, {"dry_run": True}):
+    for kwargs in ({"writeback": True}, {"dry_run": True}):
         with pytest.raises(NotImplementedError):
             coord.pour("claude", _FIXTURE, **kwargs)
+
+
+def test_pour_all_routes_to_sweep(tmp_path, monkeypatch):
+    """`pour(all=True)` DELEGATES to the sweep spine — asserted at the seam, never by running it.
+
+    Driving the real sweep here would walk the operator's actual `~/.claude` / `~/.codex` corpus,
+    which is what the stale refusal assertion above was silently doing. The contract worth holding
+    is the ROUTING: `all` reaches `sweep("all")` and carries wing and room through. Standing a
+    recorder in sweep's place proves exactly that and touches no corpus at all.
+    """
+    coord = _coord(tmp_path)
+    seen = {}
+    monkeypatch.setattr(coord, "sweep",
+                        lambda surface="all", **kw: (seen.update(surface=surface, **kw), {"ok": True})[1])
+    out = coord.pour("claude", _FIXTURE, all=True, wing="w", room="conversations")
+    assert out == {"ok": True}                       # the sweep's verdict rides back unwrapped
+    assert seen["surface"] == "all"                  # every surface, not the named one
+    assert seen["wing"] == "w" and seen["room"] == "conversations"
 
 
 def test_coordinator_kapae_cascade_round_trip(tmp_path):

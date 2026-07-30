@@ -206,12 +206,46 @@ import sys as _sys
 _LOCI_IO_PATH = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "loci_io.py")
 
 
+def _child_env():
+    """The parent's RESOLVED import path, handed to the child.
+
+    `pythonpath` in `pyproject.toml` is a pytest-ini setting: it prepends to this process's
+    `sys.path` and leaves the `PYTHONPATH` env var untouched. A child spawned with a bare
+    `dict(os.environ)` therefore inherits no path at all and dies on `ModuleNotFoundError: No
+    module named 'mempalace'` — so these three tests passed or failed on whether the OPERATOR
+    happened to export `PYTHONPATH`, which is the exact shell-dependence the ini setting exists to
+    remove. The fix reached collection and stopped at the process boundary.
+
+    Handing down the ONE root the child cannot find for itself closes it at the boundary. The
+    holders' own directory needs no help — python puts a script's directory at `sys.path[0]`, so
+    `holder_caps` and `loci` resolve from the spawn itself; only the vendored `mempalace` sits
+    outside that reach. Three constraints shaped this down to one entry:
+
+      · not the whole `sys.path` — the parent's path carries the interpreter's own lib dirs, and
+        replaying them through `PYTHONPATH` reorders them ahead of the child's stdlib, which fails
+        as `ModuleNotFoundError: No module named 'hashlib'`.
+      · not the holders' directory either — naming it explicitly puts it ahead of site-packages
+        rather than at `sys.path[0]`, and the shadowing that follows breaks `holder_caps` for the
+        child that was resolving it fine.
+      · not `PYTHONPATH` set process-wide — writing it from `pytest_configure` drops three tests
+        from collection (`test_capture_corpus.py` stops resolving `holder_caps`), reproducible on an
+        unmodified tree with a five-line plugin. The cure has to sit at the spawn, not above it.
+    """
+    scripts = _os.path.dirname(_os.path.abspath(__file__))
+    repo = _os.path.normpath(_os.path.join(scripts, "..", "..", ".."))
+    env = dict(_os.environ)
+    existing = env.get("PYTHONPATH")
+    env["PYTHONPATH"] = _os.pathsep.join(
+        [_os.path.join(repo, "mempalace")] + ([existing] if existing else []))
+    return env
+
+
 def _spawn_loci_io(sub_args, palace=None):
     argv = [_sys.executable, _LOCI_IO_PATH]
     if palace is not None:
         argv += ["--palace", palace]
     argv += sub_args
-    return _subprocess.run(argv, capture_output=True, text=True, env=dict(_os.environ))
+    return _subprocess.run(argv, capture_output=True, text=True, env=_child_env())
 
 
 @pytest.mark.parametrize("sub", [["embeddings", "--wing", "x"], ["cluster", "--wing", "x"], ["form-embeddings"]])

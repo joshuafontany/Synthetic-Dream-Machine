@@ -49,10 +49,19 @@ def test_witness_on_absent_is_honest_noop(tmp_path):
     assert _store(tmp_path).witness("ghost", "vessel-B", "f1", 1) == {"ok": False, "witnesses": 0}
 
 
-def test_truncation_never_sheds_a_defeat(tmp_path):
+def test_truncation_never_sheds_a_defeat(tmp_path, monkeypatch):
     # A defeat born as the OLDEST entry must survive a vouch-storm that overruns WITNESS_CAP —
     # dropping it would silently resurrect every vouch it defeated (the standing law reads a false
     # rise). Defeats stay compaction-exempt; only vouches truncate, oldest-first.
+    #
+    # THE CAP RIDES SMALL HERE, and the law is unchanged by that. Each `witness` is a read-modify-
+    # write against chroma that rewrites the whole log, so storming the SHIPPING cap of 4096 costs
+    # 4146 round-trips over a list growing to 4096 — quadratic, and long enough that it reads as a
+    # hang rather than a slow test. It was: this one test stalled the whole-suite run at 59% on
+    # three separate occasions, and the stall was misread as resource exhaustion until it was run
+    # alone. Compaction is scale-free — overrun-by-50 exercises the identical branch at cap 8 — so
+    # the storm rides a patched cap and the guard keeps its full meaning at a fraction of a second.
+    monkeypatch.setattr(pio, "WITNESS_CAP", 8)
     s = _store(tmp_path)
     s.put("t-1", "innovation", [1.0, 0.0], "vessel-A", "f0", {})
     s.witness("t-1", "vessel-DEFEATER", "f-defeat", -1)          # the defeat: the OLDEST edge
