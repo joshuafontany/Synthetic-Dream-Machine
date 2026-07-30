@@ -37,6 +37,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # TiddlyWiki5 IS the vendored-core build input and mempalace IS the python import
+          # root. Without them the tw5 build cannot run, so every downstream job fails on an
+          # artifact the repo never had a chance to produce.
+          submodules: recursive
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -45,6 +50,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # `@lararium/mesh` publishes its subpaths (`./lar-uris`, `./harvest`, …) into a GITIGNORED
+      # dist/, so `tsc` cannot resolve a single one of them on an unbuilt tree. Locally the tree is
+      # always built, which is why this passed on every desk and failed on every runner.
+      - name: Build (typecheck resolves workspace subpaths through dist/)
+        run: pnpm -r build
       - name: Typecheck all packages
         run: pnpm -r typecheck
 
@@ -54,6 +64,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # TiddlyWiki5 IS the vendored-core build input and mempalace IS the python import
+          # root. Without them the tw5 build cannot run, so every downstream job fails on an
+          # artifact the repo never had a chance to produce.
+          submodules: recursive
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -81,6 +96,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # TiddlyWiki5 IS the vendored-core build input and mempalace IS the python import
+          # root. Without them the tw5 build cannot run, so every downstream job fails on an
+          # artifact the repo never had a chance to produce.
+          submodules: recursive
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -89,6 +109,10 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # Eight suites guard on `existsSync` of tw5-core/ and dist/ — both gitignored build output.
+      # Unbuilt, they SKIP and the job still exits 0, so the run reads green while 35 tests never ran.
+      - name: Build (suites guard on built artifacts and silently skip without them)
+        run: pnpm -r build
       - name: Install Playwright Chromium (browser-vessel suite)
         run: pnpm exec playwright install --with-deps chromium
       - name: Run all package suites
@@ -100,6 +124,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # TiddlyWiki5 IS the vendored-core build input and mempalace IS the python import
+          # root. Without them the tw5 build cannot run, so every downstream job fails on an
+          # artifact the repo never had a chance to produce.
+          submodules: recursive
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -120,6 +149,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # TiddlyWiki5 IS the vendored-core build input and mempalace IS the python import
+          # root. Without them the tw5 build cannot run, so every downstream job fails on an
+          # artifact the repo never had a chance to produce.
+          submodules: recursive
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -142,6 +176,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # TiddlyWiki5 IS the vendored-core build input and mempalace IS the python import
+          # root. Without them the tw5 build cannot run, so every downstream job fails on an
+          # artifact the repo never had a chance to produce.
+          submodules: recursive
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
