@@ -1,36 +1,34 @@
 /**
- * heavy-roster-is-complete — the serial `heavy` roster in vitest.config.ts DETECTS its own staleness.
+ * heavy-roster-is-complete — the serial roster and its criteria both derive from the config.
  *
- * The config splits this package's suites into a full-parallel project and a serial one, because a
- * file standing a live WebSocketServer or a nested `worker_threads` island thrashes under 12-way file
- * parallelism: every such file passes green alone, and a DIFFERENT set reds each run under load — the
- * signature of contention rather than logic.
+ * `vitest.config.ts` splits this package into a full-parallel project and a serial one, because a suite
+ * standing a live resource starves the box under full parallelism. That split names its members in a
+ * literal array (vitest needs one), and a literal array cannot notice a new member: a suite added
+ * tomorrow that binds a listener joins the parallel project and re-opens the storm, surfacing later as
+ * an intermittent red somewhere else that reads as flake and costs a day to trace back here.
  *
- * That cure names its members in a hand-written array, and a hand-written array cannot notice a new
- * member. A test file added tomorrow that stands a WS server joins the PARALLEL project silently and
- * re-opens the storm; the only symptom is an intermittent red somewhere else, which reads as flake and
- * costs a day to trace back here. The house already ruled against exactly this shape — design-time
- * enumeration carries no way to detect what it missed.
+ * So the roster gets a reader. It imports {@link THRASHERS} — the config's OWN class list, not a copy —
+ * walks every suite under `tests/` RECURSIVELY, and fails naming any file that matches a class while
+ * sitting outside the array.
  *
- * So the roster gets a reader. This test applies the config's OWN criteria to every suite in the
- * directory and fails naming any file that qualifies while sitting outside the array. The array stays
- * (vitest needs a literal list), and it stops being able to drift in silence.
+ * BOTH OF THOSE WORDS CARRY WEIGHT, because an earlier shape lacked them and stayed green while wrong:
+ *   · IMPORTS, never re-encodes. Re-stating the criteria here made this reader a second hand-written
+ *     list of one fact. The config named three classes, this file encoded two, and four suites standing
+ *     a python holder ran parallel under a green check. A reader that carries authority and misses a
+ *     class is worse than no reader — a maintainer distrusts a bare array and believes a green test.
+ *   · RECURSIVELY. A flat `readdirSync` cannot see `tests/e2e/`, so the reader was structurally blind to
+ *     a whole directory it existed to police.
  *
- * WHAT COUNTS AS HEAVY, taken from the config's stated reasoning:
- *   · binds a real listener  — `new WebSocketServer` · `createServer` · `.listen(`
- *   · stands a nested island — `new Worker(` · `worker_threads`
- *
- * A file that matches and belongs in the parallel project anyway (a mock that never binds, say) earns
- * its place on {@link ALLOWED_LIGHT} with the reason written down — an exemption a reader can weigh,
- * never a silent omission.
+ * A suite matching a class that belongs in the parallel project anyway earns a line in
+ * {@link ALLOWED_LIGHT} with its reason — an exemption a reader can weigh, never a silent omission.
  */
 import { describe, expect, test } from "vitest";
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
+import { THRASHERS, heavy as DECLARED_HEAVY, mainExclude } from "../vitest.config.js";
 import { fileURLToPath } from "node:url";
 
 const testsDir = path.dirname(fileURLToPath(import.meta.url));
-const configPath = path.resolve(testsDir, "..", "vitest.config.ts");
 
 /** Files that trip a heaviness pattern yet belong in the parallel project. Each needs its reason. */
 const ALLOWED_LIGHT: Record<string, string> = {
@@ -38,34 +36,56 @@ const ALLOWED_LIGHT: Record<string, string> = {
   "tests/heavy-roster-is-complete.test.ts": "reads source text; stands no live resource",
 };
 
-/** The roster the config declares, parsed from the literal so the two can never disagree. */
+/** The roster the config declares — read from the module, so the two cannot disagree. */
 function declaredHeavy(): string[] {
-  const src = readFileSync(configPath, "utf8");
-  const block = /const heavy = \[([\s\S]*?)\];/.exec(src);
-  if (!block) throw new Error("vitest.config.ts no longer declares `const heavy = [...]` — update this reader");
-  return [...block[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+  return [...DECLARED_HEAVY];
 }
 
-/** Every suite in this directory, addressed the way the config addresses them. */
-function allSuites(): string[] {
-  return readdirSync(testsDir)
-    .filter((f) => f.endsWith(".test.ts"))
-    .map((f) => `tests/${f}`)
-    .sort();
+/** Every suite under `tests/`, at any depth, addressed the way the config addresses them. */
+function allSuites(dir = testsDir, prefix = "tests"): string[] {
+  const out: string[] = [];
+  for (const entry of readdirSync(dir)) {
+    const full = path.join(dir, entry);
+    if (statSync(full).isDirectory()) out.push(...allSuites(full, `${prefix}/${entry}`));
+    else if (entry.endsWith(".test.ts")) out.push(`${prefix}/${entry}`);
+  }
+  return out.sort();
 }
 
-const HEAVINESS = [
-  { why: "binds a listener", rx: /new WebSocketServer|createServer\s*\(|\.listen\s*\(/ },
-  { why: "stands a nested island", rx: /new Worker\s*\(|worker_threads/ },
-];
 
 /** Why a suite reads heavy, or an empty list when it does not. */
 function heavinessOf(suite: string): string[] {
   const src = readFileSync(path.resolve(testsDir, "..", suite), "utf8");
-  return HEAVINESS.filter((h) => h.rx.test(src)).map((h) => h.why);
+  return THRASHERS.filter((h) => h.rx.test(src)).map((h) => h.why);
 }
 
+/**
+ * Suites deliberately outside every project's `include`, each with the reason. A suite reachable by NO
+ * project runs nowhere and rots in silence — `tests/e2e/two-vessel-mesh.test.ts` sat unrun long enough to
+ * fall behind `runInit`'s hearth-true-name requirement, and nothing said so. Listing it here keeps the
+ * fact readable; deleting the entry without deleting the file makes this reader fail.
+ */
+const EXCLUDED_BY_DESIGN: Record<string, string> = {
+  "tests/e2e/two-vessel-mesh.test.ts":
+    "excluded from `main`, absent from `heavy` — the two-vessel founding ceremony. It fails against " +
+    "current `runInit` (hearth true-name absent) and awaits an operator ruling: repair and roster, or retire.",
+};
+
 describe("the serial heavy roster detects its own staleness", () => {
+  test("every suite is reachable by some project, or excluded on the record", () => {
+    // Reachability derives from the config's OWN exclude list, never a restatement of it.
+    const excludedDirs = mainExclude.filter((p) => p.endsWith("/**")).map((p) => p.slice(0, -3));
+    const roster = new Set(declaredHeavy());
+    const orphaned = allSuites().filter(
+      (s) => !roster.has(s) && excludedDirs.some((d) => s.startsWith(`${d}/`)) && !(s in EXCLUDED_BY_DESIGN),
+    );
+    expect(
+      orphaned,
+      `These suites belong to no vitest project, so they never run and nothing reports their absence:\n  ` +
+        orphaned.join("\n  "),
+    ).toEqual([]);
+  });
+
   test("every suite that stands a live resource sits in the roster", () => {
     const roster = new Set(declaredHeavy());
     const missing = allSuites()

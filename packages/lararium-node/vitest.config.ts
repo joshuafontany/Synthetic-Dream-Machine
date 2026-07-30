@@ -17,18 +17,30 @@ const alias = [
 ];
 
 /**
- * The HEAVY files each stand a live resource that thrashes under 12-way file parallelism: a real
- * WebSocketServer + Automerge Repo + DaemonAuthGate (the crossing tests), or a nested `worker_threads`
- * island booting the full TW5 kernel off the compiled dist (the full-boot tests). Run a dozen at once and
- * the box starves — a `repo.find()` races its sync to "unavailable", and a nested-worker ESM import of an
- * EXISTING dist file fails ERR_MODULE_NOT_FOUND under FD/CPU pressure. Every one passes green alone; only
- * the parallel storm reds them, a DIFFERENT set each run — the signature of contention, not logic.
+ * THE THRASHER CLASSES — the one place they are named, and the reader's only source.
  *
- * The cure runs these files in ONE serial project (`fileParallelism: false`) so no two heavy resources
- * stand at once, while the ~100 light files keep their full-parallel project. Scoped to the thrashers, the
- * light suite stays fast; the heavy suite trades a little wall-clock for a green it can PROVE under load.
+ * A suite standing any of these holds a live resource that starves the box under 12-way file
+ * parallelism: a `repo.find()` races its sync to "unavailable", a nested-worker ESM import of an
+ * EXISTING dist file reds ERR_MODULE_NOT_FOUND under FD pressure, a python holder times out. Each such
+ * suite passes green alone, and a DIFFERENT set reds every run — the signature of contention, never
+ * logic. The cure runs them in ONE serial project (`fileParallelism: false`) while the light files keep
+ * their full-parallel project.
+ *
+ * `tests/heavy-roster-is-complete.test.ts` IMPORTS this array and applies it to every suite under
+ * `tests/`, so a class named here is a class the reader checks. An earlier shape stated the classes in
+ * prose here and re-encoded them as regexes there; the prose named three and the regexes covered two,
+ * and four suites standing a python holder sat in the parallel project under a green reader. Two
+ * hand-written lists of one fact drift, and the one that carries authority drifts silently. Add a class
+ * HERE and the reader picks it up; there is no second list to forget.
  */
-const heavy = [
+export const THRASHERS = [
+  { why: "binds a listener", rx: /new WebSocketServer|createServer\s*\(|\.listen\s*\(/ },
+  { why: "stands a nested island", rx: /new Worker\s*\(|worker_threads/ },
+  { why: "stands a python holder", rx: /composePalace|makeContentPalace|make\w*Palace|composeEncoder|\bspawn\(\s*python/ },
+] as const;
+
+/** The suites the serial project takes. Kept complete by the reader that imports {@link THRASHERS}. */
+export const heavy = [
   // real WebSocketServer + Repo + gate crossings
   "tests/browser-crossing.test.ts",
   "tests/carriage-relay-serve-loop.test.ts",
@@ -56,7 +68,26 @@ const heavy = [
   "tests/flow-map-read-face.test.ts",
   "tests/ea-breath-watchdog.test.ts",
   "tests/island-protocol.test.ts",
+  // The python-holder class, surfaced when the reader began importing the config's OWN class list
+  // instead of re-encoding two of its three. Each spawns a real python+chroma holder from within a
+  // vitest worker — the third thrasher the config always named and the reader never checked.
+  "tests/content-palace.test.ts",
+  "tests/persistence-palace.test.ts",
+  "tests/formpalace.test.ts",
+  "tests/palace-caps.test.ts",
+  "tests/lares-query.test.ts",
+  "tests/guest-import.test.ts",
+  "tests/embed-cap.test.ts",
+  "tests/graph-cap.test.ts",
+  "tests/search-cap.test.ts",
 ];
+
+/**
+ * What the parallel project leaves out. Exported because the reader checks that every suite is reachable
+ * by SOME project, and a reader that re-states this list is a second copy of one fact — the drift this
+ * file already paid for once.
+ */
+export const mainExclude = ["tests/e2e/**", ...heavy];
 
 export default defineConfig({
   resolve: { alias },
@@ -86,7 +117,7 @@ export default defineConfig({
           name: "main",
           environment: "node",
           include: ["tests/**/*.test.ts"],
-          exclude: ["tests/e2e/**", ...heavy],
+          exclude: mainExclude,
         },
       },
     ],
