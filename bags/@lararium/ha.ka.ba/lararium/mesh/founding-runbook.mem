@@ -431,16 +431,22 @@ lares persona list                                   # the same roots, reached t
 
 ''A realm mints no DID and hosts on no machine'', so nothing gets created — it begins when someone feeds it and would cease if feeding stopped (`cabal-realm#verb-not-noun`). ''The vessel is FOUNDED; the realm is FED.''
 
-The machinery stands built (`feedCabalRealm`, the epoch-lease slot, `deriveCabalRealmLiveness` reading //alive · cooling · dissolved//) and ''carries no CLI verb''. Until one lands, the rite goes LIVE with the realm it was founded as a seed of never having begun.
+The machinery stands built and ''carries no CLI verb''. Until one lands, the rite goes LIVE with the realm it was founded as a seed of never having begun.
+
+''TWO PLANES CARRY THE WORD //FEED//, and only one of them survives a restart.'' `feedCabalRealm` warms a `BagStowage` residency — an in-process cache keyed on a wall clock, correct where it lives and worthless as a civic record; a verb that stood up its own would report on a residency it just invented. The DURABLE feeding rides the ''per-writer lease slot'': a coordinator-free max-register in epoch coordinates with ''no clock anywhere'', which `cabal-realm-clock` folds into who-feeds-and-how-deep. ''The offering the rite means is the lease roll.''
 
 ''OWED — the smallest honest surface'', and it wants no new machinery:
 
 ```
-lares cabal feed --realm <realm-doc-id>              # OWED: lay the first offering; the realm begins
-lares cabal liveness --realm <realm-doc-id>          # OWED: liveness (alive/cooling/dissolved) + who feeds
+lares cabal feed --realm <realm-doc-id>              # OWED: roll this vessel's lease slot — the offering the realm begins from
+lares cabal clock --realm <realm-doc-id>             # OWED: who feeds and how deep, verdict-free (realmMaintenanceFromBoard)
 ```
 
-The second reads the capture-clock the model already argues for — ''who feeds the realm and since when'', verdict-free, so a majority SEES a minority out-feeding them while exit stays cheap (`cabal-realm#the-unswept-corner`).
+The second reads the capture-clock the model already argues for — ''who feeds the realm and how hard'', verdict-free, so a majority SEES a minority out-feeding them while exit stays cheap (`cabal-realm#the-unswept-corner`).
+
+''AND IT REPORTS NO //ALIVE// OR //DISSOLVED//, deliberately.'' Deriving a liveness verdict needs a rate at which unfed standing erodes, and ''no rate stands seated'' — a verb that answered anyway would be inventing the operator's calibration and handing it back as a reading. `deriveCabalRealmLiveness` still maps the in-process cache tier, which reads honestly ''only inside a running vessel''. An empty board reads UNFED and never //nobody feeds it//: under no-global-now an unsynced realm and an unfed one generate identically.
+
+> ''ONE FORK GATES BOTH VERBS, and it belongs to the operator:'' WHICH BOARD carries a realm's feeding. A deterministic per-Nexus board (the seventh sibling beside carriage · antigen · vouch · edge-kāpae · persona-KEL) would federate the clock to every carrier — and publish, by inference, which keys dwell where, which is precisely what `dwellersHolding` refuses to enumerate. The realm's own members-only substrate keeps the sight INSIDE the realm and makes the clock unreadable from outside it. The read (`realmMaintenanceFromBoard`) takes whatever doc it is handed and never asks, so the choice stays open above it.
 
 <<~/ahu >>
 
