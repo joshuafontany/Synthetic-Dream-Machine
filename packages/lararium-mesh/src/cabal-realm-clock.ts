@@ -22,7 +22,7 @@
  * epoch per writer, no history), so this reads a STANDING at a point in time — who
  * maintains + how deep each has rolled — not a time-series. Capture shows as a small
  * leading set far ahead of a trailing majority; repeated reads let the operator watch
- * the trend. A richer fed-since-when history is a later cut.
+ * the trend. A richer fed-since-when history stands unbuilt.
  *
  * Platform-blind: rides ./epoch-lease + ./cabal-realm only. NO node: imports.
  *
@@ -135,8 +135,8 @@ export function realmLeaseSlotsFromBoard(doc: LarDoc, realmDocIdHex: string): Ma
  * numbers name a local sighting and never a total (the same no-completeness invariant `vouch-board` holds).
  *
  * It still reports NO liveness verdict. Deriving //alive// or //dissolved// from these epochs would need a
- * rate at which unfed standing erodes, and no rate stands seated — a verdict here would be this layer
- * inventing the operator's calibration and presenting it as a reading.
+ * rate at which unfed standing erodes, and no rate stands seated — a verdict here would install the
+ * operator's calibration inside this layer and hand it back as a reading.
  */
 export function realmMaintenanceFromBoard(doc: LarDoc, realmDocIdHex: string): CabalRealmMaintenanceProvenance {
   return cabalRealmMaintenanceProvenance(realmDocIdHex, realmLeaseSlotsFromBoard(doc, realmDocIdHex));

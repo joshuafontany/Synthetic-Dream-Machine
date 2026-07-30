@@ -9,7 +9,7 @@
  * verb): members do not BELONG to the cabal, they MAINTAIN it. The realm is
  * defined by the relationships and dissolves if they break.
  *
- * THIS CUT (Epic 2, cut 1) — PURE COMPOSITION of the EXISTING primitives only:
+ * THIS MODULE COMPOSES EXISTING PRIMITIVES and mints none of its own:
  *   · epoch-lease.ts      — the realm's OWN liveness lease (coordinator-free
  *                           max-register), keyed by the realm's sentinel DocId.
  *   · bag-residency.ts    — the realm's substrate doc cools to anu when unfed;
@@ -24,8 +24,8 @@
  *   · Keyhive CGKA / BeeKEM re-key — the AUTHORITY tie-break (concurrent
  *                                 add-while-remove, remove-wins by
  *                                 blank-on-merge). NOT here — that rides the
- *                                 Keyhive membership graph, cut 2 (gated on the
- *                                 operator's forks). Malice rides Plane-B
+ *                                 Keyhive membership graph, which stays gated on
+ *                                 the operator's forks. Malice rides Plane-B
  *                                 convergent-removal, also not here.
  *
  * THE UNSWEPT CORNER (canon #the-unswept-corner) — persistence ≠ legitimacy.
@@ -57,7 +57,7 @@ export interface CabalRealm {
    *  as the lease resourceId. Knowing it grants no authority (#the-realm). */
   readonly realmDocIdHex: string;
   /** The realm's Keyhive sentinel AgentId, hex — the membership-graph anchor a
-   *  later cut (cut 2, gated) ties the CGKA ceremony to. Inert here. */
+   *  gated CGKA ceremony will tie to. Inert here. */
   readonly realmAgentIdHex: string;
   /** The Automerge substrate doc URL — the shared content that cools to anu when
    *  the members stop feeding it (the LIVED / DISSOLVED half). */
@@ -118,10 +118,10 @@ export function feedCabalRealm(
  *
  * INERT BY DESIGN: the Ostrom-P1 cost-dial / capture-answer (the voucher quorum,
  * fork-and-leave — the legitimacy signal beyond raw maintenance) mounts HERE in
- * a later cut. That is the operator's OPEN shore (canon #the-unswept-corner:
+ * elsewhere. That is the operator's OPEN shore (canon #the-unswept-corner:
  * persistence ≠ legitimacy). Do NOT bake a legitimacy signal into this function
  * — a baked-in answer would close the unswept corner silently and wrong. The
- * actual Keyhive admission ceremony (found/join/evict CGKA) is cut 2, gated.
+ * actual Keyhive admission ceremony (found/join/evict CGKA) stays gated.
  */
 export function cabalRealmJoinGate(joinerIdentityHex: string): string {
   return joinerIdentityHex;

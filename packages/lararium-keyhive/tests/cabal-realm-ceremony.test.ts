@@ -69,7 +69,8 @@ describe("founding mints a NAME and warms nothing", () => {
 
   test("two foundings of the SAME uri mint DISTINCT realms — the name grants nothing", async () => {
     // Knowing a realm's uri lets anyone found a realm at that bearing and reach nothing of the first
-    // (`cabal-realm` NAMED-not-ruled). A uri that resolved to one authoritative realm would be the seat.
+    // (`cabal-realm` NAMED-not-ruled). A uri that resolved to one authoritative realm would seat exactly
+    // the root the model refuses.
     const founder = await founderVessel();
     const a = await foundCabalRealm(founder, URI, SUBSTRATE);
     const b = await foundCabalRealm(founder, URI, SUBSTRATE);
@@ -88,7 +89,7 @@ describe("the charter carries the veil-public face and refuses the rest", () => 
     expect(charter.genesisUri).toBe(URI);
     expect(charter.foundedAt).toBe(FOUNDED_AT);
     // The EXACT key-set, asserted — naming forbidden fields guards only the ones already imagined, and the
-    // field that arrives is the one nobody predicted.
+    // field that arrives comes from wherever nobody thought to look.
     expect(Object.keys(charter).sort())
       .toEqual(["description", "foundedAt", "genesisUri", "realmDocIdHex", "title"]);
   });
@@ -119,7 +120,7 @@ describe("opening a dwelling opens a DOOR and deposits no standing", () => {
   });
 
   test("★ NO closing pair exists — the module exports no eviction, and a later hand may not add one quietly ★", async () => {
-    // A realm holds no container to be put out of, so nothing can be evicted FROM one. A hostile hand
+    // A realm holds no container a party could be put out of, so no eviction reaches one. A hostile hand
     // shadows the RELATION (`edge-kapae`); wholesale escape runs by fork (exclude-by-omission).
     const surface = Object.keys(ceremony).sort();
     expect(surface).toEqual([
@@ -196,7 +197,7 @@ describe("a fork leaves rather than evicts", () => {
     expect(fork.newRealm.realmDocIdHex).not.toBe(old.realmDocIdHex);
     expect(fork.survivors.sort()).toEqual([keepA, keepB].sort());
     expect(fork.excluded).toEqual([captor]);
-    // The captor holds no key to the fork — never added, so nothing had to be taken away.
+    // The captor holds no key to the fork — never added, so no hand ever took one away.
     expect(await dwellersHolding(founder, fork.newRealm, [keepA, keepB, captor])).not.toContain(captor);
   });
 

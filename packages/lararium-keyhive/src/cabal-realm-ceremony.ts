@@ -16,7 +16,7 @@
  *     round-trip from stored bytes), so it cannot persist hex-in-tiddler. Document
  *     (public DocumentId ctor) is the working skeleton AND partly architecturally
  *     correct — canon #the-realm names the realm by its content-addressed *doc*
- *     identity. Track the Group subduction for a later cut (provider NOTE ~line 281).
+ *     identity. The Group subduction stands unbuilt (provider NOTE ~line 281).
  *   · forward_secrecy STAYS false — a deliberate THREAT-MODEL CHOICE, not an
  *     architectural impossibility (BeeKEM the substrate DOES keep
  *     FS against a passive adversary; the FS is forgone one layer up, at Keyhive's
@@ -27,11 +27,11 @@
  *   · membership = the Keyhive DOC-ROSTER — a LIST verified per-member against the
  *     sentinel (dwellersHolding below), NOT the closure-query of canon
  *     #RULED-by-the-closure. The closure ("evaluated as a query, never instantiated")
- *     is a later cut.
+ *     stands unbuilt.
  *
  * THIN CEREMONY: this calls the provider + the mesh floor and bakes NO legitimacy.
  * The join routes through cabalRealmJoinGate (INERT — the Ostrom-P1 voucher/capture
- * answer mounts there in a later cut; #the-unswept-corner stays OPEN). The
+ * answer mounts there when the operator seats it; #the-unswept-corner stays OPEN). The
  * introduction of a member as a known Keyhive agent (receiveContactCard) stays the
  * CALLER's job — mirrors the founding ceremony, whose vessel/PersonaGroup agents are
  * already in-scope before addSentinelMember.
@@ -53,7 +53,7 @@ import {
 import type { KeyhiveProvider } from "./keyhive-provider.js";
 
 /**
- * Optional founding side-effects — both composed onto cut 1's floor, both inert
+ * Optional founding side-effects — both composed onto the mesh floor, both inert
  * when omitted (a bare found just mints the sentinel + pairs the substrate):
  *   · residency  — registerCold the substrate (born anu / unfed until the first
  *                  feedCabalRealm warms it — #the-realm DISSOLVED-by-cooling).
@@ -198,7 +198,7 @@ export async function dwellersHolding(
 
 /**
  * READ the realm's liveness from the residency temperature of its substrate
- * (alive | dissolved — cut 1's deriveCabalRealmLiveness; an unknown/never-fed
+ * (alive | dissolved — the mesh floor's deriveCabalRealmLiveness; an unknown/never-fed
  * substrate reads anu → "dissolved").
  */
 export function cabalRealmLiveness(

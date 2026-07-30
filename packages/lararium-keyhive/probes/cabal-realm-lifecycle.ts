@@ -1,8 +1,8 @@
 /**
  * CABAL-REALM LIFECYCLE WITNESS — the found/join/evict trio drifted through a full
- * lifecycle against REAL Keyhive (no mocks) + cut 1's mesh floor.
+ * lifecycle against REAL Keyhive (no mocks) over the mesh floor.
  *
- * The Realm-Wright's drift (Epic 2, cut 2; + the charter-founding drift):
+ * The drift (+ the charter-founding drift):
  *   1. FOUND a cabal-realm AND its veil-public charter (foundCabalRealmWithCharter)
  *  1b. assert the founding founds the CHARTER (name+bearing+meta; no roster/substrate)
  *   2. JOIN two members (contact-card exchange → addSentinelMember via the INERT join gate)
@@ -59,7 +59,7 @@ async function main(): Promise<void> {
   const founder = new KeyhiveProvider();
   await founder.init({ seed: new Uint8Array(32).fill(0x11), eventStore: new InMemoryEventStore() });
 
-  // The liveness instruments from cut 1's floor.
+  // The liveness instruments the mesh floor supplies.
   const residency  = new BagStowage({ idleMs: 1 });   // 1ms idle so a sweep cools fast
   const leaseSlots = new Map<string, string>();
 
