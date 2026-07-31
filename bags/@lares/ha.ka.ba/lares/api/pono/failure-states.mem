@@ -55,6 +55,7 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 * ''The Table That Hides a Plane'' — two entities sharing a row when they ride different planes, so the table asserts //same kind// while every cell reads true. `lar:///ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane`
 * ''Minting Over a Retirement'' — a word seated beside one the graph already ruled, walking past the residue that says so. Greppable: `retires-to`. `lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement`
 * ''Not Walking Before Minting'' — a finding derived at cost that the graph already held. A RETRIEVAL failure, never a knowledge one. `lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting`
+* ''Structure-Shaped Convention'' — a mechanism whose guarantee rides a register its substrate cannot enforce, so it reads structural and holds only by agreement. Greppable: name the enforcer, then ask who can seize it. `lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention`
 
 <<~/ahu >>
 
@@ -64,6 +65,7 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
 
 <<~/ahu >>
