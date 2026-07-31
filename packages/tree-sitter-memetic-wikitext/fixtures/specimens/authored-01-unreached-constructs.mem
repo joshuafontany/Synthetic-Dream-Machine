@@ -1,0 +1,39 @@
+title: authored-01-unreached-constructs
+role: specimen — the constructs no live meme exercises
+type: text/x-memetic-wikitext
+
+<<~ ahu #open-and-close >>
+An ahu whose open and close each fold to their own kind.
+<<~/ahu >>
+
+\procedure ~Named(~Arg:"default")
+the pragma body
+\end
+
+<<macroName arg1 arg2>>
+
+{{a plain transclusion}}
+
+{{{a filtered transclusion}}}
+
+<<<quote-info-string
+a quote block whose opener carries an info string
+<<<
+
+$$$typed-info-string
+a typed block whose opener carries its dialect
+$$$
+
+@@style-info-string
+a style block whose opener carries its info
+@@
+
+```fence-info-string
+a fenced block whose opener carries an info string
+```
+
+<div>a raw html line</div>
+
+"""
+a hard-break block holds its lines verbatim
+"""

@@ -1,0 +1,19 @@
+{
+  "grammar_version": "0.1.0",
+  "memeastSchema": "1",
+  "note": "Frozen specimens. The INPUT lives beside the pinned hash, so a hash can only move by a commit that also moves the specimen. `sha256` pins the bytes; `hash` pins the fold.",
+  "specimens": {
+    "authored-01-unreached-constructs.mem": {
+      "hash": "db8bd31647b07c608b340015e79e8ac97b619b8fded61c2a2e9b3cc4ead6235b",
+      "sha256": "00a39c8e71fd3500e87c22ab939e5c93a4865b616df62df25604dcf2ab71c3ec"
+    },
+    "wild-01-voices.mem": {
+      "hash": "265015fb48f03f087c91416eac6ec72e33f1a78e9794b1c01f8fdec4064d272e",
+      "sha256": "d8679e7d9d0307791d2587b7582ba3c5fadf74eedbbb5c50b90583df3cddf37a"
+    },
+    "wild-02-pragma.mem": {
+      "hash": "7cebb69f4755280e5a36ce94c86aecc2cc2661780c5d16fd103a42d7215e4bab",
+      "sha256": "3b02db8894d036fdf2c9f1bb03ba9ee27c173044414b30700853e75efca92fac"
+    }
+  }
+}

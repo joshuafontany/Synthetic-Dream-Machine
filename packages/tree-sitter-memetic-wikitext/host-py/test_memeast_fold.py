@@ -80,43 +80,12 @@ def test_declared_manifest_matches_artifact():
     assert mf.artifact_quad()["corpusManifest"] == CORPUS_MANIFEST
 
 
-def test_golden_corpus_hashes_hold():
-    """THE PARITY GATE: every meme's canonical MemeAst hash, pinned in the
-    versioned manifest. A grammar or fold change that moves ANY hash fails
-    loud — the divergence then rides the bump ritual (classify INTENDED with
-    a NAMED skip or a re-bake in the same commit; or fix the REGRESSION).
-    This same manifest gates the TS host when it lands."""
-    import json
-    import os
-
-    here = os.path.dirname(os.path.abspath(__file__))
-    manifest_path = os.path.join(here, "..", "fixtures", f"manifest-{CORPUS_MANIFEST}.json")
-    with open(manifest_path) as fh:
-        golden = json.load(fh)
-    # repo-relative: the corpus rides the same checkout as the manifest,
-    # so the gate runs anywhere the repo lands (local tree AND CI)
-    bags = os.path.normpath(os.path.join(here, "..", "..", "..", "bags", "@lares"))
-    if not os.path.isdir(bags):
-        import pytest
-
-        pytest.skip("bags corpus absent — the gate rides the operator's tree")
-
-    skips = golden.get("skip", {})  # rel-path → reason; INTENDED divergence, named
-    drifted, missing, skipped = [], [], []
-    for rel, want in golden["corpus"].items():
-        if rel in skips:
-            skipped.append((rel, skips[rel]))
-            continue
-        path = os.path.join(bags, rel)
-        if not os.path.isfile(path):
-            missing.append(rel)  # a retired meme: the corpus wants a re-bake, not a failure
-            continue
-        data = open(path, "rb").read()
-        got = mf.structural_hash(mf.fold(data))
-        if got != want["hash"]:
-            drifted.append(rel)
-    assert not drifted, f"{len(drifted)} memes fold differently now: {drifted[:5]}"
-    # every hashed meme still parses; absences are reported, never silently passed
-    assert len(missing) < len(golden["corpus"]) // 2, f"corpus moved under the gate: {missing[:5]}"
-    # a skip names its reason or it does not exist
-    assert all(reason for _, reason in skipped), f"unnamed skips: {skipped}"
+# The golden-corpus parity gate retired here. It hashed 250 memes out of `bags/@lares` — authored
+# content under continuous revision — so it measured the fold against ground that moves: an edit and a
+# grammar regression produced the same red. It fired on 60 memes in seventeen days, every one a content
+# edit, and never once caught a grammar change.
+#
+# The four properties it bundled now sit on beds that suit them, in `test_fold_specimens.py`:
+# hashes pinned over FROZEN specimens · coverage measured against the grammar's own node-types.json ·
+# the living corpus gated on invariants (no ERROR node, spans inside their ground) · determinism over
+# real specimens. `fixtures/manifest-0.1.0.json` stays as the record of what was pinned and when.
