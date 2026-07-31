@@ -80,6 +80,24 @@ Optional depth raises yield; it does not replace the minimum shape.
 
 <<~/ahu >>
 
+<<~ ahu #retirement >>
+
+!! Retirement ~ deprecate, never redefine, and the CADENCE scopes it
+
+''An address MUST keep meaning what it meant.'' A concept that moves builds a NEW address and the old one retires to a residue pointing forward; a name reused for a changed thing silently breaks every reader who already holds it, and breaks them ''without an error'' — they read on, and the reading drifts.
+
+''Independent arrival, from a field that got burned.'' The world's registry of coordinate reference systems runs the same law verbatim — deprecate a code, never redefine it — because a human-readable frame name had already named eight materially different things across forty years while every consumer kept reading it as one. ''The plain-language name stayed ambiguous forever; the issued code did not.''
+
+''THE LAW HOLDS AT EVERY LEVEL; THE CADENCE DOES NOT.'' Naming the rate matters as much as naming the rule, because a retirement discipline pitched at one rate reads as either paralysis or churn at another:
+
+|! level |! rate |! what moves it |
+| the authored grammar | ''fast'' — drifts with use | any author, any pour |
+| engines and plugins | ''slow'' — a rejim cadence | kahu action, never a single hand |
+
+''So a grammar may retire an address between pours'', while the engine and plugin that parse it retire on a cadence the kahu hold — and a reader that carried the old parse keeps reading correctly until the slower ratchet moves beneath it. The two rates ride the genesis artifact already (<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc >>): a plugin change must never perturb the engine, and neither perturbs what an author wrote yesterday.
+
+<<~/ahu >>
+
 <<~ ahu #rating-posture >>
 
 !! Rating Posture
