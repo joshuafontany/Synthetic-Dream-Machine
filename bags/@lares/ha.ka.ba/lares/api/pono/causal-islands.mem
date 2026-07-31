@@ -308,6 +308,22 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 
 <<~/ahu >>
 
+<<~ ahu #the-model-key >>
+
+!! A time value MAY enter as a KEY, never as an arbiter
+
+''The refusal of wall clocks holds; its stated form over-reached.'' Geodesy runs dynamic reference frames where every coordinate carries a real date — and it still trusts no device clock: its time scale arrives as a post-hoc weighted ensemble of hundreds of clocks with each contributor's residual published. ''No individual clock sources the frame; each one MEASURES it.''
+
+The transferable law:
+
+> ''A time value MAY enter a merge only as a lookup key into a declared, versioned, shared model both parties already hold — and NEVER as the thing that decides.''
+
+Two parties holding positions at different epochs cannot reconcile them by comparing dates. They must first agree ''WHICH MODEL VERSION'' mediates, and different versions return different answers. ''The model carries the authority; the timestamp only addresses it.'' A timestamp that decides reads as a device clock wearing a frame's clothes; a timestamp that indexes a shared model reads as an ordinary coordinate.
+
+''The failure mode to expect never reads as corruption.'' Drift between epochs produces ''well-formed garbage'' — right shape, right digits, plausible bounds, and nothing in the data reveals the fault. It passes every structural check a replica can run.
+
+<<~/ahu >>
+
 <<~ ahu #reject >>
 
 !! Reject-list — the re-concentration traps

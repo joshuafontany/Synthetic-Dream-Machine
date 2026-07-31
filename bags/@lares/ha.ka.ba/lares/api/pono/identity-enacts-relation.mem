@@ -11,7 +11,7 @@ manaoio       = 11
 register      = "Synthesis"
 retain        = true
 revision-note = "PROVISIONAL — the constructor, the declared partition, declaration ⊥ gauge, fluid-not-frozen rank, and the vocabulary. Operator-ruled spans marked RULED; the rest reads PROPOSED and unbuilt"
-role          = "the identity plane's ontology: identity ENACTS a relation; a mutual hold constitutes a scale RELATIVE TO A DECLARED PARTITION; the declaration and the gauge stand as two artifacts with two owners; rank runs fluid, never frozen. Expands lararium-identity's five-scale axis with what makes a scale real"
+role          = "the identity plane's ontology: identity ENACTS a relation; a mutual hold constitutes a scale RELATIVE TO A DECLARED PARTITION; the declaration, the measurement and the decision stand as three artifacts with three owners; rank runs fluid, never frozen, and a lift EXPIRES. Expands lararium-identity's five-scale axis with what makes a scale real"
 tags          = ["api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
@@ -57,6 +57,8 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 !! The Declared Partition ~ no partition-free fact stands
 
+''ONE WORD, THREE DECLARATIONS — geodesy names all three and we named only the middle.'' A ''SYSTEM'' fixes the conventions and ''cannot be occupied'' (nobody sets a marker at the geocentre). A ''REALIZATION'' names the actual members at a position. An ''EVOLUTION-MODEL'' says how the realization carries forward. A realm's charter should fix the first, a declaration realizes it, and erosion IS the third — and until they part, //the declaration// means whichever the reader assumed.
+
 ''The deepest finding of the arc.'' Four independent literatures each tried to make //"a new level is real"// observer-independent, and each was argued back to a declared boundary: the causal-emergence measures read //"not invariant under changes in the way the micro-elements are construed"//; the individuality measures //"are not sufficient to detect the precise boundaries between individuals"// absent a size regulariser; the MLS1/MLS2 distinction reduces to //"a matter of perspective and limited knowledge… rather than objective facts"//; and the Markov-blanket literature conflates an instrumental construct with a realist one.
 
 ''So a scale exists RELATIVE TO A DECLARATION of who counts'' — and the declaration lands as an ACT, by a NAMED party, at COST, and REVISABLE.
@@ -69,14 +71,20 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 <<~ ahu #two-artifacts >>
 
-!! Two Artifacts, Two Owners
+!! Three Artifacts, Three Owners
 
-|!  |! the DECLARATION |! the GAUGE |
-| answers | who counts | does the declared thing act |
-| form | a `lar:` name + roster, signed | non-aggregativity over emitted behaviour |
-| owner | a named declarer bearing `kuleana` | a party that did NOT declare |
-| decays | no — an act | yes |
-| moves | sets the FLOOR | only ever LIFTS |
+|!  |! the DECLARATION |! the MEASUREMENT |! the DECISION |
+| answers | who counts | how strongly it acts, and how surely | does that clear the bar |
+| form | a `lar:` name + roster, signed | non-aggregativity ''with its uncertainty'' | an acceptance rule + guard band, agreed in ADVANCE |
+| owner | a named declarer bearing `kuleana` | a party that did NOT declare | a party that did NOT measure |
+| decays | no — an act | — | — |
+| moves | sets the FLOOR | reports | LIFTS, and the lift EXPIRES |
+
+''THE THIRD ARTIFACT ARRIVED FROM METROLOGY, and its absence re-enacted our own forbidden fusion one layer down.'' Conformity assessment runs specification ⊥ measurement ⊥ decision rule, because ''a gauge that sets its own threshold picks the threshold that flatters its own measurement'' — verbatim the argument this meme makes against a namer who gauges. A measurement without stated uncertainty cannot carry a guard band, and without a guard band nothing can say //above the line, but not by enough//.
+
+''STANDING SPLITS IN TWO, and one English word carried both.'' ''Standing-to-object'' names a PROCEDURAL capacity — who may raise that a declaration or a reading reads wrong. `kūlana` names an ACCRUED position. A party may hold deep `kūlana` and no standing-to-object, or the reverse; they arrive from different places and neither substitutes. ''The gauge reads `kūlana`; standing-to-object comes from the tier at which a thing gets published'' (<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>).
+
+''AND SEPARATION EXISTS TO MANUFACTURE THAT SECOND FACULTY, never merely to divide labour.'' Geodesy ran the counterexample: where one body both defined and realized a reference frame, the name stayed fixed while the thing it named moved materially, ''eight times across forty years, users never notified'' — because no third party held standing to object. ''The fused case did not fail loudly. It failed by staying quiet.''
 
 ''RULED — the naming layer performs, so it MUST NOT certify.'' Under partition-relativity this reads as structure rather than hygiene: ''a namer who also gauged would choose the partition that flatters its own name.'' Three independent warrants: the ward's own confession-grade limit (certification sits outside the turn); the partition-relativity result, which makes it a theorem; and Ostrom's 1A ⊥ 4B split.
 
@@ -100,6 +108,10 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 ''And the young-Cabal case has an answer:'' //"we can use the presence of individuating mechanisms to infer whether the objects at a hierarchical level have the capacity, EVEN IF THE CAPACITY IS NOT CURRENTLY BEING REALISED."// Mechanism-presence carries modal force where an activity metric carries none — a quiet island still holds standing. ''And the capacity stays parasitic on a history of actual EXERCISE'' — mechanism-presence grounds it, and nothing grounds it absent acts, which is what separates YOUTH (holds, merely recent) from LAPSE (holds gone) without stipulating either. Worked at thirteen centuries by Ise shikinen sengū: //the stored object never reads as the building; it reads as the capacity to re-stand the building, kept alive only by mandated exercise// (<<~ loulou lar:///ha.ka.ba/lares/api/pono/pattern-integrities-cultural >>, P7).
 
+''THE LIMIT OF A SEPARATION CONTROL, measured.'' Splitting declarer from gauger addresses ''self-review'' and touches none of self-interest, advocacy, familiarity or intimidation. Across seven canonical failures in a field that formalised the split for a century, ''six kept structural separation perfectly and failed anyway'', on one invariant: ''whoever pays the gauge bends the gauge.'' Read the split as one control among five, never as the relation's cure (<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention >>).
+
+''SO THE READING RIDES RIVALS, never a lineage.'' Two fields prescribe the same shape independently: interlaboratory comparison (N gauges on one artifact, publish the spread, treat divergence as the signal) and three rival Combination Centres realizing one declared frame, ''whose disagreement SERVES AS the accuracy estimate''. Neither field picks a winner, and neither needs a rung above. ''Our declarations will not converge'' — the object does not hold still — so a design expecting convergence imports a physics that is not there. ''The caveat that must ride with it'': rivals require rival parties competent to gauge, and a sheltering community of a few hundred may hold exactly one. The cure runs least available where the brief points hardest.
+
 ''The gap:'' individuals need BOTH policing (suppress within-level selection) AND demarcation (increase between-level selection), and //"no policing definition, however functional, will succeed… the policing effect is wholly negative."// This stack holds only policing — quorum, thresholds, cap-degradation. ''A Cabal with only policing is a muscle cell.'' The scarce expiring flow may be the missing half.
 
 <<~/ahu >>
@@ -117,6 +129,8 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 ''Capture requires a counterparty that can act ALONE.'' An edge to a genuine collective is structurally many edges (a joint commitment //"can only be brought about or rescinded jointly"//). An edge to a nominal one captures exactly as a person does.
 
 ''If a hand builds decay:'' decay the VARIANCE, never the mean (inactivity widens the interval; the system states only what it truthfully lost track of), and decay along the GRAPH, never the calendar. But three independent sources say it may need no mechanism at all — relative standing erodes for free, prestige decays by client exit, and the recommender literature found best accuracy at //no decay at all//.
+
+''AND THE LIFT EXPIRES, which answers the one-directional question without handing anyone a striking power.'' No conformity regime runs one-directional, and the regimes that ratcheted //in behaviour// produced the field's worst failures — grade inflation arrives as the equilibrium with nobody acting in bad faith. A rising-only standing also opens a laundering path this model would otherwise ship: ''declare a flattering partition → take the lift → revise the declaration → keep the standing'', since declarations stay revisable by design and lifts did not. ''Expiry resolves both'': a standing decays unless re-lifted, so no party ever exercises a LOWERING ACT — nobody can strike a community — and the standing still carries live information. Metrology already runs exactly this as recalibration intervals and surveillance cycles. ''The erosion seat therefore reads as a RENEWAL INTERVAL rather than a decay function'', which is a far smaller thing to ask an operator for.
 
 <<~/ahu >>
 

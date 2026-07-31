@@ -140,6 +140,25 @@ The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol s
 
 <<~/ahu >>
 
+<<~ ahu #the-shared-model >>
+
+!! The two ratchets ARE the declared shared model
+
+''The grammar reads as the frame's realization for the semantic plane.'' Two parties holding identical bytes under different `pluginsCid` parse the same `lar:` URI, the same sigil, the same gradient position into ''different structures'' — so a comparison between them means nothing, exactly as a coordinate means nothing without its datum.
+
+That makes `engineCid` ⊥ `pluginsCid` the artifact a merge-time model agreement needs, and it already stands:
+
+* ''declared'' — the CAS manifest, format-tagged.
+* ''versioned by CONTENT'' — so //which version// answers by cid, with ''no wall clock anywhere''.
+* ''shared'' — witness tiddlers on the @oracle plane, the always-carried tier.
+* ''held, never fetched'' — a vessel carries it or cannot boot.
+
+''And the two rates match what a dynamic frame independently needed'': a SLOW secular ratchet (the engine — a plugin change must never perturb it) beside a FAST local one (the plugins), so a violent local change updates a patch rather than forcing a global re-declaration.
+
+''Two stretches stay open.'' The model version binds at FOUNDING (a device delegation names the genesis `engineCid`) and nothing consults it ''when two replicas merge'' — precisely where the law bites. And this doc's own deferred case, two peers materializing fresh from different engine versions, ''names the disjoint-station-set break'': where two frames share no co-observed points, no transformation exists at all, only translation by assertion.
+
+<<~/ahu >>
+
 <<~ ahu #grounds >>
 
 !! Grounds (the realized flow)
