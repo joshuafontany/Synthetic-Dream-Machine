@@ -36,6 +36,13 @@ describe("makeEmbedCap (text→vector, driven live)", () => {
   }, TEST_TIMEOUT);
 
   test("one holder per process, never a pile", async () => {
+    // ABSOLUTE, and deliberately so — unlike the dir-keyed palaces this counter belongs to a
+    // LABEL-keyed holder: `composeEncoder` keys by label because the MODEL is the resource, so
+    // one holder serves the whole process and `1` IS the contract, not an artifact of counting
+    // from zero. A relative `before + 1` states the opposite and fails correctly (proven: with a
+    // sibling holding an unclosed encoder, the relative form reads `expected 1 to be 2` while the
+    // singleton it should be asserting is intact). The dir-keyed suites read relative; this one
+    // must not.
     open(); open();
     expect(_liveEmbedHolderCount()).toBe(1);
   }, TEST_TIMEOUT);

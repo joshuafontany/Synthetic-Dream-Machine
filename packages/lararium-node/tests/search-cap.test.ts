@@ -45,8 +45,14 @@ describe("makeSearchCap (consumed hybrid search over the owned palace, live)", (
 
   test("one search holder per palace, never a pile", async () => {
     const dir = await mkdtemp(join(tmpdir(), "searchcap-"));
+    // RELATIVE, never absolute: the registry behind this counter is a module-global Map that
+    // no reset clears, so an absolute `toBe(1)` reads the whole WORKER rather than this test.
+    // It holds today only because vitest's default `isolate: true` hands each file a fresh
+    // module registry — an inherited default, not a stated one. The delta is what the
+    // reap-don't-pile invariant actually claims: two opens on one key add ONE holder.
+    const before = _liveSearchHolderCount();
     const a = makeSearchCap(dir); const b = makeSearchCap(dir);
     closers.push(a.close, b.close);
-    expect(_liveSearchHolderCount()).toBe(1);
+    expect(_liveSearchHolderCount()).toBe(before + 1);
   }, TEST_TIMEOUT);
 });
