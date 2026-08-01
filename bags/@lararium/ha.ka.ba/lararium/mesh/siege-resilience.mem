@@ -72,6 +72,24 @@ The refresh itself runs ''CHURP-style'' — cheap dynamic-committee handoff, so 
 
 <<~/ahu >>
 
+<<~ ahu #the-active-prober >>
+
+!! The active prober ~ the watcher that answers back
+
+''A threat model that assumes a PASSIVE observer under-reads the adversary by a decade.'' The canonical move: watch for a suspicious connection, then ''CONNECT to that endpoint and speak the protocol'' to confirm what the traffic would not reveal. Run at national scale it measured a median half-second from probe to verdict, across sixteen thousand prober addresses of which ninety-five percent appeared exactly once — so blocking the probers bought nothing.
+
+''Any surface that answers a stranger distinguishably reads as an ORACLE, whatever it protects.'' Two circumvention protocols fell exactly here: they authenticated nobody, so anyone speaking the opening move got a distinguishable answer, and a probe for each arrived within months.
+
+''THREE PROPERTIES THE SURVIVING DESIGN NEEDED, and a bare gate holds none of them'':
+
+# ''The CLIENT proves first.'' The prover authenticates before the responder emits a byte — otherwise the responder itself serves as the oracle, whatever it guards.
+# ''SILENCE on failure, never rejection.'' No error, no reset, no distinguishable close, and a randomised drop interval so the TIMING carries no tell either. ''A rejection still confesses that something here understood the question.''
+# ''The gating secret rides PER-VESSEL.'' A confederation-wide credential hands one infiltrated member a universal probe key and restores the oracle with an extra step and a false sense of cover.
+
+''And the cheapest adversary never probes at all.'' A power willing to bear collateral damage blocks everything unrecognised and permits a whitelist. Against default-deny, unobservability buys nothing — only ''resembling permitted traffic'' helps, and that shelter stays revocable by whichever platform it borrows.
+
+<<~/ahu >>
+
 <<~ ahu #repair-kit >>
 
 !! The Repair-Kit ~ the delegate's verbs

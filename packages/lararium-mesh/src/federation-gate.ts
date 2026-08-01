@@ -22,6 +22,19 @@
  * id and hiding the bytes — is the V5 KeyhiveIdentitySlot / BeeKEM path, out of
  * this shore's scope. This gate IS that shore's alpha socket.
  *
+ * SECOND HONEST BOUND — THIS GATE OFFERS NO PROBE RESISTANCE, and nothing here should read as
+ * though it did. It decides what a peer may PULL; it never conceals that a lararium answers at
+ * all. An adversary that connects and speaks the opening move learns what a passive observer
+ * could not — the move a national censor has run for over a decade, at a measured median
+ * half-second, from prober addresses too numerous and too short-lived to block.
+ *
+ * What probe resistance would require, none of which this shore holds: the CLIENT authenticating
+ * BEFORE the responder emits a byte (else the responder itself serves as the oracle) · SILENCE on
+ * failure rather than a rejection, since a rejection confesses that something understood the
+ * question · and a PER-VESSEL gating secret, because a mesh-wide one hands a single infiltrator a
+ * universal probe key. That belongs to the transport, not to a share-policy shore — named here so
+ * a later reader never mistakes this gate's deny for a mesh that stays unobserved.
+ *
  * Meme: lar:///ha.ka.ba/lararium/mesh/federation-gate
  */
 import {
