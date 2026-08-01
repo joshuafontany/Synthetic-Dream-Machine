@@ -142,7 +142,7 @@ The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol s
 
 <<~ ahu #the-shared-model >>
 
-!! The two ratchets ARE the declared shared model
+!! The two ratchets name the HEARTH, never the Nexus
 
 ''The grammar reads as the frame's realization for the semantic plane.'' Two parties holding identical bytes under different `pluginsCid` parse the same `lar:` URI, the same sigil, the same gradient position into ''different structures'' — so a comparison between them means nothing, exactly as a coordinate means nothing without its datum.
 
@@ -154,6 +154,14 @@ That makes `engineCid` ⊥ `pluginsCid` the artifact a merge-time model agreemen
 * ''held, never fetched'' — a vessel carries it or cannot boot.
 
 ''And the two rates match what a dynamic frame independently needed'': a SLOW secular ratchet (the engine — a plugin change must never perturb it) beside a FAST local one (the plugins), so a violent local change updates a patch rather than forcing a global re-declaration.
+
+''AND THE PAIR DOES NOT NAME A NEXUS — that reading got tested and broke.'' Identifying a confederation by an implementation hash pins the ''intension'' (what a peer RUNS) where the property wanted reads ''extensional'' (what a peer ACCEPTS). The pin sits neither necessary — five independent clients hold one chain between them, by design — nor sufficient: two nodes ran the same intended rules and split anyway on an undocumented resource ceiling. ''A hash of source certifies provenance, never behaviour.''
+
+Worse for a shelter brief: an implementation hash ''mandates a monoculture'', and independent implementations read as a SAFETY property — where one implementation stands alone, its bug becomes the rule.
+
+''So the pair names the HEARTH'' — this place's own true-name and its own composition — and a Nexus reads off the PARSE (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>).
+
+''AND THE VERSION LABELS LEFT BOTH PREIMAGES.'' Folding a version string in beside the digest made a pure RE-TAG — identical bytes, renamed — mint a fresh true-name, which manufactures a schism out of an editorial act and reads identical to a real change. The sha256 already binds every byte the label could describe. ''A false difference and no true one'', now cut; the label rides the blob descriptor for a human to read, where a wrong one misleads nobody's identity.
 
 ''Two stretches stay open.'' The model version binds at FOUNDING (a device delegation names the genesis `engineCid`) and nothing consults it ''when two replicas merge'' — precisely where the law bites. And this doc's own deferred case, two peers materializing fresh from different engine versions, ''names the disjoint-station-set break'': where two frames share no co-observed points, no transformation exists at all, only translation by assertion.
 

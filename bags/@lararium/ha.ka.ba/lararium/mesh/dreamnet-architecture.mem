@@ -129,6 +129,29 @@ The Amorphous Dreams Cabal holds ''kahu'' at this layer: guardian of the protoco
 
 <<~/ahu >>
 
+<<~ ahu #the-nexus-parse >>
+
+!! A Nexus reads as the PARSE ~ conformance, never a hash
+
+''A Nexus stands as a CONFORMANCE-VECTOR SET, and membership reads as passing it.'' Given these `.mem` inputs, produce these parses; two vessels share a Nexus exactly when they agree on every vector — whatever engine, whatever implementation, whatever version.
+
+''The blur that hid this: //plugin// carried two entities.'' CONSTITUTIVE plugins (the parser, the sigil layer, the grammar cache) decide what a `lar:` URI MEANS — without them a vessel reads nothing. OFFERED plugins compose per-operator and carry the client diversity that keeps one implementation's bug from becoming the rule. ''The grammar never rode the engine'', so an engine hash never determined the parse.
+
+''What the vector set buys, all at once'':
+
+* ''The kahu stop deciding who belongs.'' They publish the VECTORS; membership DERIVES. Nobody gets admitted, and no act excludes anyone.
+* ''ADD runs automatic.'' A fresh upstream release joins by passing — no ceremony, no sharding, no decision. Only CHANGING the vectors costs anything, which seats the dear ceremony where it belongs.
+* ''The ratchet splits by DIRECTION rather than rate'' — ADD widens the set and can hurt nobody; DROP narrows it and puts someone out, so DROP alone takes the price and the long pre-announced notice.
+* ''Partial conformance gains a seat.'' A vessel passing an older vector set stands IN with reduced sovereignty rather than exiled — the //out of conformance, still in communion, on named authority, bounded and revocable// instrument that the older tradition ran as its most-used and this stack lacked.
+
+''AND IT ANSWERS THE LEGIBILITY WOUND.'' A published hash reads as a BROADCAST profession of allegiance — cheap, remote, and readable by any watcher, which names a conformance test an empire needs no registry to run. ''A vector runs as a CHALLENGE-RESPONSE'': one party hands an input, the other hands a parse. That proves membership to a PEER and to nobody else.
+
+> ''A vessel may prove conformance to a peer without proving it to a watcher.''
+
+''The residue, stated honestly.'' Vectors cost work, and every gap in them names a place two conforming vessels diverge. Someone AUTHORS them — the registry's table went and its editor stayed — so the set wants signing. And publishing the set's own digest would re-open the broadcast wound the challenge-response closed.
+
+<<~/ahu >>
+
 <<~ ahu #social-axis >>
 
 !! Social Axis — Delegation and Read

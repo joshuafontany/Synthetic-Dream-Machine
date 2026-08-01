@@ -275,25 +275,31 @@ export function oracleGenesisDocUrl(): AutomergeUrl {
 }
 
 /**
- * engineCid — content-CID of the engine region. A pure function of the TW5 core
- * version + its sha256 (which binds the core blob); deterministic, no doc bytes.
- * This IS the hearth true-name (G-D3) — a plugin change must NEVER perturb it.
+ * engineCid — content-CID of the engine region, and the hearth's true-name. A pure function of the
+ * core BLOB's sha256; deterministic, no doc bytes. A plugin change must NEVER perturb it.
+ *
+ * THE VERSION LABEL RIDES NOWHERE NEAR THIS PREIMAGE, deliberately. Folding a version string in beside
+ * the digest makes a pure RE-TAG — identical bytes, `5.5.0-prerelease` renamed `5.5.0` — mint a fresh
+ * true-name, which manufactures a schism out of an editorial act. The sha256 already binds every byte
+ * the label could describe; the label adds a false difference and no true one. `coreVersion` still
+ * rides the blob DESCRIPTOR for a human to read, where a wrong label misleads nobody's identity.
  */
-export function computeEngineCid(coreVersion: string, coreSha256: string): string {
-  return cidV1Sha256(utf8Bytes(`engine/v1\ncore-version:${coreVersion}\ncore-sha256:${coreSha256}`));
+export function computeEngineCid(_coreVersion: string, coreSha256: string): string {
+  return cidV1Sha256(utf8Bytes(`engine/v1\ncore-sha256:${coreSha256}`));
 }
 
 /**
- * pluginsCid — content-CID of the plugins region: the sorted {id,version,sha256}
- * triples, canonical-JSON. Sorted by id so plugin write-order never perturbs it.
+ * pluginsCid — content-CID of the plugins region: the sorted {id,sha256} PAIRS, canonical-JSON, sorted
+ * by id so write-order never perturbs it. Versions stay OUT for the same reason they leave the engine
+ * preimage — a re-tag must not read as a different composition.
  */
 export function computePluginsCid(
   plugins: readonly { readonly id: string; readonly version: string; readonly sha256: string }[],
 ): string {
-  const triples = plugins
-    .map((p) => ({ id: p.id, version: p.version, sha256: p.sha256 }))
+  const pairs = plugins
+    .map((p) => ({ id: p.id, sha256: p.sha256 }))
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-  return cidV1Sha256(utf8Bytes(`plugins/v1\n${JSON.stringify(triples)}`));
+  return cidV1Sha256(utf8Bytes(`plugins/v1\n${JSON.stringify(pairs)}`));
 }
 
 // ---------------------------------------------------------------------------

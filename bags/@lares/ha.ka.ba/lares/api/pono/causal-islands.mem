@@ -320,7 +320,11 @@ The transferable law:
 
 Two parties holding positions at different epochs cannot reconcile them by comparing dates. They must first agree ''WHICH MODEL VERSION'' mediates, and different versions return different answers. ''The model carries the authority; the timestamp only addresses it.'' A timestamp that decides reads as a device clock wearing a frame's clothes; a timestamp that indexes a shared model reads as an ordinary coordinate.
 
-''The failure mode to expect never reads as corruption.'' Drift between epochs produces ''well-formed garbage'' — right shape, right digits, plausible bounds, and nothing in the data reveals the fault. It passes every structural check a replica can run.
+''AND ONE DISTINCTION DECIDES WHICH CHANGES MAY RUN DUAL.'' A MESSAGE carries its own label, so a reader on either version converts and reads it — dual validity holds for data at rest indefinitely. A RENDEZVOUS demands one agreed instant, and no label saves it: a quorum, an epoch boundary, a joint signature, a synchronised rotation. ''Dual validity does not preserve a rendezvous; it SPLITS one.'' Four centuries of calendar reform found the same seam — parties may correspond across versions forever and cannot keep a shared feast on two reckonings. Audit every operation for which it holds before granting it a dual period.
+
+''AND A VERSION ADVANCE MUST ACTUATE NOTHING.'' Both historical reforms had to legislate this SEPARATELY and explicitly — the deleted days did not count toward loans, rents, leases, or the attainment of majority, which stayed on their original days. ''A label alone never carried the dual period.'' So: an advance MUST NOT move any deadline, expiry, vesting, or quorum committed under the prior version, and the residue outlives the reform — a non-actuation clause from 1750 still fixes a national tax year today.
+
+''The failure mode to expect never reads as corruption.''' Drift between epochs produces ''well-formed garbage'' — right shape, right digits, plausible bounds, and nothing in the data reveals the fault. It passes every structural check a replica can run.
 
 <<~/ahu >>
 
