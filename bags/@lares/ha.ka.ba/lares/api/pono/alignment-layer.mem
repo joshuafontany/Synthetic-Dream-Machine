@@ -77,7 +77,7 @@ bags like any other content, evaluated locally against a per-island trust root.
 *** //relay// — I will not relay this actor's CRDT ops to others (SSB semantics: "no longer
      willing to be a peer that shares their posts"). This is the ''Beelay-layer'' enforcement point.
 # ''`vouch`'' — a signed invitation/endorsement edge. Membership in a Cabal/Nexus is by vouch;
-   the vouch edge is recorded. Severing a vouch retroactively prunes the invitee's standing in
+   the vouch edge is recorded. Severing a vouch stops RE-LIFTING the invitee's standing in
    the voucher's subgraph. This edge carries the Sybil defense (see #sybil).
 # ''`label`'' — a signed annotation over a subject (`suspected-lemure`, `corrupt-crdt-head`,
    `off-island`, `talk-story-flagged`, …). Adopts the ATProto-labeler + FIRES model:
@@ -120,7 +120,7 @@ We refuse proof-of-work, proof-of-stake, and central registries, so the scarce r
 ''social capital''. Membership is by ''vouch'' (Persea / SybilGuard lineage): a new principal
 is not trusted by hop-distance until vouched in, and the join graph doubles as the trust graph. A flood
 of lemures holding valid Keyhive capabilities is bounded by //who vouched them in// — and that
-edge is severable, which retroactively prunes the whole subtree's standing. The honest social
+edge is severable, which stops the whole subtree's standing from RENEWING — it expires on its own interval rather than getting struck, so no hand ever lowers a party who never transacted with the severing hand. The honest social
 graph's expander property does the work; you never count identities or make them expensive, you
 make them ''socially reachable only through accountable edges''.
 
@@ -191,7 +191,7 @@ only the //root// and the //default subscriptions// change:
 The veil's cost-dial reads as the ''WHO-plane membership face'' that [[group-as-closure|group-as-closure.md]] now states whole. Three connections hold; the cost-dial model above stands unchanged — these links only name where it meets the newer formalizations:
 
 * ''The vouch carries the signed membership edge.'' A `vouch` (#sybil) rides one signed, severable edge; a group resolves as the reciprocal-edge closure over those vouches — evaluated, never instantiated (group-as-closure#core-claim). Refuse the vouch and the principal stays at the floor: admitted to no cabal, surfaced by no root — the no-vouch → anergy → stay-at-floor reading the closure model formalizes.
-* ''Durable eviction raises a kāpae on the membership stack.'' Severing a vouch retroactively prunes the subtree (#sybil); the durable form raises a [[kāpae|kapae.md]] (kāpae#membership-sense) — a remove-wins shadow that defeats a partitioned re-vouch — paired with key-rotation forward (the epoch-lease), so the evicted edge reads no future tail.
+* ''Durable eviction raises a kāpae on the membership stack.'' Severing a vouch ends the subtree's renewal (#sybil); the durable form raises a [[kāpae|kapae.md]] (kāpae#membership-sense) — a remove-wins shadow that defeats a partitioned re-vouch — paired with key-rotation forward (the epoch-lease), so the evicted edge reads no future tail.
 * ''The siege supplies the cadence.'' Siege-resilience carries the refresh that keeps a stolen vouch-edge from compounding across centuries — PSS re-randomization on a 24-hour floor — plus its correlated-compromise warning: a monoculture lets one exploit fell every vouch at once, so node-config diversity guards the cost-dial before any refresh cadence buys time.
 
 <<~/ahu >>

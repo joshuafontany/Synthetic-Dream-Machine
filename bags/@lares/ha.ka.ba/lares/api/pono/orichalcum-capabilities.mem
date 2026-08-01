@@ -75,7 +75,6 @@ fields      = ["alias", "tier", "host"]
 description = "local trust alias — bootstrap identity before full DID ceremony"
 ```
 
-A person is modeled as a group of device principals.
 A wiki island, meme, or edge island may itself act as a group principal with its own access graph.
 These are not the same object. Keep device identity below operator identity.
 

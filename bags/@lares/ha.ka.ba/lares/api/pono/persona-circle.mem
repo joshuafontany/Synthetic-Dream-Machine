@@ -133,6 +133,8 @@ over //all// a human's handles IS that root — so a me-Circle collects the hand
 human keeps as many compartments as their life demands. The vault stands at the top; the meat-brain holds the
 only join between compartments, and it never rides any wire.
 
+''AND THE REASON RUNS STRUCTURAL, never convenience.'' The vault stays off every wire because ''no constructor for a human exists anywhere in the model'' — no type, no field, no identifier meaning //the person//. Model Agnosticism makes that a law rather than a limitation, so the living human stands as a SINGULARITY the system MAY NOT resolve, and every rung names a vessel, a persona, a Handle or a dyad instead. ''Read the other way, a later hand with a better linking scheme could argue the vault back onto the axis''; read this way, there is nothing to link, because the person never entered the data. ''We map the relations precisely because relations carry the only thing that crosses the hole.''
+
 ''A vessel joins each handle-group under a PER-HANDLE PSEUDONYMOUS CREDENTIAL, never its raw device key.'' A
 vessel that joins by its ''immutable device key'' puts that one key on every handle-group's roster, so two
 handles on one device share a roster entry — and by the co-membership law (RFC 9420; Keyhive), anyone in
