@@ -1,5 +1,5 @@
 /**
- * cabal-realm-charter — the VEIL-PUBLIC shore.
+ * realm-glamour — the VEIL-PUBLIC shore.
  *
  * Proves the disclosure boundary (canon #the-realm "shared charter, read-scope"):
  *   · the CHARTER rides veil-public — name + bearing + deliberately-published meta.
@@ -12,9 +12,9 @@
 
 import { describe, test, expect } from "vitest";
 import {
-  projectCabalRealmCharter,
-  cabalRealmCharterSnapshot,
-  cabalRealmCharterExporter,
+  projectRealmGlamour,
+  realmGlamourSnapshot,
+  realmGlamourExporter,
   CABAL_REALM_VEIL_PUBLIC_SET,
   type CabalRealm,
   type CabalRealmPublishState,
@@ -39,9 +39,9 @@ const FULL_STATE: CabalRealmPublishState = {
   substrateContent: SECRET_SUBSTRATE,
 };
 
-describe("projectCabalRealmCharter — the veil-public shore", () => {
+describe("projectRealmGlamour — the veil-public shore", () => {
   test("keeps ONLY the charter fields — name, bearing, published meta", () => {
-    const charter = projectCabalRealmCharter(FULL_STATE);
+    const charter = projectRealmGlamour(FULL_STATE);
     expect(charter).toEqual({
       realmDocIdHex: REALM.realmDocIdHex,
       genesisUri:    REALM.genesisUri,
@@ -52,7 +52,7 @@ describe("projectCabalRealmCharter — the veil-public shore", () => {
   });
 
   test("THE VEIL HOLDS — members-only roster + substrate cannot leak through", () => {
-    const charter = projectCabalRealmCharter(FULL_STATE);
+    const charter = projectRealmGlamour(FULL_STATE);
     const keys = Object.keys(charter);
 
     // No members-only field names cross.
@@ -72,12 +72,12 @@ describe("projectCabalRealmCharter — the veil-public shore", () => {
 
   test("never derives memberCount from the roster — count omitted by default", () => {
     // A roster of 3 rides the input, yet NO count crosses (conservative default).
-    const charter = projectCabalRealmCharter(FULL_STATE);
+    const charter = projectRealmGlamour(FULL_STATE);
     expect(charter.memberCount).toBeUndefined();
   });
 
   test("a coarse, EXPLICITLY-published count crosses (opt-in only)", () => {
-    const charter = projectCabalRealmCharter({
+    const charter = projectRealmGlamour({
       ...FULL_STATE,
       meta: { ...FULL_STATE.meta, memberCount: 5 },  // realm chooses to advertise a coarse figure
     });
@@ -85,17 +85,17 @@ describe("projectCabalRealmCharter — the veil-public shore", () => {
   });
 
   test("a name-only realm projects just name + bearing (optional meta omitted)", () => {
-    const charter = projectCabalRealmCharter({ realm: REALM });
+    const charter = projectRealmGlamour({ realm: REALM });
     expect(charter).toEqual({ realmDocIdHex: REALM.realmDocIdHex, genesisUri: REALM.genesisUri });
     // No undefined-valued keys (so it loads cleanly into Automerge).
     expect(Object.values(charter).every((v) => v !== undefined)).toBe(true);
   });
 });
 
-describe("cabalRealmCharterSnapshot — content-addressed + deterministic", () => {
+describe("realmGlamourSnapshot — content-addressed + deterministic", () => {
   test("round-trips the public fields through the snapshot bytes", async () => {
-    const charter = projectCabalRealmCharter(FULL_STATE);
-    const snap = await cabalRealmCharterSnapshot(charter);
+    const charter = projectRealmGlamour(FULL_STATE);
+    const snap = await realmGlamourSnapshot(charter);
     const restored = automergeLoad<Record<string, unknown>>(snap.bytes);
     expect(restored.realmDocIdHex).toBe(REALM.realmDocIdHex);
     expect(restored.genesisUri).toBe(REALM.genesisUri);
@@ -103,8 +103,8 @@ describe("cabalRealmCharterSnapshot — content-addressed + deterministic", () =
   });
 
   test("deterministic — the same charter yields the same cid", async () => {
-    const a = await cabalRealmCharterSnapshot(projectCabalRealmCharter(FULL_STATE));
-    const b = await cabalRealmCharterSnapshot(projectCabalRealmCharter(FULL_STATE));
+    const a = await realmGlamourSnapshot(projectRealmGlamour(FULL_STATE));
+    const b = await realmGlamourSnapshot(projectRealmGlamour(FULL_STATE));
     expect(a.cid).toBe(b.cid);
     expect(a.cid).toMatch(/^[0-9a-f]{64}$/);
   });
@@ -112,7 +112,7 @@ describe("cabalRealmCharterSnapshot — content-addressed + deterministic", () =
   test("THE VEIL HOLDS ON THE WIRE — no secret survives into the snapshot bytes", async () => {
     // Build the snapshot from the FULL publish-state via the read-face exporter — the
     // exact path a served charter takes. The serialized bytes must carry NO secret.
-    const exporter = cabalRealmCharterExporter(FULL_STATE);
+    const exporter = realmGlamourExporter(FULL_STATE);
     const snap = await exporter(/* live doc — ignored for a static charter */);
     const bytes = Buffer.from(snap.bytes).toString("latin1");
     for (const member of SECRET_ROSTER) expect(bytes).not.toContain(member);

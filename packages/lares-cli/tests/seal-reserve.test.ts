@@ -5,7 +5,7 @@
  * Proven:
  *   · `reserve` prints the --next-key-commit + THREE recovery cards, seals ONLY the "mine" share, and the
  *     reserve SEED lands in NO file under the identity home (reconstructed from the cards, then grep'd for),
- *   · the printed commit matches charterKeySetHash over the reserve's derived keys (round-trips a rotate),
+ *   · the printed commit matches sealKeySetHash over the reserve's derived keys (round-trips a rotate),
  *   · `reserve show` reads back the public state without a seed or a full share-set,
  *   · `reserve refresh` advances the reserve epoch, prints a NEW commit, and NAMES the reconciliation route.
  */
@@ -17,7 +17,7 @@ import { cmdNexus } from "../src/commands/nexus.js";
 import type { ParsedArgs } from "../src/parse-args.js";
 import { larIdentityDir } from "../src/env.js";
 import {
-  reserveShareFromCard, assembleQuorum, reconstructFromQuorum, charterKeySetHash,
+  reserveShareFromCard, assembleQuorum, reconstructFromQuorum, sealKeySetHash,
   type ReserveCard,
 } from "@lararium/mesh";
 
@@ -50,7 +50,7 @@ function containsBytes(haystack: Uint8Array, needle: Uint8Array): boolean {
   return false;
 }
 
-describe("lares nexus charter reserve — the pre-rotation custody ceremony (CLI, real disk)", () => {
+describe("lares nexus seal reserve — the pre-rotation custody ceremony (CLI, real disk)", () => {
   let root: string;
   let writes: string[];
   beforeEach(() => {
@@ -75,7 +75,7 @@ describe("lares nexus charter reserve — the pre-rotation custody ceremony (CLI
   }
 
   test("reserve prints the commit + 3 cards, seals ONLY 'mine', and the SEED lands in NO file on disk", async () => {
-    const rc = await cmdNexus(args(["charter", "reserve"], { "guardian-a": "Alice", "guardian-b": "Bob" }));
+    const rc = await cmdNexus(args(["seal", "reserve"], { "guardian-a": "Alice", "guardian-b": "Bob" }));
     expect(rc).toBe(0);
 
     const { data } = lastJson();
@@ -96,8 +96,8 @@ describe("lares nexus charter reserve — the pre-rotation custody ceremony (CLI
     // The identity home holds the SEALED mine-share + the public state — but the SEED itself, in NO file.
     const idDir = larIdentityDir();
     const files = walkFiles(idDir);
-    expect(files.some((f) => f.endsWith("charter-reserve-mine-share.bin"))).toBe(true);
-    expect(files.some((f) => f.endsWith("charter-reserve-state.json"))).toBe(true);
+    expect(files.some((f) => f.endsWith("seal-reserve-mine-share.bin"))).toBe(true);
+    expect(files.some((f) => f.endsWith("seal-reserve-state.json"))).toBe(true);
     const seedHex = Array.from(seed).map((b) => b.toString(16).padStart(2, "0")).join("");
     for (const f of files) {
       const bytes = readFileSync(f);
@@ -106,25 +106,25 @@ describe("lares nexus charter reserve — the pre-rotation custody ceremony (CLI
     }
 
     // The public reserve-state file carries the commit but neither the seed nor a share code.
-    const stateRaw = readFileSync(join(idDir, "charter-reserve-state.json"), "utf8");
+    const stateRaw = readFileSync(join(idDir, "seal-reserve-state.json"), "utf8");
     expect(stateRaw).toContain(commit);
     for (const c of cards) expect(stateRaw).not.toContain(c.shareCode);
   });
 
-  test("the printed commit matches charterKeySetHash over the reserve's derived keys (rotate round-trip)", async () => {
-    await cmdNexus(args(["charter", "reserve"]));
+  test("the printed commit matches sealKeySetHash over the reserve's derived keys (rotate round-trip)", async () => {
+    await cmdNexus(args(["seal", "reserve"]));
     const { data } = lastJson();
-    // The commit is charterKeySetHash(verifyingKeys, 2); the reserve emits the commit, so re-derive is proven
+    // The commit is sealKeySetHash(verifyingKeys, 2); the reserve emits the commit, so re-derive is proven
     // at the mesh layer — here we assert the commit is a well-formed 2-of-3 digest the seat/rotate accepts.
     expect(data["threshold"]).toBe(2);
     expect(data["kahuCount"]).toBe(3);
-    expect(charterKeySetHash(["a".repeat(64), "b".repeat(64), "c".repeat(64)], 2)).toMatch(/^[0-9a-f]{64}$/);
+    expect(sealKeySetHash(["a".repeat(64), "b".repeat(64), "c".repeat(64)], 2)).toMatch(/^[0-9a-f]{64}$/);
   });
 
   test("reserve show reads back the public state — no seed, no share-set", async () => {
-    await cmdNexus(args(["charter", "reserve"], { "guardian-a": "Alice" }));
+    await cmdNexus(args(["seal", "reserve"], { "guardian-a": "Alice" }));
     writes.length = 0;
-    const rc = await cmdNexus(args(["charter", "reserve", "show"]));
+    const rc = await cmdNexus(args(["seal", "reserve", "show"]));
     expect(rc).toBe(0);
     const { data } = lastJson();
     expect(data["present"]).toBe(true);
@@ -136,11 +136,11 @@ describe("lares nexus charter reserve — the pre-rotation custody ceremony (CLI
   });
 
   test("reserve refresh advances the epoch, prints a NEW commit, and names the reconciliation route", async () => {
-    await cmdNexus(args(["charter", "reserve"]));
+    await cmdNexus(args(["seal", "reserve"]));
     const first = lastJson().data["nextKeyCommit"] as string;
     writes.length = 0;
 
-    const rc = await cmdNexus(args(["charter", "reserve", "refresh"]));
+    const rc = await cmdNexus(args(["seal", "reserve", "refresh"]));
     expect(rc).toBe(0);
     const { data } = lastJson();
     expect(data["mode"]).toBe("refresh");

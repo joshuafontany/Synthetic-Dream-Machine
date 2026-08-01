@@ -1,8 +1,8 @@
 /**
- * charter-reserve — the compromise-resistant custody for the charter pre-rotation's NEXT key-set.
+ * seal-reserve — the compromise-resistant custody for the charter pre-rotation's NEXT key-set.
  *
  * KERI pre-rotation commits an epoch to a DIGEST of the next epoch's keys before those keys ever sign
- * (wax-stamp: `charterKeySetHash`, `nextKeyCommit`). This module forges the seed those next keys derive
+ * (wax-stamp: `sealKeySetHash`, `nextKeyCommit`). This module forges the seed those next keys derive
  * FROM, and custodies it so an operator-full-compromise reveals nothing:
  *
  *   · the reserve seed rides a SEPARATE 32-byte CSPRNG seed — NEVER the live persona-root signing seed —
@@ -25,11 +25,11 @@
  * ONE share → nothing. (CABAL-SCALE evolution surfaced to the operator: each kahu holding their OWN reserve
  * seed splits this shore per-kahu; the founding one-seed case sits at handleIndex 0 of that generalization.)
  *
- * Meme: lar:///ha.ka.ba/lararium/api/charter-reserve
+ * Meme: lar:///ha.ka.ba/lararium/api/seal-reserve
  */
 
 import { derivePersonaKeypair, HARDENED_OFFSET } from "./persona-hd.js";
-import { charterKeySetHash } from "./wax-stamp.js";
+import { sealKeySetHash } from "./wax-stamp.js";
 import type { RecoveryShare } from "./recovery-share.js";
 import {
   splitToGuardianCards, guardianShareFromCard,
@@ -53,7 +53,7 @@ export const RESERVE_SEED_BYTES = 32;
 export const RESERVE_DOMAIN_INDEX = 0x0c_0a_17; // < HARDENED_OFFSET (asserted below); "charter" mnemonic
 
 if (RESERVE_DOMAIN_INDEX >= HARDENED_OFFSET) {
-  throw new Error("charter-reserve: RESERVE_DOMAIN_INDEX must be a RAW index below the hardened ceiling");
+  throw new Error("seal-reserve: RESERVE_DOMAIN_INDEX must be a RAW index below the hardened ceiling");
 }
 
 /**
@@ -82,7 +82,7 @@ export interface ReserveKeySet {
  */
 export async function deriveReserveKeySet(reserveSeed: Uint8Array, reserveEpoch: number): Promise<ReserveKeySet> {
   if (!Number.isInteger(reserveEpoch) || reserveEpoch < 0 || reserveEpoch >= HARDENED_OFFSET) {
-    throw new RangeError(`charter-reserve: reserveEpoch out of range: ${reserveEpoch}`);
+    throw new RangeError(`seal-reserve: reserveEpoch out of range: ${reserveEpoch}`);
   }
   const verifyingKeys: string[] = [];
   const signingKeys: string[] = [];
@@ -98,11 +98,11 @@ export async function deriveReserveKeySet(reserveSeed: Uint8Array, reserveEpoch:
 
 /**
  * The public pre-rotation commitment for a reserve key-set — the `--next-key-commit` value the operator
- * feeds `nexus charter seat`. Folds the sorted, de-duped verifying keys AND the threshold (charterKeySetHash),
+ * feeds `nexus seal seat`. Folds the sorted, de-duped verifying keys AND the threshold (sealKeySetHash),
  * so the digest is order-blind and recovers no key. One-way: it commits the next keys without revealing them.
  */
 export function reserveNextKeyCommit(verifyingKeys: readonly string[], threshold = RESERVE_THRESHOLD): string {
-  return charterKeySetHash(verifyingKeys, threshold);
+  return sealKeySetHash(verifyingKeys, threshold);
 }
 
 // ── The three recovery cards — the SHARED guardian-card primitive, one card shape for both keels ──────

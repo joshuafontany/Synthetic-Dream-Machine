@@ -241,15 +241,15 @@ export type { HopRender } from "./persona-admit-flow.js";
 export {
   readNexusCharterDoc, writeNexusCharterDoc, renderNexusCharterDoc,
   nexusCharterDocPath, nexusCharterDocRelPath, NEXUS_BAG,
-} from "./nexus-charter-doc.js";
+} from "./nexus-doc.js";
 export { loadLeafIdentity } from "./leaf-identity.js";
 export type { LeafIdentity } from "./leaf-identity.js";
-// The charter-reserve node adapter — seals the operator's "mine" share + records the PUBLIC reserve state.
+// The seal-reserve node adapter — seals the operator's "mine" share + records the PUBLIC reserve state.
 export {
   sealReserveMineShare, loadReserveMineShare, writeCharterReserveState, readCharterReserveState,
   reserveMineSharePath, reserveStatePath,
-} from "./charter-reserve-store.js";
-export type { CharterReserveState } from "./charter-reserve-store.js";
+} from "./seal-reserve-store.js";
+export type { SealReserveState } from "./seal-reserve-store.js";
 export { VerbDispatcher, VerbTable } from "@lararium/tw5";
 export type { VerbReactor, VerbContext, VerbDispatcherOptions } from "@lararium/tw5";
 export { heedSummons } from "@lararium/tw5";

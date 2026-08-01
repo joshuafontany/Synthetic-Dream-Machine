@@ -1,8 +1,8 @@
 /**
- * charter-reserve — the pre-rotation reserve keel's crypto floor, proven pure:
+ * seal-reserve — the pre-rotation reserve keel's crypto floor, proven pure:
  *   · the next key-set derives HARDENED + reproducibly from the reserve seed (SLIP-0010), and NOT from the
  *     live signing seed (a separate seed yields a disjoint key-set),
- *   · the pre-rotation commit matches charterKeySetHash over the derived verifying keys,
+ *   · the pre-rotation commit matches sealKeySetHash over the derived verifying keys,
  *   · the reserve seed splits 2-of-3 and ANY two DISTINCT custodians reconstruct it — the guardians
  *     ({guardian-a, guardian-b}) recover WITHOUT the operator,
  *   · FAIL CLOSED: one share reconstructs nothing (no quorum), a tampered card fails the checksum,
@@ -13,7 +13,7 @@ import { describe, test, expect } from "vitest";
 import {
   generateReserveSeed, deriveReserveKeySet, reserveNextKeyCommit, splitReserveSeed, reserveShareFromCard,
   confirmationPhrase, RESERVE_THRESHOLD, RESERVE_KAHU_COUNT,
-  charterKeySetHash, assembleQuorum, reconstructFromQuorum,
+  sealKeySetHash, assembleQuorum, reconstructFromQuorum,
   type ReserveCard,
 } from "../src/index.js";
 import type { RandomProvider } from "../src/crypto.js";
@@ -33,7 +33,7 @@ function counterRng(start = 1): RandomProvider {
 const EPOCH = 1;
 const seedOf = (v: number): Uint8Array => new Uint8Array(32).fill(v);
 
-describe("charter-reserve — hardened next-key derivation", () => {
+describe("seal-reserve — hardened next-key derivation", () => {
   test("derives THREE 64-hex keypairs, reproducibly from the seed", async () => {
     const seed = seedOf(7);
     const a = await deriveReserveKeySet(seed, EPOCH);
@@ -57,13 +57,13 @@ describe("charter-reserve — hardened next-key derivation", () => {
     expect(e1.verifyingKeys).not.toEqual(e2.verifyingKeys);
   });
 
-  test("the pre-rotation commit matches charterKeySetHash over the derived verifying keys", async () => {
+  test("the pre-rotation commit matches sealKeySetHash over the derived verifying keys", async () => {
     const { verifyingKeys } = await deriveReserveKeySet(seedOf(7), EPOCH);
-    expect(reserveNextKeyCommit(verifyingKeys)).toBe(charterKeySetHash(verifyingKeys, RESERVE_THRESHOLD));
+    expect(reserveNextKeyCommit(verifyingKeys)).toBe(sealKeySetHash(verifyingKeys, RESERVE_THRESHOLD));
   });
 });
 
-describe("charter-reserve — the 2-of-3 split + reconstruct", () => {
+describe("seal-reserve — the 2-of-3 split + reconstruct", () => {
   const split = (seed: Uint8Array): { cards: ReserveCard[]; mineShare: ReturnType<typeof splitReserveSeed>["mineShare"] } =>
     splitReserveSeed(seed, "Guardian A", "Guardian B", EPOCH, counterRng());
 

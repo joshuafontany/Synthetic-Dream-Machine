@@ -31,10 +31,10 @@ import {
   carriageEntriesFromBoard, writeCarriageEntry, signCarriageQuorum, signCarriageContract,
   carriageEntryCounts, foldCarriageSet, holdsCarriage, foundingRoster,
   carriageDocUrl, materializeSharedLarDoc, ed25519SignerFromSeed,
-  type CarriageAction, type CarriageEntry, type KahuCharterRoster, type QuorumSignature,
+  type CarriageAction, type CarriageEntry, type KahuRoster, type QuorumSignature,
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
-import { readNexusCharterDoc } from "../nexus-charter-doc.js";
+import { readNexusCharterDoc } from "../nexus-doc.js";
 import {
   listPersonaRoots, generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
   loadVesselVerifyingKey,
@@ -62,7 +62,7 @@ export interface NexusContractResult {
   readonly nym:             string;
   readonly version:         number;
   readonly priorVersion:    number | null;
-  readonly charterEpochCid: string;
+  readonly sealEpochCid: string;
   readonly threshold:       number;
   readonly signers:         readonly string[];
   /** How the operator's consent arrived: "supplied" (out-of-band token), "self" (held seed), or "n/a" (revoke). */
@@ -73,11 +73,11 @@ export interface NexusContractResult {
 }
 
 /** Read the seated roster off disk, FAILING CLOSED when no live quorum stands to root an admit on. */
-function seatedRosterOrRefuse(bagsDir: string): KahuCharterRoster {
+function seatedRosterOrRefuse(bagsDir: string): KahuRoster {
   const roster = foundingRoster(readNexusCharterDoc(bagsDir));
-  if (roster.charterEpochCid.length === 0 || roster.keys.length < roster.threshold) {
+  if (roster.sealEpochCid.length === 0 || roster.keys.length < roster.threshold) {
     throw new NexusContractError(
-      "no seated founding-kahu quorum to root an admit on — run `lares nexus charter seat` first (the members-registry stays inert until a quorum stands).",
+      "no seated founding-kahu quorum to root an admit on — run `lares nexus seal seat` first (the members-registry stays inert until a quorum stands).",
     );
   }
   return roster;
@@ -89,7 +89,7 @@ function seatedRosterOrRefuse(bagsDir: string): KahuCharterRoster {
  * ever minted). Mirrors nexus-kapae `selectHeldQuorumSigners`.
  */
 async function selectHeldQuorumSigners(
-  storageDir: string, roster: KahuCharterRoster,
+  storageDir: string, roster: KahuRoster,
 ): Promise<Array<{ handleIndex: number; verifyingKey: string }>> {
   const rosterKeys = new Set(roster.keys.map((k) => k.toLowerCase()));
   const indices    = await listPersonaRoots(storageDir);
@@ -119,7 +119,7 @@ async function selectHeldQuorumSigners(
  * Neither → REFUSE (never admit an operator that has not consented to carriage).
  */
 async function resolveContractIn(
-  opts: NexusContractOptions, storageDir: string, nym: string, charterEpochCid: string,
+  opts: NexusContractOptions, storageDir: string, nym: string, sealEpochCid: string,
 ): Promise<{ contractSig: QuorumSignature; how: "supplied" | "self" }> {
   if (opts.contractSig) {
     return { contractSig: { signer: nym, sig: opts.contractSig.trim().toLowerCase() }, how: "supplied" };
@@ -129,7 +129,7 @@ async function resolveContractIn(
     const root = await generateOrLoadPersonaGroupRoot(storageDir, handleIndex);
     if (root.verifyingKey.toLowerCase() !== nym) continue;
     const contractSig = await signCarriageContract(
-      nym, charterEpochCid, ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, handleIndex)),
+      nym, sealEpochCid, ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, handleIndex)),
     );
     return { contractSig, how: "self" };
   }
@@ -158,7 +158,7 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
   // The contract-in — REQUIRED for an admit, none for a revoke.
   let contract: { contractSig: QuorumSignature; how: "supplied" | "self" } | null = null;
   if (opts.action === "admit") {
-    contract = await resolveContractIn(opts, storageDir, nym, roster.charterEpochCid);
+    contract = await resolveContractIn(opts, storageDir, nym, roster.sealEpochCid);
   }
 
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
@@ -175,7 +175,7 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
       sign:   ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, s.handleIndex)),
     })));
     const entry: CarriageEntry = await signCarriageQuorum(
-      { nym, action: opts.action, version, charterEpochCid: roster.charterEpochCid },
+      { nym, action: opts.action, version, sealEpochCid: roster.sealEpochCid },
       signers,
       contract?.contractSig,
     );
@@ -198,7 +198,7 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
 
     return {
       action: opts.action, nym, version, priorVersion,
-      charterEpochCid: roster.charterEpochCid, threshold: roster.threshold,
+      sealEpochCid: roster.sealEpochCid, threshold: roster.threshold,
       signers: selected.map((s) => s.verifyingKey),
       contractIn: opts.action === "admit" ? contract!.how : "n/a",
       boardUrl, memberNow,
@@ -216,22 +216,22 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
  */
 export async function runNexusAcceptCarriage(opts: {
   handleIndex: number; bagsDir: string; storageDir?: string;
-}): Promise<{ nym: string; charterEpochCid: string; contractSig: string }> {
+}): Promise<{ nym: string; sealEpochCid: string; contractSig: string }> {
   const storageDir = opts.storageDir ?? larDataDir();
   const roster     = foundingRoster(readNexusCharterDoc(opts.bagsDir));
-  if (roster.charterEpochCid.length === 0) {
+  if (roster.sealEpochCid.length === 0) {
     throw new NexusContractError("no seated charter epoch to bind carriage consent to — the Nexus must seat its charter first.");
   }
   const root = await generateOrLoadPersonaGroupRoot(storageDir, opts.handleIndex);
   const nym  = root.verifyingKey.toLowerCase();
   const sig  = await signCarriageContract(
-    nym, roster.charterEpochCid, ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, opts.handleIndex)),
+    nym, roster.sealEpochCid, ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, opts.handleIndex)),
   );
-  return { nym, charterEpochCid: roster.charterEpochCid, contractSig: sig.sig };
+  return { nym, sealEpochCid: roster.sealEpochCid, contractSig: sig.sig };
 }
 
 export interface NexusMembersListResult {
-  readonly charterEpochCid: string;
+  readonly sealEpochCid: string;
   readonly threshold:       number;
   readonly seatedKeys:      number;
   /** The currently-admitted member nyms (folded + quorum + contract-in verified against the seated roster). */
@@ -252,7 +252,7 @@ export async function runNexusMembersList(opts: { bagsDir: string; storageDir?: 
     const entries = carriageEntriesFromBoard(handle.doc());
     const folded  = await foldCarriageSet(entries, roster);
     return {
-      charterEpochCid: roster.charterEpochCid,
+      sealEpochCid: roster.sealEpochCid,
       threshold:       roster.threshold,
       seatedKeys:      roster.keys.length,
       members:         [...folded].map((k) => k.toLowerCase()).sort(),

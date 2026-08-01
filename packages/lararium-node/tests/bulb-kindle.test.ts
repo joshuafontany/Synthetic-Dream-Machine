@@ -45,7 +45,7 @@ function fixtureBulb(): BulbArtifact {
   const artifact = buildGenesisDoc(inputs);
   return {
     seed: artifact.seed, casManifest: artifact.casManifest, casEntries: artifact.casEntries,
-    bootstrap: { note: "all-public boot pointers" }, charterEpochCid: "epoch-fixture-cid",
+    bootstrap: { note: "all-public boot pointers" }, sealEpochCid: "epoch-fixture-cid",
   };
 }
 
@@ -84,7 +84,7 @@ describe("BULB — serve a held snapshot; kindle a sovereign hearth (serve fire,
 
     const read = readBulbArtifact(genesisDir, "epoch-fixture-cid");
     expect(read).not.toBeNull();
-    expect(read!.charterEpochCid).toBe("epoch-fixture-cid");
+    expect(read!.sealEpochCid).toBe("epoch-fixture-cid");
     expect(readGenesisSeed(genesisDir)?.format).toBe(bulb.seed.format);
 
     // buildBulb → assembleBulb re-verifies every blob against its cid.
@@ -111,7 +111,7 @@ describe("BULB — serve a held snapshot; kindle a sovereign hearth (serve fire,
     // PULL over real HTTP — assembleBulb re-verifies content-address on every blob.
     const pulled = await pullBulb(httpBulbTransport(`http://127.0.0.1:${port}`));
     expect(pulled.seed.actorSeed).toBe(bulb.seed.actorSeed);
-    expect(pulled.charterEpochCid).toBe("epoch-fixture-cid");
+    expect(pulled.sealEpochCid).toBe("epoch-fixture-cid");
 
     // KINDLE — the cold device mints its OWN key; the ceremony builds on it.
     process.env["LAR_ROOT"] = mkDir("root-serve");

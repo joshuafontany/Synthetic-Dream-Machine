@@ -18,7 +18,7 @@ import { hex, hexToBytes } from "../src/crypto.js";
 import {
   signAntigenEntry, antigenEntryBytes, foldAntigenSet, isKapaed,
   makeMultiSigQuorumVerifier, denyingQuorumVerifier,
-  type KapaeAntigenEntry, type KahuCharterRoster,
+  type KapaeAntigenEntry, type KahuRoster,
 } from "../src/kapae-antigen.js";
 
 const EPOCH = "epoch-cid-genesis";
@@ -36,17 +36,17 @@ const pubOf    = (seed: Uint8Array) => ed.getPublicKeyAsync(seed).then(hex);
 const verifier = makeMultiSigQuorumVerifier();
 const VICTIM   = "deadbeef".repeat(8);   // the presenter nym under ban — any hex handle
 
-async function roster(): Promise<KahuCharterRoster> {
+async function roster(): Promise<KahuRoster> {
   const keys = await Promise.all([pubOf(SEEDS.guru), pubOf(SEEDS.telarus), pubOf(SEEDS.lindwyrm)]);
-  return { keys, threshold: 2, charterEpochCid: EPOCH };
+  return { keys, threshold: 2, sealEpochCid: EPOCH };
 }
 
-async function banEntry(over: Partial<Pick<KapaeAntigenEntry, "action" | "version" | "charterEpochCid" | "nym">> = {},
+async function banEntry(over: Partial<Pick<KapaeAntigenEntry, "action" | "version" | "sealEpochCid" | "nym">> = {},
                         seeds: Uint8Array[] = [SEEDS.guru, SEEDS.telarus]): Promise<KapaeAntigenEntry> {
   const signers = await Promise.all(seeds.map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
   return signAntigenEntry({
     nym: over.nym ?? VICTIM, action: over.action ?? "kapae",
-    version: over.version ?? 1, charterEpochCid: over.charterEpochCid ?? EPOCH,
+    version: over.version ?? 1, sealEpochCid: over.sealEpochCid ?? EPOCH,
   }, signers);
 }
 
@@ -88,12 +88,12 @@ describe("makeMultiSigQuorumVerifier — the 2-of-3 quorum", () => {
 
   test("an entry rooting on the WRONG charter epoch is ignored", async () => {
     const r = await roster();
-    const set = await foldAntigenSet([await banEntry({ charterEpochCid: "some-other-epoch" })], r, verifier);
+    const set = await foldAntigenSet([await banEntry({ sealEpochCid: "some-other-epoch" })], r, verifier);
     expect(isKapaed(VICTIM, set)).toBe(false);
   });
 
   test("an unbound (empty-key) roster fails closed", async () => {
-    const empty: KahuCharterRoster = { keys: [], threshold: 2, charterEpochCid: EPOCH };
+    const empty: KahuRoster = { keys: [], threshold: 2, sealEpochCid: EPOCH };
     const set = await foldAntigenSet([await banEntry()], empty, verifier);
     expect(isKapaed(VICTIM, set)).toBe(false);
   });
@@ -160,7 +160,7 @@ describe("antigenEntryBytes — canonical + domain", () => {
 
   test("the verifier REFUSES a foreign-domain entry even when its quorum signs perfectly over its own bytes", async () => {
     const r = await roster();
-    const act = { nym: VICTIM, action: "kapae" as const, version: 1, charterEpochCid: EPOCH, kind: "lar-some-other-board/v1" };
+    const act = { nym: VICTIM, action: "kapae" as const, version: 1, sealEpochCid: EPOCH, kind: "lar-some-other-board/v1" };
     const bytes = antigenEntryBytes(act as unknown as Omit<KapaeAntigenEntry, "signatures">);
     const signatures = await Promise.all([SEEDS.guru, SEEDS.telarus].map(async (seed) => ({
       signer: await pubOf(seed), sig: await signerOf(seed)(bytes),

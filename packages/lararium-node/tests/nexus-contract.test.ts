@@ -21,10 +21,10 @@ import { join } from "node:path";
 import * as ed from "@noble/ed25519";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
-import { hex, genesisCharterEpochCid, type NexusCharterDoc } from "@lararium/mesh";
+import { hex, genesisSealEpochCid, type NexusDoc } from "@lararium/mesh";
 import { generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot, loadVesselVerifyingKey } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
-import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
+import { writeNexusCharterDoc } from "../src/nexus-doc.js";
 import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
 
@@ -48,9 +48,9 @@ afterEach(async () => {
 });
 
 function seatCharter(keys: string[], threshold = 2): void {
-  const doc: NexusCharterDoc = {
+  const doc: NexusDoc = {
     kind: "lar-nexus-charter/v1", threshold,
-    charterEpochCid: genesisCharterEpochCid(keys, threshold),
+    sealEpochCid: genesisSealEpochCid(keys, threshold),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0] ?? null },
       { displayName: "Telarus, KSC",        verifyingKey: keys[1] ?? null },

@@ -15,7 +15,7 @@
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import { hex, hexToBytes } from "../src/crypto.js";
-import { charterKeySetHash } from "../src/wax-stamp.js";
+import { sealKeySetHash } from "../src/wax-stamp.js";
 import { buildDeviceDelegation } from "../src/device-delegation.js";
 import {
   mintPersonaInception, mintPersonaRotation, personaRotationSigningBytes,

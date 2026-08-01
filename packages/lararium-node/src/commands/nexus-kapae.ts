@@ -32,10 +32,10 @@ import {
   antigenEntriesFromBoard, writeAntigenEntry, signAntigenEntry,
   makeMultiSigQuorumVerifier, foldAntigenSet, isKapaed, foundingRoster,
   kapaeAntigenDocUrl, materializeSharedLarDoc, ed25519SignerFromSeed,
-  type KapaeAction, type KapaeAntigenEntry, type KahuCharterRoster, type LarDoc,
+  type KapaeAction, type KapaeAntigenEntry, type KahuRoster, type LarDoc,
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
-import { readNexusCharterDoc } from "../nexus-charter-doc.js";
+import { readNexusCharterDoc } from "../nexus-doc.js";
 import {
   listPersonaRoots, generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
   loadVesselVerifyingKey,
@@ -62,7 +62,7 @@ export interface NexusKapaeResult {
   readonly nym:             string;
   readonly version:         number;
   readonly priorVersion:    number | null;
-  readonly charterEpochCid: string;
+  readonly sealEpochCid: string;
   readonly threshold:       number;
   /** The verifying keys that signed the entry (the held persona-roots that met the quorum). */
   readonly signers:         readonly string[];
@@ -72,7 +72,7 @@ export interface NexusKapaeResult {
 }
 
 export interface NexusKapaeListResult {
-  readonly charterEpochCid: string;
+  readonly sealEpochCid: string;
   readonly threshold:       number;
   readonly seatedKeys:      number;
   /** The currently-Kapae'd nym set (folded + quorum-verified against the seated roster). */
@@ -82,11 +82,11 @@ export interface NexusKapaeListResult {
 }
 
 /** Read the seated roster off disk, FAILING CLOSED when no live quorum stands to root a ban on. */
-function seatedRosterOrRefuse(bagsDir: string): KahuCharterRoster {
+function seatedRosterOrRefuse(bagsDir: string): KahuRoster {
   const roster = foundingRoster(readNexusCharterDoc(bagsDir));
-  if (roster.charterEpochCid.length === 0 || roster.keys.length < roster.threshold) {
+  if (roster.sealEpochCid.length === 0 || roster.keys.length < roster.threshold) {
     throw new NexusKapaeError(
-      "no seated founding-kahu quorum to root a ban on — run `lares nexus charter seat` first (the antigen stays inert until a quorum stands).",
+      "no seated founding-kahu quorum to root a ban on — run `lares nexus seal seat` first (the antigen stays inert until a quorum stands).",
     );
   }
   return roster;
@@ -99,7 +99,7 @@ function seatedRosterOrRefuse(bagsDir: string): KahuCharterRoster {
  * threshold, distinct signers).
  */
 async function selectHeldQuorumSigners(
-  storageDir: string, roster: KahuCharterRoster,
+  storageDir: string, roster: KahuRoster,
 ): Promise<Array<{ handleIndex: number; verifyingKey: string }>> {
   const rosterKeys = new Set(roster.keys.map((k) => k.toLowerCase()));
   const indices    = await listPersonaRoots(storageDir);
@@ -157,7 +157,7 @@ export async function runNexusKapae(opts: NexusKapaeOptions): Promise<NexusKapae
       sign:   ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, s.handleIndex)),
     })));
     const entry: KapaeAntigenEntry = await signAntigenEntry(
-      { nym, action: opts.action, version, charterEpochCid: roster.charterEpochCid },
+      { nym, action: opts.action, version, sealEpochCid: roster.sealEpochCid },
       signers,
     );
 
@@ -177,7 +177,7 @@ export async function runNexusKapae(opts: NexusKapaeOptions): Promise<NexusKapae
 
     return {
       action: opts.action, nym, version, priorVersion,
-      charterEpochCid: roster.charterEpochCid, threshold: roster.threshold,
+      sealEpochCid: roster.sealEpochCid, threshold: roster.threshold,
       signers: selected.map((s) => s.verifyingKey), boardUrl, kapaedNow,
     };
   } finally {
@@ -198,7 +198,7 @@ export async function runNexusKapaeList(opts: { bagsDir: string; storageDir?: st
     const entries = antigenEntriesFromBoard(handle.doc());
     const folded  = await foldAntigenSet(entries, roster, makeMultiSigQuorumVerifier());
     return {
-      charterEpochCid: roster.charterEpochCid,
+      sealEpochCid: roster.sealEpochCid,
       threshold:       roster.threshold,
       seatedKeys:      roster.keys.length,
       kapaed:          [...folded].map((k) => k.toLowerCase()).sort(),

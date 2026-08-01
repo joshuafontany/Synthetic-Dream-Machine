@@ -18,12 +18,12 @@ import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
   hex, signAntigenEntry, kapaeAntigenDocUrl, materializeSharedLarDoc, mutableLarRecord,
-  genesisCharterEpochCid, carryContractShareDecision,
-  type KapaeAntigenEntry, type NexusCharterDoc, type FederationPosture,
+  genesisSealEpochCid, carryContractShareDecision,
+  type KapaeAntigenEntry, type NexusDoc, type FederationPosture,
 } from "@lararium/mesh";
 import { makeAntigenRingHolder } from "../src/antigen-ring.js";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
-import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
+import { writeNexusCharterDoc } from "../src/nexus-doc.js";
 import { runNexusRefresh } from "../src/nexus-refresh.js";
 
 /**
@@ -42,10 +42,10 @@ const signerOf = (seed: Uint8Array) => (bytes: Uint8Array) => ed.signAsync(bytes
 const pubOf    = (seed: Uint8Array) => ed.getPublicKeyAsync(seed).then(hex);
 const NEXUS_PUBKEY = "a1b2c3d4e5f6a7b8";
 
-function seatedCharter(keys: string[], posture?: FederationPosture): NexusCharterDoc {
-  const base: NexusCharterDoc = {
+function seatedCharter(keys: string[], posture?: FederationPosture): NexusDoc {
+  const base: NexusDoc = {
     kind: "lar-nexus-charter/v1", threshold: 2,
-    charterEpochCid: genesisCharterEpochCid(keys, 2),
+    sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
       { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },
@@ -57,7 +57,7 @@ function seatedCharter(keys: string[], posture?: FederationPosture): NexusCharte
 
 async function banEntry(nym: string, epoch: string): Promise<KapaeAntigenEntry> {
   const signers = await Promise.all([SEEDS[0]!, SEEDS[1]!].map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
-  return signAntigenEntry({ nym, action: "kapae", version: 1, charterEpochCid: epoch }, signers);
+  return signAntigenEntry({ nym, action: "kapae", version: 1, sealEpochCid: epoch }, signers);
 }
 
 /** Stand the two live holders on a repo carrying NO storage — a cold in-memory board (the "just booted" state). */
@@ -127,7 +127,7 @@ describe("nexus-refresh — out-of-process BOARD write (E2)", () => {
       // The CLI writes the ban through its OWN repo on the SAME storage dir, then flushes (out-of-process shape).
       const writer = new Repo({ storage: new NodeFSStorageAdapter(storage) });
       const board  = await materializeSharedLarDoc(writer, kapaeAntigenDocUrl(NEXUS_PUBKEY), "@kapae-antigen");
-      const ban    = await banEntry(victim, charter.charterEpochCid!);
+      const ban    = await banEntry(victim, charter.sealEpochCid!);
       board.change((d) => { d.tiddlers["ban:victim"] = mutableLarRecord("ban:victim", { text: JSON.stringify(ban) }, "test"); });
       await writer.flush();
       await writer.shutdown();   // dispose the CLI's throwaway writer whole — the ban bytes stay on disk, no repo lingers

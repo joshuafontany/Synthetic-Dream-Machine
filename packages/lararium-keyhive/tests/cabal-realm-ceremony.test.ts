@@ -15,7 +15,7 @@ import { describe, test, expect } from "vitest";
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
 import * as ceremony from "../src/cabal-realm-ceremony.js";
 import {
-  foundCabalRealm, foundCabalRealmWithCharter, openDwelling, dwellersHolding, cabalRealmLiveness,
+  foundCabalRealm, foundCabalRealmWithGlamour, openDwelling, dwellersHolding, cabalRealmLiveness,
 } from "../src/cabal-realm-ceremony.js";
 import { forkCabalRealm } from "../src/fork-realm-ceremony.js";
 import { BagStowage, cabalRealmLeaseSlot, feedCabalRealm, type CabalRealm } from "@lararium/mesh";
@@ -78,32 +78,32 @@ describe("founding mints a NAME and warms nothing", () => {
   });
 });
 
-describe("the charter carries the veil-public face and refuses the rest", () => {
-  test("★ the charter holds name · bearing · chosen meta — and NO key through which a roster could cross ★", async () => {
+describe("the glamour carries the published face and refuses the rest", () => {
+  test("★ the glamour holds name · bearing · chosen meta — and NO key through which a roster could cross ★", async () => {
     const founder = await founderVessel();
-    const { realm, charter } = await foundCabalRealmWithCharter(
+    const { realm, glamour } = await foundCabalRealmWithGlamour(
       founder, URI, SUBSTRATE,
       { title: "Test Realm", description: "founded by the suite", foundedAt: FOUNDED_AT },
     );
-    expect(charter.realmDocIdHex).toBe(realm.realmDocIdHex);
-    expect(charter.genesisUri).toBe(URI);
-    expect(charter.foundedAt).toBe(FOUNDED_AT);
+    expect(glamour.realmDocIdHex).toBe(realm.realmDocIdHex);
+    expect(glamour.genesisUri).toBe(URI);
+    expect(glamour.foundedAt).toBe(FOUNDED_AT);
     // The EXACT key-set, asserted — naming forbidden fields guards only the ones already imagined, and the
     // field that arrives comes from wherever nobody thought to look.
-    expect(Object.keys(charter).sort())
+    expect(Object.keys(glamour).sort())
       .toEqual(["description", "foundedAt", "genesisUri", "realmDocIdHex", "title"]);
   });
 
   test("an EMPTY meta founds a NAME-ONLY realm — advertising stays the founder's choice", async () => {
     const founder = await founderVessel();
-    const { charter } = await foundCabalRealmWithCharter(founder, URI, SUBSTRATE);
-    expect(Object.keys(charter).sort()).toEqual(["genesisUri", "realmDocIdHex"]);
+    const { glamour } = await foundCabalRealmWithGlamour(founder, URI, SUBSTRATE);
+    expect(Object.keys(glamour).sort()).toEqual(["genesisUri", "realmDocIdHex"]);
   });
 
-  test("the substrate URL never crosses into the charter — carry ⊥ read holds at the founding", async () => {
+  test("the substrate URL never crosses into the glamour — carry ⊥ read holds at the founding", async () => {
     const founder = await founderVessel();
-    const { charter } = await foundCabalRealmWithCharter(founder, URI, SUBSTRATE, { title: "Test Realm" });
-    expect(JSON.stringify(charter)).not.toContain(SUBSTRATE);
+    const { glamour } = await foundCabalRealmWithGlamour(founder, URI, SUBSTRATE, { title: "Test Realm" });
+    expect(JSON.stringify(glamour)).not.toContain(SUBSTRATE);
   });
 });
 
@@ -124,7 +124,7 @@ describe("opening a dwelling opens a DOOR and deposits no standing", () => {
     // shadows the RELATION (`edge-kapae`); wholesale escape runs by fork (exclude-by-omission).
     const surface = Object.keys(ceremony).sort();
     expect(surface).toEqual([
-      "cabalRealmLiveness", "dwellersHolding", "foundCabalRealm", "foundCabalRealmWithCharter", "openDwelling",
+      "cabalRealmLiveness", "dwellersHolding", "foundCabalRealm", "foundCabalRealmWithGlamour", "openDwelling",
     ]);
     for (const gone of ["evictMember", "evictDweller", "closeDwelling", "removeMember", "cabalRealmRoster"]) {
       expect(surface).not.toContain(gone);

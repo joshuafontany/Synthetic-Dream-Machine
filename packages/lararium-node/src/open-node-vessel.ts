@@ -67,7 +67,7 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { daemonGenesisDir }               from "./lares-config.js";
 import { resolvePalacePath, orderHandleTurnsToStubs, type HandleTurn } from "@lararium/mempalace";
 import { writebackWing, TelemetryUnavailable } from "@lararium/sensorium";
-import { LarEventBusImpl, DEFAULT_RINGS, DeterministicFederationGate, federationPostureFromDoc, charterChainHead, utf8Bytes } from "@lararium/mesh";
+import { LarEventBusImpl, DEFAULT_RINGS, DeterministicFederationGate, federationPostureFromDoc, sealLineageHead, utf8Bytes } from "@lararium/mesh";
 import type { SparseFormVector, WorldlineStubWire, AntigenRing, FederationGate, FederationPosture, NexusMembership, PeerClass } from "@lararium/mesh";
 import { selfSlotShareDecision } from "./self-slot-share.js";
 import { makeAntigenRingHolder } from "./antigen-ring.js";
@@ -77,7 +77,7 @@ import { runNexusRefresh } from "./nexus-refresh.js";
 import { rollLeaseEpochOnBoard } from "./lease-rekey.js";
 import { listSealedCids } from "./cas-reshare.js";
 import { readBulbArtifact, type BulbArtifact } from "./bulb.js";
-import { readNexusCharterDoc } from "./nexus-charter-doc.js";
+import { readNexusCharterDoc } from "./nexus-doc.js";
 import { makeSealedPlaneRegistry } from "./plane-seal.js";
 import type { NexusConvergenceKeyring } from "./nexus-convergence-keyring.js";
 import { standNexusKeyring } from "./nexus-convergence-secret-store.js";
@@ -373,7 +373,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // it) and STOOD once the operator's own nym is loaded, below. Null keeps every cross-operator STRANGER
   // (public-read only) through the boot window — the fail-closed default (a node never assumes Nexus-pono).
   let nexusMembership: NexusMembership | null = null;
-  // The per-Nexus federation POSTURE — read as-of-last-sync off the @nexus charter doc. Default PRIVATE
+  // The per-Nexus federation POSTURE — read as-of-last-sync off the @nexus doc. Default PRIVATE
   // (fail-closed): the pre-read boot window denies every cross-Nexus foreign operator co-federation. STOOD
   // once the operator's own nym + bags dir are known, below; a live posture-flip re-reads on membership refold.
   let federationPosture: FederationPosture = "private";
@@ -503,16 +503,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   });
   nexusMembership = nexusMembershipHolder.membership;
 
-  // Read the federation POSTURE off the @nexus charter doc (as-of-last-sync). Default PRIVATE (fail-closed):
+  // Read the federation POSTURE off the @nexus doc (as-of-last-sync). Default PRIVATE (fail-closed):
   // a cross-Nexus foreign operator co-federates ONLY when the operator flips the Nexus open. A live flip needs
   // a re-read (surfaced gap — boot-time read for alpha; the CLI `lares nexus posture` edits the doc).
-  const charterDocForBoot = readNexusCharterDoc(antigenBagsDir);
-  federationPosture = federationPostureFromDoc(charterDocForBoot);
+  const nexusDocForBoot = readNexusCharterDoc(antigenBagsDir);
+  federationPosture = federationPostureFromDoc(nexusDocForBoot);
 
   // Read the HELD bulb off the genesis dir, EPOCH-PINNED to the charter chain-head — the ALL-PUBLIC cold-boot
   // snapshot a Herm serves so a stranger kindles their OWN sovereign hearth (serve fire, never key). Null when the
   // genesis is absent (nothing to hand). Read once at boot; the corm-lease pointer re-issues on the read-face breath.
-  const bulb: BulbArtifact | null = readBulbArtifact(genesisDir ?? defaultGenesisDir(), charterDocForBoot?.charterEpochCid ?? null);
+  const bulb: BulbArtifact | null = readBulbArtifact(genesisDir ?? defaultGenesisDir(), nexusDocForBoot?.sealEpochCid ?? null);
 
   // STAND THE @cad CONVERGENCE KEYRING — the @cad seal's key source, minted for THIS vessel's charter-head epoch
   // (genesis = 0 when unseated) and persisted local (read-all). This fills the forward-declared shore: the vessel
@@ -520,8 +520,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // the vessel's OWN staged bodies for the FEDERATION plane; STAGE-2 admission delivery hands this keyring to a
   // joinee so a member reads too. FAIL-CLOSED elsewhere holds: absent this stand, `keyring.current()` throws and
   // the seal producer keeps a body cleartext-local (never plaintext sealed).
-  const charterHeadEpoch = charterChainHead(charterDocForBoot)?.epoch ?? 0;
-  nexusConvergenceKeyring = standNexusKeyring({ charterEpoch: charterHeadEpoch });
+  const sealHeadEpoch = sealLineageHead(nexusDocForBoot)?.epoch ?? 0;
+  nexusConvergenceKeyring = standNexusKeyring({ sealEpoch: sealHeadEpoch });
   // The relay-side discovery index the seal producer announces a sealed cid onto (DHT-free; hint → peers → tracker).
   const casBagTracker = makeBagTracker();
 

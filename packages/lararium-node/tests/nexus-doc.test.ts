@@ -1,6 +1,6 @@
 /**
- * nexus-charter-doc.test — the DISK adapter for the bags/@nexus charter doc + the persona pet-name the
- * `lares persona`/`lares nexus charter seat` doors drive (#66).
+ * nexus-doc.test — the DISK adapter for the bags/@nexus doc + the persona pet-name the
+ * `lares persona`/`lares nexus seal seat` doors drive (#66).
  *
  * Proven:
  *   · a seated doc WRITES in house form and READS back byte-faithful (the roster round-trips through disk),
@@ -15,13 +15,13 @@ import { mkdtempSync, rmSync, writeFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
-  emptyFoundingCharterDoc, genesisCharterEpochCid, rosterFromCharterDoc, foundingQuorumSeated,
-  genesisCharterEpoch, charterKeySetHash, charterChainHead,
-  renameOwnPersona, ownPersonaPetname, type NexusCharterDoc, type NexusCharterKahu,
+  emptyFoundingCharterDoc, genesisSealEpochCid, rosterFromNexusDoc, foundingQuorumSeated,
+  genesisCharterEpoch, sealKeySetHash, sealLineageHead,
+  renameOwnPersona, ownPersonaPetname, type NexusDoc, type NexusCharterKahu,
 } from "@lararium/mesh";
 import {
   readNexusCharterDoc, writeNexusCharterDoc, nexusCharterDocPath,
-} from "../src/nexus-charter-doc.js";
+} from "../src/nexus-doc.js";
 import {
   generateOrLoadPersonaGroupRoot, listPersonaRoots, makeNodePersonaPetnameStore,
 } from "../src/node-vessel-identity.js";
@@ -32,21 +32,21 @@ const setEnv = (k: string, v: string | undefined): void => {
   if (v === undefined) delete process.env[k]; else process.env[k] = v;
 };
 
-describe("nexus-charter-doc — disk round-trip, fail-closed", () => {
+describe("nexus-doc — disk round-trip, fail-closed", () => {
   let bags: string;
   beforeEach(() => { bags = mkdtempSync(join(tmpdir(), "lares-nexusdoc-")); });
   afterEach(() => { rmSync(bags, { recursive: true, force: true }); });
 
   test("an absent doc reads null (fail closed → empty roster)", () => {
     expect(readNexusCharterDoc(bags)).toBeNull();
-    expect(rosterFromCharterDoc(readNexusCharterDoc(bags)).keys).toEqual([]);
+    expect(rosterFromNexusDoc(readNexusCharterDoc(bags)).keys).toEqual([]);
   });
 
   test("a seated doc writes in house form and reads back faithfully", () => {
     const keys = ["a".repeat(64), "b".repeat(64)];
-    const doc: NexusCharterDoc = {
+    const doc: NexusDoc = {
       kind: "lar-nexus-charter/v1", threshold: 2,
-      charterEpochCid: genesisCharterEpochCid(keys, 2),
+      sealEpochCid: genesisSealEpochCid(keys, 2),
       kahu: [
         { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
         { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },
@@ -59,14 +59,14 @@ describe("nexus-charter-doc — disk round-trip, fail-closed", () => {
     expect(back).toEqual(doc);
     // fail-closed math: 2 seated + epoch → quorum stands
     expect(foundingQuorumSeated(back)).toBe(true);
-    expect(rosterFromCharterDoc(back).keys.sort()).toEqual([...keys].sort());
+    expect(rosterFromNexusDoc(back).keys.sort()).toEqual([...keys].sort());
   });
 
   test("the unseated scaffold round-trips to an inert roster", () => {
     writeNexusCharterDoc(bags, emptyFoundingCharterDoc());
     const back = readNexusCharterDoc(bags);
     expect(back?.kahu.length).toBe(3);
-    expect(rosterFromCharterDoc(back).keys).toEqual([]);
+    expect(rosterFromNexusDoc(back).keys).toEqual([]);
     expect(foundingQuorumSeated(back)).toBe(false);
   });
 
@@ -86,11 +86,11 @@ describe("nexus-charter-doc — disk round-trip, fail-closed", () => {
 
   test("a pre-rotated CHAIN doc round-trips through disk + roots the roster on the head epoch (#68)", () => {
     const keys = ["a".repeat(64), "b".repeat(64)];
-    const genesis = genesisCharterEpoch(keys, 2, charterKeySetHash(["c".repeat(64), "d".repeat(64)], 2));
-    const doc: NexusCharterDoc = {
+    const genesis = genesisCharterEpoch(keys, 2, sealKeySetHash(["c".repeat(64), "d".repeat(64)], 2));
+    const doc: NexusDoc = {
       kind: "lar-nexus-charter/v1", threshold: 2,
-      charterEpochCid: genesis.epochCid,
-      charterChain: [genesis],
+      sealEpochCid: genesis.epochCid,
+      sealLineage: [genesis],
       kahu: [
         { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
         { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },
@@ -100,8 +100,8 @@ describe("nexus-charter-doc — disk round-trip, fail-closed", () => {
     writeNexusCharterDoc(bags, doc);
     const back = readNexusCharterDoc(bags);
     expect(back).toEqual(doc);                                          // the chain survives disk byte-faithful
-    expect(charterChainHead(back)!.epoch).toBe(0);
-    expect(rosterFromCharterDoc(back).charterEpochCid).toBe(genesis.epochCid);   // antigen roots on the head
+    expect(sealLineageHead(back)!.epoch).toBe(0);
+    expect(rosterFromNexusDoc(back).sealEpochCid).toBe(genesis.epochCid);   // antigen roots on the head
     expect(foundingQuorumSeated(back)).toBe(true);
   });
 
@@ -110,7 +110,7 @@ describe("nexus-charter-doc — disk round-trip, fail-closed", () => {
     writeNexusCharterDoc(bags, emptyFoundingCharterDoc());
     writeFileSync(path,
       "```json nexus-charter\n" +
-      JSON.stringify({ kind: "lar-nexus-charter/v1", threshold: 2, kahu: [], charterChain: [{ epoch: 0, epochCid: "e0" }] }) +
+      JSON.stringify({ kind: "lar-nexus-charter/v1", threshold: 2, kahu: [], sealLineage: [{ epoch: 0, epochCid: "e0" }] }) +
       "\n```\n", "utf8");
     expect(readNexusCharterDoc(bags)).toBeNull();                        // an epoch missing keySetHash/nextKeyCommit → torn → closed
   });
@@ -159,16 +159,16 @@ describe("persona pet-name + seat gesture (the door's core)", () => {
       verifyingKey: byPetname.get(k.displayName.toLowerCase()) ?? k.verifyingKey,
     }));
     const seated = kahu.map((k) => k.verifyingKey).filter((v): v is string => Boolean(v));
-    const doc: NexusCharterDoc = {
+    const doc: NexusDoc = {
       kind: doc0.kind, threshold: doc0.threshold,
-      charterEpochCid: seated.length >= doc0.threshold ? genesisCharterEpochCid(seated, doc0.threshold) : null,
+      sealEpochCid: seated.length >= doc0.threshold ? genesisSealEpochCid(seated, doc0.threshold) : null,
       kahu,
     };
     writeNexusCharterDoc(bags, doc);
 
     const back = readNexusCharterDoc(bags);
     expect(existsSync(nexusCharterDocPath(bags))).toBe(true);
-    expect(rosterFromCharterDoc(back).keys.length).toBe(3);
+    expect(rosterFromNexusDoc(back).keys.length).toBe(3);
     expect(foundingQuorumSeated(back)).toBe(true);
   });
 });

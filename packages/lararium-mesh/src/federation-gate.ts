@@ -369,7 +369,7 @@ export function classifyCrossOperatorAdmission(proofVerified: boolean): CrossOpe
 
 /**
  * FederationPosture — a per-Nexus stance toward FOREIGN operators (cross-Nexus peers), read as-of-last-sync off
- * the @nexus charter doc. A Nexus develops in ISOLATION until the operator flips it open, so the default is
+ * the @nexus doc. A Nexus develops in ISOLATION until the operator flips it open, so the default is
  * PRIVATE (fail-closed: an absent / unreadable posture reads PRIVATE — see `federationPostureFromDoc`).
  *
  *   · private — the node co-federates with SAME-Nexus operators only (members of THIS charter). A cross-Nexus

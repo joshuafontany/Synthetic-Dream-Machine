@@ -207,7 +207,7 @@ Shamir ''2-of-3'', seals Share 1 on the vessel, and zeroizes the seed — the ve
 1 + the public commit, never the seed:
 
 ```
-lares nexus charter reserve --guardian-a '<name>' --guardian-b '<name>'
+lares nexus seal reserve --guardian-a '<name>' --guardian-b '<name>'
     # → prints --next-key-commit + THREE cards (each: a checksummed share code + a confirm phrase),
     #   seals 'Recovery-card mine' (Share 1) on the vessel, zeroizes the seed
 ```
@@ -216,8 +216,8 @@ Place the three cards by hand (#reserve-custody). Then seat the roster + arm the
 read the quorum verdict:
 
 ```
-lares nexus charter seat --next-key-commit <the printed commit>   # seats h0/h1/h2 → 2-of-3, epoch0 armed
-lares nexus charter show                            # the quorum STANDS + the chain head reads armed
+lares nexus seal seat --next-key-commit <the printed commit>   # seats h0/h1/h2 → 2-of-3, epoch0 armed
+lares nexus seal show                            # the quorum STANDS + the chain head reads armed
 ```
 
 <<~/ahu >>

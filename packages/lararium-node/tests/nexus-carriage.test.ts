@@ -14,9 +14,9 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import * as ed from "@noble/ed25519";
-import { hex, genesisCharterEpochCid, type NexusCharterDoc } from "@lararium/mesh";
+import { hex, genesisSealEpochCid, type NexusDoc } from "@lararium/mesh";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
-import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
+import { writeNexusCharterDoc } from "../src/nexus-doc.js";
 
 // Three founding kahu — fixed seeds → deterministic keys. The seated keys ARE the member floor.
 const SEEDS = [new Uint8Array(32).fill(1), new Uint8Array(32).fill(2), new Uint8Array(32).fill(3)];
@@ -24,10 +24,10 @@ const pubOf = (seed: Uint8Array) => ed.getPublicKeyAsync(seed).then(hex);
 // A non-kahu operator — a valid identity carrying no charter seat → a STRANGER under the kahu floor.
 const STRANGER_SEED = new Uint8Array(32).fill(7);
 
-async function seatedCharter(keys: string[]): Promise<NexusCharterDoc> {
+async function seatedCharter(keys: string[]): Promise<NexusDoc> {
   return {
     kind: "lar-nexus-charter/v1", threshold: 2,
-    charterEpochCid: genesisCharterEpochCid(keys, 2),
+    sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
       { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },

@@ -62,16 +62,16 @@ function writeStored(dir: string, entries: readonly NexusEpochSecret[]): void {
 
 /**
  * Stand this vessel's convergence keyring, minting the charter-head epoch's secret if it is not yet held. Reads
- * the persisted read-all set; ensures a secret exists for `charterEpoch` (mint + persist on first need — a genesis
+ * the persisted read-all set; ensures a secret exists for `sealEpoch` (mint + persist on first need — a genesis
  * or a charter-bump); returns the keyring over EVERY held epoch. Idempotent: a re-stand at the same epoch re-reads
  * the same secret (mints nothing). The keyring's `current()` seals under the newest epoch held.
  *
  * FAIL-CLOSED downstream: an empty keyring (which cannot arise here — this always mints the head epoch) would make
  * `installSealedBody` refuse (`keyring.current()` throws), leaving a body local/unsealed — never plaintext sealed.
  */
-export function standNexusKeyring(args: { charterEpoch: number; dir?: string }): NexusConvergenceKeyring {
+export function standNexusKeyring(args: { sealEpoch: number; dir?: string }): NexusConvergenceKeyring {
   const dir = idDirOf(args.dir);
-  const epoch = Number.isInteger(args.charterEpoch) && args.charterEpoch >= 0 ? args.charterEpoch : 0;
+  const epoch = Number.isInteger(args.sealEpoch) && args.sealEpoch >= 0 ? args.sealEpoch : 0;
   const held = readStored(dir);
   if (!held.some((e) => e.epoch === epoch)) {
     held.push(mintNexusSecret(epoch));           // the charter-head epoch had no secret yet — mint + persist it

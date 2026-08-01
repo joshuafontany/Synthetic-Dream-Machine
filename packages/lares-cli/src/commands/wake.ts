@@ -234,12 +234,12 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //     --name` act, THREE SYMMETRIC commands. The founder-mint (h0) SIGNS the founding bind at standup, so
   //     `persona new 0` LOADS that pre-standing operator-root idempotently and sets its PRIVATE pet-name;
   //     `new 1`/`new 2` mint the remaining kahu. The seat joins persona→kahu BY pet-name, so all three names
-  //     MUST land before `lares nexus charter seat` seats the 2-of-3 quorum the immune antigen reads.
+  //     MUST land before `lares nexus seal seat` seats the 2-of-3 quorum the immune antigen reads.
   //     Surfaced only under standup.
   const foundingHint: string[] | undefined = founding === undefined ? undefined : [
     `Founder persona h0 stands as the operator-root — its root signs the founding bind; \`persona new 0\` names it (idempotent — loads the founder, sets its pet-name).`,
     ...FOUNDING_KAHU.map((k, i) => `lares persona new ${i} --name '${k.displayName}'`),
-    `Then seat the 2-of-3 quorum from the named personas: lares nexus charter seat`,
+    `Then seat the 2-of-3 quorum from the named personas: lares nexus seal seat`,
     `(These three name the founding KAHU QUORUM, never a limit on faces — this vessel's own slot ceiling rides LAR_PERSONA_SLOTS.)`,
   ];
 

@@ -3,7 +3,7 @@
  * lifecycle against REAL Keyhive (no mocks) over the mesh floor.
  *
  * The drift (+ the charter-founding drift):
- *   1. FOUND a cabal-realm AND its veil-public charter (foundCabalRealmWithCharter)
+ *   1. FOUND a cabal-realm AND its veil-public charter (foundCabalRealmWithGlamour)
  *  1b. assert the founding founds the CHARTER (name+bearing+meta; no roster/substrate)
  *   2. JOIN two members (contact-card exchange → addSentinelMember via the INERT join gate)
  *   3. assert BOTH in the roster (the Keyhive doc-roster, verified per-member)
@@ -26,7 +26,7 @@
 
 import { KeyhiveProvider, InMemoryEventStore } from "../src/index.js";
 import {
-  foundCabalRealmWithCharter, openDwelling, dwellersHolding, cabalRealmLiveness,
+  foundCabalRealmWithGlamour, openDwelling, dwellersHolding, cabalRealmLiveness,
 } from "../src/cabal-realm-ceremony.js";
 import { forkCabalRealm } from "../src/fork-realm-ceremony.js";
 import {
@@ -35,8 +35,8 @@ import {
   feedCabalRealm,
   effectiveLeaseEpoch,
   rolledLeaseEpoch,
-  projectCabalRealmCharter,
-  cabalRealmCharterSnapshot,
+  projectRealmGlamour,
+  realmGlamourSnapshot,
 } from "@lararium/mesh";
 
 const REALM_URI    = "lar:///crossroads.cabal.gathers/probe-realm";
@@ -67,7 +67,7 @@ async function main(): Promise<void> {
   // A fixed foundedAt so the founding stays deterministic (a live founder passes its
   // own Date.now(); the ceremony itself reads no clock).
   const FOUNDED_AT = 1_700_000_000_000;
-  const { realm, charter } = await foundCabalRealmWithCharter(
+  const { realm, glamour } = await foundCabalRealmWithGlamour(
     founder, REALM_URI, SUBSTRATE_URL,
     { title: "Probe Realm", description: "a cabal-realm founded by the witness", foundedAt: FOUNDED_AT },
     { residency, leaseWriterId: WRITER_ID, leaseSlots },
@@ -80,17 +80,17 @@ async function main(): Promise<void> {
     leaseSlots.get(slot) === "0",
     `doc=${realm.realmDocIdHex.slice(0, 16)}… tier=${residency.tier(SUBSTRATE_URL)} epoch=${leaseSlots.get(slot)}`);
 
-  // ── STAGE 1b — CHARTER (the founding founds the realm's veil-public face) ───────
-  const charterKeys = Object.keys(charter);
-  stage("1b CHARTER — founding founds the veil-public charter (name+bearing+meta; NO roster/substrate keys)",
-    charter.realmDocIdHex === realm.realmDocIdHex &&
-    charter.genesisUri === REALM_URI &&
-    charter.foundedAt === FOUNDED_AT &&
-    charter.title === "Probe Realm" &&
-    !charterKeys.includes("roster") &&
-    !charterKeys.includes("substrateContent") &&
-    !charterKeys.includes("memberCount"),     // never auto-disclosed
-    `keys=[${charterKeys.join(",")}]`);
+  // ── STAGE 1b — GLAMOUR (the founding founds the realm's published face) ─────────
+  const glamourKeys = Object.keys(glamour);
+  stage("1b GLAMOUR — founding founds the veil-public face (name+bearing+meta; NO roster/substrate keys)",
+    glamour.realmDocIdHex === realm.realmDocIdHex &&
+    glamour.genesisUri === REALM_URI &&
+    glamour.foundedAt === FOUNDED_AT &&
+    glamour.title === "Probe Realm" &&
+    !glamourKeys.includes("roster") &&
+    !glamourKeys.includes("substrateContent") &&
+    !glamourKeys.includes("memberCount"),     // never auto-disclosed
+    `keys=[${glamourKeys.join(",")}]`);
 
   // ── STAGE 2 — JOIN two members ─────────────────────────────────────────────────
   // Each member stands an independent vessel; the founder must KNOW it as an agent first
@@ -122,13 +122,13 @@ async function main(): Promise<void> {
   // from once the realm has members. The shore must drop BOTH, in the output AND
   // in the serialized snapshot bytes (the wire form a peer actually pulls).
   const SECRET = "SECRET-SUBSTRATE-PAYLOAD-must-not-cross";
-  const withRoster = projectCabalRealmCharter({
+  const withRoster = projectRealmGlamour({
     realm,
     meta: { title: "Probe Realm", foundedAt: FOUNDED_AT },
     roster: roster0,                              // the REAL member ids (memberA, memberB)
     substrateContent: { secret: SECRET, note: `${memberA} posted here` },
   });
-  const snap = await cabalRealmCharterSnapshot(withRoster);
+  const snap = await realmGlamourSnapshot(withRoster);
   const wireBytes = Buffer.from(snap.bytes).toString("latin1");
   const outJson   = JSON.stringify(withRoster);
   const leaked =

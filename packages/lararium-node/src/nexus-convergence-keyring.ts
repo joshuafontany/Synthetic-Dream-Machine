@@ -71,9 +71,9 @@ function requireEpoch(epoch: number): number {
  * Nexus GENESIS and on a CHARTER-EPOCH BUMP ONLY (never per-body, never per-session): rotation resets the dedup
  * domain deliberately, so it costs a charter act. The minted secret then rides the private lane to every member.
  */
-export function mintNexusSecret(charterEpoch: number): NexusEpochSecret {
-  requireEpoch(charterEpoch);
-  return { epoch: charterEpoch, secret: new Uint8Array(randomBytes(CONVERGENCE_SECRET_LEN)) };
+export function mintNexusSecret(sealEpoch: number): NexusEpochSecret {
+  requireEpoch(sealEpoch);
+  return { epoch: sealEpoch, secret: new Uint8Array(randomBytes(CONVERGENCE_SECRET_LEN)) };
 }
 
 /**

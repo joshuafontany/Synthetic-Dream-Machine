@@ -19,12 +19,12 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import * as ed from "@noble/ed25519";
-import { hex, genesisCharterEpochCid, type NexusCharterDoc } from "@lararium/mesh";
+import { hex, genesisSealEpochCid, type NexusDoc } from "@lararium/mesh";
 import {
   generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot,
 } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
-import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
+import { writeNexusCharterDoc } from "../src/nexus-doc.js";
 import { runNexusKapae, runNexusKapaeList, NexusKapaeError } from "../src/commands/nexus-kapae.js";
 
 const VICTIM = "beadfeed".repeat(8);   // the presenter nym a ban targets
@@ -49,10 +49,10 @@ afterEach(() => {
 
 /** Seat a legacy-inception charter DOC binding the given verifying keys at 2-of-3 into `bags/@nexus`. */
 function seatCharter(keys: string[], threshold = 2): void {
-  const doc: NexusCharterDoc = {
+  const doc: NexusDoc = {
     kind: "lar-nexus-charter/v1",
     threshold,
-    charterEpochCid: genesisCharterEpochCid(keys, threshold),
+    sealEpochCid: genesisSealEpochCid(keys, threshold),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0] ?? null },
       { displayName: "Telarus, KSC",        verifyingKey: keys[1] ?? null },

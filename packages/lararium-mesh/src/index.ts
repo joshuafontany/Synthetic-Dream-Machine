@@ -19,7 +19,7 @@ export * from "./persona-petname.js";
 export * from "./persona-glamour.js";
 export * from "./recovery-keel-core.js";
 export * from "./guardian-card.js";
-export * from "./charter-reserve.js";
+export * from "./seal-reserve.js";
 export * from "./capability.js";
 export * from "./crypto.js";
 export * from "./agile-digest.js";
@@ -118,7 +118,7 @@ export {
   writePersonaKelEvent, personaKelEntryKey, PERSONA_KEL_ENTRY_PREFIX,
 } from "./persona-kel-board.js";
 export * from "./mu-void.js";
-export * from "./nexus-charter-seed.js";
+export * from "./nexus-seal-seed.js";
 export * from "./meme-provider.js";
 export * from "./reaction-graph.js";
 export * from "./wiki-recipe.js";
@@ -195,7 +195,7 @@ export * from "./handle-announce.js";
 export * from "./who-face.js";
 export * from "./who-face-cap.js";
 export * from "./deterministic-doc.js";
-export * from "./cabal-realm-charter.js";
+export * from "./realm-glamour.js";
 export * from "./cabal-realm-clock.js";
 export * from "./me-circle.js";
 export * from "./fork-realm.js";

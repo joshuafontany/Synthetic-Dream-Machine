@@ -10,7 +10,7 @@
  *
  * THE MEMBER SET = the seated-KAHU floor ∪ the folded operator MEMBERS-registry (members{}). Two sources,
  * unioned, each fail-closed:
- *   · the seated-kahu FLOOR — the founding-kahu charter ROSTER read off `bags/@nexus` (`seatedCharterKeys`).
+ *   · the seated-kahu FLOOR — the founding-kahu charter ROSTER read off `bags/@nexus` (`seatedKahuKeys`).
  *     Every seated kahu IS a contracted member (a strict subset), so it stands even when the members board is
  *     empty / unsynced — the conservative floor that never over-grants.
  *   · the MEMBERS-registry — the quorum-signed, contract-in members{} board (the antigen's ALLOW-twin), folded
@@ -42,14 +42,14 @@
 import type { DocHandle, Repo } from "@automerge/automerge-repo";
 import type { NexusMembership, LarDoc } from "@lararium/mesh";
 import {
-  seatedCharterKeys,
+  seatedKahuKeys,
   foundingRoster,
   foldCarriageSet,
   carriageEntriesFromBoard,
   carriageDocUrl,
   materializeSharedLarDoc,
 } from "@lararium/mesh";
-import { readNexusCharterDoc } from "./nexus-charter-doc.js";
+import { readNexusCharterDoc } from "./nexus-doc.js";
 
 /** A verifying-key nym reads clean only at the exact ed25519 length — a stray value never seats a member. */
 const NYM_RE = /^[0-9a-f]{64}$/;
@@ -98,7 +98,7 @@ export function makeNexusMembership(opts: {
 
   /** The seated-kahu floor read off disk — lowercased. An absent / unseated charter yields the empty floor. */
   const kahuFloor = (): Set<string> =>
-    new Set<string>(seatedCharterKeys(readNexusCharterDoc(bagsDir)).map((k) => k.toLowerCase()));
+    new Set<string>(seatedKahuKeys(readNexusCharterDoc(bagsDir)).map((k) => k.toLowerCase()));
 
   /** Resolve (once) the always-carried members board, wire the change listener, and cache the handle. A holder
    *  without a repo / nexusPubkey resolves to null (kahu-floor-only). A resolve fault resolves to null too
@@ -135,7 +135,7 @@ export function makeNexusMembership(opts: {
   const foldBoard = async (boardDoc: LarDoc | undefined): Promise<void> => {
     const doc     = readNexusCharterDoc(bagsDir);
     const roster  = foundingRoster(doc);
-    const floor   = new Set<string>(seatedCharterKeys(doc).map((k) => k.toLowerCase()));
+    const floor   = new Set<string>(seatedKahuKeys(doc).map((k) => k.toLowerCase()));
     const entries = carriageEntriesFromBoard(boardDoc);
     const folded  = await foldCarriageSet(entries, roster);
     const union = new Set<string>(floor);

@@ -43,12 +43,12 @@ import {
   cabalRealmJoinGate,
   cabalRealmLeaseSlot,
   deriveCabalRealmLiveness,
-  projectCabalRealmCharter,
+  projectRealmGlamour,
   type CabalRealm,
   type CabalRealmLiveness,
   type BagStowage,
-  type CabalRealmPublicMeta,
-  type CabalRealmCharter,
+  type RealmGlamourMeta,
+  type RealmGlamour,
 } from "@lararium/mesh";
 import type { KeyhiveProvider } from "./keyhive-provider.js";
 
@@ -110,14 +110,14 @@ export async function foundCabalRealm(
  */
 export interface FoundedCabalRealm {
   readonly realm:   CabalRealm;
-  readonly charter: CabalRealmCharter;
+  readonly glamour: RealmGlamour;
 }
 
 /**
  * FOUND a cabal-realm AND its veil-public CHARTER in one act — the founding that
  * gives the realm its public face. Mints the sentinel + substrate + lease
  * (foundCabalRealm, unchanged) and ALSO projects the realm's charter through the
- * pure disclosure shore (mesh/projectCabalRealmCharter): the charter carries
+ * pure disclosure shore (mesh/projectRealmGlamour): the charter carries
  * ONLY the realm's content-addressed name + bearing + whatever the founder CHOOSES
  * to advertise (`meta` — title / description / foundedAt; an empty meta founds a
  * name-only realm). The members-only substrate + roster NEVER enter the charter —
@@ -126,22 +126,22 @@ export interface FoundedCabalRealm {
  * `foundedAt` rides `meta` so the founder stamps the founding MOMENT from its own
  * runtime clock (the ceremony stays a deterministic, clock-free function — a test
  * passes a fixed value, a live founding passes Date.now()). The returned charter stands
- * publish-ready: hand it to mesh/cabalRealmCharterExporter to serve it through the
+ * publish-ready: hand it to mesh/realmGlamourExporter to serve it through the
  * existing @oracle read-face. This founds the charter; SERVING it (mounting the
  * read-face) stays the caller's separate act.
  */
-export async function foundCabalRealmWithCharter(
+export async function foundCabalRealmWithGlamour(
   provider:     KeyhiveProvider,
   uri:          string,
   substrateUrl: string,
-  meta:         CabalRealmPublicMeta = {},
+  meta:         RealmGlamourMeta = {},
   opts:         FoundCabalRealmOpts = {},
 ): Promise<FoundedCabalRealm> {
   const realm = await foundCabalRealm(provider, uri, substrateUrl, opts);
   // The shore reads ONLY {realm, meta}; no roster exists yet at founding, and
-  // none could cross even if it did (#the-veil — projectCabalRealmCharter proof).
-  const charter = projectCabalRealmCharter({ realm, meta });
-  return { realm, charter };
+  // none could cross even if it did (#the-veil — projectRealmGlamour proof).
+  const glamour = projectRealmGlamour({ realm, meta });
+  return { realm, glamour };
 }
 
 /**

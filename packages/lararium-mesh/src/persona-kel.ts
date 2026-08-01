@@ -2,7 +2,7 @@
  * persona-kel — the per-PersonaGroup KEY-EVENT-LOG: a stable identifier PREFIX the operational signing
  * key rotates BENEATH. Reading-B (identity-classes#reading-b-recovery) rotates the op-key rather than
  * resurrecting it, so continuity CANNOT ride the op-key — it rides this log. The module lifts the charter's
- * proven epoch-chain machinery (wax-stamp: CharterEpoch / verifyCharterChain / rotateCharterEpoch) DOWN to
+ * proven epoch-chain machinery (wax-stamp: SealEpoch / verifySealLineage / rotateSealEpoch) DOWN to
  * persona scale; it invents nothing structural, it re-sites what stands.
  *
  * The invariant (identity-classes#the-continuity-anchor):
@@ -13,7 +13,7 @@
  *     revives (evict runs forward-only — identity-classes#reading-b-recovery §4).
  *
  * FORK B — threshold-attest (identity-classes#the-two-forks): inception pre-commits the k-of-n DIGEST of
- * the guardians' recovery PUBLIC keys (`charterKeySetHash`); a rotation carries k guardian SIGNATURES over
+ * the guardians' recovery PUBLIC keys (`sealKeySetHash`); a rotation carries k guardian SIGNATURES over
  * the event bytes, verified against that pre-commit. NOTHING reconstructs — no secret ever assembles. The
  * recovery authority signs ONLY rotations, never content; a thief of today's op-key learns nothing of it.
  *
@@ -22,7 +22,7 @@
 
 import * as ed25519 from "@noble/ed25519";
 import { sha256HexSync, canonicalJson, canonicalJsonBytes, hexToBytes } from "./crypto.js";
-import { charterKeySetHash } from "./wax-stamp.js";
+import { sealKeySetHash } from "./wax-stamp.js";
 import type { QuorumSignature } from "./kapae-antigen.js";
 import { verifyDeviceDelegation, type DeviceDelegationTiddler } from "./device-delegation.js";
 
@@ -42,7 +42,7 @@ export interface PersonaKelEvent {
   readonly eventCid:          string;             // content-address of THIS event (its own hash)
   readonly prefix:            string;             // the STABLE identifier (AID) — fixed across every rotation
   readonly opKeyDid:          string;             // "0x"+hex — the operational key this event SEATS (head = authoritative)
-  readonly recoverySetHash:   string;             // charterKeySetHash(recoveryRoster, recoveryThreshold), pre-committed at inception
+  readonly recoverySetHash:   string;             // sealKeySetHash(recoveryRoster, recoveryThreshold), pre-committed at inception
   readonly recoveryRoster:    readonly string[];  // the n guardian recovery pubkeys — EMPTY at inception, REVEALED at a rotation
   readonly recoveryThreshold: number;             // k — REVEALED at a rotation (0 at inception; folded into recoverySetHash)
   readonly prevEventCid:      string | null;      // hash-link to the predecessor (null at inception)
@@ -100,11 +100,11 @@ export function personaPrefixOf(inceptionOpKeyDid: string, recoverySetHash: stri
 
 /**
  * Seat the INCEPTION event (seq 0, no predecessor) from the founding op-key + a PRE-COMMITMENT to the
- * guardians' recovery key-set (its digest, `charterKeySetHash`). The founding op-key seats itself here
+ * guardians' recovery key-set (its digest, `sealKeySetHash`). The founding op-key seats itself here
  * self-authorized — exactly as today's founder edge self-signs; the recovery keys never sign until a
  * rotation reveals them, so a compromise of the operational PRESENT cannot forge the recovery FUTURE.
  *
- * The caller derives `recoverySetHash` from the guardians' recovery PUBLIC keys via `charterKeySetHash`
+ * The caller derives `recoverySetHash` from the guardians' recovery PUBLIC keys via `sealKeySetHash`
  * (order-blind, threshold-folded). An empty digest leaves recovery UNARMED — `mintPersonaRotation` then
  * refuses (nothing stands pre-committed to attest a reveal against).
  */
@@ -164,7 +164,7 @@ export async function mintPersonaRotation(input: {
   if (head.recoverySetHash.length === 0) {
     return { ok: false, reason: "rotation unarmed — the head event pre-committed no recovery-set digest" };
   }
-  if (charterKeySetHash(recoveryRoster, recoveryThreshold) !== head.recoverySetHash) {
+  if (sealKeySetHash(recoveryRoster, recoveryThreshold) !== head.recoverySetHash) {
     return { ok: false, reason: "reveal mismatch — the revealed recovery roster does not match the pre-committed digest" };
   }
   const core: PersonaEventCore = {
@@ -199,7 +199,7 @@ export async function verifyRotationQuorum(
 ): Promise<{ ok: boolean; reason?: string }> {
   if (recoveryThreshold < 1) return { ok: false, reason: "recovery threshold below 1" };
   if (recoveryRoster.length < recoveryThreshold) return { ok: false, reason: "revealed roster shorter than the threshold" };
-  if (charterKeySetHash(recoveryRoster, recoveryThreshold) !== core.recoverySetHash) {
+  if (sealKeySetHash(recoveryRoster, recoveryThreshold) !== core.recoverySetHash) {
     return { ok: false, reason: "revealed roster digest does not match the pre-committed recovery-set" };
   }
   const rosterSet = new Set(recoveryRoster.map((k) => k.toLowerCase()));
@@ -223,7 +223,7 @@ export async function verifyRotationQuorum(
  * recovery-commit across every event, each event's cid recomputing over its bound core. Inception (seq 0)
  * carries no predecessor and its prefix MUST derive from its own op-key + recovery-set (the AID binding).
  * PURE — it verifies no signatures (a rotation's quorum rides `verifyRotationQuorum` / `verifyPersonaKelFull`,
- * which need the revealed roster). Mirrors `verifyCharterChain`.
+ * which need the revealed roster). Mirrors `verifySealLineage`.
  */
 export function verifyPersonaKel(chain: readonly PersonaKelEvent[]): boolean {
   if (chain.length === 0) return false;

@@ -1,5 +1,5 @@
 /**
- * cabal-realm-charter — the PUBLIC face of a cabal-realm: its CHARTER, the only
+ * realm-glamour — the PUBLIC face of a cabal-realm: its CHARTER, the only
  * thing that ever crosses the read-face wire. A pure disclosure SHORE (mirrors
  * mesh-palace's `snapshotPublicFlowMap`): drop-private, keep-public.
  *
@@ -11,7 +11,7 @@
  * read-face (content-addressed snapshot + signed pointer, fetch-CORS, anon-read);
  * THIS cut adds NO gate-loosening. It makes a CONTENT decision: it declares WHAT a
  * ⚠ `charter` HERE NAMES THE PUBLISHED FACE — editorial, delegable, its own rate — and NOT the
- * seal lineage or the roster that `nexus-charter-seed.ts` files under the same word. Six joints ride
+ * seal lineage or the roster that `nexus-seal-seed.ts` files under the same word. Six joints ride
  * one name across this package (canon `cabal-realm#six-joints`); the naming ruling stands open.
  *
  * cabal-realm publishes PUBLICLY (its charter — veil-public) vs holds MEMBERS-ONLY
@@ -25,7 +25,7 @@
  *                    lease slots + the epoch keys. NEVER crosses the shore.
  *
  * THE VEIL INVARIANT (in-process CORRECTNESS, NOT a privacy guarantee):
- * `projectCabalRealmCharter` reads ONLY the public fields of its input and
+ * `projectRealmGlamour` reads ONLY the public fields of its input and
  * constructs a literal naming ONLY charter fields. The members-only data (roster /
  * substrate content) rides the SAME input bag yet stays structurally unreachable in the
  * output — the shore never references it, so a roster or substrate content CANNOT
@@ -49,7 +49,7 @@ import type { CabalRealm } from "./cabal-realm.js";
  * the read-face wire. Every field here rides DELIBERATELY PUBLIC; the type carries NO
  * substrate content and NO member identities (#the-veil-public-set).
  */
-export interface CabalRealmCharter {
+export interface RealmGlamour {
   /** DELIBERATELY PUBLIC — the realm's content-addressed NAME (its sentinel DocId,
    *  hex). Canon #the-realm: knowing it grants nothing (NAMED-not-ruled), so publishing it
    *  costs nothing; it carries the address a peer needs to find + verify the realm. */
@@ -79,11 +79,11 @@ export interface CabalRealmCharter {
  * optional descriptive fields beyond the structural name+bearing. Separate from the
  * realm's private state by design: only what a realm CHOOSES to surface lives here.
  */
-export interface CabalRealmPublicMeta {
+export interface RealmGlamourMeta {
   readonly title?:       string;
   readonly description?: string;
   readonly foundedAt?:   number;
-  /** A coarse, explicitly-published figure ONLY (see CabalRealmCharter.memberCount).
+  /** A coarse, explicitly-published figure ONLY (see RealmGlamour.memberCount).
    *  Leave undefined — the conservative default — to publish no count at all. */
   readonly memberCount?: number;
 }
@@ -98,7 +98,7 @@ export interface CabalRealmPublishState {
   /** The realm itself — its public name (realmDocIdHex) + bearing (genesisUri). */
   readonly realm: CabalRealm;
   /** What the realm CHOOSES to advertise (optional descriptive fields). */
-  readonly meta?: CabalRealmPublicMeta;
+  readonly meta?: RealmGlamourMeta;
   /** MEMBERS-ONLY — the member roster (identity hexes). MUST NOT cross the shore.
    *  Present here only so a witness can watch the veil hold. */
   readonly roster?: readonly string[];
@@ -144,18 +144,18 @@ export const CABAL_REALM_VEIL_PUBLIC_SET = {
  * Optional fields stay omitted (never `undefined`-valued) so the charter loads
  * cleanly into Automerge and serializes deterministically.
  */
-export function projectCabalRealmCharter(state: CabalRealmPublishState): CabalRealmCharter {
+export function projectRealmGlamour(state: CabalRealmPublishState): RealmGlamour {
   const { realm, meta } = state;          // NB: roster + substrateContent deliberately NOT destructured
-  const charter: { -readonly [K in keyof CabalRealmCharter]: CabalRealmCharter[K] } = {
+  const glamour: { -readonly [K in keyof RealmGlamour]: RealmGlamour[K] } = {
     realmDocIdHex: realm.realmDocIdHex,
     genesisUri:    realm.genesisUri,
   };
-  if (meta?.title       !== undefined) charter.title       = meta.title;
-  if (meta?.description !== undefined) charter.description = meta.description;
-  if (meta?.foundedAt   !== undefined) charter.foundedAt   = meta.foundedAt;
+  if (meta?.title       !== undefined) glamour.title       = meta.title;
+  if (meta?.description !== undefined) glamour.description = meta.description;
+  if (meta?.foundedAt   !== undefined) glamour.foundedAt   = meta.foundedAt;
   // Coarse, explicitly-published count ONLY — never derived from the roster.
-  if (meta?.memberCount !== undefined) charter.memberCount = meta.memberCount;
-  return charter;
+  if (meta?.memberCount !== undefined) glamour.memberCount = meta.memberCount;
+  return glamour;
 }
 
 /**
@@ -173,9 +173,9 @@ const CHARTER_ACTOR_ID = "00000000000000000000000000000000" as const;
  * uses — load the plain charter into a fixed-actor Automerge doc, export by content
  * hash. Deterministic: the same charter yields the same cid.
  */
-export function cabalRealmCharterSnapshot(charter: CabalRealmCharter): Promise<OracleSnapshot> {
+export function realmGlamourSnapshot(charter: RealmGlamour): Promise<OracleSnapshot> {
   // Automerge rejects `undefined` values + the readonly interface; the charter
-  // already omits unset keys (projectCabalRealmCharter), so this clone runs total.
+  // already omits unset keys (projectRealmGlamour), so this clone runs total.
   return exportOracleSnapshot(automergeFrom({ ...charter }, CHARTER_ACTOR_ID));
 }
 
@@ -183,7 +183,7 @@ export function cabalRealmCharterSnapshot(charter: CabalRealmCharter): Promise<O
  * The read-face wiring helper — produce the `exportSnapshot` shore variant that
  * serves ONLY a realm's charter. Hand it straight to the node-side read-face:
  *
- *   mountOracleReadFace({ …, exportSnapshot: cabalRealmCharterExporter(state) })
+ *   mountOracleReadFace({ …, exportSnapshot: realmGlamourExporter(state) })
  *
  * The read-face calls it on each change with the live doc; the charter stands STATIC
  * public meta, so the exporter ignores that arg and re-snapshots the charter (the
@@ -191,9 +191,9 @@ export function cabalRealmCharterSnapshot(charter: CabalRealmCharter): Promise<O
  * ea-breath keeps the pointer fresh). ONLY the charter ever crosses the wire — the
  * substrate + roster never enter this path.
  */
-export function cabalRealmCharterExporter(
+export function realmGlamourExporter(
   state: CabalRealmPublishState,
 ): (doc?: unknown) => Promise<OracleSnapshot> {
-  const charter = projectCabalRealmCharter(state);
-  return (_doc?: unknown) => cabalRealmCharterSnapshot(charter);
+  const charter = projectRealmGlamour(state);
+  return (_doc?: unknown) => realmGlamourSnapshot(charter);
 }

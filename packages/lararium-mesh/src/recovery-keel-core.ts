@@ -25,7 +25,7 @@ import {
 } from "./recovery-share.js";
 import { splitToGuardianCards, type GuardianCard, type GuardianCardSplit } from "./guardian-card.js";
 import { assertHandleIndex, loadPersonaRootSeed, type PersonaVault } from "./persona-vault.js";
-import { charterKeySetHash } from "./wax-stamp.js";
+import { sealKeySetHash } from "./wax-stamp.js";
 import type { QuorumSignature } from "./kapae-antigen.js";
 import {
   mintPersonaInception, mintPersonaRotation, personaRotationSigningBytes,
@@ -221,7 +221,7 @@ export function provisionThresholdRecoveryAtFounding(input: {
   if (input.guardianRecoveryKeys.length < recoveryThreshold) {
     throw new Error("[recovery-keel-core] fewer guardian recovery keys than the threshold — cannot pre-commit an unmeetable quorum");
   }
-  const recoverySetHash = charterKeySetHash(input.guardianRecoveryKeys, recoveryThreshold);
+  const recoverySetHash = sealKeySetHash(input.guardianRecoveryKeys, recoveryThreshold);
   const inception       = mintPersonaInception(input.foundingOpKeyDid, recoverySetHash);
   return { inception, recoverySetHash, recoveryThreshold };
 }

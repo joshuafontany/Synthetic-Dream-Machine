@@ -68,7 +68,7 @@ describe("authenticated-membership-relay — cas-wire over a live authenticated 
 
     // Seal a body @cad.
     const registry = makeSealedPlaneRegistry();
-    const keyring = standNexusKeyring({ charterEpoch: 0, dir: idDir });
+    const keyring = standNexusKeyring({ sealEpoch: 0, dir: idDir });
     const cadDir = cadSealDir(storageDir);
     const installed = sealCarrierForFederation({ registry, cadDir, plaintext: BODY, keyring });
 

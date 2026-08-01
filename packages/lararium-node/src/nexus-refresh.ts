@@ -32,7 +32,7 @@ import {
   antigenEntriesFromBoard, carriageEntriesFromBoard,
   federationPostureFromDoc, type FederationPosture,
 } from "@lararium/mesh";
-import { readNexusCharterDoc } from "./nexus-charter-doc.js";
+import { readNexusCharterDoc } from "./nexus-doc.js";
 import type { AntigenRingHolder } from "./antigen-ring.js";
 import type { NexusMembershipHolder } from "./nexus-carriage.js";
 

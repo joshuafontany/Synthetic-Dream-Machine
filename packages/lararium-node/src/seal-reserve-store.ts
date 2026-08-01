@@ -1,13 +1,13 @@
 /**
- * charter-reserve-store — the node adapter for the charter reserve keel: it SEALS the operator's "mine"
+ * seal-reserve-store — the node adapter for the charter reserve keel: it SEALS the operator's "mine"
  * share at rest and records the PUBLIC reserve state. The reserve seed NEVER reaches this store (it never
  * reaches disk at all) — the vessel keeps only ONE Shamir share of it (custodian "device"), sealed exactly
  * like the recovery keel's device-share, so an at-rest read of the vessel reveals a single share → nothing.
  *
  * Two carriers, both in the sovereign identity home (`larIdentityDir`, outside every substrate wipe):
- *   · the SEALED "mine" share (`charter-reserve-mine-share.bin`) — self-sovereign secret material, sealed
+ *   · the SEALED "mine" share (`seal-reserve-mine-share.bin`) — self-sovereign secret material, sealed
  *     through the same `asSelfSovereignSecret` wall the recovery device-share rides,
- *   · the PUBLIC reserve state (`charter-reserve-state.json`) — the pre-rotation commit + guardian labels +
+ *   · the PUBLIC reserve state (`seal-reserve-state.json`) — the pre-rotation commit + guardian labels +
  *     a sealed-share flag. It carries NO seed and NO share bytes, so `reserve show` reads it freely.
  */
 
@@ -20,12 +20,12 @@ import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignS
 
 /** The sealed "mine"-share carrier — the ONE share of the reserve seed the vessel holds at rest. */
 export function reserveMineSharePath(): string {
-  return join(larIdentityDir(), "charter-reserve-mine-share.bin");
+  return join(larIdentityDir(), "seal-reserve-mine-share.bin");
 }
 
 /** The public reserve-state carrier — the pre-rotation commit + guardian labels, no secret material. */
 export function reserveStatePath(): string {
-  return join(larIdentityDir(), "charter-reserve-state.json");
+  return join(larIdentityDir(), "seal-reserve-state.json");
 }
 
 interface StoredShare {
@@ -66,7 +66,7 @@ export function loadReserveMineShare(): RecoveryShare | null {
 }
 
 /** The PUBLIC reserve state — the pre-rotation commit + guardian labels. Carries NO seed, NO share bytes. */
-export interface CharterReserveState {
+export interface SealReserveState {
   readonly reserveEpoch:    number;
   readonly nextKeyCommit:   string;
   readonly threshold:       number;
@@ -78,7 +78,7 @@ export interface CharterReserveState {
 }
 
 /** Record the public reserve state (0o600). No secret material rides in this file. */
-export function writeCharterReserveState(state: CharterReserveState): void {
+export function writeCharterReserveState(state: SealReserveState): void {
   mkdirSync(larIdentityDir(), { recursive: true });
   const path = reserveStatePath();
   atomicWriteFileSync(path, JSON.stringify(state, null, 2));
@@ -86,8 +86,8 @@ export function writeCharterReserveState(state: CharterReserveState): void {
 }
 
 /** Read the public reserve state, or null when none has landed / a torn file reads back. */
-export function readCharterReserveState(): CharterReserveState | null {
+export function readCharterReserveState(): SealReserveState | null {
   const path = reserveStatePath();
   if (!existsSync(path)) return null;
-  try { return JSON.parse(readFileSync(path, "utf8")) as CharterReserveState; } catch { return null; }
+  try { return JSON.parse(readFileSync(path, "utf8")) as SealReserveState; } catch { return null; }
 }

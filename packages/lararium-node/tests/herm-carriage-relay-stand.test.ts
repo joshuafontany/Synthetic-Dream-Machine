@@ -85,7 +85,7 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
     const storageDir = mkDir("store");
     const idDir = mkDir("id");
     const registry = makeSealedPlaneRegistry();
-    const keyring = standNexusKeyring({ charterEpoch: 0, dir: idDir });
+    const keyring = standNexusKeyring({ sealEpoch: 0, dir: idDir });
     const cadDir = cadSealDir(storageDir);
     const installed = sealCarrierForFederation({ registry, cadDir, plaintext: BODY, keyring });
     return { cadDir, installed, registry };

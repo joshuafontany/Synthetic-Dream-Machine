@@ -38,7 +38,7 @@ import {
   makeMultiSigQuorumVerifier,
   materializeSharedLarDoc,
 } from "@lararium/mesh";
-import { readNexusCharterDoc } from "./nexus-charter-doc.js";
+import { readNexusCharterDoc } from "./nexus-doc.js";
 
 /** A verifying-key nym reads clean only at the exact ed25519 length — a stray value never matches a ban. */
 const NYM_RE = /^[0-9a-f]{64}$/;

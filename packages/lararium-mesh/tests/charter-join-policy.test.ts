@@ -13,14 +13,14 @@
 import { describe, test, expect } from "vitest";
 import {
   joinPolicyFromDoc, federationPostureFromDoc, admissionDialsFromDoc,
-  NEXUS_CHARTER_DOC_KIND, type NexusCharterDoc,
-} from "../src/nexus-charter-seed.js";
+  NEXUS_CHARTER_DOC_KIND, type NexusDoc,
+} from "../src/nexus-seal-seed.js";
 
 /** A minimal seated charter — the fields under test ride on top per-case. */
-function joinCharter(extra: Partial<NexusCharterDoc> = {}): NexusCharterDoc {
+function joinCharter(extra: Partial<NexusDoc> = {}): NexusDoc {
   return {
-    kind: NEXUS_CHARTER_DOC_KIND, threshold: 2, charterEpochCid: null, kahu: [], ...extra,
-  } as NexusCharterDoc;
+    kind: NEXUS_CHARTER_DOC_KIND, threshold: 2, sealEpochCid: null, kahu: [], ...extra,
+  } as NexusDoc;
 }
 
 describe("joinPolicyFromDoc — the stranger dial, fail-closed", () => {
@@ -39,11 +39,11 @@ describe("joinPolicyFromDoc — the stranger dial, fail-closed", () => {
     expect(joinPolicyFromDoc(joinCharter())).toEqual({ kind: "invite-only" });
 
     for (const torn of ["OPEN", "open ", "", "public", "invite", null, undefined, 1, {}, ["open"]]) {
-      const doc = joinCharter({ joinPolicy: { kind: torn } as unknown as NexusCharterDoc["joinPolicy"] });
+      const doc = joinCharter({ joinPolicy: { kind: torn } as unknown as NexusDoc["joinPolicy"] });
       expect(joinPolicyFromDoc(doc)).toEqual({ kind: "invite-only" });
     }
     // a doc whose joinPolicy is itself junk (not an object) still closes
-    expect(joinPolicyFromDoc({ ...joinCharter(), joinPolicy: "open" } as unknown as NexusCharterDoc))
+    expect(joinPolicyFromDoc({ ...joinCharter(), joinPolicy: "open" } as unknown as NexusDoc))
       .toEqual({ kind: "invite-only" });
   });
 

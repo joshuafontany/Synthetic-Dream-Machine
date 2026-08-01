@@ -26,7 +26,7 @@ async function admitEntry(version = 1) {
   const nym     = await pubOf(JOIN);
   const signers = await Promise.all(KAHU.map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
   const cs      = await signCarriageContract(nym, EPOCH, signerOf(JOIN));
-  return signCarriageQuorum({ nym, action: "admit", version, charterEpochCid: EPOCH }, signers, cs);
+  return signCarriageQuorum({ nym, action: "admit", version, sealEpochCid: EPOCH }, signers, cs);
 }
 
 describe("members-board — write/read roundtrip + fail-closed extraction", () => {
@@ -36,7 +36,7 @@ describe("members-board — write/read roundtrip + fail-closed extraction", () =
     writeCarriageEntry(board, entry);
     const read = carriageEntriesFromBoard(board);
     expect(read).toHaveLength(1);
-    expect(read[0]).toMatchObject({ nym: entry.nym, action: "admit", version: 1, charterEpochCid: EPOCH });
+    expect(read[0]).toMatchObject({ nym: entry.nym, action: "admit", version: 1, sealEpochCid: EPOCH });
     expect(read[0]!.signatures).toHaveLength(2);
     expect(read[0]!.contractSig?.signer).toBe(entry.nym);
   });
@@ -64,7 +64,7 @@ describe("members-board — write/read roundtrip + fail-closed extraction", () =
     board.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(smuggled) }, EPOCH);
     const read = carriageEntriesFromBoard(board);
     expect(read).toHaveLength(1);
-    expect(Object.keys(read[0]!).sort()).toEqual(["action", "charterEpochCid", "contractSig", "kind", "nym", "signatures", "version"]);
+    expect(Object.keys(read[0]!).sort()).toEqual(["action", "contractSig", "kind", "nym", "sealEpochCid", "signatures", "version"]);
     expect(read[0]).not.toHaveProperty("email");
     expect(read[0]).not.toHaveProperty("displayName");
     expect(read[0]!.kind).toBe(CARRIAGE_ENTRY_DOMAIN);

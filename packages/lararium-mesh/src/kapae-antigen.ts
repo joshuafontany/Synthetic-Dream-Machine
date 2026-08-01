@@ -51,8 +51,8 @@ export interface KapaeAntigenEntry {
   readonly action:          KapaeAction;
   /** Monotone per-nym: a later steward act supersedes an earlier one; a stale entry cannot roll it back. */
   readonly version:         number;
-  /** The nexus-charter epoch this quorum act roots on (the wax-stamp epoch-chain — CharterEpoch.epochCid). */
-  readonly charterEpochCid: string;
+  /** The nexus-charter epoch this quorum act roots on (the wax-stamp epoch-chain — SealEpoch.epochCid). */
+  readonly sealEpochCid: string;
   /** ≥ threshold distinct-signer signatures — the quorum authority. */
   readonly signatures:      readonly QuorumSignature[];
 }
@@ -60,15 +60,15 @@ export interface KapaeAntigenEntry {
 /**
  * The founding-kahu roster the antigen signs against — the concrete keys + threshold for ONE charter
  * epoch. An UNBOUND roster (empty `keys`) can never meet a threshold ≥ 1, so it FAILS CLOSED: every
- * entry stays ignored until the operator seats the real founding keys (see ./nexus-charter-seed).
+ * entry stays ignored until the operator seats the real founding keys (see ./nexus-seal-seed).
  */
-export interface KahuCharterRoster {
+export interface KahuRoster {
   /** The founding kahu ed25519 verifying-key hexes authorized to sign under this charter epoch. */
   readonly keys:            readonly string[];
   /** k — the number of DISTINCT roster signatures a valid quorum act carries (2-of-3 at founding). */
   readonly threshold:       number;
   /** The charter epoch this roster authorizes; an entry rooting elsewhere does not verify here. */
-  readonly charterEpochCid: string;
+  readonly sealEpochCid: string;
 }
 
 /**
@@ -86,7 +86,7 @@ export function antigenEntryBytes(entry: Omit<KapaeAntigenEntry, "signatures">):
  * verifier denies at the call site; a verifier that cannot decide returns false. Never allow-all.
  */
 export interface QuorumVerifier {
-  verifyQuorum(entry: KapaeAntigenEntry, roster: KahuCharterRoster): Promise<boolean> | boolean;
+  verifyQuorum(entry: KapaeAntigenEntry, roster: KahuRoster): Promise<boolean> | boolean;
 }
 
 /**
@@ -109,15 +109,15 @@ export const denyingQuorumVerifier: QuorumVerifier = {
  *   · a signer absent from the roster does not count (a stranger cannot pad a quorum),
  *   · a signer counted TWICE counts once (a replayed signature cannot pad a quorum),
  *   · a signature that does not verify over the entry bytes does not count (tamper-evident),
- *   · the entry's `charterEpochCid` MUST equal the roster's (an entry roots on ONE known charter epoch).
+ *   · the entry's `sealEpochCid` MUST equal the roster's (an entry roots on ONE known charter epoch).
  */
 export function makeMultiSigQuorumVerifier(): QuorumVerifier {
   return {
-    async verifyQuorum(entry: KapaeAntigenEntry, roster: KahuCharterRoster): Promise<boolean> {
+    async verifyQuorum(entry: KapaeAntigenEntry, roster: KahuRoster): Promise<boolean> {
       if (entry.kind !== KAPAE_ANTIGEN_DOMAIN)                 return false;
       if (roster.threshold < 1)                               return false;
       if (roster.keys.length < roster.threshold)              return false;   // unbound/short roster → deny
-      if (entry.charterEpochCid !== roster.charterEpochCid)   return false;   // roots on an unknown epoch → deny
+      if (entry.sealEpochCid !== roster.sealEpochCid)   return false;   // roots on an unknown epoch → deny
 
       const rosterKeys = new Set(roster.keys);
       const bytes      = antigenEntryBytes(entry);
@@ -162,7 +162,7 @@ export async function signAntigenEntry(
  */
 export async function foldAntigenSet(
   entries: Iterable<KapaeAntigenEntry>,
-  roster: KahuCharterRoster,
+  roster: KahuRoster,
   verifier: QuorumVerifier,
 ): Promise<ReadonlySet<string>> {
   // Per nym, the winning verified entry: highest version; on a version tie, `kapae` beats `un_kapae`.

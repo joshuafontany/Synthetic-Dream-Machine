@@ -54,7 +54,7 @@ export function antigenEntryKey(nym: string, action: KapaeAction, version: numbe
  */
 export function writeAntigenEntry(draft: LarDoc, entry: KapaeAntigenEntry): void {
   const key = antigenEntryKey(entry.nym, entry.action, entry.version);
-  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(entry) }, entry.charterEpochCid);
+  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(entry) }, entry.sealEpochCid);
 }
 
 /** Coerce one signature-record, or null when a required field is missing / mis-typed (the whole sig drops). */
@@ -74,7 +74,7 @@ function coerceAntigenEntry(parsed: unknown): KapaeAntigenEntry | null {
   const action = p["action"];
   if (action !== "kapae" && action !== "un_kapae") return null;           // unknown action → skip
   if (!Number.isFinite(p["version"])) return null;                        // no monotone version → skip
-  if (typeof p["charterEpochCid"] !== "string" || p["charterEpochCid"].length === 0) return null; // no epoch root → skip
+  if (typeof p["sealEpochCid"] !== "string" || p["sealEpochCid"].length === 0) return null; // no epoch root → skip
   if (!Array.isArray(p["signatures"])) return null;                       // no quorum shape → skip
   const signatures: QuorumSignature[] = [];
   for (const raw of p["signatures"]) {
@@ -87,7 +87,7 @@ function coerceAntigenEntry(parsed: unknown): KapaeAntigenEntry | null {
     nym:             p["nym"],
     action:          action as KapaeAction,
     version:         p["version"] as number,
-    charterEpochCid: p["charterEpochCid"],
+    sealEpochCid: p["sealEpochCid"],
     signatures,
   };
 }

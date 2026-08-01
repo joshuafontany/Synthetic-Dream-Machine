@@ -35,16 +35,16 @@ import * as ed from "@noble/ed25519";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
-  hex, genesisCharterEpochCid, foundingRoster, foldCarriageSet, holdsCarriage,
+  hex, genesisSealEpochCid, foundingRoster, foldCarriageSet, holdsCarriage,
   carriageEntryBytes, signCarriageQuorum, ed25519SignerFromSeed,
-  type NexusCharterDoc, type KahuCharterRoster, type CarriageEntry,
+  type NexusDoc, type KahuRoster, type CarriageEntry,
 } from "@lararium/mesh";
 import {
   generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot,
   loadPersonaGroupRootSeed, loadVesselVerifyingKey,
 } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
-import { writeNexusCharterDoc, readNexusCharterDoc } from "../src/nexus-charter-doc.js";
+import { writeNexusCharterDoc, readNexusCharterDoc } from "../src/nexus-doc.js";
 import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
 
@@ -95,9 +95,9 @@ async function standHearth(root: string, threshold = 2): Promise<Hearth> {
     const nexusPubkey = await loadVesselVerifyingKey(dir);
     const keys = roots.map((r) => r.verifyingKey);
     const bags = join(root, "bags");
-    const doc: NexusCharterDoc = {
+    const doc: NexusDoc = {
       kind: "lar-nexus-charter/v1", threshold,
-      charterEpochCid: genesisCharterEpochCid(keys, threshold),
+      sealEpochCid: genesisSealEpochCid(keys, threshold),
       kahu: [
         { displayName: "Founder-0", verifyingKey: keys[0]! },
         { displayName: "Founder-1", verifyingKey: keys[1]! },
@@ -105,7 +105,7 @@ async function standHearth(root: string, threshold = 2): Promise<Hearth> {
       ],
     };
     writeNexusCharterDoc(bags, doc);
-    return { root, bags, nexusPubkey, operatorNym: keys[0]!.toLowerCase(), epoch: doc.charterEpochCid };
+    return { root, bags, nexusPubkey, operatorNym: keys[0]!.toLowerCase(), epoch: doc.sealEpochCid };
   });
 }
 
@@ -122,12 +122,12 @@ function hexToBytes(h: string): Uint8Array {
  * REVOKE counts). This models "revert the fix": if an admit counted on its kahu quorum WITHOUT the operator's
  * own consent, a Nexus could conscript. Verifies ≥ threshold distinct roster signatures over the entry bytes.
  */
-async function countsQuorumOnly(entry: CarriageEntry, roster: KahuCharterRoster): Promise<boolean> {
-  if (entry.charterEpochCid !== roster.charterEpochCid) return false;
+async function countsQuorumOnly(entry: CarriageEntry, roster: KahuRoster): Promise<boolean> {
+  if (entry.sealEpochCid !== roster.sealEpochCid) return false;
   const rosterKeys = new Set(roster.keys.map((k) => k.toLowerCase()));
   const bytes = carriageEntryBytes({
     kind: entry.kind, nym: entry.nym, action: entry.action,
-    version: entry.version, charterEpochCid: entry.charterEpochCid,
+    version: entry.version, sealEpochCid: entry.sealEpochCid,
   });
   const counted = new Set<string>();
   for (const s of entry.signatures) {
@@ -153,19 +153,19 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
     // ── Direction 1: Freyja (B) accepts carriage into A's nexus; Josh's (A) kahu admit her onto board A. ──
     const tokenF = await asRoot(rootB, () => runNexusAcceptCarriage({ handleIndex: 0, bagsDir: A.bags }));
     expect(tokenF.nym).toBe(B.operatorNym);        // signed with Freyja's own seed
-    expect(tokenF.charterEpochCid).toBe(A.epoch);  // bound to the OTHER hearth's charter epoch (the wax-stamp)
+    expect(tokenF.sealEpochCid).toBe(A.epoch);  // bound to the OTHER hearth's charter epoch (the wax-stamp)
 
     const admitF = await asRoot(rootA, () =>
       runNexusContract({ action: "admit", nym: B.operatorNym, contractSig: tokenF.contractSig, bagsDir: A.bags }));
     expect(admitF.contractIn).toBe("supplied");            // the joiner's out-of-band consent, not a self-sign
-    expect(admitF.charterEpochCid).toBe(A.epoch);          // the entry binds A's epoch cid (provenance)
+    expect(admitF.sealEpochCid).toBe(A.epoch);          // the entry binds A's epoch cid (provenance)
     expect(admitF.signers).toHaveLength(2);                // exactly the 2-of-3 founding-kahu quorum
     expect(admitF.memberNow).toBe(true);
 
     // ── Direction 2: Josh (A) accepts carriage into B's nexus; Freyja's (B) kahu admit him onto board B. ──
     const tokenJ = await asRoot(rootA, () => runNexusAcceptCarriage({ handleIndex: 0, bagsDir: B.bags }));
     expect(tokenJ.nym).toBe(A.operatorNym);
-    expect(tokenJ.charterEpochCid).toBe(B.epoch);
+    expect(tokenJ.sealEpochCid).toBe(B.epoch);
 
     const admitJ = await asRoot(rootB, () =>
       runNexusContract({ action: "admit", nym: A.operatorNym, contractSig: tokenJ.contractSig, bagsDir: B.bags }));
@@ -238,7 +238,7 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
         return { signer: r.verifyingKey, sign: ed25519SignerFromSeed(await loadPersonaGroupRootSeed(dir, i)) };
       }));
       const conscript: CarriageEntry = await signCarriageQuorum(
-        { nym: unconsented, action: "admit", version: 1, charterEpochCid: rosterA.charterEpochCid },
+        { nym: unconsented, action: "admit", version: 1, sealEpochCid: rosterA.sealEpochCid },
         signers,
         undefined,   // NO contract-in
       );

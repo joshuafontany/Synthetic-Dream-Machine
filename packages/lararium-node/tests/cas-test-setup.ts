@@ -84,14 +84,14 @@ export interface SealedBodyFixture {
 }
 
 /**
- * Seal one `plaintext` into a temp @cad dir under a fresh per-Nexus keyring (charterEpoch 0) —
+ * Seal one `plaintext` into a temp @cad dir under a fresh per-Nexus keyring (sealEpoch 0) —
  * the registry + cadDir + InstalledSealedBody a wire test serves, plus the temp-dir cleanup.
  */
 export function sealABody(plaintext: Uint8Array): SealedBodyFixture {
   const storageDir = mkdtempSync(join(tmpdir(), "lares-caswire-store-"));
   const idDir = mkdtempSync(join(tmpdir(), "lares-caswire-id-"));
   const registry = makeSealedPlaneRegistry();
-  const keyring = standNexusKeyring({ charterEpoch: 0, dir: idDir });
+  const keyring = standNexusKeyring({ sealEpoch: 0, dir: idDir });
   const cadDir = cadSealDir(storageDir);
   const installed = sealCarrierForFederation({ registry, cadDir, plaintext, keyring });
   const cleanup = () => {

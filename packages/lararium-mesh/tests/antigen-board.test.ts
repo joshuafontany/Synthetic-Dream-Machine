@@ -17,7 +17,7 @@ import { hex } from "../src/crypto.js";
 import { antigenEntriesFromBoard, writeAntigenEntry, antigenEntryKey } from "../src/antigen-board.js";
 import {
   signAntigenEntry, foldAntigenSet, makeMultiSigQuorumVerifier,
-  KAPAE_ANTIGEN_DOMAIN, type KapaeAntigenEntry, type KahuCharterRoster,
+  KAPAE_ANTIGEN_DOMAIN, type KapaeAntigenEntry, type KahuRoster,
 } from "../src/kapae-antigen.js";
 import { carryContractShareDecision, type AntigenRing } from "../src/federation-gate.js";
 import { muVoidBytes, syncCompleteVoid, kapaeDeniedVoid } from "../src/mu-void.js";
@@ -33,14 +33,14 @@ const signerOf = (seed: Uint8Array) => (bytes: Uint8Array) => ed.signAsync(bytes
 const pubOf    = (seed: Uint8Array) => ed.getPublicKeyAsync(seed).then(hex);
 const verifier = makeMultiSigQuorumVerifier();
 
-async function roster(): Promise<KahuCharterRoster> {
+async function roster(): Promise<KahuRoster> {
   const keys = await Promise.all([pubOf(SEEDS.guru), pubOf(SEEDS.telarus), pubOf(SEEDS.lindwyrm)]);
-  return { keys, threshold: 2, charterEpochCid: EPOCH };
+  return { keys, threshold: 2, sealEpochCid: EPOCH };
 }
 
 async function banEntry(nym: string, seeds = [SEEDS.guru, SEEDS.telarus]): Promise<KapaeAntigenEntry> {
   const signers = await Promise.all(seeds.map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
-  return signAntigenEntry({ nym, action: "kapae", version: 1, charterEpochCid: EPOCH }, signers);
+  return signAntigenEntry({ nym, action: "kapae", version: 1, sealEpochCid: EPOCH }, signers);
 }
 
 /** A board LarDoc carrying the given tiddler texts (each a would-be antigen entry). */
@@ -112,7 +112,7 @@ describe("writeAntigenEntry — the RAISE side lands what the reader reads (#65)
 
   async function liftEntry(nym: string, version: number, seeds = [SEEDS.guru, SEEDS.telarus]): Promise<KapaeAntigenEntry> {
     const signers = await Promise.all(seeds.map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
-    return signAntigenEntry({ nym, action: "un_kapae", version, charterEpochCid: EPOCH }, signers);
+    return signAntigenEntry({ nym, action: "un_kapae", version, sealEpochCid: EPOCH }, signers);
   }
 
   test("a written ban ROUND-TRIPS through the reader and FOLDS to Kapae'd against the seated roster", async () => {
@@ -148,7 +148,7 @@ describe("writeAntigenEntry — the RAISE side lands what the reader reads (#65)
 
     // A re-ban at a yet-higher version re-imposes it (monotone both ways).
     const reban = await signAntigenEntry(
-      { nym: VICTIM, action: "kapae", version: 3, charterEpochCid: EPOCH },
+      { nym: VICTIM, action: "kapae", version: 3, sealEpochCid: EPOCH },
       await Promise.all([SEEDS.guru, SEEDS.telarus].map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) }))),
     );
     writeAntigenEntry(doc, reban);

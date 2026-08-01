@@ -10,7 +10,7 @@
  *   · `persona new 0/1/2 --name '<kahu>'` each returns 0; the roster then reads [0,1,2] with all three pet-names,
  *   · `persona new 0` on a PRE-STANDING founder root LOADS it (created:false) and STILL sets the pet-name
  *     (idempotent — the founder is named, never re-minted, its verifying key unchanged),
- *   · `nexus charter seat` joins persona→kahu BY pet-name and seats ALL THREE (the founder among them) —
+ *   · `nexus seal seat` joins persona→kahu BY pet-name and seats ALL THREE (the founder among them) —
  *     the full 3-of-3 stands, never a 2-of-3 that strands the founder unnamed.
  */
 import { afterEach, beforeEach, describe, test, expect, vi } from "vitest";
@@ -83,7 +83,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     for (let i = 0; i < KAHU.length; i++) {
       await cmdPersona(personaArgs(["new", String(i)], { name: KAHU[i]! }));
     }
-    expect(await cmdNexus(nexusArgs(["charter", "seat"]))).toBe(0);
+    expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
 
     const doc = readNexusCharterDoc(larBagsDir());
     expect(doc?.kahu.length).toBe(3);

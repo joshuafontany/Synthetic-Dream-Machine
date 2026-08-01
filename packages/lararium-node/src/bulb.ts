@@ -40,7 +40,7 @@ export interface BulbArtifact {
   /** The ALL-PUBLIC social bootstrap pointers (identities/circles/sessions/daemon/persona doc urls). */
   readonly bootstrap:       Record<string, unknown>;
   /** The charter chain-head epoch this bulb is EPOCH-PINNED to (null when the charter is unseated). */
-  readonly charterEpochCid: string | null;
+  readonly sealEpochCid: string | null;
 }
 
 /** One content-addressed bulb blob served by cid over the public floor. */
@@ -53,7 +53,7 @@ export interface BulbManifest {
   readonly bootstrapCid:    string;              // sha256(JSON(bootstrap))
   readonly casManifestCid:  string;              // sha256(JSON(casManifest))
   readonly casCids:         readonly string[];   // the engine + plugin CAS blob cids (each = its own sha256)
-  readonly charterEpochCid: string | null;       // the epoch-PIN (charter chain-head)
+  readonly sealEpochCid: string | null;       // the epoch-PIN (charter chain-head)
 }
 
 const jsonBytes = (v: unknown): Uint8Array => utf8Bytes(JSON.stringify(v));
@@ -74,7 +74,7 @@ export function buildBulb(a: BulbArtifact): { manifest: BulbManifest; blobs: Bul
     format: BULB_MANIFEST_FORMAT,
     seedCid, bootstrapCid, casManifestCid,
     casCids: a.casEntries.map((e) => e.cid),
-    charterEpochCid: a.charterEpochCid,
+    sealEpochCid: a.sealEpochCid,
   };
   const blobs: BulbBlob[] = [
     { cid: seedCid,        bytes: seedBytes },
@@ -104,7 +104,7 @@ export function assembleBulb(manifest: BulbManifest, getBlob: (cid: string) => U
   const bootstrap   = JSON.parse(new TextDecoder().decode(verified(manifest.bootstrapCid,   "bootstrap")))   as Record<string, unknown>;
   const casManifest = JSON.parse(new TextDecoder().decode(verified(manifest.casManifestCid, "cas-manifest"))) as GenesisCasManifest;
   const casEntries  = manifest.casCids.map((cid) => ({ cid, bytes: verified(cid, "cas") }));
-  return { seed, casManifest, casEntries, bootstrap, charterEpochCid: manifest.charterEpochCid };
+  return { seed, casManifest, casEntries, bootstrap, sealEpochCid: manifest.sealEpochCid };
 }
 
 /**
@@ -112,7 +112,7 @@ export function assembleBulb(manifest: BulbManifest, getBlob: (cid: string) => U
  * the CAS manifest (island.manifest.json), every genesis/cas/<cid> blob, and the social bootstrap (social-bootstrap.json),
  * PINNED to the passed charter chain-head epoch. Returns null when the genesis is absent/malformed (nothing to serve).
  */
-export function readBulbArtifact(genesisDir: string, charterEpochCid: string | null): BulbArtifact | null {
+export function readBulbArtifact(genesisDir: string, sealEpochCid: string | null): BulbArtifact | null {
   const seed        = readGenesisSeed(genesisDir);
   const casManifest = readGenesisManifest(genesisDir);
   if (!seed || !casManifest) return null;
@@ -125,5 +125,5 @@ export function readBulbArtifact(genesisDir: string, charterEpochCid: string | n
   let bootstrap: Record<string, unknown> = {};
   try { bootstrap = JSON.parse(readFileSync(join(genesisDir, "social-bootstrap.json"), "utf8")) as Record<string, unknown>; }
   catch { bootstrap = {}; }   // a Herm with no seated social plane serves an empty bootstrap (a stranger seeds their own)
-  return { seed, casManifest, casEntries, bootstrap, charterEpochCid };
+  return { seed, casManifest, casEntries, bootstrap, sealEpochCid };
 }

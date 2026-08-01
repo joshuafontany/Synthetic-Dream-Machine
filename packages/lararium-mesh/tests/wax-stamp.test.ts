@@ -7,15 +7,15 @@ import { describe, test, expect } from "vitest";
 import { generateKeyPairSync } from "node:crypto";
 import * as ed25519 from "@noble/ed25519";
 import {
-  verifyCharterChain, classifySeal, detectDuplicity,
+  verifySealLineage, classifySeal, detectDuplicity,
   mintWaxStamp, verifyWaxStampSig, singleKeySetHash,
-  charterKeySetHash, charterEpochCidOf, mintCharterEpoch,
-  genesisCharterEpoch, rotateCharterEpoch,
-  type CharterEpoch, type WaxStamp,
+  sealKeySetHash, sealEpochCidOf, mintCharterEpoch,
+  genesisCharterEpoch, rotateSealEpoch,
+  type SealEpoch, type WaxStamp,
 } from "../src/wax-stamp.js";
 
 // A valid 3-epoch chain: each epoch's keySetHash == its predecessor's nextKeyCommit (pre-rotation).
-const CHAIN: CharterEpoch[] = [
+const CHAIN: SealEpoch[] = [
   { epoch: 0, epochCid: "e0", keySetHash: "k0", nextKeyCommit: "k1", prevEpochCid: null },
   { epoch: 1, epochCid: "e1", keySetHash: "k1", nextKeyCommit: "k2", prevEpochCid: "e0" },
   { epoch: 2, epochCid: "e2", keySetHash: "k2", nextKeyCommit: "k3", prevEpochCid: "e1" },  // HEAD
@@ -23,20 +23,20 @@ const CHAIN: CharterEpoch[] = [
 const stampUnder = (epochCid: string, sig = `sig-${epochCid}`): WaxStamp =>
   ({ artifactHash: "art-1", epochCid, sealedAt: "itc:[0,4]", signature: sig });
 // A faithful sig-verify stub: the signature is "sig-<epochCid>" iff genuinely sealed under that epoch.
-const verifySig = (s: WaxStamp, e: CharterEpoch): boolean => s.signature === `sig-${e.epochCid}`;
+const verifySig = (s: WaxStamp, e: SealEpoch): boolean => s.signature === `sig-${e.epochCid}`;
 
 describe("wax-stamp — charter-epoch provenance", () => {
-  test("verifyCharterChain accepts a pre-rotated hash-linked lineage", () => {
-    expect(verifyCharterChain(CHAIN)).toBe(true);
+  test("verifySealLineage accepts a pre-rotated hash-linked lineage", () => {
+    expect(verifySealLineage(CHAIN)).toBe(true);
   });
 
-  test("verifyCharterChain rejects a broken hash-link, broken pre-rotation, or bad genesis", () => {
-    expect(verifyCharterChain([{ ...CHAIN[0]!, prevEpochCid: "x" }])).toBe(false);                 // genesis has a prev
+  test("verifySealLineage rejects a broken hash-link, broken pre-rotation, or bad genesis", () => {
+    expect(verifySealLineage([{ ...CHAIN[0]!, prevEpochCid: "x" }])).toBe(false);                 // genesis has a prev
     const badLink = [CHAIN[0]!, { ...CHAIN[1]!, prevEpochCid: "wrong" }, CHAIN[2]!];
-    expect(verifyCharterChain(badLink)).toBe(false);                                               // hash-link broken
+    expect(verifySealLineage(badLink)).toBe(false);                                               // hash-link broken
     const badRot = [CHAIN[0]!, { ...CHAIN[1]!, keySetHash: "forged" }, CHAIN[2]!];
-    expect(verifyCharterChain(badRot)).toBe(false);                                                // pre-rotation broken
-    expect(verifyCharterChain([])).toBe(false);
+    expect(verifySealLineage(badRot)).toBe(false);                                                // pre-rotation broken
+    expect(verifySealLineage([])).toBe(false);
   });
 
   test("a seal under the HEAD epoch reads CURRENT", () => {
@@ -56,7 +56,7 @@ describe("wax-stamp — charter-epoch provenance", () => {
   });
 
   test("duplicity is detectable (two CIDs at one sequence); a consistent pair is clean", () => {
-    const fork: CharterEpoch[] = [CHAIN[0]!, { ...CHAIN[1]!, epochCid: "e1-fork", prevEpochCid: "e0" }];
+    const fork: SealEpoch[] = [CHAIN[0]!, { ...CHAIN[1]!, epochCid: "e1-fork", prevEpochCid: "e0" }];
     expect(detectDuplicity(CHAIN, fork)).toBe(1);        // epoch 1 signed two ways = proof-of-misbehavior
     expect(detectDuplicity(CHAIN, CHAIN)).toBeNull();    // the same lineage duplicates nothing
     // NOTE: which fork is "legitimate" is NOT decided here — higher-order social acceptance, never a signature.
@@ -76,14 +76,14 @@ describe("wax-stamp R1 — a no-membership reader verifies provenance from the P
 
   const k0 = key(), k1 = key(), k2 = key(), k3 = key();
   // The PUBLIC charter — keys/thresholds only, hash-linked, pre-rotated. NO member identities anywhere.
-  const CHARTER: CharterEpoch[] = [
+  const CHARTER: SealEpoch[] = [
     { epoch: 0, epochCid: "c0", keySetHash: singleKeySetHash(k0.pub), nextKeyCommit: singleKeySetHash(k1.pub), prevEpochCid: null },
     { epoch: 1, epochCid: "c1", keySetHash: singleKeySetHash(k1.pub), nextKeyCommit: singleKeySetHash(k2.pub), prevEpochCid: "c0" },
     { epoch: 2, epochCid: "c2", keySetHash: singleKeySetHash(k2.pub), nextKeyCommit: singleKeySetHash(k3.pub), prevEpochCid: "c1" },  // HEAD
   ];
 
   test("the reader classifies CURRENT / PAST-AUTHENTIC / SPOOF from the public charter alone", async () => {
-    expect(verifyCharterChain(CHARTER)).toBe(true);
+    expect(verifySealLineage(CHARTER)).toBe(true);
 
     // The org mints a stamp under the HEAD epoch, signed by the head's authorized key.
     const current = await mintWaxStamp({ artifactHash: "art-current", epoch: CHARTER[2]!, sealedAt: "itc:[8,12]", sign: sign(k2.seed) });
@@ -116,38 +116,38 @@ describe("wax-stamp R1 — a no-membership reader verifies provenance from the P
 describe("charter-epoch CHAIN minter — pre-rotation seat + rotate ceremony (#68)", () => {
   const K = (n: number): string[] => [`${n}${"a".repeat(63)}`, `${n}${"b".repeat(63)}`];   // a 2-key set, distinct per epoch
   const GEN = K(1), E1 = K(2), E2 = K(3);
-  const commit1 = charterKeySetHash(GEN, 2);   // note: GEN's own digest, for a self-consistency check
+  const commit1 = sealKeySetHash(GEN, 2);   // note: GEN's own digest, for a self-consistency check
 
-  test("charterKeySetHash is order-blind + threshold-bound; charterEpochCidOf is tamper-evident", () => {
-    expect(charterKeySetHash(GEN, 2)).toBe(charterKeySetHash([...GEN].reverse(), 2));   // order-blind
-    expect(charterKeySetHash(GEN, 2)).not.toBe(charterKeySetHash(GEN, 1));              // threshold-bound
+  test("sealKeySetHash is order-blind + threshold-bound; sealEpochCidOf is tamper-evident", () => {
+    expect(sealKeySetHash(GEN, 2)).toBe(sealKeySetHash([...GEN].reverse(), 2));   // order-blind
+    expect(sealKeySetHash(GEN, 2)).not.toBe(sealKeySetHash(GEN, 1));              // threshold-bound
     const f = { epoch: 0, keySetHash: "k0", nextKeyCommit: "k1", prevEpochCid: null };
-    expect(charterEpochCidOf(f)).toBe(mintCharterEpoch(f).epochCid);
-    expect(charterEpochCidOf({ ...f, nextKeyCommit: "TAMPERED" })).not.toBe(charterEpochCidOf(f));  // a flip moves the cid
+    expect(sealEpochCidOf(f)).toBe(mintCharterEpoch(f).epochCid);
+    expect(sealEpochCidOf({ ...f, nextKeyCommit: "TAMPERED" })).not.toBe(sealEpochCidOf(f));  // a flip moves the cid
   });
 
   test("genesis seats sequence 0 with null prev; a valid rotate ACCEPTS + the chain verifies", () => {
     // seat: genesis pre-commits epoch1's key-set (E1).
-    const g = genesisCharterEpoch(GEN, 2, charterKeySetHash(E1, 2));
+    const g = genesisCharterEpoch(GEN, 2, sealKeySetHash(E1, 2));
     expect(g.epoch).toBe(0);
     expect(g.prevEpochCid).toBeNull();
-    expect(g.keySetHash).toBe(charterKeySetHash(GEN, 2));
-    expect(verifyCharterChain([g])).toBe(true);
+    expect(g.keySetHash).toBe(sealKeySetHash(GEN, 2));
+    expect(verifySealLineage([g])).toBe(true);
 
     // rotate: reveal E1 (matches the commitment), pre-commit E2 → epoch1 hash-links to genesis.
-    const r = rotateCharterEpoch(g, E1, 2, charterKeySetHash(E2, 2));
+    const r = rotateSealEpoch(g, E1, 2, sealKeySetHash(E2, 2));
     expect(r.ok).toBe(true);
     if (!r.ok) return;
     expect(r.epoch.epoch).toBe(1);
     expect(r.epoch.prevEpochCid).toBe(g.epochCid);
-    expect(r.epoch.keySetHash).toBe(charterKeySetHash(E1, 2));
-    const chain: CharterEpoch[] = [g, r.epoch];
-    expect(verifyCharterChain(chain)).toBe(true);   // seat→rotate round-trip verifies whole
+    expect(r.epoch.keySetHash).toBe(sealKeySetHash(E1, 2));
+    const chain: SealEpoch[] = [g, r.epoch];
+    expect(verifySealLineage(chain)).toBe(true);   // seat→rotate round-trip verifies whole
   });
 
   test("a mismatched reveal REFUSES (fail-closed): the revealed key-set is not the pre-committed one", () => {
-    const g = genesisCharterEpoch(GEN, 2, charterKeySetHash(E1, 2));   // committed E1
-    const r = rotateCharterEpoch(g, E2, 2, charterKeySetHash(K(4), 2)); // but reveal E2 → mismatch
+    const g = genesisCharterEpoch(GEN, 2, sealKeySetHash(E1, 2));   // committed E1
+    const r = rotateSealEpoch(g, E2, 2, sealKeySetHash(K(4), 2)); // but reveal E2 → mismatch
     expect(r.ok).toBe(false);
     if (r.ok) return;
     expect(r.reason).toMatch(/reveal mismatch/);
@@ -155,21 +155,21 @@ describe("charter-epoch CHAIN minter — pre-rotation seat + rotate ceremony (#6
 
   test("an UNARMED head (no pre-commitment) REFUSES rotation — nothing was committed to verify", () => {
     const g = genesisCharterEpoch(GEN, 2, "");   // rotation unarmed
-    const r = rotateCharterEpoch(g, E1, 2, charterKeySetHash(E2, 2));
+    const r = rotateSealEpoch(g, E1, 2, sealKeySetHash(E2, 2));
     expect(r.ok).toBe(false);
     if (r.ok) return;
     expect(r.reason).toMatch(/unarmed/);
   });
 
   test("a broken prev-link REFUSES at chain-verify (a forged successor cannot splice in)", () => {
-    const g = genesisCharterEpoch(GEN, 2, charterKeySetHash(E1, 2));
-    const r = rotateCharterEpoch(g, E1, 2, charterKeySetHash(E2, 2));
+    const g = genesisCharterEpoch(GEN, 2, sealKeySetHash(E1, 2));
+    const r = rotateSealEpoch(g, E1, 2, sealKeySetHash(E2, 2));
     if (!r.ok) throw new Error("rotate should have accepted");
     const forged = mintCharterEpoch({ ...r.epoch, prevEpochCid: "WRONG-PREV" });   // re-mint with a broken link
-    expect(verifyCharterChain([g, forged])).toBe(false);
+    expect(verifySealLineage([g, forged])).toBe(false);
     // and a forged reveal (keySetHash not pre-committed) fails the pre-rotation guard even with a good link
-    const forgedKeys = mintCharterEpoch({ epoch: 1, keySetHash: charterKeySetHash(K(9), 2), nextKeyCommit: "x", prevEpochCid: g.epochCid });
-    expect(verifyCharterChain([g, forgedKeys])).toBe(false);
+    const forgedKeys = mintCharterEpoch({ epoch: 1, keySetHash: sealKeySetHash(K(9), 2), nextKeyCommit: "x", prevEpochCid: g.epochCid });
+    expect(verifySealLineage([g, forgedKeys])).toBe(false);
     void commit1;
   });
 });

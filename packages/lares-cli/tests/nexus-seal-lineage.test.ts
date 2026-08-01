@@ -1,5 +1,5 @@
 /**
- * nexus-charter-chain — the CLI ceremony for the PRE-ROTATED charter-epoch chain (#68), driven end-to-end
+ * nexus-seal-lineage — the CLI ceremony for the PRE-ROTATED charter-epoch chain (#68), driven end-to-end
  * through a REAL persona vault + the bags/@nexus charter DOC on disk.
  *
  * Proven:
@@ -24,7 +24,7 @@ import { larBagsDir, larDataDir } from "../src/env.js";
 import {
   generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, readNexusCharterDoc,
 } from "@lararium/node";
-import { renameOwnPersona, charterKeySetHash, charterChainHead } from "@lararium/mesh";
+import { renameOwnPersona, sealKeySetHash, sealLineageHead } from "@lararium/mesh";
 
 const KAHU = ["Guru Joshua Fontany", "Telarus, KSC", "The Lindwyrm"];
 const saved: Record<string, string | undefined> = {};
@@ -35,7 +35,7 @@ const setEnv = (k: string, v: string | undefined): void => {
 const args = (positional: string[], options: Record<string, string> = {}): ParsedArgs =>
   ({ command: "nexus", positional, options, flags: { json: true } });
 
-describe("lares nexus charter — the pre-rotated chain ceremony (CLI, real vault + disk)", () => {
+describe("lares nexus seal — the pre-rotated chain ceremony (CLI, real vault + disk)", () => {
   let root: string;
   beforeEach(() => {
     root = mkdtempSync(join(tmpdir(), "lares-nexuschain-"));
@@ -64,61 +64,61 @@ describe("lares nexus charter — the pre-rotated chain ceremony (CLI, real vaul
 
   test("seat establishes the genesis epoch + a live quorum; re-seat past a rotation fails closed", async () => {
     const keys = await seatVault();
-    const commitNext = charterKeySetHash(keys, 2);   // pre-commit a digest the current vault satisfies
+    const commitNext = sealKeySetHash(keys, 2);   // pre-commit a digest the current vault satisfies
 
-    const rc = await cmdNexus(args(["charter", "seat"], { "next-key-commit": commitNext }));
+    const rc = await cmdNexus(args(["seal", "seat"], { "next-key-commit": commitNext }));
     expect(rc).toBe(0);
 
     const doc = readNexusCharterDoc(larBagsDir());
-    expect(doc?.charterChain?.length).toBe(1);
-    const head = charterChainHead(doc)!;
+    expect(doc?.sealLineage?.length).toBe(1);
+    const head = sealLineageHead(doc)!;
     expect(head.epoch).toBe(0);
     expect(head.prevEpochCid).toBeNull();
     expect(head.nextKeyCommit).toBe(commitNext);          // rotation armed
-    expect(doc?.charterEpochCid).toBe(head.epochCid);      // the antigen roots on the head
-    expect(head.keySetHash).toBe(charterKeySetHash(keys, 2));
+    expect(doc?.sealEpochCid).toBe(head.epochCid);      // the antigen roots on the head
+    expect(head.keySetHash).toBe(sealKeySetHash(keys, 2));
   });
 
   test("the seat→rotate round-trip: rotate reveals the pre-committed key-set + appends a hash-linked epoch1", async () => {
     const keys = await seatVault();
     // Genesis pre-commits a digest the current vault reveals — so the rotate's reveal MATCHES.
-    await cmdNexus(args(["charter", "seat"], { "next-key-commit": charterKeySetHash(keys, 2) }));
-    const genesis = charterChainHead(readNexusCharterDoc(larBagsDir()))!;
+    await cmdNexus(args(["seal", "seat"], { "next-key-commit": sealKeySetHash(keys, 2) }));
+    const genesis = sealLineageHead(readNexusCharterDoc(larBagsDir()))!;
 
-    const rc = await cmdNexus(args(["charter", "rotate"], { "next-key-commit": charterKeySetHash(keys, 2) }));
+    const rc = await cmdNexus(args(["seal", "rotate"], { "next-key-commit": sealKeySetHash(keys, 2) }));
     expect(rc).toBe(0);
 
     const doc = readNexusCharterDoc(larBagsDir());
-    expect(doc?.charterChain?.length).toBe(2);
-    const head = charterChainHead(doc)!;
+    expect(doc?.sealLineage?.length).toBe(2);
+    const head = sealLineageHead(doc)!;
     expect(head.epoch).toBe(1);
     expect(head.prevEpochCid).toBe(genesis.epochCid);     // hash-linked to genesis
-    expect(doc?.charterEpochCid).toBe(head.epochCid);      // the antigen re-roots on the new head
+    expect(doc?.sealEpochCid).toBe(head.epochCid);      // the antigen re-roots on the new head
 
     // re-seat now REFUSES (the chain has rotated past genesis) — never a silent re-genesis.
-    const reseat = await cmdNexus(args(["charter", "seat"], { "next-key-commit": charterKeySetHash(keys, 2) }));
+    const reseat = await cmdNexus(args(["seal", "seat"], { "next-key-commit": sealKeySetHash(keys, 2) }));
     expect(reseat).not.toBe(0);
-    expect(readNexusCharterDoc(larBagsDir())?.charterChain?.length).toBe(2);   // unchanged
+    expect(readNexusCharterDoc(larBagsDir())?.sealLineage?.length).toBe(2);   // unchanged
   });
 
   test("a rotate whose reveal MISMATCHES the pre-commitment REFUSES (nonzero) and writes nothing", async () => {
     const keys = await seatVault();
     // Genesis pre-commits a STRANGER key-set — the vault's real keys will not match on reveal.
-    const strangerCommit = charterKeySetHash(["f".repeat(64), "e".repeat(64)], 2);
-    await cmdNexus(args(["charter", "seat"], { "next-key-commit": strangerCommit }));
+    const strangerCommit = sealKeySetHash(["f".repeat(64), "e".repeat(64)], 2);
+    await cmdNexus(args(["seal", "seat"], { "next-key-commit": strangerCommit }));
     const before = readNexusCharterDoc(larBagsDir());
-    expect(before?.charterChain?.length).toBe(1);
+    expect(before?.sealLineage?.length).toBe(1);
 
-    const rc = await cmdNexus(args(["charter", "rotate"], { "next-key-commit": charterKeySetHash(keys, 2) }));
+    const rc = await cmdNexus(args(["seal", "rotate"], { "next-key-commit": sealKeySetHash(keys, 2) }));
     expect(rc).not.toBe(0);                                 // fail-closed on the reveal mismatch
 
     const after = readNexusCharterDoc(larBagsDir());
-    expect(after?.charterChain?.length).toBe(1);            // nothing written — still at epoch0
-    expect(charterChainHead(after)!.epoch).toBe(0);
+    expect(after?.sealLineage?.length).toBe(1);            // nothing written — still at epoch0
+    expect(sealLineageHead(after)!.epoch).toBe(0);
   });
 
-  test("commit computes a key-set digest matching charterKeySetHash (the operator's offline helper)", async () => {
-    const rc = await cmdNexus(args(["charter", "commit"], { keys: `${"a".repeat(64)},${"b".repeat(64)}`, threshold: "2" }));
-    expect(rc).toBe(0);   // the digest itself is asserted against charterKeySetHash at the mesh layer
+  test("commit computes a key-set digest matching sealKeySetHash (the operator's offline helper)", async () => {
+    const rc = await cmdNexus(args(["seal", "commit"], { keys: `${"a".repeat(64)},${"b".repeat(64)}`, threshold: "2" }));
+    expect(rc).toBe(0);   // the digest itself is asserted against sealKeySetHash at the mesh layer
   });
 });

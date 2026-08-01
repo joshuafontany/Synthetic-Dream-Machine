@@ -34,7 +34,7 @@ describe("keyring-envelope — the sealed delivery round-trip", () => {
   test("a founder seals its keyring to a joinee; the joinee opens it; a wrong recipient → null", () => {
     const founderDir = mkdtempSync(join(tmpdir(), "lares-kr-founder-"));
     try {
-      const keyring = standNexusKeyring({ charterEpoch: 0, dir: founderDir });
+      const keyring = standNexusKeyring({ sealEpoch: 0, dir: founderDir });
       const entries = keyring.epochs.map((epoch) => ({ epoch, secretHex: hex(keyring.forEpoch(epoch)!) }));
 
       const joinee = mintKeyringRecipient();
@@ -89,7 +89,7 @@ describe("keyring-delivery — CARRY ⊥ READ end-to-end", () => {
 
   test("an ADMITTED device reads a sealed body; a CARRY-ONLY peer cannot", () => {
     // The founder mints its keyring + seals a carrier body @cad.
-    const founderKeyring = standNexusKeyring({ charterEpoch: 0, dir: founderDir });
+    const founderKeyring = standNexusKeyring({ sealEpoch: 0, dir: founderDir });
     const registry = makeSealedPlaneRegistry();
     const cadDir = cadSealDir(storageDir);
     const installed = sealCarrierForFederation({ registry, cadDir, plaintext: BODY, keyring: founderKeyring });
@@ -122,7 +122,7 @@ describe("keyring-delivery — CARRY ⊥ READ end-to-end", () => {
     expect([...openBodyOnCas(ciphertext, reDerived)]).toEqual([...BODY]);
 
     // A device that was NEVER delivered the keyring re-derives NOTHING (its epoch secret is absent → throws).
-    const strangerKeyring = standNexusKeyring({ charterEpoch: 0, dir: mkdtempSync(join(tmpdir(), "lares-kr-stranger-")) });
+    const strangerKeyring = standNexusKeyring({ sealEpoch: 0, dir: mkdtempSync(join(tmpdir(), "lares-kr-stranger-")) });
     // The stranger's OWN epoch-0 secret differs from the founder's → its re-derived read-cap does NOT open the body.
     const strangerCap = readCapForEpoch(BODY, installed.epoch, strangerKeyring);
     expect([...openBodyOnCas(ciphertext, strangerCap)]).not.toEqual([...BODY]);
@@ -161,7 +161,7 @@ describe("keyring-delivery — a founder ADMITS a joinee through the persona-adm
     const resolveHeadOpKey = (p: string): string | null => (p === PREFIX ? personaKey : null);
 
     // The FOUNDER stands its Nexus keyring + seals a carrier body @cad under it.
-    const founderKeyring = standNexusKeyring({ charterEpoch: 0, dir: founderId });
+    const founderKeyring = standNexusKeyring({ sealEpoch: 0, dir: founderId });
     const registry = makeSealedPlaneRegistry();
     const cadDir = cadSealDir(storageDir);
     const installed = sealCarrierForFederation({ registry, cadDir, plaintext: BODY, keyring: founderKeyring });
@@ -169,7 +169,7 @@ describe("keyring-delivery — a founder ADMITS a joinee through the persona-adm
 
     // THE GAP MADE CONCRETE: the JOINEE self-mints its own PHANTOM secret at first boot (a Nexus-of-one). It
     // differs from the founder's, so the joinee re-derives the WRONG read-cap and CANNOT read the founder's body.
-    const phantom = standNexusKeyring({ charterEpoch: 0, dir: joineeId });
+    const phantom = standNexusKeyring({ sealEpoch: 0, dir: joineeId });
     expect(hex(phantom.forEpoch(0)!)).not.toBe(hex(founderKeyring.forEpoch(0)!));
     const phantomCap = readCapForEpoch(BODY, installed.epoch, phantom);
     expect([...openBodyOnCas(ciphertext, phantomCap)]).not.toEqual([...BODY]);   // the pre-admission joinee is blind
@@ -208,8 +208,8 @@ describe("keyring-delivery — a founder ADMITS a joinee through the persona-adm
     const resolveHeadOpKey = (p: string): string | null => (p === PREFIX ? personaKey : null);
 
     // The founder holds a keyring; the JOINEE self-mints its own phantom (the "stays on its own" baseline).
-    standNexusKeyring({ charterEpoch: 0, dir: founderId });
-    const phantom = standNexusKeyring({ charterEpoch: 0, dir: joineeId });
+    standNexusKeyring({ sealEpoch: 0, dir: founderId });
+    const phantom = standNexusKeyring({ sealEpoch: 0, dir: joineeId });
     const phantomSecretHex = hex(phantom.forEpoch(0)!);
 
     // A GENUINE offer → grant (the founder folds the keyring digest into the SIGNED transcript).
@@ -224,7 +224,7 @@ describe("keyring-delivery — a founder ADMITS a joinee through the persona-adm
     //    offer) and SWAP that token into the carriage, leaving the genuine SIGNED grant intact. ──
     const attackerId = mkdtempSync(join(tmpdir(), "lares-kr-attacker-"));
     try {
-      const attackerKeyring = standNexusKeyring({ charterEpoch: 0, dir: attackerId });
+      const attackerKeyring = standNexusKeyring({ sealEpoch: 0, dir: attackerId });
       const attackerSecretHex = hex(attackerKeyring.forEpoch(0)!);
       const attackerEntries = attackerKeyring.epochs.map((epoch) => ({ epoch, secretHex: hex(attackerKeyring.forEpoch(epoch)!) }));
       const attackerEnvelope = sealKeyringEnvelope(attackerEntries, offer.offer.ephemeralPubkey);   // sealed to the PUBLIC key

@@ -33,7 +33,7 @@ export interface QuorumEntryFields {
   /** The monotone per-nym version — a higher verified version supersedes a lower. */
   readonly version:         number;
   /** The charter epoch this act roots on — an entry citing an unknown epoch is IGNORED. */
-  readonly charterEpochCid: string;
+  readonly sealEpochCid: string;
 }
 
 /**
@@ -46,6 +46,6 @@ export function quorumEntryBytes(fields: QuorumEntryFields): Uint8Array {
     nym:             fields.nym,
     action:          fields.action,
     version:         fields.version,
-    charterEpochCid: fields.charterEpochCid,
+    sealEpochCid: fields.sealEpochCid,
   });
 }

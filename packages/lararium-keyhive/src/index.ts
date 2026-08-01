@@ -48,7 +48,7 @@ export type {
 } from "./ceremony-core.js";
 
 export {
-  foundCabalRealm, foundCabalRealmWithCharter,
+  foundCabalRealm, foundCabalRealmWithGlamour,
   openDwelling, dwellersHolding, cabalRealmLiveness,
 } from "./cabal-realm-ceremony.js";
 export type { FoundCabalRealmOpts, FoundedCabalRealm } from "./cabal-realm-ceremony.js";

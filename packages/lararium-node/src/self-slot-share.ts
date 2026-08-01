@@ -46,7 +46,7 @@ export interface SelfSlotShareInput {
   /** The plane-seal oracle — only a PROVABLY-sealed plane blind-transits. Null → deny-carry, fail-closed. */
   readonly planeSeal: PlaneSeal | null;
   /**
-   * The per-Nexus federation POSTURE (read as-of-last-sync off the @nexus charter doc). Governs cross-Nexus
+   * The per-Nexus federation POSTURE (read as-of-last-sync off the @nexus doc). Governs cross-Nexus
    * carry of the PUBLIC shelf to a FOREIGN (non-member) operator: PRIVATE denies it entirely (only a SAME-Nexus
    * member co-federates); OPEN lets any proof-carrying foreign operator reach the public shelf. It NEVER touches
    * a private plane — those stay sealed by the read-floor + the self-slot denial in BOTH postures.

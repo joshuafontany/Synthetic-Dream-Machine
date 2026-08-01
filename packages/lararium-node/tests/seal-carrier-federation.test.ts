@@ -38,15 +38,15 @@ describe("nexus-convergence-secret-store — the keyring custody", () => {
 
   test("mints the charter-head epoch, persists read-all, is idempotent, appends a later epoch", () => {
     expect(loadNexusKeyring(dir)).toBeNull();                 // nothing minted yet
-    const k0 = standNexusKeyring({ charterEpoch: 0, dir });
+    const k0 = standNexusKeyring({ sealEpoch: 0, dir });
     expect(k0.epochs).toEqual([0]);
     const secret0 = k0.current().secret;
 
     // Idempotent — a re-stand at the same epoch re-reads the SAME secret (mints nothing).
-    const k0b = standNexusKeyring({ charterEpoch: 0, dir });
+    const k0b = standNexusKeyring({ sealEpoch: 0, dir });
     expect([...k0b.forEpoch(0)!]).toEqual([...secret0]);
     // A charter bump appends epoch 1 — the keyring holds BOTH (read-all: a body sealed at 0 still opens).
-    const k1 = standNexusKeyring({ charterEpoch: 1, dir });
+    const k1 = standNexusKeyring({ sealEpoch: 1, dir });
     expect(k1.epochs).toEqual([0, 1]);
     expect([...k1.forEpoch(0)!]).toEqual([...secret0]);       // epoch-0 secret survives the bump
     expect(k1.current().epoch).toBe(1);                        // seals under the newest epoch
@@ -65,7 +65,7 @@ describe("seal-carrier-federation — the seal's first producer (additive)", () 
   test("seals a carrier body → registry opens the member lane → verify-cap ⊥ read-cap → cas-transit reads back", async () => {
     const registry = makeSealedPlaneRegistry();
     const tracker  = makeBagTracker();
-    const keyring  = standNexusKeyring({ charterEpoch: 0, dir: idDir });
+    const keyring  = standNexusKeyring({ sealEpoch: 0, dir: idDir });
     const cadDir   = cadSealDir(storageDir);
 
     // THE PRODUCER — a production shore (not a test's own installSealedBody call).
@@ -99,7 +99,7 @@ describe("seal-carrier-federation — the seal's first producer (additive)", () 
 
   test("WAKE UNCHANGED: the seal writes only the ciphertext cad/ tier — the cleartext corpus CAS is untouched", () => {
     const registry = makeSealedPlaneRegistry();
-    const keyring  = standNexusKeyring({ charterEpoch: 0, dir: idDir });
+    const keyring  = standNexusKeyring({ sealEpoch: 0, dir: idDir });
     const cadDir   = cadSealDir(storageDir);
 
     // The cleartext-local wake path: cas-stage wrote the plaintext to the corpus CAS under sha256; the wake reads

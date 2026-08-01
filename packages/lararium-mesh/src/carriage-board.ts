@@ -59,7 +59,7 @@ export function carriageEntryKey(nym: string, action: CarriageAction, version: n
  */
 export function writeCarriageEntry(draft: LarDoc, entry: CarriageEntry): void {
   const key = carriageEntryKey(entry.nym, entry.action, entry.version);
-  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(entry) }, entry.charterEpochCid);
+  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(entry) }, entry.sealEpochCid);
 }
 
 /** Coerce one signature-record, or null when a required field is missing / mis-typed (the whole sig drops). */
@@ -79,7 +79,7 @@ function coerceCarriageEntry(parsed: unknown): CarriageEntry | null {
   const action = p["action"];
   if (action !== "admit" && action !== "revoke") return null;               // unknown action → skip
   if (!Number.isFinite(p["version"])) return null;                          // no monotone version → skip
-  if (typeof p["charterEpochCid"] !== "string" || p["charterEpochCid"].length === 0) return null; // no epoch root → skip
+  if (typeof p["sealEpochCid"] !== "string" || p["sealEpochCid"].length === 0) return null; // no epoch root → skip
   if (!Array.isArray(p["signatures"])) return null;                         // no quorum shape → skip
   const signatures: QuorumSignature[] = [];
   for (const raw of p["signatures"]) {
@@ -102,7 +102,7 @@ function coerceCarriageEntry(parsed: unknown): CarriageEntry | null {
     nym:             p["nym"],
     action:          action as CarriageAction,
     version:         p["version"] as number,
-    charterEpochCid: p["charterEpochCid"],
+    sealEpochCid: p["sealEpochCid"],
     signatures,
   };
   return contractSig ? { ...entry, contractSig } : entry;

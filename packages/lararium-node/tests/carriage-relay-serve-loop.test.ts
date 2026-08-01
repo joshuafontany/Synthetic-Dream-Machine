@@ -79,7 +79,7 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
     const storageDir = mkDir("store");
     const idDir = mkDir("id");
     const registry = makeSealedPlaneRegistry();
-    const keyring = standNexusKeyring({ charterEpoch: 0, dir: idDir });
+    const keyring = standNexusKeyring({ sealEpoch: 0, dir: idDir });
     const cadDir = cadSealDir(storageDir);
     const installed = sealCarrierForFederation({ registry, cadDir, plaintext: BODY, keyring });
     return { registry, cadDir, installed };

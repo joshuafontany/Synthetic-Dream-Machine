@@ -37,7 +37,7 @@ function usage(): void {
   console.error("  list                        the private multitude — held indices, active marker, pet-names");
   console.error("  admit <offer|grant|open|accept|list>   airgapped device-to-device persona hand-off (QR 3-hop)");
   console.error("");
-  console.error("  founding sequence (three symmetric commands): lares persona new 0 --name 'Guru Joshua Fontany'  ·  new 1 --name 'Telarus, KSC'  ·  new 2 --name 'The Lindwyrm'  →  lares nexus charter seat");
+  console.error("  founding sequence (three symmetric commands): lares persona new 0 --name 'Guru Joshua Fontany'  ·  new 1 --name 'Telarus, KSC'  ·  new 2 --name 'The Lindwyrm'  →  lares nexus seal seat");
 }
 
 /**
@@ -115,7 +115,7 @@ async function personaNew(args: ParsedArgs): Promise<number> {
       console.log(`persona h${index} ${root.created ? "minted" : "loaded"} — "${name}"`);
       console.log(`  verifying key: ${root.verifyingKey}`);
       console.log(`  pet-name is PRIVATE (never federates); this announces no public glamour.`);
-      console.log(`  seat it into the Nexus charter with: lares nexus charter seat`);
+      console.log(`  seat it into the Nexus seal with: lares nexus seal seat`);
     },
   });
   return 0;

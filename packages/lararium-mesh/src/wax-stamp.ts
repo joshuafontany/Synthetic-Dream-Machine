@@ -20,7 +20,7 @@ import * as ed25519 from "@noble/ed25519";
 import { sha256HexSync, hexToBytes, canonicalJson } from "./crypto.js";
 
 /** One epoch in the charter's pre-rotated, hash-linked lineage. Content-addressed by `epochCid`. */
-export interface CharterEpoch {
+export interface SealEpoch {
   readonly epoch:        number;         // monotonic sequence; genesis = 0
   readonly epochCid:     string;         // content-address of THIS epoch record (its own hash)
   readonly keySetHash:   string;         // digest of the key-set/quorum authorized to seal UNDER this epoch
@@ -44,7 +44,7 @@ export type SealVerdict = "CURRENT" | "PAST_AUTHENTIC" | "SPOOF";
  * epoch's `keySetHash` was pre-committed by its predecessor's `nextKeyCommit`, so a stolen current key
  * cannot forge a valid successor. Genesis (epoch 0) carries no predecessor.
  */
-export function verifyCharterChain(chain: readonly CharterEpoch[]): boolean {
+export function verifySealLineage(chain: readonly SealEpoch[]): boolean {
   if (chain.length === 0) return false;
   if (chain[0]!.epoch !== 0 || chain[0]!.prevEpochCid !== null) return false;
   for (let i = 1; i < chain.length; i++) {
@@ -65,10 +65,10 @@ export function verifyCharterChain(chain: readonly CharterEpoch[]): boolean {
  */
 export function classifySeal(
   stamp: WaxStamp,
-  chain: readonly CharterEpoch[],
-  verifySig: (stamp: WaxStamp, epoch: CharterEpoch) => boolean,
+  chain: readonly SealEpoch[],
+  verifySig: (stamp: WaxStamp, epoch: SealEpoch) => boolean,
 ): SealVerdict {
-  if (!verifyCharterChain(chain)) return "SPOOF";                        // a broken lineage attests nothing
+  if (!verifySealLineage(chain)) return "SPOOF";                        // a broken lineage attests nothing
   const idx = chain.findIndex((e) => e.epochCid === stamp.epochCid);
   if (idx < 0) return "SPOOF";                                           // cites no epoch in the lineage
   if (!verifySig(stamp, chain[idx]!)) return "SPOOF";                    // signature does not verify vs that epoch
@@ -80,7 +80,7 @@ export function classifySeal(
  * CIDs = proof-of-misbehavior (a controller signed inconsistent history). Returns the offending epoch
  * number, or null. This is algorithmically decidable; the LEGITIMACY of a fork is not (never auto-arbitrate).
  */
-export function detectDuplicity(a: readonly CharterEpoch[], b: readonly CharterEpoch[]): number | null {
+export function detectDuplicity(a: readonly SealEpoch[], b: readonly SealEpoch[]): number | null {
   const byEpoch = new Map(a.map((e) => [e.epoch, e.epochCid]));
   for (const e of b) {
     const other = byEpoch.get(e.epoch);
@@ -111,20 +111,20 @@ export function singleKeySetHash(signerKeyHex: string): string {
  * the digest is order-blind and a reorder or a threshold change forges no match. One-way — a reader
  * recomputes it from a PRESENTED key-set to test authorization; it recovers no key from the digest.
  */
-export function charterKeySetHash(keys: readonly string[], threshold: number): string {
+export function sealKeySetHash(keys: readonly string[], threshold: number): string {
   const norm = [...new Set(keys.map((k) => k.toLowerCase()))].sort();
   return sha256HexSync(canonicalJson({ keys: norm, threshold }));
 }
 
 /** The authority fields an epoch's content-address binds — everything but the derived `epochCid` itself. */
-export type CharterEpochFields = Omit<CharterEpoch, "epochCid">;
+export type SealEpochFields = Omit<SealEpoch, "epochCid">;
 
 /**
  * The content-address of a charter epoch — a hash BINDING the epoch's authority fields (its sequence, its
  * authorized key-set digest, its pre-rotation commitment, its predecessor link). A single bit-flip in any
  * bound field yields a different cid, so the `epochCid` the next epoch hash-links against is tamper-evident.
  */
-export function charterEpochCidOf(fields: CharterEpochFields): string {
+export function sealEpochCidOf(fields: SealEpochFields): string {
   return `epoch${fields.epoch}-${sha256HexSync(canonicalJson({
     epoch: fields.epoch, keySetHash: fields.keySetHash,
     nextKeyCommit: fields.nextKeyCommit, prevEpochCid: fields.prevEpochCid,
@@ -132,21 +132,21 @@ export function charterEpochCidOf(fields: CharterEpochFields): string {
 }
 
 /** Seal one charter epoch from its authority fields, deriving the content-address over them. */
-export function mintCharterEpoch(fields: CharterEpochFields): CharterEpoch {
-  return { ...fields, epochCid: charterEpochCidOf(fields) };
+export function mintCharterEpoch(fields: SealEpochFields): SealEpoch {
+  return { ...fields, epochCid: sealEpochCidOf(fields) };
 }
 
 /**
  * Seat the GENESIS epoch (sequence 0, no predecessor) from the founding key-set + a PRE-ROTATION
  * commitment to the NEXT epoch's keys. The commitment rides in from OFFLINE custody of the next key-set
  * (KERI pre-rotation), so stealing today's council keys forges no valid successor. An empty commitment
- * leaves rotation UNARMED — `rotateCharterEpoch` then refuses, since nothing stands pre-committed to verify
+ * leaves rotation UNARMED — `rotateSealEpoch` then refuses, since nothing stands pre-committed to verify
  * a reveal against.
  */
-export function genesisCharterEpoch(keys: readonly string[], threshold: number, nextKeyCommit: string): CharterEpoch {
+export function genesisCharterEpoch(keys: readonly string[], threshold: number, nextKeyCommit: string): SealEpoch {
   return mintCharterEpoch({
     epoch:         0,
-    keySetHash:    charterKeySetHash(keys, threshold),
+    keySetHash:    sealKeySetHash(keys, threshold),
     nextKeyCommit,
     prevEpochCid:  null,
   });
@@ -154,7 +154,7 @@ export function genesisCharterEpoch(keys: readonly string[], threshold: number, 
 
 /** A rotation attempt's outcome — the advanced epoch, or a fail-closed REFUSAL naming the mismatch. */
 export type RotateResult =
-  | { readonly ok: true;  readonly epoch: CharterEpoch }
+  | { readonly ok: true;  readonly epoch: SealEpoch }
   | { readonly ok: false; readonly reason: string };
 
 /**
@@ -162,10 +162,10 @@ export type RotateResult =
  * ways — an unarmed head (empty `nextKeyCommit`) refuses; a revealed key-set whose digest does not match
  * the head's `nextKeyCommit` refuses (the reveal was forged, lost, or the wrong threshold); and the caller
  * MUST supply the FOLLOWING commitment so the new head stays pre-rotated. The minted epoch hash-links to
- * `head.epochCid`, so `verifyCharterChain` walks an unbroken, pre-rotated lineage through it.
+ * `head.epochCid`, so `verifySealLineage` walks an unbroken, pre-rotated lineage through it.
  */
-export function rotateCharterEpoch(
-  head:              CharterEpoch,
+export function rotateSealEpoch(
+  head:              SealEpoch,
   revealedKeys:      readonly string[],
   revealedThreshold: number,
   nextKeyCommit:     string,
@@ -173,7 +173,7 @@ export function rotateCharterEpoch(
   if (head.nextKeyCommit.length === 0) {
     return { ok: false, reason: "rotation unarmed — the head epoch pre-committed no next key-set" };
   }
-  const revealedHash = charterKeySetHash(revealedKeys, revealedThreshold);
+  const revealedHash = sealKeySetHash(revealedKeys, revealedThreshold);
   if (revealedHash !== head.nextKeyCommit) {
     return { ok: false, reason: "reveal mismatch — the revealed key-set does not match the head's pre-committed digest" };
   }
@@ -192,7 +192,7 @@ export function rotateCharterEpoch(
  *  Ed25519 signature over `waxStampProofBytes`; the caller supplies a key that hashes into keySetHash. */
 export async function mintWaxStamp(input: {
   readonly artifactHash: string;
-  readonly epoch: CharterEpoch;
+  readonly epoch: SealEpoch;
   readonly sealedAt: string;
   readonly sign: (bytes: Uint8Array) => Promise<string>;
 }): Promise<WaxStamp> {
@@ -209,7 +209,7 @@ export async function mintWaxStamp(input: {
  */
 export async function verifyWaxStampSig(
   stamp: WaxStamp,
-  epoch: CharterEpoch,
+  epoch: SealEpoch,
   signerKeyHex: string,
   keyInSet: (signerKeyHex: string, keySetHash: string) => boolean = (k, h) => singleKeySetHash(k) === h,
 ): Promise<boolean> {

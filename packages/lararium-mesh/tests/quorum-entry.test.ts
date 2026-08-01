@@ -27,7 +27,7 @@ import { hex, hexToBytes } from "../src/crypto.js";
 import { quorumEntryBytes, type QuorumEntryFields } from "../src/quorum-entry.js";
 import {
   makeMultiSigQuorumVerifier as makeAntigenVerifier, KAPAE_ANTIGEN_DOMAIN,
-  type KapaeAntigenEntry, type KahuCharterRoster,
+  type KapaeAntigenEntry, type KahuRoster,
 } from "../src/kapae-antigen.js";
 import {
   foldCarriageSet, holdsCarriage, CARRIAGE_ENTRY_DOMAIN, carriageContractBytes,
@@ -48,19 +48,19 @@ function fields(kind: string, over: Partial<QuorumEntryFields> = {}): QuorumEntr
     nym:             over.nym ?? "deadbeef".repeat(8),
     action:          over.action ?? "admit",
     version:         over.version ?? 1,
-    charterEpochCid: over.charterEpochCid ?? EPOCH,
+    sealEpochCid: over.sealEpochCid ?? EPOCH,
   };
 }
 
 describe("① the canonical image — five floor fields, signatures OUTSIDE", () => {
-  test("the bytes carry exactly kind · nym · action · version · charterEpochCid", () => {
+  test("the bytes carry exactly kind · nym · action · version · sealEpochCid", () => {
     const decoded = JSON.parse(new TextDecoder().decode(quorumEntryBytes(fields("lar-test/board")))) as Record<string, unknown>;
-    expect(Object.keys(decoded).sort()).toEqual(["action", "charterEpochCid", "kind", "nym", "version"]);
+    expect(Object.keys(decoded).sort()).toEqual(["action", "kind", "nym", "sealEpochCid", "version"]);
   });
 
   test("the image is sorted-key STABLE — field insertion order cannot change the bytes a quorum signed", () => {
-    const a = quorumEntryBytes({ kind: "k", nym: "n", action: "admit", version: 3, charterEpochCid: EPOCH });
-    const b = quorumEntryBytes({ charterEpochCid: EPOCH, version: 3, action: "admit", nym: "n", kind: "k" });
+    const a = quorumEntryBytes({ kind: "k", nym: "n", action: "admit", version: 3, sealEpochCid: EPOCH });
+    const b = quorumEntryBytes({ sealEpochCid: EPOCH, version: 3, action: "admit", nym: "n", kind: "k" });
     expect(hex(b)).toBe(hex(a));
   });
 
@@ -75,7 +75,7 @@ describe("① the canonical image — five floor fields, signatures OUTSIDE", ()
     expect(hex(quorumEntryBytes(fields("lar-test/board", { nym: "cafe".repeat(16) })))).not.toBe(base);
     expect(hex(quorumEntryBytes(fields("lar-test/board", { action: "revoke" })))).not.toBe(base);
     expect(hex(quorumEntryBytes(fields("lar-test/board", { version: 2 })))).not.toBe(base);
-    expect(hex(quorumEntryBytes(fields("lar-test/board", { charterEpochCid: "other-epoch" })))).not.toBe(base);
+    expect(hex(quorumEntryBytes(fields("lar-test/board", { sealEpochCid: "other-epoch" })))).not.toBe(base);
   });
 });
 
@@ -96,7 +96,7 @@ describe("③ THE REPLAY, walked end to end — a real signature crossing boards
   test("a kahu signature raised over the ANTIGEN image does not verify over the CARRIAGE image", async () => {
     const seed = KAHU_SEEDS[0]!;
     const signer = await pubOf(seed);
-    const act = { nym: await pubOf(NYM_SEED), action: "admit", version: 1, charterEpochCid: EPOCH };
+    const act = { nym: await pubOf(NYM_SEED), action: "admit", version: 1, sealEpochCid: EPOCH };
 
     const antigenBytes  = quorumEntryBytes({ kind: KAPAE_ANTIGEN_DOMAIN,  ...act });
     const carriageBytes = quorumEntryBytes({ kind: CARRIAGE_ENTRY_DOMAIN, ...act });
@@ -110,13 +110,13 @@ describe("③ THE REPLAY, walked end to end — a real signature crossing boards
 });
 
 describe("④ each board's LIVE verifier rejects a foreign-domain entry", () => {
-  async function roster(): Promise<KahuCharterRoster> {
-    return { keys: await Promise.all(KAHU_SEEDS.map(pubOf)), threshold: 2, charterEpochCid: EPOCH };
+  async function roster(): Promise<KahuRoster> {
+    return { keys: await Promise.all(KAHU_SEEDS.map(pubOf)), threshold: 2, sealEpochCid: EPOCH };
   }
 
   /** An entry signed by two real kahu over WHATEVER `kind` it carries — a well-formed quorum on the wrong board. */
   async function signedAtDomain(kind: string): Promise<KapaeAntigenEntry> {
-    const act = { nym: await pubOf(NYM_SEED), action: "kapae", version: 1, charterEpochCid: EPOCH };
+    const act = { nym: await pubOf(NYM_SEED), action: "kapae", version: 1, sealEpochCid: EPOCH };
     const bytes = quorumEntryBytes({ kind, ...act });
     const signatures = await Promise.all(KAHU_SEEDS.slice(0, 2).map(async (s) => ({
       signer: await pubOf(s), sig: await signOf(s)(bytes),
@@ -143,8 +143,8 @@ describe("④ each board's LIVE verifier rejects a foreign-domain entry", () => 
 
   test("the carriage fold REJECTS a validly-signed ANTIGEN-domain entry (contract-in and all)", async () => {
     const nym = await pubOf(NYM_SEED);
-    const act = { nym, action: "admit", version: 1, charterEpochCid: EPOCH };
-    const contractSig = { signer: nym, sig: await signOf(NYM_SEED)(carriageContractBytes({ nym, charterEpochCid: EPOCH })) };
+    const act = { nym, action: "admit", version: 1, sealEpochCid: EPOCH };
+    const contractSig = { signer: nym, sig: await signOf(NYM_SEED)(carriageContractBytes({ nym, sealEpochCid: EPOCH })) };
 
     const build = async (kind: string): Promise<CarriageEntry> => {
       const bytes = quorumEntryBytes({ kind, ...act });

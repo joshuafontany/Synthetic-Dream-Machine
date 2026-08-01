@@ -38,7 +38,7 @@
 
 import * as ed25519 from "@noble/ed25519";
 import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
-import type { QuorumSignature, KahuCharterRoster } from "./kapae-antigen.js";
+import type { QuorumSignature, KahuRoster } from "./kapae-antigen.js";
 import { quorumEntryBytes } from "./quorum-entry.js";
 
 /** The domain a CarriageEntry's quorum signs over — a signature is meaningless without its domain. */
@@ -69,12 +69,12 @@ export interface CarriageEntry {
   readonly action:          CarriageAction;
   /** Monotone per-nym: a later steward act supersedes an earlier one; a stale entry cannot roll it back. */
   readonly version:         number;
-  /** The nexus-charter epoch this quorum act roots on (the wax-stamp epoch-chain — CharterEpoch.epochCid). */
-  readonly charterEpochCid: string;
+  /** The nexus-charter epoch this quorum act roots on (the wax-stamp epoch-chain — SealEpoch.epochCid). */
+  readonly sealEpochCid: string;
   /** ≥ threshold distinct founding-kahu signatures over `carriageEntryBytes` — the steward quorum. */
   readonly signatures:      readonly QuorumSignature[];
   /**
-   * The OPERATOR's OWN signature over `carriageContractBytes({ nym, charterEpochCid })` — the contract-in.
+   * The OPERATOR's OWN signature over `carriageContractBytes({ nym, sealEpochCid })` — the contract-in.
    * REQUIRED for an `admit` to count (its `signer` MUST equal `nym`); ABSENT / ignored for a `revoke`. This is
    * the "accepts carriage" wax-seal from the member itself; without it a Nexus cannot conscript an operator.
    */
@@ -98,11 +98,11 @@ export function carriageEntryBytes(
  * charter epoch). The operator signs this ONCE; a kahu quorum may cite the resulting `contractSig` on any
  * monotone admit version. The token IS the acceptance — its verified presence proves "accepts carriage".
  */
-export function carriageContractBytes(parts: { nym: string; charterEpochCid: string }): Uint8Array {
+export function carriageContractBytes(parts: { nym: string; sealEpochCid: string }): Uint8Array {
   return canonicalJsonBytes({
     kind:            CARRIAGE_CONTRACT_DOMAIN,
     nym:             parts.nym,
-    charterEpochCid: parts.charterEpochCid,
+    sealEpochCid: parts.sealEpochCid,
   });
 }
 
@@ -113,11 +113,11 @@ export function carriageContractBytes(parts: { nym: string; charterEpochCid: str
  * twice counts once; a signature that does not verify over the entry bytes does not count; the entry MUST root
  * on the roster's charter epoch. An unbound / short roster meets no threshold → false.
  */
-async function verifyMembershipQuorum(entry: CarriageEntry, roster: KahuCharterRoster): Promise<boolean> {
+async function verifyMembershipQuorum(entry: CarriageEntry, roster: KahuRoster): Promise<boolean> {
   if (entry.kind !== CARRIAGE_ENTRY_DOMAIN)             return false;
   if (roster.threshold < 1)                              return false;
   if (roster.keys.length < roster.threshold)             return false;   // unbound / short roster → deny
-  if (entry.charterEpochCid !== roster.charterEpochCid)  return false;   // roots on an unknown epoch → deny
+  if (entry.sealEpochCid !== roster.sealEpochCid)  return false;   // roots on an unknown epoch → deny
 
   const rosterKeys = new Set(roster.keys.map((k) => k.toLowerCase()));
   const bytes      = carriageEntryBytes(entry);
@@ -145,7 +145,7 @@ async function verifyContractIn(entry: CarriageEntry): Promise<boolean> {
   const cs = entry.contractSig;
   if (!cs) return false;
   if (cs.signer.toLowerCase() !== entry.nym.toLowerCase()) return false;   // the seal MUST be the operator's own
-  const bytes = carriageContractBytes({ nym: entry.nym, charterEpochCid: entry.charterEpochCid });
+  const bytes = carriageContractBytes({ nym: entry.nym, sealEpochCid: entry.sealEpochCid });
   try { return await ed25519.verifyAsync(hexToBytes(cs.sig), bytes, hexToBytes(entry.nym)); }
   catch { return false; }
 }
@@ -156,7 +156,7 @@ async function verifyContractIn(entry: CarriageEntry): Promise<boolean> {
  * short is ignored, never guessed into membership. Exported so a WRITER can self-verify before landing an entry
  * (never write an entry the fold would ignore — a written-but-dead admit reads as enforced while granting nothing).
  */
-export async function carriageEntryCounts(entry: CarriageEntry, roster: KahuCharterRoster): Promise<boolean> {
+export async function carriageEntryCounts(entry: CarriageEntry, roster: KahuRoster): Promise<boolean> {
   if (!(await verifyMembershipQuorum(entry, roster))) return false;
   if (entry.action === "revoke") return true;
   return verifyContractIn(entry);   // admit → the operator must have signed "accepts carriage"
@@ -186,10 +186,10 @@ export async function signCarriageQuorum(
  */
 export async function signCarriageContract(
   nym: string,
-  charterEpochCid: string,
+  sealEpochCid: string,
   sign: (bytes: Uint8Array) => Promise<string>,
 ): Promise<QuorumSignature> {
-  const sig = await sign(carriageContractBytes({ nym, charterEpochCid }));
+  const sig = await sign(carriageContractBytes({ nym, sealEpochCid }));
   return { signer: nym, sig };
 }
 
@@ -205,7 +205,7 @@ export async function signCarriageContract(
  */
 export async function foldCarriageSet(
   entries: Iterable<CarriageEntry>,
-  roster: KahuCharterRoster,
+  roster: KahuRoster,
 ): Promise<ReadonlySet<string>> {
   // Per nym, the winning counted entry: highest version; on a version tie, `revoke` beats `admit`.
   const winner = new Map<string, { version: number; action: CarriageAction }>();

@@ -19,7 +19,7 @@ import {
   signCarriageQuorum, signCarriageContract, carriageEntryBytes, foldCarriageSet, holdsCarriage,
   CARRIAGE_ENTRY_DOMAIN, type CarriageEntry, type QuorumSignature,
 } from "../src/carriage-registry.js";
-import type { KahuCharterRoster } from "../src/kapae-antigen.js";
+import type { KahuRoster } from "../src/kapae-antigen.js";
 
 const EPOCH = "epoch-cid-genesis";
 
@@ -34,9 +34,9 @@ const SEEDS = {
 const signerOf = (seed: Uint8Array) => (bytes: Uint8Array) => ed.signAsync(bytes, seed).then(hex);
 const pubOf    = (seed: Uint8Array) => ed.getPublicKeyAsync(seed).then(hex);
 
-async function roster(threshold = 2): Promise<KahuCharterRoster> {
+async function roster(threshold = 2): Promise<KahuRoster> {
   const keys = await Promise.all([pubOf(SEEDS.guru), pubOf(SEEDS.telarus), pubOf(SEEDS.lindwyrm)]);
-  return { keys, threshold, charterEpochCid: EPOCH };
+  return { keys, threshold, sealEpochCid: EPOCH };
 }
 
 /** The joining operator's "accepts carriage" contract-in for the current epoch. */
@@ -45,15 +45,15 @@ async function contractIn(seed: Uint8Array, epoch = EPOCH): Promise<QuorumSignat
   return signCarriageContract(nym, epoch, signerOf(seed));
 }
 
-async function admitEntry(over: Partial<Pick<CarriageEntry, "action" | "version" | "charterEpochCid">> = {},
+async function admitEntry(over: Partial<Pick<CarriageEntry, "action" | "version" | "sealEpochCid">> = {},
                           kahu: Uint8Array[] = [SEEDS.guru, SEEDS.telarus],
                           contract: QuorumSignature | undefined = undefined,
                           joinerSeed: Uint8Array = SEEDS.joiner): Promise<CarriageEntry> {
   const nym     = await pubOf(joinerSeed);
   const signers = await Promise.all(kahu.map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
-  const cs      = contract ?? (over.action === "revoke" ? undefined : await contractIn(joinerSeed, over.charterEpochCid ?? EPOCH));
+  const cs      = contract ?? (over.action === "revoke" ? undefined : await contractIn(joinerSeed, over.sealEpochCid ?? EPOCH));
   return signCarriageQuorum(
-    { nym, action: over.action ?? "admit", version: over.version ?? 1, charterEpochCid: over.charterEpochCid ?? EPOCH },
+    { nym, action: over.action ?? "admit", version: over.version ?? 1, sealEpochCid: over.sealEpochCid ?? EPOCH },
     signers, cs,
   );
 }
@@ -104,12 +104,12 @@ describe("the members fold — admit needs BOTH the kahu quorum AND the operator
   test("an admit on the WRONG charter epoch is ignored", async () => {
     const r = await roster();
     const nym = await pubOf(SEEDS.joiner);
-    const set = await foldCarriageSet([await admitEntry({ charterEpochCid: "some-other-epoch" })], r);
+    const set = await foldCarriageSet([await admitEntry({ sealEpochCid: "some-other-epoch" })], r);
     expect(holdsCarriage(nym, set)).toBe(false);
   });
 
   test("an unbound (empty-key) roster fails closed", async () => {
-    const empty: KahuCharterRoster = { keys: [], threshold: 2, charterEpochCid: EPOCH };
+    const empty: KahuRoster = { keys: [], threshold: 2, sealEpochCid: EPOCH };
     const nym = await pubOf(SEEDS.joiner);
     const set = await foldCarriageSet([await admitEntry()], empty);
     expect(holdsCarriage(nym, set)).toBe(false);
@@ -149,10 +149,10 @@ describe("TRACK CONTRACTS, NEVER IDENTITIES — the signed payload is the operat
   test("the signed bytes carry ONLY pubkey · action · version · charter-epoch — no identity field", async () => {
     const nym = await pubOf(SEEDS.joiner);
     const decoded = JSON.parse(new TextDecoder().decode(
-      carriageEntryBytes({ kind: CARRIAGE_ENTRY_DOMAIN, nym, action: "admit", version: 1, charterEpochCid: EPOCH }),
+      carriageEntryBytes({ kind: CARRIAGE_ENTRY_DOMAIN, nym, action: "admit", version: 1, sealEpochCid: EPOCH }),
     )) as Record<string, unknown>;
     // Exactly the floor keys — nothing that could name a human.
-    expect(Object.keys(decoded).sort()).toEqual(["action", "charterEpochCid", "kind", "nym", "version"]);
+    expect(Object.keys(decoded).sort()).toEqual(["action", "kind", "nym", "sealEpochCid", "version"]);
     expect(decoded["nym"]).toBe(nym);                       // an ed25519 pubkey, never a name
     expect(JSON.stringify(decoded)).not.toMatch(/name|email|device|behavior/i);
   });

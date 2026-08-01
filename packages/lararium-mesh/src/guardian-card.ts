@@ -3,7 +3,7 @@
  *
  * Two keels split a secret 2-of-3 across the same three custodian slots and hand the operator printable
  * cards to place BY HAND (web3-pure — no cloud/email/API coupling): the CHARTER RESERVE splits the
- * pre-rotation's reserve seed (charter-reserve), and PERSONAL IDENTITY RECOVERY splits the PersonaGroup
+ * pre-rotation's reserve seed (seal-reserve), and PERSONAL IDENTITY RECOVERY splits the PersonaGroup
  * root (recovery-keel-core). This module holds the piece they share — the card layout, the confirmation
  * handshake, and the split/reconstruct bridge — so BOTH issue the IDENTICAL card:
  *

@@ -19,11 +19,11 @@ import { Repo } from "@automerge/automerge-repo";
 import {
   hex, signAntigenEntry, foldAntigenSet, makeMultiSigQuorumVerifier,
   foundingRoster, carryContractShareDecision,
-  genesisCharterEpochCid, kapaeAntigenDocUrl, materializeSharedLarDoc, mutableLarRecord,
-  type KapaeAntigenEntry, type NexusCharterDoc,
+  genesisSealEpochCid, kapaeAntigenDocUrl, materializeSharedLarDoc, mutableLarRecord,
+  type KapaeAntigenEntry, type NexusDoc,
 } from "@lararium/mesh";
 import { makeAntigenRingHolder } from "../src/antigen-ring.js";
-import { writeNexusCharterDoc } from "../src/nexus-charter-doc.js";
+import { writeNexusCharterDoc } from "../src/nexus-doc.js";
 
 // Three founding kahu — fixed seeds → deterministic keys.
 const SEEDS = [new Uint8Array(32).fill(1), new Uint8Array(32).fill(2), new Uint8Array(32).fill(3)];
@@ -34,10 +34,10 @@ const NEXUS_PUBKEY = "a1b2c3d4e5f6a7b8";   // the node's own gate key = its Nexu
 /** The victim's own keypair — its verifying key IS the nym the ban targets, and the peer identifier. */
 const VICTIM_SEED = new Uint8Array(32).fill(9);
 
-async function seatedCharter(keys: string[]): Promise<NexusCharterDoc> {
+async function seatedCharter(keys: string[]): Promise<NexusDoc> {
   return {
     kind: "lar-nexus-charter/v1", threshold: 2,
-    charterEpochCid: genesisCharterEpochCid(keys, 2),
+    sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
       { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },
@@ -48,7 +48,7 @@ async function seatedCharter(keys: string[]): Promise<NexusCharterDoc> {
 
 async function banEntry(nym: string, epoch: string): Promise<KapaeAntigenEntry> {
   const signers = await Promise.all([SEEDS[0]!, SEEDS[1]!].map(async (s) => ({ signer: await pubOf(s), sign: signerOf(s) })));
-  return signAntigenEntry({ nym, action: "kapae", version: 1, charterEpochCid: epoch }, signers);
+  return signAntigenEntry({ nym, action: "kapae", version: 1, sealEpochCid: epoch }, signers);
 }
 
 /** Poll a predicate to a short deadline — the holder resolves + folds asynchronously in its constructor. */
@@ -96,7 +96,7 @@ describe("the LIVE refold — board ban + seated charter → Kapae'd → Mu", ()
     writeNexusCharterDoc(bags, charter);
     // A real quorum-signed ban in the always-carried board, rooting on the charter epoch.
     const board = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(NEXUS_PUBKEY), "@kapae-antigen");
-    const ban   = await banEntry(victim, charter.charterEpochCid!);
+    const ban   = await banEntry(victim, charter.sealEpochCid!);
     board.change((d) => { d.tiddlers["ban:victim"] = mutableLarRecord("ban:victim", { text: JSON.stringify(ban) }, "test"); });
 
     // Sanity: the pure fold agrees the victim is Kapae'd under this roster.
