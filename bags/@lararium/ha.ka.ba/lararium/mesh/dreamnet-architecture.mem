@@ -144,11 +144,15 @@ The Amorphous Dreams Cabal holds ''kahu'' at this layer: guardian of the protoco
 * ''The ratchet splits by DIRECTION rather than rate'' — ADD widens the set and can hurt nobody; DROP narrows it and puts someone out, so DROP alone takes the price and the long pre-announced notice.
 * ''Partial conformance gains a seat.'' A vessel passing an older vector set stands IN with reduced sovereignty rather than exiled — the //out of conformance, still in communion, on named authority, bounded and revocable// instrument that the older tradition ran as its most-used and this stack lacked.
 
-''AND IT ANSWERS THE LEGIBILITY WOUND.'' A published hash reads as a BROADCAST profession of allegiance — cheap, remote, and readable by any watcher, which names a conformance test an empire needs no registry to run. ''A vector runs as a CHALLENGE-RESPONSE'': one party hands an input, the other hands a parse. That proves membership to a PEER and to nobody else.
+''AND IT DOES NOT ANSWER THE LEGIBILITY WOUND — that reading got tested and broke.'' A challenge-response proves membership to a peer and to no PASSIVE watcher, and an adversary need not stay passive: it connects and issues the challenge itself. A national censor ran exactly this against two circumvention protocols that answered strangers, at a measured median half-second, from sixteen thousand single-use prober addresses that made blocking the probers useless. ''An openly-answering conformance test IS a probe oracle.''
 
-> ''A vessel may prove conformance to a peer without proving it to a watcher.''
+''What a gate would actually require'', from the protocol that survived that censor: the CLIENT proves FIRST, so the responder never becomes an oracle · the responder emits ''NOTHING'' on failure, since even a rejection confesses that something understood the question · and the gating secret rides ''PER-VESSEL'', because one Nexus-wide credential hands a single infiltrator a universal probe key.
 
-''The residue, stated honestly.'' Vectors cost work, and every gap in them names a place two conforming vessels diverge. Someone AUTHORS them — the registry's table went and its editor stayed — so the set wants signing. And publishing the set's own digest would re-open the broadcast wound the challenge-response closed.
+> ''THE TWO FOUNDING GOALS STATE ONE PROPOSITION WITH OPPOSITE SIGNS.'' //Anyone may join by conforming// and //a stranger learns nothing by asking// cannot both hold. Every system that survived an active prober closed its door to strangers and moved joining OUT OF BAND, where it became rationed, social, and the permanent weakest link. The choice never runs between the two; it runs over ''where the bottleneck sits and who pays it''.
+
+''AND THE DEEPEST LEAK NEEDS NO HANDSHAKE AT ALL.'' A membership defined by BEHAVIOUR reads as a behavioural FINGERPRINT: byte-identical parses, canonicalisation choices and synced artifacts carry the conformance class into published content and onto a seized device. ''A class enacted in public cannot hide.'' Gating a handshake while leaving identical artifacts in the world locks a door beside an open window — so the shelter property must come from COMPARTMENTALISATION (a peer learns only what that peer needed) rather than from unobservability.
+
+''The residue, stated honestly.'' Vectors cost work, and every gap in them names a place two conforming vessels diverge. Someone AUTHORS them — the registry's table went and its editor stayed — so the set wants signing.
 
 <<~/ahu >>
 
