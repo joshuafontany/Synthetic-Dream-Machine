@@ -63,6 +63,37 @@ export function resolveWriteRoutingEnv(): Record<string, string> {
  * Every cap a mempalace-backed python spawn wears, composed. Spread this onto the spawn env — reaching
  * for it by this one name KEEPS a new spawn site from running under-capped.
  */
+/** The env var mempalace reads to bind an embedding function without building it. */
+export const LAZY_EMBEDDER_ENV = "MEMPALACE_LAZY_EMBEDDER" as const;
+
+/**
+ * The lazy-embedder cap — a STORE holder binds an embedding function and never calls it.
+ *
+ * chromadb 1.x does not persist the embedding function, so every open must pass one or the reader
+ * silently gets the library default and its queries stop matching the writer's vectors. Under the
+ * eager factory that binding cost a full onnxruntime session PER STORE PROCESS: opening one content
+ * palace imported eleven modules and stood a MiniLM the holder never called, because the ingest
+ * pipeline supplies every vector on the wire. Standing three sensoriums multiplies that by every
+ * store we open.
+ *
+ * ── WHY THE HOUSE MAY TAKE THIS TRADE AND UPSTREAM MAY NOT ──────────────────────────────────────
+ * The deferral costs chroma's embedder-mismatch detection — the `rebuild-index` hint stops
+ * surfacing — and that guard exists to stop a reader querying an incomparable vector space. Upstream
+ * keeps it default-off for exactly that reason.
+ *
+ * Our stores already hold a STRICTER floor of their own: `content_io` pins `expected_dim` (the
+ * physically-unusable case) AND `expected_model` (the same-dim different-model swap that passes a
+ * dimension check while corrupting recall), plus `_assert_palace_model_history`, which refuses to
+ * OPEN a palace whose first stamped drawer names a different embedder than the driver's pin. Those
+ * fail loud on the wire and at compose time. So the House gives up a guard it duplicates, never one
+ * it depends on.
+ */
+export function resolveLazyEmbedderEnv(): Record<string, string> {
+  const env: Record<string, string> = {};
+  if (!process.env[LAZY_EMBEDDER_ENV]?.trim()) env[LAZY_EMBEDDER_ENV] = "1";
+  return env;
+}
+
 export function resolveHolderCapEnv(python: string | null): Record<string, string> {
-  return { ...resolveComputeCapEnv(python), ...resolveWriteRoutingEnv() };
+  return { ...resolveComputeCapEnv(python), ...resolveWriteRoutingEnv(), ...resolveLazyEmbedderEnv() };
 }
