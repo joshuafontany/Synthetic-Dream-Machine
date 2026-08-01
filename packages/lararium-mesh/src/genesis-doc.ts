@@ -18,6 +18,7 @@ import {
   load   as automergeLoad,
 } from "@automerge/automerge";
 import { stringifyAutomergeUrl } from "@automerge/automerge-repo";
+import { canonicalJsonBytes } from "./crypto.js";
 import type { AutomergeUrl, BinaryDocumentId } from "@automerge/automerge-repo";
 import { cidV1Sha256, sha256HexBytesSync, sha256BytesSync, utf8Bytes } from "./crypto.js";
 import { buildGenesisCasManifest, type GenesisCasManifest } from "./cas.js";
@@ -62,6 +63,61 @@ export interface PluginBuildAttestation {
   readonly moduleCount:             number;
   readonly packedTiddlerCount:      number;
   readonly pluginJsonSha256:        string;
+  /**
+   * The builder's signature over the canonical bytes of every field above.
+   *
+   * WHY AN UNSIGNED ATTESTATION CERTIFIES NOTHING. The hashes here bind BYTES excellently and bind
+   * PROVENANCE not at all — anyone who can write the file can write the digests to match whatever they
+   * shipped. The signature names WHO stood behind the build, which is the only thing a reader could not
+   * have recomputed for themselves.
+   *
+   * OPTIONAL, and the absence reads honestly rather than fatally: an unsigned attestation still carries
+   * usable diff handles, and `verifyPluginAttestation` reports UNSIGNED as its own verdict rather than
+   * folding it into "invalid". A reader decides what an unsigned build may seed.
+   */
+  readonly builder?:                { readonly signer: string; readonly sig: string };
+}
+
+/** The domain an attestation signs within. A signature means nothing without the domain it was made in. */
+export const PLUGIN_ATTESTATION_DOMAIN = "lar-plugin-build/v1" as const;
+
+/** The canonical bytes an attestation signs over — every field EXCEPT the signature that covers them. */
+export function pluginAttestationBytes(a: Omit<PluginBuildAttestation, "builder">): Uint8Array {
+  return canonicalJsonBytes({ domain: PLUGIN_ATTESTATION_DOMAIN, ...a });
+}
+
+/**
+ * Sign an attestation. The caller supplies the signer — this module holds no key and mints no authority,
+ * the same discipline `cabal-invite` keeps.
+ */
+export async function signPluginAttestation(
+  a: Omit<PluginBuildAttestation, "builder">,
+  signer: string,
+  sign: (bytes: Uint8Array) => Promise<string>,
+): Promise<PluginBuildAttestation> {
+  return { ...a, builder: { signer, sig: await sign(pluginAttestationBytes(a)) } };
+}
+
+/** What a reader learns about who stood behind a build. UNSIGNED reads as its own answer, never as invalid. */
+export type PluginAttestationRead = "unsigned" | "forged" | { readonly signer: string };
+
+/**
+ * Read an attestation's provenance OFFLINE — no reachable builder, no clock, nothing to phone.
+ *
+ * Returns the signer when the signature holds, `forged` when it does not, and `unsigned` when none rides.
+ * It reports and never refuses: whether an unsigned or foreign-signed build may seed a hearth stays the
+ * reader's policy, because a rule baked here would decide every operator's trust from one seat.
+ */
+export async function verifyPluginAttestation(
+  a: PluginBuildAttestation,
+  verify: (bytes: Uint8Array, sigHex: string, signerHex: string) => Promise<boolean>,
+): Promise<PluginAttestationRead> {
+  const builder = a.builder;
+  if (!builder) return "unsigned";
+  const { builder: _covered, ...covered } = a;
+  return await verify(pluginAttestationBytes(covered), builder.sig, builder.signer)
+    ? { signer: builder.signer }
+    : "forged";
 }
 
 // ---------------------------------------------------------------------------
