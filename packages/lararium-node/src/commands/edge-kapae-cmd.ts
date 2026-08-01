@@ -27,7 +27,7 @@ import {
   edgeKapaeBoardDocUrl, materializeSharedLarDoc, ed25519SignerFromSeed, hexToBytes,
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
-import { readNexusCharterDoc } from "../nexus-doc.js";
+import { readNexusDoc } from "../nexus-doc.js";
 import { daemonBagsDir } from "../lares-config.js";
 import {
   listPersonaRoots, loadPersonaGroupRootSeed, loadPersonaGroupRootVerifyingKey, loadVesselVerifyingKey,
@@ -110,7 +110,7 @@ export async function runEdgeKapae(opts: EdgeKapaeOptions): Promise<EdgeKapaeRes
     // cannot survive its own extraction refuses loudly here instead of sitting on the board doing nothing.
     // The chain that orders the act. A command deciding whether a shadow STANDS holds the chain that
     // orders standing — epoch outranks version, and nobody runs ahead of an epoch not yet minted.
-    const chain = readNexusCharterDoc(daemonBagsDir())?.sealLineage ?? [];
+    const chain = readNexusDoc(daemonBagsDir())?.sealLineage ?? [];
     const rank  = new Map(chain.map((e) => [e.epochCid, e.epoch]));
     const shadowed = await shadowSetFromBoard(
       handle.doc(), () => signerDid, verify, (cid) => rank.get(cid) ?? null,

@@ -44,7 +44,7 @@ import { type CabalJoinPolicy, DEFAULT_JOIN_POLICY } from "./cabal-invite.js";
 import type { AdmissionDials } from "./admission-price.js";
 
 /** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
-export const NEXUS_CHARTER_DOC_KIND = "lar-nexus-charter/v1" as const;
+export const NEXUS_DOC_KIND = "lar-nexus-doc/v1" as const;
 
 /** The charter doc's stable lar: bearing (names the doc; grants nothing — lar: NAMES, never fetches). */
 export const NEXUS_CHARTER_URI = "lar:///nexus.charter.seats" as const;
@@ -65,7 +65,7 @@ export interface NexusCharterKahu {
  * type its in-memory face.
  */
 export interface NexusDoc {
-  readonly kind:            typeof NEXUS_CHARTER_DOC_KIND;
+  readonly kind:            typeof NEXUS_DOC_KIND;
   /** k — the quorum threshold a valid antigen act carries (2-of-3 at founding). */
   readonly threshold:       number;
   /** The charter epoch the antigen roots on — the pre-rotated chain's HEAD epochCid, or null while unestablished. */
@@ -125,7 +125,7 @@ function isSeatedKey(key: string | null): key is string {
 
 /** The seated verifying keys a doc carries (ascending, de-duped) — the ONLY keys a quorum ever counts. */
 export function seatedKahuKeys(doc: NexusDoc | null): string[] {
-  if (!doc || doc.kind !== NEXUS_CHARTER_DOC_KIND) return [];
+  if (!doc || doc.kind !== NEXUS_DOC_KIND) return [];
   return [...new Set(doc.kahu.map((k) => k.verifyingKey).filter(isSeatedKey).map((k) => k.toLowerCase()))].sort();
 }
 
@@ -138,7 +138,7 @@ export function seatedKahuKeys(doc: NexusDoc | null): string[] {
  */
 export function genesisSealEpochCid(seatedKeys: readonly string[], threshold: number): string {
   const keys = [...seatedKeys].map((k) => k.toLowerCase()).sort();
-  return `epoch0-${sha256HexSync(canonicalJson({ kind: NEXUS_CHARTER_DOC_KIND, keys, threshold }))}`;
+  return `epoch0-${sha256HexSync(canonicalJson({ kind: NEXUS_DOC_KIND, keys, threshold }))}`;
 }
 
 /**
@@ -238,7 +238,7 @@ export function foundingQuorumSeated(doc: NexusDoc | null): boolean {
 /** The UNSEATED scaffold doc — the three founding names, every key null, no epoch. The seat command's floor. */
 export function emptyFoundingCharterDoc(): NexusDoc {
   return {
-    kind:            NEXUS_CHARTER_DOC_KIND,
+    kind:            NEXUS_DOC_KIND,
     threshold:       FOUNDING_QUORUM_THRESHOLD,
     sealEpochCid: null,
     kahu:            FOUNDING_KAHU.map((k) => ({ displayName: k.displayName, verifyingKey: null })),

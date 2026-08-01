@@ -49,7 +49,7 @@ import {
   carriageDocUrl,
   materializeSharedLarDoc,
 } from "@lararium/mesh";
-import { readNexusCharterDoc } from "./nexus-doc.js";
+import { readNexusDoc } from "./nexus-doc.js";
 
 /** A verifying-key nym reads clean only at the exact ed25519 length — a stray value never seats a member. */
 const NYM_RE = /^[0-9a-f]{64}$/;
@@ -98,7 +98,7 @@ export function makeNexusMembership(opts: {
 
   /** The seated-kahu floor read off disk — lowercased. An absent / unseated charter yields the empty floor. */
   const kahuFloor = (): Set<string> =>
-    new Set<string>(seatedKahuKeys(readNexusCharterDoc(bagsDir)).map((k) => k.toLowerCase()));
+    new Set<string>(seatedKahuKeys(readNexusDoc(bagsDir)).map((k) => k.toLowerCase()));
 
   /** Resolve (once) the always-carried members board, wire the change listener, and cache the handle. A holder
    *  without a repo / nexusPubkey resolves to null (kahu-floor-only). A resolve fault resolves to null too
@@ -133,7 +133,7 @@ export function makeNexusMembership(opts: {
   // freshly-materialized board) share. An absent / unseated charter folds empty (inert) AND yields an empty
   // floor; a lowercased union never silently misses a case match.
   const foldBoard = async (boardDoc: LarDoc | undefined): Promise<void> => {
-    const doc     = readNexusCharterDoc(bagsDir);
+    const doc     = readNexusDoc(bagsDir);
     const roster  = foundingRoster(doc);
     const floor   = new Set<string>(seatedKahuKeys(doc).map((k) => k.toLowerCase()));
     const entries = carriageEntriesFromBoard(boardDoc);

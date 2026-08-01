@@ -239,7 +239,7 @@ export { offerAdmitFlow, grantAdmitFlow, openAdmitFlow, acceptAdmitFlow, makeLoc
 export type { HopRender } from "./persona-admit-flow.js";
 // The `bags/@nexus` charter DOC adapter — the antigen roster's authority home read/written on disk (#66).
 export {
-  readNexusCharterDoc, writeNexusCharterDoc, renderNexusCharterDoc,
+  readNexusDoc, writeNexusDoc, renderNexusDoc, writeNexusSeal, writeNexusKahu, writeNexusPractice,
   nexusCharterDocPath, nexusCharterDocRelPath, NEXUS_BAG,
 } from "./nexus-doc.js";
 export { loadLeafIdentity } from "./leaf-identity.js";

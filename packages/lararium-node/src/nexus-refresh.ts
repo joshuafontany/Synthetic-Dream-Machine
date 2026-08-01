@@ -32,7 +32,7 @@ import {
   antigenEntriesFromBoard, carriageEntriesFromBoard,
   federationPostureFromDoc, type FederationPosture,
 } from "@lararium/mesh";
-import { readNexusCharterDoc } from "./nexus-doc.js";
+import { readNexusDoc } from "./nexus-doc.js";
 import type { AntigenRingHolder } from "./antigen-ring.js";
 import type { NexusMembershipHolder } from "./nexus-carriage.js";
 
@@ -68,7 +68,7 @@ export interface NexusRefreshResult {
  */
 export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefreshResult> {
   // 1. POSTURE — fresh disk read; PRIVATE on absent / torn (fail-closed: a broken read only ever tightens).
-  const posture = federationPostureFromDoc(readNexusCharterDoc(deps.bagsDir));
+  const posture = federationPostureFromDoc(readNexusDoc(deps.bagsDir));
   deps.setPosture(posture);
 
   // 2. BOARDS — a throwaway repo on the SAME storage dir reads the flushed on-disk bytes cold (the running

@@ -44,7 +44,7 @@ import {
   loadPersonaGroupRootSeed, loadVesselVerifyingKey,
 } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
-import { writeNexusCharterDoc, readNexusCharterDoc } from "../src/nexus-doc.js";
+import { writeNexusDoc, readNexusDoc } from "../src/nexus-doc.js";
 import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
 
@@ -96,7 +96,7 @@ async function standHearth(root: string, threshold = 2): Promise<Hearth> {
     const keys = roots.map((r) => r.verifyingKey);
     const bags = join(root, "bags");
     const doc: NexusDoc = {
-      kind: "lar-nexus-charter/v1", threshold,
+      kind: "lar-nexus-doc/v1", threshold,
       sealEpochCid: genesisSealEpochCid(keys, threshold),
       kahu: [
         { displayName: "Founder-0", verifyingKey: keys[0]! },
@@ -104,7 +104,7 @@ async function standHearth(root: string, threshold = 2): Promise<Hearth> {
         { displayName: "Founder-2", verifyingKey: keys[2]! },
       ],
     };
-    writeNexusCharterDoc(bags, doc);
+    writeNexusDoc(bags, doc);
     return { root, bags, nexusPubkey, operatorNym: keys[0]!.toLowerCase(), epoch: doc.sealEpochCid };
   });
 }
@@ -228,7 +228,7 @@ describe("LIVE-WIRE B4 — two hearths write each other into membership (the bil
     const unconsented = hex(await ed.getPublicKeyAsync(new Uint8Array(32).fill(201)));
 
     await asRoot(rootA, async () => {
-      const rosterA = foundingRoster(readNexusCharterDoc(A.bags));
+      const rosterA = foundingRoster(readNexusDoc(A.bags));
       const dir = larDataDir();
 
       // Hand-build the entry `runNexusContract` REFUSES to mint: a valid 2-of-3 kahu quorum over an admit that

@@ -34,7 +34,7 @@ import {
   type CarriageAction, type CarriageEntry, type KahuRoster, type QuorumSignature,
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
-import { readNexusCharterDoc } from "../nexus-doc.js";
+import { readNexusDoc } from "../nexus-doc.js";
 import {
   listPersonaRoots, generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
   loadVesselVerifyingKey,
@@ -74,7 +74,7 @@ export interface NexusContractResult {
 
 /** Read the seated roster off disk, FAILING CLOSED when no live quorum stands to root an admit on. */
 function seatedRosterOrRefuse(bagsDir: string): KahuRoster {
-  const roster = foundingRoster(readNexusCharterDoc(bagsDir));
+  const roster = foundingRoster(readNexusDoc(bagsDir));
   if (roster.sealEpochCid.length === 0 || roster.keys.length < roster.threshold) {
     throw new NexusContractError(
       "no seated founding-kahu quorum to root an admit on — run `lares nexus seal seat` first (the members-registry stays inert until a quorum stands).",
@@ -218,7 +218,7 @@ export async function runNexusAcceptCarriage(opts: {
   handleIndex: number; bagsDir: string; storageDir?: string;
 }): Promise<{ nym: string; sealEpochCid: string; contractSig: string }> {
   const storageDir = opts.storageDir ?? larDataDir();
-  const roster     = foundingRoster(readNexusCharterDoc(opts.bagsDir));
+  const roster     = foundingRoster(readNexusDoc(opts.bagsDir));
   if (roster.sealEpochCid.length === 0) {
     throw new NexusContractError("no seated charter epoch to bind carriage consent to — the Nexus must seat its charter first.");
   }
@@ -243,7 +243,7 @@ export interface NexusMembersListResult {
  *  to the empty set on an unseated charter. */
 export async function runNexusMembersList(opts: { bagsDir: string; storageDir?: string }): Promise<NexusMembersListResult> {
   const storageDir = opts.storageDir ?? larDataDir();
-  const roster     = foundingRoster(readNexusCharterDoc(opts.bagsDir));
+  const roster     = foundingRoster(readNexusDoc(opts.bagsDir));
 
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });

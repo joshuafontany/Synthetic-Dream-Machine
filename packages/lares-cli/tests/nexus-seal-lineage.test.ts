@@ -22,7 +22,7 @@ import { cmdNexus } from "../src/commands/nexus.js";
 import type { ParsedArgs } from "../src/parse-args.js";
 import { larBagsDir, larDataDir } from "../src/env.js";
 import {
-  generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, readNexusCharterDoc,
+  generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, readNexusDoc,
 } from "@lararium/node";
 import { renameOwnPersona, sealKeySetHash, sealLineageHead } from "@lararium/mesh";
 
@@ -69,7 +69,7 @@ describe("lares nexus seal — the pre-rotated chain ceremony (CLI, real vault +
     const rc = await cmdNexus(args(["seal", "seat"], { "next-key-commit": commitNext }));
     expect(rc).toBe(0);
 
-    const doc = readNexusCharterDoc(larBagsDir());
+    const doc = readNexusDoc(larBagsDir());
     expect(doc?.sealLineage?.length).toBe(1);
     const head = sealLineageHead(doc)!;
     expect(head.epoch).toBe(0);
@@ -83,12 +83,12 @@ describe("lares nexus seal — the pre-rotated chain ceremony (CLI, real vault +
     const keys = await seatVault();
     // Genesis pre-commits a digest the current vault reveals — so the rotate's reveal MATCHES.
     await cmdNexus(args(["seal", "seat"], { "next-key-commit": sealKeySetHash(keys, 2) }));
-    const genesis = sealLineageHead(readNexusCharterDoc(larBagsDir()))!;
+    const genesis = sealLineageHead(readNexusDoc(larBagsDir()))!;
 
     const rc = await cmdNexus(args(["seal", "rotate"], { "next-key-commit": sealKeySetHash(keys, 2) }));
     expect(rc).toBe(0);
 
-    const doc = readNexusCharterDoc(larBagsDir());
+    const doc = readNexusDoc(larBagsDir());
     expect(doc?.sealLineage?.length).toBe(2);
     const head = sealLineageHead(doc)!;
     expect(head.epoch).toBe(1);
@@ -98,7 +98,7 @@ describe("lares nexus seal — the pre-rotated chain ceremony (CLI, real vault +
     // re-seat now REFUSES (the chain has rotated past genesis) — never a silent re-genesis.
     const reseat = await cmdNexus(args(["seal", "seat"], { "next-key-commit": sealKeySetHash(keys, 2) }));
     expect(reseat).not.toBe(0);
-    expect(readNexusCharterDoc(larBagsDir())?.sealLineage?.length).toBe(2);   // unchanged
+    expect(readNexusDoc(larBagsDir())?.sealLineage?.length).toBe(2);   // unchanged
   });
 
   test("a rotate whose reveal MISMATCHES the pre-commitment REFUSES (nonzero) and writes nothing", async () => {
@@ -106,13 +106,13 @@ describe("lares nexus seal — the pre-rotated chain ceremony (CLI, real vault +
     // Genesis pre-commits a STRANGER key-set — the vault's real keys will not match on reveal.
     const strangerCommit = sealKeySetHash(["f".repeat(64), "e".repeat(64)], 2);
     await cmdNexus(args(["seal", "seat"], { "next-key-commit": strangerCommit }));
-    const before = readNexusCharterDoc(larBagsDir());
+    const before = readNexusDoc(larBagsDir());
     expect(before?.sealLineage?.length).toBe(1);
 
     const rc = await cmdNexus(args(["seal", "rotate"], { "next-key-commit": sealKeySetHash(keys, 2) }));
     expect(rc).not.toBe(0);                                 // fail-closed on the reveal mismatch
 
-    const after = readNexusCharterDoc(larBagsDir());
+    const after = readNexusDoc(larBagsDir());
     expect(after?.sealLineage?.length).toBe(1);            // nothing written — still at epoch0
     expect(sealLineageHead(after)!.epoch).toBe(0);
   });

@@ -24,7 +24,7 @@ import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import { hex, genesisSealEpochCid, type NexusDoc } from "@lararium/mesh";
 import { generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot, loadVesselVerifyingKey } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
-import { writeNexusCharterDoc } from "../src/nexus-doc.js";
+import { writeNexusDoc } from "../src/nexus-doc.js";
 import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
 
@@ -49,7 +49,7 @@ afterEach(async () => {
 
 function seatCharter(keys: string[], threshold = 2): void {
   const doc: NexusDoc = {
-    kind: "lar-nexus-charter/v1", threshold,
+    kind: "lar-nexus-doc/v1", threshold,
     sealEpochCid: genesisSealEpochCid(keys, threshold),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0] ?? null },
@@ -57,7 +57,7 @@ function seatCharter(keys: string[], threshold = 2): void {
       { displayName: "The Lindwyrm",        verifyingKey: keys[2] ?? null },
     ],
   };
-  writeNexusCharterDoc(bagsDir(), doc);
+  writeNexusDoc(bagsDir(), doc);
 }
 
 describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {

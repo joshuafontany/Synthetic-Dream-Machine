@@ -20,7 +20,7 @@ import {
   renameOwnPersona, ownPersonaPetname, type NexusDoc, type NexusCharterKahu,
 } from "@lararium/mesh";
 import {
-  readNexusCharterDoc, writeNexusCharterDoc, nexusCharterDocPath,
+  readNexusDoc, writeNexusDoc, nexusCharterDocPath,
 } from "../src/nexus-doc.js";
 import {
   generateOrLoadPersonaGroupRoot, listPersonaRoots, makeNodePersonaPetnameStore,
@@ -38,14 +38,14 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
   afterEach(() => { rmSync(bags, { recursive: true, force: true }); });
 
   test("an absent doc reads null (fail closed → empty roster)", () => {
-    expect(readNexusCharterDoc(bags)).toBeNull();
-    expect(rosterFromNexusDoc(readNexusCharterDoc(bags)).keys).toEqual([]);
+    expect(readNexusDoc(bags)).toBeNull();
+    expect(rosterFromNexusDoc(readNexusDoc(bags)).keys).toEqual([]);
   });
 
   test("a seated doc writes in house form and reads back faithfully", () => {
     const keys = ["a".repeat(64), "b".repeat(64)];
     const doc: NexusDoc = {
-      kind: "lar-nexus-charter/v1", threshold: 2,
+      kind: "lar-nexus-doc/v1", threshold: 2,
       sealEpochCid: genesisSealEpochCid(keys, 2),
       kahu: [
         { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
@@ -53,9 +53,9 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
         { displayName: "The Lindwyrm",        verifyingKey: null },
       ],
     };
-    const path = writeNexusCharterDoc(bags, doc);
+    const path = writeNexusDoc(bags, doc);
     expect(path).toBe(nexusCharterDocPath(bags));
-    const back = readNexusCharterDoc(bags);
+    const back = readNexusDoc(bags);
     expect(back).toEqual(doc);
     // fail-closed math: 2 seated + epoch → quorum stands
     expect(foundingQuorumSeated(back)).toBe(true);
@@ -63,8 +63,8 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
   });
 
   test("the unseated scaffold round-trips to an inert roster", () => {
-    writeNexusCharterDoc(bags, emptyFoundingCharterDoc());
-    const back = readNexusCharterDoc(bags);
+    writeNexusDoc(bags, emptyFoundingCharterDoc());
+    const back = readNexusDoc(bags);
     expect(back?.kahu.length).toBe(3);
     expect(rosterFromNexusDoc(back).keys).toEqual([]);
     expect(foundingQuorumSeated(back)).toBe(false);
@@ -72,23 +72,23 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
 
   test("a torn roster block reads null (never a partial guess into authority)", () => {
     const path = nexusCharterDocPath(bags);
-    writeNexusCharterDoc(bags, emptyFoundingCharterDoc());          // establish the dir + a valid file
+    writeNexusDoc(bags, emptyFoundingCharterDoc());          // establish the dir + a valid file
     writeFileSync(path, "```json nexus-charter\n{ not: valid json ]\n```\n", "utf8");
-    expect(readNexusCharterDoc(bags)).toBeNull();
+    expect(readNexusDoc(bags)).toBeNull();
   });
 
   test("a wrong-kind block reads null", () => {
     const path = nexusCharterDocPath(bags);
-    writeNexusCharterDoc(bags, emptyFoundingCharterDoc());
+    writeNexusDoc(bags, emptyFoundingCharterDoc());
     writeFileSync(path, "```json nexus-charter\n{ \"kind\": \"something-else\", \"threshold\": 2, \"kahu\": [] }\n```\n", "utf8");
-    expect(readNexusCharterDoc(bags)).toBeNull();
+    expect(readNexusDoc(bags)).toBeNull();
   });
 
   test("a pre-rotated CHAIN doc round-trips through disk + roots the roster on the head epoch (#68)", () => {
     const keys = ["a".repeat(64), "b".repeat(64)];
     const genesis = genesisCharterEpoch(keys, 2, sealKeySetHash(["c".repeat(64), "d".repeat(64)], 2));
     const doc: NexusDoc = {
-      kind: "lar-nexus-charter/v1", threshold: 2,
+      kind: "lar-nexus-doc/v1", threshold: 2,
       sealEpochCid: genesis.epochCid,
       sealLineage: [genesis],
       kahu: [
@@ -97,8 +97,8 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
         { displayName: "The Lindwyrm",        verifyingKey: null },
       ],
     };
-    writeNexusCharterDoc(bags, doc);
-    const back = readNexusCharterDoc(bags);
+    writeNexusDoc(bags, doc);
+    const back = readNexusDoc(bags);
     expect(back).toEqual(doc);                                          // the chain survives disk byte-faithful
     expect(sealLineageHead(back)!.epoch).toBe(0);
     expect(rosterFromNexusDoc(back).sealEpochCid).toBe(genesis.epochCid);   // antigen roots on the head
@@ -107,12 +107,12 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
 
   test("a TORN chain block reads null (never a partial pre-rotation lineage into authority)", () => {
     const path = nexusCharterDocPath(bags);
-    writeNexusCharterDoc(bags, emptyFoundingCharterDoc());
+    writeNexusDoc(bags, emptyFoundingCharterDoc());
     writeFileSync(path,
       "```json nexus-charter\n" +
-      JSON.stringify({ kind: "lar-nexus-charter/v1", threshold: 2, kahu: [], sealLineage: [{ epoch: 0, epochCid: "e0" }] }) +
+      JSON.stringify({ kind: "lar-nexus-doc/v1", threshold: 2, kahu: [], sealLineage: [{ epoch: 0, epochCid: "e0" }] }) +
       "\n```\n", "utf8");
-    expect(readNexusCharterDoc(bags)).toBeNull();                        // an epoch missing keySetHash/nextKeyCommit → torn → closed
+    expect(readNexusDoc(bags)).toBeNull();                        // an epoch missing keySetHash/nextKeyCommit → torn → closed
   });
 });
 
@@ -164,9 +164,9 @@ describe("persona pet-name + seat gesture (the door's core)", () => {
       sealEpochCid: seated.length >= doc0.threshold ? genesisSealEpochCid(seated, doc0.threshold) : null,
       kahu,
     };
-    writeNexusCharterDoc(bags, doc);
+    writeNexusDoc(bags, doc);
 
-    const back = readNexusCharterDoc(bags);
+    const back = readNexusDoc(bags);
     expect(existsSync(nexusCharterDocPath(bags))).toBe(true);
     expect(rosterFromNexusDoc(back).keys.length).toBe(3);
     expect(foundingQuorumSeated(back)).toBe(true);

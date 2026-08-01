@@ -10,7 +10,7 @@
  *     unauthenticated peer → null (fail-closed: a denylist that cannot name a peer never falsely denies it).
  *   · kapaed — the currently-Kapae'd nym set, FOLDED (kapae-antigen `foldAntigenSet` + the multi-sig quorum
  *     verifier) from the always-carried antigen BOARD entries AND the founding-kahu roster read off disk
- *     (`readNexusCharterDoc(bagsDir)` → `foundingRoster`). Re-folded on every board-doc change so a ban
+ *     (`readNexusDoc(bagsDir)` → `foundingRoster`). Re-folded on every board-doc change so a ban
  *     propagated across the mesh takes on the next sync (the immune system saturates by carry-contract).
  *
  * FAILS CLOSED, three ways, matching the antigen's own discipline:
@@ -38,7 +38,7 @@ import {
   makeMultiSigQuorumVerifier,
   materializeSharedLarDoc,
 } from "@lararium/mesh";
-import { readNexusCharterDoc } from "./nexus-doc.js";
+import { readNexusDoc } from "./nexus-doc.js";
 
 /** A verifying-key nym reads clean only at the exact ed25519 length — a stray value never matches a ban. */
 const NYM_RE = /^[0-9a-f]{64}$/;
@@ -96,7 +96,7 @@ export function makeAntigenRingHolder(opts: {
   // board) share. An absent / unseated charter folds empty (inert); a lowercased set never misses a case match.
   const foldBoard = async (boardDoc: LarDoc | undefined): Promise<void> => {
     const entries = antigenEntriesFromBoard(boardDoc);
-    const roster  = foundingRoster(readNexusCharterDoc(bagsDir));
+    const roster  = foundingRoster(readNexusDoc(bagsDir));
     const folded  = await foldAntigenSet(entries, roster, verifier);
     kapaed = new Set<string>([...folded].map((k) => k.toLowerCase()));
   };

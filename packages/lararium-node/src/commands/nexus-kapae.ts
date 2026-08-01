@@ -6,7 +6,7 @@
  *
  * Node-specific shores (only these belong here):
  *   - Repo + NodeFSStorageAdapter over the vessel store (the offline board-doc access, mirroring device-admit)
- *   - readNexusCharterDoc off `bags/@nexus` (the roster's authority home) → foundingRoster
+ *   - readNexusDoc off `bags/@nexus` (the roster's authority home) → foundingRoster
  *   - listPersonaRoots / generateOrLoadPersonaGroupRoot / loadPersonaGroupRootSeed (founder-held signing seeds)
  *   - loadVesselVerifyingKey (the node's own gate key — the board's per-island deterministic address seed)
  *
@@ -35,7 +35,7 @@ import {
   type KapaeAction, type KapaeAntigenEntry, type KahuRoster, type LarDoc,
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
-import { readNexusCharterDoc } from "../nexus-doc.js";
+import { readNexusDoc } from "../nexus-doc.js";
 import {
   listPersonaRoots, generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
   loadVesselVerifyingKey,
@@ -83,7 +83,7 @@ export interface NexusKapaeListResult {
 
 /** Read the seated roster off disk, FAILING CLOSED when no live quorum stands to root a ban on. */
 function seatedRosterOrRefuse(bagsDir: string): KahuRoster {
-  const roster = foundingRoster(readNexusCharterDoc(bagsDir));
+  const roster = foundingRoster(readNexusDoc(bagsDir));
   if (roster.sealEpochCid.length === 0 || roster.keys.length < roster.threshold) {
     throw new NexusKapaeError(
       "no seated founding-kahu quorum to root a ban on — run `lares nexus seal seat` first (the antigen stays inert until a quorum stands).",
@@ -189,7 +189,7 @@ export async function runNexusKapae(opts: NexusKapaeOptions): Promise<NexusKapae
  *  board on a cold first boot (denies nobody). FAILS CLOSED to the empty set on an unseated charter. */
 export async function runNexusKapaeList(opts: { bagsDir: string; storageDir?: string }): Promise<NexusKapaeListResult> {
   const storageDir = opts.storageDir ?? larDataDir();
-  const roster     = foundingRoster(readNexusCharterDoc(opts.bagsDir));
+  const roster     = foundingRoster(readNexusDoc(opts.bagsDir));
 
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });

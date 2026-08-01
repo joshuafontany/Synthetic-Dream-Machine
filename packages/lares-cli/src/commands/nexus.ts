@@ -24,7 +24,7 @@
  */
 
 import {
-  readNexusCharterDoc, writeNexusCharterDoc, nexusCharterDocPath,
+  readNexusDoc, writeNexusDoc, writeNexusSeal, writeNexusKahu, writeNexusPractice, nexusCharterDocPath,
   listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore,
   runNexusKapae, runNexusKapaeList, NexusKapaeError,
   runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError,
@@ -211,7 +211,7 @@ async function cmdAcceptCarriage(args: ParsedArgs): Promise<number> {
 async function cmdPosture(args: ParsedArgs): Promise<number> {
   const bagsDir = larBagsDir();
   const want = args.positional[1];
-  const doc = readNexusCharterDoc(bagsDir);
+  const doc = readNexusDoc(bagsDir);
   if (want === undefined) {
     const posture = federationPostureFromDoc(doc);
     emit(args, {
@@ -235,8 +235,10 @@ async function cmdPosture(args: ParsedArgs): Promise<number> {
     return exitFor("error");
   }
   const posture: FederationPosture = want;
+  // The PRACTICE joint alone. A posture flip once re-emitted the seal lineage's bytes on its way past;
+  // the narrow writer never parses that block, so the cheapest act no longer reaches the dearest joint.
+  const path = writeNexusPractice(bagsDir, { federationPosture: posture }, doc);
   const next = { ...doc, federationPosture: posture };
-  const path = writeNexusCharterDoc(bagsDir, next);
   emit(args, {
     ok: true,
     data: { posture, path },
@@ -390,7 +392,7 @@ async function seatKahuFromVault(
 async function sealSeat(args: ParsedArgs): Promise<number> {
   const bagsDir = larBagsDir();
   const dataDir = larDataDir();
-  const doc = readNexusCharterDoc(bagsDir) ?? emptyFoundingCharterDoc();
+  const doc = readNexusDoc(bagsDir) ?? emptyFoundingCharterDoc();
 
   // FAIL CLOSED: a chain already advanced PAST genesis is never silently re-genesied — a re-seat would
   // strand every antigen entry rooted on a rotated head. The operator advances a live chain via `rotate`.
@@ -413,7 +415,11 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
   const next: NexusDoc = sealLineage
     ? { kind: doc.kind, threshold: doc.threshold, sealEpochCid, sealLineage, kahu }
     : { kind: doc.kind, threshold: doc.threshold, sealEpochCid, kahu };
-  const path = writeNexusCharterDoc(bagsDir, next);
+  // A seat moves TWO joints — the roster it seats and the genesis epoch it establishes — so it writes both
+  // narrowly rather than re-emitting the practice dials it never touched.
+  writeNexusKahu(bagsDir, { threshold: next.threshold, kahu: next.kahu }, next);
+  const path = writeNexusSeal(bagsDir,
+    sealLineage ? { kind: next.kind, sealEpochCid, sealLineage } : { kind: next.kind, sealEpochCid }, next);
   const quorum = foundingQuorumSeated(next);
   const armed = Boolean(sealLineage) && nextKeyCommit.length > 0;
 
@@ -447,7 +453,7 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
 async function sealRotate(args: ParsedArgs): Promise<number> {
   const bagsDir = larBagsDir();
   const dataDir = larDataDir();
-  const doc = readNexusCharterDoc(bagsDir);
+  const doc = readNexusDoc(bagsDir);
   const head = sealLineageHead(doc);
   if (!doc || !head) {
     throw new UsageError("no genesis charter chain to rotate — establish one with `lares nexus seal seat` first");
@@ -479,7 +485,8 @@ async function sealRotate(args: ParsedArgs): Promise<number> {
   const sealLineage: SealEpoch[] = [...(doc.sealLineage ?? []), result.epoch];
   const sealEpochCid = result.epoch.epochCid;
   const next: NexusDoc = { kind: doc.kind, threshold: doc.threshold, sealEpochCid, sealLineage, kahu };
-  const path = writeNexusCharterDoc(bagsDir, next);
+  // A rotation ceremony reaches the SEAL joint and nothing else.
+  const path = writeNexusSeal(bagsDir, { kind: next.kind, sealEpochCid, sealLineage }, next);
   const armed = nextKeyCommit.length > 0;
 
   emit(args, {
@@ -525,7 +532,7 @@ function sealCommit(args: ParsedArgs): number {
 
 async function sealShow(args: ParsedArgs): Promise<number> {
   const bagsDir = larBagsDir();
-  const doc = readNexusCharterDoc(bagsDir);
+  const doc = readNexusDoc(bagsDir);
   const roster = rosterFromNexusDoc(doc);
   const quorum = foundingQuorumSeated(doc);
   const head = sealLineageHead(doc);
@@ -624,7 +631,7 @@ async function sealReserveProvision(args: ParsedArgs, mode: "provision" | "refre
   const reserveEpoch = mode === "refresh" ? (prior?.reserveEpoch ?? 0) + 1 : 1;
 
   // Read the charter chain to name the reconciliation route (below) — this command NEVER mutates the charter.
-  const doc = readNexusCharterDoc(larBagsDir());
+  const doc = readNexusDoc(larBagsDir());
   const chainDepth = doc?.sealLineage?.length ?? 0;
 
   const rng = defaultCryptoProvider;

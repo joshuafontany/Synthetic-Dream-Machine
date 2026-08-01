@@ -1,15 +1,29 @@
 /**
- * nexus-doc — the DISK adapter for the `bags/@nexus` charter DOC (the antigen's authority home).
+ * nexus-doc — the DISK adapter for the `bags/@nexus` doc, which carries THREE joints at three cadences.
  *
- * The founding-kahu roster lives as data-as-authority: a `.mem` carrier in the `@nexus` residency whose
- * body carries a machine-readable `json nexus-charter` fenced block. This adapter READS that block back
- * into the platform-blind `NexusDoc` (which `nexus-seal-seed.foundingRoster` folds into the
- * antigen roster) and WRITES it in house form. The disk read/write is the node concern; the fold/verify
- * stays in mesh.
+ * THE JOINTS, and why they ride separate blocks. One word once covered six entities, separated not by
+ * content but by different ceremony, threshold, RATE and authority (canon `cabal-realm#six-joints`). Three
+ * of them live here, and their amendment costs differ by orders:
  *
- * FAILS CLOSED on the read: an absent file, a missing block, torn JSON, or a wrong-kind payload all read
- * `null` — the roster then folds empty and the antigen stays inert. The parser never guesses a partial doc
- * into authority.
+ *   · SEAL     — the pre-rotated key-epoch lineage. A rotation ceremony over a k-of-n of current keys. Rare.
+ *   · KAHU     — the founding roster + its threshold. Moves when a steward seat moves.
+ *   · PRACTICE — federation posture · join policy · admission dials. An ordinary governance act, fast and
+ *                reversible, and the one a single hand may turn.
+ *
+ * WHY THREE BLOCKS RATHER THAN ONE. A single block forced every writer through a whole-doc rewrite, so a
+ * posture flip re-emitted the seal lineage's bytes on its way past, and two hands touching different joints
+ * clobbered each other last-writer-wins. Each narrow writer below re-reads the carrier at write time and
+ * swaps ONLY its own fence, carrying the other joints through as OPAQUE TEXT it never deserializes. That
+ * makes the corruption inexpressible rather than merely discouraged: a practice write holds no parsed seal
+ * to get wrong.
+ *
+ * The composed `readNexusDoc` still folds all three into one `NexusDoc`, because a reader legitimately wants
+ * the whole view — the WRITE must stay narrow, never the read.
+ *
+ * FAILS CLOSED on the read: an absent file, a missing seal or kahu block, torn JSON, or a wrong-kind payload
+ * all read `null` — the roster then folds empty and the antigen stays inert. The parser never guesses a
+ * partial doc into authority. A torn PRACTICE block never closes the doc, so the fastest-cadence joint can
+ * never take the slower ones down with it.
  *
  * The bags dir rides in as a parameter (the CLI supplies `larBagsDir()`), so this module keeps no env
  * coupling and tests against any temp tree.
@@ -18,45 +32,95 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import {
-  NEXUS_CHARTER_DOC_KIND, NEXUS_CHARTER_URI, NEXUS_CHARTER_URI_PATH,
+  NEXUS_DOC_KIND, NEXUS_CHARTER_URI, NEXUS_CHARTER_URI_PATH,
   type NexusDoc, type NexusCharterKahu, type SealEpoch,
+  type FederationPosture, type CabalJoinPolicy, type AdmissionDials,
 } from "@lararium/mesh";
 
-/** The `@nexus` residency-bag name — the holding slot the charter doc sites under. */
+/** The `@nexus` residency-bag name — the holding slot the doc sites under. */
 export const NEXUS_BAG = "@nexus" as const;
 
-/** The charter doc's mirror-relative path (holding bag + full uri-path + `.mem` extension). */
+/** The doc's mirror-relative path (holding bag + full uri-path + `.mem` extension). */
 export function nexusCharterDocRelPath(): string {
   return join(NEXUS_BAG, `${NEXUS_CHARTER_URI_PATH}.mem`);
 }
 
-/** The charter doc's absolute path under a given bags dir. */
+/** The doc's absolute path under a given bags dir. */
 export function nexusCharterDocPath(bagsDir: string): string {
   return join(bagsDir, nexusCharterDocRelPath());
 }
 
-/** The fenced machine-readable roster block the body carries — extracted whole on read, re-emitted on write. */
-const CHARTER_BLOCK_RE = /```json nexus-charter\r?\n([\s\S]*?)\r?\n```/;
+// ── the three fences ──────────────────────────────────────────────────────────────────────────────
+
+/** One joint per fence — a narrow writer swaps its own and never parses its neighbours. */
+export const SEAL_BLOCK     = "nexus-seal"     as const;
+export const KAHU_BLOCK     = "nexus-kahu"     as const;
+export const PRACTICE_BLOCK = "nexus-practice" as const;
+
+/** The SEAL joint on disk — the epoch head plus the pre-rotated lineage behind it. */
+export interface NexusSealBlock {
+  readonly kind:         typeof NEXUS_DOC_KIND;
+  readonly sealEpochCid: string | null;
+  readonly sealLineage?: readonly SealEpoch[];
+}
+
+/** The KAHU joint on disk — the founding roster and the quorum it answers at. */
+export interface NexusKahuBlock {
+  readonly threshold: number;
+  readonly kahu:      readonly NexusCharterKahu[];
+}
+
+/** The PRACTICE joint on disk — the dials one steward hand may turn, at their own fast cadence. */
+export interface NexusPracticeBlock {
+  readonly federationPosture?: FederationPosture;
+  readonly joinPolicy?:        CabalJoinPolicy;
+  readonly admissionDials?:    AdmissionDials;
+}
+
+function fenceRe(name: string): RegExp {
+  return new RegExp("```json " + name + "\\r?\\n([\\s\\S]*?)\\r?\\n```");
+}
+
+/** Pull one fence's payload, or null when the fence stands absent or its JSON reads torn. */
+function readFence(body: string, name: string): unknown | null {
+  const m = fenceRe(name).exec(body);
+  if (!m) return null;
+  try { return JSON.parse(m[1]!); } catch { return null; }
+}
 
 /**
- * Coerce a parsed charter-chain payload: `undefined` when absent (a genesis-inception doc without a charter chain), the
- * sentinel `"torn"` when malformed (which reads the WHOLE doc closed — the parser never guesses a partial
- * pre-rotation lineage into authority), or the typed `SealEpoch[]` when every epoch's shape holds.
+ * Swap ONE fence's payload inside a body, leaving every other byte untouched.
+ *
+ * The neighbours ride through as opaque text — this never parses them, so a writer cannot corrupt a joint it
+ * does not own. A body missing the named fence gains it, so a carrier written before a joint existed grows
+ * that joint rather than failing.
  */
-function coerceCharterChain(raw: unknown): SealEpoch[] | "torn" | undefined {
+function swapFence(body: string, name: string, payload: unknown): string {
+  const block = "```json " + name + "\n" + JSON.stringify(payload, null, 2) + "\n```";
+  return fenceRe(name).test(body) ? body.replace(fenceRe(name), block) : `${body.trimEnd()}\n\n${block}\n`;
+}
+
+// ── coercion ──────────────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Coerce a parsed seal-lineage payload: `undefined` when absent (a genesis-inception doc with no lineage
+ * yet), the sentinel `"torn"` when malformed (which reads the WHOLE doc closed — the parser never guesses a
+ * partial pre-rotation lineage into authority), or the typed `SealEpoch[]` when every epoch's shape holds.
+ */
+function coerceSealLineage(raw: unknown): SealEpoch[] | "torn" | undefined {
   if (raw === undefined || raw === null) return undefined;
   if (!Array.isArray(raw)) return "torn";
-  const chain: SealEpoch[] = [];
+  const lineage: SealEpoch[] = [];
   for (const item of raw) {
     if (typeof item !== "object" || item === null) return "torn";
     const e = item as Record<string, unknown>;
-    if (!Number.isInteger(e["epoch"]))            return "torn";
-    if (typeof e["epochCid"]      !== "string")   return "torn";
-    if (typeof e["keySetHash"]    !== "string")   return "torn";
-    if (typeof e["nextKeyCommit"] !== "string")   return "torn";
+    if (!Number.isInteger(e["epoch"]))             return "torn";
+    if (typeof e["epochCid"]      !== "string")    return "torn";
+    if (typeof e["keySetHash"]    !== "string")    return "torn";
+    if (typeof e["nextKeyCommit"] !== "string")    return "torn";
     const prev = e["prevEpochCid"];
     if (prev !== null && typeof prev !== "string") return "torn";
-    chain.push({
+    lineage.push({
       epoch:         e["epoch"] as number,
       epochCid:      e["epochCid"] as string,
       keySetHash:    e["keySetHash"] as string,
@@ -64,60 +128,81 @@ function coerceCharterChain(raw: unknown): SealEpoch[] | "torn" | undefined {
       prevEpochCid:  (prev ?? null) as string | null,
     });
   }
-  return chain;
+  return lineage;
 }
 
-/** Coerce an unknown parsed payload into a `NexusDoc`, or null when it fails the shape/kind guards. */
-function coerceCharterDoc(parsed: unknown): NexusDoc | null {
-  if (typeof parsed !== "object" || parsed === null) return null;
-  const p = parsed as Record<string, unknown>;
-  if (p["kind"] !== NEXUS_CHARTER_DOC_KIND) return null;
-  if (!Number.isInteger(p["threshold"]) || (p["threshold"] as number) < 1) return null;
-  if (!Array.isArray(p["kahu"])) return null;
-  const epoch = p["sealEpochCid"];
+/** Fold the three read blocks into one composed `NexusDoc`, or null when seal or kahu fails its guards. */
+function composeDoc(seal: unknown, kahu: unknown, practice: unknown): NexusDoc | null {
+  if (typeof seal !== "object" || seal === null) return null;
+  const s = seal as Record<string, unknown>;
+  if (s["kind"] !== NEXUS_DOC_KIND) return null;
+  const epoch = s["sealEpochCid"];
   const sealEpochCid = typeof epoch === "string" && epoch.length > 0 ? epoch : null;
-  const chain = coerceCharterChain(p["sealLineage"]);
-  if (chain === "torn") return null;                                // a torn chain reads the whole doc closed
-  const kahu: NexusCharterKahu[] = [];
-  for (const raw of p["kahu"]) {
-    if (typeof raw !== "object" || raw === null) return null;      // a torn member reads the whole doc closed
-    const k = raw as Record<string, unknown>;
-    if (typeof k["displayName"] !== "string") return null;
-    const vk = k["verifyingKey"];
-    kahu.push({
-      displayName:  k["displayName"],
+  const lineage = coerceSealLineage(s["sealLineage"]);
+  if (lineage === "torn") return null;                            // a torn lineage reads the whole doc closed
+
+  if (typeof kahu !== "object" || kahu === null) return null;
+  const k = kahu as Record<string, unknown>;
+  if (!Number.isInteger(k["threshold"]) || (k["threshold"] as number) < 1) return null;
+  if (!Array.isArray(k["kahu"])) return null;
+  const seats: NexusCharterKahu[] = [];
+  for (const raw of k["kahu"]) {
+    if (typeof raw !== "object" || raw === null) return null;     // a torn seat reads the whole doc closed
+    const seat = raw as Record<string, unknown>;
+    if (typeof seat["displayName"] !== "string") return null;
+    const vk = seat["verifyingKey"];
+    seats.push({
+      displayName:  seat["displayName"] as string,
       verifyingKey: typeof vk === "string" && vk.length > 0 ? vk : null,
     });
   }
-  // The federation posture reads only the exact literal "open"; anything else (absent, torn, unrecognized) folds
-  // to PRIVATE downstream via `federationPostureFromDoc` — a torn posture must never silently open the mesh.
+
+  // PRACTICE never closes the doc — a torn dial folds to its fail-closed default downstream, so the
+  // fastest-cadence joint can never take the slow-cadence joints with it. The posture reads only the exact
+  // literal "open"; anything else folds PRIVATE via `federationPostureFromDoc`, because a torn posture must
+  // never silently open the mesh.
+  const p = (typeof practice === "object" && practice !== null ? practice : {}) as Record<string, unknown>;
   const posture = p["federationPosture"] === "open" ? ("open" as const) : undefined;
-  const base: NexusDoc = { kind: NEXUS_CHARTER_DOC_KIND, threshold: p["threshold"] as number, sealEpochCid, kahu };
-  const withChain = chain === undefined ? base : { ...base, sealLineage: chain };
-  return posture === undefined ? withChain : { ...withChain, federationPosture: posture };
+
+  const base: NexusDoc = { kind: NEXUS_DOC_KIND, threshold: k["threshold"] as number, sealEpochCid, kahu: seats };
+  const withLineage = lineage === undefined ? base : { ...base, sealLineage: lineage };
+  return posture === undefined ? withLineage : { ...withLineage, federationPosture: posture };
+}
+
+// ── read ──────────────────────────────────────────────────────────────────────────────────────────
+
+/** The raw carrier body, or null when nothing stands on disk. */
+function readBody(bagsDir: string): string | null {
+  const path = nexusCharterDocPath(bagsDir);
+  if (!existsSync(path)) return null;
+  try { return readFileSync(path, "utf8"); } catch { return null; }
 }
 
 /**
- * Read the charter doc under `bagsDir` into a `NexusDoc`, or null (FAIL CLOSED) when it is absent,
- * carries no roster block, or the block is torn / wrong-kind. The caller folds a null through
- * `foundingRoster(null)` to the empty (inert) roster — never a guess.
+ * Read the `@nexus` doc into a composed `NexusDoc`, or null (FAIL CLOSED) when it stands absent, carries no
+ * seal or kahu block, or either reads torn. The caller folds a null through `foundingRoster(null)` to the
+ * empty (inert) roster — never a guess.
  */
-export function readNexusCharterDoc(bagsDir: string): NexusDoc | null {
-  const path = nexusCharterDocPath(bagsDir);
-  if (!existsSync(path)) return null;
-  let body: string;
-  try { body = readFileSync(path, "utf8"); } catch { return null; }
-  const m = CHARTER_BLOCK_RE.exec(body);
-  if (!m) return null;
-  try { return coerceCharterDoc(JSON.parse(m[1]!)); } catch { return null; }
+export function readNexusDoc(bagsDir: string): NexusDoc | null {
+  const body = readBody(bagsDir);
+  if (body === null) return null;
+  return composeDoc(readFence(body, SEAL_BLOCK), readFence(body, KAHU_BLOCK), readFence(body, PRACTICE_BLOCK));
 }
 
-/** Render the charter doc as a house-form `.mem` carrier — iam frame + prose + the machine-readable block. */
-export function renderNexusCharterDoc(doc: NexusDoc): string {
+// ── render ────────────────────────────────────────────────────────────────────────────────────────
+
+/** Render the whole carrier in house form — the iam frame, the prose, and one fenced block per joint. */
+export function renderNexusDoc(doc: NexusDoc): string {
   const seated = doc.kahu.filter((k) => k.verifyingKey).length;
-  const chainDepth = doc.sealLineage?.length ?? 0;
-  const chainLine = chainDepth > 0 ? ` · pre-rotated chain: ${chainDepth} epoch(s), head at seq ${chainDepth - 1}` : "";
-  const block = JSON.stringify(doc, null, 2);
+  const depth  = doc.sealLineage?.length ?? 0;
+  const lineageLine = depth > 0 ? ` · pre-rotated lineage: ${depth} epoch(s), head at seq ${depth - 1}` : "";
+  const seal: NexusSealBlock = doc.sealLineage === undefined
+    ? { kind: NEXUS_DOC_KIND, sealEpochCid: doc.sealEpochCid }
+    : { kind: NEXUS_DOC_KIND, sealEpochCid: doc.sealEpochCid, sealLineage: doc.sealLineage };
+  const kahu: NexusKahuBlock = { threshold: doc.threshold, kahu: doc.kahu };
+  const practice: NexusPracticeBlock =
+    doc.federationPosture === undefined ? {} : { federationPosture: doc.federationPosture };
+
   return `<<~ ? -> ${NEXUS_CHARTER_URI} >>
 \`\`\`toml iam
 uri-path  = "${NEXUS_CHARTER_URI_PATH}"
@@ -127,29 +212,78 @@ register  = "Canon"
 mana      = 19
 cacheable = true
 retain    = true
-role      = "the APPROVED founding-kahu roster — data-as-authority for the Kapae immune antigen"
+role      = "the @nexus doc — three joints at three cadences: the SEAL lineage (rare, a rotation ceremony), the KAHU roster (steward seats), and the PRACTICE dials (fast, one hand). Each rides its own block and its own narrow writer."
 \`\`\`
 
-<<~ ahu #the-founding-roster >>
+<<~ ahu #the-three-joints >>
 
-! Nexus Charter — the Founding Kahu Roster
+! The @nexus Doc — seal · kahu · practice
 
-The APPROVED roster the Kapae immune antigen reads. A ban/lift act carries ${doc.threshold}-of-${doc.kahu.length} founding-kahu signatures, rooted on the charter epoch below. Each kahu's key is that PersonaGroup's own root-derived verifying key, seated from the vault by \`lares nexus seal seat\` — never invented. An unseated key reads null, and the antigen stays inert until a quorum stands.
+Three joints ride here at three cadences, each in its own block, because a single block forced every writer through a whole-doc rewrite: a posture flip re-emitted the seal lineage on its way past, and two hands touching different joints clobbered each other. Each narrow writer swaps ONLY its own fence and carries the rest through as opaque text.
 
-Seated: ${seated}/${doc.kahu.length} · threshold ${doc.threshold} · epoch ${doc.sealEpochCid ?? "(unestablished — seat a quorum)"}${chainLine}
+The KAHU block holds the APPROVED roster the Kapae immune antigen reads. A ban/lift act carries ${doc.threshold}-of-${doc.kahu.length} founding-kahu signatures, rooted on the seal epoch below. Each kahu's key reads that PersonaGroup's own root-derived verifying key, seated from the vault by \`lares nexus seal seat\` — never invented. An unseated key reads null, and the antigen stays inert until a quorum stands.
 
-\`\`\`json nexus-charter
-${block}
+Seated: ${seated}/${doc.kahu.length} · threshold ${doc.threshold} · epoch ${doc.sealEpochCid ?? "(unestablished — seat a quorum)"}${lineageLine}
+
+\`\`\`json ${SEAL_BLOCK}
+${JSON.stringify(seal, null, 2)}
+\`\`\`
+
+\`\`\`json ${KAHU_BLOCK}
+${JSON.stringify(kahu, null, 2)}
+\`\`\`
+
+\`\`\`json ${PRACTICE_BLOCK}
+${JSON.stringify(practice, null, 2)}
 \`\`\`
 
 <<~/ahu >>
 `;
 }
 
-/** Write the charter doc under `bagsDir` in house form (mkdir -p the residency path first). */
-export function writeNexusCharterDoc(bagsDir: string, doc: NexusDoc): string {
+// ── write ─────────────────────────────────────────────────────────────────────────────────────────
+
+function writeBody(bagsDir: string, body: string): string {
   const path = nexusCharterDocPath(bagsDir);
   mkdirSync(dirname(path), { recursive: true });
-  writeFileSync(path, renderNexusCharterDoc(doc), "utf8");
+  writeFileSync(path, body, "utf8");
   return path;
+}
+
+/**
+ * Write the WHOLE carrier — the founding act's own writer, and the only one that legitimately touches every
+ * joint at once. A field-level change MUST route through a narrow writer below instead.
+ */
+export function writeNexusDoc(bagsDir: string, doc: NexusDoc): string {
+  return writeBody(bagsDir, renderNexusDoc(doc));
+}
+
+/**
+ * Swap ONE joint's block, re-reading the carrier at write time so a concurrent write to a DIFFERENT joint
+ * survives. The neighbours never get parsed, so this cannot corrupt them; `seed` renders a fresh carrier when
+ * nothing stands on disk yet.
+ */
+function writeJoint(bagsDir: string, block: string, payload: unknown, seed: NexusDoc): string {
+  const body = readBody(bagsDir) ?? renderNexusDoc(seed);
+  return writeBody(bagsDir, swapFence(body, block, payload));
+}
+
+/** Write the SEAL joint alone — a rotation ceremony's reach, touching no roster and no dial. */
+export function writeNexusSeal(bagsDir: string, seal: NexusSealBlock, seed: NexusDoc): string {
+  return writeJoint(bagsDir, SEAL_BLOCK, seal, seed);
+}
+
+/** Write the KAHU joint alone — a steward seat's reach, touching no lineage and no dial. */
+export function writeNexusKahu(bagsDir: string, kahu: NexusKahuBlock, seed: NexusDoc): string {
+  return writeJoint(bagsDir, KAHU_BLOCK, kahu, seed);
+}
+
+/**
+ * Write the PRACTICE joint alone — the fast-cadence dials one hand may turn.
+ *
+ * This one carries the sharpest reason for the split: a posture flip previously re-emitted the seal
+ * lineage's bytes, so the cheapest act in the house rewrote the dearest joint. It no longer reaches it.
+ */
+export function writeNexusPractice(bagsDir: string, practice: NexusPracticeBlock, seed: NexusDoc): string {
+  return writeJoint(bagsDir, PRACTICE_BLOCK, practice, seed);
 }

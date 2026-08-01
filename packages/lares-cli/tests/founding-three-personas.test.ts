@@ -22,7 +22,7 @@ import { cmdNexus } from "../src/commands/nexus.js";
 import type { ParsedArgs } from "../src/parse-args.js";
 import { larBagsDir, larDataDir } from "../src/env.js";
 import {
-  generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, listPersonaRoots, readNexusCharterDoc,
+  generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, listPersonaRoots, readNexusDoc,
 } from "@lararium/node";
 import { ownPersonaPetname, foundingQuorumSeated } from "@lararium/mesh";
 
@@ -85,7 +85,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     }
     expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
 
-    const doc = readNexusCharterDoc(larBagsDir());
+    const doc = readNexusDoc(larBagsDir());
     expect(doc?.kahu.length).toBe(3);
     for (const k of doc!.kahu) {
       expect(k.verifyingKey, `${k.displayName} seated by pet-name join`).toBeTruthy();

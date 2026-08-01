@@ -77,7 +77,7 @@ import { runNexusRefresh } from "./nexus-refresh.js";
 import { rollLeaseEpochOnBoard } from "./lease-rekey.js";
 import { listSealedCids } from "./cas-reshare.js";
 import { readBulbArtifact, type BulbArtifact } from "./bulb.js";
-import { readNexusCharterDoc } from "./nexus-doc.js";
+import { readNexusDoc } from "./nexus-doc.js";
 import { makeSealedPlaneRegistry } from "./plane-seal.js";
 import type { NexusConvergenceKeyring } from "./nexus-convergence-keyring.js";
 import { standNexusKeyring } from "./nexus-convergence-secret-store.js";
@@ -506,7 +506,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // Read the federation POSTURE off the @nexus doc (as-of-last-sync). Default PRIVATE (fail-closed):
   // a cross-Nexus foreign operator co-federates ONLY when the operator flips the Nexus open. A live flip needs
   // a re-read (surfaced gap — boot-time read for alpha; the CLI `lares nexus posture` edits the doc).
-  const nexusDocForBoot = readNexusCharterDoc(antigenBagsDir);
+  const nexusDocForBoot = readNexusDoc(antigenBagsDir);
   federationPosture = federationPostureFromDoc(nexusDocForBoot);
 
   // Read the HELD bulb off the genesis dir, EPOCH-PINNED to the charter chain-head — the ALL-PUBLIC cold-boot

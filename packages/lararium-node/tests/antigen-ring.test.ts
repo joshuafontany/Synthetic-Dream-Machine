@@ -23,7 +23,7 @@ import {
   type KapaeAntigenEntry, type NexusDoc,
 } from "@lararium/mesh";
 import { makeAntigenRingHolder } from "../src/antigen-ring.js";
-import { writeNexusCharterDoc } from "../src/nexus-doc.js";
+import { writeNexusDoc } from "../src/nexus-doc.js";
 
 // Three founding kahu — fixed seeds → deterministic keys.
 const SEEDS = [new Uint8Array(32).fill(1), new Uint8Array(32).fill(2), new Uint8Array(32).fill(3)];
@@ -36,7 +36,7 @@ const VICTIM_SEED = new Uint8Array(32).fill(9);
 
 async function seatedCharter(keys: string[]): Promise<NexusDoc> {
   return {
-    kind: "lar-nexus-charter/v1", threshold: 2,
+    kind: "lar-nexus-doc/v1", threshold: 2,
     sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
@@ -93,7 +93,7 @@ describe("the LIVE refold — board ban + seated charter → Kapae'd → Mu", ()
     const victim = await pubOf(VICTIM_SEED);                      // the victim's verifying key = the nym
     // Seat the founding roster on disk (the authority home the holder reads).
     const charter = await seatedCharter(keys);
-    writeNexusCharterDoc(bags, charter);
+    writeNexusDoc(bags, charter);
     // A real quorum-signed ban in the always-carried board, rooting on the charter epoch.
     const board = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(NEXUS_PUBKEY), "@kapae-antigen");
     const ban   = await banEntry(victim, charter.sealEpochCid!);

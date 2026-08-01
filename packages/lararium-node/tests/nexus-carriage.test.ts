@@ -16,7 +16,7 @@ import { join } from "node:path";
 import * as ed from "@noble/ed25519";
 import { hex, genesisSealEpochCid, type NexusDoc } from "@lararium/mesh";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
-import { writeNexusCharterDoc } from "../src/nexus-doc.js";
+import { writeNexusDoc } from "../src/nexus-doc.js";
 
 // Three founding kahu — fixed seeds → deterministic keys. The seated keys ARE the member floor.
 const SEEDS = [new Uint8Array(32).fill(1), new Uint8Array(32).fill(2), new Uint8Array(32).fill(3)];
@@ -26,7 +26,7 @@ const STRANGER_SEED = new Uint8Array(32).fill(7);
 
 async function seatedCharter(keys: string[]): Promise<NexusDoc> {
   return {
-    kind: "lar-nexus-charter/v1", threshold: 2,
+    kind: "lar-nexus-doc/v1", threshold: 2,
     sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
@@ -44,7 +44,7 @@ describe("the provable-member floor — a seated-kahu peer reads MEMBER, all els
   test("a cross-operator whose nym seats in the charter reads MEMBER; a non-kahu reads STRANGER", async () => {
     const keys     = await Promise.all(SEEDS.map(pubOf));
     const stranger = await pubOf(STRANGER_SEED);
-    writeNexusCharterDoc(bags, await seatedCharter(keys));
+    writeNexusDoc(bags, await seatedCharter(keys));
 
     const peerMap = new Map<string, string>([
       ["peer-kahu",      `keyhive-prefix:${keys[0]!}`],           // Identifier suffix = a seated kahu key → MEMBER
@@ -74,7 +74,7 @@ describe("the provable-member floor — a seated-kahu peer reads MEMBER, all els
     const holder  = makeNexusMembership({ bagsDir: bags, peerIdentifierMap: peerMap });
     expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(false);   // unseated → STRANGER
 
-    writeNexusCharterDoc(bags, await seatedCharter(keys));
+    writeNexusDoc(bags, await seatedCharter(keys));
     holder.refresh();
     expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(true);    // seated → MEMBER
   });

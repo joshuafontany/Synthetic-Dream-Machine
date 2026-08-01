@@ -23,7 +23,7 @@ import {
 } from "@lararium/mesh";
 import { makeAntigenRingHolder } from "../src/antigen-ring.js";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
-import { writeNexusCharterDoc } from "../src/nexus-doc.js";
+import { writeNexusDoc } from "../src/nexus-doc.js";
 import { runNexusRefresh } from "../src/nexus-refresh.js";
 
 /**
@@ -44,7 +44,7 @@ const NEXUS_PUBKEY = "a1b2c3d4e5f6a7b8";
 
 function seatedCharter(keys: string[], posture?: FederationPosture): NexusDoc {
   const base: NexusDoc = {
-    kind: "lar-nexus-charter/v1", threshold: 2,
+    kind: "lar-nexus-doc/v1", threshold: 2,
     sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
@@ -81,7 +81,7 @@ describe("nexus-refresh — POSTURE re-read (D2)", () => {
     let live: FederationPosture = "private";   // the live sharePolicy default, as the node boots it
     try {
       // The operator's `lares nexus posture open` rewrites the disk charter beside the running node.
-      writeNexusCharterDoc(bags, seatedCharter(keys, "open"));
+      writeNexusDoc(bags, seatedCharter(keys, "open"));
       const r = await runNexusRefresh({
         storageDir: storage, bagsDir: bags, nexusPubkey: NEXUS_PUBKEY,
         antigen: holders.antigen, membership: holders.membership, setPosture: (p) => { live = p; },
@@ -115,7 +115,7 @@ describe("nexus-refresh — out-of-process BOARD write (E2)", () => {
     const keys    = await Promise.all(SEEDS.map(pubOf));
     const victim  = await pubOf(VICTIM_SEED);
     const charter = seatedCharter(keys);
-    writeNexusCharterDoc(bags, charter);
+    writeNexusDoc(bags, charter);
 
     const holders = standHolders(bags);
     holders.peerMap.set("peer-victim", `prefix:${victim}`);

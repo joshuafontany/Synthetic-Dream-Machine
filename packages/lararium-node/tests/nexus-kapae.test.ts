@@ -24,7 +24,7 @@ import {
   generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot,
 } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
-import { writeNexusCharterDoc } from "../src/nexus-doc.js";
+import { writeNexusDoc } from "../src/nexus-doc.js";
 import { runNexusKapae, runNexusKapaeList, NexusKapaeError } from "../src/commands/nexus-kapae.js";
 
 const VICTIM = "beadfeed".repeat(8);   // the presenter nym a ban targets
@@ -50,7 +50,7 @@ afterEach(() => {
 /** Seat a legacy-inception charter DOC binding the given verifying keys at 2-of-3 into `bags/@nexus`. */
 function seatCharter(keys: string[], threshold = 2): void {
   const doc: NexusDoc = {
-    kind: "lar-nexus-charter/v1",
+    kind: "lar-nexus-doc/v1",
     threshold,
     sealEpochCid: genesisSealEpochCid(keys, threshold),
     kahu: [
@@ -59,7 +59,7 @@ function seatCharter(keys: string[], threshold = 2): void {
       { displayName: "The Lindwyrm",        verifyingKey: keys[2] ?? null },
     ],
   };
-  writeNexusCharterDoc(bagsDir(), doc);
+  writeNexusDoc(bagsDir(), doc);
 }
 
 describe("nexus kapae — the RAISE side end-to-end (#65)", () => {
