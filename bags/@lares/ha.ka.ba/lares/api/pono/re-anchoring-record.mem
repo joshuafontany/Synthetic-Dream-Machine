@@ -84,6 +84,8 @@ The dyad is the failure mode, so the record carries attestors ''PLURAL''. But RF
 
 Applied here: ''as the attestor count rises, the intersection of realms whose dwellers would jointly attest narrows — and the record begins naming the person by naming who vouched.'' Three attestors may identify a human more precisely than one name would.
 
+''AND THE SAME CURE ANSWERS THE PRESENTATION LEAK, which sharpens the timing.'' A carried credential naming its group publishes that edge at every presentation, so a per-verifier pseudonym reads as load-bearing on two surfaces rather than one. ''The decision carries an expiry'': every credential issued before the basename shape lands stays correlatable for as long as it lives, so deferring the cure prices itself in credentials already in the world.
+
 ''So the dyad cure and the no-global-identifier cure pull against each other'', and no source found addresses it. The candidate shape, unresolved and operator-seated: carry attestors as ''per-realm pseudonyms'' (the DAA basename form) rather than as stable keys — a realm reads //these three dwell here// without the record naming three keys that appear elsewhere.
 
 <<~/ahu >>

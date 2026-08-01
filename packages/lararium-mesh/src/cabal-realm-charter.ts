@@ -10,6 +10,10 @@
  * charter, read-scope"). The read/veil tier ALREADY EXISTS as the @oracle
  * read-face (content-addressed snapshot + signed pointer, fetch-CORS, anon-read);
  * THIS cut adds NO gate-loosening. It makes a CONTENT decision: it declares WHAT a
+ * ⚠ `charter` HERE NAMES THE PUBLISHED FACE — editorial, delegable, its own rate — and NOT the
+ * seal lineage or the roster that `nexus-charter-seed.ts` files under the same word. Six joints ride
+ * one name across this package (canon `cabal-realm#six-joints`); the naming ruling stands open.
+ *
  * cabal-realm publishes PUBLICLY (its charter — veil-public) vs holds MEMBERS-ONLY
  * (its substrate + roster — private, behind the Keyhive CGKA membership),
  * and wires the charter to the existing read-face's served projection.

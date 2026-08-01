@@ -1,6 +1,18 @@
 /**
- * nexus-charter-seed — the founding kahu quorum + the ROSTER-FROM-DOC read (operator-ruled 2026-07-20).
- * The `bags/@nexus` charter DOC is the AUTHORITY HOME (data-as-authority): the operator SEATS the roster
+ * nexus-charter-seed — the founding kahu quorum + the ROSTER-FROM-DOC read.
+ *
+ * ⚠ ONE WORD, SIX JOINTS — and this file holds four of them. `charter` names a FOUNDING ACT, a SEAL
+ * LINEAGE (`charterChain`), a COMPACT, a PRACTICE (`federationPosture` · `joinPolicy` ·
+ * `admissionDials`), a FACE, and a ROSTER (`kahu`) — six entities separated not by content but by
+ * DIFFERENT CEREMONY, THRESHOLD, RATE and AUTHORITY. A quorum that rotates keys can silently move the
+ * admission price, because four amendment costs sit behind one write authority.
+ *
+ * AND THE WORD MEANS THE OPPOSITE ONE FILE OVER: `cabal-realm-charter.ts` defines a charter as the
+ * projection that STRUCTURALLY EXCLUDES the roster; this doc ships the roster inside it. Both live.
+ * The split waits on the operator's naming ruling (canon `cabal-realm#six-joints`); until it lands,
+ * read every `charter` here as SEAL-LINEAGE-PLUS-ROSTER and never as the published face.
+ *
+ * The `bags/@nexus` charter DOC carries the AUTHORITY HOME (data-as-authority): the operator SEATS the roster
  * into that doc, and the pure `kapae-antigen` fold/verify read it back through here. This file names the
  * founding quorum's SHAPE (three PersonaGroups, 2-of-3) and folds a loaded doc into the `KahuCharterRoster`
  * the antigen consumes — FAILING CLOSED whenever the doc is absent, unseated, or short of a quorum.
