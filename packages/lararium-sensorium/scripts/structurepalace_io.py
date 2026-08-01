@@ -11,10 +11,12 @@ The binding is CODE-LEVEL, navigable BOTH ways:
   - the verbatim drawer (in the verbatim palace) carries `lar_ast_hash`  → this entry's id
   - this entry carries `verbatim_sha` + `source_file`                    → that drawer
 
-This helper is the SOLE holder of the `.structurepalace` PersistentClient for its palace dir
-(one process, lazily spawned, reused) — the reap-don't-pile invariant: never two holders
+One holder process serves each palace dir — the reap-don't-pile invariant: never two holders
 fighting the per-palace mine lock. The TS `makeStructurePalace` keys a singleton on the
 canonical palace dir so a second `put` reuses this one process instead of spawning a pile.
+The chroma handle itself lives in `mempalace.palace._DEFAULT_BACKEND._clients`, the shared
+registry every reap path walks — this helper opens through `get_collection` and constructs
+no client of its own, so closing a palace here reaches the same handle the CLI closes.
 
 It is OUR code (the causal-island boundary's substrate side), NOT the submodule: it only
 moves bytes across the boundary via `mempalace.palace.get_collection` (create-or-open),
