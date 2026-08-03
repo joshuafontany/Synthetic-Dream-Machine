@@ -212,6 +212,25 @@ trust calculus that ''nobody ever ran'' — Valsorda, inside the strong set: //"
 //used the WoT to validate a public key."// ''The likeliest death is that nobody traverses the DAG and the''
 ''system quietly degrades to TOFU.''
 
+''AND THE OTHER DEATH RAN THE OPPOSITE WAY: THE APPEND ITSELF AS THE WEAPON.'' The same field's key
+distribution network — federated, append-only, unmoderated, replicating signatures with no bound on how
+many one key could carry — fell to a party who simply ''appended''. A poisoned certificate accumulated
+signatures in the tens of thousands; clients fetching it broke on parse; the network emptied and the
+replacement ''validates and refuses to federate''. <<~ confidence Synthesis-Canon 15/20 >> ''The
+unbounded append constituted the whole function, so no defence could distinguish the attack from the
+service'', and the cure ran through the exact centralisation the design existed to refuse.
+
+''THE VOUCH DAG CARRIES THAT SHAPE, EDGE FOR EDGE.'' Append-only, signed, replicated, unmoderated, with
+mass conservation pricing what a vouch ''buys'' and pricing nothing about what a vouch ''costs to carry''.
+So the question stands open rather than answered here:
+
+> ''What does a flooding attack look like against an unbounded vouch append — and WHO BEARS THE COST?''
+> The fold prices the attacker's rank (C1, C6). It says nothing about the replica that must hold every
+> edge, the reader that must sweep them, or the party whose key gets buried under signatures it never
+> solicited. ''A bound on gain reads as no bound on volume.'' Whether `kapae` reaches this, whether the
+> per-writer lease slot bounds it, or whether the substrate needs a carry-cost the model has not named,
+> stands unowned.
+
 So the outline owes a ''one-sentence answer'' and makes only this claim: ''the path buys ADMISSION FOR A''
 ''STRANGER and SYBIL COST. Nothing else the DAG offers has ever paid for itself in the field.''
 
@@ -228,6 +247,29 @@ So the outline owes a ''one-sentence answer'' and makes only this claim: ''the p
 ''So the choice never runs between the two goals. It runs over WHERE THE BOTTLENECK SITS AND WHO PAYS IT.'' The anon floor and the traceless boot-invite both promise a reach the transport cannot deliver against an active adversary, and this stack owes that sentence in its founding rather than under pressure.
 
 ''The state of the art keeps SOME openness by splitting planes'' — a rendezvous plane held separate from the transport, made cheap to lose and expensive to enumerate, or dissolved so no address stands to probe. That reads as the shape worth studying, never as a cure already held.
+
+!!! Three functions, three fates ~ what re-centralised the surviving federation
+
+''ONE ENGLISH PHRASE — "anti-abuse layer" — CARRIES THREE FUNCTIONS THAT DIVERGE.'' The canonical surviving federation (mail over SMTP) reads as the worked case, and it separates cleanly:
+
+|! function |! the question it answers |! what happens to it |
+| AUTHENTICATION | did this arrive from who it claims | ''decentralises cleanly'' — a signing key and a published record, self-served by any operator, no grantor anywhere |
+| REPUTATION | should I accept from this stranger | ''centralises by its nature'' — judging strangers well demands a wide observation surface, and observation surface scales with size |
+| ADMISSION | may this party address me at all | ''decentralises IFF a party may refuse strangers by default'' |
+
+''So the domain-authentication layer never re-centralised that federation.'' Reputation did — held privately by the few largest receivers, unpublished, unappealable, and compounded by a warming cost that scales against exactly the small operator. <<~ confidence Synthesis-Canon 15/20 >> The receiver-side requirement bulletins the largest two published for bulk senders read as a private duopoly issuing protocol-adjacent policy for a network whose specification grants it no such seat. ''Order of magnitude, never a figure'': the published complaint ceilings sit in the fractions of one percent, and this meme declines to quote a number it could not verify.
+
+> ''THE LAW.'' Re-centralisation follows from the ''OBLIGATION TO ACCEPT UNSOLICITED CONTACT FROM STRANGERS'', never from abuse itself. Mail must accept strangers — that constitutes its function. A lineage-gated mesh need not, and that single refusal buys the whole property.
+
+''THE THIRD OUTCOME THE DEBATE OMITS.'' A stranger-accepting federation reaches one of three ends, and the argument usually offers only the first two: a ''reputation oligopoly'' (mail); ''bloc politics with an all-or-nothing instrument'' (the instance-blocking federations, where total acceptance and total refusal exhaust the toolkit); or ''ABANDONMENT'' — the open news federation refused to re-centralise against commercial spam and simply emptied. <<~ confidence Synthesis-Canon 14/20 >> ''Holding the line and dying counts as one of the available outcomes'', and a design that plans only against capture has planned against two thirds of the record.
+
+''No case stands, at scale, of an open federation that accepts strangers AND solved abuse without re-centralising.'' Said plainly rather than hedged. The near-misses all bought it the same way — by refusing strangers: a gossip mesh replicating only within N hops of a follow admits no path from a stranger and therefore no abuse channel, and the strongest anti-federation argument in the record comes from a system that solved abuse and metadata well by ''declining to federate at all''. This stack owes an answer to that argument rather than a silence.
+
+!!! And the gate's bill, paid in DISCOVERY
+
+''AN INVITE-GATED MESH CANNOT BE FOUND BY THE PARTY WHO MOST NEEDS IT.'' That names a MISSION failure, never an abuse failure, and no admission mechanism resolves it — the brief points at parties an empire hunts, and those parties arrive with no introducer precisely because their prior network already broke. The same friend-graph refusal that bounds abuse also bought that mesh ''no discovery, brutal onboarding, and a stall''.
+
+''So the discovery path gets built DELIBERATELY, at the same tier as the gate'' — human bridge-keepers, an out-of-band referral route, curated intake — rather than solved later by widening the gate under pressure, which converts the design back into the stranger-accepting case and hands it all three of that case's endings.
 
 <<~/ahu >>
 

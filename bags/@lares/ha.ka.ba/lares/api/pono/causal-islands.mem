@@ -148,6 +148,15 @@ The mesh keeps time on ''two clocks that never collapse into one'':
   (Web3-only law: any py/R bridge sits behind the boundary; no py ontology enters the stack proper). This
   clock annotates //rhythm//, never happened-before.
 
+''The transport carries the same law, one layer down: a REPLAY WINDOW wants a per-peer counter, never a clock.''
+WireGuard §5.1 keeps a 12-byte value per peer, encrypted and authenticated in the first handshake message,
+and discards anything less than or equal to the greatest already seen — then says outright that //"it does not
+even have to be an accurate timestamp; it simply must be a per-peer monotonically increasing 96-bit number."//
+Reading it as a wall clock would import a global now the mesh cannot hold, and would refuse a legitimate peer
+whose device clock drifted. ''The counter names a position on that peer's own walkable chain'', which reads as the
+honest instrument the no-global-now law already asks for. Handshake shape:
+`lar:///ha.ka.ba/lararium/mesh/siege-resilience#the-active-prober`.
+
 The two ride ''⊥'': FFZ names rhythmic position and alignment, never the causal order. An LWW rhythmic
 total-order MUST NOT drive a fork, merge, or revocation decision — that manufactures a global-now the mesh
 cannot hold. Liveness ratchets (the epoch-lease, non-renewal) and targeted revocation (Keyhive convergent

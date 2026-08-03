@@ -84,9 +84,55 @@ The refresh itself runs ''CHURP-style'' — cheap dynamic-committee handoff, so 
 
 # ''The CLIENT proves first.'' The prover authenticates before the responder emits a byte — otherwise the responder itself serves as the oracle, whatever it guards.
 # ''SILENCE on failure, never rejection.'' No error, no reset, no distinguishable close, and a randomised drop interval so the TIMING carries no tell either. ''A rejection still confesses that something here understood the question.''
-# ''The gating secret rides PER-VESSEL.'' A confederation-wide credential hands one infiltrated member a universal probe key and restores the oracle with an extra step and a false sense of cover.
+# ''The gate SPLITS — silence rides PER-SHRINE, admission rides PER-VESSEL'' (below). A confederation-wide credential at ADMISSION hands one infiltrated member a universal probe key and restores the oracle with an extra step and a false sense of cover; a per-vessel credential at SILENCE cannot run at all.
 
 ''And the cheapest adversary never probes at all.'' A power willing to bear collateral damage blocks everything unrecognised and permits a whitelist. Against default-deny, unobservability buys nothing — only ''resembling permitted traffic'' helps, and that shelter stays revocable by whichever platform it borrows.
+
+!!! The pattern that fits ~ Noise `IK`, and the three that disqualify themselves
+
+''The Noise Protocol Framework (revision 34, 2018-07-11) already carries this shape, and its §7.5 token sequences settle the choice by inspection'':
+
+```
+IK:  <- s              XK:  <- s            KX:  -> s
+     ...                    ...                  ...
+     -> e, es, s, ss        -> e, es             -> e
+     <- e, ee, se           <- e, ee             <- e, ee, se, s, es
+                            -> s, se
+```
+
+The `<- s` above the `...` reads //the initiator already holds the responder's static, out of band// — and THAT pre-knowledge carries the probe resistance, never any pre-shared symmetric key. Lacking the responder's static public key, a stranger cannot compute `es`, so it cannot form a message the responder will answer.
+
+* ''`XK` disqualifies itself by construction.'' The initiator's static arrives in message THREE, so the responder must answer a party it has not yet identified — the oracle, restored inside the pattern.
+* ''`KX` and `XX` fail from the other side'': no pre-shared responder static, so any stranger opens and draws a reply.
+* ''`KK` over-delivers'' — it wants the responder already holding the guest's static, which a host→guest invite alone never establishes.
+* ''`IK` fits.'' The guest's static rides ENCRYPTED in message one (`e, es, s, ss`); the responder decrypts it, looks the peer up, and decides whether to answer. Guest speaks first, guest proves first, responder accepts or stays silent.
+
+''The cost `IK` charges, priced here rather than discovered later.'' Noise §7.8 rates `IK` 4/3 on identity hiding and names the initiator's static //"Encrypted to responder's static public key, without forward secrecy. If an attacker learns the responder's private key they can decrypt the initiator's public key."// A seized shrine key therefore ''retroactively de-anonymises every past enrollment message'' an adversary recorded — a leak no refresh cadence (#cadence) reaches, since the tape already ran.
+
+!!! The split ~ silence per-SHRINE, admission per-VESSEL
+
+''A per-vessel secret CANNOT gate silence, and the arithmetic says why.'' To check a per-vessel credential the responder must first know WHICH vessel — which wants either a cleartext selector on the wire (a stable, linkable per-vessel identifier, precisely what the veil hides) or trial-verification against every enrolled vessel (an O(N) asymmetric-work amplifier handing the adversary a cheaper denial-of-service than the one #cadence defends).
+
+''So the field seats the silence gate on the RESPONDER's key.'' WireGuard §5.3 states the mechanism plainly: //"in order for the responder to remain silent, even while under load, all messages have a first MAC (msg.mac1) that uses the responder's public key. This means that at the very least, a peer sending a message must know to whom it is talking (by virtue of knowing its public key), in order to elicit any kind of response."// That check runs keyed-BLAKE2s ''before any Curve25519 work and before any state gets allocated'' — §5.1 names the goal, //"to avoid storing any state prior to authentication and to not send any responses to unauthenticated packets"//. obfs4 distributes the same shape through its bridge line.
+
+<<~moves per-vessel-secret/gates-silence -> per-shrine-mac/gates-silence on/the-responder-static-key if/pre-asymmetric-stateless-drop do/move-per-vessel-DOWN-to-admission >>
+
+''Per-vessel belongs at ADMISSION'' — the decrypted initiator static out of `IK` message one, looked up in the enrollment table, an unknown static dropped with no reply and no state. Two gates carrying two keys and two jobs: the shrine key buys ''silence toward strangers''; the enrollment record buys ''who may enter''. Fusing them loses both.
+
+''And the `mac1` seat leaks, named here so nobody buys it twice.'' WireGuard §5.3: //"this first MAC allows a passive attacker to make guesses about for which public key the packet is intended, slightly weakening identity hiding properties, though a correct guess would not constitute cryptographic proof since no private material was used in generating the MAC."// A censor holding a list of suspected shrine keys ''confirms traffic bound for one, passively, with no probe at all'' — the exact price of buying silence.
+
+!!! What the pre-shared key buys, and what it never buys
+
+''`psk2` buys a harvest-now-decrypt-later hedge. It buys NO admission.'' Noise §9.4 places the `psk` token by position: `psk0` prepends it to message one; `psk1`, `psk2` append it to the end of message one, message two. WireGuard's construction reads `Noise_IKpsk2_25519_ChaChaPoly_BLAKE2s` — the key mixes in at message TWO, so it ''cannot gate whether the responder answers message one''. §5.2 states the motive directly: //"The attack model here is that adversaries may be recording encrypted traffic on a long term basis, in hopes of someday being able to break Curve25519 and decrypt past traffic"//, and adds that where the pre-shared key leaks //"the Curve25519 keys still provide more than sufficient protection."//
+
+<<~ confidence Synthesis-Canon 14/20 >> `psk0` WOULD gate message one, and pays the O(N) trial-decryption named above — which only a Household-tier peer count affords. Crossroads and Temple tiers (#per-tier) cannot.
+
+!!! What the shape still owes
+
+* ''Key confirmation.'' WireGuard §5 holds the responder from sending transport data until the initiator's first encrypted message lands — //"This ordering restriction is to require confirmation as described for KEA+C"//. A handshake skipping it lets a responder commit to a session the peer never confirmed.
+* ''A replay window'', which wants a per-peer monotonic counter rather than a clock — the transport form of the no-global-now law, at <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks >>.
+* ''Channel binding onto the handshake hash.'' Noise §14 seats it on `h`, never the chaining key `ck`, //"to prevent multiple sessions deriving identical keys through invalid public keys"//. Any vessel-or-persona binding this stack hangs on a session hangs on `h`.
+* ''Revocation after an invite leaks'' — OPEN, carried at <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook#gather-the-fleet >>.
 
 <<~/ahu >>
 

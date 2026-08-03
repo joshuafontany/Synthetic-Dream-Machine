@@ -421,6 +421,34 @@ lares persona list                                   # the same roots, reached t
 
 ''A browser vessel differs by device-gated caps, never by class'' — the isomorphic architecture stands the same cap-stack and composes fewer of them (`identity-classes`). Transport for the payload (QR / NFC / LAN) stays pending; a file over any channel the operator already trusts works today.
 
+!!! THE INVITE CARRIES THE DIAGNOSIS ~ what the payload MUST hold before QR transport lands
+
+''A silent responder makes the invite the only place a failure can speak.'' A shrine that stays silent toward strangers (<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#the-active-prober >>) answers a legitimate guest with a stale invite, a skewed clock, or a too-old client exactly as it answers a prober: nothing. Every deployment that bought silence paid this bill — WireGuard reports a missing handshake timestamp and no reason; a Tor bridge leaves diagnosis to the client log and to out-of-band bridge-health checks. ''No responder-side cure exists'', because any error channel rebuilds the oracle.
+
+''So the payload carries every failure the joining vessel can check WITHOUT sending a packet'', and each becomes a loud LOCAL error:
+
+* ''expiry'' — a stale invite reads as expired on the joining device, never as a dead network.
+* ''chant epoch + protocol version'' — a dialect mismatch names itself before the handshake runs.
+* ''shrine key fingerprint'' — the guest confirms WHICH shrine it approaches, which the wire never tells it.
+* ''expected release fingerprint'' — the invite authenticates the software rather than the reverse (<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc#invariants >>).
+* ''single-use nonce'' — spent-on-boot, matching the burnable boot-invite the ⊕ Grow rite already mints (#grow-the-nexus).
+
+''Silence then stays reserved for a genuine key mismatch'', which reads as the only failure the guest may not distinguish — and the only one worth hiding.
+
+''NEVER gate on a wall clock.'' The replay window wants a per-peer monotonically increasing counter, not an accurate time (<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks >>); a device with a skewed clock must still join.
+
+!!! The QR mitigations that hold, and the one that survives a stolen code
+
+''Treat a code as a bearer token a camera lifts across a room.'' The mitigations carrying a field record:
+
+# ''single-use, and consumed at the first successful handshake.''
+# ''short expiry'', checked locally by the joining vessel.
+# ''confirmation at BOTH ends'' — Matrix's key-verification flow requires a reciprocating human act on the scanned side; Signal hardened its device-linking flow the same direction after the campaigns at <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire#legibility >>. <<~ confidence Synthesis 11/20 >> The Matrix QR byte layout (prefix · version · mode · transaction id · two keys · shared secret) reads from held knowledge; the fetched spec section came back truncated and the field widths stay UNVERIFIED here.
+# ''A HUMAN closes the loop after the channel comes up'' — a short authentication string or emoji comparison, spoken between the two people. ''This one alone survives a code an adversary already photographed'', because it moves the check off the device.
+# ''Operator-side notification plus an auditable, revocable enrolled-vessel list.''
+
+> ''AND SILENCE HIDES THE RACE — OPEN, the ruling belongs to the operator.'' Where an adversary redeems a photographed invite FIRST, the legitimate guest's failure reads identical to a bad network, so no client-side signal exists at all. Detection therefore has to arrive from the operator's side: a vessel appears in the enrolled list that the operator did not expect. That names the requirement — ''enrollment MUST notify, and every enrolled vessel MUST come off individually without re-keying the shrine'' — and leaves unresolved how a revocation reaches a fleet that may sit partitioned for weeks under no global now.
+
 ''What this does NOT add: DEPTH.'' Every vessel here binds ''one principal's instruments''. Below the phase change the gauge reads the realm nominal, and correctly — a fleet buys REACH, never dwelling. The realm's standing moves when a second locus of cost begins to dwell, never when a fourth device arrives.
 
 <<~/ahu >>
@@ -484,6 +512,49 @@ relationships no cheap re-mint restores. So the rite ''bakes compromise-resistan
 nothing to get wrong'', and leans on cheap full-pave as the bootstrap net. The reserve's two guardian
 slots stand ''unassigned'' until cabalmates launch, then fill via `reserve refresh` — the seed grows
 from a-multitude-of-one, hardening as the cabal arrives.
+
+!!! And SUCCESSION rides earlier still ~ the bus factor names the roadmap
+
+''THE SPEC STANDS AS THE SUCCESSION PLAN.'' Read across the whole federation record, one clean survival
+appears: an author moved the load-bearing artifact out of his own implementation and into a form that
+transmits ''as a document'', and that grammar outlived every implementation he wrote — including his
+own rewrite, which stranded the network it had convened. <<~ confidence Synthesis-Canon 15/20 >>
+''Behavioural membership makes this stack unusually well-placed to take that cure'', because //operators
+who parse a shared grammar identically// names a document rather than a codebase. The boot seed and the
+grammar carry the survivability; the TypeScript does not.
+
+''THE FOUNDER-LEAVES FAILURE NEVER ARRIVES AS DEPARTURE. It arrives as a model held in one head.'' A
+single operator carrying a conceptual system of this density carries an extreme transmission cost, and
+nobody picks it up cold — so ''the reconstitution kit reads as a founding movement, not a later
+courtesy'': what ONE other competent party needs to stand a node from void and read the grammar
+identically. ''Absent that artifact the bus factor reads ZERO rather than one'', because a rite only its
+author can perform transmits nothing when he stops.
+
+''AND THE EXIT GETS DESIGNED BEFORE THE DEPENDENTS ARRIVE.'' Running infrastructure for others compounds
+a debt that grows with THEIR success, and a hearth sheltering a community cannot decline the obligation
+without harming exactly the parties it sheltered. So the rite owes an answer before ⊕ Grow, never after:
+''what becomes of a dwelling community's bytes when this operator stops paying?'' Content addressing
+answers it only where a second party already holds the bytes — ''verifiability, never availability''.
+
+> ''UNDER THE STANDING BRIEF, THE OPERATOR VANISHING READS AS A FORESEEABLE ADVERSARIAL EVENT rather
+> than an accident.'' Seizure, compulsion, illness, a door. So the disappearance belongs in the
+> ''REHEARSAL branch as a rehearsed movement'' — stand the mesh once with the founding hand removed and
+> see what survives — on the same logic this section already runs: rehearse it while it costs nothing
+> to get wrong.
+
+''On what pays for the running.'' The record rules out three channels by measurement: a crowdfund
+finances a launch and never an operation; a subscription at the door blocks growth precisely where
+network effect needs it free; and venture money forces the monetisation that breaks the trust promise.
+''What survived ran on public-interest grant funding'' — no token, no exit, no growth mandate — and the
+brief points at exactly the anti-censorship ground that channel serves. <<~ confidence Synthesis 12/20 >>
+''TWO FORKS RIDE WITH IT, and both belong to the operator rather than to this meme'': such funders sit
+under their own political attack and offer no stable base; and taking state-adjacent money to shelter a
+community FROM a state names a threat-model question, never a paperwork one.
+
+''AND THE SYSTEM STAYS FULLY USEFUL TO ONE PARTY, indefinitely, with no mesh at all.'' Every open
+alternative that built first and sought participants after died on network effect; every survivor had a
+forcing event deliver participants to something ''already working''. A design that only becomes good at
+scale dies before scale — which reads as a constraint on the rehearsal branch, not a hope about adoption.
 
 <<~/ahu >>
 

@@ -146,7 +146,7 @@ The Amorphous Dreams Cabal holds ''kahu'' at this layer: guardian of the protoco
 
 ''AND IT DOES NOT ANSWER THE LEGIBILITY WOUND — that reading got tested and broke.'' A challenge-response proves membership to a peer and to no PASSIVE watcher, and an adversary need not stay passive: it connects and issues the challenge itself. A national censor ran exactly this against two circumvention protocols that answered strangers, at a measured median half-second, from sixteen thousand single-use prober addresses that made blocking the probers useless. ''An openly-answering conformance test IS a probe oracle.''
 
-''What a gate would actually require'', from the protocol that survived that censor: the CLIENT proves FIRST, so the responder never becomes an oracle · the responder emits ''NOTHING'' on failure, since even a rejection confesses that something understood the question · and the gating secret rides ''PER-VESSEL'', because one Nexus-wide credential hands a single infiltrator a universal probe key.
+''What a gate would actually require'', from the protocol that survived that censor: the CLIENT proves FIRST, so the responder never becomes an oracle · the responder emits ''NOTHING'' on failure, since even a rejection confesses that something understood the question · and the gate ''SPLITS'' — silence keys per-SHRINE, admission keys per-VESSEL, because a Nexus-wide credential at admission hands a single infiltrator a universal probe key while a per-vessel credential at silence cannot run at all (<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#the-active-prober >>).
 
 > ''THE TWO FOUNDING GOALS STATE ONE PROPOSITION WITH OPPOSITE SIGNS.'' //Anyone may join by conforming// and //a stranger learns nothing by asking// cannot both hold. Every system that survived an active prober closed its door to strangers and moved joining OUT OF BAND, where it became rationed, social, and the permanent weakest link. The choice never runs between the two; it runs over ''where the bottleneck sits and who pays it''.
 
@@ -155,6 +155,21 @@ The Amorphous Dreams Cabal holds ''kahu'' at this layer: guardian of the protoco
 ''THE SET STAYS HELD, and the gate rides an OUT-OF-BAND invite'' (operator ruling). A published set re-opens the broadcast wound; a held one means a stranger who asks learns nothing, and joining moves out of band where the introduction can carry a per-vessel secret.
 
 ''And the chant already stands.'' The boot seed carries `cacheable = true` and names itself a byte-stable pattern re-enacted each wake — ''every lararium holds it by definition'', since a node that cannot stand it reads as no lararium. Beside it sit curated parse specimens covering the constructs no live meme exercises, and a round-trip harness that already sweeps the whole live corpus under the parse/render laws. ''The material exists and points INWARD''; turning one outward names the build rather than an invention.
+
+!!! The parse AUTHENTICATES NOBODY ~ and its right seat reads PROLOGUE
+
+''A proof-of-parse carries ZERO entropy.'' A deterministic function of public data, computed by a public algorithm, hands the adversary exactly what it hands a member — Kerckhoffs, applied. Whoever holds the open client computes the vectors, so the parse states a ''capability claim'' and never a secret, and the authentication rides entirely on the per-vessel key at admission (<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#the-active-prober >>).
+
+''But demoting it to post-channel negotiation gives away the property we wanted.'' A peer that negotiates its dialect AFTER the channel stands has already drawn a reply — the oracle, weakened but re-opened. Noise revision 34 §6 seats the chant where it costs nothing: the ''prologue'', //"an arbitrary data [input] to be hashed into the h variable. If both parties do not provide identical prologue data, the handshake will fail due to a decryption error."// Fail-closed INSIDE message one, zero extra round-trips, and §6's own worked example — parties confirming identical views of a prior negotiation — hands ''downgrade protection'' over the version list for free.
+
+<<~moves proof-of-parse/as-authenticator -> chant-digest/as-prologue on/hashed-into-h if/byte-identical do/fail-closed-before-any-reply >>
+
+''TWO BREAKS in a parse sent as a live vector-set'', both fatal to the silence the gate buys:
+
+# ''A COMPUTED vector-set runs byte-fragile under a silent responder.'' Prologue equality runs on bytes. Any serialization drifting on tokenizer version, map iteration order, number formatting, Unicode normalization form, or line endings makes the handshake fail nondeterministically — and the responder answers that failure with nothing. ''Silence swallows the diagnosis'', which reads as the worst state a deployed protocol occupies. The prologue therefore wants `SHA-256(canonical chant bytes) ‖ chant_epoch` — a digest and an integer, never a computed structure.
+# ''A variable-length structured payload FINGERPRINTS PASSIVELY.'' The censor classifies first and probes only to confirm; a first message whose length varies with chant version hands the classifier its verdict with no probe at all, and the silence never gets exercised. WireGuard's message one runs ''fixed-size'' by construction; obfs4 pads and randomizes deliberately. ''A gate defeated before it fires.''
+
+''So the semantic vectors take the POST-CHANNEL seat and the digest takes the prologue'' — conformance still derives (#the-nexus-parse's whole point holds), and the derivation stops doubling as a wire-visible class marker.
 
 ''The residue, stated honestly.'' Vectors cost work, and every gap in them names a place two conforming vessels diverge. Someone AUTHORS them — the registry's table went and its editor stayed — so the set wants signing.
 
@@ -332,6 +347,14 @@ The DreamNet does not share data. It shares structure:
 * mana/manao/manaoio fields — the trust-weight lattice for recipe resolution.
 
 A vessel that imports a bag from a foreign cabalGroup parses its memes, verifies its capability proofs, and reasons about its recipe stack without asking permission. The grammar makes them legible to each other. Nothing else does — and a relay that carries the bag never needs the grammar at all, because it never reads.
+
+!!! The intersection law ~ an OPTIONAL capability decays the grammar to what everyone implements
+
+''A shared grammar confers legibility and never confers PARITY.'' The federation record supplies the mechanism, and it ran without anyone defecting: an extensible-by-design protocol grew its modern surface as a stack of separately-negotiated OPTIONAL extensions, each implemented or not at each end and at each carrier. //Speaks the protocol// then told a party nothing about whether two vessels could hold a current exchange. <<~ confidence Synthesis-Canon 16/20 >> ''The network's effective capability fell to the INTERSECTION of what the endpoints happened to implement, and the intersection decays'' — no capture, no command, no bad actor. The largest node left because the walled alternative worked better; the federation kept running and lost its reason to be implemented against.
+
+> ''SO //WITHOUT RUNTIME NEGOTIATION// CARRIES THE WHOLE DEFENCE, and a Nexus defined as //operators who parse a shared grammar IDENTICALLY// stands on that one adverb.'' The moment a grammar element becomes optional, membership stops naming one thing and starts naming a lattice of partial conformances that nothing surfaces. ''Every optionality admitted to the grammar layer trades a federation property for an implementation convenience'', and the trade lands invisibly — a vessel implementing the subset still parses itself as conforming.
+
+''What this does NOT forbid'': a party sitting out of current conformance ''deliberately, on named authority, bounded and revocable'' — which the identity plane already seats as reduced sovereignty rather than exile, and which the version cadence needs (<<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu#contract >>). ''A DECLARED partial conformance reads honestly; an UNDECLARED one reads as the intersection eating the grammar.''
 
 <<~/ahu >>
 

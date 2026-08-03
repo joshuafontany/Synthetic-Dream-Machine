@@ -47,9 +47,37 @@ the same one any operator could receive on their own vessel's bags — the disti
 is //which bag// carries the grant, not a new rung on the ABILITY_LADDER.
 
 The Cabal authors a grammar revision. The revision lands in the corpus bags via a
-founding or upgrade ceremony. Every vessel that syncs those bags inherits the change
-via CRDT propagation — not via a command from the Cabal. The Cabal authors; the
-protocol distributes; the vessels enforce.
+founding or upgrade ceremony. A vessel that syncs those bags inherits the change via
+CRDT propagation — not via a command from the Cabal. The Cabal authors; the protocol
+distributes; the vessels enforce.
+
+!!! The cadence reads as the highest-risk lever in the whole design
+
+''A VERSION CADENCE STANDS AS THE ONE INSTRUMENT A KAHU ACTUALLY HOLDS, and the record
+shows it stranding federations rather than governing them.'' The worked case runs exact:
+a founding node rewrote its own protocol, the network it had convened did not follow,
+and a fork formed to keep the abandoned grammar alive. <<~ confidence Synthesis-Canon 15/20 >>
+''No malice, no capture, no command — an authoring act, propagated as designed, that
+emptied the federation it propagated across.'' The same author later moved the successor
+grammar into a standards body, and ''that grammar outlived every implementation he
+wrote'' — which names the cure as ''move the load-bearing artifact somewhere it survives
+its author'', never as authoring more carefully.
+
+''AND BEHAVIOURAL MEMBERSHIP MAKES THE SCHISM INVISIBLE UNTIL IT HAS HAPPENED.'' A Nexus
+that computes membership from //who parses this grammar identically// holds no roster to
+show a split against. Two groups drift a revision apart, each still parsing itself
+identically, ''each still computing itself a Nexus'', and nothing anywhere reports that
+they stopped being one. The absent roster — a shelter property everywhere else — costs
+exactly this: ''no instrument surfaces a fork.'' A lag distribution across the carriage
+board reads as the nearest available proxy and nobody has built it.
+
+''What the treaty model therefore owes'': a revision that a vessel MAY decline while
+staying reachable and syncing — the partial-conformance seat the identity plane already
+names (//not a member, not an exile, a member with reduced sovereignty//) — so the
+cadence bends rather than strands. ''Forkability protects against a drifting kahu; it
+protects nothing against a kahu shipping correctly to a mesh that cannot keep up.''
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#the-gauge >>
 
 <<~/ahu >>
 

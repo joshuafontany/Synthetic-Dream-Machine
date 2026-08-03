@@ -126,6 +126,10 @@ The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol s
 
 ''GD-8 — soft, not hard: advance-CID → pointer-update, never re-genesis for churn.'' //(#the-oracle-pointer.)//
 
+''GD-9 — THE INVITE AUTHENTICATES THE SOFTWARE, never the reverse.'' A vessel arrives over one channel (a public repository, a package registry) and its introduction over another (a QR, a file, a spoken code). The device-pairing literature names that arrangement ''out-of-band channel authentication over a location-limited channel'' — //demonstrative identification// in Balfanz, Smetters, Stewart & Wong, //Talking to Strangers: Authentication in Ad-Hoc Wireless Networks// (NDSS 2002) — and the property it buys reads as ''multi-channel authentication'': an adversary must compromise BOTH channels, and the out-of-band channel needs authenticity alone, never confidentiality.
+
+''AND THE SPLIT DOES NOT HOLD WHERE THE SOFTWARE CHANNEL GOES UNVERIFIED.'' An adversary controlling the package controls the client that scans the code, so the code's authenticity buys nothing — the client simply ignores it. The dependency therefore inverts: the invite carries an ''expected release fingerprint'', and the freshly-fetched vessel verifies ITSELF against the invite before it ever handshakes. The supporting machinery already carries names — ''reproducible builds'' (GD-5's //reproducible core is the clean target// states the same target from the determinism side), ''binary transparency'' (a public append-only log of what shipped), and ''TUF'', whose threat model addresses precisely a compromised repository. Until one of those seats, `coreSha256` and the CAS manifest certify ''provenance, never behaviour'' (#the-shared-model).
+
 <<~/ahu >>
 
 <<~ ahu #layer-split >>
