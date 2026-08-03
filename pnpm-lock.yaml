@@ -55,7 +55,7 @@ importers:
   packages/lararium-app:
     dependencies:
       '@automerge/automerge':
-        specifier: ^3.2.6
+        specifier: 3.2.6
         version: 3.2.6
       '@automerge/automerge-repo':
         specifier: 2.6.0-alpha.2
@@ -92,7 +92,7 @@ importers:
   packages/lararium-browser:
     dependencies:
       '@automerge/automerge':
-        specifier: ^3.2.6
+        specifier: 3.2.6
         version: 3.2.6
       '@automerge/automerge-repo':
         specifier: 2.6.0-alpha.2
@@ -161,7 +161,7 @@ importers:
   packages/lararium-mesh:
     dependencies:
       '@automerge/automerge':
-        specifier: ^3.2.6
+        specifier: 3.2.6
         version: 3.2.6
       '@automerge/automerge-repo':
         specifier: 2.6.0-alpha.2
@@ -195,7 +195,7 @@ importers:
   packages/lararium-node:
     dependencies:
       '@automerge/automerge':
-        specifier: ^3.2.6
+        specifier: 3.2.6
         version: 3.2.6
       '@automerge/automerge-repo':
         specifier: 2.6.0-alpha.2
