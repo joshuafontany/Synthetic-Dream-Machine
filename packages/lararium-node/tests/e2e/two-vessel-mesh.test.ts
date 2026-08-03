@@ -8,9 +8,14 @@
  * Assertions:
  *   1. Vessel A: runInit produces sentinel oracle tiddlers in daemon doc + bootstrap
  *   2. Vessel A: daemon doc cap events carry lar URI tags (not $:/tags/CapEvent)
- *   3. Vessel A: runDeviceAdmit self-verifies B/C and emits admit.json
- *   4. Vessel B: runInit --admit writes oracle tiddlers + cap events matching Vessel A
- *   5. Vessel B: cap events in daemon doc parse cleanly as Keyhive event records
+ *   3. Vessel A: cap events parse cleanly as Keyhive event records — the founder MINTS the
+ *      capability history, so the event records live in A's bag
+ *   4. Vessel A: runDeviceAdmit signs an edge over the key B already holds, and emits admit.json
+ *   5. Vessel B: admission delivers a LINEAGE — the persona KEL prefix, the signer that vouched,
+ *      the hearth the edge binds to, and a self-delegation — and copies NO cap events
+ *
+ * The two vessels therefore hold different shapes on purpose: continuity anchors on the KEL prefix,
+ * so a later rotation supersedes B's edge rather than orphaning the vessel that holds it.
  *
  * Same-operator seed note: in production, both vessels share the same operator
  * keypair seed (the operator IS the same person on two devices). Here we let
@@ -36,6 +41,8 @@ import {
   DAEMON_BAG_ID,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   CAP_EVENT_TAG,
+  PERSONA_KEL_PREFIX_TIDDLER, SIGNER_DID_TIDDLER,
+  HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER,
 } from "@lararium/mesh";
 import { InMemoryEventStore } from "@lararium/keyhive";
 import { runInit, runDeviceAdmit } from "../../src/index.js";
@@ -98,15 +105,21 @@ function readBootstrap(genesisDir: string): BootstrapTiddlers {
   return (JSON.parse(raw.text ?? "{}") as { tiddlers?: BootstrapTiddlers }).tiddlers ?? {};
 }
 
+/** Open a bag doc from a SEPARATE repo — the reader's vantage, not the writer's.
+ *
+ * `repo.find()` rather than `findWithProgress().handle.whenReady()`: the latter resolves on a handle
+ * whose document never loaded from storage, so a reader gets an EMPTY doc and every assertion over its
+ * contents fails as though the writer had never run. `find()` rejects on unavailable instead, which
+ * turns a silent empty read into a named failure.
+ */
 async function openDaemonDocTiddlers(storageDir: string, daemonUrl: string): Promise<Record<string, unknown>> {
-  const repo     = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
-  const progress = repo.findWithProgress(daemonUrl as AutomergeUrl);
-  const handle   = progress.handle;
-  await Promise.race([
-    handle.whenReady(),
-    new Promise<void>((_, reject) => setTimeout(() => reject(new Error(`daemon doc not ready in 8s: ${daemonUrl}`)), 8000)),
+  const repo   = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
+  const handle = await Promise.race([
+    repo.find(daemonUrl as AutomergeUrl),
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error(`bag doc unavailable within 8s: ${daemonUrl}`)), 8000)),
   ]);
-  const doc = handle.doc() as Record<string, unknown> | null;
+  const doc      = handle.doc() as Record<string, unknown> | null;
   const tiddlers = (doc?.["tiddlers"] ?? {}) as Record<string, unknown>;
   await repo.flush();
   return tiddlers;
@@ -201,13 +214,26 @@ describe("Vessel A — founding ceremony", () => {
 // ---------------------------------------------------------------------------
 
 describe("device-admit payload", () => {
-  test("payload carries kind, sentinel IDs, cap events, and syncUrl", () => {
+  test("payload carries kind, sentinel IDs, the signed edge on its lineage, and syncUrl", () => {
     expect(admitPayload["kind"]).toBe("device-admit/v1");
     expect(String(admitPayload["personaGroupDocIdHex"])).toMatch(HEX_RE);
     expect(String(admitPayload["personaGroupAgentIdHex"])).toMatch(HEX_RE);
     expect(String(admitPayload["meshCabalDocIdHex"])).toMatch(HEX_RE);
-    expect(Array.isArray(admitPayload["capEvents"])).toBe(true);
-    expect((admitPayload["capEvents"] as unknown[]).length).toBeGreaterThan(0);
+
+    // Admission carries ONE signed edge anchored on a lineage — never a bundle of cap events. The
+    // KEL prefix names the persona across every rotation, so a later key change supersedes this edge
+    // rather than orphaning the vessel that holds it.
+    // The prefix carries its own namespace — it names a LINEAGE, never a raw key.
+    expect(String(admitPayload["personaKelPrefix"])).toMatch(/^persona-[0-9a-f]{60,}$/);
+    expect(String(admitPayload["signerDid"])).toMatch(HEX_RE);
+    expect(Array.isArray(admitPayload["personaKelChain"])).toBe(true);
+    expect((admitPayload["personaKelChain"] as unknown[]).length).toBeGreaterThan(0);
+
+    const edge = admitPayload["deviceEdge"] as Record<string, unknown>;
+    expect(edge?.["kind"]).toBe("device-delegation");
+    expect(String(edge?.["deviceVerifyingKey"])).toMatch(/^[0-9a-f]{60,}$/);
+    expect(edge?.["hearthTrueName"]).toBe(admitPayload["hearthTrueName"]);
+
     expect(admitPayload["syncUrl"]).toBe("ws://localhost:3000/automerge");
   });
 
@@ -241,11 +267,13 @@ describe("Vessel B — admitted vessel", () => {
       .toBe(daemonTiddlerText(vesselADaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER));
   });
 
-  test("Vessel B daemon doc cap events parse as valid Keyhive event records", async () => {
+  test("the founder's cap events parse as valid Keyhive event records", async () => {
+    // The founder mints the capability history, so the event records live in A's bag. An admitted
+    // vessel receives a lineage edge instead (below), which is why this reads A rather than B.
     const store     = new InMemoryEventStore();
     const capPrefix = `${DAEMON_BAG_ID}/cap/`;
 
-    for (const [title, entry] of Object.entries(vesselBDaemonTiddlers)) {
+    for (const [title, entry] of Object.entries(vesselADaemonTiddlers)) {
       if (!title.startsWith(capPrefix)) continue;
       const t       = (entry as Record<string,unknown>)?.["tiddler"] as Record<string,unknown>;
       const variant = t?.["variant"] as string | undefined;
@@ -264,11 +292,21 @@ describe("Vessel B — admitted vessel", () => {
     }
   });
 
-  test("Vessel B cap event count matches payload cap event count", () => {
-    const capCount = Object.keys(vesselBDaemonTiddlers).filter(t =>
-      t.startsWith(`${DAEMON_BAG_ID}/cap/`),
-    ).length;
-    const payloadCount = (admitPayload["capEvents"] as unknown[]).length;
-    expect(capCount).toBe(payloadCount);
+  test("Vessel B holds the lineage binding it was admitted on, not a cap-event bundle", () => {
+    // What admission actually delivers: the persona's KEL prefix, the signer that vouched, the
+    // hearth the edge binds to, and the self-delegation naming this device. Continuity anchors on
+    // the prefix, so a later rotation supersedes the edge rather than orphaning the vessel.
+    expect(daemonTiddlerText(vesselBDaemonTiddlers, PERSONA_KEL_PREFIX_TIDDLER))
+      .toBe(admitPayload["personaKelPrefix"]);
+    expect(daemonTiddlerText(vesselBDaemonTiddlers, SIGNER_DID_TIDDLER))
+      .toBe(admitPayload["signerDid"]);
+    expect(daemonTiddlerText(vesselBDaemonTiddlers, HEARTH_TRUE_NAME_TIDDLER))
+      .toBe(admitPayload["hearthTrueName"]);
+    expect(vesselBDaemonTiddlers[DEVICE_DELEGATION_SELF_TIDDLER]).toBeDefined();
+
+    // And the negative half, which carries the design: an admitted vessel copies NO cap events.
+    const capCount = Object.keys(vesselBDaemonTiddlers)
+      .filter((t) => t.startsWith(`${DAEMON_BAG_ID}/cap/`)).length;
+    expect(capCount).toBe(0);
   });
 });
