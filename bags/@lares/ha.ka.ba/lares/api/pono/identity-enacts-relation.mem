@@ -49,6 +49,32 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 <<~/ahu >>
 
+<<~ ahu #the-act-shape >>
+
+!! One act-shape ~ and the guard against collapsing it
+
+''Every mechanism on this plane runs the same shape'': a face SIGNS, the act lands at a POSITION, it DEPOSITS into a relation, and it EXPIRES unless renewed. A delegation edge, a vouch, a feeding, a carriage contract, a re-anchoring, a shadow — six mechanisms, one verb.
+
+''AND THE SHAPE MUST NEVER SWALLOW WHAT MAKES EACH ONE ITSELF.'' Each carries a law the shape does not generate:
+
+|! act |! its own law, not derivable from the shape |
+| delegation edge | ''attenuates'' — authority narrows downward; bind by edge, never by seed |
+| vouch | ''dilutes the actor'' — the voucher's own score splits across everyone they vouch for |
+| feeding | ''constitutes'' — the realm BEGINS in the act; existence and act read as one event |
+| carriage contract | ''bilateral'' — both hands act, and carry runs orthogonal to read |
+| re-anchoring | ''witnessed'' — needs parties BEYOND the two in the relation, un-thresholded |
+| kāpae | ''reflexive and negative'' — it shadows a RELATION, never a party |
+
+''Four axes generate those families'': ARITY (unilateral · bilateral · witnessed) · COST POLARITY (falls on the actor · on nobody · on the collective) · WHAT IT TOUCHES (a party's reach · a relation · a thing's existence) · SEAM POSITION (composing below · constituting at and above).
+
+> ''THE GUARD: a shared shape MAY carry what every act does IDENTICALLY. It MUST NOT carry what any act does DISTINCTIVELY.'' Where an act's own law would need re-deriving from the general case, the collapse has eaten the property — and the sharpest instance reads: if a vouch's cost-to-the-actor ever generalises into //acts carry weight//, the whole Sybil defence dissolves into a tuning dial.
+
+''The factoring tests itself.'' Adding an act type should cost ''only its own invariant''. Costing a fresh fold and a fresh expiry names an over-split; costing NOTHING names an over-collapse, since the new act reads indistinguishable from an old one.
+
+''Held open'': a quorum signing together may name a fourth arity — CO-ACTED, several faces at one instant on one artifact — which reads as neither unilateral, bilateral, nor witnessed. That case tests whether the axes describe structure or merely the six cases they came from.
+
+<<~/ahu >>
+
 <<~ ahu #the-constructor >>
 
 !! The Constructor ~ a mutual hold makes the next scale
@@ -173,6 +199,24 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 ''Freezing has two structural causes'', both scale-invariant: no priced, published, third-party-funded EXIT; and any class able to occupy only one side of a relation. But note the warning: Rome PUBLISHED a full statutory exit ladder and Justinian records that //"our laws were full of them, but there was no practical experience of them"// — five centuries, unwalked. Guild numbers say why: masters' sons paid 43% of the stranger fee across 245 guilds, and the mean mastership fee ran 276 days of a labourer's wages. ''Publication achieves nothing; the price sorts.''
 
 ''Capture requires a counterparty that can act ALONE.'' An edge to a genuine collective is structurally many edges (a joint commitment //"can only be brought about or rescinded jointly"//). An edge to a nominal one captures exactly as a person does.
+
+''ONE WORD CARRIED FOUR VERBS, and the separation hangs on telling them apart.''
+
+|! verb |! what it does |! transitive |! third party sees it |
+| HEAR | I do not read you | no | ''no'', while carriage continues |
+| CARRY | I do not relay, store or forward you | ''yes, by construction'' | ''yes'' — non-delivery publishes itself |
+| VOUCH | I withdraw attestation or introduction | yes, through the trust graph | ''yes'' — an absent vouch scores |
+| RECOGNISE | I deny you the standing of a party at all | — | the lowering act this plane forbids |
+
+> ''UNIFORM HEAR + CARRY + VOUCH CONSTITUTES RECOGNISE, with nobody performing it.'' The guarantee holds against the NAMED act and never against its assembly from unnamed parts.
+
+''The century of doctrine drew its line between the VERBS, never between the COUNTS.'' A thousand independent hear-refusals stay lawful; one carry-refusal by a party holding what others need attracts the harshest treatment the law carries. Counting refusers reads as the wrong instrument — ''refusals aggregate by CUT-SET rather than by sum'', so a handful of high-degree relays partition a mesh while almost nobody refuses anything.
+
+''AND A SHARED LIST READS SUFFICIENT, NEVER NECESSARY.'' Two long-running communities ran this exact design — no coordinating act, each household refusing independently, the announcement stripped of any claim about worth — and both aggregate to total exclusion, which every participant and observer treats as a sanction whatever the grammar says. Cascades need no list and no communication: they need only that others' ACTIONS stay observable, and ''non-delivery observes itself''.
+
+> ''SO THE SEPARATION HOLDS ONLY UNDER ONE INVARIANT: a third party's view of B stays invariant under A's refusal of B.'' Which demands the refusal run INGRESS-ONLY · PER-INDIVIDUAL, never per-instance or per-group · NON-EXPORTABLE, with no surface answering //does A refuse B// · EXPIRING on the same non-renewal standing uses · and ''never touching carriage''. State the invariant or name the separation nominal.
+
+''AND THE TENSION THAT WILL NOT DISSOLVE'': speed at the edge gets its speed precisely BY refusing carriage. Real and fast cannot share one verb.
 
 ''A MONETARY PARAMETER BELONGS AT THE SLOWEST AMENDMENT COST, never the fastest.'' Amendment cost MUST track how much a change can move, and a flow's refresh rate moves everything. Worse, ''discretionary issuance converts a flow into a stock'' in one step: a hand that decides when and how much makes holding a bet on that hand's next decision, draws lobbying onto the one cap worth capturing, and shifts the value from the flow to expectations about the decider. So no steward holds a refresh cap; the rate seats in the constitutive layer under its own amendment rule, and refresh runs MECHANICALLY — published cadence, per-face, non-discretionary, nothing to front-run.
 
