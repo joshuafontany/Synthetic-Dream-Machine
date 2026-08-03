@@ -136,6 +136,43 @@ The `<- s` above the `...` reads //the initiator already holds the responder's s
 
 <<~/ahu >>
 
+<<~ ahu #the-wire-budget >>
+
+!! The wire carries a BUDGET ~ and the human spends it
+
+''Unobservability names a budget a design SPENDS, never a property it holds.'' Every byte of shape removed costs throughput, latency, or the ability to add a field later — so a design that never declares its budget discovers it under an adversary instead.
+
+|! what it buys |! what it costs |
+| a fixed-size first message | stealth against passive classification | ''every future field forks the mesh'' unless the space rides reserved now |
+| constant-rate cover traffic | unlinkability of propagation | ''convergence latency, one for one'' |
+| a spoken secret rather than a scanned one | unphotographability, and no artifact on any device | a support call when it fails, and no diagnostic payload |
+| silence on failure | no probe oracle | a legitimate party sees exactly what an attacker sees |
+
+''AND THE FIXED FIRST MESSAGE BUYS SOMETHING NOBODY ASKED FOR.'' It makes optionality at the handshake ''unexpressible'' — which cures by construction the decay that killed an earlier federation, where optional capabilities pulled the effective feature set down to the intersection and the intersection kept shrinking. A Nexus defined as parsing IDENTICALLY stands on that.
+
+> ''RULED (operator): the HUMAN chooses what the mesh observes.'' This stack does not achieve unobservability and MUST NOT claim to. It offers a dial and prices each setting HONESTLY — the protocol states what a setting actually reveals and actually costs, and the surface names it without a comfortable word standing in for a weaker property. ''The budget belongs to the party who bears the risk''; the labelling belongs to us.
+
+<<~/ahu >>
+
+<<~ ahu #the-invite-secret >>
+
+!! The secret rides the VOICE ~ the descriptor rides the code
+
+''One invite, two channels, and an adversary must hold both.''
+
+* ''The scanned code carries the PUBLIC DESCRIPTOR'' — expiry, chant epoch, protocol version, the shrine's key fingerprint, the expected release fingerprint. None of it confidential, all of it checkable ''before a packet leaves'', and loud on mismatch.
+* ''The human carries the SECRET'' — short enough to speak or write, and therefore unphotographable from across a room. A scanned bearer token falls to any camera with line of sight and persists in a photo roll; a spoken code leaves ''no artifact on any device''.
+
+''The exchange runs BALANCED, because peers hold no servers.'' An augmented password exchange stores a verifier on one side, and that asymmetry ''IS a server'' however well it performs. A balanced exchange holds the same secret at both ends, assigns no roles, stores nothing, and reads no clock.
+
+''And the password CONSUMES ITSELF.'' It authorises one pairing; the vessels hold static keys afterward and the secret stops existing. So its lifetime reads as ONE USE rather than one hour — a bound that needs no global now to enforce.
+
+''This closes the scanning polarity.'' An adversary presenting a code hands a guest a ''wrong descriptor'', which reads loud, and without the spoken half they cannot complete regardless.
+
+''An open seat, named rather than filled'': a gesture-carried secret would serve a party who cannot speak or hear, and reads as a chosen secret rather than a biometric — revocable, which biometrics never manage. ''But motion carries farther than voice and records without sound'', so the threat model may run opposite to the intuition. Accessibility earns the seat; unobservability does not.
+
+<<~/ahu >>
+
 <<~ ahu #repair-kit >>
 
 !! The Repair-Kit ~ the delegate's verbs
@@ -152,6 +189,18 @@ The maintainer (the bounded repair hand of [[steward-doctrine|lar:///ha.ka.ba/la
 | ''re-genesis'' | re-seed a destroyed island from the guardians | guardian-threshold social-recovery + a TIME-LOCK |
 
 Two verbs carry a sharp edge worth naming. ''evict'' runs forward-only — TreeKEM's blank-the-path removes //future// access (the evicted member keeps what it already read); pair it with the membership-stack [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]] so the eviction shadows resurrection. ''re-genesis'' carries a ''TIME-LOCK by design'' — a guardian-threshold can re-seed a lost island, but the time-lock gives the legitimate operator a veto window to refuse an //attacker's// recovery attempt. <<~ confidence Synthesis 11/20 >> Without the lock, the social-recovery path itself becomes the adversary's cleanest entry — designation must carry authority and fail loud, never recover silently.
+
+<<~/ahu >>
+
+<<~ ahu #nothing-reconstructs >>
+
+!! Two recovery shapes ~ and only one lets a secret exist again
+
+''This stack holds two, and they diverge exactly where it matters.'' A SPLIT SEED reassembles at recovery — a transient window in which the whole secret stands somewhere. A THRESHOLD ATTESTATION gives each guardian their own key, has each SIGN the rotation independently, and ''assembles nothing''; the recovered authority rotates a fresh key rather than resurrecting an old one.
+
+> ''The second reads strictly better, and the stack already built it.'' So the live question never asks what shape arrived most recently — it asks ''whether the split seed needs to materialise at all''. Where it does not, the split retires, and no secret in the stack ever exists twice.
+
+''And a shard belongs off a screen.'' A shard carried in a scanned code lands in a photo roll, which lands on a synced device, which lands in a backup. Paper's whole virtue reads: ''it does not sync.''
 
 <<~/ahu >>
 
