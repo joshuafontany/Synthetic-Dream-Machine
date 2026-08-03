@@ -1,21 +1,13 @@
 import { defineConfig } from "vitest/config";
-import path from "path";
+import { alias } from "./vitest.alias";
 
-const root = new URL(".", import.meta.url).pathname;
-
+/** The e2e project — residency / ingest witnesses that stand real vessels.
+ *
+ * `vitest.config.ts` excludes `tests/e2e/**` from both its projects, so this config alone runs that
+ * directory, and it reaches source through the shared alias list rather than a copy of its own.
+ */
 export default defineConfig({
-  resolve: {
-    alias: [
-      { find: "@lararium/tw5",                    replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
-      // meme-ast resolves to a DIRECTORY barrel — the regex below would mis-map it to src/meme-ast.ts.
-      { find: "@lararium/mesh/meme-ast",         replacement: path.resolve(root, "../lararium-mesh/src/meme-ast/index.ts") },
-      // Every remaining mesh subpath rides ONE regex → src/<sub>.ts (explicit entries above win first;
-      // the bare "@lararium/mesh" below would otherwise swallow subpaths into "src/index.ts/<sub>").
-      { find: /^@lararium\/mesh\/(.+)$/, replacement: path.resolve(root, "../lararium-mesh/src") + "/$1.ts" },
-      { find: "@lararium/mesh",                  replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
-      { find: "@lararium/keyhive",               replacement: path.resolve(root, "../lararium-keyhive/src/index.ts") },
-    ],
-  },
+  resolve: { alias },
   test: {
     environment: "node",
     include: ["tests/e2e/**/*.test.ts"],

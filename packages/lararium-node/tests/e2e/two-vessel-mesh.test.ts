@@ -26,7 +26,7 @@
  */
 
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
-import { mkdirSync, rmSync, existsSync, readFileSync } from "fs";
+import { mkdirSync, rmSync, existsSync, readFileSync, cpSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
 import { Repo } from "@automerge/automerge-repo";
@@ -39,6 +39,7 @@ import {
 } from "@lararium/mesh";
 import { InMemoryEventStore } from "@lararium/keyhive";
 import { runInit, runDeviceAdmit } from "../../src/index.js";
+import { generateOrLoadVesselIdentity } from "../../src/node-vessel-identity.js";
 
 // ---------------------------------------------------------------------------
 // Test isolation directories
@@ -49,10 +50,38 @@ const VESSEL_A   = { storage: join(TEST_ROOT, "a", ".lararium"), genesis: join(T
 const VESSEL_B   = { storage: join(TEST_ROOT, "b", ".lararium"), genesis: join(TEST_ROOT, "b", "genesis") };
 const ADMIT_FILE = join(TEST_ROOT, "admit.json");
 
+// The built hearth artifact, which `pnpm --filter @lararium/node build:genesis` produces.
+const BUILT_GENESIS = join(new URL("../../", import.meta.url).pathname, "..", "..", "genesis");
+
+/** Ship the built hearth engine into a fresh vessel's genesis dir.
+ *
+ * A founding does not MAKE its engine — it receives one and founds a hearth around it, which is why
+ * `runInit` refuses to found without the engine content-CID (the hearth's true-name) already on disk.
+ * A vessel handed an empty genesis dir is not a vessel with a missing file; it is a vessel with no
+ * hearth to be the true-name OF. So each temp vessel gets the same artifact a real one ships with.
+ *
+ * `social-bootstrap.json` stays behind deliberately — `runInit` writes it, and it names THIS founding.
+ */
+function shipHearthEngine(genesisDir: string): void {
+  mkdirSync(genesisDir, { recursive: true });
+  cpSync(BUILT_GENESIS, genesisDir, {
+    recursive: true,
+    filter: (src) => !src.endsWith("social-bootstrap.json"),
+  });
+}
+
 mkdirSync(VESSEL_A.storage, { recursive: true });
-mkdirSync(VESSEL_A.genesis, { recursive: true });
 mkdirSync(VESSEL_B.storage, { recursive: true });
-mkdirSync(VESSEL_B.genesis, { recursive: true });
+
+// Fail here, naming the build, rather than three imports deep inside the founding ceremony.
+if (!existsSync(join(BUILT_GENESIS, "island.cid-engine"))) {
+  throw new Error(
+    `[two-vessel-mesh] no hearth engine at ${BUILT_GENESIS} — ` +
+      "run `pnpm --filter @lararium/node build:genesis` first (CI's `pnpm -r build` covers it).",
+  );
+}
+shipHearthEngine(VESSEL_A.genesis);
+shipHearthEngine(VESSEL_B.genesis);
 
 afterAll(() => {
   try { rmSync(TEST_ROOT, { recursive: true, force: true }); } catch { /* cleanup best-effort */ }
@@ -107,16 +136,26 @@ beforeAll(async () => {
   if (!daemonUrlA) throw new Error("Vessel A: daemon URL missing from bootstrap");
   vesselADaemonTiddlers = await openDaemonDocTiddlers(VESSEL_A.storage, daemonUrlA);
 
-  // Step 2 — device-admit payload
+  // Step 2 — B mints its OWN vessel key, before anyone admits it.
+  //
+  // Admission SIGNS a key the joinee already holds; it never issues one. B's private seed is born on
+  // B and stays there, and only the public verifying key crosses to A — which is what lets the QR
+  // ceremony stay photograph-inert, and why `runDeviceAdmit` refuses to run without that key.
+  // `generateOrLoadVesselIdentity` reads through on a second call, so B's `runInit` below loads this
+  // same identity rather than minting a second one.
+  const vesselB = await generateOrLoadVesselIdentity(VESSEL_B.storage);
+
+  // Step 3 — A's PersonaGroup root signs B's edge
   await runDeviceAdmit({
-    storageDir: VESSEL_A.storage,
-    genesisDir: VESSEL_A.genesis,
-    outPath:    ADMIT_FILE,
-    syncUrl:    "ws://localhost:3000/automerge",
+    storageDir:         VESSEL_A.storage,
+    genesisDir:         VESSEL_A.genesis,
+    outPath:            ADMIT_FILE,
+    syncUrl:            "ws://localhost:3000/automerge",
+    joineeVerifyingKey: vesselB.verifyingKey,
   });
   admitPayload = JSON.parse(readFileSync(ADMIT_FILE, "utf8"));
 
-  // Step 3 — Vessel B admission
+  // Step 4 — Vessel B founds against the signed payload
   await runInit({ storageDir: VESSEL_B.storage, genesisDir: VESSEL_B.genesis, admitPayloadPath: ADMIT_FILE });
 
   const bootstrapB = readBootstrap(VESSEL_B.genesis);
