@@ -121,6 +121,54 @@ red cycle stands unexplained. ''Boredom has not arrived.''
 a movement below, ''the run wins'' and the movement gets rewritten — the rite earns `status = live`
 only after a rehearsal completes end-to-end without an amendment.
 
+!!! SECOND PASS — 2026-08-04, and the rite amends again without a rehearsal
+
+''A reading against live code found what a run would have found, so the same law applies.'' Three
+amendments landed and one hypothesis got recorded:
+
+# ''⓪′ PREFLIGHT ADDED, ahead of the irreversible clear.'' The toolchain went unchecked before a movement
+  that cannot be undone. Measured: the entry point died at import on a stale build.
+# ''⊛ GATHER'S COMMANDS CONTRADICTED ITS OWN PROSE.'' The text described a joining vessel minting its own
+  key and receiving a signed edge — correct. The commands signed a payload before any joinee key existed
+  — impossible: the signing call refuses without the joinee's public verifying key. ''The description
+  tracked the design and the sequence tracked the past'', which reads as the most dangerous shape a
+  runbook carries, because the prose reassures the reader that the commands were checked.
+# ''THE ADMIT PAYLOAD'S CONTENTS NAMED.'' It carries one signed edge on a lineage, never a
+  capability-event bundle (#gather).
+# ''A CANDIDATE FOR THE STANDING RED, unproven.'' The unexplained fail-closed Binding Gate reports a
+  persona-KEL chain absent from the local board replica. An admit payload measured 2026-08-04 carries a
+  chain of ''length 1''. A one-event chain against an unsynced replica reads as a plausible
+  cannot-reach-a-head shape. <<~ confidence Provisional 4/20 >> ''NOT reproduced'' — recorded so the next
+  rehearsal watches the chain length, never as a diagnosis.
+
+''The corroboration, with its limit named.'' The founding-then-admit path stands green end-to-end in an
+automated witness (9 of 9, 2026-08-04). ''That witness is not this rite'' — it stands no containers, its
+sockets stay polite, and no drop actually drops (#rehearse). It corroborates the SHAPE of movements ②
+and ⊛; it substitutes for no cycle.
+
+<<~/ahu >>
+
+<<~ ahu #clear >>
+
+!! ⓪′ Preflight ~ prove the toolchain answers BEFORE anything irreversible
+
+''Every movement below assumes a binary that loads, and the rite never checked.'' A vessel cleared by a
+toolchain that cannot then found leaves an operator holding neither — the clear runs irreversible and the
+founding runs unavailable, and nothing in the sequence catches it in between.
+
+<<~ confidence Canon 17/20 >> ''Measured 2026-08-04'': the `lares` entry point died at import on a symbol
+absent from every source and present only in a built artifact — a stale `dist` against a renamed export.
+The error named an internal symbol, not a build, and an operator reading it mid-rite has no way to reach
+`rebuild` from what it says. ''A full rebuild cured it.''
+
+```
+pnpm -r build                                       # the dist must match the source it imports from
+lares help                                          # the binary loads and answers — the ONLY gate this proves
+```
+
+''Run this at the head of BOTH branches.'' A rehearsal that opens on a stale toolchain measures the
+toolchain and reports nothing about the rite.
+
 <<~/ahu >>
 
 <<~ ahu #clear >>
@@ -128,7 +176,8 @@ only after a rehearsal completes end-to-end without an amendment.
 !! ① Clear ~ pare to void (⚠ irreversible — the KEEPER branch)
 
 ''Branch check first.'' A REHEARSAL never reaches this movement — its clear rides `compose down -v`
-(#rehearse) and it keeps nothing. What follows governs the ''KEEPER'' founding alone.
+(#rehearse) and it keeps nothing. What follows governs the ''KEEPER'' founding alone. ''⓪′ Preflight
+stands as a precondition'', never a courtesy — it names the one failure this movement cannot undo.
 
 A fresh-from-void founding discards the prior identity. ''Back the old identity up FIRST'' — the
 vault seals nothing until movement ④, so a raw copy carries the only net before the nuke:
@@ -314,6 +363,13 @@ lares hooks resume                                  # re-arm capture/ingest
 lares status                                        # LIVE — the node serves; the quorum + charter stand
 ```
 
+''AND THE RITE ENDS HERE, at the handover.'' `hooks resume` re-arms capture, which starts the sensorium's
+clock — and the sensorium's lifecycle rides ''its own rite'', deliberately not this one
+(<<~ loulou lar:///ha.ka.ba/lararium/api/sensorium-runbook >>). The two carry different cardinal sins:
+this rite's worst outcome ''loses a key'' and nothing recovers it; the tending rite's ''loses a baseline'',
+and a corpus re-pours where a measurement never taken does not. ''A pour, a sweep, or a teardown belongs
+there'' — a movement for it here would teach an irreversibility the sensorium does not have.
+
 <<~/ahu >>
 
 <<~ ahu #crossroads >>
@@ -408,16 +464,37 @@ A laptop browser, a phone, a tablet. Each stands as a ''LEAF, CONTRACTED'' — i
 
 ''On the standing hearth'' — mint the admit payload for the joining device, under the persona root that will hold it:
 
+''THE JOINEE MINTS FIRST, AND THE ORDER CARRIES THE PROPERTY.'' Admission ''SIGNS a key the joining
+vessel already holds''; it never issues one. So the private seed is born on the joining device and stays
+there, only the ''public verifying key'' crosses, and the signing call refuses to run without it —
+measured 2026-08-04, `runDeviceAdmit` throws where that key goes missing. This ordering IS what keeps the
+QR ceremony photograph-inert: a payload names a key the holder already proved it holds.
+
+''① On the joining vessel'' — mint the vessel key and read out its public half:
+
 ```
-lares device-admit --as 0                            # signs a device-delegation edge; writes the payload
+lares wake                                           # stands the stack; mints THIS vessel's own key
+lares status                                         # read the vessel verifying key (the public half)
 ```
 
-''On the joining vessel'' — stand the stack and apply the payload (own keypair, same group):
+''② On the standing hearth'' — sign an edge over the key the joinee showed:
 
 ```
-lares wake --admit <payload-file>                    # joins the existing PersonaGroup; mints its OWN vessel key
+lares device-admit --as 0 --joinee-key <hex>         # signs a device-delegation edge; writes the payload
+```
+
+''③ On the joining vessel'' — apply the signed payload:
+
+```
+lares wake --admit <payload-file>                    # joins the existing PersonaGroup on the key it already holds
 lares persona list                                   # the same roots, reached through a new vessel
 ```
+
+''What the payload carries, and what it does NOT.'' It carries ''one signed edge on a lineage'' — the
+persona KEL prefix, the signer that vouched, the hearth true-name the edge binds to, and the
+self-delegation naming this device. It carries ''no capability-event bundle'': the founder mints the
+capability history and holds it. Continuity anchors on the KEL prefix, so a later rotation ''supersedes''
+this edge rather than orphaning the vessel holding it.
 
 ''A browser vessel differs by device-gated caps, never by class'' — the isomorphic architecture stands the same cap-stack and composes fewer of them (`identity-classes`). Transport for the payload (QR / NFC / LAN) stays pending; a file over any channel the operator already trusts works today.
 
