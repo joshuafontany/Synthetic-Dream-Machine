@@ -26,8 +26,9 @@ import {
   makeCircleStateReactor,
   makeCircleReactors,
   makePersonaSelvesReactors,
+  makeCabalRealmReactors,
 } from "@lararium/tw5";
-import { CIRCLES_DOC_URI, PERSONA_BAG_ID } from "@lararium/mesh";
+import { CIRCLES_DOC_URI, PERSONA_BAG_ID, DAEMON_BAG_ID } from "@lararium/mesh";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
@@ -171,6 +172,19 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         registry.register("persona-label",  selvesReactors.label);
         registry.register("persona-handle", selvesReactors.handle);
         registry.register("persona-selves", selvesReactors.selves);
+
+        // The CABAL-REALM verbs over @daemon, where the per-writer lease slots live. `realm-feed` rolls THIS
+        // writer's own slot — the offering a realm lives by; `realm-clock` reads every slot back and reports
+        // who feeds and how deep, VERDICT-FREE (what spread counts as capture stays the operator's
+        // calibration, and mechanizing it here would recreate the root a realm exists without).
+        const resolveDaemonStore = async () => {
+          const store = await oraclePlane.storeOf(DAEMON_BAG_ID);
+          if (!store) throw new Error("cabal-realm-verb: @daemon unresolved — the @oracle registry names no DAEMON_BAG_ID");
+          return store;
+        };
+        const realmReactors = makeCabalRealmReactors({ resolveStore: resolveDaemonStore });
+        registry.register("realm-feed",  realmReactors.feed);
+        registry.register("realm-clock", realmReactors.clock);
       }
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit

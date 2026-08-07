@@ -21,7 +21,6 @@ import { runVerb } from "../verb-call.js";
 import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
 import { setupSensorium, type PalaceSetupStep } from "../setup-sensorium.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
-import { FOUNDING_KAHU } from "@lararium/mesh";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
 import { wireCopilotHome, type CopilotWireResult } from "../copilot-wire.js";
@@ -238,7 +237,11 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //     Surfaced only under standup.
   const foundingHint: string[] | undefined = founding === undefined ? undefined : [
     `Founder persona h0 stands as the operator-root — its root signs the founding bind; \`persona new 0\` names it (idempotent — loads the founder, sets its pet-name).`,
-    ...FOUNDING_KAHU.map((k, i) => `lares persona new ${i} --name '${k.displayName}'`),
+    // The founding names come from the OPERATOR, never from this build — the roster forms at the seat from
+    // the personas that declared a Handle and stood for a chair. So the counsel shows the SHAPE and leaves
+    // every name blank.
+    "lares persona new 0 --name '<private label>' --handle '<Handle>' --seat",
+    "lares persona new 1 --name '<private label>' --handle '<Handle>' --seat   # …one command per kahu",
     `Then seat the 2-of-3 quorum from the named personas: lares nexus seal seat`,
     `(These three name the founding KAHU QUORUM, never a limit on faces — this vessel's own slot ceiling rides LAR_PERSONA_SLOTS.)`,
   ];

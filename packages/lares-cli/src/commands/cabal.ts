@@ -1,5 +1,8 @@
 /**
- * `lares cabal vouch <joiner-nym> --realm <realm-doc-id> [--expires <iso>] [--as <n>]` — the JOIN axis's
+ * `lares cabal <vouch | feed | clock>` — the three doors onto a cabal-realm: stake standing on a joiner, make
+ * the offering that keeps a realm alive, and read who feeds it.
+ *
+ * `vouch <joiner-nym> --realm <realm-doc-id> [--expires <iso>] [--as <n>]` — the JOIN axis's
  * write side: one held face stakes its OWN standing on one joiner, onto the Nexus vouch board.
  *
  * THE CONTRAST WITH `nexus contract`. Contracting a vessel into carriage needs the kahu quorum AND the
@@ -10,25 +13,154 @@
  * IT ADMITS NOBODY. A vouch rides as signal-2 on the lineage and grants nothing by itself; the crossing prices it
  * later. The vouching itself already paid the cost: the voucher's score SPLITS across everyone they
  * vouch for, so each vouch dilutes the hand that made it. That carries the whole payment, and it needs no ledger.
+ *
+ * `feed --realm <id> [--as <n>]` — THE OFFERING. A realm lives by being fed: members roll a per-realm lease
+ * epoch, one slot per writer, and the realm's liveness reads off that max-register. A FACE feeds, never a
+ * device, so adding vessels never inflates a standing. Feeding twice rolls twice — the clock measures how hard
+ * each hand feeds, so a repeated offering SHOULD register.
+ *
+ * `clock --realm <id>` — THE CAPTURE-CLOCK, and it surfaces rather than judges. It reports who feeds and how
+ * deep, the spread between leaders and trailers, and how many sit at the leading edge — raw numbers, no
+ * "captured" verdict. A minority out-feeding a realm becomes VISIBLE while exit still costs little, which is
+ * the whole answer available here: sight plus fork-as-exit, never a gate. The gate would become the captured
+ * object.
+ *
+ * WHAT THE NUMBERS CANNOT SAY. Both verbs read what THIS REPLICA has synced. A maintainer whose roll has not
+ * arrived reads as absent, and a realm nobody here has synced reads as unfed — under no-global-now those two
+ * generate identically, so the reading names a local sighting and never a total.
  */
 
-import { runCabalVouch, CabalVouchError } from "@lararium/node";
+import { runCabalVouch, CabalVouchError, loadPersonaGroupRootVerifyingKey, listPersonaRoots } from "@lararium/node";
 import type { ParsedArgs } from "../parse-args.js";
+import { larDataDir, vesselDid } from "../env.js";
+import { runVerb } from "../verb-call.js";
+import { summaryOutput } from "../verb-result.js";
+import { emit, exitFor } from "../render.js";
 
 function usage(): number {
-  console.error("usage: lares cabal <vouch>");
+  console.error("usage: lares cabal <vouch | feed | clock>");
   console.error("");
   console.error("  vouch <joiner-nym> --realm <realm-doc-id> [--expires <iso8601>] [--as <root-index>]");
   console.error("        stake YOUR standing on a joiner crossing into that realm. Dilutes you, admits nobody.");
+  console.error("  feed --realm <realm-doc-id> [--as <root-index>]");
+  console.error("        the OFFERING — roll your face's lease slot, keeping the realm alive.");
+  console.error("  clock --realm <realm-doc-id>");
+  console.error("        who feeds this realm and how deep — raw numbers, no capture verdict.");
   return 2;
 }
 
-/** `lares cabal …` — the JOIN-axis door. */
+/** `lares cabal …` — the realm doors: the JOIN axis, the offering, and the clock. */
 export async function cmdCabal(args: ParsedArgs): Promise<number> {
   switch (args.positional[0]) {
     case "vouch": return await cmdVouch(args);
+    case "feed":  return await cmdFeed(args);
+    case "clock": return await cmdClock(args);
     default:      return usage();
   }
+}
+
+class CabalUsageError extends Error {}
+
+/** The realm doc id, fail-closed — a stray value never becomes a lease prefix. */
+function realmOf(args: ParsedArgs): string {
+  const realm = (args.options["realm"] ?? "").trim().toLowerCase();
+  if (!/^[0-9a-f]{64}$/.test(realm)) {
+    throw new CabalUsageError("--realm expects a 64-hex cabal-realm doc id");
+  }
+  return realm;
+}
+
+/**
+ * WHICH FACE ACTS — the persona root the operator named, or the first held one.
+ *
+ * A realm is fed by a face, so the writer resolves from a root this vessel HOLDS and never from a value the
+ * caller typed. Naming a root the vault does not custody refuses here rather than writing a slot under a face
+ * nobody can stand behind.
+ */
+async function actingFace(args: ParsedArgs): Promise<string> {
+  const dataDir = larDataDir();
+  const held = await listPersonaRoots(dataDir);
+  if (held.length === 0) {
+    throw new CabalUsageError("no persona root held on this vessel — a realm is fed by a face, and this vessel holds none.");
+  }
+  const asRaw = args.options["as"];
+  const index = asRaw === undefined ? held[0]! : Number(asRaw);
+  if (!Number.isInteger(index)) throw new CabalUsageError(`--as expects a persona-root index, got "${asRaw}"`);
+  if (!held.includes(index)) throw new CabalUsageError(`persona root ${index} is not held here (held: ${held.join(", ")}).`);
+  const did = await loadPersonaGroupRootVerifyingKey(dataDir, index);
+  if (!did) throw new CabalUsageError(`persona root ${index} surfaces no usable verifying key — nothing to feed with.`);
+  return did.toLowerCase();
+}
+
+/** Drive one realm verb through the daemon, surfacing its refusal as itself. */
+async function realmVerb(verb: string, verbArgs: Record<string, unknown>): Promise<Record<string, unknown>> {
+  const r = await runVerb(verb, verbArgs, await vesselDid());
+  if (r.status === "error") throw new Error(r.errorMessage ?? `${verb} failed`);
+  return summaryOutput(r) ?? {};
+}
+
+/**
+ * `lares cabal feed` — make the offering. The realm's liveness rides a max-register, so this rolls only THIS
+ * face's own slot; two members feeding concurrently never clobber each other.
+ */
+async function cmdFeed(args: ParsedArgs): Promise<number> {
+  try {
+    const realm  = realmOf(args);
+    const writer = await actingFace(args);
+    const out = await realmVerb("realm-feed", { realm, writer });
+    emit(args, {
+      ok: true,
+      data: out,
+      human: () => {
+        console.log(out["first"] === true ? "FED (your first offering to this realm)" : "FED");
+        console.log(`  realm:  ${realm}`);
+        console.log(`  face:   ${writer}`);
+        console.log(`  epoch:  ${out["priorEffective"]} -> ${out["epoch"]}`);
+        console.log(`  (the roll counts the slots THIS replica has synced — a peer may hold deeper ones)`);
+      },
+    });
+    return 0;
+  } catch (err) {
+    return cabalFailure(args, "feed", err);
+  }
+}
+
+/**
+ * `lares cabal clock` — read who feeds the realm. It hands back numbers and draws no conclusion: what spread
+ * or concentration counts as capture stays the operator's calibration.
+ */
+async function cmdClock(args: ParsedArgs): Promise<number> {
+  try {
+    const realm = realmOf(args);
+    const out = await realmVerb("realm-clock", { realm });
+    const maintainers = Array.isArray(out["maintainers"])
+      ? (out["maintainers"] as Array<{ writerId: string; epoch: number }>) : [];
+    emit(args, {
+      ok: true,
+      data: out,
+      human: () => {
+        console.log(`realm ${realm}`);
+        if (maintainers.length === 0) {
+          console.log("  nobody feeds it here — which reads the same as a realm this replica has never synced.");
+          return;
+        }
+        console.log(`  maintainers: ${out["maintainerCount"]}   effective epoch: ${out["effectiveEpoch"]}`);
+        console.log(`  spread:      ${out["spread"]} (leaders ${out["leadingCount"]} at the edge, trailing at ${out["trailingEpoch"]})`);
+        for (const m of maintainers) console.log(`    ${String(m.epoch).padStart(6)}  ${m.writerId}`);
+        console.log("  no verdict rides here — what these numbers mean stays your calibration.");
+      },
+    });
+    return 0;
+  } catch (err) {
+    return cabalFailure(args, "clock", err);
+  }
+}
+
+function cabalFailure(args: ParsedArgs, verb: string, err: unknown): number {
+  const msg  = err instanceof Error ? err.message : String(err);
+  const code = err instanceof CabalUsageError ? "usage" : "error";
+  emit(args, { ok: false, error: { code, message: msg }, human: () => console.error(`lares cabal ${verb}: ${msg}`) });
+  return exitFor(code);
 }
 
 async function cmdVouch(args: ParsedArgs): Promise<number> {

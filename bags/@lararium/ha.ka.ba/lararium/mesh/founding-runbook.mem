@@ -47,7 +47,7 @@ IS the realm's founding (#feed-the-realm) · ''dwell'' seats a second operator I
 merely carrying for it (#dwell).
 
 ''The last three movements run AFTER LIVE and never gate it'' — and they carry different readiness. ⊛ Gather
-runs today on built verbs. ⊙ Feed names an OWED surface over machinery that already stands. ⊘ Dwell holds a
+runs today on built verbs, ⊙ Feed among them (its two doors landed 2026-08-07). ⊘ Dwell holds a
 built vouch and a crossing that REFUSES until the operator seats the admission dials — and its conversion act
 stays un-modelled by ruling, so no command there may name a quorum, a waiting period, or a test.
 
@@ -164,6 +164,21 @@ the human's own fleet.
 label that reads nothing like the chair name and confirm the seat still lands. A rehearsal that types the
 same string into both flags proves nothing, because a label-matching join would pass it too.
 
+''AND THE SAME READING FOUND TWO MORE, both un-pono for the same reason'' (operator, 2026-08-07):
+
+# ''THE FOUNDING NAMES SHIPPED IN THE BUILD.'' A `FOUNDING_KAHU` constant carried three display names, so
+  the SOURCE decided who the founding kahu were and the operator merely confirmed it. ''Retired.'' The
+  scaffold now names nobody, and the roster forms at the seat from the personas that declared and stood.
+  The threshold followed the same cut: a `2` written into a file would seat one Nexus's fairness call inside
+  every Nexus that founds, so the seat derives majority and takes `--threshold` for any realm wanting another.
+# ''THE PRIOR SEAL SURVIVED THE CLEAR.'' `reset --force` preserves the identity home and the `rm -rf` cuts
+  it; ''neither touches `bags/`'', where the charter doc lives. A re-founding that skipped it stranded itself
+  on a fail-closed lineage. ① now names the cut (#clear).
+
+''The shared shape.'' Each of the three named ''a thing decided somewhere the operator does not stand'' — a
+private label deciding a public chair, a build deciding a roster, a stale artifact deciding a lineage. ''A
+founding an operator merely confirms reads as somebody else's founding.
+
 <<~/ahu >>
 
 <<~ ahu #clear >>
@@ -211,8 +226,21 @@ undo.'' A vessel that carries nothing worth keeping (the bootstrap case) crosses
 
 ```
 rm -rf ~/.local/state/lares/identity                # ⚠ IRREVERSIBLE: the fresh-from-void cut
+rm -rf <corpus>/bags/@nexus                         # ⚠ IRREVERSIBLE: the prior SEAL (see below)
 lares reset --force                                 # pave the vessel store (the identity home now stands empty)
 ```
+
+''THE SEAL LIVES OUTSIDE BOTH.'' `reset --force` pares the vessel store and ''PRESERVES the identity home'';
+the `rm -rf` above cuts the identity home. ''Neither touches `bags/`'' — and the charter doc lands there
+(`bags/@nexus/ha.ka.ba/nexus/charter/founding-roster.mem`), under the corpus root, which on a development
+install ''sits inside the repository working tree''. A re-founding that skips this line strands itself: the
+seat ''FAILS CLOSED'' against a lineage already past genesis (//advance it with rotate, never re-seat//), and
+the operator holds a fresh vessel that cannot seal.
+
+''A first founding crosses this freely'' — no `bags/@nexus` stands, so the line removes nothing. ''Read the
+path off `lares status` rather than assuming it'': the corpus root rides `LAR_ROOT` (else the repo root), and
+`LAR_BAGS` re-sites the bags tree independently.
+
 
 <<~/ahu >>
 
@@ -241,6 +269,17 @@ lares persona list                                  # h0/h1/h2 stand: label -> d
   only a publicly announced Handle binds a PersonaGroup to a public glamour.
 * `--seat` stands the persona for a ''Kahu chair on THIS node''. It stays local — a chair names a seat
   on a particular node, so it never rides the fleet.
+
+''THE ROSTER FORMS FROM WHAT STOOD.'' No list of founding names ships in the build: `nexus seal seat` reads
+the personas that ''declared a Handle AND stood for a chair'' and writes exactly those as the roster. A
+scaffold carrying names would make the ''SOURCE'' decide who the founding kahu are, leaving the operator to
+confirm a legitimacy call somebody else made — and legitimacy belongs where the acts happen. A persona that
+declares and never stands ''takes no chair at all'', rather than an empty one somebody wrote down for it.
+
+''THE THRESHOLD comes from the roster, or from the operator.'' Absent `--threshold`, the seat derives
+''MAJORITY'' over what stood (3 chairs → 2). Majority reads as the weakest defensible default: it refuses a
+single hand without handing any one kahu a veto. A `--threshold` past the roster ''REFUSES'' — it would seat
+a rule no quorum could ever reach — and a seat with ''nobody standing'' refuses and writes nothing.
 
 ''THE SEAL JOINS ON THE DECLARED HANDLE, NEVER ON THE LABEL.'' Matching the private label would ''weld
 the two registers'': an operator could then seat only under the same string they call the compartment at
@@ -594,8 +633,8 @@ The machinery stands built and ''carries no CLI verb''. Until one lands, the rit
 ''OWED — the smallest honest surface'', and it wants no new machinery:
 
 ```
-lares cabal feed --realm <realm-doc-id>              # OWED: roll this vessel's lease slot — the offering the realm begins from
-lares cabal clock --realm <realm-doc-id>             # OWED: who feeds and how deep, verdict-free (realmMaintenanceFromBoard)
+lares cabal feed --realm <realm-doc-id> [--as <n>]   # the OFFERING — roll your FACE's lease slot
+lares cabal clock --realm <realm-doc-id>             # who feeds and how deep, verdict-free
 ```
 
 The second reads the capture-clock the model already argues for — ''who feeds the realm and how hard'', verdict-free, so a majority SEES a minority out-feeding them while exit stays cheap (`cabal-realm#the-unswept-corner`).

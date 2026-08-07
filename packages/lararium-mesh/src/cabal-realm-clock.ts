@@ -29,7 +29,7 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
-import { leaseEpochPrefix, effectiveLeaseEpoch } from "./epoch-lease.js";
+import { leaseEpochPrefix, leaseEpochSlotUri, effectiveLeaseEpoch, rolledLeaseEpoch } from "./epoch-lease.js";
 import { tiddlerText, type LarDoc } from "./base-doc.js";
 import type { CabalRealm } from "./cabal-realm.js";
 
@@ -140,4 +140,49 @@ export function realmLeaseSlotsFromBoard(doc: LarDoc, realmDocIdHex: string): Ma
  */
 export function realmMaintenanceFromBoard(doc: LarDoc, realmDocIdHex: string): CabalRealmMaintenanceProvenance {
   return cabalRealmMaintenanceProvenance(realmDocIdHex, realmLeaseSlotsFromBoard(doc, realmDocIdHex));
+}
+
+/** The write one writer makes to FEED a realm — its own slot, and the epoch it rolls to. */
+export interface RealmFeedWrite {
+  /** The slot tiddler this writer owns for this realm — last-writer-wins is safe inside it. */
+  readonly slotUri: string;
+  /** The epoch this feed rolls to: the effective epoch this replica can see, plus one. */
+  readonly epoch:   number;
+  /** What the effective epoch read BEFORE the roll — so a caller can report the step it took. */
+  readonly priorEffective: number;
+  /** True when this writer held no slot for this realm before — its FIRST offering. */
+  readonly first:   boolean;
+}
+
+/**
+ * Compute one writer's FEED — the offering that keeps a realm alive, as a pure function of what this replica
+ * has synced.
+ *
+ * A writer rolls only its OWN slot, so two members feeding concurrently never clobber each other and the
+ * effective epoch (the max across slots) never moves backward. Both concurrent rolls landing the same value
+ * reads as correct for a liveness lease: the realm got fed, and by how many hands the clock reports separately.
+ *
+ * THE ROLL RIDES A LOCAL SIGHTING. `priorEffective` counts the slots THIS replica holds, so a writer whose
+ * peers have not synced rolls to a lower epoch than a fully-synced replica would. Under no-global-now that
+ * reads as correct rather than as a fault — the lease is a max-register precisely so a low roll costs nothing
+ * and a high one converges.
+ */
+export function realmFeedWrite(
+  realmDocIdHex: string,
+  writerId:      string,
+  leaseSlots:    ReadonlyMap<string, string>,
+): RealmFeedWrite {
+  const slotUri = leaseEpochSlotUri(realmDocIdHex, writerId);
+  const prefix  = leaseEpochPrefix(realmDocIdHex);
+  const mine: string[] = [];
+  for (const [uri, value] of leaseSlots) {
+    if (uri.startsWith(prefix)) mine.push(value);
+  }
+  const priorEffective = effectiveLeaseEpoch(mine);
+  return {
+    slotUri,
+    epoch: rolledLeaseEpoch(priorEffective),
+    priorEffective,
+    first: !leaseSlots.has(slotUri),
+  };
 }

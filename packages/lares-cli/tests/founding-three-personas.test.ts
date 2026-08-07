@@ -111,20 +111,53 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     expect(foundingQuorumSeated(doc)).toBe(true);
   });
 
-  test("★ a declared Handle WITHOUT --seat stays UNSEATED — standing for a chair is its own act ★", async () => {
-    // h0 and h1 stand; h2 declares the same Handle its chair names but never offers itself.
+  test("★ a declared Handle WITHOUT --seat takes NO CHAIR — the roster holds only what stood ★", async () => {
+    // h0 and h1 stand; h2 declares a Handle and never offers itself. Because the roster FORMS from what
+    // stood — no list ships in the build — h2 gets no chair at all, rather than an empty one somebody
+    // else wrote down for it. A declaration never reads as consent to sit.
     await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }, { seat: true }));
     await cmdPersona(personaArgs(["new", "1"], { name: LABELS[1]!, handle: KAHU[1]! }, { seat: true }));
     await cmdPersona(personaArgs(["new", "2"], { name: LABELS[2]!, handle: KAHU[2]! }));
 
     expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
     const doc = readNexusDoc(larBagsDir());
-    const unstood = doc!.kahu.find((k) => k.displayName === KAHU[2]);
-    expect(unstood?.verifyingKey).toBeFalsy();          // it declared the name and never offered the chair
-    // The 2-of-3 threshold still stands on the two that DID offer — the seal reports an empty chair rather
-    // than reading a declaration as consent to sit in it.
-    expect(doc!.kahu.filter((k) => k.verifyingKey).length).toBe(2);
+    expect(doc!.kahu.map((k) => k.displayName)).toEqual([KAHU[0], KAHU[1]]);
+    expect(doc!.kahu.find((k) => k.displayName === KAHU[2])).toBeUndefined();
+    // Majority over the two that stood reads 2, and both sit — a live quorum over a roster of two.
+    expect(doc!.threshold).toBe(2);
     expect(foundingQuorumSeated(doc)).toBe(true);
+  });
+
+  test("★ NO name ships in the build — the roster carries exactly the Handles the operator declared ★", async () => {
+    // The load-bearing property of the inversion: a founding whose roster arrived in a release is a founding
+    // the operator merely confirms. These strings exist nowhere but in the commands above.
+    const mine = ["Kahu One", "Kahu Two", "Kahu Three"];
+    for (let i = 0; i < mine.length; i++) {
+      await cmdPersona(personaArgs(["new", String(i)], { name: `label-${i}`, handle: mine[i]! }, { seat: true }));
+    }
+    await cmdNexus(nexusArgs(["seal", "seat"]));
+    const doc = readNexusDoc(larBagsDir());
+    expect(doc!.kahu.map((k) => k.displayName).sort()).toEqual([...mine].sort());
+    for (const k of doc!.kahu) expect(k.verifyingKey).toBeTruthy();
+  });
+
+  test("the threshold derives MAJORITY over what stood, and --threshold takes the operator's own call", async () => {
+    for (let i = 0; i < KAHU.length; i++) {
+      await cmdPersona(personaArgs(["new", String(i)], { name: LABELS[i]!, handle: KAHU[i]! }, { seat: true }));
+    }
+    await cmdNexus(nexusArgs(["seal", "seat"]));
+    expect(readNexusDoc(larBagsDir())!.threshold).toBe(2);          // majority of 3
+  });
+
+  test("★ --threshold past the roster REFUSES — it would seat a rule no quorum could ever reach ★", async () => {
+    await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }, { seat: true }));
+    expect(await cmdNexus(nexusArgs(["seal", "seat"], { threshold: "4" }))).not.toBe(0);
+  });
+
+  test("★ a seat with NOBODY standing refuses, and writes no doc ★", async () => {
+    await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }));   // declares, never stands
+    expect(await cmdNexus(nexusArgs(["seal", "seat"]))).not.toBe(0);
+    expect(readNexusDoc(larBagsDir())).toBeNull();
   });
 
   test("★ the PRIVATE label never reaches the seal — the doc carries chair names and keys, no compartment labels ★", async () => {

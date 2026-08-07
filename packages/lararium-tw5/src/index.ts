@@ -197,6 +197,9 @@ export type { CircleVerbOptions, ResolveCirclesStore } from "./circle-verbs.js";
 // stays local to whichever node holds it).
 export { makePersonaSelvesReactors } from "./persona-selves-verbs.js";
 export type { PersonaSelvesVerbOptions, ResolvePersonaStore } from "./persona-selves-verbs.js";
+// The CABAL-REALM verbs over @daemon — the OFFERING that feeds a realm, and the verdict-free capture-clock.
+export { makeCabalRealmReactors, makeRealmFeedReactor, makeRealmClockReactor } from "./cabal-realm-verbs.js";
+export type { CabalRealmVerbOptions, ResolveDaemonStore } from "./cabal-realm-verbs.js";
 // Verb-plane reactors (composite/repo-only — pono home is tw5, not node; both vessels hold them).
 export { makeInitWikiReactor, makeOpenWikiReactor }   from "./wiki-mint-handlers.js";
 export { makeDraftReactor, makePruneStaleReactor }    from "./wiki-draft-handlers.js";

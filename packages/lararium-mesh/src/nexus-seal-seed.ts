@@ -108,15 +108,26 @@ export interface NexusDoc {
 /** Legacy alias — one founding kahu named by display + its (unbound-until-seated) key. */
 export type FoundingKahu = NexusCharterKahu;
 
-/** The three founding kahu PersonaGroups (operator-ruled) — the SCAFFOLD names an empty charter doc seats. */
-export const FOUNDING_KAHU: readonly NexusCharterKahu[] = [
-  { displayName: "Guru Joshua Fontany", verifyingKey: null },
-  { displayName: "Telarus, KSC",        verifyingKey: null },
-  { displayName: "The Lindwyrm",        verifyingKey: null },
-];
+/**
+ * The MAJORITY threshold over a roster of `n` — the seat's default when the operator names none.
+ *
+ * A quorum rule cannot come from nowhere, and it must not come from a constant either: a number written into
+ * this file would seat one Nexus's fairness call inside every Nexus that ever founds. Majority reads as the
+ * weakest defensible default — it refuses a single hand and refuses unanimity's hostage problem — and the seat
+ * takes `--threshold` for any operator whose realm wants a different one.
+ */
+export function majorityThreshold(n: number): number {
+  return Math.floor(n / 2) + 1;
+}
 
-/** k — the founding threshold. 2 of the 3 founding kahu sign a valid antigen (ban/lift) act. */
-export const FOUNDING_QUORUM_THRESHOLD = 2 as const;
+/**
+ * The fail-closed threshold a MALFORMED doc reads at.
+ *
+ * A doc that lost its threshold must not become easier to satisfy than one that kept it, so the fallback runs
+ * unsatisfiably high rather than low: an empty key-set never reaches it, and the roster folds inert. A low
+ * fallback here would turn a torn doc into a one-signature Nexus.
+ */
+export const UNREADABLE_THRESHOLD_FLOOR = Number.MAX_SAFE_INTEGER;
 
 /** A hex verifying key reads seated only at the exact ed25519 length — a stray/short value never seats. */
 function isSeatedKey(key: string | null): key is string {
@@ -148,7 +159,7 @@ export function genesisSealEpochCid(seatedKeys: readonly string[], threshold: nu
  * Only a doc carrying a real charter epoch AND seated keys raises a live roster.
  */
 export function rosterFromNexusDoc(doc: NexusDoc | null): KahuRoster {
-  const threshold = doc && Number.isInteger(doc.threshold) && doc.threshold >= 1 ? doc.threshold : FOUNDING_QUORUM_THRESHOLD;
+  const threshold = doc && Number.isInteger(doc.threshold) && doc.threshold >= 1 ? doc.threshold : UNREADABLE_THRESHOLD_FLOOR;
   const keys = seatedKahuKeys(doc);
   const empty: KahuRoster = { keys: [], threshold, sealEpochCid: "" };
 
@@ -235,12 +246,17 @@ export function foundingQuorumSeated(doc: NexusDoc | null): boolean {
   return r.sealEpochCid.length > 0 && r.keys.length >= r.threshold;
 }
 
-/** The UNSEATED scaffold doc — the three founding names, every key null, no epoch. The seat command's floor. */
+/**
+ * The UNSEATED scaffold doc — an EMPTY roster, no threshold yet, no epoch. The seat command's floor.
+ *
+ * IT NAMES NOBODY, and that reads as the point. A scaffold carrying names would make the SOURCE decide who
+ * the founding kahu are, and a founding whose roster ships in a build is a founding the operator merely
+ * confirms. The roster forms at the seat, from the personas that DECLARED a Handle and STOOD for a chair —
+ * the operator's own acts, on their own vessel, which is where a legitimacy question belongs.
+ *
+ * `threshold: 0` reads as UNSET rather than as a satisfiable rule: no key-set reaches a live quorum through
+ * this doc, so an unseated scaffold stays inert exactly as an absent one does.
+ */
 export function emptyFoundingCharterDoc(): NexusDoc {
-  return {
-    kind:            NEXUS_DOC_KIND,
-    threshold:       FOUNDING_QUORUM_THRESHOLD,
-    sealEpochCid: null,
-    kahu:            FOUNDING_KAHU.map((k) => ({ displayName: k.displayName, verifyingKey: null })),
-  };
+  return { kind: NEXUS_DOC_KIND, threshold: 0, sealEpochCid: null, kahu: [] };
 }

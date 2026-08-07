@@ -34,7 +34,7 @@ import {
 import { federationPostureFromDoc, type FederationPosture } from "@lararium/mesh";
 import {
   emptyFoundingCharterDoc, rosterFromNexusDoc, foundingQuorumSeated, sealLineageHead,
-  personasStandingForSeat, genesisCharterEpoch, rotateSealEpoch, sealKeySetHash,
+  personasStandingForSeat, majorityThreshold, genesisCharterEpoch, rotateSealEpoch, sealKeySetHash,
   generateReserveSeed, deriveReserveKeySet, reserveNextKeyCommit, splitReserveSeed,
   RESERVE_THRESHOLD, RESERVE_KAHU_COUNT, defaultCryptoProvider,
   type NexusDoc, type NexusCharterKahu, type SealEpoch, type ReserveCard,
@@ -63,8 +63,10 @@ function usage(): void {
 function sealUsage(): void {
   console.error("usage: lares nexus seal <seat | rotate | commit | show>");
   console.error("");
-  console.error("  seat    establish the GENESIS epoch from the held personas' verifying keys (by DECLARED Handle)");
-  console.error("          + a pre-rotation commitment:  --next-key-commit <digest>");
+  console.error("  seat    form the roster from the personas that DECLARED a Handle + STOOD for a chair, then");
+  console.error("          establish the GENESIS epoch over their verifying keys:");
+  console.error("          --next-key-commit <digest>   the pre-rotation commitment");
+  console.error("          [--threshold <k>]            the quorum rule (default: majority of those that stood)");
   console.error("  rotate  reveal the pre-committed next key-set (now in the vault) + advance the chain:");
   console.error("          --next-key-commit <digest-of-the-FOLLOWING-key-set>");
   console.error("  commit  compute a key-set commitment digest:  --keys <k1,k2,...> --threshold <k>");
@@ -374,10 +376,14 @@ const normHex = (s: string | undefined): string => (s ?? "").trim().toLowerCase(
 async function seatKahuFromVault(
   doc: NexusDoc, dataDir: string,
 ): Promise<{ kahu: NexusCharterKahu[]; seatedKeys: string[] }> {
-  // The join reads the DECLARED HANDLE, never the private pet-name. Matching on the label would weld the two
-  // registers — a human could then only seat under the same string they call the compartment at home, and
-  // every private label would quietly become a public commitment. A persona reaches a chair by declaring the
-  // Handle it answers to AND standing for a seat; both are the human's own explicit acts (persona-declare).
+  // THE ROSTER FORMS FROM WHAT STOOD, never from a list this build shipped. A persona reaches a chair by
+  // DECLARING the Handle it answers to and STANDING for a seat — two explicit acts on the operator's own
+  // vessel — and the roster reads back exactly those. A scaffold carrying names would make the SOURCE decide
+  // who the founding kahu are, leaving the operator to confirm a legitimacy call somebody else made.
+  //
+  // The chair name reads the DECLARED HANDLE, never the private pet-name. Matching the label would weld the
+  // two registers: an operator could then seat only under the same string they call the compartment at home,
+  // and every private label would become a public commitment by construction.
   const held = new Set(await listPersonaRoots(dataDir));
   // The declared Handle rides the FLEET (@persona), the seat claim stays LOCAL — so the seal reads a persona's
   // outward name as every device of the human knows it, and reads the chair claim as THIS node holds it.
@@ -387,18 +393,44 @@ async function seatKahuFromVault(
     ? localDeclarations                                                  // no vessel key = no fleet to read
     : makeFleetDeclarationStore(localDeclarations, fleetDid);
   const standing = await personasStandingForSeat(declarations);
-  const byHandle = new Map<string, string>();   // normalized declared Handle → verifying key hex
+
+  // A doc already carrying chairs keeps them — a re-seat before genesis fills keys rather than re-writing who
+  // sits. Chairs nobody stood for stay UNSEATED, and a face standing under a name no chair carries ADDS one.
+  const kahu: NexusCharterKahu[] = doc.kahu.map((k) => ({ ...k }));
+  const chairAt = new Map<string, number>(kahu.map((k, i) => [norm(k.displayName), i]));
+
   for (const [index, handle] of standing) {
     if (!held.has(index)) continue;             // a declaration without a held root seats nothing here
     const root = await generateOrLoadPersonaGroupRoot(dataDir, index);   // loads a held root; never mints here
-    byHandle.set(norm(handle), root.verifyingKey);
+    const at = chairAt.get(norm(handle));
+    if (at === undefined) {
+      chairAt.set(norm(handle), kahu.length);
+      kahu.push({ displayName: handle, verifyingKey: root.verifyingKey });
+    } else {
+      kahu[at] = { displayName: kahu[at]!.displayName, verifyingKey: root.verifyingKey };
+    }
   }
-  const kahu: NexusCharterKahu[] = doc.kahu.map((k) => {
-    const matched = byHandle.get(norm(k.displayName));
-    return { displayName: k.displayName, verifyingKey: matched ?? k.verifyingKey };
-  });
   const seatedKeys = kahu.map((k) => k.verifyingKey).filter((v): v is string => typeof v === "string" && v.length > 0);
   return { kahu, seatedKeys };
+}
+
+/**
+ * The quorum rule this seat writes: the operator's `--threshold`, else the doc's own if it carries a live one,
+ * else MAJORITY over the roster that stood. A threshold past the roster size would seat a Nexus no quorum can
+ * ever satisfy, so it refuses rather than writing an unreachable rule.
+ */
+function resolveSeatThreshold(args: ParsedArgs, doc: NexusDoc, rosterSize: number): number {
+  const raw = args.options["threshold"];
+  if (raw !== undefined) {
+    const t = Number(raw);
+    if (!Number.isInteger(t) || t < 1) throw new UsageError(`--threshold expects a whole number ≥ 1, got "${raw}"`);
+    if (t > rosterSize) {
+      throw new UsageError(`--threshold ${t} sits past the ${rosterSize} chair${rosterSize === 1 ? "" : "s"} that stood — no quorum could ever reach it`);
+    }
+    return t;
+  }
+  if (Number.isInteger(doc.threshold) && doc.threshold >= 1 && doc.threshold <= rosterSize) return doc.threshold;
+  return majorityThreshold(rosterSize);
 }
 
 async function sealSeat(args: ParsedArgs): Promise<number> {
@@ -414,19 +446,31 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
 
   const { kahu, seatedKeys } = await seatKahuFromVault(doc, dataDir);
   const nextKeyCommit = normHex(args.options["next-key-commit"]);
+  if (kahu.length === 0) {
+    throw new UsageError(
+      "no persona stands for a chair — declare a Handle and stand for one first:\n" +
+      "  lares persona new <index> --name '<label>' --handle '<Handle>' --seat",
+    );
+  }
+
+  // THE THRESHOLD, and where it comes from. A doc that already carries one keeps it; otherwise the seat
+  // derives MAJORITY over the roster that stood. Neither a constant in the source nor a silent guess: majority
+  // refuses a single hand without handing any one kahu a veto, and `--threshold` takes the operator's own call
+  // for a realm that wants a different rule.
+  const threshold = resolveSeatThreshold(args, doc, kahu.length);
 
   // Establish the genesis epoch only once a quorum is seatable — below threshold, no epoch roots (inert).
   let sealLineage: SealEpoch[] | undefined;
   let sealEpochCid: string | null = null;
-  if (seatedKeys.length >= doc.threshold) {
-    const genesis = genesisCharterEpoch(seatedKeys, doc.threshold, nextKeyCommit);
+  if (seatedKeys.length >= threshold) {
+    const genesis = genesisCharterEpoch(seatedKeys, threshold, nextKeyCommit);
     sealLineage = [genesis];
     sealEpochCid = genesis.epochCid;
   }
 
   const next: NexusDoc = sealLineage
-    ? { kind: doc.kind, threshold: doc.threshold, sealEpochCid, sealLineage, kahu }
-    : { kind: doc.kind, threshold: doc.threshold, sealEpochCid, kahu };
+    ? { kind: doc.kind, threshold, sealEpochCid, sealLineage, kahu }
+    : { kind: doc.kind, threshold, sealEpochCid, kahu };
   // A seat moves TWO joints — the roster it seats and the genesis epoch it establishes — so it writes both
   // narrowly rather than re-emitting the practice dials it never touched.
   writeNexusKahu(bagsDir, { threshold: next.threshold, kahu: next.kahu }, next);

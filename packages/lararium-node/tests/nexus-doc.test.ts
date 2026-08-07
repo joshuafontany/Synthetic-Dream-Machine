@@ -6,9 +6,10 @@
  *   · a seated doc WRITES in house form and READS back byte-faithful (the roster round-trips through disk),
  *   · an absent doc reads null → FAIL CLOSED (the roster folds empty, the antigen inert),
  *   · a torn / missing roster block reads null → FAIL CLOSED,
- *   · the unseated scaffold round-trips to an empty (inert) roster,
+ *   · the unseated scaffold NAMES NOBODY and round-trips to an inert roster,
  *   · the private pet-name the persona door sets round-trips through the node fs store,
- *   · the seat gesture (pet-name match → seated verifying keys → genesis epoch) raises a live roster.
+ *   · the seat gesture (the roster FORMS from what declared + stood → seated keys → genesis epoch) raises a
+ *     live roster, and the chair names come from the operator's declarations rather than from this build.
  */
 import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync, writeFileSync, existsSync } from "node:fs";
@@ -17,13 +18,15 @@ import { join } from "node:path";
 import {
   emptyFoundingCharterDoc, genesisSealEpochCid, rosterFromNexusDoc, foundingQuorumSeated,
   genesisCharterEpoch, sealKeySetHash, sealLineageHead,
-  renameOwnPersona, ownPersonaPetname, type NexusDoc, type NexusCharterKahu,
+  renameOwnPersona, ownPersonaPetname, declarePersonaHandle, standForKahuSeat,
+  personasStandingForSeat, majorityThreshold, type NexusDoc, type NexusCharterKahu,
 } from "@lararium/mesh";
 import {
   readNexusDoc, writeNexusDoc, nexusCharterDocPath,
 } from "../src/nexus-doc.js";
 import {
   generateOrLoadPersonaGroupRoot, listPersonaRoots, makeNodePersonaPetnameStore,
+  makeNodePersonaDeclarationStore,
 } from "../src/node-vessel-identity.js";
 
 const saved: Record<string, string | undefined> = {};
@@ -62,12 +65,21 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
     expect(rosterFromNexusDoc(back).keys.sort()).toEqual([...keys].sort());
   });
 
-  test("the unseated scaffold round-trips to an inert roster", () => {
-    writeNexusDoc(bags, emptyFoundingCharterDoc());
-    const back = readNexusDoc(bags);
-    expect(back?.kahu.length).toBe(3);
-    expect(rosterFromNexusDoc(back).keys).toEqual([]);
-    expect(foundingQuorumSeated(back)).toBe(false);
+  test("★ the unseated scaffold NAMES NOBODY, and reads back exactly as an ABSENT doc does ★", () => {
+    // A scaffold carrying names would make this BUILD decide who the founding kahu are; the roster forms at
+    // the seat instead, from the personas that declared a Handle and stood for a chair.
+    const scaffold = emptyFoundingCharterDoc();
+    expect(scaffold.kahu).toEqual([]);
+    expect(scaffold.threshold).toBe(0);
+
+    // And `threshold: 0` reads as UNSET rather than as a satisfiable rule. The reader refuses it — a doc
+    // claiming a zero threshold would be satisfied by NO signatures at all, which is the most dangerous rule
+    // a roster could carry — so an unseated scaffold on disk generates identically to no doc at all. Both
+    // fold to an inert roster, and neither can be mistaken for a seated one.
+    writeNexusDoc(bags, scaffold);
+    expect(readNexusDoc(bags)).toBeNull();
+    expect(rosterFromNexusDoc(readNexusDoc(bags)).keys).toEqual([]);
+    expect(foundingQuorumSeated(readNexusDoc(bags))).toBe(false);
   });
 
   test("a torn roster block reads null (never a partial guess into authority)", () => {
@@ -139,35 +151,43 @@ describe("persona pet-name + seat gesture (the door's core)", () => {
     expect(await ownPersonaPetname(petnames, 1)).toBe("Telarus, KSC");
   });
 
-  test("seat gesture: three held personas → pet-name match → seated keys → genesis epoch → live roster", async () => {
-    const petnames = await makeNodePersonaPetnameStore();
-    const names = ["Guru Joshua Fontany", "Telarus, KSC", "The Lindwyrm"];
-    for (let i = 0; i < names.length; i++) {
+  test("seat gesture: the roster FORMS from what declared + stood → seated keys → genesis epoch → live roster", async () => {
+    // The chair names below exist nowhere but in these declarations — no list ships in the build. The private
+    // labels read deliberately unlike them, because the seat joins on the DECLARED HANDLE and a label-matching
+    // join would weld a compartment's private name to a public commitment.
+    const petnames     = await makeNodePersonaPetnameStore();
+    const declarations = await makeNodePersonaDeclarationStore();
+    const handles = ["Kahu Alpha", "Kahu Beta", "Kahu Gamma"];
+    const labels  = ["work", "the-quiet-one", "burner"];
+    for (let i = 0; i < handles.length; i++) {
       await generateOrLoadPersonaGroupRoot(root, i);
-      await renameOwnPersona(petnames, i, names[i]!);
+      await renameOwnPersona(petnames, i, labels[i]!);
+      await declarePersonaHandle(declarations, i, handles[i]!);
+      await standForKahuSeat(declarations, i, true);
     }
-    // Replicate the seat gesture the CLI runs: read held roots' verifying keys, match by DECLARED Handle.
-    const byPetname = new Map<string, string>();
-    for (const index of await listPersonaRoots(root)) {
-      const pn = await ownPersonaPetname(petnames, index);
+
+    // Replicate the seat gesture the CLI runs: every persona that declared AND stood takes a chair under the
+    // name it declared, keyed by the root it holds.
+    const held = new Set(await listPersonaRoots(root));
+    const kahu: NexusCharterKahu[] = [];
+    for (const [index, handle] of await personasStandingForSeat(declarations)) {
+      if (!held.has(index)) continue;
       const rt = await generateOrLoadPersonaGroupRoot(root, index);
-      if (pn) byPetname.set(pn.toLowerCase(), rt.verifyingKey);
+      kahu.push({ displayName: handle, verifyingKey: rt.verifyingKey });
     }
-    const doc0 = emptyFoundingCharterDoc();
-    const kahu: NexusCharterKahu[] = doc0.kahu.map((k) => ({
-      displayName: k.displayName,
-      verifyingKey: byPetname.get(k.displayName.toLowerCase()) ?? k.verifyingKey,
-    }));
-    const seated = kahu.map((k) => k.verifyingKey).filter((v): v is string => Boolean(v));
+    const seated    = kahu.map((k) => k.verifyingKey).filter((v): v is string => Boolean(v));
+    const threshold = majorityThreshold(kahu.length);          // 3 chairs → 2, derived, never a constant
     const doc: NexusDoc = {
-      kind: doc0.kind, threshold: doc0.threshold,
-      sealEpochCid: seated.length >= doc0.threshold ? genesisSealEpochCid(seated, doc0.threshold) : null,
+      kind: emptyFoundingCharterDoc().kind, threshold,
+      sealEpochCid: seated.length >= threshold ? genesisSealEpochCid(seated, threshold) : null,
       kahu,
     };
     writeNexusDoc(bags, doc);
 
     const back = readNexusDoc(bags);
     expect(existsSync(nexusCharterDocPath(bags))).toBe(true);
+    expect(back?.kahu.map((k) => k.displayName)).toEqual(handles);   // the operator's names, not the build's
+    expect(back?.threshold).toBe(2);
     expect(rosterFromNexusDoc(back).keys.length).toBe(3);
     expect(foundingQuorumSeated(back)).toBe(true);
   });
