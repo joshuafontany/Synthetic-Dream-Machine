@@ -138,10 +138,18 @@ def test_memetic_routes_through_the_carrier():
     assert tree["children"][0]["type"] == "ahu_block"
 
 
-def test_grammar_and_corpus_files_exist():
-    base = os.path.join(HERE, "..", "grammars", "tree-sitter-lar-sigil")
-    assert os.path.isfile(os.path.join(base, "grammar.js"))
-    assert os.path.isfile(os.path.join(base, "test", "corpus", "sigils.txt"))
+def test_the_carrier_grammar_and_its_specimens_stand_on_disk():
+    """The router loads ONE committed grammar — tree-sitter-memetic-wikitext — so that is the build
+    input worth guarding: a parse tier that silently drops to prose because its grammar went missing
+    reads as a corpus with no structure rather than as a broken build.
+
+    An earlier form of this guard named `tree-sitter-lar-sigil`, which the router no longer loads. A
+    guard over a retired subject passes or fails on something nothing reads.
+    """
+    base = os.path.join(HERE, "..", "..", "tree-sitter-memetic-wikitext")
+    assert os.path.isfile(os.path.join(base, "grammar.js")), "the carrier grammar source is absent"
+    assert os.path.isdir(os.path.join(base, "host-py")), "the python host binding is absent"
+    assert os.path.isdir(os.path.join(base, "fixtures", "specimens")), "the specimen corpus is absent"
 
 
 # ── the prose tier (graceful: stanza constituency → spaCy dependency → segment) ───────────
