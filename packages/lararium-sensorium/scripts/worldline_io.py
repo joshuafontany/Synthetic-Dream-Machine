@@ -56,6 +56,7 @@ from __future__ import annotations
 import argparse
 import os
 import sqlite3
+import time
 from contextlib import contextmanager
 
 from holder_caps import (
@@ -80,6 +81,38 @@ _DB_NAME = "worldline.sqlite3"
 IDLE_TTL_ENV = "WORLDLINE_IDLE_TTL"
 DEFAULT_IDLE_TTL_SECONDS = 600.0
 _LOCK_PREFIX = "worldline_serve"
+
+
+def _set_wal(conn, attempts: int = 40, pause: float = 0.05) -> str:
+    """Put the file in WAL, tolerating a racing opener that got there first.
+
+    `PRAGMA journal_mode=WAL` takes a brief EXCLUSIVE lock, and sqlite does NOT run the busy handler
+    for a journal-mode change — so a second process opening the same store gets SQLITE_BUSY at once,
+    whatever `timeout` or `busy_timeout` says. The `timeout=30.0` on connect covers every other
+    statement here and cannot cover this one.
+
+    WAL is a property of the FILE and persists once any connection sets it, so a racing opener has
+    nothing left to do: retry briefly for the case where nobody has set it yet, then accept the mode
+    the file already carries. Only a file that ends in some OTHER mode reads as a real failure —
+    there the check-then-act guards in `add_edge` would run without the isolation they assume.
+    """
+    last = None
+    for _ in range(attempts):
+        try:
+            return str(conn.execute("PRAGMA journal_mode=WAL").fetchone()[0]).lower()
+        except sqlite3.OperationalError as exc:
+            last = exc
+            mode = str(conn.execute("PRAGMA journal_mode").fetchone()[0]).lower()
+            if mode == "wal":
+                return mode          # another opener won the race and left it exactly as wanted
+            time.sleep(pause)
+    mode = str(conn.execute("PRAGMA journal_mode").fetchone()[0]).lower()
+    if mode == "wal":
+        return mode
+    raise sqlite3.OperationalError(
+        f"worldline store could not reach WAL (mode={mode!r}) — add_edge's cycle and fork guards "
+        f"read then insert, and without WAL a concurrent writer passes a guard the other invalidates"
+    ) from last
 
 
 def _db_path(palace_path: str) -> str:
@@ -107,7 +140,7 @@ class WorldlineStore:
         # WAIT rather than raise `database is locked`; `isolation_level=None` hands transaction
         # control to us so the guards and their INSERT can ride ONE `BEGIN IMMEDIATE` (see `_write`).
         self._conn = sqlite3.connect(_db_path(palace_path), timeout=30.0, isolation_level=None)
-        self._conn.execute("PRAGMA journal_mode=WAL")
+        _set_wal(self._conn)
         self._conn.execute("PRAGMA busy_timeout=30000")
         self._conn.execute("PRAGMA synchronous=NORMAL")   # WAL-safe; fsync per checkpoint, not per commit
         self._conn.execute(
