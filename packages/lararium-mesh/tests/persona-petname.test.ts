@@ -1,7 +1,8 @@
 /**
  * persona-petname.test — the two-layer pet-names over the isomorphic persona core (#64 stage 4).
  *
- * The PRIVATE own-persona label map (never federates), the multitude-view over the whole self, and the
+ * The PRIVATE own-persona label map (fleet-only, never PUBLICLY federates), the multitude-view over the
+ * whole self, and the
  * PUBLIC persona-index → HandleCard.glamour → board wire. All platform-blind in @lararium/mesh; the node/
  * browser adapters supply the same shapes over their own storage.
  */
@@ -150,8 +151,8 @@ describe("persona-petname — the MULTITUDE-VIEW (#64 stage 4)", () => {
   });
 });
 
-describe("persona-petname — the pet-name NEVER FEDERATES (#64 stage 4)", () => {
-  test("the private label never rides onto the board; the glamour is a distinct, chosen display", async () => {
+describe("persona-petname — the pet-name NEVER PUBLICLY FEDERATES (#64 stage 4)", () => {
+  test("the private label never rides onto a PUBLIC board; only an announced Handle binds a glamour", async () => {
     const petnames = makeInMemoryPetnameStore();
     const publicStore = makeInMemoryPublicStore();
     const board = makeFakeBoard();

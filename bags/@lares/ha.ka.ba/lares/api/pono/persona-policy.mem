@@ -13,7 +13,7 @@ namespace         = "&#x2299;"
 pattern-integrity = true
 register          = "Synthesis-Canon"
 retain            = true
-role              = "persona-policy — the operator's three rulings on the multi-persona identity core: ONE face to the mesh (reboot to switch; PRIVATE-all, PUBLIC-one) · each PersonaGroup a CRYPTOGRAPHIC INDIVIDUAL (Sybil-of-one the accepted IoC cost, answered socially never in crypto) · DISTINCT recovery custodians per persona. Plus the two-layer pet-names (private map ⊥ public glamour) under Zooko, all standing on NO GLOBAL-NOW FOR IDENTITY — the mesh refuses to build the SIN even to defend itself"
+role              = "persona-policy — the operator's three rulings on the multi-persona identity core: ONE face to the mesh (reboot to switch; PRIVATE-all, PUBLIC-one) · each PersonaGroup a CRYPTOGRAPHIC INDIVIDUAL (Sybil-of-one the accepted IoC cost, answered socially never in crypto) · DISTINCT recovery custodians per persona. Plus the two-layer pet-names (private map ⊥ public glamour) under Zooko — the pet-name FLEET-SYNCS among the human's own vessels and never PUBLICLY federates — under THE BINDING LAW: only a publicly announced Handle binds a PersonaGroup to a public glamour, so no other path may carry a persona's name onto a federating surface. All standing on NO GLOBAL-NOW FOR IDENTITY — the mesh refuses to build the SIN even to defend itself"
 tags              = ["api/pono/meme"]
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/lares/api/pono/persona-policy"
@@ -70,9 +70,15 @@ The honest wall stays lit, dual to the wax-stamp's: ''"a valid key" reads as cry
 
 A persona carries ''two names beside its key'', and the key stays the only global one. ''Zooko's triangle resolves'' the same way handle-card proves it: the ''GLOBAL name STAYS the pubkey'' — the veiled-user key the persona-HD tree derives — secure-and-decentralised because it IS the key; ''memorability rides a LOCAL name'':
 
-* ''The OWN side ~ the private pet-name map'' (`{handleIndex -> petname}`, persona-petname). The human's own label for their own faces — "work", "the-guru", "my-burner" — ''freely renamable'' and ''NEVER federated''. It names the inside of the private Vault to its keeper alone. The wall runs structural: no board write exists in the shore. A ''multitude-view'' reads the whole self across the vessel — `{persona → pet-name, held-here?, has-public-handle?}` — so the human sees every face while the mesh sees one.
+* ''The OWN side ~ the private pet-name map'' (`{handleIndex -> petname}`, persona-petname). The human's own label for their own faces — "work", "the-guru", "my-burner" — ''freely renamable'' and ''never PUBLICLY federated''. It ''SHOULD ride the human's own private fleet'': a label a human keeps on one device and loses on the next names the compartment badly, so the map ''private-federates over a PRIVATE BAG'' across their own vessel-pool (the device-fleet ride, local-first until Beelay lands). The wall the shore holds runs ''PUBLIC, not cross-vessel'': no board write exists in it. A ''multitude-view'' reads the whole self across the vessel — `{persona → pet-name, held-here?, has-public-handle?}` — so the human sees every face while the mesh sees one.
 * ''The OTHER side ~ the handle-book'' (handle-book). The recogniser's local labels for ''OTHERS'' nyms' — never on any wire.
 * ''The ONLY name that federates ~ the public glamour'' (persona-glamour). The persona's veiled key ''signs a HandleCard'' whose `glamour` shows a chosen display (never a legal identity); it ''announces onto the per-Nexus @crossroads WHO board'' (who-face), self-certifying, monotone-versioned, leased against the local clock.
+
+!!! The Binding Law
+
+> ''Only a PUBLICLY ANNOUNCED HANDLE binds a PersonaGroup to a public glamour.''
+
+The announce IS the binding act — a persona's veiled key signs its own HandleCard and puts it on the board. ''No other path may carry a persona's name onto a federating surface.'' A pet-name string that reaches a published document publishes a face the human never announced, and the string's own harmlessness never licenses it: the ''declaring act'' makes a name public, never the characters in it. The two MAY read word-for-word identical — the operator's `Telarus, KSC` names a compartment privately AND announces publicly — and they stay ''two acts with two owners'' (declaration ⊥ measurement, identity-enacts-relation). ''A private label reaching a board reads as a leak, never a shortcut.'' <<~ confidence Synthesis-Canon 16/20 >>
 
 ''Three stores, never fused'': private-own (pet-name) ⊥ public-own (glamour record) ⊥ others (handle-book). The pet-name map ''wants to sync'' across the human's own PersonaGroup vessel-pool — private-federated over a PRIVATE BAG — but that ride waits on the ''device-fleet'' (not yet built; blocks on Beelay). So the shore stands ''LOCAL-FIRST'', shaped so the cross-pool sync drops into the same store shape when the fleet lands. <<~ confidence Synthesis 12/20 >>
 

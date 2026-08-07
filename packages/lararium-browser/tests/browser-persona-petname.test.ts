@@ -64,7 +64,7 @@ describe("the browser pet-name stores over IndexedDB (#64 stage 4)", () => {
     expect(byIndex[1]).toMatchObject({ petname: null, heldHere: true, hasPublicHandle: false, glamour: null });
   });
 
-  test("the private label NEVER federates — publishing a glamour leaves the label off the board", async () => {
+  test("the private label never PUBLICLY federates — publishing a glamour leaves the label off the board", async () => {
     const name = idb();
     const petnames = await makeBrowserPersonaPetnameStore(name);
     const publicStore = await makeBrowserPublicHandleStore(name);

@@ -24,8 +24,9 @@ export {
   openVesselIdb, idbGet, idbPut, idbDelete, idbKeys,
 } from "./browser-vessel-identity.js";
 export type { BrowserVesselIdentity } from "./browser-vessel-identity.js";
-// The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (never federates) + the PUBLIC
-// own-published-face record. Browser twins of the node fs stores; distinct from the handle-book.
+// The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (fleet-only; never PUBLICLY
+// federates) + the PUBLIC own-published-face record. Browser twins of the node fs stores; distinct from the
+// handle-book.
 export {
   makeBrowserPersonaPetnameStore, makeBrowserPublicHandleStore,
 } from "./browser-vessel-identity.js";

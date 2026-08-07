@@ -11,8 +11,10 @@
  *   CODE  → born-from-source at daemon boot (in-memory setTiddler, deterministic per
  *           device). NOT CRDT-bag-seeded — a $:/ put on the writing boot never paints.
  *   STATE → LOCAL/unsynced. $:/temp/lares/personas (the live multitude-view) rides the
- *           volatile temp slot. It carries the PRIVATE pet-names — which NEVER federate —
- *           so it MUST stay local: the temp slot syncs to no bag, cross-device or peer.
+ *           volatile temp slot. It carries the PRIVATE pet-names, so it MUST stay local: the
+ *           temp slot syncs to no bag, cross-device or peer. The label MAY ride the human's own
+ *           fleet — but through the pet-name store's own private bag, never through a rendered
+ *           projection, which carries no way to tell a fleet peer from a stranger.
  *
  * INPUT LAW (projection round-trip): the @daemon renders by projection and the return leg
  * relays CLICKS ONLY (numeric/boolean event fields) — never typed text. So a row's WEAR

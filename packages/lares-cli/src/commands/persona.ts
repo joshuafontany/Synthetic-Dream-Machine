@@ -9,8 +9,9 @@
  *   wear <index>                       switch the active persona (one-face-to-mesh; reboot-to-switch)
  *   list                               the private multitude-view — held indices, the active marker, pet-names
  *
- * The pet-name stays PRIVATE (persona-petname: never federates); minting a persona announces no public
- * glamour (that is a separate, deliberate publish). Founder-side: `new` mints an operator-root this vessel
+ * The pet-name stays PRIVATE (persona-petname: fleet-syncs among the human's own vessels, never PUBLICLY
+ * federates); minting a persona announces no public glamour, because only a publicly announced Handle binds
+ * a PersonaGroup to a public glamour — a separate, deliberate publish. Founder-side: `new` mints an operator-root this vessel
  * holds — a joining vessel receives a root by admit, never mints one here.
  */
 
@@ -114,7 +115,8 @@ async function personaNew(args: ParsedArgs): Promise<number> {
     human: () => {
       console.log(`persona h${index} ${root.created ? "minted" : "loaded"} — "${name}"`);
       console.log(`  verifying key: ${root.verifyingKey}`);
-      console.log(`  pet-name is PRIVATE (never federates); this announces no public glamour.`);
+      console.log(`  pet-name is PRIVATE — it fleet-syncs among your own vessels and never PUBLICLY federates.`);
+      console.log(`  this announces no glamour; only a publicly announced Handle binds a persona to one.`);
       console.log(`  seat it into the Nexus seal with: lares nexus seal seat`);
     },
   });

@@ -17,9 +17,14 @@
  * DISTINCT stores, three ways (persona-policy#two-layer):
  *   · this OwnPublicHandleStore — the vessel's local memory of ITS OWN published faces (index → nym/glamour/
  *     version), so a re-publish bumps monotone and links its own lineage (handle-card's anti-rollback).
- *   · the pet-name map (persona-petname) — the human's PRIVATE label for their own personas; never federates.
+ *   · the pet-name map (persona-petname) — the human's PRIVATE label for their own personas; fleet-syncs
+ *     among their own vessels, never PUBLICLY federates.
  *   · the handle-book (handle-book) — the recogniser's labels for OTHERS' nyms.
  * The three never fuse: private-own ⊥ public-own ⊥ others.
+ *
+ * THE BINDING LAW. Only a publicly announced Handle binds a PersonaGroup to a public glamour — the card this
+ * module mints and `announceToWhoFace` publishes IS that act. No other path may carry a persona's name onto a
+ * federating surface: a pet-name string reaching a board would publish a face the human never announced.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-policy
  */
@@ -68,7 +73,7 @@ export interface PersonaPublicHandleRecord {
 
 /**
  * How a runtime persists the vessel's OWN published faces — keyed by handle-index, ONE record per persona.
- * DISTINCT from the pet-name map (private, never federates) and the handle-book (others' nyms). A platform
+ * DISTINCT from the pet-name map (private, fleet-only) and the handle-book (others' nyms). A platform
  * supplies the shore (node fs JSON / browser IDB), mirroring the vault's other stores.
  */
 export interface OwnPublicHandleStore {

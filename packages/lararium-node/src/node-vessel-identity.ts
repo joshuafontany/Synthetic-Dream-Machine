@@ -556,8 +556,9 @@ export async function listPersonaRoots(_dataDir: string): Promise<number[]> {
 // Two DISTINCT node fs stores over `<state>/identity` (0o600, outside every substrate wipe), login-scoped
 // like the vault's slots so developers on one machine keep separate identity homes:
 //   · the PRIVATE pet-name map (`.persona-petnames-${login}.json`) — the human's own label for their own
-//     personas, freely renamable, NEVER federated (persona-petname). A future device-fleet adapter wraps
-//     this same shape over a private bag for cross-vessel sync; the local file is the local-first floor.
+//     personas, freely renamable, never PUBLICLY federated (persona-petname). A future device-fleet adapter
+//     wraps this same shape over a private bag so the label rides the human's own vessels; the local file
+//     stands as the local-first floor beneath that sync.
 //   · the PUBLIC handle record (`.persona-public-handles-${login}.json`) — the vessel's memory of ITS OWN
 //     published glamour faces (index → nym/glamour/version/cardId), so a re-publish advances the monotone
 //     card lineage (persona-glamour). Distinct from the pet-name map and from the handle-book (others' nyms).
@@ -583,7 +584,7 @@ function readPetnameMap(idDir: string, login: string | null): Record<string, str
   return {};
 }
 
-/** Write the `{handleIndex -> petname}` map to disk (0o600) — the label stays home, never federated. */
+/** Write the `{handleIndex -> petname}` map to disk (0o600) — the label stays inside the fleet, never public. */
 function writePetnameMap(idDir: string, login: string | null, names: Record<string, string>): void {
   mkdirSync(idDir, { recursive: true });
   const file = join(idDir, personaPetnameFileName(login));

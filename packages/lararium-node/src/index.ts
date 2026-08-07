@@ -213,8 +213,9 @@ export { deriveReachFaces, wsUrlForOrigin, type ReachFace, type InterfaceTable }
 export { loadActivePersonaIndex, wearPersona, personaRootExists, listPersonaRoots } from "./node-vessel-identity.js";
 export { generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed, loadPersonaGroupRootVerifyingKey } from "./node-vessel-identity.js";
 export type { PersonaGroupRoot } from "./node-vessel-identity.js";
-// The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (never federates) + the PUBLIC
-// own-published-face record (persona → @crossroads glamour). Distinct stores, distinct from the handle-book.
+// The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (fleet-only; never PUBLICLY
+// federates) + the PUBLIC own-published-face record (persona → @crossroads glamour, the one act that binds a
+// persona to a public name). Distinct stores, distinct from the handle-book.
 export { makeNodePersonaPetnameStore, makeNodePublicHandleStore } from "./node-vessel-identity.js";
 
 // The IoC follow — the node-fs LOCAL adapters for the private circle-graph + the recogniser's handle-book.

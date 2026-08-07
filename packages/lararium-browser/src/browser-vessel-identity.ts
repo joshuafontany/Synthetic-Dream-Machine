@@ -46,8 +46,8 @@ const PERSONA_ROSTER_STORE = "persona-roster";    // the EXPLICIT held-root reco
 const ACTIVE_PERSONA_STORE = "active-persona";    // the worn-mask pointer (one handle-index)
 const ANCHORS_STORE        = "anchors";           // per-index veiled-Handle anchors (public doc-ids)
 const ANCHOR_ROSTER_STORE  = "anchor-roster";     // the EXPLICIT anchored-index record
-// The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (never federates) + the PUBLIC
-// own-published-face record. Per-index, keyed by `h${N}` like the persona-root slots.
+// The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (fleet-only; never PUBLICLY
+// federates) + the PUBLIC own-published-face record. Per-index, keyed by `h${N}` like the persona-root slots.
 const PERSONA_PETNAME_STORE      = "persona-petnames";        // handleIndex → the human's PRIVATE label
 const PERSONA_PUBLIC_HANDLE_STORE = "persona-public-handles"; // handleIndex → the vessel's OWN published face
 // v4 additive stores (all causal-island-LOCAL, never federated):

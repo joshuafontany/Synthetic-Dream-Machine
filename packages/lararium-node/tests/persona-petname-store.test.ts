@@ -78,7 +78,7 @@ describe("node persona pet-name stores (#64 stage 4)", () => {
     expect(byIndex[1]).toMatchObject({ petname: null, heldHere: true, hasPublicHandle: false, glamour: null });
   });
 
-  test("the private label NEVER federates — publishing a glamour leaves the private file off the board", async () => {
+  test("the private label never PUBLICLY federates — publishing a glamour leaves the private file off the board", async () => {
     const petnames = await makeNodePersonaPetnameStore();
     const publicStore = await makeNodePublicHandleStore();
     const board = makeFakeBoard();

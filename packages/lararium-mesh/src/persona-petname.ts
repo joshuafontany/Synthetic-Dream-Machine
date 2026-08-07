@@ -7,17 +7,23 @@
  * this pet-name map (a persona → a human's private label for it), on the OTHER side the handle-book (a nym →
  * the recogniser's label for someone ELSE). This module holds the own side ONLY.
  *
- * NEVER FEDERATES. The pet-name map names a human's OWN faces to THEMSELVES — "work", "the-guru", "the
- * throwaway". It is the private inside of the private Vault (persona-circle#the-vault): a label the human
- * puts on their own compartment, never a claim any peer reads. It is DISTINCT from the public `glamour` (the
- * ONE thing a persona federates — persona-glamour) and DISTINCT from the handle-book (others' nyms). The
- * federation boundary is structural: nothing in this module writes to a board, and the multitude-view reads
- * the pet-name locally, never announces it.
+ * NEVER PUBLICLY FEDERATES — it FLEET-SYNCS among the human's own vessels. The pet-name map names a human's
+ * OWN faces to THEMSELVES — "work", "the-guru", "the throwaway". It rides the private inside of the private
+ * Vault (persona-circle#the-vault): a label the human puts on their own compartment, which their own devices
+ * SHOULD carry and which no peer outside the fleet ever reads. The boundary the module holds runs PUBLIC, not
+ * cross-vessel: nothing here writes to a board, and the multitude-view reads the pet-name locally, never
+ * announces it.
+ *
+ * THE BINDING LAW. Only a PUBLICLY ANNOUNCED HANDLE binds a PersonaGroup to a public glamour (persona-glamour
+ * mints that card; who-face announces it). A pet-name string carries no such binding and MUST NOT reach a
+ * federating document by any path — a private label that lands on a board publishes a face the human never
+ * announced. The chosen string MAY match a glamour word-for-word; the DECLARING act, never the string, makes
+ * it public.
  *
  * DEVICE-FLEET (SURFACED, not blocking). A human's own PersonaGroup rides several of their own vessels; the
- * pet-name map WANTS to sync across that private vessel-pool, private-federated over a PRIVATE BAG in the
+ * pet-name map SYNCS across that private vessel-pool, private-federated over a PRIVATE BAG in the
  * PersonaGroup. That cross-pool sync rides the device-fleet, which is not yet built (blocks on Beelay). So
- * the shore stays LOCAL-FIRST: the store persists per-vessel today, and a future federated adapter wraps the
+ * the shore stays LOCAL-FIRST: the store persists per-vessel today, and a future fleet adapter wraps the
  * same `OwnPersonaPetnameStore` shape over a private bag — the interface never moves, the sync drops in.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-policy
@@ -27,9 +33,9 @@ import { assertHandleIndex, type PersonaVault } from "./persona-vault.js";
 
 /**
  * How a runtime persists the human's PRIVATE own-persona pet-names — a `{handleIndex -> petname}` map,
- * freely renamable, NEVER federated. A platform supplies the shore (node fs JSON / browser IDB), mirroring
- * the PersonaVault's own selector/anchor stores; a later device-fleet adapter wraps this same shape over a
- * private bag for cross-vessel sync (see the module header).
+ * freely renamable, never PUBLICLY federated (it fleet-syncs among the human's own vessels). A platform
+ * supplies the shore (node fs JSON / browser IDB), mirroring the PersonaVault's own selector/anchor stores;
+ * a later device-fleet adapter wraps this same shape over a private bag for cross-vessel sync (module header).
  */
 export interface OwnPersonaPetnameStore {
   /** Read the local pet-name for a persona, or undefined when the human has named none. */
@@ -44,7 +50,7 @@ export interface OwnPersonaPetnameStore {
 
 /**
  * renameOwnPersona — set the human's PRIVATE label for one of their own personas. The pet-name carries no
- * authority and no federation — it renames a compartment to its keeper alone. A blank label reads as a
+ * authority and no PUBLIC reach — it renames a compartment to its keeper and their own fleet. A blank label reads as a
  * clear-request refused here (the caller uses `clearOwnPersonaPetname` to drop a name) so an empty write
  * never silently erases a label.
  */
