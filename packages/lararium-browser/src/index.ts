@@ -28,7 +28,7 @@ export type { BrowserVesselIdentity } from "./browser-vessel-identity.js";
 // federates) + the PUBLIC own-published-face record. Browser twins of the node fs stores; distinct from the
 // handle-book.
 export {
-  makeBrowserPersonaPetnameStore, makeBrowserPublicHandleStore,
+  makeBrowserPersonaPetnameStore, makeBrowserPublicHandleStore, makeBrowserPersonaDeclarationStore,
 } from "./browser-vessel-identity.js";
 
 export {

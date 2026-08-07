@@ -65,6 +65,8 @@ import {
   type ActivePersonaStore,
   type PersonaRoot,
   type OwnPersonaPetnameStore,
+  type PersonaDeclaration,
+  type PersonaDeclarationStore,
   type OwnPublicHandleStore,
   type PersonaPublicHandleRecord,
 } from "@lararium/mesh";
@@ -615,6 +617,68 @@ export async function makeNodePersonaPetnameStore(): Promise<OwnPersonaPetnameSt
     },
     async entries() {
       return Object.entries(readPetnameMap(idDir, login))
+        .map(([k, v]) => [Number(k), v] as const)
+        .filter(([k]) => Number.isSafeInteger(k) && k >= 0)
+        .sort((a, b) => a[0] - b[0]);
+    },
+  };
+}
+
+// ── The DECLARATION store — what a persona declares outward, before any announce ─────────────────────
+//
+// The third own-side store (persona-declare): the Handle a persona answers to + whether it stands for a Kahu
+// seat. It sits between the private pet-name and the published record so neither welds to the other — a
+// declared Handle stays a private intent until an announce binds it (the binding law).
+
+/** The declaration map filename — login-scoped, beside the pet-name map. */
+function personaDeclarationFileName(login: string | null): string {
+  return login ? `.persona-declarations-${login}.json` : ".persona-declarations.json";
+}
+
+/** Read the `{handleIndex -> declaration}` map from disk, or {} when none / a torn file reads back. */
+function readDeclarationMap(idDir: string, login: string | null): Record<string, PersonaDeclaration> {
+  const file = join(idDir, personaDeclarationFileName(login));
+  if (!existsSync(file)) return {};
+  try {
+    const raw = JSON.parse(readFileSync(file, "utf8")) as { declarations?: unknown };
+    if (raw.declarations && typeof raw.declarations === "object") {
+      return raw.declarations as Record<string, PersonaDeclaration>;
+    }
+  } catch { /* a torn map reads empty — a re-declare re-records what the human meant to wear */ }
+  return {};
+}
+
+/** Write the `{handleIndex -> declaration}` map to disk (0o600) — an intent, never a published fact. */
+function writeDeclarationMap(idDir: string, login: string | null, declarations: Record<string, PersonaDeclaration>): void {
+  mkdirSync(idDir, { recursive: true });
+  const file = join(idDir, personaDeclarationFileName(login));
+  writeFileSync(file, JSON.stringify({ declarations }, null, 2), { mode: 0o600, encoding: "utf8" });
+  try { chmodSync(file, 0o600); } catch { /* best-effort on a non-POSIX fs */ }
+}
+
+/**
+ * Build the node fs PersonaDeclarationStore — what each persona declares outward. Login-scoped, 0o600, in the
+ * identity home beside the pet-name map. Nothing here reaches a board: a declaration says what the human
+ * MEANS to wear, and only an announce (persona-glamour) binds a persona to a public glamour.
+ */
+export async function makeNodePersonaDeclarationStore(): Promise<PersonaDeclarationStore> {
+  const hint  = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const idDir = larIdentityDir();
+  const login = hint.login;
+  return {
+    async get(handleIndex) { return readDeclarationMap(idDir, login)[String(handleIndex)]; },
+    async set(handleIndex, declaration) {
+      const all = readDeclarationMap(idDir, login);
+      all[String(handleIndex)] = declaration;
+      writeDeclarationMap(idDir, login, all);
+    },
+    async clear(handleIndex) {
+      const all = readDeclarationMap(idDir, login);
+      delete all[String(handleIndex)];
+      writeDeclarationMap(idDir, login, all);
+    },
+    async entries() {
+      return Object.entries(readDeclarationMap(idDir, login))
         .map(([k, v]) => [Number(k), v] as const)
         .filter(([k]) => Number.isSafeInteger(k) && k >= 0)
         .sort((a, b) => a[0] - b[0]);

@@ -25,7 +25,7 @@
 
 import {
   readNexusDoc, writeNexusDoc, writeNexusSeal, writeNexusKahu, writeNexusPractice, nexusCharterDocPath,
-  listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore,
+  listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaDeclarationStore,
   runNexusKapae, runNexusKapaeList, NexusKapaeError,
   runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError,
   sealReserveMineShare, writeCharterReserveState, readCharterReserveState,
@@ -33,7 +33,7 @@ import {
 import { federationPostureFromDoc, type FederationPosture } from "@lararium/mesh";
 import {
   emptyFoundingCharterDoc, rosterFromNexusDoc, foundingQuorumSeated, sealLineageHead,
-  ownPersonaPetname, genesisCharterEpoch, rotateSealEpoch, sealKeySetHash,
+  personasStandingForSeat, genesisCharterEpoch, rotateSealEpoch, sealKeySetHash,
   generateReserveSeed, deriveReserveKeySet, reserveNextKeyCommit, splitReserveSeed,
   RESERVE_THRESHOLD, RESERVE_KAHU_COUNT, defaultCryptoProvider,
   type NexusDoc, type NexusCharterKahu, type SealEpoch, type ReserveCard,
@@ -372,17 +372,21 @@ const normHex = (s: string | undefined): string => (s ?? "").trim().toLowerCase(
 async function seatKahuFromVault(
   doc: NexusDoc, dataDir: string,
 ): Promise<{ kahu: NexusCharterKahu[]; seatedKeys: string[] }> {
-  const held = await listPersonaRoots(dataDir);
-  const petnames = await makeNodePersonaPetnameStore();
-  const byPetname = new Map<string, string>();   // normalized pet-name → verifying key hex
-  for (const index of held) {
-    const petname = await ownPersonaPetname(petnames, index);
-    if (!petname) continue;                       // an unnamed persona cannot match a named kahu
+  // The join reads the DECLARED HANDLE, never the private pet-name. Matching on the label would weld the two
+  // registers — a human could then only seat under the same string they call the compartment at home, and
+  // every private label would quietly become a public commitment. A persona reaches a chair by declaring the
+  // Handle it answers to AND standing for a seat; both are the human's own explicit acts (persona-declare).
+  const held = new Set(await listPersonaRoots(dataDir));
+  const declarations = await makeNodePersonaDeclarationStore();
+  const standing = await personasStandingForSeat(declarations);
+  const byHandle = new Map<string, string>();   // normalized declared Handle → verifying key hex
+  for (const [index, handle] of standing) {
+    if (!held.has(index)) continue;             // a declaration without a held root seats nothing here
     const root = await generateOrLoadPersonaGroupRoot(dataDir, index);   // loads a held root; never mints here
-    byPetname.set(norm(petname), root.verifyingKey);
+    byHandle.set(norm(handle), root.verifyingKey);
   }
   const kahu: NexusCharterKahu[] = doc.kahu.map((k) => {
-    const matched = byPetname.get(norm(k.displayName));
+    const matched = byHandle.get(norm(k.displayName));
     return { displayName: k.displayName, verifyingKey: matched ?? k.verifyingKey };
   });
   const seatedKeys = kahu.map((k) => k.verifyingKey).filter((v): v is string => typeof v === "string" && v.length > 0);
@@ -443,7 +447,8 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
       } else {
         const missing = kahu.filter((k) => !k.verifyingKey).map((k) => `"${k.displayName}"`);
         console.log(`  quorum SHORT (fail-closed; the antigen stays inert). Unseated: ${missing.join(", ") || "(none)"}`);
-        console.log(`  seat them: lares persona new <index> --name '<displayName>'  →  lares nexus seal seat`);
+        console.log(`  seat them: lares persona new <index> --name '<label>' --handle '<Handle>' --seat  →  lares nexus seal seat`);
+        console.log(`  (a chair joins on the DECLARED Handle, never on the private label)`);
       }
     },
   });

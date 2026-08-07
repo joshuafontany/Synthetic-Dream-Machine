@@ -1,17 +1,24 @@
 /**
  * founding-three-personas — the THREE SYMMETRIC founding commands, driven end-to-end through the REAL
- * `lares persona new` door + the bags/@nexus charter seat, over a genuine vault + petname store on disk.
+ * `lares persona new` door + the bags/@nexus charter seat, over a genuine vault + petname/declaration stores.
  *
  * Operator intent: h0/h1/h2 stand as THREE SYMMETRIC EXPLICIT commands, not h0 auto-bound behind the seat.
- * `wake --install` STANDS h0's operator-root (it signs the founding bind), and `persona new 0 --name` LOADS
- * that same pre-standing founder idempotently + sets its private pet-name — byte-symmetric with `new 1`/`new 2`.
+ * `wake --install` STANDS h0's operator-root (it signs the founding bind), and `persona new 0` LOADS that same
+ * pre-standing founder idempotently + sets its private label — byte-symmetric with `new 1`/`new 2`.
+ *
+ * THE JOIN READS THE DECLARED HANDLE, NEVER THE PRIVATE LABEL. A chair belongs to whoever declared the Handle
+ * it names AND stood for a seat; the pet-name labels a compartment and reaches no roster. That keeps the two
+ * registers independent — the private label here reads NOTHING like the public Handle, and the seat still
+ * lands, which a label-matching join could never do.
  *
  * Proven:
- *   · `persona new 0/1/2 --name '<kahu>'` each returns 0; the roster then reads [0,1,2] with all three pet-names,
- *   · `persona new 0` on a PRE-STANDING founder root LOADS it (created:false) and STILL sets the pet-name
+ *   · `persona new 0/1/2 --name '<label>' --handle '<kahu>' --seat` each returns 0; the roster reads [0,1,2]
+ *     with all three private labels, and all three declared Handles beside them,
+ *   · `persona new 0` on a PRE-STANDING founder root LOADS it (created:false) and STILL lands label+declaration
  *     (idempotent — the founder is named, never re-minted, its verifying key unchanged),
- *   · `nexus seal seat` joins persona→kahu BY pet-name and seats ALL THREE (the founder among them) —
- *     the full 3-of-3 stands, never a 2-of-3 that strands the founder unnamed.
+ *   · `nexus seal seat` joins persona→kahu BY DECLARED HANDLE and seats ALL THREE (the founder among them) —
+ *     the full 3-of-3 stands, never a 2-of-3 that strands the founder unnamed,
+ *   · a persona that declares a Handle but does NOT stand for a seat stays UNSEATED — standing is its own act.
  */
 import { afterEach, beforeEach, describe, test, expect, vi } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
@@ -22,18 +29,23 @@ import { cmdNexus } from "../src/commands/nexus.js";
 import type { ParsedArgs } from "../src/parse-args.js";
 import { larBagsDir, larDataDir } from "../src/env.js";
 import {
-  generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, listPersonaRoots, readNexusDoc,
+  generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, makeNodePersonaDeclarationStore,
+  listPersonaRoots, readNexusDoc,
 } from "@lararium/node";
-import { ownPersonaPetname, foundingQuorumSeated } from "@lararium/mesh";
+import { ownPersonaPetname, declaredHandle, foundingQuorumSeated } from "@lararium/mesh";
 
+/** The three chair names the seal seeds — the PUBLIC Handles each founding persona answers to. */
 const KAHU = ["Guru Joshua Fontany", "Telarus, KSC", "The Lindwyrm"];
+/** The human's PRIVATE labels for the same three compartments — deliberately unlike the Handles above. */
+const LABELS = ["the-guru", "ksc-work", "wyrm-burner"];
 const saved: Record<string, string | undefined> = {};
 const setEnv = (k: string, v: string | undefined): void => {
   saved[k] = process.env[k];
   if (v === undefined) delete process.env[k]; else process.env[k] = v;
 };
-const personaArgs = (positional: string[], options: Record<string, string> = {}): ParsedArgs =>
-  ({ command: "persona", positional, options, flags: { json: true } });
+const personaArgs = (
+  positional: string[], options: Record<string, string> = {}, flags: Record<string, boolean> = {},
+): ParsedArgs => ({ command: "persona", positional, options, flags: { json: true, ...flags } });
 const nexusArgs = (positional: string[], options: Record<string, string> = {}): ParsedArgs =>
   ({ command: "nexus", positional, options, flags: { json: true } });
 
@@ -52,15 +64,18 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     rmSync(root, { recursive: true, force: true });
   });
 
-  test("persona new 0/1/2 --name → roster [0,1,2], every kahu named; the door is symmetric", async () => {
+  test("persona new 0/1/2 → roster [0,1,2]; the private label and the declared Handle land SEPARATELY", async () => {
     for (let i = 0; i < KAHU.length; i++) {
-      expect(await cmdPersona(personaArgs(["new", String(i)], { name: KAHU[i]! }))).toBe(0);
+      expect(await cmdPersona(personaArgs(["new", String(i)], { name: LABELS[i]!, handle: KAHU[i]! }, { seat: true }))).toBe(0);
     }
     expect(await listPersonaRoots(larDataDir())).toEqual([0, 1, 2]);
 
     const petnames = await makeNodePersonaPetnameStore();
+    const declarations = await makeNodePersonaDeclarationStore();
     for (let i = 0; i < KAHU.length; i++) {
-      expect(await ownPersonaPetname(petnames, i)).toBe(KAHU[i]);
+      expect(await ownPersonaPetname(petnames, i)).toBe(LABELS[i]);      // the compartment's own label
+      expect(await declaredHandle(declarations, i)).toBe(KAHU[i]);        // what it answers to outward
+      expect(LABELS[i]).not.toBe(KAHU[i]);                                // the two registers stay independent
     }
   });
 
@@ -69,19 +84,19 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     const founder = await generateOrLoadPersonaGroupRoot(larDataDir(), 0);
     expect(founder.created).toBe(true);
 
-    // `persona new 0 --name` LOADS that same root (never re-mints) AND lands its pet-name.
-    expect(await cmdPersona(personaArgs(["new", "0"], { name: KAHU[0]! }))).toBe(0);
+    // `persona new 0` LOADS that same root (never re-mints) AND lands both the label and the declaration.
+    expect(await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }, { seat: true }))).toBe(0);
     const reloaded = await generateOrLoadPersonaGroupRoot(larDataDir(), 0);
     expect(reloaded.created).toBe(false);
     expect(reloaded.verifyingKey).toBe(founder.verifyingKey);   // the founder key is unchanged — loaded, not re-minted
 
-    const petnames = await makeNodePersonaPetnameStore();
-    expect(await ownPersonaPetname(petnames, 0)).toBe(KAHU[0]);
+    expect(await ownPersonaPetname(await makeNodePersonaPetnameStore(), 0)).toBe(LABELS[0]);
+    expect(await declaredHandle(await makeNodePersonaDeclarationStore(), 0)).toBe(KAHU[0]);
   });
 
-  test("seat joins by pet-name and seats ALL THREE — the full quorum stands, the founder among the seated", async () => {
+  test("seat joins by DECLARED HANDLE and seats ALL THREE — the full quorum stands, the founder among the seated", async () => {
     for (let i = 0; i < KAHU.length; i++) {
-      await cmdPersona(personaArgs(["new", String(i)], { name: KAHU[i]! }));
+      await cmdPersona(personaArgs(["new", String(i)], { name: LABELS[i]!, handle: KAHU[i]! }, { seat: true }));
     }
     expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
 
@@ -94,5 +109,31 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     const founder = doc!.kahu.find((k) => k.displayName === KAHU[0]);
     expect(founder?.verifyingKey).toBeTruthy();
     expect(foundingQuorumSeated(doc)).toBe(true);
+  });
+
+  test("★ a declared Handle WITHOUT --seat stays UNSEATED — standing for a chair is its own act ★", async () => {
+    // h0 and h1 stand; h2 declares the same Handle its chair names but never offers itself.
+    await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }, { seat: true }));
+    await cmdPersona(personaArgs(["new", "1"], { name: LABELS[1]!, handle: KAHU[1]! }, { seat: true }));
+    await cmdPersona(personaArgs(["new", "2"], { name: LABELS[2]!, handle: KAHU[2]! }));
+
+    expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
+    const doc = readNexusDoc(larBagsDir());
+    const unstood = doc!.kahu.find((k) => k.displayName === KAHU[2]);
+    expect(unstood?.verifyingKey).toBeFalsy();          // it declared the name and never offered the chair
+    // The 2-of-3 threshold still stands on the two that DID offer — the seal reports an empty chair rather
+    // than reading a declaration as consent to sit in it.
+    expect(doc!.kahu.filter((k) => k.verifyingKey).length).toBe(2);
+    expect(foundingQuorumSeated(doc)).toBe(true);
+  });
+
+  test("★ the PRIVATE label never reaches the seal — the doc carries chair names and keys, no compartment labels ★", async () => {
+    for (let i = 0; i < KAHU.length; i++) {
+      await cmdPersona(personaArgs(["new", String(i)], { name: LABELS[i]!, handle: KAHU[i]! }, { seat: true }));
+    }
+    await cmdNexus(nexusArgs(["seal", "seat"]));
+
+    const wire = JSON.stringify(readNexusDoc(larBagsDir()));
+    for (const label of LABELS) expect(wire).not.toContain(label);
   });
 });

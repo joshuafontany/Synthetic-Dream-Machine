@@ -30,6 +30,8 @@ import {
   type AnchorStore,
   type IdentityAnchors,
   type OwnPersonaPetnameStore,
+  type PersonaDeclaration,
+  type PersonaDeclarationStore,
   type OwnPublicHandleStore,
   type PersonaPublicHandleRecord,
 } from "@lararium/mesh";
@@ -40,7 +42,7 @@ const KEY_RECORD = "vessel-key";
 // social bootstrap (the founding floor); the persona-multitude stores mirror the node fs vault's
 // per-index files. Every store bumps the DB version together, so a reboot upgrades additively (the
 // device key + bootstrap survive; the new stores appear empty until a persona founds).
-const IDB_VERSION       = 4;
+const IDB_VERSION       = 5;
 const PERSONA_ROOTS_STORE  = "persona-roots";     // per-index persona-root keypairs (self-sovereign secret)
 const PERSONA_ROSTER_STORE = "persona-roster";    // the EXPLICIT held-root record (never a keys()-scan)
 const ACTIVE_PERSONA_STORE = "active-persona";    // the worn-mask pointer (one handle-index)
@@ -50,6 +52,9 @@ const ANCHOR_ROSTER_STORE  = "anchor-roster";     // the EXPLICIT anchored-index
 // federates) + the PUBLIC own-published-face record. Per-index, keyed by `h${N}` like the persona-root slots.
 const PERSONA_PETNAME_STORE      = "persona-petnames";        // handleIndex → the human's PRIVATE label
 const PERSONA_PUBLIC_HANDLE_STORE = "persona-public-handles"; // handleIndex → the vessel's OWN published face
+// The DECLARATION store — the Handle a persona answers to + whether it stands for a Kahu seat. It sits
+// between the two above so a private compartment label never becomes a public commitment by accident.
+const PERSONA_DECLARATION_STORE  = "persona-declarations";    // handleIndex → PersonaDeclaration
 // v4 additive stores (all causal-island-LOCAL, never federated):
 export const BOOT_INVITE_BURN_STORE = "boot-invite-burned";  // burned invite-id → 1 (single-use, local burn)
 export const CIRCLE_STORE           = "circles-follow";      // circleId → nym[] (the IoC follow-graph, private)
@@ -93,6 +98,7 @@ export function openVesselIdb(idbName: string): Promise<IDBDatabase> {
       // human labels one / publishes a glamour.
       if (!db.objectStoreNames.contains(PERSONA_PETNAME_STORE))       db.createObjectStore(PERSONA_PETNAME_STORE);
       if (!db.objectStoreNames.contains(PERSONA_PUBLIC_HANDLE_STORE)) db.createObjectStore(PERSONA_PUBLIC_HANDLE_STORE);
+      if (!db.objectStoreNames.contains(PERSONA_DECLARATION_STORE))   db.createObjectStore(PERSONA_DECLARATION_STORE);
       // v4 additive: the traceless boot-invite's LOCAL burn-set (browser twin of node's boot-invite-burned
       // ledger) + the IoC follow's private stores (circle-graph + handle-book). All causal-island-LOCAL —
       // none federate. A v3 DB gains them empty; nothing is spent/followed until the vessel acts.
@@ -461,6 +467,45 @@ function handleIndexFromKey(key: string): number | null {
   if (!m) return null;
   const n = Number(m[1]);
   return Number.isSafeInteger(n) && n >= 0 ? n : null;
+}
+
+/**
+ * Build the IDB PersonaDeclarationStore — what each persona declares outward: the Handle it answers to and
+ * whether it stands for a Kahu seat. Keyed `h${N}`, the browser twin of the node fs declaration map. Nothing
+ * here reaches a board — a declaration carries an intent, and only an announce binds a persona to a glamour.
+ */
+export async function makeBrowserPersonaDeclarationStore(idbName = "lares:vessel"): Promise<PersonaDeclarationStore> {
+  return {
+    async get(handleIndex) {
+      const db = await openVesselIdb(idbName);
+      const v  = await idbGet<PersonaDeclaration>(db, PERSONA_DECLARATION_STORE, personaPetnameKey(handleIndex));
+      db.close();
+      return v && typeof v === "object" ? v : undefined;
+    },
+    async set(handleIndex, declaration) {
+      const db = await openVesselIdb(idbName);
+      await idbPut(db, PERSONA_DECLARATION_STORE, personaPetnameKey(handleIndex), declaration);
+      db.close();
+    },
+    async clear(handleIndex) {
+      const db = await openVesselIdb(idbName);
+      await idbDelete(db, PERSONA_DECLARATION_STORE, personaPetnameKey(handleIndex));
+      db.close();
+    },
+    async entries() {
+      const db = await openVesselIdb(idbName);
+      const keys = await idbKeys(db, PERSONA_DECLARATION_STORE);
+      const pairs: Array<readonly [number, PersonaDeclaration]> = [];
+      for (const key of keys) {
+        const i = handleIndexFromKey(key);
+        if (i === null) continue;
+        const v = await idbGet<PersonaDeclaration>(db, PERSONA_DECLARATION_STORE, key);
+        if (v && typeof v === "object") pairs.push([i, v] as const);
+      }
+      db.close();
+      return pairs.sort((a, b) => a[0] - b[0]);
+    },
+  };
 }
 
 /**

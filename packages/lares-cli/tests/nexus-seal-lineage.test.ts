@@ -22,9 +22,11 @@ import { cmdNexus } from "../src/commands/nexus.js";
 import type { ParsedArgs } from "../src/parse-args.js";
 import { larBagsDir, larDataDir } from "../src/env.js";
 import {
-  generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, readNexusDoc,
+  generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, makeNodePersonaDeclarationStore, readNexusDoc,
 } from "@lararium/node";
-import { renameOwnPersona, sealKeySetHash, sealLineageHead } from "@lararium/mesh";
+import {
+  renameOwnPersona, declarePersonaHandle, standForKahuSeat, sealKeySetHash, sealLineageHead,
+} from "@lararium/mesh";
 
 const KAHU = ["Guru Joshua Fontany", "Telarus, KSC", "The Lindwyrm"];
 const saved: Record<string, string | undefined> = {};
@@ -50,13 +52,18 @@ describe("lares nexus seal — the pre-rotated chain ceremony (CLI, real vault +
     rmSync(root, { recursive: true, force: true });
   });
 
-  /** Seed the three founding kahu into the vault (pet-name → root key) and return their verifying keys. */
+  /** Seed the three founding kahu into the vault and return their verifying keys. Each persona carries a
+   *  private label AND declares the Handle its chair names, then stands for the seat — the seal joins on the
+   *  DECLARED Handle, so the label here deliberately reads nothing like it. */
   async function seatVault(): Promise<string[]> {
     const petnames = await makeNodePersonaPetnameStore();
+    const declarations = await makeNodePersonaDeclarationStore();
     const keys: string[] = [];
     for (let i = 0; i < KAHU.length; i++) {
       const rt = await generateOrLoadPersonaGroupRoot(larDataDir(), i);
-      await renameOwnPersona(petnames, i, KAHU[i]!);
+      await renameOwnPersona(petnames, i, `compartment-${i}`);
+      await declarePersonaHandle(declarations, i, KAHU[i]!);
+      await standForKahuSeat(declarations, i, true);
       keys.push(rt.verifyingKey);
     }
     return keys;

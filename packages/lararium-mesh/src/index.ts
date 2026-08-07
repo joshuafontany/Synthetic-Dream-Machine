@@ -16,6 +16,7 @@ export * from "./anchor-store.js";
 export * from "./persona-vault.js";
 export * from "./vessel-standing.js";
 export * from "./persona-petname.js";
+export * from "./persona-declare.js";
 export * from "./persona-glamour.js";
 export * from "./recovery-keel-core.js";
 export * from "./guardian-card.js";

@@ -217,6 +217,9 @@ export type { PersonaGroupRoot } from "./node-vessel-identity.js";
 // federates) + the PUBLIC own-published-face record (persona → @crossroads glamour, the one act that binds a
 // persona to a public name). Distinct stores, distinct from the handle-book.
 export { makeNodePersonaPetnameStore, makeNodePublicHandleStore } from "./node-vessel-identity.js";
+// The DECLARATION store — the Handle a persona answers to + whether it stands for a Kahu seat. Sits between
+// the private label and the published record so a private compartment name never becomes a public commitment.
+export { makeNodePersonaDeclarationStore } from "./node-vessel-identity.js";
 
 // The IoC follow — the node-fs LOCAL adapters for the private circle-graph + the recogniser's handle-book.
 // Both under the identity home, 0o600, never federated (the `lares circle` door drives them via composeFollow).
