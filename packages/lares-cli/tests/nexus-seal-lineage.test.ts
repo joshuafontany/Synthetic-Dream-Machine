@@ -128,4 +128,51 @@ describe("lares nexus seal — the pre-rotated chain ceremony (CLI, real vault +
     const rc = await cmdNexus(args(["seal", "commit"], { keys: `${"a".repeat(64)},${"b".repeat(64)}`, threshold: "2" }));
     expect(rc).toBe(0);   // the digest itself is asserted against sealKeySetHash at the mesh layer
   });
+
+  test("★ SUCCESSION rides ROTATE — the roster becomes exactly what stands, and the pre-commitment still gates it ★", async () => {
+    // Three stand and seal a genesis armed for a FOUR-key successor. Then a fourth persona stands. The
+    // rotation lands ONLY because the operator pre-committed that exact four-key set an epoch earlier —
+    // which is the whole no-admin property: nobody adds a kahu quietly.
+    const keys = await seatVault();
+    const petnames     = await makeNodePersonaPetnameStore();
+    const declarations = await makeNodePersonaDeclarationStore();
+
+    // Stand the fourth NOW, so its key exists to pre-commit against — then step it back until the rotation.
+    const fourth = await generateOrLoadPersonaGroupRoot(larDataDir(), 3);
+    await renameOwnPersona(petnames, 3, "compartment-3");
+    await declarePersonaHandle(declarations, 3, "Kahu Delta");
+    await standForKahuSeat(declarations, 3, false);
+
+    const successor = [...keys, fourth.verifyingKey];
+    const commit = sealKeySetHash(successor, 3);
+    expect(await cmdNexus(args(["seal", "seat"], { "next-key-commit": commit, threshold: "2" }))).toBe(0);
+
+    // The fourth now stands — the roster that ROTATE will seat reads four chairs.
+    await standForKahuSeat(declarations, 3, true);
+    expect(await cmdNexus(args(["seal", "rotate"], { threshold: "3" }))).toBe(0);
+
+    const doc = readNexusDoc(larSealHome());
+    expect(doc!.kahu.map((k) => k.displayName).sort()).toEqual([...KAHU, "Kahu Delta"].sort());
+    expect(doc!.threshold).toBe(3);
+    expect(doc!.sealLineage!.length).toBe(2);
+  });
+
+  test("★ a roster change with NO matching pre-commitment REFUSES — a kahu cannot be added or dropped quietly ★", async () => {
+    const keys = await seatVault();
+    // Arm for the SAME three keys — no successor was ever pre-committed for a four-chair roster.
+    expect(await cmdNexus(args(["seal", "seat"], { "next-key-commit": sealKeySetHash(keys, 2), threshold: "2" }))).toBe(0);
+
+    const petnames     = await makeNodePersonaPetnameStore();
+    const declarations = await makeNodePersonaDeclarationStore();
+    await generateOrLoadPersonaGroupRoot(larDataDir(), 3);
+    await renameOwnPersona(petnames, 3, "compartment-3");
+    await declarePersonaHandle(declarations, 3, "Kahu Delta");
+    await standForKahuSeat(declarations, 3, true);
+
+    expect(await cmdNexus(args(["seal", "rotate"]))).not.toBe(0);
+    // Nothing moved: the chain stays at genesis and the roster keeps its three chairs.
+    const doc = readNexusDoc(larSealHome());
+    expect(doc!.sealLineage!.length).toBe(1);
+    expect(doc!.kahu.length).toBe(3);
+  });
 });

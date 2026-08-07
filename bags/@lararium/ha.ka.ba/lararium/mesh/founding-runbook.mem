@@ -11,7 +11,7 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27; THIRD PASS 2026-08-06 re-points the seat join from the PRIVATE pet-name to the DECLARED HANDLE (three acts per founding command: --name labels privately, --handle declares outward, --seat stands for a chair) and gathers the names onto the fleet via `persona sync`."
+role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27; THIRD PASS 2026-08-06/07 re-points the seat join from the PRIVATE pet-name to the DECLARED HANDLE (three acts per founding command: --name labels privately, --handle declares outward, --seat stands for a chair), gathers the names onto the fleet via `persona sync`, RETIRES the built-in founding names (the roster forms from what stood; the threshold derives majority), re-homes the seal per-operator at <state>/nexus, and lands the @nexus LIFECYCLE (born by act · lives by ley-line traffic · quiet by absence — no admin capability anywhere; succession rides ROTATE under the standing pre-commitment) plus the bag-HOME axis (repository | hearth | ley, fail-closed to hearth)."
 status    = "proposed"
 revised-on = "2026-08-06"
 tags      = ["mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/charter-chain"]
@@ -182,7 +182,69 @@ same string into both flags proves nothing, because a label-matching join would 
 
 ''The shared shape.'' Each named ''a thing decided somewhere the operator does not stand'' — a private label
 deciding a public chair, a build deciding a roster, a stale artifact deciding a lineage, a directory default
-deciding where a Nexus lives. ''A founding an operator merely confirms reads as somebody else's founding.
+deciding where a Nexus lives. ''A founding an operator merely confirms reads as somebody else's founding.''
+
+<<~/ahu >>
+
+<<~ ahu #nexus-lifecycle >>
+
+!! The @nexus lifecycle ~ born by act, lives by traffic, quiet by absence
+
+''THE MYTH HOLDS THE MODEL'' (operator, 2026-08-07). A Nexus names several vessels syncing across a ''ley-line
+network'' — so ''no network traffic, no live Nexus''. Liveness reads off the lines themselves; nothing
+declares it, and nobody grants it.
+
+''WHICH ANSWERS DISSOLUTION WITHOUT AN ADMIN CAPABILITY.'' A Nexus is never dissolved — ''it goes quiet''. That
+rhymes with every neighbouring ruling rather than inventing a new shape: a cabal-realm ''DISSOLVES BY COOLING''
+and never by an act; a standing lift ''EXPIRES'' and no party holds a lowering act; //nobody dissolves a Cabal
+by preventing its meetings//. ''The correct admin capability here reads as NONE.''
+
+\procedure ~Stage(~Type:"" ~Params:"") ~Stage <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Stage Birth "verb/nexus-seal-seat admin/none ~ the operator's own personas declare and stand" >>
+<<~Stage Advance "verb/nexus-seal-rotate admin/none ~ pre-committed, quorum-bound" >>
+<<~Stage Succession "verb/nexus-seal-rotate admin/none ~ the roster becomes exactly what STANDS" >>
+<<~Stage Liveness "verb/none admin/none ~ ley-line traffic; nothing to build" >>
+<<~Stage Quiet "verb/none admin/none ~ the absence of traffic, and that IS the point" >>
+
+''SUCCESSION RIDES ROTATE, and needed no new verb.'' A kahu steps down by ''no longer standing''; a new one
+takes a chair by declaring a Handle and standing. A rotation then seats the roster that stands — and the
+''reveal must still match the prior epoch's pre-commitment'', so a roster change lands only where the operator
+pre-committed that exact successor key-set an epoch earlier, in the open, under the quorum standing then.
+''Nobody adds or drops a kahu quietly'', and no hand holds a capability to do it.
+
+''You cannot change who holds the quorum without changing what the quorum is'' — which is why the succession
+door was already there wearing another name.
+
+<<~/ahu >>
+
+<<~ ahu #bag-home >>
+
+!! Where a bag rests ~ repository ⊥ hearth ⊥ ley
+
+A bag already declares ''who may read it'' (`CapTier`) and ''whether it stands loaded'' (residency
+temperature). Neither answers ''where its bytes rest'', and one pair proves the axis stands apart: the canon
+memes and the Nexus seal read as equally PUBLIC and want ''opposite homes''.
+
+\procedure ~Home(~Type:"" ~Params:"") ~Home <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Home Repository "rests/a-configured-source-control-repo clone-carries/yes ~ canon, memes, seeds — the history IS the point" >>
+<<~Home Hearth "rests/per-operator-state clone-carries/no ~ identity · the seal · the follow-graph · the persona names" >>
+<<~Home Ley "rests/nowhere-durable clone-carries/nothing ~ it lives while the mesh carries it" >>
+
+''FAIL-CLOSED TO HEARTH, and the asymmetry carries the reason.'' Only `hearth` can be wrong quietly — a bag
+that should have ridden the repository merely fails to be shared, and an operator notices. The other two fail
+where it hurts: a mis-defaulted `repository` writes a private thing into a history somebody may already have
+pushed, and a mis-defaulted `ley` gives a durable thing no durable home. ''The default takes the recoverable
+failure.''
+
+''WHAT ENFORCES IT, and the bypass, named.'' `resolveBagHomeDir` holds the ONLY mapping from a declared home
+to a directory. A caller that ''joins its own path'' bypasses it entirely and nothing there can stop it —
+which is precisely how the seal came to sit inside a repository, off a call site reading `LAR_BAGS ?? join(root,
+"bags")`. So this stands as ''a mechanism with a named bypass rather than a guarantee'', and the discipline
+runs: a new bag asks for its directory, and a hand-rolled `join(…bags…)` invites the question why.
+''`repository` refuses outright where no repo stands configured'' — guessing a tree is the failure the axis
+exists to prevent.
 
 <<~/ahu >>
 

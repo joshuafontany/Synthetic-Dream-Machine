@@ -67,8 +67,12 @@ function sealUsage(): void {
   console.error("          establish the GENESIS epoch over their verifying keys:");
   console.error("          --next-key-commit <digest>   the pre-rotation commitment");
   console.error("          [--threshold <k>]            the quorum rule (default: majority of those that stood)");
-  console.error("  rotate  reveal the pre-committed next key-set (now in the vault) + advance the chain:");
+  console.error("  rotate  reveal the pre-committed next key-set (now in the vault) + advance the chain.");
+  console.error("          The roster becomes exactly what STANDS — the succession door: a kahu steps down by");
+  console.error("          no longer standing, a new one takes a chair by standing. Either way the reveal must");
+  console.error("          match the prior epoch's pre-commitment, so no seat moves without notice.");
   console.error("          --next-key-commit <digest-of-the-FOLLOWING-key-set>");
+  console.error("          [--threshold <k>]  the quorum rule for the new roster (default: majority)");
   console.error("  commit  compute a key-set commitment digest:  --keys <k1,k2,...> --threshold <k>");
   console.error("  show    read the current founding-kahu roster + chain head + quorum verdict");
   console.error("  reserve [refresh|show]                     custody the pre-rotation's NEXT key-set:");
@@ -373,8 +377,22 @@ const normHex = (s: string | undefined): string => (s ?? "").trim().toLowerCase(
  * seated — only vault reads flow in. Returns the updated kahu + the seated verifying keys (the CURRENT
  * key-set: at genesis the founding keys, at rotate the revealed next key-set the operator provisioned).
  */
+/**
+ * How a roster treats a chair NOBODY stands for.
+ *
+ *   · "keep" (seat)   — the chair stays, unseated. Before genesis a doc may already carry chairs the operator
+ *                       wrote in a prior pass, and a persona that happens to sit unavailable this minute must
+ *                       not lose its seat to a re-run.
+ *   · "drop" (rotate) — the chair GOES. A rotation is how a Nexus changes who holds it, so the roster becomes
+ *                       exactly what stands. This is the succession door, and it needs no admin verb: the
+ *                       reveal must still match the head's pre-commitment, so an operator cannot quietly drop
+ *                       a kahu — they must have PRE-COMMITTED the successor key-set an epoch earlier, in the
+ *                       open, under the standing quorum.
+ */
+type UnstoodChairs = "keep" | "drop";
+
 async function seatKahuFromVault(
-  doc: NexusDoc, dataDir: string,
+  doc: NexusDoc, dataDir: string, unstood: UnstoodChairs = "keep",
 ): Promise<{ kahu: NexusCharterKahu[]; seatedKeys: string[] }> {
   // THE ROSTER FORMS FROM WHAT STOOD, never from a list this build shipped. A persona reaches a chair by
   // DECLARING the Handle it answers to and STANDING for a seat — two explicit acts on the operator's own
@@ -394,9 +412,10 @@ async function seatKahuFromVault(
     : makeFleetDeclarationStore(localDeclarations, fleetDid);
   const standing = await personasStandingForSeat(declarations);
 
-  // A doc already carrying chairs keeps them — a re-seat before genesis fills keys rather than re-writing who
-  // sits. Chairs nobody stood for stay UNSEATED, and a face standing under a name no chair carries ADDS one.
-  const kahu: NexusCharterKahu[] = doc.kahu.map((k) => ({ ...k }));
+  // A doc already carrying chairs keeps them under "keep" — a re-seat before genesis fills keys rather than
+  // re-writing who sits. Under "drop" (rotation) the roster becomes exactly what stands, which is how a kahu
+  // steps down. Either way, a face standing under a name no chair carries ADDS one.
+  const kahu: NexusCharterKahu[] = unstood === "drop" ? [] : doc.kahu.map((k) => ({ ...k }));
   const chairAt = new Map<string, number>(kahu.map((k, i) => [norm(k.displayName), i]));
 
   for (const [index, handle] of standing) {
@@ -518,22 +537,42 @@ async function sealRotate(args: ParsedArgs): Promise<number> {
 
   // REVEAL: the operator has provisioned the pre-committed next key-set into the vault; seating from the
   // vault reads it back. The revealed key-set becomes the new head's authorized quorum.
-  const { kahu, seatedKeys } = await seatKahuFromVault(doc, dataDir);
-  if (seatedKeys.length < doc.threshold) {
-    throw new UsageError(`the revealed key-set is short of the ${doc.threshold}-of-${doc.kahu.length} quorum (seated ${seatedKeys.length}) — provision the next personas before rotating`);
+  // THE ROSTER BECOMES EXACTLY WHAT STANDS — the succession door. A kahu steps down by no longer standing;
+  // a new one takes a chair by declaring a Handle and standing. Neither needs an admin verb, because the
+  // reveal below must still match the head's PRE-COMMITMENT: a roster change only lands if the operator
+  // pre-committed the successor key-set an epoch earlier, under the quorum that stood then.
+  const { kahu, seatedKeys } = await seatKahuFromVault(doc, dataDir, "drop");
+  if (kahu.length === 0) {
+    throw new UsageError(
+      "no persona stands for a chair — a rotation seats the roster that STANDS, and none does. " +
+      "Stand them first: lares persona new <index> --name '<label>' --handle '<Handle>' --seat",
+    );
+  }
+  const threshold = resolveSeatThreshold(args, doc, kahu.length);
+  if (seatedKeys.length < threshold) {
+    throw new UsageError(`the revealed key-set is short of the ${threshold}-of-${kahu.length} quorum (seated ${seatedKeys.length}) — provision the next personas before rotating`);
   }
   const nextKeyCommit = normHex(args.options["next-key-commit"]);
 
   // FAIL CLOSED: a revealed key-set whose digest does not match the head's pre-commitment REFUSES, and
   // writes nothing. A stolen current key-set cannot forge a successor it never pre-committed.
-  const result = rotateSealEpoch(head, seatedKeys, doc.threshold, nextKeyCommit);
+  const result = rotateSealEpoch(head, seatedKeys, threshold, nextKeyCommit);
   if (!result.ok) {
+    // A CHANGED ROSTER lands here too, and reads as the same refusal for the same reason: the reveal must
+    // match what the prior epoch pre-committed, so adding or dropping a kahu requires having pre-committed
+    // that exact successor set. Naming the possibility turns an opaque digest mismatch into a next step.
+    const rosterMoved = kahu.length !== doc.kahu.length || threshold !== doc.threshold;
     emit(args, {
       ok: false,
       error: { code: "error", message: `rotation REFUSED (fail-closed): ${result.reason}` },
       human: () => {
         console.error(`nexus seal rotate REFUSED (fail-closed): ${result.reason}`);
         console.error(`  the chain stays at epoch ${head.epoch}; nothing written.`);
+        if (rosterMoved) {
+          console.error(`  the roster MOVED (${doc.kahu.length} chairs @ ${doc.threshold} → ${kahu.length} @ ${threshold}).`);
+          console.error(`  a succession lands only if THIS key-set was pre-committed an epoch ago:`);
+          console.error(`    lares nexus seal commit --keys <the new set> --threshold <k>   → arm it on the PRIOR rotation`);
+        }
       },
     });
     return exitFor("error");
@@ -541,9 +580,13 @@ async function sealRotate(args: ParsedArgs): Promise<number> {
 
   const sealLineage: SealEpoch[] = [...(doc.sealLineage ?? []), result.epoch];
   const sealEpochCid = result.epoch.epochCid;
-  const next: NexusDoc = { kind: doc.kind, threshold: doc.threshold, sealEpochCid, sealLineage, kahu };
-  // A rotation ceremony reaches the SEAL joint and nothing else.
+  const next: NexusDoc = { kind: doc.kind, threshold, sealEpochCid, sealLineage, kahu };
+  // A rotation reaches the SEAL joint always, and the KAHU joint only when the roster actually moved — so an
+  // ordinary re-key never rewrites a roster it did not touch.
   const path = writeNexusSeal(sealHome, { kind: next.kind, sealEpochCid, sealLineage }, next);
+  if (kahu.length !== doc.kahu.length || threshold !== doc.threshold) {
+    writeNexusKahu(sealHome, { threshold, kahu }, next);
+  }
   const armed = nextKeyCommit.length > 0;
 
   emit(args, {
