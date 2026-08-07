@@ -359,14 +359,14 @@ async function kapaeList(args: ParsedArgs): Promise<number> {
   }
 }
 
-/** normalize a display/pet-name for matching — trimmed, case-folded (a pet-name is a private human label). */
+/** normalize a chair name / declared Handle for matching — trimmed, case-folded (a human types either). */
 const norm = (s: string): string => s.trim().toLowerCase();
 
 /** normalize a commitment/key hex — trimmed, lower-cased (the digest surface stays canonical lowercase hex). */
 const normHex = (s: string | undefined): string => (s ?? "").trim().toLowerCase();
 
 /**
- * Seat each kahu's verifying key from the vault by PRIVATE pet-name match. FAIL CLOSED: no match keeps the
+ * Seat each kahu's verifying key from the vault by DECLARED HANDLE match. FAIL CLOSED: no match keeps the
  * doc's existing key (never invents, never unseats). A verifying key that is not in the vault can never be
  * seated — only vault reads flow in. Returns the updated kahu + the seated verifying keys (the CURRENT
  * key-set: at genesis the founding keys, at rotate the revealed next key-set the operator provisioned).

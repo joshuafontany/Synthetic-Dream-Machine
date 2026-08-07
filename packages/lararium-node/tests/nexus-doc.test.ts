@@ -146,7 +146,7 @@ describe("persona pet-name + seat gesture (the door's core)", () => {
       await generateOrLoadPersonaGroupRoot(root, i);
       await renameOwnPersona(petnames, i, names[i]!);
     }
-    // Replicate the seat gesture the CLI runs: read held roots' verifying keys, match by pet-name.
+    // Replicate the seat gesture the CLI runs: read held roots' verifying keys, match by DECLARED Handle.
     const byPetname = new Map<string, string>();
     for (const index of await listPersonaRoots(root)) {
       const pn = await ownPersonaPetname(petnames, index);

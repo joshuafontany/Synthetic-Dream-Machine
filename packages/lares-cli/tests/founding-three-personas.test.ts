@@ -103,7 +103,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     const doc = readNexusDoc(larBagsDir());
     expect(doc?.kahu.length).toBe(3);
     for (const k of doc!.kahu) {
-      expect(k.verifyingKey, `${k.displayName} seated by pet-name join`).toBeTruthy();
+      expect(k.verifyingKey, `${k.displayName} seated by declared-Handle join`).toBeTruthy();
     }
     // The founder (h0 / "Guru Joshua Fontany") is seated too — never a 2-of-3 that strands it unnamed.
     const founder = doc!.kahu.find((k) => k.displayName === KAHU[0]);
