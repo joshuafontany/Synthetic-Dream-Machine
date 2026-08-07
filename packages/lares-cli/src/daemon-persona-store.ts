@@ -13,10 +13,15 @@
  * to local when the sock is quiet. That posture reads straight off the causal-islands law: a node acts on its
  * own log and reconciles when a peer appears, never blocking on one.
  *
- * WHAT AN UNREACHABLE DAEMON MEANS. Silence here reports NODE-LOCAL, never failure — `lares persona sync`
- * carries the local names up once the hearth breathes. The adapter never swallows a daemon error into a silent
- * local fallback for the SHAPE of the call; it distinguishes "no daemon listening" (expected, pre-boot) from
- * "the daemon refused this verb" (surfaced), so a caller can tell a quiet sock from a real refusal.
+ * A MIRROR NEVER FAILS THE ACT IT MIRRORS. The local write already landed, so an unreachable or refusing
+ * fleet leaves the vessel correct and merely un-carried — and the reverse would be worse than useless: it
+ * would fail `persona new` on exactly the vessels that reach no fleet. A Herm, or any vessel whose @oracle
+ * registry names no @persona, never REGISTERS these verbs at all (capability-degradation by composition), so
+ * "the daemon refused" and "no daemon listening" name the same outcome for the caller: NODE-LOCAL.
+ *
+ * THE REASON STILL TRAVELS. A read hands back a reached/why pair rather than a bare null, so the caller can
+ * print WHY the names stayed home — a quiet sock and a refusing daemon read differently to a human even
+ * though both leave the same state. `lares persona sync` carries the names up once the hearth breathes.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-policy
  */
@@ -46,36 +51,43 @@ export interface FleetSelf {
   readonly handle?: string;
 }
 
-/**
- * A daemon that never answered reads as NODE-LOCAL rather than as a failure — the founding sequence runs
- * before any hearth breathes. A verb the daemon RAN and refused surfaces as itself.
- */
-function quietSock(err: unknown): boolean {
-  const msg = err instanceof Error ? err.message : String(err);
-  return /ECONNREFUSED|ENOENT|not running|no daemon|socket|connect/i.test(msg);
-}
+/** What a fleet call came back with — the names it read, or why they stayed home. */
+export type FleetRead =
+  | { readonly reached: true;  readonly selves: readonly FleetSelf[] }
+  | { readonly reached: false; readonly why: string };
 
-/** Drive one persona verb, or report the sock as quiet. Returns null when no daemon listens. */
-async function callOrQuiet(
+/** Why one fleet call did not land, or null when it did. A mirror reports; it never throws. */
+async function mirror(
   verb: string, args: Record<string, unknown>, requestedBy: string, opts: RunVerbOptions,
-): Promise<Record<string, unknown> | null> {
+): Promise<string | null> {
   try {
     const r = await runVerb(verb, args, requestedBy, opts);
-    if (r.status === "error") throw new Error(r.errorMessage ?? `${verb} failed`);
-    return summaryOutput(r) ?? {};
+    return r.status === "error" ? (r.errorMessage ?? `${verb} failed`) : null;
   } catch (err) {
-    if (quietSock(err)) return null;
-    throw err;
+    return err instanceof Error ? err.message : String(err);
   }
 }
 
-/** Read the whole fleet multitude off @persona, or null when no daemon listens. */
+/** Drive one persona verb; hand back its summary, or the reason it did not land. */
+async function callFleet(
+  verb: string, args: Record<string, unknown>, requestedBy: string, opts: RunVerbOptions,
+): Promise<{ ok: true; out: Record<string, unknown> } | { ok: false; why: string }> {
+  try {
+    const r = await runVerb(verb, args, requestedBy, opts);
+    if (r.status === "error") return { ok: false, why: r.errorMessage ?? `${verb} failed` };
+    return { ok: true, out: summaryOutput(r) ?? {} };
+  } catch (err) {
+    return { ok: false, why: err instanceof Error ? err.message : String(err) };
+  }
+}
+
+/** Read the whole fleet multitude off @persona, or the reason the read did not land. */
 export async function readFleetSelves(
   requestedBy: string, opts: RunVerbOptions = {},
-): Promise<readonly FleetSelf[] | null> {
-  const out = await callOrQuiet("persona-selves", {}, requestedBy, opts);
-  if (out === null) return null;
-  return Array.isArray(out["selves"]) ? (out["selves"] as FleetSelf[]) : [];
+): Promise<FleetRead> {
+  const r = await callFleet("persona-selves", {}, requestedBy, opts);
+  if (!r.ok) return { reached: false, why: r.why };
+  return { reached: true, selves: Array.isArray(r.out["selves"]) ? (r.out["selves"] as FleetSelf[]) : [] };
 }
 
 /**
@@ -88,21 +100,22 @@ export function makeFleetPetnameStore(
 ): OwnPersonaPetnameStore {
   return {
     async get(handleIndex) {
-      const selves = await readFleetSelves(requestedBy, opts);
-      const fleet = selves?.find((s) => s.handleIndex === handleIndex)?.petname;
+      const read = await readFleetSelves(requestedBy, opts);
+      const fleet = read.reached ? read.selves.find((s) => s.handleIndex === handleIndex)?.petname : undefined;
       return fleet ?? await local.get(handleIndex);
     },
     async set(handleIndex, petname) {
       await local.set(handleIndex, petname);
-      await callOrQuiet("persona-label", { handleIndex, petname }, requestedBy, opts);
+      await mirror("persona-label", { handleIndex, petname }, requestedBy, opts);
     },
     async clear(handleIndex) {
       await local.clear(handleIndex);
-      await callOrQuiet("persona-label", { handleIndex, petname: "" }, requestedBy, opts);
+      await mirror("persona-label", { handleIndex, petname: "" }, requestedBy, opts);
     },
     async entries() {
-      const selves = await readFleetSelves(requestedBy, opts);
-      if (selves === null) return local.entries();
+      const read = await readFleetSelves(requestedBy, opts);
+      if (!read.reached) return local.entries();
+      const selves = read.selves;
       // The fleet's view WINS where it names a persona, and the local floor fills the rest — a persona this
       // device named while the sock lay quiet still reads, and `persona sync` carries it up.
       const merged = new Map<number, string>(await local.entries());
@@ -128,24 +141,25 @@ export function makeFleetDeclarationStore(
   };
   return {
     async get(handleIndex) {
-      const selves = await readFleetSelves(requestedBy, opts);
-      return compose(await local.get(handleIndex), selves?.find((s) => s.handleIndex === handleIndex)?.handle);
+      const read = await readFleetSelves(requestedBy, opts);
+      const fleetHandle = read.reached ? read.selves.find((s) => s.handleIndex === handleIndex)?.handle : undefined;
+      return compose(await local.get(handleIndex), fleetHandle);
     },
     async set(handleIndex, declaration) {
       await local.set(handleIndex, declaration);
       if (declaration.handle !== undefined) {
-        await callOrQuiet("persona-handle", { handleIndex, handle: declaration.handle }, requestedBy, opts);
+        await mirror("persona-handle", { handleIndex, handle: declaration.handle }, requestedBy, opts);
       }
     },
     async clear(handleIndex) {
       await local.clear(handleIndex);
-      await callOrQuiet("persona-handle", { handleIndex, handle: "" }, requestedBy, opts);
+      await mirror("persona-handle", { handleIndex, handle: "" }, requestedBy, opts);
     },
     async entries() {
-      const selves = await readFleetSelves(requestedBy, opts);
+      const read = await readFleetSelves(requestedBy, opts);
       const byIndex = new Map<number, PersonaDeclaration>(await local.entries());
-      if (selves !== null) {
-        for (const s of selves) {
+      if (read.reached) {
+        for (const s of read.selves) {
           const composed = compose(byIndex.get(s.handleIndex), s.handle);
           if (composed) byIndex.set(s.handleIndex, composed);
         }

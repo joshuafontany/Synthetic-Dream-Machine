@@ -170,13 +170,15 @@ async function personaNew(args: ParsedArgs): Promise<number> {
   if (handle.length > 0) await declarePersonaHandle(declarations, index, handle);
   if (stands) await standForKahuSeat(declarations, index, true);
   const declaration = await declarations.get(index);
-  const fleetReached = did !== null && (await readFleetSelves(did)) !== null;
+  const fleetRead = did === null
+    ? { reached: false as const, why: "this vessel stands no key yet" }
+    : await readFleetSelves(did);
 
   emit(args, {
     ok: true,
     data: {
       handleIndex: index, petname: name, verifyingKey: root.verifyingKey, created: root.created,
-      handle: declaration?.handle ?? null, seat: declaration?.seat === true, fleet: fleetReached,
+      handle: declaration?.handle ?? null, seat: declaration?.seat === true, fleet: fleetRead.reached,
     },
     human: () => {
       console.log(`persona h${index} ${root.created ? "minted" : "loaded"} — "${name}"`);
@@ -191,8 +193,9 @@ async function personaNew(args: ParsedArgs): Promise<number> {
       if (declaration?.seat === true) {
         console.log(`  STANDS for a Kahu seat on THIS node; take the chair with: lares nexus seal seat`);
       }
-      if (!fleetReached) {
-        console.log(`  node-local for now — no hearth answered; carry it to your other vessels with: lares persona sync`);
+      if (!fleetRead.reached) {
+        console.log(`  NODE-LOCAL for now (${fleetRead.why})`);
+        console.log(`  the name stands here regardless; carry it to your other vessels with: lares persona sync`);
       }
     },
   });
@@ -265,8 +268,9 @@ async function personaSync(args: ParsedArgs): Promise<number> {
   if (did === null) {
     throw new UsageError("this install stands no vessel key — run `lares init` before carrying names to a fleet");
   }
-  if ((await readFleetSelves(did)) === null) {
-    throw new UsageError("no hearth answered — start the node (`lares serve`) so @persona can carry these names");
+  const read = await readFleetSelves(did);
+  if (!read.reached) {
+    throw new UsageError(`the fleet did not answer (${read.why}) — start the node (\`lares serve\`) so @persona can carry these names`);
   }
   const localPetnames     = await makeNodePersonaPetnameStore();
   const localDeclarations = await makeNodePersonaDeclarationStore();

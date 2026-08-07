@@ -136,4 +136,18 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     const wire = JSON.stringify(readNexusDoc(larBagsDir()));
     for (const label of LABELS) expect(wire).not.toContain(label);
   });
+
+  test("★ a MIRROR never fails the act it mirrors — no fleet answers, and the founding still lands ★", async () => {
+    // These tests run with no daemon at all, which IS the founding case: `persona new` runs before any hearth
+    // breathes, and a vessel whose @oracle names no @persona never REGISTERS the fleet verbs at all. Both read
+    // NODE-LOCAL to the caller. A mirror that threw here would fail the founding on exactly the vessels that
+    // reach no fleet.
+    expect(await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }, { seat: true }))).toBe(0);
+
+    // The names stand LOCALLY regardless, so the seat still joins them.
+    expect(await ownPersonaPetname(await makeNodePersonaPetnameStore(), 0)).toBe(LABELS[0]);
+    expect(await declaredHandle(await makeNodePersonaDeclarationStore(), 0)).toBe(KAHU[0]);
+    expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
+    expect(readNexusDoc(larBagsDir())!.kahu.find((k) => k.displayName === KAHU[0])?.verifyingKey).toBeTruthy();
+  });
 });

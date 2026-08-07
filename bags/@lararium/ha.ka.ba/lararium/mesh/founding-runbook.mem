@@ -11,9 +11,9 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27."
+role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27; THIRD PASS 2026-08-06 re-points the seat join from the PRIVATE pet-name to the DECLARED HANDLE (three acts per founding command: --name labels privately, --handle declares outward, --seat stands for a chair) and gathers the names onto the fleet via `persona sync`."
 status    = "proposed"
-revised-on = "2026-07-27"
+revised-on = "2026-08-06"
 tags      = ["mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/charter-chain"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/founding-runbook"
@@ -146,6 +146,24 @@ automated witness (9 of 9, 2026-08-04). ''That witness is not this rite'' — it
 sockets stay polite, and no drop actually drops (#rehearse). It corroborates the SHAPE of movements ②
 and ⊛; it substitutes for no cycle.
 
+!!! THIRD PASS — 2026-08-06, the seat stops reading a private label
+
+''A reading of the rite against the identity plane found the movement-② join reaching for the wrong
+name.'' The seal matched each chair against the operator's ''PRIVATE pet-name'', which welded two
+registers the plane holds apart: an operator could seat only under the string they call the compartment
+at home, so every private label became a public commitment by construction, and a compartment called
+`the-burner` could never stand as `The Lindwyrm`.
+
+''Nothing had leaked'' — the published string always came from the seal's own seed — so the finding names
+a ''forced coupling'', never a disclosure. The correction gives the outward intent its own store and its
+own act (`--handle`), and the chair claim a third (`--seat`), and re-points the join at the declared
+Handle. Movement ② carries the new sequence; ⊛ gather gains `persona sync`, because both names now ride
+the human's own fleet.
+
+''What a rehearsal watches here.'' That the two registers stay ''visibly different'' — set a private
+label that reads nothing like the chair name and confirm the seat still lands. A rehearsal that types the
+same string into both flags proves nothing, because a label-matching join would pass it too.
+
 <<~/ahu >>
 
 <<~ ahu #clear >>
@@ -204,16 +222,37 @@ lares reset --force                                 # pave the vessel store (the
 
 `wake --install` stands the device/vessel identity + the daemon + the founder persona-root h0
 (h0's root signs the founding bind that peers pin — it MUST pre-exist). The three kahu then stand
-as ''three symmetric commands'', each naming its persona so the charter's pet-name join matches all
-three (name h0 too — an unnamed founder strands itself out of its own charter):
+as ''three symmetric commands'' — and each command performs ''THREE ACTS, never one'' (persona-policy,
+2026-08-06). Stand h0 too; an unnamed founder strands itself out of its own charter:
 
 ```
 lares wake --install                                # stands the stack + the founder root h0
-lares persona new 0 --name 'Guru Joshua Fontany'    # loads + names the pre-standing founder
-lares persona new 1 --name 'Telarus, KSC'
-lares persona new 2 --name 'The Lindwyrm'
-lares persona list                                  # confirm h0/h1/h2 stand, all named
+lares persona new 0 --name '<private label>' --handle 'Guru Joshua Fontany' --seat
+lares persona new 1 --name '<private label>' --handle 'Telarus, KSC'        --seat
+lares persona new 2 --name '<private label>' --handle 'The Lindwyrm'        --seat
+lares persona list                                  # h0/h1/h2 stand: label -> declared Handle, each standing for a chair
 ```
+
+''THE THREE ACTS, and why the seal reads only one of them.''
+
+* `--name` sets the ''PRIVATE label'' — what the operator calls that compartment. It rides the human's
+  own fleet (@persona) and ''never publicly federates''.
+* `--handle` declares the ''PUBLIC Handle'' the persona answers to. A ''local intent'', not a publish:
+  only a publicly announced Handle binds a PersonaGroup to a public glamour.
+* `--seat` stands the persona for a ''Kahu chair on THIS node''. It stays local — a chair names a seat
+  on a particular node, so it never rides the fleet.
+
+''THE SEAL JOINS ON THE DECLARED HANDLE, NEVER ON THE LABEL.'' Matching the private label would ''weld
+the two registers'': an operator could then seat only under the same string they call the compartment at
+home, and every private label would become a public commitment by construction. The two MAY read
+word-for-word identical — the operator's `Telarus, KSC` names a compartment privately AND stands as a
+chair name — and they stay ''two acts''. ''The declaring act makes a name public, never the characters.''
+
+''Neither flag implies the other.'' A persona MAY declare a Handle and stand for no chair (the ordinary
+case, and the shape every later persona takes). A `--seat` carrying no Handle ''answers to no chair'',
+so `persona new` refuses it rather than seating a nameless claim, and a chair whose declared Handle
+nobody stood for stays ''UNSEATED'' — the seal reports the empty chair rather than reading a declaration
+as consent to sit in it.
 
 ''THIS MOVEMENT WRITES THE SELF-STOOD PATH, and a second path stands beside it'' (True Name Model,
 2026-07-25). `FoundingBinding` names two modes as a union rather than inferring one from an optional
@@ -488,7 +527,19 @@ lares device-admit --as 0 --joinee-key <hex>         # signs a device-delegation
 ```
 lares wake --admit <payload-file>                    # joins the existing PersonaGroup on the key it already holds
 lares persona list                                   # the same roots, reached through a new vessel
+lares persona sync                                   # carry this vessel's own labels + declared Handles to the fleet
 ```
+
+''THE NAMES RIDE, THE CHAIR DOES NOT'' (2026-08-06). Once a joining vessel breathes, the ''private label
+and the declared Handle'' travel the @persona bag — the self-slot FLEET-syncs it same-operator, and the
+DeterministicFederationGate never volunteers it to a cross-operator. So a persona answers to the same
+name on every device the human holds, and `persona list` on a fresh leaf reads the multitude rather than
+a blank. The ''seat claim stays on the node that holds it'': a Kahu chair names a seat on a PARTICULAR
+node, and syncing it would let one device seat a persona on another device's seal.
+
+''`sync` runs local-first and idempotent.'' A vessel FOUNDS before it breathes, so names set pre-boot
+live in the local floor until a hearth answers; running it from every vessel converges, because each
+name carries its own stamp and the later one reads. A quiet sock reports ''NODE-LOCAL, never failure''.
 
 ''What the payload carries, and what it does NOT.'' It carries ''one signed edge on a lineage'' — the
 persona KEL prefix, the signer that vouched, the hearth true-name the edge binds to, and the
@@ -688,7 +739,8 @@ agent surface owes instead:
 ''The seed response, in shape'' (never a template — the frame holds, the words never):
 
 > //You stand at movement ② (found): an identity home stands, no personas seated. Branch: REHEARSAL
-> (containers) — nothing here costs anything to redo. Run: `lares persona new 0 --name '<name>'`…
+> (containers) — nothing here costs anything to redo. Run: `lares persona new 0 --name '<label>'
+> --handle '<Handle>' --seat`…
 > Next after that: ③ reserve. ⚠ Movement ① on the KEEPER branch destroys prior roots and does not
 > undo — you are not on that branch.//
 
