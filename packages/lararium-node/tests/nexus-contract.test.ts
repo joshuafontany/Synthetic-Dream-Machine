@@ -30,7 +30,7 @@ import { makeNexusMembership } from "../src/nexus-carriage.js";
 
 let root: string;
 let priorLarRoot: string | undefined;
-const bagsDir = (): string => join(root, "bags");
+const sealHome = (): string => join(root, "state", "nexus");
 
 beforeEach(() => {
   root = mkdtempSync(join(tmpdir(), "lares-admit-"));
@@ -57,7 +57,7 @@ function seatCharter(keys: string[], threshold = 2): void {
       { displayName: "The Lindwyrm",        verifyingKey: keys[2] ?? null },
     ],
   };
-  writeNexusDoc(bagsDir(), doc);
+  writeNexusDoc(sealHome(), doc);
 }
 
 describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
@@ -68,13 +68,13 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     seatCharter(roots.slice(0, 3).map((r) => r.verifyingKey));
     const joinerNym = roots[3]!.verifyingKey.toLowerCase();
 
-    const res = await runNexusContract({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
+    const res = await runNexusContract({ action: "admit", nym: joinerNym, sealHome: sealHome() });
     expect(res.version).toBe(1);
     expect(res.signers).toHaveLength(2);       // exactly the 2-of-3 quorum
     expect(res.contractIn).toBe("self");       // multitude-of-one: the vessel held the joiner's seed
     expect(res.memberNow).toBe(true);
 
-    const list = await runNexusMembersList({ bagsDir: bagsDir() });
+    const list = await runNexusMembersList({ sealHome: sealHome() });
     expect(list.members).toContain(joinerNym);
     expect(list.entries).toHaveLength(1);
     expect(list.entries[0]).toMatchObject({ nym: joinerNym, action: "admit", version: 1, signers: 2, contractIn: true });
@@ -86,8 +86,8 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     seatCharter(roots.slice(0, 3).map((r) => r.verifyingKey));
 
     // The joiner mints its 'accepts carriage' token (index 3 on this same vessel stands in for the joiner's vessel).
-    const token = await runNexusAcceptCarriage({ handleIndex: 3, bagsDir: bagsDir() });
-    const res = await runNexusContract({ action: "admit", nym: token.nym, contractSig: token.contractSig, bagsDir: bagsDir() });
+    const token = await runNexusAcceptCarriage({ handleIndex: 3, sealHome: sealHome() });
+    const res = await runNexusContract({ action: "admit", nym: token.nym, contractSig: token.contractSig, sealHome: sealHome() });
     expect(res.contractIn).toBe("supplied");
     expect(res.memberNow).toBe(true);
   });
@@ -98,12 +98,12 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     seatCharter(roots.slice(0, 3).map((r) => r.verifyingKey));
     const joinerNym = roots[3]!.verifyingKey.toLowerCase();
 
-    await runNexusContract({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
-    const rev = await runNexusContract({ action: "revoke", nym: joinerNym, bagsDir: bagsDir() });
+    await runNexusContract({ action: "admit", nym: joinerNym, sealHome: sealHome() });
+    const rev = await runNexusContract({ action: "revoke", nym: joinerNym, sealHome: sealHome() });
     expect(rev.version).toBe(2);
     expect(rev.memberNow).toBe(false);
 
-    const list = await runNexusMembersList({ bagsDir: bagsDir() });
+    const list = await runNexusMembersList({ sealHome: sealHome() });
     expect(list.members).not.toContain(joinerNym);
   });
 
@@ -115,16 +115,16 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     seatCharter([held.verifyingKey, s1, s2]);
     const joiner = hex(await ed.getPublicKeyAsync(new Uint8Array(32).fill(9)));
 
-    await expect(runNexusContract({ action: "admit", nym: joiner, contractSig: "00".repeat(64), bagsDir: bagsDir() }))
+    await expect(runNexusContract({ action: "admit", nym: joiner, contractSig: "00".repeat(64), sealHome: sealHome() }))
       .rejects.toBeInstanceOf(NexusContractError);
-    const list = await runNexusMembersList({ bagsDir: bagsDir() });
+    const list = await runNexusMembersList({ sealHome: sealHome() });
     expect(list.entries).toHaveLength(0);
   });
 
   it("UNSEATED charter REFUSES", async () => {
     await generateOrLoadVesselIdentity(larDataDir());
     await generateOrLoadPersonaGroupRoot(larDataDir(), 0);
-    await expect(runNexusContract({ action: "admit", nym: "ab".repeat(32), contractSig: "00".repeat(64), bagsDir: bagsDir() }))
+    await expect(runNexusContract({ action: "admit", nym: "ab".repeat(32), contractSig: "00".repeat(64), sealHome: sealHome() }))
       .rejects.toBeInstanceOf(NexusContractError);
   });
 
@@ -133,7 +133,7 @@ describe("nexus admit — the RAISE side end-to-end (Build-2)", () => {
     const roots = await Promise.all([0, 1, 2].map((i) => generateOrLoadPersonaGroupRoot(larDataDir(), i)));
     seatCharter(roots.map((r) => r.verifyingKey));
     const foreign = hex(await ed.getPublicKeyAsync(new Uint8Array(32).fill(42)));   // not a held persona
-    await expect(runNexusContract({ action: "admit", nym: foreign, bagsDir: bagsDir() }))
+    await expect(runNexusContract({ action: "admit", nym: foreign, sealHome: sealHome() }))
       .rejects.toBeInstanceOf(NexusContractError);   // no contract-in obtainable → refuse
   });
 });
@@ -147,7 +147,7 @@ describe("the members{} ∪ kahu-floor UNION — the sharePolicy member gate (SE
     const joinerNym = roots[3]!.verifyingKey.toLowerCase();
 
     // Contract-in + admit the non-kahu operator onto the board.
-    await runNexusContract({ action: "admit", nym: joinerNym, bagsDir: bagsDir() });
+    await runNexusContract({ action: "admit", nym: joinerNym, sealHome: sealHome() });
 
     // Stand the membership holder over the SAME store (its own replica, as-of-last-sync) + the SAME board.
     const nexusPubkey = await loadVesselVerifyingKey(larDataDir());
@@ -157,7 +157,7 @@ describe("the members{} ∪ kahu-floor UNION — the sharePolicy member gate (SE
       ["peer-joiner", `prefix:${joinerNym}`],   // an admitted non-kahu operator → MEMBER (members{}) — SELF-SLOT-B
       ["peer-foreign", `prefix:${"ab".repeat(32)}`],  // never admitted → STRANGER
     ]);
-    const holder = makeNexusMembership({ bagsDir: bagsDir(), peerIdentifierMap: peerMap, repo, nexusPubkey });
+    const holder = makeNexusMembership({ sealHome: sealHome(), peerIdentifierMap: peerMap, repo, nexusPubkey });
     await holder.refold();   // fold the members board atop the kahu floor
 
     expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(true);      // kahu floor
@@ -173,7 +173,7 @@ describe("the members{} ∪ kahu-floor UNION — the sharePolicy member gate (SE
     const nexusPubkey = await loadVesselVerifyingKey(larDataDir());
     const repo = new Repo({ storage: new NodeFSStorageAdapter(larDataDir()) });
     const peerMap = new Map<string, string>([["peer-kahu", `prefix:${roots[0]!.verifyingKey.toLowerCase()}`]]);
-    const holder = makeNexusMembership({ bagsDir: bagsDir(), peerIdentifierMap: peerMap, repo, nexusPubkey });
+    const holder = makeNexusMembership({ sealHome: sealHome(), peerIdentifierMap: peerMap, repo, nexusPubkey });
     await holder.refold();
     expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(false);   // no charter, no board → nobody member
     holder.dispose();

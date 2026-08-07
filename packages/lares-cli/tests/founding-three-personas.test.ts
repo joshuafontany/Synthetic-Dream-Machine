@@ -27,7 +27,7 @@ import { join } from "node:path";
 import { cmdPersona } from "../src/commands/persona.js";
 import { cmdNexus } from "../src/commands/nexus.js";
 import type { ParsedArgs } from "../src/parse-args.js";
-import { larBagsDir, larDataDir } from "../src/env.js";
+import { larSealHome, larDataDir } from "../src/env.js";
 import {
   generateOrLoadPersonaGroupRoot, makeNodePersonaPetnameStore, makeNodePersonaDeclarationStore,
   listPersonaRoots, readNexusDoc,
@@ -100,7 +100,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     }
     expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
 
-    const doc = readNexusDoc(larBagsDir());
+    const doc = readNexusDoc(larSealHome());
     expect(doc?.kahu.length).toBe(3);
     for (const k of doc!.kahu) {
       expect(k.verifyingKey, `${k.displayName} seated by declared-Handle join`).toBeTruthy();
@@ -120,7 +120,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     await cmdPersona(personaArgs(["new", "2"], { name: LABELS[2]!, handle: KAHU[2]! }));
 
     expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
-    const doc = readNexusDoc(larBagsDir());
+    const doc = readNexusDoc(larSealHome());
     expect(doc!.kahu.map((k) => k.displayName)).toEqual([KAHU[0], KAHU[1]]);
     expect(doc!.kahu.find((k) => k.displayName === KAHU[2])).toBeUndefined();
     // Majority over the two that stood reads 2, and both sit — a live quorum over a roster of two.
@@ -136,7 +136,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
       await cmdPersona(personaArgs(["new", String(i)], { name: `label-${i}`, handle: mine[i]! }, { seat: true }));
     }
     await cmdNexus(nexusArgs(["seal", "seat"]));
-    const doc = readNexusDoc(larBagsDir());
+    const doc = readNexusDoc(larSealHome());
     expect(doc!.kahu.map((k) => k.displayName).sort()).toEqual([...mine].sort());
     for (const k of doc!.kahu) expect(k.verifyingKey).toBeTruthy();
   });
@@ -146,7 +146,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
       await cmdPersona(personaArgs(["new", String(i)], { name: LABELS[i]!, handle: KAHU[i]! }, { seat: true }));
     }
     await cmdNexus(nexusArgs(["seal", "seat"]));
-    expect(readNexusDoc(larBagsDir())!.threshold).toBe(2);          // majority of 3
+    expect(readNexusDoc(larSealHome())!.threshold).toBe(2);          // majority of 3
   });
 
   test("★ --threshold past the roster REFUSES — it would seat a rule no quorum could ever reach ★", async () => {
@@ -157,7 +157,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
   test("★ a seat with NOBODY standing refuses, and writes no doc ★", async () => {
     await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }));   // declares, never stands
     expect(await cmdNexus(nexusArgs(["seal", "seat"]))).not.toBe(0);
-    expect(readNexusDoc(larBagsDir())).toBeNull();
+    expect(readNexusDoc(larSealHome())).toBeNull();
   });
 
   test("★ the PRIVATE label never reaches the seal — the doc carries chair names and keys, no compartment labels ★", async () => {
@@ -166,7 +166,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     }
     await cmdNexus(nexusArgs(["seal", "seat"]));
 
-    const wire = JSON.stringify(readNexusDoc(larBagsDir()));
+    const wire = JSON.stringify(readNexusDoc(larSealHome()));
     for (const label of LABELS) expect(wire).not.toContain(label);
   });
 
@@ -181,6 +181,6 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     expect(await ownPersonaPetname(await makeNodePersonaPetnameStore(), 0)).toBe(LABELS[0]);
     expect(await declaredHandle(await makeNodePersonaDeclarationStore(), 0)).toBe(KAHU[0]);
     expect(await cmdNexus(nexusArgs(["seal", "seat"]))).toBe(0);
-    expect(readNexusDoc(larBagsDir())!.kahu.find((k) => k.displayName === KAHU[0])?.verifyingKey).toBeTruthy();
+    expect(readNexusDoc(larSealHome())!.kahu.find((k) => k.displayName === KAHU[0])?.verifyingKey).toBeTruthy();
   });
 });

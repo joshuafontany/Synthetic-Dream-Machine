@@ -95,7 +95,7 @@ import { runFlow } from "./flow-run.js";
 /** Node advertises a few rotatable wiki pins BESIDES @daemon (resource-rich vessel).
  *  The user's ONE-plus rotatable pin(s) ride this budget; the surface enforces it. */
 const NODE_WIKI_PIN_BUDGET = 3;
-import { larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, meshSensoriumDir, larContentDir, sensoriumDir }  from "./vessel-paths.js";
+import { larSealHome, larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, meshSensoriumDir, larContentDir, sensoriumDir }  from "./vessel-paths.js";
 import { makeFormPalace, type FormPalace, makeStructurePalace, type StructurePalace }  from "./sensorium.js";
 import { readCoupling } from "./sensorium-coupling.js";
 import { readCohere } from "./sensorium-cohere.js";
@@ -477,11 +477,15 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // holder resolves the always-carried antigen board, folds the quorum-signed bans against the
   // founding-kahu roster read off `bags/@nexus` (LAR_BAGS ?? <root>/bags), and re-folds on every board
   // change. FAILS CLOSED: an unseated charter → empty roster → nothing Kapae'd (no quorum, no bans).
-  const antigenBagsDir = process.env["LAR_BAGS"] ?? join(rootDirOpt ?? repoRoot, "bags");
+  // The Nexus SEAL homes PER-OPERATOR (`<state>/nexus`), never in the corpus bags tree: a seal sited in the
+  // corpus inherits that tree's home, which on a development install sits inside the repository. The seal
+  // belongs to the operators who founded it, so it survives every substrate wipe beside the sovereign root
+  // and travels with neither a clone nor a `reset`.
+  const sealHome = larSealHome();
   const antigenHolder = makeAntigenRingHolder({
     repo,
     nexusPubkey:       vesselIdentity.verifyingKey,
-    bagsDir:           antigenBagsDir,
+    sealHome,
     peerIdentifierMap,
   });
   antigenRing = antigenHolder.ring;
@@ -496,7 +500,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // Keep the HOLDER (not just its `.membership` consult): the `nexus-refresh` main verb calls its
   // `refoldWithBoard` to re-fold the member union against an out-of-process CLI board write.
   const nexusMembershipHolder = makeNexusMembership({
-    bagsDir:           antigenBagsDir,
+    sealHome,
     peerIdentifierMap,
     repo,
     nexusPubkey:       vesselIdentity.verifyingKey,
@@ -506,7 +510,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // Read the federation POSTURE off the @nexus doc (as-of-last-sync). Default PRIVATE (fail-closed):
   // a cross-Nexus foreign operator co-federates ONLY when the operator flips the Nexus open. A live flip needs
   // a re-read (surfaced gap — boot-time read for alpha; the CLI `lares nexus posture` edits the doc).
-  const nexusDocForBoot = readNexusDoc(antigenBagsDir);
+  const nexusDocForBoot = readNexusDoc(sealHome);
   federationPosture = federationPostureFromDoc(nexusDocForBoot);
 
   // Read the HELD bulb off the genesis dir, EPOCH-PINNED to the charter chain-head — the ALL-PUBLIC cold-boot
@@ -558,7 +562,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         // `nexus-refresh` verb runs; here it fires automatically when the carriage transport re-dials.
         onReconnect:  async () => {
           await runNexusRefresh({
-            storageDir, bagsDir: antigenBagsDir, nexusPubkey: vesselIdentity.verifyingKey,
+            storageDir, sealHome, nexusPubkey: vesselIdentity.verifyingKey,
             antigen: antigenHolder, membership: nexusMembershipHolder,
             setPosture: (p) => { federationPosture = p; },
           });
@@ -1335,7 +1339,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     registry.register("nexus-refresh", async () => {
       const r = await runNexusRefresh({
         storageDir,
-        bagsDir:     antigenBagsDir,
+        sealHome,
         nexusPubkey: vesselIdentity.verifyingKey,
         antigen:     antigenHolder,
         membership:  nexusMembershipHolder,

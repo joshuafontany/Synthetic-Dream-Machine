@@ -52,8 +52,8 @@ export interface NexusContractOptions {
   /** The joining operator's "accepts carriage" contract-sig hex (from `nexus accept-carriage`). Admit only;
    *  optional when the vessel holds the nym's own persona seed (multitude-of-one self-sign). */
   readonly contractSig?: string;
-  /** The charter DOC's authority home (the CLI supplies `larBagsDir()`). */
-  readonly bagsDir:    string;
+  /** The charter DOC's authority home (the CLI supplies `larSealHome()`). */
+  readonly sealHome:    string;
   readonly storageDir?: string;
 }
 
@@ -73,8 +73,8 @@ export interface NexusContractResult {
 }
 
 /** Read the seated roster off disk, FAILING CLOSED when no live quorum stands to root an admit on. */
-function seatedRosterOrRefuse(bagsDir: string): KahuRoster {
-  const roster = foundingRoster(readNexusDoc(bagsDir));
+function seatedRosterOrRefuse(sealHome: string): KahuRoster {
+  const roster = foundingRoster(readNexusDoc(sealHome));
   if (roster.sealEpochCid.length === 0 || roster.keys.length < roster.threshold) {
     throw new NexusContractError(
       "no seated founding-kahu quorum to root an admit on — run `lares nexus seal seat` first (the members-registry stays inert until a quorum stands).",
@@ -152,7 +152,7 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
     throw new NexusContractError(`"${opts.nym}" is not a valid operator nym — expected a 64-hex ed25519 verifying key.`);
   }
 
-  const roster   = seatedRosterOrRefuse(opts.bagsDir);
+  const roster   = seatedRosterOrRefuse(opts.sealHome);
   const selected = await selectHeldQuorumSigners(storageDir, roster);
 
   // The contract-in — REQUIRED for an admit, none for a revoke.
@@ -215,10 +215,10 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
  * has no epoch to bind consent to → REFUSE.
  */
 export async function runNexusAcceptCarriage(opts: {
-  handleIndex: number; bagsDir: string; storageDir?: string;
+  handleIndex: number; sealHome: string; storageDir?: string;
 }): Promise<{ nym: string; sealEpochCid: string; contractSig: string }> {
   const storageDir = opts.storageDir ?? larDataDir();
-  const roster     = foundingRoster(readNexusDoc(opts.bagsDir));
+  const roster     = foundingRoster(readNexusDoc(opts.sealHome));
   if (roster.sealEpochCid.length === 0) {
     throw new NexusContractError("no seated charter epoch to bind carriage consent to — the Nexus must seat its charter first.");
   }
@@ -241,9 +241,9 @@ export interface NexusMembersListResult {
 
 /** Read the currently-admitted member set + the raw board entries (the `--list` fold). Read-only; FAILS CLOSED
  *  to the empty set on an unseated charter. */
-export async function runNexusMembersList(opts: { bagsDir: string; storageDir?: string }): Promise<NexusMembersListResult> {
+export async function runNexusMembersList(opts: { sealHome: string; storageDir?: string }): Promise<NexusMembersListResult> {
   const storageDir = opts.storageDir ?? larDataDir();
-  const roster     = foundingRoster(readNexusDoc(opts.bagsDir));
+  const roster     = foundingRoster(readNexusDoc(opts.sealHome));
 
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });

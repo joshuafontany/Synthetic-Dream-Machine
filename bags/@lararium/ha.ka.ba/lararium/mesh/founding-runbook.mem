@@ -175,9 +175,14 @@ same string into both flags proves nothing, because a label-matching join would 
   it; ''neither touches `bags/`'', where the charter doc lives. A re-founding that skipped it stranded itself
   on a fail-closed lineage. ① now names the cut (#clear).
 
-''The shared shape.'' Each of the three named ''a thing decided somewhere the operator does not stand'' — a
-private label deciding a public chair, a build deciding a roster, a stale artifact deciding a lineage. ''A
-founding an operator merely confirms reads as somebody else's founding.
+# ''THE SEAL SAT IN THE REPOSITORY.'' Sited in the corpus bags tree, it inherited that tree's home — which on
+  a development install sits inside the working tree, so a founding seal could land in a git history. ''The
+  seal now homes per-operator'' at `<state>/nexus`, beside the sovereign identity and behind the same
+  reset boundary. ① cuts both (#clear).
+
+''The shared shape.'' Each named ''a thing decided somewhere the operator does not stand'' — a private label
+deciding a public chair, a build deciding a roster, a stale artifact deciding a lineage, a directory default
+deciding where a Nexus lives. ''A founding an operator merely confirms reads as somebody else's founding.
 
 <<~/ahu >>
 
@@ -226,20 +231,25 @@ undo.'' A vessel that carries nothing worth keeping (the bootstrap case) crosses
 
 ```
 rm -rf ~/.local/state/lares/identity                # ⚠ IRREVERSIBLE: the fresh-from-void cut
-rm -rf <corpus>/bags/@nexus                         # ⚠ IRREVERSIBLE: the prior SEAL (see below)
+rm -rf ~/.local/state/lares/nexus                   # ⚠ IRREVERSIBLE: the prior SEAL (see below)
 lares reset --force                                 # pave the vessel store (the identity home now stands empty)
 ```
 
-''THE SEAL LIVES OUTSIDE BOTH.'' `reset --force` pares the vessel store and ''PRESERVES the identity home'';
-the `rm -rf` above cuts the identity home. ''Neither touches `bags/`'' — and the charter doc lands there
-(`bags/@nexus/ha.ka.ba/nexus/charter/founding-roster.mem`), under the corpus root, which on a development
-install ''sits inside the repository working tree''. A re-founding that skips this line strands itself: the
-seat ''FAILS CLOSED'' against a lineage already past genesis (//advance it with rotate, never re-seat//), and
-the operator holds a fresh vessel that cannot seal.
+''TWO SOVEREIGN THINGS SURVIVE A RESET, and BOTH want cutting here.'' `reset --force` pares the vessel store
+and preserves the state home — that boundary IS the //share substrate, not sovereignty// law, and the sovereign
+root sits behind it on purpose. The Nexus SEAL sits behind it too, in its own home beside the identity
+(`<state>/nexus/founding-roster.mem`), so a re-founding cuts both or strands itself: the seat ''FAILS CLOSED''
+against a lineage already past genesis (//advance it with rotate, never re-seat//), and the operator holds a
+fresh vessel that cannot seal.
 
-''A first founding crosses this freely'' — no `bags/@nexus` stands, so the line removes nothing. ''Read the
-path off `lares status` rather than assuming it'': the corpus root rides `LAR_ROOT` (else the repo root), and
-`LAR_BAGS` re-sites the bags tree independently.
+''WHY THE SEAL HOMES THERE and not in the corpus.'' It reads as a FILE by ruling — an operator backs it up,
+hands it to a peer, reads it with their own eyes — and a file sited in the bags tree ''inherited that tree's
+home'', which on a development install sits inside the repository. A founding seal could have landed in a git
+history nobody meant to write it into. Per-operator state cures it, and says something true besides: ''a clone
+of the corpus carries NO Nexus'', because a Nexus belongs to the operators who founded it rather than to
+whoever copied the code.
+
+''A first founding crosses this freely'' — no seal stands, so the line removes nothing.
 
 
 <<~/ahu >>

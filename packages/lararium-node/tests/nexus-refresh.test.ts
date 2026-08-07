@@ -64,8 +64,8 @@ async function banEntry(nym: string, epoch: string): Promise<KapaeAntigenEntry> 
 function standHolders(bags: string) {
   const repo = new Repo({});
   const peerMap = new Map<string, string>();
-  const antigen = makeAntigenRingHolder({ repo, nexusPubkey: NEXUS_PUBKEY, bagsDir: bags, peerIdentifierMap: peerMap });
-  const membership = makeNexusMembership({ bagsDir: bags, peerIdentifierMap: peerMap, repo, nexusPubkey: NEXUS_PUBKEY });
+  const antigen = makeAntigenRingHolder({ repo, nexusPubkey: NEXUS_PUBKEY, sealHome: bags, peerIdentifierMap: peerMap });
+  const membership = makeNexusMembership({ sealHome: bags, peerIdentifierMap: peerMap, repo, nexusPubkey: NEXUS_PUBKEY });
   return { antigen, membership, peerMap, dispose: () => { antigen.dispose(); membership.dispose(); } };
 }
 
@@ -83,7 +83,7 @@ describe("nexus-refresh — POSTURE re-read (D2)", () => {
       // The operator's `lares nexus posture open` rewrites the disk charter beside the running node.
       writeNexusDoc(bags, seatedCharter(keys, "open"));
       const r = await runNexusRefresh({
-        storageDir: storage, bagsDir: bags, nexusPubkey: NEXUS_PUBKEY,
+        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
         antigen: holders.antigen, membership: holders.membership, setPosture: (p) => { live = p; },
       });
       expect(r.posture).toBe("open");
@@ -96,7 +96,7 @@ describe("nexus-refresh — POSTURE re-read (D2)", () => {
     let live: FederationPosture = "open";
     try {
       const r = await runNexusRefresh({
-        storageDir: storage, bagsDir: bags, nexusPubkey: NEXUS_PUBKEY,
+        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
         antigen: holders.antigen, membership: holders.membership, setPosture: (p) => { live = p; },
       });
       expect(r.posture).toBe("private");
@@ -138,7 +138,7 @@ describe("nexus-refresh — out-of-process BOARD write (E2)", () => {
 
       // The refresh re-materializes the board off storage and re-folds → the victim now stands Kapae'd.
       const r = await runNexusRefresh({
-        storageDir: storage, bagsDir: bags, nexusPubkey: NEXUS_PUBKEY,
+        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
         antigen: holders.antigen, membership: holders.membership, setPosture: () => {},
       });
       expect(r.antigenEntries).toBe(1);

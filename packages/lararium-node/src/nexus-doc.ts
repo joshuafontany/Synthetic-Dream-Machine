@@ -1,5 +1,5 @@
 /**
- * nexus-doc — the DISK adapter for the `bags/@nexus` doc, which carries THREE joints at three cadences.
+ * nexus-doc — the DISK adapter for the Nexus SEAL FILE, which carries THREE joints at three cadences.
  *
  * THE JOINTS, and why they ride separate blocks. One word once covered six entities, separated not by
  * content but by different ceremony, threshold, RATE and authority (canon `cabal-realm#six-joints`). Three
@@ -25,7 +25,7 @@
  * partial doc into authority. A torn PRACTICE block never closes the doc, so the fastest-cadence joint can
  * never take the slower ones down with it.
  *
- * The bags dir rides in as a parameter (the CLI supplies `larBagsDir()`), so this module keeps no env
+ * The seal home rides in as a parameter (the CLI supplies `larSealHome()`), so this module keeps no env
  * coupling and tests against any temp tree.
  */
 
@@ -37,17 +37,27 @@ import {
   type FederationPosture, type CabalJoinPolicy, type AdmissionDials,
 } from "@lararium/mesh";
 
-/** The `@nexus` residency-bag name — the holding slot the doc sites under. */
-export const NEXUS_BAG = "@nexus" as const;
-
-/** The doc's mirror-relative path (holding bag + full uri-path + `.mem` extension). */
+/** The seal file's name inside the seal home — one file, read by an operator's own eyes. */
 export function nexusCharterDocRelPath(): string {
-  return join(NEXUS_BAG, `${NEXUS_CHARTER_URI_PATH}.mem`);
+  return "founding-roster.mem";
 }
 
-/** The doc's absolute path under a given bags dir. */
-export function nexusCharterDocPath(bagsDir: string): string {
-  return join(bagsDir, nexusCharterDocRelPath());
+/**
+ * The seal file's absolute path under a SEAL HOME (`larSealHome()` — `<state>/nexus`, per-operator).
+ *
+ * It takes a home rather than reading one, so this module keeps no env dependency and a test stands the
+ * seal wherever it likes. The home rides per-operator state rather than the corpus tree: a Nexus belongs
+ * to the operators who founded it, never to whoever cloned the code.
+ */
+export function nexusCharterDocPath(sealHome: string): string {
+  // FAIL LOUD on an absent home. The alternative is `join(undefined, …)` dying as a TypeError about a "path
+  // argument" — an error that names the filesystem primitive and hides the wiring fault, costing a reader the
+  // whole trail back to the caller that forgot to designate a home. One guard here covers every read and
+  // write path, so no caller has to remember its own.
+  if (typeof sealHome !== "string" || sealHome.length === 0) {
+    throw new Error("nexusCharterDocPath: no seal home supplied — a caller must NAME one (the CLI passes `larSealHome()`).");
+  }
+  return join(sealHome, nexusCharterDocRelPath());
 }
 
 // ── the three fences ──────────────────────────────────────────────────────────────────────────────
@@ -206,7 +216,7 @@ export function renderNexusDoc(doc: NexusDoc): string {
   return `<<~ ? -> ${NEXUS_CHARTER_URI} >>
 \`\`\`toml iam
 uri-path  = "${NEXUS_CHARTER_URI_PATH}"
-file-path = "bags/${nexusCharterDocRelPath()}"
+file-path = "<state>/nexus/${nexusCharterDocRelPath()}"
 type      = "text/x-memetic-wikitext"
 register  = "Canon"
 mana      = 19

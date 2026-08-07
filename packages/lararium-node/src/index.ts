@@ -1,7 +1,7 @@
 export type { CorpusSource } from "./node-host.js";
 export { LARES_ROOT, REPO_ROOT, bagsRoot, laresMemesRoot } from "./node-host.js";
 export {
-  larHome, larDataDir, larIdentityDir, larProjectionDir,
+  larHome, larDataDir, larIdentityDir, larProjectionDir, larSealHome,
   larHarvestDir, larHarvestStageDir, larRuntimeDir, larStructurePalaceDir, larFormPalaceDir,
   larMempalaceDir, larContentDir, larMeshPalaceDir, scratchSensoriumDir, scratchSensoriumInstanceDir,
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
@@ -244,7 +244,7 @@ export type { HopRender } from "./persona-admit-flow.js";
 // The `bags/@nexus` charter DOC adapter — the antigen roster's authority home read/written on disk (#66).
 export {
   readNexusDoc, writeNexusDoc, renderNexusDoc, writeNexusSeal, writeNexusKahu, writeNexusPractice,
-  nexusCharterDocPath, nexusCharterDocRelPath, NEXUS_BAG,
+  nexusCharterDocPath, nexusCharterDocRelPath,
 } from "./nexus-doc.js";
 export { loadLeafIdentity } from "./leaf-identity.js";
 export type { LeafIdentity } from "./leaf-identity.js";

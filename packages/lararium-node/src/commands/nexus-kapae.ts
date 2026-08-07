@@ -51,8 +51,8 @@ export interface NexusKapaeOptions {
   readonly action:     KapaeAction;
   readonly nym:        string;
   readonly reason?:    string;
-  /** The charter DOC's authority home (the CLI supplies `larBagsDir()`). */
-  readonly bagsDir:    string;
+  /** The charter DOC's authority home (the CLI supplies `larSealHome()`). */
+  readonly sealHome:    string;
   /** The Automerge Repo store (defaults to the node vessel store). */
   readonly storageDir?: string;
 }
@@ -82,8 +82,8 @@ export interface NexusKapaeListResult {
 }
 
 /** Read the seated roster off disk, FAILING CLOSED when no live quorum stands to root a ban on. */
-function seatedRosterOrRefuse(bagsDir: string): KahuRoster {
-  const roster = foundingRoster(readNexusDoc(bagsDir));
+function seatedRosterOrRefuse(sealHome: string): KahuRoster {
+  const roster = foundingRoster(readNexusDoc(sealHome));
   if (roster.sealEpochCid.length === 0 || roster.keys.length < roster.threshold) {
     throw new NexusKapaeError(
       "no seated founding-kahu quorum to root a ban on — run `lares nexus seal seat` first (the antigen stays inert until a quorum stands).",
@@ -136,7 +136,7 @@ export async function runNexusKapae(opts: NexusKapaeOptions): Promise<NexusKapae
     throw new NexusKapaeError(`"${opts.nym}" is not a valid presenter nym — expected a 64-hex ed25519 verifying key.`);
   }
 
-  const roster   = seatedRosterOrRefuse(opts.bagsDir);
+  const roster   = seatedRosterOrRefuse(opts.sealHome);
   const selected = await selectHeldQuorumSigners(storageDir, roster);
 
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
@@ -187,9 +187,9 @@ export async function runNexusKapae(opts: NexusKapaeOptions): Promise<NexusKapae
 
 /** Read the currently-Kapae'd set + the raw board entries (the `--list` fold). Read-only; materializes a blank
  *  board on a cold first boot (denies nobody). FAILS CLOSED to the empty set on an unseated charter. */
-export async function runNexusKapaeList(opts: { bagsDir: string; storageDir?: string }): Promise<NexusKapaeListResult> {
+export async function runNexusKapaeList(opts: { sealHome: string; storageDir?: string }): Promise<NexusKapaeListResult> {
   const storageDir = opts.storageDir ?? larDataDir();
-  const roster     = foundingRoster(readNexusDoc(opts.bagsDir));
+  const roster     = foundingRoster(readNexusDoc(opts.sealHome));
 
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });

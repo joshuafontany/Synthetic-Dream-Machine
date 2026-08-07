@@ -39,7 +39,7 @@ import {
   RESERVE_THRESHOLD, RESERVE_KAHU_COUNT, defaultCryptoProvider,
   type NexusDoc, type NexusCharterKahu, type SealEpoch, type ReserveCard,
 } from "@lararium/mesh";
-import { larBagsDir, larDataDir } from "../env.js";
+import { larSealHome, larDataDir } from "../env.js";
 import { makeFleetDeclarationStore, fleetPeerDid } from "../daemon-persona-store.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -109,7 +109,7 @@ async function cmdContract(args: ParsedArgs, action: "admit" | "revoke"): Promis
   }
   try {
     const contractSig = action === "admit" ? (args.options["sig"] ?? args.options["contract"]) : undefined;
-    const r = await runNexusContract({ action, nym, ...(contractSig ? { contractSig } : {}), bagsDir: larBagsDir() });
+    const r = await runNexusContract({ action, nym, ...(contractSig ? { contractSig } : {}), sealHome: larSealHome() });
     emit(args, {
       ok: true,
       data: {
@@ -144,7 +144,7 @@ async function cmdMembers(args: ParsedArgs): Promise<number> {
     return 2;
   }
   try {
-    const r = await runNexusMembersList({ bagsDir: larBagsDir() });
+    const r = await runNexusMembersList({ sealHome: larSealHome() });
     emit(args, {
       ok: true,
       data: {
@@ -186,7 +186,7 @@ async function cmdAcceptCarriage(args: ParsedArgs): Promise<number> {
     return 2;
   }
   try {
-    const r = await runNexusAcceptCarriage({ handleIndex, bagsDir: larBagsDir() });
+    const r = await runNexusAcceptCarriage({ handleIndex, sealHome: larSealHome() });
     emit(args, {
       ok: true,
       data: { nym: r.nym, sealEpochCid: r.sealEpochCid, contractSig: r.contractSig },
@@ -213,9 +213,9 @@ async function cmdAcceptCarriage(args: ParsedArgs): Promise<number> {
  * PUBLIC planes (never a private plane). No arg reads the current posture.
  */
 async function cmdPosture(args: ParsedArgs): Promise<number> {
-  const bagsDir = larBagsDir();
+  const sealHome = larSealHome();
   const want = args.positional[1];
-  const doc = readNexusDoc(bagsDir);
+  const doc = readNexusDoc(sealHome);
   if (want === undefined) {
     const posture = federationPostureFromDoc(doc);
     emit(args, {
@@ -241,7 +241,7 @@ async function cmdPosture(args: ParsedArgs): Promise<number> {
   const posture: FederationPosture = want;
   // The PRACTICE joint alone. A posture flip once re-emitted the seal lineage's bytes on its way past;
   // the narrow writer never parses that block, so the cheapest act no longer reaches the dearest joint.
-  const path = writeNexusPractice(bagsDir, { federationPosture: posture }, doc);
+  const path = writeNexusPractice(sealHome, { federationPosture: posture }, doc);
   const next = { ...doc, federationPosture: posture };
   emit(args, {
     ok: true,
@@ -306,7 +306,7 @@ async function cmdUnKapae(args: ParsedArgs): Promise<number> {
 async function kapaeRaise(args: ParsedArgs, action: "kapae" | "un_kapae", nym: string): Promise<number> {
   const reason = args.options["reason"];
   try {
-    const r = await runNexusKapae({ action, nym, ...(reason ? { reason } : {}), bagsDir: larBagsDir() });
+    const r = await runNexusKapae({ action, nym, ...(reason ? { reason } : {}), sealHome: larSealHome() });
     emit(args, {
       ok: true,
       data: {
@@ -335,7 +335,7 @@ async function kapaeRaise(args: ParsedArgs, action: "kapae" | "un_kapae", nym: s
 
 async function kapaeList(args: ParsedArgs): Promise<number> {
   try {
-    const r = await runNexusKapaeList({ bagsDir: larBagsDir() });
+    const r = await runNexusKapaeList({ sealHome: larSealHome() });
     emit(args, {
       ok: true,
       data: {
@@ -434,9 +434,9 @@ function resolveSeatThreshold(args: ParsedArgs, doc: NexusDoc, rosterSize: numbe
 }
 
 async function sealSeat(args: ParsedArgs): Promise<number> {
-  const bagsDir = larBagsDir();
+  const sealHome = larSealHome();
   const dataDir = larDataDir();
-  const doc = readNexusDoc(bagsDir) ?? emptyFoundingCharterDoc();
+  const doc = readNexusDoc(sealHome) ?? emptyFoundingCharterDoc();
 
   // FAIL CLOSED: a chain already advanced PAST genesis is never silently re-genesied — a re-seat would
   // strand every antigen entry rooted on a rotated head. The operator advances a live chain via `rotate`.
@@ -473,8 +473,8 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
     : { kind: doc.kind, threshold, sealEpochCid, kahu };
   // A seat moves TWO joints — the roster it seats and the genesis epoch it establishes — so it writes both
   // narrowly rather than re-emitting the practice dials it never touched.
-  writeNexusKahu(bagsDir, { threshold: next.threshold, kahu: next.kahu }, next);
-  const path = writeNexusSeal(bagsDir,
+  writeNexusKahu(sealHome, { threshold: next.threshold, kahu: next.kahu }, next);
+  const path = writeNexusSeal(sealHome,
     sealLineage ? { kind: next.kind, sealEpochCid, sealLineage } : { kind: next.kind, sealEpochCid }, next);
   const quorum = foundingQuorumSeated(next);
   const armed = Boolean(sealLineage) && nextKeyCommit.length > 0;
@@ -508,9 +508,9 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
 }
 
 async function sealRotate(args: ParsedArgs): Promise<number> {
-  const bagsDir = larBagsDir();
+  const sealHome = larSealHome();
   const dataDir = larDataDir();
-  const doc = readNexusDoc(bagsDir);
+  const doc = readNexusDoc(sealHome);
   const head = sealLineageHead(doc);
   if (!doc || !head) {
     throw new UsageError("no genesis charter chain to rotate — establish one with `lares nexus seal seat` first");
@@ -543,7 +543,7 @@ async function sealRotate(args: ParsedArgs): Promise<number> {
   const sealEpochCid = result.epoch.epochCid;
   const next: NexusDoc = { kind: doc.kind, threshold: doc.threshold, sealEpochCid, sealLineage, kahu };
   // A rotation ceremony reaches the SEAL joint and nothing else.
-  const path = writeNexusSeal(bagsDir, { kind: next.kind, sealEpochCid, sealLineage }, next);
+  const path = writeNexusSeal(sealHome, { kind: next.kind, sealEpochCid, sealLineage }, next);
   const armed = nextKeyCommit.length > 0;
 
   emit(args, {
@@ -588,8 +588,8 @@ function sealCommit(args: ParsedArgs): number {
 }
 
 async function sealShow(args: ParsedArgs): Promise<number> {
-  const bagsDir = larBagsDir();
-  const doc = readNexusDoc(bagsDir);
+  const sealHome = larSealHome();
+  const doc = readNexusDoc(sealHome);
   const roster = rosterFromNexusDoc(doc);
   const quorum = foundingQuorumSeated(doc);
   const head = sealLineageHead(doc);
@@ -598,7 +598,7 @@ async function sealShow(args: ParsedArgs): Promise<number> {
   emit(args, {
     ok: true,
     data: {
-      path: nexusCharterDocPath(bagsDir),
+      path: nexusCharterDocPath(sealHome),
       present: doc !== null,
       threshold: roster.threshold,
       sealEpochCid: roster.sealEpochCid || null,
@@ -611,10 +611,10 @@ async function sealShow(args: ParsedArgs): Promise<number> {
     human: () => {
       if (!doc) {
         console.log(`no nexus doc — run \`lares nexus seal seat\` (the antigen stays inert until a quorum stands).`);
-        console.log(`  expected at: ${nexusCharterDocPath(bagsDir)}`);
+        console.log(`  expected at: ${nexusCharterDocPath(sealHome)}`);
         return;
       }
-      console.log(`nexus seal (${nexusCharterDocPath(bagsDir)}):`);
+      console.log(`nexus seal (${nexusCharterDocPath(sealHome)}):`);
       for (const k of doc.kahu) console.log(`  ${k.verifyingKey ? "seated  " : "UNSEATED"} ${k.displayName}`);
       console.log(`  threshold:  ${roster.threshold} · seated keys: ${roster.keys.length}`);
       console.log(`  chain:      ${chainDepth > 0 ? `${chainDepth} epoch(s), head at seq ${chainDepth - 1}` : "(none — legacy/unestablished)"}`);
@@ -688,7 +688,7 @@ async function sealReserveProvision(args: ParsedArgs, mode: "provision" | "refre
   const reserveEpoch = mode === "refresh" ? (prior?.reserveEpoch ?? 0) + 1 : 1;
 
   // Read the charter chain to name the reconciliation route (below) — this command NEVER mutates the charter.
-  const doc = readNexusDoc(larBagsDir());
+  const doc = readNexusDoc(larSealHome());
   const chainDepth = doc?.sealLineage?.length ?? 0;
 
   const rng = defaultCryptoProvider;

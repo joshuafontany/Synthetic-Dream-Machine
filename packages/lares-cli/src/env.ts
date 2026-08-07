@@ -24,7 +24,7 @@ import { larDataDir, loadVesselVerifyingKey, loadPersonaGroupRootVerifyingKey, r
 
 // The vessel runtime-state resolvers — defined once in @lararium/node, surfaced here.
 export {
-  larHome, larDataDir, larIdentityDir, larProjectionDir,
+  larHome, larDataDir, larIdentityDir, larProjectionDir, larSealHome,
   larHarvestDir, larHarvestStageDir, larStructurePalaceDir, larFormPalaceDir,
 } from "@lararium/node";
 

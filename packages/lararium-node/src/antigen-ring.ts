@@ -10,7 +10,7 @@
  *     unauthenticated peer → null (fail-closed: a denylist that cannot name a peer never falsely denies it).
  *   · kapaed — the currently-Kapae'd nym set, FOLDED (kapae-antigen `foldAntigenSet` + the multi-sig quorum
  *     verifier) from the always-carried antigen BOARD entries AND the founding-kahu roster read off disk
- *     (`readNexusDoc(bagsDir)` → `foundingRoster`). Re-folded on every board-doc change so a ban
+ *     (`readNexusDoc(sealHome)` → `foundingRoster`). Re-folded on every board-doc change so a ban
  *     propagated across the mesh takes on the next sync (the immune system saturates by carry-contract).
  *
  * FAILS CLOSED, three ways, matching the antigen's own discipline:
@@ -62,15 +62,15 @@ export interface AntigenRingHolder {
  * Stand the antigen ring holder. Constructs the ring SYNCHRONOUSLY (empty Kapae'd set, live presenterNym)
  * so the sharePolicy has a valid ring at once; then resolves the antigen board doc + does the first fold
  * asynchronously (a cold board denies nobody, correctly). `nexusPubkey` is the node's own gate key (its
- * Nexus key — the same key browsers pass as relayGatePubKey). `bagsDir` sites the charter doc authority home.
+ * Nexus key — the same key browsers pass as relayGatePubKey). `sealHome` sites the charter doc authority home.
  */
 export function makeAntigenRingHolder(opts: {
   repo:              Repo;
   nexusPubkey:       string;
-  bagsDir:           string;
+  sealHome:           string;
   peerIdentifierMap: ReadonlyMap<string, string>;
 }): AntigenRingHolder {
-  const { repo, nexusPubkey, bagsDir, peerIdentifierMap } = opts;
+  const { repo, nexusPubkey, sealHome, peerIdentifierMap } = opts;
   const verifier = makeMultiSigQuorumVerifier();
 
   // The folded Kapae'd set — swapped whole on each refold (no partial-set window a lookup could read).
@@ -96,7 +96,7 @@ export function makeAntigenRingHolder(opts: {
   // board) share. An absent / unseated charter folds empty (inert); a lowercased set never misses a case match.
   const foldBoard = async (boardDoc: LarDoc | undefined): Promise<void> => {
     const entries = antigenEntriesFromBoard(boardDoc);
-    const roster  = foundingRoster(readNexusDoc(bagsDir));
+    const roster  = foundingRoster(readNexusDoc(sealHome));
     const folded  = await foldAntigenSet(entries, roster, verifier);
     kapaed = new Set<string>([...folded].map((k) => k.toLowerCase()));
   };

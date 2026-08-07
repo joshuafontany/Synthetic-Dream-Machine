@@ -338,6 +338,24 @@ export function larIdentityDir(): string {
   return join(larStateHome(), "identity");
 }
 
+/**
+ * The Nexus SEAL home — the founding-kahu roster + its epoch lineage, at `<state>/nexus`.
+ *
+ * WHY IT SITS HERE AND NOT IN THE BAGS TREE. The seal reads as a FILE rather than a bag: an operator
+ * backs it up, hands it to a peer, and reads it with their own eyes. A bag would give it fleet-sync it
+ * does not want and a doc-id it does not need. But siting a file in the corpus tree made it inherit that
+ * tree's home — which on a development install sits INSIDE the repository, so a founding seal could land
+ * in a git history nobody meant to write it into.
+ *
+ * So it homes beside `identity`, per-operator, under the XDG state home: outside the corpus, outside the
+ * repo, and outside every substrate wipe (`reset`/`regenesis` reforge the CRDT store; the seal and the
+ * sovereign root both survive). A clone of the corpus therefore carries NO Nexus — which reads correct,
+ * because a Nexus belongs to the operators who founded it, never to whoever copied the code.
+ */
+export function larSealHome(): string {
+  return join(larStateHome(), "nexus");
+}
+
 // ── Durable watermarks (state) ────────────────────────────────────────────────────────────────────
 
 /** Disk-projection state dir (the synced-tree watermark) — `<state>/projection`. */

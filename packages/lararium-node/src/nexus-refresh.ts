@@ -40,7 +40,7 @@ export interface NexusRefreshDeps {
   /** The Automerge storage dir the running node + the CLI writers both bind (the shared on-disk substrate). */
   readonly storageDir: string;
   /** The `bags/@nexus` charter authority home (the CLI supplies the same dir the boot read). */
-  readonly bagsDir: string;
+  readonly sealHome: string;
   /** The node's own gate key (its Nexus key) — the boards' deterministic address seed. */
   readonly nexusPubkey: string;
   /** The live antigen ring holder — its Kapae'd set re-folds against the fresh board. */
@@ -68,7 +68,7 @@ export interface NexusRefreshResult {
  */
 export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefreshResult> {
   // 1. POSTURE — fresh disk read; PRIVATE on absent / torn (fail-closed: a broken read only ever tightens).
-  const posture = federationPostureFromDoc(readNexusDoc(deps.bagsDir));
+  const posture = federationPostureFromDoc(readNexusDoc(deps.sealHome));
   deps.setPosture(posture);
 
   // 2. BOARDS — a throwaway repo on the SAME storage dir reads the flushed on-disk bytes cold (the running

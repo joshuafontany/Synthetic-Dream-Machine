@@ -52,7 +52,7 @@ describe("the provable-member floor — a seated-kahu peer reads MEMBER, all els
       ["peer-stranger",  `prefix:${stranger}`],                   // valid identity, no seat → STRANGER
       ["peer-malformed", "short-not-64-hex"],                     // no nym → STRANGER
     ]);
-    const { membership } = makeNexusMembership({ bagsDir: bags, peerIdentifierMap: peerMap });
+    const { membership } = makeNexusMembership({ sealHome: bags, peerIdentifierMap: peerMap });
 
     expect(membership.holdsCarriagePeer("peer-kahu")).toBe(true);
     expect(membership.holdsCarriagePeer("peer-kahu-upper")).toBe(true);
@@ -64,14 +64,14 @@ describe("the provable-member floor — a seated-kahu peer reads MEMBER, all els
   test("FAIL CLOSED — no charter on disk → empty member set → every cross-operator STRANGER", async () => {
     const keys    = await Promise.all(SEEDS.map(pubOf));
     const peerMap = new Map<string, string>([["peer-kahu", `prefix:${keys[0]!}`]]);
-    const { membership } = makeNexusMembership({ bagsDir: bags, peerIdentifierMap: peerMap });   // bags empty
+    const { membership } = makeNexusMembership({ sealHome: bags, peerIdentifierMap: peerMap });   // bags empty
     expect(membership.holdsCarriagePeer("peer-kahu")).toBe(false);
   });
 
   test("refresh swaps the member set when the charter seats", async () => {
     const keys    = await Promise.all(SEEDS.map(pubOf));
     const peerMap = new Map<string, string>([["peer-kahu", `prefix:${keys[0]!}`]]);
-    const holder  = makeNexusMembership({ bagsDir: bags, peerIdentifierMap: peerMap });
+    const holder  = makeNexusMembership({ sealHome: bags, peerIdentifierMap: peerMap });
     expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(false);   // unseated → STRANGER
 
     writeNexusDoc(bags, await seatedCharter(keys));

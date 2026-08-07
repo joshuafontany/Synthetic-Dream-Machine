@@ -69,7 +69,7 @@ describe("presenterNym — the proven-nym bridge (no re-authentication)", () => 
       ["peer-malformed", "short-not-64-hex"],                   // no 64-hex suffix → null
     ]);
     const holder = makeAntigenRingHolder({
-      repo: new Repo({}), nexusPubkey: NEXUS_PUBKEY, bagsDir: "/nonexistent-bags", peerIdentifierMap: peerMap,
+      repo: new Repo({}), nexusPubkey: NEXUS_PUBKEY, sealHome: "/nonexistent-bags", peerIdentifierMap: peerMap,
     });
     try {
       expect(holder.ring.presenterNym("peer-a")).toBe(RAW_NYM);
@@ -107,7 +107,7 @@ describe("the LIVE refold — board ban + seated charter → Kapae'd → Mu", ()
       ["peer-victim", `prefix:${victim}`],
       ["peer-clean",  `prefix:${"1".repeat(64)}`],
     ]);
-    const holder = makeAntigenRingHolder({ repo, nexusPubkey: NEXUS_PUBKEY, bagsDir: bags, peerIdentifierMap: peerMap });
+    const holder = makeAntigenRingHolder({ repo, nexusPubkey: NEXUS_PUBKEY, sealHome: bags, peerIdentifierMap: peerMap });
     try {
       await waitFor(() => holder.ring.kapaed.has(victim));       // the constructor resolves the board + folds
       const noRelay = new Set<string>();
@@ -127,7 +127,7 @@ describe("the LIVE refold — board ban + seated charter → Kapae'd → Mu", ()
     board.change((d) => { d.tiddlers["ban:victim"] = mutableLarRecord("ban:victim", { text: JSON.stringify(ban) }, "test"); });
 
     const peerMap = new Map<string, string>([["peer-victim", `prefix:${victim}`]]);
-    const holder = makeAntigenRingHolder({ repo, nexusPubkey: NEXUS_PUBKEY, bagsDir: bags, peerIdentifierMap: peerMap });
+    const holder = makeAntigenRingHolder({ repo, nexusPubkey: NEXUS_PUBKEY, sealHome: bags, peerIdentifierMap: peerMap });
     try {
       await holder.refold();                                     // force the fold against the (absent) charter
       expect(holder.ring.kapaed.size).toBe(0);                  // no quorum, no bans

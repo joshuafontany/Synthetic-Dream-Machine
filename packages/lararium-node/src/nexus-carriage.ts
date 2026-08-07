@@ -75,18 +75,18 @@ export interface NexusMembershipHolder {
  * Stand the @nexus membership holder. Reads the seated-kahu floor SYNCHRONOUSLY at construction (the charter
  * doc is a disk file the operator seats, not a hot-syncing board), and — when a `repo` + `nexusPubkey` are
  * supplied — resolves the always-carried members board under its deterministic id and re-folds members{} ∪ the
- * kahu floor on every board change. `bagsDir` sites the charter doc authority home; `peerIdentifierMap` carries
+ * kahu floor on every board change. `sealHome` sites the seal's authority home; `peerIdentifierMap` carries
  * the DaemonAuthGate's proven peerId → Identifier-hex bindings.
  */
 export function makeNexusMembership(opts: {
-  bagsDir:           string;
+  sealHome:           string;
   peerIdentifierMap: ReadonlyMap<string, string>;
   /** The Automerge repo — supply to fold the members board; omit for the kahu-floor-only holder. */
   repo?:             Repo;
   /** The node's own gate key (its Nexus key) — the members board's deterministic address seed. Required with `repo`. */
   nexusPubkey?:      string;
 }): NexusMembershipHolder {
-  const { bagsDir, peerIdentifierMap, repo, nexusPubkey } = opts;
+  const { sealHome, peerIdentifierMap, repo, nexusPubkey } = opts;
 
   // The member nym set — swapped whole on each refresh/refold (no partial-set window a lookup could read).
   let members: ReadonlySet<string> = new Set<string>();
@@ -98,7 +98,7 @@ export function makeNexusMembership(opts: {
 
   /** The seated-kahu floor read off disk — lowercased. An absent / unseated charter yields the empty floor. */
   const kahuFloor = (): Set<string> =>
-    new Set<string>(seatedKahuKeys(readNexusDoc(bagsDir)).map((k) => k.toLowerCase()));
+    new Set<string>(seatedKahuKeys(readNexusDoc(sealHome)).map((k) => k.toLowerCase()));
 
   /** Resolve (once) the always-carried members board, wire the change listener, and cache the handle. A holder
    *  without a repo / nexusPubkey resolves to null (kahu-floor-only). A resolve fault resolves to null too
@@ -133,7 +133,7 @@ export function makeNexusMembership(opts: {
   // freshly-materialized board) share. An absent / unseated charter folds empty (inert) AND yields an empty
   // floor; a lowercased union never silently misses a case match.
   const foldBoard = async (boardDoc: LarDoc | undefined): Promise<void> => {
-    const doc     = readNexusDoc(bagsDir);
+    const doc     = readNexusDoc(sealHome);
     const roster  = foundingRoster(doc);
     const floor   = new Set<string>(seatedKahuKeys(doc).map((k) => k.toLowerCase()));
     const entries = carriageEntriesFromBoard(boardDoc);
