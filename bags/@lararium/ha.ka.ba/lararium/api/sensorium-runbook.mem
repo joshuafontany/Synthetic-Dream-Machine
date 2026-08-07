@@ -12,7 +12,7 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis"
 retain    = true
-role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per burn), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. Verb surface verified at MCP 2026-08-04; the CLI surface reads NARROWER and the two want aligning."
+role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per re-pour), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. Verb surface verified at MCP 2026-08-04; the CLI surface reads NARROWER and the two want aligning."
 status    = "proposed"
 tags      = ["api/pono/li-ki-integrities", "api/pono/sensorium-machina", "lararium/mesh/founding-runbook", "api/pono/causal-islands", "api/lararium/living-grammar-palace"]
 type      = "text/x-memetic-wikitext"
@@ -226,7 +226,7 @@ declared regime costs less than reconciling the drift.
 
 !!! The measure-first law
 
-<<~ confidence Synthesis-Canon 14/20 >> ''ONE clean before/after boundary exists per burn, and it opens
+<<~ confidence Synthesis-Canon 14/20 >> ''ONE clean before/after boundary exists per re-pour, and it opens
 exactly once.'' Instrument BEFORE the teardown or the comparison never becomes available. A pour
 instrumented after the fact requires a second pour to measure, which costs the whole run again and still
 lacks the original state to compare against.
@@ -241,7 +241,7 @@ Run every check before the first deletion:
   re-pours; hand-authored does not.'' A store that cannot answer this question has not earned a teardown.
 # ''The write log drained.'' Confirm the log holds COMPLETED operations (records carrying results) rather
   than a pending queue. A pending entry names work that never landed anywhere else.
-# ''The old provenance kept.'' Copy the write log out before the burn — not for recovery, but as the
+# ''The old provenance kept.'' Copy the write log out before the teardown — not for recovery, but as the
   baseline the new pour gets compared against. It costs kilobytes.
 
 !!! The movement
@@ -297,6 +297,22 @@ one common space. ''Reading it as a single scalar over one substrate mistypes th
   never PUBLISHED as a property (#identity-enacts-relation).
 * ''Reproducibility across a re-pour with different sources.'' Comparability requires a fixed source set;
   a corpus poured from a moved target measures the move.
+* ''Its own ground, by name.'' <<~ confidence Synthesis 12/20 >> The stores carry no identity for the pour
+  a reading stands over — no `pour_id`, no corpus version, nothing a second reading could match against.
+  So ''two readings taken across a re-pour compare nothing'', however faithfully each got recorded, and
+  the gap sits UPSTREAM of any ledger: a baseline needs a ground it can name before it needs a place to
+  live. The pono shape reads DERIVED rather than assigned — the content plane already
+  content-addresses its drawers, so a pour's identity can fall out of its own ground (the source set and
+  their hashes, a fold over the drawer cids) with nothing declared by fiat and no network consulted.
+
+<<~ ward _ L-Prime · crossing: generation-talk, where federation vocabulary drifts local >>
+
+''AND THE WORDS FOR THIS STAY LOCAL.'' A sensorium's stores ''never federate'' — content, form, structure
+and persistence each say so outright; only the meshpalace takes a feed from the network, and an operator
+Act alone crosses any of them to a federated surface. So the lifecycle here speaks ''pour · re-pour ·
+teardown · sweep'', never //epoch// and never //burn//: those name a charter's shared regime and a
+vessel's consecration, and borrowing them imports a topology these stores do not have. A rite that
+reaches for a federation word has usually found a gap in its own vocabulary — here, the unnamed pour.
 
 <<~/ahu >>
 
