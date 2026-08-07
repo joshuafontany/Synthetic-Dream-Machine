@@ -193,6 +193,10 @@ export {
   makeCircleReactors, makeCircleAddReactor, makeCircleRemoveReactor, makeCircleListReactor,
 } from "./circle-verbs.js";
 export type { CircleVerbOptions, ResolveCirclesStore } from "./circle-verbs.js";
+// The OWN-PERSONA name verbs over @persona — the fleet-riding pet-name + declared Handle (the `seat` claim
+// stays local to whichever node holds it).
+export { makePersonaSelvesReactors } from "./persona-selves-verbs.js";
+export type { PersonaSelvesVerbOptions, ResolvePersonaStore } from "./persona-selves-verbs.js";
 // Verb-plane reactors (composite/repo-only — pono home is tw5, not node; both vessels hold them).
 export { makeInitWikiReactor, makeOpenWikiReactor }   from "./wiki-mint-handlers.js";
 export { makeDraftReactor, makePruneStaleReactor }    from "./wiki-draft-handlers.js";

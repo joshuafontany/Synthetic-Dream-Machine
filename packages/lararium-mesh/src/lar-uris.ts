@@ -419,6 +419,21 @@ export const MESH_CABAL_DOC_ID_TIDDLER     = `${DAEMON_BAG_ID}/sentinel/mesh-cab
 export const SIGNER_DID_TIDDLER            = `${PERSONA_BAG_ID}/binding/signer-did`;
 /** Persona oracle tiddler: the hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName). */
 export const HEARTH_TRUE_NAME_TIDDLER      = `${PERSONA_BAG_ID}/hearth/true-name`;
+/** The prefix every OWN-PERSONA self tiddler sits under — the human's labels for their own faces, one per
+ *  handle-index. @persona rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator, and the
+ *  DeterministicFederationGate never volunteers it to a cross-operator, so these labels reach the human's own
+ *  devices and no stranger. */
+export const PERSONA_SELVES_PREFIX         = `${PERSONA_BAG_ID}/selves`;
+/** personaSelfTiddlerUri(2) → "…/bags/@persona/selves/h2" — one tiddler per own persona. */
+export function personaSelfTiddlerUri(handleIndex: number): string {
+  return `${PERSONA_SELVES_PREFIX}/h${handleIndex}`;
+}
+/** Read a handle-index back off a self tiddler title, or null when the title names something else. */
+export function handleIndexFromSelfTiddlerUri(title: string): number | null {
+  if (!title.startsWith(`${PERSONA_SELVES_PREFIX}/h`)) return null;
+  const n = Number(title.slice(`${PERSONA_SELVES_PREFIX}/h`.length));
+  return Number.isSafeInteger(n) && n >= 0 ? n : null;
+}
 /** Persona oracle tiddler: this vessel's OWN signed device-delegation edge (signer→vessel) — the public binding the Binding Gate verifies. */
 export const DEVICE_DELEGATION_SELF_TIDDLER = `${PERSONA_BAG_ID}/delegation/self`;
 /** Persona oracle tiddler: the persona-KEL identifier PREFIX (AID) the Binding Gate PINS — stable across every

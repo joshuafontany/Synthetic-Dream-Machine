@@ -35,6 +35,9 @@ import {
 } from "@lararium/mesh";
 import { cmdPersonaAdmit } from "./persona-admit-cmd.js";
 import { larDataDir } from "../env.js";
+import {
+  makeFleetPetnameStore, makeFleetDeclarationStore, readFleetSelves, fleetPeerDid,
+} from "../daemon-persona-store.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -48,6 +51,7 @@ function usage(): void {
   console.error("    [--seat]                  stand it for a Kahu chair on this node (needs a Handle)");
   console.error("  wear <index>                switch the active persona (reboot-to-switch — one face to the mesh)");
   console.error("  list                        the private multitude — held indices, active marker, labels, Handles");
+  console.error("  sync                        carry this node's labels + declared Handles up to the fleet (@persona)");
   console.error("  admit <offer|grant|open|accept|list>   airgapped device-to-device persona hand-off (QR 3-hop)");
   console.error("");
   console.error("  founding sequence (three symmetric commands, each declaring its Handle + standing for a chair):");
@@ -100,6 +104,7 @@ export async function cmdPersona(args: ParsedArgs): Promise<number> {
       case "new":   return await personaNew(args);
       case "wear":  return await personaWear(args);
       case "list":  return await personaList(args);
+      case "sync":  return await personaSync(args);
       case "admit": return await cmdPersonaAdmit(args);
       default:
         console.error(`lares persona: unknown sub-verb "${sub}"`);
@@ -114,6 +119,29 @@ export async function cmdPersona(args: ParsedArgs): Promise<number> {
   }
 }
 
+/**
+ * The two own-persona name stores, FLEET-MIRRORED. Each write lands on the local fs floor first (a founding
+ * runs before any daemon breathes) and rides up to @persona when the sock answers; each read prefers the
+ * fleet. The `seat` claim stays local by construction — the declaration store splits it out.
+ */
+async function fleetStores(): Promise<{
+  petnames: Awaited<ReturnType<typeof makeNodePersonaPetnameStore>>;
+  declarations: Awaited<ReturnType<typeof makeNodePersonaDeclarationStore>>;
+  did: string | null;
+}> {
+  const did = await fleetPeerDid();
+  const petnames     = await makeNodePersonaPetnameStore();
+  const declarations = await makeNodePersonaDeclarationStore();
+  // No vessel key = no place = no fleet. The pure local floor stands, and `persona sync` carries the names up
+  // once the vessel does.
+  if (did === null) return { petnames, declarations, did };
+  return {
+    petnames:     makeFleetPetnameStore(petnames, did),
+    declarations: makeFleetDeclarationStore(declarations, did),
+    did,
+  };
+}
+
 async function personaNew(args: ParsedArgs): Promise<number> {
   const index = parseIndex(args.positional[1]);
   const name = typeof args.options["name"] === "string" ? args.options["name"].trim() : "";
@@ -122,8 +150,8 @@ async function personaNew(args: ParsedArgs): Promise<number> {
   const stands = args.flags["seat"] === true;
   // A seat claim answers to a CHAIR NAME, so it needs a Handle — either declared in this breath or already
   // standing from an earlier one. Refusing here beats seating a nameless claim the seal cannot join.
+  const { petnames, declarations, did } = await fleetStores();
   if (stands && handle.length === 0) {
-    const declarations = await makeNodePersonaDeclarationStore();
     const held = await declaredHandle(declarations, index);
     if (!held) {
       throw new UsageError(
@@ -135,21 +163,20 @@ async function personaNew(args: ParsedArgs): Promise<number> {
   // Mint/load the operator-root (idempotent per index; assertHandleIndex guards inside the core), then
   // set the PRIVATE pet-name. renameOwnPersona keeps its own non-blank guard.
   const root = await generateOrLoadPersonaGroupRoot(larDataDir(), index);
-  const petnames = await makeNodePersonaPetnameStore();
   await renameOwnPersona(petnames, index, name);
 
   // The DECLARATION rides its own store, so the private label never becomes a public commitment by matching
   // a string. Each flag lands its own field; neither implies the other.
-  const declarations = await makeNodePersonaDeclarationStore();
   if (handle.length > 0) await declarePersonaHandle(declarations, index, handle);
   if (stands) await standForKahuSeat(declarations, index, true);
   const declaration = await declarations.get(index);
+  const fleetReached = did !== null && (await readFleetSelves(did)) !== null;
 
   emit(args, {
     ok: true,
     data: {
       handleIndex: index, petname: name, verifyingKey: root.verifyingKey, created: root.created,
-      handle: declaration?.handle ?? null, seat: declaration?.seat === true,
+      handle: declaration?.handle ?? null, seat: declaration?.seat === true, fleet: fleetReached,
     },
     human: () => {
       console.log(`persona h${index} ${root.created ? "minted" : "loaded"} — "${name}"`);
@@ -162,7 +189,10 @@ async function personaNew(args: ParsedArgs): Promise<number> {
         console.log(`  declares no Handle — name one with --handle '<Handle>' when it should answer outward.`);
       }
       if (declaration?.seat === true) {
-        console.log(`  STANDS for a Kahu seat on this node; take the chair with: lares nexus seal seat`);
+        console.log(`  STANDS for a Kahu seat on THIS node; take the chair with: lares nexus seal seat`);
+      }
+      if (!fleetReached) {
+        console.log(`  node-local for now — no hearth answered; carry it to your other vessels with: lares persona sync`);
       }
     },
   });
@@ -188,8 +218,7 @@ async function personaList(args: ParsedArgs): Promise<number> {
   const dataDir = larDataDir();
   const held = await listPersonaRoots(dataDir);
   const active = await loadActivePersonaIndex(dataDir);
-  const petnames = await makeNodePersonaPetnameStore();
-  const declarations = await makeNodePersonaDeclarationStore();
+  const { petnames, declarations } = await fleetStores();
 
   const rows = await Promise.all(
     held.map(async (handleIndex) => ({
@@ -215,6 +244,58 @@ async function personaList(args: ParsedArgs): Promise<number> {
         console.log(`  ${r.active ? "*" : " "} h${r.handleIndex}  ${r.petname ?? "(unnamed)"}${declares}`);
       }
       console.log(`  (* = active${active === undefined ? "; none worn yet" : ""})`);
+    },
+  });
+  return 0;
+}
+
+/**
+ * personaSync — carry this node's own-persona names UP to @persona, so the fleet reads what this device knows.
+ *
+ * A vessel founds before it breathes, so names set pre-boot live only in the local fs floor. This walks that
+ * floor and re-writes each name through the fleet-mirroring store; the verb's own stamp rule decides the rest
+ * (a name a fleet-mate set LATER stands, and this device's stale copy loses without a clobber). The `seat`
+ * claim never rides — a Kahu chair belongs to the node that holds it.
+ *
+ * Idempotent, and safe to run from every device: two vessels syncing the same persona converge, because each
+ * name carries its own stamp and the later one reads.
+ */
+async function personaSync(args: ParsedArgs): Promise<number> {
+  const did = await fleetPeerDid();
+  if (did === null) {
+    throw new UsageError("this install stands no vessel key — run `lares init` before carrying names to a fleet");
+  }
+  if ((await readFleetSelves(did)) === null) {
+    throw new UsageError("no hearth answered — start the node (`lares serve`) so @persona can carry these names");
+  }
+  const localPetnames     = await makeNodePersonaPetnameStore();
+  const localDeclarations = await makeNodePersonaDeclarationStore();
+  const petnames     = makeFleetPetnameStore(localPetnames, did);
+  const declarations = makeFleetDeclarationStore(localDeclarations, did);
+
+  const carried: Array<{ handleIndex: number; petname: string | null; handle: string | null }> = [];
+  const indices = new Set<number>([
+    ...(await localPetnames.entries()).map(([i]) => i),
+    ...(await localDeclarations.entries()).map(([i]) => i),
+  ]);
+  for (const handleIndex of [...indices].sort((a, b) => a - b)) {
+    const petname = await localPetnames.get(handleIndex);
+    const handle  = (await localDeclarations.get(handleIndex))?.handle;
+    if (petname) await petnames.set(handleIndex, petname);
+    if (handle)  await declarations.set(handleIndex, { ...(await localDeclarations.get(handleIndex) ?? {}), handle });
+    carried.push({ handleIndex, petname: petname ?? null, handle: handle ?? null });
+  }
+
+  emit(args, {
+    ok: true,
+    data: { carried },
+    human: () => {
+      if (carried.length === 0) { console.log("no own-persona names held — nothing to carry."); return; }
+      console.log(`carried ${carried.length} persona name${carried.length === 1 ? "" : "s"} up to the fleet (@persona):`);
+      for (const c of carried) {
+        console.log(`  h${c.handleIndex}  ${c.petname ?? "(unnamed)"}${c.handle ? `  ->  "${c.handle}"` : ""}`);
+      }
+      console.log("  the seat claim stays on this node — a Kahu chair belongs to the node that holds it.");
     },
   });
   return 0;

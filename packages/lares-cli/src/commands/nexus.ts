@@ -5,7 +5,8 @@
  * the chain's HEAD epoch. The pure antigen fold/verify reads this same doc through `foundingRoster`.
  *
  *   seat    read each held persona's ed25519 VERIFYING key from the vault (NEVER the signing seed), match it
- *           to a founding-kahu display name by PRIVATE pet-name, and establish the GENESIS epoch (sequence 0)
+ *           to a founding-kahu chair by its DECLARED HANDLE (never the private pet-name — matching the label
+ *           would weld a compartment's private name to a public commitment), and establish the GENESIS epoch (sequence 0)
  *           bound to the seated key-set + an operator-supplied PRE-ROTATION commitment (`--next-key-commit`)
  *           to the next epoch's keys. FAILS CLOSED: a kahu with no matching held persona stays unseated; a
  *           quorum-short roster establishes no epoch (the antigen stays inert); a chain already ADVANCED past
@@ -39,6 +40,7 @@ import {
   type NexusDoc, type NexusCharterKahu, type SealEpoch, type ReserveCard,
 } from "@lararium/mesh";
 import { larBagsDir, larDataDir } from "../env.js";
+import { makeFleetDeclarationStore, fleetPeerDid } from "../daemon-persona-store.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -61,7 +63,7 @@ function usage(): void {
 function sealUsage(): void {
   console.error("usage: lares nexus seal <seat | rotate | commit | show>");
   console.error("");
-  console.error("  seat    establish the GENESIS epoch from the held personas' verifying keys (by pet-name)");
+  console.error("  seat    establish the GENESIS epoch from the held personas' verifying keys (by DECLARED Handle)");
   console.error("          + a pre-rotation commitment:  --next-key-commit <digest>");
   console.error("  rotate  reveal the pre-committed next key-set (now in the vault) + advance the chain:");
   console.error("          --next-key-commit <digest-of-the-FOLLOWING-key-set>");
@@ -377,7 +379,13 @@ async function seatKahuFromVault(
   // every private label would quietly become a public commitment. A persona reaches a chair by declaring the
   // Handle it answers to AND standing for a seat; both are the human's own explicit acts (persona-declare).
   const held = new Set(await listPersonaRoots(dataDir));
-  const declarations = await makeNodePersonaDeclarationStore();
+  // The declared Handle rides the FLEET (@persona), the seat claim stays LOCAL — so the seal reads a persona's
+  // outward name as every device of the human knows it, and reads the chair claim as THIS node holds it.
+  const localDeclarations = await makeNodePersonaDeclarationStore();
+  const fleetDid = await fleetPeerDid();
+  const declarations = fleetDid === null
+    ? localDeclarations                                                  // no vessel key = no fleet to read
+    : makeFleetDeclarationStore(localDeclarations, fleetDid);
   const standing = await personasStandingForSeat(declarations);
   const byHandle = new Map<string, string>();   // normalized declared Handle → verifying key hex
   for (const [index, handle] of standing) {

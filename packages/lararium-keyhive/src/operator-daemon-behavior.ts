@@ -25,8 +25,9 @@ import {
   makePersonaStateReactor,
   makeCircleStateReactor,
   makeCircleReactors,
+  makePersonaSelvesReactors,
 } from "@lararium/tw5";
-import { CIRCLES_DOC_URI } from "@lararium/mesh";
+import { CIRCLES_DOC_URI, PERSONA_BAG_ID } from "@lararium/mesh";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
@@ -154,6 +155,22 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         registry.register("circle-add",    circleReactors.add);
         registry.register("circle-remove", circleReactors.remove);
         registry.register("circle-list",   circleReactors.list);
+
+        // The OWN-PERSONA name verbs over the sovereign @persona doc — the human's labels for their OWN faces
+        // (the private pet-name + the declared Handle), riding the same PRIVATE tier one plane over: the
+        // self-slot FLEET-syncs @persona same-operator so a rename lands on ALL the operator's own devices,
+        // and the DeterministicFederationGate never volunteers it to a cross-operator. The `seat` claim does
+        // NOT ride — a Kahu chair names a seat on a PARTICULAR node, so each node keeps its own. No board
+        // shore is reachable here: only a publicly announced Handle binds a persona to a public glamour.
+        const resolvePersonaStore = async () => {
+          const store = await oraclePlane.storeOf(PERSONA_BAG_ID);
+          if (!store) throw new Error("persona-selves-verb: @persona unresolved — the @oracle registry names no PERSONA_BAG_ID");
+          return store;
+        };
+        const selvesReactors = makePersonaSelvesReactors({ resolveStore: resolvePersonaStore });
+        registry.register("persona-label",  selvesReactors.label);
+        registry.register("persona-handle", selvesReactors.handle);
+        registry.register("persona-selves", selvesReactors.selves);
       }
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
