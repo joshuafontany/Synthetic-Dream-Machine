@@ -236,6 +236,60 @@ def read_stored_embeddings(collection, key_map: dict, *, where=None) -> list:
 
 
 # ---------------------------------------------------------------------------
+# guest ward — the upstream install stands APART from every sensorium
+# ---------------------------------------------------------------------------
+#
+# `~/.mempalace` holds the GUEST: an upstream mempalace install the operator tends with upstream's
+# own tooling. The House may read it as a comparator; no sensorium may take it as a root. A store
+# that opened it would write `lar_*` marks into a palace whose owner never asked for them, and the
+# guest's own hooks would then mine around our vocabulary.
+#
+# The ward lives here ONCE because every python holder already composes this module. Two callers
+# previously each carried their own copy of the check, which is one copy too many for a rule whose
+# whole value rests on holding everywhere.
+
+
+def guest_root() -> str:
+    """The guest install's real path — resolved, so a symlink spelling cannot slip past."""
+    return os.path.realpath(os.path.expanduser("~/.mempalace"))
+
+
+def inside_guest(path: str) -> bool:
+    """Whether `path` names the guest install or anything beneath it."""
+    real = os.path.realpath(os.path.expanduser(path))
+    root = guest_root()
+    return real == root or real.startswith(root + os.sep)
+
+
+def refuse_guest(path: str, *, who: str) -> None:
+    """Refuse a sensorium root that reaches the guest, naming the caller that tried.
+
+    A caller may still read the guest deliberately (`guest_harvest` writes there and carries no
+    `lar_*`); this refuses it as a SENSORIUM ROOT, which is a different act.
+    """
+    if inside_guest(path):
+        raise SystemExit(
+            f"{who}: REFUSED — {path!r} reaches the guest install at ~/.mempalace. "
+            "The guest stands apart from every sensorium; point this at "
+            "<data>/sensoriums/<name> instead."
+        )
+
+
+def refuse_guest_env(*, who: str) -> None:
+    """Refuse when MEMPALACE_PALACE_PATH aims a holder at the guest.
+
+    `config.py` reads that variable with priority OVER the config file, so a stray export redirects
+    a holder without touching any argument the caller passed.
+    """
+    aimed = os.environ.get("MEMPALACE_PALACE_PATH")
+    if aimed and inside_guest(aimed):
+        raise SystemExit(
+            f"{who}: REFUSED — MEMPALACE_PALACE_PATH aims at the guest install ({aimed!r}). "
+            "Unset it or point it at a sensorium root."
+        )
+
+
+# ---------------------------------------------------------------------------
 # serve cap — the per-palace flock singleton (reap-don't-pile, OS-enforced)
 # ---------------------------------------------------------------------------
 

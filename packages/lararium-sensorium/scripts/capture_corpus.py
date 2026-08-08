@@ -10,11 +10,11 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import sys
 
 import content_io as cio
 from capture_session import stamp_embedder
 from capture_sources import corpus_sectioned_source, corpus_source
+from holder_caps import refuse_guest, refuse_guest_env
 from capture_stream import ContentStoreLandCap
 from plane_fanout import compose_text_planes
 from sensorium import (OrderCap, compose_persistence_cap, compose_stream_sensorium,
@@ -23,10 +23,9 @@ from sensorium import (OrderCap, compose_persistence_cap, compose_stream_sensori
 
 
 def refuse_comparator(root: str) -> None:
-    comparator = os.path.realpath(os.path.expanduser("~/.mempalace"))
-    real = sensorium_paths(root).root
-    if real == comparator or real.startswith(comparator + os.sep):
-        raise SystemExit(f"capture_corpus: REFUSED — {root!r} sits inside ~/.mempalace (comparator only)")
+    """Refuse a corpus root that reaches the guest install — the ward lives in holder_caps."""
+    refuse_guest(sensorium_paths(root).root, who="capture_corpus")
+    refuse_guest_env(who="capture_corpus")
 
 
 def write_corpus_manifest(root: str, *, name: str = "corpus", ephemeral: bool = False) -> str:

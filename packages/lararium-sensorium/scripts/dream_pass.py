@@ -80,6 +80,8 @@ import argparse
 import hashlib
 import json
 import os
+
+from holder_caps import refuse_guest, refuse_guest_env
 import sys
 
 import content_io as cio
@@ -135,6 +137,11 @@ def _ward_roots(eidetic_root: str, dream_root: str) -> None:
     and the two roots collapsing to one. Designation carries authority; fail loud."""
     _refuse_comparator(eidetic_root)
     _refuse_comparator(dream_root)
+    # The guest install stands apart from every sensorium, so neither root may reach it.
+    refuse_guest(eidetic_root, who="dream_pass")
+    refuse_guest(dream_root, who="dream_pass")
+    refuse_guest_env(who="dream_pass")
+
     e = os.path.realpath(os.path.expanduser(eidetic_root))
     d = os.path.realpath(os.path.expanduser(dream_root))
     if e == d:
