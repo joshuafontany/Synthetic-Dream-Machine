@@ -86,6 +86,34 @@ docker compose -f docker-compose.mesh.yml down -v                        # THE C
 destructive command in the house, the rehearsal branch opens on one whose whole virtue reads
 //repeatable//. Run it until the sequence bores; ''boredom names the readiness the keeper needs''.
 
+!!! The KEEPER rehearsal ~ the sequence this branch never ran
+
+''The container harness stands the MESH branch'' — it founds vessels with `lares init` and witnesses Herm
+carry + partition. ''Movements ②–⑥ were never run end-to-end by anything'': persona → nexus seal → vault →
+regenesis → live had no green baseline to diff a failure against. `tools/rehearse-keeper.sh` gives them one.
+
+```
+tools/rehearse-keeper.sh                             # 2 cycles, throwaway tree, burns on exit
+tools/rehearse-keeper.sh --cycles 5 --keep           # run until it bores; keep the tree to inspect
+```
+
+''ONE ENV VAR ISOLATES EVERYTHING.'' `LAR_ROOT` re-roots data, state, the seal, the acquired library, bags,
+genesis ''and the UDS socket'' — nine of nine, measured 2026-08-08. So a throwaway costs no containers and
+destroys nothing real; the container harness stays for what containers actually buy (rude sockets, real
+disks, a drop that drops). The harness ''REFUSES'' any root under the operator's home, any root naming the
+repo, and any root already carrying an identity — ''a rehearsal harness that can eat the hearth is not one''.
+
+''THE SEED SET'' (operator-approved 2026-08-08): `@lares` · `@lararium` · `@crossroads` — the two system
+bags plus the public floor, re-copied EACH cycle so cycle 2 tests the ''rite's'' idempotency rather than a
+warm tree's. `LAR_ROOT` isolates AND empties `bags/`, so a run that skipped this would prove less than it
+appears to.
+
+''TWO DIVERGENCES, NAMED so a green run never reads as more than it proves'':
+* it founds with `lares init`, never `wake --install` — the install leg writes OUTSIDE `LAR_ROOT` (mempalace
+  pip, the `~/.claude` wires), and a rehearsal must not reach the operator's real tooling. ''The install leg
+  and the harness wiring go un-exercised.''
+* the vault seals from `LARES_ARCHIVE_PASSPHRASE`, so ''the no-echo TTY prompt leg goes un-exercised''.
+
 ''What a rehearsal proves that a test cannot.'' The suites prove every property in-process, authored
 by the same hand that wrote the code — the field has never disagreed. A container founding lets
 sockets be rude, disks be real, and a drop actually drop: it stands the cheapest ''outside island''
