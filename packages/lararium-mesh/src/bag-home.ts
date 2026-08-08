@@ -35,8 +35,9 @@
  * discipline runs: a new bag asks this module for its directory, and a review of a hand-rolled `join(…bags…)`
  * asks why.
  *
- * `repository` additionally names a substrate this module cannot supply — a configured repo root. Absent one
- * the resolver REFUSES rather than guessing a tree, because guessing is the failure it exists to prevent.
+ * `repository` additionally names a substrate this module cannot supply — a REGISTERED repo. A bag names an
+ * id; the operator maps ids to roots on their own vessel; an unregistered id REFUSES rather than guessing a
+ * tree, because guessing is the failure it exists to prevent. No path ever rides a bag's own declaration.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-policy
  */
@@ -72,10 +73,28 @@ export function parseBagHome(value: unknown): BagHome {
   return isBagHome(folded) ? folded : DEFAULT_BAG_HOME;
 }
 
+/**
+ * One CONFIGURED source-control repo, named. A bag names the `id`; nothing anywhere names a path.
+ *
+ * NO MAGIC STRINGS (operator ruling, 2026-08-08). A bag that carried a path would carry one operator's disk
+ * layout into a declaration meant to travel, and a second operator cloning that bag would inherit a directory
+ * that names nothing on their machine. The bag names an ID; each operator maps that id to a root on their own
+ * vessel. The declaration stays portable and the path stays local, which is the same split the `lar:` URI law
+ * already runs — a name that does not fetch.
+ */
+export interface RepoRegistration {
+  /** The stable id a bag names — an operator's own handle for one repo ("canon", "work", "elyncia"). */
+  readonly id:   string;
+  /** Where it stands on THIS vessel. Never travels; never appears in a bag's own declaration. */
+  readonly root: string;
+  /** Which source-control system holds it. Recorded so a mover knows what it must ask before it writes. */
+  readonly vcs:  "git" | "other";
+}
+
 /** Where each home resolves to on this vessel. A caller supplies the roots it actually stands. */
 export interface BagHomeRoots {
-  /** The CONFIGURED source-control repo root. Absent → `repository` refuses rather than guessing a tree. */
-  readonly repository?: string | undefined;
+  /** Every repo this operator configured, by id. A bag naming an unregistered id REFUSES — it never guesses. */
+  readonly repositories?: ReadonlyMap<string, RepoRegistration> | undefined;
   /** The per-operator state home — always present on a vessel that stands at all. */
   readonly hearth: string;
 }
@@ -97,14 +116,19 @@ export type BagHomeResolution =
  * carries it has no durable local original, and handing back a path would invite a caller to write one — so
  * the refusal here reads as the model speaking, never as a gap.
  */
-export function resolveBagHomeDir(home: BagHome, roots: BagHomeRoots): BagHomeResolution {
+export function resolveBagHomeDir(home: BagHome, roots: BagHomeRoots, repoId?: string): BagHomeResolution {
   switch (home) {
     case "hearth":
       return { ok: true, home, dir: roots.hearth };
-    case "repository":
-      return roots.repository
-        ? { ok: true, home, dir: roots.repository }
-        : { ok: false, home, why: "no source-control repo stands configured — declare one, or home this bag at the hearth" };
+    case "repository": {
+      if (!repoId) {
+        return { ok: false, home, why: "this bag homes at a repository and NAMES none — declare which one (a bag names an id, never a path)" };
+      }
+      const reg = roots.repositories?.get(repoId);
+      return reg
+        ? { ok: true, home, dir: reg.root }
+        : { ok: false, home, why: `no repo registered under "${repoId}" on this vessel — register it, or home this bag at the hearth` };
+    }
     case "ley":
       return { ok: false, home, why: "a ley bag rests nowhere durable — it lives while the mesh carries it, so it has no local directory" };
   }

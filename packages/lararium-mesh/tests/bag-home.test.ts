@@ -15,7 +15,8 @@ import {
 } from "../src/bag-home.js";
 import { DEFAULT_CAP_TIER, parseCapTier } from "../src/cap-tier.js";
 
-const ROOTS = { repository: "/repo", hearth: "/state" };
+const CANON = { id: "canon", root: "/repos/canon", vcs: "git" } as const;
+const ROOTS = { hearth: "/state", repositories: new Map([["canon", CANON]]) };
 
 describe("the axis reads as data, and fail-closes to the recoverable failure", () => {
   test("the three homes stand, and nothing else parses into them", () => {
@@ -63,14 +64,20 @@ describe("the resolver holds the one mapping, and refuses rather than guessing",
     expect(resolveBagHomeDir("hearth", ROOTS)).toEqual({ ok: true, home: "hearth", dir: "/state" });
   });
 
-  test("repository resolves to the CONFIGURED repo", () => {
-    expect(resolveBagHomeDir("repository", ROOTS)).toEqual({ ok: true, home: "repository", dir: "/repo" });
+  test("repository resolves through the REGISTERED id — a bag names WHAT, the vessel resolves WHERE", () => {
+    expect(resolveBagHomeDir("repository", ROOTS, "canon")).toEqual({ ok: true, home: "repository", dir: "/repos/canon" });
   });
 
-  test("★ an UNCONFIGURED repository REFUSES — inventing a tree is the failure this axis prevents ★", () => {
-    const r = resolveBagHomeDir("repository", { hearth: "/state" });
+  test("★ an UNREGISTERED id REFUSES — inventing a tree is the failure this axis prevents ★", () => {
+    const r = resolveBagHomeDir("repository", { hearth: "/state" }, "canon");
     expect(r.ok).toBe(false);
-    expect(r.ok === false && r.why).toMatch(/no source-control repo/);
+    expect(r.ok === false && r.why).toMatch(/no repo registered/);
+  });
+
+  test("★ a repository home NAMING no repo refuses — no path ever rides a declaration ★", () => {
+    const r = resolveBagHomeDir("repository", ROOTS);
+    expect(r.ok).toBe(false);
+    expect(r.ok === false && r.why).toMatch(/NAMES none/);
   });
 
   test("★ a LEY bag resolves to NO directory by construction — the model speaking, never a gap ★", () => {
@@ -84,7 +91,7 @@ describe("the resolver holds the one mapping, and refuses rather than guessing",
 
   test("every home resolves totally — no home falls through unhandled", () => {
     for (const h of BAG_HOMES) {
-      const r = resolveBagHomeDir(h as BagHome, ROOTS);
+      const r = resolveBagHomeDir(h as BagHome, ROOTS, "canon");
       expect(typeof r.ok).toBe("boolean");
       expect(r.home).toBe(h);
     }

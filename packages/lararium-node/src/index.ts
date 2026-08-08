@@ -12,6 +12,14 @@ export {
 } from "./vessel-paths.js";
 export { atomicWriteFileSync } from "./fs-atomic.js";
 
+// A bag's OWN declaration on disk (what it carries · who may read it · where it belongs), the operator's
+// REPO REGISTRY (ids, never paths), and the MOVE that relocates bytes and re-anchors the declaration together.
+export {
+  repoRegistryPath, readRepoRegistry, registerRepo, unregisterRepo,
+  bagHomeRoots, iamTableFromBody, readBagManifest, writeBagManifest, surveyBags, moveBagHome,
+} from "./bag-declare.js";
+export type { BagSighting, BagMoveOutcome } from "./bag-declare.js";
+
 // The per-@daemon resource-override reader + the composable daemon resource caps (`~/.lares/config.json`
 // sites bags/genesis/cas away from the repo-relative default; genesis artifacts stay checked-in by default).
 export {

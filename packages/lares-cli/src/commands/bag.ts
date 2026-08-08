@@ -5,18 +5,31 @@
  * one sync surface). Wiki-level operations (whole-recipe pins, composition,
  * Epoch-on-the-stack) live under `lares wiki <verb>`; bag-level lives here.
  *
+ * TWO HALVES, and they answer different questions. The RUNTIME half (pin · unpin · stats · register-cold ·
+ * epoch) answers //is this doc in RAM//. The LIFECYCLE half (list · show · declare · home · repo) answers
+ * what a bag IS, who may read it, where it belongs, and how to move it — none of which a bag could answer
+ * about itself until it carried a declaration of its own.
+ *
  * Verbs:
  *   pin <url> [--reason <text>]   — never evict this bag from RAM
  *   unpin <url>                   — remove the cooling exemption (bag rejoins the LRU sweep)
  *   stats                         — pinned / wela / anu residency snapshot
  *   register-cold <url>           — mark URL as known-but-not-loaded (oracle stub)
  *   epoch <url>                   — DXOS-style snapshot-restart; bounds history
+ *   list                          — every bag: declared tier + home, and whether it sits where it belongs
+ *   show <bag>                    — one bag's declaration, resolved on this vessel
+ *   declare <bag> --tier --home   — write/amend the declaration (moves no bytes)
+ *   home <bag> --to <home> --approve  — MOVE the bytes and re-anchor the declaration together
+ *   repo <list|add|drop>          — the repo registry; bags name IDs, never paths
  */
 
 import { vesselDid } from "../env.js";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";
+import {
+  cmdBagList, cmdBagShow, cmdBagDeclare, cmdBagHome, cmdBagRepo, bagLifecycle,
+} from "./bag-declare-cmd.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -62,6 +75,14 @@ const SUBCOMMANDS: Readonly<Record<string, { handler: BagSubcommand; summary: st
   "stats":         { handler: cmdResidency,    summary: "Print the daemon's bag residency snapshot. Needs `lares serve`." },
   "register-cold": { handler: cmdRegisterCold, summary: "Mark a bag URL as known-but-not-loaded (oracle stub). Needs `lares serve`." },
   "epoch":         { handler: cmdBagEpoch,     summary: "DXOS-style snapshot-restart on one bag. Bounds history; lossy by design." },
+  // ── The LIFECYCLE half. Everything above answers a RUNTIME question (is this doc in RAM); these answer
+  // what a bag IS, who may read it, where it belongs, and how to move it — the questions a bag could not
+  // answer about itself at all until it carried a declaration.
+  "list":          { handler: bagLifecycle(cmdBagList),    summary: "Every bag: its declared cap-tier + home, and whether it sits where it says it belongs." },
+  "show":          { handler: bagLifecycle(cmdBagShow),    summary: "One bag's declaration, and where that resolves on THIS vessel." },
+  "declare":       { handler: bagLifecycle(cmdBagDeclare), summary: "Write/amend a bag's own declaration (--tier --home --repo --role). Moves no bytes." },
+  "home":          { handler: bagLifecycle(cmdBagHome),    summary: "MOVE a bag to a home (--to, --repo). Plans by default; --approve performs it." },
+  "repo":          { handler: bagLifecycle(cmdBagRepo),    summary: "The repo registry: `list` | `add <id> --root <path>` | `drop <id>`. Bags name IDs, never paths." },
 };
 
 function printBagHelp(): void {

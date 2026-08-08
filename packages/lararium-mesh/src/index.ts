@@ -14,6 +14,9 @@ export * from "./bag-residency.js";
 // WHERE a bag's bytes rest — repository | hearth | ley — the third self-describing axis beside the cap-tier
 // (who may read) and the residency temperature (whether it stands loaded). Fail-closed to hearth.
 export * from "./bag-home.js";
+// A bag's OWN `iam` declaration — what it carries, who may read it, where it belongs. The manifest that makes
+// the three self-describing axes actually SPOKEN rather than merely defined.
+export * from "./bag-manifest.js";
 export * from "./vessel-identity-core.js";
 export * from "./anchor-store.js";
 export * from "./persona-vault.js";
