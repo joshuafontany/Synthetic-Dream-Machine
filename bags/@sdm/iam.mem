@@ -1,0 +1,21 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/bags/sdm >>
+```toml iam
+bag       = "@sdm"
+cap-tier  = "public"
+home      = "repository"
+repository = "synthetic-dream-machine"
+type      = "text/x-memetic-wikitext"
+```
+
+! @sdm
+
+This bag declares its own caps and its own home. ''cap-tier'' names WHO may read it — and only ever
+TIGHTENS against the structural floor, so a declaration cannot open what the crypto keeps shut.
+''home'' names WHERE its bytes rest: `repository` (a clone carries it) · `hearth` (per-operator, no
+clone carries it) · `ley` (nowhere durable — it lives while the mesh carries it).
+
+A repository home names a REGISTERED id, never a path: the bag names WHAT, each vessel resolves WHERE.
+
+<<~ &#x0004; -> ? >>

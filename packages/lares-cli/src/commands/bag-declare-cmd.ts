@@ -49,8 +49,9 @@ function surveyDir(args: ParsedArgs): string {
   return args.options["dir"] ?? larBagsDir();
 }
 
+/** The bag name. The dispatcher already shifted its own verb off, so the name sits FIRST here. */
 function bagArg(args: ParsedArgs, verb: string): string {
-  const raw = (args.positional[1] ?? "").trim();
+  const raw = (args.positional[0] ?? "").trim();
   if (!raw) throw new BagUsageError(`\`bag ${verb}\` wants a bag name (e.g. @lares)`);
   return raw.startsWith("@") ? raw : `@${raw}`;
 }
@@ -218,7 +219,7 @@ export async function cmdBagHome(args: ParsedArgs): Promise<number> {
 
 /** The operator's repo registry — ids the bags name, roots only this vessel knows. */
 export async function cmdBagRepo(args: ParsedArgs): Promise<number> {
-  const op = (args.positional[1] ?? "list").trim();
+  const op = (args.positional[0] ?? "list").trim();
   if (op === "list") {
     const repos = [...readRepoRegistry().values()];
     emit(args, {
@@ -236,7 +237,7 @@ export async function cmdBagRepo(args: ParsedArgs): Promise<number> {
     return 0;
   }
   if (op === "add") {
-    const id   = (args.positional[2] ?? "").trim();
+    const id   = (args.positional[1] ?? "").trim();
     const root = args.options["root"];
     if (!id || !root) throw new BagUsageError("usage: lares bag repo add <id> --root <path> [--vcs git|other]");
     const vcs  = args.options["vcs"] === "other" ? "other" : "git";
@@ -246,7 +247,7 @@ export async function cmdBagRepo(args: ParsedArgs): Promise<number> {
     return 0;
   }
   if (op === "drop") {
-    const id = (args.positional[2] ?? "").trim();
+    const id = (args.positional[1] ?? "").trim();
     if (!id) throw new BagUsageError("usage: lares bag repo drop <id>");
     const all = unregisterRepo(id);
     emit(args, { ok: true, data: { id, count: all.size },
