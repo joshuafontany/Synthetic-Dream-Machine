@@ -1,7 +1,9 @@
 # Development dependencies for lares MCP server
 pytest
 pytest-cov
-chromadb
+# Pinned: the version this line is verified against. mempalace declares a range;
+# the sensorium holders open its stores directly, so the resolved version is ours to state.
+chromadb==1.5.9
 # The /mcp surface (packages/lararium-mempalace/scripts/lares_mcp.py) rides FastMCP from the
 # official python SDK — the stdio serve + tool registry the isomorphic verb-surface stands on.
 mcp
