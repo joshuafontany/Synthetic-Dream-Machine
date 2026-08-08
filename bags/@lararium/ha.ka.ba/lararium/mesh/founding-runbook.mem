@@ -11,9 +11,9 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27; THIRD PASS 2026-08-06/07 re-points the seat join from the PRIVATE pet-name to the DECLARED HANDLE (three acts per founding command: --name labels privately, --handle declares outward, --seat stands for a chair), gathers the names onto the fleet via `persona sync`, RETIRES the built-in founding names (the roster forms from what stood; the threshold derives majority), re-homes the seal per-operator at <state>/nexus, and lands the @nexus LIFECYCLE (born by act · lives by ley-line traffic · quiet by absence — no admin capability anywhere; succession rides ROTATE under the standing pre-commitment) plus the bag-HOME axis (repository | hearth | ley, fail-closed to hearth)."
+role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27; THIRD PASS 2026-08-06/07 re-points the seat join from the PRIVATE pet-name to the DECLARED HANDLE (three acts per founding command: --name labels privately, --handle declares outward, --seat stands for a chair), gathers the names onto the fleet via `persona sync`, RETIRES the built-in founding names (the roster forms from what stood; the threshold derives majority), re-homes the seal per-operator at <state>/nexus, and lands the @nexus LIFECYCLE (born by act · lives by ley-line traffic · quiet by absence — no admin capability anywhere; succession rides ROTATE under the standing pre-commitment) plus the bag-HOME axis (repository | hearth | ley, fail-closed to hearth). FOURTH PASS 2026-08-08: ① names what the clear MUST NOT touch (the acquired library and the repo registry survive every founding — the library rebuilds from NOTHING); a founder meets two new surfaces (#bags-and-shelf) — every bag declares itself (cap-tier ⊥ home, DISK-OWNED so no wiki edit can re-home a bag) and the acquired shelf holds books outside every tracked tree, referenced by collection name rather than path."
 status    = "proposed"
-revised-on = "2026-08-06"
+revised-on = "2026-08-08"
 tags      = ["mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/charter-chain"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/founding-runbook"
@@ -248,7 +248,7 @@ exists to prevent.
 
 <<~/ahu >>
 
-<<~ ahu #clear >>
+<<~ ahu #preflight >>
 
 !! ⓪′ Preflight ~ prove the toolchain answers BEFORE anything irreversible
 
@@ -312,6 +312,34 @@ of the corpus carries NO Nexus'', because a Nexus belongs to the operators who f
 whoever copied the code.
 
 ''A first founding crosses this freely'' — no seal stands, so the line removes nothing.
+
+!!! ⚠ WHAT THE CLEAR MUST NOT TOUCH ~ the library survives every founding
+
+''DO NOT `rm -rf ~/.local/state/lares`.'' Two lines above point INSIDE that directory, which makes the
+whole-directory gesture read as the natural next reach — and it would destroy the one thing on the vessel
+that regenerates from ''nothing''.
+
+The state home carries ''four kinds'' and only two of them clear:
+
+|! kind |! path |! the clear |
+| the sovereign root | `<state>/identity` | ''CUT'' — the fresh-from-void act |
+| the Nexus seal | `<state>/nexus` | ''CUT'' — a prior lineage strands a re-founding |
+| the ACQUIRED library | `<state>/library` | ''KEEP'' — books, corpora, anything poured over. It rebuilds from NOTHING |
+| the repo registry | `<state>/repos.json` | ''KEEP'' — ids the bags name; re-registering costs an act |
+
+''The library holds what no rite can re-make.'' The runtime CAS may be pared because its blobs rebuild from
+the bags carriers; an acquired body has no such path — the corpus left the repository precisely so a shelf
+could grow without the history growing with it, and the shelf is now the only copy. Verify it after the
+founding rather than trusting the absence of an error:
+
+```
+lares library verify                                # every body re-digests to the directory holding it
+lares library list                                  # the collections, and what each holds
+```
+
+<<~ confidence Canon 18/20 >> ''A `reset` never reaches it'' — the tier homes under the STATE home for exactly
+this reason (`<data>/vessel` is what the substrate verbs reforge). The danger the rite must name reads as the
+''operator's own hand'', never the machine's.
 
 
 <<~/ahu >>
@@ -812,6 +840,52 @@ the root). The default holds — users stay light; operators carry the future.
 
 <<~/ahu >>
 
+<<~ ahu #bags-and-shelf >>
+
+!! What a founding vessel carries besides its keys ~ declarations and the shelf
+
+Two surfaces landed after this rite was first written, and a founder meets both.
+
+!!! Every bag declares itself
+
+A bag carries its own `iam.mem` answering three questions no bag could answer before: ''what it holds'',
+''who may read it'' (`cap-tier` — and a declaration only ever TIGHTENS against the structural floor, so one
+that lies open changes nothing), and ''where it belongs'' (`home` — `repository` · `hearth` · `ley`).
+
+```
+lares bag list                                      # tier + home per bag, and whether each sits where it says
+lares bag show <bag>                                # one bag, resolved on THIS vessel
+lares bag declare <bag> --tier <t> --home <h> --repo <id>
+lares bag home <bag> --to <home> --approve          # MOVE the bytes + re-anchor the declaration together
+lares bag repo add <id> --root <path>               # the registry: bags name IDs, never paths
+```
+
+''`ADRIFT` names the row that matters'' — a bag whose bytes sit somewhere its own declaration does not point
+at. That condition, unsurfaced, is how a Nexus seal came to rest inside a repository nobody chose.
+
+''THE DECLARATION IS DISK-OWNED'' (operator ruling, 2026-08-08). It never enters the store and never
+round-trips: seeded, a wiki edit could re-home a bag or loosen its cap-tier, and ''a declaration a rendered
+surface can move is a declaration nothing holds''. The authority stays where `lares bag declare` writes it.
+A re-founding therefore ''re-reads'' the declarations from disk and needs no act to restore them.
+
+!!! The acquired shelf
+
+Books and corpora a human did not author live at `<state>/library`, never in a bag. `bags/` carries what an
+operator ''authors'' and round-trips; an acquired body has no author here and no parse∘render fixed point, so
+left on the seed surface it enters git history and a growing shelf grows the history with it.
+
+```
+lares library list | show <coll> | verify           # verify re-digests BYTES, never records
+lares library acquire <file> --to <coll>            # MOVES by default — moving is the point
+lares library index <coll> --out <path>             # the tracked index, the part that travels
+```
+
+''A pour names a collection, never a path'': a bed manifest sources `library:<collection>` and each vessel
+resolves it locally — the same law the repo registry runs and the `lar:` URI before it. ''The shelf survives
+every founding'' (#clear).
+
+<<~/ahu >>
+
 <<~ ahu #agent-seed >>
 
 !! The agent seed ~ how a reader answers //what do I run next//
@@ -822,15 +896,15 @@ current state'', never from memory or from a guess about which movement stands d
 
 ''THE SURFACE SURVEY, and the gap it names.'' The two operator surfaces do NOT cover the same ground:
 
-* the ''CLI'' stands ''40 verbs'', and carries the WHOLE founding surface — `wake` · `init` ·
+* the ''CLI'' stands ''46 verbs'' (re-counted 2026-08-08), and carries the WHOLE founding surface — `wake` · `init` ·
   `reset` · `persona` · `nexus` · `herm` · `device-admit` · `invite-send`/`invite-receive` ·
-  `cabal` · `edge` · `vault` · `circle` · `regenesis`.
-* the ''MCP'' stands ''30 tools'', and carries almost none of it — its ground reads
+  `cabal` · `edge` · `vault` · `circle` · `regenesis` · `bag` · `library` (#bags-and-shelf).
+* the ''MCP'' stood ''30 tools'' at the 2026-07-27 survey and stands UN-RE-COUNTED since, and carries almost none of it — its ground reads
   sensorium/analysis/memory (`li` · `ki` · `jing` · `pour` · `couple_r` · `forecast` · `mismatch` ·
   `plane_record` · `sweep` · `rejim` · `worldline` · `recall` · `analyze`) plus `vault_*`, `wiki`,
   `status`, `flow`, `reconcile`, `kapae`/`un_kapae`, and the roster/promote/retire family.
 
-''NOT ONE founding verb crosses to the MCP.'' An agent working through that surface can read, recall,
+''NOT ONE founding verb crossed to the MCP at the survey'', and nothing since has added one — though the MCP side reads un-re-counted, so this holds as a standing reading rather than a fresh measurement. An agent working through that surface can read, recall,
 and analyze — and stands ''structurally blind'' to the entire civic/identity rite.
 
 ''THE PONO SHAPE READS GUIDANCE, NEVER EXECUTION.'' The cure emphatically does NOT mirror the

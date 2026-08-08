@@ -17,7 +17,7 @@
 
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, resolve, sep, extname } from "node:path";
-import { newChangeId, taskContentId, carrierHash, digestsEqual } from "@lararium/mesh";
+import { newChangeId, taskContentId, carrierHash, digestsEqual, BAG_MANIFEST_FILE } from "@lararium/mesh";
 import { SyncedTree, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
 import type { SubmitResult } from "./verb-result.js";
 import { runVerb } from "./verb-call.js";
@@ -99,12 +99,19 @@ export function listCarriers(source: string): string[] | null {
   let st;
   try { st = statSync(source); } catch { return null; }
   if (!st.isDirectory()) return [source];
+  // A bag's OWN declaration is DISK-OWNED and never becomes a record (operator ruling, 2026-08-08). Seeded,
+  // it would land in the bag's document and then round-trip through the projection — after which a wiki edit
+  // could re-home the bag or loosen its cap-tier. A declaration a rendered surface can move is a declaration
+  // nothing holds, so the authority stays on disk where `lares bag declare` writes it. Only the holding
+  // ROOT's manifest is excluded: a meme deeper in the tree may legitimately carry that name.
+  const bagDeclaration = join(source, BAG_MANIFEST_FILE);
   return (readdirSync(source, { recursive: true }) as string[])
     .map((f) => join(source, f))
     .filter((f) => { try { return statSync(f).isFile(); } catch { return false; } })
     // A `.meta` sidecar carries a content file's fields — it lands WITH that
     // file at the shore, never as a standalone carrier.
-    .filter((f) => !f.endsWith(".meta"));
+    .filter((f) => !f.endsWith(".meta"))
+    .filter((f) => f !== bagDeclaration);
 }
 
 /** Derive a file's carrier-root URI for one mirror plane (bags/ canon vs
