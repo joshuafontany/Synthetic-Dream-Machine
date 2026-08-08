@@ -8,7 +8,7 @@
   "sections": "extracted",
   "flow": {
     "sources": [
-      "bags/@lares/ha.ka.ba/lares/library/hawaii/kumulipo"
+      "bags/@crossroads/ha.ka.ba/lares/library/hawaii/kumulipo"
     ],
     "exclusions": [],
     "record_unit": {

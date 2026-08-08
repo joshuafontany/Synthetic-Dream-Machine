@@ -7,7 +7,7 @@
   "max_forms": 64,
   "flow": {
     "sources": [
-      "bags/@lares/ha.ka.ba/lares/library/mark-twain"
+      "bags/@crossroads/ha.ka.ba/lares/library/mark-twain"
     ],
     "exclusions": [],
     "max_file_bytes": 0,
