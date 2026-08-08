@@ -1,0 +1,27 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/kumulipo >>
+```toml iam
+collection = "kumulipo"
+entries    = "2"
+bytes      = "505331"
+type       = "text/x-memetic-wikitext"
+```
+
+! Library — kumulipo
+
+The ACQUIRED bodies this collection holds. ''The bytes rest outside every tracked tree'' —
+in the vessel's own library tier — so a shelf may grow without a repository growing with it.
+''This index travels instead'': a reader learns what the shelf holds, and how to verify it,
+without holding it.
+
+Each row carries the RFC-6920 anchor a stranger checks with no tooling of ours.
+
+| Name | Bytes | Anchor | Origin |
+|---|---|---|---|
+| kumulipo-beckwith.mem | 396570 | `ni:///sha-256;AMqMkepA-b7dNyYo_q8RRhoXNt4MGqzeRgFSmN7bVY8` | Beckwith / Liliʻuokalani translations |
+| kumulipo-liliuokalani.mem | 108761 | `ni:///sha-256;LiFmJwSX69JjARZnDY1csSgzlEq9rYBS4oRt2Tla90Y` | Beckwith / Liliʻuokalani translations |
+
+Reference this collection as `library:kumulipo` — a name that travels, never a path.
+
+<<~ &#x0004; -> ? >>

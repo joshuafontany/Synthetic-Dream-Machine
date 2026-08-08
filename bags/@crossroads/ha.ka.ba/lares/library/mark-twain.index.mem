@@ -1,0 +1,31 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/mark-twain >>
+```toml iam
+collection = "mark-twain"
+entries    = "6"
+bytes      = "16715743"
+type       = "text/x-memetic-wikitext"
+```
+
+! Library — mark-twain
+
+The ACQUIRED bodies this collection holds. ''The bytes rest outside every tracked tree'' —
+in the vessel's own library tier — so a shelf may grow without a repository growing with it.
+''This index travels instead'': a reader learns what the shelf holds, and how to verify it,
+without holding it.
+
+Each row carries the RFC-6920 anchor a stranger checks with no tooling of ours.
+
+| Name | Bytes | Anchor | Origin |
+|---|---|---|---|
+| Letters From The Earth (1909) by Mark Twain.txt | 104825 | `ni:///sha-256;2xtub3Dj-XUFODmyNIeRp1Zp4F6hv6B6HwL5R1wx8yE` | Project Gutenberg |
+| The Entire Project Gutenberg Works of Mark Twain-pg3200.txt | 16012562 | `ni:///sha-256;cfOMA3ggQvVOsdM4-aAxPSAVIILRCY8uYSGKa1zu5UE` | Project Gutenberg |
+| The Fly by Mark Twain.txt | 16757 | `ni:///sha-256;HyHIut8V6xMWESKt8SMX6E0i2ax-qJ1OEJYRmyx5LN4` | Project Gutenberg |
+| The War Prayer by Mark Twain.txt | 7354 | `ni:///sha-256;2Ub1hYx5UX7rgUFmlmD64jFViBf-ekt7G_hL2utp9Ls` | Project Gutenberg |
+| Thou Shalt Not Kill by Mark Twain.txt | 4135 | `ni:///sha-256;GwxBz8mhGfAL_5sRebnMbocOWM5k7Z7Yw2ZHYiyMSEE` | Project Gutenberg |
+| WHAT IS MAN by Mark Twain.txt | 570110 | `ni:///sha-256;Jo3Gsysz8RDZlzQtINr2EJsmlI874CouHdmze_GkBSI` | Project Gutenberg |
+
+Reference this collection as `library:mark-twain` — a name that travels, never a path.
+
+<<~ &#x0004; -> ? >>

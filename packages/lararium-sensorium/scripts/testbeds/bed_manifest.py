@@ -33,6 +33,7 @@ import argparse
 import fnmatch
 import json
 import os
+import re
 import random
 import sys
 
@@ -132,6 +133,42 @@ def predictions_stand(m: dict) -> bool:
         return m["predictions"]["anchor"] in fh.read()
 
 
+_LIBRARY_PREFIX = "library:"
+
+
+def _library_home() -> str:
+    """The ACQUIRED tier's home — `LAR_LIBRARY`, else `<XDG_STATE_HOME>/lares/library`.
+
+    It mirrors the TS resolver exactly (packages/lararium-node/src/library-store.ts). The tier sits under the
+    STATE home rather than the data home because `reset` pares `<data>/vessel`, and an acquired body — a book
+    nothing can regenerate — must survive every substrate verb."""
+    override = os.environ.get("LAR_LIBRARY")
+    if override:
+        return override
+    state = os.environ.get("XDG_STATE_HOME") or os.path.join(os.path.expanduser("~"), ".local", "state")
+    return os.path.join(state, "lares", "library")
+
+
+def resolve_source_root(src: str) -> str:
+    """Resolve one `flow.sources` entry to a directory.
+
+    THREE FORMS, and the first is the one that travels. `library:<collection>` NAMES an acquired collection
+    and each vessel resolves it locally — the same law the repo registry and the `lar:` URI already run, so a
+    manifest pours identically on a machine whose shelf sits somewhere else. An absolute path rides through
+    for a one-off. A relative path resolves against the repo root, for sources that genuinely live in the
+    tracked tree.
+
+    A collection name carrying a separator would walk out of the tier into anything the vessel can read, so
+    the reference refuses rather than trusting whoever wrote the manifest."""
+    if src.startswith(_LIBRARY_PREFIX):
+        name = src[len(_LIBRARY_PREFIX):].strip().lower()
+        if not re.fullmatch(r"[a-z0-9][a-z0-9._-]*", name):
+            raise SystemExit(f"bed_manifest: REFUSED — {src!r} names no valid collection "
+                             f"(one path segment, no separators)")
+        return os.path.join(_library_home(), name)
+    return src if os.path.isabs(src) else os.path.join(_REPO_ROOT, src)
+
+
 def resolve_flow(m: dict) -> tuple[list[str], dict]:
     """Resolve flow.sources against exclusions. Returns (kept_files, tally) —
     the tally counts every exclusion by pattern, never a silent drop."""
@@ -141,7 +178,7 @@ def resolve_flow(m: dict) -> tuple[list[str], dict]:
     tally = {pat: 0 for pat in exclusions}
     tally["_ext_filtered"] = 0
     for src in m["flow"]["sources"]:
-        root = src if os.path.isabs(src) else os.path.join(_REPO_ROOT, src)
+        root = resolve_source_root(src)
         for dirpath, _dirs, files in os.walk(root):
             for name in sorted(files):
                 fp = os.path.join(dirpath, name)
@@ -222,7 +259,7 @@ def pour(m: dict, *, twin: bool = False) -> dict:
         twin_stats = build_twin_corpus(m, files, twin_dir)
         corpus_pointer, root = twin_dir, root + "-twin"
     else:
-        roots = [s if os.path.isabs(s) else os.path.join(_REPO_ROOT, s) for s in m["flow"]["sources"]]
+        roots = [resolve_source_root(s) for s in m["flow"]["sources"]]
         corpus_pointer = os.pathsep.join(roots)
         twin_stats = None
 

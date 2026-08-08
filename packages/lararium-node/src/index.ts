@@ -20,6 +20,14 @@ export {
 } from "./bag-declare.js";
 export type { BagSighting, BagMoveOutcome } from "./bag-declare.js";
 
+// The ACQUIRED tier — bodies a human did not author, sited readable + verifiable OUTSIDE the wipe zone
+// (`<state>/library`), so a shelf may grow without a repository growing with it.
+export {
+  larLibraryHome, libraryCollectionDir, resolveLibraryRef, acquireIntoLibrary,
+  readLibraryMeta, listCollections, listCollection, verifyCollection, writeLibraryIndex,
+} from "./library-store.js";
+export type { AcquireOutcome, AcquireOptions, LibraryVerdict } from "./library-store.js";
+
 // The per-@daemon resource-override reader + the composable daemon resource caps (`~/.lares/config.json`
 // sites bags/genesis/cas away from the repo-relative default; genesis artifacts stay checked-in by default).
 export {

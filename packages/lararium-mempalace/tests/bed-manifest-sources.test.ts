@@ -10,6 +10,12 @@
  * A HELD manifest declares itself held. `pidgin-sessions` sources a `_HELD_…` marker on purpose — an open
  * fork the operator has not seated — so the guard skips a source that NAMES itself held and fails any other
  * absence. A held fork is a decision; a stale path is a fault.
+ *
+ * A `library:<collection>` source resolves against the vessel's OWN shelf, which no repository carries and no
+ * checkout guarantees. The guard therefore checks its SHAPE rather than its presence: a reference that names
+ * a valid collection passes here, and whether the bytes stand is the pour's own refusal to make (bed_manifest
+ * REFUSES on zero records). Checking presence would fail every clone that has not fetched, turning a
+ * portable reference back into a machine-local path — the exact property it exists to remove.
  */
 import { describe, test, expect } from "vitest";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
@@ -22,6 +28,8 @@ const MANIFESTS  = resolve(HERE, "..", "manifests");
 const REPO_ROOT  = resolve(HERE, "..", "..", "..");
 /** A source naming itself HELD marks an un-seated fork, never a stale path. */
 const HELD = /^_HELD_/;
+/** `library:<collection>` — a portable reference to the vessel's own shelf; shape-checked, never path-checked. */
+const LIBRARY_REF = /^library:[a-z0-9][a-z0-9._-]*$/;
 
 interface BedManifest { readonly flow?: { readonly sources?: readonly string[] } }
 
@@ -38,8 +46,12 @@ describe("every bed manifest points at ground that stands", () => {
       const sources = bed.flow?.sources ?? [];
       expect(sources.length, `${file} declares no sources — a bed that pours nothing`).toBeGreaterThan(0);
 
+      // A malformed library reference IS a fault — it names no collection any vessel could resolve.
+      const malformed = sources.filter((s) => s.startsWith("library:") && !LIBRARY_REF.test(s));
+      expect(malformed, `${file}: library references that name no valid collection`).toEqual([]);
+
       const missing = sources
-        .filter((s) => !HELD.test(s))
+        .filter((s) => !HELD.test(s) && !s.startsWith("library:"))
         .filter((s) => !existsSync(resolve(REPO_ROOT, s)));
       expect(missing, `${file}: sources absent from disk — a pour would read them as EMPTY`).toEqual([]);
     });

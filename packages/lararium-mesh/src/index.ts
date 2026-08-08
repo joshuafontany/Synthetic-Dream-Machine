@@ -17,6 +17,9 @@ export * from "./bag-home.js";
 // A bag's OWN `iam` declaration — what it carries, who may read it, where it belongs. The manifest that makes
 // the three self-describing axes actually SPOKEN rather than merely defined.
 export * from "./bag-manifest.js";
+// The ACQUIRED tier — bodies a human did not author, kept readable + verifiable OUTSIDE every tracked tree.
+// Distinct from the runtime CAS: derived blobs rebuild, acquired ones do not.
+export * from "./library-tier.js";
 export * from "./vessel-identity-core.js";
 export * from "./anchor-store.js";
 export * from "./persona-vault.js";
