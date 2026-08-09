@@ -2,7 +2,7 @@
  * runDeviceAdmit — Node adapter: produce a device-admit/v1 payload for a new vessel.
  *
  * Node-specific shores (only these belong here):
- *   - readFileSync for genesis/social-bootstrap.json
+ *   - readFileSync for the social bootstrap (<data>/vessel — see larBootstrapPath)
  *   - NodeFSStorageAdapter + findWithProgress for daemon doc access
  *   - loadVesselSigningSeed (disk keypair)
  *   - writeFileSync / process.stdout.write for output

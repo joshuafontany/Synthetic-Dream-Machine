@@ -104,7 +104,7 @@ export function daemonCorpusRoot(): string {
 }
 
 /** The genesis dir — `LAR_GENESIS` → `config.resources.genesis` → `<corpus>/genesis`. Tracked seed
- *  (island.bin + social-bootstrap + cas/). */
+ *  (island.bin + cas/ — the seed alone; the bootstrap rides the vessel store). */
 export function daemonGenesisDir(cfg: LaresConfig = loadLaresConfig()): string {
   return process.env["LAR_GENESIS"] ?? cfg.resources?.genesis ?? join(daemonCorpusRoot(), "genesis");
 }

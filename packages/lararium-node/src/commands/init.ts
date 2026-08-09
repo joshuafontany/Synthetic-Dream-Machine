@@ -4,13 +4,13 @@
  * Node-specific shores (only these belong here):
  *   - NodeFSStorageAdapter for Automerge repo
  *   - generateOrLoadVesselIdentity / loadVesselSigningSeed (disk keypair)
- *   - writeFileSync for genesis/social-bootstrap.json
+ *   - writeFileSync for the social bootstrap (<data>/vessel — see larBootstrapPath)
  *   - the composable genesis cap (daemonGenesisDir) for default directory resolution
  *
  * All ceremony logic lives in @lararium/keyhive (runFoundingCeremony,
  * runApplyAdmitPayload) and runs identically in browser + mobile vessels.
  *
- * Re-running stays idempotent: when genesis/social-bootstrap.json already lives
+ * Re-running stays idempotent: when the social bootstrap already lives
  * on disk, the function returns early without re-seeding.
  */
 

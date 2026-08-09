@@ -2,7 +2,7 @@
  * `lares init` — bootstrap a new Lararium node.
  *
  * Thin shim over `runInit` from @lararium/node. Idempotent; pass --force to
- * re-seed when genesis/social-bootstrap.json already lives on disk.
+ * re-seed when the social bootstrap already lives on disk (<data>/vessel — see larBootstrapPath).
  *
  * Flags:
  *   --force          Re-seed even when bootstrap artifact exists.

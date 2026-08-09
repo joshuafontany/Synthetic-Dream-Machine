@@ -762,7 +762,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const casWritten = mirrorGenesisCasFs(manifest, genesisCasDir(genesisDir), casDirForStorage(storageDir));
       if (casWritten > 0) console.log(`[openNodeVessel] fs CAS: mirrored ${casWritten} blob(s) by CID from genesis/cas`);
 
-      // Bootstrap URLs: genesis/social-bootstrap.json (init node — authoritative),
+      // Bootstrap URLs: the vessel's own social bootstrap (init node — authoritative),
       // falling back to the island oracle (replica vessels).
       let bootstrapPlugin: Record<string, unknown> | null = null;
       if (existsSync(bootstrapPath)) {
