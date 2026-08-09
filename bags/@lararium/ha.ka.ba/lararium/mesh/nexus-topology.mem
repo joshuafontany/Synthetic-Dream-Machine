@@ -137,7 +137,9 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 
 !! The shrinking window ~ serve-offline has a clock on it
 
-''"Renewal touches the internet; serving does not, for the certificate's full validity" carries a horizon that closes.'' Renewing at two-thirds of lifetime, the offline-serving budget reads ~60 days now, ~43 days from 2027-02-10, and ~30 days from 2028-02-16 as default validity steps 90 → 64 → 45 days. Paying a commercial CA buys the Baseline maximum instead — an advantage that ''expires 2029-03-15''.
+''"Renewal touches the internet; serving does not, for the certificate's full validity" carries a horizon that closes.'' Renewing at two-thirds of lifetime, the ''renewal cadence'' — the interval a household serves with no network at all — reads ~60 days now, ~43 days from 2027-02-10, and ~30 days from 2028-02-16 as default validity steps 90 → 64 → 45 days.
+
+<<~ confidence Synthesis-Canon 15/20 >> ''TWO DAY-COUNTS RIDE HERE AND THEY ARE NOT THE SAME NUMBER.'' Beside the cadence sits the ''grace window'' — the slack between a renewal falling due and the certificate actually expiring — which runs ~30, ~21, ~14 days across those same steps. The cadence answers //how connected must a household be//; the grace window answers //how long do we have once the alarm sounds//, and only the second one governs the drill. A note that reports one while meaning the other budgets a month of slack that was never there. Both stand computed in `cert-expiry-gauge` (`renewalCadenceDays`, `graceWindowDays`) rather than carried as prose. Paying a commercial CA buys the Baseline maximum instead — an advantage that ''expires 2029-03-15''.
 
 ''Three dates the design must hold'': **2027-02-10** — every hardcoded sixty-day timer in the mesh breaks that day, so ARI ships before it (and ARI also buys the rate-limit exemption, so it pays twice). **2028-02-16** — a thirty-day offline budget. **2029-03-15** — validation data reuse falls to ten days, so absent a persistent challenge the mesh writes DNS on every issuance.
 

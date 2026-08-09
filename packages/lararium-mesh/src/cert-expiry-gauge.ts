@@ -16,8 +16,8 @@
  *
  * So this gauge measures ELAPSED FRACTION of the certificate's own lifetime. That threshold survives a
  * validity change without anyone remembering to revisit it, which matters here because the ground moves
- * on a published schedule: default lifetimes step down, and the offline-serving budget steps down with
- * them. A fraction reads the same at every step.
+ * on a published schedule: default lifetimes step down, and both day-counts below step down with them —
+ * to different places. A fraction reads the same at every step.
  *
  * ── WHAT IT DELIBERATELY DOES NOT DO ────────────────────────────────────────────────────────────
  * No clock of its own and no I/O. `now` arrives as an argument, so a caller in a causal island supplies
@@ -132,14 +132,31 @@ export function wantsAttention(reading: CertExpiryReading): boolean {
 }
 
 /**
- * How long may this vessel serve with no internet at all?
+ * TWO DIFFERENT DAY-COUNTS LIVE HERE, and conflating them costs a household its drill.
  *
- * Serving needs no network; only issuance does. So the offline budget is whatever remains between a renewal
- * falling due and the certificate expiring — the window a household keeps working through an outage. It
- * shrinks as certificate lifetimes shorten, which is exactly why a design that hardcodes a day count breaks
- * on a schedule nobody controls.
+ * Serving needs no network; only issuance does. That single fact yields two quantities, and a design note
+ * that names one while meaning the other plans the wrong outage:
+ *
+ *   · the RENEWAL CADENCE — how often the internet must be reached at all. Renewing at two-thirds of a
+ *     90-day certificate means touching the network every 60 days, and a household is fully offline in
+ *     between. This is the figure that answers //how connected must we be//.
+ *   · the GRACE WINDOW — how long after renewal SHOULD have happened before the door actually shuts. On
+ *     that same certificate it runs 30 days. This is the figure that answers //how long do we have once
+ *     the alarm sounds//, which is the one the witness above exists to protect.
+ *
+ * Both shrink as lifetimes shorten, and they shrink to different places. Reporting them separately keeps a
+ * reader from budgeting a month of slack that was never there.
  */
-export function offlineServingDays(cert: CertLifetime): number | null {
+
+/** Days between required internet contacts — the interval a household serves with no network at all. */
+export function renewalCadenceDays(cert: CertLifetime): number | null {
+  const span = cert.notAfter - cert.notBefore;
+  if (!Number.isFinite(span) || span <= 0) return null;
+  return Math.floor((span * RENEW_ELAPSED) / DAY_MS);
+}
+
+/** Days between a renewal falling due and the certificate expiring — the slack once the alarm sounds. */
+export function graceWindowDays(cert: CertLifetime): number | null {
   const span = cert.notAfter - cert.notBefore;
   if (!Number.isFinite(span) || span <= 0) return null;
   return Math.floor((span * (1 - RENEW_ELAPSED)) / DAY_MS);

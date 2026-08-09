@@ -97,7 +97,7 @@ export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
 // The household's own certificate witness — nothing outside this stack warns before a cert expires.
 export type { CertExpiryBand, CertLifetime, CertExpiryReading } from "./cert-expiry-gauge.js";
 export {
-  readCertExpiry, wantsAttention, offlineServingDays,
+  readCertExpiry, wantsAttention, renewalCadenceDays, graceWindowDays,
   RENEW_ELAPSED, WARN_ELAPSED, URGENT_ELAPSED,
 } from "./cert-expiry-gauge.js";
 // The bag's sharing-posture as SELF-DESCRIBING DATA — the 4-tier total order + the tighten-only keystone.

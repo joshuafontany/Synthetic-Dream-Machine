@@ -9,7 +9,7 @@
 import { describe, expect, test } from "vitest";
 
 import {
-  readCertExpiry, wantsAttention, offlineServingDays,
+  readCertExpiry, wantsAttention, renewalCadenceDays, graceWindowDays,
   RENEW_ELAPSED, WARN_ELAPSED, URGENT_ELAPSED,
 } from "../src/cert-expiry-gauge.js";
 
@@ -97,15 +97,29 @@ describe("THE REASON THE THRESHOLD IS A FRACTION", () => {
   });
 });
 
-describe("the offline-serving budget shrinks with the lifetime, and says so", () => {
-  test("the window between renewal falling due and the door shutting", () => {
-    // Serving needs no internet; only issuance does. These are the budgets a household actually keeps.
-    expect(offlineServingDays(lifetime(90))).toBe(29);
-    expect(offlineServingDays(lifetime(64))).toBe(21);
-    expect(offlineServingDays(lifetime(45))).toBe(14);
+describe("two different day-counts, kept apart on purpose", () => {
+  // Conflating these plans the wrong outage: one answers how CONNECTED a household must be, the other
+  // how much SLACK it has once the alarm sounds. They shrink together and land in different places.
+  test("the renewal cadence — the interval a household serves with no network at all", () => {
+    expect(renewalCadenceDays(lifetime(90))).toBe(60);
+    expect(renewalCadenceDays(lifetime(64))).toBe(42);
+    expect(renewalCadenceDays(lifetime(45))).toBe(30);
   });
 
-  test("a nonsense lifetime budgets nothing", () => {
-    expect(offlineServingDays({ notBefore: T0, notAfter: T0 })).toBeNull();
+  test("the grace window — from renewal falling due to the door shutting", () => {
+    expect(graceWindowDays(lifetime(90))).toBe(29);
+    expect(graceWindowDays(lifetime(64))).toBe(21);
+    expect(graceWindowDays(lifetime(45))).toBe(14);
+  });
+
+  test("they are NOT the same number, at any lifetime", () => {
+    for (const days of [90, 64, 45]) {
+      expect(renewalCadenceDays(lifetime(days))).not.toBe(graceWindowDays(lifetime(days)));
+    }
+  });
+
+  test("a nonsense lifetime budgets nothing, either way", () => {
+    expect(renewalCadenceDays({ notBefore: T0, notAfter: T0 })).toBeNull();
+    expect(graceWindowDays({ notBefore: T0, notAfter: T0 })).toBeNull();
   });
 });
