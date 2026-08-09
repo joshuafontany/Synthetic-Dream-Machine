@@ -100,6 +100,23 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   mkdirSync(storageDir, { recursive: true });
   mkdirSync(genesisDir, { recursive: true });
 
+  // ── THE PRECONDITION RUNS BEFORE THE FIRST MUTATION ──────────────────────────────────────────
+  // A founding binds (device × hearthTrueName), so an absent engine CID means there is nothing to bind
+  // TO and no founding can complete. Checked LATER, this same refusal arrived after the vessel keypair
+  // and the PersonaGroup root had already been minted — a tree carrying keys and no charter, which reads
+  // like damage even though both mints load-or-create and a re-run heals them.
+  //
+  // A gate that fires after the act it guards teaches the operator to distrust a clean refusal.
+  const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
+  if (!hearthTrueName) {
+    throw new Error(
+      "[lares init] cannot found: hearth true-name (engine CID) absent from " + genesisDir + " —\n" +
+      "  the genesis seed carries it. In this repo: `pnpm --filter @lararium/node build:genesis`.\n" +
+      "  Founding an ISOLATED root (LAR_ROOT)? Seed the tracked genesis into it first:\n" +
+      "    (cd <repo> && git ls-files -z genesis/ | xargs -0 -I{} cp --parents \"{}\" \"$LAR_ROOT/\")",
+    );
+  }
+
   const operatorIdentity = await generateOrLoadVesselIdentity(storageDir);
   console.log(`[lares init] operator verifyingKey  ${operatorIdentity.verifyingKey.slice(0, 16)}…`);
 
@@ -164,13 +181,6 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   // pet-name — the first of the three symmetric persona-new commands, the founder pre-standing.
   await generateOrLoadPersonaGroupRoot(storageDir);
   const signerSeed = await loadPersonaGroupRootSeed(storageDir);
-  const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
-  if (!hearthTrueName) {
-    throw new Error(
-      "[lares init] cannot found: hearth true-name (engine CID) absent — " +
-      "run `pnpm --filter @lararium/node build:genesis` first.",
-    );
-  }
 
   const {
     identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
