@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # rehearse-keeper — run the KEEPER founding sequence against a throwaway tree, twice, and burn it.
 #
-# THE GAP THIS CLOSES. `rehearse-founding.sh` stands the MESH branch — it founds vessels with `lares init`
-# and witnesses Herm carry + partition. Movements ②–⑥ of the rite (persona → nexus seal → vault →
-# regenesis → live) have never been run end-to-end by any harness, so the keeper branch has no green
-# baseline to diff a failure against. This gives it one.
+# WHAT IT COVERS. `rehearse-founding.sh` stands the MESH branch — it founds vessels with `lares init` and
+# witnesses Herm carry + partition. This one stands the KEEPER branch: movements ②–⑥ of the rite (persona →
+# nexus seal → vault → regenesis → live), end to end, so a failure has a green baseline to diff against.
+#
+# It exists because the keeper founding runs ONCE, irreversibly, on the real hearth. Every property it can
+# be made to prove cheaply here is a property nobody has to discover there.
 #
 #   CYCLE 1  fresh tree → seed corpus → ⓪′ → ② → ③ → ④ → ⑤ → ⑥      (the rite, performed)
 #   CYCLE 2  the SAME tree, re-run from the top                       (the idempotency claim, tested)
@@ -13,26 +15,26 @@
 # ── WHY LAR_ROOT ALONE ISOLATES ──────────────────────────────────────────────────────────────────
 # Every resolver roots off it — the vessel store, the identity, the Nexus seal, the acquired library, the
 # repo registry, the hearth bags, genesis, the watermarks, the config, the runtime spool, the social
-# bootstrap and the UDS socket. Re-measured after the home inversion: TWELVE of twelve rooted under
-# LAR_ROOT. So a throwaway costs one env var and destroys nothing real, and the container harness stays for
-# what containers actually buy (rude sockets, real disks, a drop that drops).
+# bootstrap and the UDS socket — TWELVE of twelve, measured. So a throwaway costs one env var and destroys
+# nothing real, and the container harness stays for what containers actually buy (rude sockets, real disks,
+# a drop that drops).
 #
-# The count gets RE-MEASURED whenever a resolver moves, never carried forward. An isolation claim that ages
-# is an isolation claim that lies: the tenth resource (the TCP port) was found exactly that way, and the
-# homes have since re-split on whether a thing can be re-made.
+# RE-MEASURE THE COUNT WHENEVER A RESOLVER MOVES, never carry it forward. An isolation claim that ages is
+# an isolation claim that lies — a resource added or re-homed after the last count sits outside the
+# isolation while the header still promises it, and the TCP port was found exactly that way.
 #
-# ── THE ONE DIVERGENCE LEFT, NAMED ───────────────────────────────────────────────────────────────
-# `wake --install` once ALSO pip-installed the mempalace library and stood the sensorium organs — writes
-# OUTSIDE LAR_ROOT that made any isolated founding impossible. Those moved to their own doors
-# (`lares mempalace install`, `lares sense setup`, operator ruling 2026-08-08), so founding now stands the
-# VESSEL and nothing else and this harness can run the rite AS WRITTEN.
+# ── WHAT THIS HARNESS DOES NOT WALK, NAMED ───────────────────────────────────────────────────────
+# FOUNDING STANDS THE VESSEL AND NOTHING ELSE, which is what makes an isolated rehearsal possible at all: a
+# founding that reached outside LAR_ROOT could never be rehearsed without touching the operator's machine.
+# The two sidecar lanes carry their own doors (`lares mempalace install`, `lares sense setup`).
 #
-# What remains outside the tree: `wake --init` still fans out to the AI-surface wires (~/.claude, ~/.codex,
-# ~/.copilot). This harness therefore uses `--install`, never `--init`, and the harness-wiring leg goes
-# un-exercised here — a machine-setup concern rather than a founding one.
+# `wake --init` fans out to the AI-surface wires (~/.claude, ~/.codex, ~/.copilot), so this harness passes
+# `--install` and never `--init` — the wiring leg stays un-walked, a machine-setup concern rather than a
+# founding one.
 #
-# The vault seals from the env pair, so the no-echo TTY prompt leg goes un-exercised — a harness cannot type
-# at a prompt. The Erisian STAMP does run (every seal records one), into a tree that burns minutes later.
+# The vault seals from the env pair, so the no-echo TTY prompt stays un-walked too — a harness cannot type
+# at a prompt, and a keeper founding meets that leg for the first time on the day it matters. The Erisian
+# STAMP does run (every seal records one), into a tree that burns minutes later.
 #
 # ── THE GUARD ────────────────────────────────────────────────────────────────────────────────────
 # A rehearsal harness that can eat the hearth is not a rehearsal harness. This REFUSES any root that sits
@@ -89,11 +91,11 @@ export LAR_ROOT="$ROOT"
 # harness cannot, so it supplies one and NAMES that the prompt leg goes un-exercised here.
 # BOTH vars, and the pair is the point: `vault seal` mints a NEW passphrase and reads
 # LARES_ARCHIVE_PASSPHRASE_NEW, while every later open reads LARES_ARCHIVE_PASSPHRASE. Exporting only the
-# second is what the first rehearsal did, and the CLI said so plainly — twice, once per cycle.
+# second leaves `vault seal` with no target passphrase, and the CLI says so plainly — once per cycle.
 export LARES_ARCHIVE_PASSPHRASE="rehearsal-only-$(basename "$ROOT")"
 export LARES_ARCHIVE_PASSPHRASE_NEW="$LARES_ARCHIVE_PASSPHRASE"
-# Surface where a node warning is BORN rather than only that it fired — the first rehearsal reported a
-# negative setTimeout with no origin, and a warning without a stack costs more to chase than to capture.
+# Surface where a node warning is BORN rather than only that it fired. A negative-timeout warning with no
+# origin costs far more to chase than to capture, and the capture is one env var.
 export NODE_OPTIONS="${NODE_OPTIONS:-} --trace-warnings"
 # LAR_ROOT ISOLATES THE FILESYSTEM, NOT THE PORT. Nine resolvers root off it — data, state, seal, library,
 # bags, genesis, the UDS socket — and the TCP port roots off LAR_PORT alone. A throwaway on the default 8080
@@ -134,15 +136,17 @@ trap cleanup EXIT
 
 say "rehearse-keeper — the KEEPER sequence, ${CYCLES} cycle(s), throwaway at:"
 echo "  $ROOT"
-echo "  founding with \`wake --install\` — the rite AS WRITTEN. The mempalace sidecar left the boot"
-echo "  (2026-08-08), so founding no longer reaches outside LAR_ROOT. Un-exercised here: the AI-surface"
-echo "  wiring that still rides \`--init\`, which this harness never passes."
+echo "  founding with \`wake --install\` — the rite AS WRITTEN. Founding stands the VESSEL and nothing"
+echo "  else, so every byte it writes lands inside LAR_ROOT."
+echo "  NOT exercised here: the AI-surface wiring (rides \`--init\`), and the vault's TTY prompt (this"
+echo "  harness supplies the passphrase by env, so the no-echo leg goes unwalked)."
 
 # ── ⓪′ PREFLIGHT — once, ahead of everything irreversible ────────────────────────────────────────
 say "⓪′ preflight"
 # `pnpm build`, never `pnpm -r build`: the root script STAMPS the source digest after building, and the
 # freshness gate reads that stamp. Building without stamping leaves the tree reading stale, so the first
-# lifecycle verb rebuilds MID-RUN — which is how a probe once cleaned dist under the node it measured.
+# lifecycle verb rebuilds MID-RUN, and a build cleans dist — so a probe can delete the modules out from
+# under the very node it set out to measure.
 run "pnpm build (dist matches source, and says so)" sh -c "cd '$REPO_ROOT' && pnpm build"
 run "the binary loads and answers"                    node "$LARES" help
 
@@ -151,8 +155,8 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   say "═══ CYCLE $CYCLE of $CYCLES ═══"
 
   # ── CLEAR BETWEEN CYCLES. Cycle 2 must re-run the RITE, never inherit cycle 1's warm tree and its still-
-  #    running daemon — which is what the earlier runs actually measured (a 0s socket that was never
-  #    re-stood). The burn IS the clear, applied per cycle.
+  #    running daemon: a warm tree answers instantly and proves nothing, because the socket it answers on
+  #    was never re-stood. The burn IS the clear, applied per cycle.
   if [ "$CYCLE" -gt 1 ]; then
     say "clear between cycles (the rite re-runs from void, never from a warm tree)"
     step "free port $LAR_PORT + pare the tree"
@@ -176,11 +180,11 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # git refuses to carry, a rehearsal refuses to seed, so a future per-founding artifact drops out of the
   # seed the day it lands in .gitignore.
   #
-  # A per-founding address book once sat in this directory, and a `cp -r genesis` handed every from-void
-  # rehearsal the doc URLs of a founding months old. `init` found a bootstrap present, skipped re-seeding
-  # exactly as its idempotence promises, and the boot resolved @daemon to a doc no local repo held. The
-  # bootstrap has since moved into the vessel's own store, so the guard below now watches for a return
-  # nothing should ever cause.
+  # The guard below refuses a per-founding address book in this directory. One there would hand a fresh
+  # vessel ANOTHER vessel's doc URLs: `init` reads a bootstrap present and skips re-seeding exactly as its
+  # idempotence promises, then the boot resolves @daemon to a doc no local store holds — hearth-private, so
+  # no peer will ever carry it. The bootstrap lives in the vessel's own store precisely so a seed directory
+  # can be copied freely; nothing should put one here, and the guard says so if anything does.
   step "copy genesis/ (tracked files only)"
   if (cd "$REPO_ROOT" && git ls-files -z genesis/ | xargs -0 -I{} cp --parents "{}" "$ROOT/") 2>/dev/null; then
     if [ -e "$ROOT/genesis/social-bootstrap.json" ]; then
