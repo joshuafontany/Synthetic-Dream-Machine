@@ -147,6 +147,20 @@ export function bagUri(slug: string): string {
   return stableLarUri(`${BAGS_SEGMENT}/@${slug.replace(/^@/, "")}`);
 }
 
+/**
+ * Whether a string names a BAG — the `bags/@slug` surface and nothing else.
+ *
+ * The grammar mints first segments that name no bag: `tags/`, `state/`, the plugin memes, the bare-`@`
+ * sentinel documents, the `cid/` bodies, the `wikis/` identities and their slots. A reader that walks a
+ * registry, or classifies an address, must be able to ask this question rather than infer the answer from
+ * a list of what a bag is NOT — such a list is an enumeration, and it cannot notice what it missed.
+ *
+ * Canon: lar:///ha.ka.ba/lares/api/pono/one-name-one-relation
+ */
+export function isBagId(uri: string): boolean {
+  return /^lar:\/\/\/ha\.ka\.ba\/bags\/@[^/]+$/.test(uri);
+}
+
 /** Mint the canonical URI of a WIKI (a #has bag-stack; mutable). */
 export function wikiUri(slug: string): string {
   return stableLarUri(`${WIKIS_SEGMENT}/@${slug.replace(/^@/, "")}`);

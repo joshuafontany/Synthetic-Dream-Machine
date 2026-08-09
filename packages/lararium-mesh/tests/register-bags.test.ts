@@ -15,7 +15,7 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { deriveRegisterBags, type FleetMembership } from "../src/register-bags.js";
+import { catalogNamedBags, deriveRegisterBags, type FleetMembership } from "../src/register-bags.js";
 import { personaBagIdFor } from "../src/persona-scope.js";
 import { BAG_IDS, DAEMON_BAG_ID, PERSONA_NAMESPACE } from "../src/lar-uris.js";
 
@@ -118,5 +118,37 @@ describe("no platform appears in the answer", () => {
   test("the same groups yield the same set whichever vessel asks", () => {
     const fleets = [standingIn("work", WORK), standingIn("play")];
     expect(deriveRegisterBags({ fleets, wikiBags: WIKI })).toEqual(deriveRegisterBags({ fleets, wikiBags: WIKI }));
+  });
+});
+
+describe("★ the registry admits only its OWN kind ★", () => {
+  const rec = (title: string, text: string) => ({ tiddler: { title, text }, meta: { authority: "t" } });
+  const catalog = {
+    schemaVersion: "0.1",
+    tiddlers: {
+      "lar:///ha.ka.ba/bags/@notes":                       rec("lar:///ha.ka.ba/bags/@notes", "automerge:aaa"),
+      // A wiki slot's per-device draft pointer: same title prefix, same automerge text, NOT a bag.
+      "lar:///ha.ka.ba/wikis/@notes/drafts/did:key:z6Mk":   rec("lar:///ha.ka.ba/wikis/@notes/drafts/did:key:z6Mk", "automerge:bbb"),
+      "lar:///ha.ka.ba/wikis/@notes":                       rec("lar:///ha.ka.ba/wikis/@notes", "automerge:ccc"),
+      "lar:///ha.ka.ba/bags/@notes/recipes/default":        rec("lar:///ha.ka.ba/bags/@notes/recipes/default", "automerge:ddd"),
+      "lar:///ha.ka.ba/bags/@never-minted":                 rec("lar:///ha.ka.ba/bags/@never-minted", ""),
+    },
+  } as unknown as Parameters<typeof catalogNamedBags>[0];
+
+  test("★ a wiki slot pointer is NOT registered as a bag ★", () => {
+    // It carries a lar title and an automerge url, indistinguishable from a bag entry by shape alone.
+    // Registering it mints a Keyhive Document for a thing that is not a bag, and nothing throws.
+    const named = catalogNamedBags(catalog);
+    expect(named).toContain("lar:///ha.ka.ba/bags/@notes");
+    expect(named).not.toContain("lar:///ha.ka.ba/wikis/@notes/drafts/did:key:z6Mk");
+    expect(named).not.toContain("lar:///ha.ka.ba/wikis/@notes");
+  });
+
+  test("a tiddler INSIDE a bag is not a bag either — only the bag surface counts", () => {
+    expect(catalogNamedBags(catalog)).not.toContain("lar:///ha.ka.ba/bags/@notes/recipes/default");
+  });
+
+  test("an entry that never minted stays skipped — a doc that cannot resolve is not registered", () => {
+    expect(catalogNamedBags(catalog)).not.toContain("lar:///ha.ka.ba/bags/@never-minted");
   });
 });

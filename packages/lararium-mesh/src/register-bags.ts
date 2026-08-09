@@ -41,7 +41,7 @@
  */
 
 import { type LarDoc, tiddlerText } from "./base-doc.js";
-import { BAG_IDS, DAEMON_BAG_ID } from "./lar-uris.js";
+import { BAG_IDS, DAEMON_BAG_ID, isBagId } from "./lar-uris.js";
 import { personaBagIdFor } from "./persona-scope.js";
 
 /**
@@ -55,12 +55,18 @@ import { personaBagIdFor } from "./persona-scope.js";
  * An entry whose text carries no automerge url names a bag that never minted; it is skipped rather than
  * registered as a doc that cannot resolve.
  *
+ * IT ADMITS ONLY BAGS. The catalog holds other kinds keyed the same way — a wiki slot's per-device draft
+ * pointer is a `wikis/@slug/drafts/<did>` title whose text is an automerge url, indistinguishable from a
+ * bag entry by shape alone. Registering one mints a Keyhive Document for a thing that is not a bag, and
+ * nothing throws. A reader that walks a registry and takes every entry for its own kind will register
+ * whatever else was written there, and something else is always written there.
+ *
  * It lived at ONE opener, which is why the other could not open its own operator's bags.
  */
 export function catalogNamedBags(doc: LarDoc | undefined | null): string[] {
   const tiddlers = doc?.tiddlers ?? {};
   return Object.keys(tiddlers).filter(
-    (title) => title.startsWith("lar:///") && (tiddlerText(tiddlers[title]) ?? "").startsWith("automerge:"),
+    (title) => isBagId(title) && (tiddlerText(tiddlers[title]) ?? "").startsWith("automerge:"),
   );
 }
 

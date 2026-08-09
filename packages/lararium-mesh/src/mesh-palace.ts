@@ -428,19 +428,36 @@ export function isSovereignBag(slug: string): boolean {
   return SOVEREIGN_BAGS.has(slug) || isPersonaPlaneSlug(slug);
 }
 
+/** The first segments that name a MEME namespace — a corpus whose tiddlers belong to the same-named bag.
+ *  Listed rather than inferred, because inferring made every unknown segment a bag (see below). */
+const MEME_NAMESPACES: ReadonlySet<string> = new Set(["lares", "lararium", "meshpalace", "oracle"]);
+
 /**
- * Extract the `@bag` identity a `lar:///ha.ka.ba/…` URI belongs to (undefined when not one):
- * a surface `…/bags/@bag/…` names its bag directly; a bare meme `…/{namespace}/…` belongs to
- * the `@{namespace}` bag. Reserved kind-planes (`wikis`, `cid`) are not readable bags here.
+ * The bag a `lar:///ha.ka.ba/…` URI belongs to, or `undefined` where the URI names no bag.
+ *
+ * ── IT REFUSES WHAT IT CANNOT NAME ──────────────────────────────────────────────────────────────
+ * A surface `…/bags/@bag/…` names its bag directly, and a meme namespace belongs to its same-named bag.
+ * EVERYTHING ELSE reads as `undefined`, and that refusal carries the whole point.
+ *
+ * The grammar mints first segments that name no bag at all — `tags/`, `state/`, the plugin memes, the
+ * bare-`@` sentinel documents. Coercing an unrecognised segment into `@segment` handed each of those a
+ * bag identity it never had: `…/tags/X` answered `@tags`, a Keyhive membership document answered
+ * `@operator`. The reads then failed closed only because the caller's allowlist happened not to name
+ * those — the right verdict by accident of a list, from a classifier giving the wrong answer.
+ *
+ * An exclusion list is an enumeration, and an enumeration cannot notice what it missed. So this names
+ * what a bag IS and refuses the rest, the way a relative name with no origin reads as an error rather
+ * than falling back to a default (RFC 1035 §5.1).
+ *
+ * Canon: lar:///ha.ka.ba/lares/api/pono/one-name-one-relation
  */
 export function bagOf(uri: string): string | undefined {
   const m = /^lar:\/\/\/ha\.ka\.ba\/([^/]+)/.exec(uri);
   if (!m) return undefined;
   const seg = m[1]!;
   if (seg === "bags") return /^lar:\/\/\/ha\.ka\.ba\/bags\/(@[^/]+)/.exec(uri)?.[1];
-  if (seg === "wikis" || seg === "cid") return undefined;   // not a readable bag surface
-  if (seg.startsWith("@")) return seg;                       // a pre-split flat bag ref
-  return `@${seg}`;                                          // a bare meme namespace → its bag
+  if (MEME_NAMESPACES.has(seg)) return `@${seg}`;   // a corpus meme → the bag of the same name
+  return undefined;                                  // every other kind names no bag — say so
 }
 
 /**

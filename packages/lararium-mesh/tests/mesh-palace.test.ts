@@ -28,6 +28,7 @@ import {
   seedTheta, childCone, coneCenter, ROOT_CONE, type Coord,
   hermCanRead, HERM_CAPS,
   MeshPalace, emptyMeshPalaceDoc,
+  bagOf,
   type DialEntry, type VesselCapStack, type RoutingSlot, type MeshPalaceDoc,
 } from "../src/mesh-palace.js";
 import { deriveMeshSelf, deriveMeshLeaf, meshSelfDial, meshSelfSeed } from "../src/carriage-caps.js";
@@ -284,5 +285,36 @@ describe("the Herm read-scope (Lares Viales) — sighted on the map, blind to th
     expect(HERM_CAPS).toContain("rhizome.forward");
     expect(HERM_CAPS).not.toContain("tuber.author");
     expect(HERM_CAPS).not.toContain("tuber.store");
+  });
+});
+
+describe("★ the classifier REFUSES what the grammar never declared ★", () => {
+  // An exclusion list is an enumeration. Excluding `wikis` and `cid` — the two kinds the grammar declares
+  // — and coercing everything else into `@segment` handed a bag identity to every kind minted WITHOUT a
+  // kind-segment. The reads then failed closed only because the caller's allowlist happened not to name
+  // those: the right verdict by accident of a list, from a classifier giving the wrong answer.
+  test("★ a bag surface names its bag ★", () => {
+    expect(bagOf("lar:///ha.ka.ba/bags/@daemon/flows/crystal")).toBe("@daemon");
+    expect(bagOf("lar:///ha.ka.ba/bags/@lares")).toBe("@lares");
+  });
+
+  test("a meme namespace belongs to the bag of the same name", () => {
+    expect(bagOf("lar:///ha.ka.ba/lares/api/pono/persona-circle")).toBe("@lares");
+    expect(bagOf("lar:///ha.ka.ba/lararium/mesh/open-vessel")).toBe("@lararium");
+  });
+
+  test("★ every kind that names NO bag answers undefined, never a bag it never had ★", () => {
+    expect(bagOf("lar:///ha.ka.ba/tags/SharktoothSigil")).toBeUndefined();      // a tag
+    expect(bagOf("lar:///ha.ka.ba/state/boot-splash/active")).toBeUndefined();  // vessel state
+    expect(bagOf("lar:///ha.ka.ba/@operator/persona-group")).toBeUndefined();   // a membership document
+    expect(bagOf("lar:///ha.ka.ba/@mesh/admin-cabal")).toBeUndefined();         // a membership document
+    expect(bagOf("lar:///ha.ka.ba/wikis/@notes")).toBeUndefined();              // a wiki identity
+    expect(bagOf("lar:///ha.ka.ba/cid/abc123")).toBeUndefined();                // a content body
+  });
+
+  test("a Herm reads none of those either — the verdict now follows the classifier, not luck", () => {
+    expect(hermCanRead("lar:///ha.ka.ba/@operator/persona-group")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/tags/SharktoothSigil")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/lares/api/pono/persona-circle")).toBe(true);  // a waymark still crosses
   });
 });
