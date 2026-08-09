@@ -42,6 +42,7 @@ import {
   cmdSenseRoster, cmdSenseInspect, cmdSenseReconcile, cmdSenseBuild,
   cmdSensePromote, cmdSenseRetire, cmdSenseUnRetire, cmdSensePurge,
 } from "./sense-lifecycle.js";
+import { setupSensorium } from "../setup-sensorium.js";
 
 /**
  * The SOVEREIGN door onto a sensorium island's lifecycle — the parallel of the guest
@@ -82,6 +83,11 @@ type Verb = (typeof VERBS)[number];
  * stale daemon dist or a dirty sovereign store, never a wrong-store read.
  */
 const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | number>> = {
+  // `setup` STANDS the sovereign organs — and it left the boot (operator ruling, 2026-08-08). Founding a
+  // vessel used to stand them as part of `wake --install`, which made the memory tooling read as part of
+  // the base install. A vessel founds and serves without a single sensorium; standing them is a separate
+  // act, on a door that already owns every other thing done to a sensorium.
+  setup:     cmdSenseSetup,
   recall:    cmdRecall,
   refresh:   cmdRefresh,
   capture:   cmdCapture,
@@ -245,4 +251,32 @@ export async function cmdSense(args: ParsedArgs): Promise<number> {
   } finally {
     await q.close();
   }
+}
+
+/**
+ * `lares sense setup` — stand the SOVEREIGN sensorium organs (content · structure · form · persistence ·
+ * mesh), idempotently.
+ *
+ * SOVEREIGN ONLY, and the boundary is old: the guest `~/.mempalace` stands in its own lane, raised by a
+ * deliberate act, because the boot must never write the comparator it measures against. What changed is
+ * that FOUNDING no longer stands these either — a vessel founds and serves carrying no sensorium at all,
+ * and the memory tooling arrives when the operator asks for it.
+ *
+ * The py organs import the mempalace library as code, so a machine wanting these wants
+ * `lares mempalace install` first; this reports rather than assumes.
+ */
+function cmdSenseSetup(args: ParsedArgs): number {
+  const steps = setupSensorium();
+  const failed = steps.filter((s) => s.ran && !s.ok);
+  emit(args, {
+    ok: failed.length === 0,
+    ...(failed.length > 0 ? { error: { code: "error", message: `${failed.length} organ(s) failed to stand` } } : {}),
+    data: { steps },
+    human: () => {
+      console.log("sovereign sensorium organs");
+      for (const s of steps) console.log(`  ${(s.ran ? (s.ok ? "ran" : "FAIL") : "skip").padEnd(6)} ${s.step}: ${s.detail}`);
+      if (failed.length > 0) console.log("  the py organs import the mempalace library — try: lares mempalace install");
+    },
+  });
+  return failed.length === 0 ? 0 : 1;
 }

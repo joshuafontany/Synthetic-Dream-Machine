@@ -16,11 +16,15 @@
 # nothing real, and the container harness stays for what containers actually buy (rude sockets, real disks,
 # a drop that drops).
 #
-# ── ONE DELIBERATE DIVERGENCE FROM THE RITE, NAMED ───────────────────────────────────────────────
-# Movement ② says `lares wake --install`. That ALSO runs the mempalace library install (submodule + pip)
-# and re-aims the AI-surface wires under ~/.claude — both of which write OUTSIDE LAR_ROOT. A rehearsal that
-# reaches into the operator's real tooling is not a rehearsal, so this harness founds with `lares init` and
-# says so. What it therefore does NOT exercise: the mempalace install leg and the harness wiring.
+# ── THE ONE DIVERGENCE LEFT, NAMED ───────────────────────────────────────────────────────────────
+# `wake --install` once ALSO pip-installed the mempalace library and stood the sensorium organs — writes
+# OUTSIDE LAR_ROOT that made any isolated founding impossible. Those moved to their own doors
+# (`lares mempalace install`, `lares sense setup`, operator ruling 2026-08-08), so founding now stands the
+# VESSEL and nothing else and this harness can run the rite AS WRITTEN.
+#
+# What remains outside the tree: `wake --init` still fans out to the AI-surface wires (~/.claude, ~/.codex,
+# ~/.copilot). This harness therefore uses `--install`, never `--init`, and the harness-wiring leg goes
+# un-exercised here — a machine-setup concern rather than a founding one.
 #
 # ── THE GUARD ────────────────────────────────────────────────────────────────────────────────────
 # A rehearsal harness that can eat the hearth is not a rehearsal harness. This REFUSES any root that sits
@@ -96,8 +100,9 @@ trap cleanup EXIT
 
 say "rehearse-keeper — the KEEPER sequence, ${CYCLES} cycle(s), throwaway at:"
 echo "  $ROOT"
-echo "  founding with \`lares init\` rather than \`wake --install\`: the install leg writes OUTSIDE LAR_ROOT"
-echo "  (mempalace pip + ~/.claude wires), and a rehearsal must not reach the operator's real tooling."
+echo "  founding with \`wake --install\` — the rite AS WRITTEN. The mempalace sidecar left the boot"
+echo "  (2026-08-08), so founding no longer reaches outside LAR_ROOT. Un-exercised here: the AI-surface"
+echo "  wiring that still rides \`--init\`, which this harness never passes."
 
 # ── ⓪′ PREFLIGHT — once, ahead of everything irreversible ────────────────────────────────────────
 say "⓪′ preflight"
@@ -120,7 +125,7 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
 
   # ── ② FOUND ────────────────────────────────────────────────────────────────────────────────────
   say "② found — the device + the three kahu"
-  run "lares init"                          lares init
+  run "wake --install (founds the vessel)"   lares wake --install
   run "persona new 0 (label ⊥ Handle ⊥ seat)" lares persona new 0 --name rehearsal-0 --handle 'Kahu Alpha' --seat
   run "persona new 1"                        lares persona new 1 --name rehearsal-1 --handle 'Kahu Beta'  --seat
   run "persona new 2"                        lares persona new 2 --name rehearsal-2 --handle 'Kahu Gamma' --seat

@@ -1,8 +1,13 @@
 /**
- * `lares wake` — the boot ENTRY POINT. Idempotent on every awakening: check (and,
- * with --install, install) the mempalace integration, ensure the live Lararium
- * node is up (ATTACH if healthy, START detached if down — never a restart), and
+ * `lares wake` — the boot ENTRY POINT. Idempotent on every awakening: ensure the live Lararium node is
+ * up (ATTACH if healthy, START detached if down — never a restart), CHECK the mempalace sidecar, and
  * emit a live-delta hydration frame for the waking session.
+ *
+ * FOUNDING STANDS THE VESSEL AND NOTHING ELSE (operator ruling, 2026-08-08). `--install` once also
+ * pip-installed the mempalace library and stood the sensorium organs, which made a separate tool read as
+ * part of the base install and reached outside the vessel root — so a founding could never be isolated.
+ * Both moved to their own doors (`lares mempalace install`, `lares sense setup`); a wake still REPORTS
+ * what stands, because naming a missing tool serves the operator and installing one behind them does not.
  *
  * The static CLAUDE.md @-import carries the canonical seed; this frame carries
  * only what is true right now. A degraded wake still returns 0 — the entry point
@@ -18,8 +23,7 @@ import { udsAvailable } from "../local-connector.js";
 import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
-import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
-import { setupSensorium, type PalaceSetupStep } from "../setup-sensorium.js";
+import { checkMempalaceIntegration } from "../integration-check.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
@@ -87,17 +91,21 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     args.flags["init"] === true || args.flags["install"] === true || args.options["admit"] !== undefined;
   if (doStandup) founding = await foundIfAbsent(args, { root, bootstrap });
 
-  // Under --init / --install: install the mempalace LIBRARY deps (submodule + pip — the sensorium's
-  // py organs import it as code) AND stand up the SOVEREIGN sensorium (content/structure/form/
-  // persistence/mesh). Both no-op when already done. Bare `lares wake` only CHECKS.
+  // THE MEMPALACE IS A SIDECAR, AND FOUNDING NO LONGER ASSUMES IT (operator ruling, 2026-08-08).
   //
-  // What this leaves alone: the GUEST `~/.mempalace`. Booting it from here writes the store
-  // the comparator ruling reserves as an untouched baseline (RUN-ARC.md:14). The guest is raised
-  // deliberately, from its own lane — `lares mempalace setup`.
-  let mempalaceSetup: { install: InstallStep[]; palace: PalaceSetupStep[] } | undefined;
-  if (args.flags["init"] === true || args.flags["install"] === true) {
-    mempalaceSetup = { install: installMempalaceIntegration(), palace: setupSensorium() };
-  }
+  // `--install` used to pip-install the mempalace library and stand the sovereign sensorium organs as
+  // part of founding a vessel. That made a separate tool read as part of the base install — and it
+  // reached OUTSIDE the vessel root, so a founding could never be isolated: a throwaway rehearsal wrote
+  // into the operator's real Python environment. The integration-check's own header already called
+  // mempalace "a READ-ONLY sidecar submodule"; the model said sidecar and the CLI wired it into the boot.
+  //
+  // Founding now stands the VESSEL and nothing else. The two sidecar lanes carry their own doors:
+  //   · `lares mempalace install`  — the library deps (submodule + pip)
+  //   · `lares sense setup`        — the sovereign sensorium organs
+  // Both stay idempotent and both no-op when already done, so nothing was lost but the assumption.
+  //
+  // The CHECK stays here and stays cheap: a wake still REPORTS what stands, because reporting a missing
+  // tool serves the operator and installing one behind their back does not.
   const integration = checkMempalaceIntegration();
 
   // 1b. The AI-SURFACE SEATS — every harness reaches the memory sensorium through the same lares seat.
@@ -254,7 +262,6 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       node: { up: nodeUp, started, port, note: nodeNote },
       ...(recall !== undefined ? { recall } : {}),
       mempalace: { ok: integration.ok, checks: integration.checks },
-      ...(mempalaceSetup !== undefined ? { mempalaceSetup } : {}),
       ...(founding !== undefined ? { founding } : {}),
       ...(foundingHint !== undefined ? { foundingHint } : {}),
       ...(claude !== undefined ? { claude } : {}),
@@ -274,10 +281,12 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       }
       if (recall?.ok) console.log(`  recall:      ${recall.drawers ?? 0} drawers in ${recall.wing} — recent journey surfaced into the wake`);
       else if (recall) console.log(`  recall:      skipped (${recall.note})`);
-      if (mempalaceSetup !== undefined) {
-        console.log("  mempalace setup (--init):");
-        for (const s of [...mempalaceSetup.install, ...mempalaceSetup.palace])
-          console.log(`    ${(s.ran ? (s.ok ? "ran" : "FAIL") : "skip").padEnd(6)} ${s.step}: ${s.detail}`);
+      // A missing sidecar reads as COUNSEL, never as a silent install. The vessel stands without it;
+      // the operator decides whether this machine also carries the memory tooling.
+      if (integration.checks.some((c) => !c.ok)) {
+        console.log("  the mempalace sidecar stands incomplete — it is a SEPARATE tool, never part of founding:");
+        console.log("    → lares mempalace install    the library deps (submodule + pip)");
+        console.log("    → lares sense setup          the sovereign sensorium organs");
       }
       if (founding !== undefined) {
         console.log("  founding (--install):");

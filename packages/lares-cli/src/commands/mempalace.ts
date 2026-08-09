@@ -36,6 +36,7 @@ import { livePalaceProcs, fmtUptime, procInPalaceScope, type PalaceProc, type Pr
 import { hookPauseState, pauseHooks, resumeHooks } from "../hook-pause.js";
 import { portHolderPids } from "../port-control.js";
 import { larPort } from "../env.js";
+import { installMempalaceIntegration } from "../integration-check.js";
 import { cmdMempalaceHarvest } from "./mempalace-harvest.js";
 import { cmdMempalaceRepave } from "./mempalace-repave.js";
 import { emit } from "../render.js";
@@ -411,9 +412,12 @@ function cmdSetup(args: ParsedArgs): number {
 
 function printHelp(): void {
   console.log("lares mempalace <verb>   (alias: lares palace <verb>)\n");
-  console.log("The GUEST lane. `~/.mempalace` is a standalone sidecar you raise deliberately — the");
-  console.log("vessel never boots into it (`lares wake --init` stands only the sovereign sensorium).\n");
+  console.log("The SIDECAR lane. mempalace is a separate tool the vessel never assumes: founding stands the");
+  console.log("VESSEL and nothing else, and both the library and the guest store arrive by a deliberate act.\n");
   console.log("Verbs:");
+  console.log("  install             the LIBRARY deps (submodule + pip). Left `wake --install` 2026-08-08 —");
+  console.log("                      it writes OUTSIDE the vessel root, so founding could never be isolated.");
+  console.log("                      The sovereign organs stand separately: `lares sense setup`.");
   console.log("  setup               raise the guest: `mempalace init` + pin hooks.auto_save=false (idempotent)");
   console.log("  harvest [--wing w]  mine EVERY harness transcript into the guest through the vendored miner's");
   console.log("                      OWN vanilla path — no lar_* metadata, no sensorium planes. The clean");
@@ -448,6 +452,7 @@ export async function cmdMempalace(args: ParsedArgs): Promise<number> {
     command: args.command, positional: args.positional.slice(1), options: args.options, flags: args.flags,
   };
   switch (verb) {
+    case "install": return cmdMempalaceInstall(inner);
     case "setup":   return cmdSetup(inner);
     case "harvest": return await cmdMempalaceHarvest(inner);
     case "repave":  return await cmdMempalaceRepave(inner);
@@ -458,4 +463,34 @@ export async function cmdMempalace(args: ParsedArgs): Promise<number> {
       // The superset: an unwrapped verb IS a nakama subverb — pass it through to the guest palace.
       return passthroughGuest(verb, inner);
   }
+}
+
+/**
+ * `lares mempalace install` — the SIDECAR's library deps (submodule + pip).
+ *
+ * IT LEFT THE BOOT (operator ruling, 2026-08-08). `wake --install` used to run this as part of founding a
+ * vessel, which made a separate tool read as part of the base install — and it writes OUTSIDE the vessel
+ * root, into the operator's real Python environment, so a founding could never be isolated and a throwaway
+ * rehearsal reached the machine it was rehearsing on.
+ *
+ * The mempalace is a READ-ONLY sidecar submodule. A vessel founds and serves without it; what it unlocks is
+ * the memory tooling — the py organs the sovereign sensorium imports as code (`lares sense setup` stands
+ * those). Idempotent: already-installed reads as a skip, never as work.
+ */
+export function cmdMempalaceInstall(args: ParsedArgs): number {
+  const steps = installMempalaceIntegration();
+  const failed = steps.filter((s) => s.ran && !s.ok);
+  emit(args, {
+    ok: failed.length === 0,
+    ...(failed.length > 0 ? { error: { code: "error", message: `${failed.length} install step(s) failed` } } : {}),
+    data: { steps },
+    human: () => {
+      console.log("mempalace sidecar — library deps");
+      for (const s of steps) console.log(`  ${(s.ran ? (s.ok ? "ran" : "FAIL") : "skip").padEnd(6)} ${s.step}: ${s.detail}`);
+      console.log(failed.length === 0
+        ? "  the sidecar stands. Next, if you want the sovereign organs: lares sense setup"
+        : "  incomplete — the vessel still founds and serves without it.");
+    },
+  });
+  return failed.length === 0 ? 0 : 1;
 }

@@ -108,10 +108,23 @@ bags plus the public floor, re-copied EACH cycle so cycle 2 tests the ''rite's''
 warm tree's. `LAR_ROOT` isolates AND empties `bags/`, so a run that skipped this would prove less than it
 appears to.
 
-''TWO DIVERGENCES, NAMED so a green run never reads as more than it proves'':
-* it founds with `lares init`, never `wake --install` — the install leg writes OUTSIDE `LAR_ROOT` (mempalace
-  pip, the `~/.claude` wires), and a rehearsal must not reach the operator's real tooling. ''The install leg
-  and the harness wiring go un-exercised.''
+''IT RUNS THE RITE AS WRITTEN, because founding stopped reaching outside the vessel.'' `wake --install`
+once ALSO pip-installed the mempalace library and stood the sensorium organs — writes OUTSIDE `LAR_ROOT`
+that made an isolated founding impossible. ''The mempalace is a SIDECAR'' (operator ruling, 2026-08-08) and
+its own header always said so; the CLI merely wired it into the boot. Both legs moved to their own doors:
+
+```
+lares mempalace install                              # the library deps (submodule + pip)
+lares sense setup                                    # the sovereign sensorium organs
+```
+
+''A vessel founds and serves carrying neither.'' A wake still REPORTS what stands and counsels the verbs,
+because naming a missing tool serves the operator and installing one behind them does not.
+
+''TWO LEGS STILL GO UN-EXERCISED, named so a green run never reads as more than it proves'':
+* `wake --init` still fans out to the AI-surface wires (`~/.claude` · `~/.codex` · `~/.copilot`). The harness
+  passes `--install`, never `--init`, so ''the harness wiring goes untested here'' — a machine-setup concern
+  rather than a founding one.
 * the vault seals from `LARES_ARCHIVE_PASSPHRASE`, so ''the no-echo TTY prompt leg goes un-exercised''.
 
 ''What a rehearsal proves that a test cannot.'' The suites prove every property in-process, authored
@@ -382,7 +395,7 @@ as ''three symmetric commands'' — and each command performs ''THREE ACTS, neve
 2026-08-06). Stand h0 too; an unnamed founder strands itself out of its own charter:
 
 ```
-lares wake --install                                # stands the stack + the founder root h0
+lares wake --install                                # stands the VESSEL — and nothing else (#sidecar)
 lares persona new 0 --name '<private label>' --handle 'Guru Joshua Fontany' --seat
 lares persona new 1 --name '<private label>' --handle 'Telarus, KSC'        --seat
 lares persona new 2 --name '<private label>' --handle 'The Lindwyrm'        --seat
