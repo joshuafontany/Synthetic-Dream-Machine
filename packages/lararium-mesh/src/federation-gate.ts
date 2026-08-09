@@ -159,10 +159,17 @@ export interface IdentityRing {
  * returning, and LarVessel (whose `identity` field would carry the slot) is not on
  * the live factory path. So both vessels pass `identity = null` and this degenerates
  * EXACTLY to federationShareDecision (zero behavior change, deny-by-default intact).
- * Making the inner ring LIVE needs the main↔worker cap-verify bridge (the async
- * `daemon:verify-request` shore the node peer-gate already uses) + a docId→bagUrl
- * resolver over the worker's bag registry — a SEPARATE thread. This fn is that
- * shore's tested socket; it never fakes a verdict.
+ * The BRIDGE and the MAP both stand already, and conflating their absence with the ring's absence
+ * mis-sizes the work: `daemon:verify-request`/`-result` runs worker-side and the node vessel arms it for
+ * its peer gate, while the worker's provider holds the docId→bagUrl map. What is missing sits between
+ * them — no message carries that map across, and `verify-request` already takes a bagUrl, so it assumes
+ * a caller who knows one while a sharePolicy shore holds only a documentId. One message, then the ring.
+ *
+ * Lighting it CLOSES A DOOR: a bag URL gets hashed to seed the Document it names, so a name that has
+ * passed through a live ring costs a re-founding to change. Naming fusions resolve BEFORE, never after
+ * (canon: lar:///ha.ka.ba/lares/api/pono/one-name-one-relation).
+ *
+ * This fn is that shore's tested socket; it never fakes a verdict.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/identity-share-decision
  */

@@ -341,9 +341,21 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // The live KeyhiveProvider runs INSIDE the daemon-island worker (bootDaemonKeyhive
   // over the worker composite); the founding ceremony DISPOSES its transient provider
   // before returning, so NO provider — and no bag↔docId registry — reaches this
-  // main-thread shore synchronously. Arming this ring needs the async main↔worker
-  // cap-verify bridge (the `daemon:verify-request` shore node's peer-gate already uses)
-  // + a docId→bagUrl resolver over the worker's registry — a SEPARATE thread (#58-b).
+  // main-thread shore synchronously.
+  //
+  // WHAT STANDS AND WHAT REMAINS, precisely — the two get conflated, and they differ:
+  //   · the async main↔worker cap-verify bridge EXISTS and runs — `daemon:verify-request` /
+  //     `daemon:verify-result`, handled worker-side and exposed as the daemon VM's authShore, which the
+  //     node vessel already arms for its peer gate.
+  //   · the docId→bagUrl map EXISTS too, inside the worker's provider.
+  //   · what is missing sits between them: NO message carries that map across. `verify-request` already
+  //     TAKES a bagUrl, so it assumes a caller who knows one, and this shore holds only a documentId.
+  // So the gap reads one message wide, plus building the ring over it.
+  //
+  // AND WIRING IT CLOSES A DOOR. The capability layer hashes a bag URL to seed the Document behind it, so
+  // once this ring verifies, every name that has been through it costs a re-founding to change. The
+  // remaining naming fusions therefore resolve BEFORE this lights, not after
+  // (canon: lar:///ha.ka.ba/lares/api/pono/one-name-one-relation).
   const identityRing: IdentityRing | null = null;
   const repo = new Repo({
     storage:     new IndexedDBStorageAdapter(`${idbName}:repo`),
