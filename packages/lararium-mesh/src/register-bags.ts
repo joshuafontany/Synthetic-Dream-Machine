@@ -2,111 +2,104 @@
  * register-bags — which bags a vessel registers with its capability ring, derived from what it HOLDS.
  *
  * ── THE RULING THIS ENCODES ─────────────────────────────────────────────────────────────────────
- * A vessel that FOUNDED its own PersonaGroup stays private: it raised a fleet of one, so it carries its
- * own bags and nothing else. A vessel ADMITTED into a fleet carries all of that fleet's bags — private and
- * contracted alike — because a fleet that syncs a person's work to some of their devices and not others
- * has not synced it.
+ * An anonymous vessel~veil dyad stays private: it stands in no PersonaGroup, so it carries its own ground
+ * and nothing else. A vessel that JOINS a PersonaGroup carries that group's work — private and contracted
+ * alike — because a fleet that syncs a person's bags to some of their devices and not others has not
+ * synced them.
+ *
+ * The axis is JOINED-OR-NOT, and it is worth naming what it is NOT: founded-versus-admitted. How a
+ * membership arrived decides whose signature stands behind the binding; it decides nothing about which
+ * bags are the person's work. A founder's own laptop carries their catalog exactly as a phone admitted
+ * into the same group does — and the live openers already said so, one registering its catalog while the
+ * other did not, which is the drift this module exists to end.
  *
  * ── A VESSEL HOLDS A SET OF MEMBERSHIPS, NEVER ONE ──────────────────────────────────────────────
  * A human runs SEVERAL PersonaGroups, and the same laptop and the same phone may carry more than one of
- * them — a work fleet and a play fleet across one set of devices. So a vessel does not have "a binding";
- * it belongs to a set of fleets, each admitted or founded on its own terms, and the bags it registers are
- * the UNION over that set.
+ * them — a work compartment and a play compartment across one set of devices. So the bags a vessel
+ * registers are the UNION over its memberships, each contributing its own persona plane and its own catalog.
  *
- * The shape takes the set. A caller with one membership passes one, which is what the boot path supplies
- * today; a caller with three passes three and the union answers without this module changing. Writing it
- * as a scalar would have frozen a single-fleet assumption into a fresh module on the day the ruling said
- * otherwise — and a shape becomes load-bearing long before anyone re-reads it.
- *
- * ── ONE PERSONA PLANE PER MEMBERSHIP, NAMED BY DERIVATION ───────────────────────────────────────
- * `@persona` holds ONE PersonaGroup's private plane — its multitude, signer DID, KEL prefix, device
- * delegation — so a vessel in two fleets needs two of them. Each membership therefore contributes its own
- * plane, named by `personaBagIdFor(personaGroupId)`: a domain-separated derivation from that group's own
- * doc id, with nothing above it that could enumerate a person's handles (persona-scope carries the law and
- * the prior art). Both bindings contribute one — a founded fleet of one still keeps its own identity
- * substrate; what a binding decides is whose doc stands behind the plane, never whether a vessel has one.
- *
- * A vessel in NO fleet holds no persona plane, and that reads correctly rather than as a gap: an anonymous
- * vessel~veil dyad stays private, and a plane belongs to a handle, so a vessel with no handle has none.
+ * ── PLANES REGISTER, ONE PLANE MOUNTS ───────────────────────────────────────────────────────────
+ * Every group's plane registers here, or that group's own devices stop reconciling. Exactly one MOUNTS
+ * as a writable composite layer, because two would shadow each other — that law and its switch live in
+ * `persona-planes`, and the name each plane answers to derives in `persona-scope`.
  *
  * ── WHY IT LIVES HERE AND NOT AT EACH OPENER ────────────────────────────────────────────────────
- * It rode as two hand-written lists, one per platform, and they had already drifted: the admitted browser
- * carried neither the shared substrate bag nor any bag its own catalog named. Keyhive's bag→doc map lives
- * in process memory, so a bag absent from this set can never satisfy a cap check — an operator bag missing
+ * It rode as two hand-written lists, one per platform, and they had drifted: one carried the shared
+ * substrate bag and every bag its catalog named, the other carried neither. Keyhive's bag→doc map lives in
+ * process memory, so a bag absent from this set can never satisfy a cap check — an operator bag missing
  * here refuses `act LOAD` forever, silently, on the vessel least able to notice.
  *
  * Two hand-written lists of one fact drift, and the one that carries authority drifts silently. One
  * derivation, both vessels, so neither enumerates.
  */
 
+import { type LarDoc, tiddlerText } from "./base-doc.js";
 import { BAG_IDS, DAEMON_BAG_ID } from "./lar-uris.js";
 import { personaBagIdFor } from "./persona-scope.js";
 
 /**
- * How a vessel's membership in ONE fleet came to it — the fact that decides what that fleet contributes.
+ * The bag URIs the `@catalog` registry NAMES — the PersonaGroup's own work, read from the projection.
  *
- * ADMITTED — the binding arrived signed by a persona this vessel does not hold, so it joined a fleet that
- * already stood. FOUNDED — the vessel raised that PersonaGroup itself and seated its first persona, a
- * fleet of one. The opener's own words for the difference: an admitted leaf presents a binding it could
- * not have written for itself, and that is the whole difference between joining a group and declaring one.
+ * The catalog keys by bag URI, each entry's text carrying that bag's automerge url. `act CREATE` writes a
+ * durable entry here and nothing else registers the bag with keyhive, whose bag→doc map lives in process
+ * memory — so reading the catalog at boot is what lets a cap check resolve for a bag the person made
+ * yesterday, across restarts, without this module ever learning its name.
  *
- * Note what this is NOT: crossing into a Nexus. A vessel reaches a Nexus through the mesh cabal, one level
- * out from the fleet, and a fleet of one may cross while a fleet of five may not have. The bags a vessel
- * carries follow the FLEETS it belongs to, because that is whose work they are.
+ * An entry whose text carries no automerge url names a bag that never minted; it is skipped rather than
+ * registered as a doc that cannot resolve.
+ *
+ * It lived at ONE opener, which is why the other could not open its own operator's bags.
  */
-export type PersonaBinding = "admitted" | "founded";
+export function catalogNamedBags(doc: LarDoc | undefined | null): string[] {
+  const tiddlers = doc?.tiddlers ?? {};
+  return Object.keys(tiddlers).filter(
+    (title) => title.startsWith("lar:///") && (tiddlerText(tiddlers[title]) ?? "").startsWith("automerge:"),
+  );
+}
 
-/** One fleet this vessel belongs to, and what that membership carries. */
+/** One PersonaGroup this vessel stands in, and the work that group brings with it. */
 export interface FleetMembership {
-  /** The PersonaGroup this membership names. Distinct fleets contribute distinct bags. */
+  /** The PersonaGroup this membership names. Distinct groups contribute distinct planes. */
   readonly personaGroupId: string;
-  /** How this membership arrived — see `PersonaBinding`. */
-  readonly binding: PersonaBinding;
   /**
-   * Every bag this FLEET's catalog NAMES — read from the projection rather than hard-coded. An admitted
-   * membership resolves caps against these; a founded one raised no fleet whose work they would be.
+   * Every bag this group's catalog NAMES — read from the projection rather than hard-coded, so a bag the
+   * person made yesterday registers today without this module learning its name.
    */
   readonly catalogNamed?: readonly string[];
 }
 
 /** What a vessel holds at the moment it registers. Every field a FACT about this vessel, never a platform. */
 export interface RegisterBagsInput {
-  /** Every fleet this vessel belongs to. Empty reads as a vessel that belongs to none. */
+  /** Every PersonaGroup this vessel stands in. Empty reads as the anon dyad — a posture, never a gap. */
   readonly fleets: readonly FleetMembership[];
   /** The wiki slot's bag ids, when a wiki stands in the stack. A Herm carries none — blind by structure. */
   readonly wikiBags?: readonly string[];
 }
 
 /**
- * The bags every vessel registers whatever it holds — its own daemon, identity, session and control ground.
+ * The bags every vessel registers whatever it stands in — its own control plane, and the shared substrate.
  *
- * Every id here belongs to the VESSEL: its control plane, its device identities, its live sessions. No
- * persona plane sits among them, because a plane belongs to a HANDLE and a vessel's handles arrive through
- * its memberships — a vessel holding none holds none.
+ * Every id here belongs to the VESSEL or to the mesh beneath it: its daemon, its device identities, its
+ * live sessions, the catalog and oracle it reads through, and the substrate bags a vessel needs to stand at
+ * all. No persona plane sits among them, because a plane belongs to a PERSONAGROUP and a vessel's groups
+ * arrive through its memberships — a vessel standing in none holds none.
  */
 const OWN_GROUND = [
   DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions, BAG_IDS.catalog,
-  BAG_IDS.oracle, BAG_IDS.lares,
+  BAG_IDS.oracle, BAG_IDS.lares, BAG_IDS.lararium,
 ] as const;
 
 /**
- * The bags this vessel registers, derived — its own ground, its wiki, and the union over its fleets.
+ * The bags this vessel registers, derived — its ground, its wiki, and the union over the groups it stands in.
  *
- * EVERY membership contributes its own persona plane, whichever way it arrived: a handle's private plane
- * belongs to the handle, and a founded fleet of one still keeps its multitude, its signer pin and its
- * device edge. Beyond that plane, a FOUNDED membership contributes nothing — it raised a fleet of one, so
- * there is no other device whose work would arrive. An ADMITTED membership contributes the shared substrate
- * bag and every bag that fleet's catalog names — the widening IS the admission.
- *
- * Order stays stable and duplicates collapse, so two vessels holding the same memberships produce one
- * comparable set, and two fleets naming a bag in common register it once.
+ * Each membership contributes its own persona plane and every bag that group's catalog names. Order stays
+ * stable and duplicates collapse, so two vessels in the same groups produce one comparable set, and two
+ * groups naming a bag in common register it once.
  */
 export function deriveRegisterBags(input: RegisterBagsInput): string[] {
   const out: string[] = [...OWN_GROUND, ...(input.wikiBags ?? [])];
   for (const fleet of input.fleets) {
-    out.push(personaBagIdFor(fleet.personaGroupId));
-    if (fleet.binding !== "admitted") continue;
-    out.push(BAG_IDS.lararium, ...(fleet.catalogNamed ?? []));
+    out.push(personaBagIdFor(fleet.personaGroupId), ...(fleet.catalogNamed ?? []));
   }
   return [...new Set(out)];
 }

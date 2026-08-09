@@ -29,6 +29,7 @@ import {
   materializeGenesisIsland,
   whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
   personaKelBoardDocUrl, personaKelChainForPrefix,
+  deriveRegisterBags, catalogNamedBags,
   type CapModule,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
@@ -739,11 +740,13 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         personaGroupDocIdHex: social.personaGroupDocIdHex,
         personaGroupAgentIdHex: social.personaGroupAgentIdHex,
         meshCabalDocIdHex: social.meshCabalDocIdHex,
-        registerBags: [
-          DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
-          BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares,
-          slot.wikiBagId, slot.draftBagId,
-        ],
+        // Derived, never enumerated — the same derivation the node vessel runs, so neither can drift on
+        // which bags a cap check can resolve. This vessel had been carrying neither the shared substrate
+        // bag nor any bag its own catalog named, which no test could see and no throw announced.
+        registerBags: deriveRegisterBags({
+          fleets: [{ personaGroupId: social.personaGroupDocIdHex, catalogNamed: catalogNamedBags(catalogHandle.doc()) }],
+          wikiBags: [slot.wikiBagId, slot.draftBagId],
+        }),
         // The WORN persona-root's binding (founder-signed): the gate pins personaKel.prefix and walks the KEL
         // to the current head; deviceEdge is the signed device→hearth edge. From the single bootstrap.
         signerDid: social.signerDid,

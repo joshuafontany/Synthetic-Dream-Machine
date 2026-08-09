@@ -1,14 +1,13 @@
 /**
- * The registered bag set is the UNION over a vessel's fleet memberships.
+ * The registered bag set is the UNION over the PersonaGroups a vessel stands in.
  *
- * THE RULE: a vessel that FOUNDED a PersonaGroup raised a fleet of one, so that membership contributes
- * nothing beyond its own ground. A vessel ADMITTED into a fleet carries all of that fleet's bags, private
- * and contracted alike — a fleet that syncs a person's work to some of their devices and not others has
- * not synced it.
+ * THE AXIS: joined-or-not. A vessel in no PersonaGroup stays an anonymous dyad and carries its own ground.
+ * A vessel standing in a group carries that group's work — private and contracted alike, because a fleet that
+ * syncs a person's bags to some of their devices and not others has not synced them.
  *
  * AND A VESSEL HOLDS SEVERAL. A human runs more than one PersonaGroup, and the same laptop and phone may
- * carry more than one of them. So the tests drive one membership, several, and none — a shape that
- * answered only the first would freeze today's boot path into the model.
+ * carry more than one of them — so the tests drive one group, several, and none. A model that answered
+ * only the first would freeze today's boot path into the ontology.
  *
  * WHY A MISSING BAG COSTS SOMETHING. Keyhive's bag→doc map lives in process memory, so a bag absent from
  * this set can never satisfy a cap check — no throw, no warning, an `act LOAD` that refuses forever, on
@@ -24,94 +23,82 @@ const WIKI = ["lar:///ha.ka.ba/bags/@my-wiki", "lar:///ha.ka.ba/bags/@my-wiki/dr
 const WORK = ["lar:///ha.ka.ba/bags/@elyncia", "lar:///ha.ka.ba/bags/@notes"];
 const PLAY = ["lar:///ha.ka.ba/bags/@discordia"];
 
-const founded = (id: string, catalogNamed?: readonly string[]): FleetMembership =>
-  ({ personaGroupId: id, binding: "founded", ...(catalogNamed ? { catalogNamed } : {}) });
-const admitted = (id: string, catalogNamed?: readonly string[]): FleetMembership =>
-  ({ personaGroupId: id, binding: "admitted", ...(catalogNamed ? { catalogNamed } : {}) });
+const standingIn = (id: string, catalogNamed?: readonly string[]): FleetMembership =>
+  ({ personaGroupId: id, ...(catalogNamed ? { catalogNamed } : {}) });
 
 describe("the ground every vessel stands on", () => {
-  test("EVERY membership brings its own persona plane, whichever way it arrived", () => {
-    // A binding decides WHOSE doc stands behind the plane, never whether a handle has one. A founded
-    // fleet of one still carries its multitude, signer pin, KEL prefix and device edge.
-    expect(deriveRegisterBags({ fleets: [founded("g1")] })).toContain(personaBagIdFor("g1"));
-    expect(deriveRegisterBags({ fleets: [admitted("g1")] })).toContain(personaBagIdFor("g1"));
+  test("the substrate bags ride the ground, so no vessel can lose them by standing in nothing", () => {
+    // The drift this ends: one opener registered the shared substrate bag and its catalog, the other
+    // registered neither, and the second could not satisfy a cap check over its own operator's bags.
+    const bags = deriveRegisterBags({ fleets: [] });
+    expect(bags).toEqual(expect.arrayContaining([
+      DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
+      BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares, BAG_IDS.lararium,
+    ]));
   });
 
-  test("a vessel in NO fleet stands on its own ground and carries NO persona plane", () => {
-    // An anonymous vessel~veil dyad stays private. A plane belongs to a handle, so a vessel holding no
-    // handle holds no plane — an absence the model means, never a gap the boot path has to paper over.
-    const bags = deriveRegisterBags({ fleets: [] });
-    expect(bags).toEqual(expect.arrayContaining([DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.sessions]));
-    expect(bags).not.toContain(BAG_IDS.lararium);
+  test("★ an anon dyad stands in no group, so it carries NO persona plane and no one's work ★", () => {
+    const bags = deriveRegisterBags({ fleets: [], wikiBags: WIKI });
     expect(bags.some((b) => b.includes("@persona"))).toBe(false);
+    for (const b of [...WORK, ...PLAY]) expect(bags).not.toContain(b);
+    expect(bags).toEqual(expect.arrayContaining(WIKI));   // its own wiki still stands
   });
 
   test("a Herm carries no wiki, so it registers none — blind by structure, never by a flag", () => {
-    expect(deriveRegisterBags({ fleets: [founded("g1")] }).some((b) => b.includes("@my-wiki"))).toBe(false);
+    expect(deriveRegisterBags({ fleets: [standingIn("g1")] }).some((b) => b.includes("@my-wiki"))).toBe(false);
   });
 });
 
-describe("one membership", () => {
-  test("FOUNDED contributes nothing beyond the ground — a fleet of one has no other device", () => {
-    const bags = deriveRegisterBags({ fleets: [founded("g1", WORK)], wikiBags: WIKI });
-    expect(bags).toEqual(expect.arrayContaining(WIKI));
-    for (const b of WORK) expect(bags).not.toContain(b);
-    expect(bags).not.toContain(BAG_IDS.lararium);
-  });
-
-  test("ADMITTED contributes the substrate bag and every bag that fleet's catalog names", () => {
-    const bags = deriveRegisterBags({ fleets: [admitted("g1", WORK)], wikiBags: WIKI });
-    expect(bags).toContain(BAG_IDS.lararium);
+describe("one PersonaGroup", () => {
+  test("standing in a group brings its plane and every bag its catalog names", () => {
+    const bags = deriveRegisterBags({ fleets: [standingIn("g1", WORK)], wikiBags: WIKI });
+    expect(bags).toContain(personaBagIdFor("g1"));
     for (const b of WORK) expect(bags).toContain(b);
   });
 
-  test("★ THE WIDENING IS THE ADMISSION — founded ⊂ admitted, always ★", () => {
-    const asFounded = new Set(deriveRegisterBags({ fleets: [founded("g1", WORK)], wikiBags: WIKI }));
-    const asAdmitted = deriveRegisterBags({ fleets: [admitted("g1", WORK)], wikiBags: WIKI });
-    for (const b of asFounded) expect(asAdmitted).toContain(b);   // admission never DROPS a bag
-    expect(asAdmitted.length).toBeGreaterThan(asFounded.size);    // and it adds the fleet's
+  test("★ how the membership ARRIVED changes nothing — a founder's own laptop carries their work ★", () => {
+    // The correction this encodes: founded-versus-admitted decides whose signature stands behind a
+    // binding, never which bags are the person's. A model that withheld a founder's catalog would have
+    // left the vessel that MINTED a bag unable to open it.
+    const asFounder  = deriveRegisterBags({ fleets: [standingIn("g1", WORK)] });
+    const asAdmitted = deriveRegisterBags({ fleets: [standingIn("g1", WORK)] });
+    expect(asFounder).toEqual(asAdmitted);
   });
 });
 
-describe("★ SEVERAL memberships on one vessel — a work fleet and a play fleet on one laptop ★", () => {
-  test("★ each handle gets its OWN persona plane, so the second handle has somewhere to stand ★", () => {
-    // The whole point of the derived name. Collapse the two planes back to one constant and both handles
-    // write their multitude, signer pin and device edge into one document — the work self and the play
-    // self fused inside the vessel that was supposed to keep them apart.
-    const bags = deriveRegisterBags({ fleets: [admitted("work", WORK), admitted("play", PLAY)] });
+describe("★ SEVERAL groups on one vessel — a work compartment and a play compartment, one laptop ★", () => {
+  test("★ each group gets its OWN persona plane, so the second compartment has somewhere to stand ★", () => {
+    // Collapse the two planes back to one constant and both groups write their multitude, signer pin and
+    // device edge into one document — the work self and the play self fused inside the vessel that was
+    // supposed to keep them apart.
+    const bags = deriveRegisterBags({ fleets: [standingIn("work"), standingIn("play")] });
     expect(bags).toContain(personaBagIdFor("work"));
     expect(bags).toContain(personaBagIdFor("play"));
     expect(personaBagIdFor("work")).not.toBe(personaBagIdFor("play"));
   });
 
-  test("the set is the UNION, so each admitted fleet's bags arrive", () => {
-    const bags = deriveRegisterBags({ fleets: [admitted("work", WORK), admitted("play", PLAY)], wikiBags: WIKI });
+  test("the set is the UNION, so each group's work arrives", () => {
+    const bags = deriveRegisterBags({ fleets: [standingIn("work", WORK), standingIn("play", PLAY)], wikiBags: WIKI });
     for (const b of [...WORK, ...PLAY]) expect(bags).toContain(b);
   });
 
-  test("a founded fleet beside an admitted one contributes nothing of its own", () => {
-    const bags = deriveRegisterBags({ fleets: [admitted("work", WORK), founded("solo", PLAY)] });
-    for (const b of WORK) expect(bags).toContain(b);
-    for (const b of PLAY) expect(bags).not.toContain(b);   // founded means no other device to carry from
-  });
-
-  test("two fleets naming a bag in common register it once", () => {
+  test("two groups naming a bag in common register it once", () => {
     const shared = ["lar:///ha.ka.ba/bags/@shared"];
-    const bags = deriveRegisterBags({ fleets: [admitted("work", shared), admitted("play", shared)] });
+    const bags = deriveRegisterBags({ fleets: [standingIn("work", shared), standingIn("play", shared)] });
     expect(bags.filter((b) => b === shared[0])).toHaveLength(1);
     expect(bags.filter((b) => b === BAG_IDS.lararium)).toHaveLength(1);
   });
 
-  test("adding a membership only ever WIDENS — no fleet can take another's bags away", () => {
-    const one = new Set(deriveRegisterBags({ fleets: [admitted("work", WORK)] }));
-    const two = deriveRegisterBags({ fleets: [admitted("work", WORK), founded("play")] });
+  test("joining another group only ever WIDENS — no group can take another's bags away", () => {
+    const one = new Set(deriveRegisterBags({ fleets: [standingIn("work", WORK)] }));
+    const two = deriveRegisterBags({ fleets: [standingIn("work", WORK), standingIn("play", PLAY)] });
     for (const b of one) expect(two).toContain(b);
   });
 });
 
 describe("no platform appears in the answer", () => {
-  test("the same memberships yield the same set whichever vessel asks", () => {
-    const fleets = [admitted("work", WORK), founded("play")];
+  test("the same groups yield the same set whichever vessel asks", () => {
+    const fleets = [standingIn("work", WORK), standingIn("play")];
     expect(deriveRegisterBags({ fleets, wikiBags: WIKI })).toEqual(deriveRegisterBags({ fleets, wikiBags: WIKI }));
   });
 });

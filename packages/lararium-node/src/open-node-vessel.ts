@@ -41,6 +41,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagStowage, pluginCidsFromIslandBlobs,
+  deriveRegisterBags, catalogNamedBags,
   coupleMesh, crystallize, guardHitl,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
@@ -845,23 +846,6 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
   // Daemon VM — sovereign daemon island + the operator's authn/z home. `slot` ABSENT (herm) →
   // registerBags omits the user-wiki bags (the decouple); the @daemon's OWN bag still mounts.
-  /**
-   * The bag URIs the @catalog registry NAMES — its tiddlers key by bag URI, their text carrying the
-   * bag's automerge url. `act CREATE` writes a durable entry here; nothing else registers the bag
-   * with keyhive, whose bag→doc map lives in process memory. Reading the catalog at boot means a
-   * cap check resolves for every bag the operator's vessel actually holds, across restarts.
-   *
-   * An entry whose text carries no automerge url names a bag that never minted — skip it rather
-   * than register a doc that cannot resolve.
-   */
-  const catalogNamedBags = (catalogHandle: VesselCoreAssembly["catalogHandle"]): string[] => {
-    const tiddlers = catalogHandle.doc()?.tiddlers ?? {};
-    return Object.keys(tiddlers).filter((title) => {
-      if (!title.startsWith("lar:///")) return false;
-      return (tiddlerText(tiddlers[title]) ?? "").startsWith("automerge:");
-    });
-  };
-
   const openDaemon = async ({ assembly, slot }: { assembly: VesselCoreAssembly; slot?: VesselWikiSlot }): Promise<VesselDaemonVm> => {
     const daemonDoc = (await readDaemonDoc()).doc();
     const personaGroupDocIdHex   = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_GROUP_DOC_ID_TIDDLER])   ?? null;
@@ -910,19 +894,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       seed:                 vesselSeed,
       vesselVerifyingKey: vesselIdentity.verifyingKey,
       personaGroupDocIdHex, personaGroupAgentIdHex, meshCabalDocIdHex,
-      registerBags: [
-        DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
-        BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lararium, BAG_IDS.lares,
-        // User-wiki bags ride registerBags ONLY when a wiki slot is in the stack — a Herm carries
-        // no wiki, so it never registers them (blind by structure, not a flag).
-        ...(slot ? [slot.wikiBagId, slot.draftBagId] : []),
-        // Every bag the @catalog NAMES. The catalog holds refs to the operator's own bags (any
-        // vessel); the core list above names only the Cabal-controlled and infrastructural ones.
-        // keyhive's bag→doc map lives in process memory, so a bag absent here can never satisfy a
-        // cap check — `act LOAD` into an operator bag would refuse forever, and a freshly-founded
-        // vessel could never re-seed. Read the projection rather than hard-code it.
-        ...catalogNamedBags(assembly.catalogHandle),
-      ],
+      // Derived, never enumerated — one derivation both vessels share, so the node and the browser
+      // cannot drift apart on which bags a cap check can resolve. A wiki slot's bags ride only when a
+      // wiki stands in the stack; a Herm carries none, blind by structure rather than by a flag.
+      registerBags: deriveRegisterBags({
+        fleets: [{ personaGroupId: personaGroupDocIdHex, catalogNamed: catalogNamedBags(assembly.catalogHandle.doc()) }],
+        ...(slot ? { wikiBags: [slot.wikiBagId, slot.draftBagId] } : {}),
+      }),
       signerDid,
       personaKel: { prefix: personaKelPrefix, chain: personaKelChain },
       deviceEdge,
