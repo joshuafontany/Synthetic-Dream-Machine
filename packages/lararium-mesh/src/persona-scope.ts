@@ -100,7 +100,26 @@ export function personaBagIdFor(personaGroupDocIdHex: string): string {
   return bagUri(`persona-${personaScopeTag(personaGroupDocIdHex)}`);
 }
 
-/** Whether a bag id names some group's persona plane — the shape a router matches, never a hard-coded id. */
+/**
+ * Whether a bag SLUG names some PersonaGroup's plane — the family rule, in one place.
+ *
+ * It matches the derived SHAPE (`@persona-` + exactly the tag's hex width), never the bare prefix, and the
+ * difference carries weight: `@persona-kel` names a Nexus-shared KEL board that no person's private plane
+ * ever is. A prefix test would sweep it into the family and let a fence meant for hearths close over a
+ * shared board — or, worse the other way, let an allowlist written against the family admit one.
+ *
+ * Every guard that must cover a person's planes calls THIS. The rule spelled twice is the rule that drifts
+ * once, and the guard carrying authority is the one that drifts silently.
+ */
+export function isPersonaPlaneSlug(slug: string): boolean {
+  return new RegExp(`^@persona-[0-9a-f]{${PERSONA_SCOPE_TAG_HEX}}$`).test(slug);
+}
+
+/** Whether a bag id names a persona plane — the namespace itself, or any group's derived plane. */
 export function isPersonaBagId(bagId: string): boolean {
-  return bagId === PERSONA_NAMESPACE || bagId.startsWith(`${PERSONA_NAMESPACE}-`);
+  if (bagId === PERSONA_NAMESPACE) return true;
+  const slug = bagId.startsWith(`${PERSONA_NAMESPACE.slice(0, PERSONA_NAMESPACE.lastIndexOf("/"))}/`)
+    ? bagId.slice(bagId.lastIndexOf("/") + 1)
+    : null;
+  return slug !== null && isPersonaPlaneSlug(slug);
 }

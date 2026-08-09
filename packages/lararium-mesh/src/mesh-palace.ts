@@ -35,6 +35,7 @@ import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord } from "./base-doc.js";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
 import { stableLarUri, bagUri, type MeshScale } from "./lar-uris.js";
+import { isPersonaPlaneSlug } from "./persona-scope.js";
 import {
   type OracleSnapshot,
   type OraclePointer,
@@ -417,13 +418,14 @@ const SOVEREIGN_BAGS: ReadonlySet<string> = new Set(["@catalog", "@persona", "@d
 /**
  * Whether a bag slug names a hearth this Herm must never read.
  *
- * A person's PersonaGroup planes each answer to a DERIVED slug (`@persona-<tag>`), so a set of exact names
- * covers the family only by accident of how many a vessel happens to hold. The final verdict below is an
- * allowlist, so an unmatched slug already denies — this keeps the sovereign fence saying what it means
- * rather than leaning on the allowlist to be right about a case it never enumerated.
+ * A person's PersonaGroup planes each answer to a DERIVED slug, so a set of exact names covers the family
+ * only by accident of how many a vessel happens to hold. The final verdict below is an allowlist, so an
+ * unmatched slug already denies — this keeps the sovereign fence saying what it means rather than leaning
+ * on the allowlist to be right about a case it never enumerated. The family rule itself lives once, in
+ * `persona-scope`, so this fence and the regenesis refusal cannot drift apart on what counts as a plane.
  */
 export function isSovereignBag(slug: string): boolean {
-  return SOVEREIGN_BAGS.has(slug) || slug.startsWith("@persona-");
+  return SOVEREIGN_BAGS.has(slug) || isPersonaPlaneSlug(slug);
 }
 
 /**

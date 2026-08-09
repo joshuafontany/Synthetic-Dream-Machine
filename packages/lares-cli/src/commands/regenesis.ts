@@ -29,6 +29,7 @@ import { cmdReset } from "./scripted.js";
 import { cmdWake } from "./wake.js";
 import { seedRun, seedHolding, discoverHoldings } from "./seed.js";
 import { cmdAct } from "./act.js";
+import { isPersonaPlaneSlug } from "@lararium/mesh";
 
 const STEPS = [
   "stop incumbent", "reset --force (store + genesis + projection watermark)",
@@ -48,9 +49,10 @@ const PROTECTED_BAGS = new Set([
   "@daemon", "@identities", "@persona", "@groups", "@sessions", "@catalog", "@oracle",
 ]);
 
-/** A PersonaGroup plane answers to a DERIVED slug, so the refusal matches the family by shape. */
+/** A PersonaGroup plane answers to a DERIVED slug, so the refusal matches the family by shape — from
+ *  `persona-scope`, the one place that rule lives, never a second spelling of it here. */
 function isProtectedBag(slug: string): boolean {
-  return PROTECTED_BAGS.has(slug) || slug.startsWith("@persona-");
+  return PROTECTED_BAGS.has(slug) || isPersonaPlaneSlug(slug);
 }
 
 /** Resolve `--bag @slug` (or a full `bags/@slug` URI) to the discovered holding it names. */

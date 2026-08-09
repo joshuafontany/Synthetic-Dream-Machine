@@ -12,7 +12,7 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { isPersonaBagId, personaBagIdFor, personaScopeTag, PERSONA_SCOPE_TAG_HEX } from "../src/persona-scope.js";
+import { isPersonaBagId, isPersonaPlaneSlug, personaBagIdFor, personaScopeTag, PERSONA_SCOPE_TAG_HEX } from "../src/persona-scope.js";
 import { PERSONA_NAMESPACE } from "../src/lar-uris.js";
 import { isSovereignBag, hermCanRead } from "../src/mesh-palace.js";
 
@@ -83,5 +83,26 @@ describe("★ the guards cover the FAMILY, not a list of names ★", () => {
     expect(hermCanRead(`lar:///ha.ka.ba/bags/${personaBagIdFor(WORK).split("/").pop()}/selves/h1`)).toBe(false);
     expect(hermCanRead("lar:///ha.ka.ba/bags/@persona/selves/h1")).toBe(false);
     expect(hermCanRead("lar:///ha.ka.ba/bags/@lares/anything")).toBe(true);   // the waymarks still cross
+  });
+});
+
+describe("★ the family rule matches a SHAPE, not a prefix ★", () => {
+  test("★ `@persona-kel` is a Nexus-shared board, NOT anyone's private plane ★", () => {
+    // A prefix test would sweep the shared KEL board into the family. It sits one character from a real
+    // plane and means the opposite thing: a board every member reads, versus a compartment nobody else
+    // may. The derived tag has a fixed hex width, so the shape tells them apart without a list.
+    expect(isPersonaPlaneSlug("@persona-kel")).toBe(false);
+    expect(isPersonaPlaneSlug("@persona-kel-board")).toBe(false);
+    expect(isPersonaPlaneSlug(personaBagIdFor(WORK).split("/").pop()!)).toBe(true);
+  });
+
+  test("the bare namespace names no plane — nothing answers to the stem", () => {
+    expect(isPersonaPlaneSlug("@persona")).toBe(false);
+  });
+
+  test("a truncated or over-long tag reads as no plane", () => {
+    expect(isPersonaPlaneSlug("@persona-b7f1c2a9d4e603")).toBe(false);     // short
+    expect(isPersonaPlaneSlug("@persona-b7f1c2a9d4e60381ab")).toBe(false); // long
+    expect(isPersonaPlaneSlug("@persona-B7F1C2A9D4E60381")).toBe(false);   // the tag lowercases
   });
 });
