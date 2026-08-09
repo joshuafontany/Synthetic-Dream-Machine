@@ -17,7 +17,8 @@
 import { describe, expect, test } from "vitest";
 
 import { deriveRegisterBags, type FleetMembership } from "../src/register-bags.js";
-import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID } from "../src/lar-uris.js";
+import { personaBagIdFor } from "../src/persona-scope.js";
+import { BAG_IDS, DAEMON_BAG_ID } from "../src/lar-uris.js";
 
 const WIKI = ["lar:///ha.ka.ba/bags/@my-wiki", "lar:///ha.ka.ba/bags/@my-wiki/draft"];
 const WORK = ["lar:///ha.ka.ba/bags/@elyncia", "lar:///ha.ka.ba/bags/@notes"];
@@ -29,18 +30,20 @@ const admitted = (id: string, catalogNamed?: readonly string[]): FleetMembership
   ({ personaGroupId: id, binding: "admitted", ...(catalogNamed ? { catalogNamed } : {}) });
 
 describe("the ground every vessel stands on", () => {
-  test("@persona rides the ground, because the keel mounts it on EVERY boot", () => {
-    // A binding decides WHOSE doc stands behind the id, never whether a vessel has one. A founded
-    // vessel's signer pin, KEL prefix and device edge all read through this bag exactly as an admitted
-    // vessel's do — so leaving it to a membership would deny a vessel its own identity substrate.
-    expect(deriveRegisterBags({ fleets: [founded("g1")] })).toContain(PERSONA_BAG_ID);
-    expect(deriveRegisterBags({ fleets: [] })).toContain(PERSONA_BAG_ID);
+  test("EVERY membership brings its own persona plane, whichever way it arrived", () => {
+    // A binding decides WHOSE doc stands behind the plane, never whether a handle has one. A founded
+    // fleet of one still carries its multitude, signer pin, KEL prefix and device edge.
+    expect(deriveRegisterBags({ fleets: [founded("g1")] })).toContain(personaBagIdFor("g1"));
+    expect(deriveRegisterBags({ fleets: [admitted("g1")] })).toContain(personaBagIdFor("g1"));
   });
 
-  test("a vessel in NO fleet still stands on its own ground", () => {
+  test("a vessel in NO fleet stands on its own ground and carries NO persona plane", () => {
+    // An anonymous vessel~veil dyad stays private. A plane belongs to a handle, so a vessel holding no
+    // handle holds no plane — an absence the model means, never a gap the boot path has to paper over.
     const bags = deriveRegisterBags({ fleets: [] });
     expect(bags).toEqual(expect.arrayContaining([DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.sessions]));
     expect(bags).not.toContain(BAG_IDS.lararium);
+    expect(bags.some((b) => b.includes("@persona"))).toBe(false);
   });
 
   test("a Herm carries no wiki, so it registers none — blind by structure, never by a flag", () => {
@@ -71,6 +74,16 @@ describe("one membership", () => {
 });
 
 describe("★ SEVERAL memberships on one vessel — a work fleet and a play fleet on one laptop ★", () => {
+  test("★ each handle gets its OWN persona plane, so the second handle has somewhere to stand ★", () => {
+    // The whole point of the derived name. Collapse the two planes back to one constant and both handles
+    // write their multitude, signer pin and device edge into one document — the work self and the play
+    // self fused inside the vessel that was supposed to keep them apart.
+    const bags = deriveRegisterBags({ fleets: [admitted("work", WORK), admitted("play", PLAY)] });
+    expect(bags).toContain(personaBagIdFor("work"));
+    expect(bags).toContain(personaBagIdFor("play"));
+    expect(personaBagIdFor("work")).not.toBe(personaBagIdFor("play"));
+  });
+
   test("the set is the UNION, so each admitted fleet's bags arrive", () => {
     const bags = deriveRegisterBags({ fleets: [admitted("work", WORK), admitted("play", PLAY)], wikiBags: WIKI });
     for (const b of [...WORK, ...PLAY]) expect(bags).toContain(b);

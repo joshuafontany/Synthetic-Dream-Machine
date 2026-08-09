@@ -18,13 +18,16 @@
  * as a scalar would have frozen a single-fleet assumption into a fresh module on the day the ruling said
  * otherwise — and a shape becomes load-bearing long before anyone re-reads it.
  *
- * ── THE CONSTRAINT ABOVE THIS FUNCTION, NAMED SO IT STAYS VISIBLE ───────────────────────────────
+ * ── ONE PERSONA PLANE PER MEMBERSHIP, NAMED BY DERIVATION ───────────────────────────────────────
  * `@persona` holds ONE PersonaGroup's private plane — its multitude, signer DID, KEL prefix, device
- * delegation. Its bag id is a CONSTANT, and the vessel keel mounts exactly one persona doc at boot. So a
- * vessel in two fleets has nowhere to put the second plane: the id is a singleton where the model wants a
- * family. Registering the bag is correct and sufficient for one membership, and insufficient for two — a
- * fleet-scoped persona id is the piece that must land before multi-fleet boots, and this comment stands
- * where a reader meets the union rather than in a note nobody opens.
+ * delegation — so a vessel in two fleets needs two of them. Each membership therefore contributes its own
+ * plane, named by `personaBagIdFor(personaGroupId)`: a domain-separated derivation from that group's own
+ * doc id, with nothing above it that could enumerate a person's handles (persona-scope carries the law and
+ * the prior art). Both bindings contribute one — a founded fleet of one still keeps its own identity
+ * substrate; what a binding decides is whose doc stands behind the plane, never whether a vessel has one.
+ *
+ * A vessel in NO fleet holds no persona plane, and that reads correctly rather than as a gap: an anonymous
+ * vessel~veil dyad stays private, and a plane belongs to a handle, so a vessel with no handle has none.
  *
  * ── WHY IT LIVES HERE AND NOT AT EACH OPENER ────────────────────────────────────────────────────
  * It rode as two hand-written lists, one per platform, and they had already drifted: the admitted browser
@@ -36,7 +39,8 @@
  * derivation, both vessels, so neither enumerates.
  */
 
-import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID } from "./lar-uris.js";
+import { BAG_IDS, DAEMON_BAG_ID } from "./lar-uris.js";
+import { personaBagIdFor } from "./persona-scope.js";
 
 /**
  * How a vessel's membership in ONE fleet came to it — the fact that decides what that fleet contributes.
@@ -74,24 +78,25 @@ export interface RegisterBagsInput {
 }
 
 /**
- * The bags every vessel registers whatever it holds — its own daemon, identity, session and persona ground.
+ * The bags every vessel registers whatever it holds — its own daemon, identity, session and control ground.
  *
- * `@persona` sits here rather than under a membership because the keel mounts it on EVERY boot, founded or
- * admitted: what a binding decides is whose doc stands behind the id, never whether a vessel has one. A
- * founded vessel's identity reads — signer pin, KEL prefix, device edge — run through that bag exactly as
- * an admitted vessel's do.
+ * Every id here belongs to the VESSEL: its control plane, its device identities, its live sessions. No
+ * persona plane sits among them, because a plane belongs to a HANDLE and a vessel's handles arrive through
+ * its memberships — a vessel holding none holds none.
  */
 const OWN_GROUND = [
   DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions, BAG_IDS.catalog,
-  BAG_IDS.oracle, BAG_IDS.lares, PERSONA_BAG_ID,
+  BAG_IDS.oracle, BAG_IDS.lares,
 ] as const;
 
 /**
  * The bags this vessel registers, derived — its own ground, its wiki, and the union over its fleets.
  *
- * A FOUNDED membership contributes nothing beyond the ground: it raised a fleet of one, so there is no
- * other device whose work would arrive. An ADMITTED membership contributes the shared substrate bag and
- * every bag that fleet's catalog names — the widening IS the admission.
+ * EVERY membership contributes its own persona plane, whichever way it arrived: a handle's private plane
+ * belongs to the handle, and a founded fleet of one still keeps its multitude, its signer pin and its
+ * device edge. Beyond that plane, a FOUNDED membership contributes nothing — it raised a fleet of one, so
+ * there is no other device whose work would arrive. An ADMITTED membership contributes the shared substrate
+ * bag and every bag that fleet's catalog names — the widening IS the admission.
  *
  * Order stays stable and duplicates collapse, so two vessels holding the same memberships produce one
  * comparable set, and two fleets naming a bag in common register it once.
@@ -99,6 +104,7 @@ const OWN_GROUND = [
 export function deriveRegisterBags(input: RegisterBagsInput): string[] {
   const out: string[] = [...OWN_GROUND, ...(input.wikiBags ?? [])];
   for (const fleet of input.fleets) {
+    out.push(personaBagIdFor(fleet.personaGroupId));
     if (fleet.binding !== "admitted") continue;
     out.push(BAG_IDS.lararium, ...(fleet.catalogNamed ?? []));
   }
