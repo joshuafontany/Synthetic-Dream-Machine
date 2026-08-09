@@ -84,6 +84,7 @@ import {
 }                                            from "./open-browser-daemon-vm.js";
 import type { WikiRecipe }                   from "@lararium/mesh";
 
+import { waitHandle } from "@lararium/mesh";
 // ── Bootstrap artifact (IDB-persisted) ──────────────────────────────────────────
 
 const BOOTSTRAP_KEY  = "social-bootstrap";
@@ -259,13 +260,16 @@ export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPoo
   setActiveSurface: (surfaceId: string) => void;
 }
 
+/**
+ * The browser's name for mesh's one boot resolver — the same function the node vessel calls.
+ *
+ * A browser holds no store from a previous run of the hearth, so it opens before its peer has synced more
+ * often than any other vessel does. That makes the late-merge behind the fallback matter MOST here: a doc
+ * arriving a tick past the window merges into the handle this vessel is already using, instead of leaving
+ * a blank fork that never reconciles.
+ */
 async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHandle<T>): Promise<DocHandle<T>> {
-  try {
-    // automerge-repo 2.6: find() resolves when ready and rejects on unavailable.
-    return await repo.find<T>(url as AutomergeUrl);
-  } catch {
-    return fallback();
-  }
+  return waitHandle<T>(repo, url, fallback);
 }
 
 /**

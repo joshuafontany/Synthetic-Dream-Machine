@@ -1,39 +1,18 @@
 /**
  * Repo helpers shared between VM openers.
  *
- * waitHandleLocal: race whenReady() against a short fallback so a
- * repo.find() against an URL the local store doesn't yet have doesn't hang
- * boot. Used by both openNodeVessel (wiki VM) and openDaemonVm (daemon VM).
+ * `waitHandleLocal` names mesh's `waitHandle` for the node-side callers that reach it here. ONE
+ * implementation serves both vessels, which is what lets the keel's "unified strategy" mean something a
+ * reader can check: it races local readiness against a short window and merges a late remote into the
+ * fallback rather than dropping it.
  *
- * The tideline-class boot resolver (resolveBootDoc / StillJoining) lives in
- * @lararium/mesh, so the vessel keel (open-vessel-core) can reach it too — mesh
- * cannot import this node package. Re-exported here for the node-side callers
- * that import it from this module.
+ * The tideline-class boot resolver (resolveBootDoc / StillJoining) lives in @lararium/mesh too, so the
+ * vessel keel (open-vessel-core) can reach it — mesh cannot import this node package. Re-exported here
+ * for the node-side callers that import it from this module.
  */
-
-import type { AutomergeUrl, DocHandle, Repo } from "@automerge/automerge-repo";
 
 export { resolveBootDoc, isStillJoining } from "@lararium/mesh";
 export type { Tideline, StillJoining, MeshScale } from "@lararium/mesh";
 
-const LOCAL_READY_MS = 3000;
-
-export async function waitHandleLocal<T>(
-  repo: Repo,
-  url: AutomergeUrl,
-  fallbackFn: () => DocHandle<T>,
-): Promise<DocHandle<T>> {
-  // automerge-repo 2.6: findWithProgress().whenReady() resolves the handle when
-  // READY and rejects on unavailable.
-  // Race local readiness against a short fallback so boot doesn't hang on a doc
-  // the local store doesn't have yet.
-  const progress = repo.findWithProgress<T>(url);
-  const ready = await Promise.race([
-    progress.whenReady().then((h) => h).catch(() => null),
-    new Promise<null>((r) => setTimeout(() => r(null), LOCAL_READY_MS)),
-  ]);
-  if (ready) return ready;
-  const fresh = fallbackFn();
-  progress.whenReady().then((h) => { fresh.merge(h); }).catch(() => { /* remote never came */ });
-  return fresh;
-}
+/** The node-side name for mesh's one boot resolver. */
+export { waitHandle as waitHandleLocal, LOCAL_READY_MS } from "@lararium/mesh";

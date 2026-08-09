@@ -293,3 +293,7 @@ export * from "./doc-load-probe-contract.js";
 
 export * from "./doctor-sweep.js";
 export * from "./pack-provenance.js";
+
+// One boot-time doc resolver for both vessels — races local readiness, then MERGES a late remote
+// into the fallback rather than dropping it.
+export { waitHandle, LOCAL_READY_MS } from "./wait-handle.js";
