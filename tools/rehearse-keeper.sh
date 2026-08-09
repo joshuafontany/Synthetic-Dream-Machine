@@ -133,7 +133,10 @@ echo "  wiring that still rides \`--init\`, which this harness never passes."
 
 # ── ⓪′ PREFLIGHT — once, ahead of everything irreversible ────────────────────────────────────────
 say "⓪′ preflight"
-run "pnpm -r build (the dist must match its source)" sh -c "cd '$REPO_ROOT' && pnpm -r build"
+# `pnpm build`, never `pnpm -r build`: the root script STAMPS the source digest after building, and the
+# freshness gate reads that stamp. Building without stamping leaves the tree reading stale, so the first
+# lifecycle verb rebuilds MID-RUN — which is how a probe once cleaned dist under the node it measured.
+run "pnpm build (dist matches source, and says so)" sh -c "cd '$REPO_ROOT' && pnpm build"
 run "the binary loads and answers"                    node "$LARES" help
 
 while [ "$CYCLE" -lt "$CYCLES" ]; do

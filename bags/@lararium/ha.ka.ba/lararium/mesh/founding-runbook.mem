@@ -402,7 +402,7 @@ The error named an internal symbol, not a build, and an operator reading it mid-
 `rebuild` from what it says. ''A full rebuild cured it.''
 
 ```
-pnpm -r build                                       # the dist must match the source it imports from
+pnpm build                                          # build AND stamp — `pnpm -r build` skips the stamp
 lares help                                          # the binary loads and answers — the ONLY gate this proves
 pnpm outdated -r                                    # bump BEFORE, never after (see below)
 pnpm exec playwright install chromium               # ONLY after a playwright bump — the binaries pin to it
@@ -427,6 +427,11 @@ plugin carries zero automerge references, both measured. It can skew the ''on-di
 into every device-delegation edge) and the `pluginsCid` (built from this repo's own source). Those move by
 an ACT — a TW5 submodule bump, or a commit — never by an upgrade.
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+
+''USE `pnpm build`, never `pnpm -r build`.'' The root script builds and then STAMPS the source digest the
+freshness gate reads. A build that skips the stamp leaves the tree reading stale, so the first lifecycle
+verb rebuilds ''mid-founding'' — and a build cleans nothing now, but it still costs minutes at the worst
+moment. `pnpm build:clean` retires the outputs first, and even that leaves `dist.prev` to come back to.
 
 ''Run this at the head of BOTH branches.'' A rehearsal that opens on a stale toolchain measures the
 toolchain and reports nothing about the rite.
