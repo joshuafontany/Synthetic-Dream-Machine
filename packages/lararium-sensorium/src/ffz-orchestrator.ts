@@ -43,7 +43,7 @@
  * Lives BESIDE telemetry-writeback.ts (the other `lar_*` write shore): one boundary,
  * the dependency points node/cli → mempalace, never the reverse.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock · lar:///ha.ka.ba/@lararium/api/living-grammar-palace#unification
+ * Meme: lar:///ha.ka.ba/lararium/mesh/ffz-clock · lar:///ha.ka.ba/lararium/api/living-grammar-palace#unification
  */
 
 import { execFileSync } from "node:child_process";

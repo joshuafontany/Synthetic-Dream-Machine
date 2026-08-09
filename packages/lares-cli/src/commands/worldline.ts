@@ -47,7 +47,7 @@
  *
  * One surface, two actors: prose on a TTY, deterministic JSON under --json (../render.ts).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#attribution
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#attribution
  */
 
 import { DatabaseSync } from "node:sqlite";

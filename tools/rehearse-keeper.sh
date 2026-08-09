@@ -160,7 +160,23 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
     step "copy bags/$bag"
     if cp -r "$REPO_ROOT/bags/$bag" "$ROOT/bags/" 2>/dev/null; then ok; else bad "cp"; fi
   done
-  run "copy genesis/" cp -r "$REPO_ROOT/genesis" "$ROOT/genesis"
+  # SEED THE TRACKED GENESIS ALONE — never a per-founding artifact.
+  #
+  # `genesis/social-bootstrap.json` records the doc-URL map MINTED BY ONE FOUNDING. The repo already knows
+  # it does not belong to the repo: gitignored, untracked, deliberately dropped from VCS. A `cp -r genesis`
+  # walked straight past that ruling and handed every from-void rehearsal the URLs of a founding months old.
+  # `init` then found a bootstrap present, skipped re-seeding (idempotent by design), and the boot resolved
+  # @daemon to a doc no local repo held — hearth-private, so no peer will ever carry it, so it failed LOUD.
+  # The vessel behaved correctly throughout; the harness had given it somebody else's identity.
+  #
+  # Copying the TRACKED set makes one rule govern both: whatever git refuses to carry, a rehearsal refuses
+  # to seed. A future per-founding artifact drops out of the seed the day it lands in .gitignore.
+  step "copy genesis/ (tracked files only)"
+  if (cd "$REPO_ROOT" && git ls-files -z genesis/ | xargs -0 -I{} cp --parents "{}" "$ROOT/") 2>/dev/null; then
+    if [ -e "$ROOT/genesis/social-bootstrap.json" ]; then
+      bad "a per-founding artifact reached the seed"
+    else ok; fi
+  else bad "cp"; fi
 
   # ── ② FOUND ────────────────────────────────────────────────────────────────────────────────────
   say "② found — the device + the three kahu"
@@ -223,7 +239,13 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   run "④ vault seal (NEW passphrase)"       sh -c "node '$LARES' vault seal --yes"
   run "④ vault status"                      lares vault status
   run "⑤ regenesis --force"                 lares regenesis --force
-  run "⑥ status — LIVE"                     lares node status
+  # ⑥ ASSERTS BY CONNECTING, never by inspecting. `node status` reads local facts alone — bootstrap
+  # present, storage size, port in use — and the label "LIVE" claimed far more than the verb answers. A
+  # node that fataled mid-boot keeps its port bound, so `portInUse` stayed true over a dead vessel and the
+  # movement reported LIVE across two cycles that never served anything. `wake --observe` REPORTS without
+  # standing, and its `up` reads a connection, so this asks the one question that means live.
+  run "⑥ LIVE — the daemon ANSWERS" \
+    sh -c "node '$LARES' wake --json --observe | grep -q '\"up\":true'"
   run "bag list — declarations survive"     sh -c "node '$LARES' bag list | grep -q '@lares'"
 
   # The node runs DETACHED from `wake`, so no pid file names it. Free the port by whoever holds it — scoped

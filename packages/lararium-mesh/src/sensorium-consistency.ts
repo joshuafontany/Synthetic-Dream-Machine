@@ -29,7 +29,7 @@
  *      circulation is the real extension map) and reads pairwise disagreement on codomain CO-OVERLAPS — the exact dual
  *      of the sheaf's restriction + overlap. The old refusal (faking it through a restriction) is dissolved.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/pono/li-ki-integrities#crucible-tested
+ * Meme: lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested
  */
 
 // ── the li/ki plane taxonomy (the variance vocabulary the whole dual pair rides) ───────────────────

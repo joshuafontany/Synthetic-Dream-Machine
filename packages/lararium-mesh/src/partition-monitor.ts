@@ -9,7 +9,7 @@
  * phantom-free, bias-corrected cross-flow. The mergeThreshold is the operator's fairness dial.
  *
  * Platform-blind: pure arithmetic (rides ./transfer-entropy's output). NO imports.
- * Meme: lar:///ha.ka.ba/@lares/api/pono/the-veil-ladder
+ * Meme: lar:///ha.ka.ba/lares/api/pono/the-veil-ladder
  */
 
 /** A sovereignty read — the cut still holds, or the senses are merging. */

@@ -16,7 +16,7 @@
  * Pure + dependency-free (bundles into the TW5 VM beside build-patch). The caller reads the
  * transcript into {uuid, parentUuid} nodes (the harvest/capture leg already parses parentUuid).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time (Fork = concurrency the DAG holds)
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time (Fork = concurrency the DAG holds)
  */
 
 import type { BranchContext } from "./build-patch.js";

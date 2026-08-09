@@ -15,7 +15,7 @@
 // MUST cover the same item set exactly once (a strict total order); the
 // primitive validates this and throws on a mismatch rather than guessing.
 //
-// Schema: lar:///ha.ka.ba/@lares/api/v0.1/mu/the-law-of-5s (rank aggregation)
+// Schema: lar:///ha.ka.ba/lares/api/mu/the-law-of-5s (rank aggregation)
 
 /** A ranking reads best-first: index 0 carries rank 1, the strongest item. */
 export type Ranking<T> = readonly T[];

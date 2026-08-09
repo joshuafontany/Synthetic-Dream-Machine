@@ -27,7 +27,7 @@
  *     partial stream fragment). Only SAME-TYPE siblings sharing a parent = a real re-issue (the
  *     operator edited a user turn / regenerated an assistant turn).
  *
- * Meme: lar:///ha.ka.ba/@lararium/api/agent-worldline#time (rewind = set-aside)
+ * Meme: lar:///ha.ka.ba/lararium/api/agent-worldline#time (rewind = set-aside)
  */
 
 /**
