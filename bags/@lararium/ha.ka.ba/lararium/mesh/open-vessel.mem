@@ -141,6 +141,12 @@ slot, and the union over the PersonaGroups it stands in, each contributing its p
 every bag its catalog names (`register-bags`, `persona-scope`). A recipe MAY carry a
 platform's own pieces; it MUST NOT carry its own answer to a question about the operator.
 
+''DEIXIS RESOLVES ONCE, AT THE BOOT PATH.'' A vessel reads its own sentinels, derives the
+absolute name of the PersonaGroup plane it stands in, and carries that name onward —
+into the mount, the registration, the registry lookup and the daemon VM. No layer beneath
+re-derives it and none receives a gesture; the bootstrap carries the name beside the url
+(`open-vessel-core`, and canon at persona-circle#the-plane-name).
+
 ''Why the rule bites here in particular.'' Keyhive's bag→doc map lives in process memory,
 so a bag absent from that set can never satisfy a cap check — no throw, no warning, an
 `act LOAD` that refuses forever. Two hand-written lists of one fact drift, and the one

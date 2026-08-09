@@ -164,6 +164,10 @@ A vessel carries ''one private plane per PersonaGroup'' — the multitude, the s
 
 ''Distinct BAGS, never one bag with paths.'' A path under a shared bag is a tiddler namespace, so `@persona/<tag>/…` would seat one compartment's plane inside another's document, where a cap opening the outer bag opens every compartment a person holds.
 
+''ONE NAME, EVERY REACH.'' A plane stands ''seeded'' under its derived name, ''mounted'' under it, ''registered'' under it, and named by it in the `@oracle` registry and the admit payload. The founding order follows: mint the PersonaGroup, ''then'' seed its plane — a plane cannot stand under a name its group has not yet supplied, and one seeded early and renamed later leaves a document the capability layer still seeds from the old string. An admitted device recomputes the same name from the same group doc id, so two devices name one plane identically ''without a roster passing between them''.
+
+''The `@persona` stem names no bag.'' It carries the TITLE prefix every plane uses inside its own document — the signer pin, the KEL prefix, the selves, the bindings all spell `@persona/…` whichever plane holds them, because titles resolve verbatim within a document and the composite finds one by walking layers. It also carries the STEM a plane's derived id extends. Nothing answers to the bare stem.
+
 !!! Register many, mount ONE
 
 Every plane ''REGISTERS'' with the capability ring, or that compartment's own devices stop reconciling. Exactly one ''MOUNTS'' as a writable composite layer, because the composite resolves a tiddler by walking its layers: two mounted planes and one compartment's signer pin answers a read meant for the other, silently, in load order. Canon rules the same from the human side (#composition): ''one Persona takes the blame at a time.''

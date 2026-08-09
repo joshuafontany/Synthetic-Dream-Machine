@@ -18,7 +18,6 @@ import {
   CIRCLES_DOC_URI,
   SESSIONS_DOC_URI,
   DAEMON_BAG_ID,
-  PERSONA_BAG_ID,
   emptyLarDoc,
   emptyIdentitiesDoc,
   emptyCirclesDoc,
@@ -93,10 +92,18 @@ export function seedDaemonDoc(repo: Repo): DocHandle<LarDoc> {
   return handle;
 }
 
-export function seedPersonaDoc(repo: Repo): DocHandle<LarDoc> {
+/**
+ * Seed ONE PersonaGroup's private plane, under the name that group's own material derives.
+ *
+ * `personaBagId` arrives resolved (`personaBagIdFor(personaGroupDocIdHex)`) rather than derived here,
+ * because a plane must exist under its TRUE name from its first write: the capability layer hashes a bag
+ * URL to seed the document behind it, so a plane seeded under one name and renamed later would leave a
+ * document nothing can reach. The caller mints the PersonaGroup first, then seeds its plane.
+ */
+export function seedPersonaDoc(repo: Repo, personaBagId: string): DocHandle<LarDoc> {
   const handle = repo.create<LarDoc>(emptyLarDoc());
   handle.change((doc) => {
-    doc.tiddlers[PERSONA_BAG_ID] = mutableLarRecord(PERSONA_BAG_ID, { text: handle.url, kind: "oracle" }, "lararium-seed");
+    doc.tiddlers[personaBagId] = mutableLarRecord(personaBagId, { text: handle.url, kind: "oracle" }, "lararium-seed");
   });
   console.log(`[social-seed] PersonaDoc seeded url=${handle.url}`);
   return handle;

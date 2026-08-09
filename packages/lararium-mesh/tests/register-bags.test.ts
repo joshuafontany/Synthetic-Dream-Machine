@@ -66,40 +66,21 @@ describe("one PersonaGroup", () => {
   });
 });
 
-describe("★ THE MOUNTED PLANE REGISTERS UNDER THE ID EVERYTHING ELSE CALLS IT ★", () => {
-  // The defect this guards, which a suite full of derived-id assertions happily blessed: register a plane
-  // under a name that nothing mounts, nothing puts in the @oracle registry and no admit payload reads, and
-  // the plane a vessel actually stands in stays UNREGISTERED. A cap check then resolves the bag URL
-  // verbatim, finds nothing, and refuses forever — while every test still passes.
-  test("★ the mounted group registers as PERSONA_BAG_ID, the id the composite and registry use ★", () => {
-    const bags = deriveRegisterBags({ fleets: [standingIn("work")], mountedPersonaGroupId: "work" });
-    expect(bags).toContain(PERSONA_BAG_ID);
-    expect(bags).not.toContain(personaBagIdFor("work"));
-  });
-
-  test("a plane held but NOT mounted answers to its derived name — its only name anywhere", () => {
-    const bags = deriveRegisterBags({
-      fleets: [standingIn("work"), standingIn("play")], mountedPersonaGroupId: "work",
-    });
-    expect(bags).toContain(PERSONA_BAG_ID);                  // the one it stands in
-    expect(bags).toContain(personaBagIdFor("play"));         // the one it merely holds
-    expect(bags).not.toContain(personaBagIdFor("work"));     // never BOTH names for one plane
-  });
-
-  test("★ no plane ever registers under two names — two spellings seed two Keyhive docs ★", () => {
-    // keyhive hashes the bag URL to seed the Document, so a second spelling is a second document that no
-    // later aliasing can reconcile.
-    const bags = deriveRegisterBags({
-      fleets: [standingIn("work"), standingIn("play")], mountedPersonaGroupId: "work",
-    });
-    const personaNames = bags.filter((b) => b.includes("@persona"));
-    expect(personaNames).toHaveLength(2);                    // two planes, two names, never four
-  });
-
-  test("naming no mounted group leaves every plane on its derived name", () => {
-    const bags = deriveRegisterBags({ fleets: [standingIn("work")] });
+describe("★ A PLANE CARRIES ONE NAME EVERYWHERE ★", () => {
+  // The failure this forbids: a plane registered under one spelling while the composite, the @oracle
+  // registry and the admit payload reach it by another. keyhive hashes the bag URL to SEED the Document
+  // behind it, so a second spelling is a second document no later aliasing reconciles — and the plane a
+  // vessel actually stands in would answer no cap check, with no throw and no warning.
+  test("★ every plane registers under its DERIVED name — the deictic reaches no map ★", () => {
+    const bags = deriveRegisterBags({ fleets: [standingIn("work"), standingIn("play")] });
     expect(bags).toContain(personaBagIdFor("work"));
+    expect(bags).toContain(personaBagIdFor("play"));
     expect(bags).not.toContain(PERSONA_BAG_ID);
+  });
+
+  test("★ no plane ever carries two names — two planes, two names, never four ★", () => {
+    const bags = deriveRegisterBags({ fleets: [standingIn("work"), standingIn("play")] });
+    expect(bags.filter((b) => b.includes("@persona"))).toHaveLength(2);
   });
 });
 

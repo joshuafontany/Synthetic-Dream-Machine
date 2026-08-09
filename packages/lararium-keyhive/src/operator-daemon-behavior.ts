@@ -28,7 +28,7 @@ import {
   makePersonaSelvesReactors,
   makeCabalRealmReactors,
 } from "@lararium/tw5";
-import { CIRCLES_DOC_URI, PERSONA_BAG_ID, DAEMON_BAG_ID } from "@lararium/mesh";
+import { CIRCLES_DOC_URI, DAEMON_BAG_ID, personaBagIdFor } from "@lararium/mesh";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
@@ -163,9 +163,13 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         // and the DeterministicFederationGate never volunteers it to a cross-operator. The `seat` claim does
         // NOT ride — a Kahu chair names a seat on a PARTICULAR node, so each node keeps its own. No board
         // shore is reachable here: only a publicly announced Handle binds a persona to a public glamour.
+        // The plane is reached by the name its own PersonaGroup derives — the same string the registry
+        // entry, the composite layer and the capability ring use. `daemonAuth` already carries the group's
+        // doc id, so the resolution happens here rather than travelling as a second parameter.
+        const personaBagId = personaBagIdFor(daemonAuth.personaGroupDocIdHex);
         const resolvePersonaStore = async () => {
-          const store = await oraclePlane.storeOf(PERSONA_BAG_ID);
-          if (!store) throw new Error("persona-selves-verb: @persona unresolved — the @oracle registry names no PERSONA_BAG_ID");
+          const store = await oraclePlane.storeOf(personaBagId);
+          if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — the @oracle registry names no ${personaBagId}`);
           return store;
         };
         const selvesReactors = makePersonaSelvesReactors({ resolveStore: resolvePersonaStore });

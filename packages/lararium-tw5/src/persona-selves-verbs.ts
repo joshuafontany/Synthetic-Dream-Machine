@@ -27,8 +27,9 @@ import {
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 
-/** Resolve a read+write store over the @persona doc — the daemon reaches it by ACCESS (the @oracle registry
- *  names PERSONA_BAG_ID); access≠load, so no composite layer mounts. Throws LOUD when @persona is unresolved. */
+/** Resolve a read+write store over the PersonaGroup plane this vessel stands in — the daemon reaches it by
+ *  ACCESS (the @oracle registry names the plane under the id its own group derives); access≠load, so no
+ *  composite layer mounts. Throws LOUD when the plane resolves to nothing. */
 export type ResolvePersonaStore = () => Promise<LarTiddlerStore>;
 
 export interface PersonaSelvesVerbOptions {

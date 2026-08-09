@@ -20,7 +20,7 @@ import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import {
-  DAEMON_BAG_ID, PERSONA_BAG_ID, PERSONA_KEL_PREFIX_TIDDLER,
+  DAEMON_BAG_ID, personaBagIdFor, PERSONA_KEL_PREFIX_TIDDLER,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   personaKelBoardDocUrl, personaKelChainForPrefix, materializeSharedLarDoc,
 } from "@lararium/mesh";
@@ -74,9 +74,12 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const personaGroupDocIdHex = tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER]?.text ?? null;
   const meshCabalDocIdHex   = tiddlers[MESH_CABAL_DOC_ID_TIDDLER]?.text   ?? null;
   const daemonUrl            = tiddlers[DAEMON_BAG_ID]?.text                 ?? null;
-  // The founder's @persona doc — carried into the payload so the joinee SYNCS the shared
-  // veiled identity (membership-sync foundation); @daemon stays sovereign (joinee seeds its own).
-  const personaUrl           = tiddlers[PERSONA_BAG_ID]?.text                ?? null;
+  // The founder's PersonaGroup plane — carried into the payload so the joinee SYNCS the shared veiled
+  // identity (membership-sync foundation); @daemon stays sovereign (the joinee seeds its own). The entry
+  // is keyed by the name the group's own doc id derives, which both devices compute alike.
+  const personaUrl           = personaGroupDocIdHex
+    ? tiddlers[personaBagIdFor(personaGroupDocIdHex)]?.text ?? null
+    : null;
 
   if (!personaGroupDocIdHex || !meshCabalDocIdHex) {
     throw new Error(

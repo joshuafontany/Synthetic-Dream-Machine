@@ -29,7 +29,7 @@ import {
   materializeGenesisIsland,
   whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
   personaKelBoardDocUrl, personaKelChainForPrefix,
-  deriveRegisterBags, catalogNamedBags,
+  deriveRegisterBags, catalogNamedBags, personaBagIdFor,
   type CapModule,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
@@ -383,7 +383,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     });
     bootstrap = {
       identitiesUrl: a.identitiesUrl, circlesUrl: a.circlesUrl, sessionsUrl: a.sessionsUrl,
-      daemonUrl: a.daemonUrl, personaUrl: a.personaUrl,
+      daemonUrl: a.daemonUrl, personaUrl: a.personaUrl, personaBagId: a.personaBagId,
       personaGroupDocIdHex: admit.personaGroupDocIdHex,
       personaGroupAgentIdHex: admit.personaGroupAgentIdHex,
       meshCabalDocIdHex: admit.meshCabalDocIdHex,
@@ -415,7 +415,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       nexusPubkey: vesselIdentity.verifyingKey,
     });
     bootstrap = {
-      identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, daemonUrl: f.daemonUrl, personaUrl: f.personaUrl,
+      identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, daemonUrl: f.daemonUrl, personaUrl: f.personaUrl, personaBagId: f.personaBagId,
       personaGroupDocIdHex: f.personaGroupDocIdHex, personaGroupAgentIdHex: f.personaGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
       signerDid: f.signerDid, personaKelPrefix: f.personaKelPrefix, deviceEdge: f.founderEdge,
       contactCard: f.contactCardJson,
@@ -745,7 +745,6 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         // bag nor any bag its own catalog named, which no test could see and no throw announced.
         registerBags: deriveRegisterBags({
           fleets: [{ personaGroupId: social.personaGroupDocIdHex, catalogNamed: catalogNamedBags(catalogHandle.doc()) }],
-          mountedPersonaGroupId: social.personaGroupDocIdHex,
           wikiBags: [slot.wikiBagId, slot.draftBagId],
         }),
         // The WORN persona-root's binding (founder-signed): the gate pins personaKel.prefix and walks the KEL
@@ -758,7 +757,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // path), never CRDT-syncing the @oracle blob doc over the port. Same derivation as the pool.
       const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
       daemon = await openBrowserDaemonVm({
-        repo, daemonUrl: social.daemonUrl, personaUrl: social.personaUrl, coreHash: assembly.coreHash,
+        repo, daemonUrl: social.daemonUrl, personaUrl: social.personaUrl,
+        personaBagId: personaBagIdFor(social.personaGroupDocIdHex), coreHash: assembly.coreHash,
         ...(pluginCids.length ? { pluginCids } : {}),
         workerScriptUrl: daemonWorkerUrl,
         recipe: { wikiSlug: "daemon" } satisfies WikiRecipe,

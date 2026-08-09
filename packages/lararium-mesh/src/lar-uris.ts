@@ -293,11 +293,17 @@ export function flowUri(petname: string): string {
   return `${DAEMON_BAG_ID}/flows/${petname}`;
 }
 
-/** Persona bag id — the operator's veiled-identity `@persona` bag (the PersonaGroup).
- *  Carries the Shadowtalk veiled True-name; the membership-sync surface that crosses the
- *  operator's vessels (vs `@daemon`, which stays sovereign-per-vessel). Founded alongside
- *  `@daemon` via the bootstrap (not in BAG_IDS — both ride the founding ceremony). The ONE
- *  daemon VM tends BOTH bags. */
+/** The persona NAMESPACE — two jobs, and a reader who fuses them will look for a bag that does not exist.
+ *
+ *  ① The TITLE prefix every PersonaGroup plane uses INSIDE its own document: the signer pin, the KEL
+ *     prefix, the selves, the binding records all spell `@persona/...` whichever plane holds them. Titles
+ *     resolve verbatim within a document and the composite finds one by walking layers, so every plane
+ *     carries the same internal shape regardless of the bag it answers to.
+ *  ② The STEM a plane's own bag id extends — `personaBagIdFor` derives `@persona-<tag>` from that group's
+ *     doc id, and `isPersonaBagId` matches the family by that shape rather than by any fixed id.
+ *
+ *  It NAMES NO BAG on its own. A vessel holds one plane per PersonaGroup it stands in, each seeded,
+ *  mounted, registered and reached under its own derived name; nothing answers to the bare stem. */
 export const PERSONA_BAG_ID    = bagUri("persona");
 
 // ── Recipe + bag descriptor URI builders ──────────────────────────────────

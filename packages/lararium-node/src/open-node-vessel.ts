@@ -35,13 +35,13 @@ import {
   OpenIdentitySlot,
   emptyLarDoc, mutableLarRecord, tiddlerText,
   ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, CROSSROADS_DOC_URI, recipeHostFacets,
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
+  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID,
   BAG_IDS, slugFromUri, verbArgsFromPayload, registerCrossroadsInOracle,
   whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagStowage, pluginCidsFromIslandBlobs,
-  deriveRegisterBags, catalogNamedBags,
+  deriveRegisterBags, catalogNamedBags, personaBagIdFor,
   coupleMesh, crystallize, guardHitl,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
@@ -777,14 +777,21 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const circlesUrl    = bootstrapTiddlers[CIRCLES_DOC_URI]?.text    ?? tiddlerText(id?.[CIRCLES_DOC_URI])    ?? null;
       const sessionsUrl   = bootstrapTiddlers[SESSIONS_DOC_URI]?.text   ?? tiddlerText(id?.[SESSIONS_DOC_URI])   ?? null;
       const daemonUrl      = bootstrapTiddlers[DAEMON_BAG_ID]?.text       ?? tiddlerText(id?.[DAEMON_BAG_ID])       ?? null;
-      const personaUrl     = bootstrapTiddlers[PERSONA_BAG_ID]?.text      ?? tiddlerText(id?.[PERSONA_BAG_ID])      ?? null;
-      if (!identitiesUrl || !circlesUrl || !sessionsUrl || !daemonUrl || !personaUrl) {
+      // THE ONE RESOLUTION POINT on this platform: the vessel reads its own sentinel, derives the plane's
+      // absolute name, and every reader downstream carries that name rather than a gesture.
+      const personaGroupId = bootstrapTiddlers[PERSONA_GROUP_DOC_ID_TIDDLER]?.text
+        ?? tiddlerText(id?.[PERSONA_GROUP_DOC_ID_TIDDLER]) ?? null;
+      const personaBagId   = personaGroupId ? personaBagIdFor(personaGroupId) : null;
+      const personaUrl     = personaBagId
+        ? bootstrapTiddlers[personaBagId]?.text ?? tiddlerText(id?.[personaBagId]) ?? null
+        : null;
+      if (!identitiesUrl || !circlesUrl || !sessionsUrl || !daemonUrl || !personaUrl || !personaBagId) {
         throw new Error(
           `[lararium] social plane not initialised — run: pnpm --filter @lararium/node lararium:init\n` +
-          `  missing: ${[!identitiesUrl && "@identities", !circlesUrl && "@circles", !sessionsUrl && "@sessions", !daemonUrl && "@daemon", !personaUrl && "@persona"].filter(Boolean).join(", ")}`,
+          `  missing: ${[!identitiesUrl && "@identities", !circlesUrl && "@circles", !sessionsUrl && "@sessions", !daemonUrl && "@daemon", !personaUrl && "the PersonaGroup plane", !personaBagId && "the PersonaGroup sentinel"].filter(Boolean).join(", ")}`,
         );
       }
-      bootstrap = { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl };
+      bootstrap = { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl, personaBagId };
       return { islandHandle, coreHash, bootstrap };
     },
 
@@ -899,7 +906,6 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       // wiki stands in the stack; a Herm carries none, blind by structure rather than by a flag.
       registerBags: deriveRegisterBags({
         fleets: [{ personaGroupId: personaGroupDocIdHex, catalogNamed: catalogNamedBags(assembly.catalogHandle.doc()) }],
-        mountedPersonaGroupId: personaGroupDocIdHex,
         ...(slot ? { wikiBags: [slot.wikiBagId, slot.draftBagId] } : {}),
       }),
       signerDid,
@@ -915,6 +921,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       repo,
       daemonUrl: bootstrap.daemonUrl,
       personaUrl: bootstrap.personaUrl,
+      personaBagId: bootstrap.personaBagId,
       coreHash: assembly.coreHash,
       ...(pluginCids.length ? { pluginCids } : {}),
       grants: {

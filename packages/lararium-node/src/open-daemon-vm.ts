@@ -40,6 +40,8 @@ export interface DaemonVmOptions {
   daemonUrl:          string;
   /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc. */
   personaUrl:         string;
+  /** The mounted plane's bag id, resolved once at the boot path — carried, never re-derived here. */
+  personaBagId:       string;
   /**
    * SHA-256 hex (the CID) of the TW5 core blob — the daemon island pulls the engine
    * bytes by this CID from the local CAS (the CID plane).
@@ -66,7 +68,7 @@ export interface DaemonVmOptions {
 }
 
 export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore> {
-  const { repo, daemonUrl, personaUrl, coreHash, pluginCids, grants, libraryBags, daemonAuth, storageDir, workerScriptUrl } = opts;
+  const { repo, daemonUrl, personaUrl, personaBagId, coreHash, pluginCids, grants, libraryBags, daemonAuth, storageDir, workerScriptUrl } = opts;
 
   // ── Daemon doc handle (node strategy: merge-on-late-arrival) ────────────────
   const daemonHandle = await resolveBootDoc<LarDoc>(
@@ -99,7 +101,7 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
   // The wrapper IS the shore — host pieces + recipe/storage + merge-on-arrival daemonHandle;
   // the lifecycle and the whole result surface (DaemonVmCore) live once in the core.
   return openDaemonVmCore(host, {
-    repo, daemonHandle, personaHandle, recipe, grants, coreHash,
+    repo, daemonHandle, personaHandle, personaBagId, recipe, grants, coreHash,
     ...(pluginCids?.length ? { pluginCids } : {}),
     ...(daemonAuth ? { daemonAuth } : {}),
     ...(storage   ? { storage }   : {}),

@@ -46,7 +46,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER,
   CAP_EVENT_TAG,
-  seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc, seedPersonaDoc,
+  seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc, seedPersonaDoc, personaBagIdFor,
   buildDeviceDelegation, type DeviceDelegationTiddler,
   mintPersonaInception, personaKelBoardDocUrl, writePersonaKelEvent, materializeSharedLarDoc,
   type PersonaKelEvent,
@@ -122,8 +122,10 @@ export interface FoundingCeremonyResult {
   circlesUrl:            string;
   sessionsUrl:           string;
   daemonUrl:              string;
-  /** The @persona (PersonaGroup veiled-identity) doc URL — founded alongside @daemon. */
+  /** The mounted PersonaGroup plane's doc URL — founded alongside @daemon. */
   personaUrl:             string;
+  /** That plane's BAG ID, derived from the PersonaGroup's own doc id. One name, everywhere it is reached. */
+  personaBagId:           string;
   personaGroupDocIdHex:   string;
   personaGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
@@ -157,8 +159,6 @@ export async function runFoundingCeremony(
   const circlesHandle    = seedCirclesDoc(repo);
   const sessionsHandle   = seedSessionsDoc(repo);
   const daemonHandle      = seedDaemonDoc(repo);
-  // The @persona bag — the operator's veiled-identity doc, founded alongside @daemon.
-  const personaHandle     = seedPersonaDoc(repo);
 
   // Write operator identity + circles tiddlers
   const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
@@ -187,6 +187,12 @@ export async function runFoundingCeremony(
 
   const personaGroup = await keyhive.createSentinelDoc(PERSONA_GROUP_SENTINEL_URI);
   await keyhive.addSentinelMember(vesselIdentifierHex, personaGroup.docIdHex);
+
+  // The PersonaGroup's private plane, seeded only NOW — its bag name derives from the group's own doc id,
+  // so the group must exist before its plane can stand under its true name. A plane seeded under one name
+  // and renamed later would leave behind a document the capability layer still seeds from the old string.
+  const personaBagId  = personaBagIdFor(personaGroup.docIdHex);
+  const personaHandle = seedPersonaDoc(repo, personaBagId);
 
   const meshCabal = await keyhive.createSentinelDoc(MESH_CABAL_SENTINEL_URI);
   await keyhive.addSentinelMember(personaGroup.agentIdHex, meshCabal.docIdHex);
@@ -324,6 +330,7 @@ export async function runFoundingCeremony(
     sessionsUrl:           sessionsHandle.url   as string,
     daemonUrl:              daemonHandle.url      as string,
     personaUrl:            personaHandle.url    as string,
+    personaBagId,
     personaGroupDocIdHex:   personaGroup.docIdHex,
     personaGroupAgentIdHex: personaGroup.agentIdHex,
     meshCabalDocIdHex:     meshCabal.docIdHex,
@@ -433,9 +440,12 @@ export interface ApplyAdmitResult {
   circlesUrl:    string;
   sessionsUrl:   string;
   daemonUrl:      string;
-  /** The @persona doc URL the joinee resolves — the founder's shared doc (membership-sync)
-   *  when the payload carries it, else a fresh local seed (older payloads). */
+  /** The PersonaGroup plane's doc URL the joinee resolves — the founder's shared doc
+   *  (membership-sync) when the payload carries it, else a fresh local seed. */
   personaUrl:     string;
+  /** That plane's bag id, derived from the SAME group doc id the founder used. Both devices name one
+   *  plane identically or they sync nothing — the derivation is what makes that hold without a roster. */
+  personaBagId:   string;
 }
 
 /**
@@ -462,7 +472,10 @@ export async function runApplyAdmitPayload(
   const daemonHandle      = seedDaemonDoc(repo);
   // @persona: the joinee RECEIVES the founder's shared veiled-identity doc to SYNC it
   // (the membership-sync foundation). Older payloads without it fall back to a fresh local seed.
-  const personaUrl = payload.personaUrl ?? (seedPersonaDoc(repo).url as string);
+  // An admitted vessel joins a PersonaGroup that already stands, so its plane's name derives from the
+  // SAME group doc id the founder used — the two devices name one plane identically or they sync nothing.
+  const personaBagId = personaBagIdFor(payload.personaGroupDocIdHex);
+  const personaUrl = payload.personaUrl ?? (seedPersonaDoc(repo, personaBagId).url as string);
 
   const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
   for (const t of ceremonyTiddlers) {
@@ -571,5 +584,6 @@ export async function runApplyAdmitPayload(
     sessionsUrl:   sessionsHandle.url   as string,
     daemonUrl:      daemonHandle.url      as string,
     personaUrl,
+    personaBagId,
   };
 }

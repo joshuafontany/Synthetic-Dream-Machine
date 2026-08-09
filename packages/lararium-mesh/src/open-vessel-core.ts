@@ -23,7 +23,7 @@ import { CompositeStore } from "./composite-store.js";
 import type { LarTiddlerStore } from "./tiddler-store.js";
 import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarDoc } from "./base-doc.js";
-import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
+import { BAG_IDS, DAEMON_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
 import { wikiSlotUri } from "./wiki-recipe.js";
 import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
 import { isCondemned, type DocLoadProbe, type ProbeResult } from "./doc-load-probe-contract.js";
@@ -34,8 +34,16 @@ export interface VesselBootstrap {
   circlesUrl:    string;
   sessionsUrl:   string;
   daemonUrl:      string;
-  /** The @persona (PersonaGroup veiled-identity) doc URL — founded alongside @daemon. */
+  /** The mounted PersonaGroup plane's doc URL — founded alongside @daemon. */
   personaUrl:     string;
+  /**
+   * The mounted plane's BAG ID, derived from that PersonaGroup's own doc id (`personaBagIdFor`).
+   *
+   * It travels beside the url rather than being recomputed here, because a vessel resolves "the plane I
+   * stand in" ONCE — at the boot path that reads its own sentinels — and everything downstream carries the
+   * absolute name (persona-planes, and canon at persona-circle#the-plane-name).
+   */
+  personaBagId:   string;
 }
 
 /**
@@ -235,8 +243,10 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   await mountSocial(BAG_IDS.groups,     bootstrap.circlesUrl);
   await mountSocial(BAG_IDS.sessions,   bootstrap.sessionsUrl);
   await mountSocial(DAEMON_BAG_ID,      bootstrap.daemonUrl);
-  // @persona — the operator's veiled-identity bag (PersonaGroup), founded alongside @daemon.
-  await mountSocial(PERSONA_BAG_ID,     bootstrap.personaUrl);
+  // The PersonaGroup plane this vessel stands in, mounted under its own derived name. Exactly one plane
+  // mounts: the composite resolves a title by walking layers, so a second writable plane would answer
+  // reads meant for the first, in load order.
+  await mountSocial(bootstrap.personaBagId, bootstrap.personaUrl);
   const mountManifest: MountManifest = { entries, degraded };
 
   if (recipe.loadCorpora) {

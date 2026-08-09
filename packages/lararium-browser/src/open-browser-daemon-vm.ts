@@ -37,6 +37,8 @@ export interface BrowserDaemonVmOptions {
   daemonUrl:         string;
   /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc. */
   personaUrl:        string;
+  /** The mounted plane's bag id, resolved once at the boot path — carried, never re-derived here. */
+  personaBagId:      string;
   /** SHA-256 hex of TW5 core blob. null = pre-CAS path. */
   coreHash:         string | null;
   /** CIDs of the engine's plugin-tiddler blobs — the worker pulls them by CID from OPFS. */
@@ -70,7 +72,7 @@ export interface BrowserVerbPlacementRequest {
 export async function openBrowserDaemonVm(
   opts: BrowserDaemonVmOptions,
 ): Promise<DaemonVmCore> {
-  const { repo, daemonUrl, personaUrl, coreHash, pluginCids, recipe, grants, daemonAuth, workerScriptUrl } = opts;
+  const { repo, daemonUrl, personaUrl, personaBagId, coreHash, pluginCids, recipe, grants, daemonAuth, workerScriptUrl } = opts;
 
   // ── Daemon doc handle (browser strategy: find-or-create) ────────────────────
   const daemonHandle = await (async () => {
@@ -98,7 +100,7 @@ export async function openBrowserDaemonVm(
   // The wrapper IS the shore — host pieces + find-or-create daemonHandle; the lifecycle and the
   // whole result surface (DaemonVmCore) live once in the core. Return it directly, no re-spread.
   return openDaemonVmCore(host, {
-    repo, daemonHandle, personaHandle, recipe, grants, coreHash,
+    repo, daemonHandle, personaHandle, personaBagId, recipe, grants, coreHash,
     ...(pluginCids?.length ? { pluginCids } : {}),
     ...(daemonAuth ? { daemonAuth } : {}),
     workerScriptUrl,
