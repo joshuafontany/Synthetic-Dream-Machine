@@ -89,7 +89,10 @@ async function main(): Promise<void> {
   const publicUrl = process.env["LAR_PUBLIC_URL"] ?? `http://localhost:${port}`;
   const peers = (process.env["LAR_PEERS"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   const seedLabel = process.env["LAR_SEED"];
-  const meshSelf = deriveMeshSelf(publicUrl, peers, seedLabel ? { label: seedLabel } : {});
+  // The radius reads from the host HERE, where a host environment exists. Passing it inward keeps the
+  // mesh module isomorphic — it can hold no opinion about which platform it woke on.
+  const radius = Number(process.env["LAR_RADIUS"] ?? 1);
+  const meshSelf = deriveMeshSelf(publicUrl, peers, { radius, ...(seedLabel ? { label: seedLabel } : {}) });
 
   // The reach-faces this vessel answers on. The listen below binds 0.0.0.0, so the vessel answers on
   // every interface the host holds; the banner names them all. A phone on the house network reads a

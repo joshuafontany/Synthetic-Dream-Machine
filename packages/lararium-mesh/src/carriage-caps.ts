@@ -176,7 +176,7 @@ export function hashUnit(s: string): number {
 /**
  * deriveMeshSelf — the ONE mesh self-dial derivation (was duplicated across main.ts's two branches).
  * Every vessel is a NODE on the chart: θ = a content-blind FNV hash of the address, r = carriage standing
- * (`LAR_RADIUS`, default 1), bearing = `…/@oracle/node/<label>` (`LAR_SEED` label, else hash-derived).
+ * (radius, default 1 — the node entry supplies `LAR_RADIUS`), bearing = `…/@oracle/node/<label>` (`LAR_SEED` label, else hash-derived).
  */
 export function deriveMeshSelf(
   publicUrl: string, peers: readonly string[], opts: { label?: string; radius?: number } = {},
@@ -186,7 +186,11 @@ export function deriveMeshSelf(
   return {
     endpoint: publicUrl,
     bearing:  `lar:///ha.ka.ba/bags/@oracle/node/${label}`,
-    coord:    { theta: u * 2 * Math.PI, r: opts.radius ?? Number(process.env["LAR_RADIUS"] ?? 1) },
+    // The radius arrives as a PARAMETER, never read from a host environment here. This module rides the
+    // isomorphic barrel, so a global read would resolve on one platform and throw on the other — and it
+    // would stay latent for exactly as long as no browser caller reached this function. The node entry
+    // reads `LAR_RADIUS` and passes it; a browser passes its own, or takes the default the leaf takes.
+    coord:    { theta: u * 2 * Math.PI, r: opts.radius ?? 1 },
     peers,
   };
 }
