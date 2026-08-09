@@ -51,21 +51,35 @@ function usage(): void {
 /** The CURRENT passphrase — env first, else a no-echo prompt. Non-interactive without the env → usage error. */
 async function currentPass(args: ParsedArgs, label: string): Promise<string> {
   const env = process.env[ARCHIVE_PASSPHRASE_ENV];
-  if (env) return env;
+  if (env) {
+    if (canPromptSecret()) console.error(`  using ${ARCHIVE_PASSPHRASE_ENV} from the environment — no prompt opened.`);
+    return env;
+  }
   if (args.flags["yes"] || !canPromptSecret()) {
     throw new UsageError(`set ${ARCHIVE_PASSPHRASE_ENV} for non-interactive use`);
   }
   return promptSecret(`${label}: `);
 }
 
-/** A NEW passphrase — env first (non-interactive), else a double-entry no-echo prompt (anti-lockout). */
+/**
+ * A NEW passphrase — env first (non-interactive), else a double-entry no-echo prompt (anti-lockout).
+ *
+ * A TTY caller carrying the env var keeps the env: setting it deliberately means it. But the bypass
+ * SAYS SO, because an operator who expected a prompt and met silence learns nothing from the silence —
+ * they conclude the prompt is broken, or worse, that they typed something they never typed. A shell
+ * carrying a passphrase from an earlier command reads exactly like a shell that does not.
+ */
 async function newPass(args: ParsedArgs, label: string): Promise<string> {
   const env = process.env[NEW_PASS_ENV];
   if (args.flags["yes"] || !canPromptSecret()) {
     if (!env) throw new UsageError(`set ${NEW_PASS_ENV} for non-interactive use`);
     return env;
   }
-  if (env) return env;   // an operator who set the env even at a TTY means it
+  if (env) {
+    console.error(`  using ${NEW_PASS_ENV} from the environment — no prompt opened.`);
+    console.error(`  to type it instead:  env -u ${NEW_PASS_ENV} lares vault <verb>`);
+    return env;
+  }
   return promptSecretConfirmed(label);
 }
 

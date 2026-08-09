@@ -274,6 +274,13 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     "lares persona new 1 --name '<private label>' --handle '<Handle>' --seat   # …one command per kahu",
     `Then seat the 2-of-3 quorum from the named personas: lares nexus seal seat`,
     `(These three name the founding KAHU QUORUM, never a limit on faces — this vessel's own slot ceiling rides LAR_PERSONA_SLOTS.)`,
+    // WHAT THE VAULT WILL DO NEXT, said HERE rather than discovered at the sealing movement. The archive
+    // takes the passphrase path whenever LARES_ARCHIVE_PASSPHRASE rides the environment, so a founding run
+    // in a shell that carries one seals AT FOUNDING — and `vault seal` then finds nothing to do and never
+    // opens its prompt. Both outcomes stand; meeting the second unannounced reads as a broken prompt.
+    process.env["LARES_ARCHIVE_PASSPHRASE"]
+      ? `NOTE: LARES_ARCHIVE_PASSPHRASE rode this founding, so the archive sealed HERE — \`lares vault seal\` will find nothing to do and open no prompt. To type it instead, found in a shell without that var.`
+      : `The archive stands UNSEALED — seal it when the kahu stand: \`lares vault seal\` (no-echo, double-entry).`,
   ];
 
   // 3. Emit the live-delta frame (dual output). Graceful: never hard-fail the wake.

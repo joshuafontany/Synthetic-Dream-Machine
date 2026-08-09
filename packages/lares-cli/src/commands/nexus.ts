@@ -506,7 +506,12 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
       kahu: kahu.map((k) => ({ displayName: k.displayName, seated: Boolean(k.verifyingKey), verifyingKey: k.verifyingKey })),
     },
     human: () => {
-      console.log(`nexus seal seated (genesis epoch) → ${path}`);
+      // The headline names what STOOD. It once read "(genesis epoch)" unconditionally, three lines
+      // above `epoch0: (unestablished)` — a confident claim over an honest correction, which is the
+      // order an operator skims in reverse.
+      console.log(sealLineage
+        ? `nexus seal seated — GENESIS EPOCH established → ${path}`
+        : `nexus seal seated — roster written, NO epoch (quorum short) → ${path}`);
       for (const k of kahu) {
         console.log(`  ${k.verifyingKey ? "seated  " : "UNSEATED"} ${k.displayName}${k.verifyingKey ? `  ${k.verifyingKey.slice(0, 16)}…` : ""}`);
       }
