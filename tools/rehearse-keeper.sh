@@ -109,6 +109,17 @@ cleanup() {
   # the operator's REAL daemon — precisely the reach this harness exists to refuse.
   HOLDER=$(lsof -ti ":${LAR_PORT:-8099}" 2>/dev/null | head -1)
   if [ -n "$HOLDER" ]; then kill "$HOLDER" 2>/dev/null || true; sleep 1; fi
+  # SALVAGE BEFORE THE BURN, and only when something failed. A rehearsal exists to be diagnosed, and the
+  # burn destroyed the one artifact that carries a diagnosis — so a red run measured twice as little as it
+  # appeared to. The logs leave the tree; the identity, the seal and the keys burn with it.
+  if [ "$FAILED" -gt 0 ]; then
+    SALVAGE="${TMPDIR:-/tmp}/lares-keeper-salvage-$$"
+    if find "$ROOT" -name '*.log' -type f 2>/dev/null | head -1 | grep -q .; then
+      mkdir -p "$SALVAGE"
+      find "$ROOT" -name '*.log' -type f -exec cp {} "$SALVAGE/" \; 2>/dev/null
+      say "SALVAGED the boot logs to $SALVAGE — secrets stay in the tree and burn with it."
+    fi
+  fi
   if [ "$KEEP" -eq 0 ]; then rm -rf "$ROOT"; say "BURNED $ROOT — the clear IS the burn.";
   else say "KEPT $ROOT (--keep) — burn it yourself when done."; fi
 }
@@ -161,8 +172,9 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
 
   # ── ③ RESERVE + SEAT ───────────────────────────────────────────────────────────────────────────
   say "③ reserve — forge the pre-rotation, then seat the genesis epoch"
+  # The guardian labels ride the rehearsal too, so the printed cards read as the keeper's will (#reserve-custody).
   step "nexus seal reserve"
-  if RESERVE=$(lares nexus seal reserve 2>&1); then
+  if RESERVE=$(lares nexus seal reserve --guardian-a 'OLIVIA' --guardian-b 'FREYJA' 2>&1); then
     ok
     COMMIT=$(printf '%s' "$RESERVE" | grep -oE '"nextKeyCommit":"[0-9a-f]+"' | head -1 | cut -d'"' -f4)
     [ -n "$COMMIT" ] || COMMIT=$(printf '%s' "$RESERVE" | grep -oE '[0-9a-f]{64}' | head -1)
@@ -181,11 +193,30 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   say "④–⑥ — these need the node breathing (throwaway socket at \$LAR_ROOT/data/vessel)"
   # POLL TO A DEADLINE, never a fixed sleep. A cold first cycle boots empty caches and a fresh genesis; the
   # second rides what the first warmed, so a constant tuned on the warm case fails the cold one.
+  # THE DEADLINE COMES FROM THE CLI'S OWN CONTRACT, never from a number this harness picked. `wake`
+  # budgets 120s for the socket and says why in its source: the UDS binds LATER than `vessel-ready` and
+  # later than the WS port — "on a cold boot (post-regenesis), tens of seconds later". An earlier 60s here
+  # sat at HALF that budget, so two cycles reported a dead node while the node was alive and still booting;
+  # the TCP port answered the whole time, which is why every movement after it passed. A harness that
+  # out-waits the thing it measures reports on its own patience.
   step "the node from ② answers"
   SOCK="$ROOT/data/vessel/lares.sock"
+  WAKE_LOG="$ROOT/data/vessel/wake-serve.log"
   WAITED=0
-  while [ ! -S "$SOCK" ] && [ "$WAITED" -lt 60 ]; do sleep 1; WAITED=$((WAITED + 1)); done
-  if [ -S "$SOCK" ]; then printf '\033[32mok\033[0m (%ss)\n' "$WAITED"; else bad "no socket after ${WAITED}s"; fi
+  while [ ! -S "$SOCK" ] && [ "$WAITED" -lt 120 ]; do sleep 1; WAITED=$((WAITED + 1)); done
+  if [ -S "$SOCK" ]; then
+    printf '\033[32mok\033[0m (%ss)\n' "$WAITED"
+  else
+    bad "no socket after ${WAITED}s"
+    # SAY WHAT THE NODE SAID. The boot log is the one artifact that answers "stalled, faulted, or slow",
+    # and the burn destroys it — so it speaks HERE, while it still stands.
+    if [ -f "$WAKE_LOG" ]; then
+      printf '      ── wake-serve.log (tail) ──\n'
+      tail -12 "$WAKE_LOG" | sed 's/^/      /'
+    else
+      printf '      (no wake-serve.log at %s — the node never wrote one)\n' "$WAKE_LOG"
+    fi
+  fi
 
   run "④ vault seal (NEW passphrase)"       sh -c "node '$LARES' vault seal --yes"
   run "④ vault status"                      lares vault status
