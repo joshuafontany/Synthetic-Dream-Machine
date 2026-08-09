@@ -19,7 +19,7 @@ import { join } from "path";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, personaBagIdFor,
+  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, personaMembershipEntries,
   PERSONA_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { daemonGenesisDir } from "../lares-config.js";
@@ -67,16 +67,18 @@ function makeBootstrapPlugin(
   identitiesUrl: string, circlesUrl: string, sessionsUrl: string, daemonUrl: string, personaUrl: string,
   personaGroupDocIdHex: string, meshCabalDocIdHex: string,
 ): object {
-  const personaBagId = personaBagIdFor(personaGroupDocIdHex);
   const packedTiddlers = {
     [IDENTITIES_DOC_URI]:        { title: IDENTITIES_DOC_URI,        text: identitiesUrl,         kind: "oracle" },
     [CIRCLES_DOC_URI]:           { title: CIRCLES_DOC_URI,           text: circlesUrl,             kind: "oracle" },
     [SESSIONS_DOC_URI]:          { title: SESSIONS_DOC_URI,          text: sessionsUrl,             kind: "oracle" },
     [DAEMON_BAG_ID]:              { title: DAEMON_BAG_ID,              text: daemonUrl,                kind: "oracle" },
-    // The PersonaGroup plane, keyed by the name its own group derives — the string the boot path mounts
-    // it under and the capability ring registers. A joining device recomputes the same key from the same
-    // group doc id, so both name one plane identically or they sync nothing.
-    [personaBagId]:               { title: personaBagId,               text: personaUrl,               kind: "oracle" },
+    // The PersonaGroup plane and the membership that names it — written through the same pair a vessel
+    // standing in a SECOND compartment would add, so founding and admission lay down one shape. The boot
+    // path reads the family back by derivation; nothing here holds an order or an index.
+    ...Object.fromEntries(
+      personaMembershipEntries({ personaGroupId: personaGroupDocIdHex, url: personaUrl })
+        .map((e) => [e.title, { title: e.title, text: e.text, kind: "oracle" }]),
+    ),
     [MESH_CABAL_DOC_ID_TIDDLER]: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabalDocIdHex,     kind: "sentinel-id" },
     [PERSONA_GROUP_DOC_ID_TIDDLER]:{ title: PERSONA_GROUP_DOC_ID_TIDDLER, text: personaGroupDocIdHex, kind: "sentinel-id" },
   };

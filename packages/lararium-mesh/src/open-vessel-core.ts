@@ -24,6 +24,7 @@ import type { LarTiddlerStore } from "./tiddler-store.js";
 import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarDoc } from "./base-doc.js";
 import { BAG_IDS, DAEMON_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
+import type { PersonaPlaneRef } from "./persona-planes.js";
 import { wikiSlotUri } from "./wiki-recipe.js";
 import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
 import { isCondemned, type DocLoadProbe, type ProbeResult } from "./doc-load-probe-contract.js";
@@ -44,6 +45,11 @@ export interface VesselBootstrap {
    * absolute name (persona-planes, and canon at persona-circle#the-plane-name).
    */
   personaBagId:   string;
+  /**
+   * EVERY PersonaGroup plane this vessel carries — the one it mounts among them, and the rest it merely
+   * holds. Registration walks all of them; the mount takes exactly one (`persona-planes`).
+   */
+  personaPlanes:  readonly PersonaPlaneRef[];
 }
 
 /**

@@ -432,6 +432,23 @@ export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/admin-cabal");
 // PersonaGroup-identity sentinel tiddlers re-home to the @persona namespace — they name
 // the operator's veiled identity (the PersonaGroup), the membership-sync surface. MeshCabal
 // (nexus-affiliation, NOT personGroup-identity) stays under @daemon.
+/**
+ * One membership entry — this vessel stands in that PersonaGroup. Keyed by the plane's derived tag, text
+ * carrying the group's own doc id, so the family reads back without an order or an index to maintain.
+ *
+ * A LIST OF A PERSON'S GROUPS IS PERMITTED HERE, AND ONLY HERE. Canon's single-bit test: local-only reads
+ * as COLLECT (unlinkable); published reads as MERGE (links every self). This list lives on the vessel's own
+ * disk and crosses no wire — a vessel plainly must know which compartments it carries in order to carry
+ * them. What stays forbidden is presenting it: the moment such an index reaches a board, a payload or a
+ * probe answer, it becomes the correlation key the vault exists to withhold.
+ */
+export const PERSONA_MEMBERSHIP_PREFIX = `${PERSONA_NAMESPACE}/membership`;
+
+/** The membership entry naming one PersonaGroup this vessel stands in. */
+export function personaMembershipUri(planeTag: string): string {
+  return `${PERSONA_MEMBERSHIP_PREFIX}/${planeTag}`;
+}
+
 /** Persona oracle tiddler: PersonaGroup Document ID (hex). Legacy sentinel target (the Binding Gate superseded it). */
 export const PERSONA_GROUP_DOC_ID_TIDDLER   = `${PERSONA_NAMESPACE}/sentinel/persona-group/doc-id`;
 /** Persona oracle tiddler: PersonaGroup agent Identifier (hex). Used by boot Gate C. */

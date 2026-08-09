@@ -36,7 +36,8 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle
  */
 
-import { personaBagIdFor } from "./persona-scope.js";
+import { PERSONA_MEMBERSHIP_PREFIX } from "./lar-uris.js";
+import { personaBagIdFor, personaScopeTag } from "./persona-scope.js";
 
 /** One PersonaGroup's private plane: the group it belongs to, and the doc that carries it. */
 export interface PersonaPlaneRef {
@@ -135,4 +136,46 @@ export function personaPlanesFault(planes: readonly PersonaPlaneRef[]): string |
     seen.add(p.personaGroupId);
   }
   return null;
+}
+
+/** One entry as a reader hands it over — shape-agnostic, so a bootstrap plugin and a LarDoc both fit. */
+export interface PlaneEntry {
+  readonly title: string;
+  readonly text: string | null;
+}
+
+/**
+ * The family of planes this vessel carries, read from its own local entries.
+ *
+ * A membership entry names a PersonaGroup; that group's plane answers to a derived bag id, and the entry
+ * under THAT id carries the doc url. So the two halves join by derivation rather than by an index someone
+ * must keep in step — add a membership and its plane resolves, drop one and it stops resolving, with no
+ * third place to update.
+ *
+ * A membership whose plane entry is missing is SKIPPED rather than returned half-formed: a plane with no
+ * document cannot mount, cannot register, and cannot sync, so returning it would hand every caller a
+ * reference that fails later and further away.
+ */
+export function readPersonaPlanes(entries: readonly PlaneEntry[]): PersonaPlaneRef[] {
+  const urlOf = new Map(entries.map((e) => [e.title, e.text]));
+  const out: PersonaPlaneRef[] = [];
+  const seen = new Set<string>();
+  for (const e of entries) {
+    if (!e.title.startsWith(`${PERSONA_MEMBERSHIP_PREFIX}/`)) continue;
+    const groupId = e.text;
+    if (!groupId || seen.has(groupId)) continue;
+    const url = urlOf.get(personaBagIdFor(groupId));
+    if (!url) continue;
+    seen.add(groupId);
+    out.push({ personaGroupId: groupId, url });
+  }
+  return out;
+}
+
+/** The membership entries a vessel writes when it comes to stand in one more PersonaGroup. */
+export function personaMembershipEntries(plane: PersonaPlaneRef): PlaneEntry[] {
+  return [
+    { title: `${PERSONA_MEMBERSHIP_PREFIX}/${personaScopeTag(plane.personaGroupId)}`, text: plane.personaGroupId },
+    { title: personaBagIdFor(plane.personaGroupId),                                    text: plane.url },
+  ];
 }

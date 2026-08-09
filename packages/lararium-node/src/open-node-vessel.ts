@@ -41,7 +41,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagStowage, pluginCidsFromIslandBlobs,
-  deriveRegisterBags, catalogNamedBags, personaBagIdFor,
+  deriveRegisterBags, catalogNamedBags, readPersonaPlanes, mountedPlaneBagId, type PlaneEntry,
   coupleMesh, crystallize, guardHitl,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
@@ -777,21 +777,29 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const circlesUrl    = bootstrapTiddlers[CIRCLES_DOC_URI]?.text    ?? tiddlerText(id?.[CIRCLES_DOC_URI])    ?? null;
       const sessionsUrl   = bootstrapTiddlers[SESSIONS_DOC_URI]?.text   ?? tiddlerText(id?.[SESSIONS_DOC_URI])   ?? null;
       const daemonUrl      = bootstrapTiddlers[DAEMON_BAG_ID]?.text       ?? tiddlerText(id?.[DAEMON_BAG_ID])       ?? null;
-      // THE ONE RESOLUTION POINT on this platform: the vessel reads its own sentinel, derives the plane's
-      // absolute name, and every reader downstream carries that name rather than a gesture.
+      // THE ONE RESOLUTION POINT on this platform. The vessel reads back the whole FAMILY of compartments
+      // it carries, then resolves the gesture — "the one I stand in" — to that plane's absolute name.
+      // Every reader downstream carries the name; none receives the gesture.
+      const planeEntries: PlaneEntry[] = [
+        ...Object.entries(bootstrapTiddlers).map(([title, t]) => ({ title, text: t?.text ?? null })),
+        ...Object.entries(id ?? {}).map(([title, rec]) => ({ title, text: tiddlerText(rec) })),
+      ];
+      const personaPlanes  = readPersonaPlanes(planeEntries);
       const personaGroupId = bootstrapTiddlers[PERSONA_GROUP_DOC_ID_TIDDLER]?.text
         ?? tiddlerText(id?.[PERSONA_GROUP_DOC_ID_TIDDLER]) ?? null;
-      const personaBagId   = personaGroupId ? personaBagIdFor(personaGroupId) : null;
-      const personaUrl     = personaBagId
-        ? bootstrapTiddlers[personaBagId]?.text ?? tiddlerText(id?.[personaBagId]) ?? null
+      // A vessel standing in compartments but told to wear none it carries halts here rather than
+      // wearing whichever happened to load first.
+      const personaBagId   = personaGroupId && personaPlanes.length
+        ? mountedPlaneBagId(personaPlanes, personaGroupId)
         : null;
+      const personaUrl     = personaPlanes.find((p) => p.personaGroupId === personaGroupId)?.url ?? null;
       if (!identitiesUrl || !circlesUrl || !sessionsUrl || !daemonUrl || !personaUrl || !personaBagId) {
         throw new Error(
           `[lararium] social plane not initialised — run: pnpm --filter @lararium/node lararium:init\n` +
           `  missing: ${[!identitiesUrl && "@identities", !circlesUrl && "@circles", !sessionsUrl && "@sessions", !daemonUrl && "@daemon", !personaUrl && "the PersonaGroup plane", !personaBagId && "the PersonaGroup sentinel"].filter(Boolean).join(", ")}`,
         );
       }
-      bootstrap = { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl, personaBagId };
+      bootstrap = { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl, personaBagId, personaPlanes };
       return { islandHandle, coreHash, bootstrap };
     },
 
@@ -905,7 +913,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       // cannot drift apart on which bags a cap check can resolve. A wiki slot's bags ride only when a
       // wiki stands in the stack; a Herm carries none, blind by structure rather than by a flag.
       registerBags: deriveRegisterBags({
-        fleets: [{ personaGroupId: personaGroupDocIdHex, catalogNamed: catalogNamedBags(assembly.catalogHandle.doc()) }],
+        // EVERY compartment registers — a plane absent from the ring stops that compartment's own
+        // devices reconciling. Only ONE mounts; the two verbs part company here.
+        fleets: bootstrap.personaPlanes.map((p) => ({
+          personaGroupId: p.personaGroupId,
+          catalogNamed: p.personaGroupId === personaGroupDocIdHex ? catalogNamedBags(assembly.catalogHandle.doc()) : [],
+        })),
         ...(slot ? { wikiBags: [slot.wikiBagId, slot.draftBagId] } : {}),
       }),
       signerDid,

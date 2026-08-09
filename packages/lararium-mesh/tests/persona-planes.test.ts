@@ -11,7 +11,9 @@ import { describe, expect, test } from "vitest";
 import {
   activePersonaPlane,
   mountedPlaneBagId,
+  personaMembershipEntries,
   personaPlanesFault,
+  readPersonaPlanes,
   resolvePersonaPlanes,
   type PersonaPlaneRef,
 } from "../src/persona-planes.js";
@@ -98,5 +100,40 @@ describe("★ deixis resolves HERE, and only the absolute name leaves ★", () =
     // DNS makes an unresolvable relative name an error rather than a fallback; every silent-default
     // case in the surveyed art produced documented harm.
     expect(() => mountedPlaneBagId([work, play], "absent-group")).toThrow();
+  });
+});
+
+describe("★ a vessel reads back the FAMILY it carries ★", () => {
+  const entriesFor = (...planes: PersonaPlaneRef[]) => planes.flatMap(personaMembershipEntries);
+
+  test("★ two compartments on one vessel both read back ★", () => {
+    // The capability the whole naming arc served: a work compartment and a play compartment on one
+    // laptop. Anything that returns only the first freezes today's single-plane boot into the model.
+    const planes = readPersonaPlanes(entriesFor(work, play));
+    expect(planes.map((p) => p.personaGroupId).sort()).toEqual(["play-group", "work-group"]);
+    expect(planes.find((p) => p.personaGroupId === "play-group")?.url).toBe("automerge:play");
+  });
+
+  test("a vessel carrying none reads none — the anon dyad, not a gap", () => {
+    expect(readPersonaPlanes([])).toEqual([]);
+  });
+
+  test("★ a membership whose plane never minted is SKIPPED, never returned half-formed ★", () => {
+    // A plane with no document cannot mount, register or sync. Returning it hands every caller a
+    // reference that fails later and further away than here.
+    const orphan = entriesFor(work).filter((e) => e.title.includes("/membership/"));
+    expect(readPersonaPlanes(orphan)).toEqual([]);
+  });
+
+  test("the two halves join by DERIVATION — no index to keep in step", () => {
+    // The membership names the group; the plane's url sits under the id that group derives. Nothing
+    // holds an ordering or a third mapping that could fall out of agreement.
+    const entries = entriesFor(work);
+    expect(entries.some((e) => e.title === personaBagIdFor("work-group"))).toBe(true);
+    expect(readPersonaPlanes(entries)).toEqual([work]);
+  });
+
+  test("one group entered twice reads once — a repeat cannot shadow itself", () => {
+    expect(readPersonaPlanes(entriesFor(work, work))).toHaveLength(1);
   });
 });

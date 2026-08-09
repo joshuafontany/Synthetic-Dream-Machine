@@ -384,6 +384,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     bootstrap = {
       identitiesUrl: a.identitiesUrl, circlesUrl: a.circlesUrl, sessionsUrl: a.sessionsUrl,
       daemonUrl: a.daemonUrl, personaUrl: a.personaUrl, personaBagId: a.personaBagId,
+      // The compartments this vessel carries. An admitted browser joins one today; the shape takes the
+      // family so a second admission adds an entry rather than re-typing the boot path.
+      personaPlanes: [{ personaGroupId: admit.personaGroupDocIdHex, url: a.personaUrl }],
       personaGroupDocIdHex: admit.personaGroupDocIdHex,
       personaGroupAgentIdHex: admit.personaGroupAgentIdHex,
       meshCabalDocIdHex: admit.meshCabalDocIdHex,
@@ -416,6 +419,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     });
     bootstrap = {
       identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, daemonUrl: f.daemonUrl, personaUrl: f.personaUrl, personaBagId: f.personaBagId,
+      personaPlanes: [{ personaGroupId: f.personaGroupDocIdHex, url: f.personaUrl }],
       personaGroupDocIdHex: f.personaGroupDocIdHex, personaGroupAgentIdHex: f.personaGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
       signerDid: f.signerDid, personaKelPrefix: f.personaKelPrefix, deviceEdge: f.founderEdge,
       contactCard: f.contactCardJson,
@@ -744,7 +748,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         // which bags a cap check can resolve. This vessel had been carrying neither the shared substrate
         // bag nor any bag its own catalog named, which no test could see and no throw announced.
         registerBags: deriveRegisterBags({
-          fleets: [{ personaGroupId: social.personaGroupDocIdHex, catalogNamed: catalogNamedBags(catalogHandle.doc()) }],
+          // EVERY compartment registers; exactly one mounts. The two verbs part company here.
+          fleets: social.personaPlanes.map((pl) => ({
+            personaGroupId: pl.personaGroupId,
+            catalogNamed: pl.personaGroupId === social.personaGroupDocIdHex ? catalogNamedBags(catalogHandle.doc()) : [],
+          })),
           wikiBags: [slot.wikiBagId, slot.draftBagId],
         }),
         // The WORN persona-root's binding (founder-signed): the gate pins personaKel.prefix and walks the KEL
