@@ -99,7 +99,7 @@ export type { CapTier, TierFloorOracle, DeclaredTierSource, CapTierRing } from "
 export {
   CAP_TIER_ORDER, DEFAULT_CAP_TIER, capTierRank, parseCapTier, meetCapTier, resolveTier,
   refineBagTierWithTiddlers, mayDeclareTier, mayDeclassify, structuralFloorFor, resolveTierForDoc,
-  tierPermitsRelayPeer,
+  tierPermitsRelayPeer, makeTierFloorOracle,
 } from "./cap-tier.js";
 // The @cad ENCRYPT-ON-CAS primitive — cid = BLAKE3(ciphertext), verify-cap ⊥ read-cap, per-Nexus message-lock.
 export {

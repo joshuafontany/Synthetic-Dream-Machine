@@ -191,6 +191,34 @@ export function structuralFloorFor(oracle: TierFloorOracle | null, documentId: s
 }
 
 /**
+ * makeTierFloorOracle — the ONE door that assembles a floor oracle, so no site hand-rolls one.
+ *
+ * WHY A CONSTRUCTOR RATHER THAN AN OBJECT LITERAL. `isContractSecretsPlane` rides OPTIONAL so every oracle
+ * written before it keeps working unchanged — which is right for compatibility and wrong for authorship: a
+ * new site writing its own literal omits the secrets reading silently, and the omission reads exactly like
+ * a site that had no secrets plane to declare. A hand-written enumeration cannot notice what it missed.
+ * Assembling through here makes each reading a NAMED argument, so leaving one out becomes a visible act.
+ *
+ * FAIL-CLOSED per reading: an absent predicate answers false for every doc, which floors toward VEIL rather
+ * than away from it. Passing nothing at all yields an oracle that reads VEIL for everything.
+ */
+export function makeTierFloorOracle(readings: {
+  /** The doc rides the deterministically-federatable PUBLIC shelf. */
+  readonly federatable?: (documentId: string) => boolean;
+  /** The doc's bytes are provably ciphertext a carrier cannot read. */
+  readonly sealed?: (documentId: string) => boolean;
+  /** The doc holds secrets whose value rests on staying unpublished — floors at CONTRACT, read FIRST. */
+  readonly secrets?: (documentId: string) => boolean;
+}): TierFloorOracle {
+  const { federatable, sealed, secrets } = readings;
+  return {
+    isPublicPlane:          (d) => federatable?.(d) ?? false,
+    isSealedPlane:          (d) => sealed?.(d) ?? false,
+    isContractSecretsPlane: (d) => secrets?.(d) ?? false,
+  };
+}
+
+/**
  * DeclaredTierSource — the self-describing datum READER: resolve a doc → its DECLARED cap-tier (the bag
  * default already refined by its per-tiddler cascade), or null when the bag carries NO tier datum at all
  * (opts out of refinement → the floor governs, no tightening). A doc whose datum is PRESENT but torn reads
