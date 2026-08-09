@@ -26,6 +26,7 @@ import {
   encodeEnvelope, decodeEnvelope, isSealedEnvelope,
   type ArchiveSealMode, type SealedEnvelope,
 } from "@lararium/mesh";
+import { probeSecretService, keychainKekAvailable } from "./secret-service-probe.js";
 
 /** The env var carrying the operator passphrase for the scrypt KEK (WSL2-safe default path). */
 export const ARCHIVE_PASSPHRASE_ENV = "LARES_ARCHIVE_PASSPHRASE";
@@ -71,25 +72,28 @@ export interface SealPolicy {
 }
 
 /**
- * Detect a persistent OS Secret Service (the keychain leg's gate). Returns false until the
- * `@napi-rs/keyring` binding + a live sentinel round-trip land — fail-safe: unknown ⇒ absent,
- * so the resolver never trusts a keychain that might be the non-persistent keyutils cache.
+ * Does this machine hold a secret store that survives a reboot? `secret-service-probe` carries the
+ * answer and the reasoning; the probe asks the session bus WHO OWNS `org.freedesktop.secrets`, because
+ * the bus address alone reads set on machines where nothing answers. Every unknown resolves absent.
  */
-export function detectSecretService(): boolean {
-  // Shore: a real probe checks `DBUS_SESSION_BUS_ADDRESS` owns `org.freedesktop.secrets` AND a
-  // write→read→delete keychain sentinel returns. Inert until the binding is a dependency.
-  return false;
+export function detectSecretService(env: NodeJS.ProcessEnv = process.env): boolean {
+  return probeSecretService(env).persistent;
 }
 
 /**
- * Resolve the seal policy. Keychain first WHEN a persistent Secret Service is detected (the
- * shore — inert today); else the passphrase path when `LARES_ARCHIVE_PASSPHRASE` is set; else
- * cleartext (honest, unchanged). A fresh scrypt salt rides every seal (stored in the envelope),
- * so re-derivation stays self-contained and no IV/salt ever repeats.
+ * Resolve the seal policy. The keychain KEK rides only when the machine holds a persistent store AND
+ * this build can reach one (`keychainKekAvailable` — dark until a keyring binding lands); else the
+ * passphrase path when `LARES_ARCHIVE_PASSPHRASE` is set; else cleartext (honest, unchanged). A fresh
+ * scrypt salt rides every seal (stored in the envelope), so re-derivation stays self-contained and no
+ * IV/salt ever repeats.
+ *
+ * THE CARRIER DECIDES HOW MUCH A KEYCHAIN IS WORTH. Losing this KEK loses the sovereign identity floor,
+ * which nothing re-mints — so the archive earns the most conservative gate the stack has. A carrier
+ * whose loss costs only a re-authorization (a foreign credential the vessel holds for reach) sits at a
+ * different risk entirely and may light a keychain leg long before this one should.
  */
 export function resolveSealPolicy(env: NodeJS.ProcessEnv = process.env): SealPolicy {
-  // Keychain leg (detection-gated, inert until @napi-rs/keyring lands) would slot here.
-  if (detectSecretService()) { /* keychain KEK path — pending the binding */ }
+  if (keychainKekAvailable(env)) { /* keychain KEK path — reached once a binding stands */ }
 
   const passphrase = env[ARCHIVE_PASSPHRASE_ENV];
   if (passphrase && passphrase.length > 0) {

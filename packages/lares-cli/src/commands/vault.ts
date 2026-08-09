@@ -134,6 +134,11 @@ async function vaultStatus(args: ParsedArgs, daemonUp: boolean): Promise<number>
       if (output["split"]) console.error("  ⚠ SPLIT-KEK: the carriers ride different passphrases — run `lares vault repair`");
       console.log(`  sealExpected   ${output["sealExpected"]}`);
       console.log(`  passphraseEnv  ${output["passphraseEnvSet"] ? "set" : "unset"}`);
+      // The keychain leg says WHY it reads dark. A silent leg gets mistaken for a leg that never ran.
+      const kc = output["keychain"] as { persistentStore?: boolean; reason?: string; kekAvailable?: boolean } | undefined;
+      if (kc) {
+        console.log(`  keychainKek    ${kc.kekAvailable ? "available" : "dark"} — ${kc.reason ?? "no reason reported"}`);
+      }
     },
   });
   return 0;

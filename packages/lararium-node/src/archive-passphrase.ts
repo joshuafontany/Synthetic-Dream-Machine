@@ -33,6 +33,7 @@ import { scryptKek, sealBytes, unsealBytes, openArchiveBytes, ARCHIVE_PASSPHRASE
 import { archivePath } from "./identity-anchors.js";
 import { deviceSharePath } from "./recovery-share-store.js";
 import { setSealExpected, sealExpected as readSealExpected, type LaresConfig } from "./lares-config.js";
+import { probeSecretService, keychainKekAvailable } from "./secret-service-probe.js";
 
 const SALT_LEN = 16;
 
@@ -83,6 +84,12 @@ export interface ArchiveSealStatus {
   readonly sealExpected: boolean;
   /** Is `LARES_ARCHIVE_PASSPHRASE` present in the environment? (presence only — never the value). */
   readonly passphraseEnvSet: boolean;
+  /**
+   * Why the keychain KEK leg reads dark or lit on THIS machine. Carried so an operator reads the reason
+   * rather than guessing at a silence — a leg that never explains itself gets mistaken for a leg that
+   * never ran.
+   */
+  readonly keychain: { readonly persistentStore: boolean; readonly reason: string; readonly kekAvailable: boolean };
 }
 
 /** Try unsealing raw carrier bytes under a passphrase; true on a clean GCM open, false on any failure. */
@@ -159,11 +166,13 @@ export function archiveSealStatus(opts: { probe?: string; cfg?: LaresConfig } = 
   }
   // Split-KEK: a probe opened SOME sealed carriers but not all — the carriers rode different KEKs.
   const split = probeResults.length > 1 && probeResults.some((v) => v) && probeResults.some((v) => !v);
+  const probe = probeSecretService();
   return {
     carriers: out,
     split,
     sealExpected: readSealExpected(opts.cfg),
     passphraseEnvSet: Boolean(process.env[ARCHIVE_PASSPHRASE_ENV]),
+    keychain: { persistentStore: probe.persistent, reason: probe.reason, kekAvailable: keychainKekAvailable() },
   };
 }
 
