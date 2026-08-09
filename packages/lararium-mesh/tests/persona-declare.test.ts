@@ -28,30 +28,30 @@ describe("a declaration says what a persona answers to — never what it publish
   test("declaring a Handle lands it, and leaves any seat claim untouched", async () => {
     const store = makeStore();
     await standForKahuSeat(store, 1, true);
-    await declarePersonaHandle(store, 1, "Telarus, KSC");
-    expect(await store.get(1)).toEqual({ seat: true, handle: "Telarus, KSC" });
+    await declarePersonaHandle(store, 1, "Kahu Beta");
+    expect(await store.get(1)).toEqual({ seat: true, handle: "Kahu Beta" });
   });
 
   test("standing for a seat lands it, and leaves the declared Handle untouched", async () => {
     const store = makeStore();
-    await declarePersonaHandle(store, 1, "Telarus, KSC");
+    await declarePersonaHandle(store, 1, "Kahu Beta");
     await standForKahuSeat(store, 1, true);
-    expect(await declaredHandle(store, 1)).toBe("Telarus, KSC");
+    expect(await declaredHandle(store, 1)).toBe("Kahu Beta");
     // Stepping back drops the claim and keeps the name — a persona that stops offering still answers outward.
     await standForKahuSeat(store, 1, false);
-    expect(await store.get(1)).toEqual({ handle: "Telarus, KSC", seat: false });
+    expect(await store.get(1)).toEqual({ handle: "Kahu Beta", seat: false });
   });
 
   test("a blank Handle REFUSES rather than silently un-naming a face the human means to wear", async () => {
     const store = makeStore();
-    await declarePersonaHandle(store, 0, "The Lindwyrm");
+    await declarePersonaHandle(store, 0, "Kahu Gamma");
     await expect(declarePersonaHandle(store, 0, "   ")).rejects.toThrow(/empty Handle/);
-    expect(await declaredHandle(store, 0)).toBe("The Lindwyrm");   // the held declaration survives the refusal
+    expect(await declaredHandle(store, 0)).toBe("Kahu Gamma");   // the held declaration survives the refusal
   });
 
   test("clearing drops the whole declaration — the persona survives, declaring nothing outward", async () => {
     const store = makeStore();
-    await declarePersonaHandle(store, 2, "The Lindwyrm");
+    await declarePersonaHandle(store, 2, "Kahu Gamma");
     await standForKahuSeat(store, 2, true);
     await clearPersonaDeclaration(store, 2);
     expect(await store.get(2)).toBeUndefined();
@@ -60,15 +60,15 @@ describe("a declaration says what a persona answers to — never what it publish
 
   test("a Handle trims to what the human typed, never to what a store happened to hold", async () => {
     const store = makeStore();
-    await declarePersonaHandle(store, 3, "  Guru Joshua Fontany  ");
-    expect(await declaredHandle(store, 3)).toBe("Guru Joshua Fontany");
+    await declarePersonaHandle(store, 3, "  Kahu Alpha  ");
+    expect(await declaredHandle(store, 3)).toBe("Kahu Alpha");
   });
 });
 
 describe("personasStandingForSeat — both acts, or no chair", () => {
   test("★ a declared Handle WITHOUT a seat claim never stands — declaring is not offering ★", async () => {
     const store = makeStore();
-    await declarePersonaHandle(store, 0, "Guru Joshua Fontany");
+    await declarePersonaHandle(store, 0, "Kahu Alpha");
     expect(await personasStandingForSeat(store)).toEqual([]);
   });
 
@@ -82,25 +82,25 @@ describe("personasStandingForSeat — both acts, or no chair", () => {
 
   test("both acts together stand, ascending by handle-index", async () => {
     const store = makeStore();
-    for (const [i, handle] of [[2, "The Lindwyrm"], [0, "Guru Joshua Fontany"]] as const) {
+    for (const [i, handle] of [[2, "Kahu Gamma"], [0, "Kahu Alpha"]] as const) {
       await declarePersonaHandle(store, i, handle);
       await standForKahuSeat(store, i, true);
     }
-    await declarePersonaHandle(store, 1, "Telarus, KSC");   // declares, never offers
+    await declarePersonaHandle(store, 1, "Kahu Beta");   // declares, never offers
     expect(await personasStandingForSeat(store)).toEqual([
-      [0, "Guru Joshua Fontany"],
-      [2, "The Lindwyrm"],
+      [0, "Kahu Alpha"],
+      [2, "Kahu Gamma"],
     ]);
   });
 
   test("★ the store cannot read a Handle off a private label — the two registers never touch ★", async () => {
     // Nothing here takes a pet-name store, so no code path exists that could fall back to one. A persona whose
-    // compartment reads "wyrm-burner" stands as "The Lindwyrm" purely because the human said both.
+    // compartment reads "veil-three" stands as "Kahu Gamma" purely because the human said both.
     const store = makeStore();
-    await declarePersonaHandle(store, 5, "The Lindwyrm");
+    await declarePersonaHandle(store, 5, "Kahu Gamma");
     await standForKahuSeat(store, 5, true);
     const standing = await personasStandingForSeat(store);
-    expect(standing).toEqual([[5, "The Lindwyrm"]]);
+    expect(standing).toEqual([[5, "Kahu Gamma"]]);
     expect(JSON.stringify(standing)).not.toContain("burner");
   });
 });

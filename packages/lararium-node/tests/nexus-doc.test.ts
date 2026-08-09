@@ -51,9 +51,9 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
       kind: "lar-nexus-doc/v1", threshold: 2,
       sealEpochCid: genesisSealEpochCid(keys, 2),
       kahu: [
-        { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
-        { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },
-        { displayName: "The Lindwyrm",        verifyingKey: null },
+        { displayName: "Kahu Alpha", verifyingKey: keys[0]! },
+        { displayName: "Kahu Beta",        verifyingKey: keys[1]! },
+        { displayName: "Kahu Gamma",        verifyingKey: null },
       ],
     };
     const path = writeNexusDoc(bags, doc);
@@ -104,9 +104,9 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
       sealEpochCid: genesis.epochCid,
       sealLineage: [genesis],
       kahu: [
-        { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
-        { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },
-        { displayName: "The Lindwyrm",        verifyingKey: null },
+        { displayName: "Kahu Alpha", verifyingKey: keys[0]! },
+        { displayName: "Kahu Beta",        verifyingKey: keys[1]! },
+        { displayName: "Kahu Gamma",        verifyingKey: null },
       ],
     };
     writeNexusDoc(bags, doc);
@@ -148,8 +148,8 @@ describe("persona pet-name + seat gesture (the door's core)", () => {
   test("the private pet-name set by `persona new` round-trips through the node store", async () => {
     const petnames = await makeNodePersonaPetnameStore();
     await generateOrLoadPersonaGroupRoot(root, 1);
-    await renameOwnPersona(petnames, 1, "Telarus, KSC");
-    expect(await ownPersonaPetname(petnames, 1)).toBe("Telarus, KSC");
+    await renameOwnPersona(petnames, 1, "Kahu Beta");
+    expect(await ownPersonaPetname(petnames, 1)).toBe("Kahu Beta");
   });
 
   test("seat gesture: the roster FORMS from what declared + stood → seated keys → genesis epoch → live roster", async () => {

@@ -52,9 +52,9 @@ function seatCharter(keys: string[], threshold = 2): void {
     kind: "lar-nexus-doc/v1", threshold,
     sealEpochCid: genesisSealEpochCid(keys, threshold),
     kahu: [
-      { displayName: "Guru Joshua Fontany", verifyingKey: keys[0] ?? null },
-      { displayName: "Telarus, KSC",        verifyingKey: keys[1] ?? null },
-      { displayName: "The Lindwyrm",        verifyingKey: keys[2] ?? null },
+      { displayName: "Kahu Alpha", verifyingKey: keys[0] ?? null },
+      { displayName: "Kahu Beta",        verifyingKey: keys[1] ?? null },
+      { displayName: "Kahu Gamma",        verifyingKey: keys[2] ?? null },
     ],
   };
   writeNexusDoc(sealHome(), doc);

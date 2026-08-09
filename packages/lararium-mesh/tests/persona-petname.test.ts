@@ -83,9 +83,9 @@ describe("persona-petname — the PRIVATE own-persona label (#64 stage 4)", () =
   test("rename sets a private label; clear drops it; a blank rename is refused", async () => {
     const store = makeInMemoryPetnameStore();
     await renameOwnPersona(store, 0, "work");
-    await renameOwnPersona(store, 2, "  the-guru  ");   // trimmed
+    await renameOwnPersona(store, 2, "  veil-one  ");   // trimmed
     expect(await ownPersonaPetname(store, 0)).toBe("work");
-    expect(await ownPersonaPetname(store, 2)).toBe("the-guru");
+    expect(await ownPersonaPetname(store, 2)).toBe("veil-one");
 
     await expect(renameOwnPersona(store, 0, "   ")).rejects.toThrow(/empty pet-name/);
     expect(await ownPersonaPetname(store, 0)).toBe("work");   // the refused blank never erased the label

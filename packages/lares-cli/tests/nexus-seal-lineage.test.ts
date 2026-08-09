@@ -28,7 +28,7 @@ import {
   renameOwnPersona, declarePersonaHandle, standForKahuSeat, sealKeySetHash, sealLineageHead,
 } from "@lararium/mesh";
 
-const KAHU = ["Guru Joshua Fontany", "Telarus, KSC", "The Lindwyrm"];
+const KAHU = ["Kahu Alpha", "Kahu Beta", "Kahu Gamma"];
 const saved: Record<string, string | undefined> = {};
 const setEnv = (k: string, v: string | undefined): void => {
   saved[k] = process.env[k];

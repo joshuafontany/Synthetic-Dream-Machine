@@ -38,13 +38,13 @@ describe("the browser pet-name stores over IndexedDB (#64 stage 4)", () => {
     const name = idb();
     const store = await makeBrowserPersonaPetnameStore(name);
     await renameOwnPersona(store, 0, "work");
-    await renameOwnPersona(store, 2, "the-guru");
+    await renameOwnPersona(store, 2, "veil-one");
     expect(await ownPersonaPetname(store, 0)).toBe("work");
     // Persists across store handles (a fresh handle over the same DB reads the same labels).
-    expect(await (await makeBrowserPersonaPetnameStore(name)).entries()).toEqual([[0, "work"], [2, "the-guru"]]);
+    expect(await (await makeBrowserPersonaPetnameStore(name)).entries()).toEqual([[0, "work"], [2, "veil-one"]]);
     await clearOwnPersonaPetname(store, 0);
     expect(await ownPersonaPetname(store, 0)).toBeUndefined();
-    expect(await store.entries()).toEqual([[2, "the-guru"]]);
+    expect(await store.entries()).toEqual([[2, "veil-one"]]);
   });
 
   test("the MULTITUDE-VIEW over the real IDB vault: held roots + private labels + the one federated glamour", async () => {

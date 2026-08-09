@@ -21,17 +21,17 @@ const T2 = "2026-01-03T00:00:00.000Z";
 
 describe("one self tiddler — two names, two stamps, no shared field", () => {
   test("a name writes its own value+stamp pair and titles the record", () => {
-    const f = withPersonaSelfName({}, 2, "petname", "wyrm-burner", T0);
-    expect(f["petname"]).toBe("wyrm-burner");
+    const f = withPersonaSelfName({}, 2, "petname", "veil-three", T0);
+    expect(f["petname"]).toBe("veil-three");
     expect(f["petname@"]).toBe(T0);
     expect(f["title"]).toBe(personaSelfTiddlerUri(2));
   });
 
   test("★ renaming ONE name leaves the OTHER's value and stamp untouched ★", () => {
     // The whole point: a fleet-mate renaming the Handle must not lose this device's pet-name to a merge.
-    let f: PersonaSelfFields = withPersonaSelfName({}, 0, "petname", "the-guru", T0);
-    f = withPersonaSelfName(f, 0, "handle", "Guru Joshua Fontany", T1);
-    expect(foldPersonaSelf(f)).toEqual({ petname: "the-guru", handle: "Guru Joshua Fontany" });
+    let f: PersonaSelfFields = withPersonaSelfName({}, 0, "petname", "veil-one", T0);
+    f = withPersonaSelfName(f, 0, "handle", "Kahu Alpha", T1);
+    expect(foldPersonaSelf(f)).toEqual({ petname: "veil-one", handle: "Kahu Alpha" });
     expect(f["petname@"]).toBe(T0);   // untouched by the handle write
     expect(f["handle@"]).toBe(T1);
   });
@@ -50,7 +50,7 @@ describe("one self tiddler — two names, two stamps, no shared field", () => {
   });
 
   test("clearing a name stamps the clear, so it outranks a stale rename still in flight", () => {
-    const named   = withPersonaSelfName({}, 3, "handle", "The Lindwyrm", T0);
+    const named   = withPersonaSelfName({}, 3, "handle", "Kahu Gamma", T0);
     const cleared = withoutPersonaSelfName(named, 3, "handle", T1);
     expect(foldPersonaSelf(cleared).handle).toBeUndefined();
     // A rename stamped BEFORE the clear cannot resurrect the name.
@@ -67,11 +67,11 @@ describe("the multitude fold over the @persona bag", () => {
     // @persona also carries the bindings, the sentinels and the hearth true-name. A fold that swept them in
     // would report machinery as faces.
     const rows = [
-      { title: personaSelfTiddlerUri(1), fields: { petname: "ksc-work", handle: "Telarus, KSC" } },
+      { title: personaSelfTiddlerUri(1), fields: { petname: "veil-two", handle: "Kahu Beta" } },
       { title: `${PERSONA_BAG_ID}/binding/signer-did`, fields: { text: "0xdead" } },
       { title: `${PERSONA_BAG_ID}/hearth/true-name`,   fields: { text: "engine-cid" } },
     ];
-    expect(foldPersonaSelves(rows)).toEqual([[1, { petname: "ksc-work", handle: "Telarus, KSC" }]]);
+    expect(foldPersonaSelves(rows)).toEqual([[1, { petname: "veil-two", handle: "Kahu Beta" }]]);
   });
 
   test("selves sort ascending by handle-index, so two devices converge on one ordering", () => {
@@ -101,9 +101,9 @@ describe("the concurrent-fleet case, played out", () => {
     // Vessel A renames the private label; vessel B declares a Handle. Automerge merges by FIELD, and the two
     // writes touch disjoint fields, so the merged doc carries both — no last-writer-wins over the record.
     const a = withPersonaSelfName(base, 0, "petname", "new-label", T1);
-    const b = withPersonaSelfName(base, 0, "handle", "Guru Joshua Fontany", T1);
+    const b = withPersonaSelfName(base, 0, "handle", "Kahu Alpha", T1);
     const merged: PersonaSelfFields = { ...a, ...b, petname: a["petname"], "petname@": a["petname@"] };
-    expect(foldPersonaSelf(merged)).toEqual({ petname: "new-label", handle: "Guru Joshua Fontany" });
+    expect(foldPersonaSelf(merged)).toEqual({ petname: "new-label", handle: "Kahu Alpha" });
   });
 
   test("two vessels rename the SAME name — the later stamp reads, and the human can rename again", () => {

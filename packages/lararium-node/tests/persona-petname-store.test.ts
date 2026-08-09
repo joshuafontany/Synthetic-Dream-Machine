@@ -51,16 +51,16 @@ describe("node persona pet-name stores (#64 stage 4)", () => {
   test("the PRIVATE label map round-trips: rename, entries, clear — a 0o600 file, no -h suffix needed", async () => {
     const store = await makeNodePersonaPetnameStore();
     await renameOwnPersona(store, 0, "work");
-    await renameOwnPersona(store, 2, "the-guru");
+    await renameOwnPersona(store, 2, "veil-one");
     expect(await ownPersonaPetname(store, 0)).toBe("work");
-    expect(await (await makeNodePersonaPetnameStore()).entries()).toEqual([[0, "work"], [2, "the-guru"]]);   // persists across store handles
+    expect(await (await makeNodePersonaPetnameStore()).entries()).toEqual([[0, "work"], [2, "veil-one"]]);   // persists across store handles
 
     // The label lives in a dedicated identity-home file, never a persona-root nor a board.
     expect(readdirSync(larIdentityDir()).some((f) => f.startsWith(".persona-petnames"))).toBe(true);
 
     await clearOwnPersonaPetname(store, 0);
     expect(await ownPersonaPetname(store, 0)).toBeUndefined();
-    expect(await store.entries()).toEqual([[2, "the-guru"]]);
+    expect(await store.entries()).toEqual([[2, "veil-one"]]);
   });
 
   test("the MULTITUDE-VIEW over the real fs vault: held roots + private labels + the one federated glamour", async () => {

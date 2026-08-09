@@ -35,9 +35,9 @@ import {
 import { ownPersonaPetname, declaredHandle, foundingQuorumSeated } from "@lararium/mesh";
 
 /** The three chair names the seal seeds — the PUBLIC Handles each founding persona answers to. */
-const KAHU = ["Guru Joshua Fontany", "Telarus, KSC", "The Lindwyrm"];
+const KAHU = ["Kahu Alpha", "Kahu Beta", "Kahu Gamma"];
 /** The human's PRIVATE labels for the same three compartments — deliberately unlike the Handles above. */
-const LABELS = ["the-guru", "ksc-work", "wyrm-burner"];
+const LABELS = ["veil-one", "veil-two", "veil-three"];
 const saved: Record<string, string | undefined> = {};
 const setEnv = (k: string, v: string | undefined): void => {
   saved[k] = process.env[k];
@@ -105,7 +105,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     for (const k of doc!.kahu) {
       expect(k.verifyingKey, `${k.displayName} seated by declared-Handle join`).toBeTruthy();
     }
-    // The founder (h0 / "Guru Joshua Fontany") is seated too — never a 2-of-3 that strands it unnamed.
+    // The founder (h0 / "Kahu Alpha") is seated too — never a 2-of-3 that strands it unnamed.
     const founder = doc!.kahu.find((k) => k.displayName === KAHU[0]);
     expect(founder?.verifyingKey).toBeTruthy();
     expect(foundingQuorumSeated(doc)).toBe(true);

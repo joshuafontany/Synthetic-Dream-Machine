@@ -36,9 +36,9 @@ const SEEDS = {
 async function seatedDoc(seeds: Uint8Array[]): Promise<NexusDoc> {
   const keys = await Promise.all(seeds.map(pubOf));
   const kahu = [
-    { displayName: "Guru Joshua Fontany", verifyingKey: keys[0] ?? null },
-    { displayName: "Telarus, KSC",        verifyingKey: keys[1] ?? null },
-    { displayName: "The Lindwyrm",        verifyingKey: keys[2] ?? null },
+    { displayName: "Kahu Alpha", verifyingKey: keys[0] ?? null },
+    { displayName: "Kahu Beta",        verifyingKey: keys[1] ?? null },
+    { displayName: "Kahu Gamma",        verifyingKey: keys[2] ?? null },
   ];
   const seated = keys;
   return {
@@ -120,7 +120,7 @@ describe("rosterFromNexusDoc — the PRE-ROTATED CHAIN roots the antigen on the 
       if (!r.ok) throw new Error(`rotate failed: ${r.reason}`);
       chain = [g, r.epoch];
     }
-    const kahu = keys.map((vk, i) => ({ displayName: ["Guru Joshua Fontany", "Telarus, KSC", "The Lindwyrm"][i]!, verifyingKey: vk }));
+    const kahu = keys.map((vk, i) => ({ displayName: ["Kahu Alpha", "Kahu Beta", "Kahu Gamma"][i]!, verifyingKey: vk }));
     const head = chain[chain.length - 1]!;
     return { kind: NEXUS_DOC_KIND, threshold: 2, sealEpochCid: head.epochCid, sealLineage: chain, kahu };
   }

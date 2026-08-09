@@ -29,9 +29,9 @@ async function seatedCharter(keys: string[]): Promise<NexusDoc> {
     kind: "lar-nexus-doc/v1", threshold: 2,
     sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
-      { displayName: "Guru Joshua Fontany", verifyingKey: keys[0]! },
-      { displayName: "Telarus, KSC",        verifyingKey: keys[1]! },
-      { displayName: "The Lindwyrm",        verifyingKey: keys[2]! },
+      { displayName: "Kahu Alpha", verifyingKey: keys[0]! },
+      { displayName: "Kahu Beta",        verifyingKey: keys[1]! },
+      { displayName: "Kahu Gamma",        verifyingKey: keys[2]! },
     ],
   };
 }
