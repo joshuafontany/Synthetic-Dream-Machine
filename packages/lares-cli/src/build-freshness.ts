@@ -76,6 +76,15 @@ function isWorkspaceStale(): boolean {
  */
 export function freshBuildGate(argv: readonly string[], args: ParsedArgs): number | null {
   if (args.flags["skip-build"]) return null;   // re-exec'd child — already fresh
+  // OBSERVING NEVER FOUNDS OR BOOTS, so it never earns a rebuild. The gate exists because founding or
+  // booting from stale dist runs superseded logic against real identity; a caller holding the observe cap
+  // alone mutates nothing, so the danger it guards cannot arise.
+  //
+  // And the rebuild is not free to attempt: `pnpm -r build` CLEANS dist first, so a probe that triggered
+  // one would delete the modules out from under any daemon already running — measured, when a liveness
+  // check reached for `wake` and killed the node it was measuring. A reading must not be able to disturb
+  // what it reads; the capability split says so, and this is where that promise gets kept.
+  if (args.flags["observe"]) return null;
   if (!isWorkspaceStale()) return null;        // dist clearly current — run the handler in-process
 
   console.error("[lares] fresh-build: source changed since the last build — rebuilding before the daemon-lifecycle step…");

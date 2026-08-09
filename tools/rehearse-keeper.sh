@@ -180,7 +180,17 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
 
   # ── ② FOUND ────────────────────────────────────────────────────────────────────────────────────
   say "② found — the device + the three kahu"
+  # A FAILED FOUNDING ENDS THE CYCLE. Everything below stands ON the vessel this step creates, so running
+  # it anyway measures a tree that was never founded — and the CLI answers many of those verbs off disk,
+  # so the run fills with `ok` that means nothing. Cycle 2 did exactly that: the founding died on a build
+  # and five later steps still reported green. A cascade of green under a red foundation reads worse than
+  # a failure, because it invites belief.
+  BEFORE=$FAILED
   run "wake --install (founds the vessel)"   lares wake --install
+  if [ "$FAILED" -ne "$BEFORE" ]; then
+    say "CYCLE $CYCLE ABANDONED — the founding failed; every movement below would measure an unfounded tree."
+    continue
+  fi
   run "persona new 0 (label ⊥ Handle ⊥ seat)" lares persona new 0 --name rehearsal-0 --handle 'Kahu Alpha' --seat
   run "persona new 1"                        lares persona new 1 --name rehearsal-1 --handle 'Kahu Beta'  --seat
   run "persona new 2"                        lares persona new 2 --name rehearsal-2 --handle 'Kahu Gamma' --seat
