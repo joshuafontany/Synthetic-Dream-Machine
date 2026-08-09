@@ -172,9 +172,11 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
 
   # ── ③ RESERVE + SEAT ───────────────────────────────────────────────────────────────────────────
   say "③ reserve — forge the pre-rotation, then seat the genesis epoch"
-  # The guardian labels ride the rehearsal too, so the printed cards read as the keeper's will (#reserve-custody).
+  # PLACEHOLDER LABELS, never real people. A guardian label names a living person, and this harness rides a
+  # checked-in tree — so the flags exercise the PATH while the names stay the operator's to type at the CLI.
+  # A rehearsal proves that a label reaches the card; it has no business knowing whose label it is.
   step "nexus seal reserve"
-  if RESERVE=$(lares nexus seal reserve --guardian-a 'OLIVIA' --guardian-b 'FREYJA' 2>&1); then
+  if RESERVE=$(lares nexus seal reserve --guardian-a 'guardian-a' --guardian-b 'guardian-b' 2>&1); then
     ok
     COMMIT=$(printf '%s' "$RESERVE" | grep -oE '"nextKeyCommit":"[0-9a-f]+"' | head -1 | cut -d'"' -f4)
     [ -n "$COMMIT" ] || COMMIT=$(printf '%s' "$RESERVE" | grep -oE '[0-9a-f]{64}' | head -1)

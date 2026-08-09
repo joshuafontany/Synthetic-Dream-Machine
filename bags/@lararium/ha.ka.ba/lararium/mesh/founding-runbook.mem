@@ -555,13 +555,20 @@ Shamir ''2-of-3'', seals Share 1 on the vessel, and zeroizes the seed — the ve
 1 + the public commit, never the seed:
 
 ```
-lares nexus seal reserve --guardian-a 'OLIVIA' --guardian-b 'FREYJA'
+lares nexus seal reserve --guardian-a '<guardian-a>' --guardian-b '<guardian-b>'
     # → prints --next-key-commit + THREE cards (each: a checksummed share code + a confirm phrase),
     #   seals 'Recovery-card mine' (Share 1) on the vessel, zeroizes the seed
 ```
 
-''The two guardian labels stand OLIVIA and FREYJA'' (operator, 2026-08-09) — carried in the rehearsal
-harness as well, so the printed cards read the keeper's will rather than a placeholder.
+''⚠ THE REAL NAMES NEVER ENTER THE TREE'' (operator, 2026-08-09). A guardian label names a ''living
+person'', and this runbook rides a checked-in, federating corpus — so writing the actual two in here
+would publish, to every reader of the repository and every clone of its history, ''who to approach to
+reconstruct a Nexus''. The independence rule (#reserve-custody) buys its safety from an adversary not
+knowing which three domains to reach; a runbook naming two of them ''hands that back''.
+
+''So the rite carries placeholders and the operator types the names at the CLI'', where they reach the
+reserve state on the vessel and the printed cards alone. ''The same law governs every operator-facing
+example below'' — a runbook demonstrates a SHAPE, and a shape needs no real person standing in it.
 
 Place the three cards by hand (#reserve-custody). Then seat the roster + arm the pre-rotation, and
 read the quorum verdict:
