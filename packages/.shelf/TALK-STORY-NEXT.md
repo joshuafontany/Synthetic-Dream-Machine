@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/sdm/handoff/talk-story-next >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/sdm/handoff/talk-story-next >>
 ```toml iam
 uri-path  = "ha.ka.ba/sdm/handoff/talk-story-next"
 file-path = "packages/TALK-STORY-NEXT.md"
@@ -13,7 +13,7 @@ retain    = true
 cacheable = false
 ```
 
-<<~&#x0002;>>
+<<^ &#x0002;>>
 
 <<~ ahu #head >>
 
@@ -173,6 +173,6 @@ pnpm --filter @lararium/tw5 exec tsx scripts/smoke-plugin-boot.ts
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<^ &#x0003;>>
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

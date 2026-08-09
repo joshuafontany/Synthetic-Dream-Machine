@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///packages/AGENTS >>
+<<^ &#x0001; ? -> lar:///packages/AGENTS >>
 
 <<~ ahu #iam >>
 
@@ -31,7 +31,7 @@ retain       = true
 ↺ report receipts: files touched, commands run, friction found, next loop.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<^ &#x0002;>>
 
 <<~ ahu #network-topology >>
 
@@ -252,6 +252,6 @@ When reporting back, use OODA-HA receipts: observe facts, orient boundary, decid
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<^ &#x0003;>>
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

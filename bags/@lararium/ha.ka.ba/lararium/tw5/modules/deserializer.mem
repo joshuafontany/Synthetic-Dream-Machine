@@ -168,7 +168,7 @@ function rawBodyText(fullText: string, node: AhuNode): string {
 
 function extractRootToml(text: string): string | null {
   const firstAhu = text.search(/<<~[^>]*\bahu\s+#[\w-]+\s*>>/);
-  const firstStx = text.search(/<<~ [^>]*&#x0002;/);
+  const firstStx = text.search(/<<^ [^>]*&#x0002;/);
   let limit       = text.length;
   if (firstAhu >= 0) limit = Math.min(limit, firstAhu);
   if (firstStx >= 0) limit = Math.min(limit, firstStx);

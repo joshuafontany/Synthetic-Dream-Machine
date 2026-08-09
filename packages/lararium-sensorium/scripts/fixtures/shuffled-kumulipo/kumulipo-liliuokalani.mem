@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani >>
 ```toml iam
 cacheable = false
 file-path = "packages/lararium-sensorium/scripts/fixtures/shuffled-kumulipo/kumulipo-liliuokalani.mem"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -4123,6 +4123,6 @@ KAPAAKEA.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

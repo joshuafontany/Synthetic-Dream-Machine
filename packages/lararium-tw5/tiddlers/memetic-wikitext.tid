@@ -4,7 +4,7 @@ tags:
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel >>
 ```toml iam
 uri-path  = "ha.ka.ba/lares/api/pono/memetic-wikitext/kernel"
 file-path = "packages/lararium-tw5/tiddlers/memetic-wikitext.tid"
@@ -34,7 +34,7 @@ It leaves parse machinery, render machinery, and long teaching matter outward.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<^ &#x0002;>>
 
 <<~ ahu #ooda-ha >>
 
@@ -385,6 +385,6 @@ Adding a sigil: tag a tiddler with `lar:///ha.ka.ba/tags/SharktoothSigil` and po
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<^ &#x0003;>>
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

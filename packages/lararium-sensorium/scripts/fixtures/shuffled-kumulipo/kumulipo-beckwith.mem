@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith >>
 ```toml iam
 cacheable = false
 file-path = "packages/lararium-sensorium/scripts/fixtures/shuffled-kumulipo/kumulipo-beckwith.mem"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -11746,6 +11746,6 @@ MAKEMSON, MAUD. The Morning Star Rises. New Haven, 1941.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>
