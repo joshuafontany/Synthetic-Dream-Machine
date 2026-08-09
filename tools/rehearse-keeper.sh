@@ -199,7 +199,7 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # budgets 120s for the socket and says why in its source: the UDS binds LATER than `vessel-ready` and
   # later than the WS port — "on a cold boot (post-regenesis), tens of seconds later". An earlier 60s here
   # sat at HALF that budget, so two cycles reported a dead node while the node was alive and still booting;
-  # the TCP port answered the whole time, which is why every movement after it passed. A harness that
+  # the TCP port answered the whole time, which let every movement after it pass. A harness that
   # out-waits the thing it measures reports on its own patience.
   step "the node from ② answers"
   SOCK="$ROOT/data/vessel/lares.sock"

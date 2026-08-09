@@ -14,7 +14,7 @@
  */
 
 import { createConnection } from "node:net";
-import { existsSync } from "node:fs";
+import { existsSync, unlinkSync } from "node:fs";
 import { join } from "node:path";
 import { larDataDir } from "./env.js";
 import type { SubmitResult, SubmitOptions } from "./verb-result.js";
@@ -24,9 +24,62 @@ export function udsSocketPath(dataDir?: string): string {
   return join(dataDir ?? larDataDir(), "lares.sock");
 }
 
-/** Is a local daemon socket present? (Presence only — connect may still fail stale.) */
-export function udsAvailable(dataDir?: string): boolean {
+/**
+ * Does a socket FILE sit at the path? It reports a NAME standing, never a listener answering.
+ *
+ * A unix socket outlives the process that bound it: kill a daemon rudely and the inode remains, so this
+ * answers `true` for a vessel that died months ago. Reach for it to decide whether a path merits a try —
+ * never to decide whether anything breathes there. {@link udsAlive} answers that.
+ */
+export function udsSocketPresent(dataDir?: string): boolean {
   try { return existsSync(udsSocketPath(dataDir)); } catch { return false; }
+}
+
+/**
+ * Does a daemon ANSWER at the socket? The only honest liveness read — it connects.
+ *
+ * ── WHAT A FILE-CHECK COST, MEASURED ────────────────────────────────────────────────────────────
+ * Callers read file-existence AS liveness, so a stale socket reported a dead vessel as serving — for
+ * weeks, across sessions. Worse, the standing decision consulted that same reading, so the lie
+ * SUSTAINED ITSELF: the vessel stayed down precisely because the corpse of its socket kept reporting it
+ * up, and nothing ever connected to find out otherwise.
+ *
+ * `ECONNREFUSED` MARKS exactly that corpse — a name carrying nothing behind it — and it reads here as
+ * DOWN rather than as an error, because a refused connection ANSWERS.
+ *
+ * The address NAMES; it never stands the place (`lar:` signal law). Existence at an address never
+ * implies presence at a place, and a check that fuses them reports on the filesystem while claiming to
+ * report on the mesh.
+ */
+export async function udsAlive(dataDir?: string, timeoutMs = 1_500): Promise<boolean> {
+  const path = udsSocketPath(dataDir);
+  if (!udsSocketPresent(dataDir)) return false;   // no name — nothing to probe
+  return await new Promise<boolean>((resolve) => {
+    let settled = false;
+    const done = (alive: boolean): void => {
+      if (settled) return;
+      settled = true;
+      try { sock.destroy(); } catch { /* already gone */ }
+      resolve(alive);
+    };
+    const sock = createConnection(path);
+    sock.setTimeout(timeoutMs);
+    sock.once("connect", () => done(true));
+    sock.once("error",   () => done(false));   // ECONNREFUSED on a stale inode → DOWN, never an error
+    sock.once("timeout", () => done(false));   // bound but wedged answers as down, which serves the caller
+  });
+}
+
+/**
+ * Clear a socket file that answers to nobody, and say whether it cleared one.
+ *
+ * A stale inode does more than mislead — it KEEPS the lie alive. Reaping it ahead of a start makes the
+ * next presence check mean what it says. It never touches a LIVE socket: the caller hands a liveness
+ * verdict in, so this can only ever clear a corpse.
+ */
+export function reapStaleSocket(alive: boolean, dataDir?: string): boolean {
+  if (alive || !udsSocketPresent(dataDir)) return false;
+  try { unlinkSync(udsSocketPath(dataDir)); return true; } catch { return false; }
 }
 
 /** The local socket refused (absent/stale) — `runVerb` turns this into DaemonUnreachable. */

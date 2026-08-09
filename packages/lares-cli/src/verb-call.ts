@@ -17,7 +17,7 @@
  * relay — never through this surface.
  */
 
-import { invokeLocal, udsAvailable, udsSocketPath, UdsUnreachable } from "./local-connector.js";
+import { invokeLocal, udsSocketPresent, udsSocketPath, UdsUnreachable } from "./local-connector.js";
 import type { SubmitResult, SubmitOptions } from "./verb-result.js";
 
 export interface RunVerbOptions extends SubmitOptions {
@@ -38,7 +38,7 @@ export async function runVerb(
   requestedBy: string,
   opts:        RunVerbOptions = {},
 ): Promise<SubmitResult> {
-  if (!udsAvailable(opts.dataDir)) throw new DaemonUnreachable(udsSocketPath(opts.dataDir));
+  if (!udsSocketPresent(opts.dataDir)) throw new DaemonUnreachable(udsSocketPath(opts.dataDir));
   try {
     return await invokeLocal(verb, args, requestedBy, opts);
   } catch (e) {

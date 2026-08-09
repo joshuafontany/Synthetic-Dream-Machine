@@ -33,7 +33,7 @@ import { join, relative, isAbsolute } from "node:path";
 import type { ParsedArgs } from "../parse-args.js";
 import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
-import { udsAvailable, udsSocketPath } from "../local-connector.js";
+import { udsAlive, udsSocketPath } from "../local-connector.js";
 import { larRoot, vesselDid } from "../env.js";
 import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngest, recordLandedPacks, applyConfirmedRenames, type PendingDeletion } from "../ingest-core.js";
 
@@ -87,7 +87,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
       emit(args, { ok: false, error: msg, human: () => console.error(`lares watch: ${msg}`) });
       return 3;
     }
-    if (!udsAvailable()) {
+    if (!(await udsAlive())) {
       const msg = `no lares daemon at ${udsSocketPath()}`;
       emit(args, { ok: false, error: msg, human: () => { console.error(`lares watch: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
       return 3;

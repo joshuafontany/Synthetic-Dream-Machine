@@ -16,7 +16,7 @@
 
 import { larRoot, larDataDir, larPort, vesselDid } from "../env.js";
 import { stopIncumbent } from "../port-control.js";
-import { udsAvailable } from "../local-connector.js";
+import { udsAlive } from "../local-connector.js";
 import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
@@ -225,7 +225,7 @@ async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
   // C.4 — when the daemon is reachable, ask it for a residency snapshot. The CLI
   // reaches the daemon through the UDS verb socket alone, so that — not the WS
   // relay port — gates the read. Cheap call; any failure falls through silently.
-  const daemonReachable = udsAvailable();
+  const daemonReachable = await udsAlive();
   if (daemonReachable) {
     try {
       const { summaryOutput } = await import("../verb-result.js");

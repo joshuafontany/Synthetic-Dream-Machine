@@ -2,7 +2,7 @@
 
 import { larPort } from "../env.js";
 import { livePalaceProcs, type PalaceProc } from "../palace-procs.js";
-import { udsAvailable } from "../local-connector.js";
+import { udsAlive } from "../local-connector.js";
 import { portHolderPids } from "../port-control.js";
 import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -21,7 +21,7 @@ function palaceTopology(port: number): { procs: PalaceProc[]; line: string } {
 export async function cmdFlow(args: ParsedArgs): Promise<number> {
   const port = larPort();
   const { procs, line: palaceLine } = palaceTopology(port);
-  const daemonOpen = udsAvailable();
+  const daemonOpen = await udsAlive();
 
   emit(args, {
     ok: true,

@@ -24,7 +24,7 @@ import {
 import { vesselDid, larIdentityDir } from "../env.js";
 import { discordianReading } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
-import { udsAvailable } from "../local-connector.js";
+import { udsAlive } from "../local-connector.js";
 import { summaryOutput } from "../verb-result.js";
 import { emit, exitFor } from "../render.js";
 import { canPromptSecret, promptSecret, promptSecretConfirmed } from "../prompt-secret.js";
@@ -146,7 +146,7 @@ function vaultPassphrase(args: ParsedArgs): number {
 export async function cmdVault(args: ParsedArgs): Promise<number> {
   const sub = args.positional[0];
   if (!sub) { usage(); return 2; }
-  const daemonUp = udsAvailable();
+  const daemonUp = await udsAlive();
 
   try {
     switch (sub) {

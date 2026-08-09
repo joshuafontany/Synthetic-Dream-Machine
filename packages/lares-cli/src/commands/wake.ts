@@ -1,7 +1,12 @@
 /**
- * `lares wake` — the boot ENTRY POINT. Idempotent on every awakening: ensure the live Lararium node is
- * up (ATTACH if healthy, START detached if down — never a restart), CHECK the mempalace sidecar, and
- * emit a live-delta hydration frame for the waking session.
+ * `lares wake` — the boot ENTRY POINT. Idempotent on every awakening: it ATTACHES to a live Lararium
+ * node or STANDS one detached when none answers (never a restart), CHECKS the mempalace sidecar, and
+ * emits a live-delta hydration frame for the waking session.
+ *
+ * IT CARRIES TWO CAPABILITIES, AND `--observe` WITHHOLDS THE SECOND. Observing reports what stands and
+ * touches nothing; standing brings a node up, founds a vessel, wires the AI surfaces. An unattended
+ * caller — a session hook, a cron, anything that only wants a reading — holds the first alone, so
+ * looking never decides what stands.
  *
  * FOUNDING STANDS THE VESSEL AND NOTHING ELSE (operator ruling, 2026-08-08). `--install` once also
  * pip-installed the mempalace library and stood the sensorium organs, which made a separate tool read as
@@ -19,7 +24,7 @@ import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
 import { larRoot, larBootstrapPath, larDataDir, larCasDir, vesselDid } from "../env.js";
-import { udsAvailable } from "../local-connector.js";
+import { udsAlive, reapStaleSocket } from "../local-connector.js";
 import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
@@ -83,12 +88,20 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   // 1. Found-if-absent (the whole shebang) under --install; else just report the cheap check.
   //    Each step is a no-op when its artifact is present; genesis is never rebuilt; the
   //    keypair is never wiped; --install never passes --force.
+  // TWO CAPABILITIES RIDE HERE, AND A CALLER MAY HOLD ONLY THE FIRST.
+  //   observe — report what stands. It carries no side effects, so it runs safely unattended.
+  //   stand   — bring the node up, found a vessel, wire the AI surfaces. ACTS, every one.
+  // Fused, they let a caller asking "what stands right now" CHANGE what stands: merely looking started a
+  // daemon. `--observe` withholds the acting half ENTIRELY and OUTRANKS every acting flag rather than
+  // sitting beside them, so no flag further down an argv can talk a reading into an act.
+  const observeOnly = args.flags["observe"] === true;
+
   let founding: FoundStep[] | undefined;
   // The full standup runs under --init / --install (found a first vessel) OR
   // --admit FILE (join an existing PersonaGroup — own fresh keypair, same group).
   // All idempotent. `--init` and `--install` are synonyms for the full standup.
-  const doStandup =
-    args.flags["init"] === true || args.flags["install"] === true || args.options["admit"] !== undefined;
+  const doStandup = !observeOnly &&
+    (args.flags["init"] === true || args.flags["install"] === true || args.options["admit"] !== undefined);
   if (doStandup) founding = await foundIfAbsent(args, { root, bootstrap });
 
   // THE MEMPALACE IS A SIDECAR, AND FOUNDING NO LONGER ASSUMES IT (operator ruling, 2026-08-08).
@@ -114,25 +127,25 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //     every init both safe AND load-bearing — a seat aimed at a moved holder script otherwise stays
   //     shut while its wire reports success, and only re-aiming heals it. A single surface flag still
   //     targets that one alone; every wire stays graceful when its tool sits un-installed here.
-  const initAll = args.flags["init"] === true;
+  const initAll = !observeOnly && args.flags["init"] === true;
   let claude: ClaudeWireResult | undefined;
-  if (initAll || args.flags["claude"]) {
+  if (initAll || (!observeOnly && args.flags["claude"])) {
     try { claude = await wireClaudeHome(); }
     catch (e) { claude = { settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
   let codex: CodexWireResult | undefined;
-  if (initAll || args.flags["codex"]) {
+  if (initAll || (!observeOnly && args.flags["codex"])) {
     try { codex = wireCodexHome(); }
     catch (e) { codex = { configPath: "", changed: false, steps: [{ item: "codex", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
   let copilot: CopilotWireResult | undefined;
-  if (initAll || args.flags["copilot"]) {
+  if (initAll || (!observeOnly && args.flags["copilot"])) {
     try { copilot = wireCopilotHome(); }
     catch (e) { copilot = { home: "", changed: false, steps: [{ item: "copilot", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
   // Every present VS Code variant (stable + Insiders, remote-server + local-profile).
   let vscode: VscodeWireResult | undefined;
-  if (initAll || args.flags["vscode"]) {
+  if (initAll || (!observeOnly && args.flags["vscode"])) {
     try { vscode = wireVscode(); }
     catch (e) { vscode = { changed: false, steps: [{ item: "vscode", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
@@ -141,11 +154,20 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   // "Up" for the CLI means the UDS verb socket answers — the CLI reaches the daemon there
   // alone (the WS relay is the browser vessel's channel, not the CLI's; the CLI carries
   // one transport, the sock — lares↔lararium binding).
-  let nodeUp = udsAvailable();
+  // LIVENESS CONNECTS. A file-existence check reported a long-dead vessel as serving, and THIS line
+  // consulted it before deciding whether to stand the node — so the vessel stayed down BECAUSE the corpse
+  // of its socket kept reporting it up. A stale inode now reads as down and gets reaped, so the next
+  // reader meets a path that means what it says.
+  let nodeUp = await udsAlive();
+  const reaped = reapStaleSocket(nodeUp);
   let started = false;
-  let nodeNote = nodeUp ? "attached (already serving)" : "";
+  let nodeNote = nodeUp ? "attached (already serving)" : reaped ? "cleared a stale socket (nothing answered there)" : "";
 
-  if (!nodeUp) {
+  if (!nodeUp && observeOnly) {
+    nodeNote = reaped
+      ? "down — cleared a stale socket; `--observe` withholds the stand, so run `lares wake` to serve"
+      : "down — `--observe` withholds the stand; run `lares wake` to serve";
+  } else if (!nodeUp) {
     const distMain = join(repoRoot, "packages", "lararium-node", "dist", "src", "main.js");
     if (!existsSync(distMain)) {
       nodeNote = "node dist not built — run `pnpm -r build`, then `lares wake`";
@@ -216,13 +238,13 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       // bailing on a late fatal.
       if (phase === "ready") {
         const sockDeadline = Date.now() + 120_000;
-        while (Date.now() < sockDeadline && !udsAvailable()) {
+        while (Date.now() < sockDeadline && !(await udsAlive())) {
           if (/fatal:/.test(readAttestation())) { phase = "fault"; break; }
           await sleep(500);
         }
       }
       // `ready` = attested vessel-ready, no late fault, AND the verb socket answers.
-      nodeUp = phase === "ready" && udsAvailable();
+      nodeUp = phase === "ready" && await udsAlive();
       nodeNote =
         phase === "ready"
           ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`
@@ -259,7 +281,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   emit(args, {
     ok,
     data: {
-      node: { up: nodeUp, started, port, note: nodeNote },
+      // `cap` names which half the caller HELD, so a reader tells a vessel that refused to stand from one
+      // nobody asked. Without it `up:false` reads identically under both, and that difference carries the
+      // whole point of holding one cap rather than two.
+      node: { up: nodeUp, started, port, note: nodeNote, cap: observeOnly ? "observe" : "observe+stand" },
       ...(recall !== undefined ? { recall } : {}),
       mempalace: { ok: integration.ok, checks: integration.checks },
       ...(founding !== undefined ? { founding } : {}),
