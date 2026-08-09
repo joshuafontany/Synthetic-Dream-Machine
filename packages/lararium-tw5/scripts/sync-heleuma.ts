@@ -54,7 +54,7 @@ const SYNC_MODULES     = args.includes("--sync-modules");
 // Regex patterns
 // ---------------------------------------------------------------------------
 
-const SOH_URI_RE     = /<<\^[^>]*&#x0001;[^>]*\?\s*->\s*([^\s>]+)\s*>>/;
+const SOH_URI_RE     = /<<[~^][^>]*&#x0001;[^>]*\?\s*->\s*([^\s>]+)\s*>>/;
 const TOML_RE        = /```toml([\s\S]*?)```/;
 const SOURCE_SLOT_RE = /<<~ ahu #source >>([\s\S]*?)<<~\/ahu >>/;
 const FENCE_RE       = /```[^\n]*\n([\s\S]*?)\n```/;
@@ -420,8 +420,8 @@ function runScanPromote(): void {
 /** Extract the body text between <<~\x02>> and <<~\x03>> from a module tiddler. */
 function extractModuleBody(content: string): string | null {
   // STX marker may be raw \x02 or the HTML entity form
-  const stxRe = /<<\^(?:&#x0002;|[\x02])>>/;
-  const etxRe = /<<\^(?:&#x0003;|[\x03])>>/;
+  const stxRe = /<<[~^](?:&#x0002;|[\x02])>>/;
+  const etxRe = /<<[~^](?:&#x0003;|[\x03])>>/;
   const stxM = stxRe.exec(content);
   const etxM = etxRe.exec(content);
   if (!stxM || !etxM) return null;

@@ -46,13 +46,13 @@ export interface ParseEvent {
 
 export const BOOTSTRAP_SCANS: SigilScan[] = [
   // ASCII control-character framing — SOH / STX / ETX / EOT
-  { sigilName: "control-soh", regex: /<<\^(?:[^>]|->)*&#x0001;(?:[^>]|->)*\?\s*->\s*([^\s>]+)\s*>>/g, eventType: "pragma" },
-  { sigilName: "control-stx", regex: /<<\^(?:[^>]|->)*&#x0002;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
-  { sigilName: "control-etx", regex: /<<\^(?:[^>]|->)*&#x0003;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
-  { sigilName: "control-eot", regex: /<<\^(?:[^>]|->)*&#x0004;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-soh", regex: /<<[~^](?:[^>]|->)*&#x0001;(?:[^>]|->)*\?\s*->\s*([^\s>]+)\s*>>/g, eventType: "pragma" },
+  { sigilName: "control-stx", regex: /<<[~^](?:[^>]|->)*&#x0002;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-etx", regex: /<<[~^](?:[^>]|->)*&#x0003;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-eot", regex: /<<[~^](?:[^>]|->)*&#x0004;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
   // Kapu extended range — DC1 (&#x0011;) SOH variant, DC4 (&#x0014;) EOT variant
-  { sigilName: "control-soh", regex: /<<\^(?:[^>]|->)*&#x0011;(?:[^>]|->)*\?\s*->\s*([^\s>]+)\s*>>/g, eventType: "pragma" },
-  { sigilName: "control-eot", regex: /<<\^(?:[^>]|->)*&#x0014;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-soh", regex: /<<[~^](?:[^>]|->)*&#x0011;(?:[^>]|->)*\?\s*->\s*([^\s>]+)\s*>>/g, eventType: "pragma" },
+  { sigilName: "control-eot", regex: /<<[~^](?:[^>]|->)*&#x0014;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
   // Structural: ahu — slot identifier supports nested fragment paths via
   // `/`-separated segments (`#parent/child/grandchild`). Per memetic-wikitext
   // spec §5.3 + lar-uri.md §5.6, the URI fragment is a path within the meme;

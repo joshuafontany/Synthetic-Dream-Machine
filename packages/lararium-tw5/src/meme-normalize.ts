@@ -22,7 +22,7 @@
  *      scales by guessing.
  *
  * Pure + idempotent (re-running changes nothing). The SOH grammar mirrors the
- * deserializer's namespace extractor (`deserializer.ts`, `/^<<\^([^&\n]*)&#x(0001|0011)/`).
+ * deserializer's namespace extractor (`deserializer.ts`, `/^<<[~^]([^&\n]*)&#x(0001|0011)/`).
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/meme-normalize
  */

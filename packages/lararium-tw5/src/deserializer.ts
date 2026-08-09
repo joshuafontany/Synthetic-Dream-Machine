@@ -147,7 +147,7 @@ export function memeticWikitextDeserializer(
     // Stored only when non-empty; template emits it before the control char.
     // The Kapu SOH variant (&#x0011; DC1) carries its own semantics — the
     // code survives on the parent as `carrier-soh`, never normalized away.
-    const nsM = /^<<\^([^&\n]*)&#x(0001|0011)/.exec(ev.fullText);
+    const nsM = /^<<[~^]([^&\n]*)&#x(0001|0011)/.exec(ev.fullText);
     const namespace = nsM?.[1]?.trim() ?? "";
     if (namespace.length > 0 && tiddlers.length > 0) {
       for (const t of tiddlers) t["namespace"] = namespace;
@@ -210,7 +210,7 @@ function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): Tiddle
 // crossing lines (a greedy multi-line match once swallowed from a quoted
 // `<<~` mention down to the real closer; found on loci.md).
 const SOH_LINE_RE = /^<<\^(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*>>\n?/;
-const STX_LINE_RE = /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
+const STX_LINE_RE = /<<[~^](?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
 
 function stripLeadingNewlines(text: string): string {
   return text.replace(/^\n+/, "");

@@ -29,8 +29,8 @@ const sha256Tagged = formatDigest("sha256", sha256);
 let meme = readFileSync(memePath, "utf8");
 
 // --- 1. Replace body between STX/ETX -----------------------------------------
-const STX = /<<\^[^>]*&#x0002;[^>]*>>/;
-const ETX = /<<\^[^>]*&#x0003;[^>]*>>/;
+const STX = /<<[~^][^>]*&#x0002;[^>]*>>/;
+const ETX = /<<[~^][^>]*&#x0003;[^>]*>>/;
 
 const stxMatch = STX.exec(meme);
 const etxMatch = ETX.exec(meme);
