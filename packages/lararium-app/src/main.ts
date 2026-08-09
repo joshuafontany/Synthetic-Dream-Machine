@@ -1,4 +1,20 @@
 /**
+ * lararium-app — the MOBILE SURFACE placeholder.
+ *
+ * WHY IT CARRIES NO TESTS, said here so nobody reads the zero as debt. This package holds a shell for the
+ * mobile work rather than a subsystem: the surface a phone will meet once the secure-context path lands
+ * and a household can reach a vessel over a trusted origin. A test suite over a placeholder would pin a
+ * shape nobody has chosen yet.
+ *
+ * WHAT IT WILL HAVE TO ANSWER when it stops being a placeholder, each already measured elsewhere:
+ *   · a browser withholds key-minting off a secure context, so the mint gate refuses and explains rather
+ *     than throwing a property-of-undefined (`@lararium/browser` secure-context-gate),
+ *   · WebKit clears an origin's storage after seven days without interaction, and a home-screen install
+ *     is the exemption — which makes "install this" part of the identity's durability rather than a nicety,
+ *   · a device key may rest as an opaque handle; a persona root cannot, and wants a seal instead.
+ */
+
+/**
  * @lararium/app — the browser-lararium boot view.
  *
  * A sovereign causal island boots in the browser (its own key, IndexedDB, genesis

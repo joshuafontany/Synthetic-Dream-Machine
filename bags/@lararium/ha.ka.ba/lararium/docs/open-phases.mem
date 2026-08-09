@@ -91,7 +91,8 @@ fields = ["message: string"]
 [[authority-modes]]
 mode   = "local-dev"
 fields = ["roomId: string", "receiptHash: string", "issuedAt: string"]
-status = "active"
+status = "standing"
+status-why = "a live ledger of open phases rather than a design"
 
 [[authority-modes]]
 mode   = "keyhive"

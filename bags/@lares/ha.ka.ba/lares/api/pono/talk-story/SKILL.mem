@@ -25,7 +25,8 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "practice face of talk-story — triggers, the five steps, three worked exits, crucible record; law lives at the parent meme"
-status    = "draft"
+status    = "rite"
+status-why = "a skill definition — a procedure invoked, never a thing built"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/api/pono/talk-story/SKILL"
 ```

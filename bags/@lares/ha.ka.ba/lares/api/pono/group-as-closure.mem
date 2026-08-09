@@ -12,7 +12,8 @@ namespace = "&#x2B21;"
 register  = "Synthesis"
 retain    = true
 role      = "group-as-closure: a group names no central object — it names the reciprocal-edge closure over signed, typed, lar:-named individual edges, EVALUATED never instantiated; quorum = a composed threshold subject; eviction = kāpae on the membership stack; maps PersonaGroup/Plurality/Kowloon-Admins onto #has-stack composition; PROPOSED, mostly unbuilt"
-status    = "proposed"
+status    = "designed"
+status-why = "design intent, mostly unbuilt by its own status line"
 tags      = ["api/pono/meme", "api/pono/orichalcum-capabilities", "api/pono/causal-islands", "api/pono/lararium-identity"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/api/pono/group-as-closure"

@@ -15,17 +15,17 @@
  * AND EVERY FLAG CARRIES ITS REASON. `status-why` sits beside it so the field cannot drift from the prose
  * again without the drift being visible — a flag alone is exactly what went flat the first time.
  *
- * WHAT THIS GUARD DELIBERATELY DOES NOT ASSERT, AND WHY. Writing it surfaced that the field was never
- * flat so much as FRAGMENTED: seven further words already ride it across this bag — approved, canon,
- * draft, working-draft, enacting, active. Those authors chose their words, possibly for reasons the
- * three above cannot carry, and a guard that forced them into a taxonomy derived from twelve OTHER memes
- * would impose rather than describe. So this asserts only what it can defend: the one word three states
- * were wearing has gone, and any meme declaring one of the three carries its reason. The wider vocabulary
- * stands reported as a question rather than closed by a test.
+ * NINE WORDS COLLAPSED TO THREE, AND THE COLLAPSE IS THE POINT. Writing this guard surfaced that the
+ * field was never flat so much as FRAGMENTED — approved, canon, draft, working-draft, enacting, active
+ * and proposed all rode it, drifted in independently, and answered different questions at once:
+ * has-it-been-ratified, how-finished-is-the-writing, is-something-in-motion. A reader had to know which
+ * question a given word was answering before the answer meant anything.
  *
- * SCOPE: the `@lararium` implementation bag. The `@lares` pono canon carries `proposed` too and may mean
- * ratification rather than build-state by it — so this does not reach there. Naming a boundary beats
- * sweeping past one.
+ * One axis now, the one a reader actually needs: WHAT MAY I RELY ON HERE. And every flag carries its
+ * REASON beside it, so a wrong call stays findable rather than laundered into a bare word.
+ *
+ * SCOPE: the whole memegraph, both bags. The pono canon and the implementation bag answer the same
+ * question about their own subjects, so they answer it in the same words.
  */
 import { describe, expect, test } from "vitest";
 import { readFileSync } from "node:fs";
@@ -35,8 +35,8 @@ import { resolve } from "node:path";
 const REPO = resolve(__dirname, "../../..");
 const STATES = ["designed", "standing", "rite"] as const;
 
-function lararumMemes(): string[] {
-  const out = execFileSync("git", ["ls-files", "bags/@lararium"], {
+function memegraph(): string[] {
+  const out = execFileSync("git", ["ls-files", "bags"], {
     cwd: REPO, encoding: "utf8", maxBuffer: 16 * 1024 * 1024,
   });
   return out.split("\n").filter((f) => f.endsWith(".mem"));
@@ -50,7 +50,7 @@ function statusOf(src: string): { state?: string; why?: string } {
 }
 
 describe("the status flag carries a state that differs, and its reason", () => {
-  const files = lararumMemes();
+  const files = memegraph();
 
   test("the walk finds memes to check", () => {
     expect(files.length).toBeGreaterThan(50);
@@ -83,21 +83,19 @@ describe("the status flag carries a state that differs, and its reason", () => {
     expect(declared).toBeGreaterThan(8);
   });
 
-  test("the wider vocabulary stands REPORTED, never silently closed", () => {
-    // A test asserting one closed vocabulary would have quietly erased six other words their authors
-    // chose. Counting them instead keeps the question visible until someone rules on it.
+  test("the vocabulary stays closed — a tenth word cannot drift back in", () => {
+    // Nine words drifted in one at a time, each reasonable alone. This is what stops the tenth.
+    const strays: string[] = [];
     const census = new Map<string, number>();
     for (const rel of files) {
       let src: string;
       try { src = readFileSync(resolve(REPO, rel), "utf8"); } catch { continue; }
       const { state } = statusOf(src);
-      if (state) census.set(state, (census.get(state) ?? 0) + 1);
+      if (!state) continue;
+      census.set(state, (census.get(state) ?? 0) + 1);
+      if (!(STATES as readonly string[]).includes(state)) strays.push(`${rel} → "${state}"`);
     }
-    const others = [...census].filter(([k]) => !(STATES as readonly string[]).includes(k));
-    if (others.length) {
-      console.log(`\n[meme-status] words beyond the three, awaiting a ruling: ` +
-        others.map(([k, n]) => `${k}×${n}`).join(" · "));
-    }
-    expect(census.size).toBeGreaterThan(0);
+    expect(strays, `a word outside the three drifted in:\n  ${strays.join("\n  ")}`).toEqual([]);
+    console.log(`\n[meme-status] ` + [...census].map(([k, n]) => `${k}×${n}`).join(" · "));
   });
 });
