@@ -152,6 +152,28 @@ credential-linkable — the three things bare derivation cannot assert — and '
 
 <<~/ahu >>
 
+<<~ ahu #the-plane-name >>
+
+!! The Plane Name ~ how a vessel finds a compartment without a map of them
+
+A vessel carries ''one private plane per PersonaGroup'' — the multitude, the signer pin, the KEL prefix, the device edge. A human running several compartments on one laptop therefore needs several planes there, and the naming question follows immediately: ''how does a vessel find each plane without holding a thing that lists them?''
+
+''A list would BE the forbidden layer'' (#the-vault). An index over a person's compartments, sitting on their own device, reads as exactly the collector the single-bit test forbids the moment anything presents it — and SDSI names the same failure from the naming side: //a NAMESPACE, not a super-key.//
+
+''So the name DERIVES from the compartment's own material.'' Each plane answers to a domain-separated MAC over that PersonaGroup's own doc id: hold the group, name its plane; hold no group, name nothing. ''There is no root to present because there is no root.'' The same convention the per-circle scope-pseudonym already runs one level down (#the-atom, `circleScopeIndex`) — from the KEY a persona presents to a circle, up to the NAME a group's own plane answers to. One convention, two levels.
+
+''Distinct BAGS, never one bag with paths.'' A path under a shared bag is a tiddler namespace, so `@persona/<tag>/…` would seat one compartment's plane inside another's document, where a cap opening the outer bag opens every compartment a person holds.
+
+!!! Register many, mount ONE
+
+Every plane ''REGISTERS'' with the capability ring, or that compartment's own devices stop reconciling. Exactly one ''MOUNTS'' as a writable composite layer, because the composite resolves a tiddler by walking its layers: two mounted planes and one compartment's signer pin answers a read meant for the other, silently, in load order. Canon rules the same from the human side (#composition): ''one Persona takes the blame at a time.''
+
+''The switch stays the sharp edge'' (#honest-scope): the active group arrives NAMED, and an unknown name halts rather than falling back — a quiet fallback stands a vessel in a compartment the operator never chose. The error may count the planes held; it may never say which.
+
+''The honest limit.'' The tag names, it never seals: someone already holding a group's doc id computes its plane name freely. What the derivation buys reads narrower and real — the name carries ''no vessel material and no sibling material'', so two compartments on one laptop produce two ids with nothing of the laptop, and nothing of each other, inside either. The Janus probe surface rides the transport, unchanged by any naming choice. <<~ confidence Synthesis-Canon 15/20 >>
+
+<<~/ahu >>
+
 <<~ ahu #honest-scope >>
 
 !! Honest Scope ~ the key layer only

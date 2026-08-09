@@ -23,8 +23,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
 
 The authority contract lives in [[operator-peer|lar:///ha.ka.ba/lararium/mesh/operator-peer]] (two-lane law, ea, actor-parity).
 This meme owns the ''compositional structure'': what a vessel composes FROM, and the
-ONE factory shape both platforms instance. It supersedes the per-platform factory
-drift (see #drift).
+ONE factory shape both platforms instance (see #one-derivation).
 
 <<~ ahu #the-law >>
 
@@ -103,10 +102,10 @@ phase sequence), never type-conformance to a port.
 
 !! Role Names Which Pieces the Recipe Carries (the keystone reframe)
 
-The drift's root: ''role baked into platform'' (node = relay, browser = keeper). Pono:
-''role names the capability pieces a vessel CURRENTLY HOLDS'' — a snapshot of a growing
+''Role names the capability pieces a vessel CURRENTLY HOLDS'' — a snapshot of a growing
 set, decoupled from the runtime it runs on ([[feedback_isomorphism_by_composition]]). A
-role adds or omits a PIECE; it never toggles a flag or fills an optional port method.
+role adds or omits a PIECE; it never toggles a flag or fills an optional port method,
+and a substrate never stands in for a role: node-means-relay reads as a category error.
 The substrate NEVER gates which pieces a vessel MAY hold (Ink & Switch, #the-law): a
 piece absent today reads as not-yet-held, never cannot-hold.
 
@@ -127,27 +126,32 @@ an accidental open-to-all reads as unreachable by construction.
 
 <<~/ahu >>
 
-<<~ ahu #drift >>
+<<~ ahu #one-derivation >>
 
-!! What Drifted (and what the clean design heals)
+!! One Derivation ~ what a platform MAY decide, and what it MAY NOT
 
-`open-node-vessel.ts` (~735 lines) and `open-browser-vessel.ts` (~504) accreted the
-SAME protocol sequence twice, with platform divergence interleaved inline — genesis
-threading through catalog-oracle writes, bootstrap forking IDB↔file, `adminAuth`
-sharing shape but forking `registerBags`, role baked into each. No single doc owned
-the design (`open-vessel`/`lar-vessel` sat as TODO stubs), so the two drifted apart.
+Both factories reduce to thin ''RECIPES'' — each naming its pieces (the shared seven plus
+its role pieces) and the few substrate values each piece resolves native-first. The
+protocol ''SEQUENCE'' holds invariant across them, and the node + browser suites boot real
+vessels to guard it.
 
-The heal: this design names the ONE composition; both factories reduce to thin
-RECIPES — each naming its pieces (the shared seven + its role pieces) and the few
-substrate values each piece resolves native-first. Because the boot interleaves, the
-heal lands as ONE careful composition pass (not many independent slices), build-and-test
-gated by the node + browser suites (which already boot real vessels). The protocol
-SEQUENCE holds invariant; the test suites guard it.
+''A FACT ABOUT THE OPERATOR IS NEVER A PLATFORM DECISION.'' The bags a vessel registers
+with its capability ring derive from what that vessel HOLDS — its own ground, its wiki
+slot, and the union over the PersonaGroups it stands in, each contributing its plane and
+every bag its catalog names (`register-bags`, `persona-scope`). A recipe MAY carry a
+platform's own pieces; it MUST NOT carry its own answer to a question about the operator.
 
-<<~ confidence Synthesis 13/20 >> The design reads pono (composition, not interface;
-role-as-capability; native-first by subtraction). The extraction's size + the absence
-of a live-daemon test keep the build itself at moderate confidence — the sequence
-invariant + the boot tests carry the safety.
+''Why the rule bites here in particular.'' Keyhive's bag→doc map lives in process memory,
+so a bag absent from that set can never satisfy a cap check — no throw, no warning, an
+`act LOAD` that refuses forever. Two hand-written lists of one fact drift, and the one
+carrying authority drifts ''silently''; a derivation cannot.
+
+<<~/ahu >>
+
+<<~ confidence Synthesis-Canon 14/20 >> The design reads pono (composition, not interface;
+role-as-capability; native-first by subtraction), and the node + browser suites boot real
+vessels through the phase sequence, so the invariant carries a live guard rather than an
+argument. What stays open sits one level out: a live-daemon exercise of the full sequence.
 
 <<~/ahu >>
 
