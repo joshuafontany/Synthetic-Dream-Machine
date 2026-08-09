@@ -88,6 +88,11 @@ export LARES_ARCHIVE_PASSPHRASE_NEW="$LARES_ARCHIVE_PASSPHRASE"
 # Surface where a node warning is BORN rather than only that it fired — the first rehearsal reported a
 # negative setTimeout with no origin, and a warning without a stack costs more to chase than to capture.
 export NODE_OPTIONS="${NODE_OPTIONS:-} --trace-warnings"
+# LAR_ROOT ISOLATES THE FILESYSTEM, NOT THE PORT. Nine resolvers root off it — data, state, seal, library,
+# bags, genesis, the UDS socket — and the TCP port roots off LAR_PORT alone. A throwaway on the default 8080
+# collides with the operator's REAL node, which is what the first two rehearsals actually reported. The
+# tenth resource needs naming too.
+export LAR_PORT="${LAR_PORT:-8099}"
 
 FAILED=0
 CYCLE=0
@@ -102,7 +107,8 @@ cleanup() {
   # The pid file is the ONLY handle on the throwaway node. A `pkill -f` matching the root would not
   # work (LAR_ROOT rides the environment, never the command line) and a broader pattern could reach
   # the operator's REAL daemon — precisely the reach this harness exists to refuse.
-  if [ -f "$ROOT/serve.pid" ]; then kill "$(cat "$ROOT/serve.pid")" 2>/dev/null || true; sleep 1; fi
+  HOLDER=$(lsof -ti ":${LAR_PORT:-8099}" 2>/dev/null | head -1)
+  if [ -n "$HOLDER" ]; then kill "$HOLDER" 2>/dev/null || true; sleep 1; fi
   if [ "$KEEP" -eq 0 ]; then rm -rf "$ROOT"; say "BURNED $ROOT — the clear IS the burn.";
   else say "KEPT $ROOT (--keep) — burn it yourself when done."; fi
 }
@@ -123,8 +129,20 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   CYCLE=$((CYCLE + 1))
   say "═══ CYCLE $CYCLE of $CYCLES ═══"
 
+  # ── CLEAR BETWEEN CYCLES. Cycle 2 must re-run the RITE, never inherit cycle 1's warm tree and its still-
+  #    running daemon — which is what the earlier runs actually measured (a 0s socket that was never
+  #    re-stood). The burn IS the clear, applied per cycle.
+  if [ "$CYCLE" -gt 1 ]; then
+    say "clear between cycles (the rite re-runs from void, never from a warm tree)"
+    step "free port $LAR_PORT + pare the tree"
+    HOLDER=$(lsof -ti ":$LAR_PORT" 2>/dev/null | head -1)
+    [ -n "$HOLDER" ] && { kill "$HOLDER" 2>/dev/null; sleep 2; }
+    rm -rf "${ROOT:?}"/{bags,genesis,data,state,wikis} 2>/dev/null
+    ok
+  fi
+
   # ── SEED THE CORPUS. LAR_ROOT isolates AND empties bags/, so a faithful run copies the approved
-  #    seed set in. Re-copied each cycle so cycle 2 tests the RITE's idempotency, never a warm tree's.
+  #    seed set in.
   say "seed the corpus (${SEED_BAGS[*]})"
   mkdir -p "$ROOT/bags"
   for bag in "${SEED_BAGS[@]}"; do
@@ -161,15 +179,13 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # ── ④–⑥ need the node breathing. The operator's own hand starts it; this harness runs inside the
   #    operator's invocation, so it may — but it says what it is doing, every time.
   say "④–⑥ — these need the node breathing (throwaway socket at \$LAR_ROOT/data/vessel)"
-  # POLL TO A DEADLINE, never a fixed sleep. The first cycle boots cold — empty caches, a fresh genesis
-  # load — and the second rides everything the first warmed. A constant tuned on the warm case fails the
-  # cold one, which is exactly what the first rehearsal reported: cycle 1 red, cycle 2 green, same code.
-  step "lares serve (background, throwaway)"
-  ( lares serve >"$ROOT/serve.log" 2>&1 & echo $! >"$ROOT/serve.pid" )
+  # POLL TO A DEADLINE, never a fixed sleep. A cold first cycle boots empty caches and a fresh genesis; the
+  # second rides what the first warmed, so a constant tuned on the warm case fails the cold one.
+  step "the node from ② answers"
   SOCK="$ROOT/data/vessel/lares.sock"
   WAITED=0
   while [ ! -S "$SOCK" ] && [ "$WAITED" -lt 60 ]; do sleep 1; WAITED=$((WAITED + 1)); done
-  if [ -S "$SOCK" ]; then printf '\033[32mok\033[0m (%ss)\n' "$WAITED"; else bad "no socket after ${WAITED}s"; tail -12 "$ROOT/serve.log" 2>/dev/null | sed 's/^/      /'; fi
+  if [ -S "$SOCK" ]; then printf '\033[32mok\033[0m (%ss)\n' "$WAITED"; else bad "no socket after ${WAITED}s"; fi
 
   run "④ vault seal (NEW passphrase)"       sh -c "node '$LARES' vault seal --yes"
   run "④ vault status"                      lares vault status
@@ -177,8 +193,11 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   run "⑥ status — LIVE"                     lares node status
   run "bag list — declarations survive"     sh -c "node '$LARES' bag list | grep -q '@lares'"
 
-  step "stop the throwaway node"
-  if [ -f "$ROOT/serve.pid" ]; then kill "$(cat "$ROOT/serve.pid")" 2>/dev/null; sleep 2; ok; else bad "no pid"; fi
+  # The node runs DETACHED from `wake`, so no pid file names it. Free the port by whoever holds it — scoped
+  # to THIS throwaway's port, never a pattern that could reach the operator's real daemon.
+  step "stop the throwaway node (port $LAR_PORT)"
+  HOLDER=$(lsof -ti ":$LAR_PORT" 2>/dev/null | head -1)
+  if [ -n "$HOLDER" ]; then kill "$HOLDER" 2>/dev/null; sleep 2; ok; else printf '\033[32mok\033[0m (already down)\n'; fi
 done
 
 say "═══ RESULT ═══"
