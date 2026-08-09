@@ -13,7 +13,8 @@ namespace = "&#x2695;"
 register  = "Synthesis"
 retain    = true
 role      = "the browser vessel's SECURE-CONTEXT WALL and the path through it: crypto.subtle + OPFS demand https/localhost, so a family phone on http://192.168.x.x cannot mint a key → the vessel never boots (dragging the relay to wss://). The prior-art answer — a Let's Encrypt DNS-01 wildcard over a zone the serving entity holds a DNS-DELEGATION CAP over, + split-horizon DNS, ZERO per-device install. SPLIT device-key TOFU (who-syncs) from real-cert TLS (the padlock). Cert-renewal = the one island-able web2 bridge, on its own clock beside registrar tenure and serve. A NAME grants RENDEZVOUS (how to reach); a KEY grants IDENTITY (who) — the ORIGIN-ATTESTATION cap composes with nothing on the spine, so revoking a name withholds a signpost and never touches sovereignty. Researched (two-lens swarm converged 2026-07-23), NOT built. AND (2026-08-09, MEASURED in Chromium 151 + Firefox 153) what a key FORMAT buys: a non-extractable handle works and survives a restart, yet the raw seed still sits CLEARTEXT ON DISK — so the win reads NON-PORTABILITY, never non-compromise; and the origin-attestation cap is untouched by it, because that entity serves the CODE. Two key classes, two cures: a device key MAY go opaque (never resurrected), a persona root STRUCTURALLY CANNOT (hierarchical derivation needs parent bytes) and wants an at-rest seal instead. Storage evicts: seven days without interaction clears an origin on WebKit, and home-screen installation is the exemption."
-status    = "proposed"
+status    = "designed"
+status-why = "researched by two-lens swarm; the path NOT built"
 tags      = ["mesh/cap-tier", "mesh/carry-contract", "api/pono/lararium-identity", "api/pono/causal-islands", "api/pono/persona-circle"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/secure-context"
