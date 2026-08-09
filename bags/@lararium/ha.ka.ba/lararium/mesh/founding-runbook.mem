@@ -11,9 +11,9 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27; THIRD PASS 2026-08-06/07 re-points the seat join from the PRIVATE pet-name to the DECLARED HANDLE (three acts per founding command: --name labels privately, --handle declares outward, --seat stands for a chair), gathers the names onto the fleet via `persona sync`, RETIRES the built-in founding names (the roster forms from what stood; the threshold derives majority), re-homes the seal per-operator at <state>/nexus, and lands the @nexus LIFECYCLE (born by act · lives by ley-line traffic · quiet by absence — no admin capability anywhere; succession rides ROTATE under the standing pre-commitment) plus the bag-HOME axis (repository | hearth | ley, fail-closed to hearth). FOURTH PASS 2026-08-08: ① names what the clear MUST NOT touch (the acquired library and the repo registry survive every founding — the library rebuilds from NOTHING); a founder meets two new surfaces (#bags-and-shelf) — every bag declares itself (cap-tier ⊥ home, DISK-OWNED so no wiki edit can re-home a bag) and the acquired shelf holds books outside every tracked tree, referenced by collection name rather than path."
+role      = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27; THIRD PASS 2026-08-06/07 re-points the seat join from the PRIVATE pet-name to the DECLARED HANDLE (three acts per founding command: --name labels privately, --handle declares outward, --seat stands for a chair), gathers the names onto the fleet via `persona sync`, RETIRES the built-in founding names (the roster forms from what stood; the threshold derives majority), re-homes the seal per-operator at <state>/nexus, and lands the @nexus LIFECYCLE (born by act · lives by ley-line traffic · quiet by absence — no admin capability anywhere; succession rides ROTATE under the standing pre-commitment) plus the bag-HOME axis (repository | hearth | ley, fail-closed to hearth). FOURTH PASS 2026-08-08: ① names what the clear MUST NOT touch (the acquired library and the repo registry survive every founding — the library rebuilds from NOTHING); a founder meets two new surfaces (#bags-and-shelf) — every bag declares itself (cap-tier ⊥ home, DISK-OWNED so no wiki edit can re-home a bag) and the acquired shelf holds books outside every tracked tree, referenced by collection name rather than path. FIFTH PASS 2026-08-09: the ground CLEARS — deps brought current (build green, 1682 specs + 3318 tests, zero failures), the AI-instruction pointers outside the repo repointed off a dead path generation, ⓪′ preflight gains the playwright-binary leg and reports a WALK, ④ gains the two passphrase env vars with the shell-history hygiene that keeps a seal worth sealing, and ③′ gains the three questions that decide a guardian name plus the ruling that guardians MAY stand unassigned at founding. Carries one RULED rename: `hoʻāla` fails its lexicon check — Māmaka Kaiao already coined it for `to format, initialize, as a computer disk`, the inverse of the preserving waking-floor it named here, and it sat a few lines from the irreversible clear; the concept and its grounding stand, the pet-name falls, and the replacement waits on a talk-story rather than a unilateral swap."
 status    = "proposed"
-revised-on = "2026-08-08"
+revised-on = "2026-08-09"
 tags      = ["mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/charter-chain"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/founding-runbook"
@@ -246,6 +246,43 @@ same string into both flags proves nothing, because a label-matching join would 
 deciding a public chair, a build deciding a roster, a stale artifact deciding a lineage, a directory default
 deciding where a Nexus lives. ''A founding an operator merely confirms reads as somebody else's founding.''
 
+!!! FIFTH PASS — 2026-08-09, the ground clears and a coined name fails its check
+
+''The deps came current and the field said one thing worth keeping.'' Every runtime pin the operator approved
+already stood at latest; the only live bump ran `automerge-repo` alpha.2 → alpha.3 (a `uuid` and an `xstate`
+patch range, nothing else), plus the dev tooling. ''Build green, 1682 specs + 3318 tests, zero failures.''
+
+''ONE TEST FELL, AND IT NAMED AN OLDER MISTAKE THAN THE BUMP.'' A case asserting the `lar:` root's arity
+measured it by ''counting slash-segments''. Re-homing a meme one directory shallower dropped the count, so a
+passing assertion turned false without the law it guarded moving at all. It now reads the arity the law
+actually governs — three dot-terms — and no future re-homing can make it lie. ''A test that measures a proxy
+for its law reports on the proxy'', and the day the two part company it accuses the innocent change.
+
+''THE POINTERS OUTSIDE THE REPO CARRIED A DEAD GENERATION.'' A sweep of the machine's AI-instruction surfaces
+found every `lar:` URI in `~/.claude/skills` naming `@lares/v0.1/...` — a path family that stopped existing at
+the bags move and had ''dangled silently ever since''. Eighteen URIs, all repointed and each verified against
+a real `.mem` before writing. Six SKILL memes in the corpus carried the same rot in `skill-package-root`.
+''Transcripts and editor history stay untouched by law'' — rewriting a record to match the present falsifies it.
+
+<<~ confidence Synthesis-Canon 15/20 >> ''A dangling pointer in an instruction file fails silently and reads
+as fine'', because nothing resolves it until a reader tries — and a reader who cannot resolve it invents.
+
+!!!! ⚠ `hoʻāla` FAILS ITS LEXICON CHECK — the concept stands, the pet-name does not
+
+''The Hawaiian Lexicon Committee already coined `hoʻāla` for computing, and it means the opposite of ours.''
+//Māmaka Kaiao// assigns it ''to format, initialize, as a computer disk'' (`hoʻāla hou` = //to reformat//).
+Our sense named the ''waking floor'' — a vessel coming up at its minimum cap-stack, ''preserving everything''.
+
+''In this rite the collision turns dangerous rather than merely awkward'': a founder meets `hoʻāla` a few
+lines from the irreversible clear (#clear), and a ʻŌlelo Hawaiʻi reader would take the two for one family.
+''A name that inverts its own meaning beside a destructive command is a trap, not a label.''
+
+''RULED'': the pet-name goes. ''OPEN'': what replaces it — a coinage against a living lexicon's own technical
+decision belongs in a talk-story, never in a unilateral swap, and `hoʻomaka` stands unchecked for the same
+collision. ''The concept keeps its grounding'' (Direct Boot BFU/AFU · SPIRE · kubelet TLS bootstrap ·
+Tang/Clevis) and its meme; only the handle falls.
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoala-cap-floor >>
+
 <<~/ahu >>
 
 <<~ ahu #nexus-lifecycle >>
@@ -327,7 +364,18 @@ The error named an internal symbol, not a build, and an operator reading it mid-
 pnpm -r build                                       # the dist must match the source it imports from
 lares help                                          # the binary loads and answers — the ONLY gate this proves
 pnpm outdated -r                                    # bump BEFORE, never after (see below)
+pnpm exec playwright install chromium               # ONLY after a playwright bump — the binaries pin to it
 ```
+
+''A playwright bump strands its own browsers.'' The version pins a chromium build, so the browser suite dies
+at launch with //Executable doesn't exist// until the matching binary lands. Measured 2026-08-09; the first
+run after the install threw one cold-start flake and two re-runs came back clean, so ''a single browser red
+immediately after an install earns a re-run before it earns a diagnosis''.
+
+<<~ confidence Canon 17/20 >> ''Walked 2026-08-09.'' The whole tree came current, built green, and stood
+1682 specs + 3318 tests with zero failures — so this movement now reports a walk rather than a plan. The
+vendored `tiddlywiki` keeps its ''own'' eslint generation: its majors belong to that submodule, and bumping
+them from here moves the engine blob that rides inside every signed delegation preimage.
 
 ''BUMP THE DEPS BEFORE, NEVER AFTER — and the reason reads narrower than the fear.'' A runtime bump
 (automerge · noble · ws · vite) moves ''NO epoch binding'': the engine blob is vendored TW5 and the built
@@ -553,6 +601,33 @@ owned -> one share -> safe); ''loss'' (you lose vessel + card -> two guardians r
 re-seeds -> re-splits -> re-issues cards + a new commit afterward (Proactive Secret Sharing,
 [[siege-resilience|lar:///ha.ka.ba/lararium/mesh/siege-resilience]]).
 
+!!! Naming the two guardians ~ what the flags do, and the three questions that decide
+
+''`--guardian-a` and `--guardian-b` write LABELS on cards.'' They carry no key, address, or account, and
+nothing transmits anywhere: the command prints a share code plus a ''confirm phrase'' you read out-of-band,
+and you place the card by hand. The names ride the public reserve state so `seal show` can report who holds
+what — ''the label answers //who do I call at recovery//'', nothing more.
+
+''The scheme's real purchase runs in the direction operators forget.'' Full compromise of the vessel yields
+''one'' share, which is nothing. The inverse matters more: ''the two guardians recover WITHOUT you''. That
+converts a death, a hospitalization, or a lost vault from the end of the lineage into a survivable event.
+
+\procedure ~Ask(~Type:"" ~Params:"") ~Ask <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Ask Collusion "asks/would-these-two-combine-against-me ~ together they hold the Nexus; pick two whose interests differ FROM EACH OTHER" >>
+<<~Ask Correlation "asks/could-one-fire-flood-or-subpoena-reach-both ~ two cards in one house reads as a 1-of-1 wearing a costume" >>
+<<~Ask Reachability "asks/can-someone-who-is-NOT-me-find-them-on-the-worst-day ~ a guardian only you can reach recovers nothing" >>
+
+''THE NAMES MAY STAND UNASSIGNED AT FOUNDING'' — and a founder short of an answer should let them. The split
+runs 2-of-3 either way; the labels store as `unassigned` and the cards print regardless. ''Naming is a
+PLACEMENT act'' — handing physical cards to humans — and that act need not share an afternoon with the
+founding. Place them when you next stand in front of those two people.
+
+''The cost of a wrong name reads as a refresh, never a lineage'' — but the refresh carries a fork the command
+names for you: ''before'' the first rotate it re-mints genesis cleanly; ''after'' one, the current reserve
+keys must reveal at the pending rotate first, because a sealed head's pre-commitment freezes into its
+`epochCid`. So a founder who expects the names to change should refresh ''before'' rotating, not after.
+
 <<~/ahu >>
 
 <<~ ahu #threshold-attest-recovery >>
@@ -597,6 +672,37 @@ lares vault seal                                    # no-echo TTY, double-entry;
 lares vault export ~/founding-backup.sealed         # a passphrase-SEALED backup (--force overwrites)
 lares vault status                                  # confirm the seal state
 ```
+
+!!! The two env vars ~ and why a bare `export` betrays you
+
+''Two vars ride, and they answer different questions.'' `LARES_ARCHIVE_PASSPHRASE` carries the ''current''
+one (what opens the vault today); `LARES_ARCHIVE_PASSPHRASE_NEW` carries the ''target'' (what a `seal`,
+`rotate`, or `export` moves to). A first seal has no current, so only the second matters. Both exist to let a
+''non-interactive'' run proceed — the rehearsal harness reads `_NEW`, which is why a run that exported only
+the base var fails at the vault with the passphrase apparently set.
+
+```
+read -rs '?NEW passphrase: ' LARES_ARCHIVE_PASSPHRASE_NEW && echo
+export LARES_ARCHIVE_PASSPHRASE_NEW
+echo ${#LARES_ARCHIVE_PASSPHRASE_NEW}               # verify by LENGTH — never echo the secret
+```
+
+''`read -rs` rather than a bare `export`, and the difference is the whole seal.'' A typed
+`export LARES_ARCHIVE_PASSPHRASE_NEW='…'` writes the secret verbatim into the shell's history file, where it
+outlives the ceremony, survives a reboot, and rides into any backup of the home directory. ''A passphrase
+that reaches disk in the clear has already failed'' — the vault protects a stolen disk, and the history file
+sits on that same disk. The `-s` keeps it off the screen; the leading space or `read` form keeps it out of
+the history; the length check confirms arrival without disclosure.
+
+''IT LIVES FOR THAT SHELL ALONE.'' A new terminal starts without it, and that reads as the design rather
+than an inconvenience: the var exists so ''one ceremony'' can run unattended, never so a machine can seal
+itself forever. Putting it in `.zshrc` would leave the key beside the lock on every boot, which trades the
+whole at-rest seal for the cost of retyping — and the at-rest seal is the only thing standing between a
+stolen disk and a sovereign identity.
+
+<<~ confidence Canon 18/20 >> ''The TTY leg still goes un-exercised by the harness'' (#rehearse), so a
+keeper founding that seals interactively walks a path no rehearsal has proven. Seal by hand at least once
+before the day it matters.
 
 <<~/ahu >>
 
