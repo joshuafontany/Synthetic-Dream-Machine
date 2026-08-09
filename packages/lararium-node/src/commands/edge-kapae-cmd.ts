@@ -89,7 +89,7 @@ export async function runEdgeKapae(opts: EdgeKapaeOptions): Promise<EdgeKapaeRes
   const verify      = (bytes: Uint8Array, sigHex: string, did: string) =>
     ed.verifyAsync(hexToBytes(sigHex), bytes, hexToBytes(did)).catch(() => false);
   try {
-    const handle = await materializeSharedLarDoc(repo, boardUrl, "@edge-kapae");
+    const handle = await materializeSharedLarDoc(repo, boardUrl, "board:edge-kapae");
 
     // Climb from what STANDS, so an act supersedes rather than ties. A pinned version rides as given.
     const standing = edgeKapaeActsFromBoard(handle.doc()).filter((a) => a.edgeId === edgeId);

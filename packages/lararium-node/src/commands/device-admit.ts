@@ -121,7 +121,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
     throw new Error(`[lares device-admit] persona-KEL prefix missing from daemon doc — run \`lares init --force\`.`);
   }
   const founderNexusKey = await loadVesselVerifyingKey(storageDir);
-  const kelBoard   = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(founderNexusKey), "@persona-kel");
+  const kelBoard   = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(founderNexusKey), "board:persona-kel");
   const personaKelChain = personaKelChainForPrefix(kelBoard.doc(), personaKelPrefix);
   if (!personaKelChain || personaKelChain.length === 0) {
     throw new Error(`[lares device-admit] persona-KEL chain for ${personaKelPrefix.slice(0, 20)}… absent from the local board — run \`lares init --force\`.`);

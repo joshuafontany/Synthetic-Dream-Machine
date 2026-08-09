@@ -35,10 +35,10 @@ describe("materializeSharedLarDoc — first vessel mints under the id, later one
   test("the board lands under exactly the deterministic id, and a second call finds the same handle", { timeout: 10_000 }, async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const url  = whoBoardDocUrl(NX);
-    const first  = await materializeSharedLarDoc(repo, url, "who-board");
+    const first  = await materializeSharedLarDoc(repo, url, "board:who-face");
     expect(first.url).toBe(url);                    // materialized under the deterministic address, not a random one
 
-    const second = await materializeSharedLarDoc(repo, url, "who-board");
+    const second = await materializeSharedLarDoc(repo, url, "board:who-face");
     expect(second.url).toBe(first.url);             // find-first — the same doc, never a re-mint
   });
 });

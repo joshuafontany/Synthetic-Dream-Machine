@@ -146,7 +146,7 @@ export async function makeLocalPersonaKelHeadResolver(dir?: string): Promise<(pr
   const dataDir = dir ?? larDataDir();
   const nexusPubkey = await loadVesselVerifyingKey(dataDir);
   const repo = new Repo({ storage: new NodeFSStorageAdapter(dataDir) });
-  const board = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(nexusPubkey), "@persona-kel-board");
+  const board = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(nexusPubkey), "board:persona-kel");
   return async (prefix: string): Promise<string | null> => {
     const chain = personaKelChainForPrefix(board.doc(), prefix);
     if (!chain || chain.length === 0) return null;

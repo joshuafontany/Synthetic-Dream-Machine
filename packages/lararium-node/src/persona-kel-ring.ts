@@ -65,7 +65,7 @@ export function makePersonaKelRingHolder(opts: { repo: Repo; nexusPubkey: string
 
   const ready = (async (): Promise<void> => {
     try {
-      const handle = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(nexusPubkey), "@persona-kel");
+      const handle = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(nexusPubkey), "board:persona-kel");
       boardHandle = handle;
       onChange = () => refold();
       handle.on("change", onChange);

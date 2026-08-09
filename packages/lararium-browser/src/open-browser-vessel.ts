@@ -640,7 +640,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // it would put the substrate key on the social board, the one co-surface the two-key atom forbids.)
   const whoExtraCaps: CapModule[] = (relayUrl && relayGatePubKey && admittedToNexus) ? await (async () => {
     const nexusPubkey = relayGatePubKey;
-    const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "@crossroads");
+    const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "board:crossroads");
     return [whoFaceCap({ repo, crossroadsHandle, nexusPubkey, residency })];
   })() : [];
 
@@ -730,7 +730,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // seq-sorted key-event-log from this vessel's OWN per-Nexus KEL board (its gate key IS its Nexus key),
       // against the LOCAL replica "as of last sync" (no-global-now). FAIL-CLOSED: a chain the replica does not
       // carry HALTS the boot (never a global lookup, never a fall-through to the raw signer pin).
-      const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(vesselIdentity.verifyingKey), "@persona-kel");
+      const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(vesselIdentity.verifyingKey), "board:persona-kel");
       const personaKelChain = personaKelChainForPrefix(kelBoard.doc(), social.personaKelPrefix);
       if (!personaKelChain || personaKelChain.length === 0) {
         throw new Error(`[lararium-browser] persona-KEL chain for ${social.personaKelPrefix.slice(0, 20)}… absent from the local board — the Binding Gate cannot reach a head (fail-closed).`);

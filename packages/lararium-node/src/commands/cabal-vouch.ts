@@ -126,7 +126,7 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
   const verify      = (bytes: Uint8Array, sigHex: string, did: string) =>
     ed.verifyAsync(hexToBytes(sigHex), bytes, hexToBytes(did)).catch(() => false);
   try {
-    const handle = await materializeSharedLarDoc(repo, boardUrl, "@vouch-registry");
+    const handle = await materializeSharedLarDoc(repo, boardUrl, "board:vouch-registry");
 
     const before   = await verifiedVouchesFromBoard(handle.doc(), realm, verify);
     const reMinted = before.some((i) => i.voucherDid === voucherDid && i.joinerIdentityHex === joiner);

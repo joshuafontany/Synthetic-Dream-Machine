@@ -62,7 +62,7 @@ export async function registerCrossroadsInOracle(
   nexusPubkey: string,
 ): Promise<AutomergeUrl> {
   const url = crossroadsDocUrl(nexusPubkey);
-  await materializeSharedLarDoc(repo, url, "@crossroads");
+  await materializeSharedLarDoc(repo, url, "board:crossroads");
   if (tiddlerText(oracleHandle.doc()?.tiddlers?.[CROSSROADS_DOC_URI]) !== url) {
     oracleHandle.change((doc) => {
       doc.tiddlers[CROSSROADS_DOC_URI] = mutableLarRecord(CROSSROADS_DOC_URI, { text: url }, "vessel-boot");

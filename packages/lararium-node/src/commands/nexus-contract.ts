@@ -165,7 +165,7 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
   const boardUrl    = carriageDocUrl(nexusPubkey);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   try {
-    const handle = await materializeSharedLarDoc(repo, boardUrl, "@members-registry");
+    const handle = await materializeSharedLarDoc(repo, boardUrl, "board:members-registry");
 
     const priorVersion = maxVersionForNym(carriageEntriesFromBoard(handle.doc()), nym);
     const version      = (priorVersion ?? 0) + 1;
@@ -248,7 +248,7 @@ export async function runNexusMembersList(opts: { sealHome: string; storageDir?:
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   try {
-    const handle  = await materializeSharedLarDoc(repo, carriageDocUrl(nexusPubkey), "@members-registry");
+    const handle  = await materializeSharedLarDoc(repo, carriageDocUrl(nexusPubkey), "board:members-registry");
     const entries = carriageEntriesFromBoard(handle.doc());
     const folded  = await foldCarriageSet(entries, roster);
     return {

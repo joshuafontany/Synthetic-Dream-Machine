@@ -105,6 +105,17 @@ export function personaKelBoardDocUrl(nexusPubkey: string): AutomergeUrl {
  * Two vessels racing to be first both import the SAME fixed-actor blank bytes, so they converge byte-identical
  * and diverge only as each writes its own card (the benign blank-merge the @oracle path also accepts).
  */
+/**
+ * `label` names the board for a HUMAN — it rides into the boot-resolver's failure text and its
+ * still-joining record, and reaches no gate, no registry and no capability check.
+ *
+ * It therefore MUST NOT wear `@slug` clothing. In this house `@name` means a BAG: a thing that is seeded,
+ * mounted, registered, cap-checked and reachable by that exact string. A board is none of those — it stands
+ * at a deterministic doc url derived from a Nexus key, and its identity IS that url. A diagnostic dressed as
+ * a bag id invites a reader to treat it as one, and the two kinds then sit one character apart in a grep.
+ *
+ * So boards read `board:<what-it-carries>`, and the sigil stays honest: `@` names a bag, everywhere.
+ */
 export async function materializeSharedLarDoc(
   repo: Repo,
   url: AutomergeUrl,

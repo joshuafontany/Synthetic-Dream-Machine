@@ -143,7 +143,7 @@ export async function runNexusKapae(opts: NexusKapaeOptions): Promise<NexusKapae
   const boardUrl    = kapaeAntigenDocUrl(nexusPubkey);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   try {
-    const handle = await materializeSharedLarDoc(repo, boardUrl, "@kapae-antigen");
+    const handle = await materializeSharedLarDoc(repo, boardUrl, "board:kapae-antigen");
 
     // Monotone version: strictly above every prior entry for this nym, so a lift always supersedes a standing
     // ban and a re-ban always supersedes a lift (the fold keeps the highest-version verified entry per nym).
@@ -194,7 +194,7 @@ export async function runNexusKapaeList(opts: { sealHome: string; storageDir?: s
   const nexusPubkey = await loadVesselVerifyingKey(storageDir);
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   try {
-    const handle  = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(nexusPubkey), "@kapae-antigen");
+    const handle  = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(nexusPubkey), "board:kapae-antigen");
     const entries = antigenEntriesFromBoard(handle.doc());
     const folded  = await foldAntigenSet(entries, roster, makeMultiSigQuorumVerifier());
     return {

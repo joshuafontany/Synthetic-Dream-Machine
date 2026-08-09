@@ -112,7 +112,7 @@ export function makeAntigenRingHolder(opts: {
   // standing (deny-by-default for an antigen means NO bans — a cold ring denies nobody).
   void (async () => {
     try {
-      const handle = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(nexusPubkey), "@kapae-antigen");
+      const handle = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(nexusPubkey), "board:kapae-antigen");
       boardHandle = handle;
       onChange = () => { void refold(); };
       handle.on("change", onChange);

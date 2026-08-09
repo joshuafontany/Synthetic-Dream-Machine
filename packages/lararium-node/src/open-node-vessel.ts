@@ -1632,7 +1632,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // NO BOOT-TIME FACE: the cap takes no card and publishes nothing. Binding the vessel never announces the
   // identity; disclosure rides the component's deliberate `announce`, and the only key at boot would be this
   // vessel's substrate key — the one co-surface the two-key atom forbids on a social board.
-  const crossroadsHandle = await materializeSharedLarDoc(p.repo, crossroadsDocUrl(p.nexusPubkey), "@crossroads");
+  const crossroadsHandle = await materializeSharedLarDoc(p.repo, crossroadsDocUrl(p.nexusPubkey), "board:crossroads");
   const extraCaps = [
     ...carriageCaps,
     whoFaceCap({ repo: p.repo, crossroadsHandle, nexusPubkey: p.nexusPubkey, residency: p.residency }),
@@ -1673,7 +1673,7 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
   // makes it the vessel with the least to risk and the most to gain from the board — it already recognises
   // BANS (the antigen ring rides its carriage), so reading the WHO plane completes the pair: it recognises
   // the presenters those bans name. The cap cannot betray the asymmetry, because it holds no card to publish.
-  const hermCrossroads = await materializeSharedLarDoc(p.repo, crossroadsDocUrl(p.nexusPubkey), "@crossroads");
+  const hermCrossroads = await materializeSharedLarDoc(p.repo, crossroadsDocUrl(p.nexusPubkey), "board:crossroads");
   const herm = await composeHerm({
     extraCaps: [whoFaceCap({
       repo: p.repo, crossroadsHandle: hermCrossroads, nexusPubkey: p.nexusPubkey, residency: p.residency,

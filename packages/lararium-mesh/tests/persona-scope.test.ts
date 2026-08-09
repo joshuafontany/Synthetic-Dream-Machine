@@ -87,12 +87,11 @@ describe("★ the guards cover the FAMILY, not a list of names ★", () => {
 });
 
 describe("★ the family rule matches a SHAPE, not a prefix ★", () => {
-  test("★ `@persona-kel` is a Nexus-shared board, NOT anyone's private plane ★", () => {
-    // A prefix test would sweep the shared KEL board into the family. It sits one character from a real
-    // plane and means the opposite thing: a board every member reads, versus a compartment nobody else
-    // may. The derived tag has a fixed hex width, so the shape tells them apart without a list.
+  test("★ the stem plus arbitrary text names NO plane — only what the derivation can produce ★", () => {
+    // A prefix test accepts strings the derivation can never emit, which invites a caller to construct a
+    // plane name by hand. The tag has a fixed width, so the shape admits exactly the derived family.
+    expect(isPersonaPlaneSlug("@persona-anything")).toBe(false);
     expect(isPersonaPlaneSlug("@persona-kel")).toBe(false);
-    expect(isPersonaPlaneSlug("@persona-kel-board")).toBe(false);
     expect(isPersonaPlaneSlug(personaBagIdFor(WORK).split("/").pop()!)).toBe(true);
   });
 

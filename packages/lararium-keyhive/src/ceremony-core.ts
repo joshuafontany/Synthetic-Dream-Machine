@@ -291,7 +291,7 @@ export async function runFoundingCeremony(
   // Seat the inception onto the per-Nexus KEL board (deterministic id) so the very first boot walks the
   // identifier→head mapping from its OWN local replica — no advertisement, no mint-race (materialize converges
   // on byte-identical blank bytes). The board federates once (DeterministicFederationGate).
-  const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(input.nexusPubkey), "@persona-kel");
+  const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(input.nexusPubkey), "board:persona-kel");
   kelBoard.change((draft) => { for (const e of seatedEvents) writePersonaKelEvent(draft, e); });
 
   daemonHandle.change((doc) => {
@@ -523,7 +523,7 @@ export async function runApplyAdmitPayload(
   // sync of the founder's board (no-global-now: a local seed, never a global lookup). Absent snapshot → the
   // joinee relies on the federated board and boots only once it has synced the founder's inception (fail-closed).
   if (payload.personaKelChain && payload.personaKelChain.length > 0) {
-    const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(input.nexusPubkey), "@persona-kel");
+    const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(input.nexusPubkey), "board:persona-kel");
     kelBoard.change((draft) => {
       for (const event of payload.personaKelChain!) writePersonaKelEvent(draft, event);
     });

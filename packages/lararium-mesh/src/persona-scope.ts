@@ -103,13 +103,13 @@ export function personaBagIdFor(personaGroupDocIdHex: string): string {
 /**
  * Whether a bag SLUG names some PersonaGroup's plane — the family rule, in one place.
  *
- * It matches the derived SHAPE (`@persona-` + exactly the tag's hex width), never the bare prefix, and the
- * difference carries weight: `@persona-kel` names a Nexus-shared KEL board that no person's private plane
- * ever is. A prefix test would sweep it into the family and let a fence meant for hearths close over a
- * shared board — or, worse the other way, let an allowlist written against the family admit one.
+ * It matches the derived SHAPE — `@persona-` plus exactly the tag's hex width, lowercase — rather than the
+ * bare prefix, because the derivation HAS a width and a rule that ignores it accepts strings the derivation
+ * can never produce. A truncated tag, a doubled tag, an uppercased one: each names no plane, and a
+ * predicate that says otherwise invites a caller to construct one.
  *
- * Every guard that must cover a person's planes calls THIS. The rule spelled twice is the rule that drifts
- * once, and the guard carrying authority is the one that drifts silently.
+ * Every guard that must cover a person's planes calls THIS. One fact spelled twice drifts once, and the
+ * copy carrying authority drifts silently.
  */
 export function isPersonaPlaneSlug(slug: string): boolean {
   return new RegExp(`^@persona-[0-9a-f]{${PERSONA_SCOPE_TAG_HEX}}$`).test(slug);

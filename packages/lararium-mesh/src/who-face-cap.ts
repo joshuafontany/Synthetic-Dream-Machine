@@ -65,7 +65,7 @@ export function whoFaceCap(deps: {
         deps.crossroadsHandle, deps.nexusPubkey,
         (url) => (url
           ? deps.repo.find<LarDoc>(url as AutomergeUrl)
-          : materializeSharedLarDoc(deps.repo, whoBoardDocUrl(deps.nexusPubkey), "who-board")),
+          : materializeSharedLarDoc(deps.repo, whoBoardDocUrl(deps.nexusPubkey), "board:who-face")),
         "who-face-resolve",
       );
       const bagId = nexusHandlesUri(deps.nexusPubkey);

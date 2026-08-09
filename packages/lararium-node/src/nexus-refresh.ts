@@ -75,8 +75,8 @@ export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefr
   //    repo's cached handle would hand back its stale in-memory board). Read-only here; disposed on return.
   const repo = new Repo({ storage: new NodeFSStorageAdapter(deps.storageDir) });
   try {
-    const antigenBoard = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(deps.nexusPubkey), "@kapae-antigen");
-    const membersBoard = await materializeSharedLarDoc(repo, carriageDocUrl(deps.nexusPubkey), "@members-registry");
+    const antigenBoard = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(deps.nexusPubkey), "board:kapae-antigen");
+    const membersBoard = await materializeSharedLarDoc(repo, carriageDocUrl(deps.nexusPubkey), "board:members-registry");
     const antigenDoc = antigenBoard.doc();
     const membersDoc = membersBoard.doc();
     // Fold the fresh boards into the live holders. Each swaps its set whole; a fold fault throws BEFORE the

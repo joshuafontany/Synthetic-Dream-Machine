@@ -107,7 +107,7 @@ export function makeNexusMembership(opts: {
     if (boardHandle) return Promise.resolve(boardHandle);
     if (!repo || !nexusPubkey) return Promise.resolve(null);
     if (!boardResolve) {
-      boardResolve = materializeSharedLarDoc(repo, carriageDocUrl(nexusPubkey), "@members-registry")
+      boardResolve = materializeSharedLarDoc(repo, carriageDocUrl(nexusPubkey), "board:members-registry")
         .then((handle) => {
           boardHandle = handle;
           onChange = () => { void refold(); };
