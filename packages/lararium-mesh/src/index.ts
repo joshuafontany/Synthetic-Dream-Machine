@@ -94,6 +94,12 @@ export { presenterIsKapaed, carryContractShareDecision, classifyCrossOperatorAdm
 export type { CrossOperatorAdmission } from "./federation-gate.js";
 export { carrierShareDecision, capTierShareDecision } from "./federation-gate.js";
 export type { NexusMembership, PlaneSeal } from "./federation-gate.js";
+// The household's own certificate witness — nothing outside this stack warns before a cert expires.
+export type { CertExpiryBand, CertLifetime, CertExpiryReading } from "./cert-expiry-gauge.js";
+export {
+  readCertExpiry, wantsAttention, offlineServingDays,
+  RENEW_ELAPSED, WARN_ELAPSED, URGENT_ELAPSED,
+} from "./cert-expiry-gauge.js";
 // The bag's sharing-posture as SELF-DESCRIBING DATA — the 4-tier total order + the tighten-only keystone.
 export type { CapTier, TierFloorOracle, DeclaredTierSource, CapTierRing } from "./cap-tier.js";
 export {
