@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@automerge/automerge": "3.4.0",
-    "@automerge/automerge-repo": "2.6.0-alpha.2",
-    "@automerge/automerge-repo-storage-indexeddb": "2.6.0-alpha.2",
+    "@automerge/automerge-repo": "2.6.0-alpha.3",
+    "@automerge/automerge-repo-storage-indexeddb": "2.6.0-alpha.3",
     "@lararium/browser": "workspace:*",
     "@lararium/mesh": "workspace:*",
     "idiomorph": "^0.7.3"
@@ -20,7 +20,7 @@
   "devDependencies": {
     "@keyhive/keyhive": "0.1.0-alpha.6",
     "@lararium/keyhive": "workspace:*",
-    "vite": "^8.1.4",
+    "vite": "^8.2.1",
     "vite-plugin-arraybuffer": "^0.1.0",
     "vite-plugin-wasm": "^3.6.0"
   }

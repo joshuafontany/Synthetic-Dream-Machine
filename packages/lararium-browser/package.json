@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@automerge/automerge": "3.4.0",
-    "@automerge/automerge-repo": "2.6.0-alpha.2",
-    "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.2",
-    "@automerge/automerge-repo-storage-indexeddb": "2.6.0-alpha.2",
+    "@automerge/automerge-repo": "2.6.0-alpha.3",
+    "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.3",
+    "@automerge/automerge-repo-storage-indexeddb": "2.6.0-alpha.3",
     "@lararium/keyhive": "workspace:*",
     "@lararium/mesh": "workspace:*",
     "@lararium/tw5": "workspace:*"
@@ -35,7 +35,7 @@
   "devDependencies": {
     "@vitest/browser": "^4.1.10",
     "@vitest/browser-playwright": "^4.1.10",
-    "tsx": "^4.23.0",
+    "tsx": "^4.23.11",
     "vite-plugin-wasm": "^3.6.0",
     "vitest": "^4.1.10"
   }

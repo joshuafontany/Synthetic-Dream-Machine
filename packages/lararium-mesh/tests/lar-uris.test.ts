@@ -132,11 +132,14 @@ describe("bag / wiki identity — the two kinds the @catalog tracks", () => {
     expect(identitySlug("lar:///threshold.uncertain.opens")).toBeNull();
   });
 
-  test("a meme URI keeps its ha.ka.ba root arity — the split never touches it", () => {
-    // Four path segments; the split adds no fifth (bag identity rides its own URI).
+  test("a meme URI keeps its ha.ka.ba root arity — rehoming the path never touches it", () => {
+    // The LAW governs the ROOT: exactly three dot-separated terms. Path depth stays free, so a meme
+    // that moves between bags keeps its arity — an earlier shape counted slash-segments instead, and
+    // a rehoming turned that count into a false witness for a law it was never measuring.
     const meme = "lar:///ha.ka.ba/lares/api/noosphere-boot";
-    expect(identitySlug(meme)).toBeNull();               // not an identity
-    expect(meme.split("/").filter(Boolean).length).toBe(6); // scheme-empty + ha.ka.ba + 4 segs
+    expect(identitySlug(meme)).toBeNull();                        // not an identity
+    const [root] = meme.replace("lar:///", "").split("/");
+    expect(root.split(".")).toHaveLength(3);                      // ha · ka · ba — the arity under law
   });
 });
 

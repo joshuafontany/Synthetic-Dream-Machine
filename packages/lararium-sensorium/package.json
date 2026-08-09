@@ -19,7 +19,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "tsx": "^4.23.0",
+    "tsx": "^4.23.11",
     "vitest": "^4.1.10"
   },
   "dependencies": {

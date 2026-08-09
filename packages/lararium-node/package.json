@@ -23,10 +23,10 @@
   },
   "dependencies": {
     "@automerge/automerge": "3.4.0",
-    "@automerge/automerge-repo": "2.6.0-alpha.2",
-    "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.2",
-    "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.2",
-    "@automerge/automerge-repo-storage-nodefs": "2.6.0-alpha.2",
+    "@automerge/automerge-repo": "2.6.0-alpha.3",
+    "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.3",
+    "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.3",
+    "@automerge/automerge-repo-storage-nodefs": "2.6.0-alpha.3",
     "@lararium/keyhive": "workspace:*",
     "@lararium/mempalace": "workspace:*",
     "@lararium/mesh": "workspace:*",
@@ -43,7 +43,7 @@
     "@noble/ed25519": "^3.1.0",
     "@types/pngjs": "^6.0.5",
     "@types/qrcode": "^1.5.6",
-    "tsx": "^4.23.0",
+    "tsx": "^4.23.11",
     "vitest": "^4.1.10"
   }
 }
