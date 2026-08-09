@@ -10,7 +10,7 @@ manao     = 14
 manaoio   = 13
 register  = "Synthesis"
 retain    = true
-role      = "OPERATOR-APPROVED design intent for the attestation plane: how a Nexus co-signs a public Handle, and grants a scarce host-scoped nym, WITHOUT the attestor becoming a registrar. Six rulings — the severability+render law, fleet-span telemetry, attestor-separated-from-host (kahu HOST, contracted operators ATTEST), governance split from infra duty, an append-only log with a named obliged watcher, and the host-scoped nym held as a lease. Drawn from five research sweeps over NIP-05, AT Proto, WebPKI/CT, Sovrin, eIDAS, ENS/Namecoin/Handshake, and the fediverse."
+role      = "OPERATOR-APPROVED design intent for the attestation plane: how a Nexus co-signs a public Handle, and grants a scarce host-scoped nym, WITHOUT the attestor becoming a registrar. Six rulings — the severability+render law, fleet-span telemetry, attestor-separated-from-host (kahu HOST, contracted operators ATTEST), governance split from infra duty, an append-only log with a named obliged watcher, and the host-scoped nym held as a lease. Drawn from six research sweeps over NIP-05, AT Proto, WebPKI/CT, Sovrin, eIDAS, ENS/Namecoin/Handshake, the fediverse, and (2026-08-08) ICANN's root-KSK ceremony, Sigstore, Tor, Matrix, ACME/CAA/MPIC and the nonprofit asset-custody field. The sixth sweep restated ruling 3 as SUBSTRATES-not-hands (0-for-8: no live system separates the attesting hand from the resolving one; survivors made the resolver SUBSTITUTABLE instead), withdrew the ICANN registry/registrar precedent, split the money shore from the asset shore, added the CADENCE LAW (quorum on the rare act, automation on the leaf — no deployed quorum-gated issuance exists), and dissolved most of the collective-choice question into the CONTRACT form (bilateral leased contracts, never a list — a list IS a global now)."
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/attestation-plane"
 ```
@@ -91,13 +91,30 @@ fleets the infra layer keeps un-correlatable.
 !!! 3 · The attestor stands SEPARATE from the host
 
 ''RULED, and inverted from the obvious arrangement: the kahu HOST; the Nexus's CONTRACTED OPERATORS ATTEST.''
-The hand holding the infrastructure power does NOT hold the blessing power. Precedent: ICANN's 1999
-registry/registrar split broke the Network Solutions monopoly by forcing exactly this separation.
+The hand holding the infrastructure power does NOT hold the blessing power.
 
 Why it matters more than hygiene — ''whoever RESOLVES holds final say regardless of who attests.'' OpenNIC
 voted 13–2 to drop `.bit`, and a namespace with no attestor at all got adjudicated by the only party who
 could still say no. Adjudication relocates; it never vanishes. Keeping the resolving hand and the attesting
 hand apart is free today and impossible later.
+
+''THE ACHIEVABLE FORM — SUBSTRATES, NOT HANDS'' (sixth sweep, 2026-08-08). A sweep across ICANN, AT Proto,
+Matrix, Nostr, CT, ENS, Tor and OpenNIC found ''no live system'' that separated the attesting hand from the
+resolving hand — zero for eight. What every survivor built instead runs one layer down: they made the
+resolving hand ''SUBSTITUTABLE'', by seating identity in a key the resolver never mints. <<~ confidence
+Synthesis-Canon 15/20 >> So the ruling's INTENT stands and its MECHANISM restates: ''many resolvers, one
+portable key — no single resolver holds final say over IDENTITY, only over REACHABILITY.'' Separation of
+substrates buys what separation of hands promised and nobody delivered.
+
+''AND THE PRECEDENT WITHDRAWN.'' ICANN's 1999 registry/registrar split separated ''roles in a market''; it
+never split ''custody of a name'' — a registrant stays one legal person under one contract. It reads as no
+prior art for quorum custody of a registration, and this meme no longer carries it as one.
+
+''THE FIELD'S OWN NEGATIVE CASE, named:'' Matrix bakes the server domain into the user ID (`@user:example.com`),
+so `.well-known` delegation relocates the HOST and never the NAME, and the domain owner holds every identity
+on it. Bluesky and Nostr took the other road for the price of one spec page each — the graph stores KEYS,
+never handles. ''Any arrangement where a contracted operator's users carry a host-scoped address as IDENTITY
+rather than as ADDRESS repeats Matrix exactly'', which is why ruling 1's severability law rides normative.
 
 ''The guild vouch law holds here too'' — an attesting operator stakes its own standing, and the lineage
 prices concentration among attestors exactly as it prices it among vouchers (`admission-on-a-lineage`).
@@ -122,8 +139,22 @@ governance half went unperformed first, and authority pooled in whoever kept sho
 
 A kahu-cabal carrying both roles inherits that failure. ''SPLIT THEM OR FUND THEM.''
 
-<<~ confidence Synthesis 11/20 >> ''OPEN (operator):'' plans point at the Open Collective platform as the
-funding-and-accountability shore.
+''THE MONEY SHORE AND THE ASSET SHORE PART COMPANY'' (sixth sweep, 2026-08-08). Open Collective stands as the
+funding-and-accountability shore and MUST NOT become the ''asset'' shore. A fiscal host holds funds ''in its
+own bank account'': Open Collective Foundation dissolved in 2024, 600+ collectives lost their host, and only
+MONEY could transfer — and only to another 501(c)(3). ''A domain held there becomes the asset of an entity
+the kahu do not govern, exposed to that entity's own dissolution.''
+
+<<~ confidence Synthesis-Canon 14/20 >> What the field shows working for this asset class instead: SPI holds
+Debian's trademarks and domains under a member-elected board with documented domain procedures; Software
+Freedom Conservancy holds ''domain names'' for member projects à-la-carte, so a project may assign some assets
+and retain others. ''Budget the move honestly'' — Mastodon's asset transfer to a nonprofit ran roughly ten
+months with a willing founder and zero dispute.
+
+''AND THE SHELL'S OWN FAILURE MODES, kept lit:'' the sponsor that CREATED a project later petitioned to cancel
+its trademark (SFLC v. SFC); the `.ORG` registry nearly converted to private-equity ownership and what stopped
+it was ICANN — ''the resolving hand, never the nonprofit form''; and a personally-held registration exposes an
+insolvency administrator who may pull the domain back into the estate even after transfer.
 
 !!! 5 · An append-only attestation log, with a NAMED OBLIGED WATCHER
 
@@ -149,6 +180,24 @@ chain. The instrument therefore stands mostly BUILT — `charterChain`, `charter
 persona-KEL `seq`, HandleCard `version`/`prev` already carry it.
 
 ''OPEN:'' an attestation issued BETWEEN epochs wants a rule — the chain orders epochs, not the acts inside one.
+
+''THE CADENCE LAW — quorum on the rare act, automation on the frequent one'' (sixth sweep, 2026-08-08). The
+sweep found ''no deployed threshold- or quorum-gated certificate issuance anywhere'' — not in specs, not in
+CA/Browser Forum ballots, not in products. (Threshold ECDSA for DNSSEC keys and multi-signer DNSSEC both
+exist; neither gates ISSUANCE.) The reason reads structural rather than accidental: a sixty-day renewal
+cadence cannot wait on humans.
+
+<<~ confidence Synthesis-Canon 15/20 >> So every survivor ''separates cadences'' — a quorum gates the rare,
+slow, high-power act (mint a key, rotate it, admit a member), and automation carries the frequent, fast,
+low-power one (issue a leaf). ''A quorum placed in the renewal path gets bypassed inside one outage, and the
+bypass becomes permanent.'' The composable approximation that does deploy: pin issuance with CAA `accounturi`
++ `validationmethods` (RFC 8657, mandatory across the CA/B from March 2027); delegate only the
+`_acme-challenge` label per operator so proof-of-control splits from zone custody and no operator holds apex
+write; and note the shape the industry itself chose when one vantage point could lie — ''a quorum of
+OBSERVERS, never a quorum of AUTHORIZERS.''
+
+Name-constraining a subordinate CA bounds the DELEGATE and never the DELEGATOR: no X.509 mechanism removes a
+parent's own power to issue.
 
 !!! 6 · The host-scoped nym rides as a LEASE
 
@@ -187,11 +236,28 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
 * ''What is the unit of COLLECTIVE CHOICE?'' Ostrom P3 reads violated — a 2-of-3 signing quorum makes
   operators rule-takers. Keyed to vessels, a human with five vessels casts five votes. Keyed to the Handle,
   only public faces vote. Keyed to the fleet, membership must prove WITHOUT linking the dyads.
+
+  ''MOSTLY DISSOLVED — the contract form removes the electorate'' (operator, 2026-08-08). The quorum signs a
+  ''CONTRACT to one operator'' — bilateral, leased, attenuating, held and presented by its holder — never a
+  list of who counts. Verification runs peer-local against the Nexus key, so no node needs the set and no
+  writer decides what //current// means. ''A list IS a global now'', and the field's own case makes the cost
+  concrete: the one identity layer that stayed single-writer for years against stated intent was the one
+  built as a DIRECTORY. Revocation without a list rides ''non-renewal of the lease'' plus the append-only
+  witness of #5, which stays monotone — a revocation not yet seen means an island not yet synced, which reads
+  honest, where a stale list silently reads as the wrong answer.
+
+  What survives the dissolution: ''who the kahu keyholders are'' (a bounded threshold key, never a roll of the
+  governed) — and the standing refusal of ''token or stake weight'', since a namespace root moved onto
+  token-weighted governance takes capture-by-capital with it. Weighting by user count would hand every
+  operator a Sybil printing press; an operator manufactures users, and cannot manufacture another operator
+  willing to bear cost.
 * ''The rival good — RULED (operator, 2026-07-26).'' A fork that walks away with vessels ''pays in socially
-  managed resources.'' Everything the mesh reaches OUTWARD to — the first two public DNS namespaces
-  `*.elyncia.net` and `*.amorphousdreams.net` among them — rides an Open Collective, held socially rather than
-  cryptographically. A fork leaving those behind ''accepts that cost'' and re-founds equivalent capability
-  ''as a new place.''
+  managed resources.'' Everything the mesh reaches OUTWARD to — the first two public namespaces, the first
+  Nexus at `amorphousdreams.net` and the second at `elyncia.app`, among them — rides socially-held custody
+  rather than cryptographic custody. A fork leaving those behind ''accepts that cost'' and re-founds
+  equivalent capability ''as a new place.'' (The two names sit under different registry operators, so they
+  carry two policy exposures and two seizure procedures; that asymmetry wants its own pass before either name
+  carries load.)
 
   ''THE ISOMORPHISM CARRIES IT.'' A fork that leaves the leased resources falls back to a ''local rhizome''
   exactly as a vessel-veil identity falls back to the ''anon floor'' — same law, two planes. Nothing is seized
@@ -219,6 +285,7 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-siege-gate >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-price >>

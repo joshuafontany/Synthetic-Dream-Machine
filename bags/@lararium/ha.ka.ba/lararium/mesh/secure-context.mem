@@ -97,6 +97,7 @@ Read from caps rather than from tiers, the landlord and bootstrap worries dissol
 * ''ORIGIN-ATTESTATION CUSTODY.'' The wildcard's private key stands up ANY name under its zone, so whoever holds it presents trusted glass for the whole zone. <<~ confidence Synthesis 12/20 >> This rhymes exactly with a ruling already made at the person layer — ''the recovery quorum IS the impersonation quorum, so no safe custodial escrow'' (#identity-classes). OPEN: whether the origin-attestation cap wants the same quorum treatment, or whether forging a door while forging no peer stays tolerable.
 * ''PERMANENT PUBLICATION.'' <<~ confidence Synthesis-Canon 15/20 >> Certificate Transparency logs every issued cert to public, append-only logs. A ''wildcard publishes only the wildcard'' — which makes wildcard-only a ''privacy requirement, not a convenience''; any per-name cert publishes that name to the world forever. Sits beside the Herm's anon-veil path (#the-veil-ladder), and bounds what a rendezvous hint may safely carry.
 * ''REVOCATION ASYMMETRY.'' Keys revoke by quorum, locally, immediately. Browser cert revocation runs soft-fail, so short validity carries the real mitigation. An entity whose peer-identity gets expelled keeps a working trusted origin until its cert expires — two planes, two speeds.
+* ''THE REACH PLANE RAISES THE FIRST TWO.'' <<~ confidence Synthesis 12/20 >> Once a vessel holds foreign app credentials so a human posts outward from their wiki (#reach-plane), ''the browser origin stops guarding one identity and starts guarding many instruments''. Nothing about origin-attestation custody changes; its weight roughly multiplies, and it takes the fallback question up with it — a fallback that silently degrades reads tolerable when the loss is reachability and reads very differently when the vessel is a credential store. The credential vault therefore wants the OS-keychain KEK leg beneath it before it holds anything.
 * ''THE FALLBACK'S TAX LANDS AT THE WORST MOMENT.'' The name-constrained local CA issues offline forever, at the per-device install cost this path exists to avoid — so the sovereign fallback demands precisely the ceremony ruled HOSTILE to a non-technical family (#why-dns-01), in the crisis where it gets reached for. OPEN: whether a household rehearses that install BEFORE it needs it, or the fallback stays honestly unavailable.
 
 <<~/ahu >>
@@ -141,6 +142,7 @@ This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
