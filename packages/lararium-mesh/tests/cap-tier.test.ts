@@ -127,6 +127,48 @@ describe("structuralFloorFor — where the floor comes from on a real bag", () =
     expect(structuralFloorFor(oracle, "cleartext")).toBe("veil");
     expect(structuralFloorFor(null, "pub")).toBe("veil");
   });
+
+  test("an oracle omitting the secrets reading behaves exactly as before", () => {
+    expect(structuralFloorFor(oracle, "pub")).toBe("public");   // no isContractSecretsPlane on this oracle
+  });
+});
+
+describe("contract-secrets plane — a secrets store can never floor at PUBLIC", () => {
+  // A secrets plane the ambient wiring ALSO reports as public — the exact collision the ordering exists for.
+  // Registration alone would leave the credential publishable; the reading order is what forbids it.
+  const collided = {
+    isPublicPlane:          (d: string) => d === "creds" || d === "pub",
+    isSealedPlane:          (d: string) => d === "sealed",
+    isContractSecretsPlane: (d: string) => d === "creds",
+  };
+
+  test("the secrets reading runs FIRST, so a public reading cannot raise the floor", () => {
+    expect(structuralFloorFor(collided, "creds")).toBe("contract");
+    // Reorder the check below isPublicPlane and this line reads "public" — the whole guarantee is the order.
+  });
+
+  test("nothing else moves: the other planes read exactly as they did", () => {
+    expect(structuralFloorFor(collided, "pub")).toBe("public");
+    expect(structuralFloorFor(collided, "sealed")).toBe("contract");
+    expect(structuralFloorFor(collided, "cleartext")).toBe("veil");
+  });
+
+  test("a secrets plane meets a PUBLIC declaration back down to CONTRACT", () => {
+    // The keystone applied: declare the most-open tier there is, and the floor takes it back.
+    const ring: CapTierRing = {
+      floor:    collided,
+      declared: { declaredTierForDoc: () => "public" },
+    };
+    expect(resolveTierForDoc(ring, "creds")).toBe("contract");
+  });
+
+  test("a secrets plane still TIGHTENS freely — declarations move the allowed direction", () => {
+    const ring: CapTierRing = {
+      floor:    collided,
+      declared: { declaredTierForDoc: () => "veil" },
+    };
+    expect(resolveTierForDoc(ring, "creds")).toBe("veil");
+  });
 });
 
 describe("resolveTierForDoc — null declaration degenerates to the floor (inert)", () => {

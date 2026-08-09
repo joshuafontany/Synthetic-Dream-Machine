@@ -152,15 +152,39 @@ export interface TierFloorOracle {
   isPublicPlane(documentId: string): boolean;
   /** True → the doc's bytes are provably ciphertext a carrier cannot read (the sealed member-carry lane). */
   isSealedPlane(documentId: string): boolean;
+  /**
+   * True → the doc holds SECRETS whose whole value rests on staying unpublished, so no reading of any other
+   * oracle may raise it past CONTRACT. A reach credential (a foreign app secret the vessel holds so a human
+   * posts outward from their wiki) is the first such store; the name stays general because the property does
+   * — any store whose bytes stop meaning anything the moment they go world-readable belongs here.
+   *
+   * OPTIONAL for compatibility: an oracle that omits it behaves exactly as before.
+   */
+  isContractSecretsPlane?(documentId: string): boolean;
 }
 
 /**
- * structuralFloorFor — fold the floor oracles into the tier ceiling for one doc. PUBLIC wins over SEALED
- * (a plane both federatable-public AND sealed reads PUBLIC — its ciphertext still names a world-readable
- * shelf entry); a sealed-but-not-public plane reads CONTRACT; neither reads VEIL. A null oracle → VEIL.
+ * structuralFloorFor — fold the floor oracles into the tier ceiling for one doc.
+ *
+ * ── ORDER CARRIES THE WHOLE GUARANTEE ────────────────────────────────────────────────────────────
+ * The contract-secrets reading runs FIRST, ahead of PUBLIC. Placed anywhere later it never fires, because
+ * a public reading would already have returned. That ordering is what makes a secrets plane structurally
+ * unpublishable rather than merely unregistered: the keystone meets every declaration against this floor,
+ * so a secrets bag declaring PUBLIC meets straight back down to CONTRACT. Publishing a credential becomes
+ * IMPOSSIBLE, not forbidden — and a guard that holds only because nobody registered the plane as public
+ * would be protection by omission, which reads identically to no protection at all.
+ *
+ * CONTRACT rather than PERSONAGROUP, deliberately: a credential several people legitimately share (one
+ * character voiced by a cabal) needs the cabal inside the read-cap set. A personal secret then DECLARES
+ * PERSONAGROUP or VEIL to tighten — the direction a declaration is always allowed to move.
+ *
+ * The remaining order stands as before: PUBLIC wins over SEALED (a plane both federatable-public AND sealed
+ * reads PUBLIC — its ciphertext still names a world-readable shelf entry); a sealed-but-not-public plane
+ * reads CONTRACT; none of them reads VEIL. A null oracle → VEIL.
  */
 export function structuralFloorFor(oracle: TierFloorOracle | null, documentId: string): CapTier {
   if (!oracle) return "veil";
+  if (oracle.isContractSecretsPlane?.(documentId)) return "contract";
   if (oracle.isPublicPlane(documentId)) return "public";
   if (oracle.isSealedPlane(documentId)) return "contract";
   return "veil";

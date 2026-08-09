@@ -172,7 +172,11 @@ The vessel already holds two at-rest secret carriers under a two-file ratify dis
 
 ''THE TRUNCATION FALLS OUT OF A FLOOR, NEVER A CEILING'' — which reads as the tell that the framing lands right. The keystone already computes `meet(declared, floor)`, so a credential bag floored at CONTRACT meets any PUBLIC declaration back down on its own. Publishing a credential becomes ''mechanically impossible'' rather than merely forbidden, and no new enforcement carries it.
 
-''The one piece of real engineering this leaves:'' which oracle floors a credential bag at CONTRACT. The live floor reads from the federatable-set and sealed-plane oracles; a credential wants a third reading beside them. Small, answerable, and the keystone of the whole plane.
+''BUILT'' — `isContractSecretsPlane(documentId)` joins the floor oracle as a third reading, and it runs ''FIRST, ahead of the public reading''. The order carries the entire guarantee: placed anywhere later it never fires, because a public reading would already have returned. Named for the ''property'' rather than for credentials, since it fits any store whose bytes stop meaning anything the moment they go world-readable — other stores may join it.
+
+<<~ confidence Synthesis-Canon 15/20 >> ''Registration alone would not have held.'' Absent the ordered reading, the truncation would rest on nobody having registered a credential bag as a public plane — protection by omission, which reads identically to no protection at all. Mutation-verified: move the reading below `isPublicPlane` and two tests fall, the collided-plane case among them.
+
+''CONTRACT rather than PERSONAGROUP, deliberately'' — a credential a cabal legitimately shares needs the cabal inside the read-cap set; a personal secret then DECLARES tighter, the direction a declaration may always move.
 
 <<~/ahu >>
 
@@ -216,7 +220,13 @@ Three consequences follow directly:
 
 ''THE SHARED-CHARACTER CASE IS THE LIVE CONTRACT TIER.'' A character several people voice is exactly the credential held at CONTRACT — the same keyring-delivery to a set, with the blast radius the tier names. Not a hypothetical: it arrives with the first shared cast.
 
-<<~ confidence Provisional-Synthesis 8/20 >> ''AND THE TENSION STAYS OPEN.'' A credential bound to a persona must reach the fleet ''without'' the binding revealing which personas a vessel holds — the multitude-view never fleet-syncs, and a per-persona credential index would reconstruct it. That wants its own pass rather than a guess made in passing.
+!!! Many-to-many ~ the pet-names ALIGN, they never bind
+
+''RULED (operator, 2026-08-08), and it dissolves the tension rather than answering it.'' A lararium identity and a reach credential stand in a ''many-to-many'' relation — shared multitudes on both sides. A lararium identity MAY carry a pet-name mirroring an outside-service identity, and that reads as ''an alignment of pet-names'', never as ownership. ''Other lararium identities hold the same caps.''
+
+<<~ confidence Synthesis-Canon 14/20 >> The privacy tension evaporates because the object it needed dissolves: ''no per-persona credential index exists to leak.'' A credential is a cap the fleet holds; nothing maps a face to it, so nothing reconstructs the multitude from a sync. The multitude-view stays sovereign because the reach plane never had to know it.
+
+''AND THE STRUCTURAL GUARANTEE GOES WITH IT, deliberately.'' A design where one face reaches exactly one credential could make a wrong-persona post impossible; many-to-many makes it ''possible by construction'', because several people voicing one character IS the requirement rather than a leak in it. What carries the care instead reads as the render law already standing one meme over: ''EDGE, NEVER BADGE'' (#attestation-plane, ruling 1) — an emission shows which credential and which aligned pet-name it rides, so a mismatch stands ''visible'' where it can no longer stand ''prevented''. A name that appears to come from nowhere has already lost the property.
 
 <<~/ahu >>
 
@@ -224,7 +234,9 @@ Three consequences follow directly:
 
 !! Credential onboarding ~ named, unbuilt
 
-''OPEN — wants design work.'' Three routes in, with genuinely different properties:
+''RULED: onboarding runs in the NODE VESSEL context'' (operator, 2026-08-08) — the same place that holds the //use these reach-creds// capability (#compose-and-request). A credential therefore never transits the browser at all, which closes the enrollment gap the compose-and-request split would otherwise leave open. Where a browser leg proves unavoidable (an OAuth redirect must land somewhere), it rides the most security-pono integration available and hands off rather than holding.
+
+''The ROUTE still wants design work.'' Three ways in, with genuinely different properties:
 
 * ''Typing a password into a wiki'' — the worst of them. It puts a full account secret through the composition surface and teaches an operator a habit worth un-teaching.
 * ''Pasting an attenuated token'' (an app-password, a scoped grant) — works today, needs nothing new, and rides the preference the honeypot section already names. ''The pragmatic first path.''
@@ -238,9 +250,10 @@ Three consequences follow directly:
 
 !! What stays open
 
-* ''OAUTH REFRESH MAKES THE VAULT NON-PASSIVE — research and testing owed.'' A sealed store opens when asked; an expiring credential must ''reach out'' to renew itself, so the vault acquires a clock and an outbound network leg, and the refresh token itself rotates. Open beneath it: who performs the refresh (a daemon waking to refresh holds decrypted credentials in a window the archive design works hard to narrow), under which key, and whether a refresh may run with no operator present. <<~ confidence Synthesis 11/20 >> ''One consequence already reads clearly:'' prefer surfaces offering non-expiring attenuated credentials, which turns the honeypot section's preference into something closer to a rule.
-* ''The persona-binding privacy tension'' (#persona-binding) — fleet-reach without reconstructing the multitude.
-* ''The CONTRACT floor oracle'' (#the-vault-reads-as-a-bag) — the small piece the whole truncation rests on.
+* ''OAUTH REFRESH MAKES THE VAULT NON-PASSIVE — research and testing owed.'' A sealed store opens when asked; an expiring credential must ''reach out'' to renew itself, so the vault acquires a clock and an outbound network leg, and the refresh token itself rotates. Open beneath it: who performs the refresh (a daemon waking to refresh holds decrypted credentials in a window the archive design works hard to narrow), under which key, and whether a refresh may run with no operator present. <<~ confidence Synthesis 11/20 >> ''One consequence already reads clearly:'' prefer surfaces offering non-expiring attenuated credentials, which turns the honeypot section's preference into something closer to a rule — and measuring which surfaces offer them may shrink the whole apparatus to nothing, so the first act reads as a ''survey'' rather than a design.
+
+  ''KAIROS NAMES THE ENTITY THAT WOULD DO IT'' (operator pet-name, 2026-08-08). The refresh does NOT want a timer daemon — it wants an ''entity holding a narrow autonomous capability'', acting at the opportune moment rather than on a clock. Kairos against chronos: the right time, never the next tick. That framing lands the design where the ontology already stands — a nameless entity with a `#has` stack, holding exactly the caps its one act needs and nothing beside them — instead of widening a daemon that already holds too much. ''What Kairos may hold, and what it must be unable to reach, reads as the design.''
+* ''The CONTRACT floor oracle'' — ''BUILT'' as `isContractSecretsPlane`, checked ahead of the public reading (#the-vault-reads-as-a-bag).
 * ''Kowloon actor-key custody'' — their schema mints a user's keypair server-side, which does not compose as written with the downstream law (#downstream-law). Two ways through: patch the server to accept an externally-held actor key, or accept the server-held key as a reach instrument and name the custody out loud. ''Deferred until a Kowloon server actually stands.''
 
 <<~/ahu >>

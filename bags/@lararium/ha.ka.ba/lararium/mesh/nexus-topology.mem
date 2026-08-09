@@ -70,6 +70,22 @@ The two-axis meme (#dreamnet-architecture) names how a mesh ''relates''; this on
 
 ''THE OPERATOR'S LIFT, bounded.'' A contracted operator stands ''one resolver'' and routes their own LAN. They MUST NOT hold apex write on a Nexus zone. What they hold instead: a delegated `_acme-challenge` label for their own subtree, which splits ''proof of control'' from ''zone custody'' — the operator proves control of what they serve, and the Nexus never handles their key material (#attestation-plane, the cadence law).
 
+!!! Records held in trust ~ the kahu custody ruling
+
+''RULED (operator, 2026-08-08).'' The civic kahu cabal holds a contracted operator's DNS records ''in trust''. An operator who would rather not seat that trust ''stands their own Nexus'' — which reads as the honest alternative rather than a threat, since the whole stack exists to make standing one possible.
+
+''AND WILDCARDS STAY MINIMIZED.'' A wildcard's private key stands up ''any'' name under its zone, so every wildcard handed out multiplies the origin-attestation cap (#the-caps-added). The cabal holds the zone's wildcard and hands out as few as it can.
+
+<<~ confidence Synthesis 12/20 >> ''THE TENSION THIS CREATES, and the shape that resolves it.'' Certificate Transparency publishes every issued certificate to public append-only logs forever, so a ''per-name'' cert publishes that name to the world permanently while ''a wildcard publishes only the wildcard''. Wildcard-only therefore reads as a privacy requirement rather than a convenience — and minimizing wildcards, read naively, would trade household privacy for containment.
+
+''The resolution reads as SCOPE, never COUNT.'' Minimize the ''breadth'' each wildcard covers, never the number of narrow ones: a household or an operator gets a wildcard bounded to ''their own subtree'' rather than a per-name cert or a share of the zone's. Containment and privacy then compose — a leaked narrow wildcard forges only its own subtree, and no household name ever reaches a public log.
+
+<<~/ahu >>
+
+<<~ ahu #the-rebinding-test >>
+
+!! The zero-lift shortcut ~ unmeasured, so unplanned-on
+
 <<~ confidence Synthesis 12/20 >> ''The zero-lift option wants an empirical test before anyone plans on it.'' Public DNS answering with a private address trips DNS-rebinding protection on many home routers, so "just point the public name at 192.168.x.x" may simply fail on the very hardware a family owns. Until measured, treat the split-horizon resolver as the path and the public-answer shortcut as a hope.
 
 <<~/ahu >>
