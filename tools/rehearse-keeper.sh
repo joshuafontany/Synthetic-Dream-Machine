@@ -32,9 +32,11 @@
 # `--install` and never `--init` — the wiring leg stays un-walked, a machine-setup concern rather than a
 # founding one.
 #
-# The vault seals from the env pair, so the no-echo TTY prompt stays un-walked too — a harness cannot type
-# at a prompt, and a keeper founding meets that leg for the first time on the day it matters. The Erisian
-# STAMP does run (every seal records one), into a tree that burns minutes later.
+# The vault seals from _NEW rather than a typed secret, so the no-echo TTY prompt stays un-walked — a
+# harness cannot type at a prompt, and a keeper founding meets that leg for the first time on the day it
+# matters. Everything AROUND the prompt does get walked: the archive founds unsealed, ④ performs a real
+# seal, and the base var arrives only afterward, so ⑤ meets the same boot gate an operator will. The
+# Erisian STAMP runs too (every seal records one), into a tree that burns minutes later.
 #
 # ── THE GUARD ────────────────────────────────────────────────────────────────────────────────────
 # A rehearsal harness that can eat the hearth is not a rehearsal harness. This REFUSES any root that sits
@@ -87,13 +89,19 @@ else
 fi
 
 export LAR_ROOT="$ROOT"
-# A throwaway seals its vault with a throwaway secret. The rite's own ④ uses a no-echo TTY prompt; a
-# harness cannot, so it supplies one and NAMES that the prompt leg goes un-exercised here.
-# BOTH vars, and the pair is the point: `vault seal` mints a NEW passphrase and reads
-# LARES_ARCHIVE_PASSPHRASE_NEW, while every later open reads LARES_ARCHIVE_PASSPHRASE. Exporting only the
-# second leaves `vault seal` with no target passphrase, and the CLI says so plainly — once per cycle.
-export LARES_ARCHIVE_PASSPHRASE="rehearsal-only-$(basename "$ROOT")"
-export LARES_ARCHIVE_PASSPHRASE_NEW="$LARES_ARCHIVE_PASSPHRASE"
+# THE TWO VARS ANSWER DIFFERENT QUESTIONS, AND THE ORDER BETWEEN THEM IS THE RITE'S.
+#   _NEW  — "the passphrase to move TO". Read by ONE place: the vault verbs that write one
+#           (seal · rotate · export · repair). A CLI-only input.
+#   base  — "the passphrase that OPENS this vault". Read by the whole system: it decides whether the
+#           archive seals AT ALL (resolveSealPolicy), and a sealed vessel refuses to boot without it
+#           (assertSealReady). It is the vessel's operating condition, never a command's argument.
+#
+# So only _NEW rides from the start. Exporting the base HERE would seal the archive during founding,
+# leaving ④ with nothing to do — a movement reporting green over a no-op — and would carry ⑤ past the
+# boot gate the keeper founding actually meets. The base gets exported AFTER ④ seals, exactly where the
+# rite tells an operator to export it.
+PASS_DRILL="rehearsal-only-$(basename "$ROOT")"
+export LARES_ARCHIVE_PASSPHRASE_NEW="$PASS_DRILL"
 # Surface where a node warning is BORN rather than only that it fired. A negative-timeout warning with no
 # origin costs far more to chase than to capture, and the capture is one env var.
 export NODE_OPTIONS="${NODE_OPTIONS:-} --trace-warnings"
@@ -153,6 +161,12 @@ run "the binary loads and answers"                    node "$LARES" help
 while [ "$CYCLE" -lt "$CYCLES" ]; do
   CYCLE=$((CYCLE + 1))
   say "═══ CYCLE $CYCLE of $CYCLES ═══"
+
+  # EACH CYCLE FOUNDS FROM VOID, INCLUDING THE VAULT'S CONDITION. The base var arrives at ④ and would
+  # otherwise ride into the next cycle, sealing that founding at ② and turning its ④ back into the no-op
+  # this ordering exists to catch. A cycle that inherits the previous cycle's environment re-runs the
+  # commands without re-running the RITE.
+  unset LARES_ARCHIVE_PASSPHRASE
 
   # ── CLEAR BETWEEN CYCLES. Cycle 2 must re-run the RITE, never inherit cycle 1's warm tree and its still-
   #    running daemon: a warm tree answers instantly and proves nothing, because the socket it answers on
@@ -260,7 +274,17 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
     fi
   fi
 
-  run "④ vault seal (NEW passphrase)"       sh -c "node '$LARES' vault seal --yes"
+  # ④ MUST DO REAL WORK. A seal that finds every carrier already sealed exits 0, so an exit-code check
+  # reads a no-op as success — which is what this step did while the base var rode from the start.
+  step "④ vault seal — carriers actually seal"
+  if out=$(node "$LARES" vault seal --yes 2>&1) && ! printf '%s' "$out" | grep -q "sealed NOTHING"; then ok
+  else bad "sealed nothing"; printf '%s\n' "$out" | tail -4 | sed 's/^/      /'; fi
+
+  # THE STANDING CONDITION BEGINS HERE. Sealing writes sealExpected into the config, which `reset` does
+  # not clear, so every boot from now on wants the base var — and ⑤ boots a node. The rite tells the
+  # operator to export it at exactly this point; the harness walks the same order rather than dodging it
+  # by carrying the var from the start.
+  export LARES_ARCHIVE_PASSPHRASE="$PASS_DRILL"
   run "④ vault status"                      lares vault status
   run "⑤ regenesis --force"                 lares regenesis --force
   # ⑥ ASSERTS BY CONNECTING, never by inspecting. `node status` reads local facts alone — bootstrap
