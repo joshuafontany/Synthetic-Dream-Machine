@@ -326,7 +326,18 @@ The error named an internal symbol, not a build, and an operator reading it mid-
 ```
 pnpm -r build                                       # the dist must match the source it imports from
 lares help                                          # the binary loads and answers — the ONLY gate this proves
+pnpm outdated -r                                    # bump BEFORE, never after (see below)
 ```
+
+''BUMP THE DEPS BEFORE, NEVER AFTER — and the reason reads narrower than the fear.'' A runtime bump
+(automerge · noble · ws · vite) moves ''NO epoch binding'': the engine blob is vendored TW5 and the built
+plugin carries zero automerge references, both measured. It can skew the ''on-disk serde'' alone, which
+`lares rebuild` cures identity-safe. So bumping first reads as hygiene rather than a cliff.
+
+''The surfaces that WOULD be a cliff do not move on npm at all'': `hearthTrueName` (the engine CID, signed
+into every device-delegation edge) and the `pluginsCid` (built from this repo's own source). Those move by
+an ACT — a TW5 submodule bump, or a commit — never by an upgrade.
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
 
 ''Run this at the head of BOTH branches.'' A rehearsal that opens on a stale toolchain measures the
 toolchain and reports nothing about the rite.

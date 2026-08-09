@@ -1,0 +1,150 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/epoch-binding-surfaces.mem"
+l-space   = "lararium"
+mana      = 16
+manao     = 16
+manaoio   = 15
+namespace = "&#x2695;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "WHAT A DEPENDENCY BUMP COSTS AN ALREADY-FOUNDED NEXUS — the five surfaces that bind to an epoch, measured rather than assumed. The engine CID is NOT the only one: hearthTrueName rides INSIDE every signed device-delegation preimage, and the pluginsCid tracks blobs built from THIS REPO'S OWN SOURCE, which makes the Nexus conformance vector move with our commits rather than with npm. Measured 2026-08-08: a runtime dep bump (automerge · noble · ws) touches exactly ONE surface (the on-disk serde, cured identity-safe by `lares rebuild`) and moves NO epoch binding, because the engine blob is vendored TW5 and the built plugin carries zero automerge references"
+tags      = ["mesh/genesis-doc", "mesh/charter-chain"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/mesh/epoch-binding-surfaces"
+written   = "2026-08-08"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Epoch Binding Surfaces ~ what a dependency bump actually costs
+
+''The engine CID is not the only surface that binds to an epoch'' (operator, 2026-08-08). Five surfaces
+bind, they bind to ''different things'', and only one of them moves when a runtime dependency does.
+
+''This meme measures rather than reasons.'' Every row below reads off the code or a build artifact, because
+a wrong answer here reads identically to a right one until a founding breaks.
+
+<<~/ahu >>
+
+<<~ ahu #the-five >>
+
+!! The five surfaces, and what each binds TO
+
+\procedure ~Surface(~Type:"" ~Params:"") ~Surface <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Surface Seal-epoch "binds/seated-keys + threshold moved-by/a-roster-or-quorum-change ~ genesisSealEpochCid — carries NO dependency, NO blob, NO version" >>
+<<~Surface Hearth-true-name "binds/the-TW5-core-blob-sha256 moved-by/a-TW5-submodule-bump ~ engineCid, and it rides INSIDE every signed delegation preimage" >>
+<<~Surface Plugins-CID "binds/the-built-plugin-blob-shas moved-by/THIS-REPO'S-OWN-SOURCE ~ 23 modules + 115 tiddlers packed from our TS" >>
+<<~Surface Nexus-conformance "binds/engineCid ⊥ pluginsCid moved-by/either-of-those ~ the membership criterion: same pair, same Nexus" >>
+<<~Surface On-disk-serde "binds/automerge + keyhive byte formats moved-by/a-RUNTIME-dep-bump ~ the only npm-movable surface" >>
+
+!!! ★ THE ONE MOST EASILY MISSED ★
+
+''`hearthTrueName` IS the genesis `engineCid`, and it rides inside the SIGNED preimage of every
+device-delegation edge'':
+
+```
+lar-device-delegation/v2|{personaRootDid}|{deviceDid}|{deviceVerifyingKey}|{hearthTrueName}|{issuedAt}|{expiresAt}|{boundEpoch}
+```
+
+''So every vessel that ever joined SIGNED the engine CID.'' Move it and every edge names a hearth true-name
+that no longer matches — the Binding Gate refuses, and the refusal reads as a fleet-wide eviction nobody
+performed. ''The binding IS (vessel × hearthTrueName)'': the engine CID is not a version label, it is the
+''PLACE'' half of the two-key atom.
+
+<<~/ahu >>
+
+<<~ ahu #the-measurement >>
+
+!! What a runtime dep bump ACTUALLY moves ~ measured 2026-08-08
+
+''The answer reads narrower than the fear, and the narrowness rests on two facts a reader can re-check.''
+
+# ''The engine blob is VENDORED TW5.'' `computeEngineCid` hashes `engine/v1\ncore-sha256:<the TW5 core blob's
+  sha256>` — a pure function of those bytes, with the version label deliberately excluded so a re-tag cannot
+  manufacture a schism. TW5 rides as a ''workspace submodule'', so ''no npm bump can move it''.
+# ''The built plugin carries ZERO automerge references.'' Measured on the packed artifact: 23 modules, 115
+  tiddlers, and `grep -c automerge` reads ''0''. The plugin packs THIS REPO'S TS, never the runtime
+  dependency tree.
+
+''Therefore'': bumping `@automerge/*`, `@noble/*`, `ws`, `tsx`, `vite` moves ''NO epoch binding''. The seal
+lineage stands, every delegation edge still verifies, and the Nexus conformance vector holds.
+
+''What it CAN break is the on-disk serde'' — stored bytes serialized by a format the new deserializer cannot
+read. The vessel already names that condition and its cure rather than boot-looping on it:
+
+> ''Cause'': stored bytes predate a dependency bump (keyhive / automerge / beelay / TW5).
+> ''Cure (identity-safe, no data loss)'': run `lares rebuild` — rebuilds the genesis engine under current
+> deps; your operator key/card are untouched.
+
+<<~ confidence Synthesis-Canon 16/20 >> ''One surface, one cure, and the cure keeps the identity.''
+
+<<~/ahu >>
+
+<<~ ahu #the-real-mover >>
+
+!! ⚠ What DOES move a Nexus ~ our own commits
+
+''The pluginsCid tracks blobs built from THIS REPO'S SOURCE'', and the Nexus conformance vector reads
+`engineCid ⊥ pluginsCid`. So:
+
+> ''Every commit that changes the packed plugin changes the pluginsCid — and the pluginsCid is a Nexus
+> membership criterion.''
+
+''That reads far more consequential than any npm bump.'' A dependency update is an event an operator
+schedules; a source commit is an ordinary Tuesday. Adding one exported constant to `lar-uris` re-packs the
+plugin, re-attests it, and moves the digest — observed directly while building this arc.
+
+''THE RULING THE MESH ALREADY CARRIES.'' Membership computes rather than gets granted: everyone running the
+kahu's ratified `engineCid`/`pluginsCid` pair runs the same Nexus, and anyone running a different set runs a
+''different Nexus''. So a source commit does not //break// a Nexus — it ''proposes'' one, and the kahu clock
+decides whether the confederation moves together. ''The mechanism is a schism-generator by construction, and
+the ratification rite is what makes it a confederation instead.''
+
+''AND THE OPEN STRETCH STAYS OPEN'' (`genesis-doc#the-open-stretches`): the model version binds at FOUNDING
+and ''nothing consults it when two replicas MERGE'' — precisely where the law bites. Two peers materializing
+fresh from different engine versions name the ''disjoint-station-set'' break: where two frames share no
+co-observed points, ''no transformation exists at all, only translation by assertion''.
+
+<<~/ahu >>
+
+<<~ ahu #the-rule >>
+
+!! The rule for a founding
+
+''BUMP BEFORE, NEVER AFTER — and the reason is narrower than it sounds.'' A bump after founding risks the
+serde skew alone, which `lares rebuild` cures without touching the identity. So the rule reads as ''hygiene
+rather than a cliff'': founding on current deps costs one afternoon of testing; founding on stale ones costs
+a rebuild at an inconvenient moment.
+
+''The surfaces that would be a cliff — the engine CID and the plugins CID — do not move on npm at all.''
+They move when the operator bumps the TW5 submodule or when this repo's source changes, and ''both of those
+are acts, never upgrades''.
+
+\procedure ~Rule(~Type:"" ~Params:"") ~Rule <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Rule Runtime-deps "when/before-founding cost/a-rebuild-if-skipped surface/serde-only ~ automerge · noble · ws · vite" >>
+<<~Rule TW5-submodule "when/an-ACT-never-an-upgrade cost/every-delegation-edge surface/hearthTrueName ~ moves the PLACE half of the atom" >>
+<<~Rule Our-own-source "when/every-commit cost/a-proposed-Nexus surface/pluginsCid ~ the kahu clock ratifies, or the mesh shards" >>
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/device-delegation >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
