@@ -112,7 +112,7 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
     return 1;
   }
   for (const t of targets) rmSync(t.path, { recursive: t.recursive, force: true });
-  console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone)`);
+  console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone — the seal, the library and the repo registry sit beside it, equally untouched)`);
   // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
   // must exist first. (The reverse order fails: "hearth true-name (engine CID) absent".)
   console.log("[lares reset] cleared. Rebuilding genesis artifact…");

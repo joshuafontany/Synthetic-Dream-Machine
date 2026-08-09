@@ -26,7 +26,7 @@
  * See lar:///ha.ka.ba/lares/docs/lares/federation and api/pono/has-stack-ontology.
  *
  * Storage law — identity lives OUTSIDE the wipe zone:
- *   the keypair + card persist to `<state>/identity` (`larIdentityDir`), in the XDG state
+ *   the keypair + card persist to `<data>/identity` (`larIdentityDir`), in the XDG data
  *   home BESIDE — never inside — the wiped `<data>/vessel`. No `reset`/`regenesis`/`rebuild`
  *   can reach it (they rmSync the substrate store, not the state home). This realizes the
  *   law below (the key MUST NOT sit inside an Automerge doc storage path) and the
@@ -74,7 +74,7 @@ import { nodeAnchorStore } from "./identity-anchors.js";
 import { nodeRecoveryShareStore } from "./recovery-share-store.js";
 
 /**
- * The identity dir — the ONE resolver, `<state>/identity` (`larIdentityDir`), in the XDG
+ * The identity dir — the ONE resolver, `<data>/identity` (`larIdentityDir`), in the XDG
  * state home OUTSIDE any substrate wipe. `reset`/`regenesis`/`rebuild` reforge the
  * `<data>/vessel` store; the key + card + anchors survive here, unreachable by any storage
  * verb. An empty home re-derives a fresh device key — no migration arm, no legacy spelling.
@@ -185,7 +185,7 @@ function fileKeypairStore(keyFile: string, login: string | null): KeypairStore {
 // `digestAlgo` field keeps the digest swappable to blake3-256 SAID at KERI-interop).
 //
 // CUSTODY CAVEAT: this minimal hook persists the next-root private seed on the SAME
-// disk (0o600, in `<state>/identity`). Full pre-rotation (a thief of the CURRENT key
+// disk (0o600, in `<data>/identity`). Full pre-rotation (a thief of the CURRENT key
 // cannot rotate) needs the next seed in OFFLINE/cold custody — an operator-arranged
 // follow-on. The commitment (`n`) is load-bearing now; it upgrades when the seed
 // moves offline.
@@ -388,7 +388,7 @@ export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array
 //
 // The isomorphic control flow (generate/load/wear/custody-refuse/roster) lives in @lararium/mesh's
 // persona-vault — platform-blind. THIS adapter supplies the node shores: per-index 0o600 KeypairStore
-// slots in `<state>/identity` (outside every `reset`/`rebuild` wipe), a JSON active-persona selector,
+// slots in `<data>/identity` (outside every `reset`/`rebuild` wipe), a JSON active-persona selector,
 // the anchor store, and the sealed recovery-share store. The SEAL stays in this adapter — the core
 // never sees plaintext seal policy (custody-by-TYPE: each root is the vessel's OWN sovereign secret).
 //
@@ -440,7 +440,7 @@ function recordPersonaRoot(idDir: string, login: string | null, handleIndex: num
   chmodSync(file, 0o600);
 }
 
-/** The node FS ActivePersonaStore — a JSON pointer at `<state>/identity`, 0o600, outside the wipe. */
+/** The node FS ActivePersonaStore — a JSON pointer at `<data>/identity`, 0o600, outside the wipe. */
 function nodeActivePersonaStore(idDir: string, login: string | null): ActivePersonaStore {
   const file = join(idDir, activePersonaFileName(login));
   return {
@@ -555,7 +555,7 @@ export async function listPersonaRoots(_dataDir: string): Promise<number[]> {
 
 // ── The two-layer PET-NAME stores — the own-side private label + the own-side public face ────────────
 //
-// Two DISTINCT node fs stores over `<state>/identity` (0o600, outside every substrate wipe), login-scoped
+// Two DISTINCT node fs stores over `<data>/identity` (0o600, outside every substrate wipe), login-scoped
 // like the vault's slots so developers on one machine keep separate identity homes:
 //   · the PRIVATE pet-name map (`.persona-petnames-${login}.json`) — the human's own label for their own
 //     personas, freely renamable, never PUBLICLY federated (persona-petname). A future device-fleet adapter

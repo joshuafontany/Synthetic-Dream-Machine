@@ -93,6 +93,7 @@ describe("recovery-keel — founding provision against the real identity store",
     root = mkdtempSync(join(tmpdir(), "lares-recprov-"));
     setEnv("LAR_ROOT", undefined);
     setEnv("XDG_STATE_HOME", join(root, "state"));
+    setEnv("XDG_DATA_HOME", join(root, "state"));   // identity/seal/library answer HERE
     setEnv("LARES_ARCHIVE_PASSPHRASE", undefined);
   });
   afterEach(() => {
@@ -126,6 +127,7 @@ describe("recovery-keel — identity recovery issues the SHARED guardian cards (
     dir = mkdtempSync(join(tmpdir(), "lares-reccard-"));
     setEnv("LAR_ROOT", undefined);
     setEnv("XDG_STATE_HOME", join(dir, "state"));
+    setEnv("XDG_DATA_HOME", join(dir, "state"));   // identity/seal/library answer HERE
     setEnv("LARES_ARCHIVE_PASSPHRASE", undefined);
   });
   afterEach(() => {

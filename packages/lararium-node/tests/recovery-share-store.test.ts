@@ -31,6 +31,7 @@ describe("recovery-share-store — the device share at rest", () => {
     root = mkdtempSync(join(tmpdir(), "lares-recshare-"));
     setEnv("LAR_ROOT", undefined);
     setEnv("XDG_STATE_HOME", join(root, "state"));
+    setEnv("XDG_DATA_HOME", join(root, "state"));   // identity/seal/library answer HERE
     setEnv("LARES_ARCHIVE_PASSPHRASE", undefined);
   });
   afterEach(() => {

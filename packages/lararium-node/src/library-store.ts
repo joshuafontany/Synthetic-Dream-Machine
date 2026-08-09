@@ -29,11 +29,11 @@ import {
   LIBRARY_META_FILE, parseLibraryRef, metaMatchesDir, renderLibraryIndex,
   mediaTypeFromExt, niUriSha256FromHex, type LibraryEntryMeta,
 } from "@lararium/mesh";
-import { larStateHome } from "./vessel-paths.js";
+import { larDataHome } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /**
- * The acquired tier's home — `<state>/library`, or `LAR_LIBRARY`.
+ * The acquired tier's home — `<data>/library`, or `LAR_LIBRARY`.
  *
  * It sits under the STATE home rather than the data home deliberately: `<data>/vessel` is the substrate
  * `reset` and `regenesis` reforge, and an acquired body must survive both. The env override exists because a
@@ -41,7 +41,7 @@ import { atomicWriteFileSync } from "./fs-atomic.js";
  * outgrow its default.
  */
 export function larLibraryHome(): string {
-  return process.env["LAR_LIBRARY"] ?? join(larStateHome(), "library");
+  return process.env["LAR_LIBRARY"] ?? join(larDataHome(), "library");
 }
 
 /** Where one collection's bodies stand. Resolution of a `library:<name>` reference, and the only mapping. */

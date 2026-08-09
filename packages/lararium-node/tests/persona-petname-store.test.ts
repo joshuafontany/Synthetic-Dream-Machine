@@ -41,6 +41,7 @@ describe("node persona pet-name stores (#64 stage 4)", () => {
     root = mkdtempSync(join(tmpdir(), "lares-petname-"));
     setEnv("LAR_ROOT", undefined);
     setEnv("XDG_STATE_HOME", join(root, "state"));
+    setEnv("XDG_DATA_HOME", join(root, "state"));   // identity/seal/library answer HERE
   });
   afterEach(() => {
     for (const [k, v] of Object.entries(saved)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; }

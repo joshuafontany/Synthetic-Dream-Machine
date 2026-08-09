@@ -27,7 +27,7 @@ export {
 export type { BagSighting, BagMoveOutcome } from "./bag-declare.js";
 
 // The ACQUIRED tier — bodies a human did not author, sited readable + verifiable OUTSIDE the wipe zone
-// (`<state>/library`), so a shelf may grow without a repository growing with it.
+// (`<data>/library`), so a shelf may grow without a repository growing with it.
 export {
   larLibraryHome, libraryCollectionDir, resolveLibraryRef, acquireIntoLibrary,
   readLibraryMeta, listCollections, listCollection, verifyCollection, writeLibraryIndex,

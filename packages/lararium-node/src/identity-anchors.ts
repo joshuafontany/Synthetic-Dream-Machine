@@ -1,6 +1,6 @@
 /**
  * identity-anchors — the veiled-Handle's sentinel anchors, persisted in the sovereign
- * identity home (`<state>/identity/anchors.json`), OUTSIDE the wiped `@daemon` substrate.
+ * identity home (`<data>/identity/anchors.json`), OUTSIDE the wiped `@daemon` substrate.
  *
  * The founding ceremony mints the PersonaGroup / MeshCabal sentinel doc-ids off keyhive's
  * CSPRNG — a fresh id every run, unreproducible from any seed. Those ids (and the

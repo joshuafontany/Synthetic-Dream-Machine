@@ -11,7 +11,7 @@
  *   1. stop the incumbent  — port-control, graceful → force
  *   2. reset --force       — CRDT store + genesis artifacts + projection watermark
  *                            wiped; genesis re-baked; init re-founds (identity
- *                            preserved, `<state>/identity` out of every wipe)
+ *                            preserved, `<data>/identity` out of every wipe)
  *   3. wake                — boot detached, vessel-ready attested from the log
  *   4. seed --apply        — plant every bags/@* holding back into the fresh docs;
  *                            the conductor OWNS the zero-new refusal here: right

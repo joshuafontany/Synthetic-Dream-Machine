@@ -17,7 +17,7 @@ import {
   larLibraryHome, libraryCollectionDir, resolveLibraryRef, acquireIntoLibrary,
   listCollections, listCollection, verifyCollection, writeLibraryIndex, readLibraryMeta,
 } from "../src/library-store.js";
-import { larDataDir, larStateHome } from "../src/vessel-paths.js";
+import { larDataDir, larStateHome, larDataHome } from "../src/vessel-paths.js";
 
 const saved: Record<string, string | undefined> = {};
 const setEnv = (k: string, v: string | undefined): void => {
@@ -46,8 +46,13 @@ describe("the acquired tier", () => {
   test("★ it homes OUTSIDE the wipe zone — the reason it stands apart from the runtime CAS ★", () => {
     // `reset` pares <data>/vessel on the documented premise that its blobs rebuild from the bags carriers.
     // An acquired book rebuilds from nothing, so it must not live under that premise.
-    expect(larLibraryHome()).toBe(join(larStateHome(), "library"));
+    //
+    // It sits in the DATA home BESIDE that store rather than inside it — the two homes split on whether a
+    // thing can be re-made, so everything irreplaceable gathers here and the state home keeps watermarks
+    // alone. The guard that matters is the SUBDIRECTORY boundary, never the home.
+    expect(larLibraryHome()).toBe(join(larDataHome(), "library"));
     expect(larLibraryHome().startsWith(larDataDir())).toBe(false);
+    expect(larLibraryHome().startsWith(larStateHome())).toBe(false);   // watermarks live there, not books
   });
 
   test("LAR_LIBRARY re-sites it — a shelf outgrows its default disk before anything else here does", () => {
@@ -112,6 +117,7 @@ describe("verify reads BYTES, never records", () => {
     root = mkdtempSync(join(tmpdir(), "lares-libverify-"));
     setEnv("LAR_ROOT", root);
     setEnv("XDG_STATE_HOME", join(root, "xdgstate"));
+    setEnv("XDG_DATA_HOME", join(root, "xdgdata"));
     setEnv("LAR_LIBRARY", undefined);
     mkdirSync(join(root, "in"), { recursive: true });
   });
@@ -156,6 +162,7 @@ describe("a reference NAMES, and refuses what could walk out of the tier", () =>
   beforeEach(() => {
     root = mkdtempSync(join(tmpdir(), "lares-libref-"));
     setEnv("XDG_STATE_HOME", join(root, "xdgstate"));
+    setEnv("XDG_DATA_HOME", join(root, "xdgdata"));
     setEnv("LAR_LIBRARY", undefined);
   });
   afterEach(() => {

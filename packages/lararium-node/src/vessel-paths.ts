@@ -3,9 +3,12 @@
  * XDG Base Directory layout (freedesktop.org). Persistent bytes, ephemeral scratch, transient runtime,
  * durable state, and config each land in their proper XDG home instead of one `~/.lares` monolith:
  *
- *   $XDG_DATA_HOME/lares    (~/.local/share/lares)  — persistent stores: the `memory` SENSORIUM
- *                                                     (content/structure/form) + the vessel substrate.
- *   $XDG_STATE_HOME/lares   (~/.local/state/lares)  — watermarks: harvest + harvest-stage + projection.
+ *   $XDG_DATA_HOME/lares    (~/.local/share/lares)  — EVERYTHING NO RITE CAN RE-MAKE: the sovereign
+ *                                                     identity, the Nexus seal, the acquired library, the
+ *                                                     repo registry, the hearth bags, the `memory`
+ *                                                     SENSORIUM, and the vessel substrate beneath them.
+ *   $XDG_STATE_HOME/lares   (~/.local/state/lares)  — WATERMARKS ALONE: harvest, harvest-stage,
+ *                                                     projection. All of it re-derives.
  *   $XDG_CACHE_HOME/lares   (~/.cache/lares)        — ephemeral scratch: sensoriums (swept).
  *   $XDG_CONFIG_HOME/lares  (~/.config/lares)       — config.json.
  *   $XDG_RUNTIME_DIR/lares  (tmpfs, or os.tmpdir()) — transient spool (+ future sockets/locks/pids).
@@ -30,8 +33,17 @@
  * so isolation holds and the UDS socket path always agrees. Both the CLI (local-connector) and the
  * node daemon (uds-channel) resolve through HERE.
  *
- * `larIdentityDir` (the sovereign root — a separate concern) resolves under the XDG state
- *  home (`<state>/identity`), beside — never inside — the wiped substrate store.
+ * ── ONE HOME TO KEEP, ONE TO DISCARD ────────────────────────────────────────────────────────────
+ * The split answers a single question: CAN THIS BE RE-MADE? It once ran the other way — the state home
+ * carried the identity, the seal and 18M of acquired books while the data home carried the one store that
+ * rebuilds from `bags/` — so neither home could be described in a sentence, and the rite had to WARN an
+ * operator away from `rm -rf` on a directory that looked disposable and was not.
+ *
+ * Now: ''back up `<data>`; `<state>` may be deleted at any moment.'' The wipe boundary still holds because
+ * `reset` targets `<data>/vessel` — a SUBDIRECTORY, standing beside the precious things rather than over
+ * them, so the substrate re-forges while the sovereign root, the seal and the shelf sit untouched.
+ *
+ * A rule that fits in one breath needs no warning label. The danger did not get documented; it left.
  */
 
 import { existsSync, readdirSync } from "node:fs";
@@ -328,18 +340,18 @@ export function larDataDir(): string {
 }
 
 /** Vessel identity dir — the sovereign keypair + the veiled-Handle anchors, at
- *  `<state>/identity`. Sits in the XDG state home BESIDE (never inside) the wiped
+ *  `<data>/identity`. Sits in the XDG data home BESIDE (never inside) the wiped
  *  `<data>/vessel`, so every substrate verb (`reset`/`regenesis`/`rebuild`) reforges the
  *  CRDT store while the sovereign root survives untouched — the "share substrate, not
  *  sovereignty" law made a filesystem boundary. `reset` removes only `<state>/projection`
  *  under this same state home, so identity here stays out of the wipe zone. The ONE
  *  identity resolver — node-vessel-identity resolves any prior location onto it. */
 export function larIdentityDir(): string {
-  return join(larStateHome(), "identity");
+  return join(larDataHome(), "identity");
 }
 
 /**
- * The Nexus SEAL home — the founding-kahu roster + its epoch lineage, at `<state>/nexus`.
+ * The Nexus SEAL home — the founding-kahu roster + its epoch lineage, at `<data>/nexus`.
  *
  * WHY IT SITS HERE AND NOT IN THE BAGS TREE. The seal reads as a FILE rather than a bag: an operator
  * backs it up, hands it to a peer, and reads it with their own eyes. A bag would give it fleet-sync it
@@ -353,7 +365,7 @@ export function larIdentityDir(): string {
  * because a Nexus belongs to the operators who founded it, never to whoever copied the code.
  */
 export function larSealHome(): string {
-  return join(larStateHome(), "nexus");
+  return join(larDataHome(), "nexus");
 }
 
 // ── Durable watermarks (state) ────────────────────────────────────────────────────────────────────

@@ -11,10 +11,15 @@
 #   BURN     rm -rf the tree                                          (the clear IS the burn)
 #
 # ── WHY LAR_ROOT ALONE ISOLATES ──────────────────────────────────────────────────────────────────
-# Every resolver roots off it — data, state, the Nexus seal, the acquired library, bags, genesis, and the
-# UDS socket. Measured 2026-08-08: nine of nine isolated. So a throwaway costs one env var and destroys
-# nothing real, and the container harness stays for what containers actually buy (rude sockets, real disks,
-# a drop that drops).
+# Every resolver roots off it — the vessel store, the identity, the Nexus seal, the acquired library, the
+# repo registry, the hearth bags, genesis, the watermarks, the config, the runtime spool, the social
+# bootstrap and the UDS socket. Re-measured after the home inversion: TWELVE of twelve rooted under
+# LAR_ROOT. So a throwaway costs one env var and destroys nothing real, and the container harness stays for
+# what containers actually buy (rude sockets, real disks, a drop that drops).
+#
+# The count gets RE-MEASURED whenever a resolver moves, never carried forward. An isolation claim that ages
+# is an isolation claim that lies: the tenth resource (the TCP port) was found exactly that way, and the
+# homes have since re-split on whether a thing can be re-made.
 #
 # ── THE ONE DIVERGENCE LEFT, NAMED ───────────────────────────────────────────────────────────────
 # `wake --install` once ALSO pip-installed the mempalace library and stood the sensorium organs — writes
@@ -70,7 +75,9 @@ else
       echo "  A rehearsal harness that can eat the hearth is not a rehearsal harness." >&2
       exit 3 ;;
   esac
-  if [ -e "$ROOT/state/identity" ]; then
+  # The sovereign root lives in the DATA home now, beside the seal and the shelf — everything a rite
+  # cannot re-make. A guard reading the old address would wave a founded vessel straight through.
+  if [ -e "$ROOT/data/identity" ]; then
     echo "REFUSED: $ROOT already carries an identity — this harness founds from void, never over a vessel." >&2
     exit 3
   fi

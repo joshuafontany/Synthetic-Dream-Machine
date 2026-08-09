@@ -45,21 +45,23 @@ _PERSONA_ROOT_GLOB = ".persona-group-root-*.json"
 
 
 def _identity_dir(identity_dir: "str | None" = None) -> str:
-    """Resolve the on-disk identity dir — an explicit override, else `<state>/identity`, mirroring the
-    TS `larIdentityDir()` (vessel-paths.ts): `LAR_ROOT/state/identity` for isolated instances, else
-    `$XDG_STATE_HOME/lares/identity` (unset → `~/.local/state/lares/identity`). The vessel WRITES the
-    persona-group-root here (the XDG state home the identity move carried it to), so an unpassed dir
-    still reads the real salt, never the pre-XDG `~/.lares/.lararium-identity` scatter (which held no
-    file after the move). Guarded by test_identity_dir_mirrors_xdg_state."""
+    """Resolve the on-disk identity dir — an explicit override, else `<data>/identity`, mirroring the
+    TS `larIdentityDir()` (vessel-paths.ts): `LAR_ROOT/data/identity` for isolated instances, else
+    `$XDG_DATA_HOME/lares/identity` (unset → `~/.local/share/lares/identity`).
+
+    THIS MIRRORS A TS RESOLVER AND MUST FOLLOW IT. The two homes split on whether a thing can be
+    re-made: the sovereign root cannot, so it gathers in the DATA home with the seal and the shelf,
+    while the state home keeps watermarks alone. A mirror left on the old address reads a salt that
+    is not there and veils against nothing. Guarded by test_identity_dir_mirrors_xdg_data."""
     if identity_dir:
         return identity_dir
     lar_root = os.environ.get("LAR_ROOT")
     if lar_root:
-        state_home = os.path.join(lar_root, "state")
+        data_home = os.path.join(lar_root, "data")
     else:
-        xdg = (os.environ.get("XDG_STATE_HOME") or "").strip()
-        state_home = os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "state"), "lares")
-    return os.path.join(state_home, "identity")
+        xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
+        data_home = os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lares")
+    return os.path.join(data_home, "identity")
 
 
 def _persona_signing_secret(identity_dir: str) -> "bytes | None":

@@ -65,33 +65,33 @@ def test_no_secret_fails_loud(tmp_path, monkeypatch):
 # holds — the vessel WRITES the persona-group-root there. The identity-home move once left this
 # default at the pre-XDG ~/.lares/.lararium-identity scatter (which held no file post-move).
 
-def test_identity_dir_mirrors_xdg_state(monkeypatch):
+def test_identity_dir_mirrors_xdg_data(monkeypatch):
     monkeypatch.delenv("LAR_ROOT", raising=False)
-    monkeypatch.setenv("XDG_STATE_HOME", "/x/state")
+    monkeypatch.setenv("XDG_DATA_HOME", "/x/state")
     assert wv._identity_dir() == "/x/state/lares/identity"
 
 
 def test_identity_dir_honors_xdg_state_unset(monkeypatch):
     import os
     monkeypatch.delenv("LAR_ROOT", raising=False)
-    monkeypatch.delenv("XDG_STATE_HOME", raising=False)
-    expect = os.path.join(os.path.expanduser("~"), ".local", "state", "lares", "identity")
+    monkeypatch.delenv("XDG_DATA_HOME", raising=False)
+    expect = os.path.join(os.path.expanduser("~"), ".local", "share", "lares", "identity")
     assert wv._identity_dir() == expect
 
 
 def test_identity_dir_isolated_instance(monkeypatch):
     monkeypatch.setenv("LAR_ROOT", "/iso")
-    monkeypatch.delenv("XDG_STATE_HOME", raising=False)
-    assert wv._identity_dir() == "/iso/state/identity"
+    monkeypatch.delenv("XDG_DATA_HOME", raising=False)
+    assert wv._identity_dir() == "/iso/data/identity"
 
 
 def test_identity_dir_explicit_override_wins(monkeypatch):
-    monkeypatch.setenv("XDG_STATE_HOME", "/x/state")
+    monkeypatch.setenv("XDG_DATA_HOME", "/x/state")
     assert wv._identity_dir("/explicit/dir") == "/explicit/dir"
 
 
 def test_identity_dir_never_the_prexdg_scatter(monkeypatch):
     monkeypatch.delenv("LAR_ROOT", raising=False)
-    monkeypatch.delenv("XDG_STATE_HOME", raising=False)
+    monkeypatch.delenv("XDG_DATA_HOME", raising=False)
     assert ".lararium-identity" not in wv._identity_dir()
     assert "/.lares/" not in wv._identity_dir()

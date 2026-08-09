@@ -28,12 +28,12 @@ import {
   BAG_MANIFEST_FILE, bagManifestFromIam, defaultBagManifest, renderBagManifest, planBagMove,
   type BagHome, type BagHomeRoots, type BagManifest, type BagMove, type RepoRegistration,
 } from "@lararium/mesh";
-import { larStateHome } from "./vessel-paths.js";
+import { larDataHome } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /** Where the operator's repo registry rests — per-operator state, beside every other sovereign thing. */
 export function repoRegistryPath(): string {
-  return join(larStateHome(), "repos.json");
+  return join(larDataHome(), "repos.json");
 }
 
 /**
@@ -61,7 +61,7 @@ export function readRepoRegistry(): Map<string, RepoRegistration> {
 export function registerRepo(reg: RepoRegistration): Map<string, RepoRegistration> {
   const all = readRepoRegistry();
   all.set(reg.id, reg);
-  mkdirSync(larStateHome(), { recursive: true });
+  mkdirSync(larDataHome(), { recursive: true });
   atomicWriteFileSync(repoRegistryPath(), JSON.stringify({ repos: [...all.values()] }, null, 2));
   return all;
 }
@@ -70,14 +70,14 @@ export function registerRepo(reg: RepoRegistration): Map<string, RepoRegistratio
 export function unregisterRepo(id: string): Map<string, RepoRegistration> {
   const all = readRepoRegistry();
   all.delete(id);
-  mkdirSync(larStateHome(), { recursive: true });
+  mkdirSync(larDataHome(), { recursive: true });
   atomicWriteFileSync(repoRegistryPath(), JSON.stringify({ repos: [...all.values()] }, null, 2));
   return all;
 }
 
 /** This vessel's roots — the registered repos plus the hearth every standing vessel has. */
 export function bagHomeRoots(): BagHomeRoots {
-  return { hearth: join(larStateHome(), "bags"), repositories: readRepoRegistry() };
+  return { hearth: join(larDataHome(), "bags"), repositories: readRepoRegistry() };
 }
 
 /**

@@ -15,7 +15,7 @@ import {
   readBagManifest, writeBagManifest, surveyBags, moveBagHome,
   readRepoRegistry, registerRepo, unregisterRepo, bagHomeRoots, iamTableFromBody,
 } from "../src/bag-declare.js";
-import { larStateHome } from "../src/vessel-paths.js";
+import { larDataHome } from "../src/vessel-paths.js";
 
 const saved: Record<string, string | undefined> = {};
 const setEnv = (k: string, v: string | undefined): void => {
@@ -30,6 +30,7 @@ describe("bag-declare — the disk shore", () => {
     root = mkdtempSync(join(tmpdir(), "lares-bagdecl-"));
     setEnv("LAR_ROOT", root);
     setEnv("XDG_STATE_HOME", join(root, "xdgstate"));
+    setEnv("XDG_DATA_HOME", join(root, "xdgstate"));   // identity/seal/library answer HERE
     corpus = join(root, "corpus");
     mkdirSync(join(corpus, "@lares"), { recursive: true });
     mkdirSync(join(corpus, "@nexus"), { recursive: true });
@@ -76,6 +77,7 @@ describe("the repo registry — IDs, never paths", () => {
     root = mkdtempSync(join(tmpdir(), "lares-bagrepo-"));
     setEnv("LAR_ROOT", root);
     setEnv("XDG_STATE_HOME", join(root, "xdgstate"));
+    setEnv("XDG_DATA_HOME", join(root, "xdgstate"));   // identity/seal/library answer HERE
   });
   afterEach(() => {
     for (const [k, v] of Object.entries(saved)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; }
@@ -103,7 +105,9 @@ describe("the repo registry — IDs, never paths", () => {
   });
 
   test("the hearth root always stands, so hearth-homed bags always place", () => {
-    expect(bagHomeRoots().hearth).toBe(join(larStateHome(), "bags"));
+    // Hearth bags hold operator content no rite re-makes, so they gather in the DATA home with the
+    // identity, the seal and the shelf. The state home keeps only what re-derives.
+    expect(bagHomeRoots().hearth).toBe(join(larDataHome(), "bags"));
   });
 });
 
@@ -114,6 +118,7 @@ describe("surveyBags + moveBagHome — the drift surface and the act", () => {
     root = mkdtempSync(join(tmpdir(), "lares-bagmove-"));
     setEnv("LAR_ROOT", root);
     setEnv("XDG_STATE_HOME", join(root, "xdgstate"));
+    setEnv("XDG_DATA_HOME", join(root, "xdgstate"));   // identity/seal/library answer HERE
     corpus = join(root, "corpus");
     mkdirSync(join(corpus, "@lares"), { recursive: true });
     writeFileSync(join(corpus, "@lares", "a.mem"), "content", "utf8");

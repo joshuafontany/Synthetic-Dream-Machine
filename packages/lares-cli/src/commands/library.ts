@@ -6,7 +6,7 @@
  * author here and no parse∘render fixed point, so it sits on the seed surface by accident of arrival. Left
  * there it enters git history, and a shelf that grows with every book grows the history with it.
  *
- * The tier stands at `<state>/library` (or `LAR_LIBRARY`) — OUTSIDE the wipe zone, because `reset` pares
+ * The tier stands at `<data>/library` (or `LAR_LIBRARY`) — OUTSIDE the wipe zone, because `reset` pares
  * `<data>/vessel` on the documented premise that its blobs rebuild from the bags carriers. That premise holds
  * for derived blobs and fails completely for acquired ones.
  *

@@ -43,7 +43,7 @@ export function nexusCharterDocRelPath(): string {
 }
 
 /**
- * The seal file's absolute path under a SEAL HOME (`larSealHome()` — `<state>/nexus`, per-operator).
+ * The seal file's absolute path under a SEAL HOME (`larSealHome()` — `<data>/nexus`, per-operator).
  *
  * It takes a home rather than reading one, so this module keeps no env dependency and a test stands the
  * seal wherever it likes. The home rides per-operator state rather than the corpus tree: a Nexus belongs
@@ -216,7 +216,7 @@ export function renderNexusDoc(doc: NexusDoc): string {
   return `<<~ ? -> ${NEXUS_CHARTER_URI} >>
 \`\`\`toml iam
 uri-path  = "${NEXUS_CHARTER_URI_PATH}"
-file-path = "<state>/nexus/${nexusCharterDocRelPath()}"
+file-path = "<data>/nexus/${nexusCharterDocRelPath()}"
 type      = "text/x-memetic-wikitext"
 register  = "Canon"
 mana      = 19

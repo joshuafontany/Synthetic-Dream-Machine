@@ -1,5 +1,5 @@
 /**
- * M1 — the identity home resolves under XDG state (reset-safe), the ONE resolver. No
+ * M1 — the identity home resolves under XDG DATA (reset-safe), the ONE resolver. No
  * migration arm, no legacy spelling: an empty home re-derives a fresh device key.
  */
 import { mkdtempSync, mkdirSync, writeFileSync, existsSync, rmSync } from "node:fs";
@@ -30,8 +30,10 @@ describe("identity home (M1)", () => {
     rmSync(root, { recursive: true, force: true });
   });
 
-  test("larIdentityDir resolves under XDG state home", () => {
-    expect(larIdentityDir()).toBe(join(root, "state", "lares", "identity"));
+  test("larIdentityDir resolves under the XDG DATA home — beside the seal and the shelf", () => {
+    // The two homes split on whether a thing can be re-made. The sovereign root can not, so it
+    // gathers with everything else irreplaceable; reset still spares it by targeting a SUBDIR.
+    expect(larIdentityDir()).toBe(join(root, "data", "lares", "identity"));
   });
 
   test("the resolver ignores any legacy dir — no migration, the home stands alone", async () => {
@@ -40,7 +42,7 @@ describe("identity home (M1)", () => {
     mkdirSync(legacy, { recursive: true });
     writeFileSync(join(legacy, ".vessel-key.json"), JSON.stringify({ verifyingKey: "old", signingKey: "old" }));
 
-    // A read routes through identityDir() → the state home only; the legacy dir never gets consulted
+    // A read routes through identityDir() → the data home only; the legacy dir never gets consulted
     // or consumed (it just re-derives a fresh key when the home holds none).
     try { await loadVesselVerifyingKey(dataDir); } catch { /* fresh-home read may reject; the point is no migration */ }
 
