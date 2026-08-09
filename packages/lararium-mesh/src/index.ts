@@ -20,6 +20,9 @@ export * from "./bag-manifest.js";
 // The ACQUIRED tier — bodies a human did not author, kept readable + verifiable OUTSIDE every tracked tree.
 // Distinct from the runtime CAS: derived blobs rebuild, acquired ones do not.
 export * from "./library-tier.js";
+// The Erisian reckoning, computed rather than shelled out for — ddate(1) ships with many machines and no
+// machine reliably, and the whole calendar fits in one function.
+export * from "./discordian-date.js";
 export * from "./vessel-identity-core.js";
 export * from "./anchor-store.js";
 export * from "./persona-vault.js";

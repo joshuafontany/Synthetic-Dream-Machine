@@ -26,6 +26,10 @@
 # ~/.copilot). This harness therefore uses `--install`, never `--init`, and the harness-wiring leg goes
 # un-exercised here — a machine-setup concern rather than a founding one.
 #
+# The vault seals from LARES_ARCHIVE_PASSPHRASE, so the no-echo TTY prompt AND the `--ddate` composition
+# both go un-exercised. A harness cannot type at a prompt, and composing a throwaway secret with a real
+# seal-day would record a day into a tree that burns minutes later.
+#
 # ── THE GUARD ────────────────────────────────────────────────────────────────────────────────────
 # A rehearsal harness that can eat the hearth is not a rehearsal harness. This REFUSES any root that sits
 # under the operator's home, names the repo, or already carries an identity — before it writes anything.

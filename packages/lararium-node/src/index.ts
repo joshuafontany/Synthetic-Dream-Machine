@@ -12,6 +12,12 @@ export {
 } from "./vessel-paths.js";
 export { atomicWriteFileSync } from "./fs-atomic.js";
 
+// The Erisian date: `ddate(1)` where it stands (it carries holydays, exclamations, X-Day and the whole
+// %{…%} shape), the computed calendar where it does not — and the STAMP always computed, because ddate's
+// own output shape varies by invocation and a key-derivation cannot ride a moving string.
+export { readDdate, ddateAvailable, discordianReading } from "./discordian-reader.js";
+export type { DiscordianReading, DiscordianSource } from "./discordian-reader.js";
+
 // A bag's OWN declaration on disk (what it carries · who may read it · where it belongs), the operator's
 // REPO REGISTRY (ids, never paths), and the MOVE that relocates bytes and re-anchors the declaration together.
 export {
