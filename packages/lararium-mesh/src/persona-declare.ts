@@ -6,7 +6,7 @@
  * the published record (persona-glamour) remembers a face this vessel ALREADY announced. Between them sits a
  * gap: a name the human INTENDS to wear outward, chosen and not yet announced. Reading that intent off the
  * pet-name would weld the private label to the public name — a human whose compartment reads "the-burner"
- * could then never stand as "The Lindwyrm", and every private label would silently become a public
+ * could then never stand under a different declared Handle, and every private label would silently become a public
  * commitment. So the intent gets its own store and its own act.
  *
  * THE BINDING LAW HOLDS ABOVE THIS MODULE (persona-policy#the-binding-law). A declaration DECLARES; only a

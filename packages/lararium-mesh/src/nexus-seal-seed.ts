@@ -19,9 +19,9 @@
  *
  * THE FOUNDING QUORUM — three founding kahu cryptographic-individuals (persona-policy: each PersonaGroup
  * a cryptographic individual), 2-of-3:
- *   · "Guru Joshua Fontany"
- *   · "Telarus, KSC"
- *   · "The Lindwyrm"
+ *   · the founder's declared Handle
+ *   · a second declared Handle
+ *   · a third declared Handle
  *
  * THE DOC IS THE AUTHORITY. `foundingRoster`/`rosterFromNexusDoc` read a loaded `NexusDoc`, never
  * a hardcoded key-set. Each kahu's ed25519 verifying key is that PersonaGroup's own root-derived key — the

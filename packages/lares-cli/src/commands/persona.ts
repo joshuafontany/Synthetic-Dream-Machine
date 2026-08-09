@@ -20,7 +20,7 @@
  * THREE NAMES, THREE JOBS (dyad, persona-declare). `--name` labels a compartment to its keeper and their own
  * fleet; `--handle` declares what that persona answers to outward; the announce publishes it. The label and
  * the Handle MAY read identical and stay two acts, so a human whose compartment reads "the-burner" can still
- * stand as "The Lindwyrm" — nothing joins them but the human's own say-so. Founder-side: `new` mints an
+ * stand under any declared Handle — nothing joins them but the human's own say-so. Founder-side: `new` mints an
  * operator-root this vessel holds — a joining vessel receives a root by admit, never mints one here.
  */
 
@@ -55,9 +55,9 @@ function usage(): void {
   console.error("  admit <offer|grant|open|accept|list>   airgapped device-to-device persona hand-off (QR 3-hop)");
   console.error("");
   console.error("  founding sequence (three symmetric commands, each declaring its Handle + standing for a chair):");
-  console.error("    lares persona new 0 --name '<label>' --handle 'Guru Joshua Fontany' --seat");
-  console.error("    lares persona new 1 --name '<label>' --handle 'Telarus, KSC'        --seat");
-  console.error("    lares persona new 2 --name '<label>' --handle 'The Lindwyrm'        --seat");
+  console.error("    lares persona new 0 --name '<label>' --handle '<declared Handle>' --seat");
+  console.error("    lares persona new 1 --name '<label>' --handle '<declared Handle>' --seat");
+  console.error("    lares persona new 2 --name '<label>' --handle '<declared Handle>' --seat");
   console.error("    lares nexus seal seat");
 }
 

@@ -221,7 +221,7 @@ and ⊛; it substitutes for no cycle.
 name.'' The seal matched each chair against the operator's ''PRIVATE pet-name'', which welded two
 registers the plane holds apart: an operator could seat only under the string they call the compartment
 at home, so every private label became a public commitment by construction, and a compartment called
-`the-burner` could never stand as `The Lindwyrm`.
+a compartment labelled `the-burner` could never stand under any other name.
 
 ''Nothing had leaked'' — the published string always came from the seal's own seed — so the finding names
 a ''forced coupling'', never a disclosure. The correction gives the outward intent its own store and its
@@ -551,9 +551,9 @@ as ''three symmetric commands'' — and each command performs ''THREE ACTS, neve
 
 ```
 lares wake --install                                # stands the VESSEL — and nothing else (#sidecar)
-lares persona new 0 --name '<private label>' --handle 'Guru Joshua Fontany' --seat
-lares persona new 1 --name '<private label>' --handle 'Telarus, KSC'        --seat
-lares persona new 2 --name '<private label>' --handle 'The Lindwyrm'        --seat
+lares persona new 0 --name '<private label>' --handle '<declared Handle>' --seat
+lares persona new 1 --name '<private label>' --handle '<declared Handle>' --seat
+lares persona new 2 --name '<private label>' --handle '<declared Handle>' --seat
 lares persona list                                  # h0/h1/h2 stand: label -> declared Handle, each standing for a chair
 ```
 
@@ -580,8 +580,8 @@ a rule no quorum could ever reach — and a seat with ''nobody standing'' refuse
 ''THE SEAL JOINS ON THE DECLARED HANDLE, NEVER ON THE LABEL.'' Matching the private label would ''weld
 the two registers'': an operator could then seat only under the same string they call the compartment at
 home, and every private label would become a public commitment by construction. The two MAY read
-word-for-word identical — the operator's `Telarus, KSC` names a compartment privately AND stands as a
-chair name — and they stay ''two acts''. ''The declaring act makes a name public, never the characters.''
+word-for-word identical — one string may name a compartment privately AND stand as a chair name — and
+they remain ''two acts''. ''The declaring act makes a name public, never the characters.''
 
 ''Neither flag implies the other.'' A persona MAY declare a Handle and stand for no chair (the ordinary
 case, and the shape every later persona takes). A `--seat` carrying no Handle ''answers to no chair'',
