@@ -352,6 +352,9 @@ export function repairSplitKek(openPassphrase: string, sealPassphrase: string): 
  *           afterward. This gate throws because refusing is the safe default while the answer is unmade —
  *           an outage is recoverable and a silently-unsealed identity is not. It is a placeholder for a
  *           ruling, never the ruling.
+ *
+ * The shape, the Elyncia reading, and the OPEN downgrade-attack question live at
+ * lar:///ha.ka.ba/lares/api/pono/hoala-cap-floor — hoʻāla, the waking floor.
  */
 export function assertSealReady(cfg?: LaresConfig, env: NodeJS.ProcessEnv = process.env): void {
   if (readSealExpected(cfg) && !env[ARCHIVE_PASSPHRASE_ENV]) {

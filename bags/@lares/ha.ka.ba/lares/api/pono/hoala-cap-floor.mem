@@ -1,0 +1,154 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/hoala-cap-floor >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/hoala-cap-floor.mem"
+hydrate   = true
+l-space   = "stable"
+mana      = 15
+manao     = 14
+manaoio   = 14
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "hoʻāla — THE WAKING FLOOR: a vessel wakes at its MINIMUM available cap-stack and gets RAISED by recognition, never gated by absence. The unattended-reboot answer for a civic mesh (a sealed hearth that refuses to boot converts a power cut into an outage), and the same law the veil-ladder already runs one plane over: caps stack above a floor that never dissolves. Carries the degrade-not-refuse shape, the kahu-quorum raise, the downgrade-attack question held OPEN, and the Elyncia reading the myth was already carrying"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lares/api/pono/hoala-cap-floor"
+written   = "2026-08-08"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Hoʻāla ~ the waking floor
+
+''A vessel wakes at its MINIMUM available cap-stack, and gets RAISED by recognition.'' It never refuses to
+stand because something it wants stands absent; it stands at whatever floor it can reach, says what it
+cannot do, and waits to be raised. `hoʻāla` — to awaken, to rouse — names the transition.
+
+''Capability arrives by recognition; it never gates on absence.'' <<~ confidence Synthesis 12/20 >>
+
+<<~/ahu >>
+
+<<~ ahu #the-problem >>
+
+!! The problem the shape answers ~ a seal that eats a power cut
+
+An at-rest seal exists against a ''STOLEN DISK''. A vessel that REFUSES TO BOOT without its passphrase turns
+that seal into something else: an ordinary 3am power cut, with nobody awake to type, becomes an ''outage''.
+For one operator's laptop that trade reads fine. For a crossroads a family depends on it reads indefensible
+— ''the threat the seal was built for never arrived, and the seal took the place down anyway''.
+
+The refusal also mis-names what happened. A vessel that cannot open its archive has not lost its ''identity''
+— it has lost ''ACCESS TO SECRETS''. Those name different things, and only one of them should stop a node
+standing.
+
+<<~/ahu >>
+
+<<~ ahu #the-law >>
+
+!! The law it re-uses ~ caps stack above a floor that never dissolves
+
+The house already ruled this one plane over. `the-veil-ladder#the-base-model`:
+
+> ''Anon reads as the ground, not a tier'': every vessel — anon, known, operator-with-node-infra, admin alike
+> — stands anon at its floor (its own veiled-key, its own local content, no group) and ''MUST always fall
+> back there''. Caps and node infrastructure stack ABOVE the floor; they never dissolve it.
+
+''So a locked vessel has lost its CAPS, not its FLOOR.'' The veil-ladder already forbids the refusal: falling
+back to the floor reads as the rule, and a vessel that will not stand at all has fallen ''through'' it.
+
+''ONE LAW, TWO OCCASIONS.'' The ladder names the floor a BURN falls to (a chosen shedding); this names the
+floor a WAKE rises from (an unchosen absence). Same floor, opposite motions — which is the tell that the
+floor reads as real structure rather than as a special case either occasion invented.
+
+<<~/ahu >>
+
+<<~ ahu #the-shape >>
+
+!! The shape ~ degrade, announce, raise
+
+\procedure ~Wake(~Type:"" ~Params:"") ~Wake <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Wake Stand "at/the-minimum-reachable-cap-stack ~ never a refusal" >>
+<<~Wake Serve "what/needs-no-secret ~ the public shelf serves without opening anything" >>
+<<~Wake Hold "closed/every-sovereign-act ~ a locked vessel signs nothing" >>
+<<~Wake Announce "loudly/what-it-cannot-do ~ silence about a missing cap reads as the cap" >>
+<<~Wake Raise "by/recognition ~ an operator arriving, or kahu-quorum-signed material presented" >>
+
+''ANNOUNCING carries more weight than it looks.'' A vessel standing degraded and quiet is worse than one
+refusing, because a caller cannot tell a held act from a performed one. The degrade only reads honest where
+the vessel ''says the cap is absent'' at the surface a caller reads.
+
+''THE RAISE REUSES MACHINERY THE MESH ALREADY RUNS.'' A kahu quorum already signs acts against a
+pre-rotated, hash-linked epoch chain — each epoch pre-committing a digest of the next key-set. A k-of-n
+raise rides that, rather than inventing a second authority beside it. ''A crossroads could come back without
+waking anyone'', where enough of its kahu stand reachable.
+
+<<~/ahu >>
+
+<<~ ahu #the-open-question >>
+
+!! ⚠ What stays OPEN ~ the downgrade attack
+
+''If a vessel CAN run degraded, can an adversary FORCE that state and profit?'' The question has no answer
+here yet, and it decides whether the shape ships at all:
+
+* Can an attacker ''induce'' the degraded wake (cut power, deny the raise) and harvest what the floor still
+  serves?
+* Does a floor that serves a public shelf leak anything ''by existing'' — presence, liveness, a roster?
+* Does a degraded vessel become a ''confusion surface'' for peers who cannot tell held from performed?
+
+''RULED already, and not up for re-litigation'': the KEK stays passphrase-primary; a random key beside the
+ciphertext reads as obfuscation posing as isolation and gets refused; a missing passphrase ''NEVER silently
+degrades to weak key handling''. The degrade is about WHAT A VESSEL SERVES, never about weakening what it
+seals.
+
+''OPEN'': whether an unattended boot ''refuses or degrades'', and what may raise it. The boot gate throws
+today because ''refusing stays the safe default while the answer is unmade'' — an outage recovers and a
+silently-unsealed identity does not. <<~ loulou lar:///ha.ka.ba/lararium/node/archive-passphrase >> carries
+the option space where the refusal happens.
+
+''A research spirit gathers outside negentropy on this'' (2026-08-08): Vault's Shamir unseal + the
+auto-unseal critique, LUKS/Clevis/Tang network-bound encryption, TPM measured-boot sealing, systemd
+credentials, and the closest prior art — a phone's ''Before-First-Unlock'' vs ''After-First-Unlock'' states,
+which genuinely boot into reduced capability and gain it on unlock.
+
+<<~/ahu >>
+
+<<~ ahu #elyncia >>
+
+!! The Elyncia reading ~ the myth was already carrying it
+
+''The fiction resolves the same tension it always described.'' After the Second Breaking, the gods bound
+guardian spirits into orichalcum at surviving ley-line nodes. A shrine ''stabilizes through use'' — fed with
+food, drink, incense, coin — and ''a fed node hums, a neglected one flickers''. The myth never said a
+neglected shrine ''vanishes''. It flickers: present, diminished, waiting to be fed.
+
+''A vessel waking at its floor IS a flickering shrine.'' It stands at its crossroads, offers what it can
+without its keeper, and brightens when someone comes to feed it. The reciprocal bond runs exactly as the
+Lares always ran it — ''feed the Lar and it prospers you; neglect it and it turns its back'' — and turning
+its back never meant leaving the crossroads.
+
+''AND THE PLACE-BINDING SETTLES WHICH THING SURVIVES.'' A Lar binds to a PLACE, never to a family: if the
+family moved, the Lar stayed. So a vessel that loses its operator's secrets loses ''the family's'' hold and
+keeps ''the place'' — which is precisely the floor. The myth was load-bearing here before the code needed it.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-base-model >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
