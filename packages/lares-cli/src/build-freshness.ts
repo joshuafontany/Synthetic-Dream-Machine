@@ -24,8 +24,9 @@
  */
 
 import { spawnSync } from "node:child_process";
-import { existsSync, statSync, readdirSync, type Dirent } from "node:fs";
-import { join } from "node:path";
+import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync, type Dirent } from "node:fs";
+import { join, dirname, relative } from "node:path";
+import { createHash } from "node:crypto";
 import { repoRoot } from "@lararium/mesh/node";
 import type { ParsedArgs } from "./parse-args.js";
 
@@ -35,36 +36,61 @@ export const FRESH_BUILD_COMMANDS: ReadonlySet<string> = new Set([
 ]);
 
 const BUILT_LARES_BIN = join(repoRoot, "packages", "lares-cli", "dist", "src", "bin", "lares.js");
+/** The digest the current dist was built from, and the lock that keeps one writer. Both sit beside dist. */
+const BUILD_STAMP = join(repoRoot, "node_modules", ".lares-build", "source-digest");
+const BUILD_LOCK  = join(repoRoot, "node_modules", ".lares-build", "build.lock");
 
-/** Newest mtime of any source carrier under `dir` (skips dist/node_modules/.git). */
-function newestSrcMtime(dir: string): number {
-  let newest = 0;
-  let entries: Dirent[];
-  try { entries = readdirSync(dir, { withFileTypes: true }); } catch { return 0; }
-  for (const e of entries) {
-    if (e.name === "node_modules" || e.name === "dist" || e.name === ".git") continue;
-    const full = join(dir, e.name);
-    if (e.isDirectory()) {
-      const m = newestSrcMtime(full);
-      if (m > newest) newest = m;
-    } else if (/\.(ts|mts|cts|json)$/.test(e.name)) {
-      try { const m = statSync(full).mtimeMs; if (m > newest) newest = m; } catch { /* unreadable — skip */ }
+/**
+ * A digest of every source carrier under `dir` — path + bytes, walked in a stable order.
+ *
+ * FRESHNESS READS CONTENT RATHER THAN CLOCKS. An mtime comparison calls a tree stale whenever a
+ * checkout, a `touch`, a restored file or a skewed clock moves a timestamp without moving a byte —
+ * and a spurious "stale" is not merely wasteful here, because the rebuild it triggers is the thing
+ * that has repeatedly broken the tree. It also runs the other way: an editor that preserves mtimes
+ * hides a real change, and a false "fresh" runs superseded logic against real identity.
+ *
+ * Content answers both. Two trees with the same bytes ARE the same build, whatever their clocks say.
+ */
+export function sourceDigestForTest(dir: string): string { return sourceDigest(dir); }
+
+function sourceDigest(dir: string): string {
+  const h = createHash("sha256");
+  const walk = (d: string): void => {
+    let entries: Dirent[];
+    try { entries = readdirSync(d, { withFileTypes: true }); } catch { return; }
+    for (const e of [...entries].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))) {
+      if (e.name === "node_modules" || e.name === "dist" || e.name === ".git") continue;
+      if (e.name.endsWith(".prev")) continue;   // a retired output, never a source
+      const full = join(d, e.name);
+      if (e.isDirectory()) { walk(full); continue; }
+      if (!/\.(ts|mts|cts|json)$/.test(e.name)) continue;
+      // RELATIVE to the walk root — an absolute path folds the checkout location into the digest,
+      // so the same bytes would hash differently per machine and per cwd, and the stamp would never match.
+      try { h.update(relative(dir, full)); h.update(readFileSync(full)); } catch { /* unreadable — skip */ }
     }
-  }
-  return newest;
+  };
+  walk(dir);
+  return h.digest("hex");
 }
 
 /**
- * CONSERVATIVE staleness check — skip the build only when the workspace is CLEARLY current
- * (the built bin exists and is newer than every source carrier). Any doubt → build. Since the
- * gate always runs a FULL `pnpm -r build` (the bin is built last, depending on everything), a
- * gate-run leaves the bin newest; a later src edit makes it stale again. Biased toward
- * correctness: a false "stale" only costs an idempotent build; a false "fresh" runs old code.
+ * Does the built dist come from THESE bytes? Fresh when the recorded digest matches what the tree
+ * currently holds; stale on any mismatch, and stale when no build has ever stamped one.
  */
 function isWorkspaceStale(): boolean {
   if (!existsSync(BUILT_LARES_BIN)) return true;
-  const binMtime = statSync(BUILT_LARES_BIN).mtimeMs;
-  return newestSrcMtime(join(repoRoot, "packages")) > binMtime;
+  const digest = sourceDigest(join(repoRoot, "packages"));
+  let stamped: string | null = null;
+  try { stamped = readFileSync(BUILD_STAMP, "utf8").trim(); } catch { stamped = null; }
+  return stamped !== digest;
+}
+
+/** Record the digest the current dist was built FROM — written only after a build succeeds. */
+function stampBuild(): void {
+  try {
+    mkdirSync(dirname(BUILD_STAMP), { recursive: true });
+    writeFileSync(BUILD_STAMP, sourceDigest(join(repoRoot, "packages")));
+  } catch { /* a stamp we cannot write costs one extra build, never correctness */ }
 }
 
 /**
@@ -87,16 +113,33 @@ export function freshBuildGate(argv: readonly string[], args: ParsedArgs): numbe
   if (args.flags["observe"]) return null;
   if (!isWorkspaceStale()) return null;        // dist clearly current — run the handler in-process
 
+  // ONE WRITER. Two builds over one dist race with nothing between them, and the loser writes into a
+  // tree the winner is mid-way through replacing. An exclusive create IS the lock: the filesystem
+  // settles it, so no check-then-act window opens between asking and holding.
+  let held = false;
+  try {
+    mkdirSync(dirname(BUILD_LOCK), { recursive: true });
+    writeFileSync(BUILD_LOCK, String(process.pid), { flag: "wx" });
+    held = true;
+  } catch {
+    console.error("[lares] fresh-build: another build holds the lock — refusing to race it.");
+    console.error(`  wait for it, or clear a lock no process holds: rm ${BUILD_LOCK}`);
+    return 1;
+  }
+
   console.error("[lares] fresh-build: source changed since the last build — rebuilding before the daemon-lifecycle step…");
   const build = spawnSync("pnpm", ["-r", "build"], {
     cwd:   repoRoot,
     stdio: "inherit",
     shell: process.platform === "win32",
   });
+  if (held) rmSync(BUILD_LOCK, { force: true });
   if (build.status !== 0) {
     console.error("[lares] fresh-build: workspace build FAILED — aborting (never run the daemon from stale dist).");
+    console.error("  the previous output stands: a build no longer cleans first, so nothing was destroyed.");
     return build.status ?? 1;
   }
+  stampBuild();   // only a SUCCEEDING build earns a stamp — a failed one leaves the tree reading stale
 
   // Re-exec the SAME invocation against the just-built bin, in a fresh process. The
   // `--skip-build` sentinel (appended last) ends the recursion and tells the child to

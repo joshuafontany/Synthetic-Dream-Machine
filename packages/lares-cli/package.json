@@ -8,7 +8,7 @@
     "lares": "./bin/lares.mjs"
   },
   "scripts": {
-    "prebuild": "node ../../tools/clean-output.mjs dist",
+    "clean": "node ../../tools/clean-output.mjs dist",
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsx src/bin/lares.ts",
     "test": "vitest run",

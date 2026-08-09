@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r build",
+    "build": "pnpm -r build && node tools/stamp-build.mjs .",
+    "build:clean": "pnpm -r clean && pnpm -r build && node tools/stamp-build.mjs .",
     "test": "pnpm -r --workspace-concurrency=1 test",
     "test:fresh": "pnpm -r build && pnpm -r test",
     "typecheck": "pnpm -r typecheck",

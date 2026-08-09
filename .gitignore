@@ -73,5 +73,9 @@ entities.json
 # local dev corpus-root marker — opt-in per install, never ship to clones (#53)
 lar-dev-root.json
 
+# Retired build output — `pnpm -r clean` MOVES dist aside rather than deleting it, so a failed build
+# leaves a way back (`mv dist.prev dist`). The next clean supersedes it; none of it belongs to the repo.
+**/dist.prev/
+
 # runtime content-addressed store — vessel state (larDataDir/cas), never the repo (#54)
 /cas
