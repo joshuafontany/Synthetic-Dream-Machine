@@ -96,6 +96,17 @@ The two-axis meme (#dreamnet-architecture) names how a mesh ''relates''; this on
 * ''The rebinding measurement.'' Does public DNS answering with a private address survive common household routers? Unmeasured, and it decides whether the household layer needs a resolver per home or none.
 * ''The preload confirmation.'' The mobile reserve's whole argument rests on the TLD's HSTS posture; confirm before the name carries load.
 * ''Renewal as the one declared bridge.'' Issuance touches the internet; serving does not (#the-web2-bridge). Two Nexus names double the renewal surface without doubling the drill — one procedure, two subjects, and a lapse on either reads the same.
+* ''A third name appears in canon and no ruling covers it.'' `elyncia.social` rides several memes as a handle domain. It names neither Nexus and holds no seat here; whether it stands registered, and what it would serve, wants an operator word rather than an inference.
+
+<<~/ahu >>
+
+<<~ ahu #reading-the-older-memes >>
+
+!! Reading the older memes ~ a worked example is not a deployment claim
+
+Several memes carry these names inside ''worked examples'' — a doc-stack diagram reading `lar://elyncia.app/lararium`, an invitation-link sketch reading `https://elyncia.app/#catalog=…`. Those illustrate a ''shape'' (which layer holds which URL, how a fragment carries a catalog) and decide nothing about where a Nexus serves. ''This meme holds the deployment answer; a diagram holds a form.'' A reader who mistakes the second for the first will build against a placeholder.
+
+<<~ confidence Synthesis 12/20 >> ''One older meme reads as prior art rather than drift.'' The render-targets layering already separates a canonical DID from a handle-as-resolution-alias and states outright that the handle stays ''not authoritative''. That IS the severability law (#the-severability-law), written before the sweep that confirmed it and before the DID-method-compatible lock (#reach-plane) chose the same shape. Where canon already holds the right split, the lock ratifies rather than introduces.
 
 <<~/ahu >>
 
