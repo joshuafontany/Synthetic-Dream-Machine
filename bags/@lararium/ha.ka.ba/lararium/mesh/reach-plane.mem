@@ -12,7 +12,7 @@ manaoio   = 15
 namespace = "&#x2695;"
 register  = "Synthesis"
 retain    = true
-role      = "OPERATOR-LOCKED (2026-08-08) bridge doctrine: the vessel holds FOREIGN credentials in confidence so a human posts to Bluesky/Kowloon/elsewhere FROM their wiki — Lararium as force-multiplier. The load-bearing split: a foreign credential buys REACH, never IDENTITY, so custody of one never touches the sovereign plane. Four locks — BRIDGE (never present-as-actor, never cap-translation) · OUTWARD-ONLY · MAILBOX-not-seat · DID-method-compatible first. The reach chain TRUNCATES at CONTRACT (a world-readable credential stops being one) and never federates. Names the honeypot hazard and the far-side revocation asymmetry."
+role      = "OPERATOR-LOCKED (2026-08-08) bridge doctrine + the reach-vault design ledger: the vessel holds FOREIGN credentials in confidence so a human posts to Bluesky/Kowloon/elsewhere FROM their wiki — Lararium as force-multiplier. The load-bearing split: a foreign credential buys REACH, never IDENTITY, so custody of one never touches the sovereign plane. Four locks — BRIDGE (never present-as-actor, never cap-translation) · OUTWARD-ONLY · MAILBOX-not-seat · DID-method-compatible first. The reach chain TRUNCATES at CONTRACT (a world-readable credential stops being one) and never federates. Names the honeypot hazard and the far-side revocation asymmetry. DESIGN RULINGS: COMPOSE-AND-REQUEST (the glass drafts, the hearth posts — a browser holds no credential) · the vault reads as a cap-tiered BAG so the truncation falls out of a FLOOR the keystone already meets against · a per-service MANIFEST declares edit/thread/length/media/expiry · content-addressed EMIT RECEIPTS carrying the emitting vessel · health-per-credential, never a retry loop. OPEN: OAuth refresh makes the vault non-passive (research+testing owed) · the persona-binding privacy tension at high account cardinality · the CONTRACT floor oracle · credential onboarding · Kowloon actor-key custody."
 status    = "proposed"
 tags      = ["mesh/cap-tier", "mesh/membership-doctrine", "mesh/secure-context", "mesh/attestation-plane", "api/disk-projection", "api/pono/orichalcum-capabilities", "api/pono/causal-islands"]
 type      = "text/x-memetic-wikitext"
@@ -28,7 +28,9 @@ written   = "2026-08-08"
 
 ! The Reach Plane ~ foreign credentials as instruments the vessel holds
 
-> Status: PROPOSED — operator-locked (2026-08-08), unbuilt. The vault waits on the keychain KEK leg.
+> Status: PROPOSED — operator-locked (2026-08-08), unbuilt. The passphrase KEK already stands, so the
+> vault needs no keychain binding to begin; a keychain leg suits THIS plane better than the sovereign
+> floor and may light later (#the-honeypot).
 
 A human writes in their wiki and wants the words to land on Bluesky, on Kowloon, on whatever surface their people already stand in. ''The vessel carries the credential so the human never has to.'' That reads as the force-multiplier: one place to write, many places to reach.
 
@@ -53,6 +55,20 @@ The flow reuses instruments already standing — no new gate, no new distributio
 <<~flows author-in-the-wiki -> the-content-already-declares-its-cap-tier -> the-Confluence-gate-checks-declared∧floor -> render-to-the-target-native-form -> sign-and-post-with-THAT-target-reach-cap >>
 
 <<~ confidence Synthesis 12/20 >> ''Posting outward reads as another projection sink.'' The disk-projection law already names bags as canon and `wikis/` as a render of them (#disk-projection-law); a foreign surface joins that list as a target, never as a second source. ''One genuinely new subsystem falls out of the whole design: the credential vault.''
+
+<<~/ahu >>
+
+<<~ ahu #compose-and-request >>
+
+!! Compose-and-request ~ the glass drafts, the hearth posts
+
+''RULED (operator, 2026-08-08).'' A browser vessel holds NO reach credential. It ''composes'' and it ''requests''; a node vessel in the fleet holds the credentials and performs the post.
+
+The reason reads structural rather than cautious. The browser stands as the weakest island the stack admits — its sovereign key material rests where a same-origin read reaches it, and the origin-attestation question stays open beneath that (#secure-context). Handing it a drawer of foreign credentials would seat the honeypot on the one island with the thinnest walls.
+
+<<~ confidence Synthesis-Canon 14/20 >> ''The cost stays honest:'' a fleet with no node cannot post. That reads as the same shape the family mesh already assumes — a hearth stands somewhere — rather than as a new dependency.
+
+''The grain the operator named:'' a dark-by-default net where the glass a person carries stays deliberately thin, and what matters sits at a place you keep. The phone drafts in the open; the hearth holds what a search of the phone must not find. The split buys a property rather than costing a convenience.
 
 <<~/ahu >>
 
@@ -140,7 +156,92 @@ A reach credential rides the ''same'' chain a bag rides (#cap-tier) and the ''sa
 
 A capability this stack grants, it revokes — by non-renewal of a lease, under no-global-now. ''A foreign credential inverts that.'' The far side may revoke unilaterally, at an instant we do not observe, and the vessel learns by ''failure'' rather than by notice.
 
-<<~ confidence Synthesis 11/20 >> That asymmetry reads as honest rather than broken — it names precisely what holding someone else's instrument costs — but it MUST surface as a first-class state rather than an error. A projection that silently stops landing is worse than one that reports a dead reach cap, and a retry loop against a revoked credential reads to the far side as an attack.
+<<~ confidence Synthesis 11/20 >> That asymmetry reads as honest rather than broken — it names precisely what holding someone else's instrument costs — but it MUST surface as a first-class state rather than an error. A projection that silently stops landing is worse than one that reports a dead reach cap.
+
+''HEALTH PER CREDENTIAL, AND NEVER A RETRY LOOP'' (approved, operator 2026-08-08). Each credential carries a health state, updated on use and readable in status, so a dead one reads DEAD rather than reading as a projection that quietly stopped working. And the vessel MUST NOT retry against a refused credential: repeated authentication attempts read to the far side as an attack, which converts a revocation into a ban.
+
+<<~/ahu >>
+
+<<~ ahu #the-vault-reads-as-a-bag >>
+
+!! The vault reads as a bag, never as a third carrier
+
+The vessel already holds two at-rest secret carriers under a two-file ratify discipline, and both stay ''per-device by design'' — the archive and the device-share never replicate. A reach credential declared PERSONAGROUP must reach the ''fleet'', so it cannot ride that discipline at all.
+
+<<~ confidence Synthesis 12/20 >> Read as a ''cap-tiered bag'' instead and almost nothing new gets built: sealing-on-the-wire already runs universal, the declared∧floor gate already stands, keyring-delivery to a recipient set already delivers, fleet-sync already syncs.
+
+''THE TRUNCATION FALLS OUT OF A FLOOR, NEVER A CEILING'' — which reads as the tell that the framing lands right. The keystone already computes `meet(declared, floor)`, so a credential bag floored at CONTRACT meets any PUBLIC declaration back down on its own. Publishing a credential becomes ''mechanically impossible'' rather than merely forbidden, and no new enforcement carries it.
+
+''The one piece of real engineering this leaves:'' which oracle floors a credential bag at CONTRACT. The live floor reads from the federatable-set and sealed-plane oracles; a credential wants a third reading beside them. Small, answerable, and the keystone of the whole plane.
+
+<<~/ahu >>
+
+<<~ ahu #the-service-manifest >>
+
+!! The service manifest ~ each surface declares what it can do
+
+''APPROVED (operator, 2026-08-08).'' Every foreign surface carries a ''manifest'' naming what it supports, and the projection reads the manifest rather than assuming a shape. A manifest holds what the surface can do — whether a post edits after landing, whether it threads, what length it takes, which media it accepts, whether its credentials expire.
+
+The manifest exists because ''the surfaces genuinely differ and none of them tell you politely''. A projection that assumes editability against a surface that appends silently strands an operator's correction; one that assumes a length that surface refuses fails at the worst moment. Reading a declared capability turns a class of runtime surprises into a startup-time absence.
+
+''EDITS MOSTLY DO NOT TRAVEL.'' Most surfaces accept a post and never revise it, so a projection reads ''append-only in practice'' even where the bag stays mutable. State it plainly at the surface: an operator who expects a wiki edit to reach a landed post will find out the hard way otherwise.
+
+''THREADING RIDES LATER.'' Splitting a long bag or meme across a thread wants its own design, and it wants live wikis to design against. Named here so the manifest's `threads` field has a consumer waiting.
+
+<<~/ahu >>
+
+<<~ ahu #emit-receipts >>
+
+!! Emit receipts ~ content-addressed, from the first line
+
+''APPROVED (operator, 2026-08-08).'' Every emission records a ''content-addressed receipt'': what was emitted, to which surface, under which credential, from which vessel.
+
+''Posting twice is the classic failure of exactly this feature'', and deduplication retrofitted onto a live publishing pipeline goes badly — the receipts have to predate the first post rather than answer the first complaint. Content-addressing carries it without a clock: the same content over the same ground addresses the same receipt, so a re-run collides instead of duplicating (the reading-persistence rule, one plane over).
+
+''THE VESSEL RIDES THE RECEIPT, and the shared-character case is why.'' When a cabal shares a credential for one character (#persona-binding), the world sees one voice and the cabal needs to know ''whose hand moved''. Recording the emitting vessel keeps a shared character's timeline attributable ''inside'' the contract without leaking anything outside it.
+
+<<~/ahu >>
+
+<<~ ahu #persona-binding >>
+
+!! Persona binding ~ high cardinality, and two kinds of breach
+
+The operator's own ground sets the scale: three standing accounts today with more planned, a second operator planning ''one account per character'' across a growing cast, and characters from a shared setting whose credentials ''several people hold''. So the vault holds dozens of credentials, not a handful, and the binding between a persona and its credential carries real traffic.
+
+Three consequences follow directly:
+
+* ''The honeypot argument strengthens'' — dozens of credentials on one island argues compose-and-request harder than a handful ever did (#compose-and-request).
+* ''Per-app separation stops being hygiene.'' With this many credentials under one vessel, the per-app HKDF `info` becomes the thing standing between one compromise and all of them.
+* ''A wrong-persona post breaks two things at once.'' Posting as the wrong face crosses a veil the identity model exists to hold — and in a shared setting it also breaks the fiction, in front of other people's characters. The binding wants to hold STRUCTURALLY, never by interface convention, because a UI slip should be unable to reach the wrong credential at all.
+
+''THE SHARED-CHARACTER CASE IS THE LIVE CONTRACT TIER.'' A character several people voice is exactly the credential held at CONTRACT — the same keyring-delivery to a set, with the blast radius the tier names. Not a hypothetical: it arrives with the first shared cast.
+
+<<~ confidence Provisional-Synthesis 8/20 >> ''AND THE TENSION STAYS OPEN.'' A credential bound to a persona must reach the fleet ''without'' the binding revealing which personas a vessel holds — the multitude-view never fleet-syncs, and a per-persona credential index would reconstruct it. That wants its own pass rather than a guess made in passing.
+
+<<~/ahu >>
+
+<<~ ahu #cred-onboarding >>
+
+!! Credential onboarding ~ named, unbuilt
+
+''OPEN — wants design work.'' Three routes in, with genuinely different properties:
+
+* ''Typing a password into a wiki'' — the worst of them. It puts a full account secret through the composition surface and teaches an operator a habit worth un-teaching.
+* ''Pasting an attenuated token'' (an app-password, a scoped grant) — works today, needs nothing new, and rides the preference the honeypot section already names. ''The pragmatic first path.''
+* ''An OAuth redirect'' — the best experience and the most machinery. It needs a ''secure context'' to land, which ties the whole enrollment flow to the naming and certificate work (#nexus-topology, #secure-context) rather than standing on its own.
+
+''The onboarding surface also decides where a credential first exists in the clear'', which makes it a security design and not only a UX one.
+
+<<~/ahu >>
+
+<<~ ahu #what-stays-open >>
+
+!! What stays open
+
+* ''OAUTH REFRESH MAKES THE VAULT NON-PASSIVE — research and testing owed.'' A sealed store opens when asked; an expiring credential must ''reach out'' to renew itself, so the vault acquires a clock and an outbound network leg, and the refresh token itself rotates. Open beneath it: who performs the refresh (a daemon waking to refresh holds decrypted credentials in a window the archive design works hard to narrow), under which key, and whether a refresh may run with no operator present. <<~ confidence Synthesis 11/20 >> ''One consequence already reads clearly:'' prefer surfaces offering non-expiring attenuated credentials, which turns the honeypot section's preference into something closer to a rule.
+* ''The persona-binding privacy tension'' (#persona-binding) — fleet-reach without reconstructing the multitude.
+* ''The CONTRACT floor oracle'' (#the-vault-reads-as-a-bag) — the small piece the whole truncation rests on.
+* ''Kowloon actor-key custody'' — their schema mints a user's keypair server-side, which does not compose as written with the downstream law (#downstream-law). Two ways through: patch the server to accept an externally-held actor key, or accept the server-held key as a reach instrument and name the custody out loud. ''Deferred until a Kowloon server actually stands.''
 
 <<~/ahu >>
 
@@ -149,6 +250,7 @@ A capability this stack grants, it revokes — by non-renewal of a lease, under 
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/nexus-topology >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>
