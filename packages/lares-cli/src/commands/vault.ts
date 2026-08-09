@@ -1,11 +1,11 @@
 /**
- * `lares vault {status,seal,rotate,export <path>,repair}` — the at-rest seal LIFECYCLE surface (#60).
+ * `lares vault {status,seal,rotate,export <path>,repair}` — the at-rest seal LIFECYCLE surface.
  *
  * The vessel seals TWO secret carriers at rest under a scrypt-derived passphrase KEK: the keyhive archive
  * (the sovereign identity floor) and the device recovery share. This command is the operator's door to
  * their lifecycle — see them, seal them, rotate the passphrase, export a sealed backup, repair a split.
  *
- * DAEMON-FIRST (FORK-1): when the daemon holds the socket, the MUTATING verbs route THROUGH it, so the
+ * DAEMON-FIRST: when the daemon holds the socket, the MUTATING verbs route THROUGH it, so the
  * daemon re-persists the carriers AND updates its own in-memory seal policy in one act (no un-rotate).
  * When the daemon is DOWN, the CLI does the direct file op itself (same core functions, this process).
  *
@@ -71,7 +71,7 @@ async function newPass(args: ParsedArgs, label: string): Promise<string> {
 
 class UsageError extends Error {}
 
-/** Warn (never reject) on a weak passphrase — the SOFT floor (FORK-4). */
+/** Warn (never reject) on a weak passphrase — the SOFT floor. */
 function warnIfWeak(pass: string): void {
   const w = weakPassphraseWarning(pass);
   if (w) console.error(`  warning: ${w}`);

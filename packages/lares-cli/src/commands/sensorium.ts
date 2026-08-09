@@ -4,7 +4,7 @@
  * A noun-verb tree over scratch mempalace instances under `<cache>/scratch/sensoriums/<id>/`: open a sensorium,
  * ingest a path, query it, then let it DISSOLVE — or retain it through `sensorium keep`. `run` is ephemeral-DEFAULT
  * (open → ingest → analyze → dissolve on exit, success OR error); the deep ingest (bands · structure
- * · form) is the documented S1–S3 shore, the lifecycle + store + commands are wired solid in S0.
+ * · form) stands documented and unbuilt; the lifecycle + store + commands are wired solid.
  *
  * The lifecycle logic lives ONCE in @lararium/node (sense-sensorium.ts); this command is a thin
  * dispatch + render shim. The examples-first help strings here are the SINGLE SOURCE the design meme

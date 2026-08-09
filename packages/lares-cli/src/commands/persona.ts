@@ -1,7 +1,7 @@
 /**
  * `lares persona {new <index> --name <petname> [--handle <Handle>] [--seat] | wear <index> | list}` — the
  * operator's door to the
- * PLURALITY-PONO identity multitude (#66). A vessel HOLDS a set of PersonaGroup-roots — one per persona
+ * PLURALITY-PONO identity multitude. A vessel HOLDS a set of PersonaGroup-roots — one per persona
  * the operator wears (persona-vault) — and WEARS one at a time. This command DRIVES the existing node core;
  * it never re-implements minting, the custody wall, or the pet-name store.
  *

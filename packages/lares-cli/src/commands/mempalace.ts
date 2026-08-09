@@ -11,8 +11,8 @@
  *
  * THE GUEST LANE. `~/.mempalace` is a GUEST — a standalone sidecar the operator raises deliberately,
  * never a runtime binding the vessel boots into. `lares wake --init` stands only the sovereign
- * sensorium; standing the guest from the boot wrote the very store the S5 comparator ruling reserves
- * as an untouched baseline (`RUN-ARC.md:14` — "the RUN never writes it"). So every guest verb lives
+ * sensorium; standing the guest from the boot wrote the very store the COMPARATOR ruling reserves
+ * as an untouched baseline — a measurement never writes the thing it measures against. So every guest verb lives
  * HERE, behind an explicit operator act. Its uses: a sanity-check sidecar to compare the sovereign
  * sensorium against, and the source of the one-way import Act (`guest-import.ts`).
  *

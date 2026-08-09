@@ -64,7 +64,7 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
 /**
  * `lares reset` — wipe the vessel store (`<data>/vessel`) + bootstrap artifact, then re-init.
  *
- * Operator-confirmation gate: until S7 lands proper auth, we still want a
+ * Operator-confirmation gate: until proper auth lands, we still want a
  * second-thought guard. Honors --force to skip the prompt.
  */
 /**

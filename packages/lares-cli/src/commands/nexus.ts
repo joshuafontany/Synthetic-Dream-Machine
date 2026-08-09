@@ -1,7 +1,7 @@
 /**
  * `lares nexus seal {seat | rotate | commit | show}` — the operator's door to the founding-kahu ROSTER
  * and its PRE-ROTATED, hash-linked charter-epoch CHAIN (TUF ≈ KERI), the Kapae immune antigen's authority
- * home (#68). The roster lives as data-as-authority in the `bags/@nexus` charter DOC; the antigen roots on
+ * home. The roster lives as data-as-authority in the `bags/@nexus` charter DOC; the antigen roots on
  * the chain's HEAD epoch. The pure antigen fold/verify reads this same doc through `foundingRoster`.
  *
  *   seat    read each held persona's ed25519 VERIFYING key from the vault (NEVER the signing seed), match it
