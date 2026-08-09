@@ -7,12 +7,12 @@ file-path = "bags/@lares/ha.ka.ba/lares/api/pono/hoala-cap-floor.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 15
-manao     = 14
+manao     = 16
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis"
+register  = "Synthesis-Canon"
 retain    = true
-role      = "hoʻāla — THE WAKING FLOOR: a vessel wakes at its MINIMUM available cap-stack and gets RAISED by recognition, never gated by absence. The unattended-reboot answer for a civic mesh (a sealed hearth that refuses to boot converts a power cut into an outage), and the same law the veil-ladder already runs one plane over: caps stack above a floor that never dissolves. Carries the degrade-not-refuse shape, the kahu-quorum raise, the downgrade-attack question held OPEN, and the Elyncia reading the myth was already carrying"
+role      = "hoʻāla — THE WAKING FLOOR: a vessel wakes at its MINIMUM available cap-stack and gets RAISED by recognition, never gated by absence. The unattended-reboot answer for a civic mesh, and the same law the veil-ladder runs one plane over (caps stack above a floor that never dissolves) — a THIRD occasion of the identity plane's expiring lift. GROUNDED against prior art 2026-08-08: Android Direct Boot ships it and INVERTS the vocabulary (the floor is the HARDENED state; Google now FORCES it at 72h), SPIRE + kubelet TLS bootstrap validate raise-by-recognition, Vault confirms the unfixed failure, and Tang rules that KAHU MUST NOT HOLD SHARES (a share-holder becomes the collector, colliding with bind-by-edge). Carries six named breaks — no lowering designed, a bearer-credential raise, an unsigned announcement that targets, unstamped floor reads, an unwritten shelf discipline, and 'degraded' misnaming the resting state — plus the four-way downgrade profit split where the VETO reads worst because it stays quiet"
 tags      = ["api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/api/pono/hoala-cap-floor"
@@ -71,53 +71,180 @@ floor reads as real structure rather than as a special case either occasion inve
 
 <<~ ahu #the-shape >>
 
-!! The shape ~ degrade, announce, raise
+!! The shape ~ rest, announce, raise
 
 \procedure ~Wake(~Type:"" ~Params:"") ~Wake <<~Type>> <<~holds `[<~Params>]`>>
 
 <<~Wake Stand "at/the-minimum-reachable-cap-stack ~ never a refusal" >>
 <<~Wake Serve "what/needs-no-secret ~ the public shelf serves without opening anything" >>
 <<~Wake Hold "closed/every-sovereign-act ~ a locked vessel signs nothing" >>
-<<~Wake Announce "loudly/what-it-cannot-do ~ silence about a missing cap reads as the cap" >>
-<<~Wake Raise "by/recognition ~ an operator arriving, or kahu-quorum-signed material presented" >>
+<<~Wake Announce "loudly/what-it-cannot-do signed/always ~ an unsigned announcement spoofs and targets" >>
+<<~Wake Stamp "every-read/as-of-my-last-sync ~ a bare answer from the floor opens split-brain" >>
+<<~Wake Raise "by/recognition on/a-nonce-THIS-vessel-emitted ~ never a pre-baked blob" >>
+<<~Wake Expire "the-raise/lapses-back-to-the-floor ~ nobody lowers it; it simply stops being renewed" >>
 
-''ANNOUNCING carries more weight than it looks.'' A vessel standing degraded and quiet is worse than one
-refusing, because a caller cannot tell a held act from a performed one. The degrade only reads honest where
-the vessel ''says the cap is absent'' at the surface a caller reads.
+''ANNOUNCING carries more weight than it looks, and MORE than the first draft granted it.'' A vessel
+standing at the floor and quiet reads worse than one refusing, because a caller cannot tell a held act from
+a performed one. But the announcement ''MUST SIGN'': unsigned, it becomes a spoofable degradation signal AND
+a targeting beacon naming which vessel sits unraised (#the-breaks c).
 
-''THE RAISE REUSES MACHINERY THE MESH ALREADY RUNS.'' A kahu quorum already signs acts against a
-pre-rotated, hash-linked epoch chain — each epoch pre-committing a digest of the next key-set. A k-of-n
-raise rides that, rather than inventing a second authority beside it. ''A crossroads could come back without
-waking anyone'', where enough of its kahu stand reachable.
+''THE RAISE REUSES MACHINERY THE MESH ALREADY RUNS'' — a kahu quorum signing against the pre-rotated,
+hash-linked epoch chain, rather than a second authority invented beside it. ''But the vessel supplies the
+freshness'': it emits a nonce bound to its own epoch head and the kahu sign THAT, because a clockless vessel
+accepting pre-signed material accepts a bearer credential that replays forever (#the-breaks b).
+
+<<~/ahu >>
+
+<<~ ahu #prior-art >>
+
+!! What survives contact ~ the field ran this, and inverted our word for it
+
+''A research spirit gathered outside negentropy'' (Night-Watch, 2026-08-08). The shape survives; the
+vocabulary does not.
+
+!!! ⚠ THE FLOOR IS THE HARDENED STATE, NOT THE DEGRADED ONE
+
+''Android Direct Boot ships this, and reads it the opposite way we did.'' A phone boots into
+device-encrypted storage only; credential-encrypted storage opens on first unlock —
+`ACTION_LOCKED_BOOT_COMPLETED` fires at the floor, `ACTION_USER_UNLOCKED` marks the raise, and
+`isUserUnlocked()` lets a component read which state it stands in. Alarms, SMS and accessibility run at the
+floor. <<~ confidence Canon 18/20 >>
+
+''The forensics industry treats BFU as the HARDENED state and AFU as the liability'' — and Google agreed
+hard enough to ''force the floor'': Android auto-reboots after 72 hours without an unlock attempt,
+specifically to drag devices back out of extraction range.
+
+''So `degraded` misnames the safe state and biases an operator toward rushing the raise.'' ''The floor holds
+the RESTING state; the raise carries the risk.'' Every reading below re-seats on that.
+
+!!! Three more that validate the shape
+
+* ''SPIRE node attestation'' restates //capability by recognition, never gated by absence// almost verbatim
+  — a workload bootstraps holding no secret, and identity derives from what it does and where it runs.
+* ''Kubelet TLS bootstrapping'' ships the two-stage ladder (a limited credential buys a CSR, an approver
+  raises it, rotation re-runs it) — and core Kubernetes ''refuses to auto-approve serving certificates by
+  design''. The raise stays a deliberate act there too.
+* ''Vault confirms the failure and confirms nobody cured it.'' A sealed Vault serves unseal and status — ''a
+  boolean, never a cap-stack''. Auto-unseal trades the quorum for a hard KMS lifecycle dependency, and
+  recovery keys ''cannot unseal''. Issue #16419 asks for exactly our design and sits open, unanswered.
+
+!!! ★ THE KAHU MUST NOT HOLD SHARES ★
+
+''Tang gives the escrow-free shape better than a share-holding quorum does.'' Tang stays stateless, "never
+sees a single client key", gains no identifying information, and blinds the exchange so only the client
+unblinds; Clevis `sss` already composes k-of-n over tang/TPM pins.
+
+> ''Model kahu as Tang-shaped EXCHANGE parties, never as HOLDERS of KEK shares.''
+
+<<~ confidence Synthesis-Canon 16/20 >> A kahu holding shares ''becomes the collector'' — which collides
+head-on with the house's own ''bind by edge, never by seed'' law. The prior art and the standing ruling
+point the same way, which is the strongest signal available here.
+
+<<~/ahu >>
+
+<<~ ahu #the-breaks >>
+
+!! ⚠ Six breaks ~ what the proposal got wrong
+
+''(a) WE DESIGNED THE RAISE AND NEVER THE LOWERING.'' The biggest hole. A raised vessel that stays raised
+forever turns the floor into a one-time inconvenience and hands an adversary a fleet of permanently-raised
+boxes — which is precisely why Android added its 72-hour forced return. ''The raise MUST expire back to the
+floor on idle.''
+
+''AND THE HOUSE ALREADY RULED THE CURE, one plane over.'' The identity plane holds that a standing lift
+''EXPIRES rather than decays'', that ''no party exercises a lowering act'', and that the operator seats a
+''renewal interval'' rather than a rate. ''Third occasion, same law'': the raise expires, nobody lowers it,
+and a vessel that stops being recognised simply stops being raised. <<~ confidence Synthesis-Canon 15/20 >>
+
+''(b) "k-of-n material PRESENTED to it" describes a BEARER CREDENTIAL.'' A vessel at the floor holds no
+clock and no trustworthy wall time, so signed material presented to it ''replays forever'' — a thief with
+the disk AND one captured raise-packet raises the stolen vessel, and the seal-against-a-stolen-disk
+evaporates. ''The cure needs verifier-chosen freshness'': the vessel EMITS a nonce bound to its own epoch
+head, and the kahu sign ''that''. ''Never a pre-baked blob.''
+
+''(c) THE ANNOUNCEMENT, UNSIGNED, ARMS TWO ATTACKS.'' It becomes a spoofable degradation signal (peers route
+away from a healthy vessel) — and under the standing brief ''shelter against empire'' it becomes a
+''TARGETING BEACON'', naming which vessel sits unraised, right now, and where. ''The floor's announcement
+MUST sign'', and the roster of what-it-cannot-do reads as ''hostile-readable''.
+
+''(d) A FLOOR READ WITHOUT A STALENESS STAMP OPENS SPLIT-BRAIN.'' GitHub's 2012 partition and GitLab's
+Postgres split-brain both landed the same lesson: degraded-but-serving produced ~24 hours of hand
+reconciliation, ''worse than a clean stop''. Every floor read MUST carry //as of my last sync// — which the
+causal-islands law already demands and this surface had not yet honoured.
+
+''(e) THE SHELF DISCIPLINE STANDS UNWRITTEN.'' Android's own doc names it: never place private user
+information, passwords, or authorization tokens in device-encrypted storage. ''Our public shelf needs that as
+explicit law with a review gate'', never as an intention.
+
+''(f) "DEGRADED" MISNAMES THE SAFE STATE'' (#prior-art). The floor rests; the raise risks.
 
 <<~/ahu >>
 
 <<~ ahu #the-open-question >>
 
-!! ⚠ What stays OPEN ~ the downgrade attack
+!! The downgrade attack ~ forcing costs nothing; the profit splits four ways
 
-''If a vessel CAN run degraded, can an adversary FORCE that state and profit?'' The question has no answer
-here yet, and it decides whether the shape ships at all:
+''An adversary CAN force the floor'' — cut the power. Cheap, deniable, repeatable. What that buys them
+splits, and only the first line reads well for us:
 
-* Can an attacker ''induce'' the degraded wake (cut power, deny the raise) and harvest what the floor still
-  serves?
-* Does a floor that serves a public shelf leak anything ''by existing'' — presence, liveness, a roster?
-* Does a degraded vessel become a ''confusion surface'' for peers who cannot tell held from performed?
+\procedure ~Profit(~Type:"" ~Params:"") ~Profit <<~Type>> <<~holds `[<~Params>]`>>
 
-''RULED already, and not up for re-litigation'': the KEK stays passphrase-primary; a random key beside the
-ciphertext reads as obfuscation posing as isolation and gets refused; a missing passphrase ''NEVER silently
-degrades to weak key handling''. The degrade is about WHAT A VESSEL SERVES, never about weakening what it
-seals.
+<<~Profit Secret-harvest "verdict/NO ~ forcing the floor produces the BFU result extraction vendors call the BAD outcome. The floor holds." >>
+<<~Profit Veto "verdict/YES-and-severe ~ a permanent deniable veto to whoever can drop power (MITRE T1562.010)" >>
+<<~Profit Raise-oracle "verdict/YES ~ forced reboots MANUFACTURE the moment kahu present material; repetition harvests it" >>
+<<~Profit Gray-failure "verdict/YES ~ peers cannot tell AT-THE-FLOOR from COMPROMISED-AND-IMITATING-THE-FLOOR" >>
 
-''OPEN'': whether an unattended boot ''refuses or degrades'', and what may raise it. The boot gate throws
-today because ''refusing stays the safe default while the answer is unmade'' — an outage recovers and a
-silently-unsealed identity does not. <<~ loulou lar:///ha.ka.ba/lararium/node/archive-passphrase >> carries
-the option space where the refusal happens.
+''THE VETO READS AS THE WORST OF THE FOUR, and it reads worst precisely because it stays QUIET.'' A civic
+mesh whose function runs on sovereign acts hands a deniable, repeatable veto to whoever can reliably drop
+power — and the result is not an outage (loud, escalatable, politically legible) but ''silent capability
+suppression''. So the floor MUST make suppression loud: ''an unexplained reboot deserves treatment as a
+signal to peers, never as routine''. <<~ confidence Synthesis-Canon 15/20 >>
 
-''A research spirit gathers outside negentropy on this'' (2026-08-08): Vault's Shamir unseal + the
-auto-unseal critique, LUKS/Clevis/Tang network-bound encryption, TPM measured-boot sealing, systemd
-credentials, and the closest prior art — a phone's ''Before-First-Unlock'' vs ''After-First-Unlock'' states,
-which genuinely boot into reduced capability and gain it on unlock.
+''THE GRAY FAILURE names why the announcement must sign.'' Huang et al.'s differential observability: peers
+cannot distinguish a vessel at the floor from one compromised and imitating it, and standard availability
+mechanisms do not model that failure at all. ''Sign the state, or peers will trust an attacker's claim about
+it.''
+
+!!! What the field could NOT answer, which raises rather than lowers its priority
+
+* ''No accepted freshness standard for presenting quorum material to a CLOCKLESS OFFLINE node.'' Break (b)
+  sits on genuinely unmapped ground — the cure reads sound and nobody has standardised it.
+* ''No security analysis of boot-to-floor as a named server pattern'', and no established name for it. The
+  nearest handles read ''Direct Boot / BFU→AFU'' (shipped), ''progressive trust'' (Allen), and ''node
+  attestation''. `hoʻāla` may have to name it.
+* ''No field reports on NBDE or TPM at Pi-class civic scale'', and no published post-mortem uses "unseal
+  storm" — mass-reboot pain surfaces only as feature requests and support threads.
+
+!!! Where the field genuinely SPLITS, so no one mistakes a choice for a consensus
+
+''Fail-secure vs fail-open carries no settled answer.'' Vault chose fail-secure and generated exactly our
+complaint; GitHub's post-mortem concluded //fail-stop is dangerous… sometimes keep serving stale data beats
+going silent//; Android chose fail-secure AND added a timer to force more of it. ''Anyone claiming this
+settled is selling one.'' Auto-unseal splits the same way — HashiCorp ships it as the operational answer,
+practitioners argue it forfeits the point.
+
+!!! The paths that do NOT carry a civic mechanism
+
+* ''Tang/NBDE relocates the 3am outage rather than curing it'': an unreachable Tang server leaves a node
+  retrying indefinitely rather than booting, and Red Hat's DR guidance demands redundant power AND network.
+* ''The TPM path breaks on ordinary maintenance'' — PCR7 binding fails on firmware/kernel/bootloader update,
+  and `systemd-cryptenroll` refuses to re-enroll with the same PCR parameters.
+* ''Pi-class hardware carries no complete chain of trust'' without extra parts, and ''systemd-creds kills
+  fleet provisioning outright'' — credentials cannot be prepared on a machine other than the local one.
+  <<~ confidence Synthesis-Canon 15/20 >> TPM and systemd-creds serve as ''local convenience'', never as
+  the civic mechanism.
+
+!!! What stays RULED, and is not re-litigated by any of the above
+
+The KEK stays ''passphrase-primary''; a random key beside the ciphertext reads as obfuscation posing as
+isolation and gets refused; a missing passphrase ''NEVER silently degrades to weak key handling''. ''The
+floor names WHAT A VESSEL SERVES, never what it weakens.''
+
+''OPEN'': whether an unattended boot refuses or rests, what may raise it, and the renewal interval a raise
+expires on. The boot gate throws today because ''refusing stays the safe default while the answer is
+unmade'' — an outage recovers and a silently-raised identity does not.
+<<~ loulou lar:///ha.ka.ba/lararium/node/archive-passphrase >> carries the option space where the refusal
+happens.
 
 <<~/ahu >>
 
