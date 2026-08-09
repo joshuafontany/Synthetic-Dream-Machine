@@ -10,11 +10,13 @@ import { describe, expect, test } from "vitest";
 
 import {
   activePersonaPlane,
+  mountedPlaneBagId,
   personaPlanesFault,
   resolvePersonaPlanes,
   type PersonaPlaneRef,
 } from "../src/persona-planes.js";
 import { personaBagIdFor } from "../src/persona-scope.js";
+import { PERSONA_BAG_ID } from "../src/lar-uris.js";
 
 const work: PersonaPlaneRef = { personaGroupId: "work-group", url: "automerge:work" };
 const play: PersonaPlaneRef = { personaGroupId: "play-group", url: "automerge:play" };
@@ -69,5 +71,32 @@ describe("★ a family that could shadow itself never boots ★", () => {
 
   test("a well-formed family carries no fault", () => {
     expect(personaPlanesFault([work, play])).toBeNull();
+  });
+});
+
+describe("★ deixis resolves HERE, and only the absolute name leaves ★", () => {
+  test("★ the resolved name is the plane's ABSOLUTE name, never the deictic constant ★", () => {
+    // The whole law in one assertion. A deictic that survives resolution becomes an operand in the
+    // capability decision — the configuration SPKI/SDSI rules out, Capsicum banned for the filesystem
+    // (`AT_FDCWD`), and MITRE catalogues as CWE-386. Return the constant here and the gesture leaks
+    // into the map, where a bag URL is hashed to seed the document it names.
+    const bagId = mountedPlaneBagId([work, play], "work-group");
+    expect(bagId).toBe(personaBagIdFor("work-group"));
+    expect(bagId).not.toBe(PERSONA_BAG_ID);
+  });
+
+  test("standing in a different group resolves to a different absolute name", () => {
+    expect(mountedPlaneBagId([work, play], "work-group"))
+      .not.toBe(mountedPlaneBagId([work, play], "play-group"));
+  });
+
+  test("resolution is stable, so the same gesture names the same plane on every boot", () => {
+    expect(mountedPlaneBagId([work, play], "play-group")).toBe(mountedPlaneBagId([play, work], "play-group"));
+  });
+
+  test("an ungrounded gesture halts — a deictic with no referent errors, never defaults", () => {
+    // DNS makes an unresolvable relative name an error rather than a fallback; every silent-default
+    // case in the surveyed art produced documented harm.
+    expect(() => mountedPlaneBagId([work, play], "absent-group")).toThrow();
   });
 });

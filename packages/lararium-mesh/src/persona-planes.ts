@@ -79,6 +79,48 @@ export function activePersonaPlane(
 }
 
 /**
+ * mountedPlaneBagId — THE ONE PLACE DEIXIS RESOLVES. Everything downstream carries the absolute name.
+ *
+ * ── THE LAW THIS ENCODES, AND WHERE IT COMES FROM ───────────────────────────────────────────────
+ * A caller says "the plane I stand in" — a deictic, an indexical, a gesture. This function turns that
+ * gesture into the plane's ABSOLUTE name, derived from that group's own material, and only the absolute
+ * name travels onward into any map. Nine naming systems and the capability literature converged on that
+ * one move from opposite directions:
+ *
+ *   · Resolve once at the edge, store the absolute. AT-Proto resolves a Handle to a DID and binds the DID
+ *     everywhere downstream; Nostr's NIP-05 goes further — a later change to the binding MUST NOT rewrite
+ *     what was already stored. Resolution never re-fires backward.
+ *   · A local name may enter RESOLUTION; it may never stand as an operand in the DECISION. SPKI/SDSI
+ *     (RFC 2693) reduces names to keys FIRST, and only then computes authorization.
+ *   · Miller (Robust Composition): hardening a system consists of ELIMINATING name-centric designation,
+ *     not elaborating it — a callee receives the reference, never the caller's word for it. His CapDesk
+ *     keeps the deixis in the human gesture and resolves it in the shell, in the user's own namespace.
+ *   · Capsicum, given this exact fork for the filesystem, BANNED the deictic token: `AT_FDCWD` sits
+ *     forbidden in capability mode beside absolute paths and `..`.
+ *   · MITRE names the general shape CWE-386 — a constant symbolic reference whose referent moves.
+ *
+ * The one permissive precedent does not reach us. seL4 does resolve against an implicit per-thread root,
+ * and survives because that root sits kernel-installed, per-subject, unforgeable, and NOT a string any
+ * caller can utter. A bag id is a string in a document.
+ *
+ * ── WHY THIS MATTERS MORE THAN A STYLE PREFERENCE ───────────────────────────────────────────────
+ * The capability layer hashes a bag URL to SEED the Keyhive Document behind it, then looks the URL up
+ * verbatim to decide access. So the name is not a label on a plane — for a stretch of the stack it IS the
+ * plane. Two spellings seed two documents that no later aliasing reconciles, which makes a rename after
+ * the ring goes live a re-founding rather than an edit.
+ *
+ * ── THE STATE THIS FUNCTION SITS IN, STATED PLAINLY ─────────────────────────────────────────────
+ * The boot path still names the mounted plane by the constant, coherently: the composite layer, the
+ * `@oracle` registry entry, the admit payload's read of that entry and the registration all say the same
+ * string, so nothing half-wires. This function stands as the resolution point that lets those move onto
+ * absolute names together, in one pass, rather than one at a time — and the move costs least while the
+ * inner capability ring stays unwired, because nothing has hashed a name into a document yet.
+ */
+export function mountedPlaneBagId(planes: readonly PersonaPlaneRef[], activeGroupId: string): string {
+  return activePersonaPlane(planes, activeGroupId).bagId;
+}
+
+/**
  * Whether a family stands well enough to boot on: at least one plane, and no group named twice.
  *
  * A duplicated group would derive one bag id twice and mount a second writable layer over the first —
