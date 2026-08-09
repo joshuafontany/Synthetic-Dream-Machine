@@ -11,7 +11,7 @@ manaoio   = 15
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "WHAT A DEPENDENCY BUMP COSTS AN ALREADY-FOUNDED NEXUS — the five surfaces that bind to an epoch, measured rather than assumed. The engine CID is NOT the only one: hearthTrueName rides INSIDE every signed device-delegation preimage, and the pluginsCid tracks blobs built from THIS REPO'S OWN SOURCE, which makes the Nexus conformance vector move with our commits rather than with npm. Measured 2026-08-08: a runtime dep bump (automerge · noble · ws) touches exactly ONE surface (the on-disk serde, cured identity-safe by `lares rebuild`) and moves NO epoch binding, because the engine blob is vendored TW5 and the built plugin carries zero automerge references"
+role      = "WHAT A DEPENDENCY BUMP COSTS AN ALREADY-FOUNDED NEXUS — the five surfaces that bind to an epoch, measured rather than assumed. The engine CID is NOT the only one: hearthTrueName rides INSIDE every signed device-delegation preimage, and the pluginsCid tracks blobs built from THIS REPO'S OWN SOURCE. CORRECTED 2026-08-09 against the code, replacing this meme's own earlier over-claim: the pluginsCid rides as a LOCAL build-time integrity witness, never a membership criterion — the epoch binds to the ENGINE alone (hearthTrueName = engineCid, the slow ratchet), and the served-plugin layer composes per-operator beneath it on its own fast ratchet. Measured 2026-08-08: a runtime dep bump (automerge · noble · ws) touches exactly ONE surface (the on-disk serde, cured identity-safe by `lares rebuild`) and moves NO epoch binding, because the engine blob is vendored TW5 and the built plugin carries zero automerge references"
 tags      = ["mesh/genesis-doc", "mesh/charter-chain"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/epoch-binding-surfaces"
@@ -42,8 +42,7 @@ a wrong answer here reads identically to a right one until a founding breaks.
 
 <<~Surface Seal-epoch "binds/seated-keys + threshold moved-by/a-roster-or-quorum-change ~ genesisSealEpochCid — carries NO dependency, NO blob, NO version" >>
 <<~Surface Hearth-true-name "binds/the-TW5-core-blob-sha256 moved-by/a-TW5-submodule-bump ~ engineCid, and it rides INSIDE every signed delegation preimage" >>
-<<~Surface Plugins-CID "binds/the-built-plugin-blob-shas moved-by/THIS-REPO'S-OWN-SOURCE ~ 23 modules + 115 tiddlers packed from our TS" >>
-<<~Surface Nexus-conformance "binds/engineCid ⊥ pluginsCid moved-by/either-of-those ~ the membership criterion: same pair, same Nexus" >>
+<<~Surface Plugins-CID "binds/the-built-plugin-blob-shas moved-by/THIS-REPO'S-OWN-SOURCE ~ 23 modules + 115 tiddlers packed from our TS; verified at BUILD time by verifyGenesisArtifact — LOCAL integrity, never a membership criterion, and no peer path reads it (#the-real-mover)" >>
 <<~Surface On-disk-serde "binds/automerge + keyhive byte formats moved-by/a-RUNTIME-dep-bump ~ the only npm-movable surface" >>
 
 !!! ★ THE ONE MOST EASILY MISSED ★
@@ -76,7 +75,7 @@ performed. ''The binding IS (vessel × hearthTrueName)'': the engine CID is not 
   dependency tree.
 
 ''Therefore'': bumping `@automerge/*`, `@noble/*`, `ws`, `tsx`, `vite` moves ''NO epoch binding''. The seal
-lineage stands, every delegation edge still verifies, and the Nexus conformance vector holds.
+lineage stands and every delegation edge still verifies, because the binding rides the engine alone.
 
 ''What it CAN break is the on-disk serde'' — stored bytes serialized by a format the new deserializer cannot
 read. The vessel already names that condition and its cure rather than boot-looping on it:
@@ -91,23 +90,37 @@ read. The vessel already names that condition and its cure rather than boot-loop
 
 <<~ ahu #the-real-mover >>
 
-!! ⚠ What DOES move a Nexus ~ our own commits
+!! ⚠ CORRECTED — what a source commit actually moves
 
-''The pluginsCid tracks blobs built from THIS REPO'S SOURCE'', and the Nexus conformance vector reads
-`engineCid ⊥ pluginsCid`. So:
+''AN EARLIER PASS OF THIS MEME CLAIMED THE pluginsCid AS A MEMBERSHIP CRITERION'' — that everyone running
+the kahu's ratified `engineCid`/`pluginsCid` PAIR runs the same Nexus, so every commit touching the packed
+plugin ''proposes'' a new one. ''Read against the code 2026-08-09, that claim does not stand'', and it went
+out at a Synthesis-Canon band on grounds nobody had walked. Recording the correction beside the error,
+because a meme that quietly grows a right answer teaches nothing about how the wrong one got in.
 
-> ''Every commit that changes the packed plugin changes the pluginsCid — and the pluginsCid is a Nexus
-> membership criterion.''
+''WHAT THE CODE ACTUALLY DOES.'' `pluginsCid` appears in three files, and it gets COMPARED in exactly one
+place — `verifyGenesisArtifact`, called from `build-genesis-island.ts`. That runs at BUILD time and asks a
+purely local question: does the plugins region recompute to the witness this artifact stored? ''Integrity,
+never membership.'' No peer path reads it: the device-delegation preimage carries `hearthTrueName`'s value
+and nothing else from the genesis region, and no join, gate or verify compares one vessel's plugins digest
+against another's.
 
-''That reads far more consequential than any npm bump.'' A dependency update is an event an operator
-schedules; a source commit is an ordinary Tuesday. Adding one exported constant to `lar-uris` re-packs the
-plugin, re-attests it, and moves the digest — observed directly while building this arc.
+''AND THE DOCTRINE SAID SO ALREADY, in the source, in plain words'' (`genesis-artifact#hearthTrueName`):
 
-''THE RULING THE MESH ALREADY CARRIES.'' Membership computes rather than gets granted: everyone running the
-kahu's ratified `engineCid`/`pluginsCid` pair runs the same Nexus, and anyone running a different set runs a
-''different Nexus''. So a source commit does not //break// a Nexus — it ''proposes'' one, and the kahu clock
-decides whether the confederation moves together. ''The mechanism is a schism-generator by construction, and
-the ratification rite is what makes it a confederation instead.''
+> The PUBLIC face = the engine content-CID ''ALONE'' — the TW5 core + version, ''NOT the plugins''. Plugins
+> compose ''per-operator'' (DreamNet-offered) and ride their own fast ratchet, so a plugin change ''MUST
+> NEVER perturb the true-name.''
+
+<<~ confidence Canon 18/20 >> ''So the epoch rides the genesis ENGINE, and the served-plugin layer composes
+freely beneath it.'' A commit that re-packs the plugin moves a local integrity witness and touches no
+lineage: the seal stands, every delegation edge still verifies, and no confederation shifts. The
+''slow ratchet'' (engine) carries the binding; the ''fast ratchet'' (plugins) carries composition, and
+keeping them apart is what lets operators differ without schisming.
+
+''THE SHAPE OF THE ERROR, kept as the useful part.'' Two CIDs sat side by side in one manifest, so the meme
+read adjacency as conjunction and promoted a local witness to a federation criterion. ''A field's PRESENCE
+in a structure never names its ROLE'' — only a reader that follows it to a comparison learns that, and this
+one reasoned from the shape instead.
 
 ''AND THE OPEN STRETCH STAYS OPEN'' (`genesis-doc#the-open-stretches`): the model version binds at FOUNDING
 and ''nothing consults it when two replicas MERGE'' — precisely where the law bites. Two peers materializing
