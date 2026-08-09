@@ -128,7 +128,9 @@ A reach credential rides the ''same'' chain a bag rides (#cap-tier) and the ''sa
 * ''outward-only'' (lock 2) — a foreign credential grants no inbound authority over our content
 * ''attenuated tokens preferred'' — an app-password or scoped grant over an account password wherever the far side offers one; the ocap discipline (#orichalcum-capabilities) applied to instruments we did not mint
 
-''THE GAP IS THE VAULT ITSELF.'' It wants the OS-keychain KEK leg landed beneath it, and it raises the weight of the origin-attestation question (#secure-context) — a vessel holding ten credentials makes its origin a far richer target than a vessel holding one identity.
+''THE GAP IS THE VAULT ITSELF'', and it raises the weight of the origin-attestation question (#secure-context) — a vessel holding ten credentials makes its origin a far richer target than a vessel holding one identity.
+
+''THE CARRIER DECIDES WHAT A KEYCHAIN IS WORTH'' — and the reach plane inverts the caution the sovereign floor earns. Losing the archive KEK loses the identity floor, which nothing re-mints, so that carrier takes the most conservative gate the stack holds. Losing a reach-vault KEK costs ''a re-authorization'' — the downstream law again (#downstream-law: a re-mint, never a self). <<~ confidence Synthesis 12/20 >> So an OS-keychain KEK reads MORE appropriate here than on the archive, precisely because this plane holds the disposable thing. The KEK source composes across carriers; the ''policy'' per carrier reads from what its loss costs.
 
 <<~/ahu >>
 

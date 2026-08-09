@@ -9,9 +9,13 @@
  * KEK POLICY (operator ruling 2026-07-16 — passphrase-primary, keychain-conditional): the
  * key-encryption-key derives from an operator PASSPHRASE via scrypt (pure node:crypto,
  * survives a reboot — the WSL2-safe default, since an OS keychain there can land the KEK in
- * the kernel's in-memory keyutils cache and brick the identity on reboot). The OS-keychain
- * leg rides a named, detection-gated shore (`detectSecretService`) that stays inert until the
- * `@napi-rs/keyring` binding lands — it NEVER silently degrades to weak key handling.
+ * the kernel's in-memory keyutils cache and brick the identity on reboot).
+ *
+ * The OS-keychain leg rides two independent gates, and needs BOTH. `secret-service-probe` asks
+ * the machine whether a REBOOT-SURVIVING store answers — a live probe of bus name ownership,
+ * every unknown reading absent. `keychainBindingPresent` asks whether this build can reach one.
+ * The leg therefore stays dark wherever either half is missing, and it NEVER silently degrades
+ * to weak key handling.
  *
  * HONEST FALLBACK: with no passphrase configured, the archive stays CLEARTEXT (bare bytes,
  * unchanged behaviour) with a one-time warning — a random key stored beside the ciphertext
