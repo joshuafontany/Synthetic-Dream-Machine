@@ -517,7 +517,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // Read the HELD bulb off the genesis dir, EPOCH-PINNED to the charter chain-head — the ALL-PUBLIC cold-boot
   // snapshot a Herm serves so a stranger kindles their OWN sovereign hearth (serve fire, never key). Null when the
   // genesis is absent (nothing to hand). Read once at boot; the corm-lease pointer re-issues on the read-face breath.
-  const bulb: BulbArtifact | null = readBulbArtifact(genesisDir ?? defaultGenesisDir(), nexusDocForBoot?.sealEpochCid ?? null);
+  const bulb: BulbArtifact | null = readBulbArtifact(genesisDir ?? defaultGenesisDir(), nexusDocForBoot?.sealEpochCid ?? null, bootstrapPath);
 
   // STAND THE @cad CONVERGENCE KEYRING — the @cad seal's key source, minted for THIS vessel's charter-head epoch
   // (genesis = 0 when unseated) and persisted local (read-all). This fills the forward-declared shore: the vessel

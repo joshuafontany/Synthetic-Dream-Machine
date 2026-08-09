@@ -570,7 +570,11 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
  * drops the heading-titled records) — so SOH carriers MUST take the direct
  * memetic path, never the registry. The de-dup toward md-file-router is un-pono here.
  */
-const CARRIER_SOH = /<<~[^&\n]*&#x(?:0001|0011);/;
+// EITHER HEAD OPENS A CARRIER. The frame sigils moved to the control head `<<^` when the sigil sets
+// split into capability domains; the speaking head `<<~` still opens every word sigil. What identifies a
+// carrier lives in the SOH classifier that follows, never in which head carries it — so this matches on
+// the classifier and stays indifferent to the head, the way it should have from the start.
+const CARRIER_SOH = /<<[~^][^&\n]*&#x(?:0001|0011);/;
 
 /**
  * Land a whole-carrier SKINNY HANDLE — the body stays in the cid/ tier; the CRDT keeps only

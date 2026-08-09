@@ -109,11 +109,14 @@ export function assembleBulb(manifest: BulbManifest, getBlob: (cid: string) => U
 }
 
 /**
- * Read a bulb off a genesis dir — the HELD snapshot a Herm serves. Reads the plain-data seed (island.genesis.json),
+ * Read a bulb from TWO SITED INPUTS — the HELD snapshot a Herm serves. The seed rides `genesisDir`; the
+ * social bootstrap rides `bootstrapPath`, NAMED rather than reached for, because the two live in
+ * different homes now (a shared seed, a per-vessel address book) and a function that names one target
+ * while resolving the other from ambient state is the shape every confused-deputy bug wears. Reads the plain-data seed (island.genesis.json),
  * the CAS manifest (island.manifest.json), every genesis/cas/<cid> blob, and the vessel's social bootstrap,
  * PINNED to the passed charter chain-head epoch. Returns null when the genesis is absent/malformed (nothing to serve).
  */
-export function readBulbArtifact(genesisDir: string, sealEpochCid: string | null): BulbArtifact | null {
+export function readBulbArtifact(genesisDir: string, sealEpochCid: string | null, bootstrapPath: string): BulbArtifact | null {
   const seed        = readGenesisSeed(genesisDir);
   const casManifest = readGenesisManifest(genesisDir);
   if (!seed || !casManifest) return null;
@@ -124,7 +127,7 @@ export function readBulbArtifact(genesisDir: string, sealEpochCid: string | null
     return { cid: b.cid, bytes };
   });
   let bootstrap: Record<string, unknown> = {};
-  try { bootstrap = JSON.parse(readFileSync(larBootstrapPath(), "utf8")) as Record<string, unknown>; }
+  try { bootstrap = JSON.parse(readFileSync(bootstrapPath, "utf8")) as Record<string, unknown>; }
   catch { bootstrap = {}; }   // a Herm with no seated social plane serves an empty bootstrap (a stranger seeds their own)
   return { seed, casManifest, casEntries, bootstrap, sealEpochCid };
 }

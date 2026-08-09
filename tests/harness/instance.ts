@@ -144,8 +144,10 @@ function attachLive(): LarInstance {
   const root = process.env["LAR_ROOT"];
   const port = Number(process.env["LAR_PORT"] ?? 8080);
   if (!root) throw new Error("LAR_TARGET=live requires LAR_ROOT (and usually LAR_PORT) to name the instance");
-  if (!existsSync(join(root, "genesis", "social-bootstrap.json"))) {
-    throw new Error(`LAR_TARGET=live: no bootstrap at ${root}/genesis — is this a lararium root?`);
+  // A FOUNDED vessel proves itself by its own address book, which lives with the store it addresses —
+  // never in genesis/, where only the shared seed rides. Under LAR_ROOT the store sites at <root>/data/vessel.
+  if (!existsSync(join(root, "data", "vessel", "social-bootstrap.json"))) {
+    throw new Error(`LAR_TARGET=live: no social bootstrap at ${root}/data/vessel — has this root been founded?`);
   }
   const env = { LAR_ROOT: root, LAR_PORT: String(port) };
   return {

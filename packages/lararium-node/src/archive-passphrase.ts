@@ -354,7 +354,7 @@ export function repairSplitKek(openPassphrase: string, sealPassphrase: string): 
  *           ruling, never the ruling.
  *
  * The shape, the Elyncia reading, and the OPEN downgrade-attack question live at
- * lar:///ha.ka.ba/lares/api/pono/hoala-cap-floor — hoʻāla, the waking floor.
+ * lar:///ha.ka.ba/lares/api/pono/waking-floor — the waking floor.
  */
 export function assertSealReady(cfg?: LaresConfig, env: NodeJS.ProcessEnv = process.env): void {
   if (readSealExpected(cfg) && !env[ARCHIVE_PASSPHRASE_ENV]) {
