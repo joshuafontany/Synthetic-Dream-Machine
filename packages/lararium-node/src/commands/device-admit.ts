@@ -25,7 +25,7 @@ import {
   personaKelBoardDocUrl, personaKelChainForPrefix, materializeSharedLarDoc,
 } from "@lararium/mesh";
 import { daemonGenesisDir } from "../lares-config.js";
-import { larDataDir } from "../vessel-paths.js";
+import { larDataDir, larBootstrapPath } from "../vessel-paths.js";
 import { runDeviceAdmitEdge, type DeviceAdmitPayload } from "@lararium/keyhive";
 import { loadPersonaGroupRootSeed, loadVesselVerifyingKey } from "../node-vessel-identity.js";
 import { GENESIS_ENGINE_CID } from "../genesis-artifact.js";
@@ -56,11 +56,11 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const defaults   = defaultDirs();
   const storageDir = opts.storageDir ?? defaults.storageDir;
   const genesisDir = opts.genesisDir ?? defaults.genesisDir;
-  const bootstrap  = join(genesisDir, "social-bootstrap.json");
+  const bootstrap  = larBootstrapPath();
 
   if (!existsSync(bootstrap)) {
     throw new Error(
-      `[lares device-admit] genesis/social-bootstrap.json not found — run \`lares init\` first.\n` +
+      `[lares device-admit] ${bootstrap} not found — run \`lares init\` first.\n` +
       `  expected: ${bootstrap}`,
     );
   }

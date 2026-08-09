@@ -10,9 +10,11 @@ set -e
 mkdir -p "$LAR_ROOT/genesis"
 cp /app/genesis/island.* "$LAR_ROOT/genesis/" 2>/dev/null || true
 cp -r /app/genesis/cas  "$LAR_ROOT/genesis/" 2>/dev/null || true   # the CAS substrate (engine/plugin blobs by CID — re-genesis)
-# NOT social-bootstrap.json: each container founds its OWN identity below.
+# The genesis seed carries the ISLAND ALONE. The social bootstrap — one vessel's address book — lives
+# in that vessel's own store (<data>/vessel), so no copy of a seed can hand a container someone
+# else's identity. Each container founds its own below.
 
-if [ ! -f "$LAR_ROOT/genesis/social-bootstrap.json" ]; then
+if [ ! -f "$LAR_ROOT/data/vessel/social-bootstrap.json" ]; then
   echo "[boot] founding this container's own Lararium (own vessel identity)…"
   # --skip-build: the container trusts the HOST's mounted dist (the dev builds before `up`); it cannot
   # run the full-workspace fresh-build itself (the TW5 submodule isn't populated in the bind mount).

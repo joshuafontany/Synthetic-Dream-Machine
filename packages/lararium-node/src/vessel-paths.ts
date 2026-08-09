@@ -373,8 +373,36 @@ export function larHarvestStageDir(): string {
   return join(larStateHome(), "harvest-stage");
 }
 
-// NOTE: genesis/ (the baked island.bin seed + social-bootstrap.json) stays CORPUS-relative
-// (larRoot / the repo), NOT here — it is tracked seed, not runtime state. See env.ts larBootstrapPath.
+/**
+ * The social bootstrap — `<data>/vessel/social-bootstrap.json`. The ONE resolver; every reader and the
+ * writer route through it.
+ *
+ * IT HOLDS AN ADDRESS BOOK: the automerge URLs of this vessel's social docs (@identities · @circles ·
+ * @sessions · @daemon · @persona) plus their sentinel ids. No content, no keys — only WHERE those docs
+ * live. So it names one vessel, and it sits beside the store that holds what it names.
+ *
+ * ── WHY IT LEFT genesis/ ────────────────────────────────────────────────────────────────────────
+ * It lived under the CORPUS root, which answers //which corpus//, while every fact it carries answers
+ * //which vessel//. Everything else per-vessel had already moved home — identity, the Nexus seal, the
+ * library, the store holding these very docs — and the address book alone stayed behind, pointing from
+ * the corpus into the home. Three costs came with that address:
+ *   · a per-vessel artifact sat inside a shared, copyable directory, so anything copying genesis/
+ *     wholesale handed a fresh vessel another vessel's identity — which a rehearsal proved by failing;
+ *   · `reset` reached into the corpus tree to delete it, a vessel verb writing across the wall;
+ *   · a line in .gitignore stood as the only guard, where a placement should have been.
+ *
+ * ── WHY <data>/vessel RATHER THAN <state> ───────────────────────────────────────────────────────
+ * Identity and the seal sit in `<state>` because they MUST SURVIVE a wipe. This must not. An address
+ * book that outlived a `reset` would point at docs the reset destroyed — the precise failure that
+ * motivated the move, made permanent. Living inside the store, it dies WITH the docs it addresses:
+ * the invariant holds structurally rather than by a wipe-list remembering to name it.
+ */
+export function larBootstrapPath(): string {
+  return join(larDataDir(), "social-bootstrap.json");
+}
+
+// NOTE: genesis/ stays CORPUS-relative (larRoot / the repo) and now holds TRACKED SEED ALONE — the baked
+// island (island.bin, island.cid*, the manifest, cas/), identical for every vessel and safe to copy.
 
 // ── Transient runtime (tmpfs) ────────────────────────────────────────────────────────────────────
 

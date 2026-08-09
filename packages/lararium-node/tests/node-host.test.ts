@@ -54,10 +54,13 @@ describe("resolveLarUri — canonical URI topology", () => {
     expect(r.virtual).toBe(true);
   });
 
-  test("resolves laresRelPath for grammar carrier", () => {
+  test("a corpus URI reads as a tuple-file — backable, but WHERE stays the host's question", () => {
+    // The resolver answers topology alone. It once computed a disk path into a package tree that the
+    // corpus later left, and nothing joined the result, so the dead mapping misled without ever failing.
     const r = resolveLarUri("lar:///ha.ka.ba/lares/api/mu");
-    expect(r.laresRelPath).toBeTruthy();
-    expect(r.laresRelPath).toMatch(/\.mem$/);
+    expect(r.kind).toBe("tuple-file");
+    expect(r.virtual).toBe(false);
+    expect(r.resourcePath).toBe("ha.ka.ba/lares/api/mu");
   });
 });
 

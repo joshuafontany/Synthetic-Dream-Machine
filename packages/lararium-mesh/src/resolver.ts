@@ -1,15 +1,30 @@
 /**
- * `lar:` URI resolution for the Lararium carrier spine.
+ * `lar:` URI resolution for the Lararium carrier spine — TOPOLOGY ONLY.
+ *
+ * It answers what a URI NAMES: its root, its child path, whether the shape carries a caps root, and
+ * whether anything on disk could back it. It answers nothing about WHERE — and that separation follows
+ * the scheme's own law, since `lar:` names and never fetches.
+ *
+ * ── WHY NO DISK MAPPING LIVES HERE ANY LONGER ───────────────────────────────────────────────────
+ * An earlier shape carried one: `ha.ka.ba/lares/{path}` → `packages/lares-core/memes/{path}.mem`, and a
+ * matching rule for the engine packages. The corpus then moved into `bags/`, those trees stopped
+ * existing, and the mapping kept computing paths that named nothing. Nothing joined them — no production
+ * caller ever read the fields — so the rot surfaced nowhere and the header went on instructing every
+ * reader, human or agent, to look in a directory the repo had deleted.
+ *
+ * A mapping nobody joins cannot go stale LOUDLY; it can only mislead quietly. So it went, rather than
+ * getting re-pointed at `bags/` and inviting the same silence next time the corpus moves.
+ *
+ * DISK RESOLUTION RIDES THE CARRIER WALK instead (`listCarriers` over a bag directory), where a wrong
+ * path fails immediately and visibly against a real filesystem.
+ *
+ * NOTE: `lararium-mesh` stays isomorphic — no `fs`, `path`, or `process` imports. The host reads files.
  *
  * Resolution policy:
- * - ha.ka.ba/lares/{path} → packages/lares-core/memes/{path}.mem  (primary lares corpus path)
- * - ha.ka.ba/lararium/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.mem  (engine corpus)
  * - AGENTS, LARES, README → virtual until expressed under @lares
  * - INDEXES/** and other ALL-CAPS roots → virtual namespace (caps-virtual)
- * - any other shape → virtual (no on-disk path; wiki-only)
- *
- * NOTE: `lararium-mesh` is isomorphic — no `fs`, `path`, or `process` imports.
- * File existence and reading are delegated to the host (lararium-node).
+ * - a stable-tuple root with a corpus scope → tuple-file (a carrier MAY back it; the host decides)
+ * - any other shape → virtual (wiki-only)
  */
 
 export interface LarResolution {
@@ -18,10 +33,6 @@ export interface LarResolution {
   readonly childPath: readonly string[];
   /** Composite resource path used for receipts and diagnostics. */
   readonly resourcePath: string;
-  /** Relative path within packages/lares-core/memes/ — non-null only for @lares-scoped or caps-file URIs. */
-  readonly laresRelPath: string | null;
-  /** Relative path within packages/{pkg-slug}/memes/ — non-null only for engine corpus URIs (@lararium/* scope). */
-  readonly engineRelPath: string | null;
   readonly kind: "caps-file" | "caps-virtual" | "tuple-file";
   readonly virtual: boolean;
 }
@@ -91,8 +102,6 @@ export function parseHostfulLarUri(uri: string): LarHostfulResolution {
     root,
     childPath: Object.freeze(childPath),
     resourcePath,
-    laresRelPath: null,
-    engineRelPath: null,
     kind: "caps-virtual" as const,
     virtual: true as const,
     authority: Object.freeze({ alias, grant, host }),
@@ -152,36 +161,31 @@ export function resolveLarUri(uri: string): LarResolution {
 
   // Caps-file roots resolve only when expressed under @lares.
   if (CAPS_FILE_ROOTS.has(root) && childPath.length === 0) {
-    const laresRelPath = appendFragment(`${root}.md`);
-    return { uri, root, childPath, resourcePath, laresRelPath, engineRelPath: null, kind: "caps-file", virtual: false };
+    return { uri, root, childPath, resourcePath, kind: "caps-file", virtual: false };
   }
 
   if (VIRTUAL_CAPS_ROOTS.has(root) || isCapsRoot(root)) {
-    return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
+    return { uri, root, childPath, resourcePath, kind: "caps-virtual", virtual: true };
   }
 
   if (isTupleRoot(root) && root === STABLE_TUPLE_ROOT) {
-    // lar:///ha.ka.ba/lares/{rest} → packages/lares-core/memes/{rest}.mem
     if (childPath[0] === LARES_SCOPE) {
       const rest = childPath.slice(1);
       if (rest.length === 1 && ["AGENTS", "LARES", "README"].includes(rest[0]!)) {
-        return { uri, root, childPath, resourcePath, laresRelPath: appendFragment(`${rest[0]}.md`), engineRelPath: null, kind: "caps-file", virtual: false };
+        return { uri, root, childPath, resourcePath, kind: "caps-file", virtual: false };
       }
       const joined = rest.length > 0 ? rest.join("/") : "";
-      const laresRelPath = appendFragment(joined ? withMemeSuffix(joined) : "index.mem");
-      return { uri, root, childPath, resourcePath, laresRelPath, engineRelPath: null, kind: "tuple-file", virtual: false };
+      return { uri, root, childPath, resourcePath, kind: "tuple-file", virtual: false };
     }
 
-    // lar:///ha.ka.ba/lararium/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.mem
     if (childPath[0] === ENGINE_SCOPE) {
       if (!childPath[1]) {
-        return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
+        return { uri, root, childPath, resourcePath, kind: "caps-virtual", virtual: true };
       }
       const pkgSlug = `lararium-${childPath[1]}`;
       const pathParts = childPath.slice(2);
       const filePath = pathParts.length > 0 ? pathParts.join("/") : "index";
-      const engineRelPath = appendFragment(withMemeSuffix(`${pkgSlug}/memes/${filePath}`));
-      return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath, kind: "tuple-file", virtual: false };
+      return { uri, root, childPath, resourcePath, kind: "tuple-file", virtual: false };
     }
 
     // lar:///ha.ka.ba/{bags|wikis}/@{slug}[/{path}] — a CRDT surface addressed by
@@ -189,19 +193,19 @@ export function resolveLarUri(uri: string): LarResolution {
     // address); its interior is doc/registry data, not a corpus file. Resolves
     // as virtual (doc identity, not a disk path).
     if (childPath[0] === "bags" || childPath[0] === "wikis" || childPath[0]?.startsWith("@")) {
-      return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
+      return { uri, root, childPath, resourcePath, kind: "caps-virtual", virtual: true };
     }
 
     // ha.ka.ba/{rest} — a bare meme namespace with no lares/lararium disk mapping;
     // virtual (its file lives in its holding bag on disk, resolved elsewhere).
-    return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
+    return { uri, root, childPath, resourcePath, kind: "caps-virtual", virtual: true };
   }
 
   // Other three-segment tuple roots — virtual. Stabilize by moving into
   // a recognized @-scope or by registering a custom bag mirror in the daemon
   // wiki.
   if (isTupleRoot(root)) {
-    return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
+    return { uri, root, childPath, resourcePath, kind: "caps-virtual", virtual: true };
   }
 
   throw new Error(`unsupported lar root "${root}" in ${uri}`);

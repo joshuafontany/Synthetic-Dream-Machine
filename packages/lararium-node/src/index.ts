@@ -1,7 +1,7 @@
 export type { CorpusSource } from "./node-host.js";
 export { LARES_ROOT, REPO_ROOT, bagsRoot, laresMemesRoot } from "./node-host.js";
 export {
-  larHome, larDataDir, larIdentityDir, larProjectionDir, larSealHome,
+  larHome, larDataDir, larIdentityDir, larProjectionDir, larSealHome, larBootstrapPath,
   larHarvestDir, larHarvestStageDir, larRuntimeDir, larStructurePalaceDir, larFormPalaceDir,
   larMempalaceDir, larContentDir, larMeshPalaceDir, scratchSensoriumDir, scratchSensoriumInstanceDir,
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).

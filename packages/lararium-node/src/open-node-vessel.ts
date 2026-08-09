@@ -15,6 +15,7 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import { larBootstrapPath } from "./vessel-paths.js";
 import { join }                         from "path";
 import type { Server }                  from "node:http";
 import type { DocHandle, AutomergeUrl, DocumentId } from "@automerge/automerge-repo";
@@ -216,7 +217,7 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   storageDir: string;
   wss:        WebSocketServer;
   catalogUrl?: string | null;
-  /** Directory containing social-bootstrap.json. Defaults to the package's own genesis/. */
+  /** Directory holding the BAKED GENESIS SEED (island + cas). The bootstrap no longer lives here. */
   genesisDir?: string;
   /** Repo root for wiki memes scan and all mirror paths. Defaults to monorepo root. */
   rootDir?: string;
@@ -332,7 +333,7 @@ interface NodeBootPrep {
  */
 async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const { hostId, wikiId, storageDir, wss, catalogUrl, onPhase, genesisDir, rootDir: rootDirOpt } = opts;
-  const bootstrapPath = join(genesisDir ?? defaultGenesisDir(), "social-bootstrap.json");
+  const bootstrapPath = larBootstrapPath();   // <data>/vessel — beside the docs it addresses
   const emit = (p: NodeOpenPhase) => onPhase?.(p);
 
   emit("boot");

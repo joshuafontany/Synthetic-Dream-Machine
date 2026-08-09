@@ -78,8 +78,10 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
 export function resetTargets(): Array<{ path: string; recursive: boolean }> {
   const gen = (name: string, recursive = false) => ({ path: join(larRoot(), "genesis", name), recursive });
   return [
-    { path: larDataDir(), recursive: true },   // the vessel store (<data>/vessel)
-    gen("social-bootstrap.json"),
+    // The store, and the social bootstrap WITH it — the address book now lives INSIDE `<data>/vessel`,
+    // so it dies with the docs it addresses rather than by this list remembering to name it. An address
+    // book that outlived a reset would point at destroyed docs, which is why it left the corpus tree.
+    { path: larDataDir(), recursive: true },   // the vessel store (<data>/vessel) + the bootstrap within
     gen("island.bin"),
     gen("island.sha256"),
     gen("island.sha256-pre"),                  // the pre-split SHA sidecar — a reset target, so no stale digest survives

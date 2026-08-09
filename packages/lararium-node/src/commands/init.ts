@@ -23,7 +23,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { daemonGenesisDir } from "../lares-config.js";
-import { larDataDir } from "../vessel-paths.js";
+import { larDataDir, larBootstrapPath } from "../vessel-paths.js";
 import { persistIdentityAnchors } from "../identity-anchors.js";
 import {
   generateOrLoadVesselIdentity, loadVesselSigningSeed, persistVesselCard,
@@ -89,10 +89,10 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   const defaults   = defaultDirs();
   const storageDir = opts.storageDir ?? defaults.storageDir;
   const genesisDir = opts.genesisDir ?? defaults.genesisDir;
-  const bootstrap  = join(genesisDir, "social-bootstrap.json");
+  const bootstrap  = larBootstrapPath();
 
   if (existsSync(bootstrap) && !opts.force) {
-    console.log("[lares init] genesis/social-bootstrap.json already exists — skipping.");
+    console.log(`[lares init] ${bootstrap} already exists — skipping.`);
     console.log("  Pass --force or delete the file to re-seed.");
     return { skipped: true, bootstrapPath: bootstrap, storageDir, genesisDir };
   }
@@ -201,7 +201,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   persistIdentityAnchors({ personaGroupDocIdHex, meshCabalDocIdHex, personaGroupAgentIdHex });
   await repo.flush();
 
-  console.log(`[lares init] genesis/social-bootstrap.json written`);
+  console.log(`[lares init] ${bootstrap} written`);
   console.log(`  @identities  ${identitiesUrl}`);
   console.log(`  @circles     ${circlesUrl}`);
   console.log(`  @sessions    ${sessionsUrl}`);

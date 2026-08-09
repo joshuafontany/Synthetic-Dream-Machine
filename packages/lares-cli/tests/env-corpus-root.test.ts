@@ -55,7 +55,10 @@ describe("composable resource caps — independent siting off the corpus root", 
     expect(larBagsDir()).toBe(join("/corpus", "bags"));
     expect(larWikisDir()).toBe(join("/corpus", "wikis"));
     expect(larGenesisDir()).toBe(join("/corpus", "genesis"));
-    expect(larBootstrapPath()).toBe(join("/corpus", "genesis", "social-bootstrap.json"));
+    // The bootstrap does NOT follow the corpus — it names ONE VESSEL, so it sits with the store that
+    // holds the docs it addresses, and dies with them on a reset (same law as the CAS, below).
+    expect(larBootstrapPath()).toBe(join(larDataDir(), "social-bootstrap.json"));
+    expect(larBootstrapPath()).not.toBe(join("/corpus", "genesis", "social-bootstrap.json"));
   });
 
   test("the CAS roots off the VESSEL-STATE home, never the corpus — it carries state, not corpus", () => {
@@ -75,6 +78,8 @@ describe("composable resource caps — independent siting off the corpus root", 
     expect(larBagsDir()).toBe("/mnt/bags");
     expect(larGenesisDir()).toBe("/mnt/seed");
     expect(larWikisDir()).toBe(join("/corpus", "wikis"));   // untouched → still derives
-    expect(larBootstrapPath()).toBe(join("/mnt/seed", "social-bootstrap.json")); // carries LAR_GENESIS
+    // LAR_GENESIS moves the SEED alone. The address book stays with the vessel it names — a seed can be
+    // shared or re-sited freely precisely because no vessel identity rides inside it.
+    expect(larBootstrapPath()).toBe(join(larDataDir(), "social-bootstrap.json"));
   });
 });

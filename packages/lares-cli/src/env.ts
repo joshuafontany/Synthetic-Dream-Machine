@@ -24,7 +24,7 @@ import { larDataDir, loadVesselVerifyingKey, loadPersonaGroupRootVerifyingKey, r
 
 // The vessel runtime-state resolvers — defined once in @lararium/node, surfaced here.
 export {
-  larHome, larDataDir, larIdentityDir, larProjectionDir, larSealHome,
+  larHome, larDataDir, larIdentityDir, larProjectionDir, larSealHome, larBootstrapPath,
   larHarvestDir, larHarvestStageDir, larStructurePalaceDir, larFormPalaceDir,
 } from "@lararium/node";
 
@@ -86,7 +86,8 @@ export function larWikisDir(): string {
   return process.env["LAR_WIKIS"] ?? join(larRoot(), "wikis");
 }
 
-/** The genesis dir — `LAR_GENESIS`, else `<corpus>/genesis`. Tracked seed (island.bin + bootstrap). */
+/** The genesis dir — `LAR_GENESIS`, else `<corpus>/genesis`. TRACKED SEED ALONE (island + cas), identical
+ *  for every vessel. The per-vessel bootstrap left it for the store — see larBootstrapPath. */
 export function larGenesisDir(): string {
   return process.env["LAR_GENESIS"] ?? join(larRoot(), "genesis");
 }
@@ -99,12 +100,6 @@ export function larGenesisDir(): string {
  */
 export function larCasDir(): string {
   return runtimeCasOverride() ?? join(larDataDir(), "cas");   // LAR_CAS → config.vessel.cas → <state>/cas
-}
-
-/** The runtime bootstrap artifact — `<genesis>/social-bootstrap.json`. Routes through larGenesisDir
- *  so a LAR_GENESIS override carries. Genesis stays tracked seed, never runtime vessel state. */
-export function larBootstrapPath(): string {
-  return join(larGenesisDir(), "social-bootstrap.json");
 }
 
 /** Daemon WS port — LAR_PORT or 8080. */

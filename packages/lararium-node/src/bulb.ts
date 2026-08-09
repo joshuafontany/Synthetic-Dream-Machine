@@ -21,6 +21,7 @@
  */
 
 import { readFileSync } from "node:fs";
+import { larBootstrapPath } from "./vessel-paths.js";
 import { join } from "node:path";
 import { sha256HexBytesSync, utf8Bytes, type GenesisSeed, type GenesisCasManifest } from "@lararium/mesh";
 import { readGenesisSeed, readGenesisManifest, genesisCasDir } from "./genesis-artifact.js";
@@ -109,7 +110,7 @@ export function assembleBulb(manifest: BulbManifest, getBlob: (cid: string) => U
 
 /**
  * Read a bulb off a genesis dir — the HELD snapshot a Herm serves. Reads the plain-data seed (island.genesis.json),
- * the CAS manifest (island.manifest.json), every genesis/cas/<cid> blob, and the social bootstrap (social-bootstrap.json),
+ * the CAS manifest (island.manifest.json), every genesis/cas/<cid> blob, and the vessel's social bootstrap,
  * PINNED to the passed charter chain-head epoch. Returns null when the genesis is absent/malformed (nothing to serve).
  */
 export function readBulbArtifact(genesisDir: string, sealEpochCid: string | null): BulbArtifact | null {
@@ -123,7 +124,7 @@ export function readBulbArtifact(genesisDir: string, sealEpochCid: string | null
     return { cid: b.cid, bytes };
   });
   let bootstrap: Record<string, unknown> = {};
-  try { bootstrap = JSON.parse(readFileSync(join(genesisDir, "social-bootstrap.json"), "utf8")) as Record<string, unknown>; }
+  try { bootstrap = JSON.parse(readFileSync(larBootstrapPath(), "utf8")) as Record<string, unknown>; }
   catch { bootstrap = {}; }   // a Herm with no seated social plane serves an empty bootstrap (a stranger seeds their own)
   return { seed, casManifest, casEntries, bootstrap, sealEpochCid };
 }

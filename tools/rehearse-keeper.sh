@@ -162,15 +162,15 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   done
   # SEED THE TRACKED GENESIS ALONE — never a per-founding artifact.
   #
-  # `genesis/social-bootstrap.json` records the doc-URL map MINTED BY ONE FOUNDING. The repo already knows
-  # it does not belong to the repo: gitignored, untracked, deliberately dropped from VCS. A `cp -r genesis`
-  # walked straight past that ruling and handed every from-void rehearsal the URLs of a founding months old.
-  # `init` then found a bootstrap present, skipped re-seeding (idempotent by design), and the boot resolved
-  # @daemon to a doc no local repo held — hearth-private, so no peer will ever carry it, so it failed LOUD.
-  # The vessel behaved correctly throughout; the harness had given it somebody else's identity.
+  # The genesis seed carries the ISLAND ALONE, and copying the TRACKED set is how this stays true: whatever
+  # git refuses to carry, a rehearsal refuses to seed, so a future per-founding artifact drops out of the
+  # seed the day it lands in .gitignore.
   #
-  # Copying the TRACKED set makes one rule govern both: whatever git refuses to carry, a rehearsal refuses
-  # to seed. A future per-founding artifact drops out of the seed the day it lands in .gitignore.
+  # A per-founding address book once sat in this directory, and a `cp -r genesis` handed every from-void
+  # rehearsal the doc URLs of a founding months old. `init` found a bootstrap present, skipped re-seeding
+  # exactly as its idempotence promises, and the boot resolved @daemon to a doc no local repo held. The
+  # bootstrap has since moved into the vessel's own store, so the guard below now watches for a return
+  # nothing should ever cause.
   step "copy genesis/ (tracked files only)"
   if (cd "$REPO_ROOT" && git ls-files -z genesis/ | xargs -0 -I{} cp --parents "{}" "$ROOT/") 2>/dev/null; then
     if [ -e "$ROOT/genesis/social-bootstrap.json" ]; then

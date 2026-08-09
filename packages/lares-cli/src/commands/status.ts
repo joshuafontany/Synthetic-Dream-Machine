@@ -14,7 +14,7 @@
  * `lares status --palaces` keeps the palace-organ health table (a third, distinct local view).
  */
 
-import { larRoot, larDataDir, larPort, vesselDid } from "../env.js";
+import { larRoot, larDataDir, larPort, vesselDid, larBootstrapPath } from "../env.js";
 import { stopIncumbent } from "../port-control.js";
 import { udsAlive } from "../local-connector.js";
 import { existsSync, statSync, readdirSync } from "node:fs";
@@ -196,7 +196,7 @@ async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
 
   const root      = larRoot();   // corpus root (genesis); vessel state roots in the home
   const storage   = larDataDir();   // runtime → ~/.lares/.lararium
-  const bootstrap = join(root, "genesis", "social-bootstrap.json");
+  const bootstrap = larBootstrapPath();
   const portRaw   = process.env["LAR_PORT"] ?? "8080";
   const port      = Number(portRaw);
 
