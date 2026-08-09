@@ -758,6 +758,26 @@ lares vault export ~/founding-backup.sealed         # a passphrase-SEALED backup
 lares vault status                                  # confirm the seal state
 ```
 
+!!! ⚠ THE ENV VAR MAKES THIS MOVEMENT A NO-OP — and it says so quietly
+
+''A passphrase in the environment during ② seals the carriers THERE.'' The archive's seal policy takes the
+passphrase path whenever `LARES_ARCHIVE_PASSPHRASE` rides the environment, so a founding run in a shell
+that already carries one seals at founding — and ④ then finds ''nothing left to do''. The TTY prompt never
+opens, because a prompt only opens where no env var answers first.
+
+''Which reads fine, and hides one thing worth knowing'': the leg the rehearsal cannot walk goes unwalked
+HERE too. A keeper founding in a passphrase-carrying shell never meets the double-entry prompt at all —
+so it never meets it, rather than meeting it on the worst day. That reads as a smaller risk than the one
+the rite warns about, and a DIFFERENT one than an operator expects while typing ④.
+
+''Choose deliberately.'' To walk the prompt, export ONLY `LARES_ARCHIVE_PASSPHRASE_NEW` (which `seal`
+reads) and leave `LARES_ARCHIVE_PASSPHRASE` unset through ②; to seal at founding and skip ④, carry both.
+Either stands — an unwitnessed choice does not.
+
+<<~ confidence Canon 17/20 >> ''A no-op now announces itself'': `vault seal` reports sealing NOTHING and
+writes no day-stamp, rather than printing a seal-day for work it did not do. It once stamped first and
+sealed second, so a vault that sealed nothing carried a record claiming it had.
+
 !!! The two env vars ~ and why a bare `export` betrays you
 
 ''Two vars ride, and they answer different questions.'' `LARES_ARCHIVE_PASSPHRASE` carries the ''current''

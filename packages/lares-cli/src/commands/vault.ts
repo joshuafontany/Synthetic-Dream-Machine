@@ -223,13 +223,28 @@ async function vaultSeal(args: ParsedArgs, daemonUp: boolean): Promise<number> {
   // vault opens on exactly what the operator typed, and the day rides beside it as a record.
   const pass    = secret;
   const erisian = discordianReading();
-  writeSealDay(erisian.stamp, erisian.prose, erisian.source);
   const { output, via } = await routed(daemonUp, "vault-seal", { passphrase: pass }, () => ({ ...sealArchiveWithPassphrase(pass) }));
+  const sealed = (output["sealed"] ?? []) as string[];
+
+  // THE STAMP RECORDS A SEAL THAT HAPPENED, never one that was attempted. Written ahead of the call it
+  // described, it dated a vault that sealed NOTHING — so a no-op left behind a record claiming today's
+  // work, and `vault passphrase` would read that date back as fact. A day nobody sealed on is worse than
+  // no day at all: an operator recovering a vault trusts the stamp to narrow what they typed and when.
+  if (sealed.length > 0) writeSealDay(erisian.stamp, erisian.prose, erisian.source);
+
   emit(args, {
-    ok: true, data: { ...output, via },
+    ok: true, data: { ...output, via, sealedCount: sealed.length, stamped: sealed.length > 0 },
     human: () => {
-      const sealed = (output["sealed"] ?? []) as string[];
-      console.log(`sealed ${sealed.length ? sealed.join(", ") : "(nothing — carriers already sealed or absent)"} (${via})`);
+      if (sealed.length === 0) {
+        // A no-op reads as a no-op. The common cause is worth naming: a passphrase in the environment
+        // during founding seals the carriers THERE, so this movement finds nothing left to do.
+        console.log(`sealed NOTHING (${via}) — every carrier already stands sealed, or none exists yet.`);
+        console.log("  no stamp written: the day records a seal that happened, never one attempted.");
+        console.log("  see what stands:      lares vault status");
+        console.log("  change the passphrase: lares vault rotate");
+        return;
+      }
+      console.log(`sealed ${sealed.join(", ")} (${via})`);
       console.log(`  sealed on ${erisian.prose}   [${erisian.source}]`);
       console.log("  the day is a STAMP, never part of the passphrase — the vault opens on what you typed.");
       console.log("  read it back any time with:  lares vault passphrase");
