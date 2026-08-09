@@ -758,6 +758,28 @@ lares vault export ~/founding-backup.sealed         # a passphrase-SEALED backup
 lares vault status                                  # confirm the seal state
 ```
 
+!!! ★ AFTER ④ SEALS, EXPORT THE PASSPHRASE BEFORE ⑤ — walked, not reasoned ★
+
+''A seal writes `sealExpected` into the CONFIG, and `reset` does not clear it.'' Every node boot from that
+moment calls `assertSealReady` and refuses without `LARES_ARCHIVE_PASSPHRASE` in the environment. ⑤ boots a
+node. So a founding that seals at ④ by TYPING the passphrase — the honest path, the one the prompt exists
+for — walks straight into a refusal at ⑤ unless the operator carries it forward:
+
+```
+read -rs '?the passphrase you just sealed with: ' LARES_ARCHIVE_PASSPHRASE && echo
+export LARES_ARCHIVE_PASSPHRASE
+```
+
+''WITNESSED on a throwaway, both ways.'' Without the export, ⑤ reported ''started then attested a boot
+fault'', then cascaded into `no lares daemon … exit 3` and `seeding failed`. With it, the same command ran
+clean: 482 carriers ingested, the daemon answering. ''The rehearsal never caught this'' — the harness
+exports the passphrase for its whole run, so it walks the env path end to end and never meets the gate.
+
+<<~ confidence Canon 18/20 >> ''The env var is not a convenience here; it is the standing condition of a
+sealed vessel.'' Every later terminal, every reboot, every `lares serve` wants it. That reads as the
+unattended-boot tension in everyday clothes (#rehearse), and it arrives the moment the vault seals — not
+later, at some crossroads.
+
 !!! ⚠ THE ENV VAR MAKES THIS MOVEMENT A NO-OP — and it says so quietly
 
 ''A passphrase in the environment during ② seals the carriers THERE.'' The archive's seal policy takes the

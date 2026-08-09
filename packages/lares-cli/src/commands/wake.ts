@@ -80,6 +80,19 @@ async function recallIntoWake(): Promise<WakeRecall> {
   }
 }
 
+/**
+ * The FATAL line a booting node attested, trimmed for a one-line report — or null when none stands.
+ *
+ * A boot fault writes its own diagnosis, and several of them name the exact cure (a sealed archive
+ * wanting its passphrase, a stale dist wanting a rebuild). Reporting the log's PATH instead of its
+ * verdict discards the one sentence written to be read.
+ */
+function fatalLine(attestation: string): string | null {
+  const line = attestation.split("\n").reverse().find((l) => /fatal:/.test(l));
+  if (!line) return null;
+  return line.replace(/^.*?fatal:\s*/, "").replace(/^Error:\s*/, "").split("\n")[0]!.trim().slice(0, 300);
+}
+
 export async function cmdWake(args: ParsedArgs): Promise<number> {
   const port = Number(args.options["port"] ?? process.env["LAR_PORT"] ?? "8080");
   const root = larRoot();
@@ -249,7 +262,12 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
         phase === "ready"
           ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`
           : phase === "fault"
-            ? `started then attested a boot fault — see ${log}`
+            // SURFACE THE FAULT ITSELF, never only its address. The node writes a cure-naming line — "your
+          // archive is sealed, set LARES_ARCHIVE_PASSPHRASE and boot again" — and a report that answers
+          // with a PATH sends the operator to a file at the moment they least want a detour. Worse, the
+          // caller downstream then fails on the symptom (no daemon at the socket) and buries the cause
+          // entirely. The line that knows the answer belongs where the question got asked.
+          ? `started then attested a boot fault: ${fatalLine(readAttestation()) ?? "see " + log}`
             : `starting detached (pid ${child.pid ?? "?"}); boot stalled (no log progress for 15s) before vessel-ready — see ${log}`;
     }
   }
