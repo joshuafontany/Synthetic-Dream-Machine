@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/quine-principles >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/quine-principles >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/quine-principles.mem"
@@ -18,7 +18,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lares/api/pono/quine-principles"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -260,6 +260,6 @@ of the pattern. The TypeScript file is the material instantiation; the meme is t
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

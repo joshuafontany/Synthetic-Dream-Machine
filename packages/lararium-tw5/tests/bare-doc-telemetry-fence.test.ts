@@ -25,8 +25,8 @@ import {
 } from "../src/deserializer.js";
 
 const URI = "lar:///test.bare.doc";
-const STX = "<<~ &#x0002; >>";
-const ETX = "<<~ &#x0003; >>";
+const STX = "<<^ &#x0002; >>";
+const ETX = "<<^ &#x0003; >>";
 
 function renderOf(records: TiddlerFields[]): string {
   const map = new Map(records.map((r) => [String(r.title), r]));

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/schema/projection-codec >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/schema/projection-codec >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/tw5/schema/projection-codec.mem"
@@ -25,7 +25,7 @@ The carrier codec translates between disk carrier format (memetic-wikitext) and 
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -109,6 +109,6 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

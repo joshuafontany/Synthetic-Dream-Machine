@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/implementors >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/implementors >>
 ```toml iam
 body-sha256   = "281fba79de184bd211bec73fddb08dafad85527b4c64bd91ca70824b64fd1577"
 cacheable     = true
@@ -18,7 +18,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/implementors"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -58,6 +58,6 @@ export function registerImplementors(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

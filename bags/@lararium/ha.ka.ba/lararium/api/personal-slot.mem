@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/personal-slot >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/personal-slot >>
 ```toml iam
 approved-on = "2026-06-01"
 cacheable   = true
@@ -24,7 +24,7 @@ uri-shape   = "lar:///ha.ka.ba/wikis/@{slug}/personal"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #problem >>
 
@@ -503,6 +503,6 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — ''slice
 register's lived surface — the living grammar in use before curation lifts it ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]]
 #three-registers).
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

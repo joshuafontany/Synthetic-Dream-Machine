@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/cache-stable >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/cache-stable >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/cache-stable.mem"
@@ -43,7 +43,7 @@ loulou links bind cache-stable -> documentation.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #cache-stable-law >>
 
@@ -99,6 +99,6 @@ Cache-Stable-compliant memes MUST fill the OODA-HA phase line with their own pre
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

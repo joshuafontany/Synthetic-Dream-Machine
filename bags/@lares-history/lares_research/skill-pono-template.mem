@@ -8,7 +8,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/api/pono/skill-template >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/api/pono/skill-template >>
 
 <<~ ahu #iam >>
 ```toml
@@ -47,7 +47,7 @@ The ''inner layer'' follows the memetic-wikitext standard — TOML `#iam` block,
 
 A skill authored in this pattern works both as an agentskills.io-compatible loadable skill and as a first-class typed meme. When a skill also claims a stable address under `lar:///ha.ka.ba/api/**`, it may compose with `loci` rather than facing a forced choice between `skill` and `loci`.
 
-<<~&#x0002; ahu #skill-body-open >>
+<<^ &#x0002; ahu #skill-body-open >>
 Skill template opens the verification authoring stream here.
 <<~/ahu >>
 
@@ -501,7 +501,7 @@ Post-MCP-ba governs the authoring motion across migration: keep the skill body c
 <<~ loulou lar:///ha.ka.ba/api/pono/skill-template-post-mcp >>
 <<~/ahu >>
 
-<<~&#x0003; ahu #body-close >>
+<<^ &#x0003; ahu #body-close >>
 Skill template closes the verification authoring stream here.
 <<~/ahu >>
 
@@ -516,4 +516,4 @@ Skill template closes the verification authoring stream here.
 
 
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

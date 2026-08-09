@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/RFC-2119 >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/RFC-2119 >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/pono/RFC-2119.mem"
@@ -37,7 +37,7 @@ This stack uses ALL CAPS consistently for normative terms. The RFC 8174 clarific
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ietf-definitions >>
 
@@ -76,6 +76,6 @@ The stack does not import the full IETF RFC format — only the modal-force voca
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

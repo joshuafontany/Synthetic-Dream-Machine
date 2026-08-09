@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/api/island-isomorphism >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/api/island-isomorphism >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/api/island-isomorphism.mem"
@@ -20,7 +20,7 @@ written   = "2026-06-12"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -97,6 +97,6 @@ re-entry: the kue key; or the migration's step 4 boundary, where the residue get
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/memes >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/memes >>
 ```toml iam
 body-sha256   = "3fae979c5db2d0ec9ed21502145a05ce5f275426d64470df9ac07d4fedc5460b"
 cacheable     = true
@@ -18,7 +18,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/memes"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -82,6 +82,6 @@ export function registerMemesSource(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

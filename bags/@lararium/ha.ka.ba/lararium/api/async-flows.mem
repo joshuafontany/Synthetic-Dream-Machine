@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/async-flows >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/async-flows >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/api/async-flows.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-25"
 
 <<~ aka lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -174,6 +174,6 @@ write toward, not a description of current emission.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

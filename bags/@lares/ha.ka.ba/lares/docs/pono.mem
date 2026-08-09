@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/pono.mem"
@@ -40,7 +40,7 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #edges >>
 
@@ -52,6 +52,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

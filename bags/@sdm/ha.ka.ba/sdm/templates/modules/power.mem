@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/templates/modules/power >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/templates/modules/power >>
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/sdm/templates/modules/power.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/sdm/templates/modules/power"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Template — Power Module
 
@@ -88,6 +88,6 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

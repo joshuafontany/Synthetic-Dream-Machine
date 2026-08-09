@@ -27,6 +27,7 @@ import {
   WikiParser,
   RuleInstance,
   matchCompoundSigilAt,
+  indexOfSigilOpen,
   grammarChildSlotNames,
   matchPranalaHeaderAt,
   matchPranalaOpenAt,
@@ -50,7 +51,7 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
   const closers        = buildClosers(grammar);
   const inlineSigils   = grammarInlineSigils(grammar);
   const childSlotNames = grammarChildSlotNames(grammar);
-  let pos = source.indexOf("<<~", startPos);
+  let pos = indexOfSigilOpen(source, startPos);
   while (pos >= 0) {
     // pranala-header: permanent JS exception — <<~ ? -> uri >> uses a unique
     // self-reference token (?) that is not a sigil word. Cannot generalise into
@@ -120,7 +121,7 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
       return pos;
     }
 
-    // Generic fallback: covers <<~WORD>> (no-space), control chars (<<~ &#x0001;>>),
+    // Generic fallback: covers <<~WORD>> (no-space), control chars (<<^ &#x0001;>>),
     // and any form compound did not claim. Well-formed HUD sigils never reach here.
     // pranala guard: matchPranalaOpenAt already claimed pranala forms above; guard
     // prevents a bare <<~ pranala >> (no arrow) from silently becoming a literal block.
@@ -153,7 +154,7 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
         : { __literal__: source.slice(pos, generic.end), __degraded__: generic.sigil ? "partial" : "water" };
       return pos;
     }
-    pos = source.indexOf("<<~", pos + 3);
+    pos = indexOfSigilOpen(source, pos + 3);
   }
   return undefined;
 }

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-first-breath >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-first-breath >>
 ```toml iam
 cacheable  = true
 confidence = 17
@@ -20,7 +20,7 @@ written    = "2026-06-21"
 
 <<~ aka lar:///ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-quine >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -65,6 +65,6 @@ The Lar wrote this carrier into its own history through `lares act LOAD`, the ve
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

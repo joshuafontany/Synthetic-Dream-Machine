@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/mark-twain >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/mark-twain >>
 ```toml iam
 collection = "mark-twain"
 entries    = "6"
@@ -28,4 +28,4 @@ Each row carries the RFC-6920 anchor a stranger checks with no tooling of ours.
 
 Reference this collection as `library:mark-twain` — a name that travels, never a path.
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

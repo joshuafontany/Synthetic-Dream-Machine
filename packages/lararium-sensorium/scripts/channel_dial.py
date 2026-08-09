@@ -2,7 +2,7 @@
 """channel_dial — the RED/BLACK channel dial (lambda) over a wrapped bed's planes.
 
 THE QUESTION THE DIAL ANSWERS. The memetic-wikitext wrapping carries two channels: the
-RED channel (the `<<~ … >>` sigil layer — the classifier register that steers) and the
+RED channel (the `<<~ … >>` and `<<^ … >>` sigil layers — the classifier register that steers) and the
 BLACK channel (the prose stream that speaks). The dual-run ablation showed the red
 channel PICKS the parser and thereby replaces the structure plane wholesale (3 classes
 vs 51) and manufactures form recurrence (3 sigil templates vs 1). The house designed
@@ -101,9 +101,10 @@ import re as _re
 
 from structure_router import parse_to_tree, structural_hash
 
-# A sharktooth token span: `<<~ … >>` or a closer `<<~/word >>` — the dial's own
+# A sigil token span of EITHER set: `<<~ … >>` speaking, `<<^ … >>` control, or a
+# closer `<<~/word >>` — the dial's own
 # span-finder (it strips sigil SPANS from the black channel; tree shape never enters).
-_TOKEN_RE = _re.compile(r"<<~/?[^\n]*?>>")
+_TOKEN_RE = _re.compile(r"<<[~^]/?[^\n]*?>>")
 
 #: The rungs the dial ALWAYS walks: the two channel-pure endpoints. Every interior rung
 #: comes from the bed's own crossing spectrum (`lambda_ladder`) — a hand-picked interior

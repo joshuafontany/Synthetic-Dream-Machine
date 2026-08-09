@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing >>
 ```toml iam
 cacheable   = false
 file-path   = "bags/@lares/ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing.mem"
@@ -16,7 +16,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -80,6 +80,6 @@ Source: https://github.com/tlaplus/Examples
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

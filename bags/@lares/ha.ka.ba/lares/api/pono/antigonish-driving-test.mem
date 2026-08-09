@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/antigonish-driving-test >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/antigonish-driving-test >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/antigonish-driving-test.mem"
@@ -20,7 +20,7 @@ written   = "2026-06-30"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -492,6 +492,6 @@ as loss and the Arcane stays self-reported-and-unwitnessed.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

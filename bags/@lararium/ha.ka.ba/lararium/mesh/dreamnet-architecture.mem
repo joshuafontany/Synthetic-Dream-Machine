@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/dreamnet-architecture.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/dreamnet-architecture"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! DreamNet Architecture
 
@@ -480,6 +480,6 @@ The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''st
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

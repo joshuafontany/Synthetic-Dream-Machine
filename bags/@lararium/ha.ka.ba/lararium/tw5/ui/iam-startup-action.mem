@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/iam-startup-action >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/iam-startup-action >>
 ```toml iam
 cacheable  = true
 file-path  = "bags/@lararium/tw5/ui/iam-startup-action.mem"
@@ -16,7 +16,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/lararium/tw5/ui/iam-startup-action"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 \rules only filteredtranscludeinline transcludeinline
 
@@ -55,6 +55,6 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/iam-startup-action"
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

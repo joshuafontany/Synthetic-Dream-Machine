@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/render-pipeline.mem"
@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/render-pipeline"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -255,6 +255,6 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

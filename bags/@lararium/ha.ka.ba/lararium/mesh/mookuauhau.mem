@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/mesh/mookuauhau.mem"
@@ -16,7 +16,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/mesh/mookuauhau"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -114,6 +114,6 @@ No one has made ''one composition primitive serve simultaneously as the code-wir
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

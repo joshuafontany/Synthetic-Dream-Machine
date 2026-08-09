@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/hook/attack >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/hook/attack >>
 ```toml iam
 cacheable = true
 caption   = "attack"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/components/hook/attack"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Attack
 
@@ -71,6 +71,6 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

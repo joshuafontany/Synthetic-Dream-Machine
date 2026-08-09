@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/ffz-clock.mem"
@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/ffz-clock"
 
 <<~ aka lar:///ha.ka.ba/lararium/api/agent-worldline >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -412,6 +412,6 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

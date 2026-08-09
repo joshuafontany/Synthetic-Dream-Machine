@@ -3,7 +3,7 @@
  *
  * The shore's structural scanners (carrier framing, ahu blocks, kahea
  * refs) MUST NOT match sigils the operator merely QUOTES: a teaching doc
- * that shows `<<~ &#x0003; >>` inside a code fence does not close its own
+ * that shows `<<^ &#x0003; >>` inside a code fence does not close its own
  * body, and a fenced `<<~ ahu #example >>` opens no child. Before this
  * mask landed, a fenced ETX mention truncated everything
  * after it at ingest — silent content loss on real corpus files.

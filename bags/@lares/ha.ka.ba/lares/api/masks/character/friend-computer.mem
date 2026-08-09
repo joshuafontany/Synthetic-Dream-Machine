@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/character/friend-computer >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/character/friend-computer >>
 ```toml iam
 aside             = false
 cacheable         = false
@@ -51,7 +51,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #corpus >>
 
@@ -158,6 +158,6 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

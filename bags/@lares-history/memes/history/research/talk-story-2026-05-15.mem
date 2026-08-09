@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/lares-history/history/research/talk-story-2026-05-15 >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares-history/history/research/talk-story-2026-05-15 >>
 ```toml iam
 uri-path    = "ha.ka.ba/lares-history/history/research/talk-story-2026-05-15"
 file-path   = "wikis/@lares-history/history/research/talk-story-2026-05-15.mem"
@@ -16,7 +16,7 @@ retain      = true
 status-date = "2026-05-15"
 ```
 
-<<~&#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -244,6 +244,6 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<^ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

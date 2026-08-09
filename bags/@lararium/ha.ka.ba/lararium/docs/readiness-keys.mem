@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/readiness-keys >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/readiness-keys >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/readiness-keys.mem"
@@ -38,7 +38,7 @@ auth → catalog → snapshot → room-content → room-presence
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #schema >>
 
@@ -97,6 +97,6 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

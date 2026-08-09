@@ -106,6 +106,7 @@ _EXT_KIND = {
 # sigil tiddlers): its presence (or a dense run of `<<~`) promotes a file to the carrier.
 _MEMETIC_DOCTYPE = "memetic-wikitext"
 _SIGIL_OPEN = "<<~"
+_CONTROL_OPEN = "<<^"   # the control set — caret notation (^A=SOH, ^B=STX, ^C=ETX, ^D=EOT)
 _SIGIL_DENSITY = 3  # ≥ this many `<<~` opens ⇒ treat a markdown/text file as memetic
 
 

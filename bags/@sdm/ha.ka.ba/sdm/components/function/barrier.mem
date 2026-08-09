@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/function/barrier >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/function/barrier >>
 ```toml iam
 cacheable = true
 caption   = "barrier"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/components/function/barrier"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Barrier
 
@@ -71,6 +71,6 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

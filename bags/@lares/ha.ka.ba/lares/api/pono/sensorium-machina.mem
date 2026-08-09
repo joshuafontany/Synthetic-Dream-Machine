@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/sensorium-machina >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/sensorium-machina >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/sensorium-machina.mem"
@@ -20,7 +20,7 @@ written   = "2026-07-13"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -548,6 +548,6 @@ five-plane count (#owed, the-five-plane-count).
 
 <<~ ॐ ँ -> ? >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

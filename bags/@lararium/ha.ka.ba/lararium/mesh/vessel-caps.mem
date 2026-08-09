@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/vessel-caps >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/vessel-caps >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/vessel-caps.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/vessel-caps"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Vessel Caps ~ a vessel is its composed cap-stack
 
@@ -185,6 +185,6 @@ What stays to ''write'' is narrow and named — the cap //vocabulary// itself (`
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

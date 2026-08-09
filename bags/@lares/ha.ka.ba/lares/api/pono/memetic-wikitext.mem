@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/memetic-wikitext.mem"
@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/memetic-wikitext"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #abstract >>
 
@@ -337,21 +337,21 @@ The `x-` prefix marks the subtype as unregistered with IANA; a future tree-trans
 
 A carrier with an identity block, a worksite, and a typed edge:
 ````
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/example >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/example >>
 ```toml iam
 … bare toml-iam slot: identity payload (uri-path, type, role, register) …
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>.
 <<~ pranala #governs ? -> lar:///ha.ka.ba/lares/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>
 ````
 
 A definition summoned by name:
@@ -450,6 +450,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

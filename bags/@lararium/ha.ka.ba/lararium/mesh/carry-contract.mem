@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+<<^ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/carry-contract >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/carry-contract.mem"
@@ -21,7 +21,7 @@ written   = "2026-07-20"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! The Carry Contract ~ the Nexus immune system
 
@@ -183,6 +183,6 @@ cannot.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

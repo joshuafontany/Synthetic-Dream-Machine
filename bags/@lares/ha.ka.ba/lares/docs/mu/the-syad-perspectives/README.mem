@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/mu/the-syad-perspectives/README.mem"
@@ -54,7 +54,7 @@ The tight invariant now lives at:
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #rule >>
 
@@ -189,6 +189,6 @@ They do not govern the live fold.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

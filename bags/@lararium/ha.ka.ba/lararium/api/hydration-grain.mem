@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/hydration-grain >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/hydration-grain >>
 ```toml iam
 cacheable     = true
 drafted-on    = "2026-07-27"
@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lararium/api/hydration-grain"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #core-claim >>
 
@@ -118,6 +118,6 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

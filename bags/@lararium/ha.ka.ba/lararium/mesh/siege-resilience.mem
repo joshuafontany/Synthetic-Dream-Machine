@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/siege-resilience.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/siege-resilience"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Siege Resilience ~ how the mesh outlasts the necrospire
 
@@ -240,6 +240,6 @@ Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.k
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

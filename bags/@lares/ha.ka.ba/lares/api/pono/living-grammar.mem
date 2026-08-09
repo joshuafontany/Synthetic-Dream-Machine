@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/living-grammar >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/living-grammar >>
 ```toml iam
 cacheable         = true
 file-path         = "bags/@lares/api/pono/living-grammar.mem"
@@ -21,7 +21,7 @@ written           = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lares/api/noosphere-boot >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -165,6 +165,6 @@ seven substrates.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

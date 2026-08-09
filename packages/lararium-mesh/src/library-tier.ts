@@ -112,7 +112,7 @@ export function renderLibraryIndex(collection: string, entries: readonly Library
   return [
     "<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->",
     "",
-    `<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/${collection} >>`,
+    `<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/${collection} >>`,
     "```toml iam",
     `collection = "${collection}"`,
     `entries    = "${rows.length}"`,
@@ -135,7 +135,7 @@ export function renderLibraryIndex(collection: string, entries: readonly Library
     "",
     `Reference this collection as \`${libraryRef(collection)}\` — a name that travels, never a path.`,
     "",
-    "<<~ &#x0004; -> ? >>",
+    "<<^ &#x0004; -> ? >>",
     "",
   ].join("\n");
 }

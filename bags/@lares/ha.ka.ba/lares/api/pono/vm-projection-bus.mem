@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/vm-projection-bus.mem"
@@ -18,7 +18,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lares/api/pono/vm-projection-bus"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -186,6 +186,6 @@ The projection bus serves as a ''Scope-1'' mesh surface under the two-scopes rul
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

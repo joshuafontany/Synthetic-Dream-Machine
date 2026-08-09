@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/cohomological-gate >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/cohomological-gate >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/api/pono/cohomological-gate.mem"
@@ -20,7 +20,7 @@ written   = "2026-07-01"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -187,6 +187,6 @@ The boot's degraded-states law ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosp
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

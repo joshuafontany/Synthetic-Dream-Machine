@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+<<^ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/membership-doctrine.mem"
@@ -21,7 +21,7 @@ written   = "2026-07-21"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! The Membership Doctrine ~ track contracts, never identities
 
@@ -189,6 +189,6 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

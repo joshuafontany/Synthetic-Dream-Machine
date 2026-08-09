@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/self-booting-lararium >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/self-booting-lararium >>
 ```toml iam
 cacheable       = false
 confidence      = 14
@@ -18,7 +18,7 @@ type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/lares/docs/lares/history/lindwyrm/self-booting-lararium"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -288,6 +288,6 @@ It hums.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

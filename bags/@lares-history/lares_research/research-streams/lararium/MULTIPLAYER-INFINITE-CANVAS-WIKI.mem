@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI >>
 ```toml iam
 uri-path    = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI.mem"
@@ -42,7 +42,7 @@ What this system is not:
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #room-model >>
 
@@ -1270,6 +1270,6 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<^ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

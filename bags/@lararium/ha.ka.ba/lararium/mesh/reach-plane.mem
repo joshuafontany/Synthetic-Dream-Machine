@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/reach-plane >>
+<<^ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/reach-plane >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/reach-plane.mem"
@@ -22,7 +22,7 @@ written   = "2026-08-08"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -276,6 +276,6 @@ Three consequences follow directly:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

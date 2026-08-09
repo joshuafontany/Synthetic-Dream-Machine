@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
 ```toml iam
 cacheable         = true
 file-path         = "bags/@lares/api/pono/the-veil-ladder.mem"
@@ -19,7 +19,7 @@ type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/lares/api/pono/the-veil-ladder"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -142,6 +142,6 @@ For the citizen with ''no quorum yet'', the floor is a ''standalone recorded cod
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

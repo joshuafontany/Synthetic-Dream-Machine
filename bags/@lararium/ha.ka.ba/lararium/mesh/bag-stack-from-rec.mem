@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/bag-stack-from-rec >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/bag-stack-from-rec >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/bag-stack-from-rec.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/bag-stack-from-rec"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -36,6 +36,6 @@ parseBagStack(typeof recipeRec.tiddler["bag-stack"] === "string"
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

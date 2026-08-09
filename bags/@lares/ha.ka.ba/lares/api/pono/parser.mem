@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/parser >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/parser >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/parser.mem"
@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/parser"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -197,7 +197,7 @@ The ''toml iam slot'' (`#iam`) carries the canonical identity payload for a meme
 
 Canonical form:
 ````text
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/path/to/meme >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/path/to/meme >>
 ```toml iam
 uri-path  = "..."
 file-path = "..."
@@ -285,6 +285,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

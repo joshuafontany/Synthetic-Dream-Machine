@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/open-vessel >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/open-vessel >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/open-vessel.mem"
@@ -17,7 +17,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! The Vessel — One Composable Web3 Design
 
@@ -156,6 +156,6 @@ invariant + the boot tests carry the safety.
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

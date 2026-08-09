@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/docs/composition-model >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/docs/composition-model >>
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/sdm/docs/composition-model.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/sdm/docs/composition-model"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Composition Model — Operator / Dev Doc
 
@@ -133,6 +133,6 @@ Full lineage table lives in the epic. See edges.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

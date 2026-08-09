@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP >>
 
 ```toml iam
 uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP"
@@ -31,7 +31,7 @@ It adds explicit ahu markers around the major research sections so the file can 
 ↺ keep residue visible: MCP SDK churn, protocol-version drift, FFZ semantics, hostful session resolution, write-back gates, and missing formal lararium-node spec
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #m13-session-open-2026-05-02 >>
 
@@ -3280,4 +3280,4 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

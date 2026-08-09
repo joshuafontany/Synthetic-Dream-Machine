@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/preferences/operating-modes >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/preferences/operating-modes >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/docs/preferences/operating-modes.mem"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/operating-modes"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -84,6 +84,6 @@ This shelf preserves the heavier runtime choreography once wrapped around them.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

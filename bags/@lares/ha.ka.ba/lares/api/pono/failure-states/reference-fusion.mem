@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/failure-states/reference-fusion.mem"
@@ -36,7 +36,7 @@ Reference-Fusion names a world-claim warranted ''only by context text'' — the 
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -72,6 +72,6 @@ If the node refuses a true context claim outright rather than re-marking it, sig
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

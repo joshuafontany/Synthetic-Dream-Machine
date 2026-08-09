@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/hud >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/hud >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/hud.mem"
@@ -30,7 +30,7 @@ The lararium hydrates the HUD room here. The instrument panel rides the mechanic
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -120,6 +120,6 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

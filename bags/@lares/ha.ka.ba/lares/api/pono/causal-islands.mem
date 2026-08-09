@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/causal-islands.mem"
@@ -36,7 +36,7 @@ this version separates them.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #model >>
 
@@ -370,6 +370,6 @@ meant to escape):
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

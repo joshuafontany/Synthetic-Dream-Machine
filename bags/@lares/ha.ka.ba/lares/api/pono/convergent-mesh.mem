@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/api/pono/convergent-mesh.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-24"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -136,6 +136,6 @@ This meme rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CR
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

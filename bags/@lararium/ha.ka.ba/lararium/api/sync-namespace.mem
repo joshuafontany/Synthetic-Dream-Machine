@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/sync-namespace >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/sync-namespace >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/api/sync-namespace.mem"
@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lararium/api/sync-namespace"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #core-claim >>
 
@@ -99,6 +99,6 @@ This dual-distribution shape names a ''packaging convention, not a namespace exc
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

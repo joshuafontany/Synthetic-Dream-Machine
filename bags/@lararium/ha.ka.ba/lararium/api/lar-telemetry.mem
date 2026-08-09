@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/lar-telemetry >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/lar-telemetry >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/api/lar-telemetry.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-24"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/lararium-memory#capture-before-wire >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -225,6 +225,6 @@ readings AND the form-capture both drain the one emitted-marker stream, no disco
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

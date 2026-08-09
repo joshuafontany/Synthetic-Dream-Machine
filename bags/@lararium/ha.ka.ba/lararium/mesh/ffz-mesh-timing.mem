@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/ffz-mesh-timing >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/ffz-mesh-timing >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/ffz-mesh-timing.mem"
@@ -20,7 +20,7 @@ written   = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -133,6 +133,6 @@ In the Myth the law reads as the world's magic-physics. The Necrospire's Second-
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

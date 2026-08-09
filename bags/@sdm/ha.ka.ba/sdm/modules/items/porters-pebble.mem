@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/modules/items/porters-pebble >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/modules/items/porters-pebble >>
 ```toml iam
 cacheable = true
 caption   = "Porter's Pebble"
@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/modules/items/porters-pebble"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Porter's Pebble
 
@@ -87,6 +87,6 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

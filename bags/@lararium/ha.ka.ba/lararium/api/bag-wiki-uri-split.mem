@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>
 ```toml iam
 confidence   = 16
 content-type = "text/x-memetic-wikitext"
@@ -13,7 +13,7 @@ type         = "text/x-memetic-wikitext"
 uri-path     = "ha.ka.ba/lararium/api/bag-wiki-uri-split"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! The Bag / Wiki / CID Kind-Planes
 
@@ -67,6 +67,6 @@ Two registries, cleanly separated:
 
 `@oracle` stays the DreamNet read-face for the Cabal-rendered CIDs of `bags/@lares` + `bags/@lararium`. `@lares`/`@lararium` are ordinary catalog-registered operator bags — the local operator owns them until a Cabal ownership layer stands.
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

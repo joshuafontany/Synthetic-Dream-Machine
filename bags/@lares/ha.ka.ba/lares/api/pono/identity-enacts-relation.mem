@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>
 ```toml iam
 cacheable     = false
 file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/identity-enacts-relation.mem"
@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -302,6 +302,6 @@ Provisional (operator, 2026-07-28): `pili` — cling/adhere/''pertain'', one ver
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

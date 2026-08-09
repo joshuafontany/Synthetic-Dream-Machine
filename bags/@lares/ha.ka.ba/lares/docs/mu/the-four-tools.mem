@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/mu/the-four-tools.mem"
@@ -40,7 +40,7 @@ This shelf retains the local witness braid behind that compact surface.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #witness-texts >>
 
@@ -87,6 +87,6 @@ one clean preference for model agnosticism over paranoia.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

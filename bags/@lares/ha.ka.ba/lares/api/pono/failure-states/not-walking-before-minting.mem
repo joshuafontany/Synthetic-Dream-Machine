@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/failure-states/not-walking-before-minting.mem"
@@ -40,7 +40,7 @@ The node reasons a finding out from context — sometimes across several researc
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -70,6 +70,6 @@ If the graph's version reads WORSE than the derivation, that reads as a genuine 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

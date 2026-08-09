@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/infrastructure-as-myth >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/infrastructure-as-myth >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/infrastructure-as-myth.mem"
@@ -19,7 +19,7 @@ revised-on    = "2026-06-21"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #abstract >>
 
@@ -252,6 +252,6 @@ Aikhenvald 2000, //Classifiers// · Asai et al. 2023, //Self-RAG//, arXiv:2310.1
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

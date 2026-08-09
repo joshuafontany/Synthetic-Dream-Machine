@@ -37,9 +37,9 @@ _needs_carrier = pytest.mark.skipif(
 # A wrapped mini-meme whose ENVELOPE carries sigil lines only (no black envelope prose),
 # so the black channel equals the #source-text interior modulo blank lines — the case
 # where the dial's lambda=0 must land ON the extraction, not near it.
-_SIGIL_ONLY_WRAPPED = """<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/dial/mini >>
+_SIGIL_ONLY_WRAPPED = """<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/dial/mini >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #source-text >>
 
@@ -54,14 +54,14 @@ Another paragraph closes it.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>
 """
 
 # A wrapped meme with BLACK envelope matter too (a header paragraph outside the
 # source-text block) — the honest gap between lambda=0 and extraction.
-_MIXED_WRAPPED = """<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/dial/mixed >>
+_MIXED_WRAPPED = """<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/dial/mixed >>
 
 <<~ ahu #meme-header >>
 
@@ -109,7 +109,10 @@ def test_channels_complement_the_sigil_parse():
 
     # every sharktooth token survives as a node (opener + closer included); the
     # ahu block rides ABOVE them as pure structure — the whole text stays accounted.
-    assert _walk_count(tree, ("sigil", "sigil_close")) == n_tokens
+    # The carrier presents TWO sigil sets and the dial strips both: `sigil`/`sigil_close` carry the
+    # speaking set (`<<~`), `control_sigil` the framing set (`<<^` — caret notation for ^A..^D). A count
+    # over only the first would read a control-heavy carrier as mostly-black and mis-score the channel.
+    assert _walk_count(tree, ("sigil", "sigil_close", "control_sigil")) == n_tokens
     assert _walk_count(tree, ("ahu_block",)) == 1
 
 

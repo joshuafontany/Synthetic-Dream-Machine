@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/modules/powers/read-magic >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/modules/powers/read-magic >>
 ```toml iam
 cacheable = true
 caption   = "Read Magic"
@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/modules/powers/read-magic"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Read Magic
 
@@ -93,6 +93,6 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

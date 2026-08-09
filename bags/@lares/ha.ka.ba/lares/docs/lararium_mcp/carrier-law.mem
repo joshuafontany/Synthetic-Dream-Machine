@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
 ```toml iam
 file-path       = "bags/@lares/ha.ka.ba/lares/docs/lararium_mcp/carrier-law.mem"
 l-space         = "stable"
@@ -26,7 +26,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #five-lanes >>
 
@@ -162,6 +162,6 @@ Carrier truth stays ahead of syntax swell.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

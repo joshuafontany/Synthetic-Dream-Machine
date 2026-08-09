@@ -34,6 +34,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "control_sigil"
+        },
+        {
+          "type": "SYMBOL",
           "name": "fenced_block"
         },
         {
@@ -152,6 +156,35 @@
         {
           "type": "STRING",
           "value": "<<~"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "body",
+              "content": {
+                "type": "SYMBOL",
+                "name": "sigil_body"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ">>"
+        }
+      ]
+    },
+    "control_sigil": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<<^"
         },
         {
           "type": "CHOICE",
@@ -570,7 +603,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "<<[^<~\\s][^\\n]*>>[ \\t]*\\r?\\n?"
+        "value": "<<[^<~^\\s][^\\n]*>>[ \\t]*\\r?\\n?"
       }
     },
     "horizontal_rule": {

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu/l-prime >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu/l-prime >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/mu/l-prime.mem"
@@ -32,7 +32,7 @@ Each output unit bends toward observation, relation, action, stance, and earned 
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #l-prime-law >>
 
@@ -149,6 +149,6 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

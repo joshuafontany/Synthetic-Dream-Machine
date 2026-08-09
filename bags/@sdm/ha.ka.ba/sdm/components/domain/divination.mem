@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/domain/divination >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/domain/divination >>
 ```toml iam
 cacheable = true
 caption   = "divination"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/components/domain/divination"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Divination
 
@@ -72,6 +72,6 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

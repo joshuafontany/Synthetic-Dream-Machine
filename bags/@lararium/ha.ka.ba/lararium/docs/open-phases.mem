@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/open-phases >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/open-phases >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/open-phases.mem"
@@ -27,7 +27,7 @@ to live delta stream. An authority envelope wraps every live session — current
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #schema >>
 
@@ -115,6 +115,6 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/exchange-vector >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/exchange-vector >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/exchange-vector.mem"
@@ -36,7 +36,7 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` ''bearin
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -103,6 +103,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble >>
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble.mem"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Porter's Pebble — FTLS Card
 
@@ -61,6 +61,6 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

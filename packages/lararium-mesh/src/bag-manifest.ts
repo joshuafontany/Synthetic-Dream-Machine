@@ -80,7 +80,7 @@ export function renderBagManifest(m: BagManifest): string {
   const lines = [
     "<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->",
     "",
-    `<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/bags/${m.bag.replace(/^@/, "")} >>`,
+    `<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/bags/${m.bag.replace(/^@/, "")} >>`,
     "```toml iam",
     `bag       = "${m.bag}"`,
     `cap-tier  = "${m.tier}"`,
@@ -99,7 +99,7 @@ export function renderBagManifest(m: BagManifest): string {
     "",
     `A repository home names a REGISTERED id, never a path: the bag names WHAT, each vessel resolves WHERE.`,
     "",
-    "<<~ &#x0004; -> ? >>",
+    "<<^ &#x0004; -> ? >>",
     "",
   ];
   return lines.join("\n");

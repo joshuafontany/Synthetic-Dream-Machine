@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/pono-sigil >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/pono-sigil >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/pono-sigil.mem"
@@ -31,7 +31,7 @@ the same word because a `pono` edge asserts alignment — the naming runs intent
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -64,6 +64,6 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

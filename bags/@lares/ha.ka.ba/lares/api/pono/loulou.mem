@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/loulou >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/loulou >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/loulou.mem"
@@ -29,7 +29,7 @@ Carries no execution pulse. Sugar for `<<~ pranala ? -> URI family:relation >>`.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -122,6 +122,6 @@ confidence-bounded = false
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/kau >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/kau >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/kau.mem"
@@ -26,7 +26,7 @@ A device placed with intention. The instance takes its own address.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #etymology >>
 
@@ -120,6 +120,6 @@ This maps directly to the Ink & Switch island model: each automerge object opera
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

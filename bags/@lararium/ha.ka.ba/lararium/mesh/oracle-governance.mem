@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ◉&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/oracle-governance >>
+<<^ ◉&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/oracle-governance >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/oracle-governance.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Oracle Governance
 
@@ -203,6 +203,6 @@ it through a different door (<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-disco
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

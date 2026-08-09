@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/voices/masks-tree-plan >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/voices/masks-tree-plan >>
 ```toml iam
 cacheable = false
 created   = "Invalid Date"
@@ -69,7 +69,7 @@ packages/lares-core/memes/api/lares/masks/
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #orient >>
 
@@ -263,6 +263,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

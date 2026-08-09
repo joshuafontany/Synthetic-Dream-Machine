@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/federated-causal-islands.mem"
@@ -26,7 +26,7 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -383,6 +383,6 @@ causal-island-may = [
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

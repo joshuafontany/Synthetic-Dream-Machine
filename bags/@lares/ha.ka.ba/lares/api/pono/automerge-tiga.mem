@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/automerge-tiga >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/automerge-tiga >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/automerge-tiga.mem"
@@ -17,7 +17,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/api/pono/automerge-tiga"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -165,6 +165,6 @@ The six-root Automerge geometry rides ''Scope 1'' of the two-scopes ruling — t
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

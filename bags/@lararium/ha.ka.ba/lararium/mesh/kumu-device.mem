@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/kumu-device >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/kumu-device >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/mesh/kumu-device.mem"
@@ -19,7 +19,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lararium/mesh/kumu-device"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -193,6 +193,6 @@ See: `lar:///ha.ka.ba/lares/api/pono/nalu#yin-collapse-law`
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

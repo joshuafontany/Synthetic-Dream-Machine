@@ -5,7 +5,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL >>
 ```toml iam
 cacheable          = true
 constraints        = ["S1: the parent invariant (lar-uri) stays the scheme-law root; this skill does not widen or outrank it", "S2: path classes stay distinct — stable (ha.ka.ba), unstable (attitude triple), adjacent (no triple); never blur them", "S3: exactly one @-bag segment, at child[1] only; child[2]+ never carry @", "S4: a lar: URI NAMES; resolution runs against the local graph, never as a network fetch", "S5: local form for stable addresses and system names; session form for exchange spans only — it never persists into storage"]
@@ -43,7 +43,7 @@ Keep these points active when the skill loads:
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #workflow-contract >>
 
@@ -108,6 +108,6 @@ Prefer another surface when the work concerns:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

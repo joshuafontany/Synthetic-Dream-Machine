@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/camera-mount >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/camera-mount >>
 ```toml iam
 cacheable = true
 docs      = "lar:///ha.ka.ba/lararium/docs/verse-mesh"
@@ -17,7 +17,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/api/camera-mount"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! CameraMount — Invariant
 
@@ -149,6 +149,6 @@ The `mountCamera` interface stays identical. The `document` type changes; the ch
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

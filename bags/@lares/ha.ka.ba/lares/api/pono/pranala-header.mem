@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/pranala-header >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/pranala-header >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/pranala-header.mem"
@@ -31,7 +31,7 @@ Permanent JS exception: the `?` token and its `->` arrow require dedicated parse
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -95,6 +95,6 @@ uri = 1
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

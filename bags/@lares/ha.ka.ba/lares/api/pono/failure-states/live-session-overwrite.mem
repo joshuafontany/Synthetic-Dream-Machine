@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/failure-states/live-session-overwrite.mem"
@@ -37,7 +37,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -81,6 +81,6 @@ If the node records the claim and marks promotion pressure separately, boundary 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

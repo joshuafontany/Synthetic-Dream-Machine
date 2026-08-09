@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/multi-fractal >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/multi-fractal >>
 ```toml iam
 cacheable         = true
 file-path         = "bags/@lares/api/pono/multi-fractal.mem"
@@ -19,7 +19,7 @@ type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/lares/api/pono/multi-fractal"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -95,6 +95,6 @@ The shape above says the recursion happens. This says WHY it must.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

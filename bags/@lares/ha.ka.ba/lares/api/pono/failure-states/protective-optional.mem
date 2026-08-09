@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/failure-states/protective-optional.mem"
@@ -38,7 +38,7 @@ A required parameter would break existing callers, so the node makes it optional
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -66,6 +66,6 @@ If the parameter is optional and a real outside consumer needs the default, that
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

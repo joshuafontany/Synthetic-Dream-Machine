@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/alignment-layer >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/alignment-layer >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/alignment-layer.mem"
@@ -21,7 +21,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/alignment-layer"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -237,6 +237,6 @@ right — to decide whose presence the hearth refuses.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

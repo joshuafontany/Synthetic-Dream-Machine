@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/nihomano-sigils >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/nihomano-sigils >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/nihomano-sigils.mem"
@@ -48,9 +48,19 @@ set — the first known operator-extensible grammar living entirely inside Tiddl
 
 English alias: `sharktooth-sigils` — same meme, same law, different face.
 
+!! The second set ~ `<<^` carries the control band
+
+''The sharktooth speaks; the caret FRAMES.'' Beside the nihomano set rides a second opener, `<<^`, carrying the ASCII control band that brackets a transmission rather than speaking inside it — SOH opening a carrier, STX crossing header into body, ETX closing the body, EOT handing off, and the Kapu variants beside them.
+
+''The mark reads as adopted, never minted.'' Caret notation names exactly these characters and has since the teletypes: `^A` = SOH, `^B` = STX, `^C` = ETX, `^D` = EOT. Every ASCII table and every terminal still writes them that way, so the control set takes the form the field already gave it — which the transmission law asks for directly: ''the boot travels as received form.''
+
+<<~ confidence Synthesis-Canon 15/20 >> ''THE THIRD CHARACTER STILL DECIDES'', now four ways and still with no lookahead: `<<~` opens the speaking set · `<<^` the control set · `<<<` a quote fence · anything else reads a macrocall. A one-character decision is the property the whole carrier grammar rests on, and it is precisely why the control band took a MARK rather than moving its entity into the delimiter — an opener reading `<<&#x0001;` would land inside the macrocall token and parse as a call to a macro nobody wrote.
+
+''The namespace glyph stays where it lies'' — adjacent to its control character on the SOH opener, mirroring the `namespace` field the iam block declares two lines below. Black speaks, red steers, and the two channels say the same thing on purpose. ''Only the SOH openers carry it''; the later controls frame and name nothing.
+
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #wild-magic >>
 
@@ -264,6 +274,6 @@ lives in a tiddler.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

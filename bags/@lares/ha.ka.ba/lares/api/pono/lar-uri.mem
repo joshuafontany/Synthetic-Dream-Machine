@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/lar-uri.mem"
@@ -76,7 +76,7 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #scheme-syntax >>
 
@@ -375,6 +375,6 @@ lar:///ha.ka.ba/bags/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar://
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

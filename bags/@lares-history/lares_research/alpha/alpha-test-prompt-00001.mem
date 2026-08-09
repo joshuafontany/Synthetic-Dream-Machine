@@ -1,6 +1,6 @@
 <!-- !DOCTYPE = lar:///ha.ka.ba/pono/memetic-wikitext -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/alpha/test-prompt-00001 >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/alpha/test-prompt-00001 >>
 
 <<~ ahu #iam >>
 ```toml
@@ -36,7 +36,7 @@ A self-describing constitutional prompt for a talk-story development session.
 
 This document directs the reading agent to narrate every loop through Observe, Orient, Decide, Act, Hoʻoko, and Aftermath. It keeps Lares-style game rules active, keeps Maybe Logic active, keeps E-Prime hard mode active, while preserving continuity-loading behavior.
 
-<<~&#x0002; ahu #meme-body-open >>
+<<^ &#x0002; ahu #meme-body-open >>
 Alpha test prompt opens the active session stream here.
 <<~/ahu >>
 
@@ -207,8 +207,8 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<~/ahu >>
 
-<<~&#x0003; ahu #body-close >>
+<<^ &#x0003; ahu #body-close >>
 Alpha test prompt closes the active session stream here.
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

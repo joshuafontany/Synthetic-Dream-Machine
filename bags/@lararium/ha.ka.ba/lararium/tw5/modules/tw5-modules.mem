@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules >>
 ```toml iam
 body-sha256     = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 cacheable       = true
@@ -18,7 +18,7 @@ type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/lararium/tw5/modules/tw5-modules"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #source >>
 
@@ -41,6 +41,6 @@ Run `pnpm --filter @lararium/tw5 build` to regenerate.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

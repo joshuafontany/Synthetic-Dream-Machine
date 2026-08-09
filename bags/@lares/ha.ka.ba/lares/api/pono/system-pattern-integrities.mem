@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities >>
 ```toml iam
 cacheable         = true
 file-path         = "bags/@lares/api/pono/system-pattern-integrities.mem"
@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/system-pattern-integrities"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -357,6 +357,6 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

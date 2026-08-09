@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/domain/abjuration >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/domain/abjuration >>
 ```toml iam
 cacheable = true
 caption   = "abjuration"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/components/domain/abjuration"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Abjuration
 
@@ -71,6 +71,6 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

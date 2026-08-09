@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/steward-doctrine.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/steward-doctrine"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Steward Doctrine ~ the cabal that engineers its own inability to rule
 
@@ -109,6 +109,6 @@ Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.k
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/federation >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/federation >>
 ```toml iam
 cacheable  = true
 confidence = 15
@@ -19,7 +19,7 @@ written    = "2026-06-21"
 
 <<~ aka lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #what-travels >>
 
@@ -167,6 +167,6 @@ A QA vessel on native Windows 11 (PowerShell, not WSL) stands up through the sam
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

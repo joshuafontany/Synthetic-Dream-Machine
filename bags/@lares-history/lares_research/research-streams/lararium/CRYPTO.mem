@@ -1,4 +1,4 @@
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO >>
 ```toml iam
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/CRYPTO.mem"
@@ -17,7 +17,7 @@ retain       = true
 
 
 
-<<~&#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #doctrine-header >>
 
@@ -217,6 +217,6 @@ Target state (Milestone 4):
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<^ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

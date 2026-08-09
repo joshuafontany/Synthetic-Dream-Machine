@@ -113,7 +113,7 @@ _CLASSES = ("letter", "digit", "ws", "punct", "other")
 _N_CLASSES = len(_CLASSES)
 _C_LETTER, _C_DIGIT, _C_WS, _C_PUNCT, _C_OTHER = range(_N_CLASSES)
 
-_SIGIL_RE = re.compile(r"<<~|>>")
+_SIGIL_RE = re.compile(r"<<[~^]|>>")
 
 #: The recurrence channel's grammar: a repeat fires when the K_GRAM-char tail ending at t
 #: last poured within RECUR_WINDOW ticks — a bounded memory horizon, streaming-honest.

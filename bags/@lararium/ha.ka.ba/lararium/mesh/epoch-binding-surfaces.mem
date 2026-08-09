@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+<<^ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/epoch-binding-surfaces.mem"
@@ -20,7 +20,7 @@ written   = "2026-08-08"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -145,6 +145,6 @@ are acts, never upgrades''.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

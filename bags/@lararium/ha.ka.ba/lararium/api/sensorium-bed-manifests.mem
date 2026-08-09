@@ -1,4 +1,4 @@
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/sensorium-bed-manifests >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/sensorium-bed-manifests >>
 ```toml iam
 cacheable = true
 l-space   = "lararium"
@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lararium/api/sensorium-bed-manifests"
 written   = "2026-07-15"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #the-pattern >>
 
@@ -55,6 +55,6 @@ The register split rides as a ''hypothesis the harness itself tests'': liturgica
 
 <<~ ॐ ँ -> ? >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/puka >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/puka >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/puka.mem"
@@ -36,7 +36,7 @@ Grammar only --- the selecting-race execution runtime awaits the async-first spr
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -79,6 +79,6 @@ A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

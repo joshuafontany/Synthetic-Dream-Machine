@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/reaction-graph >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/reaction-graph >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/reaction-graph.mem"
@@ -27,7 +27,7 @@ Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subsc
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -211,6 +211,6 @@ The reaction dispatch layer runs as a ''Scope-1'' CRDT-wave surface under the tw
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

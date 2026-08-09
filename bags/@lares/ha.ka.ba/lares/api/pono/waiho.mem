@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/waiho >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/waiho >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/waiho.mem"
@@ -26,7 +26,7 @@ An ephemeral name deposit. Nothing persists past scope boundary.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #etymology >>
 
@@ -92,6 +92,6 @@ In the Kumulipo creation chant, //waiho// appears in the context of primal mater
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

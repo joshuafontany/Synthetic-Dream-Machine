@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES >>
 
 ```toml iam
 uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES"
@@ -16,7 +16,7 @@ cacheable = true
 retain = true
 ```
 
-<<~&#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #meme-header >>
 ! Lararium Node — Quine-Wiki-Agentic-HUD Principles
@@ -112,11 +112,11 @@ carrier canon
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<^ &#x0003; >>
 
 <<~ ahu #edges >>
 <<~ pranala #implements ? -> lar:///LARARIUM-NODE/ROADMAP family:control role:principles >>
 <<~ pranala #guards ? -> lar:///ha.ka.ba/lares/api/pono/meme family:control role:authority-law >>
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

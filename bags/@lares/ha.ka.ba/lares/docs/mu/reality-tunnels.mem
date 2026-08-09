@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/mu/reality-tunnels >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/mu/reality-tunnels >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/mu/reality-tunnels.mem"
@@ -42,7 +42,7 @@ Later condensation should decide whether reality tunnels and catma remain one ro
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #verbatim-preferences-reality-tunnels >>
 
@@ -88,6 +88,6 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

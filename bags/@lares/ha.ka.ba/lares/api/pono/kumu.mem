@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/kumu >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/kumu >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/kumu.mem"
@@ -31,7 +31,7 @@ a procedure executes; a kumu defines a form that other nodes instantiate.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -68,6 +68,6 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/oracle >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/oracle >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/oracle.mem"
@@ -41,7 +41,7 @@ turn spends, this sigil drains.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -209,6 +209,6 @@ certifies  = "nothing"
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0011; ? -> lar:///ha.ka.ba/lares/api/pono/kapu >>
+<<^ ⊙&#x0011; ? -> lar:///ha.ka.ba/lares/api/pono/kapu >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/kapu.mem"
@@ -28,7 +28,7 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -94,7 +94,7 @@ Above-namespace carriers declare their register through:
 | signal | example | meaning |
 |---|---|---|
 | `namespace` IAM field | `namespace = "ॐ ँ"` | named glyph-space above base |
-| kernel control chars | `<<~ ⊙&#x0001; ? ->` | positions 1–4 reserved for kernel-tier structural sigils |
+| kernel control chars | `<<^ ⊙&#x0001; ? ->` | positions 1–4 reserved for kernel-tier structural sigils |
 | role field | `role = "... kernel ..."` | explicit declaration of kernel authority |
 
 A carrier that uses kernel control characters without implementing kapu reads as `ano` or below.
@@ -132,7 +132,7 @@ This meme governs the kapu rating and above-namespace trust law.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
-<<~&#x0014; -> ? >>
+<<^ &#x0004; -> ? >>
+<<^ &#x0014; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/failure-states/table-hides-a-plane.mem"
@@ -40,7 +40,7 @@ A table reads as clarity, so the node builds one — and adjacency in a row asse
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -68,6 +68,6 @@ If the entities share a plane but differ in degree, that reads as an ordinary ta
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

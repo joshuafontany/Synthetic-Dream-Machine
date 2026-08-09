@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/mcp-tool-registry >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/mcp-tool-registry >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/mcp-tool-registry.mem"
@@ -27,7 +27,7 @@ Two env guards gate write access and canvas connectivity.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -143,6 +143,6 @@ inputs      = ["uri: string"]
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

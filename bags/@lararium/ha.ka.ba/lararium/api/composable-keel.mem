@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/composable-keel >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/composable-keel >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/api/composable-keel.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/has-stack >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -134,6 +134,6 @@ The keel invents nothing structural; four well-worn patterns each carry a face o
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

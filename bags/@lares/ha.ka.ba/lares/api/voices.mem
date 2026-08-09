@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/voices >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/voices >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/voices.mem"
@@ -31,7 +31,7 @@ The Voices receive rooms before session masks or task routing begin.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -393,6 +393,6 @@ payload = { priority = "support", retain = false }
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

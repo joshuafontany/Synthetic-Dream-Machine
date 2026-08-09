@@ -3,10 +3,10 @@
  *
  * Carrier framing uses HTML-entity control sigils as stream boundaries:
  *
- *   <<~[prefix?]&#x0001; ? -> lar:///URI >>   SOH — opens a carrier, declares URI
- *   <<~[prefix?]&#x0002;[^>]*>>               STX — header→body boundary
- *   <<~[prefix?]&#x0003;[^>]*>>               ETX — closes body (carrier done)
- *   <<~[prefix?]&#x0004;[^>]*>>               EOT — carrier exit sigil
+ *   <<^ [prefix?]&#x0001; ? -> lar:///URI >>   SOH — opens a carrier, declares URI
+ *   <<^ &#x0002;[^>]*>>               STX — header→body boundary
+ *   <<^ &#x0003;[^>]*>>               ETX — closes body (carrier done)
+ *   <<^ &#x0004;[^>]*>>               EOT — carrier exit sigil
  *   <<~ -> ? >>                                return-throat — EOT variant
  *   <<~ ahu #slot >>...<<~/ahu >>             ahu section — incremental child event
  *
@@ -50,11 +50,11 @@ export type MemeStreamEvent =
 // sequences allowed, but a sigil NEVER crosses a line: the multi-line form
 // once let a quoted `<<~` mention swallow text down to a distant real sigil
 // (loci.md).
-const SOH_RE  = /<<~(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*\?\s*->\s*([^\s>]+)\s*>>/;
-const STX_RE  = /<<~(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/;
-const ETX_RE  = /<<~(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/;
+const SOH_RE  = /<<\^(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*\?\s*->\s*([^\s>]+)\s*>>/;
+const STX_RE  = /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/;
+const ETX_RE  = /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/;
 // EOT: entity form (&#x0004;/&#x0014;) OR return-throat (<<~ -> ? >>)
-const EOT_RE  = /<<~(?:(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*|\s*->\s*\?)\s*>>/;
+const EOT_RE  = /<<[~^](?:(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*|\s*->\s*\?)\s*>>/;
 const AHU_OPEN_RE  = /<<~(?:[^>\n]|->)*\bahu\s+(#[\w-]+)\s*>>/;
 const AHU_CLOSE_RE = /<<~\/ahu\s*>>/;
 
@@ -62,7 +62,7 @@ type Hit = { index: number; end: number; cap: string | undefined };
 
 /**
  * Fence-aware find (fence-mask law): quoted sigils never frame
- * a carrier — a fenced `<<~ &#x0003; >>` in teaching text MUST NOT close
+ * a carrier — a fenced `<<^ &#x0003; >>` in teaching text MUST NOT close
  * the body. The parse cursor always rests outside quoted spans (a sigil
  * inside a span never gets consumed), so masking `remaining` per call
  * stays sound across streaming chunks. An unclosed fence masks its open

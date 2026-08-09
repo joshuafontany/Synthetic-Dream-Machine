@@ -18,13 +18,13 @@ from kumulipo_sections import (
 
 _ENVELOPE_HEAD = """<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/library/hawaii/kumulipo/test >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/library/hawaii/kumulipo/test >>
 ```toml iam
 register = "Canon"
 type     = "text/x-memetic-wikitext"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -45,9 +45,9 @@ _ENVELOPE_TAIL = """<<~/ahu >>
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>
 """
 
 

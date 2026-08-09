@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/mu/the-four-tools.mem"
@@ -36,7 +36,7 @@ The agent and operator MUST carry four Minor Arcana weapons and one Major Arcana
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -302,6 +302,6 @@ arcana   = "release"
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

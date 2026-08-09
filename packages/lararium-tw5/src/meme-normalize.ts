@@ -8,11 +8,11 @@
  * idempotent) hold — rather than loosening the gate that guards the graph.
  *
  * Classes closed here (the ones a hand-authored or lifted carrier most often trips):
- *   1. **SOH opener.** The opener canonicalizes to `<<~ [namespace-glyphs]&#x0001;`
- *      — one space after `<<~`, then the iam-declared namespace as LITERAL glyphs
+ *   1. **SOH opener.** The opener canonicalizes to `<<^ [namespace-glyphs]&#x0001;`
+ *      — one space after `<<^`, then the iam-declared namespace as LITERAL glyphs
  *      (or none), then the SOH char. Two drifts trip it: a missing/stale namespace
  *      (the renderer re-injects → round-trip breaks), and a missing space
- *      (`<<~ &#x0001;`, the lifted-corpus form — 10 stragglers against 102 canonical
+ *      (`<<^ &#x0001;`, the lifted-corpus form — 10 stragglers against 102 canonical
  *      siblings). The iam field is authoritative; the SOH is derived from it.
  *   2. **Register band.** The iam `register` expands its band CODE (P · PS · S ·
  *      SC · C) to the canonical band word (Provisional … Canon). A value OFF the
@@ -22,13 +22,13 @@
  *      scales by guessing.
  *
  * Pure + idempotent (re-running changes nothing). The SOH grammar mirrors the
- * deserializer's namespace extractor (`deserializer.ts`, `/^<<~([^&\n]*)&#x(0001|0011)/`).
+ * deserializer's namespace extractor (`deserializer.ts`, `/^<<\^([^&\n]*)&#x(0001|0011)/`).
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/meme-normalize
  */
 
-/** `<<~ [namespace-glyphs]&#x0001;` — capture prefix · current namespace · SOH char. */
-const SOH_OPENER_RE = /(<<~)\s*([^&\n]*?)\s*(&#x(?:0001|0011);)/;
+/** `<<^ [namespace-glyphs]&#x0001;` — capture prefix · current namespace · SOH char. */
+const SOH_OPENER_RE = /(<<\^)\s*([^&\n]*?)\s*(&#x(?:0001|0011);)/;
 
 /** Decode `&#xNNNN;` entities to literal glyphs; non-entity chars pass through. */
 function decodeEntities(s: string): string {
@@ -83,9 +83,9 @@ export function normalizeMemeSource(src: string): NormalizeResult {
   const soh = SOH_OPENER_RE.exec(text);
   if (soh) {
     const have = soh[2]!;
-    // Canonical opener: `<<~ ` + literal namespace glyphs + the SOH char. Compare
+    // Canonical opener: `<<^ ` + literal namespace glyphs + the SOH char. Compare
     // the WHOLE matched opener, not just the namespace — so a missing space
-    // (`<<~ &#x0001;`) canonicalizes even when the namespace already matches.
+    // (`<<^ &#x0001;`) canonicalizes even when the namespace already matches.
     const rebuilt = `${soh[1]} ${want}${soh[3]}`;
     if (soh[0]! !== rebuilt) {
       text = text.slice(0, soh.index) + rebuilt + text.slice(soh.index + soh[0]!.length);

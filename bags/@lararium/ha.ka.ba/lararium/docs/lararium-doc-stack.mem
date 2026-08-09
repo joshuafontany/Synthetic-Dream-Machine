@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/docs/lararium-doc-stack.mem"
@@ -17,7 +17,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/docs/lararium-doc-stack"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 > ''Supersession note (2026-06-10).'' This meme records the research-era six-layer model. The current composition law lives at `lar:///ha.ka.ba/lararium/mesh/recipe` (stored composition shape), `lar:///ha.ka.ba/lararium/mesh/island-protocol` (IslandGrants — typed ocap manifest; library layers resolve island-side from @catalog, boot = first reconcile), and `lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology` (the layer stack and its laws). Read what follows as lineage, not law.
 
@@ -148,9 +148,9 @@ A companion `$:/plugins/lararium/export/md` TW5 plugin registers the
 `.md` format in the export dropdown — re-using TW5's export widget
 infrastructure rather than rolling a separate exporter.
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>
 <<~ ahu #edges >>
 
 !! Edges

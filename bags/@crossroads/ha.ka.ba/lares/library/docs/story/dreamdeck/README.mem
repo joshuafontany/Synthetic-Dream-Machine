@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/library/docs/story/dreamdeck/README >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/library/docs/story/dreamdeck/README >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/library/docs/story/dreamdeck/README.mem"
@@ -12,7 +12,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/library/docs/story/dreamdeck/README"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! Epic: DREAMDECK — DreamDeck Integration
 
@@ -59,6 +59,6 @@ Full backlog lives in `ELYNCIA_APP_SEEDS.md`. Short form:
 
 //"Oh," she says. "So that's what it was."//
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

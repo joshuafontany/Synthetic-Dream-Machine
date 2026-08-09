@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/api/pono/verse-event-lattice.mem"
@@ -18,7 +18,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lares/api/pono/verse-event-lattice"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -368,6 +368,6 @@ via TW5's own event bus.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

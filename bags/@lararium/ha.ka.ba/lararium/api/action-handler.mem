@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/action-handler >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/action-handler >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/api/action-handler.mem"
@@ -22,7 +22,7 @@ uri-path    = "ha.ka.ba/lararium/api/action-handler"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -115,6 +115,6 @@ is shared, not duplicated (Sprint 6 parity).
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/memory-store >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/memory-store >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/tw5/memory-store.mem"
@@ -15,7 +15,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lararium/tw5/memory-store"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -140,6 +140,6 @@ same change record any AutomergeDocStore would emit.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

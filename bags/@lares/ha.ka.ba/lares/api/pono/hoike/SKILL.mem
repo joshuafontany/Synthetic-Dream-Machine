@@ -11,7 +11,7 @@ description: File or reopen a hoike (\testimony) — a kept record of a conteste
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/hoike/SKILL >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/hoike/SKILL >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/hoike/SKILL >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/hoike/SKILL.mem"
@@ -27,7 +27,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/api/pono/hoike/SKILL"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #practice >>
 
@@ -110,6 +110,6 @@ Read the three together and the grammar teaches itself: dissent gets a name and 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

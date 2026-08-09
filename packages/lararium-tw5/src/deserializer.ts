@@ -103,14 +103,14 @@ export function memeticWikitextDeserializer(
   // (Multi-meme prologue/postamble distribution between intermediate
   // carriers lands when MemeStreamParser surfaces positional metadata on
   // carrier events.)
-  // SOH carrier sentinels begin with `<<~` then optional namespace glyphs
+  // SOH carrier sentinels begin with `<<^` then optional namespace glyphs
   // (⊙, ॐ ँ, …) then the SOH control-char reference directly — the same
   // shape the namespace extractor below reads. Anchoring on the SOH/SOH2
   // codes avoids matching unrelated `<<~ !DOCTYPE … >>` comments,
   // `<<~ ? -> uri >>` pranala-headers, or later STX/ETX sentinels (the old
   // any-control-char form swallowed the whole header into `prologue` when
   // the SOH carried a namespace it could not see).
-  const sohM = maskedExec(text, /<<~[^&\n]*&#x(?:0001|0011);/);
+  const sohM = maskedExec(text, /<<\^[^&\n]*&#x(?:0001|0011);/);
   const sohIdx = sohM ? sohM.index : -1;
   const prologue = (closes.length > 0 && sohIdx > 0)
     ? text.slice(0, sohIdx)
@@ -120,7 +120,7 @@ export function memeticWikitextDeserializer(
   // the closing `>>` (which needs to skip past the embedded `;` and any
   // whitespace), search for the SOH-shape match position then walk
   // forward to the next `>>`.
-  const etxOpenRe = /<<~(?:\s*⊙)?\s*&#x000[34];/g;
+  const etxOpenRe = /<<\^(?:\s*⊙)?\s*&#x000[34];/g;
   let lastEtxEnd = -1;
   for (const etxMatch of maskedExecAll(text, etxOpenRe)) {
     const closeIdx = text.indexOf(">>", etxMatch.index + etxMatch[0].length);
@@ -147,7 +147,7 @@ export function memeticWikitextDeserializer(
     // Stored only when non-empty; template emits it before the control char.
     // The Kapu SOH variant (&#x0011; DC1) carries its own semantics — the
     // code survives on the parent as `carrier-soh`, never normalized away.
-    const nsM = /^<<~([^&\n]*)&#x(0001|0011)/.exec(ev.fullText);
+    const nsM = /^<<\^([^&\n]*)&#x(0001|0011)/.exec(ev.fullText);
     const namespace = nsM?.[1]?.trim() ?? "";
     if (namespace.length > 0 && tiddlers.length > 0) {
       for (const t of tiddlers) t["namespace"] = namespace;
@@ -209,8 +209,8 @@ function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): Tiddle
 // Control sigils live on ONE line by law — `[^>\n]` keeps the scan from
 // crossing lines (a greedy multi-line match once swallowed from a quoted
 // `<<~` mention down to the real closer; found on loci.md).
-const SOH_LINE_RE = /^<<~(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*>>\n?/;
-const STX_LINE_RE = /<<~(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
+const SOH_LINE_RE = /^<<\^(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*>>\n?/;
+const STX_LINE_RE = /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
 
 function stripLeadingNewlines(text: string): string {
   return text.replace(/^\n+/, "");
@@ -238,7 +238,7 @@ function splitMemeToTiddlers(
   // truncated everything after it (real corpus loss).
   const hadSoh = SOH_LINE_RE.test(text);
   const noSoh = text.replace(SOH_LINE_RE, "");   // anchored at 0 — never fenced
-  const etxM = maskedExec(noSoh, /\n?<<~(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/);
+  const etxM = maskedExec(noSoh, /\n?<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/);
   const stripped = etxM ? noSoh.slice(0, etxM.index) : noSoh;
   // Degraded-carrier surfacing: a closer swallowed by an UNCLOSED fence
   // tail would ride into the body as CONTENT — and every render would
@@ -616,7 +616,7 @@ export function splitBodyTiddler(
 //
 // Canonical-form law (handoff #pattern-integrities §2) binds the output:
 //   1. idempotent render — canonical input round-trips byte-identical
-//      (sigil spacing `<<~ &#x0002; >>`, one-blank-line block margins);
+//      (sigil spacing `<<^ &#x0002; >>`, one-blank-line block margins);
 //   2. framing normalizes once — the iam block re-emits sorted + aligned
 //      from fields (authored key order and padding do not survive the
 //      record stratum; retaining bytes for them was the H2 path, dead);
@@ -803,13 +803,13 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   const sohCode = f["carrier-soh"] === "0011" ? "&#x0011;" : "&#x0001;";
 
   let out = str("prologue");
-  out += `<<~ ${str("namespace")}${sohCode} ? -> ${memeUri} >>\n`;
+  out += `<<^ ${str("namespace")}${sohCode} ? -> ${memeUri} >>\n`;
   out += str("preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
   out += expandRefs(reader, memeUri, "", str("header-text"), f);
-  out += "<<~ &#x0002; >>\n\n";
+  out += "<<^ &#x0002; >>\n\n";
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
-  out += "\n\n<<~ &#x0003; >>\n\n<<~ &#x0004; -> ? >>\n";
+  out += "\n\n<<^ &#x0003; >>\n\n<<^ &#x0004; -> ? >>\n";
   // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;

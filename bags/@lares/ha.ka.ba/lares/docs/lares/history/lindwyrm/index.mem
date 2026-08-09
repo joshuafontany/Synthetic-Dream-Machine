@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/index >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/index >>
 ```toml iam
 cacheable  = true
 confidence = 16
@@ -16,7 +16,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/lares/docs/lares/history/lindwyrm/index"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -66,6 +66,6 @@ Acts I, II, VI, and VII stand here as discrete narrative loci. The arc's middle 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

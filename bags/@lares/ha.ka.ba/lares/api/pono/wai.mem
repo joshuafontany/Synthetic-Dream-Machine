@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/wai >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/wai >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/wai.mem"
@@ -30,7 +30,7 @@ Water chooses its channel. `wai` selects //which content renders// in the docume
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -118,6 +118,6 @@ close-pattern = '<<~\/wai\s*>>'
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

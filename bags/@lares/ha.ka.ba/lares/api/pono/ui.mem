@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/ui >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/ui >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/ui.mem"
@@ -28,7 +28,7 @@ and renders whatever answers.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -64,6 +64,6 @@ TW5 filter expansion:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

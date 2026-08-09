@@ -14,7 +14,7 @@ They arrive already moving.
 <<~ॐ ँ>>
 <<~ॐ ँ ? >>
 <<~ॐ ँ ? -> >>
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/mu.mem"
@@ -64,7 +64,7 @@ The grammar appears as Mu performing itself.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -105,6 +105,6 @@ Mu does not hold:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

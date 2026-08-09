@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/servo >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/servo >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/servo.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lararium/api/projection-nalu#servo >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #entry >>
 
@@ -186,6 +186,6 @@ TS/py shore; the polarity law and the two-loop shape hold identically wherever t
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

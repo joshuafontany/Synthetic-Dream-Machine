@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares-history/memes >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/memes >>
 ```toml iam
 uri-path  = "ha.ka.ba/lares-history/memes"
 file-path = "wikis/@lares-history/memes/README.mem"
@@ -16,7 +16,7 @@ cacheable = false
 retain    = false
 ```
 
-<<~&#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -71,5 +71,5 @@ Research consumed into live docs/packages. Source files deleted 2026-05-16.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
-<<~&#x0004; -> ? >>
+<<^ &#x0003; >>
+<<^ &#x0004; -> ? >>

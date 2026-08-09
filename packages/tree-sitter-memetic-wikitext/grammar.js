@@ -38,6 +38,7 @@ module.exports = grammar({
     _block: $ => choice(
       $.ahu_block,
       $.sigil,
+      $.control_sigil,
       $.fenced_block,
       $.quote_block,
       $.style_block,
@@ -68,9 +69,20 @@ module.exports = grammar({
       field('close', $.sigil_close),
     )),
 
-    // `<<~ name args… >>` — one carrier form, any vocabulary.
+    // `<<~ name args… >>` — the SPEAKING set, any vocabulary.
     sigil: $ => seq(
       '<<~',
+      optional(field('body', $.sigil_body)),
+      '>>',
+    ),
+
+    // `<<^ &#x0001; … >>` — the CONTROL set, framing the transmission rather than
+    // speaking inside it. The caret is the received notation for exactly these
+    // characters (`^A`=SOH, `^B`=STX, `^C`=ETX, `^D`=EOT), so the mark is adopted,
+    // never minted. Structurally identical to a sigil; separated so a reader can
+    // tell the envelope from the letter without inspecting the body.
+    control_sigil: $ => seq(
+      '<<^',
       optional(field('body', $.sigil_body)),
       '>>',
     ),
@@ -160,9 +172,12 @@ module.exports = grammar({
 
     transclude_block: _ => token(/\{\{[^\n]*\}\}[ \t]*\r?\n?/),
 
-    // `<<name args…>>` alone on a line — a macrocall (the sigil's `<<~` and
-    // the quote fence's `<<<` never match: the third character decides).
-    macrocall_block: _ => token(/<<[^<~\s][^\n]*>>[ \t]*\r?\n?/),
+    // `<<name args…>>` alone on a line — a macrocall. THE THIRD CHARACTER STILL
+    // DECIDES, now four ways: `<<~` speaking sigil · `<<^` control sigil ·
+    // `<<<` quote fence · anything else, a macrocall. One character, no lookahead,
+    // no precedence rule — which is why the control set took a mark rather than an
+    // entity: `<<&#x0001;` would have landed inside this token and parsed as a call.
+    macrocall_block: _ => token(/<<[^<~^\s][^\n]*>>[ \t]*\r?\n?/),
 
     horizontal_rule: _ => token(/-{3,}[ \t]*\r?\n?/),
 

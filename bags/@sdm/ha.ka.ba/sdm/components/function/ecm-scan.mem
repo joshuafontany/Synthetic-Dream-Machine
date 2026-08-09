@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/function/ecm-scan >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/function/ecm-scan >>
 ```toml iam
 cacheable = true
 caption   = "ecm-scan"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/components/function/ecm-scan"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 ! ECM Scan
 
@@ -71,6 +71,6 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

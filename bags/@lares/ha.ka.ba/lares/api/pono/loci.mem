@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/loci >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/loci >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/loci.mem"
@@ -35,7 +35,7 @@ Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -203,6 +203,6 @@ Convention fails when:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

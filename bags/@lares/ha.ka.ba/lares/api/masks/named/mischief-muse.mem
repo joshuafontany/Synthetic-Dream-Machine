@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/named/mischief-muse >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/named/mischief-muse >>
 ```toml iam
 aside             = false
 cacheable         = false
@@ -56,7 +56,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #corpus >>
 
@@ -201,6 +201,6 @@ These notes require live session observation before they can be written with con
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

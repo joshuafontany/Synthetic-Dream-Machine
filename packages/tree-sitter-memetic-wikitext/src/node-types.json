@@ -41,6 +41,10 @@
           "named": true
         },
         {
+          "type": "control_sigil",
+          "named": true
+        },
+        {
           "type": "fenced_block",
           "named": true
         },
@@ -120,6 +124,22 @@
     }
   },
   {
+    "type": "control_sigil",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "sigil_body",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "document",
     "named": true,
     "root": true,
@@ -138,6 +158,10 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "control_sigil",
           "named": true
         },
         {
@@ -321,6 +345,10 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "control_sigil",
           "named": true
         },
         {
@@ -538,6 +566,10 @@
         }
       ]
     }
+  },
+  {
+    "type": "<<^",
+    "named": false
   },
   {
     "type": "<<~",

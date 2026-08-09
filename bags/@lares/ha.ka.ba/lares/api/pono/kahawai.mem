@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/kahawai >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/kahawai >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/kahawai.mem"
@@ -29,7 +29,7 @@ water cascade.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -74,6 +74,6 @@ English alias forms:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

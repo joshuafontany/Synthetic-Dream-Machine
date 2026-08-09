@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lararium/api/ingest-canon >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lararium/api/ingest-canon >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/api/ingest-canon.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/api/ingest-canon"
 written   = "2026-06-27"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -187,6 +187,6 @@ linonetwo's tw-react + TidGi):
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

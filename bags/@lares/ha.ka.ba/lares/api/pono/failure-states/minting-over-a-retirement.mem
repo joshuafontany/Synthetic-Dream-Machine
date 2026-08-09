@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/failure-states/minting-over-a-retirement.mem"
@@ -40,7 +40,7 @@ The node reaches for a term, finds it apt, and seats it — without checking whe
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -70,6 +70,6 @@ If a ruled word exists with no residue and the node minted anyway, that reads as
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

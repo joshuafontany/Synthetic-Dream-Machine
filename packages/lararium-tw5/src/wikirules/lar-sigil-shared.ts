@@ -35,7 +35,24 @@ export interface RuleInstance {
   attrs?:    Record<string, string>;
 }
 
-export const ANY_OPEN_RE = /<<~[^\n]*?>>/g;
+// Two opener marks, one decision on the THIRD character: `~` opens the speaking set (the sharktooth
+// carries a verb), `^` opens the CONTROL set (caret notation — `^A`=SOH, `^B`=STX, `^C`=ETX, `^D`=EOT,
+// the received way of writing exactly these characters since teletypes). One character still decides,
+// four ways: `<<~` sigil · `<<^` control · `<<<` quote fence · `<<x` macrocall.
+export const SIGIL_OPEN_MARKS = "~^";
+/** True when a sigil of EITHER set opens at `pos`. */
+export function opensSigilAt(source: string, pos: number): boolean {
+  return source.startsWith("<<~", pos) || source.startsWith("<<^", pos);
+}
+/** The next opener of either set at or after `from`, or -1. */
+export function indexOfSigilOpen(source: string, from: number): number {
+  const a = source.indexOf("<<~", from);
+  const b = source.indexOf("<<^", from);
+  if (a < 0) return b;
+  if (b < 0) return a;
+  return Math.min(a, b);
+}
+export const ANY_OPEN_RE = /<<[~^][^\n]*?>>/g;
 
 // Child-slot sigil names present at bootstrap (before grammar loads from tiddlers).
 // ahu: deserializer emits <<~ ahu … >>…<<~/ahu >> blocks; must be recognised at cold boot.
@@ -218,7 +235,7 @@ export function findCloseEnd(
 }
 
 export function findGenericOpenAt(source: string, start: number): { end: number; sigil: string | null } | null {
-  if (!source.startsWith("<<~", start)) return null;
+  if (!opensSigilAt(source, start)) return null;
   ANY_OPEN_RE.lastIndex = start;
   const m = ANY_OPEN_RE.exec(source);
   if (!m || m.index !== start) return null;

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture >>
 ```toml iam
 cacheable       = false
 confidence      = 14
@@ -17,7 +17,7 @@ type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #meme-header >>
 
@@ -244,6 +244,6 @@ Address precedes infrastructure. Later, if the work succeeds, infrastructure cat
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

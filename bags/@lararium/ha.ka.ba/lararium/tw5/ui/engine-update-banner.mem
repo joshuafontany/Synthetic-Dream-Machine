@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/engine-update-banner >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/engine-update-banner >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/tw5/ui/engine-update-banner.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/engine-update-banner"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <$reveal type="nomatch" state="$:/lararium/engine/update-available" text="">
 <div class="lar-engine-update-banner">
@@ -23,6 +23,6 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/engine-update-banner"
 </div>
 </$reveal>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

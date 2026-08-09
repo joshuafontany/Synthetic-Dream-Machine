@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/l-space-trust.mem"
@@ -38,7 +38,7 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -85,6 +85,6 @@ Explicit operator-mediated promotion MAY move content upward by creating or revi
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

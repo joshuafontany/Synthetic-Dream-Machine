@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/uefn-scene >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/uefn-scene >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/uefn-scene.mem"
@@ -26,7 +26,7 @@ holding the bag can render any filtered view of the scene graph without a runnin
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #semantic-separation >>
 
@@ -211,6 +211,6 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

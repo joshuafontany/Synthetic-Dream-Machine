@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/mu/the-syad-perspectives.mem"
@@ -31,7 +31,7 @@ Standpoint declares the measure.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #relationship >>
 
@@ -305,6 +305,6 @@ satirist-operational = "nasti-avaktavya"
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

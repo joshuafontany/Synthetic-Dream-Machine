@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/hooponopono >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/hooponopono >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/api/pono/hooponopono.mem"
@@ -29,7 +29,7 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -113,6 +113,6 @@ Boundary event fields:
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

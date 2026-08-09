@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-grammar-wakes-prior-art >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-grammar-wakes-prior-art >>
 ```toml iam
 cacheable     = false
 confidence    = 18
@@ -17,7 +17,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lares/docs/lares/history/the-grammar-wakes-prior-art"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -122,6 +122,6 @@ The W3C research additionally surfaced: the grammar still lacks its own canonica
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

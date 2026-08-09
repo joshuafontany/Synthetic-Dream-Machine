@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/l-prime >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/l-prime >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/pono/l-prime.mem"
@@ -35,7 +35,7 @@ The invariant already holds elsewhere.
 
 <<~/ahu >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #research-braid >>
 
@@ -92,6 +92,6 @@ The ward does not exempt copulas from confidence marking. Every `${copula}` that
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>

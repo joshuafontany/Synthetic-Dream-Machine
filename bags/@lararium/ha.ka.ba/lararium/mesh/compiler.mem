@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/compiler >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/compiler >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/mesh/compiler.mem"
@@ -13,7 +13,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/compiler"
 ```
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -21,6 +21,6 @@ TODO: describe the load-bearing surface this file owns.
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>
