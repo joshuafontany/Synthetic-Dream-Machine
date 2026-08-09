@@ -43,8 +43,7 @@ function usage(): void {
   console.error("  repair            re-seal a lagging carrier under the passphrase that opens the other (split-KEK cure)");
   console.error("  passphrase        read back WHICH DAY this vault was sealed on, and what to type");
   console.error("");
-  console.error("  seal --ddate      compose your secret with the Erisian day, FROZEN at seal and recorded in");
-  console.error("                    the clear. The day is PUBLIC — it anchors the memory, never the strength.");
+  console.error("  every seal STAMPS its Erisian day beside the vault — a record, never part of the passphrase.");
   console.error("");
   console.error(`  non-interactive: ${ARCHIVE_PASSPHRASE_ENV} (current) · ${NEW_PASS_ENV} (new) + --yes`);
 }
@@ -82,27 +81,24 @@ function warnIfWeak(pass: string): void {
 function sealDayPath(): string { return join(larIdentityDir(), ".archive-seal-day.json"); }
 
 /**
- * Compose the operator's secret with the day the vault was sealed, in the Erisian reckoning.
+ * Record the seal-day in the clear — a STAMP ON the passphrase, never a PART of it (operator ruling,
+ * 2026-08-08).
  *
- * ── WHAT THE DAY CONTRIBUTES, STATED HONESTLY ────────────────────────────────────────────────────
- * NOT entropy. The Discordian date is PUBLIC — anyone may compute it for any day, so an attacker who knows
- * roughly when a vault was sealed knows this component outright. It contributes CEREMONY and a MEMORY
- * ANCHOR: the vault carries the day it was founded, and the operator holds one secret instead of a long
- * string. All of the strength still comes from the secret. Claiming otherwise would make a mechanism read
- * as a control it is not.
+ * ── WHY IT STAMPS RATHER THAN COMPOSES ───────────────────────────────────────────────────────────
+ * An earlier shape concatenated the day INTO the passphrase. It would have added no strength — the
+ * Discordian date is PUBLIC, computable by anyone for any day, so an attacker who knows roughly when a
+ * vault was sealed knows that component outright. And it would have added a whole new way to lose the
+ * vault: with the day inside the secret, losing the RECORD locks the operator out even holding the correct
+ * secret. Zero entropy bought at the price of a second single point of failure reads as a bad trade in
+ * both directions.
  *
- * ── AND THE DAY IS FROZEN, NEVER RECOMPUTED ──────────────────────────────────────────────────────
- * A passphrase composed with TODAY's date would change every midnight and lock the operator out of their own
- * vault by morning. So the seal FREEZES the day it happened on, records it beside the identity in the clear,
- * and every later open reads the record rather than the calendar. The stamp is the COMPUTED form, never
- * `ddate`'s prose: that binary's output shape varies by invocation (measured), and a derivation cannot ride
- * a moving string.
+ * Stamping keeps everything the ceremony was for and costs nothing. The passphrase stays exactly what the
+ * operator typed; the vault carries the day it was founded as a memory-anchor beside it; losing the stamp
+ * loses a nice fact and no access at all.
+ *
+ * The stamp is the COMPUTED form, never `ddate`'s prose — that binary's output shape varies by invocation
+ * (measured), and a record meant to read back identically cannot ride a moving string.
  */
-function composeWithSealDay(secret: string, stamp: string): string {
-  return `${secret}:${stamp}`;
-}
-
-/** Record the seal-day in the clear. It is not a secret and pretending otherwise would only lose it. */
 function writeSealDay(stamp: string, prose: string, source: string): void {
   mkdirSync(larIdentityDir(), { recursive: true });
   writeFileSync(sealDayPath(), `${JSON.stringify({ stamp, prose, source }, null, 2)}\n`, { mode: 0o600, encoding: "utf8" });
@@ -134,14 +130,14 @@ function vaultPassphrase(args: ParsedArgs): number {
         console.log("  ⚠ ddate and the computed calendar DISAGREE — a foreign ddate, or a leap-year rule we have wrong.");
       }
       if (!recorded) {
-        console.log("this vault carries NO recorded seal-day — it was sealed with a bare passphrase.");
-        console.log("  compose one with:  lares vault seal --ddate");
+        console.log("this vault carries NO recorded seal-day — it was sealed before the stamp existed.");
+        console.log("  a re-seal or a rotate records one; the passphrase itself is unaffected either way.");
         return;
       }
       console.log(`sealed: ${recorded.prose}`);
-      console.log(`  the passphrase reads  <your secret>:${recorded.stamp}`);
-      console.log("  the day is PUBLIC and adds no entropy — it anchors the memory; the secret carries the strength.");
-      console.log(`  non-interactive:  export ${ARCHIVE_PASSPHRASE_ENV}='<your secret>:${recorded.stamp}'`);
+      console.log(`  stamp:  ${recorded.stamp}`);
+      console.log("  the day is a STAMP ON the passphrase, never a PART of it — this vault opens on your");
+      console.log("  secret alone. Losing this record loses a nice fact and no access at all.");
     },
   });
   return 0;
@@ -223,24 +219,20 @@ async function vaultStatus(args: ParsedArgs, daemonUp: boolean): Promise<number>
 async function vaultSeal(args: ParsedArgs, daemonUp: boolean): Promise<number> {
   const secret = await newPass(args, "new passphrase");
   warnIfWeak(secret);
-  // `--ddate` composes the secret with the day this seal happens on, FROZEN and recorded in the clear.
-  // Without it the passphrase stays exactly what the operator typed — the ceremony is opt-in, never a
-  // surprise an operator discovers when a bare passphrase stops opening their vault.
-  const erisian = args.flags["ddate"] === true ? discordianReading() : null;
-  const pass    = erisian ? composeWithSealDay(secret, erisian.stamp) : secret;
-  if (erisian) writeSealDay(erisian.stamp, erisian.prose, erisian.source);
+  // EVERY seal stamps its day. It needs no flag because it changes nothing about the passphrase — the
+  // vault opens on exactly what the operator typed, and the day rides beside it as a record.
+  const pass    = secret;
+  const erisian = discordianReading();
+  writeSealDay(erisian.stamp, erisian.prose, erisian.source);
   const { output, via } = await routed(daemonUp, "vault-seal", { passphrase: pass }, () => ({ ...sealArchiveWithPassphrase(pass) }));
   emit(args, {
     ok: true, data: { ...output, via },
     human: () => {
       const sealed = (output["sealed"] ?? []) as string[];
       console.log(`sealed ${sealed.length ? sealed.join(", ") : "(nothing — carriers already sealed or absent)"} (${via})`);
-      if (erisian) {
-        console.log(`  sealed on ${erisian.prose}   [${erisian.source}]`);
-        console.log(`  the passphrase reads  <your secret>:${erisian.stamp}`);
-        console.log("  the day is FROZEN and recorded in the clear — it never recomputes, so tomorrow still opens.");
-        console.log("  read it back any time with:  lares vault passphrase");
-      }
+      console.log(`  sealed on ${erisian.prose}   [${erisian.source}]`);
+      console.log("  the day is a STAMP, never part of the passphrase — the vault opens on what you typed.");
+      console.log("  read it back any time with:  lares vault passphrase");
     },
   });
   return 0;
