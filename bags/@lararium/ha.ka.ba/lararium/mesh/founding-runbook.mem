@@ -121,6 +121,27 @@ lares sense setup                                    # the sovereign sensorium o
 ''A vessel founds and serves carrying neither.'' A wake still REPORTS what stands and counsels the verbs,
 because naming a missing tool serves the operator and installing one behind them does not.
 
+!!! ⚠ THE UNATTENDED-REBOOT TENSION ~ named at the gate, unruled
+
+''A sealed vessel that reboots with nobody awake REFUSES TO BOOT today.'' For one operator's laptop that
+reads fine; for a crossroads a family depends on, ''the at-rest seal converts a power cut into an outage''
+— and the seal exists to protect a stolen disk, never to gate an ordinary restart.
+
+The option space and its costs live at the gate itself (`archive-passphrase#assertSealReady`), so a later
+hand meets it where the refusal happens rather than in a document beside it. The shape that reads most pono
+stands ''UNBUILT'': a vessel that cannot open its archive has lost its ''caps'', never its ''floor'' — so it
+should come up ''anon at the floor'' (serving the public shelf, which needs no secret), hold every sovereign
+act closed, say loudly what it cannot do, and let an ACT unseal it after. ''And that act already has a shape
+the mesh runs'': a kahu quorum signing against the pre-rotated epoch chain, rather than a second authority
+invented beside it.
+
+''RULED'': passphrase-primary; no random key beside the ciphertext; never a silent degrade to weak keys.
+''OPEN'': whether an unattended boot REFUSES or DEGRADES, and what may unseal it afterward. ''The gate throws
+because refusing stays the safe default while the answer is unmade'' — an outage recovers and a silently
+unsealed identity does not.
+
+<<~ confidence Synthesis 11/20 >> This blocks no founding. It blocks a crossroads standing where nobody sleeps.
+
 ''TWO LEGS STILL GO UN-EXERCISED, named so a green run never reads as more than it proves'':
 * `wake --init` still fans out to the AI-surface wires (`~/.claude` · `~/.codex` · `~/.copilot`). The harness
   passes `--install`, never `--init`, so ''the harness wiring goes untested here'' — a machine-setup concern

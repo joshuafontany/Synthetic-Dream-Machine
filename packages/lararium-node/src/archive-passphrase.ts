@@ -310,6 +310,48 @@ export function repairSplitKek(openPassphrase: string, sealPassphrase: string): 
  * `LARES_ARCHIVE_PASSPHRASE` rides the environment, throw a PRECISE message that names the fix — instead
  * of the generic sealed-without-key throw that surfaces only once the reader hits the envelope. The marker
  * is a HINT (config), never a secret; this only reads presence of the env var, never its value.
+ *
+ * ══ THE UNATTENDED-REBOOT TENSION — NAMED, NOT SOLVED (operator, 2026-08-08) ═════════════════════
+ *
+ * THIS GATE THROWS, AND AT CIVIC SCALE THAT READS WRONG. A hearth serving a neighbourhood reboots at 3am
+ * after a power cut. Nobody is awake to type a passphrase. Today the vessel REFUSES TO BOOT and the place
+ * goes dark until a human returns — so the at-rest seal, which exists to protect a STOLEN DISK, converts an
+ * ordinary power cut into an outage. That trade is defensible for one operator's laptop and indefensible
+ * for a crossroads a family depends on.
+ *
+ * THE OPTION SPACE, with what each actually costs:
+ *   · CLEARTEXT + warning        — boots always, protects nothing at rest. Honest, and the current fallback.
+ *   · PASSPHRASE IN A DOTFILE    — boots always, and the KEK sits beside the ciphertext it protects. This is
+ *                                  obfuscation posing as isolation — the exact thing `archive-seal` refuses
+ *                                  to do automatically, done by hand instead. It reports SEALED while
+ *                                  offering no offline protection, which is worse than honest cleartext
+ *                                  because it stops the operator looking.
+ *   · OS KEYCHAIN                — distrusted here by ruling: on WSL2 a KEK can land in the kernel keyutils
+ *                                  cache and BRICK the identity on reboot. The leg stays dark behind two
+ *                                  independent probes.
+ *   · TPM / HARDWARE-SEALED      — survives reboot, binds to platform state, needs hardware a Pi-class
+ *                                  crossroads may or may not carry. UNEXPLORED here.
+ *   · BOOT LOCKED, UNSEAL LATER  — the vessel STANDS without its secrets and serves what needs none; an act
+ *                                  unseals it afterward. See below; this reads most pono and stands UNBUILT.
+ *
+ * WHY "BOOT LOCKED" FITS THE HOUSE ALREADY. The veil-ladder rules that every vessel stands anon at its floor
+ * — its own key, its own local content, no group — and MUST always fall back there; caps stack above the
+ * floor and never dissolve it. A vessel that cannot open its archive has lost the caps, not the floor. So the
+ * pono shape is not a refusal but a DEGRADE: come up at the anon floor, serve the public shelf (which needs
+ * no secret to serve), hold every sovereign act closed, and say loudly what it cannot do until unsealed.
+ *
+ * AND THE UNSEALING ACT HAS A SHAPE THE MESH ALREADY RUNS. A kahu quorum already signs antigen acts against
+ * a pre-rotated epoch chain; a k-of-n remote unseal would reuse that machinery rather than invent a second
+ * authority. A crossroads could then come back without waking anyone, if enough of its kahu are reachable —
+ * which is what "civic scale" actually asks for.
+ *
+ * WHAT STAYS RULED AND WHAT STAYS OPEN, so a later hand does not mistake one for the other:
+ *   RULED   the KEK is passphrase-primary; a random key beside the ciphertext is refused; a missing
+ *           passphrase NEVER silently degrades to weak key handling.
+ *   OPEN    whether a sealed vessel REFUSES or DEGRADES on an unattended boot, and what may unseal it
+ *           afterward. This gate throws because refusing is the safe default while the answer is unmade —
+ *           an outage is recoverable and a silently-unsealed identity is not. It is a placeholder for a
+ *           ruling, never the ruling.
  */
 export function assertSealReady(cfg?: LaresConfig, env: NodeJS.ProcessEnv = process.env): void {
   if (readSealExpected(cfg) && !env[ARCHIVE_PASSPHRASE_ENV]) {

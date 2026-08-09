@@ -26,9 +26,8 @@
 # ~/.copilot). This harness therefore uses `--install`, never `--init`, and the harness-wiring leg goes
 # un-exercised here — a machine-setup concern rather than a founding one.
 #
-# The vault seals from LARES_ARCHIVE_PASSPHRASE, so the no-echo TTY prompt AND the `--ddate` composition
-# both go un-exercised. A harness cannot type at a prompt, and composing a throwaway secret with a real
-# seal-day would record a day into a tree that burns minutes later.
+# The vault seals from the env pair, so the no-echo TTY prompt leg goes un-exercised — a harness cannot type
+# at a prompt. The Erisian STAMP does run (every seal records one), into a tree that burns minutes later.
 #
 # ── THE GUARD ────────────────────────────────────────────────────────────────────────────────────
 # A rehearsal harness that can eat the hearth is not a rehearsal harness. This REFUSES any root that sits
@@ -81,7 +80,14 @@ fi
 export LAR_ROOT="$ROOT"
 # A throwaway seals its vault with a throwaway secret. The rite's own ④ uses a no-echo TTY prompt; a
 # harness cannot, so it supplies one and NAMES that the prompt leg goes un-exercised here.
+# BOTH vars, and the pair is the point: `vault seal` mints a NEW passphrase and reads
+# LARES_ARCHIVE_PASSPHRASE_NEW, while every later open reads LARES_ARCHIVE_PASSPHRASE. Exporting only the
+# second is what the first rehearsal did, and the CLI said so plainly — twice, once per cycle.
 export LARES_ARCHIVE_PASSPHRASE="rehearsal-only-$(basename "$ROOT")"
+export LARES_ARCHIVE_PASSPHRASE_NEW="$LARES_ARCHIVE_PASSPHRASE"
+# Surface where a node warning is BORN rather than only that it fired — the first rehearsal reported a
+# negative setTimeout with no origin, and a warning without a stack costs more to chase than to capture.
+export NODE_OPTIONS="${NODE_OPTIONS:-} --trace-warnings"
 
 FAILED=0
 CYCLE=0
@@ -155,12 +161,17 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # ── ④–⑥ need the node breathing. The operator's own hand starts it; this harness runs inside the
   #    operator's invocation, so it may — but it says what it is doing, every time.
   say "④–⑥ — these need the node breathing (throwaway socket at \$LAR_ROOT/data/vessel)"
+  # POLL TO A DEADLINE, never a fixed sleep. The first cycle boots cold — empty caches, a fresh genesis
+  # load — and the second rides everything the first warmed. A constant tuned on the warm case fails the
+  # cold one, which is exactly what the first rehearsal reported: cycle 1 red, cycle 2 green, same code.
   step "lares serve (background, throwaway)"
   ( lares serve >"$ROOT/serve.log" 2>&1 & echo $! >"$ROOT/serve.pid" )
-  sleep 6
-  if [ -S "$ROOT/data/vessel/lares.sock" ]; then ok; else bad "no socket after 6s"; tail -8 "$ROOT/serve.log" 2>/dev/null | sed 's/^/      /'; fi
+  SOCK="$ROOT/data/vessel/lares.sock"
+  WAITED=0
+  while [ ! -S "$SOCK" ] && [ "$WAITED" -lt 60 ]; do sleep 1; WAITED=$((WAITED + 1)); done
+  if [ -S "$SOCK" ]; then printf '\033[32mok\033[0m (%ss)\n' "$WAITED"; else bad "no socket after ${WAITED}s"; tail -12 "$ROOT/serve.log" 2>/dev/null | sed 's/^/      /'; fi
 
-  run "④ vault seal"                        sh -c "node '$LARES' vault seal --yes"
+  run "④ vault seal (NEW passphrase)"       sh -c "node '$LARES' vault seal --yes"
   run "④ vault status"                      lares vault status
   run "⑤ regenesis --force"                 lares regenesis --force
   run "⑥ status — LIVE"                     lares node status
