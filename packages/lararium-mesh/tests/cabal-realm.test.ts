@@ -14,6 +14,7 @@ import { describe, test, expect } from "vitest";
 import {
   cabalRealmLeaseSlot,
   deriveCabalRealmLiveness,
+  livenessIsAboutTheRealm,
   feedCabalRealm,
   cabalRealmJoinGate,
   type CabalRealm,
@@ -77,5 +78,27 @@ describe("cabalRealmJoinGate — INERT (the capture-gap stays OPEN)", () => {
     expect(cabalRealmJoinGate(id)).toBe(id);
     // identity-only, inert: no transform, no admit/deny verdict, no scoring.
     expect(cabalRealmJoinGate("")).toBe("");
+  });
+});
+
+describe("★ absence of a load is NOT absence of a polity ★", () => {
+  test("★ a substrate this vessel never synced reads `unread`, never `dissolved` ★", () => {
+    // Temperature is a fact about a PLACE; liveness is a fact about a PRINCIPAL. Under no-global-now
+    // "I never fetched it" and "it ended" generate identically, so defaulting the gap to cold answers a
+    // question about a polity with a fact about a cache.
+    expect(deriveCabalRealmLiveness(undefined)).toBe("unread");
+    expect(deriveCabalRealmLiveness(undefined)).not.toBe("dissolved");
+  });
+
+  test("a reading this vessel DOES hold still speaks about the realm", () => {
+    expect(deriveCabalRealmLiveness("wela")).toBe("alive");
+    expect(deriveCabalRealmLiveness("anu")).toBe("dissolved");
+  });
+
+  test("★ a caller can tell a verdict from a blind spot ★", () => {
+    // Without this, every gate on liveness silently treats its own blindness as the realm's death.
+    expect(livenessIsAboutTheRealm("unread")).toBe(false);
+    expect(livenessIsAboutTheRealm("dissolved")).toBe(true);
+    expect(livenessIsAboutTheRealm("alive")).toBe(true);
   });
 });

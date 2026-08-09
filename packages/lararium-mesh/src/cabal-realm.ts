@@ -81,18 +81,38 @@ export function cabalRealmLeaseSlot(realmDocIdHex: string, writerId: string): st
  *   · wela ("hot")  → "alive"      — fed, humming.
  *   · anu  ("cold") → "dissolved"  — cooled, unfed; re-warmable, never deleted
  *                                    (#the-realm DISSOLVED-by-cooling).
+ *   · no reading    → "unread"     — THIS vessel has not synced the substrate.
  *
- * "cooling" rides the type as the future intermediate, but the residency engine
- * exposes only the two settled states through its public surface (the `warm`
- * middle tier never landed, and the transient `evicting`
- * flag stays private to BagStowage). So this pure function maps the two
- * derivable states only; a higher layer that can observe an in-flight cool may
- * report "cooling" itself. Keeping it a pure total function of the public tier.
+ * ── WHY ABSENCE TAKES ITS OWN STATE ─────────────────────────────────────────
+ * Temperature is a fact about a PLACE — whether a bag stands loaded in this vessel's
+ * memory. Liveness is a fact about a PRINCIPAL — whether a polity still stands. Reading
+ * the second off the first is legitimate only where the vessel HAS a reading; where it
+ * has none, "I never fetched it" and "it ended" generate identically under no-global-now,
+ * and defaulting the gap to cold answers a question about a polity with a fact about a
+ * cache (canon: one-name-one-relation#one-vocabulary-four-axes).
+ *
+ * So absence rides as its own state rather than as a default, and it names the VESSEL's
+ * condition rather than the realm's: `unread` says this replica has not seen it. A caller
+ * that must have a verdict decides what to do with that; nothing here decides for them.
+ *
+ * "cooling" rides the type as the future intermediate, since the residency engine exposes
+ * only the two settled states through its public surface (the `warm` middle tier never
+ * landed, and the transient `evicting` flag stays private to BagStowage). A higher layer
+ * that can observe an in-flight cool may report it.
  */
-export type CabalRealmLiveness = "alive" | "cooling" | "dissolved";
+export type CabalRealmLiveness = "alive" | "cooling" | "dissolved" | "unread";
 
-export function deriveCabalRealmLiveness(temp: ResidencyTemperature): CabalRealmLiveness {
+export function deriveCabalRealmLiveness(temp: ResidencyTemperature | undefined | null): CabalRealmLiveness {
+  // Absence arrives as either shape depending on the reader; the point is the absence, never its spelling.
+  if (temp === undefined || temp === null) return "unread";
   return temp === "wela" ? "alive" : "dissolved";
+}
+
+/** Whether a liveness reading says anything about the REALM at all — `unread` says only that this
+ *  vessel has not looked. A caller gating on liveness asks this first, or it treats its own blindness
+ *  as the realm's death. */
+export function livenessIsAboutTheRealm(l: CabalRealmLiveness): boolean {
+  return l !== "unread";
 }
 
 /**

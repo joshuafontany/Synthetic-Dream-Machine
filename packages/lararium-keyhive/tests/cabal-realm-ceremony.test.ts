@@ -175,10 +175,17 @@ describe("liveness reads the feeding, never the founding", () => {
     expect(cabalRealmLiveness(residency, realm)).toBe("alive");
   });
 
-  test("a realm the residency never heard of reads DISSOLVED — an unknown substrate never reads alive", async () => {
+  test("★ a realm this vessel never synced reads UNREAD — its own blindness is not the realm's death ★", async () => {
+    // What this test used to assert — that an unheard-of realm reads DISSOLVED — WAS the fusion: it
+    // answered a question about a polity with a fact about a local cache. Under no-global-now, "I never
+    // fetched it" and "it ended" generate identically, so the honest reading names the vessel's own
+    // condition and leaves the verdict to whoever can actually reach the substrate.
     const founder = await founderVessel();
     const realm   = await foundCabalRealm(founder, URI, SUBSTRATE);   // no residency opt
-    expect(cabalRealmLiveness(new BagStowage({ idleMs: 1 }), realm)).toBe("dissolved");
+    const reading = cabalRealmLiveness(new BagStowage({ idleMs: 1 }), realm);
+    expect(reading).toBe("unread");
+    expect(reading).not.toBe("dissolved");
+    expect(reading).not.toBe("alive");   // and it never reads alive either — it says nothing at all
   });
 });
 

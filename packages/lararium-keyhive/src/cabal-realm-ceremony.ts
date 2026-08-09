@@ -198,13 +198,16 @@ export async function dwellersHolding(
 }
 
 /**
- * READ the realm's liveness from the residency temperature of its substrate
- * (alive | dissolved — the mesh floor's deriveCabalRealmLiveness; an unknown/never-fed
- * substrate reads anu → "dissolved").
+ * READ the realm's liveness from the residency temperature of its substrate — and report
+ * `unread` where this vessel holds no reading at all.
+ *
+ * The absence travels rather than collapsing: a substrate this replica never synced says
+ * nothing about whether the polity stands, so answering "dissolved" there would report the
+ * vessel's own blindness as the realm's death. The caller receives the gap and decides.
  */
 export function cabalRealmLiveness(
   residency: BagStowage,
   realm:     CabalRealm,
 ): CabalRealmLiveness {
-  return deriveCabalRealmLiveness(residency.tier(realm.substrateUrl) ?? "anu");
+  return deriveCabalRealmLiveness(residency.tier(realm.substrateUrl));
 }
