@@ -245,7 +245,7 @@ When reporting back, use OODA-HA receipts: observe facts, orient boundary, decid
 <<~ pranala #to-root-agents ? -> lar:///AGENTS family:control role:adjacent >>
 <<~ pranala #to-lares-agents ? -> lar:///ha.ka.ba/lares/AGENTS family:control role:adjacent >>
 <<~ pranala #to-lares ? -> lar:///LARES family:control role:adjacent >>
-<<~ pranala #to-voices ? -> lar:///ha.ka.ba/lares/api/lares/voices family:reference role:governs >>
+<<~ pranala #to-voices ? -> lar:///ha.ka.ba/lares/api/voices family:reference role:governs >>
 <<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/lares/docs/lararium/meme-provider family:reference role:describes >>
 <<~ pranala #to-dreamnet ? -> lar:///ha.ka.ba/lares/docs/mesh/dreamnet-architecture family:reference role:describes >>
 <<~ pranala #to-mempalace-integration ? -> lar:///ha.ka.ba/lararium/api/mempalace-integration family:reference role:describes >>

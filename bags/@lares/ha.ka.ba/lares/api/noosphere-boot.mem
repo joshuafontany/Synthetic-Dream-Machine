@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/lares/noosphere-boot >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/noosphere-boot >>
 ```toml iam
 cacheable = true
 hydrate   = true
@@ -13,7 +13,7 @@ reflexive = true
 register  = "Synthesis-Canon"
 retain    = true
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/lares/api/lares/noosphere-boot"
+uri-path  = "ha.ka.ba/lares/api/noosphere-boot"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>

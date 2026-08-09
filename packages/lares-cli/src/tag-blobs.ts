@@ -25,7 +25,7 @@
  * blob floor). It writes ONLY under the explicit `--tag-blobs` gesture — a normal
  * ingest mutates no source.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/cas-stage
+ * Meme: lar:///ha.ka.ba/lares/api/cas-stage
  */
 
 import { writeFileSync, existsSync, readFileSync } from "node:fs";

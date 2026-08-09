@@ -128,13 +128,13 @@ describe("bag / wiki identity — the two kinds the @catalog tracks", () => {
 
   test("identitySlug returns null for a nested path — a bare identity carries none", () => {
     expect(identitySlug("lar:///ha.ka.ba/wikis/@lares/drafts/did%3Aweb")).toBeNull();
-    expect(identitySlug("lar:///ha.ka.ba/lares/api/lares/noosphere-boot")).toBeNull();
+    expect(identitySlug("lar:///ha.ka.ba/lares/api/noosphere-boot")).toBeNull();
     expect(identitySlug("lar:///threshold.uncertain.opens")).toBeNull();
   });
 
   test("a meme URI keeps its ha.ka.ba root arity — the split never touches it", () => {
     // Four path segments; the split adds no fifth (bag identity rides its own URI).
-    const meme = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
+    const meme = "lar:///ha.ka.ba/lares/api/noosphere-boot";
     expect(identitySlug(meme)).toBeNull();               // not an identity
     expect(meme.split("/").filter(Boolean).length).toBe(6); // scheme-empty + ha.ka.ba + 4 segs
   });

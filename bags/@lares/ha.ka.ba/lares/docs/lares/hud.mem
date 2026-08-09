@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/docs/lares/hud"
 
 ! Lararium HUD — Reading the Panel
 
-Teaching companion to the HUD law (`lar:///ha.ka.ba/lares/api/lares/hud`). The law names the panel and gauges; this room shows how to compose and read the line at glance-speed — glyph tables, stance/tool grammar, the confidence reading rule, and field-annotation thresholds.
+Teaching companion to the HUD law (`lar:///ha.ka.ba/lares/api/hud`). The law names the panel and gauges; this room shows how to compose and read the line at glance-speed — glyph tables, stance/tool grammar, the confidence reading rule, and field-annotation thresholds.
 
 <<~/ahu >>
 
@@ -187,8 +187,8 @@ The opening header declares the state that //governs// a span (prospective). In-
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/hud >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/voices >>
+<<~ loulou lar:///ha.ka.ba/lares/api/hud >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
 
 <<~/ahu >>

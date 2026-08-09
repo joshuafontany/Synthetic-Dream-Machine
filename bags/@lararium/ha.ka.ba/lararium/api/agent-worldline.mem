@@ -419,7 +419,7 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/capture-annotation-model >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/lar-telemetry >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/voices#worker-swarm >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices#worker-swarm >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 
 ''Tie ~ the form-palace as a third FeedCap.'' The nameless palace-instance that captures a turn's FORM

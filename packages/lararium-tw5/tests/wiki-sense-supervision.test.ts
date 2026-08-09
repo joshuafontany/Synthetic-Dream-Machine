@@ -8,7 +8,7 @@
  * UN-supervised island fails loud (the confused-deputy ward, both legs); proof-federate refuses
  * typed. The Chromium twin (browser/tests) drives the SAME asks over a real Web Worker wire.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sense-supervision
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sense-supervision
  */
 
 import { describe, test, expect } from "vitest";

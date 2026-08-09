@@ -210,7 +210,7 @@ Same primitive as the worldline's ratified `fork ≡ sibling-spawn`; the adapter
 
 Our contribution back: ''uuid-keying'' (the C-cut — turn-keyed identity), ''current-branch reconstruction'' (the leaf-chain walk), and the ''`appendOnly`-gated universal kāpae'' (down-weight-and-keep across both families). Together they give the base the reconciler it lacks — and give the field its first cross-app rewind reader.
 
-''PR scope — reconciler PR-ready.'' <<~ confidence Synthesis-Canon 14/20 >> The ''4-adapter reconciler'' (Claude Code · Codex · Copilot-Chat · Copilot-CLI, #adapters-built) stands green on a ''feature branch, no PR yet''. Faithful-upstream boundary ([[web3-only-lares|lar:///ha.ka.ba/lares/api/lares/corpus]]): the adapters ride as a ''storage-adjacent chat-adapter layer'' (behind the base's `backends/base.py` capability shore) + the gone-turn trigger + tests — the kupono models (nameless cap-stacks, no-global-now) stay in our trunk.
+''PR scope — reconciler PR-ready.'' <<~ confidence Synthesis-Canon 14/20 >> The ''4-adapter reconciler'' (Claude Code · Codex · Copilot-Chat · Copilot-CLI, #adapters-built) stands green on a ''feature branch, no PR yet''. Faithful-upstream boundary ([[web3-only-lares|lar:///ha.ka.ba/lares/api/corpus]]): the adapters ride as a ''storage-adjacent chat-adapter layer'' (behind the base's `backends/base.py` capability shore) + the gone-turn trigger + tests — the kupono models (nameless cap-stacks, no-global-now) stay in our trunk.
 
 ''One open item before donating.'' <<~ confidence Synthesis 9/20 >> The ''Copilot-CLI'' adapter reads ''schema-verified, not fully bytes-verified'' (this box's lone session was empty, #grounds). A real Copilot-CLI session must exercise the `editedTurnIndices` re-emit path before the reconciler opens its PR upstream.
 
@@ -251,7 +251,7 @@ Our contribution back: ''uuid-keying'' (the C-cut — turn-keyed identity), ''cu
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/agent-worldline#time >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/corpus >>
+<<~ loulou lar:///ha.ka.ba/lares/api/corpus >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/gold-anchor >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/lararium-memory >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance >>

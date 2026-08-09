@@ -114,7 +114,7 @@ describe("the compose — `#has {formal, informal}`: neither top", () => {
     const root = mkdtempSync(join(tmpdir(), "lar-mw-sensorium-"));
     try {
       const m = buildMemeticWikitextSensorium(root, {
-        lar: "lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium",
+        lar: "lar:///ha.ka.ba/lares/api/memetic-wikitext-sensorium",
         formalDir: join(root, "formal"),
         informalDir: join(root, "informal"),
         created: "2026-07-01T00:00:00.000Z",

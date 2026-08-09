@@ -10,7 +10,7 @@
  * The organ shapes the SAME frame the browser DOM sink renders; the SINK (DOM write) is the only
  * platform shore, witnessed in the browser tier. One hull, differ by grant not hull.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-coherence-projection
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-coherence-projection
  */
 
 import { describe, expect, test } from "vitest";

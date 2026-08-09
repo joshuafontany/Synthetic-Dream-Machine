@@ -4,7 +4,7 @@
  * loci cap (+ lociTotal), the ask-wire error frames (both ends fail loud), the non-finite
  * recall limit, the unknown filter-suffix refusal, and the non-default proofBag round-trip.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sensorium-cap
  */
 
 import { describe, test, expect } from "vitest";

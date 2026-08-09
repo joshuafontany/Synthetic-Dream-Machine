@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/exchange-vector"
 
 ! Exchange Vector Law
 
-Each substantive exchange turn MUST open with an `aim` vector: a `lar:` ''bearing vector'' that reads operator intent on the left and delegates `->` to the role the node adopts on the right. The turn closes on a `yield` vector. Full frame law: `lar:///ha.ka.ba/lares/api/lares/hud#panel-law`.
+Each substantive exchange turn MUST open with an `aim` vector: a `lar:` ''bearing vector'' that reads operator intent on the left and delegates `->` to the role the node adopts on the right. The turn closes on a `yield` vector. Full frame law: `lar:///ha.ka.ba/lares/api/hud#panel-law`.
 
 <<~/ahu >>
 

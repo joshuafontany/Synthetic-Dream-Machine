@@ -5,7 +5,7 @@
  * each entry carrying the answering bag + a causal stamp (heads + changeId). It NEVER reaches across
  * islands (local-first). The wiki-sensorium projection folds this.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-store-adapter
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-store-adapter
  */
 
 import { describe, test, expect } from "vitest";

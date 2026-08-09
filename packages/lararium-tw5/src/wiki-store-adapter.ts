@@ -18,7 +18,7 @@
  * rich in one lens and bare in the other DIVERGES the planes — a localized obstruction; a corpus
  * where the two lenses track each other GLUES (radius 0).
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-store-adapter
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-store-adapter
  */
 
 import type { CompositeStore, CompositeEntry, ChangeOrigin } from "@lararium/mesh";

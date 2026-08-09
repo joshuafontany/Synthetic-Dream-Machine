@@ -253,7 +253,7 @@ After this pass:
 * `voices.md#voice-house` — the definitive Voice house, naming law, and seniority ✓
 * `voices/workers.md` — worker lifecycle, tag format, and escalation template ✓
 * `voices/masks.md` — the mask grammar the invariant absorbs forward ✓
-* `lar:///ha.ka.ba/lares/api/lares/voices` can begin to absorb the settled grammar
+* `lar:///ha.ka.ba/lares/api/voices` can begin to absorb the settled grammar
 
 !!! Further Extractions Identified — Next Passes
 

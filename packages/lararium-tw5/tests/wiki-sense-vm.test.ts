@@ -14,7 +14,7 @@
  * Boots once per suite (the core blob rides tw5-core/, a build artifact) — the suite SKIPS loudly
  * when the blob stays absent (run `pnpm --filter @lararium/tw5 build:tw5-vendor` first).
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sensorium-cap
  */
 
 import { describe, test, expect, beforeAll } from "vitest";

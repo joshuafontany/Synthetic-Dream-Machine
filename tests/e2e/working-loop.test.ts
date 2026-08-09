@@ -21,11 +21,11 @@ import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem");
-const BOOT_URI  = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const BOOT_URI  = "lar:///ha.ka.ba/lares/api/noosphere-boot";
 const WORKING   = "lar:///ha.ka.ba/wikis/@lares/working";
 const LARES     = "lar:///ha.ka.ba/bags/@lares";
-const REL = "ha.ka.ba/lares/api/lares/noosphere-boot.mem";
+const REL = "ha.ka.ba/lares/api/noosphere-boot.mem";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 let lar: LarInstance;

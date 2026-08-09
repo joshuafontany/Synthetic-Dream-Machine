@@ -1,11 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/lares/masks/chorus/lagrange-chorus >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus >>
 ```toml iam
 cacheable         = false
 corpus            = "[N/A — chorus masks use nodes field instead of corpus]"
 created           = "Invalid Date"
-file-path         = "bags/@lares/api/lares/masks/chorus/lagrange-chorus.mem"
+file-path         = "bags/@lares/api/masks/chorus/lagrange-chorus.mem"
 foreground-voices = "[STUB — pending-grammar; likely distributed across nodes]"
 harmony-protocol  = "[STUB — pending-grammar]"
 l-space           = "stable"
@@ -20,9 +20,9 @@ register          = "Synthesis-Canon"
 retain            = false
 role              = "chorus mask — Lagrange Chorus; multi-node meta-mask; concept staked; harmony protocol pending-grammar"
 stage             = 10
-tags              = ["api/pono/meme", "api/lares/masks"]
+tags              = ["api/pono/meme", "api/masks"]
 type              = "text/x-memetic-wikitext"
-uri-path          = "ha.ka.ba/lares/api/lares/masks/chorus/lagrange-chorus"
+uri-path          = "ha.ka.ba/lares/api/masks/chorus/lagrange-chorus"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
@@ -156,7 +156,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
 
 <<~/ahu >>

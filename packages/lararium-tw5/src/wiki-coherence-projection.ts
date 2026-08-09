@@ -20,7 +20,7 @@
  * radius reading to an indicator frame. {@link wireCoherenceProjection} owns only the gate and two
  * injected shores (read the source, emit the frame). The DOM write swaps in at the sink alone.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-coherence-projection
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-coherence-projection
  */
 
 import type { ConsistencyRadius } from "@lararium/mesh";

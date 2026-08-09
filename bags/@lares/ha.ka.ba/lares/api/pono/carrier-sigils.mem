@@ -92,7 +92,7 @@ Resonance glyphs are ''not'' spine sigils. They prefix the ''SOH opener only'', 
 
 ```
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/… >>      ← pono layer
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/lares/… >>   ← mu/lares/lararium layer
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/… >>   ← mu/lares/lararium layer
 <<~ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/… >>          ← docs/library, bare
 ```
 

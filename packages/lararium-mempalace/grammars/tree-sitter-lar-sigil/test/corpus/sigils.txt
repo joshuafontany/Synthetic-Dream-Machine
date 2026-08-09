@@ -48,7 +48,7 @@ prose under the section
 the pranala-header edge
 ==================
 
-<<~ ? -> lar:///ha.ka.ba/lares/api/lares/corpus >>
+<<~ ? -> lar:///ha.ka.ba/lares/api/corpus >>
 
 ---
 

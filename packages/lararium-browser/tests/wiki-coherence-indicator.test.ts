@@ -10,7 +10,7 @@
  * (Like the consistency keystone's browser witness, the RUN awaits the @vitest/browser harness repair; the sink drags in
  * zero node builtins — it imports @lararium/tw5 for the frame TYPE only, erased at runtime.)
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-coherence-projection
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-coherence-projection
  */
 
 import { describe, test, expect } from "vitest";

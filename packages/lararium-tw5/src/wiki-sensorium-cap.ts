@@ -29,7 +29,7 @@
  * THE HULL RUNS PLATFORM-BLIND: no node builtins — the same cap composes on node AND in a browser
  * worker; {@link hasWikiSensorium} wears the existing {@link IslandCap} idiom (island-caps.ts).
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sensorium-cap
  */
 
 import type { CompositeStore, SensoriumContract, SensoriumSignalType } from "@lararium/mesh";

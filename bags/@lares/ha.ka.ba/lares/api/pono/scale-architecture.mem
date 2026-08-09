@@ -26,7 +26,7 @@ written   = "2026-07-01"
 
 ! The Scale Architecture ~ tractable from the start, quality a dial
 
-''One-line:'' the corpus-palace machina ([[corpus|lar:///ha.ka.ba/lares/api/lares/corpus]]) and the cohomological fusion ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]]) stay TRACTABLE at corpus scale through four carries — a structure-distance DESCENT, a fusion ESCAPE, a scalable-from-the-start CATMA, and a numerical minimalist-PATH — where quality is a continuous DIAL, never a wall the corpus hits.
+''One-line:'' the corpus-palace machina ([[corpus|lar:///ha.ka.ba/lares/api/corpus]]) and the cohomological fusion ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]]) stay TRACTABLE at corpus scale through four carries — a structure-distance DESCENT, a fusion ESCAPE, a scalable-from-the-start CATMA, and a numerical minimalist-PATH — where quality is a continuous DIAL, never a wall the corpus hits.
 
 <<~ confidence Synthesis-Canon 13/20 >> The design principle: ''never densify the whole corpus, never solve exactly what a Lipschitz-faithful approximation indexes, never eigensolve what a polynomial matrix-vector loop approximates.'' Every heavy operation the machina names carries a cheap descent that preserves the //neighbor structure// the house actually reads, and the accuracy it trades away rides an explicit knob the operator turns. The catma: ''scalable from the start'' — the cheap path is the DEFAULT path, the exact one a rarely-taken option, so the corpus scale never surprises the build.
 
@@ -38,7 +38,7 @@ written   = "2026-07-01"
 
 ''One-line:'' exact tree-edit-distance (TED) is O(n³) per pair and O(N²·n³) over a corpus — never affordable and never NEEDED; descend to ''DECKARD structural embeddings + pq-gram profiles'', licensed by a ''Lipschitz argument'': pq-gram distance bounds the edit distance, so an embedding preserves the neighbor structure the sensorium reads.
 
-The structure plane ([[corpus|lar:///ha.ka.ba/lares/api/lares/corpus#the-caps]]) reads trees. The exact structural metric — Zhang–Shasha tree-edit-distance — runs O(n³) per tree pair, and comparing every pair across a corpus of N trees runs O(N²·n³): a wall, not a slope. <<~ confidence Synthesis-Canon 14/20 >> The wall is avoidable because ''the house never needs the exact distance'' — it needs the neighbor structure (who is near whom, which trees cluster), and a Lipschitz-faithful proxy preserves exactly that.
+The structure plane ([[corpus|lar:///ha.ka.ba/lares/api/corpus#the-caps]]) reads trees. The exact structural metric — Zhang–Shasha tree-edit-distance — runs O(n³) per tree pair, and comparing every pair across a corpus of N trees runs O(N²·n³): a wall, not a slope. <<~ confidence Synthesis-Canon 14/20 >> The wall is avoidable because ''the house never needs the exact distance'' — it needs the neighbor structure (who is near whom, which trees cluster), and a Lipschitz-faithful proxy preserves exactly that.
 
 <<~ranks descent exact-TED ~ the wall: Zhang–Shasha O(n³)/pair, O(N²·n³)/corpus — the metric the descent REFUSES -> pq-gram ~ constant-per-node PROFILES: shred each tree into its p-ancestor × q-sibling grams, distance = L1 / Jaccard over gram bags — linear to build, sub-quadratic to index -> deckard ~ characteristic VECTORS: the tree's structure cast to a Euclidean feature vector (Jiang 2007), Euclidean-approx clustering via LSH — an embedding, indexable in metric-tree time >>
 
@@ -74,7 +74,7 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 ''One-line:'' quality is a continuous DIAL, never a wall — K, ε, L, nSurr each trade accuracy for compute smoothly; and the corpus is NEVER densified whole — a ''merge-and-reduce coreset tree'' keeps a bounded streaming summary, memory O(coreset) not O(corpus²).
 
-<<~ confidence Synthesis-Canon 13/20 >> The house holds this as a ''catma'' ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#law-of-5s]] — a held-loosely stance, not a dogma): //scalable from the start.// The cheap path is the default, and every accuracy knob turns continuously so the corpus can grow without the architecture changing shape.
+<<~ confidence Synthesis-Canon 13/20 >> The house holds this as a ''catma'' ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#law-of-5s]] — a held-loosely stance, not a dogma): //scalable from the start.// The cheap path is the default, and every accuracy knob turns continuously so the corpus can grow without the architecture changing shape.
 
 <<~ranks dial K ~ neighbor count in the graph — fewer neighbors, sparser Laplacian, faster diffusion; a smooth accuracy↔compute trade -> epsilon ~ ε, the approximation tolerance on the structural proxy / LSH bucket width — looser ε, faster index, more slack -> L ~ the Chebyshev polynomial DEGREE — lower L, cheaper matrix function, coarser spectral filter; error falls as L rises -> nSurr ~ the surrogate / permutation count for the R null (the false-discovery ward, [[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina#ki]]) — fewer surrogates, faster, weaker null-calibration >>
 
@@ -129,7 +129,7 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 * ''The catma:'' Bentley & Saxe (decomposable searching, merge-and-reduce) · Har-Peled & Mazumdar (coresets for k-means / k-median) — the bounded streaming summary.
 * ''The numerical path:'' ENACTED py/R-side in the sensorium `settlePrecision` (commits `f50a35b8`, `ab85fc2b`, `f9d07e49`) — signal-fraction confidence, closed-form settle, complementary π→conf guard; TS keeps the pure-functor math floor these identities seed.
 * ''North-stars (named, not built):'' Hoel (effective information / causal emergence) · the Bures metric (quantum fidelity geometry) · Hofstadter (tangled hierarchy / strange loop).
-* ''House ties:'' [[corpus|lar:///ha.ka.ba/lares/api/lares/corpus]] (the machina this scales) · [[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]] (the fusion the escape serves) · [[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina]] (the design-of-record, the R keel) · [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities]] (the consistency-radius).
+* ''House ties:'' [[corpus|lar:///ha.ka.ba/lares/api/corpus]] (the machina this scales) · [[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]] (the fusion the escape serves) · [[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina]] (the design-of-record, the R keel) · [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities]] (the consistency-radius).
 
 <<~/ahu >>
 
@@ -137,7 +137,7 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/corpus >>
+<<~ loulou lar:///ha.ka.ba/lares/api/corpus >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/cohomological-gate >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/sensorium-machina >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>

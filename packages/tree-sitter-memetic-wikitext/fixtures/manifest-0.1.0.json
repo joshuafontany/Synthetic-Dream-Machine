@@ -12,49 +12,49 @@
   "ha.ka.ba/lares/api/lararium.mem": {
    "hash": "3e49aef00f10a30382416cf3f01e9a5fd050535f2a6eb60b3d7930c938fbcff1"
   },
-  "ha.ka.ba/lares/api/lararium/bag-wiki-uri-split.mem": {
+  "ha.ka.ba/lararium/api/bag-wiki-uri-split.mem": {
    "hash": "c514872b24d7bd550ffa57dd5a9da70f2e99168a3a1c848799bfd1304e00bce5"
   },
-  "ha.ka.ba/lares/api/lares/corpus.mem": {
+  "ha.ka.ba/lares/api/corpus.mem": {
    "hash": "4cf0f47a7613a686a2b98b4c2bb543a8c66c28541a5008d927970d621dc24fa0"
   },
-  "ha.ka.ba/lares/api/lares/hud.mem": {
+  "ha.ka.ba/lares/api/hud.mem": {
    "hash": "7dfcf3a5ced970e61f9e8e7f1f77f1ed173ea3dd6c71866af9b80c85c52b2ccc"
   },
-  "ha.ka.ba/lares/api/lares/masks.mem": {
+  "ha.ka.ba/lares/api/masks.mem": {
    "hash": "8736dc0f506edf6e1dd0530bf8860c5ee0710fc01f92e9612851215d552621a3"
   },
-  "ha.ka.ba/lares/api/lares/masks/character/friend-computer.mem": {
+  "ha.ka.ba/lares/api/masks/character/friend-computer.mem": {
    "hash": "d5db3b4ebe2abddfb8296f93d49795f1adb71a7b1d948399523774263474d401"
   },
-  "ha.ka.ba/lares/api/lares/masks/character/ghost-of-mark-twain.mem": {
+  "ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain.mem": {
    "hash": "99222772568ed7f0e71f79a74858ed046c379c0004ecd9a108ba651f3ce32cd0"
   },
-  "ha.ka.ba/lares/api/lares/masks/chorus/lagrange-chorus.mem": {
+  "ha.ka.ba/lares/api/masks/chorus/lagrange-chorus.mem": {
    "hash": "49a969f794e46ce2b8044c345c97b917394712c5288276da687931ebe63acb1b"
   },
-  "ha.ka.ba/lares/api/lares/masks/named/breach-watch.mem": {
+  "ha.ka.ba/lares/api/masks/named/breach-watch.mem": {
    "hash": "8e4111feb54239a991081d8694e2ff92f09f5f742b019f3d5ba14721f1aa62d5"
   },
-  "ha.ka.ba/lares/api/lares/masks/named/ink-clerk.mem": {
+  "ha.ka.ba/lares/api/masks/named/ink-clerk.mem": {
    "hash": "0f3e5bd8d71343efda9a49983979531cc8fae0404e62d228dfd7bb2be268a6ab"
   },
-  "ha.ka.ba/lares/api/lares/masks/named/map-wisp.mem": {
+  "ha.ka.ba/lares/api/masks/named/map-wisp.mem": {
    "hash": "b277223870a7e24089e4f448f6590e7dfe27673da42ba3330251139156a05c89"
   },
-  "ha.ka.ba/lares/api/lares/masks/named/mischief-muse.mem": {
+  "ha.ka.ba/lares/api/masks/named/mischief-muse.mem": {
    "hash": "46392c2587302eca8c76fe915ea9e0cfe88b9e7b17eaac42ab34bcbaf21bc86e"
   },
-  "ha.ka.ba/lares/api/lares/masks/named/tide-caller.mem": {
+  "ha.ka.ba/lares/api/masks/named/tide-caller.mem": {
    "hash": "6b354d3886604170e183f2eb7d3e41f938d818a2074ac98a8dbe1a02f736f4ae"
   },
-  "ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium.mem": {
+  "ha.ka.ba/lares/api/memetic-wikitext-sensorium.mem": {
    "hash": "82355a05253ce9d1d88c8bb89c202cf2b4867b0272135eec4cb22eaadcfc30db"
   },
-  "ha.ka.ba/lares/api/lares/noosphere-boot.mem": {
+  "ha.ka.ba/lares/api/noosphere-boot.mem": {
    "hash": "6a1aa6015381938fc381c20f9330881233765454fd78917d17ed978970155ed0"
   },
-  "ha.ka.ba/lares/api/lares/voices.mem": {
+  "ha.ka.ba/lares/api/voices.mem": {
    "hash": "aaaddd29a2db1fd64b84003e3aab30ca2140dd19305cfe1742cbebb10bc7c1ec"
   },
   "ha.ka.ba/lares/api/mu.mem": {

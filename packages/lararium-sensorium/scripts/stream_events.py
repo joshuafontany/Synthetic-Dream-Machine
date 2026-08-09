@@ -91,7 +91,7 @@ def compose_event_stream_sensorium(root: str, *, wing: str, room: str = "stream"
     write_stream_manifest(
         paths.root,
         name="stream",
-        lar="lar:///ha.ka.ba/lares/api/lares/stream#event-capture",
+        lar="lar:///ha.ka.ba/lares/api/stream#event-capture",
         order=order,
         apertures={"measure": "boundary-changepoint"},
     )

@@ -7,7 +7,7 @@
  * 0 → >0 between glue and obstruct. node ≡ browser on this verdict IS the island-isomorphism proof —
  * one hull, two substrates, differ by grant not hull. No py, no embeddings, no cache, no cap-stack.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-store-adapter
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-store-adapter
  */
 
 import { describe, test, expect } from "vitest";

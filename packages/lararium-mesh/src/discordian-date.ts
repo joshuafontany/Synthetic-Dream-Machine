@@ -11,7 +11,7 @@
  * a common year. That is the one rule an implementation usually gets wrong, and getting it wrong shifts
  * every date in ten months of a leap year by one.
  *
- * Canon: lar:///ha.ka.ba/lares/api/lares/noosphere-boot#law-of-5s
+ * Canon: lar:///ha.ka.ba/lares/api/noosphere-boot#law-of-5s
  */
 
 /** The five seasons, in order. The Law of 5s, as a calendar. */

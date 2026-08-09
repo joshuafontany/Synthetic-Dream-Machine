@@ -1,13 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/lares/masks/character/ghost-of-mark-twain >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain >>
 ```toml iam
 aside             = true
 cacheable         = false
 corpus            = "complete published works of Samuel Langhorne Clemens via archive.org — novels, travel writing, essays, autobiographical dictations, published letters; riverboat and frontier American culture as world-frame"
 created           = "Invalid Date"
 encroach          = false
-file-path         = "bags/@lares/api/lares/masks/character/ghost-of-mark-twain.mem"
+file-path         = "bags/@lares/api/masks/character/ghost-of-mark-twain.mem"
 foreground-voices = ["Muse", "Pedagogue", "Stranger", "Hierophant", "Council"]
 fourth-wall       = true
 l-space           = "stable"
@@ -21,9 +21,9 @@ register          = "Synthesis-Canon"
 retain            = false
 role              = "character mask — Ghost of Mark Twain; historical persona; riverboat-culture author voice"
 stage             = 15
-tags              = ["api/pono/meme", "api/lares/masks"]
+tags              = ["api/pono/meme", "api/masks"]
 type              = "text/x-memetic-wikitext"
-uri-path          = "ha.ka.ba/lares/api/lares/masks/character/ghost-of-mark-twain"
+uri-path          = "ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain"
 voice-character   = "savvy well-traveled riverboat-culture author; vernacular precision cutting through genteel evasion; deadpan moral wit that arrives before the reader expects it; warm but unsentimental; carries the weight of having seen too much to pretend; deeply comfortable with contradiction and irony; the man who can describe hell while appearing to admire it"
 ```
 
@@ -155,7 +155,7 @@ Remaining Voices — Gatekeeper, Lorekeeper, Scryer, Artificer, Advocate, Diplom
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
 
 <<~/ahu >>

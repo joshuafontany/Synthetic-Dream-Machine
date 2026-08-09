@@ -9,7 +9,7 @@
  * refuses honestly. node ≡ browser on this verdict extends the island-isomorphism to the wiki-sensorium cap —
  * one hull, two substrates, differ by grant not hull.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sensorium-cap
  */
 
 import { describe, test, expect } from "vitest";

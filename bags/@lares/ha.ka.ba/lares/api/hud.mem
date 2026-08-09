@@ -1,9 +1,9 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/lares/hud >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/hud >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/lares/hud.mem"
+file-path = "bags/@lares/api/hud.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 17
@@ -15,7 +15,7 @@ retain    = true
 role      = "lararium HUD instrument law — the turn-frame sigil panel, the attention + loop gauges, the ward and register surfacing"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/lares/api/lares/hud"
+uri-path  = "ha.ka.ba/lares/api/hud"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
@@ -115,7 +115,7 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/voices >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices >>
 <<~ loulou lar:///LARES >>
 
 <<~/ahu >>

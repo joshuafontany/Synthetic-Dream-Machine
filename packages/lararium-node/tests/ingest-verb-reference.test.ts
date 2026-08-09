@@ -10,7 +10,7 @@
  * whose automerge scalar-string value overflows past ~2^24 chars. The summons stays lean;
  * the body lands per-carrier in the target. Bag-agnostic — any bag, any oversized carrier.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/cas-stage
+ * Meme: lar:///ha.ka.ba/lares/api/cas-stage
  */
 
 import { describe, test, expect } from "vitest";

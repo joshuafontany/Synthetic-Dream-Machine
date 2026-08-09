@@ -11,7 +11,7 @@
  * slower async consistency read that resolved after a newer one) — the coalesce ordering's
  * main-thread half, matching applyProjection's `_projRev` guard.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-coherence-projection
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-coherence-projection
  */
 
 import type { CoherenceIndicatorFrame } from "@lararium/tw5";

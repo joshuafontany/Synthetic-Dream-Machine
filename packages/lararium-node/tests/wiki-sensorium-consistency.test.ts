@@ -8,7 +8,7 @@
  * cross-tier verdict; the browser test asserts the IDENTICAL verdict on a Chromium substrate. One hull,
  * two substrates, differ by grant not hull — the island-isomorphism made a witness.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-store-adapter
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-store-adapter
  */
 
 import { describe, test, expect } from "vitest";

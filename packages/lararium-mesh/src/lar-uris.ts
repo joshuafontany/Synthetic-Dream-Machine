@@ -137,7 +137,7 @@ export function laresVerbUri(verb: string): string {
 // at module-init, and a `const` in its temporal dead zone cannot be read by a hoisted
 // function called before its own line.
 //
-// Canon: lar:///ha.ka.ba/lares/api/lararium/bag-wiki-uri-split
+// Canon: lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split
 export const BAGS_SEGMENT  = "bags"  as const;
 export const WIKIS_SEGMENT = "wikis" as const;
 export const CID_SEGMENT   = "cid"   as const;

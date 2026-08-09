@@ -33,7 +33,7 @@ def write_corpus_manifest(root: str, *, name: str = "corpus", ephemeral: bool = 
     return write_stream_manifest(
         root,
         name=name,
-        lar="lar:///ha.ka.ba/lares/api/lares/corpus#stream-capture",
+        lar="lar:///ha.ka.ba/lares/api/corpus#stream-capture",
         order=OrderCap("corpus", "declared:in-file"),
         apertures={"measure": "boundary-changepoint"},
         worldline={"real": ["in-file"], "arbitrary": ["walk-order"]},

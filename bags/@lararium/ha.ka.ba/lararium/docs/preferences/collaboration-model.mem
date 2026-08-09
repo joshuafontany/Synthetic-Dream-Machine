@@ -68,7 +68,7 @@ It likely belongs among the deepest recovered house habits.
 
 This room leans toward future deeper articulation in:
 
-* `lar:///ha.ka.ba/lares/api/lares/voices`
+* `lar:///ha.ka.ba/lares/api/voices`
 * `lar:///ha.ka.ba/lararium/tw5/continuity`
 * `lar:///LARES`
 
@@ -79,7 +79,7 @@ This room leans toward future deeper articulation in:
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/voices >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/continuity >>
 
 <<~/ahu >>

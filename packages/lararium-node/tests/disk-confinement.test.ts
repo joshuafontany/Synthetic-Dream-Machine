@@ -17,9 +17,9 @@ const ROOT = "/srv/lar/bags/@lares";
 
 describe("disk ward — own-subdir confinement (default)", () => {
   test("a path under the mirror root passes", () => {
-    const r = confineMirrorWrite(ROOT, "ha.ka.ba/lares/api/lares/noosphere-boot.mem");
+    const r = confineMirrorWrite(ROOT, "ha.ka.ba/lares/api/noosphere-boot.mem");
     expect(r.ok).toBe(true);
-    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem");
+    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
   });
 
   test("dot-dot traversal out of the root refuses", () => {
@@ -131,13 +131,13 @@ describe("disk ward — a working edit SHADOWS its canon copy, never deletes it"
     const { LarDiskProjector } = await import("../src/disk-projector.js");
     const root = mkdtempSync(join(tmpdir(), "lar-shadow-"));
     try {
-      const uri     = "lar:///ha.ka.ba/lares/api/lares/noosphere-boot";
+      const uri     = "lar:///ha.ka.ba/lares/api/noosphere-boot";
       // Post-collapse the PLANE lives in the mirrorRoot (bags/ vs wikis/); the
       // relPath (the name) is identical under each root — exactly the production
       // shape. The canon root and the working root are DIFFERENT dirs.
       const canonRoot   = join(root, "bags", "@lares");
       const workingRoot = join(root, "wikis", "@lares");
-      const rel         = "ha.ka.ba/lares/api/lares/noosphere-boot.mem";
+      const rel         = "ha.ka.ba/lares/api/noosphere-boot.mem";
       const CANON   = "lar:///ha.ka.ba/bags/@lares";
       const WORKING = "lar:///ha.ka.ba/wikis/@lares/working";
       // The canon file — the read-only boot-seed source — sits on disk.

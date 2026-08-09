@@ -38,16 +38,16 @@ skeleton meme-loci ready for talk-story-dev fill passes.
 packages/lares-core/memes/api/lares/masks/
   masks.md                          → lar:///ha.ka.ba/lares/api/masks
   named/
-    mischief-muse.md                → lar:///ha.ka.ba/lares/api/lares/masks/named/mischief-muse
-    tide-caller.md                  → lar:///ha.ka.ba/lares/api/lares/masks/named/tide-caller
-    breach-watch.md                 → lar:///ha.ka.ba/lares/api/lares/masks/named/breach-watch
-    ink-clerk.md                    → lar:///ha.ka.ba/lares/api/lares/masks/named/ink-clerk
-    map-wisp.md                     → lar:///ha.ka.ba/lares/api/lares/masks/named/map-wisp
+    mischief-muse.md                → lar:///ha.ka.ba/lares/api/masks/named/mischief-muse
+    tide-caller.md                  → lar:///ha.ka.ba/lares/api/masks/named/tide-caller
+    breach-watch.md                 → lar:///ha.ka.ba/lares/api/masks/named/breach-watch
+    ink-clerk.md                    → lar:///ha.ka.ba/lares/api/masks/named/ink-clerk
+    map-wisp.md                     → lar:///ha.ka.ba/lares/api/masks/named/map-wisp
   character/
-    ghost-of-mark-twain.md          → lar:///ha.ka.ba/lares/api/lares/masks/character/ghost-of-mark-twain
-    friend-computer.md              → lar:///ha.ka.ba/lares/api/lares/masks/character/friend-computer
+    ghost-of-mark-twain.md          → lar:///ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain
+    friend-computer.md              → lar:///ha.ka.ba/lares/api/masks/character/friend-computer
   chorus/
-    lagrange-chorus.md              → lar:///ha.ka.ba/lares/api/lares/masks/chorus/lagrange-chorus
+    lagrange-chorus.md              → lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus
 ```
 
 ''9 files total:'' 1 parent + 5 named + 2 character + 1 chorus.

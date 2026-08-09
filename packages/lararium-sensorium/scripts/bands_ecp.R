@@ -16,7 +16,7 @@
 #
 # Run:  Rscript --vanilla bands_ecp.R  < request.ndjson
 #
-# Meme: lar:///ha.ka.ba/lares/api/lares/corpus#the-bands
+# Meme: lar:///ha.ka.ba/lares/api/corpus#the-bands
 
 suppressWarnings(suppressMessages({
   have_json <- requireNamespace("jsonlite", quietly = TRUE)

@@ -1,16 +1,16 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/lares/api/lararium/bag-wiki-uri-split >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>
 ```toml iam
 confidence   = 16
 content-type = "text/x-memetic-wikitext"
-file-path    = "bags/@lares/ha.ka.ba/lares/api/lararium/bag-wiki-uri-split.mem"
+file-path    = "bags/@lararium/api/bag-wiki-uri-split.mem"
 mana         = 17
 register     = "Synthesis-Canon"
 role         = "the bag / wiki / cid kind-plane law — the three surfaces a lar: URI names, the edit/publish shore, and the isomorphic wiki core"
 status       = "canon"
 type         = "text/x-memetic-wikitext"
-uri-path     = "ha.ka.ba/lares/api/lararium/bag-wiki-uri-split"
+uri-path     = "ha.ka.ba/lararium/api/bag-wiki-uri-split"
 ```
 
 <<~ &#x0002; >>

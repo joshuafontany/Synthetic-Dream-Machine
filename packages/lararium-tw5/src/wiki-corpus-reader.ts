@@ -9,7 +9,7 @@
  * hull over a composite-store island (resolved, kāpae-honored, causal-stamped — heads/changeId/bagId
  * ride through as provenance).
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sensorium-cap
  */
 
 import type { CompositeStore, CompositeEntry } from "@lararium/mesh";

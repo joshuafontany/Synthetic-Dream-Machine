@@ -9,7 +9,7 @@
  * un-supervised designation (both the supervisor's grant check and the pool's live-island check
  * fail loud), and proof-federate refuses typed.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sense-supervision
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sense-supervision
  */
 
 import { describe, test, expect, afterEach } from "vitest";

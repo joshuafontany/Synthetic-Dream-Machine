@@ -1,9 +1,9 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/memetic-wikitext-sensorium >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/memetic-wikitext-sensorium.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 15
@@ -14,7 +14,7 @@ register  = "Synthesis"
 retain    = true
 role      = "the memetic-wikitext SENSORIUM — the design-of-record for the CONCRETE instance of the neither-top, co-located-peers pattern. A nameless nested entity that `#has` TWO PEER sub-sensoria — FORMAL (memes-on-disk = grammar/liturgy) ⋈ INFORMAL (chat-sessions = pidgin) — with NEITHER on top: `coupling.children=[formal, informal]`, the coupling plane reading the DIRECTED formal↔informal flow (does liturgy inform chat, or chat crystallize into liturgy? — both directions, neither assumed) via the mesh keel's `coupleMesh` (whiten→couple→χ²-gate). THE LOAD-BEARING INSIGHT: the co-location is FRACTAL — the SAME neither-top-co-located-peers pattern recurs at TWO scales, (a) STRATUM: red-sigil-register ⋈ black-prose co-located (skeletal-tier + association-graph), (b) CORPUS: formal-liturgical ⋈ informal-pidgin co-located (peer sub-sensoria + coupling edge) — so ONE structure serves both: the reader written for the stratum IS the shape composed for the corpus. THE READER (crucible: do NOT build a new parser): the meme-ast island scanner (disjoint-match, dodges the no-overlap limit) + a tree-sitter INJECTION config (sigil grammar into the <<~…>> ranges — injections model the disjoint partition natively) + a source-CID-pinned STANDOFF stratum-tag table (per byte-range {span, tag: black|red|base, source-CID}); strata ASSOCIATE to a SKELETAL TIER (the prose/char stream) via association edges (autosegmental — NOT position-identity). TWO AXES: span (the aperture-ladder — the GRAIN / FFZ membership address reads it, never a frequency band) × channel (red/black classifier — categorical); a control-sigil at fine grain reads as a CROSS-GRAIN signal, never forced to an outer level. THE LI/KI SPLIT (理/氣): content/structure/form RESTRICT into the LI chain (pattern — what recurs, the grammar, the shape, computed from the moment's OWN span); the KI readings EXTEND (boundary · coupling · standing — flow needing data OUTSIDE the span), COUPLING the live centre here (the directed formal↔informal read). Enacted in packages/lararium-node/src/memetic-wikitext-sensorium.ts."
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium"
+uri-path  = "ha.ka.ba/lares/api/memetic-wikitext-sensorium"
 written   = "2026-07-01"
 ```
 
@@ -41,7 +41,7 @@ entity `#has` a cap-stack, and the composition IS the filetree. Here the entity 
 <<~ranks peer formal ~ memes-on-disk = the grammar / liturgy — the inscribed classifier channel, the red that steers -> informal ~ chat-sessions = the pidgin — the lived stream, the black that speaks >>
 
 ''Neither is top.'' The manifest carries `coupling.children = [formal, informal]` — two children of one
-nameless parent, addressed as peers ([[causal-islands|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#causal-islands]]).
+nameless parent, addressed as peers ([[causal-islands|lar:///ha.ka.ba/lares/api/noosphere-boot#causal-islands]]).
 The coupling edge reads the DIRECTED flow ''both ways'' — does liturgy inform chat (the grammar seeds the
 pidgin), or does chat crystallize into liturgy (the pidgin settles into inscribed form)? Neither direction
 is assumed; `coupleMesh` reads which one carries, and how much.
@@ -55,7 +55,7 @@ is assumed; `coupleMesh` reads which one carries, and how much.
 ''The load-bearing insight:'' the //neither-top, co-located peers// pattern is not a one-off shape at the
 corpus scale. It ''recurs'' — the same pattern holds at a finer scale, inside a single text.
 
-<<~ranks scale stratum ~ WITHIN one text: the red-sigil-register ⋈ the black-prose co-locate — the classifier channel beside the propositional stream ([[classifier-channel|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#classifier-channel]]) -> corpus ~ ACROSS texts: the formal-liturgical ⋈ the informal-pidgin co-locate — the two peer sub-sensoria and their coupling edge >>
+<<~ranks scale stratum ~ WITHIN one text: the red-sigil-register ⋈ the black-prose co-locate — the classifier channel beside the propositional stream ([[classifier-channel|lar:///ha.ka.ba/lares/api/noosphere-boot#classifier-channel]]) -> corpus ~ ACROSS texts: the formal-liturgical ⋈ the informal-pidgin co-locate — the two peer sub-sensoria and their coupling edge >>
 
 ''So ONE structure serves both.'' The reader written for the stratum scale — split a text into
 co-located channels, window each into a signal, couple them — ''is the same shape'' composed at the
@@ -93,7 +93,7 @@ skeletal slot without //being// that slot's position. A sigil does not merely si
 
 ''A stratum reads on two independent axes; collapsing them loses the signal.''
 
-<<~ranks axis span ~ the aperture-ladder ([[noosphere-boot|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#law-of-5s]] — Pulse·Beat·Measure·Arc·Theme): the GRAIN of the stratum's own byte-range — the FFZ membership address reads it (a containment level), never a frequency band -> channel ~ the red/black classifier — a CATEGORICAL annotation (black prose · red control-sigil · base — the four Mu wildcard operators `* ? ! _`); not a scale, a KIND >>
+<<~ranks axis span ~ the aperture-ladder ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#law-of-5s]] — Pulse·Beat·Measure·Arc·Theme): the GRAIN of the stratum's own byte-range — the FFZ membership address reads it (a containment level), never a frequency band -> channel ~ the red/black classifier — a CATEGORICAL annotation (black prose · red control-sigil · base — the four Mu wildcard operators `* ? ! _`); not a scale, a KIND >>
 
 ''The cross-band proof.'' A control-sigil at fine grain — an inline `<<~ confidence Synthesis 12/20 >>`
 mid-paragraph — has a ''fine'' span-band (Pulse: its own bytes are few) yet ''associates'' to a ''coarse''
@@ -136,7 +136,7 @@ named for follow-up.
 ''Where memetic-wikitext EXCEEDS phonology'' (reach past autosegmental for these): the skeleton is
 RECURSIVELY NESTED (tree-sitter / RAPTOR, not a flat tier); the tiers are themselves LANGUAGES (html ⊂
 wikitext ⊂ x-memetic grammars, not flat feature-strings); the red is NEVER REALIZED (its true cousin is
-the CLASSIFIER / determinative channel ([[classifier-channel|lar:///ha.ka.ba/lares/api/lares/noosphere-boot#classifier-channel]]),
+the CLASSIFIER / determinative channel ([[classifier-channel|lar:///ha.ka.ba/lares/api/noosphere-boot#classifier-channel]]),
 not tone). <<~ confidence Synthesis 10/20 >> keep the WITHIN-block engine autosegmental, the recursion
 tree-sitter.
 

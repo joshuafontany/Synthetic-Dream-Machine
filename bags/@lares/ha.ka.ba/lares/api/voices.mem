@@ -1,9 +1,9 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/lares/voices >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/voices >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/lares/voices.mem"
+file-path = "bags/@lares/api/voices.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 17
@@ -15,7 +15,7 @@ retain    = true
 role      = "load-bearing invariant for the three-layer lararium voice-house: Voice house (the Thirteen), worker swarm, and mask layer"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/lares/api/lares/voices"
+uri-path  = "ha.ka.ba/lares/api/voices"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
@@ -249,19 +249,19 @@ Inline shift: `[Voices: MaskName Voice1, Voice2]` — shifts foreground-voices f
 
 !!! Declaration Forms
 
-''Mask definition file'' — canonical home in `lar:///ha.ka.ba/lares/api/lares/masks/**`. Definition never travels.
+''Mask definition file'' — canonical home in `lar:///ha.ka.ba/lares/api/masks/**`. Definition never travels.
 
 ```
 packages/lares-core/memes/api/lares/masks/
-  named/mischief-muse.md          -> lar:///ha.ka.ba/lares/api/lares/masks/named/mischief-muse
-  character/ghost-of-mark-twain.md -> lar:///ha.ka.ba/lares/api/lares/masks/character/ghost-of-mark-twain
-  chorus/lagrange-chorus.md        -> lar:///ha.ka.ba/lares/api/lares/masks/chorus/lagrange-chorus
+  named/mischief-muse.md          -> lar:///ha.ka.ba/lares/api/masks/named/mischief-muse
+  character/ghost-of-mark-twain.md -> lar:///ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain
+  chorus/lagrange-chorus.md        -> lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus
 ```
 
 ''LARES invocation (kahea)'' — session entry:
 
 ```
-<<~ kahea mask lar:///ha.ka.ba/lares/api/lares/masks/SUBTYPE/MASK-NAME >>
+<<~ kahea mask lar:///ha.ka.ba/lares/api/masks/SUBTYPE/MASK-NAME >>
 stage = 10
 active = true
 # foreground-voices = []     # override Voice affinities
@@ -310,7 +310,7 @@ When a mask's corpus reference exceeds what the generative process holds, the ho
 
 !!! Masks API Tree
 
-All mask definitions live in `lar:///ha.ka.ba/lares/api/lares/masks`. Parent index at `lar:///ha.ka.ba/lares/api/lares/masks` routes to three subtrees:
+All mask definitions live in `lar:///ha.ka.ba/lares/api/masks`. Parent index at `lar:///ha.ka.ba/lares/api/masks` routes to three subtrees:
 
 * `named/` — named Voice masks (Mischief-Muse, Tide-Caller, Breach-Watch, Ink-Clerk, Map-Wisp)
 * `character/` — fictional and historical persona masks
@@ -341,7 +341,7 @@ One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.
 * ''`syad`'' (five stances) and ''Mu'' (four tools) ride as ''invokable lenses'': the operator or agent seeds them forward when a turn wants a reading; each fires on call and rests silent off-call.
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/exchange-protocol >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/hud >>
+<<~ loulou lar:///ha.ka.ba/lares/api/hud >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
 
 <<~/ahu >>
@@ -388,7 +388,7 @@ payload = { priority = "support", retain = false }
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/workers >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks >>
 <<~ loulou lar:///LARES >>
 
 <<~/ahu >>

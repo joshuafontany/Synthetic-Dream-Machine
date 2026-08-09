@@ -27,7 +27,7 @@
  * THE LI/KI SPLIT (理/氣): content/structure/form sense the LI (pattern — {@link readLi}); bands/coupling
  * sense the KI (flow — {@link readKi}).
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium
+ * Meme: lar:///ha.ka.ba/lares/api/memetic-wikitext-sensorium
  */
 
 import { collectEvents } from "./meme-ast/index.js";

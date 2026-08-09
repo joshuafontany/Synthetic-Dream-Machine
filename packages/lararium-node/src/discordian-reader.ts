@@ -22,7 +22,7 @@
  * worth everything to surface: it names either a `ddate` this code has not met, or a leap-year rule this
  * code got wrong — and the second is the one that hides for four years at a time.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/noosphere-boot#law-of-5s
+ * Meme: lar:///ha.ka.ba/lares/api/noosphere-boot#law-of-5s
  */
 
 import { execFileSync } from "node:child_process";

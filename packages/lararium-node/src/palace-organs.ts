@@ -418,7 +418,7 @@ export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
   return [
     materializeSensorium("memetic-wikitext:manifest", topDir, {
       sensorium: "memetic-wikitext",
-      lar: "lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium",
+      lar: "lar:///ha.ka.ba/lares/api/memetic-wikitext-sensorium",
       caps: {},                                        // the top holds NO byte-storing fiber cap
       bands,
       children: [
@@ -430,7 +430,7 @@ export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
     // Each peer carries the persistence infrastructure beside its content self-cap.
     materializeSensorium("memetic-wikitext:formal:manifest", formalDir, {
       sensorium: "formal",
-      lar: "lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium#formal",
+      lar: "lar:///ha.ka.ba/lares/api/memetic-wikitext-sensorium#formal",
       caps: { content: { absDir: formalDir, engine: "mempalace" }, ...formal.cap },   // memes-on-disk corpus (self-cap → ".") + persistence
       persistencePolicy: formal.persistencePolicy,
       bands,
@@ -438,7 +438,7 @@ export function materializeMemeticWikitextSensorium(): PalaceSetupStep[] {
     }),
     materializeSensorium("memetic-wikitext:informal:manifest", informalDir, {
       sensorium: "informal",
-      lar: "lar:///ha.ka.ba/lares/api/lares/memetic-wikitext-sensorium#informal",
+      lar: "lar:///ha.ka.ba/lares/api/memetic-wikitext-sensorium#informal",
       caps: { content: { absDir: informalDir, engine: "mempalace" }, ...informal.cap }, // chat-sessions corpus (self-cap → ".") + persistence
       persistencePolicy: informal.persistencePolicy,
       bands,

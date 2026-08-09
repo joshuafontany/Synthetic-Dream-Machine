@@ -9,7 +9,7 @@
  * (parse → linearize). Then it checks the move-skeleton now carries the parsed
  * bearing structure instead of a bare presence token.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/noosphere-boot#lar-uri
+ * Meme: lar:///ha.ka.ba/lares/api/noosphere-boot#lar-uri
  */
 
 import { describe, test, expect } from "vitest";

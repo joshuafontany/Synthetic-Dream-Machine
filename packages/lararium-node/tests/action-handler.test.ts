@@ -303,7 +303,7 @@ describe("LOAD handler", () => {
     registerActionReactors(table, { composite });
     const handler = table.get("LOAD")!;
     const args = {
-      "source-uri": "bags/@lares/api/lares/example.md",
+      "source-uri": "bags/@lares/api/example.md",
       "to-bag": BAG_HIGH,
       "change-id": "c-load-1",
       carriers: [{ title: "lar:///ha.ka.ba/lares/example", text: "Aloha — carrier body.\n" }],

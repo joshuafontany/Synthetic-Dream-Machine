@@ -21,7 +21,7 @@
  * federation Act the OPERATOR gates — {@link WikiSenseFederateRefusal} answers honestly, typed,
  * mirroring the wiki-sensorium cap's couple() refusal.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sense-supervision
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sense-supervision
  */
 
 import { DAEMON_BAG_ID, stableTagUri, newEventId } from "@lararium/mesh";

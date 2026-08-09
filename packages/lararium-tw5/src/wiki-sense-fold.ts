@@ -24,7 +24,7 @@ module-type: library
  * THE HULL RUNS PLATFORM-BLIND and store-blind: no node builtins, no store imports — the fold
  * takes docs, never a store.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sensorium-cap
  */
 
 // mesh SUBPATH imports (the grammar-cache precedent) — the root index drags automerge/wasm, which

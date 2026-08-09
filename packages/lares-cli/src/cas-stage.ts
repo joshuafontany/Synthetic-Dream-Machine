@@ -22,7 +22,7 @@
  * bytes back to the same string. So the CID keys the STRING form, and the decode reproduces
  * it verbatim regardless of the underlying filetype.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/cas-stage
+ * Meme: lar:///ha.ka.ba/lares/api/cas-stage
  */
 
 import { mkdirSync, writeFileSync, existsSync } from "node:fs";

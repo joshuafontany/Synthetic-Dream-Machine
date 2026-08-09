@@ -8,7 +8,7 @@
  * unbuilt refusal. This tier ALSO witnesses the node-reachable shores: the content/structure recall
  * tiers, the volatile memo's change-invalidation, and the island-cap signal surface.
  *
- * Meme: lar:///ha.ka.ba/lares/api/lares/wiki-sensorium-cap
+ * Meme: lar:///ha.ka.ba/lares/api/wiki-sensorium-cap
  */
 
 import { readFileSync } from "node:fs";

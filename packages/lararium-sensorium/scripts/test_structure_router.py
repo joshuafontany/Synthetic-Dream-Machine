@@ -123,7 +123,7 @@ def test_ahu_block_nests_inner_sigils():
 def test_doctype_and_pranala_header():
     src = (
         "<!-- <<~ !DOCTYPE = lar:///x/memetic-wikitext >> -->\n"
-        "<<~ ? -> lar:///ha.ka.ba/lares/api/lares/corpus >>\n"
+        "<<~ ? -> lar:///ha.ka.ba/lares/api/corpus >>\n"
     )
     tree = sr.parse_to_tree("memetic-wikitext", src.encode())
     types = [c["type"] for c in tree["children"]]
