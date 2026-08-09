@@ -252,12 +252,10 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
   operator a Sybil printing press; an operator manufactures users, and cannot manufacture another operator
   willing to bear cost.
 * ''The rival good — RULED (operator, 2026-07-26).'' A fork that walks away with vessels ''pays in socially
-  managed resources.'' Everything the mesh reaches OUTWARD to — the first two public namespaces, the first
-  Nexus at `amorphousdreams.net` and the second at `elyncia.app`, among them — rides socially-held custody
+  managed resources.'' Everything the mesh reaches OUTWARD to — the first two Nexus namespaces
+  `*.amorphousdreams.net` and `*.elyncia.net` among them (#nexus-topology) — rides socially-held custody
   rather than cryptographic custody. A fork leaving those behind ''accepts that cost'' and re-founds
-  equivalent capability ''as a new place.'' (The two names sit under different registry operators, so they
-  carry two policy exposures and two seizure procedures; that asymmetry wants its own pass before either name
-  carries load.)
+  equivalent capability ''as a new place.''
 
   ''THE ISOMORPHISM CARRIES IT.'' A fork that leaves the leased resources falls back to a ''local rhizome''
   exactly as a vessel-veil identity falls back to the ''anon floor'' — same law, two planes. Nothing is seized
@@ -286,6 +284,7 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/nexus-topology >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-siege-gate >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-price >>

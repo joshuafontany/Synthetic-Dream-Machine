@@ -1,0 +1,118 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/nexus-topology >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/nexus-topology.mem"
+hydrate   = true
+l-space   = "lararium"
+mana      = 15
+manao     = 15
+manaoio   = 14
+namespace = "&#x2695;"
+register  = "Synthesis"
+retain    = true
+role      = "the DEPLOYMENT topology under the two-axis mesh: which public name serves which Nexus, at which layer, for whose glass. The first Nexus at *.amorphousdreams.net and the second at *.elyncia.net; elyncia.app RESERVED for the mobile surface, where the TLD's own HSTS preload makes every name under it a SECURE CONTEXT BY CONSTRUCTION — a load-bearing property against the crypto.subtle wall, never a branding choice. Three serving layers (household LAN via split-horizon · a contracted operator's own LAN under delegated challenge labels · the cloud shelf for the general internet), and the law that holds them together: a Nexus name grants RENDEZVOUS, never IDENTITY, so every layer stays severable."
+status    = "proposed"
+tags      = ["mesh/secure-context", "mesh/attestation-plane", "mesh/dreamnet-architecture", "mesh/reach-plane", "api/network-edge", "api/pono/causal-islands"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/lararium/mesh/nexus-topology"
+written   = "2026-08-08"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Nexus Topology ~ which name serves which glass
+
+> Status: PROPOSED — the names stand registered; the serving layers stand unbuilt.
+
+The two-axis meme (#dreamnet-architecture) names how a mesh ''relates''; this one names how it ''reaches a browser''. Two questions live here and want to stay apart: ''which public name serves a Nexus'', and ''what a name may therefore claim''. The second answer governs the first: a Nexus name grants ''rendezvous'', never ''identity'' (#name-and-key), so every layer below stays severable by construction.
+
+<<~/ahu >>
+
+<<~ ahu #the-names >>
+
+!! The names ~ two Nexuses, one mobile reserve
+
+\procedure ~Namespace(~Type:"" ~Params:"") ~Namespace <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Namespace First-Nexus "name/*.amorphousdreams.net serves/the-first-Nexus glass/desktop-and-LAN" >>
+<<~Namespace Second-Nexus "name/*.elyncia.net serves/the-second-Nexus glass/desktop-and-LAN" >>
+<<~Namespace Mobile-Reserve "name/elyncia.app serves/the-mobile-surface glass/phone-and-tablet held/RESERVED" >>
+
+''Both Nexuses ride the same TLD.'' One registry operator, so ''one policy surface and one seizure procedure'' rather than two — which simplifies the drill and concentrates the exposure in the same act. Name both halves: a single procedure rehearses once and covers both names; a single procedure also fails once and takes both.
+
+<<~/ahu >>
+
+<<~ ahu #why-app-for-mobile >>
+
+!! Why `.app` carries the mobile surface ~ the TLD does the work
+
+<<~ confidence Synthesis-Canon 15/20 >> The `.app` TLD ships ''HSTS-preloaded across the whole zone'' — browsers refuse plain `http://` for every name under it before a single byte crosses. Set beside the wall this stack already documents (#the-wall: `crypto.subtle` and OPFS answer only in a secure context), that reads as ''the TLD enforcing the precondition the vessel needs to boot''.
+
+''So the reserve names a security property, never a brand.'' A phone reaching `elyncia.app` cannot be downgraded onto a plaintext origin by a hostile network, a stale bookmark, or a mistyped scheme — the class of failure most likely to strand exactly the non-technical family this path exists to serve. The mobile surface carries the least technical operator and the most hostile networks; it earns the TLD that removes a whole failure mode at the registry layer.
+
+<<~ confidence Synthesis 12/20 >> ''The honest bound:'' this rests on the TLD's preload posture holding, which sits outside anything the stack governs. It deserves confirmation before the name carries load, and it composes with the DNS-01 path rather than replacing it — preload forces `https`, and a trusted cert still has to exist for `https` to answer.
+
+<<~/ahu >>
+
+<<~ ahu #three-layers >>
+
+!! Three serving layers ~ where a request actually lands
+
+<<~ranks serving household@0..6 ~ a split-horizon resolver answers Nexus names with LAN addresses; the home node serves; no internet at all -> operator-lan@7..13 ~ a contracted operator routes their own LAN under a delegated challenge label, forwarding outward through the Nexus name -> cloud-shelf@14..20 ~ the general internet resolves to the Nexus's own hosts >>
+
+''The same name answers differently by vantage'' — which reads as the honest shape rather than a trick, because a causal island only ever knows what its own resolver told it (#causal-islands). A household that loses its uplink keeps every local answer; a visitor from the wider internet reaches the cloud shelf; neither one holds a global view, and neither needs one.
+
+''THE OPERATOR'S LIFT, bounded.'' A contracted operator stands ''one resolver'' and routes their own LAN. They MUST NOT hold apex write on a Nexus zone. What they hold instead: a delegated `_acme-challenge` label for their own subtree, which splits ''proof of control'' from ''zone custody'' — the operator proves control of what they serve, and the Nexus never handles their key material (#attestation-plane, the cadence law).
+
+<<~ confidence Synthesis 12/20 >> ''The zero-lift option wants an empirical test before anyone plans on it.'' Public DNS answering with a private address trips DNS-rebinding protection on many home routers, so "just point the public name at 192.168.x.x" may simply fail on the very hardware a family owns. Until measured, treat the split-horizon resolver as the path and the public-answer shortcut as a hope.
+
+<<~/ahu >>
+
+<<~ ahu #the-severability-law >>
+
+!! What a Nexus name may claim ~ nothing
+
+''NORMATIVE, and it governs every layer above.'' A Nexus name grants ''rendezvous'' — where to reach — and grants ''nothing else''. It authenticates an origin, never a peer (#name-and-key). Therefore:
+
+* A Nexus that stops resolving MUST drop the label and MUST NOT alter the graph. Losing an address costs a convenience, never a self (#attestation-plane, ruling 1).
+* A person's standing NEVER rides a name under these zones. Carry a host-scoped address as ''identity'' rather than as ''address'' and the arrangement repeats the failure the field has already measured — the domain owner comes to hold every identity on it.
+* Withholding a name withholds a signpost. Every key, byte, and peer relation survives it, so ''no delegation makes a landlord''.
+
+<<~ confidence Synthesis-Canon 14/20 >> The two-name design carries its own answer to the concentration it creates: ''each Nexus can resolve for the other's attestations''. That costs nothing to arrange now and stops being arrangeable once either name carries load alone.
+
+<<~/ahu >>
+
+<<~ ahu #what-stays-open >>
+
+!! What stays open
+
+* ''The custody shell.'' These registrations sit with a legal person today. The asset shore (#attestation-plane, ruling 4) wants a purpose-built holder with a written exit clause — a ten-month track by the field's own precedent, running in parallel and blocking nothing.
+* ''The rebinding measurement.'' Does public DNS answering with a private address survive common household routers? Unmeasured, and it decides whether the household layer needs a resolver per home or none.
+* ''The preload confirmation.'' The mobile reserve's whole argument rests on the TLD's HSTS posture; confirm before the name carries load.
+* ''Renewal as the one declared bridge.'' Issuance touches the internet; serving does not (#the-web2-bridge). Two Nexus names double the renewal surface without doubling the drill — one procedure, two subjects, and a lapse on either reads the same.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/network-edge >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
