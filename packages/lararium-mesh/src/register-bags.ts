@@ -18,10 +18,22 @@
  * them — a work compartment and a play compartment across one set of devices. So the bags a vessel
  * registers are the UNION over its memberships, each contributing its own persona plane and its own catalog.
  *
- * ── PLANES REGISTER, ONE PLANE MOUNTS ───────────────────────────────────────────────────────────
+ * ── PLANES REGISTER, ONE PLANE MOUNTS — AND THE MOUNTED ONE ANSWERS TO THE MOUNT ID ─────────────
  * Every group's plane registers here, or that group's own devices stop reconciling. Exactly one MOUNTS
  * as a writable composite layer, because two would shadow each other — that law and its switch live in
  * `persona-planes`, and the name each plane answers to derives in `persona-scope`.
+ *
+ * THE ID A PLANE REGISTERS UNDER MUST EQUAL THE ID EVERYTHING ELSE CALLS IT. A cap check looks the bag
+ * URL up verbatim in keyhive's bag→doc map, and that map's key seeds the Keyhive Document itself — two
+ * spellings of one plane seed two documents that can never be reconciled by aliasing afterwards. The
+ * composite, the `@oracle` registry and the admit payload all reach the MOUNTED plane by `PERSONA_BAG_ID`,
+ * so that is the id the mounted plane registers under. A plane a vessel holds and does NOT mount answers
+ * to its derived name, which is the only name it has anywhere.
+ *
+ * Read that as the deictic/absolute split rather than as two names for one fact: `PERSONA_BAG_ID` names
+ * "the plane I stand in", the way "here" names a place, and a derived id names one particular plane
+ * absolutely. Moving the mount onto derived ids everywhere would collapse the two — that change belongs to
+ * the founding and admit ceremonies, not to this module, and it stays a fork rather than a silent drift.
  *
  * ── WHY IT LIVES HERE AND NOT AT EACH OPENER ────────────────────────────────────────────────────
  * It rode as two hand-written lists, one per platform, and they had drifted: one carried the shared
@@ -34,7 +46,7 @@
  */
 
 import { type LarDoc, tiddlerText } from "./base-doc.js";
-import { BAG_IDS, DAEMON_BAG_ID } from "./lar-uris.js";
+import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID } from "./lar-uris.js";
 import { personaBagIdFor } from "./persona-scope.js";
 
 /**
@@ -72,6 +84,15 @@ export interface FleetMembership {
 export interface RegisterBagsInput {
   /** Every PersonaGroup this vessel stands in. Empty reads as the anon dyad — a posture, never a gap. */
   readonly fleets: readonly FleetMembership[];
+  /**
+   * The PersonaGroup whose plane this vessel MOUNTS — the one face it wears this boot.
+   *
+   * That plane registers under `PERSONA_BAG_ID`, because the composite layer, the `@oracle` registry entry
+   * and the admit payload all name it that way, and a cap check resolves the bag URL verbatim. Naming a
+   * group absent from `fleets` reads as a fault: the vessel would register a plane for a group it does not
+   * stand in, so the caller states one it carries or none at all.
+   */
+  readonly mountedPersonaGroupId?: string;
   /** The wiki slot's bag ids, when a wiki stands in the stack. A Herm carries none — blind by structure. */
   readonly wikiBags?: readonly string[];
 }
@@ -99,7 +120,8 @@ const OWN_GROUND = [
 export function deriveRegisterBags(input: RegisterBagsInput): string[] {
   const out: string[] = [...OWN_GROUND, ...(input.wikiBags ?? [])];
   for (const fleet of input.fleets) {
-    out.push(personaBagIdFor(fleet.personaGroupId), ...(fleet.catalogNamed ?? []));
+    const mounted = fleet.personaGroupId === input.mountedPersonaGroupId;
+    out.push(mounted ? PERSONA_BAG_ID : personaBagIdFor(fleet.personaGroupId), ...(fleet.catalogNamed ?? []));
   }
   return [...new Set(out)];
 }

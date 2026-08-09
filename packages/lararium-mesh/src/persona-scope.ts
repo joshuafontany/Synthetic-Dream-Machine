@@ -48,11 +48,17 @@
  * (persona-circle#honest-scope). That surface rides the transport, not the name, and it stays named here
  * rather than quietly assumed away.
  *
- * ── STILL OWED ──────────────────────────────────────────────────────────────────────────────────
- * The persona tiddler paths in `lar-uris` (`PERSONA_GROUP_AGENT_ID_TIDDLER`, `SIGNER_DID_TIDDLER`,
- * `PERSONA_SELVES_PREFIX`, the binding prefixes) still hang off the constant. They become functions of a
- * bag id when the openers mount a plane per membership; this module lands the naming law and its guard
- * first, so the wiring has one thing to converge on rather than a second convention to invent.
+ * ── WHAT A DERIVED NAME DOES AND DOES NOT REACH ─────────────────────────────────────────────────
+ * The persona TIDDLER paths (`SIGNER_DID_TIDDLER`, `PERSONA_SELVES_PREFIX`, the binding prefixes) keep
+ * their `@persona/...` spelling under any plane, and they keep resolving: a store answers a title by
+ * looking it up verbatim in its own document, and the composite finds a title by WALKING its layers — a
+ * layer's bag id labels the change events it emits, and namespaces nothing. So every plane's document
+ * carries the same internal shape whatever its bag is called.
+ *
+ * What a bag id DOES reach is everything keyed by the bag itself: the composite's own layer lookups, the
+ * `@oracle` registry entry, the admit payload's read of that entry, and the capability check — which
+ * resolves the bag URL verbatim and hashes it to seed the Keyhive Document. So a plane's name must stay
+ * ONE string across all of those; `register-bags` carries which string a given plane answers to.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle
  */

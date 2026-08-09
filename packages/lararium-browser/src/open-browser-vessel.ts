@@ -745,6 +745,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         // bag nor any bag its own catalog named, which no test could see and no throw announced.
         registerBags: deriveRegisterBags({
           fleets: [{ personaGroupId: social.personaGroupDocIdHex, catalogNamed: catalogNamedBags(catalogHandle.doc()) }],
+          mountedPersonaGroupId: social.personaGroupDocIdHex,
           wikiBags: [slot.wikiBagId, slot.draftBagId],
         }),
         // The WORN persona-root's binding (founder-signed): the gate pins personaKel.prefix and walks the KEL

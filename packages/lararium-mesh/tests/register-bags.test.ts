@@ -17,7 +17,7 @@ import { describe, expect, test } from "vitest";
 
 import { deriveRegisterBags, type FleetMembership } from "../src/register-bags.js";
 import { personaBagIdFor } from "../src/persona-scope.js";
-import { BAG_IDS, DAEMON_BAG_ID } from "../src/lar-uris.js";
+import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID } from "../src/lar-uris.js";
 
 const WIKI = ["lar:///ha.ka.ba/bags/@my-wiki", "lar:///ha.ka.ba/bags/@my-wiki/draft"];
 const WORK = ["lar:///ha.ka.ba/bags/@elyncia", "lar:///ha.ka.ba/bags/@notes"];
@@ -63,6 +63,43 @@ describe("one PersonaGroup", () => {
     const asFounder  = deriveRegisterBags({ fleets: [standingIn("g1", WORK)] });
     const asAdmitted = deriveRegisterBags({ fleets: [standingIn("g1", WORK)] });
     expect(asFounder).toEqual(asAdmitted);
+  });
+});
+
+describe("★ THE MOUNTED PLANE REGISTERS UNDER THE ID EVERYTHING ELSE CALLS IT ★", () => {
+  // The defect this guards, which a suite full of derived-id assertions happily blessed: register a plane
+  // under a name that nothing mounts, nothing puts in the @oracle registry and no admit payload reads, and
+  // the plane a vessel actually stands in stays UNREGISTERED. A cap check then resolves the bag URL
+  // verbatim, finds nothing, and refuses forever — while every test still passes.
+  test("★ the mounted group registers as PERSONA_BAG_ID, the id the composite and registry use ★", () => {
+    const bags = deriveRegisterBags({ fleets: [standingIn("work")], mountedPersonaGroupId: "work" });
+    expect(bags).toContain(PERSONA_BAG_ID);
+    expect(bags).not.toContain(personaBagIdFor("work"));
+  });
+
+  test("a plane held but NOT mounted answers to its derived name — its only name anywhere", () => {
+    const bags = deriveRegisterBags({
+      fleets: [standingIn("work"), standingIn("play")], mountedPersonaGroupId: "work",
+    });
+    expect(bags).toContain(PERSONA_BAG_ID);                  // the one it stands in
+    expect(bags).toContain(personaBagIdFor("play"));         // the one it merely holds
+    expect(bags).not.toContain(personaBagIdFor("work"));     // never BOTH names for one plane
+  });
+
+  test("★ no plane ever registers under two names — two spellings seed two Keyhive docs ★", () => {
+    // keyhive hashes the bag URL to seed the Document, so a second spelling is a second document that no
+    // later aliasing can reconcile.
+    const bags = deriveRegisterBags({
+      fleets: [standingIn("work"), standingIn("play")], mountedPersonaGroupId: "work",
+    });
+    const personaNames = bags.filter((b) => b.includes("@persona"));
+    expect(personaNames).toHaveLength(2);                    // two planes, two names, never four
+  });
+
+  test("naming no mounted group leaves every plane on its derived name", () => {
+    const bags = deriveRegisterBags({ fleets: [standingIn("work")] });
+    expect(bags).toContain(personaBagIdFor("work"));
+    expect(bags).not.toContain(PERSONA_BAG_ID);
   });
 });
 

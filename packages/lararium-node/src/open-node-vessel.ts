@@ -899,6 +899,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       // wiki stands in the stack; a Herm carries none, blind by structure rather than by a flag.
       registerBags: deriveRegisterBags({
         fleets: [{ personaGroupId: personaGroupDocIdHex, catalogNamed: catalogNamedBags(assembly.catalogHandle.doc()) }],
+        mountedPersonaGroupId: personaGroupDocIdHex,
         ...(slot ? { wikiBags: [slot.wikiBagId, slot.draftBagId] } : {}),
       }),
       signerDid,
