@@ -36,6 +36,7 @@ import {
   type PersonaPublicHandleRecord,
 } from "@lararium/mesh";
 
+import { assertCanMint } from "./secure-context-gate.js";
 const KEY_RECORD = "vessel-key";
 
 // The IndexedDB object stores this vessel keeps. `keystore`/`bootstrap` carry the device key + the
@@ -166,6 +167,9 @@ function base64urlToHex(b64url: string): string {
 
 const browserKeypairCrypto: KeypairCrypto = {
   async generate() {
+    // Read the context BEFORE any key work. Off a secure context this throws with the cause and the cure;
+    // without it, `crypto.subtle` reads undefined and a household meets a TypeError naming neither.
+    assertCanMint();
     const keyPair = await crypto.subtle.generateKey(
       { name: "Ed25519" } as EcKeyGenParams,
       true,

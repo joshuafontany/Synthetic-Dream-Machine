@@ -43,3 +43,11 @@ export type {
   BrowserVerbTable, VerbReactor, BrowserVerbPlacementRequest,
 } from "./open-browser-daemon-vm.js";
 export { parseAdmitCarriage, parseAdmitPaste, formatAdmitCommand, toAdmitCarriage, ADMIT_KIND } from "./admit-carriage.js";
+
+// The mint-time context gate — refuse where a browser withholds, and name the cause and the cure.
+export type {
+  SecureContextVerdict, SecureContextReading, SecureContextHost, StoragePersistence, StorageReading, StorageHost,
+} from "./secure-context-gate.js";
+export {
+  readSecureContext, assertCanMint, ambientHost, requestDurableStorage, ambientStorage,
+} from "./secure-context-gate.js";
