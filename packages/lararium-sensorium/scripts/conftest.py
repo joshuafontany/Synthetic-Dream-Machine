@@ -118,6 +118,11 @@ def _close_open_palaces() -> None:
     outlives the test, and chromadb frees the rust-side SQLite/HNSW handles only on `close()` — a
     bare dereference leaves them open. `close_palace` drops the handle without marking the backend
     closed, so it stays reusable for the next test.
+
+    KEEP IT — AND KNOW WHAT IT HIDES. Running everywhere, this hook makes a leaking path and a clean
+    path score identically, which is why the handle question stayed unanswerable until something
+    measured OUTSIDE it (`test_handle_gauge.py` opens and closes inside one test for exactly that
+    reason). The hygiene is worth its cost; the blindness is worth naming beside it.
     """
     try:
         from mempalace import palace as _palace
