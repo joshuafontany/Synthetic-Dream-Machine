@@ -16,12 +16,12 @@ import { describe, expect, test } from "vitest";
 import { MemoryTiddlerStore } from "../src/memory-store.js";
 import { makePersonaSelvesReactors } from "../src/persona-selves-verbs.js";
 import type { VerbContext } from "../src/verb-dispatcher.js";
-import { personaSelfTiddlerUri, PERSONA_BAG_ID, mutableLarRecord } from "@lararium/mesh";
+import { personaSelfTiddlerUri, PERSONA_NAMESPACE, mutableLarRecord } from "@lararium/mesh";
 
 const CTX = {} as VerbContext;
 
 function store(): MemoryTiddlerStore {
-  return new MemoryTiddlerStore(PERSONA_BAG_ID);
+  return new MemoryTiddlerStore(PERSONA_NAMESPACE);
 }
 function reactorsOver(s: MemoryTiddlerStore) {
   return makePersonaSelvesReactors({ resolveStore: async () => s });
@@ -90,11 +90,11 @@ describe("what the verbs refuse", () => {
 
   test("★ the identity machinery beside these labels stays untouched and unread ★", async () => {
     const s = store();
-    s._seed(mutableLarRecord(`${PERSONA_BAG_ID}/binding/signer-did`, { text: "0xdead" }, "lararium-seed"));
+    s._seed(mutableLarRecord(`${PERSONA_NAMESPACE}/binding/signer-did`, { text: "0xdead" }, "lararium-seed"));
     const r = reactorsOver(s);
     await r.label({ handleIndex: 0, petname: "veil-one" }, CTX);
     expect(await r.selves({}, CTX)).toMatchObject({ selves: [{ handleIndex: 0, petname: "veil-one" }] });
-    expect(((await s.get(`${PERSONA_BAG_ID}/binding/signer-did`))?.tiddler as { text?: string })?.text).toBe("0xdead");
+    expect(((await s.get(`${PERSONA_NAMESPACE}/binding/signer-did`))?.tiddler as { text?: string })?.text).toBe("0xdead");
   });
 
   test("★ NO verb carries a seat claim — a chair can never be seated from another vessel ★", async () => {

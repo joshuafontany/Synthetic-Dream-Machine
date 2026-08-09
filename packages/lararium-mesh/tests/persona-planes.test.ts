@@ -16,7 +16,7 @@ import {
   type PersonaPlaneRef,
 } from "../src/persona-planes.js";
 import { personaBagIdFor } from "../src/persona-scope.js";
-import { PERSONA_BAG_ID } from "../src/lar-uris.js";
+import { PERSONA_NAMESPACE } from "../src/lar-uris.js";
 
 const work: PersonaPlaneRef = { personaGroupId: "work-group", url: "automerge:work" };
 const play: PersonaPlaneRef = { personaGroupId: "play-group", url: "automerge:play" };
@@ -82,7 +82,7 @@ describe("★ deixis resolves HERE, and only the absolute name leaves ★", () =
     // into the map, where a bag URL is hashed to seed the document it names.
     const bagId = mountedPlaneBagId([work, play], "work-group");
     expect(bagId).toBe(personaBagIdFor("work-group"));
-    expect(bagId).not.toBe(PERSONA_BAG_ID);
+    expect(bagId).not.toBe(PERSONA_NAMESPACE);
   });
 
   test("standing in a different group resolves to a different absolute name", () => {

@@ -13,7 +13,8 @@
 import { describe, expect, test } from "vitest";
 
 import { isPersonaBagId, personaBagIdFor, personaScopeTag, PERSONA_SCOPE_TAG_HEX } from "../src/persona-scope.js";
-import { PERSONA_BAG_ID } from "../src/lar-uris.js";
+import { PERSONA_NAMESPACE } from "../src/lar-uris.js";
+import { isSovereignBag, hermCanRead } from "../src/mesh-palace.js";
 
 const WORK = "b7f1c2a9d4e60381";
 const PLAY = "3e5a90cc17bd4f22";
@@ -58,12 +59,29 @@ describe("★ the vault property — the compartments stay unlinked ★", () => 
 
 describe("a router recognises a persona plane by SHAPE", () => {
   test("both the founding id and any derived plane read as persona bags", () => {
-    expect(isPersonaBagId(PERSONA_BAG_ID)).toBe(true);
+    expect(isPersonaBagId(PERSONA_NAMESPACE)).toBe(true);
     expect(isPersonaBagId(personaBagIdFor(WORK))).toBe(true);
   });
 
   test("a bag that merely starts with the same letters does not", () => {
     expect(isPersonaBagId("lar:///ha.ka.ba/bags/@personal-notes")).toBe(false);
     expect(isPersonaBagId("lar:///ha.ka.ba/bags/@daemon")).toBe(false);
+  });
+});
+
+describe("★ the guards cover the FAMILY, not a list of names ★", () => {
+  test("★ a derived plane reads as sovereign to the Herm fence ★", () => {
+    // The weld test found this: a fence naming "@persona" by exact slug covers a person's planes only by
+    // accident of how many they happen to hold. The Herm's final verdict is an allowlist, so an unmatched
+    // slug already denies — but a sovereign fence must say what it means rather than lean on that.
+    expect(isSovereignBag("@persona")).toBe(true);
+    expect(isSovereignBag(personaBagIdFor(WORK).split("/").pop()!)).toBe(true);
+    expect(isSovereignBag("@lares")).toBe(false);
+  });
+
+  test("a Herm reads no plane of any PersonaGroup, named or derived", () => {
+    expect(hermCanRead(`lar:///ha.ka.ba/bags/${personaBagIdFor(WORK).split("/").pop()}/selves/h1`)).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/@persona/selves/h1")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/@lares/anything")).toBe(true);   // the waymarks still cross
   });
 });

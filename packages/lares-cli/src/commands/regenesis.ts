@@ -48,6 +48,11 @@ const PROTECTED_BAGS = new Set([
   "@daemon", "@identities", "@persona", "@groups", "@sessions", "@catalog", "@oracle",
 ]);
 
+/** A PersonaGroup plane answers to a DERIVED slug, so the refusal matches the family by shape. */
+function isProtectedBag(slug: string): boolean {
+  return PROTECTED_BAGS.has(slug) || slug.startsWith("@persona-");
+}
+
 /** Resolve `--bag @slug` (or a full `bags/@slug` URI) to the discovered holding it names. */
 function resolveHolding(
   bagArg: string,
@@ -83,7 +88,7 @@ export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise
     console.error(`  known: ${holdings.map((x) => x.holding).join(" · ") || "(none found)"}`);
     return 3;
   }
-  if (PROTECTED_BAGS.has(h.holding)) {
+  if (isProtectedBag(h.holding)) {
     console.error(`[regenesis --bag] REFUSED: ${h.holding} rides the social/registry plane (the boot contract) — L4 targets bags/@* content bags only.`);
     return 2;
   }

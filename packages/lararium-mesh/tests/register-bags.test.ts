@@ -17,7 +17,7 @@ import { describe, expect, test } from "vitest";
 
 import { deriveRegisterBags, type FleetMembership } from "../src/register-bags.js";
 import { personaBagIdFor } from "../src/persona-scope.js";
-import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID } from "../src/lar-uris.js";
+import { BAG_IDS, DAEMON_BAG_ID, PERSONA_NAMESPACE } from "../src/lar-uris.js";
 
 const WIKI = ["lar:///ha.ka.ba/bags/@my-wiki", "lar:///ha.ka.ba/bags/@my-wiki/draft"];
 const WORK = ["lar:///ha.ka.ba/bags/@elyncia", "lar:///ha.ka.ba/bags/@notes"];
@@ -75,7 +75,7 @@ describe("★ A PLANE CARRIES ONE NAME EVERYWHERE ★", () => {
     const bags = deriveRegisterBags({ fleets: [standingIn("work"), standingIn("play")] });
     expect(bags).toContain(personaBagIdFor("work"));
     expect(bags).toContain(personaBagIdFor("play"));
-    expect(bags).not.toContain(PERSONA_BAG_ID);
+    expect(bags).not.toContain(PERSONA_NAMESPACE);
   });
 
   test("★ no plane ever carries two names — two planes, two names, never four ★", () => {

@@ -13,7 +13,7 @@ import {
   personaSelfTiddlerUri, handleIndexFromSelfTiddlerUri, foldPersonaSelf, foldPersonaSelves,
   withPersonaSelfName, withoutPersonaSelfName, type PersonaSelfFields,
 } from "../src/persona-selves.js";
-import { PERSONA_BAG_ID } from "../src/lar-uris.js";
+import { PERSONA_NAMESPACE } from "../src/lar-uris.js";
 
 const T0 = "2026-01-01T00:00:00.000Z";
 const T1 = "2026-01-02T00:00:00.000Z";
@@ -68,8 +68,8 @@ describe("the multitude fold over the @persona bag", () => {
     // would report machinery as faces.
     const rows = [
       { title: personaSelfTiddlerUri(1), fields: { petname: "veil-two", handle: "Kahu Beta" } },
-      { title: `${PERSONA_BAG_ID}/binding/signer-did`, fields: { text: "0xdead" } },
-      { title: `${PERSONA_BAG_ID}/hearth/true-name`,   fields: { text: "engine-cid" } },
+      { title: `${PERSONA_NAMESPACE}/binding/signer-did`, fields: { text: "0xdead" } },
+      { title: `${PERSONA_NAMESPACE}/hearth/true-name`,   fields: { text: "engine-cid" } },
     ];
     expect(foldPersonaSelves(rows)).toEqual([[1, { petname: "veil-two", handle: "Kahu Beta" }]]);
   });
@@ -90,7 +90,7 @@ describe("the multitude fold over the @persona bag", () => {
 
   test("the title round-trips its handle-index, and a foreign title reads null", () => {
     expect(handleIndexFromSelfTiddlerUri(personaSelfTiddlerUri(7))).toBe(7);
-    expect(handleIndexFromSelfTiddlerUri(`${PERSONA_BAG_ID}/binding/signer-did`)).toBeNull();
+    expect(handleIndexFromSelfTiddlerUri(`${PERSONA_NAMESPACE}/binding/signer-did`)).toBeNull();
     expect(handleIndexFromSelfTiddlerUri("some/other/title")).toBeNull();
   });
 });

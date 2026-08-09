@@ -295,6 +295,10 @@ export function flowUri(petname: string): string {
 
 /** The persona NAMESPACE — two jobs, and a reader who fuses them will look for a bag that does not exist.
  *
+ *  The word is deliberate. SDSI's ruling on this exact shape reads "a NAMESPACE, not a super-key" — a place
+ *  local names hang from, carrying no authority of its own. Calling it a ROOT would claim the opposite and
+ *  name the very thing canon forbids above a person's compartments.
+ *
  *  ① The TITLE prefix every PersonaGroup plane uses INSIDE its own document: the signer pin, the KEL
  *     prefix, the selves, the binding records all spell `@persona/...` whichever plane holds them. Titles
  *     resolve verbatim within a document and the composite finds one by walking layers, so every plane
@@ -304,7 +308,7 @@ export function flowUri(petname: string): string {
  *
  *  It NAMES NO BAG on its own. A vessel holds one plane per PersonaGroup it stands in, each seeded,
  *  mounted, registered and reached under its own derived name; nothing answers to the bare stem. */
-export const PERSONA_BAG_ID    = bagUri("persona");
+export const PERSONA_NAMESPACE    = bagUri("persona");
 
 // ── Recipe + bag descriptor URI builders ──────────────────────────────────
 
@@ -415,21 +419,21 @@ export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/admin-cabal");
 // the operator's veiled identity (the PersonaGroup), the membership-sync surface. MeshCabal
 // (nexus-affiliation, NOT personGroup-identity) stays under @daemon.
 /** Persona oracle tiddler: PersonaGroup Document ID (hex). Legacy sentinel target (the Binding Gate superseded it). */
-export const PERSONA_GROUP_DOC_ID_TIDDLER   = `${PERSONA_BAG_ID}/sentinel/persona-group/doc-id`;
+export const PERSONA_GROUP_DOC_ID_TIDDLER   = `${PERSONA_NAMESPACE}/sentinel/persona-group/doc-id`;
 /** Persona oracle tiddler: PersonaGroup agent Identifier (hex). Used by boot Gate C. */
-export const PERSONA_GROUP_AGENT_ID_TIDDLER = `${PERSONA_BAG_ID}/sentinel/persona-group/agent-id`;
+export const PERSONA_GROUP_AGENT_ID_TIDDLER = `${PERSONA_NAMESPACE}/sentinel/persona-group/agent-id`;
 /** Daemon oracle tiddler: MeshCabal Document ID (hex) — NEXUS-affiliation, sovereign-per-vessel. Used by boot Gate C. */
 export const MESH_CABAL_DOC_ID_TIDDLER     = `${DAEMON_BAG_ID}/sentinel/mesh-cabal/doc-id`;
 /** Persona oracle tiddler: the PINNED signer DID ("0x"+hex) the Binding Gate verifies the edge against —
  *  self-DID for an anon (self-signed), a granting root-DID for a delegated/operator vessel. */
-export const SIGNER_DID_TIDDLER            = `${PERSONA_BAG_ID}/binding/signer-did`;
+export const SIGNER_DID_TIDDLER            = `${PERSONA_NAMESPACE}/binding/signer-did`;
 /** Persona oracle tiddler: the hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName). */
-export const HEARTH_TRUE_NAME_TIDDLER      = `${PERSONA_BAG_ID}/hearth/true-name`;
+export const HEARTH_TRUE_NAME_TIDDLER      = `${PERSONA_NAMESPACE}/hearth/true-name`;
 /** The prefix every OWN-PERSONA self tiddler sits under — the human's labels for their own faces, one per
  *  handle-index. @persona rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator, and the
  *  DeterministicFederationGate never volunteers it to a cross-operator, so these labels reach the human's own
  *  devices and no stranger. */
-export const PERSONA_SELVES_PREFIX         = `${PERSONA_BAG_ID}/selves`;
+export const PERSONA_SELVES_PREFIX         = `${PERSONA_NAMESPACE}/selves`;
 /** personaSelfTiddlerUri(2) → "…/bags/@persona/selves/h2" — one tiddler per own persona. */
 export function personaSelfTiddlerUri(handleIndex: number): string {
   return `${PERSONA_SELVES_PREFIX}/h${handleIndex}`;
@@ -441,11 +445,11 @@ export function handleIndexFromSelfTiddlerUri(title: string): number | null {
   return Number.isSafeInteger(n) && n >= 0 ? n : null;
 }
 /** Persona oracle tiddler: this vessel's OWN signed device-delegation edge (signer→vessel) — the public binding the Binding Gate verifies. */
-export const DEVICE_DELEGATION_SELF_TIDDLER = `${PERSONA_BAG_ID}/delegation/self`;
+export const DEVICE_DELEGATION_SELF_TIDDLER = `${PERSONA_NAMESPACE}/delegation/self`;
 /** Persona oracle tiddler: the persona-KEL identifier PREFIX (AID) the Binding Gate PINS — stable across every
  *  op-key rotation. The gate walks the per-Nexus KEL board to this prefix's current head op-key and verifies
  *  the device edge against THAT head (Reading-B continuity); the raw signer-DID is provenance only. */
-export const PERSONA_KEL_PREFIX_TIDDLER     = `${PERSONA_BAG_ID}/binding/persona-kel-prefix`;
+export const PERSONA_KEL_PREFIX_TIDDLER     = `${PERSONA_NAMESPACE}/binding/persona-kel-prefix`;
 
 // ── @personal / @draft binding tiddler prefixes ───────────────────────────
 // The (PersonaGroup × recipe-fingerprint) → docUrl bindings live as tiddlers
@@ -454,11 +458,11 @@ export const PERSONA_KEL_PREFIX_TIDDLER     = `${PERSONA_BAG_ID}/binding/persona
 // share a lifecycle. The binding tiddler title is `${PREFIX}/${fingerprintHex}`;
 // its `text` carries the bound URL.
 // Canon: lar:///ha.ka.ba/lararium/api/personal-slot#core-claim
-export const PERSONAL_BINDINGS_PREFIX = `${PERSONA_BAG_ID}/personal-bindings`;
-export const DRAFT_BINDINGS_PREFIX    = `${PERSONA_BAG_ID}/draft-bindings`;
+export const PERSONAL_BINDINGS_PREFIX = `${PERSONA_NAMESPACE}/personal-bindings`;
+export const DRAFT_BINDINGS_PREFIX    = `${PERSONA_NAMESPACE}/draft-bindings`;
 // @working binds like @personal (PersonaGroup×fingerprint, cross-device) — the
 // SAVED live write layer; normal edits route here, canon publishes on promotion.
-export const WORKING_BINDINGS_PREFIX  = `${PERSONA_BAG_ID}/working-bindings`;
+export const WORKING_BINDINGS_PREFIX  = `${PERSONA_NAMESPACE}/working-bindings`;
 
 // ── Well-known bag slot IDs ────────────────────────────────────────────────
 // Six root docs (two planes) + in-memory leaves.

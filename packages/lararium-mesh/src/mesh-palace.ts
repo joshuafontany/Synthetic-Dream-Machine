@@ -415,6 +415,18 @@ const HERM_READABLE_BAGS: ReadonlySet<string> = new Set(["@oracle", "@lararium",
 const SOVEREIGN_BAGS: ReadonlySet<string> = new Set(["@catalog", "@persona", "@daemon"]);
 
 /**
+ * Whether a bag slug names a hearth this Herm must never read.
+ *
+ * A person's PersonaGroup planes each answer to a DERIVED slug (`@persona-<tag>`), so a set of exact names
+ * covers the family only by accident of how many a vessel happens to hold. The final verdict below is an
+ * allowlist, so an unmatched slug already denies — this keeps the sovereign fence saying what it means
+ * rather than leaning on the allowlist to be right about a case it never enumerated.
+ */
+export function isSovereignBag(slug: string): boolean {
+  return SOVEREIGN_BAGS.has(slug) || slug.startsWith("@persona-");
+}
+
+/**
  * Extract the `@bag` identity a `lar:///ha.ka.ba/…` URI belongs to (undefined when not one):
  * a surface `…/bags/@bag/…` names its bag directly; a bare meme `…/{namespace}/…` belongs to
  * the `@{namespace}` bag. Reserved kind-planes (`wikis`, `cid`) are not readable bags here.
@@ -432,13 +444,14 @@ export function bagOf(uri: string): string | undefined {
 /**
  * The Lares Viales read-scope: a Herm reads the public floor (`@oracle` base-ontology, the
  * `@lararium`/`@lares` corpus, its own `@meshpalace` FLOW-map) and NEVER a local operator's sovereign
- * bag (`@catalog`, `@persona`, `@daemon`). **Fail-closed** — an unparseable or unknown bag denies.
+ * bag (`@catalog`, `@daemon`, and every PersonaGroup plane). **Fail-closed** — an unparseable or
+ * unknown bag denies.
  * Blind to the territory, sighted on the map (#lares-viales). A full Lararium reads its own sovereign
  * bags by its own caps; this gate names only what a *Herm* may see.
  */
 export function hermCanRead(uri: string): boolean {
   const bag = bagOf(uri);
-  if (bag === undefined || SOVEREIGN_BAGS.has(bag)) return false; // the hearths — never (fail-closed)
+  if (bag === undefined || isSovereignBag(bag)) return false;     // the hearths — never (fail-closed)
   return HERM_READABLE_BAGS.has(bag);                            // the waymarks — yes
 }
 
