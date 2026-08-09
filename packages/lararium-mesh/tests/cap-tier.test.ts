@@ -120,16 +120,13 @@ describe("structuralFloorFor — where the floor comes from on a real bag", () =
   const oracle = {
     isPublicPlane: (d: string) => d === "pub",
     isSealedPlane: (d: string) => d === "sealed",
+    isContractSecretsPlane: () => false
   };
   test("federatable-public → PUBLIC; sealed → CONTRACT; cleartext-local → VEIL; null oracle → VEIL", () => {
     expect(structuralFloorFor(oracle, "pub")).toBe("public");
     expect(structuralFloorFor(oracle, "sealed")).toBe("contract");
     expect(structuralFloorFor(oracle, "cleartext")).toBe("veil");
     expect(structuralFloorFor(null, "pub")).toBe("veil");
-  });
-
-  test("an oracle omitting the secrets reading behaves exactly as before", () => {
-    expect(structuralFloorFor(oracle, "pub")).toBe("public");   // no isContractSecretsPlane on this oracle
   });
 });
 
@@ -173,7 +170,8 @@ describe("contract-secrets plane — a secrets store can never floor at PUBLIC",
 
 describe("resolveTierForDoc — null declaration degenerates to the floor (inert)", () => {
   const ring: CapTierRing = {
-    floor:    { isPublicPlane: (d) => d === "pub", isSealedPlane: (d) => d === "sealed" },
+    floor:    { isPublicPlane: (d) => d === "pub", isSealedPlane: (d) => d === "sealed" ,
+    isContractSecretsPlane: () => false},
     declared: { declaredTierForDoc: (d) => (d === "pub" ? "personagroup" : null) },
   };
   test("a declared doc tightens; an undeclared doc rides the floor unchanged", () => {
@@ -207,7 +205,8 @@ const membership: NexusMembership = { holdsCarriagePeer: (p) => p === MEMBER };
 /** A floor oracle + declared source over a synthetic public docId, so the tighten is observable at the shore. */
 function ringDeclaring(docId: string, declared: CapTier | null): CapTierRing {
   return {
-    floor:    { isPublicPlane: (d) => d === docId, isSealedPlane: () => false },
+    floor:    { isPublicPlane: (d) => d === docId, isSealedPlane: () => false ,
+    isContractSecretsPlane: () => false},
     declared: { declaredTierForDoc: (d) => (d === docId ? declared : null) },
   };
 }
@@ -265,7 +264,8 @@ describe("capTierShareDecision — the gate consults the declared tier, TIGHTEN-
     // A NON-federatable, non-sealed doc: the base carry-split denies it to a stranger. A declared PUBLIC must NOT grant it.
     const privateDoc = "deadbeef" as unknown as DocumentId;
     const ring: CapTierRing = {
-      floor:    { isPublicPlane: () => false, isSealedPlane: () => false },   // VEIL structural floor
+      floor:    { isPublicPlane: () => false, isSealedPlane: () => false ,
+    isContractSecretsPlane: () => false},   // VEIL structural floor
       declared: { declaredTierForDoc: () => "public" },                       // the datum LIES open
     };
     const v = await capTierShareDecision(

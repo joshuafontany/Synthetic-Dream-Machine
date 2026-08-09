@@ -109,7 +109,7 @@ import {
 import { makeRecallHolder, type RecallHolder } from "./recall-holder.js";
 import { makeContentPalace, type ContentPalace } from "./sensorium.js";
 import { multiGraphRecall, makeFormSearch, makeStructureSearch }  from "./sensorium-recall.js";
-import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
+import { waitHandle, resolveBootDoc } from "./repo-helpers.js";
 import { makeChildProcessDocLoadProbe, quarantineDoc, recoverCleanTail } from "./doc-load-probe.js";
 import { loadIdentityArchive } from "./identity-anchors.js";
 import { assertSealReady } from "./archive-passphrase.js";
@@ -723,7 +723,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const keel: VesselOrchestration<VesselIslandPool>["keel"] = {
     repo,
     catalogHandle,
-    waitHandle: <T>(url: AutomergeUrl, fallback: () => DocHandle<T>) => waitHandleLocal<T>(repo, url, fallback),
+    waitHandle: <T>(url: AutomergeUrl, fallback: () => DocHandle<T>) => waitHandle<T>(repo, url, fallback),
 
     // Genesis island (required) + the social-plane bootstrap it carries.
     loadGenesis: async () => {
@@ -819,7 +819,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // Corpus capability piece — one top-level bag per catalog corpus entry (shared loader).
     loadCorpora: (composite) => loadCatalogCorpora({
       repo, catalogHandle,
-      mintLocalHandle: (docUrl) => waitHandleLocal<LarDoc>(repo, docUrl as AutomergeUrl, blankMemeStore(repo)),
+      mintLocalHandle: (docUrl) => waitHandle<LarDoc>(repo, docUrl as AutomergeUrl, blankMemeStore(repo)),
       source: "lararium-seed",
     }, composite),
 

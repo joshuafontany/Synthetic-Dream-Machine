@@ -176,7 +176,7 @@ export function reconcileGenesisCid(
   const incomingPluginsCid = regionCid(incomingHandle, GENESIS_CID_PLUGINS_TIDDLER);
 
   // Self-merge guard: a fresh boot falls the island back to the genesis handle
-  // itself (the bootstrap path — open-node-vessel waitHandleLocal fallback). A
+  // itself (the bootstrap path — open-node-vessel waitHandle fallback). A
   // doc merged into itself trips automerge 3.x's wasm borrow-checker ("recursive
   // use of an object … unsafe aliasing"); automerge 2.x silently no-op'd it.
   // When the live doc IS the genesis doc there is nothing to reconcile.

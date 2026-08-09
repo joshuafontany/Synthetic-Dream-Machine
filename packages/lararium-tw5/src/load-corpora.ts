@@ -6,7 +6,7 @@
  * Each catalog `corpus:` entry becomes one read-only top-level bag. An entry DECLARING a mesh scale
  * federates via the tideline resolver (`resolveBootDoc` — StillJoining skips its layer, reconciling
  * later, never a blank ghost); an undeclared entry mints local. The per-vessel pieces collapse to a
- * single injected `mintLocalHandle` (node = waitHandleLocal + blankMemeStore; browser = waitHandleLocal
+ * single injected `mintLocalHandle` (node = waitHandle + blankMemeStore; browser = waitHandle
  * + repo.create) plus the provenance `source`. Adopts the browser twin's terser shape.
  *
  * Home = tw5 (it owns `addReadOnlyLayer` and imports the mesh helpers; mesh cannot import tw5).
@@ -24,7 +24,7 @@ import {
 export interface CorpusLoaderDeps {
   readonly repo: Repo;
   readonly catalogHandle: DocHandle<LarDoc>;
-  /** Per-vessel local mint: each vessel's `waitHandleLocal` bound to its blank-doc factory. */
+  /** Per-vessel local mint: each vessel's `waitHandle` bound to its blank-doc factory. */
   readonly mintLocalHandle: (docUrl: string) => Promise<DocHandle<LarDoc>>;
   /** Provenance stamped on the corpus + registry records (`"lararium-seed"` / `"browser-boot"`). */
   readonly source: string;

@@ -5,7 +5,7 @@
  * vessels compose. This file supplies the node platform pieces:
  *   - spawnWorker  : worker_threads Worker (.on / .postMessage)
  *   - newSyncChannel: worker_threads MessageChannel
- *   - daemonHandle  : waitHandleLocal (merge-on-late-arrival strategy)
+ *   - daemonHandle  : waitHandle (merge-on-late-arrival strategy)
  *   - recipe       : built here from libraryBags; storage = nodefs dir
  *
  * Node-ahead capability proxies (authShore verify-proxy, resolveBinding) compose

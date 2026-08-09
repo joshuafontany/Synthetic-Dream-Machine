@@ -261,18 +261,6 @@ export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPoo
 }
 
 /**
- * The browser's name for mesh's one boot resolver — the same function the node vessel calls.
- *
- * A browser holds no store from a previous run of the hearth, so it opens before its peer has synced more
- * often than any other vessel does. That makes the late-merge behind the fallback matter MOST here: a doc
- * arriving a tick past the window merges into the handle this vessel is already using, instead of leaving
- * a blank fork that never reconciles.
- */
-async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHandle<T>): Promise<DocHandle<T>> {
-  return waitHandle<T>(repo, url, fallback);
-}
-
-/**
  * Load a PREVIOUSLY-FOUNDED @catalog by its persisted url — and never re-found it SILENTLY. A stored
  * catalogUrl means this vessel already founded + persisted a catalog; a find() rejection here means the
  * LOCAL copy is gone (IndexedDB quota eviction under storage pressure, or corruption). Re-founding a
@@ -659,7 +647,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     keel: {
       repo,
       catalogHandle,
-      waitHandle: <T>(url: AutomergeUrl, fallback: () => DocHandle<T>) => waitHandleLocal<T>(repo, url, fallback),
+      waitHandle: <T>(url: AutomergeUrl, fallback: () => DocHandle<T>) => waitHandle<T>(repo, url, fallback),
 
       // Genesis REQUIRED — the node-parity materialize-fresh path. The @oracle is a LIVE
       // CRDT under the DETERMINISTIC doc id (oracleGenesisDocUrl): materializeGenesisIsland
@@ -694,7 +682,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // Corpus capability (parity — browser syncs corpus bags too; shared loader).
       loadCorpora: (composite) => loadCatalogCorpora({
         repo, catalogHandle,
-        mintLocalHandle: (docUrl) => waitHandleLocal<LarDoc>(repo, docUrl, () => repo.create<LarDoc>(emptyLarDoc())),
+        mintLocalHandle: (docUrl) => waitHandle<LarDoc>(repo, docUrl, () => repo.create<LarDoc>(emptyLarDoc())),
         source: "browser-boot",
       }, composite),
 

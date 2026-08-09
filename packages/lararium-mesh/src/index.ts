@@ -297,3 +297,7 @@ export * from "./pack-provenance.js";
 // One boot-time doc resolver for both vessels — races local readiness, then MERGES a late remote
 // into the fallback rather than dropping it.
 export { waitHandle, LOCAL_READY_MS } from "./wait-handle.js";
+
+// The registered bag set, derived from the persona BINDING — founded stays private, admitted carries the fleet's.
+export type { PersonaBinding, RegisterBagsInput } from "./register-bags.js";
+export { deriveRegisterBags } from "./register-bags.js";

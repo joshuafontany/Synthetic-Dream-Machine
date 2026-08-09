@@ -158,9 +158,11 @@ export interface TierFloorOracle {
    * posts outward from their wiki) is the first such store; the name stays general because the property does
    * — any store whose bytes stop meaning anything the moment they go world-readable belongs here.
    *
-   * OPTIONAL for compatibility: an oracle that omits it behaves exactly as before.
+   * REQUIRED. An oracle that could omit this reading would floor a secrets plane by its other readings and
+   * publish what must not publish — and the omission would look exactly like a plane holding no secrets.
+   * Every floor answers all three questions or answers none.
    */
-  isContractSecretsPlane?(documentId: string): boolean;
+  isContractSecretsPlane(documentId: string): boolean;
 }
 
 /**
@@ -184,7 +186,7 @@ export interface TierFloorOracle {
  */
 export function structuralFloorFor(oracle: TierFloorOracle | null, documentId: string): CapTier {
   if (!oracle) return "veil";
-  if (oracle.isContractSecretsPlane?.(documentId)) return "contract";
+  if (oracle.isContractSecretsPlane(documentId)) return "contract";
   if (oracle.isPublicPlane(documentId)) return "public";
   if (oracle.isSealedPlane(documentId)) return "contract";
   return "veil";
