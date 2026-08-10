@@ -7,41 +7,38 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { personaSlotCeiling, standAs, standsAtFloor } from "../src/vessel-standing.js";
+import { personaSlotCeiling, standAs } from "../src/vessel-standing.js";
 
 describe("★ every node stands first as a Herm ★", () => {
   test("★ a hearth whose archive holds shut STANDS — at the floor, never refusing ★", () => {
     // Refusing converts an ordinary restart into an outage. The seal exists against a stolen disk, never
     // to gate a power cut.
-    const st = standAs("hearth", false);
-    expect(st.cls).toBe("herm");
-    expect(st.reason).toBe("archive-sealed-shut");
+    expect(standAs("hearth", false)).toBe("herm");
   });
 
   test("★ standing at the floor is FACELESS BY LAW, not a hearth missing its faces ★", () => {
     // The class carries the guarantee structurally: no dial raises a Herm's ceiling, so a vessel at the
     // floor cannot stand a persona root even by mistake.
-    const st = standAs("hearth", false);
-    expect(personaSlotCeiling(st.cls)).toBe(0);
-    expect(personaSlotCeiling(st.cls, 99)).toBe(0);
+    const cls = standAs("hearth", false);
+    expect(personaSlotCeiling(cls)).toBe(0);
+    expect(personaSlotCeiling(cls, 99)).toBe(0);
   });
 
   test("an open archive stands the class that was asked for — the operator lit the fire", () => {
-    expect(standAs("hearth", true)).toEqual({ cls: "hearth", reason: "as-asked" });
-    expect(standAs("leaf", true)).toEqual({ cls: "leaf", reason: "as-asked" });
+    expect(standAs("hearth", true)).toBe("hearth");
+    expect(standAs("leaf", true)).toBe("leaf");
   });
 
   test("a Herm stands as asked whatever the archive says — nothing about it waits on a raise", () => {
-    expect(standAs("herm", false)).toEqual({ cls: "herm", reason: "as-asked" });
-    expect(standAs("herm", true)).toEqual({ cls: "herm", reason: "as-asked" });
+    expect(standAs("herm", false)).toBe("herm");
+    expect(standAs("herm", true)).toBe("herm");
   });
 });
 
-describe("the announcement can tell the two Herms apart", () => {
-  test("★ a floor-standing vessel reads DIFFERENTLY from a vessel that IS a Herm ★", () => {
-    // Both are Herms and both are correct; only one is waiting for a key. An announcement that could not
-    // tell them apart would either alarm a crossroads operator or hide a hearth's waiting.
-    expect(standsAtFloor(standAs("hearth", false))).toBe(true);
-    expect(standsAtFloor(standAs("herm", false))).toBe(false);
+describe("★ one floor, not two kinds of Herm ★", () => {
+  test("★ an unraised crossroads and a shut hearth stand in the SAME state ★", () => {
+    // Naming them apart froze a difference that does not survive contact: any vessel at the floor may be
+    // raised when someone who can raise it arrives.
+    expect(standAs("herm", false)).toBe(standAs("hearth", false));
   });
 });

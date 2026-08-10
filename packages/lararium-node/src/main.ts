@@ -34,7 +34,7 @@ import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
 import { deriveReachFaces, wsUrlForOrigin, crossingUrl, appOriginForFace, type InterfaceTable } from "./lan-address.js";
 import { openNodeVessel, openNodeHerm, type NodeRecipe } from "./open-node-vessel.js";
-import { standAs, standsAtFloor } from "@lararium/mesh";
+import { standAs } from "@lararium/mesh";
 import { archiveOpens } from "./archive-passphrase.js";
 import { ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 import { deriveMeshSelf } from "./node-caps.js";
@@ -144,14 +144,15 @@ async function main(): Promise<void> {
   // and it holds every sovereign act closed until a key arrives. Refusing would convert an ordinary power
   // cut into an outage, and the seal exists against a stolen disk. Nothing is lowered here — a vessel that
   // cannot open simply never rose (canon: lar:///ha.ka.ba/lares/api/pono/waking-floor).
-  const standing = standAs(recipe === "herm" ? "herm" : "hearth", archiveOpens());
-  if (standsAtFloor(standing)) {
+  const sealShut = !archiveOpens();
+  const standing = standAs(recipe === "herm" ? "herm" : "hearth", !sealShut);
+  if (sealShut) {
     console.log("[lararium] the archive holds shut — standing at the WAKING FLOOR, faceless by class.");
     console.log("[lararium]   carrying and serving the public shelf; every sovereign act waits.");
     console.log(`[lararium]   light the hearth fire: set ${ARCHIVE_PASSPHRASE_ENV} and boot again.`);
   }
 
-  if (standing.cls === "herm") {
+  if (standing === "herm") {
     const pullMs = process.env["LAR_PULL_MS"];   // carriage cadence — tuning, kept separate from membership
     const herm = await openNodeHerm({
       hostId:     "lares-viales",

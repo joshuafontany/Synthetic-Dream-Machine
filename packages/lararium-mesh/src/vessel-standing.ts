@@ -90,49 +90,37 @@ export function refuseSlot(cls: VesselClass, handleIndex: number, declaredCeilin
   return permitsPersonaSlot(cls, handleIndex, declaredCeiling) ? null : "past-ceiling";
 }
 
-// ── THE WAKING FLOOR — what a vessel stands as when its archive will not open ──────────────────────────
-
-/** Why a vessel stands as it does. Named, because "herm" alone hides whether anyone chose it. */
-export type StandingReason =
-  | "as-asked"             // the recipe named this class and nothing overrode it
-  | "archive-sealed-shut"; // a hearth was asked for; its archive holds shut, so it stands at the floor
-
-/** What a vessel stands as, and why. */
-export interface VesselStanding {
-  readonly cls:    VesselClass;
-  readonly reason: StandingReason;
-}
+// ── THE WAKING FLOOR — one floor, and caps that arrive by recognition ──────────────────────────────────
 
 /**
- * standAs — every node stands first as a Herm; an operator lights the hearth fire.
+ * standAs — every vessel stands first at the FLOOR; caps arrive afterward, by recognition.
  *
- * ── THE FLOOR IS THE HARDENED STATE, NOT A DEGRADE ──────────────────────────────────────────────────────
- * A vessel whose archive holds shut has lost its CAPS, never its FLOOR: it carries, it serves the public
- * shelf, and it holds every sovereign act closed. Calling that "degraded" reads the safety backwards and
- * biases an operator toward rushing the raise — the field already learned this and inverted our first
- * vocabulary (Android's Direct Boot ships the same shape, and forensics treats before-first-unlock as the
- * HARDENED state, after-first-unlock as the liability).
+ * ── ONE FLOOR, NOT TWO KINDS OF HERM ────────────────────────────────────────────────────────────────────
+ * A crossroads nobody has raised and a hearth whose archive holds shut stand in the SAME state, and naming
+ * them apart would freeze a difference that does not survive contact: any vessel at the floor may be raised
+ * when someone who can raise it arrives. A wayside herm gets a building raised over it and a hearth fire lit
+ * when somebody comes to dwell; the marker was never a different KIND of thing from the house.
  *
- * So this never lowers anything. A vessel that cannot open simply never rose, and an operator supplying the
- * key raises it. Nobody exercises a lowering act, here or anywhere in this house.
+ * ── THE FLOOR IS THE HARDENED STATE ─────────────────────────────────────────────────────────────────────
+ * A vessel here has lost its CAPS, never its FLOOR: it carries, it serves the public shelf, and it holds
+ * every sovereign act closed. Calling that "degraded" reads the safety backwards — the field inverted our
+ * first vocabulary (Android's Direct Boot ships this shape; forensics treats before-first-unlock as the
+ * HARDENED state and after-first-unlock as the liability, and Google now FORCES the return).
  *
- * ── AND THE RAISE BELONGS TO THIS LAYER ALONE ───────────────────────────────────────────────────────────
- * Opening a vessel's own archive is the act of whoever holds that vessel's opening secret — never a kahu
- * quorum. The founding order proves it: a kahu cabal is seated FROM declared Handles, which stand on an
- * already-raised lararium, so a raise that waited on a quorum could never found the first Nexus at all. A
- * quorum's acts belong one layer out (the antigen, carriage contracts, the seal lineage) and reach no
- * vessel's archive — a share-holder would become the collector the vault exists to refuse.
+ * So nothing is ever lowered. A vessel that cannot open simply never rose, and a raise that stops being
+ * renewed simply stops standing — no party exercises a lowering act, here or anywhere in this house.
+ *
+ * ── AND THE CEILING LAW SURVIVES THE RAISE, WHICH IS WHY BOTH CAN HOLD ──────────────────────────────────
+ * `personaSlotCeiling("herm") === 0` bars a SEATED persona root — a human's key resting on a crossroads,
+ * the one thing the class exists to prevent. A raise puts no key there: caps arrive WITH a recognised
+ * operator, ride their own keys, and leave when the recognition stops being renewed. The vessel's at-rest
+ * state never changes, so a stolen disk still yields nothing of anybody's person.
+ *
+ * SEATED ⊥ RAISED. The first is storage and stays barred; the second is presence and stays welcome.
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/waking-floor
  */
-export function standAs(asked: VesselClass, archiveOpens: boolean): VesselStanding {
-  // A Herm holds no persona by law, so nothing about it waits on a raise — it stands as asked, always.
-  if (asked === "herm")  return { cls: "herm", reason: "as-asked" };
-  if (archiveOpens)      return { cls: asked,  reason: "as-asked" };
-  return { cls: "herm", reason: "archive-sealed-shut" };
-}
-
-/** Whether this standing came from a shut archive rather than from the recipe — what an announcement says. */
-export function standsAtFloor(st: VesselStanding): boolean {
-  return st.reason === "archive-sealed-shut";
+export function standAs(asked: VesselClass, archiveOpens: boolean): VesselClass {
+  // A hearth that cannot open its archive stands where every unraised vessel stands — at the floor.
+  return archiveOpens ? asked : "herm";
 }
