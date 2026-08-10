@@ -128,47 +128,53 @@ export function standAs(asked: VesselClass, archiveOpens: boolean): VesselClass 
 // ── THE RAISE — caps arrive by recognition, and end by SUPERSESSION ────────────────────────────────────
 
 /**
- * A Nexus's current epoch — a ROLLING WINDOW of markers, never a scalar.
+ * A Nexus's current lease epoch — the SAME max-register the rest of the house already rolls.
  *
- * An epoch names a set, and the set moves: markers enter as the Nexus trades and fall off the far end. That
- * single mechanism gives both properties the raise needs, with no clock anywhere — SUPERSESSION (a newer
- * marker arrives) and EXPIRY (an old one rolls off), both driven by the Nexus's own events rather than by
- * any duration anybody must agree on.
+ * ── WHY THIS IS NOT A THIRD MECHANISM ───────────────────────────────────────────────────────────────────
+ * A draft of this carried a rolling WINDOW of markers, and a window is a set: it answers //is this listed//
+ * and cannot answer //is this newer//, so a partitioned island cannot reason about it locally, and whatever
+ * falls off the far end encodes a retention policy nobody wrote down. It also enumerates — a list of valid
+ * markers is a roster of moments, and this house holds no rosters.
  *
- * And it is PER-NEXUS. A vessel standing in more than one holds more than one window, and a marker means
- * nothing outside the Nexus that minted it.
+ * A raise is a capability grant that goes stale by NON-RENEWAL, which is exactly what `epoch-lease` already
+ * does for every other grant: a per-resource max-register held as per-writer slots, folded by max, rolled
+ * forward by whoever renews. `device-delegation` binds to it with `boundEpoch`. The raise binds the same
+ * way, so the mesh carries ONE fencing mechanism rather than one per surface.
+ *
+ * Read it as: the Nexus is the resource, and its lease epoch is the fence.
  */
-export interface EpochWindow {
-  /** Whose window this is — the Nexus key. A marker carries no meaning outside it. */
-  readonly nexus:   string;
-  /** The markers currently standing, oldest first. Rolling: entering at one end, falling off the other. */
-  readonly markers: readonly string[];
+export interface NexusEpoch {
+  /** Whose epoch this is — the Nexus key. An epoch value means nothing outside the Nexus that rolls it. */
+  readonly nexus:     string;
+  /** The effective lease epoch — `effectiveLeaseEpoch` over that Nexus's per-writer slots. */
+  readonly effective: number;
 }
 
-/** A raise standing over a vessel: who was recognised, in which Nexus, under which marker. */
 /** A raise standing over a vessel: who was recognised, and under which fencing epoch. */
 export interface RaisedCaps {
   /** The recogniser whose presence carries these caps. Their keys, never the vessel's. */
-  readonly byNym:  string;
-  /** The Nexus whose window this raise rides. A raise crosses no Nexus boundary. */
-  readonly nexus:  string;
-  /** The epoch marker it was issued under — a FENCING TOKEN, never a timer. */
-  readonly marker: string;
+  readonly byNym:     string;
+  /** The Nexus whose lease this raise rides. A raise crosses no Nexus boundary. */
+  readonly nexus:     string;
+  /** The lease epoch it was issued under — a FENCING TOKEN, never a timer. */
+  readonly boundEpoch: number;
 }
 
 /**
- * Whether a raise still stands, read against the vessel's own high-water epoch.
+ * Whether a raise still stands, read against its Nexus's own lease epoch.
  *
  * ── NO DURATION, NO CLOCK, NO GLOBAL NOW ────────────────────────────────────────────────────────────────
- * A first draft of this took a wall-clock `now` and an interval, and that form is the one the house forbids:
- * two islands with different clocks disagree about whether a raise stands, and a vessel AT THE FLOOR holds
- * no trustworthy wall time at all — precisely the vessel this law governs.
+ * A first draft took a wall-clock `now` and an interval, and that form is the one the house forbids: two
+ * islands with different clocks disagree about whether a raise stands, and a vessel AT THE FLOOR holds no
+ * trustworthy wall time at all — precisely the vessel this law governs.
  *
- * So a raise stands while its MARKER stands in its Nexus's rolling window, and stops when that marker rolls
- * off — supersession and expiry from one mechanism, both driven by the Nexus's own trading rather than by a
- * duration anybody must agree on. A paused, forwarded or replayed raise self-revokes the moment its marker
- * leaves the window: no global broadcast, no clock, and a returning holder stays fenced whether or not
- * anyone suspected it.
+ * So a raise stands while the Nexus's epoch has not rolled past the epoch it bound to, and stops the moment
+ * it has. Supersession and expiry come from one mechanism, driven by the Nexus's own renewals rather than by
+ * a duration anybody must agree on. A paused, forwarded or replayed raise self-revokes at the next roll: no
+ * global broadcast, no clock, and a returning holder stays fenced whether or not anyone suspected it.
+ *
+ * The comparison is `>=` because a grant issued AT the current epoch stands until the next roll — the same
+ * reading `device-delegation` gives `boundEpoch`, so a reader who knows one knows both.
  *
  * ── AND THE ENDING RIDES A SECOND WIRE, DELIBERATELY NOT FOLDED IN HERE ──────────────────────────────────
  * Deciding "stop waiting for a renewal" cannot be done from safety alone — under asynchrony nothing tells a
@@ -180,13 +186,13 @@ export interface RaisedCaps {
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/waking-floor · the clockless lease model (safety ⊥ liveness)
  */
-export function raiseStands(raise: RaisedCaps | null, epoch: EpochWindow | null): boolean {
+export function raiseStands(raise: RaisedCaps | null, epoch: NexusEpoch | null): boolean {
   if (!raise || !epoch) return false;
-  if (raise.nexus !== epoch.nexus) return false;      // a marker means nothing outside its own Nexus
-  return epoch.markers.includes(raise.marker);        // stands while its marker stands; rolls off with it
+  if (raise.nexus !== epoch.nexus) return false;      // an epoch means nothing outside its own Nexus
+  return raise.boundEpoch >= epoch.effective;         // stands until the Nexus rolls past it
 }
 
 /** The caps a vessel carries under its current fence — its floor, plus any raise not yet superseded. */
-export function standingClass(floor: VesselClass, raise: RaisedCaps | null, epoch: EpochWindow | null): VesselClass {
+export function standingClass(floor: VesselClass, raise: RaisedCaps | null, epoch: NexusEpoch | null): VesselClass {
   return raiseStands(raise, epoch) ? "hearth" : floor;
 }
