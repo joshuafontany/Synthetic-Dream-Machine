@@ -113,7 +113,7 @@ import { multiGraphRecall, makeFormSearch, makeStructureSearch }  from "./sensor
 import { waitHandle, resolveBootDoc } from "./repo-helpers.js";
 import { makeChildProcessDocLoadProbe, quarantineDoc, recoverCleanTail } from "./doc-load-probe.js";
 import { loadIdentityArchive } from "./identity-anchors.js";
-import { assertSealReady } from "./archive-passphrase.js";
+import { archiveOpens } from "./archive-passphrase.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
   makeResidencyStatsReactor,
@@ -905,11 +905,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // M3 — node-main reads the persisted keyhive Archive from the identity home and passes it into the
     // worker (same custody boundary the 32-byte seed already crosses). keyhive inits from it as the
     // restore FLOOR, then replays @daemon cap-events on top — a torn @daemon restores instead of orphaning.
-    // BOOT-GATE (#60): when the config marks sealing expected but no LARES_ARCHIVE_PASSPHRASE rides the
-    // environment, fail PRECISELY here — naming the fix — rather than deeper in the reader on the generic
-    // sealed-without-key throw. The marker is a config HINT, never a secret.
-    assertSealReady();
-    const archiveBytes = loadIdentityArchive();
+    // THE WAKING FLOOR (#60, superseding the boot-gate throw): when the config marks sealing expected and no
+    // passphrase rides the environment, the archive stays SHUT and this daemon stands WITHOUT it. Throwing
+    // here would have made the floor a lie — the boot announces that it stands faceless and carrying, then
+    // the same condition killed it one frame later. `daemonAuth` already treats the archive as optional, so
+    // standing without it costs nothing structurally: keyhive loses its restore FLOOR and replays cap-events
+    // alone, which is exactly a vessel that has lost its CAPS and kept its FLOOR.
+    //
+    // Reading rather than asserting is the ruling itself (canon: waking-floor). Nothing is lowered — a
+    // vessel that cannot open simply never rose, and an operator supplying the key raises it.
+    const archiveBytes = archiveOpens() ? loadIdentityArchive() : null;
     const daemonAuth = {
       seed:                 vesselSeed,
       vesselVerifyingKey: vesselIdentity.verifyingKey,

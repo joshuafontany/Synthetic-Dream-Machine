@@ -124,3 +124,47 @@ export function standAs(asked: VesselClass, archiveOpens: boolean): VesselClass 
   // A hearth that cannot open its archive stands where every unraised vessel stands — at the floor.
   return archiveOpens ? asked : "herm";
 }
+
+// ── THE RAISE — caps arrive by recognition, and end by SUPERSESSION ────────────────────────────────────
+
+/** A raise standing over a vessel: who was recognised, and under which fencing epoch. */
+export interface RaisedCaps {
+  /** The recogniser whose presence carries these caps. Their keys, never the vessel's. */
+  readonly byNym: string;
+  /** The corm epoch this raise was issued under — a FENCING TOKEN, never a timer. */
+  readonly epoch: number;
+}
+
+/**
+ * Whether a raise still stands, read against the vessel's own high-water epoch.
+ *
+ * ── NO DURATION, NO CLOCK, NO GLOBAL NOW ────────────────────────────────────────────────────────────────
+ * A first draft of this took a wall-clock `now` and an interval, and that form is the one the house forbids:
+ * two islands with different clocks disagree about whether a raise stands, and a vessel AT THE FLOOR holds
+ * no trustworthy wall time at all — precisely the vessel this law governs.
+ *
+ * So expiry reads as SUPERSESSION — "a higher epoch exists downstream of me" — never as "a duration
+ * elapsed". The guarded resource holds its highest-admitted epoch and refuses anything beneath it, so a
+ * paused, forwarded or replayed raise self-revokes the instant a higher epoch touches the vessel. No global
+ * broadcast, no clock, and a returning holder stays fenced whether or not anyone suspected it.
+ *
+ * ── AND THE ENDING RIDES A SECOND WIRE, DELIBERATELY NOT FOLDED IN HERE ──────────────────────────────────
+ * Deciding "stop waiting for a renewal" cannot be done from safety alone — under asynchrony nothing tells a
+ * slow recogniser from a departed one. That decision belongs to the LIVENESS wire: local, monotone,
+ * suspicion-accruing, never leaving its island as a timestamp anyone else must agree on. It feeds SUSPICION
+ * and never ordering, and acting on a wrong suspicion stays safe because this fence still holds.
+ *
+ * Fusing the two wires is how a global now gets smuggled back in. They stay apart.
+ *
+ * Canon: lar:///ha.ka.ba/lares/api/pono/waking-floor · the clockless lease model (safety ⊥ liveness)
+ */
+export function raiseStands(raise: RaisedCaps | null, highestAdmittedEpoch: number): boolean {
+  if (!raise) return false;
+  if (!Number.isSafeInteger(raise.epoch) || !Number.isSafeInteger(highestAdmittedEpoch)) return false;
+  return raise.epoch >= highestAdmittedEpoch;   // superseded the moment a higher epoch lands
+}
+
+/** The caps a vessel carries under its current fence — its floor, plus any raise not yet superseded. */
+export function standingClass(floor: VesselClass, raise: RaisedCaps | null, highestAdmittedEpoch: number): VesselClass {
+  return raiseStands(raise, highestAdmittedEpoch) ? "hearth" : floor;
+}

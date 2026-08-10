@@ -7,7 +7,7 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { personaSlotCeiling, standAs } from "../src/vessel-standing.js";
+import { personaSlotCeiling, raiseStands, standAs, standingClass } from "../src/vessel-standing.js";
 
 describe("★ every node stands first as a Herm ★", () => {
   test("★ a hearth whose archive holds shut STANDS — at the floor, never refusing ★", () => {
@@ -40,5 +40,32 @@ describe("★ one floor, not two kinds of Herm ★", () => {
     // Naming them apart froze a difference that does not survive contact: any vessel at the floor may be
     // raised when someone who can raise it arrives.
     expect(standAs("herm", false)).toBe(standAs("hearth", false));
+  });
+});
+
+describe("★ the raise ends by SUPERSESSION — no clock, no duration ★", () => {
+  const raise = (epoch: number) => ({ byNym: "kai", epoch });
+
+  test("★ a raise stands until a HIGHER epoch lands — never until a duration elapses ★", () => {
+    // A wall-clock form fails twice over: two islands disagree about whether it stands, and a vessel at
+    // the floor holds no trustworthy wall time at all — precisely the vessel this law governs.
+    expect(raiseStands(raise(7), 7)).toBe(true);
+    expect(raiseStands(raise(7), 8)).toBe(false);
+  });
+
+  test("★ a replayed or forwarded raise self-revokes against the fence ★", () => {
+    // The captured packet keeps its old epoch; the vessel has moved past it. No broadcast told it to.
+    expect(raiseStands(raise(3), 9)).toBe(false);
+  });
+
+  test("★ the vessel falls BACK to its floor, not to some third state ★", () => {
+    expect(standingClass("herm", raise(5), 5)).toBe("hearth");
+    expect(standingClass("herm", raise(5), 6)).toBe("herm");
+  });
+
+  test("no raise, or a torn reading, stands at the floor", () => {
+    expect(raiseStands(null, 1)).toBe(false);
+    expect(raiseStands(raise(Number.NaN), 1)).toBe(false);
+    expect(raiseStands(raise(1), Number.NaN)).toBe(false);
   });
 });
