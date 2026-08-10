@@ -114,7 +114,7 @@ sub-memes; this carries the keel + the meme map.
 !! The Layering (one-way, zero cycles)
 
 ```
-@lares/core        — voice house · mu · syad · law-of-5s · OODA-HA · e-prime · lar-URI (noosphere-boot)
+@lares/core        — voice house · mu · syad · law-of-5s · OODA-HA · l-prime · lar-URI (noosphere-boot)
   └ @lararium/mesh  — SUBSTRATE keel, VM-FREE: CompositeStore · AutomergeDocStore · MemeProvider ·
                       island-protocol · island-repo · BagResidencyManager · CapabilityVerifier ·
                       AuthVerifierShore · auth-wire (V3) · open-vessel-core (assembleVessel) ·

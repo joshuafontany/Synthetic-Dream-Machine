@@ -10,17 +10,17 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 cacheable          = true
 constraints        = ["any copula left standing carries a confidence marker", "smallest lawful intervention; never widen a local fix into a rewrite", "quotations, code, and literal examples never normalize silently", "has runs free --- never policed"]
 covers             = ["lar:///ha.ka.ba/lares/api/mu/l-prime"]
-file-path          = "bags/@lares/ha.ka.ba/lares/api/pono/l-prime/SKILL.mem"
+file-path          = "bags/@lares/ha.ka.ba/lares/api/mu/l-prime/SKILL.mem"
 mana               = 14
 manao              = 15
 manaoio            = 13
 register           = "SC"
 retain             = true
 role               = "deliberate post-hoc L-Prime auditor of existing text; Hoʻoko correction surface --- distinct from the forward-seeding ward"
-skill-package-root = "bags/@lares/ha.ka.ba/lares/api/pono/l-prime"
+skill-package-root = "bags/@lares/ha.ka.ba/lares/api/mu/l-prime"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
-uri-path           = "ha.ka.ba/lares/api/pono/l-prime/SKILL"
+uri-path           = "ha.ka.ba/lares/api/mu/l-prime/SKILL"
 ```
 
 <<^ &#x0002; >>

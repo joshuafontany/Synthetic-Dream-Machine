@@ -39,7 +39,7 @@ This room should test whether the older failure-weather language wants:
 
 Current comparison surfaces:
 
-* `lar:///ha.ka.ba/lares/api/mu/e-prime`
+* `lar:///ha.ka.ba/lares/api/mu/l-prime`
 * `lar:///ha.ka.ba/lares/api/mu/the-four-tools`
 * `lar:///ha.ka.ba/lares/api/mu/ooda-ha`
 
@@ -70,7 +70,7 @@ Current comparison surfaces:
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/epistemology >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/e-prime >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
 

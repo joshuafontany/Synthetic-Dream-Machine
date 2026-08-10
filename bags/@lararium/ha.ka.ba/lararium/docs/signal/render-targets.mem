@@ -190,13 +190,13 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 <<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 <<~ syad … >>
 ```
 
 * `aim` — operator intent `->` adopted role; the turn's bearing vector
 * `hud` — `Aperture` (attention range) and `OODA-HA` (loop visibility) on `0–20`
-* `ward` — the `E-Prime` copula gate; the Wand lights it at open (`* E-Prime`; the Stone `0 E-Prime` on an operator lift), the Sword draws it at close (`!` led, `⚠ N` breaches quoted, `↻` re-arm)
+* `ward` — the `L-Prime` copula gate; the Wand lights it at open (`* L-Prime`; the Stone `0 L-Prime` on an operator lift), the Sword draws it at close (`!` led, `⚠ N` breaches quoted, `↻` re-arm)
 * `syad` — invoked standpoints (optional `:` tool-carry); `mu` for tools alone
 * `confidence` — register-word + level, before a grounded claim
 
@@ -325,7 +325,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 ```
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
 <<~ hud Aperture(10) OODA-HA(3) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 <<~ syad 🏛️ >>
 Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
