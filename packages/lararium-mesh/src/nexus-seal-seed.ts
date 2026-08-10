@@ -7,10 +7,20 @@
  * DIFFERENT CEREMONY, THRESHOLD, RATE and AUTHORITY. A quorum that rotates keys can silently move the
  * admission price, because four amendment costs sit behind one write authority.
  *
- * AND THE WORD MEANS THE OPPOSITE ONE FILE OVER: `realm-glamour.ts` defines a charter as the
- * projection that STRUCTURALLY EXCLUDES the roster; this doc ships the roster inside it. Both live.
- * The split waits on the operator's naming ruling (canon `cabal-realm#six-joints`); until it lands,
- * read every `charter` here as SEAL-LINEAGE-PLUS-ROSTER and never as the published face.
+ * THE NAMING RULING LANDED (canon `cabal-realm#six-joints`): the word retires to the FOUNDING ACT, and
+ * the other joints hold their own names — `SealEpoch`/`verifySealLineage` for the lineage, `RealmGlamour`/
+ * `projectRealmGlamour` for the published face, `KahuRoster` for the seats. Two joints collapsed as a gain:
+ * the NAME reads as the content-address of the founding act, and the evidentiary MUNIMENT collapses whole,
+ * since content-addressing makes a record self-proving natively.
+ *
+ * SO WHERE `charter` SURVIVES IN AN IDENTIFIER HERE, IT NAMES THE SEATS AND THE SEAL — never the published
+ * face, which excludes them by definition. A reader who takes the two for one word publishes a muster roll
+ * while meaning to publish a device.
+ *
+ * WHAT REMAINS FUSED IS AUTHORITY, NOT STORAGE. The disk doc now carries seal · kahu · practice in three
+ * fenced blocks at three cadences, so no write clobbers a joint it never meant to touch. But no threshold
+ * gates any of those writes, and one operator command still moves kahu and seal together — so the warning
+ * above stands undischarged: four amendment costs, one hand.
  *
  * The `bags/@nexus` charter DOC carries the AUTHORITY HOME (data-as-authority): the operator SEATS the roster
  * into that doc, and the pure `kapae-antigen` fold/verify read it back through here. This file names the
