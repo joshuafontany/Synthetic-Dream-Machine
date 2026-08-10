@@ -133,7 +133,7 @@ Ranked by how far apart the senses sit — the farther apart, the more surely a 
 * ''handle'' — an integer path index · a published card · a rung on the veil ladder.
 * ''veil'' — the anon face of a dyad · a reader-set of one vessel.
 * ''ring'' — a transport partition · a capability barrier · a quorum-signed ban list.
-* ''epoch'' — a liveness lease · an authority re-key · a seal lineage.
+* ''epoch'' — a liveness lease · a seal lineage · a group-key generation · a history cut · a POSIX time origin · a rhythmic band. ''Unbraided by OWNERSHIP, not by shape'' (epoch-binding-surfaces): the lease and the seal lineage collapse to ONE mechanism in two carriers, both OURS; the group-key generation belongs to Keyhive/BeeKEM (upstream MLS) and blanks where ours picks a winner; the history cut is DXOS's ceremony; the time origin is POSIX's and names the one authority this house refuses. ''A word we mint we may rule; a word a dependency owns we qualify and translate, never redefine.'' The separating question: does the fold pick a WINNER, or blank both paths?
 
 <<~/ahu >>
 

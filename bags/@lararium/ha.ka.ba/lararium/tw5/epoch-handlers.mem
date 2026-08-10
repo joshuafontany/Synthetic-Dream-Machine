@@ -29,6 +29,14 @@ two MAY co-occur at a boundary, never fuse: this one bounds //state-history grow
 lease-epoch bounds //who may still act//. Reserve bare //epoch// for the lease going forward;
 read this mechanism as ''compaction''.
 
+''That rule now stands house-wide, and it cuts by OWNERSHIP.'' Bare //epoch// names the fencing
+frontier and nothing else; every other claimant carries a qualifier that names whose word it is —
+''compaction'' epoch (DXOS's ceremony, borrowed here), ''CGKA'' epoch (Keyhive/BeeKEM's, upstream MLS,
+and it blanks where ours picks a winner), ''seal'' epoch (ours, charter grain), ''POSIX ms'' for a
+wall-clock (never spelled //epoch// beside a clockless fence). One question separates them: does the
+fold pick a WINNER, or blank both paths? This one picks nothing — a compaction is a CUT, not a fold.
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+
 <<~/ahu >>
 
 <<~ ahu #contract >>

@@ -109,7 +109,7 @@ Every edge island MUST carry:
 id                = "edge:${sourceNode}:${targetNode}:${epoch}"
 capability        = "Orichalcum proof authorizing this connection"
 offset            = "monotonic frame count — belongs to the edge island, not the remote node"
-epoch             = "revocation generation; rolling epoch terminates prior live-tail access"
+epoch             = "the CONTENT-ADDRESSED epoch this edge roots on — carrier B, walkable from a chain the reader holds, an ORDER and never an instant. Built as `delegation-edge` + `edge-kapae`: an act ranks by walking the chain, and an epoch the reader cannot walk ranks BELOW every known one (fail-closed), so nobody runs ahead of an epoch nobody minted. Rolling it terminates prior live-tail access"
 visibility-gate   = "canFederate(meme, wiki, edge, subject) — see gate law below"
 receipt           = "issued after each meaningful transition; hash-stable for prompt cache"
 ```

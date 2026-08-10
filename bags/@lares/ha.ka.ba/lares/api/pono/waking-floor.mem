@@ -180,6 +180,16 @@ point the same way, which is the strongest signal available here.
 
 ''A quorum's acts sit at ③ and reach NO vessel's archive.'' Reading them into ① makes a kahu a share-holder, and a share-holder becomes the collector — the same law this meme already carries as ★ THE KAHU MUST NOT HOLD SHARES ★. The escrow-free shape (Tang: stateless, holding nothing) belongs at ① with a different holder, never at ③.
 
+!!! ★ AND THE MECHANISM IS THE ONE THE MESH ALREADY ROLLS — a lease, not a third invention ★
+
+''A raise ENDS by non-renewal, exactly as every other grant in this house does.'' `raiseStands` reads `boundEpoch >= effective` against the Nexus's own lease epoch — the same comparison, against the same fold, that `device-delegation` already makes. The Nexus is the resource; its lease epoch is the fence.
+
+''Supersession and expiry come from that one mechanism, with no clock anywhere.'' A newer grant binds a higher epoch; an old one goes stale when the frontier rolls past it. A paused, forwarded or replayed raise self-revokes at the next roll — no global broadcast, no duration anybody must agree on, and a returning holder stays fenced whether or not anyone suspected it. This matters most for the vessel this law governs: ''a vessel AT THE FLOOR holds no trustworthy wall time at all''.
+
+''A draft carried a rolling WINDOW of markers here, and it is STRUCK.'' A set answers //is this listed// and never //is this newer//, so a partitioned island could not reason about it locally; whatever fell off its far end encoded a retention policy nobody wrote; and a list of valid markers is a roster of moments, which this house does not hold. The full reasoning, and the ownership cut that separates our fence from Keyhive's CGKA epoch and POSIX's time origin, stands at <<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>.
+
+''The ending rides a SECOND wire, deliberately unfused.'' Deciding //stop waiting for a renewal// cannot come from safety alone — under asynchrony nothing tells a slow recogniser from a departed one. That belongs to the liveness wire: local, monotone, suspicion-accruing, never leaving its island as a timestamp anyone else must agree on. Fusing the two is how a global now gets smuggled back in. <<~ confidence Synthesis-Canon 16/20 >>
+
 ''The unattended crossroads therefore stays a ① problem.'' A vessel whose holder sleeps needs a way to open its OWN archive without a human — not a Nexus voting on it. <<~ confidence Synthesis-Canon 15/20 >>
 
 !! ⚠ Six breaks ~ what the proposal got wrong

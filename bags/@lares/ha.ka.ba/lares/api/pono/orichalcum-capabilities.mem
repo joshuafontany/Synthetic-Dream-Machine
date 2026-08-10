@@ -186,8 +186,8 @@ note    = "capability scoped to one specific edge island"
 
 [[caveats]]
 kind    = "epoch"
-type    = "epoch string"
-note    = "capability invalid after this epoch string; rolls with revocation"
+type    = "content-addressed epoch (carrier B)"
+note    = "capability invalid once the chain rolls past the epoch it roots on. An ORDER, never an instant — a reader RANKS it by walking the chain it holds, and an unwalkable epoch ranks below every known one (fail-closed). Built: delegation-edge + edge-kapae. Distinct from the integer lease frontier (carrier A, epoch-lease/boundEpoch) only in how the order is carried; same law"
 ```
 
 !!! Federation Defaults (operator-configurable per wiki recipe)
@@ -251,7 +251,7 @@ lar:///memes/ha.ka.ba/lares/pono/some-meme
     admin group   → write + move
     operator group → read + sync + propose
 
-edge:nodeA:nodeB:some-wiki:epoch42
+edge:nodeA:nodeB:some-wiki:<epochCid>
   members:
     nodeA device key → sync + pull
     nodeB device key → sync + pull

@@ -137,7 +137,7 @@ The section above reads the Herm as a ''standing'' — the cap-composition a cro
 
 ''The floor reads HARDENED, never degraded.'' A vessel that cannot open its archive holds no key to misuse, and the rhyme is Android's Direct Boot (a device before first unlock runs a real system with the credential-encrypted store sealed) — forensics names the same split BFU vs AFU. So the floor is where a vessel is SAFEST, and the hearth fire is what it trades that safety for.
 
-''SEATED ⊥ RAISED.'' `personaSlotCeiling("herm") === 0` bars a SEATED persona root — no human's key rests at a crossroads to steal. A ''raise'' seats nothing: a recognised operator may carry caps onto a Herm, and those caps ride the recogniser's OWN keys, so the Herm always falls back to the floor when the raise stops standing (`raiseStands` reads the raise against the Nexus's own rolling window of epoch markers, never a clock). The two words answer different questions — //what rests here// and //what may act here// — and a design that fuses them puts a key at a crossroads.
+''SEATED ⊥ RAISED.'' `personaSlotCeiling("herm") === 0` bars a SEATED persona root — no human's key rests at a crossroads to steal. A ''raise'' seats nothing: a recognised operator may carry caps onto a Herm, and those caps ride the recogniser's OWN keys, so the Herm always falls back to the floor when the raise stops standing (`raiseStands` reads the raise against the Nexus's own LEASE epoch — `boundEpoch >= effective`, the same comparison every device delegation already makes, and never a clock). The two words answer different questions — //what rests here// and //what may act here// — and a design that fuses them puts a key at a crossroads.
 
 <<~/ahu >>
 
