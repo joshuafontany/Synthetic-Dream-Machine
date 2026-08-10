@@ -144,11 +144,16 @@ the mesh runs'': a kahu quorum signing against the pre-rotated epoch chain, rath
 invented beside it.
 
 ''RULED'': passphrase-primary; no random key beside the ciphertext; never a silent degrade to weak keys.
-''OPEN'': whether an unattended boot REFUSES or DEGRADES, and what may unseal it afterward. ''The gate throws
-because refusing stays the safe default while the answer is unmade'' — an outage recovers and a silently
-unsealed identity does not.
 
-<<~ confidence Synthesis 11/20 >> This blocks no founding. It blocks a crossroads standing where nobody sleeps.
+''RULED and ENACTED'': an unattended boot ''stands at the floor''. `standAs(asked, archiveOpens)` returns the
+asked class only where the identity archive opens and `"herm"` otherwise, so a vessel whose seal stays shut
+meshes, carries, routes, and says loudly what it cannot do — it seats no persona
+(`personaSlotCeiling("herm") === 0`). Nothing degrades silently, because the floor is a NAMED standing rather
+than a weakened one: the vessel that cannot open its archive holds no key to misuse. An operator ''lights the
+hearth fire'' after, and a recognised operator may RAISE caps onto it that ride their own keys and always fall
+back (waking-floor). An outage recovers; a silently unsealed identity does not — and neither happens here.
+
+<<~ confidence Synthesis-Canon 15/20 >> A crossroads may now stand where nobody sleeps: it wakes at the floor and waits for a hand.
 
 ''TWO LEGS STILL GO UN-EXERCISED, named so a green run never reads as more than it proves'':
 * `wake --init` still fans out to the AI-surface wires (`~/.claude` · `~/.codex` · `~/.copilot`). The harness
