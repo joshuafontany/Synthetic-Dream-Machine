@@ -72,13 +72,23 @@ A persona carries ''two names beside its key'', and the key stays the only globa
 
 * ''The OWN side ~ the private pet-name map'' (`{handleIndex -> petname}`, persona-petname). The human's own label for their own faces — "work", "the-guru", "my-burner" — ''freely renamable'' and ''never PUBLICLY federated''. It ''RIDES the human's own private fleet'': the map private-federates over the ''@persona bag'' across their own vessel-pool (the fleet ride, below). The wall the shore holds runs ''PUBLIC, not cross-vessel'': no board write exists in it. A ''multitude-view'' reads the whole self across the vessel — `{persona → pet-name, held-here?, has-public-handle?}` — so the human sees every face while the mesh sees one.
 * ''The OTHER side ~ the handle-book'' (handle-book). The recogniser's local labels for ''OTHERS'' nyms' — never on any wire.
-* ''The ONLY name that federates PUBLICLY ~ the public glamour'' (persona-glamour). The persona's veiled key ''signs a HandleCard'' whose `glamour` shows a chosen display (never a legal identity); it ''announces onto the per-Nexus @crossroads WHO board'' (who-face), self-certifying, monotone-versioned, leased against the local clock.
+* ''The ONLY name that federates PUBLICLY ~ the public glamour'' (persona-glamour). The persona's veiled key ''signs a HandleCard'' whose `glamour` shows a chosen display (never a legal identity); it ''announces onto the per-Nexus @crossroads WHO board'' (who-face), self-certifying, monotone-versioned. ''What supersedes it is a higher version, never a clock'' — a reader on any island orders two cards by their own monotone version without consulting a shared now; a local clock may hint that a card has gone quiet, and a hint never carries a verdict two islands must agree on.
 
 !!! The Binding Law
 
 > ''Only a PUBLICLY ANNOUNCED HANDLE binds a PersonaGroup to a public glamour.''
 
 The announce IS the binding act — a persona's veiled key signs its own HandleCard and puts it on the board. ''No other path may carry a persona's name onto a federating surface.'' A pet-name string that reaches a published document publishes a face the human never announced, and the string's own harmlessness never licenses it: the ''declaring act'' makes a name public, never the characters in it. The two MAY read word-for-word identical — the operator's `Telarus, KSC` names a compartment privately AND announces publicly — and they stay ''two acts with two owners'' (declaration ⊥ measurement, identity-enacts-relation). ''A private label reaching a board reads as a leak, never a shortcut.'' <<~ confidence Synthesis-Canon 16/20 >>
+
+!!! The announce IS a kūkala ~ so the board's two authorities govern it
+
+A HandleCard announce lands on the crossroads as a ''kūkala'' — a public cry pinned to a board that only grows — and it inherits that board's whole grammar rather than needing a rule of its own:
+
+* the announce reads as a ''notice'': this persona cries this Handle here.
+* a withdrawal reads as a ''tombstone'' the persona signs over its OWN cry. Taking a face down is as public as putting it up, because a board where things vanish quietly cannot be read — and a tombstone over ANOTHER persona's card does nothing at all, which is what keeps every member from holding a delete button over the board.
+* a Nexus refusal reads as a ''kāpae'', shadowing the SUBJECT rather than one cry, ''remove-wins'', before or after. Two islands with no shared now cannot agree which act came first; if a later cry could outlive a refusal, anyone refused at the Gate re-pins from a partition and stands again, and the Gate becomes a request.
+
+So the fold answers //what stands// order-independently, and the ''two authorities never blur'': a persona governs only its own cries, and the Nexus governs the board. The declaring-act law rides underneath both — the cry makes the name public, never the characters in it. <<~ confidence Synthesis-Canon 15/20 >>
 
 !!! The declaration ~ the store that keeps the other two apart
 
