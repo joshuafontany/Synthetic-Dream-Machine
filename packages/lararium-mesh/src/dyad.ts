@@ -83,7 +83,7 @@ export interface DyadRecord {
    * A bare group-id string would read as a POINTER a reader resolves against whatever replica state it
    * happens to hold — the confused deputy in its textbook form, since the designation names a target while
    * ambient state supplies the authority. This carries its own authority instead: the group root SIGNED this
-   * exact relationship at a named epoch, so a verifier needs the edge and the root DID and nothing else.
+   * exact relationship at a named epochCid, so a verifier needs the edge and the root DID and nothing else.
    */
   readonly binding: DelegationEdge | null;
 }
@@ -98,10 +98,10 @@ export function dyadBindingSubject(ref: DyadRef): Record<string, string> {
 
 /** Mint the edge gathering a relationship into a fleet — run where the group ROOT lives. */
 export function signDyadBinding(
-  ref: DyadRef, groupRootDid: LarDid, epoch: string,
+  ref: DyadRef, groupRootDid: LarDid, epochCid: string,
   sign: (bytes: Uint8Array) => Promise<string>,
 ): Promise<DelegationEdge> {
-  return signDelegationEdge(DELEGATION_DOMAIN.dyadBinding, dyadBindingSubject(ref), groupRootDid, epoch, sign);
+  return signDelegationEdge(DELEGATION_DOMAIN.dyadBinding, dyadBindingSubject(ref), groupRootDid, epochCid, sign);
 }
 
 /** Lowercase a DID once, so two spellings of one key never derive two ids. */
@@ -165,8 +165,8 @@ function coerceDyad(parsed: unknown): DyadRecord | null {
   let binding: DelegationEdge | null = null;
   if (typeof b === "object" && b !== null) {
     const x = b as Record<string, unknown>;
-    if (typeof x["signer"] === "string" && typeof x["epoch"] === "string" && typeof x["sig"] === "string") {
-      binding = { signer: x["signer"], epoch: x["epoch"], sig: x["sig"] };
+    if (typeof x["signer"] === "string" && typeof x["epochCid"] === "string" && typeof x["sig"] === "string") {
+      binding = { signer: x["signer"], epochCid: x["epochCid"], sig: x["sig"] };
     }
   }
   const record = dyadFromEdge(edge as unknown as DeviceDelegationTiddler, binding);

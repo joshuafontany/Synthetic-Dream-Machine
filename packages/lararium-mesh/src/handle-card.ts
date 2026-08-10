@@ -51,7 +51,8 @@ export interface HandleCard {
   readonly version:  number;
   /** The previous card's id (its content hash), or null at first publication — the face's own lineage. */
   readonly prev:     string | null;
-  /** ms epoch — a freshness lease read against the recogniser's LOCAL clock. An unfed card goes stale itself. */
+  /** POSIX ms — a freshness lease read against the recogniser's LOCAL clock. An unfed card goes stale itself.
+   *  Deliberately not spelled `epoch`: that word names the mesh's fencing frontier, never a wall-clock. */
   readonly expiry:   number;
   /** OPTIONAL content-address of the handle's reputation thread (the signed vouches/annotations). */
   readonly standing: string | null;
@@ -118,11 +119,11 @@ export function fleetProofSubject(nym: string): Record<string, string> {
 
 /** Mint the edge binding a face to its fleet — run where the persona ROOT lives, never where it publishes. */
 export function signFleetProof(
-  args: { readonly nym: string; readonly rootDid: string; readonly epoch: string },
+  args: { readonly nym: string; readonly rootDid: string; readonly epochCid: string },
   sign: (bytes: Uint8Array) => Promise<string>,
 ): Promise<DelegationEdge> {
   return signDelegationEdge(
-    DELEGATION_DOMAIN.fleetProof, fleetProofSubject(args.nym), args.rootDid, args.epoch, sign);
+    DELEGATION_DOMAIN.fleetProof, fleetProofSubject(args.nym), args.rootDid, args.epochCid, sign);
 }
 
 /**

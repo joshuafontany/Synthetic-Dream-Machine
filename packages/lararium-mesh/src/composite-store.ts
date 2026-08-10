@@ -26,7 +26,7 @@ import {
   corpusLarUri,
 } from "./lar-uris.js";
 import { headsEqual } from "./wiki-recipe.js";
-import type { WikiRecipe, EpochPinState } from "./wiki-recipe.js";
+import type { WikiRecipe, BagPinState } from "./wiki-recipe.js";
 
 // Re-export so callers get bag IDs and URI helpers from a single import.
 export { corpusLarUri as corpusBagId };
@@ -414,9 +414,9 @@ export class CompositeStore implements LarTiddlerStore {
   }
 
   /**
-   * Residency Model — audit per-bag pin state against the recipe's `bagEpochs`.
+   * Residency Model — audit per-bag pin state against the recipe's `bagPins`.
    *
-   * Returns a Map keyed by bagId carrying one EpochPinState per pinned bag.
+   * Returns a Map keyed by bagId carrying one BagPinState per pinned bag.
    * Default policy: **audit-only**. Operators read the audit; downstream
    * consumers MAY refuse, time-travel via `view(pinnedHeads)`, or warn. Loud
    * silent refusal at the read path stays out of scope per the deferred-
@@ -435,9 +435,9 @@ export class CompositeStore implements LarTiddlerStore {
    * Anti-pattern #5 defense (recipe-drift poisoning).
    * Meme: lar:///ha.ka.ba/lararium/api/residency-model
    */
-  async auditEpochs(recipe: WikiRecipe): Promise<Map<string, EpochPinState>> {
-    const out = new Map<string, EpochPinState>();
-    const pins = recipe.bagEpochs;
+  async auditPins(recipe: WikiRecipe): Promise<Map<string, BagPinState>> {
+    const out = new Map<string, BagPinState>();
+    const pins = recipe.bagPins;
     if (!pins || pins.size === 0) return out;
     for (const [bagId, pinned] of pins) {
       const layer = this.layers.find((l) => l.bagId === bagId);

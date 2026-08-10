@@ -189,6 +189,8 @@ export function ffzCompare(a: FfzClock, b: FfzClock): -1 | 0 | 1 {
 export function ffzMerge(a: FfzClock, b: FfzClock): FfzClock {
   const epochA = a.levels[4];
   const epochB = b.levels[4];
+  // L4's band is called Theme/epoch — a RHYTHMIC name, and a pure homonym of the mesh's fencing epoch.
+  // The `Math.max` below is a band-width fold, NOT the lease max-register it resembles.
   const dominantEpoch = Math.max(epochA, epochB);
   const bl = b.levels as readonly number[];
   const levels = (a.levels as readonly number[]).map((v, i): number => {

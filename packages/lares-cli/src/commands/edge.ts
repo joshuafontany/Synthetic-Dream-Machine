@@ -1,5 +1,5 @@
 /**
- * `lares edge {kapae | un-kapae} <edge-id> --epoch <e> [--as <root-index>] [--version <n>]` — set one
+ * `lares edge {kapae | un-kapae} <edge-id> --epoch-cid <cid> [--as <root-index>] [--version <n>]` — set one
  * RELATIONSHIP aside, or take the marker back down.
  *
  * SCOPED UNDER `edge` to mirror `nexus kapae` / `nexus un_kapae`, and to keep them apart. Both acts set
@@ -25,7 +25,7 @@ import { runEdgeKapae, EdgeKapaeError } from "@lararium/node";
 import type { ParsedArgs } from "../parse-args.js";
 
 function usage(): number {
-  console.error("usage: lares edge {kapae | un-kapae} <edge-id> --epoch <epoch> [--as <root-index>] [--version <n>]");
+  console.error("usage: lares edge {kapae | un-kapae} <edge-id> --epoch-cid <cid> [--as <root-index>] [--version <n>]");
   console.error("");
   console.error("  kapae <edge-id>      set the relationship aside (a raised marker wins a tie under partition)");
   console.error("  un-kapae <edge-id>   take the marker back down — a deliberate re-admission, never a fall-through");
@@ -37,8 +37,8 @@ export async function cmdEdge(args: ParsedArgs): Promise<number> {
   if (verb !== "kapae" && verb !== "un-kapae") return usage();
 
   const edgeId = args.positional[1];
-  const epoch  = args.options["epoch"];
-  if (!edgeId || !epoch) return usage();
+  const epochCid  = args.options["epoch-cid"];
+  if (!edgeId || !epochCid) return usage();
 
   const asRaw = args.options["as"];
   const verRaw = args.options["version"];
@@ -55,14 +55,14 @@ export async function cmdEdge(args: ParsedArgs): Promise<number> {
 
   try {
     const r = await runEdgeKapae({
-      edgeId, epoch, raised: verb === "kapae",
+      edgeId, epochCid, raised: verb === "kapae",
       ...(handleIndex !== undefined ? { handleIndex } : {}),
       ...(version !== undefined ? { version } : {}),
     });
     console.log(r.raised ? "RAISED — the relationship stands aside" : "LOWERED — the relationship stands again");
     console.log(`  edge:     ${r.edgeId}`);
     console.log(`  version:  ${r.version}`);
-    console.log(`  epoch:    ${r.epoch}`);
+    console.log(`  epoch-cid: ${r.epochCid}`);
     console.log(`  signer:   ${r.signerDid}`);
     console.log(`  board:    ${r.boardUrl}`);
     // What a reader consulting THIS signer as the edge's authority would now see — never a claim that every

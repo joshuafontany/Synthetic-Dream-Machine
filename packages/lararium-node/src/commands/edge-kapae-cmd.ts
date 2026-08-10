@@ -40,8 +40,8 @@ export interface EdgeKapaeOptions {
   readonly edgeId:       string;
   /** true → raise the shadow (set aside); false → lower it (a deliberate re-admission). */
   readonly raised:       boolean;
-  /** The epoch this act roots on — an ORDER, never an instant. */
-  readonly epoch:        string;
+  /** The epochCid this act roots on — an ORDER, never an instant. */
+  readonly epochCid:        string;
   /** WHICH held persona root signs. Absent → the first held root. */
   readonly handleIndex?: number;
   /** Pin the version rather than climbing from the board — for a partitioned re-assertion. */
@@ -53,21 +53,21 @@ export interface EdgeKapaeResult {
   readonly edgeId:    string;
   readonly raised:    boolean;
   readonly version:   number;
-  readonly epoch:     string;
+  readonly epochCid:     string;
   readonly signerDid: string;
   readonly boardUrl:  string;
   /** Whether the shadow STANDS after this act, read back through the verifying fold under this signer. */
   readonly shadowStands: boolean;
 }
 
-/** Land one kāpae act on the Nexus board. `now` never enters — an act roots on an epoch, never a clock. */
+/** Land one kāpae act on the Nexus board. `now` never enters — an act roots on an epochCid, never a clock. */
 export async function runEdgeKapae(opts: EdgeKapaeOptions): Promise<EdgeKapaeResult> {
   const storageDir = opts.storageDir ?? larDataDir();
   const edgeId     = opts.edgeId.trim();
-  const epoch      = opts.epoch.trim();
+  const epochCid      = opts.epochCid.trim();
 
   if (edgeId.length === 0) throw new EdgeKapaeError("an edge id names the relationship to act on — none given.");
-  if (epoch.length === 0)  throw new EdgeKapaeError("an epoch roots the act — none given (an act carries an order, never an instant).");
+  if (epochCid.length === 0)  throw new EdgeKapaeError("an epochCid roots the act — none given (an act carries an order, never an instant).");
 
   const held = await listPersonaRoots(storageDir);
   if (held.length === 0) {
@@ -99,7 +99,7 @@ export async function runEdgeKapae(opts: EdgeKapaeOptions): Promise<EdgeKapaeRes
     }
 
     const act = await signEdgeKapae(
-      { edgeId, raised: opts.raised, version, epoch },
+      { edgeId, raised: opts.raised, version, epochCid },
       ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, handleIndex)),
     );
     handle.change((d) => writeEdgeKapae(d, act));
@@ -109,13 +109,13 @@ export async function runEdgeKapae(opts: EdgeKapaeOptions): Promise<EdgeKapaeRes
     // learns whether the shadow now STANDS rather than merely whether a tiddler landed — and an act that
     // cannot survive its own extraction refuses loudly here instead of sitting on the board doing nothing.
     // The chain that orders the act. A command deciding whether a shadow STANDS holds the chain that
-    // orders standing — epoch outranks version, and nobody runs ahead of an epoch not yet minted.
+    // orders standing — epochCid outranks version, and nobody runs ahead of an epochCid not yet minted.
     const chain = readNexusDoc(daemonBagsDir())?.sealLineage ?? [];
-    const rank  = new Map(chain.map((e) => [e.epochCid, e.epoch]));
+    const rank  = new Map(chain.map((e) => [e.epochCid, e.epoch]));   // cid → its ORDINAL position in the chain
     const shadowed = await shadowSetFromBoard(
       handle.doc(), () => signerDid, verify, (cid) => rank.get(cid) ?? null,
     );
-    return { edgeId, raised: opts.raised, version, epoch, signerDid, boardUrl, shadowStands: shadowed.has(edgeId) };
+    return { edgeId, raised: opts.raised, version, epochCid, signerDid, boardUrl, shadowStands: shadowed.has(edgeId) };
   } finally {
     await repo.flush().catch(() => { /* best-effort final flush */ });
   }

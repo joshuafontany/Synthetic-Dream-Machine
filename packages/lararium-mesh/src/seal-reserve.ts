@@ -76,6 +76,10 @@ export interface ReserveKeySet {
 
 /**
  * Derive the NEXT epoch's three kahu keypairs HARDENED from the reserve seed. Deterministic and
+ * `reserveEpoch` is a ROTATION GENERATION — carrier-A shaped (a monotone integer that rolls on a rotate),
+ * riding here as an HD path segment rather than as a fence anyone reads. It never names a wall-clock and
+ * never names Keyhive's CGKA epoch (epoch-binding-surfaces#whose-word-is-it).
+ *
  * reproducible: the same (seed, reserveEpoch) always yields the same key-set, so a rotate ceremony
  * re-derives the signing keys from a reconstructed seed WITHOUT ever having persisted them. The path
  * hardens per segment (SLIP-0010 ed25519); a derived signing key never reveals the reserve seed.

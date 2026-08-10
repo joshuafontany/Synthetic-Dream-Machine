@@ -62,6 +62,9 @@ export interface FoundingShares {
  * Handle carries standing — because no crypto recovers a secret from nothing. The caller seals the
  * device-share, surfaces the recorded code for the citizen to write down, and relays the escrow share.
  */
+/** `recoveryEpoch` is a ROTATION GENERATION — carrier-A shaped (a monotone integer that rolls when the
+ *  shares re-split), never a wall-clock and never Keyhive's CGKA epoch. See
+ *  lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces#whose-word-is-it */
 export function splitRootAtFounding(rootSeed: Uint8Array, rng: RandomProvider, recoveryEpoch = 1): FoundingShares {
   const custodians: CustodianTag[] = ["device", "recorded-code", "escrow-peer"];
   const shares = splitToShares(rootSeed, 2, custodians, recoveryEpoch, rng);

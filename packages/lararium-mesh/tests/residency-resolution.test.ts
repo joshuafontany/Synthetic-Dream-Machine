@@ -1,6 +1,6 @@
 /**
  * Residency Model Sprint 3 — resolveAll / resolveTopmost on CompositeStore +
- * WikiRecipe bagEpochs + lensFor hook tests.
+ * WikiRecipe bagPins + lensFor hook tests.
  *
  * Surfaces the multi-bag residency that already runs inside CompositeStore
  * (listBagsHolding existed pre-sprint; resolveAll/resolveTopmost return
@@ -16,7 +16,7 @@ import {
   lensFor, identityLens, headsEqual,
   LARES_BAG, wikiBagUri,
 } from "../src/wiki-recipe.js";
-import type { WikiRecipe, EpochPinState } from "../src/wiki-recipe.js";
+import type { WikiRecipe, BagPinState } from "../src/wiki-recipe.js";
 import type { LarTiddlerRecord, LarTiddlerStore, ChangeOrigin } from "../src/tiddler-store.js";
 
 // ---------------------------------------------------------------------------
@@ -157,24 +157,24 @@ describe("multi-bag residency invariants (residency model)", () => {
 });
 
 // ---------------------------------------------------------------------------
-// WikiRecipe.bagEpochs interface (S3.5 — hook, no enforcement yet)
+// WikiRecipe.bagPins interface (S3.5 — hook, no enforcement yet)
 // ---------------------------------------------------------------------------
 
-describe("WikiRecipe.bagEpochs (Anti-pattern #5 hook)", () => {
-  test("bagEpochs absent by default — recipe stays unpinned", () => {
+describe("WikiRecipe.bagPins (Anti-pattern #5 hook)", () => {
+  test("bagPins absent by default — recipe stays unpinned", () => {
     const recipe: WikiRecipe = { wikiSlug: "demo" };
-    expect(recipe.bagEpochs).toBeUndefined();
+    expect(recipe.bagPins).toBeUndefined();
   });
 
-  test("bagEpochs accepts a ReadonlyMap of slot URIs to Automerge Heads", () => {
+  test("bagPins accepts a ReadonlyMap of slot URIs to Automerge Heads", () => {
     // Heads = ReadonlyArray<string>; we pass a stub-shaped array.
     const epochs = new Map<string, readonly string[]>([
       [LARES_BAG, ["head-1", "head-2"]],
       [wikiBagUri("demo"), ["wiki-head-1"]],
     ]);
-    const recipe: WikiRecipe = { wikiSlug: "demo", bagEpochs: epochs as never };
-    expect(recipe.bagEpochs?.get(LARES_BAG)).toEqual(["head-1", "head-2"]);
-    expect(recipe.bagEpochs?.size).toBe(2);
+    const recipe: WikiRecipe = { wikiSlug: "demo", bagPins: epochs as never };
+    expect(recipe.bagPins?.get(LARES_BAG)).toEqual(["head-1", "head-2"]);
+    expect(recipe.bagPins?.size).toBe(2);
   });
 });
 
@@ -276,7 +276,7 @@ describe("headsEqual (set-semantic equality)", () => {
 });
 
 // ---------------------------------------------------------------------------
-// CompositeStore.auditEpochs (Anti-pattern #5 defense — audit-only)
+// CompositeStore.auditPins (Anti-pattern #5 defense — audit-only)
 // ---------------------------------------------------------------------------
 
 /** Heads-aware MemoryTiddlerStore wrapper for audit tests. */
@@ -293,11 +293,11 @@ class HeadsAwareStore implements LarTiddlerStore {
 const BAG_A = "lar:///ha.ka.ba/bags/@aleph";
 const BAG_B = "lar:///ha.ka.ba/bags/@beth";
 
-describe("CompositeStore.auditEpochs", () => {
-  test("returns empty map when recipe has no bagEpochs", async () => {
+describe("CompositeStore.auditPins", () => {
+  test("returns empty map when recipe has no bagPins", async () => {
     const store = await makeStoreWithLayers();
     const recipe: WikiRecipe = { wikiSlug: "demo" };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     expect(audit.size).toBe(0);
   });
 
@@ -306,9 +306,9 @@ describe("CompositeStore.auditEpochs", () => {
     store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["h1", "h2"]), writable: true });
     const recipe: WikiRecipe = {
       wikiSlug: "demo",
-      bagEpochs: new Map([[BAG_A, ["h1", "h2"]]]),
+      bagPins: new Map([[BAG_A, ["h1", "h2"]]]),
     };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     const state = audit.get(BAG_A);
     expect(state?.state).toBe("matched");
     expect((state as { state: "matched"; heads: readonly string[] }).heads).toEqual(["h1", "h2"]);
@@ -319,9 +319,9 @@ describe("CompositeStore.auditEpochs", () => {
     store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["b", "a", "c"]), writable: true });
     const recipe: WikiRecipe = {
       wikiSlug: "demo",
-      bagEpochs: new Map([[BAG_A, ["a", "b", "c"]]]),
+      bagPins: new Map([[BAG_A, ["a", "b", "c"]]]),
     };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     expect(audit.get(BAG_A)?.state).toBe("matched");
   });
 
@@ -330,9 +330,9 @@ describe("CompositeStore.auditEpochs", () => {
     store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["h3"]), writable: true });
     const recipe: WikiRecipe = {
       wikiSlug: "demo",
-      bagEpochs: new Map([[BAG_A, ["h1"]]]),
+      bagPins: new Map([[BAG_A, ["h1"]]]),
     };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     const state = audit.get(BAG_A);
     expect(state?.state).toBe("drifted");
     const drifted = state as { state: "drifted"; pinned: readonly string[]; current: readonly string[] };
@@ -345,9 +345,9 @@ describe("CompositeStore.auditEpochs", () => {
     store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["h1"]), writable: true });
     const recipe: WikiRecipe = {
       wikiSlug: "demo",
-      bagEpochs: new Map([[BAG_A, ["h1"]], [BAG_B, ["x"]]]),
+      bagPins: new Map([[BAG_A, ["h1"]], [BAG_B, ["x"]]]),
     };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     expect(audit.get(BAG_B)?.state).toBe("absent");
     expect(audit.get(BAG_A)?.state).toBe("matched");
   });
@@ -358,9 +358,9 @@ describe("CompositeStore.auditEpochs", () => {
     store.addLayer({ bagId: BAG_A, store: new MemoryTiddlerStore(), writable: true });
     const recipe: WikiRecipe = {
       wikiSlug: "demo",
-      bagEpochs: new Map([[BAG_A, ["h1"]]]),
+      bagPins: new Map([[BAG_A, ["h1"]]]),
     };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     expect(audit.get(BAG_A)?.state).toBe("opaque");
   });
 
@@ -369,9 +369,9 @@ describe("CompositeStore.auditEpochs", () => {
     store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(null), writable: true });
     const recipe: WikiRecipe = {
       wikiSlug: "demo",
-      bagEpochs: new Map([[BAG_A, ["h1"]]]),
+      bagPins: new Map([[BAG_A, ["h1"]]]),
     };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     expect(audit.get(BAG_A)?.state).toBe("opaque");
   });
 
@@ -381,12 +381,12 @@ describe("CompositeStore.auditEpochs", () => {
     store.addLayer({ bagId: BAG_B, store: new HeadsAwareStore(["h-b-current"]), writable: true });
     const recipe: WikiRecipe = {
       wikiSlug: "demo",
-      bagEpochs: new Map([
+      bagPins: new Map([
         [BAG_A, ["h-a"]],          // matched
         [BAG_B, ["h-b-pinned"]],   // drifted
       ]),
     };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     expect(audit.size).toBe(2);
     expect(audit.get(BAG_A)?.state).toBe("matched");
     expect(audit.get(BAG_B)?.state).toBe("drifted");
@@ -404,9 +404,9 @@ describe("CompositeStore.auditEpochs", () => {
     await store.put(rec("T", "live"), origin(BAG_A), { bag: BAG_A });
     const recipe: WikiRecipe = {
       wikiSlug: "demo",
-      bagEpochs: new Map([[BAG_A, ["h-pinned"]]]),  // drifted
+      bagPins: new Map([[BAG_A, ["h-pinned"]]]),  // drifted
     };
-    const audit = await store.auditEpochs(recipe);
+    const audit = await store.auditPins(recipe);
     expect(audit.get(BAG_A)?.state).toBe("drifted");
     // Drift does NOT affect default reads.
     const top = await store.resolveTopmost("T");
@@ -414,9 +414,9 @@ describe("CompositeStore.auditEpochs", () => {
     expect((top?.record.tiddler as Record<string, unknown>)["text"]).toBe("live");
   });
 
-  test("EpochPinState type carries discriminated states", () => {
+  test("BagPinState type carries discriminated states", () => {
     // Compile-time check that the discriminated union covers all five states.
-    const states: EpochPinState[] = [
+    const states: BagPinState[] = [
       { state: "unpinned" },
       { state: "matched", heads: ["h"] },
       { state: "drifted", pinned: ["a"], current: ["b"] },

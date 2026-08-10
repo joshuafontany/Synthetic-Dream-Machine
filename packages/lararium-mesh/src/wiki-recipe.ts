@@ -155,15 +155,15 @@ export interface WikiRecipe {
    */
   readonly mirrorBags?: readonly SlotUri[];
   /**
-   * Optional bag-epoch pins — Anti-pattern #5 defense (recipe-drift poisoning).
+   * Optional bag PINS — Anti-pattern #5 defense (recipe-drift poisoning).
    * Each pinned slot carries an Automerge Heads array naming the expected state.
-   * When a slot carries a pin, `CompositeStore.auditEpochs(recipe)` reports
+   * When a slot carries a pin, `CompositeStore.auditPins(recipe)` reports
    * the drift state per bag; `resolveAllRespectingPins(recipe, title)` skips
    * drifted bags from the read path. Default reads (`resolveAll` / `get` /
    * `resolveTopmost`) stay unaffected — opt-in by call site.
    * Default null/absent = unpinned.
    */
-  readonly bagEpochs?: ReadonlyMap<SlotUri, Heads>;
+  readonly bagPins?: ReadonlyMap<SlotUri, Heads>;
 
   /**
    * Optional read-time lenses keyed by `meta.schemaVersion` — Anti-pattern #2
@@ -242,7 +242,7 @@ export function headsEqual(a: readonly string[], b: readonly string[]): boolean 
 }
 
 /**
- * EpochPinState — per-bag pin status returned by `CompositeStore.auditEpochs`.
+ * BagPinState — per-bag pin status returned by `CompositeStore.auditPins`.
  *
  *   unpinned  — the recipe carries no pin for this bag
  *   matched   — current bag heads equal the pinned heads (set-semantically)
@@ -256,7 +256,7 @@ export function headsEqual(a: readonly string[], b: readonly string[]): boolean 
  * residency-model deferred-enactment design (modal-view reader belongs to
  * a follow-up sprint with explicit "detached" operator UX).
  */
-export type EpochPinState =
+export type BagPinState =
   | { readonly state: "unpinned" }
   | { readonly state: "matched";  readonly heads:  readonly string[] }
   | { readonly state: "drifted";  readonly pinned: readonly string[]; readonly current: readonly string[] }

@@ -34,10 +34,10 @@ const bverify = (b: Uint8Array, sig: string, did: string) =>
   ed.verifyAsync(hexToBytes(sig), b, hexToBytes(did)).catch(() => false);
 
 /** A dyad carrying a REAL edge signed by the named root. */
-async function bound(vessel: string, veil: string, rootSeed: Uint8Array, epoch = "epoch0-aaa") {
+async function bound(vessel: string, veil: string, rootSeed: Uint8Array, epochCid = "epoch0-aaa") {
   const root = await ed.getPublicKeyAsync(rootSeed).then(hex);
   const ref  = { vesselDid: vessel, veilDid: veil };
-  return dyadFromEdge(edge(vessel, veil), await signDyadBinding(ref, root, epoch, bsigner(rootSeed)));
+  return dyadFromEdge(edge(vessel, veil), await signDyadBinding(ref, root, epochCid, bsigner(rootSeed)));
 }
 
 beforeAll(async () => {
@@ -181,7 +181,7 @@ describe("the fleet closes over a PRESENTED EDGE, never over a pointer", () => {
   test("a stale EPOCH still verifies as a signature — scoping stays the caller's, and stays positive", async () => {
     const old = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED, "epoch0-aaa");
     expect(await verifiedFleetOfGroup([old], GROUP_ME, bverify)).toHaveLength(1);
-    expect(old.binding!.epoch).toBe("epoch0-aaa");   // the caller compares against its own head
+    expect(old.binding!.epochCid).toBe("epoch0-aaa");   // the caller compares against its own head
   });
 
   test("a second root on the SAME vessel stays a separate fleet", async () => {
@@ -211,7 +211,7 @@ describe("the fleet closes over a PRESENTED EDGE, never over a pointer", () => {
 
   // One primitive now signs both this and the fleet-proof, so the DOMAIN carries the separation an edge
   // minted for one purpose must never verify at another.
-  test("the binding bytes cover both ends, the root, the epoch AND the domain", () => {
+  test("the binding bytes cover both ends, the root, the epochCid AND the domain", () => {
     const r = { vesselDid: VESSEL_A, veilDid: VEIL_WORK };
     const D = DELEGATION_DOMAIN.dyadBinding;
     const a = hex(delegationBytes(D, dyadBindingSubject(r), "root1", "e1"));
@@ -312,7 +312,7 @@ describe("a kāpae over the relationship stands aside a VALID edge", () => {
   // it; a SET-ASIDE edge stays aside, so re-presenting the same relationship cannot resurrect it.
   test("re-presenting the SAME relationship cannot walk back under the shadow", async () => {
     const work  = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED);
-    const again = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED, "epoch1-bbb");   // fresh edge, later epoch
+    const again = await bound(VESSEL_A, VEIL_WORK, ROOT_ME_SEED, "epoch1-bbb");   // fresh edge, later epochCid
     expect(again.dyadId).toBe(work.dyadId);                                        // same relationship
     expect(await verifiedFleetOfGroup([again], GROUP_ME, bverify, new Set([work.dyadId]))).toEqual([]);
   });

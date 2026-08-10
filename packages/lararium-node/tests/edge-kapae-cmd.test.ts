@@ -52,7 +52,7 @@ afterEach(async () => {
 async function boardState(authority: string) {
   const repo   = new Repo({ storage: new NodeFSStorageAdapter(larDataDir()) });
   const handle = await materializeSharedLarDoc(
-    repo, edgeKapaeBoardDocUrl(await loadVesselVerifyingKey(larDataDir())), "@edge-kapae");
+    repo, edgeKapaeBoardDocUrl(await loadVesselVerifyingKey(larDataDir())), "board:edge-kapae");
   const acts     = edgeKapaeActsFromBoard(handle.doc());
   // This harness holds no charter chain, and declares it rather than omitting the argument —
   // so the fold orders on version alone, which is exactly what these witnesses exercise.
@@ -63,7 +63,7 @@ async function boardState(authority: string) {
 
 describe("runEdgeKapae — a relationship set aside, and taken back", () => {
   it("RAISES, and the shadow stands under the signer that raised it", async () => {
-    const r = await runEdgeKapae({ edgeId: EDGE, raised: true, epoch: EPOCH });
+    const r = await runEdgeKapae({ edgeId: EDGE, raised: true, epochCid: EPOCH });
 
     expect(r.version).toBe(1);                     // a monotone counter starts where the law starts it
     expect(r.shadowStands).toBe(true);
@@ -74,8 +74,8 @@ describe("runEdgeKapae — a relationship set aside, and taken back", () => {
   });
 
   it("★ the version CLIMBS from the board, so a lower SUPERSEDES rather than ties ★", async () => {
-    const up   = await runEdgeKapae({ edgeId: EDGE, raised: true,  epoch: EPOCH });
-    const down = await runEdgeKapae({ edgeId: EDGE, raised: false, epoch: EPOCH });
+    const up   = await runEdgeKapae({ edgeId: EDGE, raised: true,  epochCid: EPOCH });
+    const down = await runEdgeKapae({ edgeId: EDGE, raised: false, epochCid: EPOCH });
 
     expect(up.version).toBe(1);
     expect(down.version).toBe(2);
@@ -87,15 +87,15 @@ describe("runEdgeKapae — a relationship set aside, and taken back", () => {
   });
 
   it("★ a PINNED same-version lower leaves the shadow UP — remove-wins, reachable from the verb ★", async () => {
-    const up   = await runEdgeKapae({ edgeId: EDGE, raised: true,  epoch: EPOCH });
-    const tie  = await runEdgeKapae({ edgeId: EDGE, raised: false, epoch: EPOCH, version: up.version });
+    const up   = await runEdgeKapae({ edgeId: EDGE, raised: true,  epochCid: EPOCH });
+    const tie  = await runEdgeKapae({ edgeId: EDGE, raised: false, epochCid: EPOCH, version: up.version });
 
     expect(tie.version).toBe(up.version);
     expect(tie.shadowStands).toBe(true);           // the raise held the tie
   });
 
   it("the write asserts NO authority — an act lands, and a reader under a different authority drops it", async () => {
-    const r = await runEdgeKapae({ edgeId: EDGE, raised: true, epoch: EPOCH });
+    const r = await runEdgeKapae({ edgeId: EDGE, raised: true, epochCid: EPOCH });
     expect(r.shadowStands).toBe(true);
 
     // the same board, read by someone who holds a DIFFERENT key as the edge's authority
@@ -106,8 +106,8 @@ describe("runEdgeKapae — a relationship set aside, and taken back", () => {
   });
 
   it("acts on DIFFERENT edges never contend — each climbs its own counter", async () => {
-    const a = await runEdgeKapae({ edgeId: "edge-a", raised: true, epoch: EPOCH });
-    const b = await runEdgeKapae({ edgeId: "edge-b", raised: true, epoch: EPOCH });
+    const a = await runEdgeKapae({ edgeId: "edge-a", raised: true, epochCid: EPOCH });
+    const b = await runEdgeKapae({ edgeId: "edge-b", raised: true, epochCid: EPOCH });
     expect(a.version).toBe(1);
     expect(b.version).toBe(1);                     // b's counter never saw a's
 
@@ -115,12 +115,12 @@ describe("runEdgeKapae — a relationship set aside, and taken back", () => {
     expect([...shadowed].sort()).toEqual(["edge-a", "edge-b"]);
   });
 
-  it("REFUSES a blank edge, a blank epoch, an unheld root, and a sub-floor version", async () => {
-    await expect(runEdgeKapae({ edgeId: "  ", raised: true, epoch: EPOCH })).rejects.toThrow(EdgeKapaeError);
-    await expect(runEdgeKapae({ edgeId: EDGE, raised: true, epoch: "  " })).rejects.toThrow(EdgeKapaeError);
-    await expect(runEdgeKapae({ edgeId: EDGE, raised: true, epoch: EPOCH, handleIndex: 99 }))
+  it("REFUSES a blank edge, a blank epochCid, an unheld root, and a sub-floor version", async () => {
+    await expect(runEdgeKapae({ edgeId: "  ", raised: true, epochCid: EPOCH })).rejects.toThrow(EdgeKapaeError);
+    await expect(runEdgeKapae({ edgeId: EDGE, raised: true, epochCid: "  " })).rejects.toThrow(EdgeKapaeError);
+    await expect(runEdgeKapae({ edgeId: EDGE, raised: true, epochCid: EPOCH, handleIndex: 99 }))
       .rejects.toThrow(EdgeKapaeError);
-    await expect(runEdgeKapae({ edgeId: EDGE, raised: true, epoch: EPOCH, version: 0 }))
+    await expect(runEdgeKapae({ edgeId: EDGE, raised: true, epochCid: EPOCH, version: 0 }))
       .rejects.toThrow(EdgeKapaeError);
   });
 });

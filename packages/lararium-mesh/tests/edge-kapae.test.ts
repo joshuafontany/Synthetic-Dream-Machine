@@ -24,7 +24,7 @@ import { hex, hexToBytes } from "../src/crypto.js";
 const A_SEED = new Uint8Array(32).fill(11);   // admin A
 const B_SEED = new Uint8Array(32).fill(12);   // admin B
 const EPOCH  = "epoch0-aaa";
-/** The chain these witnesses walk — one minted epoch, so they order WITHIN it, which is what they test. */
+/** The chain these witnesses walk — one minted epochCid, so they order WITHIN it, which is what they test. */
 const ONE: EpochOrder = (e) => (e === EPOCH ? 0 : null);
 
 const signer = (s: Uint8Array) => (b: Uint8Array) => ed.signAsync(b, s).then(hex);
@@ -33,7 +33,7 @@ const verify = (b: Uint8Array, sig: string, did: string) =>
   ed.verifyAsync(hexToBytes(sig), b, hexToBytes(did)).catch(() => false);
 
 const act = (edgeId: string, raised: boolean, version: number, seed: Uint8Array) =>
-  signEdgeKapae({ edgeId, raised, version, epoch: EPOCH }, signer(seed));
+  signEdgeKapae({ edgeId, raised, version, epochCid: EPOCH }, signer(seed));
 
 describe("remove-wins — the asymmetry that carries the guarantee", () => {
   test("★ a same-version RAISE and LOWER leave the shadow UP ★", async () => {
@@ -101,16 +101,16 @@ describe("an unverified act carries no authority", () => {
     expect((await verifiedShadowSet([raise], () => undefined, verify, ONE)).size).toBe(0);
   });
 
-  test("a tampered field breaks the signature — the bytes bind edge, gesture, version and epoch", async () => {
+  test("a tampered field breaks the signature — the bytes bind edge, gesture, version and epochCid", async () => {
     const authority = await pubOf(A_SEED);
     const raise = await act("edge-1", true, 1, A_SEED);
     const moved: EdgeKapae = { ...raise, edgeId: "edge-2" };
     expect((await verifiedShadowSet([moved], () => authority, verify, ONE)).size).toBe(0);
 
-    const a = hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 1, epoch: "x" }));
-    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: false, version: 1, epoch: "x" })));
-    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 2, epoch: "x" })));
-    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 1, epoch: "y" })));
+    const a = hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 1, epochCid: "x" }));
+    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: false, version: 1, epochCid: "x" })));
+    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 2, epochCid: "x" })));
+    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 1, epochCid: "y" })));
   });
 
   test("a torn or foreign tiddler drops, and an absent board shadows nothing", async () => {
@@ -176,31 +176,31 @@ describe("the board — where a shadow becomes RAISABLE, not merely readable", (
   });
 });
 
-describe("the epoch bounds the ceiling grab a scalar cannot", () => {
-  // A chain the reader can walk. `null` reads unknown — an epoch nobody has minted, or one from elsewhere.
+describe("the epochCid bounds the ceiling grab a scalar cannot", () => {
+  // A chain the reader can walk. `null` reads unknown — an epochCid nobody has minted, or one from elsewhere.
   const chain = (m: Record<string, number>) => (e: string) => m[e] ?? null;
-  const at = (edgeId: string, raised: boolean, version: number, epoch: string, seed: Uint8Array) =>
-    signEdgeKapae({ edgeId, raised, version, epoch }, signer(seed));
+  const at = (edgeId: string, raised: boolean, version: number, epochCid: string, seed: Uint8Array) =>
+    signEdgeKapae({ edgeId, raised, version, epochCid }, signer(seed));
 
-  test("★ an absurd version on an OLD epoch loses to a modest one on a NEW epoch ★", async () => {
+  test("★ an absurd version on an OLD epochCid loses to a modest one on a NEW epochCid ★", async () => {
     // The grab: mint a lower at a version no future act can reach, and hold the edge open forever.
     const grab  = await at("edge-9", false, Number.MAX_SAFE_INTEGER, "e1", B_SEED);
     const raise = await at("edge-9", true,  1,                       "e2", A_SEED);
     const order = chain({ e1: 1, e2: 2 });
     // Version alone hands the edge to the grab; the chain refuses it, because nobody runs ahead of an
-    // epoch that has not been minted.
+    // epochCid that has not been minted.
     expect(foldEdgeKapae([grab, raise], ONE).has("edge-9")).toBe(false);           // scalar: the grab wins
     expect(foldEdgeKapae([grab, raise], order).has("edge-9")).toBe(true);     // chain: it does not
     expect(foldEdgeKapae([raise, grab], order).has("edge-9")).toBe(true);     // and order of arrival never matters
   });
 
-  test("an UNKNOWN epoch ranks below every known one — a chain we cannot walk lowers nothing", async () => {
+  test("an UNKNOWN epochCid ranks below every known one — a chain we cannot walk lowers nothing", async () => {
     const raise   = await at("edge-8", true,  1,    "e1",      A_SEED);
     const foreign = await at("edge-8", false, 9_999, "unknown", B_SEED);
     expect(foldEdgeKapae([raise, foreign], chain({ e1: 1 })).has("edge-8")).toBe(true);
   });
 
-  test("within ONE epoch the version still orders, and a same-version tie still leaves the shadow up", async () => {
+  test("within ONE epochCid the version still orders, and a same-version tie still leaves the shadow up", async () => {
     const order = chain({ e1: 1 });
     const raise = await at("edge-7", true,  1, "e1", A_SEED);
     const lower = await at("edge-7", false, 2, "e1", B_SEED);

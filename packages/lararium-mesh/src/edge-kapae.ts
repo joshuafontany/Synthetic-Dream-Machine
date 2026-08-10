@@ -57,16 +57,16 @@ export interface EdgeKapae {
   readonly raised:  boolean;
   /** Monotone per edge. A later act supersedes an earlier one; a stale act cannot roll it back. */
   readonly version: number;
-  /** The epoch this act roots on. An ORDER, never an instant — a causal island holds no global now. */
-  readonly epoch:   string;
+  /** The epochCid this act roots on. An ORDER, never an instant — a causal island holds no global now. */
+  readonly epochCid:   string;
   /** ed25519 by the authority that holds this edge, over `edgeKapaeBytes`. */
   readonly sig:     string;
 }
 
-/** The bytes an act signs — the edge, the gesture, the version and the epoch, bound together. */
+/** The bytes an act signs — the edge, the gesture, the version and the epochCid, bound together. */
 export function edgeKapaeBytes(a: Omit<EdgeKapae, "sig">): Uint8Array {
   return canonicalJsonBytes({
-    kind: a.kind, edgeId: a.edgeId, raised: a.raised, version: a.version, epoch: a.epoch,
+    kind: a.kind, edgeId: a.edgeId, raised: a.raised, version: a.version, epochCid: a.epochCid,
   });
 }
 
@@ -93,7 +93,7 @@ export function edgeKapaeKey(edgeId: string, raised: boolean, version: number): 
 /** Land an act on a board draft. Call INSIDE a `handle.change()` callback. */
 export function writeEdgeKapae(draft: LarDoc, act: EdgeKapae): void {
   const key = edgeKapaeKey(act.edgeId, act.raised, act.version);
-  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(act) }, act.epoch);
+  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(act) }, act.epochCid);
 }
 
 /** A parsed payload reads as an act only at the exact FLOOR shape — extra fields drop. */
@@ -104,11 +104,11 @@ function coerceAct(parsed: unknown): EdgeKapae | null {
   if (typeof p["edgeId"] !== "string" || p["edgeId"].length === 0) return null;
   if (typeof p["raised"] !== "boolean") return null;
   if (!Number.isSafeInteger(p["version"]) || (p["version"] as number) < 1) return null;
-  if (typeof p["epoch"] !== "string" || p["epoch"].length === 0) return null;
+  if (typeof p["epochCid"] !== "string" || p["epochCid"].length === 0) return null;
   if (typeof p["sig"] !== "string" || p["sig"].length === 0) return null;
   return {
     kind: EDGE_KAPAE_DOMAIN, edgeId: p["edgeId"], raised: p["raised"],
-    version: p["version"] as number, epoch: p["epoch"], sig: p["sig"],
+    version: p["version"] as number, epochCid: p["epochCid"], sig: p["sig"],
   };
 }
 
@@ -129,23 +129,23 @@ export function edgeKapaeActsFromBoard(doc: LarDoc | undefined | null): EdgeKapa
 }
 
 /**
- * Ranks an act's epoch against the chain a reader holds — higher reads later, `null` reads unknown.
+ * Ranks an act's epochCid against the chain a reader holds — higher reads later, `null` reads unknown.
  *
  * WHY THE FOLD TAKES ONE. Version alone is an unbounded scalar standing in for a position, so a hand may
  * simply name a larger number: one act at an absurd version wins every future fold, mintable under partition,
  * converging as the winner on reconnect. That grab is unanswerable in a scalar and trivial against a chain —
- * nobody runs ahead of an epoch that has not been minted. Epoch outranks version; version orders within one.
+ * nobody runs ahead of an epochCid that has not been minted. Epoch outranks version; version orders within one.
  *
  * It arrives INJECTED and REQUIRED, like `verify` and `authorityFor` — this module holds no chain and must
  * not, and a fold that decides standing may not silently fall back to a scalar when nobody hands it one.
  * A reader holding no chain says so explicitly (`noChainHeld`) rather than by omitting an argument.
- * An unknown epoch ranks BELOW every known one (`-1`), so an act rooting on a chain the reader cannot walk
+ * An unknown epochCid ranks BELOW every known one (`-1`), so an act rooting on a chain the reader cannot walk
  * never lowers a shadow raised on one it can — fail-closed, matching the antigen's treatment of the same case.
  */
 export type EpochOrder = (epochCid: string) => number | null;
 
 /**
- * The declaration a reader makes when it holds no chain to walk — every epoch reads unknown, so the fold
+ * The declaration a reader makes when it holds no chain to walk — every epochCid reads unknown, so the fold
  * orders on version alone and the ceiling grab stands open. Named rather than defaulted, because a caller
  * that cannot order epochs should SAY it at the call site where a reviewer will see it.
  */
@@ -163,7 +163,7 @@ export const noChainHeld: EpochOrder = () => null;
  * standing and an unverified act would let anyone lower anyone's shadow.
  */
 export function foldEdgeKapae(acts: readonly EdgeKapae[], epochOrder: EpochOrder): Set<string> {
-  const rank = (a: EdgeKapae): number => epochOrder(a.epoch) ?? -1;
+  const rank = (a: EdgeKapae): number => epochOrder(a.epochCid) ?? -1;
   const best = new Map<string, EdgeKapae>();
   for (const a of acts) {
     const prior = best.get(a.edgeId);
@@ -172,7 +172,7 @@ export function foldEdgeKapae(acts: readonly EdgeKapae[], epochOrder: EpochOrder
     // EPOCH FIRST — a position on a chain nobody can run ahead of. Version only breaks a same-epoch tie.
     if (ra !== rp) { if (ra > rp) best.set(a.edgeId, a); continue; }
     if (a.version > prior.version) { best.set(a.edgeId, a); continue; }
-    // SAME epoch AND version, opposing gestures → the raise holds. A tie never re-admits.
+    // SAME epochCid AND version, opposing gestures → the raise holds. A tie never re-admits.
     if (a.version === prior.version && a.raised) best.set(a.edgeId, a);
   }
   const shadowed = new Set<string>();

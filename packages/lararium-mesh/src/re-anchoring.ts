@@ -70,7 +70,7 @@ export interface Attestation {
 /**
  * A dwelling re-anchored from a host to a realm.
  *
- * THE POSITION, NEVER AN INSTANT. `epoch` roots the record on a walkable chain, so two replicas holding that
+ * THE POSITION, NEVER AN INSTANT. `epochCid` roots the record on a walkable chain, so two replicas holding that
  * chain order two records identically without either reading a clock. A wall clock in a merge-relevant
  * predicate makes convergence non-deterministic — and a device clock reads freely settable by its user and
  * more freely by its operator, where skew arrives on purpose as a testing feature.
@@ -88,8 +88,8 @@ export interface ReAnchoring {
   readonly dweller:   string;
   /** The realm the dwelling re-anchored INTO. */
   readonly realm:     string;
-  /** The epoch this record roots on. An ORDER, never an instant. */
-  readonly epoch:     string;
+  /** The epochCid this record roots on. An ORDER, never an instant. */
+  readonly epochCid:     string;
   /**
    * The parties already dwelling who witnessed it — unordered, independently signed, and carrying NO rule
    * about how many suffice. A single-element set is representable and reads as the dyad it is; refusing it
@@ -105,13 +105,13 @@ export interface ReAnchoring {
  * grow after the fact without invalidating what already signed, and no attestor's mark depends on who else
  * marked. That independence is what keeps the set un-thresholded rather than a quorum in disguise.
  */
-export function reAnchoringBytes(r: Pick<ReAnchoring, "kind" | "dweller" | "realm" | "epoch">): Uint8Array {
-  return canonicalJsonBytes({ kind: r.kind, dweller: r.dweller, realm: r.realm, epoch: r.epoch });
+export function reAnchoringBytes(r: Pick<ReAnchoring, "kind" | "dweller" | "realm" | "epochCid">): Uint8Array {
+  return canonicalJsonBytes({ kind: r.kind, dweller: r.dweller, realm: r.realm, epochCid: r.epochCid });
 }
 
 /** Mint one attestor's mark. The caller supplies the signer; this module holds no key. */
 export async function signAttestation(
-  subject: Pick<ReAnchoring, "kind" | "dweller" | "realm" | "epoch">,
+  subject: Pick<ReAnchoring, "kind" | "dweller" | "realm" | "epochCid">,
   attestor: string,
   sign: (bytes: Uint8Array) => Promise<string>,
 ): Promise<Attestation> {
@@ -119,20 +119,20 @@ export async function signAttestation(
 }
 
 /**
- * The key one record rides under — dweller and realm and epoch together.
+ * The key one record rides under — dweller and realm and epochCid together.
  *
- * Keyed this way, a re-anchoring at a LATER epoch lands beside its predecessor rather than overwriting it, so
+ * Keyed this way, a re-anchoring at a LATER epochCid lands beside its predecessor rather than overwriting it, so
  * a dwelling that lapsed and re-anchored again reads as two acts rather than one edited state. The board
  * holds acts; the fold holds depth.
  */
-export function reAnchoringKey(dweller: string, realm: string, epoch: string): string {
-  return `${RE_ANCHORING_PREFIX}${realm}/${dweller}/${epoch}`;
+export function reAnchoringKey(dweller: string, realm: string, epochCid: string): string {
+  return `${RE_ANCHORING_PREFIX}${realm}/${dweller}/${epochCid}`;
 }
 
 /** Land a record on a board draft. Call INSIDE a `handle.change()` callback. */
 export function writeReAnchoring(draft: LarDoc, r: ReAnchoring): void {
-  const key = reAnchoringKey(r.dweller, r.realm, r.epoch);
-  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(r) }, r.epoch);
+  const key = reAnchoringKey(r.dweller, r.realm, r.epochCid);
+  draft.tiddlers[key] = mutableLarRecord(key, { text: JSON.stringify(r) }, r.epochCid);
 }
 
 /** A parsed payload reads as a record only at the exact FLOOR shape — extra fields drop. */
@@ -142,7 +142,7 @@ function coerceRecord(parsed: unknown): ReAnchoring | null {
   if (p["kind"] !== RE_ANCHORING_DOMAIN) return null;
   if (typeof p["dweller"] !== "string" || p["dweller"].length === 0) return null;
   if (typeof p["realm"] !== "string" || p["realm"].length === 0) return null;
-  if (typeof p["epoch"] !== "string" || p["epoch"].length === 0) return null;
+  if (typeof p["epochCid"] !== "string" || p["epochCid"].length === 0) return null;
   if (!Array.isArray(p["attestors"])) return null;
   const attestors: Attestation[] = [];
   for (const a of p["attestors"] as unknown[]) {
@@ -154,7 +154,7 @@ function coerceRecord(parsed: unknown): ReAnchoring | null {
   }
   return {
     kind: RE_ANCHORING_DOMAIN, dweller: p["dweller"], realm: p["realm"],
-    epoch: p["epoch"], attestors,
+    epochCid: p["epochCid"], attestors,
   };
 }
 
@@ -166,7 +166,7 @@ function coerceRecord(parsed: unknown): ReAnchoring | null {
  * equivalence does load-bearing work: a party who declines to attest performs no detectable act, because
  * nobody can tell their absence from ordinary partition. Every trust network that survived hostile pressure
  * kept exactly that discretion. So no read here, and nothing built on one, may report a count as TOTAL, a set
- * as COMPLETE, or a board as current "as of epoch N".
+ * as COMPLETE, or a board as current "as of epochCid N".
  */
 export function reAnchoringsFromBoard(doc: LarDoc | undefined | null): ReAnchoring[] {
   const tiddlers = doc?.tiddlers;
@@ -216,7 +216,7 @@ export async function verifiedAttestors(
  * delete, and no count presentable as a total.
  *
  * `epochOrder` arrives INJECTED and REQUIRED, exactly as the kāpae fold takes it: this module holds no chain
- * and must not. An unknown epoch ranks below every known one, so a record rooting on a chain the reader
+ * and must not. An unknown epochCid ranks below every known one, so a record rooting on a chain the reader
  * cannot walk never outranks one it can — fail-closed. A reader holding no chain says so with `noChainHeld`
  * rather than by omitting an argument nobody sees.
  */
@@ -226,12 +226,12 @@ export async function dwellingHistory(
   realm: string,
   verify: (bytes: Uint8Array, sigHex: string, signerDid: string) => Promise<boolean>,
   epochOrder: (epochCid: string) => number | null,
-): Promise<{ epoch: string; attestors: string[] }[]> {
+): Promise<{ epochCid: string; attestors: string[] }[]> {
   const mine = reAnchoringsFromBoard(doc).filter((r) => r.dweller === dweller && r.realm === realm);
-  const out: { epoch: string; attestors: string[] }[] = [];
+  const out: { epochCid: string; attestors: string[] }[] = [];
   for (const r of mine) {
     const attestors = await verifiedAttestors(r, verify);
-    if (attestors.length > 0) out.push({ epoch: r.epoch, attestors });   // an unattested record deposits nothing
+    if (attestors.length > 0) out.push({ epochCid: r.epochCid, attestors });   // an unattested record deposits nothing
   }
-  return out.sort((a, b) => (epochOrder(a.epoch) ?? -1) - (epochOrder(b.epoch) ?? -1));
+  return out.sort((a, b) => (epochOrder(a.epochCid) ?? -1) - (epochOrder(b.epochCid) ?? -1));
 }

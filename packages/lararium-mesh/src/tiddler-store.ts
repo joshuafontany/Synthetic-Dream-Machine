@@ -193,7 +193,7 @@ export interface LarTiddlerStore {
    * Returns the current Automerge Heads when the underlying store carries
    * causal history; returns null for in-memory stores with no Automerge backing.
    *
-   * Used by CompositeStore.auditEpochs() to detect bag-epoch drift
+   * Used by CompositeStore.auditPins() to detect bag-pin drift
    * (Anti-pattern #5 defense). Stores that omit this method behave as if it
    * returned null — they cannot participate in pin checks.
    */

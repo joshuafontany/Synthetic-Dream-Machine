@@ -25,14 +25,14 @@ const verify  = (b: Uint8Array, sig: string, did: string) =>
 
 const REALM   = "realm-amorphous";
 const DWELLER = "dweller-1";
-/** A chain the reader can walk. `null` reads unknown — an epoch nobody minted, or one from elsewhere. */
+/** A chain the reader can walk. `null` reads unknown — an epochCid nobody minted, or one from elsewhere. */
 const chain = (m: Record<string, number>) => (e: string) => m[e] ?? null;
 
-const subject = (epoch: string) =>
-  ({ kind: RE_ANCHORING_DOMAIN, dweller: DWELLER, realm: REALM, epoch }) as const;
+const subject = (epochCid: string) =>
+  ({ kind: RE_ANCHORING_DOMAIN, dweller: DWELLER, realm: REALM, epochCid }) as const;
 
-async function record(epoch: string, attestorSeeds: number[]): Promise<ReAnchoring> {
-  const s = subject(epoch);
+async function record(epochCid: string, attestorSeeds: number[]): Promise<ReAnchoring> {
+  const s = subject(epochCid);
   const attestors: Attestation[] = [];
   for (const n of attestorSeeds) {
     attestors.push(await signAttestation(s, await pubOf(seedOf(n)), signer(seedOf(n))));
@@ -98,17 +98,17 @@ describe("the record refuses what the ruling forbids", () => {
   test("★ the signed subject holds the dweller, the realm and the POSITION — and nothing else ★", async () => {
     // What a validating field would look like if one ever crept in, and the assertion that keeps it out.
     const parsed = JSON.parse(new TextDecoder().decode(reAnchoringBytes(subject("e1"))));
-    expect(Object.keys(parsed).sort()).toEqual(["dweller", "epoch", "kind", "realm"]);
+    expect(Object.keys(parsed).sort()).toEqual(["dweller", "epochCid", "kind", "realm"]);
     for (const forbidden of ["method", "rite", "quorum", "minAttestors", "waitingPeriod", "test", "franchise"]) {
       expect(parsed).not.toHaveProperty(forbidden);
     }
   });
 
-  test("no wall clock rides anywhere — the position is a chain epoch", async () => {
+  test("no wall clock rides anywhere — the position is a chain epochCid", async () => {
     const r = await record("e1", [7]);
     const wire = JSON.stringify(r);
     expect(wire).not.toMatch(/\b(timestamp|issuedAt|expiresAt|createdAt|notBefore|notAfter)\b/);
-    expect(typeof r.epoch).toBe("string");
+    expect(typeof r.epochCid).toBe("string");
   });
 
   test("an EXTRA field on the wire drops at the floor rather than riding through", async () => {
@@ -121,7 +121,7 @@ describe("the record refuses what the ruling forbids", () => {
     // The EXACT key-set, asserted — because naming forbidden fields only guards the ones already imagined,
     // and the field that arrives is the one nobody predicted. This is the belt; the named refusals below are
     // the suspenders. (`carriage-board` holds the same pair for the same reason.)
-    expect(Object.keys(back).sort()).toEqual(["attestors", "dweller", "epoch", "kind", "realm"]);
+    expect(Object.keys(back).sort()).toEqual(["attestors", "dweller", "epochCid", "kind", "realm"]);
     expect(back).not.toHaveProperty("method");
     expect(back).not.toHaveProperty("quorum");
   });
@@ -148,10 +148,10 @@ describe("the fold answers does-this-one-hold, never who-holds", () => {
     writeReAnchoring(doc, await record("e1", [7]));
     writeReAnchoring(doc, await record("e2", [8]));
     const h = await dwellingHistory(doc, DWELLER, REALM, verify, order);
-    expect(h.map((x) => x.epoch)).toEqual(["e1", "e2", "e3"]);
+    expect(h.map((x) => x.epochCid)).toEqual(["e1", "e2", "e3"]);
   });
 
-  test("a re-anchoring at a LATER epoch lands BESIDE its predecessor — the board holds acts, not state", async () => {
+  test("a re-anchoring at a LATER epochCid lands BESIDE its predecessor — the board holds acts, not state", async () => {
     const doc = emptyDoc();
     writeReAnchoring(doc, await record("e1", [7]));
     writeReAnchoring(doc, await record("e2", [8]));

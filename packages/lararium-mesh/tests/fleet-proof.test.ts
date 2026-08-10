@@ -45,7 +45,7 @@ describe("the edge turns a convention into a proof", () => {
   test("★ a face bound by its OWN root verifies ★", async () => {
     const nym  = await pubOf(FACE_SEED);
     const root = await pubOf(ROOT_SEED);
-    const c = await card({ fleetProof: await signFleetProof({ nym, rootDid: root, epoch: EPOCH }, signer(ROOT_SEED)) });
+    const c = await card({ fleetProof: await signFleetProof({ nym, rootDid: root, epochCid: EPOCH }, signer(ROOT_SEED)) });
 
     expect(await verifyFleetProof(c, verify)).toBe(true);
     expect((await verifyHandleCard(c, verify)).ok).toBe(true);   // and the card still certifies itself
@@ -54,14 +54,14 @@ describe("the edge turns a convention into a proof", () => {
   test("★ a FORGED claim on someone else's fleet REFUSES ★", async () => {
     const nym = await pubOf(FACE_SEED);
     // the forger names a root it does not hold, and signs with its own key
-    const forged = await signFleetProof({ nym, rootDid: await pubOf(OTHER_ROOT), epoch: EPOCH }, signer(FACE_SEED));
+    const forged = await signFleetProof({ nym, rootDid: await pubOf(OTHER_ROOT), epochCid: EPOCH }, signer(FACE_SEED));
     expect(await verifyFleetProof(await card({ fleetProof: forged }), verify)).toBe(false);
   });
 
   test("an edge cannot be LIFTED from one card onto another — it covers the nym it speaks for", async () => {
     const nym  = await pubOf(FACE_SEED);
     const root = await pubOf(ROOT_SEED);
-    const honest = await signFleetProof({ nym, rootDid: root, epoch: EPOCH }, signer(ROOT_SEED));
+    const honest = await signFleetProof({ nym, rootDid: root, epochCid: EPOCH }, signer(ROOT_SEED));
 
     // paste that edge onto a DIFFERENT face
     const otherFace = new Uint8Array(32).fill(9);
@@ -73,11 +73,11 @@ describe("the edge turns a convention into a proof", () => {
     expect(await verifyFleetProof(stolen, verify)).toBe(false);
   });
 
-  test("an edge bound at a DIFFERENT epoch refuses — the epoch orders the binding", async () => {
+  test("an edge bound at a DIFFERENT epochCid refuses — the epochCid orders the binding", async () => {
     const nym  = await pubOf(FACE_SEED);
     const root = await pubOf(ROOT_SEED);
-    const p = await signFleetProof({ nym, rootDid: root, epoch: EPOCH }, signer(ROOT_SEED));
-    const moved = await card({ fleetProof: { ...p, epoch: "epoch1-deadbeef" } });
+    const p = await signFleetProof({ nym, rootDid: root, epochCid: EPOCH }, signer(ROOT_SEED));
+    const moved = await card({ fleetProof: { ...p, epochCid: "epoch1-deadbeef" } });
     expect(await verifyFleetProof(moved, verify)).toBe(false);
   });
 
@@ -92,7 +92,7 @@ describe("the edge turns a convention into a proof", () => {
   test("the card never carries a device key or a member list — the privacy rests on absence", async () => {
     const nym  = await pubOf(FACE_SEED);
     const root = await pubOf(ROOT_SEED);
-    const c = await card({ fleetProof: await signFleetProof({ nym, rootDid: root, epoch: EPOCH }, signer(ROOT_SEED)) });
+    const c = await card({ fleetProof: await signFleetProof({ nym, rootDid: root, epochCid: EPOCH }, signer(ROOT_SEED)) });
     const fields = new Set(Object.keys(c).concat(Object.keys(c.fleetProof!)));
     for (const leak of ["deviceDid", "vesselDid", "members", "dyads", "veilDid"]) {
       expect(fields.has(leak)).toBe(false);
@@ -120,13 +120,13 @@ describe("identity and signature answer different questions, so they cover diffe
     const nym  = await pubOf(FACE_SEED);
     const root = await pubOf(ROOT_SEED);
     const unbound = await card();
-    const bound = await card({ fleetProof: await signFleetProof({ nym, rootDid: root, epoch: EPOCH }, signer(ROOT_SEED)) });
+    const bound = await card({ fleetProof: await signFleetProof({ nym, rootDid: root, epochCid: EPOCH }, signer(ROOT_SEED)) });
     expect(await handleCardId(bound)).not.toBe(await handleCardId(unbound));
   });
 
   // One primitive now signs this AND the dyad binding, so the DOMAIN carries the separation: an edge
   // minted to bind a FACE must never verify as one binding a RELATIONSHIP.
-  test("the proof bytes bind nym, root, epoch AND the domain", () => {
+  test("the proof bytes bind nym, root, epochCid AND the domain", () => {
     const D = DELEGATION_DOMAIN.fleetProof;
     const a = hex(delegationBytes(D, fleetProofSubject("nym1"), "root1", "e1"));
     expect(a).not.toBe(hex(delegationBytes(D, fleetProofSubject("nym2"), "root1", "e1")));

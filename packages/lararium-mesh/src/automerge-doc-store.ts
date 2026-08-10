@@ -167,7 +167,7 @@ export class AutomergeDocStore implements LarTiddlerStore {
   /**
    * Residency Model: current Automerge Heads for this bag's doc.
    * Returns null when the doc has not yet hydrated (DocHandle.doc() returns
-   * undefined). Used by CompositeStore.auditEpochs() to detect bag-epoch drift.
+   * undefined). Used by CompositeStore.auditPins() to detect bag-pin drift.
    */
   async getHeads(): Promise<readonly string[] | null> {
     const doc = this.handle.doc();
