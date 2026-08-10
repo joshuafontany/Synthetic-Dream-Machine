@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/library/docs/story/dreamdeck/README >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lares/ha.ka.ba/lares/library/docs/story/dreamdeck/README.mem"
+file-path = "bags/@crossroads/ha.ka.ba/lares/library/docs/story/dreamdeck/README.mem"
 l-space   = "stable"
 register  = "Sketch 9/20"
 retain    = false

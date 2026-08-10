@@ -5,7 +5,7 @@
 cacheable         = false
 corpus            = "[N/A — chorus masks use nodes field instead of corpus]"
 created           = "Invalid Date"
-file-path         = "bags/@lares/api/masks/chorus/lagrange-chorus.mem"
+file-path         = "bags/@lares/ha.ka.ba/lares/api/masks/chorus/lagrange-chorus.mem"
 foreground-voices = "[STUB — pending-grammar; likely distributed across nodes]"
 harmony-protocol  = "[STUB — pending-grammar]"
 l-space           = "stable"

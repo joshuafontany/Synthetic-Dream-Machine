@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/has-stack >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/pono/has-stack.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/has-stack.mem"
 l-space   = "stable"
 mana      = 14
 manao     = 15

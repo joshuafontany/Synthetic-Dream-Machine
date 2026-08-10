@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/wikitext-filter >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lares/api/pono/wikitext-filter.mem"
+file-path   = "bags/@lares/ha.ka.ba/lares/api/pono/wikitext-filter.mem"
 grammar-key = "wikitext-filter"
 guest-mime  = "text/x-wikitext-filter"
 l-space     = "stable"

@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/mesh/operator-peer.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/operator-peer.mem"
 hydrate   = true
 l-space   = "lararium"
 mana      = 19

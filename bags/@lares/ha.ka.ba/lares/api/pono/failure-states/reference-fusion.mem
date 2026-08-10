@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/pono/failure-states/reference-fusion.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/failure-states/reference-fusion.mem"
 mana      = 15
 manao     = 16
 manaoio   = 14

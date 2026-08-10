@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lararium/api/ingest-canon >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/api/ingest-canon.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/api/ingest-canon.mem"
 hydrate   = true
 l-space   = "lararium"
 mana      = 18

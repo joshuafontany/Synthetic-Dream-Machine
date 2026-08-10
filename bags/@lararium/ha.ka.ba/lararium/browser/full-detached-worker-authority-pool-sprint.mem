@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/browser/full-detached-worker-authority-pool-sprint.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint.mem"
 l-space   = "lararium"
 mana      = 18
 manao     = 18

@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/worker-message-protocol >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lararium/docs/worker-message-protocol.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/docs/worker-message-protocol.mem"
 l-space   = "stable"
 mana      = 15
 manao     = 16

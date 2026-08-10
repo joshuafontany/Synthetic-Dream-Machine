@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/node/handler-args >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/node/handler-args.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/node/handler-args.mem"
 heleuma   = "ba"
 mana      = 17
 manao     = 17

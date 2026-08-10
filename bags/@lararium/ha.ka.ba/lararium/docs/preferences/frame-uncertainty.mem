@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/preferences/frame-uncertainty >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lararium/docs/preferences/frame-uncertainty.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/docs/preferences/frame-uncertainty.mem"
 l-space   = "stable"
 mana      = 16
 manao     = 17

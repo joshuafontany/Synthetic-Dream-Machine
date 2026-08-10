@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lares/api/pono/render-pipeline.mem"
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/render-pipeline.mem"
 l-space       = "stable"
 mana          = 17
 manao         = 17

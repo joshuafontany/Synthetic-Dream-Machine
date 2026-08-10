@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/tw5-browser-surface >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/tw5/tw5-browser-surface.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/tw5/tw5-browser-surface.mem"
 l-space     = "lararium"
 mana        = 17
 register    = "Synthesis-Canon"

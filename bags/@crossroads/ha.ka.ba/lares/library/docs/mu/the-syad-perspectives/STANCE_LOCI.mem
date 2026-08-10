@@ -4,7 +4,7 @@
 ```toml iam
 cacheable         = false
 dependencies      = ["confidence"]
-file-path         = "bags/@lares/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI.mem"
+file-path         = "bags/@crossroads/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI.mem"
 grammar           = true
 l-space           = "stable"
 phase-map-act     = "#procedures"

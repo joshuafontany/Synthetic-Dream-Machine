@@ -4,7 +4,7 @@
 ```toml iam
 approved-on   = "2026-06-01"
 cacheable     = true
-file-path     = "bags/@lararium/api/residency-tiers.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/api/residency-tiers.mem"
 hydrate       = true
 l-space       = "stable"
 mana          = 17

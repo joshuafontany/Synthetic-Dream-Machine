@@ -4,7 +4,7 @@
 ```toml iam
 approved-on   = "2026-06-02"
 cacheable     = true
-file-path     = "bags/@lararium/api/disk-projection.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/api/disk-projection.mem"
 hydrate       = true
 l-space       = "stable"
 mana          = 17

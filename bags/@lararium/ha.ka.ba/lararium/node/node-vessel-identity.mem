@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/node/node-vessel-identity >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/node/node-vessel-identity.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/node/node-vessel-identity.mem"
 l-space     = "lararium"
 mana        = 3
 register    = "Provisional"

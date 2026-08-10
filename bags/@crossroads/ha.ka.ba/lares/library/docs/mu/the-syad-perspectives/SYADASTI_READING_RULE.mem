@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lares/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.mem"
+file-path = "bags/@crossroads/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.mem"
 l-space   = "stable"
 register  = "Synthesis-Canon 16/20"
 retain    = false

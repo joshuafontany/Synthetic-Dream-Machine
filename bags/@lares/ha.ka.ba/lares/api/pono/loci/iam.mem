@@ -2,7 +2,7 @@
 
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/loci/iam >>
 ```toml iam
-file-path = "bags/@lares/api/pono/loci/iam.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/loci/iam.mem"
 mana      = 15
 manao     = 17
 manaoio   = 14

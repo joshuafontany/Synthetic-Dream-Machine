@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu/chao >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/mu/chao.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/mu/chao.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 17

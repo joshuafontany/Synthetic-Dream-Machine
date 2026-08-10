@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/recipe >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/mesh/recipe.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/mesh/recipe.mem"
 l-space     = "lararium"
 mana        = 12
 manao       = 12

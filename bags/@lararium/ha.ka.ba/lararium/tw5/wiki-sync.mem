@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/wiki-sync >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/tw5/wiki-sync.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/tw5/wiki-sync.mem"
 l-space     = "lararium"
 mana        = 3
 register    = "Provisional"

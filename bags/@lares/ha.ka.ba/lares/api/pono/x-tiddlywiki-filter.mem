@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lares/api/pono/x-tiddlywiki-filter.mem"
+file-path   = "bags/@lares/ha.ka.ba/lares/api/pono/x-tiddlywiki-filter.mem"
 grammar-key = "x-tiddlywiki-filter"
 guest-mime  = "text/x-tiddlywiki-filter"
 mana        = 18

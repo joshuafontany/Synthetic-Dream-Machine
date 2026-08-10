@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lararium/docs/preferences/proactive-surfacing.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/docs/preferences/proactive-surfacing.mem"
 l-space   = "stable"
 mana      = 16
 manao     = 17

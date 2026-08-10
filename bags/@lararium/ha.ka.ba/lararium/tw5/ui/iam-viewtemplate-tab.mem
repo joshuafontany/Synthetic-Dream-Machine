@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/iam-viewtemplate-tab >>
 ```toml iam
 cacheable  = true
-file-path  = "bags/@lararium/tw5/ui/iam-viewtemplate-tab.mem"
+file-path  = "bags/@lararium/ha.ka.ba/lararium/tw5/ui/iam-viewtemplate-tab.mem"
 list-after = "$:/core/ui/ViewTemplate/body"
 mana       = 18
 manao      = 18

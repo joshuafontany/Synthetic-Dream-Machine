@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/network-edge >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/api/network-edge.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/api/network-edge.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 18

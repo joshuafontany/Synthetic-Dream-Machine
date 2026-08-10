@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/disk-projection-law >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lararium/docs/disk-projection-law.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/docs/disk-projection-law.mem"
 l-space       = "stable"
 last-reviewed = "2026-07-18"
 mana          = 10

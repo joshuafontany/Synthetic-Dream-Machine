@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/noosphere-project-instructions >>
 ```toml iam
 cacheable = true
-file-path = "noosphere-project-instructions.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/docs/lares/cloud-settings.mem"
 hydrate   = true
 mana      = 17
 manao     = 17

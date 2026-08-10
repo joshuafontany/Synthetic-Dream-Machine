@@ -4,7 +4,7 @@
 ```toml iam
 body-sha256   = "410944ae0dd96ed55a0a91f0443532760b016f9fcbc44e0c339d74bcf97d8c37"
 cacheable     = true
-file-path     = "bags/@lararium/tw5/modules/filter-operators/edge.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/tw5/modules/filter-operators/edge.mem"
 heleuma       = "ka"
 l-space       = "lararium"
 mana          = 14

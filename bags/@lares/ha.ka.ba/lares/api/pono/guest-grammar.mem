@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/guest-grammar >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/pono/guest-grammar.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/guest-grammar.mem"
 mana      = 15
 manao     = 16
 manaoio   = 14

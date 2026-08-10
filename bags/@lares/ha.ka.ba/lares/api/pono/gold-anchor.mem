@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/gold-anchor >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/pono/gold-anchor.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/gold-anchor.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 18

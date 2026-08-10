@@ -4,7 +4,7 @@
 ```toml iam
 body-sha256   = "4eb7fd5da26c4cb5097ed713b105a0e0f8570f390a4ee7882ec7a98064faea68"
 cacheable     = true
-file-path     = "bags/@lares/api/pono/ability-implies.mem"
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/ability-implies.mem"
 heleuma       = "ka"
 mana          = 18
 manao         = 17

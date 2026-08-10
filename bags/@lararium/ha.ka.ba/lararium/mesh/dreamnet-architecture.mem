@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/mesh/dreamnet-architecture.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/dreamnet-architecture.mem"
 l-space   = "lararium"
 mana      = 17
 manao     = 16

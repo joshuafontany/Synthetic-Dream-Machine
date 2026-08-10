@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/api/living-grammar-palace.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/api/living-grammar-palace.mem"
 hydrate   = true
 l-space   = "lararium"
 mana      = 19

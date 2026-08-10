@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/keyhive/capability-provider >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/keyhive/capability-provider.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/keyhive/capability-provider.mem"
 l-space     = "lararium"
 mana        = 3
 register    = "Provisional"

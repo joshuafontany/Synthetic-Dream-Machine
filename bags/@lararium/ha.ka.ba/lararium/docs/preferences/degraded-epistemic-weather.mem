@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lararium/docs/preferences/degraded-epistemic-weather.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather.mem"
 l-space   = "stable"
 mana      = 16
 manao     = 17

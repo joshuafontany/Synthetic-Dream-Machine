@@ -10,7 +10,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 cacheable          = true
 constraints        = ["S1: the parent invariant remains the admission law and this skill does not outrank it", "S2: guest work enters only through explicit host admission; ambient leakage does not count as lawful guest grammar", "S3: root primitives stay host-side and do not become guest-family proxies", "S4: hana keeps opener, optional priming payload, and guest body distinct", "S5: parser legality, lowering schemas, fixture execution, and long examples move outward before the parent swells"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/guest-grammar"]
-file-path          = "bags/@lares/api/pono/guest-grammar/SKILL.mem"
+file-path          = "bags/@lares/ha.ka.ba/lares/api/pono/guest-grammar/SKILL.mem"
 mana               = 15
 manao              = 16
 manaoio            = 14

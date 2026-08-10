@@ -4,7 +4,7 @@
 ```toml iam
 cacheable       = true
 canonical-forms = ["inline"]
-file-path       = "bags/@lares/api/pono/pranala.mem"
+file-path       = "bags/@lares/ha.ka.ba/lares/api/pono/pranala.mem"
 mana            = 15
 manao           = 16
 manaoio         = 14

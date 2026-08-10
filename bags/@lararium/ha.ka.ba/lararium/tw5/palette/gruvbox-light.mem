@@ -2,7 +2,7 @@
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/palette/gruvbox-light >>
 ```toml iam
-file-path = "bags/@lararium/tw5/palette/gruvbox-light.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/tw5/palette/gruvbox-light.mem"
 l-space   = "adjacent"
 register  = "Synthesis"
 role      = "Gruvbox Light color palette for TW5 theme engine"

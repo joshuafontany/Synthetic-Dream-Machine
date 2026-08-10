@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/mesh/steward-doctrine.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/steward-doctrine.mem"
 l-space   = "lararium"
 mana      = 15
 manao     = 14

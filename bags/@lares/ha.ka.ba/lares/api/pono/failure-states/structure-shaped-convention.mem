@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/pono/failure-states/structure-shaped-convention.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention.mem"
 mana      = 14
 manao     = 15
 manaoio   = 14

@@ -2,7 +2,7 @@
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/exchange-protocol >>
 ```toml iam
-file-path = "bags/@lararium/docs/exchange-protocol.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/docs/exchange-protocol.mem"
 l-space   = "stable"
 register  = "Synthesis"
 retain    = false

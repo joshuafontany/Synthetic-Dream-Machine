@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lares/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.mem"
+file-path = "bags/@crossroads/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.mem"
 l-space   = "stable"
 register  = "Synthesis 12/20"
 retain    = false

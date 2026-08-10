@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/repo-root >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/mesh/repo-root.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/mesh/repo-root.mem"
 l-space     = "lararium"
 mana        = 3
 register    = "Provisional"

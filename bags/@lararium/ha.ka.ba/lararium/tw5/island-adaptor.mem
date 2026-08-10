@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/island-adaptor >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/tw5/island-adaptor.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/tw5/island-adaptor.mem"
 l-space     = "lararium"
 mana        = 3
 register    = "Provisional"

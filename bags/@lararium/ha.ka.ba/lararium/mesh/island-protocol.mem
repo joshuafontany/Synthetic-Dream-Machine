@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/island-protocol >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lararium/mesh/island-protocol.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/mesh/island-protocol.mem"
 l-space       = "lararium"
 mana          = 14
 register      = "Synthesis-Canon"

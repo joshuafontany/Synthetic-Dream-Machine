@@ -9,7 +9,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ```toml iam
 constraints        = ["S1: the canonical loci remains the stable-address capability law", "S2: derivation algorithm runs in full step order without skipping", "S3: resolved and declared-unresolved stay distinct; neither collapses into the other", "S4: rating commitment stays truthful; a path hit never overrides honest unresolved tension", "S5: file-siting mutations and opener changes cross as distinct bounded Hoʻoko transactions", "S6: aftermath names all declared-unresolved addresses; none silently disappear"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/loci"]
-file-path          = "bags/@lares/api/pono/loci/SKILL.mem"
+file-path          = "bags/@lares/ha.ka.ba/lares/api/pono/loci/SKILL.mem"
 mana               = 14
 manao              = 16
 manaoio            = 13

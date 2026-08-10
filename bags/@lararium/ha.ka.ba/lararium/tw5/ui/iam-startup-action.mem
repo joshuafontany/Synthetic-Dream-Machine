@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/iam-startup-action >>
 ```toml iam
 cacheable  = true
-file-path  = "bags/@lararium/tw5/ui/iam-startup-action.mem"
+file-path  = "bags/@lararium/ha.ka.ba/lararium/tw5/ui/iam-startup-action.mem"
 list-after = "$:/core/ui/StartupActions/DefaultTiddlers"
 mana       = 18
 manao      = 17

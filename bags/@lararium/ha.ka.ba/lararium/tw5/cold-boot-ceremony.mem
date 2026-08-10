@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/cold-boot-ceremony >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/tw5/cold-boot-ceremony.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/tw5/cold-boot-ceremony.mem"
 l-space     = "lararium"
 mana        = 3
 register    = "Provisional"

@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/causal-island-pattern >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/api/causal-island-pattern.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/api/causal-island-pattern.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 19

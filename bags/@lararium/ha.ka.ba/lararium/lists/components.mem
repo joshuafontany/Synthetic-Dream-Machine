@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/lists/components >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/lists/components.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/lists/components.mem"
 mana      = 13
 manao     = 16
 register  = "Synthesis"

@@ -4,7 +4,7 @@
 ```toml iam
 body-sha256   = "3fae979c5db2d0ec9ed21502145a05ce5f275426d64470df9ac07d4fedc5460b"
 cacheable     = true
-file-path     = "bags/@lararium/tw5/modules/filter-operators/memes.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/tw5/modules/filter-operators/memes.mem"
 heleuma       = "ba"
 l-space       = "lararium"
 mana          = 14

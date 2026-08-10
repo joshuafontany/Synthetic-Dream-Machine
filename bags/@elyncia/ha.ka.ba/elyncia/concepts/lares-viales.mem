@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/concepts/lares-viales >>
 ```toml iam
 cacheable = true
-file-path = "bags/@elyncia/concepts/lares-viales.mem"
+file-path = "bags/@elyncia/ha.ka.ba/elyncia/concepts/lares-viales.mem"
 mana      = 14
 manao     = 14
 manaoio   = 13

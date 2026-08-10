@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lares/api/pono/causal-islands.mem"
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/causal-islands.mem"
 heleuma       = "ba"
 l-space       = "stable"
 mana          = 18

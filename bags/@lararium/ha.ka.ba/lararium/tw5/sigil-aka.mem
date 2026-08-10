@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/sigil-aka >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/tw5/sigil-aka.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/tw5/sigil-aka.mem"
 mana      = 16
 manao     = 16
 manaoio   = 15

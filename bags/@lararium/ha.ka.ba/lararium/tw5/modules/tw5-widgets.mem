@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lararium/tw5/modules/tw5-widgets.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/tw5/modules/tw5-widgets.mem"
 l-space       = "adjacent"
 mana          = 17
 manao         = 17

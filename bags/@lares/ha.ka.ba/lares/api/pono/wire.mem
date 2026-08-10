@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/wire >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/pono/wire.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/wire.mem"
 mana      = 13
 manao     = 15
 manaoio   = 12

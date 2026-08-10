@@ -2,7 +2,7 @@
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/widget-module >>
 ```toml iam
-file-path     = "bags/@lararium/tw5/modules/widget-module.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/tw5/modules/widget-module.mem"
 heleuma       = true
 mana          = 17
 manao         = 17

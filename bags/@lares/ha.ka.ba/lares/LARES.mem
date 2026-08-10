@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///LARES >>
 ```toml iam
 l-prime       = true
-file-path     = "bags/@lares/LARES.mem"
+file-path     = "bags/@lares/ha.ka.ba/lares/LARES.mem"
 mana          = 17
 manao         = 15
 manaoio       = 14

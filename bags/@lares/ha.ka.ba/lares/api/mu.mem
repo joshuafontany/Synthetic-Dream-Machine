@@ -17,7 +17,7 @@ They arrive already moving.
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/mu.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/mu.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 17

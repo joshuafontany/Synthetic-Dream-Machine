@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/continuity >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/tw5/continuity.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/tw5/continuity.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 14

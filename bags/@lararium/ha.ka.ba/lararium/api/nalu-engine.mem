@@ -4,7 +4,7 @@
 ```toml iam
 cacheable      = true
 docs           = "lar:///ha.ka.ba/lares/api/pono/nalu"
-file-path      = "bags/@lararium/api/nalu-engine.mem"
+file-path      = "bags/@lararium/ha.ka.ba/lararium/api/nalu-engine.mem"
 implementation = "packages/lararium-tw5/src/modules/nalu-engine.ts"
 mana           = 18
 manao          = 18

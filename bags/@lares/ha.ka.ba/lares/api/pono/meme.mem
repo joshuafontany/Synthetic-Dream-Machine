@@ -4,7 +4,7 @@
 ```toml iam
 cacheable      = true
 control-glyphs = ["&#x0001;", "&#x0002;", "&#x0003;", "&#x0004;", "&#x0005;", "&#x0006;"]
-file-path      = "bags/@lares/api/pono/meme.mem"
+file-path      = "bags/@lares/ha.ka.ba/lares/api/pono/meme.mem"
 mana           = 17
 manao          = 17
 manaoio        = 14

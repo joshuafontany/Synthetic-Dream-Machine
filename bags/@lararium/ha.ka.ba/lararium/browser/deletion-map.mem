@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/browser/deletion-map >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/browser/deletion-map.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/browser/deletion-map.mem"
 l-space   = "lararium"
 mana      = 18
 manao     = 18

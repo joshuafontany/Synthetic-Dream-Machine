@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/lares-lararium-binding >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/api/lares-lararium-binding.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/api/lares-lararium-binding.mem"
 hydrate   = true
 l-space   = "stable"
 mana      = 17

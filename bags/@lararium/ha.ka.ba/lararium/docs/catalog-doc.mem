@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/catalog-doc >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lararium/docs/catalog-doc.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/docs/catalog-doc.mem"
 l-space       = "stable"
 mana          = 18
 manao         = 17

@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lares/api/pono/memetic-wikitext.mem"
+file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/memetic-wikitext.mem"
 l-space       = "stable"
 mana          = 19
 manao         = 19

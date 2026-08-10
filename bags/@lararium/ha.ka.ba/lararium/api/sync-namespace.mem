@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/sync-namespace >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lararium/api/sync-namespace.mem"
+file-path     = "bags/@lararium/ha.ka.ba/lararium/api/sync-namespace.mem"
 hydrate       = true
 l-space       = "stable"
 mana          = 17

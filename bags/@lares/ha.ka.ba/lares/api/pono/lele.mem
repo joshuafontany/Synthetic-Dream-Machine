@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/lele >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/api/pono/lele.mem"
+file-path = "bags/@lares/ha.ka.ba/lares/api/pono/lele.mem"
 namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true

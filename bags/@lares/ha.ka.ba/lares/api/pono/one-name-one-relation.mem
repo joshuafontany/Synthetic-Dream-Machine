@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/one-name-one-relation >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lares/lares/api/pono/one-name-one-relation.mem"
+file-path   = "bags/@lares/ha.ka.ba/lares/api/pono/one-name-one-relation.mem"
 hydrate     = true
 l-space     = "lares"
 mana        = 17

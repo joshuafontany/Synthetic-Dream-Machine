@@ -10,7 +10,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 cacheable          = true
 constraints        = ["S1: the parent invariant remains the copy-shape authority and this skill does not outrank it", "S2: a lawful meme keeps identity, thresholds, phase map, edges, and honest return throat visible", "S3: ratings remain distinct — confidence, mana, manao, and manaoio do not collapse into one vague quality signal", "S4: declared depth uses named pranala sugar only when the outward claim carries real yield, real backlog, or real adjacency", "S5: skeleton blocks, detailed conformance tables, research notes, and long procedure move outward before the parent swells"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/meme"]
-file-path          = "bags/@lares/api/pono/meme/SKILL.mem"
+file-path          = "bags/@lares/ha.ka.ba/lares/api/pono/meme/SKILL.mem"
 mana               = 16
 manao              = 17
 manaoio            = 14

@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/api/island-isomorphism >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/api/island-isomorphism.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/api/island-isomorphism.mem"
 l-space   = "stable"
 mana      = 14
 manao     = 15

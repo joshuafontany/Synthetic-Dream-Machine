@@ -3,7 +3,7 @@
 <<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/action-handler >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/api/action-handler.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/api/action-handler.mem"
 l-space     = "stable"
 mana        = 16
 manao       = 16

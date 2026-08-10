@@ -3,7 +3,7 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/peer-coordination >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lararium/docs/peer-coordination.mem"
+file-path = "bags/@lararium/ha.ka.ba/lararium/docs/peer-coordination.mem"
 mana      = 18
 manao     = 18
 manaoio   = 17
