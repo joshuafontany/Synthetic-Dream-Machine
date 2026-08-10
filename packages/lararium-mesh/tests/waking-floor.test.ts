@@ -43,29 +43,35 @@ describe("★ one floor, not two kinds of Herm ★", () => {
   });
 });
 
-describe("★ the raise ends by SUPERSESSION — no clock, no duration ★", () => {
-  const raise = (epoch: number) => ({ byNym: "kai", epoch });
+describe("★ the raise rides a ROLLING WINDOW — no clock, no scalar ★", () => {
+  const raise = (marker: string, nexus = "nx1") => ({ byNym: "kai", nexus, marker });
+  const win = (markers: string[], nexus = "nx1") => ({ nexus, markers });
 
-  test("★ a raise stands until a HIGHER epoch lands — never until a duration elapses ★", () => {
-    // A wall-clock form fails twice over: two islands disagree about whether it stands, and a vessel at
-    // the floor holds no trustworthy wall time at all — precisely the vessel this law governs.
-    expect(raiseStands(raise(7), 7)).toBe(true);
-    expect(raiseStands(raise(7), 8)).toBe(false);
+  test("★ a raise stands while its marker stands in the window ★", () => {
+    expect(raiseStands(raise("m3"), win(["m1", "m2", "m3"]))).toBe(true);
   });
 
-  test("★ a replayed or forwarded raise self-revokes against the fence ★", () => {
-    // The captured packet keeps its old epoch; the vessel has moved past it. No broadcast told it to.
-    expect(raiseStands(raise(3), 9)).toBe(false);
+  test("★ it ends by ROLLING OFF — expiry without any duration anyone must agree on ★", () => {
+    // The window advances as the Nexus trades. Nothing lowered the raise; its marker simply left.
+    expect(raiseStands(raise("m1"), win(["m2", "m3", "m4"]))).toBe(false);
   });
 
-  test("★ the vessel falls BACK to its floor, not to some third state ★", () => {
-    expect(standingClass("herm", raise(5), 5)).toBe("hearth");
-    expect(standingClass("herm", raise(5), 6)).toBe("herm");
+  test("★ a replayed raise self-revokes once its marker has rolled off ★", () => {
+    expect(raiseStands(raise("old"), win(["m9"]))).toBe(false);
   });
 
-  test("no raise, or a torn reading, stands at the floor", () => {
-    expect(raiseStands(null, 1)).toBe(false);
-    expect(raiseStands(raise(Number.NaN), 1)).toBe(false);
-    expect(raiseStands(raise(1), Number.NaN)).toBe(false);
+  test("★ a marker means NOTHING outside the Nexus that minted it ★", () => {
+    // An epoch is per-Nexus. A vessel standing in two holds two windows, and neither answers for the other.
+    expect(raiseStands(raise("m1", "nx1"), win(["m1"], "nx2"))).toBe(false);
+  });
+
+  test("the vessel falls BACK to its floor, not to some third state", () => {
+    expect(standingClass("herm", raise("m1"), win(["m1"]))).toBe("hearth");
+    expect(standingClass("herm", raise("m1"), win(["m2"]))).toBe("herm");
+  });
+
+  test("no raise, or no window, stands at the floor", () => {
+    expect(raiseStands(null, win(["m1"]))).toBe(false);
+    expect(raiseStands(raise("m1"), null)).toBe(false);
   });
 });

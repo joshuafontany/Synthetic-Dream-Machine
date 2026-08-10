@@ -127,12 +127,33 @@ export function standAs(asked: VesselClass, archiveOpens: boolean): VesselClass 
 
 // ── THE RAISE — caps arrive by recognition, and end by SUPERSESSION ────────────────────────────────────
 
+/**
+ * A Nexus's current epoch — a ROLLING WINDOW of markers, never a scalar.
+ *
+ * An epoch names a set, and the set moves: markers enter as the Nexus trades and fall off the far end. That
+ * single mechanism gives both properties the raise needs, with no clock anywhere — SUPERSESSION (a newer
+ * marker arrives) and EXPIRY (an old one rolls off), both driven by the Nexus's own events rather than by
+ * any duration anybody must agree on.
+ *
+ * And it is PER-NEXUS. A vessel standing in more than one holds more than one window, and a marker means
+ * nothing outside the Nexus that minted it.
+ */
+export interface EpochWindow {
+  /** Whose window this is — the Nexus key. A marker carries no meaning outside it. */
+  readonly nexus:   string;
+  /** The markers currently standing, oldest first. Rolling: entering at one end, falling off the other. */
+  readonly markers: readonly string[];
+}
+
+/** A raise standing over a vessel: who was recognised, in which Nexus, under which marker. */
 /** A raise standing over a vessel: who was recognised, and under which fencing epoch. */
 export interface RaisedCaps {
   /** The recogniser whose presence carries these caps. Their keys, never the vessel's. */
-  readonly byNym: string;
-  /** The corm epoch this raise was issued under — a FENCING TOKEN, never a timer. */
-  readonly epoch: number;
+  readonly byNym:  string;
+  /** The Nexus whose window this raise rides. A raise crosses no Nexus boundary. */
+  readonly nexus:  string;
+  /** The epoch marker it was issued under — a FENCING TOKEN, never a timer. */
+  readonly marker: string;
 }
 
 /**
@@ -143,10 +164,11 @@ export interface RaisedCaps {
  * two islands with different clocks disagree about whether a raise stands, and a vessel AT THE FLOOR holds
  * no trustworthy wall time at all — precisely the vessel this law governs.
  *
- * So expiry reads as SUPERSESSION — "a higher epoch exists downstream of me" — never as "a duration
- * elapsed". The guarded resource holds its highest-admitted epoch and refuses anything beneath it, so a
- * paused, forwarded or replayed raise self-revokes the instant a higher epoch touches the vessel. No global
- * broadcast, no clock, and a returning holder stays fenced whether or not anyone suspected it.
+ * So a raise stands while its MARKER stands in its Nexus's rolling window, and stops when that marker rolls
+ * off — supersession and expiry from one mechanism, both driven by the Nexus's own trading rather than by a
+ * duration anybody must agree on. A paused, forwarded or replayed raise self-revokes the moment its marker
+ * leaves the window: no global broadcast, no clock, and a returning holder stays fenced whether or not
+ * anyone suspected it.
  *
  * ── AND THE ENDING RIDES A SECOND WIRE, DELIBERATELY NOT FOLDED IN HERE ──────────────────────────────────
  * Deciding "stop waiting for a renewal" cannot be done from safety alone — under asynchrony nothing tells a
@@ -158,13 +180,13 @@ export interface RaisedCaps {
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/waking-floor · the clockless lease model (safety ⊥ liveness)
  */
-export function raiseStands(raise: RaisedCaps | null, highestAdmittedEpoch: number): boolean {
-  if (!raise) return false;
-  if (!Number.isSafeInteger(raise.epoch) || !Number.isSafeInteger(highestAdmittedEpoch)) return false;
-  return raise.epoch >= highestAdmittedEpoch;   // superseded the moment a higher epoch lands
+export function raiseStands(raise: RaisedCaps | null, epoch: EpochWindow | null): boolean {
+  if (!raise || !epoch) return false;
+  if (raise.nexus !== epoch.nexus) return false;      // a marker means nothing outside its own Nexus
+  return epoch.markers.includes(raise.marker);        // stands while its marker stands; rolls off with it
 }
 
 /** The caps a vessel carries under its current fence — its floor, plus any raise not yet superseded. */
-export function standingClass(floor: VesselClass, raise: RaisedCaps | null, highestAdmittedEpoch: number): VesselClass {
-  return raiseStands(raise, highestAdmittedEpoch) ? "hearth" : floor;
+export function standingClass(floor: VesselClass, raise: RaisedCaps | null, epoch: EpochWindow | null): VesselClass {
+  return raiseStands(raise, epoch) ? "hearth" : floor;
 }
