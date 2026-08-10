@@ -9,11 +9,14 @@
     "test": "pnpm -r --workspace-concurrency=1 test",
     "test:fresh": "pnpm -r build && pnpm -r test",
     "typecheck": "pnpm -r typecheck",
+    "typecheck:witness": "tools/typecheck-witness.sh",
     "lint": "pnpm -r lint",
     "dev": "concurrently -n node,vite -c magenta,cyan \"pnpm --filter @lararium/node dev\" \"pnpm --filter @lararium/app dev\"",
     "test:unit": "pnpm -r test",
     "test:sigil-alignment": "pnpm --filter @lararium/tw5 test:sigil-alignment",
     "test:e2e": "pnpm --filter @lares/harness test:e2e",
+    "witness:founding": "tools/founding-witness.sh",
+    "witness": "tools/witness-all.sh",
     "test:e2e:live": "pnpm --filter @lares/harness test:live"
   },
   "devDependencies": {

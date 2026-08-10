@@ -66,7 +66,7 @@
 import { hmac } from "@noble/hashes/hmac.js";
 import { sha256 } from "@noble/hashes/sha2.js";
 
-import { bagUri, PERSONA_NAMESPACE } from "./lar-uris.js";
+import { bagUri } from "./lar-uris.js";
 
 /** Domain separation. Distinct from `circle-scope`, so the two levels can never derive into each other. */
 const PERSONA_SCOPE_HMAC_KEY = new TextEncoder().encode("lares persona-scope v1");
@@ -113,13 +113,4 @@ export function personaBagIdFor(personaGroupDocIdHex: string): string {
  */
 export function isPersonaPlaneSlug(slug: string): boolean {
   return new RegExp(`^@persona-[0-9a-f]{${PERSONA_SCOPE_TAG_HEX}}$`).test(slug);
-}
-
-/** Whether a bag id names a persona plane — the namespace itself, or any group's derived plane. */
-export function isPersonaBagId(bagId: string): boolean {
-  if (bagId === PERSONA_NAMESPACE) return true;
-  const slug = bagId.startsWith(`${PERSONA_NAMESPACE.slice(0, PERSONA_NAMESPACE.lastIndexOf("/"))}/`)
-    ? bagId.slice(bagId.lastIndexOf("/") + 1)
-    : null;
-  return slug !== null && isPersonaPlaneSlug(slug);
 }

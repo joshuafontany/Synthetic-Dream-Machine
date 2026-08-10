@@ -14,7 +14,6 @@ import {
   personaMembershipEntries,
   personaPlanesFault,
   readPersonaPlanes,
-  resolvePersonaPlanes,
   type PersonaPlaneRef,
 } from "../src/persona-planes.js";
 import { personaBagIdFor } from "../src/persona-scope.js";
@@ -22,17 +21,6 @@ import { PERSONA_NAMESPACE } from "../src/lar-uris.js";
 
 const work: PersonaPlaneRef = { personaGroupId: "work-group", url: "automerge:work" };
 const play: PersonaPlaneRef = { personaGroupId: "play-group", url: "automerge:play" };
-
-describe("the family resolves its own names", () => {
-  test("each plane's bag id derives from its own group, never hand-written", () => {
-    const resolved = resolvePersonaPlanes([work, play]);
-    expect(resolved.map((p) => p.bagId)).toEqual([personaBagIdFor("work-group"), personaBagIdFor("play-group")]);
-  });
-
-  test("resolving keeps the doc url intact, so a mount reads the plane it named", () => {
-    expect(resolvePersonaPlanes([work])[0]?.url).toBe("automerge:work");
-  });
-});
 
 describe("★ one face at a time ★", () => {
   test("the active group is chosen BY NAME, out of the family the vessel holds", () => {

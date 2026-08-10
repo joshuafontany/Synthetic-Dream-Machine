@@ -52,11 +52,6 @@ export interface ResolvedPersonaPlane extends PersonaPlaneRef {
   readonly bagId: string;
 }
 
-/** Resolve each plane's bag id from its own group, so a caller never hand-writes one. */
-export function resolvePersonaPlanes(planes: readonly PersonaPlaneRef[]): ResolvedPersonaPlane[] {
-  return planes.map((p) => ({ ...p, bagId: personaBagIdFor(p.personaGroupId) }));
-}
-
 /**
  * The ONE plane this vessel stands in, chosen by name.
  *

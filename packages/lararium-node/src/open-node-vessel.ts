@@ -41,7 +41,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagStowage, pluginCidsFromIslandBlobs,
-  deriveRegisterBags, catalogNamedBags, readPersonaPlanes, mountedPlaneBagId, type PlaneEntry,
+  deriveRegisterBags, catalogNamedBags, readPersonaPlanes, mountedPlaneBagId, personaPlanesFault, type PlaneEntry,
   coupleMesh, crystallize, guardHitl,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
@@ -785,6 +785,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         ...Object.entries(id ?? {}).map(([title, rec]) => ({ title, text: tiddlerText(rec) })),
       ];
       const personaPlanes  = readPersonaPlanes(planeEntries);
+      // A family that could shadow itself never boots. One group entered twice derives ONE bag id and
+      // would mount a second writable layer over the first — the same silent shadowing the one-face law
+      // exists to prevent, arriving through a merge rather than a switch.
+      const planesFault = personaPlanes.length ? personaPlanesFault(personaPlanes) : null;
+      if (planesFault) throw new Error(`[lararium] the PersonaGroup planes this vessel carries do not stand: ${planesFault}`);
       const personaGroupId = bootstrapTiddlers[PERSONA_GROUP_DOC_ID_TIDDLER]?.text
         ?? tiddlerText(id?.[PERSONA_GROUP_DOC_ID_TIDDLER]) ?? null;
       // A vessel standing in compartments but told to wear none it carries halts here rather than

@@ -12,8 +12,7 @@
  */
 import { describe, expect, test } from "vitest";
 
-import { isPersonaBagId, isPersonaPlaneSlug, personaBagIdFor, personaScopeTag, PERSONA_SCOPE_TAG_HEX } from "../src/persona-scope.js";
-import { PERSONA_NAMESPACE } from "../src/lar-uris.js";
+import { isPersonaPlaneSlug, personaBagIdFor, personaScopeTag, PERSONA_SCOPE_TAG_HEX } from "../src/persona-scope.js";
 import { isSovereignBag, hermCanRead } from "../src/mesh-palace.js";
 
 const WORK = "b7f1c2a9d4e60381";
@@ -57,16 +56,6 @@ describe("★ the vault property — the compartments stay unlinked ★", () => 
   });
 });
 
-describe("a router recognises a persona plane by SHAPE", () => {
-  test("both the founding id and any derived plane read as persona bags", () => {
-    expect(isPersonaBagId(PERSONA_NAMESPACE)).toBe(true);
-    expect(isPersonaBagId(personaBagIdFor(WORK))).toBe(true);
-  });
-
-  test("a bag that merely starts with the same letters does not", () => {
-    expect(isPersonaBagId("lar:///ha.ka.ba/bags/@personal-notes")).toBe(false);
-    expect(isPersonaBagId("lar:///ha.ka.ba/bags/@daemon")).toBe(false);
-  });
 });
 
 describe("★ the guards cover the FAMILY, not a list of names ★", () => {
