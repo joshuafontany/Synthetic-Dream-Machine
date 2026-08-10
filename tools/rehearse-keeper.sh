@@ -296,6 +296,40 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
     sh -c "node '$LARES' wake --json --observe | grep -q '\"up\":true'"
   run "bag list — declarations survive"     sh -c "node '$LARES' bag list | grep -q '@lares'"
 
+  # ── ⑦ READY TO CONTRACT ────────────────────────────────────────────────────────────────────────
+  say "⑦ ready — the door a second operator walks through"
+  # THE END-STATE THE ARC IS FOR. Everything above stands ONE hearth; a Nexus that cannot admit a second
+  # operator is a private vessel wearing a charter. This walks BOTH halves of the real handshake:
+  #   `nexus accept-carriage`  the JOINER's half — mints their nym + a signed contract-in
+  #   `nexus contract --sig`   the KAHU's half   — the quorum counter-signs it onto the members board
+  # A held persona stands in for the joining operator, so both halves run on one machine. What that does
+  # NOT prove is the two vessels being genuinely separate islands — the token crosses a function call here
+  # rather than a wire — and that stays NAMED rather than implied.
+  step "⑦ accept-carriage (the joiner's half)"
+  if CARRIAGE=$(lares nexus accept-carriage --index 2 --json 2>&1); then
+    ok
+    PEER_NYM=$(printf '%s' "$CARRIAGE" | grep -oE '"nym":"[0-9a-fx]+"' | head -1 | cut -d'"' -f4)
+    PEER_SIG=$(printf '%s' "$CARRIAGE" | grep -oE '"contractSig":"[0-9a-f]+"' | head -1 | cut -d'"' -f4)
+  else
+    bad "$?"; printf '%s\n' "$CARRIAGE" | tail -4 | sed 's/^/      /'; PEER_NYM=""; PEER_SIG=""
+  fi
+
+  if [ -n "$PEER_NYM" ] && [ -n "$PEER_SIG" ]; then
+    run "⑦ contract (the kahu's half) — MEMBER" \
+      sh -c "node '$LARES' nexus contract '$PEER_NYM' --sig '$PEER_SIG' --json | grep -q '\"memberNow\":true'"
+    run "the members board folds them IN" \
+      sh -c "node '$LARES' nexus members --list --json | grep -q '$PEER_NYM'"
+    run "revoke SUPERSEDES — never deletes" \
+      sh -c "node '$LARES' nexus revoke '$PEER_NYM' --json | grep -q '\"memberNow\":false'"
+  else
+    step "⑦ contract"; bad "no nym/sig captured from accept-carriage"
+  fi
+
+  # THE REFUSAL, measured. A gate only ever shown saying yes has not been shown to be a gate — and this
+  # one must FAIL CLOSED on a nym carrying no contract-in at all.
+  run "a nym with NO contract-in refuses, and writes nothing" \
+    sh -c "! node '$LARES' nexus contract 0000000000000000000000000000000000000000000000000000000000000000 --json 2>&1 | grep -q '\"ok\":true'"
+
   # The node runs DETACHED from `wake`, so no pid file names it. Free the port by whoever holds it — scoped
   # to THIS throwaway's port, never a pattern that could reach the operator's real daemon.
   step "stop the throwaway node (port $LAR_PORT)"
