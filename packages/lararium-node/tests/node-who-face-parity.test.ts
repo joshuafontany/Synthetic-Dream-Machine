@@ -31,7 +31,7 @@ function substrateStub(composite: CompositeStore): CapModule {
 
 /** Compose the WHO plane the way an opener does: materialize @crossroads deterministically, then wire the cap. */
 async function composeWhoPlane(repo: Repo, nexusPubkey: string, composite: CompositeStore) {
-  const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "@crossroads");
+  const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "board:crossroads");
   const vessel = await composeVessel([
     substrateStub(composite),
     whoFaceCap({ repo, crossroadsHandle, nexusPubkey }),

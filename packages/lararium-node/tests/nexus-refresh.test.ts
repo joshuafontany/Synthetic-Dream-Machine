@@ -126,7 +126,7 @@ describe("nexus-refresh — out-of-process BOARD write (E2)", () => {
 
       // The CLI writes the ban through its OWN repo on the SAME storage dir, then flushes (out-of-process shape).
       const writer = new Repo({ storage: new NodeFSStorageAdapter(storage) });
-      const board  = await materializeSharedLarDoc(writer, kapaeAntigenDocUrl(NEXUS_PUBKEY), "@kapae-antigen");
+      const board  = await materializeSharedLarDoc(writer, kapaeAntigenDocUrl(NEXUS_PUBKEY), "board:kapae-antigen");
       const ban    = await banEntry(victim, charter.sealEpochCid!);
       board.change((d) => { d.tiddlers["ban:victim"] = mutableLarRecord("ban:victim", { text: JSON.stringify(ban) }, "test"); });
       await writer.flush();

@@ -60,7 +60,7 @@ beforeAll(async () => {
   });
 
   // Read the persona-KEL chain the founding seated on the per-Nexus board — the Binding Gate walks it.
-  const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(verifyingKey), "@persona-kel");
+  const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(verifyingKey), "board:persona-kel");
   const kelChain = personaKelChainForPrefix(kelBoard.doc(), cer.personaKelPrefix);
   if (!kelChain) throw new Error("founding seated no persona-KEL chain");
 

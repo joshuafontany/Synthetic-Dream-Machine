@@ -95,7 +95,7 @@ describe("the LIVE refold — board ban + seated charter → Kapae'd → Mu", ()
     const charter = await seatedCharter(keys);
     writeNexusDoc(bags, charter);
     // A real quorum-signed ban in the always-carried board, rooting on the charter epoch.
-    const board = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(NEXUS_PUBKEY), "@kapae-antigen");
+    const board = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(NEXUS_PUBKEY), "board:kapae-antigen");
     const ban   = await banEntry(victim, charter.sealEpochCid!);
     board.change((d) => { d.tiddlers["ban:victim"] = mutableLarRecord("ban:victim", { text: JSON.stringify(ban) }, "test"); });
 
@@ -121,7 +121,7 @@ describe("the LIVE refold — board ban + seated charter → Kapae'd → Mu", ()
 
   test("FAIL CLOSED — no charter on disk → empty roster → nothing Kapae'd (the ban never verifies)", async () => {
     const victim = await pubOf(VICTIM_SEED);
-    const board = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(NEXUS_PUBKEY), "@kapae-antigen");
+    const board = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(NEXUS_PUBKEY), "board:kapae-antigen");
     // A perfectly-signed ban rooting on an epoch — but NO seated charter, so no roster keys verify it.
     const ban = await banEntry(victim, "epoch-cid-genesis");
     board.change((d) => { d.tiddlers["ban:victim"] = mutableLarRecord("ban:victim", { text: JSON.stringify(ban) }, "test"); });

@@ -42,7 +42,7 @@ async function bootOver(repo: Repo, daemonUrl: string, s: Uint8Array, verifyingK
   composite.addLayer({ bagId: DAEMON_BAG_ID, store, writable: true });
   store.markSyncComplete();
   // Walk the vessel's OWN per-Nexus KEL board (its gate key IS its Nexus key) for the pinned identifier's chain.
-  const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(verifyingKey), "@persona-kel");
+  const kelBoard = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(verifyingKey), "board:persona-kel");
   const chain = personaKelChainForPrefix(kelBoard.doc(), personaKelPrefix);
   if (!chain) throw new Error(`no persona-KEL chain for ${personaKelPrefix} on this vessel's board`);
   return bootDaemonKeyhive({
@@ -66,7 +66,7 @@ describe("two vessels bind under one Handle", () => {
     const pg = { docIdHex: cer.personaGroupDocIdHex, agentIdHex: cer.personaGroupAgentIdHex };
     const { keyhive: founder } = await bootOver(founderRepo, cer.daemonUrl, FOUNDER_SEED, founderKey, pg, cer.meshCabalDocIdHex, cer.signerDid, cer.personaKelPrefix, cer.founderEdge);
     // Snapshot the founder's KEL chain — the admit payload carries it so the joinee seeds its LOCAL board.
-    const founderKelBoard = await materializeSharedLarDoc(founderRepo, personaKelBoardDocUrl(founderKey), "@persona-kel");
+    const founderKelBoard = await materializeSharedLarDoc(founderRepo, personaKelBoardDocUrl(founderKey), "board:persona-kel");
     const founderKelChain = personaKelChainForPrefix(founderKelBoard.doc(), cer.personaKelPrefix)!;
 
     // Joinee mints its identity ONCE — its card + its Archive (persisted encrypted-at-rest in prod).
