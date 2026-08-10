@@ -3,7 +3,7 @@
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
 ```toml iam
 cacheable         = true
-file-path         = "bags/@lares/api/pono/cabal-realm.mem"
+file-path         = "bags/@lares/ha.ka.ba/lares/api/pono/cabal-realm.mem"
 hydrate           = true
 l-space           = "stable"
 mana              = 17
@@ -13,7 +13,8 @@ namespace         = "&#x2299;"
 pattern-integrity = true
 register          = "Synthesis-Canon"
 retain            = true
-role              = "cabal-realm — a CabalGroup read as an IMAGINED REALM on the DreamNet: the superset of the members' shared infrastructure, imagined as one shared expanse (a hearth beside, not a category above). It carries no DID of its own — a Place bears identity, a vessel names the metal running the code, a realm names what the members jointly imagine and maintain. Named-not-ruled, alive by its epoch, dissolving to anu when unfed. The tie-break rides the realm's epoch (BeeKEM); malice rides Plane-B convergent-removal"
+role              = "cabal-realm — a CabalGroup read as an IMAGINED REALM on the DreamNet: the superset of the members' shared infrastructure, imagined as one shared expanse (a hearth beside, not a category above). It carries no DID of its own — a Place bears identity, a vessel names the metal running the code, a realm names what the members jointly imagine and maintain. Named-not-ruled, alive by its epoch, dissolving to anu when unfed. The tie-break rides the realm's epoch (BeeKEM); malice rides Plane-B convergent-removal. GOVERNING A REALM ⊥ GOVERNING THE METAL (operator ruling 2026-08-09): the Ostrom principles govern the realm — the virtual relationship-place — while infrastructure authority (who runs the metal, who holds the archive passphrase, who lights a Herm, who signs a kāpae) sits on the vessel and the charter. Neither substitutes for the other"
+revised-on        = "2026-08-10"
 tags              = ["api/pono/meme"]
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/lares/api/pono/cabal-realm"
@@ -105,6 +106,14 @@ Without these the realm becomes the //un//-governed commons that collapses (Hard
 * ''P5 — graduated sanctions.'' Gossip → reminder → ''anergy-not-ban'' (already held in the network-edge doctrine).
 * ''P2 — benefit ∝ maintenance.'' The realm remembers who fed it; defeats free-riding.
 * ''Soft-state discipline'' — a generous re-warm K-factor (so a still-wanted realm doesn't falsely starve) + bounded cold-GC by causal stability (so tombstones don't bloat every replica forever).
+
+!!! ★ GOVERNING A REALM ⊥ GOVERNING THE METAL ★
+
+''Two managements wear one word, and a reading that fuses them mis-sites every seat it names'' (operator ruling). A realm is a ''virtual relationship-place'' — what the members jointly imagine over their pooled vessels; its governance is Ostrom's, and its subject is the shared expanse. ''Infrastructure management'' is a different subject entirely: who runs which metal, who holds the archive passphrase, who lights a Herm into a lararium, who signs a Nexus kāpae. Those seats sit on the vessel and the charter, never in the realm.
+
+The fusion is easy because the same person often does both, and it fails in one direction: ''a realm's members agreeing something does NOT move a key, and an operator holding the metal does NOT hold a vote in the realm.'' Where a design needs both it must name both, separately — the realm's agreement and the infrastructure's authority never substitute for each other.
+
+The Ostrom principles above still hold ''unchanged'' under the cut; they govern the realm. Read them as claims about the metal and P1's cost-dial turns into an admission fee for hardware, which no one ever ruled. <<~ confidence Synthesis-Canon 14/20 >>
 
 <<~/ahu >>
 

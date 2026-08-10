@@ -11,7 +11,8 @@ manaoio   = 15
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "WHAT A DEPENDENCY BUMP COSTS AN ALREADY-FOUNDED NEXUS — the five surfaces that bind to an epoch, measured rather than assumed. The engine CID is NOT the only one: hearthTrueName rides INSIDE every signed device-delegation preimage, and the pluginsCid tracks blobs built from THIS REPO'S OWN SOURCE. CORRECTED 2026-08-09 against the code, replacing this meme's own earlier over-claim: the pluginsCid rides as a LOCAL build-time integrity witness, never a membership criterion — the epoch binds to the ENGINE alone (hearthTrueName = engineCid, the slow ratchet), and the served-plugin layer composes per-operator beneath it on its own fast ratchet. Measured 2026-08-08: a runtime dep bump (automerge · noble · ws) touches exactly ONE surface (the on-disk serde, cured identity-safe by `lares rebuild`) and moves NO epoch binding, because the engine blob is vendored TW5 and the built plugin carries zero automerge references"
+role      = "WHAT A DEPENDENCY BUMP COSTS AN ALREADY-FOUNDED NEXUS — the five surfaces that bind to an epoch, measured rather than assumed. The engine CID is NOT the only one: hearthTrueName rides INSIDE every signed device-delegation preimage, and the pluginsCid tracks blobs built from THIS REPO'S OWN SOURCE. CORRECTED 2026-08-09 against the code, replacing this meme's own earlier over-claim: the pluginsCid rides as a LOCAL build-time integrity witness, never a membership criterion — the epoch binds to the ENGINE alone (hearthTrueName = engineCid, the slow ratchet), and the served-plugin layer composes per-operator beneath it on its own fast ratchet. Measured 2026-08-08: a runtime dep bump (automerge · noble · ws) touches exactly ONE surface (the on-disk serde, cured identity-safe by `lares rebuild`) and moves NO epoch binding, because the engine blob is vendored TW5 and the built plugin carries zero automerge references. THREE SHAPES named 2026-08-10: the word \"epoch\" carries a CID CHAIN (the seal epoch), a SCALAR MAX-REGISTER (the corm epoch-lease, per-writer), and a ROLLING WINDOW of markers (a vessel's raise, per-Nexus). They do not convert; ask which SURFACE and the shape follows. A window is count-based, so in a mesh its cost lands on SAFETY rather than liveness — the order-free rhyme that survives is the per-peer receiver-side window, evaluated locally"
+revised-on = "2026-08-10"
 tags      = ["mesh/genesis-doc", "mesh/charter-chain"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/epoch-binding-surfaces"
@@ -44,6 +45,19 @@ a wrong answer here reads identically to a right one until a founding breaks.
 <<~Surface Hearth-true-name "binds/the-TW5-core-blob-sha256 moved-by/a-TW5-submodule-bump ~ engineCid, and it rides INSIDE every signed delegation preimage" >>
 <<~Surface Plugins-CID "binds/the-built-plugin-blob-shas moved-by/THIS-REPO'S-OWN-SOURCE ~ 23 modules + 115 tiddlers packed from our TS; verified at BUILD time by verifyGenesisArtifact — LOCAL integrity, never a membership criterion, and no peer path reads it (#the-real-mover)" >>
 <<~Surface On-disk-serde "binds/automerge + keyhive byte formats moved-by/a-RUNTIME-dep-bump ~ the only npm-movable surface" >>
+
+!!! ★ THE WORD "EPOCH" NAMES THREE SHAPES — say which one a surface means ★
+
+''Three incompatible shapes carry this one word, and nothing had reconciled them.'' Each is correct for its own surface, and a reader who carries one shape onto another surface builds the wrong comparison:
+
+| shape | what it IS | where it governs |
+| ''a CID CHAIN'' | a hash-linked head, one value, its history behind it | the SEAL epoch (this meme's first surface) — a roster or quorum change moves it |
+| ''a SCALAR MAX-REGISTER'' | one monotone number per writer, merged by max | the corm epoch-lease — held per-writer so a concurrent higher value never drops under last-writer-wins |
+| ''a ROLLING WINDOW of markers'' | a moving SET, per-Nexus; markers enter as the Nexus trades and fall off the far end | a vessel's RAISE — supersession and expiry from one mechanism, with no clock |
+
+''The shapes do not convert.'' A chain head orders one lineage; a max-register merges concurrent writers; a window answers //is this still current// without ordering anything. Asking which is //the// epoch reads as the error — ''ask which surface, and the shape follows''.
+
+''AND A WINDOW CARRIES A COST THE OTHER TWO DO NOT.'' It is count-based, so its lifetime tracks the Nexus's own tempo: a quiet Nexus expires nothing and a busy one expires fast. In a totally-ordered chain that costs LIVENESS; ''in a mesh it costs SAFETY'', because the quietest island's window never advances and the slowest peer becomes the replay surface for everyone. The order-free rhyme that survives is the per-peer receiver-side window (IPsec-shaped), evaluated locally, where two receivers may hold different windows for one sender and both be correct — and where the edge answers ''undefined'' rather than a verdict. <<~ confidence Synthesis 12/20 >>
 
 !!! ★ THE ONE MOST EASILY MISSED ★
 

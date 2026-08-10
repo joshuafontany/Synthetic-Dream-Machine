@@ -11,7 +11,8 @@ manaoio   = 15
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the membership doctrine — the privacy invariant of the whole public-facing mesh: the Nexus tracks operator CONTRACTS, never user IDENTITIES. An operator contract carries pubkey + accepts-carriage + charter-epoch and NOTHING more; users SOFT-ATTACH and leave no roster trace; invites are sealed BURNABLE capabilities spent-on-boot that leave no record. We choose to not have the user table. Operator-ruled 2026-07-21."
+role      = "the membership doctrine — the privacy invariant of the whole public-facing mesh: the Nexus tracks operator CONTRACTS, never user IDENTITIES. An operator contract carries pubkey + accepts-carriage + charter-epoch and NOTHING more; users SOFT-ATTACH and leave no roster trace; invites are sealed BURNABLE capabilities spent-on-boot that leave no record. We choose to not have the user table. Operator-ruled 2026-07-21. SECOND CONDITION ruled 2026-08-09: belonging carries TWO conditions — the contract AND agreement with the grammar vectors traded on that Nexus. Agreement rides KEYED, never audited (the MLS RFC 9420 `confirmation_tag` shape): a peer that disagrees cannot produce the binding, so no roster row is needed to record who agrees — the second condition adds NO table and lands back on the no-roster ruling."
+revised-on = "2026-08-10"
 status    = "standing"
 status-why = "operator-ruled and enforced at the members-registry"
 tags      = ["mesh/carry-contract", "mesh/identity-classes", "api/pono/persona-policy", "api/pono/cabal-realm", "api/pono/causal-islands"]
@@ -38,6 +39,18 @@ written   = "2026-07-21"
 > leaves is (a) a carriage contract they consciously signed, or (b) a public Handle-card they
 > consciously posted to `@crossroads`. Everything else — who used the protocols, when, what they
 > read, their private data — leaves no central record.''
+
+!!! ★ BELONGING CARRIES TWO CONDITIONS — the contract, and the grammar ★
+
+''An operator belongs to a Nexus by CONTRACT and by AGREEING WITH THE GRAMMAR VECTORS traded there'' (operator-ruled). The registry records the first; the second never becomes a row, and that reads as the point rather than a gap — ''the invariant above still holds whole''. A node that cannot read what a Nexus trades cannot carry it faithfully, cannot verify what it relays, and cannot be bound by what it never parsed: //contract without grammar-agreement reads as a signature over an unread page//.
+
+''THE SECOND CONDITION IS KEYED, NEVER AUDITED, and that is what keeps it out of the registry.'' The field's one surviving instance (MLS, RFC 9420) folds the declared grammar into the key schedule — ''disagree on the grammar and you derive a different key and fail to decrypt''. It never ASKS a peer whether it understands, because you cannot detect a peer that lies about understanding; it makes the lie non-computable. Twenty-four years of the alternative stand recorded, the same declared-critical-and-not-processed bug shipping in 2002, 2011 and 2026 across three vendors.
+
+''So the check adds no trace, no roster row, and no new authority'' — it rides where the crypto already rides, bilaterally, peer-local, exactly like the rest of this doctrine.
+
+''AND ITS SCALE IS BOUNDED, which the no-roster ruling already anticipated.'' Exclusion power is bounded by the excluder's market share: three fields built this gate correctly and three retreated under open-internet pressure. The one that held gates at the ''group'' boundary, where the members are the whole relevant population and the roster stays local. ''Deployable at Lararium and Nexus scale; at DreamNet scale it predicts the same retreat'' — which is why a bilateral leased contract per operator, and never a confederation-wide roster, is the shape that survives. <<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-invariants >>
+
+<<~ confidence Synthesis-Canon 14/20 >> — the condition stands ruled; ''its mechanism stands UNBUILT'', and a prior treatment waits on another worldline to surface from the sensorium.
 
 <<~ confidence Synthesis-Canon 15/20 >> The corpo's first act stands up the user table — the row per
 human that becomes the product. This doctrine ''chooses to not have the table.'' A Nexus runs
