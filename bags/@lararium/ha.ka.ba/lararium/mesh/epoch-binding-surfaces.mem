@@ -56,6 +56,22 @@ a wrong answer here reads identically to a right one until a founding breaks.
 
 ''Same law, two carriers: a value that only moves forward, and a grant that goes stale when it moves past.'' The chain is the max-register at the charter grain — where what changes is //who may roll it//, which a plain counter cannot express.
 
+!!!! Whose word is it ~ the unblur that has to come first
+
+''Before asking what a shape does, ask who owns the word.'' A word this house mints, it may rule; a word a dependency owns, it MUST NOT redefine — it qualifies at the shore and translates, because redefining an upstream term silently forks the reader's understanding of the upstream's own docs.
+
+| the word | owner | what it names there | our rule |
+| ''epoch'' (bare) | ''ours'' | the monotone fencing frontier — `epoch-lease`, bound by `boundEpoch` | RESERVED. Bare //epoch// names this and nothing else (the rule `epoch-handlers` already set) |
+| ''seal epoch'' | ''ours'', shape from KERI/TUF | the charter's hash-linked lineage, head = `sealEpochCid` | always QUALIFIED. Same law as the fence, at a grain where the writer-set itself rotates |
+| ''CGKA epoch'' | ''Keyhive / BeeKEM'', upstream MLS RFC 9420 | a group-key generation; concurrent rolls ''merge by BLANKING'' and hold NO root secret until a later non-concurrent commit | NEVER ours to rule. Keeps its upstream spelling, always qualified. A max-register picks a winner and this does not — carrying our fence onto it costs FORWARD SECRECY (cabal-realm#the-tie-break) |
+| ''compaction epoch'' | ''DXOS'', borrowed for `bag-epoch` | a snapshot-restart that cuts history behind | always QUALIFIED. It bounds //state-history growth//, never //who may act// — a cut, not a fence |
+| ''epoch (ms)'' | ''POSIX'' | a time ORIGIN — 1970, and a wall-clock offset from it | NOT SPENT HERE. Our wall-clock fields read `POSIX ms`, because a reader meeting both spellings in one file has to guess which authority a number carries — and one of them is the global now this house refuses |
+| ''L4 Theme / strategic epoch'' | ''ours'' (FfzClock) | a rhythmic BAND name, unbounded | pure homonym. Names no mechanism; a grep for the fence should read past it |
+
+''The test that separates them in one question: does the fold pick a WINNER, or blank both paths?'' Max-register and chain-head both pick; CGKA blanks; compaction picks nothing because it is not a fold at all.
+
+''And a lease rides two instruments, not one'' — the epoch-counter for its VALUE, FfzClock for its CADENCE (ffz-clock#the-two-instruments); how fast the frontier SHOULD roll is paced to the adversary's measured creep, never to convenience (ffz-mesh-timing#the-primary-clock).
+
 ''AND THE THIRD SHAPE DIED.'' A vessel's RAISE briefly carried a rolling WINDOW of markers — a moving set, per-Nexus, entered as the Nexus traded and falling off the far end. It refuted on three counts, each fatal alone:
 * ''a set answers //is this listed//, never //is this newer//'', so a partitioned island cannot reason about it locally — the one property a causal island needs most.
 * ''whatever falls off the far end encodes a retention policy nobody wrote down'', and a count-based lifetime tracks the Nexus's own tempo: a quiet Nexus expires nothing, a busy one expires fast, and the slowest peer becomes everyone's replay surface. In a totally-ordered chain that costs LIVENESS; in a mesh it costs SAFETY.

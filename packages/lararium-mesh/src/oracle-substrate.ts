@@ -121,7 +121,7 @@ export async function buildOraclePointer(args: {
     throw new Error(`oracle-pointer: version must be a non-negative integer, got ${args.version}`);
   }
   if (!Number.isFinite(args.expiry) || args.expiry <= 0) {
-    throw new Error(`oracle-pointer: expiry must be a positive epoch-ms, got ${args.expiry}`);
+    throw new Error(`oracle-pointer: expiry must be a positive POSIX-ms timestamp, got ${args.expiry}`);
   }
   const pub    = hex(await ed25519.getPublicKeyAsync(args.signerSeed));
   const fields: Omit<OraclePointer, "sig"> = {

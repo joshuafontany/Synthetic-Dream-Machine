@@ -90,7 +90,7 @@ export interface EnrollmentOffer {
   readonly ephemeralPubkey: string;
   /** A fresh challenge B pins the session to (hex) — the grant must echo it, so a grant cannot replay onto another offer. */
   readonly nonceB:          string;
-  /** Epoch-ms validity bound — an offer past this is stale (no global now; read against a local clock). */
+  /** POSIX-ms validity bound — an offer past this is stale (no global now; read against a local clock). */
   readonly expiry:          number;
 }
 
@@ -134,7 +134,7 @@ export interface GrantTranscript {
   readonly targetVesselId: string;
   readonly nonceB:         string;   // echoes the offer — binds this grant to THIS enrollment
   readonly nonceA:         string;   // fresh — A's own anti-replay
-  readonly expiry:         number;   // grant validity (epoch-ms)
+  readonly expiry:         number;   // grant validity, POSIX ms — a wall-clock, never the fencing epoch
   /**
    * OPTIONAL — a lowercase-hex sha256 that COMMITS the persona signature to a sibling payload the grant CARRIES
    * out-of-band (the STAGE-2 convergence-keyring envelope: a read-key gating who reads every sealed body). The

@@ -62,7 +62,9 @@ interface KeyhiveTokenPayload {
   readonly audience:     string;
   readonly bagUrl:       string;
   readonly access:       CapabilityAccess;
-  /** Absolute expiry (epoch ms) if the caller passed expiresIn; else null.
+  /** Absolute expiry in POSIX milliseconds if the caller passed expiresIn; else null. WALL-CLOCK, and
+   *  deliberately not the word `epoch` — that names the mesh's clockless fencing frontier (`epoch-lease`),
+   *  and a reader who meets both spellings in one file has to guess which authority a number carries.
    *  NOTE (shore): the provider's DelegateArgs carries no expiry, so expiry is
    *  token-advisory only — verifyDelegation enforces it, the crypto layer does
    *  not. Real time-boxing waits on a provider expiry surface. */
