@@ -56,8 +56,6 @@ describe("★ the vault property — the compartments stay unlinked ★", () => 
   });
 });
 
-});
-
 describe("★ the guards cover the FAMILY, not a list of names ★", () => {
   test("★ a derived plane reads as sovereign to the Herm fence ★", () => {
     // The weld test found this: a fence naming "@persona" by exact slug covers a person's planes only by

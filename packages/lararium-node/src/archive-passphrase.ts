@@ -340,10 +340,13 @@ export function repairSplitKek(openPassphrase: string, sealPassphrase: string): 
  * pono shape is not a refusal but a DEGRADE: come up at the anon floor, serve the public shelf (which needs
  * no secret to serve), hold every sovereign act closed, and say loudly what it cannot do until unsealed.
  *
- * AND THE UNSEALING ACT HAS A SHAPE THE MESH ALREADY RUNS. A kahu quorum already signs antigen acts against
- * a pre-rotated epoch chain; a k-of-n remote unseal would reuse that machinery rather than invent a second
- * authority. A crossroads could then come back without waking anyone, if enough of its kahu are reachable —
- * which is what "civic scale" actually asks for.
+ * AND THE RAISE BELONGS TO THIS LAYER ALONE — a correction, because an earlier reading put it one layer out.
+ * Opening a vessel's archive is the act of whoever holds THAT VESSEL's opening secret. It cannot be a kahu
+ * quorum: a cabal is seated FROM declared Handles standing on an already-raised lararium, so a raise waiting
+ * on a quorum could never found the first Nexus — the dependency runs in a circle. A quorum's acts sit one
+ * layer out (the antigen, carriage contracts, the seal lineage) and reach no vessel's archive; a kahu
+ * holding shares would become the collector the vault exists to refuse (waking-floor: KAHU MUST NOT HOLD
+ * SHARES; Tang gives the escrow-free shape a share-holding quorum cannot).
  *
  * WHAT STAYS RULED AND WHAT STAYS OPEN, so a later hand does not mistake one for the other:
  *   RULED   the KEK is passphrase-primary; a random key beside the ciphertext is refused; a missing
@@ -356,6 +359,17 @@ export function repairSplitKek(openPassphrase: string, sealPassphrase: string): 
  * The shape, the Elyncia reading, and the OPEN downgrade-attack question live at
  * lar:///ha.ka.ba/lares/api/pono/waking-floor — the waking floor.
  */
+/**
+ * Whether this vessel's archive OPENS — a reading, never a verdict on whether to proceed.
+ *
+ * The boot asks this and stands accordingly: open → the class the recipe asked for; shut → the waking floor
+ * (`standAs`). A reading rather than a throw is the whole ruling — refusing converts an ordinary power cut
+ * into an outage, while the seal exists against a stolen disk.
+ */
+export function archiveOpens(cfg?: LaresConfig, env: NodeJS.ProcessEnv = process.env): boolean {
+  return !readSealExpected(cfg) || Boolean(env[ARCHIVE_PASSPHRASE_ENV]);
+}
+
 export function assertSealReady(cfg?: LaresConfig, env: NodeJS.ProcessEnv = process.env): void {
   if (readSealExpected(cfg) && !env[ARCHIVE_PASSPHRASE_ENV]) {
     throw new Error(
