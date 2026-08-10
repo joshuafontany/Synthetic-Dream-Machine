@@ -304,3 +304,4 @@ export { deriveRegisterBags, catalogNamedBags } from "./register-bags.js";
 export * from "./persona-scope.js";
 export * from "./persona-planes.js";
 export * from "./holdings-witness.js";
+export * from "./crossroads-cry.js";
