@@ -17,6 +17,7 @@
     "test:e2e": "pnpm --filter @lares/harness test:e2e",
     "witness:founding": "tools/founding-witness.sh",
     "witness:memes": "tools/meme-coordinates-witness.sh",
+    "witness:contract": "tools/contract-witness.sh",
     "witness": "tools/witness-all.sh",
     "test:e2e:live": "pnpm --filter @lares/harness test:live"
   },
