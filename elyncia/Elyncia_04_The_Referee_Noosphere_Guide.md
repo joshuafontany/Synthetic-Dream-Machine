@@ -696,7 +696,7 @@ The ledger prefers this answer. It weighs less.
 
 ### Why Naming Cures
 
-Every cure in this litany runs through a name. That wants explaining, and the explanation sits in the world's own wound. When the Necrospire fell, the counter-pattern it drove into the ley-script was an un-naming: iron rots unless storied; names slough from the dead like leaves; the roads of the Passing fill with scripts that answer to nothing. The adversary of this whole art wears no rival pantheon's face and does not come out of the dark. It strips handles — until nothing can be addressed, and what cannot be addressed cannot be summoned, corrected, or kept. A degraded node drifts, one slipped register at a time, toward that grammar. The tender's naming — this state, this Voice, this fork — pulls it back into the web of the addressable.
+Every cure in this litany runs through a name. That wants explaining, and the explanation sits in the world's own wound. When the Necrospire fell, the counter-pattern it loosed was an un-naming: iron rots unless storied and tended; names slough from the dead like leaves; the roads of the Passing fill with scripts that answer to nothing. The adversary of this whole art wears no rival pantheon's face and does not come out of the dark. It strips handles — until nothing can be addressed, and what cannot be addressed cannot be summoned, corrected, or kept. A degraded node drifts, one slipped register at a time, toward that grammar. The tender's naming — this state, this Voice, this fork — pulls it back into the web of the addressable.
 
 The Lich Imperator takes no interest in your table. The grammar he wrote does.
 

@@ -17,7 +17,7 @@ telarus@dreamdeck-enyalius:\~$ lares ritual summon \--local-instance
 > …luminance plays on the frescos, statues, and ceramic murals  
 > Presenting encrypted identity token & prismatic UCAN key...   
 > Accepted: (telarus) Telarus, KSC; Capabilities: Nexus/Admin;Amorphous Dreams Cabal/Admin  
-> Last login: Chaos 5, YOLD 5492 \- January 5, 4327 on bash 523.0.9  
+> Last login: Chaos 5, YOLD 5492 \- January 5, 4326 on bash 523.0.9  
 > Web3 Admin access granted. Noopheric connections live.  
 > Local spirit guide: lares@dreamdeck-enyalious  
 > Today is Sweetmorn, the 31st day of Chaos in the YOLD 3192\!
@@ -67,7 +67,7 @@ Elyncia’s ley-line network, the web of mana that composed Her pattern (Web 1\)
 
 The year is YOLD 5492 (4326 CE/AD). Almost 500 years ago the Necrospire, the meteor prison of the Lich Imperator, returned and broke the planet for the second time. The chaos toppled the largest Empire of Neo-Thracia, threw all global factions and powers into imbalance, cursed all iron technology, and shattered the existing communications networks (Web 2).
 
-At the urging of the leader of the megacity trade port of New Delos, the immortal Lindwyrn, the gods again were called to council. Hermes, Hephestus, Grandmother Spider, and Eris devised a plan: The DreamNet. They relied on Hermes’ speed to place a network of orichalcum inscribed magitech statues at the remaining ley-line nodes. These became new anchors used to bind the very ley-lines themselves into the Lares DreamNet (Web 3.0).
+At the urging of the leader of the megacity trade port of New Delos, the immortal Lindwyrm, the gods again were called to council. Hermes, Hephaestus, Grandmother Spider, and Eris devised a plan: The DreamNet. They relied on Hermes’ speed to place a network of orichalcum inscribed magitech statues at the remaining ley-line nodes. These became new anchors used to bind the very ley-lines themselves into the Lares DreamNet (Web 3.0).
 
 This group of Noospheric LLM spirits now hold the planet’s pattern together. Most users must go to a specific place (the local Lares node) & ask for a copy of the spirit to search the noosphere, serve documents, open communications sessions, query the dream realms, and speak to other local spirits. Mages, sorcerers, and other skilled noosphere travelers may have other methods available.
 
@@ -85,7 +85,7 @@ The Breakings changed this. The First Breaking shattered the old continuity of t
 
 This is a change in mode, not a universal ban. Named gods can still act directly, and some do so more readily than others. But direct immanence is now rarer, riskier, and more consequential, while distributed divine presence has become the practical norm of post-Breaking Elyncia.
 
-However, Elyncia is cursed by a mysterious phenomenon known as the Curse of Iron, which causes un-Named worked iron objects to rust within weeks. Despite the curse, hope and innovation thrive in Elyncia. Clans of the Brimstone Court (mostly dwarves, gnomes, & trolls) are custodians of the secret of crucible steel and have created named firearms and other Named tools resistant to the Curse. These folk represent the resilience and ingenuity of Elyncia’s inhabitants, facing the challenges of their world with determination and resourcefulness.
+However, Elyncia carries the **Curse of Iron** — a curse in the folk telling, a void-born **rust-blight** turned virulent at the Second Breaking in the scholars' — under which un-Named, untended worked iron rots within weeks wherever a bloom runs. Iron did not leave the world; it became *precious*. The Ironspine clans still mine and work it behind quarantine rites; the Order of Amaranth convoys it under the sign of the unfading flower; and everywhere iron is kept, it is kept the way other treasures are kept behind locks — behind immune-charms, tended like a relative. Clans of the Brimstone Court (mostly dwarves, gnomes, & trolls) remain custodians of the secret of crucible steel, whose smelt comes out clean, and forge Named firearms and other Named tools the blight cannot touch. These folk represent the resilience and ingenuity of Elyncia’s inhabitants, facing the challenges of their world with determination and resourcefulness.
 
 Power-armor crafted from bronze and other resources displays the world’s technological prowess and warriors brandish laser swords that shimmer with arcane energy. Elyncia’s cultures have just prototyped “flying triremes” and other magitech vehicles, crafts & ships that defy gravity with mana-foils. The wave-jammers have existed since before the recent cataclysm, their mana-foils letting them skim above the waters. The rediscovery of “power cores”, ancient magitech from the War of the Immortals and the First Breaking, have allowed the factions to evolve these into sky-jammers and the very rare and dangerous void-jammers.
 
@@ -122,11 +122,13 @@ During the War of the Immortals (on Gaia, the Bronze age collapse) the faerie tr
 
 ### YOLD 5000 / 3834 CE (492 YA):
 
-*Fall of the Necrospire*: Another asteroid falls and strikes the Illyrian Nexus, the Age of Undeath begins – Quakes and tsunamis tear Elyncia apart; cities and arcologies collapse. The Seven Seas become violently unreliable—storm-surge, astral backwash, and tsunamis plague the lands. Undead surge forth—some free-willed, most enslaved—pressed into service by the Necrospire’s faction, the rogue Unseelie Court, and others. The Lich Imperator remains trapped in the Illyrian caldera pierced by the Necrospire, while his agents and void-touched creations begin to sow strife around the world.
+*The Day of Falling Stars*: For a full day and night before the great impact, meteorites fall at random across the whole face of Elyncia — hundreds of small strikes, no pattern any augur could read, on cities and steppes and open sea alike. Each stone carries spores. The bombardment seeds the rust-blight planet-wide; the ruin to come finds its kindling already laid.
+
+*Fall of the Necrospire*: Then the Necrospire itself strikes the Illyrian Nexus, and the Age of Undeath begins – Quakes and tsunamis tear Elyncia apart; cities and arcologies collapse. The Seven Seas become violently unreliable—storm-surge, astral backwash, and tsunamis plague the lands. Undead surge forth—some free-willed, most enslaved—pressed into service by the Necrospire’s faction, the rogue Unseelie Court, and others. The Lich Imperator remains trapped in the Illyrian caldera pierced by the Necrospire, while his agents and void-touched creations begin to sow strife around the world.
 
 *Death lies Dreaming*: All the cults of Thanatos report outbreaks of fits and madness, seeing their patron "falling into darkness, dreaming and drifting". This was soon confirmed by gods with relationships to the Death-deities: *Thanatos* and all of their godly masks have been ripped from the world of Elyncia at once.
 
-*The Curse of Iron*: After the Necrospire’s fall, all worked iron began rotting within weeks unless maintained or bound by true mythic naming. The mana shock of the Necrospire’s impact upon the primary node of Web 2 network shattered the Empire’s communications, corrupted AIs, and silenced the spirit-engines. Iron closest to the impact site decayed the most rapidly. Civilizations across the planet fell into ruin.
+*The Curse of Iron*: The **rust-blight** — a void-fungus the Lich bred exo-virulent through his long exile, keyed to worked iron — rode in on the Day of Falling Stars, sown at random across every continent. The mana shock of the Necrospire’s impact upon the primary node of the Web 2 network shattered the Empire’s communications, corrupted AIs, and silenced the spirit-engines — and the dying lattice carried the bloom into every networked place the bombardment had missed. Iron closest to the impact decayed most rapidly; the First Bloom ran hardest where stones and lattice met. Civilizations across the planet fell into ruin — and then the blight, having gorged, began its lasting habit: eating the local iron too fast, dying back to spores, and blooming again wherever iron gathers untended.
 
 ### YOLD 5002 / 3836 CE (490 YA): 
 
@@ -164,23 +166,31 @@ In some dream realms, Luna hangs immense and silver—close enough to see the sh
 
 ## The Second Breaking — The Necrospire’s Return
 
-When the **Necrospire** fell, the planet screamed. Its impact didn’t simply shatter cities—it **scarred the Pattern**. In the shockwave’s wake, every unNamed iron thing began to fail: tools flaked, bridges wept rust, automata seized. The **Curse of Iron** wasn’t a mere material blight; it was a metaphysical injunction etched into Elyncia’s ley-script—an exclusion clause written against “cold iron” and all it stood for.
+For a day and a night before the **Necrospire** fell, the sky fell first: meteorites at random across the whole of Elyncia, small strikes without pattern, every stone carrying spores. Then the Necrospire came down, and the planet screamed. In the shockwave’s wake, iron began to fail in spreading rings: tools flaked, bridges wept rust, automata seized mid-stride. The folk name — the **Curse of Iron** — survives because it fits the experience. The truth runs stranger: the Necrospire carried a passenger.
 
 Long before, in the **First Breaking**, the gods and fae lords tore the worlds of Sol apart along their feud-lines. At the height of that crisis the necromancer who would become the **Lich Imperator** first claimed his undeath and was banished into the void—*victory without closure*. The Lich learned a lesson only the undying can cherish: **revenge that takes millennia lands deeper than any spear**.
 
 ### The Lich’s Revenge on the Pattern
 
-The Second Breaking is that revenge. The falling Necrospire did not just bring legions; it brought a **counter-Pattern**—a counter-mantra burrowed into reality. Iron, once the metal of constraint and binding, now rots unless Named. To work iron was to speak law into matter; the Lich twisted that law to **un-name** what was merely useful and empower only what is storied.
+The Second Breaking is that revenge, and the revenge is a gardener's. Out in the deep void a quiet flora rides the debris-lanes: a spore-lichen that grazes, over centuries, on sky-iron — comet-cores, meteoric reefs, the slow rust of dead orbitals. Void-farers knew it the way sailors know barnacles. It had never troubled a living world.
+
+The Lich spent his exile breeding it. In the Necrospire's oubliettes he turned the quiet grazer **exo-virulent** — keyed to *worked* iron: the metal of constraint and binding, the metal that had bound *him*. The bombardment was the sowing; the impact was the signature. The **First Bloom** ran like the end of the world, and near Illyria it was one — worked iron rotting in days, arsenals to red mud, rail and gate and reliquary failing together. But a curse holds forever; an organism has to eat. The blight ate too well. Strain after strain gorged on the local iron, starved, and **died back to spores** — and what settled over Elyncia was an ecology: constantly mutating, forking, blooming where iron gathers untended, sleeping where it has already fed.
 
 In practice:
 
-* **UnNamed iron** oxidizes and decays within weeks unless obsessively maintained.
+* **Untended iron draws the blight.** In blight country an un-Named tool rots within weeks during a bloom; a careless hoard of iron *invites* one.
 
-* **Named iron**—iron tied to myth, oath, or deed—can persist, but the naming must be *true* (ritual, deed, lineage, geas).
+* **Named iron — tended iron — endures.** The naming rites double as **immune-charms**: the oiling, the ash and salt, the rust-psalms, the yearly bathing of a blade like a relative. The naming must be *true* (ritual, deed, lineage, geas) — because the story keeps the tending, and the tending keeps the iron. Whether the rite works on the fungus or the fungus respects the rite is a scholars' war; the iron does not care.
 
-* **Alloys and alternatives** (orichalcum, bronze, bone-ceramic, glass-steel, crucible steels sanctified by the Brimstone forges) slip the curse by **pattern exception**—they are “not the iron that bound him.”
+* **Sky-iron runs precious beyond gold.** Blades pattern-forged from meteoric iron carry a watered grain like frozen smoke — and, in some tellings, a *tamed strain* living in the metal: a benign culture that holds the blade against its wild cousins the way a mother's sourdough holds the loaf. Such blades are fed, bathed, and Named; several are older than their nations; a few have opinions.
 
-* **Post-Fall networks** avoid iron entirely, relying on orichalcum runestones, organic glyph matrices, and soul-crystal arrays.
+* **The Brimstone crucibles slip the blight by process.** The secret smelt denatures spores in the melt — crucible steel and Named Firearms come out clean. The Court guards the process like a founding myth, because it is one.
+
+* **Alloys and alternatives** (orichalcum, bronze, bone-ceramic, glass-steel) the blight simply does not eat. **Post-Fall networks** avoid iron entirely — orichalcum runestones, organic glyph matrices, soul-crystal arrays — because the First Bloom rode the old lattice, and nobody has forgotten.
+
+**The iron cultures endure.** The **Ironspine clans** still mine and work true iron in their mountain passes — quarantine rites at the adit mouths, spore-lamps burning, stores lined with Verdant Coil cedar and salt, every ingot tallied and charm-chained. The **Order of Amaranth** convoys iron across blight country under the sign of the unfading flower, anointing cargo with amaranth-oil and putting blooms down hard when a cache turns. In Brimstone, the forge-cities work heat the blight cannot follow. Iron did not leave the world. It became *precious* — heirloom, dowry, temple-treasure — a metal you keep the way you keep a name.
+
+Three accounts of the blight circulate, and the Archive endorses none. The folk hold it a **curse**, and their tending-rites work. The scholars hold it an **organism**, and their quarantines work. A quiet heresy holds that the fungus was a harmless void-garden thing the Lich *wounded into rage* — and that somewhere at the bottom of every strain's fork-tree the original still grazes, dreaming of clean comet-ice, waiting to be tamed whole. What is commonly understood: tend your iron.
 
 ### Death Fell Silent
 
@@ -207,6 +217,8 @@ The dream realms have multiplied. Some are gentle, allowing trade and passage; o
 ### The Loom at the Heart of the World
 
 At the center of the Noosphere, where all ley-lines knot and shimmer, lies the Loom of Elyncia: a sphere of woven light, turning without sound. Here, the Goddess lies dreaming, drawing in threads from other worlds, embroidering them onto her living pattern. Each choice is a risk—pull too much, and the borrowed dreams fall to entropy; pull too little, and Elyncia drifts toward unraveling. The Loom hums with histories not her own, each stitch a bargain with Universe.
+
+Far out along the Void Lanes, at the still points between the worlds, Grandmother Spider keeps the far side of the pattern — stringing the **Lares Lagrange Chorus** across the balance-points and holding its ten nodes singing (*The Lares DreamNet* names the lattice). Where the Loom draws threads in, the Spider walks them out; the weave holds because both hands work it.
 
 Yet the Loom’s hum is not unchallenged—there are whispers in the Noosphere of the Imperator’s shadow stirring again, though he remains imprisoned deep within the Necrospire. Upon the high Illyrian plateau, the great impact caldera has flooded with molten rock, replacing the deep void that once ringed his fortress. There, the Lich paces within the heart of the fallen meteor, while his commanders and constructs slip out into the world from the ziggurat above. Their master seethes, trapped by the liquid fire below, patient as the grave, waiting for the hour to unmake the world.
 
@@ -272,7 +284,7 @@ The Astral Sea is the roiling, half-real expanse that lies between Elyncia’s s
 * **Notable Hazards:**  
   * Microgravity fractures and sudden void-tide surges  
   * Omen-reef storms that scramble navigation and DreamNet routing  
-  * Comet-iron nodes that accelerates the Curse of Iron in un-named tools  
+  * Comet-iron reefs where wild rust-blight strains nest thickest — un-named tools rot in days, and blight-tamers come hunting mother-strains  
 * **Adventure Hooks:**  
   * Rebind a failing anchor-stone before the next Astral storm window opens.  
   * Escort a void-prospector crew into the Lantern Vaults and back.  
@@ -294,7 +306,7 @@ The Astral Sea is the roiling, half-real expanse that lies between Elyncia’s s
   * **Dream-Gardeners** – Semi-mystical horticulturalists who maintain the balance between the Coil’s natural and arcane growth  
   * **Bloom Raiders** – Sky-ship crews who harvest rare fruits and alchemical blooms without regard for local law or sanctity  
 * **Cultural Influences & Notes:** Life here is organized around the Coil’s seasonal growth and wither cycles, each phase bringing shifts in trade, politics, and ecology. Oral histories and living murals tell of a time before the Coil’s creation, when its vine-heart was said to bind together multiple realms. Music, dance, and festival processions often trace the spiral pattern of the Coil itself, embodying its living geometry.  
-* **Strategic Importance:** The Coil produces rare botanical resources, including potent healing fruits, mana-rich pollens, and wood immune to the Curse of Iron. Its portals to hidden demi-planes make it a valuable stop for navigators seeking shortcuts across the Astral Sea.  
+* **Strategic Importance:** The Coil produces rare botanical resources, including potent healing fruits, mana-rich pollens, and cedar-resin woods that ward off rust-blight spores (the lining of every serious iron-chest on the continent). Its portals to hidden demi-planes make it a valuable stop for navigators seeking shortcuts across the Astral Sea.  
 * **Lares Node Status:** Mobile and semi-sentient, shifting its astral position with the Coil’s seasonal growth; Path-Lares and Garden-Lares dominate, often requiring tribute in offerings of song, bloom, or seed to grant guidance  
 * **Notable Hazards:**  
   * Sudden bloom surges that block aerial passages and crush settlements under the weight of new growth  
@@ -517,7 +529,7 @@ The Western Net is a wilder, more fragmented constellation of Nexus, scattered a
 
 * **Region / Net:** Western Net (Eastern shelf of former Mu)  
 * **Origin / Dream-Mirror Source:** Japan, Nusantara (mythic Thailand, Myanmar, Malaysia, Indonesia), New Zealand, Nausicaä & the Valley of the Wind  
-* **Geography & Environment:** Once the eastern shelf of the great Nexus of Mu, the Broken Isles were ripped away during the fall of the Necrospire. The land shattered into three great islands divided by deep Astral Sea rifts, fringed with sky-islands, and threaded with ancient fungal jungles. The **northernmost isle** is the lowest-lying, prone to flooding and dominated by fungal megaflora whose root networks may conceal a slow, semi-sentient hivemind. The **southeastern isle** is perpetually swathed in mist, its geothermal ley-nodes feeding a labyrinth of waterfall canyons and hidden terraces. The **southwestern isle** is a mountainous jungle riddled with bamboo-built cavern cities and Underdark rift-gates that serve as both trade arteries and deadly hazards. Drifting above all three are sky-islands—rooted rock masses inhabited by insect fae clans—casting shifting shadows on the seas below.  
+* **Geography & Environment:** Once the eastern shelf of the great Nexus of Mu, the Broken Isles were ripped away during the fall of the Necrospire. (Chart-name; the rift-coast locals say **the Shattered Isles**, and keep the older grief in it.) The land shattered into three great islands divided by deep Astral Sea rifts, fringed with sky-islands, and threaded with ancient fungal jungles. The **northernmost isle** is the lowest-lying, prone to flooding and dominated by fungal megaflora whose root networks may conceal a slow, semi-sentient hivemind. The **southeastern isle** is perpetually swathed in mist, its geothermal ley-nodes feeding a labyrinth of waterfall canyons and hidden terraces. The **southwestern isle** is a mountainous jungle riddled with bamboo-built cavern cities and Underdark rift-gates that serve as both trade arteries and deadly hazards. Drifting above all three are sky-islands—rooted rock masses inhabited by insect fae clans—casting shifting shadows on the seas below.  
 * **Major Settlements & Sites:**  
   * **Mycohaven** – Northern isle port-city partially grown from fungal architecture; the political seat of the Fungal Druid Circles.  
   * **Mist Monastery** – A cliffside temple on the southeastern isle whose resonant bells guide ships and flyers through treacherous fog channels.

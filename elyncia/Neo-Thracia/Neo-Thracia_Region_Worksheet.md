@@ -16,9 +16,9 @@ Task: Refine Neo-Thracian Nexus Region worksheet/outline (no full OGA writeup; t
 Slogan (brochure-voice): *“Where the empire fell, yet the grim horsemen ride still.”*
 
 **Tilt-history (truth engine):**
-An ascendant magitech empire riding Hebros trade + Web2 arterie (“civilization” as conquest machine) hit its peak, then got kneecapped by interacting catastrophes ("The Second Breaking"): 
+An ascendant magitech empire riding Hebros trade + Web2 arteries (“civilization” as conquest machine) hit its peak, then got kneecapped by interacting catastrophes ("The Second Breaking"): 
 
-**Death fell silent** and the **Iron Curse** made “normal iron” unreliable, cracking the empire’s logistics and sacred infrastructure. Spirit Engine daemons and the empires synthetic horses and automatons failed or went rouge. The Necrospire’s impact in nearby Illyria shattered parts of Elyncia, with the Hebros delta artery collapsing into **shoals/whirlpools/shattered bridges**. The DreamNet then flooded with necro-scripts; rift mazes sealed the overland routes, a maelstrom sealed the Hebros mouth / Astral Sea routes to the Illyrian archipelago and other Nexus. **Neo-Thracia was cut off for 489 years**, reopening only recently (maelstrom breaks up in YOLD 5491; start of play YOLD 5492).
+**The sky fell for a day** — the Day of Falling Stars, random meteorites seeding the rust-blight across every land — then **Death fell silent**, and the **Iron Curse** made “normal iron” unreliable: a blight that blooms, gorges, and dies back to spores, cracking the empire’s logistics and sacred infrastructure wherever iron gathered untended. Spirit Engine daemons and the empire's synthetic horses and automatons failed or went rogue. The Necrospire’s impact in nearby Illyria shattered parts of Elyncia, with the Hebros delta artery collapsing into **shoals/whirlpools/shattered bridges**. The DreamNet then flooded with necro-scripts; rift mazes sealed the overland routes, a maelstrom sealed the Hebros mouth / Astral Sea routes to the Illyrian archipelago and other Nexus. **Neo-Thracia was cut off for 489 years**, reopening only recently (maelstrom breaks up in YOLD 5491; start of play YOLD 5492).
 
 ## 2) Region Statline (campaign physics)
 
@@ -65,7 +65,7 @@ DEM-based cartography, sea/astral level ~-10m, huge fluxlands/rift zones; Neo-Th
 | 3  Hebros river delta approach  |  New Delos & other Nexus | Legal but monitored by river forts | Toll + shrine clearance | Cult attention; rumor tags on travelers.; New Delos agents & opposition faction agents. |
 |4 Fluxlands/Rift Mazes/Astral Sea routes | Illyria, Winterlands, and other Nexus | Taboo; Dangerous. | Oaths, guide fees, contamination tithes. | 
 
-### Map & scale notes (for later, but it shapes the worksheet)
+### Map & scale notes (shapes the worksheet)
 
 * Base cartography: DEM-like terrain as the “truth layer,” with rift/flux overlays. Exploration markup as the “play layer.”
 * Ocean/astral-sea level offsets and Summerlands relationship:
@@ -73,7 +73,7 @@ DEM-based cartography, sea/astral level ~-10m, huge fluxlands/rift zones; Neo-Th
 
 ### Ambient Tables
 
-These are the Region’s “UI buttons.” (We’ll write the actual tables later.)
+These are the Region’s “UI buttons,” described by function; the rolled tables land at the table’s own pace.
 
 **Ambient tables:**
 
@@ -146,7 +146,7 @@ Use these as **always-on** scene fuel.
 * **Unseelie agents** (clandestine): destabilize alliances; reclaim fae-haunted heartland territories.
 * **Dominion of Magic legionaries** (expeditionary): want ley hubs + relic tech; don’t care who they break. 
 * **Krull’s Order of Amaranth scouts** (patrol wardens): watch the mountain passes, restore the border forts, broker passage for sworn parties, and quietly collect relic-claims for the Order.
-* **Free Cities spies / Delian operatives** ("Adventerer’s Guide" cover): seek leverage vs Dominion; collect knowledge and salvage; want “power core” rumor confirmation. 
+* **Free Cities spies / Delian operatives** ("Adventurer’s Guild" cover): seek leverage vs Dominion; collect knowledge and salvage; want “power core” rumor confirmation. 
 
 **Caverns-native polities (the Cavern’s “real governments”):**
 
@@ -160,7 +160,7 @@ Jennell’s history gives you the core move: **old royal playground becomes a be
 
 Ainos sells itself as a “lake-city,” though Lake Stentoris is less one lake and more a scatter of dark waters stitched together by reeds, salt-crust flats, and old river channels. Locals will tell you it has always been like this—an inland basin of “watchful eyes,” perfect for hiding barges, cult-processions, and inconvenient truths. The oldest stones (if you can find someone willing to guide you to them) sit on sun-bleached limestone ridges that look suspiciously like old shorelines, with fort ruins that stare out across grass instead of waves. Travelers learn fast: the high ground isn’t always the safest ground, but it’s usually the driest—and in Stentoris country, “dry” counts as a luxury.
 
-The lake-basin is a stair-step world: long sand ridges (locals call them “fossil roads”) run like pale causeways across the lower flats, while the reed-forests fill everything in between with head-high labyrinth. Nights pool cold air in the basin, so mists hang until midday, and the fog does strange things to sound—your guide’s voice can seem to come from the wrong direction, or arrive a few seconds late, like the land is buffering. Old shrine-tops poke out of silt in places where the faithful insist the waterline used to be (or might be again, depending on which priest you offend). And yes, there are persistent rumors of a beached fleet—galley skeletons upright in the dirt, as if the lake simply walked away and forgot to take them along.
+The lake-basin is a stair-step world: long sand ridges (locals call them “fossil roads”) run like pale causeways across the lower flats, while the reed-forests fill everything in between with head-high labyrinth. Nights pool cold air in the basin, so mists hang until midday, and the fog does strange things to sound—your guide’s voice can seem to come from the wrong direction, or arrive a few seconds late, like the land is buffering. Old shrine-tops poke out of silt in places where the faithful insist the waterline used to be (or might be again, depending on which priest you offend). And yes, there are persistent rumors of a beached fleet—galley skeletons upright in the dirt, as if the lake simply walked away and forgot to take them along. River-pilots keep a saying for the whole watershed: *“Stentoris gave its water to the mountains, and the mountains never gave it back.”* Most who say it mean it as weather-lore. The oldest chanters do not.
 
 Ainos itself is built like an argument between centuries. Whole quarters are empty, walled off, or “temporarily” claimed by one faction’s paperwork and another faction’s knives. The imperial-era grids still show through in the street plan, but the lived city clusters where food, water, and warding are reliable—especially near the lake-cults who offer purification rites, safe-conduct tokens, and “iron-blessing exceptions” (all perfectly legitimate, of course, and priced accordingly). Outsiders come looking for salvage, contracts, or lost capitals; locals come looking for missing kin, missing names, and missing days. If you’ve heard tales of old Thracian under-works—sealed halls, forbidden chapels, beast-king legacies—people in Ainos will smile politely and change the subject, which is usually how you know you’re getting warm.
 
@@ -173,21 +173,21 @@ Ainos itself is built like an argument between centuries. Whole quarters are emp
 
 #### Districts
 
-* **The Fossil Roads:** elevated sand-spits used as caravan lanes; watchposts, toll shrines, ambush alcoves, and the occasional “temporary” barricade.
+* **The Fossil Roads:** elevated sand-spits used as caravan lanes; watchposts, toll shrines, ambush alcoves, and the occasional “temporary” barricade. (The regional word: any raised ridge or causeway-lane running over wetland answers to *fossil road* — the Stentoris basin and the Vale floor both speak it.)
 * **The Sinking Temples:** half-buried sanctuaries where roofs and lintels poke from marsh; pilgrimage site, relic-market, and perfect place to get recruited into something you didn’t mean to join. May have Lares shrines (contested).
 * **The Empty Wards:** whole blocks inside the old walls kept dark—some by law, some by fear, some by whatever keeps knocking on the gates during fae nights.
 * **The Orpheion Steps:** a terraced hillside in the city of cracked amphitheater-stones and vine-choked stairs where Orphic chanters swear the lake “answers” in harmonics on mist-mornings; part pilgrimage route, part public court, part audition hall for anyone claiming a named Song—bring coin, bring witnesses, and don’t sing what you can’t unsing. Public LAres shrines available.
-* **The Lake Towns:** a loose necklace of reed-edge hamlets and sand-spit market-stops scattered around Stentoris’s “scattered eyes,” each with its own saint, taboo, and toll; they trade fish, salt, shrine-charms, and rumors like currency, and every town swears it alone knows the real safe channel—especially when the mists come down and the lake starts pretending it’s bigger than it is.
+* **The Lake Towns:** a loose necklace of reed-edge hamlets and sand-spit market-stops scattered around Stentoris’s “scattered eyes,” each with its own saint, taboo, and toll; they trade fish, salt, shrine-charms, and rumors like currency, and every town swears it alone knows the real safe channel—especially when the mists come down and the lake starts pretending it’s bigger than it is. Skara and Wet-Bell of the guide-roster (Vale worksheet §6) stand among these.
 
 ### Zones
 
 #### Zone 1 — The Caverns of Thracia (& surface ruins)
 
-Core idea: **imperial leisure-palace → beast-polity megadungeon → outward raids + cult wars**. Multi‑faction violence; cult strongholds; “old imperial” horrors. Jaquays’ strata: “royal playground carved by enslaved beastfolk”, beastmen revolt, outlawed death worship, invading tribes, etc.
+Core idea: **imperial leisure-palace → beast-polity megadungeon → outward raids + cult wars**. Multi‑faction violence; cult strongholds; “old imperial” horrors. Jaquays’ strata: “royal playground carved by enslaved beastfolk”, beastmen revolt, outlawed death worship, invading tribes, etc. The capital itself sits far up the Tonzos in an enclosed karst polje — **the Breathing Vale** — under an intermittent lake that drowns and reveals the megalopolis by season; the full dossier (lake-states, watershed villages, guides, the Below's factions) lives in the Vale worksheet, the campaign's sharp end.
 
 Postcard places:
 
-* **The Lost City Surface Ruins:** swamp‑edge foundations, hidden entrances, patrol ecology.
+* **The Breathing Vale & the Lost City:** three ruin-crowned hills in silver water, drowned avenues readable from a boat, hidden entrances, patrol ecology — see the Vale worksheet.
 * **The Gates of Death:** Thanatos’ threshold; cult‑kept choke‑point.
 * **The Chapel of Thanatos:** death‑rite space with strict watchers.
 * **Hall of the Sphinx:** a proud old hall that demands wit or tribute.
@@ -201,14 +201,14 @@ Core idea: limestone labyrinths, sinkholes, monastery-forts, and **rift mazes th
 Postcard places:
 
 * **The White Teeth Escarpment:** a cliffline full of swallow-holes; rope bridges that “used to be” imperial roads.
-* **The Hiss Caves:** warm vents + old workshops; technomagic tribes harvest pre-curse alloys here.
+* **The Hiss Caves:** warm vents + old workshops; technomagic tribes harvest pre-curse alloys here. Hiss-Gate Steading of the guide-roster keeps the gate.
 * **The Split Pass:** an old imperial gatehouse cut in half by a rift—both halves still enforce different laws.
 * **The Shepherd-Warden Towers:** “civilian” hill forts that now run protection rackets (or protection miracles).
 * **The Chalk Labyrinth:** a living rift-maze that reorders itself each watch; great for chase scenes and lost caravans.
 
 #### Zone 3 — The Lake-lands of Ainos (Lake Stentoris)
 
-Core idea: inland holy lakes + sparse city + cult jurisdiction. It’s a **ritual economy**: rites, ferries, oaths, and salvage certification—because nobody trusts raw iron or raw history anymore. (Your Orphic/Hekate axis goes here.)
+Core idea: inland holy lakes + sparse city + cult jurisdiction. It’s a **ritual economy**: rites, ferries, oaths, and salvage certification—because nobody trusts raw iron or raw history anymore. (The Orphic/Hekate axis lives here.)
 
 Postcard places:
 
@@ -227,7 +227,7 @@ Postcard places:
 * **Bridge-Stumps & Bell-Towers:** drowned shrine infrastructure sticking out of the muck like accusations.
 * **Dominion Forward Camp:** clean tents, automaton sentries, Dominion legions. Offer “safe” maps, threat of conscription.
 * **The Salt-Shadow Fields:** farmland that becomes a mirror-flat tideplain at night.
-* **The Shoal-Bazaar:** scavenger flotillas trading in dry wood, rope, and non-iron fasteners.
+* **The Shoal-Bazaar:** scavenger flotillas trading in dry wood, rope, and non-iron fasteners. Threshold of the guide-roster stands a reed-day inland.
 * **The Mouth of the Hebros:** still “angry” with residual maelstrom logic—your big regional threshold. Offers "fata morgana" like glimpses of Illyria, debris sometimes includes fresh items from ~500 years ago.
 
 ---
@@ -235,4 +235,4 @@ Postcard places:
 ## 6) Weird Handle / "Glitch Insert"
 
 **Field effects / anomalies**
-Purpose: turn metaphysics into handles: rift types, necro-fog effects, iron-curse escalation clocks, shrine-ritual outcomes. Use `Caverns_of_Thracia.md` as a guide, "upgraded" with our Orichalcum Age Mythpunk themes.
+Purpose: turn metaphysics into handles: rift types, necro-fog effects, iron-curse escalation clocks, shrine-ritual outcomes. Use `Caverns_of_Thracia.md` as a guide, "upgraded" with the Orichalcum Age Mythpunk themes.

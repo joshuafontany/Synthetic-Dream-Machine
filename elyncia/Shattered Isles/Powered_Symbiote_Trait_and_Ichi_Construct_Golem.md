@@ -22,7 +22,7 @@ The system wraps around or is helmed by the operator. The operator uses the syst
 
 **Action economy:** The system perceives and can communicate but cannot act independently. The operator gains the system's Burn talents and item features.
 
-**Damage Threshold (DT):** The system grants its Level as DT to the operator while worn. DT scales with system category and degrades with negative Levels. Note: `DT 1` does not prevent any incoming dmage, but can serve as a higher base for temproary DT bonuses from gear, traits, or powers. These other sources of DT can also be damaged or degraded.
+**Damage Threshold (DT):** The system grants its Level as DT to the operator while worn. DT scales with system category and degrades with negative Levels. Note: `DT 1` does not prevent any incoming damage, but can serve as a higher base for temporary DT bonuses from gear, traits, or powers. These other sources of DT can also be damaged or degraded.
 
 | Category | Typical DT | Examples |
 |---|---|---|
@@ -54,7 +54,7 @@ The system has a **Replenish score** (re #) representing its power reserves. Whe
 
 - The system **counts as** one Powered System. You cannot operate multiple Powered Systems simultaneously.
 - The symbiotic interface occupies **1 trait or item slot** on the operator's sheet (a Hallmark companion).
-- When in Symbiosis Mode, this Hallmark slot **overlaps** with the one worn-armor slot. Reduce the usual encumbrance of the worn symbiotic gear by 1. On light mecha and larger vehicles, the relationship in inversed. The Hallmsrk trait allows the operator to occupy the vehicle's helm wihtout taking any vehicle capacity slots. The biological/magical bond handles integration.
+- When in Symbiosis Mode, this Hallmark slot **overlaps** with the one worn-armor slot. Reduce the usual encumbrance of the worn symbiotic gear by 1. On light mecha and larger vehicles, the relationship inverts: the Hallmark trait allows the operator to occupy the vehicle's helm without taking any vehicle capacity slots. The biological/magical bond handles integration.
 - Installed mods, vehicle-scoped gear, mecha system, and Powers-as-Traits can fill a system-character's physical and/or trait inventory slots.
 - Repair materials, spare parts, and uninstalled upgrade components occupy **separate** item slots on the operator-character's sheet as normal gear.
 
@@ -68,11 +68,11 @@ The system's physical item inventory slots can be filled with **installed mods**
 - **Burn-triggered mods** (e.g., forcefield, speed burst, weapon systems) — require a Burn activation roll to use.
 - **Structural mods** (e.g., +armor rating, DT improvements, hull reinforcement) — always active regardless of power state.
 
-The number of available mod slots depends on the system's item inventory (7 + STR, modified by Inner Fire or other slot-expanding traits). Mods can be repaired, replaced, or upgraded through the Hallmark upgrade tables, materials, and XP investment.
+The number of available mod slots depends on the system's item inventory (7 + STR, plus any Inner Fire flexible slots assigned here, plus other slot-expanding traits). Mods can be repaired, replaced, or upgraded through the Hallmark upgrade tables, materials, and XP investment.
 
 ### Hull/Vitality Mods
 
-In combat, the operator of a Powered Symbiote is the target of all incoming damage. Hull/Vitality mods are available, and many come as standard upgrades on light mecha and large vehiles. This structure or hull serves as an additional pool of temporary Life, aside from any force-field or other temporary Life. Damage is tracke to this pool first, unless traits or other effects over-ride this. Non-symbiote vechiles serve as the target in combat, have their own Life total, and rely on their operator and crew to perform tests or rolls (See SDM chapters and UVG/VBLG/OGA for core vehicle and mod rules). PArkinglot Note: synthesize this into a better flow later. This Hallmark Trait eventually belongs in the FLTS Magitech and Fantascience chapter, but parkinglot that.
+In combat, the operator of a Powered Symbiote is the target of all incoming damage. Hull/Vitality mods are available, and many come as standard upgrades on light mecha and large vehicles. This structure or hull serves as an additional pool of temporary Life, aside from any force-field or other temporary Life. Damage is tracked to this pool first, unless traits or other effects over-ride this. Non-symbiote vehicles serve as the target in combat, have their own Life total, and rely on their operator and crew to perform tests or rolls (See SDM chapters and UVG/VBLG/OGA for core vehicle and mod rules). Parking-lot note: synthesize this into a better flow later. This Hallmark Trait eventually belongs in the FTLS Magitech and Fantascience chapter.
 
 ### Ejection Systems
 
@@ -90,7 +90,7 @@ When the operator (or the system) suffers a **Defeat trigger** while in Symbiosi
 
 # Ichi (he/them) — Character Sheet
 
-*Ichi and Akli serve as the book example for the Powered Symbiote trait.*
+*Ichi and Aki serve as the book example for the Powered Symbiote trait.*
 
 **Player:** Freyja (also plays Lady Aki)
 **Concept:** Spore-daemon-armor symbiote — three things that merged into a person
@@ -140,17 +140,17 @@ Instead of colonizing, the spore-jelly symbiosed with the daemon. Something woke
 
 **Physical Defense (Autonomous):** 12;  7 + AGI (0) + Armor (+5; heritage Armoured Body +1 and armor mod +4 both apply) + Skill (0)
 
-**Mental Defense (Autonomous):** 10?; 7 + AUR (2) + Ward (+1; heritage Armoured Body) + Skill (?)
+**Mental Defense (Autonomous):** 9; 7 + THT (1) + Ward (+1; heritage Armoured Body) + Skill (0)
 
 **Physical Defense (Worn by Aki):** 14; 7 + Aki's AGI (1) + Armor (+5 base, +1 Aki's Spider Folk carapace = **+6 total**) + Skill (0). See Powered Symbiote trait.
 
-**Mental Defense (Worn by Aki):** 11; 7 + Aki's AUR (2) + Ward (+1 Ichi base, +1 Aki's Spider Folk carapace = **+2 total**) + Skill (0).
+**Mental Defense (Worn by Aki):** 12; 7 + Aki's THT (3) + Ward (+1 Ichi base, +1 Aki's Spider Folk carapace = **+2 total**) + Skill (0). *(Matches Aki's roadmap; AUR governs psychic saves, not Defense.)*
 
 ---
 
 ## Life
 
-Base 4 + level gains + any END-linked bonuses. *(Exact total per Freyja's XP investment in the Life track.)*
+**12** — base 4 + 4/level across 2 Levels (standard track, matching Aki's). *(Re-spend stays open to Freyja's XP choices.)*
 
 ---
 
@@ -162,11 +162,11 @@ Base 4 + level gains + any END-linked bonuses. *(Exact total per Freyja's XP inv
 
 **Armoured Body** *(Skilled slot 2, +1 Armor, +1 Ward)* — The ancient chitin-and-composite plating. Inherent structural toughness — cannot be removed. \*This bonus applies in **both** autonomous and worn modes. In worn mode it is included in the base +5/+1 rating (exception to normal stacking; see Powered Symbiote core rules).
 
-**Inner Fire** *(Skilled, slot 3, +2 trait/item inventory slots, +1 Defeat threshold)* — The daemon core refuses to go down. Expanded inventory represents integral compartments, sealed weapon mounts, and the mycelium dream-deck's internal footprint.
+**Inner Fire** *(Skilled, slot 3, +2 flexible inventory slots, +1 Defeat threshold)* — The daemon core refuses to go down. The two bonus slots are **flexible**: assign each to the trait or item inventory as it fills (ruled: Inner Fire expands *any* inventory). For Ichi they represent integral compartments, sealed weapon mounts, and the mycelium dream-deck's internal footprint.
 
 ---
 
-## Traits (5/8 slots filled)
+## Traits (5/8 base slots; +2 Inner Fire flex shared with Gear)
 
 ### Slot 0a — Golem *(Path trait)*
 
@@ -251,14 +251,14 @@ For Ichi, this manifests as the **mycelium dream-deck interface**. The spore sub
 
 ---
 
-## Gear Inventory (4/8 slots filled)
+## Gear Inventory (4/8 base slots; +2 Inner Fire flex shared with Traits)
 
 ### Slot 1 Starting Equipment *(parked — minimal)*
 
 - Uwa-obi (Outer Belt, [pockets] equivalent): A thick, often white, linen or cotton sash worn over the sarashi (binding cloth) to secure the armor (dō) and act as a foundation for carrying weapons. Allows carrying 1st 5sp of items at ready (referee's call), and wielding one of these items does not consume the normal +1 gear inventory slot.
 - Ironwood and bamboo bokken (1d8, 1 st, )
 - Crystal Knife (1d4, 1 sp)
-- Iron Tantō (1d4+2, 1 sp, [cut]) — Named, possibly a relic of the original seargents kit
+- Iron Tantō (1d4+2, 1 sp, [cut]) — Named, possibly a relic of the original sergeant's kit
 - Starting cash (*Full starting cash and gear to be determined.*)
 
 ### Slot 2 War-Memory Surge Mod
