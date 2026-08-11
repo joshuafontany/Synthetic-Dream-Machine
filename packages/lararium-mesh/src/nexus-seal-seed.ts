@@ -46,6 +46,7 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/carry-contract#the-honest-edges
  */
 
+import { NEXUS_DOC_DOMAIN } from "./domains.js";
 import type { KahuRoster } from "./kapae-antigen.js";
 import { sha256HexSync, canonicalJson } from "./crypto.js";
 import { type SealEpoch, verifySealLineage, sealKeySetHash } from "./wax-stamp.js";
@@ -54,7 +55,7 @@ import { type CabalJoinPolicy, DEFAULT_JOIN_POLICY } from "./cabal-invite.js";
 import type { AdmissionDials } from "./admission-price.js";
 
 /** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
-export const NEXUS_DOC_KIND = "lar-nexus-doc/v1" as const;
+export const NEXUS_DOC_KIND = NEXUS_DOC_DOMAIN;
 
 /** The charter doc's stable lar: bearing (names the doc; grants nothing — lar: NAMES, never fetches). */
 export const NEXUS_CHARTER_URI = "lar:///nexus.charter.seats" as const;

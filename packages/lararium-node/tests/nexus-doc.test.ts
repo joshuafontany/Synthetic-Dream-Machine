@@ -11,6 +11,7 @@
  *   · the seat gesture (the roster FORMS from what declared + stood → seated keys → genesis epoch) raises a
  *     live roster, and the chair names come from the operator's declarations rather than from this build.
  */
+import { NEXUS_DOC_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync, writeFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -48,7 +49,7 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
   test("a seated doc writes in house form and reads back faithfully", () => {
     const keys = ["a".repeat(64), "b".repeat(64)];
     const doc: NexusDoc = {
-      kind: "lar-nexus-doc/v1", threshold: 2,
+      kind: NEXUS_DOC_DOMAIN, threshold: 2,
       sealEpochCid: genesisSealEpochCid(keys, 2),
       kahu: [
         { displayName: "Kahu Alpha", verifyingKey: keys[0]! },
@@ -100,7 +101,7 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
     const keys = ["a".repeat(64), "b".repeat(64)];
     const genesis = genesisCharterEpoch(keys, 2, sealKeySetHash(["c".repeat(64), "d".repeat(64)], 2));
     const doc: NexusDoc = {
-      kind: "lar-nexus-doc/v1", threshold: 2,
+      kind: NEXUS_DOC_DOMAIN, threshold: 2,
       sealEpochCid: genesis.epochCid,
       sealLineage: [genesis],
       kahu: [
@@ -122,7 +123,7 @@ describe("nexus-doc — disk round-trip, fail-closed", () => {
     writeNexusDoc(bags, emptyFoundingCharterDoc());
     writeFileSync(path,
       "```json nexus-charter\n" +
-      JSON.stringify({ kind: "lar-nexus-doc/v1", threshold: 2, kahu: [], sealLineage: [{ epoch: 0, epochCid: "e0" }] }) +
+      JSON.stringify({ kind: NEXUS_DOC_DOMAIN, threshold: 2, kahu: [], sealLineage: [{ epoch: 0, epochCid: "e0" }] }) +
       "\n```\n", "utf8");
     expect(readNexusDoc(bags)).toBeNull();                        // an epoch missing keySetHash/nextKeyCommit → torn → closed
   });

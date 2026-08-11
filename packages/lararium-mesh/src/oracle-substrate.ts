@@ -20,12 +20,12 @@
  * existing channel) rides a separate, node-side module.
  */
 
+import { ORACLE_POINTER_DOMAIN } from "./domains.js";
 import * as ed25519 from "@noble/ed25519";
 import { save, getHeads, type Doc } from "@automerge/automerge";
 import { hex, hexToBytes, sha256Hex, utf8Bytes, defaultCryptoProvider, type DigestProvider } from "./crypto.js";
 
-export const ORACLE_POINTER_DOMAIN = "lar-oracle-pointer/v1" as const;
-
+export { ORACLE_POINTER_DOMAIN } from "./domains.js";
 const HEX64_RE = /^[0-9a-f]{64}$/;   // sha256 hex / ed25519 verifying-key hex / automerge head
 const SIG_RE   = /^[0-9a-f]{128}$/;  // 64-byte ed25519 signature hex
 

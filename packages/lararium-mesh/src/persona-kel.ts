@@ -20,6 +20,7 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/persona-kel
  */
 
+import { PERSONA_KEL_DOMAIN } from "./domains.js";
 import * as ed25519 from "@noble/ed25519";
 import { sha256HexSync, canonicalJson, canonicalJsonBytes, hexToBytes } from "./crypto.js";
 import { sealKeySetHash } from "./wax-stamp.js";
@@ -27,8 +28,7 @@ import type { QuorumSignature } from "./kapae-antigen.js";
 import { verifyDeviceDelegation, type DeviceDelegationTiddler } from "./device-delegation.js";
 
 /** The domain the persona-KEL prefix + event bytes tag — separates a persona AID from every other hash. */
-export const PERSONA_KEL_DOMAIN = "lar-persona-kel/v1" as const;
-
+export { PERSONA_KEL_DOMAIN } from "./domains.js";
 /**
  * One event in a persona's pre-rotated, hash-linked key-event-log. Content-addressed by `eventCid`.
  *

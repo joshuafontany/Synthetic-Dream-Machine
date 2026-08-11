@@ -36,6 +36,7 @@ export * from "./recovery-keel-core.js";
 export * from "./guardian-card.js";
 export * from "./seal-reserve.js";
 export * from "./capability.js";
+export * from "./domains.js";
 export * from "./crypto.js";
 export * from "./agile-digest.js";
 export * from "./projection-registry.js";

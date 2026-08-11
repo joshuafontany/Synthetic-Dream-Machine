@@ -36,19 +36,18 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-operator-contract
  */
 
+import { CARRIAGE_CONTRACT_DOMAIN, CARRIAGE_ENTRY_DOMAIN } from "./domains.js";
 import * as ed25519 from "@noble/ed25519";
 import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
 import type { QuorumSignature, KahuRoster } from "./kapae-antigen.js";
 import { quorumEntryBytes } from "./quorum-entry.js";
 
 /** The domain a CarriageEntry's quorum signs over — a signature is meaningless without its domain. */
-export const CARRIAGE_ENTRY_DOMAIN = "lar-carriage-entry/v1" as const;
-
+export { CARRIAGE_ENTRY_DOMAIN } from "./domains.js";
 /** The domain the operator's OWN "accepts carriage" contract-token signs over — DISTINCT from the entry
  *  domain, and version-INDEPENDENT: the operator consents to carriage-under-this-epoch ONCE, and a kahu
  *  quorum may then admit / re-admit it at any monotone version citing that one standing consent. */
-export const CARRIAGE_CONTRACT_DOMAIN = "lar-carriage-contract/v1" as const;
-
+export { CARRIAGE_CONTRACT_DOMAIN } from "./domains.js";
 /** A steward act on the members set: ADMIT an operator into carriage, or REVOKE it. Monotone per-nym. */
 export type CarriageAction = "admit" | "revoke";
 

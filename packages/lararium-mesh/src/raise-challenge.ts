@@ -31,11 +31,12 @@
  * Canon: lar:///ha.ka.ba/lares/api/pono/waking-floor
  */
 
+import { RAISE_CHALLENGE_DOMAIN } from "./domains.js";
 import { canonicalJsonBytes } from "./crypto.js";
 import type { RaisedCaps } from "./vessel-standing.js";
 
 /** Domain separation — a raise signature can never be replayed as any other act this house signs. */
-const RAISE_DOMAIN = "lar-raise-challenge/v1" as const;
+const RAISE_DOMAIN = RAISE_CHALLENGE_DOMAIN;
 
 /**
  * What a vessel EMITS to invite a raise. The nonce is the vessel's own; the epoch head names the fence the

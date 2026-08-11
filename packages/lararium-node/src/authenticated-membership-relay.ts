@@ -23,6 +23,7 @@
  * Meme: lar:///ha.ka.ba/lararium/node/authenticated-membership-relay
  */
 
+import { MEMBERSHIP_RELAY_DOMAIN } from "@lararium/mesh";
 import { WebSocketServer, WebSocket, type RawData } from "ws";
 import * as ed from "@noble/ed25519";
 import {
@@ -33,7 +34,7 @@ import {
 
 const asText = (data: RawData): string => (typeof data === "string" ? data : data.toString());
 /** The audience tag the membership proof-of-possession binds to — distinct from the daemon-bag audience. */
-const MEMBERSHIP_AUD = "lar-membership-relay/v1" as const;
+const MEMBERSHIP_AUD = MEMBERSHIP_RELAY_DOMAIN;
 
 /** The wire frames over the socket: the auth handshake, then opaque envelope carriage. */
 type RelayFrame =

@@ -40,6 +40,7 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/persona-admit
  */
 
+import { PERSONA_ADMIT_SEAL_INFO, PERSONA_ENROLL_DOMAIN, PERSONA_GRANT_DOMAIN, PERSONA_JOIN_DOMAIN, PERSONA_SEALED_DOMAIN } from "./domains.js";
 import { x25519 } from "@noble/curves/ed25519.js";
 import * as ed25519 from "@noble/ed25519";
 import { sealToRecipient, openFromSender } from "./sealed-box.js";
@@ -49,17 +50,14 @@ import {
 } from "./crypto.js";
 
 // ── Domains — a signature / a key-derivation is meaningless without the domain it was made in ──────────────
-export const PERSONA_ENROLL_DOMAIN = "lar-persona-enroll/v1" as const;
-export const PERSONA_GRANT_DOMAIN  = "lar-persona-grant/v1" as const;
-export const PERSONA_SEALED_DOMAIN = "lar-persona-sealed-grant/v1" as const;
-export const PERSONA_JOIN_DOMAIN   = "lar-persona-join/v1" as const;
-/**
- * The HKDF `info` string — domain-separates THIS seal's key-derivation from every other X25519 use.
- * `/v2` names the salt widening: the shared `sealed-box` primitive binds the pubkey PAIR ahead of the two
- * challenges (a strict superset of the prior salt), so a v1 and a v2 peer derive different keys and fail closed
- * rather than mis-open. The version carries that break in the open, never as a mystery.
- */
-const HKDF_INFO = utf8Bytes("lar-persona-admit/v2/grant-seal");
+export {
+  PERSONA_ENROLL_DOMAIN, PERSONA_GRANT_DOMAIN, PERSONA_SEALED_DOMAIN, PERSONA_JOIN_DOMAIN,
+} from "./domains.js";
+/** The HKDF `info` — domain-separates THIS seal's key-derivation from every other X25519 use, and above
+ *  all from the keyring-envelope delivery: both protocols run between the same device pair at admission,
+ *  so one shared `info` would let their key material fuse. It carries its OWN name in the registry
+ *  rather than a version digit, because separation belongs to the name. */
+const HKDF_INFO = utf8Bytes(PERSONA_ADMIT_SEAL_INFO);
 /** A nonce (challenge) rides 16 bytes; the AEAD nonce rides XChaCha's 24. */
 const CHALLENGE_LEN = 16;
 const NYM_RE = /^[0-9a-f]{64}$/;

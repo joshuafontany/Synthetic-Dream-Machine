@@ -34,12 +34,12 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/kapae
  */
 
+import { EDGE_KAPAE_DOMAIN } from "./domains.js";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, tiddlerText } from "./base-doc.js";
 import { canonicalJsonBytes } from "./crypto.js";
 
-export const EDGE_KAPAE_DOMAIN = "lar-edge-kapae/v1" as const;
-
+export { EDGE_KAPAE_DOMAIN } from "./domains.js";
 /** The tiddler-key prefix every kāpae act rides under. */
 export const EDGE_KAPAE_PREFIX = "lar:///ha.ka.ba/dreamnet/edge-kapae/" as const;
 

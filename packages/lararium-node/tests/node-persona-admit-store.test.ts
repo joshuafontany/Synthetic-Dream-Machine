@@ -9,6 +9,7 @@
  *   · CONSUME-ONCE — a stashed enrollment secret / sent memo is returned exactly once, then dropped (a secret
  *     never lingers past the one hop it enables); a second take reads null.
  */
+import { PERSONA_GRANT_DOMAIN, PERSONA_JOIN_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -21,7 +22,7 @@ import type { JoinRecord, EnrollmentSecret, SentGrantMemo } from "@lararium/mesh
 
 function joinRec(prefix: string, expiry: number): JoinRecord {
   return {
-    kind: "lar-persona-join/v1",
+    kind: PERSONA_JOIN_DOMAIN,
     personaRef: { prefix, verifyingKey: "aa".repeat(32) },
     targetVesselId: "bb".repeat(32),
     granterKey: "aa".repeat(32),
@@ -81,7 +82,7 @@ describe("node-persona-admit-store — the per-vessel multitude-view", () => {
   test("CONSUME-ONCE: a stashed sent memo is returned once, then dropped; reset clears pending", () => {
     const memo: SentGrantMemo = {
       transcript: {
-        kind: "lar-persona-grant/v1",
+        kind: PERSONA_GRANT_DOMAIN,
         personaRef: { prefix: "Epersona_A", verifyingKey: "aa".repeat(32) },
         targetVesselId: "bb".repeat(32), nonceB: "02".repeat(16), nonceA: "0a".repeat(16), expiry: 9999,
       },

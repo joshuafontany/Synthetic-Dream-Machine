@@ -10,6 +10,7 @@
  *     the relay, so the cas-wire gate reads it as the stranger → Mu (the forged carry never crosses),
  *   · the wire bytes match the in-memory proof (the MembershipChannel interface carries the identical messages).
  */
+import { MEMBERSHIP_RELAY_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -139,7 +140,7 @@ describe("authenticated-membership-relay — cas-wire over a live authenticated 
         void (async () => {
           const ts = new Date(Date.now() - 10 * 60_000).toISOString();   // ten minutes stale
           const sig = await ed25519SignerFromSeed(peerSeed)(
-            authProofBytes({ nonce: frame.nonce!, gatePubKey: frame.gatePubKey!, peerPubKey, aud: "lar-membership-relay/v1", ts }),
+            authProofBytes({ nonce: frame.nonce!, gatePubKey: frame.gatePubKey!, peerPubKey, aud: MEMBERSHIP_RELAY_DOMAIN, ts }),
           );
           raw.send(JSON.stringify({ t: "auth", peerPubKey, ts, sig }));
         })();
@@ -176,7 +177,7 @@ describe("authenticated-membership-relay — cas-wire over a live authenticated 
               for (const [seed, key] of [[seedA, keyA], [seedB, keyB]] as const) {
                 const ts = new Date().toISOString();
                 const sig = await ed25519SignerFromSeed(seed)(
-                  authProofBytes({ nonce: frame.nonce!, gatePubKey: frame.gatePubKey!, peerPubKey: key, aud: "lar-membership-relay/v1", ts }),
+                  authProofBytes({ nonce: frame.nonce!, gatePubKey: frame.gatePubKey!, peerPubKey: key, aud: MEMBERSHIP_RELAY_DOMAIN, ts }),
                 );
                 frames.push(JSON.stringify({ t: "auth", peerPubKey: key, ts, sig }));
               }

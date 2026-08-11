@@ -21,18 +21,18 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/keyring-envelope
  */
 
+import { KEYRING_ENVELOPE_DOMAIN, KEYRING_ENVELOPE_SEAL_INFO } from "./domains.js";
 import { x25519 } from "@noble/curves/ed25519.js";
 import { hex, hexToBytes, utf8Bytes, canonicalJsonBytes, base64UrlEncode, base64UrlDecode } from "./crypto.js";
 import { sealToRecipient, openFromSender } from "./sealed-box.js";
 
-export const KEYRING_ENVELOPE_DOMAIN = "lar-keyring-envelope/v1" as const;
-/**
- * The HKDF `info` — domain-separates THIS delivery's key-derivation from every other X25519 use, and above all from
- * the persona-admit grant seal (both protocols run between the same device pair at admission, so one shared `info`
- * would let their key material fuse). `/v2` names the move onto the shared `sealed-box` primitive, which salts with
- * pubkey BYTES rather than hex strings — that also retires a hex-case hazard the string salt carried.
- */
-const HKDF_INFO = utf8Bytes("lar-keyring-envelope/v2");
+export { KEYRING_ENVELOPE_DOMAIN } from "./domains.js";
+/** The HKDF `info` — domain-separates THIS delivery's key-derivation from every other X25519 use, and
+ *  above all from the persona-admit grant seal: both protocols run between the same device pair at
+ *  admission, so one shared `info` would let their key material fuse. It carries its OWN registry name
+ *  rather than a version digit — this once rode `/v2` beside the signing domain's `/v1`, which let a
+ *  version number do a domain's job, and a naive reset to v1 would have fused exactly what it separates. */
+const HKDF_INFO = utf8Bytes(KEYRING_ENVELOPE_SEAL_INFO);
 
 /** One epoch's secret in the delivered set — the integer epoch + its 32-byte salt as hex. */
 export interface KeyringEntryWire {

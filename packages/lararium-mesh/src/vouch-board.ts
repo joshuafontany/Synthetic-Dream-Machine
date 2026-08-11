@@ -42,6 +42,7 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing
  */
 
+import { VOUCH_EDGE_DOMAIN } from "./domains.js";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, tiddlerText } from "./base-doc.js";
 import { CABAL_INVITE_DOMAIN, cabalInviteBytes, type CabalInvite } from "./cabal-invite.js";
@@ -56,7 +57,7 @@ import { sha256HexSync, canonicalJson } from "./crypto.js";
  */
 export function vouchEdgeId(invite: CabalInvite): string {
   return sha256HexSync(canonicalJson({
-    kind: "lar-vouch-edge/v1",
+    kind: VOUCH_EDGE_DOMAIN,
     realmDocIdHex:     invite.realmDocIdHex,
     voucherDid:        invite.voucherDid,
     joinerIdentityHex: invite.joinerIdentityHex,

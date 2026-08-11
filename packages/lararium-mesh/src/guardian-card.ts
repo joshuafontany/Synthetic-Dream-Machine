@@ -29,6 +29,7 @@ import {
   splitToShares, encodeShareBytes, decodeShareBytes,
   type RecoveryShare, type CustodianTag,
 } from "./recovery-share.js";
+import { RECOVERY_CARD_CONFIRM_DOMAIN } from "./domains.js";
 import { sha256HexSync } from "./crypto.js";
 import type { RandomProvider } from "./crypto.js";
 
@@ -164,7 +165,7 @@ export function guardianRecoveryRegistrationCard(
 // different share codes → different phrases; the shared domain keeps the receipt one shape).
 
 /** The default domain both keels share — one handshake across the reserve card and the identity card. */
-export const GUARDIAN_CONFIRM_DOMAIN = "lar-recovery-card-confirm/v1";
+export const GUARDIAN_CONFIRM_DOMAIN = RECOVERY_CARD_CONFIRM_DOMAIN;
 
 const CONFIRM_WORDS: readonly string[] = [
   "amber", "anchor", "arbor", "ash", "aster", "birch", "brass", "brook",

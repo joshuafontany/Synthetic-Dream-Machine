@@ -14,6 +14,7 @@
  * quorum with two of their OWN held roots (the real-cabal collect-signatures ceremony is the surfaced fork).
  */
 
+import { NEXUS_DOC_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -50,7 +51,7 @@ afterEach(() => {
 /** Seat a legacy-inception charter DOC binding the given verifying keys at 2-of-3 into `bags/@nexus`. */
 function seatCharter(keys: string[], threshold = 2): void {
   const doc: NexusDoc = {
-    kind: "lar-nexus-doc/v1",
+    kind: NEXUS_DOC_DOMAIN,
     threshold,
     sealEpochCid: genesisSealEpochCid(keys, threshold),
     kahu: [

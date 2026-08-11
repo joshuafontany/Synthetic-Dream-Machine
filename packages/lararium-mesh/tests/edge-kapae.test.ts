@@ -12,6 +12,7 @@
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/kapae
  */
+import { EDGE_KAPAE_DOMAIN } from "../src/domains.js";
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
@@ -107,10 +108,10 @@ describe("an unverified act carries no authority", () => {
     const moved: EdgeKapae = { ...raise, edgeId: "edge-2" };
     expect((await verifiedShadowSet([moved], () => authority, verify, ONE)).size).toBe(0);
 
-    const a = hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 1, epochCid: "x" }));
-    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: false, version: 1, epochCid: "x" })));
-    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 2, epochCid: "x" })));
-    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: "lar-edge-kapae/v1", edgeId: "e", raised: true, version: 1, epochCid: "y" })));
+    const a = hex(edgeKapaeBytes({ kind: EDGE_KAPAE_DOMAIN, edgeId: "e", raised: true, version: 1, epochCid: "x" }));
+    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: EDGE_KAPAE_DOMAIN, edgeId: "e", raised: false, version: 1, epochCid: "x" })));
+    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: EDGE_KAPAE_DOMAIN, edgeId: "e", raised: true, version: 2, epochCid: "x" })));
+    expect(a).not.toBe(hex(edgeKapaeBytes({ kind: EDGE_KAPAE_DOMAIN, edgeId: "e", raised: true, version: 1, epochCid: "y" })));
   });
 
   test("a torn or foreign tiddler drops, and an absent board shadows nothing", async () => {
@@ -118,7 +119,7 @@ describe("an unverified act carries no authority", () => {
     writeEdgeKapae(doc, await act("edge-1", true, 1, A_SEED));
     doc.tiddlers["lar:///junk"] = { id: "lar:///junk", tiddler: { text: "not json" } } as never;
     doc.tiddlers["lar:///half"] = {
-      id: "lar:///half", tiddler: { text: JSON.stringify({ kind: "lar-edge-kapae/v1", edgeId: "x" }) },
+      id: "lar:///half", tiddler: { text: JSON.stringify({ kind: EDGE_KAPAE_DOMAIN, edgeId: "x" }) },
     } as never;
     expect(edgeKapaeActsFromBoard(doc)).toHaveLength(1);
     expect(edgeKapaeActsFromBoard(null)).toEqual([]);

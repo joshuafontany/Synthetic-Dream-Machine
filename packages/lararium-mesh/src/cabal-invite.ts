@@ -32,11 +32,11 @@
  * freely still. Held as DEBT, named here so the next hand sees the substitution rather than inheriting it.
  *
  */
+import { CABAL_INVITE_DOMAIN } from "./domains.js";
 import { canonicalJsonBytes, hex } from "./crypto.js";
 
 /** The domain string an invite signs over. A signature is meaningless without the domain it was made in. */
-export const CABAL_INVITE_DOMAIN = "lar-cabal-invite/v1" as const;
-
+export { CABAL_INVITE_DOMAIN } from "./domains.js";
 /**
  * How a realm answers "may this joiner cross?".
  *

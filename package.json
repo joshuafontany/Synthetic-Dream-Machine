@@ -19,6 +19,7 @@
     "witness:memes": "tools/meme-coordinates-witness.sh",
     "witness:contract": "tools/contract-witness.sh",
     "witness:parity": "tools/surface-parity-witness.sh",
+    "witness:domains": "tools/domain-registry-witness.sh",
     "witness": "tools/witness-all.sh",
     "test:e2e:live": "pnpm --filter @lares/harness test:live"
   },

@@ -9,6 +9,7 @@
  *   · FAIL CLOSED: no charter on disk → empty member set → NOBODY reads member (every cross-operator STRANGER),
  *   · refresh swaps the whole set when the charter seats.
  */
+import { NEXUS_DOC_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -26,7 +27,7 @@ const STRANGER_SEED = new Uint8Array(32).fill(7);
 
 async function seatedCharter(keys: string[]): Promise<NexusDoc> {
   return {
-    kind: "lar-nexus-doc/v1", threshold: 2,
+    kind: NEXUS_DOC_DOMAIN, threshold: 2,
     sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Kahu Alpha", verifyingKey: keys[0]! },

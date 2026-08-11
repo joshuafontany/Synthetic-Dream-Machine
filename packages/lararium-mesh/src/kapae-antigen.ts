@@ -19,13 +19,13 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/carry-contract#kapae-the-antigen
  */
 
+import { KAPAE_ANTIGEN_DOMAIN } from "./domains.js";
 import * as ed25519 from "@noble/ed25519";
 import { hexToBytes } from "./crypto.js";
 import { quorumEntryBytes } from "./quorum-entry.js";
 
 /** The domain a Kapae-antigen entry signs over — a signature is meaningless without its domain. */
-export const KAPAE_ANTIGEN_DOMAIN = "lar-kapae-antigen/v1" as const;
-
+export { KAPAE_ANTIGEN_DOMAIN } from "./domains.js";
 /** A steward act on the antigen: raise a ban, or lift one. Monotone per-nym by `version`. */
 export type KapaeAction = "kapae" | "un_kapae";
 

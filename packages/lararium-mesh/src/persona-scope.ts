@@ -63,13 +63,14 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle
  */
 
+import { PERSONA_SCOPE_INFO } from "./domains.js";
 import { hmac } from "@noble/hashes/hmac.js";
 import { sha256 } from "@noble/hashes/sha2.js";
 
 import { bagUri } from "./lar-uris.js";
 
 /** Domain separation. Distinct from `circle-scope`, so the two levels can never derive into each other. */
-const PERSONA_SCOPE_HMAC_KEY = new TextEncoder().encode("lares persona-scope v1");
+const PERSONA_SCOPE_HMAC_KEY = new TextEncoder().encode(PERSONA_SCOPE_INFO);
 
 /** How many hex characters of the MAC name a plane. 16 hex = 64 bits — far past any collision a human's
  *  own handful of compartments could reach, and short enough that a person reads a bag id in a log. */

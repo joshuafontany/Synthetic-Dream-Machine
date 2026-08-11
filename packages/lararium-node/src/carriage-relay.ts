@@ -20,6 +20,7 @@
  * Meme: lar:///ha.ka.ba/lararium/node/carriage-relay
  */
 
+import { RELAY_GATE_INFO } from "@lararium/mesh";
 import { createHmac } from "node:crypto";
 import * as ed from "@noble/ed25519";
 import { hex, type MembershipEnvelope } from "@lararium/mesh";
@@ -48,7 +49,7 @@ export interface CarriageRelay {
  *  IS the separation, so two purposes never share key bytes however convenient the sharing looks.
  *  Node's own HMAC rather than a bundled one — this module starts a WS server and is node-only by
  *  construction, so reaching for the platform adds no dependency to carry. */
-const RELAY_GATE_DOMAIN = "lares relay-gate v1";
+const RELAY_GATE_DOMAIN = RELAY_GATE_INFO;
 
 /**
  * Resolve the relay's gate seed the way a vessel boot does: a configured 32-byte hex seed when one rides the config,

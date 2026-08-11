@@ -14,6 +14,7 @@
  *     non-kahu operator as MEMBER, off the SAME board the admit wrote (SELF-SLOT-B lit),
  *   · USER-NEVER-WRITTEN: the board carries operator-pubkey nyms only.
  */
+import { NEXUS_DOC_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -49,7 +50,7 @@ afterEach(async () => {
 
 function seatCharter(keys: string[], threshold = 2): void {
   const doc: NexusDoc = {
-    kind: "lar-nexus-doc/v1", threshold,
+    kind: NEXUS_DOC_DOMAIN, threshold,
     sealEpochCid: genesisSealEpochCid(keys, threshold),
     kahu: [
       { displayName: "Kahu Alpha", verifyingKey: keys[0] ?? null },

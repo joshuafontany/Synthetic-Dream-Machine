@@ -24,6 +24,7 @@
  *
  * Design-of-record: lar:///ha.ka.ba/lares/api/pono/persona-circle#the-vault (publication model).
  */
+import { HANDLE_CARD_DOMAIN } from "./domains.js";
 import { canonicalJsonBytes, hex, hexToBytes } from "./crypto.js";
 import {
   signDelegationEdge, verifyDelegationEdge, DELEGATION_DOMAIN, type DelegationEdge,
@@ -31,8 +32,7 @@ import {
 import * as ed25519 from "@noble/ed25519";
 
 /** The domain a card signs over. A signature is meaningless without the domain it was made in. */
-export const HANDLE_CARD_DOMAIN = "lar-handle-card/v1" as const;
-
+export { HANDLE_CARD_DOMAIN } from "./domains.js";
 /**
  * The published face of one handle — PUBLIC data only. Nothing here may reach the vault or another face.
  *

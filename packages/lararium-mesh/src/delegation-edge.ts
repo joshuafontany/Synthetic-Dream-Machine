@@ -22,6 +22,7 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/attestation-plane
  */
 
+import { DYAD_BINDING_DOMAIN, FLEET_PROOF_DOMAIN } from "./domains.js";
 import { canonicalJsonBytes } from "./crypto.js";
 
 /** A signer's vouch for one subject, at one epochCid. The only delegation shape this stack mints. */
@@ -81,7 +82,7 @@ export async function verifyDelegationEdge(
 /** The domains this stack mints edges under. A new use adds a string here, never a second primitive. */
 export const DELEGATION_DOMAIN = {
   /** A published face ← the persona root that speaks for its fleet. */
-  fleetProof:  "lar-fleet-proof/v1",
+  fleetProof:  FLEET_PROOF_DOMAIN,
   /** A vessel×veil relationship ← the group root that gathered it. */
-  dyadBinding: "lar-dyad-binding/v1",
+  dyadBinding: DYAD_BINDING_DOMAIN,
 } as const;

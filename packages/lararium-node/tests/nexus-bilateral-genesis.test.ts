@@ -27,6 +27,7 @@
  * running peer reads the new member at BOUNDED STALENESS, never instantly. This headless proof folds each
  * hearth's board directly off its own store, so it proves the CONTRACT, not the wire's refold latency.
  */
+import { NEXUS_DOC_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -96,7 +97,7 @@ async function standHearth(root: string, threshold = 2): Promise<Hearth> {
     const keys = roots.map((r) => r.verifyingKey);
     const bags = join(root, "state", "nexus");
     const doc: NexusDoc = {
-      kind: "lar-nexus-doc/v1", threshold,
+      kind: NEXUS_DOC_DOMAIN, threshold,
       sealEpochCid: genesisSealEpochCid(keys, threshold),
       kahu: [
         { displayName: "Founder-0", verifyingKey: keys[0]! },

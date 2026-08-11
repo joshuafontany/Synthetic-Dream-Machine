@@ -4,6 +4,7 @@
  * The starred tests carry the security properties rather than the mechanics. Each of them, failing, still
  * leaves a system that raises vessels correctly on every honest input — which is exactly why they exist.
  */
+import { RAISE_CHALLENGE_DOMAIN } from "../src/domains.js";
 import { describe, expect, test } from "vitest";
 
 import {
@@ -121,7 +122,7 @@ describe("the signed bytes", () => {
   });
 
   test("carry a domain tag, so a raise signature replays as no other act", () => {
-    expect(Buffer.from(raiseChallengeBytes(challenge())).toString("utf8")).toContain("lar-raise-challenge/v1");
+    expect(Buffer.from(raiseChallengeBytes(challenge())).toString("utf8")).toContain(RAISE_CHALLENGE_DOMAIN);
   });
 
   test("carry NOTHING of the vessel's contents — a challenge is not a disclosure", () => {

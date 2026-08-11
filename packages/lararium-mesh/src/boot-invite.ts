@@ -37,12 +37,12 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-invite
  */
 
+import { BOOT_INVITE_DOMAIN } from "./domains.js";
 import * as ed25519 from "@noble/ed25519";
 import { canonicalJsonBytes, hex, hexToBytes } from "./crypto.js";
 
 /** The domain a boot-invite signs over. A signature is meaningless without the domain it was made in. */
-export const BOOT_INVITE_DOMAIN = "lar-boot-invite/v1" as const;
-
+export { BOOT_INVITE_DOMAIN } from "./domains.js";
 /**
  * A sealed, single-use, TRACELESS boot capability. Note what is ABSENT by construction: no `voucherDid`, no
  * joiner identity, no place edge — a boot-invite is bearer within its Nexus and names nobody. The Nexus seals

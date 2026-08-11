@@ -10,6 +10,7 @@
  *   · FAIL CLOSED: no charter on disk → empty roster → nothing Kapae'd (no quorum, no bans),
  *   · a cold ring (board unresolved) denies nobody (a denylist's absence = no bans).
  */
+import { NEXUS_DOC_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -36,7 +37,7 @@ const VICTIM_SEED = new Uint8Array(32).fill(9);
 
 async function seatedCharter(keys: string[]): Promise<NexusDoc> {
   return {
-    kind: "lar-nexus-doc/v1", threshold: 2,
+    kind: NEXUS_DOC_DOMAIN, threshold: 2,
     sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Kahu Alpha", verifyingKey: keys[0]! },

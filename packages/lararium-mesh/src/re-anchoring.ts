@@ -43,13 +43,13 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/re-anchoring-record
  */
 
+import { RE_ANCHORING_DOMAIN } from "./domains.js";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, tiddlerText } from "./base-doc.js";
 import { canonicalJsonBytes } from "./crypto.js";
 
 /** The domain a re-anchoring signs over — a signature without its domain says nothing. */
-export const RE_ANCHORING_DOMAIN = "lar-re-anchoring/v1" as const;
-
+export { RE_ANCHORING_DOMAIN } from "./domains.js";
 /** The board prefix a record lands under. */
 export const RE_ANCHORING_PREFIX = "$:/lar/re-anchoring/";
 

@@ -9,6 +9,7 @@
  *     re-folds → the victim stands Kapae'd → carryContractShareDecision draws Mu for its peer.
  *   · the running holder's cached (empty) board proves the gap: WITHOUT the refresh the victim is not Kapae'd.
  */
+import { NEXUS_DOC_DOMAIN } from "@lararium/mesh";
 import { afterEach, beforeEach, describe, test, expect } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -44,7 +45,7 @@ const NEXUS_PUBKEY = "a1b2c3d4e5f6a7b8";
 
 function seatedCharter(keys: string[], posture?: FederationPosture): NexusDoc {
   const base: NexusDoc = {
-    kind: "lar-nexus-doc/v1", threshold: 2,
+    kind: NEXUS_DOC_DOMAIN, threshold: 2,
     sealEpochCid: genesisSealEpochCid(keys, 2),
     kahu: [
       { displayName: "Kahu Alpha", verifyingKey: keys[0]! },

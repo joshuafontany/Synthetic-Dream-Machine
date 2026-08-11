@@ -9,6 +9,7 @@
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing
  */
+import { CABAL_INVITE_DOMAIN } from "../src/domains.js";
 import { describe, test, expect } from "vitest";
 import * as ed from "@noble/ed25519";
 import {
@@ -62,7 +63,7 @@ describe("vouch-board — an unverified vouch is an unbounded one", () => {
     const doc  = boardOf([real]);
     doc.tiddlers["lar:///unrelated"]      = { id: "lar:///unrelated", tiddler: { text: "not json at all" } } as never;
     doc.tiddlers["lar:///half-an-invite"] = {
-      id: "lar:///half-an-invite", tiddler: { text: JSON.stringify({ kind: "lar-cabal-invite/v1", realmDocIdHex: REALM }) },
+      id: "lar:///half-an-invite", tiddler: { text: JSON.stringify({ kind: CABAL_INVITE_DOMAIN, realmDocIdHex: REALM }) },
     } as never;
 
     expect(await verifiedVouchesFromBoard(doc, REALM, verify)).toHaveLength(1);

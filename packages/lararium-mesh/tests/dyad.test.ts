@@ -8,6 +8,7 @@
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/persona-circle · lar:///ha.ka.ba/lares/api/pono/group-as-closure
  */
+import { DYAD_DOMAIN } from "../src/domains.js";
 import { describe, test, expect, beforeAll } from "vitest";
 import * as ed from "@noble/ed25519";
 import { hex, hexToBytes } from "../src/crypto.js";
@@ -145,7 +146,7 @@ describe("the signature outranks the label", () => {
     const doc = docOf([dyadFromEdge(edge(VESSEL_A, VEIL_WORK))]);
     doc.tiddlers["lar:///unrelated"] = { id: "lar:///unrelated", tiddler: { text: "not json" } } as never;
     doc.tiddlers["lar:///no-edge"]   = {
-      id: "lar:///no-edge", tiddler: { text: JSON.stringify({ kind: "lar-dyad/v1" }) },
+      id: "lar:///no-edge", tiddler: { text: JSON.stringify({ kind: DYAD_DOMAIN }) },
     } as never;
     expect(dyadsFromDoc(doc)).toHaveLength(1);
     expect(dyadsFromDoc(null)).toEqual([]);

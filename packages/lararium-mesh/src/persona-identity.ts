@@ -38,6 +38,7 @@
  * Meme: lar:///ha.ka.ba/lararium/api/persona-identity
  */
 
+import { CIRCLE_SCOPE_INFO } from "./domains.js";
 import { hmac } from "@noble/hashes/hmac.js";
 import { sha256 } from "@noble/hashes/sha2.js";
 import { derivePersonaKeypair } from "./persona-hd.js";
@@ -93,7 +94,7 @@ export async function deriveVeiledUserKey(
 
 // ── Per-circle SCOPE-PSEUDONYM (the beyond-Ink&Switch unlinkability FLOOR) ──
 
-const CIRCLE_SCOPE_HMAC_KEY = new TextEncoder().encode("lares circle-scope v1");
+const CIRCLE_SCOPE_HMAC_KEY = new TextEncoder().encode(CIRCLE_SCOPE_INFO);
 
 /**
  * circleScopeIndex — the per-circle hardened index for the scope-pseudonym leaf.

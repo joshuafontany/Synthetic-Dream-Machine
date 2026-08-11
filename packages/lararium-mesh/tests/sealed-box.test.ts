@@ -29,6 +29,7 @@
  * `node:crypto` to a stub; a randomness property written in the browser hull could go deterministic and pass
  * BECAUSE the property under test had been removed. The randomness guards below need the real platform RNG.
  */
+import { KEYRING_ENVELOPE_SEAL_INFO, PERSONA_ADMIT_SEAL_INFO } from "../src/domains.js";
 import { describe, test, expect } from "vitest";
 import { x25519 } from "@noble/curves/ed25519.js";
 import * as ed from "@noble/ed25519";
@@ -158,8 +159,8 @@ describe("④ the salt binds the pubkey pair ALWAYS, then the session challenges
 describe("THE LIVE DOMAINS — each protocol's constant pinned by LITERAL, from outside its module", () => {
   // Hard-coded on purpose. Importing the constants would let a fused pair pass, because both sides of the
   // assertion would move together. These strings are the contract; changing one must red this file.
-  const PERSONA_GRANT_SEAL_INFO = utf8Bytes("lar-persona-admit/v2/grant-seal");
-  const KEYRING_ENVELOPE_INFO   = utf8Bytes("lar-keyring-envelope/v2");
+  const PERSONA_GRANT_SEAL_INFO = utf8Bytes(PERSONA_ADMIT_SEAL_INFO);
+  const KEYRING_ENVELOPE_INFO   = utf8Bytes(KEYRING_ENVELOPE_SEAL_INFO);
 
   test("the keyring envelope derives under `lar-keyring-envelope/v2` and NOT under the grant-seal domain", () => {
     const { recipientSecret, recipientPubkey } = mintKeyringRecipient();

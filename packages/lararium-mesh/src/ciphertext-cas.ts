@@ -37,6 +37,7 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/content-resolution#cad-storage
  */
 
+import { CAD_KEYSTREAM_INFO } from "./domains.js";
 import { blake3 } from "@noble/hashes/blake3.js";
 import { hex } from "./crypto.js";
 import { formatDigest, digestsEqual } from "./agile-digest.js";
@@ -48,7 +49,7 @@ export const CIPHERTEXT_CID_ALGO = "blake3" as const;
 export const CONVERGENCE_SECRET_LEN = 32 as const;
 
 /** The fixed domain-separation tag the keystream hashes under `key = messageKey` — distinct from the derive step. */
-const KEYSTREAM_DOMAIN = new TextEncoder().encode("lar-cad/v1/keystream");
+const KEYSTREAM_DOMAIN = new TextEncoder().encode(CAD_KEYSTREAM_INFO);
 
 /** A sealed body: the secret-free VERIFY-CAP (cid) + the ciphertext a relay carries + the READ-CAP a member keeps. */
 export interface SealedBody {

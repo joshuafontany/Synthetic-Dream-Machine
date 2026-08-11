@@ -25,11 +25,11 @@
  * surface (@noble/ed25519 v3 + ./crypto hex).
  */
 
+import { DEVICE_DELEGATION_DOMAIN } from "./domains.js";
 import * as ed25519 from "@noble/ed25519";
 import { hex, hexToBytes } from "./crypto.js";
 
-export const DEVICE_DELEGATION_DOMAIN = "lar-device-delegation/v2" as const;
-
+export { DEVICE_DELEGATION_DOMAIN } from "./domains.js";
 /** Clock drift tolerance for the freshness window (matches the V3 auth-proof posture / UCAN ±60s). */
 /**
  * The clock-skew tolerance the freshness check falls back on — PRIVATE, and it stays private because
