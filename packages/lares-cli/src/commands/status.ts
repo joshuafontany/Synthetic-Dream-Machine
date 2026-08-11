@@ -130,7 +130,7 @@ export async function cmdNode(args: ParsedArgs): Promise<number> {
  * `lares vessel stop` — halt the daemon on the port (graceful → force), the missing pair to
  * `lares vessel stand`. Pure port-control (no vm boot, no wipe): SIGTERM the incumbent, escalate to
  * SIGKILL if it lingers, and report which. A free port reads as already-stopped, not an error.
- * Fills the lifecycle gap that `reconcile` (stop+serve) and `hooks pause` (capture only) leave open.
+ * Fills the lifecycle gap that `vessel stand --restart` (stop+stand) and `hooks pause` (capture only) leave open.
  */
 export async function cmdNodeStop(args: ParsedArgs): Promise<number> {
   const port = larPort();

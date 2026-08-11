@@ -96,34 +96,32 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
     next: ["lares mempalace status", "lares mempalace quiesce   # pause AND drain"],
   },
 
-  status: {
+  vessel: {
     synopsis:
-      "Local node health — bootstrap presence, storage size, whether the daemon port is in use, and " +
-      "(when up) a residency snapshot. With `--palaces`, print the palace-organ health table " +
-      "(re-runnable): each organ's resolved dir + whether its store has materialized.",
+      "THE VESSEL DOOR — one namespace over the vessel's own causal island. Seven primitives and one " +
+      "read: `found` mints identity + bootstrap · `stand` brings the daemon up and reports · `stop` " +
+      "halts it on the port · `clear` wipes the store and re-founds (identity survives) · `bake` " +
+      "re-derives the genesis island · `seed` plants every bags/@* holding back into its doc · `read` " +
+      "inspects and starts nothing. Compositions ride `vessel flow <petname>`, so a new cap-stack " +
+      "arrives as a flow rather than another top-level verb.",
     examples: [
-      "lares vessel read            # node health snapshot",
-      "lares vessel read --palaces  # the palace-organ health table",
-      "lares vessel read --json     # machine-readable",
-    ],
-    flags: ["--palaces   print the palace-organ health table (mempalace · structure · form · mesh)"],
-    next: ["lares vessel stand --init   # stand up any absent organ"],
-  },
-
-  wake: {
-    synopsis:
-      "The boot ENTRY POINT (idempotent). Ensures the node is up (attach if healthy, start detached if " +
-      "down) and emits a live hydration frame. `--init`/`--install` stand up the whole stack incl. ALL " +
-      "palace organs; `--claude`/`--codex`/`--copilot`/`--vscode` wire each harness's MCP + ingest hook.",
-    examples: [
-      "lares vessel stand               # idempotent boot, attach-or-start",
-      "lares vessel stand --init        # ... + stand up every palace organ",
+      "lares vessel stand                      # idempotent boot, attach-or-start, and REPORT",
+      "lares vessel stand --init               # ... + stand up every palace organ",
       "lares vessel stand --install --claude   # cold-pull standup + wire ~/.claude",
+      "lares vessel read --palaces             # health, plus the palace-organ table",
+      "lares vessel seed --apply --yes         # plant every holding (idempotent)",
+      "lares vessel flow refresh               # the post-code-change cure: build · stop · clear · stand",
     ],
     flags: [
-      "--init / --install   found the stack + stand up all palace organs (idempotent)",
-      "--admit <file>       join an existing operator PersonaGroup",
-      "--claude/--codex/--copilot/--vscode   wire that harness's mempalace MCP + hook",
+      "stand --foreground   this terminal owns the node (no Vite)",
+      "stand --with-app     node + Vite app together",
+      "stand --restart [--clear]   free the port first, optionally wiping the store",
+      "stand --observe      REPORT ONLY — withholds the standing half; outranks every acting flag",
+      "stand --init / --install    found the stack + stand up all palace organs (idempotent)",
+      "stand --admit <file>        join an existing operator PersonaGroup",
+      "stand --claude/--codex/--copilot/--vscode   wire that harness's mempalace MCP + hook",
+      "read --palaces       the palace-organ health table (mempalace · structure · form · mesh)",
+      "flow <petname>       refresh · rebuild · rebirth — the pet-named cap-stacks",
     ],
     next: ["lares vessel read --palaces", "lares sense pour --all"],
   },
