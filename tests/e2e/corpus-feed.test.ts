@@ -52,10 +52,13 @@ function walkFiles(dir: string): string[] {
 
 /** Distinct carrier-root URIs in the source corpus that mirror under @lares. */
 function expectedRoots(): Set<string> {
-  const files = execSync(`find ${CORPUS} -name '*.md'`, { encoding: "utf8" }).trim().split("\n");
+  // THE CORPUS CARRIES `.mem`. This hunted `*.md` — the extension the carrier convention left behind —
+  // so `find` returned nothing, the staged mirror stood empty, and every read below ENOENT'd on a boot
+  // meme that was never copied. A zero-length find reads as "no corpus", never as "wrong glob".
+  const files = execSync(`find ${CORPUS} -name '*.mem'`, { encoding: "utf8" }).trim().split("\n");
   const roots = new Set<string>();
   for (const f of files) {
-    const m = /<<~[^&\n]*&#x(?:0001|0011); \? -> (\S+) >>/.exec(readFileSync(f, "utf8"));
+    const m = /<<[\^~][^&\n]*&#x(?:0001|0011); \? -> (\S+) >>/.exec(readFileSync(f, "utf8"));
     if (m?.[1]?.startsWith("lar:///ha.ka.ba/lares/")) roots.add(m[1]);
   }
   return roots;
@@ -102,7 +105,7 @@ describe("corpus feed — the whole hearth in one gesture (staged witness)", () 
     // file at its full-name path; fragments never surface.
     const mirrorRoot = join(lar.root, "bags/@lares");
     const fileUris = new Set(files.map((f) =>
-      "lar:///" + relative(mirrorRoot, f).split(sep).join("/").replace(/\.md$/, ""),
+      "lar:///" + relative(mirrorRoot, f).split(sep).join("/").replace(/\.mem$/, ""),
     ));
     const roots = expectedRoots();
     for (const r of roots) expect(fileUris.has(r), `missing projection for ${r}`).toBe(true);

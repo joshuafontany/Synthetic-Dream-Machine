@@ -16,7 +16,7 @@
  *   delete — a confirmed vanish (grace expired, no pairing) tombstones the carrier
  *
  * Staged-only (mutating, spawns watcher daemons). Carriers template from the
- * small canonical `tick.md` with the URI slug swapped — cheap to parse, lands
+ * small canonical `tick.mem` with the URI slug swapped — cheap to parse, lands
  * clean through the ingest gate.
  */
 
@@ -28,7 +28,7 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const CLI_BIN   = join(REPO_ROOT, "packages/lares-cli/dist/src/bin/lares.js");
-const TICK_TMPL = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/pono/tick.md");
+const TICK_TMPL = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/pono/tick.mem");
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -39,13 +39,13 @@ let tickTemplate = "";
 
 /** Disk path a `cutc-<slug>` carrier projects to under the staged bags mirror. */
 function carrierPath(slug: string): string {
-  return join(lar.root, "bags/@lares/ha.ka.ba/lares/api/pono", `${slug}.md`);
+  return join(lar.root, "bags/@lares/ha.ka.ba/lares/api/pono", `${slug}.mem`);
 }
 function carrierUri(slug: string): string {
   return `lar:///ha.ka.ba/lares/api/pono/${slug}`;
 }
 
-/** Template a fresh carrier from tick.md, swapping ONLY the URI slug (the path
+/** Template a fresh carrier from tick.mem, swapping ONLY the URI slug (the path
  *  derives the record URI; the body prose carries over untouched). */
 function carrierBody(slug: string): string {
   return tickTemplate.replaceAll("pono/tick", `pono/${slug}`);

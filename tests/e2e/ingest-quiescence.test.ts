@@ -111,7 +111,7 @@ describe("ingest quiescence — the composed loop holds still", () => {
 
   test("Q4 — the NFC membrane assertion refuses foreign normal forms loudly", async () => {
     if (lar.mode !== "staged") return;
-    const nfdPath = join(lar.root, "bags/@lares/ha.ka.ba/lares/api/nfd-probe.md");
+    const nfdPath = join(lar.root, "bags/@lares/ha.ka.ba/lares/api/nfd-probe.mem");
     const body = readFileSync(projected, "utf8")
       .replace(/noosphere-boot/g, "nfd-probe")
       .replace("# Entry", "# Entrée".normalize("NFD"));   // é as e + combining accent
