@@ -52,6 +52,8 @@ Time rides three instruments, never one (`ffz-clock`):
 
 !! Two revocation modes ~ the epoch is a LEASE, not a revoker
 
+<<~ confidence Canon 17/20 >> ''CANONICAL — this section is the founding statement of the fencing epoch, and a sweep should CITE it rather than restate it.'' The collapse (one mechanism, two carriers) and the ownership cut that keeps our fence off Keyhive's CGKA epoch both stand downstream of this paragraph: <<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+
 Revocation runs two modes, and conflating them ships an unsafe gate:
 
 * ''Non-renewal (the default)'' — the ''epoch-lease'': a max-register rolls forward, every grant at epoch ≤ N must re-mint or expire. Coordinator-free, rides Automerge over the WS relay. <<~ confidence Synthesis-Canon 15/20 >> Safe //because// it only ratchets the whole resource forward — it never singles out one principal.

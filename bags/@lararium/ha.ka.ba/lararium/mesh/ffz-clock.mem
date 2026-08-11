@@ -249,7 +249,7 @@ when a step produces an operator-meaningful event, not 120×/s).
 
 <<~ranks profile operator-agent ~ default Lares (the Claude-agent profile) · L0/L1/L2/L3 = 64/512/64/128 (Loom-grounded @ 100+-turn scale; SHAPE grounded, constants SEEDED — calibrate against real transcript histograms): L0 Pulse = one generation SEGMENT (`stop_reason`/tool_use round) ≤64/Beat, with a block sub-offset ≤16 (index, not a tick); L1 Beat = one grounded exchange turn ≤512/Measure; L2 Measure = session ≤64/Arc; L3 Arc = day ≤128/Theme. Ticks on the operator grounding act, read from the HARNESS transcript (#rhythmic-address) -> ttrpg ~ 128/512/2048/32768; scene-beat = Beat -> strategy ~ 256/1024/8192/131072; turn-resolution = Beat -> action-rpg ~ 512/2048/16384/262144; encounter-beat = Beat -> physics-sandbox ~ Katamari-style 1024/256/4096/65536; rolling-decision-burst = Beat -> rhythm-daw ~ 191/5/31/1024 (coprime-prime near 192/4/32 — shared factors collide in hash-merge paths); measure/bar = Beat -> ci-cd ~ 64/128/1024/16384; pipeline-stage = Beat -> market-iot ~ 1024/512/4096/65536; candle-close / sensor-threshold = Beat -> async-social ~ PR/Slack 32/64/512/8192; review-round = Beat >>
 
-All profiles leave L4 = ∞ (operator-declared epoch). The register names
+All profiles leave L4 = ∞ (operator-declared epoch). ''HOMONYM — this //epoch// names a RHYTHMIC BAND and no mechanism''; the mesh's fencing epoch is a different word wearing the same letters (epoch-binding-surfaces#whose-word-is-it). A grep for the fence should read past every L4 mention here. The register names
 (Pulse/Beat/Measure/Arc/Theme) apply uniformly; only the bounds differ.
 
 ''The bounds name per-island RATCHET depths, not membership grains.'' A profile's numbers set how

@@ -35,6 +35,11 @@ import { resolve }                       from "path";
 import { deriveReachFaces, wsUrlForOrigin, crossingUrl, appOriginForFace, type InterfaceTable } from "./lan-address.js";
 import { openNodeVessel, openNodeHerm, type NodeRecipe } from "./open-node-vessel.js";
 import { standAs } from "@lararium/mesh";
+import { randomBytes } from "node:crypto";
+import {
+  standRaiseDoor, effectiveLeaseEpochOnBoard, nexusMemberNyms, verifyNymSignature,
+} from "./vessel-raise.js";
+import { loadVesselVerifyingKey } from "./node-vessel-identity.js";
 import { archiveOpens } from "./archive-passphrase.js";
 import { ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 import { deriveMeshSelf } from "./node-caps.js";
@@ -150,6 +155,7 @@ async function main(): Promise<void> {
     console.log("[lararium] the archive holds shut — standing at the WAKING FLOOR, faceless by class.");
     console.log("[lararium]   carrying and serving the public shelf; every sovereign act waits.");
     console.log(`[lararium]   light the hearth fire: set ${ARCHIVE_PASSPHRASE_ENV} and boot again.`);
+    console.log("[lararium]   or a recognised operator raises it for their visit: `lares raise` at the door.");
   }
 
   if (standing === "herm") {
@@ -173,6 +179,33 @@ async function main(): Promise<void> {
     console.log(`[herm] oracle:    ${herm.oracleDocUrl}`);
     console.log(`[herm] daemon:    ${herm.daemon.daemonHandle.url}`);
     console.log(`[herm] FLOW-map read-face: GET /oracle/pointer · /oracle/<cid>.bin`);
+
+    // ── THE RAISE DOOR — the third path onto caps, beside the archive and the recipe ────────────────
+    // `standAs` above answers what this vessel stands as ALONE. A recognised operator may raise it for the
+    // length of their visit, and those caps ride THEIR key: nothing seats a persona root here, and
+    // `personaSlotCeiling("herm") === 0` keeps that true whatever stands.
+    //
+    // It stands HERE rather than beside `standAs` because the fence lives on a board, and the board opens
+    // with the vessel. The door reads the lease epoch off the live @daemon doc every time it is asked —
+    // a remembered epoch would hold a vessel raised past the roll that should have dropped it.
+    //
+    // Nothing here touches disk. A reboot drops this vessel back to its floor with nothing to resume,
+    // which is what keeps SEATED ⊥ RAISED true at rest (waking-floor#the-raise-is-a-vessel-layer-act).
+    // The vessel's OWN verifying key names both sides here: it is the vessel a grant must answer for, and
+    // the Nexus whose members board it reads. A Herm carrying a foreign Nexus names that Nexus instead.
+    const selfKey = await loadVesselVerifyingKey(storageDir);
+    const raiseDoor = standRaiseDoor({
+      vesselId:   selfKey,
+      nexus:      selfKey,
+      floor:      standing,
+      leaseEpoch: () => effectiveLeaseEpochOnBoard(herm.daemon.daemonHandle, selfKey),
+      // Recognition BORROWS the membership fold that already stands — quorum-signed, contract-in
+      // verified. A vessel carrying no members recognises nobody, which is the fail-closed reading.
+      recognises: async (nym) => (await nexusMemberNyms(storageDir)).has(nym.toLowerCase()),
+      verify:     verifyNymSignature,
+      nonce:      () => randomBytes(32).toString("hex"),
+    });
+    console.log(`[herm] standing:  ${await raiseDoor.standing()} — the raise door answers at the crossroads`);
     for (const f of reachFaces) console.log(`[herm] ws:        ${wsUrlForOrigin(f.origin)}   (${f.kind})`);
 
     // The CARRIAGE CROSSROADS (Socket B) — announced when a relay port rode the config (LAR_HERM_RELAY_PORT).
