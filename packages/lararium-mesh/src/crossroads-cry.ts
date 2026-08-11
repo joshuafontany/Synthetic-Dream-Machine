@@ -26,6 +26,16 @@
  * been written. Who may sign a Nexus kāpae is the charter quorum's business, and a cry's signature is the
  * board writer's; the fold reads the record and reports what stands.
  *
+ * ── ▶ SUSPENDED, AND FURTHER OUT THAN IT LOOKS ────────────────────────────────────────────────
+ * Nothing calls this fold either, and here the gap is larger: NOTHING WRITES A CRY. The board this reads
+ * has no producer at all — a Handle announce is ruled to land as a kūkala (persona-policy#the-announce-is
+ * -a-kukala) and the announce does not yet write one. So the work ahead is the BOARD, never the wiring;
+ * a fold over an empty board reports an empty board, correctly and pointlessly.
+ *
+ * Kept standing rather than deferred, because the fold is the part with the subtle law in it — two
+ * authorities that never blur, and a kāpae that must defeat a later cry — and that reasoning is cheaper
+ * to hold in code with its tests than to re-derive when the board arrives.
+ *
  * Meme: lar:///ha.ka.ba/lararium/docs/crossroads
  */
 

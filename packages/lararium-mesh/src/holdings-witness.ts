@@ -25,6 +25,17 @@
  * A correction naming a command that does not exist wastes the reader's trust the first time they type it.
  * Where the act has no verb yet, the finding says so plainly rather than inventing one.
  *
+ * ── ▶ SUSPENDED, AND ON WHAT ──────────────────────────────────────────────────────────────────
+ * This fold stands complete and NOTHING CALLS IT, which reads as an unwired module and is not one. The
+ * `declared` reading has no producer: `bodyIndexBagUri` is exported and called by nobody, because the
+ * @cad index SITER is designed and unbuilt. Wired today, every held file would report UNDECLARED — true
+ * of each file and useless as a report, since the correction below already says the crossing has no verb.
+ *
+ * So the blocker sits OUTSIDE this module and gets named rather than left for the next reader to
+ * re-derive: the DECLARING ACT needs a verb, and the body index needs a writer. When one lands, the
+ * three readings are ready — `mirror-paths` projects `onDisk`, the index gives `declared`, and
+ * `readCasBlobFromFs` answers `casHolds`.
+ *
  * Meme: lar:///ha.ka.ba/lararium/docs/crossroads
  */
 
