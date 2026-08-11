@@ -28,6 +28,7 @@
     "@automerge/automerge-repo": "2.6.0-alpha.3",
     "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.3",
     "@automerge/automerge-repo-storage-indexeddb": "2.6.0-alpha.3",
+    "@noble/ed25519": "^3.1.0",
     "@lararium/keyhive": "workspace:*",
     "@lararium/mesh": "workspace:*",
     "@lararium/tw5": "workspace:*"
