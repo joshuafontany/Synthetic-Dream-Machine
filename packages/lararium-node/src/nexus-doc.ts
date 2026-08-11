@@ -32,7 +32,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import {
-  NEXUS_DOC_KIND, NEXUS_CHARTER_URI, NEXUS_CHARTER_URI_PATH,
+  NEXUS_DOC_DOMAIN, NEXUS_CHARTER_URI, NEXUS_CHARTER_URI_PATH,
   type NexusDoc, type NexusCharterKahu, type SealEpoch,
   type FederationPosture, type CabalJoinPolicy, type AdmissionDials,
 } from "@lararium/mesh";
@@ -69,7 +69,7 @@ export const PRACTICE_BLOCK = "nexus-practice" as const;
 
 /** The SEAL joint on disk — the epoch head plus the pre-rotated lineage behind it. */
 export interface NexusSealBlock {
-  readonly kind:         typeof NEXUS_DOC_KIND;
+  readonly kind:         typeof NEXUS_DOC_DOMAIN;
   readonly sealEpochCid: string | null;
   readonly sealLineage?: readonly SealEpoch[];
 }
@@ -145,7 +145,7 @@ function coerceSealLineage(raw: unknown): SealEpoch[] | "torn" | undefined {
 function composeDoc(seal: unknown, kahu: unknown, practice: unknown): NexusDoc | null {
   if (typeof seal !== "object" || seal === null) return null;
   const s = seal as Record<string, unknown>;
-  if (s["kind"] !== NEXUS_DOC_KIND) return null;
+  if (s["kind"] !== NEXUS_DOC_DOMAIN) return null;
   const epoch = s["sealEpochCid"];
   const sealEpochCid = typeof epoch === "string" && epoch.length > 0 ? epoch : null;
   const lineage = coerceSealLineage(s["sealLineage"]);
@@ -174,7 +174,7 @@ function composeDoc(seal: unknown, kahu: unknown, practice: unknown): NexusDoc |
   const p = (typeof practice === "object" && practice !== null ? practice : {}) as Record<string, unknown>;
   const posture = p["federationPosture"] === "open" ? ("open" as const) : undefined;
 
-  const base: NexusDoc = { kind: NEXUS_DOC_KIND, threshold: k["threshold"] as number, sealEpochCid, kahu: seats };
+  const base: NexusDoc = { kind: NEXUS_DOC_DOMAIN, threshold: k["threshold"] as number, sealEpochCid, kahu: seats };
   const withLineage = lineage === undefined ? base : { ...base, sealLineage: lineage };
   return posture === undefined ? withLineage : { ...withLineage, federationPosture: posture };
 }
@@ -207,8 +207,8 @@ export function renderNexusDoc(doc: NexusDoc): string {
   const depth  = doc.sealLineage?.length ?? 0;
   const lineageLine = depth > 0 ? ` · pre-rotated lineage: ${depth} epoch(s), head at seq ${depth - 1}` : "";
   const seal: NexusSealBlock = doc.sealLineage === undefined
-    ? { kind: NEXUS_DOC_KIND, sealEpochCid: doc.sealEpochCid }
-    : { kind: NEXUS_DOC_KIND, sealEpochCid: doc.sealEpochCid, sealLineage: doc.sealLineage };
+    ? { kind: NEXUS_DOC_DOMAIN, sealEpochCid: doc.sealEpochCid }
+    : { kind: NEXUS_DOC_DOMAIN, sealEpochCid: doc.sealEpochCid, sealLineage: doc.sealLineage };
   const kahu: NexusKahuBlock = { threshold: doc.threshold, kahu: doc.kahu };
   const practice: NexusPracticeBlock =
     doc.federationPosture === undefined ? {} : { federationPosture: doc.federationPosture };

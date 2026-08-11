@@ -55,7 +55,10 @@ import { type CabalJoinPolicy, DEFAULT_JOIN_POLICY } from "./cabal-invite.js";
 import type { AdmissionDials } from "./admission-price.js";
 
 /** The doc kind the antigen roster trusts — a doc carrying any other kind folds to the empty (inert) roster. */
-export const NEXUS_DOC_KIND = NEXUS_DOC_DOMAIN;
+/** The doc kind the antigen roster trusts — domain separation wearing its DOCUMENT form. A reader that
+ *  meets another kind folds to the empty (inert) roster, exactly as a verifier meeting another signing
+ *  domain refuses: same law, one on bytes, one on a record. So it takes the registry name directly. */
+export { NEXUS_DOC_DOMAIN } from "./domains.js";
 
 /** The charter doc's stable lar: bearing (names the doc; grants nothing — lar: NAMES, never fetches). */
 export const NEXUS_CHARTER_URI = "lar:///nexus.charter.seats" as const;
@@ -76,7 +79,7 @@ export interface NexusCharterKahu {
  * type its in-memory face.
  */
 export interface NexusDoc {
-  readonly kind:            typeof NEXUS_DOC_KIND;
+  readonly kind:            typeof NEXUS_DOC_DOMAIN;
   /** k — the quorum threshold a valid antigen act carries (2-of-3 at founding). */
   readonly threshold:       number;
   /** The charter epoch the antigen roots on — the pre-rotated chain's HEAD epochCid, or null while unestablished. */
@@ -147,7 +150,7 @@ function isSeatedKey(key: string | null): key is string {
 
 /** The seated verifying keys a doc carries (ascending, de-duped) — the ONLY keys a quorum ever counts. */
 export function seatedKahuKeys(doc: NexusDoc | null): string[] {
-  if (!doc || doc.kind !== NEXUS_DOC_KIND) return [];
+  if (!doc || doc.kind !== NEXUS_DOC_DOMAIN) return [];
   return [...new Set(doc.kahu.map((k) => k.verifyingKey).filter(isSeatedKey).map((k) => k.toLowerCase()))].sort();
 }
 
@@ -160,7 +163,7 @@ export function seatedKahuKeys(doc: NexusDoc | null): string[] {
  */
 export function genesisSealEpochCid(seatedKeys: readonly string[], threshold: number): string {
   const keys = [...seatedKeys].map((k) => k.toLowerCase()).sort();
-  return `epoch0-${sha256HexSync(canonicalJson({ kind: NEXUS_DOC_KIND, keys, threshold }))}`;
+  return `epoch0-${sha256HexSync(canonicalJson({ kind: NEXUS_DOC_DOMAIN, keys, threshold }))}`;
 }
 
 /**
@@ -269,5 +272,5 @@ export function foundingQuorumSeated(doc: NexusDoc | null): boolean {
  * this doc, so an unseated scaffold stays inert exactly as an absent one does.
  */
 export function emptyFoundingCharterDoc(): NexusDoc {
-  return { kind: NEXUS_DOC_KIND, threshold: 0, sealEpochCid: null, kahu: [] };
+  return { kind: NEXUS_DOC_DOMAIN, threshold: 0, sealEpochCid: null, kahu: [] };
 }

@@ -63,6 +63,17 @@ for p in sorted(pathlib.Path("packages").rglob("*.ts")):
                 continue
             stray.append(f"{s}:{i}  {m.group(1)}")
 
+# ── USED — a domain nobody signs under is design-time language wearing protocol clothes ─────────
+# `delegation-edge` sat here exactly once: minted from a module filename, while that module takes its
+# domain as a PARAMETER and callers pass fleet-proof or dyad-binding. A registry that accretes unused
+# entries stops being a map of what the house signs.
+srcdirs = [q for q in pathlib.Path("packages").rglob("*.ts")
+           if "/dist/" not in str(q) and q != REG and "/src/" in str(q)]
+blob = "\n".join(q.read_text(errors="replace") for q in srcdirs)
+unused = [e for e, _n in names if not re.search(rf"\b{e}\b", blob)]
+if unused:
+    fail.append("registered but signed under by nothing: " + ", ".join(unused))
+
 print(f"[domain-registry] {len(names)} domains, all under {root}")
 if stray:
     print(f"  {len(stray)} domain literal(s) written OUTSIDE the registry:")

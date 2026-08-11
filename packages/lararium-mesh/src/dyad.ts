@@ -43,7 +43,7 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/persona-circle · lar:///ha.ka.ba/lares/api/pono/group-as-closure
  */
 
-import { DYAD_DOMAIN } from "./domains.js";
+import { DYAD_ID_DOMAIN } from "./domains.js";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, tiddlerText } from "./base-doc.js";
 import { sha256HexSync, canonicalJson } from "./crypto.js";
@@ -53,8 +53,7 @@ import {
 import type { DeviceDelegationTiddler, LarDid } from "./device-delegation.js";
 
 /** The domain a dyad id hashes under — so an id never collides with another content-address in the tree. */
-export const DYAD_ID_DOMAIN = DYAD_DOMAIN;
-
+export { DYAD_ID_DOMAIN } from "./domains.js";
 /** The tiddler-key prefix a vessel's dyad slots ride under — N slots, never one `self`. */
 export const DYAD_SLOT_PREFIX = "lar:///ha.ka.ba/dreamnet/dyad/" as const;
 

@@ -13,12 +13,11 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/carry-contract#kapae-the-antigen
  */
 
-import { MU_DOMAIN } from "./domains.js";
+import { MU_VOID_DOMAIN } from "./domains.js";
 import { canonicalJson, canonicalJsonBytes } from "./crypto.js";
 
 /** The domain of the void — a stable tag so a reader parses Mu without inferring intent from shape. */
-export const MU_VOID_DOMAIN = MU_DOMAIN;
-
+export { MU_VOID_DOMAIN } from "./domains.js";
 /** The void itself — carries NOTHING but its domain. No reason, no target, no confession rides here. */
 export interface MuVoid {
   readonly kind: typeof MU_VOID_DOMAIN;

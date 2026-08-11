@@ -54,12 +54,10 @@ export const DEVICE_DELEGATION_DOMAIN = d("device-delegation");
 export const PERSONA_KEL_DOMAIN = d("persona-kel");
 /** The announced outward face: a self-certifying HandleCard. */
 export const HANDLE_CARD_DOMAIN = d("handle-card");
-/** A signer vouching for one subject at one epoch — the delegation-edge primitive. */
-export const DELEGATION_EDGE_DOMAIN = d("delegation-edge");
 /** A fleet proof: one nym carried across a human's own vessels. */
 export const FLEET_PROOF_DOMAIN = d("fleet-proof");
 /** The vessel×veil dyad, and the binding that names it. */
-export const DYAD_DOMAIN = d("dyad");
+export const DYAD_ID_DOMAIN = d("dyad-id");
 export const DYAD_BINDING_DOMAIN = d("dyad-binding");
 
 // ── ADMISSION + ENROLMENT ───────────────────────────────────────────────────────────────────────
@@ -88,7 +86,7 @@ export const VOUCH_EDGE_DOMAIN = d("vouch-edge");
 /** The record that a re-anchoring happened, never what made it valid. */
 export const RE_ANCHORING_DOMAIN = d("re-anchoring");
 /** A guardian's confirmation on a recovery card. */
-export const RECOVERY_CARD_CONFIRM_DOMAIN = d("recovery-card-confirm");
+export const GUARDIAN_CONFIRM_DOMAIN = d("guardian-confirm");
 
 // ── SEALED CONTENT + TRANSPORT ──────────────────────────────────────────────────────────────────
 /** The keyring delivery envelope — the signed wire shape. */
@@ -111,9 +109,9 @@ export const CIRCLE_SCOPE_INFO = d("circle-scope");
 /** The served `@oracle` pointer doc. */
 export const ORACLE_POINTER_DOMAIN = d("oracle-pointer");
 /** The deterministic plugin build's provenance. */
-export const PLUGIN_BUILD_DOMAIN = d("plugin-build");
+export const PLUGIN_ATTESTATION_DOMAIN = d("plugin-attestation");
 /** The Mu void marker — an immune-set refusal carrying no subject. */
-export const MU_DOMAIN = d("mu");
+export const MU_VOID_DOMAIN = d("mu-void");
 /** A vessel's raise challenge — verifier-chosen freshness at the waking floor. */
 export const RAISE_CHALLENGE_DOMAIN = d("raise-challenge");
 
@@ -122,14 +120,13 @@ export const RAISE_CHALLENGE_DOMAIN = d("raise-challenge");
  * still cannot hide: the witness also refuses any domain literal written outside this file.
  */
 export const ALL_DOMAINS: readonly string[] = [
-  DEVICE_DELEGATION_DOMAIN, PERSONA_KEL_DOMAIN, HANDLE_CARD_DOMAIN, DELEGATION_EDGE_DOMAIN,
-  FLEET_PROOF_DOMAIN, DYAD_DOMAIN, DYAD_BINDING_DOMAIN,
+  DEVICE_DELEGATION_DOMAIN, PERSONA_KEL_DOMAIN, HANDLE_CARD_DOMAIN,   FLEET_PROOF_DOMAIN, DYAD_ID_DOMAIN, DYAD_BINDING_DOMAIN,
   PERSONA_ENROLL_DOMAIN, PERSONA_GRANT_DOMAIN, PERSONA_SEALED_DOMAIN, PERSONA_JOIN_DOMAIN,
   PERSONA_ADMIT_SEAL_INFO, BOOT_INVITE_DOMAIN, CABAL_INVITE_DOMAIN,
   NEXUS_DOC_DOMAIN, KAPAE_ANTIGEN_DOMAIN, CARRIAGE_ENTRY_DOMAIN, CARRIAGE_CONTRACT_DOMAIN,
   MEMBERSHIP_RELAY_DOMAIN, EDGE_KAPAE_DOMAIN, VOUCH_EDGE_DOMAIN, RE_ANCHORING_DOMAIN,
-  RECOVERY_CARD_CONFIRM_DOMAIN,
+  GUARDIAN_CONFIRM_DOMAIN,
   KEYRING_ENVELOPE_DOMAIN, KEYRING_ENVELOPE_SEAL_INFO, CAD_KEYSTREAM_INFO, RELAY_GATE_INFO,
   PERSONA_SCOPE_INFO, CIRCLE_SCOPE_INFO,
-  ORACLE_POINTER_DOMAIN, PLUGIN_BUILD_DOMAIN, MU_DOMAIN, RAISE_CHALLENGE_DOMAIN,
+  ORACLE_POINTER_DOMAIN, PLUGIN_ATTESTATION_DOMAIN, MU_VOID_DOMAIN, RAISE_CHALLENGE_DOMAIN,
 ];

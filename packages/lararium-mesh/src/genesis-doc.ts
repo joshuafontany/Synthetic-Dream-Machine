@@ -17,7 +17,7 @@ import {
   save   as automergeSave,
   load   as automergeLoad,
 } from "@automerge/automerge";
-import { PLUGIN_BUILD_DOMAIN } from "./domains.js";
+import { PLUGIN_ATTESTATION_DOMAIN } from "./domains.js";
 import { stringifyAutomergeUrl } from "@automerge/automerge-repo";
 import { canonicalJsonBytes } from "./crypto.js";
 import type { AutomergeUrl, BinaryDocumentId } from "@automerge/automerge-repo";
@@ -80,8 +80,7 @@ export interface PluginBuildAttestation {
 }
 
 /** The domain an attestation signs within. A signature means nothing without the domain it was made in. */
-export const PLUGIN_ATTESTATION_DOMAIN = PLUGIN_BUILD_DOMAIN;
-
+export { PLUGIN_ATTESTATION_DOMAIN } from "./domains.js";
 /** The canonical bytes an attestation signs over — every field EXCEPT the signature that covers them. */
 export function pluginAttestationBytes(a: Omit<PluginBuildAttestation, "builder">): Uint8Array {
   return canonicalJsonBytes({ domain: PLUGIN_ATTESTATION_DOMAIN, ...a });

@@ -14,7 +14,7 @@ import * as ed from "@noble/ed25519";
 import { hex } from "../src/crypto.js";
 import {
   rosterFromNexusDoc, foundingRoster, foundingQuorumSeated, genesisSealEpochCid,
-  sealLineageHead, emptyFoundingCharterDoc, NEXUS_DOC_KIND, type NexusDoc,
+  sealLineageHead, emptyFoundingCharterDoc, NEXUS_DOC_DOMAIN, type NexusDoc,
 } from "../src/nexus-seal-seed.js";
 import {
   genesisCharterEpoch, rotateSealEpoch, sealKeySetHash, mintCharterEpoch, type SealEpoch,
@@ -42,7 +42,7 @@ async function seatedDoc(seeds: Uint8Array[]): Promise<NexusDoc> {
   ];
   const seated = keys;
   return {
-    kind: NEXUS_DOC_KIND, threshold: 2,
+    kind: NEXUS_DOC_DOMAIN, threshold: 2,
     sealEpochCid: seated.length >= 2 ? genesisSealEpochCid(seated, 2) : null,
     kahu,
   };
@@ -122,7 +122,7 @@ describe("rosterFromNexusDoc — the PRE-ROTATED CHAIN roots the antigen on the 
     }
     const kahu = keys.map((vk, i) => ({ displayName: ["Kahu Alpha", "Kahu Beta", "Kahu Gamma"][i]!, verifyingKey: vk }));
     const head = chain[chain.length - 1]!;
-    return { kind: NEXUS_DOC_KIND, threshold: 2, sealEpochCid: head.epochCid, sealLineage: chain, kahu };
+    return { kind: NEXUS_DOC_DOMAIN, threshold: 2, sealEpochCid: head.epochCid, sealLineage: chain, kahu };
   }
 
   test("a chain-rooted genesis doc raises a live roster on the head epoch + verifies a real quorum entry", async () => {

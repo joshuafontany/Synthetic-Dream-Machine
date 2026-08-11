@@ -13,13 +13,13 @@
 import { describe, test, expect } from "vitest";
 import {
   joinPolicyFromDoc, federationPostureFromDoc, admissionDialsFromDoc,
-  NEXUS_DOC_KIND, type NexusDoc,
+  NEXUS_DOC_DOMAIN, type NexusDoc,
 } from "../src/nexus-seal-seed.js";
 
 /** A minimal seated charter — the fields under test ride on top per-case. */
 function joinCharter(extra: Partial<NexusDoc> = {}): NexusDoc {
   return {
-    kind: NEXUS_DOC_KIND, threshold: 2, sealEpochCid: null, kahu: [], ...extra,
+    kind: NEXUS_DOC_DOMAIN, threshold: 2, sealEpochCid: null, kahu: [], ...extra,
   } as NexusDoc;
 }
 
