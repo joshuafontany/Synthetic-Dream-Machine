@@ -61,7 +61,7 @@ export interface RaiseGrant {
   readonly sig:       string;
 }
 
-/** Why a grant did not stand. A reason, never a throw — untrusted input crosses this seam. */
+/** Why a grant did not stand. A reason, never a throw — untrusted input crosses this shore. */
 export type RaiseRefusal =
   | "wrong-vessel"      // the grant answers a challenge some other vessel emitted
   | "wrong-nexus"       // the challenge names a Nexus this vessel does not carry

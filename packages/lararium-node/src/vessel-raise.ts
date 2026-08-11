@@ -7,7 +7,7 @@
  * vessel's at-rest state never changes, so a stolen disk yields nothing of anybody's person. Writing a
  * standing raise anywhere would re-open the bearer-credential hole the challenge nonce exists to close.
  *
- * So this module holds two things in memory and offers no persistence seam at all — not as an omission,
+ * So this module holds two things in memory and offers no persistence shore at all — not as an omission,
  * as the ruling.
  *
  * ── THE LIVE CHALLENGE DROPS AFTER ONE ANSWER, WHICHEVER WAY IT WENT ────────────────────────────
@@ -170,7 +170,7 @@ export async function nexusMemberNyms(storageDir: string): Promise<ReadonlySet<s
   }
 }
 
-/** Verify an ed25519 signature by a nym over bytes. Never throws — untrusted input crosses this seam. */
+/** Verify an ed25519 signature by a nym over bytes. Never throws — untrusted input crosses this shore. */
 export async function verifyNymSignature(nym: string, bytes: Uint8Array, sig: string): Promise<boolean> {
   try { return await ed25519.verifyAsync(hexToBytes(sig), bytes, hexToBytes(nym.replace(/^0x/, ""))); }
   catch { return false; }

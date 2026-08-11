@@ -8,7 +8,7 @@
  * ── WHY THIS VERB CARRIES NO `ask` OR `answer` YET, SAID PLAINLY ────────────────────────────────
  * Those two halves belong to the ASKING vessel, and the door that holds them lives in that vessel's
  * running process — a raise is presence, held in memory, never written down. Reaching it from a separate
- * CLI process needs the door registered as a daemon verb, at the `wireVerbs` seam in `open-node-vessel`,
+ * CLI process needs the door registered as a daemon verb, at the `wireVerbs` shore in `open-node-vessel`,
  * which means constructing the door there rather than after the open. That is a boot-path change and it
  * waits for its own pass. Naming a verb here that does not stand would spend a reader's trust the first
  * time they typed it.
