@@ -55,6 +55,10 @@ jobs:
       # always built, which is why this passed on every desk and failed on every runner.
       - name: Build (typecheck resolves workspace subpaths through dist/)
         run: pnpm -r build
+      # A range in a manifest is a version nobody chose. This costs no build, so it rides the cheapest
+      # job and fails before anything downstream spends time on a tree whose bytes are not pinned.
+      - name: Every dependency names ONE version
+        run: tools/exact-deps-witness.sh
       - name: Typecheck all packages
         run: pnpm -r typecheck
 

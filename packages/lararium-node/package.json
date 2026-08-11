@@ -32,18 +32,18 @@
     "@lararium/mesh": "workspace:*",
     "@lararium/sensorium": "workspace:*",
     "@lararium/tw5": "workspace:*",
-    "@octokit/rest": "^22.0.1",
-    "@types/ws": "^8.18.1",
-    "isomorphic-ws": "^5.0.0",
-    "pngjs": "^7.0.0",
-    "qrcode": "^1.5.4",
-    "ws": "^8.21.3"
+    "@octokit/rest": "22.0.1",
+    "@types/ws": "8.18.1",
+    "isomorphic-ws": "5.0.0",
+    "pngjs": "7.0.0",
+    "qrcode": "1.5.4",
+    "ws": "8.21.3"
   },
   "devDependencies": {
-    "@noble/ed25519": "^3.1.0",
-    "@types/pngjs": "^6.0.5",
-    "@types/qrcode": "^1.5.6",
-    "tsx": "^4.23.11",
-    "vitest": "^4.1.10"
+    "@noble/ed25519": "3.1.0",
+    "@types/pngjs": "6.0.5",
+    "@types/qrcode": "1.5.6",
+    "tsx": "4.23.11",
+    "vitest": "4.1.10"
   }
 }

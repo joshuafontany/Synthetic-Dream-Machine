@@ -15,13 +15,13 @@
     "@automerge/automerge-repo-storage-indexeddb": "2.6.0-alpha.3",
     "@lararium/browser": "workspace:*",
     "@lararium/mesh": "workspace:*",
-    "idiomorph": "^0.7.3"
+    "idiomorph": "0.7.4"
   },
   "devDependencies": {
     "@keyhive/keyhive": "0.1.0-alpha.6",
     "@lararium/keyhive": "workspace:*",
-    "vite": "^8.2.1",
-    "vite-plugin-arraybuffer": "^0.1.0",
-    "vite-plugin-wasm": "^3.6.0"
+    "vite": "8.2.1",
+    "vite-plugin-arraybuffer": "0.1.4",
+    "vite-plugin-wasm": "3.6.0"
   }
 }

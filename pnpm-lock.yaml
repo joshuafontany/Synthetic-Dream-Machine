@@ -12,22 +12,22 @@ importers:
         specifier: workspace:*
         version: link:packages/lares-cli
       '@types/node':
-        specifier: ^26.2.0
+        specifier: 26.2.0
         version: 26.2.0
       concurrently:
-        specifier: ^10.0.4
+        specifier: 10.0.4
         version: 10.0.4
       playwright:
-        specifier: ^1.62.1
+        specifier: 1.62.1
         version: 1.62.1
       playwright-mcp-wsl:
-        specifier: ^1.0.0
+        specifier: 1.0.0
         version: 1.0.0
       tsx:
-        specifier: ^4.23.11
+        specifier: 4.23.11
         version: 4.23.11
       typescript:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2
 
   TiddlyWiki5:
@@ -70,7 +70,7 @@ importers:
         specifier: workspace:*
         version: link:../lararium-mesh
       idiomorph:
-        specifier: ^0.7.3
+        specifier: 0.7.4
         version: 0.7.4
     devDependencies:
       '@keyhive/keyhive':
@@ -80,13 +80,13 @@ importers:
         specifier: workspace:*
         version: link:../lararium-keyhive
       vite:
-        specifier: ^8.2.1
+        specifier: 8.2.1
         version: 8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11)
       vite-plugin-arraybuffer:
-        specifier: ^0.1.0
+        specifier: 0.1.4
         version: 0.1.4
       vite-plugin-wasm:
-        specifier: ^3.6.0
+        specifier: 3.6.0
         version: 3.6.0(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/lararium-browser:
@@ -113,23 +113,23 @@ importers:
         specifier: workspace:*
         version: link:../lararium-tw5
       '@noble/ed25519':
-        specifier: ^3.1.0
+        specifier: 3.1.0
         version: 3.1.0
     devDependencies:
       '@vitest/browser':
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))(vitest@4.1.10)
       '@vitest/browser-playwright':
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(playwright@1.62.1)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))(vitest@4.1.10)
       tsx:
-        specifier: ^4.23.11
+        specifier: 4.23.11
         version: 4.23.11
       vite-plugin-wasm:
-        specifier: ^3.6.0
+        specifier: 3.6.0
         version: 3.6.0(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/lararium-keyhive:
@@ -145,7 +145,7 @@ importers:
         version: link:../lararium-tw5
     devDependencies:
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/lararium-mempalace:
@@ -155,10 +155,10 @@ importers:
         version: link:../lararium-mesh
     devDependencies:
       tsx:
-        specifier: ^4.23.11
+        specifier: 4.23.11
         version: 4.23.11
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/lararium-mesh:
@@ -176,23 +176,23 @@ importers:
         specifier: 2.6.0-alpha.3
         version: 2.6.0-alpha.3
       '@noble/ciphers':
-        specifier: ^2.3.0
+        specifier: 2.3.0
         version: 2.3.0
       '@noble/curves':
-        specifier: ^2.3.0
+        specifier: 2.3.0
         version: 2.3.0
       '@noble/ed25519':
-        specifier: ^3.1.0
+        specifier: 3.1.0
         version: 3.1.0
       '@noble/hashes':
-        specifier: ^2.3.0
+        specifier: 2.3.0
         version: 2.3.0
     devDependencies:
       tsx:
-        specifier: ^4.23.11
+        specifier: 4.23.11
         version: 4.23.11
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/lararium-node:
@@ -228,38 +228,38 @@ importers:
         specifier: workspace:*
         version: link:../lararium-tw5
       '@octokit/rest':
-        specifier: ^22.0.1
+        specifier: 22.0.1
         version: 22.0.1
       '@types/ws':
-        specifier: ^8.18.1
+        specifier: 8.18.1
         version: 8.18.1
       isomorphic-ws:
-        specifier: ^5.0.0
+        specifier: 5.0.0
         version: 5.0.0(ws@8.21.3)
       pngjs:
-        specifier: ^7.0.0
+        specifier: 7.0.0
         version: 7.0.0
       qrcode:
-        specifier: ^1.5.4
+        specifier: 1.5.4
         version: 1.5.4
       ws:
-        specifier: ^8.21.3
+        specifier: 8.21.3
         version: 8.21.3
     devDependencies:
       '@noble/ed25519':
-        specifier: ^3.1.0
+        specifier: 3.1.0
         version: 3.1.0
       '@types/pngjs':
-        specifier: ^6.0.5
+        specifier: 6.0.5
         version: 6.0.5
       '@types/qrcode':
-        specifier: ^1.5.6
+        specifier: 1.5.6
         version: 1.5.6
       tsx:
-        specifier: ^4.23.11
+        specifier: 4.23.11
         version: 4.23.11
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/lararium-sensorium:
@@ -272,10 +272,10 @@ importers:
         version: link:../lararium-mesh
     devDependencies:
       tsx:
-        specifier: ^4.23.11
+        specifier: 4.23.11
         version: 4.23.11
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/lararium-tw5:
@@ -284,26 +284,26 @@ importers:
         specifier: workspace:*
         version: link:../lararium-mesh
       '@taplo/lib':
-        specifier: ^0.5.0
+        specifier: 0.5.0
         version: 0.5.0
       smol-toml:
-        specifier: ^1.7.1
+        specifier: 1.7.1
         version: 1.7.1
       tiddlywiki:
         specifier: workspace:*
         version: link:../../TiddlyWiki5
     devDependencies:
       tsx:
-        specifier: ^4.23.11
+        specifier: 4.23.11
         version: 4.23.11
       tw5-typed:
-        specifier: ^1.1.5
+        specifier: 1.1.5
         version: 1.1.5
       vite:
-        specifier: ^8.2.1
+        specifier: 8.2.1
         version: 8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11)
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/lares-cli:
@@ -325,10 +325,10 @@ importers:
         version: link:../lararium-tw5
     devDependencies:
       tsx:
-        specifier: ^4.23.11
+        specifier: 4.23.11
         version: 4.23.11
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   packages/tree-sitter-memetic-wikitext:
@@ -352,7 +352,7 @@ importers:
         specifier: 2.6.0-alpha.3
         version: 2.6.0-alpha.3
       vitest:
-        specifier: ^4.1.10
+        specifier: 4.1.10
         version: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
 
   wtf: {}
@@ -846,9 +846,6 @@ packages:
 
   '@types/node@24.13.3':
     resolution: {integrity: sha512-Dh8vAsV36ig5wa9OX4pXvMc9D3Veibfw2wix0CUwYODLD8nkj9UsLjASr49nPg+2eKzxhBV+v7L8pXvT4e639Q==}
-
-  '@types/node@26.1.1':
-    resolution: {integrity: sha512-nxAkRSVkN1Y0JC1W8ky/fTfkGsMmcrRsbx+3XoZE+rMOX71kLYTV7fLXpqud1GpbpP5TuffXFqfX7fH2GgZREw==}
 
   '@types/node@26.2.0':
     resolution: {integrity: sha512-5IviulTZeRNp2vAJ514cc/HUlY5nZ9fCbq9DMyC52BrhFZACo3nI0R7qBxhQmo/d27NFe96ur/b7Wwxklda+kg==}
@@ -1870,18 +1867,6 @@ packages:
     resolution: {integrity: sha512-42AtmgqjV+X1VpdOfyTGOYRi0/zsoLqtXQckTmqTeybT+BDIbM/Guxo7x3pE2vtpr1ok6xRqM9OpBe+Jyoqyww==}
     engines: {node: '>=18'}
 
-  ws@8.21.0:
-    resolution: {integrity: sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==}
-    engines: {node: '>=10.0.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: '>=5.0.2'
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-
   ws@8.21.3:
     resolution: {integrity: sha512-201TZ/kPWxoPr/OKWjquZR1SWKXcvxdH+e1xrx89b3YbmzLMFCLfnaG1HFIgWzJOEWZ7MvpK++odZufgYR50Rw==}
     engines: {node: '>=10.0.0'}
@@ -2306,21 +2291,17 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
-  '@types/node@26.1.1':
-    dependencies:
-      undici-types: 8.3.0
-
   '@types/node@26.2.0':
     dependencies:
       undici-types: 8.3.0
 
   '@types/pngjs@6.0.5':
     dependencies:
-      '@types/node': 26.1.1
+      '@types/node': 26.2.0
 
   '@types/qrcode@1.5.6':
     dependencies:
-      '@types/node': 26.1.1
+      '@types/node': 26.2.0
 
   '@types/tern@0.23.9':
     dependencies:
@@ -2328,7 +2309,7 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 26.1.1
+      '@types/node': 26.2.0
 
   '@typescript-eslint/types@8.62.0': {}
 
@@ -2415,7 +2396,7 @@ snapshots:
       sirv: 3.0.2
       tinyrainbow: 3.1.0
       vitest: 4.1.10(@types/node@26.2.0)(@vitest/browser-playwright@4.1.10)(vite@8.2.1(@types/node@26.2.0)(esbuild@0.28.1)(tsx@4.23.11))
-      ws: 8.21.0
+      ws: 8.21.3
     transitivePeerDependencies:
       - bufferutil
       - msw
@@ -3214,8 +3195,6 @@ snapshots:
       ansi-styles: 6.2.3
       string-width: 7.2.0
       strip-ansi: 7.2.0
-
-  ws@8.21.0: {}
 
   ws@8.21.3: {}
 

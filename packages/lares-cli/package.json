@@ -22,7 +22,7 @@
     "@lararium/tw5": "workspace:*"
   },
   "devDependencies": {
-    "tsx": "^4.23.11",
-    "vitest": "^4.1.10"
+    "tsx": "4.23.11",
+    "vitest": "4.1.10"
   }
 }

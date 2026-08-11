@@ -11,6 +11,6 @@
   "devDependencies": {
     "@automerge/automerge-repo": "2.6.0-alpha.3",
     "@automerge/automerge-repo-storage-nodefs": "2.6.0-alpha.3",
-    "vitest": "^4.1.10"
+    "vitest": "4.1.10"
   }
 }
