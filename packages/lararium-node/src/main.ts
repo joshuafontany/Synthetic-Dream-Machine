@@ -210,6 +210,14 @@ async function main(): Promise<void> {
       nonce:      () => randomBytes(32).toString("hex"),
     });
     console.log(`[herm] standing:  ${await raiseDoor.standing()} — the raise door answers at the crossroads`);
+
+    // THE VESSEL EMITS ITS OWN CHALLENGE, and emitting it costs nothing. It names what is being raised —
+    // vessel, Nexus, epoch, nonce — and carries nothing of what this vessel holds. A forged challenge buys
+    // an attacker nothing either: a grant answers only the exact nonce the asking vessel still holds, and
+    // an attacker holds no such vessel. One boot, one nonce, until the ask/answer verbs stand.
+    const invitation = await raiseDoor.ask();
+    console.log(`[herm] raise challenge (hand to a recognised operator; they run \`lares raise sign\`):`);
+    console.log(`[herm]   ${JSON.stringify(invitation)}`);
     for (const f of reachFaces) console.log(`[herm] ws:        ${wsUrlForOrigin(f.origin)}   (${f.kind})`);
 
     // The CARRIAGE CROSSROADS (Socket B) — announced when a relay port rode the config (LAR_HERM_RELAY_PORT).
