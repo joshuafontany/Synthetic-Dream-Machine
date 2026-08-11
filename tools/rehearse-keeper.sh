@@ -157,6 +157,12 @@ say "⓪′ preflight"
 # under the very node it set out to measure.
 run "pnpm build (dist matches source, and says so)" sh -c "cd '$REPO_ROOT' && pnpm build"
 run "the binary loads and answers"                    node "$LARES" help
+# A BUILD THAT EXITS 0 HAS NOT TYPECHECKED. `pnpm build` compiles per package and a package whose build
+# is not wired into the recursive run — or whose errors arrive colorized, with ANSI bytes sitting between
+# the word "error" and its code — passes a green exit and a naive grep alike. The witness reports REAL
+# errors per package and exits non-zero on any, so a type error cannot ride into a founding behind a
+# clean-looking build.
+run "the tree typechecks (not merely builds)"         sh -c "cd '$REPO_ROOT' && tools/typecheck-witness.sh"
 
 while [ "$CYCLE" -lt "$CYCLES" ]; do
   CYCLE=$((CYCLE + 1))
