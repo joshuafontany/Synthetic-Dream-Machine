@@ -68,10 +68,10 @@ def has_door(tool: str) -> str | None:
 # AN EXEMPTION MUST STATE WHY, AND IT PRINTS EVERY RUN. A silent allow-list decays into a surface nobody
 # audits; a permanently-red witness trains a reader to skip it. Both failures end the same way, so an
 # exemption stays visible and carries its reason where the next reader meets it.
-EXEMPT = {
-    "plane-record":
-        "the cross-plane witness lives py-side (`plane_query.plane_record_witness`); a CLI door has to "
-        "route through the palace holder the same way MCP does, which is a build rather than a listing",
+EXEMPT: dict[str, str] = {
+    # Empty by intent. `plane-record` sat here until its door landed — the daemon verb had stood all
+    # along and only the CLI side was missing, so the exemption bought a build rather than excusing one.
+    # A future entry states WHY where the next reader meets it, never in a commit message.
 }
 
 missing = [t for t in tools if not has_door(t) and t not in EXEMPT]
