@@ -142,7 +142,7 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
       status: "selected-for-next-boot",
       liveApplied: false,
       rebootRequired: true,
-      note: "active wiki marker updated; the current wiki keeps mounted until the next `lares serve` boot (alert seeded)",
+      note: "active wiki marker updated; the current wiki keeps mounted until the next `lares vessel stand --foreground` boot (alert seeded)",
     };
   };
 }

@@ -5,7 +5,7 @@
  *
  * Those session files (~/.claude/projects/…) ARE the mempalace's verbatim harvest
  * source, so a short window evaporates the raw memory before the ingest hook mines it.
- * `lares wake --claude` sets the floor when absent (no-clobber); THIS command forces a
+ * `lares vessel stand --claude` sets the floor when absent (no-clobber); THIS command forces a
  * value — the explicit lever to raise an existing-but-low setting.
  *
  *   lares cleanup-days            show the current value (+ the floor)

@@ -308,7 +308,7 @@ const personGroupAgentIdHex = (await composite.get(PERSONA_GROUP_AGENT_ID_TIDDLE
 if (!personGroupAgentIdHex) throw new Error("[binding] founding ceremony incomplete — no PersonaGroup");
 
 // delegate() throws unless the bag's Keyhive Document already exists — registerBag mints it
-// first (keyhive-provider.ts:146). The PersonaGroup agent hydrates by construction: `lares init`
+// first (keyhive-provider.ts:146). The PersonaGroup agent hydrates by construction: `lares vessel found`
 // writes PERSONA_GROUP_AGENT_ID_TIDDLER (ceremony-core.ts:156-159) and node boot reads it +
 // HALTs at Gate B/C if absent (open-node-vessel.ts:549-578). So at this call site a real,
 // membership-verified PersonaGroup is already present — never a phantom. Field name matches the

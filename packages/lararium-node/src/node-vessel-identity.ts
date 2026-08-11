@@ -314,7 +314,7 @@ export async function loadVesselVerifyingKey(dataDir: string): Promise<string> {
   const keyFile = join(identityDir(dataDir), keyFileName(hint.login));
   if (!existsSync(keyFile)) {
     throw new Error(
-      `[vessel-identity] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
+      `[vessel-identity] no key file at ${keyFile} — run \`lares vessel found\` first to generate the keypair`,
     );
   }
   const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
@@ -348,14 +348,14 @@ export async function persistVesselCard(dataDir: string, contactCardJson: string
 
 /**
  * Load the operator's cached ContactCard JSON. Throws when absent — the caller
- * must run `lares init` (which mints + persists it during the founding ceremony).
+ * must run `lares vessel found` (which mints + persists it during the founding ceremony).
  */
 export async function loadVesselCard(dataDir: string): Promise<string> {
   const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
   const cardFile = join(identityDir(dataDir), cardFileName(hint.login));
   if (!existsSync(cardFile)) {
     throw new Error(
-      `[vessel-identity] no ContactCard at ${cardFile} — run \`lares init\` (it mints the card during the founding ceremony)`,
+      `[vessel-identity] no ContactCard at ${cardFile} — run \`lares vessel found\` (it mints the card during the founding ceremony)`,
     );
   }
   return readFileSync(cardFile, "utf8");
@@ -366,7 +366,7 @@ export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array
   const keyFile = join(identityDir(dataDir), keyFileName(hint.login));
   if (!existsSync(keyFile)) {
     throw new Error(
-      `[vessel-identity] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
+      `[vessel-identity] no key file at ${keyFile} — run \`lares vessel found\` first to generate the keypair`,
     );
   }
   const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;

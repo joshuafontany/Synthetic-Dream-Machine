@@ -8,7 +8,7 @@
  *   · the v2 DELEGATION EDGE binds them without merging them, carrying the hearth's True Name as P
  *     in "Operator O delegates to Device D AT PLACE P".
  *
- * Runs the exact subsequence `lares init` executes (commands/init.ts: generateOrLoadVesselIdentity →
+ * Runs the exact subsequence `lares vessel found` executes (commands/init.ts: generateOrLoadVesselIdentity →
  * generateOrLoadPersonaGroupRoot → loadPersonaGroupRootSeed → buildDeviceDelegation) over a temp XDG
  * state home — no founding, no daemon, no ceremony repo. The browser twin lives at
  * browser/tests/browser-persona-vault.test.ts; this closes the node side.
@@ -33,7 +33,7 @@ const setEnv = (k: string, v: string | undefined): void => {
   if (v === undefined) delete process.env[k]; else process.env[k] = v;
 };
 
-/** The hearth's True Name stands in as the genesis engine CID `lares init` reads off disk. */
+/** The hearth's True Name stands in as the genesis engine CID `lares vessel found` reads off disk. */
 const HEARTH_TRUE_NAME = "bafyTestHearthTrueName";
 
 describe("the True Name Model — vessel, persona root, and the edge that binds them", () => {

@@ -238,7 +238,7 @@ async function personaList(args: ParsedArgs): Promise<number> {
     data: { active: active ?? null, personas: rows },
     human: () => {
       if (rows.length === 0) {
-        console.log("no personas held — stand the founder with `lares wake --install`, then name + declare every kahu (three symmetric commands): `lares persona new 0/1/2 --name '<label>' --handle '<Handle>' --seat` (new 0 loads+names the founder).");
+        console.log("no personas held — stand the founder with `lares vessel stand --install`, then name + declare every kahu (three symmetric commands): `lares persona new 0/1/2 --name '<label>' --handle '<Handle>' --seat` (new 0 loads+names the founder).");
         return;
       }
       console.log("personas (the private multitude — private label -> declared Handle):");
@@ -266,11 +266,11 @@ async function personaList(args: ParsedArgs): Promise<number> {
 async function personaSync(args: ParsedArgs): Promise<number> {
   const did = await fleetPeerDid();
   if (did === null) {
-    throw new UsageError("this install stands no vessel key — run `lares init` before carrying names to a fleet");
+    throw new UsageError("this install stands no vessel key — run `lares vessel found` before carrying names to a fleet");
   }
   const read = await readFleetSelves(did);
   if (!read.reached) {
-    throw new UsageError(`the fleet did not answer (${read.why}) — start the node (\`lares serve\`) so @persona can carry these names`);
+    throw new UsageError(`the fleet did not answer (${read.why}) — start the node (\`lares vessel stand --foreground\`) so @persona can carry these names`);
   }
   const localPetnames     = await makeNodePersonaPetnameStore();
   const localDeclarations = await makeNodePersonaDeclarationStore();

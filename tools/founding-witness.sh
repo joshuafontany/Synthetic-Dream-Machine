@@ -22,7 +22,7 @@ trap 'rm -rf "$TB"' EXIT
 git ls-files -z genesis/ | xargs -0 -I{} cp --parents "{}" "$TB/" 2>/dev/null
 
 echo "founding-witness: founding under $TB"
-if ! LAR_ROOT="$TB" node "$REPO/packages/lares-cli/bin/lares.mjs" init >"$TB/init.log" 2>&1; then
+if ! LAR_ROOT="$TB" node "$REPO/packages/lares-cli/bin/lares.mjs" vessel found >"$TB/init.log" 2>&1; then
   echo "  FOUNDING FAILED — tail of the log:"; tail -15 "$TB/init.log" | sed 's/^/    /'; exit 1
 fi
 

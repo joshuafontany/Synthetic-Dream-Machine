@@ -1,5 +1,5 @@
 /**
- * copilot-wire — `lares wake --copilot`: wire the LARES MCP seat (memory through the lares house)
+ * copilot-wire — `lares vessel stand --copilot`: wire the LARES MCP seat (memory through the lares house)
  * and the Lares session-ingest hook into the GitHub Copilot CLI home (~/.copilot/). A stale mempalace
  * MCP entry is reaped in the same pass — a harness holding its own palace holder reaches past the
  * node into the store, and N writers on one Chroma index is what corrupts it.
@@ -71,7 +71,7 @@ export function wireCopilotHome(opts: { home?: string } = {}): CopilotWireResult
 
   const laresMcp = resolveLaresMcp();
   if (laresMcp === null) {
-    steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" });
+    steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares vessel stand --init`" });
   } else {
     // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
     // package that moves its holder) otherwise sits drifted forever while the wire reports it present —

@@ -1,5 +1,5 @@
 /**
- * reset-targets — the wipe-list contract (`lares reset`, scripted.ts).
+ * reset-targets — the wipe-list contract (`lares vessel clear`, scripted.ts).
  *
  * Two laws under test (GAP 1, regenesis scout 2026-07-01):
  *   1. the projection watermark dies WITH the store — a surviving synced-tree

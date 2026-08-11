@@ -80,7 +80,7 @@ function resolve(opts: WorldlineKgOptions): Resolved {
       return execFileSync(bin, [...args], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 28, encoding: "utf8" });
     });
   const py = opts.python ?? resolveMempalacePython() ?? "";
-  if (!py) throw new KgUnavailable("no python holds mempalace — create ~/.venv and pip install the holder deps (`lares wake --install`)");
+  if (!py) throw new KgUnavailable("no python holds mempalace — create ~/.venv and pip install the holder deps (`lares vessel stand --install`)");
   const script = opts.script ?? resolveKgIo();
   if (!existsSync(script)) throw new KgUnavailable(`kg_io.py missing at ${script}`);
   // The KG lands SOVEREIGN — `<memory>/knowledge_graph.sqlite3`, beside the fork-DAG's own

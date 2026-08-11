@@ -66,7 +66,7 @@ step "the binary answers"
 if node "$LARES" help >/dev/null 2>&1; then ok; else bad "build first: pnpm build"; exit 1; fi
 
 # ── ① VESSEL A — found the Nexus, seat the quorum ────────────────────────────────────────────────
-# THE SEED EACH FOUNDING READS. `lares init` resolves the hearth true-name (the engine CID) from the
+# THE SEED EACH FOUNDING READS. `lares vessel found` resolves the hearth true-name (the engine CID) from the
 # tracked genesis tree, so an isolated root must carry it before a founding can stand. Its own error names
 # this step verbatim — the harness performs it rather than making a reader discover it.
 seed_genesis() {
@@ -76,7 +76,7 @@ seed_genesis() {
 say "① vessel A — the Nexus founds and seats its quorum"
 step "seed A's genesis (the hearth true-name lives there)"
 if seed_genesis "$A_ROOT"; then ok; else bad "cp genesis"; fi
-run_a "A founds"                        wake --install
+run_a "A founds"                        vessel stand --install
 # A FAILED FOUNDING ENDS THE RUN. Many verbs below answer off disk, so a broken founding fills the report
 # with green that means nothing — the exact cascade `rehearse-keeper` learned to refuse.
 if [ "$FAILED" -ne 0 ]; then
@@ -101,7 +101,7 @@ say "② vessel B — an INDEPENDENT operator founds their own hearth"
 step "seed B's genesis"
 if seed_genesis "$B_ROOT"; then ok; else bad "cp genesis"; fi
 BEFORE=$FAILED
-run_b "B founds (own device key, own vault)"  wake --install
+run_b "B founds (own device key, own vault)"  vessel stand --install
 if [ "$FAILED" -ne "$BEFORE" ]; then
   say "ABANDONED — B's founding failed; the handshake has no second vessel to cross to."
   exit "$FAILED"

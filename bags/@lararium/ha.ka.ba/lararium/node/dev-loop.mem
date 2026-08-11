@@ -28,7 +28,7 @@ A Lararium vessel boots from ''compiled dist'', founds from a ''baked genesis se
 the genesis blob, the on-disk vessel — and each has a cure. The cures are ''idempotent'': safe to
 run from any prior state (running · stale · none), so the loop never needs a clean-slate ritual.
 
-''The one to reach for after editing code:'' `lares refresh`.
+''The one to reach for after editing code:'' `lares vessel flow refresh`.
 
 <<~/ahu >>
 

@@ -1,17 +1,17 @@
 /**
- * `lares status` — the status surface, NAMESPACED into two referents (the name-collision cure):
+ * `lares vessel read` — the status surface, NAMESPACED into two referents (the name-collision cure):
  *
- *   lares node status        NODE HEALTH — bootstrap presence, storage size, port in use. Pure local
+ *   lares vessel read        NODE HEALTH — bootstrap presence, storage size, port in use. Pure local
  *                            inspection, no vm boot.
  *   lares sense status       SENSORIUM TAXONOMY — what the Memory sensorium holds; the real read rides
  *                            the sense door over the @daemon's composed caps.
- *   lares status             ALIAS → `lares node status`.
- *   lares status sensorium   ALIAS → points at `lares sense status` (the sensorium door).
+ *   lares vessel read             ALIAS → `lares vessel read`.
+ *   lares vessel read sensorium   ALIAS → points at `lares sense status` (the sensorium door).
  *
  * The two carried one name before (CLI status = node-health · MCP status = taxonomy); they name
  * one referent each now, so the isomorphism table holds no name resolving to two things.
  *
- * `lares status --palaces` keeps the palace-organ health table (a third, distinct local view).
+ * `lares vessel read --palaces` keeps the palace-organ health table (a third, distinct local view).
  */
 
 import { larRoot, larDataDir, larPort, vesselDid, larBootstrapPath } from "../env.js";
@@ -29,8 +29,8 @@ import type { ParsedArgs } from "../parse-args.js";
 const CLAUDE_DEFAULT_CLEANUP_DAYS = 30; // Claude's own default when the key is unset.
 
 /**
- * `lares status --palaces` — the palace-organ health table (re-runnable). Reads the SAME registry
- * `lares wake --init` stands up + `lares sense teardown` removes, so the health view never drifts
+ * `lares vessel read --palaces` — the palace-organ health table (re-runnable). Reads the SAME registry
+ * `lares vessel stand --init` stands up + `lares sense teardown` removes, so the health view never drifts
  * from what setup/teardown act on. Pure inspection (each organ's cheap probe), no vm boot.
  */
 function cmdStatusPalaces(args: ParsedArgs): number {
@@ -53,7 +53,7 @@ function cmdStatusPalaces(args: ParsedArgs): number {
       ...(coupling ? { coupling: { sensorium: coupling.sensorium, readable: coupling.readable, sharedUnits: coupling.sharedUnits, verdict: coupling.fusion?.verdict ?? null, note: coupling.note } } : {}),
     },
     human: () => {
-      console.log("lares status — palace organs (sovereign)");
+      console.log("lares vessel read — palace organs (sovereign)");
       for (const o of organs) {
         console.log(`  ${o.healthy ? "ok     " : "ABSENT "} ${o.name.padEnd(22)} ${o.dir}`);
       }
@@ -63,7 +63,7 @@ function cmdStatusPalaces(args: ParsedArgs): number {
         const verdict = coupling.fusion ? coupling.fusion.verdict : "insufficient";
         console.log(`\n  coupling (${coupling.sensorium}): ${verdict} — ${coupling.note}`);
       }
-      if (!allHealthy) console.log("\n  → stand up absent organs:  lares wake --init");
+      if (!allHealthy) console.log("\n  → stand up absent organs:  lares vessel stand --init");
       if (!guest.healthy) console.log("  → raise the guest sidecar: lares mempalace setup");
     },
   });
@@ -100,19 +100,19 @@ export function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Pr
   });
 }
 
-// `lares status sensorium` — an alias. The sensorium taxonomy reads through the sense door
+// `lares vessel read sensorium` — an alias. The sensorium taxonomy reads through the sense door
 // (`lares sense status`, which routes to the @daemon's composed content cap); this alias points there
-// rather than opening a second path. Local organ health rides `lares status --palaces`.
+// rather than opening a second path. Local organ health rides `lares vessel read --palaces`.
 const SENSORIUM_STATUS_REDIRECT =
   "the sensorium taxonomy reads at `lares sense status` (the sovereign door). For local organ health, " +
-  "run `lares status --palaces`; for node health, `lares node status`.";
+  "run `lares vessel read --palaces`; for node health, `lares vessel read`.";
 
-/** `lares status sensorium` (alias) — points at `lares sense status`, the sensorium taxonomy door. */
+/** `lares vessel read sensorium` (alias) — points at `lares sense status`, the sensorium taxonomy door. */
 function cmdSensoriumStatus(args: ParsedArgs): number {
   emit(args, {
     ok: false,
-    error: { code: "verb-error", message: SENSORIUM_STATUS_REDIRECT, hint: "run `lares sense status` for the taxonomy; `lares status --palaces` for local organ health." },
-    human: () => { console.error(`lares status sensorium → ${SENSORIUM_STATUS_REDIRECT}`); },
+    error: { code: "verb-error", message: SENSORIUM_STATUS_REDIRECT, hint: "run `lares sense status` for the taxonomy; `lares vessel read --palaces` for local organ health." },
+    human: () => { console.error(`lares vessel read sensorium → ${SENSORIUM_STATUS_REDIRECT}`); },
   });
   return exitFor("verb-error");
 }
@@ -122,13 +122,13 @@ export async function cmdNode(args: ParsedArgs): Promise<number> {
   const sub = args.positional[0];
   if (sub === undefined || sub === "status") return cmdNodeStatus(args);
   if (sub === "stop") return cmdNodeStop(args);
-  console.error(`lares node: unknown subverb "${sub}". Run \`lares node status\` or \`lares node stop\`.`);
+  console.error(`lares node: unknown subverb "${sub}". Run \`lares vessel read\` or \`lares vessel stop\`.`);
   return 2;
 }
 
 /**
- * `lares node stop` — halt the daemon on the port (graceful → force), the missing pair to
- * `lares wake`. Pure port-control (no vm boot, no wipe): SIGTERM the incumbent, escalate to
+ * `lares vessel stop` — halt the daemon on the port (graceful → force), the missing pair to
+ * `lares vessel stand`. Pure port-control (no vm boot, no wipe): SIGTERM the incumbent, escalate to
  * SIGKILL if it lingers, and report which. A free port reads as already-stopped, not an error.
  * Fills the lifecycle gap that `reconcile` (stop+serve) and `hooks pause` (capture only) leave open.
  */
@@ -156,10 +156,10 @@ export async function cmdSensorium(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares status vessel` — the DEEP health lens (the `git fsck` role, folded into status
+ * `lares vessel read vessel` — the DEEP health lens (the `git fsck` role, folded into status
  * rather than a sibling verb): probes every Automerge doc in the vessel store through a
  * disposable child-process boundary and charts MOUNTED vs CONDEMNED (a torn doc that would
- * abort the WASM runtime on load). Read-only; a condemned doc points at `lares regenesis`.
+ * abort the WASM runtime on load). Read-only; a condemned doc points at `lares vessel flow rebirth`.
  * Exits non-zero on a tear, so a boot/CI gate reads health off the exit code.
  */
 export async function cmdStatusVessel(args: ParsedArgs): Promise<number> {
@@ -187,7 +187,7 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
   if (args.positional[0] === "sensorium") return cmdSensoriumStatus(args);
   if (args.positional[0] === "node") return cmdNodeStatus(args);
   if (args.positional[0] === "vessel") return cmdStatusVessel(args);
-  // Bare `lares status` = muscle-memory alias → node health.
+  // Bare `lares vessel read` = muscle-memory alias → node health.
   return cmdNodeStatus(args);
 }
 
@@ -231,7 +231,7 @@ async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
       const { summaryOutput } = await import("../verb-result.js");
       const { runVerb } = await import("../verb-call.js");
       // One line over the sock (the lares↔lararium binding). Cheap probe; any failure
-      // falls through silently — `lares status` never errors. The residency verb is
+      // falls through silently — `lares vessel read` never errors. The residency verb is
       // cap-gated, so it needs the real VESSEL did (a non-did requestedBy cap-errors
       // quietly) — the Place is what asks.
       const did = await vesselDid();
@@ -254,8 +254,8 @@ async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
     ok: true,
     data,
     human: () => {
-      console.log("lares status (local node)");
-      console.log(`  bootstrap:   ${hasBoot ? "present" : "absent (run `lares init`)"}`);
+      console.log("lares vessel read (local node)");
+      console.log(`  bootstrap:   ${hasBoot ? "present" : "absent (run `lares vessel found`)"}`);
       console.log(`  storage:     ${storageStr}`);
       console.log(`  port ${port}:  ${portInUse ? "in use (node likely running)" : "free"}`);
       if (residencyLine) console.log(`  residency:   ${residencyLine}`);

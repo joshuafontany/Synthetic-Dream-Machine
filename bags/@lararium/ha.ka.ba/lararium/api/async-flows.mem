@@ -49,7 +49,7 @@ off-TTY / `--detach` it returns the id and exits.
 
 \procedure ~Verb(~Type:"" ~Params:"") ~Verb <<~Type>> <<~holds `[<~Params>]`>>
 
-<<~Verb status "lares status <id> ~ one-shot, authoritative current state; emits a pollInterval hint" >>
+<<~Verb status "lares vessel read <id> ~ one-shot, authoritative current state; emits a pollInterval hint" >>
 <<~Verb watch "lares watch <id> ~ stream progress until terminal; --exit-status mirrors the job result into the CLI exit code (gh/kubectl shape)" >>
 <<~Verb wait "lares wait <id> --timeout <s> ~ block until terminal-or-timeout; timeout → structured 'still running + progress', NEVER a hard fail (the work lives in the job, not the call)" >>
 <<~Verb cancel "lares cancel <id> ~ move the job to the cancelled terminal state (distinct from Ctrl-C, which DETACHES — job keeps running, re-attach by id)" >>
@@ -153,7 +153,7 @@ The three pieces already exist:
 
 ''Implementation order'' (write-toward; confirm interfaces first — see caveat):
 # Make long ops ''return the request-id fast'' (+ `--detach`); default TTY attaches to `watch`.
-# Add ''`lares status|watch|wait|cancel <id>`'' over the durable-result + daemon-job stores.
+# Add ''`lares vessel read|watch|wait|cancel <id>`'' over the durable-result + daemon-job stores.
 # Emit the ''progress event stream'' (job → NDJSON on stderr / bar on TTY; result on stdout); route mempalace `--daemon --background` for the heavy mines + surface its `daemon jobs/wait`.
 # ''Exit-124 timeout'' + the semantic codes + `pollInterval` in `status`.
 

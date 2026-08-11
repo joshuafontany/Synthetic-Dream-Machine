@@ -122,7 +122,7 @@ jobs:
       # dependency rather than on anything about the code. Skipping it instead would be worse:
       # absence-of-finding and absence-of-looking read identically in a green run.
       #
-      # ONE VENV — `~/.venv`, the same path `spawn-resolve` probes and `lares wake --install`
+      # ONE VENV — `~/.venv`, the same path `spawn-resolve` probes and `lares vessel stand --install`
       # stands. A venv anywhere else is an interpreter with different powers, which is the whole
       # hazard that rule exists to close.
       - uses: actions/setup-python@v5

@@ -98,7 +98,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   const bootstrap  = larBootstrapPath();
 
   if (existsSync(bootstrap) && !opts.force) {
-    console.log(`[lares init] ${bootstrap} already exists — skipping.`);
+    console.log(`[lares vessel found] ${bootstrap} already exists — skipping.`);
     console.log("  Pass --force or delete the file to re-seed.");
     return { skipped: true, bootstrapPath: bootstrap, storageDir, genesisDir };
   }
@@ -116,7 +116,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
   if (!hearthTrueName) {
     throw new Error(
-      "[lares init] cannot found: hearth true-name (engine CID) absent from " + genesisDir + " —\n" +
+      "[lares vessel found] cannot found: hearth true-name (engine CID) absent from " + genesisDir + " —\n" +
       "  the genesis seed carries it. In this repo: `pnpm --filter @lararium/node build:genesis`.\n" +
       "  Founding an ISOLATED root (LAR_ROOT)? Seed the tracked genesis into it first:\n" +
       "    (cd <repo> && git ls-files -z genesis/ | xargs -0 -I{} cp --parents \"{}\" \"$LAR_ROOT/\")",
@@ -124,7 +124,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   }
 
   const operatorIdentity = await generateOrLoadVesselIdentity(storageDir);
-  console.log(`[lares init] operator verifyingKey  ${operatorIdentity.verifyingKey.slice(0, 16)}…`);
+  console.log(`[lares vessel found] operator verifyingKey  ${operatorIdentity.verifyingKey.slice(0, 16)}…`);
 
   const repo = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
 
@@ -134,11 +134,11 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     // the root→joinee edge (the founder's PersonaGroup root signed it). The joinee writes that
     // binding into its OWN daemon doc and boots through its Binding Gate — no Beelay, no cap events.
     if (!existsSync(opts.admitPayloadPath)) {
-      throw new Error(`[lares init --admit] payload file not found: ${opts.admitPayloadPath}`);
+      throw new Error(`[lares vessel found --admit] payload file not found: ${opts.admitPayloadPath}`);
     }
     const payload = JSON.parse(readFileSync(opts.admitPayloadPath, "utf8")) as DeviceAdmitPayload;
     if (payload.kind !== "device-admit/v1") {
-      throw new Error(`[lares init --admit] unexpected payload kind: ${payload.kind}`);
+      throw new Error(`[lares vessel found --admit] unexpected payload kind: ${payload.kind}`);
     }
     // The joinee's OWN seed — the admit supplies the BINDING; the vessel supplies the SELF. The ceremony
     // mints this vessel's self-certifying ContactCard from it, and a cardless vessel cannot speak at a gate.
@@ -167,12 +167,12 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     });
     await repo.flush();
 
-    console.log(`[lares init --admit] vessel ${operatorIdentity.verifyingKey.slice(0, 16)}… admitted`);
+    console.log(`[lares vessel found --admit] vessel ${operatorIdentity.verifyingKey.slice(0, 16)}… admitted`);
     console.log(`  @persona      ${personaUrl}${payload.personaUrl ? " (synced from founder)" : " (fresh local — payload carried none)"}`);
     console.log(`  PersonaGroup ${payload.personaGroupDocIdHex.slice(0, 20)}…`);
     console.log(`  signer pin   ${payload.signerDid.slice(0, 20)}…`);
     console.log(`  hearth-name  ${payload.hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);
-    console.log("[lares init --admit] done — joined the PersonaGroup. Start with: lares dev");
+    console.log("[lares vessel found --admit] done — joined the PersonaGroup. Start with: lares vessel stand --with-app");
     return { skipped: false, bootstrapPath: bootstrap, storageDir, genesisDir };
   }
 
@@ -217,7 +217,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   persistIdentityAnchors({ personaGroupDocIdHex, meshCabalDocIdHex, personaGroupAgentIdHex });
   await repo.flush();
 
-  console.log(`[lares init] ${bootstrap} written`);
+  console.log(`[lares vessel found] ${bootstrap} written`);
   console.log(`  @identities  ${identitiesUrl}`);
   console.log(`  @circles     ${circlesUrl}`);
   console.log(`  @sessions    ${sessionsUrl}`);
@@ -228,7 +228,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   console.log(`  operator-root ${signerDid.slice(0, 20)}…`);
   console.log(`  persona-KEL   ${personaKelPrefix.slice(0, 20)}…  (the pinned identifier the Binding Gate walks)`);
   console.log(`  hearth-name   ${hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);
-  console.log("[lares init] done — Nexus node ready. Start with: lares dev");
+  console.log("[lares vessel found] done — Nexus node ready. Start with: lares vessel stand --with-app");
 
   return { skipped: false, bootstrapPath: bootstrap, storageDir, genesisDir };
 }

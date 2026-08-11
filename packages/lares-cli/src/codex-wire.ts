@@ -1,5 +1,5 @@
 /**
- * codex-wire — `lares wake --codex`: wire the LARES MCP seat (memory through the lares house) and
+ * codex-wire — `lares vessel stand --codex`: wire the LARES MCP seat (memory through the lares house) and
  * the Lares session-ingest hook into the OpenAI Codex CLI home (~/.codex/config.toml). A stale
  * mempalace MCP block is reaped in the same pass — a harness holding its own palace holder reaches
  * past the node into the store, and N writers on one Chroma index is what corrupts it.
@@ -64,7 +64,7 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
   //     lares house. Codex reads `env` as an inline TOML table.
   const laresMcp = resolveLaresMcp();
   if (laresMcp === null) {
-    steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" });
+    steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares vessel stand --init`" });
   } else {
     // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
     // package that moves its holder) otherwise sits drifted forever while the wire reports it present —

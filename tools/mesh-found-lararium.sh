@@ -24,6 +24,6 @@ cp -r "$REPO"/genesis/cas "$DIR/genesis/" 2>/dev/null || true   # the CAS substr
 
 # 3. Found identity + social-bootstrap into the isolated root (non-interactive, idempotent).
 echo "[found] founding Lararium into $DIR…"
-LAR_ROOT="$DIR" lares init
+LAR_ROOT="$DIR" lares vessel found
 
 echo "[found] ✓ self-contained Lararium at $DIR — mount as LAR_ROOT in the mesh compose."

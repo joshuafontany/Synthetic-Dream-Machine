@@ -1,5 +1,5 @@
 /**
- * `lares wake` — the boot ENTRY POINT. Idempotent on every awakening: it ATTACHES to a live Lararium
+ * `lares vessel stand` — the boot ENTRY POINT. Idempotent on every awakening: it ATTACHES to a live Lararium
  * node or STANDS one detached when none answers (never a restart), CHECKS the mempalace sidecar, and
  * emits a live-delta hydration frame for the waking session.
  *
@@ -178,14 +178,14 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
 
   if (!nodeUp && observeOnly) {
     nodeNote = reaped
-      ? "down — cleared a stale socket; `--observe` withholds the stand, so run `lares wake` to serve"
-      : "down — `--observe` withholds the stand; run `lares wake` to serve";
+      ? "down — cleared a stale socket; `--observe` withholds the stand, so run `lares vessel stand` to serve"
+      : "down — `--observe` withholds the stand; run `lares vessel stand` to serve";
   } else if (!nodeUp) {
     const distMain = join(repoRoot, "packages", "lararium-node", "dist", "src", "main.js");
     if (!existsSync(distMain)) {
-      nodeNote = "node dist not built — run `pnpm -r build`, then `lares wake`";
+      nodeNote = "node dist not built — run `pnpm -r build`, then `lares vessel stand`";
     } else if (!existsSync(bootstrap)) {
-      nodeNote = "no bootstrap — run `lares init` (or point LAR_ROOT at an initialized instance)";
+      nodeNote = "no bootstrap — run `lares vessel found` (or point LAR_ROOT at an initialized instance)";
     } else {
       const dataDir = larDataDir();   // runtime → <data>/vessel
       mkdirSync(dataDir, { recursive: true });
@@ -323,7 +323,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       timestamp: new Date().toISOString(),
     },
     human: () => {
-      console.log("lares wake");
+      console.log("lares vessel stand");
       console.log(`  node:        ${nodeUp ? "up" : "down"} on :${port}${nodeNote ? ` — ${nodeNote}` : ""}`);
       console.log(`  mempalace:   ${integration.ok ? "integrated" : "incomplete"}`);
       for (const c of integration.checks) {

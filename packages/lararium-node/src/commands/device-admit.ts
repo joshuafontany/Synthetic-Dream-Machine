@@ -60,7 +60,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
 
   if (!existsSync(bootstrap)) {
     throw new Error(
-      `[lares device-admit] ${bootstrap} not found — run \`lares init\` first.\n` +
+      `[lares device-admit] ${bootstrap} not found — run \`lares vessel found\` first.\n` +
       `  expected: ${bootstrap}`,
     );
   }
@@ -84,7 +84,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   if (!personaGroupDocIdHex || !meshCabalDocIdHex) {
     throw new Error(
       `[lares device-admit] sentinel oracle IDs missing from social-bootstrap.json.\n` +
-      `  Run \`lares init --force\` to re-establish the founding ceremony.`,
+      `  Run \`lares vessel found --force\` to re-establish the founding ceremony.`,
     );
   }
   if (!daemonUrl) {
@@ -108,7 +108,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const agentEntry         = tiddlerMap[PERSONA_GROUP_AGENT_ID_TIDDLER] as Record<string,unknown> | undefined;
   const personaGroupAgentIdHex = (agentEntry?.["tiddler"] as Record<string,unknown> | undefined)?.["text"] as string | null ?? null;
   if (!personaGroupAgentIdHex) {
-    throw new Error(`[lares device-admit] PersonaGroup agent ID missing from daemon doc — run \`lares init --force\`.`);
+    throw new Error(`[lares device-admit] PersonaGroup agent ID missing from daemon doc — run \`lares vessel found --force\`.`);
   }
 
   // The founder's persona-KEL PREFIX (the identifier the joinee will pin) + the chain SNAPSHOT off the
@@ -118,13 +118,13 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const kelPrefixEntry = tiddlerMap[PERSONA_KEL_PREFIX_TIDDLER] as Record<string,unknown> | undefined;
   const personaKelPrefix = (kelPrefixEntry?.["tiddler"] as Record<string,unknown> | undefined)?.["text"] as string | null ?? null;
   if (!personaKelPrefix) {
-    throw new Error(`[lares device-admit] persona-KEL prefix missing from daemon doc — run \`lares init --force\`.`);
+    throw new Error(`[lares device-admit] persona-KEL prefix missing from daemon doc — run \`lares vessel found --force\`.`);
   }
   const founderNexusKey = await loadVesselVerifyingKey(storageDir);
   const kelBoard   = await materializeSharedLarDoc(repo, personaKelBoardDocUrl(founderNexusKey), "board:persona-kel");
   const personaKelChain = personaKelChainForPrefix(kelBoard.doc(), personaKelPrefix);
   if (!personaKelChain || personaKelChain.length === 0) {
-    throw new Error(`[lares device-admit] persona-KEL chain for ${personaKelPrefix.slice(0, 20)}… absent from the local board — run \`lares init --force\`.`);
+    throw new Error(`[lares device-admit] persona-KEL chain for ${personaKelPrefix.slice(0, 20)}… absent from the local board — run \`lares vessel found --force\`.`);
   }
 
   await repo.flush();
@@ -137,7 +137,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const signerSeed     = await loadPersonaGroupRootSeed(storageDir);
   const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
   if (!hearthTrueName) {
-    throw new Error("[lares device-admit] hearth true-name (engine CID) absent — run `lares init` first.");
+    throw new Error("[lares device-admit] hearth true-name (engine CID) absent — run `lares vessel found` first.");
   }
   const payload = await runDeviceAdmitEdge({
     signerSeed,

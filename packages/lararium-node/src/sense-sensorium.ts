@@ -144,7 +144,7 @@ export function sensoriumFormConstructiconPath(sensoriumRoot: string): string {
 /** Invoke the rooted Python capture pipe and retain only its lifecycle summary. */
 export const defaultSensoriumIngest: SensoriumIngest = ({ sourcePath, sensoriumRoot, ephemeral = false }) => {
   const { python, script, submoduleRoot, scriptPresent } = resolveCorpusCaptureSpawn();
-  if (!python || !scriptPresent) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: "ingest-skipped: no corpus capture pipe (lares wake --install)" };
+  if (!python || !scriptPresent) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: "ingest-skipped: no corpus capture pipe (lares vessel stand --install)" };
   if (!existsSync(sourcePath)) return { drawers: 0, structures: 0, bands: 0, forms: 0, note: `ingest-skipped: source absent (${sourcePath})` };
   try {
     const env = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : ""), ...resolveHolderCapEnv(python) };

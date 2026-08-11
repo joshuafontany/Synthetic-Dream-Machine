@@ -57,7 +57,7 @@ export async function cmdResidency(_args: ParsedArgs): Promise<number> {
     r = await runVerb("residency", {}, await vesselDid());
   } catch (err) {
     console.error(`lares: ${err instanceof Error ? err.message : String(err)}`);
-    console.error("  Start the daemon with `lares serve` and try again.");
+    console.error("  Start the daemon with `lares vessel stand --foreground` and try again.");
     return 3;
   }
   if (r.status === "error") {
@@ -94,7 +94,7 @@ async function runResidencyCommand(name: string, args: Record<string, unknown>):
     r = await runVerb(name, args, await vesselDid());
   } catch (err) {
     console.error(`lares: ${err instanceof Error ? err.message : String(err)}`);
-    console.error("  Start the daemon with `lares serve` and try again.");
+    console.error("  Start the daemon with `lares vessel stand --foreground` and try again.");
     return 3;
   }
   if (r.status === "error") {

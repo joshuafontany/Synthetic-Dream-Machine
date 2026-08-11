@@ -90,7 +90,7 @@ export async function cmdFlowRun(args: ParsedArgs): Promise<number> {
   const submit = await runVerb("flow", verbArgs, did, { timeoutMs: TIMEOUT_CEIL_MS }).catch((err: unknown) => {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg,
-                   hint: "Start the daemon with `lares serve` (the runner reaches both hulls through it)." },
+                   hint: "Start the daemon with `lares vessel stand --foreground` (the runner reaches both hulls through it)." },
                  human: () => console.error(`lares flow ${petname}: ${msg}`) });
     return null;
   });

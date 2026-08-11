@@ -102,12 +102,12 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "(when up) a residency snapshot. With `--palaces`, print the palace-organ health table " +
       "(re-runnable): each organ's resolved dir + whether its store has materialized.",
     examples: [
-      "lares status            # node health snapshot",
-      "lares status --palaces  # the palace-organ health table",
-      "lares status --json     # machine-readable",
+      "lares vessel read            # node health snapshot",
+      "lares vessel read --palaces  # the palace-organ health table",
+      "lares vessel read --json     # machine-readable",
     ],
     flags: ["--palaces   print the palace-organ health table (mempalace · structure · form · mesh)"],
-    next: ["lares wake --init   # stand up any absent organ"],
+    next: ["lares vessel stand --init   # stand up any absent organ"],
   },
 
   wake: {
@@ -116,16 +116,16 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "down) and emits a live hydration frame. `--init`/`--install` stand up the whole stack incl. ALL " +
       "palace organs; `--claude`/`--codex`/`--copilot`/`--vscode` wire each harness's MCP + ingest hook.",
     examples: [
-      "lares wake               # idempotent boot, attach-or-start",
-      "lares wake --init        # ... + stand up every palace organ",
-      "lares wake --install --claude   # cold-pull standup + wire ~/.claude",
+      "lares vessel stand               # idempotent boot, attach-or-start",
+      "lares vessel stand --init        # ... + stand up every palace organ",
+      "lares vessel stand --install --claude   # cold-pull standup + wire ~/.claude",
     ],
     flags: [
       "--init / --install   found the stack + stand up all palace organs (idempotent)",
       "--admit <file>       join an existing operator PersonaGroup",
       "--claude/--codex/--copilot/--vscode   wire that harness's mempalace MCP + hook",
     ],
-    next: ["lares status --palaces", "lares sense pour --all"],
+    next: ["lares vessel read --palaces", "lares sense pour --all"],
   },
 
   sense: {

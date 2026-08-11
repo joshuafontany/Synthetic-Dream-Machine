@@ -1,5 +1,5 @@
 /**
- * setup-sensorium — `lares wake --init`: stand up the SOVEREIGN sensorium organs. Idempotent. A thin
+ * setup-sensorium — `lares vessel stand --init`: stand up the SOVEREIGN sensorium organs. Idempotent. A thin
  * CLI wrapper: the logic lives ONCE in @lararium/node's palace-organ registry (`setupPalaceOrgans`),
  * the SAME enumerator `lares sense teardown` reads — so setup and teardown can never drift over
  * which organs exist.

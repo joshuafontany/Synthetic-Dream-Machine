@@ -98,10 +98,10 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {
-      ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." },
+      ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares vessel stand --foreground` and try again." },
       human: () => {
         console.error(`lares sense recall: ${msg}`);
-        console.error("  Start the daemon with `lares serve` and try again.");
+        console.error("  Start the daemon with `lares vessel stand --foreground` and try again.");
       },
     });
     return exitFor("daemon-unreachable");
@@ -126,8 +126,8 @@ export async function cmdRecall(args: ParsedArgs): Promise<number> {
     const msg = "the running daemon predates recall stamp filters (it returned an unfiltered result)";
     emit(args, {
       ok: false, requestId: result.requestId,
-      error: { code: "verb-error", message: msg, hint: "Restart the daemon on fresh dist (`lares serve` / `lares wake`) and retry." },
-      human: () => { console.error(`lares sense recall: ${msg}`); console.error("  Restart the daemon on fresh dist (`lares serve` / `lares wake`) and retry."); },
+      error: { code: "verb-error", message: msg, hint: "Restart the daemon on fresh dist (`lares vessel stand --foreground` / `lares vessel stand`) and retry." },
+      human: () => { console.error(`lares sense recall: ${msg}`); console.error("  Restart the daemon on fresh dist (`lares vessel stand --foreground` / `lares vessel stand`) and retry."); },
     });
     return exitFor("verb-error");
   }

@@ -16,7 +16,7 @@ and sweeps every harness's transcripts into per-project wings.
 ```bash
 rm -rf ~/.mempalace ~/.lares ~/.mempalace.bak.pre350   # palace + derived stage + stale backup
 pnpm -r build                                          # CLI reflects latest (no-op if current)
-lares wake --init --claude --codex --copilot --vscode  # palace up + every surface wired
+lares vessel stand --init --claude --codex --copilot --vscode  # palace up + every surface wired
 lares harvest --all                                    # sweep every transcript surface → wings
 # reload the editor / fresh session so the live Stop/SessionEnd hooks activate
 ```
@@ -26,7 +26,7 @@ already branches platform; mcp.json lands under `%APPDATA%\Code[ - Insiders]\Use
 
 ---
 
-## `lares wake` flags
+## `lares vessel stand` flags
 
 | flag | does |
 |---|---|

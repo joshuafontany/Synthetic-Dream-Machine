@@ -5,7 +5,7 @@
  * WITHOUT booting keyhive (operator-peer #actor-parity OP-AP5, meme
  * lar:///ha.ka.ba/lararium/mesh/operator-peer). It holds only:
  *   - the operator Ed25519 seed → a bare signer (no keyhive), and
- *   - the cached ContactCard JSON minted once at `lares init`.
+ *   - the cached ContactCard JSON minted once at `lares vessel found`.
  * With these it presents a self-certifying identity and signs the V3
  * proof-of-possession at the peer-boundary gate. The full keyhive engine boots
  * once on the always-on RELAY, which verifies leaf proofs in its keyholder worker.
@@ -26,7 +26,7 @@ export type { LeafIdentity } from "@lararium/mesh";
 
 /**
  * Load the operator's light leaf identity from disk (seed + cached card). Throws
- * when either artifact is absent — the caller must run `lares init` first (it
+ * when either artifact is absent — the caller must run `lares vessel found` first (it
  * generates the keypair and mints + caches the ContactCard).
  */
 export async function loadLeafIdentity(dataDir: string): Promise<LeafIdentity> {

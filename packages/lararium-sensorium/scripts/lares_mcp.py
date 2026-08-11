@@ -397,7 +397,7 @@ class LaresCoordinator:
 
     def status(self) -> dict:
         """What the sensorium holds — the content taxonomy PLUS the DERIVED layer (mempalace projection ·
-        rejim geology), so status names the eidetic ground AND the rebuildable views (mirrors `lares status`)."""
+        rejim geology), so status names the eidetic ground AND the rebuildable views (mirrors `lares vessel read`)."""
         return {**self._content.taxonomy(), "derived": derived_views(self._palace)}
 
     def worldline(self, selector: "str | None" = None, *, as_of=None) -> dict:
@@ -1215,7 +1215,7 @@ def main() -> None:
     else:
         if not uds.available():
             raise SystemExit(
-                f"lares_mcp: no lares daemon at {uds.socket_path()} — start one with `lares serve`.\n"
+                f"lares_mcp: no lares daemon at {uds.socket_path()} — start one with `lares vessel stand --foreground`.\n"
                 "  This surface routes every verb through the @daemon so the palace keeps ONE owner.\n"
                 "  For a single-session direct open, pass --standalone --sensorium <dir>."
             )

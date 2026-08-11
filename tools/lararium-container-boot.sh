@@ -3,7 +3,7 @@
 # identity model, each vessel mints its own identity (separate from the operator identity), so a
 # containerized Lararium founds its own (own vessel key + operator + binding edge) into its own
 # volume — an independent sovereign hearth. The engine island is built host-side and carried in via
-# the repo mount (the CAS substrate); this root gets its own copy so `lares init` can read the CID.
+# the repo mount (the CAS substrate); this root gets its own copy so `lares vessel found` can read the CID.
 set -e
 : "${LAR_ROOT:?LAR_ROOT must be set}"
 
@@ -18,7 +18,7 @@ if [ ! -f "$LAR_ROOT/data/vessel/social-bootstrap.json" ]; then
   echo "[boot] founding this container's own Lararium (own vessel identity)…"
   # --skip-build: the container trusts the HOST's mounted dist (the dev builds before `up`); it cannot
   # run the full-workspace fresh-build itself (the TW5 submodule isn't populated in the bind mount).
-  node packages/lares-cli/dist/src/bin/lares.js init --skip-build
+  node packages/lares-cli/dist/src/bin/lares.js vessel found --skip-build
 fi
 
 echo "[boot] serving…"

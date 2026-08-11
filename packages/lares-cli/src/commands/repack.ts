@@ -67,7 +67,7 @@ export async function cmdRepack(args: ParsedArgs): Promise<number> {
     result = await runVerb(submitName, submitArgs, did);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." }, human: () => { console.error(`lares repack: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
+    emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares vessel stand --foreground` and try again." }, human: () => { console.error(`lares repack: ${msg}`); console.error("  Start the daemon with `lares vessel stand --foreground` and try again."); } });
     return exitFor("daemon-unreachable");
   }
   if (result.status === "error") {

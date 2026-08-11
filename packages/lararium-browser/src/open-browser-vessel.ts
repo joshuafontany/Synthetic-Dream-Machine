@@ -413,7 +413,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     // FOUND. No admit — the vessel raises its own PersonaGroup and founds its FIRST persona (never the
     // self-signed floor). The two-key atom: the DEVICE key (vesselSeed) inits keyhive as the Individual;
     // a DISTINCT PersonaGroup ROOT signs the device-delegation edge. Mint that root founder-side (root-on-
-    // founder), load its seed as the signer, and WEAR it — mirroring node's `lares init` (init.ts: mint
+    // founder), load its seed as the signer, and WEAR it — mirroring node's `lares vessel found` (init.ts: mint
     // generateOrLoadPersonaGroupRoot → loadPersonaGroupRootSeed → runFoundingCeremony{signerSeed}).
     await generateOrLoadBrowserPersonaRoot(idbName, FOUNDING_PERSONA_INDEX);
     const signerSeed = await loadBrowserPersonaRootSeed(idbName, FOUNDING_PERSONA_INDEX);

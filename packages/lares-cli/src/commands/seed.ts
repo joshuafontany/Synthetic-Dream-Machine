@@ -1,5 +1,5 @@
 /**
- * `lares seed` — plant the holdings back into the docs (the regenesis re-feed entity).
+ * `lares vessel seed` — plant the holdings back into the docs (the regenesis re-feed entity).
  *
  * A nameless entity composed of #has caps: disk-grant (bags/) · synced-tree · the two
  * existing feed gestures, kind-routed per holding:
@@ -15,7 +15,7 @@
  * (the regenesis conductor refuses it right after a reset; a daily seed accepts it
  * as convergence).
  *
- *   lares seed [--apply] [--yes]   — preview per holding by default (the ingest posture)
+ *   lares vessel seed [--apply] [--yes]   — preview per holding by default (the ingest posture)
  */
 
 import { readdirSync, statSync } from "node:fs";
@@ -120,7 +120,7 @@ export async function cmdSeed(args: ParsedArgs): Promise<number> {
     emit(args, {
       ok: false,
       error: { code: "not-found", message: `no @holdings under ${join(larRoot(), "bags")}` },
-      human: () => console.error(`lares seed: no @holdings under ${join(larRoot(), "bags")}`),
+      human: () => console.error(`lares vessel seed: no @holdings under ${join(larRoot(), "bags")}`),
     });
     return 3;
   }

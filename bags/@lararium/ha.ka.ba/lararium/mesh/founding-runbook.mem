@@ -35,12 +35,12 @@ written   = "2026-07-20"
 
 !! The rite ~ rehearsed first, then the six movements, then the growing
 
-<<~loops ⓪ rehearse -> ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ regenesis -> LIVE -> ⚲ crossroads -> ⊕ grow -> ⊛ gather -> ⊙ feed -> ⊘ dwell >>
+<<~loops ⓪ rehearse -> ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ seed -> LIVE -> ⚲ crossroads -> ⊕ grow -> ⊛ gather -> ⊙ feed -> ⊘ dwell >>
 
 ''Rehearse'' runs the whole rite in containers, disposably, until it bores (#rehearse) · ''clear''
 pares the vessel to void · ''found'' stands the device + the three kahu · ''reserve'' forges the
 pre-rotation's future-key custody · ''seal-and-back-up'' locks the secrets at rest + writes a
-recoverable copy · ''regenesis'' re-seeds the content from `bags/` · ''LIVE'' serves ·
+recoverable copy · ''seed'' plants the content from `bags/` · ''LIVE'' serves ·
 ''crossroads'' stands a Herm where a family needs one (#crossroads) · ''grow'' opens the Nexus,
 contracts fellow operators, and welcomes users at the anon floor (#grow-the-nexus) · ''gather'' brings the
 operator's own vessels in as contracted leaves (#gather-the-fleet) · ''feed'' lays the first offering, which
@@ -89,7 +89,7 @@ destructive command in the house, the rehearsal branch opens on one whose whole 
 
 !!! The KEEPER rehearsal ~ the sequence this branch never ran
 
-''The container harness stands the MESH branch'' — it founds vessels with `lares init` and witnesses Herm
+''The container harness stands the MESH branch'' — it founds vessels with `lares vessel found` and witnesses Herm
 carry + partition. ''Movements ②–⑥ were never run end-to-end by anything'': persona → nexus seal → vault →
 regenesis → live had no green baseline to diff a failure against. `tools/rehearse-keeper.sh` gives them one.
 
@@ -468,7 +468,7 @@ them from here moves the engine blob that rides inside every signed delegation p
 ''BUMP THE DEPS BEFORE, NEVER AFTER — and the reason reads narrower than the fear.'' A runtime bump
 (automerge · noble · ws · vite) moves ''NO epoch binding'': the engine blob is vendored TW5 and the built
 plugin carries zero automerge references, both measured. It can skew the ''on-disk serde'' alone, which
-`lares rebuild` cures identity-safe. So bumping first reads as hygiene rather than a cliff.
+`lares vessel flow rebuild` cures identity-safe. So bumping first reads as hygiene rather than a cliff.
 
 ''The surfaces that WOULD be a cliff do not move on npm at all'': `hearthTrueName` (the engine CID, signed
 into every device-delegation edge) and the `pluginsCid` (built from this repo's own source). Those move by
@@ -497,7 +497,7 @@ A fresh-from-void founding discards the prior identity. ''Back the old identity 
 vault seals nothing until movement ④, so a raw copy carries the only net before the nuke:
 
 ```
-lares status                                        # confirm the identity-home path
+lares vessel read                                        # confirm the identity-home path
 cp -r ~/.local/share/lares/identity ~/founding-backup-PRIOR   # the only pre-nuke net
 lares hooks pause                                   # still the capture/ingest hooks during the pave
 ```
@@ -508,7 +508,7 @@ undo.'' A vessel that carries nothing worth keeping (the bootstrap case) crosses
 ```
 rm -rf ~/.local/share/lares/identity                # ⚠ IRREVERSIBLE: the fresh-from-void cut
 rm -rf ~/.local/share/lares/nexus                   # ⚠ IRREVERSIBLE: the prior SEAL (see below)
-lares reset --force                                 # pave the vessel store (the identity home now stands empty)
+lares vessel clear --force                                 # pave the vessel store (the identity home now stands empty)
 ```
 
 ''TWO SOVEREIGN THINGS SURVIVE A RESET, and BOTH want cutting here.'' `reset --force` pares the vessel store
@@ -595,7 +595,7 @@ as ''three symmetric commands'' — and each command performs ''THREE ACTS, neve
 2026-08-06). Stand h0 too; an unnamed founder strands itself out of its own charter:
 
 ```
-lares wake --install                                # stands the VESSEL — and nothing else (#sidecar)
+lares vessel stand --install                                # stands the VESSEL — and nothing else (#sidecar)
 lares persona new 0 --name '<private label>' --handle '<declared Handle>' --seat
 lares persona new 1 --name '<private label>' --handle '<declared Handle>' --seat
 lares persona new 2 --name '<private label>' --handle '<declared Handle>' --seat
@@ -803,27 +803,19 @@ lares vault export ~/founding-backup.sealed         # a passphrase-SEALED backup
 lares vault status                                  # confirm the seal state
 ```
 
-!!! ★ AFTER ④ SEALS, EXPORT THE PASSPHRASE BEFORE ⑤ — walked, not reasoned ★
+!!! ★ WHAT A SEAL COMMITS THE OPERATOR TO, from this moment on ★
 
-''A seal writes `sealExpected` into the CONFIG, and `reset` does not clear it.'' Every node boot from that
-moment calls `assertSealReady` and refuses without `LARES_ARCHIVE_PASSPHRASE` in the environment. ⑤ boots a
-node. So a founding that seals at ④ by TYPING the passphrase — the honest path, the one the prompt exists
-for — walks straight into a refusal at ⑤ unless the operator carries it forward:
+''A seal writes `sealExpected` into the CONFIG, and the clear does not remove it.'' Every node boot from
+that moment calls `assertSealReady` and refuses without `LARES_ARCHIVE_PASSPHRASE` in the environment.
 
-```
-read -rs '?the passphrase you just sealed with: ' LARES_ARCHIVE_PASSPHRASE && echo
-export LARES_ARCHIVE_PASSPHRASE
-```
+''The rite itself no longer crosses that gate.'' ⑤ plants content into the vessel already standing from ②
+and restarts nothing, so a founding that seals here by TYPING the passphrase — the honest path, the one
+the prompt exists for — walks to LIVE without carrying it forward by hand between two movements.
 
-''WITNESSED on a throwaway, both ways.'' Without the export, ⑤ reported ''started then attested a boot
-fault'', then cascaded into `no lares daemon … exit 3` and `seeding failed`. With it, the same command ran
-clean: 482 carriers ingested, the daemon answering. ''The rehearsal never caught this'' — the harness
-exports the passphrase for its whole run, so it walks the env path end to end and never meets the gate.
-
-<<~ confidence Canon 18/20 >> ''The env var is not a convenience here; it is the standing condition of a
-sealed vessel.'' Every later terminal, every reboot, every `lares serve` wants it. That reads as the
-unattended-boot tension in everyday clothes (#rehearse), and it arrives the moment the vault seals — not
-later, at some crossroads.
+<<~ confidence Canon 18/20 >> ''The env var is not a convenience; it is the standing condition of a
+sealed vessel.'' Every later terminal, every reboot, every `lares vessel stand --foreground` wants it.
+That reads as the unattended-boot tension in everyday clothes (#rehearse), and it arrives the moment the
+vault seals — not later, at some crossroads.
 
 !!! ⚠ THE ENV VAR MAKES THIS MOVEMENT A NO-OP — and it says so quietly
 
@@ -880,17 +872,25 @@ before the day it matters.
 
 <<~ ahu #regenesis-live >>
 
-!! ⑤ Regenesis + ⑥ LIVE ~ re-seed the content, serve
+!! ⑤ Seed + ⑥ LIVE ~ plant the content, serve
 
-Regenesis rebirths the CRDT content from `bags/` (identity now stands preserved — the reset lives
-inside regenesis, and the identity home rides outside every wipe). Resume the hooks, and the node
-serves:
+The vessel already stands from ②. What ⑤ adds is the CONTENT: every `bags/@*` holding planted back
+into its doc, kind-routed and diff-gated. Resume the hooks, and the node serves:
 
 ```
-lares regenesis --force                             # stop → reset store → re-bake genesis → wake → seed --apply
+lares vessel seed --apply --yes                     # plant every holding; idempotent, a converged tree no-ops
 lares hooks resume                                  # re-arm capture/ingest
-lares status                                        # LIVE — the node serves; the quorum + charter stand
+lares vessel read                                   # LIVE — the node serves; the quorum + charter stand
 ```
+
+''SEED, not rebirth — and the subtraction removes a trap rather than hiding one.'' Rebirth composes
+stop · clear · bake · stand · seed, which on a fresh founding tears down what ② built ninety seconds
+earlier and re-bakes a genesis nothing has touched. Only the seeding was ever needed here. Rebirth of a
+''standing'' vessel stays a real motion — `lares vessel flow rebirth` — and simply not a founding step.
+
+The trap it removes: a seal writes `sealExpected` into the config, and the clear does not remove it, so
+every later daemon boot calls `assertSealReady` and wants the passphrase in its environment. A movement
+that RESTARTS the daemon crosses that gate mid-rite. A movement that never restarts never crosses it.
 
 ''AND THE RITE ENDS HERE, at the handover.'' `hooks resume` re-arms capture, which starts the sensorium's
 clock — and the sensorium's lifecycle rides ''its own rite'', deliberately not this one
@@ -919,8 +919,8 @@ lares herm --port 8080 --relay-port 8090            # the http FLOW-map face + t
 Herm's OWN identity — stable across reboots, so a family's hearths keep dialing the same key and
 ''never a fresh random per boot''.
 
-''DERIVES, and the word is load-bearing.'' The gate seed reads `HMAC-SHA256("lares relay-gate v1",
-vesselSeed)` — domain-separated, never the identity seed passed through. It once WAS the seed itself, so a
+''DERIVES, and the word is load-bearing.'' The gate seed reads `HMAC-SHA256(RELAY_GATE_INFO,
+vesselSeed)` — the tag itself lives in the domain registry — domain-separated, never the identity seed passed through. It once WAS the seed itself, so a
 Herm published its vessel identity key as the public crossroads gate key: nothing leaked, and two trust
 domains became one correlatable pair, which is the join the veil model spends its design preventing. The
 house's own rule settles it — an HMAC `info` IS the separation.
@@ -1031,8 +1031,8 @@ QR ceremony photograph-inert: a payload names a key the holder already proved it
 ''① On the joining vessel'' — mint the vessel key and read out its public half:
 
 ```
-lares wake                                           # stands the stack; mints THIS vessel's own key
-lares status                                         # read the vessel verifying key (the public half)
+lares vessel stand                                           # stands the stack; mints THIS vessel's own key
+lares vessel read                                         # read the vessel verifying key (the public half)
 ```
 
 ''② On the standing hearth'' — sign an edge over the key the joinee showed:
@@ -1044,7 +1044,7 @@ lares device-admit --as 0 --joinee-key <hex>         # signs a device-delegation
 ''③ On the joining vessel'' — apply the signed payload:
 
 ```
-lares wake --admit <payload-file>                    # joins the existing PersonaGroup on the key it already holds
+lares vessel stand --admit <payload-file>                    # joins the existing PersonaGroup on the key it already holds
 lares persona list                                   # the same roots, reached through a new vessel
 lares persona sync                                   # carry this vessel's own labels + declared Handles to the fleet
 ```

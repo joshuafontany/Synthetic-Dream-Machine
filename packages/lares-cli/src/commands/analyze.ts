@@ -52,10 +52,10 @@ export async function cmdAnalyze(args: ParsedArgs): Promise<number> {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {
       ok: false,
-      error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve`, or run `lares_mcp --standalone --sensorium <root>`." },
+      error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares vessel stand --foreground`, or run `lares_mcp --standalone --sensorium <root>`." },
       human: () => {
         console.error(`lares sense analyze: ${msg}`);
-        console.error("  Start the daemon with `lares serve` and try again.");
+        console.error("  Start the daemon with `lares vessel stand --foreground` and try again.");
         console.error("  (Standalone today: lares_mcp --standalone --sensorium <root>, tool `analyze`.)");
       },
     });

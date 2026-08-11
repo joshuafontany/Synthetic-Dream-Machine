@@ -186,7 +186,7 @@ proof-of-possession with ''bare `@noble/ed25519`'' over its seed — zero keyhiv
 the leaf, honoring no-VM-on-main without a per-invocation Worker boot. The full
 keyhive engine boots ONCE, on the always-on ''relay'', which amortizes the cost and
 verifies leaf proofs in its keyholder worker. The ContactCard carries no expiry or
-nonce — mint it once (at `lares init`), re-present it forever; proof FRESHNESS rides
+nonce — mint it once (at `lares vessel found`), re-present it forever; proof FRESHNESS rides
 the per-challenge nonce + timestamp, never the cached card (never cache the nonce).
 No contradiction with [[open-vessel|lar:///ha.ka.ba/lararium/mesh/open-vessel]]'s equal-peer claim: leaf and relay share IDENTICAL
 STRUCTURE; they differ only in currently-held CAPABILITIES (the relay holds the keyhive
@@ -205,7 +205,7 @@ authority equals the INTERSECTION of the operator's grant and the agent's attenu
 <<~ confidence Synthesis-Canon 15/20 >> The leaf-identity shape (OP-AP5/6) stands
 resolved by twin scouts 2026-06-07 (light cached-card + bare-Ed25519 signer over the
 heavy worker-keyhive path; the tree's `auth-proof` tests already prove bare-Ed25519
-proofs verify). The remaining BUILD: `lares init` mints + persists the operator
+proofs verify). The remaining BUILD: `lares vessel found` mints + persists the operator
 ContactCard (`.operator-card.json`, 0o600); a leaf-identity provider loads
 seed+card; then V3 C (peer transport) and the writable MCP surface compose over it.
 

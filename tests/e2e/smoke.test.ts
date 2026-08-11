@@ -97,9 +97,9 @@ describe("smoke — residency canon through the real CLI", () => {
 });
 
 describe("smoke — any target (live-safe reads)", () => {
-  test("lares status answers from the targeted instance", async () => {
-    const r = await lar.cli(["status", "--json"]);
-    // Status reads local instance health; ok on both modes, and the gesture
+  test("lares vessel read answers from the targeted instance", async () => {
+    const r = await lar.cli(["vessel", "read", "--json"]);
+    // A read of local instance health; ok on both modes, and the gesture
     // mutates nothing — the one assertion a LIVE hearth always tolerates.
     expect(r.code).toBe(0);
   });

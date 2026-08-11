@@ -1,7 +1,7 @@
 # docker-compose.mesh.yml — the DreamNet mesh-test harness (Infrastructure as Myth, IaC backup).
 #
 # All vessels composed over the ONE keel (composeVessel — cap-compose.ts), each founding its own
-# identity in-container (lares init), then booting its cap-stack. Proves the composable keel being a
+# identity in-container (lares vessel found), then booting its cap-stack. Proves the composable keel being a
 # mesh — daemon-FULL Hermai carrying the FLOW-map, container-to-container.
 #
 #   lararium-a    composeLararium (substrate+daemon+wiki+pool+read-face)                    :18090

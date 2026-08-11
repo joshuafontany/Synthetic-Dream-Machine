@@ -2,7 +2,7 @@
  * two-vessel-mesh.test.ts — integration test: two node vessels boot and join the same mesh.
  *
  * Scenario:
- *   Vessel A = founding operator node (runs lares init, becomes Gate A/B/C passing)
+ *   Vessel A = founding operator node (runs lares vessel found, becomes Gate A/B/C passing)
  *   Vessel B = second vessel admitted via device-admit payload (same operator, second machine)
  *
  * Assertions:

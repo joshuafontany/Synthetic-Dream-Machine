@@ -10,7 +10,7 @@
  * warm daemons (`quiesce`), and un-pause when the storm passes (`resume`).
  *
  * THE GUEST LANE. `~/.mempalace` is a GUEST — a standalone sidecar the operator raises deliberately,
- * never a runtime binding the vessel boots into. `lares wake --init` stands only the sovereign
+ * never a runtime binding the vessel boots into. `lares vessel stand --init` stands only the sovereign
  * sensorium; standing the guest from the boot wrote the very store the COMPARATOR ruling reserves
  * as an untouched baseline — a measurement never writes the thing it measures against. So every guest verb lives
  * HERE, behind an explicit operator act. Its uses: a sanity-check sidecar to compare the sovereign

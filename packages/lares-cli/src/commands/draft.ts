@@ -50,7 +50,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
       ok: false, error: msg,
       human: () => {
         console.error(`lares draft: ${msg}`);
-        console.error("  Start the daemon with `lares serve` and try again.");
+        console.error("  Start the daemon with `lares vessel stand --foreground` and try again.");
       },
     });
     return 3;

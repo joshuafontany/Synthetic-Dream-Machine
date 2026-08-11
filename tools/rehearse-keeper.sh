@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # rehearse-keeper — run the KEEPER founding sequence against a throwaway tree, twice, and burn it.
 #
-# WHAT IT COVERS. `rehearse-founding.sh` stands the MESH branch — it founds vessels with `lares init` and
+# WHAT IT COVERS. `rehearse-founding.sh` stands the MESH branch — it founds vessels with `lares vessel found` and
 # witnesses Herm carry + partition. This one stands the KEEPER branch: movements ②–⑥ of the rite (persona →
-# nexus seal → vault → regenesis → live), end to end, so a failure has a green baseline to diff against.
+# nexus seal → vault → seed → live), end to end, so a failure has a green baseline to diff against.
 #
 # It exists because the keeper founding runs ONCE, irreversibly, on the real hearth. Every property it can
 # be made to prove cheaply here is a property nobody has to discover there.
@@ -220,7 +220,7 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # and five later steps still reported green. A cascade of green under a red foundation reads worse than
   # a failure, because it invites belief.
   BEFORE=$FAILED
-  run "wake --install (founds the vessel)"   lares wake --install
+  run "wake --install (founds the vessel)"   lares vessel stand --install
   if [ "$FAILED" -ne "$BEFORE" ]; then
     say "CYCLE $CYCLE ABANDONED — the founding failed; every movement below would measure an unfounded tree."
     continue
@@ -286,20 +286,22 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   if out=$(node "$LARES" vault seal --yes 2>&1) && ! printf '%s' "$out" | grep -q "sealed NOTHING"; then ok
   else bad "sealed nothing"; printf '%s\n' "$out" | tail -4 | sed 's/^/      /'; fi
 
-  # THE STANDING CONDITION BEGINS HERE. Sealing writes sealExpected into the config, which `reset` does
-  # not clear, so every boot from now on wants the base var — and ⑤ boots a node. The rite tells the
-  # operator to export it at exactly this point; the harness walks the same order rather than dodging it
-  # by carrying the var from the start.
+  # THE STANDING CONDITION BEGINS HERE. Sealing writes sealExpected into the config, which the clear does
+  # not remove, so every later daemon boot wants the base var. ⑤ no longer boots one — it plants content
+  # into the vessel already standing from ② — but the var still rides from this point, because that is
+  # what a sealed vessel commits its operator to and the harness walks the operator's own order.
   export LARES_ARCHIVE_PASSPHRASE="$PASS_DRILL"
   run "④ vault status"                      lares vault status
-  run "⑤ regenesis --force"                 lares regenesis --force
+  # ⑤ SEEDS, and does not rebirth. Rebirth composes stop · clear · bake · stand · seed, which on a fresh
+  # founding tears down what ② built and re-bakes a genesis nothing touched. Only the seeding belongs here.
+  run "⑤ seed --apply"                      lares vessel seed --apply --yes
   # ⑥ ASSERTS BY CONNECTING, never by inspecting. `node status` reads local facts alone — bootstrap
   # present, storage size, port in use — and the label "LIVE" claimed far more than the verb answers. A
   # node that fataled mid-boot keeps its port bound, so `portInUse` stayed true over a dead vessel and the
   # movement reported LIVE across two cycles that never served anything. `wake --observe` REPORTS without
   # standing, and its `up` reads a connection, so this asks the one question that means live.
   run "⑥ LIVE — the daemon ANSWERS" \
-    sh -c "node '$LARES' wake --json --observe | grep -q '\"up\":true'"
+    sh -c "node '$LARES' vessel stand --json --observe | grep -q '\"up\":true'"
   run "bag list — declarations survive"     sh -c "node '$LARES' bag list | grep -q '@lares'"
 
   # ── ⑦ READY TO CONTRACT ────────────────────────────────────────────────────────────────────────

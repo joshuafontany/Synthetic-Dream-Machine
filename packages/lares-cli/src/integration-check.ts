@@ -1,6 +1,6 @@
 /**
  * integration-check — verify (and, on demand, install) the mempalace integration
- * that `lares wake` depends on. The CHECK is cheap and runs every wake; the
+ * that `lares vessel stand` depends on. The CHECK is cheap and runs every wake; the
  * INSTALL is one-time, behind `--install`, and touches the foundation.
  *
  * mempalace is a READ-ONLY sidecar submodule; we never edit it, only ensure it's
@@ -20,7 +20,7 @@ const MEMPALACE_PLUGIN = join(MEMPALACE_DIR, ".claude-plugin", "plugin.json");
 
 /**
  * The Python interpreter that holds mempalace (venv-aware). ONE source of truth:
- * @lararium/mempalace owns the resolver; this re-export keeps `lares wake`'s cheap
+ * @lararium/mempalace owns the resolver; this re-export keeps `lares vessel stand`'s cheap
  * check on the exact same logic. A second copy kept "in lockstep" would drift.
  */
 export const resolvePython = resolveMempalacePython;
@@ -44,7 +44,7 @@ export function checkMempalaceIntegration(): IntegrationReport {
   checks.push({
     name: "submodule",
     ok: submoduleOk,
-    detail: submoduleOk ? MEMPALACE_DIR : "absent — `lares wake --install` (git submodule update --init mempalace)",
+    detail: submoduleOk ? MEMPALACE_DIR : "absent — `lares vessel stand --install` (git submodule update --init mempalace)",
   });
 
   const pkgOk = existsSync(join(MEMPALACE_PKG, "package.json"));
@@ -69,7 +69,7 @@ export function checkMempalaceIntegration(): IntegrationReport {
         holderOk = probe.status === 0;
         holderDetail = holderOk
           ? `${py} -m mempalace.mcp_server importable`
-          : "holder deps absent — `lares wake --install` (pip install -e ./mempalace)";
+          : "holder deps absent — `lares vessel stand --install` (pip install -e ./mempalace)";
       }
     } catch {
       /* leave the not-found default */

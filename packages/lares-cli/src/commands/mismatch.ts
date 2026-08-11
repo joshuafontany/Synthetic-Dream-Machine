@@ -61,7 +61,7 @@ export async function cmdMismatch(args: ParsedArgs): Promise<number> {
   const submit = await runVerb("mismatch", { rows, ...(names ? { names } : {}) }, did, { timeoutMs: TIMEOUT_CEIL_MS }).catch((err: unknown) => {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg,
-                   hint: "Start the daemon with `lares serve` (the comparator reaches both the TS hull and the R plane through it)." },
+                   hint: "Start the daemon with `lares vessel stand --foreground` (the comparator reaches both the TS hull and the R plane through it)." },
                  human: () => console.error(`lares sense mismatch: ${msg}`) });
     return null;
   });

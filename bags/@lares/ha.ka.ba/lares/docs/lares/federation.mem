@@ -11,7 +11,7 @@ manao      = 14
 manaoio    = 13
 register   = "Synthesis"
 retain     = true
-role       = "operator how-to: federate a second vessel into your PersonaGroup via lares wake --admit — what github carries vs what travels out-of-band, the TRUE NAME MODEL (a distinct key per vessel, delegated in at the hearth's True Name) and the retired copy-the-key stopgap it supersedes, the witnessed procedure kept as record"
+role       = "operator how-to: federate a second vessel into your PersonaGroup via lares vessel stand --admit — what github carries vs what travels out-of-band, the TRUE NAME MODEL (a distinct key per vessel, delegated in at the hearth's True Name) and the retired copy-the-key stopgap it supersedes, the witnessed procedure kept as record"
 type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/lares/docs/lares/federation"
 written    = "2026-06-21"
@@ -134,10 +134,10 @@ Transmit ''out-of-band'' to the new vessel: `admit.json`, and the operator key (
 
 ```
 pnpm install && pnpm -r build      # bootstrap the lares CLI + node
-lares wake --admit admit.json      # idempotent join-standup
+lares vessel stand --admit admit.json      # idempotent join-standup
 ```
 
-`lares wake --admit` runs the same found-if-absent standup as `--install` — build, mempalace, genesis (skipped; `island.bin` rides the clone) — but the init step ''joins'' the PersonaGroup from the payload instead of founding a new one: it loads the operator key (same DID = a member), applies the cap-events, writes the local `social-bootstrap.json` into the vessel's own store, and stands the node up. The keyhive boot gates then verify membership and the vessel goes live. Re-running is a no-op (the bootstrap already lives).
+`lares vessel stand --admit` runs the same found-if-absent standup as `--install` — build, mempalace, genesis (skipped; `island.bin` rides the clone) — but the init step ''joins'' the PersonaGroup from the payload instead of founding a new one: it loads the operator key (same DID = a member), applies the cap-events, writes the local `social-bootstrap.json` into the vessel's own store, and stands the node up. The keyhive boot gates then verify membership and the vessel goes live. Re-running is a no-op (the bootstrap already lives).
 
 <<~/ahu >>
 
@@ -157,13 +157,13 @@ A ''browser'' vessel meets one more gate before any of this — the ''secure-con
 
 !! The Windows Surface
 
-A QA vessel on native Windows 11 (PowerShell, not WSL) stands up through the same `lares wake --install` / `--admit`, with these surface notes:
+A QA vessel on native Windows 11 (PowerShell, not WSL) stands up through the same `lares vessel stand --install` / `--admit`, with these surface notes:
 
 * ''`lares` global'' — `--install`/`--admit` writes a `lares.cmd` shim beside the bin (on Unix it symlinks into `~/.local/bin`). Add that directory to PATH so `lares` runs bare. The link step is self-contained — it does not depend on `pnpm setup`/`PNPM_HOME`.
 * ''Python'' — the integration check resolves `python3` → `python` → `py`, so Windows' `python`/`py` is found.
 * ''The wake hook is portable'' — it runs node exec-form (`node lares-wake-hook.mjs`), no shell, identical on Windows and Unix.
-* ''mempalace's keep-hooks are bash'' (`Stop` / `PreCompact`) — on native Windows they need ''Git for Windows'' (which Claude Code already requires for its bash tool). With Git Bash present, `lares wake --claude` wires them as `bash "<path>"`; without it, the verbatim keep-leg stays dark until Git for Windows is installed.
-* ''`lares reconcile`'' (the dev restart) uses `lsof`/`ss` — Unix-only; it does not run during a normal wake, but the restart loop awaits a Windows (netstat/taskkill) path.
+* ''mempalace's keep-hooks are bash'' (`Stop` / `PreCompact`) — on native Windows they need ''Git for Windows'' (which Claude Code already requires for its bash tool). With Git Bash present, `lares vessel stand --claude` wires them as `bash "<path>"`; without it, the verbatim keep-leg stays dark until Git for Windows is installed.
+* ''`lares vessel stand --restart`'' (the dev restart) uses `lsof`/`ss` — Unix-only; it does not run during a normal wake, but the restart loop awaits a Windows (netstat/taskkill) path.
 
 <<~/ahu >>
 

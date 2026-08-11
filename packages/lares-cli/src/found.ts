@@ -1,5 +1,5 @@
 /**
- * found — the idempotent founding orchestration behind `lares wake --install`.
+ * found — the idempotent founding orchestration behind `lares vessel stand --install`.
  *
  * Stands up the whole shebang from a (mostly) fresh pull — node build, mempalace
  * integration, social-plane init, genesis — by COMPOSING the existing commands,
@@ -8,7 +8,7 @@
  * Safety law (the keypair-wipe lesson generalized):
  *  - the plan is computed by file PRESENCE alone (read-only); only absent steps run;
  *  - the operator keypair is load-or-create — never wiped (node-vessel-identity.ts);
- *  - `lares init` self-guards on the bootstrap (skips the ceremony if present);
+ *  - `lares vessel found` self-guards on the bootstrap (skips the ceremony if present);
  *  - genesis is BUILD-IF-ABSENT ONLY — a rebuild can shift the CID and diverge a
  *    founded identity, so re-founding stays an explicit operator act (reset), never
  *    a wake. `--install` never passes `--force`.
@@ -57,7 +57,7 @@ export function planFounding(ctx: FoundContext): PlanStep[] {
   return [
     { step: "build", present: existsSync(NODE_DIST_MAIN), wouldRun: "pnpm install && pnpm -r build" },
     { step: "mempalace", present: checkMempalaceIntegration().ok, wouldRun: "git submodule update --init + pip install -e ./mempalace" },
-    { step: "init", present: existsSync(ctx.bootstrap), wouldRun: "lares init (keypair load-or-create; founding ceremony only if absent)" },
+    { step: "init", present: existsSync(ctx.bootstrap), wouldRun: "lares vessel found (keypair load-or-create; founding ceremony only if absent)" },
     { step: "genesis", present: existsSync(islandBin), wouldRun: "build-genesis (BUILD-IF-ABSENT; never rebuilds a founded shrine)" },
   ];
 }
@@ -130,7 +130,7 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
         ? `init exited ${code}`
         : admit
           ? `JOINED PersonaGroup via admit payload (${admit}) — own keypair, same group`
-          : "lares init (founded a new PersonaGroup)";
+          : "lares vessel found (founded a new PersonaGroup)";
     steps.push({ step: "init", action: code === 0 ? "ran" : "failed", detail });
     if (code !== 0) return steps;
   }

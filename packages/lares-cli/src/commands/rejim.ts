@@ -94,10 +94,10 @@ export async function cmdRejim(args: ParsedArgs): Promise<number> {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {
       ok: false,
-      error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." },
+      error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares vessel stand --foreground` and try again." },
       human: () => {
         console.error(`lares sense rejim: ${msg}`);
-        console.error("  Start the daemon with `lares serve` and try again.");
+        console.error("  Start the daemon with `lares vessel stand --foreground` and try again.");
       },
     });
     return exitFor("daemon-unreachable");

@@ -1,5 +1,5 @@
 /**
- * seed-holdings — `lares seed`'s holdings map (seed.ts discoverHoldings).
+ * seed-holdings — `lares vessel seed`'s holdings map (seed.ts discoverHoldings).
  *
  * The map DISCOVERS every `@*` dir under `<root>/bags/`, never hardcodes: files,
  * non-@ dirs, and a missing bags/ all stay out; order sorts stable; each holding

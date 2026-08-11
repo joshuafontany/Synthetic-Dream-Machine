@@ -23,8 +23,8 @@ let starting: Promise<MempalaceClient> | null = null;
 
 async function open(): Promise<MempalaceClient> {
   const spawn = resolveMempalaceSpawn();
-  if (!spawn.holderPresent) throw new Error("mempalace submodule absent — run `lares wake --install`");
-  if (!spawn.python) throw new Error("no python holds mempalace — create ~/.venv and pip install the holder deps (`lares wake --install`)");
+  if (!spawn.holderPresent) throw new Error("mempalace submodule absent — run `lares vessel stand --install`");
+  if (!spawn.python) throw new Error("no python holds mempalace — create ~/.venv and pip install the holder deps (`lares vessel stand --install`)");
   const client = new MempalaceClient({
     submoduleRoot: spawn.submoduleRoot,
     python: spawn.python,

@@ -113,7 +113,7 @@ The Lararium node treats build, init, and runtime as strictly separated authorsh
 
 ```text
 Build time    scripts/build-genesis-island.ts    content Tiga → genesis/island.bin (CID-verifiable)
-Init time     lares init  (was scripts/init-lararium.ts)    social Tiga + identity ceremony → genesis/social-bootstrap.json
+Init time     lares vessel found  (was scripts/init-lararium.ts)    social Tiga + identity ceremony → genesis/social-bootstrap.json
 Runtime       openNodeVessel  /  openBrowserVessel          finds docs, wires layers; never authors social state
 ```
 

@@ -43,7 +43,7 @@ export interface LaresMcpCommand {
 
 /**
  * Resolve the `lares` MCP server invocation, or null when the pieces are not on disk (no python, no
- * script — `lares wake --install` lays them down).
+ * script — `lares vessel stand --install` lays them down).
  *
  * ABSOLUTE by construction: a harness spawns this with no venv active and no cwd guarantee, so the
  * interpreter, the script and the palace all resolve to full paths, and PYTHONPATH carries the
@@ -53,7 +53,7 @@ export interface LaresMcpCommand {
 export function resolveLaresMcp(): LaresMcpCommand | null {
   const { python, script, submoduleRoot, scriptPresent } = resolveLaresMcpSpawn();
   if (python === null || !scriptPresent) return null;
-  if (!existsSync(memorySensoriumDir())) return null; // no sensorium stood — `lares wake --init` stands it
+  if (!existsSync(memorySensoriumDir())) return null; // no sensorium stood — `lares vessel stand --init` stands it
   return {
     command: python,
     args: [script],   // ROUTED: no --palace. The surface opens no store; it speaks to the @daemon.

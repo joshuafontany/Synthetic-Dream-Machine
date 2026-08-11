@@ -4,7 +4,7 @@
  * Two modes, selected by LAR_TARGET (the env contract: lares-cli/src/env.ts):
  *
  *   staged (default) — the harness OWNS the instance: ephemeral root under
- *     os.tmpdir(), random port, `lares reset --force` → daemon boot → await
+ *     os.tmpdir(), random port, `lares vessel clear --force` → daemon boot → await
  *     `phase → live` → tests run → daemon killed, root deleted. QA isolation
  *     by construction; every run starts from genesis.
  *
@@ -97,8 +97,8 @@ async function openStaged(): Promise<LarInstance> {
   const port = await freePort();
   const env  = { LAR_ROOT: root, LAR_PORT: String(port) };
 
-  // Genesis — `lares reset --force` seeds the root (init runs inside).
-  const reset = await runCli(env, ["reset", "--root", root, "--force"]);
+  // Genesis — `lares vessel clear --force` seeds the root (init runs inside).
+  const reset = await runCli(env, ["vessel", "clear", "--root", root, "--force"]);
   if (reset.code !== 0) {
     rmSync(root, { recursive: true, force: true });
     throw new Error(`staged reset failed (${reset.code}):\n${reset.stderr.slice(-800)}`);

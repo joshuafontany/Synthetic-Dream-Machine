@@ -51,7 +51,7 @@ real instance in one of two modes:
 
 | Mode | Selector | Behavior |
 |---|---|---|
-| **Staged** *(default)* | — | harness OWNS the instance: ephemeral root under `os.tmpdir()`, random port, `lares reset --force` → daemon boot → await `phase → live` → tests → daemon killed, root deleted. Every run starts from genesis. |
+| **Staged** *(default)* | — | harness OWNS the instance: ephemeral root under `os.tmpdir()`, random port, `lares vessel clear --force` → daemon boot → await `phase → live` → tests → daemon killed, root deleted. Every run starts from genesis. |
 | **Live** | `LAR_TARGET=live` + `LAR_ROOT`/`LAR_PORT` | harness ATTACHES: never resets, never stops, never deletes. Mutating tests guard on `instance.mode === "staged"` and skip. |
 
 **The env contract** (one source: `packages/lares-cli/src/env.ts`): `LAR_ROOT` +

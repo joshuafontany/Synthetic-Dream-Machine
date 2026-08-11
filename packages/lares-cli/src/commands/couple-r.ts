@@ -58,7 +58,7 @@ export async function cmdCoupleR(args: ParsedArgs): Promise<number> {
   const submit = await runVerb("couple-r", verbArgs, did, { timeoutMs: TIMEOUT_CEIL_MS }).catch((err: unknown) => {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg,
-                   hint: "Start the daemon with `lares serve`, or run `lares_mcp --standalone --sensorium <root>` (tool `couple_r`)." },
+                   hint: "Start the daemon with `lares vessel stand --foreground`, or run `lares_mcp --standalone --sensorium <root>` (tool `couple_r`)." },
                  human: () => console.error(`lares sense couple-r: ${msg}`) });
     return null;
   });

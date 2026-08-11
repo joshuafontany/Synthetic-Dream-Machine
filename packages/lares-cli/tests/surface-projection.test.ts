@@ -11,14 +11,18 @@
  * declaration added no gate a human has to pass.
  */
 import { describe, test, expect } from "vitest";
-import { projectCommands } from "../src/bin/lares.js";
+import { projectCommands, COMMAND_NAMES } from "../src/bin/lares.js";
 
 describe("the table projects onto surfaces it declares", () => {
   test("the CLI surface carries the whole command set — no human lost a verb to this", () => {
-    const cli = projectCommands("cli");
-    expect(cli.length).toBeGreaterThan(35);
-    expect(cli.map((e) => e.name)).toContain("wake");
-    expect(cli.map((e) => e.name)).toContain("nexus");
+    // DERIVED, never a threshold. A magic minimum measures the table's SIZE, which is exactly what a
+    // collapse is supposed to move — so it fires on the deliberate act and stays silent on the real
+    // failure, a row that quietly stops projecting. The property is TOTALITY: every declared command
+    // reaches the human surface.
+    const cli = projectCommands("cli").map((e) => e.name);
+    expect([...cli].sort()).toEqual([...COMMAND_NAMES].sort());
+    expect(cli).toContain("vessel");
+    expect(cli).toContain("nexus");
   });
 
   // The default carries a RULE rather than a convenience: nothing reaches an agent until a hand declares it.
@@ -51,12 +55,13 @@ describe("the signing hand stays the human's", () => {
 
   test("the acts that mint, sign, seal or stake are the ones marked", () => {
     const signing = new Set(projectCommands("cli").filter((e) => e.signs).map((e) => e.name));
-    // each of these runs a key: founding, minting a face, staking standing, sealing an invite, quorum acts
-    for (const name of ["init", "vault", "persona", "cabal", "edge", "nexus", "device-admit"]) {
+    // each of these runs a key: founding (`vessel found`/`seed`), minting a face, staking standing,
+    // sealing an invite, quorum acts
+    for (const name of ["vessel", "vault", "persona", "cabal", "edge", "nexus", "device-admit"]) {
       expect(signing.has(name)).toBe(true);
     }
     // and a read-only verb never claims to hold one
-    for (const name of ["status", "act", "bag"]) {
+    for (const name of ["act", "bag", "wiki"]) {
       expect(signing.has(name)).toBe(false);
     }
   });

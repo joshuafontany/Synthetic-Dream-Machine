@@ -22,7 +22,7 @@
  * Safety: if live mempalace processes (MCP servers / a running mine) hold a SELECTED store open, the
  * verb REFUSES (exit conflict) unless `--force` is also given — a holder of an UN-selected sensorium
  * never blocks. Re-pave after with the full ceremony:
- * `lares wake --init` → `lares sense pour --all` → `lares mempalace resume`.
+ * `lares vessel stand --init` → `lares sense pour --all` → `lares mempalace resume`.
  *
  * Usage:  lares sense teardown                    # preview EVERY group
  *         lares sense teardown memory             # preview ONE sensorium
@@ -90,7 +90,7 @@ const ORGAN_LABEL: Readonly<Record<string, string>> = {
 
 /**
  * Resolve the teardown targets — never an ambient default. The PALACE organs come from the SHARED
- * @lararium/node registry (`palaceOrgans`), the SAME list `lares wake --init` stands up (one
+ * @lararium/node registry (`palaceOrgans`), the SAME list `lares vessel stand --init` stands up (one
  * enumerator, two consumers, can't drift). Teardown adds its own non-palace idempotency targets
  * (the harvest watermark + stage) AND every ephemeral scratch sensorium instance, so an
  * interrupted `sensorium run` can never leak state past a re-pave.
@@ -333,7 +333,7 @@ export async function cmdPalaceTeardown(args: ParsedArgs): Promise<number> {
       // The FULL ceremony tail — a bare `harvest --all` hint left followers with a
       // config-less palace and hooks paused forever (--drain holds them paused).
       console.log("  re-pave ceremony:");
-      console.log("    1. lares wake --init        (stand the organs: config.json + hooks.auto_save=false pin)");
+      console.log("    1. lares vessel stand --init        (stand the organs: config.json + hooks.auto_save=false pin)");
       console.log("    2. lares sense pour --all      (the re-pave)");
       console.log("    3. lares mempalace resume   (un-pause the hooks)");
     },

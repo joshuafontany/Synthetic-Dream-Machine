@@ -225,7 +225,7 @@ is cleaner than it looks.
 
 ```
 ~$ <<~ operator -> sits down, pulls out personal device >>
-~$ lares status
+~$ lares vessel read
 ```
 
 <<~ lares aim lar://traveler:guest@spice-quarter/node.steady.asks -> lar://lares:host@spice-quarter/lorekeeper.ledger.reads >>

@@ -136,7 +136,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." }, human: () => { console.error(`lares ingest: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
+    emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares vessel stand --foreground` and try again." }, human: () => { console.error(`lares ingest: ${msg}`); console.error("  Start the daemon with `lares vessel stand --foreground` and try again."); } });
     return exitFor("daemon-unreachable");
   }
   if (result.status === "error") {

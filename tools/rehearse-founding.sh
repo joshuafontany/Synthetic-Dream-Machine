@@ -8,7 +8,7 @@
 #
 #   BURN → FOUND → WITNESS carry → WITNESS partition → BURN,  × CYCLES
 #
-# Each container mints its OWN identity in-container (tools/lararium-container-boot.sh → `lares init`),
+# Each container mints its OWN identity in-container (tools/lararium-container-boot.sh → `lares vessel found`),
 # so every cycle founds genuinely fresh sovereign hearths — never a restored snapshot of a prior run.
 #
 # WHAT A CYCLE WITNESSES (each by exit code, no metaphysics):

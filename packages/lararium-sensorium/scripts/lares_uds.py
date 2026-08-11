@@ -85,7 +85,7 @@ def operator_did() -> str:
         if key:
             return "0x" + key
     raise LaresDaemonUnreachable(
-        f"no vessel identity under {ident} — run `lares wake --init` to found this node"
+        f"no vessel identity under {ident} — run `lares vessel stand --init` to found this node"
     )
 
 
@@ -99,7 +99,7 @@ def call(verb: str, args: "dict | None" = None, *, timeout: float = 30.0,
     """
     path = socket_path()
     if not os.path.exists(path):
-        raise LaresDaemonUnreachable(f"no lares daemon at {path} — start one with `lares serve`")
+        raise LaresDaemonUnreachable(f"no lares daemon at {path} — start one with `lares vessel stand --foreground`")
 
     line = json.dumps({
         "verb": verb,

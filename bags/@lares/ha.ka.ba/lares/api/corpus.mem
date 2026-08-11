@@ -72,7 +72,7 @@ drift. The organ ladder wires dependency-ordered:
 `setup` runs ''wire-once / detect-existing'' (idempotent — an already-stood organ no-ops), returns the
 `PalaceSetupStep[]` ledger as a table or JSON, and surfaces through:
 
-<<~ranks surface wake-init ~ `lares wake --init` (EXTEND the existing wake) -> status-palaces ~ `lares status --palaces` (probe every organ's standing) >>
+<<~ranks surface wake-init ~ `lares vessel stand --init` (EXTEND the existing wake) -> status-palaces ~ `lares vessel read --palaces` (probe every organ's standing) >>
 
 ''The help that teaches.'' Add a per-command ''HELP REGISTRY'' — each command carries
 `{ synopsis, examples[], flags[] }`, examples-first. <<~ confidence Synthesis-Canon 13/20 >> This registry
@@ -253,7 +253,7 @@ TW5-quine runs after S0 + S2.
 
 \procedure ~Sprint(~Type:"" ~Params:"") ~Sprint <<~Type>> <<~holds `[<~Params>]`>>
 
-<<~Sprint S0 "name/CLI foundation [UNGATED] ~ palaceOrgans registry · setup-wires-all-five · help-registry · `lares corpus` ephemeral-lifecycle · THIS corpus.md heleuma meme ~ ACCEPT: `lares status --palaces` lists all five organs; `lares corpus run <path>` opens, analyzes, and DISSOLVES on exit; an interrupted run leaves no scratch under ~/.lares/.corpus/; `lares heleuma` ties this meme to the corpus help registry" >>
+<<~Sprint S0 "name/CLI foundation [UNGATED] ~ palaceOrgans registry · setup-wires-all-five · help-registry · `lares corpus` ephemeral-lifecycle · THIS corpus.md heleuma meme ~ ACCEPT: `lares vessel read --palaces` lists all five organs; `lares corpus run <path>` opens, analyzes, and DISSOLVES on exit; an interrupted run leaves no scratch under ~/.lares/.corpus/; `lares heleuma` ties this meme to the corpus help registry" >>
 <<~Sprint S1 "name/bands cap ~ the grain address (FFZ membership tree) + the boundary tree R leg (ecp::e.divisive nested changepoints over content+form+structure, cosine-drift the signal) ~ ACCEPT: the grain address maps Pulse→Theme as containment LEVELS; a bootstrap reproduces the locked boundaries (resampling-consensus gate fires)" >>
 <<~Sprint S2 "name/structure cap ~ tree-sitter router → the existing structurepalace encoder + the `<<~…>>` sigil grammar ~ ACCEPT: code/markdown/wikitext/json route through one CST API; the sigil grammar parses a meme's `<<~…>>` spans; the encoder yields content-free shape vectors" >>
 <<~Sprint S3 "name/form cap ~ the induction holder (TreeMiner + PrefixSpan/BIDE + c2xg, EM-iterated, MDL-stopped) ~ ACCEPT: the `induce` batch surfaces templates that each pay their description-length; the LLM labels them AFTER mining, never inside the loop" >>

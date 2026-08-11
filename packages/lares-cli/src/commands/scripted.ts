@@ -30,7 +30,7 @@ export async function cmdHeleuma(args: ParsedArgs): Promise<number> {
   return runTsxScript(join(REPO_ROOT, "scripts", "heleuma.ts"), scriptArgs);
 }
 
-/** `lares serve` — boot the lararium node only (no Vite).
+/** `lares vessel stand --foreground` — boot the lararium node only (no Vite).
  *
  *  Runs the BUILT dist, never tsx-source: the sovereign island workers spawn from
  *  compiled `.js` siblings (`node-daemon-island.js` / `node-wiki-island.js`, no
@@ -41,7 +41,7 @@ export async function cmdServe(args: ParsedArgs): Promise<number> {
   const { existsSync } = await import("node:fs");
   const distMain = join(NODE_PKG, "dist", "src", "main.js");
   if (!existsSync(distMain)) {
-    console.error(`[lares serve] ${distMain} not found — run \`pnpm -r build\` first (the island workers are compiled; tsx-source cannot spawn them).`);
+    console.error(`[lares vessel stand --foreground] ${distMain} not found — run \`pnpm -r build\` first (the island workers are compiled; tsx-source cannot spawn them).`);
     return 1;
   }
   const extraArgs: string[] = [];
@@ -53,7 +53,7 @@ export async function cmdServe(args: ParsedArgs): Promise<number> {
   return runCommand("node", [distMain, ...extraArgs], NODE_PKG);
 }
 
-/** `lares dev` — boot node + Vite app concurrently (full dev experience). */
+/** `lares vessel stand --with-app` — boot node + Vite app concurrently (full dev experience). */
 export async function cmdDev(_args: ParsedArgs): Promise<number> {
   // Defer to the workspace-root `pnpm dev` script which already wires
   // `concurrently -n node,vite`. Touching that orchestration here would
@@ -62,13 +62,13 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares reset` — wipe the vessel store (`<data>/vessel`) + bootstrap artifact, then re-init.
+ * `lares vessel clear` — wipe the vessel store (`<data>/vessel`) + bootstrap artifact, then re-init.
  *
  * Operator-confirmation gate: until proper auth lands, we still want a
  * second-thought guard. Honors --force to skip the prompt.
  */
 /**
- * The reset wipe-list — the ONE spelling of every path `lares reset` deletes, resolved at
+ * The reset wipe-list — the ONE spelling of every path `lares vessel clear` deletes, resolved at
  * call time (AFTER any --root sets LAR_ROOT). Exported for the wipe-list contract test:
  * the projection watermark dies WITH the store (GAP 1); identity NEVER appears here.
  *
@@ -105,25 +105,25 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"];
   const targets = resetTargets();
 
-  console.log("[lares reset] will delete:");
+  console.log("[lares vessel clear] will delete:");
   for (const t of targets) if (existsSync(t.path)) console.log(`  ${t.path}`);
   if (!args.flags["force"]) {
     console.log("Pass --force to proceed.");
     return 1;
   }
   for (const t of targets) rmSync(t.path, { recursive: t.recursive, force: true });
-  console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone — the seal, the library and the repo registry sit beside it, equally untouched)`);
+  console.log(`[lares vessel clear] preserved identity: ${larIdentityDir()} (out of the wipe zone — the seal, the library and the repo registry sit beside it, equally untouched)`);
   // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
   // must exist first. (The reverse order fails: "hearth true-name (engine CID) absent".)
-  console.log("[lares reset] cleared. Rebuilding genesis artifact…");
+  console.log("[lares vessel clear] cleared. Rebuilding genesis artifact…");
   const genesisCode = await cmdBuildGenesis(args);
   if (genesisCode !== 0) return genesisCode;
-  console.log("[lares reset] Running lares init…");
+  console.log("[lares vessel clear] Running lares vessel found…");
   const { cmdInit } = await import("./init.js");
   return cmdInit(args);
 }
 
-/** `lares fresh` — reset (--force implied) then serve. Assumes dist is current (run `refresh` to
+/** `lares vessel clear --force && lares vessel stand --foreground` — reset (--force implied) then serve. Assumes dist is current (run `refresh` to
  *  also recompile). */
 export async function cmdFresh(args: ParsedArgs): Promise<number> {
   const resetCode = await cmdReset({ ...args, flags: { ...args.flags, force: true } });
@@ -132,7 +132,7 @@ export async function cmdFresh(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares refresh` — THE idempotent post-dev-change cure. After ANY code edit, run this:
+ * `lares vessel flow refresh` — THE idempotent post-dev-change cure. After ANY code edit, run this:
  *   1. `pnpm -r build`     — recompile every package's dist (the island workers spawn from dist, not
  *                            tsx-source — a stale dist = a half-dead vessel). Idempotent.
  *   2. `reconcile --fresh` — stop the incumbent on the port (graceful→force, by port-access, no PID
@@ -147,18 +147,18 @@ export async function cmdFresh(args: ParsedArgs): Promise<number> {
  *   - `serve`     : boot the dist, fail-fast (no convergence, no rebuild)
  */
 export async function cmdRefresh(args: ParsedArgs): Promise<number> {
-  console.log("[lares refresh] (1/2) pnpm -r build — recompiling all dist…");
+  console.log("[lares vessel flow refresh] (1/2) pnpm -r build — recompiling all dist…");
   const buildCode = await runCommand("pnpm", ["-r", "build"], REPO_ROOT);
   if (buildCode !== 0) {
-    console.error("[lares refresh] build failed — fix the compile, then re-run `lares refresh`.");
+    console.error("[lares vessel flow refresh] build failed — fix the compile, then re-run `lares vessel flow refresh`.");
     return buildCode;
   }
-  console.log("[lares refresh] (2/2) reconcile --fresh — re-pave + serve…");
+  console.log("[lares vessel flow refresh] (2/2) reconcile --fresh — re-pave + serve…");
   return cmdReconcile({ ...args, flags: { ...args.flags, fresh: true } });
 }
 
 /**
- * `lares reconcile` — converge to ONE live vessel for the dev/test loop. Idempotent
+ * `lares vessel stand --restart` — converge to ONE live vessel for the dev/test loop. Idempotent
  * from ANY prior state (running / stale / none): stop the incumbent by ACCESS to the
  * OS port-table (graceful SIGTERM → poll port-free → bounded SIGKILL fallback — no PID
  * file, no supervisor), optional `--fresh` wipe, then serve. The port is the single-
@@ -169,10 +169,10 @@ export async function cmdReconcile(args: ParsedArgs): Promise<number> {
   const { stopIncumbent } = await import("../port-control.js");
   try {
     const r = await stopIncumbent(port);
-    if (r.stopped) console.log(`[lares reconcile] stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})`);
-    else           console.log(`[lares reconcile] :${port} already free`);
+    if (r.stopped) console.log(`[lares vessel stand --restart] stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})`);
+    else           console.log(`[lares vessel stand --restart] :${port} already free`);
   } catch (e) {
-    console.error(`[lares reconcile] ${e instanceof Error ? e.message : String(e)}`);
+    console.error(`[lares vessel stand --restart] ${e instanceof Error ? e.message : String(e)}`);
     return 1;
   }
   if (args.flags["fresh"]) {
@@ -183,7 +183,7 @@ export async function cmdReconcile(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares rebuild` — the identity-safe dep-bump cure (Tier 0).
+ * `lares vessel flow rebuild` — the identity-safe dep-bump cure (Tier 0).
  *
  * When a dependency bump (keyhive / automerge / beelay / TW5) skews the on-disk
  * serde format, the vessel-host can't deserialize the stored genesis engine and
@@ -202,13 +202,13 @@ export async function cmdRebuild(args: ParsedArgs): Promise<number> {
   const { stopIncumbent } = await import("../port-control.js");
   try {
     const r = await stopIncumbent(port);
-    if (r.stopped) console.log(`[lares rebuild] stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})`);
-    else           console.log(`[lares rebuild] :${port} already free`);
+    if (r.stopped) console.log(`[lares vessel flow rebuild] stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})`);
+    else           console.log(`[lares vessel flow rebuild] :${port} already free`);
   } catch (e) {
-    console.error(`[lares rebuild] ${e instanceof Error ? e.message : String(e)}`);
+    console.error(`[lares vessel flow rebuild] ${e instanceof Error ? e.message : String(e)}`);
     return 1;
   }
-  console.log("[lares rebuild] rebuilding genesis engine under current deps (storage + identity untouched)…");
+  console.log("[lares vessel flow rebuild] rebuilding genesis engine under current deps (storage + identity untouched)…");
   const genesisCode = await cmdBuildGenesis(rootedArgs);
   if (genesisCode !== 0) return genesisCode;
   return cmdServe(rootedArgs);

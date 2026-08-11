@@ -40,10 +40,10 @@ const ROOT = envOf("LAR_SWARM_ROOT");   // a founded .lararium dataDir → use i
 const TRANSPORT = RELAY ? `ws ${RELAY}` : `file ${DIR}`;
 
 /** This vessel's seed: its REAL founded identity (loadVesselSigningSeed) when LAR_SWARM_ROOT
- *  points at a `lares init`-founded dataDir; a deterministic test byte otherwise. */
+ *  points at a `lares vessel found`-founded dataDir; a deterministic test byte otherwise. */
 async function loadSeed(): Promise<Uint8Array> {
   if (ROOT) {
-    await generateOrLoadVesselIdentity(ROOT);   // mint this vessel's identity if absent (idempotent, = lares init's mint)
+    await generateOrLoadVesselIdentity(ROOT);   // mint this vessel's identity if absent (idempotent, = lares vessel found's mint)
     const seed = await loadVesselSigningSeed(ROOT);
     console.log(`[swarm-node] using FOUNDED vessel identity from ${ROOT}`);
     return seed;

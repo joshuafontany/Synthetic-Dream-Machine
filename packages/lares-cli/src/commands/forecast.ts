@@ -53,7 +53,7 @@ export async function cmdForecast(args: ParsedArgs): Promise<number> {
   const submit = await runVerb("forecast", { rows }, did, { timeoutMs: TIMEOUT_CEIL_MS }).catch((err: unknown) => {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg,
-                   hint: "Start the daemon with `lares serve`, or run `lares_mcp --standalone` (tool `forecast`)." },
+                   hint: "Start the daemon with `lares vessel stand --foreground`, or run `lares_mcp --standalone` (tool `forecast`)." },
                  human: () => console.error(`lares sense forecast: ${msg}`) });
     return null;
   });

@@ -1,5 +1,5 @@
 /**
- * claude-wire — `lares wake --claude`: wire the Lares hooks into ~/.claude/settings.json (so a Claude
+ * claude-wire — `lares vessel stand --claude`: wire the Lares hooks into ~/.claude/settings.json (so a Claude
  * harness auto-wakes on SessionStart and auto-keeps verbatim memory on Stop/SessionEnd) and register
  * the LARES MCP seat in ~/.claude.json (so recall reaches the memory sensorium THROUGH the lares
  * house). Any stale `mempalace` MCP registration is reaped in the same pass — a harness holding its
@@ -42,7 +42,7 @@ async function acquireLock(lockPath: string): Promise<void> {
       await sleep(100); // async backoff — never blocks the main thread (no Atomics.wait / SharedArrayBuffer)
     }
   }
-  throw new Error(`${lockPath} held by another writer — another \`lares wake --claude\` is running; retry shortly`);
+  throw new Error(`${lockPath} held by another writer — another \`lares vessel stand --claude\` is running; retry shortly`);
 }
 
 /**
@@ -78,7 +78,7 @@ function reapMempalaceMcp(): ClaudeWireStep {
 function registerLaresMcp(): ClaudeWireStep {
   const mcp = resolveLaresMcp();
   if (mcp === null) {
-    return { item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" };
+    return { item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares vessel stand --init`" };
   }
   const got = spawnSync("claude", ["mcp", "get", "lares"], { encoding: "utf8", timeout: 10_000 });
   if (got.error !== undefined) {
@@ -156,7 +156,7 @@ const HOOK_SPECS: readonly HookSpec[] = [
  *
  * Those session files (~/.claude/projects/…) ARE the mempalace's verbatim-memory harvest
  * source; a low cleanup window evaporates the raw ground before the ingest hook mines it,
- * so `lares wake --claude` raises the floor as part of standing the memory shore.
+ * so `lares vessel stand --claude` raises the floor as part of standing the memory shore.
  */
 export const CLEANUP_PERIOD_DAYS_FLOOR = 99999;
 
@@ -200,7 +200,7 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
       raw = readFileSync(settingsPath, "utf8");
       settings = JSON.parse(raw) as ClaudeSettings;
     } catch {
-      throw new Error(`${settingsPath} is not valid JSON — refusing to overwrite (fix it, then re-run \`lares wake --claude\`)`);
+      throw new Error(`${settingsPath} is not valid JSON — refusing to overwrite (fix it, then re-run \`lares vessel stand --claude\`)`);
     }
     copyFileSync(settingsPath, settingsPath + ".bak");
     backedUp = true;

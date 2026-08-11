@@ -128,7 +128,7 @@ export async function vesselDid(): Promise<string> {
   try {
     return "0x" + (await loadVesselVerifyingKey(larDataDir()));
   } catch {
-    throw new Error(`no vessel key under ${larDataDir()} — run \`lares init\` (or point LAR_ROOT at an initialized instance)`);
+    throw new Error(`no vessel key under ${larDataDir()} — run \`lares vessel found\` (or point LAR_ROOT at an initialized instance)`);
   }
 }
 
@@ -146,7 +146,7 @@ export async function personaRootDid(handleIndex = 0): Promise<string> {
   if (!vk) {
     throw new Error(
       `no persona root h${handleIndex} under ${larDataDir()} — this vessel custodies no operator root ` +
-      `(found with \`lares init\`, or read the pinned signer DID an admit payload carried)`,
+      `(found with \`lares vessel found\`, or read the pinned signer DID an admit payload carried)`,
     );
   }
   return "0x" + vk;

@@ -100,7 +100,7 @@ export class SyncedTree {
 
   /**
    * Forget every observation belonging to ONE bag — the L4 per-bag scalpel. Where
-   * `lares reset` wipes the whole projection dir (the all-bags rebirth), a targeted
+   * `lares vessel clear` wipes the whole projection dir (the all-bags rebirth), a targeted
    * single-bag regenesis clears just this bag's carrier keys (`${bagId}\0…`) so its
    * re-feed reads every carrier as `new` (a surviving watermark would read them all
    * `unchanged` and leave the freshly-cleared doc empty — the same poison the whole-tree

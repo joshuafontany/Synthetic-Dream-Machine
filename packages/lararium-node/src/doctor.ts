@@ -1,8 +1,8 @@
 /**
  * doctor (node) — the nodefs read-side of the health sweep. Enumerates every doc in a
  * NodeFS store root, probes each through the L1 child_process boundary, and hands back the
- * isomorphic `DoctorReport`. Read-only — the `git fsck` role. `lares status vessel` renders
- * it; recovery rides the existing `lares regenesis` (CRDT rebirth from bags/), never a new
+ * isomorphic `DoctorReport`. Read-only — the `git fsck` role. `lares vessel read vessel` renders
+ * it; recovery rides the existing `lares vessel flow rebirth` (CRDT rebirth from bags/), never a new
  * verb.
  */
 
@@ -73,7 +73,7 @@ export function formatDoctorReport(report: DoctorReport, storageDir: string): st
     for (const e of bad) {
       lines.push(`    ${e.documentId}  [${e.status}]  ${e.reason ?? ""}`.trimEnd());
     }
-    lines.push(`  recover with: lares regenesis`);
+    lines.push(`  recover with: lares vessel flow rebirth`);
   }
   return lines.join("\n");
 }

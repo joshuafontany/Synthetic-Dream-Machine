@@ -17,7 +17,7 @@
  * social plane (its own @identities/@circles), never the Herm's.
  *
  * SCOPE. `kindleFromBulb` runs the LIGHT cold-boot ceremony — @oracle island + the device's own key + the identity/
- * circle tiddlers. A top-level `lares kindle <herm-url>` command that yields a directly `lares serve`-able hearth
+ * circle tiddlers. A top-level `lares kindle <herm-url>` command that yields a directly `lares vessel stand --foreground`-able hearth
  * additionally bridges `runFoundingCeremony` (the @daemon + keyhive + sentinel seeding), writes the device's own
  * the social bootstrap (the vessel's own doc-url map), and guards a fresh device (refuse when an identity already
  * stands). That command touches the lares-cli CLI↔MCP↔VERB_SEATS parity fixture — a gated follow, not this keel.

@@ -24,10 +24,10 @@ export interface RunVerbOptions extends SubmitOptions {
   readonly dataDir?: string;
 }
 
-/** No daemon holds the socket — the operator must `lares serve`. */
+/** No daemon holds the socket — the operator must `lares vessel stand --foreground`. */
 export class DaemonUnreachable extends Error {
   constructor(socketPath: string) {
-    super(`no lares daemon at ${socketPath} — start one with \`lares serve\``);
+    super(`no lares daemon at ${socketPath} — start one with \`lares vessel stand --foreground\``);
     this.name = "DaemonUnreachable";
   }
 }

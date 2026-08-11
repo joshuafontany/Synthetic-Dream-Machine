@@ -89,7 +89,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
     }
     if (!(await udsAlive())) {
       const msg = `no lares daemon at ${udsSocketPath()}`;
-      emit(args, { ok: false, error: msg, human: () => { console.error(`lares watch: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
+      emit(args, { ok: false, error: msg, human: () => { console.error(`lares watch: ${msg}`); console.error("  Start the daemon with `lares vessel stand --foreground` and try again."); } });
       return 3;
     }
   }

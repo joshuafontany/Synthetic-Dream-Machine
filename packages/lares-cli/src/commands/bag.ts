@@ -53,7 +53,7 @@ export async function cmdBagCompact(args: ParsedArgs): Promise<number> {
     r = await runVerb("bag-compact", { bagUrl }, did, { timeoutMs: 30_000 });
   } catch (err) {
     console.error(`lares bag: ${err instanceof Error ? err.message : String(err)}`);
-    console.error("  Start the daemon with `lares serve` and try again.");
+    console.error("  Start the daemon with `lares vessel stand --foreground` and try again.");
     return 3;
   }
   if (r.status === "error") {
@@ -75,10 +75,10 @@ export async function cmdBagCompact(args: ParsedArgs): Promise<number> {
 type BagSubcommand = (args: ParsedArgs) => Promise<number>;
 
 const SUBCOMMANDS: Readonly<Record<string, { handler: BagSubcommand; summary: string }>> = {
-  "pin":           { handler: cmdPin,          summary: "Pin a bag URL — daemon never evicts it. Needs `lares serve`." },
-  "unpin":         { handler: cmdUnpin,        summary: "Unpin a bag URL — removes the cooling exemption; the bag rejoins the LRU sweep. Needs `lares serve`." },
-  "stats":         { handler: cmdResidency,    summary: "Print the daemon's bag residency snapshot. Needs `lares serve`." },
-  "register-cold": { handler: cmdRegisterCold, summary: "Mark a bag URL as known-but-not-loaded (oracle stub). Needs `lares serve`." },
+  "pin":           { handler: cmdPin,          summary: "Pin a bag URL — daemon never evicts it. Needs `lares vessel stand --foreground`." },
+  "unpin":         { handler: cmdUnpin,        summary: "Unpin a bag URL — removes the cooling exemption; the bag rejoins the LRU sweep. Needs `lares vessel stand --foreground`." },
+  "stats":         { handler: cmdResidency,    summary: "Print the daemon's bag residency snapshot. Needs `lares vessel stand --foreground`." },
+  "register-cold": { handler: cmdRegisterCold, summary: "Mark a bag URL as known-but-not-loaded (oracle stub). Needs `lares vessel stand --foreground`." },
   "compact":       { handler: cmdBagCompact,     summary: "DXOS-style snapshot-restart on one bag. Bounds history; lossy by design." },
   // ── The LIFECYCLE half. Everything above answers a RUNTIME question (is this doc in RAM); these answer
   // what a bag IS, who may read it, where it belongs, and how to move it — the questions a bag could not

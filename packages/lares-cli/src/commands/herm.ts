@@ -2,7 +2,7 @@
  * `lares herm` — stand a HERM (Lares Viales), the wiki-less wayfarer that STANDS the carriage crossroads
  * (Socket B) a family's hearths dial to carry sealed @cad bodies between each other.
  *
- * This is a stand-up verb, NOT a fork of the boot: it spawns the SAME `main.js` the `lares wake` path runs,
+ * This is a stand-up verb, NOT a fork of the boot: it spawns the SAME `main.js` the `lares vessel stand` path runs,
  * routed to `openNodeHerm` via `--recipe herm`, with the carriage relay standing when a relay port rides the
  * config (`--relay-port` / `LAR_HERM_RELAY_PORT`). Pi-deployable: a gate seed + a relay port + the http
  * FLOW-map read-face port. The relay's gate seed derives from the Herm's OWN identity (stable across restarts)
@@ -34,7 +34,7 @@ export async function cmdHerm(args: ParsedArgs): Promise<number> {
   const distMain = join(repoRoot, "packages", "lararium-node", "dist", "src", "main.js");
   const preflight: string | null =
     !existsSync(distMain)   ? "node dist not built — run `pnpm -r build`, then `lares herm`" :
-    !existsSync(bootstrap)  ? "no bootstrap — run `lares init` (or point LAR_ROOT at an initialized instance)" :
+    !existsSync(bootstrap)  ? "no bootstrap — run `lares vessel found` (or point LAR_ROOT at an initialized instance)" :
     null;
 
   // The gate pubkey the CLI can name up-front when the relay seed DEFAULTS to the Herm's own identity — a pinned

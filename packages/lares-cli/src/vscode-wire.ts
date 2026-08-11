@@ -1,5 +1,5 @@
 /**
- * vscode-wire — `lares wake --vscode`: register the LARES MCP seat into VS Code, across whichever
+ * vscode-wire — `lares vessel stand --vscode`: register the LARES MCP seat into VS Code, across whichever
  * variants are installed — stable + Insiders, remote-server (WSL/SSH) + local-profile. Backs up
  * before each change; preserves the operator's other servers.
  *
@@ -61,7 +61,7 @@ export function wireVscode(opts: { home?: string } = {}): VscodeWireResult {
 
   const laresMcp = resolveLaresMcp();
   if (laresMcp === null) {
-    return { changed: false, steps: [{ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares wake --init`" }] };
+    return { changed: false, steps: [{ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares vessel stand --init`" }] };
   }
 
   let found = 0;

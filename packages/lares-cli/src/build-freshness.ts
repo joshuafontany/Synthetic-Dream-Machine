@@ -18,7 +18,7 @@
  *   - Fail-loud           — a build failure ABORTS; the daemon never runs from stale code.
  *   - Composable          — install = build + init + wake + wire, each step re-runnable.
  *
- * Commands in FRESH_BUILD_COMMANDS route through `freshBuildGate` before their handler.
+ * An invocation `needsFreshBuild` accepts routes through `freshBuildGate` before its handler.
  * The `--skip-build` sentinel marks the re-exec'd child (build already done) so it runs
  * its handler directly — ending the recursion.
  */
@@ -30,10 +30,25 @@ import { createHash } from "node:crypto";
 import { repoRoot } from "@lararium/mesh/node";
 import type { ParsedArgs } from "./parse-args.js";
 
-/** Daemon-lifecycle verbs that found / boot / mutate identity from workspace code. */
-export const FRESH_BUILD_COMMANDS: ReadonlySet<string> = new Set([
-  "init", "wake", "serve", "dev", "rebuild", "reset", "fresh", "reconcile", "build-genesis",
-]);
+/**
+ * Does this invocation found / boot / mutate identity from workspace code?
+ *
+ * DERIVED, never rostered. A list of verb names had to be remembered on every surface change, and it
+ * drifted the moment one arrived — which is the same defect the vessel door exists to close. Every
+ * substrate motion now rides ONE door, so membership is a property of that door rather than a name to
+ * recall.
+ *
+ * The test states the EXCEPTIONS, so it fails safe: a sub-door added later is gated until someone
+ * argues otherwise. Only two motions neither found nor boot — `read` inspects and starts nothing, and
+ * `stop` is pure port-control that loads no vessel logic.
+ */
+const NEVER_STALE: ReadonlySet<string> = new Set(["read", "stop", "help"]);
+
+export function needsFreshBuild(args: ParsedArgs): boolean {
+  if (args.command !== "vessel") return false;
+  const sub = args.positional[0];
+  return sub !== undefined && !NEVER_STALE.has(sub);
+}
 
 const BUILT_LARES_BIN = join(repoRoot, "packages", "lares-cli", "dist", "src", "bin", "lares.js");
 /** The digest the current dist was built from, and the lock that keeps one writer. Both sit beside dist. */

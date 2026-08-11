@@ -603,7 +603,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const joinGatePubKey = opts.joinGatePubKey ?? process.env["LAR_JOIN_GATE"] ?? null;
   const joinDocUrl     = opts.joinDocUrl     ?? process.env["LAR_JOIN_DOC"]  ?? null;
   // The operator's OWN light leaf identity (cached ContactCard + bare-Ed25519 signer). A missing card (never
-  // `lares init`-ed) → skip the dial rather than crash the boot (fail-open to inert; a dial needs a real card).
+  // `lares vessel found`-ed) → skip the dial rather than crash the boot (fail-open to inert; a dial needs a real card).
   let nexusDial: NexusClientDial | null = null;
   if (joinSyncUrl) {
     try {
@@ -614,7 +614,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         onLog: (line) => console.log(`[nexus-join] ${line}`),
       });
     } catch (e) {
-      console.log(`[nexus-join] dial-out skipped — leaf identity unavailable (run \`lares init\`): ${e instanceof Error ? e.message : String(e)}`);
+      console.log(`[nexus-join] dial-out skipped — leaf identity unavailable (run \`lares vessel found\`): ${e instanceof Error ? e.message : String(e)}`);
     }
   }
 
@@ -833,7 +833,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const moved = quarantineDoc(storageDir, verdict);
       console.warn(
         `[lararium] DEGRADED plane — quarantined ${verdict.documentId} (${verdict.status}: ${verdict.reason ?? "?"})` +
-        ` → ${moved ?? "already gone"}; the plane mounts read-only until \`lares regenesis\` rematerializes it`,
+        ` → ${moved ?? "already gone"}; the plane mounts read-only until \`lares vessel flow rebirth\` rematerializes it`,
       );
     },
 
@@ -872,14 +872,14 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     const personaGroupAgentIdHex = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_GROUP_AGENT_ID_TIDDLER]) ?? null;
     const meshCabalDocIdHex     = tiddlerText(daemonDoc?.tiddlers?.[MESH_CABAL_DOC_ID_TIDDLER])     ?? null;
     if (!personaGroupDocIdHex || !personaGroupAgentIdHex || !meshCabalDocIdHex) {
-      throw new Error(`[lararium] DreamNet sentinel oracle tiddlers missing — run \`lares init\`.`);
+      throw new Error(`[lararium] DreamNet sentinel oracle tiddlers missing — run \`lares vessel found\`.`);
     }
     // The binding signer-pin + edge — the Binding Gate's authority. FAIL-CLOSED: a missing pin or
     // edge MUST halt the boot, NEVER fall through to skip the Binding Gate (the confused-deputy / PCD cure).
     const signerDid  = tiddlerText(daemonDoc?.tiddlers?.[SIGNER_DID_TIDDLER]) ?? null;
     const edgeRecord = daemonDoc?.tiddlers?.[DEVICE_DELEGATION_SELF_TIDDLER];
     if (!signerDid || !edgeRecord?.tiddler) {
-      throw new Error(`[lararium] DreamNet binding (signer pin + device edge) missing from daemon doc — run \`lares init\`.`);
+      throw new Error(`[lararium] DreamNet binding (signer pin + device edge) missing from daemon doc — run \`lares vessel found\`.`);
     }
     const deviceEdge = edgeRecord.tiddler as unknown as DeviceDelegationTiddler;
     // THE PERSONA-KEL PIN — the continuity anchor the Binding Gate walks. Read the pinned identifier PREFIX
@@ -889,7 +889,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // the boot (never a global lookup, never a fall-through to the raw signer pin).
     const personaKelPrefix = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_KEL_PREFIX_TIDDLER]) ?? null;
     if (!personaKelPrefix) {
-      throw new Error(`[lararium] DreamNet binding (persona-KEL prefix) missing from daemon doc — run \`lares init\`.`);
+      throw new Error(`[lararium] DreamNet binding (persona-KEL prefix) missing from daemon doc — run \`lares vessel found\`.`);
     }
     const kelHolder = makePersonaKelRingHolder({ repo, nexusPubkey: vesselIdentity.verifyingKey });
     await kelHolder.ready;

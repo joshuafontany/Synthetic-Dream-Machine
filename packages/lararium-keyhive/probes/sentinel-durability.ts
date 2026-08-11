@@ -1,7 +1,7 @@
 /**
  * Sentinel durability probe — founding ceremony survives restart.
  *
- * Simulates the full lares init → daemon restart → Gate B/C verify cycle
+ * Simulates the full lares vessel found → daemon restart → Gate B/C verify cycle
  * inside a single process, with no disk I/O. The "restart" is: dispose
  * the founding KeyhiveProvider, construct a fresh one, replay the event
  * bytes captured by InMemoryEventStore, then assert sentinel membership
