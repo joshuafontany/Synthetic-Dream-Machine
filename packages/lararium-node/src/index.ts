@@ -294,7 +294,7 @@ export {
   makeWikiPinReactor, makeWikiUnpinReactor,
   makeAddBagReactor, makeRemoveBagReactor,
   makePruneStaleReactor, makeDraftReactor,
-  makeEpochBagReactor, makeRotateRecipeReactor,
+  makeCompactBagReactor, makeRotateRecipeReactor,
   makeResidencyStatsReactor,
   makePinReactor, makeUnpinReactor, makeRegisterColdReactor,
 } from "@lararium/tw5";

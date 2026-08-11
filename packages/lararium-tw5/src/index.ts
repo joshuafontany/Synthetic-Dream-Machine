@@ -207,7 +207,7 @@ export { makeAddBagReactor, makeRemoveBagReactor }    from "./wiki-compose-handl
 export type {
   WikiHandlerOptions, WikiMintHandlerOptions, PruneStaleOptions, WikiComposeOptions, DraftHandlerOptions,
 } from "./wiki-handler-options.js";
-export { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
+export { makeCompactBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
 export type { EpochHandlerOptions, RotateRecipeOptions } from "./epoch-handlers.js";
 export { makeResidencyStatsReactor } from "./residency-handlers.js";
 export type { ResidencyHandlerOptions } from "./residency-handlers.js";

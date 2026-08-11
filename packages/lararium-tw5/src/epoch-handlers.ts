@@ -58,7 +58,11 @@ export interface EpochHandlerOptions {
  *
  * Returns { bagUrl, oldDocUrl, newDocUrl, tiddlerCount, tombstoneCount }.
  */
-export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
+/** The `bag-compact` reactor. The MODULE keeps its `epoch-handlers` filename — its own header
+ *  disambiguates loudly and its meme names the mechanism compaction, so a file rename would churn two
+ *  coordinate fields for no reader gain. The VERB is what an operator types and what lands in a record's
+ *  `authority`, so the verb is what moved. */
+export function makeCompactBagReactor(opts: EpochHandlerOptions): VerbReactor {
   return async (args) => {
     const bagUrl = stringArg(args, "bagUrl");
     if (!bagUrl) throw new Error("args.bagUrl is required");
@@ -109,7 +113,7 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
         },
         meta: {
           ...(existing?.meta ?? {}),
-          authority: existing?.meta?.authority ?? "lares-cli:bag-epoch",
+          authority: existing?.meta?.authority ?? "lares-cli:bag-compact",
         },
       };
     });
@@ -120,7 +124,7 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
     // Reboot-pending: one bag → many wikis. Scan @catalog recipes for those whose
     // bag-stack includes this bag, and alert each (main skips unmounted ones). The
     // oracle now points at the new doc, but a live island has the OLD doc mounted.
-    const alertedWikis = await alertWikisUsingBag(opts, bagUrl, "bag-epoch");
+    const alertedWikis = await alertWikisUsingBag(opts, bagUrl, "bag-compact");
 
     return {
       bagUrl,

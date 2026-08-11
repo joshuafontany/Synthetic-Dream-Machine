@@ -27,7 +27,11 @@ the ''compaction'' that bounds CRDT history — DISTINCT from the authority/live
 siege refresh window at <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>. The
 two MAY co-occur at a boundary, never fuse: this one bounds //state-history growth//, the
 lease-epoch bounds //who may still act//. Reserve bare //epoch// for the lease going forward;
-read this mechanism as ''compaction''.
+read this mechanism as ''compaction''. ''AND THE VERB NOW SAYS SO'': `lares bag compact` /
+`lares wiki compact`, over the daemon verb `bag-compact`, stamping `lares-cli:bag-compact` as a record's
+authority. The MODULE keeps its `epoch-handlers` filename — this header already disambiguates and a file
+rename would churn two coordinate fields for no reader gain — so the rule landed where an operator meets
+it rather than where a maintainer does.
 
 ''That rule now stands house-wide, and it cuts by OWNERSHIP.'' Bare //epoch// names the fencing
 frontier and nothing else; every other claimant carries a qualifier that names whose word it is —
@@ -46,7 +50,7 @@ fold pick a WINNER, or blank both paths? This one picks nothing — a compaction
 Two reactors, both running worker-ward over the catalog accessor
 (access≠load), both ending in a reboot-pending alert to affected live wikis:
 
-* ''`epoch-bag <bag-url>`'' (`makeEpochBagReactor`) — snapshot-restart:
+* ''`bag-compact <bag-url>`'' (`makeCompactBagReactor`) — snapshot-restart:
   open the old doc, materialize all tiddlers into a freshly minted doc (no
   history), point the `@catalog` oracle at the new doc URL, register the new
   doc cold with the residency manager, alert every wiki whose recipe stack

@@ -11,7 +11,7 @@
  * This collapses the verb plumbing: reactors that took a bespoke `catalogHandle`
  * (and `islandHandle`, and any other specific handle) now take ONE accessor and
  * reach every bag through `find(bagUri)`. The catalog-writing verbs
- * (init-wiki / bag-epoch / rotate-recipe) open `@catalog` via `handle()` — its
+ * (init-wiki / bag-compact / rotate-recipe) open `@catalog` via `handle()` — its
  * own registered URL — write, and sync; they never LOAD it as a render layer.
  *
  * Pairs with [[project_bag_stack_ontology]] (access≠load keystone) and

@@ -15,7 +15,7 @@
  *   unpin <url>                   — remove the cooling exemption (bag rejoins the LRU sweep)
  *   stats                         — pinned / wela / anu residency snapshot
  *   register-cold <url>           — mark URL as known-but-not-loaded (oracle stub)
- *   epoch <url>                   — DXOS-style snapshot-restart; bounds history
+ *   compact <url>                 — DXOS-style snapshot-restart; bounds history
  *   list                          — every bag: declared tier + home, and whether it sits where it belongs
  *   show <bag>                    — one bag's declaration, resolved on this vessel
  *   declare <bag> --tier --home   — write/amend the declaration (moves no bytes)
@@ -34,8 +34,13 @@ import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-/** `lares bag epoch <bag-url>` — DXOS-style snapshot-restart on one bag. */
-export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
+/** `lares bag compact <bag-url>` — DXOS-style snapshot-restart on one bag.
+ *
+ *  NAMED FOR WHAT IT DOES, and for whose word it borrows. The ceremony is DXOS's, and `epoch` in this
+ *  house is RESERVED for the monotone fencing frontier a grant binds to. A compaction CUTS history and
+ *  fences nobody, so it carries the qualifier and leaves the bare word to the fence
+ *  (lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces#whose-word-is-it). */
+export async function cmdBagCompact(args: ParsedArgs): Promise<number> {
   const bagUrl = args.positional[0];
   if (!bagUrl) {
     console.error("usage: lares bag epoch <bag-url>");
@@ -45,7 +50,7 @@ export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
   let r;
   try {
     // UDS fast path, WS fallback (the lares↔lararium binding).
-    r = await runVerb("bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+    r = await runVerb("bag-compact", { bagUrl }, did, { timeoutMs: 30_000 });
   } catch (err) {
     console.error(`lares bag: ${err instanceof Error ? err.message : String(err)}`);
     console.error("  Start the daemon with `lares serve` and try again.");
@@ -74,7 +79,7 @@ const SUBCOMMANDS: Readonly<Record<string, { handler: BagSubcommand; summary: st
   "unpin":         { handler: cmdUnpin,        summary: "Unpin a bag URL — removes the cooling exemption; the bag rejoins the LRU sweep. Needs `lares serve`." },
   "stats":         { handler: cmdResidency,    summary: "Print the daemon's bag residency snapshot. Needs `lares serve`." },
   "register-cold": { handler: cmdRegisterCold, summary: "Mark a bag URL as known-but-not-loaded (oracle stub). Needs `lares serve`." },
-  "epoch":         { handler: cmdBagEpoch,     summary: "DXOS-style snapshot-restart on one bag. Bounds history; lossy by design." },
+  "compact":       { handler: cmdBagCompact,     summary: "DXOS-style snapshot-restart on one bag. Bounds history; lossy by design." },
   // ── The LIFECYCLE half. Everything above answers a RUNTIME question (is this doc in RAM); these answer
   // what a bag IS, who may read it, where it belongs, and how to move it — the questions a bag could not
   // answer about itself at all until it carried a declaration.

@@ -351,10 +351,10 @@ export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
  * `lares wiki epoch <slug> <bag-url>` — Epoch one of the wiki's bags.
  *
  * Thin wrapper: verifies the bag is in the wiki's recipe stack, then
- * delegates to bag-epoch. Returns the same shape as bag-epoch with
+ * delegates to bag-compact. Returns the same shape as bag-compact with
  * a recipe-membership check up front.
  */
-export async function cmdWikiEpoch(args: ParsedArgs): Promise<number> {
+export async function cmdWikiCompact(args: ParsedArgs): Promise<number> {
   const slug   = args.positional[0];
   const bagUrl = args.positional[1];
   if (!slug || !bagUrl) {
@@ -362,7 +362,7 @@ export async function cmdWikiEpoch(args: ParsedArgs): Promise<number> {
     return 2;
   }
   const did    = await vesselDid();
-  const r = await call("bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+  const r = await call("bag-compact", { bagUrl }, did, { timeoutMs: 30_000 });
   if (r.status === "error") {
     console.error(`wiki epoch failed: ${r.errorMessage ?? "unknown"}`);
     return 4;
@@ -549,7 +549,7 @@ const SUBCOMMANDS: Readonly<Record<string, { handler: WikiSubcommand; summary: s
   "unpin":      { handler: cmdWikiUnpin,     summary: "Unpin every bag in the wiki's recipe." },
   "add-bag":    { handler: cmdWikiAddBag,    summary: "Add a bag to the wiki's recipe at runtime. Hot-reload via composite.addLayer." },
   "remove-bag": { handler: cmdWikiRemoveBag, summary: "Remove a bag from the wiki's recipe (soft remove; F-arc adds StoryList drain)." },
-  "epoch":         { handler: cmdWikiEpoch,         summary: "DXOS-style snapshot-restart on one of the wiki's bags. Bounds history." },
+  "compact":       { handler: cmdWikiCompact,         summary: "DXOS-style snapshot-restart on one of the wiki's bags. Bounds history." },
   "rotate-recipe": { handler: cmdWikiRotateRecipe,  summary: "Nix-generations: mint fresh canonical; retain old as previous-canon underlay." },
   "prune-stale":   { handler: cmdWikiPruneStale,    summary: "Surface stale draft tiddlers (no recent activity) for residency-action-or-prune." },
   "list":       { handler: cmdWikiList,      summary: "Enumerate wikis registered in the catalog. Needs `lares serve`." },
