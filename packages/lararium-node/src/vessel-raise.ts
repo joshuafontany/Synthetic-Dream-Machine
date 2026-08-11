@@ -21,6 +21,12 @@
  * the one failure mode this fence exists to prevent. Nobody performs a lowering act here; the reading
  * simply stops coming back raised.
  *
+ * ── ONE CHALLENGE PER BOOT, UNTIL THE ASK VERB STANDS ──────────────────────────────────────────
+ * The Herm emits a challenge in its boot output, which is the whole of the vessel's half today. So a
+ * refused answer burns the only challenge that boot carried, and a second attempt waits for a restart.
+ * That reads as INCONVENIENT rather than unsafe — the burn is the property, not the cost — and it lifts
+ * the moment `raise ask` stands as a daemon verb and a recogniser can provoke a fresh nonce on demand.
+ *
  * ── AND IT STANDS ON THE HERM BRANCH ALONE, WHICH IS A RULING ──────────────────────────────────
  * A hearth already carries its caps: its operator opened its archive, which is the ① act itself. A raise
  * adds nothing there — `standingClass` on a `hearth` floor answers `hearth` either way. The door belongs
