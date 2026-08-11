@@ -155,7 +155,11 @@ async function main(): Promise<void> {
     console.log("[lararium] the archive holds shut — standing at the WAKING FLOOR, faceless by class.");
     console.log("[lararium]   carrying and serving the public shelf; every sovereign act waits.");
     console.log(`[lararium]   light the hearth fire: set ${ARCHIVE_PASSPHRASE_ENV} and boot again.`);
-    console.log("[lararium]   or a recognised operator raises it for their visit: `lares raise` at the door.");
+    // NAME NO VERB THAT DOES NOT STAND. The raise DOOR stands (vessel-raise, wired below on the Herm
+    // branch); the CLI ceremony that carries a challenge out and a grant back does not. A line naming
+    // `lares raise` here would spend the reader's trust the first time they typed it — the same law
+    // `holdings-witness` already carries for its own corrections.
+    console.log("[lararium]   a recognised operator may also raise it for a visit; the door answers, the CLI verb waits.");
   }
 
   if (standing === "herm") {

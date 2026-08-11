@@ -21,6 +21,11 @@
  * the one failure mode this fence exists to prevent. Nobody performs a lowering act here; the reading
  * simply stops coming back raised.
  *
+ * ── AND IT STANDS ON THE HERM BRANCH ALONE, WHICH IS A RULING ──────────────────────────────────
+ * A hearth already carries its caps: its operator opened its archive, which is the ① act itself. A raise
+ * adds nothing there — `standingClass` on a `hearth` floor answers `hearth` either way. The door belongs
+ * where a vessel stands at the floor and someone else arrives: the crossroads.
+ *
  * Canon: lar:///ha.ka.ba/lares/api/pono/waking-floor · lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces
  */
 
