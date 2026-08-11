@@ -8,12 +8,12 @@
       "sha256": "00a39c8e71fd3500e87c22ab939e5c93a4865b616df62df25604dcf2ab71c3ec"
     },
     "wild-01-voices.mem": {
-      "hash": "265015fb48f03f087c91416eac6ec72e33f1a78e9794b1c01f8fdec4064d272e",
-      "sha256": "d8679e7d9d0307791d2587b7582ba3c5fadf74eedbbb5c50b90583df3cddf37a"
+      "hash": "e89b148f7400c2297cb09386268648e98f732db6f4a5a32015d0578709359f62",
+      "sha256": "030f06aeca0aab744e37feead4eeebbe9ec5f7dec97e39682fd7a061e194a248"
     },
     "wild-02-pragma.mem": {
-      "hash": "7cebb69f4755280e5a36ce94c86aecc2cc2661780c5d16fd103a42d7215e4bab",
-      "sha256": "3b02db8894d036fdf2c9f1bb03ba9ee27c173044414b30700853e75efca92fac"
+      "hash": "afc712112a0d07feec0fcbcdd2e65858bbab355217e0f614432ee79b4b2ee937",
+      "sha256": "494decfff2f695f810f7d042cd919b26f6c7261d8584ae3c6778864ec947fb00"
     }
   }
 }

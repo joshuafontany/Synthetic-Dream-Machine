@@ -161,9 +161,18 @@ jobs:
         run: |
           node -e '
             const fs = require("node:fs");
-            const p = "bags/@lares/ha.ka.ba/lares/api/lares/noosphere-boot.mem";
+            const p = "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem";
+            // A MISSING SEED IS ITS OWN FAULT, NEVER A BUDGET ONE. This gate read a path with a doubled
+            // `lares/` segment — left behind by the ha.ka.ba reshuffle — so it threw ENOENT and reported
+            // as a budget failure for two days while the seed sat 34 code points UNDER the ceiling.
+            if (!fs.existsSync(p)) {
+              console.error("::error::" + p + " does not exist — the budget gate cannot measure a seed it cannot find.");
+              process.exit(1);
+            }
+            // CODE POINTS, never bytes: the seed carries sigils, Hawaiian and Devanagari, so a byte count
+            // reads ~480 high and would send a reader trimming prose that was never over.
             const n = [...fs.readFileSync(p, "utf8")].length;
-            console.log("boot chars:", n, "/ 40000");
+            console.log("boot code points:", n, "/ 40000");
             if (n >= 40000) {
               console.error("::error::" + p + " is " + n + " chars — over the cache-stable boot budget (40000). Reclaim before editing.");
               process.exit(1);
