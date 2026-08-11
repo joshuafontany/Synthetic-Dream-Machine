@@ -82,6 +82,36 @@ export function vouchConcentration(rank: LineageRank, cluster: readonly string[]
 }
 
 /**
+ * The share of RECEIVED mass held by the single heaviest receiver — the absorption twin of
+ * `vouchConcentration`.
+ *
+ * That one asks whose hands hold the power to let people in. This asks whether the mass those hands gave
+ * away has piled up on one identity anyway — which a giver-side reading cannot see. Both readings can look
+ * healthy while this runs to 1: many hands, all pointing the same direction, is the shape a plane built as
+ * shelter has to be able to notice.
+ *
+ * ── THE SEED IS NOT A RECEIVER, AND COUNTING IT INVERTS THE READING ─────────────────────────────
+ * The seed holds ε by assignment — teleport mass, the walk's restart pool — and absorbs nothing across an
+ * edge. Counted as a receiver it distorts twice: it inflates the denominator on an open lineage, and on a
+ * CAPPED one it becomes the heaviest holder of a now-smaller total, so clamping absorption makes the
+ * instrument report MORE concentration. Measured, on the first run of the test that exists to prove the
+ * cap works: capping drove this from 0.389 to 0.504 while the received distribution genuinely levelled.
+ *
+ * An instrument that moves the wrong way under the cure is worse than no instrument, so the origin sits
+ * outside the reading. An empty lineage reads 0 — absence is never evidence.
+ */
+export function receiverConcentration(rank: LineageRank, seed: string): number {
+  let total = 0;
+  let heaviest = 0;
+  for (const [who, s] of rank.score) {
+    if (who === seed) continue;                       // the origin gives; it never receives
+    total += s;
+    if (s > heaviest) heaviest = s;
+  }
+  return total > 0 ? heaviest / total : 0;
+}
+
+/**
  * Price a crossing.
  *
  * The applicant's own RANK discounts the price — a deep-standing lineage makes an introduction cheap,

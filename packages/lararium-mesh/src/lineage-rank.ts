@@ -55,6 +55,34 @@ export interface LineageRankOptions {
    * (invite-only), low ε lets it wander (open protocol). Same fold, same code, one number.
    */
   readonly epsilon: number;
+
+  /**
+   * THE RECEIVER-SIDE CAP — the most any ONE identity may absorb, however many hands vouch for it.
+   * Absent (or non-finite) leaves the fold unbounded, which is what it did before this existed.
+   *
+   * ── WHY THIS SIDE, AND NOT THE OTHER ──────────────────────────────────────────────────────────
+   * Mass conservation already bounds what a giver EMITS: a voucher's score splits across everyone it
+   * vouches for, so minting sybils downstream only re-divides mass that already crossed one edge. That
+   * is a giver-side bound, and the field has measured what giver-side bounds achieve. Stack Exchange
+   * caps a voter's daily votes — a textbook giver bound — and the RECEIVED distribution still runs a
+   * Gini of 0.976. Two systems reach low concentration and both bound the RECEIVER: Slashdot at 0.30
+   * with comment score clamped to [−1,+5], participatory budgeting at ~0.41 with one approval per
+   * project per voter.
+   *
+   * So the lever that works clamps ABSORPTION. Nothing here limits how many may vouch for someone, or
+   * remembers that they did; the fold simply stops counting past the ceiling.
+   *
+   * ── WHY IT DOES NOT BREAK THE CLOSED FORM ─────────────────────────────────────────────────────
+   * Clipped mass takes the road this fold already gives to a sink's mass: it leaves the lineage and
+   * returns to the seed's reset pool, never to the graph. Routing it onward would reintroduce a cycle
+   * and destroy the single-pass exactness. The sweep stays O(|V| + |E|) and still needs no iteration.
+   *
+   * ── WHY IT IS NOT A RANK ──────────────────────────────────────────────────────────────────────
+   * A ceiling is a clamp, never an ordering, and nothing stores it per identity. Two nodes at the cap
+   * are indistinguishable — which is the point: concentration is capture, and a plane built as shelter
+   * cannot let one hand accumulate without bound merely because many hands were generous.
+   */
+  readonly receiverCap?: number;
 }
 
 export interface LineageRank {
@@ -64,6 +92,14 @@ export interface LineageRank {
   readonly order: readonly string[];
   /** False when the vouch set contains a cycle — which a signed lineage cannot produce, so it reads as a bug. */
   readonly acyclic: boolean;
+  /**
+   * Total mass the receiver-side cap refused. Zero when no cap binds — including when none was asked for.
+   *
+   * It reports the BOUND WORKING, never a per-identity total: a caller may see that a ceiling bound
+   * somewhere without learning whose absorption it clipped. "Do not render running totals" holds — the
+   * count carries the concentration, and this one is a single scalar over the whole fold.
+   */
+  readonly clipped: number;
 }
 
 /**
@@ -82,7 +118,7 @@ export function rankLineage(
   edges: readonly VouchEdge[],
   opts: LineageRankOptions,
 ): LineageRank {
-  const { epsilon } = opts;
+  const { epsilon, receiverCap } = opts;
   if (!(epsilon > 0 && epsilon < 1)) {
     throw new Error(`lineage-rank: epsilon must sit in (0,1); got ${epsilon}`);
   }
@@ -128,7 +164,7 @@ export function rankLineage(
     }
   }
   if (order.length !== reachable.size) {
-    return { score: new Map(), order: [], acyclic: false };
+    return { score: new Map(), order: [], acyclic: false, clipped: 0 };
   }
 
   // THE FOLD. One sweep in topological order: every parent is fully scored before any child reads it, so
@@ -136,15 +172,29 @@ export function rankLineage(
   const score = new Map<string, number>();
   for (const v of order) score.set(v, 0);
   score.set(seed, epsilon);
-  for (const v of order) {
+  // The ceiling any one identity may absorb. Non-finite (or absent) reads as unbounded, so a caller that
+  // never asks for a cap gets exactly the fold that stood before one existed.
+  // The seed sits OUTSIDE this ceiling by construction: ε is teleport mass, ASSIGNED before the sweep, and
+  // the clamp lives inside the sweep where mass crosses an edge. That is the honest boundary — a cap bounds
+  // ABSORPTION, and the origin absorbs nothing. Clamping it would shrink the walk's restart pool instead.
+  const cap = typeof receiverCap === "number" && Number.isFinite(receiverCap) ? receiverCap : Infinity;
+  let clipped = 0;                                    // mass the cap refused, reported so a caller can SEE
+  for (const v of order) {                            // the bound bind rather than infer it from a shape
     const s = score.get(v) ?? 0;
     const kids = (children.get(v) ?? []).filter((c) => reachable.has(c));
     if (!kids.length) continue;                       // a SINK. Its mass leaves the lineage and returns to
     const share = (1 - epsilon) * s / (outdeg.get(v) ?? 1);   // the seed's reset pool — never to the graph,
-    for (const c of kids) score.set(c, (score.get(c) ?? 0) + share);  // which would reintroduce a cycle and
-  }                                                   // destroy the closed form outright.
+    for (const c of kids) {                           // which would reintroduce a cycle and destroy the
+      const raw = (score.get(c) ?? 0) + share;        // closed form outright.
+      // CLIPPED MASS TAKES THE SINK'S ROAD. Sending the excess onward would make the receiver's ceiling
+      // its children's windfall — a cap that pays whoever stands nearest the capped node, which invites
+      // exactly the arrangement it exists to prevent.
+      if (raw > cap) { clipped += raw - cap; score.set(c, cap); }
+      else score.set(c, raw);
+    }
+  }
 
-  return { score, order, acyclic: true };
+  return { score, order, acyclic: true, clipped };
 }
 
 /**
