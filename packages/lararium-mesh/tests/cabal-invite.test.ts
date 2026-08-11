@@ -9,7 +9,6 @@
  * needed its issuer REACHABLE would fail in an isolated mesh — and an isolated mesh names the only kind
  * that ever really needs one.
  */
-import { CABAL_INVITE_DOMAIN } from "../src/domains.js";
 import { describe, test, expect } from "vitest";
 import * as ed25519 from "@noble/ed25519";
 import {
@@ -102,6 +101,6 @@ describe("the DreamNet opens invite-only", () => {
   test("a payload of the wrong DOMAIN is not an invite, whatever it claims", async () => {
     const notAnInvite = { ...(await mint()), kind: "nexus-treaty/v1" } as unknown as CabalInvite;
     expect((await decide(notAnInvite)).refusal).toBe("no-invite");
-    expect(CABAL_INVITE_DOMAIN).toBe(CABAL_INVITE_DOMAIN);
+    expect(CABAL_INVITE_DOMAIN).toBe("lar:///ha.ka.ba/lares/domain/cabal-invite/v1");
   });
 });
