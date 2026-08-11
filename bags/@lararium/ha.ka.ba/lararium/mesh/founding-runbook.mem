@@ -98,6 +98,29 @@ tools/rehearse-keeper.sh                             # 2 cycles, throwaway tree,
 tools/rehearse-keeper.sh --cycles 5 --keep           # run until it bores; keep the tree to inspect
 ```
 
+''THE REHEARSAL NOW WALKS ⑦ — the door a second operator comes through.'' Movements ②–⑥ prove a hearth
+standing ALONE, and a Nexus that cannot admit a second operator is a private vessel wearing a charter. ⑦
+runs both halves of the handshake with held personas (`accept-carriage` mints the joiner's contract-in,
+the quorum counter-signs it onto the members board, `revoke` supersedes) ''and the refusal'': a nym with
+no contract-in must fail closed and write nothing. A gate only ever shown saying yes has not been shown
+to be a gate.
+
+''AND THE CUSTODY CROSSING HAS ITS OWN WITNESS.'' ⑦ signs with a persona the same vessel holds, so the
+one property the ceremony exists for — that a Nexus admits a key it has ''NEVER HELD'' — goes unmeasured
+there. `contract-witness` stands TWO roots that share nothing and crosses it for real:
+
+```
+tools/contract-witness.sh                            # two independent foundings, one handshake
+npm run witness                                      # every witness, never short-circuiting
+```
+
+''It also surfaces a step one vessel hides.'' `accept-carriage` reads the roster from the JOINER'S OWN
+seal home, because a contract-in binds to the charter epoch it consents under — so ''B cannot consent to
+a charter it has never seen'', and A's `founding-roster.mem` (public material: seated keys, threshold,
+epoch lineage) must travel FIRST. Holding it lets B name the epoch; it grants B no quorum, because the
+public charter is not a key.
+
+
 ''ONE ENV VAR ISOLATES EVERYTHING.'' `LAR_ROOT` re-roots data, state, the seal, the acquired library, bags,
 genesis ''and the UDS socket'' — ''TWELVE of twelve'', re-measured after the home inversion. So a throwaway costs no containers and
 destroys nothing real; the container harness stays for what containers actually buy (rude sockets, real
@@ -889,6 +912,29 @@ crossroads earns a name it can be addressed and vouched by, while ''no local hum
 steal''. It runs a full immune keel (it recognises Kapae bans and draws Mu) yet ''reads nothing'' —
 carry ⊥ read holds absolutely; it holds the ciphertext replica and decrypts none of it. It founds
 CONTRACTED (#found), so it holds no seed to leak.
+
+''AND A HERM CARRIES A RAISE DOOR, so a recognised operator may act there for a visit.'' The Herm prints a
+''raise challenge'' in its own boot output — vessel, Nexus, epoch, nonce, and nothing of what it holds. A
+recognised operator signs it on THEIR machine and hands the grant back:
+
+```
+# on the recogniser's own vessel, with one of their own persona roots:
+lares raise sign '<challenge-json>' [--as <persona-index>]
+```
+
+''The caps ride the recogniser's key, never the Herm's.'' Nothing seats a persona root at the crossroads
+(`personaSlotCeiling("herm") === 0`), so a stolen disk still yields nothing of anybody's person, and the
+raise lives in memory only — a reboot drops the vessel back to its floor with nothing to resume.
+
+''It ends by NON-RENEWAL, and nobody performs a lowering act.'' A grant binds the lease epoch its
+challenge named; when that Nexus's epoch rolls past it the reading simply stops coming back raised.
+Recognition itself borrows the members fold this Nexus already holds — quorum-signed, contract-in
+verified — so a Herm that recognises nobody raises for nobody.
+
+''WHAT WAITS: the ask/answer verbs.'' The Herm's own half — provoking a fresh challenge on demand and
+reading a grant back — needs the door registered as a daemon verb, so today the boot output carries ONE
+challenge and a refused answer waits for a restart. Inconvenient rather than unsafe: burning a challenge
+on refusal IS what stops anyone grinding at a nonce.
 
 ''The boundary reads STRUCTURAL, never a flag.'' A Herm that gains a persona cap ''stops reading as a
 Herm'' — it composes into an operator-class vessel and the nothing-to-steal property leaves with the

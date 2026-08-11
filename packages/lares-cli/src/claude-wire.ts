@@ -69,7 +69,7 @@ function reapMempalaceMcp(): ClaudeWireStep {
  * `claude mcp add`) — NOT settings.json, which Claude ignores for mcpServers.
  *
  * The lares house owns this seat: the harness reaches memory THROUGH it (recall · recall_structure ·
- * recall_form · plane_record · harvest · status · worldline · kapae) rather than opening a palace of
+ * the sensorium lifecycle — the list lives in `lares_mcp.py`, never transcribed) rather than opening a palace of
  * its own. One owner, one writer.
  *
  * Idempotent by CONVERGENCE, never by presence: an aligned seat passes untouched, a drifted one re-aims

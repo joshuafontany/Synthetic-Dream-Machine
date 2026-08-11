@@ -7,7 +7,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.." || exit 1
 status=0
-for w in typecheck-witness meme-coordinates-witness founding-witness contract-witness; do
+for w in typecheck-witness meme-coordinates-witness surface-parity-witness founding-witness contract-witness; do
   echo "── $w ──"
   if ! "tools/$w.sh"; then status=1; fi
 done

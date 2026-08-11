@@ -2,10 +2,19 @@
  * mcp-resolve — resolve the LARES MCP seat the harness-wire modules register, plus the shared
  * WireAction vocabulary.
  *
- * A harness reaches memory through the LARES surface (`lares_mcp.py` — FastMCP over the memory
- * sensorium: recall · recall_structure · recall_form · plane_record · harvest · status · worldline ·
- * kapae · un_kapae), and that surface holds NO STORE: every verb rides the @daemon cap-wire
- * (`lares_uds.py`) to the one process that owns the palace holders.
+ * A harness reaches memory through the LARES surface (`lares_mcp.py` — FastMCP over the sensorium
+ * lifecycle), and that surface holds NO STORE: every verb rides the @daemon cap-wire (`lares_uds.py`)
+ * to the one process that owns the palace holders.
+ *
+ * THE TOOL LIST LIVES IN `lares_mcp.py` AND NOWHERE ELSE. This header once named nine verbs while the
+ * surface carried thirty — a hand-written list cannot notice what it missed, and it read as
+ * authoritative to whoever found it. `tools/surface-parity-witness.sh` derives the count and holds the
+ * invariant that matters: every MCP tool answers to a CLI door.
+ *
+ * THE CONVERSE IS A RULING, NOT A GAP. The CLI carries the KEY-HOLDING ceremonies — founding, persona
+ * minting, the charter quorum, the vault past a status read, the raise — and MCP carries none of them.
+ * MCP speaks stdio-per-client, so N sessions run N processes; handing that surface a signing verb would
+ * put N unsynchronised holders on one operator's keys. The operator's hand keeps those.
  *
  * MCP speaks stdio-per-client, so N sessions run N of these processes. A surface that opened a chroma
  * client would therefore put N unsynchronized writers on one index — and no lock cures that, because

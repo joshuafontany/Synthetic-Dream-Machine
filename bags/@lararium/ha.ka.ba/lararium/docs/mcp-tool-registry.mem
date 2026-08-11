@@ -10,7 +10,7 @@ manao         = 17
 manaoio       = 16
 register      = "Synthesis-Canon"
 retain        = true
-role          = "MCP tool registry: ten tools + two prompts, OODA-HA phase map, input schemas, env guards"
+role          = "SUPERSEDED — MCP tool registry: ten tools + two prompts, OODA-HA phase map, input schemas, env guards"
 source-symbol = "lararium-hud lararium-canvas lararium-read lararium-inspect lararium-query lararium-edges lararium-draft lararium-write lararium-fire lararium-receipt lararium-align lararium-explain_uri"
 status-date   = "2026-04-30"
 type          = "text/x-memetic-wikitext"
@@ -21,9 +21,26 @@ uri-path      = "ha.ka.ba/lararium/docs/mcp-tool-registry"
 
 ! MCP Tool Registry
 
-Ten registered tools and two prompts expose the Lararium graph API to MCP clients.
-Tools map onto OODA-HA phases: Observe → Orient → Decide → Act → Aftermath.
-Two env guards gate write access and canvas connectivity.
+''THIS PAGE DESCRIBES A SURFACE THAT NO LONGER SERVES.'' The ten TS tools below rode an
+Automerge-native MCP redesign that never landed; the LIVE MCP seat is `lares_mcp.py` — FastMCP over the
+sensorium lifecycle, every verb riding the @daemon cap-wire to the one process that owns the palace
+holders. Kept as a record of the shape that was tried, never as a map of what answers today.
+
+''AND THE COUNT WAS THE TELL.'' This page said ten, `mcp-resolve.ts` said nine, and the live surface
+carried THIRTY — three descriptions of one surface, none of them derived from it. The count now lives
+where the tools do, and `tools/surface-parity-witness.sh` holds the invariant that matters: every MCP
+tool answers to a CLI door.
+
+''THE CONVERSE IS A RULING.'' The CLI carries the key-holding ceremonies — founding, persona minting,
+the charter quorum, the vault past a status read, the raise — and MCP carries none of them. MCP speaks
+stdio-per-client, so N sessions run N processes; a signing verb there would put N unsynchronised holders
+on one operator's keys.
+
+----
+
+Ten registered tools and two prompts exposed the Lararium graph API to MCP clients.
+Tools mapped onto OODA-HA phases: Observe → Orient → Decide → Act → Aftermath.
+Two env guards gated write access and canvas connectivity.
 
 <<~/ahu >>
 
