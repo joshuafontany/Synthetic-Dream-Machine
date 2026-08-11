@@ -68,7 +68,7 @@ describe("promotion publish-diff — the cap-gated carrier MOVE across a canon s
     const r = await lar.cli(["act", "MOVE", "--title", BOOT_URI, "--from", LARES_URI, "--to", LARARIUM_URI, "--yes", "--json"]);
     expect(r.json?.["ok"]).toBe(true);
     const data = r.json?.["data"] as Record<string, unknown>;
-    expect(String(data?.["audit"])).toMatch(/@admin\/outcomes\//);  // the effect-record audit URI
+    expect(String(data?.["audit"])).toMatch(/@daemon\/outcomes\//);  // the effect-record audit URI
     expect(Number(data?.["moved"])).toBeGreaterThan(1);             // the WHOLE carrier group, not one title
   }, 60_000);
 

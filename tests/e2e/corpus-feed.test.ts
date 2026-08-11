@@ -1,6 +1,6 @@
 /**
  * e2e/corpus-feed — vector 4's staged witness: the WHOLE @lares corpus
- * (bags/@lares/ha.ka.ba/@lares, the hearth's content tree) rides one directory-batch LOAD
+ * (bags/@lares/ha.ka.ba/lares, the hearth's content tree) rides one directory-batch LOAD
  * into a staged vessel, and the disk co-projection writes back carrier-whole.
  *
  * What this soaks (first contact at scale for the 2026-06-11 grain burn):
@@ -21,7 +21,9 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares");
+// `@` marks a SURFACE (the bag), never a meme namespace — so the content tree inside the bag reads
+// bare. `BOOT_PROJ` below already carried that; this constant is the one that needed to follow.
+const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares");
 const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
 const BOOT_REL  = "api/noosphere-boot.mem";
 // Projected (staged) siting under the full-path-inside-bag rule:

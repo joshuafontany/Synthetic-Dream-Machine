@@ -149,7 +149,7 @@ describe("watcher Cut C — the disk peer witnessed end-to-end", () => {
       for (let k = 1; k <= 5; k++) {
         writeFileSync(carrierPath("cutc-edit"), base.replace("**Status: DEFERRED**", `**Status: DEFERRED-edit-${k}**`));
       }
-      await w.waitFor(/INGEST\s+lar:\/\/\/ha\.ka\.ba\/@lares\/v0\.1\/api\/pono\/cutc-edit/);
+      await w.waitFor(/INGEST\s+lar:\/\/\/ha\.ka\.ba\/lares\/api\/pono\/cutc-edit/);
       await sleep(2_500);                        // let any re-projection settle
 
       // Exactly one ingest of cutc-edit: the 5 keystrokes coalesced, the
@@ -231,7 +231,7 @@ describe("watcher Cut C — the disk peer witnessed end-to-end", () => {
       const path = carrierPath("cutc-del");
       rmSync(path);                              // a real, confirmed removal
 
-      await w.waitFor(/TOMBSTONE\s+lar:\/\/\/ha\.ka\.ba\/@lares\/v0\.1\/api\/pono\/cutc-del/, 15_000);
+      await w.waitFor(/TOMBSTONE\s+lar:\/\/\/ha\.ka\.ba\/lares\/api\/pono\/cutc-del/, 15_000);
       expect(existsSync(path), "a tombstoned carrier stays gone from disk").toBe(false);
     } finally {
       await w.stop();

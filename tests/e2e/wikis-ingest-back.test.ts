@@ -91,11 +91,10 @@ describe("wikis ingest-back — the @working write-layer round-trips", () => {
   test("WB2 — a disk edit on a wikis/ file ingests back to @working in one cycle", async () => {
     if (lar.mode !== "staged") return;
     const before = readFileSync(projected, "utf8");
-    const edited = before.replace(
-      "# Entry ~ Lararium Boot",
-      "# Entry ~ Lararium Boot (wikis-ingest-back-edit)",
-    );
-    expect(edited).not.toBe(before);  // guard: heading drift fails loud, never a no-op
+    // Bind to the SHAPE of a heading, never to its prose. What the seed's first heading SAYS belongs to
+    // the operator; a literal here turns any rewording of theirs into a red suite, which is what it did.
+    const edited = before.replace(/^(#\s+\S.*)$/m, "$1 (wikis-ingest-back-edit)");
+    expect(edited).not.toBe(before);  // guard: a carrier with no heading at all fails loud, never a no-op
     writeFileSync(projected, edited);
 
     const r = await ingest(["--apply", "--yes"]);

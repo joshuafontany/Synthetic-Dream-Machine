@@ -67,7 +67,10 @@ describe("smoke — residency canon through the real CLI", () => {
     if (lar.mode !== "staged") return;
     const r = await lar.cli(["act", "LOAD", "--source-uri", "https://example.org/nope", "--to", LARES_URI, "--yes", "--json"]);
     expect(r.json?.["ok"]).toBe(false);
-    expect(String(r.json?.["error"] ?? "")).toMatch(/no carriers/);
+    // The CLI's error rides a STRUCTURED envelope — `{ code, message, hint? }`. Stringifying the whole
+    // object yields "[object Object]", which matches no assertion and names no cause.
+    const err = r.json?.["error"] as { message?: string } | string | undefined;
+    expect(typeof err === "string" ? err : (err?.message ?? "")).toMatch(/no carriers/);
   });
 
   test("wiki init + add-bag compose the user registry", async () => {
