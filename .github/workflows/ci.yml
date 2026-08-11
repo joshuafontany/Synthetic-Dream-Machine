@@ -113,6 +113,31 @@ jobs:
       # Unbuilt, they SKIP and the job still exits 0, so the run reads green while 35 tests never ran.
       - name: Build (suites guard on built artifacts and silently skip without them)
         run: pnpm -r build
+      # THE HOLDER IS A DEPENDENCY, NOT AN OPTIONAL EXTRA. `content-palace` drives the python
+      # mempalace holder live, and with no interpreter holding it the suite fails on an absent
+      # dependency rather than on anything about the code. Skipping it instead would be worse:
+      # absence-of-finding and absence-of-looking read identically in a green run.
+      #
+      # ONE VENV — `~/.venv`, the same path `spawn-resolve` probes and `lares wake --install`
+      # stands. A venv anywhere else is an interpreter with different powers, which is the whole
+      # hazard that rule exists to close.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Cache the holder venv
+        id: venv-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.venv
+          key: holder-venv-${{ runner.os }}-py312-${{ hashFiles('mempalace/pyproject.toml') }}
+      - name: Stand the holder venv (~/.venv)
+        if: steps.venv-cache.outputs.cache-hit != 'true'
+        run: |
+          python3 -m venv ~/.venv
+          ~/.venv/bin/python3 -m pip install --upgrade pip
+          ~/.venv/bin/python3 -m pip install -e ./mempalace
+      - name: Witness the holder answers
+        run: ~/.venv/bin/python3 -c "import mempalace; print('holder ok')"
       - name: Install Playwright Chromium (browser-vessel suite)
         run: pnpm exec playwright install --with-deps chromium
       - name: Run all package suites
