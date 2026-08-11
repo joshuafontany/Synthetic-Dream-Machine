@@ -111,7 +111,11 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
     relay = await bootRelayGate({ vesselSeed: hermSeed, relayPort: 0 });
     expect(relay).not.toBeNull();
     expect(relay!.port).toBeGreaterThan(0);
-    expect(relay!.gatePubKey).toBe(await pubOf(hermSeed));   // the crossroads' gate key IS the Herm's own key
+    // ★ THE GATE KEY IS DERIVED FROM THE HERM'S IDENTITY, NEVER EQUAL TO IT ★ — this line once asserted
+    // equality, which stated the flaw as an invariant: the published crossroads key WAS the vessel
+    // identity key, joining the transport and identity trust domains in one correlatable pair.
+    expect(relay!.gatePubKey).toBe(await pubOf(resolveRelayGateSeed(hermSeed)));
+    expect(relay!.gatePubKey).not.toBe(await pubOf(hermSeed));
     expect(relay!.tracker.size).toBe(0);
     const url = `ws://127.0.0.1:${relay!.port}`;
 
@@ -162,8 +166,7 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
     // Two "restarts" from the Herm's own identity seed → the IDENTICAL gate seed (a hearth keeps dialing one key).
     const restart1 = resolveRelayGateSeed(hermSeed);
     const restart2 = resolveRelayGateSeed(hermSeed);
-    expect([...restart1]).toEqual([...hermSeed]);
-    expect([...restart2]).toEqual([...restart1]);
+    expect([...restart2]).toEqual([...restart1]);   // stable across restarts — the property that matters
 
     // A pinned seed hex → a DIFFERENT, still-deterministic key (the operator's out-of-band choice).
     const pinnedHex = "aa".repeat(32);
@@ -174,8 +177,14 @@ describe("herm-carriage-relay-stand — a Herm stands the crossroads; a member c
     expect(hex(pinned1)).toBe(pinnedHex);
 
     // An empty / absent seed hex falls back to the identity seed — never a fresh random.
-    expect([...resolveRelayGateSeed(hermSeed, "")]).toEqual([...hermSeed]);
-    expect([...resolveRelayGateSeed(hermSeed, undefined)]).toEqual([...hermSeed]);
+    // ★ AND THE DERIVED SEED IS NOT THE VESSEL'S OWN ★ — an empty/absent pin still DERIVES rather than
+    // passing the identity seed through. These two lines once asserted equality, pinning the flaw: the
+    // relay gate key WAS the vessel identity key, published to every dialing hearth, joining two trust
+    // domains in one correlatable pair. Deterministic still, separated now.
+    expect([...resolveRelayGateSeed(hermSeed, "")]).not.toEqual([...hermSeed]);
+    expect([...resolveRelayGateSeed(hermSeed, undefined)]).not.toEqual([...hermSeed]);
+    expect([...resolveRelayGateSeed(hermSeed, "")]).toEqual([...resolveRelayGateSeed(hermSeed, undefined)]);
+    expect(resolveRelayGateSeed(hermSeed).length).toBe(32);   // an Ed25519 seed's exact width
 
     // The gate PUBKEY the two restarts announce is therefore identical — the stable-identity guarantee, end to end.
     const stood1 = await startCarriageRelay({ gateSeed: restart1, port: 0 });
