@@ -21,6 +21,7 @@
     "witness:parity": "tools/surface-parity-witness.sh",
     "witness:domains": "tools/domain-registry-witness.sh",
     "witness:deps": "tools/exact-deps-witness.sh",
+    "witness:rite": "tools/rite-commands-witness.sh",
     "witness": "tools/witness-all.sh",
     "test:e2e:live": "pnpm --filter @lares/harness test:live"
   },

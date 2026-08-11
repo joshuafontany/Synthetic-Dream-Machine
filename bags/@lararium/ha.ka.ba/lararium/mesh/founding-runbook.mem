@@ -767,7 +767,7 @@ keys must reveal at the pending rotate first, because a sealed head's pre-commit
 ''Fork B'' (identity-classes#the-two-forks) recovers a PERSONA-root the way the reserve pre-commits a
 CHARTER key-set: ''both pre-commit at founding''. The reserve folds the next epoch's kahu keys into
 `nextKeyCommit`; the persona-KEL folds the ''guardians' recovery PUBLIC keys'' into the identifier
-PREFIX at inception (`provisionThresholdRecoveryAtFounding` -> `charterKeySetHash` -> `mintPersonaInception`).
+PREFIX at inception (`provisionThresholdRecoveryAtFounding` -> `sealKeySetHash` -> `mintPersonaInception`).
 The two rites RHYME — a pre-committed k-of-n digest an operational compromise cannot forge — and the
 same ''independence rule'' (#reserve-custody) binds the three guardian domains.
 
