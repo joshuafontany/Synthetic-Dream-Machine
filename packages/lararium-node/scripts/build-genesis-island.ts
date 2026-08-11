@@ -193,6 +193,17 @@ function main(): void {
   const coreBlob         = new Uint8Array(readFileSync(coreJsPath));
   const coreSha256       = sha256HexBytesSync(coreBlob);
   console.log(`[genesis] TW5 core  v${TW5_VERSION}  sha=${coreSha256.slice(0, 12)}…`);
+  // ── THIS SHA IS THE HEARTH'S TRUE NAME, AND IT SAYS SO WHERE THE HAND LANDS ──────────────────
+  // `computeEngineCid` folds exactly these bytes, and the result rides INSIDE the signed preimage of
+  // every device-delegation edge. So moving the TW5 submodule re-binds every vessel that ever joined:
+  // each edge names a hearth true-name that no longer matches, and the Binding Gate refuses them all.
+  //
+  // The danger is that the ACT looks like hygiene. `git submodule update --remote` moves this pointer
+  // with the same three-second gesture that harmlessly fast-forwards every other submodule in the tree,
+  // and nothing else here distinguishes the one whose movement evicts a fleet. Saying it at the moment
+  // the bytes get hashed costs one line; discovering it from a fleet of refusals costs a re-founding.
+  console.log(`[genesis]   ↳ this sha becomes hearthTrueName — moving the TW5 submodule after a founding`);
+  console.log(`[genesis]     re-binds EVERY device-delegation edge. Treat it as an epoch act, not an upgrade.`);
 
   const attestations     = readPluginAttestations();
   const plugins          = collectPlugins(attestations);

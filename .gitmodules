@@ -10,6 +10,11 @@
 [submodule "kowloon-client"]
 	path = kowloon-client
 	url = git@github.com:amorphous-dreams/kowloon-client.git
+# ⚠ LOAD-BEARING BEYOND ITS SIZE. The sha256 of this submodule's built core blob IS `hearthTrueName`,
+# and that value rides inside the signed preimage of every device-delegation edge. Moving this pointer
+# after a founding re-binds every vessel that ever joined — each edge names a hearth true-name that no
+# longer matches, and the Binding Gate refuses them all. It moves by an EPOCH ACT, never by hygiene:
+# `git submodule update --remote` here is not the same gesture it is three lines above.
 [submodule "TiddlyWiki5"]
 	path = TiddlyWiki5
 	url = git@github.com:amorphous-dreams/TiddlyWiki5.git

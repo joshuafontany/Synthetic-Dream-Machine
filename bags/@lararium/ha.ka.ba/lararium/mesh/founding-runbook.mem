@@ -438,10 +438,22 @@ The error named an internal symbol, not a build, and an operator reading it mid-
 
 ```
 pnpm build                                          # build AND stamp — `pnpm -r build` skips the stamp
+tools/typecheck-witness.sh                          # a green BUILD is not a typechecked tree — see below
 lares help                                          # the binary loads and answers — the ONLY gate this proves
 pnpm outdated -r                                    # bump BEFORE, never after (see below)
 pnpm exec playwright install chromium               # ONLY after a playwright bump — the binaries pin to it
 ```
+
+''A BUILD THAT EXITS 0 HAS NOT TYPECHECKED.'' `tsc` colorizes, so ANSI bytes sit between the word `error`
+and its code — a reader grepping for `error TS`, the obvious thing to grep for, matches ''NOTHING'' while a
+package carries two dozen real errors. A package whose compile never joins the recursive run passes the
+same way. ''The silence reads exactly like success'', which makes it the worst shape a check can take.
+
+<<~ confidence Canon 18/20 >> ''Witnessed against a live example.'' A recursive build reported no errors
+while a filtered one reported a real TS2307 in a command module — same tree, same moment, two answers. The
+witness reads per package and exits non-zero on any real error, so a type error cannot ride into a founding
+behind a clean-looking build. ''The rehearsal harness runs it too'' — the rite and its rehearsal check the
+same thing, which is the only way a green rehearsal predicts anything about the keeper branch.
 
 ''A playwright bump strands its own browsers.'' The version pins a chromium build, so the browser suite dies
 at launch with //Executable doesn't exist// until the matching binary lands. Measured 2026-08-09; the first
@@ -906,6 +918,12 @@ lares herm --port 8080 --relay-port 8090            # the http FLOW-map face + t
 ''The gate seed pins, and that matters across restarts.'' Absent `--relay-seed`, it derives from this
 Herm's OWN identity — stable across reboots, so a family's hearths keep dialing the same key and
 ''never a fresh random per boot''.
+
+''DERIVES, and the word is load-bearing.'' The gate seed reads `HMAC-SHA256("lares relay-gate v1",
+vesselSeed)` — domain-separated, never the identity seed passed through. It once WAS the seed itself, so a
+Herm published its vessel identity key as the public crossroads gate key: nothing leaked, and two trust
+domains became one correlatable pair, which is the join the veil model spends its design preventing. The
+house's own rule settles it — an HMAC `info` IS the separation.
 
 ''What a Herm holds and what it refuses.'' It carries a ''PLACE DID'' and ''NO operator DID'': the
 crossroads earns a name it can be addressed and vouched by, while ''no local human key rests there to
