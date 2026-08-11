@@ -106,8 +106,15 @@ describe("persona-admit — the 3-hop ceremony", () => {
     const f = await fixtures();
     const { offer, secret } = mintEnrollmentOffer({ targetVesselId: f.deviceKey });
     const { sealed } = await sealPersonaGrant({ offer, personaRef: f.personaRef, personaSigner: f.personaSigner });
-    // Flip one hex nibble of the ciphertext.
-    const flipped = sealed.ciphertext.slice(0, -1) + (sealed.ciphertext.slice(-1) === "0" ? "1" : "0");
+    // FLIP A DECODED BYTE, never an encoded character. The ciphertext rides base64url, where the FINAL
+    // character carries trailing bits the decoder discards — so for some ciphertext lengths, rewriting
+    // that character decodes to the very same bytes and the open correctly succeeds on untampered
+    // material. The ciphertext ends differently every run (fresh ephemeral, fresh nonce), which is why
+    // editing the string surfaced as a security assertion failing at random rather than as a bad probe.
+    const raw = Buffer.from(sealed.ciphertext, "base64url");
+    raw[0] = (raw[0] as number) ^ 0x01;                 // one bit, in a byte the AEAD certainly covers
+    const flipped = raw.toString("base64url");
+    expect(flipped).not.toBe(sealed.ciphertext);        // the probe proves it tampered before it asserts
     const verdict = await openPersonaGrant({ sealed: { ...sealed, ciphertext: flipped }, secret, resolveHeadOpKey: f.resolveHeadOpKey });
     expect(verdict.ok).toBe(false);
   });
