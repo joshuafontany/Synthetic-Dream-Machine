@@ -78,11 +78,12 @@ describe("ingest quiescence — the composed loop holds still", () => {
   test("Q2 — a disk content edit converges in ONE cycle", async () => {
     if (lar.mode !== "staged") return;
     const before = readFileSync(projected, "utf8");
-    const edited = before.replace(
-      "# Entry ~ Lararium Boot",
-      "# Entry ~ Lararium Boot (quiescence-edit)",
-    );
-    expect(edited).not.toBe(before); // guard: heading drift must fail loud, not collapse to a no-op edit
+    // THE PROJECTION SPEAKS MEMETIC-WIKITEXT, never the carrier's source dialect. A markdown `#` heading
+    // round-trips to `!`, and `#` at line start means an ORDERED LIST ITEM here — so hunting `# ` on this
+    // file silently edits the wrong construct. Bind to the first `!` heading, whatever its prose says:
+    // the wording belongs to the operator, the syntax to the canonical form.
+    const edited = before.replace(/^(!\s+\S.*)$/m, "$1 (quiescence-edit)");
+    expect(edited).not.toBe(before); // guard: a carrier with no heading fails loud, never a no-op edit
     writeFileSync(projected, edited);
 
     const r = await ingest(["--apply", "--yes"]);
@@ -114,7 +115,7 @@ describe("ingest quiescence — the composed loop holds still", () => {
     const nfdPath = join(lar.root, "bags/@lares/ha.ka.ba/lares/api/nfd-probe.mem");
     const body = readFileSync(projected, "utf8")
       .replace(/noosphere-boot/g, "nfd-probe")
-      .replace("# Entry", "# Entrée".normalize("NFD"));   // é as e + combining accent
+      .replace("! Entry", "! Entrée".normalize("NFD"));   // é as e + combining accent (wikitext heading)
     writeFileSync(nfdPath, body);
     expect(body).not.toBe(body.normalize("NFC"));
 

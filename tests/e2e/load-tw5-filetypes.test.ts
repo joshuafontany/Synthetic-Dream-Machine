@@ -81,7 +81,10 @@ describe("LOAD — memetic memes AND all legal TW5 filetypes (via TW5's registry
 
   test("T5 — headless plain files land as text/plain, titled by the loci law", () => {
     if (lar.mode !== "staged") return;
-    expect(titles).toContain("lar:///ha.ka.ba/lares/plain");
-    expect(titles).toContain("lar:///ha.ka.ba/lares/notes");
+    // DERIVE from the target, never hardcode the address. The loci law titles a headless carrier
+    // `<the --to bag>/<basename>`, so the expectation moves whenever the bag URI does — and a literal
+    // here simply records where the bag USED to live, which is what it had come to record.
+    expect(titles).toContain(`${LARES_URI}/plain`);
+    expect(titles).toContain(`${LARES_URI}/notes`);
   });
 });

@@ -145,10 +145,15 @@ describe("watcher Cut C — the disk peer witnessed end-to-end", () => {
       await w.waitFor(/watching/);
 
       // Five rapid edits inside the debounce window → one coalesced wave.
-      const base = readFileSync(carrierPath("cutc-edit"), "utf8");
-      for (let k = 1; k <= 5; k++) {
-        writeFileSync(carrierPath("cutc-edit"), base.replace("**Status: DEFERRED**", `**Status: DEFERRED-edit-${k}**`));
-      }
+      //
+      // THE CARRIER SPEAKS MEMETIC-WIKITEXT, where bold reads `''…''` and never `**…**`. Hunting the
+      // markdown form matched nothing, so all five "edits" wrote byte-identical content: the watcher
+      // correctly reported `0 changed`, and the timeout that followed read as a watcher fault. A probe
+      // that fails to edit must fail as a PROBE, so the guard rides below.
+      const base  = readFileSync(carrierPath("cutc-edit"), "utf8");
+      const nth   = (k: number) => base.replace("''Status: DEFERRED''", `''Status: DEFERRED-edit-${k}''`);
+      expect(nth(1), "the edit changed nothing — the carrier's prose moved").not.toBe(base);
+      for (let k = 1; k <= 5; k++) writeFileSync(carrierPath("cutc-edit"), nth(k));
       await w.waitFor(/INGEST\s+lar:\/\/\/ha\.ka\.ba\/lares\/api\/pono\/cutc-edit/);
       await sleep(2_500);                        // let any re-projection settle
 

@@ -17,7 +17,7 @@ import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import { join } from "node:path";
 import { readFileSync } from "node:fs";
-import { targetInstance, bootDocUrl, type LarInstance } from "../harness/instance.js";
+import { targetInstance, bootDocUrl, vesselStorageDir, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
@@ -41,7 +41,7 @@ describe("smoke — the vessel stands", () => {
     // 2026-06-16: @oracle/@lararium/@lares are three separate docs).
     const oracleUrl = bootDocUrl(lar, "oracle");
     expect(oracleUrl).toBeTruthy();
-    const repo = new Repo({ storage: new NodeFSStorageAdapter(join(lar.root, ".lararium")) });
+    const repo = new Repo({ storage: new NodeFSStorageAdapter(vesselStorageDir(lar)) });
     const isle = await repo.find(oracleUrl as never);
     const rec  = (isle.doc() as { tiddlers?: Record<string, { tiddler?: { text?: string }; meta?: { authority?: string } }> })?.tiddlers?.[LARES_URI];
     expect(rec?.tiddler?.text).toMatch(/^automerge:/);

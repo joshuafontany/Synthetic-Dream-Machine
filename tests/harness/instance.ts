@@ -166,6 +166,19 @@ export async function targetInstance(): Promise<LarInstance> {
   return process.env["LAR_TARGET"] === "live" ? attachLive() : openStaged();
 }
 
+/**
+ * The vessel's Automerge STORE on disk — the one path a raw-storage read may open.
+ *
+ * It rides under the DATA home (`<root>/data/vessel`) rather than beside the root, because the home
+ * inversion split the two XDG homes on whether a thing can be RE-MADE: identity, seal, library and the
+ * vessel store crossed to <data>; <state> keeps watermarks alone. A test that hardcodes the older
+ * sibling path does not fail loudly — it opens an absent directory, finds no chunks, and reports the
+ * document "unavailable", which reads as a replication fault rather than a wrong address.
+ */
+export function vesselStorageDir(instance: LarInstance): string {
+  return join(instance.root, "data", "vessel");
+}
+
 /** Read a `key: automerge:...` line from the staged boot log (e.g. "lararium", "catalog"). */
 export function bootDocUrl(instance: LarInstance, key: string): string | null {
   const m = instance.bootLog().match(new RegExp(`${key}:\\s+(automerge:[A-Za-z0-9]+)`));
