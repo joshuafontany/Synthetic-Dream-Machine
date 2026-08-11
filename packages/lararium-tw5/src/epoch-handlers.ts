@@ -42,7 +42,7 @@ export interface EpochHandlerOptions {
 }
 
 /**
- * `lares bag epoch <bag-url>` — snapshot-restart a single bag.
+ * `lares bag compact <bag-url>` — snapshot-restart a single bag.
  *
  * Steps (pono web3 — daemon holds ACCESS, never reaches into a mounted wiki):
  *   1. Resolve old Automerge URL via the catalog accessor (access≠load).

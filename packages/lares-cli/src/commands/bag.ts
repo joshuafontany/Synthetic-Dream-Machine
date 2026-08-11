@@ -43,7 +43,7 @@ import type { ParsedArgs } from "../parse-args.js";
 export async function cmdBagCompact(args: ParsedArgs): Promise<number> {
   const bagUrl = args.positional[0];
   if (!bagUrl) {
-    console.error("usage: lares bag epoch <bag-url>");
+    console.error("usage: lares bag compact <bag-url>");
     return 2;
   }
   const did = await vesselDid();
@@ -57,12 +57,12 @@ export async function cmdBagCompact(args: ParsedArgs): Promise<number> {
     return 3;
   }
   if (r.status === "error") {
-    console.error(`bag epoch failed: ${r.errorMessage ?? "unknown"}`);
+    console.error(`bag compact failed: ${r.errorMessage ?? "unknown"}`);
     return 4;
   }
   const result = summaryOutput(r) ?? {};
   console.log("");
-  console.log(`bag epoch: ${result["bagUrl"]}`);
+  console.log(`bag compact: ${result["bagUrl"]}`);
   console.log(`  old doc:  ${result["oldDocUrl"]}`);
   console.log(`  new doc:  ${result["newDocUrl"]}`);
   console.log(`  tiddlers: ${result["tiddlerCount"]}  tombstones: ${result["tombstoneCount"]}`);

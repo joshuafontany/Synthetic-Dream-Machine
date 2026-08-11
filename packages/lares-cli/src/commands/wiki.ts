@@ -348,7 +348,7 @@ export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares wiki epoch <slug> <bag-url>` — Epoch one of the wiki's bags.
+ * `lares wiki compact <slug> <bag-url>` — compact one of the wiki's bags.
  *
  * Thin wrapper: verifies the bag is in the wiki's recipe stack, then
  * delegates to bag-compact. Returns the same shape as bag-compact with
@@ -358,13 +358,13 @@ export async function cmdWikiCompact(args: ParsedArgs): Promise<number> {
   const slug   = args.positional[0];
   const bagUrl = args.positional[1];
   if (!slug || !bagUrl) {
-    console.error("usage: lares wiki epoch <slug> <bag-url>");
+    console.error("usage: lares wiki compact <slug> <bag-url>");
     return 2;
   }
   const did    = await vesselDid();
   const r = await call("bag-compact", { bagUrl }, did, { timeoutMs: 30_000 });
   if (r.status === "error") {
-    console.error(`wiki epoch failed: ${r.errorMessage ?? "unknown"}`);
+    console.error(`wiki compact failed: ${r.errorMessage ?? "unknown"}`);
     return 4;
   }
   const result = summaryOutput(r) ?? {};

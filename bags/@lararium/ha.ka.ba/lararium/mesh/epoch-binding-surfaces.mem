@@ -64,7 +64,7 @@ a wrong answer here reads identically to a right one until a founding breaks.
 | ''epoch'' (bare) | ''ours'' | the monotone fencing frontier — `epoch-lease`, bound by `boundEpoch` | RESERVED. Bare //epoch// names this and nothing else (the rule `epoch-handlers` already set) |
 | ''seal epoch'' | ''ours'', shape from KERI/TUF | the charter's hash-linked lineage, head = `sealEpochCid` | always QUALIFIED. Same law as the fence, at a grain where the writer-set itself rotates |
 | ''CGKA epoch'' | ''Keyhive / BeeKEM'', upstream MLS RFC 9420 | a group-key generation; concurrent rolls ''merge by BLANKING'' and hold NO root secret until a later non-concurrent commit | NEVER ours to rule. Keeps its upstream spelling, always qualified. A max-register picks a winner and this does not — carrying our fence onto it costs FORWARD SECRECY (cabal-realm#the-tie-break) |
-| ''compaction epoch'' | ''DXOS'', borrowed for `bag-epoch` | a snapshot-restart that cuts history behind | always QUALIFIED. It bounds //state-history growth//, never //who may act// — a cut, not a fence |
+| ''compaction epoch'' | ''DXOS'', borrowed for `bag-compact` | a snapshot-restart that cuts history behind | always QUALIFIED. It bounds //state-history growth//, never //who may act// — a cut, not a fence |
 | ''epoch (ms)'' | ''POSIX'' | a time ORIGIN — 1970, and a wall-clock offset from it | NOT SPENT HERE. Our wall-clock fields read `POSIX ms`, because a reader meeting both spellings in one file has to guess which authority a number carries — and one of them is the global now this house refuses |
 | ''L4 Theme / strategic epoch'' | ''ours'' (FfzClock) | a rhythmic BAND name, unbounded | pure homonym. Names no mechanism; a grep for the fence should read past it |
 

@@ -37,7 +37,7 @@ composite. The recipe + bag-oracle reach run ''two-source'' (operator ruling,
   the running wiki.
 * ''bag removed'' → `CompositeStore.removeLayerLive`: departed titles
   tombstone to projections, records the bag shadowed resurface.
-* ''oracle URL moved'' (bag epoch / rotate-recipe) → swap the layer's store
+* ''oracle URL moved'' (bag compact / rotate-recipe) → swap the layer's store
   in place at the same cascade position, replay from the new doc.
 
 Reconciles serialize (one at a time; a change mid-run queues one rerun). The

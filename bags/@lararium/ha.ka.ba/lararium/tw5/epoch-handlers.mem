@@ -9,7 +9,7 @@ mana        = 12
 manao       = 12
 register    = "Synthesis"
 retain      = true
-role        = "bag-epoch + rotate-recipe — DXOS-style snapshot-restart on a bag; the only local-first mechanism that bounds CRDT history"
+role        = "bag-compact + rotate-recipe — DXOS-style snapshot-restart on a bag; the only local-first mechanism that bounds CRDT history"
 source-file = "packages/lararium-tw5/src/epoch-handlers.ts"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lararium/tw5/epoch-handlers"
@@ -93,7 +93,7 @@ reclaiming its storage stays an operator act (OS-level or a future GC sprint).
 EPOCH is the //cut behind//, paired with RECONCILE's //fold forward// (residency-model
 #non-residency-verbs): ''two verbs, sequenced `reconcile → epoch`, never''
 ''auto-coupled'' — the fold stays op-log-recoverable; the cut destroys recovery.
-The implemented reactors above (`epoch-bag`, `rotate-recipe`) carry the
+The implemented reactors above (`bag-compact`, `rotate-recipe`) carry the
 mechanism; promoting it to a deliberate operator verb adds:
 
 * ''Two acts, not one.'' The irreversible ''CUT'' (snapshot-restart into a fresh

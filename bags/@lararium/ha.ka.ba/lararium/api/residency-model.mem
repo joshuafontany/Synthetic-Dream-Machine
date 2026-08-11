@@ -235,7 +235,7 @@ The prior research surfaced six failure modes documented across OverlayFS, Docke
 | 2 | ''Schema drift across multi-bag residency'' | Kleppmann EuroSys 2021 | Cambria-style read-time lenses, not write-time migration |
 | 3 | ''Kāpae resurrection'' | OverlayFS / moby#783 | First-class `tombstone` op distinct from "absent" (the toggleable shadow-vs-fall-through cut: [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]]) |
 | 4 | ''Shadow-override confusion'' | TW5 #570, #9139 | Surface `origin-bag` as a tiddler field on every read |
-| 5 | ''Recipe-drift poisoning'' | Nix overlays / OCI layers | Recipe pins bag-epochs (DXOS-style); `lares wiki diff` shows what would change if pins bumped |
+| 5 | ''Recipe-drift poisoning'' | Nix overlays / OCI layers | Recipe carries `bagPins` — slot → Automerge heads (DXOS-style); `lares wiki diff` shows what would change if pins bumped |
 | 6 | ''Concurrent commits into same lower bag'' | Upwelling (explicitly unsolved) | Operator-visible commit queue per bag; surface the race rather than hide it |
 
 <<~/ahu >>
@@ -261,7 +261,7 @@ The CRDT layer SHOULD surface every conflict it detects as readable state. It MU
 
 !!! Deferred items reframed
 
-Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-queue for concurrent ACTIONs) shift from ''arbitration mechanisms'' to ''Talk-Story-surfacing layers''. They show conflicts to the operator; they never resolve. The implementation timeline waits on a live wiki-mesh — multi-operator scenarios reveal the actual surfacing UX shape; abstract design ahead of real conflict-cases would build the wrong surface.
+Two Sprint deferrals (modal-view reader at the bag-pin surface; commit-queue for concurrent ACTIONs) shift from ''arbitration mechanisms'' to ''Talk-Story-surfacing layers''. They show conflicts to the operator; they never resolve. The implementation timeline waits on a live wiki-mesh — multi-operator scenarios reveal the actual surfacing UX shape; abstract design ahead of real conflict-cases would build the wrong surface.
 
 !!! Why this is pono
 
