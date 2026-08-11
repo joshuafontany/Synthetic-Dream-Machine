@@ -103,8 +103,8 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/peer-coordination >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/identity-slot >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/composite-store >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-coordination >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-slot >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/composite-store >>
 
 <<~/ahu >>

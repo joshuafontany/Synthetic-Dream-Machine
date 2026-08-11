@@ -122,8 +122,8 @@ fields = [
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/readiness-keys >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/open-phases >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/readiness-keys >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/open-phases >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/auth-providers >>
 

@@ -111,8 +111,8 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/catalog-doc >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/readiness-keys >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/catalog-doc >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/readiness-keys >>
 
 <<~/ahu >>
 

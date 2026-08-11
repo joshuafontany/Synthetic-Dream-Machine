@@ -1,6 +1,6 @@
 <<~ ? -> lar:///README >>
 ```toml iam
-uri-path     = "ha.ka.ba/lares/README"
+uri-path     = "README"
 file-path = "bags/@lares/README.mem"
 type = "text/x-memetic-wikitext"
 l-space      = "adjacent"

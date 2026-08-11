@@ -92,7 +92,7 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/open-phases >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/open-phases >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
 <<~/ahu >>

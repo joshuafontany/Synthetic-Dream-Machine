@@ -125,7 +125,7 @@ export interface CorpusSource {
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/corpus-sources >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/corpus-sources >>
 
 <<~/ahu >>
 
