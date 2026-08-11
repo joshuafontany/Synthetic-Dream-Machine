@@ -37,8 +37,22 @@ tools = [t.replace("_", "-") for t in
 
 # The CLI's own answer, never a transcription of it: the top-level listing, plus each parent verb's own
 # help. A door counts whether it stands at the top or one level in.
-top = subprocess.run(["node", str(CLI), "help"], capture_output=True, text=True).stdout
+proc = subprocess.run(["node", str(CLI), "help"], capture_output=True, text=True)
+top  = proc.stdout
 doors = set(re.findall(r'^\s+(?:\S\s+)?([a-z][a-z0-9-]*)\s{2,}\S', top, re.M))
+
+# A BINARY THAT CANNOT START MUST SAY SO, not shrink the count. This witness invokes the real CLI, which
+# is exactly why it catches what a source-only check cannot — a rename can leave every package
+# typecheck-clean while a STALE DIST in a sibling package breaks the import graph, and the binary then
+# dies before printing a single verb. Read as a door count, that failure looks like missing parity;
+# read here, it names itself.
+if proc.returncode != 0 or not doors:
+    print("[surface-parity] the built CLI did not answer `help` — parity is unmeasurable until it does.")
+    tail = (proc.stderr or proc.stdout).strip().splitlines()
+    for line in tail[:6]:
+        print(f"      {line}")
+    print("      A stale dist in a sibling package is the usual cause: `pnpm build`.")
+    sys.exit(1)
 
 # THE SUB-VERB MAP COMES FROM SOURCE, NEVER FROM INVOKING ANYTHING. A first draft discovered sub-verbs by
 # running each parent verb with no arguments — which is both slow and RECKLESS: `wake`, `regenesis` and
