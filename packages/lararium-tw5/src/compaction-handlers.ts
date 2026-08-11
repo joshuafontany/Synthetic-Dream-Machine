@@ -1,5 +1,5 @@
 /**
- * epoch-handlers — DXOS-style snapshot-restart on a bag.
+ * compaction-handlers — DXOS-style snapshot-restart on a bag.
  *
  * The only local-first CRDT mechanism that actually bounds history. Mints
  * a NEW Automerge doc with the source bag's current materialized tiddlers
@@ -58,10 +58,9 @@ export interface EpochHandlerOptions {
  *
  * Returns { bagUrl, oldDocUrl, newDocUrl, tiddlerCount, tombstoneCount }.
  */
-/** The `bag-compact` reactor. The MODULE keeps its `epoch-handlers` filename — its own header
- *  disambiguates loudly and its meme names the mechanism compaction, so a file rename would churn two
- *  coordinate fields for no reader gain. The VERB is what an operator types and what lands in a record's
- *  `authority`, so the verb is what moved. */
+/** The `bag-compact` reactor — the verb an operator types, and the `authority` a compacted record
+ *  carries. The module carries the mechanism's own word too: a filename holding the RESERVED word would
+ *  make every grep for the fencing epoch land on a history cut. */
 export function makeCompactBagReactor(opts: EpochHandlerOptions): VerbReactor {
   return async (args) => {
     const bagUrl = stringArg(args, "bagUrl");

@@ -83,7 +83,7 @@ CRDT slot the oracles point at.
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/engine-watch >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/recipe >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/epoch-handlers >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/compaction-handlers >>
 
 <<~/ahu >>
 

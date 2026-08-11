@@ -1,18 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/epoch-handlers >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/compaction-handlers >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/ha.ka.ba/lararium/tw5/epoch-handlers.mem"
+file-path   = "bags/@lararium/ha.ka.ba/lararium/tw5/compaction-handlers.mem"
 l-space     = "lararium"
 mana        = 12
 manao       = 12
 register    = "Synthesis"
 retain      = true
 role        = "bag-compact + rotate-recipe — DXOS-style snapshot-restart on a bag; the only local-first mechanism that bounds CRDT history"
-source-file = "packages/lararium-tw5/src/epoch-handlers.ts"
+source-file = "packages/lararium-tw5/src/compaction-handlers.ts"
 type        = "text/x-memetic-wikitext"
-uri-path    = "ha.ka.ba/lararium/tw5/epoch-handlers"
+uri-path    = "ha.ka.ba/lararium/tw5/compaction-handlers"
 ```
 
 <<^ &#x0002; >>
@@ -29,9 +29,9 @@ two MAY co-occur at a boundary, never fuse: this one bounds //state-history grow
 lease-epoch bounds //who may still act//. Reserve bare //epoch// for the lease going forward;
 read this mechanism as ''compaction''. ''AND THE VERB NOW SAYS SO'': `lares bag compact` /
 `lares wiki compact`, over the daemon verb `bag-compact`, stamping `lares-cli:bag-compact` as a record's
-authority. The MODULE keeps its `epoch-handlers` filename — this header already disambiguates and a file
-rename would churn two coordinate fields for no reader gain — so the rule landed where an operator meets
-it rather than where a maintainer does.
+authority. ''AND THE MODULE MOVED WITH IT'': `compaction-handlers.ts`, so a maintainer opening the file
+meets the mechanism's own word rather than the reserved one. A filename that keeps a retired word makes
+every grep for the fence hit a cut.
 
 ''That rule now stands house-wide, and it cuts by OWNERSHIP.'' Bare //epoch// names the fencing
 frontier and nothing else; every other claimant carries a qualifier that names whose word it is —
@@ -91,7 +91,7 @@ reclaiming its storage stays an operator act (OS-level or a future GC sprint).
 !! Deferred design — EPOCH as an operator rite (proposed 2026-06-15)
 
 EPOCH is the //cut behind//, paired with RECONCILE's //fold forward// (residency-model
-#non-residency-verbs): ''two verbs, sequenced `reconcile → epoch`, never''
+#non-residency-verbs): ''two verbs, sequenced `reconcile → compact`, never''
 ''auto-coupled'' — the fold stays op-log-recoverable; the cut destroys recovery.
 The implemented reactors above (`bag-compact`, `rotate-recipe`) carry the
 mechanism; promoting it to a deliberate operator verb adds:

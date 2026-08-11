@@ -27,7 +27,7 @@ Reads `rec.tiddler["bag-stack"]`, coerces to string or undefined, delegates to `
 
 !! Why here
 
-`wiki-handlers.ts` and `epoch-handlers.ts` repeated the same 53-character inline guard four times each:
+`wiki-handlers.ts` and `compaction-handlers.ts` repeated the same 53-character inline guard four times each:
 ```ts
 parseBagStack(typeof recipeRec.tiddler["bag-stack"] === "string"
   ? recipeRec.tiddler["bag-stack"] : undefined)

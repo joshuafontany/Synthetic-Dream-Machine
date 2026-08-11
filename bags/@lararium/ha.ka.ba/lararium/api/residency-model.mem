@@ -195,7 +195,7 @@ The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/D
 
 !!! EPOCH — cut history behind (DEFERRED, named here for the pair)
 
-RECONCILE folds //forward//; ''EPOCH'' cuts //behind// (bounds the op-log; epoch-handlers). They stay ''two verbs, sequenced `reconcile → epoch`, never auto-coupled'' — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a //content// epoch (peers offline across a content cut cannot merge).
+RECONCILE folds //forward//; ''COMPACT'' cuts //behind// (bounds the op-log; compaction-handlers). They stay ''two verbs, sequenced `reconcile → compact`, never auto-coupled'' — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a //content// epoch (peers offline across a content cut cannot merge).
 
 <<~/ahu >>
 
