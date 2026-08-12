@@ -105,12 +105,41 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"];
   const targets = resetTargets();
 
+  const port = Number(args.options["port"] ?? process.env["LAR_PORT"] ?? "8080");
+
   console.log("[lares vessel clear] will delete:");
   for (const t of targets) if (existsSync(t.path)) console.log(`  ${t.path}`);
+  console.log(`[lares vessel clear] will first stop whatever holds :${port}`);
   if (!args.flags["force"]) {
     console.log("Pass --force to proceed.");
     return 1;
   }
+
+  // ── STOP THE HOLDER BEFORE THE WIPE, ALWAYS ─────────────────────────────────────────────────
+  // A daemon holding the store does not notice the store leaving. It keeps its heap, keeps the port,
+  // and keeps writing — so the next `vessel stand` finds the port occupied, ATTACHES to that process,
+  // and reports a healthy vessel standing over a directory that no longer exists.
+  //
+  // Measured: the attach succeeded, the seed then failed six-for-six with exit 3, and standing against
+  // the half-cleared store left `@catalog` unreadable — "hearth-private doc unavailable — local
+  // corruption". Only `flow rebirth` recovered it. None of that announced itself as a wipe/holder race.
+  //
+  // The clear owns this because it owns the destruction: whoever removes the store is the one who can
+  // still name what was holding it.
+  const { stopIncumbent } = await import("../port-control.js");
+  try {
+    const r = await stopIncumbent(port);
+    console.log(r.stopped
+      ? `[lares vessel clear] stopped the incumbent on :${port} (${r.forced ? "forced" : "graceful"})`
+      : `[lares vessel clear] :${port} already free`);
+  } catch (e) {
+    // FAIL CLOSED. Wiping a store out from under a process that survived the stop is precisely the
+    // corruption this exists to prevent, so refuse rather than proceed hopefully.
+    console.error(`[lares vessel clear] could not free :${port} — ${e instanceof Error ? e.message : String(e)}`);
+    console.error("  Refusing to wipe a store a live process may still hold. Stop it, then re-run.");
+    return 1;
+  }
+
   for (const t of targets) rmSync(t.path, { recursive: t.recursive, force: true });
   console.log(`[lares vessel clear] preserved identity: ${larIdentityDir()} (out of the wipe zone — the seal, the library and the repo registry sit beside it, equally untouched)`);
   // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
