@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/kumulipo >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/library/kumulipo >>
 ```toml iam
 collection = "kumulipo"
 entries    = "2"

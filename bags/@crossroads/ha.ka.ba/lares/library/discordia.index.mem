@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/discordia >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/library/discordia >>
 ```toml iam
 collection = "discordia"
 entries    = "5"

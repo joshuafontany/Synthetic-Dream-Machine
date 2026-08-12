@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/bags/elyncia >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/bags/elyncia >>
 ```toml iam
 bag       = "@elyncia"
 cap-tier  = "public"
