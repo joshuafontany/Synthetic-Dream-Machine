@@ -120,10 +120,12 @@ export function freshBuildGate(argv: readonly string[], args: ParsedArgs): numbe
   // booting from stale dist runs superseded logic against real identity; a caller holding the observe cap
   // alone mutates nothing, so the danger it guards cannot arise.
   //
-  // And the rebuild is not free to attempt: `pnpm -r build` CLEANS dist first, so a probe that triggered
-  // one would delete the modules out from under any daemon already running — measured, when a liveness
-  // check reached for the stand door and killed the node it was measuring. A reading must not be able to disturb
-  // what it reads; the capability split says so, and this is where that promise gets kept.
+  // And the rebuild is not free to attempt: it re-emits every package's dist while a daemon runs from it.
+  // Measured, when a liveness check reached for the stand door: the gate fired, the build cleared dist,
+  // and the running node lost `node-host.js` mid-flight — the probe killed what it was measuring, then
+  // reported it dead. `build` re-emits without clearing today (`build:clean` holds the clearing), so the
+  // sharpest edge has moved; the rule stands on the principle rather than on that one blast radius. A
+  // reading must not be able to disturb what it reads, and this is where that promise gets kept.
   if (args.flags["observe"]) return null;
   if (!isWorkspaceStale()) return null;        // dist clearly current — run the handler in-process
 
@@ -150,7 +152,7 @@ export function freshBuildGate(argv: readonly string[], args: ParsedArgs): numbe
   if (held) rmSync(BUILD_LOCK, { force: true });
   if (build.status !== 0) {
     console.error("[lares] fresh-build: workspace build FAILED — aborting (never run the daemon from stale dist).");
-    console.error("  the previous output stands: a build no longer cleans first, so nothing was destroyed.");
+    console.error("  the previous output stands: `build` re-emits dist without clearing it, so nothing was destroyed.");
     return build.status ?? 1;
   }
   stampBuild();   // only a SUCCEEDING build earns a stamp — a failed one leaves the tree reading stale
