@@ -108,9 +108,9 @@ export function memeticWikitextDeserializer(
   // (⊙, ॐ ँ, …) then the SOH control-char reference directly — the same
   // shape the namespace extractor below reads. Anchoring on the SOH/SOH2
   // codes avoids matching unrelated `<<~ !DOCTYPE … >>` comments,
-  // `<<~ ? -> uri >>` pranala-headers, or later STX/ETX sentinels (the old
-  // any-control-char form swallowed the whole header into `prologue` when
-  // the SOH carried a namespace it could not see).
+  // `<<~ ? -> uri >>` pranala-headers, or later STX/ETX sentinels — an
+  // any-control-char form swallows the whole header into `prologue` whenever
+  // the SOH carries a namespace it cannot see.
   const sohM = maskedExec(text, /<<\^[^&\n]*&#x(?:0001|0011);/);
   const sohIdx = sohM ? sohM.index : -1;
   const prologue = (closes.length > 0 && sohIdx > 0)
@@ -140,7 +140,7 @@ export function memeticWikitextDeserializer(
   }
   // THE SLOT: what the carrier wrote between end-of-text and end-of-transmission.
   const slotText = (lastEtxEnd >= 0 && eotStart > lastEtxEnd) ? text.slice(lastEtxEnd, eotStart) : "";
-  // Past EOT there is only the frame's own trailing newline; keep the old reading for that tail.
+  // Past EOT there stands only the frame's own trailing newline; that tail reads to end of text.
   if (eotStart >= 0) {
     const eotEnd = text.indexOf(">>", eotStart);
     if (eotEnd >= 0) lastEtxEnd = eotEnd + 2;
@@ -652,7 +652,7 @@ export function splitBodyTiddler(
 //      (sigil spacing `<<^ &#x0002; >>`, one-blank-line block margins);
 //   2. framing normalizes once — the iam block re-emits sorted + aligned
 //      from fields (authored key order and padding do not survive the
-//      record stratum; retaining bytes for them was the H2 path, dead);
+//      record stratum);
 //   3. parse∘render ≡ records — proven by the round-trip harness, never
 //      by assertion.
 //
@@ -666,11 +666,11 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 // fence — they rebuild from the envelope + record stratum on recompose, so
 // emitting them into the TOML DOUBLES the body (title/text) or the framing.
 //
-// Telemetry-fence supersession (operator overrule 2026-07-20, supersedes ruling
-// 16f4b271): sensorium/worldline telemetry routes through Py on capture, and a
-// sensorium→wiki pull MUST carry ALL its metadata. So `lar_*` sensorium fields
-// (`lar_agent_handle`, `lar_ffz`, `lar_root_handle`, …) round-trip WHOLE — the
-// blanket `lar_` prefix-strip is gone. Only two `lar_*` markers stay denied by
+// The telemetry fence (operator ruling 2026-07-20): sensorium/worldline telemetry
+// routes through Py on capture, and a sensorium→wiki pull MUST carry ALL its
+// metadata. So `lar_*` sensorium fields (`lar_agent_handle`, `lar_ffz`,
+// `lar_root_handle`, …) round-trip WHOLE — no prefix carries a blanket denial.
+// Only two `lar_*` markers stay denied by
 // EXACT name: the transient parse-grade diagnostics `lar_parse_failures` /
 // `lar_parse_degraded`, which `parseMemeText`/`safeSplitMeme` stamp on ingest to
 // surface degradation — derived-on-read diagnostics, never authored metadata,
@@ -695,7 +695,7 @@ const IAM_DENY: ReadonlySet<string> = new Set([
   // The block check attests the span it follows; it is frame, never an authored iam field.
   "block-check", "postamble-foreign",
 ]);
-// Authored-identity resurrections: the deny-set
+// Authored identity re-emits: the deny-set
 // holds MACHINE stamps only. `type` re-emits verbatim — the carrier
 // self-describes its dialect at rest (TW5's content-type field shares the
 // name exactly; round trip = identity). `namespace` re-emits as explicit
@@ -749,8 +749,8 @@ function fmtNamespaceEntities(v: string): string {
 }
 
 /** Canonical iam TOML: sorted keys, equals-signs aligned to the longest key.
- *  `lar_*` sensorium/worldline metadata re-emits WHOLE (telemetry-fence
- *  supersession, 2026-07-20 — see IAM_DENY); the deny-set names the only
+ *  `lar_*` sensorium/worldline metadata re-emits WHOLE (the telemetry fence —
+ *  see IAM_DENY); the deny-set names the only
  *  denials by exact key (structural/envelope + the two parse-grade markers).
  *  TW5-internal `$…` fields stay off the operator's TOML. */
 /** Field-value equality across the string | string[] carrier shapes (undefined never matches). */

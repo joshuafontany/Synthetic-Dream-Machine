@@ -5,9 +5,9 @@
  * ONE NAMESPACE PER CAUSAL ISLAND; THE PLANE IS A PARAMETER, NEVER A NEW VERB. That law already
  * governs every other plane in this CLI — `nexus`, `persona`, `vault`, `library`, `circle`, `cabal`,
  * `sense`, `sensorium` each hold one door over one island. The vessel — its store, its genesis
- * artifact, its daemon, its corpus — forms an island by every test this house applies, and it was the
- * one plane the law never reached. That omission is why the top-level verb count grew back after each
- * collapse: a door absorbs new capability, and a plane with no door has nowhere to put it but the top.
+ * artifact, its daemon, its corpus — forms an island by every test this house applies, and it holds
+ * this door. A door absorbs new capability; a plane with no door has nowhere to put it but the top,
+ * and that is how a top-level verb count grows back.
  *
  * ── SEVEN PRIMITIVES + ONE READ ─────────────────────────────────────────────────────────────────
  * A primitive names ONE motion and cannot be expressed as a sequence of the others. Everything else
@@ -28,9 +28,9 @@
  * a motion that belongs to the workspace.
  *
  * ── WHAT THIS DOOR DOES NOT DO ──────────────────────────────────────────────────────────────────
- * It adds and removes NOTHING. Every primitive already ran inside a verb it now answers for, and each
- * sub-door hands the operator's own args to that same handler. A collapse that also changed behaviour
- * could not be verified — a green suite afterward would prove neither half.
+ * It adds and removes NOTHING. Every sub-door hands the operator's own args straight to the handler
+ * beneath and changes nothing on the way: behaviour lives in the handlers, dispatch lives here. A door
+ * that also moved behaviour could not be verified — a green suite would prove neither half.
  *
  * Meme: lar:///ha.ka.ba/lares/cli/vessel-door
  */
@@ -63,16 +63,15 @@ const withFlag = (args: ParsedArgs, key: string, value = true): ParsedArgs =>
 /**
  * `vessel stand` — the ENTRY POINT, and the one sub-door that carries modes.
  *
- * Standing a vessel has always been one motion with several postures, and the postures were four
- * separate top-level verbs. They read as flags because that is what they are: `--foreground` chooses
- * who owns the terminal, `--with-app` adds the Vite face beside it, `--restart` clears the port first.
- * None of them is a different motion.
+ * Standing a vessel runs ONE motion with several postures, and each posture rides a flag:
+ * `--foreground` chooses who owns the terminal, `--with-app` adds the Vite face beside it, `--restart`
+ * clears the port first. None of them names a different motion.
  */
 async function standVessel(args: ParsedArgs): Promise<number> {
   const a = under(args);
   if (a.flags["with-app"])    return cmdDev(a);
   if (a.flags["restart"])     {
-    // `--clear` reads as the operator's word for the wipe; the handler beneath named it `fresh`.
+    // `--clear` reads as the operator's word for the wipe; the handler beneath spells it `fresh`.
     return cmdReconcile(a.flags["clear"] ? withFlag(a, "fresh") : a);
   }
   if (a.flags["foreground"])  return cmdServe(a);
@@ -82,16 +81,16 @@ async function standVessel(args: ParsedArgs): Promise<number> {
 /**
  * `vessel flow <petname>` — the pet-named cap-stacks over the primitives.
  *
- * Each of these is a SEQUENCE, and naming a sequence at the top level is exactly how a surface grows
- * back. They live behind one sub-door so a new composition arrives as a new flow rather than a new
+ * Each of these composes a SEQUENCE, and naming a sequence at the top level is exactly how a surface
+ * grows back. They live behind one sub-door so a new composition arrives as a new flow rather than a new
  * verb. Distinct from `lares flow`, which composes signal instruments over the sensorium planes —
  * same shape of surface, different island.
  */
 const FLOWS: Readonly<Record<string, { readonly composes: string; readonly run: Sub }>> = {
   refresh: { composes: "build · stop · clear · stand", run: cmdRefresh },
   rebuild: { composes: "bake · stand",                 run: cmdRebuild },
-  // Rebirth of a STANDING vessel is a real motion, and stop-wipe-bake is exactly right for it. It is
-  // simply not a founding step — a fresh founding has nothing standing to tear down.
+  // Rebirth of a STANDING vessel names a real motion, and stop-wipe-bake carries it. A fresh founding
+  // never runs it — nothing stands there to tear down.
   rebirth: { composes: "stop · clear · bake · stand · seed", run: cmdRegenesis },
 };
 

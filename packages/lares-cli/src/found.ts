@@ -72,7 +72,7 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
   const present = (step: string): boolean => plan.find((p) => p.step === step)?.present ?? false;
   const steps: FoundStep[] = [];
 
-  // 1. Build — the node dist must exist for serve. (The CLI itself is already built;
+  // 1. Build — the node dist must exist before the daemon can boot. (The CLI itself is already built;
   //    it had to be, to run this. A truly cold pull bootstraps the CLI with one
   //    manual `pnpm install && pnpm -r build` first.)
   if (present("build")) {

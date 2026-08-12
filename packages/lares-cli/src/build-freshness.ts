@@ -3,8 +3,8 @@
  *
  * A `lares` run loads the workspace packages from their BUILT dist. A stale dist
  * silently runs OLD code — and for a found/boot/mutate verb that means founding an
- * identity or booting the daemon with superseded logic — e.g. an `init` against a
- * stale `@lararium/node` dist calls the keyhive ceremony without the signer seed and
+ * identity or booting the daemon with superseded logic — e.g. a `vessel found` against
+ * a stale `@lararium/node` dist calls the keyhive ceremony without the signer seed and
  * crashes mid-ceremony, leaving a half-founded vessel.
  *
  * Node caches modules at import, so building MID-process cannot reload them. The only
@@ -13,8 +13,8 @@
  *
  * Best-practice shape for these CLI-managed daemon verbs:
  *   - Fresh-build invariant — never found/boot from stale dist (this module).
- *   - Idempotent          — every verb is safe to re-run (init skips-if-founded, wake
- *                           attaches-or-starts, build no-ops when current).
+ *   - Idempotent          — every verb re-runs safely (`found` skips-if-founded, `stand`
+ *                           attaches-or-starts, the build no-ops when current).
  *   - Fail-loud           — a build failure ABORTS; the daemon never runs from stale code.
  *   - Composable          — install = build + init + wake + wire, each step re-runnable.
  *
@@ -33,10 +33,9 @@ import type { ParsedArgs } from "./parse-args.js";
 /**
  * Does this invocation found / boot / mutate identity from workspace code?
  *
- * DERIVED, never rostered. A list of verb names had to be remembered on every surface change, and it
- * drifted the moment one arrived — which is the same defect the vessel door exists to close. Every
- * substrate motion now rides ONE door, so membership is a property of that door rather than a name to
- * recall.
+ * DERIVED, never rostered. A remembered list of verb names drifts the moment a surface changes — the
+ * same defect the vessel door exists to close. Every substrate motion rides ONE door, so membership
+ * reads off that door rather than off a name someone has to recall.
  *
  * The test states the EXCEPTIONS, so it fails safe: a sub-door added later is gated until someone
  * argues otherwise. Only two motions neither found nor boot — `read` inspects and starts nothing, and
@@ -123,7 +122,7 @@ export function freshBuildGate(argv: readonly string[], args: ParsedArgs): numbe
   //
   // And the rebuild is not free to attempt: `pnpm -r build` CLEANS dist first, so a probe that triggered
   // one would delete the modules out from under any daemon already running — measured, when a liveness
-  // check reached for `wake` and killed the node it was measuring. A reading must not be able to disturb
+  // check reached for the stand door and killed the node it was measuring. A reading must not be able to disturb
   // what it reads; the capability split says so, and this is where that promise gets kept.
   if (args.flags["observe"]) return null;
   if (!isWorkspaceStale()) return null;        // dist clearly current — run the handler in-process

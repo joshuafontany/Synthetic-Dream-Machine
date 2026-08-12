@@ -7,7 +7,7 @@
  * text) add a description.
  *
  * Architecture notes:
- *   - The CLI is a thin dispatch shim. Every command's logic lives in a
+ *   - The CLI dispatches and nothing more. Every command's logic lives in a
  *     library function (typically in @lararium/node), so the same operations
  *     can also run from inside the TW5 vm via the verb-tiddler protocol.
  *   - No HTTP/RPC surface here. CLI ↔ live-node coordination rides a

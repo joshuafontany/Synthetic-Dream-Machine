@@ -46,7 +46,7 @@ for x in data:
     drift.append((n, x["f"]))
 
 # ── CONTENT PAST ETX ────────────────────────────────────────────────────────────────────────────
-# The text ends at ETX; the slot below carries the block check alone. The parser refuses this now, so
+# The text ends at ETX; the slot below carries the block check alone. The parser refuses this, so
 # reaching the witness means a carrier was authored that way and never ingested — worth naming before
 # someone wonders why their edit never landed.
 stranded = [(x["f"], x["strandedPastEtx"]) for x in data if x.get("strandedPastEtx")]

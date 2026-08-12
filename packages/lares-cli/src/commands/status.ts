@@ -1,15 +1,13 @@
 /**
  * `lares vessel read` — the status surface, NAMESPACED into two referents (the name-collision cure):
  *
- *   lares vessel read        NODE HEALTH — bootstrap presence, storage size, port in use. Pure local
- *                            inspection, no vm boot.
- *   lares sense status       SENSORIUM TAXONOMY — what the Memory sensorium holds; the real read rides
- *                            the sense door over the @daemon's composed caps.
- *   lares vessel read             ALIAS → `lares vessel read`.
+ *   lares vessel read             NODE HEALTH — bootstrap presence, storage size, port in use. Pure
+ *                                 local inspection, no vm boot.
+ *   lares sense status            SENSORIUM TAXONOMY — what the Memory sensorium holds; the read rides
+ *                                 the sense door over the @daemon's composed caps.
  *   lares vessel read sensorium   ALIAS → points at `lares sense status` (the sensorium door).
  *
- * The two carried one name before (CLI status = node-health · MCP status = taxonomy); they name
- * one referent each now, so the isomorphism table holds no name resolving to two things.
+ * Each name resolves to ONE referent, so the isomorphism table holds no name reaching two things.
  *
  * `lares vessel read --palaces` keeps the palace-organ health table (a third, distinct local view).
  */
@@ -36,8 +34,8 @@ const CLAUDE_DEFAULT_CLEANUP_DAYS = 30; // Claude's own default when the key is 
 function cmdStatusPalaces(args: ParsedArgs): number {
   const organs = palaceOrgans().map((o) => ({ name: o.name, dir: o.dir, healthy: organHealthy(o) }));
   const allHealthy = organs.every((o) => o.healthy);
-  // The GUEST rides BESIDE the table, never inside it — `~/.mempalace` is not an organ the vessel
-  // stands (the comparator ruling), so its absence must never read as an unhealthy sovereign store.
+  // The GUEST rides BESIDE the table, never inside it — `~/.mempalace` never stands as an organ of the
+  // vessel (the comparator ruling), so its absence must never read as an unhealthy sovereign store.
   // Surfaced so the operator keeps sight of it: present or not, it is `lares mempalace setup`'s to raise.
   const g = guestMempalaceOrgan();
   const guest = { name: g.name, dir: g.dir, healthy: organHealthy(g) };
@@ -117,7 +115,7 @@ function cmdSensoriumStatus(args: ParsedArgs): number {
   return exitFor("verb-error");
 }
 
-/** `lares node <subverb>` — the node command group; `status` reads node health (the historical view). */
+/** The node sub-group — `status` reads node health, `stop` halts the daemon on the port. */
 export async function cmdNode(args: ParsedArgs): Promise<number> {
   const sub = args.positional[0];
   if (sub === undefined || sub === "status") return cmdNodeStatus(args);
@@ -127,10 +125,11 @@ export async function cmdNode(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares vessel stop` — halt the daemon on the port (graceful → force), the missing pair to
+ * `lares vessel stop` — halt the daemon on the port (graceful → force), the pair to
  * `lares vessel stand`. Pure port-control (no vm boot, no wipe): SIGTERM the incumbent, escalate to
  * SIGKILL if it lingers, and report which. A free port reads as already-stopped, not an error.
- * Fills the lifecycle gap that `vessel stand --restart` (stop+stand) and `hooks pause` (capture only) leave open.
+ * It ENDS a vessel and nothing else — `vessel stand --restart` stops then stands, `hooks pause`
+ * suppresses capture alone.
  */
 export async function cmdNodeStop(args: ParsedArgs): Promise<number> {
   const port = larPort();
@@ -156,8 +155,8 @@ export async function cmdSensorium(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares vessel read vessel` — the DEEP health lens (the `git fsck` role, folded into status
- * rather than a sibling verb): probes every Automerge doc in the vessel store through a
+ * `lares vessel read vessel` — the DEEP health lens (the `git fsck` role, reached through the one
+ * read door rather than a verb of its own): probes every Automerge doc in the vessel store through a
  * disposable child-process boundary and charts MOUNTED vs CONDEMNED (a torn doc that would
  * abort the WASM runtime on load). Read-only; a condemned doc points at `lares vessel flow rebirth`.
  * Exits non-zero on a tear, so a boot/CI gate reads health off the exit code.
@@ -195,7 +194,7 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
 async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
 
   const root      = larRoot();   // corpus root (genesis); vessel state roots in the home
-  const storage   = larDataDir();   // runtime → ~/.lares/.lararium
+  const storage   = larDataDir();   // runtime → <data>/vessel
   const bootstrap = larBootstrapPath();
   const portRaw   = process.env["LAR_PORT"] ?? "8080";
   const port      = Number(portRaw);

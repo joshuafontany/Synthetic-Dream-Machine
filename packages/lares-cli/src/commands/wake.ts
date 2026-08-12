@@ -8,11 +8,10 @@
  * caller — a session hook, a cron, anything that only wants a reading — holds the first alone, so
  * looking never decides what stands.
  *
- * FOUNDING STANDS THE VESSEL AND NOTHING ELSE (operator ruling, 2026-08-08). `--install` once also
- * pip-installed the mempalace library and stood the sensorium organs, which made a separate tool read as
- * part of the base install and reached outside the vessel root — so a founding could never be isolated.
- * Both moved to their own doors (`lares mempalace install`, `lares sense setup`); a wake still REPORTS
- * what stands, because naming a missing tool serves the operator and installing one behind them does not.
+ * FOUNDING STANDS THE VESSEL AND NOTHING ELSE (operator ruling, 2026-08-08). The mempalace library and
+ * the sensorium organs keep their own doors (`lares mempalace install`, `lares sense setup`), so a
+ * founding stays isolated to the vessel root. A wake still REPORTS what stands, because naming a missing
+ * tool serves the operator and installing one behind them does not.
  *
  * The static CLAUDE.md @-import carries the canonical seed; this frame carries
  * only what is true right now. A degraded wake still returns 0 — the entry point
@@ -117,18 +116,15 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     (args.flags["init"] === true || args.flags["install"] === true || args.options["admit"] !== undefined);
   if (doStandup) founding = await foundIfAbsent(args, { root, bootstrap });
 
-  // THE MEMPALACE IS A SIDECAR, AND FOUNDING NO LONGER ASSUMES IT (operator ruling, 2026-08-08).
+  // THE MEMPALACE RIDES AS A SIDECAR, AND FOUNDING ASSUMES NOTHING OF IT (operator ruling, 2026-08-08).
   //
-  // `--install` used to pip-install the mempalace library and stand the sovereign sensorium organs as
-  // part of founding a vessel. That made a separate tool read as part of the base install — and it
-  // reached OUTSIDE the vessel root, so a founding could never be isolated: a throwaway rehearsal wrote
-  // into the operator's real Python environment. The integration-check's own header already called
-  // mempalace "a READ-ONLY sidecar submodule"; the model said sidecar and the CLI wired it into the boot.
+  // Standing the library or the sensorium organs from here reaches OUTSIDE the vessel root, so a founding
+  // could never be isolated: a throwaway rehearsal writes into the operator's real Python environment.
   //
-  // Founding now stands the VESSEL and nothing else. The two sidecar lanes carry their own doors:
+  // Founding stands the VESSEL and nothing else. The two sidecar lanes carry their own doors:
   //   · `lares mempalace install`  — the library deps (submodule + pip)
   //   · `lares sense setup`        — the sovereign sensorium organs
-  // Both stay idempotent and both no-op when already done, so nothing was lost but the assumption.
+  // Both stay idempotent and both no-op when already done.
   //
   // The CHECK stays here and stays cheap: a wake still REPORTS what stands, because reporting a missing
   // tool serves the operator and installing one behind their back does not.

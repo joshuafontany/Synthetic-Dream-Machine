@@ -42,7 +42,7 @@ function step(n: number): string { return `[regenesis ${n + 1}/${STEPS.length}] 
  * The bags a single-bag regenesis MUST NOT target — the social/registry plane the boot
  * contract stands on. `discoverHoldings` only ever returns `bags/@*` dirs (@daemon,
  * @identities, @persona, @groups, @sessions, @catalog/@oracle live on the social plane
- * with no `bags/` dir), so a name lookup already fences them out; this set is the
+ * with no `bags/` dir), so a name lookup already fences them out; this set carries the
  * belt-and-braces refusal that names WHY, never the primary gate.
  */
 const PROTECTED_BAGS = new Set([
@@ -66,8 +66,8 @@ function resolveHolding(
 
 /**
  * L4 — targeted single-bag regenesis: rebirth ONE bag's doc from its `bags/@slug` disk
- * canon WITHOUT a full-store wipe and WITHOUT stopping the vessel. The scalpel to
- * `regenesis`'s sledgehammer: it reaches @daemon / sibling bags / identity / genesis /
+ * canon WITHOUT a full-store wipe and WITHOUT stopping the vessel. The scalpel beside the
+ * whole-store sledgehammer: it reaches @daemon / sibling bags / identity / genesis /
  * the mempalace NOT AT ALL. Three scoped steps, mirroring reset+seed for one holding:
  *
  *   1. CLEAR the bag doc   — daemon-side, cap-verified, tombstone-in-place (the doc

@@ -64,23 +64,23 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
 /**
  * `lares vessel clear` — wipe the vessel store (`<data>/vessel`) + bootstrap artifact, then re-init.
  *
- * Operator-confirmation gate: until proper auth lands, we still want a
- * second-thought guard. Honors --force to skip the prompt.
+ * Operator-confirmation gate: the wipe refuses without `--force`, so destruction stays a
+ * deliberate second act.
  */
 /**
  * The reset wipe-list — the ONE spelling of every path `lares vessel clear` deletes, resolved at
  * call time (AFTER any --root sets LAR_ROOT). Exported for the wipe-list contract test:
- * the projection watermark dies WITH the store (GAP 1); identity NEVER appears here.
+ * the projection watermark dies WITH the store; identity NEVER appears here.
  *
- * larDataDir()/larProjectionDir() resolve the canonical XDG dirs deterministically —
- * no legacy arm exists to dangle, so the wipe names them directly.
+ * larDataDir()/larProjectionDir() resolve the canonical XDG dirs deterministically, so the
+ * wipe names them directly.
  */
 export function resetTargets(): Array<{ path: string; recursive: boolean }> {
   const gen = (name: string, recursive = false) => ({ path: join(larRoot(), "genesis", name), recursive });
   return [
-    // The store, and the social bootstrap WITH it — the address book now lives INSIDE `<data>/vessel`,
-    // so it dies with the docs it addresses rather than by this list remembering to name it. An address
-    // book that outlived a reset would point at destroyed docs, which is why it left the corpus tree.
+    // The store, and the social bootstrap WITH it — the address book lives INSIDE `<data>/vessel`, so
+    // it dies with the docs it addresses rather than by this list remembering to name it. An address
+    // book that outlived a reset would point at destroyed docs, which is why it sits outside the corpus.
     { path: larDataDir(), recursive: true },   // the vessel store (<data>/vessel) + the bootstrap within
     gen("island.bin"),
     gen("island.sha256"),
@@ -164,16 +164,16 @@ export async function cmdFresh(args: ParsedArgs): Promise<number> {
  * `lares vessel flow refresh` — THE idempotent post-dev-change cure. After ANY code edit, run this:
  *   1. `pnpm -r build`     — recompile every package's dist (the island workers spawn from dist, not
  *                            tsx-source — a stale dist = a half-dead vessel). Idempotent.
- *   2. `reconcile --fresh` — stop the incumbent on the port (graceful→force, by port-access, no PID
- *                            file), re-pave the vessel (~/.lares storage wiped + re-init + genesis
- *                            re-baked under the fresh build; identity preserved), then serve the dist.
+ *   2. re-pave + serve    — stop the incumbent on the port (graceful→force, by port-access, no PID
+ *                            file), re-pave the vessel (store wiped + re-found + genesis re-baked
+ *                            under the fresh build; identity preserved), then serve the dist.
  *
- * Idempotent from ANY prior state (running / stale / none). The dev-loop sibling commands, by reach:
- *   - `refresh`   : code changed → REBUILD + re-pave + serve   (this — the full cure)
- *   - `reconcile` : just converge a running vessel (no rebuild, no wipe unless --fresh)
- *   - `rebuild`   : dep-bump serde skew → re-bake genesis only (NO wipe, identity-safe)
- *   - `fresh`     : re-pave + serve, assuming dist already current
- *   - `serve`     : boot the dist, fail-fast (no convergence, no rebuild)
+ * Idempotent from ANY prior state (running / stale / none). The dev-loop siblings, by reach:
+ *   - `vessel flow refresh`            : code changed → REBUILD + re-pave + serve  (this — the full cure)
+ *   - `vessel stand --restart`         : converge a running vessel (no rebuild, no wipe)
+ *   - `vessel flow rebuild`            : dep-bump serde skew → re-bake genesis only (NO wipe, identity-safe)
+ *   - `vessel stand --restart --clear` : re-pave + serve, assuming dist already current
+ *   - `vessel stand --foreground`      : boot the dist, fail-fast (no convergence, no rebuild)
  */
 export async function cmdRefresh(args: ParsedArgs): Promise<number> {
   console.log("[lares vessel flow refresh] (1/2) pnpm -r build — recompiling all dist…");
@@ -219,10 +219,10 @@ export async function cmdReconcile(args: ParsedArgs): Promise<number> {
  * faults (`tag for enum is not valid`). The cure is to REBUILD the genesis engine
  * under the current deps — NOT to wipe storage and NEVER to touch identity.
  *
- * Idempotent: stop the incumbent on the port (graceful→force, like reconcile),
- * rebuild genesis under the explicitly-resolved root, then serve. No `.lararium`
- * wipe, no key/card touch — the operator's DID survives untouched. Reserve `reset`/
- * `fresh` for true re-founding; reach for `rebuild` first on a dep-bump fault.
+ * Idempotent: stop the incumbent on the port (graceful→force, as a restart does),
+ * rebuild genesis under the explicitly-resolved root, then serve. No store wipe,
+ * no key/card touch — the operator's DID survives untouched. Reserve `vessel clear`
+ * for true re-founding; reach for this flow first on a dep-bump fault.
  */
 export async function cmdRebuild(args: ParsedArgs): Promise<number> {
   const root       = args.options["root"] ?? process.env["LAR_ROOT"] ?? REPO_ROOT;

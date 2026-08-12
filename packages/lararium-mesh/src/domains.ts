@@ -11,12 +11,12 @@
  * `"MLS 1.0 "` (RFC 9420), BIP-340's tagged hashes, the Noise protocol NAME hashed into the handshake
  * state, EIP-712's domainSeparator. The constant is protocol identity, never a magic number.
  *
- * ── SO WHAT WAS ACTUALLY UN-PONO ────────────────────────────────────────────────────────────────
- * Not the strings. Thirty-two of them lived across twenty-five files in TWO spellings — `lar-<name>/v<N>`
- * for signing, `"lares <name> v<N>"` for HMAC keys — with no registry and no witness. Nothing could say
- * they were unique, and a typo in a domain tag does not fail loudly: it silently mints a SECOND protocol
- * whose signatures verify against nothing. Multiformats is the sharpest prior art here, and its whole
- * value is that THE TABLE IS THE ARTIFACT rather than the prefixes.
+ * ── WHY A TABLE, AND NOT JUST THE STRINGS ───────────────────────────────────────────────────────
+ * Scattered, they cannot be checked. Thirty-two of them once sat across twenty-five files in TWO
+ * spellings — `lar-<name>/v<N>` for signing, `"lares <name> v<N>"` for HMAC keys — and nothing could say
+ * they differed. A typo in a domain tag does not fail loudly: it silently mints a SECOND protocol whose
+ * signatures verify against nothing. Multiformats sets the sharpest prior art, and its whole value rides
+ * on THE TABLE AS THE ARTIFACT rather than on the prefixes.
  *
  * ── THE ONTOLOGY: a domain is a NAME, so it takes the house's naming form ───────────────────────
  * `lar:` names and does not fetch (RFC 4151's `tag:` precedent), which is exactly a domain tag's nature:
@@ -25,14 +25,14 @@
  *     lar:///ha.ka.ba/lares/domain/<name>/v1
  *
  * — the stable `ha.ka.ba` root, one path for the whole family, and the version IN BAND so a v2 can never
- * collide with the v1 it replaces. Versions all read v1: early alpha, no outside consumers, and a `2` that
- * recorded a past migration was archaeology encoded into a protocol string.
+ * collide with the v1 it replaces. Versions all read v1: early alpha, no outside consumers, and a `2`
+ * that records a past migration encodes archaeology into a protocol string.
  *
  * ── AND A VERSION MUST NEVER DO A DOMAIN'S JOB ──────────────────────────────────────────────────
- * Resetting exposed this. `keyring-envelope` carried `/v1` as its SIGNING domain and `/v2` as its HKDF
- * `info` — two purposes told apart by a version digit, so a naive reset to v1 would have fused them. The
- * same held for `persona-admit/v2/grant-seal`. Both now carry their own NAME: separation belongs to the
- * name, and the version belongs to the protocol's own history.
+ * A version digit that carries separation fuses on the first reset. `keyring-envelope` carried `/v1` as
+ * its SIGNING domain and `/v2` as its HKDF `info` — two purposes told apart by a digit, so a naive reset
+ * to v1 would have fused them; `persona-admit/v2/grant-seal` sat the same way. Each carries its own NAME
+ * instead: separation belongs to the name, and the version belongs to the protocol's own history.
  *
  * ── HOW TO ADD ONE ──────────────────────────────────────────────────────────────────────────────
  * Add it HERE, exported, and use the export. `tools/domain-registry-witness.sh` refuses a duplicate, a
@@ -65,8 +65,8 @@ export const PERSONA_ENROLL_DOMAIN = d("persona-enroll");
 export const PERSONA_GRANT_DOMAIN = d("persona-grant");
 export const PERSONA_SEALED_DOMAIN = d("persona-sealed-grant");
 export const PERSONA_JOIN_DOMAIN = d("persona-join");
-/** The grant seal's HKDF `info`. A NAME of its own — this once rode `persona-admit/v2`, letting a version
- *  digit carry the separation from the four signing domains above. */
+/** The grant seal's HKDF `info`. A NAME of its own — never a version digit carrying the separation from
+ *  the four signing domains above. */
 export const PERSONA_ADMIT_SEAL_INFO = d("persona-admit-grant-seal");
 /** A burnable boot invite, spent once at a vessel's first waking. */
 export const BOOT_INVITE_DOMAIN = d("boot-invite");
@@ -91,8 +91,8 @@ export const GUARDIAN_CONFIRM_DOMAIN = d("guardian-confirm");
 // ── SEALED CONTENT + TRANSPORT ──────────────────────────────────────────────────────────────────
 /** The keyring delivery envelope — the signed wire shape. */
 export const KEYRING_ENVELOPE_DOMAIN = d("keyring-envelope");
-/** Its HKDF `info`. A NAME of its own: this once rode `keyring-envelope/v2` while the signing domain rode
- *  `/v1`, so a version digit was doing a domain's job and a reset would have fused them. */
+/** Its HKDF `info`. A NAME of its own, held apart from the signing domain above: a version digit doing a
+ *  domain's job fuses the two on the first reset. */
 export const KEYRING_ENVELOPE_SEAL_INFO = d("keyring-envelope-seal");
 /** The `@cad` convergent keystream — ciphertext-addressed bodies. */
 export const CAD_KEYSTREAM_INFO = d("cad-keystream");
