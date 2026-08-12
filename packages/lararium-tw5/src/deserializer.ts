@@ -682,6 +682,18 @@ const IAM_DENY: ReadonlySet<string> = new Set([
   "header-text", "ahu-parent", "ahu-slot", "carrier-soh",
   // transient parse-grade diagnostics — stamped on ingest, denied by exact name
   "lar_parse_failures", "lar_parse_degraded",
+  // RESIDENCY IS NOT IDENTITY. The nalu engine annotates every inbound write with `origin-bag` so the
+  // READ path can surface which bag answered — that is its whole job, and it belongs on the record.
+  // Serializing it into the carrier fuses two different things: `uri-path` is what the meme IS, a bag
+  // is where it currently LIVES. A meme re-projected to another bag, or moved wiki→bags when residency
+  // changes, would then carry a stamp that names its old home — and a projector reading the carrier
+  // for its destination would write it back there.
+  //
+  // Measured: with this denied, a full re-seed rewrites 0 lines of `bags/`. Before it, 480 carriers
+  // came back changed on every cycle, none of it content.
+  "origin-bag",
+  // The block check attests the span it follows; it is frame, never an authored iam field.
+  "block-check", "postamble-foreign",
 ]);
 // Authored-identity resurrections: the deny-set
 // holds MACHINE stamps only. `type` re-emits verbatim — the carrier
