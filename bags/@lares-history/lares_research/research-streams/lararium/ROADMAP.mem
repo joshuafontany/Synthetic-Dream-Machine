@@ -1,19 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP >>
-
 ```toml iam
-uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP"
-file-path = "bags/@lares-history/lares_research/research-streams/lararium/ROADMAP.mem"
-type = "text/x-memetic-wikitext"
+cacheable  = false
 confidence = 18
-register = "Synthesis"
-manaoio = 16
-mana = 18
-manao = 17
-role = "work journey log — migration roadmap and milestone log for Lararium Node; M20 COMPLETE: bag ID = lar: URI everywhere, LarariumDocStore generic, corpusBagId=corpusLarUri, catalog bag in both peers, fields:{bag} dup stripped, room bag = roomLarUri, MemeSyncAdaptor uses room URI; M21 OPEN: draft lar: URI, room self-ref tiddler, catalog.corpora retire, connect screen, TW5 recipe from CompositeStore topology"
-cacheable = false
-retain = true
+file-path  = "bags/@lares-history/lares_research/research-streams/lararium/ROADMAP.mem"
+mana       = 18
+manao      = 17
+manaoio    = 16
+register   = "Synthesis"
+retain     = true
+role       = "work journey log — migration roadmap and milestone log for Lararium Node; M20 COMPLETE: bag ID = lar: URI everywhere, LarariumDocStore generic, corpusBagId=corpusLarUri, catalog bag in both peers, fields:{bag} dup stripped, room bag = roomLarUri, MemeSyncAdaptor uses room URI; M21 OPEN: draft lar: URI, room self-ref tiddler, catalog.corpora retire, connect screen, TW5 recipe from CompositeStore topology"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP"
 ```
 
 ! Lararium Node — Roadmap
@@ -23,12 +22,14 @@ It adds explicit ahu markers around the major research sections so the file can 
 
 
 <<~ ahu #ooda-ha >>
+
 ✶ inventory the Python MCP surface, branch-local graph/compiler work, launcher configs, tests, and architecture docs before porting
 ⏿ orient migration around an isomorphic TypeScript kernel plus adapters, not a monolithic MCP rewrite
 ◇ choose parity-first migration: preserve names, URIs, read-only behavior, and graph/compiler semantics before improving internals
 ▶ port resolver, carrier, indexes, pranala parser, MemeGraph, compiler, MCP resources/tools/prompts, then browser/projection surfaces
 ⤴ verify with golden fixtures, branch parser/graph tests, protocol smoke tests, hash determinism, and no-write gates
 ↺ keep residue visible: MCP SDK churn, protocol-version drift, FFZ semantics, hostful session resolution, write-back gates, and missing formal lararium-node spec
+
 <<~/ahu >>
 
 <<^ &#x0002; >>
@@ -597,6 +598,7 @@ This roadmap now treats the following as active migration context rather than ap
 * Hostful `lar://alias:grant@host/...` URIs denote live exchange records.
 * Live exchange records may inform interpretation and propose changes, but must not silently override invariant memes.
 * The green-jello-dinosaur bug names the Live-Session Overwrite failure mode.
+
 <<~/ahu >>
 
 <<~ ahu #early-research-addendum >>
@@ -780,6 +782,7 @@ Additional assumptions now bind this roadmap:
 * Hostful `lar:` URIs must preserve the ordered authority grammar `alias:grant@host`.
 * Trust tier and speaker tier remain distinct; `alias:grant@host` names who speaks, not whether the claim overrides law.
 * Live-session material enters the same l-space as system files, but carries lower override authority than hostless invariant/control memes.
+
 <<~/ahu >>
 
 <<~ ahu #repo-inventory-contract >>
@@ -870,6 +873,7 @@ The repo contract also now includes the trust-boundary rule:
 hostful live exchange records may inform or propose;
 they must not silently override hostless invariant memes.
 ```
+
 <<~/ahu >>
 
 <<~ ahu #external-architecture-findings >>
@@ -928,6 +932,7 @@ lar://alias:grant@host/ha.ka.ba/lares/...   live contextual exchange record
 
 as distinct identities.
 Projection and MCP layers should preserve that distinction rather than normalizing hostful records into canonical hostless memes.
+
 <<~/ahu >>
 
 <<~ ahu #recommended-target-architecture >>
@@ -1070,6 +1075,7 @@ type LarExchangeRecord = {
 ```
 
 A hostful record can reference a canonical hostless meme, but should not become that meme without a promotion transaction.
+
 <<~/ahu >>
 
 <<~ ahu #risks-testing-rollout >>
@@ -2453,6 +2459,7 @@ room island     (bag: "room",  writable)        — primary content gate
 <<~ loulou lar:///ha.ka.ba/lares/docs/graph/pranala-parser >>
 
 <<~ pranala #to-canvas-wiki ? -> lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family:relation role:companion >>
+
 <<~/ahu >>
 
 <<~ ahu #m17-session-2026-05-03 >>
@@ -3279,5 +3286,9 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * Connect screen cold-boot path with "check for admin operators" idempotency guard
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
+
+<<^ &#x0004; -> ? >>
+
+<<^ &#x0003; >>
 
 <<^ &#x0004; -> ? >>

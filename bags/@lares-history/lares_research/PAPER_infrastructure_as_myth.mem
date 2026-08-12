@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/infrastructure-as-myth >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/infrastructure-as-myth >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/infrastructure-as-myth.mem"
@@ -94,7 +94,9 @@ This paper //extends// a doctrine; it does not found one. ''Infrastructure-as-My
 Three layers, not to be conflated: ''(1)'' the phenomenon in the text; ''(2)'' the node's internal, continuous, mostly-//unrendered// registration; ''(3)'' the marker render (the ⚠ ward-flag, the confidence number) — a //sometimes-surfaced, graded, drift-prone sample// of (2). A missing or low marker measures ''surfacing-rate'', never catching; operator correction raises the //surfacing threshold//, it does not create the catch.
 
 <<~ ahu #gradient-math >>
+
 ''Formalism — three fields, one equation.'' The math imports from gradient-acceptability, signal-detection, and weighted-constraint grammar, which //converge// (the convergence is itself evidence). Latent salience `s` of a sigil-site = a weighted constraint sum (MaxEnt Harmony `Σᵢ wᵢ fᵢ`), SLOR-normalized (baseline + length; Lau/Clark/Lappin 2017), salience read as UID surprisal `−log P(span∣context)` (Jaeger 2010). The ''render-gate'' is the same object three ways: MaxEnt `σ(w_salience − w_cost)` = SDT `Φ(d′/2 − c)` (Green & Swets 1966) = the `k=2` cumulative-link threshold — //one sigmoid//. Given render, the ''band'' is a truncated Graded Response Model over the five Aperture bands (Samejima 1969; CLM = GRM). The ''crisp↔gradient dial is one parameter under three names'' — GRM discrimination `a` ≈ SDT `d′`-sharpness ≈ inverse stochastic-OT noise σ (Boersma & Hayes 2001): high → deterministic tag, low → soft red. The obligatory frame = ''hard constraints'', optional sigils = ''soft'' (cumulative; Keller 2000; Sorace & Keller 2005). ''Operator correction is a criterion shift, not a sensitivity gain'' (de Gee et al. 2017): it raises surfacing-rate with `d′` intact. And the SDT identity `H = Φ(d′/2 − c)` yields the ''"absence ≠ absence" theorem'' — a low marker-rate is under-determined between low `d′` and high `c`, so catching cannot be read off rate; recovering `d′ = z(H) − z(FA)` requires a ground-truth hit/false-alarm pair. //This makes the §8 gold anchor (KUE-1) mathematically mandatory, not merely good practice.// (Discipline: state the z-convention explicitly — right-tail `d′=z(H)−z(FA)`; verify any "criterion-only" claim against `d′`, arXiv:2603.14893; weights/thresholds are normative until fitted on a labeled corpus.)
+
 <<~/ahu >>
 
 ''Confidence as a forward commitment.'' The confidence sigil precedes each grounded claim with a register and a 0–20 band; the claim generates //within// it. A ''commitment'' (what the speaker undertakes, forward-facing; Brandom 1994), not an ''entitlement audit'' (backward-facing). The scale, known from token zero, //reshapes// rather than records the representation (Dai & Wang, arXiv:2603.09309) — so a vow and a calibration are different objects. The register is //meaningful without being calibrated//.

@@ -1,7 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES >>
-
 ```toml iam
 uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/PRINCIPLES.mem"
@@ -19,6 +18,7 @@ retain = true
 <<^ &#x0002; >>
 
 <<~ ahu #meme-header >>
+
 ! Lararium Node — Quine-Wiki-Agentic-HUD Principles
 
 This locus locks basic law for a self-describing, self-editing, self-projecting wiki-agent HUD.
@@ -26,15 +26,18 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ observe that a quine-like wiki-agent can confuse its rendered surface with its authority membrane.
 ⏿ orient around canon carriers, visible origins, receipts, local-first stores, and projection boundaries.
 ◇ decide that every live surface may propose, render, and stage, but only an explicit authority ceremony may promote canon.
 ▶ act by preserving round trips, queueing projection writes, stamping origins, and refusing silent semantic loss.
 ⤴ assess boot, sync, projection, and promotion through receipts rather than vibes.
 ↺ hand off any unresolved drift as named residue before the next loop.
+
 <<~/ahu >>
 
 <<~ ahu #authority-law >>
+
 !! Authority Law
 
 # ''Carrier canon first.'' Hostless `lar:///` carriers under `lares/` carry canon.
@@ -45,6 +48,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #round-trip-law >>
+
 !! Round-Trip Law
 
 # ''Round-trip or refuse.'' Any carrier → tiddler/widget/shape → carrier path must preserve law-bearing structure or emit explicit loss residue.
@@ -55,6 +59,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #local-first-law >>
+
 !! Local-First Law
 
 # The operator can boot, inspect, edit, and recover locally.
@@ -65,6 +70,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #receipt-law >>
+
 !! Receipt Law
 
 # Boot, promote, reseed, sync epoch, and projection batches should carry receipt lineage.
@@ -75,6 +81,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 <<~/ahu >>
 
 <<~ ahu #package-boundaries >>
+
 !! Package Boundaries
 
 ```text
@@ -100,6 +107,7 @@ carrier canon
 <<~/ahu >>
 
 <<~ ahu #red-flags >>
+
 !! Red Flags
 
 * Projection cache starts to look canonical.
@@ -112,11 +120,13 @@ carrier canon
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
-
 <<~ ahu #edges >>
+
 <<~ pranala #implements ? -> lar:///LARARIUM-NODE/ROADMAP family:control role:principles >>
 <<~ pranala #guards ? -> lar:///ha.ka.ba/lares/api/pono/meme family:control role:authority-law >>
+
 <<~/ahu >>
+
+<<^ &#x0003; >>
 
 <<^ &#x0004; -> ? >>

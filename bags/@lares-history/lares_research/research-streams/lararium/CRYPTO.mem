@@ -1,21 +1,19 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO >>
 ```toml iam
-uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO"
-file-path = "bags/@lares-history/lares_research/research-streams/lararium/CRYPTO.mem"
-type = "text/x-memetic-wikitext"
-l-space      = "adjacent"
-confidence   = 19
-register     = "Synthesis-Canon"
-manaoio      = 18
-mana         = 18
-manao        = 18
-role         = "web crypto provider boundary doctrine — canonical bytes, digest, randomness"
-cacheable    = true
-hydrate      = true
-retain       = true
+cacheable  = true
+confidence = 19
+file-path  = "bags/@lares-history/lares_research/research-streams/lararium/CRYPTO.mem"
+hydrate    = true
+l-space    = "adjacent"
+mana       = 18
+manao      = 18
+manaoio    = 18
+register   = "Synthesis-Canon"
+retain     = true
+role       = "web crypto provider boundary doctrine — canonical bytes, digest, randomness"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO"
 ```
-
-
 
 <<^ &#x0002; >>
 

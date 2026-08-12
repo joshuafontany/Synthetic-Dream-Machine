@@ -1,3 +1,10 @@
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+```toml iam
+type = "text/x-memetic-wikitext"
+```
+
+<<^ &#x0002; >>
+
 <<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml iam
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
@@ -143,3 +150,7 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 <<~/ahu >>
 
 <<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+
+<<^ &#x0003; >>
+
+<<^ &#x0004; -> ? >>

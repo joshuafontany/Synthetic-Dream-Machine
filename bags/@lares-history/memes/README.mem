@@ -2,18 +2,18 @@
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/memes >>
 ```toml iam
-uri-path  = "ha.ka.ba/lares-history/memes"
-file-path = "wikis/@lares-history/memes/README.mem"
-type      = "text/x-memetic-wikitext"
-l-space   = "archive"
+cacheable  = false
 confidence = 18
-register  = "Synthesis"
-manaoio   = 17
-mana      = 18
-manao     = 17
-role      = "consume-archive index: research that survived the pono pass and landed in live memes or packages"
-cacheable = false
-retain    = false
+file-path  = "wikis/@lares-history/memes/README.mem"
+l-space    = "archive"
+mana       = 18
+manao      = 17
+manaoio    = 17
+register   = "Synthesis"
+retain     = false
+role       = "consume-archive index: research that survived the pono pass and landed in live memes or packages"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lares-history/memes"
 ```
 
 <<^ &#x0002; >>
@@ -72,4 +72,5 @@ Research consumed into live docs/packages. Source files deleted 2026-05-16.
 <<~/ahu >>
 
 <<^ &#x0003; >>
+
 <<^ &#x0004; -> ? >>

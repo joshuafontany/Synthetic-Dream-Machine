@@ -9,10 +9,9 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 <!-- !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext -->
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/api/pono/skill-template >>
-
-<<~ ahu #iam >>
-```toml
+```toml iam
 # <<~ ahu #iam-ha "structure" >>
+
 uri-path = "ha.ka.ba/api/pono/skill-template"
 file-path = "lares/ha-ka-ba/api/pono/skill-pono-template.mem"
 content-type = "text/x-memetic-wikitext"
@@ -20,6 +19,7 @@ manaoio = 8
 confidence = 10
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
+
 mana = 11
 manao = 12
 implements = [
@@ -31,8 +31,10 @@ role = "skill template, verification authoring guide, and pre/post-MCP implement
 skill-package-root = "ha-ka-ba/api/pono/skill-*.md"
 # <<~/ahu >>
 # <<~ ahu #iam-ba "flow" >>
+
 # <<~/ahu >>
 ```
+
 <<~/ahu >>
 
 ! Skill Package Template
@@ -47,8 +49,12 @@ The ''inner layer'' follows the memetic-wikitext standard — TOML `#iam` block,
 
 A skill authored in this pattern works both as an agentskills.io-compatible loadable skill and as a first-class typed meme. When a skill also claims a stable address under `lar:///ha.ka.ba/api/**`, it may compose with `loci` rather than facing a forced choice between `skill` and `loci`.
 
-<<^ &#x0002; ahu #skill-body-open >>
+<<^ &#x0002; >>
+
+<<~ ahu #skill-body-open >>
+
 Skill template opens the verification authoring stream here.
+
 <<~/ahu >>
 
 <<~ ahu #phase-map >>
@@ -417,6 +423,7 @@ Pre-MCP-ba governs implementation motion: start with two or three mechanical inv
 <<~/ahu >>
 
 <<~ loulou lar:///ha.ka.ba/api/pono/skill-template-pre-mcp >>
+
 <<~/ahu >>
 
 <<~ ahu #post-mcp >>
@@ -499,10 +506,13 @@ Post-MCP-ba governs the authoring motion across migration: keep the skill body c
 <<~/ahu >>
 
 <<~ loulou lar:///ha.ka.ba/api/pono/skill-template-post-mcp >>
+
 <<~/ahu >>
 
-<<^ &#x0003; ahu #body-close >>
+<<~ ahu #body-close >>
+
 Skill template closes the verification authoring stream here.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
@@ -514,6 +524,6 @@ Skill template closes the verification authoring stream here.
 
 <<~/ahu >>
 
-
+<<^ &#x0003; >>
 
 <<^ &#x0004; -> ? >>

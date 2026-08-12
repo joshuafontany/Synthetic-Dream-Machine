@@ -2,18 +2,18 @@
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/memes/history >>
 ```toml iam
-uri-path  = "ha.ka.ba/lares-history/memes/history"
-file-path = "wikis/@lares-history/memes/history/README.mem"
-type      = "text/x-memetic-wikitext"
-l-space   = "archive"
+cacheable  = false
 confidence = 18
-register  = "Synthesis"
-manaoio   = 17
-mana      = 18
-manao     = 17
-role      = "index of historical provenance memes — origin stories and development arc records, not doctrine"
-cacheable = false
-retain    = false
+file-path  = "wikis/@lares-history/memes/history/README.mem"
+l-space    = "archive"
+mana       = 18
+manao      = 17
+manaoio    = 17
+register   = "Synthesis"
+retain     = false
+role       = "index of historical provenance memes — origin stories and development arc records, not doctrine"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lares-history/memes/history"
 ```
 
 <<^ &#x0002; >>
@@ -67,4 +67,5 @@ Whole-file period-artifacts kept verbatim (definitions and instructions, never n
 <<~/ahu >>
 
 <<^ &#x0003; >>
+
 <<^ &#x0004; -> ? >>

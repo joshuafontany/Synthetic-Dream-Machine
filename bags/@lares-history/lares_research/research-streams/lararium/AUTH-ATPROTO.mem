@@ -1,19 +1,18 @@
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO >>
-
 ```toml iam
-uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO"
-file-path = "bags/@lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO.mem"
-type         = "text/x-memetic-wikitext"
-l-space      = "adjacent"
-confidence   = 18
-register     = "Synthesis-Canon"
-manaoio      = 17
-mana         = 18
-manao        = 18
-role         = "ATProto / Bluesky login architecture doctrine — BFF, identity layers, DPoP boundary"
-cacheable    = true
-hydrate      = true
-retain       = true
+cacheable  = true
+confidence = 18
+file-path  = "bags/@lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO.mem"
+hydrate    = true
+l-space    = "adjacent"
+mana       = 18
+manao      = 18
+manaoio    = 17
+register   = "Synthesis-Canon"
+retain     = true
+role       = "ATProto / Bluesky login architecture doctrine — BFF, identity layers, DPoP boundary"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO"
 ```
 
 <<^ &#x0002; >>

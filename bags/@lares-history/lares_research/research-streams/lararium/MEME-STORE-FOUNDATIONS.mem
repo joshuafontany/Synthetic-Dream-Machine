@@ -1,3 +1,10 @@
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+```toml iam
+type = "text/x-memetic-wikitext"
+```
+
+<<^ &#x0002; >>
+
 <<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
 ```toml iam
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
@@ -214,3 +221,7 @@ The identity and UCAN layer is now in place:
 <<~/ahu >>
 
 <<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+
+<<^ &#x0003; >>
+
+<<^ &#x0004; -> ? >>

@@ -1,21 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SESSION >>
-
 ```toml iam
-uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SESSION"
-file-path = "bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem"
-type         = "text/x-memetic-wikitext"
-l-space      = "adjacent"
-confidence   = 18
-register     = "Synthesis-Canon"
-manaoio      = 17
-mana         = 18
-manao        = 17
-implements   = [
-  "lar:///ha.ka.ba/lares/api/pono/meme"
-]
-role         = "session handoff crystal — 2026-05-03 (session 10) — M25 Loop 2 (partial): node peer oracle tiddler alignment; MemeSyncAdaptor 15 tests; CompositeStore.addProjection 4 tests; 172 passing (was 153)"
+confidence = 18
+file-path  = "bags/@lares-history/lares_research/research-streams/lararium/SESSION.mem"
+implements = ["lar:///ha.ka.ba/lares/api/pono/meme"]
+l-space    = "adjacent"
+mana       = 18
+manao      = 17
+manaoio    = 17
+register   = "Synthesis-Canon"
+role       = "session handoff crystal — 2026-05-03 (session 10) — M25 Loop 2 (partial): node peer oracle tiddler alignment; MemeSyncAdaptor 15 tests; CompositeStore.addProjection 4 tests; 172 passing (was 153)"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SESSION"
 ```
 
 <<^ &#x0002; >>

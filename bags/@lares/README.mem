@@ -1,4 +1,4 @@
-<<~ ? -> lar:///README >>
+<<^ &#x0001; ? -> lar:///README >>
 ```toml iam
 uri-path     = "README"
 file-path = "bags/@lares/README.mem"
@@ -11,6 +11,8 @@ role         = "identity frame and infrastructure map for the Lares node"
 cacheable    = true
 retain       = true
 ```
+
+<<^ &#x0002; >>
 
 <<~ ahu #identity-frame >>
 
@@ -128,3 +130,7 @@ lares/
 <<~/ahu >>
 
 <<~ ? -> lar:///README >>
+
+<<^ &#x0003; >>
+
+<<^ &#x0004; -> ? >>

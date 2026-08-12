@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ &#x0002; >>
+
 <<~ ahu #head >>
 
 ! Structure-Shaped Convention
