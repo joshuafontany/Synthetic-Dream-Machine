@@ -44,6 +44,7 @@ import { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence
 export { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
 import { parseTaploFields } from "./toml-ast.js";
 import { shoreDiagnostic } from "./meme-ast/diagnostics.js";
+import { classifyPostamble } from "./block-check.js";
 import type { MemeDiagnostic } from "./meme-ast/diagnostics.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
 import { parseMemeText } from "./meme-ast/parse.js";
@@ -120,11 +121,29 @@ export function memeticWikitextDeserializer(
   // the closing `>>` (which needs to skip past the embedded `;` and any
   // whitespace), search for the SOH-shape match position then walk
   // forward to the next `>>`.
-  const etxOpenRe = /<<\^(?:\s*⊙)?\s*&#x000[34];/g;
+  // ETX AND EOT ARE DIFFERENT GLYPHS AND MUST BE SCANNED APART. One pattern for `&#x000[34]` takes
+  // the LAST match, which is the EOT — so `lastEtxEnd` landed past the end of transmission and the
+  // slot between ETX and EOT was never looked at. Content stranded there stayed inside the meme text
+  // and disappeared in the render, silently: that is how two `#edges` blocks were lost.
+  const closeEnd = (m: { index: number; 0: string }): number => {
+    const idx = text.indexOf(">>", m.index + m[0].length);
+    return idx >= 0 ? idx + 2 : -1;
+  };
   let lastEtxEnd = -1;
-  for (const etxMatch of maskedExecAll(text, etxOpenRe)) {
-    const closeIdx = text.indexOf(">>", etxMatch.index + etxMatch[0].length);
-    if (closeIdx >= 0) lastEtxEnd = closeIdx + 2;
+  for (const etxMatch of maskedExecAll(text, /<<[~^](?:\s*\S+)?\s*&#x0003;/g)) {
+    const end = closeEnd(etxMatch);
+    if (end >= 0) lastEtxEnd = end;
+  }
+  let eotStart = -1;
+  for (const eotMatch of maskedExecAll(text, /<<[~^](?:\s*\S+)?\s*&#x0004;/g)) {
+    if (lastEtxEnd >= 0 && eotMatch.index >= lastEtxEnd) { eotStart = eotMatch.index; break; }
+  }
+  // THE SLOT: what the carrier wrote between end-of-text and end-of-transmission.
+  const slotText = (lastEtxEnd >= 0 && eotStart > lastEtxEnd) ? text.slice(lastEtxEnd, eotStart) : "";
+  // Past EOT there is only the frame's own trailing newline; keep the old reading for that tail.
+  if (eotStart >= 0) {
+    const eotEnd = text.indexOf(">>", eotStart);
+    if (eotEnd >= 0) lastEtxEnd = eotEnd + 2;
   }
   const postamble = (closes.length > 0 && lastEtxEnd >= 0 && lastEtxEnd < text.length)
     ? text.slice(lastEtxEnd)
@@ -155,10 +174,24 @@ export function memeticWikitextDeserializer(
     if (nsM?.[2] === "0011" && tiddlers.length > 0) {
       tiddlers[0]!["carrier-soh"] = "0011";
     }
-    // Only store postamble when it has real content (not just trailing whitespace).
-    // A whitespace-only postamble (e.g. a single trailing \n after EOT) would be
-    // rendered before the ETX marker by the template, producing an extra blank line.
-    if (postamble.trim().length > 0 && tiddlers.length > 0 && ev === closes[closes.length - 1]) {
+    // WHAT MAY STAND BETWEEN ETX AND EOT — the BCC, and nothing else.
+    //
+    // ETX ends the text; the slot after it carries the block check, never payload (block-check.ts
+    // holds the why). A carrier that wrote prose there lost it: the render never reproduced it, and
+    // nothing said so. Two `#edges` blocks vanished that way before anyone diffed a round-trip.
+    //
+    // So the slot gets classified rather than stored blind. A block check survives as the trailer it
+    // is; foreign content raises an ERROR the gate refuses on, which is the NAK the original protocol
+    // would have answered with.
+    if ((postamble.trim().length > 0 || slotText.trim().length > 0)
+        && tiddlers.length > 0 && ev === closes[closes.length - 1]) {
+      const slot = classifyPostamble(slotText);
+      if (slot.kind === "bcc") {
+        tiddlers[0]!["block-check"] = slot.digest;
+      } else if (slot.kind === "foreign") {
+        tiddlers[0]!["postamble-foreign"] = String(slot.lines);
+      }
+      // The raw slot rides on regardless, so a refusal can still show the operator their own bytes.
       tiddlers[0]!["postamble"] = postamble;
     }
     result.push(...tiddlers);
@@ -835,6 +868,18 @@ export function deserializeCarrier(
   const records = memeticWikitextDeserializer(text, fields);
   const diagnostics: MemeDiagnostic[] = [];
   for (const record of records) {
+    // CONTENT PAST ETX REFUSES — the NAK the block check was always for. The text ends at ETX and the
+    // slot below it carries the check alone, so anything else there reaches no reader. It used to
+    // vanish in the render instead, which is how two `#edges` blocks were lost without a word.
+    const stranded = record["postamble-foreign"];
+    if (stranded !== undefined) {
+      diagnostics.push({
+        from: 0, to: text.length, severity: "error",
+        source: "memetic-wikitext", code: "postamble-content",
+        message: `${stranded} line(s) stand between ETX and EOT. The text ends at ETX; that slot `
+               + "carries the block check alone. Move the content above the `<<^ &#x0003; >>` close.",
+      });
+    }
     if (!String(record.title ?? "").includes("/parse-warning/")) continue;
     for (const line of String(record.text ?? "").split("\n")) {
       if (line.trim()) diagnostics.push(shoreDiagnostic(line.trim(), text.length));
