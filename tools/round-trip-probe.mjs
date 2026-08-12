@@ -23,7 +23,12 @@ for (const f of files) {
     const { records, diagnostics } = memeticIngestOps.deserialize(uri, disk);
     const canonical = memeticIngestOps.render(uri, records);
     out.push({ f, uri, same: canonical === disk, canonical, disk,
-               grade: memeticIngestOps.grade(diagnostics) });
+               grade: memeticIngestOps.grade(diagnostics),
+               // Content stranded past ETX — the gate refuses on this; the witness names the file.
+               strandedPastEtx: diagnostics.filter((d) => d.code === "postamble-content").length,
+               // Residency stamped into the carrier. `uri-path` is what a meme IS; a bag is where it
+               // LIVES, and a carrier that names its bag lies the moment residency moves.
+               residencyStamp: /^origin-bag\s*=/m.test(disk) });
   } catch (e) { out.push({ f, uri, error: String(e).slice(0, 120) }); }
 }
 writeFileSync(process.env.OUT, JSON.stringify(out));

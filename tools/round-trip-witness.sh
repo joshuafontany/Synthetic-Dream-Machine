@@ -45,9 +45,27 @@ for x in data:
             if l[:1] in "+-" and l[:3] not in ("---", "+++"))
     drift.append((n, x["f"]))
 
+# ── CONTENT PAST ETX ────────────────────────────────────────────────────────────────────────────
+# The text ends at ETX; the slot below carries the block check alone. The parser refuses this now, so
+# reaching the witness means a carrier was authored that way and never ingested — worth naming before
+# someone wonders why their edit never landed.
+stranded = [(x["f"], x["strandedPastEtx"]) for x in data if x.get("strandedPastEtx")]
+
+# ── RESIDENCY STAMPED INTO CANON ────────────────────────────────────────────────────────────────
+# `origin-bag` is a READ-PATH annotation the nalu engine writes onto records. In a carrier it fuses
+# identity with residency, and a meme re-projected to another bag then carries its old home.
+stamped = [x["f"] for x in data if x.get("residencyStamp")]
+
 total = len(data)
-print(f"[round-trip] {total} carriers parsed · {len(drift)} whose BODY does not render back")
-if drift:
+print(f"[round-trip] {total} carriers parsed · {len(drift)} whose BODY does not render back · "
+      f"{len(stranded)} with content past ETX · {len(stamped)} carrying a residency stamp")
+if stranded:
+    print("  content stranded between ETX and EOT (reaches no reader):")
+    for f, n in stranded: print(f"    {n:5d} diag  {f}")
+if stamped:
+    print("  `origin-bag` written into the carrier (residency belongs on the record):")
+    for f in stamped: print(f"           {f}")
+if drift or stranded or stamped:
     for n, f in sorted(drift, reverse=True):
         print(f"    {n:5d} lines  {f}")
     print("  Repair the CARRIER, never the renderer's output — adopting a render can encode a")
