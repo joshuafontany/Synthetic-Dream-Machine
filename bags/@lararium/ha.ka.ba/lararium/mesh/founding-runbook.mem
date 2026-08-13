@@ -153,8 +153,8 @@ because naming a missing tool serves the operator and installing one behind them
 reads fine; for a crossroads a family depends on, ''the at-rest seal converts a power cut into an outage''
 — and the seal exists to protect a stolen disk, never to gate an ordinary restart.
 
-The option space and its costs live at the gate itself (`archive-passphrase#assertSealReady`), so a later
-hand meets it where the refusal happens rather than in a document beside it. ''PARTLY BUILT NOW'': a hearth
+The option space and its costs live beside the reading itself (`archive-passphrase#archiveOpens`), so a
+later hand meets it where the decision happens rather than in a document beside it. ''BUILT NOW'': a hearth
 whose archive holds shut STANDS at the waking floor as a Herm — faceless by class, carrying, serving the
 public shelf, every sovereign act closed — rather than refusing to boot (`standAs`, and the boot says so in
 plain words). ''What remains UNBUILT is the unattended raise'', and one correction rides with it: the raise
@@ -804,8 +804,16 @@ lares vault status                                  # confirm the seal state
 
 !!! ★ WHAT A SEAL COMMITS THE OPERATOR TO, from this moment on ★
 
-''A seal writes `sealExpected` into the CONFIG, and the clear does not remove it.'' Every node boot from
-that moment calls `assertSealReady` and refuses without `LARES_ARCHIVE_PASSPHRASE` in the environment.
+''A seal writes `sealExpected` into the CONFIG, and the clear does not remove it.'' From that moment every
+boot reads whether the archive OPENS, and a boot that cannot open it ''does not refuse — it stands at the
+WAKING FLOOR''. The vessel comes up as a crossroads: it meshes, carries, routes, serves the public shelf,
+and holds every sovereign act closed until a key arrives. Nothing degrades, because the floor is a named
+standing rather than a weakened one — a vessel that cannot open simply never rose.
+
+''Which changes what a missing passphrase LOOKS like, and that matters more than the mechanism.'' An
+operator expecting a refusal reads a running-but-faceless vessel as a failure and goes hunting one. The
+honest reading: ''the hearth did not light''. The cure rides in the boot's own words — set
+`LARES_ARCHIVE_PASSPHRASE` and stand it again.
 
 ''The rite itself no longer crosses that gate.'' ⑤ plants content into the vessel already standing from ②
 and restarts nothing, so a founding that seals here by TYPING the passphrase — the honest path, the one
@@ -888,8 +896,10 @@ earlier and re-bakes a genesis nothing has touched. Only the seeding was ever ne
 ''standing'' vessel stays a real motion — `lares vessel flow rebirth` — and simply not a founding step.
 
 The trap it removes: a seal writes `sealExpected` into the config, and the clear does not remove it, so
-every later daemon boot calls `assertSealReady` and wants the passphrase in its environment. A movement
-that RESTARTS the daemon crosses that gate mid-rite. A movement that never restarts never crosses it.
+every later daemon boot reads whether the archive opens, and one that cannot stands at the FLOOR instead of
+lighting the hearth. A movement that RESTARTS the daemon meets that reading mid-rite — and a founding would
+reach LIVE as a crossroads rather than a hearth, which reads like a failure and is not one. A movement that
+never restarts never meets it.
 
 ''AND THE RITE ENDS HERE, at the handover.'' `hooks resume` re-arms capture, which starts the sensorium's
 clock — and the sensorium's lifecycle rides ''its own rite'', deliberately not this one
