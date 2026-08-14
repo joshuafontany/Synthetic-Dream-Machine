@@ -102,9 +102,17 @@ performing them in red — //rubrica//, red ochre, the practice standing in litu
 blank space left for a rubricator's hand. The two channels never compete for the same reading, because a
 celebrant already knows which one to say aloud.
 
-The `<<` `>>` family lifts the same division into a context stream. The BLACK carries content — what the
-turn says. The RED carries performative instruction — what the turn DOES, how it stands, which stance it
-holds, what it vows. A sigil steers; it never asserts. Colour names the division; the bracket enacts it.
+The `<<` `>>` family lifts the same division into a context stream. The BLACK carries content — what the turn SAYS. The RED carries
+performative instruction — what the turn DOES.
+
+''The red acts in two domains, and both are acting.'' In a context stream a sigil ''steers'': it names
+the stance, sets the gauge, vows the confidence, marks the phase. In a live wiki the same sigil ''calls'':
+it renders, transcludes, invokes a procedure, opens a widget. Steering and calling look different and
+divide the same way — each one DOES something, and neither one SAYS anything.
+
+''A sigil steers and calls; it never asserts.'' An assertion belongs to the black, where it can be
+weighed, doubted and answered. A rubric cannot be argued with; it can only be performed or ignored —
+which is exactly why the instruction channel and the claim channel must never share a colour.
 
 Memetic-wikitext SHALL read as a ''superset of TW5 wikitext'': every valid TW5 wikitext document reads as valid memetic-wikitext. A processor reads bare `<<name>>` as an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
 
@@ -452,6 +460,12 @@ reads as memetic-wikitext built on TW5 wikitext. The superset relation this spec
 `<!DOCTYPE root PUBLIC "fpi" "system">` to keyword plus root name; this keeps that collapse and lets
 the `lar:` URI stand where the system identifier stands. Two standards, both recognisable on sight,
 neither invented here.
+
+''The root name carries no `text/`, and that division is the point.'' A DOCTYPE names a DOCUMENT TYPE;
+`<!DOCTYPE html>` writes `html`, never `text/html`. The media type has its own home and always has —
+the tiddler's `type:` field, and the `type` line in every carrier's iam block. One name per relation:
+the DOCTYPE says WHICH GRAMMAR READS THIS, the `type` field says WHAT THIS IS TO A TRANSPORT. Folding
+the media type into the DOCTYPE slot would put both under one name for no gain.
 
 ''The media type follows the same suffix'' (#media-type): `text/x-memetic-wikitext+tiddlywiki`. The
 `x-` marks the subtype unregistered with IANA and drops on registration; the suffix does not — it
