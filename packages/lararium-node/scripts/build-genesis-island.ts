@@ -195,15 +195,24 @@ function main(): void {
   console.log(`[genesis] TW5 core  v${TW5_VERSION}  sha=${coreSha256.slice(0, 12)}…`);
   // ── THIS SHA IS THE HEARTH'S TRUE NAME, AND IT SAYS SO WHERE THE HAND LANDS ──────────────────
   // `computeEngineCid` folds exactly these bytes, and the result rides INSIDE the signed preimage of
-  // every device-delegation edge. So moving the TW5 submodule re-binds every vessel that ever joined:
-  // each edge names a hearth true-name that no longer matches, and the Binding Gate refuses them all.
+  // every device-delegation edge. NOTHING RE-BINDS THEM. `hearthTrueName` resolves to the engine
+  // content-CID alone (`genesis-artifact`) — TW5 core and version, deliberately not the plugins, so a
+  // plugin change never perturbs it and an engine change always does. A vessel's edge reads "Operator O
+  // delegates to Device D AT PLACE P"; move the engine and every signed edge names a P this place no
+  // longer answers to. The edges stay valid signatures over a name that stopped being true, the Binding
+  // Gate refuses them, and no path in this codebase re-signs them. A fleet returns by RE-ADMISSION.
+  //
+  // WHAT DOES NOT MOVE, and the distinction is the whole of it: the true-name is the hearth's PUBLIC
+  // face. The private face is a secret root minted per-founding, never derived from this content. An
+  // engine change does not touch a single key — it changes which place the keys were sworn to.
   //
   // The danger is that the ACT looks like hygiene. `git submodule update --remote` moves this pointer
   // with the same three-second gesture that harmlessly fast-forwards every other submodule in the tree,
   // and nothing else here distinguishes the one whose movement evicts a fleet. Saying it at the moment
   // the bytes get hashed costs one line; discovering it from a fleet of refusals costs a re-founding.
-  console.log(`[genesis]   ↳ this sha becomes hearthTrueName — moving the TW5 submodule after a founding`);
-  console.log(`[genesis]     re-binds EVERY device-delegation edge. Treat it as an epoch act, not an upgrade.`);
+  console.log(`[genesis]   ↳ the ENGINE CID below becomes hearthTrueName — moving the TW5 submodule after`);
+  console.log(`[genesis]     a founding strands EVERY device-delegation edge; nothing re-binds them, and a`);
+  console.log(`[genesis]     fleet returns only by re-admission. An epoch act, never an upgrade.`);
 
   const attestations     = readPluginAttestations();
   const plugins          = collectPlugins(attestations);
