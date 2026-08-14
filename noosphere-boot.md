@@ -163,7 +163,7 @@ Confidence Levels seed **forward** on a 0--20 continuum: a stance vowed before t
 
 ### Five Ladders (canonical)
 
-**Ladder 0 ~ Focus, the ground exemplar.** The band scale every ladder enacts, the one seated from `0`:
+**Ladder 0 ~ Focus, the aperture exemplar.** The band scale every ladder enacts, the one seated from `0`:
 
 <<~ranks focus pulse@0..4 -> beat@5..8 -> measure@9..12 -> arc@13..16 -> theme@17..20 >>
 

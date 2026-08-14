@@ -1,27 +1,29 @@
-// seed-parity — transpose the markdown seed into memetic-wikitext and diff it against the carrier.
+// seed-parity — transpose the carrier seed into markdown and diff it against the markdown seed.
 //
 // The seed stands in two files and one dialect apart:
 //
-//   noosphere-boot.md                                   the file the harness loads
-//   bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem   the carrier the corpus holds
+//   bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem   FIRST projection — the corpus carrier
+//   noosphere-boot.md                                   SECOND projection — what the harness loads
 //
-// Their bodies say the same thing in two markups, so no byte comparison can check them and every
-// hand that edits one must remember the other. A forgotten twin drifts SILENTLY: both files parse,
-// both round-trip, both read correct, and the house holds two boot seeds that no longer agree.
+// Neither file holds the source. The source sits with the operator; the carrier is the first thing
+// it becomes, and the markdown renders from there for a harness that reads no wikitext. So the
+// transpose runs CARRIER -> MARKDOWN, and a divergence names the markdown as the one that drifted.
 //
-// This transposes the markdown by rule — headings, emphasis, list markers — and diffs the result
-// against the carrier body. A divergence names a line, never a byte count, so the reading survives
-// an edit that changes length on both sides.
+// Their bodies say one thing in two markups, so no byte comparison can check them and every hand
+// that edits one must remember the other. A forgotten twin drifts SILENTLY: both files parse, both
+// round-trip, both read correct, and the house holds two boot seeds that no longer agree — the one
+// drift no other instrument here can see, because each of them compares a file to its own reflection.
 //
-// THE TRANSPOSE RUNS ONE WAY ON PURPOSE. Markdown carries less structure than wikitext, so
-// md → wikitext is total while the inverse guesses. The `.md` reads as the authority for CONTENT;
-// the carrier reads as the authority for how the corpus stores it.
+// ONE DIRECTION CARRIES MORE THAN THE OTHER. Wikitext marks an ordered list with a bare `#`, which
+// markdown spends on headings; markdown numbers each item, which wikitext leaves implicit. So this
+// transposer counts list position and re-numbers, and reads `!` depth for headings — both total.
+// Going the other way would have to guess where a `#` meant heading and where it meant item.
 import { readFileSync } from "fs";
 import { join } from "path";
 
 const REPO = process.env["REPO"] ?? process.cwd();
-const MD   = join(REPO, "noosphere-boot.md");
 const MEM  = join(REPO, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const MD   = join(REPO, "noosphere-boot.md");
 
 /** Both bodies open at the SOH — everything above it belongs to the file's own frame. */
 const SOH = "<<^ ॐ ँ&#x0001;";
@@ -32,23 +34,51 @@ function body(text, path) {
   return text.slice(i);
 }
 
-/** Markdown → memetic-wikitext, by rule. Fenced blocks pass through untouched. */
+/** Memetic-wikitext → markdown, by rule. Fenced blocks pass through untouched. */
 function transpose(text) {
   let fenced = false;
+  let ordinal = 0;
   return text.split("\n").map((line) => {
     if (line.startsWith("```")) { fenced = !fenced; return line; }
     if (fenced) return line;
-    return line
-      .replace(/^(#{1,5})\s+/, (_, h) => "!".repeat(h.length) + " ")
-      .replace(/^(\s*)-\s+/, (_, s) => `${s}* `)
-      .replace(/^(\s*)\d+\.\s+/, (_, s) => `${s}# `)
-      .replace(/\*\*(.+?)\*\*/g, "''$1''")
-      .replace(/(?<![\w*])\*(?!\s)([^*\n]+?)(?<!\s)\*(?![\w*])/g, "//$1//");
+    const ordered = /^(\s*)#\s+(.*)$/.exec(line);
+    if (ordered) {
+      ordinal += 1;
+      return `${ordered[1]}${ordinal}. ${inline(ordered[2] ?? "")}`;
+    }
+    ordinal = 0;                                     // any other line closes the run
+    return inline(
+      line
+        .replace(/^(!{1,5})\s+/, (_, h) => "#".repeat(h.length) + " ")
+        .replace(/^(\s*)\*\s+/, (_, s) => `${s}- `),
+    );
   }).join("\n");
 }
 
-const expected = transpose(body(readFileSync(MD, "utf8"), MD)).split("\n");
-const actual   = body(readFileSync(MEM, "utf8"), MEM).split("\n");
+/**
+ * Emphasis, both marks, applied inside a line whichever block form carried it.
+ *
+ * CODE SPANS STAY SEALED. A `lar:` URI inside backticks carries a slash pair that reads as an italic
+ * open and an italic close, so an emphasis pass walking the whole line eats the middle of the scheme
+ * and reports the twin as drifted. Split on the backtick, transform the odd segments, and every span
+ * the author fenced survives verbatim.
+ */
+function inline(s) {
+  // MASK, TRANSFORM, RESTORE — never split. An emphasis span may WRAP a code span
+  // (`''Tag format: `X`''`), so cutting the line at each backtick orphans the closing mark and the
+  // whole span survives untransformed. Masking leaves the line whole for the emphasis pass while the
+  // fenced text stays out of its reach.
+  const spans = [];
+  const masked = s.replace(/`[^`]*`/g, (m) => {
+    spans.push(m);
+    return `${spans.length - 1}`;
+  });
+  const emphasised = masked.replace(/''(.+?)''/g, "**$1**").replace(/\/\/(.+?)\/\//g, "*$1*");
+  return emphasised.replace(/(\d+)/g, (_, i) => spans[Number(i)] ?? "");
+}
+
+const expected = transpose(body(readFileSync(MEM, "utf8"), MEM)).split("\n");
+const actual   = body(readFileSync(MD, "utf8"), MD).split("\n");
 
 const drift = [];
 for (let i = 0; i < Math.max(expected.length, actual.length); i++) {
@@ -56,14 +86,14 @@ for (let i = 0; i < Math.max(expected.length, actual.length); i++) {
 }
 
 if (drift.length === 0) {
-  console.log(`[seed-parity] both seeds carry one body, ${actual.length} lines, two dialects`);
+  console.log(`[seed-parity] the markdown seed reads the carrier, transposed — ${actual.length} lines`);
   process.exit(0);
 }
-console.log(`[seed-parity] ${drift.length} line(s) diverge between the seeds`);
+console.log(`[seed-parity] ${drift.length} line(s) where the markdown left the carrier`);
 for (const [n, exp, act] of drift.slice(0, 20)) {
   console.log(`  line ${n}`);
-  console.log(`    md  -> ${(exp ?? "<absent>").slice(0, 150)}`);
-  console.log(`    mem -> ${(act ?? "<absent>").slice(0, 150)}`);
+  console.log(`    carrier -> ${(exp ?? "<absent>").slice(0, 150)}`);
+  console.log(`    md      -> ${(act ?? "<absent>").slice(0, 150)}`);
 }
 if (drift.length > 20) console.log(`  … and ${drift.length - 20} more`);
 process.exit(1);
