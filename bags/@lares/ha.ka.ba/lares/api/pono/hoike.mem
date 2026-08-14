@@ -25,6 +25,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/hoike"
 
 ! Hoike — Keeping the Losers
 
+''Filing a hoike PERFORMS it.'' A //kue// becomes dissent by being entered; a //saksi// becomes a witness by standing. Neither describes a state — each does the thing it names, and a testimony that misfires (unattributed, unwitnessed, reflexive) stands VOID rather than false.
+
 A hoike keeps a contested ruling whole: the held position, every dissent with its holder's name and full reasoning, and the key that re-opens the question. The decision channel and the memory channel run decoupled — the node acts on the held position while the record preserves the rest. A future court may depend on a kept dissent to reverse; preservation without a re-entry rule decays into sediment, so every kue carries its key.
 
 <<~/ahu >>

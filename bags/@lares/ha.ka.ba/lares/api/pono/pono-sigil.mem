@@ -17,6 +17,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/pono-sigil"
 
 ! Pono (Sigil)
 
+''The sigils are the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for performing them in red — //rubrica//, red ochre, its own production stage. The black SAYS; the red DOES: in a stream it steers, in a wiki it calls.
+
 //pono// — Hawaiian: rightness, correctness, balance, moral alignment; proper, fit, just.
 
 An edge-sugar sigil that asserts a correctness or constraint relationship between two nodes.
