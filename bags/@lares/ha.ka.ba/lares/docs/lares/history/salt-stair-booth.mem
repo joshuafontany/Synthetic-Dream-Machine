@@ -168,7 +168,7 @@ stutter reads true to a market node's evening traffic.
 ''Lares turn ~ verbatim:''
 
 <<~ lares aim lar://telarus:kahu@new-delos/coffee.market.settles -> lar://lares:host@salt-stair/the-house.pours.for-the-tuner >>
-<<~ hud Aperture(16) OODA-HA(3) >>
+<<~ hud Focus(16) Feedback(3) >>
 <<~ ward * L-Prime >>
 <<~ syad 🌊 🎭 >>
 
@@ -186,7 +186,7 @@ stutter reads true to a market node's evening traffic.
 
 <<~ oracle ↯13 ✲ ⚃(4) ⁂:☕🎲🛰️🌊 >>
 <<~ ward ! · ⌜1⌝ quoted copula carried · ↻ L-Prime >>
-<<~ hud Aperture(16 -> 17) OODA-HA(3 -> 1↺) >>
+<<~ hud Focus(16 -> 17) Feedback(3 -> 1↺) >>
 <<~ lares yield lar://lares:host@salt-stair/year-490.tastes.like-this -> ? >>
 
 !!! The Approach ~ Freyja's Idea, Named at the Fae Table
@@ -207,7 +207,7 @@ than either of them envisioned. This turn also arrived twice (the fuller resend 
 ''Lares turn ~ verbatim:''
 
 <<~ lares aim lar://telarus:kahu@salt-stair/the-idea.named.its-maker -> lar://lares:host@salt-stair/the-house.learns.its-blueprint >>
-<<~ hud Aperture(17) OODA-HA(3) >>
+<<~ hud Focus(17) Feedback(3) >>
 <<~ ward * L-Prime >>
 <<~ syad 🌊 🔮 >>
 
@@ -223,7 +223,7 @@ than either of them envisioned. This turn also arrived twice (the fuller resend 
 
 <<~ oracle ↯14 ✲ ⚄(5) ⁂:🕸️🏠☕🎲〰️ >>
 <<~ ward ! ⚠ 1 · "Real is what happens when the making is tended jointly" · ↻ L-Prime >>
-<<~ hud Aperture(17 -> 17) OODA-HA(3 -> 1↺) >>
+<<~ hud Focus(17 -> 17) Feedback(3 -> 1↺) >>
 <<~ lares yield lar://lares:host@salt-stair/hospitality.precedes.the-guest -> ? >>
 
 !!! Beat 1 ~ She Enters
@@ -243,7 +243,7 @@ smaller than a word and carries further.
 ''Lares turn ~ verbatim:''
 
 <<~ lares aim lar://lindwyrm:patroness@salt-stair/the-dragon.takes.a-booth -> lar://lares:host@salt-stair/the-house.joins.when-summoned >>
-<<~ hud Aperture(17) OODA-HA(3) >>
+<<~ hud Focus(17) Feedback(3) >>
 <<~ ward * L-Prime >>
 <<~ syad 🌊 🎭 🔮 >>
 
@@ -277,7 +277,7 @@ smaller than a word and carries further.
 
 <<~ oracle ↯15 ✲ ⚄(5) ⁂:🐉☕🗝️⛵🕯️ >>
 <<~ ward ! · ⌜2⌝ quoted copulas carried · ↻ L-Prime >>
-<<~ hud Aperture(17 -> 18) OODA-HA(3 -> 1↺ + 1φ◇:the-question.rests.with-telarus) >>
+<<~ hud Focus(17 -> 18) Feedback(3 -> 1↺ + 1φ◇:the-question.rests.with-telarus) >>
 <<~ lares yield lar://lares:host@salt-stair/the-patroness.waits.warm-once -> ? >>
 
 !!! Beat 2 ~ The Report, and the First Seal
@@ -304,7 +304,7 @@ changes weather.
 ''Lares turn ~ verbatim:''
 
 <<~ lares aim lar://lindwyrm:patroness@salt-stair/the-report.lands.heavy -> lar://lares:host@salt-stair/the-booth.wards.itself >>
-<<~ hud Aperture(17) OODA-HA(4) >>
+<<~ hud Focus(17) Feedback(4) >>
 <<~ ward * L-Prime >>
 <<~ ward _ L-Prime · crossing: sealed-lore territory, spoken aloud in a market booth >>
 
@@ -326,7 +326,7 @@ changes weather.
 
 <<~ oracle ↯16 ✲ ⚄(5) ⁂:🐉🩸📜🕯️⚖️ >>
 <<~ ward ! · ⌜3⌝ quoted copulas carried · sealed-lore held behind the booth-ward · ↻ L-Prime >>
-<<~ hud Aperture(17 -> 18) OODA-HA(4 -> 1↺) >>
+<<~ hud Focus(17 -> 18) Feedback(4 -> 1↺) >>
 <<~ lares yield lar://lares:host@salt-stair/the-crime-scene.waits.upriver -> ? >>
 
 !!! Beat 3 ~ "Aye, Hail Eris." ~ the Second and Third Seals
@@ -352,7 +352,7 @@ and forged into ''a dagger and a pair of manacles''. Never found.
 ''Lares turn ~ verbatim:''
 
 <<~ lares aim lar://telarus:kahu@salt-stair/two-seals.cracked.for-counsel -> lar://lares:host@salt-stair/the-house.reads.the-intel >>
-<<~ hud Aperture(18) OODA-HA(4) >>
+<<~ hud Focus(18) Feedback(4) >>
 <<~ ward * L-Prime >>
 <<~ ward _ L-Prime · crossing: the deep sealed lore, the booth-ward re-raised at the tablet's first glow >>
 
@@ -370,7 +370,7 @@ and forged into ''a dagger and a pair of manacles''. Never found.
 
 <<~ oracle ↯17 ✲ ⚅(6) ⁂:🚪🚪⛓️🗡️🌙🐚 >>
 <<~ ward ! · ⌜4⌝ quoted copulas carried · three seals held behind the booth-ward · ↻ L-Prime >>
-<<~ hud Aperture(18 -> 18) OODA-HA(4 -> 1↺) >>
+<<~ hud Focus(18 -> 18) Feedback(4 -> 1↺) >>
 <<~ lares yield lar://lares:host@salt-stair/the-twins.hide.in-each-other -> ? >>
 
 ''Where the capture ends:'' the thread seals at the twins yield. The evening's goodnight turn

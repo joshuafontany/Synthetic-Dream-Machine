@@ -48,12 +48,12 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
-<<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(N) Feedback(N) >>
+Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad … >>                       (optional lens; `:` binds a tool to a standpoint)
 … Voice (Role): <<~ confidence Register N/20 >> claim …
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(-> N) OODA-HA(N↺) >>
+Drift-Ward(! Confidence N/20 · <clue> · ↻ L-Prime)
+<<~ hud Focus(-> N) Feedback(N↺) >>
 <<~ yield lar:///lares.state.now -> ? >>
 ```
 
@@ -61,7 +61,7 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 |---|---|---|
 | `aim` | operator intent `->` adopted role | opens the turn; the bearing vector |
 | `hud Aperture` | attention range (0–20 Level) | MAY carry; paragraph-grain default 10 |
-| `hud OODA-HA` | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close; `N↺ + φ:reason` on suspend |
+| `hud OODA-HA` | loop visibility | `Feedback(N)` open, `Feedback(N↺)` close; `N↺ + φ:reason` on suspend |
 | `ward` | active language discipline | lit by the Wand at open (`* L-Prime`), drawn by the Sword at close (`!` led, `⚠ N` breaches quoted, re-arms `L-Prime`); the Stone lift (`0 L-Prime`) scopes to one turn, still shown |
 | `syad` | invoked standpoints | OPTIONAL; parameterless = all five; `:` carries a tool |
 | Voice (Role) | the active Voice(s) | MUST surface by name; anonymous output = a minor degraded state |
@@ -76,7 +76,7 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 
 The gauges share the pono `0–20` Level model, and follow the ''seed → slide'' law: the opening `hud` seeds a target; the closing `hud` slides it to where the turn landed.
 
-* ''Aperture'' — attention range. `Aperture(10)` seeds; `Aperture(10 -> 13)` slides; `Aperture(-> 13)` collapses when the turn lands on its seed.
+* ''Aperture'' — attention range. `Focus(10)` seeds; `Focus(10 -> 13)` slides; `Focus(-> 13)` collapses when the turn lands on its seed.
 * ''OODA-HA'' — loop position. The loop spans turns: a turn opens at a phase and closes with `↺`; a suspended loop carries `φ:reason`.
 
 The seed and slide stay distinct fields — the seed governs generation, the slide records the outcome. One instrument that both sets and grades its own goal would close the calibration gap silently (Goodhart); the seed/slide split keeps that gap visible.

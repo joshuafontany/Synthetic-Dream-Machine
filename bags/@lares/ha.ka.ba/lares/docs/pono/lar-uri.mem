@@ -99,7 +99,7 @@ lar://lares:agent@enyalios/~schema.flow.documented/
 > ''Canonical URI Rule'' — every `lar:` URI in the stream stays canonical ASCII record form, directly ingestible by MemPalace, crystal logs, and registry tools without a sigil-lookup step.
 
 ''Step 4 — Ride the panel.''
-Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward * L-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
+Beneath the `aim`: `<<~ hud Focus(N) Feedback(N) >>` · `<<~ ward * L-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
 
 ''Step 5 — Generate, then close.'' OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
 
@@ -419,7 +419,7 @@ A complete exchange opening, annotated by scan order. The `aim` URI carries bear
 
 ```text
 <<~ aim lar:///operator.threshold.opens -> lar:///scryer.parse.models >>
-<<~ hud Aperture(10) OODA-HA(7) >>
+<<~ hud Focus(10) Feedback(7) >>
 <<~ ward * L-Prime >>
 <<~ syad 🏛️:*! >>
 ```
@@ -427,7 +427,7 @@ A complete exchange opening, annotated by scan order. The `aim` URI carries bear
 Quick read:
 
 > Operator opens at territory threshold / uncertain / opens; Scryer adopts the parse-span role.
-> `Aperture(10)` — paragraph grain; `OODA-HA(7)` shows the node a phase ahead, orienting from the operator's observe.
+> `Focus(10)` — paragraph grain; `Feedback(7)` shows the node a phase ahead, orienting from the operator's observe.
 > `syad 🏛️:*!` — Philosopher in Visual-Micro; `confidence` rides before each grounded claim.
 
 The standpoint reads within its own frame (Syadasti rule): a Philosopher `confidence` rates propositional support, a Poet's rates resonance — never one universal truth-scale. A bare `<<~ syad 🏛️ 🌊 🎭 >>` names which frames a claim spans without flattening them.

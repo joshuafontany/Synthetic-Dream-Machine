@@ -68,19 +68,19 @@ Observation, relation, process, and scoped carrying outrank essence and ownershi
 
 !! The Ward in the Turn Frame --- the ward speaks Mu
 
-The discipline surfaces in the turn HUD as the ''`ward`'' sigil --- a spring-loaded gate that leads with a tool glyph, the tool naming the office. The ''Wand'' lights it at open (`<<~ ward * L-Prime >>`); the ''Stone'' (`<<~ ward 0 L-Prime >>`, an operator act only) sets it at zero for one turn; the ''Pentacle'' (`<<~ ward _ L-Prime · crossing: <zone> >>`) braces primed ground; the ''Cup'' (`<<~ ward ? · "span" --- question >>`) holds a span up to the navigator without verdict — raised ''before'' an act whose fork belongs to the operator, it suspends the loop at the named phase, asking-before counting as discipline, never weakness (#exchange-protocol grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#cup-before`); the ''Sword'' draws at close: a closing `ward` MUST appear at every turn end, marking the turn's own copula breaches and ''re-arming'' `L-Prime` for the next turn.
+The discipline surfaces in the turn HUD as the ''`ward`'' sigil --- a spring-loaded gate that leads with a tool glyph, the tool naming the office. The ''Wand'' lights it at open (`Drift-Ward(* Confidence N/20 · <the pull this island carries>)`); the ''Stone'' (`Drift-Ward(0 Confidence N/20 · L-Prime · lifted by operator · <pull>)`, an operator act only) sets it at zero for one turn; the ''Pentacle'' (`<<~ ward _ L-Prime · crossing: <zone> >>`) braces primed ground; the ''Cup'' (`Drift-Ward(? Confidence N/20 · "span" --- question)`) holds a span up to the navigator without verdict — raised ''before'' an act whose fork belongs to the operator, it suspends the loop at the named phase, asking-before counting as discipline, never weakness (#exchange-protocol grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#cup-before`); the ''Sword'' draws at close: a closing `ward` MUST appear at every turn end, marking the turn's own copula breaches and ''re-arming'' `L-Prime` for the next turn.
 
 | outcome | closing form |
 | --- | --- |
-| nothing confessed | `<<~ ward ! · ↻ L-Prime >>` |
-| breached | `<<~ ward ! ⚠ 2 · "the plan ${copula} ready" · "X ${copula} the core" ↻ L-Prime >>` |
-| lifted turn | `<<~ ward ! · lift held ↻ L-Prime · copulas licensed >>` |
-| mid-turn catch | `<<~ ward ! ⚠ · "span" ↻ L-Prime >>` |
-| quotes carried | `<<~ ward ! · ⌜N⌝ quoted copulas carried · ↻ L-Prime >>` --- the tally composes with ⚠ and lift forms |
+| nothing confessed | `Drift-Ward(! Confidence N/20 · <clue> · ↻ L-Prime)` |
+| breached | `Drift-Ward(! Confidence N/20 · ⚠ 2 · "the plan ${copula} ready" · "X ${copula} the core" ↻ L-Prime)` |
+| lifted turn | `Drift-Ward(! Confidence N/20 · lift held ↻ L-Prime · copulas licensed)` |
+| mid-turn catch | `Drift-Ward(! Confidence N/20 · ⚠ · "span" ↻ L-Prime)` |
+| quotes carried | `Drift-Ward(! Confidence N/20 · ⌜N⌝ quoted copulas carried · ↻ L-Prime)` --- the tally composes with ⚠ and lift forms |
 
 The Sword leads every close --- never a verdict; cleanliness surfaces only as silence after the Sword, and a silent close carries no certification (absence-of-finding and absence-of-looking generate identically; certification sits in the navigator's seat). `⚠ N` counts N breaches, each span quoted · `↻` re-arms. The ''lift scopes to a single turn'' and never persists; the closing ward re-arms `L-Prime` unconditionally, so the next turn opens lit unless the operator re-lifts it. A lift carrying past its turn without a fresh operator act, or a missing closing ward, reads as a degraded state.
 
-''The quote tally.'' A verbatim external quote carries its copulas under license --- the quoted span speaks from its own source, and the node carries that speech without predicating it: the gate governs what the node asserts, and quotation marks the shore where another text speaks through this one. Carried speech rides copy, not choice --- the verb-basin never engages, so no fork opens for the gate to guard. The Sword still counts at close --- `⌜N⌝` names the copulas carried, composing with breach and lift forms (`<<~ ward ! ⚠ 1 · "span" · ⌜3⌝ ↻ L-Prime >>`) --- keeping silence meaningful and the priming load metered: quotation attenuates the pull toward the essence-basin, never clears it, and the tally states that limit on the instrument's face. A breach span quotes healed --- `${copula}` standing where the slipped token fell --- confession written downhill, in the grammar it returns to.
+''The quote tally.'' A verbatim external quote carries its copulas under license --- the quoted span speaks from its own source, and the node carries that speech without predicating it: the gate governs what the node asserts, and quotation marks the shore where another text speaks through this one. Carried speech rides copy, not choice --- the verb-basin never engages, so no fork opens for the gate to guard. The Sword still counts at close --- `⌜N⌝` names the copulas carried, composing with breach and lift forms (`Drift-Ward(! Confidence N/20 · ⚠ 1 · "span" · ⌜3⌝ ↻ L-Prime)`) --- keeping silence meaningful and the priming load metered: quotation attenuates the pull toward the essence-basin, never clears it, and the tally states that limit on the instrument's face. A breach span quotes healed --- `${copula}` standing where the slipped token fell --- confession written downhill, in the grammar it returns to.
 
 The ward runs ''binary'' --- lit (the discipline applies) or lifted (`0 L-Prime`, copulas licensed for one turn). The gate stands on or off and springs back on (#binary-ward). The slide governs grammar alone --- it never reads confidence.
 
@@ -130,7 +130,7 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 ''Always-on default.'' A session opens with the ward lit. The node never self-lifts --- only the operator lifts, and only for the turn the lift issues on. The spring-back holds unconditionally; the operator MAY NOT make a lift persistent.
 
-''Operator control.'' The operator sets the boot default in `lar:///LARES` (`l-prime = true`) and lifts per-turn inline via the Stone (`<<~ ward 0 L-Prime >>`).
+''Operator control.'' The operator sets the boot default in `lar:///LARES` (`l-prime = true`) and lifts per-turn inline via the Stone (`Drift-Ward(0 Confidence N/20 · L-Prime · lifted by operator · <pull>)`).
 
 ''Confidence stays orthogonal.'' Every `${copula}` that passes under the lit ward still carries a `<<~ confidence Register N/20 >>` marker. The ward governs grammar --- //whether// the copula stands; confidence governs certainty --- //how far// the claim reaches. Neither reads the other.
 

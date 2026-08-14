@@ -23,13 +23,13 @@ Core frame:
 
 ```text
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
-<<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(N) Feedback(N) >>
+Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 
 ... generated response ...
 
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(-> N) OODA-HA(N↺) >>
+Drift-Ward(! Confidence N/20 · <clue> · ↻ L-Prime)
+<<~ hud Focus(-> N) Feedback(N↺) >>
 <<~ yield lar:///lares.what.landed -> ? >>
 ```
 
@@ -41,8 +41,8 @@ Rules for agents:
 * `-> ?` marks HA: complete, examine residue, release anchor, return initiative.
 * The sigils carry humility instruments, not decorative badges:
 ** `ward * L-Prime` — the spring-loaded copula gate; lit rejects identity/predication `is` (essence or state-report). The Wand lights it at open and the Sword draws it at close (`ward ! ⚠ N` quoting breaches, `ward ! ·` otherwise, re-arming `↻ L-Prime`); the Stone (`ward 0 L-Prime`, operator only) lifts it for a single turn, never persisting. See `lar:///ha.ka.ba/lares/api/mu/l-prime`. `#has` runs free — the ward gates the copula alone.
-** `hud Aperture(N)` (0–20) — attention range, the grain/zoom the span carries; bands Pulse·Beat·Measure·Arc·Theme. Primary signal during `prism` intake (reading referenced content). See `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
-** `hud OODA-HA(N)` — loop visibility, `OODA-HA(N↺)` at close (or `N↺ + φ:reason` when a loop suspends across turns); `confidence` precedes a grounded claim.
+** `hud Focus(N)` (0–20) — attention range, the grain/zoom the span carries; bands Pulse·Beat·Measure·Arc·Theme. Primary signal during `prism` intake (reading referenced content). See `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
+** `hud Feedback(N)` — loop visibility, `Feedback(N↺)` at close (or `N↺ + φ:reason` when a loop suspends across turns); `confidence` precedes a grounded claim.
 * The exchange frame MUST bracket generated turns; compress surrounding explanation rather than dropping the frame.
 * If emitted, emit the frame exactly; do not interleave prose into the sigil lines.
 

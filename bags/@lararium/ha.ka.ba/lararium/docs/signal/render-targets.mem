@@ -189,8 +189,8 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
-<<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(N) Feedback(N) >>
+Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad … >>
 ```
 
@@ -324,8 +324,8 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 
 ```
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
-<<~ hud Aperture(10) OODA-HA(3) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(10) Feedback(3) >>
+Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad 🏛️ >>
 Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
