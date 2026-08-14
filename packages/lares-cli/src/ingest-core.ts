@@ -3,7 +3,7 @@
  * one-shot CLI command AND the long-lived watcher daemon run the SAME path.
  *
  * Two legs live here; the third leg lives on the island:
- *   scan  — walk source for .md carriers, derive each uri by the loci law,
+ *   scan  — walk source for `.mem` carriers, derive each uri by the loci law,
  *           NFC-assert at the shore, hash, diff disk-hash vs synced-hash
  *   submit — pack NEW+CHANGED carriers (hashes riding with the text) into one
  *            INGEST verb; the island's gate supplies currentRenderHash (leg 3)

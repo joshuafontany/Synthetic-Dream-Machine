@@ -12,15 +12,15 @@ module-type: startup
  * already answered the only question a router could ask, so the registration carries no ambiguity
  * forward.
  *
- * ── WHY NO CONTENT SNIFF ────────────────────────────────────────────────────────────────────────
- * A sniff earns its cost where ONE extension holds TWO kinds and the bytes decide between them.
- * Here it cannot help, and it can hurt in a way nothing downstream reports: a carrier whose head
- * shape a sniffer fails to recognise routes to some other deserializer SILENTLY, producing a tiddler
- * that looks imported and whose frame never parsed.
+ * ── A MALFORMED CARRIER STAYS A CARRIER ─────────────────────────────────────────────────────────
+ * A `.mem` whose frame does not parse reaches the carrier reader anyway, which raises
+ * `carrier.iam.missing` and names the fault. That keeps the diagnostic reachable: a door that
+ * re-types unrecognised bytes hands them to a reader with no opinion about frames, and the file
+ * imports looking whole while nothing checked it.
  *
- * A malformed carrier belongs to the carrier reader, which raises `carrier.iam.missing` and names
- * the fault — never to a router that reclassifies it away from the diagnostic that would have named
- * it. Graceful parsing means AUGMENT AND WRAP at the reader, not reassign at the door.
+ * Twenty carriers in the corpus stand on an SOH frame with no declaration line, so head shapes vary
+ * legitimately and a shape-based decision at the door would strand them. Graceful parsing means
+ * AUGMENT AND WRAP at the reader — the reader holds the grammar, the door holds only the extension.
  *
  * ── ONE REGISTRATION REACHES EVERY DOOR ─────────────────────────────────────────────────────────
  * Drag-and-drop, the import dialog, and the filesystem adaptor all resolve through

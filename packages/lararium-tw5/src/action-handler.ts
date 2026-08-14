@@ -566,7 +566,7 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
 /**
  * A memetic-wikitext carrier opens with the SOH classifier (&#x0001; / &#x0011;).
  * NOTE: TW5 filetype registration does NOT reproduce the direct memetic decomposition
- * in this integration (routing a memetic `.md` through the registry
+ * in this integration (routing a memetic carrier through the filetype registry
  * drops the heading-titled records) — so SOH carriers MUST take the direct
  * memetic path, never the registry. A de-dup toward the import path is un-pono here.
  */
