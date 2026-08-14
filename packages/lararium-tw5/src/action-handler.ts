@@ -565,10 +565,10 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
  */
 /**
  * A memetic-wikitext carrier opens with the SOH classifier (&#x0001; / &#x0011;).
- * NOTE: TW5's md-file-router does NOT reproduce the direct memetic decomposition
+ * NOTE: TW5 filetype registration does NOT reproduce the direct memetic decomposition
  * in this integration (routing a memetic `.md` through the registry
  * drops the heading-titled records) — so SOH carriers MUST take the direct
- * memetic path, never the registry. The de-dup toward md-file-router is un-pono here.
+ * memetic path, never the registry. A de-dup toward the import path is un-pono here.
  */
 // THE CARRIER FRAME RIDES THE CONTROL HEAD. When the sigil sets split into capability domains, the frame
 // took `<<^` and the speaking head `<<~` kept every word sigil — so the head now CARRIES the distinction

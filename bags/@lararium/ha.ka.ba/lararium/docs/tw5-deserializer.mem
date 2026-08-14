@@ -45,7 +45,7 @@ Parse warnings ride a synthesised `$:/lararium/parse-warning/<slug>` tiddler (`P
 
 The deserializer travels as a plugin tiddler — TS source compiled to a CJS module tiddler carrying `module-type: tiddlerdeserializer`. TW5 collects every such module by type at boot; the content-type key on the export binds the function to `text/x-memetic-wikitext` with no imperative property assignment and no closure over a live wiki class. Disk ingest and store load converge on the exact registry: `$tw.wiki.deserializeTiddlers` dispatches by content-type into the collected set.
 
-The paired `md-file-router` startup module registers `.mem` (and `.md`) as `text/x-md-auto` through `$tw.config.fileExtensionInfo`, so drag-and-drop, the import dialog, and the filesystem adaptor route as one. Its `text/x-md-auto` deserializer sniffs the head bytes — the `!DOCTYPE` comment fast-path or a line-bound SOH sigil — then delegates a carrier to `text/x-memetic-wikitext` and everything else to `text/x-markdown`, resolving each target function out of the same collected `tiddlerdeserializer` set.
+The paired `carrier-filetype` startup module registers `.mem` as `text/x-memetic-wikitext` through `$tw.config.fileExtensionInfo`, so drag-and-drop, the import dialog, and the filesystem adaptor route as one. ''One extension, one type'' — the extension answers the only question a content sniff could ask, and a malformed carrier reaches the carrier reader (which names the fault) rather than a router that would reclassify it away from its own diagnostic.
 
 <<~/ahu >>
 
