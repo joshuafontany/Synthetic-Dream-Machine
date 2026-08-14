@@ -560,7 +560,7 @@ Cooking, crafting, enchanting, summoning, and other rituals require time, a reci
 
 **Recipes** are ritual items that take 1 sp (soap) of inventory space \- or the noöspheric equivalent. Common recipes yield consumables, gear, dream-tonics, healing stews, memory crystals, Bonus Dice trinkets, etc. This can include:
 
-DEV NOTE: Recipes and Secrets may carry **rank tags**: `[skilled]`, `[expert]`, or `[master]`. A rank-tagged recipe requires a higher grade of ingredient than a baseline version, but the output item starts above level 0. To use a rank-tagged recipe without penalty, the crafter must have a Path or Background skill at the same rank; otherwise the roll is made with Disadvantage. Base rule and Power-side equivalent are in Ch06 → Rank and Power Economy; Ch05 → Anomolous Object Recipes covers the same system for magitech/fantascience craft work.
+DEV NOTE: Recipes and Secrets may carry **rank tags**: `[skilled]`, `[expert]`, or `[master]`. A rank-tagged recipe requires a higher grade of ingredient than a baseline version, but the output item starts above level 0. To use a rank-tagged recipe without penalty, the crafter must have a Path or Background skill at the same rank; otherwise the roll is made with Disadvantage. Base rule and Power-side equivalent are in Ch06 → Rank and Power Economy; Ch05 → Anomalous Object Recipes covers the same system for magitech/fantascience craft work.
 
 - SDM Powers anchored into items.
 - Strange Items or Gear (via UVG and Vastlands item tables).

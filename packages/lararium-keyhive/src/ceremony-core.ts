@@ -143,22 +143,132 @@ export interface FoundingCeremonyResult {
   founderEdge:           DeviceDelegationTiddler;
 }
 
+// ── THE TWO HALVES OF A FOUNDING ───────────────────────────────────────────────────────────────
+// A founding stands TWO things, and canon keeps them apart: a PLACE (a somewhere — addressable,
+// carriable, vouchable) and a FACE (a someone — a persona root, its key-event-log, the edge binding
+// a device to it). `identity-classes#herm-establishment` rules the separation outright: the Herm
+// "boots permissionlessly on its own key… it asks no blessing to exist", and "NO civic identity mints
+// into the Herm" — only the wax-sealed contract edges.
+//
+// So the place founds ALONE and the face lands on top of it, by a later operator act. Fusing them made
+// every vessel mint a human's root before it could carry a single byte, which is the one thing a
+// crossroads exists not to do.
+//
+// WHERE THE CABAL SITS, AND WHY NOT THE PLACE: a MeshCabal holds MEMBERS, and its members read as
+// PersonaGroups — faces. `IdentityAnchors` already files it that way, keyed by handle-index beside the
+// persona ids, and the boot path calls cabal membership AFFILIATION rather than identity (a PersonaGroup
+// belongs to many cabals or none). So a cabal seeded on a place identifier would hold a membership
+// structure with nothing that can be a member.
+//
+// A faceless place carries by CONTRACT instead — the wax-sealed carriage edge canon gives the Herm:
+// "No civic identity mints into the Herm — only the wax-sealed contract/edges." Carry ⊥ read holds
+// without a cabal, because the edge carries the authority a seat would have.
+//
+// Canon: lar:///ha.ka.ba/lares/api/pono/waking-floor · lar:///ha.ka.ba/lararium/mesh/identity-classes
+
+/** What a place-founding needs: a key, a name, and the hearth it stands at. No persona anywhere. */
+export interface PlaceFoundingInput {
+  repo:               Repo;
+  /** The PER-VESSEL device signing seed — inits Keyhive (this vessel IS the Individual). */
+  vesselSeed:         Uint8Array;
+  /** Hex-encoded 32-byte Ed25519 verifying key of the per-vessel device. */
+  vesselVerifyingKey: string;
+  /** The hearth true-name (engine content-CID) this place stands at. */
+  hearthTrueName:     string;
+}
+
+export interface PlaceFoundingResult {
+  /** The sovereign @daemon island — the immune core, standing before any face. */
+  daemonUrl:            string;
+  /** That island's live handle. `seedDaemonDoc` CREATES, so a face-founding must be handed this one
+   *  rather than seeding again — a second call would stand a second @daemon and orphan the first. */
+  daemonHandle:         ReturnType<typeof seedDaemonDoc>;
+  /** This vessel's own Keyhive agent — the Place DID's identifier. */
+  vesselIdentifierHex:  string;
+  /** The self-certifying ContactCard the light leaf-identity path re-presents (OP-AP5). */
+  contactCardJson:      string;
+}
+
 /**
- * Seed social docs, run the Keyhive founding ceremony, flush cap events to
- * the daemon doc, and write oracle tiddlers. Returns handles and sentinel IDs.
+ * Found the PLACE — @daemon, the vessel's own Keyhive individual, and the blind-carriage cabal.
  *
- * The caller is responsible for repo.flush() and persisting the bootstrap
- * artifact (the mapping of lar URIs → Automerge URLs + sentinel IDs).
+ * Everything here stands on the vessel's own key and asks nobody. A vessel founded to this point
+ * carries, serves the public shelf, and holds every sovereign act closed: the waking floor, reached
+ * by founding rather than by falling.
  */
-export async function runFoundingCeremony(
-  input: FoundingCeremonyInput,
-): Promise<FoundingCeremonyResult> {
-  const { repo, vesselSeed, vesselVerifyingKey, vesselDisplayName } = input;
+export async function foundThePlace(input: PlaceFoundingInput): Promise<PlaceFoundingResult> {
+  const { repo, vesselSeed, hearthTrueName } = input;
+
+  const daemonHandle = seedDaemonDoc(repo);
+
+  const keyhive = new KeyhiveProvider();
+  const store   = new InMemoryEventStore();
+  await keyhive.init({ seed: vesselSeed, eventStore: store });
+
+  const vesselIdentifierHex = await keyhive.vesselIdentifierHex();
+
+  await flushCapEvents(store, daemonHandle);
+
+  daemonHandle.change((doc) => {
+    doc.tiddlers[HEARTH_TRUE_NAME_TIDDLER] = {
+      tiddler: { title: HEARTH_TRUE_NAME_TIDDLER, text: hearthTrueName, kind: "hearth-true-name" },
+      meta: { authority: "lares-init" },
+    };
+  });
+
+  const contactCardJson = new TextDecoder().decode(await keyhive.contactCard());
+  await keyhive.dispose();
+
+  return {
+    daemonUrl: daemonHandle.url as string,
+    daemonHandle,
+    vesselIdentifierHex,
+    contactCardJson,
+  };
+}
+
+/** What a face-founding lands ON: a place that already stands, named by its own @daemon. */
+export interface FaceFoundingInput {
+  repo:               Repo;
+  /** The @daemon handle the place-founding stood. The face writes its pins into the SAME island. */
+  daemonHandle:       ReturnType<typeof seedDaemonDoc>;
+  vesselSeed:         Uint8Array;
+  vesselVerifyingKey: string;
+  vesselDisplayName:  string;
+  binding:            FoundingBinding;
+  hearthTrueName:     string;
+  nexusPubkey:        string;
+}
+
+export interface FaceFoundingResult {
+  /** The MeshCabal this face founds — a membership structure whose members read as PersonaGroups. */
+  meshCabalDocIdHex:      string;
+  identitiesUrl:          string;
+  circlesUrl:             string;
+  sessionsUrl:            string;
+  personaUrl:             string;
+  personaBagId:           string;
+  personaGroupDocIdHex:   string;
+  personaGroupAgentIdHex: string;
+  signerDid:              string;
+  personaKelPrefix:       string;
+  founderEdge:            DeviceDelegationTiddler;
+}
+
+/**
+ * Found the FACE — the persona group, its private plane, the social planes, the binding edge and the
+ * persona-KEL inception — onto a place that already stands.
+ *
+ * It re-opens Keyhive over the cap events the place persisted rather than carrying a live provider in,
+ * so ONE path serves both the composed founding and a later operator act. A face landing months after
+ * its place runs exactly the code the founding ran.
+ */
+export async function foundTheFace(input: FaceFoundingInput): Promise<FaceFoundingResult> {
+  const { repo, daemonHandle, vesselSeed, vesselVerifyingKey, vesselDisplayName } = input;
 
   const identitiesHandle = seedIdentitiesDoc(repo);
   const circlesHandle    = seedCirclesDoc(repo);
   const sessionsHandle   = seedSessionsDoc(repo);
-  const daemonHandle      = seedDaemonDoc(repo);
 
   // Write operator identity + circles tiddlers
   const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
@@ -178,10 +288,11 @@ export async function runFoundingCeremony(
     }
   }
 
-  // ── Keyhive founding ceremony ──────────────────────────────────────────────
+  // Re-open Keyhive over what the place already wrote — the cap events ARE the continuity.
   const keyhive = new KeyhiveProvider();
-  const store   = new InMemoryEventStore();
+  const store   = await replayCapEvents(daemonHandle);
   await keyhive.init({ seed: vesselSeed, eventStore: store });
+  await keyhive.hydrateFromEventStore();
 
   const vesselIdentifierHex = await keyhive.vesselIdentifierHex();
 
@@ -194,44 +305,23 @@ export async function runFoundingCeremony(
   const personaBagId  = personaBagIdFor(personaGroup.docIdHex);
   const personaHandle = seedPersonaDoc(repo, personaBagId);
 
+  // The cabal stands WITH the face, seated on the PersonaGroup that can actually hold a seat in it.
   const meshCabal = await keyhive.createSentinelDoc(MESH_CABAL_SENTINEL_URI);
   await keyhive.addSentinelMember(personaGroup.agentIdHex, meshCabal.docIdHex);
 
-  // Flush Keyhive events to daemon doc in DaemonEventStore-compatible format.
-  const initEvents = await store.list();
-  for (const evt of initEvents) {
-    const hashBuf = await crypto.subtle.digest("SHA-256", evt.bytes.slice());
-    const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
-    const title   = capEventTitle(hash);
-    daemonHandle.change((doc) => {
-      if (!doc.tiddlers[title]) {
-        doc.tiddlers[title] = {
-          tiddler: {
-            title,
-            text:        bytesToBase64(evt.bytes),
-            tags:        CAP_EVENT_TAG,
-            variant:     evt.variant,
-            hash,
-            "bytes-len": String(evt.bytes.length),
-          },
-          meta: { authority: "lares-init" },
-        };
-      }
-    });
-  }
+  await flushCapEvents(store, daemonHandle);
 
-  // Write sentinel oracle tiddlers so boot gates can reconstruct DocumentIds.
   daemonHandle.change((doc) => {
+    doc.tiddlers[MESH_CABAL_DOC_ID_TIDDLER] = {
+      tiddler: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabal.docIdHex, kind: "sentinel-id" },
+      meta: { authority: "lares-init" },
+    };
     doc.tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER] = {
       tiddler: { title: PERSONA_GROUP_DOC_ID_TIDDLER, text: personaGroup.docIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init" },
     };
     doc.tiddlers[PERSONA_GROUP_AGENT_ID_TIDDLER] = {
       tiddler: { title: PERSONA_GROUP_AGENT_ID_TIDDLER, text: personaGroup.agentIdHex, kind: "sentinel-id" },
-      meta: { authority: "lares-init" },
-    };
-    doc.tiddlers[MESH_CABAL_DOC_ID_TIDDLER] = {
-      tiddler: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabal.docIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init" },
     };
   });
@@ -305,39 +395,106 @@ export async function runFoundingCeremony(
       tiddler: { title: PERSONA_KEL_PREFIX_TIDDLER, text: personaKelPrefix, kind: "persona-kel-prefix" },
       meta: { authority: "lares-init" },
     };
-    doc.tiddlers[HEARTH_TRUE_NAME_TIDDLER] = {
-      tiddler: { title: HEARTH_TRUE_NAME_TIDDLER, text: input.hearthTrueName, kind: "hearth-true-name" },
-      meta: { authority: "lares-init" },
-    };
     doc.tiddlers[DEVICE_DELEGATION_SELF_TIDDLER] = {
       tiddler: { title: DEVICE_DELEGATION_SELF_TIDDLER, ...founderEdge },
       meta: { authority: "lares-init" },
     };
   });
 
-  // Mint the operator's self-certifying ContactCard ONCE, before the ceremony
-  // keyhive disposes. The card carries no expiry/nonce, so a short-lived LEAF
-  // actor (CLI run / agent turn) re-presents this cached JSON forever without
-  // booting keyhive — the light-identity path (operator-peer #actor-parity
-  // OP-AP5). The caller persists it beside the operator key (0o600).
-  const contactCardJson = new TextDecoder().decode(await keyhive.contactCard());
-
   await keyhive.dispose();
 
   return {
-    identitiesUrl:         identitiesHandle.url as string,
-    circlesUrl:            circlesHandle.url    as string,
-    sessionsUrl:           sessionsHandle.url   as string,
-    daemonUrl:              daemonHandle.url      as string,
-    personaUrl:            personaHandle.url    as string,
+    meshCabalDocIdHex: meshCabal.docIdHex,
+    identitiesUrl: identitiesHandle.url as string,
+    circlesUrl:    circlesHandle.url    as string,
+    sessionsUrl:   sessionsHandle.url   as string,
+    personaUrl:    personaHandle.url    as string,
     personaBagId,
     personaGroupDocIdHex:   personaGroup.docIdHex,
     personaGroupAgentIdHex: personaGroup.agentIdHex,
-    meshCabalDocIdHex:     meshCabal.docIdHex,
-    contactCardJson,
     signerDid,
     personaKelPrefix,
     founderEdge,
+  };
+}
+
+/** Write an event store's cap events into @daemon in DaemonEventStore-compatible form. Idempotent. */
+async function flushCapEvents(
+  store: InMemoryEventStore,
+  daemonHandle: ReturnType<typeof seedDaemonDoc>,
+): Promise<void> {
+  for (const evt of await store.list()) {
+    const hashBuf = await crypto.subtle.digest("SHA-256", evt.bytes.slice());
+    const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    const title   = capEventTitle(hash);
+    daemonHandle.change((doc) => {
+      if (!doc.tiddlers[title]) {
+        doc.tiddlers[title] = {
+          tiddler: {
+            title,
+            text:        bytesToBase64(evt.bytes),
+            tags:        CAP_EVENT_TAG,
+            variant:     evt.variant,
+            hash,
+            "bytes-len": String(evt.bytes.length),
+          },
+          meta: { authority: "lares-init" },
+        };
+      }
+    });
+  }
+}
+
+/** Read @daemon's cap events back into a fresh store, so a later ceremony resumes the same lattice. */
+async function replayCapEvents(
+  daemonHandle: ReturnType<typeof seedDaemonDoc>,
+): Promise<InMemoryEventStore> {
+  const store = new InMemoryEventStore();
+  const doc   = daemonHandle.doc();
+  for (const [title, rec] of Object.entries(doc?.tiddlers ?? {})) {
+    if (!title.startsWith(`${DAEMON_BAG_ID}/cap/`)) continue;
+    if (rec?.meta?.deleted) continue;
+    const fields = rec?.tiddler as Record<string, string> | undefined;
+    if (!fields?.["text"] || !fields["variant"] || !fields["hash"]) continue;
+    await store.put({
+      bytes:   base64ToBytes(fields["text"]),
+      variant: fields["variant"] as never,
+      hash:    fields["hash"],
+    });
+  }
+  return store;
+}
+
+/**
+ * The whole founding, both halves in one act — what a self-stood hearth or a browser vessel runs.
+ *
+ * A vessel that holds its own person founds place and face together; nothing is gained by making its
+ * operator type two commands. `lares vessel found` runs the FIRST half alone, and `lares persona new 0`
+ * lands the second whenever its operator arrives.
+ */
+export async function runFoundingCeremony(
+  input: FoundingCeremonyInput,
+): Promise<FoundingCeremonyResult> {
+  const place = await foundThePlace({
+    repo:               input.repo,
+    vesselSeed:         input.vesselSeed,
+    vesselVerifyingKey: input.vesselVerifyingKey,
+    hearthTrueName:     input.hearthTrueName,
+  });
+  const face = await foundTheFace({
+    repo:               input.repo,
+    daemonHandle:       place.daemonHandle,
+    vesselSeed:         input.vesselSeed,
+    vesselVerifyingKey: input.vesselVerifyingKey,
+    vesselDisplayName:  input.vesselDisplayName,
+    binding:            input.binding,
+    hearthTrueName:     input.hearthTrueName,
+    nexusPubkey:        input.nexusPubkey,
+  });
+  return {
+    daemonUrl:       place.daemonUrl,
+    contactCardJson: place.contactCardJson,
+    ...face,
   };
 }
 

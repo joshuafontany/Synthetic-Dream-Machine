@@ -69,6 +69,21 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
   let kh: KeyhiveProvider | null = null;
   let mintedByHex = daemonAuth.vesselVerifyingKey;
 
+  // ── PERSONA-SCOPED ACTS NEED A FACE, AND SAY SO ────────────────────────────────────────────────
+  // A vessel at the WAKING FLOOR carries and serves; it holds no persona plane, no bindings, nobody to
+  // delegate a bag TO. Reaching for the face here refuses LOUDLY rather than resolving `undefined` into
+  // a cap check — an audience that reads undefined would delegate to nobody and look like it worked.
+  const faceAgent = (): string => {
+    const id = daemonAuth.personaGroupAgentIdHex;
+    if (!id) throw new Error("[daemon] this vessel stands at the waking floor and holds no face — light one with `lares persona new 0 --name '<label>'` before any persona-scoped act.");
+    return id;
+  };
+  const faceGroup = (): string => {
+    const id = daemonAuth.personaGroupDocIdHex;
+    if (!id) throw new Error("[daemon] this vessel stands at the waking floor and holds no PersonaGroup plane — light a face with `lares persona new 0 --name '<label>'`.");
+    return id;
+  };
+
   return makeDaemonBehavior({
     ...daemonExtra, // the vessel-injected telemetry capture SINK flows through (idempotent cap → live)
     // Sovereign-worker data-plane: register the read-only reactors in-worker over the
@@ -94,7 +109,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         // bagUrl = the lar: bag URL — the key registerBag/delegate/verify all share,
         // the same string boot-registration registers (never the automerge doc url).
         await kh.registerBag(bagUrl);
-        await kh.delegate({ bagUrl, audience: daemonAuth.personaGroupAgentIdHex, access: "admin" });
+        await kh.delegate({ bagUrl, audience: faceAgent(), access: "admin" });
       };
       registerActionReactors(registry, {
         composite: ctx.composite,
@@ -166,7 +181,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         // The plane is reached by the name its own PersonaGroup derives — the same string the registry
         // entry, the composite layer and the capability ring use. `daemonAuth` already carries the group's
         // doc id, so the resolution happens here rather than travelling as a second parameter.
-        const personaBagId = personaBagIdFor(daemonAuth.personaGroupDocIdHex);
+        const personaBagId = personaBagIdFor(faceGroup());
         const resolvePersonaStore = async () => {
           const store = await oraclePlane.storeOf(personaBagId);
           if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — the @oracle registry names no ${personaBagId}`);
@@ -247,13 +262,14 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         seed:                  daemonAuth.seed,
         eventStore:            new DaemonEventStore({ daemon: ctx.composite }),
         vesselVerifyingKey:  daemonAuth.vesselVerifyingKey,
-        personaGroupDocIdHex:   daemonAuth.personaGroupDocIdHex,
-        personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex,
-        meshCabalDocIdHex:     daemonAuth.meshCabalDocIdHex,
+        // The face pins ride CONDITIONALLY — the gate runs in full or grants no persona caps at all.
+        ...(daemonAuth.personaGroupDocIdHex   ? { personaGroupDocIdHex:   daemonAuth.personaGroupDocIdHex }   : {}),
+        ...(daemonAuth.personaGroupAgentIdHex ? { personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex } : {}),
+        ...(daemonAuth.meshCabalDocIdHex      ? { meshCabalDocIdHex:      daemonAuth.meshCabalDocIdHex }      : {}),
         registerBags:          daemonAuth.registerBags,
-        signerDid:       daemonAuth.signerDid,
-        personaKel:            daemonAuth.personaKel,
-        deviceEdge:            daemonAuth.deviceEdge,
+        ...(daemonAuth.signerDid  ? { signerDid:  daemonAuth.signerDid }  : {}),
+        ...(daemonAuth.personaKel ? { personaKel: daemonAuth.personaKel } : {}),
+        ...(daemonAuth.deviceEdge ? { deviceEdge: daemonAuth.deviceEdge } : {}),
         ...(daemonAuth.archiveBytes ? { archiveBytes: daemonAuth.archiveBytes } : {}),
       });
       kh = keyhive;
@@ -387,7 +403,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       if (!kh) throw new Error("keyhive not booted");
       const common = {
         fingerprint, repo: ctx.repo, daemonStore: ctx.composite, keyhive: kh,
-        personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex, mintedByHex, recipeTrace,
+        personaGroupAgentIdHex: faceAgent(), mintedByHex, recipeTrace,
       } as const;
       const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });
       const draft    = await resolveOrMintBinding({ ...common, kind: "draft-binding",    prefix: DRAFT_BINDINGS_PREFIX });

@@ -12,7 +12,7 @@ The unstable ley line networks of Elyncia hold a startling secret. Anyone who kn
 ## Mana Pool (\[dangerous\] secret)
 
 A  **Mana pool** is a temporary trait (up to 10 life, 1 slot) that stores pooled life (mana). Life stored in a mana pool, or in a readied item that has a life pool, is immediately available to spend on Power activation. Gathering life from the local ambient mana into a pool requires an action and a Mana Pool roll.  
-\> d20 \+ Oldtech (Thought) OR Fantascience (Charsima) vs 
+\> d20 \+ Oldtech (Thought) OR Fantascience (Charisma) vs 
 
 ## Dangerous Magic
 

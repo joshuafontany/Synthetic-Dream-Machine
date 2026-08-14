@@ -327,8 +327,8 @@ The Conversion Doctrine (`TODO_BECMI_Spell_Effect_Conversion_Doctrine.md → ## 
 | S1 | **DONE 2026-04-03** | Seed P: values on all 196 OSR pending stubs from crosswalk `Class(es)/Spell-level` column (`max(1, min_level × 2)`) | `AnnP(Annotator)` (done; `_todo/BECMI/scripts/annotate_ch06_p_levels.py` created, fixed, and run: 195 cards annotated) |
 | S2 | **DONE 2026-04-03** | Migrate all `[high-tier]` tags: replace with `[dangerous]` where P:≥12 or editorial-[dangerous] call; remove where P:<12 utility | `TierShift(Migrator)` (done; 59 REPLACE→dangerous, 2 existing [dangerous] stripped, 3 remove-only: Commune / Pass Plant / Truesight) |
 | S3 | **DONE 2026-04-03** | Finger of Death: accept synthesized `osr:` block (Gap 3); add tags `[necromancy] [dangerous] [death] [deathly] [attack]`; P: 10 seeded by S1 | `GapFix(Annotator)` (done; crosswalk `osr: imported = yes` confirmed) |
-| S4 | **DONE 2026-04-03** | Reckless Dweomer: change `[storage:burden]` → `[storage:trait]` | `GapFix(Annotator)` (done) |
-| S5 | **TODO** | Batch migrate `[storage:item]` → `[storage:trait]` on all 194 OSR pending stubs (Doctrine F.6: [storage:trait] is the default for BECMI-sourced powers; [storage:item] is Ch05-only for item-variant cards) | `StoreFix(Migrator)` |
+| S4 | **DONE 2026-04-03** | Reckless Dweomer: seat corrected burden → trait | `GapFix(Annotator)` (done) |
+| S5 | **CLOSED 2026-08-12** | Storage seating carries no ms tag — the manuscripts hold no `[storage:*]` layer; seat contracts live in the `bags/@sdm` mount-points. BECMI default seat stays trait (Doctrine F.6); item seats arrive as Ch05 variant-card work | `StoreFix(Migrator)` (closed) |
 | S6 | **TODO** | Shield Ward manual P: assignment — card not in crosswalk; determine correct P: from FTLS design intent and set explicitly | `Lares (Council)` |
 | S7 | **TODO** | osr: recognizer sweep — run `import_ch06_osr.py check` and verify `drift: no`; ensure all recognizer lines use exact canonical Classic Name or documented alias | `DriftWatch [task[Continuity]]` → escalates to `Ink-Clerk (Lorekeeper)` |
 

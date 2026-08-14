@@ -868,34 +868,40 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // registerBags omits the user-wiki bags (the decouple); the @daemon's OWN bag still mounts.
   const openDaemon = async ({ assembly, slot }: { assembly: VesselCoreAssembly; slot?: VesselWikiSlot }): Promise<VesselDaemonVm> => {
     const daemonDoc = (await readDaemonDoc()).doc();
-    const personaGroupDocIdHex   = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_GROUP_DOC_ID_TIDDLER])   ?? null;
-    const personaGroupAgentIdHex = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_GROUP_AGENT_ID_TIDDLER]) ?? null;
-    const meshCabalDocIdHex     = tiddlerText(daemonDoc?.tiddlers?.[MESH_CABAL_DOC_ID_TIDDLER])     ?? null;
-    if (!personaGroupDocIdHex || !personaGroupAgentIdHex || !meshCabalDocIdHex) {
-      throw new Error(`[lararium] DreamNet sentinel oracle tiddlers missing — run \`lares vessel found\`.`);
-    }
-    // The binding signer-pin + edge — the Binding Gate's authority. FAIL-CLOSED: a missing pin or
-    // edge MUST halt the boot, NEVER fall through to skip the Binding Gate (the confused-deputy / PCD cure).
-    const signerDid  = tiddlerText(daemonDoc?.tiddlers?.[SIGNER_DID_TIDDLER]) ?? null;
+    const personaGroupDocIdHex   = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_GROUP_DOC_ID_TIDDLER])   ?? undefined;
+    const personaGroupAgentIdHex = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_GROUP_AGENT_ID_TIDDLER]) ?? undefined;
+    const meshCabalDocIdHex     = tiddlerText(daemonDoc?.tiddlers?.[MESH_CABAL_DOC_ID_TIDDLER])     ?? undefined;
+    // The cabal rides with the FACE — its members read as PersonaGroups, so a faceless place names none.
+    // ── THE FACE, IF ONE STANDS ────────────────────────────────────────────────────────────────
+    // The signer pin + edge carry the Binding Gate's authority. Their ABSENCE names a place at the
+    // WAKING FLOOR rather than a fault: a vessel founded by `lares vessel found` and never lit by
+    // `lares persona new 0` holds no persona, by design — canon has it boot permissionlessly on its
+    // own key (identity-classes#herm-establishment).
+    //
+    // THE GATE STILL NEVER SOFTENS. Downstream, `bootDaemonKeyhive` runs the Binding Gate in FULL or
+    // grants no persona caps at all, and refuses a TORN face outright. So absence buys fewer caps, never
+    // a skipped check — the confused-deputy / PCD cure survives the floor intact.
+    const signerDid  = tiddlerText(daemonDoc?.tiddlers?.[SIGNER_DID_TIDDLER]) ?? undefined;
     const edgeRecord = daemonDoc?.tiddlers?.[DEVICE_DELEGATION_SELF_TIDDLER];
-    if (!signerDid || !edgeRecord?.tiddler) {
-      throw new Error(`[lararium] DreamNet binding (signer pin + device edge) missing from daemon doc — run \`lares vessel found\`.`);
-    }
-    const deviceEdge = edgeRecord.tiddler as unknown as DeviceDelegationTiddler;
+    const deviceEdge = edgeRecord?.tiddler as unknown as DeviceDelegationTiddler | undefined;
     // THE PERSONA-KEL PIN — the continuity anchor the Binding Gate walks. Read the pinned identifier PREFIX
     // from @daemon (the pin's root of trust), then read its seq-sorted key-event-log from the per-Nexus KEL
     // board — this node's OWN gate key IS its Nexus key. The read runs against the LOCAL replica "as of last
     // sync" (no-global-now); FAIL-CLOSED — a missing prefix OR a chain the local replica does not carry HALTS
     // the boot (never a global lookup, never a fall-through to the raw signer pin).
-    const personaKelPrefix = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_KEL_PREFIX_TIDDLER]) ?? null;
-    if (!personaKelPrefix) {
-      throw new Error(`[lararium] DreamNet binding (persona-KEL prefix) missing from daemon doc — run \`lares vessel found\`.`);
-    }
-    const kelHolder = makePersonaKelRingHolder({ repo, nexusPubkey: vesselIdentity.verifyingKey });
-    await kelHolder.ready;
-    const personaKelChain = kelHolder.chainForPrefix(personaKelPrefix);
-    if (!personaKelChain || personaKelChain.length === 0) {
-      throw new Error(`[lararium] persona-KEL chain for the pinned identifier ${personaKelPrefix.slice(0, 20)}… absent from the local board replica — the Binding Gate cannot reach a head (fail-closed).`);
+    // PINNED-BUT-UNWALKABLE ≠ UNPINNED, and the difference decides between a floor and a fault. A vessel
+    // that pins NO identifier holds no face and stands at the floor. A vessel that pins one whose chain its
+    // local replica cannot reach has a face it cannot prove — that HALTS, fail-closed, exactly as before
+    // (never a global lookup; a not-yet-synced replica simply denies).
+    const personaKelPrefix = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_KEL_PREFIX_TIDDLER]) ?? undefined;
+    let personaKelChain: ReturnType<ReturnType<typeof makePersonaKelRingHolder>["chainForPrefix"]> = null;
+    if (personaKelPrefix) {
+      const kelHolder = makePersonaKelRingHolder({ repo, nexusPubkey: vesselIdentity.verifyingKey });
+      await kelHolder.ready;
+      personaKelChain = kelHolder.chainForPrefix(personaKelPrefix);
+      if (!personaKelChain || personaKelChain.length === 0) {
+        throw new Error(`[lararium] persona-KEL chain for the pinned identifier ${personaKelPrefix.slice(0, 20)}… absent from the local board replica — the Binding Gate cannot reach a head (fail-closed).`);
+      }
     }
     // Register the per-Nexus @crossroads into @oracle (isomorphic with the browser). The node IS the
     // confederation anchor, so its own gate key IS its Nexus key — the same key browsers pass as
@@ -918,7 +924,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     const daemonAuth = {
       seed:                 vesselSeed,
       vesselVerifyingKey: vesselIdentity.verifyingKey,
-      personaGroupDocIdHex, personaGroupAgentIdHex, meshCabalDocIdHex,
+      // The face pins ride CONDITIONALLY — a place at the floor carries none, and writing them as
+      // explicit `undefined` would read as a torn face rather than an unlit one.
+      ...(personaGroupDocIdHex   ? { personaGroupDocIdHex }   : {}),
+      ...(personaGroupAgentIdHex ? { personaGroupAgentIdHex } : {}),
+      ...(meshCabalDocIdHex      ? { meshCabalDocIdHex }      : {}),
       // Derived, never enumerated — one derivation both vessels share, so the node and the browser
       // cannot drift apart on which bags a cap check can resolve. A wiki slot's bags ride only when a
       // wiki stands in the stack; a Herm carries none, blind by structure rather than by a flag.
@@ -931,9 +941,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         })),
         ...(slot ? { wikiBags: [slot.wikiBagId, slot.draftBagId] } : {}),
       }),
-      signerDid,
-      personaKel: { prefix: personaKelPrefix, chain: personaKelChain },
-      deviceEdge,
+      ...(signerDid ? { signerDid } : {}),
+      ...(personaKelPrefix && personaKelChain
+        ? { personaKel: { prefix: personaKelPrefix, chain: personaKelChain } }
+        : {}),
+      ...(deviceEdge ? { deviceEdge } : {}),
       ...(archiveBytes ? { archiveBytes } : {}),
     };
     // The engine's plugin-tiddler CIDs — the daemon worker pulls them by CID from the fs CAS

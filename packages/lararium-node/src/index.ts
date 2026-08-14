@@ -182,8 +182,8 @@ export { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "./open-node-vessel.js";
 export { SyncedTree, contentHash, syncedTreeKey } from "./synced-tree.js";
 export { bagsFileToUri, wikisFileToUri } from "./bag-paths.js";
 
-export { runInit } from "./commands/init.js";
-export type { InitOptions, InitResult } from "./commands/init.js";
+export { runInit, runFoundTheFace, faceStands } from "./commands/init.js";
+export type { InitOptions, InitResult, FoundFaceOptions, FoundFaceResult } from "./commands/init.js";
 
 export { runDeviceAdmit } from "./commands/device-admit.js";
 export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-admit.js";

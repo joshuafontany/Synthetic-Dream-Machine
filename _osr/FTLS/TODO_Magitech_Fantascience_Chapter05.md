@@ -290,7 +290,7 @@ Sequencing lock status (2026-04-01):
   - generate -> identify -> activate/use -> deplete/fail/curse -> repair/create -> market interface.
 - [x] Add explicit boundary pointers to Chapters 04, 06, 07, and 09.
 - [x] Remove/replace any duplicate procedure text in other chapters with pointers.
-- [x] Promote shared module-resolution and item-use defaults from compatibility support into the core `Anomolous Object Procedure`.
+- [x] Promote shared module-resolution and item-use defaults from compatibility support into the core `Anomalous Object Procedure`.
 - [x] Upgrade module catalog blocks into runnable mini-procedures for common imported items.
 - [x] Add compact FTLS resolver inserts for armor, ranged weapons, swords, and weapon secondary riders.
 - [x] Demote compatibility support bands to secondary expansion status instead of primary ownership.

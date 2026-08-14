@@ -51,7 +51,7 @@ For each looted cache or major hoard, record:
 
 ## Treasure Family
 
-Use this table to sort lots by treasure family, not to resolve how a concrete relic, ward, strange item, or charged device works in play. Once a lot turns into a specific object, go to Chapter 05 and run the `Anomolous Object Procedure`, then return here for transport, storage, sale, and fallout.
+Use this table to sort lots by treasure family, not to resolve how a concrete relic, ward, strange item, or charged device works in play. Once a lot turns into a specific object, go to Chapter 05 and run the `Anomalous Object Procedure`, then return here for transport, storage, sale, and fallout.
 
 | Treasure Family | Recommended Tags | Usual Handling |
 |---|---|---|
@@ -245,13 +245,13 @@ Roll `d12` when a lot is marked unusual, collector, or special.
 ### Treasure Table G: Relic/Magic Yield
 
 Use Chapter 05 for this table and full specific-item resolution:
-- [Anomolous Object Procedure](Flying_Triremes_and_Laser_Swords_05_Magitech_and_Fantascience.md#anomolous-object-procedure)
-- [Anomolous Object Catalog](Flying_Triremes_and_Laser_Swords_05_Magitech_and_Fantascience.md#anomolous-object-catalog)
+- [Anomalous Object Procedure](Flying_Triremes_and_Laser_Swords_05_Magitech_and_Fantascience.md#anomalous-object-procedure)
+- [Anomalous Object Catalog](Flying_Triremes_and_Laser_Swords_05_Magitech_and_Fantascience.md#anomalous-object-catalog)
 - [Legacy Generation Support](Flying_Triremes_and_Laser_Swords_05_Magitech_and_Fantascience.md#legacy-generation-support)
 
 Quick handoff:
 1. Roll `d100` on `Magic Item Yield Table` in Chapter 05.  
-2. Use the `Anomolous Object Procedure` and `Anomolous Object Catalog` to resolve the concrete object.  
+2. Use the `Anomalous Object Procedure` and `Anomalous Object Catalog` to resolve the concrete object.  
 3. Drop into `Legacy Generation Support` only if you need denser old-school yield support or named-effect coverage.  
 4. Return to this chapter for hoard handling, transport, and liquidation.
 

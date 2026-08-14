@@ -126,7 +126,7 @@ Conversion record rule:
 - Chapter 05 decides what those become: repaired relics, modified devices, fresh consumables, rebuilt weapons, ward gear, or archive media.
 - If conversion changes faction heat, legal status, or curse profile, record that here before the item enters Chapter 09 market flow.
 
-## Anomolous Object Procedure
+## Anomalous Object Procedure
 
 Use this as the primary Chapter 05 loop. The sections below tell you how to classify, test, use, and record an object in FTLS terms before you ever need the legacy support layer.
 
@@ -270,11 +270,11 @@ Every resolved object should end as an SDM-facing record:
 
 That record is the real Chapter 05 output.
 
-## Anomolous Object Recipes
+## Anomalous Object Recipes
 
 DEV NOTE: Grimoire recipes and other fantascience craft procedures may carry **rank tags**: `[skilled]`, `[expert]`, or `[master]`. A rank tag requires a higher grade of ingredient and produces an output that starts above level 0. The crafter must have a Path or Background skill at the same rank or roll with Disadvantage. Canonical base rule: Ch06 → Rank and Power Economy. For RSS Recipes and Secrets (cooking, ritual, field craft), see Ch04 → Recipes.
 
-## Anomolous Object Catalog
+## Anomalous Object Catalog
 
 Use these family entries as the chapter’s primary catalog. They preserve old-school shapes, but present them in ftls/SDM terms.
 

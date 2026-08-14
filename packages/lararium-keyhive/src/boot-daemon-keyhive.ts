@@ -30,18 +30,18 @@ export interface BootDaemonKeyhiveInput {
   readonly eventStore: CapabilityProviderInitOpts["eventStore"];
   /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
   readonly vesselVerifyingKey: string;
-  /** PersonaGroup sentinel Document id hex — legacy sentinel target (the Binding Gate superseded it). */
-  readonly personaGroupDocIdHex: string;
-  /** PersonaGroup agent id hex — Gate C membership subject. */
-  readonly personaGroupAgentIdHex: string;
-  /** MeshCabal sentinel Document id hex — Gate C membership target. */
-  readonly meshCabalDocIdHex: string;
+  /** PersonaGroup sentinel Document id hex. ABSENT names a vessel at the WAKING FLOOR — see `face` below. */
+  readonly personaGroupDocIdHex?: string;
+  /** PersonaGroup agent id hex — the affiliation layer's membership subject. */
+  readonly personaGroupAgentIdHex?: string;
+  /** MeshCabal sentinel Document id hex — the affiliation layer's membership target, face-side. */
+  readonly meshCabalDocIdHex?: string;
   /** Writable bag URIs to register so `verify`/`delegate` resolve (lar: URIs). */
   readonly registerBags: readonly string[];
   /** The PINNED signer DID — provenance ONLY (the founding op-key = the KEL inception op-key). The Binding
    *  Gate NO LONGER pins this; it pins `personaKel.prefix` and walks the KEL to the current head (no hybrid —
    *  accepting both a raw op-key pin AND the prefix would open a downgrade). */
-  readonly signerDid: string;
+  readonly signerDid?: string;
   /** The persona-KEL PIN + the LOCAL-replica chain the gate walks (identity-classes#the-continuity-anchor).
    *  `prefix` is the stable identifier (AID) read from @daemon (the pin's root of trust); `chain` is the
    *  seq-sorted key-event-log the caller read from its per-Nexus KEL board replica "as of last sync". The gate
@@ -49,9 +49,9 @@ export interface BootDaemonKeyhiveInput {
    *  rotation quorum verified), and verifies the edge against THAT head — a rotated key still binds a fresh
    *  edge; a superseded key rejects. FAIL-CLOSED: an absent / broken / unreachable-head chain HALTS the boot
    *  (never a global lookup — a not-yet-synced replica simply denies). */
-  readonly personaKel: { readonly prefix: string; readonly chain: readonly PersonaKelEvent[] };
+  readonly personaKel?: { readonly prefix: string; readonly chain: readonly PersonaKelEvent[] };
   /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free binding. */
-  readonly deviceEdge: DeviceDelegationTiddler;
+  readonly deviceEdge?: DeviceDelegationTiddler;
   /** OPTIONAL prior-identity Archive (a previous `exportArchive()`), persisted encrypted-at-rest. A joinee
    *  admitted into a PersonaGroup restores from it so its prekeys match the card the founder minted-to —
    *  without it, a fresh boot regenerates prekeys and the shared content reads "Key not found". */
@@ -86,6 +86,23 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
 
   const did = await keyhive.whoami();
 
+  // ── DOES A FACE STAND HERE? ────────────────────────────────────────────────────────────────
+  // A place founded without a face (`lares vessel found`, no `persona new 0`) carries no persona pins
+  // at all, and canon says it still stands: the Herm "boots permissionlessly on its own key… it asks no
+  // blessing to exist" (identity-classes#herm-establishment).
+  //
+  // THE GATE NEVER SOFTENS. It runs in FULL or the vessel carries no persona caps — absence of a face is
+  // not a weaker check, it is FEWER CAPS. That is what keeps the confused-deputy / PCD cure intact: you
+  // cannot skip the Binding Gate by deleting the edge, because deleting the edge deletes the authority
+  // the gate would have granted. A HALF face refuses outright — a vessel holding some pins and not others
+  // has a torn founding, and guessing which half to trust is exactly the deputy confusion.
+  const facePins = [input.personaGroupDocIdHex, input.signerDid, input.personaKel, input.deviceEdge];
+  const facesHeld = facePins.filter((p) => p !== undefined).length;
+  if (facesHeld > 0 && facesHeld < facePins.length) {
+    throw new Error("[daemon-keyhive] the face this vessel pins reads TORN — some persona pins stand and others do not. Re-found the face (`lares persona new 0`) rather than booting on half of one.");
+  }
+  const facelessFloor = facesHeld === 0;
+
   // Gate A — keyhive identity MUST match the operator's persisted verifying key.
   if (!did.endsWith(input.vesselVerifyingKey)) {
     throw new Error(
@@ -101,21 +118,23 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
   // self-contained signed (vessel × hearthTrueName) proof over public CRDT state — no Beelay, no
   // encrypted-graph walk. FAIL-CLOSED and HALT on: a chain whose genesis prefix mismatches the pin (a
   // mis-threaded log), an unreachable / broken / below-quorum head, or an edge that does not chain to the head.
-  const { prefix, chain } = input.personaKel;
+  if (!facelessFloor) {
+  const { prefix, chain } = input.personaKel!;
   if (chain.length === 0 || chain[0]!.prefix !== prefix) {
     throw new Error(`[daemon-keyhive] Binding Gate: persona-KEL pin/chain mismatch — the local chain does not head the pinned identifier ${prefix.slice(0, 20)}…`);
   }
-  const binding = await verifyEdgeAgainstPersonaKel(input.deviceEdge, chain, { now: Date.now() });
+  const binding = await verifyEdgeAgainstPersonaKel(input.deviceEdge!, chain, { now: Date.now() });
   if (!binding.ok) {
     throw new Error(`[daemon-keyhive] Binding Gate: device-delegation edge failed verification against the persona-KEL head op-key. ${binding.reason ?? ""}`);
   }
   // Bind-check: the edge MUST delegate to THIS vessel's key (designation carries authority —
   // a valid edge for a DIFFERENT vessel is not authority for this one).
-  if (input.deviceEdge.deviceVerifyingKey !== input.vesselVerifyingKey) {
+  if (input.deviceEdge!.deviceVerifyingKey !== input.vesselVerifyingKey) {
     throw new Error(
-      `[daemon-keyhive] Binding Gate: edge delegates to ${input.deviceEdge.deviceVerifyingKey.slice(0, 16)}…, ` +
+      `[daemon-keyhive] Binding Gate: edge delegates to ${input.deviceEdge!.deviceVerifyingKey.slice(0, 16)}…, ` +
       `not this vessel ${input.vesselVerifyingKey.slice(0, 16)}…`,
     );
+  }
   }
 
   // Cabal/Nexus membership (the former "Gate C") has LEFT the boot path — it is AFFILIATION,

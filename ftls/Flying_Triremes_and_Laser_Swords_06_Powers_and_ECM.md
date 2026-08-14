@@ -591,8 +591,8 @@ System-level Immortal-tier procedure scaffolding that constrains how all module 
 
 - Placeholder for PP economy, rank progression gates, and sphere-linked advancement constraints.
 - Placeholder for mortal-to-Immortal conversion boundaries and recovery cadence.
-- Placeholder: **Rank Tags on Powers.** Powers may carry rank tags: `[skilled]`, `[expert]`, or `[master]`. A rank tag unlocks additional effects, overcharge options, or riders on that power. To use a rank-tagged power without penalty, the user must have a Path or Background skill at the same rank; otherwise the power is rolled with Disadvantage. This tagging system also applies to RSS Recipes and Secrets (see Ch04 → Recipes) and to magitech/fantascience craft recipes (see Ch05 → Anomolous Object Recipes); for recipes, a rank tag requires a higher grade of ingredient and causes the output item to start above level 0.
-- Placeholder: Faerie folk clans and factions often teach powers to young fae in a partially locked form. Then, once compotence has been demonstraited, the power users can unlock their overcharges witha an initiation ritual. Other initiation rituals allows rank tag upgrades.
+- Placeholder: **Rank Tags on Powers.** Powers may carry rank tags: `[skilled]`, `[expert]`, or `[master]`. A rank tag unlocks additional effects, overcharge options, or riders on that power. To use a rank-tagged power without penalty, the user must have a Path or Background skill at the same rank; otherwise the power is rolled with Disadvantage. This tagging system also applies to RSS Recipes and Secrets (see Ch04 → Recipes) and to magitech/fantascience craft recipes (see Ch05 → Anomalous Object Recipes); for recipes, a rank tag requires a higher grade of ingredient and causes the output item to start above level 0.
+- Placeholder: Faerie folk clans and factions often teach powers to young fae in a partially locked form. Then, once competence has been demonstrated, the power users can unlock their overcharges with an initiation ritual. Other initiation rituals allow rank tag upgrades.
 
 ## Immortal Effect Doctrine
 
@@ -600,7 +600,7 @@ System-level Immortal-tier procedure scaffolding that constrains how all module 
 - Placeholder for transplanar exceptions (conjuring limits, mental resolution, undead/entropy curing).
 - Placeholder for module override rules that supersede mortal-level ritual mechanics.
 
-DEV NOTE: Purely placeholder to complete Chapter 06 conversion. This really belongs in a another chapter.
+DEV NOTE: Purely placeholder to complete Chapter 06 conversion. This really belongs in another chapter.
 
 # Mana, Counterspells, and Jamming
 
@@ -623,22 +623,21 @@ DEV NOTE: Purely placeholder to complete Chapter 06 conversion. This really belo
 >
 > The Mana must be stored immediately in a Gear or Trait inventory slot; if there is no room, it overflows into Burdens (referee’s call). You may spend this Mana in place of Life to cast powers, either incrementally or all at once. You cannot use the Reckless Dweomer power while carrying Mana in any inventory.
 >
-> This power is Very Dangerous. While you are carrying Mana and you make a Defeat roll, or whenever you make any other Dangerous Magic roll, you must immediately make a another Dangerous Magic roll. Unused Mana disperses back into the ley-lines at sunset or sunrise.
+> This power is Very Dangerous. While you are carrying Mana and you make a Defeat roll, or whenever you make any other Dangerous Magic roll, you must immediately make another Dangerous Magic roll. Unused Mana disperses back into the ley-lines at sunset or sunrise.
 >
-> _Ritual Overchange:_ The `[ritual]` tag changes a Power's time-rframe tocat. Instead of 1 round, the user must perform an extended ritual - scaled by the time cost given per point of Power required. Time costs: 1 round/P, 1 minute/P, 10 mintues/P, 1 Hour/P, or 1 watch (4 hours)/P. Ritual casting does not require the Power to be "at the ready", and can be cast from Gimoires or other spell storage. This can also be represented by the Power-as-Gear in the form of ritual items in the local Area that do not need to be "at the ready". Each ritual assistant reduces the overcharge Power cost by 1, or the time needed by 1 cost, minimum 1 each. Ritual Helper afifiniies can apply, capped byt the leader's rank bonus in their magic proficiencey skill (+3/+6/+9).
+> _Ritual Overcharge:_ The `[ritual]` tag changes a Power's time-frame to cast. Instead of 1 round, the user must perform an extended ritual - scaled by the time cost given per point of Power required. Time costs: 1 round/P, 1 minute/P, 10 minutes/P, 1 Hour/P, or 1 watch (4 hours)/P. Ritual casting does not require the Power to be "at the ready", and can be cast from Grimoires or other spell storage. This can also be represented by the Power-as-Gear in the form of ritual items in the local Area that do not need to be "at the ready". Each ritual assistant reduces the overcharge Power cost by 1, or the time needed by 1 cost, minimum 1 each. Ritual Helper affinities can apply, capped by the leader's rank bonus in their magic proficiency skill (+3/+6/+9).
 > 
-> _Overcharge (2):_ `[ritual]`, time cost/P: 1 round; Casting Reckless Dweomer as a x2 overcahrge ritual is the "safe, slow" procedure. The mana pool generated equals the power user's Level or the local Arcane rating, whichever is lower. 
+> _Overcharge (2):_ `[ritual]`, time cost/P: 1 round; Casting Reckless Dweomer as a x2 overcharge ritual is the "safe, slow" procedure. The mana pool generated equals the power user's Level or the local Arcane rating, whichever is lower. 
 >
-> _Overcharge (4):_ `[ritual]`, time cost/P: 1 round; Casting Reckless Dweomer as a x4 overcahrge ritual is the "slow, safe, powerful" procedure. The mana pool generated equals the lead caster's Level + Aura, or the area Arcane level x2 (whichever is lower). helpers can either reduce time, or add +1 mana to the final Pool. 
+> _Overcharge (4):_ `[ritual]`, time cost/P: 1 round; Casting Reckless Dweomer as a x4 overcharge ritual is the "slow, safe, powerful" procedure. The mana pool generated equals the lead caster's Level + Aura, or the area Arcane level x2 (whichever is lower). Helpers can either reduce time, or add +1 mana to the final Pool. 
 >
-> _Overcharge (8):_ `[ritual]`, time cost/P: 1 round; Casting Reckless Dweomer as a x4 overcahrge ritual is the "slow, dangerous, powerful" procedure. The mana pool generated equals the lead caster's Level + Aura, or the area Arcane level x2 (whichever is lower). Helpers can either: reduce time, add +1 to the Arcane rating used for this ritual, or add +1 mana to the final Pool. 
+> _Overcharge (8):_ `[ritual]`, time cost/P: 1 round; Casting Reckless Dweomer as a x8 overcharge ritual is the "slow, dangerous, powerful" procedure. The mana pool generated equals the lead caster's Level + Aura, or the area Arcane level x2 (whichever is lower). Helpers can either: reduce time, add +1 to the Arcane rating used for this ritual, or add +1 mana to the final Pool. 
 >
 > _Dangerous:_ Very Dangerous: make Dangerous Magic checks as noted in the body text.
 
 tags:
 >   [power]
 >   [oldtech]
->   [storage:trait]
 
 meta:
 > - source:
@@ -669,7 +668,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [anti-magic]
 >   [ward]
@@ -736,7 +734,6 @@ magic spell) can cancel the barrier.
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [counterforce]
 >   [utility]
@@ -824,7 +821,6 @@ trol and snap him out of that control).
 
 tags:
 >   [power]
->   [storage:item]
 >   [area]
 >   [disable]
 >   [silence]
@@ -910,7 +906,6 @@ the victim may move out of the area.
 
 tags:
 >   [power]
->   [storage:item]
 >   [evocation]
 >   [radiant]
 >   [guided]
@@ -999,7 +994,6 @@ one target or at different targets.
 
 tags:
 >   [power]
->   [storage:item]
 >   [evocation]
 >   [lightning]
 >   [attack]
@@ -1071,7 +1065,6 @@ caster until the total length of the bolt is 60'.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -1114,7 +1107,6 @@ striking, clawing, biting, squeezing, etc.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -1148,7 +1140,6 @@ of 6" x 12". Duration: 3 turns. Range: 24".
 
 tags:
 >   [power]
->   [storage:item]
 >   [lightning]
 >   [area]
 >   [weather]
@@ -1229,7 +1220,6 @@ duration (or the storm) ends.
 
 tags:
 >   [power]
->   [storage:item]
 >   [attack]
 >   [force]
 
@@ -1306,7 +1296,6 @@ ration ends, except by a dispel magic spell effect
 
 tags:
 >   [power]
->   [storage:item]
 >   [ward]
 >   [lightning]
 >   [druid]
@@ -1384,7 +1373,6 @@ against him will do full damage.
 
 tags:
 >   [power]
->   [storage:item]
 >   [barrier]
 >   [control]
 >   [battlefield]
@@ -1459,7 +1447,6 @@ user spells wall of iron, stoneform, ironform or
 
 tags:
 >   [power]
->   [storage:item]
 >   [barrier]
 >   [force]
 >   [ward]
@@ -1604,7 +1591,6 @@ spell or wished away.
 
 tags:
 >   [power]
->   [storage:item]
 >   [movement]
 >   [utility]
 >   [imbued]
@@ -1687,7 +1673,6 @@ lowed.
 
 tags:
 >   [power]
->   [storage:item]
 >   [conjuration]
 >   [utility]
 >   [movement]
@@ -1769,7 +1754,6 @@ throw is allowed.
 
 tags:
 >   [power]
->   [storage:item]
 >   [movement]
 >   [imbued]
 
@@ -1852,7 +1836,6 @@ tate spell); this does not require concentration.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [ward]
 >   [protection]
 >   [immunity]
@@ -1959,7 +1942,6 @@ ments are possible.
 
 tags:
 >   [power]
->   [storage:item]
 >   [battlefield]
 >   [force]
 
@@ -2045,7 +2027,6 @@ falling back down to the floor.
 
 tags:
 >   [power]
->   [storage:item]
 >   [force]
 >   [control]
 
@@ -2131,7 +2112,6 @@ turbed.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [barrier]
 >   [metal]
@@ -2223,7 +2203,6 @@ on battering attacks.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [exile]
 >   [planar]
 >   [dimensional]
@@ -2302,7 +2281,6 @@ peared.
 
 tags:
 >   [power]
->   [storage:item]
 >   [attack]
 >   [stun]
 
@@ -2365,7 +2343,6 @@ points is stunned for 1d6 turns. No creature with
 
 tags:
 >   [power]
->   [storage:item]
 >   [combat]
 >   [buff]
 >   [weapon]
@@ -2434,7 +2411,6 @@ the weapon).
 
 tags:
 >   [power]
->   [storage:item]
 >   [ward]
 >   [barrier]
 >   [animal]
@@ -2504,7 +2480,6 @@ tacks, just as the druid is protected from theirs.
 
 tags:
 >   [power]
->   [storage:item]
 >   [ward]
 >   [barrier]
 >   [plant]
@@ -2576,7 +2551,6 @@ druid is protected from theirs.
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [ward]
 >   [imbued]
@@ -2637,7 +2611,6 @@ creature within the spell’s range.
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [ward]
 >   [imbued]
@@ -2742,7 +2715,6 @@ still apply until the spell duration ends.
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [ward]
 >   [focus]
@@ -2853,8 +2825,6 @@ they suffer.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:trait]
->   [storage:item]
 
 meta:
 > - source:
@@ -2881,7 +2851,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [ward]
 >   [force]
@@ -2964,7 +2933,6 @@ evaporates.
 tags:
 >   [power]
 >   [oldtech]
->   [storage:item]
 >   [abjuration]
 >   [force]
 >   [armor]
@@ -3007,7 +2975,6 @@ meta:
 tags:
 >   [power]
 >   [oldtech]
->   [storage:trait]
 >   [focus]
 >   [stance]
 >   [defense]
@@ -3044,7 +3011,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [element]
 >   [imbue]
 >   [rite]
@@ -3079,7 +3045,6 @@ meta:
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [evocation]
 >   [fire]
 >   [attack]
@@ -3167,7 +3132,6 @@ rolled on the dice.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [evocation]
 >   [fire]
 >   [attack]
@@ -3260,7 +3224,6 @@ can be dispelled.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [attack]
 >   [fire]
 >   [area]
@@ -3366,7 +3329,6 @@ be made for each blast the character contac
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -3420,7 +3382,6 @@ fire-source is extinguished.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [fire]
 >   [barrier]
 >   [battlefield]
@@ -3496,7 +3457,6 @@ ble damage while breaking through.
 
 tags:
 >   [power]
->   [storage:item]
 >   [fire]
 >   [utility]
 >   [attack]
@@ -3576,7 +3536,6 @@ round remains burning.)
 
 tags:
 >   [power]
->   [storage:item]
 >   [fire]
 >   [debuff]
 >   [druid]
@@ -3667,7 +3626,6 @@ pounds (100 cn—for example, a two-handed
 
 tags:
 >   [power]
->   [storage:item]
 >   [protection]
 >   [elemental]
 >   [fire]
@@ -3739,7 +3697,6 @@ damage per Hit Die).
 
 tags:
 >   [power]
->   [storage:item]
 >   [cold]
 >   [area]
 >   [barrier]
@@ -3843,7 +3800,6 @@ tures each take twice the amount of damage
 
 tags:
 >   [power]
->   [storage:item]
 >   [protection]
 >   [elemental]
 >   [area]
@@ -3904,7 +3860,6 @@ fect will move with the cleric.
 
 tags:
 >   [power]
->   [storage:item]
 >   [terrain]
 >   [battlefield]
 >   [destruction]
@@ -3988,7 +3943,6 @@ death to escape falling in).
 
 tags:
 >   [power]
->   [storage:item]
 >   [battlefield]
 >   [earth]
 >   [terrain]
@@ -4053,7 +4007,6 @@ is helpful for constructing castles.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [barrier]
 >   [infrastructure]
@@ -4122,7 +4075,6 @@ points of damage to what it hits, and it shatters.
 
 tags:
 >   [power]
->   [storage:item]
 >   [control]
 >   [restraint]
 >   [plant]
@@ -4182,7 +4134,6 @@ avoid the effects of the entangle.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [plants]
 >   [terrain]
@@ -4273,7 +4224,6 @@ treants).
 
 tags:
 >   [power]
->   [storage:trait]
 >   [earth]
 >   [totem]
 
@@ -4306,7 +4256,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [weather]
 >   [environment]
 >   [utility]
@@ -4378,7 +4327,6 @@ survive temperature extremes.
 
 tags:
 >   [power]
->   [storage:item]
 >   [weather]
 >   [control]
 >   [battlefield]
@@ -4465,7 +4413,6 @@ lapses, the creature will attack the druid.
 
 tags:
 >   [power]
->   [storage:item]
 >   [weather]
 >   [environment]
 >   [control]
@@ -4557,7 +4504,6 @@ nado as a storm or gale.
 
 tags:
 >   [power]
->   [storage:item]
 >   [concealment]
 >   [weather]
 >   [druid]
@@ -4633,7 +4579,6 @@ blind.
 
 tags:
 >   [power]
->   [storage:item]
 >   [weather]
 >   [environment]
 >   [dangerous]
@@ -4708,7 +4653,6 @@ summon weather from up to 10 miles away.)
 
 tags:
 >   [power]
->   [storage:item]
 >   [terrain]
 >   [water]
 >   [infrastructure]
@@ -4789,7 +4733,6 @@ come stuck.
 
 tags:
 >   [power]
->   [storage:trait]
 >   [water]
 >   [attack]
 >   [control]
@@ -4823,7 +4766,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [area]
 >   [death]
 >   [kill]
@@ -4893,7 +4835,6 @@ death ray or die.
 
 tags:
 >   [power]
->   [storage:item]
 >   [attack]
 >   [transmutation]
 >   [dangerous]
@@ -4954,7 +4895,6 @@ effects.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [attack]
 >   [debilitation]
 >   [dangerous]
@@ -5031,7 +4971,6 @@ blind.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [attack]
 >   [dangerous]
 
@@ -5110,7 +5049,6 @@ saving throw).
 
 tags:
 >   [power]
->   [storage:item]
 >   [attack]
 >   [poison]
 >   [area-denial]
@@ -5191,7 +5129,6 @@ poison or be killed by the vapors.
 
 tags:
 >   [power]
->   [storage:item]
 >   [attack]
 >   [cloud]
 >   [area-denial]
@@ -5282,7 +5219,6 @@ attacks.
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [battlefield]
 >   [area]
@@ -5353,7 +5289,6 @@ works outdoors and above-ground.
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [swarm]
 >   [battlefield]
@@ -5453,7 +5388,6 @@ the normal movement rate.
 
 tags:
 >   [power]
->   [storage:item]
 >   [movement]
 >   [teleport]
 
@@ -5523,7 +5457,6 @@ throw vs. spells to avoid the effect.
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [utility]
 >   [breach]
@@ -5602,7 +5535,6 @@ type of lock will be opened.
 
 tags:
 >   [power]
->   [storage:item]
 >   [portal]
 >   [access]
 
@@ -5702,7 +5634,6 @@ magic spell.
 
 tags:
 >   [power]
->   [storage:item]
 >   [traversal]
 >   [teleport]
 >   [druid]
@@ -5780,7 +5711,6 @@ Other trees
 
 tags:
 >   [power]
->   [storage:trait]
 >   [movement]
 >   [phase]
 >   [utility]
@@ -5848,7 +5778,6 @@ trapped within the reappearing stone, and dies.
 
 tags:
 >   [power]
->   [storage:item]
 >   [traversal]
 >   [plant]
 >   [druid]
@@ -5918,7 +5847,6 @@ what is happening while he is in the tree.
 
 tags:
 >   [power]
->   [storage:item]
 >   [movement]
 >   [teleport]
 >   [dangerous]
@@ -6072,7 +6000,6 @@ dungeon) lies at that point (DM’s discretion).
 
 tags:
 >   [power]
->   [storage:item]
 >   [teleport]
 >   [utility]
 
@@ -6170,7 +6097,6 @@ with a -2 penalty to the roll.
 
 tags:
 >   [power]
->   [storage:item]
 >   [traversal]
 >   [teleport]
 >   [druid]
@@ -6253,7 +6179,6 @@ port two additional willing creatures.
 
 tags:
 >   [power]
->   [storage:item]
 >   [traversal]
 >   [teleport]
 >   [phase]
@@ -6356,7 +6281,6 @@ effect or an anti-magic shell.
 
 tags:
 >   [power]
->   [storage:item]
 >   [movement]
 >   [teleport]
 >   [sanctuary]
@@ -6432,7 +6356,6 @@ matically gains initiative unless surprised.
 tags:
 >   [power]
 >   [ritual]
->   [storage:trait]
 
 meta:
 > - source:
@@ -6466,7 +6389,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [dream]
 >   [totem]
 >   [stance]
@@ -6503,7 +6425,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [water]
 >   [stance]
 
@@ -6540,7 +6461,6 @@ meta:
 tags:
 >   [power]
 >   [ritual]
->   [storage:trait]
 >   [shadow]
 >   [web]
 >   [stance]
@@ -6577,7 +6497,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [chaos]
 >   [lightning]
 
@@ -6614,7 +6533,6 @@ meta:
 tags:
 >   [power]
 >   [ritual]
->   [storage:trait]
 >   [earth]
 >   [ward]
 >   [rite]
@@ -6650,7 +6568,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [healing]
 >   [restoration]
 >   [reversible]
@@ -6713,7 +6630,6 @@ roll to cause the critical wound.
 
 tags:
 >   [power]
->   [storage:item]
 >   [healing]
 >   [restoration]
 >   [cleanse]
@@ -6793,7 +6709,6 @@ that will work on a newly-raised creature.
 
 tags:
 >   [power]
->   [storage:item]
 >   [healing]
 >   [restoration]
 
@@ -6870,7 +6785,6 @@ points of damage. It cannot heal damage if used
 
 tags:
 >   [power]
->   [storage:item]
 >   [healing]
 >   [restoration]
 >   [reversible]
@@ -6933,7 +6847,6 @@ cessfully cast the cause serious wounds spell.
 
 tags:
 >   [power]
->   [storage:item]
 >   [healing]
 >   [restoration]
 >   [cleanse]
@@ -6998,7 +6911,6 @@ feeblemind effect.
 
 tags:
 >   [power]
->   [storage:item]
 >   [restoration]
 >   [condition-removal]
 >   [cleric]
@@ -7053,7 +6965,6 @@ however, affect blindness caused by a curse.
 
 tags:
 >   [power]
->   [storage:item]
 >   [healing]
 >   [restoration]
 >   [reversible]
@@ -7126,7 +7037,6 @@ as long as usual. The disease is fatal in 2d12 (2-
 
 tags:
 >   [power]
->   [storage:item]
 >   [restoration]
 >   [condition-removal]
 >   [poison]
@@ -7212,7 +7122,6 @@ ing in any case, is usually a Chaotic act.
 
 tags:
 >   [power]
->   [storage:item]
 >   [ward]
 >   [poison]
 >   [druid]
@@ -7279,7 +7188,6 @@ petrification breath (such as a gorgon’s).
 
 tags:
 >   [power]
->   [storage:item]
 >   [transformation]
 >   [restoration]
 >   [reversible]
@@ -7349,7 +7257,6 @@ saving throw vs. turn to stone to avoid the effect.
 tags:
 >   [power]
 >   [ritual]
->   [storage:trait]
 >   [venom]
 >   [gaze]
 
@@ -7382,7 +7289,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [utility]
 >   [traversal]
 >   [air]
@@ -7457,7 +7363,6 @@ a normal component of the atmosphere.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [supply]
 >   [healing]
@@ -7521,7 +7426,6 @@ lay in a big store of food created by this spell.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [water]
 >   [supply]
@@ -7590,7 +7494,6 @@ spell to create, up to the spell’s maximum.
 
 tags:
 >   [power]
->   [storage:item]
 >   [healing]
 >   [utility]
 >   [supply]
@@ -7654,7 +7557,6 @@ affect any living creature.
 
 tags:
 >   [power]
->   [storage:item]
 >   [survival]
 >   [environment]
 >   [dangerous]
@@ -7734,7 +7636,6 @@ damage.
 
 tags:
 >   [power]
->   [storage:trait]
 >   [movement]
 >   [water]
 >   [adaptation]
@@ -7808,7 +7709,6 @@ the breathing of air.
 
 tags:
 >   [power]
->   [storage:item]
 >   [buff]
 >   [tempo]
 >   [movement]
@@ -7890,7 +7790,6 @@ to avoid the effect.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -7933,7 +7832,6 @@ points, a thief’s by 1-6 points, or a cleric’s by 1-4.
 
 tags:
 >   [power]
->   [storage:item]
 >   [transformation]
 >   [buff]
 >   [animal]
@@ -7996,7 +7894,6 @@ fantastic creatures.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -8053,7 +7950,6 @@ volume.
 
 tags:
 >   [power]
->   [storage:burden]
 >   [secret]
 >   [totem]
 >   [stance]
@@ -8088,7 +7984,6 @@ meta:
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [sensory]
 >   [enhancement]
 >   [darkness]
@@ -8169,7 +8064,6 @@ example, 8' tall or walking with a crutch).
 
 tags:
 >   [power]
->   [storage:item]
 >   [control]
 >   [area]
 >   [utility]
@@ -8245,7 +8139,6 @@ sure) can break free of a web in 4 rounds.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [body]
 >   [deathless]
@@ -8521,7 +8414,6 @@ cluding spells and spell-like abilities (using the
 
 tags:
 >   [power]
->   [storage:item]
 >   [transformation]
 >   [control]
 >   [dangerous]
@@ -8615,7 +8507,6 @@ lasts until dispelled, or until the creature dies.
 
 tags:
 >   [power]
->   [storage:item]
 >   [transformation]
 >   [body]
 >   [imbued]
@@ -8708,7 +8599,6 @@ ual (see polymorph other).
 
 tags:
 >   [power]
->   [storage:item]
 >   [transformation]
 >   [dangerous]
 
@@ -8817,7 +8707,6 @@ Dice.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [transformation]
 >   [self]
 >   [dangerous]
@@ -8937,7 +8826,6 @@ tion from evil or anti-magic shell spell effect.
 
 tags:
 >   [power]
->   [storage:item]
 >   [defense]
 >   [transformation]
 
@@ -9028,7 +8916,6 @@ fore the attacking spell strikes.
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [transformation]
 >   [cleric]
@@ -9102,7 +8989,6 @@ poisonous) or 13 (poisonous).
 
 tags:
 >   [power]
->   [storage:trait]
 >   [bone]
 >   [earth]
 >   [forge]
@@ -9147,7 +9033,6 @@ meta:
 tags:
 >   [power]
 >   [oldtech]
->   [storage:burden]
 >   [totem]
 >   [vome]
 >   [stance]
@@ -9184,7 +9069,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [water]
 >   [shapechange]
 >   [movement]
@@ -9220,7 +9104,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [reveal]
 >   [anti-concealment]
@@ -9289,7 +9172,6 @@ and power.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [detection]
 >   [anti-concealment]
@@ -9351,7 +9233,6 @@ spell to see invisible things within 30'.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [detection]
 >   [utility]
@@ -9408,7 +9289,6 @@ trap, nor is a natural hazard, such as quicksand.
 
 tags:
 >   [power]
->   [storage:item]
 >   [reveal]
 >   [support]
 >   [druid]
@@ -9489,7 +9369,6 @@ four man-sized creatures).
 
 tags:
 >   [power]
->   [storage:item]
 >   [illusion]
 >   [focus]
 >   [imbued]
@@ -9581,7 +9460,6 @@ he or she attacks or casts any spell.
 
 tags:
 >   [power]
->   [storage:item]
 >   [illusion]
 >   [focus]
 >   [imbued]
@@ -9651,7 +9529,6 @@ others within 10') also become invisible.
 
 tags:
 >   [power]
->   [storage:item]
 >   [veil]
 >   [invisibility]
 
@@ -9737,7 +9614,6 @@ ble again for one full turn.
 
 tags:
 >   [power]
->   [storage:item]
 >   [illusion]
 >   [defense]
 >   [focus]
@@ -9819,7 +9695,6 @@ the spellcaster will be affected by the spell.)
 
 tags:
 >   [power]
->   [storage:item]
 >   [illusion]
 >   [concealment]
 >   [area]
@@ -9903,7 +9778,6 @@ area does not destroy the illusion.
 
 tags:
 >   [power]
->   [storage:trait]
 >   [secret]
 >   [dream]
 >   [water]
@@ -9938,7 +9812,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [illusion]
 >   [terrain]
 >   [control]
@@ -10010,7 +9883,6 @@ an intelligent creature, or until dispelled.
 
 tags:
 >   [power]
->   [storage:item]
 >   [illusion]
 >   [control]
 >   [focus]
@@ -10114,7 +9986,6 @@ damage sustained disappears immediately.
 
 tags:
 >   [power]
->   [storage:item]
 >   [illusion]
 >   [decoy]
 >   [control]
@@ -10183,7 +10054,6 @@ by a hand-to-hand weapon, it disappears.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -10231,7 +10101,6 @@ easily be accomplished by a second level magic-user).
 
 tags:
 >   [power]
->   [storage:item]
 >   [illusion]
 >   [deception]
 >   [utility]
@@ -10289,7 +10158,6 @@ be within range of the spell.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -10348,7 +10216,6 @@ given. Message can not exceed 25 words.
 tags:
 >   [power]
 >   [oldtech]
->   [storage:trait]
 >   [water]
 >   [totem]
 
@@ -10384,7 +10251,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [shadow]
 >   [stance]
 
@@ -10419,7 +10285,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [elemental]
 >   [control]
@@ -10512,7 +10377,6 @@ return an uncontrolled elemental to its plane.
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [servitor]
 >   [invisible]
@@ -10577,7 +10441,6 @@ to its home plane.
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [servitor]
 >   [utility]
@@ -10668,7 +10531,6 @@ See Chapter 14 for a full description of the
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [elemental]
 >   [druid]
@@ -10741,7 +10603,6 @@ magic or dispel evil spell.
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [utility]
 
@@ -10833,7 +10694,6 @@ plane of existence.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [animal]
 >   [summon]
@@ -10922,7 +10782,6 @@ ends.
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [control]
 
@@ -11029,7 +10888,6 @@ giant weasels (5 Hit Die monsters); and so forth.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [monster]
 >   [construct]
@@ -11134,7 +10992,6 @@ nondispellable constructs.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [monster]
 >   [construct]
@@ -11247,7 +11104,6 @@ effect.
 
 tags:
 >   [power]
->   [storage:item]
 >   [summon]
 >   [animal]
 >   [druid]
@@ -11343,7 +11199,6 @@ mals encountered while adventuring.
 
 tags:
 >   [power]
->   [storage:item]
 >   [planar]
 >   [portal]
 >   [summon]
@@ -11481,7 +11336,6 @@ instance, make him leave if he chooses to stay.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:trait]
 >   [earth]
 >   [summon]
 
@@ -11514,7 +11368,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [compulsion]
 >   [binding]
 >   [dangerous]
@@ -11584,7 +11437,6 @@ failure (5% per level difference).
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [binding]
 >   [utility]
@@ -11657,7 +11509,6 @@ spellcaster.
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [binding]
 >   [ward]
@@ -11726,7 +11577,6 @@ dispelled). However, a knock spell can open the
 
 tags:
 >   [power]
->   [storage:item]
 >   [binding]
 >   [trigger]
 >   [ward]
@@ -11851,7 +11701,6 @@ situation described comes to pass.
 
 tags:
 >   [power]
->   [storage:item]
 >   [binding]
 >   [duration]
 >   [ritual]
@@ -11985,7 +11834,6 @@ nently placed upon them.
 
 tags:
 >   [power]
->   [storage:item]
 >   [trap]
 >   [binding]
 >   [dangerous]
@@ -12140,7 +11988,6 @@ turns (as the power word stun spell).
 
 tags:
 >   [power]
->   [storage:trait]
 >   [totem]
 >   [bind]
 >   [control]
@@ -12176,7 +12023,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [ritual]
 >   [necromancy]
 >   [conjuration]
@@ -12306,7 +12152,6 @@ haunt, spirit, nightshade, or special).
 
 tags:
 >   [power]
->   [storage:item]
 >   [resurrection]
 >   [undead]
 >   [dangerous]
@@ -12434,7 +12279,6 @@ curing blindness or feeblemind, etc.).
 
 tags:
 >   [power]
->   [storage:item]
 >   [healing]
 >   [restoration]
 >   [resurrection]
@@ -12540,7 +12384,6 @@ should be at least semi-intelligent.
 
 tags:
 >   [power]
->   [storage:item]
 >   [necromancy]
 >   [dangerous]
 >   [death]
@@ -12594,7 +12437,6 @@ Finger of death will actually cure 3d10 (3-30) points of damage for any undead w
 
 tags:
 >   [power]
->   [storage:trait]
 >   [necromancy]
 >   [anchor]
 >   [persistence]
@@ -12628,7 +12470,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [restoration]
 >   [dangerous]
 >   [reversible]
@@ -12714,7 +12555,6 @@ but it is a Chaotic act, avoided by Lawful clerics.
 
 tags:
 >   [power]
->   [storage:item]
 >   [abjuration]
 >   [banishment]
 >   [undead]
@@ -12798,7 +12638,6 @@ influence of any magical charm.
 
 tags:
 >   [power]
->   [storage:item]
 >   [restoration]
 >   [abjuration]
 >   [utility]
@@ -12878,7 +12717,6 @@ make a saving throw vs. spells to avoid the curse.
 
 tags:
 >   [power]
->   [storage:item]
 >   [morale]
 >   [combat-buff]
 >   [cleric]
@@ -12956,7 +12794,6 @@ throw vs. spells to avoid the penalties.
 
 tags:
 >   [power]
->   [storage:trait]
 >   [fueled]
 
 meta:
@@ -12988,7 +12825,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [communication]
 >   [death]
@@ -13068,7 +12904,6 @@ alignments differ, the spirit may reply in riddles.
 
 tags:
 >   [power]
->   [storage:trait]
 >   [necromancy]
 >   [ritual]
 >   [control]
@@ -13164,7 +12999,6 @@ is usually a Chaotic act.
 
 tags:
 >   [power]
->   [storage:burden]
 >   [necromancy]
 >   [command]
 >   [undead]
@@ -13200,7 +13034,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [restoration]
 >   [morale]
 >   [cleric]
@@ -13288,7 +13121,6 @@ of 120'.
 
 tags:
 >   [power]
->   [storage:item]
 >   [word]
 >   [banishment]
 >   [undead]
@@ -13389,7 +13221,6 @@ an anti-magic shell.
 tags:
 >   [power]
 >   [ritual]
->   [storage:trait]
 >   [totem]
 >   [shout]
 
@@ -13431,7 +13262,6 @@ meta:
 tags:
 >   [power]
 >   [fantascience]
->   [storage:trait]
 >   [chaos]
 >   [totem]
 >   [gaze]
@@ -13465,7 +13295,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [mental]
 >   [debuff]
 >   [dangerous]
@@ -13538,7 +13367,6 @@ by a cleric’s cureall spell.
 
 tags:
 >   [power]
->   [storage:item]
 >   [mind]
 >   [possession]
 >   [dangerous]
@@ -13662,7 +13490,6 @@ act.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [ward]
 >   [mind]
 >   [protection]
@@ -13766,7 +13593,6 @@ normal attack roll.
 
 tags:
 >   [power]
->   [storage:item]
 >   [mind]
 >   [compulsion]
 >   [curse]
@@ -13871,7 +13697,6 @@ to remove a quest cast by a 20th level cleric has a
 
 tags:
 >   [power]
->   [storage:item]
 >   [mental]
 >   [control]
 >   [disable]
@@ -13961,7 +13786,6 @@ spell.
 
 tags:
 >   [power]
->   [storage:item]
 >   [control]
 >   [mental]
 >   [focus]
@@ -14055,7 +13879,6 @@ ghoul’s paralysis ability.
 
 tags:
 >   [power]
->   [storage:item]
 >   [mental]
 >   [social]
 >   [control]
@@ -14206,7 +14029,6 @@ tacked by the spellcaster’s allies.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [charm]
 >   [creature-control]
 >   [mind]
@@ -14267,7 +14089,6 @@ to avoid the effects.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [hold]
 >   [restraint]
 >   [paralysis]
@@ -14343,7 +14164,6 @@ fect.
 
 tags:
 >   [power]
->   [storage:item]
 >   [mind]
 >   [compulsion]
 >   [dangerous]
@@ -14420,7 +14240,6 @@ five rounds at levels 25-28, six rounds at levels
 
 tags:
 >   [power]
->   [storage:item]
 >   [mental]
 >   [control]
 >   [debuff]
@@ -14498,7 +14317,6 @@ Attack the creature’s own party
 
 tags:
 >   [power]
->   [storage:item]
 >   [control]
 >   [animal]
 >   [charm]
@@ -14573,7 +14391,6 @@ ically hostile).
 
 tags:
 >   [power]
->   [storage:item]
 >   [control]
 >   [animal]
 >   [druid]
@@ -14646,7 +14463,6 @@ summoned, conjured, or controlled animals.
 
 tags:
 >   [power]
->   [storage:item]
 >   [control]
 >   [nature]
 >   [charm]
@@ -14726,7 +14542,6 @@ plants spell, and possibly a permanence as well.)
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [control]
 >   [charm]
 >   [mind]
@@ -14822,7 +14637,6 @@ for one turn.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [research]
 
@@ -14913,7 +14727,6 @@ great power.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [utility]
 >   [language]
@@ -14980,7 +14793,6 @@ until the duration ends.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:trait]
 >   [dream]
 >   [gaze]
 
@@ -15013,7 +14825,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [oracle]
 >   [ritual]
@@ -15086,7 +14897,6 @@ questioned.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [dangerous]
 
@@ -15207,7 +15017,6 @@ chart below to determine this.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [navigation]
 >   [utility]
@@ -15284,7 +15093,6 @@ used to find a fast escape route.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [weather]
 >   [druid]
@@ -15353,7 +15161,6 @@ predicts what is to come.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [mental]
 >   [detection]
@@ -15454,7 +15261,6 @@ forms of mind-reading for the spell duration.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [scrying]
 >   [detection]
@@ -15523,7 +15329,6 @@ effects of this spell. No saving throw is allowed.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -15565,7 +15370,6 @@ Clairaudience: Same as Clairvoyance except it allows hearing rather than visuali
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [scrying]
 >   [scouting]
@@ -15627,7 +15431,6 @@ through the eye.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [communication]
 >   [animal]
@@ -15709,7 +15512,6 @@ must be able to perform it.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [communication]
 >   [plant]
@@ -15774,7 +15576,6 @@ cleric to communicate with plantlike monsters
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [communication]
 >   [reversible]
@@ -15885,7 +15686,6 @@ the command words turn into gibberish.
 tags:
 >   [power]
 >   [fantascience]
->   [storage:trait]
 >   [anchored]
 >   [concentration]
 
@@ -15922,7 +15722,6 @@ meta:
 tags:
 >   [power]
 >   [fantascience]
->   [storage:trait]
 >   [concentration]
 >   [dream]
 >   [shadow]
@@ -15971,7 +15770,6 @@ meta:
 tags:
 >   [power]
 >   [fantascience]
->   [storage:trait]
 >   [command]
 >   [tactics]
 >   [rite]
@@ -16011,7 +15809,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 
 meta:
 > - source:
@@ -16048,7 +15845,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [network]
 >   [scent]
 >   [scout]
@@ -16082,7 +15878,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [detection]
 
@@ -16152,7 +15947,6 @@ Detect Magic
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [search]
 >   [utility]
@@ -16236,7 +16030,6 @@ The spell will not locate a creature.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [detection]
 
@@ -16308,7 +16101,6 @@ Detect Evil
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [alignment]
 >   [reversible]
@@ -16383,7 +16175,6 @@ swer will be the result of any further attempts.
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [identification]
 
@@ -16438,7 +16229,6 @@ mate the number of charges on an item within
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [hazard]
 >   [druid]
@@ -16519,7 +16309,6 @@ where, the duration is half normal (three turns).
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [tracking]
 >   [druid]
@@ -16593,7 +16382,6 @@ find special rare plants.)
 
 tags:
 >   [power]
->   [storage:item]
 >   [divination]
 >   [utility]
 >   [arcana]
@@ -16672,7 +16460,6 @@ using this spell.
 
 tags:
 >   [power]
->   [storage:trait]
 >   [earth]
 >   [recon]
 >   [warren]
@@ -16713,7 +16500,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [totem]
 >   [sound]
 >   [shadow]
@@ -16755,7 +16541,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:trait]
 >   [dream]
 >   [totem]
 >   [network]
@@ -16792,7 +16577,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [cross-tradition]
 >   [item-use]
 >   [dangerous]
@@ -16883,7 +16667,6 @@ idic spells are also not reversible.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [utility]
 
@@ -16956,7 +16739,6 @@ quick shelters and to create rope.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [construction]
 >   [metal]
@@ -17038,7 +16820,6 @@ we find that an iron wall will have an AC of —
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [metal]
 >   [craft]
@@ -17085,7 +16866,6 @@ about 20 hit points per 1" thickness.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [earth]
 >   [construction]
@@ -17175,7 +16955,6 @@ thick and have 60 hit points.
 
 tags:
 >   [power]
->   [storage:item]
 >   [creation]
 >   [construction]
 >   [wood]
@@ -17262,7 +17041,6 @@ be about 8" thick and have 40 hit points.
 
 tags:
 >   [power]
->   [storage:item]
 >   [transformation]
 >   [terrain]
 >   [druid]
@@ -17358,7 +17136,6 @@ spells to avoid becoming stuck).
 
 tags:
 >   [power]
->   [storage:item]
 >   [transformation]
 >   [material]
 >   [druid]
@@ -17429,7 +17206,6 @@ turn to nonmagical wooden clubs.
 
 tags:
 >   [power]
->   [storage:item]
 >   [force]
 >   [wood]
 >   [control]
@@ -17537,7 +17313,6 @@ other secured objects (such as trees).
 
 tags:
 >   [power]
->   [storage:item]
 >   [transformation]
 >   [wood]
 >   [druid]
@@ -17617,7 +17392,6 @@ chance to be unaffected.)
 
 tags:
 >   [power]
->   [storage:item]
 >   [animation]
 >   [control]
 >   [utility]
@@ -17711,7 +17485,6 @@ chances to hit as the cleric animating them.
 tags:
 >   [power]
 >   [oldtech]
->   [storage:trait]
 >   [fueled]
 >   [craft]
 >   [shell]
@@ -17747,7 +17520,6 @@ meta:
 
 tags:
 >   [power]
->   [storage:item]
 >   [evocation]
 >   [utility]
 >   [light]
@@ -17834,7 +17606,6 @@ the victim does get a saving throw.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -17876,7 +17647,6 @@ tinued concentration.
 
 tags:
 >   [power]
->   [storage:item]
 >   [evocation]
 >   [utility]
 >   [light]
@@ -17984,7 +17754,6 @@ spell will cancel its effects.
 
 tags:
 >   [power]
->   [storage:item]
 
 meta:
 > - source:
@@ -18035,7 +17804,6 @@ When reversed, light creates darkness: a circle of darkness 30' in diameter. It 
 
 tags:
 >   [power]
->   [storage:item]
 >   [shadow]
 >   [anchored]
 >   [reversible]
@@ -18081,7 +17849,6 @@ Continual darkness creates a completely dark volume of 60' diameter (30' radius)
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [barrier]
 >   [ward]
 >   [area]
@@ -18236,7 +18003,6 @@ A person with an active anti-magic shell (in-
 
 tags:
 >   [power]
->   [storage:item]
 >   [ritual]
 >   [reality]
 >   [dangerous]
@@ -18331,7 +18097,6 @@ worded wish that’s out of balance. Chara
 tags:
 >   [power]
 >   [fantascience]
->   [storage:item]
 >   [time]
 >   [self]
 >   [dangerous]

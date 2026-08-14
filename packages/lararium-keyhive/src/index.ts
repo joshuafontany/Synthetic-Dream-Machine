@@ -38,7 +38,10 @@ export type {
 // import it.
 
 export {
-  runFoundingCeremony, runDeviceAdmitEdge, runApplyAdmitPayload,
+  foundThePlace, foundTheFace, runFoundingCeremony, runDeviceAdmitEdge, runApplyAdmitPayload,
+} from "./ceremony-core.js";
+export type {
+  PlaceFoundingInput, PlaceFoundingResult, FaceFoundingInput, FaceFoundingResult,
 } from "./ceremony-core.js";
 export { runReadmitEdge, type ReadmitEdgeInput } from "./recovery-core.js";
 export type {

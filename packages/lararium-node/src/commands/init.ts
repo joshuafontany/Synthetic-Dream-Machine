@@ -7,8 +7,11 @@
  *   - writeFileSync for the social bootstrap (<data>/vessel — see larBootstrapPath)
  *   - the composable genesis cap (daemonGenesisDir) for default directory resolution
  *
- * All ceremony logic lives in @lararium/keyhive (runFoundingCeremony,
+ * All ceremony logic lives in @lararium/keyhive (foundThePlace, foundTheFace,
  * runApplyAdmitPayload) and runs identically in browser + mobile vessels.
+ *
+ * THE TWO HALVES: `runInit` stands the PLACE alone — a vessel that carries and serves, holding no
+ * human face. `runFoundTheFace` lands the persona half whenever an operator arrives to light it.
  *
  * Re-running stays idempotent: when the social bootstrap already lives
  * on disk, the function returns early without re-seeding.
@@ -29,9 +32,11 @@ import {
   generateOrLoadVesselIdentity, loadVesselSigningSeed, persistVesselCard,
   generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
 } from "../node-vessel-identity.js";
+import type { AutomergeUrl } from "@automerge/automerge-repo";
+import type { LarDoc } from "@lararium/mesh";
 import { GENESIS_ENGINE_CID } from "../genesis-artifact.js";
 import {
-  runFoundingCeremony, runApplyAdmitPayload, type DeviceAdmitPayload,
+  foundThePlace, foundTheFace, runApplyAdmitPayload, type DeviceAdmitPayload,
 } from "@lararium/keyhive";
 import { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "../open-node-vessel.js";
 
@@ -63,25 +68,11 @@ function defaultDirs(): { storageDir: string; genesisDir: string } {
   };
 }
 
-function makeBootstrapPlugin(
-  identitiesUrl: string, circlesUrl: string, sessionsUrl: string, daemonUrl: string, personaUrl: string,
-  personaGroupDocIdHex: string, meshCabalDocIdHex: string,
-): object {
-  const packedTiddlers = {
-    [IDENTITIES_DOC_URI]:        { title: IDENTITIES_DOC_URI,        text: identitiesUrl,         kind: "oracle" },
-    [CIRCLES_DOC_URI]:           { title: CIRCLES_DOC_URI,           text: circlesUrl,             kind: "oracle" },
-    [SESSIONS_DOC_URI]:          { title: SESSIONS_DOC_URI,          text: sessionsUrl,             kind: "oracle" },
-    [DAEMON_BAG_ID]:              { title: DAEMON_BAG_ID,              text: daemonUrl,                kind: "oracle" },
-    // The PersonaGroup plane and the membership that names it — written through the same pair a vessel
-    // standing in a SECOND compartment would add, so founding and admission lay down one shape. The boot
-    // path reads the family back by derivation; nothing here holds an order or an index.
-    ...Object.fromEntries(
-      personaMembershipEntries({ personaGroupId: personaGroupDocIdHex, url: personaUrl })
-        .map((e) => [e.title, { title: e.title, text: e.text, kind: "oracle" }]),
-    ),
-    [MESH_CABAL_DOC_ID_TIDDLER]: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabalDocIdHex,     kind: "sentinel-id" },
-    [PERSONA_GROUP_DOC_ID_TIDDLER]:{ title: PERSONA_GROUP_DOC_ID_TIDDLER, text: personaGroupDocIdHex, kind: "sentinel-id" },
-  };
+type PackedTiddler  = { title: string; text: string; kind: string };
+type PackedTiddlers = Record<string, PackedTiddler>;
+
+/** Wrap a packed tiddler map as the bootstrap plugin the vessel reads at boot. */
+function bootstrapPlugin(packedTiddlers: PackedTiddlers): object {
   return {
     title:         SOCIAL_BOOTSTRAP_PLUGIN_TITLE,
     "plugin-type": "plugin",
@@ -89,6 +80,41 @@ function makeBootstrapPlugin(
     tags:          "lar:///ha.ka.ba/tags/lararium-bootstrap",
     text:          JSON.stringify({ tiddlers: packedTiddlers }),
   };
+}
+
+/** What a PLACE bootstrap carries: its sovereign island, and nothing of any person. */
+function placeTiddlers(daemonUrl: string): PackedTiddlers {
+  return {
+    [DAEMON_BAG_ID]: { title: DAEMON_BAG_ID, text: daemonUrl, kind: "oracle" },
+  };
+}
+
+/** What a FACE adds on top: the social planes, the PersonaGroup that names them, and the cabal it seats in. */
+function faceTiddlers(
+  identitiesUrl: string, circlesUrl: string, sessionsUrl: string, personaUrl: string,
+  personaGroupDocIdHex: string, meshCabalDocIdHex: string,
+): PackedTiddlers {
+  return {
+    [MESH_CABAL_DOC_ID_TIDDLER]: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabalDocIdHex, kind: "sentinel-id" },
+    [IDENTITIES_DOC_URI]: { title: IDENTITIES_DOC_URI, text: identitiesUrl, kind: "oracle" },
+    [CIRCLES_DOC_URI]:    { title: CIRCLES_DOC_URI,    text: circlesUrl,    kind: "oracle" },
+    [SESSIONS_DOC_URI]:   { title: SESSIONS_DOC_URI,   text: sessionsUrl,   kind: "oracle" },
+    // The PersonaGroup plane and the membership that names it — written through the same pair a vessel
+    // standing in a SECOND compartment would add, so founding and admission lay down one shape. The boot
+    // path reads the family back by derivation; nothing here holds an order or an index.
+    ...Object.fromEntries(
+      personaMembershipEntries({ personaGroupId: personaGroupDocIdHex, url: personaUrl })
+        .map((e) => [e.title, { title: e.title, text: e.text as string, kind: "oracle" }]),
+    ),
+    [PERSONA_GROUP_DOC_ID_TIDDLER]: { title: PERSONA_GROUP_DOC_ID_TIDDLER, text: personaGroupDocIdHex, kind: "sentinel-id" },
+  };
+}
+
+/** Read the packed tiddlers back out of a bootstrap already on disk. */
+function readPackedTiddlers(path: string): PackedTiddlers {
+  const plugin = JSON.parse(readFileSync(path, "utf8")) as { text?: string };
+  const packed = JSON.parse(plugin.text ?? '{"tiddlers":{}}') as { tiddlers?: PackedTiddlers };
+  return packed.tiddlers ?? {};
 }
 
 export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
@@ -153,11 +179,13 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
       nexusPubkey: operatorIdentity.verifyingKey,
     });
 
-    const bootstrapPlugin = makeBootstrapPlugin(
-      identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
-      payload.personaGroupDocIdHex, payload.meshCabalDocIdHex,
-    );
-    writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
+    // An admit lands a place AND a contracted face in one act — the contracting operator already signed
+    // the edge, so nothing waits on a later ceremony here.
+    writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin({
+      ...placeTiddlers(daemonUrl),
+      ...faceTiddlers(identitiesUrl, circlesUrl, sessionsUrl, personaUrl,
+                      payload.personaGroupDocIdHex, payload.meshCabalDocIdHex),
+    }), null, 2), "utf8");
     // A joined vessel persists the SAME anchors from the admit payload — its identity home
     // now backstops the veiled Handle exactly as the founder's does.
     persistIdentityAnchors({
@@ -176,59 +204,144 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     return { skipped: false, bootstrapPath: bootstrap, storageDir, genesisDir };
   }
 
-  // ── Founding ceremony path ───────────────────────────────────────────────
+  // ── PLACE-FOUNDING — a somewhere, standing on its own key alone ─────────────────────────────
+  // Canon rules the halves apart (identity-classes#herm-establishment): a vessel "boots permissionlessly
+  // on its own key… it asks no blessing to exist", and NO civic identity mints into it. So founding stands
+  // the PLACE — the sovereign @daemon island, the vessel's own Keyhive individual, and the blind-carriage
+  // cabal seated on that individual — and stops there. The vessel now carries, serves the public shelf,
+  // and holds every sovereign act closed: the waking floor, reached by founding rather than by falling.
+  //
+  // The FACE lands later, by an operator act: `lares persona new 0 --name '<label>'` runs `runFoundTheFace`
+  // below. A hearth whose operator stands right here types two commands instead of one, and a crossroads
+  // never types the second at all.
   const vesselSeed = await loadVesselSigningSeed(storageDir);
 
-  // The binding: the per-vessel key (vesselSeed) is the DEVICE; the PersonaGroup ROOT (persona h0)
-  // signs the edge that binds it to the hearth true-name — that root's DID becomes the PINNED signerDid
-  // peers verify the founding edge (and every admit-time device-delegation) against. Founder-only, so the
-  // founding STANDS h0's root here; a founding with no operator-root to bind through is no founding.
-  // `lares persona new 0 --name '<kahu>'` then LOADS this same root idempotently and sets its private
-  // pet-name — the first of the three symmetric persona-new commands, the founder pre-standing.
-  await generateOrLoadPersonaGroupRoot(storageDir);
-  const signerSeed = await loadPersonaGroupRootSeed(storageDir);
-
-  const {
-    identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
-    personaGroupDocIdHex, meshCabalDocIdHex, personaGroupAgentIdHex, contactCardJson,
-    signerDid, personaKelPrefix,
-  } = await runFoundingCeremony({
+  const place = await foundThePlace({
     repo,
     vesselSeed,
     vesselVerifyingKey: operatorIdentity.verifyingKey,
-    vesselDisplayName:  operatorIdentity.displayName ?? "operator",
-    binding: { mode: "self-stood", signerSeed },
     hearthTrueName,
-    // This node's own gate key IS its Nexus key — the per-Nexus KEL board the founding seats the inception on.
-    nexusPubkey: operatorIdentity.verifyingKey,
   });
 
-  // Cache the operator ContactCard for the light leaf-identity path — a CLI/agent
+  // Cache the vessel's ContactCard for the light leaf-identity path — a CLI/agent
   // re-presents it on every peer handshake without booting keyhive (OP-AP5).
-  await persistVesselCard(storageDir, contactCardJson);
+  await persistVesselCard(storageDir, place.contactCardJson);
 
-  const bootstrapPlugin = makeBootstrapPlugin(
-    identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
-    personaGroupDocIdHex, meshCabalDocIdHex,
-  );
-  writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
-  // The veiled-Handle anchors ride the sovereign identity home, OUTSIDE the wiped substrate,
-  // so a rebirth reforges @daemon while re-reading the SAME PersonaGroup/MeshCabal ids + agentId.
-  persistIdentityAnchors({ personaGroupDocIdHex, meshCabalDocIdHex, personaGroupAgentIdHex });
+  writeFileSync(bootstrap, JSON.stringify(
+    bootstrapPlugin(placeTiddlers(place.daemonUrl)), null, 2), "utf8");
+  // NO anchors land here. The veiled-Handle anchor set keys by handle-index and names a PERSONA's
+  // planes — a place that holds no face holds no handle to anchor. `runFoundTheFace` writes the set.
   await repo.flush();
 
   console.log(`[lares vessel found] ${bootstrap} written`);
-  console.log(`  @identities  ${identitiesUrl}`);
-  console.log(`  @circles     ${circlesUrl}`);
-  console.log(`  @sessions    ${sessionsUrl}`);
-  console.log(`  @daemon       ${daemonUrl}`);
-  console.log(`  @persona      ${personaUrl}`);
-  console.log(`  PersonaGroup  ${personaGroupDocIdHex.slice(0, 20)}…`);
-  console.log(`  MeshCabal    ${meshCabalDocIdHex.slice(0, 20)}…`);
-  console.log(`  operator-root ${signerDid.slice(0, 20)}…`);
-  console.log(`  persona-KEL   ${personaKelPrefix.slice(0, 20)}…  (the pinned identifier the Binding Gate walks)`);
-  console.log(`  hearth-name   ${hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);
-  console.log("[lares vessel found] done — Nexus node ready. Start with: lares vessel stand --with-app");
+  console.log(`  @daemon       ${place.daemonUrl}`);
+  console.log(`  hearth-name   ${hearthTrueName.slice(0, 20)}…  (the place this vessel stands at)`);
+  console.log("[lares vessel found] the PLACE stands — carrying, serving the public shelf, faceless.");
+  console.log("  stand it:      lares vessel stand");
+  console.log("  light a face:  lares persona new 0 --name '<label>'");
 
   return { skipped: false, bootstrapPath: bootstrap, storageDir, genesisDir };
+}
+
+
+// ---------------------------------------------------------------------------
+// The face half — landed by an operator act, onto a place that already stands
+// ---------------------------------------------------------------------------
+
+export interface FoundFaceOptions {
+  readonly storageDir?: string;
+  readonly genesisDir?: string;
+}
+
+/** Whether a face already stands on this place — a pure read that founds nothing. */
+export function faceStands(): boolean {
+  const bootstrap = larBootstrapPath();
+  if (!existsSync(bootstrap)) return false;
+  return Boolean(readPackedTiddlers(bootstrap)[PERSONA_GROUP_DOC_ID_TIDDLER]?.text);
+}
+
+export interface FoundFaceResult {
+  readonly alreadyStood:         boolean;
+  readonly personaGroupDocIdHex: string;
+  readonly personaKelPrefix:     string;
+  readonly signerDid:            string;
+}
+
+/**
+ * Land the FACE onto a standing place — the operator act that turns a carrying vessel into a hearth.
+ *
+ * It refuses on a place that has not been founded (nothing to land on) and reads as a no-op on a vessel
+ * that already holds a face: a second face would fork the very continuity the persona-KEL pin exists to
+ * hold, so the idempotence here is a safety property rather than a convenience.
+ */
+export async function runFoundTheFace(opts: FoundFaceOptions = {}): Promise<FoundFaceResult> {
+  const defaults   = defaultDirs();
+  const storageDir = opts.storageDir ?? defaults.storageDir;
+  const genesisDir = opts.genesisDir ?? defaults.genesisDir;
+  const bootstrap  = larBootstrapPath();
+
+  if (!existsSync(bootstrap)) {
+    throw new Error("[lares persona new] no place stands here — run `lares vessel found` first.");
+  }
+  const packed = readPackedTiddlers(bootstrap);
+
+  const already = packed[PERSONA_GROUP_DOC_ID_TIDDLER]?.text;
+  if (already) {
+    return {
+      alreadyStood: true, personaGroupDocIdHex: already,
+      personaKelPrefix: "", signerDid: "",
+    };
+  }
+
+  const daemonUrl = packed[DAEMON_BAG_ID]?.text;
+  if (!daemonUrl) {
+    throw new Error("[lares persona new] the bootstrap names no @daemon — this place did not finish founding.");
+  }
+
+  const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
+  if (!hearthTrueName) {
+    throw new Error(`[lares persona new] hearth true-name (engine CID) absent from ${genesisDir} — the edge binds (device × hearthTrueName) and has nothing to bind to.`);
+  }
+
+  const vesselIdentity = await generateOrLoadVesselIdentity(storageDir);
+  const vesselSeed     = await loadVesselSigningSeed(storageDir);
+  const repo           = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
+  const daemonHandle   = await repo.find<LarDoc>(daemonUrl as AutomergeUrl);
+
+  // The persona ROOT — the human's side. It only ever SIGNS; the per-vessel key stays the Individual.
+  // The founding root seats at h0 ALWAYS — the face IS the vessel's first persona, and a founding that
+  // seated it anywhere else would leave h0 empty beneath a group that names it.
+  await generateOrLoadPersonaGroupRoot(storageDir, 0);
+  const signerSeed = await loadPersonaGroupRootSeed(storageDir, 0);
+
+  const face = await foundTheFace({
+    repo,
+    daemonHandle,
+    vesselSeed,
+    vesselVerifyingKey: vesselIdentity.verifyingKey,
+    vesselDisplayName:  vesselIdentity.displayName ?? "operator",
+    binding: { mode: "self-stood", signerSeed },
+    hearthTrueName,
+    // This node's own gate key IS its Nexus key — the per-Nexus KEL board the inception seats onto.
+    nexusPubkey: vesselIdentity.verifyingKey,
+  });
+
+  writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin({
+    ...packed,
+    ...faceTiddlers(face.identitiesUrl, face.circlesUrl, face.sessionsUrl, face.personaUrl,
+                    face.personaGroupDocIdHex, face.meshCabalDocIdHex),
+  }), null, 2), "utf8");
+  persistIdentityAnchors({
+    meshCabalDocIdHex:      face.meshCabalDocIdHex,
+    personaGroupDocIdHex:   face.personaGroupDocIdHex,
+    personaGroupAgentIdHex: face.personaGroupAgentIdHex,
+  });
+  await repo.flush();
+
+  return {
+    alreadyStood: false,
+    personaGroupDocIdHex: face.personaGroupDocIdHex,
+    personaKelPrefix:     face.personaKelPrefix,
+    signerDid:            face.signerDid,
+  };
 }

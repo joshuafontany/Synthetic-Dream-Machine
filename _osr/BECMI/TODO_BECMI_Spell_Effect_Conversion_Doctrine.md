@@ -20,7 +20,7 @@
 - **Vancian**: Spellbook (written spells) + memory (prepared spells) + ritual targets (some cleric spells)
 - **SDM**: Trait slots (Ba "Psyche", and Ka "Soul" slots), Item slots (Ha "Body" physical/device-based), Burden slots (Trait/Gear overflow, afflictions/curses), Structure/Location (installed in gear/vehicles/infrastructure/etc)
 
-[Canon: Synthetic_Dream_Machine_04_Powers_Index.md -> "Usage Notes" + storage tags]
+[Canon: Synthetic_Dream_Machine_04_Powers_Index.md -> "Usage Notes"; seat contracts: bags/@sdm mount-points]
 [Canon: Vastlands_Guidebook.md -> "Storing Powers"]
 
 ### Learning Model
@@ -31,7 +31,7 @@
 
 ### Inventory Semantics
 - **Vancian**: Orthogonal systems (spell slots separate from inventory; spell levels 1–9 fixed by class)
-- **SDM**: **Unified inventory model**: 7 + STR item slots, 7 + Thought score trait slots for character concepts, 20 burden slots; powers occupy trait OR item slot (not separate, may even be a Burden if cursed, etc) + [storage: burden/structure/location] variants. Vehicles and other "entities" can also have Powers. Some rare Powers take up more than one slot.
+- **SDM**: **Unified inventory model**: 7 + STR item slots, 7 + Thought score trait slots for character concepts, 20 burden slots; powers occupy trait OR item slot (not separate, may even be a Burden if cursed, etc) + burden/structure/location seat variants. Vehicles and other "entities" can also have Powers. Some rare Powers take up more than one slot.
 
 [Canon: Synthetic_Dream_Machine_01_Quickstart.md -> "Item and Trait Overflow"]
 
@@ -63,7 +63,7 @@
 - [Flying_Triremes_and_Laser_Swords_06_Powers_and_ECM.md -> "Powers from Old School Roleplaying"](ftls/Flying_Triremes_and_Laser_Swords_06_Powers_and_ECM.md) → canonical `Spell Level × 2 = SDM Power Level` pin (Luka Rejec)
 
 ### Storage & Access
-- [Synthetic_Dream_Machine_04_Powers_Index.md#L173](Synthetic_Dream_Machine_04_Powers_Index.md#L173) → "Storage tags" usage note
+- `bags/@sdm/ha.ka.ba/sdm/mount-points/{trait,item,burden,structure}` → seat contracts (trait 7+Thought · item 7+Strength · burden 20/−1)
 - [Synthetic_Dream_Machine_03_Traits_Index.md#L4388](Synthetic_Dream_Machine_03_Traits_Index.md#L4388) → "Power Scroller" trait (shows scroll-binding mechanic)
 - [Synthetic_Dream_Machine_01_Quickstart.md#L468](Synthetic_Dream_Machine_01_Quickstart.md#L468) → "Each power or spell occupies a trait or item inventory slot..."
 
@@ -111,10 +111,10 @@
 
    Variable / multi-level spells map as variable P: entries or use Overcharge steps rather than a fixed level. Before assigning a final P:, cross-check analogous powers in the SDM Powers Index for calibration trends (e.g., `Real-Time Rebuild` P: variable, `Reuse the Shell` P: 1–12). This is the **Trend Reference step**: the locked staging corpus provides the source witness; the SDM Powers Index provides the calibration pattern.
 
-2. **Storage form** determines accessibility:
-   - **[storage:trait]** = mastered power, signature ability (like a special ability)
-   - **[storage:item]** = spellbook/device/scroll (findable, stealable)
-   - **[storage:burden]** = curse powers, geas-like bindings
+2. **Storage seat** determines accessibility. Seat contracts live in `bags/@sdm/ha.ka.ba/sdm/mount-points/`; the ms card carries no storage tag — a card notes its seating in prose or `meta:` where it matters:
+   - **trait seat** = mastered power, signature ability (like a special ability)
+   - **item seat** = spellbook/device/scroll (findable, stealable)
+   - **burden seat** = curse powers, geas-like bindings
 
 3. **[dangerous] tag** replaces "high spell level resistance" on NPCs
    - The P: 12 threshold is not arbitrary: under the x2 formula, 6th-level is where the BECMI spell list turns world-altering — *Geas*, *Death Spell*, *Disintegrate*, *Move Earth*. These aren’t utility spells; they reshape narrative, bypass defenses, or kill outright. SDM powers in the existing index also cluster [dangerous] at P: 12+, so the formula and the observed design trend agree.
@@ -136,7 +136,7 @@
 
 For crosswalk Phase 2 module sections, prioritize rows with:
 - High Power Level (P: 12–18+) for iconic spells known by name (6th–9th level under x2 formula)
-- Multiple [storage:] variants (item-locked spells should list trait-equivalent)
+- Multiple seat variants (item-locked spells should list trait-equivalent)
 - [dangerous] tag + corruption domain for spell-from-tome powers (P: 12+ = 6th-level and above)
 - Album association where available (e.g., "Eternal Arkhiatricon" album for undead-themed Vancian spells)
 
@@ -297,16 +297,15 @@ Tags are not flavor labels — they are **procedure flags that tell the referee 
 
 ##### F.2 — Structural Frame Tags (Mandatory)
 
-Every power card — native SDM or OSR-derived — carries exactly these two structural tags. They are non-negotiable and appear at the start of the tag line in this order:
+Every power card — native SDM or OSR-derived — carries exactly one structural tag, first on the tag line:
 
 | Tag | Role | Values |
 |---|---|---|
 | `[power]` | Universal marker; always first | Always `[power]` |
-| `[storage:X]` | Storage mode; always second | `trait` · `item` · `burden` · `structure` · `location` |
 
-Multiple `[storage:X]` tags may appear side by side when a power can live in more than one storage form (e.g., `[storage:trait] [storage:item]`). For `[storage:X]` definitions, cross-reference Point 2 of the Spell-to-Power Module Mapping section above.
+Storage seating (trait · item · burden · structure · location) rides no tag: seat contracts live in the `bags/@sdm` mount-points, and a power that can live in more than one seat says so in prose or gains variant cards. For seat definitions, cross-reference Point 2 of the Spell-to-Power Module Mapping section above.
 
-Tradition tags (`[oldtech]`, `[fantascience]`, `[ritual]`, `[weapon]`) follow immediately after `[storage:X]` when they apply. They are not a mandatory slot — omit them when none clearly fits. `[fantascience]` signals CHARISMA-track proficiency; `[oldtech]` signals THOUGHT-track proficiency. Their definitions live in Appendix Null (Schools & Traditions, Artifacts & Practices, and Weird Science & Magitech sections).
+Tradition tags (`[oldtech]`, `[fantascience]`, `[ritual]`, `[weapon]`) follow immediately after `[power]` when they apply. They are not a mandatory slot — omit them when none clearly fits. `[fantascience]` signals CHARISMA-track proficiency; `[oldtech]` signals THOUGHT-track proficiency. Their definitions live in Appendix Null (Schools & Traditions, Artifacts & Practices, and Weird Science & Magitech sections).
 
 ##### F.3 — Tradition Tags (conditional)
 
@@ -319,7 +318,7 @@ The tradition tags name the power’s origin context and drive Affinity and prof
 | `[oldtech]` | Magitech; THOUGHT-track proficiency. Precise detection, analysis, access, or targeted biological/technical augmentation; feels like careful instrumentation rather than spectacle. Minimal fictional side-effects; operational, not spectacular. In Appendix Null: "Core" and "Weird Science & Magitech." | Detect Magic, Detect Evil, Clairvoyance, ESP, Infravision, Mage Armor, Locate Object, Find Traps |
 | `[weapon]` | Weapon-mode power; delivers its effect through a weapon frame or resolves as a weapon attack. No BECMI spell examples yet — tag is available in Appendix Null: "Artifacts & Practices" for Chapter 05 Magitech work. | *(none yet — re-examine when Chapter 05 commences)* |
 
-If none of the tradition tags apply, omit them. The mandatory `[power] [storage:X]` frame still applies. Layer 3 behavior tags carry the descriptive weight for catch-all powers. A power without a tradition tag is implicitly general.
+If none of the tradition tags apply, omit them. The mandatory `[power]` frame still applies. Layer 3 behavior tags carry the descriptive weight for catch-all powers. A power without a tradition tag is implicitly general.
 
 ##### F.4 — Additional Tags: The FTLS_06 Layered Pattern
 
@@ -327,7 +326,7 @@ FTLS Chapter 06 establishes the conversion pattern: extend the 2-tag structural 
 
 **Layer 2 — Tradition/Source and OSR School Tags**
 
-sdm/FTLS tradition tags go first within this layer — placed immediately after `[storage:X]` — when they apply: `[oldtech]` · `[fantascience]` · `[ritual]` · `[weapon]` (full criteria in F.3). Then add OSR school and cleric domain names directly as flat tags. Do **not** remap or substitute SDM vocabulary.
+sdm/FTLS tradition tags go first within this layer — placed immediately after `[power]` — when they apply: `[oldtech]` · `[fantascience]` · `[ritual]` · `[weapon]` (full criteria in F.3). Then add OSR school and cleric domain names directly as flat tags. Do **not** remap or substitute SDM vocabulary.
 
 *Magic-User schools:*
 `[abjuration]` · `[conjuration]` · `[divination]` · `[enchantment]` · `[evocation]` · `[illusion]` · `[necromancy]` · `[transmutation]`
@@ -357,11 +356,11 @@ Representative examples for BECMI conversions: `[fire]` · `[lightning]` · `[co
 
 ##### F.6 — Default Tag Sets for Common BECMI Families
 
-**Storage default — `[storage:trait]`:** All BECMI-derived power cards use `[storage:trait]` as the default. This is intentional: the SDM conversion replaces Vancian spell slots with trait slots, so learned spells are abilities you carry in yourself, not texts you hold. Note that FTLS_06 defaults to `[storage:item]` for OSR spells (grimoire-pattern); that is the correct precedent for item-side variants, not for this work. When Chapter 05 (Magitech & Fantascience — magic items and artifacts) work commences, `[storage:item]` and `[storage:burden]` variants of many of these powers will emerge. The storage tag is the knob to change when that happens — do not retroactively alter the base trait card, create additional item/burden-mode cards instead. One `[storage:burden]` precedent worth noting now: FTLS_06 assigns it to powers whose primary effect IS an ongoing burden condition (Giant Growth, Crown of the Grave are examples). If a converted spell primarily imposes Wear-and-Tear, `[storage:burden]` may be the right choice alongside `[storage:trait]`, etc. Note: *Reckless Dweomer* was previously listed here but its canonical tags are `[storage:trait]` — Mana is stored in a Trait slot and only *overflows* into Burdens when no Trait slot is available; the burden state is a consequence of overflow, not the primary storage mode.
+**Seat default — trait:** All BECMI-derived power cards seat as traits by default. This follows the conversion's core move: SDM replaces Vancian spell slots with trait slots, so a learned spell rides in you as an ability, not in a text you hold. Note that FTLS_06's OSR imports lean item-seated (grimoire-pattern); that precedent serves item-side variants, not this work. When Chapter 05 (Magitech & Fantascience — magic items and artifacts) work commences, item- and burden-seat variants of many of these powers will emerge. The seat serves as the knob to turn when that happens — do not retroactively alter the base trait card, create additional item/burden-mode variant cards instead. One burden-seat precedent worth noting now: FTLS_06 uses it for powers whose primary effect IS an ongoing burden condition (Giant Growth, Crown of the Grave are examples). If a converted spell primarily imposes Wear-and-Tear, a burden seat may fit alongside the trait seat, etc. Note: *Reckless Dweomer* seats as a trait — Mana sits in a Trait slot and only *overflows* into Burdens when no Trait slot stands open; the burden state follows from overflow, not from the primary seat.
 
 If none of the tradition tags (F.3) apply to a given family’s cards, omit the tradition tag — the table’s Layer 3 behavior tags carry the meaning.
 
-Starting tag patterns by spell module. All are `[power] [storage:trait]` unless noted — fill in spell-specific Layer 3/4 details beyond what’s shown.
+Starting tag patterns by spell module. All are `[power]`, trait-seated, unless noted — fill in spell-specific Layer 3/4 details beyond what’s shown.
 
 | BECMI Module | Tradition tag (if applicable) | School (L2) | Behavior (L3) | Element (L4) |
 |---|---|---|---|---|
@@ -408,6 +407,8 @@ OSR class restrictions (Cleric-only, Magic-User only, Druid-only) are dropped. A
 > **STATUS markers:** `DRAFT` = work in progress · `APPROVED` = operator sign-off complete · `READY-TO-PROPAGATE` = cleared for Ch06 temp file pass.
 >
 > **Maintenance rule:** Once rows migrate here, this is the source of truth for those rows. Do not duplicate back into crosswalk module sections.
+>
+> **The Arcana Guard-Law.** The thirteen modules close as a set: the power modules name **verbs of will**; the procedural modules name **axes of system**. New content enters as a sub-module, a tag, a witness lane, or a procedural parameter — never as a new module. A fourteenth module requires a demonstrated new verb of will, and the burden of proof sits on the claimant. **Routing files a power; it does not essentialize it**: a power lives in one module for provenance and doctrine, and speaks as many modules' tag-vocabularies as its fiction earns (blends stay first-class). New corpora — Ars Magica, the Mage editions, and their kin — enter as witness lanes feeding the same thirteen, never as modules.
 
 ---
 
@@ -521,7 +522,7 @@ A short procedural module covering mechanics that apply across families when a p
 1. **Ritual Activation** — what triggers the ritual form of a power: time, place, material conditions, number of participants
 2. **Component and Time Cost** — how ritual activation trades Life cost for time+material costs
 3. **Interruption and Corruption** — consequences when a ritual breaks mid-cast; corruption trajectory for P: 12+ rituals
-4. **Cross-Reference Index** — spells that support or require ritual activation: Permanence, Contingency, Symbol; Immortal-grade operations are covered in the Immortal Metaphysics module
+4. **Cross-Reference Index** — spells that support or require ritual activation: Permanence, Contingency, Symbol; Immortal-grade operations are covered in the Ascension module
 
 Ritual Mechanics is **procedure-only**. Spell cards that use ritual governance (including `Permanence`, `Contingency`, `Symbol`, `Wish`, `Timestop`, and `Wizardry`) are routed to their owning spell modules; this module retains only cross-module procedure rows. Use the trends and patterns in the SDM Powers Index to ground this section before looking at the OSR Powers.
 
@@ -535,25 +536,27 @@ Ritual Mechanics is **procedure-only**. Spell cards that use ritual governance (
 
 ---
 
-### Module: Immortal Metaphysics
+### Module: Ascension
 
 **STATUS: DRAFT**
 
 #### Doctrine
 
-Covers the system-level procedures that govern how Immortal-tier beings interact with and produce magical effects. This is not a playable power collection — it is the rules infrastructure that sits above all other modules. An Immortal’s expressions of power draw from every other module; these rows specify how that expression is structured, costed, scaled, and adjudicated at the Immortal tier.
+Covers **how a will climbs**: acquisition, initiation, rank, unlock, and apotheosis — from a mortal's first seeded power through the Immortal ceiling. The room holds no playable power collection — it holds the rules infrastructure that sits above all other modules, governing how standing in the arcana is earned, gated, and priced at every tier. Its mortal-side floor seats the rank-tag economy (`[skilled]` / `[expert]` / `[master]`), initiation-unlock rites (the partially-locked-gift pattern), and starting-power seeding; its upper stories keep the Immortal-tier procedures. An Immortal’s expressions of power draw from every other module; these rows specify how that expression is structured, costed, scaled, and adjudicated at the Immortal tier.
 
 Source: `Immortals -> Sections 1–2` (rank economics and sphere context) and `Immortals -> Section 3: Immortal Magic` (effect doctrine). The Catalog notes that "no unique Phase 1 spell rows are currently Immortals-primary; Immortals remains represented as a co-source lane within relevant rows." All rows here are therefore `procedure` type and contain no power-card expressions.
 
-Distinct from Ritual Mechanics (mortal-level ritual activation doctrine) and from any of the twelve power-module modules — each of which may still apply when an Immortal activates that class of effect. These rows govern the frame and the override layer, not the effect type.
+Distinct from Ritual Mechanics (mortal-level ritual activation doctrine) and from any of the twelve other modules — each of which may still apply when an Immortal activates that class of effect. These rows govern the frame and the override layer, not the effect type.
 
 **Sub-modules:**
+- **Rank and Initiation (mortal-side)** — the canonical rank-tag rule (`[skilled]` / `[expert]` / `[master]` gate riders, overcharge options, and recipe grades; matching Path/Background skill rank or roll with Disadvantage), initiation-unlock rites (partially-locked powers opened by rite; rank-tag upgrades by further initiation), and starting-power seeding (Magic-User Starting Spell Choice lands here). This sub-module seats the rule that FTLS Ch04 (RSS Recipes), Ch05 (Anomalous Object Recipes), and Ch06 (Rank and Power Economy placeholder) all defer to — the deferral chain resolves HERE.
 - **Rank and Power Economy** — PP conversion from mortal XP, rank/level frame, GT advancement gate, sphere selection and recovery cadence; the structural accounting layer (`Immortals -> Sections 1–2`)
 - **Immortal Effect Doctrine** — sphere-factor cost model, magical effect index (S1-S4), caster level rule, range/duration scaling, damage scaling and averaging, limits on use, effect explanation overrides, plus transplanar exception rows for conjuring/summoning limits, mental effect resolution, and undead/entropy curing (`Immortals -> Section 3: Immortal Magic`)
 
 **SDM Conversion Notes:**
 - All rows `procedure` type; none generate power cards directly
 - Rank and Economy rows inform SDM Chapter 05 PP cost infrastructure; cross-reference before building high-tier PP tables
+- Mortal-side rank/initiation rows resolve the Ch04/Ch05/Ch06 rank-tag deferral chain; when P0 restructures Ch06, the Rank and Power Economy placeholder section re-points here
 - Effect Doctrine rows constrain how other module conversion notes apply when the caster is an Immortal
 - Transplanar exception rows (conjuring limits, mental resolution, undead curing) forward-reference their host modules: each host module notes the Immortal-tier override lives here
 
@@ -598,11 +601,11 @@ Distinct from Ritual Mechanics (mortal-level ritual activation doctrine) and fro
 Covers all powers that suppress, cancel, absorb, reflect, or jam magical effects — the active power expressions of ECM-tradition interference. Distinct from Binding (behavioral obligation) and Psychic Warfare (Ka-mind attack). These powers operate on magic itself as a substrate: they treat spells and magical fields as signals to be cut, caught, turned, or silenced.
 
 **Sub-modules:**
-- **Mana** — wild mana handling and reckless discharge; `[storage:trait]` (overflow to Burdens); *Reckless Dweomer* is the anchor power
+- **Mana** — wild mana handling and reckless discharge; trait-seated (overflow to Burdens); *Reckless Dweomer* is the anchor power
 - **Jamming / Counterspells** — anti-magic fields, dispel mechanics, spell-absorption items, silence fields; `[negate][suppress][ecm]`
 
 **SDM Conversion Notes:**
-- Reckless Dweomer → `[storage:trait]` with Burden overflow; `[mana][oldtech][dangerous]` tags; Very Dangerous (cascading Dangerous Magic rolls while carrying Mana and on any Defeat roll); no overcharge; cannot cast while Mana is held in a Trait slot; see Mana sub-module doctrine below
+- Reckless Dweomer → trait-seated with Burden overflow; `[mana][oldtech][dangerous]` tags; Very Dangerous (cascading Dangerous Magic rolls while carrying Mana and on any Defeat roll); no overcharge; cannot cast while Mana is held in a Trait slot; see Mana sub-module doctrine below
 - Anti-magic and dispel effects → `[negate][suppress]`; `[area]` for field forms; `[dangerous]` at P: 12+
 - Silence → `[suppress][ecm]`; partial jam (speech/casting only)
 - Spell-catching / spell-turning items → `[store:spell][ecm]`; trigger notes on capacity and dormancy
@@ -611,7 +614,7 @@ Covers all powers that suppress, cancel, absorb, reflect, or jam magical effects
 
 ##### Mana
 
-The Mana sub-module covers wild mana handling, reckless activation, and the mechanical cost infrastructure for pushing power use beyond safe limits. *Reckless Dweomer* (FTLS_06) is the canonical anchor: roll 1d6 + Aura, gain that much Mana stored in a Trait inventory slot; overflow goes to Burdens if no Trait slot is free; Mana may be spent in place of Life to cast powers. Storage doctrine: `[storage:trait]` — Mana lives in a Trait slot by default and overflows to Burdens only when no slot exists. The burden state is a consequence of overflow, not the primary storage mode. Danger escalation: if Mana gained exceeds effective level, immediately make a Dangerous Magic roll; while carrying Mana, any Defeat roll or other Dangerous Magic roll triggers an additional Dangerous Magic roll (Very Dangerous). Mana disperses at the next sunset or sunrise.
+The Mana sub-module covers wild mana handling, reckless activation, and the mechanical cost infrastructure for pushing power use beyond safe limits. *Reckless Dweomer* (FTLS_06) is the canonical anchor: roll 1d6 + Aura, gain that much Mana stored in a Trait inventory slot; overflow goes to Burdens if no Trait slot is free; Mana may be spent in place of Life to cast powers. Seat doctrine: trait — Mana lives in a Trait slot by default and overflows to Burdens only when no slot exists. The burden state is a consequence of overflow, not the primary seat. Danger escalation: if Mana gained exceeds effective level, immediately make a Dangerous Magic roll; while carrying Mana, any Defeat roll or other Dangerous Magic roll triggers an additional Dangerous Magic roll (Very Dangerous). Mana disperses at the next sunset or sunrise.
 
 BECMI source material does not map directly to a Mana sub-module — there is no BECMI spell that cleanly corresponds to "accept a burden to overcharge a casting." This sub-module is a **synthesis lane**: Reckless Dweomer and kin are SDM inventions grounded in the overcharge and Danger Roll infrastructure, and BECMI conversion only contributes to it indirectly (e.g. reckless-casting rulings that emerge during Danger Roll adjudication). Populate migration rows here when Chapter 05 (Magitech & Fantascience) or Phase 2 specifically generates Mana-class cards.
 
@@ -790,11 +793,11 @@ Covers all powers that operate on biological systems — tissue repair, metaboli
 - *Remove Curse, Bless, Dispel Evil* → Rites of the Deathless Ka Restoration sub-module (Ka-channel program removal)
 
 **SDM Conversion Notes:**
-- Healing powers → `[healing][vital]`; `[storage:trait]` default
+- Healing powers → `[healing][vital]`; trait seat default
 - Cure-condition powers → `[cleanse]`; add `[vital]` only when Life is also restored
 - Metabolic augmentation → `[vital][focus]` + explicit exhaustion burden risk (confirmed by `Nunka's Biophysical Overdrive`)
 - Sensory augmentation → `[vital][imbued]` (persistent biological modification)
-- Item-side variants (Ring of Remedies, Ring of Survival, Rod of Health) → `[storage:item]`
+- Item-side variants (Ring of Remedies, Ring of Survival, Rod of Health) → item-seated
 
 #### Migration Tables
 
@@ -950,7 +953,7 @@ Covers all powers that call entities from outside the scene, fabricate new biolo
 **SDM Conversion Notes:**
 - Summoning → `[summon][fueled]`; `[dangerous]` at P: 12+; creature fabrication bundles add `[conjuration]`
 - Persistent servitors (Invisible Stalker, Aerial Servant) → `[summon][focus]`
-- Covenant and Binding → `[bind]`; Geas → `[bind][burden]` + `[storage:burden]` if the effect IS a geas on the target
+- Covenant and Binding → `[bind]`; Geas → `[bind][burden]`, burden-seated if the effect IS a geas on the target
 - Hold Portal / Wizard Lock → `[bind][ward][anchored]`
 
 #### Migration Tables
@@ -970,7 +973,7 @@ Covers all powers that call entities from outside the scene, fabricate new biolo
 | Create Any Monster | spell | MU9 · Master, RC | Apex creature conjuration; command reliability, persistence failure modes, and campaign-scale impact doctrine required. MU9 → P: 18; `[dangerous]` mandatory. Creates any monster up to one-quarter caster-level HD; command reliability uncertain above P: 14 equivalent. Tags `[summon][conjuration][fueled][dangerous]`. | custom | no |
 | Summon Animals | spell | Dr4 · Master, RC | Druidic ally-call with explicit HD budgeting by caster level. Tags `[summon][fueled]`. | partial | no |
 | Djinni Summoning | item-effect | — · Expert | Expert ring; summons one djinni to serve for up to one day, once per week, keyed to current wearer. | custom | — |
-| Immortal Conjuring And Summoning Limits | procedure | — · Immortals | → See Immortal Metaphysics module: Immortal Effect Doctrine. Transplanar response requirements and sphere/element bias constraints for Immortal-tier summoners. | custom | — |
+| Immortal Conjuring And Summoning Limits | procedure | — · Immortals | → See Ascension module: Immortal Effect Doctrine. Transplanar response requirements and sphere/element bias constraints for Immortal-tier summoners. | custom | — |
 
 ##### Covenant and Binding
 
@@ -1007,7 +1010,7 @@ Functional question: **is the Ka still in range?** Resurrection is Ka retrieval 
 - Soul restoration → `[ka][vital][dangerous]`; `Restore` has caster-cost (temporary level loss, 2d10 days recovery)
 - `Speak with the Dead` → `[channel][ka]`; routes here (not Signal/Attunement) because it queries Ka of the dead (archived, not live)
 - Corpse Fabrication → `[necrotic][conjuration][fueled][dangerous]`; explicit command-scope doctrine required before card write
-- Undead Command → `[bind][necrotic]`; `[storage:item]` for artifact powers; distinct from Turning Undead procedure
+- Undead Command → `[bind][necrotic]`; item-seated for artifact powers; distinct from Turning Undead procedure
 
 #### Migration Tables
 
@@ -1048,7 +1051,7 @@ Functional question: **is the Ka still in range?** Resurrection is Ka retrieval 
 | Control Lesser Undead | item-effect | Master artifact-table command interface for lesser undead tiers; HD ceiling and count limits. Tags `[bind][necrotic]`. | custom |
 | Control Greater Undead | item-effect | Master artifact-table command interface for higher undead tiers. Tags `[bind][necrotic]`. | custom |
 | Turning Undead | procedure | Core clerical anti-undead procedure; matrix lookup, retreat/destroy thresholds, target-type-specific outcomes. | custom |
-| Immortal Undead / Entropy Curing | procedure | → See Immortal Metaphysics module: Immortal Effect Doctrine. Undead-curative magic re-reads as Entropy-creature healing at Immortal tier. | custom |
+| Immortal Undead / Entropy Curing | procedure | → See Ascension module: Immortal Effect Doctrine. Undead-curative magic re-reads as Entropy-creature healing at Immortal tier. | custom |
 
 ---
 
@@ -1073,7 +1076,7 @@ Covers powers that operate on the Ka-mind — from low-bandwidth behavioral capt
 - Mental Destruction → `[mind][dangerous]`; Int-collapse; class-filtered save penalty for arcane casters
 - Mind Transfer → `[mind][channel]`; custom body-vault doctrine needed before card write
 - Noospheric Defense → `[mind][ward][ecm]`; suppresses hostile mental influence
-- Compulsion and Oath → `[bind][burden][storage:burden]`; distinct from Geas (Summoning / Covenant and Binding)
+- Compulsion and Oath → `[bind][burden]`, burden-seated; distinct from Geas (Summoning / Covenant and Binding)
 
 #### Migration Tables
 
@@ -1101,13 +1104,13 @@ Covers powers that operate on the Ka-mind — from low-bandwidth behavioral capt
 | Classic Name | Type | Source | Notes | Mapping Status | Converted |
 | --- | --- | --- | --- | --- |  ---  |
 | Mind Barrier | spell | MU8 · Master, RC | High-tier noospheric defense against hostile mental influence. Tags `[mind][ward][ecm]`. | custom | no |
-| Immortal Mental Effect Resolution | procedure | — · Immortals | → See Immortal Metaphysics module: Immortal Effect Doctrine. Non-magical recovery cadence for charmed/feebleminded Immortals. | custom | — |
+| Immortal Mental Effect Resolution | procedure | — · Immortals | → See Ascension module: Immortal Effect Doctrine. Non-magical recovery cadence for charmed/feebleminded Immortals. | custom | — |
 
 ##### Compulsion and Oath
 
 | Classic Name | Type | Source | Notes | Mapping Status | Converted |
 | --- | --- | --- | --- | --- |  ---  |
-| Quest | spell | C5 · Companion, RC | Compulsion-obligation lane; escalating magical penalties for non-fulfillment; rebound on impossible or directly fatal tasks; removable only by Cureall/Wish or Remove Geas. Cross-note: Geas handled in Summoning / Covenant and Binding. Tags `[bind][burden][storage:burden]`. | custom | no |
+| Quest | spell | C5 · Companion, RC | Compulsion-obligation lane; escalating magical penalties for non-fulfillment; rebound on impossible or directly fatal tasks; removable only by Cureall/Wish or Remove Geas. Cross-note: Geas handled in Summoning / Covenant and Binding. Tags `[bind][burden]`; burden-seated. | custom | no |
 
 ##### Charm
 
@@ -1219,13 +1222,13 @@ Distinct from Faerie Bodycrafts (biological) and Summoning (calling from outside
 
 **Sub-modules:**
 - **Brews and Consumables** — potions, Holy Water, alchemical consumables, Alchemical Potion Duplication; `[brew]` + payload-specific tags (`[vital]` / `[ward]` / `[control]` etc. by effect)
-- **Inscribed Items and Devices** — all scroll types (spell scrolls, protection scrolls, cursed scrolls, Companion named scrolls), rings not routed elsewhere, wands/rods/staves not routed elsewhere, miscellaneous magic items, Spell Storing, Quill of Copying, Ring of Memory, Slate of Identification, Intelligent Swords/Special Swords, Mapmaking, Treasure Finding; `[storage:item][device]`
+- **Inscribed Items and Devices** — all scroll types (spell scrolls, protection scrolls, cursed scrolls, Companion named scrolls), rings not routed elsewhere, wands/rods/staves not routed elsewhere, miscellaneous magic items, Spell Storing, Quill of Copying, Ring of Memory, Slate of Identification, Intelligent Swords/Special Swords, Mapmaking, Treasure Finding; `[device]`, item-seated
 - **Fabrication and Artifact Craft** — form-spells (Clothform, Ironform, Stoneform, Woodform, Steelform), material transmutation (Metal to Wood, Warp Wood, Turn Wood, Dissolve), Animate Objects, all artifact-procedure rows (Creating Artifacts, Charges, Destruction, handicaps, Auto-Defense, Immortal craft doctrine), artifact-scale item effects (Open Mind, Choose Option, Control-type artifact powers, Turn Undead Bonus, Spell Damage Bonus, Life Trapping); `[fabricate][transmute][artifact]`; apex artifact rows carry `[bind][dangerous]`
 
 **SDM Conversion Notes:**
 - Potion effects → `[brew]` as container tag; payload inherits its own behavior/element tags; duration and effect travel with the payload
-- Scroll items → `[storage:item][inscription]`; single-use → add `[burn]`; Companion named scrolls (Communication, Creation, Equipment, Shelter, etc.) → bundled-description entries, not separate cards per name
-- Intelligent Swords/Special Swords → `[storage:item][intelligent]`; treat as NPC-style entries with limited power access, not standard power cards
+- Scroll items → `[inscription]`, item-seated; single-use → add `[burn]`; Companion named scrolls (Communication, Creation, Equipment, Shelter, etc.) → bundled-description entries, not separate cards per name
+- Intelligent Swords/Special Swords → `[intelligent]`, item-seated; treat as NPC-style entries with limited power access, not standard power cards
 - Artifact procedures (Creating, Charges, Destruction) → custom procedure blocks, not standard power cards; they define *process* not *effect*
 - Form-spells (Ironform etc.) are RC-only; each form gets its own card as `[fabricate][imbued]` transformation bundle
 
@@ -1341,7 +1344,7 @@ Distinct from Faerie Bodycrafts (biological) and Summoning (calling from outside
 
 #### Doctrine
 
-Covers powers whose primary effect is light emission, darkness manipulation, prismatic spectrum effects, void transit, or void-condition effects. Distinct from Illusion and Glamour Counter-Veil (Faerie Fire routes there, not here). These are environmental and battlefield-condition powers that act on the visible spectrum, darkness, and the metaphysical edge of perceived reality — including planar apertures, dimensional transit, and reality-boundary rewrites.
+The room's one claim: it governs **the edge of perceived reality** — spectrum, shadow, boundary, transit, and temporal exception. Time, gates, and reality-rewrites enter as sub-modules of the edge, never as a fourteenth module. Covers powers whose primary effect is light emission, darkness manipulation, prismatic spectrum effects, void transit, or void-condition effects. Distinct from Illusion and Glamour Counter-Veil (Faerie Fire routes there, not here). These are environmental and battlefield-condition powers that act on the visible spectrum, darkness, and the metaphysical edge of perceived reality — including planar apertures, dimensional transit, and reality-boundary rewrites.
 
 **Sub-modules:**
 - **Radiance** — Light, Continual Light, Dancing Lights, Illumination (deferred); `[light]`
