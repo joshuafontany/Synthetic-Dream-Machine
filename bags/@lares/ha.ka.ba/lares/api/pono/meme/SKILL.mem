@@ -3,7 +3,7 @@ name: meme
 description: Generate, compress, or audit meme surfaces under lar:///ha.ka.ba/lares/api/pono/meme. Keep the parent invariant small, preserve the copy-shape, and move skeleton detail, rating tables, and research outward.
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/meme/SKILL >>
 ```toml iam
@@ -189,7 +189,7 @@ When writing or revising:
 !!! Copy-Ready Skeleton
 
 ````markdown
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/[PATH] >>
 

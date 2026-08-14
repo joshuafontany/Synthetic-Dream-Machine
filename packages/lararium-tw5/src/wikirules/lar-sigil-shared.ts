@@ -1,6 +1,6 @@
 /**
  * lar-sigil-shared — shared helpers for the three lar-sigil wikirule
- * modules (lar-sigil-block, lar-sigil-inline, lar-doctype-comment).
+ * modules (lar-sigil-block, lar-sigil-inline, lar-declaration).
  *
  * Each rule file lives in its own module-type:wikirule tiddler so TW5's
  * standard plugin loader registers them via the canonical

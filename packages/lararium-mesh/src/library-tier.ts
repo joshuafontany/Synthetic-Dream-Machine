@@ -110,7 +110,7 @@ export function renderLibraryIndex(collection: string, entries: readonly Library
   const rows = [...entries].sort((a, b) => a.name.localeCompare(b.name));
   const total = rows.reduce((n, e) => n + e.size, 0);
   return [
-    "<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->",
+    "<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>",
     "",
     `<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/library/${collection} >>`,
     "```toml iam",

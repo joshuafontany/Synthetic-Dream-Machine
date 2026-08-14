@@ -78,7 +78,7 @@ export function bagManifestFromIam(bag: string, iam: Record<string, unknown> | n
 /** Render a manifest back to the `toml iam` body a bag's `iam.mem` carries. Stable key order — a diff reads. */
 export function renderBagManifest(m: BagManifest): string {
   const lines = [
-    "<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->",
+    "<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>",
     "",
     `<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/bags/${m.bag.replace(/^@/, "")} >>`,
     "```toml iam",

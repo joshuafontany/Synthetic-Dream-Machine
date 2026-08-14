@@ -23,11 +23,17 @@ const SNIFF_TYPE    = "text/x-md-auto";
 const MEMETIC_TYPE  = "text/x-memetic-wikitext";
 const MARKDOWN_TYPE = "text/x-markdown";
 
-// Carrier sniff: canonical carriers open with the !DOCTYPE comment on
+// Carrier sniff: canonical carriers open with the !DOCTYPE declaration on
 // line 1 and the SOH on line ~3. The sniffer reads the head: DOCTYPE
-// comment fast-path, else a line-bound SOH within the first few lines.
-const DOCTYPE_COMMENT_RE = /^<!--\s*<<~\s*!DOCTYPE/;
-const SOH_LINE_RE        = /^<<~[^>\n]*&#x(?:0001|0011);/m;
+// fast-path, else a line-bound SOH within the first few lines.
+//
+// BOTH ARMS MUST MATCH THE SHAPE CARRIERS ACTUALLY CARRY. An SOH opens `<<^`,
+// never `<<~` — a fallback spelled with the sharktooth matches no carrier ever
+// written, so the `||` reads as belt-and-braces while the declaration arm holds
+// the whole corpus alone. A carrier that drops the declaration line then routes
+// to markdown, silently, and its frame never parses.
+const DOCTYPE_RE  = /^<<!DOCTYPE\s/;
+const SOH_LINE_RE = /^<<\^[^>\n]*&#x(?:0001|0011);/m;
 const SNIFF_HEAD_BYTES   = 512;
 
 interface TwUtils {
@@ -84,7 +90,7 @@ function mdAutoDeserializer(
   const tw = (globalThis as { $tw?: TwGlobal }).$tw;
 
   const head = text.slice(0, SNIFF_HEAD_BYTES);
-  const isCarrier = DOCTYPE_COMMENT_RE.test(head) || SOH_LINE_RE.test(head);
+  const isCarrier = DOCTYPE_RE.test(head) || SOH_LINE_RE.test(head);
   const targetType = isCarrier ? MEMETIC_TYPE : MARKDOWN_TYPE;
 
   if (tw) {

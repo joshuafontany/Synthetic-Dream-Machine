@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<<!DOCTYPE lar:///ha.ka.ba/api/pono/memetic-wikitext >>
 name: skill-template
 description: Template and authoring guide for memetic-wikitext verification skill packages. Use this skill when you need to author, evaluate, or instantiate a conformance-checking skill that verifies one or more loci meme law (kānāwai) against invariants.
 version: "0.1-draft"
@@ -6,7 +6,7 @@ author: ha.ka.ba
 license: TBD
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
-<!-- !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext -->
+<<!DOCTYPE lar:///ha.ka.ba/api/pono/memetic-wikitext >>
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/api/pono/skill-template >>
 ```toml iam
@@ -230,7 +230,7 @@ def check-r1(lines: list[str]) -> InvariantResult:
     return InvariantResult(
         "R1", "fail",
         observed=lines[0].strip() if lines else "(empty file)",
-        repair="Add <!-- !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext --> as line 1"
+        repair="Add <<!DOCTYPE lar:///ha.ka.ba/api/pono/memetic-wikitext >> as line 1"
     )
 
 def check-r3-rating-fields(content: str) -> InvariantResult:
@@ -352,7 +352,7 @@ function checkR1(content: string): InvariantResult {
   return {
     id: "R1", status: "fail",
     observed: firstLine,
-    repair: "Add <!-- !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext --> as line 1"
+    repair: "Add <<!DOCTYPE lar:///ha.ka.ba/api/pono/memetic-wikitext >> as line 1"
   };
 }
 
