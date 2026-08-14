@@ -425,6 +425,27 @@ A canvas reaction wire (flow surface):
 
 <<~ ahu #carrier-bytes >>
 
+!! Carrier Frame — The Declaration Register
+
+`<<!WORD … >>` opens a SECOND frame register, and the two divide by layer rather than by taste:
+
+<<~moves declaration -> states/what-must-hold-BEFORE-a-transmission on/the-carrier if/read-first do/select-the-grammar >>
+<<~moves control -> marks/a-POSITION-WITHIN-a-transmission on/the-stream if/framing do/open-close-or-end >>
+
+''A declaration is not a position.'' `&#x0001;` opens a heading, `&#x0003;` ends text, `&#x0004;` ends
+transmission — every control mark names a place inside one act of sending. `<<!DOCTYPE … >>` names
+which grammar reads that act at all, and in the received framing nothing precedes SOH. Giving both one
+opener would put two relations under one head, deliberately, for the first time in this grammar.
+
+''`<<!` reads on arrival.'' SGML has spelled a markup declaration `<!DOCTYPE …>` since 1986 and HTML
+carries it to every page; the doubled bracket costs a reader who has seen one exactly nothing. That
+matters here more than anywhere else in the corpus, because the declaration is the FIRST LINE of every
+carrier — the one line a stranger meets before knowing any of this.
+
+''The register takes members, not exceptions.'' `!DOCTYPE` stands first; the register admits further
+`!WORD` declarations under the same law — read before content, selecting or constraining the grammar,
+never performing a move the renderer runs. A `!WORD` that acts belongs in the speaking set.
+
 !! Carrier Frame — The Control Set
 
 The bytes law says what a carrier is made of; the frame law says how it is marked. Both pin here, per

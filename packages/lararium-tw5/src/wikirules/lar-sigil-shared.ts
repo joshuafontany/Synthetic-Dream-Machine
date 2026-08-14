@@ -38,7 +38,8 @@ export interface RuleInstance {
 // Two opener marks, one decision on the THIRD character: `~` opens the speaking set (the sharktooth
 // carries a verb), `^` opens the CONTROL set (caret notation — `^A`=SOH, `^B`=STX, `^C`=ETX, `^D`=EOT,
 // the received way of writing exactly these characters since teletypes). One character still decides,
-// four ways: `<<~` sigil · `<<^` control · `<<<` quote fence · `<<x` macrocall.
+// five ways: `<<~` sigil · `<<^` control · `<<!` declaration · `<<<` quote fence · `<<x` macrocall.
+// `!` never opens a macro name, so the fifth costs the one-character decision nothing.
 export const SIGIL_OPEN_MARKS = "~^";
 /** True when a sigil of EITHER set opens at `pos`. */
 export function opensSigilAt(source: string, pos: number): boolean {
