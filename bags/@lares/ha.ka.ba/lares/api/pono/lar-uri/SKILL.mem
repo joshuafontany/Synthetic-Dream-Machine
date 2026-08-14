@@ -3,7 +3,7 @@ name: lar-uri
 description: Author, validate, or audit lar: URI addresses under lar:///ha.ka.ba/lares/api/pono/lar-uri. Keep the scheme law small, hold the path taxonomy and the one-bag @-rule distinct, and resolve names against the local graph — never as a network fetch.
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
-<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL >>
 ```toml iam

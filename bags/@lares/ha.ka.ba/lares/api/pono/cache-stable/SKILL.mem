@@ -3,7 +3,7 @@ name: cache-stable
 description: Generate, compress, or audit cache-stable-compliant memes under lar:///ha.ka.ba/lares/api/pono/cache-stable. Treat the canonical loci as self-describing law and self-executing template; keep cache-stable surfaces short, exact, stable, cacheable, and split heavy matter outward.
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
-<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/cache-stable >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/cache-stable >>
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL >>
 ```toml iam

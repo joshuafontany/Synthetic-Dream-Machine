@@ -3,7 +3,7 @@ name: memetic-wikitext
 description: Generate, compress, or audit memetic-wikitext surfaces under lar:///ha.ka.ba/lares/api/pono/memetic-wikitext. Keep the parent invariant small, preserve primitive distinction, and push legality tables, examples, and render detail outward.
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
-<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>
 ```toml iam

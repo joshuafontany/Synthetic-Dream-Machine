@@ -1,4 +1,4 @@
-<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 ```toml iam
@@ -95,6 +95,16 @@ The `<<` `>>` pair forms the outer delimiter family for every active sigil. The 
 | `<<~!` | pragma (definition) | `<<~! wehe name(p) >>` |
 | `<<~?` | unresolved-pressure | `<<~? #fragment >>` |
 | `<<` //(bare)// | inherited TW5 macro call (superset) | `<<macroName params>>` |
+
+''The sigils are the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for
+performing them in red — //rubrica//, red ochre, the practice standing in liturgical manuscripts from the
+13th century and earlier, and rubrication ran as its own production stage: the black text printed first,
+blank space left for a rubricator's hand. The two channels never compete for the same reading, because a
+celebrant already knows which one to say aloud.
+
+The `<<` `>>` family lifts the same division into a context stream. The BLACK carries content — what the
+turn says. The RED carries performative instruction — what the turn DOES, how it stands, which stance it
+holds, what it vows. A sigil steers; it never asserts. Colour names the division; the bracket enacts it.
 
 Memetic-wikitext SHALL read as a ''superset of TW5 wikitext'': every valid TW5 wikitext document reads as valid memetic-wikitext. A processor reads bare `<<name>>` as an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
 
@@ -300,7 +310,7 @@ A ''conforming author'' SHOULD: reserve capitalized RFC-2119 force for intended 
 
 ```
 Type name:                 text
-Subtype name:              x-memetic-wikitext
+Subtype name:              x-memetic-wikitext+tiddlywiki
 Required parameters:       none
 Optional parameters:       charset (default UTF-8)
 Encoding considerations:   8-bit; UTF-8 REQUIRED
@@ -314,7 +324,7 @@ Applications:              lararium nodes; TiddlyWiki5 carriers; mesh tooling
 File extension:            .mem (carrier form), .tid (runtime widget/procedure)
 ```
 
-The `x-` prefix marks the subtype as unregistered with IANA; a future tree-transfer drops the prefix on registration.
+The `x-` prefix marks the subtype as unregistered with IANA; a future tree-transfer drops the prefix on registration. The `+tiddlywiki` structured syntax suffix [RFC6839] survives that transfer — it states that this syntax is BUILT ON TW5 wikitext, which stays true whatever the subtype is called.
 
 <<~/ahu >>
 
@@ -424,6 +434,28 @@ A canvas reaction wire (flow surface):
 <<~/ahu >>
 
 <<~ ahu #carrier-bytes >>
+
+!! The DOCTYPE — declaring an extension of TW5 wikitext
+
+Every carrier opens by naming the grammar that reads it:
+
+```
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+```
+
+''The root name carries an RFC 6839 structured syntax suffix.'' A `+suffix` names the base syntax a
+format is BUILT ON — `image/svg+xml` reads as SVG built on XML, and `memetic-wikitext+tiddlywiki`
+reads as memetic-wikitext built on TW5 wikitext. The superset relation this spec asserts in prose
+(#lexical) rides in the type name itself, in the form a media-type registry already understands.
+
+''The shape is HTML5-minimal SGML.'' `<!DOCTYPE html>` collapsed SGML's full
+`<!DOCTYPE root PUBLIC "fpi" "system">` to keyword plus root name; this keeps that collapse and lets
+the `lar:` URI stand where the system identifier stands. Two standards, both recognisable on sight,
+neither invented here.
+
+''The media type follows the same suffix'' (#media-type): `text/x-memetic-wikitext+tiddlywiki`. The
+`x-` marks the subtype unregistered with IANA and drops on registration; the suffix does not — it
+states a structural fact about the syntax and holds whatever the subtype is called.
 
 !! Carrier Frame — The Declaration Register
 
