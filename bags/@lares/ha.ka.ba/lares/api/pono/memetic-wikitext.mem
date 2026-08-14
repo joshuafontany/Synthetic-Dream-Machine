@@ -413,11 +413,82 @@ A canvas reaction wire (flow surface):
 * ''`spatial` sugar.'' Family registered; a directional sugar sigil and English alias remain pending.
 * ''`kukali` (reactive wait).'' Awaits an async `ReactionGraph`; the wait posture has no semantics without an async execution context.
 * ''Widget-tree pass.'' `resolveWidgetTree(ast, registry)` — the parse→widget→DOM middle layer — remains a pending implementation stage.
-* ''Transclusion family name.'' English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
+* ''EOT targeting (open).'' `target:` on `&#x0004;` today reads `?`, the held-uncertainty mark. What
+  else it may name — the next carrier in a chain, a bag, a bearing — stands open as a new capability
+  rather than a gap; whatever it admits becomes an edge the graph can walk.
+* ''ETX/ETB roles (open).'' Read strictly, the final block takes ETX and an intermediate one takes ETB —
+  which would put ETB on a carrier's text and ETX on its attestation. The frame above reads the other
+  way and states why. The strict reading stays named rather than dismissed.
+* ''Transclusion family name. English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
 
 <<~/ahu >>
 
 <<~ ahu #carrier-bytes >>
+
+!! Carrier Frame — The Control Set
+
+The bytes law says what a carrier is made of; the frame law says how it is marked. Both pin here, per
+the canonical-form discipline — the boundary enforces, the spec declares.
+
+!!! One sigil, dispatched by code
+
+The frame speaks through ONE sigil, `<<^ … >>`, parameterised by the control character it stands for.
+`code:` selects the mark; the remaining slots belong to that mark alone. One name, one relation — the
+frame position — with the code as a parameter, the way `lares` carries `aim` and `yield` through a
+single vector.
+
+\procedure ^(code slots)
+<<^ code:"&#x000N;" ...slots >>
+\end
+
+!!! Named, colon-paired, TW5-native
+
+Slots read `name:"value"`, which invokes in FIVE registers at once: TW5 procedure calls (the host's
+own — a parameter labelled with its name and a colon, values in single, double, triple-double or
+`[[bracket]]` quotes), TW5 tiddler-field headers, YAML, JSON and CSS. A frame that reads correctly in
+the host's calling syntax IS a call in that host, never a lookalike.
+
+''The colon, never the equals.'' TW5 treats `=` and `:` as equivalent separators today, with newer work
+distinguishing `=` for dynamic parameters. A carrier frame holds still for centuries; it takes the
+stable separator and leaves the evolving one alone.
+
+!!! The marks that stand
+
+|!code |!mark |!slots |!carries |
+|`&#x0001;` |SOH |`namespace` `bearing` `uri` |the carrier declares itself and its canonical address |
+|`&#x0011;` |SOH₂ |`namespace` `bearing` `uri` |the second heading form |
+|`&#x0002;` |STX |— |text begins |
+|`&#x0003;` |ETX |`bcc` |text ends; the block check follows the mark directly |
+|`&#x0017;` |ETB |`hash` |the attestation block ends |
+|`&#x0004;` |EOT |`target` |transmission ends, bearing forward |
+
+''ETX takes its check adjacent, per the received framing.'' In character-oriented synchronous framing
+(IBM BSC, 1967) a block runs `STX -> text -> ETX|ETB -> BCC`: the terminator comes first and the check
+follows it directly. The `bcc` slot sits where a receiver has always looked for it.
+
+''ETB terminates the attestation block, and EOT follows it.'' ETX and ETB both terminate and both take
+a check; ETX ends the final block, ETB an intermediate one. A carrier's text ends at ETX, its
+attestation block ends at ETB, and EOT closes the transmission — so ETB's "more follows" reading holds
+literally.
+
+!!! The marks held in reserve
+
+Named here so a later hand finds them claimed rather than free:
+
+* `&#x0010;` ''DLE'' — the escape that makes a frame mark safe inside a body. Reserved against the day a
+  carrier body contains a byte sequence a reader would take for a frame.
+* `&#x0016;` ''SYN'' — resynchronise. A reader that lost the frame finds it again here.
+* `&#x0006;` / `&#x0015;` ''ACK / NAK'' — the response pair. A carrier states; a receiver answers.
+
+!!! What the projection adds, and the carrier never says
+
+A slot name serves a reader; the carrier serves a parser. The tiddler-view-template renders the frame
+LITERALLY — the `<<` in its own colour, each slot labelled — so a newcomer meets `hash` as a word on
+screen while the carrier holds the pair that names it. The announced face and the true-name, one layer
+below the grammar (canon: `lar:///ha.ka.ba/lares/api/pono/persona-circle`).
+
+Each mark's `sigil-*.tid` carries `lar-pattern`, and a SHAPE-EXACT pattern refuses a wrong fill the way
+a shape-exact slug rule refuses a truncated tag. Enforcement rides the recogniser, never the surface.
 
 !! Carrier Bytes Law
 
