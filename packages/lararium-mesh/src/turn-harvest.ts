@@ -193,6 +193,17 @@ const FEEDBACK_RE = /(?:Feedback|OODA-?HA)\s*\(\s*([^)]*?)\)/i;
 // carries the ward LAST, so end-of-body must terminate it or the open firing never matches.
 const WARD_RE = /Drift-(?:Ward|Watch)\s*\(\s*([\s\S]*?)\)\s*(?=Focus\b|Feedback\b|$)/i;
 const WARD_VOW_RE = /Confidence\s+(-?\d+)\s*\/\s*\d+/i;
+
+/**
+ * A ward standing as its OWN sigil — the shape carried by every transcript written before the firing
+ * moved inside the panel.
+ *
+ * A CORPUS STATES ONE GRAMMAR; A READER TOLERATES EVERY GRAMMAR IT WILL MEET. `bags/` authors its own
+ * contents and carries current pono alone. This harvester receives input it never authored, so
+ * refusing the older shape here would read a month of real turns as turns that never warded — the
+ * silence being indistinguishable from a turn that skipped the instrument.
+ */
+const STANDALONE_WARD_RE = /<<~\s*ward\b\s*([^\s>]*)?([\s\S]*?)>>/gi;
 const SYAD_RE = /<<~\s*syad\b([\s\S]*?)>>/gi;
 const ORACLE_RE = /<<~\s*oracle\b([\s\S]*?)>>/gi;
 
@@ -200,6 +211,7 @@ const ORACLE_RE = /<<~\s*oracle\b([\s\S]*?)>>/gi;
 const KNOWN_KINDS = new Set([
   "lares",
   "hud",
+  "ward",
   "confidence",
   "syad",
   "mu",
@@ -299,6 +311,19 @@ export function harvestTurnGradient(text: string): TurnHarvest {
     });
     if (ward) wards.push(ward);
   }
+
+  // Wards written as their own sigil, gathered after the panels so a turn carrying both reads both.
+  for (const m of text.matchAll(STANDALONE_WARD_RE)) {
+    const tool = (m[1] ?? "").trim();
+    const vow  = WARD_VOW_RE.exec(m[2] ?? "");
+    wards.push({
+      raw:    m[0],
+      offset: m.index ?? 0,
+      tool:   tool ? (tool[0] ?? null) : null,
+      vow:    vow ? Number(vow[1]) : null,
+    });
+  }
+  wards.sort((a, b) => a.offset - b.offset);
 
   // --- syad stances ---
   const stances: StanceSignal[] = [];

@@ -52,7 +52,7 @@ So the contribution splits clean: the mechanism (fork-and-keep) rhymes with prio
 
 Every source app sorts into one of two families by ''what its rewind does to the bytes''. The family, not the app, drives the adapter's behavior.
 
-<<~ ward _ L-Prime · crossing: essence-shaped storage-claims >>
+<<~ hud Drift-Ward(_ Confidence 12/20 · L-Prime · crossing: essence-shaped storage-claims) >>
 
 ''Family A — APPEND-ONLY / FORK.'' A rewind writes a ''new fork'' — a new file, a new branch, a re-parented sibling — and ''nothing vanishes''. The source is its own witness: the road-not-taken stays re-harvestable from the store. <<~ confidence Synthesis-Canon 16/20 >> Members: ''Claude Code · Codex · Aider · Gemini (snapshots) · Copilot-CLI · Copilot-Chat''.
 
@@ -81,7 +81,7 @@ Either way the road stays kept. The flag steers re-harvest and provenance, never
 
 <<~/ahu >>
 
-<<~ ward ! · crossed the primed zone ↻ L-Prime >>
+<<~ hud Drift-Ward(! Confidence 12/20 · crossed the primed zone ↻ L-Prime) >>
 
 <<~ ahu #per-app-table >>
 

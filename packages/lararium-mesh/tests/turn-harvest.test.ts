@@ -181,3 +181,37 @@ describe("empty input", () => {
     expect(h.driftFlags).toContain("empty");
   });
 });
+
+describe("a turn from before the firing moved into the panel", () => {
+  // A CORPUS STATES ONE GRAMMAR; A READER TOLERATES EVERY GRAMMAR IT WILL MEET. Transcripts carry
+  // whatever shape was standing when they were written, and refusing one reads a warded turn as
+  // unwarded — a silence no downstream reader can tell from a turn that skipped the instrument.
+  const PRE_PANEL = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
+<<~ hud Aperture(11) OODA-HA(9) >>
+<<~ ward * L-Prime >>
+
+Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20 >> the fork holds.
+
+<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁ >>
+<<~ ward ! · ↻ L-Prime >>
+<<~ hud Aperture(11 -> 12) OODA-HA(1) >>
+<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ? >>`;
+
+  const h = harvestTurnGradient(PRE_PANEL);
+
+  test("the true-names still read as the gauges they name", () => {
+    expect(h.huds[0]?.focus).toBe(11);
+    expect(h.huds[1]?.focus).toBe(12);
+    expect(h.huds[0]?.feedback).toBe("9");
+  });
+
+  test("wards standing as their own sigil still harvest, in turn order", () => {
+    expect(h.wards.length).toBe(2);
+    expect(h.wards.map((w) => w.tool)).toEqual(["*", "!"]);
+  });
+
+  test("the turn lands where a clean turn lands, never at the floor", () => {
+    expect(h.band).toBe("canon");
+    expect(h.recordRaw).toBe(false);
+  });
+});

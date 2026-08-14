@@ -82,8 +82,8 @@ pattern pushes forward onto strictly fewer records than exhibit it).
 ''`require_base()` refuses a restriction set that mixes bases or omits one'', so the wrong comparison
 stops type-checking rather than returning a plausible figure.
 
-<<~ ward ! ⚠ · this table stood hand-written in an earlier draft, with a plane the code does not declare
-and a base it does · ↻ L-Prime >>
+<<~ hud Drift-Ward(! Confidence 12/20 · ⚠ · this table stood hand-written in an earlier draft, with a plane the code does not declare
+and a base it does · ↻ L-Prime) >>
 
 !!! The order that matters
 
@@ -306,7 +306,7 @@ one common space. ''Reading it as a single scalar over one substrate mistypes th
   content-addresses its drawers, so a pour's identity can fall out of its own ground (the source set and
   their hashes, a fold over the drawer cids) with nothing declared by fiat and no network consulted.
 
-<<~ ward _ L-Prime · crossing: generation-talk, where federation vocabulary drifts local >>
+<<~ hud Drift-Ward(_ Confidence 12/20 · L-Prime · crossing: generation-talk, where federation vocabulary drifts local) >>
 
 ''AND THE WORDS FOR THIS STAY LOCAL.'' A sensorium's stores ''never federate'' — content, form, structure
 and persistence each say so outright; only the meshpalace takes a feed from the network, and an operator
