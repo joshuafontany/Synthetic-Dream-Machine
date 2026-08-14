@@ -70,8 +70,7 @@ The panel rides beneath the `aim` as sigils:
 
 ```text
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
-<<~ hud Focus(10) Feedback(3) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(10) Feedback(3) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 <<~ syad 🏛️ 🗡️ >>
 ```
 

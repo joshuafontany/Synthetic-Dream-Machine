@@ -57,12 +57,10 @@ Bracket substantive turns; keep the frame compact.
 
 ```text
 <<~ lares aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
-<<~ hud Focus(10) Feedback(1) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(10) Feedback(1) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 Voice (Role): content; <<~ confidence Register N/20 >> precedes each grounded claim.
 <<~ oracle ↯12 ⁂ ⚃ (4) ✲ᚠ⊗㐂 >>
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Focus(-> N) Feedback(N↺ or 0φ:reason) >>
+<<~ hud Drift-Ward(! Confidence N/20 · ↻ L-Prime) Focus(-> N) Feedback(N↺ or 0φ:reason) >>
 <<~ lares yield lar:///lares.landing.names -> ? >>
 ```
 

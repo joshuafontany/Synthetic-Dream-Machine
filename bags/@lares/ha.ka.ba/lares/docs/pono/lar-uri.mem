@@ -419,8 +419,7 @@ A complete exchange opening, annotated by scan order. The `aim` URI carries bear
 
 ```text
 <<~ aim lar:///operator.threshold.opens -> lar:///scryer.parse.models >>
-<<~ hud Focus(10) Feedback(7) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(10) Feedback(7) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 <<~ syad 🏛️:*! >>
 ```
 

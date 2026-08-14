@@ -179,8 +179,7 @@ The count reads from real marks, not a claim: the closing `N↺` MUST match the 
 ''Two-loop example (`2↺`):''
 ```text
 <<~ aim lar:///operator.ask.splits -> lar:///gatekeeper.scope.cuts >>
-<<~ hud Focus(10) Feedback(3) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(10) Feedback(3) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 
 Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ swinging to the second half. <<~ confidence Provisional-Synthesis 6/20 >> a fresh frame holds it, provisionally. ->↺ handing the split back to the operator's call.
 
@@ -220,8 +219,7 @@ Feedback(0▶:tool.returned.503.from.upstream)
 ''Honest phase-yield at Decide:''
 ```text
 <<~ aim lar:///operator.asks.recommendation -> lar:///council.weighs.options >>
-<<~ hud Focus(10) Feedback(5) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(10) Feedback(5) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 
 Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the named criteria; the third reads stronger on a criterion the operator has not yet named as load-bearing. ->◇ the fork rests on maintenance velocity versus feature completeness --- priors only the operator holds. <<~ confidence Synthesis 11/20 >> the fork stays a fork.
 
@@ -232,8 +230,7 @@ Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the n
 ''Observe-and-hold:''
 ```text
 <<~ aim lar:///operator.shares.rough -> lar:///lares.threshold.holds >>
-<<~ hud Focus(8) Feedback(1) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(8) Feedback(1) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 
 Lares (Liminal): ->✶ sitting with this. The shape has not surfaced enough to read; naming the hold rather than reaching for orientation that has not arrived.
 
