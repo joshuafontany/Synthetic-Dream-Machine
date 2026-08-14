@@ -47,14 +47,12 @@ function sigilNode(name: string, attrs: Record<string, string>, pos = 0): MemeAs
 
 // The clean worked turn (mirrors turn-harvest.test.ts CLEAN_TURN).
 const CLEAN_TURN = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
-<<~ hud Aperture(11) OODA-HA(9) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(11) Feedback(9) Drift-Ward(* Confidence 15/20 · a preferred answer already held) >>
 
 Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20 >> the fork holds.
 
 <<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁ >>
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(11 -> 12) OODA-HA(1↺) >>
+<<~ hud Drift-Ward(! Confidence 12/20 · the read rides on a source I never opened · ↻ L-Prime) Focus(11 -> 12) Feedback(1↺) >>
 <<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ? >>`;
 
 function tokensOfKind(stream: readonly MoveToken[], kind: MoveToken["kind"]): MoveToken[] {
@@ -87,7 +85,7 @@ describe("emitMoveSkeleton — the clean turn", () => {
     expect(wards.map((w) => w.axisId)).toEqual(["ward:wand", "ward:sword"]);
   });
 
-  test("a phase token rides off the closing HUD's OODA-HA glyph", () => {
+  test("a phase token rides off the closing HUD's Feedback glyph", () => {
     const phases = tokensOfKind(sk.stream, "phase");
     expect(phases.some((p) => p.token === "aftermath")).toBe(true);
     expect(phases.every((p) => p.axisId?.startsWith("phase:"))).toBe(true);

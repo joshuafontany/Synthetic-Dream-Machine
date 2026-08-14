@@ -17,7 +17,8 @@
  * abstains on structure and keeps its RAW source (never-drop-the-source).
  *
  * It widens {@link harvest} (the aim/yield bearing) to the whole house HUD —
- * Voices, the HUD gauges, Syad stances, the confidence markers, ward, oracle —
+ * Voices, the HUD gauges (Focus, Feedback, the Drift-Ward firing), Syad stances, the confidence
+ * markers, oracle —
  * and keeps MULTIPLE in-turn signals as an offset-anchored set, never collapsed.
  *
  * Pure + isomorphic: text in, a {@link TurnHarvest} out — no I/O, no store, no
@@ -56,12 +57,21 @@ export interface ConfidenceSignal extends OffsetSignal {
   readonly max: number;
 }
 
-/** A `<<~ hud Aperture(..) OODA-HA(..) >>` gauge panel (open or close). */
+/** A `<<~ hud Focus(..) Feedback(..) Drift-Ward(..) >>` panel (open or close). */
 export interface HudSignal extends OffsetSignal {
-  /** Aperture target/actual numerator (the last number when a `->` slide appeared), or null. */
-  readonly aperture: number | null;
-  /** The OODA-HA payload verbatim (`3`, `0◇:fork.depends`, `1↺ + ▶:…`), or null. */
-  readonly oodaHa: string | null;
+  /** Focus target/actual numerator (the last number when a `->` slide appeared), or null. */
+  readonly focus: number | null;
+  /** The Feedback payload verbatim (`3`, `0◇:fork.depends`, `1↺ + ▶:…`), or null. */
+  readonly feedback: string | null;
+  /**
+   * The Drift-Ward firing carried inside this panel, or null.
+   *
+   * THE WARD RIDES IN THE PANEL, so a harvester that scans for a ward SIGIL finds none and reports
+   * a turn that warded as a turn that did not. It reads the params instead — last position at open,
+   * first at close — and that positional difference is the only thing distinguishing the two
+   * firings, since they answer to each other not at all.
+   */
+  readonly ward: WardSignal | null;
 }
 
 /** A Syad standpoint invocation — by name, emoji, or glyph. */
@@ -70,10 +80,12 @@ export interface StanceSignal extends OffsetSignal {
   readonly token: string;
 }
 
-/** A `<<~ ward .. >>` sigil (open-lit, lift, brace, appeal, or Sword close). */
+/** A `Drift-Ward(..)` firing inside a HUD panel (Wand, lift, brace, appeal, or Sword close). */
 export interface WardSignal extends OffsetSignal {
-  /** The leading tool/office glyph after `ward` (`*`,`0`,`_`,`?`,`!`), or null. */
+  /** The leading tool/office glyph inside the firing (`*`,`0`,`_`,`?`,`!`), or null. */
   readonly tool: string | null;
+  /** The confidence level the firing vows (`Confidence 12/20` → 12), or null. */
+  readonly vow: number | null;
 }
 
 /** A recognized but non-specialized sigil (`kahea`, `mu`, `lares` non-aim/yield, …). */
@@ -174,10 +186,13 @@ const CONF_RE = /<<~\s*confidence\b([\s\S]*?)>>/gi;
 const CONF_NUM_RE = /(-?\d+)\s*\/\s*(\d+)/;
 
 const HUD_RE = /<<~\s*hud\b([\s\S]*?)>>/gi;
-const APERTURE_RE = /Aperture\s*\(\s*([^)]*?)\)/i;
-const OODA_RE = /OODA-?HA\s*\(\s*([^)]*?)\)/i;
-
-const WARD_RE = /<<~\s*ward\b\s*([^\s>]*)?([\s\S]*?)>>/gi;
+// The announced faces lead; the true-names stay readable so a turn written either way harvests.
+const FOCUS_RE = /(?:Focus|Aperture)\s*\(\s*([^)]*?)\)/i;
+const FEEDBACK_RE = /(?:Feedback|OODA-?HA)\s*\(\s*([^)]*?)\)/i;
+// The firing closes where the next gauge begins or where the panel body ends — an open panel
+// carries the ward LAST, so end-of-body must terminate it or the open firing never matches.
+const WARD_RE = /Drift-(?:Ward|Watch)\s*\(\s*([\s\S]*?)\)\s*(?=Focus\b|Feedback\b|$)/i;
+const WARD_VOW_RE = /Confidence\s+(-?\d+)\s*\/\s*\d+/i;
 const SYAD_RE = /<<~\s*syad\b([\s\S]*?)>>/gi;
 const ORACLE_RE = /<<~\s*oracle\b([\s\S]*?)>>/gi;
 
@@ -185,7 +200,6 @@ const ORACLE_RE = /<<~\s*oracle\b([\s\S]*?)>>/gi;
 const KNOWN_KINDS = new Set([
   "lares",
   "hud",
-  "ward",
   "confidence",
   "syad",
   "mu",
@@ -260,29 +274,30 @@ export function harvestTurnGradient(text: string): TurnHarvest {
     });
   }
 
-  // --- HUD panels ---
+  // --- HUD panels (each carrying its Drift-Ward firing) ---
+  const wards: WardSignal[] = [];
   const huds: HudSignal[] = [];
   for (const m of text.matchAll(HUD_RE)) {
     const body = m[1] ?? "";
-    const ap = APERTURE_RE.exec(body);
-    const ooda = OODA_RE.exec(body);
+    const ap = FOCUS_RE.exec(body);
+    const fb = FEEDBACK_RE.exec(body);
+    const wm = WARD_RE.exec(body);
+    const ward: WardSignal | null = wm
+      ? {
+          raw:    wm[0],
+          offset: (m.index ?? 0) + (wm.index ?? 0),
+          tool:   ((wm[1] ?? "").trim()[0]) ?? null,
+          vow:    (() => { const v = WARD_VOW_RE.exec(wm[1] ?? ""); return v ? Number(v[1]) : null; })(),
+        }
+      : null;
     huds.push({
       raw: m[0],
       offset: m.index ?? 0,
-      aperture: ap ? lastNumber(ap[1] ?? "") : null,
-      oodaHa: ooda ? (ooda[1] ?? "").trim() || null : null,
+      focus: ap ? lastNumber(ap[1] ?? "") : null,
+      feedback: fb ? (fb[1] ?? "").trim() || null : null,
+      ward,
     });
-  }
-
-  // --- ward sigils ---
-  const wards: WardSignal[] = [];
-  for (const m of text.matchAll(WARD_RE)) {
-    const tool = (m[1] ?? "").trim();
-    wards.push({
-      raw: m[0],
-      offset: m.index ?? 0,
-      tool: tool ? tool[0] ?? null : null,
-    });
+    if (ward) wards.push(ward);
   }
 
   // --- syad stances ---

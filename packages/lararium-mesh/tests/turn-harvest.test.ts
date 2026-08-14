@@ -17,14 +17,12 @@ import {
 } from "../src/index.js";
 
 const CLEAN_TURN = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
-<<~ hud Aperture(11) OODA-HA(9) >>
-<<~ ward * L-Prime >>
+<<~ hud Focus(11) Feedback(9) Drift-Ward(* Confidence 15/20 · I hold a preferred answer already) >>
 
 Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20 >> the fork holds.
 
 <<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁ >>
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(11 -> 12) OODA-HA(1) >>
+<<~ hud Drift-Ward(! Confidence 12/20 · the velocity read rides on a README I never opened · ↻ L-Prime) Focus(11 -> 12) Feedback(1) >>
 <<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ? >>`;
 
 describe("harvestBand — band thresholds on the 0..20 ladder", () => {
@@ -57,9 +55,10 @@ describe("clean turn — harvests with confidence", () => {
 
   test("captures the HUD panels (open + close)", () => {
     expect(h.huds.length).toBe(2);
-    expect(h.huds[0]?.aperture).toBe(11);
-    // close panel: Aperture(11 -> 12) keeps the last (actual) number
-    expect(h.huds[1]?.aperture).toBe(12);
+    expect(h.huds[0]?.focus).toBe(11);
+    // close panel: Focus(11 -> 12) keeps the last (actual) number
+    expect(h.huds[1]?.focus).toBe(12);
+    expect(h.huds[0]?.feedback).toBe("9");
   });
 
   test("captures the confidence marker with register + value", () => {
@@ -69,8 +68,14 @@ describe("clean turn — harvests with confidence", () => {
     expect(h.confidences[0]?.max).toBe(20);
   });
 
-  test("captures ward and oracle sigils", () => {
+  test("reads the Drift-Ward firing out of each panel, and the oracle", () => {
+    // THE WARD RIDES IN THE PANEL — a harvester scanning for a ward SIGIL finds none and reports a
+    // turn that warded as a turn that did not. Both firings come off the `hud` params.
     expect(h.wards.length).toBe(2);
+    expect(h.huds[0]?.ward?.tool).toBe("*");
+    expect(h.huds[0]?.ward?.vow).toBe(15);
+    expect(h.huds[1]?.ward?.tool).toBe("!");
+    expect(h.huds[1]?.ward?.vow).toBe(12);
     expect(h.oracles.length).toBe(1);
   });
 

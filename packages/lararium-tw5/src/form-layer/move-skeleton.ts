@@ -208,7 +208,7 @@ function hudTokens(h: HudSignal): MoveToken[] {
   const out: MoveToken[] = [
     { kind: "hud", token: "hud", axisId: "sigil:hud", offset: h.offset },
   ];
-  const payload = h.oodaHa ?? "";
+  const payload = h.feedback ?? "";
   for (const phase of OODA_HA_PHASES) {
     if (payload.includes(phase.glyph)) {
       const name = phaseForGlyph(phase.glyph);

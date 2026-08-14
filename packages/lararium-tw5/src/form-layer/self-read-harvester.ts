@@ -253,7 +253,7 @@ function closingHud(huds: readonly HudSignal[]): HudSignal | null {
  */
 export function aftermathClosedFromHuds(huds: readonly HudSignal[]): boolean {
   const hud = closingHud(huds);
-  const payload = hud?.oodaHa ?? "";
+  const payload = hud?.feedback ?? "";
   if (SUSPENSION_RE.test(payload)) return false; // a suspended loop persists open
   const ratchet = RATCHET_RE.exec(payload);
   return ratchet !== null && Number(ratchet[1]) >= 1;

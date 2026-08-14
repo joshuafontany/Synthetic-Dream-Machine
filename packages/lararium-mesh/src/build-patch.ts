@@ -205,7 +205,7 @@ export function deriveRootHandle(sourceFile?: string, frontier?: string | null):
 /** Deterministic function-hall routing from the authored instruments (no LLM). */
 function hallForHarvest(h: TurnHarvest): string {
   if (h.bearing && h.standing >= 13) return "hall_facts"; // a decision landed, high standing
-  if (h.huds.some((x) => (x.oodaHa ?? "").includes("↺"))) return "hall_events"; // an OODA loop closed
+  if (h.huds.some((x) => (x.feedback ?? "").includes("↺"))) return "hall_events"; // a Feedback loop closed
   if (h.sigilCount > 0 || h.voices.length > 0) return "hall_discoveries"; // structured exploration
   return ""; // leave the substrate's own hall untouched
 }
