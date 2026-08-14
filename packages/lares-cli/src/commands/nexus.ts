@@ -47,7 +47,7 @@ import type { ParsedArgs } from "../parse-args.js";
 class UsageError extends Error {}
 
 function usage(): void {
-  console.error("usage: lares nexus <charter | kapae | un_kapae | contract | revoke | members | accept-carriage | posture>");
+  console.error("usage: lares nexus <seal | rite | kapae | un_kapae | contract | revoke | members | accept-carriage | posture>");
   console.error("");
   console.error("  seal <seat | rotate | commit | show>      the founding-kahu roster + pre-rotated epoch chain");
   console.error("  kapae <nym> [--reason <text>]             raise a quorum-signed ban on a presenter nym");
@@ -58,6 +58,7 @@ function usage(): void {
   console.error("  members --list                            read the currently-admitted member set (the fold)");
   console.error("  accept-carriage [--index N]               (joining operator) mint the 'accepts carriage' contract-in");
   console.error("  posture [private | open]                  read / flip the cross-Nexus federation posture");
+  console.error("  rite <petname>                            the pet-named procedures — `cabal` seats the founding quorum");
 }
 
 function sealUsage(): void {
@@ -93,11 +94,80 @@ export async function cmdNexus(args: ParsedArgs): Promise<number> {
     case "members":         return await cmdMembers(args);
     case "accept-carriage": return await cmdAcceptCarriage(args);
     case "posture":         return await cmdPosture(args);
+    case "rite":            return await runNexusRite(args);
     default:
       if (verb) console.error(`lares nexus: unknown verb "${verb}"`);
       usage();
       return 2;
   }
+}
+
+/**
+ * `lares nexus rite <petname>` — the pet-named procedures over the nexus primitives.
+ *
+ * A RITE names a complex multi-verb procedure, at second position so a composition never competes with a
+ * primitive for namespace. The primitives keep every behaviour; a rite only orders them.
+ */
+const NEXUS_RITES: Readonly<Record<string, { readonly composes: string; readonly run: (a: ParsedArgs) => Promise<number> }>> = {
+  cabal: { composes: "seal reserve · seal seat · seal show", run: runCabalRite },
+};
+
+/**
+ * The cabal rite — forge the pre-rotation, seat the roster it arms, and read the verdict.
+ *
+ * ── WHY IT DOES NOT MINT THE PERSONAS ───────────────────────────────────────────────────────────
+ * A chair joins on a DECLARED HANDLE, and a handle is a name a human chooses and announces. A rite that
+ * invented three of them would make the SOURCE decide who the founding kahu are, leaving the operator to
+ * confirm a legitimacy call somebody else made. So the three `persona new` acts stay outside this rite,
+ * deliberately, and the seat refuses when nobody stands — which is the correct refusal, not a gap.
+ *
+ * ── WHAT IT ACTUALLY REMOVES ────────────────────────────────────────────────────────────────────
+ * The pre-rotation digest. `reserve` forges it and `seat` requires it, and between them an operator
+ * transcribes a 64-character hex by hand — the only place in the whole founding where a value crosses on
+ * a clipboard. The reserve WRITES that digest into its own state, so the rite reads it back and threads
+ * it. A digest copied by hand is a digest that can be copied wrong, and a wrong one seats a pre-commitment
+ * no future rotate can ever satisfy.
+ */
+async function runCabalRite(args: ParsedArgs): Promise<number> {
+  const rest = { ...args, positional: args.positional.slice(2) };
+
+  const reserved = await sealReserveProvision(rest, "provision");
+  if (reserved !== 0) {
+    console.error("lares nexus rite cabal: halted at `seal reserve` — nothing seated, nothing written.");
+    return reserved;
+  }
+
+  // The digest crosses in memory rather than through a human. Absent state here names a reserve that
+  // reported success and persisted nothing, which is worth refusing loudly rather than seating unarmed.
+  const state = readCharterReserveState();
+  const commit = state?.nextKeyCommit;
+  if (!commit) {
+    console.error("lares nexus rite cabal: the reserve wrote no next-key commit — refusing to seat unarmed.");
+    console.error("  an unarmed genesis epoch cannot pre-commit its successor, so the chain could never rotate.");
+    return 1;
+  }
+
+  const seated = await sealSeat({ ...rest, options: { ...rest.options, "next-key-commit": commit } });
+  if (seated !== 0) {
+    console.error("lares nexus rite cabal: halted at `seal seat`. The reserve stands; re-run after seating");
+    console.error("  personas that declared a Handle AND stood for a chair (`persona new <i> --handle … --seat`).");
+    return seated;
+  }
+  return await sealShow(rest);
+}
+
+async function runNexusRite(args: ParsedArgs): Promise<number> {
+  const petname = args.positional[1];
+  const rite = petname ? NEXUS_RITES[petname] : undefined;
+  if (!rite) {
+    if (petname) console.error(`lares nexus rite: unknown rite "${petname}"\n`);
+    console.error("lares nexus rite <petname> — the pet-named procedures over the nexus primitives\n");
+    for (const [name, r] of Object.entries(NEXUS_RITES)) console.error(`  ${name.padEnd(7)} ${r.composes}`);
+    console.error("\n  cabal seats the founding quorum on THIS node — the kahu stand, the epoch arms, and the");
+    console.error("  Nexus becomes ready to contract carriage with other operators.");
+    return petname ? 2 : 0;
+  }
+  return rite.run(args);
 }
 
 /**

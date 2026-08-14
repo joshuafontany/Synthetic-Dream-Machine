@@ -82,31 +82,81 @@ async function standVessel(args: ParsedArgs): Promise<number> {
  * `vessel flow <petname>` — the pet-named cap-stacks over the primitives.
  *
  * Each of these composes a SEQUENCE, and naming a sequence at the top level is exactly how a surface
- * grows back. They live behind one sub-door so a new composition arrives as a new flow rather than a new
- * verb. Distinct from `lares flow`, which composes signal instruments over the sensorium planes —
- * same shape of surface, different island.
+ * grows back. They live behind one sub-door so a new composition arrives as a new RITE rather than a new
+ * verb.
+ *
+ * A RITE names a complex multi-verb procedure — the same word the runbooks carry as their own status, and
+ * the same slot every door offers: `<door> rite <petname>`. It sits at second position deliberately, so a
+ * composition never competes with a primitive for the top-level namespace. `flow` names a sensory MODALITY
+ * in this house (a mesh senses who · authority · transit), never a procedure, so a composition wearing it
+ * squatted on a word that already meant something.
  */
-const FLOWS: Readonly<Record<string, { readonly composes: string; readonly run: Sub }>> = {
-  refresh: { composes: "build · stop · clear · stand", run: cmdRefresh },
-  rebuild: { composes: "bake · stand",                 run: cmdRebuild },
+const RITES: Readonly<Record<string, { readonly composes: string; readonly run: Sub }>> = {
+  // THE FOUNDING. A vessel stands from nothing: mint what it needs, bring it up, plant the corpus.
+  //
+  // WHAT CLASS IT STANDS AS IS NOT THIS RITE'S CHOICE. The boot reads whether the identity archive opens
+  // and stands the vessel accordingly — a HERM at the waking floor when it holds shut, a LARARIUM when a
+  // key is present. So an unsealed founding lights a hearth, and a sealed one with no passphrase in the
+  // environment stands a crossroads that carries, routes and serves the public shelf while every sovereign
+  // act waits. Neither is a failure and neither is a degradation: a vessel that cannot open never rose.
+  //
+  // The rite REPORTS which one it got, because the two look identical from outside and an operator who
+  // expected a hearth reads a crossroads as a broken founding rather than an unlit one.
+  founding: { composes: "found · stand · seed", run: runFoundingRite },
+  refresh:  { composes: "build · stop · clear · stand", run: cmdRefresh },
+  rebuild:  { composes: "bake · stand",                 run: cmdRebuild },
   // Rebirth of a STANDING vessel names a real motion, and stop-wipe-bake carries it. A fresh founding
   // never runs it — nothing stands there to tear down.
-  rebirth: { composes: "stop · clear · bake · stand · seed", run: cmdRegenesis },
+  rebirth:  { composes: "stop · clear · bake · stand · seed", run: cmdRegenesis },
 };
 
-async function runFlow(args: ParsedArgs): Promise<number> {
+/**
+ * The founding rite — found · stand · seed, halting at the first step that refuses.
+ *
+ * It runs the primitives rather than reimplementing them, so the rite carries no behaviour of its own and
+ * every fix to a primitive reaches it for free. A composition that grows its own logic stops being a
+ * composition and becomes a fourteenth verb wearing a pet-name.
+ */
+async function runFoundingRite(args: ParsedArgs): Promise<number> {
+  const sealedShut = !process.env["LARES_ARCHIVE_PASSPHRASE"];
+  const steps: ReadonlyArray<readonly [string, Sub]> = [
+    ["found", (a) => cmdInit(a)],
+    ["stand", (a) => standVessel({ ...a, positional: ["stand"] })],
+    ["seed",  (a) => cmdSeed({ ...a, flags: { ...a.flags, apply: true, yes: true } })],
+  ];
+  for (const [name, run] of steps) {
+    const code = await run({ ...args, positional: [] });
+    if (code !== 0) {
+      console.error(`lares vessel rite founding: halted at ${name} (exit ${code}) — the rite runs the`);
+      console.error("  primitives, so re-run it after curing that step; every one of them is idempotent.");
+      return code;
+    }
+  }
+  // The class the boot chose, named where the operator is looking. `standAs` decides it from whether the
+  // archive opens; this only reports what that reading implies, and never re-derives it.
+  console.error(sealedShut
+    ? "lares vessel rite founding: stood WITHOUT an archive passphrase in the environment.\n"
+      + "  A sealed vessel stands at the WAKING FLOOR as a herm — carrying, routing, serving the public\n"
+      + "  shelf, every sovereign act waiting. Set LARES_ARCHIVE_PASSPHRASE and stand it again to light\n"
+      + "  the hearth. An UNSEALED vessel stood as a lararium and needs nothing."
+    : "lares vessel rite founding: an archive passphrase rode the environment — the hearth lights if the\n"
+      + "  archive opens under it. `lares vessel read` names the standing.");
+  return 0;
+}
+
+async function runRite(args: ParsedArgs): Promise<number> {
   const petname = args.positional[1];
-  const flow = petname ? FLOWS[petname] : undefined;
-  if (!flow) {
-    if (petname) console.error(`lares vessel flow: unknown flow "${petname}"\n`);
-    console.error("lares vessel flow <petname> — the pet-named cap-stacks over the vessel primitives\n");
-    for (const [name, f] of Object.entries(FLOWS)) {
-      console.error(`  ${name.padEnd(9)} ${f.composes}`);
+  const rite = petname ? RITES[petname] : undefined;
+  if (!rite) {
+    if (petname) console.error(`lares vessel rite: unknown rite "${petname}"\n`);
+    console.error("lares vessel rite <petname> — the pet-named procedures over the vessel primitives\n");
+    for (const [name, r] of Object.entries(RITES)) {
+      console.error(`  ${name.padEnd(9)} ${r.composes}`);
     }
     return petname ? 2 : 0;
   }
-  // Two names come off: "flow" and the petname.
-  return flow.run({ ...args, positional: args.positional.slice(2) });
+  // Two names come off: "rite" and the petname.
+  return rite.run({ ...args, positional: args.positional.slice(2) });
 }
 
 /** The door's map. Every entry names a primitive, a read, or the one composed sub-door. */
@@ -118,7 +168,7 @@ const SUBS: Readonly<Record<string, { readonly summary: string; readonly run: Su
   bake:  { summary: "re-derive the genesis island from the engine + packed plugin (moves no identity)",  run: (a) => cmdBuildGenesis(under(a)) },
   seed:  { summary: "plant every bags/@* holding back into its doc, kind-routed and diff-gated",         run: (a) => cmdSeed(under(a)) },
   read:  { summary: "inspect and start nothing — bootstrap, storage, port, seal, personas, quorum",      run: (a) => cmdStatus(under(a)) },
-  flow:  { summary: "the pet-named cap-stacks: refresh · rebuild · rebirth",                             run: runFlow },
+  rite:  { summary: "the pet-named procedures: founding · refresh · rebuild · rebirth",                 run: runRite },
 };
 
 function printVesselHelp(): void {
@@ -126,7 +176,7 @@ function printVesselHelp(): void {
   for (const [name, s] of Object.entries(SUBS)) {
     console.log(`  ${name.padEnd(7)} ${s.summary}`);
   }
-  console.log("\n  A fresh founding composes: vessel found · vessel stand · vessel seed");
+  console.log("\n  A fresh founding: lares vessel rite founding   (found · stand · seed)");
 }
 
 export async function cmdVessel(args: ParsedArgs): Promise<number> {
