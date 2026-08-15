@@ -12,9 +12,9 @@
 // A spec that names a mark no reader recognises is not a bug in either half. It is a bug in the SEAM,
 // and a seam is exactly what no single-artifact witness can see.
 //
-// The reading runs one way on purpose: a DECLARED-BUT-UNRECOGNISED mark is a promise the tree cannot
-// keep, and it fails. A RECOGNISED-BUT-UNDECLARED mark only means the code reads more than the spec
-// wrote down, which is tolerable and reported rather than refused.
+// The reading runs one way on purpose: a mark the SPEC stands and no TIDDLER declares is a promise the
+// tree cannot keep, and it fails. A tiddler declaring a mark the spec never wrote down only means the
+// readers hold more than the spec says — reported, never refused.
 import { readFileSync } from "fs";
 import { execSync } from "child_process";
 import { join } from "path";
@@ -37,21 +37,26 @@ if (standing.length === 0) {
   process.exit(1);
 }
 
-// What the readers actually scan for. Source only: `dist/` is a build of this same source and would
-// agree with it by construction, which is the failure mode this witness exists to refuse.
-const sources = execSync(
-  "git ls-files 'packages/*/src/**/*.ts' 'packages/*/src/*.ts'",
+// What the tree actually recognises. The frame marks DECLARE THEMSELVES in `tiddlers/sigil-frame-*.tid`,
+// each carrying `lar-code` and the `lar-pattern` that matches it — the same self-declaring shape the
+// plugin build already uses for modules, where a `.ts` becomes a tiddler by carrying a tiddler header.
+//
+// READING THE TIDDLERS RATHER THAN THE SOURCE IS THE POINT. Grepping TypeScript for control codes finds
+// every incidental `0004` in unrelated arithmetic and misses a mark declared in wikitext, so it answers
+// a question adjacent to the one asked. A frame mark the corpus can carry is a mark some tiddler
+// declares; anything else is a coincidence in a number.
+const tiddlers = execSync(
+  "git ls-files 'packages/lararium-tw5/tiddlers/sigil-frame-*.tid'",
   { encoding: "utf8", cwd: REPO },
 ).split("\n").filter(Boolean);
 
 const seen = new Set();
-for (const f of sources) {
+for (const f of tiddlers) {
   const t = readFileSync(join(REPO, f), "utf8");
-  for (const m of t.matchAll(/&#x00[0-9A-Fa-f]{2};|\b00[0-9A-Fa-f]{2}\b/g)) {
-    const raw = m[0];
-    const hex = raw.startsWith("&") ? raw.slice(3, 7) : raw;
-    seen.add(`&#x${hex};`);
-  }
+  const code = /^lar-code:\s*(&#x[0-9A-Fa-f]{4};)\s*$/m.exec(t);
+  const pattern = /^lar-pattern:\s*\S/m.test(t);
+  if (code && pattern) seen.add(code[1]);
+  else if (code) console.log(`  ${f} declares ${code[1]} and carries no lar-pattern`);
 }
 
 const unrecognised = standing.filter((s) => !seen.has(s.code));
@@ -61,7 +66,7 @@ const undeclared = [...seen].filter(
 
 console.log(
   `[frame-parity] spec declares ${standing.length} standing + ${reserved.length} reserved; ` +
-  `source recognises ${seen.size}`,
+  `tiddlers recognise ${seen.size}`,
 );
 
 if (undeclared.length > 0) {
@@ -69,9 +74,9 @@ if (undeclared.length > 0) {
 }
 
 if (unrecognised.length === 0) {
-  console.log("  every mark the spec stands, some reader scans for");
+  console.log("  every mark the spec stands, a tiddler declares and patterns");
   process.exit(0);
 }
-console.log(`  DECLARED, RECOGNISED BY NOTHING — a promise the tree cannot keep:`);
+console.log(`  DECLARED BY THE SPEC, DECLARED BY NO TIDDLER — a promise the tree cannot keep:`);
 for (const { code, mark } of unrecognised) console.log(`    ${code}  ${mark}`);
 process.exit(1);

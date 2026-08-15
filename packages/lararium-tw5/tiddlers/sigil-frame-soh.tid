@@ -1,0 +1,13 @@
+title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-frame-soh
+tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
+lar-kind: frame
+lar-family: frame
+lar-code: &#x0001;
+lar-slots: namespace bearing uri
+lar-pattern: <<\^[^>\n]*&#x0001;
+lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext
+type: text/vnd.tiddlywiki
+
+<!-- SOH &#x0001; — the carrier declares itself and its canonical address. The pattern anchors on the CONTROL CODE, never on what precedes
+     it: an SOH may carry a namespace glyph the matcher cannot know, and a shape that scans for
+     the opener alone swallows the whole header. -->

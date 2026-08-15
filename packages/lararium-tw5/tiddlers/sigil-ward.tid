@@ -1,9 +1,10 @@
 title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-ward
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: metadata
-lar-pattern: <<~\s*ward\b([\s\S]*?)>>
-lar-pono-uri: lar:///ha.ka.ba/lares/api/noosphere-boot#l-prime
+lar-pattern: Drift-Ward\s*\(
+lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/drift-ward
 type: text/vnd.tiddlywiki
 
-<!-- ward — the L-Prime ward (Sword/Wand/etc. tool glyph). HUD-frame sigil: recognized in the tree,
+<!-- Drift-Ward — the ward, fired INSIDE the `hud` panel rather than as a sigil of its own
+     (last at open, first at close). Recognized in the tree,
      rendered as plain literal text for now. -->
