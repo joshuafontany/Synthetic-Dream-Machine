@@ -11,9 +11,9 @@ manaoio   = 14
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "THE SUBSTRATE COLLAPSE — performed. One namespace per causal island governs every plane in this CLI except the vessel's own, where sixteen bare verbs stand for seven primitives and their compositions. This meme carries the primitive set, the door, the flow-set, the ripples that must close with them, the verifications that prove the collapse landed, and the parts deliberately left standing. It instructs; it does not argue."
+role      = "THE SUBSTRATE COLLAPSE — performed. One namespace per causal island governs every plane in this CLI except the vessel's own, where sixteen bare verbs stand for seven primitives and their compositions. This meme carries the primitive set, the door, the rite-set, the ripples that must close with them, the verifications that prove the collapse landed, and the parts deliberately left standing. It instructs; it does not argue."
 status    = "standing"
-status-why = "the door stands, the compositions ride it as flows, every caller moved and every collapsed spelling refuses; walked by the founding + contract witnesses and the keeper rehearsal"
+status-why = "the door stands, the compositions ride it as rites, every caller moved and every collapsed spelling refuses; walked by the founding + contract witnesses and the keeper rehearsal"
 tags      = ["api/pono/meme", "lararium/api/lares-lararium-binding"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/cli/vessel-door"
@@ -78,41 +78,41 @@ still answers teaches that both spellings stand, and the surface regrows from th
 | `reset` | wipe · found | `vessel clear` |
 | `fresh` | wipe · stand | `vessel clear && vessel stand` |
 | `reconcile` | stop · wipe? · stand | `vessel stand --restart [--clear]` |
-| `refresh` | build · stop · wipe · stand | `vessel flow refresh` |
-| `rebuild` | bake · stand | `vessel flow rebuild` |
+| `refresh` | build · stop · wipe · stand | `vessel rite refresh` |
+| `rebuild` | bake · stand | `vessel rite rebuild` |
 | `build-genesis` | bake | `vessel bake` |
-| `regenesis` | stop · wipe · bake · stand · seed | `vessel flow rebirth` |
+| `regenesis` | stop · wipe · bake · stand · seed | `vessel rite rebirth` |
 | `seed` | seed | `vessel seed` |
 | `status` · `node status` | read | `vessel read` |
 
-''THE COMPOSITIONS BECOME FLOWS, NEVER VERBS.'' `refresh`, `rebuild` and `rebirth` are pet-named
-cap-stacks over the primitives, and this house already carries the surface for exactly that: a flow-door
-where new capability arrives as a new flow rather than another raw verb. A composition earns a pet-name;
+''THE COMPOSITIONS RIDE AS RITES, NEVER VERBS.'' `refresh`, `rebuild` and `rebirth` are pet-named
+cap-stacks over the primitives, and this house already carries the surface for exactly that: a rite-door
+where new capability arrives as a new rite rather than another raw verb. A composition earns a pet-name;
 it never earns a top-level name.
 
-<<~ confidence Canon 17/20 >> ''The test for a flow versus a primitive'': a primitive names one motion
+<<~ confidence Canon 17/20 >> ''The test for a rite versus a primitive'': a primitive names one motion
 and cannot be expressed as a sequence of the others. Everything else composes.
 
 <<~/ahu >>
 
-<<~ ahu #the-founding-flow >>
+<<~ ahu #the-founding-rite >>
 
-!! ⚠ The founding rite becomes a flow, and one movement changes
+!! ⚠ The founding rite rides the rite-door, and one movement changes
 
 The rite currently reaches its fifth movement through `regenesis`, which stops the daemon, wipes the store,
 re-bakes genesis, stands the node again and then seeds. ''On a fresh founding that tears down what the
 second movement built ninety seconds earlier.'' The only part the rite needs there is the seeding.
 
-''So the founding flow composes: found · stand · seed.'' No stop, no wipe, no second bake.
+''So the founding rite composes: found · stand · seed.'' No stop, no wipe, no second bake.
 
 ''AND THAT SUBTRACTION REMOVES A TRAP RATHER THAN HIDING IT.'' Sealing the vault writes a marker the clear
 does not remove, so every later daemon boot wants the passphrase in its environment. Because the current
 fifth movement RESTARTS the daemon, it crosses that gate — and an operator who sealed by typing must carry
-the passphrase forward by hand between two movements or watch the vessel come up at the floor. ''A flow
+the passphrase forward by hand between two movements or watch the vessel come up at the floor. ''A rite
 that never restarts never crosses the gate'', so the carry-forward step and the paragraph explaining it
 both leave the rite.
 
-''Keep `rebirth` as its own flow.'' Rebirth of a STANDING vessel is a real motion and stop-wipe-bake is
+''Keep `rebirth` as its own rite.'' Rebirth of a STANDING vessel is a real motion and stop-wipe-bake is
 exactly right for it. It is simply not a founding step, and its name says so.
 
 <<~/ahu >>
@@ -127,9 +127,10 @@ name substrate verbs directly. Each MUST move in the same act.
 # ''THE GENERATED MCP MIRROR.'' The CLI↔MCP↔seat isomorphism rides a GENERATED fixture, never a
   hand-edited one. Rebuild the CLI first, then regenerate, then confirm the isomorphism reports green.
   A hand-edit here reads as a passing test over a surface nobody generated.
-# ''THE FRESH-BUILD GATE.'' It carries a ROSTER of daemon-lifecycle verbs — nine names that must each be
-  remembered. One door replaces the roster with a single membership test, and the gate stops drifting
-  every time a verb is added.
+# ''THE FRESH-BUILD GATE.'' Membership DERIVES from the door rather than from a remembered list of verb
+  names. A roster drifts the moment a surface changes — the very defect this door closes. The derived
+  test states its EXCEPTIONS instead, so it fails safe: a sub-door added later stays gated until someone
+  argues it out.
 # ''THE FOUNDING RITE.'' Its preflight, its clear, its stand, its seed and its live movements all name
   substrate verbs directly. It is the operator-instruction source, so a stale command there fails at the
   worst moment a command can fail.
@@ -178,7 +179,12 @@ suite afterward would prove neither half. Move the names; move nothing else.
 # ''The isomorphism reports green'' after regenerating the mirror — the three surfaces name one verb set.
 # ''No old name answers.'' Every collapsed spelling MUST fail as an unknown verb. A surviving alias is the
   failure mode this collapse exists to prevent, and it hides perfectly behind a passing suite.
-# ''The keeper rehearsal walks both cycles green'' — which also proves the founding flow composes
+# ''The surface gets measured at the VERB, never at the door.'' Thirty doors carry a hundred and sixteen
+  addressable verbs. A door count therefore reports a collapse the operator cannot feel: the fan-out lives
+  one level below the number, so a surface that reads halved by doors may not have moved at all. Count
+  what an operator can actually type, and quote both figures — the pair is the reading, either alone
+  flatters.
+# ''The keeper rehearsal walks both cycles green'' — which also proves the founding rite composes
   correctly, since the harness performs the rite rather than describing it.
 # ''The founding rite reads end to end'' with every command resolving to a verb that answers. A rite
   amended by many hands drifts fastest at exactly the commands nobody re-typed.
@@ -192,11 +198,11 @@ suite afterward would prove neither half. Move the names; move nothing else.
 ''Land the substrate collapse only on a quiet tree.'' It touches the entry point every other thread stands
 on, so it wants to arrive between phases rather than during one.
 
-<<~loops ✶ primitives-and-door -> ⏿ flows -> ◇ ripples -> ▶ verifications -> ↺ the-rite-and-its-harness >>
+<<~loops ✶ primitives-and-door -> ⏿ rites -> ◇ ripples -> ▶ verifications -> ↺ the-rite-and-its-harness >>
 
 # ''Stand the door and the primitives first, with the old verbs still answering.'' The two surfaces
   co-exist for exactly one commit, which keeps every caller working while the new shape gets proven.
-# ''Move the flows'' — the compositions, pet-named through the flow surface.
+# ''Move the rites'' — the compositions, pet-named through the rite surface.
 # ''Close the ripples in one act'' — the generated mirror, the fresh-build gate, the rite, the harness,
   the container boot, the witnesses, the hook, the handler headers.
 # ''Then cut the old names, all of them, in a single commit.'' No aliases, no deprecation window. A
