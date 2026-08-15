@@ -37,6 +37,21 @@ for (const f of files) {
     const wrong = new RegExp(`^<<~[^>\\n]*${code}`, "m");
     if (wrong.test(t)) faults.push([f, `${name} rides <<~ — the frame takes <<^`]);
   }
+  // THE BEARING ARROW IS STRUCTURE, so a frame that lost it is malformed rather than terse.
+  //
+  // `? -> uri` at the heading and `-> ?` at the close carry ONE relation read from two ends — source
+  // unresolved and target known, then source known and target unresolved. A named parameter would state
+  // a PROPERTY; the arrow states a RELATION, and the control-soh scan captures its target as a group.
+  // Drop it and the capture returns nothing while every other check here still reads the frame as sound.
+  const soh = /^<<\^[^>\n]*&#x(?:0001|0011);/m.test(t);
+  if (soh && !/^<<\^[^>\n]*&#x(?:0001|0011);\s*\?\s*->\s*\S+\s*>>/m.test(t)) {
+    faults.push([f, "SOH carries no `? -> uri` — the heading states no bearing"]);
+  }
+  const eot = /^<<\^[^>\n]*&#x(?:0004|0014);/m.test(t);
+  if (eot && !/^<<\^[^>\n]*&#x(?:0004|0014);\s*->\s*\?\s*>>/m.test(t)) {
+    faults.push([f, "EOT carries no `-> ?` — the close resolves a bearing it cannot know"]);
+  }
+
   // AN OPENED BODY CLOSES — and a carrier that never opens one carries no fault. The frame acts as a
   // FIELD OF THE TEXT BODY (operator ruling), so a bag manifest or a library index whose whole content
   // IS its iam stands with a heading and nothing to bracket. Demanding ETX there would report ten
