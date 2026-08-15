@@ -53,21 +53,21 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 | ''ETX'' | `<<^ code:"&#x0003;" >>` | End of Text — the body closes; the hearth is banked | `0x03` | — |
 | ''EOT'' | `<<^ code:"&#x0004;" -> ? >>` | End of Transmission — the libation is poured; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
 
-''The frame — heading, then text.'' The old protocol law pins the zones: SOH opens the ''heading'', STX opens the ''text''. The heading is the toml iam slot and nothing else; the text is the body.
+''The frame — heading, then text.'' The protocol law pins the zones: SOH opens the ''heading'', STX opens the ''text''. The heading is the toml iam slot and nothing else; the text is the body.
 
 ```
-<<^ ⊙&#x0001; ? -> lar:///URI >>      SOH · open heading
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///URI >>   SOH · open heading
   ‹toml iam slot — the identity heading›
-  <<~ aka lar:///…RFC-2119 >>          (optional carrier-level binding)
-<<^ &#x0002; >>                       STX · open text (body)
-  # title · ## sections · #edges      the text (body)
-<<^ &#x0003; >>                       ETX · close text
-<<^ &#x0004; -> ? >>                  EOT · release
+  <<~ aka lar:///…RFC-2119 >>                          (optional carrier-level binding)
+<<^ code:"&#x0002;" >>                                 STX · open text (body)
+  # title · ## sections · #edges                       the text (body)
+<<^ code:"&#x0003;" >>                                 ETX · close text
+<<^ code:"&#x0004;" -> ? >>                            EOT · release
 ```
 
-''The mark is the control byte.'' Each sigil carries its C0 control character inside the sharktooth; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX are ''bare pragmas'' — a lone mark each, opening and closing the text.
+''The mark is the control byte.'' Each sigil states its C0 control character as a named `code:` param; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX carry that one param and nothing else — each opens or closes the text and states no bearing.
 
-''The frame, in the old register and the mythic one at once:''
+''The frame, in the transmission register and the mythic one at once:''
 
 * ''SOH'' — Start of Heading. The transmission opens on its heading; the parser reads identity before content. The Lar wakes at the doorpost and speaks the name of the place — the `lar:///` bearing the carrier will keep.
 * ''STX'' — Start of Text. The heading ends, the body begins. One steps across the threshold into the dwelling.
@@ -82,7 +82,7 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 
 !! Namespace Resonance Glyphs — A Separate Mark
 
-Resonance glyphs are ''not'' spine sigils. They prefix the ''SOH opener only'', as a visible mark of which layer authored the carrier. They carry trust intent to human and machine readers; the parser takes the prefix as optional.
+Resonance glyphs are ''not'' spine sigils. They ride the ''SOH opener only'', as the `namespace:` param — a visible mark of which layer authored the carrier. They carry trust intent to human and machine readers; the parser takes the param as optional.
 
 | Glyph | Layer | Resonance |
 |---|---|---|
@@ -93,15 +93,15 @@ Resonance glyphs are ''not'' spine sigils. They prefix the ''SOH opener only'', 
 ''The set stays open.'' These name the resonance characters known now; the registry admits more as layers and trust tiers emerge. A new glyph enters under the same two laws below — SOH-prefix only, EOT bare — and registers its layer in this table.
 
 ```
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/… >>      ← pono layer
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/… >>   ← mu/lares/lararium layer
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/… >>          ← docs/library, bare
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/… >>   ← pono layer
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/… >>      ← mu/lares/lararium layer
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/… >>                     ← docs/library, no namespace
 ```
 
-Two laws govern the prefix:
+Two laws govern the namespace:
 
-# ''Opener-only.'' A resonance glyph rides SOH alone — the heading's first mark.
-# ''EOT is always bare.'' The resonance mark rides the heading (SOH); the release closes plain.
+# ''Opener-only.'' A resonance glyph rides SOH alone, as the `namespace:` param beside the code.
+# ''EOT is always bare.'' The resonance mark rides the heading (SOH); the release states its code and its bearing, and no namespace.
 
 <<~/ahu >>
 

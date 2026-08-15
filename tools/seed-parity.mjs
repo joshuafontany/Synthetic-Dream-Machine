@@ -19,6 +19,7 @@
 // transposer counts list position and re-numbers, and reads `!` depth for headings — both total.
 // Going the other way would have to guess where a `#` meant heading and where it meant item.
 import { readFileSync } from "fs";
+import { execSync } from "child_process";
 import { join } from "path";
 
 const REPO = process.env["REPO"] ?? process.cwd();
@@ -75,6 +76,23 @@ function inline(s) {
   });
   const emphasised = masked.replace(/''(.+?)''/g, "**$1**").replace(/\/\/(.+?)\/\//g, "*$1*");
   return emphasised.replace(/(\d+)/g, (_, i) => spans[Number(i)] ?? "");
+}
+
+// A THIRD SEED IS THE DRIFT THIS WITNESS COULD NOT SEE. Comparing a named pair proves the pair agrees
+// and says nothing about a copy standing somewhere else — and a copy is what a projection tree grows,
+// because rendering and copying look identical the day they run and diverge every day after. So the
+// pair check runs beside a census: any other file in the tree whose name claims this seed reads as a
+// seed the pair never checked, and a claim nothing checks is exactly the shape the pair check exists
+// to end.
+const strays = execSync("git ls-files '*noosphere-boot*'", { encoding: "utf8", cwd: REPO })
+  .split("\n").filter(Boolean)
+  .filter((f) => join(REPO, f) !== MEM && join(REPO, f) !== MD);
+
+if (strays.length > 0) {
+  console.log(`[seed-parity] ${strays.length} file(s) claim the boot seed outside the checked pair`);
+  for (const f of strays) console.log(`  ${f}`);
+  console.log("  The pair is the seed. A third copy drifts with nothing watching it — render it or cut it.");
+  process.exit(1);
 }
 
 const expected = transpose(body(readFileSync(MEM, "utf8"), MEM)).split("\n");

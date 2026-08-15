@@ -162,7 +162,7 @@ function template(opts: {
   const sourceRel = relative(WORKSPACE, opts.sourceFile);
   return `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///${uriPath} >>
+<<^ code:"&#x0001;" ? -> lar:///${uriPath} >>
 \`\`\`toml iam
 uri-path     = "${uriPath}"
 file-path    = "${memeRel}"
@@ -176,7 +176,7 @@ l-space      = "lararium"
 cacheable    = true
 retain       = true
 \`\`\`
-<<^ &#x0002;>>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #contract >>
 TODO: describe the load-bearing surface this file owns.
