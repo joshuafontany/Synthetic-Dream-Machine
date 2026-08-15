@@ -53,6 +53,8 @@ export type MemeStreamEvent =
 const SOH_RE  = /<<\^(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*\?\s*->\s*([^\s>]+)\s*>>/;
 const STX_RE  = /<<[~^](?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/;
 const ETX_RE  = /<<[~^](?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/;
+// ETB: the attestation block terminator — stands between ETX and EOT, never framing text.
+const ETB_RE  = /<<[~^](?:[^>\n]|->)*&#x0017;(?:[^>\n]|->)*>>/;
 // EOT: entity form (&#x0004;/&#x0014;) OR return-throat (<<~ -> ? >>)
 const EOT_RE  = /<<[~^](?:(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*|\s*->\s*\?)\s*>>/;
 const AHU_OPEN_RE  = /<<~(?:[^>\n]|->)*\bahu\s+(#[\w-]+)\s*>>/;

@@ -528,6 +528,7 @@ stable separator and leaves the evolving one alone.
 |`&#x0003;` |ETX |`bcc` |text ends; the block check follows the mark directly |
 |`&#x0017;` |ETB |`hash` |the attestation block ends |
 |`&#x0004;` |EOT |`target` |transmission ends, bearing forward |
+|`&#x0014;` |EOT₂ |`target` |the Kapu transmission-end variant |
 
 ''ETX takes its check adjacent, per the received framing.'' In character-oriented synchronous framing
 (IBM BSC, 1967) a block runs `STX -> text -> ETX|ETB -> BCC`: the terminator comes first and the check

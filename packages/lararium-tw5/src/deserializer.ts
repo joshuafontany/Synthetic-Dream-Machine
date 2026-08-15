@@ -854,7 +854,15 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   out += expandRefs(reader, memeUri, "", str("header-text"), f);
   out += "<<^ &#x0002; >>\n\n";
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
-  out += "\n\n<<^ &#x0003; >>\n\n<<^ &#x0004; -> ? >>\n";
+  // ETX takes its block check adjacent, per the received framing (STX -> text -> ETX -> BCC); the
+  // attestation block follows and ETB terminates it. A carrier carrying neither emits neither, so
+  // nothing that stands today changes shape — and a carrier that gains one keeps it across a
+  // projection round trip, which is the whole reason the emitter has to know the mark at all.
+  const bcc  = str("carrier-bcc");
+  const sila = str("carrier-sila");
+  out += `\n\n<<^ &#x0003; >>${bcc ? `${bcc}` : ""}\n`;
+  if (sila) out += `\n${sila}\n<<^ &#x0017; >>\n`;
+  out += "\n<<^ &#x0004; -> ? >>\n";
   // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;
