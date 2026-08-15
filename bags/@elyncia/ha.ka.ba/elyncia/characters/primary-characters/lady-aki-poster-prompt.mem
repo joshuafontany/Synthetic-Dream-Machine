@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-prompt >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-prompt >>
 ```toml iam
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-prompt"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -57,6 +57,6 @@ No spider legs on Ichi. No tall ritual hat. No generic witch hat. No polished fi
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

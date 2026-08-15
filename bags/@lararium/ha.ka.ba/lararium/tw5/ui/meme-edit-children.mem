@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/meme-edit-children >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/meme-edit-children >>
 ```toml iam
 cacheable  = true
 file-path  = "bags/@lararium/ha.ka.ba/lararium/tw5/ui/meme-edit-children.mem"
@@ -16,7 +16,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-edit-children"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 \whitespace trim
 
@@ -59,6 +59,6 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-edit-children"
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

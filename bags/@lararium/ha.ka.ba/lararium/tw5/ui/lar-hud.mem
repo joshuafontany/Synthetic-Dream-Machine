@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/lar-hud >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/lar-hud >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/tw5/ui/lar-hud.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/lar-hud"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! LarHUD — Dockable TW5 Wiki Frame
 
@@ -117,9 +117,9 @@ as a flex sibling unaffected by tldraw's internal layout changes.
 * ''Resize handle'': drag the left edge of sidebar to adjust width between MIN_W and MAX_W
 * ''Per-tiddler navigation'': HUD tab bar gains a breadcrumb trail for open tiddlers
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>
 <<~ ahu #edges >>
 
 !! Edges

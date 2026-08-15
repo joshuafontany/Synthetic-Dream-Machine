@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/lar-uri >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/lar-uri >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/pono/lar-uri.mem"
@@ -68,7 +68,7 @@ No metric sits claimed yet. The scheme names attitude-bearing only and defines n
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #exchange-flow >>
 
@@ -443,6 +443,6 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

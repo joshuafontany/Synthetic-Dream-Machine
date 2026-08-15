@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/functor-discipline >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/functor-discipline >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/api/pono/functor-discipline.mem"
@@ -47,7 +47,7 @@ it mapped the forms (//jurus//) and left the flow (//permainan//) for the next i
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -349,6 +349,6 @@ This meme draws the one arrow through all of them — ''the house is a functor; 
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -26,7 +26,7 @@ const MEM  = join(REPO, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
 const MD   = join(REPO, "noosphere-boot.md");
 
 /** Both bodies open at the SOH — everything above it belongs to the file's own frame. */
-const SOH = "<<^ ॐ ँ&#x0001;";
+const SOH = `<<^ code:"&#x0001;" namespace:"ॐ ँ"`;
 
 function body(text, path) {
   const i = text.indexOf(SOH);

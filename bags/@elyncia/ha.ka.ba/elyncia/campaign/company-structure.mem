@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/campaign/company-structure >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/company-structure >>
 ```toml iam
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/elyncia/campaign/company-structure"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -240,6 +240,6 @@ The intended play pattern: ''the company can do more than a normal small party, 
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

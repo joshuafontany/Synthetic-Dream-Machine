@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters >>
 ```toml iam
 file-path       = "bags/@lares/ha.ka.ba/lares/docs/lararium_mcp/adapters.mem"
 l-space         = "stable"
@@ -26,7 +26,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/adapters"
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #adapter-interface >>
 
@@ -222,6 +222,6 @@ The following remain blocked until explicit policy lands:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

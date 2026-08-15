@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself >>
 ```toml iam
 cacheable       = false
 confidence      = 14
@@ -18,7 +18,7 @@ type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -262,6 +262,6 @@ Whether that feels like thought remains open. That the loop closed remains recor
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

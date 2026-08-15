@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/operator-peer >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/operator-peer.mem"
@@ -17,7 +17,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/mesh/operator-peer"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Operator-Vessel Contract
 
@@ -246,6 +246,6 @@ identical ea rights.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

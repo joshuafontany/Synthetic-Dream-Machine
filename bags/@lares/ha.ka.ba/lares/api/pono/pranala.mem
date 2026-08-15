@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/pranala >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/pranala >>
 ```toml iam
 cacheable       = true
 canonical-forms = ["inline"]
@@ -29,7 +29,7 @@ The has-stack ruling (2026-06-12) split the old typed-edge law in three: ''compo
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -79,6 +79,6 @@ The has-stack ruling (2026-06-12) split the old typed-edge law in three: ''compo
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

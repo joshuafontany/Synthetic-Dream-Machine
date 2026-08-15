@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/tw5-boot-gate >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/tw5-boot-gate >>
 ```toml iam
 file-path     = "bags/@lararium/ha.ka.ba/lararium/docs/tw5-boot-gate.mem"
 last-reviewed = "2026-07-18"
@@ -14,7 +14,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/docs/tw5-boot-gate"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -78,6 +78,6 @@ The ''implementors interface'' it queries IS a meme: `lar:///ha.ka.ba/lares/api/
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

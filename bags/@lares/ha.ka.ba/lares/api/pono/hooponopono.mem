@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/hooponopono >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/hooponopono >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/api/pono/hooponopono.mem"
@@ -29,7 +29,7 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -113,6 +113,6 @@ Boundary event fields:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

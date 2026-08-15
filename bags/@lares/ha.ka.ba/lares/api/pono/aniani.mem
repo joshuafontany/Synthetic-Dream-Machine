@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/aniani >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/aniani >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/ha.ka.ba/lares/api/pono/aniani.mem"
@@ -20,7 +20,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lares/api/pono/aniani"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #mirror >>
 
@@ -121,6 +121,6 @@ Leave one corner honestly open and seen. A set that sweeps every corner clean ha
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

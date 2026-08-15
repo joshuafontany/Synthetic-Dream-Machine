@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/api/pono/orichalcum-capabilities.mem"
@@ -26,7 +26,7 @@ Authority gate for wiki islands, edge islands, and canon MOVE.
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -292,6 +292,6 @@ the crypto gate, not instead of it.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

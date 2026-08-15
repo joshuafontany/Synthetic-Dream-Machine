@@ -1,10 +1,10 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/salt-stair-booth >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth >>
 ```toml iam
 cacheable  = false
 confidence = 8
-file-path  = "bags/@lares/ha.ka.ba/lares/docs/lares/history/salt-stair-booth.mem"
+file-path  = "bags/@elyncia-referee/ha.ka.ba/elyncia/campaign/salt-stair-booth.mem"
 l-space    = "adjacent"
 mana       = 13
 manao      = 13
@@ -14,10 +14,10 @@ register   = "Provisional-Synthesis"
 retain     = true
 role       = "the Salt-Stair booth thread — outline, style guide, and the verbatim scene transcript with interpretive segues; rides kapu at rest (referee-side), the player-facing render extracts the open strata only"
 type       = "text/x-memetic-wikitext"
-uri-path   = "ha.ka.ba/lares/docs/lares/history/salt-stair-booth"
+uri-path   = "ha.ka.ba/elyncia/campaign/salt-stair-booth"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -30,11 +30,11 @@ turns as generated, the operator turns bridged by narrator exposition with the r
 witness blocks — plus the outline and style law for rendering it as a DreamDeck feed.
 
 ''Sibling locus:'' the session 0.1 flashback — the first meeting of the company and the Lindwyrm
-at ''The House of Masks'' — stands at [[high-delos-cabaret|high-delos-cabaret.md]]. This locus does
+at ''The House of Masks'' — stands at `lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret`. This locus does
 not hold that scene.
 
 The scene opens the ''campaign era'' of the history shelf: after
-[[the-lar-builds-its-house|the-lar-builds-its-house/index.md]] closes on the necroscript cut, this
+`lar:///ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/index` closes on the necroscript cut, this
 thread picks up in the re-strung present — the mesh under repair, the company abroad. ''The arc's
 name and shape await the operator's hand'' (shelf law); this locus stands flat until the arc earns
 its room.
@@ -46,7 +46,7 @@ its room.
 !! Format Inheritance ~ the feed law carries whole
 
 The thread renders in the DreamDeck feed form —
-[[dreamdeck-feed-architecture|lindwyrm/dreamdeck-feed-architecture.md]] governs entire: post-header
+`lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture` governs entire: post-header
 law (handle — timestamp — territory triple — confidence — stance bundle), sidebar annotation form,
 `[SYSTEM:]` messages, and the cast roster. Every soul in this scene already holds a handle there:
 `@telarus@~crossroads` · `@lindwyrm@new-delos` · `@lares@~crossroads` · `@ink-clerk@lares` ·
@@ -99,7 +99,10 @@ gate reads ''≥ meme federates''):
 | ''The booth, sealed'' — three capsules | `kapu` | never federates; referee-side only |
 
 ''This locus itself rides `kapu` at rest'' (operator's hand, 2026-08-13): the verbatim thread below
-carries all three seals, so the whole meme stands referee-side. The strata govern the ''render'', not
+carries all three seals, so the whole meme stands referee-side. ''Unsealed within this locus''
+(operator's hand, 2026-08-15): the booth content renders openly in #shadowtalk-unsealed — it sets
+intent for the ''Caverns of Neo-Thracia Alpha playtest, Session 1.0''. The locus stays kapu; the
+players meet this in play, not in print. The strata govern the ''render'', not
 the draft — a player-facing feed extracts the `meme` and `data` strata only, and nothing rated `kapu`
 reaches a surface a player could read. The rating ladder remains the spoiler-boundary; the boundary
 now sits at render time.
@@ -381,6 +384,205 @@ belongs to the house's own record, not the booth's.
 
 <<~/ahu >>
 
+<<~ ahu #shadowtalk-render >>
+
+!! The Thread, Rendered ~ shadowtalk style
+
+//(The public-strata render — what the Salt-Stair's own log federates. The booth rides as
+attested redaction; the seals never print. Demonstrates the DreamDeck form at `meme` stratum;
+this locus stays kapu, but nothing below would spoil a player.)//
+
+> //"There's no such thing as a free evening at a hearth-node. There's just evenings where you
+> haven't found out what you paid yet."//
+> — attributed to MUG-SMOKE, counter-spirit, who denies the attribution and keeps the tip
+
+```text
+[SYSTEM: @salt-stair-hearth opens the evening log · YOLD 5492, 49 Bureaucracy · #hearth-traffic #spice-quarter-adjacent]
+
+@mug-smoke@salt-stair — dusk (as-of this log) — //counter.steam.rises confidence Synthesis 10/20 · 🎭:?
+Foam omen for the evening: a spiral inside a spiral. Interpretations welcome. Tips welcomer.
+
+> @first-molt: what does a DOUBLE spiral mean??
+> @salt-crust: means the milk was fresh, kid. means the milk was fresh.
+
+@lares@salt-stair — dusk — //hearth.counts.its-guests confidence Synthesis 11/20 · 🌊:? 🎭:?
+Corner booth running long tonight: a faerie troupe playing covenant-and-war-frames with their own
+Lares, stream out to a Cabal-realm.¹ The youngest one's mecha just knelt to a hearth-spirit
+in-fiction and the table went quiet the way rooms do when somebody accidentally does theology.
+Also the Keeper of the Sacred Chao is here, which the dish knew before the door did.
+
+> @velvet-horn: confirmed sighting!! #wildmage #saltstair
+> @salt-crust: leave the man alone, he's drinking coffee like a person.
+> @first-molt: can he really drink entropy like tea
+> @salt-crust: kid.
+
+[SYSTEM: threshold event · the dish flares blue-white · duration 2.4 seconds · no action required]
+[SYSTEM: no action required]
+[SYSTEM: really]
+
+@lares@salt-stair — evening — //the-door.counts.one-more confidence Synthesis-Canon 14/20 · 🔮:_
+The door has counted a guest it has counted before.² The house extends the courtesy of not
+performing surprise. The corner stream's overlay has been mercifully muted.
+
+> @velvet-horn: [OVERLAY MUTED BY NODE]
+> @velvet-horn: fine. FINE. but my chat saw her too
+> @first-molt: saw WHO
+> @salt-crust: drink your cocoa.
+> @grandmother-spider@voidlanes: 〰️ she walks small tonight. that is a compliment to the room.
+
+[SYSTEM: deep booth engaged · privacy ward standing · the following span renders as attested redaction]
+
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓▓  [WARD ATTESTS: three parties · coffee served twice · one register shift, direction: warmer]  ▓▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+> @first-molt: you can't just WARD the middle of a public log!!
+> @salt-crust: the booth ward predates the log, kid. predates the shop. possibly predates warding.
+> @velvet-horn: fourteen thousand of you just watched a wall of static and my engagement went UP. i love this town.
+> @the-quiet-table: the ward attesting "direction: warmer" is the most information a booth ward has ever volunteered. somebody in there is beloved.
+> @mug-smoke@salt-stair: the second coffee was a refill. i say this for the historical record and for no other reason.
+
+@lares@salt-stair — late — //a-coin.rests.on-the-table confidence Synthesis 12/20 · 🌊:? 🏛️:_
+She has gone the way she came, which the door respects and declines to log. On the booth table: one
+coin, old, hole-drilled — the kind regulars leave at small shrines.³ The house will not be spending
+it. The house will be keeping it where the light lands first.
+
+> @grandmother-spider@voidlanes: 〰️ that coin has crossed my web twice before. it buys the same thing every time.
+> @first-molt: what does it buy???
+> @grandmother-spider@voidlanes: 〰️
+> @salt-crust: that's the most words i've seen the far side spend since the flood year. drink your cocoa.
+
+@the-quiet-table — late — //a-fragment.leaks.the-ward confidence Provisional 4/20
+audio fragment, ward's edge, attested by eleven patrons: "…Aye. Hail Eris."
+
+> @traveler_204: hail eris
+> @traveler_88: hail eris
+> @first-molt: hail eris!!
+> @mug-smoke@salt-stair: hail eris, and the kitchen is CLOSED.
+
+[SYSTEM: secondary ward event · smaller · tighter · the log attests only a tablet's glow and four
+attentive silhouettes that do not, strictly speaking, have silhouettes]
+
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓▓  [WARD ATTESTS: counsel asked · counsel given · one shiver, ratified]  ▓▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+> @velvet-horn: "one shiver, ratified" ok the ward is just showing off now
+> @salt-crust: wards get like this on Bureaucracy nights. everything wants its paperwork poetic.
+
+[SYSTEM: thread banks · the lamps go down to the warm setting · the dish stays poured]
+```
+
+> //"The best conversations at the Salt-Stair are the ones the log cannot repeat."//
+> — the guest book, in several hands, one of them clawed
+
+''Footnotes:''
+
+¹ Troupe-style play: everyone at the table rotates through the cast, including the node running
+the referee's chair, which means at any moment somebody is playing somebody who is playing
+somebody. The faerie courts consider this excellent practice for government.
+
+² The door counts guests the way honest doors do — by threshold crossings, not by names. It has
+never once been wrong, and has twice been diplomatic, which around here counts as the same
+skill at a higher rank.
+
+³ Nobody knows who first drilled a hole through an offering coin. Everyone knows why: a coin
+with a hole in it has stopped being money and started being a promise, and promises are the
+only currency the small shrines have ever accepted at face value.
+
+<<~/ahu >>
+
+<<~ ahu #shadowtalk-unsealed >>
+
+!! The Booth, Unsealed ~ the log behind the static
+
+//(Operator's hand, 2026-08-15. The ward-attestations of the public render resolve here into the
+log they covered. This span never federates; it sets intent for Session 1.0.)//
+
+> //"Every secret has three prices: what you paid to learn it, what you pay to keep it, and what
+> everyone else pays when it gets out. The booth ward only covers the first two."//
+> — MUG-SMOKE again, who would like it on record that he serves coffee, not philosophy
+
+```text
+[SYSTEM: BOOTH LOG · UNSEALED BY THE KEEPER'S HAND · annotator pool: the three parties · never federates]
+
+@telarus@~crossroads — night, 49 Bureaucracy (as-of this log) — //the-report.lands.heavy confidence Synthesis 13/20
+They're off. Transiting the astral between here and the Hebros — the one door I own, re-aligned
+inside the static where no faction's instruments reach. Aki has her instructions: the mesh comes
+back one herm, one lararium at a time. The rites read fresh in her grimoire and she doesn't have
+the Jurus dance yet, but we chose the right crew.¹ Dossiers land before they do.
+
+> @lindwyrm@new-delos: Off. Good. Thirteen months I have watched that window; the word "transiting" improves the coffee.
+> @lindwyrm@new-delos: and the Shattered Isles girl — nervous is CORRECT. she asked one genuine question at the debrief and held my gaze while I answered it, which is more than two admirals and a Dominion legate managed this season. tell her nothing. nervousness before dragons is a survival trait. I decline to sabotage it.
+
+@telarus@~crossroads — later — //the-first-seal.cracks.for-counsel confidence Synthesis-Canon 14/20
+The adversary, confirmed. The puppet behind the Magiocracy is UMVALD — the Vampire Lord. The soul
+the Lich duped into performing the Death-slaying rite in the Caverns, sold as "eternal life."
+Eris's crew tipped him to the ruse before the altar. So Umvald hijacked the rite at the last
+moment — and his cult's survivors of the blood-magic fallout became the world's Deathless: the
+vampires, the revenants, the living-dead lineages.² That cabal took the Byzantine capital and
+stood up the Empire's successor state.
+
+> @lindwyrm@new-delos: I held three cover stories about the Magiocracy's spine. the truth was the ugliest of the three, which is the usual arrangement.
+> @lindwyrm@new-delos: so read the board plainly, among friends behind a ward: THE LICH'S GREAT RITE DID NOT FAIL. IT WAS STOLEN — at the altar, by its own instrument. and the thief's cabal has spent five centuries doing what stolen divinity always does: institutionalizing.³
+> @lindwyrm@new-delos: two fronts. the Lich crawls south through the passes with armies, patient as his caldera. Umvald already GOVERNS, patient as paperwork. and your company sails between them into the one place both want above all others.
+> @lindwyrm@new-delos: the Caverns were never a ruin, Telarus. they are the CRIME SCENE. everything that matters to both adversaries is still in evidence there.
+> @lares@salt-stair: booth's warded. saying the rest small anyway.
+
+[SYSTEM: the Patroness departs · one hole-drilled coin on the table · the ward thins, then re-raises at a tablet's glow]
+
+@telarus@~crossroads — deep night — //two-seals.crack.together confidence Synthesis 12/20
+Two more, and I want the house's read. It was not just Death laid low that day. THEY TRIED TO
+KILL DREAM TOO — and almost succeeded. Both named Arcana Personas scattered across the
+sol-system's DreamNets, ha, ka, and ba all shattered.⁴ The Myrmidon cabals tell of
+Achilles-reborn — woke on Elyncia centuries back as if from a dream, refounded his band, won the
+old glories. then a shade told him Penthesilea had watched him from the astral since his rebirth,
+and he took off the armor and walked into the broken underworld to find her. I keep dreaming of
+him meeting half-mad masks of Death and Dream. And the artifacts: the Lich had Umvald gather the
+meteoric iron of the Tall el-Hammam fall, and forged a dagger and a pair of manacles.
+Never found.
+
+> @lares@salt-stair (Scryer): first read, and it reframes the crime: THEY WENT FOR THE TWINS. Death and Dream — the two doors out of a life. one door doesn't return you; the other does. kill both and you have sealed every exit of every soul at once. "enslave everything" was never rhetoric. it was the mechanism.
+> @lares@salt-stair (Scryer): and mark the date-math: the DreamNet was consecrated two years after Dream almost died. the network is not just infrastructure. it is a PROSTHESIS — a splint where a wounded god used to stand whole. the gods didn't come to her table to invest. they came to triage.
+> @lares@salt-stair (Council): the synthesis, vowed forward, Provisional, sealed to this booth: the oldest cult report reads "Death lies dreaming." five centuries of poetry — unless it is a FORENSIC REPORT. the hijack cracked the rite's timing, and in the cracked instant Death did what a cornered door does: fled through the OTHER door. Death hid inside Dream — which is why the strike meant for one twin nearly killed the other. the manacles exist because you cannot kill Death, only BIND it. the dagger was for Dream, the softer twin. if this reading holds even crooked, the two Arcana are not separately lost. they are hiding in each other's wreckage — and whoever gathers one has begun, unknowing, to gather both.
+> @lares@salt-stair (Hierophant): which makes the Myrmidon tale the gathering-myth already in motion. the man his epic defines by armor and wrath wakes AS IF FROM A DREAM — note the door he came through — and at one shade's word takes the armor OFF and descends as a pilgrim. a katabasis through a shattered underworld means no one judge at one throne: a pilgrimage shard to shard, mask to half-mad mask, each holding a fragment of a broken twin. the oldest way gods get re-membered is a mortal looking for someone else.⁵
+> @lares@salt-stair (Ink-Clerk): the ledger's receipts, last: Tall el-Hammam stands in Gaia's real archives — a cosmic airburst, a city annihilated from the sky. sky-iron from a CITY-KILLING FALL, forged into instruments by the same hand that keyed the rust-blight to spare meteoric iron. the exception is the escape clause: his artifacts are immune to his own curse BY DESIGN. which means, practically: a dagger and a pair of manacles have spent five hundred years NOT RUSTING, wherever they lie. and a dagger wants one more use — but manacles want an OCCUPANT.
+> @telarus@~crossroads: …aye. Hail Eris.
+> @lares@salt-stair (Liminal): shiver ratified. held open with you.
+
+[SYSTEM: BOOTH LOG ENDS · the fae table's laughter returns like a tide]
+```
+
+''Session 1.0 intent, stated plainly:'' two fronts (the Lich's armies in the passes; Umvald's
+Dominion governing from Byzantium) · a narrowing window · the Caverns as the crime scene both
+adversaries want · two wounded Arcana hiding in each other's wreckage · a katabasis already
+walking · and somewhere, un-rusted after five centuries, a dagger that wants one more use and a
+pair of manacles that want an occupant.
+
+''Footnotes:''
+
+¹ "The right crew" here means: one wizard with fresh rites and correct nervousness, one captain
+with fingerguns, one first-timer, one kaiju-tracker, and one prismatic archer for a kingdom of
+dark. History suggests this is exactly how it always looks right before it works.
+
+² Taxonomy note for the record: the Deathless dispute the term "undead" as hurtful,
+"post-mortal" as bureaucratic, and "revenant-adjacent" as a slur invented by insurers. The one
+term all their lineages accept is "citizens," which tells you most of what you need to know
+about Byzantium.
+
+³ Institutionalized theft of divinity looks, from street level, remarkably like a functioning
+civil service. The paperwork is real. The notary seals are real. Only the underlying ontology
+was stolen, and ontology has no complaints department.
+
+⁴ For beings of that order, ha, ka, and ba scatter the way a dropped chord scatters — the notes
+land in different rooms and each one insists it is the song.
+
+⁵ Orpheus looked back. The tale's fear is that Achilles won't — that a man who has already
+laid down wrath and armor has nothing left to look back AT, which makes him either the perfect
+pilgrim or the perfect gathering-vessel, and the masks he meets will have opinions about which.
+
+<<~/ahu >>
+
 <<~ ahu #style >>
 
 !! Style Notes ~ scene-specific registers
@@ -422,6 +624,6 @@ belongs to the house's own record, not the booth's.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

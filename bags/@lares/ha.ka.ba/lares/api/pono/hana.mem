@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/hana >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/hana >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/api/pono/hana.mem"
@@ -31,7 +31,7 @@ grammar interpreter consumes the body, it closes.
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -66,6 +66,6 @@ A hana block body MUST be valid input for the named grammar interpreter.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

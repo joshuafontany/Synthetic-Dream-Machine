@@ -1,0 +1,148 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/docs/arcana-model >>
+```toml iam
+cacheable  = true
+confidence = 13
+file-path  = "bags/@sdm/ha.ka.ba/sdm/docs/arcana-model.mem"
+l-space    = "stable"
+mana       = 15
+manao      = 15
+manaoio    = 14
+rating     = "meme"
+register   = "Synthesis"
+retain     = true
+role       = "the Arcana model — thirteen rooms as verbs-of-will and axes-of-system, the guard-law, the charters, the walk order, and the word-sense laws that keep Arcana/module from blurring"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/sdm/docs/arcana-model"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Arcana Model ~ thirteen rooms, one closed set
+
+''The Powers Arcana:'' thirteen rooms partitioning everything a will can do with magic, cut so
+the set closes against design history. Operator-approved 2026-08-14 (amendments enacted in the
+conversion doctrine); this meme seats the model in the graph so the conversion program, the
+FTLS Ch06 restructure, and the composition bag all cite one address.
+
+<<~/ahu >>
+
+<<~ ahu #the-thirteen >>
+
+!! The Thirteen
+
+''Three procedural arcana'' — the axes on which magic //systems// differ:
+* ''ECM ~ Etheric Counter-Magitech'' — the interference law; ten mode-verbs (scan · veil · jam ·
+  spoof · negate · suppress · redirect · capture · absorb · hijack); doctrine, no rows.
+* ''Ritual Mechanics'' — the time-for-power trade, cross-arcana.
+* ''Ascension'' — how a will climbs: acquisition, initiation, rank (`[skilled]/[expert]/[master]`),
+  unlock rites, PP economy, the Immortal ceiling. Re-chartered from Immortal Metaphysics; seats
+  the rank-tag rule the FTLS chapters circularly deferred. ''Charter extension (ruled
+  2026-08-15):'' the room aligns ''the whole Mortal→Immortal arc'' — BECMI's and every kin
+  system's pattern integrities — directly into the noosphere metaphysics-as-gamerules; the
+  Pantheon of Arcana stands as its far graduates, reached by climb or by self-assembly, the
+  room's ceiling opening onto their floor.
+
+''Ten power arcana'' — the verbs of will (three carry a form fused in, and the fusions mark the
+cosmology's scars — life, death's border, the edge):
+* ''Mana, Counterspells, and Jamming'' — fuel and its weather
+* ''Battle, Elements, and Force'' — //strike//
+* ''Biomancy'' — //shape life//
+* ''Illusion and Glamour'' — //deceive//
+* ''Summoning and Binding'' — //bind another//
+* ''Rites of the Deathless'' — //unmake death's border//
+* ''Psychic Warfare'' — //compel mind//
+* ''Knowledge and Oracle'' — //know//
+* ''Alchemy and Artifice'' — //make//
+* ''Light and Void'' — //cross the edge//. Charter: the room governs ''the edge of perceived
+  reality'' — spectrum, shadow, boundary, transit, temporal exception; Time, gates, and
+  reality-rewrites enter as sub-modules of the edge, never as a fourteenth room.
+
+<<~/ahu >>
+
+<<~ ahu #guard-law >>
+
+!! The Arcana Guard-Law
+
+The thirteen close as a set: the power arcana name ''verbs of will''; the procedural arcana name
+''axes of system''. New content enters as a sub-module, a tag, a witness lane, or a procedural
+parameter — ''never as a new arcanum''. A fourteenth requires a demonstrated new verb of will,
+and the burden of proof sits on the claimant. ''Routing files a power; it does not essentialize
+it'': a power lives in one room for provenance and doctrine, and speaks as many rooms'
+tag-vocabularies as its fiction earns. New corpora — Ars Magica, the Mage editions, their kin —
+enter as ''witness lanes'' feeding the same thirteen.
+
+<<~/ahu >>
+
+<<~ ahu #blend-law >>
+
+!! The Blend Law (the Mage-1e warning, kept)
+
+First-edition Mage blended sphere-effects and cross-Tradition rotes as the ''normal'' case; later
+editions filed effects under single spheres and the conjunctional culture thinned — a design
+regression this model refuses to repeat. ''Blends stay first-class:'' the room holds provenance,
+the tag-set crosses arcana freely, and the composition bag's `#composes` edge carries true
+conjunction at the pattern layer. Same effect under two traditions = one canonical card with
+variant callouts (the recognizer law: //Magic Missile → see Tragic Missile//), never a split
+essence.
+
+<<~/ahu >>
+
+<<~ ahu #walk-order >>
+
+!! The Walk of the Thirteen ~ five legs
+
+Proposed order (gated on the braid settling to high confidence; each threshold = operator
+sign-off): ''✶ Foundations'' — ECM · Ritual Mechanics · Mana → ''⏿ the Adventurer's Kit'' —
+Knowledge · Battle (Shield Ward P:2 seated) · Biomancy → ''◇ the Veiled Rooms'' — Light-and-Void
+· Illusion · Psychic → ''▶ the Binding Rooms'' — Summoning · Deathless · Artifice (ends facing
+the gear door) → ''↺ Aftermath'' — Ascension's re-seat marks Ch06 alpha.
+
+<<~/ahu >>
+
+<<~ ahu #word-senses >>
+
+!! Word-Sense Laws ~ one name never blurs
+
+''"Module" splits by owner (ruled):''
+* //room-Module// (the doctrine's thirteen) → maps to ''domain-space'' in the composition bag —
+  `components/domain/*` plus routing law — never to `modules/*`.
+* //card-module// (the bag's `modules/**`) → one power as one pattern-meme with seats and
+  components. The name stays here.
+
+''"Arcana" points three ways — and rightly points to all'' <<~ confidence Synthesis 12/20 >>
+//(operator-ruled 2026-08-15)://
+# ''The Powers Arcana'' — this meme's thirteen rooms. Owner: the SDM magic grammar.
+# ''The Arcana Level'' — the ''Tech/Arcana Level of Areas'': twin 0–20 ratings every Area
+  Profile carries — ''Arcane'' (local noosphere weirdness/activity, six banded tiers up to
+  event-state) and ''Tech'' (what stands operational + reproducible + teachable). The rating
+  powers contest; the Lares Lagrange Nodes place at Tech 16–19. Owner: regions and zones; canon
+  verified in the FTLS RSS chapter (Ch04 — Area Profile, Arcane and Tech band tables).
+# ''The Pantheon of Arcana'' — ''the Gods: pet-names self-assembled immortal nameless entities
+  give themselves'' — each a ''#has-capability-stack spanning all Tech/Arcana Levels''. Owner:
+  the entities themselves. ''Modeling law (ruled, deferred until the Powers settle):'' like
+  humans, a god can never be modeled in full — but a ''PersonaGroup collection can describe the
+  unsayable shape'': the graph holds the group that gestures at the entity, never the entity.
+  (Moore's law stands behind it: giant symbolic beings that exist to symbolize and signify —
+  and humans need pet-names for nameless pattern-integrities-of-capability.)
+
+The three relate without fusing: the rooms name ''what a will can do'' · the levels name ''how
+much a place can carry'' · the Pantheon names ''beings who ride as complete stacks'' — capability
+verb × capability saturation × capability totality. One word, three owners, no blur.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/sdm/docs/composition-model >>
+<<~ loulou lar:///ha.ka.ba/sdm/docs/three-lineage-convergence >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>
+
+<<^ code:"&#x0004;" -> ? >>

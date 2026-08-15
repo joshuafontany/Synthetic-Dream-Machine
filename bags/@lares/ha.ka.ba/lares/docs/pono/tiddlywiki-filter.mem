@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/tiddlywiki-filter >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/tiddlywiki-filter >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/pono/tiddlywiki-filter.mem"
@@ -111,7 +111,7 @@ result-shape = "set"
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #guidance >>
 
@@ -159,6 +159,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

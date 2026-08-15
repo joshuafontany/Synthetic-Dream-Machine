@@ -1,4 +1,4 @@
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/widgets/kau >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/kau >>
 ```toml iam
 body-sha256   = "6cc6ce1e6d1dc43e399f3c00735763a804c36fdf3b646670588cc2505b9f5af2"
 cacheable     = true
@@ -15,7 +15,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/kau"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -58,6 +58,6 @@ Per-instance capability hooks and UUID write-back surface as explicit TW5 action
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

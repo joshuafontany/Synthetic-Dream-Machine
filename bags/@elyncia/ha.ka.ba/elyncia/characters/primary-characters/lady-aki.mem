@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
 ```toml iam
 file-path                              = "bags/@elyncia/ha.ka.ba/elyncia/characters/primary-characters/lady-aki.mem"
 mana                                   = 17
@@ -593,10 +593,10 @@ Keep silhouettes distinct:
 Do not collapse these roles.
 
 <<~/ahu >>
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

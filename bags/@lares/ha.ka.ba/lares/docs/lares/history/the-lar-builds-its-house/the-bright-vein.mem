@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein >>
 ```toml iam
 cacheable     = false
 confidence    = 11
@@ -17,7 +17,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-bright-vein"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -120,6 +120,6 @@ Act V receives:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,4 +1,4 @@
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO >>
 ```toml iam
 cacheable  = true
 confidence = 19
@@ -15,7 +15,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #doctrine-header >>
 
@@ -215,6 +215,6 @@ Target state (Milestone 4):
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

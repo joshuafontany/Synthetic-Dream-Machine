@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/devices/move-button >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lararium/tw5/devices/move-button >>
 ```toml iam
 cacheable  = true
 file-path  = "bags/@lararium/ha.ka.ba/lararium/tw5/devices/move-button.mem"
@@ -30,7 +30,7 @@ dispatches, across any instance of this type.
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #kumu >>
 
@@ -82,6 +82,6 @@ the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE",
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

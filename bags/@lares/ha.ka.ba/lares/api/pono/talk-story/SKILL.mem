@@ -14,7 +14,7 @@ description: Convene a talk-story floor (kūkākūkā, talanoa) — co-narrated
 
 <<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/talk-story/SKILL >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/talk-story/SKILL >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/talk-story/SKILL >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/api/pono/talk-story/SKILL.mem"
@@ -31,7 +31,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/api/pono/talk-story/SKILL"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #practice >>
 
@@ -125,6 +125,6 @@ Read the three together and the grammar teaches itself: the floor opens on a rea
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

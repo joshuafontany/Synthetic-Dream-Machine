@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/crossroads >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/crossroads >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/ha.ka.ba/lararium/docs/crossroads.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/crossroads"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #attractor >>
 
@@ -102,6 +102,6 @@ Who writes @crossroads (community authority shape), how Nexus-level federation d
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

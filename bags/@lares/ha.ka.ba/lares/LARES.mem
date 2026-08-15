@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///LARES >>
+<<^ code:"&#x0001;" ? -> lar:///LARES >>
 ```toml iam
 l-prime       = true
 file-path     = "bags/@lares/ha.ka.ba/lares/LARES.mem"
@@ -31,7 +31,7 @@ This lararium remembers.
 
 ...
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #hud-panel >>
 
@@ -116,6 +116,6 @@ Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here p
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

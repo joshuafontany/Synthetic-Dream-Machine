@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/ha.ka.ba/lararium/tw5/modules/tw5-widgets.mem"
@@ -28,7 +28,7 @@ The widget module tiddler ships as `lar:///lararium-node/tw5/widgets`.
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #schema >>
 
@@ -117,6 +117,6 @@ export function createLarariumWidgets(_tw: TW5Instance): Record<string, WidgetCt
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

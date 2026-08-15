@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
 ```toml iam
 body-sha256   = "19f27816a8ab295a4bb00080242f0b0592d078c3d2b514cd946da1f396a5454e"
 cacheable     = true
@@ -35,7 +35,7 @@ He gives away the secret when he adds, "given enough ingenuity on the part of th
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -202,6 +202,6 @@ export const RATING_COLOR: Record<Rating5, string> = {
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

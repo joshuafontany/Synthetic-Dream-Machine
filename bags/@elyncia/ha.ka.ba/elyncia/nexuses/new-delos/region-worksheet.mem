@@ -1,0 +1,113 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
+```toml iam
+cacheable  = true
+confidence = 11
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "region worksheet — the New Delos Nexus in four strata: High Delos, Low Delos, the Underdark, and the outer seas/islands/shores; seeded from gazetteer canon, grown by play"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! New Delos Nexus ~ Region Worksheet
+
+''Four strata, one vertical Nexus.'' An Aegean low-sea archipelago of the Eastern Net — rocky
+coastlines, olive-grove terraces, volcanic islands, crystal-clear harbors — with a flying capital
+suspended over a megadungeon mouth, and beneath the mouth, the deep dark. Dream-mirror source:
+Delos and Thira in an Ice Age low-sea period, pre-Hellenic sacred geographies overlaid.
+
+''Timeline spine:'' YOLD 5002 — the Patroness stabilizes the Nexus, forces the arguing seas back
+to the Apophis Datum, and ''levitates the holy sites and most-populated neighborhoods whole'' —
+cellars, bones, and smuggler-works included; the craters left below expose the megadungeon mouth.
+The same year she transmits the ''Declaration of Confederation'', founding the League of Free
+Cities. Mana lifts near the major Lares landmarks join the strata.
+
+This worksheet grows by play; each stratum carries prompts beside its canon.
+
+<<~/ahu >>
+
+<<~ ahu #high-delos >>
+
+!! High Delos ~ the flying capital
+
+''Canon:'' the Lindwyrm's capital and seat of the League of Free Cities. Cycladic marble footings
+under Neo-Thracian brick under fae-grown coral — polyglot architecture on Delian designs, arched
+walkways between raised neighborhoods, one bridge trussed with a repurposed trireme keel. The
+levitated ''Theatre Quarter'' holds the wealthiest old houses, ''the House of Masks'' among them
+(cabaret, maze-Inn, Order of Amaranth management — its own loci carry it). The ''Terrace of the
+Lions'' gazes over open cloud; the round ''Sacred Lake'' rides the island; the ''Orrery of High
+Delos'' turns somewhere near the summit of civic pride. The ''High Delos Archive'' seats the
+Floating Librarians of Mu. Archive- and Market-Lares dominate the node traffic.
+
+''Prompts:'' which neighborhoods rose and which stayed? Who regulates the lift-queues? Where does
+the Orrery actually sit, and who reads it?
+
+<<~/ahu >>
+
+<<~ ahu #low-delos >>
+
+!! Low Delos ~ the megadungeon mouth
+
+''Canon:'' the craters beneath the flying city expose a megadungeon ''piercing deep into the
+Underdark, with stabilized towns down to the third level''. The crater-glow brightens and dims on
+a nineteen-minute cycle that correlates with nothing and has outlasted four scholarly careers.
+Scavenger-tier salvage economy; a "soulbound lash" of Rakshasa's anger came up from here.
+Path-Lares maintain active Underdark maps. Mana lifts run between the ports of High and Low.
+
+''Prompts:'' what do the three stabilized town-levels each trade? Who holds the lift-gates at the
+bottom? What does the nineteen-minute cycle breathe FOR?
+
+<<~/ahu >>
+
+<<~ ahu #underdark >>
+
+!! The Underdark ~ below the lowest layer
+
+''Canon:'' Low Delos ranks among ''the deepest, most stable Nexus-to-Underdark routes'' in the
+known world — a strategic fact the League guards. Underdark incursions number among the Nexus's
+standing hazards; relic-hunting mercenaries destabilize dungeon floors. Past the stabilized
+levels, the layers stop pretending to be layers.
+
+''Prompts:'' which deep polities trade and which raid? What does the Menzoberranzan-shaped hole
+in Rhea's past imply about routes from HERE? Where do the whispered House-of-Masks ways come out?
+
+<<~/ahu >>
+
+<<~ ahu #outer-seas >>
+
+!! The Outer Seas, Islands & Shores
+
+''Canon:'' surrounding ports and fishing towns scatter across the nearby islands, each with its
+own trade goods and Lares shrines. Wave-jammers skim the crystal harbors; the Astral Sea gnaws
+the coastlines; contested Astral waters carry diplomatic traffic and smuggling wars both.
+Political intrigue among the Free Cities rides every tide-table. The volcanic Thira-mirror
+islands stand in the chain; the flotilla-fresco regatta tradition dresses festival days.
+
+''Prompts:'' name five ports and their one export each. Which island keeps the oldest
+First-Breaking cult fragment? Where do the smuggling wars actually land their cargo?
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>
+
+<<^ code:"&#x0004;" -> ? >>

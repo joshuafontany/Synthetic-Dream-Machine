@@ -26,14 +26,14 @@ const URI = "lar:///ha.ka.ba/lares/api/mu";
 const FULL_CARRIER = [
   `<!-- <<~ !DOCTYPE = ${URI} >> -->`,
   ``,
-  `<<^ &#x0001; ? -> ${URI} >>`,
+  `<<^ code:"&#x0001;" ? -> ${URI} >>`,
   ``,
   "```toml iam",
   `uri-path = "ha.ka.ba/lares/api/mu"`,
   `type     = "text/x-memetic-wikitext"`,
   "```",
   ``,
-  `<<^ &#x0002;>>`,
+  `<<^ code:"&#x0002;" >>`,
   ``,
   `<<~ ahu #spine >>`,
   `Core invariants.`,
@@ -43,8 +43,8 @@ const FULL_CARRIER = [
   `<<~ pranala ? -> lar:///AGENTS family:control role:implements >>`,
   `<<~/ahu >>`,
   ``,
-  `<<^ &#x0003;>>`,
-  `<<^ &#x0004; -> ? >>`,
+  `<<^ code:"&#x0003;" >>`,
+  `<<^ code:"&#x0004;" -> ? >>`,
 ].join("\n");
 
 // ---------------------------------------------------------------------------
@@ -106,8 +106,8 @@ describe("MemeStreamParser — incremental streaming", () => {
     const parser = new MemeStreamParser();
     // Push the opening portion — no carrier-close yet
     const partial = [
-      `<<^ &#x0001; ? -> ${URI} >>`,
-      `<<^ &#x0002;>>`,
+      `<<^ code:"&#x0001;" ? -> ${URI} >>`,
+      `<<^ code:"&#x0002;" >>`,
       `<<~ ahu #body >>`,
       `body text`,
       `<<~/ahu >>`,
@@ -116,7 +116,7 @@ describe("MemeStreamParser — incremental streaming", () => {
     expect(mid.some((e) => e.kind === "carrier-close")).toBe(false);
 
     // Push the closing portion
-    const tail = "\n<<^ &#x0003;>>\n<<^ &#x0004; -> ? >>";
+    const tail = "\n<<^ code:\"&#x0003;\" >>\n<<^ code:\"&#x0004;\" -> ? >>";
     const final = parser.push(tail);
     expect(final.some((e) => e.kind === "carrier-close")).toBe(true);
   });
@@ -130,9 +130,9 @@ describe("MemeStreamParser — minimal carrier (no ahu body)", () => {
   test("emits open and close for a data carrier with no ahu body", () => {
     const URI2   = "lar:///ha.ka.ba/lares/api/pono/invariant";
     const minimal = [
-      `<<^ &#x0001; ? -> ${URI2} >>`,
-      `<<^ &#x0002;>>`,
-      `<<^ &#x0003;>>`,
+      `<<^ code:"&#x0001;" ? -> ${URI2} >>`,
+      `<<^ code:"&#x0002;" >>`,
+      `<<^ code:"&#x0003;" >>`,
     ].join("\n");
     const events = new MemeStreamParser().push(minimal);
     expect(events.some((e) => e.kind === "carrier-open")).toBe(true);

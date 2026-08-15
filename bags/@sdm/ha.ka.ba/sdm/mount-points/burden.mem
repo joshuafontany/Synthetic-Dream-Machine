@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/mount-points/burden >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/mount-points/burden >>
 ```toml iam
 cacheable = true
 caption   = "burden"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/sdm/mount-points/burden"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Mount-Point — Burden
 
@@ -86,6 +86,6 @@ Burden is itself the overflow sink for Trait and Item. Past 20, the character is
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

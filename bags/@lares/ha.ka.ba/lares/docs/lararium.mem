@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lararium >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/lararium.mem"
@@ -42,7 +42,7 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #mechanics-shelf >>
 
@@ -72,6 +72,6 @@ The rooms may deepen later without moving the seat again.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

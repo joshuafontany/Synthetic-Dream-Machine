@@ -1,4 +1,4 @@
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/widgets/pranala >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/pranala >>
 ```toml iam
 body-sha256   = "c024548a4d09384a9d5df111d3b73b712a2951f3287975efd6140790e2a3ab3d"
 cacheable     = true
@@ -15,7 +15,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/pranala"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -43,6 +43,6 @@ export function PranalaWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTr
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

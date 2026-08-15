@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/meme-provider >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/meme-provider >>
 ```toml iam
 body-sha256 = "0d482f4f018ba241ba5d582c02b282741306053d9a2fed9c8614bb7a0d6036b1"
 cacheable   = true
@@ -16,7 +16,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lararium/docs/meme-provider"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ```typescript
 /**
@@ -202,6 +202,6 @@ export class MemeProvider {
 }
 ```
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

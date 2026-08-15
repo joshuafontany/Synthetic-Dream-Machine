@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES >>
 ```toml iam
 uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/PRINCIPLES.mem"
@@ -15,7 +15,7 @@ cacheable = true
 retain = true
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -127,6 +127,6 @@ carrier canon
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

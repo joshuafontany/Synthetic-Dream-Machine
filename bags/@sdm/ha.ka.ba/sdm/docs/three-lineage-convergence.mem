@@ -1,0 +1,98 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/docs/three-lineage-convergence >>
+```toml iam
+cacheable  = true
+confidence = 12
+file-path  = "bags/@sdm/ha.ka.ba/sdm/docs/three-lineage-convergence.mem"
+l-space    = "adjacent"
+mana       = 13
+manao      = 14
+manaoio    = 12
+rating     = "meme"
+register   = "Synthesis"
+retain     = true
+role       = "design research — the three-lineage convergence: Ars Magica's verb×form grammar, Mage's rated spheres, and the SDM thirteen; what each lens teaches the conversion program"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/sdm/docs/three-lineage-convergence"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Three-Lineage Convergence
+
+Three magic-system designs, independently derived across four decades, factor magic the same way
+— and their differences teach the SDM thirteen exactly where it stands. Read alongside
+[[arcana-model|arcana-model.md]]; grown from the 2026-08-13 lens session.
+
+<<~/ahu >>
+
+<<~ ahu #the-three >>
+
+!! The Three Factorings
+
+* ''Ars Magica (1987):'' a ''pure product grammar'' — five techniques (Creo · Intellego · Muto ·
+  Perdo · Rego) × ten forms = fifty cells, setting-agnostic, no cell privileged. Verbs times
+  themes, immaculate and unhistoried.
+* ''Mage: the Ascension (1993):'' ''nine rated dimensions'' — a mage rides as a vector (Forces 3,
+  Correspondence 2…), an effect as a point the vector must dominate. First edition blended
+  spheres and cross-Tradition rotes as the normal case; later editions retreated to single-sphere
+  filing and the conjunctional culture thinned.
+* ''SDM (this canon):'' thirteen rooms — a verb basis ''warped by the setting's metaphysical
+  geography''. Three rooms carry a fused form (shape×life · bind×death's-border · cross×the-edge)
+  and the fusions sit precisely at the cosmology's scars: the rewritten flesh, the stabbed Death,
+  the maelstrom edge.
+
+<<~/ahu >>
+
+<<~ ahu #mappings >>
+
+!! The Mappings (evidence of convergence)
+
+* ''AD&D's eight schools'' route into the thirteen without remainder — abjuration splits
+  Battle/ECM on the before/after-signal law; necromancy splits Deathless/Biomancy on which side
+  of death the flesh sits. Both splits principled.
+* ''Mage's nine spheres'' map near-bijectively onto the nine-plus-one power rooms:
+  Correspondence + Time → the Void edge · Prime → Mana · Life → Biomancy · Mind → Psychic ·
+  Spirit → Summoning/Deathless · Forces → Battle · Matter → Artifice · Entropy → Mana/Battle.
+* ''The procedural quartet re-derives in Ars:'' Parma/Penetration = ECM resolution (the contest
+  measures the will behind the signal, never the payload — both systems cut it the same way) ·
+  vis = Mana with a supply chain · the seasonal laboratory = Ritual Mechanics at year-scale ·
+  the Limits of Magic = the Ascension ceiling as negative theology.
+* ''Psionics enters at 0e itself'' (Eldritch Wizardry) and needs no fourteenth room — Psychic
+  Warfare takes the powers, Mana takes the point economy.
+
+<<~/ahu >>
+
+<<~ ahu #the-lessons >>
+
+!! What Each Lens Teaches
+
+* ''From Ars:'' the verb×theme factoring works — and a PURE grammar reads as a conlang. The SDM
+  thirteen limp in three places on purpose: ''the taxonomy is the archaeology.'' The irregular
+  rooms are the oldest wounds. Do not regularize them.
+* ''From Mage 1e:'' blends must stay first-class or the culture stops blending (the blend-law in
+  the arcana model). And the rating-vector — character standing as a vector over the arcana —
+  hands Ascension its sphere-dot pattern: rank tags as dots, initiation as buying the next one
+  with a rite.
+* ''From the RAW lineage both descend from:'' Mage asked "what if belief were load-bearing?" and
+  made it a tragedy; Elyncia asks the same and makes it a maintenance schedule. Paradox becomes
+  the Danger Roll; consensus becomes the noosphere, tended rather than enforced.
+* ''For the witness lanes:'' Ars 5e (extraction standing at `~/Ars-Magica/work/`) and the Mage
+  editions enter as witness lanes feeding the same thirteen — the guard-law's final clause,
+  already proven survivable by every mapping above.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/sdm/docs/arcana-model >>
+<<~ loulou lar:///ha.ka.ba/sdm/docs/composition-model >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>
+
+<<^ code:"&#x0004;" -> ? >>

@@ -44,11 +44,11 @@ for (const f of files) {
   // a PROPERTY; the arrow states a RELATION, and the control-soh scan captures its target as a group.
   // Drop it and the capture returns nothing while every other check here still reads the frame as sound.
   const soh = /^<<\^[^>\n]*&#x(?:0001|0011);/m.test(t);
-  if (soh && !/^<<\^[^>\n]*&#x(?:0001|0011);\s*\?\s*->\s*\S+\s*>>/m.test(t)) {
+  if (soh && !/^<<\^[^>\n]*&#x(?:0001|0011);[^>\n]*?\?\s*->\s*\S+\s*>>/m.test(t)) {
     faults.push([f, "SOH carries no `? -> uri` — the heading states no bearing"]);
   }
   const eot = /^<<\^[^>\n]*&#x(?:0004|0014);/m.test(t);
-  if (eot && !/^<<\^[^>\n]*&#x(?:0004|0014);\s*->\s*\?\s*>>/m.test(t)) {
+  if (eot && !/^<<\^[^>\n]*&#x(?:0004|0014);[^>\n]*?->\s*\?\s*>>/m.test(t)) {
     faults.push([f, "EOT carries no `-> ?` — the close resolves a bearing it cannot know"]);
   }
 

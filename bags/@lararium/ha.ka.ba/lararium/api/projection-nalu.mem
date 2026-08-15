@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/projection-nalu >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/projection-nalu >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/api/projection-nalu.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-26"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/nalu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -180,6 +180,6 @@ The DOM nalu (`tw5-projection.ts`) draws `CoalesceGate`; the disk nalu (`disk-pr
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

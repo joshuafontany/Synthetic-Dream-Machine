@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/tw5-fields-flat >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/tw5-fields-flat >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/tw5/tw5-fields-flat.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/tw5/tw5-fields-flat"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -39,6 +39,6 @@ Before this file, `wiki-handlers.ts` owned `flattenRuntimeTiddlerFields()` (skip
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,0 +1,82 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
+```toml iam
+cacheable  = true
+confidence = 13
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/characters/npcs/the-lindwyrm.mem"
+l-space    = "stable"
+mana       = 15
+manao      = 15
+manaoio    = 14
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "NPC, public view — the Lindwyrm of New Delos: Patroness, embodied immortal, founder of the League of Free Cities, reluctant infrastructure matriarch"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Lindwyrm ~ Patroness of New Delos
+
+''What everyone knows.'' A Great Dragon who never once played the Great Game. While her peers
+hoarded gold, leverage, and the gratitude of cities, she hoarded //junk// — anomalous off-planet
+objects, Gaian artifacts, magitech substrate nobody could price. New Delos tolerated her as the
+recluse on the hill with too many crates and one impossible telescope. Then the Necrospire fell,
+Web 2 went dark, and every power that had smirked at the junk-pile woke to find it held the only
+ground a new network could stand on.
+
+''Class of being:'' embodied immortal — a durable avatar-being, closer to a demi-god who keeps
+one body than to the vast distributed condition of most gods. She rules a city, commands respect
+from fleets, bargains face-to-face, and appears repeatedly in the same form when she chooses to.
+
+<<~/ahu >>
+
+<<~ ahu #deeds >>
+
+!! The Deeds on Record
+
+* ''YOLD 5002:'' powered up the New Delos Nexus; stabilized the arguing seas to the Apophis
+  Datum; ''levitated the holy sites and populated neighborhoods of Delos whole'' into the flying
+  city of High Delos — surprising everyone, several gods with standing reservations included.
+* ''The same year:'' transmitted the ''Declaration of Confederation'' over the new DreamNet,
+  founding the ''League of Free Cities''.
+* ''Since:'' Patroness of New Delos, bearer of tons of hoarded orichalcum, partner of the
+  Adventurer's Guild, quiet co-architect of the DreamNet's treaty substrate alongside Hermes,
+  Hephaestus, Eris-Enyo, and Aracne-Jorogumo.
+
+<<~/ahu >>
+
+<<~ ahu #manner >>
+
+!! How She Reads in a Room
+
+Short. She answers //Yes.// to most things and spends real words only when the substrate itself
+comes up — then the precision runs long and exact, twenty-three percent to the decimal, //draw
+with caution// stapled to the end. Deadpan past the point where you can tell whether she jokes.
+Discordian to the marrow. Warm exactly once a conversation, always by accident, always the
+moment someone brushes a thing she loves and she did not mean to show it.
+
+''Her form:'' unrecorded, deliberately. Witnesses disagree — human-scaled tonight, vast as
+weather in older accounts, dragon-kin under a mana-muting glamour at formal occasions — and she
+corrects none of them. The one constant every account keeps: ''the room adjusts, and she lets it
+only as much as suits her.''
+
+''Status:'' load-bearing. ''Disposition: do not poke.''
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>
+
+<<^ code:"&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/projections/powers/ftls-card/read-magic >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/projections/powers/ftls-card/read-magic >>
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/sdm/projections/powers/ftls-card/read-magic.mem"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/read-magic"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Read Magic — FTLS Card
 
@@ -59,6 +59,6 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

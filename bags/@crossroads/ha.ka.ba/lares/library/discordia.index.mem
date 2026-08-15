@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/library/discordia >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/library/discordia >>
 ```toml iam
 collection = "discordia"
 entries    = "5"
@@ -27,4 +27,4 @@ Each row carries the RFC-6920 anchor a stranger checks with no tooling of ours.
 
 Reference this collection as `library:discordia` — a name that travels, never a path.
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

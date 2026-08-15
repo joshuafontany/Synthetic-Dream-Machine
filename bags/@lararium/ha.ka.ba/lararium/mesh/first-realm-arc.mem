@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/first-realm-arc >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/first-realm-arc >>
 ```toml iam
 cacheable     = false
 file-path     = "bags/@lararium/ha.ka.ba/lararium/mesh/first-realm-arc.mem"
@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/first-realm-arc"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -91,6 +91,6 @@ The runbook stands ''Synthesis-Canon and complete for what it covers''. These si
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

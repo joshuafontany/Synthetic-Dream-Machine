@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/mu/model-agnosticism >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/mu/model-agnosticism >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/mu/model-agnosticism.mem"
@@ -42,7 +42,7 @@ Later condensation should leave only what the docs shelf needs after the live AP
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #verbatim-preferences-foundation >>
 
@@ -135,6 +135,6 @@ The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a c
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

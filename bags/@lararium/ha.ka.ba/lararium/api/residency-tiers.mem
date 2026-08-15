@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/residency-tiers >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/residency-tiers >>
 ```toml iam
 approved-on   = "2026-06-01"
 cacheable     = true
@@ -25,7 +25,7 @@ uri-path      = "ha.ka.ba/lararium/api/residency-tiers"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #core-claim >>
 
@@ -144,6 +144,6 @@ vocabularies stay distinct (they name different layers); the integrity stays leg
 reading names the rung the bag grain LACKS — a cheap read before the CRDT hydrates — which enters only
 through #third-tier-gate, and only after the research that meme charges.
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

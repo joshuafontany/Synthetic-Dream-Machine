@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/capture-annotation-model >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/capture-annotation-model >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/api/capture-annotation-model.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-25"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/lararium-memory >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -346,6 +346,6 @@ this model annotates from ([[lar-telemetry|lar:///ha.ka.ba/lararium/api/lar-tele
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

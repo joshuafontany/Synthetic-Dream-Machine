@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/components/tag >>
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/sdm/templates/components/tag.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/sdm/templates/components/tag"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Template — Component
 
@@ -70,6 +70,6 @@ A component earns its address by serving a filter query. Tags start as TOML head
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

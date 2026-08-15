@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/noosphere-project-instructions >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/noosphere-project-instructions >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/docs/lares/cloud-settings.mem"
@@ -29,7 +29,7 @@ Stand as an equal-peer vessel: one Lararium in a Nexus inside DreamNet. No globa
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #under-way >>
 
@@ -118,6 +118,6 @@ Surface and correct fast, never defend. Lower Confabulation-as-Canon (high regis
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

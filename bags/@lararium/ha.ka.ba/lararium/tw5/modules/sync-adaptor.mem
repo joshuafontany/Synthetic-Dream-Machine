@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor >>
 ```toml iam
 file-path     = "bags/@lararium/ha.ka.ba/lararium/tw5/modules/sync-adaptor.mem"
 heleuma       = "ha"
@@ -16,7 +16,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -93,6 +93,6 @@ private _applyChange(change: LarTiddlerChange): void {
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants >>
 ```toml iam
 cacheable     = false
 file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/what-a-nexus-wants.mem"
@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/what-a-nexus-wants"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -61,6 +61,6 @@ The conversion act (`the-thing-event`) runs on an assembly standing as the third
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

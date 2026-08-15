@@ -1,0 +1,99 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier >>
+```toml iam
+cacheable  = true
+confidence = 12
+file-path  = "bags/@elyncia-referee/ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 15
+manaoio    = 13
+rating     = "kapu"
+register   = "Synthesis"
+retain     = true
+role       = "NPC dossier, referee view — the Lindwyrm behind the public face: the summit as recruitment engine, the intelligence apparatus, the long game of the mesh; the deepest seals stay in the operator's own seats, pointed at and never carried here"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Lindwyrm ~ Referee Dossier
+
+''The public meme tells the truth and stops early.'' This dossier carries the working layer
+beneath: what she runs, through whom, and toward what. The deepest strata — her history with
+Telarus, the sealed lore of the Breakings' true shape — ''ride the operator's own memory seats
+and never draft here''; this meme points at their existence and carries none of their content.
+
+<<~/ahu >>
+
+<<~ ahu #the-apparatus >>
+
+!! The Apparatus
+
+* ''Rhea the Moon Elf'' — her intelligence-mistress; a trained cadre and a small network whose
+  Neo-Thracian intel of the last two months set the summit's timing. Wash-outs from Rhea's cut
+  flow to the Adventurer's Guild, which keeps the partner company stocked with vetted talent.
+  ([[dossier|rhea-the-moon-elf.md]])
+* ''Captain Melantha Vex'' — the respectable cut-out: Guild-Captain paperwork over selective
+  disclosure; standing instructions to deliver Lady Aki to the Ainos corridor and recover any
+  pre-Breaking pilotage scrap en route. ([[dossier|melantha-vex.md]])
+* ''The Adventurer's Guild'' — the partner company and the deniable hand: contracts where a
+  Patroness's direct hand would tilt the politics.
+* ''The House of Masks'' — the Order of Amaranth's floor, her preferred neutral ground; the
+  whispered liminal ways beneath it reach where a dragon prefers not to be seen traveling.
+
+<<~/ahu >>
+
+<<~ ahu #the-long-game >>
+
+!! The Long Game
+
+''The summit runs as a recruitment engine.'' The broadcast's paid-holiday generosity reads as
+bait, and everyone signing knows it — which keeps it honest. The real agenda sits at the empty
+seat: ''Neo-Thracia'', thirteen months past the storm's breaking, the Hebros mouth navigable
+four months running, the Dominion mapping another league of coast each season the window
+narrows. The Credit Compact's generous terms buy her the one thing a hoard cannot: ''companies
+willing to walk into a broken Nexus and relight it one herm at a time.''
+
+''What she watches:'' the Dominion's scout legion on the coastal road · Krull's Amaranth company
+in the passes · the Courts' agents she pretends not to track and tracks · the window.
+
+''What she protects:'' the mesh itself. The DreamNet stands on her hoard's orichalcum; every
+relit lararium extends the thing she spent centuries preparing without admitting she was
+preparing it.
+
+<<~/ahu >>
+
+<<~ ahu #form-and-seals >>
+
+!! Form, and the Sealed Strata
+
+''Her body — blessed canon (2026-08-15), referee-side:'' the heraldic lindworm law holds true —
+''wingless, serpentine, two forelimbs only'', scales in orichalcum-sheen, her hoard's metal
+grown into her body. ''She never flew; she levitated a city instead'' — a wingless dragon who
+solved flight by engineering, which explains more of her career than any prophecy. Her humanoid
+dragon-kin form rides as ''a kept shed skin, worn like couture'' (the folktale seam: the
+lindworm transforms by shedding); the mana-muting glamour reads as "the last shift." The public
+meme's witnesses-disagree line stays TRUE and stays published — she corrects no one, and the
+disagreement serves her.
+
+''Sealed strata, pointed at, never carried:'' her finding of Telarus and the debt between them ·
+the true shape of what broke at the Second Breaking and what she knows of it · the reasons a
+dragon builds meshes. These live referee-side of even this bag — the operator's seats alone.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/league-of-free-cities >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>
+
+<<^ code:"&#x0004;" -> ? >>

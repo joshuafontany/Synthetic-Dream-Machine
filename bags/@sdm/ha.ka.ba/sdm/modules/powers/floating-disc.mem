@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
 ```toml iam
 cacheable = true
 caption   = "Floating Disc"
@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/modules/powers/floating-disc"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Floating Disc
 
@@ -89,6 +89,6 @@ On a botched or interfered read, choose one: the disc drops its load; locks into
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

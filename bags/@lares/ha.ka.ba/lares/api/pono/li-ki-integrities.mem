@@ -1,9 +1,9 @@
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 ```toml iam
 type = "text/x-memetic-wikitext"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ॐ ँ ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 ```toml iam
@@ -160,6 +160,6 @@ Named empty seats, held open: ''value/preference'' (nothing yet reads what the n
 
 <<~ ॐ ँ -> ? >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

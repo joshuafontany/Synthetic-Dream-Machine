@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/catalog-doc >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/catalog-doc >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/ha.ka.ba/lararium/docs/catalog-doc.mem"
@@ -40,7 +40,7 @@ A peer that has not completed auth MUST NOT receive catalog content.
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #schema >>
 
@@ -129,6 +129,6 @@ fields = [
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

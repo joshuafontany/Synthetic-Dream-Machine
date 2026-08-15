@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/keyhive/keyhive-provider >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/keyhive/keyhive-provider >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/ha.ka.ba/lararium/keyhive/keyhive-provider.mem"
@@ -16,7 +16,7 @@ type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/lararium/keyhive/keyhive-provider"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Keyhive Provider
 
@@ -124,6 +124,6 @@ enters the PersonaGroup doc. The private scalar never leaves the memory of the f
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
 ```toml iam
 cacheable  = true
 confidence = 12
@@ -17,7 +17,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/elyncia/factions/lamplighters-union"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -59,6 +59,6 @@ company repairing a broken Nexus one herm at a time.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

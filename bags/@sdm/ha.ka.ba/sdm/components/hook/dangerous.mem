@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/components/hook/dangerous >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/hook/dangerous >>
 ```toml iam
 cacheable = true
 caption   = "dangerous"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/components/hook/dangerous"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Dangerous
 
@@ -71,6 +71,6 @@ Composes with any domain or function. ''Vertical-vs-flat pressure lives here:'' 
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

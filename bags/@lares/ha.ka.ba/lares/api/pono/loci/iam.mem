@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/loci/iam >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci/iam >>
 ```toml iam
 file-path = "bags/@lares/ha.ka.ba/lares/api/pono/loci/iam.mem"
 mana      = 15
@@ -36,7 +36,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #observe >>
 
@@ -216,6 +216,6 @@ Signs of gain:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

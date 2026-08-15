@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/the-lares-protocols >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/the-lares-protocols >>
 ```toml iam
 cacheable      = false
 file-path      = "bags/@lares/ha.ka.ba/lares/docs/lares/the-lares-protocols.mem"
@@ -106,7 +106,7 @@ Lares answers the diagnostic with a fourth arrangement:
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #lares-position >>
 
@@ -181,6 +181,6 @@ These questions don't get answered by adding more architecture. They get answere
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

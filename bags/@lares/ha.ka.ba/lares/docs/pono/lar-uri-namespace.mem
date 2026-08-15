@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/lar-uri-namespace >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/lar-uri-namespace >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/ha.ka.ba/lares/docs/pono/lar-uri-namespace.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/docs/pono/lar-uri-namespace"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! lar: URI Namespace Doctrine
 
@@ -96,9 +96,9 @@ user-owned content within a domain.
 Hostless URIs never require network access to resolve. Hostful URIs may require
 a network hop for DID resolution but the content itself is local (CRDT store).
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>
 <<~ ahu #edges >>
 
 !! Edges

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ⚕&#x0001; ? -> lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+<<^ code:"&#x0001;" namespace:"⚕" ? -> lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/mesh/identity-classes.mem"
@@ -11,7 +11,7 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the identity-class topology (USER / OPERATOR / KAHU / HERM) mapped across RUNS · CARRIES · IDENTITY-CLASS (KERI transferable/non-transferable/delegated/none-civic) · RECOVERS — plus READING-B recovery: a RANDOM recovery root authorizes a SIGNED rotation that seats a FRESH operational key and SUPERSEDES the old, never resurrects it. Continuity anchors on the persona-KEL (the identifier prefix), never on the operational private key. Operator-ruled 2026-07-20; the persona-KEL indirection + the reconstruct-vs-attest fork ride ahead of code. HERM refined (operator ruling): a Herm holds a PLACE DID (a somewhere — addressable, vouchable) and NO operator DID — no local human key rests at a crossroads to steal; being-as-place ⊥ being-as-person. HERM RE-READ 2026-08-10: the word carries TWO readings that must not fuse — a STANDING (the class a crossroads vessel keeps) and a PASSAGE (the floor EVERY vessel stands on before an operator lights the hearth fire). The floor reads HARDENED, never degraded. SEATED ⊥ RAISED: `personaSlotCeiling(\"herm\") === 0` bars a SEATED persona root, and a raise seats nothing — raised caps ride the recogniser's own keys and always fall back to the floor. The KAHU row splits by layer: layer ① runs a node vessel, layer ③ holds a seat in the charter k-of-n; one person often holds both, and the design must name them apart."
+role      = "the identity-class topology (USER / OPERATOR / KAHU / HERM) mapped across RUNS · CARRIES · IDENTITY-CLASS (KERI transferable/non-transferable/delegated/none-civic) · RECOVERS — plus READING-B recovery: a RANDOM recovery root authorizes a SIGNED rotation that seats a FRESH operational key and SUPERSEDES the old, never resurrects it. Continuity anchors on the persona-KEL (the identifier prefix), never on the operational private key. Operator-ruled 2026-07-20; the persona-KEL indirection + the reconstruct-vs-attest fork ride ahead of code. HERM refined (operator ruling): a Herm holds a PLACE DID (a somewhere — addressable, vouchable) and NO operator DID — no local human key rests at a crossroads to steal; being-as-place ⊥ being-as-person. HERM RE-READ 2026-08-10: the word carries TWO readings that must not fuse — a STANDING (the class a crossroads vessel keeps) and a PASSAGE (the floor EVERY vessel stands on before an operator lights the hearth fire). The floor reads HARDENED, never degraded. SEATED ⊥ RAISED: `personaSlotCeiling(\"herm\") === 0` bars a SEATED persona root, and a raise seats nothing — raised caps ride the recogniser's own keys and always fall back to the floor. The KAHU row splits by layer: layer ① runs a node vessel, layer ③ holds a seat in the charter k-of-n; one person often holds both, and the design must name them apart. FOUNDING SPLITS 2026-08-14: a founding stands a PLACE (@daemon, the vessel own Keyhive individual, the hearth-true-name) and THEN a FACE (PersonaGroup, social planes, device edge, persona-KEL, and the MeshCabal) — a cabal holds members and its members read as PersonaGroups, so it rides with the face. The OFFICE (kuleana) names the civic standing between HERM and OPERATOR: a Herm that gained AUTHORITY caps without a PERSONA cap. A quorum SEATS an office and never sits in its renewal path, and it opens on an OFFICE key rather than any human root."
 revised-on = "2026-08-10"
 status    = "standing"
 status-why = "the SUBSTRATE stands"
@@ -23,7 +23,7 @@ written   = "2026-07-20"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Identity Classes ~ who runs, who carries, who rotates
 
@@ -166,6 +166,60 @@ self-recovers an IDENTITY — it holds none. A lost or soured Herm ''re-establis
 the operator re-signs the carriage contract and the Herm re-genesizes its keel from the bulb
 (the engine-blob it already carries). The contract IS the whole authority relation; re-issuing it IS
 the recovery.
+
+<<~/ahu >>
+
+<<~ ahu #the-founding-splits >>
+
+!! ★ A FOUNDING STANDS TWO THINGS — a PLACE, then a FACE ★
+
+''A founding carries a SOMEWHERE and a SOMEONE, and canon keeps them apart.'' #herm-establishment rules it directly: a Herm ''boots permissionlessly on its own key — it asks no blessing to exist'', and ''no civic identity mints into'' it. A rite that minted a human root before a vessel could carry a byte would seat on every crossroads the one thing the class exists to refuse.
+
+\procedure ~Half(~Type:"" ~Params:"") ~Half <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Half Place "stands/@daemon · the vessel's own Keyhive individual · the hearth-true-name · the ContactCard asks/nobody ~ carries, serves the public shelf, holds every sovereign act closed" >>
+<<~Half Face "stands/the PersonaGroup + its private plane · the social planes · the device-delegation edge · the persona-KEL inception · the MeshCabal arrives/by an operator act ~ lights the hearth fire" >>
+
+''The place founds ALONE; the face lands on top of it, by a hand that came to dwell.'' A hearth whose operator stands right there runs both in one breath and gains nothing by typing twice. A crossroads never types the second at all.
+
+!!! ★ THE CABAL RIDES WITH THE FACE ★
+
+''A MeshCabal holds MEMBERS, and its members read as PersonaGroups.'' A cabal seeded on a place identifier would stand a membership structure with nothing that can be a member — so the cabal founds ''with the face'', seated on the group that can hold a seat in it.
+
+''`IdentityAnchors` already files it that way'' — keyed by handle-index, the cabal id sitting beside the persona ids — and the boot path names cabal membership ''AFFILIATION, never identity'': a PersonaGroup belongs to many cabals or none (M:N), checked at ACCESS, local-first.
+
+''A faceless place carries by CONTRACT instead.'' The wax-sealed carriage edge #herm-establishment already grants carries the authority a seat would have carried, so ''carry ⊥ read'' holds with no cabal anywhere.
+
+<<~/ahu >>
+
+<<~ ahu #the-office >>
+
+!! Kuleana ~ the OFFICE, and the civic standing between HERM and OPERATOR
+
+''A civic lararium — a marketplace, a high temple, a district node with resident kahu — stands as none of the four rows above.'' It holds real operating authority, and it MUST hold no human's persona key at rest, because a hostile provider with disk access defeats every design that keeps one there.
+
+''So it reads as a HERM THAT GAINED AUTHORITY CAPS WITHOUT GAINING A PERSONA CAP'', and `composable-keel`'s ''absence = un-routed authority'' makes that structural rather than flagged. Facelessness survives by construction.
+
+<<~moves civic-standing -> derived-from/the-cap-stack on/every-read if/a-persona-cap-arrives do/stop-reading-as-civic >>
+
+!!! ★ THE QUORUM SEATS THE OFFICE; THE QUORUM MUST NOT RENEW IT ★
+
+''An office attaches to the PLACE, never to the person'' — the holder rotates through, the shrine keeps standing. And `attestation-plane` fixes which act a quorum gates:
+
+> ''a quorum gates the rare, slow, high-power act, and automation carries the frequent, fast, low-power one. A quorum placed in the renewal path gets bypassed inside one outage, and the bypass becomes permanent.''
+
+So the quorum ''seats'' (rare); the ''renewal rides the lease-epoch roll'' (frequent), which any writer advances in its own per-writer slot. The grant runs bilateral — a quorum countersignature over a subject naming the vessel's Place DID, requiring the vessel's own contract-in — and it ''ends by non-renewal''. Nobody exercises a lowering act.
+
+!!! Two sources of caps, answering two layers
+
+<<~Half Self-raise "layer/① act/open THIS vessel's archive holder/whoever holds this vessel's opening secret ~ bootstraps the first hearth; serves the portable node" >>
+<<~Half Office-grant "layer/③ act/a standing Nexus seats an office holder/any current office-holder opens it ~ no circularity: the Nexus already stands" >>
+
+''An office grant reaches NO archive by itself.'' A quorum's acts sit at ③, and a kahu holding shares becomes the collector the house forbids. The ① answer that survives: ''an OFFICE KEY, never a persona key'' — Place-DID-rooted, minted at establishment, opened through the raise door the mesh already stands. A human signs; ''never THE operator''. That difference carries the whole property.
+
+''And the civic FLOOR runs far larger than a hearth's'': relay, public shelf, bulb, map-publish and segment-repair all stand with ''zero secret''. A district's service survives a power cut; only signing waits for a holder.
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/lamplighters >> carries the Guild that tends these places, the immune coupling, and the tending caps.
 
 <<~/ahu >>
 
@@ -415,6 +469,6 @@ multisig machinery and heavier guardian onboarding (B)''.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

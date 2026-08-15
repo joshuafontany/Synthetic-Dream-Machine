@@ -205,7 +205,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 * [x] Merge `grammars/memetic-wikitext.md` into `pono/memetic-wikitext.md` (law + grammar kernel in one file)
 * [x] Delete `api/grammars/` tree entirely
 * [x] Update `GRAMMAR_MEME_URI`, `GRAMMAR_GENESIS_REL_PATH`, test paths, inline comments → `pono/memetic-wikitext`
-* [x] Upgrade all 25 `pono/*.md` files to `⊙` sigils (`<<^ &#x0001;` / `<<^ &#x0004;`)
+* [x] Upgrade all 25 `pono/*.md` files to `⊙` sigils (`<<^ code:"&#x0001;"` / `<<^ code:"&#x0004;"`)
 * [x] Misfile moves: `circles-kowloon` → `docs/pono/`, `pattern-integrity` → `mu/`, `tiddlywiki-filter` → `docs/pono/`, `source-module` → `docs/lararium/`
 * [x] Move `masks/**` → `lares/masks/**`; upgrade to `ॐ ँ` sigils; update all URIs
 * [x] Update `lares/voices.md` mask references to `api/lares/masks`
@@ -214,10 +214,10 @@ Social graph control inverts: circles are owned by their center, not the platfor
 
 | Namespace | Open | Close |
 |---|---|---|
-| `pono/` | `<<^ ⊙&#x0001;` | `<<^ &#x0004;` |
-| `mu/`, `lares/` | `<<^ ॐ ँ&#x0001;` | `<<^ &#x0004;` |
-| `docs/` | `<<^ &#x0001;` | `<<^ &#x0004;` |
-| `kapu.md` | `<<^ ⊙&#x0011;` | `<<^ &#x0014;` (DC1/DC4 — intentional) |
+| `pono/` | `<<^ code:"&#x0001;" namespace:"⊙"` | `<<^ code:"&#x0004;"` |
+| `mu/`, `lares/` | `<<^ code:"&#x0001;" namespace:"ॐ ँ"` | `<<^ code:"&#x0004;"` |
+| `docs/` | `<<^ code:"&#x0001;"` | `<<^ code:"&#x0004;"` |
+| `kapu.md` | `<<^ code:"&#x0011;" namespace:"⊙"` | `<<^ code:"&#x0014;"` (DC1/DC4 — intentional) |
 
 !!! Known Forward Pointers (not blocking S6)
 

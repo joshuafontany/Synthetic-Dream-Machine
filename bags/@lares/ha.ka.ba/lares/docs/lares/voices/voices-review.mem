@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/voices/voices-review >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/voices/voices-review >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/lares/voices/voices-review.mem"
@@ -51,7 +51,7 @@ Output rooms:
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #observe >>
 
@@ -361,6 +361,6 @@ MASKS.md converted from stub to forward-route to `lar:///LARES#session-masks`.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

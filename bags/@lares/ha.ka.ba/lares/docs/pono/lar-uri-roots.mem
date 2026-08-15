@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/pono/lar-uri-roots >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/lar-uri-roots >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/ha.ka.ba/lares/docs/pono/lar-uri-roots.mem"
@@ -27,7 +27,7 @@ The resolver classifies the root segment before walking the child path.
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -75,6 +75,6 @@ stable-tuple-root = "ha.ka.ba"
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

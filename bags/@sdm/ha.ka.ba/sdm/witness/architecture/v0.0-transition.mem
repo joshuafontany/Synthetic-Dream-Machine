@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/witness/architecture/v0.0-transition >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/architecture/v0.0-transition >>
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/sdm/witness/architecture/v0.0-transition.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/witness/architecture/v0.0-transition"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Architecture Witness — v0.0 Transition
 
@@ -68,6 +68,6 @@ The edge taxonomy collapsed to one flat verb (`#has`, no family/role) for compos
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

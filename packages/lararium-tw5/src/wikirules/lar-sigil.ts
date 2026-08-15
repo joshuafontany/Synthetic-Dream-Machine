@@ -121,7 +121,7 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
       return pos;
     }
 
-    // Generic fallback: covers <<~WORD>> (no-space), control chars (<<^ &#x0001;>>),
+    // Generic fallback: covers <<~WORD>> (no-space), control chars (<<^ code:"&#x0001;" >>),
     // and any form compound did not claim. Well-formed HUD sigils never reach here.
     // pranala guard: matchPranalaOpenAt already claimed pranala forms above; guard
     // prevents a bare <<~ pranala >> (no arrow) from silently becoming a literal block.

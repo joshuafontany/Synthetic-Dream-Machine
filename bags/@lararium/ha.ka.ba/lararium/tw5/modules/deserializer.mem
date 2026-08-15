@@ -1,4 +1,4 @@
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/deserializer >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/deserializer >>
 ```toml iam
 body-sha256   = "d689443fc704d96b7c2e3802de2f76541b33cd3f9fe422199387a4bd1ce74b21"
 file-path     = "bags/@lararium/ha.ka.ba/lararium/tw5/modules/deserializer.mem"
@@ -16,7 +16,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/deserializer"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -232,6 +232,6 @@ function asStringFields(fields: Record<string, unknown>): TiddlerFields {
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

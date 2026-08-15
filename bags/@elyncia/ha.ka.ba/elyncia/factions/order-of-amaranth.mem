@@ -1,0 +1,63 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/order-of-amaranth >>
+```toml iam
+cacheable  = true
+confidence = 12
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/factions/order-of-amaranth.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 14
+manaoio    = 13
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "faction meme — the Order of Amaranth: sanctuary law, iron convoys under the unfading flower, field medicine, the livery and the sacrament"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/elyncia/factions/order-of-amaranth"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Order of Amaranth
+
+''The standing canon:'' convoys precious iron under ''the sign of the unfading flower'',
+anointing cargo with amaranth-oil and putting rust-blooms down hard when a cache turns. Keepers
+of the Unfading Seed. Amaranth churches — old ruined cathedrals, far-flung monasteries, pop-up
+tent-churches — offer ''sanctuary; violence kapu''. Known for field medicine, sanctuary law, and
+an unnerving ease around the free-willed dead. Elite shock troops and seekers of ancient ruins.
+Management of the House of Masks, and its floor's neutrality, ride under their sign.
+
+<<~/ahu >>
+
+<<~ ahu #livery >>
+
+!! Livery & Sacrament (blessed 2026-08-15)
+
+''The livery:'' amaranth ''wine-crimson into magenta'' over unbleached linen and bone-white.
+Dried amaranth chaplets worn at the shoulder — ''unfading while everything iron around them
+rusts'', which states the whole theology without a sermon. Deep agents carry
+''tarnished-silver flower pins'': a flower that never fades, on a metal that does.
+
+''The sacrament:'' ''amaranth-grain honey bread'', pressed and broken for guest-right and field
+ration both — sanctuary law made edible. A traveler who has broken the Order's bread holds
+guest-right at any tent-church that learns of it; the Order holds a long memory for who broke
+bread and who refused it.
+
+//(Gaia's dream-mirror carries the root: amarantos, "unfading" — and the grain pressed with
+honey into sacred shapes, shared and eaten.)//
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>
+
+<<^ code:"&#x0004;" -> ? >>

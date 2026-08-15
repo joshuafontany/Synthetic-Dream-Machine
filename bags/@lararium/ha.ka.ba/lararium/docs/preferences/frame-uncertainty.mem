@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/preferences/frame-uncertainty >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/frame-uncertainty >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/ha.ka.ba/lararium/docs/preferences/frame-uncertainty.mem"
@@ -16,7 +16,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/frame-uncertainty"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -68,6 +68,6 @@ Where the branch matters, the fork must surface.
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

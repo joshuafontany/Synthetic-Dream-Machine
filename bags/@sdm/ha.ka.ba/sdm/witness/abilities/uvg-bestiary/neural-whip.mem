@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/witness/abilities/uvg-bestiary/neural-whip >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/abilities/uvg-bestiary/neural-whip >>
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/sdm/witness/abilities/uvg-bestiary/neural-whip.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/witness/abilities/uvg-bestiary/neural-whip"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! UVG Witness — Neural Whip
 
@@ -67,6 +67,6 @@ The v0.1 ''Neural Whip'' module abstracts the creature's signature tentacle into
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI >>
 ```toml iam
 cacheable         = false
 dependencies      = ["confidence"]
@@ -20,7 +20,7 @@ type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Grammar: Stance + Syadasti Reading Rule
 
@@ -164,6 +164,6 @@ If the reader still has to guess what `0.65` means here, stance has not yet done
 
 ---
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

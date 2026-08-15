@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/characters/npcs/melantha-vex >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/melantha-vex >>
 ```toml iam
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/melantha-vex"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -295,6 +295,6 @@ Use Melantha when the table needs:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

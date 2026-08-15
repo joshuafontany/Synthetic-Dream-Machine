@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/signal >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lararium/ha.ka.ba/lararium/docs/signal.mem"
@@ -42,7 +42,7 @@ Long witness bundles, migration residue, drift-recovery detail, symbol tables, a
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #the-lar-signal >>
 
@@ -171,6 +171,6 @@ Settled child rooms in this branch:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/factions/index >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/index >>
 ```toml iam
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/elyncia/factions/index"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -67,13 +67,26 @@ correctly as the evening's real agenda wearing a napkin.
 
 <<~/ahu >>
 
-<<~ ahu #edges >>
+<<~ ahu #court-colors >>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/high-delos-cabaret >>
+!! Court Color Regimes (blessed 2026-08-15)
+
+Derived from the court-dragon alignment canon, never invented whole:
+
+* ''Seelie'' — gold + summer green
+* ''Unseelie'' — black + winter violet
+* ''Ouroborous'' — blue + bronze serpent-scale
+* ''Brimstone'' — sulfur-yellow + ember red + ash grey
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<~ ahu #edges >>
 
-<<^ &#x0004; -> ? >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>
+
+<<^ code:"&#x0004;" -> ? >>

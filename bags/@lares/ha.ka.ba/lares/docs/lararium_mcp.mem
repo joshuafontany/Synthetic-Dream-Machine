@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp >>
 ```toml iam
 entry-point       = "python3 -m lares.lararium_mcp"
 file-path         = "bags/@lares/ha.ka.ba/lares/docs/lararium_mcp.mem"
@@ -30,7 +30,7 @@ uri-path          = "ha.ka.ba/lares/docs/lararium_mcp"
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #running >>
 
@@ -340,6 +340,6 @@ class MyAdapter:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/ha.ka.ba/lares/api/pono/shelter-against-empire.mem"
@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/shelter-against-empire"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #the-brief >>
 
@@ -168,6 +168,6 @@ And the deeper limit, stated so nobody has to rediscover it: ''every failure in 
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

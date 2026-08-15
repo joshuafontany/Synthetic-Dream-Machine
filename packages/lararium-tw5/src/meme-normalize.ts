@@ -8,11 +8,11 @@
  * idempotent) hold — rather than loosening the gate that guards the graph.
  *
  * Classes closed here (the ones a hand-authored or lifted carrier most often trips):
- *   1. **SOH opener.** The opener canonicalizes to `<<^ [namespace-glyphs]&#x0001;`
+ *   1. **SOH opener.** The opener canonicalizes to `<<^ code:"&#x0001;" namespace:"[namespace-glyphs]" `
  *      — one space after `<<^`, then the iam-declared namespace as LITERAL glyphs
  *      (or none), then the SOH char. Two drifts trip it: a missing/stale namespace
  *      (the renderer re-injects → round-trip breaks), and a missing space
- *      (`<<^ &#x0001;`, the lifted-corpus form — 10 stragglers against 102 canonical
+ *      (`<<^ code:"&#x0001;" `, the lifted-corpus form — 10 stragglers against 102 canonical
  *      siblings). The iam field is authoritative; the SOH is derived from it.
  *   2. **Register band.** The iam `register` expands its band CODE (P · PS · S ·
  *      SC · C) to the canonical band word (Provisional … Canon). A value OFF the
@@ -21,14 +21,21 @@
  *      axes), so the gate surfaces it for human triage rather than fusing two
  *      scales by guessing.
  *
- * Pure + idempotent (re-running changes nothing). The SOH grammar mirrors the
- * deserializer's namespace extractor (`deserializer.ts`, `/^<<[~^]([^&\n]*)&#x(0001|0011)/`).
+ * Pure + idempotent (re-running changes nothing). The SOH grammar mirrors the deserializer's own
+ * param-aware SOH scan (`deserializer.ts`).
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/meme-normalize
  */
 
-/** `<<^ [namespace-glyphs]&#x0001;` — capture prefix · current namespace · SOH char. */
-const SOH_OPENER_RE = /(<<\^)\s*([^&\n]*?)\s*(&#x(?:0001|0011);)/;
+/**
+ * The whole SOH opener, up to its closing `>>`, with the namespace param captured where one stands.
+ *
+ * The opener carries NAMED PARAMS, so canonicalizing it means rewriting the param list rather than
+ * splicing glyphs in front of a control entity. Matching the whole head lets one rebuild place the
+ * namespace correctly whether the carrier states one, states a stale one, or states none at all.
+ */
+const SOH_OPENER_RE =
+  /(<<\^)[ \t]*(?:code:"(&#x(?:0001|0011);)"(?:[ \t]+namespace:"([^"]*)")?|([^&\n]*?)(&#x(?:0001|0011);))/;
 
 /** Decode `&#xNNNN;` entities to literal glyphs; non-entity chars pass through. */
 function decodeEntities(s: string): string {
@@ -82,11 +89,17 @@ export function normalizeMemeSource(src: string): NormalizeResult {
   const want = nsRaw === null ? "" : decodeEntities(nsRaw).trim();
   const soh = SOH_OPENER_RE.exec(text);
   if (soh) {
-    const have = soh[2]!;
-    // Canonical opener: `<<^ ` + literal namespace glyphs + the SOH char. Compare
-    // the WHOLE matched opener, not just the namespace — so a missing space
-    // (`<<^ &#x0001;`) canonicalizes even when the namespace already matches.
-    const rebuilt = `${soh[1]} ${want}${soh[3]}`;
+    // BOTH SPELLINGS READ, ONE SPELLING WRITES. A head stating named params reads from them; a head
+    // from before the params carries its namespace as bare glyphs in front of the control entity, and
+    // this is the door that lifts it. Normalizing is exactly where a grammar migration belongs — the
+    // reader stays forgiving so a carrier written under either form still arrives, and every carrier
+    // that passes through leaves in the current one.
+    const code = soh[2] ?? soh[5]!;
+    const have = soh[3] ?? soh[4]?.trim() ?? "";
+    // Canonical opener: the control head, the code param, then the namespace param where the iam
+    // declares one. Comparing the WHOLE matched head rather than the namespace alone canonicalizes
+    // spacing and param order together, so one rewrite settles every drift the head can carry.
+    const rebuilt = `${soh[1]} code:"${code}"${want ? ` namespace:"${want}"` : ""}`;
     if (soh[0]! !== rebuilt) {
       text = text.slice(0, soh.index) + rebuilt + text.slice(soh.index + soh[0]!.length);
       notes.push(have !== want

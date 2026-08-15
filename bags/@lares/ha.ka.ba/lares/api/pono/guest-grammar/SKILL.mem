@@ -5,7 +5,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>
 ```toml iam
 cacheable          = true
 constraints        = ["S1: the parent invariant remains the admission law and this skill does not outrank it", "S2: guest work enters only through explicit host admission; ambient leakage does not count as lawful guest grammar", "S3: root primitives stay host-side and do not become guest-family proxies", "S4: hana keeps opener, optional priming payload, and guest body distinct", "S5: parser legality, lowering schemas, fixture execution, and long examples move outward before the parent swells"]
@@ -43,7 +43,7 @@ Keep these points active when the skill loads:
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #workflow-contract >>
 
@@ -235,6 +235,6 @@ Aftermath — close by naming:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

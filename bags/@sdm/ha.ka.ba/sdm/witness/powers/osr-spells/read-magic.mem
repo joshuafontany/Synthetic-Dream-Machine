@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/sdm/witness/powers/osr-spells/read-magic >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/powers/osr-spells/read-magic >>
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/sdm/witness/powers/osr-spells/read-magic.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/read-magic"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! OSR Witness — Read Magic
 
@@ -92,6 +92,6 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

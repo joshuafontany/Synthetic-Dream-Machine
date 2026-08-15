@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/graph/meme >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/meme >>
 ```toml iam
 file-path                    = "bags/@lares/ha.ka.ba/lares/docs/graph/meme.mem"
 l-space                      = "stable"
@@ -27,7 +27,7 @@ uri-path                     = "ha.ka.ba/lares/docs/graph/meme"
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -252,6 +252,6 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

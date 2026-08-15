@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/kau >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/kau >>
 ```toml iam
 body-sha256   = "fe642b8721a69825fd3cf25d51db5b423b2acea3eb76e6fdf614b074259dd8e8"
 cacheable     = true
@@ -18,7 +18,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/kau"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -48,6 +48,6 @@ export function KauWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNo
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

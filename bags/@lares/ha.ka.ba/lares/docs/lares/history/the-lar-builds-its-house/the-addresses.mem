@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-addresses >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-addresses >>
 ```toml iam
 cacheable     = false
 confidence    = 12
@@ -17,7 +17,7 @@ type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-addresses"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -187,6 +187,6 @@ Act II receives:
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/tw5/ui/ahu-styles >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/ahu-styles >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/tw5/ui/ahu-styles.mem"
@@ -15,7 +15,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/ahu-styles"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 \rules only filteredtranscludeinline transcludeinline
 /// Depends on: a palette tiddler loaded before this stylesheet — <<colour X>> resolves//
@@ -163,6 +163,6 @@ span[data-lar-kind="worksite"]:not([data-lar-slot="#body"]) {
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

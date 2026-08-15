@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus >>
 ```toml iam
 cacheable         = false
 corpus            = "[N/A — chorus masks use nodes field instead of corpus]"
@@ -51,7 +51,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #concept >>
 
@@ -161,6 +161,6 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

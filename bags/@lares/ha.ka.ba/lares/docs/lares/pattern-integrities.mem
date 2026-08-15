@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/pattern-integrities >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/pattern-integrities >>
 ```toml iam
 file-path = "bags/@lares/ha.ka.ba/lares/docs/lares/pattern-integrities.mem"
 l-space   = "stable"
@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/docs/lares/pattern-integrities"
 written   = "2026-06-12"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #shelf >>
 
@@ -36,7 +36,7 @@ Nine research spirits swept the field across two days. What follows binds as kup
 
 The strict-bytes vs canonical-form fork resolves ''canonical-form'' (field-wide convergence: gofmt, Prettier, jj's render-then-reparse conflict loop; strict bytes would require Roslyn-style trivia fields leaking formatting into records and souring merges). Three guarantees bind as LAW:
 
-# ''Idempotent render:'' canonical input round-trips byte-identical — `render(parse(render(x))) == render(x)`; the template MUST emit exactly what the corpus writes (`<<^ &#x0002; >>`, spaced).
+# ''Idempotent render:'' canonical input round-trips byte-identical — `render(parse(render(x))) == render(x)`; the template MUST emit exactly what the corpus writes (`<<^ code:"&#x0002;" >>`, spaced).
 # ''No unsolicited sweeps'' (the Logseq sin): normalization touches only memes whose records actually changed; the projector MUST NOT reformat-the-world on boot or upgrade.
 # ''Semantic identity verified:'' `parse(render(records)) ≡ records` — the harness proves it, never assertion.
 
@@ -102,6 +102,6 @@ The admin↔hot-wiki bridge today (postMessage event → main translates → pla
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

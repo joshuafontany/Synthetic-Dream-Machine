@@ -1,0 +1,62 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/gorgonne-diaspora >>
+```toml iam
+cacheable  = true
+confidence = 12
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/factions/gorgonne-diaspora.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 14
+manaoio    = 13
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "faction meme — the Gorgonne Diaspora Cabals: the far-roaming serpent-folk of the sea-roads; appearance canon, gaze-courtesy, shipboard culture"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/elyncia/factions/gorgonne-diaspora"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Gorgonne Diaspora Cabals
+
+''The serpent-folk of the sea-roads'', scattered across the harbors and skyjammer decks of many
+Nexuses — a diaspora organized as cabals, crews, and great-houses rather than any homeland. The
+heritage rides the Plane-Touched Gorgonne line: hair-serpents as spirit-familiars, the clans'
+discounted //Serpent's Gaze//, and the old appearance canon that already named them at sea —
+''"captains with serpents for braids."''
+
+<<~/ahu >>
+
+<<~ ahu #appearance >>
+
+!! Appearance Canon (blessed 2026-08-15)
+
+The sea-going cabals descend the ''Euryale line — "the far-roaming"'' — a sailor's lineage by
+its own name. The type: the ''beautiful-Medusa'' face of the later tellings, ''serpent braids
+dressed with coin-rings'' (a crew's shared purse rides in its captain's hair), ''small bronze
+wing-vestiges at the temples'' — the archaic wings and bronze hands surviving as ornament-scale
+inheritance — and ''smoked-glass gaze-spectacles'' worn as courtesy and couture both.
+
+''The spectacle weld:'' gorgonne gaze-courtesy invented the fashion the harbor guilds now wear
+as status — the "Ray-Bane Navigators" of the Third Oar descend from gorgonne courtesy-glass.
+Wearing smoked lenses around a gorgonne reads as good manners; refusing them reads as either
+deep trust or a challenge, and every gorgonne knows which before you do.
+
+''Shipboard culture:'' mirror-taboos run the decks — polished metal stays below, sightlines get
+rigged with cloth, and a crew's toasts run in rounds, in sequence, by rank.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>
+
+<<^ code:"&#x0004;" -> ? >>

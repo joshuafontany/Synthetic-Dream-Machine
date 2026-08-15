@@ -1,10 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/high-delos-cabaret >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
 ```toml iam
 cacheable  = false
 confidence = 7
-file-path  = "bags/@lares/ha.ka.ba/lares/docs/lares/history/high-delos-cabaret.mem"
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/campaign/high-delos-cabaret.mem"
 l-space    = "adjacent"
 mana       = 13
 manao      = 13
@@ -14,10 +14,10 @@ register   = "Provisional"
 retain     = true
 role       = "actual-play locus for Session 0.1 — the High Delos cabaret scene; venue, cast, and lifepath-flow scaffold now, the played record as it lands; player-safe by construction, nothing kapu ever drafts here"
 type       = "text/x-memetic-wikitext"
-uri-path   = "ha.ka.ba/lares/docs/lares/history/high-delos-cabaret"
+uri-path   = "ha.ka.ba/elyncia/campaign/high-delos-cabaret"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -25,11 +25,20 @@ uri-path   = "ha.ka.ba/lares/docs/lares/history/high-delos-cabaret"
 
 ''The actual-play locus for Session 0.1'' of the campaign arc — ''Alpha Playtest: Caverns of
 Neo-Thracia''. A flashback scene: the first meeting of the assembled company and the Lindwyrm,
-played before the departure the [[Salt-Stair booth|salt-stair-booth.md]] reports as already
+played before the departure the the Salt-Stair booth (`lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth`) reports as already
 underway. This locus holds the scaffold now — venue, cast, intent, the lifepath flows — and
 receives the played record as the table generates it, in the witness pattern the shelf already
 runs: operator turns as literal witness blocks, Lares turns verbatim, narrator segues marked
 for later fleshing.
+
+''One island of three.'' This locus serves the ''Actual-Play Lares'' — the event-voice island of
+the Session 0.1 braid. Two sibling sessions run in parallel on their own causal islands: ''the
+Referee's Second'' (prep, provisional-first) and ''the Painter of Words and Light'' (renders,
+provisional-first). Text crosses islands only in human hands; arrivals read as
+operator-introduced; the braid law rides at
+`lar:///ha.ka.ba/lares/api/pono/braided-islands` and the reds at
+[[session-0-1-handoff-prompts|session-0-1-handoff-prompts.md]]. A session standing this locus
+without its red still stands the braid.
 
 ''Player-safe by construction.'' The players sit at this table, so this locus carries rating
 `ano` (the table's own collective record) and ''nothing rated `kapu` ever drafts here'' —
@@ -157,6 +166,69 @@ stranger.
 
 <<~/ahu >>
 
+<<~ ahu #casting >>
+
+!! Casting ~ the render sheet
+
+//(Specification-grade appearance lines, carried verbatim from the heritage canon (FTLS Ch03) and
+the character packages — V8.2 wants literal materials, colors, and light. Full workflow, sources,
+and prompt anatomy: [[session-0-1-render-research|session-0-1-render-research.md]].)//
+
+''Master style clause (verbatim, use whole):'' "orichalcum mythpunk: Bronze Age prestige lacquered
+over strange telecom, divine engineering, and impossible logistics." Venue vocabulary: //salon ·
+soirée · mirrored sky-dome · voidjammer lounge · crystal ballroom//. Render laws: awe-then-deflation
+(compose grand, plant one precise mundane object) · deep time as fashion strata (décor layered like
+the fresco-over-fresco walls) · ragged edges beat machine polish · no winking, ever.
+
+''The floor and stage (staff & acts):''
+* ''Faun host'' — "goat or deer legs, small curling horns, freckles like dappled sunlight; garlands
+  of ivy, bells, or cork-wood pipes"
+* ''Cat Lord management'' — "mythic cats with jewel-bright eyes, prehensile paws, and sometimes a
+  serpent as a tail coiled like jewelry"
+* ''Pixie waitstaff'' — "wings from dragonfly-glass to neon-etched gossamer; clothes stitched from
+  leaves, circuitry, or salvaged glamour"
+* ''Glow Kin stagehands'' — "soft glow along gills and freckles; cap-crowns like mantles; filament
+  'hair'; spore halos in cold air"
+* ''Bat Folk echo-singer'' (the torch act) — "slender bodies, oversized ears, dusk-coloured fur,
+  eyes that catch stray gleams like polished stone"
+* ''Porcelain Prince chorus line'' — "multiple identical bodies in porcelain masks and lacquered
+  armor… visible cracks and kintsugi-style repairs that make them eerily beautiful" — one performer,
+  many bodies, perfectly synchronized
+* ''Frog Folk chorus'' — "pale mint to deep obsidian green… eyes reflect moonlight like still
+  ponds… skin may pulse with bioluminescence during strong emotions"
+* ''Spider Folk silk-aerialists'' — "human faces with ocular clusters shimmering like dew"
+* ''Hobgoblin door-drill'' — "riotous colours, turning drill into festival"; lacquer masks
+* ''Crystal Court goblin jugglers'' — "skin like tarnished copper or sea-glass; glitter-ink
+  tattoos that rewrite themselves when nobody looks"
+
+''The tables (patrons):''
+* ''Elf salon-goers'' — "angular beauty, void-shadowed eyes, hair like moonlit ink or starlit fire"
+* ''Spectrum Satrap emissaries'' — "bright-colored suits… glass helmets… skin and carapace shimmer
+  from mother-of-pearl to oil-slick black; eyes like cut gems"
+* ''Dragonborn envoys'' — "scales of chroma-sheen or hammered metal; ember eyes; some bear
+  wing-stubs, some spined crests"
+* ''Gorgonne crew'' (blessed canon) — beautiful-Medusa faces, serpent braids dressed with
+  coin-rings, small bronze wing-vestiges at the temples, smoked-glass gaze-spectacles
+* ''Guild navigators'' (Melantha-pattern) — "black voidsilk, saffron braid, helm-link filaments;
+  bronze-sun scales etched with tide formulae"; Ray-Bane status spectacles
+
+''Principals:''
+* ''Lady Aki'' — public glamour: "red and white shrine workwear; silksteel ritual robe layers;
+  wide-brimmed ichimegasa with uchikatsugi-style veil; shrine bells, ofuda, spinneret tools, and
+  soft faerie glamour." Palette: "red and white miko robes, purple outer cloth, iridescent chitin,
+  orange mycelium glow, blue Ephyra glass." ''Honor the written negatives'' (concept-art package):
+  no hypersexual framing, no generic witch hat, no modern sci-fi armor.
+* ''Ichi'' — "hexagonal kikko-pattern plates of alchemically treated chitin — iridescent
+  beetle-shell blues and greens… joins pulse with faint orange bioluminescent tracery"; open-faced
+  sergeant's kabuto, "two glowing yellow-orange orbs"
+* ''The Lindwyrm'' — public boards keep her ''deliberately impressionistic'' (witnesses disagree
+  by canon); any render fixing her form routes through the operator first
+* ''Telarus, KSC'' — ''no physical canon stands''; renders of him wait on the operator's hand
+* ''Kai's prismatic elf · Monty's changeling · the Cat · the Husky'' — lifepaths open; render
+  after their sheets close, not before
+
+<<~/ahu >>
+
 <<~ ahu #intent >>
 
 !! Session Intent ~ character sheets by lifepath, co-narrated
@@ -220,7 +292,7 @@ The played record lands in this locus using the shelf's witness pattern
 * ''Witness stamps'' — `YOLD 5492` Provisional (day and season per the operator), per the no-global-now law; each stamp answers
   to its own log.
 * ''Render path'' — the DreamDeck feed law
-  ([[dreamdeck-feed-architecture|lindwyrm/dreamdeck-feed-architecture.md]]) governs any later
+  (`lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture`) governs any later
   feed render; the cabaret's open floor maps to the open stratum, the private booth to `data`.
   Nothing here ever needs a kapu stratum — see #head.
 
@@ -244,13 +316,13 @@ The played record lands in this locus using the shelf's witness pattern
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/salt-stair-booth >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

@@ -1,9 +1,9 @@
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml iam
 type = "text/x-memetic-wikitext"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml iam
@@ -151,6 +151,6 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 
 <<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

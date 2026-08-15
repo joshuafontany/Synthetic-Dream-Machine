@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/lararium-canonical-model >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/lararium-canonical-model >>
 ```toml iam
 cacheable = true
 file-path = "bags/@lararium/ha.ka.ba/lararium/api/lararium-canonical-model.mem"
@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/api/lararium-canonical-model"
 
 <<~ aka source-of-truth: read THIS first; the sub-memes (pranala below) carry the depth. >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Lararium — The Canonical Model
 
@@ -278,6 +278,6 @@ Read order once held: noosphere-boot → THIS → (open-vessel · causal-island 
 seeded by the boot, enacted per turn, corrected by degree, decaying untended; the memory-palace that
 captures its FORM beside the verbatim CONTENT stands at [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]].
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

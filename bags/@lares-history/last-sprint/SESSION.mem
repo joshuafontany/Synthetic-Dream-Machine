@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares-history/last-sprint/SESSION >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/last-sprint/SESSION >>
 ```toml iam
 file-path = "bags/@lares-history/last-sprint/SESSION.mem"
 l-space   = "archive"
@@ -11,7 +11,7 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares-history/last-sprint/SESSION"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! Session State — Lararium Web3 Refactor
 
@@ -95,11 +95,11 @@ Full end-to-end verification: `wikis/scratch/memes/docs/lares/the-lares-protocol
 | `meme-sync-adaptor.ts` | `_applyLiveRecord` and `onChangeset` bulk path both stamp `bag` field on TW5 tiddlers — disk projector reads bag provenance without touching Automerge. |
 | `bag-mirror.ts` | `wikiShadowPathStrategy` extended with bare `lar:///ha.ka.ba/{rest}` URI fallback (no @-scope) → `memes/{rest}.md`. Fragment URIs → `memes/{path}/{fragment}.md`. Fixes the zero-projection bug for wiki-bag tiddlers. |
 | `deserializer.ts` + plugin bundle | `splitRecursive` extended: `parentSourceFile` param threads to child `file-path` generation. Children receive full effective iam via `regenerateIamToml(effectiveIam, {})` with child-specific `uri-path` + `file-path` override. Child `file-path` strips the leading `#` from `block.slot`. ''Build law: changes to `deserializer.ts` require `tsx scripts/build-plugin-tiddler.ts` — `tsc` alone is NOT sufficient (deserializer runs inside TW5 plugin bundle).'' |
-| `tw5-widgets.ts` | `LARARIUM_MEME_TEMPLATE_MARKDOWN_MEME` updated for five-layer child structure: conditional SOH (for tiddlers with `fragment-parent`), iam block (from `iam-source`), STX (`<<^ &#x0002; >>`), `{{!!text}}`, ETX (`<<^ &#x0003; >>`), EOT (`<<^ &#x0004; -> ? >>`). Prologue emitted only when explicitly present (not inherited from parent). |
+| `tw5-widgets.ts` | `LARARIUM_MEME_TEMPLATE_MARKDOWN_MEME` updated for five-layer child structure: conditional SOH (for tiddlers with `fragment-parent`), iam block (from `iam-source`), STX (`<<^ code:"&#x0002;" >>`), `{{!!text}}`, ETX (`<<^ code:"&#x0003;" >>`), EOT (`<<^ code:"&#x0004;" -> ? >>`). Prologue emitted only when explicitly present (not inherited from parent). |
 
 ''Five-layer child file structure confirmed:''
 ````
-<<^ &#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols#thesis >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols#thesis >>
 ```toml iam
 uri-path = "ha.ka.ba/docs/lares/the-lares-protocols#thesis"
 file-path = "wikis/scratch/memes/docs/lares/the-lares-protocols/thesis.mem"
@@ -107,13 +107,13 @@ l-space  = "draft"
 …
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 body text…
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>
 ````
 
 ''OODA-HA code review findings (non-blocking smells):''
@@ -884,16 +884,16 @@ Attention-scale register names now canonical: ''Pulse'' (L0) / ''Beat'' (L1) / '
 * `api/grammars/memetic-wikitext.md` merged into `api/pono/memetic-wikitext.md` (single source: law + grammar kernel)
 * `api/grammars/` tree deleted entirely
 * `GRAMMAR_MEME_URI` and `GRAMMAR_GENESIS_REL_PATH` updated to `pono/memetic-wikitext`
-* All 25 pono memes upgraded to `⊙` sigils (`<<^ ⊙&#x0001;` / `<<^ &#x0004;`)
+* All 25 pono memes upgraded to `⊙` sigils (`<<^ code:"&#x0001;" namespace:"⊙"` / `<<^ code:"&#x0004;"`)
 
 ''Namespace sigil table (settled):''
 
 | Namespace | Open | Close |
 |---|---|---|
-| `pono/` | `<<^ ⊙&#x0001;` | `<<^ &#x0004;` |
-| `mu/`, `lares/` | `<<^ ॐ ँ&#x0001;` | `<<^ &#x0004;` |
-| `docs/` | `<<^ &#x0001;` | `<<^ &#x0004;` |
-| `kapu.md` | `<<^ ⊙&#x0011;` | `<<^ &#x0014;` (DC1/DC4 — intentional) |
+| `pono/` | `<<^ code:"&#x0001;" namespace:"⊙"` | `<<^ code:"&#x0004;"` |
+| `mu/`, `lares/` | `<<^ code:"&#x0001;" namespace:"ॐ ँ"` | `<<^ code:"&#x0004;"` |
+| `docs/` | `<<^ code:"&#x0001;"` | `<<^ code:"&#x0004;"` |
+| `kapu.md` | `<<^ code:"&#x0011;" namespace:"⊙"` | `<<^ code:"&#x0014;"` (DC1/DC4 — intentional) |
 
 ''Misfile audit — five moves:''
 # `pono/circles-kowloon.md` → `docs/pono/circles-kowloon.md` (doc companion, not binding law)
@@ -1104,6 +1104,6 @@ Both questions surface before S9 (lararium-browser) and should inform the
 * `packages/lararium-mesh/src/capability.ts` — NEW; `buildDeviceDelegation`, `verifyDeviceDelegation` (S7.1)
 * `packages/lares-core/memes/api/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

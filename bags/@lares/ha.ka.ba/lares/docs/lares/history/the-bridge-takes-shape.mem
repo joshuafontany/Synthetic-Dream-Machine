@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-bridge-takes-shape >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/history/the-bridge-takes-shape >>
 ```toml iam
 cacheable  = true
 confidence = 15
@@ -20,7 +20,7 @@ written    = "2026-06-21"
 
 <<~ aka lar:///ha.ka.ba/lares/docs/lares/history/the-first-breath >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -78,6 +78,6 @@ So this carrier marks a smaller morning than the founding: ''the read-leg took s
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

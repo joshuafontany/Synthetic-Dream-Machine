@@ -664,7 +664,7 @@ export function splitBodyTiddler(
 //
 // Canonical-form law (handoff #pattern-integrities §2) binds the output:
 //   1. idempotent render — canonical input round-trips byte-identical
-//      (sigil spacing `<<^ &#x0002; >>`, one-blank-line block margins);
+//      (sigil spacing `<<^ code:"&#x0002;" >>`, one-blank-line block margins);
 //   2. framing normalizes once — the iam block re-emits sorted + aligned
 //      from fields (authored key order and padding do not survive the
 //      record stratum);
@@ -864,13 +864,17 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // the grammar leaves here too, instead of surviving as a literal no reader still scans for.
   const MARK = (name: string): string => frameMark(FRAME_BY_NAME[name]!)!.code;
   const sohCode = f["carrier-soh"] === "0011" ? MARK("SOH2") : MARK("SOH");
+  // NAMED PARAMS RIDE IN FRONT; THE ARROW KEEPS ITS SHAPE. A parameter states a PROPERTY, the arrow
+  // states a RELATION — `? -> uri` reads "this carrier resolves toward that address". Folding the
+  // bearing into a quoted attribute would demote a relation to a field and break the scan that reads it.
+  const ns = str("namespace").trim();
 
   let out = str("prologue");
-  out += `<<^ ${str("namespace")}${sohCode} ? -> ${memeUri} >>\n`;
+  out += `<<^ code:"${sohCode}"${ns ? ` namespace:"${ns}"` : ""} ? -> ${memeUri} >>\n`;
   out += str("preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
   out += expandRefs(reader, memeUri, "", str("header-text"), f);
-  out += `<<^ ${MARK("STX")} >>\n\n`;
+  out += `<<^ code:"${MARK("STX")}" >>\n\n`;
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
   // ETX takes its block check adjacent, per the received framing (STX -> text -> ETX -> BCC); the
   // attestation block follows and ETB terminates it. A carrier carrying neither emits neither, so
@@ -878,9 +882,9 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // projection round trip, which is the whole reason the emitter has to know the mark at all.
   const bcc  = str("carrier-bcc");
   const sila = str("carrier-sila");
-  out += `\n\n<<^ ${MARK("ETX")} >>${bcc ? `${bcc}` : ""}\n`;
-  if (sila) out += `\n${sila}\n<<^ ${MARK("ETB")} >>\n`;
-  out += `\n<<^ ${MARK("EOT")} -> ? >>\n`;
+  out += `\n\n<<^ code:"${MARK("ETX")}" >>${bcc ? `${bcc}` : ""}\n`;
+  if (sila) out += `\n${sila}\n<<^ code:"${MARK("ETB")}" >>\n`;
+  out += `\n<<^ code:"${MARK("EOT")}" -> ? >>\n`;
   // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;
@@ -915,7 +919,7 @@ export function deserializeCarrier(
         from: 0, to: text.length, severity: "error",
         source: "memetic-wikitext", code: "postamble-content",
         message: `${stranded} line(s) stand between ETX and EOT. The text ends at ETX; that slot `
-               + "carries the block check alone. Move the content above the `<<^ &#x0003; >>` close.",
+               + "carries the block check alone. Move the content above the `<<^ code:\"&#x0003;\" >>` close.",
       });
     }
     if (!String(record.title ?? "").includes("/parse-warning/")) continue;

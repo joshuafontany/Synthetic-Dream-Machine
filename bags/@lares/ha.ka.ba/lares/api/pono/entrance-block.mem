@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/entrance-block >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/entrance-block >>
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/ha.ka.ba/lares/api/pono/entrance-block.mem"
@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/entrance-block"
 <<~ aka lar:///ha.ka.ba/lares/api/pono/nalu >>
 <<~ aka lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #the-law >>
 
@@ -169,6 +169,6 @@ Every shared resource in the py fleet owes the same test: `content_io` · `struc
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

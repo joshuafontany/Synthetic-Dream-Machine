@@ -82,27 +82,27 @@ describe("parse∘render — the recompose inverse on the boot meme", () => {
 // ---------------------------------------------------------------------------
 
 const TEACHING_URI = "lar:///ha.ka.ba/lares/memory/fence-teaching";
-const TEACHING = `<<^ ${"&#x0001;"} ? -> ${TEACHING_URI} >>
+const TEACHING = `<<^ code:"${"&#x0001;"}" ? -> ${TEACHING_URI} >>
 \`\`\`toml iam
 uri-path = "ha.ka.ba/lares/memory/fence-teaching"
 type     = "text/x-memetic-wikitext"
 \`\`\`
 
-<<^ ${"&#x0002;"} >>
+<<^ code:"${"&#x0002;"}" >>
 
 <<~ ahu #lesson >>
 
 A fenced carrier close MUST NOT close this body:
 
 \`\`\`text
-<<^ ${"&#x0003;"} >>
+<<^ code:"${"&#x0003;"}" >>
 <<~ ahu #fake >>
 not a child
 <<~/ahu >>
 <<~ kahea ahu #ghost >>
 \`\`\`
 
-Inline mentions stay literal too: \`<<^ ${"&#x0003;"} >>\` and \`<<~ ahu #also-fake >>\`.
+Inline mentions stay literal too: \`<<^ code:"${"&#x0003;"}" >>\` and \`<<~ ahu #also-fake >>\`.
 
 \`\`\`\`md
 a four-backtick fence quoting an iam fence:
@@ -115,9 +115,9 @@ mana = 99
 
 After the fence, the carrier still runs.
 
-<<^ ${"&#x0003;"} >>
+<<^ code:"${"&#x0003;"}" >>
 
-<<^ ${"&#x0004;"} -> ? >>
+<<^ code:"${"&#x0004;"}" -> ? >>
 `;
 
 describe("fence-mask — quoted sigils never frame, split, or expand", () => {
@@ -146,24 +146,24 @@ describe("fence-mask — quoted sigils never frame, split, or expand", () => {
 
 describe("Kapu SOH variant survives the round trip", () => {
   const KAPU_URI = "lar:///ha.ka.ba/lares/memory/kapu-carrier";
-  const KAPU = `<<^ ⊙${"&#x0011;"} ? -> ${KAPU_URI} >>
+  const KAPU = `<<^ code:"${"&#x0011;"}" namespace:"⊙" ? -> ${KAPU_URI} >>
 \`\`\`toml iam
 uri-path = "ha.ka.ba/lares/memory/kapu-carrier"
 type     = "text/x-memetic-wikitext"
 \`\`\`
 
-<<^ ${"&#x0002;"} >>
+<<^ code:"${"&#x0002;"}" >>
 
 kapu body.
 
-<<^ ${"&#x0003;"} >>
+<<^ code:"${"&#x0003;"}" >>
 
-<<^ ${"&#x0004;"} -> ? >>
+<<^ code:"${"&#x0004;"}" -> ? >>
 `;
   test("the DC1 code and namespace re-emit on the SOH line", () => {
     const records = recordsOf(KAPU, KAPU_URI);
     const rendered = expandMemeRefs(readerOf(records), KAPU_URI)!;
-    expect(rendered.startsWith(`<<^ ⊙${"&#x0011;"} ? -> ${KAPU_URI} >>`)).toBe(true);
+    expect(rendered.startsWith(`<<^ code:"${"&#x0011;"}" namespace:"⊙" ? -> ${KAPU_URI} >>`)).toBe(true);
     expect(rendered).toBe(expandMemeRefs(readerOf(recordsOf(rendered, KAPU_URI)), KAPU_URI));
   });
 });

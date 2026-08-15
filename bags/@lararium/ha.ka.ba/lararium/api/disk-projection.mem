@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/disk-projection >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/disk-projection >>
 ```toml iam
 approved-on   = "2026-06-02"
 cacheable     = true
@@ -25,7 +25,7 @@ uri-path      = "ha.ka.ba/lararium/api/disk-projection"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #core-claim >>
 
@@ -202,6 +202,6 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 the FORMAL register of the living grammar ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#three-registers]]) — the curated band
 between casual chat-use and the defined parser core.
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

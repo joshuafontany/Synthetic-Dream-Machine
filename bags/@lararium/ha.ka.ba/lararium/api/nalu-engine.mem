@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lararium/api/nalu-engine >>
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/nalu-engine >>
 ```toml iam
 cacheable      = true
 docs           = "lar:///ha.ka.ba/lares/api/pono/nalu"
@@ -18,7 +18,7 @@ type           = "text/x-memetic-wikitext"
 uri-path       = "ha.ka.ba/lararium/api/nalu-engine"
 ```
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 ! nalu-engine — Invariant
 
@@ -157,6 +157,6 @@ transact per frame (crest). WITNESSED: the queue (`nalu-engine.ts`) + the shore 
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

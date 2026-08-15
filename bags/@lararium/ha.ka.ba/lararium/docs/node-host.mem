@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lararium/docs/node-host >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/node-host >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lararium/ha.ka.ba/lararium/docs/node-host.mem"
@@ -30,7 +30,7 @@ every downstream stratum reads one path law.
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -129,6 +129,6 @@ export interface CorpusSource {
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>

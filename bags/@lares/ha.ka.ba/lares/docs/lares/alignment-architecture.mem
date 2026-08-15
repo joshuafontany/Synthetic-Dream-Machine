@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/alignment-architecture >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/alignment-architecture >>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/lares/alignment-architecture.mem"
@@ -37,7 +37,7 @@ The home-intranet RPG (a Referee running encounters across player wikis) reads a
 
 <<~/ahu >>
 
-<<^ &#x0002; >>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #foundation >>
 
@@ -213,6 +213,6 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 
 <<~/ahu >>
 
-<<^ &#x0003; >>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>
