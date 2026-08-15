@@ -72,6 +72,19 @@ const scannerOnly = [...scannerCodes].filter(
 );
 const specOnly = standing.filter((s) => !scannerCodes.has(s.code));
 
+// AND THE EMITTER, which closes the cycle. `expandMemeRefs` in `deserializer.ts` recomposes a carrier
+// from records back to bytes, and it writes every frame mark as a STRING LITERAL — four recognisers
+// read the frame, one hand-written emitter writes it, and none of the five consults the others.
+//
+// A MARK THE EMITTER CANNOT WRITE IS A MARK PROJECTION SILENTLY DROPS. A carrier could gain an
+// attestation block, parse correctly, and lose it the first time a wiki wrote it back to disk — the
+// read side would never complain, because nothing it reads went missing.
+const EMITTER = join(REPO, "packages/lararium-tw5/src/deserializer.ts");
+const emitterSrc = readFileSync(EMITTER, "utf8");
+const emitterBody = emitterSrc.slice(emitterSrc.indexOf("export function expandMemeRefs"));
+const emitted = new Set([...emitterBody.matchAll(/&#x00[0-9A-Fa-f]{2};/g)].map((m) => m[0]));
+const unemitted = standing.filter((s) => !emitted.has(s.code));
+
 const unrecognised = standing.filter((s) => !seen.has(s.code));
 const undeclared = [...seen].filter(
   (c) => !standing.some((s) => s.code === c) && !reserved.some((r) => r.code === c),
@@ -88,6 +101,10 @@ if (scannerOnly.length > 0) {
 if (specOnly.length > 0) {
   console.log(`  the spec stands marks the bootstrap scanner cannot find:`);
   for (const { code, mark } of specOnly) console.log(`    ${code}  ${mark}`);
+}
+if (unemitted.length > 0) {
+  console.log(`  the emitter cannot write, so projection would drop:`);
+  for (const { code, mark } of unemitted) console.log(`    ${code}  ${mark}`);
 }
 if (undeclared.length > 0) {
   console.log(`  recognised but undeclared (tolerated): ${undeclared.sort().join(" ")}`);
