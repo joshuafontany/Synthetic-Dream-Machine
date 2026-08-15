@@ -329,7 +329,7 @@ The Conversion Doctrine (`TODO_BECMI_Spell_Effect_Conversion_Doctrine.md → ## 
 | S3 | **DONE 2026-04-03** | Finger of Death: accept synthesized `osr:` block (Gap 3); add tags `[necromancy] [dangerous] [death] [deathly] [attack]`; P: 10 seeded by S1 | `GapFix(Annotator)` (done; crosswalk `osr: imported = yes` confirmed) |
 | S4 | **DONE 2026-04-03** | Reckless Dweomer: seat corrected burden → trait | `GapFix(Annotator)` (done) |
 | S5 | **CLOSED 2026-08-12** | Storage seating carries no ms tag — the manuscripts hold no `[storage:*]` layer; seat contracts live in the `bags/@sdm` mount-points. BECMI default seat stays trait (Doctrine F.6); item seats arrive as Ch05 variant-card work | `StoreFix(Migrator)` (closed) |
-| S6 | **TODO** | Shield Ward manual P: assignment — card not in crosswalk; determine correct P: from FTLS design intent and set explicitly | `Lares (Council)` |
+| S6 | **DONE 2026-08-14** | Shield Ward P: 2 — operator ruling ratifies the standing value in `bags/@sdm` (module `#default` and card both carry P: 2; aligns with the x2 formula for the 1st-level `Shield` recognizer) | `Lares (Council)` (done) |
 | S7 | **TODO** | osr: recognizer sweep — run `import_ch06_osr.py check` and verify `drift: no`; ensure all recognizer lines use exact canonical Classic Name or documented alias | `DriftWatch [task[Continuity]]` → escalates to `Ink-Clerk (Lorekeeper)` |
 
 ---
@@ -353,7 +353,7 @@ The Conversion Doctrine (`TODO_BECMI_Spell_Effect_Conversion_Doctrine.md → ## 
 
 #### Spikes (open questions — needs operator ruling)
 
-- **S6 spike — Shield Ward P: determination**: `Shield Ward` is a native FTLS card with no BECMI crosswalk entry. P: needs to be established from FTLS design intent (recommended: compare to analogous BCM `Shield` / `Protec. from Normal Missiles` / Ward-type spells as a baseline). Operator ruling needed before S6 closes.
+- **S6 spike — CLOSED 2026-08-14**: Shield Ward P: 2 stands by operator ruling, ratifying the value already carried in the `bags/@sdm` module and card.
 - **P:<12 editorial [dangerous] calls (first pass)**: Polymorph Others (P:8, permanent-transform save), Conjure Elemental (P:10, creature can kill caster), Dispel Evil (P:10, banishes/destroys), Magic Jar (P:10, soul displacement), Quest (P:10, permanent magical compulsion) were tagged `[dangerous]` on editorial grounds this sprint. These are first-pass calls; card body conversion pass (Pass 3) may revise.
 - **Commune, Pass Plant, Truesight**: `[high-tier]` removed; no `[dangerous]` added. First-pass call: these are utility/divination effects without dangerous outputs at their P: tier. Revisit at N1.
 

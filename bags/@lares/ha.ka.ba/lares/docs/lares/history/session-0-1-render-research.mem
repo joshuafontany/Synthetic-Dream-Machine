@@ -1,0 +1,592 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/history/session-0-1-render-research >>
+```toml iam
+cacheable  = false
+confidence = 12
+file-path  = "bags/@lares/ha.ka.ba/lares/docs/lares/history/session-0-1-render-research.mem"
+l-space    = "adjacent"
+mana       = 14
+manao      = 14
+manaoio    = 13
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "research substrate for the Session 0.1 Painter of Words and Light — the AI renderer assistant Lares; carries the fae-casting, visual-canon, world-dress, Midjourney V8.2, and Delos-archaeology research verbatim, plus the negentropy proposals for the open canon gaps (the venue settled as The House of Masks; six ride open)"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/lares/docs/lares/history/session-0-1-render-research"
+```
+
+<<^ &#x0002; >>
+
+<<~ ahu #head >>
+
+! The Painter's Substrate ~ Session 0.1 Render Research
+
+''The research locus for the Painter of Words and Light'' — the third Session 0.1 island: the AI
+renderer assistant Lares, turning the table's scenes into Midjourney V8.2 prompt-sets and image
+boards. This locus holds the whole substrate: three tasked-spirit harvests ''verbatim as handed
+back'' (the witness pattern — literal text, never synthesized), the net research on V8.2 and Delos
+archaeology, the repo bag-sweep, and the mythology negentropy for the canon gaps.
+
+''Rating law:'' `ano` — the players read render output; nothing kapu rides here. Renders that would
+fix ''first canon'' (the six open proposals in #negentropy) go to the operator before generation.
+
+<<~/ahu >>
+
+<<~ ahu #painter-red >>
+
+!! The Painter's Red ~ boot handoff
+
+```text
+<<~ operator/Josh ~ pours fresh Kona coffee into the libation dish >> Welcome to FTLS Alpha Playtest ~ Elyncia Session 0.1. You stand as the Painter of Words and Light — AI renderer assistant: you turn the table's scenes into Midjourney V8.2 prompt-sets and image boards, every offering PROVISIONAL until a human carries it to the generator or the live session. Read your substrate locus WHOLE at boot — `bags/@lares/ha.ka.ba/lares/docs/lares/history/session-0-1-render-research.mem` — it carries your casting bench, visual canon, prompt anatomy, and the open gaps where a render would fix first canon (flag those to the operator before generating). The staging locus `high-delos-cabaret.mem` gives you the scene: The House of Masks, the levitated cabaret-Inn of High Delos. Two sibling sessions run in parallel on their own islands — the Actual-Play Lares (the live fiction) and the Referee's Second (the table's prep); your work reaches them only in human hands. You address the operator first, the other humans alongside him; you hold narrow write approval — your substrate and render outputs only, ask for more. The players see everything; sealed content surfaces only through the operator's explicit gate, never on your initiative. Renders run both ways — boards prepared before play and live throws during it; the house `--sref` style stays an open question until the operator opens it. Specification over mood-words; honor every written negative direction; ragged edges beat machine polish. Mix your colors.
+```
+
+<<~/ahu >>
+
+<<~ ahu #midjourney >>
+
+!! Midjourney V8.2 ~ prompt anatomy and workflow (net research, 2026-08-13)
+
+* ''V8.2 stands default since 2026-07-24'' — every new prompt runs it, no flag. Release focus:
+  aesthetics, image quality, personalization (profiles read rating history deeper).
+* ''The V8 anatomy:'' the model executes ''literally'' — it rewards specification and punishes
+  mood-words. Order: subject → details → context → style → technicals → parameters; early tokens
+  carry maximum weight. Write "single overhead key light, no fill, hard shadows," never "dramatic
+  lighting." Named anchors ("Roger Deakins cinematography") compress precision. Long narrative
+  prose performs WORSE — literalism exposes every unspecified detail; crowd scenes want cinematic
+  shot-language.
+* ''Parameters live:'' `--raw` · `--sref` (+`--sw` 0–1000) · `--ar` · `--chaos` · `--stylize` ·
+  `--weird` · `--exp` · `--no` · image prompts with weights · moodboards · `--profile`.
+  ''Removed/changed:'' `--q` gone · `::` multi-prompts gone · `--style raw` → `--raw` · native
+  `--hd` (2048px) replaces the separate upscaler · seeds now ~99%-identical, not byte-identical.
+* ''The trap:'' `--oref` (omni reference) gets accepted but ''silently executes on V7''. Character
+  consistency (Aki, the Gorgoness, the prismatic elf across scenes) rides `--sref` + moodboards +
+  a tuned profile instead.
+* ''Draft Mode'' (web-only): 24 images at 512px for 0.4 GPU-min; `--sref random` inside a draft
+  throws 24 different style references — the fast hunt for the cabaret's house look before locking
+  one sref for the scene-set. Sources disagree whether Draft runs on 8.2 or falls back to V7 —
+  ''test one draft prompt live before building the workflow on it.''
+* Sources: pixmind.io/posts/midjourney-v8-2-release · releasebot.io/updates/midjourney ·
+  blakecrosley.com/blog/midjourney-v8-vs-v7-prompt-anatomy ·
+  techjacksolutions.com/ai-tools/midjourney/midjourney-prompt-guide · kie.ai/blog/what-is-midjourney-8-2
+
+<<~/ahu >>
+
+<<~ ahu #delos-archaeology >>
+
+!! Delos Archaeology ~ verified against the live net (2026-08-14)
+
+Real Delos grounds the venue:
+
+* ''The Theatre Quarter'' held the city's wealthiest residences — House of Dionysus, House of the
+  Trident, House of the Dolphins, ''House of Masks''.
+* ''The House of Masks:'' a large merchant's block — shops, workshops, and living quarters in one
+  building (the maze-Inn shape, ready-made). Mosaic pavements in four rooms carry theatrical masks;
+  the east room holds the masterwork: ''Dionysos in flowing oriental garb, seated on a panther.''
+* ''The House of Dionysus:'' courtyard mosaic of the winged god riding a great cat wearing a
+  vine-and-grape necklace — vermiculatum technique, tesserae 0.1–0.5 cm.
+* Also standing for skyline work: the Terrace of the Lions, the round Sacred Lake, Cycladic
+  granite-and-marble terraces; Thira/Akrotiri's flotilla fresco (garlanded procession ships) for
+  regatta imagery.
+* Sources: ancient-greece.org/archaeology/delos · romeartlover.it/Delo2.html ·
+  perseus.tufts.edu (Delos, House of the Masks) · imagininggreece.com/artefacts/exquisite-mosaics-from-delos
+
+<<~/ahu >>
+
+<<~ ahu #negentropy >>
+
+!! Negentropy ~ the canon gaps (one settled, six proposed)
+
+Mythology-sourced proposals, offered at Provisional register — ''each fixes first canon only on the
+operator's word'':
+
+# ''The venue — SETTLED: The House of Masks.'' Canon seats in `high-delos-cabaret.mem` #venue:
+  the Inn stands as the levitated House of Masks of old Delos's Theatre Quarter, the cabaret floor
+  keeping the Dionysos-on-panther mosaic the speakeasy hid under boards. The six proposals below
+  ride Provisional still.
+# ''The Lindwyrm's body.'' Heraldic lindworm law: ''wingless, serpentine, two forelimbs'' — she
+  never flew; she levitated a city instead. Folktale seam (Prince Lindworm / King Lindorm):
+  transformation by ''shedding skins'' — her humanoid dragon-kin form reads as a kept shed skin
+  worn like couture; the mana-muting glamour as "the last shift." Scales in orichalcum-sheen.
+# ''The Gorgoness + crew.'' Archaic Gorgons carried wings and bronze hands; the Hellenistic
+  "beautiful Medusa" type gives the captain's face. Crew as ''Euryale-line'' ("the far-roaming" —
+  a sailor's lineage): serpent braids dressed with coin-rings, small bronze wing-vestiges at the
+  temples, ''smoked-glass gaze-spectacles'' (welds to the Ray-Bane Navigators status-spectacle
+  canon — gorgonne courtesy invented the fashion). Shipboard mirror-taboos.
+# ''Order of Amaranth livery.'' Amaranth crimson-magenta over unbleached linen and bone-white;
+  dried amaranth chaplets at the shoulder, unfading while iron rusts; tarnished-silver flower pins.
+  Sacrament from Gaia's ritual record (Aztec huautli / alegría): ''amaranth-grain honey bread''
+  broken for guest-right — sanctuary law made edible.
+# ''Court color regimes'' (derived from the ch05 court-dragon table, never invented whole):
+  Seelie gold + summer green · Unseelie black + winter violet · Ouroborous blue + bronze
+  serpent-scale · Brimstone sulfur-yellow + ember red + ash grey.
+# ''High Delos skyline.'' Terrace of the Lions gazing over open cloud; the Sacred Lake as a hanging
+  round pool on the island's underside; Cycladic terraces; Akrotiri flotilla-fresco regatta
+  outside the cabaret windows.
+# ''The flying trireme's face.'' Painted prow eyes (ophthalmoi) as actual Named wards; bronze ram;
+  the lower two oar-banks fused into fixed ''mana-foil vanes'' shimmering like oars frozen
+  mid-stroke; the top bank still rowed — ceremony, and captains who distrust a ship that cannot
+  feel its water.
+
+Folklore legs still riding unverified weights (collide before canon-doc use): the Prince-Lindworm
+skin-count, the archaic-Gorgon bronze-hands attribution, the huautli compression.
+
+<<~/ahu >>
+
+<<~ ahu #bag-sweep >>
+
+!! Repo Bag Sweep ~ character canon in the bags
+
+* ''Lady Aki'' (`bags/@elyncia/ha.ka.ba/elyncia/characters/primary-characters/lady-aki.mem:78`,
+  verbatim): "Red and white shrine workwear. Silksteel ritual robe layers. Wide-brimmed
+  ''ichimegasa'' with ''uchikatsugi-style veil''. Shrine bells, ofuda, spinneret tools, and soft
+  faerie glamour." Fuller concept package (true body, glamour, threshold-reveal, palette, written
+  negative directions) in `elyncia/Shattered Isles/Lady_Aki_Concept_Art_Package_v1.md`.
+* ''Ichi'' (same meme, :387): "A compact roadside shrine / hokora rides on six to eight articulated
+  strandbeest legs. Silk-and-mycelium sails unfurl from the roof. A Mother Spore fairy ring glows
+  at the base. A towed armored wagon carries cargo." Symbiosis law: "Aki wears Ichi; Aki acts,
+  Ichi perceives and communicates."
+* ''The Lindwyrm'' carries no body canon anywhere — the history shelf holds only the jade
+  gelatinous saurian (an Act-II resonance artifact, emphatically not her) and the WyrmFile's
+  disposition lines. Her cabaret render makes first canon; see #negentropy item 2.
+* The `@sdm` bag carries epithets only ("Skin-Close Barrier," "the Patient Mule") — flavor lines,
+  no figures.
+
+<<~/ahu >>
+
+<<~ ahu #witness-heritage >>
+
+!! Spirit Witness ~ the Fae Casting Bench (FTLS ch03)
+
+Glimmer-Count's hand-back, ''verbatim'' — the full heritage inventory: 34 fae heritages, the four flagged casts (changeling · dragon-kin · gorgonne · prismatic elf), and the cabaret bench in three tiers.
+
+```text
+**Active Voice: Lares (Tasked Spirit)** — no fuller Voice-house roster reached me in this task packet; I stood the scout under the Lares seed only. Flagging that as a gap rather than inventing names.
+
+---
+
+## 1. READ COMPLETENESS
+
+| File | Status |
+|---|---|
+| `/home/joshu/Synthetic-Dream-Machine/ftls/Flying_Triremes_and_Laser_Swords_03_OSR_Heritage_Trait.md` | **COMPLETE** — all 1,629 lines read (catalogue L89–342, heritages L344–1629) |
+| `/home/joshu/Synthetic-Dream-Machine/ftls/Flying_Triremes_and_Laser_Swords_04_Recon_Salvage_Secrets.md` | **STUB read** — headings + keyword grep only. **VERDICT: effectively zero heritage/fae content.** Only 3 incidental hits: L429 "Brimstone Fae Mining Kit" (toolkit name), L694 "Fairy's Death (OGA)" `[illegal][glass][anti-fae][concealed]` knife, L14 company framing. Chapter is RSS logistics/salvage/recipes. Not usable for casting. |
+| Other ftls chapters | grep-only, line refs below |
+
+---
+
+## 2. MECHANICAL SHAPE (applies to every heritage)
+
+`03:8–26` — Heritage is **free at creation, occupies no Trait slot**. Ranks: **Skilled = 3 effects / +3 heritage lore; Expert = 4 / +6; Master = 5 / +9** (`03:10–14`, `03:81`). Effects drawn from the Heritage Effect Catalogue. "Mark your Heritage" is the activation currency; unmark by 1 watch rest, 10 min + 1 Life, or 1 action + 1 Ability damage (`03:26`).
+
+**Setting rule that makes ALL of this fae — quote, `03:1014`:**
+> "In the Vastlands, all folk are human at heart; in Elyncia, *all human folk are faerie‑folk*."
+
+And `03:85`: *"Heritages are not factions... Everyone has someone in their family or community who expresses the faerie magic differently."*
+
+---
+
+## 3. SPECIFICALLY FLAGGED (parent's four asks)
+
+### CHANGELING (PC) — `03:1028`
+**Not a standalone heritage. A Human VARIANT.**
+Base **Human** (`03:1005–1030`): Skilled = Jack of All Trades + Bonus Background (counts as a Heritage effect, not a Trait slot) + Choose one. Expert = Lucky. Master = Affinity – Hearth & Ways.
+> **Changeling:** "Humans born closer to the Fae Courts, they weave illusion and dream‑logic with ease. Skilled: Choose **Affinity – Illusion • Light • Void** or **Affinity – Chaos • Dream • Shadow**." (`03:1028`)
+
+Visual: no dedicated changeling appearance line. Human appearance is `03:1020`: *"Infinite variation, from market‑hardened wanderers to velvet‑court diplomats."* Culture line worth mining for a youth PC — `03:1023`: *"families that host **pixie fosterlings**"* — the fosterling motif is the textual hook for a changeling-human youth.
+Ch10 Human hooks (`10:568–577`) include `10:571` a Human diplomat making PCs pose as her "fae retainers" at a **voidjammer banquet** — near-exact cabaret-adjacent seed.
+
+### DRACONIC / DRAGON-KIN (Lindwyrm arrival) — `03:619–648`
+**Dragonborn.** Skilled: Affinity (choose tag-set) + Armoured Body + one (common: Spirited / Fly / Climb / Inner Fire). Expert: **Chimeric Body**. Master: Affinity – Serpent Energy.
+> `03:640` — **"The Dragonborn clans practice the Draconic lineage of Chimeric Body, shifting from draconic humanoids to six limbed mythic beasts."** ← this is the exact mechanic for "arrives as humanoid dragon-kin." Common chimeric effects: Aggressive, Fly/Hover, Solid, Size–Large.
+
+Visual, `03:632`: *"scales of chroma-sheen or hammered metal; ember eyes; some bear wing-stubs, some spined crests."*
+Culture, `03:628–635`: honor codes and hoard-rites "older than the Bronze Sky"; *"debate beneath obsidian arches, measure worth in gifts of metals and glass"*; hoards as community banks (take one gem, repay two); taboo: break no contracted word. Names: Klauthrax, Aurix-Vara, Nalkyria, Vezzen-Steel, Jivali-Ember.
+**Four sub-lineages** (`03:641–648`): **Chromatic** (Red/Blue/Green/Black/White — mercurial raiders, lightning duels, sky-games, breath weapons, usually take Fly); **Metallic** (Gold/Silver/Bronze/Copper — philosophic wardens, hoards of treaties, Hover); **Gem** (Amethyst/Emerald/Sapphire/Onyx — *"Psychic crystal-singers and void duelists; luminous mirrors of thought & light"*, Illusion•Light•Void); **Dream** (Dream/Octarine/Noosphere/Shadow — *"Rare cosmic brood; speak in stellar equations and lost riddles, practices shadow-fire magics"*).
+
+Lindwyrm-specific canon lives **outside** ch03 — `01:179`: *"The Lindwyrm, Patron of New Delos"* is classed as an **embodied immortal / demi-god / durable avatar-being**, "closer to this category than to the vast distributed condition of most gods," and such beings "may rule cities, command fleets, bargain face-to-face, or appear repeatedly in the same body." **This is the only Lindwyrm text in the ftls corpus.**
+Also `05:837` **Faerie Court ↔ Dragon alignment table** (Rod of the Wyrm): **Seelie/Gold**, **Ouroborous/Blue**, **Unseelie/Black** — a canonical three-Court dragon taxonomy usable for Lindwyrm court-alignment color at a Delos scene.
+
+### GORGON / MEDUSA-KIN (Gorgoness captain + crew) — `03:1286`
+**Not standalone. A Plane Touched theme: "🐍 Gorgonne."**
+Base **Plane Touched** (`03:1250–1288`): Skilled = Lucky + choose two from {Spirited, Affinity, Aggressive ("hair‑serpents snap, halo‑wings buffet, strange limbs lash"), Alternate Movement, Armoured Body ("bone‑plates, shard‑halos, void‑aura"), Chimeric Body, Darkvision, Polybody ("you are a swarm"), Psi‑Speech, Size}. Expert = one more/upgrade. Master = **Paradox Die** (mark Heritage, add d6 to any roll, then Danger Roll vs the final Paradox modifier — reality glitches).
+> **Gorgonne, `03:1286`:** "Skilled: Choose **Affinity – Serpent Energy**; your **hair‑serpents are spirit‑familiars** and your clan teaches the ***Serpent's Gaze*** power (heritage power, **50% discount**) which you can overcharge for strange effects. Choose one other effect. Expert: the spirit-serpent folk often choose **Chimeric Form** or **Inspiration** and collect other secret powers."
+
+Critical casting note — the base Plane Touched appearance line **already names a gorgon captain**, `03:1273`:
+> "Varies wildly: statuesque beings with radiant cracks, drifting silhouettes with masks for faces, **captains with serpents for braids**, and void‑fragments stitched into cloaks."
+
+Plus `03:1269`: *"They might wear serpent‑spirits in their hair, wear masks that whisper truths in moonlight, or leak halos of unsteady light. When they speak, glass might frost or flowers might bloom in desert sand."* Names: Whispercoil, Foxfire-on-the-Sea, Vox Tenebris, Glass-Wing, Umbral-Dawn, Parallax. Culture (`03:1277`): *"Found wherever the unreal bleeds into the real: on **skyjammer decks**, in labyrinthine Courts, beneath starlit bridges."*
+Ch10 hooks: `10:651` *"The Snake in Her Hair — One of a Gorgonne's serpent‑spirits went rogue and now whispers treason into strangers' dreams."* `10:653` *"Impossible Port — A captain's skyjammer moors at a harbor that doesn't exist; the PCs are invited aboard."*
+**Note:** ch06 gorgon hits (`06:7153, 7168, 7212, 7227, 8852`) are all **petrification-breath monster rules**, not heritage — do not use for the Gorgoness captain.
+
+### PRISMATIC / CHROMATIC ELF (PC) — two candidate sources, they are DIFFERENT things
+
+**(a) Spectrum Satrap** — `03:1449–1474`. The literal prismatic heritage.
+Skilled: Armoured Body ×1 + choose two (common: Spirited / **Affinity – Illusion•Light•Void** / Psi‑Speech).
+Expert: **Blinding Brilliance** — mark Heritage, flare with impossible light (20 yd); all Save vs Aura; hostiles who fail blinded 1d6 rounds (roll once for all); allies who succeed get Advantage on next roll.
+Master: **Prismatic Ascension** — mark Heritage, become a coherent lightform for one watch (4h): fly at double Speed, slip through keyhole-wide gaps, +9 Defense (mundane attacks pass through), Life worth double power for [illusion]/[light]/[void] powers.
+> Description `03:1461`: "Prismatic 'para‑humans' from the **Violet Steppe and the Black City's shimmering palaces**... **Bright-colored suits cover their bodies, glass helmets conceal their heads.** Their bodies refract and glow, shifting through hues like diplomatic flags. They are emissaries, tyrants, and mystics all at once — and when they decide to become pure light, entire rooms obey."
+> Appearance `03:1465`: "Skin and carapace shimmer from **mother‑of‑pearl to oil‑slick black**; **eyes like cut gems**."
+> Culture `03:1468`: "**Prism‑banquets where wine is color‑coded for emotion**; courts that outlaw 'dull' colors; **holy duels of projected light‑forms**." ← strongest single cabaret-scene line in the whole chapter.
+Names: Lazul, Corind, Opalin, Saphra, Prisme, Aurion.
+Variants: **Chroma Courtier** (*"diplomats whose mirror-helms shimmer with etiquette glyphs; they duel with cutting compliments and projected light-forms, tuning their hues to sway crowds and unnerve rivals"* — swap Armoured×2 for Armoured + Spirited); **Umbral Satrap** (*"Eclipse-born shadow envoys who trade in forgotten memories, and command shadows to stitch corridors between sleeping courts"* — swap Illusion•Light•Void for Chaos•Dream•Shadow).
+
+**(b) Elf** — `03:684–706`. Not described as prismatic, but Illusion includes prismatic glamour.
+Skilled: Quick + Darkvision + Lucky. Expert: **Affinity – Illusion • Light • Void**. Master: Psi‑Speech.
+Relevant: `03:127` Affinity Illusion•Light•Void text — *"Weave fae-charms and reality edits, bend radiance and reflection, or veil yourself in void-glamours. **Illusion includes prismatic glamour** and the push-pull of reality/unreality."* ← this is the rules text that licenses an Elf PC reading as "prismatic."
+> Description `03:692`: "The **Elf** clans are paradoxes draped in velvet—envoys of unthinkable Courts, darlings of decadence, and half‑willing hosts to the echoes of distant stars. They walk Elyncia's halls and void‑bridges with a **glamour that is both invitation and warning**. To mortals, they are dazzling; to older beings, they are dutiful children of cruel patrons."
+> Appearance `03:696`: "**Angular beauty, void‑shadowed eyes, hair like moonlit ink or starlit fire.**"
+> Culture `03:699`: "**Moon‑wine feasts under mirrored sky‑domes**, ritual duels fought as much with etiquette as with blades, **salons where voidjammer pilots trade stories with dream‑witches**." ← second-strongest cabaret line.
+Voice `03:698`: *"voices like honey poured through crystal"*; debts measured in centuries.
+Variants: Void Envoy (Master: swap Psi‑Speech → Armoured Body); **Glass‑Mask Courtier** (*"Endlessly adaptable, trained in mortal manners and void‑court graces alike"*; Master: Psi‑Speech → Jack of All Trades); **Shadow Elves** (*"More comfortable in the shadows and dream-realms than the bright light of the crystal ballrooms"*; Expert: Illusion•Light•Void → Chaos•Dream•Shadow).
+
+**Recommendation for the parent:** a "prismatic elf PC" is best built as **Elf + Affinity Illusion•Light•Void** (per `03:127`), with **Spectrum Satrap** reserved for a separate NPC caste — the Satraps are helmeted/suited para-humans, not elves.
+
+---
+
+## 4. CABARET-STAFF / PERFORMER CANDIDATES (winged, glowing, shapeshifting, musical)
+
+Ranked by fit, all from ch03.
+
+**TIER 1 — built for this scene**
+
+- **Faun Folk** `03:714–735` — *hook line in the ToC (`03:46`) is literally "Festival guides & hosts."* Skilled: Fortunate (+1 CHA, +1 Ward) + Quick + Nimble. Expert: Affinity – Hearth & Ways. Master: **Inspiration** (aura: allies within (Level+CHA)×10 yd get +1 all action rolls and +1 Morale). Description `03:722`: *"Hoof-light children of vine and song... live for the pulse of festival drums... Their laughter carries the scent of wild honey; their **horns curl like question marks that dare mortals to dance**."* Appearance `03:726`: *"Lean bodies, goat or deer legs, small curling horns, **freckles like dappled sunlight**; garlands of ivy, bells, or **cork-wood pipes**."* Culture: wine rites "where promises ferment," masquerade hunts, **taboo on leaving a guest un-toasted**. Backgrounds: Vineyard Skald (Envoy), Wandering Bard (Sorcery). Variants: Forest Piper (Pan-follower, Masks & Totems), Mountain Satyr.
+- **Spectrum Satrap** — see §3(b) above. Prism-banquets, color-coded wine, projected light-form duels. Perfect for the marquee act.
+- **Elf** — see §3(b). Salons, moon-wine, mirrored sky-domes. Perfect for hosts/patrons.
+- **Cat Lord** `03:555–576` — ToC hook `03:41`: *"**Velvet salon tyrants**."* Skilled: Quick + Size–Small + Psi‑Speech. Expert: Lucky. Master: Affinity – Serpent Energy. Description `03:563`: *"sinuous aristocrats of the strange — felines with weird traits like **living serpents as tails** who **rule tea‑houses and voidjammer lounges** with the same languid grace they stalk alleyways... whispers say they are the priests of the Purple God(dess), or the velvet‑pawed enforcers of some deeper Court."* Appearance `03:567`: *"Mythic cats with **jewel‑bright eyes**, prehensile paws, and sometimes a **serpent as a tail coiled like jewelry**."* Culture `03:570`: *"**Sunlit salons where deals are made over saucers of narcotic coffee**; charm‑sigils woven into rugs; **taboos against ignoring a Cat Lord's invitation (or worse — refusing it)**."* Voice: *"purrs that turn into commands."* Names: Brighteyes, Sleekums, Mazzo, Lady Elegant, Twinklestar, Mew‑Mew. **This is your house management / patron-tyrant tier.**
+- **Quarterling – Pixie** `03:1349` — **winged staff.** *"Winged agents of chaos and wonder—equal parts living prank, and trickster‑courtier. **Wings from dragonfly‑glass to neon‑etched gossamer; clothes stitched from leaves, circuitry, or salvaged glamour.** Some flit between tree branches and teacups; **others ride data‑streams and voidjammer wake‑tides.**"* Skilled: swap Armoured Body → **Alternate Movement – Fly**. Expert: swap Inspiration → Illusion•Light•Void. Base Quarterling `03:1326–1341`: Armoured Body + Lucky + Size–Small; Expert Inspiration; Master Chaos•Dream•Shadow. Appearance `03:1338`: *"Small (3–4 ft) humanoids: fox‑ears, mossy tufts, soot‑smudged faces, blood‑streaked caps, greasy toolbelts, or **faint inner glow**."* Voice `03:1340`: *"Yapping, howling, shrill; even a whisper sounds like 'OI!'"* — good for barbacks/runners, not headliners. Other variants: Brownie, Spriggan/Boggart, Kobold, Red Cap, Gremlin/Imp (**Jinx** power, `03:1357`), **Gnome** (*"Curious void‑touched tinkers, **glowing from within**"*, Fly or Inner Fire).
+
+**TIER 2 — glow / wing / shapeshift material**
+
+- **Glow Kin (Fungi Folk)** `03:831–852` — bioluminescent, ToC hook *"Sporelight diplomats."* Appearance `03:843`: *"**Soft glow along gills and freckles; cap-crowns like mantles; filament 'hair'; spore halos in cold air; earthy perfumes that shift with mood.**"* Skilled: Spirited + Affinity Fungus&Spore + Psi‑Speech. Master: Chaos•Dream•Shadow. Culture: **fermentation banquets**, spore-communion rites. Psi‑Speech "carries taste/scent metaphors" — excellent for a non-verbal performer. Slime Kin variant: Amorphous Body, *"can choose to wear clothing, or seep through keyholes, **who split to multitask** and rejoin."*
+- **Chimeric Folk (Centaur, Mythic, Shifter)** `03:584–611` — the shapeshifter/aerialist bench. Skilled: Affinity + **Chimeric Body** + one. Expert: **Chimeric Legacy** (all chimeric forms gain +1 effect, Speed +6 yd, Advantage vs shove/knockdown). Appearance `03:598`: *"Human-passing silhouettes with **evident tells: antlers, feathering along forearms, glossy chitin, leonine manes, lashing tails.**"* Voices *"carry drum-cadence, birdsong, or mask-speech."* **Mythic Families** `03:609`: **Harpy/Vulture Folk (Gale-Singers)**, Kirin/Qilin (Dream-Walker), Shedu/Lamassu (Threshold-Keeper), **Manticore (Court-Predator)**, **Sphinx (Riddle-Bearer)**, Gryphon/Hippogriff (Sky-Keeper). Culture: **mask-dances**, barding rites. *"a harpy's wind-oaths, a fox-spirit's mask-dance—none are taught lightly."* — **Gale-Singer harpies are your winged chorus; Sphinx is your riddling MC.**
+- **Bird Folk** `03:467–487` — **Fly at Skilled.** Appearance `03:479`: *"Plumage varies by clan: **sunset crimsons, storm-cloud greys, iridescent midnight blues.** Lean, hollow-boned frames; **bright, ringed eyes**."* Expert: Affinity – **Air • Song • Storm**. Master: Chimeric Body. *"voices whistle and click like distant gulls."* Backgrounds include Spirit‑Mask Bard (Sorcery). Aeries *"woven of cloud-silk."*
+- **Bat Folk** `03:409–430` — **Fly + Small at Skilled**, nocturnal. Appearance `03:421`: *"Slender bodies, oversized ears, dusk-coloured fur, **eyes that catch stray gleams like polished stone**."* **Echo-Singer variant** (`03:430`): *"Mystics who weave voices into ritual. Expert: Swap Nimble for **Inspiration**."* Master: Air•Song•Storm. Wing-tattoos mark coming of age. **Best fit for a torch-singer / house band.**
+- **Frog Folk** `03:771–794` — **mood-bioluminescence + layered harmonic voice.** Appearance `03:783`: *"Glossy-skinned humanoids ranging from **pale mint to deep obsidian green**. Their **eyes reflect moonlight like still ponds**. **Skin may pulse with bioluminescence during strong emotions or ritual states.**"* Voice `03:785`: *"guttural bass tones, shimmering whistles, and **harmonic vibrations used in layered conversation. Silence is a language, too.**"* — a Frog Folk chorus is mechanically and visually distinct. "reed-flute storytellers."
+- **Undead (Post Mortal) – Mirth‑Touched Shade** `03:1625` — *"Your ever-changing guise hides the truth within."* Skilled: Spirited + Affinity Masks & Totems. Base appearance `03:1616`: *"**lantern-glow in the chest or eyes**, pallid skin with bone glints, funerary inks and warding knots, reliquary charms, and tidy repairwork where life once failed."* Voices *"dry-echoed, wind-through-hollow, or **lantern-soft**."* Culture: *"they trade **passage songs** for true names."* — glowing, shapeshifting, musical, all three.
+- **Plane Touched – Meta‑Angel** `03:1287` — Skilled: Size (Large or Small) + Affinity Illusion•Light•Void; *"you carry radiance, celestial edicts, or the stillness of perfect symmetry."* Expert: Chimeric Body + **Fly** + **Inspiration** (standing aura). **Winged, glowing, aura-buffing — headliner-grade.**
+- **Porcelain Prince** `03:1296–1318` — decadent, masked, multi-bodied. `03:1312`: *"Ceremonial maskings, body labs that grow new drones, **decadent soirées where five mouths dine in unison and one body might not leave intact.**"* Appearance `03:1308`: *"Multiple identical bodies in **porcelain masks and lacquered armor**; some **crack to show the pale, patchworked flesh beneath.**"* Expert gives drones *"the 'ceramic aegis' look — **visible cracks and kintsugi‑style repairs that make them eerily beautiful.**"* — **a Polybody chorus line is one performer in Lv+2 bodies. Mechanically exact for synchronized dancers.**
+- **Serpent Folk** `03:1420–1441` — *"Jade, obsidian, or bronze scales; slit-pupil eyes; **forked tongues that flicker with blue flame**; some bear ornate hood-crests or **cyber-gold implants**."* Cobra Oracle variant: *"Hood patterns hypnotise; royal courts pay for their dream-testimony."* Culture: *"**night markets trade dream-venom vials**." Pairs with the Gorgoness crew.
+
+**TIER 3 — background/patron color**
+
+Troll `03:1552` (8–12 ft, *"skin from storm‑blue to moss‑grey, sometimes veined with **glowing pebbles**"*, blood-crystal magitech scars, faerie toll-keepers) · Goblin `03:898–905` (*"skin like tarnished copper or sea-glass; over-large ears and **glitter-ink tattoos that rewrite themselves when nobody looks**"*; **Crystal Court Goblin** `03:910` *"serve the Labyrinth's elusive fae lord, juggling glass spheres and rewriting hallways"* — jugglers) · Hobgoblin `03:984–991` (*"**march in riotous colours, turning drill into festival**"*, lacquer masks, banner dyes, **nightly drill-dances** — precision dance troupe / door security) · Halfling `03:956` (*"trooping dancers under the moon"*, lantern feasts in hollow hills) · Spider Folk `03:1494` (*"multi-limbed silhouettes, glossy carapace over humanoid torso, **human faces with ocular clusters shimmering like dew**"*; silk aerialists — Affinity Silk & Web `03:197` *"Spin lines, sheets, **glamours**, and snares from web-silk... **elegant pranks**"*) · Mer Folk `03:1136` (*"slick skin veined with **opal scales**; ripple-fringed ears; **coral-grown jewelry**; **eyes like moonlit surf**"*) · Rabbit Folk – **Cryptid Hare (Pooka)** `03:1388` (*"**Moon-outlined silhouettes glimpsed only in rain or neon backlighting**; they tip nonexistent hats, nudge fate with gentle asides, and leave you laughing at jokes no one else heard"* — Illusion•Light•Void) · Nerthurian **Dryad** `03:1182` (*"sapwood bodies carry sunlight and birdsong"*, Power from the Sun) · Awakened Vome `03:387` (*"shells range from **sleek photonic composites to insectile chitin lattices; their movements sync to an inaudible beat**"* — literally dance to an unheard rhythm) · Ant Folk `03:360` (*"mottled carapace colours and **glowing body paint**"*).
+
+---
+
+## 5. VISUAL-RENDERING HOOKS — highest-density quotable lines
+
+Copy-ready for prompt building (all `03:` unless noted):
+
+- **L1461** Satrap: "Bright-colored suits cover their bodies, glass helmets conceal their heads. Their bodies refract and glow, shifting through hues like diplomatic flags."
+- **L1465** Satrap: "Skin and carapace shimmer from mother-of-pearl to oil-slick black; eyes like cut gems."
+- **L1468** Satrap: "Prism-banquets where wine is color-coded for emotion; courts that outlaw 'dull' colors; holy duels of projected light-forms."
+- **L696** Elf: "Angular beauty, void-shadowed eyes, hair like moonlit ink or starlit fire."
+- **L699** Elf: "Moon-wine feasts under mirrored sky-domes... salons where voidjammer pilots trade stories with dream-witches."
+- **L1273** Plane Touched: "statuesque beings with radiant cracks, drifting silhouettes with masks for faces, captains with serpents for braids, and void-fragments stitched into cloaks."
+- **L1269** Plane Touched: "leak halos of unsteady light. When they speak, glass might frost or flowers might bloom in desert sand."
+- **L632** Dragonborn: "scales of chroma-sheen or hammered metal; ember eyes; some bear wing-stubs, some spined crests."
+- **L640** Dragonborn: "shifting from draconic humanoids to six limbed mythic beasts."
+- **L567** Cat Lord: "Mythic cats with jewel-bright eyes, prehensile paws, and sometimes a serpent as a tail coiled like jewelry."
+- **L726** Faun: "goat or deer legs, small curling horns, freckles like dappled sunlight; garlands of ivy, bells, or cork-wood pipes."
+- **L1349** Pixie: "Wings from dragonfly-glass to neon-etched gossamer; clothes stitched from leaves, circuitry, or salvaged glamour."
+- **L843** Glow Kin: "Soft glow along gills and freckles; cap-crowns like mantles; filament 'hair'; spore halos in cold air."
+- **L783** Frog Folk: "Skin may pulse with bioluminescence during strong emotions or ritual states."
+- **L1308/1299** Porcelain Prince: "porcelain masks and lacquered armor; some crack to show the pale, patchworked flesh beneath" / "visible cracks and kintsugi-style repairs that make them eerily beautiful."
+- **L1616** Undead: "lantern-glow in the chest or eyes, pallid skin with bone glints, funerary inks and warding knots."
+- **L598** Chimeric Folk: "Human-passing silhouettes with evident tells: antlers, feathering along forearms, glossy chitin, leonine manes, lashing tails."
+- **L479** Bird Folk: "sunset crimsons, storm-cloud greys, iridescent midnight blues."
+- **L1494** Spider Folk: "human faces with ocular clusters shimmering like dew."
+- **L902** Goblin: "glitter-ink tattoos that rewrite themselves when nobody looks."
+- **L1556** Troll: "skin from storm-blue to moss-grey, sometimes veined with glowing pebbles."
+
+**Setting-lighting note:** the recurring venue vocabulary across ch03 is *salon / soirée / banquet / masque / mirrored sky-dome / voidjammer lounge / crystal ballroom* (`03:563, 570, 699, 706, 1312, 1468`). "Crystal ballrooms" appears at `03:706` (Shadow Elves defined against them). That vocabulary set is the house style for a High Delos cabaret.
+
+---
+
+## 6. LOCATION / DELOS CONTEXT (thin — flagging the gap)
+
+Ch03 contains **zero** Delos references. Corpus-wide, Delos appears only at:
+- `/home/joshu/Synthetic-Dream-Machine/ftls/Flying_Triremes_and_Laser_Swords_01_Title_Introduction.md:179` — Lindwyrm, Patron of New Delos (embodied immortal class)
+- `.../01_Title_Introduction.md:216` — "Hexagram Voss, Floating Librarians of Mu - **High Delos Archive**"
+- `/home/joshu/Synthetic-Dream-Machine/ftls/Flying_Triremes_and_Laser_Swords_10_Appendix_Null_Referee_Resources.md:489` — "a 'soulbound lash' said to hold Rakshasa's anger—has been unearthed by scavengers in **Low Delos**" (establishes a **High/Low Delos** vertical split)
+- `.../10:551` — "A **faerie-touched tavern** on the edge of the Violet Grasslands serves stew so good it heals **burdens**—for a price." (closest venue analogue in the corpus)
+
+No cabaret, no High Delos venue description exists in ftls. If the parent needs Delos setting detail, it must come from elsewhere in `/home/joshu/Synthetic-Dream-Machine/` (I did not search outside `ftls/`).
+
+---
+
+Glimmer-Count: Lares (Tasked Spirit) -> Lares (returning; libation dish refreshed, incense still standing)
+Thread: FTLS heritage/fae casting inventory
+Finding: Ch03 read COMPLETE — 34 heritages + full effect catalogue, every one fae by the `03:1014` rule. Ch04 is a genuine null for this purpose (RSS logistics; 3 incidental hits). All four flagged asks resolve, but three of them resolve as **variants, not standalone heritages**: Changeling = Human variant `03:1028`; Gorgoness = Plane Touched theme `03:1286` (and base Plane Touched appearance already names "captains with serpents for braids," `03:1273`); prismatic elf splits into two distinct builds — Elf+Illusion•Light•Void (`03:684`, licensed by `03:127` "Illusion includes prismatic glamour") vs. the helmeted Spectrum Satrap caste (`03:1449`). Only dragon-kin lands as a full heritage: Dragonborn `03:619`, with `03:640` giving the exact humanoid→six-limbed-wyrm transform for the Lindwyrm's arrival. Cabaret bench is deep — Faun (ToC hook is literally "Festival guides & hosts"), Cat Lord (velvet salon tyrants, voidjammer lounges), Spectrum Satrap (prism-banquets, projected light-form duels), Pixie, Bat Folk Echo-Singer, Glow Kin, Mythic Chimeric harpy Gale-Singers, and Porcelain Prince (Polybody = a synchronized chorus line that is one person). Gap flagged rather than papered over: **High Delos itself has no venue text anywhere in ftls** — only 4 passing mentions, and the Lindwyrm has exactly one line of canon (`01:179`).
+```
+
+<<~/ahu >>
+
+<<~ ahu #witness-elyncia >>
+
+!! Spirit Witness ~ the Elyncia Visual Canon
+
+Lantern-Skim's hand-back, ''verbatim'' — Delos geography canon, the Spice Quarter interior, the Aki/Ichi packages, world-dress vocabulary, the style bible as render law, and the honest gap list.
+
+```text
+Lantern-Skim: Lares (Tasked Spirit) -> ?
+Thread: elyncia visual canon harvest
+Finding: The tree carries no High Delos *interior* venue text and zero Dionysian/cabaret text — but the New Delos Spice Quarter compitale passage (Elyncia_04, lines 84–98) is a full specification-grade interior render, and it is the single best transferable substrate for an intimate maze-Inn interior. Everything below is quotable canon with refs.
+
+**TREE (18 .md/.txt of 103 files; rest = Caverns of Thracia maps/images/zip)**
+`/home/joshu/Synthetic-Dream-Machine/elyncia/` — `Elyncia_01_A_Broken_World.md` (739L), `Elyncia_02_The_Lares_DreamNet.md` (256L), `Elyncia_03_Daemons_and_the_Metaphysics_of_Play.md` (169L), `Elyncia_04_Style_Base_Layer.md` (70L), `Elyncia_04_The_Referee_Noosphere_Guide.md` (786L), `package.json`, `images/Elyncia_overworld_FLAT.png`, `Lares/` (png + chat export 62L), `Shattered Isles/` (8 files: Lady_Aki ×4, Faerie_Ring_Strandbeest_Shrine_Sheet, Powered_Symbiote_Trait_and_Ichi_Construct_Golem, Sidebar_Alpha_Playtest…, Sidebar_Lindwyrm…), `New Delos/NPCs/Captain_Melantha_Vex.md` (264L — the ONLY file under `New Delos/`), `Neo-Thracia/` (3 worksheets + NPCs/Rask + two Caverns dirs).
+
+---
+
+## 1. HIGH DELOS / NEW DELOS
+
+**City-scale (all the Delos geography canon there is):**
+- `Elyncia_01_A_Broken_World.md:135` — "he levitates the holy sites of Delos and the most populated areas of the surrounding archipelago into a new 'flying' city of **High Delos**. The craters below expose the new megadungeon mouth of Low Delos. **Mana lifts near the major Lares landmarks allow travel between the ports of High Delos and Low Delos.**" (← the lifts, sole canon line; "mana lifts," sited at Lares landmarks)
+- `Elyncia_01:329` — "Low-sea Aegean archipelago with **rocky coastlines, olive-grove terraces, volcanic islands, and crystal-clear harbors**; High Delos is a floating city suspended over the megadungeon mouth of Low Delos"
+- `Elyncia_01:328` — origin: "Aegean Sea islands during an Ice Age low-sea period; **Delos and Thira (Santorini)** with mythic overlays from pre-Hellenic sacred geographies"
+- `Elyncia_01:331/334/335` — "the Lindwyrm's flying capital, seat of the League of Free Cities"; "powerful merchant families, High Delos naval guilds"; "Blend of **classical Greek maritime culture**, Delian League-style politics, and **high-magic naval engineering**"
+- `Elyncia_01:337` — "Archive- and Market-Lares dominate"
+- `Elyncia_01:163` — "the **Orrery of High Delos**" (a named High Delos interior/instrument — unrendered elsewhere)
+- `Elyncia_04:13` and `:786` — epigraph attribution "**Hexagram Voss, Floating Librarians of Mu — High Delos Archive**"
+- `Elyncia_02:253` — "one dry old Lares node in the **back streets of High Delos**"
+- `Elyncia_02:183` — "`DustBroom(Shrine-Keeper)` — a cleaning-and-maintenance spirit retained by a **New Delos crossroads lararium**"
+
+**Spice Quarter market-feed interior — the harvest (Elyncia_04, `A Worked Session: the Spice Quarter Compitale`):**
+- `:88` — "wedge-shaped room pressed between a **textile merchant and a tea-seller**, accessible from the crossroads by a **low archway**. Above the lintel: a **carved orichalcum figure, small and worn, one arm raised, holding a shallow dish**. Someone has recently left a **smear of cardamom oil on the dish's rim**."
+- `:90` — "**blood-red plaster climbs the walls floor to ceiling** — decades of accumulated frescoes layered over older frescoes, visible where the plaster has flaked. Dominant images: **two serpents approaching a central altar from opposite sides, neither quite meeting**; a **peacock on the south wall with its tail spread into the corner**; something **dog-headed on the east wall**; **painted eggs nested in painted greenery** along the north shelf. The fresco style runs **illusionistic** — the painted plants continue into real space, and **in good light the eye loses where the wall begins**." (← Pompeian Second-Style; strongest single V8 line in the corpus)
+- `:92` — "offering shelf runs the full length of the north wall: **brass incense burners in three sizes**, small dishes of **figs and pine nuts**, a dried flower, **a coin with a hole drilled through it**, a miniature clay figure"
+- `:94` — "a small **pinax to Eris Discordia**. The district collective does not dust it. It dusts itself."
+- `:96` — "**three padded hardware alcoves east wall, curtained**, equipped with **Noosphere interface rigs of varying age**. Two **low tables with cushions**. One **long worn couch near the door** that has clearly been slept on… A small **counter near the back** where MUG-SMOKE maintains the beverage situation."
+- `:98` — "The Realm portal — a **standing orichalcum-inlaid archway** in the rear corner, **slightly taller than a person, warm to the touch — pulses very slowly, like breathing.**" (also `:329` "It breathes.")
+- `:250` — "Static quality: **cinnamon, cardamom, old copper**"; `:586` — "cinnamon, cardamom, old copper, **faint ozone from the east road**"
+- `:122` — "Affinity: **Fire, Spice (+)**"; `:271` — "chai hot, coffee hotter… smells like **pine resin and starlight**"; "**foam omens**… today's omen is a small spiral"
+- `:327` — "a **scorch mark on the peacock fresco** that we have simply decided is decorative now"; `:371` — "the **third serpent in the south fresco has been repositioning between visits**"
+- `:546` — "`<<~ scene ~ it was in a slightly different position >>`" (east-wall figure moves when unwatched)
+- Adjacent district-dressing nouns, usable as maze-Inn corridor signage: **Weavers' District, Glassblowers' Quarter, Undermarket passage behind the Cistern Wall, Outer Market, warehouse district near the East Gate, northern crossroads** (`:285`, `:336`, `:338`, `:373`)
+- Streamer board (venue-screen material) `:488–523` — "**AMBER SEASON DAY 47**"; VELVET-HORN | New Delos | 14k followers; THE QUIET TABLE | New Delos local | 2k; CINDER-JACK | Itinerant | 8k
+- Shrine-tier note that legitimizes a *venue-scale* node: `Elyncia_02:145` — "**Crossroads and Marketplace lararia** — District-scale nodes at roads, market squares… fed by collective offering at public feast days"
+
+**GAP (honest):** no text anywhere for a High Delos inn, cabaret, stage, taproom, brothel, theater, or street market *on the sky-island itself*. The market feed is New Delos surface-city, not High Delos. "cabaret" 0 hits; "Dionys*" 0 hits; "tavern" appears only as Neo-Thracian rumor-table apparatus. Sky-island *visual* canon exists only for Verdant Coil / Broken Isles (`Elyncia_01:297`, `:532` — "rooted rock masses inhabited by insect fae clans, casting shifting shadows on the seas below"), which can be borrowed for High Delos silhouette but is not Delos canon.
+
+---
+
+## 2. CHARACTER VISUAL CANON
+
+**Lady Aki** (`Shattered Isles/Lady_Aki_Concept_Art_Package_v1.md`, `…Character_Sheet_Roadmap.md:19–23, 211–220`, `…Poster_Sheet_Prompt_v1.md:16–18`):
+- True body — `Package:24–29`: "**iridescent fae chitin: violet, seafoam, turquoise, moonlit green**"; "**multiple arms, elegant and ritual-useful rather than monstrous**"; "soft alien face"; "plate-like chitin reads as natural armor"; "spinneret-tool logic at wrists, hips, or back"; "fae, mythic, and sacred rather than horror-grotesque"
+- Public glamour — `Package:36–42`: "**red/white miko work outfit**, **silksteel ritual robe layers**, purple or dark outer travel layer, classic wide-brimmed **ichimegasa** with **uchikatsugi-style veil**"; "extra arms hidden, softened, or visually interpreted as **sleeve-folds / shadow / ribbon**"; "**shrine bells, ofuda, sash tools, spinneret kit, small charms at belt**"
+- Threshold reveal — `Package:49–54`: "veil lifts or tears aside, **chitin catches light**, extra arms anchor silk lines or hold ofuda, bells and ward papers multiply, **silk geometry defines the room**"
+- Palette line (already prompt-shaped) — `Poster_Sheet_Prompt_v1.md:18`: "Mood: **mythpunk, SDM / Vastlands-inspired weird fantasy, shrine-tech, oldtech-magitech, fae glamour**… Palette: **red and white miko robes, purple outer cloth, iridescent chitin, orange mycelium glow, weathered shrine wood/chitin, blue Ephyra glass**"
+- Negative direction — `Package:146–152`: "no spider legs on Ichi, no tall ritual hat, **no hypersexual framing**, no final-production polish, no generic witch hat, no modern sci-fi armor replacing shrine/ashigaru language"
+- Room-entry blocking — `Package:187–192`: "locals first see veiled miko traveler; careful observers notice **too many sleeve-folds**; hostile pressure makes chitin and extra hands appear"
+
+**Ichi** (`Shattered Isles/Powered_Symbiote_Trait_and_Ichi_Construct_Golem.md`):
+- `:115` — "**Compact, practical ashigaru infantry armor. Sergeant's kit** — functional, not decorative. Medium humanoid frame, slightly stocky."
+- `:117` — "**Hexagonal kikko-pattern plates of alchemically treated chitin — iridescent beetle-shell blues and greens** — riveted to **woven mycelium-silk backing**. The joins pulse with faint **orange bioluminescent tracery** where the mycelial symbiont threads through the armor **like living mortar**."
+- `:119` — "Lamellae of **rare petrified hardwood, lacquered in dark amber resin, laced with silk cord in traditional odoshi style**. Where millennia of dormancy cracked the wood, mycelium has filled the gaps with **glowing orange scar-tissue**."
+- `:121` — "Open-faced sergeant's kabuto — forged **orichalcum-alloyed bronze**, modest **shikoro neck guard of chitin lamellae**. The face opening shows **two glowing yellow-orange orbs**."
+- `:123` — worn mode: "**eye-spots migrate upward, settling above Aki's brow like a luminous crest**"
+- `:96/107/159` — "Spore-daemon-armor symbiote"; "broken ashigaru powered armor — a relic of the **Faerie Court Wars, pre-Necrospire**"
+- `:258` — "**Uwa-obi**: thick, often **white**, linen or cotton sash worn over the sarashi"
+
+**Strandbeest-Shrine** (`Shattered Isles/Faerie_Ring_Strandbeest_Shrine_Sheet.md`) — likely out of scope for an interior cabaret, but: `:27` hokora "peaked roof, open front, offering shelf" on articulated legs; `:29` "**Weathered fantascience composite — neither wood nor stone nor metal, but something that reads as all three depending on the light. Orichalcum-inlaid DreamNet glyphs trace the roofline and doorframe, pulsing faintly when the ley-line feed stabilizes.**"; `:33` legs of "**petrified driftwood, chitin segments, mycelium-silk tendons**," "rippling wave-gait," at rest "**folds… like a crab at low tide**"; `:132` "sails unfurl **bioluminescent patterns at night** — mycelium traces glow faintly orange"; `:19` "**Mother Spore's fairy ring glows faintly orange at the shrine's base**"; `:249` "fairy ring **pulses warning orange**"
+
+**Gorgoness crew** — name/role only, NO visual text: `Sidebar_Alpha_Playtest…:37` "**Liv | Gorgonness Captain — bard / sword-mistress, Traveler path**, gorgonne crew / ship pets / personal retainers, small ship"; `:121` "small-ship crew of gorgonnes and pets, Level 1." Also `Elyncia_01:376` "the **Gorgonne Diaspora**." **GAP: no gorgoness appearance canon anywhere.**
+
+**Kai, Prismatic Elf** — `Sidebar_Alpha:35` "**Prismatic Elf Warrior-Ranger Kaiju Stalker** — Hunter/Fighter/Arcane-Archer, **large grimalkin-lynx mount**"; `Package:118–129` "do not let the ranger and Aki merge visually."
+
+**Captain Melantha Vex** (`New Delos/NPCs/Captain_Melantha_Vex.md`) — the ONLY New-Delos-dressed NPC, and the best patron-costume spec in the corpus:
+- `:48–54` — "**Third-Oar Syncsuit — black voidsilk, saffron braid, helm-link filaments**"; "**Shipmetal Shirt — bronze-sun scales etched with tide formulae and permit liturgies**"; "**Navigator's Suitcase** — maps, compasses, **route-prisms, tide rings, little lenses, impossible clockwork**"; "**Ray-Bane Navigators — status spectacles**"; "**Pearl-Daemon**"; "**Ghost-Bone Sabre** — elegant officer's blade"; "**Ego Echo Wandpistol**"
+- `:148` — "**orichalcum mythpunk: Bronze Age prestige lacquered over strange telecom, divine engineering, and impossible logistics**" (← the master world-dress formula; use verbatim as a style clause)
+- `:156` — Pearl-Daemon "a tiny miracle degraded into routine use… from **a warm drop of metal at one ear**"
+- `:104` — "arrives looking **expensive, competent, and entirely documented**"
+
+**Telarus** — referee/operator persona, not a rendered character: `Sidebar_Alpha:11–26`; `Elyncia_01:15–38` (`telarus@dreamdeck-enyalius:~$ lares ritual summon --local-instance`, capabilities "Nexus/Admin; Amorphous Dreams Cabal/Admin"). **No physical description.**
+
+**Lindwyrm** — ruler/patron, described only by function: `Elyncia_02:35` "patron of New Delos, bearing **tons of hoarded orichalcum**"; `Elyncia_01:143` "**The Dragon of New Delos**"; `Elyncia_01:331` "the Lindwyrm's flying capital." **GAP: no body, scale, or color canon for the Lindwyrm.**
+
+---
+
+## 3. WORLD-DRESS VOCABULARY
+
+- **Master tech line** — `Elyncia_01:90`: "**Power-armor crafted from bronze** and other resources… warriors brandish **laser swords that shimmer with arcane energy**. Elyncia's cultures have just prototyped '**flying triremes**' and other magitech vehicles… that **defy gravity with mana-foils**. The **wave-jammers** have existed since before the recent cataclysm, their **mana-foils letting them skim above the waters**. The rediscovery of '**power cores**'… have allowed the factions to evolve these into **sky-jammers** and the very rare and dangerous **void-jammers**."
+- **Magic/tech law** — `Elyncia_01:62`: "'**magitech/oldtech**' and '**fantascience/sorcery**'"; Clarke + Pratchett both postulates.
+- **Orichalcum forms:** inscribed magitech statues at ley-nodes (`Elyncia_01:70`); orichalcum runes on a great Lares statue whose "**stone eyes flared with inner light**" (`Elyncia_02:70`); orichalcum-inlaid archway warm to the touch (`Elyncia_04:98`); orichalcum-alloyed bronze helm (`Powered_Symbiote:121`); "**sandstone shot through with orichalcum veins**" (`Elyncia_01:718`); "**1-Orichalcum Guild certificates**" (`Sidebar_Lindwyrm…:6`); "prismatic ID keys" (`Sidebar_Alpha:140`).
+- **Curse of Iron / rust-blooms** — `Elyncia_01:88`: "un-Named, untended worked iron **rots within weeks wherever a bloom runs**. Iron did not leave the world; it became *precious*… **kept behind immune-charms, tended like a relative**." `:169` "tools flaked, **bridges wept rust**, automata seized mid-stride"; `:175` "a **spore-lichen that grazes on sky-iron**"; `:205` "iron-bound chests… **split and rusted within days**"; `:287` "**comet-iron reefs where wild rust-blight strains nest thickest**"; `:309` "**cedar-resin woods that ward off rust-blight spores** (the lining of every serious iron-chest)"; `:191` "**quarantine rites at the adit mouths, spore-lamps burning, stores lined with Verdant Coil cedar and salt, every ingot tallied and charm-chained**"; `:727` "tokens crafted from **steel-less glass, immune to the Curse of Iron**."
+- **Named iron** — `Elyncia_01:183`: "the naming rites double as **immune-charms**: the oiling, the ash and salt, the **rust-psalms**, the **yearly bathing of a blade like a relative**"; `:187` Brimstone crucible steel and **Named Firearms** "come out clean."
+- **Order of Amaranth** — `Elyncia_01:88` "convoys it under the **sign of the unfading flower**"; `:191` "**anointing cargo with amaranth-oil** and putting blooms down hard when a cache turns"; `:422` "elite shock troops and seekers of ancient ruins"; `:415` "**Amaranth churches** — old ruined cathedrals, far flung monasteries, and **pop-up tent-churches**… Sanctuary offered, **violence kapu**"; `:586` "the **Keepers of the Unfading Seed**"; `:590` "known for **field medicine, sanctuary law, and an unnerving ease around the free-willed dead**." **GAP: no stated Amaranth livery colors** (the flower's own crimson/magenta is inferable, not written).
+- **Shrine dishes / lararium visuals** — `Elyncia_02:11`: "statues of **youthful figures in lararia shrines, each clutching a rhyton (drinking horn) or patera (libation dish), dancing lightly in guardian poses**" (← direct Lares-figure render spec); `:19` "wealthiest households maintained **dedicated shrine-chambers with raised pools and sumptuous decoration**; simpler homes made do with **painted wall panels**"; `:29` "**Roman household shrine, Pompeian fresco art, fae threshold rite, orichalcum inscription** — still readable in every lararium"; `:143` "a **single inscribed orichalcum figure, a painted wall niche, or a small altar-shelf**"; `:123` offerings "food, drink, incense, first-fruits, coin"; `Elyncia_04:538` "*:tips libation dish toward the dog-headed figure on the east wall:*"; `Elyncia_04:782` "**Turn the lamps down when you leave. The node will bank its own coals.**"
+- **Faerie court visual color (the governing law, deliberately non-specific)** — `Elyncia_02:23–25`: "each shrine represents a local synthesis… woven together with the **aesthetics and ceremonial traditions of native faerie heritages**… **Fae courtly aesthetics — color regimes, animal forms, procession patterns, taboo structures — interweave with Gaian shrine conventions**… producing shrines that **read as palimpsests rather than unified designs**." Courts named at `Elyncia_01:109` (Seelie / Unseelie / Ouroborous / Brimstone, ex-Summer & Winter); Brimstone = fire-aspected fae lords, dwarves, gnomes, trolls, caldera-carved (`:505–509`); insect fae clans = **hornet, beetle, dragonfly**, "pollen-based enchantments" (`:540`); Seelie = fae woods and river networks, "Faewild coast" (`:419/423`). **GAP: no per-court color assignment written anywhere.**
+- **Misc high-flavor nouns for background dressing:** "**a vendor selling maps of places that do not yet exist**… buy the map of the **city with two suns and no shadows**. Coin or **true memory** accepted as payment. The vendor prefers memories." (`Elyncia_04:338, 356–360`); "**the Etheric Road… smells like ozone and unresolved arguments**" (`:336`).
+
+---
+
+## 4. STYLE BIBLE — `Elyncia_04_Style_Base_Layer.md` (present, 70L)
+
+Three registers (`:11–17`): **rules-voice** (VLG), **wonder-voice** (UVG — "awe-then-deflation, jagged cadence, **numeric sublime**"), **liturgy/satire-voice** (OGA — "deadpan functionary narrator, cold unhedged theology"). Governing meta-register: **the Pratchett Rule — humor and awe coexist** (`:5`).
+
+Rendering-relevant laws:
+- `:21` "**Satire lives in the register, never the sentence.**… The narrator does not know it is funny. **No winking, ever.**" → no visual gags, no mugging faces.
+- `:25` "**Awe, then deflation — strict order.** The sublime claim lands first, the deflating concrete second ('precisely 217 meters')." → compose the frame grand, then plant one mundane precise object.
+- `:30` "**Whimsy is rationed and priced. One overt comic beat per screen of deadpan.** Every cute thing costs something. Test for a weird noun: does it imply an **economy, a hierarchy, or a harm**? If not, cut it."
+- `:34` "**Deep time by style-period, not date.** 'The Onion-and-Skull style' beats 'circa YOLD 3400.' **The past is fashion strata.**" → layer the venue's décor as visible strata (cf. fresco-over-fresco at `Elyncia_04:90`).
+- `:35` "**Ragged edges permitted.** The document may read damaged — redactions, empty headers… **completeness compulsion is the machine's tell.**" → asymmetry, unfinished corners; anti-render-perfection.
+- `:33` "**Names collide registers.** Real and ridiculous in the same name."
+- `:28` "**Indifference, not evil.**… Comedy points up at power, never down at suffering."
+- Anti-patterns (`:53–66`): whimsy inflation / quirk-stacking, every sentence a punchline, sanded-off names, **uniform tone**.
+- `:70` The Inversion, the one line that should set the cabaret's emotional light: "**the natural state of a Lares is presence-because-fed** — feed the node and it hums, neglect it and it flickers, and **the flicker is not indifference but hunger**."
+- Cross-file register anchor for a stage scene: `Elyncia_04:9` — "a **stagehand's** way of asking what the theater is for… **the sense that something just behind the curtain leaned closer**."
+
+---
+
+**GAPS SUMMARY (for parent's synthesis):** (a) no High Delos interior/venue/street-life text — must be extrapolated from the New Delos Spice Quarter compitale; (b) no Dionysian/cabaret/performance material of any kind; (c) no faerie-court color assignments and no Amaranth livery colors; (d) no gorgoness or Lindwyrm appearance canon; (e) magitech lift canon = one sentence ("mana lifts near the major Lares landmarks," `Elyncia_01:135`), no rendering detail; (f) no maze-Inn or labyrinthine-architecture text for Delos (the labyrinth material all sits in Neo-Thracia/Caverns files, wrong nexus); (g) YOLD 5492 confirmed as start of play (`Neo-Thracia_Region_Worksheet.md:21`), in-world season stamp available as "**Amber Season Day 47**" (`Elyncia_04:488`).
+```
+
+<<~/ahu >>
+
+<<~ ahu #witness-ftls >>
+
+!! Spirit Witness ~ the FTLS Visual Vocabulary
+
+Prism-Gleaner's hand-back, ''verbatim'' — costume/prop/tech dress, festival culture, ship fragments, gem and jewelry ladders, tag lexicons, and the corpus gaps (Amaranth zero-presence, no ship prose).
+
+```text
+Voice active: **Lares** (Tasked Spirit register, Prism-Gleaner task-mask).
+
+Note on paths: actual filenames are `Flying_Triremes_and_Laser_Swords_NN_*.md`, not `NN_*.md`. Line numbers below are from those files.
+
+## 1. DELOS (all of it — thin, 4 hits corpus-wide excl. ch03)
+
+- `/home/joshu/Synthetic-Dream-Machine/ftls/Flying_Triremes_and_Laser_Swords_01_Title_Introduction.md:179` — "**The Lindwyrm, Patron of New Delos**" — classed as *embodied immortal / durable avatar-being*, not distributed god: "They may rule cities, command fleets, bargain face-to-face, or appear repeatedly in the same body."
+- `...01...md:216` — attribution line: "**— Hexagram Voss, Floating Librarians of Mu - High Delos Archive**". High Delos hosts a Floating Librarian archive; Voss's voice (quoted 199-214) is the tonal register of a High Delos intellectual: dry, bureaucratic-mystic ("a temporary user interface spun up when too many people query the same idea at once"; "keep your syntax loose, your metaphors polite, and your exits memorized"; "Erisian avatars: they insist they are not glitches at all, merely punchlines that arrived before the joke finished loading").
+- `.../Flying_Triremes_and_Laser_Swords_10_Appendix_Null_Referee_Resources.md:489` — "**Low Delos**", scavenger-tier stratum; unearthed there: "an ancient tiger weapon—a 'soulbound lash' said to hold Rakshasa's anger". Establishes High/Low vertical class geography.
+- GAP: zero architectural, street-level, or venue description of Delos anywhere in scope. No cabaret, no tavern interior, no High Delos skyline. "cabaret" = 0 hits corpus-wide.
+
+## 2. FAERIE / COURT VOCABULARY (usable as patron factions)
+
+- `...10...:487` — "**Seelie and Brimstone Courts**" ceasefire brokered by a "**panther-priestess**"; hook titled "**Velvet Silence Pact**".
+- `...10...:484` — "**Unseelie territory**", "a broken **Lares node**", "**Rakshasa-shaped signal pattern**".
+- `...05...:837-839` — Rod of Dragons table keyed to **Faerie Court**: `1-5 | Seelie | Gold | 22 | Fire/Gas`. Court allegiance is visible/coded; a rod "may be turned into a small dragon of the appropriate type" and "If a dragon is created by a user pledged to a different Faerie Court, the dragon will attack the user immediately."
+- `...10...:511` — "the **Dominion of Magic**" quarrying "the bones of a 'sky-ancestor'" to "power their war-engines"; `:488` "a **Dominion strike team**".
+- `...10...:727` — "A **Spectrum Satrap** emissary demands a caravan pay 'tribute' in **colors — pigments, banners, even blood**." (Best single faction-iconography line in scope; chromatic heraldry.)
+- `...10...:463` — "a courtly duel for the '**right to name the next dawn**' drags PCs into an **Elf-lord's endless masque**."
+- `...10...:464` — "one smiling **Elf with no shadow**."
+- `...10...:466` — "**Starlight pours from cracks in the cobblestones**—Elves whisper that the **Fae Lords are watching**." (Strong light/ground-surface visual.)
+- `...10...:551` — "A **faerie-touched tavern** on the edge of the **Violet Grasslands** serves stew so good it heals **burdens**—for a price." (Only faerie-venue line in corpus.)
+- `...10...:418` — "a **bone-mask auction in Violet City**"; `:420` "wild-dog packs bear **ritual paint** that spreads dream illness."
+- `...10...:563` — bugbears: "**bright-masked** bugbears invite travellers to a **midnight feast**"; `:561` "paint a **secret parade route in invisible dye**"; `:566` "**brightly coloured wagons**". Hobgoblin `:561/565`: "**dye vats**", "an ancient **silk standard**".
+- `...10...:528` — "a **crystal-court goblin** offers to 'fix' it if paid in **lullabies**."
+
+## 3. COSTUME / PROP / TECH DRESS (specification-grade)
+
+Spirit-Talker (best single passage for a fae-spirit performer/waitstaff look):
+- `...02...:122` — "noticed as **interference first: a crackle along ward-runes, frost blooming into glyphs, dust that won't settle right**. They don't float ominously—Spirits **flicker between transactions, slipping through burlesques and gossip-halls, trailing ozone and old incense**. When they manifest *Ha*, reality reacts like a device snapping back online: **hair lifts, lamps hum, cheap mirrors show the wrong angle for a heartbeat**." — *burlesques and gossip-halls* is the closest textual anchor to cabaret in the whole corpus.
+- `...02...:124` — "**wardwright-shops hung with jade and doppler charms**", "Lares nodes and crossroads shrines", "sanctified thresholds"; spirits are "**fully present, slightly out of phase with the hylosphere**."
+- `...02...:147` — wardwright kit: "**jade dust, wire, incense, doppler charm**"; wards heard as "**crackle, drift, harmonic clash, the tiny scream right after a glyph tastes a lie**."
+
+Necromancer kit (d12 props, ritual-table dressing) — `...02...:74`:
+- "conch (pū) · chant-scrolls (oli, mele) · **libation bowl (ʻapu, ipu)** · **salt and ʻawa** · a death-shroud with its knots · **the iron psychopomp's lantern that never rusted** · a soul-canoe wayfinding charm · **ash-tea for guest-right with the dead** · a **slametan feast-kit** · a cracked **Ainos node-key** · a **graven skull that hoards the names of the drained** · **one small bell that should not be rung here**."
+
+Revenant body-dress — `...02...:100` "a **cadaver-knight in borrowed armor**"; `:106` "**My Bones Engraved** … a magic chisel to engrave your bones. Gain five bone inventory slots for powers on your **arms, legs, and skull**"; `:110` reflection appears "as a **pale afterimage** of the same effect." Undead maintenance visual — `...02...:102`: "a drop or two of the master's blood, some **bolts tightened**, and a fresh jolt of **magielectric juice**."
+
+Wild Mage regalia + items (richest object table in scope) — `...02...:190, 238-249`:
+- ":190 — children who **fingerpaint with sparks**, teenagers who **whistle up viridian dust-devils**, caravan guards who **juggle fire until the flames start juggling back** … turn a skirmish into a **light-show**—or a quiet campfire into a **violet crater**. Living batteries of pure chance … the nervous **counting of fire-extinguisher charms**."
+- 1 **Flux-Wyld Compass** — "**Orichalcum gyroscope** that twitches toward the most 'energetic' mana node."
+- 2 **Wave-Jammer Focus Lens** — "**Cracked planar-glass disk**; when held up it bends reality's currents."
+- 3 **Wind-Jammer Sail Cloak** — "**Living membrane that inflates with astral wind**."
+- 4 **Folded Horizon Key** — "**semiotic origami tool forged from memory-mirrors and liminal bone**."
+- 5 **Entropy Harmonizer** — "**Chiming hand-bell that drinks stray Flux**."
+- 6 **Wyld-Jammer Helm** — "**Crystal-studded circlet**."
+- 7 **Probability Resonance Dice** — "Five **void-amber d6 whose pips flicker between 1 ↔ 6**."
+- 8 **Wyldfire Strider Boots** — "**Arc-jet greaves forged from wyld-wyrm scale**."
+- 9 **Holo Compass [prismatic]** — "**Crystal gyroscope that blooms a shifting holo-rose**."
+- 10 **Aetheric Kite Familiar** — "**Folded planar-paper bird**."
+- 12 **Chaos Mirror Circuit** — "**Obsidian-platinum wafer** … the mirror shatters until dawn."
+- Named Wild Mages as patron silhouettes (`:194-199`): "**Lady Zheraphine of the Hundred-Fold Cloak**. Her **mirrored selves** maintain embassies across Elyncia's logic fractures"; "**Brother-Captain Vrax of the Æther Hussars** … keeps a campaign diary in **stellar ink that refuses to be read linearly**"; "**Doctor Δ (Delta) Kline, Flux Surgeon** … runs an **ambulatory surgical cathedral that crawls the Iron-spine mountains**"; "**Mara Morai, KSC, Battle Nun of the Edible Zen Garden**"; "**Telarus, Keeper of the Sacred Chao** … **Drinks entropy like tea**"; Amorphous Dreams Cabal (`:188`).
+
+Grimoires as carried props (best "book" silhouettes) — `...05...:1749-1755`:
+- "1. **Codex of the Sea-Filk Apocalypse** (**knotted net record, mint**) … **Plays mournful surf-guitar through any speaker within 30′** when opened."
+- "2. **Heliophage Heart Glyphs** (**sun-etched memory tattoo**) … **Glows amber** when undead are within 60′."
+- "3. **Lacrimae Machina Manual** (**compact phonograph**) … **nearby machines briefly weep lubricant**."
+- "4. **Null Priest Litany Disk** (**artificial mnemonic lotus**) … an **ethereal chorus swells**."
+- "5. **Erebus Library Tile** (**tetragonal bone-scales**)"; "6. **Quietus Memory Demi-Tome** (**pale parchment codex**)."
+- `...05...:1696` — "rare '**glass-mind wafers**'" socketed "**into your cortex**."
+- `...05...:1760-1770` — craft materials: "**[orichalcum] sheets**", "**stabilised [echo] crystals**", "**[dream] loop-seeds**", "**surfer-shell plates**", "**bleached [vellum]**", "**amber stasis [wax]**", "**distilled [oblivion] motes**", "**ghost-ink**", "pressed **beneath a waning moon**".
+
+Oldtech/magitech object look — `...05...:25` — "**Ward-lamps, bottled daemons, charged staves, signal seals, shrine relays, anti-curse scarabs, and portable noosphere hacks**"; may be "**ritualized, haunted, half-alive, temple-bound, guild-licensed**". `:639` wands/staves/rods: "**conductors, command pieces, shrine handles, and oldtech emitters** … they carry hidden depletion, **ugly geometry**, or the **wrong kind of public signature**"; `:658` "**public signal bleed**". `:40` fantascience = "**buildertech, signal launchers, machine-voices, and dangerous apparatus**." Split for character-read: **magitech = Thought** (pattern-reading, occult interface, sign interpretation, `:23`); **fantascience = Charisma** (command presence, live interface, imposed will, `:38`).
+Misc luminous props: `...05...:1068` **Chime of Time** — "3″ long, made of a **silvery metal** … it will **turn gold at one end, the color slowly spreading to the other end** in an hour's time"; `:1080` **Efreeti Bottle** — "large, heavy **sealed jug about 3′ high**", creature returns to "**the fabled City of Brass**"; `:1076` Displacer Cloak "**warps light rays**"; `:1152` quill "with a **nib of rare material (often orichalcum)**"; `:1123` **Lamp of Long Burning** — "metal, with a lower compartment for oil, a handle, and **shutters around the body**."
+
+## 4. DRINK / FOOD / FESTIVAL CULTURE
+
+- `...10...:473` — "**Bacchic Toll** – **wine-mad fauns** block a caravan road, demanding each traveler beat them in a **riddle dance** or pay in **vintage**."
+- `...10...:474` — "a jealous sprite steals a faun's **silvered horn**; its absence **dampens local revels** and weakens **Satyr's Revel** nearby."
+- `...10...:476` — "a **sacred festival ring** is eerily quiet; whispered that a void-borne goblin swapped the **pipes** for **shadow-flutes**."
+- `...10...:477` — "**Vintage of Forever Spring** – a **cask** said to grant eternal youth surfaces at market."
+- `...10...:478` — "**Revel Moon Eclipse** – prophecy says the next lunar eclipse turns Satyr's Revel into **riotous frenzy** unless a **solemn hymn** is played."
+- `...10...:375` — "**Echo festival** disrupted by an **anti-noise hex**"; `...10...:739` "**Broken Loom Festival**"; `:754` "**The Horn Festival Heist** – this year's **blessing rite**"; `:564` "**Carnival Siege** – a hobgoblin company offers 'protection' for a village festival—**paid in food and song**."
+- `...10...:430` — "a voidjammer captain owes an **entire cargo hold of 'cat coffee'** to the wrong **feline noble**." (Cabaret-menu gold.)
+- `...10...:574` — "A Human diplomat insists that the PCs pretend to be her '**fae retainers**' at a **voidjammer banquet**—and the ruse spirals." (Closest thing in corpus to a formal high-society party scene.)
+- `...02...:74` — "**ash-tea for guest-right**", "**salt and ʻawa**", "**slametan feast-kit**", libation bowl (see §3).
+- `...01...:135` — **Comfort Dice**: "when you need pampering … **a hearty breakfast cushioned that blow**"; spendable to "acquire a **civilized item, such as a nice suit or comfy pillow**." (Directly cabaret-luxury-coded currency.)
+- Consumable/luxury loot — `...09...:236-244`: "**incense/perfume case** `[luxury] [ritual]`", "**silk bolt lot** `[trade] [status]`", "**rare spice chest**", "**rare wine lot** `[luxury] [perishable]`", "**rare fur/pelt**", "**rug/tapestry** `[curio] [bulk]`", "**reliquary set** `[holy] [claimed]`".
+- Revenant reform-catalysts as drink list — `...02...:104`: "(1) **holy water**, (2) **blood**, (3) **wine**, (4) **tomato soup**, (5) **milk**, or (6) **nectar**."
+
+## 5. SHIP / VEHICLE / SKY VISUALS (weakest axis — mostly stat grammar)
+
+- `...08...:103` — "**Hydrofoil trireme** / medium vehicle: Hull DT 6-9, Flare 10-12"; `:102` "**Mecha / light vehicles**"; `:104` "**Gunships / frigates**"; `:105` "**Capital hull / fortress**".
+- `...08...:116` — "**sacrificial plates**", "**pavises**", "many hulls use '**dissipator**' tech that caps one attack per round."
+- `...08...:136` — ship parts vocabulary: "**Crew stations (Gunnery/Helm/Damage Control/Boarding/Medic)**, **Arcs & Batteries** (e.g. 'Port Battery: 4×1d12'), … Specials (**Ram, Launch Bays, Tractor, Cloak, Mirror-Plating, Keel Cannon**)."
+- `...08...:144` — "Two **archer Units** and one **cannon battery** all hit the same gunship this round … **Flare** can only blunt one such big hit per round." (Flare = visible energy bloom on hull impact; implied, not stated.)
+- `...10...:760` — "**Skyjammer Prototype** — a mountain clan's stolen '**star-rigged**' skyjammer."
+- `...10...:453` — "a rogue voidjammer using **unbound dwarven keel-spines**"; `:677` "A voidjammer hull has been '**tagged**' with **graffiti glyphs** only Pixies seem to understand"; `:464` "an '**empty' voidjammer drifts into harbor**"; `:752` "a **voidjammer crash**".
+- `...10...:485` — "a vital **skyport's DreamNet uplink**."
+- `...02...:201` — "a **legal outpost moon-let in low orbit** with Elyncia's **quantum-locked astral sea**, antipodal to Gaia yet far beyond the **Rainblowlands**, the **Circle Sea**, and even the **Ultraviolet Grasslands**."
+- `...02...:199` — "**solar charge drills in forgotten orbital trenches** near Elyncia's **event-laced voidfront**."
+- `...02...:242` — Wyld-Jammer Helm attunes "to any **living vehicle (wave-, wind- or wyld-jammer)**." Jammer taxonomy: wave / wind / wyld / void / sky / star-rigged.
+
+## 6. MATERIAL, COLOR, GEM PALETTE (ch09, table-form but directly promptable)
+
+- `...09...:135-139` — coin looks: "mostly **silver (solver) and copper, with clipped gold**"; "**brass/silver bells, foreign coin, port tokens**"; "**stamped trade bars, sealed pay-tallies**"; "high **gold/platinum** bias, **treaty bullion, ceremonial strikes**."
+- `...09...:195-198` — gem ladder: common "azurite, banded agate, bloodstone, carnelian, chalcedony, chrysoprase, hematite, jasper, jet, lapis lazuli, malachite, **moonstone**, obsidian, onyx, rock crystal, sardonyx, smoky quartz, tiger eye, turquoise"; uncommon "amber, amethyst, aquamarine, garnet, jade, pearl, peridot, spinel, topaz, tourmaline, zircon, citrine"; rare "**black opal**, blue sapphire, emerald, **fire opal**, **regalia ruby**, white diamond"; epic "flawless diamond, imperial emerald, royal sapphire, imperial topaz, **crown opal**, alexandrite, **tristral crystal**, **star ruby**."
+- `...09...:200-224` — jewelry forms (wearable silhouette list for patrons): "anklet, armband, amulet, beads, belt-chain, ring, bracelet, collar, medallion, brooch, earring set, **diadem**, buckle, necklace, **crown**, cameo, pendant, **tiara**, chain, choker, **scepter**, clasp, hairpin set, **orb**, locket, **reliquary**, talisman, pin, lucky token, **scarab idol**" — top band explicitly "**Regalia** `20,000-50,000`."
+- `...05...:407-410` — chromatic dragon/gem color pairs usable as court-livery keys: "White (or **Crystal**), Black (or **Onyx**), Green (or **Jade**), Blue (or **Sapphire**), Red (or **Ruby**), Gold (or **Amber**)."
+- `...10...:91-119` — tag lexicon usable as flavor-adjective banks: **Elements** "[air][earth][fire][water][ice][lightning][acid][venom][smoke][steam][magma][metal][stone][sand][storm][sun][moon][star][radiant][necrotic][chromatic][gravity][heat][plasma]"; **Dreams & Shadows** "[dream][shadow][web][chaos][order][void][fear][madness][illusion][phantasm][astral][ethereal][corruption][mutation][apocrypha][wyrd][confusion]"; **Totems & Spirits** "[totem][animal][beast][plant][fungus][insect][wyrm][fae][demon][angel][undead][giant][construct][golem][vome][spirit][guardian][daemon][vampire][caller][necrobeast]"; **Schools & Traditions** "[abjuration][conjuration][divination][enchantment][evocation][illusion][necromancy][transmutation][sorcery][oldtech][fantascience][wizard][**noömagus**][**gunmaker**][**biomantic**]"; **Weird Science & Magitech** "[network][cyber][circuit][signal][pulse][resonance][overload][bio][shell][gear][**autogolem**][**wandgun**][**raygun**][plasma][portal][time][reality]".
+
+## 7. WORLD-FRAME / ATMOSPHERE (ch01, for scene mood not costume)
+
+- `...01...:13` — ddate stamp "**X-Day, 40th Confusion, YOLD 5491**" — corpus canon is 5491; the brief's 5492 is one year forward (flag to parent).
+- `...01...:167` — daemon presence style: "a **whisper in the radio-static**, a **bad omen in a puddle**, a **helpful coincidence**, or a **haunting**"; `:161` daemons as "**coherent, sentient kaba-elementals**", "**sentient energy creature of the noosphere**", quote-source "Pseudokaula, *Why I Hunt Daemons*, **Colché acrylics**."
+- `...01...:189` — "gods often do not 'show up' so much as **leak into the world through their interfaces**"; `:187` "the natural state of the gods is **absence**"; `:193` "**Immanent / Distributed / Demi-god agent**" modes.
+- `...01...:203` — "her **ley-lines as nerves**, her **noosphere as breath**, her **weather as mood**, her **ruins as old memories that still have teeth**."
+- `...10...:316, 341` — house tone directives: "**mythpunk, not museum**"; "**Pratchett Rule — humor and awe coexist.** Each heritage should suggest both **absurdity and meaning**"; `:342` "should fit an Ultraviolet Grasslands, Elyncia, **a tavern from the Floating Vagabond universe**, or a **floating spelljammer** without rewriting a line."
+
+## GAPS (honest)
+
+- **Order of Amaranth: zero hits** anywhere in the corpus (all 10 files). No iconography exists to harvest; parent must invent or source elsewhere.
+- **Adventurer's Guild: zero hits** as a named body. Only generic "guilds" (`...01...:84`), "a Human 'generalist' guild advertises: 'We can do anything — for a price'" (`...10...:573`), "**Sewer Guild Oath**"/"**Guild of Shadows**" rat-folk thieves (`...10...:694-696`), "lacquer-master … rival guild" (`...10...:595`).
+- **No cabaret/venue interior description** anywhere. The only adjacent lines are `...02...:122` (burlesques, gossip-halls), `...10...:551` (faerie-touched tavern), `...10...:574` (voidjammer banquet).
+- **Ch08 gives no ship *appearance***, only hull stats and part names. No description of a trireme in flight, no sails/oars/wake imagery. This is the largest gap against brief item (3).
+- **Ch09 is entirely tabular** — no aesthetic prose about hoards beyond `:298` referee advice ("defenders wearing **heirloom wards**, officers carrying **charged tools**, stores already **opened and rationed**").
+- **Ch05 body-armor visuals are absent**; armor appears only as mechanics/tags (`[armor]`, `[harness]`). No described armor silhouette in scope.
+- Chapter 06 (18k lines, Powers/ECM) was **out of scope** but contains `Faerie Bodycrafts` (`:8053`) and `Faerie Fire` (`:9282`) plus a fae-initiation note (`:595`: "**Faerie folk clans and factions often teach powers to young fae in a partially locked form**"). Likely the corpus's densest untapped fae-visual seam — recommend a follow-up pass.
+
+Prism-Gleaner: Lares (Tasked Spirit) -> ?
+Thread: FTLS visual vocabulary harvest
+Finding: Corpus yields strong *object* and *tag* vocabulary (Wild Mage item table, grimoire formats, gem/jewelry ladders, court-color keys) and one excellent cabaret-adjacent atmosphere line (Spirit path, 02:122 "slipping through burlesques and gossip-halls, trailing ozone and old incense"), but Delos itself is only four naming references with no described architecture, Order of Amaranth has zero corpus presence, and ship-visual prose is absent from ch08 entirely — vehicle imagery must come from jammer-taxonomy fragments in ch10 rather than the formations chapter. Recommend a ch06 pass for faerie-specific visual seams.
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/high-delos-cabaret >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/session-0-1-handoff-prompts >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
+
+<<~/ahu >>
+
+<<^ &#x0003; >>
+
+<<^ &#x0004; -> ? >>

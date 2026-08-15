@@ -1,0 +1,187 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/nexuses/neo-thracia/session-zero >>
+```toml iam
+cacheable  = true
+confidence = 13
+file-path  = "bags/@elyncia-referee/ha.ka.ba/elyncia/nexuses/neo-thracia/session-zero.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 13
+rating     = "kapu"
+register   = "Synthesis"
+retain     = true
+role       = "referee doc — Session Zero notes for the Neo-Thracia campaign arc"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/elyncia/nexuses/neo-thracia/session-zero"
+```
+
+<<^ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Neo-Thracia ~ Session Zero
+
+//Migrated verbatim from `elyncia/Neo-Thracia/Session_Zero.md` (2026-08-14); md→wikitext conversion mechanical — prose
+untouched; md table separator rows dropped.//
+
+<<~/ahu >>
+
+<<~ ahu #body >>
+
+! Session Zero — Caverns of Thracia Operation Dossier
+*Addressed from ''The Lindwyrm'' (New Delos Nexus) to ''Lady Aki'' (Grandmother Spider’s folk, Broken Isles) and crew*  
+*Cover: “Adventurers’ Guild”*
+
+> ''Player-safe brief.'' This document is designed to be read at Session Zero without revealing start-of-campaign spoilers.
+
+---
+
+!! Letter of Commission (The Lindwyrm)
+
+Lady Aki—
+
+You and yours are being hired because you can ''enter a place that hates being entered'', make sense of it, and leave with its teeth still in your pockets.
+
+In ''four weeks'', a relief trireme will arrive at the ''mouth of the Hebros'', towing your vessel. You will be introduced under an ''Adventurers’ Guild'' guise. The local lararium at the river mouth will provide decryption, updates, and—when necessary—deniable miracles.
+
+Your mission is simple to say, hard to do.
+
+!!! Mission Frame
+
+''Primary Objective''
+* ''Recon and map'' accessible portions of the ruin known in old GAIA archives as ''The Caverns of Thracia'' (“Thracia”).
+* Establish whether the site can support ''repeat operations'' (safe approach, staging points, extraction routes).
+
+''Secondary Objectives'' //(choose as you go)//
+* Recover ''portable valuables'' suitable for trade, patronage, and leverage.
+* Identify ''local powers'' (who controls what, what they fear, what they want).
+* Extract ''one actionable secret'': a route, a key, a weakness, or a bargain.
+
+''Rules of Engagement''
+* You are not here to “clear a dungeon.” You are here to ''learn the machine and survive the feedback''.
+* Retreat is victory. Silence is profit. Being remembered is cost.
+
+— ''The Lindwyrm''
+
+---
+
+!! Start-Visible Intelligence
+[Each intel point includes an estimated ''confidence %''. Only items marked ''CONFIDENCE'' should be treated as known at Session Zero.]
+
+!!! Site Identity & Nature
+
+* ''CONFIDENCE — 90%''  
+  ''Thracia is a layered ruin (city-turned-caverns), not a single linear dungeon.'' Expect multiple routes, loops, and vertical connections.
+
+* ''CONFIDENCE — 85%''  
+  ''The site is “live.”'' There are organized inhabitants who patrol, occupy territory, and react to intrusion.
+
+* ''CONFIDENCE — 80%''  
+  ''Caution and planning beat force.'' Noise and repeated fighting increase risk over time.
+
+* ''CONFIDENCE — 70%''  
+  ''Depth correlates with danger.'' The deeper you go, the older and more lethal the architecture and opposition become.
+
+!!! Approach & Operational Reality
+
+* ''CONFIDENCE — 75%''  
+  ''Approach is seasonal and/or conditional.'' The most reliable entry vector may depend on river conditions, local movement, or timing.
+
+* ''CONFIDENCE — 65%''  
+  ''The ruin is “misreported.”'' Many maps exist; most are wrong in useful ways.
+
+* ''CONFIDENCE — 60%''  
+  ''False Thracia sites exist nearby''—ruins and “Thracia-like” locations that attract the careless and the greedy.
+
+!!! Inhabitants (Player-Safe)
+
+* ''CONFIDENCE — 80%''  
+  ''Beast-men are present in force'' (gnolls, lizard folk, and related warbands). They operate like societies, not random encounters.
+
+* ''CONFIDENCE — 65%''  
+  ''A central power likely rules deeper inside'' (a court, warlord, or “king” figure). Expect hierarchy.
+
+* ''CONFIDENCE — 60%''  
+  ''Humans are present as captives, renegades, or survivors.'' They may be sources of information—and complications.
+
+!!! Hazard Profile (Player-Safe)
+
+* ''CONFIDENCE — 85%''  
+  ''Patrol pressure is constant.'' Expect time, fatigue, and attrition more than a single decisive battle.
+
+* ''CONFIDENCE — 70%''  
+  ''Traps and ancient mechanisms remain active'' in key corridors and threshold areas.
+
+* ''CONFIDENCE — 65%''  
+  ''Environmental threats are real'' (poisonous vermin/fungus, unstable stone, darkness, tight chokes).
+
+---
+
+!! Session Zero Rumors (Unconfirmed)
+[Share these as rumors. Do not confirm which are true.]
+
+* ''CONFIDENCE — 55%'' “There’s an underground garden where light still falls.”  
+* ''CONFIDENCE — 50%'' “The beast-men fear something deeper than their own warlords.”  
+* ''CONFIDENCE — 45%'' “If you learn even scraps of the old tongue, the walls ’make sense’ faster.”  
+* ''CONFIDENCE — 40%'' “Some entrances are ’safe’—until you use them twice.”  
+* ''CONFIDENCE — 35%'' “The place rearranges your certainty, not your corridors.”  
+* ''CONFIDENCE — 25%'' “Every entrance has already been mapped.” *(useful lie)*
+
+---
+
+!! What the Crew Should Agree On (Session Zero Contract)
+
+!!! 1) Tone of Play (What “Winning” Looks Like)
+* You “win” by ''information, positioning, and extraction'', not body count.
+* Treat every fight as a ''costly negotiation''.
+
+!!! 2) Table Expectations
+* ''Retreat is normal.''
+* ''Mapping matters'' (even rough mapping).
+* ''Prisoners / parley / disguises'' are expected tools.
+
+!!! 3) Roles for the First Incursion
+Pick defaults now:
+* ''Scout / Point'' (sees danger first)
+* ''Speaker'' (parley, lies, reads a room)
+* ''Quartermaster'' (light, rope, food, emergency reserves)
+* ''Anchor'' (rear guard, extraction discipline)
+
+---
+
+!! Operational Logistics (CONFIDENCE)
+
+* ''Insertion:'' Adventurers’ Guild cover, Hebros-mouth staging. *(80%—planned, not guaranteed.)*
+* ''Arrival:'' Relief trireme towing your ship in ''4 weeks''. *(90%—weather permitting.)*
+* ''Support:'' The ''Hebros-mouth lararium'' can decrypt archives, relay messages, and maintain a stable line. *(85%.)*
+
+---
+
+!! After Session Zero: What the Lindwyrm Wants Back
+Bring three agreements to the first session:
+
+# ''First incursion goal:'' map one safe loop and identify one resource node.”  
+# ''No-go boundary:'' log any complex magitech or fantascience for future weeks.  
+# ''Extraction plan:'' where you run when it goes wrong. Hebros Mouth lararium is a "Safe zone".
+
+[!] IMPORTANT: :YOUR EYES ONLY: Aki - We need to confirm rumors that the lost "Power Core" tech can be recovered from the NeoThracian Nexus. The Caverns are the obvious first place to start that search. We are currently only able to maintain or repair our existing Power Cores if they do not fall to effective Level 0 items. We have recently lost Power Cores to catasrophic critical failures. Do not proceed upriver in the Trireme until you confirm the Nexus’ stability ratings. Your Crew’s smaller craft will be more appropriate to the waterways in the Nexus. :/FREE TRADE LEAGUE DEFENSE SECRET:
+
+---
+
+!! One-Page Player Handout (Copy/Paste)
+* Thracia is a ''multi-layer ruin'' with loops and vertical routes. (90%)
+* It is ''inhabited and reactive''—patrols, territory, consequences. (85%)
+* ''Depth increases danger.'' (70%)
+* There are ''false Thracia sites'' nearby that waste time. (60%)
+* ''Beast-men factions'' are active (gnolls/lizards/etc.). (80%)
+* There may be a ''central power'' deeper inside. (65%)
+* Traps and environmental hazards are part of the baseline. (70–85%)
+* Retreat and negotiation are normal survival tools. (85%)
+
+<<~/ahu >>
+
+<<^ &#x0003; >>
+
+<<^ &#x0004; -> ? >>

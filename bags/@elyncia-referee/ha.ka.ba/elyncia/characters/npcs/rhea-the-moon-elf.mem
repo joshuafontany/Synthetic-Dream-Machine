@@ -1,0 +1,64 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+
+<<^ &#x0001; ? -> lar:///ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf >>
+```toml iam
+cacheable  = true
+confidence = 13
+file-path  = "bags/@elyncia-referee/ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 13
+rating     = "kapu"
+register   = "Synthesis"
+retain     = true
+role       = "referee NPC (Freyja's authorship) — L7 Combat-Rogue/Artificer, the Dragoness's intelligence-mistress; Menzoberranzan fall, blight-hardened prosthetics, Neo-Thracian network"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf"
+```
+
+<<^ &#x0002; >>
+
+<<~ ahu #head >>
+
+! Rhea the Moon Elf
+
+//Migrated verbatim from `elyncia/New Delos/NPCs/Rhea_the_Moon_Elf.md` (2026-08-14); the md→wikitext conversion ran mechanical
+— prose untouched.//
+
+<<~/ahu >>
+
+<<~ ahu #body >>
+
+! Rhea the Moon Elf
+
+*GM record — NPC of Freyja's authorship (noted to the record 2026-08-14). Register: Provisional-Synthesis; the Level 7 sheet remains unbuilt. Player-safe as written; her network's tradecraft stays at the table's discretion.*
+
+!! The Shape of Her
+
+''Level 7 · primary paths: Combat-Rogue / Artificer.'' She styles herself //Rhea the Moon Elf//; the family ledgers of ''Menzoberranzan'' would style her otherwise. A noble house's daughter driven into the deep dark and then to the surface — where the family //mad-maxxed around for a while// — until the Spider Queen's agents made them, and Rhea fled through the planar gates and found a way to Elyncia. The crossing rhymes with Telarus's own fall, and the two of them know it.
+
+!! Tropes & Kit
+
+* ''High-level drow magic'' — the old house's inheritance, carried far from the house.
+* ''Steampunk prosthesis'' — the lost left arm and left leg rebuilt as enchanted magitech limbs: contraptions and weaponry built *into* them, a dungeon-crawler's toolkit worn as a body.
+* ''Built to solo-crawl'' — in the manner the old tales give Robilar: traps expected, doors distrusted, retreat pre-planned.
+* ''Blight-hardened'' — her magitech stands proofed against the rust-blight and against rust-monsters both; whatever her limbs are made of, the blight does not read it as food. *(Weld: the Named-iron / sky-iron / crucible-steel practices of the Curse of Iron canon — which proofing she uses stays hers to reveal.)*
+
+!! Her Work in Elyncia
+
+Since her arrival she has ''trained a cadre of agents'' and runs a ''small intelligence network for the Dragoness''. Rogues who don't make her cut go to the ''Adventurer's Guild'' — where they remain useful, and where, not coincidentally, her patroness's partner company gains a steady stream of vetted talent.
+
+''For the last two months her network has sent back intel from the Neo-Thracian Nexus'' — the readings that shaped the Patroness's summit timing and the company's sub-mission both.
+
+!! Hooks Held Open
+
+* Whether any of her Neo-Thracian agents remain in place when the company lands.
+* What the Spider Queen's agents made, exactly, and whether the making reached Elyncia behind her.
+* The prosthetics' maker — self-built, commissioned, or inherited from someone who no longer needs them.
+
+<<~/ahu >>
+
+<<^ &#x0003; >>
+
+<<^ &#x0004; -> ? >>
