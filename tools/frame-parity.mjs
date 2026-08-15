@@ -59,6 +59,19 @@ for (const f of tiddlers) {
   else if (code) console.log(`  ${f} declares ${code[1]} and carries no lar-pattern`);
 }
 
+// AND THE BOOTSTRAP SCANNER, which reads before any tiddler loads. `BOOTSTRAP_SCANS` carries its own
+// control table so a cold parse can find a frame at all — a second recogniser, hand-written, that no
+// tiddler governs. Comparing spec to tiddlers alone reads TAUTOLOGICAL while one hand writes both;
+// the scanner is the independent side, and drift between the two is the seam this witness exists for.
+const SCANNER = join(REPO, "packages/lararium-tw5/src/meme-ast/scanner.ts");
+const scannerCodes = new Set(
+  [...readFileSync(SCANNER, "utf8").matchAll(/&#x00[0-9A-Fa-f]{2};/g)].map((m) => m[0]),
+);
+const scannerOnly = [...scannerCodes].filter(
+  (c) => !standing.some((s) => s.code === c) && !reserved.some((r) => r.code === c),
+);
+const specOnly = standing.filter((s) => !scannerCodes.has(s.code));
+
 const unrecognised = standing.filter((s) => !seen.has(s.code));
 const undeclared = [...seen].filter(
   (c) => !standing.some((s) => s.code === c) && !reserved.some((r) => r.code === c),
@@ -69,6 +82,13 @@ console.log(
   `tiddlers recognise ${seen.size}`,
 );
 
+if (scannerOnly.length > 0) {
+  console.log(`  the bootstrap scanner reads marks the spec never wrote down: ${scannerOnly.sort().join(" ")}`);
+}
+if (specOnly.length > 0) {
+  console.log(`  the spec stands marks the bootstrap scanner cannot find:`);
+  for (const { code, mark } of specOnly) console.log(`    ${code}  ${mark}`);
+}
 if (undeclared.length > 0) {
   console.log(`  recognised but undeclared (tolerated): ${undeclared.sort().join(" ")}`);
 }
