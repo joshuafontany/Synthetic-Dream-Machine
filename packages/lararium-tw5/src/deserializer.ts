@@ -171,12 +171,22 @@ export function memeticWikitextDeserializer(
     // Stored only when non-empty; template emits it before the control char.
     // The Kapu SOH variant (&#x0011; DC1) carries its own semantics — the
     // code survives on the parent as `carrier-soh`, never normalized away.
-    const nsM = /^<<[~^]([^&\n]*)&#x(0001|0011)/.exec(ev.fullText);
-    const namespace = nsM?.[1]?.trim() ?? "";
+    // A NAMED PARAM WINS OVER THE BARE PREFIX, and the order matters more than it looks. The bare form
+    // takes everything between the head and the control entity as the namespace — which reads correctly
+    // only while nothing else stands there. Put one named param in front of the entity and the prefix
+    // scan returns `code:"` as a namespace: no throw, no diagnostic, a wrong glyph carried forward into
+    // every render and every re-emission. The reader that breaks FIRST under a frame migration breaks
+    // SILENTLY, so it learns the new shape before any carrier writes one.
+    const nsParam = /^<<[~^][^>\n]*?\bnamespace:\s*"([^"]*)"/.exec(ev.fullText);
+    const nsBare  = /^<<[~^]([^&:\n]*)&#x(0001|0011)/.exec(ev.fullText);
+    // The heading variant rides its own capture: a `code:` param names it, else the bare entity does.
+    const sohCode = /^<<[~^][^>\n]*?\bcode:\s*"&#x(0001|0011);"/.exec(ev.fullText)?.[1]
+      ?? nsBare?.[2];
+    const namespace = (nsParam?.[1] ?? nsBare?.[1] ?? "").trim();
     if (namespace.length > 0 && tiddlers.length > 0) {
       for (const t of tiddlers) t["namespace"] = namespace;
     }
-    if (nsM?.[2] === "0011" && tiddlers.length > 0) {
+    if (sohCode === "0011" && tiddlers.length > 0) {
       tiddlers[0]!["carrier-soh"] = "0011";
     }
     // WHAT MAY STAND BETWEEN ETX AND EOT — the BCC, and nothing else.
