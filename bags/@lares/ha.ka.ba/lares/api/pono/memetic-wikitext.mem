@@ -492,6 +492,43 @@ carrier — the one line a stranger meets before knowing any of this.
 `!WORD` declarations under the same law — read before content, selecting or constraining the grammar,
 never performing a move the renderer runs. A `!WORD` that acts belongs in the speaking set.
 
+!! The Bearing Arrow — one edge, two orientations
+
+The frame's heading and its close both carry an arrow, and they carry ONE relation read from two ends:
+
+|!mark |!form |!source |!target |
+|SOH |`? -> lar:///…` |unresolved |known — the carrier arriving at its address |
+|EOT |`-> ?` |known |unresolved — the carrier departing into open bearing |
+
+''`?` names an unresolved bearing'', never a keyword and never a name. `lar-sigil` guards that reading
+explicitly: the header form matches BEFORE the compound dispatcher, ''to prevent compound from
+misreading any stray `<<~ ? … >>` as a sigil named `?`''. And the control-soh scan captures the arrow's
+target as a group, so the bearing rides as PARSED STRUCTURE rather than as decoration inside the line.
+
+!!! Why the arrow survives a named-parameter frame
+
+A named parameter states a PROPERTY — //this carrier has a lar value//. The arrow states a RELATION —
+//this carrier resolves toward that address//. One name, one relation: the edge IS the relation, and
+folding it into a quoted attribute would demote a relation to a field and break the scanner's capture
+with it. So named params ride in FRONT of the arrow and the arrow keeps its shape.
+
+!!! A declared unresolved bearing is not a dangling link
+
+Nelson's indictment of embedded one-way links names the failure exactly: an address that outlived its
+target and never said so, surfacing at access time to whoever trusted it. Xanadu's cure lifts links
+out of documents so content may move beneath them.
+
+The arrow answers the same failure from the other side. It stays embedded and makes its SOURCE
+self-resolving — `?` reads as //wherever this carrier stands// at read time — so the carrier moves and
+its outbound bearing travels with it. And `-> ?` declares the dangle rather than suffering it: a
+frontier, honestly marked, the way a MUD room's exit to an unbuilt room reads as an open edge and never
+as an error.
+
+''A declared unresolved bearing is not a dangling link. A dangling link is an unresolved bearing that
+lied about being resolved.'' The same cut runs through the block check (`unchecked` never `mismatch`)
+and through the ward's infelicities (a misfire voids, an abuse rings hollow): ABSENCE DECLARED and
+ABSENCE DISCOVERED are different facts, and every instrument here that conflated them read useless.
+
 !! Carrier Frame — The Control Set
 
 The bytes law says what a carrier is made of; the frame law says how it is marked. Both pin here, per
