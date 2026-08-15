@@ -1,4 +1,4 @@
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/roaming/sea-glass >>
+<<^ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/lares/api/masks/roaming/sea-glass >>
 ```toml iam
 cacheable         = true
 created           = "2026-07-24"
@@ -20,7 +20,7 @@ voice-role        = "_"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
-<<~ &#x0002; >>
+<<^ &#x0002; >>
 
 <<~ ahu #identity >>
 
@@ -144,6 +144,6 @@ Where sibling masks grow character-notes through talk-story-dev passes, Sea-Glas
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
+<<^ &#x0003; >>
 
-<<~ &#x0004; -> ? >>
+<<^ &#x0004; -> ? >>
