@@ -38,6 +38,11 @@ import {
   composeSlotPath,
 } from "./meme-ast/ahu-scan.js";
 import { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
+import { frameMark, FRAME_MARKS } from "./frame-marks.js";
+
+/** name -> code, so the emitter names a mark rather than spelling its entity. */
+const FRAME_BY_NAME: Record<string, string> =
+  Object.fromEntries(FRAME_MARKS.map((m) => [m.name, m.code]));
 // The fence-mask law surfaces through the shore: consumers (tests, the
 // projector layer) read quoted-sigil semantics from HERE, never from
 // meme-ast internals (vm-grammar-boundary law).
@@ -845,14 +850,17 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
 
   const str = (k: string): string => (typeof f[k] === "string" ? (f[k] as string) : "");
   const iam = emitIamToml(f, IAM_DENY);
-  const sohCode = f["carrier-soh"] === "0011" ? "&#x0011;" : "&#x0001;";
+  // The emitter reads the shared table rather than spelling the entities inline: a mark that leaves
+  // the grammar leaves here too, instead of surviving as a literal no reader still scans for.
+  const MARK = (name: string): string => frameMark(FRAME_BY_NAME[name]!)!.code;
+  const sohCode = f["carrier-soh"] === "0011" ? MARK("SOH2") : MARK("SOH");
 
   let out = str("prologue");
   out += `<<^ ${str("namespace")}${sohCode} ? -> ${memeUri} >>\n`;
   out += str("preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
   out += expandRefs(reader, memeUri, "", str("header-text"), f);
-  out += "<<^ &#x0002; >>\n\n";
+  out += `<<^ ${MARK("STX")} >>\n\n`;
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
   // ETX takes its block check adjacent, per the received framing (STX -> text -> ETX -> BCC); the
   // attestation block follows and ETB terminates it. A carrier carrying neither emits neither, so
@@ -860,9 +868,9 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // projection round trip, which is the whole reason the emitter has to know the mark at all.
   const bcc  = str("carrier-bcc");
   const sila = str("carrier-sila");
-  out += `\n\n<<^ &#x0003; >>${bcc ? `${bcc}` : ""}\n`;
-  if (sila) out += `\n${sila}\n<<^ &#x0017; >>\n`;
-  out += "\n<<^ &#x0004; -> ? >>\n";
+  out += `\n\n<<^ ${MARK("ETX")} >>${bcc ? `${bcc}` : ""}\n`;
+  if (sila) out += `\n${sila}\n<<^ ${MARK("ETB")} >>\n`;
+  out += `\n<<^ ${MARK("EOT")} -> ? >>\n`;
   // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;

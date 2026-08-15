@@ -72,18 +72,20 @@ const scannerOnly = [...scannerCodes].filter(
 );
 const specOnly = standing.filter((s) => !scannerCodes.has(s.code));
 
-// AND THE EMITTER, which closes the cycle. `expandMemeRefs` in `deserializer.ts` recomposes a carrier
-// from records back to bytes, and it writes every frame mark as a STRING LITERAL — four recognisers
-// read the frame, one hand-written emitter writes it, and none of the five consults the others.
+// AND `FRAME_MARKS`, the shared table every reader and the writer now agree on. The CODES collapsed
+// there because they are one fact; the PATTERNS stayed local because each context earned its own scan
+// against a bug its comment records. So this seam checks the fact that drifts, and leaves alone the
+// three that must differ.
 //
-// A MARK THE EMITTER CANNOT WRITE IS A MARK PROJECTION SILENTLY DROPS. A carrier could gain an
-// attestation block, parse correctly, and lose it the first time a wiki wrote it back to disk — the
-// read side would never complain, because nothing it reads went missing.
-const EMITTER = join(REPO, "packages/lararium-tw5/src/deserializer.ts");
-const emitterSrc = readFileSync(EMITTER, "utf8");
-const emitterBody = emitterSrc.slice(emitterSrc.indexOf("export function expandMemeRefs"));
-const emitted = new Set([...emitterBody.matchAll(/&#x00[0-9A-Fa-f]{2};/g)].map((m) => m[0]));
-const unemitted = standing.filter((s) => !emitted.has(s.code));
+// A MARK THE TABLE NEVER DECLARES IS A MARK NOTHING HOLDS — no reader scans for it, and the emitter
+// cannot write it, so a carrier that gained one would lose it on the first write-back with nothing on
+// the read path able to notice what went missing.
+const TABLE = join(REPO, "packages/lararium-tw5/src/frame-marks.ts");
+const tableCodes = new Set(
+  [...readFileSync(TABLE, "utf8").matchAll(/code:\s*"(&#x00[0-9A-Fa-f]{2};)"/g)].map((m) => m[1]),
+);
+const untabled = standing.filter((s) => !tableCodes.has(s.code));
+const tableOnly = [...tableCodes].filter((c) => !standing.some((s) => s.code === c));
 
 const unrecognised = standing.filter((s) => !seen.has(s.code));
 const undeclared = [...seen].filter(
@@ -102,9 +104,12 @@ if (specOnly.length > 0) {
   console.log(`  the spec stands marks the bootstrap scanner cannot find:`);
   for (const { code, mark } of specOnly) console.log(`    ${code}  ${mark}`);
 }
-if (unemitted.length > 0) {
-  console.log(`  the emitter cannot write, so projection would drop:`);
-  for (const { code, mark } of unemitted) console.log(`    ${code}  ${mark}`);
+if (untabled.length > 0) {
+  console.log(`  the spec stands marks FRAME_MARKS never declares, so no reader or writer holds them:`);
+  for (const { code, mark } of untabled) console.log(`    ${code}  ${mark}`);
+}
+if (tableOnly.length > 0) {
+  console.log(`  FRAME_MARKS declares marks the spec never wrote down: ${tableOnly.sort().join(" ")}`);
 }
 if (undeclared.length > 0) {
   console.log(`  recognised but undeclared (tolerated): ${undeclared.sort().join(" ")}`);
