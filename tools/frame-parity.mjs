@@ -87,6 +87,34 @@ const tableCodes = new Set(
 const untabled = standing.filter((s) => !tableCodes.has(s.code));
 const tableOnly = [...tableCodes].filter((c) => !standing.some((s) => s.code === c));
 
+// AND EVERY READER, checked against the table rather than rewritten onto it.
+//
+// Four readers spell their own control codes inside scans their contexts earned — the stream framer
+// refusing to cross a line, the bootstrap taking the wider read, the deserializer anchoring on the
+// code itself. Rewriting those to build from a shared constant would collapse three scars into one
+// regex and reopen the bugs their comments record.
+//
+// So the table stays authoritative BY VERIFICATION rather than by construction: every code any reader
+// scans for must stand in `FRAME_MARKS`, and every mark the table declares must be scanned somewhere.
+// Six spellings of one fact do not always want one spelling — sometimes they want an instrument that
+// notices when they disagree.
+const READERS = [
+  "packages/lararium-tw5/src/meme-ast/scanner.ts",
+  "packages/lararium-tw5/src/meme-stream.ts",
+  "packages/lararium-tw5/src/deserializer.ts",
+  "packages/lararium-tw5/src/block-check.ts",
+];
+const readerCodes = new Map();
+for (const f of READERS) {
+  for (const m of readFileSync(join(REPO, f), "utf8").matchAll(/&#x00[0-9A-Fa-f]{2};/g)) {
+    if (!readerCodes.has(m[0])) readerCodes.set(m[0], []);
+    const at = readerCodes.get(m[0]);
+    if (!at.includes(f)) at.push(f);
+  }
+}
+const strayInReader = [...readerCodes.keys()].filter((c) => !tableCodes.has(c));
+const unscanned = [...tableCodes].filter((c) => !readerCodes.has(c));
+
 const unrecognised = standing.filter((s) => !seen.has(s.code));
 const undeclared = [...seen].filter(
   (c) => !standing.some((s) => s.code === c) && !reserved.some((r) => r.code === c),
@@ -104,6 +132,13 @@ if (specOnly.length > 0) {
   console.log(`  the spec stands marks the bootstrap scanner cannot find:`);
   for (const { code, mark } of specOnly) console.log(`    ${code}  ${mark}`);
 }
+if (strayInReader.length > 0) {
+  console.log(`  a reader scans for marks FRAME_MARKS never declares:`);
+  for (const c of strayInReader.sort()) console.log(`    ${c}  ${readerCodes.get(c).join(" ")}`);
+}
+if (unscanned.length > 0) {
+  console.log(`  FRAME_MARKS declares marks no reader scans for: ${unscanned.sort().join(" ")}`);
+}
 if (untabled.length > 0) {
   console.log(`  the spec stands marks FRAME_MARKS never declares, so no reader or writer holds them:`);
   for (const { code, mark } of untabled) console.log(`    ${code}  ${mark}`);
@@ -115,7 +150,12 @@ if (undeclared.length > 0) {
   console.log(`  recognised but undeclared (tolerated): ${undeclared.sort().join(" ")}`);
 }
 
-if (unrecognised.length === 0) {
+// A WITNESS THAT PRINTS WITHOUT FAILING IS THE ABSENCE-OF-FINDING SHAPE IN ITS OWN CLOTHES: every
+// seam below either fails the run or it is decoration, so all of them count.
+const broken =
+  unrecognised.length + strayInReader.length + unscanned.length + untabled.length + specOnly.length;
+
+if (broken === 0) {
   console.log("  every mark the spec stands, a tiddler declares and patterns");
   process.exit(0);
 }
