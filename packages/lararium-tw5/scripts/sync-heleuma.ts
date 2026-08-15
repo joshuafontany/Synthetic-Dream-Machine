@@ -417,11 +417,13 @@ function runScanPromote(): void {
 //   source-file/source-symbol, injects into module tiddler body if drifted.
 // ---------------------------------------------------------------------------
 
-/** Extract the body text between <<~\x02>> and <<~\x03>> from a module tiddler. */
+/** Extract the body text a module tiddler frames between its STX and ETX marks. */
 function extractModuleBody(content: string): string | null {
-  // STX marker may be raw \x02 or the HTML entity form
-  const stxRe = /<<[~^](?:&#x0002;|[\x02])>>/;
-  const etxRe = /<<[~^](?:&#x0003;|[\x03])>>/;
+  // A mark rides the head as a NAMED PARAM (`code:"&#x0002;"`), and a hand-written carrier may still
+  // spell it as a raw control character. Both scans admit either, and both admit whatever else the head
+  // carries — a pattern that demanded the mark alone matched only the one spelling it was written for.
+  const stxRe = /<<[~^][^>\n]*(?:&#x0002;|[\x02])[^>\n]*>>/;
+  const etxRe = /<<[~^][^>\n]*(?:&#x0003;|[\x03])[^>\n]*>>/;
   const stxM = stxRe.exec(content);
   const etxM = etxRe.exec(content);
   if (!stxM || !etxM) return null;
@@ -613,7 +615,7 @@ function scaffoldDecoratorMeme(d: DecoratorFile): void {
 
   const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ &#x0001; ? -> lar:///${uriPath} >>
+<<^ code:"&#x0001;" ? -> lar:///${uriPath} >>
 \`\`\`toml iam
 uri-path    = "${uriPath}"
 file-path   = "${filePath}"
@@ -633,7 +635,7 @@ cacheable   = true
 status-date = "${new Date().toISOString().slice(0, 10)}"
 \`\`\`
 
-<<^ &#x0002;>>
+<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -661,9 +663,9 @@ ${joined}
 
 <<~/ahu >>
 
-<<^ &#x0003;>>
+<<^ code:"&#x0003;" >>
 
-<<^ &#x0004; -> ? >>
+<<^ code:"&#x0004;" -> ? >>
 `;
 
   writeFileSync(memePath, meme, "utf8");

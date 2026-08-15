@@ -41,7 +41,7 @@ export interface ParseEvent {
 // Used when no GrammarRules loaded (bootstrap / unit tests without grammar).
 //
 // Control-character framing protocol MUST precede ahu and generic scans so
-// decorated forms like <<^&#x0002; ahu #meme-body-open >> remain structural.
+// decorated forms like <<^ code:"&#x0002;" ahu #meme-body-open >> remain structural.
 // ---------------------------------------------------------------------------
 
 export const BOOTSTRAP_SCANS: SigilScan[] = [

@@ -65,7 +65,7 @@ describe("the property the matchers must hold", () => {
 
   test("either head opens a carrier when the classifier follows", () => {
     expect(CARRIER_SOH.test("<<^ code:\"&#x0001;\" namespace:\"⚕\" ? -> lar:///x >>")).toBe(true);
-    expect(CARRIER_SOH.test("<<~ ⚕&#x0001; ? -> lar:///x >>")).toBe(true);
+    expect(CARRIER_SOH.test("<<~ code:\"&#x0001;\" namespace:\"⚕\" ? -> lar:///x >>")).toBe(true);
     expect(CARRIER_SOH.test("<<^ code:\"&#x0011;\" namespace:\"⊙\" ? -> lar:///x >>")).toBe(true);
   });
 

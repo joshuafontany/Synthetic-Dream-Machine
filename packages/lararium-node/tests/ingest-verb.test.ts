@@ -166,7 +166,7 @@ describe("INGEST — the gate composed with replace-by-group", () => {
 
     // The known refusal class: an unclosed fence that swallows the closer
     // (the shore's degraded-carrier surfacing, found live 2026-06-11).
-    const broken = source.replace("<<^ &#x0003; >>", "```js\nunclosed fence\n<<^ &#x0003; >>");
+    const broken = source.replace("<<^ code:\"&#x0003;\" >>", "```js\nunclosed fence\n<<^ code:\"&#x0003;\" >>");
     const table = new VerbTable();
     registerActionReactors(table, { composite });
     const args = ingestArgs(broken, sha(canonical));
