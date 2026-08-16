@@ -142,9 +142,10 @@ export interface DaemonVmCoreOptions {
   daemonHandle:     DocHandle<LarDoc>;
   /** Persona (@persona PersonaGroup) doc handle, resolved by the platform wrapper the same way.
    *  The ONE daemon VM tends BOTH bags — @daemon (sovereign) + @persona (veiled identity). */
-  personaHandle:    DocHandle<LarDoc>;
+  /** ABSENT on a PLACE that never grew a face — the VM tends @daemon alone. */
+  personaHandle?:   DocHandle<LarDoc>;
   /** The mounted plane's bag id, derived from its PersonaGroup's own doc id — one name, everywhere. */
-  personaBagId:     string;
+  personaBagId?:    string;
   /** One-recipe model for the daemon island. */
   recipe:          WikiRecipe;
   /** Typed structural capabilities (engine doc, @daemon bag, @lares, @catalog access). */
@@ -315,9 +316,12 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   // The PersonaGroup plane this vessel stands in, tended by the SAME VM (one VM, two bags), and
   // mounted under the name its own group derives — the id the registry, the cap ring and the admit
   // payload all use for it.
-  const personaStore = new AutomergeDocStore(personaHandle, personaBagId);
-  composite.addLayer({ bagId: personaBagId, store: personaStore, writable: true });
-  personaStore.markSyncComplete();
+  // The persona plane layers only when a face stands; a faceless place carries @daemon and nothing of a person.
+  if (personaHandle && personaBagId) {
+    const personaStore = new AutomergeDocStore(personaHandle, personaBagId);
+    composite.addLayer({ bagId: personaBagId, store: personaStore, writable: true });
+    personaStore.markSyncComplete();
+  }
 
   // ── MessageChannel — island ↔ vessel Repo sync (wiring owned by mesh) ───────
   const { mainPort, syncPort } = host.newSyncChannel();

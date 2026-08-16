@@ -29,14 +29,22 @@ import { wikiSlotUri } from "./wiki-recipe.js";
 import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
 import { isCondemned, type DocLoadProbe, type ProbeResult } from "./doc-load-probe-contract.js";
 
-/** The social-plane + daemon + persona doc URLs a vessel's bootstrap resolves (founding done). */
+/**
+ * The doc URLs a vessel's bootstrap resolves.
+ *
+ * ONLY `daemonUrl` stands required. A founding stands a PLACE first — @daemon, the vessel's own Keyhive
+ * individual, the hearth-true-name — and the FACE lands later by an operator act, so a vessel that carries
+ * and serves while holding no persona names NO social plane here. Absence reads as the waking floor, never
+ * as a torn founding: the boot path refuses a HALF face (some pins standing, others absent) exactly as
+ * `bootDaemonKeyhive` does, so fewer caps never buys a softened gate.
+ */
 export interface VesselBootstrap {
-  identitiesUrl: string;
-  circlesUrl:    string;
-  sessionsUrl:   string;
+  identitiesUrl?: string;
+  circlesUrl?:   string;
+  sessionsUrl?:  string;
   daemonUrl:      string;
   /** The mounted PersonaGroup plane's doc URL — founded alongside @daemon. */
-  personaUrl:     string;
+  personaUrl?:    string;
   /**
    * The mounted plane's BAG ID, derived from that PersonaGroup's own doc id (`personaBagIdFor`).
    *
@@ -44,7 +52,7 @@ export interface VesselBootstrap {
    * stand in" ONCE — at the boot path that reads its own sentinels — and everything downstream carries the
    * absolute name (persona-planes, and canon at persona-circle#the-plane-name).
    */
-  personaBagId:   string;
+  personaBagId?:  string;
   /**
    * EVERY PersonaGroup plane this vessel carries — the one it mounts among them, and the rest it merely
    * holds. Registration walks all of them; the mount takes exactly one (`persona-planes`).
@@ -245,14 +253,18 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
     composite.addLayer({ bagId, store: new AutomergeDocStore(await resolve(url as AutomergeUrl), bagId), writable: true });
     entries.push({ bagId, documentId, status: "mounted" });
   };
-  await mountSocial(BAG_IDS.identities, bootstrap.identitiesUrl);
-  await mountSocial(BAG_IDS.groups,     bootstrap.circlesUrl);
-  await mountSocial(BAG_IDS.sessions,   bootstrap.sessionsUrl);
+  // A PLACE names no social plane, so each mount rides its own url standing. A faceless vessel carries
+  // and serves with these absent — the waking floor, reached by founding rather than by falling.
+  if (bootstrap.identitiesUrl) await mountSocial(BAG_IDS.identities, bootstrap.identitiesUrl);
+  if (bootstrap.circlesUrl)    await mountSocial(BAG_IDS.groups,     bootstrap.circlesUrl);
+  if (bootstrap.sessionsUrl)   await mountSocial(BAG_IDS.sessions,   bootstrap.sessionsUrl);
   await mountSocial(DAEMON_BAG_ID,      bootstrap.daemonUrl);
   // The PersonaGroup plane this vessel stands in, mounted under its own derived name. Exactly one plane
   // mounts: the composite resolves a title by walking layers, so a second writable plane would answer
   // reads meant for the first, in load order.
-  await mountSocial(bootstrap.personaBagId, bootstrap.personaUrl);
+  if (bootstrap.personaBagId && bootstrap.personaUrl) {
+    await mountSocial(bootstrap.personaBagId, bootstrap.personaUrl);
+  }
   const mountManifest: MountManifest = { entries, degraded };
 
   if (recipe.loadCorpora) {

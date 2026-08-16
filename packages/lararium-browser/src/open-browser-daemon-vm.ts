@@ -36,9 +36,10 @@ export interface BrowserDaemonVmOptions {
   repo:             Repo;
   daemonUrl:         string;
   /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc. */
-  personaUrl:        string;
+  /** ABSENT on a place that never grew a face. */
+  personaUrl?:       string;
   /** The mounted plane's bag id, resolved once at the boot path — carried, never re-derived here. */
-  personaBagId:      string;
+  personaBagId?:     string;
   /** SHA-256 hex of TW5 core blob. null = pre-CAS path. */
   coreHash:         string | null;
   /** CIDs of the engine's plugin-tiddler blobs — the worker pulls them by CID from OPFS. */
@@ -86,7 +87,7 @@ export async function openBrowserDaemonVm(
   // ── Persona doc handle (same find-or-create) — the one VM tends both bags ────
   const personaHandle = await (async () => {
     try {
-      return await repo.find<LarDoc>(personaUrl as AutomergeUrl);
+      return personaUrl ? await repo.find<LarDoc>(personaUrl as AutomergeUrl) : undefined;
     } catch {
       return repo.create<LarDoc>(emptyLarDoc());
     }
@@ -100,7 +101,9 @@ export async function openBrowserDaemonVm(
   // The wrapper IS the shore — host pieces + find-or-create daemonHandle; the lifecycle and the
   // whole result surface (DaemonVmCore) live once in the core. Return it directly, no re-spread.
   return openDaemonVmCore(host, {
-    repo, daemonHandle, personaHandle, personaBagId, recipe, grants, coreHash,
+    repo, daemonHandle, recipe, grants, coreHash,
+    ...(personaHandle ? { personaHandle } : {}),
+    ...(personaBagId  ? { personaBagId }  : {}),
     ...(pluginCids?.length ? { pluginCids } : {}),
     ...(daemonAuth ? { daemonAuth } : {}),
     workerScriptUrl,

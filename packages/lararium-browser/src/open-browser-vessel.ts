@@ -777,8 +777,12 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // path), never CRDT-syncing the @oracle blob doc over the port. Same derivation as the pool.
       const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
       daemon = await openBrowserDaemonVm({
-        repo, daemonUrl: social.daemonUrl, personaUrl: social.personaUrl,
-        personaBagId: personaBagIdFor(social.personaGroupDocIdHex), coreHash: assembly.coreHash,
+        repo, daemonUrl: social.daemonUrl, coreHash: assembly.coreHash,
+        // The persona plane rides only when a face stands. A browser vessel normally holds one — it IS
+        // a person's face — so absence here names an unfinished founding rather than a crossroads, and
+        // the VM stands faceless instead of resolving a document nobody founded.
+        ...(social.personaUrl ? { personaUrl: social.personaUrl } : {}),
+        ...(social.personaBagId ? { personaBagId: social.personaBagId } : {}),
         ...(pluginCids.length ? { pluginCids } : {}),
         workerScriptUrl: daemonWorkerUrl,
         recipe: { wikiSlug: "daemon" } satisfies WikiRecipe,

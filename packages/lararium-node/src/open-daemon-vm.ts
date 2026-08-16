@@ -38,10 +38,13 @@ const DEFAULT_ADMIN_WORKER_URL = new URL("./node-daemon-island.js", import.meta.
 export interface DaemonVmOptions {
   repo:              Repo;
   daemonUrl:          string;
-  /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc. */
-  personaUrl:         string;
-  /** The mounted plane's bag id, resolved once at the boot path — carried, never re-derived here. */
-  personaBagId:       string;
+  /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc.
+   *  ABSENT on a PLACE that never grew a face: there is no persona doc to resolve, and the VM
+   *  stands without one rather than reaching for a document nobody founded. */
+  personaUrl?:        string;
+  /** The mounted plane's bag id, resolved once at the boot path — carried, never re-derived here.
+   *  Absent with `personaUrl`; the two stand or fall together. */
+  personaBagId?:      string;
   /**
    * SHA-256 hex (the CID) of the TW5 core blob — the daemon island pulls the engine
    * bytes by this CID from the local CAS (the CID plane).
@@ -76,10 +79,10 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
     { tideline: "hearth-private", label: "@daemon" },
   );
   // ── Persona doc handle (same strategy) — the one VM tends both bags ──────────
-  const personaHandle = await resolveBootDoc<LarDoc>(
+  const personaHandle = personaUrl ? await resolveBootDoc<LarDoc>(
     repo, personaUrl as AutomergeUrl,
     { tideline: "hearth-private", label: "@persona" },
-  );
+  ) : undefined;
 
   // The daemon holds NO standing system-bag mount: it reaches a deep target bag
   // by ACCESS per residency action (ephemeral mount, released after — the
@@ -101,7 +104,9 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
   // The wrapper IS the shore — host pieces + recipe/storage + merge-on-arrival daemonHandle;
   // the lifecycle and the whole result surface (DaemonVmCore) live once in the core.
   return openDaemonVmCore(host, {
-    repo, daemonHandle, personaHandle, personaBagId, recipe, grants, coreHash,
+    repo, daemonHandle, recipe, grants, coreHash,
+    ...(personaHandle ? { personaHandle } : {}),
+    ...(personaBagId  ? { personaBagId }  : {}),
     ...(pluginCids?.length ? { pluginCids } : {}),
     ...(daemonAuth ? { daemonAuth } : {}),
     ...(storage   ? { storage }   : {}),

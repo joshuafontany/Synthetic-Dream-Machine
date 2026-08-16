@@ -798,13 +798,32 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         ? mountedPlaneBagId(personaPlanes, personaGroupId)
         : null;
       const personaUrl     = personaPlanes.find((p) => p.personaGroupId === personaGroupId)?.url ?? null;
-      if (!identitiesUrl || !circlesUrl || !sessionsUrl || !daemonUrl || !personaUrl || !personaBagId) {
+      // ── THE PLACE STANDS ALONE; THE FACE RIDES OPTIONAL ────────────────────────────────────────
+      // Only @daemon reads required — a founding stands a PLACE first (`lares vessel found`) and a FACE
+      // later (`lares persona new 0`), so a vessel that carries and serves while holding no persona names
+      // none of the social planes here. Absence reads as the WAKING FLOOR.
+      if (!daemonUrl) {
+        throw new Error(`[lararium] this vessel names no @daemon — the place never finished founding. Run \`lares vessel found\`.`);
+      }
+      // A TORN face refuses outright, mirroring `bootDaemonKeyhive`: some pins standing and others absent
+      // names a half-finished founding, and guessing which half to trust is the confused-deputy error.
+      const faceParts = [identitiesUrl, circlesUrl, sessionsUrl, personaUrl, personaBagId];
+      const faceHeld  = faceParts.filter(Boolean).length;
+      if (faceHeld > 0 && faceHeld < faceParts.length) {
         throw new Error(
-          `[lararium] social plane not initialised — run: pnpm --filter @lararium/node lararium:init\n` +
-          `  missing: ${[!identitiesUrl && "@identities", !circlesUrl && "@circles", !sessionsUrl && "@sessions", !daemonUrl && "@daemon", !personaUrl && "the PersonaGroup plane", !personaBagId && "the PersonaGroup sentinel"].filter(Boolean).join(", ")}`,
+          `[lararium] the face this vessel carries reads TORN — some social planes stand and others do not.\n` +
+          `  missing: ${[!identitiesUrl && "@identities", !circlesUrl && "@circles", !sessionsUrl && "@sessions", !personaUrl && "the PersonaGroup plane", !personaBagId && "the PersonaGroup sentinel"].filter(Boolean).join(", ")}\n` +
+          `  Re-light the face (\`lares persona new 0\`) rather than booting on half of one.`,
         );
       }
-      bootstrap = { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl, personaBagId, personaPlanes };
+      bootstrap = {
+        daemonUrl, personaPlanes,
+        ...(identitiesUrl ? { identitiesUrl } : {}),
+        ...(circlesUrl    ? { circlesUrl }    : {}),
+        ...(sessionsUrl   ? { sessionsUrl }   : {}),
+        ...(personaUrl    ? { personaUrl }    : {}),
+        ...(personaBagId  ? { personaBagId }  : {}),
+      };
       return { islandHandle, coreHash, bootstrap };
     },
 
@@ -955,8 +974,9 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     daemonVm = await openDaemonVm({
       repo,
       daemonUrl: bootstrap.daemonUrl,
-      personaUrl: bootstrap.personaUrl,
-      personaBagId: bootstrap.personaBagId,
+      // The persona plane rides only when a face stands; the daemon VM resolves nothing that is absent.
+      ...(bootstrap.personaUrl   ? { personaUrl:   bootstrap.personaUrl }   : {}),
+      ...(bootstrap.personaBagId ? { personaBagId: bootstrap.personaBagId } : {}),
       coreHash: assembly.coreHash,
       ...(pluginCids.length ? { pluginCids } : {}),
       grants: {
