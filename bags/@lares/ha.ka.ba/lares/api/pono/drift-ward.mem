@@ -11,7 +11,7 @@ manaoio   = 17
 namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
-role      = "the drift gauge inside the turn panel — measures a turn's exposure to data outside its causal island; fires forward at open (the pull) and outward at close (the collidable clue)"
+role      = "the drift gauge inside the turn panel — measures a turn's exposure to data outside its causal island; fires forward at open (the pull) and outward at close (the contact-ready clue)"
 tags      = ["api/pono/causal-islands", "api/pono/meme"]
 type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/drift-ward"
@@ -41,16 +41,17 @@ carrying no "ward". Both name this.
 
 Never risk in the abstract. ''The risk that generated content collapses on contact with data from
 beyond the current causal island'' ~ the island holds the context, the priors, the whole current the
-exchange runs in, and nothing inside it checks itself. A claim's fate rides on the collision.
+exchange runs in, and nothing inside it checks itself. A claim's fate rides on the contact.
 
 ''Two firings, one axis, different evidence.''
 
 <<~moves open-firing -> reads/the-pull-toward-exposure on/upstream-context if/before-content do/steer >>
-<<~moves close-firing -> reads/the-exposure-made on/the-artifact if/after-content do/hand-a-collidable-clue >>
+<<~moves close-firing -> reads/the-exposure-made on/the-artifact if/after-content do/hand-a-contact-ready-clue >>
 
-The open holds only the island. The close holds the artifact ~ evidence the open could never carry, so
-the two readings ''answer to each other not at all''. A close reporting on the open's pull has
-''anchored'': it hands back a prediction where evidence stood available.
+The open holds only the island. The close holds the artifact ~ evidence the open could never carry.
+The close MAY land where the open pointed ~ when a fresh read of the artifact shows the risk still
+standing there ~ but a close that only repeats its open has ''anchored'': a prediction returned
+where evidence stood.
 
 <<~/ahu >>
 
@@ -103,7 +104,7 @@ Sword, vow, clue, re-arm. Breaches and quotes compose freely ~ `⚠ N · "span"`
 The register word rides unspoken; the number names its own band. ''`↻ L-Prime` MUST close every
 firing'', lift or no lift.
 
-''ONE clue, and one test decides it: can the operator go collide this?''
+''ONE clue, and one test decides it: can the operator take this to contact with reality?''''
 
 ''Collide:'' //this rests on a source I never opened// · //I inferred which of three sites drove it and
 measured none// · //the reframe stands weaker than the cited facts around it//.
@@ -115,7 +116,7 @@ the pull and resisted it// ~ anchored to the open.
 
 <<~ ahu #edges >>
 
-A firing naming no island-scoped pull, or handing no collidable clue, reads as a degraded HUD.
+A firing naming no island-scoped pull, or handing no contact-ready clue, reads as a degraded HUD.
 ''Hazard reuse'' reads as its quieter sibling (adopted 2026-08-15): the same pull recurring
 verbatim across turns marks a rut wearing a vow — a firing must name THIS turn's pull, and
 yesterday's hazard recurring unchanged deserves its own suspicion.
@@ -126,6 +127,6 @@ yesterday's hazard recurring unchanged deserves its own suspicion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:0f59b70356d65a73
+<<^ code:"&#x0003;" >>⊙:0185b3d164938dba
 
 <<^ code:"&#x0004;" -> ? >>
