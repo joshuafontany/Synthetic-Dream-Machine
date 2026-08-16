@@ -93,6 +93,9 @@ const project = (src) => {
 };
 
 const SCHEMA = [
+  // THE LINE THIS WITNESS DID NOT CHECK. It held SOH through EOT and passed a projection carrying no
+  // declaration at all — the one line that selects which grammar reads everything below it.
+  ["the carrier opens on its declaration", (t) => /^<<!DOCTYPE memetic-wikitext\+tiddlywiki lar:\/\/\/\S+ >>$/m.test(t.split("\n")[0] ?? "")],
   ["SOH states its code", (t) => /^<<\^ code:"&#x(?:0001|0011);"/m.test(t)],
   ["SOH states its bearing", (t) => /^<<\^ code:"&#x(?:0001|0011);"[^>\n]*?\? -> \S+ >>/m.test(t)],
   ["STX opens the body", (t) => t.includes('<<^ code:"&#x0002;" >>')],

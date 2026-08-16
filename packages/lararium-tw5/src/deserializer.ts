@@ -51,6 +51,10 @@ import { parseTaploFields } from "./toml-ast.js";
 import { shoreDiagnostic } from "./meme-ast/diagnostics.js";
 import { classifyPostamble } from "./block-check.js";
 import { CARRIER_TYPE, CARRIER_TYPES, isCarrierType } from "@lararium/mesh/carrier-type";
+
+/** The one declaration a carrier opens on: this grammar, at the address that specifies it. */
+const DECLARATION =
+  "<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>";
 import type { MemeDiagnostic } from "./meme-ast/diagnostics.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
 import { parseMemeText } from "./meme-ast/parse.js";
@@ -903,6 +907,14 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   const ns = str("namespace").trim();
 
   let out = str("prologue");
+  // THE DECLARATION IS THE CARRIER'S BUSINESS, exactly as the frame is. An author writes content and
+  // identity; which grammar reads the result is not a question they should have to answer, and a
+  // carrier that never carried a declaration would otherwise never gain one — the projection would
+  // mint SOH through EOT and leave the one line that selects the grammar to chance.
+  //
+  // `prologue` wins where it stands: a carrier that already opens on a declaration re-emits its own
+  // bytes verbatim, so minting fills an ABSENCE and never overwrites an author.
+  if (!/^<<!DOCTYPE\b/m.test(str("prologue"))) out += `${DECLARATION}\n\n`;
   out += `<<^ code:"${sohCode}"${ns ? ` namespace:"${ns}"` : ""} ? -> ${memeUri} >>\n`;
   out += str("preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
