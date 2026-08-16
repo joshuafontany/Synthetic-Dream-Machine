@@ -56,6 +56,23 @@ for (const f of files) {
   // FIELD OF THE TEXT BODY (operator ruling), so a bag manifest or a library index whose whole content
   // IS its iam stands with a heading and nothing to bracket. Demanding ETX there would report ten
   // correct carriers as broken, which is how a witness teaches a reader to ignore it.
+  // THE CLOSES COME IN ORDER, and nothing checked it. Three carriers stood `EOT · ETX · EOT` — an
+  // end-of-transmission before the text had ended — and every check here passed them: a mark rode the
+  // control head, an opened body closed, and the LAST of each mark sat in the right sequence. Only a
+  // render diff found them, which is the one instrument an operator does not run by hand.
+  //
+  // THE SHAPE, NOT THE ORDER OF EVERY PAIR. This tool reads raw text with no fence mask, and memes that
+  // TEACH the frame carry complete example carriers in their bodies — `carrier-sigils` shows a full
+  // heading-to-release sequence, `meme/SKILL` carries a whole stamped example. An EOT that precedes an
+  // ETX with PROSE between them is a lesson. An EOT that precedes the final ETX with only blank lines
+  // between them is a stray close, and the only thing it can be.
+  const finalEtx = (() => { let at = -1; for (const m of t.matchAll(/^<<\^[^>\n]*&#x0003;[^\n]*$/gm)) at = m.index; return at; })();
+  if (finalEtx >= 0) {
+    const before = t.slice(0, finalEtx);
+    const strayEot = /<<\^[^>\n]*&#x(?:0004|0014);[^\n]*>>\s*$/.exec(before);
+    if (strayEot) faults.push([f, "an EOT stands immediately before the final ETX — a stray close"]);
+  }
+
   if (/^<<\^[^>\n]*&#x0002;/m.test(t)) {
     if (!/^<<\^[^>\n]*&#x0003;/m.test(t)) faults.push([f, "opens a body on STX and never closes it on ETX"]);
     if (!/^<<\^[^>\n]*&#x(?:0004|0014);/m.test(t)) faults.push([f, "closes on ETX and never ends on EOT"]);
