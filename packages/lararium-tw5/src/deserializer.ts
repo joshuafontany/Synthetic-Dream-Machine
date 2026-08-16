@@ -50,6 +50,7 @@ export { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence
 import { parseTaploFields } from "./toml-ast.js";
 import { shoreDiagnostic } from "./meme-ast/diagnostics.js";
 import { classifyPostamble } from "./block-check.js";
+import { bccOfSpan } from "./carrier-check.js";
 import { CARRIER_TYPE, CARRIER_TYPES, isCarrierType } from "@lararium/mesh/carrier-type";
 
 /** The one declaration a carrier opens on: this grammar, at the address that specifies it. */
@@ -919,15 +920,23 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   out += str("preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
   out += expandRefs(reader, memeUri, "", str("header-text"), f);
+  // THE SPAN OPENS HERE. The check covers STX-open through ETX-close inclusive, so the emitter marks
+  // where the body begins and computes over the bytes it has actually assembled — never over a field.
+  const spanStart = out.length;
   out += `<<^ code:"${MARK("STX")}" >>\n\n`;
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
   // ETX takes its block check adjacent, per the received framing (STX -> text -> ETX -> BCC); the
-  // attestation block follows and ETB terminates it. A carrier carrying neither emits neither, so
-  // nothing that stands today changes shape — and a carrier that gains one keeps it across a
-  // projection round trip, which is the whole reason the emitter has to know the mark at all.
-  const bcc  = str("carrier-bcc");
+  // attestation block follows and ETB terminates it.
+  //
+  // COMPUTED HERE, NEVER READ FROM A FIELD. A stored check goes stale the moment the bytes move, and
+  // the span carries the frame sigils' OWN bytes — so a frame migration would turn every stored check
+  // into a `mismatch` over a body nobody touched. The parser lands an arriving check on `block-check`;
+  // the emitter reads that field for PRESENCE alone and recomputes the value, which is what lets a
+  // stamped carrier survive a round trip at all.
   const sila = str("carrier-sila");
-  out += `\n\n<<^ code:"${MARK("ETX")}" >>${bcc ? `${bcc}` : ""}\n`;
+  out += `\n\n<<^ code:"${MARK("ETX")}" >>`;
+  if (str("block-check")) out += bccOfSpan(out.slice(spanStart), str("namespace").trim());
+  out += "\n";
   if (sila) out += `\n${sila}\n<<^ code:"${MARK("ETB")}" >>\n`;
   out += `\n<<^ code:"${MARK("EOT")}" -> ? >>\n`;
   // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
