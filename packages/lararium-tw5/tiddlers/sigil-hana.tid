@@ -1,6 +1,7 @@
 title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-hana
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: guest-grammar
+lar-cold: structure
 lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/hana
 lar-see-also: \task
 lar-open-pattern: <<~\s*hana\s+([^\n>]+?)\s*>>

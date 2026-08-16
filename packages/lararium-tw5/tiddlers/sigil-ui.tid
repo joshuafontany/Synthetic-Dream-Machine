@@ -1,6 +1,7 @@
 title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-ui
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: query
+lar-cold: structure
 lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/ui
 lar-see-also: \query
 lar-pattern: <<~\s*ui\s+([^\n>]+?)\s*>>
