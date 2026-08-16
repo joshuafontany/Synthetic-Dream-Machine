@@ -294,8 +294,21 @@ function splitMemeToTiddlers(
   // truncated everything after it (real corpus loss).
   const hadSoh = SOH_LINE_RE.test(text);
   const noSoh = text.replace(SOH_LINE_RE, "");   // anchored at 0 — never fenced
-  const etxM = maskedExec(noSoh, /\n?<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/);
-  const stripped = etxM ? noSoh.slice(0, etxM.index) : noSoh;
+  // THE LAST CLOSE CLOSES; AN EARLIER ONE BELONGS TO AN EMBEDDED EXAMPLE. Documents that TEACH the
+  // frame carry example marks in their prose — `meme/SKILL` holds two ETX and three EOT — and cutting
+  // at the first truncated a body mid-document. `checkedSpan` already walks to the last ETX for the
+  // same reason on the same corpus; this walk is that rule, in the split.
+  //
+  // A carrier that frames no body still closes its transmission, so where no ETX stands the body ends
+  // at the last EOT — otherwise the author's own close rides inside the body and the projection mints
+  // a second one below it.
+  let etxM: { index: number } | null = null;
+  for (const m of maskedExecAll(noSoh, /\n?<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g)) etxM = m;
+  let eotM: { index: number } | null = null;
+  if (!etxM) {
+    for (const m of maskedExecAll(noSoh, /\n?<<\^(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*>>/g)) eotM = m;
+  }
+  const stripped = etxM ? noSoh.slice(0, etxM.index) : (eotM ? noSoh.slice(0, eotM.index) : noSoh);
   // Degraded-carrier surfacing: a closer swallowed by an UNCLOSED fence
   // tail would ride into the body as CONTENT — and every render would
   // append a fresh closer pair, doubling without bound. This shows up
@@ -328,7 +341,16 @@ function splitMemeToTiddlers(
   // (the header-routed wrap left the body slot empty
   // and stacked blank lines). A degraded SOH-carrier missing its STX keeps the
   // header reading (its iam still parses; the gradient grades the miss).
-  const bare = !hadSoh && !stxM;
+  // ONE MODEL FOR EVERY CARRIER: the identity heading, then the body. NO STX MEANS ALL BODY, heading or
+  // no heading — a carrier stating identity and nothing framed is a meme whose body the author left
+  // short, not a second kind of document. The body stands OPTIONAL and may hold prose, ahu slots, both,
+  // or nothing; a meme maps to several tiddlers and a tiddler's own text may stand empty.
+  //
+  // Reading a heading-only carrier as ALL HEADER routed its prose into `header-text` and left the body
+  // slot empty, so the projection minted an empty STX/ETX pair beside the author's own EOT — a carrier
+  // that never round-tripped, in a shape nothing measured, because both witnesses skip a carrier that
+  // states no `uri-path` and these were exactly the carriers that stated none.
+  const bare = !stxM;
   // AN AUTHORED IAM IS A HEADING, FRAME OR NO FRAME. The frame is the carrier's business; identity is
   // the AUTHOR'S, and an operator who opens a file with a labelled `toml iam` fence has stated one.
   // Reading a bare doc as ALL BODY buried that fence in the text and minted a near-empty heading beside
