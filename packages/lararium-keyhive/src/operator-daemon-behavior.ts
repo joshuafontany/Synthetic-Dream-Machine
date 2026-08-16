@@ -28,7 +28,7 @@ import {
   makePersonaSelvesReactors,
   makeCabalRealmReactors,
 } from "@lararium/tw5";
-import { CIRCLES_DOC_URI, DAEMON_BAG_ID, personaBagIdFor } from "@lararium/mesh";
+import { CIRCLES_DOC_URI, DAEMON_BAG_ID, personaBagIdFor, leaseEpochPrefix, effectiveLeaseEpoch } from "@lararium/mesh";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
@@ -53,6 +53,7 @@ import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFI
 import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
 import { DaemonEventStore } from "./daemon-event-store.js";
 import { resolveOrMintBinding } from "./resolve-binding.js";
+import { runFaceJoin, type FaceJoinSummons } from "./face-join.js";
 import type { KeyhiveProvider } from "./keyhive-provider.js";
 
 /**
@@ -204,6 +205,57 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         const realmReactors = makeCabalRealmReactors({ resolveStore: resolveDaemonStore });
         registry.register("realm-feed",  realmReactors.feed);
         registry.register("realm-clock", realmReactors.clock);
+
+        // `face-join` — the CAPABILITY half of joining this operator's own face, run where the booted
+        // provider already lives. A device-admit confers STANDING (a signed edge the joinee pins); keyhive
+        // still knows no such member, so the joinee reaches the plaintext planes and decrypts nothing sealed.
+        // A joinee summons here with its ContactCard + the edge that licenses it, and leaves holding the
+        // group key. The human confers standing once, by hand; the machine completes the capability.
+        //
+        // The gate reads THIS vessel's own edge for its two anchors: the root that signed us is the only root
+        // whose edges seat anyone here, and the hearth we bind to is the hearth a joinee must bind to.
+        //
+        // FRESHNESS TAKES THE LEASE, NEVER THE CLOCK ALONE. The PersonaGroup's per-writer slots fold by
+        // max-register — monotone, read locally, no shared now — and a grant bound below that reads stale.
+        // Rolling those slots re-admits the WHOLE fleet (the epoch leases, it never revokes one device;
+        // a single device leaves by `revokeSentinelMember`).
+        registry.register("face-join", async (args) => {
+          if (!kh) throw new Error("[daemon] face-join: keyhive unbooted");
+          const ownEdge = daemonAuth.deviceEdge;
+          if (!ownEdge) {
+            throw new Error(
+              "[daemon] face-join: this vessel carries no device edge of its own, so it can name no root to " +
+              "verify a joinee against — light a face with `lares persona new 0 --name '<label>'`.",
+            );
+          }
+          const summons = args["summons"] as FaceJoinSummons | undefined;
+          if (!summons || typeof summons !== "object") {
+            throw new Error("[daemon] face-join: no summons in args — carry {contactCard, deviceEdge}.");
+          }
+          // The lease read, off the live @daemon replica: every slot under this group's prefix, folded by max.
+          const store = await resolveDaemonStore();
+          const prefix = leaseEpochPrefix(faceGroup());
+          const slots: string[] = [];
+          for (const title of await store.listVisible()) {
+            if (!title.startsWith(prefix)) continue;
+            const record = await store.get(title);
+            const text = (record as { tiddler?: { text?: unknown } } | undefined)?.tiddler?.text;
+            if (typeof text === "string") slots.push(text);
+          }
+
+          const outcome = await runFaceJoin(kh, summons, {
+            personaRootDid:       ownEdge.personaRootDid,
+            hearthTrueName:       ownEdge.hearthTrueName,
+            personaGroupDocIdHex: faceGroup(),
+            leaseEpoch:           effectiveLeaseEpoch(slots),
+            now:                  Date.now(),
+          });
+          // A refusal RETURNS — an unlicensed summons names an absent contract, never an attack, and the
+          // reason rides the outcome so the joinee's panel can paint why rather than showing a silence.
+          return outcome.ok
+            ? { verb: "face-join", admitted: true,  ...outcome.grant }
+            : { verb: "face-join", admitted: false, reason: outcome.reason };
+        });
       }
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
