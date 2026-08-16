@@ -216,12 +216,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   // never types the second at all.
   const vesselSeed = await loadVesselSigningSeed(storageDir);
 
-  const place = await foundThePlace({
-    repo,
-    vesselSeed,
-    vesselVerifyingKey: operatorIdentity.verifyingKey,
-    hearthTrueName,
-  });
+  const place = await foundThePlace({ repo, vesselSeed, hearthTrueName });
 
   // Cache the vessel's ContactCard for the light leaf-identity path — a CLI/agent
   // re-presents it on every peer handshake without booting keyhive (OP-AP5).

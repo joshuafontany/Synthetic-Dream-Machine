@@ -171,8 +171,6 @@ export interface PlaceFoundingInput {
   repo:               Repo;
   /** The PER-VESSEL device signing seed — inits Keyhive (this vessel IS the Individual). */
   vesselSeed:         Uint8Array;
-  /** Hex-encoded 32-byte Ed25519 verifying key of the per-vessel device. */
-  vesselVerifyingKey: string;
   /** The hearth true-name (engine content-CID) this place stands at. */
   hearthTrueName:     string;
 }
@@ -190,7 +188,7 @@ export interface PlaceFoundingResult {
 }
 
 /**
- * Found the PLACE — @daemon, the vessel's own Keyhive individual, and the blind-carriage cabal.
+ * Found the PLACE — @daemon, the vessel's own Keyhive individual, and the hearth it stands at.
  *
  * Everything here stands on the vessel's own key and asks nobody. A vessel founded to this point
  * carries, serves the public shelf, and holds every sovereign act closed: the waking floor, reached
@@ -476,10 +474,9 @@ export async function runFoundingCeremony(
   input: FoundingCeremonyInput,
 ): Promise<FoundingCeremonyResult> {
   const place = await foundThePlace({
-    repo:               input.repo,
-    vesselSeed:         input.vesselSeed,
-    vesselVerifyingKey: input.vesselVerifyingKey,
-    hearthTrueName:     input.hearthTrueName,
+    repo:           input.repo,
+    vesselSeed:     input.vesselSeed,
+    hearthTrueName: input.hearthTrueName,
   });
   const face = await foundTheFace({
     repo:               input.repo,
