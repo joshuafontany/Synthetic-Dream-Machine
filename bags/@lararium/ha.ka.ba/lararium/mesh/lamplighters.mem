@@ -97,6 +97,68 @@ So the quorum ''seats'' an office (rare) and the ''renewal rides the lease-epoch
 
 <<~/ahu >>
 
+<<~ ahu #welded >>
+
+!! ★ THE WELD — what this model OWES the rest of the mesh ★
+
+''Designed in a corner across many turns, this carrier re-derived five things the DreamNet already stands.'' Each correction below lands the design INSIDE what ships rather than beside it.
+
+!!! ① The office grant IS a carriage entry
+
+''`Office Grant` restates `CarriageEntry` field-for-field'' — quorum countersignature, the subject's own `contractSig`, charter-epoch root, monotone-per-nym fold, fail-closed at every shore. It even borrows the literal field name. ''So an office seats as a CARRIAGE ENTRY whose cap reads //may tend this place about X, until epoch N//'', never as a second registry. `membership-doctrine` rules that payload //the floor and nothing above it//, and a fresh record type would breach a ceiling the house already set.
+
+!!! ② CAP ⊥ STANDING — and only one of them rides a device
+
+<<~ranks cap what-may-I-do -> flows-DOWN-by-delegation -> signed-scoped-EXPIRING -> carried-on-a-device/YES >>
+<<~ranks standing what-do-I-count-as -> flows-UP-by-conferral -> a-live-query-never-a-stored-number -> carried-on-a-device/NEVER >>
+
+''//May tend this crossroads// rides as a CAP. //Belongs to the Union// stands as a STANDING'', and a standing carried on a device rebuilds the apex this house removed. So the Union holds no members anywhere — ''a walker carries what they may do, and what they count as answers live, or not at all''.
+
+!!! ③ The repair verbs already stand
+
+`siege-resilience` types the maintainer's verb-set and `steward-doctrine` bounds the steward's break-glass hand — including the edge this carrier needed and never stated: ''it cannot change who signs''. Tending composes with those rather than replacing them. And `siege-resilience` holds that a Herm self-stabilizes transient corruption ''without a maintainer touching it'', so the Union answers ''ABANDONMENT and WITNESS'', never routine repair.
+
+!!! ④ REACH names something else
+
+The `reach` plane already owns that word for foreign app credentials, at ''inverted risk polarity'' — weak and disposable there, dangerous and remote here. `tend.island` keeps its grounding; the network-reachable half wants a word this house has not spent.
+
+!!! ⑤ ★ THE KAHU HOLD NO ADJUDICATIVE POWER ★
+
+`kahu.mem` stands at Synthesis-Canon and rules it plainly: ''//No living authority tells a vessel what to do. The treaty does//'' — the grammar enforces itself, and ''a version cadence stands as the one instrument a kahu actually holds''. A model seating them as the only condemning body writes a lower register over a higher one. ''Condemnation wants re-siting.''
+
+''And `kahu.mem` names a seat this Union could fill'' — //no instrument surfaces a fork… a lag distribution across the carriage board reads as the nearest available proxy and nobody has built it//. A sensor reporting DIVERGENCE reaches no verdict and needs no adjudicative power at all. ''But the seat as stated sits one notch off, and the proposed proxy carries three death certificates.''
+
+!!!! ★ FORK SURFACING SURVIVES THE NO-ROSTER LAW; FORK SIZING DOES NOT ★
+
+''Bilateral divergence measures ride roster-free, clock-free, and SHIPPED'' — `git rev-list --left-right --count` returns ahead/behind from two head hashes alone; Automerge head-exchange gives the same primitive over the hash-DAG; XMPP's caps-hash gives it for GRAMMAR, a peer publishing a hash over its own feature surface so a mismatch reads //we parse differently// with no roster anywhere. So //no instrument surfaces a fork// overstates: ''the accurate loss reads NO INSTRUMENT SIZES ONE.'' <<~ confidence Synthesis-Canon 15/20 >>
+
+''Mazieres-Shasha names the law under it'': a forked view becomes permanent and surfaces ''only when the forked parties MEET''. No local computation reaches it, and every fork-linearizable construction ''BLOCKS'' — no wait-free version exists, which strains causal-islands harder than the roster law does. Going from //you and I diverged// to //we are two Nexuses now// ranges over the population, and that ''IS a roster wearing another name''.
+
+!!!! ⚠ AND THE LAG PROXY FAILS IN THE WRONG DIRECTION
+
+''Under a real schism the two groups stop meeting: lag never lengthens, THE SAMPLE VANISHES'' — and silence reads identically to health, the Sword's own law restated. ''The proxy runs blindest exactly where the schism sits.''
+
+Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 50x false-positive under ordinary CPU and network stress · ''Bitcoin Core DELETED'' its version-distribution fork warning as //completely useless// against miners writing garbage into version bits, and never replaced it · ''RFC 8145'' trust-anchor telemetry fired, read ~4% of resolvers stale, ''postponed the DNS root KSK rollover a full year'', and the data proved corrupted at the source. <<~ confidence Canon 17/20 >>
+
+''What a Union genuinely buys, and its ceiling'': a sampled ''grammar-hash histogram'' pooled from MEETINGS (never memberships) · pooled ''divergence DEPTH in the DAG, never delay in time'' · and ''GREASE-shaped continuous probing'' — seeding a well-formed unknown sigil into ordinary traffic so a peer's tolerance of an unknown revision surfaces every meeting, asked before a cadence ships rather than after.
+
+''The ceiling reads EPIDEMIOLOGY, never CENSUS.'' Detection runs bounded by the mixing rate of the meeting graph, and a schism that partitions that graph — the ordinary case, since groups that stop agreeing stop talking — drives sampling toward zero ''precisely as the divergence completes''. The Union converts a blind spot into a SLOW spot; it never converts it into sight.
+
+<<~ ward ? · the fork between a cheap BILATERAL divergence instrument (shipped elsewhere, honest, already-solved) and a union-scale SCHISM sensor (structurally capped, blind where it matters most) belongs to the operator. >>
+
+!!! ⚠ AND THE OFFICE CANNOT END THE WAY THIS CARRIER SAYS IT ENDS
+
+''Both halves of `Office Fence` and `Office Ending` fail against the built mechanism.'' One lease fence carries ''every raise and every device edge''; `lease-rekey` states in its own header that rolling an epoch ''STALES every outstanding grant on that resource at once''; and `rolledLeaseEpoch` writes `effective + 1` into a NAMED WRITER's slot — so ''the roll IS a lowering act, and it carries a signer''.
+
+<<~moves office-ending -> UNRESOLVED on/the-built-fence if/scoped-per-Nexus do/non-renewal-mass-stales-the-whole-island >>
+<<~moves office-ending -> UNRESOLVED on/the-built-fence if/scoped-per-office do/the-holder-holds-a-writer-slot-and-self-renews-forever >>
+
+''No third position stands in the mechanism as built.'' The fork turns on ONE unruled value — which `resourceId` an office grant passes to `leaseEpochPrefix` — and this carrier declines to pick it. <<~ confidence Synthesis 10/20 >>
+
+''What the epoch rulings DO settle, and they hold firm'': the LEASE epoch (a scalar per-writer max-register) ''fences''; the SEAL epoch (a CID chain) ''records lineage''; ''the two never fuse''; the rolling-window reading stands ''STRUCK'' — a set answers //is this listed// and never //is this newer//, and a list of markers reads as a roster of moments; and ''the NEXUS fences, never the cabal'' — an epoch means nothing outside the island that rolls it.
+
+<<~/ahu >>
+
 <<~ ahu #immune >>
 
 !! The immune coupling ~ innate, adaptive, memory
@@ -208,7 +270,11 @@ RFC 2693 §7 rules the ordinary ending: //"under SPKI one does not declare a key
 
 !!! ★ And the structural argument closes it independent of security ★
 
-''Counting N distinct presenters needs a tender set, and a tender set reads as a ROSTER.'' "Three tenders agreed" presupposes an agreed set at an agreed moment — a roster ''and'' a global now, both forbidden. Weighting does not merely risk capture here: ''it holds no well-defined N in this substrate''. Any implementation smuggles a roster back in.
+''Counting N distinct presenters needs a tender set, and a tender set reads as a ROSTER.'' "Three tenders agreed" presupposes an agreed set at an agreed moment — a roster ''and'' a global now, both forbidden. Weighting does not merely risk capture here: ''it costs leverage no observer can price''.
+
+⚠ ''A draft called this a STRUCTURAL impossibility, and that reads FALSE against the substrate.'' `nexus-carriage` already folds a per-island contracted-operator set, and `lares nexus members list` prints it sorted — ''N stands well-defined and island-local'', pono, no global now. The security leg above survives untouched; the impossibility leg does not. ''Naming a policy choice a theorem means the next reader never re-opens it when the security argument shifts.''
+
+''What holds the threshold out reads as DOCTRINE, never arithmetic'': `membership-doctrine`'s ''un-thresholded attestor bundle'' — members sign independently, the count crosses, and ''the sufficiency rule stays structurally absent''. The threshold never went homeless; the house ''deliberately declines to seat one''.
 
 !!! What recovers the speed instead
 
