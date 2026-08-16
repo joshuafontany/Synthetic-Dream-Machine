@@ -321,12 +321,30 @@ function splitMemeToTiddlers(
   // and stacked blank lines). A degraded SOH-carrier missing its STX keeps the
   // header reading (its iam still parses; the gradient grades the miss).
   const bare = !hadSoh && !stxM;
-  const headerRegion = stxM ? stripped.slice(0, stxM.index) : (bare ? "" : stripped);
+  // AN AUTHORED IAM IS A HEADING, FRAME OR NO FRAME. The frame is the carrier's business; identity is
+  // the AUTHOR'S, and an operator who opens a file with a labelled `toml iam` fence has stated one.
+  // Reading a bare doc as ALL BODY buried that fence in the text and minted a near-empty heading beside
+  // it, so the projection wrote TWO iam blocks and dropped every field the author declared — silently,
+  // and stably, because the malformed result round-trips against itself.
+  //
+  // The fence must OPEN the file to count. One standing further down belongs to whatever section holds
+  // it, and lifting that would take a teaching example for a declaration.
+  const leadingIam = bare ? findIamFence(stripped, false) : null;
+  const authoredHead = leadingIam && stripped.slice(0, leadingIam.start).trim() === ""
+    ? leadingIam
+    : null;
+  const headerRegion = stxM
+    ? stripped.slice(0, stxM.index)
+    : (authoredHead ? stripped.slice(0, authoredHead.end) : (bare ? "" : stripped));
   // Trim body edges at ingest. The export template owns the visual padding:
   // one blank line after STX and one blank line before ETX. Keeping the stored
   // field edge-trimmed prevents authored leading/trailing newlines from stacking
   // with those template-emitted margins.
-  const bodyRegion   = stripLeadingNewlines(stxM ? stripped.slice(stxM.index + stxM[0].length) : (bare ? stripped : ""));
+  const bodyRegion   = stripLeadingNewlines(
+    stxM
+      ? stripped.slice(stxM.index + stxM[0].length)
+      : (authoredHead ? stripped.slice(authoredHead.end) : (bare ? stripped : "")),
+  );
 
   // Parse iam fields from header region (before STX).
   // Guard: only look for iam in the part of headerRegion before the first
