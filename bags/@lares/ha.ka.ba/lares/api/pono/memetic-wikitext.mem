@@ -11,8 +11,8 @@ manaoio       = 17
 namespace     = "&#x2299;"
 register      = "Synthesis-Canon"
 retain        = true
-revised-on    = "2026-06-11"
-revision-note = "#carrier-bytes law added: UTF-8 no-BOM, LF, Unicode NFC pinned as canonical form; boundary normalizes once"
+revised-on    = "2026-08-15"
+revision-note = "normative half rebuilt on the TW5 macro-call production: five heads in the prefix table, ABNF derived from parseMacroInvocation, UTF-8 string-literal values, frame and host-reading in the conformance MUSTs, block check and authoring laws stated, five worksites split so every cross-reference resolves"
 role          = "submittable specification for text/x-memetic-wikitext — abstract, conformance (RFC-2119), lexical structure, ABNF surface grammar, dual-layer processing model, pranala type system, media-type registration, security. Ontology referenced, not duplicated. Sibling submission to the lar: URI spec."
 status        = "standing"
 status-why = "submission-draft"
@@ -77,6 +77,12 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''dual layer'' | the compile-time graph reading and render-time semantic reading of one surface (#processing-model). |
 | ''guest grammar'' | a foreign grammar admitted into a bounded worksite (#guest-grammar). |
 | ''camera'' | one render surface over the shared world graph (page or canvas). |
+| ''frame'' | the control marks bracketing a carrier: heading, text, and transmission bounds (#control-set). |
+| ''mark'' | one control character the frame stands for, named by a `code:` parameter. |
+| ''slot'' | a named parameter a given mark carries; the mark decides which slots apply. |
+| ''declaration'' | a `<<!WORD >>` statement read before content, selecting or constraining the grammar. |
+| ''namespace'' | the resonance glyph a carrier's heading states, naming which layer authored it. |
+| ''block check'' | a check computed over the framed span, carried adjacent to ETX (#control-set). |
 
 <<~/ahu >>
 
@@ -88,13 +94,51 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 
 The `<<` `>>` pair forms the outer delimiter family for every active sigil. The tilde `~` marks the Lararium sigil namespace inside that family.
 
-| Prefix | Mode | Example |
-|---|---|---|
-| `<<~` | primary sigil | `<<~ ahu #id >>`, `<<~ aka lar:///uri >>` |
-| `<<~/` | block close | `<<~/ahu >>` |
-| `<<~!` | pragma (definition) | `<<~! wehe name(p) >>` |
-| `<<~?` | unresolved-pressure | `<<~? #fragment >>` |
-| `<<` //(bare)// | inherited TW5 macro call (superset) | `<<macroName params>>` |
+| Prefix | TW5 macro name | Register | Example |
+|---|---|---|---|
+| `<<~` | `~` | primary sigil — the speaking set | `<<~ ahu #id >>`, `<<~ aka lar:///uri >>` |
+| `<<~/` | `~/name` | block close | `<<~/ahu >>` |
+| `<<~!` | `~!` | pragma (definition) | `<<~! wehe name(p) >>` |
+| `<<~?` | `~?` | unresolved-pressure | `<<~? #fragment >>` |
+| `<<^` | `^` | control set — the carrier frame (#control-set) | `<<^ code:"&#x0002;" >>` |
+| `<<!` | `!WORD` | declaration register (#declaration-register) | `<<!DOCTYPE … >>` |
+| `<<` //(bare)// | //the name itself// | inherited TW5 macro call (superset) | `<<macroName params>>` |
+
+!!! Every sigil IS a TiddlyWiki5 macro call
+
+The superset relation runs deeper than coexistence: ''each row above parses as a TW5 macro call under
+TW5's own `parseMacroInvocationAsTransclusion`'', with the third character standing as the macro NAME.
+TW5's macro-name token reads `/([^\s>"'=:]+)/` — any run without whitespace, `>`, quote, `=` or colon —
+so `~`, `^`, `!DOCTYPE` and `<` all name macros the host already admits. Nothing here extends the host
+parser; the grammar chooses names inside the space TW5 left open.
+
+Two consequences a processor MUST hold:
+
+# A vanilla TW5 processor reads a carrier as ''valid wikitext'', every sigil an unbound macro call. The
+  reading degrades to inert text, never to a parse error.
+# A memetic processor binds those names to procedures. The DEFINITION reads native too — `\procedure ^(code)`
+  is a TW5 procedure definition TW5's own pragma parser accepts, `isProcedureDefinition` and all.
+
+''The third character decides, with no lookahead.'' `<<~` opens the speaking set · `<<^` the control set ·
+`<<!` the declaration register · `<<<` a quote fence · anything else reads an inherited macro call. `!`
+never opens a TW5 macro name in practice, so the declaration register costs the decision nothing.
+
+!!! Named parameters, in the host's own calling syntax
+
+TW5 parses a macro parameter as an attribute: an optional `name` and separator, then a value. Three
+facts the frame rests on, each the host's and not this grammar's:
+
+* ''The colon separator requires a strict identifier'' — TW5 tests the name against `/^[A-Za-z0-9\-_]+$/`
+  before accepting `:`, so `$:/foo` never mis-reads as a named parameter. `code:` and `namespace:` pass.
+* ''A quoted value is a TW5 string literal'' — single, double, triple-double or `[[bracket]]` — and a
+  string literal carries UTF-8, so `namespace:"&#x2299;"` and `namespace:"ॐ ँ"` stand as written.
+* ''An unnamed value reads positional'', numbered in order. `?` and `->` ride as positional parameters,
+  which is how the bearing arrow survives inside a macro call (#bearing-arrow).
+
+''A `lar:` URI already reads as a named parameter.'' TW5 takes `lar:///ha.ka.ba/…` as the name `lar` with
+value `///ha.ka.ba/…`, because `lar` passes the strict-identifier test and `:` separates. The host has
+been reading every `lar:` reference in this corpus as a `lar` parameter from the beginning; the grammar
+inherits that reading rather than declaring one.
 
 ''The sigils are the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for
 performing them in red — //rubrica//, red ochre, the practice standing in liturgical manuscripts from the
@@ -130,57 +174,91 @@ A `#fragment-id` after a sigil name names an addressable anchor. A block's close
 
 !! Formal Grammar (ABNF)
 
-This grammar (RFC 5234) defines the ''surface shape'' alone: any name-token reads as a sigil command word, and the registry binds names to behavior. A conforming parser MUST accept exactly the surface this grammar describes.
+This grammar (RFC 5234) defines the ''surface shape'' alone: any name-token reads as a sigil command word,
+and the registry binds names to behavior. A conforming parser MUST accept exactly the surface this grammar
+describes.
+
+''The grammar builds on TW5's macro call, and adds no delimiter of its own.'' `macro-call` below restates
+the host production [TW5]; every memetic form derives from it by naming a macro and shaping its
+parameters. A processor that already parses TW5 macro calls parses every sigil here.
 
 ```abnf
-; ── lexical primitives ──────────────────────────────────────
+; ── the host production, restated ───────────────────────────
 LWSP        = *( SP / HTAB )
+macro-name  = 1*( %x21-10FFFF except SP / DQUOTE / "'" / ">" / "=" / ":" )
+macro-call  = "<<" macro-name params LWSP ">>"     ; [TW5] parseMacroInvocation
+params      = *( LWSP param )
+param       = named-param / positional
+named-param = identifier ( ":" / "=" ) value       ; ":" requires identifier
+identifier  = 1*( ALPHA / DIGIT / "-" / "_" )      ; [TW5] strict-identifier test
+positional  = value
+value       = string-literal / unquoted
+string-literal = DQUOTE *( %x00-10FFFF except DQUOTE ) DQUOTE
+               / "'" *( %x00-10FFFF except "'" ) "'"
+               / 3DQUOTE *( %x00-10FFFF ) 3DQUOTE
+               / "[[" *( %x00-10FFFF except "]]" ) "]]"
+unquoted    = 1*( %x21-10FFFF except SP / DQUOTE / "'" / ">" )   ; ">" allowed in "->"
+
+; ── the four macro names this grammar claims ────────────────
+speaking    = "~"                     ; the sigil set
+control     = "^"                     ; the carrier frame
+declaration = "!" 1*ALPHA             ; !DOCTYPE and its register
+pragma-name = "~!"
+unres-name  = "~?"
+
+; ── lexical primitives ──────────────────────────────────────
 name-token  = ( ALPHA / "_" ) *( ALPHA / DIGIT / "-" / "_" )
 canonical   = name-token              ; Hawaiian canonical name
 alias       = "\" name-token          ; English alias namespace
 sigil-name  = canonical / alias
 fragment    = "#" name-token
 URI-ref     = <a lar: URI or fragment, opaque here; see [LAR-URI]>
+                                      ; the host reads "lar:" as a named param
 
-; ── outer delimiters ────────────────────────────────────────
-open        = "<<~"
-open-pragma = "<<~!"
-open-unres  = "<<~?"
-close-mark  = ">>"
-block-close = "<<~/" sigil-name LWSP close-mark
-
-; ── attributes ──────────────────────────────────────────────
-attr        = key ":" value / URI-ref / fragment / name-token
-key         = name-token
-value       = DQUOTE *( %x20-21 / %x23-7E ) DQUOTE / name-token
-attrs       = *( LWSP attr )
-
-; ── sigils ──────────────────────────────────────────────────
-inline      = open LWSP sigil-name attrs LWSP close-mark
-block       = open LWSP sigil-name [ LWSP fragment ] attrs LWSP close-mark
+; ── sigils, each a macro-call ───────────────────────────────
+block-close = "<<" "~/" sigil-name LWSP ">>"
+inline      = "<<" speaking LWSP sigil-name params LWSP ">>"
+block       = "<<" speaking LWSP sigil-name [ LWSP fragment ] params LWSP ">>"
               content
               block-close
-pragma      = open-pragma LWSP sigil-name [ LWSP params ]
-              [ LWSP "=" LWSP filter-expr ] LWSP close-mark
-              [ content open-pragma-close ]
-unresolved  = open-unres LWSP [ fragment ] LWSP close-mark
+pragma      = "<<" pragma-name LWSP sigil-name [ LWSP defn-params ]
+              [ LWSP "=" LWSP filter-expr ] LWSP ">>"
+              [ content pragma-close ]
+unresolved  = "<<" unres-name LWSP [ fragment ] LWSP ">>"
+edge        = "<<" speaking LWSP sigil-name LWSP [ fragment LWSP ]
+              [ "?" LWSP "->" LWSP ] URI-ref params LWSP ">>"
 
-; ── edges (sigil-name is an edge-family sugar) ──────────────
-edge        = open LWSP sigil-name LWSP [ fragment LWSP ]
-              [ "?" LWSP "->" LWSP ] URI-ref attrs LWSP close-mark
+; ── the carrier frame (#control-set) ────────────────────────
+frame       = "<<" control LWSP code-param params LWSP ">>"
+code-param  = "code:" DQUOTE "&#x" 4HEXDIG ";" DQUOTE
+header      = "<<" control LWSP code-param [ LWSP ns-param ]
+              LWSP "?" LWSP "->" LWSP URI-ref LWSP ">>"
+ns-param    = "namespace:" string-literal
+footer      = "<<" control LWSP code-param LWSP "->" LWSP "?" LWSP ">>"
+
+; ── the declaration register (#declaration-register) ────────
+doctype     = "<<" declaration LWSP root-name LWSP URI-ref LWSP ">>"
+root-name   = name-token [ "+" name-token ]        ; [RFC6839] suffix
 
 ; ── guest grammar (opaque to the host) ─────────────────────
 filter-expr = "[" *( %x20-5C / %x5E-7E ) "]"   ; evaluated by a guest handler
 
 ; ── document ────────────────────────────────────────────────
-carrier     = [ header ] *( block / inline / pragma / unresolved / text )
+carrier     = [ doctype ] [ header ]
+              *( block / inline / pragma / unresolved / frame / text )
               [ footer ]
-header      = open LWSP %x01 LWSP "?" LWSP "->" LWSP URI-ref LWSP close-mark
-footer      = open LWSP %x04 LWSP "->" LWSP "?" LWSP close-mark
-text        = 1*( <any run that does not begin a sigil open> )
+text        = 1*( <any run that does not begin a macro-call> )
 ```
 
-''Normative grammar rules.'' (1) An `alias` MUST map to its `canonical` before any further processing; the compiled tree MUST carry only canonical names. (2) A `block-close` MUST match the innermost unclosed `block`/`pragma` of the same name. (3) `filter-expr` content stays opaque to the host parser; only a registered guest handler interprets it. (4) `URI-ref` structure defers to [LAR-URI]. (5) Memetic-wikitext inherits the TW5 wikitext base [TW5]; bare `<<name>>` macro calls and other TW5 constructs read as inherited content (the `text` production), defined by [TW5] and not re-specified here.
+''Normative grammar rules.'' (1) An `alias` MUST map to its `canonical` before any further processing; the
+compiled tree MUST carry only canonical names. (2) A `block-close` MUST match the innermost unclosed
+`block`/`pragma` of the same name. (3) `filter-expr` content stays opaque to the host parser; only a
+registered guest handler interprets it. (4) `URI-ref` structure defers to [LAR-URI]. (5) Memetic-wikitext
+inherits the TW5 wikitext base [TW5]; bare `<<name>>` macro calls and other TW5 constructs read as
+inherited content (the `text` production), defined by [TW5] and not re-specified here. (6) Every
+production above resolves to `macro-call`; a processor MUST NOT require a delimiter the host does not
+already parse. (7) A `frame` sigil MUST state `code:` as its first parameter; the remaining slots belong
+to the mark that code names (#control-set).
 
 <<~/ahu >>
 
@@ -304,7 +382,19 @@ The `\` prefix marks the English alias namespace. An alias carries identical sem
 
 !! Conformance Classes
 
-A ''conforming parser'' MUST: accept the surface of #grammar; map aliases to canonicals; produce the graph-layer AST and typed edges; enforce close-tag matching; treat `filter-expr` as opaque.
+A ''conforming parser'' MUST: accept the surface of #grammar; read every sigil as a TW5 macro call
+(#lexical-structure); map aliases to canonicals; produce the graph-layer AST and typed edges; enforce
+close-tag matching; treat `filter-expr` as opaque.
+
+A ''conforming carrier reader'' MUST additionally: read the frame's `code:` parameter to identify each
+mark (#control-set); read a leading `<<!DOCTYPE >>` before selecting a grammar (#declaration-register);
+accept a carrier that states no frame and MINT one on projection (#authoring); normalize bytes once at
+the boundary (#carrier-bytes); and report a missing block check as ''unchecked'' rather than as a failed
+one (#control-set).
+
+''The host reading is a conformance obligation, not a courtesy.'' A carrier processed by a vanilla TW5
+engine MUST parse as valid wikitext with every sigil an unbound macro call. A grammar change that breaks
+that reading breaks the superset claim this document rests on, whatever else it gains.
 
 A ''conforming renderer'' MUST: read the dual layer as one parse; honor transclusion fidelity (`aka` frozen, `kahea` live); maintain the render-stack recursion guard; declare its render mode before crossing a mutation boundary; target exactly one camera per pass. A renderer MAY support a subset of cameras and MUST degrade a missing camera visibly.
 
@@ -354,8 +444,11 @@ The `x-` prefix marks the subtype as unregistered with IANA; a future tree-trans
 
 !! Worked Examples (Non-Normative)
 
-A carrier with an identity block, a worksite, and a typed edge:
+A carrier with an identity block, a worksite, and a typed edge — opening on the declaration every
+carrier states first (#declaration-register):
 ````
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/example >>
 ```toml iam
 … bare toml-iam slot: identity payload (uri-path, type, role, register) …
@@ -438,10 +531,17 @@ A canvas reaction wire (flow surface):
   which would put ETB on a carrier's text and ETX on its attestation. The frame above reads the other
   way and states why. The strict reading stays named rather than dismissed.
 * ''Transclusion family name. English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
+* ''The `+tiddlywiki` suffix, declared and not yet adopted (open).'' #media-type registers
+  `text/x-memetic-wikitext+tiddlywiki`; every carrier in the corpus, the filetype registration, and this
+  document's own iam write `text/x-memetic-wikitext`. The suffix states a true structural fact
+  [RFC6839] and the unsuffixed name states what the tree runs. Adopting the suffix means moving every
+  carrier and the registry together; dropping it means the registration section states less than the
+  syntax does. The choice belongs to the operator, and until it lands this document declares one name
+  and the corpus writes another — named here rather than resolved silently on either side.
 
 <<~/ahu >>
 
-<<~ ahu #carrier-bytes >>
+<<~ ahu #doctype >>
 
 !! The DOCTYPE — declaring an extension of TW5 wikitext
 
@@ -454,7 +554,7 @@ Every carrier opens by naming the grammar that reads it:
 ''The root name carries an RFC 6839 structured syntax suffix.'' A `+suffix` names the base syntax a
 format is BUILT ON — `image/svg+xml` reads as SVG built on XML, and `memetic-wikitext+tiddlywiki`
 reads as memetic-wikitext built on TW5 wikitext. The superset relation this spec asserts in prose
-(#lexical) rides in the type name itself, in the form a media-type registry already understands.
+(#lexical-structure) rides in the type name itself, in the form a media-type registry already understands.
 
 ''The shape is HTML5-minimal SGML.'' `<!DOCTYPE html>` collapsed SGML's full
 `<!DOCTYPE root PUBLIC "fpi" "system">` to keyword plus root name; this keeps that collapse and lets
@@ -470,6 +570,10 @@ the media type into the DOCTYPE slot would put both under one name for no gain.
 ''The media type follows the same suffix'' (#media-type): `text/x-memetic-wikitext+tiddlywiki`. The
 `x-` marks the subtype unregistered with IANA and drops on registration; the suffix does not — it
 states a structural fact about the syntax and holds whatever the subtype is called.
+
+<<~/ahu >>
+
+<<~ ahu #declaration-register >>
 
 !! Carrier Frame — The Declaration Register
 
@@ -491,6 +595,10 @@ carrier — the one line a stranger meets before knowing any of this.
 ''The register takes members, not exceptions.'' `!DOCTYPE` stands first; the register admits further
 `!WORD` declarations under the same law — read before content, selecting or constraining the grammar,
 never performing a move the renderer runs. A `!WORD` that acts belongs in the speaking set.
+
+<<~/ahu >>
+
+<<~ ahu #bearing-arrow >>
 
 !! The Bearing Arrow — one edge, two orientations
 
@@ -529,6 +637,10 @@ lied about being resolved.'' The same cut runs through the block check (`uncheck
 and through the ward's infelicities (a misfire voids, an abuse rings hollow): ABSENCE DECLARED and
 ABSENCE DISCOVERED are different facts, and every instrument here that conflated them read useless.
 
+<<~/ahu >>
+
+<<~ ahu #control-set >>
+
 !! Carrier Frame — The Control Set
 
 The bytes law says what a carrier is made of; the frame law says how it is marked. Both pin here, per
@@ -541,8 +653,12 @@ The frame speaks through ONE sigil, `<<^ … >>`, parameterised by the control c
 frame position — with the code as a parameter, the way `lares` carries `aim` and `yield` through a
 single vector.
 
-\procedure ^(code slots)
-<<^ code:"&#x000N;" ...slots >>
+''The definition reads as native as the call.'' `^` names a TW5 procedure, defined in TW5's own pragma
+syntax and accepted by TW5's own pragma parser; the call is a TW5 macro call (#lexical-structure). A
+processor binds the name; nothing about either side asks the host for an extension.
+
+\procedure ^(code)
+<<^ code:"&#x000N;" >>
 \end
 
 !!! Named, colon-paired, TW5-native
@@ -566,6 +682,25 @@ stable separator and leaves the evolving one alone.
 |`&#x0017;` |ETB |`code` `hash` |the attestation block ends |
 |`&#x0004;` |EOT |`code` `target` |transmission ends, bearing forward |
 |`&#x0014;` |EOT₂ |`code` `target` |the Kapu transmission-end variant |
+
+!!! The block check
+
+The `bcc` slot carries a check over the framed span. Normatively:
+
+* ''Span:'' the first character of the STX sigil through the last character of the ETX sigil, inclusive.
+  The check covers the marks that bound it and never covers itself, which is what lets it sit ''after''
+  ETX with no self-exclusion rule.
+* ''Form:'' `<namespace>:<16 hex digits>` — the low 64 bits of SHA-256 over the span's UTF-8 bytes,
+  prefixed by the carrier's namespace. Sixty-four bits sit far past what a transport fault reaches and
+  short enough that a person reads the line.
+* ''Computed, never stored.'' A writer computes the check over the body it has assembled; a reader
+  recomputes it over the bytes in front of it. Two computations of one fact, never a copy of one — a
+  stored derivation goes stale the moment the thing it derives from moves.
+* ''A carrier holding no check reads `unchecked`, never `mismatch`.'' Absence of a check and a failed
+  check are different facts (#bearing-arrow), and a reader that collapsed them would be useless exactly
+  where it matters. The caller decides what an unchecked carrier may do; it still parses.
+* ''What a relay can do with it:'' raw bytes, one scan, no parser and no canonicaliser. A relay holding
+  `pull` and not `read` verifies this check over an offering it cannot open.
 
 ''ETX takes its check adjacent, per the received framing.'' In character-oriented synchronous framing
 (IBM BSC, 1967) a block runs `STX -> text -> ETX|ETB -> BCC`: the terminator comes first and the check
@@ -594,6 +729,45 @@ below the grammar (canon: `lar:///ha.ka.ba/lares/api/pono/persona-circle`).
 
 Each mark's `sigil-*.tid` carries `lar-pattern`, and a SHAPE-EXACT pattern refuses a wrong fill the way
 a shape-exact slug rule refuses a truncated tag. Enforcement rides the recogniser, never the surface.
+
+<<~/ahu >>
+
+<<~ ahu #authoring >>
+
+!! Authoring — what an author states, and what the carrier adds
+
+An author writes content and identity; a carrier carries framing. The two divide cleanly, and a
+processor MUST keep the division:
+
+!!! The identity heading, by position
+
+A labelled ```` ```toml iam ```` fence states identity. Which identity it states reads by POSITION:
+
+# The fence that OPENS a carrier heads the ''carrier'' — its address, its namespace, its register.
+# Every LATER fence heads the ''worksite it sits in'' — that slot's own register, its own confidence —
+  and it overrides what the carrier declared without reaching back up.
+# Neither reaches into the other.
+
+A processor MUST NOT lift a worksite's fence to the carrier, and MUST NOT bury the carrier's fence in the
+body. Both failures are silent and both are stable: the malformed result parses, renders, and agrees with
+itself on every later pass.
+
+!!! Framing is minted, never demanded
+
+A carrier MAY arrive with no frame at all — an author saving prose from an editor, a render surface
+writing a tiddler back. A conforming processor MUST accept it and MUST MINT the frame on projection:
+SOH with the namespace the iam declares, STX, ETX, EOT. Refusing an unframed file makes the grammar the
+author's problem; mangling one corrupts canon quietly.
+
+!!! The projection settles
+
+Projecting a projection MUST change nothing. A processor whose output re-reads differently from its
+input leaves every carrier reading "edited" on every scan, so the ingest loop never converges and a
+write-back rewrites the author's source forever.
+
+<<~/ahu >>
+
+<<~ ahu #carrier-bytes >>
 
 !! Carrier Bytes Law
 
