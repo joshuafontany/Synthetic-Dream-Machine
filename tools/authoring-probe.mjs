@@ -33,6 +33,24 @@ const IAM_NS = IAM.replace("```\n", "").replace("type     =", 'namespace = "⊙"
 
 const BODY = "! A New Thought\n\nThe operator writes a file and saves it.\n";
 
+// A SLOT'S IAM IS THE SLOT'S. Every iam block that does not open the file heads the ahu tiddler it sits
+// in — its own register, its own confidence — and it overrides what the parent declared without
+// reaching back up. An author who writes a slot heading has addressed the slot, not the carrier.
+const SLOT = [
+  "<<~ ahu #inner >>",
+  "",
+  "```toml iam",
+  'register = "Provisional"',
+  'confidence = "7"',
+  "```",
+  "",
+  "! Inner",
+  "",
+  "slot prose.",
+  "",
+  "<<~/ahu >>",
+].join("\n");
+
 /** What an operator, an editor, or a wiki VM actually hands the ingest. */
 const AUTHORED = [
   ["bare prose, no frame and no iam", `${BODY}`, ""],
@@ -48,13 +66,22 @@ const AUTHORED = [
     `<<^ code:"&#x0001;" namespace:"⊙" ? -> ${URI} >>\n${IAM_NS}\n<<^ code:"&#x0002;" >>\n\n${BODY}\n<<^ code:"&#x0003;" >>\n\n<<^ code:"&#x0004;" -> ? >>\n`,
     "⊙",
   ],
+  [
+    "an ahu slot carrying its own iam, under an unframed carrier",
+    `${IAM_NS}\n\n${BODY}\n${SLOT}\n`,
+    "⊙",
+    { "#inner": { register: "Provisional", confidence: "7" }, parent: { register: undefined } },
+  ],
 ];
 
 const project = (src) => {
   const records = memeticWikitextDeserializer(src, { title: URI });
   if (!records?.length) return { records: 0, out: null };
-  const out = expandMemeRefs((u) => (u === URI ? records[0] : null), URI);
-  return { records: records.length, out, fields: records[0] };
+  // A carrier's slots project THROUGH the parent, so the reader must answer for every record the parse
+  // produced — handing back only the parent renders the slots as empty refs.
+  const by = new Map(records.map((r) => [r["title"], r]));
+  const out = expandMemeRefs((u) => by.get(u) ?? null, URI);
+  return { records: records.length, out, fields: records[0], by };
 };
 
 const SCHEMA = [
@@ -67,7 +94,7 @@ const SCHEMA = [
 ];
 
 const faults = [];
-for (const [name, src, wantNs] of AUTHORED) {
+for (const [name, src, wantNs, wantSlots] of AUTHORED) {
   let first;
   try {
     first = project(src);
@@ -86,6 +113,15 @@ for (const [name, src, wantNs] of AUTHORED) {
   const gotNs = /^<<\^ code:"&#x(?:0001|0011);" namespace:"([^"]*)"/m.exec(first.out)?.[1] ?? "";
   if (gotNs !== wantNs) {
     faults.push([name, `the head carries namespace "${gotNs}" where the iam declares "${wantNs}"`]);
+  }
+  // The slot ruling, checked on the RECORDS rather than the rendered text: a field the author wrote in
+  // a slot heading must land on that slot, and must not have climbed to the parent.
+  for (const [frag, want] of Object.entries(wantSlots ?? {})) {
+    const rec = frag === "parent" ? first.fields : first.by.get(`${URI}${frag}`);
+    if (!rec) { faults.push([name, `the parse produced no record for ${frag}`]); continue; }
+    for (const [k, v] of Object.entries(want)) {
+      if (rec[k] !== v) faults.push([name, `${frag} carries ${k}=${JSON.stringify(rec[k])} where the author wrote ${JSON.stringify(v)}`]);
+    }
   }
   // A projection that changes on the second pass never settles, so the ingest loop reads the file as
   // edited forever and a write-back rewrites the operator's source on every scan.

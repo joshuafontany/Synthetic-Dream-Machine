@@ -327,8 +327,11 @@ function splitMemeToTiddlers(
   // it, so the projection wrote TWO iam blocks and dropped every field the author declared — silently,
   // and stably, because the malformed result round-trips against itself.
   //
-  // The fence must OPEN the file to count. One standing further down belongs to whatever section holds
-  // it, and lifting that would take a teaching example for a declaration.
+  // THE FENCE MUST OPEN THE FILE TO COUNT, because every OTHER iam block belongs to the ahu tiddler it
+  // sits in. A slot's fence is that slot's own identity heading — its `register`, its `confidence`, its
+  // own address — and `extractSlotStructure` lifts it onto the child record where it overrides whatever
+  // the parent declared. One law, read by position: the opening fence heads the carrier, each later
+  // fence heads its slot, and neither reaches into the other.
   const leadingIam = bare ? findIamFence(stripped, false) : null;
   const authoredHead = leadingIam && stripped.slice(0, leadingIam.start).trim() === ""
     ? leadingIam
