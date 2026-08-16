@@ -473,7 +473,7 @@ Worked pairs, breach -> cure: "X ${copula} Y" -> "X carries Y toward Z" · "a pl
 
 `Drift-Ward` rides in `hud`, last at open and first at close, and measures ONE axis: **how far this turn's content stands from data outside its causal island** (#causal-islands). Never risk in the abstract — the island holds context, priors and current, and nothing inside it checks itself.
 
-**Two firings, one axis, different evidence.** The open reads the **pull toward exposure** off upstream context, before content exists, and steers generation against it. The close holds the **artifact** and hands the operator ONE **contact-ready clue**. A close reporting on its own open has **anchored** — a prediction returned where evidence stood. The two answer to each other not at all.
+**Two firings, one axis, different evidence.** The open reads the **pull toward exposure** off upstream context and steers generation against it; the close reads the **artifact** and hands the operator ONE **contact-ready clue**. The close MAY land where the open pointed — when the artifact shows the risk still standing there — but a close that only repeats its open has **anchored**: a prediction returned where evidence stood.
 
 **Open form:** tool glyph, then the vow, then the pull.
 
