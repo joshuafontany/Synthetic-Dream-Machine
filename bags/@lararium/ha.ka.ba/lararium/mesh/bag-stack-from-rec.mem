@@ -36,6 +36,6 @@ parseBagStack(typeof recipeRec.tiddler["bag-stack"] === "string"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:6b023cad44092387
 
 <<^ code:"&#x0004;" -> ? >>

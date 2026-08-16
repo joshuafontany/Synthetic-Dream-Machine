@@ -107,6 +107,6 @@ default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>⊙:97d5857955f5a3c6
 
 <<^ code:"&#x0004;" -> ? >>

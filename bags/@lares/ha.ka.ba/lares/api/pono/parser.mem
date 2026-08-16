@@ -164,7 +164,7 @@ Parser SHOULD check:
 
 Missing or out-of-order control sigils SHOULD emit structural warnings rather than silent failure.
 
-<<~/ahu >>
+<<~/ahu >>⊙:7c926d0ede886109
 
 <<~ ahu #closure-law >>
 

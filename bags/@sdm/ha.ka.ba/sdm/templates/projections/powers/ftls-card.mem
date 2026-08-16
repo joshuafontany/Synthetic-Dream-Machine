@@ -78,6 +78,6 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:8c62b3767eb95203
 
 <<^ code:"&#x0004;" -> ? >>

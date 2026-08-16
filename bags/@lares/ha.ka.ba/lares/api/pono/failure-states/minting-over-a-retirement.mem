@@ -70,6 +70,6 @@ If a ruled word exists with no residue and the node minted anyway, that reads as
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>⊙:307f07097d0d6b8f
 
 <<^ code:"&#x0004;" -> ? >>

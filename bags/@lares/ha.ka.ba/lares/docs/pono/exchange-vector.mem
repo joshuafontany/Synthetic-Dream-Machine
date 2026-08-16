@@ -106,6 +106,6 @@ Long-term, the server should validate the vector and render the HUD from the par
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:c86ee641bc9ca451
 
 <<^ code:"&#x0004;" -> ? >>

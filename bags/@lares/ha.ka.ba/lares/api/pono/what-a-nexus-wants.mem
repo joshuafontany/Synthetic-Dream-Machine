@@ -61,6 +61,6 @@ The conversion act (`the-thing-event`) runs on an assembly standing as the third
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:6b9867ee84947e1b
 
 <<^ code:"&#x0004;" -> ? >>

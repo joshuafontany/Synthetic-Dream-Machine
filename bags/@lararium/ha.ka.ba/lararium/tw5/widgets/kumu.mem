@@ -45,6 +45,6 @@ export function KumuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:03b5997a15067727
 
 <<^ code:"&#x0004;" -> ? >>

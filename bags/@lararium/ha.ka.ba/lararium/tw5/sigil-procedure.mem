@@ -74,6 +74,6 @@ the body runs through the pragma handler (TW5 parse-time, not render-time).
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:93e2aaaedfda4d4a
 
 <<^ code:"&#x0004;" -> ? >>

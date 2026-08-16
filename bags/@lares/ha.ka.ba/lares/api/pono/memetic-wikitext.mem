@@ -483,7 +483,7 @@ Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>.
 <<~ pranala #governs ? -> lar:///ha.ka.ba/lares/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>⊙:ac9ee02111854317
 
 <<^ code:"&#x0004;" -> ? >>
 ````

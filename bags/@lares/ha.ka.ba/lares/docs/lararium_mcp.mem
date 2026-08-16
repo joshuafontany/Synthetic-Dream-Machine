@@ -340,6 +340,6 @@ class MyAdapter:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:e82e9ff2cd4691e0
 
 <<^ code:"&#x0004;" -> ? >>

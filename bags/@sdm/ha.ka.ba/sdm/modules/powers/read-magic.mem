@@ -93,6 +93,6 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:54c6dc5d71625f25
 
 <<^ code:"&#x0004;" -> ? >>

@@ -83,6 +83,6 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>⊙:fdde12b83b3c6f02
 
 <<^ code:"&#x0004;" -> ? >>

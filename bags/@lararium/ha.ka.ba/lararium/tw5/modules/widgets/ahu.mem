@@ -48,6 +48,6 @@ export function AhuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:3357cb00583298bb
 
 <<^ code:"&#x0004;" -> ? >>

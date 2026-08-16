@@ -47,6 +47,6 @@ Walks the AST, collects all `PranalaNode` and `PranalaSugarNode` instances, retu
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/pranala-parser >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/memetic-parser >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:240273db97f553bc
 
 <<^ code:"&#x0004;" -> ? >>

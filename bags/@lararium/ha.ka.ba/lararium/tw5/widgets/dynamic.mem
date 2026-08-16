@@ -45,6 +45,6 @@ export function DynamicWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:b9edd84f7fc7f0d2
 
 <<^ code:"&#x0004;" -> ? >>

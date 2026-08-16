@@ -64,6 +64,6 @@ executable adversarial tests -> receipt-backed trust
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:9ed82969c4a1178a
 
 <<^ code:"&#x0004;" -> ? >>

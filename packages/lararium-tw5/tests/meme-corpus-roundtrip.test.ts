@@ -41,7 +41,7 @@ const squeeze = (s: string) =>
 const sigilNorm = (s: string) => s
   .replace(/<<~\s*/g, "<<~ ").replace(/\s*>>/g, " >>")
   .replace(/<<\^ code:"&#x(0001|0011);"[^>\n]*?( \?)/g, '<<^ code:"&#x$1;"$2')  // the namespace re-homes (framing)
-  .replace(/<<\^ code:"&#x0002;" >>\n*/g, "").replace(/<<\^ code:"&#x0003;" >>\n*/g, "")
+  .replace(/<<\^ code:"&#x0002;" >>\n*/g, "").replace(/<<\^ code:"&#x0003;" >>[^\n]*\n*/g, "")
   .replace(/<<\^ code:"&#x0004;"[^\n]*>>\n*/g, "");
 const lawView = (s: string) => squeeze(sigilNorm(contentView(s)));
 

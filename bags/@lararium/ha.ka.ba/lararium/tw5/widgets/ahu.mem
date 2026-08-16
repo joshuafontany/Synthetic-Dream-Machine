@@ -85,6 +85,6 @@ AhuWidget.prototype.refresh = function (this: TW5WidgetInstance, changedTiddlers
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:4834b2d67501a88a
 
 <<^ code:"&#x0004;" -> ? >>

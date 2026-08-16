@@ -48,6 +48,6 @@ export function SigilWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTree
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:4cd798dbdabadcdf
 
 <<^ code:"&#x0004;" -> ? >>

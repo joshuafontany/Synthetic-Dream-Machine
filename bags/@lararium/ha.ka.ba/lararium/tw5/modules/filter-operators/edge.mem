@@ -63,6 +63,6 @@ export function registerEdge(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:9b98be166759a725
 
 <<^ code:"&#x0004;" -> ? >>

@@ -38,6 +38,10 @@
  */
 /**
  * The check as the spec writes it: `<namespace>:<16 hex digits>`, standing directly after the ETX sigil.
+ * THE NAMESPACE HALF HOLDS WHATEVER THE OPERATOR DECLARED, and two shapes broke patterns that assumed
+ * otherwise: it MAY stand EMPTY — most carriers declare no resonance glyph, and their check reads
+ * `:<16 hex>` — and it MAY CARRY A SPACE, because `ॐ ँ` is two codepoints with one between them. Each
+ * assumption reported the check as foreign content stranded past ETX: the exact fault it rules out.
  *
  * A block runs `STX -> text -> ETX -> BCC` and the check follows the terminator with nothing between —
  * the position a receiver has always read it from. The value derives; `carrier-check.ts` computes it
@@ -45,7 +49,7 @@
  * questions, and a classifier that answered the first under the name of the second would invite the
  * reading that a present postamble is a verified one.
  */
-export const BCC_RE = /^(\S+:[0-9a-f]{16})$/;
+export const BCC_RE = /^([^\n]*:[0-9a-f]{16})$/;
 
 /**
  * What a carrier wrote between ETX and EOT.

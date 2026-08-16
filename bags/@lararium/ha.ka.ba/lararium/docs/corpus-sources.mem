@@ -148,6 +148,6 @@ A FTLS-only table composes: lares + ftls + room.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:8147a35e67ef5e24
 
 <<^ code:"&#x0004;" -> ? >>

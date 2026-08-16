@@ -45,6 +45,6 @@ export function LeleWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:25815a57244b9b99
 
 <<^ code:"&#x0004;" -> ? >>

@@ -283,7 +283,7 @@ state stays local-first, no-global-now enacted rather than breached.
 * ''mDNS in the browser'': not available (no UDP multicast in browsers). LAN
   discovery for browser peers routes through the node server's mDNS discovery.
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:5644bc1859f5e1ea
 
 <<^ code:"&#x0004;" -> ? >>
 <<~ ahu #edges >>

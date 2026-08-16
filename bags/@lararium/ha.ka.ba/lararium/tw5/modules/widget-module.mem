@@ -105,6 +105,6 @@ export function createLarariumWidgets(_tw: any): Record<string, WidgetCtor> {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:8b16d21ffb5fdc67
 
 <<^ code:"&#x0004;" -> ? >>

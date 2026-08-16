@@ -50,7 +50,7 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 |---|---|---|---|---|
 | ''SOH'' | `<<^ code:"&#x0001;" ? -> lar:///URI >>` | Start of Heading — the Lar takes its post; the place is named with its `lar:` bearing | `0x01` | DC1 `0x11` |
 | ''STX'' | `<<^ code:"&#x0002;" >>` | Start of Text — cross the threshold; the body opens | `0x02` | — |
-| ''ETX'' | `<<^ code:"&#x0003;" >>` | End of Text — the body closes; the hearth is banked | `0x03` | — |
+| ''ETX'' | `<<^ code:"&#x0003;" >>⊙:534b280c56d20d32` | End of Text — the body closes; the hearth is banked | `0x03` | — |
 | ''EOT'' | `<<^ code:"&#x0004;" -> ? >>` | End of Transmission — the libation is poured; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
 
 ''The frame — heading, then text.'' The protocol law pins the zones: SOH opens the ''heading'', STX opens the ''text''. The heading is the toml iam slot and nothing else; the text is the body.

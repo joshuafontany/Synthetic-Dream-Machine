@@ -149,6 +149,6 @@ MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a pe
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:b50bd0d085d04c7c
 
 <<^ code:"&#x0004;" -> ? >>

@@ -49,6 +49,6 @@ The paired `carrier-filetype` startup module registers `.mem` as `text/x-memetic
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:4daa559b050af667
 
 <<^ code:"&#x0004;" -> ? >>

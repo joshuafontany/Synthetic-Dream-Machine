@@ -1187,6 +1187,6 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:dc26bc47264fdfeb
 
 <<^ code:"&#x0004;" -> ? >>

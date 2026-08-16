@@ -117,7 +117,7 @@ as a flex sibling unaffected by tldraw's internal layout changes.
 * ''Resize handle'': drag the left edge of sidebar to adjust width between MIN_W and MAX_W
 * ''Per-tiddler navigation'': HUD tab bar gains a breadcrumb trail for open tiddlers
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:ece6da053119b90f
 
 <<^ code:"&#x0004;" -> ? >>
 <<~ ahu #edges >>

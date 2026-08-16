@@ -105,6 +105,6 @@ arm-wire       = "reaction"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>⊙:0c085d919d7cb17a
 
 <<^ code:"&#x0004;" -> ? >>

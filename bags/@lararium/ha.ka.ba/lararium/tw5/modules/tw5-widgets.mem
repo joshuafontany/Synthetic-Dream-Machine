@@ -117,6 +117,6 @@ export function createLarariumWidgets(_tw: TW5Instance): Record<string, WidgetCt
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:c20ef5bbb3bc244c
 
 <<^ code:"&#x0004;" -> ? >>

@@ -63,6 +63,6 @@ The instrument grammar itself stays in the pair; this room holds only the signal
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:b251334c3b2b0f26
 
 <<^ code:"&#x0004;" -> ? >>

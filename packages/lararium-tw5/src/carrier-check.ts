@@ -76,7 +76,7 @@ export function bccOf(text: string, namespace: string): string | null {
 export function verifyBcc(text: string): "ok" | "mismatch" | "unchecked" {
   const span = checkSpan(text);
   if (!span) return "unchecked";
-  const trailing = /^\s*(\S+:[0-9a-f]{16})/.exec(text.slice(span.end));
+  const trailing = /^[ \t]*([^\n]*:[0-9a-f]{16})/.exec(text.slice(span.end));
   if (!trailing) return "unchecked";
   const carried = trailing[1]!;
   const namespace = carried.slice(0, carried.lastIndexOf(":"));

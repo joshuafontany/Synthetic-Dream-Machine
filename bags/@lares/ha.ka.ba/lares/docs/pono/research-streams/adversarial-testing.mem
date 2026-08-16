@@ -80,6 +80,6 @@ Source: https://github.com/tlaplus/Examples
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:72dae2f0db623e27
 
 <<^ code:"&#x0004;" -> ? >>

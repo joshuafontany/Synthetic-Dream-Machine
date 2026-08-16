@@ -69,6 +69,6 @@ The workspace trust gate explains when the node must pause anyway.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:ae200ff0a45fa3ba
 
 <<^ code:"&#x0004;" -> ? >>

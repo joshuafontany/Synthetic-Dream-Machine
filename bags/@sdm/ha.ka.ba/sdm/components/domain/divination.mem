@@ -72,6 +72,6 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:4e664bac05387683
 
 <<^ code:"&#x0004;" -> ? >>

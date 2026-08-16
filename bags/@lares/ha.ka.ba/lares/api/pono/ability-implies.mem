@@ -75,6 +75,6 @@ export function abilityImplies(have: OrichalcumAbility, need: OrichalcumAbility)
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>⊙:db87ad4365ec65b2
 
 <<^ code:"&#x0004;" -> ? >>

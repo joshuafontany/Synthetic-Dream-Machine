@@ -72,6 +72,6 @@ AST reader: read the sockets, then route.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:9f0eecbeb34c46b2
 
 <<^ code:"&#x0004;" -> ? >>
