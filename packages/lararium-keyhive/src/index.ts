@@ -13,6 +13,10 @@ export { KeyhiveIdentitySlot } from "./keyhive-identity-slot.js";
 export type { KeyhiveIdentitySlotOpts } from "./keyhive-identity-slot.js";
 export { packPersonaCrossing, applyPersonaCrossing } from "./persona-crossing.js";
 export type { PersonaCrossingBundle, CrossingContent, CrossingPlaintext } from "./persona-crossing.js";
+export { runFaceJoin, gateFaceJoin } from "./face-join.js";
+export type {
+  FaceJoinSummons, FaceJoinGrant, FaceJoinOutcome, FaceJoinRefusal, FaceJoinProvider, FaceJoinContext,
+} from "./face-join.js";
 
 export { InMemoryEventStore, inIslandSlice, inSelfSlice } from "./event-store.js";
 export type { EventStore, EventRecord } from "./event-store.js";
