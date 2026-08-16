@@ -22,6 +22,7 @@
  */
 
 import { existsSync, readFileSync, readdirSync, writeFileSync, mkdirSync } from "fs";
+import { CARRIER_TYPE } from "../packages/lararium-mesh/src/carrier-type.js";
 import { join, dirname, basename, relative, resolve } from "path";
 
 const WORKSPACE = resolve(dirname(new URL(import.meta.url).pathname), "..");
@@ -167,7 +168,7 @@ function template(opts: {
 uri-path     = "${uriPath}"
 file-path    = "${memeRel}"
 source-file  = "${sourceRel}"
-type         = "text/x-memetic-wikitext"
+type         = ${JSON.stringify(CARRIER_TYPE)}
 register     = "CS"
 confidence   = 10
 mana         = 10

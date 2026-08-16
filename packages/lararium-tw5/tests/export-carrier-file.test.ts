@@ -11,6 +11,7 @@ import { describe, test, expect, beforeAll } from "vitest";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { TW5Engine } from "../src/tw5-vm.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import { exportCarrierFile } from "../src/meme-write.js";
 import LARES_MEMETIC_WIKITEXT_PLUGIN from "../plugins/lares-memetic-wikitext.json" with { type: "json" };
 import { TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME } from "../src/generated-tw5-version.js";
@@ -48,7 +49,7 @@ describe.skipIf(coreBlobSkip)(
     });
     engine.setTiddler({
       title: "lar:///ha.ka.ba/lares/api/native/carrier",
-      type:  "text/x-memetic-wikitext",
+      type:  CARRIER_TYPE,
       text:  "a memetic carrier still recomposes to .mem.\n",
     });
     // A skinny handle whose body left the CRDT for the cid/ tier — NO text.

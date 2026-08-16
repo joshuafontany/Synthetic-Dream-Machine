@@ -23,6 +23,7 @@ import {
   expandMemeRefs,
   type TiddlerFields,
 } from "../src/deserializer.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 
 const URI = "lar:///test.bare.doc";
 const STX = "<<^ code:\"&#x0002;\" >>";
@@ -68,7 +69,7 @@ describe("iam fence — lar_* sensorium metadata round-trips; only structural/pa
   test("lar_* sensorium fields re-emit; parse-grade markers + $-keys stay out; operator fields stay in", () => {
     const fields: TiddlerFields = {
       title: URI,
-      type: "text/x-memetic-wikitext",
+      type: CARRIER_TYPE,
       text: "body line",
       cacheable: "true",
       // sensorium / worldline metadata — round-trips WHOLE (supersedes 16f4b271)
@@ -102,7 +103,7 @@ describe("iam fence — lar_* sensorium metadata round-trips; only structural/pa
     const bigBody = Array.from({ length: 40 }, (_, i) => `paragraph ${i} — a line of real body content.`).join("\n\n");
     const fields: TiddlerFields = {
       title: URI,
-      type: "text/x-memetic-wikitext",
+      type: CARRIER_TYPE,
       text: bigBody,
       cacheable: "true",
       lar_agent_handle: "run-1.deadbeef",

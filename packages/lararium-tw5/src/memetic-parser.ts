@@ -35,7 +35,7 @@ import type { ParseFailure as ParseFailureLike } from "./meme-ast/types.js";
 
 const RULES_CONFIG_TIDDLER = "lar:///ha.ka.ba/config/memetic-rules-except";
 
-const MEMETIC_TYPE = "text/x-memetic-wikitext";
+import { CARRIER_TYPE as MEMETIC_TYPE } from "@lararium/mesh/carrier-type";
 
 const DEFAULT_RULES_EXCEPT: ReadonlySet<string> = new Set<string>();
 
@@ -161,4 +161,7 @@ function MemeticParser(this: ParserInstance, type: string, text: string, options
 }
 MemeticParser.prototype = Object.create(stdParser.prototype as object) as ParserPrototype;
 
+// BOTH SPELLINGS EXPORT THE SAME PARSER. TW5 keys parser modules by type string, so a carrier stored
+// under the unsuffixed name needs its own export or it silently falls through to the wikitext parser.
+export { MemeticParser as "text/x-memetic-wikitext+tiddlywiki" };
 export { MemeticParser as "text/x-memetic-wikitext" };

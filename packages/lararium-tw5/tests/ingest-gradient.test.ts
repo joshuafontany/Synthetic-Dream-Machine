@@ -14,6 +14,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { decideIngest } from "../src/ingest-gate.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 
 const REPO_ROOT = new URL("../../..", import.meta.url).pathname;
 const BOOT = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
@@ -55,7 +56,7 @@ describe("the ingest gate carries the gradient", () => {
       expect(diagnostic.from).toBeGreaterThanOrEqual(0);
       expect(diagnostic.to).toBeGreaterThanOrEqual(diagnostic.from);
       expect(["error", "warning", "info", "hint"]).toContain(diagnostic.severity);
-      expect(diagnostic.source).toBe("text/x-memetic-wikitext");
+      expect(diagnostic.source).toBe(CARRIER_TYPE);
       expect(typeof diagnostic.code).toBe("string");
     }
   });

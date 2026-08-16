@@ -32,7 +32,7 @@ import type { TW5Engine } from "./tw5-vm.js";
 import { makeTw5FileInfo } from "./tw5-file-info.js";
 import type { TW5Instance } from "./types/tiddlywiki.js";
 
-const MEMETIC_TYPE = "text/x-memetic-wikitext";
+import { CARRIER_TYPE as MEMETIC_TYPE, isCarrierType } from "@lararium/mesh/carrier-type";
 
 /**
  * Return the canonical memetic-wikitext for a meme URI — the whole carrier,
@@ -109,7 +109,9 @@ export function exportCarrierFile(tw5: TW5Engine, memeUri: string): CarrierFile 
   // file-info pass would emit only the parent's rewritten text). Absent/blank
   // type on a memetic-decomposed carrier still routes here (the recompose
   // returns null for a non-memetic record and we fall through).
-  if (type === MEMETIC_TYPE) {
+  // ROUTING READS WIDE; MINTING WRITES NARROW. This asks "is this a carrier", never "does it spell the
+  // type the way I would" — a record stored under the earlier spelling still recomposes to `.mem`.
+  if (isCarrierType(type)) {
     return { ext: ".mem", body: exportMemeText(tw5, memeUri) };
   }
   const info = makeTw5FileInfo(tw5.$tw as unknown as TW5Instance, memeUri, fields as Record<string, unknown>);

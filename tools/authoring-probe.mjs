@@ -21,12 +21,13 @@
 // those keep arriving from editors, clipboards and older sessions. Refusing either would make the
 // grammar the author's problem; mangling either would corrupt canon quietly. Both must MINT.
 import { memeticWikitextDeserializer, expandMemeRefs } from "../packages/lararium-tw5/dist/deserializer.js";
+import { CARRIER_TYPE, CARRIER_TYPE_UNSUFFIXED } from "../packages/lararium-mesh/dist/carrier-type.js";
 
 const URI = "lar:///ha.ka.ba/lares/docs/authoring-probe";
 const IAM = [
   "```toml iam",
   'uri-path = "ha.ka.ba/lares/docs/authoring-probe"',
-  'type     = "text/x-memetic-wikitext"',
+  `type     = "${CARRIER_TYPE}"`,
   "```",
 ].join("\n");
 const IAM_NS = IAM.replace("```\n", "").replace("type     =", 'namespace = "⊙"\ntype     =');
@@ -64,6 +65,13 @@ const AUTHORED = [
   [
     "the canonical frame, authored by hand",
     `<<^ code:"&#x0001;" namespace:"⊙" ? -> ${URI} >>\n${IAM_NS}\n<<^ code:"&#x0002;" >>\n\n${BODY}\n<<^ code:"&#x0003;" >>\n\n<<^ code:"&#x0004;" -> ? >>\n`,
+    "⊙",
+  ],
+  [
+    // A carrier written before the suffix names the same syntax and always did. It must project, and
+    // it must project under the CANONICAL name — the reader stays wide, the writer stays singular.
+    "a carrier declaring the type name written before the suffix",
+    `${IAM_NS.replace(CARRIER_TYPE, CARRIER_TYPE_UNSUFFIXED)}\n\n${BODY}`,
     "⊙",
   ],
   [

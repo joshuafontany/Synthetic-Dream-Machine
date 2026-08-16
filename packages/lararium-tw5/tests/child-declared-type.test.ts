@@ -7,10 +7,11 @@
 import { describe, expect, test } from "vitest";
 
 import { splitBodyTiddler } from "../src/deserializer.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import type { TiddlerFields } from "../src/deserializer.js";
 
 const ROOT = "lar:///ha.ka.ba/x/demo";
-const base: TiddlerFields = { type: "text/x-memetic-wikitext" };
+const base: TiddlerFields = { type: CARRIER_TYPE };
 
 function childByTitleEnd(children: TiddlerFields[], suffix: string): TiddlerFields | undefined {
   return children.find((c) => String(c.title).endsWith(suffix));
@@ -42,6 +43,6 @@ describe("child declared iam type (default-before-spread)", () => {
     const { children } = splitBodyTiddler(ROOT, body, base);
     const kid = childByTitleEnd(children, "#plain");
     expect(kid).toBeDefined();
-    expect(kid!.type).toBe("text/x-memetic-wikitext");
+    expect(kid!.type).toBe(CARRIER_TYPE);
   });
 });

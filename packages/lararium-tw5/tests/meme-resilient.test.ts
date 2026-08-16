@@ -8,6 +8,7 @@
 import { describe, expect, test } from "vitest";
 
 import { parseMemeText } from "../src/meme-ast/parse.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import type { GrammarRules } from "../src/meme-ast/types.js";
 
 const URI = "lar:///test.resilient.parses";
@@ -99,7 +100,7 @@ describe("the recovery gradient reads onto the core severity ladder", () => {
     const [diagnostic] = failuresToDiagnostics([failure("water")], 6);
     expect(diagnostic!.from).toBe(3);
     expect(diagnostic!.to).toBe(6);
-    expect(diagnostic!.source).toBe("text/x-memetic-wikitext");
+    expect(diagnostic!.source).toBe(CARRIER_TYPE);
     expect(diagnostic!.code).toBe("unclosed-sigil");
   });
 

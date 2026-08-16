@@ -11,6 +11,7 @@
  */
 
 import type { ParseFailure } from "./types.js";
+import { CARRIER_TYPE as MEMETIC_TYPE } from "@lararium/mesh/carrier-type";
 
 export type DiagnosticSeverity = "error" | "warning" | "info" | "hint";
 
@@ -23,7 +24,7 @@ export interface MemeDiagnostic {
   readonly message:  string;
 }
 
-export const MEMETIC_SOURCE = "text/x-memetic-wikitext";
+export const MEMETIC_SOURCE = MEMETIC_TYPE;
 
 /** Worst severity first, so a grade moves only when the worst class of fault moves. */
 const SEVERITY_RANK: Readonly<Record<DiagnosticSeverity, number>> = {

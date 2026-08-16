@@ -14,6 +14,7 @@
 import { describe, test, expect } from "vitest";
 import { createHash } from "crypto";
 import { bootTrustedModules } from "../src/tw5-module-gate.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import { stack } from "../src/filters/stack.js";
 import type { TW5FilterOperator, TW5FilterSource } from "../src/types/tiddlywiki.js";
 
@@ -69,7 +70,7 @@ function fakeTw(initial: Record<string, Fields>) {
 function moduleMeme(title: string, body: string, overrides: Fields = {}): Fields {
   return {
     title,
-    type:          "text/x-memetic-wikitext",
+    type:          CARRIER_TYPE,
     tags:          [MODULE_COMPONENT],
     mana:          "18", manao: "18", manaoio: "18", confidence: "18",
     "module-type": "library",
@@ -106,7 +107,7 @@ describe("bootTrustedModules — selection by worn component", () => {
 
     for (const t of ["low", "nohash", "bare"]) {
       expect(tiddlers.get(`lar:///ha.ka.ba/bags/@test/modules/${t}`)!["type"])
-        .toBe("text/x-memetic-wikitext");
+        .toBe(CARRIER_TYPE);
     }
   });
 });

@@ -6,9 +6,9 @@
  * only by diffing a round-trip. A block check answers a bad block with NAK, never with silence.
  */
 import { describe, test, expect } from "vitest";
-import { createHash } from "node:crypto";
 import { deserializeCarrier } from "../src/deserializer.js";
-import { classifyPostamble, checkedSpan, bccLine } from "../src/block-check.js";
+import { classifyPostamble, checkedSpan } from "../src/block-check.js";
+import { bccOfSpan } from "../src/carrier-check.js";
 
 const frame = (slot: string): string =>
   `<<^ code:"&#x0001;" ? -> lar:///t/x >>\n\`\`\`toml iam\nuri-path = "t/x"\n\`\`\`\n\n` +
@@ -19,7 +19,7 @@ const stranded = (text: string): string[] =>
     .filter((d) => d.code === "postamble-content").map((d) => d.severity);
 
 const digestOf = (text: string): string =>
-  "sha256:" + createHash("sha256").update(checkedSpan(text) ?? "").digest("hex");
+  bccOfSpan(checkedSpan(text) ?? "", "\u2299");
 
 describe("★ content past ETX refuses instead of vanishing ★", () => {
   test("an empty slot is legal — the block check is OPTIONAL", () => {
@@ -33,7 +33,7 @@ describe("★ content past ETX refuses instead of vanishing ★", () => {
 
   test("a well-formed block check is legal in that slot", () => {
     const t = frame("");
-    expect(stranded(frame("\n" + bccLine(digestOf(t)) + "\n"))).toEqual([]);
+    expect(stranded(frame("\n" + digestOf(t) + "\n"))).toEqual([]);
   });
 });
 

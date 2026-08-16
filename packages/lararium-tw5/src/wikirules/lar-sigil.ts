@@ -20,6 +20,7 @@ module-type: wikirule
  */
 
 import { getGrammar } from "../grammar-cache.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import { severityOfRung } from "../meme-ast/diagnostics.js";
 import type { RecoveryRung } from "../meme-ast/diagnostics.js";
 import {
@@ -178,7 +179,7 @@ export function parse(this: RuleInstance): ParseTreeNode[] {
       from,
       to,
       severity: severityOfRung(grade as RecoveryRung),
-      source:   "text/x-memetic-wikitext",
+      source:   CARRIER_TYPE,
       code:     `unrecognized-sigil-${grade}`,
       message:  `The sigil form recovered as ${grade}, and its text stands verbatim`,
     });

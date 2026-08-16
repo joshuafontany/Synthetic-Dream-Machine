@@ -11,6 +11,7 @@
 import { describe, expect, test } from "vitest";
 
 import { expandMemeRefs } from "../src/deserializer.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import type { TiddlerFields } from "../src/deserializer.js";
 
 const ROOT = "lar:///ha.ka.ba/x/demo";
@@ -22,7 +23,7 @@ function reader(map: Record<string, TiddlerFields>) {
 describe("child iam inheritance (parent-diff)", () => {
   const parent: TiddlerFields = {
     title: ROOT,
-    type: "text/x-memetic-wikitext",
+    type: CARRIER_TYPE,
     namespace: "ns",
     "carrier-soh": "0001",
     text: "<<~ kahea ahu #kid >>",
@@ -34,7 +35,7 @@ describe("child iam inheritance (parent-diff)", () => {
   }
 
   test("inherited-matching field (type == parent) is NOT re-emitted on the child", () => {
-    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: "text/x-memetic-wikitext", text: "body" };
+    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: CARRIER_TYPE, text: "body" };
     const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
     expect(out).not.toBeNull();
     expect(childBlock(out!)).not.toMatch(/^type = /m);   // matches parent → skipped
@@ -63,7 +64,7 @@ describe("child iam inheritance (parent-diff)", () => {
   });
 
   test("an empty child (no iam, no body) holds a SINGLE blank line, never balloons", () => {
-    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: "text/x-memetic-wikitext", text: "" };
+    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: CARRIER_TYPE, text: "" };
     const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
     // sigil · one blank · closer — no three-blank bloat.
     expect(out).toMatch(/<<~ ahu #kid >>\n\n<<~\/ahu >>/);

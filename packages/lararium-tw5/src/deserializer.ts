@@ -50,6 +50,7 @@ export { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence
 import { parseTaploFields } from "./toml-ast.js";
 import { shoreDiagnostic } from "./meme-ast/diagnostics.js";
 import { classifyPostamble } from "./block-check.js";
+import { CARRIER_TYPE, CARRIER_TYPES, isCarrierType } from "@lararium/mesh/carrier-type";
 import type { MemeDiagnostic } from "./meme-ast/diagnostics.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
 import { parseMemeText } from "./meme-ast/parse.js";
@@ -74,7 +75,9 @@ export interface TiddlerFields {
 // memeticWikitextDeserializer — the TW5 module export
 //
 // TW5 registers tiddlerdeserializer modules keyed by content-type.
-// The compiled CJS exports: exports["text/x-memetic-wikitext"] = this function.
+// The compiled CJS exports: exports["<type>"] = this function, once per spelling. TW5 keys deserializer
+// modules by type string, so a carrier stored under the unsuffixed name needs its own export or the
+// file reads as plain text and yields no records at all.
 // ---------------------------------------------------------------------------
 
 export function memeticWikitextDeserializer(
@@ -397,7 +400,7 @@ function splitMemeToTiddlers(
     ...baseFields,
     ...rootFields,
     title: uri,
-    type:  "text/x-memetic-wikitext",
+    type:  CARRIER_TYPE,
     text:  normalizedBodyRewritten,
     ...(preIamContent.trim()   ? { preamble:     preIamContent }   : {}),
     ...(headerRewritten.trim() ? { "header-text": headerRewritten } : {}),
@@ -464,7 +467,7 @@ function splitRecursive(
       // childStructure.fields and OVERRIDES this default via the spread — a typed child keeps its
       // type instead of losing it to the memetic-wikitext hardcode. (The parent carrier stays
       // memetic by construction — this deserializer runs because the carrier IS memetic.)
-      type:              "text/x-memetic-wikitext",
+      type:              CARRIER_TYPE,
       ...childStructure.fields,
       title:             childUri,
       text:              childStructure.text,
@@ -624,6 +627,7 @@ function asStringFields(fields: Record<string, unknown>): TiddlerFields {
   return out;
 }
 
+export { memeticWikitextDeserializer as "text/x-memetic-wikitext+tiddlywiki" };
 export { memeticWikitextDeserializer as "text/x-memetic-wikitext" };
 
 // ---------------------------------------------------------------------------
@@ -877,7 +881,15 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
 export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | null {
   const f = reader(memeUri);
   if (!f) return null;
-  if (f.type !== "text/x-memetic-wikitext") return null;
+  // A RECORD THAT IS NOT A CARRIER PROJECTS TO NOTHING, and until it said so this was the quietest
+  // failure in the tree: a type the reader does not admit returns null, the projection writes no file,
+  // and nothing anywhere reports which record went missing or why.
+  if (!isCarrierType(f.type)) {
+    if (typeof f["type"] === "string" && (f["type"] as string).includes("memetic-wikitext")) {
+      console.warn(`[memetic-deserializer] ${memeUri} declares type "${f["type"] as string}" — not a spelling this reader admits (${CARRIER_TYPES.join(" · ")}); it will not project`);
+    }
+    return null;
+  }
 
   const str = (k: string): string => (typeof f[k] === "string" ? (f[k] as string) : "");
   const iam = emitIamToml(f, IAM_DENY);

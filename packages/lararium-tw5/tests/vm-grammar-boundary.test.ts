@@ -10,6 +10,7 @@ import { describe, expect, test } from "vitest";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { TW5Engine } from "../src/tw5-vm.js";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 
@@ -84,13 +85,13 @@ describe("pono grammar boundary", () => {
 
     (engine as unknown as { _tw: unknown })._tw = { wiki, Tiddler: FakeTiddler };
 
-    const records = engine.ingestCarrier("lar:///test", "<<~ meme text >>", { type: "text/x-memetic-wikitext" });
+    const records = engine.ingestCarrier("lar:///test", "<<~ meme text >>", { type: CARRIER_TYPE });
 
     expect(calls).toEqual([
       {
-        type: "text/x-memetic-wikitext",
+        type: CARRIER_TYPE,
         text: "<<~ meme text >>",
-        fields: { title: "lar:///test", type: "text/x-memetic-wikitext" },
+        fields: { title: "lar:///test", type: CARRIER_TYPE },
       },
     ]);
     expect(records.map((r) => r.tiddler.title)).toEqual(["lar:///test"]);

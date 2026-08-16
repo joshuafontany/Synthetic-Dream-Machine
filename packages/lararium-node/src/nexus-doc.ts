@@ -30,6 +30,7 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import { join, dirname } from "node:path";
 import {
   NEXUS_DOC_DOMAIN, NEXUS_CHARTER_URI, NEXUS_CHARTER_URI_PATH,
@@ -217,7 +218,7 @@ export function renderNexusDoc(doc: NexusDoc): string {
 \`\`\`toml iam
 uri-path  = "${NEXUS_CHARTER_URI_PATH}"
 file-path = "<data>/nexus/${nexusCharterDocRelPath()}"
-type      = "text/x-memetic-wikitext"
+type      = ${JSON.stringify(CARRIER_TYPE)}
 register  = "Canon"
 mana      = 19
 cacheable = true

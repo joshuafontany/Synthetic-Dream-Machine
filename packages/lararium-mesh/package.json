@@ -79,6 +79,10 @@
     "./node": {
       "import": "./dist/node.js",
       "types": "./dist/node.d.ts"
+    },
+    "./carrier-type": {
+      "import": "./dist/carrier-type.js",
+      "types": "./dist/carrier-type.d.ts"
     }
   },
   "main": "./dist/index.js",

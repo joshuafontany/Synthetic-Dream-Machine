@@ -41,6 +41,8 @@
  */
 
 /** The scheme a manifest, recipe, or pour uses to name a collection without naming a directory. */
+import { CARRIER_TYPE } from "./carrier-type.js";
+
 export const LIBRARY_REF_PREFIX = "library:" as const;
 
 /** The self-describing sidecar beside every acquired body. */
@@ -117,7 +119,7 @@ export function renderLibraryIndex(collection: string, entries: readonly Library
     `collection = "${collection}"`,
     `entries    = "${rows.length}"`,
     `bytes      = "${total}"`,
-    'type       = "text/x-memetic-wikitext"',
+    `type       = "${CARRIER_TYPE}"`,
     "```",
     "",
     `! Library — ${collection}`,

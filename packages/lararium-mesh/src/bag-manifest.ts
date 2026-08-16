@@ -28,6 +28,7 @@
  */
 
 import { parseCapTier, DEFAULT_CAP_TIER, type CapTier } from "./cap-tier.js";
+import { CARRIER_TYPE } from "./carrier-type.js";
 import { parseBagHome, DEFAULT_BAG_HOME, resolveBagHomeDir, type BagHome, type BagHomeRoots, type BagHomeResolution } from "./bag-home.js";
 
 /** The file a bag's self-declaration rides, at the bag's own root. A meme about the bag. */
@@ -87,7 +88,7 @@ export function renderBagManifest(m: BagManifest): string {
     `home      = "${m.home}"`,
     ...(m.repository ? [`repository = "${m.repository}"`] : []),
     ...(m.role ? [`role      = "${m.role.replace(/"/g, "'")}"`] : []),
-    'type      = "text/x-memetic-wikitext"',
+    `type      = "${CARRIER_TYPE}"`,
     "```",
     "",
     `! ${m.bag}`,

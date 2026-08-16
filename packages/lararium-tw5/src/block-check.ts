@@ -36,14 +36,16 @@
  * It rides the caret family with the other frame sigils because it IS frame, never body — a reader
  * who meets it should feel the same register as the ETX above it.
  */
-// THE CHECK'S LINE FORM LIVES HERE; THE CHECK ITSELF LIVES IN `carrier-check.ts`, which computes it
-// over the framed span rather than reading it from a field. Until the stamping sweep runs, this module
-// only CLASSIFIES what follows ETX — it never verifies, so a carrier's postamble reads as present or
-// absent and never as correct. Naming that gap beats a classifier that looks like a check.
-export const BCC_RE = /^<<[~^]\s*BCC\s+(sha256:[0-9a-f]{64})\s*>>$/;
-
-/** Render the trailer for a computed digest. */
-export const bccLine = (digest: string): string => `<<^ BCC ${digest} >>`;
+/**
+ * The check as the spec writes it: `<namespace>:<16 hex digits>`, standing directly after the ETX sigil.
+ *
+ * A block runs `STX -> text -> ETX -> BCC` and the check follows the terminator with nothing between —
+ * the position a receiver has always read it from. The value derives; `carrier-check.ts` computes it
+ * over the framed span, and this module only says whether one STANDS. Present and CORRECT are different
+ * questions, and a classifier that answered the first under the name of the second would invite the
+ * reading that a present postamble is a verified one.
+ */
+export const BCC_RE = /^(\S+:[0-9a-f]{16})$/;
 
 /**
  * What a carrier wrote between ETX and EOT.

@@ -8,6 +8,7 @@
  * Reaction routing: reaction-router.ts TW5 startup module. No globals.
  */
 
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import type {
   TW5Instance,
   TW5TiddlerInputFields,
@@ -70,7 +71,7 @@ export class TW5Engine {
     if (!this._tw) throw new Error("TW5Engine: call boot() before ingestCarrier()");
     const base: TW5TiddlerInputFields = { title: uri, ...extraFields };
     let tiddlers = (
-      this._tw.wiki.deserializeTiddlers("text/x-memetic-wikitext", text, base) ?? []
+      this._tw.wiki.deserializeTiddlers(CARRIER_TYPE, text, base) ?? []
     ) as TW5TiddlerInputFields[];
     if (opts?.realmOrigin) {
       const ro = opts.realmOrigin;
