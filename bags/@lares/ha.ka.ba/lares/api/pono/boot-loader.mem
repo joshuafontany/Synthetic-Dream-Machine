@@ -40,8 +40,10 @@ A cold reader stands a wiki. That is its whole office, and the office names its 
   divide there, and a loader that cannot tell heading from body cannot hand a wiki its own seed.
 # It MUST find the ''identity heading'' — the labelled toml fence — because the seed's address, its
   namespace and its type ride there.
-# It MUST find ''worksite boundaries'' (`ahu`), because a seed carries slots and a loader that flattens
-  them hands the wiki one record where the author wrote several.
+# It MUST find ''worksite boundaries'' (`ahu`), because a worksite is a RECORD boundary: the parent meme
+  becomes a tiddler and each `ahu` becomes a related tiddler beside it, so the boundary carries a
+  structural relationship the round trip must reproduce. A loader that flattened them would hand the
+  wiki one record where the author wrote several, and the relation would not survive the next write-back.
 # It reads ''nothing else''. Every remaining sigil rides through as text, and the wiki resolves it once
   the wiki exists.
 
@@ -67,6 +69,29 @@ property that keeps one grammar from becoming two.
 
 ''The gradient carries the rest.'' Anything the loader does not frame survives as text, whole, and
 reaches the wiki unaltered. Nothing is lost by not being understood early.
+
+<<~/ahu >>
+
+<<~ ahu #not-only-a-loader >>
+
+!! The scan set serves three offices, and only one of them is the boot
+
+The cold scan set reads as a boot fallback and answers to that name, which invites the obvious
+retirement: cut it to the floor above, since a wiki holds the grammar. ''Measured, that cut breaks
+fourteen tests, and the breakages name two more offices the same set was quietly holding.''
+
+* ''The boot floor'' — the six obligations above. Frame, heading, worksite, and pass-through.
+* ''The sensorium's vocabulary.'' `wiki-sense-fold` and the memetic sensorium call the scan with NO
+  grammar, reading sigil DENSITY as a signal — how thick with construct a span runs. That measure wants
+  the whole vocabulary, not the frame: a text carrying `heihei` and `kahea` and `waiho` reads denser than
+  one carrying none, and a loader-sized scan would report every such text as flat.
+* ''The gradient's grader.'' The diagnostics path grades a construct it cannot fully read as `missing` —
+  the partial rung — rather than dropping it to water. Grading needs the specific scans to know what the
+  author reached for, and the generic catch-all to notice a reach it does not recognise.
+
+''So the set stays whole, and the boot floor is a READING of it rather than a subset to cut down to.''
+The retirement test — //does this exist for a spelling no live population uses?// — answers NO here:
+three populations use it, and two of them are not the boot.
 
 <<~/ahu >>
 
