@@ -104,6 +104,18 @@ async function openStaged(): Promise<LarInstance> {
     throw new Error(`staged reset failed (${reset.code}):\n${reset.stderr.slice(-800)}`);
   }
 
+  // ── THE RITE RUNS IN TWO STEPS, SO THE HARNESS PERFORMS BOTH ───────────────────────────────
+  // `vessel clear` re-founds a PLACE: @daemon, the vessel's own Keyhive individual, the hearth
+  // true-name. A place stands and serves while holding no face — which is correct, and which is
+  // NOT what these suites test. They exercise a hearth: personas, wiki, catalog, the pairing the
+  // boot path derives. So the staged instance lights its face here, and a suite that wants the
+  // FLOOR asks for it deliberately rather than inheriting it from a founding that stopped early.
+  const face = await runCli(env, ["persona", "new", "0", "--name", "staged"]);
+  if (face.code !== 0) {
+    rmSync(root, { recursive: true, force: true });
+    throw new Error(`staged face-founding failed (${face.code}):\n${face.stderr.slice(-800)}`);
+  }
+
   // Boot the daemon from dist; capture its log; await `phase → live`.
   let log = "";
   const daemon: ChildProcess = spawn(process.execPath, [NODE_MAIN, "--root", root, "--port", String(port)], {
