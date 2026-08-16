@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 ---
 name: meme
 description: Generate, compress, or audit meme surfaces under lar:///ha.ka.ba/lares/api/pono/meme. Keep the parent invariant small, preserve the copy-shape, and move skeleton detail, rating tables, and research outward.
@@ -18,7 +20,7 @@ register           = "Synthesis-Canon"
 retain             = true
 role               = "meme operational skill — composition, audit, conformance check, and lawful companion-meme split"
 skill-package-root = "bags/@lares/ha.ka.ba/lares/api/pono/meme"
-type               = "text/x-memetic-wikitext"
+type               = "text/x-memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
 ```
 

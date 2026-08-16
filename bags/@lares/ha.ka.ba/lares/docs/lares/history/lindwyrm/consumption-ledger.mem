@@ -13,7 +13,7 @@ mode       = "narrate-to-self"
 register   = "Synthesis"
 retain     = true
 role       = "consumption ledger for Lindwyrm / DreamDeck narrative loci migration"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/lares/history/lindwyrm/consumption-ledger"
 ```
 

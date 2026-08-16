@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 ---
 name: talk-story
 description: Convene a talk-story floor (kūkākūkā, talanoa) — co-narrated
@@ -27,7 +29,7 @@ retain    = true
 role      = "practice face of talk-story — triggers, the five steps, three worked exits, crucible record; law lives at the parent meme"
 status    = "rite"
 status-why = "a skill definition — a procedure invoked, never a thing built"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/talk-story/SKILL"
 ```
 

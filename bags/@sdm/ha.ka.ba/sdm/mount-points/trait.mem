@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "mount-point: Trait — Power engraved in body, mind, or aura"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/mount-points/trait"
 ```
 

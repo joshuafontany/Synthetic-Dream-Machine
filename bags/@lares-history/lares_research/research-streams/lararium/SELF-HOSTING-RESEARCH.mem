@@ -1,6 +1,8 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml iam
-type = "text/x-memetic-wikitext"
+type = "text/x-memetic-wikitext+tiddlywiki"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -9,7 +11,7 @@ type = "text/x-memetic-wikitext"
 ```toml iam
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH.mem"
-type = "text/x-memetic-wikitext"
+type = "text/x-memetic-wikitext+tiddlywiki"
 l-space      = "adjacent"
 confidence   = 18
 register     = "Synthesis-Canon"

@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "bounded guest-grammar block — hana as work/action container; grammar-key selects the interpreter; English alias: \\task"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-hana"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/hana"
 ```
 

@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "procedure executor sigil — block-container scope for named procedure/function definitions; Hawaiian alias for \\procedure"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-wehe"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/wehe"
 ```
 

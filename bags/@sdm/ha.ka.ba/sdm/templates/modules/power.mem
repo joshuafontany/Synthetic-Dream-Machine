@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "root template meme for Power module memes — flat #has composition, lean playable default"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/templates/modules/power"
 ```
 

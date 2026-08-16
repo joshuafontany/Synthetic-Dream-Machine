@@ -7,7 +7,7 @@ l-space   = "adjacent"
 register  = "Synthesis"
 role      = "Gruvbox Dark color palette for TW5 theme engine"
 tags      = ["$:/tags/Palette"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/palette/gruvbox-dark"
 ```
 

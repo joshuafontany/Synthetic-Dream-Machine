@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "~ dispatcher sigil — routes <<~ name args >> to the named ~procedure; the entry point for all sigil dispatch"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-dispatcher"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/dispatcher"
 ```
 

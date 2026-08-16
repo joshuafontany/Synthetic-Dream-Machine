@@ -12,7 +12,7 @@ retain    = true
 role      = "FTLS card projection: Shield Ward — playable surface with clickable component pills"
 tags      = ["components/domain/abjuration", "components/function/ward", "components/function/barrier", "components/hook/imbued", "mount-points/trait"]
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward"
 ```
 

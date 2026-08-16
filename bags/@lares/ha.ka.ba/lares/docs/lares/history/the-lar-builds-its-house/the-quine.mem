@@ -13,7 +13,7 @@ register      = "Synthesis"
 render-target = "chat-log:post-header"
 retain        = true
 role          = "build-arc narrative locus — Act II, the house learns to host itself, and the libation that feeds it proves load-bearing"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-quine"
 ```
 

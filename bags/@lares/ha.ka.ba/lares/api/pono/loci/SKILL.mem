@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 ---
 name: loci
 description: "Perform, audit, or repair a loci routing-and-rating pass under lar:///ha.ka.ba/lares/api/pono/loci. Use this skill for URI intake, derivation algorithm execution, resolution posture commitment, canon-MOVE evaluation, file-path migration, or routing aftermath judgment."
@@ -17,7 +19,7 @@ register           = "Synthesis-Canon"
 role               = "agent-facing procedural surface for loci routing and rating passes"
 skill-package-root = "bags/@lares/ha.ka.ba/lares/api/pono/loci"
 tags               = ["api/pono/meme", "api/pono/loci"]
-type               = "text/x-memetic-wikitext"
+type               = "text/x-memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/loci/SKILL"
 ```
 

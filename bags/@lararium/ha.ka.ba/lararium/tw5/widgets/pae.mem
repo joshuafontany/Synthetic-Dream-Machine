@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/pae >>
 ```toml iam
 body-sha256   = "c07b3df5af791f4014879ee3530ed3ee59c1a06a7b41979ee2946118439d1955"
@@ -11,7 +13,7 @@ retain        = true
 role          = "anchor: PaeWidget — heleuma ka"
 source-symbol = "PaeWidget"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/pae", "tw5/modules/tw5-widgets"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/pae"
 ```
 

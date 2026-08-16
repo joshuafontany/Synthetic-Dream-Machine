@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "canvasspace conditional-branch — the Verse `if`/`case` flow-branch; a `<decides>` failable condition tests serially, one execution arm fires; renders as a branch node whose arms fire as reaction wires; the canvas cousin of wai"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-heihei"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heihei"
 ```
 

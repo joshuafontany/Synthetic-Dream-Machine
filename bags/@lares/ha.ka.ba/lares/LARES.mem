@@ -12,7 +12,7 @@ register      = "Synthesis-Canon"
 role          = "configuration surface, behind-the-curtain dial room, session-config"
 tags      = ["api/pono/meme"]
 l-space       = "adjacent"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "LARES"
 ```
 

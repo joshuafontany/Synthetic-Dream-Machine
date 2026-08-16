@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/toml >>
 ```toml iam
 body-sha256   = "d4f13f77f33d37dc2115243f6271a959c1021f2ee5226a8e4c8d733232adeb50"
@@ -11,7 +13,7 @@ retain        = true
 role          = "anchor: TomlWidget — heleuma ka"
 source-symbol = "TomlWidget"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/toml", "tw5/modules/tw5-widgets"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/toml"
 ```
 

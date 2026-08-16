@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "filter-function declaration pragma — helu as enumeration/calculation; TW5 \\function equivalent; English alias: \\function"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-helu"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/helu"
 ```
 

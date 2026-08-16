@@ -5,7 +5,7 @@
 collection = "discordia"
 entries    = "5"
 bytes      = "694253"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 ```
 
 ! Library — discordia

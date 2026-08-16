@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "lararium canvas room registry — default rooms, portals, layout types"
 tags      = ["lar:///ha.ka.ba/lares/api/lararium"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/canvas/rooms"
 ```
 

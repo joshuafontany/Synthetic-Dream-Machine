@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "conditional branch-continuation sigil — elif form; Hawaiian alias for \\elif; a second stream joining the flow"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kahawai"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kahawai"
 ```
 

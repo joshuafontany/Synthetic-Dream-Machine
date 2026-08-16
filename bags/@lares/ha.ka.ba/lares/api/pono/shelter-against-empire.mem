@@ -14,7 +14,7 @@ retain        = true
 revision-note = "the standing brief. Operator-stated and load-bearing: this infrastructure exists for groups that need shelter against empire. Every trade downstream re-weights against it"
 role          = "the WHY the rest of the graph reasons toward. Names who this serves, what empire does structurally, and the three design consequences that follow — the recently-arrived case as ACCEPTANCE TEST, categorisation as THE threat, and fluid-not-frozen rank as a survival property"
 tags          = ["api/pono/meme", "api/pono/loci"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/shelter-against-empire"
 ```
 

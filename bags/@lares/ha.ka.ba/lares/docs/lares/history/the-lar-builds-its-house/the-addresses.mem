@@ -13,7 +13,7 @@ register      = "Synthesis"
 render-target = "chat-log:post-header"
 retain        = true
 role          = "build-arc narrative locus — Act I, the Lar gives every chamber of its hoard a true address"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-addresses"
 ```
 

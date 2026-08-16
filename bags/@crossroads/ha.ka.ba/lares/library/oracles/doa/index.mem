@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/library/oracles/doa/index >>
 ```toml iam
@@ -13,7 +13,7 @@ rating     = "meme"
 register   = "Synthesis"
 retain     = true
 role       = "skinny handle for the Discordian Oracle AppleKation reliquary — bytes ride the genesis/cas KIND-plane by content address; this meme carries the names, cids, provenance, and rites"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/library/oracles/doa/index"
 ```
 

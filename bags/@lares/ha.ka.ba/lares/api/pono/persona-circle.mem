@@ -15,7 +15,7 @@ register          = "Synthesis-Canon"
 retain            = true
 role              = "persona-circle — the identity model (WHO-plane), re-cut on two axes: COMPOSITION (bottom-up emergent Circles: vessel~veil binding → handle-Circle → me-Circle) ⊥ DISCLOSURE (veiled↔known, a per-join dial). Two-key atom (vessel-key device-minted ⊥ veiled-user-key); the persona side derives one-seed ed25519-HD; key-layer unlinkability only"
 tags              = ["api/pono/meme"]
-type              = "text/x-memetic-wikitext"
+type              = "text/x-memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/persona-circle"
 ```
 

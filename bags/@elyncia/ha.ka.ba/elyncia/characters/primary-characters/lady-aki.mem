@@ -27,7 +27,7 @@ sdm-character-save                     = 13
 sdm-daemon-name                        = "Freyja Fontany"
 sdm-daemon-uri                         = "lar:///ha.ka.ba/bags/@players/freyja-fontany"
 l-space                                = "stable:@elyncia"
-type                                   = "text/x-memetic-wikitext"
+type                                   = "text/x-memetic-wikitext+tiddlywiki"
 uri-path                               = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki"
 ```
 

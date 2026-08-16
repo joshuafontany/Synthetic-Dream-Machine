@@ -14,7 +14,7 @@ retain      = true
 role        = "Genesis & the two planes: a thin @oracle pointer-doc + a CID manifest + CAS blobs. The @oracle is a SOFT-coupled served pointer on the CRDT epoch plane, atop the immutable CID plane."
 source-file = "packages/lararium-mesh/src/genesis-doc.ts"
 tags        = ["mesh/alignment-plan", "mesh/dreamnet-architecture"]
-type        = "text/x-memetic-wikitext"
+type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/genesis-doc"
 ```
 

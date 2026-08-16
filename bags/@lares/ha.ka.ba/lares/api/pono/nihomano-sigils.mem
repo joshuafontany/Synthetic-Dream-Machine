@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "origin myth and cultural contract for the Lares memetic wikitext sigil set — nihomano as the first discovered grammar; SharktoothSigil as operator-extensible wild-magic"
 tags      = ["lar:///ha.ka.ba/tags/SharktoothSigil"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/nihomano-sigils"
 ```
 

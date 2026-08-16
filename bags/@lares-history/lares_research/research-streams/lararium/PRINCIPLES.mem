@@ -4,7 +4,7 @@
 ```toml iam
 uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES"
 file-path = "bags/@lares-history/lares_research/research-streams/lararium/PRINCIPLES.mem"
-type = "text/x-memetic-wikitext"
+type = "text/x-memetic-wikitext+tiddlywiki"
 confidence = 20
 register = "Synthesis-Canon"
 manaoio = 18

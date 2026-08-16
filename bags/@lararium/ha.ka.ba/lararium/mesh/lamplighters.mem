@@ -13,7 +13,7 @@ register  = "Synthesis"
 retain    = true
 role      = "the Lamplighters' Union (the MECHANISM half; the faction carrier holds the Elyncia reading) and the OFFICE (kuleana) that seats a civic standing — who tends a faceless crossroads, what authority a tender holds, and how that authority ends. Carries the immune coupling (PRESENTATION ⊥ CONDEMNATION: tenders present, only a quorum condemns), the ZERO-WEIGHT ruling on presentation (a count of presenters needs a roster, and a roster carries a global now), the REACH split on tending caps (never a claimed body-location), and DEATH-AND-REBIRTH on physical touch. Grounded 2026-08-14 against Tor bad-relays, Ethereum slashing, CT, TUF, PeerReview, EigenTrust's Sybil collapse, the IPMI/BMC record, TCG physical-presence and FIDO user-presence. Holds ONE open question the operator has not ruled: whether island-admin tending reaches the herm's own signing key."
 tags      = ["mesh/identity-classes", "mesh/carry-contract", "mesh/epoch-binding-surfaces", "api/pono/waking-floor", "api/pono/meme"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/lamplighters"
 written   = "2026-08-14"
 ```

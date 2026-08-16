@@ -11,7 +11,7 @@ manaoio    = 16
 register   = "Synthesis"
 retain     = true
 role       = "work journey log — migration roadmap and milestone log for Lararium Node; M20 COMPLETE: bag ID = lar: URI everywhere, LarariumDocStore generic, corpusBagId=corpusLarUri, catalog bag in both peers, fields:{bag} dup stripped, room bag = roomLarUri, MemeSyncAdaptor uses room URI; M21 OPEN: draft lar: URI, room self-ref tiddler, catalog.corpora retire, connect screen, TW5 recipe from CompositeStore topology"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/ROADMAP"
 ```
 

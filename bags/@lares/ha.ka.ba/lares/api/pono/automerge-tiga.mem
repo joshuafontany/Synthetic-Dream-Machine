@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant: six base docs in two tigas — content plane (ha/ka/ba) + social plane (identities/groups/sessions)"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/automerge-tiga"
 ```
 

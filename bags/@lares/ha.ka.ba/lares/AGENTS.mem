@@ -13,7 +13,7 @@ retain    = true
 role      = "threshold constitution, operator-agent alignment shore, boot router"
 tags      = ["api/pono/meme"]
 l-space   = "adjacent"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "AGENTS"
 ```
 

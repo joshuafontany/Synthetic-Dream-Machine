@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "reaction-family edge sugar — UEFN device graph event wire; listenable at source, subscribable at target"
 tags      = ["api/pono/pranala", "api/pono/reaction-graph", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-papalohe"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/papalohe"
 ```
 

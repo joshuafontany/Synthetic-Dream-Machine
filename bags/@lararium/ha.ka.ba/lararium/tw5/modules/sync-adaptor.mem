@@ -12,7 +12,7 @@ role          = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 e
 source-symbol = "_applyChange"
 status-date   = "2026-04-30"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/heleuma/ha"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 ```
 
@@ -58,8 +58,8 @@ private _applyChange(change: LarTiddlerChange): void {
       } else {
         const rec = change.record;
         const isCarrier = rec.text !== undefined &&
-          (rec.fields["type"] === "text/x-memetic-wikitext" ||
-            rec.fields["content-type"] === "text/x-memetic-wikitext" ||
+          (rec.fields["type"] === "text/x-memetic-wikitext+tiddlywiki" ||
+            rec.fields["content-type"] === "text/x-memetic-wikitext+tiddlywiki" ||
             (!(rec.fields["type"] || rec.fields["content-type"]) && change.title.startsWith("lar:")));
 
         if (isCarrier && rec.text) {

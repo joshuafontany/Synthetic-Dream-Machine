@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "conditional fallback sigil — else form; Hawaiian alias for \\else; the cut-off water, the path when all streams closed"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-mukuwai"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/mukuwai"
 ```
 

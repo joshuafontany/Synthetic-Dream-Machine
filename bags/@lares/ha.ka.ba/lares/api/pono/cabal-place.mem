@@ -16,7 +16,7 @@ retain            = true
 retires-to        = "ha.ka.ba/lares/api/pono/cabal-realm"
 role              = "RETIRE-RESIDUE — cabal-place carried the CabalGroup model until the operator reserved the word PLACE for the identity-bearing Lararium (the hearth that holds a DID). The whole substance moved forward to cabal-realm, which sharpens the same model as an IMAGINED REALM on the DreamNet — the superset of the members' shared infrastructure. Read cabal-realm; this address survives only to point there"
 tags              = ["api/pono/meme"]
-type              = "text/x-memetic-wikitext"
+type              = "text/x-memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/cabal-place"
 ```
 

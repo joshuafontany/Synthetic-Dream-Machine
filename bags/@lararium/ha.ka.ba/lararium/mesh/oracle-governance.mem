@@ -15,7 +15,7 @@ role      = "oracle-governance: a per-nexus @oracle board (ownership+scale groun
 status    = "designed"
 status-why = "design intent, mostly unbuilt"
 tags      = ["mesh/dreamnet-architecture", "api/pono/group-as-closure", "api/pono/causal-islands"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/oracle-governance"
 written   = "2026-06-29"
 ```

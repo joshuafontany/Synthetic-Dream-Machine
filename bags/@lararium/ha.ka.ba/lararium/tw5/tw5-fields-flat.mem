@@ -11,7 +11,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "heleuma: TW5TiddlerFields → Record<string,string> normaliser"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/tw5-fields-flat"
 ```
 

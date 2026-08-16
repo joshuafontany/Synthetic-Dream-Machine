@@ -11,7 +11,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source: TW5 widget module protocol — LARARIUM_WIDGETS_TIDDLER stub + prototype chain wiring"
 source-symbol = "createLarariumWidgets"
 status-date   = "2026-04-30"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widget-module"
 ```
 

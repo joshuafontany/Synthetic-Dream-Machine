@@ -16,7 +16,7 @@ retain            = true
 role              = "cabal-realm — a CabalGroup read as an IMAGINED REALM on the DreamNet: the superset of the members' shared infrastructure, imagined as one shared expanse (a hearth beside, not a category above). It carries no DID of its own — a Place bears identity, a vessel names the metal running the code, a realm names what the members jointly imagine and maintain. Named-not-ruled, alive by its epoch, dissolving to anu when unfed. The tie-break rides the realm's epoch (BeeKEM); malice rides Plane-B convergent-removal. GOVERNING A REALM ⊥ GOVERNING THE METAL (operator ruling 2026-08-09): the Ostrom principles govern the realm — the virtual relationship-place — while infrastructure authority (who runs the metal, who holds the archive passphrase, who lights a Herm, who signs a kāpae) sits on the vessel and the charter. Neither substitutes for the other"
 revised-on        = "2026-08-10"
 tags              = ["api/pono/meme"]
-type              = "text/x-memetic-wikitext"
+type              = "text/x-memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/cabal-realm"
 ```
 

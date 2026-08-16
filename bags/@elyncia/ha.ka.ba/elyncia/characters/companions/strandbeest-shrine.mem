@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine >>
 ```toml iam
@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "companion sheet — the Faerie-Ring Strandbeest Shrine: walking hokora, mycelium sails, Mother Spore ring"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/companions/strandbeest-shrine"
 ```
 

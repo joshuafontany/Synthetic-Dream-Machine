@@ -12,7 +12,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the dev loop: the idempotent CLI cures after a code change (refresh/reconcile/rebuild/fresh/serve/reset/wake) + WHERE vessel state lives (~/.lares) vs corpus (the repo). The reach taxonomy + the path law + the invariants the dev loop rests on."
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/node/dev-loop"
 written   = "2026-06-27"
 ```

@@ -1,5 +1,4 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/pono/memetic-wikitext >>
-
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<^ code:"&#x0001;" ? -> lar:///todo/DreamNet_MemeWiki >>
 
 <<~ ahu #iam >>
@@ -7,7 +6,7 @@
 # <<~ ahu #iam-ha "structure" >>
 name = "DreamNet_MemeWiki"
 file-path = "todo/todo.DreamNet-MemeWiki.mem"
-content-type = "text/x-memetic-wikitext"
+content-type = "text/x-memetic-wikitext+tiddlywiki"
 version = "0.1-draft"
 tulen = 0.62
 # <<~/ahu >>

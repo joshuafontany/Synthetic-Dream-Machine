@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = false
 role      = "docs room for shared-situation-awareness framing, prospective display theory, and research grounding behind lar signal"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/sa-display"
 ```
 

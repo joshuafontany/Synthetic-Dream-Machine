@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier >>
 ```toml iam
@@ -13,7 +13,7 @@ rating     = "kapu"
 register   = "Synthesis"
 retain     = true
 role       = "NPC dossier, referee view — the Lindwyrm behind the public face: the summit as recruitment engine, the intelligence apparatus, the long game of the mesh; the deepest seals stay in the operator's own seats, pointed at and never carried here"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier"
 ```
 
@@ -74,7 +74,15 @@ preparing it.
 
 ''Her body — blessed canon (2026-08-15), referee-side:'' the heraldic lindworm law holds true —
 ''wingless, serpentine, two forelimbs only'', scales in orichalcum-sheen, her hoard's metal
-grown into her body. ''She never flew; she levitated a city instead'' — a wingless dragon who
+grown into her body. ''Register (Freyja's canon):'' very eastern — Miyazaki / Earthsea /
+Spirited-Away dragon-language — crossed with the German wingless line; ''Master-tier heritage
+with levitation-flight'' (she flies the way rivers swim, no wings asked). The insulation from
+the Great Game read as strategy in hindsight and as temperament in truth: the conclave of 5002
+convened at her table because hers was the only neutral one, and neutrality that old converts
+to authority overnight. ''The table itself (operator-felt, Provisional):'' a hidden
+astral-dream-realm hoard-room, connected to what became the House of Masks — her vault cleared
+for company; the low door that breathes may open on it still, which reads the RSVP card's "I
+will use the door" at its full depth. ''She never flew; she levitated a city instead'' — a wingless dragon who
 solved flight by engineering, which explains more of her career than any prophecy. Her humanoid
 dragon-kin form rides as ''a kept shed skin, worn like couture'' (the folktale seam: the
 lindworm transforms by shedding); the mana-muting glamour reads as "the last shift." The public

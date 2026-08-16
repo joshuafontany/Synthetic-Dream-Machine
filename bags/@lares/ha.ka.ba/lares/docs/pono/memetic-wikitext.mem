@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "extended documentation surface for memetic-wikitext: examples, authoring profiles, boundary notes, migration residue, and the W3C/prior-art lineage verdicts behind the submission spec"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/memetic-wikitext"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/memetic-wikitext"
 ```
 

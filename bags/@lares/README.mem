@@ -1,8 +1,10 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///README >>
 ```toml iam
 uri-path     = "README"
 file-path = "bags/@lares/README.mem"
-type = "text/x-memetic-wikitext"
+type = "text/x-memetic-wikitext+tiddlywiki"
 l-space      = "adjacent"
 register     = "Synthesis-Canon"
 mana         = 17

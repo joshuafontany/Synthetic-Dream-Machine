@@ -19,7 +19,7 @@ role          = "load-bearing architectural invariant — ONE island-owned resid
 status        = "standing"
 status-why = "rides the residency substrate; the tier read stands with it"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/residency-tiers"
 ```
 

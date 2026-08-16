@@ -19,7 +19,7 @@ role          = "load-bearing invariant — the node vessel's two on-disk projec
 status        = "standing"
 status-why = "the disk projector stands live; bags render to wikis"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/disk-projection"
 ```
 

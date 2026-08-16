@@ -11,7 +11,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "heleuma: bag-stack extractor from a recipe LarTiddlerRecord"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/bag-stack-from-rec"
 ```
 

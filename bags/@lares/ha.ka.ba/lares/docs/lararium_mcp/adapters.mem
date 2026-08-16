@@ -12,7 +12,7 @@ role            = "canonical submodule adapter and sidecar integration contract 
 source-consumes = ["packages/lares-core/memes/docs/mcp/SUBMODULE_ADAPTER_INTERFACE.md", "packages/lares-core/memes/docs/mcp/SUBMODULE_INTEGRATION_MATRIX.md", "packages/lares-core/memes/docs/mcp/mempalace.md", "packages/lares-core/memes/docs/mcp/subtasks/MCP-SUBTASK-007_MEMPALACE_LANE.md"]
 status-date     = "2026-04-23"
 tags            = ["api/pono/meme", "api/pono/loci"]
-type            = "text/x-memetic-wikitext"
+type            = "text/x-memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/adapters"
 ```
 

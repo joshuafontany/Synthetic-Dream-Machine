@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "root template meme for FTLS Power card projection memes — playable surface with clickable component pills"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/templates/projections/powers/ftls-card"
 ```
 

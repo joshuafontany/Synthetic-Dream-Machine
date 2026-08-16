@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for Live-Session Overwrite — bug anatomy, test vector, and mitigation notes"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/live-session-overwrite"
 ```
 

@@ -12,7 +12,7 @@ manaoio    = 17
 register   = "Synthesis"
 retain     = false
 role       = "index of historical provenance memes — origin stories and development arc records, not doctrine"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares-history/memes/history"
 ```
 

@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "carrier phase boundary — transmission lifecycle law"
 tags      = ["api/pono/meme", "api/pono/memetic-wikitext"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pae"
 ```
 

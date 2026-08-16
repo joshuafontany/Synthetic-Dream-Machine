@@ -1,6 +1,8 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/Vector_Chronometer_Research_Seed >>
 ```toml iam
-type = "text/x-memetic-wikitext"
+type = "text/x-memetic-wikitext+tiddlywiki"
 ```
 
 <<^ code:"&#x0002;" >>

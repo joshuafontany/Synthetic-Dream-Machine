@@ -11,7 +11,7 @@ register    = "Synthesis"
 retain      = true
 role        = "bag-compact + rotate-recipe — DXOS-style snapshot-restart on a bag; the only local-first mechanism that bounds CRDT history"
 source-file = "packages/lararium-tw5/src/compaction-handlers.ts"
-type        = "text/x-memetic-wikitext"
+type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/compaction-handlers"
 ```
 

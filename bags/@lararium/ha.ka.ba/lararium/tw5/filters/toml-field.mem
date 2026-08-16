@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/filters/toml-field >>
 ```toml iam
 body-sha256   = "be6b13cb4d87d73e9447e498196e8ab7d28344a46a5dc322727e4cba7d201158"
@@ -11,7 +13,7 @@ retain        = true
 role          = "anchor: registerTomlFieldOperator — heleuma ka"
 source-symbol = "registerTomlFieldOperator"
 tags          = ["tw5/modules/tw5-widgets"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/filters/toml-field"
 ```
 

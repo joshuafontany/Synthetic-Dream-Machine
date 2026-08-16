@@ -15,7 +15,7 @@ role        = "type-level device contract: KumuDeviceSpec, KumuListenable, KumuS
 source-file = "packages/lararium-mesh/src/kumu-device.ts"
 status-date = "2026-05-28"
 tags        = ["api/pono/meme"]
-type        = "text/x-memetic-wikitext"
+type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/kumu-device"
 ```
 

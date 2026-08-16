@@ -8,7 +8,7 @@ register  = "Canon"
 retain    = false
 role      = "docs companion for RFC-2119: online references, verb definitions, and IETF provenance"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/RFC-2119"
 ```
 

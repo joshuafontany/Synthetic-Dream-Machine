@@ -13,7 +13,7 @@ retain    = true
 role      = "Item module: Porter's Pebble — a found stuckforce relic that holds the Floating Disc Power; first proof an item is an entity that #has a Power through the item mount-point (module nesting)"
 tags      = ["mount-points/item", "components/domain/stuckforce", "modules/powers/floating-disc"]
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/modules/items/porters-pebble"
 ```
 

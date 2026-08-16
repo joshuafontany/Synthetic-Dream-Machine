@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/dynamic >>
 ```toml iam
 body-sha256   = "f215c3518f1c876508cedb636c7dd2f34acd16a538248a7a28c03ed894f3e4ee"
@@ -11,7 +13,7 @@ retain        = true
 role          = "anchor: DynamicWidget — heleuma ka"
 source-symbol = "DynamicWidget"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/dynamic", "tw5/modules/tw5-widgets"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/dynamic"
 ```
 

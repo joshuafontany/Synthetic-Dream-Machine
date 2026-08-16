@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "UEFN scene decomposition model — Verse scene file → Lararium wiki graph → TW5 filtered views; web3 / NOT Blueprint"
 tags      = ["lar:///ha.ka.ba/lararium/mesh/kumu-device"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/uefn-scene"
 ```
 

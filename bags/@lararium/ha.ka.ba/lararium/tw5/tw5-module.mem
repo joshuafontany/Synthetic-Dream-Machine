@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "interface bundle: kernel-injectable TW5 module meme; capability gate for corpus-carried executable code"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/kapu"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/tw5-module"
 ```
 

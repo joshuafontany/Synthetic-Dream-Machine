@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 ---
 name: l-prime
 description: Audit or correct EXISTING text for L-Prime conformance under lar:///ha.ka.ba/lares/api/mu/l-prime. Use when a user wants settled prose, law text, notes, or prompt material scanned, flagged, or turned — the canonical rule being that any copula left standing carries an inline confidence marker. Not for first-pass generation (the always-on loci + ward seed that forward).
@@ -19,7 +21,7 @@ retain             = true
 role               = "deliberate post-hoc L-Prime auditor of existing text; Hoʻoko correction surface --- distinct from the forward-seeding ward"
 skill-package-root = "bags/@lares/ha.ka.ba/lares/api/mu/l-prime"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type               = "text/x-memetic-wikitext"
+type               = "text/x-memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/mu/l-prime/SKILL"
 ```
 

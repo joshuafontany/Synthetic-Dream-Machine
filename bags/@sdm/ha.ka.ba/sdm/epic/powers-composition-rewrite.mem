@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "epic plan: SDM+ Powers as navigable composition space"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/epic/powers-composition-rewrite"
 ```
 

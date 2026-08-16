@@ -8,7 +8,7 @@ mana      = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for CirclesDoc"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/circles-kowloon"
 ```
 

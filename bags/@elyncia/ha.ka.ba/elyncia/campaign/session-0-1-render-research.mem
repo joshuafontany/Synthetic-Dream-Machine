@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/session-0-1-render-research >>
 ```toml iam
@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "research substrate for the Session 0.1 Painter of Words and Light — the AI renderer assistant Lares; carries the fae-casting, visual-canon, world-dress, Midjourney V8.2, and Delos-archaeology research verbatim, plus the negentropy proposals for the open canon gaps (the venue settled as The House of Masks; six ride open)"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/session-0-1-render-research"
 ```
 
@@ -108,8 +108,11 @@ livery in `factions/order-of-amaranth.mem`, the court colors in `factions/index.
   the Inn stands as the levitated House of Masks of old Delos's Theatre Quarter, the cabaret floor
   keeping the Dionysos-on-panther mosaic the speakeasy hid under boards. The six proposals below
   ride Provisional still.
-# ''The Lindwyrm's body.'' Heraldic lindworm law: ''wingless, serpentine, two forelimbs'' — she
-  never flew; she levitated a city instead. Folktale seam (Prince Lindworm / King Lindorm):
+# ''The Lindwyrm's body'' (BLESSED; register per Freyja 2026-08-15). Heraldic lindworm law:
+  ''wingless, serpentine, two forelimbs'' — Master-tier heritage with ''levitation-flight'': she
+  flies the way rivers swim. ''Render register:'' very eastern — ''Miyazaki / Earthsea /
+  Spirited-Away'' dragon-language (the river-spirit line) crossed with the ''German wingless''
+  lindworm — never the winged Western wyrm. Folktale seam (Prince Lindworm / King Lindorm):
   transformation by ''shedding skins'' — her humanoid dragon-kin form reads as a kept shed skin
   worn like couture; the mana-muting glamour as "the last shift." Scales in orichalcum-sheen.
 # ''The Gorgoness + crew.'' Archaic Gorgons carried wings and bronze hands; the Hellenistic
@@ -124,8 +127,9 @@ livery in `factions/order-of-amaranth.mem`, the court colors in `factions/index.
 # ''Court color regimes'' (derived from the ch05 court-dragon table, never invented whole):
   Seelie gold + summer green · Unseelie black + winter violet · Ouroborous blue + bronze
   serpent-scale · Brimstone sulfur-yellow + ember red + ash grey.
-# ''High Delos skyline'' //(researched 2026-08-15, net-verified; rides Provisional until
-  blessed)//: ''Mount Kynthos'' (113m, the pre-Greek summit precinct — cave shrines and temples
+# ''High Delos skyline'' //(researched 2026-08-15, net-verified; ''the Colossus weld BLESSED
+  2026-08-15'' — civic-scale ley-line node, Temple-tier Lares, seated in the region worksheet;
+  the rest of the dressing rides Provisional)//: ''Mount Kynthos'' (113m, the pre-Greek summit precinct — cave shrines and temples
   to foreign gods) crowns the sky-island; the ''Terrace of the Lions'' (Naxian archaic marble,
   ~600 BC, originally nine-to-sixteen, stylized and formal) lines its processional road gazing
   over open cloud where the Sacred Lake's water used to answer them; the round ''Sacred Lake''

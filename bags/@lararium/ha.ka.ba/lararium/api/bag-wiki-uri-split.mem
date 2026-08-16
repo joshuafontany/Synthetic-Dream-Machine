@@ -3,14 +3,14 @@
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>
 ```toml iam
 confidence   = 16
-content-type = "text/x-memetic-wikitext"
+content-type = "text/x-memetic-wikitext+tiddlywiki"
 file-path    = "bags/@lararium/ha.ka.ba/lararium/api/bag-wiki-uri-split.mem"
 mana         = 17
 register     = "Synthesis-Canon"
 role         = "the bag / wiki / cid kind-plane law — the three surfaces a lar: URI names, the edit/publish shore, and the isomorphic wiki core"
 status       = "designed"
 status-why = "the split ruled; no source carries it yet"
-type         = "text/x-memetic-wikitext"
+type         = "text/x-memetic-wikitext+tiddlywiki"
 uri-path     = "ha.ka.ba/lararium/api/bag-wiki-uri-split"
 ```
 

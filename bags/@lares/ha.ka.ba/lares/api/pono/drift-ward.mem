@@ -13,7 +13,7 @@ register  = "Synthesis"
 retain    = true
 role      = "the drift gauge inside the turn panel — measures a turn's exposure to data outside its causal island; fires forward at open (the pull) and outward at close (the collidable clue)"
 tags      = ["api/pono/causal-islands", "api/pono/meme"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/drift-ward"
 ```
 

@@ -15,7 +15,7 @@ role        = "invariant: within-island reaction dispatch substrate — Reaction
 source-file = "packages/lararium-mesh/src/reaction-graph.ts"
 status-date = "2026-05-28"
 tags        = ["api/pono/meme"]
-type        = "text/x-memetic-wikitext"
+type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/reaction-protocol"
 ```
 

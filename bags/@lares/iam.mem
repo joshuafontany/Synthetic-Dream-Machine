@@ -6,7 +6,7 @@ bag       = "@lares"
 cap-tier  = "public"
 home      = "repository"
 repository = "synthetic-dream-machine"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 ```
 
 ! @lares

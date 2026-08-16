@@ -10,7 +10,7 @@ manaoio   = 16
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 role      = "extended docs for loci interface — evaluation guidance, canon-MOVE criteria, MCP roadmap"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/loci"
 ```
 

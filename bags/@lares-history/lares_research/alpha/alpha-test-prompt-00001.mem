@@ -1,5 +1,4 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/pono/memetic-wikitext >>
-
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/alpha/test-prompt-00001 >>
 
 <<~ ahu #iam >>
@@ -7,7 +6,7 @@
 # <<~ ahu #iam-ha "structure" >>
 name = "test-prompt-00001"
 file-path = "ha-ka-ba/alpha/alpha-test-prompt-00001.mem"
-content-type = "text/x-memetic-wikitext"
+content-type = "text/x-memetic-wikitext+tiddlywiki"
 version = "0.1-alpha"
 tulen = 0.55
 # <<~/ahu >>

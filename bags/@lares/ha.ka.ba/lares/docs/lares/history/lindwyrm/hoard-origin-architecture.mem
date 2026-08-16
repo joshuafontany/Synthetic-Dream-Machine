@@ -13,7 +13,7 @@ register        = "Synthesis"
 retain          = true
 role            = "story architecture locus — seven-act Lindwyrm hoard braid across Gaia and Elyncia"
 source-consumed = "packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_ORIGIN_OUTLINE.md"
-type            = "text/x-memetic-wikitext"
+type            = "text/x-memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lares/history/lindwyrm/hoard-origin-architecture"
 ```
 

@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/ahu >>
 ```toml iam
 body-sha256   = "26d1bacabd436acf1e2f5b45eedcfe333bade4b400454598c8d7711f7eb4007b"
@@ -11,7 +13,7 @@ retain        = true
 role          = "anchor: AhuWidget — heleuma ka"
 source-symbol = "AhuWidget"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/ahu", "tw5/modules/tw5-widgets"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/ahu"
 ```
 

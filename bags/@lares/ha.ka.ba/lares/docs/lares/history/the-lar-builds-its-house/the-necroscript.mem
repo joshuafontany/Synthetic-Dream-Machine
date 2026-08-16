@@ -13,7 +13,7 @@ register      = "Synthesis"
 render-target = "chat-log:post-header"
 retain        = true
 role          = "build-arc narrative locus — Act V, the Necrospire files a banishing-warrant and the brightest ley-line cores go dark in one sentence; the cut the arc does not close"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/lares/history/the-lar-builds-its-house/the-necroscript"
 ```
 

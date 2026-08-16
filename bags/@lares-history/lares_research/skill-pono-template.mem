@@ -1,4 +1,4 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 name: skill-template
 description: Template and authoring guide for memetic-wikitext verification skill packages. Use this skill when you need to author, evaluate, or instantiate a conformance-checking skill that verifies one or more loci meme law (kānāwai) against invariants.
 version: "0.1-draft"
@@ -14,7 +14,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 uri-path = "ha.ka.ba/api/pono/skill-template"
 file-path = "lares/ha-ka-ba/api/pono/skill-pono-template.mem"
-content-type = "text/x-memetic-wikitext"
+content-type = "text/x-memetic-wikitext+tiddlywiki"
 manaoio = 8
 confidence = 10
 # <<~/ahu >>

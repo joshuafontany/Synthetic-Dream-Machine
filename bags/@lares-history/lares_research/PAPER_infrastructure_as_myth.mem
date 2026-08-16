@@ -4,7 +4,7 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/api/pono/infrastructure-as-myth.mem"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 register      = "Synthesis"
 status        = "designed"
 status-why = "a research paper rather than a build subject"

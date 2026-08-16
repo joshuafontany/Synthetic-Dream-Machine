@@ -15,7 +15,7 @@ role      = "the carry-contract: revocation reframed as an IMMUNE SYSTEM (no fir
 status    = "standing"
 status-why = "the SUBSTRATE stands"
 tags      = ["mesh/dreamnet-architecture", "mesh/oracle-governance", "mesh/siege-resilience", "api/pono/cabal-realm", "api/pono/causal-islands"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/carry-contract"
 written   = "2026-07-20"
 ```

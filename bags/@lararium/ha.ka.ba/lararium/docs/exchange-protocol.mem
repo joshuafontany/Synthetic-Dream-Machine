@@ -7,7 +7,7 @@ l-space   = "stable"
 register  = "Synthesis"
 retain    = false
 role      = "agent-facing exchange flow meme: bearing-vector/HUD bracket and HA handoff"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/exchange-protocol"
 ```
 

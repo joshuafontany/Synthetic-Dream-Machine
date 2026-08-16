@@ -10,7 +10,7 @@ manaoio       = 17
 register      = "Synthesis-Canon"
 role          = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
 status-date   = "2026-04-30"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/tw5-boot-gate"
 ```
 

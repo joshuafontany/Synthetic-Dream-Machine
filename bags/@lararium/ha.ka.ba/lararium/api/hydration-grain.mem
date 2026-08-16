@@ -17,7 +17,7 @@ role          = "the ONE pattern integrity â€” carry the name, defer the body â€
 status        = "designed"
 status-why = "the grain ruled; no source carries it yet"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/hydration-grain"
 ```
 

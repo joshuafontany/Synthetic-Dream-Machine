@@ -1,3 +1,5 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony >>
 ```toml iam
 body-sha256   = "09e7f52ebcb8617e2f675e8a4f09f043474488b34b93ff3c857615a923153300"
@@ -14,7 +16,7 @@ role          = "heleuma ka: void-start operator identity tiddler builder"
 source-symbol = "*"
 status-date   = "2026-05-04"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/heleuma/ka"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony"
 ```
 

@@ -1,6 +1,8 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 ```toml iam
-type = "text/x-memetic-wikitext"
+type = "text/x-memetic-wikitext+tiddlywiki"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -17,7 +19,7 @@ register  = "Synthesis-Canon"
 retain    = true
 reflexive = true
 l-space   = "stable"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/li-ki-integrities"
 ```
 

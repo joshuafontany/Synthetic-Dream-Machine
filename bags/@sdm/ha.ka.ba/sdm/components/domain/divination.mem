@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "component (domain): Divination — the school of perceiving the hidden"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/domain/divination"
 ```
 

@@ -15,7 +15,7 @@ role      = "submission-grade specification for the lar: URI scheme — abstract
 status    = "standing"
 status-why = "submission-draft"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/lar-uri"
 ```
 

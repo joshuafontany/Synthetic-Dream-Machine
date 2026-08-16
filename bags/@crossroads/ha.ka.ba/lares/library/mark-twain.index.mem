@@ -5,7 +5,7 @@
 collection = "mark-twain"
 entries    = "6"
 bytes      = "16715743"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 ```
 
 ! Library — mark-twain

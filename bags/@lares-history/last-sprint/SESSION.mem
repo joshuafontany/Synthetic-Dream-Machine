@@ -7,7 +7,7 @@ l-space   = "archive"
 register  = "Synthesis"
 retain    = true
 role      = "sprint resume artifact — the state a session needed to continue without prior chat context"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares-history/last-sprint/SESSION"
 ```
 

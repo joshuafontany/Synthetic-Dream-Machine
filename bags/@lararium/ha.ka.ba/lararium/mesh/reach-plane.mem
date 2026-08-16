@@ -16,7 +16,7 @@ role      = "OPERATOR-LOCKED (2026-08-08) bridge doctrine + the reach-vault desi
 status    = "designed"
 status-why = "operator-locked, unbuilt"
 tags      = ["mesh/cap-tier", "mesh/membership-doctrine", "mesh/secure-context", "mesh/attestation-plane", "api/disk-projection", "api/pono/orichalcum-capabilities", "api/pono/causal-islands"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/reach-plane"
 written   = "2026-08-08"
 ```

@@ -12,7 +12,7 @@ manaoio    = 17
 register   = "Synthesis"
 retain     = false
 role       = "consume-archive index: research that survived the pono pass and landed in live memes or packages"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares-history/memes"
 ```
 

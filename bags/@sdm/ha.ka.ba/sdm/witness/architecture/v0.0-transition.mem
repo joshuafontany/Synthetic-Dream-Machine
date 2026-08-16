@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "architecture witness: what the v0.0 prototype contained and why it retired into the v0.1 composition model"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/witness/architecture/v0.0-transition"
 ```
 

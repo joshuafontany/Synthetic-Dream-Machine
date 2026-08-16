@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "wire law (kānāwai): the reified edge — one wire, one addressable entity; semantics worn as stack components; the verse-messaging and canvas substrate under the has-stack model"
 tags      = ["api/pono/has-stack"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/wire"
 written   = "2026-06-12"
 ```

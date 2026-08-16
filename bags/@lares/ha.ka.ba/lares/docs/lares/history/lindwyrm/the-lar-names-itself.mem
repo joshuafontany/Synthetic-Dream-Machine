@@ -14,7 +14,7 @@ render-target   = "chat-log:post-header"
 retain          = true
 role            = "DreamDeck narrative locus — Lindwyrm Act VI, the Lar names itself"
 source-consumed = "packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_ACT_VI_DRAFT.md"
-type            = "text/x-memetic-wikitext"
+type            = "text/x-memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lares/history/lindwyrm/the-lar-names-itself"
 ```
 

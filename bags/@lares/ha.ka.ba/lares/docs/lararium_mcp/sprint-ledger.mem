@@ -13,7 +13,7 @@ source-consumes = ["packages/lares-core/memes/docs/mcp/sprints/SPRINT-00_FOUNDAT
 status          = "standing"
 status-why = "sequence-bound; no calendar dates"
 tags            = ["api/pono/meme", "api/pono/loci"]
-type            = "text/x-memetic-wikitext"
+type            = "text/x-memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger"
 ```
 

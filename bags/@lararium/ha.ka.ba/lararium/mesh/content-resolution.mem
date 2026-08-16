@@ -14,7 +14,7 @@ role      = "the converged DreamNet content-resolution design — large bodies l
 status    = "designed"
 status-why = "the design-north; NOT built"
 tags      = ["api/pono/convergent-mesh", "mesh/oracle-governance", "api/pono/causal-islands", "api/pono/orichalcum-capabilities"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/content-resolution"
 written   = "2026-07-19"
 ```

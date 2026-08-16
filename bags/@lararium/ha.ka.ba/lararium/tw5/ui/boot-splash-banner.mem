@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "Boot-splash banner — shown while causal islands warm; hidden by $:/lararium/boot-splash/active signal"
 tags      = ["$:/tags/PageTemplate"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/boot-splash-banner"
 ```
 

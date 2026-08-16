@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "craft failure law — an optional parameter protecting the author's own tests in a codebase with no consumers"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/protective-optional"
 ```
 

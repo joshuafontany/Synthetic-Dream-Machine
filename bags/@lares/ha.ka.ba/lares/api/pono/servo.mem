@@ -14,7 +14,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "THE governor pattern integrity — a bound that SELF-TUNES from an EWMA'd observed signal by clamped negative feedback, instead of holding a guessed constant. Names the control loop (observe → smooth → compute → nudge/clamp), the POLARITY law (the tuning direction follows what the bound protects: a lossless flush-gate SHRINKS its depth under load · a lossy coalesce-window GROWS under load · a kill-timeout GROWS its headroom under load — INVERTED), the two-loop completion (fast servo around a slow re-anchoring derive), the guards (deadband · clamp · cold-start default · completions-only-teach). The breathing-threshold law the nalu gates, the mine-timeout, and the future congestion-control all enact. Enacted: mesh/gate-tuning.ts (deriveGate/adaptGate/adaptWindow) composed in capture-engine.ts; mempalace/mine-timeout.ts (adaptiveTimeoutMs, the inverted polarity)."
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/servo"
 written   = "2026-06-29"
 ```

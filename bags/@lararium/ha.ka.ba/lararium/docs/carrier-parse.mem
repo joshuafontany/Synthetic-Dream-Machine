@@ -14,7 +14,7 @@ source        = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
 source-symbol = "deserializeCarrier"
 status-date   = "2026-04-30"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/heleuma/ka"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/carrier-parse"
 ```
 

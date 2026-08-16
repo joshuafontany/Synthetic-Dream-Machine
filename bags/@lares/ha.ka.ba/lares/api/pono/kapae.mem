@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "tombstone-as-shadow pattern integrity — a raised kāpae shadows lower layers (resurrection-prevention), toggleable, distinct from absent (the fall-through retract)"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kapae"
 ```
 

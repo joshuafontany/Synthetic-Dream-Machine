@@ -11,7 +11,7 @@ register      = "Synthesis-Canon"
 role          = "design doc: TW5 tiddlerdeserializer module (module-type auto-collection) for text/x-memetic-wikitext"
 source        = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
 status-date   = "2026-04-30"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/tw5-deserializer"
 ```
 

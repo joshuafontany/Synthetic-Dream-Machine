@@ -15,7 +15,7 @@ register          = "Synthesis-Canon"
 retain            = true
 role              = "persona-policy — the operator's three rulings on the multi-persona identity core: ONE face to the mesh (reboot to switch; PRIVATE-all, PUBLIC-one) · each PersonaGroup a CRYPTOGRAPHIC INDIVIDUAL (Sybil-of-one the accepted IoC cost, answered socially never in crypto) · DISTINCT recovery custodians per persona. Plus the two-layer pet-names (private map ⊥ public glamour) under Zooko — the pet-name FLEET-SYNCS among the human's own vessels and never PUBLICLY federates — under THE BINDING LAW: only a publicly announced Handle binds a PersonaGroup to a public glamour, so no other path may carry a persona's name onto a federating surface. All standing on NO GLOBAL-NOW FOR IDENTITY — the mesh refuses to build the SIN even to defend itself"
 tags              = ["api/pono/meme"]
-type              = "text/x-memetic-wikitext"
+type              = "text/x-memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/persona-policy"
 written           = "2026-07-20"
 ```

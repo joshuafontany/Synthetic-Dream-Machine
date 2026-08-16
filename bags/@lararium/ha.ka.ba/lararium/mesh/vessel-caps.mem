@@ -11,7 +11,7 @@ manaoio   = 14
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the vessel cap-stack model: a vessel = a composed #has-stack of caps (CARRIAGE{rhizome,stolon} ⊥ VESSEL{tuber,bulb,corm}), ECS-shaped, declared by handshake, carriage self-elected — any vessel meshes by declaring caps"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/vessel-caps"
 ```
 

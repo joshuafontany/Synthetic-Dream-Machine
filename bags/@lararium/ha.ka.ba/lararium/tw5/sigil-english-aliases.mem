@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "design record: English alias sigil vocabulary — \\procedure, \\if, \\for, \\widget cross-refs to Hawaiian equivalents"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-procedure", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-if", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-for", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-widget"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/sigil-english-aliases"
 ```
 

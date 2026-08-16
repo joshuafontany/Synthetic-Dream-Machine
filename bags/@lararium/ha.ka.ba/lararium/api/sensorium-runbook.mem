@@ -16,7 +16,7 @@ role      = "the TENDING rite — the sensorium's operational lifecycle, sibling
 status    = "rite"
 status-why = "the tending rite; its verb surface stands verified against the live roster"
 tags      = ["api/pono/li-ki-integrities", "api/pono/sensorium-machina", "lararium/mesh/founding-runbook", "api/pono/causal-islands", "api/lararium/living-grammar-palace"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/api/sensorium-runbook"
 written   = "2026-08-04"
 ```

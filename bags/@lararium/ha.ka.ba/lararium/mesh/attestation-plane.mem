@@ -11,7 +11,7 @@ manaoio   = 13
 register  = "Synthesis"
 retain    = true
 role      = "OPERATOR-APPROVED design intent for the attestation plane: how a Nexus co-signs a public Handle, and grants a scarce host-scoped nym, WITHOUT the attestor becoming a registrar. Six rulings — the severability+render law, fleet-span telemetry, attestor-separated-from-host (kahu HOST, contracted operators ATTEST), governance split from infra duty, an append-only log with a named obliged watcher, and the host-scoped nym held as a lease. Drawn from six research sweeps over NIP-05, AT Proto, WebPKI/CT, Sovrin, eIDAS, ENS/Namecoin/Handshake, the fediverse, and (2026-08-08) ICANN's root-KSK ceremony, Sigstore, Tor, Matrix, ACME/CAA/MPIC and the nonprofit asset-custody field. The sixth sweep restated ruling 3 as SUBSTRATES-not-hands (0-for-8: no live system separates the attesting hand from the resolving one; survivors made the resolver SUBSTITUTABLE instead), withdrew the ICANN registry/registrar precedent, split the money shore from the asset shore, added the CADENCE LAW (quorum on the rare act, automation on the leaf — no deployed quorum-gated issuance exists), and dissolved most of the collective-choice question into the CONTRACT form (bilateral leased contracts, never a list — a list IS a global now)."
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/attestation-plane"
 ```
 

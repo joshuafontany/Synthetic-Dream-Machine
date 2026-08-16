@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "mount-point: Item — Power stored in an object; container sub-rule for albums/codices"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/mount-points/item"
 ```
 

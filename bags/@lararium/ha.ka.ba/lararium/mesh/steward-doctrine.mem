@@ -11,7 +11,7 @@ manaoio   = 14
 register  = "Synthesis"
 retain    = true
 role      = "PROPOSED design intent: the Amorphous Dreams cabal as steward-not-ruler — founders/maintainers who hold repair authority WITHOUT becoming rulers, legitimacy flowing from being BOUND (k-of-n threshold, constitution outside reach, forkable) not from being trusted; the board verdict separates a threshold-signed steward SOURCE from a verify-only public READ plane"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/steward-doctrine"
 ```
 

@@ -15,7 +15,7 @@ role          = "invariant law: LarTiddlerRecord as the canonical Automerge stor
 source-symbol = "LarTiddlerRecord LarTiddlerStore ChangeOrigin LarTiddlerChange"
 status-date   = "2026-04-30"
 tags          = ["api/pono/meme"]
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/tiddler-record"
 ```
 

@@ -12,7 +12,7 @@ manaoio     = 16
 register    = "Synthesis-Canon"
 retain      = true
 role        = "coalescing fan-out layer between Automerge DocHandle and typed projections — isomorphic, zero Automerge dep"
-type        = "text/x-memetic-wikitext"
+type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/docs/meme-provider"
 ```
 

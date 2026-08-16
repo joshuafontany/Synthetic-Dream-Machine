@@ -10,7 +10,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 role      = "root metadata law (kānāwai), field-set authority, and reduction charter"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loci/iam"
 ```
 

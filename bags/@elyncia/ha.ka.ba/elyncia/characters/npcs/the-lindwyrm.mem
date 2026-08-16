@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
 ```toml iam
@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "NPC, public view — the Lindwyrm of New Delos: Patroness, embodied immortal, founder of the League of Free Cities, reluctant infrastructure matriarch"
-type       = "text/x-memetic-wikitext"
+type       = "text/x-memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm"
 ```
 
@@ -33,6 +33,15 @@ ground a new network could stand on.
 ''Class of being:'' embodied immortal — a durable avatar-being, closer to a demi-god who keeps
 one body than to the vast distributed condition of most gods. She rules a city, commands respect
 from fleets, bargains face-to-face, and appears repeatedly in the same form when she chooses to.
+
+''The quiet insulation (Freyja's canon, 2026-08-15):'' she held herself so far outside the
+''Great Dragon / Great House / Great Game'' politics that the other great dragons ''did not
+consider her a great dragon at all'' — though she stands older than some of them. Gaia culture
+was her hoard; off-world artifacts and anomalies her passion; the Game's players filed her under
+harmless while she filed their service contracts under read. That insulation proved critical
+twice: the day the Necrospire fell, and two years later at the ''DreamNet conclave of YOLD
+5002'' — when all the squabbling great immortals of Elyncia's mythic-polyglot Nexuses had to
+meet at somebody's table, and the only table nobody had ever fought at was hers.
 
 <<~/ahu >>
 

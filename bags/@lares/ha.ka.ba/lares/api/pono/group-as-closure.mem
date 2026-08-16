@@ -15,7 +15,7 @@ role      = "group-as-closure: a group names no central object — it names the 
 status    = "designed"
 status-why = "design intent, mostly unbuilt by its own status line"
 tags      = ["api/pono/meme", "api/pono/orichalcum-capabilities", "api/pono/causal-islands", "api/pono/lararium-identity"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/group-as-closure"
 written   = "2026-06-29"
 ```

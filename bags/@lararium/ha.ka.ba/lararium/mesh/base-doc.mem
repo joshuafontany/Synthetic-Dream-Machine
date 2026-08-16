@@ -11,7 +11,7 @@ register    = "Synthesis"
 retain      = true
 role        = "the LarDoc record/blob shapes + the bag→doc oracle resolve-and-write-back primitive (resolveOracleDoc) + blob descriptor addressing"
 source-file = "packages/lararium-mesh/src/base-doc.ts"
-type        = "text/x-memetic-wikitext"
+type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/base-doc"
 ```
 

@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "wikispace conditional block-container — the TW5 `\\if` filter cascade; first non-empty filter renders its body; the water cascade with kahawai (`\\elseif`) + mukuwai (`\\else`); content selection on the document surface"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-wai"]
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/wai"
 ```
 

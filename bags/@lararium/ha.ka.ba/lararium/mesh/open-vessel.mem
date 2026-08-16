@@ -13,7 +13,7 @@ register    = "Synthesis"
 retain      = true
 role        = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations; openVesselCore owns the sequence, VesselHostShore injects substrate atoms; role rides as a capability bundle, never a platform"
 source-file = "packages/lararium-mesh/src/open-vessel-core.ts"
-type        = "text/x-memetic-wikitext"
+type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
 ```
 

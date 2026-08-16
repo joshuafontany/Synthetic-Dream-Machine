@@ -10,7 +10,7 @@ manao     = 16
 manaoio   = 14
 register  = "Synthesis-Canon"
 role      = "names the copula-free predicate; a carrier holds a component; the held thing speaks; tables fall to holds-stacks; ordered runs, crossings, and grades each ride their own verb (four verbs, three spines)"
-type      = "text/x-memetic-wikitext"
+type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/holds"
 written   = "2026-06-14"
 ```

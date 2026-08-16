@@ -10,7 +10,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe tw5-vm.ts"
 source-file = "packages/lararium-tw5/src/tw5-vm.ts"
-type        = "text/x-memetic-wikitext"
+type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/tw5-vm"
 ```
 

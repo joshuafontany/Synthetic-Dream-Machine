@@ -14,7 +14,7 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: dynamic — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "DynamicWidget"
 status-date   = "2026-05-03"
-type          = "text/x-memetic-wikitext"
+type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/dynamic"
 ```
 

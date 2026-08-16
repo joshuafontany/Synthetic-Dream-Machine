@@ -95,6 +95,18 @@ if (strays.length > 0) {
   process.exit(1);
 }
 
+// THE DECLARATION SITS ABOVE THE SOH, so the body comparison below never reached it — and the markdown
+// seed kept the retired comment form through every green run this witness ever printed. The first line
+// of each seed is the one line that selects the grammar; it gets compared first, and on its own terms.
+const memFirst = readFileSync(MEM, "utf8").split("\n")[0] ?? "";
+const mdFirst  = readFileSync(MD, "utf8").split("\n")[0] ?? "";
+if (memFirst !== mdFirst) {
+  console.log("[seed-parity] the seeds open on different declarations");
+  console.log(`  carrier -> ${memFirst}`);
+  console.log(`  md      -> ${mdFirst}`);
+  process.exit(1);
+}
+
 const expected = transpose(body(readFileSync(MEM, "utf8"), MEM)).split("\n");
 const actual   = body(readFileSync(MD, "utf8"), MD).split("\n");
 
