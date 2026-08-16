@@ -1,7 +1,6 @@
 title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kukali
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: leaf
-lar-cold: structure
 lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/kukali
 lar-see-also: \suspends
 lar-pattern: <<~\s*kukali(?:\s+trigger:([\w.-]+))?\s*>>

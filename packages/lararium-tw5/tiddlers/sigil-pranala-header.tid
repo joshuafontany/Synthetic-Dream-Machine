@@ -1,7 +1,6 @@
 title: lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pranala-header
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: header
-lar-cold: structure
 lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/pranala-header
 lar-pattern: <<~\s*\?\s*->\s*(\S+)\s*>>
 type: text/vnd.tiddlywiki

@@ -382,18 +382,18 @@ A sigil stands in two places and reads differently in each. In an exchange turn 
 18/20 >>` ''steers'' — it vows a band the claim generates within. Inside a meme — a chat-history lares,
 an in-character scene, a transcript — the same glyphs read as ''content'': what was said, quoted.
 
-''A processor MUST NOT resolve a quoted steering sigil.'' Rendering one to a widget would make a
-transcript lie about what it holds, which is the one failure a record of speech cannot survive.
+''The gradient already answers this, and answers it correctly.'' A sigil resolves to whatever procedure
+its name binds; a name that binds none renders as its own text. That floor is not a fallback the
+grammar tolerates — for a quoted steering sigil it is the RIGHT render, because a transcript that
+resolved what it quotes would lie about what was said, and a record of speech survives nothing less.
 
-So each sigil declares what a COLD parse does with it, where the sigil is defined:
+So no sigil declares which register it stands in, and none should: the register belongs to the CARRIER,
+which knows whether it holds a turn or a quotation of one. A processor MUST NOT resolve a sigil whose
+name binds no procedure, and MUST render it as the text it is.
 
-|!reading |!a cold parse |!because |
-|`structure` |MUST find it |it bounds a worksite, carries an edge, or frames a carrier |
-|`verbatim` |MUST leave it as text |the meme quotes it, and the quoting is the point |
-
-The steering register — `confidence`, `hud`, `syad`, `lares`, `oracle`, `ward` — reads `verbatim`, and a
-carrier holding one holds a QUOTATION of a turn rather than a turn. //(How a live wiki may render such a
-quotation, once it can, stays open — a render that shows what was steered without performing it.)//
+//(A live wiki may bind such a name later — a procedure that SHOWS what was steered without performing
+it, styled as its own block. The extension point is the same one every sigil uses, so the render arrives
+without the grammar moving.)//
 
 <<~/ahu >>
 
