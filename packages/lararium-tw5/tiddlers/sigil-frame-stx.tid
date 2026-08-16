@@ -3,7 +3,7 @@ tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: frame
 lar-family: frame
 lar-code: &#x0002;
-lar-slots: 
+lar-slots: code
 lar-pattern: <<\^[^>\n]*&#x0002;
 lar-pono-uri: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext
 type: text/vnd.tiddlywiki

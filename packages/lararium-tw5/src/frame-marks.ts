@@ -41,13 +41,13 @@ export interface FrameMark {
  * tiddlers, so a mark added here and nowhere else fails rather than passing quietly.
  */
 export const FRAME_MARKS: readonly FrameMark[] = [
-  { code: "&#x0001;", name: "SOH",  slots: ["namespace", "bearing", "uri"] },
-  { code: "&#x0011;", name: "SOH2", slots: ["namespace", "bearing", "uri"] },
-  { code: "&#x0002;", name: "STX",  slots: [] },
-  { code: "&#x0003;", name: "ETX",  slots: ["bcc"] },
-  { code: "&#x0017;", name: "ETB",  slots: ["hash"] },
-  { code: "&#x0004;", name: "EOT",  slots: ["target"] },
-  { code: "&#x0014;", name: "EOT2", slots: ["target"] },
+  { code: "&#x0001;", name: "SOH",  slots: ["code", "namespace", "bearing", "uri"] },
+  { code: "&#x0011;", name: "SOH2", slots: ["code", "namespace", "bearing", "uri"] },
+  { code: "&#x0002;", name: "STX",  slots: ["code"] },
+  { code: "&#x0003;", name: "ETX",  slots: ["code", "bcc"] },
+  { code: "&#x0017;", name: "ETB",  slots: ["code", "hash"] },
+  { code: "&#x0004;", name: "EOT",  slots: ["code", "target"] },
+  { code: "&#x0014;", name: "EOT2", slots: ["code", "target"] },
 ] as const;
 
 /** The mark a code names, or undefined where the grammar stands none. */

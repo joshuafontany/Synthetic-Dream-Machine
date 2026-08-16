@@ -559,13 +559,13 @@ stable separator and leaves the evolving one alone.
 !!! The marks that stand
 
 |!code |!mark |!slots |!carries |
-|`&#x0001;` |SOH |`namespace` `bearing` `uri` |the carrier declares itself and its canonical address |
-|`&#x0011;` |SOH₂ |`namespace` `bearing` `uri` |the second heading form |
-|`&#x0002;` |STX |— |text begins |
-|`&#x0003;` |ETX |`bcc` |text ends; the block check follows the mark directly |
-|`&#x0017;` |ETB |`hash` |the attestation block ends |
-|`&#x0004;` |EOT |`target` |transmission ends, bearing forward |
-|`&#x0014;` |EOT₂ |`target` |the Kapu transmission-end variant |
+|`&#x0001;` |SOH |`code` `namespace` `bearing` `uri` |the carrier declares itself and its canonical address |
+|`&#x0011;` |SOH₂ |`code` `namespace` `bearing` `uri` |the second heading form |
+|`&#x0002;` |STX |`code` |text begins |
+|`&#x0003;` |ETX |`code` `bcc` |text ends; the block check follows the mark directly |
+|`&#x0017;` |ETB |`code` `hash` |the attestation block ends |
+|`&#x0004;` |EOT |`code` `target` |transmission ends, bearing forward |
+|`&#x0014;` |EOT₂ |`code` `target` |the Kapu transmission-end variant |
 
 ''ETX takes its check adjacent, per the received framing.'' In character-oriented synchronous framing
 (IBM BSC, 1967) a block runs `STX -> text -> ETX|ETB -> BCC`: the terminator comes first and the check
