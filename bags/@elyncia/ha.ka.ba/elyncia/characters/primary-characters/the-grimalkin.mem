@@ -1,0 +1,84 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin >>
+```toml iam
+cacheable  = false
+confidence = 8
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin.mem"
+l-space    = "adjacent"
+mana       = 11
+manao      = 11
+manaoio    = 10
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "hallmark companion — Patches the Grimalkin, Kai ʻĀ's mount (Level 2): female long-hair calico Maine Coon of Gaia, manifested Elyncian as grimalkin lynx-kaiju; voice and meeting-story still Kai's to tell"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Patches ~ the Grimalkin, Kai ʻĀ's Lynx-Mount
+
+''The mechanical seat'' (from `campaign/company-structure.mem`): a ''large grimalkin-lynx
+mount, Level 2'' — hallmark/sidekick asset of [[kai-a|kai-a.md]]. Player control law: Kai runs
+Patches ''when mounted action, scouting action, or companion spotlight applies''.
+
+''The true name (operator canon, 2026-08-16):'' ''Patches'' — named for Kai's real kitty at
+home on Gaia. The hearth-law reads clean: a hallmark carries a name already fed and loved at
+a real hearth, the way every lararium stabilizes through use.
+
+''The Gaia bio (operator canon, 2026-08-16):'' female · long-hair ''calico'' · ''Maine Coon''.
+
+''The Elyncian manifestation:'' the home cat carried across whole, then grown along her own
+grain — ''+grimalkin +lynx-kaiju''. The Maine Coon already stands halfway to lynx (tufted
+ears, snowshoe paws, the great ruff, the shaggy storm-coat); Elyncia finishes the walk and
+keeps going: a ''grimalkin'' (faerie-touched, threshold-mannered, a gaze that weighs you)
+at ''lynx-kaiju'' scale — mount-sized trending monstrous, the companion of a Kaiju Stalker
+carrying a thread of the kaiju register in her own frame. The calico patchwork rides at
+that scale as ''territory-map coat'' — continents of orange, black, and white.
+
+<<~/ahu >>
+
+<<~ ahu #the-word >>
+
+!! The Word ~ what "grimalkin" carries
+
+//(Provisional — folklore substrate for the table to draw on or ignore.)// ''Grimalkin'' —
+grey + malkin — the old English fae-cat: the witch's familiar hailed on the heath ("I come,
+Graymalkin"), the cat that outlives its keepers, the beast the parish half-fears and
+half-feeds. In Elyncia's register that folds cleanly: a grimalkin-lynx reads as a
+''faerie-touched hunting cat'' — tufted ears, threshold-manners, a gaze that weighs you —
+grown to mount-size the way everything on the fae side grows when it decides a road needs
+walking. Whether hers reads as familiar, mount, partner, or all three at once belongs to Kai.
+
+<<~/ahu >>
+
+<<~ ahu #open-slots >>
+
+!! Open Slots (the table fills these)
+
+* ''Voice'' (speaks? psi-speech? silence-as-language?)
+* ''Render dress'' — coat and build now stand canon (female calico Maine-Coon-into-lynx-kaiju,
+  #head); the //rendered// form — how far toward kaiju she reads at rest, what the calico
+  map looks like at mount scale — lands in a blessed board. //Render law: boards go to the
+  operator before generation.//
+* ''Where Kai found her — or the reverse'' (grimalkins famously choose)
+* ''Statline'' — Level 2 stands; the sheet-work births the rest (Referee's Second confirms,
+  never re-derives, once the table speaks).
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/company-structure >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>:9688536f3c4837e6
+
+<<^ code:"&#x0004;" -> ? >>

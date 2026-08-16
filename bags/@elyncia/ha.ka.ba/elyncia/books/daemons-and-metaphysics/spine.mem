@@ -1,0 +1,66 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine >>
+```toml iam
+cacheable  = true
+confidence = 10
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "spine — Elyncia 03, Daemons and the Metaphysics of Play; cut-plan pending its close read"
+tags       = ["ha.ka.ba/elyncia/books/index"]
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Elyncia 03 ~ Daemons and the Metaphysics of Play ~ Spine
+
+The metaphysics book — daemons as kaba-elementals, the player-daemon frame, the table's own
+ontology. ''This chapter rides unread-in-full this session: the walk below stands as a sketch
+and the cut-plan waits on the close read.''
+
+''Spine law:'' the chunks live at their topical graph addresses; this spine holds the walk (the
+reading order) and the mortar (the connective prose, written as chunks land). The kahea calls
+below activate one by one as each chunk meme seats; until then the walk reads as the cut-plan.
+''The source MD stays canonical until this spine renders the book whole.''
+
+<<~/ahu >>
+
+<<~ ahu #walk >>
+
+!! The Walk ~ reading order
+
+# //(pending close read — expected seams:)// `concepts/daemons` · `concepts/player-daemons` · `concepts/metaphysics-of-play` · further chunks at the read
+
+//(Do not move text against this walk until the close read blesses the boundaries.)//
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+!! Source Staging
+
+//(Empty by stage-law: verbatim MD blocks land here during the move — the chapter's own
+connective tissue, epigraphs, and any text whose home IS the spine. Uplift to live wikitext
+comes only after all source text reads as moved.)//
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/books/index >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>:5fc7219913e81974
+
+<<^ code:"&#x0004;" -> ? >>

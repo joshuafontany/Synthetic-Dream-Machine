@@ -1,0 +1,57 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/index >>
+```toml iam
+cacheable  = true
+confidence = 10
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/books/index.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "landing page — the Elyncia books as a TW5 ToC over the spine memes; each spine walks its chapter's chunks through the graph"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/books/index"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Elyncia Books
+
+''The library's landing.'' Each chapter survives as a ''spine'' — a curated walk through the
+meme graph, transcluding its chunks in reading order with the spine's own mortar between. The
+chunks live at their topical addresses; the books remain readable wholes. Migration runs in
+stages: spines first (standing) · verbatim moves into each home meme's `#source` staging ·
+uplift to live wikitext last.
+
+<<~/ahu >>
+
+<<~ ahu #toc >>
+
+!! Table of Contents
+
+\procedure ~BookShelf() <<toc-selective-expandable "ha.ka.ba/elyncia/books/index" sort:"uri-path">>
+
+<<~BookShelf>>
+
+//(The ToC walks the spines by their `books/index` tag. Until the live wiki renders it, the
+shelf reads plainly:)//
+
+# [[Elyncia 01 ~ A Broken World|a-broken-world/spine.md]]
+# [[Elyncia 02 ~ The Lares DreamNet|the-lares-dreamnet/spine.md]] //(the pilot)//
+# [[Elyncia 03 ~ Daemons and the Metaphysics of Play|daemons-and-metaphysics/spine.md]]
+# Elyncia 04 ~ The Referee Noosphere Guide — ''referee tier'': the spine rides `@elyncia-referee`
+  and renders only in referee recipes
+# The Style Base Layer — migrates as a ''single meme'' (already chunk-sized), referee-side,
+  when the RNG moves
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>:d163ff18ee09e1f7
+
+<<^ code:"&#x0004;" -> ? >>

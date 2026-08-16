@@ -164,14 +164,20 @@ skin-count, the archaic-Gorgon bronze-hands attribution, the huautli compression
   verbatim): "Red and white shrine workwear. Silksteel ritual robe layers. Wide-brimmed
   ''ichimegasa'' with ''uchikatsugi-style veil''. Shrine bells, ofuda, spinneret tools, and soft
   faerie glamour." Fuller concept package (true body, glamour, threshold-reveal, palette, written
-  negative directions) in `elyncia/Shattered Isles/Lady_Aki_Concept_Art_Package_v1.md`.
+  negative directions) in `bags/@elyncia/ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-art.mem`
+  (poster prompt beside it in `lady-aki-poster-prompt.mem`; Ichi's full package in `ichi.mem`).
+  //Path law for the witness blocks below: the `Shattered Isles/` MDs they cite have since
+  migrated into `characters/primary-characters/` — the witnesses stay literal; resolve their
+  paths through this note.//
 * ''Ichi'' (same meme, :387): "A compact roadside shrine / hokora rides on six to eight articulated
   strandbeest legs. Silk-and-mycelium sails unfurl from the roof. A Mother Spore fairy ring glows
   at the base. A towed armored wagon carries cargo." Symbiosis law: "Aki wears Ichi; Aki acts,
   Ichi perceives and communicates."
-* ''The Lindwyrm'' carries no body canon anywhere — the history shelf holds only the jade
-  gelatinous saurian (an Act-II resonance artifact, emphatically not her) and the WyrmFile's
-  disposition lines. Her cabaret render makes first canon; see #negentropy item 2.
+* ''The Lindwyrm'' — body canon now BLESSED and seated (Freyja 2026-08-15):
+  `bags/@elyncia/ha.ka.ba/elyncia/characters/npcs/the-lindwyrm.mem` carries the public register
+  (wingless lindworm, two forelimbs, orichalcum-sheen, levitation-flight, the kept shed-skin
+  humanoid form); render register per #negentropy item 2. The jade gelatinous saurian on the
+  history shelf reads as an Act-II resonance artifact, emphatically not her.
 * The `@sdm` bag carries epithets only ("Skin-Close Barrier," "the Patient Mule") — flavor lines,
   no figures.
 
@@ -609,6 +615,6 @@ Finding: Corpus yields strong *object* and *tag* vocabulary (Wild Mage item tabl
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:c0973cf7f3040b41
+<<^ code:"&#x0003;" >>:22fea634ae580985
 
 <<^ code:"&#x0004;" -> ? >>

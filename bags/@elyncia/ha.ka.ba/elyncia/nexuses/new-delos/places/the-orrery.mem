@@ -1,0 +1,41 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery >>
+```toml iam
+cacheable  = true
+confidence = 10
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "place, High Delos — the Orrery: the Reach-tier instrument mapping where Elyncia's pattern reached into neighboring worlds; access unruled"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Orrery of High Delos
+
+''Stratum:'' High Delos · ''Scale:'' Site — but its subject runs Reach-tier and beyond.
+
+Canon: the Orrery holds ''Lares node maps showing where Elyncia's pattern has reached into
+neighboring worlds to patch her own seams'' — records that align with Gaia's Vastlands archive:
+void currents, rearranged constellations, wormhole lanes remembered only in song. The map of
+maps; the instrument that knows where the worlds touch.
+
+''Open prompts:'' who reads it, and who may stand before it · whether the table ever does ·
+whether it renders as the campaign's master-map artifact (the weld to the Node Interaction Card
+and the Painter's establishing boards stands noted).
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>:00d20dac549a26fc
+
+<<^ code:"&#x0004;" -> ? >>

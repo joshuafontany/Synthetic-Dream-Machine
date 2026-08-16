@@ -1,0 +1,92 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
+```toml iam
+cacheable  = false
+confidence = 10
+file-path  = "bags/@elyncia/ha.ka.ba/elyncia/characters/primary-characters/kai-a.mem"
+l-space    = "adjacent"
+mana       = 12
+manao      = 12
+manaoio    = 11
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "primary character — Kai ʻĀ, the prismatic elf warrior-ranger kaiju-stalker (Kai's PC); build approved, lifepath open for Session 0.1 talk-story"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/kai-a"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Kai ʻĀ ~ Prismatic Elf Warrior-Ranger, Kaiju Stalker
+
+''The held name (operator canon, 2026-08-16):'' ''Kai ʻĀ'' — "Sea; Fiery, burning, or to
+glitter and sparkle like a gem or star." The player's own name carried into the fiction and
+lit from within — sea-water and gem-fire in two syllables, which reads as the prismatic
+condition itself.
+
+''Archetype'' (company canon, `campaign/company-structure.mem`): ''Prismatic Elf
+Warrior-Ranger Kaiju Stalker'' — Hunter / Fighter / Arcane-Archer. Company function:
+long-range scouting, overwatch, wilderness tracking, monster-scale threat assessment.
+Her mount, ''Patches'' the grimalkin-lynx, rides in her own meme:
+[[the-grimalkin|the-grimalkin.md]].
+
+''Lifepath:'' OPEN — closes at the Session 0.1 table by lifepath-life talk-story,
+co-narrated in-scene. Nothing below pre-empts what Kai speaks there.
+
+<<~/ahu >>
+
+<<~ ahu #the-build >>
+
+!! The Build ~ APPROVED (operator, 2026-08-16)
+
+''Elf + Affinity – Illusion • Light • Void'' — the blessed construction for "prismatic elf":
+
+* ''Elf heritage'' (FTLS `03:684–706`): Skilled = Quick + Darkvision + Lucky · Expert =
+  ''Affinity – Illusion • Light • Void'' · Master = Psi-Speech.
+* ''The license'' (`03:127`, verbatim): "Weave fae-charms and reality edits, bend radiance and
+  reflection, or veil yourself in void-glamours. ''Illusion includes prismatic glamour'' and the
+  push-pull of reality/unreality."
+* ''The reservation:'' the helmeted ''Spectrum Satrap'' (`03:1449`) stays a separate NPC caste —
+  suited-and-glass-helmed para-humans of the Violet Steppe and the Black City, never elves.
+  Kai ʻĀ may meet them; she does not read as one.
+
+''Ch03 elf register'' (verbatim, for voice and render): "Angular beauty, void-shadowed eyes,
+hair like moonlit ink or starlit fire" (`03:696`) · "a glamour that is both invitation and
+warning" (`03:692`) · "voices like honey poured through crystal" (`03:698`). Which elf-clan
+variant (if any) she carries — Void Envoy · Glass-Mask Courtier · Shadow Elf · none —
+stays a table question.
+
+<<~/ahu >>
+
+<<~ ahu #threads >>
+
+!! Open Threads (Provisional — the table decides)
+
+* ''Home turf:'' the standing read holds her as ''an arcane archer from Aki's home turf'' —
+  a Shattered-Isles-adjacent thread binding her to Freyja's cluster; critical for the Caverns.
+  Confirm or re-aim in talk-story.
+* ''The hunt discipline:'' what a kaiju-stalker's craft looks like when the prey out-scales
+  the hunter — trophy law, threat-reading, where the arcane rides in the archery.
+* ''The bow:'' unnamed, unspecified — first canon belongs to Kai.
+* ''Silhouette law'' (from the Aki concept package): "do not let the ranger and Aki merge
+  visually" — Ranger = wilderness / hunt / kaiju-scale threat reading; Aki = shrine /
+  threshold / veil. Hold the separation in every render.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/company-structure >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>:7554d92fbe77677d
+
+<<^ code:"&#x0004;" -> ? >>

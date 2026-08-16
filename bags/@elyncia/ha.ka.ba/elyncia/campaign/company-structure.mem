@@ -63,7 +63,7 @@ Telarus does ''not'' use the player-side company to solve problems for the playe
 
 | Player-Daemon / Seat | Primary Character | Hallmark / Sidekick Assets | Company-Scale Assets | Main Expedition Function |
 | ''Freyja'' | ''Lady Aki'' — wandering Spider Folk miko-wizard, mycelium-alchemist, illusionist, shrine-worker | ''Ichi'' — Ashigaru Armor Golem / powered symbiote bodyguard | ''Faerie-Ring Strandbeest-Shrine'', ''Ephyra'' tasked spirits | Threshold rites, field logistics, ritual analysis, shrine support, silk/mycelium problem-solving |
-| ''Kai'' | ''Prismatic Elf Warrior-Ranger Kaiju Stalker'' — Hunter / Fighter / Arcane-Archer | ''Large grimalkin-lynx mount'' | Hunting/scouting loadout, kaiju-stalker field expertise | Long-range scouting, overwatch, wilderness tracking, monster-scale threat assessment |
+| ''Kai'' | ''Kai ʻĀ'' — Prismatic Elf Warrior-Ranger Kaiju Stalker — Hunter / Fighter / Arcane-Archer (build approved: Elf + Affinity Illusion•Light•Void; seat: `characters/primary-characters/kai-a.mem`) | ''Patches'' the Grimalkin — large grimalkin-lynx mount (`the-grimalkin.mem`) | Hunting/scouting loadout, kaiju-stalker field expertise | Long-range scouting, overwatch, wilderness tracking, monster-scale threat assessment |
 | ''Monty'' | ''Fae-Touched Human Changeling Street Youth Ninja Girl'' — “Shadow” archetype, inspired by FF5-style ninja tools/traits/powers/gear | ''Husky dog companion'' | Infiltration kit, urban-survival contacts or habits | Stealth, intrusion, escape routes, misdirection, streetwise readings of danger |
 | ''Liv'' | ''Gorgonness Captain'' — bard / sword-mistress, Traveler path | ''Gorgonne crew/ ship pets / personal retainers as appropriate'' | ''Small ship, gorgonne crew, ship stores, company cargo space'' | Ship command, morale, negotiation, travel cadence, crew coordination, sword-and-song leadership |
 
@@ -103,7 +103,7 @@ Primary PC:
 * Path / role language: ''Hunter / Fighter / Arcane-Archer''
 
 Hallmark / sidekick:
-* ''Large grimalkin-lynx mount'', Level 2
+* ''Patches'' — large grimalkin-lynx mount, Level 2
 
 Player control:
 * the ranger,
@@ -240,6 +240,6 @@ The intended play pattern: ''the company can do more than a normal small party, 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:0e99b94de1f8f063
+<<^ code:"&#x0003;" >>:cb4ec2422a54f565
 
 <<^ code:"&#x0004;" -> ? >>
