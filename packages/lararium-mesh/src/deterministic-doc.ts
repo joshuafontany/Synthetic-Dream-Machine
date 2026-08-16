@@ -15,14 +15,12 @@
  */
 import type { Repo, DocHandle, DocumentId } from "@automerge/automerge-repo";
 import { interpretAsDocumentId, stringifyAutomergeUrl, type AutomergeUrl, type BinaryDocumentId } from "@automerge/automerge-repo";
-import { from as automergeFrom, save as automergeSave } from "@automerge/automerge";
+import { save as automergeSave } from "@automerge/automerge";
+import { pinnedDoc } from "./pinned-doc.js";
 import { sha256BytesSync, utf8Bytes } from "./crypto.js";
 import { resolveBootDoc } from "./boot-resolver.js";
 import { CROSSROADS_DOC_URI, nexusHandlesUri, nexusRegistryUri } from "./lar-uris.js";
 import { emptyLarDoc, type LarDoc } from "./base-doc.js";
-
-/** A fixed actor so every vessel's blank materialization yields byte-identical bytes → they converge, never fork. */
-const SHARED_BLANK_ACTOR = "00000000000000000000000000000000" as const;
 
 /** Derive a deterministic automerge: URL from a seed string — the first 16 bytes of its sha256 as the doc-id. */
 export function deterministicDocUrl(seed: string): AutomergeUrl {
@@ -102,8 +100,10 @@ export function personaKelBoardDocUrl(nexusPubkey: string): AutomergeUrl {
  * Find the shared doc if it's already present (a prior boot or a synced peer), else materialize a blank one
  * UNDER the deterministic id. Uses hearth-private patience (the @oracle materialize path's choice): a missing
  * doc is the legitimate first boot — the anchor materializes rather than waiting a long mesh-delivery window.
- * Two vessels racing to be first both import the SAME fixed-actor blank bytes, so they converge byte-identical
- * and diverge only as each writes its own card (the benign blank-merge the @oracle path also accepts).
+ * Two vessels racing to be first both import the SAME ambient-free blank bytes (`pinnedDoc` pins the actor AND
+ * the clock — an unpinned clock alone splits one actor's seq 1 in two and automerge refuses the merge), so they
+ * converge byte-identical and diverge only as each writes its own card, under the fresh actor its own handle
+ * mints (the benign blank-merge the @oracle path also accepts).
  */
 /**
  * `label` names the board for a HUMAN — it rides into the boot-resolver's failure text and its
@@ -127,7 +127,7 @@ export async function materializeSharedLarDoc(
   } catch {
     // unavailable → this vessel is first: materialize a blank board under the deterministic id
   }
-  const bytes  = automergeSave(automergeFrom(emptyLarDoc() as unknown as Record<string, unknown>, SHARED_BLANK_ACTOR));
+  const bytes  = automergeSave(pinnedDoc(emptyLarDoc() as unknown as Record<string, unknown>));
   const handle = repo.import<LarDoc>(bytes, { docId: interpretAsDocumentId(url) as DocumentId });
   await handle.whenReady();
   return handle;

@@ -40,7 +40,7 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
-import { from as automergeFrom } from "@automerge/automerge";
+import { pinnedDoc } from "./pinned-doc.js";
 import { exportOracleSnapshot, type OracleSnapshot } from "./oracle-substrate.js";
 import type { CabalRealm } from "./cabal-realm.js";
 
@@ -159,24 +159,17 @@ export function projectRealmGlamour(state: CabalRealmPublishState): RealmGlamour
 }
 
 /**
- * A FIXED Automerge actorId for charter loads. Automerge's default `from` mints a
- * RANDOM actor, which lands in the saved bytes — two loads of the SAME charter would
- * then hash differently. Pinning the actor makes the snapshot bytes a PURE function
- * of the charter content, so the cid carries a true content address (stable until the
- * realm's published meta changes — exactly what a content-addressed read-face wants).
- */
-const CHARTER_ACTOR_ID = "00000000000000000000000000000000" as const;
-
-/**
  * Serialize a charter into a content-addressed snapshot (the read-face artifact),
  * reusing the EXACT @oracle mechanism (`exportOracleSnapshot`) the FLOW-map serve
- * uses — load the plain charter into a fixed-actor Automerge doc, export by content
- * hash. Deterministic: the same charter yields the same cid.
+ * uses — load the plain charter into an ambient-free Automerge doc (`pinnedDoc` pins
+ * the actor AND the clock, both of which otherwise land in the saved bytes), export by
+ * content hash. Deterministic: the same charter yields the same cid, stable until the
+ * realm's published meta changes — exactly what a content-addressed read-face wants.
  */
 export function realmGlamourSnapshot(charter: RealmGlamour): Promise<OracleSnapshot> {
   // Automerge rejects `undefined` values + the readonly interface; the charter
   // already omits unset keys (projectRealmGlamour), so this clone runs total.
-  return exportOracleSnapshot(automergeFrom({ ...charter }, CHARTER_ACTOR_ID));
+  return exportOracleSnapshot(pinnedDoc({ ...charter } as unknown as Record<string, unknown>));
 }
 
 /**

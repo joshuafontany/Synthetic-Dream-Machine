@@ -29,7 +29,8 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/mesh-palace
  */
 
-import { from as automergeFrom, type Doc } from "@automerge/automerge";
+import { type Doc } from "@automerge/automerge";
+import { pinnedDoc } from "./pinned-doc.js";
 import type { DocHandle } from "@automerge/automerge-repo";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord } from "./base-doc.js";
@@ -518,17 +519,14 @@ export type {
   PointerVerdict as FlowMapVerdict,
 };
 
-/** A FIXED Automerge actorId for read-face projection loads. Automerge's default
- *  `from` mints a RANDOM actor that lands in the saved bytes, so the SAME public
- *  projection would hash to a fresh cid every export — breaking the read-face's
- *  "re-export only when the content hash actually changes" invariant (spurious
- *  pointer ratchets on every ea-breath). Pinning the actor makes the snapshot a
- *  PURE function of the public projection's content. */
-const FLOW_MAP_ACTOR_ID = "00000000000000000000000000000000" as const;
-
-/** Load a plain LarDoc projection into a fresh Automerge doc (A.from rejects the readonly interface). */
+/** Load a plain LarDoc projection into a fresh ambient-free Automerge doc.
+ *
+ *  Automerge writes BOTH a random actor and a wall-clock time into the saved bytes, so an unpinned load hashes
+ *  the SAME public projection to a fresh cid every export — breaking the read-face's "re-export only when the
+ *  content hash actually changes" invariant (spurious pointer ratchets on every ea-breath). `pinnedDoc` pins
+ *  both, making the snapshot a PURE function of the public projection's content. */
 function loadDoc(d: LarDoc): Doc<Record<string, unknown>> {
-  return automergeFrom(d as unknown as Record<string, unknown>, FLOW_MAP_ACTOR_ID);
+  return pinnedDoc(d as unknown as Record<string, unknown>);
 }
 
 /** Snapshot a mesh-palace doc's PUBLIC FLOW-map (shore applied) as a content-addressed read-face. */
