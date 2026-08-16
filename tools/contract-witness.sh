@@ -69,8 +69,12 @@ if node "$LARES" help >/dev/null 2>&1; then ok; else bad "build first: pnpm buil
 # THE SEED EACH FOUNDING READS. `lares vessel found` resolves the hearth true-name (the engine CID) from the
 # tracked genesis tree, so an isolated root must carry it before a founding can stand. Its own error names
 # this step verbatim — the harness performs it rather than making a reader discover it.
+# SEED FROM DISK, NEVER FROM THE INDEX. `git ls-files` names what the index tracks, and a genesis rebake
+# writes new content-addressed blobs while the old ones stay listed until someone commits the change. A
+# seed built from that list fails on files the disk no longer holds — and worse, when it succeeds it
+# founds from a genesis no vessel would ever read, because a vessel reads the disk.
 seed_genesis() {
-  ( cd "$REPO_ROOT" && git ls-files -z genesis/ | xargs -0 -I{} cp --parents "{}" "$1/" ) 2>/dev/null
+  ( cd "$REPO_ROOT" && find genesis -type f -print0 | xargs -0 -I{} cp --parents "{}" "$1/" ) 2>/dev/null
 }
 
 say "① vessel A — the Nexus founds and seats its quorum"

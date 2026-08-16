@@ -255,9 +255,12 @@ compiled tree MUST carry only canonical names. (2) A `block-close` MUST match th
 `block`/`pragma` of the same name. (3) `filter-expr` content stays opaque to the host parser; only a
 registered guest handler interprets it. (4) `URI-ref` structure defers to [LAR-URI]. (5) Memetic-wikitext
 inherits the TW5 wikitext base [TW5]; bare `<<name>>` macro calls and other TW5 constructs read as
-inherited content (the `text` production), defined by [TW5] and not re-specified here. (6) Every
-production above resolves to `macro-call`; a processor MUST NOT require a delimiter the host does not
-already parse. (7) A `frame` sigil MUST state `code:` as its first parameter; the remaining slots belong
+inherited content (the `text` production), defined by [TW5] and not re-specified here. (6) Every production above stands as a
+`macro-call` IN THE HOST'S READING: a conforming TW5 processor MUST parse a carrier as valid wikitext,
+every sigil an unbound macro call, and this document's superset claim rests on that direction alone.
+''The converse does not follow.'' A memetic processor MAY recognise a NARROWER set of parameter
+spellings than the host admits — it MUST NOT refuse a spelling the host accepts, and MUST degrade an
+unrecognised one to text rather than to a parse error (#lexical-structure, the gradient's floor). (7) A `frame` sigil MUST state `code:` as its first parameter; the remaining slots belong
 to the mark that code names (#control-set).
 
 <<~/ahu >>
@@ -712,9 +715,17 @@ The `bcc` slot carries a check over the framed span. Normatively:
 * ''Form:'' `<namespace>:<16 hex digits>` — the low 64 bits of SHA-256 over the span's UTF-8 bytes,
   prefixed by the carrier's namespace. Sixty-four bits sit far past what a transport fault reaches and
   short enough that a person reads the line.
+* ''The span binds the FRAME'S BYTE SPELLING, and that is why the check computes.'' The span opens on the
+  STX sigil and closes on the ETX sigil, so those sigils' own bytes ride inside it. A frame migration —
+  a mark gaining a named parameter, a spacing rule settling — moves them, and every check computed
+  before it would read `mismatch` over a body nobody touched, reporting corruption where a grammar
+  merely evolved.
 * ''Computed, never stored.'' A writer computes the check over the body it has assembled; a reader
   recomputes it over the bytes in front of it. Two computations of one fact, never a copy of one — a
   stored derivation goes stale the moment the thing it derives from moves.
+* ''The heading stays outside.'' The span opens at STX, so the identity block sits above it: sorted keys,
+  aligned equals, entity-escaped glyphs and child inheritance all churn the iam without touching the
+  check. A carrier whose heading was re-canonicalised still verifies.
 * ''A carrier holding no check reads `unchecked`, never `mismatch`.'' Absence of a check and a failed
   check are different facts (#bearing-arrow), and a reader that collapsed them would be useless exactly
   where it matters. The caller decides what an unchecked carrier may do; it still parses.
