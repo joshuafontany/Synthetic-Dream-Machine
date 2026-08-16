@@ -70,8 +70,15 @@ export interface FaceJoinProvider {
   receiveContactCard(bytes: Uint8Array): Promise<{ id: string }>;
   verifySentinelMembership(agentIdHex: string, sentinelDocIdHex: string): Promise<{ ok: boolean; reason?: string }>;
   addSentinelMember(memberIdentifierHex: string, sentinelDocIdHex: string): Promise<void>;
+  delegate(args: { bagUrl: string; audience: string; access: "read" | "admin" }): Promise<unknown>;
   eventsForPeer(peerAgentIdHex: string): Promise<Uint8Array[]>;
   contactCard(): Promise<Uint8Array>;
+}
+
+/** A bag to re-grant after a seat lands, at the access the granter ALREADY holds toward this audience. */
+export interface FaceJoinRegrant {
+  readonly bagUrl: string;
+  readonly access: "read" | "admin";
 }
 
 export interface FaceJoinContext {
@@ -81,6 +88,21 @@ export interface FaceJoinContext {
   readonly hearthTrueName: string;
   /** The PersonaGroup sentinel the joinee joins. */
   readonly personaGroupDocIdHex: string;
+  /** That group's AGENT id — the audience a bag delegates to (the doc id above names the sentinel itself). */
+  readonly personaGroupAgentIdHex: string;
+  /**
+   * The bags to RE-GRANT once the seat lands, and the access each already carries toward this group.
+   *
+   * A seat does not reach backward on its own: a bag delegated to the group BEFORE this member joined keeps a
+   * delegation made against the older group, and the transitive re-key never propagates onto it. A member
+   * seated and left there reads nothing the group already held — membership without reach. Re-granting each
+   * bag re-points it at the re-keyed group.
+   *
+   * This grants NO new authority: the caller names bags it has ALREADY delegated to this same audience, at the
+   * access it already gave. A caller that names a bag it never granted would be widening the group's reach
+   * under cover of a join, so the list belongs to the caller that knows its own grants, never to this function.
+   */
+  readonly regrant?: readonly FaceJoinRegrant[];
   /**
    * THE LEASE AUTHORITY — this resource's current max-register epoch (`effectiveLeaseEpoch` over its slots).
    * A grant whose `boundEpoch` sits below it reads STALE and the gate refuses. A max-register is monotone and
@@ -175,8 +197,15 @@ export async function runFaceJoin(
   const mustAdd = summons.force === true || !seated.ok;
   if (mustAdd) {
     await provider.addSentinelMember(joineeAgentIdHex, ctx.personaGroupDocIdHex);
+    // Re-point the group's existing bags at the re-keyed group, so the new seat reaches what the group already
+    // held. Only after the add — a re-grant made first would key to the group this member stands outside of.
+    for (const bag of ctx.regrant ?? []) {
+      await provider.delegate({ bagUrl: bag.bagUrl, audience: ctx.personaGroupAgentIdHex, access: bag.access });
+    }
   }
 
+  // CAPTURE LAST — the events must carry the add AND every re-grant above, or the joinee ingests a membership
+  // that reaches nothing (the add→re-grant→capture order `packPersonaCrossing` also keeps).
   const events = await provider.eventsForPeer(joineeAgentIdHex);
   const founderCard = new TextDecoder().decode(await provider.contactCard());
 

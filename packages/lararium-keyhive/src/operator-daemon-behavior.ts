@@ -244,11 +244,17 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
           }
 
           const outcome = await runFaceJoin(kh, summons, {
-            personaRootDid:       ownEdge.personaRootDid,
-            hearthTrueName:       ownEdge.hearthTrueName,
-            personaGroupDocIdHex: faceGroup(),
-            leaseEpoch:           effectiveLeaseEpoch(slots),
-            now:                  Date.now(),
+            personaRootDid:         ownEdge.personaRootDid,
+            hearthTrueName:         ownEdge.hearthTrueName,
+            personaGroupDocIdHex:   faceGroup(),
+            personaGroupAgentIdHex: faceAgent(),
+            leaseEpoch:             effectiveLeaseEpoch(slots),
+            now:                    Date.now(),
+            // The bags this vessel ALREADY delegated to its own face, re-granted so a fresh seat reaches them.
+            // Naming only what we granted, at the access we granted, widens nobody's reach — it refreshes the
+            // epoch on grants that already stand. `registerBags` IS that set: every one of them passed through
+            // `registerBagCap`, which delegates admin to this same audience.
+            regrant: daemonAuth.registerBags.map((bagUrl) => ({ bagUrl, access: "admin" as const })),
           });
           // A refusal RETURNS — an unlicensed summons names an absent contract, never an attack, and the
           // reason rides the outcome so the joinee's panel can paint why rather than showing a silence.

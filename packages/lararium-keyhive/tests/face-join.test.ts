@@ -30,15 +30,16 @@ async function edgeFor(opts: { seed?: Uint8Array; key?: string; hearth?: string;
   });
 }
 
-interface Calls { received: number; added: string[]; events: number }
+interface Calls { received: number; added: string[]; events: number; regranted: string[] }
 
 function fakeProvider(opts: { seated?: boolean; cardId?: string } = {}): FaceJoinProvider & { calls: Calls } {
-  const calls: Calls = { received: 0, added: [], events: 0 };
+  const calls: Calls = { received: 0, added: [], events: 0, regranted: [] };
   return {
     calls,
     async receiveContactCard() { calls.received++; return { id: opts.cardId ?? cardIdFor(JOINEE_KEY) }; },
     async verifySentinelMembership() { return opts.seated ? { ok: true } : { ok: false, reason: "no access" }; },
     async addSentinelMember(member, doc) { calls.added.push(`${member}@${doc}`); },
+    async delegate(a) { calls.regranted.push(a.bagUrl); return {}; },
     async eventsForPeer() { calls.events++; return [new Uint8Array([1, 2, 3]), new Uint8Array([4, 5])]; },
     async contactCard() { return new TextEncoder().encode('{"founder":"card"}'); },
   };
@@ -50,6 +51,7 @@ async function ctxFor(): Promise<FaceJoinContext> {
     personaRootDid:       own.personaRootDid,
     hearthTrueName:       HEARTH,
     personaGroupDocIdHex: "ab".repeat(16),
+    personaGroupAgentIdHex: "cd".repeat(16),
     leaseEpoch:           0,          // an unfed resource — the epoch a founding's grants bind to
     now:                  NOW,
   };
@@ -138,6 +140,34 @@ describe("the gate — a signature, never a list", () => {
   test("gateFaceJoin runs its edge checks with no card at all", async () => {
     const ctx = await ctxFor();
     await expect(gateFaceJoin({ edge: await edgeFor(), ctx })).resolves.toEqual({ ok: true });
+  });
+});
+
+describe("the re-grant — a seat that reaches what the group already held", () => {
+  test("a fresh seat re-points the group's existing bags, AFTER the add", async () => {
+    const ctx = { ...(await ctxFor()), regrant: [
+      { bagUrl: "lar:///ha.ka.ba/bags/@catalog", access: "admin" as const },
+      { bagUrl: "lar:///ha.ka.ba/bags/@persona", access: "admin" as const },
+    ] };
+    const p   = fakeProvider();
+    const out = await runFaceJoin(p, summons(await edgeFor()), ctx);
+    expect(out.ok).toBe(true);
+    expect(p.calls.regranted).toEqual(["lar:///ha.ka.ba/bags/@catalog", "lar:///ha.ka.ba/bags/@persona"]);
+    expect(p.calls.added).toHaveLength(1);
+  });
+
+  test("an already-seated device re-grants NOTHING — no seat moved, no epoch moved", async () => {
+    const ctx = { ...(await ctxFor()), regrant: [{ bagUrl: "lar:///ha.ka.ba/bags/@catalog", access: "admin" as const }] };
+    const p   = fakeProvider({ seated: true });
+    await runFaceJoin(p, summons(await edgeFor()), ctx);
+    expect(p.calls.regranted).toEqual([]);
+  });
+
+  test("a REFUSED summons re-grants nothing", async () => {
+    const ctx = { ...(await ctxFor()), regrant: [{ bagUrl: "lar:///ha.ka.ba/bags/@catalog", access: "admin" as const }] };
+    const p   = fakeProvider();
+    await runFaceJoin(p, summons(await edgeFor({ seed: OTHER_SEED })), ctx);
+    expect(p.calls.regranted).toEqual([]);
   });
 });
 
