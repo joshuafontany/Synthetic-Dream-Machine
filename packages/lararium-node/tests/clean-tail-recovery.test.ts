@@ -10,7 +10,7 @@ import { join } from "node:path";
 
 import { describe, expect, test } from "vitest";
 
-import { moveTornTailAside } from "../src/doc-load-probe.js";
+import { moveTornTailAside, resolveChildPath } from "../src/doc-load-probe.js";
 import { docStorePath } from "../src/store-integrity.js";
 
 const DOC = "44u4T4NwgkkCoBdze4gyY8pFSNQC";
@@ -56,5 +56,27 @@ describe("moveTornTailAside", () => {
     expect(firstMoved[0]).not.toEqual(secondMoved[0]); // distinct destinations, no clobber
     expect(existsSync(firstMoved[0]!)).toBe(true);
     expect(existsSync(secondMoved[0]!)).toBe(true);
+  });
+});
+
+/**
+ * The spawn crosses out of the parent's loader: `spawn(process.execPath, [childPath, …])`
+ * starts a bare node, so `childPath` MUST name a real `.js` on disk. Running from the TS
+ * SOURCE (`tsx src/main.ts` — the `pnpm dev` / `vessel stand --with-app` path) resolves the
+ * sibling under `src/`, where only the `.ts` lives; the compiled twin under `dist/src/` carries
+ * the child. A path that misses makes every doc exit 1 and read as `aborted`, condemning sound
+ * data — so the resolver either names an existing file or throws a build instruction.
+ */
+describe("doc-load-probe child resolution", () => {
+  test("resolves a child that exists on disk, or throws a build instruction", () => {
+    let resolved: string | null = null;
+    try {
+      resolved = resolveChildPath();
+    } catch (e) {
+      expect((e as Error).message).toContain("pnpm -r build");
+      return;
+    }
+    expect(existsSync(resolved!)).toBe(true);
+    expect(resolved!.endsWith(".js")).toBe(true);
   });
 });

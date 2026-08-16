@@ -16,7 +16,7 @@
 
 import { spawn } from "node:child_process";
 import { mkdirSync, renameSync, writeFileSync, existsSync } from "node:fs";
-import { join, basename } from "node:path";
+import { join, basename, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   isCondemned,
@@ -34,6 +34,34 @@ export type { DocLoadProbe, ProbeOptions, ProbeResult, ProbeStatus };
 
 const CHILD_URL = new URL("./doc-load-probe-child.js", import.meta.url);
 const DEFAULT_TIMEOUT_MS = 30_000;
+
+/**
+ * Resolve the COMPILED child entry the spawn hands to a bare `node`.
+ *
+ * The spawn crosses out of whatever loader the parent runs under: `spawn(process.execPath, …)`
+ * starts plain node with no TypeScript hook, so the argv path must name a real `.js` on disk.
+ * A parent running from `dist/` finds its sibling directly. A parent running the TS SOURCE
+ * (`tsx src/main.ts`, the `pnpm dev` / `vessel stand --with-app` path) sees `import.meta.url`
+ * point at `src/`, whose `.js` sibling exists only under `dist/src/` — so the source layout
+ * maps to its compiled twin here.
+ *
+ * A missing child names a HARNESS fault, never a doc verdict: it throws, so the caller fails
+ * loudly instead of reading every doc as `aborted` and quarantining sound data.
+ */
+export function resolveChildPath(): string {
+  const sibling = fileURLToPath(CHILD_URL);
+  if (existsSync(sibling)) return sibling;
+  const marker = `${sep}src${sep}`;
+  const cut = sibling.lastIndexOf(marker);
+  if (cut >= 0) {
+    const compiled = `${sibling.slice(0, cut)}${sep}dist${marker}${sibling.slice(cut + marker.length)}`;
+    if (existsSync(compiled)) return compiled;
+  }
+  throw new Error(
+    `doc-load-probe: the disposable child is missing (${sibling}) — run \`pnpm -r build\`. ` +
+      `The probe refuses to report docs as aborted when it cannot run at all.`,
+  );
+}
 
 interface ChildLine {
   ok?: boolean;
@@ -86,7 +114,7 @@ export async function probeDocLoad(
     }
   }
 
-  const childPath = fileURLToPath(CHILD_URL);
+  const childPath = resolveChildPath();
   return await new Promise<ProbeResult>((resolve) => {
     const child = spawn(process.execPath, [childPath, storageDir, documentId], {
       stdio: ["ignore", "pipe", "pipe"],
@@ -145,7 +173,7 @@ export function makeChildProcessDocLoadProbe(storageDir: string): DocLoadProbe {
  * spawn is abort-resistant; the child_process bulkhead still contains any residual poison.
  */
 function runCleanTailChild(storageDir: string, documentId: string, timeoutMs: number): Promise<ChildLine | null> {
-  const childPath = fileURLToPath(CHILD_URL);
+  const childPath = resolveChildPath();
   return new Promise<ChildLine | null>((resolve) => {
     const child = spawn(process.execPath, [childPath, storageDir, documentId, "--clean-tail"], {
       stdio: ["ignore", "pipe", "pipe"],
