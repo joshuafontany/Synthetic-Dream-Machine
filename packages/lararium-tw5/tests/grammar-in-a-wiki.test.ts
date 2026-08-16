@@ -32,6 +32,8 @@ import { readFileSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 import path from "node:path";
 import { TW5Engine } from "../src/tw5-vm.js";
+import { expandMemeRefs } from "../src/deserializer.js";
+import { memeticIngestOps } from "../src/ingest-gate.js";
 import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import LARES_MEMETIC_WIKITEXT_PLUGIN from "../plugins/lares-memetic-wikitext.json" with { type: "json" };
 import { TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME } from "../src/generated-tw5-version.js";
@@ -79,19 +81,108 @@ describe.skipIf(coreBlobSkip)(
     expect(records.length).toBeGreaterThan(1);
   });
 
-  test("the corpus round-trips through the WIKI, not through a reader standing outside it", () => {
-    const carriers = execSync("git ls-files 'bags/@lares/ha.ka.ba/lares/api/pono/*.mem'",
-      { encoding: "utf8", cwd: REPO }).split("\n").filter(Boolean).slice(0, 40);
+  /**
+   * ROUND TRIP, THROUGH THE WIKI. `bags/` is canon and the ingest loop compares each carrier against
+   * `render(parse(disk))`. When the two disagree the carrier reads "changed" on every scan forever: it
+   * never converges, the merge seat never settles, and a write-back rewrites the operator's source.
+   *
+   * The IAM BLOCK IS EXEMPT — key realignment and added metadata are the renderer's business and the
+   * operator has ruled them acceptable. Only BODY drift fails.
+   */
+  test("every carrier renders back to the bytes the WIKI parsed it from", () => {
+    const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
+      .split("\n").filter(Boolean);
+    const stripIam = (t: string) => t.replace(/```toml iam\n[\s\S]*?\n```\n/g, "```toml iam\n<IAM>\n```\n");
     const drift: string[] = [];
     for (const f of carriers) {
-      const src = readFileSync(path.join(REPO, f), "utf8");
-      const uri = /uri-path\s*=\s*"([^"]+)"/.exec(src)?.[1];
+      const disk = readFileSync(path.join(REPO, f), "utf8");
+      const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(disk)?.[1];
       if (!uri) continue;
-      const records = deserialize(src, `lar:///${uri}`);
-      if (records.length === 0) drift.push(`${f}: the wiki read no carrier`);
+      const title = `lar:///${uri}`;
+      const records = deserialize(disk, title);
+      if (records.length === 0) { drift.push(`${f}: the wiki read no carrier`); continue; }
+      const by = new Map(records.map((r) => [r["title"] as string, r]));
+      const rendered = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, title);
+      if (rendered === null) { drift.push(`${f}: projected to nothing`); continue; }
+      if (stripIam(rendered) !== stripIam(disk)) drift.push(`${f}: body does not render back`);
     }
+    expect(carriers.length).toBeGreaterThan(500);
     expect(drift).toEqual([]);
-    expect(carriers.length).toBeGreaterThan(20);
+  });
+
+  /**
+   * TWO FAULTS THAT VANISH RATHER THAN FAIL, and neither is body drift.
+   *
+   * · CONTENT PAST ETX. The text ends at ETX; the slot below it carries the block check alone. A carrier
+   *   that wrote prose there loses it — the render never reproduces it and nothing says so. Two `#edges`
+   *   blocks disappeared that way before anyone diffed a round trip.
+   * · A RESIDENCY STAMP IN CANON. `origin-bag` is a READ-PATH annotation the engine writes onto records.
+   *   Written into a carrier it fuses identity with residency, and a meme re-projected to another bag
+   *   then carries its old home.
+   */
+  test("no carrier strands content past ETX, and none stamps its residency into canon", () => {
+    const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
+      .split("\n").filter(Boolean);
+    const stranded: string[] = [], stamped: string[] = [];
+    for (const f of carriers) {
+      const disk = readFileSync(path.join(REPO, f), "utf8");
+      const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(disk)?.[1];
+      if (!uri) continue;
+      if (/^origin-bag\s*=/m.test(disk)) stamped.push(f);
+      const { diagnostics } = memeticIngestOps.deserialize(`lar:///${uri}`, disk) as {
+        diagnostics: Array<{ code?: string }>;
+      };
+      if (diagnostics.some((d) => d.code === "postamble-content")) stranded.push(f);
+    }
+    expect(stranded).toEqual([]);
+    expect(stamped).toEqual([]);
+  });
+
+  /**
+   * AUTHORING, THROUGH THE WIKI. `round-trip` proves canon stays canon over files already canonical
+   * when they landed. This proves a HAND-AUTHORED file BECOMES canon — the shape an operator writes in
+   * an editor, the shape a render surface hands the projector, the shape an older session emits.
+   */
+  test("every shape an operator writes mints a schema-correct carrier, and settles", () => {
+    const URI = "lar:///ha.ka.ba/lares/docs/authoring-probe";
+    const IAM = ['```toml iam', 'uri-path = "ha.ka.ba/lares/docs/authoring-probe"',
+      `type     = "${CARRIER_TYPE}"`, "```"].join("\n");
+    const IAM_NS = IAM.replace("type     =", 'namespace = "⊙"\ntype     =');
+    const BODY = "! A New Thought\n\nThe operator writes a file and saves it.\n";
+    const SLOT = ["<<~ ahu #inner >>", "", "```toml iam", 'register = "Provisional"', "```", "",
+      "! Inner", "", "slot prose.", "", "<<~/ahu >>"].join("\n");
+    const SHAPES: Array<[string, string, string]> = [
+      ["bare prose, no frame and no iam", BODY, ""],
+      ["iam only — identity without framing", `${IAM}\n\n${BODY}`, ""],
+      ["iam declaring a namespace, unframed", `${IAM_NS}\n\n${BODY}`, "⊙"],
+      ["a frame from before the named params",
+        `<<^ ⊙&#x0001; ? -> ${URI} >>\n${IAM_NS}\n<<^ &#x0002; >>\n\n${BODY}\n<<^ &#x0003; >>\n\n<<^ &#x0004; -> ? >>\n`, "⊙"],
+      ["a carrier declaring the type name written before the suffix",
+        `${IAM_NS.replace(CARRIER_TYPE, "text/x-memetic-wikitext")}\n\n${BODY}`, "⊙"],
+      ["an ahu slot carrying its own iam", `${IAM_NS}\n\n${BODY}\n${SLOT}\n`, "⊙"],
+    ];
+    const project = (src: string) => {
+      const records = deserialize(src, URI);
+      const by = new Map(records.map((r) => [r["title"] as string, r]));
+      return { records, by, out: expandMemeRefs((u: string) => (by.get(u) ?? null) as never, URI) };
+    };
+    const faults: string[] = [];
+    for (const [name, src, wantNs] of SHAPES) {
+      const first = project(src);
+      if (!first.out) { faults.push(`${name}: projected to nothing`); continue; }
+      const head = first.out.split("\n");
+      if (!/^<<!DOCTYPE memetic-wikitext\+tiddlywiki lar:\/\/\/\S+ >>$/.test(head[0] ?? "")) faults.push(`${name}: no declaration`);
+      if (!/^<<\^ code:"&#x(?:0001|0011);"[^>\n]*?\? -> \S+ >>/m.test(first.out)) faults.push(`${name}: SOH states no bearing`);
+      for (const [claim, mark] of [["STX", "0002"], ["ETX", "0003"]] as const) {
+        if (!first.out.includes(`<<^ code:"&#x${mark};" >>`)) faults.push(`${name}: no ${claim}`);
+      }
+      if (!/^<<\^ code:"&#x(?:0004|0014);"[^>\n]*?-> \? >>/m.test(first.out)) faults.push(`${name}: EOT releases nothing`);
+      const gotNs = /^<<\^ code:"&#x(?:0001|0011);" namespace:"([^"]*)"/m.exec(first.out)?.[1] ?? "";
+      if (gotNs !== wantNs) faults.push(`${name}: namespace "${gotNs}" where the iam declares "${wantNs}"`);
+      const second = project(first.out);
+      if (second.out !== first.out) faults.push(`${name}: projecting the projection changed it`);
+    }
+    expect(faults).toEqual([]);
   });
 
   test("a name that binds no procedure renders as its own text — the gradient's floor", () => {

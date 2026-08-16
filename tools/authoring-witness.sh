@@ -6,11 +6,8 @@
 # BECOMES canon — the shape an operator writes in an editor, the shape a wiki VM hands the projector,
 # the shape an older session still emits.
 #
-# Exit 0 = every authored shape mints a schema-correct carrier and settles on the second pass.
+# The parse happens in a live wiki, for the reason `round-trip-witness` records.
 set -uo pipefail
 cd "$(dirname "$0")/.."
-
-if [ ! -f packages/lararium-tw5/dist/deserializer.js ]; then
-  echo "[authoring] @lararium/tw5 is not built — run \`pnpm -r build\`"; exit 1
-fi
-node tools/authoring-probe.mjs
+pnpm -s --filter @lararium/tw5 test grammar-in-a-wiki 2>&1 | grep -E "mints a schema-correct|Tests |×|FAIL" || true
+pnpm -s --filter @lararium/tw5 test grammar-in-a-wiki >/dev/null 2>&1
