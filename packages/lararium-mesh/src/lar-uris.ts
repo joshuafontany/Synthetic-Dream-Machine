@@ -460,6 +460,16 @@ export const PERSONA_GROUP_DOC_ID_TIDDLER   = `${PERSONA_NAMESPACE}/sentinel/per
 export const PERSONA_GROUP_AGENT_ID_TIDDLER = `${PERSONA_NAMESPACE}/sentinel/persona-group/agent-id`;
 /** Daemon oracle tiddler: MeshCabal Document ID (hex) — NEXUS-affiliation, sovereign-per-vessel. Used by boot Gate C. */
 export const MESH_CABAL_DOC_ID_TIDDLER     = `${DAEMON_BAG_ID}/sentinel/mesh-cabal/doc-id`;
+
+/**
+ * The HEARTH's @daemon url — the door this vessel knocks on to ask its face for a seat.
+ *
+ * An admitted vessel seeds its OWN @daemon, because that plane never crosses; so the one url it cannot
+ * derive is where its hearth listens. The admit payload carries it once, and this tiddler keeps it, so a
+ * joinee that has long since spent its payload still knows where to ask. Absent on a vessel that founded
+ * its own face — such a vessel IS the hearth, and knocks on no one.
+ */
+export const HEARTH_DAEMON_URL_TIDDLER     = `${DAEMON_BAG_ID}/hearth/daemon-url`;
 /** Persona oracle tiddler: the PINNED signer DID ("0x"+hex) the Binding Gate verifies the edge against —
  *  self-DID for an anon (self-signed), a granting root-DID for a delegated/operator vessel. */
 export const SIGNER_DID_TIDDLER            = `${PERSONA_NAMESPACE}/binding/signer-did`;

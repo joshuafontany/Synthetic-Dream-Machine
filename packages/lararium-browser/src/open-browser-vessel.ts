@@ -103,6 +103,9 @@ interface BrowserBootstrap extends VesselBootstrap {
   deviceEdge:            DeviceDelegationTiddler;
   /** Cached self-certifying ContactCard JSON (founding) — the leaf identity for the V3 peer gate. */
   contactCard?:          string;
+  /** The HEARTH's @daemon url — the door this vessel knocks on for its seat. Null/absent when it founded
+   *  its own face; such a vessel IS the hearth. Persisted at admission, re-read on every later boot. */
+  hearthDaemonUrl?:      string | null;
 }
 
 // The @oracle no longer needs an IDB rendezvous key: it lives under the DETERMINISTIC
@@ -407,6 +410,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // between joining a group and declaring one. The gate walks the KEL prefix to the current head.
       signerDid: admit.signerDid, personaKelPrefix: admit.personaKelPrefix, deviceEdge: admit.deviceEdge,
       contactCard: a.contactCardJson,
+      hearthDaemonUrl: a.hearthDaemonUrl,
     };
     bootKeyWrites.bootstrap = bootstrap;
   } else if (!bootstrap) {
@@ -435,6 +439,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       personaGroupDocIdHex: f.personaGroupDocIdHex, personaGroupAgentIdHex: f.personaGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
       signerDid: f.signerDid, personaKelPrefix: f.personaKelPrefix, deviceEdge: f.founderEdge,
       contactCard: f.contactCardJson,
+      hearthDaemonUrl: null,   // a vessel that founded its own face IS the hearth
     };
     bootKeyWrites.bootstrap = bootstrap;
   }
@@ -1066,6 +1071,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     wikiDocUrl:       result.wikiHandle.url,
     catalogHandleUrl: catalogHandle.url,
     daemonDocUrl:     social.daemonUrl,
+    hearthDaemonUrl:  social.hearthDaemonUrl ?? null,
     oracleDocUrl:     result.assembly.islandHandle.url,
     larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase:            "live",

@@ -44,6 +44,7 @@ import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID,
   PERSONA_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  HEARTH_DAEMON_URL_TIDDLER,
   SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER,
   CAP_EVENT_TAG,
   seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc, seedPersonaDoc, personaBagIdFor,
@@ -604,6 +605,9 @@ export interface ApplyAdmitResult {
   /** That plane's bag id, derived from the SAME group doc id the founder used. Both devices name one
    *  plane identically or they sync nothing — the derivation is what makes that hold without a roster. */
   personaBagId:   string;
+  /** The HEARTH's @daemon url — where this vessel asks for its seat. Null when the payload named no door;
+   *  the vessel then holds standing and can ask for nothing until an operator carries a route to it. */
+  hearthDaemonUrl: string | null;
 }
 
 /**
@@ -701,6 +705,16 @@ export async function runApplyAdmitPayload(
       tiddler: { title: MESH_CABAL_DOC_ID_TIDDLER, text: payload.meshCabalDocIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init-admit" },
     };
+    // THE DOOR, KEPT. The payload names the hearth's own @daemon once; a joinee spends its payload and boots
+    // for years after, so the url lands on the plane the joinee always reads. Every other url here rides the
+    // RESULT into one bootstrap; this one is also the only address a joinee cannot re-derive from anything it
+    // holds, so it earns a tiddler beside the sentinel ids.
+    if (payload.hearthDaemonUrl) {
+      doc.tiddlers[HEARTH_DAEMON_URL_TIDDLER] = {
+        tiddler: { title: HEARTH_DAEMON_URL_TIDDLER, text: payload.hearthDaemonUrl, kind: "hearth-door" },
+        meta: { authority: "lares-init-admit" },
+      };
+    }
   });
 
   // Keyhive membership cap-events (packPersonaCrossing), when the founder packed them: write each into this
@@ -743,5 +757,6 @@ export async function runApplyAdmitPayload(
     daemonUrl:      daemonHandle.url      as string,
     personaUrl,
     personaBagId,
+    hearthDaemonUrl: payload.hearthDaemonUrl ?? null,
   };
 }

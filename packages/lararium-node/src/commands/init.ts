@@ -169,7 +169,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     // The joinee's OWN seed — the admit supplies the BINDING; the vessel supplies the SELF. The ceremony
     // mints this vessel's self-certifying ContactCard from it, and a cardless vessel cannot speak at a gate.
     const admitSeed = await loadVesselSigningSeed(storageDir);
-    const { contactCardJson, identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl } = await runApplyAdmitPayload({
+    const { contactCardJson, identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl, hearthDaemonUrl } = await runApplyAdmitPayload({
       repo,
       vesselSeed: admitSeed,
       vesselVerifyingKey: operatorIdentity.verifyingKey,

@@ -81,6 +81,9 @@ export interface VesselResult<TPool, TDaemon> {
    * a face's vessels, and @circles what syncs across one operator's devices.
    */
   daemonDocUrl:     string;
+  /** The HEARTH's @daemon — where THIS vessel asks for its seat. Null when it founded its own face and so
+   *  IS the hearth, knocking on no one. Distinct from `daemonDocUrl`, which names this vessel's own plane. */
+  hearthDaemonUrl:  string | null;
   oracleDocUrl:     string | null;
   larariumDocUrl:   string | null;
   phase:            LarOpenPhase;
