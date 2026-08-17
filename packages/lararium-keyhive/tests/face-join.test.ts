@@ -154,6 +154,18 @@ describe("the re-grant — a seat that reaches what the group already held", () 
     expect(out.ok).toBe(true);
     expect(p.calls.regranted).toEqual(["lar:///ha.ka.ba/bags/@catalog", "lar:///ha.ka.ba/bags/@persona"]);
     expect(p.calls.added).toHaveLength(1);
+    if (out.ok) expect(out.grant.regranted).toBe(2);   // the count rides OUT, so a caller can see reach
+  });
+
+  test("a seat granted with an EMPTY regrant list reports 0 — membership without reach, visibly", async () => {
+    // The failure this fences looks healthy from every other angle: admitted, re-keyed, events flowing, and a
+    // member that opens nothing the group already held. Only the count says so.
+    const ctx = await ctxFor();                     // no `regrant` — the daemon named no standing bags
+    const out = await runFaceJoin(fakeProvider(), summons(await edgeFor()), ctx);
+    expect(out.ok).toBe(true);
+    if (!out.ok) return;
+    expect(out.grant.reKeyed).toBe(true);
+    expect(out.grant.regranted).toBe(0);
   });
 
   test("an already-seated device re-grants NOTHING — no seat moved, no epoch moved", async () => {

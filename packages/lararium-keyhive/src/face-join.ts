@@ -60,6 +60,15 @@ export interface FaceJoinGrant {
   /** True when this call actually added the member (and so re-keyed the group); false when it handed back an
    *  existing seat. A joinee reads it as "the group moved" vs "you were already here". */
   readonly reKeyed: boolean;
+  /**
+   * How many of the group's standing bags this seat re-pointed at the re-keyed group.
+   *
+   * A seat with `reKeyed: true` and `regranted: 0` reads as membership WITHOUT REACH — the member holds a
+   * seat and opens nothing the group already carried. That shape looks identical to a healthy join from
+   * every other angle, so the count rides out where a caller and a test can both see it rather than being
+   * inferred from an event tally.
+   */
+  readonly regranted: number;
 }
 
 export type FaceJoinRefusal = { readonly ok: false; readonly reason: string };
@@ -195,12 +204,14 @@ export async function runFaceJoin(
   // seat in the NEW sentinel, so the add genuinely runs.
   const seated = await provider.verifySentinelMembership(joineeAgentIdHex, ctx.personaGroupDocIdHex);
   const mustAdd = summons.force === true || !seated.ok;
+  let regranted = 0;
   if (mustAdd) {
     await provider.addSentinelMember(joineeAgentIdHex, ctx.personaGroupDocIdHex);
     // Re-point the group's existing bags at the re-keyed group, so the new seat reaches what the group already
     // held. Only after the add — a re-grant made first would key to the group this member stands outside of.
     for (const bag of ctx.regrant ?? []) {
       await provider.delegate({ bagUrl: bag.bagUrl, audience: ctx.personaGroupAgentIdHex, access: bag.access });
+      regranted++;
     }
   }
 
@@ -217,6 +228,7 @@ export async function runFaceJoin(
       founderCard,
       capEvents: events.map(bytesToBase64),
       reKeyed: mustAdd,
+      regranted,
     },
   };
 }
