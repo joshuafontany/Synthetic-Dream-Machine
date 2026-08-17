@@ -126,9 +126,14 @@ export function memeticWikitextDeserializer(
   // the SOH carries a namespace it cannot see.
   const sohM = maskedExec(text, /<<\^[^&\n]*&#x(?:0001|0011);/);
   const sohIdx = sohM ? sohM.index : -1;
-  const prologue = (closes.length > 0 && sohIdx > 0)
-    ? text.slice(0, sohIdx)
-    : "";
+  // THE FRAME OWNS THE DECLARATION; the field keeps only what stands BEYOND it. `prologue` predates the
+  // declaration existing as a register, so it stored a line the emitter now mints — 4,015 copies of it
+  // across the corpus, because the field is copied onto every record of a carrier.
+  //
+  // Stripping it here retires the mint-suppression below with it: a check that existed only to avoid
+  // doubling what this field stored.
+  const prologueRaw = (closes.length > 0 && sohIdx > 0) ? text.slice(0, sohIdx) : "";
+  const prologue = prologueRaw.replace(/^<<!DOCTYPE[^>\n]*>>\n?\n?/m, "");
   // ETX/EOT closer end: walk to find the last close-sentinel and use the
   // position right after its `>>`. Rather than craft a finicky regex for
   // the closing `>>` (which needs to skip past the embedded `;` and any
@@ -935,9 +940,10 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // carrier that never carried a declaration would otherwise never gain one — the projection would
   // mint SOH through EOT and leave the one line that selects the grammar to chance.
   //
-  // `prologue` wins where it stands: a carrier that already opens on a declaration re-emits its own
-  // bytes verbatim, so minting fills an ABSENCE and never overwrites an author.
-  if (!/^<<!DOCTYPE\b/m.test(str("prologue"))) out += `${DECLARATION}\n\n`;
+  // MINTED UNCONDITIONALLY. The frame owns this line, so the parse no longer stores a copy of it and
+  // nothing here has to check whether one stands — a suppression check and the field it guarded, gone
+  // together. What the author wrote ABOVE the declaration still rides in `prologue` and emits first.
+  out += `${DECLARATION}\n\n`;
   out += `<<^ code:"${sohCode}"${ns ? ` namespace:"${ns}"` : ""} ? -> ${memeUri} >>\n`;
   out += str("preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
