@@ -33,7 +33,6 @@ import {
   CATALOG_DOC_URI,
   ORACLE_DOC_URI,
   BAG_IDS,
-  legacyIdentityUri,
   identitySlug,
 } from "../src/lar-uris.js";
 
@@ -115,15 +114,11 @@ describe("bag / wiki identity — the two kinds the @catalog tracks", () => {
     expect(bagUri("lares")).not.toBe(wikiUri("lares"));
   });
 
-  test("legacyIdentityUri mints the pre-split form a prior store still carries", () => {
-    expect(legacyIdentityUri("lares")).toBe("lar:///ha.ka.ba/@lares");
-    expect(legacyIdentityUri("@lares")).toBe("lar:///ha.ka.ba/@lares");
-  });
 
   test("identitySlug reads the slug from all three forms", () => {
     expect(identitySlug(bagUri("sdm"))).toBe("sdm");
     expect(identitySlug(wikiUri("sdm"))).toBe("sdm");
-    expect(identitySlug(legacyIdentityUri("sdm"))).toBe("sdm");
+    expect(identitySlug("lar:///ha.ka.ba/@sdm")).toBe("sdm");   // a store written before the rule settled
   });
 
   test("identitySlug returns null for a nested path — a bare identity carries none", () => {

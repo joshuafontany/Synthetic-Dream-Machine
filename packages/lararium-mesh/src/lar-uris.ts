@@ -190,14 +190,11 @@ export function cidFromUri(uri: string): string | null {
   return hash.length > 0 ? hash : null;
 }
 
-/** Mint the bare `lar:///ha.ka.ba/bags/@{slug}` form — a reader tries the canonical `bags/@`
- *  form first, then falls back here to resolve a store that carries the un-prefixed shape. */
-export function legacyIdentityUri(slug: string): string {
-  return stableLarUri(`@${slug.replace(/^@/, "")}`);
-}
-
-/** Read the identity slug off a bag/wiki URI in ANY of the three forms (`bags/@x`,
- *  `wikis/@x`, legacy `@x`); return null when the URI names no bare identity. */
+/** Read the identity slug off a bag or wiki URI (`bags/@x`, `wikis/@x`); null when the URI names none.
+ *
+ *  The pattern still ACCEPTS a root-level `@x`, which nothing mints: `@` opens a bag DIRECTORY name and so
+ *  always follows a `bags/` or `wikis/` segment. The tolerance costs a reader nothing and lets a store written
+ *  before that rule settled still answer; it grants no way to write one. */
 export function identitySlug(uri: string): string | null {
   const m = /^lar:\/\/\/ha\.ka\.ba\/(?:bags\/|wikis\/)?@([^/]+)$/.exec(uri);
   return m ? m[1]! : null;
@@ -425,7 +422,7 @@ export function emptySessionsDoc(): SessionsDoc     { return emptyLarDoc(); }
 //   MeshCabal    — operators participating in one Nexus (PersonaGroup → MeshCabal)
 
 /** Sentinel URI for a vessel's PersonaGroup membership document. */
-export const PERSONA_GROUP_SENTINEL_URI = stableLarUri("@operator/persona-group");
+export const PERSONA_GROUP_SENTINEL_URI = stableLarUri("sentinel/persona-group");
 /**
  * Sentinel URI for a Nexus's MeshCabal membership document — the body of KAHU, the kuleana-bearing tenders
  * of one nexus-mesh, each seated as a PersonaGroup.
@@ -435,7 +432,7 @@ export const PERSONA_GROUP_SENTINEL_URI = stableLarUri("@operator/persona-group"
  * carry. `admin` named this slot while the design still spoke web2, and imported an authority the seat never
  * held — the exact blur that word carries wherever it lands.
  */
-export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/kahu-cabal");
+export const MESH_CABAL_SENTINEL_URI   = stableLarUri("sentinel/kahu-cabal");
 
 // PersonaGroup-identity sentinel tiddlers re-home to the @persona namespace — they name
 // the operator's veiled identity (the PersonaGroup), the membership-sync surface. MeshCabal
