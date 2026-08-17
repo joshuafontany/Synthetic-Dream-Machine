@@ -71,8 +71,8 @@ table play.
 * ''Routes'' — the pointcrawl legs (roads, rivers, ley-lines, void-lanes). On-route travel
   runs the destination procedure at week scale, no hex navigation — the UVG system stated
   plainly.
-* ''Grounds'' — the ambient field between: the Area's Tags + Arcane + Tech, read off the
-  Realm worksheet. Off-route, the Ground activates.
+* ''Ambient'' — the field between (SDM-06's own word: the world's breathing): the Area's
+  Tags + Arcane + Tech, read off the Realm worksheet. Off-route, the Ambient activates.
 
 <<~/ahu >>
 
@@ -83,7 +83,7 @@ table play.
 ''On-route:'' skip straight to the destination procedure (week scale, supplies, misfortune,
 encounters, arrival — Quickstart `01:1723`).
 
-''Off-route, the Ground activates'' — watch-scale crawl: declare direction and method ->
+''Off-route, the Ambient activates'' — watch-scale crawl: declare direction and method ->
 spend one watch and resources -> navigate (a miss drifts the party one hex and clouds the
 map) -> read the hex's horizon line; working the hex opens the hidden handle -> encounter
 check per the FTLS-04 Encounter Roll under its ''Attention'' bands (never a flat 1-in-6),
@@ -130,6 +130,6 @@ grain, blessed before moving:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:b6e86944f99c8dff
+<<^ code:"&#x0003;" >>:a874b9042c6334fb
 
 <<^ code:"&#x0004;" -> ? >>
