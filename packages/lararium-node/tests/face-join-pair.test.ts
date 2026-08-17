@@ -260,3 +260,49 @@ describe("face-join — the granting half, proven end to end", () => {
     expect(again.grant.capEvents.length).toBeGreaterThan(0);   // still recovers its material
   }, 60_000);
 });
+
+describe("the hearth's door — kept where a joinee always reads it", () => {
+  test("an applied admit lands the door on the joinee's OWN @daemon, and returns it", async () => {
+    const { Repo } = await import("@automerge/automerge-repo");
+    const { runApplyAdmitPayload } = await import("@lararium/keyhive");
+    const { HEARTH_DAEMON_URL_TIDDLER } = await import("@lararium/mesh");
+
+    const HEARTH_DOOR = "automerge:2fakeHearthDoorUrl000000000";
+    const joinee = await makeVessel(72);
+    const edge = await buildDeviceDelegation({
+      personaRootSeed: ROOT_SEED, deviceVerifyingKey: await rawKeyOf(joinee), hearthTrueName: HEARTH,
+      issuedAt: "2026-08-16T11:00:00.000Z", expiresAt: "2026-09-16T11:00:00.000Z", boundEpoch: 0,
+    });
+    const repo = new Repo({});
+    const applied = await runApplyAdmitPayload({
+      repo,
+      vesselSeed:         new Uint8Array(32).fill(71),
+      vesselVerifyingKey: await rawKeyOf(joinee),
+      vesselDisplayName:  "a joining leaf",
+      nexusPubkey:        "8".repeat(64),
+      payload: {
+        kind: "device-admit/v1",
+        signerDid:              edge.personaRootDid,
+        personaKelPrefix:       "persona-probe",
+        deviceEdge:             edge,
+        hearthTrueName:         HEARTH,
+        personaGroupDocIdHex:   "ab".repeat(16),
+        personaGroupAgentIdHex: "cd".repeat(16),
+        meshCabalDocIdHex:      "ef".repeat(16),
+        syncUrl:                null,
+        hearthDaemonUrl:        HEARTH_DOOR,
+      },
+    });
+
+    // The RESULT carries it into this boot's bootstrap …
+    expect(applied.hearthDaemonUrl).toBe(HEARTH_DOOR);
+
+    // … and the joinee's OWN @daemon keeps it for every boot after, the payload long since spent.
+    const { DocHandle } = await import("@automerge/automerge-repo");
+    void DocHandle;
+    const daemon = await repo.find(applied.daemonUrl as never);
+    const held = (daemon.doc() as { tiddlers?: Record<string, { tiddler?: { text?: string } }> })
+      ?.tiddlers?.[HEARTH_DAEMON_URL_TIDDLER]?.tiddler?.text;
+    expect(held).toBe(HEARTH_DOOR);
+  }, 60_000);
+});
