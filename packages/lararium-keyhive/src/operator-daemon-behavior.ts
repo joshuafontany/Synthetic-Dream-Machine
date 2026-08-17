@@ -105,12 +105,16 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // resolveOrMintBinding sequence). Shared by CREATE and wiki init — a mint
       // that only writes a catalog entry leaves the bag cap-denied until restart.
       // `kh` binds late — booted before dispatch.
+      // The access this vessel grants its OWN face over every bag it mints. The mint and the join's re-grant
+      // read this one name, so a re-grant can never hand the group more than the mint did — the two cannot
+      // drift into a silent promotion, because there is nothing for them to drift apart FROM.
+      const FACE_BAG_ACCESS = "admin" as const;
       const registerBagCap = async (bagUrl: string): Promise<void> => {
         if (!kh) throw new Error("mint: keyhive unbooted — cannot register the new bag's cap");
         // bagUrl = the lar: bag URL — the key registerBag/delegate/verify all share,
         // the same string boot-registration registers (never the automerge doc url).
         await kh.registerBag(bagUrl);
-        await kh.delegate({ bagUrl, audience: faceAgent(), access: "admin" });
+        await kh.delegate({ bagUrl, audience: faceAgent(), access: FACE_BAG_ACCESS });
       };
       registerActionReactors(registry, {
         composite: ctx.composite,
@@ -252,9 +256,9 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
             now:                    Date.now(),
             // The bags this vessel ALREADY delegated to its own face, re-granted so a fresh seat reaches them.
             // Naming only what we granted, at the access we granted, widens nobody's reach — it refreshes the
-            // epoch on grants that already stand. `registerBags` IS that set: every one of them passed through
-            // `registerBagCap`, which delegates admin to this same audience.
-            regrant: daemonAuth.registerBags.map((bagUrl) => ({ bagUrl, access: "admin" as const })),
+            // epoch on grants that already stand. `registerBags` IS that set, and `FACE_BAG_ACCESS` IS the
+            // access every one of them carries, because the mint above reads the same name.
+            regrant: daemonAuth.registerBags.map((bagUrl) => ({ bagUrl, access: FACE_BAG_ACCESS })),
           });
           // A refusal RETURNS — an unlicensed summons names an absent contract, never an attack, and the
           // reason rides the outcome so the joinee's panel can paint why rather than showing a silence.
