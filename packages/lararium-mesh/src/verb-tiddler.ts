@@ -76,12 +76,12 @@ export const VERB_RESULT_KEY = "summary" as const;
 export const TASK_KIND    = "task"    as const;
 export const RECEIPT_KIND = "receipt" as const;
 
-/** `lar:///ha.ka.ba/@<bag>/task/<cid>` — a content-addressed task (invocation) fact. */
+/** `lar:///ha.ka.ba/bags/@<bag>/task/<cid>` — a content-addressed task (invocation) fact. */
 export function taskUri(bagUri: string, contentId: string): string {
   return `${bagUri}/${TASK_KIND}/${contentId}`;
 }
 
-/** `lar:///ha.ka.ba/@<bag>/receipt/<task-cid>` — the receipt keyed by the task it answers (UCAN `ran`). */
+/** `lar:///ha.ka.ba/bags/@<bag>/receipt/<task-cid>` — the receipt keyed by the task it answers (UCAN `ran`). */
 export function receiptUri(bagUri: string, taskContentId: string): string {
   return `${bagUri}/${RECEIPT_KIND}/${taskContentId}`;
 }

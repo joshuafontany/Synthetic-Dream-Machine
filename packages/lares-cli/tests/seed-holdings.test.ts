@@ -3,7 +3,7 @@
  *
  * The map DISCOVERS every `@*` dir under `<root>/bags/`, never hardcodes: files,
  * non-@ dirs, and a missing bags/ all stay out; order sorts stable; each holding
- * carries its disk source + its `lar:///ha.ka.ba/@…` bag address.
+ * carries its disk source + its `lar:///ha.ka.ba/bags/@…` bag address.
  */
 
 import { describe, test, expect, beforeEach, afterEach } from "vitest";

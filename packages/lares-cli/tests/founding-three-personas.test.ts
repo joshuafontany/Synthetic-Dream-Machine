@@ -21,10 +21,11 @@
  *   · a persona that declares a Handle but does NOT stand for a seat stays UNSEATED — standing is its own act.
  */
 import { afterEach, beforeEach, describe, test, expect, vi } from "vitest";
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, cpSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { cmdPersona } from "../src/commands/persona.js";
+import { cmdVessel } from "../src/commands/vessel.js";
 import { cmdNexus } from "../src/commands/nexus.js";
 import type { ParsedArgs } from "../src/parse-args.js";
 import { larSealHome, larDataDir } from "../src/env.js";
@@ -51,12 +52,19 @@ const nexusArgs = (positional: string[], options: Record<string, string> = {}): 
 
 describe("the three symmetric founding commands (CLI, real vault + disk)", () => {
   let root: string;
-  beforeEach(() => {
+  beforeEach(async () => {
     root = mkdtempSync(join(tmpdir(), "lares-founding3-"));
     setEnv("LAR_ROOT", root);                       // isolates bags + vault-state + petname store under one tree
     setEnv("LARES_ARCHIVE_PASSPHRASE", undefined);
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "error").mockImplementation(() => {});
+    // An isolated root carries no hearth true-name until the tracked genesis seed rides into it — the engine
+    // CID a founding binds the place TO lives there, and `vessel found` refuses without one.
+    cpSync(join(import.meta.dirname, "..", "..", "..", "genesis"), join(root, "genesis"), { recursive: true });
+    // THE PLACE STANDS FIRST. A founding splits in two: `vessel found` stands the PLACE (a faceless hearth
+    // that carries and serves), and `persona new 0` lights the FIRST FACE on it. A face has nowhere to stand
+    // without a place, and says so, so every one of these commands begins from a founded hearth.
+    expect(await cmdVessel({ command: "vessel", positional: ["found"], options: {}, flags: { json: true } })).toBe(0);
   });
   afterEach(() => {
     vi.restoreAllMocks();

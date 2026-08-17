@@ -13,7 +13,7 @@
  *   - Effect-record annotations (tiddler tags, archival profession derivation) — audit
  *
  * Effect-record URI shape (a bag's indelible residency ledger):
- *   lar:///ha.ka.ba/@<bag>/ledger/residency/<event-id>
+ *   lar:///ha.ka.ba/bags/@<bag>/ledger/residency/<event-id>
  *
  * Each effect record carries a `tags` field including `LARES_EFFECT_RECORD_TAG`,
  * an `archival-verb` field with one of ARCHIVAL_VERBS, and the linking fields
@@ -65,12 +65,12 @@ export const LARES_EFFECT_RECORD_TAG = stableTagUri("lares-effect-record");
 
 // ── URI shape ───────────────────────────────────────────────────────────────
 
-/** `lar:///ha.ka.ba/@<bag>/ledger/residency/` — residency-ledger prefix for one bag. */
+/** `lar:///ha.ka.ba/bags/@<bag>/ledger/residency/` — residency-ledger prefix for one bag. */
 export function effectLedgerPrefix(bagUri: string): string {
   return `${bagUri}/ledger/residency/`;
 }
 
-/** `lar:///ha.ka.ba/@<bag>/ledger/residency/<event-id>` — one effect-record tiddler. */
+/** `lar:///ha.ka.ba/bags/@<bag>/ledger/residency/<event-id>` — one effect-record tiddler. */
 export function effectRecordUri(bagUri: string, eventId: string): string {
   return `${effectLedgerPrefix(bagUri)}${eventId}`;
 }

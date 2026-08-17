@@ -56,7 +56,7 @@ describe("uds-channel — carriers bypass the @daemon doc (co-located routing)",
     const dir = mkdtempSync(join(tmpdir(), "uds-routing-"));
     const socketPath = join(dir, "lares.sock");
 
-    const CARRIER_URI = "lar:///ha.ka.ba/@target/doc/manifesto";
+    const CARRIER_URI = "lar:///ha.ka.ba/bags/@target/doc/manifesto";
     const CARRIER_BODY = "THE-WHOLE-CARRIER-BODY-that-must-never-touch-@daemon";
     const placed: Placed[] = [];
 

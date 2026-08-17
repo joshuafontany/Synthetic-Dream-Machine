@@ -5,7 +5,7 @@
  * kind of 5-point ladders the Law of Fives carries (aperture · ladder · scope ·
  * rating · stage). Every ranking reads best-first: index 0 names rank 1.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/v0.1/mu/the-law-of-5s
+ * Meme: lar:///ha.ka.ba/lares/api/pono/the-law-of-5s
  */
 
 import { describe, test, expect } from "vitest";

@@ -306,14 +306,14 @@ describe("★ the classifier REFUSES what the grammar never declared ★", () =>
   test("★ every kind that names NO bag answers undefined, never a bag it never had ★", () => {
     expect(bagOf("lar:///ha.ka.ba/tags/SharktoothSigil")).toBeUndefined();      // a tag
     expect(bagOf("lar:///ha.ka.ba/state/boot-splash/active")).toBeUndefined();  // vessel state
-    expect(bagOf("lar:///ha.ka.ba/@operator/persona-group")).toBeUndefined();   // a membership document
-    expect(bagOf("lar:///ha.ka.ba/@mesh/admin-cabal")).toBeUndefined();         // a membership document
+    expect(bagOf("lar:///ha.ka.ba/sentinel/persona-group")).toBeUndefined();   // a membership document
+    expect(bagOf("lar:///ha.ka.ba/sentinel/kahu-cabal")).toBeUndefined();         // a membership document
     expect(bagOf("lar:///ha.ka.ba/wikis/@notes")).toBeUndefined();              // a wiki identity
     expect(bagOf("lar:///ha.ka.ba/cid/abc123")).toBeUndefined();                // a content body
   });
 
   test("a Herm reads none of those either — the verdict now follows the classifier, not luck", () => {
-    expect(hermCanRead("lar:///ha.ka.ba/@operator/persona-group")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/sentinel/persona-group")).toBe(false);
     expect(hermCanRead("lar:///ha.ka.ba/tags/SharktoothSigil")).toBe(false);
     expect(hermCanRead("lar:///ha.ka.ba/lares/api/pono/persona-circle")).toBe(true);  // a waymark still crosses
   });
