@@ -67,6 +67,15 @@ export interface VesselResult<TPool, TDaemon> {
   activeWikiSource: "boot-arg" | "daemon-marker";
   wikiDocUrl:       string;
   catalogHandleUrl: string;
+  /**
+   * This vessel's OWN @daemon doc — the plane a caller writes a verb SUMMONS onto.
+   *
+   * Every other url here names something a vessel reads; this one names where it ASKS. The composite store
+   * reads and never writes, so a summons rides the repo and this handle: the dispatcher relays it into a
+   * volatile invocation and lands the outcome back on the same plane, which fleet-syncs to the operator's
+   * own devices. Without it a host surface can render a vessel and never call it.
+   */
+  daemonDocUrl:     string;
   oracleDocUrl:     string | null;
   larariumDocUrl:   string | null;
   phase:            LarOpenPhase;

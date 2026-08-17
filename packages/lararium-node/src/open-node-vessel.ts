@@ -293,6 +293,9 @@ const blankMemeStore = (repo: Repo): (() => DocHandle<LarDoc>) =>
 interface NodeBootPrep {
   repo:             Repo;
   catalogHandle:    DocHandle<LarDoc>;
+  /** This vessel's own @daemon doc — the plane a caller writes a verb SUMMONS onto (VesselResult carries it
+   *  out, so a host surface can ask this vessel rather than only render it). */
+  daemonDocUrl:     string;
   /** This PLACE's own 32-byte signing seed — the substrate key, never the human's. The two-key atom keeps it
    *  distinct from the persona root a device-delegation edge signs under (`device-delegation.vesselSeed`). */
   vesselSeed:     Uint8Array;
@@ -1641,6 +1644,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
   return {
     repo, catalogHandle, vesselSeed, nexusPubkey: vesselIdentity.verifyingKey,
+    daemonDocUrl: bootstrap.daemonUrl,
     residency, carriageLoop, carriageRelay, nexusDial, bulb, emit, orchestration,
     openDaemon, wireVerbs, afterDaemon,
     daemonVm:         () => daemonVm,
@@ -1702,6 +1706,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     daemon: p.daemonVm(),
     wikiDocUrl:       result.wikiHandle.url,
     catalogHandleUrl: p.catalogHandle.url,
+    daemonDocUrl:     p.daemonDocUrl,
     oracleDocUrl:     result.assembly.islandHandle.url,
     larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase: "live",

@@ -1065,6 +1065,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     activeWikiSource: "boot-arg",
     wikiDocUrl:       result.wikiHandle.url,
     catalogHandleUrl: catalogHandle.url,
+    daemonDocUrl:     social.daemonUrl,
     oracleDocUrl:     result.assembly.islandHandle.url,
     larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase:            "live",
