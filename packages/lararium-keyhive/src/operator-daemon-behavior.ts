@@ -244,6 +244,20 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
           if (!summons || typeof summons !== "object") {
             throw new Error("[daemon] face-join: no summons in args — carry {contactCard, deviceEdge}.");
           }
+          // A HEARTH NEVER SEATS ITSELF.
+          //
+          // A summons rides @daemon, and @daemon fleet-syncs across the operator's own devices — so every
+          // seated vessel sees it, and every one of them runs this verb over the SAME PersonaGroup under the
+          // SAME root. The joinee's own island would pass its own gate (the edge it presents was signed by the
+          // root its boot pins) and seat itself, while the hearth seats it too: two writers, one group, one
+          // seat, racing to re-key. The joinee is exactly the vessel that must not answer, and it knows itself
+          // by the key it just presented.
+          if (summons.deviceEdge?.deviceVerifyingKey?.toLowerCase() === daemonAuth.vesselVerifyingKey.toLowerCase()) {
+            return {
+              verb: "face-join", admitted: false, self: true,
+              reason: "this vessel IS the joinee — a summons is answered by the hearth that holds the face, never by the device asking to join it.",
+            };
+          }
           // The lease read, off the live @daemon replica: every slot under this group's prefix, folded by max.
           const store = await resolveDaemonStore();
           const prefix = leaseEpochPrefix(faceGroup());

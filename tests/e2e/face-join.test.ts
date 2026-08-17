@@ -13,6 +13,7 @@
  *   V2 — a repeat hands the seat back and moves no epoch (reKeyed false, regranted 0), material still flowing
  *   V3 — force re-keys and re-grants again, for a suspected-but-unrevoked key
  *   V4 — an edge signed by ANOTHER root refuses, with a reason a joinee's panel can paint
+ *   V5 — a hearth refuses to seat ITSELF, so a fleet-synced summons never draws two writers
  *
  * V1's `regranted` assertion is the one that cannot be inferred: membership WITHOUT reach looks identical to a
  * healthy join from every other angle — admitted, re-keyed, events flowing — and only the count says so.
@@ -33,6 +34,18 @@ let dataDir = "";
 let joineeCard = "";
 let joineeKey = "";
 let edge: DeviceDelegationTiddler | null = null;
+
+/** Wait for the daemon's UDS home to appear under this root. The socket lands a beat AFTER the boot phase
+ *  resolves, so a single sample races it — and a raced sample reads as "no socket" rather than "not yet". */
+async function awaitSocketDir(root: string, timeoutMs = 60_000): Promise<string> {
+  const deadline = Date.now() + timeoutMs;
+  for (;;) {
+    const hit = findSocketDir(root);
+    if (hit) return hit;
+    if (Date.now() > deadline) return "";
+    await new Promise((r) => setTimeout(r, 500));
+  }
+}
 
 /** Find the daemon's UDS home under this instance's root — the socket names it, whatever the layout. */
 function findSocketDir(root: string, depth = 5): string | null {
@@ -59,7 +72,7 @@ async function summon(body: Record<string, unknown>): Promise<Record<string, unk
 
 beforeAll(async () => {
   lar = await targetInstance();
-  dataDir = findSocketDir(lar.root) ?? "";
+  dataDir = await awaitSocketDir(lar.root);
 
   // A THROWAWAY vessel stands its own keyhive and offers its own card — the joinee half, never this hearth's.
   const p = new KeyhiveProvider();
@@ -106,6 +119,20 @@ describe("e2e/face-join — the join against a live hearth", () => {
     expect(g["admitted"]).toBe(true);
     expect(g["reKeyed"]).toBe(true);
     expect(g["regranted"] as number).toBeGreaterThan(0);
+  }, 120_000);
+
+  test("V5 — a hearth refuses to seat ITSELF, so one summons never draws two writers", async () => {
+    // A summons rides @daemon, and @daemon fleet-syncs across the operator's own devices — so the joinee's own
+    // island sees it too, runs this same verb over the same group under the same root, and would pass its own
+    // gate. Two writers racing to seat one member and re-key one group. The joinee knows itself by the key it
+    // just presented, and stands down.
+    const ownKey = /gate=([0-9a-f]{64})/.exec(lar.bootLog())?.[1]
+      ?? /this leaf's key: 0x([0-9a-f]{64})/.exec(lar.bootLog())?.[1] ?? "";
+    expect(ownKey).not.toBe("");
+    const selfEdge = { ...(edge as DeviceDelegationTiddler), deviceVerifyingKey: ownKey, deviceDid: `0x${ownKey}` };
+    const g = await summon({ contactCard: joineeCard, deviceEdge: selfEdge });
+    expect(g["admitted"]).toBe(false);
+    expect(g["self"]).toBe(true);
   }, 120_000);
 
   test("V4 — an edge signed by another root refuses, with a reason worth painting", async () => {
