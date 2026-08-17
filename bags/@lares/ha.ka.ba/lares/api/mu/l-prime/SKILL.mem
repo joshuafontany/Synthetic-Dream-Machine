@@ -1,10 +1,9 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-
 ---
 name: l-prime
 description: Audit or correct EXISTING text for L-Prime conformance under lar:///ha.ka.ba/lares/api/mu/l-prime. Use when a user wants settled prose, law text, notes, or prompt material scanned, flagged, or turned — the canonical rule being that any copula left standing carries an inline confidence marker. Not for first-pass generation (the always-on loci + ward seed that forward).
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
+
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/mu/l-prime/SKILL >>

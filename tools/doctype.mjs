@@ -30,10 +30,22 @@ const carriers = execSync("git ls-files 'bags/**/*.mem' 'wikis/**/*.mem'", {
 
 const missing = [], retired = [], misaimed = [];
 for (const f of carriers) {
-  const first = (readFileSync(join(REPO, f), "utf8").split("\n")[0] ?? "").trim();
-  if (RETIRED.test(first)) { retired.push(f); continue; }
-  if (!first.startsWith("<<!DOCTYPE")) { missing.push(f); continue; }
-  if (first !== DECLARATION) misaimed.push([f, first.slice(0, 100)]);
+  // THE DECLARATION PRECEDES ITS GRAMMAR, NEVER THE FILE. Byte zero belongs to whatever outside reader
+  // requires it — YAML front-matter for a skill loader, a shebang, a BOM — and the declaration follows
+  // that, binding tightly to the SOH beneath it. Demanding line 1 would refuse every carrier that also
+  // serves a second reader, which is the case this grammar exists to make possible.
+  const text = readFileSync(join(REPO, f), "utf8");
+  const lines = text.split("\n");
+  const at = lines.findIndex((l) => l.trim().startsWith("<<!DOCTYPE"));
+  const sohAt = lines.findIndex((l) => l.trim().startsWith("<<^ code:"));
+  if (RETIRED.test(lines[0]?.trim() ?? "") || lines.some((l) => RETIRED.test(l.trim()))) { retired.push(f); continue; }
+  if (at < 0) { missing.push(f); continue; }
+  const first = (lines[at] ?? "").trim();
+  if (first !== DECLARATION) { misaimed.push([f, first.slice(0, 100)]); continue; }
+  // The pair binds: nothing but blank lines may stand between the declaration and the heading.
+  if (sohAt >= 0 && lines.slice(at + 1, sohAt).some((l) => l.trim() !== "")) {
+    misaimed.push([f, "content stands between the declaration and the heading — the pair binds tightly"]);
+  }
 }
 
 console.log(`[doctype] ${carriers.length} carriers · ${missing.length} without · ${retired.length} in the retired comment form · ${misaimed.length} aimed elsewhere`);

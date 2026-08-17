@@ -36,6 +36,11 @@ function body(text, path) {
 }
 
 /** Memetic-wikitext → markdown, by rule. Fenced blocks pass through untouched. */
+// THE BLOCK CHECK IS A CARRIER ARTIFACT, NEVER SEED CONTENT. The carrier carries a check adjacent to
+// ETX because a relay verifies it there; the markdown seed is bytes a harness loads and no relay ever
+// pulls. Comparing them across that difference reads a correct pair as drifted.
+const stripCheck = (t) => t.replace(/(<<\^ code:"&#x0003;" >>)[^\n]*/g, "$1");
+
 function transpose(text) {
   let fenced = false;
   let ordinal = 0;
@@ -107,7 +112,7 @@ if (memFirst !== mdFirst) {
   process.exit(1);
 }
 
-const expected = transpose(body(readFileSync(MEM, "utf8"), MEM)).split("\n");
+const expected = stripCheck(transpose(body(readFileSync(MEM, "utf8"), MEM))).split("\n");
 const actual   = body(readFileSync(MD, "utf8"), MD).split("\n");
 
 const drift = [];

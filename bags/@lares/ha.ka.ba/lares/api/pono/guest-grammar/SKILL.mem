@@ -1,10 +1,9 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-
 ---
 name: guest-grammar
 description: Generate, compress, or audit guest-grammar surfaces under lar:///ha.ka.ba/lares/api/pono/guest-grammar. Keep the parent invariant small, preserve explicit admission, and move parser, lowering, and fixture detail outward.
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
+
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>

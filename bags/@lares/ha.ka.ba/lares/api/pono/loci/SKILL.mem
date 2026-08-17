@@ -1,10 +1,9 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-
 ---
 name: loci
 description: "Perform, audit, or repair a loci routing-and-rating pass under lar:///ha.ka.ba/lares/api/pono/loci. Use this skill for URI intake, derivation algorithm execution, resolution posture commitment, canon-MOVE evaluation, file-path migration, or routing aftermath judgment."
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
+
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/loci/SKILL >>

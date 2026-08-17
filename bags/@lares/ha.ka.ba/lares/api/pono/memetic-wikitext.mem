@@ -614,6 +614,34 @@ carries it to every page; the doubled bracket costs a reader who has seen one ex
 matters here more than anywhere else in the corpus, because the declaration is the FIRST LINE of every
 carrier — the one line a stranger meets before knowing any of this.
 
+!!! The declaration precedes its grammar, never the file
+
+''Byte zero belongs to the outer reader.'' A markup declaration has claimed first position since SGML,
+and it has never claimed it alone: `<?xml … ?>` outranks `<!DOCTYPE>`, a BOM outranks both, and a
+`#!` shebang outranks everything because an operating system says so. Each claimant knows its place and
+none negotiates.
+
+So the declaration's claim reads weaker and truer than "first": ''it MUST precede the grammar it
+declares'', and nothing else. A carrier MAY open on a FOREIGN HEADER — YAML front-matter, a shebang, a
+BOM — where an outside consumer requires one, and the declaration follows it.
+
+<<~moves prologue -> admits/a-foreign-header on/byte-zero if/an-outside-reader-requires-it do/yield-the-slot >>
+
+The order stands fixed:
+
+|!position |!claimant |!required by |
+|0 |BOM |encoding detection |
+|1 |foreign header — YAML front-matter, shebang |the outside consumer that reads this file too |
+|2 |`<<!DOCTYPE … >>` |this grammar |
+|3 |`<<^ code:"&#x0001;" … >>` |this carrier |
+
+''The DOCTYPE and the SOH bind tightly.'' Nothing stands between them. That pair IS the invariant a
+processor enforces; what precedes the pair belongs to whoever else reads the file.
+
+One file then serves two readers. A skill loader reads front-matter at byte zero and stops; this grammar
+skips the foreign header and reads its own declaration below. The alternative — one file per reader,
+maintained by hand — is the twin-drift this corpus already keeps a witness against.
+
 ''The register takes members, not exceptions.'' `!DOCTYPE` stands first; the register admits further
 `!WORD` declarations under the same law — read before content, selecting or constraining the grammar,
 never performing a move the renderer runs. A `!WORD` that acts belongs in the speaking set.
@@ -781,6 +809,19 @@ A labelled ```` ```toml iam ```` fence states identity. Which identity it states
 A processor MUST NOT lift a worksite's fence to the carrier, and MUST NOT bury the carrier's fence in the
 body. Both failures are silent and both are stable: the malformed result parses, renders, and agrees with
 itself on every later pass.
+
+!!! Three zones, not two
+
+A carrier reads in three zones, and the middle one had no name:
+
+# ''The identity heading'' — the labelled `toml iam` fence. What the meme IS.
+# ''The carrier bindings'' — between the heading and STX. `<<~ aka lar:///… >>` binds a reference at
+  carrier level; `<<~ kahea ahu #… >>` mounts a slot. These read as AUTHORED structure, not framing:
+  they state what the carrier holds before its body opens.
+# ''The body'' — between STX and ETX. Optional, and holding prose, ahu slots, both, or nothing.
+
+A processor MUST keep the three apart on projection. Folding the bindings into the body moves an
+authored declaration below a mark that says the text has begun.
 
 !!! Framing is minted, never demanded
 
