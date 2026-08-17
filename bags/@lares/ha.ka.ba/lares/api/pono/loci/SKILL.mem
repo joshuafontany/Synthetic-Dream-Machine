@@ -34,7 +34,6 @@ This skill does not widen, soften, or reinterpret it.
 Loci SKILL opens the procedural stream here.
 <<~/ahu >>
 
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #load-contract >>
 
@@ -225,6 +224,6 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:cf458c9b312d7388
+<<^ code:"&#x0003;" >>:9f62f51c0249e66c
 
 <<^ code:"&#x0004;" -> ? >>
