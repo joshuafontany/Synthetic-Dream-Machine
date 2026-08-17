@@ -52,6 +52,19 @@ const workerScriptUrl = new URL(wikiWorkerUrlStr,  import.meta.url);
 const IDB = "lares:vessel";
 const $ = (id: string): HTMLElement => document.getElementById(id) as HTMLElement;
 
+
+/**
+ * The @oracle read-face this page reads from, when no `?oracle=` names one.
+ *
+ * The page is served BY the vessel it reads, so the host that delivered it is the host that answers — a
+ * literal `localhost` reads true only where the browser and the node share a machine, and silently points a
+ * LAN or a phone at itself. `location.hostname` follows the page home wherever it was fetched from.
+ */
+function defaultReadFace(): string {
+  const host = location.hostname || "localhost";
+  return `${location.protocol}//${host}:8080`;
+}
+
 function row(parent: HTMLElement, k: string, v: string, cls = ""): void {
   const d = document.createElement("div");
   d.className = "row";
@@ -68,7 +81,7 @@ function set(id: string, text: string, cls = ""): void {
 // (it reads a public read-face; it must not be gated behind the local vessel coming up).
 // Config-supplied via ?oracle=…, default the local dev node; elyncia.app → a public one.
 async function readOracle(): Promise<void> {
-  const readFace = new URLSearchParams(location.search).get("oracle") ?? "http://localhost:8080";
+  const readFace = new URLSearchParams(location.search).get("oracle") ?? defaultReadFace();
   set("oracle-status", `reading ${readFace} …`);
   try {
     const r = await pullAndVerifyOracle<{ tiddlers?: Record<string, unknown> }>(readFace);
@@ -296,7 +309,7 @@ async function bootVessel(): Promise<void> {
   } else {
     console.log(
       "[vessel] PURE LOCAL BOOT — no node vessel dialled.\n" +
-      "         To cross:  ?relay=ws://localhost:8080/ws&gate=<node's gate key>",
+      `         To cross:  ?relay=ws://${location.hostname || "localhost"}:8080/ws&gate=<node's gate key>`,
     );
   }
   // ?genesis=<base> → where the static host serves genesis/ (manifest + cas/). Default /genesis.
@@ -310,7 +323,7 @@ async function bootVessel(): Promise<void> {
         coordSeed: location.origin,
         peers: meshParam
           ? meshParam.split(",").map((s) => s.trim()).filter(Boolean)
-          : [new URLSearchParams(location.search).get("oracle") ?? "http://localhost:8080"],
+          : [new URLSearchParams(location.search).get("oracle") ?? defaultReadFace()],
       }
     : undefined;
   try {
