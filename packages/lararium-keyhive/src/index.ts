@@ -121,6 +121,10 @@ export interface DeviceAdmitPayload {
    * onto the HEARTH's @daemon, and this names it. The joinee resolves it the way it resolves `islandDocUrl`
    * and `personaUrl`: over the crossing its device edge already opened.
    *
+   * The route runs both ways already: `browser-crossing` proves a leaf resolving a HEARTH-owned doc by url
+   * and writing to it, with the hearth observing the change over the same crossed socket. Naming the door is
+   * what was missing, never the opening of it.
+   *
    * Absent on older payloads → the joinee holds standing and can ask for nothing; its capability half waits
    * on an operator-carried route.
    */
