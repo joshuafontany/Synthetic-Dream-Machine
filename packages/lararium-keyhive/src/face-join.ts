@@ -199,9 +199,13 @@ export async function runFaceJoin(
   const boundVerdict = await gateFaceJoin({ edge: summons.deviceEdge, ctx, cardIdentifierHex: joineeAgentIdHex });
   if (!boundVerdict.ok) return boundVerdict;
 
-  // Membership lives FOUNDER-side: a joinee that lost its own store is still a member here, and hands back the
-  // events it needs to rebuild — self-healing with no epoch churn. A joinee whose group was re-founded holds no
-  // seat in the NEW sentinel, so the add genuinely runs.
+  // Membership lives FOUNDER-side, so a joinee that lost its own store still reads as seated here and takes the
+  // no-re-key path. That returns its membership, NEVER its keys: keyhive mints fresh prekeys per init, and the
+  // group's already-sealed material stays keyed to the prekeys that vessel held when it was seated. A wiped
+  // store recovers from its ARCHIVE (`keyhive-provider` init: RESTORE-OR-FRESH) and from nothing here — force
+  // re-keys the group and still opens none of it. A seat is not a key.
+  //
+  // A joinee whose group was re-founded holds no seat in the NEW sentinel, so the add genuinely runs.
   const seated = await provider.verifySentinelMembership(joineeAgentIdHex, ctx.personaGroupDocIdHex);
   const mustAdd = summons.force === true || !seated.ok;
   let regranted = 0;

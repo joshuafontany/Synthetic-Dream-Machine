@@ -16,6 +16,9 @@
  *
  * V1's `regranted` assertion is the one that cannot be inferred: membership WITHOUT reach looks identical to a
  * healthy join from every other angle — admitted, re-keyed, events flowing — and only the count says so.
+ *
+ * None of these vectors asserts RECOVERY. A summons returns a seat and public ops, never prekey secrets, so a
+ * vessel that lost its store restores from its archive; the pair test holds that boundary.
  */
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { existsSync, readdirSync, statSync } from "node:fs";
@@ -88,12 +91,14 @@ describe("e2e/face-join — the join against a live hearth", () => {
     expect(g["regranted"] as number).toBeGreaterThan(0);
   }, 120_000);
 
-  test("V2 — a repeat hands the seat back, moves no epoch, and still returns the material", async () => {
+  test("V2 — a repeat hands the seat back and moves no epoch", async () => {
     const g = await summon({ contactCard: joineeCard, deviceEdge: edge });
     expect(g["admitted"]).toBe(true);
     expect(g["reKeyed"]).toBe(false);
     expect(g["regranted"]).toBe(0);
-    expect((g["capEvents"] as string[]).length).toBeGreaterThan(0);   // a wiped store still recovers
+    // Events still flow, and that is membership rather than recovery: a vessel whose store was wiped mints
+    // fresh prekeys and opens none of the group's sealed material from these. Its keel is the archive.
+    expect((g["capEvents"] as string[]).length).toBeGreaterThan(0);
   }, 120_000);
 
   test("V3 — force re-keys a seated device and re-grants again", async () => {

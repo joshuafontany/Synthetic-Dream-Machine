@@ -147,6 +147,82 @@ describe("face-join — the granting half, proven end to end", () => {
     await expect(joinee.decryptContent(BAG, sealedEarly)).rejects.toThrow();
   }, 60_000);
 
+  test("a WIPED joinee recovers from its ARCHIVE — never from a re-summons, forced or not", async () => {
+    // Case 3 of the repeat scenarios: browser storage evicted (Safari's 7-day rule, an OPFS sweep) while the
+    // device key survives in IndexedDB. A seat is NOT enough to heal it, and no summons is either.
+    //
+    // Keyhive mints fresh prekeys on every init, and the group's material stays sealed to the prekeys the
+    // vessel held when it was seated. Re-presenting a card with NEW prekeys does not re-point that material:
+    // the default repeat hands the seat back unchanged, and even `force` — which does re-key — leaves the
+    // already-sealed chunks answering to prekeys this vessel no longer carries. The ARCHIVE holds those
+    // secrets, and restoring from it is the recovery keel (`keyhive-provider` init: RESTORE-OR-FRESH).
+    //
+    // This vector exists because the opposite reads so plausibly. A summons that returns capEvents and a
+    // seat looks like recovery from every angle except the one that matters — whether anything opens.
+    const founder = await makeVessel(17);
+    const joinee  = await makeVessel(118);
+
+    const pg = await founder.createSentinelDoc("lar:///ha.ka.ba/sentinel/pg-wiped");
+    await founder.addSentinelMember(await founder.vesselIdentifierHex(), pg.docIdHex);
+
+    const edge = await buildDeviceDelegation({
+      personaRootSeed: ROOT_SEED, deviceVerifyingKey: await rawKeyOf(joinee), hearthTrueName: HEARTH,
+      issuedAt: "2026-08-16T11:00:00.000Z", expiresAt: "2026-09-16T11:00:00.000Z", boundEpoch: 0,
+    });
+    const ctx: FaceJoinContext = {
+      personaRootDid: edge.personaRootDid, hearthTrueName: HEARTH,
+      personaGroupDocIdHex: pg.docIdHex, personaGroupAgentIdHex: pg.agentIdHex, leaseEpoch: 0, now: NOW,
+    };
+    const cardOf = async (v: KeyhiveProvider) => new TextDecoder().decode(await v.contactCard());
+
+    const first = await runFaceJoin(founder, { kind: "face-join/v1", contactCard: await cardOf(joinee), deviceEdge: edge }, ctx);
+    expect(first.ok).toBe(true);
+    if (!first.ok) return;
+
+    const BAG = "lar:///ha.ka.ba/bags/@catalog/wiped-store";
+    const { docId } = await founder.registerBag(BAG);
+    await founder.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
+    await joinee.receiveContactCard(new TextEncoder().encode(first.grant.founderCard));
+    await joinee.ingestPeerEvents(first.grant.capEvents.map(b64));
+    await joinee.ingestPeerEvents(await founder.eventsForPeer(first.grant.joineeAgentIdHex));
+    joinee.adoptBag(BAG, docId);
+    const sealed = await founder.encryptContent(BAG, new TextEncoder().encode("survives the wipe"));
+    await joinee.ingestPeerEvents(await founder.eventsForPeer(first.grant.joineeAgentIdHex));
+    // The seated vessel opens it — the control, so every refusal below reads as the wipe and nothing else.
+    expect(new TextDecoder().decode(await joinee.decryptContent(BAG, sealed))).toBe("survives the wipe");
+
+    // What a durable vessel keeps: the prekey secrets and its stable card, exported before the loss.
+    const archive = await joinee.exportArchive();
+
+    // THE WIPE — same seed (the device key survived), no archive (the store did not).
+    const wiped = await makeVessel(118);
+    const wipedCard = await cardOf(wiped);
+
+    // The default repeat hands the seat back; nothing re-keys, and nothing opens.
+    const plain = await runFaceJoin(founder, { kind: "face-join/v1", contactCard: wipedCard, deviceEdge: edge }, ctx);
+    expect(plain.ok).toBe(true);
+    if (!plain.ok) return;
+    expect(plain.grant.reKeyed).toBe(false);
+    await wiped.receiveContactCard(new TextEncoder().encode(plain.grant.founderCard));
+    await wiped.ingestPeerEvents(plain.grant.capEvents.map(b64));
+    wiped.adoptBag(BAG, docId);
+    await expect(wiped.decryptContent(BAG, sealed)).rejects.toThrow();
+
+    // FORCE re-keys the group — and STILL nothing opens. A seat is not a key.
+    const forced = await runFaceJoin(founder, { kind: "face-join/v1", contactCard: wipedCard, deviceEdge: edge, force: true }, ctx);
+    expect(forced.ok).toBe(true);
+    if (!forced.ok) return;
+    expect(forced.grant.reKeyed).toBe(true);
+    await wiped.ingestPeerEvents(forced.grant.capEvents.map(b64));
+    await expect(wiped.decryptContent(BAG, sealed)).rejects.toThrow();
+
+    // THE KEEL — restore from the archive, and the same ciphertext opens with no summons at all.
+    const restored = new KeyhiveProvider();
+    await restored.init({ seed: seedOf(118), eventStore: noopStore, archiveBytes: archive });
+    restored.adoptBag(BAG, docId);
+    expect(new TextDecoder().decode(await restored.decryptContent(BAG, sealed))).toBe("survives the wipe");
+  }, 60_000);
+
   test("a repeat summons returns the seat without moving the group epoch", async () => {
     const founder = await makeVessel(13);
     const joinee  = await makeVessel(114);
