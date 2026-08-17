@@ -423,7 +423,7 @@ export class KeyhiveProvider implements CapabilityProvider {
    * Create a sentinel Document used as a membership principal.
    *
    * NOTE: Keyhive's Group primitive is the semantically correct vehicle for
-   * membership cabals (Person-Group, Mesh adminCabal). However, GroupId has a
+   * membership cabals (Person-Group, Mesh kahu-cabal). However, GroupId has a
    * private constructor in alpha.56c — no round-trip from stored bytes. We
    * use Document here because DocumentId has a public constructor, enabling
    * hex-in-tiddler persistence. Migrate to Group when the API exposes

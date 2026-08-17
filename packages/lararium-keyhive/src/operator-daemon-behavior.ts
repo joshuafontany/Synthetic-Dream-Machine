@@ -100,21 +100,29 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       // gated, the `lares act` front door. The daemon reaches a deep target bag by
       // ACCESS (ephemeral mount, released after — no standing system-bag mount; the
       // edit/action split, wiki-layer-ontology#write-law).
-      // A new bag is born WITH its cap: register its Keyhive Document + delegate
-      // admin to the operator's PersonaGroup, in the same act as the mint (the
+      // A new bag is born WITH its cap: register its Keyhive Document + hand the
+      // operator's PersonaGroup the reach below, in the same act as the mint (the
       // resolveOrMintBinding sequence). Shared by CREATE and wiki init — a mint
       // that only writes a catalog entry leaves the bag cap-denied until restart.
       // `kh` binds late — booted before dispatch.
-      // The access this vessel grants its OWN face over every bag it mints. The mint and the join's re-grant
-      // read this one name, so a re-grant can never hand the group more than the mint did — the two cannot
-      // drift into a silent promotion, because there is nothing for them to drift apart FROM.
-      const FACE_BAG_ACCESS = "admin" as const;
+      // THE REACH this vessel hands its OWN face over every bag it mints.
+      //
+      // The string stays keyhive's, because the wire speaks keyhive's vocabulary; the NAME says what the grant
+      // does here. Keyhive's `admin` names one precise power — "the ability to revoke any members of a group,
+      // not just those that they have causal seniority over" — never the web2 administrator its spelling
+      // suggests, and never a tier of person. A face that mints a bag may seat and unseat within it; that is
+      // the whole of what crosses.
+      //
+      // The mint and the join's re-grant read this ONE name, so a re-grant can never hand the group more than
+      // the mint did — the two cannot drift into a silent promotion, because nothing stands for them to drift
+      // apart FROM.
+      const FACE_SEATS_AND_UNSEATS = "admin" as const;
       const registerBagCap = async (bagUrl: string): Promise<void> => {
         if (!kh) throw new Error("mint: keyhive unbooted — cannot register the new bag's cap");
         // bagUrl = the lar: bag URL — the key registerBag/delegate/verify all share,
         // the same string boot-registration registers (never the automerge doc url).
         await kh.registerBag(bagUrl);
-        await kh.delegate({ bagUrl, audience: faceAgent(), access: FACE_BAG_ACCESS });
+        await kh.delegate({ bagUrl, audience: faceAgent(), access: FACE_SEATS_AND_UNSEATS });
       };
       registerActionReactors(registry, {
         composite: ctx.composite,
@@ -256,9 +264,9 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
             now:                    Date.now(),
             // The bags this vessel ALREADY delegated to its own face, re-granted so a fresh seat reaches them.
             // Naming only what we granted, at the access we granted, widens nobody's reach — it refreshes the
-            // epoch on grants that already stand. `registerBags` IS that set, and `FACE_BAG_ACCESS` IS the
+            // epoch on grants that already stand. `registerBags` IS that set, and `FACE_SEATS_AND_UNSEATS` IS the
             // access every one of them carries, because the mint above reads the same name.
-            regrant: daemonAuth.registerBags.map((bagUrl) => ({ bagUrl, access: FACE_BAG_ACCESS })),
+            regrant: daemonAuth.registerBags.map((bagUrl) => ({ bagUrl, access: FACE_SEATS_AND_UNSEATS })),
           });
           // A refusal RETURNS — an unlicensed summons names an absent contract, never an attack, and the
           // reason rides the outcome so the joinee's panel can paint why rather than showing a silence.

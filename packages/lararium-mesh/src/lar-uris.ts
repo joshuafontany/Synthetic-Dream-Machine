@@ -426,8 +426,16 @@ export function emptySessionsDoc(): SessionsDoc     { return emptyLarDoc(); }
 
 /** Sentinel URI for a vessel's PersonaGroup membership document. */
 export const PERSONA_GROUP_SENTINEL_URI = stableLarUri("@operator/persona-group");
-/** Sentinel URI for a Nexus's MeshCabal membership document. */
-export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/admin-cabal");
+/**
+ * Sentinel URI for a Nexus's MeshCabal membership document — the body of KAHU, the kuleana-bearing tenders
+ * of one nexus-mesh, each seated as a PersonaGroup.
+ *
+ * The name says a ROLE, never a rank. A cabal seat carries the tending a Nexus lives by; it confers no tier
+ * above anyone, and the members hold no power over each other that the membership graph does not already
+ * carry. `admin` named this slot while the design still spoke web2, and imported an authority the seat never
+ * held — the exact blur that word carries wherever it lands.
+ */
+export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/kahu-cabal");
 
 // PersonaGroup-identity sentinel tiddlers re-home to the @persona namespace — they name
 // the operator's veiled identity (the PersonaGroup), the membership-sync surface. MeshCabal
