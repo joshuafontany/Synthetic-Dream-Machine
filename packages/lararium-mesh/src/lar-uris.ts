@@ -115,8 +115,8 @@ export function verbArgsFromPayload(payload: Record<string, unknown>): Record<st
   }
 }
 
-/** Build a verb-summon tiddler title: `…/verb/<verb>` — PURE BEARING, no args (they ride
- *  the tiddler's `arg-<name>` fields; #48 retired the args-in-URI smuggling). */
+/** Build a verb-summon tiddler title: `…/verb/<verb>` — PURE BEARING. The address names the verb and
+ *  nothing per-invocation; args ride the tiddler's own `arg-<name>` fields. */
 export function laresVerbUri(verb: string): string {
   return `${LARES_VERB_URI_PREFIX}${verb}`;
 }
@@ -192,9 +192,9 @@ export function cidFromUri(uri: string): string | null {
 
 /** Read the identity slug off a bag or wiki URI (`bags/@x`, `wikis/@x`); null when the URI names none.
  *
- *  The pattern still ACCEPTS a root-level `@x`, which nothing mints: `@` opens a bag DIRECTORY name and so
- *  always follows a `bags/` or `wikis/` segment. The tolerance costs a reader nothing and lets a store written
- *  before that rule settled still answer; it grants no way to write one. */
+ *  `@` opens a bag DIRECTORY name, so a minted identity always carries a `bags/` or `wikis/` segment. The
+ *  pattern reads a root-level `@x` too — a reader costs nothing by answering an address it can resolve, and
+ *  no minter in this stack produces one. */
 export function identitySlug(uri: string): string | null {
   const m = /^lar:\/\/\/ha\.ka\.ba\/(?:bags\/|wikis\/)?@([^/]+)$/.exec(uri);
   return m ? m[1]! : null;
@@ -428,9 +428,9 @@ export const PERSONA_GROUP_SENTINEL_URI = stableLarUri("sentinel/persona-group")
  * of one nexus-mesh, each seated as a PersonaGroup.
  *
  * The name says a ROLE, never a rank. A cabal seat carries the tending a Nexus lives by; it confers no tier
- * above anyone, and the members hold no power over each other that the membership graph does not already
- * carry. `admin` named this slot while the design still spoke web2, and imported an authority the seat never
- * held — the exact blur that word carries wherever it lands.
+ * above anyone, and its holders hold no power over each other that the membership graph does not already
+ * carry. Any name here that reads as an office — administrator, owner, root — would import an authority the
+ * seat does not hold, so the slot names what its holders DO.
  */
 export const MESH_CABAL_SENTINEL_URI   = stableLarUri("sentinel/kahu-cabal");
 

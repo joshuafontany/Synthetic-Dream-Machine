@@ -39,8 +39,8 @@ export interface LarariumVesselResult<
   TRepo = unknown,
   TStore extends LarTiddlerStore = LarTiddlerStore,
 > {
-  /** Optional — the main-thread `LarVessel` wrapper is being retired (the island
-   *  pool is the live surface). Present on platforms that still construct one. */
+  /** Optional. The ISLAND POOL is the live surface; a platform that also constructs a main-thread wrapper
+   *  hands it here, and one that does not simply omits it. Nothing reads this to decide behaviour. */
   vessel?: TVessel;
   pool: TPool;
   repo: TRepo;
@@ -55,8 +55,8 @@ export interface LarariumVesselResult<
  * VesselResult — the ONE shared vessel-open result (no vessel-by-type). Both node and
  * browser return this; only the substrate type-params differ (TPool = the platform island
  * pool, TDaemon = the platform daemon VM). Substrate extras (node's eventBus/stopTick,
- * browser's engineUpdated) extend this — never a fork of the common surface. The retired
- * LarVessel wrapper has no slot here.
+ * browser's engineUpdated) extend this — never a fork of the common surface. The surface names the pool,
+ * the repo, the store and the daemon; no main-thread wrapper occupies a slot.
  */
 export interface VesselResult<TPool, TDaemon> {
   pool:             TPool;

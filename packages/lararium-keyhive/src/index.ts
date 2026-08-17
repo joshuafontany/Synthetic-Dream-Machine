@@ -72,8 +72,9 @@ export type { ForkCabalRealmOpts } from "./fork-realm-ceremony.js";
  */
 export interface DeviceAdmitPayload {
   readonly kind:                   "device-admit/v1";
-  /** The PINNED signer DID — provenance (the founder's persona-KEL inception op-key). The joinee's Binding
-   *  Gate pins `personaKelPrefix` and walks the KEL to the head; the signer-DID is no longer the pin. */
+  /** The PINNED signer DID — PROVENANCE only (the founder's persona-KEL inception op-key). The pin is
+   *  `personaKelPrefix`: the Binding Gate walks that identifier's KEL to its current head and verifies
+   *  against THAT, so a rotated key still binds and a superseded one rejects. */
   readonly signerDid:              string;
   /** The founder's persona-KEL identifier PREFIX (AID) the joinee PINS — the joinee's own device edge chains
    *  to whatever op-key currently heads this identifier (the founder's persona-root, until a Reading-B rotation). */
