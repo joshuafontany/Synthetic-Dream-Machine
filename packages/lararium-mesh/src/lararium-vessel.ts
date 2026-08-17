@@ -70,10 +70,15 @@ export interface VesselResult<TPool, TDaemon> {
   /**
    * This vessel's OWN @daemon doc — the plane a caller writes a verb SUMMONS onto.
    *
-   * Every other url here names something a vessel reads; this one names where it ASKS. The composite store
-   * reads and never writes, so a summons rides the repo and this handle: the dispatcher relays it into a
-   * volatile invocation and lands the outcome back on the same plane, which fleet-syncs to the operator's
-   * own devices. Without it a host surface can render a vessel and never call it.
+   * Every other url here names something a vessel reads; this one names where it is ASKED. The composite
+   * store reads and never writes, so a summons rides the repo and this handle: the dispatcher relays it into
+   * a volatile invocation and lands the outcome back on the same plane. Without it a host surface can render
+   * a vessel and never call it.
+   *
+   * @daemon stays SOVEREIGN-PER-VESSEL — it never fleet-syncs, because it is the PLACE's own control plane
+   * and two places sharing one would stand a global now across the fleet. A caller therefore knocks on the
+   * door of the vessel it means to summon, by that vessel's own url here; @persona is what crosses between
+   * a face's vessels, and @circles what syncs across one operator's devices.
    */
   daemonDocUrl:     string;
   oracleDocUrl:     string | null;

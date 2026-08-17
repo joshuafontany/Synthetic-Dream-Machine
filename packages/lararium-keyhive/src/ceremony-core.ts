@@ -519,6 +519,9 @@ export interface DeviceAdmitEdgeInput {
   syncUrl:                string | null;
   /** Automerge URL of the issuing vessel's genesis island — for peer-sync delivery. */
   islandDocUrl?:          string | null;
+  /** The HEARTH's own @daemon doc — the door the joinee knocks on to ask for its seat (@daemon never
+   *  crosses, so a joinee's own plane reaches nobody). Mirrors islandDocUrl: a founder doc the joinee resolves. */
+  hearthDaemonUrl?:       string | null;
   /** The founder's @persona doc URL — the joinee receives it to SYNC the shared veiled identity
    *  (the membership-sync foundation). Mirrors islandDocUrl: a founder doc the joinee syncs. */
   personaUrl?:            string | null;
@@ -564,6 +567,7 @@ export async function runDeviceAdmitEdge(
     meshCabalDocIdHex:      input.meshCabalDocIdHex,
     syncUrl:                input.syncUrl,
     ...(input.islandDocUrl != null ? { islandDocUrl: input.islandDocUrl } : {}),
+    ...(input.hearthDaemonUrl != null ? { hearthDaemonUrl: input.hearthDaemonUrl } : {}),
     ...(input.personaUrl   != null ? { personaUrl:   input.personaUrl }   : {}),
   };
 }

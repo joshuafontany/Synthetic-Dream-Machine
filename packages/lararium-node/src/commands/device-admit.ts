@@ -41,6 +41,8 @@ export interface DeviceAdmitOptions {
   readonly joineeVerifyingKey: string;
   /** Automerge URL of this vessel's genesis island — included in payload for peer-sync delivery. */
   readonly islandDocUrl?:  string | null;
+  /** This hearth's own @daemon doc — the door the joinee knocks on for its seat. */
+  readonly hearthDaemonUrl?: string | null;
 }
 
 function defaultDirs(): { storageDir: string; genesisDir: string } {
@@ -150,6 +152,9 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
     meshCabalDocIdHex,
     syncUrl:      opts.syncUrl      ?? null,
     islandDocUrl: opts.islandDocUrl ?? null,
+    // THE DOOR. Defaults to this hearth's OWN @daemon, read from the same bootstrap the sentinel ids come
+    // from — a joinee seeds its own plane at admission, so only this url tells it where to knock.
+    hearthDaemonUrl: opts.hearthDaemonUrl ?? daemonUrl,
     personaUrl,
   });
 

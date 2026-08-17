@@ -11,8 +11,10 @@
  * WHY THE @daemon ISLAND OWNS IT. The island already holds the booted provider (`operator-daemon-behavior`
  * delegates every freshly minted bag through it), and the event store admits ONE writer. A second process
  * opening its own provider over the same store would stand a second holder against a single-owner store. So
- * the join rides the verb surface every other act rides: a joinee writes `@daemon/summons/<id>`, the dispatcher
- * relays it into the island, the outcome lands at `@daemon/outcomes/<id>` and syncs back by CRDT.
+ * the join rides the verb surface every other act rides — and rides it toward the HEARTH. @daemon stays
+ * sovereign-per-vessel (a joinee seeds its own at admission), so a summons written to a joinee's own plane
+ * reaches nobody. The joinee writes onto the HEARTH's @daemon, by the url the admit payload names, and the
+ * outcome lands beside it on that same plane for the joinee to read back.
  *
  * WHAT CROSSES, AND WHY IT MAY. The grant carries `eventsForPeer` output — PUBLIC membership + CGKA ops,
  * encrypted to the joinee's own prekey. No prekey secret, no archive and no application key rides here (the

@@ -113,4 +113,16 @@ export interface DeviceAdmitPayload {
    * binary delivery. Absent on payloads from older vessels; treated as null.
    */
   readonly islandDocUrl?:          string | null;
+  /**
+   * The HEARTH's own @daemon doc — the door a joinee knocks on.
+   *
+   * @daemon stays sovereign-per-vessel: this joinee seeds its OWN at admission, so a verb summons written to
+   * its own plane reaches nobody. Asking the hearth to seat it — the keyhive half of the join — means writing
+   * onto the HEARTH's @daemon, and this names it. The joinee resolves it the way it resolves `islandDocUrl`
+   * and `personaUrl`: over the crossing its device edge already opened.
+   *
+   * Absent on older payloads → the joinee holds standing and can ask for nothing; its capability half waits
+   * on an operator-carried route.
+   */
+  readonly hearthDaemonUrl?:       string | null;
 }
