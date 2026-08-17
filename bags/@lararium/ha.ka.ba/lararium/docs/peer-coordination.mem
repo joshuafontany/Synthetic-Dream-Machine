@@ -193,9 +193,6 @@ rendezvous exists; the island file approach is the correct solution.
 with their IDs as a single import payload — relevant for shipping the initial
 island definition bundle to new nodes.
 
-<<^ code:"&#x0003;" >>:560acfa08116fb30
-
-<<^ code:"&#x0004;" -> ? >>
 <<~ ahu #edges >>
 
 !! Edges
@@ -206,3 +203,7 @@ island definition bundle to new nodes.
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/beelay >>
 
 <<~/ahu >>
+
+<<^ code:"&#x0003;" >>:bb78d9a42e6a0b50
+
+<<^ code:"&#x0004;" -> ? >>

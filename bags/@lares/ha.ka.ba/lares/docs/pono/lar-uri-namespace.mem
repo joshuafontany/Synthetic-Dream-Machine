@@ -96,9 +96,6 @@ user-owned content within a domain.
 Hostless URIs never require network access to resolve. Hostful URIs may require
 a network hop for DID resolution but the content itself is local (CRDT store).
 
-<<^ code:"&#x0003;" >>:e0572fa2e543b7c1
-
-<<^ code:"&#x0004;" -> ? >>
 <<~ ahu #edges >>
 
 !! Edges
@@ -108,3 +105,7 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/composite-store >>
 
 <<~/ahu >>
+
+<<^ code:"&#x0003;" >>:cd14c1405965e4e5
+
+<<^ code:"&#x0004;" -> ? >>

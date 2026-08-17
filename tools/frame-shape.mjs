@@ -44,12 +44,13 @@ for (const f of files) {
   // unresolved and target known, then source known and target unresolved. A named parameter would state
   // a PROPERTY; the arrow states a RELATION, and the control-soh scan captures its target as a group.
   // Drop it and the capture returns nothing while every other check here still reads the frame as sound.
-  const soh = /^<<\^[^>\n]*&#x(?:0001|0011);/m.test(t);
-  if (soh && !/^<<\^[^>\n]*&#x(?:0001|0011);[^>\n]*?\?\s*->\s*\S+\s*>>/m.test(t)) {
+  const masked = (re) => [...maskedExecAll(t, re)];
+  const soh = masked(/^<<\^[^>\n]*&#x(?:0001|0011);[^\n]*$/gm).length > 0;
+  if (soh && masked(/^<<\^[^>\n]*&#x(?:0001|0011);[^>\n]*?\?\s*->\s*\S+\s*>>/gm).length === 0) {
     faults.push([f, "SOH carries no `? -> uri` — the heading states no bearing"]);
   }
-  const eot = /^<<\^[^>\n]*&#x(?:0004|0014);/m.test(t);
-  if (eot && !/^<<\^[^>\n]*&#x(?:0004|0014);[^>\n]*?->\s*\?\s*>>/m.test(t)) {
+  const eot = masked(/^<<\^[^>\n]*&#x(?:0004|0014);[^\n]*$/gm).length > 0;
+  if (eot && masked(/^<<\^[^>\n]*&#x(?:0004|0014);[^>\n]*?->\s*\?\s*>>/gm).length === 0) {
     faults.push([f, "EOT carries no `-> ?` — the close resolves a bearing it cannot know"]);
   }
 
@@ -71,9 +72,9 @@ for (const f of files) {
     faults.push([f, "an EOT stands before the text ends — the closes run out of order"]);
   }
 
-  if (/^<<\^[^>\n]*&#x0002;/m.test(t)) {
-    if (!/^<<\^[^>\n]*&#x0003;/m.test(t)) faults.push([f, "opens a body on STX and never closes it on ETX"]);
-    if (!/^<<\^[^>\n]*&#x(?:0004|0014);/m.test(t)) faults.push([f, "closes on ETX and never ends on EOT"]);
+  if (masked(/^<<\^[^>\n]*&#x0002;[^\n]*$/gm).length > 0) {
+    if (masked(/^<<\^[^>\n]*&#x0003;[^\n]*$/gm).length === 0) faults.push([f, "opens a body on STX and never closes it on ETX"]);
+    if (masked(/^<<\^[^>\n]*&#x(?:0004|0014);[^\n]*$/gm).length === 0) faults.push([f, "closes on ETX and never ends on EOT"]);
   }
 }
 
