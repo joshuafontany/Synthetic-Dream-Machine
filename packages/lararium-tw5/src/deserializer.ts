@@ -543,12 +543,13 @@ function extractRootTomlWithPos(text: string) { return findIamFence(text); }
 // file" projection.
 //
 // Convention:
-//   - preamble = operator prose flanking the iam toml, before the first
-//     inner sigil. The iam toml's original position within the preamble
-//     is preserved as a `<<~ iam >>` sentinel marker — operators may
-//     write prose BEFORE iam, AFTER iam, or BOTH; the marker keeps the
-//     bytes recoverable. On emission, the slot template substitutes the
-//     marker with the regenerated iam toml block.
+//   - THE FENCE MUST OPEN ITS HEAD. A labelled iam fence heads the slot it opens; content standing
+//     BEFORE it means the fence heads nothing — it is body, the way a teaching example is. The parent
+//     law (#authoring: the fence that OPENS a carrier heads it) reaches every slot the same way.
+//
+//     Post-iam content in the head STANDS — that is the bindings zone, authored, and it re-emits
+//     between the iam and the body. Pre-iam content does not, and `preamble` retires with it: a zone
+//     that names a shape the grammar forbids holds bytes nothing should have written.
 //   - fields    = parsed from the iam toml block (operator-authored keys).
 //   - text      = body proper — from the first inner kahea ref to the last
 //     inner kahea ref end (inclusive of refs for sub-slot reconstruction).
@@ -577,7 +578,12 @@ function extractSlotStructure(
   // it into fields mutated content on round-trip (key reorder, re-alignment,
   // the fence relabeled `toml iam`). Carrier-whole law: content bytes survive
   // whole.
-  const iamM = findIamFence(bodyText, false);
+  // A fence preceded by content heads nothing. Whitespace does not count as content — a blank line
+  // between the ahu sigil and the fence is spacing, not prose.
+  const iamCandidate = findIamFence(bodyText, false);
+  const iamM = iamCandidate && bodyText.slice(0, iamCandidate.start).trim() === ""
+    ? iamCandidate
+    : null;
 
   let preamble = "";
   let fields: TiddlerFields = {};
@@ -750,7 +756,7 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 const IAM_DENY: ReadonlySet<string> = new Set([
   // envelope + record stratum — reconstructed on recompose, never authored TOML
   "title", "text", "modified", "revision",
-  "slot", "fragment-parent", "preamble", "postamble", "prologue",
+  "slot", "fragment-parent", "postamble", "prologue",
   "header-text", "ahu-parent", "ahu-slot", "carrier-soh",
   // transient parse-grade diagnostics — stamped on ingest, denied by exact name
   "lar_parse_failures", "lar_parse_degraded",
