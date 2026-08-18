@@ -13,9 +13,10 @@
  *           temp slot syncs to no bag, cross-device or peer. The ONE federated surface stays the glamour a
  *           human deliberately publishes, never this panel.
  *
- * INPUT LAW (projection round-trip): the return leg relays CLICKS ONLY. So the UNFOLLOW button carries the
- * row's OWN nym (known at render time); FOLLOWING a NEW nym (which needs a nym + a self-certifying card, not a
- * typed field) rides the `lares circle` CLI or an off-surface affordance, never a projected text input.
+ * WHAT THIS PANEL ACCEPTS. The UNFOLLOW button carries the row's own nym, known at render time. FOLLOWING a
+ * new nym takes more than a string — a nym AND a self-certifying card — so it rides the `lares circle` door
+ * or another off-surface affordance. The projection carries typed text; a follow simply needs material a
+ * text field cannot supply.
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/daemon-circle-tiddlers
  */

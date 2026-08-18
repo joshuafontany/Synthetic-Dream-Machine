@@ -16,10 +16,11 @@
  *           fleet — but through the pet-name store's own private bag, never through a rendered
  *           projection, which carries no way to tell a fleet peer from a stranger.
  *
- * INPUT LAW (projection round-trip): the @daemon renders by projection and the return leg
- * relays CLICKS ONLY (numeric/boolean event fields) — never typed text. So a row's WEAR
- * button carries the row's OWN index (known at render time), while MINT carries no typed
- * name: the vessel-side mint sets a DEFAULT private label the human renames off-surface.
+ * WHAT THIS PANEL ACCEPTS. The projection round-trip carries BOTH legs — clicks and typed text — so the
+ * shape here says what a persona panel should take, never what the transport allows. A row's WEAR button
+ * carries that row's own index, known at render time. MINT carries no name, because a pet-name is PRIVATE
+ * and a value typed into a projected field crosses a render surface with no way to tell a fleet peer from
+ * a stranger; the mint sets a default label and the human renames it through the pet-name store's own bag.
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/daemon-persona-tiddlers
  */

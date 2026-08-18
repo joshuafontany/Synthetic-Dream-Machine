@@ -24,10 +24,9 @@ import { HULLS_TS_ONLY } from "@lararium/mesh";
 // frames ride onProjection to the boot; the boot's active-surface gate decides whether they paint #projection.
 runBrowserSovereignWorker((manifest) =>
   makeOperatorDaemonBehavior(manifest, {
-    // THE ISOMORPHIC SEED LIFT: the @daemon protocol seed (Ui+Persona+Circle+Flow) no longer lives here —
-    // makeDaemonBehavior runs the ONE cap-gated seedDaemonProtocol in onEa, so both boots seed from one
-    // site (the two-site wart + the node-onBoot asymmetry this file once flagged are gone). This ts-only
-    // browser vessel passes HULLS_TS_ONLY → it seeds crystal alone. onBoot drops to the projection mount.
+    // ONE SEED SITE: `makeDaemonBehavior` runs the cap-gated `seedDaemonProtocol` in onEa, so the @daemon
+    // protocol seed (Ui+Persona+Circle+Flow) stands identically on either boot. This ts-only browser vessel
+    // passes HULLS_TS_ONLY → it seeds crystal alone, and its onBoot carries the projection mount.
     onBoot: (ctx) => mountProjection(ctx),
     runnableHulls: HULLS_TS_ONLY,
   }));

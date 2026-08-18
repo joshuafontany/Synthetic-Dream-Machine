@@ -878,9 +878,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // persona-mint — mint a new persona-root at the NEXT index and set its DEFAULT private
       // pet-name (PRIVATE-all — the label never PUBLICLY federates; only a publicly announced Handle
       // binds a persona to a glamour, and that stays a SEPARATE explicit act, never auto-fired here).
-      // The projection round-trip relays clicks,
-      // never typed text, so the mint names the face for the human (renamed off-surface); a
-      // typed rename is not a projected affordance. Next index = max(held) + 1, or 0 when the
+      // The mint names the face for the human, who renames it through the pet-name store's own private
+      // bag: a label typed into a projected field would travel a render surface with no way to tell a fleet
+      // peer from a stranger, and the label is PRIVATE. Next index = max(held) + 1, or 0 when the
       // vessel holds no root (a joinee founding its first face).
       registry.register("persona-mint", async () => {
         const roster = await listBrowserPersonaRoots(idbName);
