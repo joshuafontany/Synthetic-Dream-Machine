@@ -15,7 +15,8 @@
  *   V4 — with a face, the persona verbs return
  */
 import { describe, test, expect } from "vitest";
-import { makeOperatorDaemonBehavior } from "@lararium/keyhive/operator-daemon-behavior";
+import { operatorDaemonOptions } from "@lararium/keyhive/operator-daemon-behavior";
+import { VerbTable } from "@lararium/tw5";
 
 /** A recording registry — the surface `wireWorkerVerbs` writes into. */
 function fakeRegistry() {
@@ -42,28 +43,21 @@ const manifest = (face: boolean) => ({
 }) as never;
 
 /**
- * THE SEAM THESE VECTORS WAIT ON.
- *
- * `wireWorkerVerbs` is handed to `makeDaemonBehavior` and called deep inside its `onEa`, over a real
- * VerbTable and a live IslandContext — so nothing can reach the wiring pass without standing a whole daemon.
- * That absence is why a faceless place could throw at wire time with 1,900 tests green: the one pass that
- * decides WHICH verbs a vessel offers has no door of its own.
- *
- * The pono shape: `makeOperatorDaemonBehavior` names its wiring as an exported function over
- * (daemonAuth, deps) that both the behavior and a test can call. Until it does, this helper asserts it
- * reached the pass at all — a registry that stays empty means the vectors below proved nothing, and must
- * say so rather than pass by absence.
+ * These call the wiring pass DIRECTLY. It decides which verbs a vessel offers, and it used to have no door of
+ * its own — handed to `makeDaemonBehavior` and invoked inside its onEa over a live VerbTable, so nothing could
+ * read it without standing a whole daemon. That absence is how a faceless throw hid behind a green suite.
  */
 const wire = (face: boolean) => {
-  const reg = fakeRegistry();
-  const behavior = makeOperatorDaemonBehavior(manifest(face)) as unknown as {
-    wireWorkerVerbs?: (r: unknown, c: unknown) => void;
+  const registry = new VerbTable();
+  const names: string[] = [];
+  const realRegister = registry.register.bind(registry);
+  (registry as unknown as { register: (n: string, f: unknown) => void }).register = (n, f) => {
+    names.push(n); realRegister(n, f as never);
   };
-  behavior.wireWorkerVerbs?.(reg, fakeCtx());
-  // A vacuous green is worse than a red: if the pass never ran, every assertion below reads as "absent"
-  // and passes for the wrong reason.
-  expect(reg.names.length, "the wiring pass never ran — these vectors need a seam onto it").toBeGreaterThan(0);
-  return reg.names;
+  operatorDaemonOptions(manifest(face)).wireWorkerVerbs?.(registry, fakeCtx());
+  // A vacuous green is worse than a red: a pass that never ran leaves every assertion below true by absence.
+  expect(names.length, "the wiring pass never ran").toBeGreaterThan(0);
+  return names;
 };
 
 describe("a faceless place stands", () => {

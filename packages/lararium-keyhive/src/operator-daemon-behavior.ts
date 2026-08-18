@@ -61,11 +61,11 @@ import type { KeyhiveProvider } from "./keyhive-provider.js";
  * material, falls back to the verifier-less behavior (delegated-verb path only);
  * daemon manifests always carry daemonAuth, so that path guards tests.
  */
-export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: DaemonExtra = {}): IslandBehavior {
+export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: DaemonExtra = {}): DaemonBehaviorOptions {
   // persistArchive + vault ride node-only; keep them OUT of the makeDaemonBehavior spread (not DaemonBehaviorOptions).
   const { persistArchive, vault, ...daemonExtra } = extra;
   const daemonAuth = manifest.daemonAuth;
-  if (!daemonAuth) return makeDaemonBehavior({ ...daemonExtra });
+  if (!daemonAuth) return { ...daemonExtra };
 
   let kh: KeyhiveProvider | null = null;
   let mintedByHex = daemonAuth.vesselVerifyingKey;
@@ -85,7 +85,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
     return id;
   };
 
-  return makeDaemonBehavior({
+  return {
     ...daemonExtra, // the vessel-injected telemetry capture SINK flows through (idempotent cap → live)
     // Sovereign-worker data-plane: register the read-only reactors in-worker over the
     // IslandContext composite (verify-then-delegate gate inherited); the residency
@@ -194,16 +194,25 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         // The plane is reached by the name its own PersonaGroup derives — the same string the registry
         // entry, the composite layer and the capability ring use. `daemonAuth` already carries the group's
         // doc id, so the resolution happens here rather than travelling as a second parameter.
-        const personaBagId = personaBagIdFor(faceGroup());
-        const resolvePersonaStore = async () => {
-          const store = await oraclePlane.storeOf(personaBagId);
-          if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — the @oracle registry names no ${personaBagId}`);
-          return store;
-        };
-        const selvesReactors = makePersonaSelvesReactors({ resolveStore: resolvePersonaStore });
-        registry.register("persona-label",  selvesReactors.label);
-        registry.register("persona-handle", selvesReactors.handle);
-        registry.register("persona-selves", selvesReactors.selves);
+        // A FACELESS PLACE OFFERS NO PERSONA VERBS.
+        //
+        // A founding stands a PLACE first — carrying, serving the public shelf — and lights a FACE after. In
+        // that window `faceGroup()` names nothing, and reaching for it HERE would throw during the wiring pass
+        // itself, taking the whole boot with it. So these register only where they can act, the gate the vault
+        // verbs already keep: absent the thing they need, they never register at all. A caller then meets an
+        // unknown verb rather than a verb that throws, which is the honest answer to "this place holds no face".
+        if (daemonAuth.personaGroupDocIdHex) {
+          const personaBagId = personaBagIdFor(faceGroup());
+          const resolvePersonaStore = async () => {
+            const store = await oraclePlane.storeOf(personaBagId);
+            if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — the @oracle registry names no ${personaBagId}`);
+            return store;
+          };
+          const selvesReactors = makePersonaSelvesReactors({ resolveStore: resolvePersonaStore });
+          registry.register("persona-label",  selvesReactors.label);
+          registry.register("persona-handle", selvesReactors.handle);
+          registry.register("persona-selves", selvesReactors.selves);
+        }
 
         // The CABAL-REALM verbs over @daemon, where the per-writer lease slots live. `realm-feed` rolls THIS
         // writer's own slot — the offering a realm lives by; `realm-clock` reads every slot back and reports
@@ -231,63 +240,66 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
         // max-register — monotone, read locally, no shared now — and a grant bound below that reads stale.
         // Rolling those slots re-admits the WHOLE fleet (the epoch leases, it never revokes one device;
         // a single device leaves by `revokeSentinelMember`).
-        registry.register("face-join", async (args) => {
-          if (!kh) throw new Error("[daemon] face-join: keyhive unbooted");
-          const ownEdge = daemonAuth.deviceEdge;
-          if (!ownEdge) {
-            throw new Error(
-              "[daemon] face-join: this vessel carries no device edge of its own, so it can name no root to " +
-              "verify a joinee against — light a face with `lares persona new 0 --name '<label>'`.",
-            );
-          }
-          const summons = args["summons"] as FaceJoinSummons | undefined;
-          if (!summons || typeof summons !== "object") {
-            throw new Error("[daemon] face-join: no summons in args — carry {contactCard, deviceEdge}.");
-          }
-          // A HEARTH NEVER SEATS ITSELF.
-          //
-          // A summons rides @daemon, and @daemon fleet-syncs across the operator's own devices — so every
-          // seated vessel sees it, and every one of them runs this verb over the SAME PersonaGroup under the
-          // SAME root. The joinee's own island would pass its own gate (the edge it presents was signed by the
-          // root its boot pins) and seat itself, while the hearth seats it too: two writers, one group, one
-          // seat, racing to re-key. The joinee is exactly the vessel that must not answer, and it knows itself
-          // by the key it just presented.
-          if (summons.deviceEdge?.deviceVerifyingKey?.toLowerCase() === daemonAuth.vesselVerifyingKey.toLowerCase()) {
-            return {
-              verb: "face-join", admitted: false, self: true,
-              reason: "this vessel IS the joinee — a summons is answered by the hearth that holds the face, never by the device asking to join it.",
-            };
-          }
-          // The lease read, off the live @daemon replica: every slot under this group's prefix, folded by max.
-          const store = await resolveDaemonStore();
-          const prefix = leaseEpochPrefix(faceGroup());
-          const slots: string[] = [];
-          for (const title of await store.listVisible()) {
-            if (!title.startsWith(prefix)) continue;
-            const record = await store.get(title);
-            const text = (record as { tiddler?: { text?: unknown } } | undefined)?.tiddler?.text;
-            if (typeof text === "string") slots.push(text);
-          }
+        // The capability half of a join is persona-scoped too — a hearth with no face seats nobody.
+        if (daemonAuth.personaGroupDocIdHex) {
+          registry.register("face-join", async (args) => {
+            if (!kh) throw new Error("[daemon] face-join: keyhive unbooted");
+            const ownEdge = daemonAuth.deviceEdge;
+            if (!ownEdge) {
+              throw new Error(
+                "[daemon] face-join: this vessel carries no device edge of its own, so it can name no root to " +
+                "verify a joinee against — light a face with `lares persona new 0 --name '<label>'`.",
+              );
+            }
+            const summons = args["summons"] as FaceJoinSummons | undefined;
+            if (!summons || typeof summons !== "object") {
+              throw new Error("[daemon] face-join: no summons in args — carry {contactCard, deviceEdge}.");
+            }
+            // A HEARTH NEVER SEATS ITSELF.
+            //
+            // A summons rides @daemon, and @daemon fleet-syncs across the operator's own devices — so every
+            // seated vessel sees it, and every one of them runs this verb over the SAME PersonaGroup under the
+            // SAME root. The joinee's own island would pass its own gate (the edge it presents was signed by the
+            // root its boot pins) and seat itself, while the hearth seats it too: two writers, one group, one
+            // seat, racing to re-key. The joinee is exactly the vessel that must not answer, and it knows itself
+            // by the key it just presented.
+            if (summons.deviceEdge?.deviceVerifyingKey?.toLowerCase() === daemonAuth.vesselVerifyingKey.toLowerCase()) {
+              return {
+                verb: "face-join", admitted: false, self: true,
+                reason: "this vessel IS the joinee — a summons is answered by the hearth that holds the face, never by the device asking to join it.",
+              };
+            }
+            // The lease read, off the live @daemon replica: every slot under this group's prefix, folded by max.
+            const store = await resolveDaemonStore();
+            const prefix = leaseEpochPrefix(faceGroup());
+            const slots: string[] = [];
+            for (const title of await store.listVisible()) {
+              if (!title.startsWith(prefix)) continue;
+              const record = await store.get(title);
+              const text = (record as { tiddler?: { text?: unknown } } | undefined)?.tiddler?.text;
+              if (typeof text === "string") slots.push(text);
+            }
 
-          const outcome = await runFaceJoin(kh, summons, {
-            personaRootDid:         ownEdge.personaRootDid,
-            hearthTrueName:         ownEdge.hearthTrueName,
-            personaGroupDocIdHex:   faceGroup(),
-            personaGroupAgentIdHex: faceAgent(),
-            leaseEpoch:             effectiveLeaseEpoch(slots),
-            now:                    Date.now(),
-            // The bags this vessel ALREADY delegated to its own face, re-granted so a fresh seat reaches them.
-            // Naming only what we granted, at the access we granted, widens nobody's reach — it refreshes the
-            // epoch on grants that already stand. `registerBags` IS that set, and `FACE_SEATS_AND_UNSEATS` IS the
-            // access every one of them carries, because the mint above reads the same name.
-            regrant: daemonAuth.registerBags.map((bagUrl) => ({ bagUrl, access: FACE_SEATS_AND_UNSEATS })),
+            const outcome = await runFaceJoin(kh, summons, {
+              personaRootDid:         ownEdge.personaRootDid,
+              hearthTrueName:         ownEdge.hearthTrueName,
+              personaGroupDocIdHex:   faceGroup(),
+              personaGroupAgentIdHex: faceAgent(),
+              leaseEpoch:             effectiveLeaseEpoch(slots),
+              now:                    Date.now(),
+              // The bags this vessel ALREADY delegated to its own face, re-granted so a fresh seat reaches them.
+              // Naming only what we granted, at the access we granted, widens nobody's reach — it refreshes the
+              // epoch on grants that already stand. `registerBags` IS that set, and `FACE_SEATS_AND_UNSEATS` IS the
+              // access every one of them carries, because the mint above reads the same name.
+              regrant: daemonAuth.registerBags.map((bagUrl) => ({ bagUrl, access: FACE_SEATS_AND_UNSEATS })),
+            });
+            // A refusal RETURNS — an unlicensed summons names an absent contract, never an attack, and the
+            // reason rides the outcome so the joinee's panel can paint why rather than showing a silence.
+            return outcome.ok
+              ? { verb: "face-join", admitted: true,  ...outcome.grant }
+              : { verb: "face-join", admitted: false, reason: outcome.reason };
           });
-          // A refusal RETURNS — an unlicensed summons names an absent contract, never an attack, and the
-          // reason rides the outcome so the joinee's panel can paint why rather than showing a silence.
-          return outcome.ok
-            ? { verb: "face-join", admitted: true,  ...outcome.grant }
-            : { verb: "face-join", admitted: false, reason: outcome.reason };
-        });
+        }
       }
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
@@ -494,5 +506,17 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: 
       const working  = await resolveOrMintBinding({ ...common, kind: "working-binding",  prefix: WORKING_BINDINGS_PREFIX });
       return { personalUrl: personal.url, draftUrl: draft.url, workingUrl: working.url };
     },
-  });
+  };
+}
+
+/**
+ * The operator's daemon-island behavior — `operatorDaemonOptions` stood up.
+ *
+ * The options ride their own door because the wiring pass they carry decides WHICH VERBS A VESSEL OFFERS,
+ * and that decision had no witness: `wireWorkerVerbs` is called deep inside `makeDaemonBehavior`'s onEa over
+ * a live VerbTable, so nothing could read it without standing a whole daemon. A pass that shapes a vessel's
+ * surface deserves to be readable on its own.
+ */
+export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: DaemonExtra = {}): IslandBehavior {
+  return makeDaemonBehavior(operatorDaemonOptions(manifest, extra));
 }
