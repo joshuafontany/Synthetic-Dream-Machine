@@ -393,7 +393,13 @@ function splitMemeToTiddlers(
   const _rootIamCutoff = _rootIamTopBlocks.length > 0
     ? _rootIamTopBlocks[0]!.openStart
     : headerRegion.length;
-  const iamPos     = extractRootTomlWithPos(headerRegion.slice(0, _rootIamCutoff));
+  // THE FENCE MUST OPEN ITS HEAD, at the carrier level exactly as at the slot level. Content standing
+  // between the heading sigil and a labelled fence means the fence heads nothing — it reads as body,
+  // the way a teaching example does. Whitespace is spacing, never content.
+  const _iamCandidate = extractRootTomlWithPos(headerRegion.slice(0, _rootIamCutoff));
+  const iamPos = _iamCandidate && headerRegion.slice(0, _iamCandidate.start).trim() === ""
+    ? _iamCandidate
+    : null;
   const rootToml   = iamPos?.content ?? null;
   const rootFieldsRaw = rootToml ? fieldifyToml(rootToml, warnings, uri) : {};
   const { __arrayKeys: _, ...rootFields } = rootFieldsRaw as TiddlerFields & { __arrayKeys?: string[] };
@@ -590,7 +596,9 @@ function extractSlotStructure(
   let remainder = bodyText;
 
   if (iamM) {
-    preamble  = bodyText.slice(0, iamM.start);
+    // A fence that OPENS its head has only spacing above it, and spacing is not content — capturing it
+    // gave `preamble` a whitespace value that re-emitted as an iam key and shrank on the next read.
+    preamble  = "";
     const raw = fieldifyToml(iamM.content, warnings, context);
     const { __arrayKeys: _, ...parsed } = raw as TiddlerFields & { __arrayKeys?: string[] };
     fields    = parsed;
