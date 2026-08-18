@@ -749,7 +749,7 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 // so they stay off the operator's TOML (map never fuses to territory).
 const IAM_DENY: ReadonlySet<string> = new Set([
   // envelope + record stratum — reconstructed on recompose, never authored TOML
-  "title", "text", "modified", "revision", "bag",
+  "title", "text", "modified", "revision",
   "slot", "fragment-parent", "preamble", "postamble", "prologue",
   "header-text", "ahu-parent", "ahu-slot", "carrier-soh",
   // transient parse-grade diagnostics — stamped on ingest, denied by exact name
