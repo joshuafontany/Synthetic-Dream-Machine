@@ -364,6 +364,24 @@ lar:///ha.ka.ba/bags/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar://
 
 <<~/ahu >>
 
+<<~ ahu #belonging >>
+
+!! Belonging Lives in the Address
+
+''A fragment path names its own parentage.'' `root#a/b` states its parent as `root#a` by the
+fragment-path law; nothing else has to carry it. A stored field naming the same parent is a second
+spelling of one fact, and a second spelling can disagree with the first the moment both become editable.
+
+''Rendering is a different relation and no field could hold it.'' One meme renders into many places —
+`<<~ ahu #x -> lar:///other >>` points a worksite at a full address — so the relation is many-to-many and
+lives in the ''markers that hold it'', in the carriers that write them. A child cannot list its renderers
+without a write on every transclusion.
+
+<<~moves belonging -> rides/the-address on/every-hop if/derived do/refuse-a-second-copy >>
+<<~moves rendering -> rides/the-marker on/the-renderer if/many-to-many do/stay-out-of-the-child >>
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 !! Edges
@@ -376,6 +394,6 @@ lar:///ha.ka.ba/bags/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar://
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:e33672d6a4c357b5
+<<^ code:"&#x0003;" >>⊙:3fe3c334b4de029e
 
 <<^ code:"&#x0004;" -> ? >>

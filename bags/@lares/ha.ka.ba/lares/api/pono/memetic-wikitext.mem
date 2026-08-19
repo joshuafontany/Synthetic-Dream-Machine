@@ -769,6 +769,18 @@ a check; ETX ends the final block, ETB an intermediate one. A carrier's text end
 attestation block ends at ETB, and EOT closes the transmission — so ETB's "more follows" reading holds
 literally.
 
+!!! Residency is not identity, and only one name carries it
+
+`origin-bag` names ''which doc answered'' — the engine writes it on the read path, and a projector
+reading it for a destination would write a meme back to its old home. It never re-emits.
+
+''`bag` carries three senses and none of them is that.'' A ''write parameter'' naming which store
+receives a put; a ''manifest's own subject''; and an ''effect record's required field'' — the residency
+ledger's parse refuses a record without one, so denying it does not degrade an audit trail, it makes one
+unreadable. Its siblings `source-bag` · `dest-bag` · `bag-cleared` · `bag-retired` were never in question.
+
+One name, three offices; the engine stamp is the other name.
+
 !!! The marks held in reserve
 
 Named here so a later hand finds them claimed rather than free:
@@ -822,6 +834,33 @@ A carrier reads in three zones, and the middle one had no name:
 
 A processor MUST keep the three apart on projection. Folding the bindings into the body moves an
 authored declaration below a mark that says the text has begun.
+
+!!! The placement law
+
+''A field visible on the tiddler MUST round-trip. A fact that cannot round-trip MUST NOT be visible on
+the tiddler.'' A promise, never a prohibition — and it replaces every list of names an author may not use.
+
+|!class |!holds |!because |
+|on the tiddler |iam fields · zone content · effect-record fields |the author sees it, so the author may edit it, from either surface |
+|another tiddler |relations · indexes · recipes |a relation between things is not a property of one thing |
+|the envelope |kāpae · authority · change-id · schema-version · the bag cap-reference |facts about the record's replication, not its content |
+|nowhere |`slot` · `fragment-parent` · `file-path` · the block check |derived on demand; a second copy can disagree once both are editable |
+
+''Placement declares itself in the title'' — the one field that exists before a record is opened, so
+every consumer honours it without agreeing on anything else. TW5 states the same integrity with `$:/`,
+`$:/temp/` and `$:/temp/volatile/`.
+
+!!! The fence opens its head
+
+A labelled iam fence heads the head it ''opens''. Content standing before it means the fence heads
+nothing — it reads as body, exactly as a teaching example does. Whitespace is spacing, never content.
+
+''Post-iam content in the head STANDS.'' That is the ''bindings zone'' (#lexical-structure): a carrier
+states what it holds before its body opens, and folding those into the body would move an authored
+declaration below a mark that says the text has begun.
+
+The law reaches every level. A carrier's head and an ahu slot's head answer to it identically — one rule
+rather than two spellings of a similar one.
 
 !!! Framing is minted, never demanded
 

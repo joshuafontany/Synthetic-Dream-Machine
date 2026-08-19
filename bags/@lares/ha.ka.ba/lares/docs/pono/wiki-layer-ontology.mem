@@ -41,6 +41,7 @@ Every wiki composes from a recipe/cascade stack, and one bag in that stack works
 | instance mounts (above) | volumes / tmpfs | — | owned children |
 | `@catalog` | registry | bag/recipe store | repository |
 | recipe | manifest (ordered layer list) | recipe | — |
+| a plugin, packed or unpacked | an image layer | a lower bag | — |
 | crossing the boundary | //(no OCI verb — see #crossing-law)// | ACTION verbs | — |
 | transitive-closure helper | lockfile | — | — |
 
@@ -63,6 +64,36 @@ The quine governs ''every'' wiki — user and system alike. `@oracle` //alone// 
 ''The default seat (operator ruling, 2026-06-10; recipe revised 2026-06-16):'' the vessel's default pinned primary wiki = `@lares`-as-wiki — slug `lares` seats the operator-minted system doc itself as the write layer. The `@lares` wiki-recipe (seeded in the `@oracle` system plane, not `@catalog`) carries `@lararium` as a live library, so the doctrine corpus composes into the hearth; the recipe dedupes the coinciding wiki slot against the `@oracle` floor. The operator tends the personality at the hearth by default, and the disk-mirror designation carries those edits back to `bags/@lares` as `.md` memes.
 
 > Two faces on one bag — library-face turned down-stack to the consumers, dwelling-face turned up-stack to the instance. The threshold looks both ways. — Tide-Caller
+
+<<~/ahu >>
+
+<<~ ahu #bag-as-cap >>
+
+!! A Bag Is a Capability, Not a Format
+
+''A bag names any collection of tiddlers from a pet-named source.'' The cap reads //enumerate your
+tiddlers//, and its concrete forms stay open: a directory of `.mem` carriers, an Automerge doc, a
+content-addressed shelf, or a plugin.
+
+''A plugin IS a bag'' — packed or unpacked. Packed, it rides as one tiddler holding JSON-data-of-other-
+tiddlers, the shape TW5 has always used; unpacked, its tiddlers stand as ordinary members. Either way it
+answers the same cap, which is why the Rosetta row reads //plugin ↔ image layer ↔ lower bag//.
+
+''And a plugin rides in other bags.'' A packed plugin inside `@lares` is a bag held inside a bag — the
+cap is recursive, so one of the tiddlers a bag enumerates may itself answer the cap. Healthy prior art
+carries the same property: every TiddlyWiki can act as another's plugin library.
+
+''What the recipe adds, the bag never holds.'' Priority comes from the recipe's order; kāpae comes from a
+tombstone in a higher layer. Neither is a field on a meme, which is how one meme stands shadowed in one
+wiki and lives in another without knowing either.
+
+!!! Kāpae completes the shadow pattern
+
+TW5 lets a real tiddler ''override'' a shadow and gives no verb for removing one — no way to say //this
+default should not appear here//. `tombstone()` is that verb: it marks deletion in live wiki state ''and
+shadows lower-priority bags in the cascade''. The shadow stays whole in its own bag; this composition
+simply stops seeing it. A deletion that shadows rather than destroys, which is why it belongs to the
+composition and never to the meme.
 
 <<~/ahu >>
 
@@ -198,6 +229,6 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:35955650de63c863
+<<^ code:"&#x0003;" >>:9024844f21926a4d
 
 <<^ code:"&#x0004;" -> ? >>
