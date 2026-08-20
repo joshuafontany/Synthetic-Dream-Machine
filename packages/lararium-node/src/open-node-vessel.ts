@@ -30,7 +30,7 @@ import type {
   LarDoc,
   LarariumVesselOptions, VesselResult, LarOpenPhase,
   VesselBootstrap, VesselCoreAssembly,
-  CompositeStore, MeshPalaceDoc, DiskMirrorGrant,
+  CompositeStore, DiskMirrorGrant,
 } from "@lararium/mesh";
 import {
   makeDurableMailbox,
@@ -279,7 +279,6 @@ export interface NodeHermResult {
   repo:             Repo;
   store:            CompositeStore;
   daemon:           DaemonVmCore;
-  meshPalaceHandle: DocHandle<MeshPalaceDoc>;
   oracleDocUrl:     string;
   catalogHandleUrl: string;
   larariumDocUrl:   string | null;
@@ -1786,7 +1785,6 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
     repo:             p.repo,
     store:            herm.assembly.composite,
     daemon:           p.daemonVm(),
-    meshPalaceHandle: herm.meshPalaceHandle,
     oracleDocUrl:     herm.assembly.islandHandle.url,
     catalogHandleUrl: p.catalogHandle.url,
     larariumDocUrl:   herm.assembly.larariumHandle?.url ?? null,

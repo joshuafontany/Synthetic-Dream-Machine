@@ -37,15 +37,14 @@
  */
 
 import type { Server } from "node:http";
-import type { Repo, DocHandle } from "@automerge/automerge-repo";
+import type { Repo } from "@automerge/automerge-repo";
 import {
   composeVessel, type CapModule, type ComposedVessel,
-  type MeshPalaceDoc,
   type VesselKeel, type VesselCoreAssembly,
   type BagStowage,
   // ── the lifted carriage machinery, now mesh-floor (re-exported below) ──
   CARRIAGE_CAP,
-  meshPalaceCap, carriageCap, carriageStack, meshSelfSeed, type MeshSelf, type MeshPalaceComponent,
+  carriageStack, type MeshSelf, type MeshPalaceComponent,
 } from "@lararium/mesh";
 import {
   composeCoreVessel, substrateCap, daemonCap, CORE_CAP,
@@ -56,13 +55,14 @@ import { mountBulbReadFace } from "./bulb-read-face.js";
 import type { BulbArtifact } from "./bulb.js";
 
 /**
- * RE-EXPORT the isomorphic carriage symbols from `@lararium/mesh` so existing node-side importers
- * (open-node-vessel, main.ts, carriage-cap.test) keep resolving from `./node-caps.js` after the lift.
+ * The carriage symbols node-side callers reach through this one door — the same modules
+ * `@lararium/mesh` declares, named here so a node importer has a single place to ask for the
+ * carriage. Each name below has a caller; a symbol nothing reaches belongs in mesh alone.
  */
 export {
   meshPalaceCap, carriageCap, carriageStack, discoverPeers, dampedRadius, incommensurablePullMs,
-  deriveMeshSelf, deriveMeshLeaf, meshSelfDial, meshSelfSeed,
-  type MeshSelf, type MeshPalaceComponent, type CarriageComponent,
+  deriveMeshSelf,
+  type MeshSelf, type MeshPalaceComponent,
 } from "@lararium/mesh";
 
 /**
@@ -151,13 +151,15 @@ export interface HermStackDeps extends DaemonCapDeps {
   readonly onLog?:         (line: string) => void;
 }
 
-/** The handles a composed Herm hands back. */
+/**
+ * The handles a composed Herm hands back. The composed vessel itself is the read-face over
+ * everything else it built — `vessel.get(id)` reaches any cap by name — so this carries only what a
+ * caller actually drives, and disposal runs through `vessel` in reverse build order.
+ */
 export interface ComposedHerm {
-  readonly vessel:           ComposedVessel;
-  readonly assembly:         VesselCoreAssembly;
-  readonly daemon:           VesselDaemonVm;
-  readonly meshPalaceHandle: DocHandle<MeshPalaceDoc>;
-  readonly readFace:         OracleReadFace;
+  readonly vessel:   ComposedVessel;
+  readonly assembly: VesselCoreAssembly;
+  readonly daemon:   VesselDaemonVm;
 }
 
 /**
@@ -196,9 +198,7 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
   ]);
   return {
     vessel,
-    assembly:         vessel.get<VesselCoreAssembly>(CAP.substrate)!,
-    daemon:           vessel.get<VesselDaemonVm>(CAP.daemon)!,
-    meshPalaceHandle: vessel.get<MeshPalaceComponent>(CAP.meshpalace)!.handle,
-    readFace:         vessel.get<OracleReadFace>(CAP.readFace)!,
+    assembly: vessel.get<VesselCoreAssembly>(CAP.substrate)!,
+    daemon:   vessel.get<VesselDaemonVm>(CAP.daemon)!,
   };
 }
