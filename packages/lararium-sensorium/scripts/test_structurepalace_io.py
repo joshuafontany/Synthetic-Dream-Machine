@@ -455,10 +455,11 @@ def test_structure_default_honors_xdg_unset(monkeypatch):
 
 
 def test_structure_default_isolated_instance(monkeypatch):
-    # LAR_ROOT (test harness / staged pairs) roots under <root>/abide — the SAME branch TS takes.
+    # LAR_ROOT (test harness / staged pairs) roots under <root>/data/lararium — the SAME branch TS takes.
+    # Every directory under an isolated root names an XDG KIND; the two HOUSES nest inside the data kind.
     monkeypatch.setenv("LAR_ROOT", "/iso")
     monkeypatch.delenv("XDG_DATA_HOME", raising=False)
-    assert ap._default_structurepalace_dir() == "/iso/abide/sensoriums/memory/structure"
+    assert ap._default_structurepalace_dir() == "/iso/data/lararium/sensoriums/memory/structure"
 
 
 def test_structure_default_never_the_prexdg_scatter(monkeypatch):

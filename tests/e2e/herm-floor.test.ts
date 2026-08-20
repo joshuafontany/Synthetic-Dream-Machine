@@ -87,7 +87,7 @@ function findSock(dir: string, depth = 5): string | null {
  * fault. The log the vessel writes is the one that knows.
  */
 async function standHerm(r: string): Promise<{ live: boolean; log: string }> {
-  const wakeLog = join(r, "data/vessel/wake-serve.log");
+  const wakeLog = join(r, "data/lares/vessel/wake-serve.log");
   // CLEAR THE PRIOR BOOT'S LOG FIRST. The vessel APPENDS, so a `phase → live` from an earlier stand
   // answers instantly for a vessel that never came back up — the lift vector then reports a hearth that
   // stood when nothing did, and reaches for a socket no process holds.

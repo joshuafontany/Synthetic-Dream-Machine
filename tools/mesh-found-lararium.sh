@@ -2,8 +2,10 @@
 # mesh-found-lararium — found a self-contained, isolated Lararium into <dir> for the Docker mesh
 # harness. Builds the genesis island (idempotent), gives <dir> its OWN genesis copy (init reads the
 # engine CID from LAR_ROOT/genesis), then founds identity + social-bootstrap. The result is fully
-# self-contained under <dir> (genesis/ + .lararium-identity/ + .lararium/), mountable into a container
-# as LAR_ROOT. Secrets stay local (gitignore .mesh-test/).
+# self-contained under <dir> — `genesis/` beside the XDG kinds an isolated root stands (`data/`, `state/`,
+# `cache/`, `config/`, `run/`), with the two houses nested inside the data kind: `data/lares` for the
+# spirits' identity, seal and vessel substrate, `data/lararium` for the house's shelf and sensoriums.
+# Mountable into a container as LAR_ROOT. Secrets stay local (gitignore .mesh-test/).
 #
 # Usage: tools/mesh-found-lararium.sh .mesh-test/lararium-a
 set -euo pipefail

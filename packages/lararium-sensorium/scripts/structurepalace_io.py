@@ -594,16 +594,16 @@ def _serve(palace_path: str) -> None:
 
 def _default_structurepalace_dir() -> str:
     """The canonical structure plane — `<lararium>/sensoriums/memory/structure`, where `<lararium>` resolves the
-    SAME rule the TS `larariumDataHome()` (xdg-base.ts) holds: `LAR_ROOT/abide` for isolated instances,
-    else `$XDG_DATA_HOME/lararium` (unset → `~/.local/share/lararium`). A sensorium abides in the shrine,
-    so both tongues must name the shrine or capture writes one dir while recall reads another — the
-    write-only-store disease. The two views stay byte-identical, guarded by
+    SAME rule the TS `larariumDataHome()` (xdg-base.ts) holds: `LAR_ROOT/data/lararium` for isolated
+    instances, else `$XDG_DATA_HOME/lararium` (unset → `~/.local/share/lararium`). A sensorium belongs to
+    the HOUSE, so both tongues must name the house or capture writes one dir while recall reads another —
+    the write-only-store disease. The two views stay byte-identical, guarded by
     test_structure_default_mirrors_xdg. A caller still passes `--palace` (designation carries the
     authority); this default only keeps an unpassed holder landing true."""
     from sensorium import _lararium_data_home   # local: keeps this module's import graph acyclic
 
-    abide_home = _lararium_data_home()
-    return os.path.join(abide_home, "sensoriums", "memory", "structure")
+    house_home = _lararium_data_home()
+    return os.path.join(house_home, "sensoriums", "memory", "structure")
 
 
 def _structure_embeddings(palace_path: str, out) -> int:

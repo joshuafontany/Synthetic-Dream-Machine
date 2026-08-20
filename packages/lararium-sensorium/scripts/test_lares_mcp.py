@@ -595,12 +595,13 @@ def test_daemon_routed_set_names_the_wired_verbs():
 
 
 def test_sensorium_address_resolver_honors_lar_root(monkeypatch, tmp_path):
-    # the py resolver mirrors TS larariumDataHome/sensoriumDir: LAR_ROOT/abide for an isolated instance, so
-    # the MCP `sensorium=` address and the CLI `lares sense <sensorium>` name ONE root byte-for-byte.
+    # the py resolver mirrors TS larariumDataHome/sensoriumDir: LAR_ROOT/data/lararium for an isolated
+    # instance, so the MCP `sensorium=` address and the CLI `lares sense <sensorium>` name ONE root
+    # byte-for-byte.
     #
-    # A SENSORIUM ABIDES. It holds operator history and DreamNet history — capture the machine took once and
-    # cannot take again — so it homes in the shrine beside the acquired shelf, never in the spirit's house
-    # where a rite reforges the substrate. `abide/` mirrors the `lararium/` home the XDG fall takes below.
+    # THE CRITERION IS WHOSE IT IS. A sensorium holds operator history and DreamNet history — the HOUSE'S,
+    # never any one Lar's — so it homes beside the acquired shelf, and every directory under an isolated
+    # root names an XDG KIND with the two HOUSES nested inside the data kind, exactly as under XDG.
     from sensorium import sensorium_dir, sensorium_names
     monkeypatch.setenv("LAR_ROOT", str(tmp_path))
     monkeypatch.delenv("XDG_DATA_HOME", raising=False)

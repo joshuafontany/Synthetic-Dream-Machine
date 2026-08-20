@@ -82,7 +82,7 @@ def test_identity_dir_honors_xdg_state_unset(monkeypatch):
 def test_identity_dir_isolated_instance(monkeypatch):
     monkeypatch.setenv("LAR_ROOT", "/iso")
     monkeypatch.delenv("XDG_DATA_HOME", raising=False)
-    assert wv._identity_dir() == "/iso/data/identity"
+    assert wv._identity_dir() == "/iso/data/lares/identity"
 
 
 def test_identity_dir_explicit_override_wins(monkeypatch):

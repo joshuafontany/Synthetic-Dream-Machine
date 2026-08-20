@@ -42,11 +42,17 @@ class LaresVerbError(Exception):
 
 
 def data_dir() -> str:
-    """`<XDG_DATA_HOME>/lares/vessel` — the ONE env contract both sides resolve the socket under.
-    `LAR_ROOT` relocates the whole tree for an isolated instance; honor it the way the TS side does."""
+    """`<lares>/vessel` — the ONE env contract both sides resolve the socket under, mirroring TS
+    `larDataDir()` (vessel-paths.ts): `LAR_ROOT/data/lares/vessel` for an isolated instance, else
+    `$XDG_DATA_HOME/lares/vessel` (unset -> `~/.local/share/lares/vessel`).
+
+    THE CRITERION IS WHOSE IT IS. The vessel substrate belongs to the SPIRITS, so it stands in the
+    spirits' house; what belongs to the HOUSE stands at `<lararium>`. Under an isolated root every
+    directory names an XDG KIND and the two HOUSES nest inside the data kind, exactly as under XDG —
+    so a resolver one segment short opens an absent directory and reports a daemon that never answered."""
     root = os.environ.get("LAR_ROOT")
     if root:
-        return os.path.join(root, "data", "vessel")
+        return os.path.join(root, "data", "lares", "vessel")
     xdg = os.environ.get("XDG_DATA_HOME") or os.path.join(os.path.expanduser("~"), ".local", "share")
     return os.path.join(xdg, "lares", "vessel")
 
@@ -60,13 +66,15 @@ def available() -> bool:
 
 
 def identity_dir() -> str:
-    """`<dirname(dataDir)>/.lararium-identity` — the SIBLING of the data dir.
+    """`<lares>/identity` — the SIBLING of the vessel store, mirroring TS `larIdentityDir()`.
 
-    Identity sits beside the wipe-zone, never inside it, so no destructive storage verb can reach it.
-    The dir derives from the SAME dataDir the socket does, which keeps the did we send and the daemon
-    that answers agreed on one keypair.
+    A Lar's keys ARE that Lar, so the sovereign root belongs to the SPIRITS and stands beside the
+    substrate rather than inside it: every substrate verb (`reset`/`regenesis`/`rebuild`) reforges the
+    store while identity survives untouched. The dir derives from the SAME house the socket does, which
+    keeps the did this side sends and the daemon that answers agreed on ONE keypair — a second spelling
+    reads a keypair the TS side never wrote and sends a did no cap resolves.
     """
-    return os.path.join(os.path.dirname(data_dir()), ".lararium-identity")
+    return os.path.join(os.path.dirname(data_dir()), "identity")
 
 
 def operator_did() -> str:

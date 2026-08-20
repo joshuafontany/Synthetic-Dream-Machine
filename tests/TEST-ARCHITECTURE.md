@@ -88,7 +88,7 @@ produce is indistinguishable from a real fault, which is what makes them expensi
 confidently and answers wrong. Collide the instrument before believing what it says.
 
 **`lares vessel stand` DETACHES.** The launcher prints a status line and exits while the vessel it
-started keeps running and writes `<root>/data/vessel/wake-serve.log`. A harness watching the
+started keeps running and writes `<root>/data/lares/vessel/wake-serve.log`. A harness watching the
 launcher's pipe sees a vessel that reached `live` as one that printed nothing — the floor reported
 down while it is up. *Read the vessel's own log, never the launcher's stdout.*
 
@@ -122,9 +122,9 @@ re-standing races that flush: the re-stand binds a port the dying vessel still h
 **Name a process by the port it holds.** `pkill -f <pattern>` matches its own shell and kills the
 harness with the vessel. *`ss -ltnp | grep ':PORT ' | grep -oP 'pid=\K[0-9]+'`.*
 
-**UDS paths cap at ~107 bytes.** A root deep enough to push `<root>/data/vessel/lares.sock` past it
-fails `connect` with `EINVAL`, which reads exactly like a daemon that never opened its door. *Stand
-test vessels at a short root.*
+**UDS paths cap at ~107 bytes.** A root deep enough to push `<root>/data/lares/vessel/lares.sock` past
+it fails `connect` with `EINVAL`, which reads exactly like a daemon that never opened its door. The
+suffix runs 30 bytes, so a root over ~77 bytes crosses the cap. *Stand test vessels at a short root.*
 
 ### Red vectors
 

@@ -149,3 +149,26 @@ def test_pour_roots_in_the_xdg_sensorium_roster(tmp_path, monkeypatch):
     assert seen["root"] == sensorium_dir(m["bed"])           # the bed name, not the stale field
     assert os.path.join("sensoriums", m["bed"]) in seen["root"]
     assert seen["root"].startswith(str(tmp_path / "home"))   # under the redirected home
+
+
+def test_library_home_mirrors_the_ts_resolver(tmp_path, monkeypatch):
+    # ONE SHELF, TWO TONGUES. `_library_home()` mirrors TS `larLibraryHome()` (library-store.ts), which
+    # reads `LAR_LIBRARY ?? join(larariumDataHome(), "library")`. A second spelling points a flow at a
+    # shelf the CLI never fills, and the flow reports an empty collection rather than a wrong address.
+    #
+    # THE CRITERION IS WHOSE IT IS. A family's books are the family's, so the shelf stands in the HOUSE's
+    # home — and under an isolated root every directory names an XDG KIND with the two HOUSES nested
+    # inside the data kind, exactly as under XDG.
+    monkeypatch.delenv("LAR_LIBRARY", raising=False)
+
+    monkeypatch.setenv("LAR_ROOT", "/iso")
+    monkeypatch.delenv("XDG_DATA_HOME", raising=False)
+    assert bm._library_home() == os.path.join("/iso", "data", "lararium", "library")
+
+    monkeypatch.delenv("LAR_ROOT", raising=False)
+    monkeypatch.setenv("XDG_DATA_HOME", str(tmp_path))
+    assert bm._library_home() == os.path.join(str(tmp_path), "lararium", "library")
+
+    # The override wins outright, exactly as the TS `??` does.
+    monkeypatch.setenv("LAR_LIBRARY", str(tmp_path / "elsewhere"))
+    assert bm._library_home() == str(tmp_path / "elsewhere")

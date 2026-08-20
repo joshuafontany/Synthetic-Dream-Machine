@@ -141,15 +141,19 @@ def _library_home() -> str:
 
     It mirrors the TS resolver exactly (packages/lararium-node/src/library-store.ts, `larLibraryHome`), so a
     `library:<collection>` reference resolves to the SAME directory whichever tongue reads it; a second
-    spelling would point a flow at a shelf the CLI never fills. The tier stands in the SHRINE
-    (`LAR_ROOT/abide`, else `$XDG_DATA_HOME/lararium`) because an acquired body — a book nothing can
-    regenerate — must outlive every rite, and a house no wipe names carries that without a list."""
+    spelling would point a flow at a shelf the CLI never fills. The tier stands in the HOUSE'S home
+    (`LAR_ROOT/data/lararium`, else `$XDG_DATA_HOME/lararium`) because a family's books are the family's:
+    an acquired body has no author in any tracked tree, so nothing re-makes it, and a house no wipe names
+    carries that without a list."""
     override = os.environ.get("LAR_LIBRARY")
     if override:
         return override
     lar_root = os.environ.get("LAR_ROOT")
     if lar_root:
-        return os.path.join(lar_root, "abide", "library")
+        # Under an isolated root every directory names an XDG KIND — data, state, cache, config, run — and
+        # the two HOUSES nest inside the data kind exactly as they do under XDG. A house never stands where
+        # a kind belongs, so this reads as the real disk with a different prefix.
+        return os.path.join(lar_root, "data", "lararium", "library")
     xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
     base = xdg or os.path.join(os.path.expanduser("~"), ".local", "share")
     return os.path.join(base, "lararium", "library")

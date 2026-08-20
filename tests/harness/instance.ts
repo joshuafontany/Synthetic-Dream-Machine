@@ -157,9 +157,11 @@ function attachLive(): LarInstance {
   const port = Number(process.env["LAR_PORT"] ?? 8080);
   if (!root) throw new Error("LAR_TARGET=live requires LAR_ROOT (and usually LAR_PORT) to name the instance");
   // A FOUNDED vessel proves itself by its own address book, which lives with the store it addresses —
-  // never in genesis/, where only the shared seed rides. Under LAR_ROOT the store sites at <root>/data/vessel.
-  if (!existsSync(join(root, "data", "vessel", "social-bootstrap.json"))) {
-    throw new Error(`LAR_TARGET=live: no social bootstrap at ${root}/data/vessel — has this root been founded?`);
+  // never in genesis/, where only the shared seed rides. Under LAR_ROOT the store sites at
+  // <root>/data/lares/vessel: every directory under an isolated root names an XDG KIND, and the two
+  // HOUSES nest inside the data kind exactly as they do under XDG.
+  if (!existsSync(join(root, "data", "lares", "vessel", "social-bootstrap.json"))) {
+    throw new Error(`LAR_TARGET=live: no social bootstrap at ${root}/data/lares/vessel — has this root been founded?`);
   }
   const env = { LAR_ROOT: root, LAR_PORT: String(port) };
   return {
@@ -181,14 +183,17 @@ export async function targetInstance(): Promise<LarInstance> {
 /**
  * The vessel's Automerge STORE on disk — the one path a raw-storage read may open.
  *
- * It rides under the DATA home (`<root>/data/vessel`) rather than beside the root, because the home
- * inversion split the two XDG homes on whether a thing can be RE-MADE: identity, seal, library and the
- * vessel store crossed to <data>; <state> keeps watermarks alone. A test that hardcodes the older
- * sibling path does not fail loudly — it opens an absent directory, finds no chunks, and reports the
- * document "unavailable", which reads as a replication fault rather than a wrong address.
+ * It rides in the SPIRITS' house (`<root>/data/lares/vessel`) because a vessel substrate is the spirits':
+ * a Lar wakes, acts and gives way, and `clear`, `bake` and `rebirth` reforge that substrate whole. What
+ * belongs to the HOUSE — the acquired shelf, the sensoriums — stands beside it at `<root>/data/lararium`,
+ * and `<root>/state` keeps watermarks alone. A house never stands where a kind belongs, so an isolated
+ * root reads as the real disk with a different prefix.
+ *
+ * NAME THE ADDRESS EXACTLY. A wrong path here does not fail loudly — it opens an absent directory, finds
+ * no chunks, and reports the document "unavailable", which reads as a replication fault.
  */
 export function vesselStorageDir(instance: LarInstance): string {
-  return join(instance.root, "data", "vessel");
+  return join(instance.root, "data", "lares", "vessel");
 }
 
 /** Read a `key: automerge:...` line from the staged boot log (e.g. "lararium", "catalog"). */

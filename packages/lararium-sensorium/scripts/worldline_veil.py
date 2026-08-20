@@ -46,13 +46,14 @@ _PERSONA_ROOT_GLOB = ".persona-group-root-*.json"
 
 def _identity_dir(identity_dir: "str | None" = None) -> str:
     """Resolve the on-disk identity dir — an explicit override, else `<lares>/identity`, mirroring the
-    TS `larIdentityDir()` (vessel-paths.ts): `LAR_ROOT/data/identity` for isolated instances, else
+    TS `larIdentityDir()` (vessel-paths.ts): `LAR_ROOT/data/lares/identity` for isolated instances, else
     `$XDG_DATA_HOME/lares/identity` (unset → `~/.local/share/lares/identity`).
 
-    THIS MIRRORS A TS RESOLVER AND MUST FOLLOW IT. The two homes split on whether a thing can be
-    re-made: the sovereign root cannot, so it gathers in the DATA home with the seal and the shelf,
-    while the state home keeps watermarks alone. A mirror left on the old address reads a salt that
-    is not there and veils against nothing. Guarded by test_identity_dir_mirrors_xdg_data."""
+    THIS MIRRORS A TS RESOLVER AND MUST FOLLOW IT. The sovereign root belongs to the SPIRITS — a Lar's
+    keys ARE that Lar — so it stands in the spirits' house beside the seal, while the house's own things
+    (the shelf, the sensoriums) stand at `<lararium>` and the state home keeps watermarks alone. A mirror
+    naming any other address reads a salt that is not there and veils against nothing. Guarded by
+    test_identity_dir_mirrors_xdg_data."""
     if identity_dir:
         return identity_dir
     lar_root = os.environ.get("LAR_ROOT")

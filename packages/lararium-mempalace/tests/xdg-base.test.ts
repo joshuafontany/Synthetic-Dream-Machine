@@ -77,7 +77,7 @@ describe("xdg-base (the shared XDG resolver)", () => {
     expect(memorySensoriumPersistenceDir()).toBe(join(root, "persistence"));
   });
 
-  it("memorySensoriumStructureDir: isolated LAR_ROOT roots under <root>/abide (the py branch)", () => {
+  it("memorySensoriumStructureDir: isolated LAR_ROOT roots under <root>/data/lararium (the py branch)", () => {
     set("LAR_ROOT", "/iso");
     set("XDG_DATA_HOME", undefined);
     expect(memorySensoriumStructureDir()).toBe(join("/iso", "data", "lararium", "sensoriums", "memory", "structure"));

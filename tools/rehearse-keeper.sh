@@ -79,9 +79,11 @@ else
       echo "  A rehearsal harness that can eat the hearth is not a rehearsal harness." >&2
       exit 3 ;;
   esac
-  # The sovereign root lives in the DATA home now, beside the seal and the shelf — everything a rite
-  # cannot re-make. A guard reading the old address would wave a founded vessel straight through.
-  if [ -e "$ROOT/data/identity" ]; then
+  # THE SOVEREIGN ROOT STANDS IN THE SPIRITS' HOUSE, beside the seal — a Lar's keys ARE that Lar, so no
+  # rite re-makes them. Under LAR_ROOT each directory names an XDG kind and the two houses nest inside
+  # the data kind, so identity sites at `<root>/data/lares/identity`. This guard must name that exact
+  # address: a probe one segment short finds nothing and waves a founded vessel straight through.
+  if [ -e "$ROOT/data/lares/identity" ]; then
     echo "REFUSED: $ROOT already carries an identity — this harness founds from void, never over a vessel." >&2
     exit 3
   fi
@@ -105,8 +107,8 @@ export LARES_ARCHIVE_PASSPHRASE_NEW="$PASS_DRILL"
 # Surface where a node warning is BORN rather than only that it fired. A negative-timeout warning with no
 # origin costs far more to chase than to capture, and the capture is one env var.
 export NODE_OPTIONS="${NODE_OPTIONS:-} --trace-warnings"
-# LAR_ROOT ISOLATES THE FILESYSTEM, NOT THE PORT. Nine resolvers root off it — data, state, seal, library,
-# bags, genesis, the UDS socket — and the TCP port roots off LAR_PORT alone. A throwaway on the default 8080
+# LAR_ROOT ISOLATES THE FILESYSTEM, NOT THE PORT. Every home roots off it — the two data houses (lares
+# and lararium), state, cache, config, run, plus bags, genesis and the UDS socket — and the TCP port roots off LAR_PORT alone. A throwaway on the default 8080
 # collides with the operator's REAL node, which is what the first two rehearsals actually reported. The
 # tenth resource needs naming too.
 export LAR_PORT="${LAR_PORT:-8099}"
@@ -252,7 +254,7 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
 
   # ── ④–⑥ need the node breathing. The operator's own hand starts it; this harness runs inside the
   #    operator's invocation, so it may — but it says what it is doing, every time.
-  say "④–⑥ — these need the node breathing (throwaway socket at \$LAR_ROOT/data/vessel)"
+  say "④–⑥ — these need the node breathing (throwaway socket at \$LAR_ROOT/data/lares/vessel)"
   # POLL TO A DEADLINE, never a fixed sleep. A cold first cycle boots empty caches and a fresh genesis; the
   # second rides what the first warmed, so a constant tuned on the warm case fails the cold one.
   # THE DEADLINE COMES FROM THE CLI'S OWN CONTRACT, never from a number this harness picked. `wake`
@@ -262,8 +264,8 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # the TCP port answered the whole time, which let every movement after it pass. A harness that
   # out-waits the thing it measures reports on its own patience.
   step "the node from ② answers"
-  SOCK="$ROOT/data/vessel/lares.sock"
-  WAKE_LOG="$ROOT/data/vessel/wake-serve.log"
+  SOCK="$ROOT/data/lares/vessel/lares.sock"
+  WAKE_LOG="$ROOT/data/lares/vessel/wake-serve.log"
   WAITED=0
   while [ ! -S "$SOCK" ] && [ "$WAITED" -lt 120 ]; do sleep 1; WAITED=$((WAITED + 1)); done
   if [ -S "$SOCK" ]; then
