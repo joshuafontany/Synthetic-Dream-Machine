@@ -1,0 +1,94 @@
+/**
+ * frames-per-carrier — how many bodies a carrier holds, counted the way the PARSER counts.
+ *
+ * ── WHY THIS EXISTS ─────────────────────────────────────────────────────────────────────────────
+ * `checkSpan` finds a file's FIRST `STX -> ETX` and stops, so `verifyBcc` answers for one body and
+ * `bcc-witness` reports one verdict per file. That reading holds exactly as long as a carrier holds
+ * one body, and nothing in this tree had ever asked whether they do.
+ *
+ * A grep cannot ask it. This grammar TEACHES its own control set, so the specification memes carry
+ * worked examples of every mark inside quote fences — one-tick inline, three- and four-tick blocks.
+ * A pattern without a fence mask reads each of those as a live frame and reports the document that
+ * defines the check as a document whose second body goes unchecked. Two hand-counts did exactly that
+ * before this file existed, one of them off by half.
+ *
+ * So the count imports `maskedExecAll` — the parser's own mask, the same reader the deserializer uses
+ * to divide a carrier — and a teaching example stays a teaching example.
+ *
+ * Meme: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext
+ */
+
+import { describe, test, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import { execSync } from "node:child_process";
+import path from "node:path";
+import { maskedExecAll } from "../src/deserializer.js";
+import { checkSpan } from "../src/carrier-check.js";
+import { REPO } from "./test-wiki.js";
+
+/** ETX sigils the parser would honour — quoted mentions masked out. */
+function liveFrames(text: string): number {
+  return [...maskedExecAll(text, /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g)].length;
+}
+
+describe("a carrier's bodies, counted through the parser's own fence mask", () => {
+  const carriers = execSync("find bags -name '*.mem'", { cwd: REPO, encoding: "utf8" })
+    .trim().split("\n").filter(Boolean);
+
+  /** A run that scanned nothing must not read as a run that found nothing. */
+  test("the corpus is present", () => {
+    expect(carriers.length).toBeGreaterThan(100);
+  });
+
+  /**
+   * THE CLAIM `checkSpan` RESTS ON.
+   *
+   * One body per carrier means one span, one check, and a witness whose per-file verdict covers the
+   * whole file. A carrier holding two bodies carries one check over the first and none over the rest,
+   * and every instrument in this tree would still read it green.
+   *
+   * A red here does NOT say the corpus is broken — it says the CHECK READER is single-frame and the
+   * corpus has outgrown it. The cure lives in `carrier-check.ts`, which would walk every span rather
+   * than the first, and this test names the carriers it would have to walk.
+   */
+  test("every carrier holds exactly one body, or names itself for a multi-frame check reader", () => {
+    const multi = carriers
+      .map((rel) => ({ rel, n: liveFrames(readFileSync(path.join(REPO, rel), "utf8")) }))
+      .filter((c) => c.n > 1)
+      .map((c) => `${c.n} bodies · ${c.rel}`);
+    expect(multi).toEqual([]);
+  });
+});
+
+describe("the check reader divides a carrier where the parser divides it", () => {
+  const carriers = execSync("find bags -name '*.mem'", { cwd: REPO, encoding: "utf8" })
+    .trim().split("\n").filter(Boolean);
+
+  /**
+   * THE READER AND THE WRITER MUST MEET ON ONE SPAN.
+   *
+   * `checkSpan` walks raw text — `indexOf(stx)`, `indexOf(etx)` — while the emitter and the
+   * deserializer both read through the fence mask. On a carrier that quotes the control set, those two
+   * readings land in different places: the unmasked reader locks onto a WORKED EXAMPLE and verifies the
+   * check written inside it, while the carrier's real body goes unexamined and still reports `ok`.
+   *
+   * The corpus's own specification memes are the ones that quote the control set, so the documents
+   * DEFINING this instrument are the documents it misreads.
+   *
+   * The cure is one line of reach: `checkSpan` takes the same mask the parser takes. Until it does,
+   * `bcc-witness: ok N` overstates its coverage by however many carriers this test names.
+   */
+  test("checkSpan lands on the body the parser sees, never on a quoted example", () => {
+    const misread: string[] = [];
+    for (const rel of carriers) {
+      const text = readFileSync(path.join(REPO, rel), "utf8");
+      const span = checkSpan(text);
+      if (!span) continue;
+      const real = [...maskedExecAll(text, /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g)];
+      if (real.length === 0) continue;
+      const realEnd = real[0]!.index + real[0]![0].length;
+      if (span.end !== realEnd) misread.push(`${rel}: reader ends ${span.end}, parser ends ${realEnd}`);
+    }
+    expect(misread).toEqual([]);
+  });
+});
