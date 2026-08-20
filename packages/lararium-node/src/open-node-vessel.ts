@@ -957,14 +957,27 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // verbs that read a persona plane resolve it the way every user bag resolves, from @catalog. This boot
     // carries the seed across that gap.
     //
+    // ALL FOUR OF A FACE'S PLANES, not the persona plane alone: @circles, @identities and @sessions carry
+    // the same tag and answer the same ownership question, so one bridge serves the whole face and the four
+    // cannot drift onto different registries.
+    //
     // Idempotent by construction: it writes the url the seed already names, so a plane registered on an
     // earlier boot is re-written identically and a plane the operator lit an hour ago registers now.
-    for (const plane of bootstrap.personaPlanes) {
-      const bagId = personaBagIdFor(plane.personaGroupId);
-      if (tiddlerText(assembly.catalogHandle.doc()?.tiddlers?.[bagId]) === plane.url) continue;
+    const registerInCatalog = (bagId: string, url: string | null | undefined): void => {
+      if (!url || tiddlerText(assembly.catalogHandle.doc()?.tiddlers?.[bagId]) === url) return;
       assembly.catalogHandle.change((doc) => {
-        doc.tiddlers[bagId] = mutableLarRecord(bagId, { text: plane.url, kind: "oracle" }, "vessel-boot");
+        doc.tiddlers[bagId] = mutableLarRecord(bagId, { text: url, kind: "oracle" }, "vessel-boot");
       });
+    };
+    for (const plane of bootstrap.personaPlanes) {
+      registerInCatalog(personaBagIdFor(plane.personaGroupId), plane.url);
+    }
+    // The worn face's siblings ride the bootstrap under their own derived names; register them beside it.
+    const wornFace = bootstrap.personaBagId ? personaSiblingBagIds(bootstrap.personaBagId) : null;
+    if (wornFace) {
+      registerInCatalog(wornFace.circles,    bootstrap.circlesUrl);
+      registerInCatalog(wornFace.identities, bootstrap.identitiesUrl);
+      registerInCatalog(wornFace.sessions,   bootstrap.sessionsUrl);
     }
     // M3 — node-main reads the persisted keyhive Archive from the identity home and passes it into the
     // worker (same custody boundary the 32-byte seed already crosses). keyhive inits from it as the

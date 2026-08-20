@@ -28,9 +28,6 @@ import {
   LARARIUM_DOC_URI,
   CATALOG_DOC_URI,
   LARES_DOC_URI,
-  IDENTITIES_NAMESPACE,
-  CIRCLES_NAMESPACE,
-  SESSIONS_NAMESPACE,
   bagDescriptorUri,
   recipeUri,
 } from "./lar-uris.js";
@@ -306,14 +303,19 @@ export function computePluginsCid(
 // Root bag catalog
 // ---------------------------------------------------------------------------
 
+/**
+ * The bags GENESIS itself stands — the universal floor every vessel carries, and nothing else.
+ *
+ * A FACE'S PLANES ARE NOT DECLARED HERE. @persona · @circles · @identities · @sessions each derive their id
+ * from the tag their PersonaGroup mints, so no name for them exists when this seed is built, and a genesis
+ * every vessel shares can describe no plane belonging to one person. They describe themselves at founding,
+ * where the knowledge lives.
+ */
 const ROOT_BAGS = [
   { bagId: ORACLE_DOC_URI,     label: "ha — runtime system island (Oracle)",       readPolicy: "public",  writePolicy: "private" },
   { bagId: LARARIUM_DOC_URI,   label: "ha — memetic corpus (Lararium)",            readPolicy: "public",  writePolicy: "private" },
   { bagId: CATALOG_DOC_URI,    label: "ka — corpus discovery (Catalog)",            readPolicy: "public",  writePolicy: "private" },
   { bagId: LARES_DOC_URI,      label: "ba — persona & doctrine (Lares)",            readPolicy: "public",  writePolicy: "private" },
-  { bagId: IDENTITIES_NAMESPACE, label: "ha — principals (Identities)",               readPolicy: "private", writePolicy: "private" },
-  { bagId: CIRCLES_NAMESPACE,    label: "ka — collective authority (Circles)",        readPolicy: "private", writePolicy: "private" },
-  { bagId: SESSIONS_NAMESPACE,   label: "ba — live operator sessions (Sessions)",     readPolicy: "private", writePolicy: "private" },
 ] as const;
 
 // ---------------------------------------------------------------------------

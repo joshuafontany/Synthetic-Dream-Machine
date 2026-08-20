@@ -175,15 +175,27 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       // the @daemon follow surface (a browser paints it; a headless node daemon rests the temp tiddler).
       if (ctx.oracleUrl) {
         const sysPlane = makeCatalogAccessor(ctx.repo, ctx.oracleUrl);
-        // THE FOLLOW GRAPH BELONGS TO THE FACE THAT IS WORN. `@circles-<tag>` names this PersonaGroup's
-        // own circles, derived off the same tag as its persona plane, so a vessel holding a multitude
-        // reads the circles of the face it stands in and never another's. The tag comes from the plane
-        // id itself — the name is the index — so nothing here holds a second copy to drift from.
+        // The registry a FACE's planes answer to — @persona, @circles, @identities, @sessions all share one
+        // tag and one home. Built once so the two verb families below cannot drift onto different planes.
+        const facePlane = ctx.catalogUrl ? makeCatalogAccessor(ctx.repo, ctx.catalogUrl) : null;
+        // THE FOLLOW GRAPH BELONGS TO THE FACE THAT IS WORN, AND A FACE'S PLANES ARE USER BAGS.
+        //
+        // `@circles-<tag>` names this PersonaGroup's own circles, derived off the same tag as its persona
+        // plane, so a vessel holding a multitude reads the circles of the face it stands in and never
+        // another's. The tag comes from the plane id itself — the name is the index — so nothing here holds
+        // a second copy to drift from.
+        //
+        // It resolves from @catalog, beside the persona plane it shares a tag with: @oracle names the SYSTEM
+        // bags, the universal floor every vessel carries, and a person's relations are not universal. Which
+        // registry a face's planes answer to reads as an OWNERSHIP question rather than a measured one — the
+        // pair matches wherever both halves are written, so evidence alone never settled it (canon:
+        // wiki-layer-ontology, ruled by the operator).
         const resolveCirclesStore = async () => {
           const face = personaSiblingBagIds(personaBagIdFor(faceGroup()));
           if (!face) throw new Error("circle-verb: this vessel's PersonaGroup plane names no face");
-          const store = await sysPlane.storeOf(face.circles);
-          if (!store) throw new Error(`circle-verb: ${face.circles} unresolved — the @oracle registry names no such plane for the face this vessel wears`);
+          if (!facePlane) throw new Error("circle-verb: this island carries no @catalog plane — a user bag has no registry to resolve from");
+          const store = await facePlane.storeOf(face.circles);
+          if (!store) throw new Error(`circle-verb: ${face.circles} unresolved — @catalog names no such plane for the face this vessel wears`);
           return store;
         };
         const circleReactors = makeCircleReactors({ resolveStore: resolveCirclesStore, tw5: ctx.tw5 });
@@ -234,11 +246,10 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           // grants. @crossroads names what a stranger may mount. A PersonaGroup's plane belongs to a person,
           // so it lives in the middle one; reaching for it on the system floor asks the wrong plane a
           // question it was never given to answer, and the refusal reads as a missing document.
-          const catalogPlane = ctx.catalogUrl ? makeCatalogAccessor(ctx.repo, ctx.catalogUrl) : null;
           const personaBagId = personaBagIdFor(faceGroup());
           const resolvePersonaStore = async () => {
-            if (!catalogPlane) throw new Error("persona-selves-verb: this island carries no @catalog plane — a user bag has no registry to resolve from");
-            const store = await catalogPlane.storeOf(personaBagId);
+            if (!facePlane) throw new Error("persona-selves-verb: this island carries no @catalog plane — a user bag has no registry to resolve from");
+            const store = await facePlane.storeOf(personaBagId);
             if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — @catalog names no ${personaBagId}`);
             return store;
           };

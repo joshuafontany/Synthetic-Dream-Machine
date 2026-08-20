@@ -1,7 +1,7 @@
 {
   "format": "lararium-genesis-cas/v1",
   "engineCid": "bafkreift7cvcpxxqusdb4lkxsxnt3mzv5uip6tpytinrh7ibgrvu7ceqwa",
-  "pluginsCid": "bafkreigqn55j5nw5zrcluakubaascpfxu6c2wp7f5y6vd2dbfdh3j46vgy",
+  "pluginsCid": "bafkreidhtip42gfauo3zglau2fjn6xxhh4sbv562efuhwppjs6xbxyuwty",
   "blobs": [
     {
       "cid": "17fcae33dc754c1535762ec4915b796410996f0ff21148ac4efcb66ac7fdf7f4",
@@ -10,7 +10,7 @@
       "version": "1.2.24"
     },
     {
-      "cid": "c9ff2be977748efd736e2456b6fa3128d8f7625b234e0e6ba12cbcb4c7b3f9a7",
+      "cid": "c7291f475ced443204a258bd6797905d63713ab30bca46bca2a03adcdad600e4",
       "id": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
       "mimeType": "application/json",
       "version": "0.1.0"
