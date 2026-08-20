@@ -151,7 +151,15 @@ describe("the herm — the floor of the lararium cap stack", () => {
       .catch((e: Error) => ({ error: e.message }));
     // Either an unknown verb or a named refusal — both say "light a face". Neither may be a raw throw.
     expect(JSON.stringify(r)).toMatch(/light a face|unknown verb|no face|waking floor/i);
-  }, 60_000);
+
+    // EVERY face-scoped verb, not just the persona ones. @circles arrives with the FACE — a PLACE
+    // bootstrap carries @daemon alone — so a follow verb on this floor must name the lift too. Answering
+    // "@circles unresolved: the @oracle registry names no CIRCLES_DOC_URI" is true and useless: it reads
+    // as a broken registry to the one human who could fix it by lighting a face.
+    const c = await invokeLocal("circle-list", { circle: "following" }, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 })
+      .catch((e: Error) => ({ error: e.message }));
+    expect(JSON.stringify(c), "a follow verb on the floor refused in registry-fault language").toMatch(/light a face|unknown verb|no face|waking floor/i);
+  }, 90_000);
 
   test("R5 — a herm LIFTS into a lararium: light the face, re-wake, the hearth verbs stand", async () => {
     execFileSync(process.execPath, [CLI, "persona", "new", "0", "--name", "the lift"], {

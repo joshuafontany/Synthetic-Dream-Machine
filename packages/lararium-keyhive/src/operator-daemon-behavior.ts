@@ -181,9 +181,18 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           return store;
         };
         const circleReactors = makeCircleReactors({ resolveStore: resolveCirclesStore, tw5: ctx.tw5 });
-        registry.register("circle-add",    circleReactors.add);
-        registry.register("circle-remove", circleReactors.remove);
-        registry.register("circle-list",   circleReactors.list);
+
+        // A FACELESS FLOOR NAMES THE LIFT — the one refusal every face-scoped verb hands back.
+        //
+        // The floor is a state a vessel LIFTS out of, so a refusal there carries the act that lifts it
+        // (the law `holdings-witness` keeps for its own corrections: a refusal says what would change the
+        // answer). The closure reaches for no face, so standing it costs the boot nothing.
+        const lightAFace = (verb: string): VerbReactor => async () => {
+          throw new Error(
+            `[daemon] ${verb}: this vessel stands at the WAKING FLOOR and holds no face — ` +
+            "light one with `lares persona new 0 --name '<label>'`, then stand the vessel again.",
+          );
+        };
 
         // The OWN-PERSONA name verbs over the sovereign @persona doc — the human's labels for their OWN faces
         // (the private pet-name + the declared Handle), riding the same PRIVATE tier one plane over: the
@@ -202,6 +211,16 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
         // verbs already keep: absent the thing they need, they never register at all. A caller then meets an
         // unknown verb rather than a verb that throws, which is the honest answer to "this place holds no face".
         if (daemonAuth.personaGroupDocIdHex) {
+          // THE FOLLOW-GRAPH RIDES THE FACE, so it registers on the same fact the persona verbs do.
+          // Founding writes @circles in the same breath as the PersonaGroup plane and its sentinel — a
+          // PLACE bootstrap carries @daemon alone — and the boot refuses a partial set outright, so the
+          // two stand or fall together. Registering the follow verbs on a faceless floor would answer a
+          // human "@circles unresolved: the @oracle registry names no CIRCLES_DOC_URI" — a true sentence
+          // that reads as a broken registry, when the honest answer is that no face has been lit yet.
+          registry.register("circle-add",    circleReactors.add);
+          registry.register("circle-remove", circleReactors.remove);
+          registry.register("circle-list",   circleReactors.list);
+
           // A PERSONA PLANE IS A USER BAG, SO IT RESOLVES FROM @catalog.
           //
           // Three registries stand and each answers its own question. @oracle names the SYSTEM bags — the
@@ -222,24 +241,14 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           registry.register("persona-handle", selvesReactors.handle);
           registry.register("persona-selves", selvesReactors.selves);
         } else {
-          // A FACELESS FLOOR NAMES THE LIFT.
-          //
           // Leaving these unregistered answers a caller "no handler registered for persona-selves" — true,
-          // and it hands a human nothing to act on. The floor is a state a vessel LIFTS out of, so the
-          // refusal carries the act that lifts it, the same law `holdings-witness` keeps for its own
-          // corrections: a refusal says what would change the answer.
-          //
-          // The closure reaches for no face, so standing it here costs the boot nothing — which is the whole
-          // reason the reactors above stay behind their gate.
-          const lightAFace = (verb: string): VerbReactor => async () => {
-            throw new Error(
-              `[daemon] ${verb}: this vessel stands at the WAKING FLOOR and holds no face — ` +
-              "light one with `lares persona new 0 --name '<label>'`, then stand the vessel again.",
-            );
-          };
+          // and it hands a human nothing to act on. Every verb that needs a face answers with the lift.
           registry.register("persona-label",  lightAFace("persona-label"));
           registry.register("persona-handle", lightAFace("persona-handle"));
           registry.register("persona-selves", lightAFace("persona-selves"));
+          registry.register("circle-add",     lightAFace("circle-add"));
+          registry.register("circle-remove",  lightAFace("circle-remove"));
+          registry.register("circle-list",    lightAFace("circle-list"));
         }
 
         // The CABAL-REALM verbs over @daemon, where the per-writer lease slots live. `realm-feed` rolls THIS
