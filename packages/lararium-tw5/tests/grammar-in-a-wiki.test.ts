@@ -193,4 +193,47 @@ describe.skipIf(coreBlobSkip)(
     expect(flat).toContain("confidence");
     expect(flat).not.toContain("$:/plugins/lares/confidence");
   });
+
+  /**
+   * THE FLOOR, AND NOTHING BELOW IT.
+   *
+   * TiddlyWiki restricts no field name, and MultiWikiServer restricts exactly two — its resolver reads
+   * `fields: { ...fields, title, revision: revision.toString() }`, overwriting those and leaving every
+   * other name the author wrote untouched. `bag_id`, `created` and `updated` are COLUMNS beside the
+   * field map, never injected into it.
+   *
+   * So this grammar restricts the same two, and asks one thing of everything else: SURVIVE AN EDIT.
+   *
+   * A field that is visible and cannot round-trip is a field the operator can change and lose — on
+   * another machine, later, with nobody at the keyboard, because the browser authors and a different
+   * vessel projects. There is no second class of field that "should not be visible": a fact the machine
+   * derives simply is not written onto the record, and an author who later writes that name gets an
+   * ordinary custom field like any other.
+   */
+  test("every field the parse produces survives an edit, but the two the host owns", () => {
+    // `type` joins them for the same reason `title` does: the host reads it to CHOOSE a deserializer,
+    // in this grammar exactly as in TiddlyWiki's own filetype registry, and never stores it in the bytes
+    // — a carrier IS its type, so the value is re-derived on every read rather than carried.
+    const HOST_OWNED = new Set(["title", "revision", "type"]);
+    const carrier = readFileSync(path.join(REPO, "bags/@lares/ha.ka.ba/lares/api/pono/ahu.mem"), "utf8");
+    const uri = `lar:///${/^uri-path\s*=\s*"([^"]+)"/m.exec(carrier)![1]!}`;
+    const base = deserialize(carrier, uri);
+    const produced = [...new Set(base.flatMap((r) => Object.keys(r)))].filter((k) => !HOST_OWNED.has(k));
+
+    const lost: string[] = [];
+    for (const key of produced) {
+      const records = base.map((r) => ({ ...r }));
+      const target  = records.find((r) => r[key] !== undefined) ?? records[0]!;
+      const edited  = key === "text" ? `${String(target[key] ?? "")}\nEDITED` : `EDITED-${key}`;
+      target[key] = edited;
+      const by  = new Map(records.map((r) => [r["title"] as string, r]));
+      const out = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, uri);
+      if (out === null) { lost.push(`${key}: projected to nothing`); continue; }
+      const back = deserialize(out, uri);
+      const got  = String((back.find((r) => r["title"] === target["title"]) ?? back[0])?.[key] ?? "");
+      const survived = key === "text" ? got.includes("EDITED") : got === edited;
+      if (!survived) lost.push(key);
+    }
+    expect(lost).toEqual([]);
+  });
 });
