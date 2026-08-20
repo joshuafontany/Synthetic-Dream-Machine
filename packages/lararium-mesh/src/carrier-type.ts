@@ -37,3 +37,14 @@ export const CARRIER_TYPES: readonly string[] = [CARRIER_TYPE, CARRIER_TYPE_UNSU
 export function isCarrierType(type: unknown): boolean {
   return typeof type === "string" && CARRIER_TYPES.includes(type);
 }
+
+/**
+ * The declaration every carrier opens with, spelled once.
+ *
+ * It carries the grammar's NAME before the address that defines it, so a reader learns what reads the
+ * bytes before it learns where the law lives. Three carriers once opened with the address alone, minted
+ * by two writers that each spelled the line by hand — and they parsed, and round-tripped to something
+ * else, because a hand-spelled constant drifts the moment the real one moves.
+ */
+export const DECLARATION =
+  `<<!DOCTYPE ${CARRIER_TYPE_UNSUFFIXED.replace("text/x-", "")}+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>`;

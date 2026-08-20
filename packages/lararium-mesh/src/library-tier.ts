@@ -41,7 +41,7 @@
  */
 
 /** The scheme a manifest, recipe, or pour uses to name a collection without naming a directory. */
-import { CARRIER_TYPE } from "./carrier-type.js";
+import { CARRIER_TYPE, DECLARATION } from "./carrier-type.js";
 
 export const LIBRARY_REF_PREFIX = "library:" as const;
 
@@ -112,7 +112,7 @@ export function renderLibraryIndex(collection: string, entries: readonly Library
   const rows = [...entries].sort((a, b) => a.name.localeCompare(b.name));
   const total = rows.reduce((n, e) => n + e.size, 0);
   return [
-    "<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>",
+    DECLARATION,
     "",
     `<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/${collection} >>`,
     "```toml iam",

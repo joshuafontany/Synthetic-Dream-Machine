@@ -28,7 +28,7 @@
  */
 
 import { parseCapTier, DEFAULT_CAP_TIER, type CapTier } from "./cap-tier.js";
-import { CARRIER_TYPE } from "./carrier-type.js";
+import { CARRIER_TYPE, DECLARATION } from "./carrier-type.js";
 import { parseBagHome, DEFAULT_BAG_HOME, resolveBagHomeDir, type BagHome, type BagHomeRoots, type BagHomeResolution } from "./bag-home.js";
 
 /** The file a bag's self-declaration rides, at the bag's own root. A meme about the bag. */
@@ -79,7 +79,7 @@ export function bagManifestFromIam(bag: string, iam: Record<string, unknown> | n
 /** Render a manifest back to the `toml iam` body a bag's `iam.mem` carries. Stable key order — a diff reads. */
 export function renderBagManifest(m: BagManifest): string {
   const lines = [
-    "<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>",
+    DECLARATION,
     "",
     `<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/bags/${m.bag.replace(/^@/, "")} >>`,
     "```toml iam",
