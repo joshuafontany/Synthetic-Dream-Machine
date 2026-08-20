@@ -4,7 +4,7 @@
  * ── WHY THIS EXISTS ─────────────────────────────────────────────────────────────────────────────
  * `checkSpan` finds a file's FIRST `STX -> ETX` and stops, so `verifyBcc` answers for one body and
  * `bcc-witness` reports one verdict per file. That reading holds exactly as long as a carrier holds
- * one body, and nothing in this tree had ever asked whether they do.
+ * one body, and this file is what asks.
  *
  * A grep cannot ask it. This grammar TEACHES its own control set, so the specification memes carry
  * worked examples of every mark inside quote fences — one-tick inline, three- and four-tick blocks.
@@ -75,8 +75,9 @@ describe("the check reader divides a carrier where the parser divides it", () =>
    * The corpus's own specification memes are the ones that quote the control set, so the documents
    * DEFINING this instrument are the documents it misreads.
    *
-   * The cure is one line of reach: `checkSpan` takes the same mask the parser takes. Until it does,
-   * `bcc-witness: ok N` overstates its coverage by however many carriers this test names.
+   * `checkSpan` reads through that same mask, so the two meet on one span and this test holds the
+   * meeting. Nine carriers stopped verifying an example the day it did, and `bcc-witness` traded nine
+   * false `ok` readings for nine honest `unchecked` ones.
    */
   test("checkSpan lands on the body the parser sees, never on a quoted example", () => {
     const misread: string[] = [];
@@ -90,5 +91,36 @@ describe("the check reader divides a carrier where the parser divides it", () =>
       if (span.end !== realEnd) misread.push(`${rel}: reader ends ${span.end}, parser ends ${realEnd}`);
     }
     expect(misread).toEqual([]);
+  });
+});
+
+describe("the frame head locks to control, in both directions", () => {
+  const BODY = 'the body\n';
+
+  /**
+   * THE ACCEPTING HALF, which the corpus proves every run.
+   */
+  test("a control-headed frame divides a carrier", () => {
+    const carrier = `<<^ code:"&#x0002;" >>\n${BODY}\n<<^ code:"&#x0003;" >>\n`;
+    expect(checkSpan(carrier)).not.toBeNull();
+  });
+
+  /**
+   * THE REJECTING HALF, which nothing proved until now.
+   *
+   * The corpus writes only the current form, so every test that reads it confirms the matchers still
+   * FIND what the grammar emits — and none of them confirms the matchers REFUSE what it does not. That
+   * is the half a lock exists for, and the half whose absence would go unnoticed longest: a reader
+   * still admitting the speaking head passes every corpus test there is.
+   */
+  test("a speaking-headed frame does not", () => {
+    const malformed = `<<~ code:"&#x0002;" >>\n${BODY}\n<<~ code:"&#x0003;" >>\n`;
+    expect(checkSpan(malformed)).toBeNull();
+  });
+
+  /** A frame opening on control and closing on the speaking head divides nothing either. */
+  test("a mixed frame does not", () => {
+    const mixed = `<<^ code:"&#x0002;" >>\n${BODY}\n<<~ code:"&#x0003;" >>\n`;
+    expect(checkSpan(mixed)).toBeNull();
   });
 });
