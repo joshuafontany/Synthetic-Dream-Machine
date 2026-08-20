@@ -207,6 +207,6 @@ kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elev
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>⊙:20253b29828555a2
 
 <<^ code:"&#x0004;" -> ? >>

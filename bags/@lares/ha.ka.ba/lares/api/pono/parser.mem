@@ -285,6 +285,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>⊙:0d273a3e36ce9719
 
 <<^ code:"&#x0004;" -> ? >>
