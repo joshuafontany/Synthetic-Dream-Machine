@@ -52,27 +52,35 @@ describe("xdg-base (the shared XDG resolver)", () => {
     expect(larDataHome()).toBe(join("/home/tester", ".local", "share", "lares"));
   });
 
-  // The li planes must resolve the SAME string the Python holders' defaults do
-  // (structurepalace_io._default_structurepalace_dir + siblings) — capture writes and FFZ recall
-  // otherwise split across a stale pre-XDG dir (the structure-plane divergence healed 2026-07-15).
-  it("memorySensoriumStructureDir: <XDG>/lares/sensoriums/memory/structure — mirrors the py default", () => {
+  // A sensorium ABIDES: it holds capture the machine took once and cannot take again, so it stands in
+  // the shrine (`lararium/`) and never in the house whose substrate a rite reforges. Both tongues must
+  // name the shrine — the li planes resolve the SAME string the Python holders' defaults do
+  // (structurepalace_io._default_structurepalace_dir + siblings), or capture writes one dir while recall
+  // reads another (the write-only-store disease).
+  it("memorySensoriumStructureDir: <XDG>/lararium/sensoriums/memory/structure — mirrors the py default", () => {
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", "/x/data");
-    expect(memorySensoriumStructureDir()).toBe(join("/x/data", "lares", "sensoriums", "memory", "structure"));
+    expect(memorySensoriumStructureDir()).toBe(join("/x/data", "lararium", "sensoriums", "memory", "structure"));
+  });
+
+  it("the memory sensorium NEVER stands under the spirit's home — the wipe zone made structural", () => {
+    set("LAR_ROOT", undefined);
+    set("XDG_DATA_HOME", "/x/data");
+    expect(memorySensoriumStructureDir().startsWith(larDataHome())).toBe(false);
   });
 
   it("memorySensoriumFormDir / PersistenceDir: siblings under the one root", () => {
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", "/x/data");
-    const root = join("/x/data", "lares", "sensoriums", "memory");
+    const root = join("/x/data", "lararium", "sensoriums", "memory");
     expect(memorySensoriumFormDir()).toBe(join(root, "form"));
     expect(memorySensoriumPersistenceDir()).toBe(join(root, "persistence"));
   });
 
-  it("memorySensoriumStructureDir: isolated LAR_ROOT roots under <root>/data (the py branch)", () => {
+  it("memorySensoriumStructureDir: isolated LAR_ROOT roots under <root>/abide (the py branch)", () => {
     set("LAR_ROOT", "/iso");
     set("XDG_DATA_HOME", undefined);
-    expect(memorySensoriumStructureDir()).toBe(join("/iso", "data", "sensoriums", "memory", "structure"));
+    expect(memorySensoriumStructureDir()).toBe(join("/iso", "abide", "sensoriums", "memory", "structure"));
   });
 
   it("mempalaceContentParent: always the upstream-default ~/.mempalace (never the tree)", () => {

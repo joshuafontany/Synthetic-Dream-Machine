@@ -593,19 +593,17 @@ def _serve(palace_path: str) -> None:
 # the same graceful path the absent form collection takes.
 
 def _default_structurepalace_dir() -> str:
-    """The canonical structure plane — `<abide>/sensoriums/memory/structure`, where `<data>` resolves the
-    SAME XDG rule the TS `larDataHome()` (xdg-base.ts) holds: `LAR_ROOT/data` for isolated instances,
-    else `$XDG_DATA_HOME/lares` (unset → `~/.local/share/lares`). The two views stay byte-identical by
-    convention, guarded by test_structure_default_mirrors_xdg. A caller still passes `--palace`
-    (designation carries the authority); this default only keeps an unpassed holder landing true, never
-    reaching the pre-XDG `~/.lares/.structurepalace` scatter it used to."""
-    lar_root = os.environ.get("LAR_ROOT")
-    if lar_root:
-        data_home = os.path.join(lar_root, "data")
-    else:
-        xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
-        data_home = os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lares")
-    return os.path.join(data_home, "sensoriums", "memory", "structure")
+    """The canonical structure plane — `<abide>/sensoriums/memory/structure`, where `<abide>` resolves the
+    SAME rule the TS `larariumDataHome()` (xdg-base.ts) holds: `LAR_ROOT/abide` for isolated instances,
+    else `$XDG_DATA_HOME/lararium` (unset → `~/.local/share/lararium`). A sensorium abides in the shrine,
+    so both tongues must name the shrine or capture writes one dir while recall reads another — the
+    write-only-store disease. The two views stay byte-identical, guarded by
+    test_structure_default_mirrors_xdg. A caller still passes `--palace` (designation carries the
+    authority); this default only keeps an unpassed holder landing true."""
+    from sensorium import _lararium_data_home   # local: keeps this module's import graph acyclic
+
+    abide_home = _lararium_data_home()
+    return os.path.join(abide_home, "sensoriums", "memory", "structure")
 
 
 def _structure_embeddings(palace_path: str, out) -> int:

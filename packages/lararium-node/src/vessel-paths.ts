@@ -184,7 +184,7 @@ export function sensoriumNames(): string[] {
  * A bare plane name (`content`) still resolves against `memory`, which keeps the common read short.
  */
 export function sensoriumLenses(): Record<string, string> {
-  const root = join(larDataHome(), "sensoriums");
+  const root = join(larariumDataHome(), "sensoriums");
   const out: Record<string, string> = {};
 
   // DISCOVER the palaces; never declare them. A sensorium `#has` EITHER planes OR child sensoriums —
@@ -272,7 +272,7 @@ export function larContentDir(): string {
  *  composition (sensorium.ts). The cross-Lararium federation feed/carriage lives elsewhere in the mesh
  *  domain — this is directory + structure only. */
 export function meshSensoriumDir(): string {
-  return join(larDataHome(), "sensoriums", "mesh");
+  return join(larariumDataHome(), "sensoriums", "mesh");
 }
 
 /** The WHO child-sensorium dir — `<mesh>/who`. Identity/presence: content (presence-embeddings) +
@@ -307,7 +307,7 @@ export function larMeshPalaceDir(): string {
  *  `coupling.children[]` edges, NEITHER on top; the coupling plane reads the directed formal↔informal
  *  flow (memetic-wikitext-sensorium.ts). The filetree IS the composition (sensorium.ts). */
 export function memeticWikitextSensoriumDir(): string {
-  return join(larDataHome(), "sensoriums", "memetic-wikitext");
+  return join(larariumDataHome(), "sensoriums", "memetic-wikitext");
 }
 
 /** The FORMAL peer-sensorium dir — `<memetic-wikitext>/formal`. The memes-on-disk corpus (grammar/
