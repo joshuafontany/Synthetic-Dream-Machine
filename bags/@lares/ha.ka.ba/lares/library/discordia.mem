@@ -1,0 +1,30 @@
+<<!DOCTYPE lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/discordia >>
+```toml iam
+collection = "discordia"
+entries    = "5"
+bytes      = "694457"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+```
+
+! Library — discordia
+
+The ACQUIRED bodies this collection holds. ''The bytes rest outside every tracked tree'' —
+in the vessel's own library tier — so a shelf may grow without a repository growing with it.
+''This index travels instead'': a reader learns what the shelf holds, and how to verify it,
+without holding it.
+
+Each row carries the RFC-6920 anchor a stranger checks with no tooling of ours.
+
+| Name | Bytes | Anchor | Origin |
+|---|---|---|---|
+| are-discordians-serious.mem | 4817 | `ni:///sha-256;oVRoEeWZDiYjan3jYZKI60_81nM7LQi5lMj2Rk8oJKk` | //(unrecorded)// |
+| common-sense-tarot.mem | 245379 | `ni:///sha-256;OT2FGU1IUkF6vJYPUXRyUGZEjo5557EpEDLB3nS0Mqc` | //(unrecorded)// |
+| cosmic-trigger-i-chapel-perilous-prologue.mem | 15915 | `ni:///sha-256;roL_Lz56KukAPOZ5Wqaq91weIwG2LsUd4oJxeux5SR8` | //(unrecorded)// |
+| prometheus-rising-ch-8-the-4-tools.mem | 3042 | `ni:///sha-256;RlNRMmR7094zShIsqPbTsebxAxA2EFL_GYQsAXPkiRg` | //(unrecorded)// |
+| prometheus-rising.djvu.txt | 425304 | `ni:///sha-256;2n4LFworCtd87Mf3YkEHKliJsISoc9L8T4NJBV-ZHpg` | //(unrecorded)// |
+
+Reference this collection as `library:discordia` — a name that travels, never a path.
+
+<<^ code:"&#x0004;" -> ? >>
