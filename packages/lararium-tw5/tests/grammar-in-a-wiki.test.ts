@@ -34,6 +34,7 @@ import path from "node:path";
 import { TW5Engine } from "../src/tw5-vm.js";
 import { bootTestWiki, wikiSkip, skipNote } from "./test-wiki.js";
 import { expandMemeRefs } from "../src/deserializer.js";
+import { parseTaploFields } from "../src/toml-ast.js";
 import { memeticIngestOps } from "../src/ingest-gate.js";
 import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 
@@ -256,13 +257,15 @@ describe.skipIf(wikiSkip)(
     // lines around the fence. It licenses nothing about which keys stand or what they carry. So the
     // comparison runs twice — once over the raw block, once over the block read as a key-value set —
     // and the difference between those two counts sorts a rewrite from a loss.
-    const keyset = (block: string) => JSON.stringify(
-      block.split("\n").reduce<Record<string, string>>((acc, line) => {
-        const m = /^\s*([\w-]+)\s*=\s*(.*)$/.exec(line);
-        if (m) acc[m[1]!] = m[2]!.trim();
-        else if (line.trim()) acc[`~cont${Object.keys(acc).length}`] = line.trim();
-        return acc;
-      }, {}), Object.keys({}).sort());
+    // READ AS DATA, NEVER AS LINES. A line-wise reading forgives whatever it cannot see: a multi-line
+    // array whose elements merely re-indent hashes the same, and one whose elements REORDER hashes
+    // differently only by accident of which line each fell on. The grammar already stands a TOML reader,
+    // so the parity gate asks it rather than approximating it, and a value's TYPE carries into the
+    // comparison the way it carries into a tiddler field.
+    const asData = (block: string) => {
+      const fields = parseTaploFields(block);
+      return JSON.stringify(Object.keys(fields).sort().map((k) => [k, fields[k]]));
+    };
 
     const layout: string[] = [], content: string[] = [];
     for (const f of carriers) {
@@ -277,7 +280,7 @@ describe.skipIf(wikiSkip)(
       if (rendered === null) continue;
       const a = iamOf(disk), b = iamOf(rendered);
       if (a === null || b === null || a === b) continue;
-      (keyset(a) === keyset(b) ? layout : content).push(f);
+      (asData(a) === asData(b) ? layout : content).push(f);
     }
     expect(carriers.length).toBeGreaterThan(500);
     // Layout drift is a rewrite the operator sees once. CONTENT drift is a key or a value the
