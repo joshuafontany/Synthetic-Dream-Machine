@@ -26,6 +26,7 @@ import { larDataDir, loadVesselVerifyingKey, loadPersonaGroupRootVerifyingKey, r
 export {
   larHome, larDataDir, larIdentityDir, larProjectionDir, larSealHome, larBootstrapPath,
   larHarvestDir, larHarvestStageDir, larStructurePalaceDir, larFormPalaceDir,
+  larariumDataHome,
 } from "@lararium/node";
 
 /** The committed marker that opts a checkout in as the repo dev-preset corpus root. */

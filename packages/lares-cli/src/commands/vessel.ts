@@ -23,7 +23,7 @@
  *   seed   plants every bags holding back into its doc, kind-routed, diff-gated — idempotent
  *   read   the pure inspection that starts nothing
  *
- * `build` — compile the workspace and stamp the source digest — rides inside `flow refresh` rather
+ * `build` — compile the workspace and stamp the source digest — rides inside `rite refresh` rather
  * than standing alone: it moves the TREE, not the vessel, and a door over one island should not hold
  * a motion that belongs to the workspace.
  *
@@ -79,7 +79,7 @@ async function standVessel(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `vessel flow <petname>` — the pet-named cap-stacks over the primitives.
+ * `vessel rite <petname>` — the pet-named cap-stacks over the primitives.
  *
  * Each of these composes a SEQUENCE, and naming a sequence at the top level is exactly how a surface
  * grows back. They live behind one sub-door so a new composition arrives as a new RITE rather than a new

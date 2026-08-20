@@ -1,5 +1,5 @@
 /**
- * `lares vessel flow rebirth` — CRDT-layer rebirth from bags/ (alpha ritual).
+ * `lares vessel rite rebirth` — CRDT-layer rebirth from bags/ (alpha ritual).
  *
  * SCOPE: the CRDT/wiki-bags layers + the CID'd genesis
  * blobs ONLY. The mempalace nuke-and-pave runs at its own cadence as the Sensorium
@@ -102,7 +102,7 @@ export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise
   ];
 
   if (!args.flags["force"]) {
-    console.log(`lares vessel flow rebirth --bag ${h.holding} — targeted single-bag rebirth (preview; pass --force to enact)`);
+    console.log(`lares vessel rite rebirth --bag ${h.holding} — targeted single-bag rebirth (preview; pass --force to enact)`);
     for (let i = 0; i < scopedSteps.length; i++) console.log(`  [L4 ${i + 1}/${scopedSteps.length}] ${scopedSteps[i]}`);
     console.log(`  UNTOUCHED: @daemon · sibling bags (${holdings.filter((x) => x.holding !== h.holding).map((x) => x.holding).join(" · ") || "(none)"}) · ${larIdentityDir()} (keys) · genesis · the mempalace · the running vessel (never stopped)`);
     return 0;
@@ -152,7 +152,7 @@ export async function cmdRegenesis(args: ParsedArgs): Promise<number> {
   if (bagArg) return cmdRegenesisBag(args, bagArg);
 
   if (!args.flags["force"]) {
-    console.log("lares vessel flow rebirth — CRDT-layer rebirth from bags/ (preview; pass --force to enact)");
+    console.log("lares vessel rite rebirth — CRDT-layer rebirth from bags/ (preview; pass --force to enact)");
     for (let i = 0; i < STEPS.length; i++) console.log(`  ${step(i)}`);
     const holdings = discoverHoldings(larRoot());
     console.log(`  holdings to re-seed: ${holdings.map((h) => h.holding).join(" · ") || "(none found!)"}`);

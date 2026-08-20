@@ -8,7 +8,7 @@
 import { join } from "node:path";
 import { runTsxScript, runCommand } from "../spawn.js";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
-import { larDataDir, larProjectionDir, larIdentityDir, larRoot } from "../env.js";
+import { larDataDir, larProjectionDir, larIdentityDir, larariumDataHome, larRoot } from "../env.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const NODE_PKG = join(REPO_ROOT, "packages", "lararium-node");
@@ -122,7 +122,7 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   //
   // Measured: the attach succeeded, the seed then failed six-for-six with exit 3, and standing against
   // the half-cleared store left `@catalog` unreadable — "hearth-private doc unavailable — local
-  // corruption". Only `flow rebirth` recovered it. None of that announced itself as a wipe/holder race.
+  // corruption". Only `rite rebirth` recovered it. None of that announced itself as a wipe/holder race.
   //
   // The clear owns this because it owns the destruction: whoever removes the store is the one who can
   // still name what was holding it.
@@ -141,7 +141,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   }
 
   for (const t of targets) rmSync(t.path, { recursive: t.recursive, force: true });
-  console.log(`[lares vessel clear] preserved identity: ${larIdentityDir()} (out of the wipe zone — the seal, the library and the repo registry sit beside it, equally untouched)`);
+  console.log(`[lares vessel clear] preserved identity: ${larIdentityDir()} (the seal and the repo registry sit beside it, equally untouched)`);
+  console.log(`[lares vessel clear] preserved the shrine: ${larariumDataHome()} (the acquired shelf + every sensorium — another house entirely, named by no wipe)`);
   // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
   // must exist first. (The reverse order fails: "hearth true-name (engine CID) absent".)
   console.log("[lares vessel clear] cleared. Rebuilding genesis artifact…");
@@ -161,7 +162,7 @@ export async function cmdFresh(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares vessel flow refresh` — THE idempotent post-dev-change cure. After ANY code edit, run this:
+ * `lares vessel rite refresh` — THE idempotent post-dev-change cure. After ANY code edit, run this:
  *   1. `pnpm -r build`     — recompile every package's dist (the island workers spawn from dist, not
  *                            tsx-source — a stale dist = a half-dead vessel). Idempotent.
  *   2. re-pave + serve    — stop the incumbent on the port (graceful→force, by port-access, no PID
@@ -169,20 +170,20 @@ export async function cmdFresh(args: ParsedArgs): Promise<number> {
  *                            under the fresh build; identity preserved), then serve the dist.
  *
  * Idempotent from ANY prior state (running / stale / none). The dev-loop siblings, by reach:
- *   - `vessel flow refresh`            : code changed → REBUILD + re-pave + serve  (this — the full cure)
+ *   - `vessel rite refresh`            : code changed → REBUILD + re-pave + serve  (this — the full cure)
  *   - `vessel stand --restart`         : converge a running vessel (no rebuild, no wipe)
- *   - `vessel flow rebuild`            : dep-bump serde skew → re-bake genesis only (NO wipe, identity-safe)
+ *   - `vessel rite rebuild`            : dep-bump serde skew → re-bake genesis only (NO wipe, identity-safe)
  *   - `vessel stand --restart --clear` : re-pave + serve, assuming dist already current
  *   - `vessel stand --foreground`      : boot the dist, fail-fast (no convergence, no rebuild)
  */
 export async function cmdRefresh(args: ParsedArgs): Promise<number> {
-  console.log("[lares vessel flow refresh] (1/2) pnpm -r build — recompiling all dist…");
+  console.log("[lares vessel rite refresh] (1/2) pnpm -r build — recompiling all dist…");
   const buildCode = await runCommand("pnpm", ["-r", "build"], REPO_ROOT);
   if (buildCode !== 0) {
-    console.error("[lares vessel flow refresh] build failed — fix the compile, then re-run `lares vessel flow refresh`.");
+    console.error("[lares vessel rite refresh] build failed — fix the compile, then re-run `lares vessel rite refresh`.");
     return buildCode;
   }
-  console.log("[lares vessel flow refresh] (2/2) reconcile --fresh — re-pave + serve…");
+  console.log("[lares vessel rite refresh] (2/2) reconcile --fresh — re-pave + serve…");
   return cmdReconcile({ ...args, flags: { ...args.flags, fresh: true } });
 }
 
@@ -212,7 +213,7 @@ export async function cmdReconcile(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares vessel flow rebuild` — the identity-safe dep-bump cure (Tier 0).
+ * `lares vessel rite rebuild` — the identity-safe dep-bump cure (Tier 0).
  *
  * When a dependency bump (keyhive / automerge / beelay / TW5) skews the on-disk
  * serde format, the vessel-host can't deserialize the stored genesis engine and
@@ -231,13 +232,13 @@ export async function cmdRebuild(args: ParsedArgs): Promise<number> {
   const { stopIncumbent } = await import("../port-control.js");
   try {
     const r = await stopIncumbent(port);
-    if (r.stopped) console.log(`[lares vessel flow rebuild] stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})`);
-    else           console.log(`[lares vessel flow rebuild] :${port} already free`);
+    if (r.stopped) console.log(`[lares vessel rite rebuild] stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})`);
+    else           console.log(`[lares vessel rite rebuild] :${port} already free`);
   } catch (e) {
-    console.error(`[lares vessel flow rebuild] ${e instanceof Error ? e.message : String(e)}`);
+    console.error(`[lares vessel rite rebuild] ${e instanceof Error ? e.message : String(e)}`);
     return 1;
   }
-  console.log("[lares vessel flow rebuild] rebuilding genesis engine under current deps (storage + identity untouched)…");
+  console.log("[lares vessel rite rebuild] rebuilding genesis engine under current deps (storage + identity untouched)…");
   const genesisCode = await cmdBuildGenesis(rootedArgs);
   if (genesisCode !== 0) return genesisCode;
   return cmdServe(rootedArgs);

@@ -102,15 +102,15 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "read: `found` mints identity + bootstrap · `stand` brings the daemon up and reports · `stop` " +
       "halts it on the port · `clear` wipes the store and re-founds (identity survives) · `bake` " +
       "re-derives the genesis island · `seed` plants every bags/@* holding back into its doc · `read` " +
-      "inspects and starts nothing. Compositions ride `vessel flow <petname>`, so a new cap-stack " +
-      "arrives as a flow rather than another top-level verb.",
+      "inspects and starts nothing. Compositions ride `vessel rite <petname>`, so a new cap-stack " +
+      "arrives as a rite rather than another top-level verb.",
     examples: [
       "lares vessel stand                      # idempotent boot, attach-or-start, and REPORT",
       "lares vessel stand --init               # ... + stand up every palace organ",
       "lares vessel stand --install --claude   # cold-pull standup + wire ~/.claude",
       "lares vessel read --palaces             # health, plus the palace-organ table",
       "lares vessel seed --apply --yes         # plant every holding (idempotent)",
-      "lares vessel flow refresh               # the post-code-change cure: build · stop · clear · stand",
+      "lares vessel rite refresh               # the post-code-change cure: build · stop · clear · stand",
     ],
     flags: [
       "stand --foreground   this terminal owns the node (no Vite)",
@@ -121,7 +121,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "stand --admit <file>        join an existing operator PersonaGroup",
       "stand --claude/--codex/--copilot/--vscode   wire that harness's mempalace MCP + hook",
       "read --palaces       the palace-organ health table (mempalace · structure · form · mesh)",
-      "flow <petname>       refresh · rebuild · rebirth — the pet-named cap-stacks",
+      "rite <petname>       founding · refresh · rebuild · rebirth — the pet-named cap-stacks",
     ],
     next: ["lares vessel read --palaces", "lares sense pour --all"],
   },

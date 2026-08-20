@@ -5,7 +5,7 @@ export {
   larHarvestDir, larHarvestStageDir, larRuntimeDir, larStructurePalaceDir, larFormPalaceDir,
   larMempalaceDir, larContentDir, larMeshPalaceDir, scratchSensoriumDir, scratchSensoriumInstanceDir,
   // XDG base homes + the memory sensorium dir + config path (the consolidated layout).
-  larDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
+  larDataHome, larariumDataHome, larStateHome, larCacheHome, larConfigHome, larRuntimeHome, larConfigPath,
   memorySensoriumDir, memorySensoriumLenses, sensoriumLenses, sensoriumNames, sensoriumDir,
   // The `mesh` sensorium dir + its WHO/AUTHORITY/FLOW child dirs (the consolidated federation tree).
   meshSensoriumDir, meshWhoDir, meshAuthorityDir, meshFlowDir,
