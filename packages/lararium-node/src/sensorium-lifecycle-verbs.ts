@@ -36,7 +36,7 @@ import { atomicWriteFileSync } from "./fs-atomic.js";
  *  pioneer (a later reconcile, once the signal wires, can tenure it). Arbitrary until F6 calibration. */
 export const DEFAULT_HARDENING_HALFLIFE = 30 as const;
 
-/** The sensoriums root — `<data>/sensoriums` — derived from {@link sensoriumDir} (no extra path import). */
+/** The sensoriums root — `<abide>/sensoriums` — derived from {@link sensoriumDir} (no extra path import). */
 function sensoriaRoot(): string {
   return dirname(sensoriumDir("_"));
 }
@@ -56,7 +56,7 @@ export interface LifecycleRow {
   readonly retiredGrounds?: MustieGround;
 }
 
-/** LIST every sensorium standing under `<data>/sensoriums`, each with its declared/derived lifecycle. */
+/** LIST every sensorium standing under `<abide>/sensoriums`, each with its declared/derived lifecycle. */
 export function rosterSensoria(): LifecycleRow[] {
   const rows: LifecycleRow[] = [];
   for (const name of sensoriumNames()) {
@@ -190,7 +190,7 @@ export function buildEphemeralSensorium(name: string, opts: { halfLife?: number 
 
 // ── the alias-indirection store (Sanity hot-swap) — the gated store-swap promote's plumbing ────────────
 
-/** `<data>/sensoriums/.aliases.json` — a name → underlying-dir map. Empty/absent until a store-swap runs. */
+/** `<abide>/sensoriums/.aliases.json` — a name → underlying-dir map. Empty/absent until a store-swap runs. */
 function aliasStorePath(): string {
   return join(sensoriaRoot(), ".aliases.json");
 }

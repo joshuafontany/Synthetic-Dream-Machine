@@ -95,17 +95,32 @@ def _lar_data_home() -> str:
     return os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lares")
 
 
+def _lararium_data_home() -> str:
+    """Resolve the ABIDING home the SAME way TS `larariumDataHome` (xdg-base.ts) resolves it: `LAR_ROOT/abide`
+    for an isolated instance, else `$XDG_DATA_HOME/lararium` (unset -> `~/.local/share/lararium`).
+
+    LARES PASS; THE LARARIUM ABIDES. A Lar carries the vessel substrate every rite reforges; the shrine holds
+    what no rite re-makes. A sensorium is operator history and DreamNet history — capture the machine took
+    once and cannot take again — so it stands here, and survives a complete re-founding by living in another
+    house rather than by staying off a wipe's list."""
+    lar_root = os.environ.get("LAR_ROOT")
+    if lar_root:
+        return os.path.join(lar_root, "abide")
+    xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
+    return os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lararium")
+
+
 def sensorium_dir(name: str) -> str:
-    """Turn a sensorium NAME into its root — `<data>/sensoriums/<name>` — mirroring TS `sensoriumDir`
+    """Turn a sensorium NAME into its root — `<abide>/sensoriums/<name>` — mirroring TS `sensoriumDir`
     (vessel-paths.ts). The one shore a `lares sense <sensorium>` / MCP `sensorium=` address crosses to
     reach a target root; `memory` resolves the same dir the memory default names."""
-    return os.path.join(_lar_data_home(), "sensoriums", name)
+    return os.path.join(_lararium_data_home(), "sensoriums", name)
 
 
 def sensorium_names() -> "list[str]":
-    """Roster every sensorium standing under `<data>/sensoriums` — the names an address may reach.
+    """Roster every sensorium standing under `<abide>/sensoriums` — the names an address may reach.
     Mirrors TS `sensoriumNames`; an absent dir reads as an empty roster rather than raising."""
-    root = os.path.join(_lar_data_home(), "sensoriums")
+    root = os.path.join(_lararium_data_home(), "sensoriums")
     try:
         return sorted(e.name for e in os.scandir(root) if e.is_dir())
     except OSError:

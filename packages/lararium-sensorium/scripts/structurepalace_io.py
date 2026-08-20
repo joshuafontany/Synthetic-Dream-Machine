@@ -51,7 +51,7 @@ mirrors kg_io's raw-sqlite-beside-chroma idiom) keeps the turn_key → structura
 since chroma cannot where-filter inside a JSON provenance list.
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
-  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 structurepalace_io.py serve --palace <data>/sensoriums/memory/structure
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 structurepalace_io.py serve --palace <abide>/sensoriums/memory/structure
 """
 from __future__ import annotations
 
@@ -593,7 +593,7 @@ def _serve(palace_path: str) -> None:
 # the same graceful path the absent form collection takes.
 
 def _default_structurepalace_dir() -> str:
-    """The canonical structure plane — `<data>/sensoriums/memory/structure`, where `<data>` resolves the
+    """The canonical structure plane — `<abide>/sensoriums/memory/structure`, where `<data>` resolves the
     SAME XDG rule the TS `larDataHome()` (xdg-base.ts) holds: `LAR_ROOT/data` for isolated instances,
     else `$XDG_DATA_HOME/lares` (unset → `~/.local/share/lares`). The two views stay byte-identical by
     convention, guarded by test_structure_default_mirrors_xdg. A caller still passes `--palace`
@@ -657,7 +657,7 @@ def main() -> None:
         "structure-embeddings",
         help="batch readback of structure vectors keyed by verbatim_sha (the FFZ 3rd plane)",
     )
-    se.add_argument("--palace", default="", help="the structure plane dir (default: <data>/sensoriums/memory/structure)")
+    se.add_argument("--palace", default="", help="the structure plane dir (default: <abide>/sensoriums/memory/structure)")
     se.set_defaults(fn=cmd_structure_embeddings)
     args = ap.parse_args()
     args.fn(args)

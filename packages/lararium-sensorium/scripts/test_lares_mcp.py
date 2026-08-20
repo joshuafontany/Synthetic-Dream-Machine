@@ -595,23 +595,30 @@ def test_daemon_routed_set_names_the_wired_verbs():
 
 
 def test_sensorium_address_resolver_honors_lar_root(monkeypatch, tmp_path):
-    # the py resolver mirrors TS larDataHome/sensoriumDir: LAR_ROOT/data for an isolated instance, so the
-    # MCP `sensorium=` address and the CLI `lares sense <sensorium>` name ONE root byte-for-byte.
+    # the py resolver mirrors TS larariumDataHome/sensoriumDir: LAR_ROOT/abide for an isolated instance, so
+    # the MCP `sensorium=` address and the CLI `lares sense <sensorium>` name ONE root byte-for-byte.
+    #
+    # A SENSORIUM ABIDES. It holds operator history and DreamNet history — capture the machine took once and
+    # cannot take again — so it homes in the shrine beside the acquired shelf, never in the spirit's house
+    # where a rite reforges the substrate. `abide/` mirrors the `lararium/` home the XDG fall takes below.
     from sensorium import sensorium_dir, sensorium_names
     monkeypatch.setenv("LAR_ROOT", str(tmp_path))
     monkeypatch.delenv("XDG_DATA_HOME", raising=False)
-    assert sensorium_dir("memory") == os.path.join(str(tmp_path), "data", "sensoriums", "memory")
+    assert sensorium_dir("memory") == os.path.join(str(tmp_path), "abide", "sensoriums", "memory")
     assert sensorium_names() == []                         # an absent dir rosters empty, never raises
-    os.makedirs(os.path.join(str(tmp_path), "data", "sensoriums", "ai-sessions"))
+    os.makedirs(os.path.join(str(tmp_path), "abide", "sensoriums", "ai-sessions"))
     assert "ai-sessions" in sensorium_names()             # a stood sensorium shows in the roster
+    # AND IT STANDS CLEAR OF THE WIPE ZONE: nothing a rite reforges shares this root.
+    assert not sensorium_dir("memory").startswith(os.path.join(str(tmp_path), "data"))
 
 
 def test_sensorium_address_resolver_falls_to_xdg(monkeypatch, tmp_path):
-    # LAR_ROOT unset → $XDG_DATA_HOME/lares/sensoriums/<name>, the same fall TS larDataHome takes.
+    # LAR_ROOT unset → $XDG_DATA_HOME/lararium/sensoriums/<name>, the same fall TS larariumDataHome takes.
     from sensorium import sensorium_dir
     monkeypatch.delenv("LAR_ROOT", raising=False)
     monkeypatch.setenv("XDG_DATA_HOME", str(tmp_path))
-    assert sensorium_dir("mesh") == os.path.join(str(tmp_path), "lares", "sensoriums", "mesh")
+    assert sensorium_dir("mesh") == os.path.join(str(tmp_path), "lararium", "sensoriums", "mesh")
+    assert "lares" not in sensorium_dir("mesh").split(os.sep)   # the spirit's house holds no history
 
 
 # ── the human-query INSTRUMENTS: rejim (rhythm) · analyze (change-points) · the routed analyze wall ──

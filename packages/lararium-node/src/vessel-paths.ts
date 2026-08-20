@@ -4,12 +4,12 @@
  * durable state, and config each land in their proper XDG home instead of one `~/.lares` monolith:
  *
  *   $XDG_DATA_HOME/lares    (~/.local/share/lares)  — WHAT A LAR CARRIES: the sovereign identity, the
- *                                                     Nexus seal, the repo registry, the `memory`
- *                                                     SENSORIUM, and the vessel substrate every rite
- *                                                     reforges beneath them.
- *   $XDG_DATA_HOME/lararium (~/.local/share/lararium) — WHAT THE SHRINE ABIDES: the acquired library, and
- *                                                     whatever else no rite re-makes and no carrier
- *                                                     re-derives. LARES PASS; THE LARARIUM ABIDES — the
+ *                                                     Nexus seal, the repo registry, and the vessel
+ *                                                     substrate every rite reforges beneath them.
+ *   $XDG_DATA_HOME/lararium (~/.local/share/lararium) — WHAT THE SHRINE ABIDES: the acquired library and
+ *                                                     the SENSORIUMS — operator history and DreamNet
+ *                                                     history, capture the machine took once and cannot
+ *                                                     take again. LARES PASS; THE LARARIUM ABIDES — the
  *                                                     wipe zone made structural, so a tier survives by
  *                                                     standing in another house, never by a list.
  *   $XDG_STATE_HOME/lares   (~/.local/state/lares)  — WATERMARKS ALONE: harvest, harvest-stage,
@@ -19,14 +19,14 @@
  *   $XDG_RUNTIME_DIR/lares  (tmpfs, or os.tmpdir()) — transient spool (+ future sockets/locks/pids).
  *
  * The SENSORIUM consolidation (SHEAF-TRUE): content ← the contentpalace, structure ← the structurepalace,
- * form ← the formpalace, ALL THREE co-located under `<data>/sensoriums/memory/{content,structure,form}`
+ * form ← the formpalace, ALL THREE co-located under `<abide>/sensoriums/memory/{content,structure,form}`
  * so the filetree IS the composition (sensorium.ts). The lararium OWNS its content plane: the sovereign
  * contentpalace inherits mempalace's exact base schema, holds content internally under the XDG data dir,
  * and adopting a user's mempalace history runs as a deliberate one-way import Act (`guest-import.ts`),
  * never a runtime binding. bands + coupling are BASE caps — they live in the manifest, never as dirs.
  *
  * The mesh federation store lives as its OWN `mesh` SENSORIUM that `#has` three nested child sensoriums
- * (WHO · AUTHORITY · FLOW) under `<data>/sensoriums/mesh`, the children hanging below it. The mesh's own
+ * (WHO · AUTHORITY · FLOW) under `<abide>/sensoriums/mesh`, the children hanging below it. The mesh's own
  * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
  *
  * Every resolver answers the canonical XDG dir deterministically — one canonical home, no `~/.lares`
@@ -121,10 +121,10 @@ export function larHome(): string {
 
 // ── The `memory` sensorium (content · structure · form) ──────────────────────────────────────────
 
-/** The `memory` sensorium dir — `<data>/sensoriums/memory`. Its manifest declares content/structure/
+/** The `memory` sensorium dir — `<abide>/sensoriums/memory`. Its manifest declares content/structure/
  *  form/persistence (fiber caps, leaf-dirs below) + bands/coupling (base caps, manifest-only). */
 export function memorySensoriumDir(): string {
-  return join(larDataHome(), "sensoriums", "memory");
+  return join(larariumDataHome(), "sensoriums", "memory");
 }
 
 /**
@@ -151,16 +151,16 @@ export function memorySensoriumLenses(): Record<string, string> {
   };
 }
 
-/** Resolve a sensorium NAME to its root dir — `<data>/sensoriums/<name>` (the manifest lives beneath it).
+/** Resolve a sensorium NAME to its root dir — `<abide>/sensoriums/<name>` (the manifest lives beneath it).
  *  The one place a `lares sense <sensorium> <verb>` address turns a name into a target root; `memory`
  *  resolves to {@link memorySensoriumDir} by construction (same join), so the default stays identical. */
 export function sensoriumDir(name: string): string {
-  return join(larDataHome(), "sensoriums", name);
+  return join(larariumDataHome(), "sensoriums", name);
 }
 
-/** Every sensorium standing under `<data>/sensoriums` — the ones a lens may name. */
+/** Every sensorium standing under `<abide>/sensoriums` — the ones a lens may name. */
 export function sensoriumNames(): string[] {
-  const root = join(larDataHome(), "sensoriums");
+  const root = join(larariumDataHome(), "sensoriums");
   try {
     return readdirSync(root, { withFileTypes: true })
       .filter((e) => e.isDirectory())
@@ -267,7 +267,7 @@ export function larContentDir(): string {
 
 // ── The `mesh` sensorium (WHO · AUTHORITY · FLOW) ─────────────────────────────────────────────────
 
-/** The `mesh` sensorium dir — `<data>/sensoriums/mesh`. Its manifest declares MINIMAL own caps + three
+/** The `mesh` sensorium dir — `<abide>/sensoriums/mesh`. Its manifest declares MINIMAL own caps + three
  *  nested children (who/authority/flow) as dumb `coupling.children[]` edges; the filetree IS the
  *  composition (sensorium.ts). The cross-Lararium federation feed/carriage lives elsewhere in the mesh
  *  domain — this is directory + structure only. */
@@ -302,7 +302,7 @@ export function larMeshPalaceDir(): string {
 
 // ── The `memetic-wikitext` sensorium (FORMAL ⋈ INFORMAL peers, neither top) ───────────────────────
 
-/** The `memetic-wikitext` sensorium dir — `<data>/sensoriums/memetic-wikitext`. A nameless nested
+/** The `memetic-wikitext` sensorium dir — `<abide>/sensoriums/memetic-wikitext`. A nameless nested
  *  entity that `#has` NO fiber cap and TWO PEER child-sensoria (formal ⋈ informal) as dumb
  *  `coupling.children[]` edges, NEITHER on top; the coupling plane reads the directed formal↔informal
  *  flow (memetic-wikitext-sensorium.ts). The filetree IS the composition (sensorium.ts). */

@@ -63,7 +63,7 @@ export function mempalaceContentParent(): string {
 }
 
 /**
- * The SOVEREIGN content plane — `<data>/sensoriums/memory/content`. The plane the capture path fills
+ * The SOVEREIGN content plane — `<abide>/sensoriums/memory/content`. The plane the capture path fills
  * every turn, and therefore the plane every reader must NAME. An unpassed palace path is not a default:
  * it is a silent reach into the guest, and it is why this store spent its life write-only.
  *
@@ -75,13 +75,13 @@ export function memorySensoriumContentDir(): string {
 }
 
 /**
- * The `memory` sensorium root — `<data>/sensoriums/memory`. Home to the li planes AND to the worldline
+ * The `memory` sensorium root — `<abide>/sensoriums/memory`. Home to the li planes AND to the worldline
  * stores (the KG + the fork-DAG). It sits SOVEREIGN, never inside the guest comparator: a rite that
  * paves the comparator must never reach a plane the RUN writes, and the worldline holds lineage the
  * comparator has no claim on.
  */
 export function memorySensoriumDir(): string {
-  return join(larDataHome(), "sensoriums", "memory");
+  return join(larariumDataHome(), "sensoriums", "memory");
 }
 
 /**

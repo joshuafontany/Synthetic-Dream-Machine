@@ -68,7 +68,7 @@ read faces only.
 
 Usage (the mempalace venv):
   PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 dream_pass.py run \
-      --eidetic <data>/sensoriums/human-text-lares-memes [--dream <root>] \
+      --eidetic <abide>/sensoriums/human-text-lares-memes [--dream <root>] \
       [--tolerance 0.25] [--min-support 2] [--max-forms 64] [--max-candidates 384] \
       [--loci-cap 32]
 
