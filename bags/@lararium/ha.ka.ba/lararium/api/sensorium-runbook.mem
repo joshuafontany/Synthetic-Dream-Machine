@@ -12,7 +12,7 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis"
 retain    = true
-role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per re-pour), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. MEASURED CORRECTION: the CLI does NOT read narrower — the two surfaces slice DIFFERENTLY. `lares sense` carries a wide sensorium door (capture · setup · sweep · meta · teardown · quiesce/resume/holders · the durable lifecycle · the instrument set), while the MCP roster spans SEVERAL CLI verb-groups at once (vault_* · wiki · kapae belong to `lares vault`/`wiki`/`edge`, never to `sense`). Neither is a subset of the other, so `alignment` means naming the slicing rather than widening one to match."
+role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per re-pour), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. MEASURED CORRECTION: the CLI does NOT read narrower — the two surfaces slice DIFFERENTLY. `lares sense` carries a wide sensorium door (capture · setup · sweep · meta · teardown · quiesce/resume/holders · the durable lifecycle · the instrument set), while the MCP roster spans SEVERAL CLI verb-groups at once (vault_* · wiki · kapae belong to `lares vault`/`wiki`/`edge`, never to `sense`). Neither is a subset of the other, so `alignment` means naming the slicing rather than widening one to match. Carries the SITING LAW (#the-planes): three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — and a sensorium holds operator history and DreamNet history, so it belongs to the HOUSE and stands at `<lararium>/sensoriums/<name>` (`larariumDataHome()` / `_lararium_data_home()`, one string in both tongues). Under LAR_ROOT every directory names an XDG KIND and the two houses nest inside the data kind, so an isolated root reads as the real disk with a different prefix. The teardown preflight names the one reach that stays INTENDED: the operator's own hand."
 status    = "rite"
 status-why = "the tending rite; its verb surface stands verified against the live roster"
 tags      = ["api/pono/li-ki-integrities", "api/pono/sensorium-machina", "lararium/mesh/founding-runbook", "api/pono/causal-islands", "api/lararium/living-grammar-palace"]
@@ -57,6 +57,32 @@ the consecration. ''This one runs the daily offering.''
 ''A sensorium holds planes, and a plane holds nothing until something feeds it.'' The instruments read
 whatever stands; against an unfed plane they answer honestly and say nothing, which reads identical to a
 broken instrument unless the operator knows which planes carry weight.
+
+!!! Where a sensorium stands ~ the house's own home
+
+''THREE WORDS, AND NONE OF THEM ARE SYNONYMS'': ''lares'' names the SPIRITS (agents, personas — their
+identity, and the vessel substrate they run on), ''lararium'' names the HOUSE (the acquired shelf, the
+sensoriums, the history), and ''lar'' names the NAMESPACE, the `lar:///…` URIs and every resolver in the
+stack. ''Every siting answers one question — whose is this?'' A sensorium holds operator history and
+DreamNet history, so it belongs to the HOUSE, and it stands in the house's home:
+
+|! form |! the sensorium root |! resolver |
+| the operator's disk | `~/.local/share/lararium/sensoriums/<name>` | `larariumDataHome()` · `_lararium_data_home()` |
+| an isolated root (`LAR_ROOT`) | `<root>/data/lararium/sensoriums/<name>` | the same two, re-prefixed |
+
+Under an isolated root each directory names an XDG ''KIND'' — data, state, cache, config, run — and the two
+HOUSES nest inside the data kind exactly as they do under XDG: `<root>/data/lares` beside
+`<root>/data/lararium`. ''A house never stands where a kind belongs'', so an isolated root reads as the real
+disk with a different prefix and a rehearsal never reaches the operator's own planes. Both tongues resolve
+the same string — the TypeScript `larariumDataHome()` and the Python `_lararium_data_home()` — so a holder
+started from either side opens the same store.
+
+<<~ confidence Canon 17/20 >> ''What a rite re-makes decides nothing here; whose it is decides everything.''
+A Lar wakes, acts and gives way, and `clear`, `bake` and `rebirth` reforge the substrate beneath it whole.
+None of them reach a sensorium, because a sensorium never stood in the spirits' home to begin with. That it
+also survives every founding reads as the ''CONSEQUENCE'' of belonging to the house, never the reason — and
+belonging makes the protection STRUCTURAL: a tier kept safe by its absence from a wipe-list stays safe until
+somebody widens the list by one path segment, while a tier standing in its own house leaves no edge to widen.
 
 !!! What feeds what ~ four planes over four bases
 
@@ -244,6 +270,10 @@ Run every check before the first deletion:
   than a pending queue. A pending entry names work that never landed anywhere else.
 # ''The old provenance kept.'' Copy the write log out before the teardown — not for recovery, but as the
   baseline the new pour gets compared against. It costs kilobytes.
+# ''The operator's hand named the store.'' `lares sense teardown`, `purge` and `rederive.py` reach into
+  `<lararium>/sensoriums` ''on purpose'' — a dev-time re-pour wants exactly that, and no guard belongs on
+  them. The structural protection covers the machine's rites, never the operator's own hand, so the reading
+  the operator must not lose stands at #catastrophe ⑥: capture the machine took once and cannot take again.
 
 !!! The movement
 
@@ -392,6 +422,6 @@ absence of finding and absence of looking generate identically.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⚕:d50370e4b06f51bb
+<<^ code:"&#x0003;" >>⚕:f928e108862bc72f
 
 <<^ code:"&#x0004;" -> ? >>
