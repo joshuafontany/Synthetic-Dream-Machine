@@ -29,6 +29,7 @@
 // second spelling of one primitive, and the isomorphic surface is exactly where that costs most.
 import { sha256HexSync } from "@lararium/mesh/crypto";
 
+import { fencedSpans, maskedExec } from "./meme-ast/fence-mask.js";
 import { frameMark } from "./frame-marks.js";
 
 /**
@@ -40,19 +41,24 @@ import { frameMark } from "./frame-marks.js";
  */
 export const BCC_HEX = 16;
 
-/** The span a check covers: STX opener through ETX closer, inclusive. Null when the frame is absent. */
+/**
+ * The span a check covers: STX opener through ETX closer, inclusive. Null when the frame is absent.
+ *
+ * READ THROUGH THE FENCE MASK, because this grammar teaches its own control set. The specification
+ * memes carry worked examples of every mark inside quote fences, and a raw `indexOf` locks onto the
+ * FIRST one it meets — which in those documents is an example, hundreds of lines above the body. Six
+ * carriers verified that way: the reader confirmed a check written inside a teaching example and
+ * reported `ok` while the carrier's own body went unexamined. The emitter never had that fault, since
+ * it divides a carrier the way the deserializer does; this reader now meets it on one span.
+ */
 export function checkSpan(text: string): { start: number; end: number } | null {
-  const stx = frameMark("&#x0002;")!.code;
-  const etx = frameMark("&#x0003;")!.code;
-  const stxAt = text.indexOf(stx);
-  if (stxAt < 0) return null;
-  const start = text.lastIndexOf("<<", stxAt);
-  if (start < 0) return null;
-  const etxAt = text.indexOf(etx, stxAt);
-  if (etxAt < 0) return null;
-  const close = text.indexOf(">>", etxAt);
-  if (close < 0) return null;
-  return { start, end: close + 2 };
+  const spans = fencedSpans(text);
+  const stxM = maskedExec(text, /<<[~^](?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g, spans);
+  if (!stxM) return null;
+  const rest = text.slice(stxM.index);
+  const etxM = maskedExec(rest, /<<[~^](?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g, fencedSpans(rest));
+  if (!etxM) return null;
+  return { start: stxM.index, end: stxM.index + etxM.index + etxM[0].length };
 }
 
 /** The check over an already-isolated body span. */
