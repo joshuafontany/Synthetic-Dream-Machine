@@ -207,7 +207,7 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" ahu #body-close >>
+<<^ code:"&#x0003;" ahu #body-close >>:0a87cafa3443f830
 Alpha test prompt closes the active session stream here.
 <<~/ahu >>
 

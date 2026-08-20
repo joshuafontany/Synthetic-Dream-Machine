@@ -1104,6 +1104,6 @@ Both questions surface before S9 (lararium-browser) and should inform the
 * `packages/lararium-mesh/src/capability.ts` — NEW; `buildDeviceDelegation`, `verifyDeviceDelegation` (S7.1)
 * `packages/lares-core/memes/api/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:a5d95c6bae129713
 
 <<^ code:"&#x0004;" -> ? >>
