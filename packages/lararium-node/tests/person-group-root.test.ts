@@ -20,7 +20,7 @@ import {
 import { larIdentityDir } from "../src/vessel-paths.js";
 
 const freshDataDir = (): string => join(mkdtempSync(join(tmpdir(), "lares-pgroot-")), ".lararium");
-/** The identity dir answers to `larIdentityDir()` — `<state>/identity`, beside the wiped `<data>/vessel`. */
+/** The identity dir answers to `larIdentityDir()` — `<state>/identity`, beside the wiped `<lares>/vessel`. */
 const idDirOf = (_dataDir: string): string => larIdentityDir();
 const find = (idDir: string, prefix: string): string | undefined =>
   readdirSync(idDir).find((f) => f.startsWith(prefix));

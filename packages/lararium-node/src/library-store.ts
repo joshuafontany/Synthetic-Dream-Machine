@@ -6,7 +6,7 @@
  *
  * ── IT BELONGS TO THE HOUSE, AND THAT IS THE WHOLE POINT ─────────────────────────────────────────
  * A shelf is the LARARIUM's, never any Lar's — a family's books outlast whoever reads them. So it homes in
- * `<abide>`, and everything else follows: the runtime CAS under `<data>/vessel` is licensed for the wipe by
+ * `<lararium>`, and everything else follows: the runtime CAS under `<lares>/vessel` is licensed for the wipe by
  * one premise, that its blobs rebuild from the bags carriers on each seed, and that premise holds for
  * DERIVED blobs while failing completely for acquired ones — a book regenerates from nothing. Standing in
  * its own house rather than one directory aside from a house every rite pares is what makes that structural.

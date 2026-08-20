@@ -14,7 +14,7 @@ import { runReconcileCadence } from "./sensorium-lifecycle-verbs.js";
 
 // The Boundary-1 inversion, in the worker: keyhive stays fs-blind, node supplies the writer that
 // lands the keyhive Archive in the sovereign identity home. The worker inherits process.env, so it
-// resolves the SAME `<data>/identity` path as main — the archive persists direct, no worker→main hop.
+// resolves the SAME `<lares>/identity` path as main — the archive persists direct, no worker→main hop.
 //
 // `vault` — the SAME inversion for the at-rest seal LIFECYCLE (#60). It runs IN this worker (the one that
 // owns the M3 re-seal), so seal/rotate re-persist the carriers AND update THIS process.env seal policy in

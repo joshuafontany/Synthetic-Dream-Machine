@@ -4,7 +4,7 @@
  * Node-specific shores (only these belong here):
  *   - NodeFSStorageAdapter for Automerge repo
  *   - generateOrLoadVesselIdentity / loadVesselSigningSeed (disk keypair)
- *   - writeFileSync for the social bootstrap (<data>/vessel — see larBootstrapPath)
+ *   - writeFileSync for the social bootstrap (<lares>/vessel — see larBootstrapPath)
  *   - the composable genesis cap (daemonGenesisDir) for default directory resolution
  *
  * All ceremony logic lives in @lararium/keyhive (foundThePlace, foundTheFace,

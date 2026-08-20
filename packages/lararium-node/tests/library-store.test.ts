@@ -47,7 +47,7 @@ describe("the acquired tier", () => {
     // THE CRITERION IS WHOSE IT IS. A shelf is the LARARIUM's — a family's books outlast whoever reads
     // them — so it stands in the house's home rather than the one the Lares carry.
     //
-    // LARES PASS; THE LARARIUM ABIDES, and the wipe-safety follows: `reset` pares <data>/vessel on the
+    // LARES PASS; THE LARARIUM ABIDES, and the wipe-safety follows: `reset` pares <lares>/vessel on the
     // premise that its blobs rebuild from the bags carriers, and an acquired book rebuilds from nothing.
     // A sibling subdirectory stays safe until someone widens a wipe by one path segment; a separate
     // home has no such edge to widen.

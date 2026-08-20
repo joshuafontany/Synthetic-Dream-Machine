@@ -76,12 +76,17 @@ describe("the two homes never nest and never alias", () => {
 });
 
 describe("LAR_ROOT isolates BOTH homes", () => {
-  test("an isolated instance nests data AND abide under its own root", () => {
+  test("an isolated instance nests BOTH HOUSES under the data KIND, as the real disk does", () => {
+    // ONE VOCABULARY IN BOTH CONTEXTS. Under LAR_ROOT every directory names an XDG kind — data, state,
+    // cache, config, run — and the two HOUSES nest inside the data kind exactly as they do under XDG. A
+    // house standing where a kind belongs makes an isolated run read differently from the disk it stands
+    // in for, and a test that rehearses a different shape rehearses the wrong thing.
     set("LAR_ROOT", "/iso");
     set("XDG_DATA_HOME", "/x/data");                 // present, and OUTRANKED
-    expect(laresDataHome()).toBe(join("/iso", "data"));
-    expect(larariumDataHome()).toBe(join("/iso", "abide"));
-    expect(isUnder(larariumDataHome(), laresDataHome())).toBe(false);
+    expect(laresDataHome()).toBe(join("/iso", "data", "lares"));
+    expect(larariumDataHome()).toBe(join("/iso", "data", "lararium"));
+    expect(isUnder(larariumDataHome(), laresDataHome())).toBe(false);   // siblings, never nested
+    expect(isUnder(laresDataHome(), larariumDataHome())).toBe(false);
   });
 
   test("an isolated run never reaches the operator's own shelf or sensoriums", () => {
@@ -147,7 +152,7 @@ describe("the one-segment law — a name never routes out of its root", () => {
 
   test("sensoriumDir refuses a traversing name rather than resolving out of the shrine", () => {
     set("LAR_ROOT", "/iso");
-    expect(sensoriumDir("memory")).toBe(join("/iso", "abide", "sensoriums", "memory"));   // it RESOLVES
+    expect(sensoriumDir("memory")).toBe(join("/iso", "data", "lararium", "sensoriums", "memory"));   // it RESOLVES
     expect(() => sensoriumDir("../../abide")).toThrow(/ONE path segment/);                //  … and refuses
   });
 

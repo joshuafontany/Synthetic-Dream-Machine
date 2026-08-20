@@ -351,7 +351,7 @@ interface NodeBootPrep {
  */
 async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   const { hostId, wikiId, storageDir, wss, catalogUrl, onPhase, genesisDir, rootDir: rootDirOpt } = opts;
-  const bootstrapPath = larBootstrapPath();   // <data>/vessel — beside the docs it addresses
+  const bootstrapPath = larBootstrapPath();   // <lares>/vessel — beside the docs it addresses
   const emit = (p: NodeOpenPhase) => onPhase?.(p);
 
   emit("boot");
@@ -496,7 +496,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // holder resolves the always-carried antigen board, folds the quorum-signed bans against the
   // founding-kahu roster read off `bags/@nexus` (LAR_BAGS ?? <root>/bags), and re-folds on every board
   // change. FAILS CLOSED: an unseated charter → empty roster → nothing Kapae'd (no quorum, no bans).
-  // The Nexus SEAL homes PER-OPERATOR (`<data>/nexus`), never in the corpus bags tree: a seal sited in the
+  // The Nexus SEAL homes PER-OPERATOR (`<lares>/nexus`), never in the corpus bags tree: a seal sited in the
   // corpus inherits that tree's home, which on a development install sits inside the repository. The seal
   // belongs to the operators who founded it, so it survives every substrate wipe beside the sovereign root
   // and travels with neither a clone nor a `reset`.

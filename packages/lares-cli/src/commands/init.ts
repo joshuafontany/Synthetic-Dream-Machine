@@ -2,7 +2,7 @@
  * `lares vessel found` — bootstrap a new Lararium node.
  *
  * Thin shim over `runInit` from @lararium/node. Idempotent; pass --force to
- * re-seed when the social bootstrap already lives on disk (<data>/vessel — see larBootstrapPath).
+ * re-seed when the social bootstrap already lives on disk (<lares>/vessel — see larBootstrapPath).
  *
  * Flags:
  *   --force          Re-seed even when bootstrap artifact exists.
@@ -22,7 +22,7 @@ export async function cmdInit(args: ParsedArgs): Promise<number> {
   // ONLY an explicit --root sets LAR_ROOT (never a default — that would defeat the ~/.lares uplift).
   if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"];
   if (args.flags["force"])     Object.assign(opts, { force: true });
-  // storage (runtime) → <data>/vessel (larDataDir); genesis (the baked seed) stays corpus-relative.
+  // storage (runtime) → <lares>/vessel (larDataDir); genesis (the baked seed) stays corpus-relative.
   Object.assign(opts, { storageDir: args.options["storage"] ?? larDataDir() });
   Object.assign(opts, { genesisDir: args.options["genesis"] ?? join(larRoot(), "genesis") });
   if (args.options["admit"])   Object.assign(opts, { admitPayloadPath: args.options["admit"] });

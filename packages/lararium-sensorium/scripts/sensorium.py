@@ -85,21 +85,21 @@ def derived_views(root: str) -> dict:
 
 def _lares_data_home() -> str:
     """Resolve THE SPIRITS' HOUSE the SAME way TS `laresDataHome` (xdg-base.ts) resolves it:
-    `LAR_ROOT/data` for an isolated instance, else `$XDG_DATA_HOME/lares` (unset → `~/.local/share/lares`).
+    `LAR_ROOT/data/lares` for an isolated instance, else `$XDG_DATA_HOME/lares` (unset → `~/.local/share/lares`).
 
     `lares` names the SPIRITS — their identity, their seal, the substrate they run on; a Lar's keys ARE
     that Lar. `lararium` names the HOUSE. `lar` names the NAMESPACE alone. The two views stay
     byte-identical by convention so a name a caller addresses lands on the one root both surfaces name."""
     lar_root = os.environ.get("LAR_ROOT")
     if lar_root:
-        return os.path.join(lar_root, "data")
+        return os.path.join(lar_root, "data", "lares")
     xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
     return os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lares")
 
 
 def _lararium_data_home() -> str:
     """Resolve THE HOUSE'S HOME the SAME way TS `larariumDataHome` (xdg-base.ts) resolves it:
-    `LAR_ROOT/abide` for an isolated instance, else `$XDG_DATA_HOME/lararium`
+    `LAR_ROOT/data/lararium` for an isolated instance, else `$XDG_DATA_HOME/lararium`
     (unset -> `~/.local/share/lararium`).
 
     THE CRITERION IS WHOSE IT IS. A sensorium holds operator history and DreamNet history — the
@@ -108,7 +108,7 @@ def _lararium_data_home() -> str:
     its own house rather than off a wipe's list."""
     lar_root = os.environ.get("LAR_ROOT")
     if lar_root:
-        return os.path.join(lar_root, "abide")
+        return os.path.join(lar_root, "data", "lararium")
     xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
     return os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lararium")
 
@@ -132,7 +132,7 @@ def assert_one_segment(kind: str, name: str) -> str:
 
 
 def sensorium_dir(name: str) -> str:
-    """Turn a sensorium NAME into its root — `<abide>/sensoriums/<name>` — mirroring TS `sensoriumDir`
+    """Turn a sensorium NAME into its root — `<lararium>/sensoriums/<name>` — mirroring TS `sensoriumDir`
     (vessel-paths.ts). The one shore a `lares sense <sensorium>` / MCP `sensorium=` address crosses to
     reach a target root; `memory` resolves the same dir the memory default names. The name passes the
     one-segment law first, so an address can never route out of the shrine."""
@@ -140,7 +140,7 @@ def sensorium_dir(name: str) -> str:
 
 
 def sensorium_names() -> "list[str]":
-    """Roster every sensorium standing under `<abide>/sensoriums` — the names an address may reach.
+    """Roster every sensorium standing under `<lararium>/sensoriums` — the names an address may reach.
     Mirrors TS `sensoriumNames`; an absent dir reads as an empty roster rather than raising."""
     root = os.path.join(_lararium_data_home(), "sensoriums")
     try:

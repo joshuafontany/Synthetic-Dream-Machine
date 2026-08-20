@@ -51,7 +51,7 @@ mirrors kg_io's raw-sqlite-beside-chroma idiom) keeps the turn_key → structura
 since chroma cannot where-filter inside a JSON provenance list.
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
-  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 structurepalace_io.py serve --palace <abide>/sensoriums/memory/structure
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 structurepalace_io.py serve --palace <lararium>/sensoriums/memory/structure
 """
 from __future__ import annotations
 
@@ -593,7 +593,7 @@ def _serve(palace_path: str) -> None:
 # the same graceful path the absent form collection takes.
 
 def _default_structurepalace_dir() -> str:
-    """The canonical structure plane — `<abide>/sensoriums/memory/structure`, where `<abide>` resolves the
+    """The canonical structure plane — `<lararium>/sensoriums/memory/structure`, where `<lararium>` resolves the
     SAME rule the TS `larariumDataHome()` (xdg-base.ts) holds: `LAR_ROOT/abide` for isolated instances,
     else `$XDG_DATA_HOME/lararium` (unset → `~/.local/share/lararium`). A sensorium abides in the shrine,
     so both tongues must name the shrine or capture writes one dir while recall reads another — the
@@ -655,7 +655,7 @@ def main() -> None:
         "structure-embeddings",
         help="batch readback of structure vectors keyed by verbatim_sha (the FFZ 3rd plane)",
     )
-    se.add_argument("--palace", default="", help="the structure plane dir (default: <abide>/sensoriums/memory/structure)")
+    se.add_argument("--palace", default="", help="the structure plane dir (default: <lararium>/sensoriums/memory/structure)")
     se.set_defaults(fn=cmd_structure_embeddings)
     args = ap.parse_args()
     args.fn(args)

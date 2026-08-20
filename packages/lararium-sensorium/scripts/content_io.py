@@ -23,7 +23,7 @@ Protocol — NDJSON over stdin/stdout, one JSON object per line (only JSON to st
     <- {"id":4,"ok":true,"result":{"matches":[{cid,distance,metadata},…]}}
 
 Run with the mempalace CLI's interpreter (it has the package + chroma):
-  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 content_io.py serve --palace <abide>/sensoriums/<target>/content
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 content_io.py serve --palace <lararium>/sensoriums/<target>/content
 """
 from __future__ import annotations
 

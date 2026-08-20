@@ -49,7 +49,7 @@ The CASCADE (branch-mute across the sensoria) rides the Python coordinator (`cas
 `cascade_un_kapae`) — it holds the rhizome AND the content stores, above any single palace.
 
 Run with the mempalace CLI's interpreter (it has the package):
-  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 worldline_io.py serve --palace <abide>/sensoriums/<target>/worldline
+  PYTHONPATH=<repo>/mempalace  ~/.venv/bin/python3 worldline_io.py serve --palace <lararium>/sensoriums/<target>/worldline
 """
 from __future__ import annotations
 

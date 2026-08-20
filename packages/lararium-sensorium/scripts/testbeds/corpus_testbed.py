@@ -8,7 +8,7 @@ three planes — content (text + warm-embed vector) · structure (parse-router t
 second pass landing zero (idempotent re-derivation). Prove-by-witness, not green units.
 
 THE SENSORIUM LAW this driver enforces:
-  · the test-bed lives in the XDG sensorium roster (<abide>/sensoriums/<name>, or any
+  · the test-bed lives in the XDG sensorium roster (<lararium>/sensoriums/<name>, or any
     operator root) and reads as EPHEMERAL — controlled ground-truth for the
     independence test, disposable after;
   · it REFUSES a root under the ~/.mempalace guest comparator (the comparator stays
@@ -19,7 +19,7 @@ structurepalace) · form/ (the form collection) · all three keyed by the record
 
 Usage (the mempalace venv):
   PYTHONPATH=<repo>/mempalace ~/.venv/bin/python3 corpus_testbed.py run \
-      --corpus <dir> [--corpus <dir> ...] --sensorium <abide>/sensoriums/human-text-<name> \
+      --corpus <dir> [--corpus <dir> ...] --sensorium <lararium>/sensoriums/human-text-<name> \
       [--wing wing_testbed] [--room corpus] [--min-support 2] [--max-forms 64]
 
 Meme: lar:///ha.ka.ba/lararium/sensorium/corpus-testbed
@@ -162,7 +162,7 @@ def main() -> None:
     r.add_argument("--corpus", action="append", required=True,
                    help="a corpus root (repeatable; dirs walk recursively for markdown/text)")
     r.add_argument("--sensorium", required=True,
-                   help="the EPHEMERAL test-bed sensorium (e.g. <abide>/sensoriums/human-text-x); never ~/.mempalace")
+                   help="the EPHEMERAL test-bed sensorium (e.g. <lararium>/sensoriums/human-text-x); never ~/.mempalace")
     r.add_argument("--wing", default="wing_testbed")
     r.add_argument("--room", default="corpus")
     r.add_argument("--min-support", type=int, default=2, dest="min_support")

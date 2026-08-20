@@ -37,7 +37,7 @@ export interface FoundStep {
 export interface FoundContext {
   /** Instance root (LAR_ROOT). */
   readonly root: string;
-  /** The social-bootstrap path — `<data>/vessel`, resolved by larBootstrapPath. */
+  /** The social-bootstrap path — `<lares>/vessel`, resolved by larBootstrapPath. */
   readonly bootstrap: string;
 }
 

@@ -45,7 +45,7 @@ _PERSONA_ROOT_GLOB = ".persona-group-root-*.json"
 
 
 def _identity_dir(identity_dir: "str | None" = None) -> str:
-    """Resolve the on-disk identity dir — an explicit override, else `<data>/identity`, mirroring the
+    """Resolve the on-disk identity dir — an explicit override, else `<lares>/identity`, mirroring the
     TS `larIdentityDir()` (vessel-paths.ts): `LAR_ROOT/data/identity` for isolated instances, else
     `$XDG_DATA_HOME/lares/identity` (unset → `~/.local/share/lares/identity`).
 
@@ -57,7 +57,7 @@ def _identity_dir(identity_dir: "str | None" = None) -> str:
         return identity_dir
     lar_root = os.environ.get("LAR_ROOT")
     if lar_root:
-        data_home = os.path.join(lar_root, "data")
+        data_home = os.path.join(lar_root, "data", "lares")
     else:
         xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
         data_home = os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lares")

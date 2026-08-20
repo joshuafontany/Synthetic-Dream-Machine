@@ -137,7 +137,7 @@ _LIBRARY_PREFIX = "library:"
 
 
 def _library_home() -> str:
-    """The ACQUIRED tier's home — `LAR_LIBRARY`, else `<abide>/library`.
+    """The ACQUIRED tier's home — `LAR_LIBRARY`, else `<lararium>/library`.
 
     It mirrors the TS resolver exactly (packages/lararium-node/src/library-store.ts, `larLibraryHome`), so a
     `library:<collection>` reference resolves to the SAME directory whichever tongue reads it; a second
@@ -253,7 +253,7 @@ def pour(m: dict, *, twin: bool = False) -> dict:
                          "turn/tiddler/module shores land with their own engines")
     files, tally = resolve_flow(m)
     # Every bed lands in the ONE sensorium roster the node governs: XDG
-    # <abide>/sensoriums/<bed>, resolved from the bed NAME (the address carries
+    # <lararium>/sensoriums/<bed>, resolved from the bed NAME (the address carries
     # the bearing — the manifest's literal `root` field stays advisory). This
     # seats each poured bed as a first-class EPHEMERAL sensorium (compose_testbed
     # stamps ephemeral=true) that the standing roster + teardown already reach,

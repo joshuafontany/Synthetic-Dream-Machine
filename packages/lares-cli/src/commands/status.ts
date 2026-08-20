@@ -194,7 +194,7 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
 async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
 
   const root      = larRoot();   // corpus root (genesis); vessel state roots in the home
-  const storage   = larDataDir();   // runtime → <data>/vessel
+  const storage   = larDataDir();   // runtime → <lares>/vessel
   const bootstrap = larBootstrapPath();
   const portRaw   = process.env["LAR_PORT"] ?? "8080";
   const port      = Number(portRaw);

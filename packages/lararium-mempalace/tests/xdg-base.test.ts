@@ -33,9 +33,9 @@ describe("xdg-base (the shared XDG resolver)", () => {
     for (const r of roots.splice(0)) rmSync(r, { recursive: true, force: true });
   });
 
-  it("laresDataHome: LAR_ROOT wins → <root>/data", () => {
+  it("laresDataHome: LAR_ROOT wins → <root>/data/lares — the house inside the kind", () => {
     set("LAR_ROOT", "/isolated/pair");
-    expect(laresDataHome()).toBe(join("/isolated/pair", "data"));
+    expect(laresDataHome()).toBe(join("/isolated/pair", "data", "lares"));
   });
 
   it("laresDataHome: XDG_DATA_HOME/lares when unisolated", () => {
@@ -80,7 +80,7 @@ describe("xdg-base (the shared XDG resolver)", () => {
   it("memorySensoriumStructureDir: isolated LAR_ROOT roots under <root>/abide (the py branch)", () => {
     set("LAR_ROOT", "/iso");
     set("XDG_DATA_HOME", undefined);
-    expect(memorySensoriumStructureDir()).toBe(join("/iso", "abide", "sensoriums", "memory", "structure"));
+    expect(memorySensoriumStructureDir()).toBe(join("/iso", "data", "lararium", "sensoriums", "memory", "structure"));
   });
 
   it("mempalaceContentParent: always the upstream-default ~/.mempalace (never the tree)", () => {

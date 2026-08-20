@@ -19,14 +19,14 @@
  *   $XDG_RUNTIME_DIR/lares  (tmpfs, or os.tmpdir()) — transient spool (+ future sockets/locks/pids).
  *
  * The SENSORIUM consolidation (SHEAF-TRUE): content ← the contentpalace, structure ← the structurepalace,
- * form ← the formpalace, ALL THREE co-located under `<abide>/sensoriums/memory/{content,structure,form}`
+ * form ← the formpalace, ALL THREE co-located under `<lararium>/sensoriums/memory/{content,structure,form}`
  * so the filetree IS the composition (sensorium.ts). The lararium OWNS its content plane: the sovereign
  * contentpalace inherits mempalace's exact base schema, holds content internally under the abiding home,
  * and adopting a user's mempalace history runs as a deliberate one-way import Act (`guest-import.ts`),
  * never a runtime binding. bands + coupling are BASE caps — they live in the manifest, never as dirs.
  *
  * The mesh federation store lives as its OWN `mesh` SENSORIUM that `#has` three nested child sensoriums
- * (WHO · AUTHORITY · FLOW) under `<abide>/sensoriums/mesh`, the children hanging below it. The mesh's own
+ * (WHO · AUTHORITY · FLOW) under `<lararium>/sensoriums/mesh`, the children hanging below it. The mesh's own
  * caps stay minimal — its STRUCTURE is the three children, each carrying its own thin manifest.
  *
  * Every resolver answers the canonical XDG dir deterministically — one canonical home, no `~/.lares`
@@ -40,13 +40,13 @@
  *
  * ── THREE HOMES, ONE QUESTION ───────────────────────────────────────────────────────────────────
  * Every siting answers WHOSE IS THIS?, and the answer picks the house:
- *   `<abide>`  the LARARIUM's — the acquired shelf, the sensoriums. Back it up; nothing re-makes it.
- *   `<data>`   the LARES' — their identity and seal, and the substrate they run on. Back it up.
+ *   `<lararium>`  the LARARIUM's — the acquired shelf, the sensoriums. Back it up; nothing re-makes it.
+ *   `<lares>`   the LARES' — their identity and seal, and the substrate they run on. Back it up.
  *   `<state>`  nobody's for long: watermarks, deletable at any moment, each re-deriving from what it
  *              watches.
  *
- * THE WIPE ZONE STANDS AS A HOUSE, NOT A LIST. `reset` pares `<data>/vessel` and `<state>/projection`;
- * `<abide>` shares no prefix with either, so the tier a wipe must never end survives by its ADDRESS.
+ * THE WIPE ZONE STANDS AS A HOUSE, NOT A LIST. `reset` pares `<lares>/vessel` and `<state>/projection`;
+ * `<lararium>` shares no prefix with either, so the tier a wipe must never end survives by its ADDRESS.
  * A tier kept safe by sitting one subdirectory aside stays safe only until somebody widens the wipe by a
  * path segment; a tier standing in another house leaves no edge to widen.
  *
@@ -152,7 +152,7 @@ export function assertOneSegment(kind: string, name: string): string {
 
 // ── The `memory` sensorium (content · structure · form) ──────────────────────────────────────────
 
-/** The `memory` sensorium dir — `<abide>/sensoriums/memory`. Its manifest declares content/structure/
+/** The `memory` sensorium dir — `<lararium>/sensoriums/memory`. Its manifest declares content/structure/
  *  form/persistence (fiber caps, leaf-dirs below) + bands/coupling (base caps, manifest-only). */
 export function memorySensoriumDir(): string {
   return join(larariumDataHome(), "sensoriums", "memory");
@@ -182,14 +182,14 @@ export function memorySensoriumLenses(): Record<string, string> {
   };
 }
 
-/** Resolve a sensorium NAME to its root dir — `<abide>/sensoriums/<name>` (the manifest lives beneath it).
+/** Resolve a sensorium NAME to its root dir — `<lararium>/sensoriums/<name>` (the manifest lives beneath it).
  *  The one place a `lares sense <sensorium> <verb>` address turns a name into a target root; `memory`
  *  resolves to {@link memorySensoriumDir} by construction (same join), so the default stays identical. */
 export function sensoriumDir(name: string): string {
   return join(larariumDataHome(), "sensoriums", assertOneSegment("sensoriumDir", name));
 }
 
-/** Every sensorium standing under `<abide>/sensoriums` — the ones a lens may name. */
+/** Every sensorium standing under `<lararium>/sensoriums` — the ones a lens may name. */
 export function sensoriumNames(): string[] {
   const root = join(larariumDataHome(), "sensoriums");
   try {
@@ -298,7 +298,7 @@ export function larContentDir(): string {
 
 // ── The `mesh` sensorium (WHO · AUTHORITY · FLOW) ─────────────────────────────────────────────────
 
-/** The `mesh` sensorium dir — `<abide>/sensoriums/mesh`. Its manifest declares MINIMAL own caps + three
+/** The `mesh` sensorium dir — `<lararium>/sensoriums/mesh`. Its manifest declares MINIMAL own caps + three
  *  nested children (who/authority/flow) as dumb `coupling.children[]` edges; the filetree IS the
  *  composition (sensorium.ts). The cross-Lararium federation feed/carriage lives elsewhere in the mesh
  *  domain — this is directory + structure only. */
@@ -333,7 +333,7 @@ export function larMeshPalaceDir(): string {
 
 // ── The `memetic-wikitext` sensorium (FORMAL ⋈ INFORMAL peers, neither top) ───────────────────────
 
-/** The `memetic-wikitext` sensorium dir — `<abide>/sensoriums/memetic-wikitext`. A nameless nested
+/** The `memetic-wikitext` sensorium dir — `<lararium>/sensoriums/memetic-wikitext`. A nameless nested
  *  entity that `#has` NO fiber cap and TWO PEER child-sensoria (formal ⋈ informal) as dumb
  *  `coupling.children[]` edges, NEITHER on top; the coupling plane reads the directed formal↔informal
  *  flow (memetic-wikitext-sensorium.ts). The filetree IS the composition (sensorium.ts). */
@@ -370,17 +370,17 @@ export function scratchSensoriumInstanceDir(id: string): string {
 
 // ── The vessel substrate (Automerge Repo — NOT a sensorium) ──────────────────────────────────────
 
-/** Storage dir — the Automerge Repo, vessel key, and UDS socket, at `<data>/vessel`.
+/** Storage dir — the Automerge Repo, vessel key, and UDS socket, at `<lares>/vessel`.
  *  WIPED by `reset`. NOT a sensorium (it carries no sensory fiber caps). */
 export function larDataDir(): string {
   return join(laresDataHome(), "vessel");
 }
 
 /** Vessel identity dir — the sovereign keypair + the veiled-Handle anchors, at
- *  `<data>/identity`. It sits BESIDE (never inside) the wiped `<data>/vessel`, so every
+ *  `<lares>/identity`. It sits BESIDE (never inside) the wiped `<lares>/vessel`, so every
  *  substrate verb (`reset`/`regenesis`/`rebuild`) reforges the CRDT store while the
  *  sovereign root survives untouched — the "share substrate, not sovereignty" law made a
- *  filesystem boundary. The wipe-list names `<data>/vessel` and `<state>/projection` and
+ *  filesystem boundary. The wipe-list names `<lares>/vessel` and `<state>/projection` and
  *  nothing else, so identity here stands outside it. The ONE identity resolver —
  *  node-vessel-identity resolves any prior location onto it. */
 export function larIdentityDir(): string {
@@ -388,7 +388,7 @@ export function larIdentityDir(): string {
 }
 
 /**
- * The Nexus SEAL home — the founding-kahu roster + its epoch lineage, at `<data>/nexus`.
+ * The Nexus SEAL home — the founding-kahu roster + its epoch lineage, at `<lares>/nexus`.
  *
  * WHY IT SITS HERE AND NOT IN THE BAGS TREE. The seal reads as a FILE rather than a bag: an operator
  * backs it up, hands it to a peer, and reads it with their own eyes. A bag would give it fleet-sync it
@@ -423,7 +423,7 @@ export function larHarvestStageDir(): string {
 }
 
 /**
- * The social bootstrap — `<data>/vessel/social-bootstrap.json`. The ONE resolver; every reader and the
+ * The social bootstrap — `<lares>/vessel/social-bootstrap.json`. The ONE resolver; every reader and the
  * writer route through it.
  *
  * IT HOLDS AN ADDRESS BOOK: the automerge URLs of this vessel's social docs (@identities · @circles ·
@@ -440,7 +440,7 @@ export function larHarvestStageDir(): string {
  *   · `reset` reached into the corpus tree to delete it, a vessel verb writing across the wall;
  *   · a line in .gitignore stood as the only guard, where a placement should have been.
  *
- * ── WHY <data>/vessel RATHER THAN <state> ───────────────────────────────────────────────────────
+ * ── WHY <lares>/vessel RATHER THAN <state> ───────────────────────────────────────────────────────
  * Identity and the seal sit in `<state>` because they MUST SURVIVE a wipe. This must not. An address
  * book that outlived a `reset` would point at docs the reset destroyed — the precise failure that
  * motivated the move, made permanent. Living inside the store, it dies WITH the docs it addresses:

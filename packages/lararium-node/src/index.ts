@@ -28,7 +28,7 @@ export {
 export type { BagSighting, BagMoveOutcome } from "./bag-declare.js";
 
 // The ACQUIRED tier — bodies a human did not author, sited readable + verifiable in the SHRINE
-// (`<abide>/library`), a house no wipe names, so a shelf may grow without a repository growing with it.
+// (`<lararium>/library`), a house no wipe names, so a shelf may grow without a repository growing with it.
 export {
   larLibraryHome, libraryCollectionDir, resolveLibraryRef, acquireIntoLibrary,
   readLibraryMeta, listCollections, listCollection, verifyCollection, writeLibraryIndex,

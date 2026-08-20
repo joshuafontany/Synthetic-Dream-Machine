@@ -31,7 +31,7 @@
  *   - structurepalace   <memory>/structure  — the structural-AST store (li/sheaf).
  *   - formpalace        <memory>/form       — the living-grammar FORM-vector store (li/sheaf).
  *   - persistencepalace <memory>/persistence — the Testimony/witness store (cosheaf cap).
- *   - meshpalace        <abide>/sensoriums/mesh — the `mesh` SENSORIUM (stood LAST: it couples to a
+ *   - meshpalace        <lararium>/sensoriums/mesh — the `mesh` SENSORIUM (stood LAST: it couples to a
  *                 live node). It `#has` three nested child sensoriums — WHO · AUTHORITY · FLOW —
  *                 each its own dir + thin manifest. Here we wire only the directory STRUCTURE +
  *                 stamp the manifests; the feed/carriage + cap-content live elsewhere.

@@ -604,12 +604,14 @@ def test_sensorium_address_resolver_honors_lar_root(monkeypatch, tmp_path):
     from sensorium import sensorium_dir, sensorium_names
     monkeypatch.setenv("LAR_ROOT", str(tmp_path))
     monkeypatch.delenv("XDG_DATA_HOME", raising=False)
-    assert sensorium_dir("memory") == os.path.join(str(tmp_path), "abide", "sensoriums", "memory")
+    assert sensorium_dir("memory") == os.path.join(str(tmp_path), "data", "lararium", "sensoriums", "memory")
     assert sensorium_names() == []                         # an absent dir rosters empty, never raises
-    os.makedirs(os.path.join(str(tmp_path), "abide", "sensoriums", "ai-sessions"))
+    os.makedirs(os.path.join(str(tmp_path), "data", "lararium", "sensoriums", "ai-sessions"))
     assert "ai-sessions" in sensorium_names()             # a stood sensorium shows in the roster
-    # AND IT STANDS CLEAR OF THE WIPE ZONE: nothing a rite reforges shares this root.
-    assert not sensorium_dir("memory").startswith(os.path.join(str(tmp_path), "data"))
+    # AND IT STANDS CLEAR OF THE WIPE ZONE — which is the LARES HOUSE, never the data KIND. Both houses
+    # nest inside `data/` exactly as they nest inside `$XDG_DATA_HOME`; what a rite reforges is everything
+    # under `lares/`, and the shrine is its SIBLING there, never its child.
+    assert not sensorium_dir("memory").startswith(os.path.join(str(tmp_path), "data", "lares"))
 
 
 def test_sensorium_address_resolver_falls_to_xdg(monkeypatch, tmp_path):
@@ -641,8 +643,8 @@ def test_lar_root_isolates_both_homes(monkeypatch, tmp_path):
     from sensorium import _lares_data_home, _lararium_data_home
     monkeypatch.setenv("LAR_ROOT", str(tmp_path))
     monkeypatch.setenv("XDG_DATA_HOME", "/somewhere/else")       # present, and OUTRANKED
-    assert _lares_data_home() == os.path.join(str(tmp_path), "data")
-    assert _lararium_data_home() == os.path.join(str(tmp_path), "abide")
+    assert _lares_data_home() == os.path.join(str(tmp_path), "data", "lares")
+    assert _lararium_data_home() == os.path.join(str(tmp_path), "data", "lararium")
     assert not _lararium_data_home().startswith(_lares_data_home() + os.sep)
 
 
@@ -652,7 +654,7 @@ def test_a_sensorium_address_never_routes_out_of_the_shrine(monkeypatch, tmp_pat
     # it in — and a traversing segment consults no wipe-list on the way. The shore refuses it.
     from sensorium import sensorium_dir, assert_one_segment
     monkeypatch.setenv("LAR_ROOT", str(tmp_path))
-    assert sensorium_dir("memory") == os.path.join(str(tmp_path), "abide", "sensoriums", "memory")
+    assert sensorium_dir("memory") == os.path.join(str(tmp_path), "data", "lararium", "sensoriums", "memory")
     assert assert_one_segment("t", "memetic-wikitext") == "memetic-wikitext"   # a plain name passes
     for bad in ("..", ".", "", "../abide", "a/b", "/etc", "..\\win"):
         with pytest.raises(ValueError, match="ONE path segment"):

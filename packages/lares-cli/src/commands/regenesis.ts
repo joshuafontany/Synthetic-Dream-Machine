@@ -11,7 +11,7 @@
  *   1. stop the incumbent  — port-control, graceful → force
  *   2. reset --force       — CRDT store + genesis artifacts + projection watermark
  *                            wiped; genesis re-baked; init re-founds (identity
- *                            preserved, `<data>/identity` out of every wipe)
+ *                            preserved, `<lares>/identity` out of every wipe)
  *   3. wake                — boot detached, vessel-ready attested from the log
  *   4. seed --apply        — plant every bags/@* holding back into the fresh docs;
  *                            the conductor OWNS the zero-new refusal here: right
@@ -199,6 +199,6 @@ export async function cmdRegenesis(args: ParsedArgs): Promise<number> {
   for (const h of failed) console.error(`[regenesis] seed ${h.holding} (${h.gesture}) → exit ${h.exitCode}`);
   if (failed.length > 0) { console.error("[regenesis] seeding failed — the docs may sit part-fed; re-run seed/regenesis (idempotent)"); return 1; }
 
-  console.log("[regenesis] rebirth complete — witness: `lares vessel read`, one meme through the wiki, chunk census on the vessel store (larDataDir — <data>/vessel)");
+  console.log("[regenesis] rebirth complete — witness: `lares vessel read`, one meme through the wiki, chunk census on the vessel store (larDataDir — <lares>/vessel)");
   return 0;
 }

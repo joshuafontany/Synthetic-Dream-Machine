@@ -28,7 +28,7 @@ import { join } from "node:path";
  */
 export function laresDataHome(): string {
   const root = process.env["LAR_ROOT"];
-  return root ? join(root, "data")
+  return root ? join(root, "data", "lares")
               : join(process.env["XDG_DATA_HOME"]?.trim() || join(homedir(), ".local", "share"), "lares");
 }
 
@@ -47,12 +47,15 @@ export function laresDataHome(): string {
  * Belonging makes the wipe zone STRUCTURAL. A tier that survives because a directory is not on a list
  * survives until somebody edits the list; a tier standing in its own house needs no list at all.
  *
- * `LAR_ROOT` shores it the same way it shores the vessel home, so an isolated root nests both tiers and a
- * test never reaches the operator's own shelf.
+ * ONE VOCABULARY IN BOTH CONTEXTS. Under `LAR_ROOT` every directory names an XDG KIND — data, state,
+ * cache, config, run — and the two HOUSES nest inside the data kind exactly as they do under XDG:
+ * `<root>/data/lares` beside `<root>/data/lararium`, `$XDG_DATA_HOME/lares` beside
+ * `$XDG_DATA_HOME/lararium`. A house never stands where a kind belongs, so an isolated root reads as the
+ * real disk with a different prefix, and a test never reaches the operator's own shelf.
  */
 export function larariumDataHome(): string {
   const root = process.env["LAR_ROOT"];
-  return root ? join(root, "abide")
+  return root ? join(root, "data", "lararium")
               : join(process.env["XDG_DATA_HOME"]?.trim() || join(homedir(), ".local", "share"), "lararium");
 }
 
@@ -71,7 +74,7 @@ export function mempalaceContentParent(): string {
 }
 
 /**
- * The SOVEREIGN content plane — `<abide>/sensoriums/memory/content`. The plane the capture path fills
+ * The SOVEREIGN content plane — `<lararium>/sensoriums/memory/content`. The plane the capture path fills
  * every turn, and therefore the plane every reader must NAME. An unpassed palace path is not a default:
  * it is a silent reach into the guest, and it is why this store spent its life write-only.
  *
@@ -83,7 +86,7 @@ export function memorySensoriumContentDir(): string {
 }
 
 /**
- * The `memory` sensorium root — `<abide>/sensoriums/memory`. Home to the li planes AND to the worldline
+ * The `memory` sensorium root — `<lararium>/sensoriums/memory`. Home to the li planes AND to the worldline
  * stores (the KG + the fork-DAG). It sits SOVEREIGN, never inside the guest comparator: a rite that
  * paves the comparator must never reach a plane the RUN writes, and the worldline holds lineage the
  * comparator has no claim on.

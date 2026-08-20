@@ -62,7 +62,7 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares vessel clear` — wipe the vessel store (`<data>/vessel`) + bootstrap artifact, then re-init.
+ * `lares vessel clear` — wipe the vessel store (`<lares>/vessel`) + bootstrap artifact, then re-init.
  *
  * Operator-confirmation gate: the wipe refuses without `--force`, so destruction stays a
  * deliberate second act.
@@ -78,10 +78,10 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
 export function resetTargets(): Array<{ path: string; recursive: boolean }> {
   const gen = (name: string, recursive = false) => ({ path: join(larRoot(), "genesis", name), recursive });
   return [
-    // The store, and the social bootstrap WITH it — the address book lives INSIDE `<data>/vessel`, so
+    // The store, and the social bootstrap WITH it — the address book lives INSIDE `<lares>/vessel`, so
     // it dies with the docs it addresses rather than by this list remembering to name it. An address
     // book that outlived a reset would point at destroyed docs, which is why it sits outside the corpus.
-    { path: larDataDir(), recursive: true },   // the vessel store (<data>/vessel) + the bootstrap within
+    { path: larDataDir(), recursive: true },   // the vessel store (<lares>/vessel) + the bootstrap within
     gen("island.bin"),
     gen("island.sha256"),
     gen("island.sha256-pre"),                  // the pre-split SHA sidecar — a reset target, so no stale digest survives
@@ -101,7 +101,7 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   const { rmSync, existsSync } = await import("node:fs");
   // Only an EXPLICIT --root sets LAR_ROOT (isolated instances). NEVER default it to REPO_ROOT —
   // that would make larHome() resolve to the repo and defeat the ~/.lares uplift (the bug this
-  // reset hit). With LAR_ROOT unset: storage → <data>/vessel (larDataDir), genesis → repo (larRoot).
+  // reset hit). With LAR_ROOT unset: storage → <lares>/vessel (larDataDir), genesis → repo (larRoot).
   if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"];
   const targets = resetTargets();
 

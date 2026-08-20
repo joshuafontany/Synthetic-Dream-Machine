@@ -6,8 +6,8 @@
  * author here and no parse∘render fixed point, so it sits on the seed surface by accident of arrival. Left
  * there it enters git history, and a shelf that grows with every book grows the history with it.
  *
- * The tier stands at `<abide>/library` (or `LAR_LIBRARY`) — in the SHRINE, the house that abides while a
- * rite reforges the spirit's substrate. `reset` pares `<data>/vessel` on the premise that its blobs rebuild
+ * The tier stands at `<lararium>/library` (or `LAR_LIBRARY`) — in the SHRINE, the house that abides while a
+ * rite reforges the spirit's substrate. `reset` pares `<lares>/vessel` on the premise that its blobs rebuild
  * from the bags carriers; that premise holds for derived blobs and fails completely for acquired ones, so
  * the shelf stands where no wipe reaches rather than one directory aside from one that does.
  *

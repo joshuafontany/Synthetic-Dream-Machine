@@ -17,7 +17,7 @@ import { larIdentityDir } from "../src/vessel-paths.js";
 
 const freshDataDir = (): string => join(mkdtempSync(join(tmpdir(), "lares-prerot-")), ".lararium");
 /**
- * The identity sits at `<state>/identity` under the XDG state home — BESIDE the wiped `<data>/vessel`,
+ * The identity sits at `<state>/identity` under the XDG state home — BESIDE the wiped `<lares>/vessel`,
  * never inside it, so a substrate verb reforges the CRDT store while the sovereign root survives. The
  * dir therefore answers to `larIdentityDir()`, never to the data dir handed in.
  */
