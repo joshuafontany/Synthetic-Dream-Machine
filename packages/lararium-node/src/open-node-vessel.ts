@@ -1,14 +1,17 @@
 /**
  * openNodeVessel — local-first Node.js vessel factory.
  *
- * A thin RECIPE over the composable-keel engine. Node supplies the platform atoms (NodeFS storage,
+ * A thin opener over the composable-keel engine. Node supplies the platform atoms (NodeFS storage,
  * WS relay + DaemonAuthGate, worker_threads pool) and the capability pieces it holds (the inbound
- * gate, the corpus loader, the residual pool/repo verbs, the main-resident BagStowage
- * mechanism). `prepareNodeBoot` builds those atoms + the keel + the boot closures ONCE; the two boot
- * entry-points compose the right #has-cap-stack over them:
- *   - openNodeVessel → composeLararium (the FULL node: substrate → daemon → wiki → pool → live).
- *   - openNodeHerm   → composeHerm     (the wiki-LESS Herm: substrate → daemon → meshpalace →
- *     read-face). The @daemon stays (the immune core); its registerBags omits the absent wiki bags.
+ * gate, the corpus loader, the residual pool/repo verbs, the main-resident BagStowage mechanism).
+ *
+ * `prepareNodeBoot` builds those atoms + the keel + the boot closures ONCE, and BOTH entry-points
+ * run it: the doors differ only in which #has-cap-stack they compose over the one preparation.
+ *   - openNodeVessel → composeLararium — a hearth: the base course plus the caps a FACE lifts.
+ *   - openNodeHerm   → composeHerm     — a crossroads: the base course plus the caps an HTTP floor
+ *     serves. No wiki, no pool; the @daemon stays, the immune core every vessel carries, and its
+ *     registerBags omits the user-wiki bags where no wiki stands.
+ * Each stack is declared at its compose site and derived by `composeVessel`; read it there.
  *
  * The node vessel holds no semantic privilege. It carries roads, docks, and sync; live VM state lives
  * in sovereign islands (daemon + wiki). FPI-5 (trim tab): all Node-specific code lives here.

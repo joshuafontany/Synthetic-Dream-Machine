@@ -124,10 +124,9 @@ export function bulbCap(deps: {
 // ── the two node cap-stacks ──────────────────────────────────────────────────────────────────────
 
 /**
- * composeLararium — the FULL node, a REAL granular #has-cap-stack: `composeCoreVessel` wires the
- * six core caps (substrate → wikislot → daemon → wiki → pool → mount) the SHARED keel declares — no
- * delegating wrapper. Returns the VesselCoreResult directly (no `{vessel,core}` wrapper;
- * the caller reads `.core`). Behaviour stays verbatim: the topo-order reproduces the monolith.
+ * composeLararium — a hearth: `composeCoreVessel` wires the caps a FACE lifts over the base course
+ * every vessel carries, and the opener composes the carriage pair and the WHO plane alongside. A
+ * REAL granular #has-cap-stack, never a delegating wrapper. Returns the VesselCoreResult directly.
  */
 export const composeLararium = composeCoreVessel;
 

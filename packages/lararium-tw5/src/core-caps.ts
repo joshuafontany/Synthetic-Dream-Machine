@@ -2,22 +2,20 @@
  * core-caps — THE vessel keel as a GRANULAR #has-cap-stack (one keel, both substrates).
  *
  * Canon: lar:///ha.ka.ba/lararium/api/composable-keel + …/mesh/open-vessel +
- * …/api/lararium-canonical-model. The former monolithic vessel sequence
- * decomposes here into SIX cap-modules a vessel HAS — substrate · wikislot · daemon · wiki ·
- * pool · mount — each declaring only the deps it routes (POLA), `composeVessel` topologically
- * WIRING them. The build order the topo-sort guarantees (substrate → wikislot → daemon → wiki →
- * pool → mount) reproduces the monolith's exact phase ordering verbatim — the daemon-first
- * sovereignty gate (`await daemon.workerEa` before primary-wiki mount) stays INSIDE the mount cap.
+ * …/api/lararium-canonical-model.
  *
- * The substrate + daemon caps are the SHARED floor both the full vessel AND the wiki-less Herm
- * compose over (the Herm omits wikislot/wiki/pool from its stack — blind by structure). The daemon
- * cap OPTIONALLY routes the wiki slot, so it builds with `slot` undefined on the Herm path (the
- * @daemon decouple) and with `slot` present on the full path.
+ * The vessel sequence lives here as cap-MODULES a vessel HAS, each declaring only the deps it routes
+ * (POLA), `composeVessel` topologically WIRING them. Ordering is DERIVED from those declarations, so
+ * the guarantees hold without any list restating them: the daemon-first sovereignty gate
+ * (`await daemon.workerEa` before primary-wiki mount) stays INSIDE the mount cap, and each cap emits
+ * its own phases as it builds — the substrate cap island-ready/corpus-ready, the wiki cap
+ * wiki-ready/vessel-ready, the mount cap tw5-booted/live.
  *
- * Phase distribution (the same sequence the monolith emitted, never re-ordered):
- *   - island-ready / corpus-ready  — inside assembleVessel (the substrate cap)
- *   - wiki-ready / vessel-ready     — the wiki cap (after the slot layers mount)
- *   - tw5-booted / live            — the mount cap (after the daemon-first gate + primary mount)
+ * The caps this file declares are the ones a FACE lifts — the wiki slot, the wiki, the pool, the
+ * mount — over substrate and daemon, which every vessel carries. A vessel with no face composes the
+ * substrate and the daemon and none of the rest, blind to sovereign content by structure. The daemon
+ * cap OPTIONALLY routes the wiki slot, so it builds with `slot` undefined where no wiki stands (the
+ * @daemon decouple) and with `slot` present where one does.
  */
 
 import type { Repo, DocHandle, LarDoc, LarOpenPhase, VesselKeel, VesselCoreAssembly } from "@lararium/mesh";
@@ -210,9 +208,9 @@ export function mountCap<TPool extends PrimaryMountPool>(o: VesselOrchestration<
 
 /**
  * composeCoreVessel — run the one vessel boot as a GRANULAR #has-cap-stack on either substrate.
- * composeVessel topologically wires substrate → wikislot → daemon → wiki → pool → mount (the exact
- * monolith order), then this extracts the few entry-points the boot needs and drops the broad
- * composer authority (the powerbox guard). The daemon-first gate holds inside the mount cap.
+ * `composeVessel` derives the wiring order from what each cap declares; this then extracts the few
+ * entry-points the boot needs and drops the broad composer authority (the powerbox guard). The
+ * daemon-first gate holds inside the mount cap.
  */
 export async function composeCoreVessel<TPool extends PrimaryMountPool>(
   o: VesselOrchestration<TPool>,

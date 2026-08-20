@@ -1,10 +1,11 @@
 /**
- * carriage-caps — the ISOMORPHIC carriage machinery, lifted DOWN to the mesh floor.
+ * carriage-caps — the ISOMORPHIC carriage machinery, on the mesh floor where every vessel reaches it.
  *
  * These caps wire a vessel's PUBLIC FLOW-map (@meshpalace) and the blind relay that carries it across
- * the astral space — platform-blind by construction (no node http Server, no tw5 wiki). A BROWSER vessel
- * composes the very same caps a node does; the node-side `node-caps` now RE-EXPORTS these so existing
- * importers keep resolving, and adds only the node-only `flowMapReadFaceCap` (the http disclosure wire).
+ * the astral space — platform-blind by construction (no node http Server, no tw5 wiki). A hearth, a
+ * crossroads and a browser leaf compose the SAME pair through `carriageStack` (below) and differ only
+ * in the mesh standing each hands in. Serving that map over HTTP is a node-only act and lives in
+ * node-caps' `flowMapReadFaceCap`; carrying it is everyone's, and lives here.
  *
  * Layer law: `@lararium/mesh` is the LOWEST package — it CANNOT import `@lararium/tw5` (circular). So the
  * substrate cap-id rides here as a WIRE-STRING (`SUBSTRATE_CAP_ID`), matched by VALUE to tw5's
