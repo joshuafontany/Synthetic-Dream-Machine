@@ -102,13 +102,19 @@ async function operatorDid(r: string): Promise<string> {
   finally { if (prior === undefined) delete process.env["LAR_ROOT"]; else process.env["LAR_ROOT"] = prior; }
 }
 
-afterAll(() => {
+afterAll(async () => {
   try {
     const pid = execFileSync("bash", ["-lc",
       `ss -ltnp 2>/dev/null | grep ':${PORT} ' | grep -oP 'pid=\\K[0-9]+' | head -1`], { encoding: "utf8" }).trim();
-    if (pid) process.kill(Number(pid));
+    if (pid) {
+      process.kill(Number(pid));
+      // LET THE VESSEL FINISH DYING. It flushes its stores on the way down, so tearing the tree out from
+      // under it races its own writes and ENOTEMPTYs — a teardown fault that reads as a suite failure with
+      // every vector green above it.
+      await new Promise((r) => setTimeout(r, 3000));
+    }
   } catch { /* nothing held the port */ }
-  if (root) rmSync(root, { recursive: true, force: true });
+  try { if (root) rmSync(root, { recursive: true, force: true }); } catch { /* a straggler write; the tmpdir keeps it */ }
 });
 
 describe("the herm — the floor of the lararium cap stack", () => {

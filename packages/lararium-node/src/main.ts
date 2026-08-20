@@ -33,7 +33,7 @@ import { networkInterfaces }             from "os";
 import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
 import { deriveReachFaces, wsUrlForOrigin, crossingUrl, appOriginForFace, type InterfaceTable } from "./lan-address.js";
-import { openNodeVessel, openNodeHerm, type NodeRecipe } from "./open-node-vessel.js";
+import { openNodeVessel, openNodeHerm, type AskedStanding } from "./open-node-vessel.js";
 import { standAs } from "@lararium/mesh";
 import { randomBytes } from "node:crypto";
 import {
@@ -59,7 +59,7 @@ import { loadLaresConfig } from "./lares-config.js";
 // CLI / env config
 // ---------------------------------------------------------------------------
 
-function parseArgs(): { port: number; storageDir: string; genesisDir: string; wikiId: string; rootDir: string; catalogUrl: string | null; recipe: NodeRecipe } {
+function parseArgs(): { port: number; storageDir: string; genesisDir: string; wikiId: string; rootDir: string; catalogUrl: string | null; recipe: AskedStanding } {
   const args = process.argv.slice(2);
   const get  = (flag: string, env: string, fallback: string) => {
     const i = args.indexOf(flag);
@@ -72,7 +72,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
   // <rootDir>/genesis. Genesis stays checked-in by default, so a no-config boot lands on the repo's
   // tracked seed exactly as before; an operator sites it under ~ via config.resources.genesis.
   const genesisDir = resolve(get("--genesis", "LAR_GENESIS", cfg.resources?.genesis ?? join(rootDir, "genesis")));
-  const recipe = (get("--recipe", "LAR_RECIPE", "lararium") === "herm" ? "herm" : "lararium") as NodeRecipe;
+  const recipe = (get("--recipe", "LAR_RECIPE", "lararium") === "herm" ? "herm" : "lararium") as AskedStanding;
   return {
     port:       Number(get("--port", "LAR_PORT", "8080")),
     storageDir,
@@ -183,14 +183,16 @@ async function main(): Promise<void> {
   if (standing === "herm") {
     const pullMs = process.env["LAR_PULL_MS"];   // carriage cadence — tuning, kept separate from membership
     const herm = await openNodeHerm({
-      hostId:     "lares-viales",
+      // The name follows what STANDS, never which branch reached here. A vessel the operator asked to keep
+      // faceless IS Lares Viales, gods of the crossroads; a hearth waiting on its face stands on the same
+      // floor under its own name, and calling it a wayfarer would tell its operator they built the wrong thing.
+      hostId:     recipe === "herm" ? "lares-viales" : "lararium-node",
       wikiId,
       storageDir,
       genesisDir,
       rootDir,
       wss,
       catalogUrl,
-      recipe:     "herm",
       httpServer,
       meshSelf,
       ...(pullMs ? { pullIntervalMs: Number.parseInt(pullMs, 10) } : {}),

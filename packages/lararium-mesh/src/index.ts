@@ -160,7 +160,7 @@ export type { Repo, DocHandle, AutomergeUrl, StorageAdapterInterface } from "@au
 export { makeIslandRepo, attachMessageChannelSync } from "./island-repo.js";
 export type { IslandRepoConfig } from "./island-repo.js";
 export { assembleVessel, mountWikiSlot } from "./open-vessel-core.js";
-export type { VesselRecipe, VesselBootstrap, VesselCoreAssembly } from "./open-vessel-core.js";
+export type { VesselKeel, VesselBootstrap, VesselCoreAssembly } from "./open-vessel-core.js";
 export { awaitIslandMsg } from "./vessel-host.js";
 export type { AwaitIslandMsgOpts, VesselWorkerHandle, VesselIslandHost } from "./vessel-host.js";
 export { VesselIslandPoolCore } from "./vessel-island-pool-core.js";

@@ -20,7 +20,7 @@
  *   - tw5-booted / live            — the mount cap (after the daemon-first gate + primary mount)
  */
 
-import type { Repo, DocHandle, LarDoc, LarOpenPhase, VesselRecipe, VesselCoreAssembly } from "@lararium/mesh";
+import type { Repo, DocHandle, LarDoc, LarOpenPhase, VesselKeel, VesselCoreAssembly } from "@lararium/mesh";
 import { assembleVessel, mountWikiSlot, LARES_DOC_URI, composeVessel, type CapModule } from "@lararium/mesh";
 import { mountPrimaryWiki, type PrimaryMountPool, type BindingResolver } from "./vessel-steps.js";
 import { VerbTable } from "./verb-dispatcher.js";
@@ -51,7 +51,7 @@ export interface VesselWikiSlot {
  * tempStore, loadCorpora); the closures below carry the VM-focused + capability pieces.
  */
 export interface VesselOrchestration<TPool extends PrimaryMountPool> {
-  keel:        VesselRecipe;
+  keel:        VesselKeel;
   /** Resolve the active-wiki slot AFTER the keel assembles — the slug derives from the
    *  daemon-doc marker (post-genesis), so it cannot precede assembleVessel. */
   wikiSlot:     (assembly: VesselCoreAssembly) => VesselWikiSlot | Promise<VesselWikiSlot>;
@@ -98,7 +98,7 @@ export const CORE_CAP = {
 /** substrate — the shared keel floor: assembleVessel (composite cascade → genesis @oracle island →
  *  @lares/@lararium canon → social plane @identities/@groups/@sessions/@daemon/@persona + corpora).
  *  Emits island-ready/corpus-ready INSIDE assembleVessel. */
-export function substrateCap(keel: VesselRecipe): CapModule {
+export function substrateCap(keel: VesselKeel): CapModule {
   return { id: CORE_CAP.substrate, build: () => assembleVessel(keel) };
 }
 
@@ -231,7 +231,7 @@ export async function composeCoreVessel<TPool extends PrimaryMountPool>(
     wikiCap(o),
     poolCap(o),
     mountCap(o),
-    ...extraCaps, // a Herm's caps minus the wiki = the roads; the full vessel + these caps = a hearth-node
+    ...extraCaps, // the hearth caps above ride ON the floor every vessel stands; these add its role (carriage, WHO)
   ]);
 
   const assembly = vessel.get<VesselCoreAssembly>(CORE_CAP.substrate)!;

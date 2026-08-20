@@ -2,17 +2,17 @@
  * open-vessel-core — the ONE composable vessel, in code (mesh-resident).
  *
  * Canon: lar:///ha.ka.ba/lararium/mesh/open-vessel. A vessel IS a composition:
- * a recipe naming which sovereign pieces it carries + the few substrate values each
+ * a keel naming which sovereign pieces it carries + the few substrate values each
  * resolves native-first. Node and browser differ ONLY in capabilities, never in
  * structure (Ink & Switch): both walk this ONE protocol sequence.
  *
  * VM-FREE by design — this owns the substrate-level keel (composite cascade,
  * genesis island layer, social plane, daemon doc, wiki-slot layers), so it lives in
  * mesh, NOT tw5. The VM-focused pieces (daemon-VM spawn, primary-wiki mount, island
- * pool) stay in the platform recipe / tw5. The one tw5-class the keel needs — the
+ * pool) stay in the platform keel / tw5. The one tw5-class the keel needs — the
  * volatile temp store — injects as `tempStore`, so mesh holds zero tw5 dep.
  *
- * NO `if (platform)` enters here. A capability the recipe omits simply does not run.
+ * NO `if (platform)` enters here. A capability the keel omits simply does not run.
  * The shore for every capability stays open on both substrates so the browser SHALL
  * grow into init/PersonaGroup/genesis/corpus/residency.
  */
@@ -61,11 +61,11 @@ export interface VesselBootstrap {
 }
 
 /**
- * VesselRecipe — the composition a vessel supplies. NOT a host port: a record of the
+ * VesselKeel — the composition a vessel supplies. NOT a host port: a record of the
  * substrate atoms each sovereign piece resolves native-first + the capability pieces
  * the vessel currently holds. Closures own their substrate; the core never branches.
  */
-export interface VesselRecipe {
+export interface VesselKeel {
   // ── substrate atoms (resolved native-first by each piece) ──
   repo:          Repo;
   catalogHandle: DocHandle<LarDoc>;
@@ -115,7 +115,7 @@ export interface MountManifest {
   readonly degraded: boolean;
 }
 
-/** What the keel assembles before the recipe mounts daemon + wiki. */
+/** What the keel assembles before the wiki recipe mounts daemon + wiki. */
 export interface VesselCoreAssembly {
   repo:          Repo;
   composite:     CompositeStore;
@@ -152,11 +152,11 @@ function addReadOnlyLayer(composite: CompositeStore, bagId: string, handle: DocH
 /**
  * Assemble the shared vessel keel: catalog floor, genesis island canon layer,
  * @lares canon, social plane, daemon doc — plus the corpus capability piece when held.
- * The phase sequence holds invariant; each piece resolves its substrate via the recipe.
+ * The phase sequence holds invariant; each piece resolves its substrate via the keel.
  */
-export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAssembly> {
-  const { repo, catalogHandle, waitHandle, loadGenesis } = recipe;
-  const emit = (p: LarOpenPhase) => recipe.onPhase?.(p);
+export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssembly> {
+  const { repo, catalogHandle, waitHandle, loadGenesis } = keel;
+  const emit = (p: LarOpenPhase) => keel.onPhase?.(p);
 
   const composite = new CompositeStore();
   addReadOnlyLayer(composite, BAG_IDS.catalog, catalogHandle);
@@ -218,7 +218,7 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   // ── social plane (resolveHandle encodes the seed policy) + daemon doc ──
   // Route symmetry: the base-canon docs above resolve through the graceful tideline
   // resolver; the social plane earns the same discipline here. A `docLoadProbe` (when the
-  // recipe holds one) materializes each doc in a disposable boundary FIRST — a condemned
+  // keel holds one) materializes each doc in a disposable boundary FIRST — a condemned
   // doc gets quarantined and mounts as a read-only blank (writable:false, so no write forks
   // into the placeholder), and the manifest marks the vessel degraded. Absent a probe, the
   // doc resolves straight through, as before.
@@ -227,21 +227,21 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   let degraded = false;
   const mountSocial = async (bagId: string, url: string): Promise<void> => {
     const documentId = documentIdFromUrl(url);
-    if (recipe.docLoadProbe) {
-      const verdict = await recipe.docLoadProbe.probe(documentId);
+    if (keel.docLoadProbe) {
+      const verdict = await keel.docLoadProbe.probe(documentId);
       if (isCondemned(verdict)) {
         // L3 — before condemning the whole doc, try a clean-tail recovery: verify the doc's
         // clean record-prefix loads in isolation, then drop only the torn tail. A promoted
         // doc mounts WRITABLE from its verified prefix (a suffix of edits lost, never a tear
         // kept), and the vessel stays whole. Only a torn base (null) falls through.
-        const promoted = recipe.recoverCleanTail ? await recipe.recoverCleanTail(verdict) : null;
+        const promoted = keel.recoverCleanTail ? await keel.recoverCleanTail(verdict) : null;
         if (promoted && !isCondemned(promoted)) {
           composite.addLayer({ bagId, store: new AutomergeDocStore(await resolve(url as AutomergeUrl), bagId), writable: true });
           const cut = promoted.cleanTail;
           entries.push({ bagId, documentId, status: "promoted", reason: cut ? `clean-tail: kept ${cut.kept}, moved ${cut.movedAside.length} aside` : "clean-tail recovery" });
           return;
         }
-        recipe.quarantineDoc?.(verdict);
+        keel.quarantineDoc?.(verdict);
         degraded = true;
         entries.push({ bagId, documentId, status: "degraded", reason: `${verdict.status}: ${verdict.reason ?? ""}`.trim() });
         // Read-only blank stands in — the plane reads empty until L4 rematerializes it,
@@ -267,8 +267,8 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   }
   const mountManifest: MountManifest = { entries, degraded };
 
-  if (recipe.loadCorpora) {
-    await recipe.loadCorpora(composite);
+  if (keel.loadCorpora) {
+    await keel.loadCorpora(composite);
     emit("corpus-ready");
   }
 
@@ -280,7 +280,7 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
  * temp; the island still owns live VM state). Returns the handles for the mount.
  */
 export async function mountWikiSlot(
-  recipe: VesselRecipe,
+  keel: VesselKeel,
   composite: CompositeStore,
   slot: { wikiSlug: string; wikiKey: string; wikiBagId: string; draftOracleTitle: string; draftBagId: string },
   /** Pre-resolved wiki doc — the @lares-as-wiki quine seats the operator-minted
@@ -288,7 +288,7 @@ export async function mountWikiSlot(
    *  never in @catalog — no cross-plane resolution, no second mint). */
   presetWikiHandle?: DocHandle<LarDoc>,
 ): Promise<{ wikiHandle: DocHandle<LarDoc>; draftHandle: DocHandle<LarDoc> }> {
-  const { repo, catalogHandle, waitHandle } = recipe;
+  const { repo, catalogHandle, waitHandle } = keel;
   // Resolve the CANON doc by its content key (bags/@{slug}) — where the mint
   // writer keys it. The wiki IDENTITY (wikis/@{slug}, slot.wikiKey) is a separate
   // registry entry, not the canon-doc lookup.
@@ -309,7 +309,7 @@ export async function mountWikiSlot(
   );
   composite.addLayer({ bagId: slot.draftBagId, store: new AutomergeDocStore(draftHandle, slot.draftBagId), writable: true, defaultWritable: false });
 
-  composite.addLayer({ bagId: wikiSlotUri(slot.wikiSlug, "temp"), store: recipe.tempStore(), writable: true, defaultWritable: true });
+  composite.addLayer({ bagId: wikiSlotUri(slot.wikiSlug, "temp"), store: keel.tempStore(), writable: true, defaultWritable: true });
 
   return { wikiHandle, draftHandle };
 }

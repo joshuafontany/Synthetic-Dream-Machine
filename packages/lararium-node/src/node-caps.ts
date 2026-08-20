@@ -3,8 +3,9 @@
  *
  * A vessel = a #has-cap-stack (the flat, dependency-blind set of cap-modules it HAS); `composeVessel`
  * reads the stack and topologically WIRES the live components, handing each a POLA-scoped resolver.
- * Vessel-TYPES are different STACKS, never feature-flags: a Herm is not "a node with wiki=false" — it
- * is a stack that never declares the wiki/pool caps, so nothing routes to them (blind by structure).
+ * Vessel-kinds are different STACKS, never feature-flags — and the difference runs BASE-THEN-LIFT: the
+ * Herm is the FLOOR every vessel stands on, and a Lararium is that floor with the hearth caps added. A
+ * stack that never declares the wiki/pool caps routes nothing to them (blind by structure, not by flag).
  *
  * The ISOMORPHIC carriage machinery (meshpalace + carriage caps, MeshSelf, the routing helpers) now
  * lives DOWN on the mesh floor (`@lararium/mesh` carriage-caps) so a BROWSER vessel composes the very
@@ -12,11 +13,12 @@
  * `flowMapReadFaceCap` (the http disclosure wire) + the two node cap-stacks.
  *
  * Two node stacks ride here:
- *   - composeLararium — the FULL node, a granular #has-cap-stack wired by `composeCoreVessel`.
- *   - composeHerm — the Lares Viales / Herm: a wiki-LESS wayfarer composed UP from granular caps —
- *     substrate (the @oracle island + social plane) + the @daemon immune core + a writable @meshpalace
- *     FLOW-map + the read-face that serves it. NO wiki, NO pool. The @daemon STAYS (the immune core
- *     lives in both stacks); its registerBags simply omits the absent user-wiki bags — the decouple.
+ *   - composeHerm — the FLOOR: substrate (the @oracle island + social plane) + the @daemon immune core
+ *     + a writable @meshpalace FLOW-map + the read-face that serves it. The Lares Viales stack, and the
+ *     course every other vessel stands on. NO wiki, NO pool.
+ *   - composeLararium — the floor with the HEARTH CAPS added (wiki-slot, wiki, pool, mount), wired by
+ *     `composeCoreVessel`. The @daemon rides BOTH: it is the immune core, present from founding, and its
+ *     registerBags simply omits the user-wiki bags where no wiki stands — the decouple.
  *
  * Canon: lar:///ha.ka.ba/lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
  */
@@ -26,7 +28,7 @@ import type { Repo, DocHandle } from "@automerge/automerge-repo";
 import {
   composeVessel, type CapModule, type ComposedVessel,
   type MeshPalaceDoc,
-  type VesselRecipe, type VesselCoreAssembly,
+  type VesselKeel, type VesselCoreAssembly,
   type BagStowage,
   // ── the lifted carriage machinery, now mesh-floor (re-exported below) ──
   CARRIAGE_CAP,
@@ -117,7 +119,7 @@ export function bulbCap(deps: {
 export const composeLararium = composeCoreVessel;
 
 export interface HermStackDeps extends DaemonCapDeps {
-  readonly keel:           VesselRecipe;
+  readonly keel:           VesselKeel;
   readonly repo:           Repo;
   readonly residency?:     BagStowage;
   readonly httpServer:     Server;

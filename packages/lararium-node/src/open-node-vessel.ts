@@ -41,7 +41,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagStowage, pluginCidsFromIslandBlobs,
-  deriveRegisterBags, catalogNamedBags, readPersonaPlanes, mountedPlaneBagId, personaPlanesFault, type PlaneEntry,
+  deriveRegisterBags, catalogNamedBags, personaBagIdFor, readPersonaPlanes, mountedPlaneBagId, personaPlanesFault, type PlaneEntry,
   coupleMesh, crystallize, guardHitl,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
@@ -211,8 +211,16 @@ export const SOCIAL_BOOTSTRAP_PLUGIN_TITLE = "lar:///ha.ka.ba/lararium/bootstrap
 /** @see LarOpenPhase in @lararium/mesh */
 export type NodeOpenPhase = LarOpenPhase;
 
-/** Which #has-cap-stack openNodeVessel composes. Default the full Lararium. */
-export type NodeRecipe = "lararium" | "herm";
+/**
+ * What the operator ASKS this vessel to stand as — the first argument `standAs` weighs.
+ *
+ * A vessel composes by what it EARNS, never by a type it declares: every one stands as a herm and lifts to a
+ * hearth when a face stands. So this DECLINES the lift ("herm" — a public crossroads meant to stay faceless)
+ * or leaves it open; it never selects a different kind of thing.
+ *
+ * The word "recipe" belongs to the pinned WIKI's composition and to nothing else.
+ */
+export type AskedStanding = "lararium" | "herm";
 
 export interface NodeVesselOptions extends LarariumVesselOptions {
   storageDir: string;
@@ -222,8 +230,6 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   genesisDir?: string;
   /** Repo root for wiki memes scan and all mirror paths. Defaults to monorepo root. */
   rootDir?: string;
-  /** Cap-stack to compose. "herm" → the wiki-less Lares Viales (use openNodeHerm). Default "lararium". */
-  recipe?: NodeRecipe;
   /** HTTP server the Herm's FLOW-map read-face serves over (required for openNodeHerm). */
   httpServer?: Server;
   /** This vessel's mesh standing — derived once via deriveMeshSelf. Present → it self-announces,
@@ -267,7 +273,6 @@ export interface NodeVesselResult extends VesselResult<VesselIslandPool, DaemonV
 
 /** A composed Herm (wiki-less): the @daemon immune core + a served @meshpalace FLOW-map, no pool. */
 export interface NodeHermResult {
-  recipe:           "herm";
   repo:             Repo;
   store:            CompositeStore;
   daemon:           DaemonVmCore;
@@ -339,7 +344,7 @@ interface NodeBootPrep {
 
 /**
  * Build the shared node boot substrate: the platform atoms (repo + WS relay/gate, catalog, operator
- * identity, residency mechanism) + the keel recipe + the VM-focused closures (wiki-slot, daemon,
+ * identity, residency mechanism) + the keel + the VM-focused closures (wiki-slot, daemon,
  * verbs, pool, after-hooks). NO sequencing here — `composeLararium`/`composeHerm` wire the order.
  */
 async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
@@ -937,6 +942,21 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // relayGatePubKey — so node + its browser leaves resolve the identical @crossroads. The @daemon core
     // splices @crossroads into the recipe + registerBags for either vessel.
     await registerCrossroadsInOracle(repo, assembly.islandHandle, vesselIdentity.verifyingKey);
+    // ── THE BOOTSTRAP SEEDS; @catalog REGISTERS ──────────────────────────────────────────────────
+    // A face is lit by `lares persona new 0` — a CLI act, on a vessel that is not running — so the plane it
+    // stands lands in the BOOTSTRAP, which is this island's cold-start seed and reaches no registry. The
+    // verbs that read a persona plane resolve it the way every user bag resolves, from @catalog. This boot
+    // carries the seed across that gap.
+    //
+    // Idempotent by construction: it writes the url the seed already names, so a plane registered on an
+    // earlier boot is re-written identically and a plane the operator lit an hour ago registers now.
+    for (const plane of bootstrap.personaPlanes) {
+      const bagId = personaBagIdFor(plane.personaGroupId);
+      if (tiddlerText(assembly.catalogHandle.doc()?.tiddlers?.[bagId]) === plane.url) continue;
+      assembly.catalogHandle.change((doc) => {
+        doc.tiddlers[bagId] = mutableLarRecord(bagId, { text: plane.url, kind: "oracle" }, "vessel-boot");
+      });
+    }
     // M3 — node-main reads the persisted keyhive Archive from the identity home and passes it into the
     // worker (same custody boundary the 32-byte seed already crosses). keyhive inits from it as the
     // restore FLOOR, then replays @daemon cap-events on top — a torn @daemon restores instead of orphaning.
@@ -1768,7 +1788,6 @@ export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermRes
   p.emit("live");
 
   return {
-    recipe:           "herm",
     repo:             p.repo,
     store:            herm.assembly.composite,
     daemon:           p.daemonVm(),

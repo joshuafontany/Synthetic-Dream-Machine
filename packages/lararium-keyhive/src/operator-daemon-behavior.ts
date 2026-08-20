@@ -174,9 +174,9 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       // is reachable here, the never-federates wall made structural. `ctx.tw5` lets a mutation/list re-render
       // the @daemon follow surface (a browser paints it; a headless node daemon rests the temp tiddler).
       if (ctx.oracleUrl) {
-        const oraclePlane = makeCatalogAccessor(ctx.repo, ctx.oracleUrl);
+        const sysPlane = makeCatalogAccessor(ctx.repo, ctx.oracleUrl);
         const resolveCirclesStore = async () => {
-          const store = await oraclePlane.storeOf(CIRCLES_DOC_URI);
+          const store = await sysPlane.storeOf(CIRCLES_DOC_URI);
           if (!store) throw new Error("circle-verb: @circles unresolved — the @oracle registry names no CIRCLES_DOC_URI");
           return store;
         };
@@ -202,10 +202,19 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
         // verbs already keep: absent the thing they need, they never register at all. A caller then meets an
         // unknown verb rather than a verb that throws, which is the honest answer to "this place holds no face".
         if (daemonAuth.personaGroupDocIdHex) {
+          // A PERSONA PLANE IS A USER BAG, SO IT RESOLVES FROM @catalog.
+          //
+          // Three registries stand and each answers its own question. @oracle names the SYSTEM bags — the
+          // universal floor every vessel carries. @catalog names the operator's own bags under their OCAP
+          // grants. @crossroads names what a stranger may mount. A PersonaGroup's plane belongs to a person,
+          // so it lives in the middle one; reaching for it on the system floor asks the wrong plane a
+          // question it was never given to answer, and the refusal reads as a missing document.
+          const catalogPlane = ctx.catalogUrl ? makeCatalogAccessor(ctx.repo, ctx.catalogUrl) : null;
           const personaBagId = personaBagIdFor(faceGroup());
           const resolvePersonaStore = async () => {
-            const store = await oraclePlane.storeOf(personaBagId);
-            if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — the @oracle registry names no ${personaBagId}`);
+            if (!catalogPlane) throw new Error("persona-selves-verb: this island carries no @catalog plane — a user bag has no registry to resolve from");
+            const store = await catalogPlane.storeOf(personaBagId);
+            if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — @catalog names no ${personaBagId}`);
             return store;
           };
           const selvesReactors = makePersonaSelvesReactors({ resolveStore: resolvePersonaStore });
@@ -238,7 +247,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
         // who feeds and how deep, VERDICT-FREE (what spread counts as capture stays the operator's
         // calibration, and mechanizing it here would recreate the root a realm exists without).
         const resolveDaemonStore = async () => {
-          const store = await oraclePlane.storeOf(DAEMON_BAG_ID);
+          const store = await sysPlane.storeOf(DAEMON_BAG_ID);
           if (!store) throw new Error("cabal-realm-verb: @daemon unresolved — the @oracle registry names no DAEMON_BAG_ID");
           return store;
         };
