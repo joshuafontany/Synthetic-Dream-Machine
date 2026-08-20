@@ -41,7 +41,7 @@
 
 import type { Repo } from "@lararium/mesh";
 import {
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID,
+  IDENTITIES_NAMESPACE, CIRCLES_NAMESPACE, SESSIONS_NAMESPACE, DAEMON_BAG_ID,
   PERSONA_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   HEARTH_DAEMON_URL_TIDDLER,
@@ -296,7 +296,7 @@ export async function foundTheFace(input: FaceFoundingInput): Promise<FaceFoundi
   // The operator's own identity + circle tiddlers land on the planes that now carry this face's tag.
   const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
   for (const t of ceremonyTiddlers) {
-    const handle = t.bag === IDENTITIES_DOC_URI ? identitiesHandle : circlesHandle;
+    const handle = t.bag === IDENTITIES_NAMESPACE ? identitiesHandle : circlesHandle;
     handle.change((doc) => {
       if (!doc.tiddlers[t.title]) {
         doc.tiddlers[t.title] = { tiddler: { title: t.title, ...t.fields }, meta: { authority: t.authority } };
@@ -643,7 +643,7 @@ export async function runApplyAdmitPayload(
 
   const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
   for (const t of ceremonyTiddlers) {
-    if (t.bag === IDENTITIES_DOC_URI) {
+    if (t.bag === IDENTITIES_NAMESPACE) {
       identitiesHandle.change((doc) => {
         if (!doc.tiddlers[t.title]) {
           doc.tiddlers[t.title] = { tiddler: { title: t.title, ...t.fields }, meta: { authority: t.authority } };

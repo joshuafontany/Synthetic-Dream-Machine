@@ -28,9 +28,9 @@ import {
   LARARIUM_DOC_URI,
   CATALOG_DOC_URI,
   LARES_DOC_URI,
-  IDENTITIES_DOC_URI,
-  CIRCLES_DOC_URI,
-  SESSIONS_DOC_URI,
+  IDENTITIES_NAMESPACE,
+  CIRCLES_NAMESPACE,
+  SESSIONS_NAMESPACE,
   bagDescriptorUri,
   recipeUri,
 } from "./lar-uris.js";
@@ -311,9 +311,9 @@ const ROOT_BAGS = [
   { bagId: LARARIUM_DOC_URI,   label: "ha — memetic corpus (Lararium)",            readPolicy: "public",  writePolicy: "private" },
   { bagId: CATALOG_DOC_URI,    label: "ka — corpus discovery (Catalog)",            readPolicy: "public",  writePolicy: "private" },
   { bagId: LARES_DOC_URI,      label: "ba — persona & doctrine (Lares)",            readPolicy: "public",  writePolicy: "private" },
-  { bagId: IDENTITIES_DOC_URI, label: "ha — principals (Identities)",               readPolicy: "private", writePolicy: "private" },
-  { bagId: CIRCLES_DOC_URI,    label: "ka — collective authority (Circles)",        readPolicy: "private", writePolicy: "private" },
-  { bagId: SESSIONS_DOC_URI,   label: "ba — live operator sessions (Sessions)",     readPolicy: "private", writePolicy: "private" },
+  { bagId: IDENTITIES_NAMESPACE, label: "ha — principals (Identities)",               readPolicy: "private", writePolicy: "private" },
+  { bagId: CIRCLES_NAMESPACE,    label: "ka — collective authority (Circles)",        readPolicy: "private", writePolicy: "private" },
+  { bagId: SESSIONS_NAMESPACE,   label: "ba — live operator sessions (Sessions)",     readPolicy: "private", writePolicy: "private" },
 ] as const;
 
 // ---------------------------------------------------------------------------

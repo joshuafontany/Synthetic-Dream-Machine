@@ -20,9 +20,7 @@ import {
   CATALOG_DOC_URI,
   LARES_DOC_URI,
   LARARIUM_DOC_URI,
-  IDENTITIES_DOC_URI,
-  CIRCLES_DOC_URI,
-  SESSIONS_DOC_URI,
+  type PersonaScopedBags,
   DAEMON_BAG_ID,
   mutableLarRecord,
   tiddlerText,
@@ -264,6 +262,10 @@ export function reconcileWellKnownTiddlers(
   handle:         DocHandle<LarDoc>,
   catalogUrl:     string,
   laresUrl?:      string,
+  /** The face whose three travelling planes this island registers, or null where no face stands. Their
+   *  names derive off the face's own tag, so the registry says WHOSE planes it names — and a second face
+   *  on the same vessel registers a second set beside them rather than overwriting the first. */
+  face?:          PersonaScopedBags | null,
   identitiesUrl?: string,
   groupsUrl?:     string,
   sessionsUrl?:   string,
@@ -274,9 +276,9 @@ export function reconcileWellKnownTiddlers(
   const selfOk = tiddlers[ORACLE_DOC_URI]?.tiddler.text === handle.url;
   const catOk  = tiddlers[CATALOG_DOC_URI]?.tiddler.text  === catalogUrl;
   const baOk   = laresUrl        ? tiddlers[LARES_DOC_URI]?.tiddler.text      === laresUrl       : true;
-  const idOk   = identitiesUrl   ? tiddlers[IDENTITIES_DOC_URI]?.tiddler.text === identitiesUrl  : true;
-  const grOk   = groupsUrl       ? tiddlers[CIRCLES_DOC_URI]?.tiddler.text    === groupsUrl      : true;
-  const seOk   = sessionsUrl     ? tiddlers[SESSIONS_DOC_URI]?.tiddler.text   === sessionsUrl    : true;
+  const idOk   = face && identitiesUrl ? tiddlers[face.identities]?.tiddler.text === identitiesUrl : true;
+  const grOk   = face && groupsUrl     ? tiddlers[face.circles]?.tiddler.text    === groupsUrl     : true;
+  const seOk   = face && sessionsUrl   ? tiddlers[face.sessions]?.tiddler.text   === sessionsUrl   : true;
   const adOk   = daemonUrl        ? tiddlers[DAEMON_BAG_ID]?.tiddler.text       === daemonUrl       : true;
   if (selfOk && catOk && baOk && idOk && grOk && seOk && adOk) return;
 
@@ -284,9 +286,9 @@ export function reconcileWellKnownTiddlers(
     if (!selfOk) d.tiddlers[ORACLE_DOC_URI] = mutableLarRecord(ORACLE_DOC_URI, { text: handle.url, kind: "oracle" }, "lararium-seed");
     if (!catOk)  d.tiddlers[CATALOG_DOC_URI]  = mutableLarRecord(CATALOG_DOC_URI, { text: catalogUrl, kind: "oracle" }, "lararium-seed");
     if (!baOk  && laresUrl)      d.tiddlers[LARES_DOC_URI]      = mutableLarRecord(LARES_DOC_URI, { text: laresUrl, kind: "oracle" }, "lararium-seed");
-    if (!idOk  && identitiesUrl) d.tiddlers[IDENTITIES_DOC_URI] = mutableLarRecord(IDENTITIES_DOC_URI, { text: identitiesUrl }, "lararium-seed");
-    if (!grOk  && groupsUrl)     d.tiddlers[CIRCLES_DOC_URI]    = mutableLarRecord(CIRCLES_DOC_URI, { text: groupsUrl }, "lararium-seed");
-    if (!seOk  && sessionsUrl)   d.tiddlers[SESSIONS_DOC_URI]   = mutableLarRecord(SESSIONS_DOC_URI, { text: sessionsUrl }, "lararium-seed");
+    if (!idOk  && face && identitiesUrl) d.tiddlers[face.identities] = mutableLarRecord(face.identities, { text: identitiesUrl }, "lararium-seed");
+    if (!grOk  && face && groupsUrl)     d.tiddlers[face.circles]    = mutableLarRecord(face.circles, { text: groupsUrl }, "lararium-seed");
+    if (!seOk  && face && sessionsUrl)   d.tiddlers[face.sessions]   = mutableLarRecord(face.sessions, { text: sessionsUrl }, "lararium-seed");
     if (!adOk  && daemonUrl)      d.tiddlers[DAEMON_BAG_ID]       = mutableLarRecord(DAEMON_BAG_ID, { text: daemonUrl }, "lararium-seed");
   });
 

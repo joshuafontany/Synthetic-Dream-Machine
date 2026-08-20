@@ -29,7 +29,7 @@ import {
   materializeGenesisIsland,
   whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
   personaKelBoardDocUrl, personaKelChainForPrefix,
-  deriveRegisterBags, catalogNamedBags, personaBagIdFor,
+  deriveRegisterBags, catalogNamedBags, personaBagIdFor, personaSiblingBagIds,
   type CapModule,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
@@ -935,9 +935,13 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       void residency.pin(BAG_IDS.catalog,    "boot:catalog");
       void residency.pin(BAG_IDS.oracle,   "boot:lararium-island");
       if (assembly.laresHandle) void residency.pin(BAG_IDS.lares, "boot:lares-corpus");
-      void residency.pin(BAG_IDS.identities, "boot:identities");
-      void residency.pin(BAG_IDS.groups,     "boot:circles");
-      void residency.pin(BAG_IDS.sessions,   "boot:sessions");
+      // A face's planes pin under the face's own names — the vessel pins what it actually mounted.
+      const pinFace = social.personaBagId ? personaSiblingBagIds(social.personaBagId) : null;
+      if (pinFace) {
+        void residency.pin(pinFace.identities, "boot:identities");
+        void residency.pin(pinFace.circles,    "boot:circles");
+        void residency.pin(pinFace.sessions,   "boot:sessions");
+      }
       void residency.pin(DAEMON_BAG_ID,       "boot:daemon");
       residency.startSweeper();
       assembly.composite.attachResidency(residency);

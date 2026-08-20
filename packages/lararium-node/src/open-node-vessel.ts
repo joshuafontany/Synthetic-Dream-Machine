@@ -38,13 +38,13 @@ import {
   OpenIdentitySlot,
   emptyLarDoc, mutableLarRecord, tiddlerText,
   ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, CROSSROADS_DOC_URI, recipeHostFacets,
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID,
+  DAEMON_BAG_ID,
   BAG_IDS, slugFromUri, verbArgsFromPayload, registerCrossroadsInOracle,
   whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagStowage, pluginCidsFromIslandBlobs,
-  deriveRegisterBags, catalogNamedBags, personaBagIdFor, readPersonaPlanes, mountedPlaneBagId, personaPlanesFault, type PlaneEntry,
+  deriveRegisterBags, catalogNamedBags, personaBagIdFor, personaSiblingBagIds, readPersonaPlanes, mountedPlaneBagId, personaPlanesFault, type PlaneEntry,
   coupleMesh, crystallize, guardHitl,
 }                                       from "@lararium/mesh";
 import type { WikiActivationCap } from "@lararium/mesh";
@@ -790,9 +790,6 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         ? (JSON.parse(bootstrapPlugin["text"] as string) as { tiddlers: Record<string, { text?: string }> }).tiddlers
         : {};
       const id   = islandHandle.doc()?.tiddlers;
-      const identitiesUrl = bootstrapTiddlers[IDENTITIES_DOC_URI]?.text ?? tiddlerText(id?.[IDENTITIES_DOC_URI]) ?? null;
-      const circlesUrl    = bootstrapTiddlers[CIRCLES_DOC_URI]?.text    ?? tiddlerText(id?.[CIRCLES_DOC_URI])    ?? null;
-      const sessionsUrl   = bootstrapTiddlers[SESSIONS_DOC_URI]?.text   ?? tiddlerText(id?.[SESSIONS_DOC_URI])   ?? null;
       const daemonUrl      = bootstrapTiddlers[DAEMON_BAG_ID]?.text       ?? tiddlerText(id?.[DAEMON_BAG_ID])       ?? null;
       // THE ONE RESOLUTION POINT on this platform. The vessel reads back the whole FAMILY of compartments
       // it carries, then resolves the gesture — "the one I stand in" — to that plane's absolute name.
@@ -815,6 +812,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         ? mountedPlaneBagId(personaPlanes, personaGroupId)
         : null;
       const personaUrl     = personaPlanes.find((p) => p.personaGroupId === personaGroupId)?.url ?? null;
+      // THE THREE PLANES THAT TRAVEL WITH THE FACE, read under the face's own names. The plane id
+      // resolved just above carries the tag, so its siblings come from it — the name is the index, and
+      // no second copy of the tag rides the bootstrap to drift from this one. A vessel standing in no
+      // face reads none of them, which is the faceless floor answering honestly.
+      const faceSiblings  = personaBagId ? personaSiblingBagIds(personaBagId) : null;
+      const readPlane = (bagId: string | undefined): string | null =>
+        bagId ? (bootstrapTiddlers[bagId]?.text ?? tiddlerText(id?.[bagId]) ?? null) : null;
+      const identitiesUrl = readPlane(faceSiblings?.identities);
+      const circlesUrl    = readPlane(faceSiblings?.circles);
+      const sessionsUrl   = readPlane(faceSiblings?.sessions);
       // ── THE PLACE STANDS ALONE; THE FACE RIDES OPTIONAL ────────────────────────────────────────
       // Only @daemon reads required — a founding stands a PLACE first (`lares vessel found`) and a FACE
       // later (`lares persona new 0`), so a vessel that carries and serves while holding no persona names
@@ -1534,9 +1541,13 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     void residency.pin(BAG_IDS.oracle,     "boot:oracle-island");
     void residency.pin(BAG_IDS.lararium,   "boot:lararium-corpus");
     if (assembly.laresHandle) void residency.pin(BAG_IDS.lares, "boot:lares-corpus");
-    void residency.pin(BAG_IDS.identities, "boot:identities");
-    void residency.pin(BAG_IDS.groups,     "boot:circles");
-    void residency.pin(BAG_IDS.sessions,   "boot:sessions");
+    // A face's planes pin under the face's own names — the vessel pins what it actually mounted.
+    const pinFace = bootstrap.personaBagId ? personaSiblingBagIds(bootstrap.personaBagId) : null;
+    if (pinFace) {
+      void residency.pin(pinFace.identities, "boot:identities");
+      void residency.pin(pinFace.circles,    "boot:circles");
+      void residency.pin(pinFace.sessions,   "boot:sessions");
+    }
     void residency.pin(DAEMON_BAG_ID,       "boot:daemon");
     residency.startSweeper();
     assembly.composite.attachResidency(residency);
@@ -1547,6 +1558,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // Keep oracle tiddlers current — self, ka, ba, social plane, daemon.
     reconcileWellKnownTiddlers(
       assembly.islandHandle, catalogHandle.url, assembly.laresHandle?.url,
+      bootstrap.personaBagId ? personaSiblingBagIds(bootstrap.personaBagId) : null,
       bootstrap.identitiesUrl, bootstrap.circlesUrl, bootstrap.sessionsUrl,
       daemonVm.daemonHandle.url,
     );

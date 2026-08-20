@@ -22,7 +22,7 @@ import { join } from "path";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, personaMembershipEntries,
+  DAEMON_BAG_ID, personaMembershipEntries, personaScopedBagIds,
   PERSONA_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { daemonGenesisDir } from "../lares-config.js";
@@ -94,11 +94,15 @@ function faceTiddlers(
   identitiesUrl: string, circlesUrl: string, sessionsUrl: string, personaUrl: string,
   personaGroupDocIdHex: string, meshCabalDocIdHex: string,
 ): PackedTiddlers {
+  // A FACE'S PLANES ARE NAMED BY THE FACE. All four ride names derived off the one tag this
+  // PersonaGroup's doc id yields, so the bootstrap that carries them says WHOSE they are; a
+  // vessel-global `@circles` would name one shelf where a multitude needs one per face.
+  const face = personaScopedBagIds(personaGroupDocIdHex);
   return {
     [MESH_CABAL_DOC_ID_TIDDLER]: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabalDocIdHex, kind: "sentinel-id" },
-    [IDENTITIES_DOC_URI]: { title: IDENTITIES_DOC_URI, text: identitiesUrl, kind: "oracle" },
-    [CIRCLES_DOC_URI]:    { title: CIRCLES_DOC_URI,    text: circlesUrl,    kind: "oracle" },
-    [SESSIONS_DOC_URI]:   { title: SESSIONS_DOC_URI,   text: sessionsUrl,   kind: "oracle" },
+    [face.identities]: { title: face.identities, text: identitiesUrl, kind: "oracle" },
+    [face.circles]:    { title: face.circles,    text: circlesUrl,    kind: "oracle" },
+    [face.sessions]:   { title: face.sessions,   text: sessionsUrl,   kind: "oracle" },
     // The PersonaGroup plane and the membership that names it — written through the same pair a vessel
     // standing in a SECOND compartment would add, so founding and admission lay down one shape. The boot
     // path reads the family back by derivation; nothing here holds an order or an index.

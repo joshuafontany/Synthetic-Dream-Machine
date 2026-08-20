@@ -242,9 +242,23 @@ export const BOOT_SPLASH_ACTIVE_URI = stableLarUri("state/boot-splash/active");
 
 // ── Social plane ──────────────────────────────────────────────────────────
 
-export const IDENTITIES_DOC_URI = bagUri("identities");
-export const CIRCLES_DOC_URI    = bagUri("circles");
-export const SESSIONS_DOC_URI   = bagUri("sessions");
+/** The three social NAMESPACES a face carries, each the twin of `PERSONA_NAMESPACE` above and read the
+ *  same way — a TITLE prefix inside a document, and the STEM that document's own bag id extends.
+ *
+ *  A FACE'S RELATIONS TRAVEL WITH THE FACE. Who a persona follows, blocks and mutes; how it recognises
+ *  others; the sessions it wears — each answers WHICH FACE is worn, so a vessel holding a multitude keeps
+ *  ONE SET PER FACE. `personaScopedBagIds` derives all four names off the one tag a PersonaGroup's own doc
+ *  id yields, and `personaSiblingBagIds` reaches the other three from any one of them: the name is the
+ *  index, so nothing stores a second copy to drift from.
+ *
+ *  NONE OF THESE NAMES A BAG. Titles inside a plane spell `@circles/following` whichever plane holds them,
+ *  exactly as every persona plane's records spell `@persona/...`; a title resolves verbatim within its own
+ *  document, so one internal shape serves every face. The bag answering to it is `@circles-<tag>`, and a
+ *  vessel-global `@circles` would put one persona's blocked list in the same document as another's follows
+ *  — where anything reading it correlates the faces a multitude exists to hold apart. */
+export const IDENTITIES_NAMESPACE = bagUri("identities");
+export const CIRCLES_NAMESPACE    = bagUri("circles");
+export const SESSIONS_NAMESPACE   = bagUri("sessions");
 
 // ── URI builders ──────────────────────────────────────────────────────────
 
@@ -338,36 +352,37 @@ export function bagDescriptorUri(bagId: string): string {
 
 // ── Social plane URI builders ──────────────────────────────────────────────
 
-// These nested titles live INSIDE a bag doc — built from the const so they stay keyed
-// to the doc the daemon composite mounts (a bare literal would drift from it).
+// These nested titles live INSIDE whichever plane holds them, built from the NAMESPACE so every face's
+// document carries one internal shape. The bag a title lands in is the face's `@…-<tag>`; the title never
+// names it, so a record written on one face reads identically on the next.
 /** identityTiddlerUri("did:key:z…") → "…/bags/@identities/did:key:z…" */
 export function identityTiddlerUri(did: string): string {
-  return `${IDENTITIES_DOC_URI}/${did}`;
+  return `${IDENTITIES_NAMESPACE}/${did}`;
 }
 
 /** circleTiddlerUri("admins") → "…/bags/@circles/admins" */
 export function circleTiddlerUri(id: string): string {
-  return `${CIRCLES_DOC_URI}/${id}`;
+  return `${CIRCLES_NAMESPACE}/${id}`;
 }
 
 /** sessionTiddlerUri("sess-abc") → "…/bags/@sessions/sess-abc" */
 export function sessionTiddlerUri(id: string): string {
-  return `${SESSIONS_DOC_URI}/${id}`;
+  return `${SESSIONS_NAMESPACE}/${id}`;
 }
 
 /** sessionEventLogUri("sess-abc") → "…/bags/@sessions/sess-abc/events" */
 export function sessionEventLogUri(sessionId: string): string {
-  return `${SESSIONS_DOC_URI}/${sessionId}/events`;
+  return `${SESSIONS_NAMESPACE}/${sessionId}/events`;
 }
 
 /** deviceDelegationUri(opDid, devDid) → "…/bags/@identities/{opDid}/devices/{devDid}" */
 export function deviceDelegationUri(personaRootDid: string, deviceDid: string): string {
-  return `${IDENTITIES_DOC_URI}/${encodeURIComponent(personaRootDid)}/devices/${encodeURIComponent(deviceDid)}`;
+  return `${IDENTITIES_NAMESPACE}/${encodeURIComponent(personaRootDid)}/devices/${encodeURIComponent(deviceDid)}`;
 }
 
 /** nexusTrustUri("abcdef…") → "…/bags/@identities/trust/nexus/abcdef…" */
 export function nexusTrustUri(nexusPubkey: string): string {
-  return `${IDENTITIES_DOC_URI}/trust/nexus/${nexusPubkey}`;
+  return `${IDENTITIES_NAMESPACE}/trust/nexus/${nexusPubkey}`;
 }
 
 // ── The @nexus plane — a confederation's per-Nexus faces (causal island) ──────
@@ -529,7 +544,4 @@ export const BAG_IDS = {
   catalog:    CATALOG_DOC_URI,
   lares:      LARES_DOC_URI,
   crossroads: CROSSROADS_DOC_URI,
-  identities: IDENTITIES_DOC_URI,
-  groups:     CIRCLES_DOC_URI,
-  sessions:   SESSIONS_DOC_URI,
 } as const;

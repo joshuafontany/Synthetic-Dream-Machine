@@ -17,6 +17,7 @@ import {
   emptyCirclesDoc,
   emptySessionsDoc,
   mutableLarRecord,
+  circleTiddlerUri,
   sessionEventLogUri,
 } from "@lararium/mesh";
 
@@ -45,8 +46,11 @@ export function seedCirclesDoc(repo: Repo, bagId: string): DocHandle<LarDoc> {
   const handle = repo.create<LarDoc>(emptyCirclesDoc());
   handle.change((doc) => {
     doc.tiddlers[bagId] = mutableLarRecord(bagId, { text: handle.url }, "lararium-seed");
+    // The SELF-POINTER answers to the plane's own bag id; every record INSIDE it spells the NAMESPACE.
+    // A title resolves verbatim within its own document, so one internal shape serves every face and a
+    // reader never has to know which face it stands on to name a circle.
     for (const { id, displayName } of SYSTEM_CIRCLES) {
-      const uri = `${bagId}/${id}`;
+      const uri = circleTiddlerUri(id);
       doc.tiddlers[uri] = mutableLarRecord(uri, {
         text: "",
         id,

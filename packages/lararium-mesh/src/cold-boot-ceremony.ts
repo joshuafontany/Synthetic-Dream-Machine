@@ -13,7 +13,7 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/cold-boot-ceremony
  */
 
-import { identityTiddlerUri, circleTiddlerUri, IDENTITIES_DOC_URI, CIRCLES_DOC_URI } from "./lar-uris.js";
+import { identityTiddlerUri, circleTiddlerUri, IDENTITIES_NAMESPACE, CIRCLES_NAMESPACE } from "./lar-uris.js";
 
 // ---------------------------------------------------------------------------
 // Base58btc — Bitcoin/IPFS alphabet, no external deps
@@ -96,7 +96,7 @@ export function buildCeremonyTiddlers(
 
   const identityTiddler: CeremonyTiddler = {
     title:     identityTiddlerUri(did),
-    bag:       IDENTITIES_DOC_URI,
+    bag:       IDENTITIES_NAMESPACE,
     authority: "cold-boot-ceremony",
     fields: {
       did:          did,
@@ -110,7 +110,7 @@ export function buildCeremonyTiddlers(
 
   const groupTiddler: CeremonyTiddler = {
     title:     circleTiddlerUri("operators"),
-    bag:       CIRCLES_DOC_URI,
+    bag:       CIRCLES_NAMESPACE,
     authority: "cold-boot-ceremony",
     fields: {
       id:               "operators",

@@ -29,7 +29,7 @@ import type { Repo, DocHandle } from "@automerge/automerge-repo";
 import {
   materializeGenesisDoc, materializeGenesisIsland, validateGenesisBytes,
   buildCeremonyTiddlers, didKeyFromVerifyingKey,
-  emptyLarDoc, IDENTITIES_DOC_URI,
+  emptyLarDoc, IDENTITIES_NAMESPACE,
   type LarDoc,
 } from "@lararium/mesh";
 import { assembleBulb, type BulbArtifact, type BulbManifest } from "./bulb.js";
@@ -128,7 +128,7 @@ export async function kindleFromBulb(args: {
   const identitiesHandle: DocHandle<LarDoc> = repo.create<LarDoc>(emptyLarDoc());
   const circlesHandle:    DocHandle<LarDoc> = repo.create<LarDoc>(emptyLarDoc());
   for (const t of ceremony) {
-    const handle = t.bag === IDENTITIES_DOC_URI ? identitiesHandle : circlesHandle;
+    const handle = t.bag === IDENTITIES_NAMESPACE ? identitiesHandle : circlesHandle;
     handle.change((doc) => {
       if (!doc.tiddlers[t.title]) {
         doc.tiddlers[t.title] = { tiddler: { title: t.title, ...t.fields }, meta: { authority: t.authority } };

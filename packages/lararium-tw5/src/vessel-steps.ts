@@ -172,36 +172,3 @@ export async function mountPrimaryWiki(
   return { personalUrl, draftUrl, workingUrl };
 }
 
-export interface SocialPlaneUrls {
-  identitiesUrl: string;
-  circlesUrl:    string;
-  sessionsUrl:   string;
-}
-
-export interface SocialPlaneHandles {
-  identitiesHandle: DocHandle<LarDoc>;
-  groupsHandle:     DocHandle<LarDoc>;
-  sessionsHandle:   DocHandle<LarDoc>;
-}
-
-/**
- * Mount the social plane (@identities / @circles→groups / @sessions) onto the
- * composite as writable layers. Shared spine; the seed policy is the caller's
- * `resolveHandle`. Layer order (identities → groups → sessions) is preserved
- * so callers control overall composite priority by call-site placement.
- */
-export async function mountSocialPlane(
-  composite:     CompositeStore,
-  urls:          SocialPlaneUrls,
-  resolveHandle: ResolveBagHandle,
-): Promise<SocialPlaneHandles> {
-  const identitiesHandle = await resolveHandle(urls.identitiesUrl as AutomergeUrl, BAG_IDS.identities);
-  const groupsHandle     = await resolveHandle(urls.circlesUrl    as AutomergeUrl, BAG_IDS.groups);
-  const sessionsHandle   = await resolveHandle(urls.sessionsUrl   as AutomergeUrl, BAG_IDS.sessions);
-
-  composite.addLayer({ bagId: BAG_IDS.identities, store: new AutomergeDocStore(identitiesHandle, BAG_IDS.identities), writable: true });
-  composite.addLayer({ bagId: BAG_IDS.groups,     store: new AutomergeDocStore(groupsHandle,     BAG_IDS.groups),     writable: true });
-  composite.addLayer({ bagId: BAG_IDS.sessions,   store: new AutomergeDocStore(sessionsHandle,   BAG_IDS.sessions),   writable: true });
-
-  return { identitiesHandle, groupsHandle, sessionsHandle };
-}

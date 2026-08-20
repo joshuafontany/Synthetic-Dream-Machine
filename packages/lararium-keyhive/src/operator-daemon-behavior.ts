@@ -28,7 +28,7 @@ import {
   makePersonaSelvesReactors,
   makeCabalRealmReactors,
 } from "@lararium/tw5";
-import { CIRCLES_DOC_URI, DAEMON_BAG_ID, personaBagIdFor, leaseEpochPrefix, effectiveLeaseEpoch } from "@lararium/mesh";
+import { DAEMON_BAG_ID, personaBagIdFor, personaSiblingBagIds, leaseEpochPrefix, effectiveLeaseEpoch } from "@lararium/mesh";
 import type { IslandBehavior, IslandContext, DaemonBehaviorOptions, VerbReactor } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
@@ -167,7 +167,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
 
       // The FOLLOW-GRAPH verbs — the SOURCE OF TRUTH over the sovereign @circles doc. "Adding to a circle IS
       // the follow"; circle-add/circle-remove write @circles.memberDids, circle-list reads it back. The daemon
-      // reaches @circles by ACCESS off the @oracle registry (which names CIRCLES_DOC_URI) — access≠load, write-
+      // reaches this face's `@circles-<tag>` by ACCESS off the @oracle registry — access≠load, write-
       // then-sync. @circles rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator (so a follow
       // lands on ALL the operator's own devices) and the DeterministicFederationGate NEVER volunteers it to a
       // cross-operator (@circles is outside its federatable set). A follow writes ONLY @circles — no board shore
@@ -175,9 +175,15 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       // the @daemon follow surface (a browser paints it; a headless node daemon rests the temp tiddler).
       if (ctx.oracleUrl) {
         const sysPlane = makeCatalogAccessor(ctx.repo, ctx.oracleUrl);
+        // THE FOLLOW GRAPH BELONGS TO THE FACE THAT IS WORN. `@circles-<tag>` names this PersonaGroup's
+        // own circles, derived off the same tag as its persona plane, so a vessel holding a multitude
+        // reads the circles of the face it stands in and never another's. The tag comes from the plane
+        // id itself — the name is the index — so nothing here holds a second copy to drift from.
         const resolveCirclesStore = async () => {
-          const store = await sysPlane.storeOf(CIRCLES_DOC_URI);
-          if (!store) throw new Error("circle-verb: @circles unresolved — the @oracle registry names no CIRCLES_DOC_URI");
+          const face = personaSiblingBagIds(personaBagIdFor(faceGroup()));
+          if (!face) throw new Error("circle-verb: this vessel's PersonaGroup plane names no face");
+          const store = await sysPlane.storeOf(face.circles);
+          if (!store) throw new Error(`circle-verb: ${face.circles} unresolved — the @oracle registry names no such plane for the face this vessel wears`);
           return store;
         };
         const circleReactors = makeCircleReactors({ resolveStore: resolveCirclesStore, tw5: ctx.tw5 });
@@ -215,7 +221,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           // Founding writes @circles in the same breath as the PersonaGroup plane and its sentinel — a
           // PLACE bootstrap carries @daemon alone — and the boot refuses a partial set outright, so the
           // two stand or fall together. Registering the follow verbs on a faceless floor would answer a
-          // human "@circles unresolved: the @oracle registry names no CIRCLES_DOC_URI" — a true sentence
+          // human "@circles-<tag> unresolved: the @oracle registry names no such plane" — a true sentence
           // that reads as a broken registry, when the honest answer is that no face has been lit yet.
           registry.register("circle-add",    circleReactors.add);
           registry.register("circle-remove", circleReactors.remove);

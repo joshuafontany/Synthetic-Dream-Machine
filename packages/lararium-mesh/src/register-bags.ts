@@ -42,7 +42,7 @@
 
 import { type LarDoc, tiddlerText } from "./base-doc.js";
 import { BAG_IDS, DAEMON_BAG_ID, isBagId } from "./lar-uris.js";
-import { personaBagIdFor } from "./persona-scope.js";
+import { personaScopedBagIds } from "./persona-scope.js";
 
 /**
  * The bag URIs the `@catalog` registry NAMES — the PersonaGroup's own work, read from the projection.
@@ -92,27 +92,29 @@ export interface RegisterBagsInput {
 /**
  * The bags every vessel registers whatever it stands in — its own control plane, and the shared substrate.
  *
- * Every id here belongs to the VESSEL or to the mesh beneath it: its daemon, its device identities, its
- * live sessions, the catalog and oracle it reads through, and the substrate bags a vessel needs to stand at
- * all. No persona plane sits among them, because a plane belongs to a PERSONAGROUP and a vessel's groups
- * arrive through its memberships — a vessel standing in none holds none.
+ * Every id here belongs to the VESSEL or to the mesh beneath it: its daemon, the catalog and oracle it
+ * reads through, and the substrate bags a vessel needs to stand at all. NO PLANE OF A FACE sits among
+ * them — not the persona plane, and not the circles, identities or sessions that travel with it. Those
+ * belong to a PERSONAGROUP and arrive through this vessel's memberships, so a vessel standing in no group
+ * holds none of them, and a vessel standing in several holds one set per face.
  */
 const OWN_GROUND = [
-  DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions, BAG_IDS.catalog,
-  BAG_IDS.oracle, BAG_IDS.lares, BAG_IDS.lararium,
+  DAEMON_BAG_ID, BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares, BAG_IDS.lararium,
 ] as const;
 
 /**
  * The bags this vessel registers, derived — its ground, its wiki, and the union over the groups it stands in.
  *
- * Each membership contributes its own persona plane and every bag that group's catalog names. Order stays
- * stable and duplicates collapse, so two vessels in the same groups produce one comparable set, and two
- * groups naming a bag in common register it once.
+ * Each membership contributes THE WHOLE FACE — its persona plane and the circles, identities and sessions
+ * that travel with it, all four derived off the one tag that group's doc id yields — plus every bag that
+ * group's catalog names. Order stays stable and duplicates collapse, so two vessels in the same groups
+ * produce one comparable set, and two groups naming a bag in common register it once.
  */
 export function deriveRegisterBags(input: RegisterBagsInput): string[] {
   const out: string[] = [...OWN_GROUND, ...(input.wikiBags ?? [])];
   for (const fleet of input.fleets) {
-    out.push(personaBagIdFor(fleet.personaGroupId), ...(fleet.catalogNamed ?? []));
+    const face = personaScopedBagIds(fleet.personaGroupId);
+    out.push(face.persona, face.circles, face.identities, face.sessions, ...(fleet.catalogNamed ?? []));
   }
   return [...new Set(out)];
 }

@@ -23,6 +23,7 @@ import { CompositeStore } from "./composite-store.js";
 import type { LarTiddlerStore } from "./tiddler-store.js";
 import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarDoc } from "./base-doc.js";
+import { personaSiblingBagIds } from "./persona-scope.js";
 import { BAG_IDS, DAEMON_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
 import type { PersonaPlaneRef } from "./persona-planes.js";
 import { wikiSlotUri } from "./wiki-recipe.js";
@@ -255,13 +256,20 @@ export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssemb
   };
   // A PLACE names no social plane, so each mount rides its own url standing. A faceless vessel carries
   // and serves with these absent — the waking floor, reached by founding rather than by falling.
-  if (bootstrap.identitiesUrl) await mountSocial(BAG_IDS.identities, bootstrap.identitiesUrl);
-  if (bootstrap.circlesUrl)    await mountSocial(BAG_IDS.groups,     bootstrap.circlesUrl);
-  if (bootstrap.sessionsUrl)   await mountSocial(BAG_IDS.sessions,   bootstrap.sessionsUrl);
+  //
+  // THE NAME IS THE INDEX. The three planes that travel with a face answer to names derived off the SAME
+  // tag as the persona plane already mounted here, so the plane id in hand yields its own siblings and
+  // nothing stores a second copy to drift from. A vessel that names no persona plane names none of them.
+  const face = bootstrap.personaBagId ? personaSiblingBagIds(bootstrap.personaBagId) : null;
+  if (face) {
+    if (bootstrap.identitiesUrl) await mountSocial(face.identities, bootstrap.identitiesUrl);
+    if (bootstrap.circlesUrl)    await mountSocial(face.circles,    bootstrap.circlesUrl);
+    if (bootstrap.sessionsUrl)   await mountSocial(face.sessions,   bootstrap.sessionsUrl);
+  }
   await mountSocial(DAEMON_BAG_ID,      bootstrap.daemonUrl);
-  // The PersonaGroup plane this vessel stands in, mounted under its own derived name. Exactly one plane
+  // The PersonaGroup plane this vessel stands in, mounted under its own derived name. Exactly one face
   // mounts: the composite resolves a title by walking layers, so a second writable plane would answer
-  // reads meant for the first, in load order.
+  // reads meant for the first, in load order — and one face's circles would answer for another's.
   if (bootstrap.personaBagId && bootstrap.personaUrl) {
     await mountSocial(bootstrap.personaBagId, bootstrap.personaUrl);
   }

@@ -18,6 +18,7 @@ import { describe, expect, test } from "vitest";
 import { catalogNamedBags, deriveRegisterBags, type FleetMembership } from "../src/register-bags.js";
 import { personaBagIdFor } from "../src/persona-scope.js";
 import { BAG_IDS, DAEMON_BAG_ID, PERSONA_NAMESPACE } from "../src/lar-uris.js";
+import { personaScopedBagIds, personaTagFromBagId } from "../src/persona-scope.js";
 
 const WIKI = ["lar:///ha.ka.ba/bags/@my-wiki", "lar:///ha.ka.ba/bags/@my-wiki/draft"];
 const WORK = ["lar:///ha.ka.ba/bags/@elyncia", "lar:///ha.ka.ba/bags/@notes"];
@@ -32,9 +33,38 @@ describe("the ground every vessel stands on", () => {
     // registered neither, and the second could not satisfy a cap check over its own operator's bags.
     const bags = deriveRegisterBags({ fleets: [] });
     expect(bags).toEqual(expect.arrayContaining([
-      DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
-      BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares, BAG_IDS.lararium,
+      DAEMON_BAG_ID, BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares, BAG_IDS.lararium,
     ]));
+  });
+
+  test("★ a face's relations are NOT ground — a vessel standing in nothing carries no one's circles ★", () => {
+    // A vessel-global @circles would put one persona's blocked list in the same document as another's
+    // follows, where anything reading it correlates the faces a multitude exists to hold apart. So the
+    // three planes that travel with a face arrive through a MEMBERSHIP, exactly as the persona plane does.
+    const bags = deriveRegisterBags({ fleets: [] });
+    for (const stem of ["@circles", "@identities", "@sessions"]) {
+      expect(bags.some((b) => b.includes(stem))).toBe(false);
+    }
+  });
+
+  test("★ standing in a group brings the WHOLE face, all four planes sharing ONE tag ★", () => {
+    const bags = deriveRegisterBags({ fleets: [standingIn("g1")] });
+    const face = personaScopedBagIds("g1");
+    for (const b of [face.persona, face.circles, face.identities, face.sessions]) expect(bags).toContain(b);
+    // The tag is what binds them: read it off the persona plane and the other three follow from it.
+    const tag = personaTagFromBagId(face.persona);
+    expect(tag).not.toBeNull();
+    for (const b of [face.circles, face.identities, face.sessions]) expect(b.endsWith(`-${tag}`)).toBe(true);
+  });
+
+  test("★ two faces on one vessel keep DISJOINT sets — no plane is shared between them ★", () => {
+    const a = personaScopedBagIds("g1");
+    const b = personaScopedBagIds("g2");
+    const setA = new Set([a.persona, a.circles, a.identities, a.sessions]);
+    for (const id of [b.persona, b.circles, b.identities, b.sessions]) expect(setA.has(id)).toBe(false);
+    // and a vessel standing in both registers all eight, none collapsing into another
+    const bags = deriveRegisterBags({ fleets: [standingIn("g1"), standingIn("g2")] });
+    for (const id of [...setA, b.persona, b.circles, b.identities, b.sessions]) expect(bags).toContain(id);
   });
 
   test("★ an anon dyad stands in no group, so it carries NO persona plane and no one's work ★", () => {

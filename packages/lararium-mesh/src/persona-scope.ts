@@ -164,7 +164,13 @@ export function personaScopedBagIdsForTag(tag: string): PersonaScopedBags {
  * ids the derivation could have produced (`isPersonaPlaneSlug`'s shape, width and case included).
  */
 export function personaTagFromBagId(bagId: string): string | null {
-  const slug = bagId.startsWith("@") ? bagId : (identitySlug(bagId) ?? "");
+  // `identitySlug` hands back the slug WITHOUT its leading `@`, while the family rule matches the slug
+  // WITH it. Normalise to one spelling here rather than letting each caller guess which form it holds:
+  // callers hold the full bag URI far more often than a bare slug, and a reader that silently answered
+  // null for the common form would report every face as nameless.
+  const bare = bagId.startsWith("@") ? bagId.slice(1) : identitySlug(bagId);
+  if (bare === null) return null;
+  const slug = `@${bare}`;
   if (!isPersonaPlaneSlug(slug)) return null;
   return slug.slice("@persona-".length);
 }

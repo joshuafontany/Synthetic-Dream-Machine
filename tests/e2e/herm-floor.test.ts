@@ -149,7 +149,9 @@ describe("the herm — the floor of the lararium cap stack", () => {
 
   test("R2 — a herm serves the public shelf with no hearth-fire lit", async () => {
     const res = await fetch(`http://127.0.0.1:${PORT}/oracle/pointer`).catch(() => null);
-    expect(res?.ok, "the read-face never answered — carrying is what the floor is FOR").toBe(true);
+    // This vector reaches the vessel R1 stood. A refusal here reads as "the shelf is unserved" and can
+    // equally mean "no vessel is listening at all" — so name both, and let the reader tell them apart.
+    expect(res?.ok, `the read-face never answered on :${PORT} — either the floor serves no shelf, or nothing stands there for R5 to lift`).toBe(true);
   }, 60_000);
 
   test("R3 — a herm carries: its verb channel answers a caller", async () => {
@@ -173,7 +175,7 @@ describe("the herm — the floor of the lararium cap stack", () => {
 
     // EVERY face-scoped verb, not just the persona ones. @circles arrives with the FACE — a PLACE
     // bootstrap carries @daemon alone — so a follow verb on this floor must name the lift too. Answering
-    // "@circles unresolved: the @oracle registry names no CIRCLES_DOC_URI" is true and useless: it reads
+    // "@circles-<tag> unresolved: the @oracle registry names no such plane" is true and useless: it reads
     // as a broken registry to the one human who could fix it by lighting a face.
     const c = await invokeLocal("circle-list", { circle: "following" }, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 })
       .catch((e: Error) => ({ error: e.message }));
@@ -185,8 +187,11 @@ describe("the herm — the floor of the lararium cap stack", () => {
       env: { ...process.env, LAR_ROOT: root }, cwd: REPO, stdio: "ignore",
     });
     await stopVessel();
-    const { live } = await standHerm(root);
-    expect(live, "the lift left the vessel unable to stand").toBe(true);
+    const { live, log } = await standHerm(root);
+    // CARRY THE BOOT INTO THE FAILURE. A bare `expected false to be true` names a vessel that did not
+    // stand and says nothing about WHY — and this vector has flaked without ever telling anyone what the
+    // lifted boot was doing when it did. The log the vessel wrote is the only witness to that.
+    expect(live, `the lift left the vessel unable to stand:\n${log.slice(-2000)}`).toBe(true);
 
     const dir = findSock(root);
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");

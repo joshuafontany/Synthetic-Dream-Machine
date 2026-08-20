@@ -30,7 +30,7 @@
  */
 
 import {
-  circleTiddlerUri, CIRCLES_DOC_URI,
+  circleTiddlerUri, CIRCLES_NAMESPACE,
   type LarTiddlerStore, type LarTiddlerRecord,
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
@@ -38,7 +38,8 @@ import type { TW5Engine } from "./tw5-vm.js";
 import { CIRCLE_STATE_TITLE } from "./daemon-circle-tiddlers.js";
 
 /** Resolve a read+write store over the @circles doc — the daemon reaches it by ACCESS (the @oracle registry
- *  names CIRCLES_DOC_URI); access≠load, so no composite layer mounts. Throws LOUD when @circles is unresolved. */
+ *  names this face's `@circles-<tag>`); access≠load, so no composite layer mounts. Throws LOUD when it is
+ *  unresolved. Titles INSIDE the plane spell the namespace, so a circle reads the same on every face. */
 export type ResolveCirclesStore = () => Promise<LarTiddlerStore>;
 
 export interface CircleVerbOptions {
@@ -210,9 +211,10 @@ export function makeCircleListReactor(opts: CircleVerbOptions): VerbReactor {
       renderCircle(opts.tw5, circle, members);
       return { verb: "circle-list", circle, members, federated: false };
     }
-    // Every circle: the tiddlers under the CIRCLES_DOC_URI/ prefix (the self-pointer at CIRCLES_DOC_URI —
-    // no trailing slash — falls outside the prefix and is skipped, as is any nested title).
-    const prefix = `${CIRCLES_DOC_URI}/`;
+    // Every circle: the tiddlers under the namespace prefix. The plane's SELF-POINTER answers to that
+    // face's own `@circles-<tag>` and never carries this prefix at all, so it is skipped by shape rather
+    // than by exclusion — as is any nested title.
+    const prefix = `${CIRCLES_NAMESPACE}/`;
     const titles = (await store.listVisible()).sort();
     const circles: Array<{ circle: string; members: string[] }> = [];
     for (const title of titles) {
