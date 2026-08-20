@@ -439,7 +439,7 @@ function isSerdeSkewFault(err: unknown): boolean {
   const msg = err instanceof Error ? err.message : String(err);
   // Match the SYMPTOM (a Rust deserializer error), never the wrapper: matching any
   // `[vessel-host] fault` / `manifest handler threw` painted every island fault
-  // (e.g. a slot-sync timeout) with the "run lares vessel flow rebuild" cure — a wrong cure
+  // (e.g. a slot-sync timeout) with the "run lares vessel rite rebuild" cure — a wrong cure
   // banner that costs real diagnosis time.
   return /tag for enum is not valid|failed to deserialize|invalid type:|serde/i.test(msg);
 }
@@ -448,7 +448,7 @@ main().catch((err) => {
   if (isSerdeSkewFault(err)) {
     console.error("[lararium] STORED-BYTES SERDE SKEW — the vessel could not deserialize the stored genesis engine.");
     console.error("[lararium]   Cause: stored bytes predate a dependency bump (keyhive / automerge / beelay / TW5).");
-    console.error("[lararium]   Cure (identity-safe, no data loss): run `lares vessel flow rebuild`");
+    console.error("[lararium]   Cure (identity-safe, no data loss): run `lares vessel rite rebuild`");
     console.error("[lararium]         — rebuilds the genesis engine under current deps; your operator key/card are untouched.");
     console.error("[lararium]   underlying:", err instanceof Error ? err.message : String(err));
     process.exit(75);  // EX_TEMPFAIL — recoverable, distinct from a generic fatal(1)

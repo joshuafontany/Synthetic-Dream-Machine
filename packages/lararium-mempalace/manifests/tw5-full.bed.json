@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "bed": "tw5-full",
-  "root": "<data>/sensoriums/tw5-full",
+  "root": "<abide>/sensoriums/tw5-full",
   "wing": "wing_testbed",
   "room": "corpus",
   "min_support": 2,

@@ -876,7 +876,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const moved = quarantineDoc(storageDir, verdict);
       console.warn(
         `[lararium] DEGRADED plane — quarantined ${verdict.documentId} (${verdict.status}: ${verdict.reason ?? "?"})` +
-        ` → ${moved ?? "already gone"}; the plane mounts read-only until \`lares vessel flow rebirth\` rematerializes it`,
+        ` → ${moved ?? "already gone"}; the plane mounts read-only until \`lares vessel rite rebirth\` rematerializes it`,
       );
     },
 

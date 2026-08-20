@@ -7,7 +7,7 @@
 # identical on both. For a local-first mesh standing a semi-permanent vessel, that is a divergence
 # with no witness, which is the one kind this house refuses.
 #
-# It also erases an act. A dependency bump here is a NAMED motion — `vessel flow rebuild` exists as the
+# It also erases an act. A dependency bump here is a NAMED motion — `vessel rite rebuild` exists as the
 # identity-safe cure for exactly that skew — and a range performs that motion by itself, unrecorded,
 # between two runs of a command nobody re-typed.
 #

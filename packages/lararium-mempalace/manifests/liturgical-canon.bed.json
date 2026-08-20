@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "bed": "liturgical-canon",
-  "root": "<data>/sensoriums/liturgical-canon",
+  "root": "<abide>/sensoriums/liturgical-canon",
   "wing": "wing_testbed",
   "room": "corpus",
   "min_support": 2,

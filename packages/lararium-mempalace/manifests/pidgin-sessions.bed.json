@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "bed": "pidgin-sessions",
-  "root": "<data>/sensoriums/pidgin-sessions",
+  "root": "<abide>/sensoriums/pidgin-sessions",
   "wing": "wing_testbed",
   "room": "corpus",
   "min_support": 2,
