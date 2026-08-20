@@ -67,7 +67,7 @@ import { PERSONA_SCOPE_INFO } from "./domains.js";
 import { hmac } from "@noble/hashes/hmac.js";
 import { sha256 } from "@noble/hashes/sha2.js";
 
-import { bagUri } from "./lar-uris.js";
+import { bagUri, identitySlug } from "./lar-uris.js";
 
 /** Domain separation. Distinct from `circle-scope`, so the two levels can never derive into each other. */
 const PERSONA_SCOPE_HMAC_KEY = new TextEncoder().encode(PERSONA_SCOPE_INFO);
@@ -114,4 +114,63 @@ export function personaBagIdFor(personaGroupDocIdHex: string): string {
  */
 export function isPersonaPlaneSlug(slug: string): boolean {
   return new RegExp(`^@persona-[0-9a-f]{${PERSONA_SCOPE_TAG_HEX}}$`).test(slug);
+}
+
+// ── ONE TAG NAMES A WHOLE FACE ────────────────────────────────────────────────────────────────────
+
+/**
+ * The planes a PersonaGroup carries, all four named off the ONE tag that group derives.
+ *
+ * A face's relations travel with the face, never with the machine under it. `@circles` holds who this
+ * persona follows, blocks and mutes; `@identities` holds how it recognises others; `@sessions` holds the
+ * sessions it wears — each a property of WHICH FACE is worn, so a vessel holding a multitude keeps one set
+ * per face. A single vessel-global `@circles` would put one persona's blocked list in the same document as
+ * another's follows, and anything reading that document correlates the faces the multitude exists to hold
+ * apart. The tag is an HMAC of the group's own doc id, so the four names share a suffix a human can grep
+ * and a machine can derive, and neither has to be told the relation.
+ *
+ * NEXUS AUTHORIZATION RINGS DO NOT LIVE HERE. A nexus tier names who may act at a Nexus, not who a person
+ * reads — it belongs to `@nexus`, and copying it per-face would mint one authorization ring per mask.
+ */
+export interface PersonaScopedBags {
+  readonly persona:    string;
+  readonly circles:    string;
+  readonly identities: string;
+  readonly sessions:   string;
+}
+
+/** All four of one PersonaGroup's plane ids, derived. The caller mints the group first — a plane must
+ *  stand under its TRUE name from its first write (see `personaBagIdFor`). */
+export function personaScopedBagIds(personaGroupDocIdHex: string): PersonaScopedBags {
+  return personaScopedBagIdsForTag(personaScopeTag(personaGroupDocIdHex));
+}
+
+/** The same four, named off a tag already in hand. */
+export function personaScopedBagIdsForTag(tag: string): PersonaScopedBags {
+  return {
+    persona:    bagUri(`persona-${tag}`),
+    circles:    bagUri(`circles-${tag}`),
+    identities: bagUri(`identities-${tag}`),
+    sessions:   bagUri(`sessions-${tag}`),
+  };
+}
+
+/**
+ * The tag a persona plane's own id carries, or null when the id names no plane.
+ *
+ * THE NAME IS THE INDEX. A store that already resolved `@persona-<tag>` holds the tag in that string, so a
+ * face reaches its own circles, identities and sessions without the group doc id in hand and without a
+ * second copy stored anywhere to drift from. Nothing derives a tag it cannot also verify: this reads only
+ * ids the derivation could have produced (`isPersonaPlaneSlug`'s shape, width and case included).
+ */
+export function personaTagFromBagId(bagId: string): string | null {
+  const slug = bagId.startsWith("@") ? bagId : (identitySlug(bagId) ?? "");
+  if (!isPersonaPlaneSlug(slug)) return null;
+  return slug.slice("@persona-".length);
+}
+
+/** A persona plane's SIBLINGS — the rest of that face, off the plane id alone. Null when it names none. */
+export function personaSiblingBagIds(personaBagId: string): PersonaScopedBags | null {
+  const tag = personaTagFromBagId(personaBagId);
+  return tag === null ? null : personaScopedBagIdsForTag(tag);
 }

@@ -3,20 +3,14 @@
  *
  * Exports:
  *   seedLaresDoc          — create the ba satellite doc on first boot
- *   seedIdentitiesDoc     — create the @identities satellite doc on first boot
- *   seedCirclesDoc        — create the @circles satellite doc on first boot (+ 5 system circles)
- *   seedSessionsDoc       — create the @sessions satellite doc on first boot
- *   seedDaemonDoc          — create the operator-private daemon bag on first boot
- *   createSessionEventLog — create a per-session SessionEventLog child doc
+ * A PLACE seeds `@daemon` alone. A FACE seeds its own four planes, each under the id its PersonaGroup's
+ * tag derives (`personaScopedBagIds`) — so the caller passes the bag id in rather than reading a constant,
+ * and a vessel holding a multitude keeps one set of relations per face instead of one per machine.
  */
 
 import type { Repo, DocHandle }  from "@automerge/automerge-repo";
 import type { LarDoc, SessionEventLog } from "@lararium/mesh";
 import {
-  LARES_DOC_URI,
-  IDENTITIES_DOC_URI,
-  CIRCLES_DOC_URI,
-  SESSIONS_DOC_URI,
   DAEMON_BAG_ID,
   emptyLarDoc,
   emptyIdentitiesDoc,
@@ -26,26 +20,19 @@ import {
   sessionEventLogUri,
 } from "@lararium/mesh";
 
-export function seedLaresDoc(repo: Repo): DocHandle<LarDoc> {
-  const handle = repo.create<LarDoc>(emptyLarDoc());
-  handle.change((doc) => {
-    doc.tiddlers[LARES_DOC_URI] = mutableLarRecord(LARES_DOC_URI, { text: handle.url }, "lararium-seed");
-  });
-  console.log(`[social-seed] LaresDoc seeded  url=${handle.url}`);
-  return handle;
-}
-
-export function seedIdentitiesDoc(repo: Repo): DocHandle<LarDoc> {
+export function seedIdentitiesDoc(repo: Repo, bagId: string): DocHandle<LarDoc> {
   const handle = repo.create<LarDoc>(emptyIdentitiesDoc());
   handle.change((doc) => {
-    doc.tiddlers[IDENTITIES_DOC_URI] = mutableLarRecord(IDENTITIES_DOC_URI, { text: handle.url }, "lararium-seed");
+    doc.tiddlers[bagId] = mutableLarRecord(bagId, { text: handle.url }, "lararium-seed");
   });
   console.log(`[social-seed] IdentitiesDoc seeded  url=${handle.url}`);
   return handle;
 }
 
-// System circle IDs — auto-seeded per Kowloon model (jzellis): adding to a circle IS the follow;
-// membership never federates; social graph is private to the owning node.
+// The system circles every FACE carries — adding to a circle IS the follow (Kowloon model, jzellis).
+// Membership never federates; the graph is private to the persona that holds it, and each face carries its
+// own set under its own tag. NEXUS AUTHORIZATION RINGS ARE NOT HERE: a nexus tier names who may act at a
+// Nexus, not who a person reads, so it lives on @nexus — one ring per Nexus, never one per mask.
 const SYSTEM_CIRCLES: Array<{ id: string; displayName: string }> = [
   { id: "following",     displayName: "Following" },
   { id: "all-following", displayName: "All Following" },
@@ -54,12 +41,12 @@ const SYSTEM_CIRCLES: Array<{ id: string; displayName: string }> = [
   { id: "muted",         displayName: "Muted" },
 ];
 
-export function seedCirclesDoc(repo: Repo): DocHandle<LarDoc> {
+export function seedCirclesDoc(repo: Repo, bagId: string): DocHandle<LarDoc> {
   const handle = repo.create<LarDoc>(emptyCirclesDoc());
   handle.change((doc) => {
-    doc.tiddlers[CIRCLES_DOC_URI] = mutableLarRecord(CIRCLES_DOC_URI, { text: handle.url }, "lararium-seed");
+    doc.tiddlers[bagId] = mutableLarRecord(bagId, { text: handle.url }, "lararium-seed");
     for (const { id, displayName } of SYSTEM_CIRCLES) {
-      const uri = `${CIRCLES_DOC_URI}/${id}`;
+      const uri = `${bagId}/${id}`;
       doc.tiddlers[uri] = mutableLarRecord(uri, {
         text: "",
         id,
@@ -74,10 +61,10 @@ export function seedCirclesDoc(repo: Repo): DocHandle<LarDoc> {
   return handle;
 }
 
-export function seedSessionsDoc(repo: Repo): DocHandle<LarDoc> {
+export function seedSessionsDoc(repo: Repo, bagId: string): DocHandle<LarDoc> {
   const handle = repo.create<LarDoc>(emptySessionsDoc());
   handle.change((doc) => {
-    doc.tiddlers[SESSIONS_DOC_URI] = mutableLarRecord(SESSIONS_DOC_URI, { text: handle.url }, "lararium-seed");
+    doc.tiddlers[bagId] = mutableLarRecord(bagId, { text: handle.url }, "lararium-seed");
   });
   console.log(`[social-seed] SessionsDoc seeded  url=${handle.url}`);
   return handle;

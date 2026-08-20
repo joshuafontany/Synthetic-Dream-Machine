@@ -47,7 +47,8 @@ import {
   HEARTH_DAEMON_URL_TIDDLER,
   SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, PERSONA_KEL_PREFIX_TIDDLER,
   CAP_EVENT_TAG,
-  seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc, seedPersonaDoc, personaBagIdFor,
+  seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc, seedPersonaDoc,
+  personaBagIdFor, personaScopedBagIds,
   buildDeviceDelegation, type DeviceDelegationTiddler,
   mintPersonaInception, personaKelBoardDocUrl, writePersonaKelEvent, materializeSharedLarDoc,
   type PersonaKelEvent,
@@ -265,28 +266,6 @@ export interface FaceFoundingResult {
 export async function foundTheFace(input: FaceFoundingInput): Promise<FaceFoundingResult> {
   const { repo, daemonHandle, vesselSeed, vesselVerifyingKey, vesselDisplayName } = input;
 
-  const identitiesHandle = seedIdentitiesDoc(repo);
-  const circlesHandle    = seedCirclesDoc(repo);
-  const sessionsHandle   = seedSessionsDoc(repo);
-
-  // Write operator identity + circles tiddlers
-  const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
-  for (const t of ceremonyTiddlers) {
-    if (t.bag === IDENTITIES_DOC_URI) {
-      identitiesHandle.change((doc) => {
-        if (!doc.tiddlers[t.title]) {
-          doc.tiddlers[t.title] = { tiddler: { title: t.title, ...t.fields }, meta: { authority: t.authority } };
-        }
-      });
-    } else {
-      circlesHandle.change((doc) => {
-        if (!doc.tiddlers[t.title]) {
-          doc.tiddlers[t.title] = { tiddler: { title: t.title, ...t.fields }, meta: { authority: t.authority } };
-        }
-      });
-    }
-  }
-
   // Re-open Keyhive over what the place already wrote — the cap events ARE the continuity.
   const keyhive = new KeyhiveProvider();
   const store   = await replayCapEvents(daemonHandle);
@@ -298,11 +277,32 @@ export async function foundTheFace(input: FaceFoundingInput): Promise<FaceFoundi
   const personaGroup = await keyhive.createSentinelDoc(PERSONA_GROUP_SENTINEL_URI);
   await keyhive.addSentinelMember(vesselIdentifierHex, personaGroup.docIdHex);
 
-  // The PersonaGroup's private plane, seeded only NOW — its bag name derives from the group's own doc id,
-  // so the group must exist before its plane can stand under its true name. A plane seeded under one name
-  // and renamed later would leave behind a document the capability layer still seeds from the old string.
-  const personaBagId  = personaBagIdFor(personaGroup.docIdHex);
+  // THE FACE'S FOUR PLANES, SEEDED ONLY NOW — every one of them names the group's own tag, so the group
+  // must exist before any of them can stand under its true name. The capability layer keys a document by
+  // hashing its bag URL (`changeIdForBag`), so a plane seeded under one name and renamed later leaves
+  // behind a document nothing can ever reach again.
+  //
+  // A face's relations travel with the FACE. @circles holds who this persona follows, blocks and mutes;
+  // @identities holds how it recognises others; @sessions holds the sessions it wears. One vessel-global
+  // set would put one persona's blocked list in the same document as another's follows, and anything
+  // reading it correlates the faces a multitude exists to hold apart.
+  const planes        = personaScopedBagIds(personaGroup.docIdHex);
+  const personaBagId  = planes.persona;
   const personaHandle = seedPersonaDoc(repo, personaBagId);
+  const identitiesHandle = seedIdentitiesDoc(repo, planes.identities);
+  const circlesHandle    = seedCirclesDoc(repo, planes.circles);
+  const sessionsHandle   = seedSessionsDoc(repo, planes.sessions);
+
+  // The operator's own identity + circle tiddlers land on the planes that now carry this face's tag.
+  const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
+  for (const t of ceremonyTiddlers) {
+    const handle = t.bag === IDENTITIES_DOC_URI ? identitiesHandle : circlesHandle;
+    handle.change((doc) => {
+      if (!doc.tiddlers[t.title]) {
+        doc.tiddlers[t.title] = { tiddler: { title: t.title, ...t.fields }, meta: { authority: t.authority } };
+      }
+    });
+  }
 
   // The cabal stands WITH the face, seated on the PersonaGroup that can actually hold a seat in it.
   const meshCabal = await keyhive.createSentinelDoc(MESH_CABAL_SENTINEL_URI);
@@ -628,15 +628,17 @@ export async function runApplyAdmitPayload(
     throw new Error("[ceremony] runApplyAdmitPayload: payload lacks signerDid/deviceEdge/hearthTrueName/personaKelPrefix — refusing to admit.");
   }
 
-  const identitiesHandle = seedIdentitiesDoc(repo);
-  const circlesHandle    = seedCirclesDoc(repo);
-  const sessionsHandle   = seedSessionsDoc(repo);
-  const daemonHandle      = seedDaemonDoc(repo);
+  const daemonHandle = seedDaemonDoc(repo);
+  // THE FOUR PLANES OF THE FACE THIS VESSEL JOINS — all named off the SAME group doc id the founder used,
+  // so the two devices name one set identically or they sync nothing. @daemon stays sovereign-per-vessel
+  // and is seeded fresh above; the face's planes are shared ground reached by one derivation.
+  const planes = personaScopedBagIds(payload.personaGroupDocIdHex);
+  const identitiesHandle = seedIdentitiesDoc(repo, planes.identities);
+  const circlesHandle    = seedCirclesDoc(repo, planes.circles);
+  const sessionsHandle   = seedSessionsDoc(repo, planes.sessions);
   // @persona: the joinee RECEIVES the founder's shared veiled-identity doc to SYNC it
   // (the membership-sync foundation). Older payloads without it fall back to a fresh local seed.
-  // An admitted vessel joins a PersonaGroup that already stands, so its plane's name derives from the
-  // SAME group doc id the founder used — the two devices name one plane identically or they sync nothing.
-  const personaBagId = personaBagIdFor(payload.personaGroupDocIdHex);
+  const personaBagId = planes.persona;
   const personaUrl = payload.personaUrl ?? (seedPersonaDoc(repo, personaBagId).url as string);
 
   const ceremonyTiddlers = buildCeremonyTiddlers(vesselVerifyingKey, vesselDisplayName);
