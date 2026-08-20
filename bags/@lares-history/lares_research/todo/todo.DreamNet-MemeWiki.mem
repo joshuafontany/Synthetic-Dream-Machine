@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///todo/DreamNet_MemeWiki >>
-```toml iam\ntype      = "text/x-memetic-wikitext+tiddlywiki"\nuri-path  = "todo/DreamNet_MemeWiki"\n```\n\n
+
 <<~ ahu #iam >>
 ```toml
 # <<~ ahu #iam-ha "structure" >>
@@ -469,7 +469,7 @@ Leave the unresolved items visible and bounded. Hidden residue is how architectu
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" ahu #body-close >>:a612b33a7f915b7f
+<<^ code:"&#x0003;" ahu #body-close >>
 DreamNet MemeWiki closes the active research-consolidation stream here.
 <<~/ahu >>
 
