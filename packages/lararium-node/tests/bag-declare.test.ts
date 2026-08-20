@@ -15,7 +15,7 @@ import {
   readBagManifest, writeBagManifest, surveyBags, moveBagHome,
   readRepoRegistry, registerRepo, unregisterRepo, bagHomeRoots, iamTableFromBody,
 } from "../src/bag-declare.js";
-import { larDataHome } from "../src/vessel-paths.js";
+import { laresDataHome } from "../src/vessel-paths.js";
 
 const saved: Record<string, string | undefined> = {};
 const setEnv = (k: string, v: string | undefined): void => {
@@ -107,7 +107,7 @@ describe("the repo registry — IDs, never paths", () => {
   test("the hearth root always stands, so hearth-homed bags always place", () => {
     // Hearth bags hold operator content no rite re-makes, so they gather in the DATA home with the
     // identity, the seal and the shelf. The state home keeps only what re-derives.
-    expect(bagHomeRoots().hearth).toBe(join(larDataHome(), "bags"));
+    expect(bagHomeRoots().hearth).toBe(join(laresDataHome(), "bags"));
   });
 });
 

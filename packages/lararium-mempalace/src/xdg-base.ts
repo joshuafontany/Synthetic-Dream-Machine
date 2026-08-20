@@ -15,31 +15,37 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 
 /**
- * $XDG_DATA_HOME/lares — WHAT A LAR CARRIES: the sovereign identity, the Nexus seal, the repo registry,
- * and the vessel substrate every rite reforges beneath them. What abides — the acquired shelf and the
- * sensoriums — stands in {@link larariumDataHome} instead. Honors `$XDG_DATA_HOME` (unset → the
- * freedesktop default `~/.local/share`), and roots under `LAR_ROOT/data` for ISOLATED instances (the
- * test harness / staged pairs).
+ * $XDG_DATA_HOME/lares — THE SPIRITS' HOUSE. What belongs to the Lares themselves: the sovereign
+ * identity, the Nexus seal, the repo registry, and the vessel substrate they run on. A Lar's keys ARE
+ * that Lar, so identity stays here and a rite reforging the substrate beneath it changes nothing about
+ * whose it is. What belongs to the HOUSE — the acquired shelf, the sensoriums — stands in
+ * {@link larariumDataHome}. Honors `$XDG_DATA_HOME` (unset → the freedesktop default `~/.local/share`),
+ * and roots under `LAR_ROOT/data` for ISOLATED instances (the test harness / staged pairs).
+ *
+ * `lar` names the NAMESPACE (the `lar:///…` URIs, every resolver in this stack); `lares` names the
+ * SPIRITS; `lararium` names the HOUSE. Three words, no synonyms — which is why this resolver reads
+ * `lares`, not `lar`.
  */
-export function larDataHome(): string {
+export function laresDataHome(): string {
   const root = process.env["LAR_ROOT"];
   return root ? join(root, "data")
               : join(process.env["XDG_DATA_HOME"]?.trim() || join(homedir(), ".local", "share"), "lares");
 }
 
 /**
- * The ABIDING home — `~/.local/share/lararium`, the sibling that outlives every rite.
+ * The HOUSE's home — `~/.local/share/lararium`, the shrine a family fed across generations and left
+ * standing when they moved.
  *
- * LARES PASS; THE LARARIUM ABIDES. A Lar wakes, acts, and gives way — the vessel substrate under
- * `lares/` is exactly that: reforged whole by `clear`, `bake` and `rebirth`, and correct to lose, because
- * a rite re-makes it from the carriers on disk. The lararium is the SHRINE, the place a family fed across
- * generations and left standing when they moved. What lands here is what no rite can re-make and no
- * carrier re-derives: an acquired body has no author in any tracked tree and no parse∘render fixed point
- * to rebuild from, so a wipe that reached it would end it.
+ * THE CRITERION IS WHOSE IT IS. What lands here belongs to the LARARIUM rather than to any Lar: the
+ * acquired shelf, and the sensoriums that hold operator history and DreamNet history. LARES PASS; THE
+ * LARARIUM ABIDES — a Lar wakes, acts and gives way, and the substrate under `lares/` gives way with it,
+ * reforged whole by `clear`, `bake` and `rebirth`. That the house's things also survive every rite reads
+ * as the CONSEQUENCE of whose they are, never the reason: an acquired body has no author in any tracked
+ * tree and no parse∘render fixed point, and a sensorium holds capture the machine took once and cannot
+ * take again, so nothing rebuilds either and a wipe reaching them would end them.
  *
- * The split makes the wipe zone STRUCTURAL. A tier that survives because a directory is not on a list
- * survives until somebody edits the list; a tier that survives because it stands in another house needs
- * no list at all.
+ * Belonging makes the wipe zone STRUCTURAL. A tier that survives because a directory is not on a list
+ * survives until somebody edits the list; a tier standing in its own house needs no list at all.
  *
  * `LAR_ROOT` shores it the same way it shores the vessel home, so an isolated root nests both tiers and a
  * test never reaches the operator's own shelf.
@@ -70,7 +76,7 @@ export function mempalaceContentParent(): string {
  * it is a silent reach into the guest, and it is why this store spent its life write-only.
  *
  * Kept here (not in `@lararium/node/vessel-paths`) so the mempalace package can name it without an
- * import cycle — the same reason {@link larDataHome} lives here.
+ * import cycle — the same reason {@link laresDataHome} lives here.
  */
 export function memorySensoriumContentDir(): string {
   return join(memorySensoriumDir(), "content");

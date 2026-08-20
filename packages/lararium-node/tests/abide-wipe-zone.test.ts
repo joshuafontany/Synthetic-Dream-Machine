@@ -1,10 +1,11 @@
 /**
  * abide-wipe-zone — the law that makes the wipe zone STRUCTURAL, held as vectors.
  *
- * LARES PASS; THE LARARIUM ABIDES. A Lar carries the substrate every rite reforges; the shrine holds
- * what no rite re-makes — the acquired shelf and the sensoriums, capture the machine took once. The
- * ruling's whole force is that this survives by ADDRESS rather than by a wipe-list remembering to spare
- * a directory, so what needs holding is a property of the two addresses:
+ * THE CRITERION IS WHOSE IT IS. The acquired shelf and the sensoriums belong to the LARARIUM; identity
+ * and the seal belong to the LARES, because a Lar's keys ARE that Lar. LARES PASS; THE LARARIUM ABIDES —
+ * that the house's things also outlive every rite follows from whose they are. The ruling's force is that
+ * this holds by ADDRESS rather than by a wipe-list remembering to spare a directory, so what needs
+ * holding is a property of the two addresses:
  *
  *   1. the two homes never nest and never alias — neither reaches the other by any prefix,
  *   2. `LAR_ROOT` isolates BOTH, so a test never reaches the operator's own shelf,
@@ -20,7 +21,7 @@
 import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { join } from "node:path";
 import {
-  larDataHome, larariumDataHome, larStateHome, larCacheHome,
+  laresDataHome, larariumDataHome, larStateHome, larCacheHome,
   larDataDir, larIdentityDir, larSealHome, larProjectionDir,
   memorySensoriumDir, meshSensoriumDir, memeticWikitextSensoriumDir, sensoriumDir,
   scratchSensoriumInstanceDir, assertOneSegment, larLibraryHome,
@@ -46,10 +47,10 @@ describe("the two homes never nest and never alias", () => {
   test("XDG default: `lares` and `lararium` are siblings, neither under the other", () => {
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", "/x/data");
-    expect(larDataHome()).toBe(join("/x/data", "lares"));           // the code RAN and produced this
+    expect(laresDataHome()).toBe(join("/x/data", "lares"));           // the code RAN and produced this
     expect(larariumDataHome()).toBe(join("/x/data", "lararium"));
-    expect(isUnder(larariumDataHome(), larDataHome())).toBe(false);
-    expect(isUnder(larDataHome(), larariumDataHome())).toBe(false);
+    expect(isUnder(larariumDataHome(), laresDataHome())).toBe(false);
+    expect(isUnder(laresDataHome(), larariumDataHome())).toBe(false);
   });
 
   test("the two names defeat even a NAIVE string-prefix wipe — `lararium` diverges before `lares` ends", () => {
@@ -58,9 +59,9 @@ describe("the two homes never nest and never alias", () => {
     // The usual sibling-name trap (`/x/lares` vs `/x/lares-backup`) needs a segment-boundary check to
     // refuse. These two never reach it: `larar` parts from `lares` at the fifth character, so a wipe
     // written with a bare `startsWith` misses the shrine as surely as a careful one does.
-    expect(larariumDataHome().startsWith(larDataHome())).toBe(false);
-    expect(larDataHome().startsWith(larariumDataHome())).toBe(false);
-    expect(isUnder(larariumDataHome(), larDataHome())).toBe(false);
+    expect(larariumDataHome().startsWith(laresDataHome())).toBe(false);
+    expect(laresDataHome().startsWith(larariumDataHome())).toBe(false);
+    expect(isUnder(larariumDataHome(), laresDataHome())).toBe(false);
   });
 
   test("neither home aliases the state or cache home", () => {
@@ -68,7 +69,7 @@ describe("the two homes never nest and never alias", () => {
     set("XDG_DATA_HOME", "/x/data");
     set("XDG_STATE_HOME", "/x/state");
     set("XDG_CACHE_HOME", "/x/cache");
-    const homes = [larDataHome(), larariumDataHome(), larStateHome(), larCacheHome()];
+    const homes = [laresDataHome(), larariumDataHome(), larStateHome(), larCacheHome()];
     expect(new Set(homes).size).toBe(homes.length);
     for (const a of homes) for (const b of homes) if (a !== b) expect(isUnder(a, b)).toBe(false);
   });
@@ -78,9 +79,9 @@ describe("LAR_ROOT isolates BOTH homes", () => {
   test("an isolated instance nests data AND abide under its own root", () => {
     set("LAR_ROOT", "/iso");
     set("XDG_DATA_HOME", "/x/data");                 // present, and OUTRANKED
-    expect(larDataHome()).toBe(join("/iso", "data"));
+    expect(laresDataHome()).toBe(join("/iso", "data"));
     expect(larariumDataHome()).toBe(join("/iso", "abide"));
-    expect(isUnder(larariumDataHome(), larDataHome())).toBe(false);
+    expect(isUnder(larariumDataHome(), laresDataHome())).toBe(false);
   });
 
   test("an isolated run never reaches the operator's own shelf or sensoriums", () => {
@@ -125,8 +126,8 @@ describe("what abides stands in the shrine, and shares no prefix with what a rit
   test("the sovereign root and the seal stay in the spirit's house — the split is not a move of everything", () => {
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", "/x/data");
-    expect(isUnder(larIdentityDir(), larDataHome())).toBe(true);
-    expect(isUnder(larSealHome(), larDataHome())).toBe(true);
+    expect(isUnder(larIdentityDir(), laresDataHome())).toBe(true);
+    expect(isUnder(larSealHome(), laresDataHome())).toBe(true);
     expect(isUnder(larIdentityDir(), larDataDir())).toBe(false);    // beside the wiped store, never inside
   });
 });

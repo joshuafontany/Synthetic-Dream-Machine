@@ -3,15 +3,15 @@
  * XDG Base Directory layout (freedesktop.org). Persistent bytes, ephemeral scratch, transient runtime,
  * durable state, and config each land in their proper XDG home instead of one `~/.lares` monolith:
  *
- *   $XDG_DATA_HOME/lares    (~/.local/share/lares)  — WHAT A LAR CARRIES: the sovereign identity, the
+ *   $XDG_DATA_HOME/lares    (~/.local/share/lares)  — THE SPIRITS' OWN: the sovereign identity, the
  *                                                     Nexus seal, the repo registry, and the vessel
- *                                                     substrate every rite reforges beneath them.
- *   $XDG_DATA_HOME/lararium (~/.local/share/lararium) — WHAT THE SHRINE ABIDES: the acquired library and
- *                                                     the SENSORIUMS — operator history and DreamNet
+ *                                                     substrate they run on. A Lar's keys ARE that Lar.
+ *   $XDG_DATA_HOME/lararium (~/.local/share/lararium) — THE HOUSE'S OWN: the acquired library and the
+ *                                                     SENSORIUMS — operator history and DreamNet
  *                                                     history, capture the machine took once and cannot
- *                                                     take again. LARES PASS; THE LARARIUM ABIDES — the
- *                                                     wipe zone made structural, so a tier survives by
- *                                                     standing in another house, never by a list.
+ *                                                     take again. LARES PASS; THE LARARIUM ABIDES — and
+ *                                                     the wipe zone stands structural in consequence,
+ *                                                     a tier held by its house rather than by a list.
  *   $XDG_STATE_HOME/lares   (~/.local/state/lares)  — WATERMARKS ALONE: harvest, harvest-stage,
  *                                                     projection. All of it re-derives.
  *   $XDG_CACHE_HOME/lares   (~/.cache/lares)        — ephemeral scratch: sensoriums (swept).
@@ -39,10 +39,11 @@
  * node daemon (uds-channel) resolve through HERE.
  *
  * ── THREE HOMES, ONE QUESTION ───────────────────────────────────────────────────────────────────
- * Every siting answers CAN THIS BE RE-MADE?, and the answer picks the house:
- *   `<abide>`  nothing re-makes it — the acquired shelf, the sensoriums. Back it up.
- *   `<data>`   the sovereign root no rite may touch, plus the substrate every rite reforges. Back it up.
- *   `<state>`  watermarks alone; deletable at any moment, because each re-derives from what it watches.
+ * Every siting answers WHOSE IS THIS?, and the answer picks the house:
+ *   `<abide>`  the LARARIUM's — the acquired shelf, the sensoriums. Back it up; nothing re-makes it.
+ *   `<data>`   the LARES' — their identity and seal, and the substrate they run on. Back it up.
+ *   `<state>`  nobody's for long: watermarks, deletable at any moment, each re-deriving from what it
+ *              watches.
  *
  * THE WIPE ZONE STANDS AS A HOUSE, NOT A LIST. `reset` pares `<data>/vessel` and `<state>/projection`;
  * `<abide>` shares no prefix with either, so the tier a wipe must never end survives by its ADDRESS.
@@ -59,10 +60,11 @@ import { basename, join } from "node:path";
 // The XDG data-home + the mempalace content parent live in ONE cycle-free
 // home — `@lararium/mempalace/xdg-base` — so vessel-paths and mempalace's palace-path derive the store
 // parent from the SAME source (no value-duplication). Imported across the existing node → mempalace edge.
-import { larDataHome, larariumDataHome, mempalaceContentParent } from "@lararium/mempalace/xdg-base";
+import { laresDataHome, larariumDataHome, mempalaceContentParent } from "@lararium/mempalace/xdg-base";
 
-// Re-export both homes — `larDataHome` for what a rite reforges, `larariumDataHome` for what abides.
-export { larDataHome, larariumDataHome };
+// Re-export both homes — `laresDataHome` for what belongs to the SPIRITS, `larariumDataHome` for what
+// belongs to the HOUSE. (`lar` names the namespace alone; the resolvers below wear it for that reason.)
+export { laresDataHome, larariumDataHome };
 
 // ── XDG base homes ──────────────────────────────────────────────────────────────────────────────
 // Each honors its env var (unset → the freedesktop default), and roots under LAR_ROOT when isolated.
@@ -371,7 +373,7 @@ export function scratchSensoriumInstanceDir(id: string): string {
 /** Storage dir — the Automerge Repo, vessel key, and UDS socket, at `<data>/vessel`.
  *  WIPED by `reset`. NOT a sensorium (it carries no sensory fiber caps). */
 export function larDataDir(): string {
-  return join(larDataHome(), "vessel");
+  return join(laresDataHome(), "vessel");
 }
 
 /** Vessel identity dir — the sovereign keypair + the veiled-Handle anchors, at
@@ -382,7 +384,7 @@ export function larDataDir(): string {
  *  nothing else, so identity here stands outside it. The ONE identity resolver —
  *  node-vessel-identity resolves any prior location onto it. */
 export function larIdentityDir(): string {
-  return join(larDataHome(), "identity");
+  return join(laresDataHome(), "identity");
 }
 
 /**
@@ -400,7 +402,7 @@ export function larIdentityDir(): string {
  * because a Nexus belongs to the operators who founded it, never to whoever copied the code.
  */
 export function larSealHome(): string {
-  return join(larDataHome(), "nexus");
+  return join(laresDataHome(), "nexus");
 }
 
 // ── Durable watermarks (state) ────────────────────────────────────────────────────────────────────

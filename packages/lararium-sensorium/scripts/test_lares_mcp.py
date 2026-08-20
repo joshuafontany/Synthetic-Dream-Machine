@@ -626,10 +626,10 @@ def test_the_two_homes_never_nest_or_alias(monkeypatch, tmp_path):
     # in either direction and by either reading — the segment-safe one AND the naive string prefix a
     # hand-written wipe reaches for. `lararium` parts from `lares` at the fifth character, so even the
     # careless reading misses the shrine.
-    from sensorium import _lar_data_home, _lararium_data_home
+    from sensorium import _lares_data_home, _lararium_data_home
     monkeypatch.delenv("LAR_ROOT", raising=False)
     monkeypatch.setenv("XDG_DATA_HOME", str(tmp_path))
-    data, abide = _lar_data_home(), _lararium_data_home()
+    data, abide = _lares_data_home(), _lararium_data_home()
     assert data == os.path.join(str(tmp_path), "lares")          # the resolvers RAN
     assert abide == os.path.join(str(tmp_path), "lararium")
     assert not abide.startswith(data) and not data.startswith(abide)
@@ -638,12 +638,12 @@ def test_the_two_homes_never_nest_or_alias(monkeypatch, tmp_path):
 def test_lar_root_isolates_both_homes(monkeypatch, tmp_path):
     # An isolated instance nests BOTH tiers under its own root, so a test never reaches the operator's
     # own shelf — and the two stay disjoint inside the sandbox exactly as they do outside it.
-    from sensorium import _lar_data_home, _lararium_data_home
+    from sensorium import _lares_data_home, _lararium_data_home
     monkeypatch.setenv("LAR_ROOT", str(tmp_path))
     monkeypatch.setenv("XDG_DATA_HOME", "/somewhere/else")       # present, and OUTRANKED
-    assert _lar_data_home() == os.path.join(str(tmp_path), "data")
+    assert _lares_data_home() == os.path.join(str(tmp_path), "data")
     assert _lararium_data_home() == os.path.join(str(tmp_path), "abide")
-    assert not _lararium_data_home().startswith(_lar_data_home() + os.sep)
+    assert not _lararium_data_home().startswith(_lares_data_home() + os.sep)
 
 
 def test_a_sensorium_address_never_routes_out_of_the_shrine(monkeypatch, tmp_path):

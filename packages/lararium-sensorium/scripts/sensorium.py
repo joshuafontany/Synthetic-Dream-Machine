@@ -83,11 +83,13 @@ def derived_views(root: str) -> dict:
     return views
 
 
-def _lar_data_home() -> str:
-    """Resolve the data home the SAME way TS `larDataHome` (xdg-base.ts) resolves it: `LAR_ROOT/data`
-    for an isolated instance, else `$XDG_DATA_HOME/lares` (unset → `~/.local/share/lares`). The two
-    views stay byte-identical by convention so a name a caller addresses lands on the one root both
-    surfaces name."""
+def _lares_data_home() -> str:
+    """Resolve THE SPIRITS' HOUSE the SAME way TS `laresDataHome` (xdg-base.ts) resolves it:
+    `LAR_ROOT/data` for an isolated instance, else `$XDG_DATA_HOME/lares` (unset → `~/.local/share/lares`).
+
+    `lares` names the SPIRITS — their identity, their seal, the substrate they run on; a Lar's keys ARE
+    that Lar. `lararium` names the HOUSE. `lar` names the NAMESPACE alone. The two views stay
+    byte-identical by convention so a name a caller addresses lands on the one root both surfaces name."""
     lar_root = os.environ.get("LAR_ROOT")
     if lar_root:
         return os.path.join(lar_root, "data")
@@ -96,13 +98,14 @@ def _lar_data_home() -> str:
 
 
 def _lararium_data_home() -> str:
-    """Resolve the ABIDING home the SAME way TS `larariumDataHome` (xdg-base.ts) resolves it: `LAR_ROOT/abide`
-    for an isolated instance, else `$XDG_DATA_HOME/lararium` (unset -> `~/.local/share/lararium`).
+    """Resolve THE HOUSE'S HOME the SAME way TS `larariumDataHome` (xdg-base.ts) resolves it:
+    `LAR_ROOT/abide` for an isolated instance, else `$XDG_DATA_HOME/lararium`
+    (unset -> `~/.local/share/lararium`).
 
-    LARES PASS; THE LARARIUM ABIDES. A Lar carries the vessel substrate every rite reforges; the shrine holds
-    what no rite re-makes. A sensorium is operator history and DreamNet history — capture the machine took
-    once and cannot take again — so it stands here, and survives a complete re-founding by living in another
-    house rather than by staying off a wipe's list."""
+    THE CRITERION IS WHOSE IT IS. A sensorium holds operator history and DreamNet history — the
+    LARARIUM's, never any one Lar's — so it stands here. LARES PASS; THE LARARIUM ABIDES, and surviving a
+    complete re-founding follows from that: capture the machine took once and cannot take again, kept in
+    its own house rather than off a wipe's list."""
     lar_root = os.environ.get("LAR_ROOT")
     if lar_root:
         return os.path.join(lar_root, "abide")

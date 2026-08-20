@@ -4,11 +4,12 @@
  * The pure half (the layout law, the reference grammar, the index) lives in `@lararium/mesh`'s library-tier.
  * This is the disk: where the tier stands, how a body enters it, and what a verify actually reads.
  *
- * ── IT HOMES IN THE SHRINE, AND THAT IS THE WHOLE POINT ──────────────────────────────────────────
- * The runtime CAS under `<data>/vessel` is licensed for the wipe by one premise: its blobs rebuild from the
- * bags carriers on each seed. That premise holds for DERIVED blobs and fails completely for acquired ones —
- * a book regenerates from nothing. So the shelf stands in `<abide>`, a house no wipe names, rather than one
- * directory aside from a house every rite pares.
+ * ── IT BELONGS TO THE HOUSE, AND THAT IS THE WHOLE POINT ─────────────────────────────────────────
+ * A shelf is the LARARIUM's, never any Lar's — a family's books outlast whoever reads them. So it homes in
+ * `<abide>`, and everything else follows: the runtime CAS under `<data>/vessel` is licensed for the wipe by
+ * one premise, that its blobs rebuild from the bags carriers on each seed, and that premise holds for
+ * DERIVED blobs while failing completely for acquired ones — a book regenerates from nothing. Standing in
+ * its own house rather than one directory aside from a house every rite pares is what makes that structural.
  *
  * ── ACQUIRING MOVES, IT DOES NOT COPY (by default) ───────────────────────────────────────────────
  * The point of the act is to get a body OUT of a tracked tree. A copy leaves the original exactly where it

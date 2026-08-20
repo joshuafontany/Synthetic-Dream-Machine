@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach } from "vitest";
 import { mkdtempSync, rmSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { larDataHome, mempalaceContentParent, memorySensoriumStructureDir, memorySensoriumFormDir, memorySensoriumPersistenceDir } from "../src/xdg-base.js";
+import { laresDataHome, mempalaceContentParent, memorySensoriumStructureDir, memorySensoriumFormDir, memorySensoriumPersistenceDir } from "../src/xdg-base.js";
 
 /**
  * xdg-base is the ONE cycle-free source both `@lararium/node`'s vessel-paths.ts (`larMempalaceDir`)
@@ -33,23 +33,23 @@ describe("xdg-base (the shared XDG resolver)", () => {
     for (const r of roots.splice(0)) rmSync(r, { recursive: true, force: true });
   });
 
-  it("larDataHome: LAR_ROOT wins → <root>/data", () => {
+  it("laresDataHome: LAR_ROOT wins → <root>/data", () => {
     set("LAR_ROOT", "/isolated/pair");
-    expect(larDataHome()).toBe(join("/isolated/pair", "data"));
+    expect(laresDataHome()).toBe(join("/isolated/pair", "data"));
   });
 
-  it("larDataHome: XDG_DATA_HOME/lares when unisolated", () => {
+  it("laresDataHome: XDG_DATA_HOME/lares when unisolated", () => {
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", "/xdg/data");
-    expect(larDataHome()).toBe(join("/xdg/data", "lares"));
+    expect(laresDataHome()).toBe(join("/xdg/data", "lares"));
   });
 
-  it("larDataHome: freedesktop default ~/.local/share/lares when neither set", () => {
+  it("laresDataHome: freedesktop default ~/.local/share/lares when neither set", () => {
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", undefined);
     set("HOME", "/home/tester");
     set("USERPROFILE", "/home/tester");
-    expect(larDataHome()).toBe(join("/home/tester", ".local", "share", "lares"));
+    expect(laresDataHome()).toBe(join("/home/tester", ".local", "share", "lares"));
   });
 
   // A sensorium ABIDES: it holds capture the machine took once and cannot take again, so it stands in
@@ -66,7 +66,7 @@ describe("xdg-base (the shared XDG resolver)", () => {
   it("the memory sensorium NEVER stands under the spirit's home — the wipe zone made structural", () => {
     set("LAR_ROOT", undefined);
     set("XDG_DATA_HOME", "/x/data");
-    expect(memorySensoriumStructureDir().startsWith(larDataHome())).toBe(false);
+    expect(memorySensoriumStructureDir().startsWith(laresDataHome())).toBe(false);
   });
 
   it("memorySensoriumFormDir / PersistenceDir: siblings under the one root", () => {
