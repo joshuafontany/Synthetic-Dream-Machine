@@ -9,29 +9,19 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/api/pono/skill-template >>
 ```toml iam
-# <<~ ahu #iam-ha "structure" >>
-
-uri-path = "ha.ka.ba/api/pono/skill-template"
-file-path = "lares/ha-ka-ba/api/pono/skill-pono-template.mem"
-content-type = "text/x-memetic-wikitext+tiddlywiki"
-manaoio = 8
-confidence = 10
-# <<~/ahu >>
-# <<~ ahu #iam-ka "detail" >>
-
-mana = 11
-manao = 12
-implements = [
+confidence         = 10
+implements         = [
   "lar:///ha.ka.ba/api/pono/meme",
   "lar:///ha.ka.ba/api/pono/loci"
 ]
-register = "Synthesis"
-role = "skill template, verification authoring guide, and pre/post-MCP implementation roadmap"
+mana               = 11
+manao              = 12
+manaoio            = 8
+register           = "Synthesis"
+role               = "skill template, verification authoring guide, and pre/post-MCP implementation roadmap"
 skill-package-root = "ha-ka-ba/api/pono/skill-*.md"
-# <<~/ahu >>
-# <<~ ahu #iam-ba "flow" >>
-
-# <<~/ahu >>
+type               = "text/x-memetic-wikitext+tiddlywiki"
+uri-path           = "ha.ka.ba/api/pono/skill-template"
 ```
 
 <<~/ahu >>
