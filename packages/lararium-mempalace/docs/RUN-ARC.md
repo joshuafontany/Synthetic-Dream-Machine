@@ -186,7 +186,7 @@ cid-correspondence null · a triple-overlap/nesting drift-detector fixture that 
    an invariant with no drift-detector already drifts), and a `grammar_epoch` stamped beside each
    structural hash so a parser bump reads as a visible re-projection, never a silent hash storm.
 
-   **OWED — the standing memory palace holds pre-gradient hashes.** `~/.lares/sensorium/memory` was
+   **OWED — the standing memory palace holds pre-gradient hashes.** `<lararium>/sensoriums/memory` was
    captured before the cure; its 870 structure entries were computed under the degenerate parse. It needs
    a rebuild before any projector reads it.
 

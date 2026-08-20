@@ -61,9 +61,9 @@ def test_no_secret_fails_loud(tmp_path, monkeypatch):
 
 
 # --- the XDG-state parity guard (identity-home caller-lag, healed 2026-07-15) ------------
-# The salt dir MUST resolve the SAME XDG-STATE rule the TS larIdentityDir() (vessel-paths.ts)
-# holds — the vessel WRITES the persona-group-root there. The identity-home move once left this
-# default at the pre-XDG ~/.lares/.lararium-identity scatter (which held no file post-move).
+# The salt dir MUST resolve the SAME rule the TS larIdentityDir() (vessel-paths.ts) holds — the vessel
+# WRITES the persona-group-root there, so a second spelling reads a salt that is not there and veils
+# against nothing. The vectors below pin the ONE address and refuse every scattered sibling.
 
 def test_identity_dir_mirrors_xdg_data(monkeypatch):
     monkeypatch.delenv("LAR_ROOT", raising=False)

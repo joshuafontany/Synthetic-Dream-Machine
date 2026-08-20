@@ -11,7 +11,7 @@ manaoio   = 16
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the dev loop: the idempotent CLI cures after a code change (refresh/reconcile/rebuild/fresh/serve/reset/wake) + WHERE vessel state lives (~/.lares) vs corpus (the repo). The reach taxonomy + the path law + the invariants the dev loop rests on."
+role      = "the dev loop: the idempotent CLI cures after a code change (refresh/reconcile/rebuild/fresh/serve/reset/wake) + WHERE vessel state lives vs corpus (the repo). Carries the SITING LAW: three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — so the spirits' vessel, identity, seal and hearth bags stand at <lares>, the acquired shelf and the sensoriums at <lararium>, and the watermarks alone at <state>. Under LAR_ROOT every directory names an XDG kind and the two houses nest inside the data kind. The reach taxonomy + the path law + the invariants the dev loop rests on."
 type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/node/dev-loop"
 written   = "2026-06-27"
@@ -59,23 +59,35 @@ half-dead vessel: port bound, worker `ERR_MODULE_NOT_FOUND`). So after a TS edit
 
 <<~ ahu #vessel-paths >>
 
-!! Where state lives ~ vessel-home vs corpus (the ~/.lares split)
+!! Where state lives ~ the two houses vs the corpus
 
 The CORPUS + code live in the ''repo'' (versioned); the vessel's RUNTIME STATE lives in the
-operator's ''home'' (`~/.lares`). This is the `@daemon` ontology made filesystem — the
-bound-operator's vessel-only worker belongs to the operator, not a checkout.
+operator's own homes. This is the `@daemon` ontology made filesystem — the bound-operator's
+vessel-only worker belongs to the operator, not a checkout.
 
-<<~ranks home ~/.lares/.lararium:storage·key·socket -> .lararium-identity:keypair -> .lararium-projection:synced-tree -> harvest·harvest-stage:memories >>
+''THREE WORDS, AND NONE OF THEM ARE SYNONYMS'': ''lares'' names the SPIRITS, ''lararium'' names the
+HOUSE, ''lar'' names the NAMESPACE. Every siting answers ''whose is this?'':
+
+|! home |! holds |! whose |
+| `<lares>` (`~/.local/share/lares`) | `vessel/` storage · key · UDS socket · `identity/` keypair · `nexus/` seal · `repos.json` · hearth bags | the SPIRITS' — a Lar's keys ARE that Lar |
+| `<lararium>` (`~/.local/share/lararium`) | `library/` the acquired shelf · `sensoriums/` operator history + DreamNet history | the HOUSE'S — nothing here re-derives |
+| `<state>` (`~/.local/state/lares`) | `projection/` synced-tree watermark · `harvest/` · `harvest-stage/` | nobody's for long — all of it re-derives |
+
 <<~ranks corpus repo/genesis:baked-island.bin-seed+bootstrap -> repo/bags:seed-memes -> repo/packages:code >>
 
 ''The resolver'' — ONE source, `@lararium/node/vessel-paths.ts` (`larHome` · `larDataDir` ·
-`larIdentityDir` · `larProjectionDir` · `larHarvest*`), so the CLI (local-connector) and the daemon
-(uds-channel) always agree on the ''UDS socket'' path. The palace stays `~/.mempalace`
-(mempalace's own home; `MEMPALACE_PALACE_PATH` overrides).
+`larIdentityDir` · `larProjectionDir` · `larHarvest*`) over `@lararium/mempalace/xdg-base`
+(`laresDataHome` · `larariumDataHome`), so the CLI (local-connector) and the daemon (uds-channel)
+always agree on the ''UDS socket'' path. `larHome()` (`~/.lares`) carries the per-@daemon
+`config.json` alone. The guest mempalace stays `~/.mempalace` (mempalace's own home;
+`MEMPALACE_PALACE_PATH` overrides); the SOVEREIGN content plane rides `<lararium>/sensoriums/memory`.
 
-''`LAR_ROOT`'' overrides the home root for ISOLATED instances (the test harness / staged pairs) —
-both storage AND genesis fall under it. ''Only an EXPLICIT `--root` (or the env) sets it'' — never a
-default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat the split.
+''`LAR_ROOT`'' overrides the root for ISOLATED instances (the test harness / staged pairs) — every
+home AND genesis fall under it. Each directory beneath it names an XDG ''KIND'' — data, state, cache,
+config, run — and the two HOUSES nest inside the data kind exactly as under XDG: `<root>/data/lares`
+beside `<root>/data/lararium`. ''A house never stands where a kind belongs'', so an isolated root
+reads as the real disk with a different prefix. ''Only an EXPLICIT `--root` (or the env) sets it'' —
+never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat the split.
 
 <<~/ahu >>
 
@@ -88,8 +100,9 @@ default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat 
 * ''dist, not tsx'' — island workers spawn compiled; a stale dist is a half-dead vessel. `refresh` rebuilds.
 * ''genesis before init'' — init founds the hearth FROM the engine CID, so the baked artifact must
   exist first. `reset` order is delete → ''rebuild genesis'' → init (the reverse fails "engine CID absent").
-* ''identity survives reset'' — `~/.lares/.lararium-identity` is a sibling of the wipe-zone; `reset`
-  preserves the operator's keypair/DID. A true re-found (new DID) needs an explicit identity wipe.
+* ''identity survives reset'' — `<lares>/identity` is a SIBLING of the substrate `reset` reforges,
+  never a child, so the act cannot reach it and `reset` preserves the operator's keypair/DID. A true
+  re-found (new DID) needs an explicit identity wipe.
 * ''only explicit `--root` sets `LAR_ROOT`'' — never thread a `REPO_ROOT` default through reset/init
   (it silently relocates the vessel into the repo).
 * ''deterministic genesis'' — a re-bake with unchanged code is byte-identical (no churn); a diff means
@@ -107,6 +120,6 @@ default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:fad2511d327f2fa5
+<<^ code:"&#x0003;" >>⊙:2d38c3c3b2b31057
 
 <<^ code:"&#x0004;" -> ? >>

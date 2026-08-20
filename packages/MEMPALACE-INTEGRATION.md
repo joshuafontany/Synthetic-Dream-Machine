@@ -51,7 +51,7 @@ re-runs no-op), and degrades gracefully when its tool isn't installed.
 |---|---|
 | `lares harvest --all [--dry-run]` | sweep **every transcript surface** → group by project wing → mine convos + write `lar_*`. Idempotent. **Transcripts only** (never curated MD). |
 | `lares harvest --writeback --wing <w> [--limit N]` | enrich one wing's existing drawers with `lar_*` + hall routing. Idempotent (`lar_hv`). |
-| `lares harvest <path> --wing <w> [--dry-run]` | default: read transcript turns → gradient parser → watermarked bearing index (`~/.lares/harvest/<wing>.ndjson`). |
+| `lares harvest <path> --wing <w> [--dry-run]` | default: read transcript turns → gradient parser → watermarked bearing index (`<state>/harvest/<wing>.ndjson`). |
 
 **Sources swept by `--all`** (each drawer tagged `lar_surface`):
 

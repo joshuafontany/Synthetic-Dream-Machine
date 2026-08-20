@@ -463,7 +463,8 @@ def test_structure_default_isolated_instance(monkeypatch):
 
 
 def test_structure_default_never_the_prexdg_scatter(monkeypatch):
-    # The bug it heals: the pre-XDG `~/.lares/.structurepalace` scatter must never reappear.
+    # ONE ADDRESS, never a scatter. A per-plane dir hung off the operator's bare home splits the
+    # store capture writes from the store recall reads; these vectors refuse that shape by name.
     monkeypatch.delenv("LAR_ROOT", raising=False)
     monkeypatch.delenv("XDG_DATA_HOME", raising=False)
     assert ".structurepalace" not in ap._default_structurepalace_dir()

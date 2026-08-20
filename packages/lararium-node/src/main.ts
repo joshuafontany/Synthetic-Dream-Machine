@@ -67,7 +67,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
   };
   const cfg        = loadLaresConfig();   // per-@daemon resource overrides (~/.lares/config.json)
   const rootDir    = resolve(get("--root", "LAR_ROOT", REPO_ROOT));   // corpus root (genesis)
-  const storageDir = resolve(get("--storage", "LAR_STORAGE", larDataDir()));   // runtime → ~/.lares/.lararium
+  const storageDir = resolve(get("--storage", "LAR_STORAGE", larDataDir()));   // the vessel substrate → <lares>/vessel
   // The composable genesis cap: --genesis flag → LAR_GENESIS env → ~/.lares/config.json → repo-relative
   // <rootDir>/genesis. Genesis stays checked-in by default, so a no-config boot lands on the repo's
   // tracked seed exactly as before; an operator sites it under ~ via config.resources.genesis.

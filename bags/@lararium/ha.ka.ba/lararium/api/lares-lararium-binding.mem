@@ -133,7 +133,8 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 !! Wiring (when the identity work pauses)
 
 # ''Daemon UDS verb-channel'' (lararium-node): a Unix-domain listener at
-   `~/.lares/lares.sock` (perms `0600`, stale-cleanup, Windows named-pipe fallback)
+   `<lares>/vessel/lares.sock` — the socket rides WITH the substrate it serves, in the
+   spirits' house (perms `0600`, stale-cleanup, Windows named-pipe fallback)
    that decodes a capability-bearing invocation, runs it through the ''existing''
    VerbDispatcher, and returns the durable outcome. Alongside the WS — not replacing
    it. //(Touches the node boot/ingress — coordinate with the identity/boot work.)//
@@ -164,6 +165,6 @@ the `status` residency probe passes a non-did `requestedBy` and cap-errors quiet
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ॐ ँ:f2202c4d086a3432
+<<^ code:"&#x0003;" >>ॐ ँ:ca476669fdea0667
 
 <<^ code:"&#x0004;" -> ? >>

@@ -47,7 +47,7 @@ export interface DeviceAdmitOptions {
 
 function defaultDirs(): { storageDir: string; genesisDir: string } {
   return {
-    storageDir: larDataDir(),        // runtime → ~/.lares/.lararium
+    storageDir: larDataDir(),        // the vessel substrate → <lares>/vessel
     // Baked seed rides the composable genesis cap (LAR_GENESIS → ~/.lares/config.json →
     // repo-relative <corpus>/genesis). Checked-in by default; a no-config boot lands on the repo seed.
     genesisDir: daemonGenesisDir(),

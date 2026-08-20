@@ -1,7 +1,7 @@
 /**
  * gone-turns — the REWIND detector primitive (pure, dependency-free).
  *
- * The harvest index (`~/.lares/harvest/<wing>.ndjson`) is append-only, keyed by turn-uuid, with NO
+ * The harvest index (`<state>/harvest/<wing>.ndjson`) is append-only, keyed by turn-uuid, with NO
  * gone-turn reconciliation: once a turn is recorded it stays, even if the operator later REWINDS the
  * transcript (an edited message, a branch abandoned) so that turn-uuid no longer appears. A turn the
  * index still holds but the current transcript no longer carries is a GONE turn — a rewind.

@@ -105,8 +105,9 @@ describe("the repo registry — IDs, never paths", () => {
   });
 
   test("the hearth root always stands, so hearth-homed bags always place", () => {
-    // Hearth bags hold operator content no rite re-makes, so they gather in the DATA home with the
-    // identity, the seal and the shelf. The state home keeps only what re-derives.
+    // THE CRITERION IS WHOSE IT IS. A hearth bag holds what a Lar authored, so it stands in the
+    // SPIRITS' house beside the identity and the seal. The house's own things — the acquired shelf,
+    // the sensoriums — stand at `<lararium>`, and the state home keeps watermarks alone.
     expect(bagHomeRoots().hearth).toBe(join(laresDataHome(), "bags"));
   });
 });

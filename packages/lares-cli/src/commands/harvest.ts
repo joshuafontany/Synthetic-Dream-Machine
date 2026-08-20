@@ -12,7 +12,8 @@
  *     the grammar manifests provisionally, so clean turns harvest with
  *     confidence and degraded/novel/missing forms record on the 0..20 gradient,
  *     down to the floor; below it a turn keeps its raw source and abstains.
- *   - IDEMPOTENT: a per-key content-hash watermark (~/.lares/harvest/state.json)
+ *   - IDEMPOTENT: a per-key content-hash watermark (<state>/harvest/state.json — a watermark
+ *     re-derives, so it rides the state home rather than either house)
  *     skips turns already harvested; re-runs and resumes are no-ops. The harvest
  *     index is append-only NDJSON keyed by turn uuid.
  *
