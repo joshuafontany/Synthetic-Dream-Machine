@@ -17,6 +17,27 @@
  * character of the ETX sigil, inclusive — so the check covers the marks that bound it and never covers
  * itself, which is what lets it sit after ETX with no self-exclusion rule.
  *
+ * ── TWO ALTITUDES: HEX TRAVELS, GLYPHS RENDER ───────────────────────────────────────────────────
+ * The slot the check occupies — after ETX, before EOT — carries it in the received framing and in this
+ * grammar alike, so one form serves both and the check needs no wrapper of its own.
+ *
+ * What the check LOOKS like splits by artifact class rather than by layer.
+ *
+ * A CARRIER holds the hex form, `<namespace>:<16 hex>`, because a carrier travels. Bytes that never
+ * move as emoji cannot be bitten by a variation selector, a zero-width joiner, a skin-tone modifier or
+ * a client's own normalization, and a reader holding nothing but the file can still verify it. Keeping
+ * the glyph vocabulary out of the encoding also keeps it REVISABLE: an alphabet frozen into the bytes
+ * could never improve without invalidating every carrier ever written, where an alphabet used only to
+ * render may be bettered in year three with every existing stamp still verifying.
+ *
+ * A PROJECTION carries the glyph-stamped form on disk — an FTLS Powers card, a character sheet, any
+ * artifact the wiki renders for a reader rather than ships to a peer. A projection IS the rendered
+ * surface, so the file on disk shows what the live wiki shows, and an operator comparing the two reads
+ * one thing in both places. The at-a-glance stamp belongs where reading happens.
+ *
+ * Two spellings of one digest, each where it serves: the same law the house stands at every other
+ * altitude — a private pet-name beside a declared Handle, `Aperture` beside `Focus`.
+ *
  * ── WHAT A RELAY CAN DO WITH IT ─────────────────────────────────────────────────────────────────
  * Raw bytes, one scan, no parser and no canonicaliser. A Herm holding `pull` and not `read` verifies
  * this check over an offering it cannot open — the relay-law exception in `ability-implies` is exactly
