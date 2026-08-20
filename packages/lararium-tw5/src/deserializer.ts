@@ -148,12 +148,12 @@ export function memeticWikitextDeserializer(
     return idx >= 0 ? idx + 2 : -1;
   };
   let lastEtxEnd = -1;
-  for (const etxMatch of maskedExecAll(text, /<<[~^](?:\s*\S+)?\s*&#x0003;/g)) {
+  for (const etxMatch of maskedExecAll(text, /<<\^(?:\s*\S+)?\s*&#x0003;/g)) {
     const end = closeEnd(etxMatch);
     if (end >= 0) lastEtxEnd = end;
   }
   let eotStart = -1;
-  for (const eotMatch of maskedExecAll(text, /<<[~^](?:\s*\S+)?\s*&#x0004;/g)) {
+  for (const eotMatch of maskedExecAll(text, /<<\^(?:\s*\S+)?\s*&#x0004;/g)) {
     if (lastEtxEnd >= 0 && eotMatch.index >= lastEtxEnd) { eotStart = eotMatch.index; break; }
   }
   // THE SLOT: what the carrier wrote between end-of-text and end-of-transmission.
@@ -191,9 +191,9 @@ export function memeticWikitextDeserializer(
     // every render and every re-emission. The reader that breaks FIRST under a frame migration breaks
     // SILENTLY, so it learns the new shape before any carrier writes one.
     const nsParam = /^<<[~^][^>\n]*?\bnamespace:\s*"([^"]*)"/.exec(ev.fullText);
-    const nsBare  = /^<<[~^]([^&:\n]*)&#x(0001|0011)/.exec(ev.fullText);
+    const nsBare  = /^<<\^([^&:\n]*)&#x(0001|0011)/.exec(ev.fullText);
     // The heading variant rides its own capture: a `code:` param names it, else the bare entity does.
-    const sohCode = /^<<[~^][^>\n]*?\bcode:\s*"&#x(0001|0011);"/.exec(ev.fullText)?.[1]
+    const sohCode = /^<<\^[^>\n]*?\bcode:\s*"&#x(0001|0011);"/.exec(ev.fullText)?.[1]
       ?? nsBare?.[2];
     const namespace = (nsParam?.[1] ?? nsBare?.[1] ?? "").trim();
     if (namespace.length > 0 && tiddlers.length > 0) {
@@ -271,7 +271,7 @@ function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): Tiddle
 // crossing lines (a greedy multi-line match once swallowed from a quoted
 // `<<~` mention down to the real closer; found on loci.md).
 const SOH_LINE_RE = /^<<\^(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*>>\n?/;
-const STX_LINE_RE = /<<[~^](?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
+const STX_LINE_RE = /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
 
 function stripLeadingNewlines(text: string): string {
   return text.replace(/^\n+/, "");

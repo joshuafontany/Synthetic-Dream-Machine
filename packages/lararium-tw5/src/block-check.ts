@@ -73,7 +73,7 @@ export function classifyPostamble(postamble: string): Postamble {
   // `[^>]*` cannot cross the `>` inside `-> ?`, so the EOT sigil's own arrow defeats a naive strip.
   // Match to the line's end instead — a frame sigil never spans lines.
   const body = postamble
-    .replace(/<<[~^](?:\s*\S+)?\s*&#x0004;[^\n]*?>>/g, "")
+    .replace(/<<\^(?:\s*\S+)?\s*&#x0004;[^\n]*?>>/g, "")
     .trim();
   if (body.length === 0) return { kind: "empty" };
 
@@ -90,10 +90,10 @@ export function classifyPostamble(postamble: string): Postamble {
  * and inventing a span for it would attest to something the frame never delimited.
  */
 export function checkedSpan(framed: string): string | null {
-  const stx = /<<[~^](?:\s*\S+)?\s*&#x0002;[^>]*>>/.exec(framed);
+  const stx = /<<\^(?:\s*\S+)?\s*&#x0002;[^>]*>>/.exec(framed);
   if (!stx) return null;
   // The LAST ETX closes the text; an earlier one would belong to an embedded example.
-  const etxRe = /<<[~^](?:\s*\S+)?\s*&#x0003;[^>]*>>/g;
+  const etxRe = /<<\^(?:\s*\S+)?\s*&#x0003;[^>]*>>/g;
   let end = -1;
   for (let m = etxRe.exec(framed); m !== null; m = etxRe.exec(framed)) end = m.index + m[0].length;
   if (end < 0 || end <= stx.index) return null;

@@ -54,7 +54,7 @@ const SYNC_MODULES     = args.includes("--sync-modules");
 // Regex patterns
 // ---------------------------------------------------------------------------
 
-const SOH_URI_RE     = /<<[~^][^>]*&#x0001;[^>]*\?\s*->\s*([^\s>]+)\s*>>/;
+const SOH_URI_RE     = /<<\^[^>]*&#x0001;[^>]*\?\s*->\s*([^\s>]+)\s*>>/;
 const TOML_RE        = /```toml([\s\S]*?)```/;
 const SOURCE_SLOT_RE = /<<~ ahu #source >>([\s\S]*?)<<~\/ahu >>/;
 const FENCE_RE       = /```[^\n]*\n([\s\S]*?)\n```/;
@@ -422,8 +422,8 @@ function extractModuleBody(content: string): string | null {
   // A mark rides the head as a NAMED PARAM (`code:"&#x0002;"`), and a hand-written carrier may still
   // spell it as a raw control character. Both scans admit either, and both admit whatever else the head
   // carries — a pattern that demanded the mark alone matched only the one spelling it was written for.
-  const stxRe = /<<[~^][^>\n]*(?:&#x0002;|[\x02])[^>\n]*>>/;
-  const etxRe = /<<[~^][^>\n]*(?:&#x0003;|[\x03])[^>\n]*>>/;
+  const stxRe = /<<\^[^>\n]*(?:&#x0002;|[\x02])[^>\n]*>>/;
+  const etxRe = /<<\^[^>\n]*(?:&#x0003;|[\x03])[^>\n]*>>/;
   const stxM = stxRe.exec(content);
   const etxM = etxRe.exec(content);
   if (!stxM || !etxM) return null;
