@@ -317,7 +317,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 * copilot format-drift fix (`discoverCopilotCli` keys on `events.jsonl`; verify vs `workspace.yaml`).
 
 ''BLOCKED (live):''
-* Live end-to-end smoke + the blurred-drawer nuke-and-pave re-mine — gated on `lares vessel flow rebuild` (genesis SERDE skew, operator's stored state) + the palace MCP returning.
+* Live end-to-end smoke + the blurred-drawer nuke-and-pave re-mine — gated on `lares vessel rite rebuild` (genesis SERDE skew, operator's stored state) + the palace MCP returning.
 
 ''OPEN forks (operator priors):''
 * task as KG edge-attribute vs entity-node (promote on fan-out).
@@ -346,6 +346,6 @@ this model annotates from ([[lar-telemetry|lar:///ha.ka.ba/lararium/api/lar-tele
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ॐ ँ:db4704d29d106722
+<<^ code:"&#x0003;" >>ॐ ँ:f96338e556f4b054
 
 <<^ code:"&#x0004;" -> ? >>

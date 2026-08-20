@@ -264,7 +264,7 @@ Two tiers cross the read/sealed cut:
 * ''public tier'' — engine-blob + plugin-blobs, ''universal'', fetch-by-anyone, the same grammar floor every vessel verifies from cold (the genesis CID lineage, #grammar-as-shared-structure).
 * ''sealed tier'' — sovereign byte-blobs, encrypted to the cabal/persona read-set, carried blind by the relay (#the-relay-floor).
 
-''Cold-boot by CID.'' A cold Lararium ''bootstraps its engine by CID from a peer or a Herm'' — it fetches the engine-blob off the public floor, verifies by rehash, and stands its runtime before it decrypts a single sovereign doc. <<~ confidence Synthesis-Canon 14/20 >> WITNESSED: the re-genesis carries the engine-blob ''by CID'' into the node vessel — the serde-skew dep-bump cure (`lares vessel flow rebuild`, commit 95edf181), the engine riding as content rather than a baked-in artifact. The ''cross-vessel cold-fetch'' (a Lararium pulling its engine off a peer/Herm) stands ''PROPOSED'', riding the same read-face the node already serves.
+''Cold-boot by CID.'' A cold Lararium ''bootstraps its engine by CID from a peer or a Herm'' — it fetches the engine-blob off the public floor, verifies by rehash, and stands its runtime before it decrypts a single sovereign doc. <<~ confidence Synthesis-Canon 14/20 >> WITNESSED: the re-genesis carries the engine-blob ''by CID'' into the node vessel — the serde-skew dep-bump cure (`lares vessel rite rebuild`, commit 95edf181), the engine riding as content rather than a baked-in artifact. The ''cross-vessel cold-fetch'' (a Lararium pulling its engine off a peer/Herm) stands ''PROPOSED'', riding the same read-face the node already serves.
 
 !!! Large bodies leave the CRDT ~ content-resolution over the blob floor
 
@@ -480,6 +480,6 @@ The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''st
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:a2c577c7bc464646
+<<^ code:"&#x0003;" >>:acc7e0f384af4a20
 
 <<^ code:"&#x0004;" -> ? >>
