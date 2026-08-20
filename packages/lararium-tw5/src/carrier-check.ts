@@ -50,13 +50,17 @@ export const BCC_HEX = 16;
  * carriers verified that way: the reader confirmed a check written inside a teaching example and
  * reported `ok` while the carrier's own body went unexamined. The emitter never had that fault, since
  * it divides a carrier the way the deserializer does; this reader now meets it on one span.
+ *
+ * The head is the CONTROL glyph and only that. A matcher admitting the speaking head would accept a
+ * malformed carrier in silence — and silence is this layer's whole danger, because an unmatched frame
+ * reroutes to text rather than throwing.
  */
 export function checkSpan(text: string): { start: number; end: number } | null {
   const spans = fencedSpans(text);
-  const stxM = maskedExec(text, /<<[~^](?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g, spans);
+  const stxM = maskedExec(text, /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g, spans);
   if (!stxM) return null;
   const rest = text.slice(stxM.index);
-  const etxM = maskedExec(rest, /<<[~^](?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g, fencedSpans(rest));
+  const etxM = maskedExec(rest, /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g, fencedSpans(rest));
   if (!etxM) return null;
   return { start: stxM.index, end: stxM.index + etxM.index + etxM[0].length };
 }

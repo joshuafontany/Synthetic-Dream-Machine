@@ -30,25 +30,39 @@ function trackedSources(): string[] {
   return out.split("\n").filter((f) => f.endsWith(".ts") && !f.includes("/dist/"));
 }
 
-describe("★ every control matcher stays indifferent to the head ★", () => {
+describe("★ every control matcher reads the control head, and only that ★", () => {
   const files = trackedSources();
 
   test("the walk finds sources to check", () => {
     expect(files.length).toBeGreaterThan(10);
   });
 
-  test("no control matcher pins a single head", () => {
+  /**
+   * THE FRAME LOCKS TO THE CONTROL GLYPH.
+   *
+   * These matchers once accepted either head, and the reason was written into this test: a matcher
+   * pinning one head goes blind the day a head moves. That held while both heads were live. The frame
+   * has since locked to `<<^`, and the argument inverts — a matcher still admitting `<<~` accepts a
+   * malformed carrier in SILENCE, which is the same blindness aimed the other way and worse here,
+   * because an unmatched frame reroutes to text rather than throwing.
+   *
+   * The corpus has already moved: one carrier holds the old form and the fence mask shows it quoted,
+   * a teaching example rather than a frame. The matchers have not. This test names the ones left.
+   *
+   * Two of them are not leftovers and want reading before they move — `ANY_OPEN_RE` matches ANY sigil
+   * open by design, and the deserializer's namespace/SOH-code reads take a head's PARAMS rather than
+   * assert its glyph. Whichever survives review earns an exemption written where it stands.
+   */
+  test("no control matcher admits the speaking head", () => {
     const offenders: string[] = [];
     for (const rel of files) {
       let src: string;
       try { src = readFileSync(resolve(PKG, rel), "utf8"); } catch { continue; }
       for (const m of src.matchAll(CONTROL_MATCHER)) {
-        // `[~^]` accepts both. `\^` or a bare `~` pins one, and a pinned matcher goes blind the day a
-        // head moves — silently, because a missed carrier reroutes rather than throwing.
-        if (m[1] !== "[~^]") offenders.push(`${rel} → ${m[0].slice(0, 56)}`);
+        if (m[1] !== "\\^") offenders.push(`${rel} → ${m[0].slice(0, 56)}`);
       }
     }
-    expect(offenders, `these matchers pin one head:\n  ${offenders.join("\n  ")}`).toEqual([]);
+    expect(offenders, `these matchers still admit the speaking head:\n  ${offenders.join("\n  ")}`).toEqual([]);
   });
 
   test("the walk actually finds matchers — an empty sweep would pass vacuously", () => {

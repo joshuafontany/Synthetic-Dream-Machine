@@ -877,6 +877,29 @@ write-back rewrites the author's source forever.
 
 <<~/ahu >>
 
+<<~ ahu #frame-head-lock >>
+
+## The Frame Head Locks to Control
+
+A frame mark MUST open on the control head `<<^`. A reader MUST NOT honour a control entity carried
+under the speaking head `<<~`, and a writer MUST NOT emit one.
+
+**The lock reads as a tightening and acts as a safety rule.** An unmatched frame does not throw — it
+reroutes, and the carrier falls to text with every field it declared going unread. So a matcher that
+admits either head accepts a malformed carrier in silence, and silence is the whole danger at this
+layer: the failure arrives as a document that parsed, not as an error anyone sees.
+
+Both heads once stood, and a reader written then took the wider match deliberately, against the day a
+head moved. The head has moved. The wider match now guards nothing and admits everything.
+
+**A reader MUST divide a carrier through the fence mask.** This grammar teaches its own control set, so
+a conformant corpus carries worked examples of every mark inside quote fences. An unmasked reader locks
+onto the first example it meets and answers for a span the writer never wrote — which is how a check
+reader here once verified a digest written inside a teaching example while the body it named went
+unexamined, and reported the carrier sound.
+
+<<~/ahu >>
+
 <<~ ahu #canonical-form >>
 
 ## Canonical Form ~ the writer's law
