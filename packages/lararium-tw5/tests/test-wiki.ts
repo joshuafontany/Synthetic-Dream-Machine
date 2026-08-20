@@ -7,6 +7,11 @@
  * spellings drift the way every such set drifts — a plugin added to five of them reads correct in each
  * file while the sixth quietly tests an older grammar.
  *
+ * WHAT A SUITE CALLS DECIDES, never what it constructs. Six ask a wiki to answer — three through
+ * `exportCarrierFile`, one through `$tw.wiki.deserializeTiddlers`, one across two describes of its own,
+ * and `wiki-sense-vm` through a boot it keeps, since the PACKED ARTIFACT is what that suite witnesses
+ * and a door loading the source JSON would test away the drift it watches for.
+ *
  * Constructing a `TW5Engine` does NOT make a suite one of them. `vm-grammar-boundary` builds an engine
  * and never boots it, driving a fake wiki to prove the host delegates decomposition to the VM rather
  * than deciding it — the engine there is a stand-in, and routing it through this door would replace the
