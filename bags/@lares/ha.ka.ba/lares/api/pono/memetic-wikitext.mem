@@ -877,6 +877,43 @@ write-back rewrites the author's source forever.
 
 <<~/ahu >>
 
+<<~ ahu #canonical-form >>
+
+## Canonical Form ~ the writer's law
+
+The sections above answer *how a reader divides these bytes*. This one answers the question a reader
+never asks and every writer must: **given a record, which bytes stand.**
+
+**The block check forces the question.** A check computed over a span presumes two implementations
+agree on that span down to the byte. Two conforming writers that part over a single space produce
+different checks across identical content — a disagreement between two correct parsers, which no
+reader can adjudicate and a relay holding `pull` and not `read` cannot even open. Any format that
+digests its own serialization owes a canonical form; this one owes it twice, because the check rides
+in the carrier rather than beside it.
+
+### The iam block
+
+A writer emitting a carrier's iam MUST:
+
+<<~ranks canon sort ~ keys lexicographic, never authoring order -> omit ~ a key the envelope owns, a key opening with `$`, a value empty or absent -> inherit ~ a child writes a key ONLY where it differs from its parent -> align ~ `=` padded to the longest surviving key, one space each side -> entity ~ a `namespace` value renders as HTML entities -> silence ~ no surviving key means no block, never an empty fence >>
+
+The alignment reads as presentation and acts as law: a hand-written block using single spaces parses
+identically and re-emits one column wider, so the file reports as changed on every projection and its
+check disagrees with the bytes beside it. **A writer that cannot state its padding cannot federate.**
+
+### One mouth
+
+These laws describe what the emitter already enacts, and stating them here serves a second reader —
+the one writing a migration, a sweep, or an independent implementation. Such a writer SHOULD route
+through the emitter rather than reproduce it: the projection path already does, and every carrier in
+this corpus that failed to render back was written by a hand that went around it.
+
+A migration is the honest exception. A document standing in a shape the current grammar no longer
+emits cannot be rewritten by a writer that only knows the current shape, so a migration reads with the
+reader, and writes with the emitter, and never composes bytes of its own.
+
+<<~/ahu >>
+
 <<~ ahu #carrier-bytes >>
 
 !! Carrier Bytes Law
