@@ -124,3 +124,34 @@ describe("the frame head locks to control, in both directions", () => {
     expect(checkSpan(mixed)).toBeNull();
   });
 });
+
+describe("what the corpus witnesses can and cannot see", () => {
+  const carriers = execSync("git ls-files 'bags/**/*.mem'", { cwd: REPO, encoding: "utf8" })
+    .trim().split("\n").filter(Boolean);
+
+  /**
+   * NAMING A CARRIER ADMITS IT TO THE WITNESS.
+   *
+   * Every corpus walk in this package opens the same way: read `uri-path`, and `continue` where a
+   * carrier declares none. That skip reads as reasonable — an unnamed carrier addresses no meme, so a
+   * round-trip has nothing to render it back TO — and it means a green corpus run says nothing at all
+   * about the carriers it stepped over.
+   *
+   * The cost is not theoretical. Two carriers gained a `uri-path` in an earlier pass and immediately
+   * failed the corpus round-trip, and the failure read as damage the naming had caused. It was not.
+   * They had never passed; they had never been LOOKED AT, and being named is what put them in front of
+   * the reader for the first time.
+   *
+   * So the skip gets counted rather than left implicit. This test does not demand the number be zero —
+   * a bag descriptor and a library index legitimately name no meme. It demands the number be KNOWN, so
+   * a run that reads green also says how much ground it declined to walk.
+   */
+  test("the carriers no corpus walk examines stay counted, never merely skipped", () => {
+    const unnamed = carriers.filter(
+      (rel) => !/^uri-path\s*=\s*"([^"]+)"/m.test(readFileSync(path.join(REPO, rel), "utf8")));
+    expect(carriers.length).toBeGreaterThan(500);
+    // Raise this only alongside a reading of what was added, and never to make a run go green.
+    expect(unnamed.length, `unnamed carriers, invisible to every corpus round-trip:\n  ${unnamed.join("\n  ")}`)
+      .toBeLessThanOrEqual(17);
+  });
+});
