@@ -29,7 +29,7 @@ import {
   makeCabalRealmReactors,
 } from "@lararium/tw5";
 import { CIRCLES_DOC_URI, DAEMON_BAG_ID, personaBagIdFor, leaseEpochPrefix, effectiveLeaseEpoch } from "@lararium/mesh";
-import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
+import type { IslandBehavior, IslandContext, DaemonBehaviorOptions, VerbReactor } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
 /** Vessel-injected daemon shore the platform entry supplies (node folds the telemetry capture SINK here; a
@@ -212,6 +212,25 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           registry.register("persona-label",  selvesReactors.label);
           registry.register("persona-handle", selvesReactors.handle);
           registry.register("persona-selves", selvesReactors.selves);
+        } else {
+          // A FACELESS FLOOR NAMES THE LIFT.
+          //
+          // Leaving these unregistered answers a caller "no handler registered for persona-selves" — true,
+          // and it hands a human nothing to act on. The floor is a state a vessel LIFTS out of, so the
+          // refusal carries the act that lifts it, the same law `holdings-witness` keeps for its own
+          // corrections: a refusal says what would change the answer.
+          //
+          // The closure reaches for no face, so standing it here costs the boot nothing — which is the whole
+          // reason the reactors above stay behind their gate.
+          const lightAFace = (verb: string): VerbReactor => async () => {
+            throw new Error(
+              `[daemon] ${verb}: this vessel stands at the WAKING FLOOR and holds no face — ` +
+              "light one with `lares persona new 0 --name '<label>'`, then stand the vessel again.",
+            );
+          };
+          registry.register("persona-label",  lightAFace("persona-label"));
+          registry.register("persona-handle", lightAFace("persona-handle"));
+          registry.register("persona-selves", lightAFace("persona-selves"));
         }
 
         // The CABAL-REALM verbs over @daemon, where the per-writer lease slots live. `realm-feed` rolls THIS
@@ -495,17 +514,27 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       return { ...verdict, identifier: id, proofVerified, reason: verdict.reason ?? cross.reason };
     },
 
-    resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] }) => {
-      if (!kh) throw new Error("keyhive not booted");
-      const common = {
-        fingerprint, repo: ctx.repo, daemonStore: ctx.composite, keyhive: kh,
-        personaGroupAgentIdHex: faceAgent(), mintedByHex, recipeTrace,
-      } as const;
-      const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });
-      const draft    = await resolveOrMintBinding({ ...common, kind: "draft-binding",    prefix: DRAFT_BINDINGS_PREFIX });
-      const working  = await resolveOrMintBinding({ ...common, kind: "working-binding",  prefix: WORKING_BINDINGS_PREFIX });
-      return { personalUrl: personal.url, draftUrl: draft.url, workingUrl: working.url };
-    },
+    ...(daemonAuth.personaGroupAgentIdHex ? {
+    // A HERM RESOLVES NO PERSONA-SEALED BINDINGS.
+    //
+    // These name a wiki's personal/draft/working layers, each keyed under a PERSONA. The floor of the cap
+    // stack carries its @daemon and no operator bag a human decrypts locally — that plane reads OPEN to its
+    // founding operator rather than sealed to a group — so there is nothing here to key, and nothing to
+    // resolve. Supplied only where a face stands, the gate the vault verbs already keep; a floor that offered
+    // this callback would throw reaching for a face DURING BOOT and take its own standing with it.
+      resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] }) => {
+        if (!kh) throw new Error("keyhive not booted");
+        const common = {
+          fingerprint, repo: ctx.repo, daemonStore: ctx.composite, keyhive: kh,
+          personaGroupAgentIdHex: faceAgent(), mintedByHex, recipeTrace,
+        } as const;
+        const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });
+        const draft    = await resolveOrMintBinding({ ...common, kind: "draft-binding",    prefix: DRAFT_BINDINGS_PREFIX });
+        const working  = await resolveOrMintBinding({ ...common, kind: "working-binding",  prefix: WORKING_BINDINGS_PREFIX });
+        return { personalUrl: personal.url, draftUrl: draft.url, workingUrl: working.url };
+      },
+    } : {}),
+
   };
 }
 

@@ -25,7 +25,7 @@
  *   R5 — a herm LIFTS into a lararium                  · the cap-stack transition the runbook's rite performs
  */
 import { describe, test, expect, afterAll } from "vitest";
-import { mkdtempSync, rmSync, existsSync, readdirSync, statSync } from "node:fs";
+import { mkdtempSync, rmSync, existsSync, readdirSync, statSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync, spawn } from "node:child_process";
@@ -53,21 +53,53 @@ function findSock(dir: string, depth = 5): string | null {
   return null;
 }
 
-/** Stand the floor and report what it reached. Resolves the boot log either way — a fault is a result. */
+/**
+ * Stand the floor and report what it reached. Resolves the boot log either way — a fault is a result.
+ *
+ * READ THE VESSEL'S OWN LOG, NEVER THE LAUNCHER'S STDOUT. `lares vessel stand` DETACHES: the launcher
+ * prints a status line and exits while the vessel it started writes `wake-serve.log` under its own data
+ * dir. A harness watching the launcher's pipe sees a vessel that reached `live` as one that printed
+ * nothing, and reports the floor down while it is up — a measurement fault that reads exactly like a boot
+ * fault. The log the vessel writes is the one that knows.
+ */
 async function standHerm(r: string): Promise<{ live: boolean; log: string }> {
+  const wakeLog = join(r, "data/vessel/wake-serve.log");
+  // CLEAR THE PRIOR BOOT'S LOG FIRST. The vessel APPENDS, so a `phase → live` from an earlier stand
+  // answers instantly for a vessel that never came back up — the lift vector then reports a hearth that
+  // stood when nothing did, and reaches for a socket no process holds.
+  rmSync(wakeLog, { force: true });
   const child = spawn(process.execPath, [CLI, "vessel", "stand"], {
     env: { ...process.env, LAR_ROOT: r, LAR_PORT: String(PORT) }, cwd: REPO,
   });
-  let log = "";
-  child.stdout.on("data", (b) => { log += String(b); });
-  child.stderr.on("data", (b) => { log += String(b); });
+  let launcher = "";
+  child.stdout.on("data", (b) => { launcher += String(b); });
+  child.stderr.on("data", (b) => { launcher += String(b); });
   const deadline = Date.now() + 150_000;
   for (;;) {
+    const log = (existsSync(wakeLog) ? readFileSync(wakeLog, "utf8") : "") + launcher;
     if (/phase → live/.test(log)) return { live: true, log };
-    if (/boot fault|fatal|Error:/.test(log)) return { live: false, log };
+    // FAIL FAST ONLY ON A FAULT THIS VESSEL RAISED. A bare /Error:/ also matches the keyhive wasm's own
+    // DEBUG stream ("Error: Some(ReceiveCgkaOpError(UnknownInvitePrekey…))") — a line a healthy boot prints
+    // on its way to `live`, which cuts the watch short and reports a hearth that stood as one that died.
+    // These names belong to the JS runtime and to this house; the log below them belongs to everyone.
+    if (/boot fault|FATAL|already in use|TypeError:|ReferenceError:|Cannot read properties/.test(log)) return { live: false, log };
     if (Date.now() > deadline) return { live: false, log: log + "\n[timeout]" };
     await new Promise((res) => setTimeout(res, 500));
   }
+}
+
+/**
+ * The presenter every verb vector must carry: THIS VESSEL'S OWN KEY, the one the `lares` CLI presents.
+ *
+ * A zero key names nobody, and nobody is refused on capability before the question this file asks — does a
+ * FACE stand — is ever reached. A vector holding a zero key measures the cap gate and reports the herm.
+ */
+async function operatorDid(r: string): Promise<string> {
+  const { fleetPeerDid } = await import("../../packages/lares-cli/src/daemon-persona-store.js");
+  const prior = process.env["LAR_ROOT"];
+  process.env["LAR_ROOT"] = r;
+  try { return (await fleetPeerDid()) ?? `0x${"0".repeat(64)}`; }
+  finally { if (prior === undefined) delete process.env["LAR_ROOT"]; else process.env["LAR_ROOT"] = prior; }
 }
 
 afterAll(() => {
@@ -99,14 +131,17 @@ describe("the herm — the floor of the lararium cap stack", () => {
     const dir = findSock(root);
     expect(dir, "no UDS door — a herm that carries nothing has no floor under anything").not.toBeNull();
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");
-    const r = await invokeLocal("where", {}, `0x${"0".repeat(64)}`, { dataDir: dir!, timeoutMs: 20_000 });
-    expect((r as { status?: string }).status).toBe("done");
+    // A WELL-FORMED call. `where` requires `args.tiddler`; an empty payload earns "args.tiddler is
+    // required" — the channel answering correctly, which a vector reading only `status` scores as a floor
+    // that does not carry.
+    const r = await invokeLocal("where", { tiddler: "$:/lares/oracle" }, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 });
+    expect(JSON.stringify(r), "the verb channel never answered a well-formed call").toMatch(/"status":"done"/);
   }, 60_000);
 
   test("R4 — a herm refuses a hearth-scoped act LEGIBLY, never by stack trace", async () => {
     const dir = findSock(root);
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");
-    const r = await invokeLocal("persona-selves", {}, `0x${"0".repeat(64)}`, { dataDir: dir!, timeoutMs: 20_000 })
+    const r = await invokeLocal("persona-selves", {}, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 })
       .catch((e: Error) => ({ error: e.message }));
     // Either an unknown verb or a named refusal — both say "light a face". Neither may be a raw throw.
     expect(JSON.stringify(r)).toMatch(/light a face|unknown verb|no face|waking floor/i);
@@ -124,7 +159,7 @@ describe("the herm — the floor of the lararium cap stack", () => {
 
     const dir = findSock(root);
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");
-    const r = await invokeLocal("persona-selves", {}, `0x${"0".repeat(64)}`, { dataDir: dir!, timeoutMs: 20_000 });
-    expect((r as { status?: string }).status).toBe("done");
+    const r = await invokeLocal("persona-selves", {}, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 });
+    expect(JSON.stringify(r), "the lifted hearth still refuses its own face-scoped verb").toMatch(/"status":"done"/);
   }, 240_000);
 });

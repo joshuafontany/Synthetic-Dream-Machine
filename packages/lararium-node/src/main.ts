@@ -41,6 +41,7 @@ import {
 } from "./vessel-raise.js";
 import { loadVesselVerifyingKey } from "./node-vessel-identity.js";
 import { archiveOpens } from "./archive-passphrase.js";
+import { faceStands } from "./commands/init.js";
 import { ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
@@ -142,15 +143,32 @@ async function main(): Promise<void> {
     for (const f of reachFaces) console.log(`[lararium]   ${wsUrlForOrigin(f.origin)}   (${f.kind})`);
   });
 
-  // ── Herm (Lares Viales) — the wiki-LESS wayfarer cap-stack: @daemon immune core + a served
-  //    @meshpalace FLOW-map, no wiki/pool. Routed by --recipe herm / LAR_RECIPE=herm. ──────────
-  // ── THE WAKING FLOOR — every node stands first as a Herm; an operator lights the hearth fire ──────────
-  // A hearth whose archive holds shut STANDS rather than refusing: it carries, it serves the public shelf,
-  // and it holds every sovereign act closed until a key arrives. Refusing would convert an ordinary power
-  // cut into an outage, and the seal exists against a stolen disk. Nothing is lowered here — a vessel that
-  // cannot open simply never rose (canon: lar:///ha.ka.ba/lares/api/pono/waking-floor).
+  // ── THE BASE COURSE — every vessel stands as a Herm, and the hearth is what it LIFTS to ──────────────
+  // The Herm cap-stack (@daemon immune core + a served @meshpalace FLOW-map, no wiki, no pool) is the FLOOR
+  // of this stack rather than a sibling of it. A lararium is a herm with its hearth fire lit, so the lift
+  // reads off what actually stands here, and every vessel reaches `live` through the floor first.
+  //
+  // TWO FACTS LIFT IT, and they answer different questions. A FACE lit — `lares persona new 0` landed a
+  // PersonaGroup onto this place — names what the vessel HOLDS; a place founded and no face yet holds a
+  // crossroads, and composing a hearth over it reaches for a face during boot and takes its own standing
+  // with it. The ARCHIVE opening names what the vessel can OPEN right now; a hearth whose archive holds
+  // shut carries, serves the public shelf, and holds every sovereign act closed until a key arrives.
+  //
+  // `--recipe herm` DECLINES the lift — a public crossroads an operator means to keep faceless — rather
+  // than selecting a different kind of thing. Nothing is ever lowered here: a vessel that cannot open
+  // simply never rose (canon: lar:///ha.ka.ba/lares/api/pono/waking-floor).
+  //
+  // The class stays orthogonal to the CEILING. `personaSlotCeiling("herm") === 0` bars a SEATED persona
+  // root on a crossroads; standing at the floor for want of a face bars nothing — `lares persona new`
+  // reads its own ceiling and lights the face that lifts the next boot. MAY-HOLD-A-FACE ⊥ HOLDS-ONE-NOW.
   const sealShut = !archiveOpens();
-  const standing = standAs(recipe === "herm" ? "herm" : "hearth", !sealShut);
+  const faceLit  = faceStands();
+  const standing = standAs(recipe !== "herm" && faceLit ? "hearth" : "herm", !sealShut);
+  if (standing === "herm" && !sealShut && recipe !== "herm" && !faceLit) {
+    console.log("[lararium] the PLACE stands and no face is lit — standing at the WAKING FLOOR.");
+    console.log("[lararium]   carrying and serving the public shelf; every sovereign act waits.");
+    console.log("[lararium]   light the hearth fire:  lares persona new 0 --name '<label>'   (then stand again)");
+  }
   if (sealShut) {
     console.log("[lararium] the archive holds shut — standing at the WAKING FLOOR, faceless by class.");
     console.log("[lararium]   carrying and serving the public shelf; every sovereign act waits.");

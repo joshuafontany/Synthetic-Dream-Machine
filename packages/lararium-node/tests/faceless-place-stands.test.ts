@@ -65,11 +65,30 @@ describe("a faceless place stands", () => {
     expect(() => wire(false)).not.toThrow();
   });
 
-  test("V2 — persona-scoped verbs do not register without a face", () => {
-    const names = wire(false);
-    for (const v of ["persona-label", "persona-handle", "persona-selves", "face-join"]) {
-      expect(names).not.toContain(v);
+  test("V2 — a face-scoped verb the floor CANNOT run refuses by naming the lift", async () => {
+    // Absent a face these once went unregistered, and a caller met "no handler registered for
+    // persona-selves" — true, and nothing a human can act on. The floor is a state a vessel LIFTS out of,
+    // so the name stands and the refusal carries the act that lifts it.
+    const registry = new VerbTable();
+    const seen: string[] = [];
+    const real = registry.register.bind(registry);
+    (registry as unknown as { register: (n: string, f: unknown) => void }).register = (n, f) => {
+      seen.push(n); real(n, f as never);
+    };
+    operatorDaemonOptions(manifest(false)).wireWorkerVerbs?.(registry, fakeCtx());
+    expect(seen.length, "the wiring pass never ran").toBeGreaterThan(0);
+
+    for (const v of ["persona-label", "persona-handle", "persona-selves"]) {
+      expect(seen, `${v} must stand so its refusal can speak`).toContain(v);
+      await expect(registry.get(v)!({}, {} as never)).rejects.toThrow(/waking floor|persona new 0/i);
     }
+  });
+
+  test("V2b — face-join stays unregistered: a floor seats nobody, and no message changes that", () => {
+    // Distinct from the read verbs above. `persona-selves` refuses an act this vessel could perform once
+    // lifted; `face-join` would seat another device into a group that does not exist, so it holds no
+    // lifted form to describe and stands as an unknown verb rather than a refusal that implies one.
+    expect(wire(false)).not.toContain("face-join");
   });
 
   test("V3 — the place-scoped verbs register anyway; carrying and serving is what it is for", () => {
