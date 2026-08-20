@@ -33,7 +33,7 @@ A Lararium runs as a ''swarm of one operator's vessels'' (a PersonaGroup) — ea
 
 ''What NEVER enters github'' (identity-bearing — gitignored):
 * `.lararium/.vessel-key-*.json` — the operator's private signing key.
-* `<data>/vessel/social-bootstrap.json` — the PersonaGroup pointers (admin/identities/circles/sessions doc-URLs + the sentinel PersonaGroup / MeshCabal IDs).
+* `<lares>/vessel/social-bootstrap.json` — the PersonaGroup pointers (admin/identities/circles/sessions doc-URLs + the sentinel PersonaGroup / MeshCabal IDs).
 
 These travel ''out-of-band'' (a secure channel you control), never the public remote. A clone alone cannot join a PersonaGroup; joining requires what the founding vessel hands over deliberately.
 
@@ -167,6 +167,6 @@ A QA vessel on native Windows 11 (PowerShell, not WSL) stands up through the sam
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:243f07ee92961d6c
+<<^ code:"&#x0003;" >>:704a686cc555422f
 
 <<^ code:"&#x0004;" -> ? >>
