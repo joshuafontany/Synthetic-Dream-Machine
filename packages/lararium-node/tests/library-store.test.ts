@@ -17,7 +17,7 @@ import {
   larLibraryHome, libraryCollectionDir, resolveLibraryRef, acquireIntoLibrary,
   listCollections, listCollection, verifyCollection, writeLibraryIndex, readLibraryMeta,
 } from "../src/library-store.js";
-import { larDataDir, larStateHome, larDataHome } from "../src/vessel-paths.js";
+import { larDataDir, larStateHome, larDataHome, larariumDataHome } from "../src/vessel-paths.js";
 
 const saved: Record<string, string | undefined> = {};
 const setEnv = (k: string, v: string | undefined): void => {
@@ -43,15 +43,17 @@ describe("the acquired tier", () => {
     rmSync(root, { recursive: true, force: true });
   });
 
-  test("★ it homes OUTSIDE the wipe zone — the reason it stands apart from the runtime CAS ★", () => {
+  test("★ it homes in the SHRINE, not the spirit — the wipe zone made structural ★", () => {
     // `reset` pares <data>/vessel on the documented premise that its blobs rebuild from the bags carriers.
     // An acquired book rebuilds from nothing, so it must not live under that premise.
     //
-    // It sits in the DATA home BESIDE that store rather than inside it — the two homes split on whether a
-    // thing can be re-made, so everything irreplaceable gathers here and the state home keeps watermarks
-    // alone. The guard that matters is the SUBDIRECTORY boundary, never the home.
-    expect(larLibraryHome()).toBe(join(larDataHome(), "library"));
-    expect(larLibraryHome().startsWith(larDataDir())).toBe(false);
+    // LARES PASS; THE LARARIUM ABIDES. The shelf stands in a DIFFERENT HOME from everything a rite
+    // reforges, so it survives by standing in another house rather than by a directory staying off
+    // somebody's list. A sibling subdirectory survives until someone widens a wipe by one path segment;
+    // a separate home has no such edge to widen.
+    expect(larLibraryHome()).toBe(join(larariumDataHome(), "library"));
+    expect(larLibraryHome().startsWith(larDataHome())).toBe(false);    // not the spirit's home at all
+    expect(larLibraryHome().startsWith(larDataDir())).toBe(false);     // and nowhere near the vessel store
     expect(larLibraryHome().startsWith(larStateHome())).toBe(false);   // watermarks live there, not books
   });
 

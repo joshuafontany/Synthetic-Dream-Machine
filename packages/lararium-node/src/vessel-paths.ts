@@ -3,10 +3,15 @@
  * XDG Base Directory layout (freedesktop.org). Persistent bytes, ephemeral scratch, transient runtime,
  * durable state, and config each land in their proper XDG home instead of one `~/.lares` monolith:
  *
- *   $XDG_DATA_HOME/lares    (~/.local/share/lares)  — EVERYTHING NO RITE CAN RE-MAKE: the sovereign
- *                                                     identity, the Nexus seal, the acquired library, the
- *                                                     repo registry, the hearth bags, the `memory`
- *                                                     SENSORIUM, and the vessel substrate beneath them.
+ *   $XDG_DATA_HOME/lares    (~/.local/share/lares)  — WHAT A LAR CARRIES: the sovereign identity, the
+ *                                                     Nexus seal, the repo registry, the `memory`
+ *                                                     SENSORIUM, and the vessel substrate every rite
+ *                                                     reforges beneath them.
+ *   $XDG_DATA_HOME/lararium (~/.local/share/lararium) — WHAT THE SHRINE ABIDES: the acquired library, and
+ *                                                     whatever else no rite re-makes and no carrier
+ *                                                     re-derives. LARES PASS; THE LARARIUM ABIDES — the
+ *                                                     wipe zone made structural, so a tier survives by
+ *                                                     standing in another house, never by a list.
  *   $XDG_STATE_HOME/lares   (~/.local/state/lares)  — WATERMARKS ALONE: harvest, harvest-stage,
  *                                                     projection. All of it re-derives.
  *   $XDG_CACHE_HOME/lares   (~/.cache/lares)        — ephemeral scratch: sensoriums (swept).
@@ -53,10 +58,10 @@ import { join } from "node:path";
 // The XDG data-home + the mempalace content parent live in ONE cycle-free
 // home — `@lararium/mempalace/xdg-base` — so vessel-paths and mempalace's palace-path derive the store
 // parent from the SAME source (no value-duplication). Imported across the existing node → mempalace edge.
-import { larDataHome, mempalaceContentParent } from "@lararium/mempalace/xdg-base";
+import { larDataHome, larariumDataHome, mempalaceContentParent } from "@lararium/mempalace/xdg-base";
 
-// Re-export the data home so the historical `@lararium/node` surface (`larDataHome`) stays stable.
-export { larDataHome };
+// Re-export both homes — `larDataHome` for what a rite reforges, `larariumDataHome` for what abides.
+export { larDataHome, larariumDataHome };
 
 // ── XDG base homes ──────────────────────────────────────────────────────────────────────────────
 // Each honors its env var (unset → the freedesktop default), and roots under LAR_ROOT when isolated.

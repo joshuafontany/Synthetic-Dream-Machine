@@ -26,6 +26,29 @@ export function larDataHome(): string {
 }
 
 /**
+ * The ABIDING home — `~/.local/share/lararium`, the sibling that outlives every rite.
+ *
+ * LARES PASS; THE LARARIUM ABIDES. A Lar wakes, acts, and gives way — the vessel substrate under
+ * `lares/` is exactly that: reforged whole by `clear`, `bake` and `rebirth`, and correct to lose, because
+ * a rite re-makes it from the carriers on disk. The lararium is the SHRINE, the place a family fed across
+ * generations and left standing when they moved. What lands here is what no rite can re-make and no
+ * carrier re-derives: an acquired body has no author in any tracked tree and no parse∘render fixed point
+ * to rebuild from, so a wipe that reached it would end it.
+ *
+ * The split makes the wipe zone STRUCTURAL. A tier that survives because a directory is not on a list
+ * survives until somebody edits the list; a tier that survives because it stands in another house needs
+ * no list at all.
+ *
+ * `LAR_ROOT` shores it the same way it shores the vessel home, so an isolated root nests both tiers and a
+ * test never reaches the operator's own shelf.
+ */
+export function larariumDataHome(): string {
+  const root = process.env["LAR_ROOT"];
+  return root ? join(root, "abide")
+              : join(process.env["XDG_DATA_HOME"]?.trim() || join(homedir(), ".local", "share"), "lararium");
+}
+
+/**
  * The GUEST mempalace's PARENT store dir — the upstream-default `~/.mempalace`.
  *
  * The content-cap-home ruling that once made this the memory sensorium's `content` fiber was RETIRED:

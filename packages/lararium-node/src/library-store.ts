@@ -29,19 +29,23 @@ import {
   LIBRARY_META_FILE, parseLibraryRef, metaMatchesDir, renderLibraryIndex,
   mediaTypeFromExt, niUriSha256FromHex, type LibraryEntryMeta,
 } from "@lararium/mesh";
-import { larDataHome } from "./vessel-paths.js";
+import { larariumDataHome } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /**
- * The acquired tier's home — `<data>/library`, or `LAR_LIBRARY`.
+ * The acquired tier's home — `~/.local/share/lararium/library`, or `LAR_LIBRARY`.
  *
- * It sits under the STATE home rather than the data home deliberately: `<data>/vessel` is the substrate
- * `reset` and `regenesis` reforge, and an acquired body must survive both. The env override exists because a
- * shelf grows without bound and an operator may want it on another disk — the one resource here likely to
- * outgrow its default.
+ * IT STANDS IN THE SHRINE, NOT THE SPIRIT. `lares/vessel` is the substrate `reset` and `regenesis`
+ * reforge, and an acquired body survives neither on its own merits: it has no author in any tracked tree
+ * and no parse∘render fixed point, so nothing re-derives it and a wipe that reached it would end it.
+ * Standing it under `lararium/` makes that structural — the tier survives because it lives in another
+ * house, never because a directory stayed off somebody's list.
+ *
+ * The env override exists because a shelf grows without bound and an operator may want it on another
+ * disk — the one resource here likely to outgrow its default.
  */
 export function larLibraryHome(): string {
-  return process.env["LAR_LIBRARY"] ?? join(larDataHome(), "library");
+  return process.env["LAR_LIBRARY"] ?? join(larariumDataHome(), "library");
 }
 
 /** Where one collection's bodies stand. Resolution of a `library:<name>` reference, and the only mapping. */
