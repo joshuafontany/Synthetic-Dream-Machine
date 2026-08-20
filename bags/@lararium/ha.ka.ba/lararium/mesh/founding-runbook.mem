@@ -319,7 +319,7 @@ lines from the irreversible clear (#clear), and a ʻŌlelo Hawaiʻi reader would
 
 ''RULED'': the pet-name goes, and the concept keeps its grounding (Direct Boot BFU/AFU · SPIRE · kubelet
 TLS bootstrap · Tang/Clevis) and its meme. ''It now reads THE WAKING FLOOR'' — plain English, operator-ruled,
-and the phrase the prose had been using all along while the handle claimed otherwise.
+and the phrase the prose carries throughout, so handle and body now say one thing.
 
 ''THE CHECK RAN WIDER THAN THE ONE WORD, and every near candidate failed too.'' Read against the primary
 dictionaries rather than a summary: `hoʻomaka` carries ''to begin, start, as a computer program'' — spent,
@@ -536,11 +536,11 @@ question — ''can this be re-made?'' — so the rite names one directory to gua
 | `~/.local/share/lares` (`<data>`) | identity · nexus seal · library · repo registry · hearth bags · the vessel substrate | ''BACK THIS UP.'' Nothing here re-derives except `vessel/` |
 | `~/.local/state/lares` (`<state>`) | harvest-stage · projection watermark · locks | ''DELETE AT WILL.'' All of it re-derives |
 
-''IT RAN THE OTHER WAY UNTIL TODAY, and the inversion is why this section used to open with a warning.''
-The state home carried the identity, the seal and 18M of acquired books while the data home carried the one
-store that rebuilds from `bags/` — so neither home could be described in a sentence, and the rite had to
-wave an operator away from an `rm -rf` on a directory that ''looked'' disposable and was not. ''A rule that
-fits in one breath needs no warning label'': the danger did not get documented, it left.
+''THE TWO HOMES SPLIT ON ONE QUESTION: can this thing be RE-MADE?'' Everything that cannot — identity, the
+seal, the acquired library, the repo registry, the hearth bags — homes under `<data>`, and everything that
+re-derives homes under `<state>`. Each home then describes itself in a sentence, and an operator reading
+either name knows what an `rm -rf` there costs without consulting a list. ''A rule that fits in one breath
+needs no warning label'': the danger does not get documented, it leaves.
 
 Within `<data>`, only ''one subdirectory'' clears, and the founding cuts two more by hand:
 
@@ -826,7 +826,7 @@ operator expecting a refusal reads a running-but-faceless vessel as a failure an
 honest reading: ''the hearth did not light''. The cure rides in the boot's own words — set
 `LARES_ARCHIVE_PASSPHRASE` and stand it again.
 
-''The rite itself no longer crosses that gate.'' ⑤ plants content into the vessel already standing from ②
+''The rite never crosses that gate.'' ⑤ plants content into the vessel already standing from ②
 and restarts nothing, so a founding that seals here by TYPING the passphrase — the honest path, the one
 the prompt exists for — walks to LIVE without carrying it forward by hand between two movements.
 
@@ -1352,6 +1352,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⚕:ec912627a6381fc6
+<<^ code:"&#x0003;" >>⚕:ee656a46858e7682
 
 <<^ code:"&#x0004;" -> ? >>
