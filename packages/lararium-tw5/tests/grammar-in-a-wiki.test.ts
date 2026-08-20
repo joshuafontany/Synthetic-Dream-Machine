@@ -32,29 +32,22 @@ import { readFileSync, existsSync } from "node:fs";
 import { execSync } from "node:child_process";
 import path from "node:path";
 import { TW5Engine } from "../src/tw5-vm.js";
+import { bootTestWiki, wikiSkip, skipNote } from "./test-wiki.js";
 import { expandMemeRefs } from "../src/deserializer.js";
 import { memeticIngestOps } from "../src/ingest-gate.js";
 import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
-import LARES_MEMETIC_WIKITEXT_PLUGIN from "../plugins/lares-memetic-wikitext.json" with { type: "json" };
-import { TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME } from "../src/generated-tw5-version.js";
 
 const REPO = new URL("../../..", import.meta.url).pathname;
-const CORE_PATH = path.join(TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME);
 
 /** The vendored core is a gitignored build artifact; a silent skip would turn this file green by absence. */
-const coreBlobSkip = existsSync(CORE_PATH)
-  ? false
-  : `TW5 core blob absent at ${CORE_PATH} — run: pnpm --filter @lararium/tw5 build:tw5-vendor`;
 
-describe.skipIf(coreBlobSkip)(
-  `★ the grammar, measured in a live wiki ★${coreBlobSkip ? ` [SKIPPED: ${coreBlobSkip}]` : ""}`,
+describe.skipIf(wikiSkip)(
+  `★ the grammar, measured in a live wiki ★${skipNote}`,
 () => {
   let engine: TW5Engine;
   /** One wiki for the file. Booting per-test would measure the boot, not the grammar. */
   beforeAll(async () => {
-    engine = new TW5Engine();
-    await engine.boot(new Uint8Array(readFileSync(CORE_PATH)),
-      [LARES_MEMETIC_WIKITEXT_PLUGIN as unknown as Record<string, unknown>]);
+    engine = await bootTestWiki();
   });
 
   const deserialize = (text: string, title: string) =>

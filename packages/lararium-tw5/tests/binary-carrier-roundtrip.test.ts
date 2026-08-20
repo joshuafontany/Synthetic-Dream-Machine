@@ -10,34 +10,21 @@ import { describe, test, expect, beforeAll } from "vitest";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { TW5Engine } from "../src/tw5-vm.js";
+import { bootTestWiki, wikiSkip, skipNote } from "./test-wiki.js";
 import { exportCarrierFile } from "../src/meme-write.js";
 import { makeTw5Deserializer } from "../src/action-handler.js";
-import LARES_MEMETIC_WIKITEXT_PLUGIN from "../plugins/lares-memetic-wikitext.json" with { type: "json" };
-import { TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME } from "../src/generated-tw5-version.js";
 
-const CORE_PATH = path.join(TW5_CORE_DIR, TW5_CORE_SCRIPT_FILENAME);
-/**
- * The vendored TW5 core is a GITIGNORED BUILD ARTIFACT, so a fresh clone — and CI's `test` job, which runs
- * `pnpm -r test` with no build step — sees it absent. An anonymous `skipIf` there drops this suite at exit 0,
- * indistinguishable from a green run. The skip now NAMES itself and its cure in the reporter line, following
- * `lararium-node/tests/blob-sovereignty.test.ts:35-44`.
- */
-const coreBlobSkip = existsSync(CORE_PATH)
-  ? false
-  : `TW5 core blob absent at ${CORE_PATH} — run: pnpm --filter @lararium/tw5 build:tw5-vendor`;
 const URI = "lar:///ha.ka.ba/lares/api/native/pic";
 const RAW = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0xff, 0x00, 0xfe]);
 const B64 = RAW.toString("base64");
 
-describe.skipIf(coreBlobSkip)(
-  `a binary carrier round-trips through its native filetype${coreBlobSkip ? ` [SKIPPED: ${coreBlobSkip}]` : ""}`,
+describe.skipIf(wikiSkip)(
+  `a binary carrier round-trips through its native filetype${skipNote}`,
 () => {
   let engine: TW5Engine;
 
   beforeAll(async () => {
-    engine = new TW5Engine();
-    const coreBlob = new Uint8Array(readFileSync(CORE_PATH));
-    await engine.boot(coreBlob, [LARES_MEMETIC_WIKITEXT_PLUGIN as unknown as Record<string, unknown>]);
+    engine = await bootTestWiki();
     engine.setTiddler({ title: URI, type: "image/png", text: B64 });
   }, 60_000);
 
