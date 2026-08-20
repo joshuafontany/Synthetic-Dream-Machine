@@ -47,7 +47,17 @@ The `#has-cap-stack` reads ''entity-component-system'' (ECS) and stays purely de
 #has-cap-stack = (VesselId, Set<CapModule>)   — flat, edgeless, dependency-blind
 ```
 
-This declaration answers //what a vessel IS// — a full node holds `{lararium-core, daemon, mesh-palace, read-face, …}`; a Herm holds `{substrate, daemon, mesh-palace, read-face}` and nothing more. ECS supplies the ''inventory vocabulary'' (entity = vessel · component = cap · system = behavior), never the boot engine. The stack sits inert until a root wires it.
+This declaration answers //what a vessel IS//, and it answers it in ''caps, never types''. Measured at a live boot, a vessel's stack composes in three groups:
+
+| group | caps | a vessel holds it when |
+|---|---|---|
+| ''BASE'' | substrate · daemon · meshpalace · carriage · who-face | always — the course every vessel stands on |
+| ''LIFT'' | wikislot · wiki · pool · mount | a ''FACE'' stands |
+| ''CROSSROADS'' | read-face · bulb | an ''HTTP floor'' stands |
+
+BASE + LIFT composes a Lararium; BASE + CROSSROADS composes a Herm. The groups follow what a vessel ''HOLDS'' — a face, an http floor — never a kind-flag it was labelled with, so CROSSROADS belongs to whatever vessel serves an http floor rather than to the Herm as a kind: a hearth's opener hands it no server, and a browser could hold no such thing at all.
+
+ECS supplies the ''inventory vocabulary'' (entity = vessel · component = cap · system = behavior), never the boot engine. The stack sits inert until a root wires it, and the order is DERIVED from what each cap declares — a list restating that order is a second authority with nothing under it.
 
 <<~/ahu >>
 
@@ -65,10 +75,13 @@ The ''composition-root'' (`composeVessel`) reads the flat stack and ''topologica
 <<~ confidence Synthesis-Canon 15/20 >> The refusal carries the integrity: a vessel that cannot wire its declared stack ''does not start half-built''. The composer surfaces the gap (which cap requires which absent dep, or the cycle path) and stops — the build-or-fail discipline, not a degraded run.
 
 ```text
-declare:  stack = [substrate, daemon(req: substrate), mesh-palace(req: daemon), read-face(req: mesh-palace)]
+declare:  stack = [substrate, daemon(req: substrate), meshpalace(req: substrate),
+                   carriage(req: meshpalace), read-face(req: substrate, meshpalace)]
 wire:     composeVessel(stack) → topo-order → build each w/ POLA resolver → ComposedVessel{ get, order, dispose }
-refuse:   daemon present, substrate ABSENT → throw "[compose] vessel refuses to boot: daemon requires substrate"
+refuse:   read-face present, meshpalace ABSENT → throw "[compose] vessel refuses to boot: cap \"read-face\" requires \"meshpalace\""
 ```
+
+''The carriage pair is indivisible by structure.'' `carriage` requires `meshpalace`, so a stack naming the second without the first refuses to boot; `carriageStack` names the pair once on the mesh floor and a hearth, a crossroads and a browser leaf all compose it, differing only in the mesh standing each hands in. A crossroads composes it ''unconditionally'' — its read-face requires the map it projects, so a vessel that has met nobody still stands its map and serves an empty one.
 
 <<~/ahu >>
 
@@ -134,6 +147,6 @@ The keel invents nothing structural; four well-worn patterns each carry a face o
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ॐ ँ:f687db83c4603199
+<<^ code:"&#x0003;" >>ॐ ँ:ebbd806f020f047e
 
 <<^ code:"&#x0004;" -> ? >>

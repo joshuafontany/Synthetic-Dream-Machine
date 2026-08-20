@@ -99,9 +99,18 @@ composition and never to the meme.
 
 <<~ ahu #oracle-planes >>
 
-!! Three Oracle Planes — Three Authorities
+!! Four Homes — Three Registries and the Seed
 
-An oracle (a bag-URI → doc-URL pointer) resolves from the plane that owns it; no plane projects into another (one home per oracle, zero drift surface):
+An oracle (a bag-URI → doc-URL pointer) resolves from the home that owns it; no home projects into another (one home per oracle, zero drift surface). Three are ''registries'' a running vessel reads; the fourth is the ''cold-start seed'' that carries a vessel's own planes before any registry mounts:
+
+| Home | Answers | Who may mount |
+|---|---|---|
+| ''bootstrap'' | a vessel's own planes before a registry stands | this vessel, local-first |
+| ''`@oracle`'' | the SYSTEM island — engine blobs, system bag→doc, genesis-cid | every vessel |
+| ''`@catalog`'' | the operator's PRIVATE bag oracles, under OCAP grants | the operator's grant graph |
+| ''`@crossroads`'' | PUBLIC + infrastructure (the dreamnet layer) | a stranger, no grant |
+
+The three registries carry their authority classes below:
 
 | Plane | Oracle home | Holds | Authority class |
 |---|---|---|---|
@@ -116,6 +125,12 @@ An oracle (a bag-URI → doc-URL pointer) resolves from the plane that owns it; 
 Islands resolve each slot from its plane: invariants + system bags from the `@oracle` doc they already hold, user library bags from `@catalog`, public bags (future) from `@crossroads`. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies; the ''RECONCILE'' rite, engine-watch EW-6), never the catalog composition class.
 
 ''Invariant mint law (operator-gated, 2026-06-10):'' minting a protocol invariant rides the ''most-restricted grant — operator(admin), timed''. Only the node home (the base @lararium node, the genesis office) mints; the keel only READS the oracle, and wild vessels receive the invariant plane by federating the ''@oracle'' runtime-island doc — absent reads //not-yet-federated//, never mint-it-yourself. Mint-if-absent self-heals at the node's genesis load (boot = first reconcile); two node homes sharing one @oracle doc settle a concurrent mint by LWW: write, re-read, ''adopt the winner''. Grant-proof enforcement arrives with keyhive; placement enforces the gate today. Content arrives by its own arc; the empty doc stands the structure.
+
+''REGISTERED-WHERE-READ, the matched pair.'' A plane resolves when one home ''registers'' its pointer and the reader asks ''that same'' home. A mismatch reads as a missing document rather than as a misplaced question, which is the failure that hides: `seedPersonaDoc` writes a PersonaGroup plane's self-pointer into the plane itself and into NO registry, so a reader asking any home finds nothing. A ''PersonaGroup plane is a user bag and resolves from `@catalog`'' — reaching for it on the system floor asks the wrong home a question it was never given to answer — and the boot bridges seed → registry so the pair matches.
+
+''What the bootstrap carries splits PLACE from FACE.'' A founding writes `@daemon` alone for a PLACE; a FACE adds `@identities`, `@circles`, `@sessions`, the PersonaGroup plane and its sentinel, in one breath, and the boot refuses a partial set. So a faceless crossroads carries `@daemon` and nothing else, and every face-scoped verb on that floor answers with the act that lifts it rather than with a registry fault.
+
+<<~ confidence Canon 17/20 >> ''`@circles` is a FACE plane that registers on `@oracle`, and that pair is matched.'' Measured on live vessels 2026-08-19: a hearth's own boot writes the `@circles` pointer into the `@oracle` island doc, the follow verbs read it back through the same home, and a full add/list/remove round-trip lands. Its FACE-shaped lifecycle does not move its home — where a pointer is written and where it is read is the only question that decides resolution, and here both answer `@oracle`. `@daemon` is a SYSTEM plane on `@oracle` by the same proof: it stands alone on a faceless crossroads and its realm verbs write and read back there.
 
 ''Content face ↔ read face (one `@oracle`, never two boards).'' This recipe/invariant plane names the ''content face'' of `@oracle`; its governed ''read face'' — who signs the public-read projection, at what scale, and how it stays un-capturable — refines forward at <<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>. Same `@oracle` seen two ways.
 
@@ -229,6 +244,6 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:9024844f21926a4d
+<<^ code:"&#x0003;" >>:fb4dd31d35257904
 
 <<^ code:"&#x0004;" -> ? >>

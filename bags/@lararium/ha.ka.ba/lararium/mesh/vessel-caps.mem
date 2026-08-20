@@ -137,6 +137,10 @@ The section above reads the Herm as a ''standing'' — the cap-composition a cro
 
 ''The floor reads HARDENED, never degraded.'' A vessel that cannot open its archive holds no key to misuse, and the rhyme is Android's Direct Boot (a device before first unlock runs a real system with the credential-encrypted store sealed) — forensics names the same split BFU vs AFU. So the floor is where a vessel is SAFEST, and the hearth fire is what it trades that safety for.
 
+''MAY-HOLD-A-FACE ⊥ HOLDS-ONE-NOW.'' Two facts lift a vessel and they answer different questions. `standAs(asked, archiveOpens)` keeps the ''ARCHIVE'' question ALONE — what this vessel can OPEN right now. Whether a ''FACE'' stands — whether an operator landed a PersonaGroup here — is read separately, because folding it into `standAs` would make a faceless place class-`herm`, where `personaSlotCeiling("herm") === 0` bars the very face that lifts it. A place founded with no face yet holds a crossroads; composing a hearth over it reaches for a face during boot and takes its own standing with it.
+
+''`--recipe herm` DECLINES the lift'' — a public crossroads an operator means to keep faceless — rather than selecting a different kind of thing. Nothing is ever lowered: a vessel that cannot open simply never rose. The word ''recipe'' belongs to the pinned wiki's composition; what the flag carries is a STANDING a vessel asks to stand as (operator ruling).
+
 ''SEATED ⊥ RAISED.'' `personaSlotCeiling("herm") === 0` bars a SEATED persona root — no human's key rests at a crossroads to steal. A ''raise'' seats nothing: a recognised operator may carry caps onto a Herm, and those caps ride the recogniser's OWN keys, so the Herm always falls back to the floor when the raise stops standing (`raiseStands` reads the raise against the Nexus's own LEASE epoch — `boundEpoch >= effective`, the same comparison every device delegation already makes, and never a clock). The two words answer different questions — //what rests here// and //what may act here// — and a design that fuses them puts a key at a crossroads.
 
 <<~/ahu >>
@@ -193,6 +197,6 @@ What stays to ''write'' is narrow and named — the cap //vocabulary// itself (`
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:67e7257c22382ae4
+<<^ code:"&#x0003;" >>:926dfc2312e8aa2c
 
 <<^ code:"&#x0004;" -> ? >>
