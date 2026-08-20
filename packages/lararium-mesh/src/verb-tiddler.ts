@@ -129,7 +129,7 @@ export interface Verb {
   /**
    * Generic target list. Each string is interpreted by the handler:
    *   - tiddler URI:   "lar:///ha.ka.ba/..."
-   *   - file path:     "/abs/path/to/file.md" or "relative/path"
+   *   - file path:     "/abs/path/to/file.mem" or "relative/path"
    *   - internet URI:  "https://..."
    *   - any other id the handler understands
    * Empty list = no targets (args-only verb).

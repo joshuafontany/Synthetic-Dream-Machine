@@ -1,5 +1,5 @@
 /**
- * `lares normalize <file.md ...> [--check]`
+ * `lares normalize <file.mem ...> [--check]`
  *
  * The normalize gesture — canonicalize a meme carrier's framing so the
  * round-trip lens laws hold (meme-corpus-roundtrip: single-closer · content-
@@ -8,8 +8,9 @@
  * run this before committing a new carrier — the gate stays strict, the
  * authoring stays graceful.
  *
- * Currently homes a carrier's iam-declared `namespace` into its SOH opener as
- * literal glyphs (the class a hand-authored carrier most often trips). The
+ * Two classes ride it. A carrier's iam-declared `namespace` homes into its SOH opener as literal
+ * glyphs — the class a hand-authored carrier most often trips. A declaration naming the grammar's
+ * address and not its name takes the current one, from the authority beside the type constant. The
  * transform is pure + idempotent (`@lararium/tw5/meme-normalize`).
  *
  *   --check   report carriers that WOULD change; write nothing. Exit 1 if any
@@ -32,7 +33,7 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
   if (typeof args.options["check"] === "string") files.push(args.options["check"]);
 
   if (files.length === 0) {
-    console.error("usage: lares normalize <file.md ...> [--check]");
+    console.error("usage: lares normalize <file.mem ...> [--check]");
     console.error("  canonicalize a meme carrier's framing (embeds the iam-declared namespace into the SOH).");
     console.error("  --check   report carriers that would change; write nothing (exit 1 if any) — for CI/pre-commit.");
     return 2;

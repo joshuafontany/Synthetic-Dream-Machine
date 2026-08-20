@@ -149,7 +149,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
 
     // The disk grant lives HERE — the operator gesture reads the carriers and
     // sends content WITH the verb (islands hold no fetch capability). A local
-    // .md file or a directory of .md memes packs into args.carriers.
+    // carrier file, or a directory of them, packs into args.carriers.
     try {
       const st = statSync(sourceUri);
       const isDir = st.isDirectory();
