@@ -84,6 +84,22 @@ export function normalizeMemeSource(src: string): NormalizeResult {
   const flags: string[] = [];
   let text = src;
 
+  // ── 0. The declaration names the grammar, then the address ───────────────
+  //
+  // A carrier opening with the address alone parses, renders back to something else, and reads as
+  // content drift in a round-trip witness — three library indexes arrived that way from two writers
+  // that each spelled the line by hand. The one authority lives beside the type constant; a carrier
+  // holding a shorter or older declaration takes it here, which is what a normalize gesture is for.
+  const decl = /^<<!DOCTYPE[^>\n]*>>/m.exec(text);
+  if (decl && decl[0] !== DECLARATION) {
+    text = text.slice(0, decl.index) + DECLARATION + text.slice(decl.index + decl[0].length);
+    notes.push("declaration: took the grammar's name before its address");
+    flags.push("declaration");
+  }
+  // ABSENCE RAISES NOTHING HERE. This gesture repairs what a carrier wrote; whether a `.mem` on disk
+  // must carry a declaration at all is the doctype witness's question, and normalize also runs over
+  // fragments and authoring drafts that legitimately carry no head.
+
   // ── 1. SOH opener (namespace embed + spacing) ────────────────────────────
   const nsRaw = iamNamespace(text);
   const want = nsRaw === null ? "" : decodeEntities(nsRaw).trim();
