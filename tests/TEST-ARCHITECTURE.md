@@ -81,6 +81,70 @@ composition, and one live-safe `status` read.
 
 ---
 
+## Reading a live vessel — the instrument laws
+
+Every law here was paid for by a loop that measured the VECTOR and reported the CODE. A red these
+produce is indistinguishable from a real fault, which is what makes them expensive: the suite answers
+confidently and answers wrong. Collide the instrument before believing what it says.
+
+**`lares vessel stand` DETACHES.** The launcher prints a status line and exits while the vessel it
+started keeps running and writes `<root>/data/vessel/wake-serve.log`. A harness watching the
+launcher's pipe sees a vessel that reached `live` as one that printed nothing — the floor reported
+down while it is up. *Read the vessel's own log, never the launcher's stdout.*
+
+**That log APPENDS.** Re-standing into an existing log means the previous boot's `phase → live`
+matches instantly for a vessel that never came back. The vector then reports a hearth that stood when
+nothing did, and reaches for a socket no process holds. *Clear the log before every stand.*
+
+**A zero presenter key is refused on CAPABILITY, before your question is reached.** `0x000…` names
+nobody, and nobody is denied by the cap gate long before the thing under test runs. A vector holding a
+zero key measures the gate and reports whatever it meant to ask. *Present the vessel's own did —
+`fleetPeerDid()` under the test's `LAR_ROOT`.*
+
+**Never fail-fast on a bare `/Error:/`.** A healthy keyhive wasm boot prints
+`Error: Some(ReceiveCgkaOpError(UnknownInvitePrekey…))` on its way to `live`. Matching it cuts the
+watch short and reports a vessel that stood as one that died. *Match faults this house raises —
+`boot fault`, `FATAL`, `already in use`, `TypeError:` — not the word "Error".*
+
+**An arg-shape check that fires BEFORE the resolve makes a proof vacuous.** `realm-clock` validates
+`realm` as 64-hex and only then calls `resolveStore()`. Driving it with a malformed realm returns a
+clean, legible refusal that proves the plane resolves — and proves nothing at all, because the plane
+was never reached. The same shape hides in every verb that validates before it reaches. *Assert the
+code under test RAN: drive the verb with arguments good enough to reach past every gate in front of
+it, and prefer a WRITE round-trip, which cannot pass by absence.*
+
+**A fixed sleep is not a wait.** A vessel flushes its stores and its repo on the way down, so how long
+it holds its listener depends on what it wrote, not on a constant. Pausing a fixed interval and
+re-standing races that flush: the re-stand binds a port the dying vessel still holds, dies with
+"already in use", and the vector reports the act under test broken when what broke was the wait.
+*Poll for the condition — the port free, the socket present — never a duration.*
+
+**Name a process by the port it holds.** `pkill -f <pattern>` matches its own shell and kills the
+harness with the vessel. *`ss -ltnp | grep ':PORT ' | grep -oP 'pid=\K[0-9]+'`.*
+
+**UDS paths cap at ~107 bytes.** A root deep enough to push `<root>/data/vessel/lares.sock` past it
+fails `connect` with `EINVAL`, which reads exactly like a daemon that never opened its door. *Stand
+test vessels at a short root.*
+
+### Red vectors
+
+**This repo holds no standing red.** The working tree carries no `test.fails` and no `test.todo`; the
+one `test.skip` is a deferred scouting question, not a known defect. That is deliberate and it follows
+from *Delete fearlessly* below: a suite asserts what stands, and a defect worth keeping is worth an
+issue, not a permanently amber bar nobody reads.
+
+The exception the house does allow is a **contract held red on purpose while it is being built** — the
+herm-floor five were written that way, failing with the next site's name in the message until the floor
+stood. `test.fails` is the tool for that window, and its behaviour here is collided, not assumed: a
+failing body reports `1 expected fail` and the suite stays green, while a body that PASSES fails the
+suite with `Expect test to fail`. That inversion is the whole value — the vector goes red the moment
+the defect is fixed, so a red contract cannot be silently left behind. `test.todo` registers a name and
+runs nothing.
+
+*When such a window closes, the vectors become ordinary tests and the header stops calling itself red.*
+
+---
+
 ## Principles (YIN)
 
 1. **Co-locate.** A test lives with the package it tests. No orphan test tree.
