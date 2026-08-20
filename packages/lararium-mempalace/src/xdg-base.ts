@@ -15,9 +15,11 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 
 /**
- * $XDG_DATA_HOME/lares — the persistent-store home (the sensoriums + the vessel substrate). Honors
- * `$XDG_DATA_HOME` (unset → the freedesktop default `~/.local/share`), and roots under `LAR_ROOT/data`
- * for ISOLATED instances (the test harness / staged pairs).
+ * $XDG_DATA_HOME/lares — WHAT A LAR CARRIES: the sovereign identity, the Nexus seal, the repo registry,
+ * and the vessel substrate every rite reforges beneath them. What abides — the acquired shelf and the
+ * sensoriums — stands in {@link larariumDataHome} instead. Honors `$XDG_DATA_HOME` (unset → the
+ * freedesktop default `~/.local/share`), and roots under `LAR_ROOT/data` for ISOLATED instances (the
+ * test harness / staged pairs).
  */
 export function larDataHome(): string {
   const root = process.env["LAR_ROOT"];

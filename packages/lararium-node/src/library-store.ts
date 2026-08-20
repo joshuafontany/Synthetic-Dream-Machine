@@ -4,11 +4,11 @@
  * The pure half (the layout law, the reference grammar, the index) lives in `@lararium/mesh`'s library-tier.
  * This is the disk: where the tier stands, how a body enters it, and what a verify actually reads.
  *
- * ── IT HOMES OUTSIDE THE WIPE ZONE, AND THAT IS THE WHOLE POINT ──────────────────────────────────
- * `larCasDir()` resolves under `<data>/vessel`, which `reset` pares — licensed by its own comment, on the
- * premise that its blobs "rebuild from the bags/ carriers on each seed". That premise holds for DERIVED
- * blobs and fails completely for acquired ones: a book regenerates from nothing. So the library homes beside
- * `identity` and the Nexus seal under the state home, where the substrate verbs do not reach.
+ * ── IT HOMES IN THE SHRINE, AND THAT IS THE WHOLE POINT ──────────────────────────────────────────
+ * The runtime CAS under `<data>/vessel` is licensed for the wipe by one premise: its blobs rebuild from the
+ * bags carriers on each seed. That premise holds for DERIVED blobs and fails completely for acquired ones —
+ * a book regenerates from nothing. So the shelf stands in `<abide>`, a house no wipe names, rather than one
+ * directory aside from a house every rite pares.
  *
  * ── ACQUIRING MOVES, IT DOES NOT COPY (by default) ───────────────────────────────────────────────
  * The point of the act is to get a body OUT of a tracked tree. A copy leaves the original exactly where it

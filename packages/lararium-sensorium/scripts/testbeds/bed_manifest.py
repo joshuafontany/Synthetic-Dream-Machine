@@ -137,16 +137,22 @@ _LIBRARY_PREFIX = "library:"
 
 
 def _library_home() -> str:
-    """The ACQUIRED tier's home — `LAR_LIBRARY`, else `<XDG_STATE_HOME>/lares/library`.
+    """The ACQUIRED tier's home — `LAR_LIBRARY`, else `<abide>/library`.
 
-    It mirrors the TS resolver exactly (packages/lararium-node/src/library-store.ts). The tier sits under the
-    STATE home rather than the data home because `reset` pares `<data>/vessel`, and an acquired body — a book
-    nothing can regenerate — must survive every substrate verb."""
+    It mirrors the TS resolver exactly (packages/lararium-node/src/library-store.ts, `larLibraryHome`), so a
+    `library:<collection>` reference resolves to the SAME directory whichever tongue reads it; a second
+    spelling would point a flow at a shelf the CLI never fills. The tier stands in the SHRINE
+    (`LAR_ROOT/abide`, else `$XDG_DATA_HOME/lararium`) because an acquired body — a book nothing can
+    regenerate — must outlive every rite, and a house no wipe names carries that without a list."""
     override = os.environ.get("LAR_LIBRARY")
     if override:
         return override
-    state = os.environ.get("XDG_STATE_HOME") or os.path.join(os.path.expanduser("~"), ".local", "state")
-    return os.path.join(state, "lares", "library")
+    lar_root = os.environ.get("LAR_ROOT")
+    if lar_root:
+        return os.path.join(lar_root, "abide", "library")
+    xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
+    base = xdg or os.path.join(os.path.expanduser("~"), ".local", "share")
+    return os.path.join(base, "lararium", "library")
 
 
 def resolve_source_root(src: str) -> str:

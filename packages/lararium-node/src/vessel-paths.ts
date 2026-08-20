@@ -21,7 +21,7 @@
  * The SENSORIUM consolidation (SHEAF-TRUE): content ← the contentpalace, structure ← the structurepalace,
  * form ← the formpalace, ALL THREE co-located under `<abide>/sensoriums/memory/{content,structure,form}`
  * so the filetree IS the composition (sensorium.ts). The lararium OWNS its content plane: the sovereign
- * contentpalace inherits mempalace's exact base schema, holds content internally under the XDG data dir,
+ * contentpalace inherits mempalace's exact base schema, holds content internally under the abiding home,
  * and adopting a user's mempalace history runs as a deliberate one-way import Act (`guest-import.ts`),
  * never a runtime binding. bands + coupling are BASE caps — they live in the manifest, never as dirs.
  *
@@ -38,17 +38,18 @@
  * so isolation holds and the UDS socket path always agrees. Both the CLI (local-connector) and the
  * node daemon (uds-channel) resolve through HERE.
  *
- * ── ONE HOME TO KEEP, ONE TO DISCARD ────────────────────────────────────────────────────────────
- * The split answers a single question: CAN THIS BE RE-MADE? It once ran the other way — the state home
- * carried the identity, the seal and 18M of acquired books while the data home carried the one store that
- * rebuilds from `bags/` — so neither home could be described in a sentence, and the rite had to WARN an
- * operator away from `rm -rf` on a directory that looked disposable and was not.
+ * ── THREE HOMES, ONE QUESTION ───────────────────────────────────────────────────────────────────
+ * Every siting answers CAN THIS BE RE-MADE?, and the answer picks the house:
+ *   `<abide>`  nothing re-makes it — the acquired shelf, the sensoriums. Back it up.
+ *   `<data>`   the sovereign root no rite may touch, plus the substrate every rite reforges. Back it up.
+ *   `<state>`  watermarks alone; deletable at any moment, because each re-derives from what it watches.
  *
- * Now: ''back up `<data>`; `<state>` may be deleted at any moment.'' The wipe boundary still holds because
- * `reset` targets `<data>/vessel` — a SUBDIRECTORY, standing beside the precious things rather than over
- * them, so the substrate re-forges while the sovereign root, the seal and the shelf sit untouched.
+ * THE WIPE ZONE STANDS AS A HOUSE, NOT A LIST. `reset` pares `<data>/vessel` and `<state>/projection`;
+ * `<abide>` shares no prefix with either, so the tier a wipe must never end survives by its ADDRESS.
+ * A tier kept safe by sitting one subdirectory aside stays safe only until somebody widens the wipe by a
+ * path segment; a tier standing in another house leaves no edge to widen.
  *
- * A rule that fits in one breath needs no warning label. The danger did not get documented; it left.
+ * A rule that fits in one breath needs no warning label.
  */
 
 import { existsSync, readdirSync } from "node:fs";
@@ -345,12 +346,12 @@ export function larDataDir(): string {
 }
 
 /** Vessel identity dir — the sovereign keypair + the veiled-Handle anchors, at
- *  `<data>/identity`. Sits in the XDG data home BESIDE (never inside) the wiped
- *  `<data>/vessel`, so every substrate verb (`reset`/`regenesis`/`rebuild`) reforges the
- *  CRDT store while the sovereign root survives untouched — the "share substrate, not
- *  sovereignty" law made a filesystem boundary. `reset` removes only `<state>/projection`
- *  under this same state home, so identity here stays out of the wipe zone. The ONE
- *  identity resolver — node-vessel-identity resolves any prior location onto it. */
+ *  `<data>/identity`. It sits BESIDE (never inside) the wiped `<data>/vessel`, so every
+ *  substrate verb (`reset`/`regenesis`/`rebuild`) reforges the CRDT store while the
+ *  sovereign root survives untouched — the "share substrate, not sovereignty" law made a
+ *  filesystem boundary. The wipe-list names `<data>/vessel` and `<state>/projection` and
+ *  nothing else, so identity here stands outside it. The ONE identity resolver —
+ *  node-vessel-identity resolves any prior location onto it. */
 export function larIdentityDir(): string {
   return join(larDataHome(), "identity");
 }
@@ -364,7 +365,7 @@ export function larIdentityDir(): string {
  * tree's home — which on a development install sits INSIDE the repository, so a founding seal could land
  * in a git history nobody meant to write it into.
  *
- * So it homes beside `identity`, per-operator, under the XDG state home: outside the corpus, outside the
+ * So it homes beside `identity`, per-operator, under the XDG data home: outside the corpus, outside the
  * repo, and outside every substrate wipe (`reset`/`regenesis` reforge the CRDT store; the seal and the
  * sovereign root both survive). A clone of the corpus therefore carries NO Nexus — which reads correct,
  * because a Nexus belongs to the operators who founded it, never to whoever copied the code.

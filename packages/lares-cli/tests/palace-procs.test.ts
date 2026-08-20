@@ -141,7 +141,7 @@ describe("isUnderPath", () => {
 describe("procInPalaceScope — one island per door", () => {
   // The two islands the ruling separates: the guest comparator and the sovereign memory sensorium.
   const GUEST = "/home/joshu/.mempalace/palace";
-  const MEMORY = "/home/joshu/.local/share/lares/sensoriums/memory";
+  const MEMORY = "/home/joshu/.local/share/lararium/sensoriums/memory";
 
   const holder = (serves: string): PalaceProc => ({
     pid: 1, ppid: 1, kind: "write-daemon", serves, uptimeSec: 1, spawnerCmd: "x",

@@ -6,9 +6,10 @@
  * author here and no parse∘render fixed point, so it sits on the seed surface by accident of arrival. Left
  * there it enters git history, and a shelf that grows with every book grows the history with it.
  *
- * The tier stands at `<data>/library` (or `LAR_LIBRARY`) — OUTSIDE the wipe zone, because `reset` pares
- * `<data>/vessel` on the documented premise that its blobs rebuild from the bags carriers. That premise holds
- * for derived blobs and fails completely for acquired ones.
+ * The tier stands at `<abide>/library` (or `LAR_LIBRARY`) — in the SHRINE, the house that abides while a
+ * rite reforges the spirit's substrate. `reset` pares `<data>/vessel` on the premise that its blobs rebuild
+ * from the bags carriers; that premise holds for derived blobs and fails completely for acquired ones, so
+ * the shelf stands where no wipe reaches rather than one directory aside from one that does.
  *
  *     <library>/<collection>/<cid>/<the real filename>
  *     <library>/<collection>/<cid>/meta.json
@@ -50,7 +51,7 @@ function usage(): number {
   console.error("  index <collection> --out <path> write the tracked index — the part that travels");
   console.error("  path <collection>               resolve library:<collection> to a directory");
   console.error("");
-  console.error(`  the shelf stands at ${larLibraryHome()} — outside every tracked tree, outside the wipe zone.`);
+  console.error(`  the shelf stands at ${larLibraryHome()} — the shrine that abides, outside every tracked tree and every wipe.`);
   return 2;
 }
 

@@ -28,7 +28,7 @@
  * Storage law — identity lives OUTSIDE the wipe zone:
  *   the keypair + card persist to `<data>/identity` (`larIdentityDir`), in the XDG data
  *   home BESIDE — never inside — the wiped `<data>/vessel`. No `reset`/`regenesis`/`rebuild`
- *   can reach it (they rmSync the substrate store, not the state home). This realizes the
+ *   can reach it (they rmSync the substrate store, never the home that holds it). This realizes the
  *   law below (the key MUST NOT sit inside an Automerge doc storage path) and the
  *   keypair-wipe lesson: a destructive storage verb cannot reach identity.
  *

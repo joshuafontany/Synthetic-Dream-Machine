@@ -2,7 +2,7 @@
  * library-store — the ACQUIRED tier: readable, verifiable, and out of every tracked tree.
  *
  * These hold the properties the tier exists for:
- *   · it homes OUTSIDE the wipe zone — the whole reason it stands apart from the runtime CAS,
+ *   · it homes in the SHRINE, a house no wipe names — the whole reason it stands apart from the CAS,
  *   · a body keeps its REAL FILENAME inside a cid-named directory, so the store reads as a library,
  *   · acquiring MOVES by default, because leaving the original where it was cures nothing,
  *   · verify re-digests the BYTES and checks them against the DIRECTORY — never against the sidecar,
