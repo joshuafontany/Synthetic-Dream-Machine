@@ -121,7 +121,7 @@ import {
 } from "@lararium/tw5";   // residency stats — the lone read that stays main-resident; the shared residency/pool-wiring factory
 import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
 import { DaemonAuthGate }                           from "./daemon-auth-gate.js";
-import { composeLararium, composeHerm, meshPalaceCap, carriageCap, meshSelfSeed, type MeshSelf } from "./node-caps.js";
+import { composeLararium, composeHerm, carriageStack, type MeshSelf } from "./node-caps.js";
 
 /** The genesis dir when a caller sites none — resolves through the composable genesis cap
  *  (`LAR_GENESIS` → `~/.lares/config.json` → repo-relative `<corpus>/genesis`). Genesis stays
@@ -1692,21 +1692,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // A Lararium is a hearth that is ALSO a first-class mesh-node: when self-announce params are supplied,
   // it composes the carriage (meshpalace + carriage) ALONGSIDE the wiki-full core — it carries + navigates
   // the FLOW-map for its own routing (carry-without-reserve; no second read-face, no @oracle conflict).
-  const carriageCaps = opts.meshSelf ? [
-    meshPalaceCap({
-      repo: p.repo, ...(p.residency ? { residency: p.residency } : {}),
-      selfCoord: opts.meshSelf.coord,
-      seed: meshSelfSeed(opts.meshSelf),
-    }),
-    carriageCap({
-      peers: opts.meshSelf.peers, selfBearing: opts.meshSelf.bearing,
-      ...(opts.meshSelf.endpoint ? { selfEndpoint: opts.meshSelf.endpoint } : {}), // absent → a leaf
-      selfCoord: opts.meshSelf.coord,
-      ...(opts.meshSelf.maxFanout !== undefined ? { maxFanout: opts.meshSelf.maxFanout } : {}),
-      nodeSeedHex: Buffer.from(p.vesselSeed).toString("hex"),
-      onLog: (l) => console.log(`[lararium] ${l}`),
-    }),
-  ] : [];
+  const carriageCaps = opts.meshSelf ? carriageStack({
+    repo:        p.repo,
+    self:        opts.meshSelf,
+    nodeSeedHex: Buffer.from(p.vesselSeed).toString("hex"),
+    ...(p.residency ? { residency: p.residency } : {}),
+    onLog: (l) => console.log(`[lararium] ${l}`),
+  }) : [];
 
   // ── The WHO plane at the ANCHOR — resolve this island's own board; announce NOTHING ──
   // The identity twin of the browser leaf's whoFaceCap, the SAME cap composed by the SAME contract: the node

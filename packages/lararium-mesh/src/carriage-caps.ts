@@ -293,3 +293,53 @@ export function carriageCap(deps: {
     dispose: (c) => (c as CarriageComponent).stop(),
   };
 }
+
+// ── the CARRIAGE STACK — the pair every navigating vessel composes, named once ─────────────────────
+
+/**
+ * carriageStack — the two caps that let a vessel CARRY and NAVIGATE the mesh, as one ordered list.
+ *
+ * A vessel reaches the FLOW-map through exactly this pair: `meshpalace` holds the writable map,
+ * `carriage` pulls peers' public read-faces and re-ranks by l-space proximity. They are ONE unit —
+ * `carriageCap` requires `meshpalace`, so a stack declaring the second without the first REFUSES to
+ * boot. Naming the pair here keeps that indivisibility structural, and keeps a hearth, a Herm and a
+ * browser leaf composing the SAME carriage rather than three hand-copied config blocks that drift.
+ *
+ * `self` carries the vessel's mesh standing (`deriveMeshSelf` at an anchor, `deriveMeshLeaf` in a
+ * browser). PRESENT → the vessel self-announces its dial(s), seeds a routing slot, and re-ranks
+ * against its own coord; a self with no `endpoint` announces no dial and rides as a leaf that
+ * carries-in only. ABSENT → an empty FLOW-map and a carriage with no peers: the map still stands, so
+ * a cap that requires it (the Herm's public read-face) composes on a vessel that has met nobody yet.
+ *
+ * WHETHER to carry stays the door's own call — a vessel that never declares this pair routes nothing
+ * to the mesh, blind by structure. This names WHAT the pair is, never WHO takes it.
+ */
+export function carriageStack(deps: {
+  repo:            Repo;
+  residency?:      BagStowage;
+  self?:           MeshSelf;
+  nodeSeedHex:     string;
+  pullIntervalMs?: number;
+  onLog?:          (line: string) => void;
+}): readonly CapModule[] {
+  const self = deps.self;
+  return [
+    meshPalaceCap({
+      repo: deps.repo,
+      ...(deps.residency ? { residency: deps.residency } : {}),
+      ...(self ? { seed: meshSelfSeed(self), selfCoord: self.coord } : {}),
+    }),
+    carriageCap({
+      peers:       self?.peers ?? [],
+      nodeSeedHex: deps.nodeSeedHex,   // the node-id seeds this vessel's incommensurable cadence
+      ...(deps.pullIntervalMs !== undefined ? { pullIntervalMs: deps.pullIntervalMs } : {}),
+      ...(self ? {
+        ...(self.endpoint ? { selfEndpoint: self.endpoint } : {}), // absent → a leaf, not dial-able
+        selfCoord:   self.coord,
+        selfBearing: self.bearing,
+        ...(self.maxFanout !== undefined ? { maxFanout: self.maxFanout } : {}),
+      } : {}),
+      ...(deps.onLog ? { onLog: deps.onLog } : {}),
+    }),
+  ];
+}

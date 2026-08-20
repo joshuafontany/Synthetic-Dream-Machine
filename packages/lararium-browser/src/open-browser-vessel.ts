@@ -25,7 +25,7 @@ import {
   DeterministicFederationGate, identityShareDecision, type FederationGate, type IdentityRing,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, verbArgsFromPayload, bagStackFromRec, recipeUri, recipeHostFacets, type WikiActivationCap,
-  meshPalaceCap, carriageCap, meshSelfSeed, deriveMeshLeaf,
+  carriageStack, deriveMeshLeaf,
   materializeGenesisIsland,
   whoFaceCap, materializeSharedLarDoc, crossroadsDocUrl, registerCrossroadsInOracle,
   personaKelBoardDocUrl, personaKelChainForPrefix,
@@ -630,21 +630,14 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       meshLeaf.coordSeed, meshLeaf.peers,
       ...(meshLeaf.radius !== undefined ? [{ radius: meshLeaf.radius }] : []),
     );
-    return [
-      meshPalaceCap({
-        repo, residency,
-        selfCoord: leaf.coord,
-        seed: meshSelfSeed(leaf),   // [] for a leaf — carries-in, advertises no self-dial
-      }),
-      carriageCap({
-        peers: leaf.peers, selfBearing: leaf.bearing,
-        // no selfEndpoint — a leaf is not dial-able (the endpoint-absent leaf↔full tier)
-        selfCoord: leaf.coord,
-        ...(meshLeaf.maxFanout !== undefined ? { maxFanout: meshLeaf.maxFanout } : {}),
-        nodeSeedHex: vesselVerifyingKey,   // the per-vessel cadence seed (browser-safe hex string, no Buffer)
-        onLog: (l) => console.log(`[lararium-browser] ${l}`),
-      }),
-    ];
+    // The SAME pair a node hearth and a Herm compose — a leaf differs only in the standing it hands in.
+    // `deriveMeshLeaf` yields a self with NO endpoint, so the stack seeds no dial and announces nothing:
+    // this vessel carries-in and is never dial-able (the endpoint-absent leaf↔full tier).
+    return [...carriageStack({
+      repo, residency, self: leaf,
+      nodeSeedHex: vesselVerifyingKey,   // the per-vessel cadence seed (browser-safe hex string, no Buffer)
+      onLog: (l) => console.log(`[lararium-browser] ${l}`),
+    })];
   })() : [];
 
   // ── The WHO plane as a LEAF — RESOLVE the per-Nexus @crossroads board; announce NOTHING ──

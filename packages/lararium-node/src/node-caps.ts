@@ -3,9 +3,19 @@
  *
  * A vessel = a #has-cap-stack (the flat, dependency-blind set of cap-modules it HAS); `composeVessel`
  * reads the stack and topologically WIRES the live components, handing each a POLA-scoped resolver.
- * Vessel-kinds are different STACKS, never feature-flags — and the difference runs BASE-THEN-LIFT: the
- * Herm is the FLOOR every vessel stands on, and a Lararium is that floor with the hearth caps added. A
- * stack that never declares the wiki/pool caps routes nothing to them (blind by structure, not by flag).
+ * Vessel-kinds are different STACKS, never feature-flags, and the difference runs BASE-THEN-LIFT. The
+ * composed stacks each vessel actually stands, measured at a live boot:
+ *
+ *   BASE      substrate · daemon · meshpalace · carriage · who-face   — every vessel that carries
+ *   LIFT      wikislot · wiki · pool · mount                          — added when a FACE stands
+ *   CROSSROADS  read-face · bulb                                      — added when an httpServer stands
+ *
+ * BASE + LIFT = a Lararium. BASE + CROSSROADS = a Herm. The three groups compose by what a vessel HOLDS
+ * — a face, an http floor — never by a kind-flag it was labelled with. CROSSROADS belongs to the vessel
+ * that serves an http floor rather than to the Herm as a kind: a hearth composes no read-face because
+ * its opener hands it no server, and a browser leaf could hold no such thing at all.
+ *
+ * A stack that never declares the wiki/pool caps routes nothing to them (blind by structure, not flag).
  *
  * The ISOMORPHIC carriage machinery (meshpalace + carriage caps, MeshSelf, the routing helpers) now
  * lives DOWN on the mesh floor (`@lararium/mesh` carriage-caps) so a BROWSER vessel composes the very
@@ -13,12 +23,15 @@
  * `flowMapReadFaceCap` (the http disclosure wire) + the two node cap-stacks.
  *
  * Two node stacks ride here:
- *   - composeHerm — the FLOOR: substrate (the @oracle island + social plane) + the @daemon immune core
- *     + a writable @meshpalace FLOW-map + the read-face that serves it. The Lares Viales stack, and the
- *     course every other vessel stands on. NO wiki, NO pool.
- *   - composeLararium — the floor with the HEARTH CAPS added (wiki-slot, wiki, pool, mount), wired by
- *     `composeCoreVessel`. The @daemon rides BOTH: it is the immune core, present from founding, and its
- *     registerBags simply omits the user-wiki bags where no wiki stands — the decouple.
+ *   - composeHerm — BASE + CROSSROADS: substrate (the @oracle island + social plane), the @daemon immune
+ *     core, the carriage pair (a writable @meshpalace FLOW-map + the puller that fills it), the read-face
+ *     that serves that map, and — where a genesis stands to hand — the bulb. NO wiki, NO pool.
+ *   - composeLararium — BASE + LIFT, wired by `composeCoreVessel` (wiki-slot, wiki, pool, mount); its
+ *     opener composes the carriage pair alongside. The @daemon rides BOTH — the immune core, present
+ *     from founding — and its registerBags omits the user-wiki bags where no wiki stands: the decouple.
+ *
+ * The carriage pair rides one shared builder (`carriageStack`, mesh floor), so the hearth, the Herm and
+ * the browser leaf carry the SAME two caps and differ only in the mesh standing each hands in.
  *
  * Canon: lar:///ha.ka.ba/lararium/api/composable-keel · …/mesh/vessel-caps#lares-viales
  */
@@ -32,7 +45,7 @@ import {
   type BagStowage,
   // ── the lifted carriage machinery, now mesh-floor (re-exported below) ──
   CARRIAGE_CAP,
-  meshPalaceCap, carriageCap, meshSelfSeed, type MeshSelf, type MeshPalaceComponent,
+  meshPalaceCap, carriageCap, carriageStack, meshSelfSeed, type MeshSelf, type MeshPalaceComponent,
 } from "@lararium/mesh";
 import {
   composeCoreVessel, substrateCap, daemonCap, CORE_CAP,
@@ -47,7 +60,7 @@ import type { BulbArtifact } from "./bulb.js";
  * (open-node-vessel, main.ts, carriage-cap.test) keep resolving from `./node-caps.js` after the lift.
  */
 export {
-  meshPalaceCap, carriageCap, discoverPeers, dampedRadius, incommensurablePullMs,
+  meshPalaceCap, carriageCap, carriageStack, discoverPeers, dampedRadius, incommensurablePullMs,
   deriveMeshSelf, deriveMeshLeaf, meshSelfDial, meshSelfSeed,
   type MeshSelf, type MeshPalaceComponent, type CarriageComponent,
 } from "@lararium/mesh";
@@ -149,30 +162,25 @@ export interface ComposedHerm {
 }
 
 /**
- * composeHerm — the wiki-LESS wayfarer #has-cap-stack: [substrate, daemon, meshpalace, read-face].
+ * composeHerm — the wiki-LESS wayfarer #has-cap-stack, BASE + CROSSROADS:
+ * [substrate, daemon, meshpalace, carriage, read-face, (bulb), …extraCaps].
  * No wiki, no pool — blind to sovereign content by structure. The @daemon stays (the immune core);
- * its registerBags omits the absent user-wiki bags (the decouple proven by the daemon-without-wiki
- * finding). The read-face serves the @meshpalace FLOW-map a Herm carries.
+ * its registerBags omits the absent user-wiki bags (the decouple the daemon-without-wiki finding
+ * proved). The read-face serves the @meshpalace FLOW-map the carriage pair carries.
  */
 export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
   const vessel = await composeVessel([
     substrateCap(d.keel),
     daemonCap(d),
-    meshPalaceCap({
-      repo: d.repo,
+    // The carriage rides UNCONDITIONALLY here, self or no self: the read-face below REQUIRES the
+    // @meshpalace it projects, so a Herm that has met nobody still stands its map and serves an empty
+    // one. That is what a crossroads IS before anyone passes.
+    ...carriageStack({
+      repo:        d.repo,
+      nodeSeedHex: Buffer.from(d.signerSeed).toString("hex"),
       ...(d.residency ? { residency: d.residency } : {}),
-      ...(d.meshSelf ? { seed: meshSelfSeed(d.meshSelf), selfCoord: d.meshSelf.coord } : {}),
-    }),
-    carriageCap({
-      peers: d.meshSelf?.peers ?? [],
+      ...(d.meshSelf ? { self: d.meshSelf } : {}),
       ...(d.pullIntervalMs !== undefined ? { pullIntervalMs: d.pullIntervalMs } : {}),
-      nodeSeedHex: Buffer.from(d.signerSeed).toString("hex"),  // the node-id seeds its incommensurable cadence
-      ...(d.meshSelf ? {
-        ...(d.meshSelf.endpoint ? { selfEndpoint: d.meshSelf.endpoint } : {}), // absent → a leaf
-        selfCoord:    d.meshSelf.coord,
-        selfBearing:  d.meshSelf.bearing,
-        ...(d.meshSelf.maxFanout !== undefined ? { maxFanout: d.meshSelf.maxFanout } : {}),
-      } : {}),
       ...(d.onLog ? { onLog: d.onLog } : {}),
     }),
     flowMapReadFaceCap({
