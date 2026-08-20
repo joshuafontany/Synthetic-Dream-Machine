@@ -56,7 +56,7 @@
  * carries the same internal shape whatever its bag is called.
  *
  * What a bag id DOES reach is everything keyed by the bag itself: the composite's own layer lookups, the
- * `@oracle` registry entry, the admit payload's read of that entry, and the capability check — which
+ * `@catalog` registry entry, the admit payload's read of that entry, and the capability check — which
  * resolves the bag URL verbatim and hashes it to seed the Keyhive Document. So a plane's name must stay
  * ONE string across all of those; `register-bags` carries which string a given plane answers to.
  *

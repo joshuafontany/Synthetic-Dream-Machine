@@ -167,7 +167,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
 
       // The FOLLOW-GRAPH verbs — the SOURCE OF TRUTH over the sovereign @circles doc. "Adding to a circle IS
       // the follow"; circle-add/circle-remove write @circles.memberDids, circle-list reads it back. The daemon
-      // reaches this face's `@circles-<tag>` by ACCESS off the @oracle registry — access≠load, write-
+      // reaches this face's `@circles-<tag>` by ACCESS off the @catalog registry — access≠load, write-
       // then-sync. @circles rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator (so a follow
       // lands on ALL the operator's own devices) and the DeterministicFederationGate NEVER volunteers it to a
       // cross-operator (@circles is outside its federatable set). A follow writes ONLY @circles — no board shore
