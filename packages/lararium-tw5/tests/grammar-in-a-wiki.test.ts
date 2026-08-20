@@ -250,7 +250,21 @@ describe.skipIf(wikiSkip)(
       .split("\n").filter(Boolean);
     const iamOf = (t: string) => /```toml iam\n([\s\S]*?)\n```/.exec(t)?.[1] ?? null;
 
-    const drift: string[] = [];
+    // WHAT `guarantee 2` FORGIVES, AND WHAT IT DOES NOT.
+    //
+    // `meme-roundtrip` licenses the iam's FRAMING to normalize: key order, the `=` column, the blank
+    // lines around the fence. It licenses nothing about which keys stand or what they carry. So the
+    // comparison runs twice — once over the raw block, once over the block read as a key-value set —
+    // and the difference between those two counts sorts a rewrite from a loss.
+    const keyset = (block: string) => JSON.stringify(
+      block.split("\n").reduce<Record<string, string>>((acc, line) => {
+        const m = /^\s*([\w-]+)\s*=\s*(.*)$/.exec(line);
+        if (m) acc[m[1]!] = m[2]!.trim();
+        else if (line.trim()) acc[`~cont${Object.keys(acc).length}`] = line.trim();
+        return acc;
+      }, {}), Object.keys({}).sort());
+
+    const layout: string[] = [], content: string[] = [];
     for (const f of carriers) {
       const disk = readFileSync(path.join(REPO, f), "utf8");
       const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(disk)?.[1];
@@ -262,9 +276,13 @@ describe.skipIf(wikiSkip)(
       const rendered = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, title);
       if (rendered === null) continue;
       const a = iamOf(disk), b = iamOf(rendered);
-      if (a !== null && b !== null && a !== b) drift.push(f);
+      if (a === null || b === null || a === b) continue;
+      (keyset(a) === keyset(b) ? layout : content).push(f);
     }
     expect(carriers.length).toBeGreaterThan(500);
-    expect(drift, `${drift.length} carriers whose iam the projector would rewrite`).toEqual([]);
+    // Layout drift is a rewrite the operator sees once. CONTENT drift is a key or a value the
+    // projection would silently change, and no license covers it.
+    expect(content, `${content.length} carriers whose iam CONTENT the projector would change ` +
+      `(a further ${layout.length} differ in layout alone, which guarantee 2 licenses)`).toEqual([]);
   });
 });
