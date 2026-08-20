@@ -80,16 +80,20 @@ export function didKeyFromVerifyingKey(verifyingKeyHex: string): string {
 // Tiddler URI helpers — inlined to avoid @lararium/mesh import in CJS
 // ---------------------------------------------------------------------------
 
-const SOCIAL_HOST        = "ha.ka.ba";
-const IDENTITIES_BAG_URI = `lar:///${SOCIAL_HOST}/@identities`;
-const GROUPS_BAG_URI     = `lar:///${SOCIAL_HOST}/@circles`;
+// NAMESPACES, never bags. A title resolves verbatim inside its own document, so `@identities/<did>` and
+// `@circles/operators` spell the same in every face's planes and one internal shape serves them all. The
+// BAGS answering to them carry the face's tag — `@identities-<tag>`, `@circles-<tag>` — because a face's
+// relations travel with the FACE and a vessel-global bag would correlate the faces a multitude holds apart.
+const SOCIAL_HOST         = "ha.ka.ba";
+const IDENTITIES_NAMESPACE = `lar:///${SOCIAL_HOST}/@identities`;
+const CIRCLES_NAMESPACE    = `lar:///${SOCIAL_HOST}/@circles`;
 
 function identityTiddlerUri(did: string): string {
-  return `${IDENTITIES_BAG_URI}/${did}`;
+  return `${IDENTITIES_NAMESPACE}/${did}`;
 }
 
 function circleTiddlerUri(id: string): string {
-  return `${GROUPS_BAG_URI}/${id}`;
+  return `${CIRCLES_NAMESPACE}/${id}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -121,7 +125,7 @@ export function buildCeremonyTiddlers(
 
   const identityTiddler: CeremonyTiddler = {
     title:     identityTiddlerUri(did),
-    bag:       IDENTITIES_BAG_URI,
+    bag:       IDENTITIES_NAMESPACE,
     authority: "cold-boot-ceremony",
     fields: {
       did:          did,
@@ -135,7 +139,7 @@ export function buildCeremonyTiddlers(
 
   const groupTiddler: CeremonyTiddler = {
     title:     circleTiddlerUri("operators"),
-    bag:       GROUPS_BAG_URI,
+    bag:       CIRCLES_NAMESPACE,
     authority: "cold-boot-ceremony",
     fields: {
       id:               "operators",

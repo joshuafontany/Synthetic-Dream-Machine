@@ -12,7 +12,7 @@ manaoio       = 16
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony"
 register      = "Synthesis-Canon"
 retain        = true
-role          = "heleuma ka: void-start operator identity tiddler builder"
+role          = "heleuma ka: void-start device identity tiddler builder — titles in the @identities/@circles NAMESPACES, written into the founding face's own tag-derived planes"
 source-symbol = "*"
 status-date   = "2026-05-04"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/heleuma/ka"]
@@ -30,10 +30,12 @@ Void-start identity builder. Runs on first boot when `IdentitiesDoc` has no prin
 
 Given a hex-encoded 32-byte Ed25519 verifying key, derives `did:key` (multicodec `0xed01` + base58btc, UCAN/Keyhive aligned) and returns two tiddler records:
 
-* `IdentityTiddler` at `lar:///ha.ka.ba/bags/@identities/{did}` — operator principal, `kind = "operator"`, `verifyingKey` populated for Keyhive upgrade
-* `CircleTiddler` at `lar:///ha.ka.ba/bags/@circles/operators` — sole-member operators group, `capabilityPolicy = "group:operators"`
+* `IdentityTiddler` titled `@identities/{did}` — the per-vessel device leaf, `kind = "device"`, `verifyingKey` populated for Keyhive upgrade
+* `CircleTiddler` titled `@circles/operators` — sole-member operators group, `capabilityPolicy = "group:operators"`
 
-The device Ed25519 keypair is the identity root. GitHub / BlueSky auth enriches `displayName` only.
+''Those titles name NAMESPACES, never bags.'' A title resolves verbatim inside its own document, so both spell the same in every face's planes and one internal shape serves them all. The BAGS answering to them carry the face's tag — `@identities-<tag>`, `@circles-<tag>`, derived off the PersonaGroup's own doc id — because a face's relations travel with the FACE, and a vessel-global bag would seat one persona's records beside another's where anything reading it correlates the faces a multitude exists to hold apart.
+
+The device Ed25519 keypair roots the DEVICE; the operator identity rides the PersonaGroup root that delegates to it. GitHub / BlueSky auth enriches `displayName` only.
 
 Caller MUST check the identity tiddler does not already exist before writing (idempotent guard).
 
@@ -121,16 +123,20 @@ export function didKeyFromVerifyingKey(verifyingKeyHex: string): string {
 // Tiddler URI helpers — inlined to avoid @lararium/mesh import in CJS
 // ---------------------------------------------------------------------------
 
-const SOCIAL_HOST        = "ha.ka.ba";
-const IDENTITIES_BAG_URI = `lar:///${SOCIAL_HOST}/@identities`;
-const GROUPS_BAG_URI     = `lar:///${SOCIAL_HOST}/@circles`;
+// NAMESPACES, never bags. A title resolves verbatim inside its own document, so `@identities/<did>` and
+// `@circles/operators` spell the same in every face's planes and one internal shape serves them all. The
+// BAGS answering to them carry the face's tag — `@identities-<tag>`, `@circles-<tag>` — because a face's
+// relations travel with the FACE and a vessel-global bag would correlate the faces a multitude holds apart.
+const SOCIAL_HOST         = "ha.ka.ba";
+const IDENTITIES_NAMESPACE = `lar:///${SOCIAL_HOST}/@identities`;
+const CIRCLES_NAMESPACE    = `lar:///${SOCIAL_HOST}/@circles`;
 
 function identityTiddlerUri(did: string): string {
-  return `${IDENTITIES_BAG_URI}/${did}`;
+  return `${IDENTITIES_NAMESPACE}/${did}`;
 }
 
 function circleTiddlerUri(id: string): string {
-  return `${GROUPS_BAG_URI}/${id}`;
+  return `${CIRCLES_NAMESPACE}/${id}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -162,13 +168,13 @@ export function buildCeremonyTiddlers(
 
   const identityTiddler: CeremonyTiddler = {
     title:     identityTiddlerUri(did),
-    bag:       IDENTITIES_BAG_URI,
+    bag:       IDENTITIES_NAMESPACE,
     authority: "cold-boot-ceremony",
     fields: {
       did:          did,
       displayName:  name,
       createdAt:    now,
-      kind:         "operator",
+      kind:         "device",   // the per-vessel device leaf; the operator identity is the PersonaGroup root that delegates to it
       verifyingKey: verifyingKeyHex,
       readPolicy:   "private",
     },
@@ -176,7 +182,7 @@ export function buildCeremonyTiddlers(
 
   const groupTiddler: CeremonyTiddler = {
     title:     circleTiddlerUri("operators"),
-    bag:       GROUPS_BAG_URI,
+    bag:       CIRCLES_NAMESPACE,
     authority: "cold-boot-ceremony",
     fields: {
       id:               "operators",
@@ -201,6 +207,6 @@ export function buildCeremonyTiddlers(
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:77fb27ca4a164d50
+<<^ code:"&#x0003;" >>:95b1f53affdd0f44
 
 <<^ code:"&#x0004;" -> ? >>

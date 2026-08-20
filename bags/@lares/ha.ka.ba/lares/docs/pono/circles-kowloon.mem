@@ -7,7 +7,7 @@ file-path = "bags/@lares/ha.ka.ba/lares/docs/pono/circles-kowloon.mem"
 mana      = 16
 register  = "Synthesis-Canon"
 retain    = true
-role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for CirclesDoc"
+role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for the per-face CirclesDoc that answers to @circles-<tag>"
 type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/circles-kowloon"
 ```
@@ -118,14 +118,14 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 |---|---|
 | `type: "System"` | `kind: "System"` — auto-seeded at node boot |
 | `type: "Circle"` | `kind: "Circle"` — operator-created |
-| `actorId` | `bag: CIRCLES_DOC_URI`, authority of owning node |
+| `actorId` | `bag: @circles-<tag>` — the plane of the FACE that holds the circle, named off that PersonaGroup's own tag |
 | `members[]` (embedded snapshots) | `memberDids` (TW5 list of DIDs); snapshots live in IdentitiesDoc |
 | `to/canReply/canReact` on circle | `addressingScope` field on CircleTiddler |
 | `to/canReply/canReact` on content | tiddler fields on content tiddlers (planned) |
 | `signature` | `encryptedShareHint` + Keyhive capability chain (S7) |
-| Never-federate membership | Circle membership stays in CirclesDoc, never in oracle tiddlers |
-| System circles per user | Seeded by `seedCirclesDoc()` at first boot |
-| Group system circles | Seeded when a nexus circle is created (nexus:user, nexus:operator, etc.) |
+| Never-federate membership | Membership stays in the face's own `@circles-<tag>`, never in registry tiddlers |
+| System circles per user | Seeded by `seedCirclesDoc()` when a FACE is founded — one set per face, never one per machine |
+| Nexus authorization rings | NOT a circle. A nexus tier names who may act at a Nexus, never who a person reads — it answers to `@nexus` (design-only today; no code stands it) |
 
 <<~/ahu >>
 
@@ -133,23 +133,19 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 
 !! System Circles to Auto-Seed
 
-At `seedCirclesDoc()` time, write these system circle tiddlers:
+At `seedCirclesDoc()` time — once per FACE, into that face's own `@circles-<tag>` — write these system circle tiddlers:
 
 ```
-@circles/following       — people the operator actively reads
+@circles/following       — people this face actively reads
 @circles/all-following   — superset: followed nodes + circles
 @circles/circles         — tracks circle memberships
 @circles/blocked
 @circles/muted
 ```
 
-Nexus authorization circles (seeded by nexus admin at nexus boot):
-```
-@circles/nexus:anon
-@circles/nexus:user
-@circles/nexus:operator
-@circles/nexus:admin
-```
+''The titles keep the bare namespace; the BAG carries the tag.'' A title resolves verbatim inside its own document, so `@circles/following` spells the same in every face's plane and one internal shape serves them all. Which face a follow belongs to reads off the BAG — `@circles-<tag>` — and a vessel-global `@circles` would seat one persona's blocked list in the same document as another's follows, where anything reading it correlates the faces a multitude exists to hold apart.
+
+''Nexus authorization rings name no circle.'' A nexus tier says who may act at a Nexus, not who a person reads, so it answers to `@nexus` — one ring per Nexus rather than one per mask. Seeding `nexus:user` or `nexus:admin` into a face's circles plane would mint an authorization ring per face and file it under a follow graph. The rings stand as design today; no code seeds them.
 
 <<~/ahu >>
 
@@ -174,6 +170,6 @@ Nexus authorization circles (seeded by nexus admin at nexus boot):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:9004816a7a51deb0
+<<^ code:"&#x0003;" >>:01764203a99602c4
 
 <<^ code:"&#x0004;" -> ? >>
