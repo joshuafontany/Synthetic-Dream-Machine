@@ -131,8 +131,9 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
 
   await repo.flush();
 
-  // The founder's PersonaGroup ROOT signs the joinee's edge (the upgrade event). The root seed
-  // is founder-only (.lararium-identity); the joinee supplies ONLY its PUBLIC verifying key.
+  // The founder's PersonaGroup ROOT signs the joinee's edge (the upgrade event). The root seed is
+  // founder-only, held in the spirits' house at `<lares>/identity`; the joinee supplies ONLY its
+  // PUBLIC verifying key.
   if (!opts.joineeVerifyingKey) {
     throw new Error("[lares device-admit] --joinee-key <hex> required — the joining vessel's public verifying key.");
   }

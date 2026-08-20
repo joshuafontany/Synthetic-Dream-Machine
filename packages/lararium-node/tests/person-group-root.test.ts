@@ -1,11 +1,11 @@
 /**
  * persona-group-root.test.ts — PersonaGroup-root key custody (operator-root capability, Phase 0.2).
  *
- * Proves the custody helper the meshed founding consumes: a founder-only root key,
- * minted once and loaded idempotently, persisted into the wipe-safe `.lararium-identity/`
- * sibling, and — the load-bearing assertion — a DISTINCT capability from the per-vessel
- * device key (two capabilities in the #has-stack, never numbered planes). The seed
- * surfaces founder-only and throws when absent.
+ * Proves the custody helper the meshed founding consumes: a founder-only root key, minted once and
+ * loaded idempotently, persisted into `<lares>/identity` — a SIBLING of the substrate a rite reforges,
+ * never a child of it — and, the load-bearing assertion, a DISTINCT capability from the per-vessel
+ * device key (two capabilities in the #has-stack, never numbered planes). The seed surfaces
+ * founder-only and throws when absent.
  */
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
@@ -41,7 +41,7 @@ describe("PersonaGroup-root custody (operator-root capability — genesis Phase 
     rmSync(larRoot, { recursive: true, force: true });
   });
 
-  it("mints a fresh root into the wipe-safe sibling dir, NOT the .lararium wipe zone", async () => {
+  it("mints a fresh root into the identity dir — a sibling of the substrate, never inside it", async () => {
     const dataDir = freshDataDir();
     try {
       const root = await generateOrLoadPersonaGroupRoot(dataDir);
