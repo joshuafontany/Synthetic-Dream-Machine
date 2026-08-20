@@ -23,7 +23,7 @@ import { assembleVessel, mountWikiSlot, LARES_DOC_URI, composeVessel, type CapMo
 import { mountPrimaryWiki, type PrimaryMountPool, type BindingResolver } from "./vessel-steps.js";
 import { VerbTable } from "./verb-dispatcher.js";
 
-// ── core surface types (the recipe a platform supplies + the result it hands back) ───────────────
+// ── core surface types (what a platform supplies + the result it hands back) ─────────────────────
 
 /** The daemon VM surface the orchestrator drives (node + browser both satisfy it). */
 export interface VesselDaemonVm {
@@ -32,7 +32,7 @@ export interface VesselDaemonVm {
   resolveBinding: BindingResolver;
 }
 
-/** The active-wiki slot identity the recipe resolves (projected from the wiki's
+/** The active-wiki slot identity the opener resolves (projected from the wiki's
  *  slug via `recipeHostFacets` — the isomorphic core, one minter set host + island). */
 export interface VesselWikiSlot {
   activeWikiId:     string;
@@ -44,7 +44,7 @@ export interface VesselWikiSlot {
 }
 
 /**
- * VesselOrchestration — the full recipe a platform supplies. The mesh `keel` recipe
+ * VesselOrchestration — everything a platform supplies to the shared keel. The mesh `keel`
  * carries the substrate atoms (repo, catalog, bootstrap, waitHandle, loadGenesis,
  * tempStore, loadCorpora); the closures below carry the VM-focused + capability pieces.
  */
@@ -221,7 +221,7 @@ export async function composeCoreVessel<TPool extends PrimaryMountPool>(
     wikiSlotCap(o),
     daemonCap({
       // The full vessel ALWAYS resolves the slot first (wikislot is in the stack) → bridge the
-      // shared optional-slot daemon cap to this recipe's required-slot openDaemon.
+      // shared optional-slot daemon cap to this orchestration's required-slot openDaemon.
       openDaemon: (a) => o.openDaemon({ assembly: a.assembly, slot: a.slot! }),
       ...(o.wireVerbs   ? { wireVerbs:   o.wireVerbs   } : {}),
       ...(o.afterDaemon ? { afterDaemon: o.afterDaemon } : {}),

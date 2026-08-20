@@ -59,7 +59,7 @@ import { loadLaresConfig } from "./lares-config.js";
 // CLI / env config
 // ---------------------------------------------------------------------------
 
-function parseArgs(): { port: number; storageDir: string; genesisDir: string; wikiId: string; rootDir: string; catalogUrl: string | null; recipe: AskedStanding } {
+function parseArgs(): { port: number; storageDir: string; genesisDir: string; wikiId: string; rootDir: string; catalogUrl: string | null; askedStanding: AskedStanding } {
   const args = process.argv.slice(2);
   const get  = (flag: string, env: string, fallback: string) => {
     const i = args.indexOf(flag);
@@ -72,7 +72,9 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
   // <rootDir>/genesis. Genesis stays checked-in by default, so a no-config boot lands on the repo's
   // tracked seed exactly as before; an operator sites it under ~ via config.resources.genesis.
   const genesisDir = resolve(get("--genesis", "LAR_GENESIS", cfg.resources?.genesis ?? join(rootDir, "genesis")));
-  const recipe = (get("--recipe", "LAR_RECIPE", "lararium") === "herm" ? "herm" : "lararium") as AskedStanding;
+  // `--recipe` names the operator-facing flag; what it carries is a STANDING this vessel asks to
+  // stand as, never a kind it is. "Recipe" belongs to the pinned wiki's composition alone.
+  const askedStanding = (get("--recipe", "LAR_RECIPE", "lararium") === "herm" ? "herm" : "lararium") as AskedStanding;
   return {
     port:       Number(get("--port", "LAR_PORT", "8080")),
     storageDir,
@@ -80,7 +82,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
     wikiId:     get("--wiki", "LAR_WIKI", "lares"),
     rootDir,
     catalogUrl: process.env["LAR_CATALOG"] ?? null,
-    recipe,
+    askedStanding,
   };
 }
 
@@ -89,7 +91,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
 // ---------------------------------------------------------------------------
 
 async function main(): Promise<void> {
-  const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl, recipe } = parseArgs();
+  const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl, askedStanding } = parseArgs();
 
   // Mesh standing — derived ONCE for either cap-stack, shared by the herm + lararium
   // branches. Every vessel stands a node on the routing chart: LAR_PUBLIC_URL = its REACHABLE http
@@ -163,8 +165,8 @@ async function main(): Promise<void> {
   // reads its own ceiling and lights the face that lifts the next boot. MAY-HOLD-A-FACE ⊥ HOLDS-ONE-NOW.
   const sealShut = !archiveOpens();
   const faceLit  = faceStands();
-  const standing = standAs(recipe !== "herm" && faceLit ? "hearth" : "herm", !sealShut);
-  if (standing === "herm" && !sealShut && recipe !== "herm" && !faceLit) {
+  const standing = standAs(askedStanding !== "herm" && faceLit ? "hearth" : "herm", !sealShut);
+  if (standing === "herm" && !sealShut && askedStanding !== "herm" && !faceLit) {
     console.log("[lararium] the PLACE stands and no face is lit — standing at the WAKING FLOOR.");
     console.log("[lararium]   carrying and serving the public shelf; every sovereign act waits.");
     console.log("[lararium]   light the hearth fire:  lares persona new 0 --name '<label>'   (then stand again)");
@@ -186,7 +188,7 @@ async function main(): Promise<void> {
       // The name follows what STANDS, never which branch reached here. A vessel the operator asked to keep
       // faceless IS Lares Viales, gods of the crossroads; a hearth waiting on its face stands on the same
       // floor under its own name, and calling it a wayfarer would tell its operator they built the wrong thing.
-      hostId:     recipe === "herm" ? "lares-viales" : "lararium-node",
+      hostId:     askedStanding === "herm" ? "lares-viales" : "lararium-node",
       wikiId,
       storageDir,
       genesisDir,
@@ -204,7 +206,7 @@ async function main(): Promise<void> {
     console.log(`[herm] daemon:    ${herm.daemon.daemonHandle.url}`);
     console.log(`[herm] FLOW-map read-face: GET /oracle/pointer · /oracle/<cid>.bin`);
 
-    // ── THE RAISE DOOR — the third path onto caps, beside the archive and the recipe ────────────────
+    // ── THE RAISE DOOR — the third path onto caps, beside the archive and the asked standing ────────
     // `standAs` above answers what this vessel stands as ALONE. A recognised operator may raise it for the
     // length of their visit, and those caps ride THEIR key: nothing seats a persona root here, and
     // `personaSlotCeiling("herm") === 0` keeps that true whatever stands.

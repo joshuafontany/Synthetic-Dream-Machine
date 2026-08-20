@@ -1,22 +1,20 @@
 /**
- * e2e/herm-floor — THE HERM CONTRACT, held red until the floor of the cap stack stands.
+ * e2e/herm-floor — THE HERM CONTRACT, stood against a live vessel.
  *
- * INTENTIONALLY RED. These name what the floor owes, and they fail today.
+ * A HERM IS NOT A LARARIUM MISSING SOMETHING. It is the BASE COURSE every vessel stands on, and a
+ * lararium is that course with its hearth-fire lit. The stack carries the distinction as CAPS rather
+ * than kinds: a vessel composes the caps it can hold, and `personaSlotCeiling("herm") === 0` bars a
+ * SEATED persona root on a crossroads. Facelessness is not only a window between two commands — a
+ * crossroads someone stands for the public may never light a face at all.
  *
- * A HERM IS NOT A LARARIUM MISSING SOMETHING. The stack says so in its own types: `VesselClass` reads
- * "hearth" | "leaf" | "herm", `NodeRecipe` reads "lararium" | "herm" — a recipe an operator CHOOSES — and
- * `personaSlotCeiling("herm") === 0` bars a seated persona root outright. The code's word for it is
- * "faceless-by-class". So facelessness is not a window between two commands; it is what this tier IS, and a
- * herm someone stands as a public crossroads may never light a face at all.
+ * MAY-HOLD-A-FACE ⊥ HOLDS-ONE-NOW. `standAs` asks the ARCHIVE question alone; whether a face STANDS is
+ * a separate fact the boot reads separately, and `--recipe herm` DECLINES the lift rather than naming a
+ * different kind of thing.
  *
- * That makes the herm the BASE CASE of the lararium cap stack rather than an edge of it — a lararium is a
- * herm with its hearth-fire lit — and it makes the present fault worse than a rough edge: the daemon cannot
- * boot its own floor. A live stand prints "the PLACE stands" and then dies reaching for a face.
- *
- * WHY THESE ARE E2E AND NOT UNIT. Three times this session a unit vector fenced the exact site just found,
- * went green, and the live boot produced another one further along — the prefab, then the wiring pass, then
- * the verifier. A vector that fences a SITE finds one; a vector that stands the PATH lets the boot enumerate
- * its own reaches for a face. R1 fails with the next site's name in its message, and that is its job.
+ * WHY THESE ARE E2E AND NOT UNIT. A vector that fences a SITE finds that site; a vector that stands the
+ * PATH lets the boot enumerate its own reaches for a face, and this floor was found one reach at a time
+ * by unit vectors that each went green while the live boot failed further along. R1 stands the whole
+ * path, and when it fails it fails with the next site's name in its message.
  *
  *   R1 — a herm reaches `live`                         · the base case of the stack
  *   R2 — a herm serves the public shelf                · carrying is what the floor is FOR
@@ -40,6 +38,32 @@ function standHermRoot(): string {
   const r = mkdtempSync(join(tmpdir(), "lares-herm-"));
   execFileSync("bash", ["-lc", `cd ${REPO} && git ls-files -z genesis/ | xargs -0 -I{} cp --parents "{}" "${r}/"`]);
   return r;
+}
+
+/** The pid holding PORT, or "" — the one reliable way to name this vessel's process. `pkill -f` matches
+ *  its own shell and would kill the harness. */
+function portPid(): string {
+  return execFileSync("bash", ["-lc",
+    `ss -ltnp 2>/dev/null | grep ':${PORT} ' | grep -oP 'pid=\\K[0-9]+' | head -1`], { encoding: "utf8" }).trim();
+}
+
+/**
+ * Stop the vessel on PORT and WAIT FOR THE PORT ITSELF to come free — never a fixed sleep.
+ *
+ * A herm's shutdown flushes its stores and its repo before it exits, so how long it holds the listener
+ * depends on how much it wrote, not on a constant. A fixed pause races that flush: the re-stand binds a
+ * port the dying vessel still holds, dies with "already in use", and the vector reports the LIFT broken
+ * when what broke was the wait. Poll the port and the race is gone.
+ */
+async function stopVessel(): Promise<void> {
+  const pid = portPid();
+  if (!pid) return;
+  try { process.kill(Number(pid)); } catch { /* already gone */ }
+  const deadline = Date.now() + 30_000;
+  while (Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, 250));
+    if (!portPid()) return;
+  }
 }
 
 function findSock(dir: string, depth = 5): string | null {
@@ -104,15 +128,10 @@ async function operatorDid(r: string): Promise<string> {
 
 afterAll(async () => {
   try {
-    const pid = execFileSync("bash", ["-lc",
-      `ss -ltnp 2>/dev/null | grep ':${PORT} ' | grep -oP 'pid=\\K[0-9]+' | head -1`], { encoding: "utf8" }).trim();
-    if (pid) {
-      process.kill(Number(pid));
-      // LET THE VESSEL FINISH DYING. It flushes its stores on the way down, so tearing the tree out from
-      // under it races its own writes and ENOTEMPTYs — a teardown fault that reads as a suite failure with
-      // every vector green above it.
-      await new Promise((r) => setTimeout(r, 3000));
-    }
+    // LET THE VESSEL FINISH DYING. It flushes its stores on the way down, so tearing the tree out from
+    // under it races its own writes and ENOTEMPTYs — a teardown fault that reads as a suite failure with
+    // every vector green above it.
+    await stopVessel();
   } catch { /* nothing held the port */ }
   try { if (root) rmSync(root, { recursive: true, force: true }); } catch { /* a straggler write; the tmpdir keeps it */ }
 });
@@ -165,9 +184,7 @@ describe("the herm — the floor of the lararium cap stack", () => {
     execFileSync(process.execPath, [CLI, "persona", "new", "0", "--name", "the lift"], {
       env: { ...process.env, LAR_ROOT: root }, cwd: REPO, stdio: "ignore",
     });
-    const pid = execFileSync("bash", ["-lc",
-      `ss -ltnp 2>/dev/null | grep ':${PORT} ' | grep -oP 'pid=\\K[0-9]+' | head -1`], { encoding: "utf8" }).trim();
-    if (pid) { process.kill(Number(pid)); await new Promise((r) => setTimeout(r, 2500)); }
+    await stopVessel();
     const { live } = await standHerm(root);
     expect(live, "the lift left the vessel unable to stand").toBe(true);
 

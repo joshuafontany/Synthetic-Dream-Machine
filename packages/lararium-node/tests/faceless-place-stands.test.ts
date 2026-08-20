@@ -9,8 +9,8 @@
  * stack founds a face, so a faceless boot has no witness anywhere else.
  *
  *   V1 — wiring the daemon's verbs FACELESS never throws; a place that prints "the PLACE stands" boots
- *   V2 — persona-scoped verbs DO NOT REGISTER without a face, the gate the vault verbs already keep:
- *        absent the thing they need, they never register (rather than registering and throwing on call)
+ *   V2 — face-scoped verbs refuse by NAMING THE LIFT, never by stack trace: the reactor reaches for no
+ *        face when it is wired, so standing it costs the boot nothing and a caller learns what to do
  *   V3 — the place-scoped verbs register anyway — carrying and serving is what a faceless place IS FOR
  *   V4 — with a face, the persona verbs return
  */
