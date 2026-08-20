@@ -13,7 +13,8 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { resetTargets } from "../src/commands/scripted.js";
-import { larDataDir, larProjectionDir, larIdentityDir } from "../src/env.js";
+import { larDataDir, larProjectionDir, larIdentityDir, larariumDataHome } from "../src/env.js";
+import { larLibraryHome, memorySensoriumDir, meshSensoriumDir, memeticWikitextSensoriumDir } from "@lararium/node";
 
 let root: string;
 let savedRoot: string | undefined;
@@ -43,6 +44,22 @@ describe("resetTargets — the one wipe-list spelling", () => {
     expect(byPath.get(larProjectionDir())).toBe(true);
     expect(byPath.get(join(root, "genesis", "cas"))).toBe(true);
     expect(byPath.get(join(root, "genesis", "island.bin"))).toBe(false);
+  });
+
+  test("★ NO wipe target reaches the SHRINE — the ruling's whole claim, held here ★", () => {
+    // LARES PASS; THE LARARIUM ABIDES. The shelf and the sensoriums survive by standing in a house
+    // this list cannot name, so the assertion runs both ways: no target sits inside the shrine, and
+    // the shrine does not sit inside any target. A `--root` run isolates both homes, so the vectors
+    // hold on the operator's tree for the same reason they hold here.
+    const targets = resetTargets().map((t) => t.path);
+    expect(targets.length).toBeGreaterThan(0);                       // the list RESOLVED
+    expect(targets).toContain(larDataDir());                         // and it really is the wipe-list
+    const abiding = [larariumDataHome(), larLibraryHome(), memorySensoriumDir(), meshSensoriumDir(), memeticWikitextSensoriumDir()];
+    const under = (d: string, r: string) => d === r || d.startsWith(r.endsWith("/") ? r : r + "/");
+    for (const t of targets) for (const a of abiding) {
+      expect(under(a, t)).toBe(false);
+      expect(under(t, a)).toBe(false);
+    }
   });
 
   test("identity NEVER rides the wipe-list (keys survive every reset)", () => {

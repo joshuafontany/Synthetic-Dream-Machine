@@ -54,7 +54,7 @@
 
 import { existsSync, readdirSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 
 // The XDG data-home + the mempalace content parent live in ONE cycle-free
 // home — `@lararium/mempalace/xdg-base` — so vessel-paths and mempalace's palace-path derive the store
@@ -120,6 +120,34 @@ export function larHome(): string {
   return process.env["LAR_ROOT"] ?? join(homedir(), ".lares");
 }
 
+// ── The one-segment law (every caller-named dir passes through it) ───────────────────────────────
+
+/**
+ * Admit a caller-supplied NAME as exactly one path segment, or refuse.
+ *
+ * A resolver that `join`s a caller's word onto a root hands that caller the whole filesystem: `join`
+ * resolves `..`, so a name carrying separators walks out of the root it was meant to stay inside. Two
+ * resolvers here feed DELETE verbs — `lares sense purge <name>` and `lares sensorium dissolve <id>`
+ * both `rmSync` recursively over what the name resolves to — and one of them reaches through the MCP,
+ * so the segment arrives from outside this island entirely.
+ *
+ * The shrine survives a RITE structurally, by standing in a house no wipe-list names. A traversing
+ * segment is the one thing that defeats that, because it does not consult the list either: it walks.
+ * So the containment holds at the CHOKE-POINT, where a name becomes a path, rather than at each of the
+ * dozen verbs downstream — the same mechanism-over-policy shape `confineMirrorWrite` keeps for the
+ * projector, and for the same reason (the input is untrusted wherever the policy came from).
+ *
+ * One segment means what `readdirSync` would hand back: `basename(name) === name`, and never `.` or `..`.
+ * It THROWS rather than returning a verdict, because every caller resolves a path it is about to act on
+ * and a fail-closed refusal is the only reading that cannot be ignored.
+ */
+export function assertOneSegment(kind: string, name: string): string {
+  if (name.length === 0 || name === "." || name === ".." || basename(name) !== name || name.includes("\\")) {
+    throw new Error(`${kind} refuses ${JSON.stringify(name)} — a name resolves to ONE path segment, never a route out of its root`);
+  }
+  return name;
+}
+
 // ── The `memory` sensorium (content · structure · form) ──────────────────────────────────────────
 
 /** The `memory` sensorium dir — `<abide>/sensoriums/memory`. Its manifest declares content/structure/
@@ -156,7 +184,7 @@ export function memorySensoriumLenses(): Record<string, string> {
  *  The one place a `lares sense <sensorium> <verb>` address turns a name into a target root; `memory`
  *  resolves to {@link memorySensoriumDir} by construction (same join), so the default stays identical. */
 export function sensoriumDir(name: string): string {
-  return join(larariumDataHome(), "sensoriums", name);
+  return join(larariumDataHome(), "sensoriums", assertOneSegment("sensoriumDir", name));
 }
 
 /** Every sensorium standing under `<abide>/sensoriums` — the ones a lens may name. */
@@ -332,9 +360,10 @@ export function scratchSensoriumDir(): string {
   return join(larCacheHome(), "scratch", "sensoriums");
 }
 
-/** The scratch instance dir for one ephemeral sensorium, by its id, under {@link scratchSensoriumDir}. */
+/** The scratch instance dir for one ephemeral sensorium, by its id, under {@link scratchSensoriumDir}.
+ *  `dissolve` rmSyncs whatever this returns, so the id passes the one-segment law first. */
 export function scratchSensoriumInstanceDir(id: string): string {
-  return join(scratchSensoriumDir(), id);
+  return join(scratchSensoriumDir(), assertOneSegment("scratchSensoriumInstanceDir", id));
 }
 
 // ── The vessel substrate (Automerge Repo — NOT a sensorium) ──────────────────────────────────────

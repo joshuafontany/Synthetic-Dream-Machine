@@ -110,11 +110,30 @@ def _lararium_data_home() -> str:
     return os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lararium")
 
 
+def assert_one_segment(kind: str, name: str) -> str:
+    """Admit a caller-supplied NAME as exactly one path segment, or refuse. Mirrors TS
+    `assertOneSegment` (vessel-paths.ts).
+
+    `os.path.join` resolves nothing, but the joined string still walks: a name carrying `..` reaches
+    out of the root it was meant to stay inside the moment anything opens or removes it. This shore
+    takes names from the MCP, so the segment arrives from outside this island entirely. The shrine
+    survives a RITE structurally, by standing in a house no wipe-list names; a traversing segment is
+    the one thing that defeats that, because it walks rather than consulting a list. It RAISES rather
+    than returning a verdict — a caller resolves a path it is about to act on, and a fail-closed
+    refusal is the only reading that cannot be ignored."""
+    if not name or name in (".", "..") or os.path.basename(name) != name or "\\" in name:
+        raise ValueError(
+            f"{kind} refuses {name!r} — a name resolves to ONE path segment, never a route out of its root"
+        )
+    return name
+
+
 def sensorium_dir(name: str) -> str:
     """Turn a sensorium NAME into its root — `<abide>/sensoriums/<name>` — mirroring TS `sensoriumDir`
     (vessel-paths.ts). The one shore a `lares sense <sensorium>` / MCP `sensorium=` address crosses to
-    reach a target root; `memory` resolves the same dir the memory default names."""
-    return os.path.join(_lararium_data_home(), "sensoriums", name)
+    reach a target root; `memory` resolves the same dir the memory default names. The name passes the
+    one-segment law first, so an address can never route out of the shrine."""
+    return os.path.join(_lararium_data_home(), "sensoriums", assert_one_segment("sensorium_dir", name))
 
 
 def sensorium_names() -> "list[str]":
