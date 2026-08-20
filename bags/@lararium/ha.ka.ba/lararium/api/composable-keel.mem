@@ -55,7 +55,9 @@ This declaration answers //what a vessel IS//, and it answers it in ''caps, neve
 | ''LIFT'' | wikislot · wiki · pool · mount | a ''FACE'' stands |
 | ''CROSSROADS'' | read-face · bulb | an ''HTTP floor'' stands |
 
-BASE + LIFT composes a Lararium; BASE + CROSSROADS composes a Herm. The groups follow what a vessel ''HOLDS'' — a face, an http floor — never a kind-flag it was labelled with, so CROSSROADS belongs to whatever vessel serves an http floor rather than to the Herm as a kind: a hearth's opener hands it no server, and a browser could hold no such thing at all.
+''BASE ALONE STANDS THE HERM.'' Every vessel stands on the base course, and a Lararium reads as that same herm floor carrying what a FACE lifts over it — never as a full vessel with its wiki subtracted. So the two compose in SEQUENCE rather than as siblings: BASE, then LIFT. `--recipe herm` DECLINES the lift; it selects no different kind of thing, and `standAs` returns `"herm"` for any vessel whose archive holds shut, whatever it asked to stand as.
+
+CROSSROADS rides orthogonal to both. The groups follow what a vessel ''HOLDS'' — a face, an http floor — never a kind-flag it was labelled with, so CROSSROADS belongs to whatever vessel serves an http floor rather than to the Herm as a kind: a hearth's opener hands it no server, and a browser could hold no such thing at all.
 
 ECS supplies the ''inventory vocabulary'' (entity = vessel · component = cap · system = behavior), never the boot engine. The stack sits inert until a root wires it, and the order is DERIVED from what each cap declares — a list restating that order is a second authority with nothing under it.
 
@@ -89,7 +91,7 @@ refuse:   read-face present, meshpalace ABSENT → throw "[compose] vessel refus
 
 !! Absence ~ un-routed authority, by structure
 
-A Herm does ''not'' read as //"a node with `wiki = false"`//. A Herm reads as a ''cap-stack that never declares the wiki cap'' — so nothing routes to it, and the vessel runs ''blind by structure'', never by a flag a later bug could flip. The relay floor's `#has-NOT read` (vessel-caps#the-five-caps) lands here as ''absence of a routed capability'', the Genode reading: //an absent cap grants no authority.//
+A Herm does ''not'' read as //"a node with `wiki = false"`//, and a Lararium does not read as //"a vessel with its wiki subtracted"//. A Herm reads as a ''cap-stack that never declares the wiki cap'' — so nothing routes to it, and the vessel runs ''blind by structure'', never by a flag a later bug could flip. The relay floor's `#has-NOT read` (vessel-caps#the-five-caps) lands here as ''absence of a routed capability'', the Genode reading: //an absent cap grants no authority.//
 
 So the disclosure boundary holds at the ''shape of the composition'', not at a checked condition. A Herm cannot reach the operator-content wikis because no edge in its wired graph reaches them — the confused-deputy guard made structural (the standing covenant: designation carries authority, and an absent designation fails closed). ''Absence = un-routed authority'', the cleanest cut the keel makes.
 
@@ -147,6 +149,6 @@ The keel invents nothing structural; four well-worn patterns each carry a face o
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ॐ ँ:ebbd806f020f047e
+<<^ code:"&#x0003;" >>ॐ ँ:57231d4741b2a0d8
 
 <<^ code:"&#x0004;" -> ? >>

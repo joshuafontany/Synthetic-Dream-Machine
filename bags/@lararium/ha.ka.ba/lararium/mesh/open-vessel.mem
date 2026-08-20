@@ -11,7 +11,7 @@ manao       = 16
 manaoio     = 14
 register    = "Synthesis"
 retain      = true
-role        = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations; openVesselCore owns the sequence, VesselHostShore injects substrate atoms; role rides as a capability bundle, never a platform"
+role        = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations named by its KEEL (VesselKeel); openVesselCore owns the sequence, the keel supplies the substrate atoms; role rides as a capability bundle, never a platform. `recipe` names the pinned wiki's composition and nothing else."
 source-file = "packages/lararium-mesh/src/open-vessel-core.ts"
 type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
@@ -78,8 +78,12 @@ them, it does not re-implement them.
 !! The Shape — A Vessel Composes Its Pieces
 
 A vessel does not read as a core that an injected host-port drives. A vessel ''IS a''
-''composition'' — a recipe that names which sovereign pieces it carries and the order
-they assemble. The open phases (`boot → repo-open → catalog-ready → island-ready →
+''composition'' — a ''KEEL'' (`VesselKeel`) that names which sovereign pieces it carries
+and the order they assemble. ''The word `recipe` belongs to the pinned wiki'' (operator
+ruling): a wiki's recipe names the bag cascade it composes from, and letting the vessel
+borrow it put one word across two layers that answer to different hands. What an operator
+ASKS a vessel to stand as rides its own name — `AskedStanding` — and `standAs` decides
+what it actually stands as from whether the archive opens. The open phases (`boot → repo-open → catalog-ready → island-ready →
 wiki-ready → vessel-ready → corpus-ready → tw5-booted → live`) mark the composition
 milestones, gating on the admin island's `ea` before any wiki mounts (S11.5
 admin-first). The same shape composes one level down (admin-vm, sovereign-kernel,
@@ -100,7 +104,7 @@ phase sequence), never type-conformance to a port.
 
 <<~ ahu #role >>
 
-!! Role Names Which Pieces the Recipe Carries (the keystone reframe)
+!! Role Names Which Pieces the Keel Carries (the keystone reframe)
 
 ''Role names the capability pieces a vessel CURRENTLY HOLDS'' — a snapshot of a growing
 set, decoupled from the runtime it runs on ([[feedback_isomorphism_by_composition]]). A
@@ -109,19 +113,19 @@ and a substrate never stands in for a role: node-means-relay reads as a category
 The substrate NEVER gates which pieces a vessel MAY hold (Ink & Switch, #the-law): a
 piece absent today reads as not-yet-held, never cannot-hold.
 
-* The ''relay'' recipe carries, in addition to the seven base pieces: the inbound-peer
+* The ''relay'' keel carries, in addition to the seven base pieces: the inbound-peer
   gate (V3), the disk-mirror grant, the full resident-verb plane, the residency
   sweeper.
-* The ''leaf / keeper'' recipe simply OMITS those pieces and carries the outbound
+* The ''leaf / keeper'' keel simply OMITS those pieces and carries the outbound
   peer-handshake instead. An omitted piece reads as absent from the cascade — no
   no-op stub, no `if (platform)`, nothing for the composition to branch on.
 
-A node MAY compose a thin leaf recipe; a future heavy browser MAY compose relay
-pieces — because role lives in the recipe, not the substrate. ''The access piece is''
-''always present, never a default'': the relay recipe carries the V3 gate piece; the
-browser recipe carries the `admit same-origin / in-process` piece (its only peers ride
+A node MAY compose a thin leaf keel; a future heavy browser MAY compose relay
+pieces — because role lives in the keel, not the substrate. ''The access piece is''
+''always present, never a default'': the relay keel carries the V3 gate piece; the
+browser keel carries the `admit same-origin / in-process` piece (its only peers ride
 the MessageChannel to its own island + the same-origin BroadcastChannel — trusted by
-origin, a LEGITIMATE asymmetry, not an open hole). No recipe omits the access piece, so
+origin, a LEGITIMATE asymmetry, not an open hole). No keel omits the access piece, so
 an accidental open-to-all reads as unreachable by construction.
 
 <<~/ahu >>
@@ -130,7 +134,7 @@ an accidental open-to-all reads as unreachable by construction.
 
 !! One Derivation ~ what a platform MAY decide, and what it MAY NOT
 
-Both factories reduce to thin ''RECIPES'' — each naming its pieces (the shared seven plus
+Both factories reduce to thin ''KEELS'' — each naming its pieces (the shared seven plus
 its role pieces) and the few substrate values each piece resolves native-first. The
 protocol ''SEQUENCE'' holds invariant across them, and the node + browser suites boot real
 vessels to guard it.
@@ -138,7 +142,7 @@ vessels to guard it.
 ''A FACT ABOUT THE OPERATOR IS NEVER A PLATFORM DECISION.'' The bags a vessel registers
 with its capability ring derive from what that vessel HOLDS — its own ground, its wiki
 slot, and the union over the PersonaGroups it stands in, each contributing its plane and
-every bag its catalog names (`register-bags`, `persona-scope`). A recipe MAY carry a
+every bag its catalog names (`register-bags`, `persona-scope`). A keel MAY carry a
 platform's own pieces; it MUST NOT carry its own answer to a question about the operator.
 
 ''DEIXIS RESOLVES ONCE, AT THE BOOT PATH.'' A vessel reads its own sentinels, derives the
@@ -166,6 +170,6 @@ argument. What stays open sits one level out: a live-daemon exercise of the full
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
 
-<<^ code:"&#x0003;" >>:c5bc2457af02d93b
+<<^ code:"&#x0003;" >>:64ddd4887031756c
 
 <<^ code:"&#x0004;" -> ? >>
