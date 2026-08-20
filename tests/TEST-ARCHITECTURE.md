@@ -128,18 +128,25 @@ test vessels at a short root.*
 
 ### Red vectors
 
-**This repo holds no standing red.** The working tree carries no `test.fails` and no `test.todo`; the
-one `test.skip` is a deferred scouting question, not a known defect. That is deliberate and it follows
-from *Delete fearlessly* below: a suite asserts what stands, and a defect worth keeping is worth an
-issue, not a permanently amber bar nobody reads.
+**The convention this repo actually uses is a PLAIN FAILING TEST whose header names the defect.** It
+carries no `test.fails` and no `test.todo`; the one `test.skip` defers a scouting question. Red
+contracts are written as ordinary vectors that fail, with a doc-comment saying what the red means —
+`frames-per-carrier` states it outright: *"A red here does NOT say the corpus is broken — it says the
+CHECK READER is single-frame and the corpus has outgrown it"*, and names where the cure lives.
 
-The exception the house does allow is a **contract held red on purpose while it is being built** — the
-herm-floor five were written that way, failing with the next site's name in the message until the floor
-stood. `test.fails` is the tool for that window, and its behaviour here is collided, not assumed: a
-failing body reports `1 expected fail` and the suite stays green, while a body that PASSES fails the
-suite with `Expect test to fail`. That inversion is the whole value — the vector goes red the moment
-the defect is fixed, so a red contract cannot be silently left behind. `test.todo` registers a name and
-runs nothing.
+**Counting `test.fails` does not tell you whether a repo holds a standing red.** An earlier revision of
+this section read the two markers, found none, and recorded "this repo holds no standing red" while a
+plain red vector stood in the tree. The measurement answered the question it could reach rather than
+the question asked — the same shape as an arg-check that fires before the resolve. *To find the
+standing reds, run the suites and read the bar.*
+
+**Known standing reds must be named in the suite that carries them, never only in a session.** A red
+nobody can distinguish from a regression costs every later reader the same investigation.
+
+`test.fails` remains available and its behaviour here is collided, not assumed: a failing body reports
+`1 expected fail` and the suite stays green, while a body that PASSES fails the suite with `Expect test
+to fail`. That inversion is its whole value — a red contract goes red the moment it is fixed and cannot
+be silently left behind. `test.todo` registers a name and runs nothing.
 
 *When such a window closes, the vectors become ordinary tests and the header stops calling itself red.*
 
