@@ -43,7 +43,7 @@ A component meme gives one facet — a domain, function, hook, or posture — an
 
 ''Two tiddlers per component.''
 
-# ''The full meme'' — this `.md`, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml iam`:
+# ''The full meme'' — this carrier, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml iam`:
 
 ```toml
 title   = "lar:///ha.ka.ba/sdm/components/function/ecm-scan"
@@ -70,6 +70,6 @@ A component earns its address by serving a filter query. Tags start as TOML head
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:e11c7c296d57b519
+<<^ code:"&#x0003;" >>:386bb95df73d2286
 
 <<^ code:"&#x0004;" -> ? >>
