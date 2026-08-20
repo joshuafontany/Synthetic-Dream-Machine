@@ -229,4 +229,42 @@ describe.skipIf(wikiSkip)(
     }
     expect(lost).toEqual([]);
   });
+
+  /**
+   * THE IAM BLOCK, COMPARED RAW.
+   *
+   * The corpus round-trip above masks the iam before comparing, and the sibling suite normalizes
+   * through its own view, so every proof this repo holds about a carrier surviving projection is a
+   * proof about its BODY. Nothing has ever compared a `.mem`'s declaration bytes to what the emitter
+   * would write in their place.
+   *
+   * That matters because the projector writes through `exportCarrierFile`. Any difference between the
+   * emitter's block and a carrier's own — key order, the `=` column, an omitted empty, a key inherited
+   * from a parent — lands as a rewrite on the first sync of a live wiki, silently and corpus-wide.
+   *
+   * The canonical form states seven laws for this block. This is what asks whether the corpus keeps
+   * them.
+   */
+  test("a carrier's iam block already reads as the emitter would write it", () => {
+    const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
+      .split("\n").filter(Boolean);
+    const iamOf = (t: string) => /```toml iam\n([\s\S]*?)\n```/.exec(t)?.[1] ?? null;
+
+    const drift: string[] = [];
+    for (const f of carriers) {
+      const disk = readFileSync(path.join(REPO, f), "utf8");
+      const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(disk)?.[1];
+      if (!uri) continue;
+      const title = `lar:///${uri}`;
+      const records = deserialize(disk, title);
+      if (records.length === 0) continue;
+      const by = new Map(records.map((r) => [r["title"] as string, r]));
+      const rendered = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, title);
+      if (rendered === null) continue;
+      const a = iamOf(disk), b = iamOf(rendered);
+      if (a !== null && b !== null && a !== b) drift.push(f);
+    }
+    expect(carriers.length).toBeGreaterThan(500);
+    expect(drift, `${drift.length} carriers whose iam the projector would rewrite`).toEqual([]);
+  });
 });
