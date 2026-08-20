@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/alpha/test-prompt-00001 >>
-
+```toml iam\ntype      = "text/x-memetic-wikitext+tiddlywiki"\nuri-path  = "ha.ka.ba/alpha/test-prompt-00001"\n```\n\n
 <<~ ahu #iam >>
 ```toml
 # <<~ ahu #iam-ha "structure" >>
@@ -207,7 +207,7 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" ahu #body-close >>
+<<^ code:"&#x0003;" ahu #body-close >>:0a87cafa3443f830
 Alpha test prompt closes the active session stream here.
 <<~/ahu >>
 

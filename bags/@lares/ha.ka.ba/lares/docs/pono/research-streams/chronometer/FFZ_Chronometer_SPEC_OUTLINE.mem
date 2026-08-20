@@ -3,6 +3,7 @@
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE >>
 ```toml iam
 type = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -817,6 +818,6 @@ progression, including fork/join for Tasked Spirits.]
 
 lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:6&p=10#O0.O0.O0.A6.A1 → ?
 
-<<^ code:"&#x0003;" >>
+<<^ code:"&#x0003;" >>:203fa75a9d45d91a
 
 <<^ code:"&#x0004;" -> ? >>
