@@ -2,10 +2,15 @@
  * test-wiki — one door to a booted TiddlyWiki, for every suite that asks the wiki rather than a module.
  *
  * ── WHY ONE DOOR ────────────────────────────────────────────────────────────────────────────────
- * Seven suites boot an engine and each re-derived the same three things: where the vendored core blob
- * sits, what to do when it is absent, and which plugins the grammar needs. Three facts in seven
- * spellings drift the way every such set drifts — a plugin added to six of them reads correct in each
- * file while the seventh quietly tests an older grammar.
+ * The suites that ask a real wiki each re-derived the same three things: where the vendored core blob
+ * sits, what to do when it is absent, and which plugins the grammar needs. Three facts in six
+ * spellings drift the way every such set drifts — a plugin added to five of them reads correct in each
+ * file while the sixth quietly tests an older grammar.
+ *
+ * Constructing a `TW5Engine` does NOT make a suite one of them. `vm-grammar-boundary` builds an engine
+ * and never boots it, driving a fake wiki to prove the host delegates decomposition to the VM rather
+ * than deciding it — the engine there is a stand-in, and routing it through this door would replace the
+ * fake it exists to hold. A suite belongs here when it needs a wiki to ANSWER, not to exist.
  *
  * The SKIP is the half worth naming. The core blob is a gitignored build artifact, so a fresh clone —
  * and CI's `test` job, which runs `pnpm -r test` with no build step — sees it absent. An anonymous
