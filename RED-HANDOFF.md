@@ -1,98 +1,72 @@
-# RED HANDOFF — the herm as base course
+# RED HANDOFF — the lift's last joint
 
-**Branch** `feature/lararium-node-4` · everything below is committed · **nothing pushed**
+**Branch** `feature/lararium-node-4` · committed · **nothing pushed**
 
-## THE RULING (operator, 2026-08-19)
-**Every vessel — node, browser, all, isomorphically — stands as a HERM first, then lifts.**
-The herm is the **base course** of the lararium cap stack, never a sibling recipe.
-Radical YIN cuts/rewrites approved for this collapse.
+## THE ONE RED
 
-## THE CUT — one line, unmade
-`packages/lararium-node/src/main.ts:153`
-```ts
-const standing = standAs(recipe === "herm" ? "herm" : "hearth", !sealShut);
-//                 ↑ asks by FLAG        ↑ checks only the seal — never whether a face stands
+`tests/e2e/herm-floor.test.ts` **R5 — the lift.** R1–R4 stand green against the live path.
+
+A vessel founded faceless, given a face by `lares persona new 0`, and stood again reaches
+`[lararium] phase → live` as a full hearth — wiki, daemon, pool, read-face, crossing. The lift itself works.
+Its face-scoped verb does not:
+
 ```
-`standAs` already carries the model: the floor is what you get, the hearth is what you EARN.
-It is missing one condition. The shape:
-```ts
-standAs("hearth", !sealShut && aFaceStands)   // --recipe herm becomes a way to DECLINE the lift
+persona-selves-verb: the PersonaGroup plane is unresolved —
+the @oracle registry names no lar:///ha.ka.ba/bags/@persona-4b47a29cacd89959
 ```
-**⚠ UNCOLLIDED: I never opened `standAs`.** Read it before cutting — I quoted its behaviour all
-session from a summary line. If its second arg means something narrower, this names the wrong condition.
 
-## WHY — four faults, one cause
-A live `vessel stand` on a founded-but-FACELESS store dies. Four layers, all the same cause —
-**a HEARTH composition running on a vessel that had only earned the BASE**:
-1. `open-node-vessel` prefab read `bootstrap.daemonUrl` before `loadGenesis` ran → **FIXED** (thunks)
-2. verb wiring called `personaBagIdFor(faceGroup())` eagerly → **GATED**
-3. `resolveBinding` read `faceAgent()` on the boot path → **gate traded one fatal for another**
-   (`"no resolveBinding configured"`, `daemon-behavior.ts:337`) — **NOT COMMITTED, uncommitted in tree**
-4. …the next one, whatever it is
-**The collapse removes all four gates as redundant.** Do not add a fifth.
+**The verb registers (a face stands) and its PLANE never does.** `runFoundTheFace` writes the group's doc id
+into the bootstrap, and the next boot's @oracle registry carries no `@persona-<slug>` entry to resolve. Start
+at `operator-daemon-behavior.ts` `resolvePersonaStore` → `oraclePlane.storeOf(personaBagIdFor(faceGroup()))`,
+and walk back to who registers a bag into @oracle at boot vs. at founding. The name derives correctly; the
+registration is what is missing.
 
-## THE SHAPE
-```
-prepareNodeBoot            ← ALREADY shared by both doors (~1000 lines, no fork)
-  → composeHerm            ← the base course, every vessel, always
-    → + hearth caps        (a face stands)
-    → + carriage caps      (meshSelf)
-    → + wiki caps          (a user wiki)
-```
-`openNodeVessel` (:1670) and `openNodeHerm` (:1737) both call `prepareNodeBoot`; the ONLY fork is the
-compose call. Memory: `composeLararium`/`composeBrowser` are ALREADY one function — so the remaining
-collapse is `composeHerm` → base, `composeLararium` → base + lift. Browser mirrors for free
-(`open-browser-vessel.ts:627` calls itself "the mirror of openNodeVessel").
+## THE RULING, ENACTED
+**Every vessel stands as a HERM and LIFTS to a hearth.** The lift reads whether a FACE stands, never which
+recipe a flag asked for; `--recipe herm` DECLINES the lift. `main.ts` routes on `faceStands()`.
 
-## HELD RED — the acceptance vectors
-`tests/e2e/herm-floor.test.ts` — **5/5 red, intentionally.**
-R1 a herm reaches live · R2 serves the public shelf · R3 carries · R4 refuses hearth-scoped acts
-legibly · R5 LIFTS into a lararium.
-- **R1 is the enumerator** — its failure names the next site. Do not guess sites; run it.
-- **⚠ R2–R4 are CASCADE reds** — they fail only because R1 never stood a daemon. After R1 greens,
-  prove each fails independently (kill the read-face, remove the socket) or three vectors flip green
-  having proven nothing.
-- **⚠ R1–R5 may target the wrong door** — they stand a *lararium* recipe faceless. After the collapse
-  there is ONE door; rewrite them against `stand`.
-- No red-vector convention exists in this repo (zero `test.fails`/`test.todo`). Mine are the first.
-  `TEST-ARCHITECTURE.md` wants an entry. **`test.fails` behaviour in this harness is UNCOLLIDED.**
+**The two facts stay apart.** A face lit names what a vessel HOLDS; the archive opening names what it can
+OPEN. `standAs(asked, archiveOpens)` keeps the archive question and returns `"herm"` when it holds shut —
+folding face-standing into that parameter would make a faceless place class-`herm`, where
+`personaSlotCeiling("herm") === 0` bars the very face that would lift it. **MAY-HOLD-A-FACE ⊥ HOLDS-ONE-NOW.**
 
-## THE HERM, in the code's own words
-`VesselClass = "hearth"|"leaf"|"herm"` · `NodeRecipe = "lararium"|"herm"` ·
-`personaSlotCeiling("herm") === 0` → **"faceless-by-class"**
-- **A herm HAS @daemon** — its own wiki, the immune core. "No wiki" in `node-caps:151` means no USER
-  wiki. It holds no other operator bag a human decrypts locally.
-- Its @daemon reads **OPEN to the founding operator** (kahu-cabal access: deferred to a multi-herm mesh).
-- **The lift adds a face to a STANDING @daemon** — it never creates one. That is why the runbook's rite
-  is two commands, not a migration.
+`composeHerm` / `composeLararium` still stand as two functions. The ROUTING collapsed; the composition did
+not. Both already share `prepareNodeBoot`, so the remaining cut is presentational — do it when something asks
+for it, not on principle.
 
-## GREEN AND LANDED (do not re-derive)
-face-join core + gate (5 refusal grounds) · daemon verb where the provider lives · re-grant so a seat
-REACHES (`regranted` rides out) · a hearth never seats itself · lease decides / clock backstops ·
-@daemon NEVER crosses → `hearthDaemonUrl` names the hearth's door · `pinnedDoc` (actor AND clock) ·
-`admin` → `kahu-cabal` · root-`@` swept · the wiring seam (`operatorDaemonOptions`).
-**Vectors:** 6 e2e face-join (live daemon) · 4 pair · 4 leaf-fleet · 38 keyhive · 136 node/775 ·
-198 mesh/1888 · 26 cli/149 · 64 tw5/490.
+## THE INSTRUMENT LAW — what this loop actually cost
+Four of the five reds were the vectors measuring themselves, not the floor:
+1. **Read the vessel's own log.** `lares vessel stand` DETACHES. A harness watching the launcher's pipe
+   scores a vessel that reached `live` as one that printed nothing. Read `data/vessel/wake-serve.log`.
+2. **Clear that log before standing.** The vessel APPENDS — a prior boot's `phase → live` answers instantly
+   for a vessel that never came back up.
+3. **Present a real key.** A zero key names nobody, and nobody is refused on CAPABILITY before the question
+   the vector asks is ever reached. Use `fleetPeerDid()` under the test's own `LAR_ROOT`.
+4. **Never fail-fast on a bare `/Error:/`.** The keyhive wasm prints `Error: Some(ReceiveCgkaOpError(...))`
+   on a HEALTHY boot. Match faults this house raises.
 
-## FOUR CLAIMS THAT TESTED FALSE (each read plausible; each cost a loop)
-1. a wiped store self-heals via a repeat summons — **NO**, the ARCHIVE is the only keel; a seat is not a key
-2. a seat reaches what the group holds — **NO**, a bag delegated BEFORE the join needs a re-delegate
-3. pinning the actor makes bytes pure — **NO**, automerge also writes a wall-clock `time`
-4. a hearth can just answer summonses — **NO**, @daemon fleet-syncs; a hearth never seats itself
+**A red is a claim about the code. Collide the instrument before believing it.**
+
+## CLAIMS THAT TESTED FALSE (do not re-derive)
+- *a wiped store self-heals via a repeat summons* — the ARCHIVE is the only keel; a seat is not a key
+- *a seat reaches what the group holds* — a bag delegated BEFORE the join needs a re-delegate
+- *pinning the actor makes bytes pure* — automerge also writes a wall-clock `time`
+- *a hearth can just answer summonses* — @daemon fleet-syncs; a hearth never seats itself
+- *the `resolveBinding` gate trades one fatal for another* — `no resolveBinding configured` POSTS a result,
+  never throws, on a path a faceless floor never walks. The gate is correct and load-bearing.
+- *`standAs` needs a face condition* — see the ruling above; it would deadlock the founding.
+
+## GREEN AND LANDED
+face-join core + gate (5 refusal grounds) · daemon verb where the provider lives · re-grant so a seat REACHES ·
+a hearth never seats itself · lease decides / clock backstops · @daemon NEVER crosses → `hearthDaemonUrl` ·
+`pinnedDoc` (actor AND clock) · `admin` → `kahu-cabal` · the herm as base course · a face-scoped verb the
+floor cannot run refuses by NAMING THE LIFT.
+
+**Vectors:** herm-floor 4/5 · 6 e2e face-join · 4 pair · 4 leaf-fleet · 38 keyhive · 776 node · 198 mesh/1888 ·
+26 cli/149 · 64 tw5/490 · typecheck clean.
 
 ## OPEN, NOT MINE TO DECIDE
 - **The live click round-trip.** My trace says both projection legs stand; the operator remembers it
-  unfinished. Unresolved. The join surface (Phase 1) rests on it.
+  unfinished. Unresolved.
 - **Leaf-as-hearth relay** — can a browser ACCEPT an inbound crossing or only dial? Deferred to live infra.
-- **`admin` prose** — 68 code comments + 86 memes still spell the old sense. Set aside by the operator.
-
-## ORDER
-0. read `standAs` → make the one-line cut → collapse compose → **remove the four gates** → green R1
-1. prove R2–R4 independently → R5 (the lift) → rewrite vectors against the single door
-2. the join surface (`daemon-face-join-tiddlers.ts`) → localhost → LAN
-3. `--force` surface · fleet-reset lever · the herm vocabulary sweep ("waking floor"/"faceless place" → herm)
-
-## THE PATTERN TO WATCH
-Four times this session: fence the site just found → suite greens → the live path produces another.
-**A vector that fences a SITE finds one; a vector that stands the PATH enumerates.**
-And three vacuous greens: assert the code under test actually RAN.
+- **`admin` prose** — 68 comments + 86 memes still spell the old sense. Set aside by the operator.
