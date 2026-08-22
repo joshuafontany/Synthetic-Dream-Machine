@@ -352,37 +352,44 @@ export function bagDescriptorUri(bagId: string): string {
 
 // ── Social plane URI builders ──────────────────────────────────────────────
 
-// These nested titles live INSIDE whichever plane holds them, built from the NAMESPACE so every face's
-// document carries one internal shape. The bag a title lands in is the face's `@…-<tag>`; the title never
-// names it, so a record written on one face reads identically on the next.
-/** identityTiddlerUri("did:key:z…") → "…/bags/@identities/did:key:z…" */
+// ── INNER PATHS — a title names its own record, never the entity holding it ──────────────────────
+//
+// AN ADDRESS CARRIES THREE SLOTS, EACH NAMED ONCE: the HOME (whose house), the ENTITY
+// (`{bags,wikis}/@name` — the only place `@` stands), and the INNER PATH. These build the third.
+//
+// A title carries NO `@` and NO entity. The bag a record lands in is the face's own `@…-<tag>`, and the
+// caller already names it in the record's `bag` field — so a title that repeated it would say the entity
+// twice and fuse two slots into one string. Keeping the inner path free of the entity is also what lets
+// one internal shape serve every face: a record written on one persona's plane reads identically on the
+// next, because nothing in its title knows which plane it sits in.
+/** identityTiddlerUri("did:key:z…") → "lar:///ha.ka.ba/identities/did:key:z…" */
 export function identityTiddlerUri(did: string): string {
-  return `${IDENTITIES_NAMESPACE}/${did}`;
+  return stableLarUri(`identities/${did}`);
 }
 
-/** circleTiddlerUri("admins") → "…/bags/@circles/admins" */
+/** circleTiddlerUri("admins") → "lar:///ha.ka.ba/circles/admins" */
 export function circleTiddlerUri(id: string): string {
-  return `${CIRCLES_NAMESPACE}/${id}`;
+  return stableLarUri(`circles/${id}`);
 }
 
-/** sessionTiddlerUri("sess-abc") → "…/bags/@sessions/sess-abc" */
+/** sessionTiddlerUri("sess-abc") → "lar:///ha.ka.ba/sessions/sess-abc" */
 export function sessionTiddlerUri(id: string): string {
-  return `${SESSIONS_NAMESPACE}/${id}`;
+  return stableLarUri(`sessions/${id}`);
 }
 
-/** sessionEventLogUri("sess-abc") → "…/bags/@sessions/sess-abc/events" */
+/** sessionEventLogUri("sess-abc") → "lar:///ha.ka.ba/sessions/sess-abc/events" */
 export function sessionEventLogUri(sessionId: string): string {
-  return `${SESSIONS_NAMESPACE}/${sessionId}/events`;
+  return stableLarUri(`sessions/${sessionId}/events`);
 }
 
-/** deviceDelegationUri(opDid, devDid) → "…/bags/@identities/{opDid}/devices/{devDid}" */
+/** deviceDelegationUri(opDid, devDid) → "lar:///ha.ka.ba/identities/{opDid}/devices/{devDid}" */
 export function deviceDelegationUri(personaRootDid: string, deviceDid: string): string {
-  return `${IDENTITIES_NAMESPACE}/${encodeURIComponent(personaRootDid)}/devices/${encodeURIComponent(deviceDid)}`;
+  return stableLarUri(`identities/${encodeURIComponent(personaRootDid)}/devices/${encodeURIComponent(deviceDid)}`);
 }
 
-/** nexusTrustUri("abcdef…") → "…/bags/@identities/trust/nexus/abcdef…" */
+/** nexusTrustUri("abcdef…") → "lar:///ha.ka.ba/identities/trust/nexus/abcdef…" */
 export function nexusTrustUri(nexusPubkey: string): string {
-  return `${IDENTITIES_NAMESPACE}/trust/nexus/${nexusPubkey}`;
+  return stableLarUri(`identities/trust/nexus/${nexusPubkey}`);
 }
 
 // ── The @nexus plane — a confederation's per-Nexus faces (causal island) ──────
