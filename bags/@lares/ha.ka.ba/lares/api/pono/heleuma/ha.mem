@@ -58,6 +58,6 @@ It SHALL NOT declare `body-sha256` — ha does not promote.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:be48e58ba6aabf12
+<<^ code:"&#x0003;" >>ni:///sha-256;vkjli6aqvxL8dckFTOJ1iK_HwLudqaz9SsMOtYa0Phc
 
 <<^ code:"&#x0004;" -> ? >>

@@ -3287,6 +3287,6 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<^ code:"&#x0003;" >>:ea3b7793f38d8705
+<<^ code:"&#x0003;" >>ni:///sha-256;6jt3k_ONhwXH3OslVOsyaUvRmpil65okYPBG6ddo00U
 
 <<^ code:"&#x0004;" -> ? >>

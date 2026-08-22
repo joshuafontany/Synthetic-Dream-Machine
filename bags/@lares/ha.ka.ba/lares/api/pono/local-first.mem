@@ -263,6 +263,6 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:b0020538461e7295
+<<^ code:"&#x0003;" >>ni:///sha-256;sAIFOEYecpVnJid4gjQkwPpH8FQ1bbudYQa39-yiYZw
 
 <<^ code:"&#x0004;" -> ? >>

@@ -292,6 +292,6 @@ the crypto gate, not instead of it.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:c7848b32f2e22a65
+<<^ code:"&#x0003;" >>ni:///sha-256;x4SLMvLiKmVrM53QgNqhx1_aklUkp9vNP9Qo3KDpKz0
 
 <<^ code:"&#x0004;" -> ? >>

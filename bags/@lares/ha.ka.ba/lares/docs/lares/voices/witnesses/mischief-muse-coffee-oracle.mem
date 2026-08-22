@@ -114,6 +114,6 @@ Use this witness carrier for provenance.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:14c8532c7470b5c5
+<<^ code:"&#x0003;" >>ni:///sha-256;FMhTLHRwtcVtZsBPhNr4cXT9mWrotXu8yAcGGW0F-ZM
 
 <<^ code:"&#x0004;" -> ? >>

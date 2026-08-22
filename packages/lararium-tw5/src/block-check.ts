@@ -49,7 +49,7 @@
  * questions, and a classifier that answered the first under the name of the second would invite the
  * reading that a present postamble is a verified one.
  */
-export const BCC_RE = /^([^\n]*:[0-9a-f]{16})$/;
+export const BCC_RE = /^(ni:\/\/\/[a-z0-9-]+;[A-Za-z0-9_-]+)$/;
 
 /**
  * What a carrier wrote between ETX and EOT.

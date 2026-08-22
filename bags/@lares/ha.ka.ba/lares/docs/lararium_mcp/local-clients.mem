@@ -127,6 +127,6 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:463feb762d4affd8
+<<^ code:"&#x0003;" >>ni:///sha-256;Rj_rdi1K_9jc9aD8KpQyOnv1hqwgHpBC8Up4oCyk35A
 
 <<^ code:"&#x0004;" -> ? >>

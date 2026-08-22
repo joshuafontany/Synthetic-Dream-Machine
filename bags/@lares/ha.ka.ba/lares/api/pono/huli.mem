@@ -121,6 +121,6 @@ close-pattern = '<<~\/huli\s*>>'
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:840593780748bd96
+<<^ code:"&#x0003;" >>ni:///sha-256;hAWTeAdIvZYBrOEuPi5k2Va71x1P5rr5iqxvhNMnkWY
 
 <<^ code:"&#x0004;" -> ? >>

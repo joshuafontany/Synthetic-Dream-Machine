@@ -66,6 +66,6 @@ A hana block body MUST be valid input for the named grammar interpreter.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:78ec4ae5f84248ee
+<<^ code:"&#x0003;" >>ni:///sha-256;eOxK5fhCSO5VaAfk7cgSxnDu5Pnv9pqGfvcK5kTmPds
 
 <<^ code:"&#x0004;" -> ? >>

@@ -291,6 +291,6 @@ state stays local-first, no-global-now enacted rather than breached.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:5ba0cfbc4ddb4fac
+<<^ code:"&#x0003;" >>ni:///sha-256;W6DPvE3bT6yVpB6VagLILR64tQ6Hp7WFpAqxnF-85mc
 
 <<^ code:"&#x0004;" -> ? >>

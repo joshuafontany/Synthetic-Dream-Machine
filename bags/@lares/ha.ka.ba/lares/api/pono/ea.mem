@@ -114,6 +114,6 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the //liv
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:d8b45d5f222ba8ef
+<<^ code:"&#x0003;" >>ni:///sha-256;2LRdXyIrqO9QtEepcIB8FEk18zLtskvM_XAN8QkqSMk
 
 <<^ code:"&#x0004;" -> ? >>

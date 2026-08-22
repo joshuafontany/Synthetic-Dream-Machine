@@ -68,6 +68,6 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:024c5f75067ae38e
+<<^ code:"&#x0003;" >>ni:///sha-256;AkxfdQZ6447sQR4-R37qnNNT0JkxNVj6ZujreSmS5YQ
 
 <<^ code:"&#x0004;" -> ? >>

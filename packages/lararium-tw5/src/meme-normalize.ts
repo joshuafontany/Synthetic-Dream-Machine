@@ -34,6 +34,19 @@
  * splicing glyphs in front of a control entity. Matching the whole head lets one rebuild place the
  * namespace correctly whether the carrier states one, states a stale one, or states none at all.
  */
+/**
+ * The declaration a carrier opens with.
+ *
+ * SPELLED HERE, not imported, and the constraint is structural rather than stylistic: this module gets
+ * BUNDLED INTO THE TW5 PLUGIN, so an import from the mesh package would pull that package's automerge
+ * wasm into a bundle that cannot carry it. The whole file stays dependency-free for that reason.
+ *
+ * `type-parity` holds the two spellings together — it reads every literal declaration in the tree
+ * against the one authority, so this copy cannot drift without a witness saying so.
+ */
+const DECLARATION =
+  "<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>";
+
 const SOH_OPENER_RE =
   /(<<\^)[ \t]*(?:code:"(&#x(?:0001|0011);)"(?:[ \t]+namespace:"([^"]*)")?|([^&\n]*?)(&#x(?:0001|0011);))/;
 

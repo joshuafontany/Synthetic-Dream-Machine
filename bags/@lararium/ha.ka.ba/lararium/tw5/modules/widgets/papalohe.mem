@@ -48,6 +48,6 @@ export function PapaloheWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseT
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:ea786f369ff1f324
+<<^ code:"&#x0003;" >>ni:///sha-256;6nhvNp_x8ySjtB1spCXP77GE16DO-7mCR6jyuhFiMOs
 
 <<^ code:"&#x0004;" -> ? >>

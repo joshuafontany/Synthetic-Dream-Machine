@@ -207,6 +207,6 @@ export function buildCeremonyTiddlers(
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:95b1f53affdd0f44
+<<^ code:"&#x0003;" >>ni:///sha-256;lbH1Ov_dD0TtPEqGctzoxmnF2TbPURwWGeSF4KvfG90
 
 <<^ code:"&#x0004;" -> ? >>

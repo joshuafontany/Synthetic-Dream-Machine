@@ -70,6 +70,6 @@ A component earns its address by serving a filter query. Tags start as TOML head
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:386bb95df73d2286
+<<^ code:"&#x0003;" >>ni:///sha-256;OGu5Xfc9Iob_hXQnr6tuLG1BtvOBtBiWm9MCqGO-gHw
 
 <<^ code:"&#x0004;" -> ? >>

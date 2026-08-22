@@ -224,6 +224,6 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:9f62f51c0249e66c
+<<^ code:"&#x0003;" >>ni:///sha-256;n2L1HAJJ5myDDayzDGZGQruLHVBm9k4c2ZCHd7RpUYA
 
 <<^ code:"&#x0004;" -> ? >>

@@ -28,6 +28,6 @@ Architecture invariants this entry preserves: web2 smell test (no HTTP/RPC dispa
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:6f35648190e52fac
+<<^ code:"&#x0003;" >>ni:///sha-256;bzVkgZDlL6y0iR6Ld5eyu5bSk1W-zi8z5n7lElpAfyo
 
 <<^ code:"&#x0004;" -> ? >>

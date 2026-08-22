@@ -120,6 +120,6 @@ never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:2d38c3c3b2b31057
+<<^ code:"&#x0003;" >>ni:///sha-256;LTjDw7KzEFettMRKy22X4ghUttwa6z91taqWWal3sDY
 
 <<^ code:"&#x0004;" -> ? >>

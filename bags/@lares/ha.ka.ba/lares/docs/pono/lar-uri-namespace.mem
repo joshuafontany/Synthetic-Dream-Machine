@@ -106,6 +106,6 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:cd14c1405965e4e5
+<<^ code:"&#x0003;" >>ni:///sha-256;zRTBQFll5OX-B8eSoGZRues4jXVC7G_e8yBMX2s75Rs
 
 <<^ code:"&#x0004;" -> ? >>

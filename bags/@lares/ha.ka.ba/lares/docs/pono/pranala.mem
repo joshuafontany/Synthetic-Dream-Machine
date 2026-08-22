@@ -107,6 +107,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:864a83872417c6a4
+<<^ code:"&#x0003;" >>ni:///sha-256;hkqDhyQXxqTWrqKYTj9QBPxEMpTKkh5UqZdfXCbTSwM
 
 <<^ code:"&#x0004;" -> ? >>

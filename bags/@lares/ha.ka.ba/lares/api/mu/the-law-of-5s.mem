@@ -202,6 +202,6 @@ export const RATING_COLOR: Record<Rating5, string> = {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ॐ ँ:854d78ead2ed26d6
+<<^ code:"&#x0003;" >>ni:///sha-256;hU146tLtJtbsnhPM1rOOPAqqv8fxJeQJAssTz4fhKFQ
 
 <<^ code:"&#x0004;" -> ? >>

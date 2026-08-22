@@ -60,6 +60,6 @@ It SHALL NOT declare `body-sha256` without `source-symbol`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:bc23c70c3b62e725
+<<^ code:"&#x0003;" >>ni:///sha-256;vCPHDDti5yUk7R65-u-GxS2y90tPJ07l1NxskLR4GA4
 
 <<^ code:"&#x0004;" -> ? >>

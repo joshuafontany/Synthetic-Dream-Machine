@@ -38,6 +38,6 @@ These helpers carry no side effects or platform assumptions. They could become a
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:8d1af64c42bcbb13
+<<^ code:"&#x0003;" >>ni:///sha-256;jRr2TEK8uxM6__nEKEScDvmwzORsNhXU1-fyHN7k4jY
 
 <<^ code:"&#x0004;" -> ? >>

@@ -166,6 +166,6 @@ Minimal boot should remain small enough to avoid compaction.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:d87d9b630c356ea3
+<<^ code:"&#x0003;" >>ni:///sha-256;2H2bYww1bqNE3FumufAGx8vE6yjqZNGqR7hoQXpPyyo
 
 <<^ code:"&#x0004;" -> ? >>

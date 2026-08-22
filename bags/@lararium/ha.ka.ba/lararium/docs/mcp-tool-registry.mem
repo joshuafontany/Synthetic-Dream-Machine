@@ -160,6 +160,6 @@ inputs      = ["uri: string"]
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:4046b7816fb37109
+<<^ code:"&#x0003;" >>ni:///sha-256;QEa3gW-zcQmNzMnnfEEsUovPQRXfRZ7CfO0ATVV-y7E
 
 <<^ code:"&#x0004;" -> ? >>

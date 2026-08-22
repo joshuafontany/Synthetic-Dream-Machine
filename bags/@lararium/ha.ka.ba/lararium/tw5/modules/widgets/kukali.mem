@@ -48,6 +48,6 @@ export function KukaliWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTre
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:543a7192b8aa9d06
+<<^ code:"&#x0003;" >>ni:///sha-256;VDpxkriqnQZP94OCV7lVRb3ET9XatduzsR2zZrf1_jM
 
 <<^ code:"&#x0004;" -> ? >>

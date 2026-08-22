@@ -76,6 +76,6 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:d731d1a92a5342ef
+<<^ code:"&#x0003;" >>ni:///sha-256;1zHRqSpTQu-FN0CpJnpyCs7GXzkVPhyP__sHxNZ6-uw
 
 <<^ code:"&#x0004;" -> ? >>

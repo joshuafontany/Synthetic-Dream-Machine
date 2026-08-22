@@ -240,6 +240,6 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:72178298cdf2bd3f
+<<^ code:"&#x0003;" >>ni:///sha-256;cheCmM3yvT-2cTyG8sV1jhNGqkuJKRmSf_GVNWu1F_A
 
 <<^ code:"&#x0004;" -> ? >>

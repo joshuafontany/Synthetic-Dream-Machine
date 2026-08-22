@@ -79,6 +79,6 @@ A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:1785145f86ac7a06
+<<^ code:"&#x0003;" >>ni:///sha-256;F4UUX4asegZqtDWw0lCiBvzgiOGQbqhrrlTW7RNDL8k
 
 <<^ code:"&#x0004;" -> ? >>

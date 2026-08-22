@@ -66,6 +66,6 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:c95d83edad6c3616
+<<^ code:"&#x0003;" >>ni:///sha-256;yV2D7a1sNhZvkxLHL7KtlyosXuAK-Qx52s2kkwkVK6g
 
 <<^ code:"&#x0004;" -> ? >>

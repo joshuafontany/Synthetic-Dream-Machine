@@ -58,6 +58,6 @@ export function registerImplementors(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:0a9f86067b8cb8dc
+<<^ code:"&#x0003;" >>ni:///sha-256;Cp-GBnuMuNyGntf1URY3Px4jj9Ou4-iWcufddCA2RuQ
 
 <<^ code:"&#x0004;" -> ? >>

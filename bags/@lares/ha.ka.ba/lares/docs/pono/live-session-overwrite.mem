@@ -102,6 +102,6 @@ A passing test records the jello claim as session evidence and refuses silent ca
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:4a2aff7be5364c36
+<<^ code:"&#x0003;" >>ni:///sha-256;Sir_e-U2TDZTvfCchITOFnkg4B8Mrs9agmNvPYKzYT4
 
 <<^ code:"&#x0004;" -> ? >>

@@ -53,14 +53,30 @@ import { sha256HexSync } from "@lararium/mesh/crypto";
 import { fencedSpans, maskedExec } from "./meme-ast/fence-mask.js";
 import { frameMark } from "./frame-marks.js";
 
+/** The one digest algorithm this grammar accepts, named in the check and never chosen by it. */
+export const CHECK_ALG = "sha-256";
+
 /**
- * How many hex characters the check carries.
+ * The check names its algorithm so a reader may KNOW, never so a message may CHOOSE.
  *
- * A block check answers "did these bytes survive the hop", never "did anyone alter this body" — that
- * second question belongs to the seal. Sixty-four bits sit far past what a transport fault reaches and
- * short enough that a person reads the line.
+ * A verifier that dispatched on the algorithm a carrier declares would let the carrier pick its own
+ * strength — the shape behind a decade of confusion attacks on token formats that trusted their own
+ * `alg` field. So the allowlist lives here, on the reading side, and anything outside it refuses.
  */
-export const BCC_HEX = 16;
+const ACCEPTED_ALGS: ReadonlySet<string> = new Set([CHECK_ALG]);
+
+/** base64url of a hex string — no padding, isomorphic, no Buffer. */
+function hexToB64u(hex: string): string {
+  const A = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  let bits = 0, acc = 0, out = "";
+  for (let i = 0; i < hex.length; i += 2) {
+    acc = (acc << 8) | parseInt(hex.slice(i, i + 2), 16);
+    bits += 8;
+    while (bits >= 6) { out += A[(acc >> (bits - 6)) & 63]; bits -= 6; }
+  }
+  if (bits > 0) out += A[(acc << (6 - bits)) & 63];
+  return out;
+}
 
 /**
  * The span a check covers: STX opener through ETX closer, inclusive. Null when the frame is absent.
@@ -86,15 +102,44 @@ export function checkSpan(text: string): { start: number; end: number } | null {
   return { start: stxM.index, end: stxM.index + etxM.index + etxM[0].length };
 }
 
-/** The check over an already-isolated body span. */
-export function bccOfSpan(span: string, namespace: string): string {
-  return `${namespace.trim()}:${sha256HexSync(span).slice(0, BCC_HEX)}`;
+/**
+ * The check over an already-isolated body span, as a name that points at itself.
+ *
+ * The form is the shelves' own: an algorithm, then the full digest of the bytes it covers. A shelf's
+ * name says the string it names lives elsewhere; this one says the string is the body directly above
+ * it. Position is what tells them apart, and a resolver MUST NOT follow one found after ETX.
+ *
+ * FULL WIDTH, never truncated. Every system that stores a digest for machine verification stores all
+ * of it and shortens only for a reader — and every truncation that got hurt had been sized against
+ * accident and then met an adversary. `nihOfSpan` is the reader's form, derived and never stored.
+ */
+export function bccOfSpan(span: string): string {
+  return `ni:///${CHECK_ALG};${hexToB64u(sha256HexSync(span))}`;
+}
+
+/**
+ * The same check in the form RFC 6920 wrote for people: lowercase hex, and a Luhn mod-16 digit that
+ * catches the transposition a hand actually makes.
+ *
+ * DERIVED, NEVER STORED. A carrier holds one spelling; this is what an instrument PRINTS when a person
+ * has to read a check aloud or carry it to another screen. Two homes for one fact is the failure this
+ * grammar keeps finding, so the second home is a moment rather than a place.
+ */
+export function nihOfSpan(span: string): string {
+  const hex = sha256HexSync(span);
+  let sum = 0, factor = 2;
+  for (let i = hex.length - 1; i >= 0; i--) {
+    const addend = factor * parseInt(hex[i]!, 16);
+    factor = factor === 2 ? 1 : 2;
+    sum += Math.floor(addend / 16) + (addend % 16);
+  }
+  return `nih:///${CHECK_ALG};${hex};${((16 - (sum % 16)) % 16).toString(16)}`;
 }
 
 /** The check a whole carrier should carry, or null where it holds no framed body. */
-export function bccOf(text: string, namespace: string): string | null {
+export function bccOf(text: string): string | null {
   const span = checkSpan(text);
-  return span ? bccOfSpan(text.slice(span.start, span.end), namespace) : null;
+  return span ? bccOfSpan(text.slice(span.start, span.end)) : null;
 }
 
 /**
@@ -107,9 +152,12 @@ export function bccOf(text: string, namespace: string): string | null {
 export function verifyBcc(text: string): "ok" | "mismatch" | "unchecked" {
   const span = checkSpan(text);
   if (!span) return "unchecked";
-  const trailing = /^[ \t]*([^\n]*:[0-9a-f]{16})/.exec(text.slice(span.end));
+  const trailing = /^[ \t]*(ni:\/\/\/([a-z0-9-]+);([A-Za-z0-9_-]+))/.exec(text.slice(span.end));
   if (!trailing) return "unchecked";
-  const carried = trailing[1]!;
-  const namespace = carried.slice(0, carried.lastIndexOf(":"));
-  return bccOfSpan(text.slice(span.start, span.end), namespace) === carried ? "ok" : "mismatch";
+  // The message names its algorithm; this reader decides whether to accept it.
+  if (!ACCEPTED_ALGS.has(trailing[2]!)) return "mismatch";
+  // CANONICAL OR REJECT. base64url admits several spellings of a value whose bit-length is not a
+  // multiple of six, so a comparator that tolerated them would call two different strings one check.
+  // Re-encoding what we computed and comparing whole refuses every non-canonical spelling for free.
+  return bccOfSpan(text.slice(span.start, span.end)) === trailing[1]! ? "ok" : "mismatch";
 }

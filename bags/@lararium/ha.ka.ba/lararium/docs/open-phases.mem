@@ -116,6 +116,6 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:2be5da1df92cde4e
+<<^ code:"&#x0003;" >>ni:///sha-256;K-XaHfks3k4voumu12UPAJgR7cTZnn_2xLssWoNwMBY
 
 <<^ code:"&#x0004;" -> ? >>

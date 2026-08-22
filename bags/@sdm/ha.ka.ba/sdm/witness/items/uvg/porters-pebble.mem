@@ -63,6 +63,6 @@ The v0.1 ''Porter's Pebble'' is the epic's first ''module-nesting'' proof:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:3f962d623473998c
+<<^ code:"&#x0003;" >>ni:///sha-256;P5YtYjRzmYyBDSpWbg39prnPrafpIIme3dCdQAGZSgc
 
 <<^ code:"&#x0004;" -> ? >>

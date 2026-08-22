@@ -250,6 +250,6 @@ The Voice house spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST implem
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:c35157b30d81564e
+<<^ code:"&#x0003;" >>ni:///sha-256;w1FXsw2BVk4V4MCi53XNNQD8lnubi2jRlnJgCVXwdoI
 
 <<^ code:"&#x0004;" -> ? >>

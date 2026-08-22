@@ -252,6 +252,6 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:7dc9a800acac26b2
+<<^ code:"&#x0003;" >>ni:///sha-256;fcmoAKysJrK6zeVxZk-Wmf-bo0xK65etrV-hkzaymXg
 
 <<^ code:"&#x0004;" -> ? >>

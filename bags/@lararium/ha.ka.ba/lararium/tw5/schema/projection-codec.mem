@@ -109,6 +109,6 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:a5165f42659e239f
+<<^ code:"&#x0003;" >>ni:///sha-256;pRZfQmWeI58-aYE5jSLqEHqR9lrWBSN7SmCfQS2t1NM
 
 <<^ code:"&#x0004;" -> ? >>

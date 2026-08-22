@@ -118,6 +118,6 @@ close-pattern = '<<~\/wehe\s*>>'
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:49163051c5bf1b6d
+<<^ code:"&#x0003;" >>ni:///sha-256;SRYwUcW_G21Rg4-SqFWRKvp5GkgaHb79UyZHQ_nYDS8
 
 <<^ code:"&#x0004;" -> ? >>

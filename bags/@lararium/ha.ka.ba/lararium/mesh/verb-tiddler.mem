@@ -60,6 +60,6 @@ Audit/ledger note: durable residency audit lives at `@<bag>/ledger/residency/<ev
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:aaf44a784a9180c2
+<<^ code:"&#x0003;" >>ni:///sha-256;qvRKeEqRgMLXUIldK2Ny1r5Xjd9fNFDHL8Ylg4w7ooo
 
 <<^ code:"&#x0004;" -> ? >>

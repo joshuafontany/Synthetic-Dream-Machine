@@ -357,6 +357,6 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:a2ab84041fefe053
+<<^ code:"&#x0003;" >>ni:///sha-256;oquEBB_v4FNmE9VlBz6E9S5AQkKlJtP0Hy-cLQ0LsvM
 
 <<^ code:"&#x0004;" -> ? >>

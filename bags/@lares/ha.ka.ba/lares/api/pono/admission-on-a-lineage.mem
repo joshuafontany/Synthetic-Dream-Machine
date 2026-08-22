@@ -323,6 +323,6 @@ model, (3) settles the sink, (4) hunts C4's counterexample, and (6) instruments 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:6148801c10b74d40
+<<^ code:"&#x0003;" >>ni:///sha-256;YUiAHBC3TUAzlbbD8h1gmBYqaGNAcsk62NnZl1iwUR0
 
 <<^ code:"&#x0004;" -> ? >>

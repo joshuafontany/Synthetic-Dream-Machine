@@ -70,6 +70,6 @@ boots correctly in offline or cold-start conditions before the corpus is loaded.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:05d2f063c51e984c
+<<^ code:"&#x0003;" >>ni:///sha-256;BdLwY8UemEz9-YlOxmoHDcSYjt2QfimAfq_esm3PQLI
 
 <<^ code:"&#x0004;" -> ? >>

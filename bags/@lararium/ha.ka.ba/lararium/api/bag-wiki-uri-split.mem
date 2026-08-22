@@ -68,6 +68,6 @@ Two registries, cleanly separated:
 
 `@oracle` stays the DreamNet read-face for the Cabal-rendered CIDs of `bags/@lares` + `bags/@lararium`. `@lares`/`@lararium` are ordinary catalog-registered operator bags — the local operator owns them until a Cabal ownership layer stands.
 
-<<^ code:"&#x0003;" >>:cedeae22732d7b87
+<<^ code:"&#x0003;" >>ni:///sha-256;zt6uInMte4dq7s7QWegSZq7eUmihqP28RYw2xSfsczw
 
 <<^ code:"&#x0004;" -> ? >>

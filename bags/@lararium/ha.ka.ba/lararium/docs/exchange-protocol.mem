@@ -61,6 +61,6 @@ emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:be097b4883944317
+<<^ code:"&#x0003;" >>ni:///sha-256;vgl7SIOUQxdXz_JdlYx1KPK-aCF76hhxB3G3ZeMoKpw
 
 <<^ code:"&#x0004;" -> ? >>

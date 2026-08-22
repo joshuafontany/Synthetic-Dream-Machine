@@ -60,6 +60,6 @@ Per-instance capability hooks and UUID write-back surface as explicit TW5 action
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:57ece184648ba9c7
+<<^ code:"&#x0003;" >>ni:///sha-256;V-zhhGSLqceJEi1YckYtdZDfMzLR5uIv-XPTeU51QxA
 
 <<^ code:"&#x0004;" -> ? >>

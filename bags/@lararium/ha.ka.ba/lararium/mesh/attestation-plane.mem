@@ -293,6 +293,6 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:76dd1ebdf700becd
+<<^ code:"&#x0003;" >>ni:///sha-256;dt0evfcAvs21A7CC7sGZIyhhsAgxB0bYQ9EeKoEGvzo
 
 <<^ code:"&#x0004;" -> ? >>

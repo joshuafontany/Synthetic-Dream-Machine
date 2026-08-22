@@ -99,6 +99,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:58d514c01c5de348
+<<^ code:"&#x0003;" >>ni:///sha-256;WNUUwBxd40hzbgVNm9ChrcoJyhVCfcyPlwFExJjDHlw
 
 <<^ code:"&#x0004;" -> ? >>

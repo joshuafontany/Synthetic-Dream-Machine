@@ -48,6 +48,6 @@ export function KauWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:de2e2a23a0661529
+<<^ code:"&#x0003;" >>ni:///sha-256;3i4qI6BmFSljfIf-QWfTl5kFH3fqBhe1xQceOeodaeI
 
 <<^ code:"&#x0004;" -> ? >>

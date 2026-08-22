@@ -69,6 +69,6 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:fb5d3e222beb645a
+<<^ code:"&#x0003;" >>ni:///sha-256;-10-IivrZFoDVy1W0FZJeD9AI07nqhwEh-j9KIom6hw
 
 <<^ code:"&#x0004;" -> ? >>

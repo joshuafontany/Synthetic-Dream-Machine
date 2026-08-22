@@ -170,6 +170,6 @@ At `seedCirclesDoc()` time — once per FACE, into that face's own `@circles-<ta
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>:01764203a99602c4
+<<^ code:"&#x0003;" >>ni:///sha-256;AXZCA6mWAsQxSydCYAVXyb0LUluN6uBL3NvC9mqMJxA
 
 <<^ code:"&#x0004;" -> ? >>

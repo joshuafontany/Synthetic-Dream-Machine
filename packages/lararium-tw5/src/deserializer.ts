@@ -977,7 +977,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // stamped carrier survive a round trip at all.
   const sila = str("carrier-sila");
   out += `\n\n<<^ code:"${MARK("ETX")}" >>`;
-  if (str("block-check")) out += bccOfSpan(out.slice(spanStart), str("namespace").trim());
+  if (str("block-check")) out += bccOfSpan(out.slice(spanStart));
   out += "\n";
   if (sila) out += `\n${sila}\n<<^ code:"${MARK("ETB")}" >>\n`;
   out += `\n<<^ code:"${MARK("EOT")}" -> ? >>\n`;
