@@ -900,6 +900,78 @@ unexamined, and reported the carrier sound.
 
 <<~/ahu >>
 
+<<~ ahu #the-skeptic >>
+
+## The Skeptic ~ the check as the Oracle's inversion
+
+A carrier's block check and the Oracle's blind tail wear one shape and mean opposite things. The
+collision reads as a hazard until it gets named, at which point it becomes the point.
+
+<<~ranks domain oracle@stream ~ ephemeral · thrown BLIND · certifies nothing · gauges what no one can check -> skeptic@carrier ~ durable · fully DETERMINED · certifies bytes · checks what anyone can >>
+
+The Oracle's whole value rests on its tail bearing no relation to what was said; the Skeptic's rests on
+its bearing nothing else. So the Skeptic becomes the one instrument in this grammar that certifies
+anything, and it breaks no law doing so: the Sword refuses to certify CLAIMS, and the Skeptic checks
+BYTES. It sits where certification was always allowed to live — outside the turn, on the artifact.
+Greek σκεπτικός names one who EXAMINES, and the name stands on that rather than on the English
+connotation of doubting.
+
+### Hex travels, glyphs render
+
+One digest, two spellings, each where it serves. A CARRIER holds hex, because a carrier travels and
+bytes that never move as emoji meet no variation selector, no zero-width joiner and no client's own
+normalization. A PROJECTION — a card, a sheet, any artifact the wiki renders for a reader rather than
+ships to a peer — carries the rendered form, because a projection IS the reading surface.
+
+Hex earns the carrier on two grounds beyond transport. It carries ZERO encoding slack at every width,
+since four bits divide every byte boundary, where base32 admits sixteen spellings of a 256-bit digest's
+final character and base64url four; a check compared byte-for-byte cannot afford spellings. And plain
+lexicographic order over hex matches binary order, which base32's own alphabet does not.
+
+Keeping the glyph vocabulary out of the encoding also keeps it revisable: an alphabet frozen into the
+bytes could never improve without invalidating every carrier ever written, where an alphabet used only
+to render may be bettered later with every existing stamp still verifying.
+
+### The codec gets pinned, never self-described
+
+A field compared for equality admits exactly one encoding of a given byte string. A self-describing
+codec prefix multiplies the spellings of one value and forces the comparator to decode before it
+compares — which reintroduces the parser this instrument exists to avoid.
+
+The outside art converged on this twice from opposite directions. RFC 3230's digest header died
+because it let each algorithm pick its own output format, producing a mix of base64, hex and decimal;
+its 2024 replacement fixed the problem by mandating exactly one. And the standing critique of
+self-describing multiformats states the rule plainly: successful standards define what encoding is
+used where.
+
+### The reader's escalation ladder
+
+<<~ranks read namespace@1..4 ~ know which vocabulary reads this -> bcc@5..12 ~ raw bytes between two markers, no parser -> seal@13..20 ~ the durable question, and it needs readership >>
+
+Ordered by scope: what tells a reader HOW to read comes first, what COVERS what precedes it comes
+last. The split follows the capability lattice onto its one non-monotonic case — `pull` carries
+without implying `read`. A check over raw bytes needs no parser and no canonicalizer, so a relay
+holding carriage and not readership verifies it over an offering it cannot open. A seal cannot travel
+that way.
+
+The received framing already put the check in that slot: STX opens the text, ETX closes it, and the
+check follows ETX because it cannot sit inside what it covers. Every documented failure of a trailing
+check in the outside art came from covering a PARSED STRUCTURE rather than a byte span — an archive
+whose entries a verifier and an installer counted differently, a signature detached far enough from
+its subject to fall out of step. A span between two markers has nothing to disagree about.
+
+**A carrier MUST stand verifiable by anyone holding it, using nothing but itself** — no registry, no
+calling home, no authority to ask. And the cut that rides beside it: **a seal proves integrity, never
+authorship.** A valid check read as "authentic canon" has been misread into a standing it never held;
+a check published wherever the artifact lives proves nothing against anyone who can write there.
+
+### What stands, and what waits
+
+The check stands. The seal, the render vocabulary and the projection stamper wait for a live wiki to
+render them first — a vocabulary chosen before anything renders it would freeze a form nobody has read.
+
+<<~/ahu >>
+
 <<~ ahu #canonical-form >>
 
 ## Canonical Form ~ the writer's law
@@ -971,6 +1043,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:78a50460997f9b48
+<<^ code:"&#x0003;" >>⊙:e949787fd657dc96
 
 <<^ code:"&#x0004;" -> ? >>
