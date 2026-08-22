@@ -15,6 +15,8 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/has-stack
  */
 
+import { BAGS_SEGMENT } from "@lararium/mesh";
+
 /** One stack entry: the authored tag and its qualified lar:/// uri (null = outside the stack / unresolvable). */
 export interface StackEntry {
   readonly tag: string;
@@ -42,7 +44,7 @@ export function bagScopeOf(carrierTitle: string): string | null {
   if (!m) return null;
   const root = m[1]!, ns = m[2]!;
   if (KIND_PLANES.has(ns)) return null;        // a surface (bags/@…), not a meme namespace
-  return `${root}/bags/@${ns}`;
+  return `${root}/${BAGS_SEGMENT}/@${ns}`;
 }
 
 /**
@@ -55,7 +57,7 @@ export function qualifyStackTag(tag: string, scope: string | null): string | nul
   if (!RELATIVE_RE.test(tag)) return null;
   if (!scope) return null;
   // scope is `<root>/bags/@<ns>`; a meme addresses bare: `<root>/<ns>/<tag>`.
-  const bare = scope.replace("/bags/@", "/");
+  const bare = scope.replace(`/${BAGS_SEGMENT}/@`, "/");
   return `lar:///${bare}/${tag}`;
 }
 

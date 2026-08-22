@@ -39,6 +39,8 @@
  * Meme: lar:///ha.ka.ba/lararium/docs/crossroads
  */
 
+import { CROSSROADS_DOC_URI, BAGS_SEGMENT } from "./lar-uris.js";
+
 /** What a vessel keeps, what it has declared, and what its content store actually holds. */
 export interface HoldingsReading {
   /** Bag-relative paths present in this vessel's on-disk mirror, per bag id. */
@@ -62,9 +64,13 @@ export interface HoldingFinding {
   readonly correction: string;
 }
 
+/** The crossroads tail, DERIVED from the one address that mints it — root-tolerant, so a foreign three-term
+ *  root still reads, and spelled in exactly one place so a rename moves both halves together. */
+const CROSSROADS_TAIL = CROSSROADS_DOC_URI.slice(CROSSROADS_DOC_URI.indexOf(`/${BAGS_SEGMENT}/`));
+
 /** Whether a bag id names the Nexus crossroads — the one bag whose entries are DECLARATIONS to a Nexus. */
 function isCrossroads(bagId: string): boolean {
-  return bagId.endsWith("/bags/@crossroads");
+  return bagId.endsWith(CROSSROADS_TAIL);
 }
 
 /**
