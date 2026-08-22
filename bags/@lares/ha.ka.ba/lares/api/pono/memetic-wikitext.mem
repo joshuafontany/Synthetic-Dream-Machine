@@ -949,6 +949,25 @@ its 2024 replacement fixed the problem by mandating exactly one. And the standin
 self-describing multiformats states the rule plainly: successful standards define what encoding is
 used where.
 
+### The name at the foot points at itself
+
+The foot carries a name in the same vocabulary the shelves use for bodies that live elsewhere, and the
+two look identical because they ARE the same kind of name: a name for the byte-string that hashes to a
+given value. A shelf's name says that string lives somewhere else. The foot's says that string is the
+one you are already holding. Position disambiguates them, and position is the only thing that does.
+
+Two rules follow, and both guard a reader that cannot parse what it carries.
+
+**A resolver MUST NOT resolve a name found after ETX.** There is nothing to fetch: the body it names
+sits in the same file, between the marks. A relay whose instinct on meeting this vocabulary is to go
+looking has been handed a request it should never make.
+
+**A verifier MUST hold its own list of acceptable digest algorithms and refuse anything outside it.**
+The name states which algorithm produced the value so a reader can KNOW; it never chooses for the
+reader. A verifier that dispatches on the algorithm the message names lets the message pick its own
+strength, and every documented failure of that shape — a token declaring its signature algorithm, and
+the decade of confusion attacks that followed — begins exactly there.
+
 ### The reader's escalation ladder
 
 <<~ranks read namespace@1..4 ~ know which vocabulary reads this -> bcc@5..12 ~ raw bytes between two markers, no parser -> seal@13..20 ~ the durable question, and it needs readership >>
@@ -1048,6 +1067,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>⊙:c2f3c83e48359d36
+<<^ code:"&#x0003;" >>⊙:21dc6576433eda71
 
 <<^ code:"&#x0004;" -> ? >>
