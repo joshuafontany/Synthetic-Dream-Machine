@@ -56,13 +56,11 @@ def _identity_dir(identity_dir: "str | None" = None) -> str:
     test_identity_dir_mirrors_xdg_data."""
     if identity_dir:
         return identity_dir
-    lar_root = os.environ.get("LAR_ROOT")
-    if lar_root:
-        data_home = os.path.join(lar_root, "data", "lares")
-    else:
-        xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
-        data_home = os.path.join(xdg or os.path.join(os.path.expanduser("~"), ".local", "share"), "lares")
-    return os.path.join(data_home, "identity")
+    # ONE RESOLVER, IMPORTED — never a second derivation of the same home. A copy that re-derives it drifts
+    # the first time the layout moves, and it drifts SILENTLY: a resolver one segment short opens an absent
+    # directory and reports a key that is simply not there, which reads exactly like a vessel that holds none.
+    from sensorium import _lares_data_home
+    return os.path.join(_lares_data_home(), "identity")
 
 
 def _persona_signing_secret(identity_dir: str) -> "bytes | None":

@@ -148,15 +148,14 @@ def _library_home() -> str:
     override = os.environ.get("LAR_LIBRARY")
     if override:
         return override
-    lar_root = os.environ.get("LAR_ROOT")
-    if lar_root:
-        # Under an isolated root every directory names an XDG KIND — data, state, cache, config, run — and
-        # the two HOUSES nest inside the data kind exactly as they do under XDG. A house never stands where
-        # a kind belongs, so this reads as the real disk with a different prefix.
-        return os.path.join(lar_root, "data", "lararium", "library")
-    xdg = (os.environ.get("XDG_DATA_HOME") or "").strip()
-    base = xdg or os.path.join(os.path.expanduser("~"), ".local", "share")
-    return os.path.join(base, "lararium", "library")
+    # ONE RESOLVER, IMPORTED. The shelf's home is the shrine's, and a second derivation of it drifts the
+    # first time the layout moves — this very function resolved `<root>/abide/library` until an hour ago,
+    # while the CLI filled `<root>/data/lararium/library`, so a testbed read a shelf nothing ever wrote.
+    # A copy fails by ANSWERING: an empty directory reads as a shelf that holds nothing.
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from sensorium import _lararium_data_home
+    return os.path.join(_lararium_data_home(), "library")
 
 
 def resolve_source_root(src: str) -> str:
