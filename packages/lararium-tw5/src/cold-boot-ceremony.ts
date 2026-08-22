@@ -80,13 +80,19 @@ export function didKeyFromVerifyingKey(verifyingKeyHex: string): string {
 // Tiddler URI helpers — inlined to avoid @lararium/mesh import in CJS
 // ---------------------------------------------------------------------------
 
-// NAMESPACES, never bags. A title resolves verbatim inside its own document, so `@identities/<did>` and
-// `@circles/operators` spell the same in every face's planes and one internal shape serves them all. The
-// BAGS answering to them carry the face's tag — `@identities-<tag>`, `@circles-<tag>` — because a face's
-// relations travel with the FACE and a vessel-global bag would correlate the faces a multitude holds apart.
+// INNER PATHS — a title names its own record and never the entity holding it. An address carries three
+// slots, each named once: the HOME, the ENTITY (`{bags,wikis}/@name`, the only place `@` stands) and the
+// INNER PATH. These build the third, so a title carries no `@` and no bag: the record's `bag` field already
+// names the face's `@…-<tag>`, and a title repeating it would say the entity twice. Keeping the inner path
+// free of the entity is also what lets ONE internal shape serve every face — a record written on one
+// persona's plane reads identically on the next, because nothing in its title knows which plane holds it.
+//
+// These MIRROR `@lararium/mesh`'s `lar-uris` and stay inlined only because this module is CJS and must not
+// import it. THE TWO SPELLINGS MUST MATCH BYTE-FOR-BYTE: a title minted here and read there resolves to
+// one record, or to none at all.
 const SOCIAL_HOST         = "ha.ka.ba";
-const IDENTITIES_NAMESPACE = `lar:///${SOCIAL_HOST}/@identities`;
-const CIRCLES_NAMESPACE    = `lar:///${SOCIAL_HOST}/@circles`;
+const IDENTITIES_NAMESPACE = `lar:///${SOCIAL_HOST}/identities`;
+const CIRCLES_NAMESPACE    = `lar:///${SOCIAL_HOST}/circles`;
 
 function identityTiddlerUri(did: string): string {
   return `${IDENTITIES_NAMESPACE}/${did}`;
