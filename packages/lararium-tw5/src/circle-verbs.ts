@@ -30,7 +30,7 @@
  */
 
 import {
-  circleTiddlerUri, CIRCLES_NAMESPACE,
+  circleTiddlerUri, CIRCLES_INNER,
   type LarTiddlerStore, type LarTiddlerRecord,
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
@@ -214,7 +214,7 @@ export function makeCircleListReactor(opts: CircleVerbOptions): VerbReactor {
     // Every circle: the tiddlers under the namespace prefix. The plane's SELF-POINTER answers to that
     // face's own `@circles-<tag>` and never carries this prefix at all, so it is skipped by shape rather
     // than by exclusion — as is any nested title.
-    const prefix = `${CIRCLES_NAMESPACE}/`;
+    const prefix = `${CIRCLES_INNER}/`;
     const titles = (await store.listVisible()).sort();
     const circles: Array<{ circle: string; members: string[] }> = [];
     for (const title of titles) {

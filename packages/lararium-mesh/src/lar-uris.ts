@@ -362,34 +362,42 @@ export function bagDescriptorUri(bagId: string): string {
 // twice and fuse two slots into one string. Keeping the inner path free of the entity is also what lets
 // one internal shape serve every face: a record written on one persona's plane reads identically on the
 // next, because nothing in its title knows which plane it sits in.
+// The INNER namespace each record kind gathers under — the prefix a lister folds by, and the stem every
+// builder below extends. Distinct from the `*_NAMESPACE` bag addresses: those name the ENTITY a record
+// lands in, these name the record's own path INSIDE it, and a lister that folds by a bag address finds
+// nothing because no title carries one.
+export const IDENTITIES_INNER = stableLarUri("identities");
+export const CIRCLES_INNER    = stableLarUri("circles");
+export const SESSIONS_INNER   = stableLarUri("sessions");
+
 /** identityTiddlerUri("did:key:z…") → "lar:///ha.ka.ba/identities/did:key:z…" */
 export function identityTiddlerUri(did: string): string {
-  return stableLarUri(`identities/${did}`);
+  return `${IDENTITIES_INNER}/${did}`;
 }
 
 /** circleTiddlerUri("admins") → "lar:///ha.ka.ba/circles/admins" */
 export function circleTiddlerUri(id: string): string {
-  return stableLarUri(`circles/${id}`);
+  return `${CIRCLES_INNER}/${id}`;
 }
 
 /** sessionTiddlerUri("sess-abc") → "lar:///ha.ka.ba/sessions/sess-abc" */
 export function sessionTiddlerUri(id: string): string {
-  return stableLarUri(`sessions/${id}`);
+  return `${SESSIONS_INNER}/${id}`;
 }
 
 /** sessionEventLogUri("sess-abc") → "lar:///ha.ka.ba/sessions/sess-abc/events" */
 export function sessionEventLogUri(sessionId: string): string {
-  return stableLarUri(`sessions/${sessionId}/events`);
+  return `${SESSIONS_INNER}/${sessionId}/events`;
 }
 
 /** deviceDelegationUri(opDid, devDid) → "lar:///ha.ka.ba/identities/{opDid}/devices/{devDid}" */
 export function deviceDelegationUri(personaRootDid: string, deviceDid: string): string {
-  return stableLarUri(`identities/${encodeURIComponent(personaRootDid)}/devices/${encodeURIComponent(deviceDid)}`);
+  return `${IDENTITIES_INNER}/${encodeURIComponent(personaRootDid)}/devices/${encodeURIComponent(deviceDid)}`;
 }
 
 /** nexusTrustUri("abcdef…") → "lar:///ha.ka.ba/identities/trust/nexus/abcdef…" */
 export function nexusTrustUri(nexusPubkey: string): string {
-  return stableLarUri(`identities/trust/nexus/${nexusPubkey}`);
+  return `${IDENTITIES_INNER}/trust/nexus/${nexusPubkey}`;
 }
 
 // ── The @nexus plane — a confederation's per-Nexus faces (causal island) ──────

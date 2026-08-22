@@ -17,7 +17,7 @@ import { MemoryTiddlerStore } from "../src/memory-store.js";
 import { makeCircleReactors, foldMembers } from "../src/circle-verbs.js";
 import type { VerbContext } from "../src/verb-dispatcher.js";
 import type { TW5Engine } from "../src/tw5-vm.js";
-import { circleTiddlerUri, CIRCLES_NAMESPACE, mutableLarRecord } from "@lararium/mesh";
+import { circleTiddlerUri, CIRCLES_INNER, mutableLarRecord } from "@lararium/mesh";
 
 const CTX = {} as VerbContext;
 const NYM_A = "aa".repeat(32);
@@ -25,7 +25,7 @@ const NYM_B = "bb".repeat(32);
 
 /** A @circles store seeded with the "following" system circle (legacy memberDids empty), as seedCirclesDoc plants it. */
 function seededCircles(): MemoryTiddlerStore {
-  const store = new MemoryTiddlerStore(CIRCLES_NAMESPACE);
+  const store = new MemoryTiddlerStore(CIRCLES_INNER);
   store._seed(mutableLarRecord(circleTiddlerUri("following"), {
     text: "", id: "following", displayName: "Following", kind: "System", memberDids: "", createdAt: "",
   }, "lararium-seed"));
@@ -110,7 +110,7 @@ describe("circle-verbs — the per-nym follow-graph over @circles", () => {
   });
 
   test("a legacy memberDids register folds in as a baseline, superseded by a real remove", async () => {
-    const store = new MemoryTiddlerStore(CIRCLES_NAMESPACE);
+    const store = new MemoryTiddlerStore(CIRCLES_INNER);
     // An OLDER doc that still carries the space-joined register (a seed, or a pre-C2 write).
     store._seed(mutableLarRecord(circleTiddlerUri("following"), {
       text: "", id: "following", displayName: "Following", kind: "System",
@@ -130,7 +130,7 @@ describe("circle-verbs — the per-nym follow-graph over @circles", () => {
     const t0 = new Date(1_000_000).toISOString();
     const baseFields = { text: "", id: "following", displayName: "Following", kind: "System", createdAt: "", [`mbr+:${NYM_A}`]: t0 };
     const seed = () => {
-      const s = new MemoryTiddlerStore(CIRCLES_NAMESPACE);
+      const s = new MemoryTiddlerStore(CIRCLES_INNER);
       s._seed(mutableLarRecord(circleTiddlerUri("following"), { ...baseFields }, "lararium-seed"));
       return s;
     };
@@ -176,9 +176,11 @@ describe("circle-verbs — the per-nym follow-graph over @circles", () => {
     await add({ circle: "following", nym: NYM_A }, CTX);
     await remove({ circle: "following", nym: NYM_B }, CTX);
 
-    // Every title the reactors ever wrote sits under the @circles prefix — no board shore is reachable.
+    // Every title the reactors ever wrote sits under the CIRCLES INNER namespace — no board shore is
+    // reachable. It folds by the inner stem, never the bag address: a title names its own record and never
+    // the entity holding it, so a check against `@circles-<tag>` would match nothing and pass by vacuity.
     for (const title of store._snapshot().keys()) {
-      expect(title.startsWith(CIRCLES_NAMESPACE)).toBe(true);
+      expect(title.startsWith(CIRCLES_INNER)).toBe(true);
       expect(title).not.toContain("crossroads");
       expect(title).not.toContain("board");
     }
