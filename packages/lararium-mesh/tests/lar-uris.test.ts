@@ -221,7 +221,13 @@ describe("â˜… an inner path names its own record, never the entity holding it â˜
     expect(uris.nexusTrustUri("ab".repeat(32)).startsWith(`${IDENTITIES_INNER}/`)).toBe(true);
   });
 
-  test("no title carries an `@` or the entity that holds it", () => {
+  test("no title names the ENTITY that holds it â€” the relation, not a character", () => {
+    // THE INVARIANT IS RELATIONAL AND OUTLIVES ANY SPELLING. A title carrying its own bag ties a record to
+    // the plane that happened to hold it when it was written, so the same record read from another face
+    // resolves nowhere. What makes that wrong is the REPETITION, never the punctuation: fencing `@` here
+    // would fence a character that means nothing once entities spell plainly, and a did with an email
+    // local-part or a handle used as a record key would trip a guard with no reason to fire â€” and the next
+    // reader would take its refusal for law. `/bags/` marks an entity address either way.
     for (const title of [
       uris.identityTiddlerUri("did:key:zX"),
       uris.circleTiddlerUri("following"),
@@ -230,8 +236,11 @@ describe("â˜… an inner path names its own record, never the entity holding it â˜
       uris.deviceDelegationUri("did:key:zA", "did:key:zB"),
       uris.nexusTrustUri("ab".repeat(32)),
     ]) {
-      expect(title).not.toContain("@");        // `@` stands in the ENTITY slot alone
-      expect(title).not.toContain("/bags/");   // and a title never repeats where it sits
+      expect(title).not.toContain("/bags/");
+      expect(title).not.toContain("/wikis/");
+      for (const entity of [IDENTITIES_NAMESPACE, CIRCLES_NAMESPACE, SESSIONS_NAMESPACE]) {
+        expect(title.startsWith(entity)).toBe(false);   // never its own bag, nor any other's
+      }
     }
   });
 
@@ -242,10 +251,13 @@ describe("â˜… an inner path names its own record, never the entity holding it â˜
     expect(CIRCLES_INNER).not.toBe(CIRCLES_NAMESPACE);
     expect(SESSIONS_INNER).not.toBe(SESSIONS_NAMESPACE);
     for (const entity of [IDENTITIES_NAMESPACE, CIRCLES_NAMESPACE, SESSIONS_NAMESPACE]) {
-      expect(entity).toContain("/bags/@");     // an entity address, and it says so
+      expect(entity).toContain("/bags/");       // an entity address, named by its slot
     }
     for (const stem of [IDENTITIES_INNER, CIRCLES_INNER, SESSIONS_INNER]) {
-      expect(stem).not.toContain("@");         // a stem, and it says so
+      // A stem stands where no entity does. Checked by the SLOT it occupies, so the vector still holds
+      // when entities stop spelling themselves with a leading character.
+      expect(stem).not.toContain("/bags/");
+      expect(stem).not.toContain("/wikis/");
     }
   });
 });
