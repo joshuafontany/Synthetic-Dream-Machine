@@ -12,6 +12,7 @@
  */
 
 import { describe, test, expect } from "vitest";
+import * as uris from "../src/lar-uris.js";
 import {
   larRoot,
   isStableLarUri,
@@ -188,5 +189,63 @@ describe("@crossroads — the public oracle plane (three-plane model)", () => {
     // one names the doc, the other publishes where to find it to a stranger.
     expect(nexusHandlesUri("nx").startsWith(NEXUS_DOC_URI)).toBe(true);
     expect(nexusHandlesUri("nx").startsWith(CROSSROADS_DOC_URI)).toBe(false);
+  });
+});
+
+// ── THE THREE SLOTS — an address names each once, and a builder answers to its own stem ──────────────
+//
+// Every fault in this family looked identical from inside: a builder moved, a consumer did not, and the
+// mismatch FOLDED EMPTY or ROUTED WRONG rather than throwing. `circle-list` returned no circles; a record's
+// `bag` field carried a title stem. Neither raised. These vectors make the pairing structural.
+describe("★ an inner path names its own record, never the entity holding it ★", () => {
+  const { IDENTITIES_INNER, CIRCLES_INNER, SESSIONS_INNER,
+          IDENTITIES_NAMESPACE, CIRCLES_NAMESPACE, SESSIONS_NAMESPACE } = uris;
+  // A VACUOUS GREEN WOULD BE WORSE THAN THE FAULT: an absent export reads `undefined`, every
+  // `not.toContain("@")` passes on it, and the whole describe blesses nothing. Prove they exist first.
+  test("the six constants this block reasons over actually stand", () => {
+    for (const v of [IDENTITIES_INNER, CIRCLES_INNER, SESSIONS_INNER,
+                     IDENTITIES_NAMESPACE, CIRCLES_NAMESPACE, SESSIONS_NAMESPACE]) {
+      expect(typeof v).toBe("string");
+      expect(v.startsWith("lar:///")).toBe(true);
+    }
+  });
+
+  test("every title builder extends ITS OWN stem — the one a lister folds by", () => {
+    // A lister folds by the stem; a builder that stopped extending it makes that fold return nothing,
+    // silently. Pair them here so the two can never drift apart unobserved.
+    expect(uris.identityTiddlerUri("did:key:zX").startsWith(`${IDENTITIES_INNER}/`)).toBe(true);
+    expect(uris.circleTiddlerUri("following").startsWith(`${CIRCLES_INNER}/`)).toBe(true);
+    expect(uris.sessionTiddlerUri("s1").startsWith(`${SESSIONS_INNER}/`)).toBe(true);
+    expect(uris.sessionEventLogUri("s1").startsWith(`${SESSIONS_INNER}/`)).toBe(true);
+    expect(uris.deviceDelegationUri("did:key:zA", "did:key:zB").startsWith(`${IDENTITIES_INNER}/`)).toBe(true);
+    expect(uris.nexusTrustUri("ab".repeat(32)).startsWith(`${IDENTITIES_INNER}/`)).toBe(true);
+  });
+
+  test("no title carries an `@` or the entity that holds it", () => {
+    for (const title of [
+      uris.identityTiddlerUri("did:key:zX"),
+      uris.circleTiddlerUri("following"),
+      uris.sessionTiddlerUri("s1"),
+      uris.sessionEventLogUri("s1"),
+      uris.deviceDelegationUri("did:key:zA", "did:key:zB"),
+      uris.nexusTrustUri("ab".repeat(32)),
+    ]) {
+      expect(title).not.toContain("@");        // `@` stands in the ENTITY slot alone
+      expect(title).not.toContain("/bags/");   // and a title never repeats where it sits
+    }
+  });
+
+  test("the stem and the entity stay DIFFERENT strings — one slot each, never fused", () => {
+    // The fault this fences: a single constant serving both slots. A record's `bag` then carries a title
+    // stem, and every consumer routing by that field sends it somewhere else without complaint.
+    expect(IDENTITIES_INNER).not.toBe(IDENTITIES_NAMESPACE);
+    expect(CIRCLES_INNER).not.toBe(CIRCLES_NAMESPACE);
+    expect(SESSIONS_INNER).not.toBe(SESSIONS_NAMESPACE);
+    for (const entity of [IDENTITIES_NAMESPACE, CIRCLES_NAMESPACE, SESSIONS_NAMESPACE]) {
+      expect(entity).toContain("/bags/@");     // an entity address, and it says so
+    }
+    for (const stem of [IDENTITIES_INNER, CIRCLES_INNER, SESSIONS_INNER]) {
+      expect(stem).not.toContain("@");         // a stem, and it says so
+    }
   });
 });

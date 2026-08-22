@@ -91,15 +91,21 @@ export function didKeyFromVerifyingKey(verifyingKeyHex: string): string {
 // import it. THE TWO SPELLINGS MUST MATCH BYTE-FOR-BYTE: a title minted here and read there resolves to
 // one record, or to none at all.
 const SOCIAL_HOST         = "ha.ka.ba";
-const IDENTITIES_NAMESPACE = `lar:///${SOCIAL_HOST}/identities`;
-const CIRCLES_NAMESPACE    = `lar:///${SOCIAL_HOST}/circles`;
+// The INNER stem a title extends — no `@`, no bag. Mirrors mesh's `IDENTITIES_INNER`/`CIRCLES_INNER`.
+const IDENTITIES_INNER     = `lar:///${SOCIAL_HOST}/identities`;
+const CIRCLES_INNER        = `lar:///${SOCIAL_HOST}/circles`;
+// The ENTITY a record lands in — `bags/@name`, the one slot `@` stands in. Mirrors mesh's
+// `IDENTITIES_NAMESPACE`/`CIRCLES_NAMESPACE`, and a record's `bag` field carries THIS, never the stem
+// above: one constant serving both slots would fuse the two and route a record by the wrong string.
+const IDENTITIES_NAMESPACE = `lar:///${SOCIAL_HOST}/bags/@identities`;
+const CIRCLES_NAMESPACE    = `lar:///${SOCIAL_HOST}/bags/@circles`;
 
 function identityTiddlerUri(did: string): string {
-  return `${IDENTITIES_NAMESPACE}/${did}`;
+  return `${IDENTITIES_INNER}/${did}`;
 }
 
 function circleTiddlerUri(id: string): string {
-  return `${CIRCLES_NAMESPACE}/${id}`;
+  return `${CIRCLES_INNER}/${id}`;
 }
 
 // ---------------------------------------------------------------------------
