@@ -8,13 +8,29 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./agile-digest": {
+      "import": "./dist/agile-digest.js",
+      "types": "./dist/agile-digest.d.ts"
+    },
     "./bures-metric": {
       "import": "./dist/bures-metric.js",
       "types": "./dist/bures-metric.d.ts"
     },
+    "./carrier-type": {
+      "import": "./dist/carrier-type.js",
+      "types": "./dist/carrier-type.d.ts"
+    },
     "./cascade": {
       "import": "./dist/cascade.js",
       "types": "./dist/cascade.d.ts"
+    },
+    "./crypto": {
+      "import": "./dist/crypto.js",
+      "types": "./dist/crypto.d.ts"
+    },
+    "./ffz-project": {
+      "import": "./dist/ffz-project.js",
+      "types": "./dist/ffz-project.d.ts"
     },
     "./harvest": {
       "import": "./dist/harvest.js",
@@ -24,69 +40,57 @@
       "import": "./dist/lar-uris.js",
       "types": "./dist/lar-uris.d.ts"
     },
-    "./mirror-paths": {
-      "import": "./dist/mirror-paths.js",
-      "types": "./dist/mirror-paths.d.ts"
-    },
-    "./reaction-graph": {
-      "import": "./dist/reaction-graph.js",
-      "types": "./dist/reaction-graph.d.ts"
-    },
-    "./worldline": {
-      "import": "./dist/worldline.js",
-      "types": "./dist/worldline.d.ts"
-    },
-    "./sensorium-consistency": {
-      "import": "./dist/sensorium-consistency.js",
-      "types": "./dist/sensorium-consistency.d.ts"
-    },
-    "./sensorium-fusion": {
-      "import": "./dist/sensorium-fusion.js",
-      "types": "./dist/sensorium-fusion.d.ts"
-    },
-    "./sensorium-contract": {
-      "import": "./dist/sensorium-contract.js",
-      "types": "./dist/sensorium-contract.d.ts"
-    },
-    "./crypto": {
-      "import": "./dist/crypto.js",
-      "types": "./dist/crypto.d.ts"
-    },
-    "./agile-digest": {
-      "import": "./dist/agile-digest.js",
-      "types": "./dist/agile-digest.d.ts"
-    },
-    "./ffz-project": {
-      "import": "./dist/ffz-project.js",
-      "types": "./dist/ffz-project.d.ts"
-    },
-    "./windowed-coupling": {
-      "import": "./dist/windowed-coupling.js",
-      "types": "./dist/windowed-coupling.d.ts"
-    },
     "./linearity-gate": {
       "import": "./dist/linearity-gate.js",
       "types": "./dist/linearity-gate.d.ts"
-    },
-    "./rank-te": {
-      "import": "./dist/rank-te.js",
-      "types": "./dist/rank-te.d.ts"
     },
     "./mesh-coupling": {
       "import": "./dist/mesh-coupling.js",
       "types": "./dist/mesh-coupling.d.ts"
     },
+    "./mirror-paths": {
+      "import": "./dist/mirror-paths.js",
+      "types": "./dist/mirror-paths.d.ts"
+    },
     "./node": {
       "import": "./dist/node.js",
       "types": "./dist/node.d.ts"
     },
-    "./carrier-type": {
-      "import": "./dist/carrier-type.js",
-      "types": "./dist/carrier-type.d.ts"
+    "./rank-te": {
+      "import": "./dist/rank-te.js",
+      "types": "./dist/rank-te.d.ts"
+    },
+    "./reaction-graph": {
+      "import": "./dist/reaction-graph.js",
+      "types": "./dist/reaction-graph.d.ts"
+    },
+    "./sensorium-consistency": {
+      "import": "./dist/sensorium-consistency.js",
+      "types": "./dist/sensorium-consistency.d.ts"
+    },
+    "./sensorium-contract": {
+      "import": "./dist/sensorium-contract.js",
+      "types": "./dist/sensorium-contract.d.ts"
+    },
+    "./sensorium-fusion": {
+      "import": "./dist/sensorium-fusion.js",
+      "types": "./dist/sensorium-fusion.d.ts"
     },
     "./tiddler-store": {
       "import": "./dist/tiddler-store.js",
       "types": "./dist/tiddler-store.d.ts"
+    },
+    "./vessel-condition": {
+      "import": "./dist/vessel-condition.js",
+      "types": "./dist/vessel-condition.d.ts"
+    },
+    "./windowed-coupling": {
+      "import": "./dist/windowed-coupling.js",
+      "types": "./dist/windowed-coupling.d.ts"
+    },
+    "./worldline": {
+      "import": "./dist/worldline.js",
+      "types": "./dist/worldline.d.ts"
     }
   },
   "main": "./dist/index.js",

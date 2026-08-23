@@ -27,6 +27,7 @@ export * from "./vessel-identity-core.js";
 export * from "./anchor-store.js";
 export * from "./persona-vault.js";
 export * from "./vessel-standing.js";
+export * from "./vessel-condition.js";
 export * from "./raise-challenge.js";
 export * from "./persona-petname.js";
 export * from "./persona-declare.js";

@@ -24,6 +24,7 @@ import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
 import { larRoot, larBootstrapPath, larDataDir, larCasDir, vesselDid } from "../env.js";
 import { udsAlive, reapStaleSocket } from "../local-connector.js";
+import { readVesselStanding, conditionOk } from "@lararium/mesh/vessel-condition";
 import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
@@ -265,30 +266,30 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
           await sleep(500);
         }
       }
-      // `ready` = attested vessel-ready, no late fault, AND the verb socket answers.
-      const sockAnswers = await udsAlive();
-      nodeUp = phase === "ready" && sockAnswers;
-      nodeNote =
-        phase === "ready"
-          // THE NOTE MUST NOT OUTRANK THE FLAG. Attestation and the verb socket are two events, and the
-          // socket can still be silent when the node has already attested. Printing the bare
-          // "attested vessel-ready" beside `up: false` reads as a contradiction, and a caller that
-          // believes the note treats a rising vessel as a broken one. Naming the gap costs a clause and
-          // tells the operator the true cure: read again.
-          ? sockAnswers
-            ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`
-            : udsRefusal
-              ? `serving, but the verb socket REFUSED to bind: ${udsRefusal}`
-                + (/EINVAL/.test(udsRefusal) ? "  (a Unix socket path caps near 108 bytes — LAR_ROOT sits too deep)" : "")
-              : `started detached (pid ${child.pid ?? "?"}); attested vessel-ready, verb socket still silent — RISING, read again`
-          : phase === "fault"
-            // SURFACE THE FAULT ITSELF, never only its address. The node writes a cure-naming line — "your
-          // archive is sealed, set LARES_ARCHIVE_PASSPHRASE and boot again" — and a report that answers
-          // with a PATH sends the operator to a file at the moment they least want a detour. Worse, the
-          // caller downstream then fails on the symptom (no daemon at the socket) and buries the cause
-          // entirely. The line that knows the answer belongs where the question got asked.
-          ? `started then attested a boot fault: ${fatalLine(readAttestation()) ?? "see " + log}`
-            : `starting detached (pid ${child.pid ?? "?"}); boot stalled (no log progress for 15s) before vessel-ready — see ${log}`;
+      // ONE READING, FROM ONE PLACE. `readVesselStanding` folds what this supervisor OBSERVED into the
+      // four-state condition the whole house reports in, and `ok` derives from that state — so the note
+      // and the flag cannot disagree, whatever either says. The constructor refuses a ready-claiming
+      // message on a state that has not earned it, which is the original fault made unconstructible
+      // rather than merely avoided.
+      const condition = readVesselStanding({
+        started:   true,
+        attested:  phase === "ready",
+        accepting: await udsAlive(),
+        refusal:   udsRefusal,
+      });
+      nodeUp = conditionOk(condition);
+      nodeNote = phase === "fault"
+        // A BOOT FAULT KEEPS ITS OWN VOICE. The node writes a cure-naming line — "your archive is sealed,
+        // set LARES_ARCHIVE_PASSPHRASE and boot again" — and a report answering with a PATH sends the
+        // operator to a file at the moment they least want a detour, while the caller downstream fails on
+        // the symptom and buries the cause. The line that knows the answer belongs where the question got
+        // asked, so it rides verbatim rather than through the condition's vocabulary.
+        ? `started then attested a boot fault: ${fatalLine(readAttestation()) ?? "see " + log}`
+        : condition.state === "rising" && phase !== "ready"
+          ? `starting detached (pid ${child.pid ?? "?"}); boot stalled (no log progress for 15s) — see ${log}`
+          : `${condition.message} (pid ${child.pid ?? "?"})`
+            + (condition.reason === "uds-refused" && /EINVAL/.test(udsRefusal ?? "")
+                ? "  (a Unix socket path caps near 108 bytes — LAR_ROOT sits too deep)" : "");
     }
   }
 
