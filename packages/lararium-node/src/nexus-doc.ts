@@ -292,8 +292,9 @@ export function writeNexusKahu(bagsDir: string, kahu: NexusKahuBlock, seed: Nexu
 /**
  * Write the PRACTICE joint alone — the fast-cadence dials one hand may turn.
  *
- * This one carries the sharpest reason for the split: a posture flip previously re-emitted the seal
- * lineage's bytes, so the cheapest act in the house rewrote the dearest joint. It no longer reaches it.
+ * This one carries the sharpest reason for the split: the cheapest act in the house MUST NOT reach the
+ * dearest joint. A posture flip that re-emitted the seal lineage's bytes would rewrite it; this writer
+ * cannot reach it.
  */
 export function writeNexusPractice(bagsDir: string, practice: NexusPracticeBlock, seed: NexusDoc): string {
   return writeJoint(bagsDir, PRACTICE_BLOCK, practice, seed);

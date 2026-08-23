@@ -3,8 +3,8 @@
  *
  *   1. BARE-DOC BODY-CENTERING (3d7238ec): a no-carrier doc (no SOH, no STX)
  *      parses as ALL BODY, and the recompose centers its content between the
- *      minted &#x0002;/&#x0003; markers — the header-routed wrap previously left
- *      the body slot empty and stacked blank lines.
+ *      minted &#x0002;/&#x0003; markers. A header-routed wrap leaves the body slot
+ *      empty and stacks blank lines.
  *
  *   2. TELEMETRY-FENCE SUPERSESSION (operator overrule 2026-07-20, supersedes
  *      ruling 16f4b271): telemetry routes through Py on capture, and a

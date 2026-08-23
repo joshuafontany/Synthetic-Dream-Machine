@@ -468,10 +468,10 @@ export async function cmdMempalace(args: ParsedArgs): Promise<number> {
 /**
  * `lares mempalace install` — the SIDECAR's library deps (submodule + pip).
  *
- * IT LEFT THE BOOT (operator ruling, 2026-08-08). `wake --install` used to run this as part of founding a
- * vessel, which made a separate tool read as part of the base install — and it writes OUTSIDE the vessel
- * root, into the operator's real Python environment, so a founding could never be isolated and a throwaway
- * rehearsal reached the machine it was rehearsing on.
+ * FOUNDING NEVER REACHES IT (operator ruling, 2026-08-08). This writes OUTSIDE the vessel root, into the
+ * operator's real Python environment — so a founding that ran it could never stay isolated, and a throwaway
+ * rehearsal would touch the machine it rehearses on. `wake --install` stands the vessel; a separate tool
+ * answers on its own door.
  *
  * The mempalace is a READ-ONLY sidecar submodule. A vessel founds and serves without it; what it unlocks is
  * the memory tooling — the py organs the sovereign sensorium imports as code (`lares sense setup` stands

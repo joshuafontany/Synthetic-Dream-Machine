@@ -120,9 +120,9 @@ export function vfePrecisionTerm(precision: number, meanSqErr: number): number {
 
 /**
  * The precision that minimizes {@link vfePrecisionTerm}: `argmin_π ½(π·ε̄² − ln π) = 1/ε̄²`,
- * computed as the CLOSED FORM `1/(ε̄²+EPS_REL)`. The floor is RELATIVE (`EPS_REL`, not the old
- * absolute `EPS=1e-9`), so a near-noiseless plane (`ε̄²→0`) caps at `PI_MAX = 1/EPS_REL` rather
- * than the scale-blind `1e9` ceiling that used to clamp every `ε̄² < 1e-9` (Defect 2, #crucible-tested).
+ * computed as the CLOSED FORM `1/(ε̄²+EPS_REL)`. The floor stays RELATIVE (`EPS_REL`), so a
+ * near-noiseless plane (`ε̄²→0`) caps at `PI_MAX = 1/EPS_REL`. An ABSOLUTE floor (`EPS=1e-9`) clamps
+ * every `ε̄² < 1e-9` to one scale-blind `1e9` ceiling (Defect 2, #crucible-tested).
  */
 export function optimalPrecision(meanSqErr: number): number {
   return 1 / (Math.max(0, meanSqErr) + EPS_REL);
