@@ -245,10 +245,23 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       // the socket answers, or a caller (the seed leg, a hook recall) fires into the gap and
       // gets DaemonUnreachable. Poll the socket up to a cold-boot-generous deadline, still
       // bailing on a late fatal.
+      //
+      // A BIND THAT REFUSED IS NOT A BIND THAT IS SLOW. The channel logs `uds error: <cause>` the instant
+      // `listen` refuses, and that line is not a `fatal:` — the node keeps serving, only the verb socket
+      // never arrives. Polling the generous cold-boot deadline against it spends two silent minutes and
+      // then reports an unexplained `up: false`, while the answer sat in the log the whole time.
+      //
+      // The commonest cause has a cure the operator can act on: a Unix socket path is capped near 108
+      // bytes, so a deep LAR_ROOT (a scratch dir, a nested worktree) fails EINVAL while everything else
+      // about the vessel stands correctly.
+      let udsRefusal: string | null = null;
       if (phase === "ready") {
         const sockDeadline = Date.now() + 120_000;
         while (Date.now() < sockDeadline && !(await udsAlive())) {
-          if (/fatal:/.test(readAttestation())) { phase = "fault"; break; }
+          const tail = readAttestation();
+          if (/fatal:/.test(tail)) { phase = "fault"; break; }
+          const refused = /uds error: (.+)/.exec(tail);
+          if (refused) { udsRefusal = refused[1]!.trim(); break; }
           await sleep(500);
         }
       }
@@ -264,7 +277,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
           // tells the operator the true cure: read again.
           ? sockAnswers
             ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`
-            : `started detached (pid ${child.pid ?? "?"}); attested vessel-ready, verb socket still silent — RISING, read again`
+            : udsRefusal
+              ? `serving, but the verb socket REFUSED to bind: ${udsRefusal}`
+                + (/EINVAL/.test(udsRefusal) ? "  (a Unix socket path caps near 108 bytes — LAR_ROOT sits too deep)" : "")
+              : `started detached (pid ${child.pid ?? "?"}); attested vessel-ready, verb socket still silent — RISING, read again`
           : phase === "fault"
             // SURFACE THE FAULT ITSELF, never only its address. The node writes a cure-naming line — "your
           // archive is sealed, set LARES_ARCHIVE_PASSPHRASE and boot again" — and a report that answers
