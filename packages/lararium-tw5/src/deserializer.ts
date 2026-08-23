@@ -446,6 +446,24 @@ function splitMemeToTiddlers(
 
   const result: TiddlerFields[] = [parent, ...allChildren];
 
+  // ── THE WARNING TIDDLER IS THE ENVELOPE, AND IT HOLDS MORE THAN THIS ────────────────────────────
+  //
+  // A parse grade is something the READER observed, never something the author wrote, so a field
+  // carrying it on the record would be a fact an operator can see and edit and cannot round-trip —
+  // the placement law's exact prohibition. This tiddler is where such facts belong.
+  //
+  // Two DIFFERENT readings exist and neither subsumes the other. These `warnings` are AUTHORING
+  // advisories: a TOML key the URI already derives, a carrier close sitting inside an unclosed fence.
+  // `parseMemeText` reports something else entirely — positional grammar recoveries, each naming what
+  // the parser fell back to. Summing them into one count would blur a nudge to a person with a
+  // recovery by a machine.
+  //
+  // They belong in ONE tiddler under TWO counts, which is the host's own shape: TiddlyWiki stages many
+  // findings from one operation in a single `$:/Import` tiddler rather than scattering them, keeping a
+  // reader's query at one address. `safeSplitMeme` currently stamps the grammar count on the RECORD
+  // instead, because it runs outside this function and cannot reach here — routing it in is the owed
+  // work, and it must ENRICH this tiddler rather than push a second one. A third emitter added here
+  // moves every downstream record count.
   if (warnings.length > 0) {
     result.push({
       title:         parseWarningTitle(uri),
