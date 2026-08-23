@@ -36,6 +36,7 @@ services:
       LAR_PORT: "8080"
       LAR_PEERS: "http://herm-source:8080"       # the hearth ALSO carries: bootstraps from a Herm, then navigates
       LAR_PUBLIC_URL: "http://lararium-a:8080"
+      LAR_STAND_FACE: "alpha"                    # a FULL Lararium stands as a hearth — a face lifts it off the floor
     entrypoint: ["sh", "tools/lararium-container-boot.sh"]
     networks: [mesh]
     ports:

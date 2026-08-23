@@ -26,5 +26,19 @@ if [ ! -f "$LAR_ROOT/data/lares/vessel/social-bootstrap.json" ]; then
   node packages/lares-cli/dist/src/bin/lares.js vessel found --skip-build
 fi
 
+# A PLACE IS NOT YET A HEARTH. `vessel found` stands the place FACELESS, and `standAs` reads a faceless
+# vessel as a herm however the compose file labels it — so a container meant to serve as a full Lararium
+# must LIGHT A FACE before it serves, or it stands the crossroads instead and announces no node dial.
+# A Herm container leaves this unset on purpose: staying faceless IS its standing (Lares Viales).
+if [ -n "${LAR_STAND_FACE:-}" ]; then
+  # NEVER FATAL. Lighting a face seeds four planes through the repo, and a cold container whose peers have
+  # not yet answered reports the plane doc unavailable — a vessel that then EXITS serves nothing at all,
+  # where a faceless one still carries and routes. So the lift is attempted and its refusal is named, and
+  # the container serves either way; `standAs` reads whatever actually stands.
+  echo "[boot] lighting the face '${LAR_STAND_FACE}' — this container serves as a hearth, never a crossroads…"
+  node packages/lares-cli/dist/src/bin/lares.js persona new 0 --name "$LAR_STAND_FACE" \
+    || echo "[boot] the face did NOT light (see the error above) — serving faceless, at the waking floor"
+fi
+
 echo "[boot] serving…"
 exec node packages/lararium-node/dist/src/main.js
