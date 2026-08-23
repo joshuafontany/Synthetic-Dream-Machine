@@ -20,10 +20,23 @@ const DECL = "packages/lararium-mesh/src/carrier-type.ts";
 const decl = readFileSync(join(REPO, DECL), "utf8");
 const canonical = /CARRIER_TYPE = "([^"]+)"/.exec(decl)?.[1];
 const legacy = /CARRIER_TYPE_UNSUFFIXED = "([^"]+)"/.exec(decl)?.[1];
+// The authority builds its declaration from the type constant, so this witness builds the same
+// string the same way rather than string-matching a template it cannot evaluate.
+const declSpec = /DECLARATION[\s\S]{0,120}?(lar:\/\/\/[^\s`"]+)/.exec(decl)?.[1];
+const declaration = declSpec ? `<<!DOCTYPE ${canonical.replace("text/x-", "")} ${declSpec} >>` : null;
 if (!canonical || !legacy) {
   console.error("[type-parity] carrier-type.ts declares neither name — the declaration moved");
   process.exit(1);
 }
+
+// THE DOCTYPE LINE GETS THE SAME GUARD, AND FOR THE SAME REASON A CARRIER TAUGHT US.
+//
+// Two writers once spelled that line by hand while the authority held another, and they drifted the
+// moment the grammar took its `+tiddlywiki` suffix — three library indexes opened by naming the
+// grammar's ADDRESS and never its name, parsed, and rendered back to something else. One module still
+// spells it inline out of necessity: `meme-normalize` gets bundled into the TW5 plugin, so an import
+// from the mesh package would drag that package's automerge wasm into a bundle that cannot hold it.
+// A necessary copy is fine; an UNWATCHED one is how the last three carriers broke.
 
 // THE EXPORT KEYS ARE THE ONE PLACE A LITERAL MUST STAND. TypeScript's `export { X as "literal" }`
 // takes no expression, so the dispatch keys spell both names by necessity — and both must be there,
@@ -68,7 +81,28 @@ for (const f of carriers) {
   else neither++;
 }
 
+// Every literal DOCTYPE in a source must match the authority character for character.
+const declFaults = [];
+if (declaration) {
+  for (const f of SOURCES) {
+    if (f === DECL) continue;
+    const t = readFileSync(join(REPO, f), "utf8");
+    for (const m of t.matchAll(/<<!DOCTYPE[^"`\n]*/g)) {
+      const lit = m[0].trim().replace(/\s*>>$/, " >>");
+      // A CONCRETE declaration names the grammar and its address; anything else is a source
+      // DESCRIBING the form rather than writing one — a grammar sketch in a comment, or a template
+      // that builds the line from the constants it already reads. Neither can drift.
+      if (lit.includes("${") || !lit.includes("lar:///")) continue;
+      if (!declaration.includes(lit.replace(/ >>$/, ""))) declFaults.push([f, lit.slice(0, 90)]);
+    }
+  }
+}
+
 console.log(`[type-parity] canonical "${canonical}" · also read "${legacy}"`);
+if (declFaults.length > 0) {
+  console.log(`  a source spells a DOCTYPE that differs from the one authority:`);
+  for (const [where, lit] of declFaults) console.log(`    ${where}\n      ${lit}`);
+}
 console.log(`  corpus: ${suffixed} suffixed · ${unsuffixed} on the earlier name · ${neither} declaring neither`);
 
 if (inline.length > 0) {
@@ -77,7 +111,7 @@ if (inline.length > 0) {
 }
 for (const [f, why] of faults) console.log(`  ${f} ${why}`);
 
-if (inline.length + faults.length === 0) {
+if (inline.length + faults.length + declFaults.length === 0) {
   console.log("  one declaration, and every dispatch key registers both names");
   process.exit(0);
 }
