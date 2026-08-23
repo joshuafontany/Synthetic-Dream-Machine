@@ -197,8 +197,23 @@ export class MempalaceClient {
       this.stderrTail = (this.stderrTail + chunk).slice(-4096);
       if (this.onLog) this.onLog(chunk.replace(/\n+$/, ""));
     });
-    proc.on("exit", (code) => this.rejectAll(this.withStderr(new Error(`mempalace holder exited (code ${code ?? "null"})`))));
-    proc.on("error", (err: Error) => this.rejectAll(this.withStderr(err)));
+    // `close` CARRIES THE LAST WORDS; `exit` DOES NOT. Node states it plainly: "When the 'exit' event is
+    // triggered, child process stdio streams might still be open." A holder's most diagnostic lines land
+    // as it dies, so folding the tail at `exit` folds a tail that has not finished arriving — the fault
+    // reaches the operator with its ending cut off, which reads as a vaguer fault rather than a missing
+    // one. `close` fires only once every stdio stream has closed.
+    //
+    // ONE DOWN, ONCE. `exit` "may or may not fire after an error has occurred", so both handlers can run
+    // for a single death; the latch keeps one death from rejecting every waiter twice with two different
+    // messages.
+    let died = false;
+    const goesDown = (err: Error): void => {
+      if (died) return;
+      died = true;
+      this.rejectAll(this.withStderr(err));
+    };
+    proc.on("close", (code) => goesDown(new Error(`mempalace holder exited (code ${code ?? "null"})`)));
+    proc.on("error", (err: Error) => goesDown(err));
 
     await this.request("initialize", {
       protocolVersion: "2025-11-25",
@@ -250,8 +265,14 @@ export class MempalaceClient {
     this.send({ jsonrpc: "2.0", method, params });
   }
 
-  /** Fold the buffered stderr tail into an error so a python-side fault reaches the caller (the recall
-   *  path surfaces the REAL ChromaDB error, never a bare timeout/exit). No tail → the error unchanged. */
+  /**
+   * Fold the buffered stderr tail into an error so a python-side fault reaches the caller (the recall
+   * path surfaces the REAL ChromaDB error, never a bare timeout/exit). No tail → the error unchanged.
+   *
+   * APPEND, NEVER SUBSTITUTE. The supervisor's own message names WHICH call failed and WHEN; the child's
+   * tail names WHY. A fold that replaced the first with the second would trade one half of the diagnosis
+   * for the other — kubelet appends for the same reason, and this keeps both voices in one string.
+   */
   private withStderr(err: Error): Error {
     const tail = this.stderrTail.trim();
     if (tail) err.message = `${err.message}\n  holder stderr: ${tail}`;
