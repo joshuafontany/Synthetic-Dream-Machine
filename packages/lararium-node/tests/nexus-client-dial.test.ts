@@ -207,6 +207,12 @@ describe("B1 — the production client dial-out mounts onto a live Repo and cros
     // repo already holds elsewhere (`waitHandle`, D2): the claim rides `awaitKey` + the expect below,
     // never the arrival order.
     //
+    // TWO CURES TRIED, BOTH REFUTED — do not spend a third attempt on either:
+    //   · `allowableStates` on THIS call (below). No change in failure rate, same error.
+    //   · Awaiting the repo's `document` event before finding. STRICTLY WORSE — the event never fires for
+    //     this url, so every run deadlocked to the timeout. Discovery here does not announce; the find IS
+    //     what asks, which is why no pre-find gate can exist.
+    //
     // IT DOES NOT CURE THE KNOWN FLAKE, and trying it again will not. This file fails roughly one run in
     // several with `Error: Document … is unavailable` raised from `StorageSource`/`DocumentQuery` with NO
     // frame in this file — an UNHANDLED REJECTION from a query nothing here awaits. No option passed to
