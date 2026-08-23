@@ -245,44 +245,16 @@ export function memeticWikitextDeserializer(
 
 function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): TiddlerFields[] {
   let tiddlers: TiddlerFields[];
-  let degraded = false;
-  let failures = 0;
   try {
     tiddlers = splitMemeToTiddlers(uri, text, fields);
   } catch (err) {
     console.warn(`[memetic-deserializer] split failed for ${uri} — verbatim fallback (drop-honesty): ${err instanceof Error ? err.message : String(err)}`);
-    tiddlers = [{ ...fields, title: uri, text } as TiddlerFields];
-    degraded = true;
+    tiddlers = [{ ...fields, title: uri, text, lar_parse_degraded: "1" } as TiddlerFields];
   }
   try {
-    failures = parseMemeText(uri, text, getGrammar() ?? undefined).failures.length;
+    const failures = parseMemeText(uri, text, getGrammar() ?? undefined).failures.length;
+    if (failures > 0 && tiddlers[0]) tiddlers[0]["lar_parse_failures"] = String(failures);
   } catch { /* gradient validation is best-effort (no wiki/grammar in scope) */ }
-
-  // THE GRAMMAR COUNT JOINS THE ENVELOPE THE SPLITTER ALREADY RAISED — never a second one.
-  //
-  // This function runs OUTSIDE `splitMemeToTiddlers`, so it cannot reach that emitter and once stamped
-  // the count on the record instead. Pushing a warning tiddler from here would give a carrier two of
-  // them and move every downstream record count; enriching the one already present gives the reader a
-  // single address, which is the host's own staging shape.
-  //
-  // BOTH counts stand whenever the envelope does, so a reader never has to tell "none of this kind"
-  // apart from "this kind went unmeasured" — the absence-versus-zero blur that once let a missing
-  // digest read as a passing one.
-  const envelope = tiddlers.find((t) => String(t["tags"] ?? "").includes(PARSE_WARNING_TAG));
-  if (envelope) {
-    envelope["failure-count"] = String(failures);
-  } else if (degraded || failures > 0) {
-    tiddlers.push({
-      title:           parseWarningTitle(uri),
-      tags:            PARSE_WARNING_TAG,
-      "meme-uri":      uri,
-      "warning-count": "0",
-      "failure-count": String(failures),
-      text: degraded
-        ? "The split failed; this meme rode back verbatim rather than truncating."
-        : `The grammar recovered ${failures} span${failures === 1 ? "" : "s"} while reading this meme.`,
-    } as TiddlerFields);
-  }
   return tiddlers;
 }
 
@@ -803,6 +775,8 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 // metadata. So `lar_*` sensorium fields (`lar_agent_handle`, `lar_ffz`,
 // `lar_root_handle`, …) round-trip WHOLE — no prefix carries a blanket denial.
 // Only two `lar_*` markers stay denied by
+// EXACT name: the transient parse-grade diagnostics `lar_parse_failures` /
+// `lar_parse_degraded`, which `parseMemeText`/`safeSplitMeme` stamp on ingest to
 // surface degradation — derived-on-read diagnostics, never authored metadata,
 // so they stay off the operator's TOML (map never fuses to territory).
 const IAM_DENY: ReadonlySet<string> = new Set([
@@ -811,6 +785,7 @@ const IAM_DENY: ReadonlySet<string> = new Set([
   "slot", "fragment-parent", "postamble", "prologue",
   "header-text", "ahu-parent", "ahu-slot", "carrier-soh",
   // transient parse-grade diagnostics — stamped on ingest, denied by exact name
+  "lar_parse_failures", "lar_parse_degraded",
   // RESIDENCY IS NOT IDENTITY. The nalu engine annotates every inbound write with `origin-bag` so the
   // READ path can surface which bag answered — that is its whole job, and it belongs on the record.
   // Serializing it into the carrier fuses two different things: `uri-path` is what the meme IS, a bag
