@@ -27,6 +27,7 @@ import {
 } from "@lararium/mesh";
 import { daemonGenesisDir } from "../lares-config.js";
 import { larDataDir, larBootstrapPath } from "../vessel-paths.js";
+import { listPersonaRoots } from "../node-vessel-identity.js";
 import { persistIdentityAnchors } from "../identity-anchors.js";
 import {
   generateOrLoadVesselIdentity, loadVesselSigningSeed, persistVesselCard,
@@ -131,6 +132,20 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     console.log(`[lares vessel found] ${bootstrap} already exists — skipping.`);
     console.log("  Pass --force or delete the file to re-seed.");
     return { skipped: true, bootstrapPath: bootstrap, storageDir, genesisDir };
+  }
+
+  // A FRESH BOOTSTRAP NAMES NO FACE, AND `faceStands` READS ONLY THE BOOTSTRAP. So re-seeding over a
+  // vessel whose persona roots stand on disk drops it to the waking floor while every other reading still
+  // answers that the face is fine — `persona list` reads the ROSTER and keeps naming it. The root is not
+  // lost (`persona new <i>` loads rather than mints, and writes the doc id back), but nothing would say so
+  // and the operator would meet a herm where they left a hearth.
+  //
+  // Two records of one fact, and only one of them gets rewritten here. This says which.
+  const standingRoots = await listPersonaRoots(larDataDir()).catch(() => [] as number[]);
+  if (standingRoots.length > 0) {
+    console.log(`[lares vessel found] ${standingRoots.length} persona root(s) stand: ${standingRoots.join(", ")}`);
+    console.log("  This bootstrap names none of them, so the vessel stands FACELESS at the waking floor.");
+    console.log(`  Re-light each one (the root loads, it is not re-minted):  lares persona new ${standingRoots[0]} --name '<label>'`);
   }
 
   mkdirSync(storageDir, { recursive: true });

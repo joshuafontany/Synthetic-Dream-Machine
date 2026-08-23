@@ -253,10 +253,18 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
         }
       }
       // `ready` = attested vessel-ready, no late fault, AND the verb socket answers.
-      nodeUp = phase === "ready" && await udsAlive();
+      const sockAnswers = await udsAlive();
+      nodeUp = phase === "ready" && sockAnswers;
       nodeNote =
         phase === "ready"
-          ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`
+          // THE NOTE MUST NOT OUTRANK THE FLAG. Attestation and the verb socket are two events, and the
+          // socket can still be silent when the node has already attested. Printing the bare
+          // "attested vessel-ready" beside `up: false` reads as a contradiction, and a caller that
+          // believes the note treats a rising vessel as a broken one. Naming the gap costs a clause and
+          // tells the operator the true cure: read again.
+          ? sockAnswers
+            ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`
+            : `started detached (pid ${child.pid ?? "?"}); attested vessel-ready, verb socket still silent — RISING, read again`
           : phase === "fault"
             // SURFACE THE FAULT ITSELF, never only its address. The node writes a cure-naming line — "your
           // archive is sealed, set LARES_ARCHIVE_PASSPHRASE and boot again" — and a report that answers

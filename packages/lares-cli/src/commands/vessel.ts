@@ -118,7 +118,6 @@ const RITES: Readonly<Record<string, { readonly composes: string; readonly run: 
  * composition and becomes a fourteenth verb wearing a pet-name.
  */
 async function runFoundingRite(args: ParsedArgs): Promise<number> {
-  const sealedShut = !process.env["LARES_ARCHIVE_PASSPHRASE"];
   const steps: ReadonlyArray<readonly [string, Sub]> = [
     ["found", (a) => cmdInit(a)],
     ["stand", (a) => standVessel({ ...a, positional: ["stand"] })],
@@ -132,15 +131,14 @@ async function runFoundingRite(args: ParsedArgs): Promise<number> {
       return code;
     }
   }
-  // The class the boot chose, named where the operator is looking. `standAs` decides it from whether the
-  // archive opens; this only reports what that reading implies, and never re-derives it.
-  console.error(sealedShut
-    ? "lares vessel rite founding: stood WITHOUT an archive passphrase in the environment.\n"
-      + "  A sealed vessel stands at the WAKING FLOOR as a herm — carrying, routing, serving the public\n"
-      + "  shelf, every sovereign act waiting. Set LARES_ARCHIVE_PASSPHRASE and stand it again to light\n"
-      + "  the hearth. An UNSEALED vessel stood as a lararium and needs nothing."
-    : "lares vessel rite founding: an archive passphrase rode the environment — the hearth lights if the\n"
-      + "  archive opens under it. `lares vessel read` names the standing.");
+  // THE CLASS IS THE BOOT'S TO REPORT, and it already does. `standAs` reads THREE things — whether the
+  // archive opens, whether a face stands, and whether the operator asked for a herm — and the node prints
+  // the matching line with the matching cure. A second report here could only re-derive that from what the
+  // rite happens to see, and the one signal reachable from this side (a passphrase in the environment)
+  // names none of the three: a FRESH founding is faceless, so it stands at the waking floor whatever the
+  // environment holds, and a line keyed on the env var would call that a sealed archive.
+  //
+  // One reading, in `standAs`, printed by the boot that performed it.
   return 0;
 }
 
