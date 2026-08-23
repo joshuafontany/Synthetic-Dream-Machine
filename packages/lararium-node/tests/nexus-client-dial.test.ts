@@ -201,7 +201,18 @@ describe("B1 — the production client dial-out mounts onto a live Repo and cros
     await awaitPeer(nodeB.gate, 6_000);
 
     // B → A: the dialing node finds + syncs B's doc.
-    const foundOnA = await nodeA.repo.find<GreetDoc>(docB.url);
+    //
+    // A CROSSED SOCKET IS NOT AN ANNOUNCED DOC. `awaitPeer` proves the dial reached the gate; the sync
+    // protocol still has to tell A that B holds this document. `allowableStates` states the intent the
+    // repo already holds elsewhere (`waitHandle`, D2): the claim rides `awaitKey` + the expect below,
+    // never the arrival order.
+    //
+    // IT DOES NOT CURE THE KNOWN FLAKE, and trying it again will not. This file fails roughly one run in
+    // several with `Error: Document … is unavailable` raised from `StorageSource`/`DocumentQuery` with NO
+    // frame in this file — an UNHANDLED REJECTION from a query nothing here awaits. No option passed to
+    // THIS call can catch a rejection thrown by a different one; the fix belongs where that query is
+    // made, which is not yet found. Measured before and after: still red intermittently, same error.
+    const foundOnA = await nodeA.repo.find<GreetDoc>(docB.url, { allowableStates: ["unavailable", "ready"] });
     await awaitKey(foundOnA, GREETING_KEY, 5_000, "node A never synced node B's doc");
     expect(foundOnA.doc()?.tiddlers?.[GREETING_KEY]?.text).toBe("the DreamNet breathes");
 

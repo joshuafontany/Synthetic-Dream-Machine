@@ -68,6 +68,15 @@ export { laresDataHome, larariumDataHome };
 
 // ── XDG base homes ──────────────────────────────────────────────────────────────────────────────
 // Each honors its env var (unset → the freedesktop default), and roots under LAR_ROOT when isolated.
+//
+// THE KIND SEGMENT APPEARS ONLY WHERE TWO KINDS SHARE A FLOOR. Under LAR_ROOT the data home splits
+// `data/lares` from `data/lararium` because the spirits' substrate and the house's shelf both stand
+// there and a wipe must reach exactly one. State and cache hold ONE kind, so `<root>/state` and
+// `<root>/cache` name it fully — a segment there would carry no relation, and a reader who "restored
+// the symmetry" would add one. Under XDG the `lares` segment does different work: it separates this
+// house from every other application sharing `~/.local/state`. Same word, two jobs, one of which
+// LAR_ROOT already does by owning the whole root. A house-kind durable state would earn the segment
+// on the day one exists.
 
 /** $XDG_STATE_HOME/lares — durable watermarks (harvest, harvest-stage, projection). */
 export function larStateHome(): string {

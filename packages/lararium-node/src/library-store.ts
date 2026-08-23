@@ -34,7 +34,12 @@ import { larariumDataHome } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 
 /**
- * The acquired tier's home — `~/.local/share/lararium/library`, or `LAR_LIBRARY`.
+ * The acquired tier's home — `<lararium>/library`, which reads `~/.local/share/lararium/library`
+ * loose and `<root>/data/lararium/library` under LAR_ROOT. `LAR_LIBRARY` overrides both.
+ *
+ * BOTH ISOLATION ARMS MATTER. A rehearsal that set only `LAR_LIBRARY` and a rehearsal that set only
+ * `LAR_ROOT` are equally isolated; a comment naming one would send a reader to reach the operator's
+ * real shelf while believing otherwise.
  *
  * IT STANDS IN THE SHRINE, NOT THE SPIRIT. `lares/vessel` is the substrate `reset` and `regenesis`
  * reforge, and an acquired body survives neither on its own merits: it has no author in any tracked tree

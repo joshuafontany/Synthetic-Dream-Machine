@@ -45,13 +45,13 @@ packages/lararium-node/playwright-report
 **/playwright-report/
 **/test-results/**/tests/.playwright-userdata/
 
-# The vessel's own state — store, identity, seal, library, and the social bootstrap — lives in the
-# operator's HOME (<data>/vessel, <state>/identity, <state>/nexus, <state>/library), never in a tree.
-# Nothing is listed here because nothing lands here: a placement holds it out, not a rule.
+# The vessel's own state lives in the operator's HOME, never in a tree, and splits by WHOSE IT IS:
+# the spirits' own — store, identity, seal, social bootstrap — under <lares>; the house's, which a
+# re-founding must not take — library, sensoriums — under <lararium>. Nothing is listed here because
+# nothing lands here: a placement holds it out, not a rule.
 
 # scratch wiki — operator's live editable surface, never committed.
-# Named wikis (e.g. wikis/@lares-history/) are checked in.
-wikis/@scratch/
+# Named wikis (e.g. wikis/lares-history/) are checked in.
 wikis/scratch/
 !tests/expected/wikis/
 
