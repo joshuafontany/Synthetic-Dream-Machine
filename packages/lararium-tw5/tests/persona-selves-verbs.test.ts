@@ -1,12 +1,12 @@
 /**
- * persona-selves-verbs — a human's own-persona names land in @persona, read back, and NEVER touch a board.
+ * persona-selves-verbs — a human's own-persona names land in persona, read back, and NEVER touch a board.
  *
  * These hold the fleet-ride the verbs exist for:
- *   · `persona-label` / `persona-handle` each write ONE name's value+stamp pair over the @persona store.
+ *   · `persona-label` / `persona-handle` each write ONE name's value+stamp pair over the persona store.
  *   · `persona-selves` folds the multitude back, ascending, reading only the selves tiddlers.
  *   · TWO NAMES, ONE RECORD: declaring a Handle never disturbs the pet-name beside it.
  *   · A BLANK value CLEARS a name; a stale write reports `written: false` rather than clobbering.
- *   · NEVER-FEDERATES: the reactors reach ONLY the @persona store — no @crossroads / board title is ever
+ *   · NEVER-FEDERATES: the reactors reach ONLY the persona store — no crossroads / board title is ever
  *     written, and every outcome reads `federated: false`. Only an announced Handle binds a public glamour.
  *   · THE SEAT NEVER RIDES: no verb here carries a seat claim, so a fleet-mate can never seat a persona on
  *     another node's seal.
@@ -31,7 +31,7 @@ async function fieldsOf(s: MemoryTiddlerStore, handleIndex: number): Promise<Rec
   return ((await s.get(personaSelfTiddlerUri(handleIndex)))?.tiddler ?? {}) as Record<string, unknown>;
 }
 
-describe("the two names land on @persona and read back", () => {
+describe("the two names land on persona and read back", () => {
   test("persona-label writes the PRIVATE pet-name and folds it back through persona-selves", async () => {
     const s = store();
     const r = reactorsOver(s);
@@ -83,7 +83,7 @@ describe("what the verbs refuse", () => {
     const r = reactorsOver(s);
     await r.label({ handleIndex: 2, petname: "veil-three" }, CTX);
     await r.handle({ handleIndex: 2, handle: "Kahu Gamma" }, CTX);
-    // No board / @crossroads / who-face title exists in the store, and nothing outside the selves prefix moved.
+    // No board / crossroads / who-face title exists in the store, and nothing outside the selves prefix moved.
     const titles = await s.listVisible();
     expect(titles).toEqual([personaSelfTiddlerUri(2)]);
   });

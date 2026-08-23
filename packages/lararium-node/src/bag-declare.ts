@@ -137,7 +137,7 @@ export function surveyBags(dir: string, roots: BagHomeRoots = bagHomeRoots()): B
   if (!existsSync(dir)) return [];
   const out: BagSighting[] = [];
   for (const name of readdirSync(dir).sort()) {
-    if (!name.startsWith("@")) continue;
+    if (name.startsWith(".")) continue;   // every other directory under bags/ names a holding
     const bagDir = join(dir, name);
     if (!statSync(bagDir).isDirectory()) continue;
     const manifest = readBagManifest(bagDir, name);

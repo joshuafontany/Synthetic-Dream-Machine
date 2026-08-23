@@ -74,7 +74,7 @@ describe("CREATE — born with its cap", () => {
       registerBag: async (bagUrl) => { registered.push(bagUrl); },
     });
 
-    const bag = "lar:///ha.ka.ba/bags/@newbag";
+    const bag = "lar:///ha.ka.ba/bags/newbag";
     const result = await reactor({ bag }, makeContext());
 
     expect(result.plane).toBe("catalog");
@@ -93,7 +93,7 @@ describe("CREATE — born with its cap", () => {
       reach: { repo, catalogUrl: CATALOG_URL, oracleUrl: null },
       // registerBag absent — the mint proceeds, cap registration simply no-ops.
     });
-    const result = await reactor({ bag: "lar:///ha.ka.ba/bags/@nocap" }, makeContext());
+    const result = await reactor({ bag: "lar:///ha.ka.ba/bags/nocap" }, makeContext());
     expect(result.plane).toBe("catalog");
     expect(typeof result.docUrl).toBe("string");
   });

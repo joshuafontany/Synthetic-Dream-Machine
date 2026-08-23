@@ -18,31 +18,31 @@ const CARRIER = "lar:///ha.ka.ba/sdm/modules/powers/floating-disc";
 
 describe("has-stack — relative-name qualification", () => {
   test("bagScopeOf derives root/@bag/version from a carrier title", () => {
-    expect(bagScopeOf(CARRIER)).toBe("ha.ka.ba/bags/@sdm");
-    expect(bagScopeOf("lar:///ha.ka.ba/lares/api/pono/meme")).toBe("ha.ka.ba/bags/@lares");
+    expect(bagScopeOf(CARRIER)).toBe("ha.ka.ba/bags/sdm");
+    expect(bagScopeOf("lar:///ha.ka.ba/lares/api/pono/meme")).toBe("ha.ka.ba/bags/lares");
   });
 
   test("bagScopeOf refuses unscoped titles", () => {
     expect(bagScopeOf("HelloThere")).toBeNull();
     expect(bagScopeOf("$:/temp/something")).toBeNull();
-    expect(bagScopeOf("lar:///ha.ka.ba/bags/@sdm")).toBeNull();          // no version
+    expect(bagScopeOf("lar:///ha.ka.ba/bags/sdm")).toBeNull();          // no version
     expect(bagScopeOf("lar:///two.term/@x/v1/y")).toBeNull();       // bad root arity
   });
 
   test("a relative tag qualifies against the carrier's own scope", () => {
-    expect(qualifyStackTag("components/hook/attack", "ha.ka.ba/bags/@sdm"))
+    expect(qualifyStackTag("components/hook/attack", "ha.ka.ba/bags/sdm"))
       .toBe("lar:///ha.ka.ba/sdm/components/hook/attack");
   });
 
   test("a lar:/// tag passes through already qualified, any scope", () => {
     const uri = "lar:///ha.ka.ba/lares/api/pono/loci";
-    expect(qualifyStackTag(uri, "ha.ka.ba/bags/@sdm")).toBe(uri);
+    expect(qualifyStackTag(uri, "ha.ka.ba/bags/sdm")).toBe(uri);
     expect(qualifyStackTag(uri, null)).toBe(uri);
   });
 
   test("system and free-form tags stay outside the stack", () => {
-    expect(qualifyStackTag("$:/tags/Alert", "ha.ka.ba/bags/@sdm")).toBeNull();
-    expect(qualifyStackTag("just a caption tag", "ha.ka.ba/bags/@sdm")).toBeNull();
+    expect(qualifyStackTag("$:/tags/Alert", "ha.ka.ba/bags/sdm")).toBeNull();
+    expect(qualifyStackTag("just a caption tag", "ha.ka.ba/bags/sdm")).toBeNull();
   });
 
   test("a relative tag on an unscoped carrier stays unresolved", () => {

@@ -110,12 +110,20 @@ if [ "$FAILED" -ne "$BEFORE" ]; then
   say "ABANDONED — B's founding failed; the handshake has no second vessel to cross to."
   exit "$FAILED"
 fi
-run_b "B mints its own persona"               persona new 0 --name joiner --handle 'Independent Operator'
+# The name doubles as the ABSENCE PROBE below, so it must not collide with ordinary prose. A bare
+# "joiner" matched "zero-width joiner" inside vendored engine text and read A's root as leaking B's
+# key. A probe that can appear by accident measures the corpus, never the boundary.
+B_PROBE="bjoiner-$$-xqz"
+run_b "B mints its own persona"               persona new 0 --name "$B_PROBE" --handle 'Independent Operator'
 
 step "★ B's key is FOREIGN to A — no shared seed on disk ★"
 # The whole ceremony defends one boundary; measure it rather than assume it. If any of B's persona
 # material sat under A's root, every signature below would verify for the wrong reason.
-if [ -d "$A_ROOT" ] && ! grep -rqs "joiner" "$A_ROOT" 2>/dev/null; then ok
+#
+# THE PROBE MUST BE FINDABLE FIRST. An absence claim over a name nothing ever wrote reads green by
+# vacancy, so B's own root answers for the grep before A's root answers for the boundary.
+if ! grep -rqs "$B_PROBE" "$B_ROOT" 2>/dev/null; then bad "the probe names nothing under B — the absence below would measure the grep"
+elif [ -d "$A_ROOT" ] && ! grep -rqs "$B_PROBE" "$A_ROOT" 2>/dev/null; then ok
 else bad "B's material reachable from A's root"; fi
 
 # ── ③ THE PREREQUISITE — carry A's public charter to B ───────────────────────────────────────────

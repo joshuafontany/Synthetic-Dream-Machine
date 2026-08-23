@@ -1,0 +1,107 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lares/pattern-integrities >>
+```toml iam
+file-path = "bags/lares/ha.ka.ba/lares/docs/lares/pattern-integrities.mem"
+l-space   = "stable"
+mana      = 15
+manao     = 15
+manaoio   = 14
+register  = "Synthesis-Canon"
+retain    = true
+role      = "the research shelf: prior art, golden principles, anti-patterns for the seven stack integrities — field-grounded by nine research spirits, 2026-06-11/12; binds as kupono intent (builds implement THESE, never improvisation)"
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/lares/pattern-integrities"
+written   = "2026-06-12"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #shelf >>
+
+! Pattern Integrities — the research shelf
+
+
+Nine research spirits swept the field across two days. What follows binds as kupono intent — builds implement //these//, never improvisation.
+
+!!! 1 · Record log + derived projections
+
+* ''Projections stay rebuildable and disposable'' (CQRS canon; Kleppmann //Turning the Database Inside-Out//): every read surface derives by deterministic transform; a deleted projection file reads as a non-event — rebuild = replay.
+* ''Grain law confirmed'' (Automerge cookbook; PushPin's overhead lesson; Yjs guidance): one bag = one doc = "a unit of collaboration"; tid-grain records inside it = the blessed middle grain; merge unit SHOULD match edit unit.
+* ''Anti-pattern, triply condemned:'' rendered/recomputable bytes inside the CRDT doc — bloats the write model, lives in Automerge history //forever// (truncation unimplemented), and forms an internal dual-write. The retain-whole-carrier direction stays dead.
+* ''Watch item:'' Automerge history grows permanently; DXOS answers with ''epochs'' (explicit history-cut ceremonies). No action now; the pattern waits on real growth.
+* Named: Tonsky crdt-filesync (file = projection) · Patchwork/Tiny Essay Editor (Automerge-canonical markdown) · Cambria (lens-translated projections).
+
+!!! 2 · Store ↔ filesystem round-trip — the canonical-form law
+
+The strict-bytes vs canonical-form fork resolves ''canonical-form'' (field-wide convergence: gofmt, Prettier, jj's render-then-reparse conflict loop; strict bytes would require Roslyn-style trivia fields leaking formatting into records and souring merges). Three guarantees bind as LAW:
+
+# ''Idempotent render:'' canonical input round-trips byte-identical — `render(parse(render(x))) == render(x)`; the template MUST emit exactly what the corpus writes (`<<^ code:"&#x0002;" >>`, spaced).
+# ''No unsolicited sweeps'' (the Logseq sin): normalization touches only memes whose records actually changed; the projector MUST NOT reformat-the-world on boot or upgrade.
+# ''Semantic identity verified:'' `parse(render(records)) ≡ records` — the harness proves it, never assertion.
+
+* ''Echo suppression by content, not event-window'' (Dropbox Nucleus; Syncthing): the `writing` set works as a degenerate one-tree model; the upgrade path = persisted last-projected ''content hash'' per file, ingest drops no-op loads. Burr-grade, not blocking.
+* ''Best practices:'' atomic temp-file + rename writes; watcher coalescing on file //stability//; periodic full-scan backstop; property-test the loop with seeded randomness (Dropbox runs millions nightly).
+* ''Anti-patterns:'' timestamp conflict resolution · mid-write reads · non-idempotent serializers (Pandoc's writer can reparse to a //different// AST — the named cautionary tale).
+* Named: Jujutsu (working copy = materialized commit; snapshot-before-act) · Unison (formal no-silent-overwrite spec) · gofmt's //restraint// (preserve operator blank-line choices where grammar permits — cheap goodwill at first contact).
+
+!!! 3 · Layered multi-bag composition
+
+* Recipe = ordered stack, later bag shadows per-title; ''bag = locus of namespace AND access control'' (TiddlyWeb 2008 → MWS Bags & Recipes — our own ancestor validates the shape).
+* ''Shadowing cannot express "remove from below"'' (OCI whiteouts; overlayfs opaque markers): a layered delete eventually needs an explicit ''tombstone/whiteout verb''. ~~Reserved, not scheduled.~~ ''Realized as kāpae'' (2026-06) — the tombstone op shipped: `store.tombstone` / CLEAR / DROP / `listKapaeBags`, the toggleable shadow held distinct from //absent// (the `remove` fall-through). See [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]] + residency-model anti-pattern #3.
+* ''The closure ruling firms'' (vector 3): npm's flat hoisting birthed phantom dependencies; pnpm's strictness + lockfiles killed them; the OCI manifest names its full ordered layer list even though built transitively. The lean graduates to a researched recommendation: ''resolve transitively at mount-time, record the flattened ordered closure in the consumer's own recipe'' — plus a deliberate lock-refresh verb and `--frozen-lockfile`-spirit drift detection.
+
+!!! 4 · Residency & ownership across replicas
+
+* ''Coordinate ⊥ change-identity, two axes'' (AT Protocol: record identity = path/rkey, stable across edits; CIDs address versions): our COPY-preserves-change-id ruling stands independently validated.
+* ''Visibility ≠ residency'' (automerge-repo sharePolicy vs storage; the anti-pattern = conflating "synced to me" with "resident here"): atproto's answer — one authoritative home, others hold derived views — reads cleanest and matches @catalog `holdings` accession as the registration act.
+* Named: DXOS spaces (container bounds replication — bag-as-ACL-locus mirrored) · IPFS/IPLD (content addressing answers //what//, never //where//; residency devolves to pinning).
+
+!!! 5 · Confined derived writers
+
+* The ward already stands on the right side of the line: ''mechanism at the choke-point'' (`confineMirrorWrite` — seccomp/SES precedent: the kernel refuses regardless of upper-layer opinion), ''policy in the cascade/manifest''. POLA, deny-by-default, capability = designation + permission together.
+* ''Anti-pattern to keep dead:'' a policy flag treated as a boundary (npm hoisting; event-stream's ambient authority). Capability = manifest grant, never a cascade-settable flag — already law; the research confirms, adds nothing to change.
+* One burr found in re-read: the stale-cross-mirror unlink (`disk-projector.ts` flush tail) confines inline instead of routing through the ward — one gate, one choke-point; fold into vector 1.
+
+!!! 6 · Live ingest (disk → records) — researched 2026-06-11, three spirits, pre-build
+
+* ''Complete the Nucleus triangle, cheap:'' the CRDT record-set already sits as the merge seat (Remote); a persisted per-carrier ''last-projected content hash'' forms the Synced tree; a disk snapshot forms Local. Every ingest decision = three-way diff against these; an event means only "re-stat this path." Persist OBSERVATIONS, never work-queues — crash recovery = full scan + re-diff, no journal replay (Dropbox Nucleus; its legacy queue corruption forced the rewrite).
+* ''Two hash gates end echo storms structurally:'' ingest drops a load whose disk-hash == synced-hash; projection skips a write whose bytes == disk. Content-match, NEVER clock ("timing-based suppression has no precedent in any production engine"; Syncthing retrofitted content-hash suppression in 2025 as a bug fix, PR #10351). The `writing` set demotes to latency optimization.
+* ''Events = hints; the periodic full scan stays truth'' (Syncthing keeps rescan even with the watcher on). Queue overflow / watch exhaustion / dead backend = first-class states → rescan + alert. ''Watchman cookie self-test at boot'' (write a cookie, await your own event) detects a dead watch backend at startup — the WSL2 answer; bag tree on ext4 = load-bearing fact (/mnt = no events, ever).
+* ''Settle = no events AND stat stable AND hash confirms — never a timer'' (chokidar awaitWriteFinish failure modes documented). Classify BOTH save dances: rename-replace (vim; FROM/TO cookie pair) and truncate-in-place (VS Code; transient 0-byte file). Filter editor litter (vim's literal `4913` probe file, .swp, ~); deletions get a grace window (git checkout = a thousand edits + transient deletes — TidGi's battle scar).
+* ''A disk edit enters as a DIFF spliced against the last-projected text'' into the Automerge doc (Tonsky crdt-filesync; Ink & Switch) — whole-file replace = delete-all+insert-all, destroys concurrent merges. Per-carrier lock; order ingest → merge → project (Jujutsu snapshot-before-act — the direct fix for the Logseq class).
+* ''The anti-Logseq laws, with receipts'' (#11256 #11327 #5135 #10481 #3650): never write a cached parse over an externally-edited file · never rewrite files the mind didn't touch (canonical-form rewrites fire only on records that actually changed — guarantee 2 restated for ingest) · collision-check identity (title→path non-injective = two records silently merge, one dies) · refuse loudly what the shore cannot round-trip (parse-warning + alert, never best-effort ingest) · backup-before-overwrite as the data-loss backstop (Jermolene's "running backups").
+* ''Route ingest through the existing sync machinery as a pseudo-server'' (twillm bidirectional-filesystem branch, PR #9806 + TidGi's production WatchFileSystemAdaptor — the closest living twins): one conflict path, not two. twillm's echo suppression = full reparse + field-compare; TidGi found time+size cheaper; our two hash gates beat both.
+* ''CI vectors before any daemon:'' ingest∘project = identity (doc-side) · project∘ingest = identity (canonical files) · non-canonical ingest converges in ONE cycle (the gofmt-loop guard) · randomized interleavings of {disk edit, record edit, crash, delayed event} assert ''quiescence'' — "zero writes after round N" makes an echo storm a one-line test failure (Dropbox CanopyCheck/Trinity; Hughes ICST 2016).
+* ''twillm close-read deltas (PR #9806 branch source, read 2026-06-11)'' — the closest twin's empirical lessons, folded into the verb design: ADOPT — chokidar `awaitWriteFinish {stabilityThreshold:100, pollInterval:50}` under a 400ms per-path trailing debounce (their field-tested settle values) · event→buffer→single-drain-seat shape, but drain ON the debounced event, never their fixed poll (their own app pins the 60s poll to 2s to feel live) · post-reparse set-difference for titles vanished from multi-record carriers · sticky residency (once a record projects to a carrier it stays; routing rules never silently move it) · executable record types excluded from live ingest · capability self-removal when no store watches (their poll once kept headless node alive forever). WE-MUST-DO-BETTER — deletion quarantine before destructive apply (git checkout = unlink floods; their branch does nothing) · rename re-link by content-hash match between a fresh add and a pending delete (their unlink+add breaks identity; our hash tree makes the re-link nearly free) · Jermolene's own unbuilt wish, "running backups" before any delete/overwrite. VALIDATED — their commit 7a80bd4a (serializer dropped created/modified → every save→watch cycle became a near-miss loop) empirically proves our canonical-form byte-fixed-point as THE prerequisite for echo silence; their fallback restraint (never write back over a foreign edit) = our gate's conflict branch. Their YAML subset never reaches a byte fixed point (numbers re-emit quoted; objects collapse to JSON blobs); their `\n---` frontmatter truncation = their unguarded unclosed-fence cousin.
+* ''Counter-example that validates the architecture:'' SiYuan ABANDONED markdown-as-store because block identity cannot anchor in CommonMark — our ahu-anchored fragment URIs answer exactly that; the carrier stays the store's co-projection because the grammar carries addresses.
+
+!!! 7 · Cross-island messaging + vessel projection — researched 2026-06-12, three spirits, pre-build
+
+The admin↔hot-wiki bridge today (postMessage event → main translates → placeVerb; lossy placeWikiVerb to unmounted islands) reads as the field's named anti-pattern: the event-bus god object — "a growing switch translating event names to verbs, where every new feature edits the router." The refinement, braided from actors/bus/shore spirits:
+
+* ''The lane law'' (the rule that decides everything): //main may see every EDGE created, never every MESSAGE sent// — when main's traffic scales with verb volume instead of island count, the lane assignment reads wrong. Lanes: ''main = supervisor + registrar only'' (mount/unmount, supervision, capability INTRODUCTION — mint a MessageChannel, hand the ports, step away; OTP: supervisors supervise, they don't relay) · ''direct MessagePorts'' = pairwise signalable/awaitable verbs once introduced (ports nest — a port rides over a port; granovetter introduction composes without main; Node 22 postMessageToThread = the field admitting parent-routing bottlenecks) · ''the merge seat'' = sticky_event state + durable mailboxes (deliver-to-IDENTITY, Orleans/Akka-sharding shape: a verb for an unmounted island parks as a record keyed by island id; delivery triggers rehydration — kills the lossy placeWikiVerb) · ''postMessage/broadcast'' = loss-tolerant hints ONLY, with the EDU discipline STATED (no delivery guarantee, supersession semantics, self-expiry; Matrix synapse #11150 = the bug-class of under-specifying the lossy lane).
+* ''Fire vs await lives in the wire protocol, not convention'' — CapTP allocates NO answer slot for sendOnly; IslandMsg types SHOULD carry the same enforced distinction (signalable/awaitable as different message kinds).
+* ''Verb lifecycle = record pair, everywhere'' (the CLI's summons/outcome physics extend to islands): summons {id, verb, args, issuer} + outcome {summonsId, status: done|rejected|failed, executor}. ''The outcome record = the idempotency ledger = the audit log, one artifact'' (executor checks for an existing outcome before side-effecting → at-least-once redelivery becomes exactly-once EFFECT). Rejection = a first-class outcome, never an error channel. Named precedent: trpc-crdt (calls as Yjs records, response awaited as a field; free fleet-wide observability of in-flight verbs — a HUD gift).
+* ''BOUND THE BUS HISTORY'' — the one mechanism the precedents lack out-of-box: Automerge keeps every op forever; a busy verb bus through a long-lived canonical doc = unbounded churn history (field data: tombstone sets at GBs by 10M entries). Law: per-task or per-epoch BUS DOCS, small, discarded/archived whole, a pointer kept in the durable graph — rhymes with project-engine-epoch. Yjs invented Awareness for exactly this math.
+* ''Ephemeral/persistent placement criteria'' (every mature system draws the line: Yjs doc/awareness · automerge change/broadcast · Matrix PDU/EDU): ephemeral iff loss-acceptable AND session-scoped AND high-frequency AND self-expiring; persistent if anyone must act exactly-once, an offline recipient must still receive it, it orders against durable state, or you'd want it in a postmortem. Ring-0 alerts = EDUs (keep the dual-write durable audit) · verbs = PDUs.
+* ''Addressing = SSB shape'': each principal writes its OWN outbox region; addressee named by identity IN the record; reader pulls by subscription ("relay holds pull not read" — the islands doctrine already vows this). Never write into another's store ambient; inbox-writes (if ever) gate per-writer capability. automerge-repo scopes ephemeral messages per-DOC — our signals SHOULD carry a doc-URL scope, easing later promotion of a signal class into records.
+* ''Vessel projection protocol (the browser leg + every future vessel type)'' — the shore triplet, convergent across VS Code/Figma/Flutter/Monaco/worker-dom: (1) OUTBOUND: the sovereign island owns a typed model and emits ONE atomic versioned batch per frame (Flutter's layer-tree commit = the nalu's strongest field precedent: one wave, all observers, no half-applied state); each vessel supplies only an APPLIER — DOM-applier (shadow root), terminal-applier, canvas-applier, headless-applier (today's fake-DOM = exactly this); declarative state-mirror beats command-streams because appliers may ignore/coalesce/re-derive. (2) POLICY OUTBOUND AHEAD: default-handling declared in advance (the passive-listener/touch-action precedent) — preventDefault across an async shore = a lie about causality (Partytown documents it unfixable). (3) INBOUND: version-stamped SEMANTIC intents (never raw events; Events don't structured-clone), local echo vessel-side as pure presentation, reconciled by the next wave. Sovereign assigns stable node ids. NEVER expose the DOM; expose the versioned view-model (VS Code's 20-year ruling; Figma rebuilt their sandbox in WASM after shared-heap shores kept escaping — separate heaps keep working). vscode.dev runs the same RPC across process/worker/remote unchanged = the transport-agnostic proof the many-vessels law wants. worker-dom's gesture-flags on forwarded input = capability riding the input path, keep.
+* ''Anti-patterns, named:'' per-mutation postMessage (killed react-worker-dom) · sync hops through the coordinator (Electron sendSync freezes; Actual Budget postmortem) · whole-DOM mirroring (worker-dom's fate: mirror the semantic model instead) · fire-and-forget where durability was needed (Erlang silent-drop; Akka added /deadLetters as the visibility valve — keep one) · commands-as-events (a command may be REJECTED; an event = confirmed fact).
+* ''Reconciled to the coordinator-verb-plane ruling (2026-07):'' the `@daemon` coordinator's verbs fan work across the islands-mesh (TS workers + py nalu-gates/servos) — it introduces edges then steps away, exactly per the lane law above. Stream-processing (telemetry, corpus, AI-session-memory) offloads to py islands and runs there directly; pulling that stream //into// the TS coordinator and back out would enact the "sync hops through the coordinator" anti-pattern this shelf names. The lane law reads the same either way: main sees the edge minted, never every message on it.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/handoff >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-isomorphism >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;Uwvn1-AiQEwOnCWTxjr8UeTr_m5wJqOyqhg3r3qRYXM
+
+<<^ code:"&#x0004;" -> ? >>

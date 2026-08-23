@@ -447,7 +447,7 @@ ECM — Etheric Counter-Magitech — is a **procedural module**, not a power cat
 | `[redirect]` | Shove an incoming effect sideways: left/right/up/down, ally/enemy swap, mirror back |
 | `[capture]` | Intercept a power payload and store it as charge for later use |
 | `[absorb]` | Eat power energy, converting it to Life, Ward, heat, or a burden (referee chooses fitting currency) |
-| `[hijack]` | Take control of an active effect briefly — rewrite its target, parameters, or allegiance |
+| `[control]` | Take control of an active effect briefly — rewrite its target, parameters, or allegiance |
 
 **Combinable tags (stack freely with ECM mode tags):**
 `[illusion]` · `[glamour]` · `[charm]` · `[noosphere]` · `[dreamnet]` · `[ha]` · `[ka]` · `[ba]` · `[ward]` · `[daemon]` · `[field]` · `[ritual]`
@@ -481,7 +481,7 @@ Inside a Dream Realm, ECM is network security. Outside, it’s fieldcraft. Same 
 
 The beta-rules chapter organizes ECM behaviors into sub-categories. When converting BECMI entries, use these routing rules to assign power cards to the correct Power Module.
 
-**Counterspells (`[negate][suppress][redirect][capture][hijack]`):**
+**Counterspells (`[negate][suppress][redirect][capture][control]`):**
 → **Mana, Counterspells, and Jamming** (Power Module)
 Hard-counter operations — ending, pausing, turning, storing, and stealing active effects. ECM targets *active effects and power activations.* It does not erase an item’s lifelong weirdness unless that weirdness is currently running as an effect.
 
@@ -505,7 +505,7 @@ Identity-layer ECM: spoofs recognition, authority, beauty, threat, and "who you 
 → **Illusion and Glamour** (Power Module)
 Perception-layer ECM. Two classes: **Figments** (sensory spoofs — distract, misdirect; meaningful interaction triggers a Sensing chance; collapse for that observer on success); **Illusion proper / schema writes** (can cause real harm by forcing false reality-layer; require a conscious/mindlike process; resisted by Aura save; create burdens on failure). Paired Slot Doctrine: many illusion powers ship as a paired mode in one slot — True mode (weaker, real, cannot be disbelieved) and Illusion mode (stronger, gains Overcharge hooks, adds Sensing/Disbelief riders). See **Illusion and Glamour** module doctrine for full detail.
 
-**Charms (`[charm][spoof][hijack]`):**
+**Charms (`[charm][spoof][control]`):**
 → **Binding and Compulsion** (Power Module)
 Desire/obedience ECM on the Ka channel — injecting impulses, framed certainties, cravings, taboos, and short command-patterns. Not "remote puppetry" by default: charms are *steering, binding, and permission edits* unless Overcharged. On Sacrifice: charm works but target immediately gets a clue that something pushed them. On Doom: full effect; may impose a burden ("Compelled," "Infatuated," "Shamed," etc.). Charm breaks immediately if the caster attacks the charmed target. Re-save cadence by target Intelligence: low INT → slow; high INT → frequent. See Section G and **Binding and Compulsion** module doctrine.
 
@@ -630,7 +630,8 @@ BECMI source material does not map directly to a Mana sub-module — there is no
 | Dispel Magic | spell | C4/MU3 · Expert, RC | Core ECM counterforce anchor. 20' cube; auto-dispels equal/lower caster-level magic; fails 5% per higher level; does not affect ordinary magic items. | custom | no |
 | Silence 15' Radius | spell | C2 · Expert, RC | Anti-speech and anti-casting field; partial noospheric jam. 30' sphere suppresses speech and casting inside; hearing from outside still works. | partial | no |
 | Spell Catching | item-effect | — · Companion, RC | Counter-capture of hostile spell into storage media. Save vs. Spells on success; captured spell usable once within 24 hours. | custom | — |
-| Ring of Spell Eating | item-effect | — · Companion, RC | Spell absorption ring; damage spells heal wearer; non-damage spells canceled; 10th use in a day triggers 24h dormancy. | custom | — |
+| Ring of Spell Eating (cursed) | item-effect | — · Companion, RC | Source witness (rc_full.txt:17383, companion_full.txt:6199): CURSE ring — appears/functions as spell turning, then eats the wearer's own memorized spells; cannot be removed below a remove curse from a 25th+ level caster; dispel evil by 36th-level caster upgrades it to a true ring of spell turning. Curse-face seats toward burden. | custom | — |
+| Ring of Spell Eating (uncursed variant) | item-effect | — · community: BG3 mod scene | Community-lineage build (operator-attested 2026-08-19, Baldur's Gate 3 online mod community — NOT in the staged BECMI corpus): spell absorption ring; damage spells heal wearer; non-damage spells canceled; 10th use in a day triggers 24h dormancy. Kept as named variant beside the cursed source face; enters at community register. | custom | — |
 | Ring of Spell Turning | item-effect | — · Expert, RC | Reflects 2-12 incoming spells back at casters; true spells only (not monster spell-like powers or item-borne effects). | custom | — |
 | Staff of Dispelling | item-effect | — · Companion, RC | Touch-based targeted dispel; special handling for potions, scrolls, and permanent items. | custom | — |
 | Wand of Negation | item-effect | — · Expert | Narrow ECM wand that cancels one other wand or staff effect instead of countering free-cast spells; if the canceled effect has duration the negation persists for one round. | custom | — |

@@ -27,7 +27,7 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 // ---------------------------------------------------------------------------
 
 const FIXTURE_URL = new URL("./fixtures/repo-in-island-echo.mjs", import.meta.url);
-const WIKI_ID     = "lar:///ha.ka.ba/bags/@test/repo-in-island";
+const WIKI_ID     = "lar:///ha.ka.ba/bags/test/repo-in-island";
 
 
 // ---------------------------------------------------------------------------

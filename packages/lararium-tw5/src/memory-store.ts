@@ -28,7 +28,7 @@
  * cascade (lar:///ha.ka.ba/lararium/config/bag-paths) decides routing, not this
  * store: prefix rules send those four above the `$:/state/` → @temp catch-all.
  * See:
- *   bags/@lares/ha.ka.ba/lararium/api/personal-slot.md
+ *   bags/lares/ha.ka.ba/lararium/api/personal-slot.md
  *
  * Tombstoned titles disappear from listVisible() but remain readable via
  * get() when the record carries { deleted: true }.

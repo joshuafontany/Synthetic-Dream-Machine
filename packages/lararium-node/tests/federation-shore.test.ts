@@ -49,8 +49,8 @@ describe("§8 federation shore — docUrl non-null, two Repos, one MessageChanne
 
     // Vessel writes a change after the island is synced.
     wikiHandle.change((d) => {
-      d.tiddlers["lar:///ha.ka.ba/bags/@test/federation/page"] = {
-        title: "lar:///ha.ka.ba/bags/@test/federation/page",
+      d.tiddlers["lar:///ha.ka.ba/bags/test/federation/page"] = {
+        title: "lar:///ha.ka.ba/bags/test/federation/page",
         text: "archipelago",
       };
     });
@@ -62,7 +62,7 @@ describe("§8 federation shore — docUrl non-null, two Repos, one MessageChanne
         5_000,
       );
       const check = () => {
-        if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@test/federation/page"]) {
+        if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/test/federation/page"]) {
           clearTimeout(timer);
           resolve();
         }
@@ -72,7 +72,7 @@ describe("§8 federation shore — docUrl non-null, two Repos, one MessageChanne
     });
 
     expect(
-      found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@test/federation/page"],
+      found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/test/federation/page"],
     ).toBeDefined();
 
     port1.close();
@@ -101,8 +101,8 @@ describe("§8 federation shore — docUrl non-null, two Repos, one MessageChanne
 
     // Island writes — vessel observes via the same channel.
     found.change((d) => {
-      d.tiddlers["lar:///ha.ka.ba/bags/@test/federation/reply"] = {
-        title: "lar:///ha.ka.ba/bags/@test/federation/reply",
+      d.tiddlers["lar:///ha.ka.ba/bags/test/federation/reply"] = {
+        title: "lar:///ha.ka.ba/bags/test/federation/reply",
         text: "pono",
       };
     });
@@ -113,7 +113,7 @@ describe("§8 federation shore — docUrl non-null, two Repos, one MessageChanne
         5_000,
       );
       const check = () => {
-        if (wikiHandle.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@test/federation/reply"]) {
+        if (wikiHandle.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/test/federation/reply"]) {
           clearTimeout(timer);
           resolve();
         }
@@ -123,7 +123,7 @@ describe("§8 federation shore — docUrl non-null, two Repos, one MessageChanne
     });
 
     expect(
-      wikiHandle.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@test/federation/reply"],
+      wikiHandle.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/test/federation/reply"],
     ).toBeDefined();
 
     port1.close();

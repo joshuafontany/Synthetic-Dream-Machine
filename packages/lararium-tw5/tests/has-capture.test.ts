@@ -25,7 +25,7 @@ function fakeEngine() {
 
 function fakeCtx() {
   const posted: Array<{ listenable?: string; payload?: unknown }> = [];
-  const ctx = { wikiUri: "lar:///ha.ka.ba/bags/@telemetry/island", post: (m: unknown) => void posted.push(m as never) } as unknown as IslandContext;
+  const ctx = { wikiUri: "lar:///ha.ka.ba/bags/telemetry/island", post: (m: unknown) => void posted.push(m as never) } as unknown as IslandContext;
   return { ctx, posted };
 }
 

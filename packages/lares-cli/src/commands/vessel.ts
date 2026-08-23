@@ -166,7 +166,7 @@ const SUBS: Readonly<Record<string, { readonly summary: string; readonly run: Su
   stop:  { summary: "halt the daemon on the port (graceful → forced); a free port reads as stopped",     run: (a) => cmdNodeStop(under(a)) },
   clear: { summary: "wipe the store + projection watermark, re-bake and re-found (identity survives)",   run: (a) => cmdReset(under(a)) },
   bake:  { summary: "re-derive the genesis island from the engine + packed plugin (moves no identity)",  run: (a) => cmdBuildGenesis(under(a)) },
-  seed:  { summary: "plant every bags/@* holding back into its doc, kind-routed and diff-gated",         run: (a) => cmdSeed(under(a)) },
+  seed:  { summary: "plant every bags/* holding back into its doc, kind-routed and diff-gated",         run: (a) => cmdSeed(under(a)) },
   read:  { summary: "inspect and start nothing — bootstrap, storage, port, seal, personas, quorum",      run: (a) => cmdStatus(under(a)) },
   rite:  { summary: "the pet-named procedures: founding · refresh · rebuild · rebirth",                 run: runRite },
 };

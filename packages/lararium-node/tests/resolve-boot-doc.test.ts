@@ -15,7 +15,7 @@ describe("resolveBootDoc — tideline-class boot resolution", () => {
   it("returns the real handle for a doc present in the local store", async () => {
     const repo = new Repo();
     const h = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
-    const got = await resolveBootDoc(repo, h.url, { tideline: "hearth-private", label: "@test" });
+    const got = await resolveBootDoc(repo, h.url, { tideline: "hearth-private", label: "test" });
     expect(got.url).toBe(h.url);   // the SAME id — never a fresh ghost
   });
 
@@ -24,7 +24,7 @@ describe("resolveBootDoc — tideline-class boot resolution", () => {
     const url = origin.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} }).url; // lives in `origin`
     const node = new Repo();                                                                 // separate, no network
     await expect(
-      resolveBootDoc(node, url, { tideline: "hearth-private", label: "@daemon" }),
+      resolveBootDoc(node, url, { tideline: "hearth-private", label: "daemon" }),
     ).rejects.toThrow(/hearth-private doc unavailable/);
   });
 

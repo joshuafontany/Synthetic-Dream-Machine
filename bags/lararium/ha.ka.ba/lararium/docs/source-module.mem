@@ -1,0 +1,113 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/source-module >>
+```toml iam
+cacheable = true
+file-path = "bags/lararium/ha.ka.ba/lararium/docs/source-module.mem"
+l-space   = "stable"
+mana      = 16
+manao     = 16
+manaoio   = 15
+register  = "Synthesis-Canon"
+retain    = true
+role      = "capability meme for source-module carrier: package TypeScript source files emitted as memes into the graph"
+tags      = ["lar:///ha.ka.ba/lares/api/pono/meme"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lararium/docs/source-module"
+```
+
+<<~ ahu #head >>
+
+! Source Module
+
+Verbatim TypeScript source file emitted as a meme into the graph at postbuild time.
+Makes monorepo source navigable, queryable, and reactable through lar:/// URIs.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #ooda-ha >>
+
+✶ detect a postbuild trigger for a priority source file; read verbatim source text
+⏿ orient: hash the content; compare against existing carrier in the store
+◇ hash matches → no-op; hash differs → overwrite carrier with new source text and built-at timestamp
+▶ emit source-module meme at lar:///source/<package>/<path> with origin:operator-import
+↺ meme graph now holds current source; agents can read, query, and react to source changes; confirm carrier written; content-hash recorded; no noise or data files emitted
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+!! Law
+
+A source-module meme carries the verbatim source text of one TypeScript/TSX file
+as its body, with structured fields naming its package, path, and exports.
+
+A postbuild script (`write-source-memes.ts`) emits source modules after each `pnpm build`. The script never checks them into `lares/` — it writes them as generated artifacts into the Automerge store at boot.
+
+This makes the monorepo's source navigable through the meme graph:
+agents can read, query, and react to source changes as memes.
+
+<<~/ahu >>
+
+<<~ ahu #carrier-shape >>
+
+!! Carrier Shape
+
+```toml
+uri            = "lar:///source/<package-name>/<relative-src-path>"
+               # e.g. lar:///source/lararium-mesh/src/live-protocol.ts
+
+[fields]
+package        = "@lararium/mesh"         # pnpm package name
+src-path       = "src/live-protocol.ts"   # path relative to package root
+lang           = "typescript"             # typescript | tsx | javascript
+built-at       = "ISO 8601 timestamp"
+content-hash   = "SHA-256 hex of source text"
+exports        = ["ReactionGraph", "ReactionBinding", ...]  # named exports
+```
+
+The body (`text`) is the verbatim source content.
+
+<<~/ahu >>
+
+<<~ ahu #priority-modules >>
+
+!! Priority Modules
+
+These files are the highest-value source-module memes:
+
+```
+@lararium/mesh    src/parser.ts           — memetic-wikitext parser
+@lararium/mesh    src/causal-island.ts    — causal island doctrine + AuthorityFirstGuard
+@lararium/mesh    src/live-protocol.ts    — wire protocol types + ReactionGraph
+@lararium/tw5     src/lararium-tw5.ts     — TW5 integration facade
+@lararium/app     src/LarariumPanel.tsx   — HUD + TW5 panel component
+@lararium/app     src/LarariumShell.tsx   — shell root
+```
+
+<<~/ahu >>
+
+<<~ ahu #postbuild-contract >>
+
+!! Postbuild Contract
+
+The `write-source-memes.ts` script MUST:
+
+# Run after each successful build in affected packages.
+# For each priority source file: read, hash, emit a carrier meme into the store.
+# Use origin `{ kind: "operator-import" }` — source memes enter as canon-hydrate peers.
+# Overwrite existing carrier if content-hash differs; no-op if hash matches.
+# Never emit noise or data files — only files with named exports that implement
+   invariant capabilities or architectural law.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;iFwbzEMLeG3ALGCl6WkdmiAUWzQDRv8M9LN138FFnYc
+
+<<^ code:"&#x0004;" -> ? >>

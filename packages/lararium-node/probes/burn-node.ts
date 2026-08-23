@@ -17,8 +17,8 @@ import { envOf, b64, unb64, ProbeVolume, runProbeRole } from "./probe-ceremony.j
 
 const SHARED = envOf("LAR_BURN_SHARED");
 const ROLE   = envOf("LAR_BURN_ROLE", "device");
-const BAG    = "lar:///ha.ka.ba/bags/@catalog/burn-note";
-const FLOOR  = "lar:///ha.ka.ba/bags/@catalog/my-own-floor";
+const BAG    = "lar:///ha.ka.ba/bags/catalog/burn-note";
+const FLOOR  = "lar:///ha.ka.ba/bags/catalog/my-own-floor";
 const seedOf = (n: number): Uint8Array => new Uint8Array(32).fill(n);
 const putList = (vol: ProbeVolume, name: string, us: readonly Uint8Array[]): void => vol.putText(name, JSON.stringify(us.map(b64)));
 const readList = (vol: ProbeVolume, name: string): Uint8Array[] => (JSON.parse(vol.readText(name)) as string[]).map(unb64);

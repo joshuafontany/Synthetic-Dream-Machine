@@ -16,4 +16,4 @@ The static `CLAUDE.md` @-import carries the canonical seed (always-true); this p
 - `lares vessel stand --install` — found a *first* vessel (build · mempalace · init · genesis, each found-if-absent; genesis never rebuilt; keypair never wiped).
 - `lares vessel stand --admit <payload>` — stand up a *joining* vessel into an existing operator PersonGroup (same idempotent standup; the init step joins from a `device-admit` payload).
 
-**Federating a second vessel** (out-of-band identity transmit + the device-admit flow) is written up at the meme `lar:///ha.ka.ba/lares/docs/lares/federation` (`bags/@lares/ha.ka.ba/lares/docs/lares/federation.md`). Note: `social-bootstrap.json` and the operator key are identity-bearing — gitignored, never committed, transmitted out-of-band only.
+**Federating a second vessel** (out-of-band identity transmit + the device-admit flow) is written up at the meme `lar:///ha.ka.ba/lares/docs/lares/federation` (`bags/lares/ha.ka.ba/lares/docs/lares/federation.md`). Note: `social-bootstrap.json` and the operator key are identity-bearing — gitignored, never committed, transmitted out-of-band only.

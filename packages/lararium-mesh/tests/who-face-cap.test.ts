@@ -1,7 +1,7 @@
 /**
  * who-face-cap.test.ts — the isomorphic WHO-plane cap, through the real compose engine.
  *
- * Proven: composing whoFaceCap resolves the Nexus's WHO board through @crossroads, layers it into the
+ * Proven: composing whoFaceCap resolves the Nexus's WHO board through crossroads, layers it into the
  * substrate composite (writable, so a relay syncs it), announces NOTHING, and exposes an ingest that
  * recognises what's on the board. This is the vessel-boot unit both node and browser compose.
  */
@@ -82,7 +82,7 @@ describe("whoFaceCap — the isomorphic WHO-plane vessel cap", () => {
     await who.ingest(book);
     expect(book.get(await pubOf(FASTJACK_SEED))?.card.glamour).toBe("FastJack");
 
-    // @crossroads advertises the board; the composite carries the board layer (so a relay syncs it)
+    // crossroads advertises the board; the composite carries the board layer (so a relay syncs it)
     expect(tiddlerText(crossroads.doc()?.tiddlers?.[nexusHandlesUri(NEXUS)])).toBe(who.handle.url);
     expect(composite.layerIds).toContain(nexusHandlesUri(NEXUS));
 
@@ -92,7 +92,7 @@ describe("whoFaceCap — the isomorphic WHO-plane vessel cap", () => {
   test("a second vessel on the SAME nexus resolves the SAME board — one shared island board", { timeout: 15_000 }, async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const crossroads = repo.create<LarDoc>(emptyLarDoc());
-    // vessel A composes, then vessel B composes over the SAME @crossroads
+    // vessel A composes, then vessel B composes over the SAME crossroads
     const vA = await composeVessel([substrateStub(new CompositeStore()),
       whoFaceCap({ repo, crossroadsHandle: crossroads, nexusPubkey: NEXUS })]);
     const vB = await composeVessel([substrateStub(new CompositeStore()),

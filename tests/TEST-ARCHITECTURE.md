@@ -73,9 +73,9 @@ composition, and one live-safe `status` read.
   (`ADD COPY MOVE CLEAR DROP LOAD`) + effect records through the real `lares` CLI
   against a running vessel.
 - **Assert against current canon only.** The `wela/anu` residency model
-  ([residency-tiers](../bags/@lararium/ha.ka.ba/lararium/api/residency-tiers.mem)) and the
+  ([residency-tiers](../bags/lararium/ha.ka.ba/lararium/api/residency-tiers.mem)) and the
   disk-projection surfaces — `bags/` seed, `wikis/` projection
-  ([disk-projection](../bags/@lararium/ha.ka.ba/lararium/api/disk-projection.mem)).
+  ([disk-projection](../bags/lararium/ha.ka.ba/lararium/api/disk-projection.mem)).
 - **Goldens are regenerable, never load-bearing history.** When the model changes,
   regenerate or delete. No promote-era artifacts ever return.
 

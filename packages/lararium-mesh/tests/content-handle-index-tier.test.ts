@@ -33,7 +33,7 @@ describe("assertBodyIndexTier — fail-closed, the tiers never cross", () => {
     expect(() => assertBodyIndexTier(CATALOG_DOC_URI, "public")).toThrow(/MUST ride/);
   });
   test("an UNKNOWN holding bag THROWS for either publicity (fail-closed)", () => {
-    const stray = "lar:///ha.ka.ba/bags/@daemon";
+    const stray = "lar:///ha.ka.ba/bags/daemon";
     expect(() => assertBodyIndexTier(stray, "public")).toThrow();
     expect(() => assertBodyIndexTier(stray, "private")).toThrow();
   });

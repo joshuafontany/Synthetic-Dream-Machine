@@ -35,7 +35,7 @@ describe("switcher-state reactor", () => {
     const reactor = makeSwitcherStateReactor(tw5);
 
     const result = await reactor(
-      { active: "notes daemon lab", held: "notes", surface: "lab", recipeSlug: "notes", recipe: "lar:///ha.ka.ba/bags/@notes lar:///ha.ka.ba/bags/@shared" },
+      { active: "notes daemon lab", held: "notes", surface: "lab", recipeSlug: "notes", recipe: "lar:///ha.ka.ba/bags/notes lar:///ha.ka.ba/bags/shared" },
       CTX,
     );
 
@@ -47,7 +47,7 @@ describe("switcher-state reactor", () => {
     expect(t["held"]).toBe("notes");
     expect(t["surface"]).toBe("lab");
     expect(t["recipeSlug"]).toBe("notes");
-    expect(t["recipe"]).toBe("lar:///ha.ka.ba/bags/@notes lar:///ha.ka.ba/bags/@shared");
+    expect(t["recipe"]).toBe("lar:///ha.ka.ba/bags/notes lar:///ha.ka.ba/bags/shared");
     expect(typeof t["ts"]).toBe("string");
   });
 

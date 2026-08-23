@@ -1,0 +1,327 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi >>
+```toml iam
+cacheable  = true
+confidence = 13
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/ichi.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 13
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "Ichi — Powered Symbiote trait + Construct Golem; spore-daemon ashigaru armor, worn and autonomous modes, flexible Inner Fire slots"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/ichi"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Ichi ~ Powered Symbiote & Construct Golem
+
+//Migrated verbatim from `elyncia/Shattered Isles/Powered_Symbiote_Trait_and_Ichi_Construct_Golem.md` (2026-08-14); md→wikitext conversion mechanical — prose
+untouched; md table separator rows dropped.//
+
+<<~/ahu >>
+
+<<~ ahu #body >>
+
+! Powered Symbiote [Hallmark Trait]
+
+*A new Hallmark-only Trait for sdm/FTLS. This section presents the trait rules first, then Ichi & Aki as the worked example.*
+
+---
+
+!! Powered Symbiote
+
+''Powered Symbiote.'' You are a living powered system — personal armor, a helmed vehicle, a mecha, an alien-style symbiont — that can operate independently or be worn/piloted by a bonded operator. The system has its own character sheet (Heritage, Traits, Ability Scores, Life, Level) and occupies a ''trait or item inventory slot'' on the operator's sheet as a Hallmark.
+
+!!! Mode Switch
+
+Entering or exiting symbiosis requires an ''action'' from both the system and the operator. Both lose their actions for that round, but movement and free actions are still possible.
+
+!!! When Worn/Piloted (Symbiosis Mode)
+
+The system wraps around or is helmed by the operator. The operator uses the system's ''defense ratings'' (Armor and Ward) in place of any other worn armor. The system's defense rating ''overrides'' other worn armor — and you cannot operate multiple Powered systems simultaneously.
+
+''Under-armor:'' The operator may wear light armor or clothing beneath the system. The under-armor's ''defense rating does not stack'' — the system's rating applies instead. However, under-armor ''passives, pockets, environmental features, and non-defense properties'' still function. Example: ritual robes worn underneath provide their spiritual effects and pockets but not their armor bonus.
+
+''Heritage Armoured Body:'' If the operator has an inherent Armoured Body effect from their Heritage (representing their own body — carapace, scales, hide), this ''does stack'' with the system's armor and ward ratings. Heritage form is not worn equipment; it sits inside the system as an additional layer.
+
+''Action economy:'' The system perceives and can communicate but cannot act independently. The operator gains the system's Burn talents and item features.
+
+''Damage Threshold (DT):'' The system grants its Level as DT to the operator while worn. DT scales with system category and degrades with negative Levels. Note: `DT 1` does not prevent any incoming damage, but can serve as a higher base for temporary DT bonuses from gear, traits, or powers. These other sources of DT can also be damaged or degraded.
+
+| Category | Typical DT | Examples |
+| Personal powered armor | 1–3 | alien symbiont, spectral parasite, porcelain walker |
+| Light mecha / mount | 3–5 | War-golem, cavalry mecha, combat symbiont |
+| Heavy mecha | 5–7 | Siege walker, heavy warframe |
+| Helmed vehicle (light) | 5–7 | Skyjammer, gunboat |
+| Helmed vehicle (heavy) | 8–10 | Trireme, frigate |
+| Capital ship | 12+ | Fortress-ship, cathedral-mech |
+
+*DT benchmarks align with the Formations & Mass Combat chapter.*
+
+!!! When Autonomous (Independent Mode)
+
+The system uses its own character sheet — its own Heritage, Traits, Ability Scores, Life, Level, actions, and equipment. The operator loses access to the system's armor rating, DT, Burn talents, and item features.
+
+!!! Powered Features & Battery
+
+The system has a ''Replenish score'' (re #) representing its power reserves. When the operator activates a ''Burn talent'' (as a free action), roll d20 against the re score:
+
+* ''Roll above re score:'' Burn talent activates. Battery holds.
+* ''Roll at or below re score:'' Burn talent activates, BUT apply ''−1 effective Level'' to the system. This reduces any powered feature or talent strength based on level (DT, etc), and may degrade other Level-dependent effects.
+* ''At effective Level 0:'' The system enters ''Unpowered/Emergency Mode''. Powered features become dormant. Physical armor still protects. Burn talents unavailable.
+* ''Damage or drain below Level 0:'' Roll ''Defeat'' for the system. *(This chassis parallels OSR-style level drain — a unified mechanic for power depletion, undead energy drain, and system degradation.)*
+
+''Recharging:'' Requires a spare power source, automagical recharging cradle (or prayer altar), or access to a functioning ley-line node / active lararium. Portable recharging unit: 1 sack, €500. Each negative Level recovered requires one full recharge cycle.
+
+!!! Slot Economy Summary
+
+* The system ''counts as'' one Powered System. You cannot operate multiple Powered Systems simultaneously.
+* The symbiotic interface occupies ''1 trait or item slot'' on the operator's sheet (a Hallmark companion).
+* When in Symbiosis Mode, this Hallmark slot ''overlaps'' with the one worn-armor slot. Reduce the usual encumbrance of the worn symbiotic gear by 1. On light mecha and larger vehicles, the relationship inverts: the Hallmark trait allows the operator to occupy the vehicle's helm without taking any vehicle capacity slots. The biological/magical bond handles integration.
+* Installed mods, vehicle-scoped gear, mecha system, and Powers-as-Traits can fill a system-character's physical and/or trait inventory slots.
+* Repair materials, spare parts, and uninstalled upgrade components occupy ''separate'' item slots on the operator-character's sheet as normal gear.
+
+!! Powered Mods
+
+!!! Installed Mods
+
+The system's physical item inventory slots can be filled with ''installed mods'' — permanent modifications that define its powered capabilities. Mods occupy item slots and represent the system's built-in hardware:
+
+* ''Passive mods'' (e.g., +STR bonus, environmental seals, sensor arrays) — always active when the system is Powered.
+* ''Burn-triggered mods'' (e.g., forcefield, speed burst, weapon systems) — require a Burn activation roll to use.
+* ''Structural mods'' (e.g., +armor rating, DT improvements, hull reinforcement) — always active regardless of power state.
+
+The number of available mod slots depends on the system's item inventory (7 + STR, plus any Inner Fire flexible slots assigned here, plus other slot-expanding traits). Mods can be repaired, replaced, or upgraded through the Hallmark upgrade tables, materials, and XP investment.
+
+!!! Hull/Vitality Mods
+
+In combat, the operator of a Powered Symbiote is the target of all incoming damage. Hull/Vitality mods are available, and many come as standard upgrades on light mecha and large vehicles. This structure or hull serves as an additional pool of temporary Life, aside from any force-field or other temporary Life. Damage is tracked to this pool first, unless traits or other effects over-ride this. Non-symbiote vehicles serve as the target in combat, have their own Life total, and rely on their operator and crew to perform tests or rolls (See SDM chapters and UVG/VBLG/OGA for core vehicle and mod rules). Parking-lot note: synthesize this into a better flow later. This Hallmark Trait eventually belongs in the FTLS Magitech and Fantascience chapter.
+
+!!! Ejection Systems
+
+When the operator (or the system) suffers a ''Defeat trigger'' while in Symbiosis Mode — meaning any damage that would force a Defeat roll — the operator may choose to ''Eject'' instead of rolling Defeat personally.
+
+''Ejection cost:'' The system takes ''−1 Level'' (cumulative with any battery drain). Both operator and system separate immediately (both prone, no action cost beyond the round's interruption). The operator survives at their current Life total, unarmored.
+
+''Reboot or Kip-up:'' If the system's effective Level remains above 0 after Ejection, they may attempt to act autonomously on their next turn (standing up costs movement as normal). This allows the system to sometimes recover and continue fighting independently or assist the operator — a damaged but stubborn partner getting back on their feet.
+
+''At Level 0 after Ejection:'' The system enters Unpowered/Emergency Mode. They can still act autonomously (crawl, communicate, be carried) but powered features and Burn talents are offline.
+
+''Below Level 0 after Ejection:'' The system rolls Defeat on its own table.
+
+---
+
+! Ichi (he/them) — Character Sheet
+
+*Ichi and Aki serve as the book example for the Powered Symbiote trait.*
+
+''Player:'' Freyja (also plays Lady Aki)
+''Concept:'' Spore-daemon-armor symbiote — three things that merged into a person
+''Heritage:'' Construct
+''Level:'' 2
+''Role:'' Aki's companion (hallmark); living symbiotic powered armor / autonomous fighter / DreamNet interface
+
+---
+
+!! Origin
+
+A Mother Spore (fairy ring mushroom spirit) dispatched a floating Ephyra spore-jellyfish tasked spirit to an old shrine where Lady Aki had detected remnant magitech signal. The mission: settle, colonize, grow a batch of mushroom-ashigaru homunculi, send them home for jobs.
+
+The spore-jelly found broken ashigaru powered armor — a relic of the Faerie Court Wars, pre-Necrospire. The armor's personal daemon was still inside: not dead, not functional, dreaming in the wreckage after millennia.
+
+Instead of colonizing, the spore-jelly symbiosed with the daemon. Something woke up. Not a homunculus, not a daemon, not a suit of armor — something new.
+
+---
+
+!! Visual Description
+
+''Silhouette:'' Compact, practical ashigaru infantry armor. Sergeant's kit — functional, not decorative. Medium humanoid frame, slightly stocky.
+
+''Dō (cuirass):'' Hexagonal kikko-pattern plates of alchemically treated chitin — iridescent beetle-shell blues and greens — riveted to woven mycelium-silk backing. The joins pulse with faint ''orange bioluminescent tracery'' where the mycelial symbiont threads through the armor like living mortar.
+
+''Kote (armored sleeves) & suneate (greaves):'' Lamellae of rare petrified hardwood, lacquered in dark amber resin, laced with silk cord in traditional odoshi style. Where millennia of dormancy cracked the wood, mycelium has filled the gaps with glowing orange scar-tissue.
+
+''Kabuto (helmet):'' Open-faced sergeant's design — forged magical-metal-composite (orichalcum-alloyed bronze), modest shikoro neck guard of chitin lamellae. The face opening shows ''two glowing yellow-orange orbs'' — the daemon-spore consciousness looking out.
+
+''When worn by Aki:'' The eye-spots migrate upward, settling above Aki's brow like a luminous crest — a guardian's gaze watching from above the wearer's face.
+
+''Overall:'' The patina of something built to be used, not displayed. Cracks filled with light. Surfaces that breathe. A damaged thing made whole in a way its makers never intended.
+
+---
+
+!! Ability Scores — The Dreamer
+
+| STR | AGI | END | CHA | THT | AUR |
+| 1 | 0 | 2 | 1 | 1 | 2 |
+
+*Emphasis: Aura-heavy for Dreamwalker and DreamNet interfacing. Endurance for the ancient frame's stubbornness. Charisma and Thought for a nascent mind learning to be a person. Strength sufficient but not dominant — the daemon remembers fighting, but Ichi is more dreamer than warrior.*
+
+---
+
+!! Defenses
+
+''Physical Defense (Autonomous):'' 12;  7 + AGI (0) + Armor (+5; heritage Armoured Body +1 and armor mod +4 both apply) + Skill (0)
+
+''Mental Defense (Autonomous):'' 9; 7 + THT (1) + Ward (+1; heritage Armoured Body) + Skill (0)
+
+''Physical Defense (Worn by Aki):'' 14; 7 + Aki's AGI (1) + Armor (+5 base, +1 Aki's Spider Folk carapace = ''+6 total'') + Skill (0). See Powered Symbiote trait.
+
+''Mental Defense (Worn by Aki):'' 12; 7 + Aki's THT (3) + Ward (+1 Ichi base, +1 Aki's Spider Folk carapace = ''+2 total'') + Skill (0). //(Matches Aki's roadmap; AUR governs psychic saves, not Defense.)//
+
+---
+
+!! Life
+
+''12'' — base 4 + 4/level across 2 Levels (standard track, matching Aki's). //(Re-spend stays open to Freyja's XP choices.)//
+
+---
+
+!! Heritage: Construct *(free, no trait slot)*
+
+> Ichi is a Construct Golem, part modern Elyncian mycelial tasked spirit, part dreaming daemon, and part lost magitech powered armor from the ancient Faerie Court Wars.
+
+''Deathless'' //(Skilled slot 1)// — Ichi doesn't die at 0 Life. They enter a dormant state. Recovery requires upkeep: organic matter, mana-rich nutrients, ambient ley-line signal, or time at a functioning node. Sacrifice something to trigger reconstitution — biomass, a potion, a watch spent at a lararium.
+
+''Armoured Body'' //(Skilled slot 2, +1 Armor, +1 Ward)// — The ancient chitin-and-composite plating. Inherent structural toughness — cannot be removed. \*This bonus applies in ''both'' autonomous and worn modes. In worn mode it is included in the base +5/+1 rating (exception to normal stacking; see Powered Symbiote core rules).
+
+''Inner Fire'' //(Skilled, slot 3, +2 flexible inventory slots, +1 Defeat threshold)// — The daemon core refuses to go down. The two bonus slots are ''flexible'': assign each to the trait or item inventory as it fills (ruled: Inner Fire expands //any// inventory). For Ichi they represent integral compartments, sealed weapon mounts, and the mycelium dream-deck's internal footprint.
+
+---
+
+!! Traits (5/8 base slots; +2 Inner Fire flex shared with Gear)
+
+!!! Slot 0a — Golem *(Path trait)*
+
+> "You have made, remade, and unmade yourself. You have a timelost civilian profession. You become Skilled (+3) in any activity you closely observe for a day, encoding it as a skill lemma stored in an inventory slot."
+
+''Ichi's timelost profession:'' Sergeant's field maintenance — the daemon remembers how to repair kit, maintain a camp perimeter, check armor straps, organize a supply line. Fragmentary, practical, nothing glamorous.
+
+''Skill-lemma encoding'' is Ichi's core learning mechanism: //watch, absorb, replicate//. The spore-jelly was designed to do exactly this. The daemon adds context — not just "how to sharpen a blade" but "how a soldier sharpens a blade before a battle they don't expect to survive."
+
+---
+
+!!! Slot 0b — Background: Military *(Court Wars sergeant)*
+
+The original daemon served as an NCO in the Faerie Court Wars — an era before the Necrospire's return. This background grants competence in: formation discipline, tactical assessment, field logistics, recognition of rank insignia and command structures (including ancient/obsolete ones).
+
+When Ichi encounters military architecture, fortifications, or unit formations from or inspired by the Court Wars era, the daemon's buried memory may surface as instinct or déjà vu.
+
+---
+
+!!! Slots 1 — Powered Symbiote *(Hallmark Trait)*
+Ichi's specific implementation of the generic trait (see Core Rules above).
+
+''Bonded operator:'' Lady Aki
+
+!!!! Gear Stats (Worn Mode)
+
+| Stat | Value | Notes |
+| ''Armor'' | +5 | Heritage Armoured Body (+1) + custom armor mod (+4, damaged) |
+| ''Ward'' | +1 | Heritage Armoured Body (+1) |
+| ''Size'' | 2 stone (Medium) | Operator's Powered Symbiote trait satisfies one of those slots; Mycelium-silk backing compresses and conforms |
+| ''Features'' | powered (re 4), cool, environmental, living | |
+| ''DT'' | 2 | Personal powered armor class (low end) |
+| ''Category'' | Golem-class powered armor | |
+
+''Stacking with Aki:'' Aki's Spider Folk heritage Armoured Body (+1 Armor, +1 Ward) stacks. ''Totals when Aki wears Ichi: +6 Armor, +2 Ward, DT 2.''
+
+!!!! Installed Mods (3 item slots filled)
+
+| Mod | Slot | Type | Effect |
+| ''War-Memory Surge'' | 1 | Passive (Burn) | +2 STR while Burn is active |
+| ''Ejection System'' | 1 | Reactive | Eject on failed Defeat trigger; cost −1 Level per Ejection (see core rules) |
+| ''Armor Plating'' | 1 | Structural | +4 Armor (damaged; repairable to +5, +6, +7 through investment) |
+
+!!!! Burn Mode
+
+Activate as free action, roll d20 vs re 4:
+* ''5+:'' Burn activates, battery holds. War-Memory Surge grants +2 STR.
+* ''1–4:'' Burn activates, −1 effective Level. War-Memory Surge still grants +2 STR this scene, but system degrades.
+* ''Level 0:'' Unpowered. Armor provides physical protection only. No Burn talents.
+* ''Below 0:'' Defeat roll.
+
+!!!! Ejection
+
+On a Defeat trigger while worn: operator may Eject instead of rolling personal Defeat. Cost: Ichi takes −1 Level. Both prone. Operator survives at current Life, unarmored.
+
+If Ichi remains above Level 0 after Ejection: may kip up and act autonomously next turn.
+If Ichi at Level 0: Unpowered Emergency Mode (can act but no powered features).
+If Ichi below Level 0: Ichi rolls Defeat.
+
+!!!! Upgrade Trajectory
+
+| State | Armor Mod | Total Armor (worn) | With Aki | Equivalent |
+| ''Current (damaged)'' | +4 | +5 | +6 | Bone Mesh / Chain Mail |
+| ''Repaired'' | +5 | +6 | +7 | Porcelain Walker class |
+| ''Restored'' | +6 | +7 | +8 | Full Archaic (pristine) |
+| ''Power Core'' | +7 | +8 | +9 | Beyond standard golem armor |
+
+!!! Slot 2 — Dreamwalker *(Scion path)*
+
+> "Dream, and your daemon-dream-self walks the dream realm."
+
+For Ichi, this manifests as the ''mycelium dream-deck interface''. The spore substrate connects to the DreamNet and local noospheric signals during rest or meditation. Ichi can:
+
+* ''Dream-walk ley-line networks'' — perceive the shape and health of local ley-lines from within the DreamNet
+* ''Interface with lararia'' — connect to Lares nodes, potentially diagnosing damage or corruption
+* ''Diagnose damaged infrastructure'' — directly relevant to the Neo-Thracian ley-line repair mission
+
+''Open question (held by Liminal):'' What does Ichi //dream//? A millennia-old daemon merged with a newborn spore-consciousness — whose dreams dominate? The sergeant's last battle? The Mother Spore's mycorrhizal network memory? Something entirely new? This does not need answering yet.
+
+---
+
+!! Gear Inventory (4/8 base slots; +2 Inner Fire flex shared with Traits)
+
+!!! Slot 1 Starting Equipment *(parked — minimal)*
+
+* Uwa-obi (Outer Belt, [pockets] equivalent): A thick, often white, linen or cotton sash worn over the sarashi (binding cloth) to secure the armor (dō) and act as a foundation for carrying weapons. Allows carrying 1st 5sp of items at ready (referee's call), and wielding one of these items does not consume the normal +1 gear inventory slot.
+* Ironwood and bamboo bokken (1d8, 1 st, )
+* Crystal Knife (1d4, 1 sp)
+* Iron Tantō (1d4+2, 1 sp, [cut]) — Named, possibly a relic of the original sergeant's kit
+* Starting cash (*Full starting cash and gear to be determined.*)
+
+!!! Slot 2 War-Memory Surge Mod
+
+See ''Powered Symbiote'' (1 st).
+
+!!! Slot 3 Ejection System Mod
+
+See ''Powered Symbiote'' (1 st).
+
+!!! Slot 4 Armored Plating Mod
+
+See ''Powered Symbiote'' (1 st).
+
+---
+
+!! On Aki's Sheet
+
+''Ichi occupies:'' 1 item inventory slot (companion/hallmark)
+''Bond type:'' Symbiotic mycelium (physical/biological upkeep)
+''When worn:'' Companion slot and worn-armor slot overlap — one entry
+''Restriction:'' Cannot operate multiple Powered systems simultaneously
+
+---
+
+!! Notes for Play
+
+''Two-character management (Freyja):''
+* ''Armor mode:'' Freyja plays Aki with Ichi's armor stats applied. Ichi can perceive and communicate (mycelium link) but cannot act independently. Freyja voices Ichi's reactions, observations, warnings from inside.
+* ''Autonomous mode:'' Freyja plays both characters, separate action economies, separate sheets.
+* ''Mode switch:'' Full-round action, both lose actions.
+
+''The personhood question:'' The Mother Spore sent a tasked spirit. What came back isn't a tasked spirit anymore. Does the Glade recognize Ichi? Does Ichi owe the Glade labor? Is Ichi a person or a malfunction? //Hold this open.//
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;qc0ffVXOoi9d3fChqoubjCCrxa7G_IPOiCVUTYZFF6g
+
+<<^ code:"&#x0004;" -> ? >>

@@ -69,15 +69,14 @@ export function wikiShadowMirrorRelPath(uri: string): string | null {
   if (rest === null) return null;
   let dirPrefix: string;
 
-  if (rest.startsWith(`@lares/`)) {
-    rest = rest.slice(`@lares/`.length);
+  if (rest.startsWith(`lares/`)) {
+    rest = rest.slice(`lares/`.length);
     dirPrefix = `lares/`;
-  } else if (rest.startsWith(`@lararium/`)) {
-    rest = rest.slice(`@lararium/`.length);
+  } else if (rest.startsWith(`lararium/`)) {
+    rest = rest.slice(`lararium/`.length);
     dirPrefix = `lararium/`;
-  } else if (rest.startsWith("@")) {
-    return null;
   } else {
+    // Any other entity mirrors nowhere — one arm, because there was never a second outcome to reach.
     return null;
   }
 

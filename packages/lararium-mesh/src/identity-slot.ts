@@ -36,7 +36,7 @@
  *   lar: URI tiddlers so users can inspect and override from within the wiki:
  *     lar:///ha.ka.ba/lararium/config/identity/did
  *     lar:///ha.ka.ba/lararium/config/identity/provider
- *     lar:///ha.ka.ba/bags/@catalog
+ *     lar:///ha.ka.ba/bags/catalog
  *   Reserve $:/ ONLY for TW5 core + TW5 plugins. All Lararium config is lar:.
  *   Tiddlers with lar: URIs serve as the heleuma sync candidates; $:/ tiddlers do not.
  */

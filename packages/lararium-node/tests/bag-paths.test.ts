@@ -11,8 +11,8 @@ describe("carrierBaseRelPath — the extension-less carrier siting function", ()
   });
 
   test("a FOREIGN name sites whole — any bag holds any name (the crack, closed)", () => {
-    expect(carrierBaseRelPath("lar:///ha.ka.ba/bags/@other/v2/notes/thing"))
-      .toBe("ha.ka.ba/bags/@other/v2/notes/thing");
+    expect(carrierBaseRelPath("lar:///ha.ka.ba/bags/other/v2/notes/thing"))
+      .toBe("ha.ka.ba/bags/other/v2/notes/thing");
   });
 
   test("fragments live inside their parent carrier — null", () => {

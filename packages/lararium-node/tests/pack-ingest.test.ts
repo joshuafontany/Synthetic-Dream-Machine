@@ -32,7 +32,7 @@ const coreBlobSkip = existsSync(CORE)
   ? false
   : `TW5 core blob absent at ${CORE} — run: pnpm --filter @lararium/tw5 build:tw5-vendor`;
 const URI  = "lar:///ha.ka.ba/lares/api/native/bundle";
-const BAG  = "lar:///ha.ka.ba/bags/@lares";
+const BAG  = "lar:///ha.ka.ba/bags/lares";
 const PACK = "ha.ka.ba/lares/api/native/bundle.json";      // the disk mirror-relative pack path
 const sha = (s: string) => createHash("sha256").update(s, "utf8").digest("hex");
 

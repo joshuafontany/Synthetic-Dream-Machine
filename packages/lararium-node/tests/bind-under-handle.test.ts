@@ -30,7 +30,7 @@ const pubOf = async (s: Uint8Array): Promise<string> => hex(await ed25519.getPub
 const seed  = (n: number): Uint8Array => new Uint8Array(32).fill(n);
 const FOUNDER_SEED = seed(60);
 const JOINEE_SEED  = seed(160);
-const BAG = "lar:///ha.ka.ba/bags/@catalog/handle-shared";
+const BAG = "lar:///ha.ka.ba/bags/catalog/handle-shared";
 
 /** Boot a live keyhive over a founded/admitted daemon doc, the way a real vessel boots. */
 async function bootOver(repo: Repo, daemonUrl: string, s: Uint8Array, verifyingKey: string,

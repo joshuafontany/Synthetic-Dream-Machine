@@ -21,7 +21,7 @@ import { join } from "node:path";
 import { scanSource, candidatesOf, applyConfirmedRenames } from "../src/ingest-core.js";
 import { SyncedTree, syncedTreeKey } from "@lararium/node";
 
-const TO_BAG = "lar:///ha.ka.ba/bags/@x/notes";
+const TO_BAG = "lar:///ha.ka.ba/bags/x/notes";
 const uriOf = (stem: string) => `lar:///ha.ka.ba/lares/api/${stem}`;
 
 let root = "";

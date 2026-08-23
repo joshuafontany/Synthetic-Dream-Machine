@@ -6,7 +6,7 @@
  * an adversarial + kupono + YIN research pass (2026-06-01) the
  * `warm` tier was CUT: the model is a TWO-state thermal axis in ʻōlelo Hawaiʻi —
  * wela (hot) / anu (cold) — plus an orthogonal pin flag. No tests existed before
- * this file (the S6 suite was lost in the @lararium/core → @lararium/mesh port).
+ * this file (the S6 suite was lost in the lararium/core → lararium/mesh port).
  *
  * Covers:
  *   - deriveBagTemperature (any wela referrer → wela, else anu) — S11.4 model

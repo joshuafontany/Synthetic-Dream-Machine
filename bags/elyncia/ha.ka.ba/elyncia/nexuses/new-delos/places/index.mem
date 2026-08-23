@@ -1,0 +1,57 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/index >>
+```toml iam
+cacheable  = true
+confidence = 11
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/index.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "place-shelf index for the New Delos Nexus — the fractal worksheet law and the Destination roster across all strata"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/index"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! New Delos ~ Places Index
+
+''The fractal worksheet law:'' the Realm-hex worksheet
+([[region-worksheet|../region-worksheet.md]]) holds the 30-mile view; each named Destination
+earns a Travel-hex place meme on this shelf; Sites and Areas that matter (extraction, delving,
+RSS profiles) nest beneath their Destinations. ''Every place meme declares its stratum and its
+hex-scale.'' Feed every hex: horizon · hidden handle · bleed.
+
+<<~/ahu >>
+
+<<~ ahu #roster >>
+
+!! The Destination Roster
+
+''High Delos (the constellation):'' the House of Masks (Theatre Quarter) · the High Delos
+Archive · the Orrery · the Naxian Colossus precinct (the civic ley-line node) · the Terrace of
+the Lions · //further sky-hubs unnamed//.
+
+''The sea-level ring (young ports, founded post-flight):'' the Salt-Stair's harbor town
+(''town unnamed — prompt'') · the Spice Quarter and its market district · //three-to-five
+ring-ports await naming//.
+
+''Below:'' the Low Delos mouth (where Rinia rose), towns to the third level.
+
+''Far exclaves of the constellation:'' the Poseidon-coast crags · the Artemision's risen six
+miles (near the Izmir-coast) — constellation members hanging over other Realms.
+
+''Elsewhere-but-adjacent:'' Hawaiki, the drifting Nexus, moors on its own unwritten rhythm.
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;3AUEl50ke8Y0TWaMiIU_ax-DZZfOKUs-UNyfamH2wBo
+
+<<^ code:"&#x0004;" -> ? >>

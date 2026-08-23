@@ -23,9 +23,9 @@ import type { LarTiddlerRecord, LarTiddlerStore, ChangeOrigin } from "../src/tid
 // Fixtures
 // ---------------------------------------------------------------------------
 
-const HIGH = "lar:///ha.ka.ba/bags/@high";
-const MID  = "lar:///ha.ka.ba/bags/@mid";
-const LOW  = "lar:///ha.ka.ba/bags/@low";
+const HIGH = "lar:///ha.ka.ba/bags/high";
+const MID  = "lar:///ha.ka.ba/bags/mid";
+const LOW  = "lar:///ha.ka.ba/bags/low";
 
 function rec(title: string, text: string): LarTiddlerRecord {
   return { tiddler: { title, text } };
@@ -290,8 +290,8 @@ class HeadsAwareStore implements LarTiddlerStore {
   async getHeads(): Promise<readonly string[] | null> { return this.heads; }
 }
 
-const BAG_A = "lar:///ha.ka.ba/bags/@aleph";
-const BAG_B = "lar:///ha.ka.ba/bags/@beth";
+const BAG_A = "lar:///ha.ka.ba/bags/aleph";
+const BAG_B = "lar:///ha.ka.ba/bags/beth";
 
 describe("CompositeStore.auditPins", () => {
   test("returns empty map when recipe has no bagPins", async () => {

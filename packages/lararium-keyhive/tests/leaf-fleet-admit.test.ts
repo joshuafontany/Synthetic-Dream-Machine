@@ -90,7 +90,7 @@ describe("an end-user's fleet — leaves only, no node anywhere", () => {
     expect(out.grant.reKeyed).toBe(true);
     await absorb(laptop, out.grant);
 
-    const BAG = "lar:///ha.ka.ba/bags/@catalog/leaf-fleet-note";
+    const BAG = "lar:///ha.ka.ba/bags/catalog/leaf-fleet-note";
     const { docId } = await phone.registerBag(BAG);
     await phone.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
     const sealed = await phone.encryptContent(BAG, new TextEncoder().encode("what the phone knows"));
@@ -122,7 +122,7 @@ describe("an end-user's fleet — leaves only, no node anywhere", () => {
     }
 
     // Seal AFTER the whole fleet stands, so the chunk keys to an epoch every member is inside.
-    const BAG = "lar:///ha.ka.ba/bags/@catalog/leaf-fleet-shared";
+    const BAG = "lar:///ha.ka.ba/bags/catalog/leaf-fleet-shared";
     const { docId } = await phone.registerBag(BAG);
     await phone.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
     const sealed = await phone.encryptContent(BAG, new TextEncoder().encode("one face, three devices"));

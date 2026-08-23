@@ -39,7 +39,7 @@ describe("epoch-lease — coordinator-free max-register", () => {
   });
 
   test("slot URIs are prefix-scannable + charset-safe (resource/writer may carry slashes)", () => {
-    const resource = "lar:///ha.ka.ba/bags/@wiki/foo";
+    const resource = "lar:///ha.ka.ba/bags/wiki/foo";
     const prefix = leaseEpochPrefix(resource);
     const slot = leaseEpochSlotUri(resource, "0xabc/def");
     expect(slot.startsWith(prefix)).toBe(true);   // the verb scans the prefix to gather slots

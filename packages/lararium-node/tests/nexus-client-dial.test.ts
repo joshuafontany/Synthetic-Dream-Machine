@@ -34,9 +34,9 @@ import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import { DaemonAuthGate } from "../src/daemon-auth-gate.js";
 import { startNexusClientDial, maybeStartNexusClientDial } from "../src/nexus-client-dial.js";
 
-const AUD = "lar:///ha.ka.ba/bags/@daemon";
-const GREETING_KEY = "lar:///ha.ka.ba/bags/@crossroads/greeting";
-const REPLY_KEY    = "lar:///ha.ka.ba/bags/@personal/reply";
+const AUD = "lar:///ha.ka.ba/bags/daemon";
+const GREETING_KEY = "lar:///ha.ka.ba/bags/crossroads/greeting";
+const REPLY_KEY    = "lar:///ha.ka.ba/bags/personal/reply";
 type GreetDoc = { tiddlers: Record<string, { text: string }> };
 
 /** An Ed25519 keypair — raw 32-byte seed + verifying-key hex (the node-vessel-identity pattern). */

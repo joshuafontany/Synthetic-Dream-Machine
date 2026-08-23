@@ -18,7 +18,7 @@ import { describe, test, expect } from "vitest";
 import { KeyhiveProvider, KeyhiveIdentitySlot } from "@lararium/keyhive";
 
 const memStore = () => ({ put: async () => {}, list: async () => [] });
-const BAG = "lar:///ha.ka.ba/bags/@test/keyhive-identity-slot";
+const BAG = "lar:///ha.ka.ba/bags/test/keyhive-identity-slot";
 
 describe("KeyhiveIdentitySlot — real capability barrier behind the IdentitySlot interface", () => {
   test("granted delegation clears; forged/never-granted DID denied", async () => {

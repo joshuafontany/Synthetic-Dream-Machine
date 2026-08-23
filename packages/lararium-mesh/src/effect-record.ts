@@ -13,7 +13,7 @@
  *   - Effect-record annotations (tiddler tags, archival profession derivation) — audit
  *
  * Effect-record URI shape (a bag's indelible residency ledger):
- *   lar:///ha.ka.ba/bags/@<bag>/ledger/residency/<event-id>
+ *   lar:///ha.ka.ba/bags/<bag>/ledger/residency/<event-id>
  *
  * Each effect record carries a `tags` field including `LARES_EFFECT_RECORD_TAG`,
  * an `archival-verb` field with one of ARCHIVAL_VERBS, and the linking fields
@@ -65,12 +65,12 @@ export const LARES_EFFECT_RECORD_TAG = stableTagUri("lares-effect-record");
 
 // ── URI shape ───────────────────────────────────────────────────────────────
 
-/** `lar:///ha.ka.ba/bags/@<bag>/ledger/residency/` — residency-ledger prefix for one bag. */
+/** `lar:///ha.ka.ba/bags/<bag>/ledger/residency/` — residency-ledger prefix for one bag. */
 export function effectLedgerPrefix(bagUri: string): string {
   return `${bagUri}/ledger/residency/`;
 }
 
-/** `lar:///ha.ka.ba/bags/@<bag>/ledger/residency/<event-id>` — one effect-record tiddler. */
+/** `lar:///ha.ka.ba/bags/<bag>/ledger/residency/<event-id>` — one effect-record tiddler. */
 export function effectRecordUri(bagUri: string, eventId: string): string {
   return `${effectLedgerPrefix(bagUri)}${eventId}`;
 }
@@ -78,7 +78,7 @@ export function effectRecordUri(bagUri: string, eventId: string): string {
 /** True when a title sits in any bag's or slot's residency ledger. */
 export function isEffectRecordUri(title: string): boolean {
   // The `/ledger/residency/<event-id>` TAIL marks an effect record; the prefix
-  // that holds the ledger varies — `bags/@<bag>`, `wikis/@<slug>/working`, a bare
+  // that holds the ledger varies — `bags/<bag>`, `wikis/<slug>/working`, a bare
   // `@<bag>`. Match on the tail after any holding path, so the projector skips an
   // audit record on every plane (it is audit data, never a carrier surface). A
   // narrower prefix pattern leaks a ledger record held by a per-wiki slot to disk.

@@ -101,7 +101,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "THE VESSEL DOOR — one namespace over the vessel's own causal island. Seven primitives and one " +
       "read: `found` mints identity + bootstrap · `stand` brings the daemon up and reports · `stop` " +
       "halts it on the port · `clear` wipes the store and re-founds (identity survives) · `bake` " +
-      "re-derives the genesis island · `seed` plants every bags/@* holding back into its doc · `read` " +
+      "re-derives the genesis island · `seed` plants every bags/* holding back into its doc · `read` " +
       "inspects and starts nothing. Compositions ride `vessel rite <petname>`, so a new cap-stack " +
       "arrives as a rite rather than another top-level verb.",
     examples: [

@@ -1,6 +1,6 @@
 /**
  * founding-three-personas — the THREE SYMMETRIC founding commands, driven end-to-end through the REAL
- * `lares persona new` door + the bags/@nexus charter seat, over a genuine vault + petname/declaration stores.
+ * `lares persona new` door + the bags/nexus charter seat, over a genuine vault + petname/declaration stores.
  *
  * Operator intent: h0/h1/h2 stand as THREE SYMMETRIC EXPLICIT commands, not h0 auto-bound behind the seat.
  * `wake --install` STANDS h0's operator-root (it signs the founding bind), and `persona new 0` LOADS that same

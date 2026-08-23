@@ -20,8 +20,8 @@ import type { IslandContext } from "../src/island-context.js";
 
 const SLUG     = "test-wiki";
 const WIKI_BAG = wikiBagUri(SLUG);
-const LIB_BAG  = "lar:///ha.ka.ba/bags/@corpus/elyncia";
-const RECIPE   = recipeUri("@catalog", SLUG);
+const LIB_BAG  = "lar:///ha.ka.ba/bags/corpus/elyncia";
+const RECIPE   = recipeUri("catalog", SLUG);
 
 type Tiddlers = Record<string, LarTiddlerRecord>;
 
@@ -68,8 +68,8 @@ function harness(opts: { stack: string[]; libMounted?: boolean; libTiddlers?: Ti
 
   const composite = new CompositeStore();
   const laresStore = new MemoryTiddlerStore(LARES_BAG);
-  // @oracle is the structural floor (operator ruling 2026-06-16); @lararium is a
-  // library, not a structural pre-mount. The floor + @lares persona seat here.
+  // oracle is the structural floor (operator ruling 2026-06-16); lararium is a
+  // library, not a structural pre-mount. The floor + lares persona seat here.
   composite.addLayer({ bagId: ORACLE_BAG, store: new MemoryTiddlerStore(ORACLE_BAG), writable: true, defaultWritable: false });
   composite.addLayer({ bagId: LARES_BAG,    store: laresStore,                            writable: true, defaultWritable: false });
   const handles = new Map<string, DocHandle<LarDoc>>([[WIKI_BAG, wikiDoc.handle]]);
@@ -101,7 +101,7 @@ describe("recipe-watch", () => {
     expect(await startRecipeWatch(ctx)).toBeUndefined();
   });
 
-  test("bag added to the recipe mounts live, above @lares", async () => {
+  test("bag added to the recipe mounts live, above lares", async () => {
     const h = harness({ stack: [WIKI_BAG] });
     const stop = await startRecipeWatch(h.ctx);
     h.catalog.set(RECIPE, rec(RECIPE, { "bag-stack": `${WIKI_BAG} ${LIB_BAG}` }));

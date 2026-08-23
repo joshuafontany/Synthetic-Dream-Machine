@@ -52,13 +52,13 @@ describe("the summon field contract", () => {
     const payload = {
       uri:  laresVerbUri("add-bag"),
       verb: "add-bag",
-      [LARES_VERB_ARGS_WIRE_FIELD]: JSON.stringify({ slug: "my-notes", bagUrl: "lar:///ha.ka.ba/bags/@lares" }),
+      [LARES_VERB_ARGS_WIRE_FIELD]: JSON.stringify({ slug: "my-notes", bagUrl: "lar:///ha.ka.ba/bags/lares" }),
     };
-    expect(verbArgsFromPayload(payload)).toEqual({ slug: "my-notes", bagUrl: "lar:///ha.ka.ba/bags/@lares" });
+    expect(verbArgsFromPayload(payload)).toEqual({ slug: "my-notes", bagUrl: "lar:///ha.ka.ba/bags/lares" });
   });
 
   test("a bag URI carrying its own '/' and ':' survives the JSON round-trip losslessly", () => {
-    const bag = "lar:///ha.ka.ba/bags/@lares";
+    const bag = "lar:///ha.ka.ba/bags/lares";
     const wire = JSON.stringify({ slug: "@personal", bagUrl: bag });
     expect(verbArgsFromPayload({ [LARES_VERB_ARGS_WIRE_FIELD]: wire })).toEqual({ slug: "@personal", bagUrl: bag });
   });

@@ -1,0 +1,183 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/automerge-tiga >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/automerge-tiga.mem"
+l-space   = "stable"
+mana      = 19
+manao     = 19
+manaoio   = 18
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant: two planes of different arity — the vessel-wide content tiga (ha/ka/ba) + a face's own four planes (persona/circles/identities/sessions), all named off one derived tag and resolved from @catalog"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/automerge-tiga"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #ooda-ha >>
+
+✶ observe that the doc stack carries two planes of DIFFERENT ARITY. The content plane holds vessel-wide roots — the content Tiga (ha/ka/ba), one oracle chain through ha. The social plane repeats ONCE PER FACE: `@persona-<tag>`, `@circles-<tag>`, `@identities-<tag>`, `@sessions-<tag>`, four planes off one derived tag, and a vessel holding a multitude carries one such set per face.
+⏿ orient around Bucky Fuller's structural law: the triangle forms the minimal stable POLYGON, the tetrahedron the minimal structural SYSTEM — a shape that stands with nothing above it. The content plane rides a triangle rooted at ha and carries SDM forces (structure/fire/personality). A face rides a tetrahedron rooted at NOTHING: four planes bound by a shared derived tag, with no vessel-global doc over them, because a layer above a person's compartments mints exactly the root persona-circle canon forbids.
+◇ decide that both planes stand canonical and load-bearing: the content Tiga names ha/ka/ba; a face's planes carry no SDM force names — function names them (persona, circles, identities, sessions). Ha holds oracle tiddlers for the two non-ha CONTENT docs. ''A face's four planes resolve from `@catalog`'' (operator ruling, 2026-08-20): `@oracle` names the SYSTEM bags, the universal floor every vessel carries, and a person's relations reach no such universality.
+▶ lock the two-plane model as invariant: any peer that opens ha discovers the content siblings by walking LarariumDoc oracle tiddlers, and a face's planes reach each other by DERIVATION — `personaSiblingBagIds` reads the tag out of any one plane's own name, so no index lists them. No vertex carries upward pointers.
+↺ assess: the model holds when every deploy reaches the content arms from ha (CATALOG, LARES), and every lit face carries exactly four planes sharing one tag, each registered on `@catalog` and read back from `@catalog`. Residue: wiki docs and corpus docs function as non-root docs — they hang from ka as leaves. Corpus child-docs sit at pos-2 under @catalog (M22 remapping). Keyhive treats the content roots and each PersonaGroup's own four as SEPARATE group boundaries — a key appearing in both would correlate the face with the machine.
+
+<<~/ahu >>
+
+<<~ ahu #tiga-law >>
+
+!! Two Planes — the Content Tiga, and a Face's Own Four
+
+''Tiga'' (Indonesian: triangle) — the minimal stable polygon (Buckminster Fuller).
+The content plane rides one, rooted at ha. A face rides the tetrahedron above it, rooted at nothing.
+
+!!! Content Plane — Automerge Tiga (ha / ka / ba)
+
+```
+         ha
+        /  \
+      ka .. ba
+```
+
+| Vertex | Doc | URI | SDM force | Oracle role |
+|---|---|---|---|---|
+| ''ha'' | `LarariumDoc` | `@lararium` | structure / stability | root oracle — holds all five non-ha tiddlers |
+| ''ka'' | `CatalogDoc` | `@catalog` | fire / motion | motion oracle — holds corpus and wiki tiddlers |
+| ''ba'' | `LaresDoc` | `@lares` | personality / flow | personality oracle — holds `@lares` system tiddlers |
+
+!!! A Face's Four Planes — one tag, and no root above them
+
+A PersonaGroup's plane set repeats per FACE, never per vessel, and all four names derive from ONE tag: a domain-separated HMAC over that group's own doc id (`personaScopedBagIds`).
+
+```
+       persona-<tag>
+        /    |    \
+ circles · identities · sessions
+```
+
+| Doc | Bag | Role |
+|---|---|---|
+| `PersonaDoc` | `@persona-<tag>` | this group's private plane — multitude, signer DID, KEL prefix, device delegation |
+| `IdentitiesDoc` | `@identities-<tag>` | how THIS face recognises others — the principal records it holds |
+| `CirclesDoc` | `@circles-<tag>` | who this face follows, blocks and mutes — the follow graph, private, never federated |
+| `SessionsDoc` | `@sessions-<tag>` | the sessions this face wears; hostful overlays project into these |
+
+A face's planes carry no SDM force names — function names them.
+
+''A face's relations travel with the FACE, never with the machine.'' One vessel-global `@circles` would seat one persona's blocked list in the same document as another's follows, and anything reading that document correlates the faces a multitude exists to hold apart.
+
+''Nothing stands above the four.'' No vessel-level index lists a person's PersonaGroups: such a layer mints the presentable root that correlates the compartments (persona-circle canon; SDSI/RFC 2693 — a petname system names a NAMESPACE, never a super-key). ''The name is the index'' — a store holding `@persona-<tag>` reads the tag out of that string and `personaSiblingBagIds` reaches the other three from it, so nothing stores a second copy to drift from.
+
+''Nexus authorization rings live on `@nexus`, never here.'' A nexus tier names who may act at a Nexus, not who a person reads; copying it per-face would mint one authorization ring per mask.
+
+''The mint order binds.'' `changeIdForBag` keys a document by hashing its bag URL, so the PersonaGroup mints FIRST and every plane stands under its true name from its first write — a plane seeded before its tag exists answers to a name nothing reaches again.
+
+Ha holds oracle tiddlers for the two non-ha CONTENT docs; a face's four resolve from `@catalog`.
+
+!!! Structural Laws
+
+''Content plane:''
+
+# Ha holds ka. `LarariumDoc.tiddlers[CATALOG_DOC_URI].text` = CatalogDoc automerge URL.
+# Ha holds ba. `LarariumDoc.tiddlers[LARES_DOC_URI].text` = LaresDoc automerge URL.
+# Ka holds corpus child-docs. `CatalogDoc.tiddlers[corpusLarUri(slug)].text` = corpus doc automerge URL (pos-2: `@catalog/@{slug}`).
+# Ka holds wiki leaves. `CatalogDoc.tiddlers[wikiBagUri(slug)].text` = wiki leaf doc automerge URL.
+
+''A face's planes (registered on `@catalog`, read back from `@catalog`):''
+
+# The four ids DERIVE. `personaScopedBagIds(personaGroupDocIdHex)` yields `{persona, circles, identities, sessions}`, all off one tag; no doc lists them.
+# Each plane self-describes. A plane's own document carries `tiddlers[its own bag id].text` = its own automerge URL.
+# The founding registers all four. A face lit by a CLI act on a vessel that never ran lands its planes in the bootstrap, and the boot bridges seed → `@catalog` so registered-where-read matches.
+# Titles inside a plane keep the BARE namespace. `@circles/following` spells the same inside every face's circles document — a title resolves verbatim within its own document, so one internal shape serves every face.
+
+''Invariants across both planes:''
+
+# No leaf carries upward pointers. Leaves self-describe only (own lar: URI → own automerge URL).
+# Reachability flows ha → {ka, ba} → leaves inside the content plane. A face's four reach each other by DERIVATION off their shared tag, with no document above them. No back-edges anywhere.
+# `@` appears ONLY at pos-1 (root doc) or pos-2 (corpus child-doc under @catalog). Never at pos-3+.
+
+''Self-description rule (every root doc and every face plane):''
+
+Each carries `tiddlers[its own lar: URI].text = its own automerge URL`.
+
+```
+ha:          tiddlers["lar:///ha.ka.ba/bags/lararium"].text    = automerge://…
+ka:          tiddlers["lar:///ha.ka.ba/bags/catalog"].text     = automerge://…
+ba:          tiddlers["lar:///ha.ka.ba/bags/lares"].text       = automerge://…
+persona:     tiddlers["lar:///ha.ka.ba/bags/persona-<tag>"].text    = automerge://…
+identities:  tiddlers["lar:///ha.ka.ba/bags/identities-<tag>"].text = automerge://…
+circles:     tiddlers["lar:///ha.ka.ba/bags/circles-<tag>"].text    = automerge://…
+sessions:    tiddlers["lar:///ha.ka.ba/bags/sessions-<tag>"].text   = automerge://…
+```
+
+<<~/ahu >>
+
+<<~ ahu #zelenka-alignment >>
+
+!! Zelenka Alignment
+
+Brooklyn Zelenka's Beelay/Keyhive design: documents link ''downward only''.
+A reachability index is computed from the root forward — not declared by leaves.
+The content plane enacts this: ha serves as its sole oracle root, ka and ba function as arms, and corpus child-docs and wikis hang from ka as leaves. A face's four planes carry the law further — they link downward from nothing at all, and a reader reaches them by deriving the tag rather than by walking an index.
+
+In Keyhive terms: the content roots map to a ''root group'' (ha) holding its arms as sub-groups, while each PersonaGroup's four planes map to THAT GROUP's own boundary and never join ha's — a key appearing in both rosters would correlate the face with the machine carrying it.
+Membership flows inward from each root, never upward from leaves.
+The oracle-tiddler chain serves as the pre-Keyhive reachability index for the content plane; a face's derived tag serves as its own.
+
+''Upward pointers are prohibited'' in corpus docs, wiki docs, and every face-plane tiddler payload.
+Both planes' stability depends on this constraint holding at every deploy.
+
+<<~/ahu >>
+
+<<~ ahu #boot-sequence-mapping >>
+
+!! Boot Sequence → the Two Planes
+
+```
+Step 1 — repo open              : storage layer, no doc identity yet
+Step 2 — ha opens               : LarariumDoc syncs; grammar + widgets available
+          ha reads ka URI       : tiddlers[CATALOG_DOC_URI].text      → CatalogDoc URL
+          ha reads ba URI       : tiddlers[LARES_DOC_URI].text        → LaresDoc URL
+          ha reads @daemon URI  : the realm plane — a SYSTEM plane, present on a faceless floor
+Step 3 — ka opens               : CatalogDoc syncs; corpus + wiki URLs known
+Step 4 — corpus child-docs      : each carries own self-ref tiddler; pos-2 under @catalog
+Step 5 — wiki leaf              : situates session content
+Step 6 — ba opens               : LaresDoc syncs; personality layer active
+Step 7 — a lit face opens       : @catalog resolves @persona-<tag> and its three siblings;
+                                  relations, principal records and session state available.
+                                  A PLACE with no face lit carries @daemon alone and stops here.
+```
+
+Ba (LaresDoc) opens before any face — personality flows after structure and motion, before the identity layer activates.
+A face's planes open last, and only where a face stands lit: relations sit downstream of content-plane stability, and a faceless vessel reaches this step with nothing to open.
+This ordering carries structural correctness for the SDM metaphysics — not incidental.
+
+<<~/ahu >>
+
+<<~ ahu #scope-1-networking >>
+
+!! Scope 1 ~ the TS CID/CRDT pipe [surgical 2026-07-03]
+
+The two-plane Automerge geometry rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The ''CRDT-causal clock runs in TS'' (structural causality — the Automerge logical time these roots carry, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of ''Scope 2'' (the general Sensorium-palaces). This doc-stack ''consumes the whole model''; both scopes braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling names where the structural CID/CRDT layer runs sovereign to TS.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;-EPmbJ49qf39D3kKpuqEjG4Bndw3kKY8SDo0xY91GHw
+
+<<^ code:"&#x0004;" -> ? >>

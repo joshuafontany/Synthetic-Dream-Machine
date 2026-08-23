@@ -27,9 +27,9 @@ import { MemoryTiddlerStore } from "../src/memory-store.js";
 import type { IslandContext } from "../src/island-context.js";
 import type { IslandCap } from "../src/island-caps.js";
 
-const ISLAND_A = "lar:///ha.ka.ba/bags/@sense-supervised";
-const ISLAND_B = "lar:///ha.ka.ba/bags/@sense-elsewhere";
-const STRANGER = "lar:///ha.ka.ba/bags/@sense-unsupervised";
+const ISLAND_A = "lar:///ha.ka.ba/bags/sense-supervised";
+const ISLAND_B = "lar:///ha.ka.ba/bags/sense-elsewhere";
+const STRANGER = "lar:///ha.ka.ba/bags/sense-unsupervised";
 
 /** One supervised island behind an in-process channel wearing the wire's message shape. */
 interface ChannelHarness {
@@ -94,7 +94,7 @@ describe("wiki-sense supervision reads — node tier", () => {
 
   test("a cohere read flows daemon→island→back and holds the PROOF in the daemon's own store", async () => {
     const harness = await standChannel([ISLAND_A]);
-    const proofStore = new MemoryTiddlerStore("lar:///ha.ka.ba/bags/@daemon");
+    const proofStore = new MemoryTiddlerStore("lar:///ha.ka.ba/bags/daemon");
     const supervisor = createWikiSenseSupervisor(harness.shores, { proofStore });
     harness.bind(supervisor);
     try {
@@ -113,7 +113,7 @@ describe("wiki-sense supervision reads — node tier", () => {
       expect(proof.island).toBe(ISLAND_A);
       expect(proof.glues).toBe(true);
       expect(proof.gateKind).toBe("reconcilable");
-      const title = proofRecordUri("lar:///ha.ka.ba/bags/@daemon", proof.eventId);
+      const title = proofRecordUri("lar:///ha.ka.ba/bags/daemon", proof.eventId);
       expect(isProofRecordUri(title)).toBe(true);
       const stored = await proofStore.get(title);
       expect(stored).not.toBeNull();
@@ -208,7 +208,7 @@ describe("wiki-sense supervision reads — node tier", () => {
       gateKind: "ontological" as const, dimH1: 2, cost: 1,
       obstructionLoci: ["ornate-novel"] as readonly string[], lociTotal: 1, corpusSize: 4,
     };
-    const rec = buildProofRecordTiddler(proof, "lar:///ha.ka.ba/bags/@daemon");
+    const rec = buildProofRecordTiddler(proof, "lar:///ha.ka.ba/bags/daemon");
     expect(parseProofRecord(rec.tiddler as Record<string, unknown>)).toEqual(proof);
   });
 });

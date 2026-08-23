@@ -17,7 +17,7 @@ import { decideIngest } from "../src/ingest-gate.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "../src/deserializer.js";
 
 const REPO_ROOT = new URL("../../..", import.meta.url).pathname;
-const BOOT = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const BOOT = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
 const URI  = "lar:///ha.ka.ba/lares/api/noosphere-boot";
 
 const sha = (s: string) => createHash("sha256").update(s, "utf8").digest("hex");

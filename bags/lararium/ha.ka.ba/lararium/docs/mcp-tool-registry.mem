@@ -1,0 +1,165 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/mcp-tool-registry >>
+```toml iam
+cacheable     = true
+file-path     = "bags/lararium/ha.ka.ba/lararium/docs/mcp-tool-registry.mem"
+l-space       = "stable"
+mana          = 17
+manao         = 17
+manaoio       = 16
+register      = "Synthesis-Canon"
+retain        = true
+role          = "SUPERSEDED — MCP tool registry: ten tools + two prompts, OODA-HA phase map, input schemas, env guards"
+source-symbol = "lararium-hud lararium-canvas lararium-read lararium-inspect lararium-query lararium-edges lararium-draft lararium-write lararium-fire lararium-receipt lararium-align lararium-explain_uri"
+status-date   = "2026-04-30"
+type          = "text/x-memetic-wikitext+tiddlywiki"
+uri-path      = "ha.ka.ba/lararium/docs/mcp-tool-registry"
+```
+
+<<~ ahu #head >>
+
+! MCP Tool Registry
+
+''THIS PAGE DESCRIBES A SURFACE THAT NO LONGER SERVES.'' The ten TS tools below rode an
+Automerge-native MCP redesign that never landed; the LIVE MCP seat is `lares_mcp.py` — FastMCP over the
+sensorium lifecycle, every verb riding the @daemon cap-wire to the one process that owns the palace
+holders. Kept as a record of the shape that was tried, never as a map of what answers today.
+
+''AND THE COUNT WAS THE TELL.'' This page said ten, `mcp-resolve.ts` said nine, and the live surface
+carried THIRTY — three descriptions of one surface, none of them derived from it. The count now lives
+where the tools do, and `tools/surface-parity-witness.sh` holds the invariant that matters: every MCP
+tool answers to a CLI door.
+
+''THE CONVERSE IS A RULING.'' The CLI carries the key-holding ceremonies — founding, persona minting,
+the charter quorum, the vault past a status read, the raise — and MCP carries none of them. MCP speaks
+stdio-per-client, so N sessions run N processes; a signing verb there would put N unsynchronised holders
+on one operator's keys.
+
+----
+
+Ten registered tools and two prompts exposed the Lararium graph API to MCP clients.
+Tools mapped onto OODA-HA phases: Observe → Orient → Decide → Act → Aftermath.
+Two env guards gated write access and canvas connectivity.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #law >>
+
+!! Law
+
+`LARARIUM_HTTP_URL` — required for canvas-connected tools (lararium-canvas, lararium-fire).
+`LARARIUM_WRITE_MODE=enabled` — required for lararium-write with `dry_run: false`.
+
+All tools pending Automerge-native MCP redesign return errors except:
+* lararium-canvas — live HTTP pass-through to `/api/rooms`
+* lararium-fire — live HTTP POST to `/api/fire`
+* lararium-write — dry_run preview (always) or guarded write
+
+<<~/ahu >>
+
+<<~ ahu #schema >>
+
+!! Schema (machine-readable)
+
+```toml
+server-name = "lararium"
+server-version = "0.1.0"
+
+# Tool list — OODA-HA phase ordering
+[[tools]]
+name        = "lararium-hud"
+phase       = "observe"           # ✶
+description = "Full operator-agent alignment snapshot. Call this first to orient."
+inputs      = []
+env-required = []
+
+[[tools]]
+name        = "lararium-canvas"
+phase       = "observe"           # ✶
+description = "Live canvas state — active rooms, meme list, connection status."
+inputs      = []
+env-required = ["LARARIUM_HTTP_URL"]
+
+[[tools]]
+name        = "lararium-read"
+phase       = "orient"            # ⏿
+description = "Read the raw text of a file-backed lar:/// carrier (memetic wikitext)."
+inputs      = ["uri: string"]
+env-required = []
+
+[[tools]]
+name        = "lararium-inspect"
+phase       = "orient"            # ⏿
+description = "Inspect a lar:/// carrier: metadata, shape, implements list, outbound pranala edges."
+inputs      = ["uri: string"]
+env-required = []
+
+[[tools]]
+name        = "lararium-query"
+phase       = "orient"            # ⏿
+description = "Evaluate a TiddlyWiki5 filter expression against the current boot closure."
+inputs      = ["expr: string"]
+env-required = []
+
+[[tools]]
+name        = "lararium-edges"
+phase       = "orient"            # ⏿
+description = "List all pranala edges. Optional filter by family and fromUri substring."
+inputs      = ["family?: enum(control|relation|observe|dataflow|message|reaction|constraint|spatial)", "from?: string"]
+env-required = []
+
+[[tools]]
+name        = "lararium-draft"
+phase       = "decide"            # ◇
+description = "Scaffold a new meme carrier without writing to disk. Returns proposed carrier text."
+inputs      = ["uri: string", "role?: string", "implements?: string[]", "body?: string"]
+env-required = []
+
+[[tools]]
+name        = "lararium-write"
+phase       = "act"               # ▶
+description = "Write carrier text to a lares/ file. dry_run:true (default) previews; dry_run:false writes."
+inputs      = ["uri: string", "text: string", "dry_run?: boolean = true"]
+env-required = ["LARARIUM_WRITE_MODE=enabled (for dry_run:false)"]
+
+[[tools]]
+name        = "lararium-fire"
+phase       = "act"               # ▶
+description = "Fire a named reaction event on the live canvas server."
+inputs      = ["fromUri: string", "trigger: string", "payload?: object"]
+env-required = ["LARARIUM_HTTP_URL"]
+
+[[tools]]
+name        = "lararium-receipt"
+phase       = "aftermath"         # ↺
+description = "Compile current boot receipt — SHA256 identity hash of the live closure."
+inputs      = []
+env-required = []
+
+# Prompts
+[[prompts]]
+name        = "lararium-align"
+description = "Bootstrap operator-agent alignment — orient the agent to the current graph state."
+inputs      = []
+
+[[prompts]]
+name        = "lararium-explain_uri"
+description = "Explain the resolution and carrier metadata for a lar:/// URI."
+inputs      = ["uri: string"]
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;QEa3gW-zcQmNzMnnfEEsUovPQRXfRZ7CfO0ATVV-y7E
+
+<<^ code:"&#x0004;" -> ? >>

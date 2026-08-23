@@ -27,7 +27,7 @@ cd "$(dirname "$0")/.."
 python3 - <<'PY'
 import re, pathlib, subprocess, sys
 
-RITE = pathlib.Path("bags/@lararium/ha.ka.ba/lararium/mesh/founding-runbook.mem")
+RITE = pathlib.Path("bags/lararium/ha.ka.ba/lararium/mesh/founding-runbook.mem")
 BIN  = "packages/lares-cli/dist/src/bin/lares.js"
 if not RITE.exists():
     print(f"[rite-commands] no rite at {RITE}"); sys.exit(1)

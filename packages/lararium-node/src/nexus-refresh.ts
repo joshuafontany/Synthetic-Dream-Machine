@@ -1,7 +1,7 @@
 /**
  * nexus-refresh — the LIVE-refold shore behind the `nexus-refresh` daemon verb.
  *
- * A running node reads three authorities off the `bags/@nexus` charter + the always-carried antigen / members
+ * A running node reads three authorities off the `bags/nexus` charter + the always-carried antigen / members
  * boards: the federation POSTURE, the Kapae'd DENY set, and the contracted MEMBER set. All three settle at boot
  * and re-fold live ONLY on a board-doc CHANGE that reaches the running repo — the WS-sync path (a peer's ban or
  * admit propagates over the relay, fires the handle change, refolds). But an OUT-OF-PROCESS edit does NOT reach
@@ -39,7 +39,7 @@ import type { NexusMembershipHolder } from "./nexus-carriage.js";
 export interface NexusRefreshDeps {
   /** The Automerge storage dir the running node + the CLI writers both bind (the shared on-disk substrate). */
   readonly storageDir: string;
-  /** The `bags/@nexus` charter authority home (the CLI supplies the same dir the boot read). */
+  /** The `bags/nexus` charter authority home (the CLI supplies the same dir the boot read). */
   readonly sealHome: string;
   /** The node's own gate key (its Nexus key) — the boards' deterministic address seed. */
   readonly nexusPubkey: string;

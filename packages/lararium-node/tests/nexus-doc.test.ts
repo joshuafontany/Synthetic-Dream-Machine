@@ -1,5 +1,5 @@
 /**
- * nexus-doc.test — the DISK adapter for the bags/@nexus doc + the persona pet-name the
+ * nexus-doc.test — the DISK adapter for the bags/nexus doc + the persona pet-name the
  * `lares persona`/`lares nexus seal seat` doors drive (#66).
  *
  * Proven:

@@ -1,6 +1,6 @@
 /**
  * nexus-seal-lineage — the CLI ceremony for the PRE-ROTATED charter-epoch chain (#68), driven end-to-end
- * through a REAL persona vault + the bags/@nexus charter DOC on disk.
+ * through a REAL persona vault + the bags/nexus charter DOC on disk.
  *
  * Proven:
  *   · seat establishes the GENESIS epoch (sequence 0, null prev) with a pre-rotation commitment + raises a

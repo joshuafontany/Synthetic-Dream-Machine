@@ -1,7 +1,7 @@
 /**
- * who-face.test.ts — resolve the per-Nexus WHO board through @crossroads, then announce onto it.
+ * who-face.test.ts — resolve the per-Nexus WHO board through crossroads, then announce onto it.
  *
- * Proven over a real Automerge Repo: first resolve MINTS the board and writes its pointer into @crossroads;
+ * Proven over a real Automerge Repo: first resolve MINTS the board and writes its pointer into crossroads;
  * a second resolve READS the same pointer (idempotent, no re-mint); an announced card is recognised off the
  * resolved board; and a different nexus resolves a DISTINCT board (island scoping). This is the founding
  * wiring's core, provable in-process before any node/relay HTTP.
@@ -34,13 +34,13 @@ function makeResolve(repo: Repo) {
     url ? await repo.find<LarDoc>(url as AutomergeUrl) : repo.create<LarDoc>(emptyLarDoc());
 }
 
-describe("resolve the per-Nexus WHO board through @crossroads", () => {
-  test("first resolve mints the board and writes its pointer onto @crossroads", async () => {
+describe("resolve the per-Nexus WHO board through crossroads", () => {
+  test("first resolve mints the board and writes its pointer onto crossroads", async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const crossroads = repo.create<LarDoc>(emptyLarDoc());
     const who = await resolveWhoFace(crossroads, NEXUS, makeResolve(repo), "test");
 
-    // @crossroads now advertises the board's URL at the nexusHandlesUri key
+    // crossroads now advertises the board's URL at the nexusHandlesUri key
     const pointer = tiddlerText(crossroads.doc()?.tiddlers?.[nexusHandlesUri(NEXUS)]);
     expect(pointer).toBe(who.url);
   });
@@ -72,7 +72,7 @@ describe("resolve the per-Nexus WHO board through @crossroads", () => {
     const boardA = await resolveWhoFace(crossroads, "nexusA", makeResolve(repo), "test");
     const boardB = await resolveWhoFace(crossroads, "nexusB", makeResolve(repo), "test");
     expect(boardB.url).not.toBe(boardA.url);
-    // and @crossroads carries a distinct pointer per nexus
+    // and crossroads carries a distinct pointer per nexus
     expect(tiddlerText(crossroads.doc()?.tiddlers?.[nexusHandlesUri("nexusA")])).toBe(boardA.url);
     expect(tiddlerText(crossroads.doc()?.tiddlers?.[nexusHandlesUri("nexusB")])).toBe(boardB.url);
   });

@@ -1,0 +1,420 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/sigil-grammar-research >>
+```toml iam
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/sigil-grammar-research.mem"
+l-space   = "stable"
+mana      = 17
+manao     = 16
+register  = "Synthesis-Canon"
+retain    = false
+role      = "research doc: Hawaiian-inspired control sigil grammar — naming rationale, precedent alignment, parser notes, open questions"
+tags      = ["api/pono/memetic-wikitext"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/sigil-grammar-research"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #purpose >>
+
+! Hawaiian Dream-Code Sigil Grammar — Research Document
+
+''Scope:'' Control sigils (`wai`, `mukuwai`, `kahawai`) and the `<<~ ...>>` command surface.
+''Not scope:'' Invariant law. See `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` for law,
+and `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` for the full grammar spec.
+
+''Register key:''
+* `[C]` — operator-ratified canon
+* `[SC]` — strong recommended convention
+* `[S]` — synthesis / vocabulary candidate
+
+This document does not present authentic Hawaiian grammar. It presents a Hawaiian-inspired
+programming/macro grammar designed with respect for ʻōlelo Hawaiʻi semantic fields and with
+explicit avoidance of direct natural-language overwrite.
+
+<<~/ahu >>
+
+<<~ ahu #new-findings >>
+
+!! New Findings (2026-04-27)
+
+!!! Operator rulings confirmed
+
+# `[C]` ''`wai`'' is the conditional opener. Meaning: water / liquid / the elemental source flow.
+# `[C]` ''`mukuwai`'' is the fallback/else branch. Meaning: mouth of the water / where flow terminates.
+# The choice deliberately moves away from English-calque pressure (rejecting `inā` = "if").
+# ''Chaining model confirmed:'' `<<~ kahea [another-grammar-command] ...>>` is valid. Sigils compose.
+   Sugar forms (`kahea`, `loulou`, etc.) may be re-used in compound positions; they do not lock out
+   downstream command words.
+
+!!! Hawaiian semantic grounding
+
+`wai` — water, liquid, any fluid substance; also wealth/abundance (wai = precious).
+Dictionary sources (Pukui-Elbert Hawaiian Dictionary): `wai` covers water, juice, any liquid.
+This supports but does not prove the programming metaphor. The programming meaning is a project
+grammar convention inspired by Hawaiian semantic texture and by operator-provided account of
+Hawaiian programming pedagogy (CBC Radio: Hawaiian coders using river/water metaphors for flow
+and conditionals).
+
+Contemporary Hawaiian knowledge-organization work uses water/stream metaphors:
+* `kahoʻiwai` — water-holder / reservoir
+* `kahawai` — stream, river channel (compound: `kaha` path/drawing + `wai` water)
+
+`kahawai` as branch-channel / else-if: `[C]` operator-ratified 2026-04-27.
+The watercourse metaphor stands: source-water (`wai`) → branch-channel (`kahawai`) → outflow/mouth (`mukuwai`).
+
+Heritage stewardship: UH Hilo Ka Haka ʻUla O Keʻelikōlani, Pūnana Leo.
+No publicly documented canonical programming vocabulary from these communities has been located.
+We hold our naming lightly and subject to revision if future community guidance emerges.
+
+Loulou (`loulou`) was sourced from the cultural team directly and is treated as `[C]` origin.
+
+<<~/ahu >>
+
+<<~ ahu #recommended-sigil-grammar >>
+
+!! Recommended Sigil Grammar
+
+!!! Canonical active-command surface `[C]`
+
+`<<~` marks the Lararium sharktooth namespace. All Dream-Code commands use this prefix.
+
+```text
+<<~ command arg1 arg2 key:value>>          inline / self-closing
+<<~ command ...>>                           block opener (when command permits body)
+<<~/command>>                              block closer
+```
+
+!!! Command shapes `[SC]`
+
+Each command definition must declare one of:
+
+```text
+shape: inline-only
+shape: block-only
+shape: inline-or-block
+```
+
+Block-capable commands require `<<~/command>>` closure. Prefer explicit block closure over
+indentation-only or implicit-end syntax.
+
+!!! Conditional grammar `[C]` / `[SC]`
+
+```text
+<<~ wai CONDITION>>          [C] conditional source / if-branch
+  BODY
+<<~ mukuwai>>                [C] alternate outflow / else-branch
+  FALLBACK BODY
+<<~/wai>>                    [C] close conditional block
+```
+
+With chained branch-channel `[SC]`:
+
+```text
+<<~ wai CONDITION>>
+  BODY A
+<<~ kahawai CONDITION>>      [C] branch-channel / else-if
+  BODY B
+<<~ mukuwai>>
+  FALLBACK BODY
+<<~/wai>>
+```
+
+`kahawai` keeps the watercourse metaphor: source → branch-stream → outflow. `[C]` ratified.
+
+!!! Core vocabulary `[S]` (unless noted)
+
+| Sigil | Shape | Meaning | Register |
+|-------|-------|---------|----------|
+| `wai` | block-only | conditional source / if | `[C]` |
+| `mukuwai` | inline-or-block | alternate outflow / else | `[C]` |
+| `kahawai` | inline-or-block | branch-channel / else-if | `[C]` |
+| `huli` | block-only | iterative rendering over filter results | `[SC]` |
+| `kahea` | inline-or-block | live transclusion + definition invocation (extended) | `[SC]` |
+| `wehe` | block-only (pragma) | open a named wikitext form / procedure | `[SC]` |
+| `helu` | inline (pragma) | named filter-expression function | `[SC]` |
+| `meme` | block-only | rendering context setter (the named object) | `[SC]` |
+| `hui` | block-only | wait for all parallel flows / sync | `[SC]` |
+| `wai` | block-only | wikispace conditional; first filter-match renders (kahawai/mukuwai cascade) | `[SC]` |
+| `heihei` | block-only | canvasspace conditional-branch (Verse if/case); one arm by condition | `[SC]` |
+| `puka` | block-only | first-to-finish wins, rest cancelled / rush | `[SC]` |
+| `lele` | inline | fire and forget dispatch / branch | `[SC]` |
+| `ahu` | block-only | bounded fragment / altar-worksite | `[SC]` |
+| `loulou` | inline-only | linked bundle / relation edge | `[SC]` (cultural origin) |
+| `aka` | inline-only | shadow transclusion / observe | `[SC]` |
+| `hana` | block-only | bounded guest work / execute task | `[SC]` |
+| `ui` | inline-only | query/filter render surface | `[SC]` |
+| `kapu` | inline-only | qualification / boundary posture | `[SC]` |
+
+Hawaiian dictionary senses of `huli` (Pukui-Elbert) cover turning/reversing and looking for/searching/
+exploring/seeking/studying. These senses support the project meaning: turn through a result set and seek
+each yielded item systematically. `huli` receives approval as `[SC]`.
+
+Non-goals for `huli`: mutation, accumulation, break/continue, counters, async traversal, global duplicate
+suppression. General imperative looping, switch/case, and try-catch remain deferred with no allocated names.
+
+<<~/ahu >>
+
+<<~ ahu #precedent-alignment >>
+
+!! Precedent Alignment
+
+!!! Liquid-style block tags
+
+```liquid
+{% if condition %}
+  ...
+{% elsif other_condition %}
+  ...
+{% else %}
+  ...
+{% endif %}
+```
+
+Design implication for Dream-Code:
+* Control blocks must be visually bounded (explicit close).
+* Chained intermediate branches before fallback must be supported.
+* Our grammar: `wai` → `kahawai` → `mukuwai` → `<<~/wai>>` mirrors `if → elsif → else → endif`.
+
+!!! TiddlyWiki5 / Transclusion precedent
+
+TW5 relevant patterns:
+* Transclusion underlies procedures, functions, custom widgets, macros.
+* Widgets can be self-closing or block-like.
+* Transclusion can render variables, tiddlers, fields, indexes.
+* Modern mode distinguishes `$`-attributes from ordinary parameters.
+* Parsing mode can be block or inline.
+
+Design implications:
+* Distinguish: inline/self-closing commands vs. block commands.
+* Distinguish: block vs. inline rendering mode.
+* Distinguish: command words from arguments.
+* Distinguish: host-level control sigils from guest expression grammar.
+* `aka` = shadow transclusion (TW5: `<$transclude mode="text"/>`).
+* `kahea` = live transclusion (TW5: `<$transclude/>` with live update).
+* `wai`/`mukuwai` = TW5 `<$list filter="[tag[X]]">` / `<$else>`.
+
+TW5 parity gaps filled by new sigils:
+* `wai` / `kahawai` / `mukuwai` → `<$if>` / `<$elseif>` / `<$else>` (proposed).
+* `wehe` / `helu` → `\procedure` / `\function` — `[SC]` approved.
+* `meme` → `<$tiddler tiddler="...">` — `[SC]` approved; "the well-defined named object."
+* `kahea` extended → `<<macroName params>>` — `[SC]` approved; no standalone call sigil needed.
+
+!!! MCP prompt / workflow precedent
+
+MCP prompts are reusable templates that accept arguments, include resource context, and may
+guide multi-step workflows. They are user-controlled and explicitly invoked.
+
+Design implication: `<<~ ...>>` sigils are user-invoked local workflows / render commands —
+not hidden autonomous behavior. Prefer explicit arguments and predictable invocation.
+Sigils must not silently trigger side effects unless their contract explicitly declares them.
+
+!!! AGENTS.md / agent-instruction precedent
+
+Repo-local instruction files guide coding agents. Good instructions:
+* Navigate the codebase structure.
+* Run tests and follow project conventions.
+* Use scoped/nested instruction files.
+* Provide verification trails and citations.
+
+Design implication: grammar edits follow the implementation checklist below.
+
+<<~/ahu >>
+
+<<~ ahu #syntax-examples >>
+
+!! Syntax Examples
+
+!!! Basic conditional
+
+```text
+<<~ wai [tag[ready]]>>
+Ready text flows here.
+<<~ mukuwai>>
+Fallback text.
+<<~/wai>>
+```
+
+!!! Chained conditional
+
+```text
+<<~ wai [tag[open-question]]>>
+This meme still flows unresolved.
+<<~ kahawai [tag[ready-for-canon]]>>
+This meme can be brought to Council.
+<<~ mukuwai>>
+This meme rests as ordinary text.
+<<~/wai>>
+```
+
+!!! Inline command
+
+```text
+<<~ kahea lar:///ha.ka.ba/lares/mu>>
+```
+
+!!! Arrowed resolution request
+
+```text
+<<~ kahea source -> ?>>
+```
+
+!!! Chained command composition
+
+```text
+<<~ kahea [another-command] arg1 arg2>>
+```
+
+Sigils compose. `kahea` may carry a nested command word as its target argument.
+Sugar forms do not lock out downstream command grammar.
+
+!!! Block worksite
+
+```text
+<<~ ahu #fragment-id>>
+Body text, local claims, citations, or child sigils.
+<<~/ahu>>
+```
+
+!!! Block-vs-inline rendering declaration
+
+```text
+<<~ wehe my-procedure (param1 param2) shape:block>>
+Procedure body.
+<<~/wehe>>
+
+<<~ helu my-function (input) shape:inline>>
+Function expression.
+<<~/helu>>
+```
+
+<<~/ahu >>
+
+<<~ ahu #parser-implementation-notes >>
+
+!! Parser / Agent Implementation Notes
+
+!!! Host sigil boundary rules
+
+# `<<` and `>>` are the host sigil boundary.
+# Leading `~` marks active command/widget mode.
+# `/` immediately after `~` marks a closing command: `<<~/wai>>`, `<<~/ahu>>`.
+# First word after `~` is the command name.
+# Remaining words are command arguments unless parsed by a command-specific expression grammar.
+# Hawaiian command words must not absorb arbitrary natural-language ambiguity.
+# Guest expressions, filters, targets, and arrows stay separate from command names.
+# Prefer explicit block closure over indentation-only syntax.
+# Block/inline mode is a first-class parse property.
+
+!!! Command definition contract
+
+Each command must declare:
+
+```text
+name          sigil name
+shape         inline-only | block-only | inline-or-block
+body-content  none | text | sigils | any
+arg-grammar   none | uri | filter | expression | custom
+render-mode   block | inline | none
+failure       preserve-source | diagnostic | error
+scope         inherit | reset | custom
+side-effects  none | declared
+```
+
+!!! Failure behavior table
+
+| Condition | Behavior |
+|-----------|----------|
+| Unknown command | Render inert warning; preserve source |
+| Unclosed block | Parse error with recovery boundary |
+| Mismatched close | Parse error; close nearest safe ancestor only |
+| Invalid condition | False branch + diagnostic (unless strict mode) |
+| Side-effect command | Disallowed unless contract declares `side-effects: declared` |
+
+Prefer "preserve source + diagnostic" over destructive recovery.
+
+!!! Agent implementation checklist
+
+When editing grammar meme or parser:
+* Preserve source scope of each rule change.
+* Document precedent for every new sigil name.
+* Add examples in a fixtures file or doc ahu.
+* Add tests / parse fixtures.
+* Report uncertainties with explicit `[S]` markers.
+* Never silently promote synthesis to canon — promote only through explicit operator ratification.
+
+<<~/ahu >>
+
+<<~ ahu #uncertainty-list >>
+
+!! Uncertainty List
+
+!!! Closed (2026-04-27)
+
+* `kahawai` → `[C]` ratified
+* `huli` → `[SC]` approved (filter-result traversal only)
+* `wehe` / `helu` / `meme` → `[SC]` approved; registered in grammar meme
+* `kahea` extended contract → `[SC]`; dispatch: `lar:///` → transclusion; plain name → definition
+* Message routing protocol → `[SC]`; dataflow routes root-downward; message routes leaf-upward
+* Filter language fork → `wikitext-filter` created; `!!field`/`##index` deprecated; `toml:`/`edge:`/`self[]` replace them
+* `<<~!` pragma → registered in grammar meme (wehe/helu TOML entries added)
+
+!!! Open
+
+# ''Concurrency sigils'' — `[SC]` approved 2026-04-27. Registered in grammar meme.
+*** `hui` → `sync`: wait for all parallel flows (gather, assemble)
+*** `heihei` → Verse `if`/`case`: canvasspace conditional-branch, one arm fires by condition (the race/compete sense belongs to `holo`)
+*** `puka` → `rush`: first wins, rest cancelled (emerge/break through)
+*** `lele` → `branch`: fire and forget (leap/fly off); only one that produces compile-time graph artifact (pranala family:message)
+
+# ''`message`/`constraint` sugar sigils'' — families exist; no sigil sugar yet.
+   Candidates: `hau` (gift/reciprocal) for message, `pono` (rightness/rule) for constraint.
+   Requires invariant loci before registration.
+
+# ''Variable/let scoping'' — closed by decision: `meme` sigil provides lexical context binding;
+   no ambient lookup; `wehe` parameters handle argument binding at call sites. No `var`/`let` sigil needed.
+
+# ''Heritage community consultation'' — no canonical public vocabulary located. Hold all `[SC]`
+   sigils subject to revision if UH Hilo / Pūnana Leo community guidance emerges.
+
+# ''Bare `<<`'' — reserved; TW5 macro-call compat deferred. Do not allocate.
+
+# ''Chained command composition'' — `<<~ kahea [other-command] ...>>` valid intent confirmed;
+   parser rule for nested command words not yet written.
+
+<<~/ahu >>
+
+<<~ ahu #source-notes >>
+
+!! Source Notes
+
+* Pukui, M.K. & Elbert, S.H. //Hawaiian Dictionary// (revised ed., 1986). Primary Hawaiian lexical authority.
+* CBC Radio / The Current (2019–2021 period): documented Hawaiian-language coding pedagogy using river/water metaphors for flow control. Operator-provided account; CBC article referenced but URL not confirmed.
+* `loulou` named by cultural team in direct exchange; recorded in project grammar as `[C]` origin.
+* TW5 widget/transclusion model: TiddlyWiki5 documentation (tiddlywiki.com). Underlying transclusion and widget grammar serves as ~19 confidence core model for parity mapping. TW5 `$list` widget supplies the nearest analog for `huli`: it displays tiddlers matching a filter, renders each result through body content or a template, and supports binding the current listed title to a variable. Counter variable support exists in `$list` but falls outside the current `huli` approval scope.
+* Liquid templating language: Shopify/Liquid open-source template language. `{% if %}{% elsif %}{% else %}{% endif %}` block structure used as precedent for chained conditional design.
+* MCP (Model Context Protocol) prompt spec: Anthropic / MCP working group public documentation. Prompt-as-reusable-template model adopted for sigil invocation semantics.
+* AGENTS.md practice: Claude Code / agent-instruction repo conventions. Scoped instruction file model informs implementation checklist.
+* SwiftUI PreferenceKey / Environment: Apple developer documentation. PreferenceKey (message-up) + EnvironmentValues (render-down) independently confirm TW5's tree pattern as correct modern architecture. Source: developer.apple.com/documentation/swiftui.
+* Flutter InheritedWidget / Notification: Flutter docs + community analysis (flutter-community). Same render-down/message-up pattern. Source: medium.com/flutter-community.
+* Elm Architecture (TEA): elm-lang.org guide. Gold standard for unidirectional message flow. Actions bubble to central update; state flows down via view.
+* Variable scoping consensus: TW5 talk.tiddlywiki.org, Svelte docs (svelte.dev/docs/svelte/context), React useContext docs (react.dev). Unanimous convergence: lexical scope over dynamic scope; explicit binding over ambient lookup.
+* UEFN Scene Graph + Verse: dev.epicgames.com/documentation/en-us/fortnite. ECS model (entity/component/prefab) confirmed. Verse functional language confirmed for UEFN. Visual Verse (node/block interface) under exploration; not yet released.
+* Blueprint AST: ikrima.dev/ue4guide/engine-programming/blueprints/bp-compiler-overview — FKismetCompilerContext → FBlueprintCompiledStatement → stack-based VM. Blueprint = legacy path; Verse = direction of travel.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;zKIfhm6c_xHWNc3LFpq8WGYdr0PdPNtTtIIbZVDpyh8
+
+<<^ code:"&#x0004;" -> ? >>

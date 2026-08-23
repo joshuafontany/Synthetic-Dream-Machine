@@ -45,13 +45,13 @@ const t = JSON.parse(JSON.parse(fs.readFileSync(path, "utf8")).text).tiddlers;
 const entries = Object.entries(t).map(([title, v]) => ({ title, text: v.text ?? null }));
 const fail = (m) => { console.error("  MISMATCH (place): " + m); process.exitCode = 1; };
 
-if (!t["lar:///ha.ka.ba/bags/@daemon"]?.text?.startsWith("automerge:")) {
+if (!t["lar:///ha.ka.ba/bags/daemon"]?.text?.startsWith("automerge:")) {
   fail("the place names no @daemon island — a founding that writes nothing else must still write this");
 }
 // FACELESS BY POSITIVE ASSERTION. A place that wrote a persona pin would pass any looser reading.
 const planes = readPersonaPlanes(entries);
 if (planes.length !== 0) fail(`the place wrote ${planes.length} persona plane(s); a place holds none until a face lands`);
-if (t["lar:///ha.ka.ba/bags/@persona/sentinel/persona-group/doc-id"]) {
+if (t["lar:///ha.ka.ba/bags/persona/sentinel/persona-group/doc-id"]) {
   fail("the place wrote a PersonaGroup sentinel — the cabal and the group ride with the FACE");
 }
 if (!process.exitCode) console.log("  ok (place) — @daemon stands, and nothing of a person");
@@ -74,7 +74,7 @@ const fail = (m) => { console.error("  MISMATCH (face): " + m); process.exitCode
 const planes = readPersonaPlanes(entries);
 if (planes.length !== 1) fail(`the face wrote ${planes.length} readable planes, expected 1`);
 
-const active = t["lar:///ha.ka.ba/bags/@persona/sentinel/persona-group/doc-id"]?.text;
+const active = t["lar:///ha.ka.ba/bags/persona/sentinel/persona-group/doc-id"]?.text;
 if (!active) fail("no active PersonaGroup sentinel — the boot path has no gesture to resolve");
 else {
   // The pairing itself: the name the founding wrote, and the name the boot path derives.

@@ -55,7 +55,7 @@ describe.skipIf(wikiSkip)(
     (engine.$tw.wiki.deserializeTiddlers(CARRIER_TYPE, text, { title }) ?? []) as Array<Record<string, unknown>>;
 
   test("the wiki dispatches a carrier by its type, under the name the corpus writes", () => {
-    const src = readFileSync(path.join(REPO, "bags/@lares/ha.ka.ba/lares/api/pono/boot-loader.mem"), "utf8");
+    const src = readFileSync(path.join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/boot-loader.mem"), "utf8");
     const records = deserialize(src, "lar:///ha.ka.ba/lares/api/pono/boot-loader");
     // A type the wiki does not dispatch yields NOTHING — no throw, no records. So the count is the
     // claim: the deserializer registered, the filetype resolved, and the frame divided the carrier.
@@ -67,7 +67,7 @@ describe.skipIf(wikiSkip)(
     // The read side stays wide permanently: a carrier authored before the suffix names the same syntax
     // and always did. This is the claim that rested on module exports COMPILING rather than on the host
     // RESOLVING them — the one an export-key transform could have dropped with nothing here to notice.
-    const src = readFileSync(path.join(REPO, "bags/@lares/ha.ka.ba/lares/api/pono/boot-loader.mem"), "utf8")
+    const src = readFileSync(path.join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/boot-loader.mem"), "utf8")
       .replace(CARRIER_TYPE, "text/x-memetic-wikitext");
     const records = (engine.$tw.wiki.deserializeTiddlers(
       "text/x-memetic-wikitext", src, { title: "lar:///probe/legacy" },
@@ -209,7 +209,7 @@ describe.skipIf(wikiSkip)(
     // in this grammar exactly as in TiddlyWiki's own filetype registry, and never stores it in the bytes
     // — a carrier IS its type, so the value is re-derived on every read rather than carried.
     const HOST_OWNED = new Set(["title", "revision", "type"]);
-    const carrier = readFileSync(path.join(REPO, "bags/@lares/ha.ka.ba/lares/api/pono/ahu.mem"), "utf8");
+    const carrier = readFileSync(path.join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/ahu.mem"), "utf8");
     const uri = `lar:///${/^uri-path\s*=\s*"([^"]+)"/m.exec(carrier)![1]!}`;
     const base = deserialize(carrier, uri);
     const produced = [...new Set(base.flatMap((r) => Object.keys(r)))].filter((k) => !HOST_OWNED.has(k));

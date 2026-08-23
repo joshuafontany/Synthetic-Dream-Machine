@@ -32,8 +32,8 @@ const REPO_FIXTURE_URL = new URL("./fixtures/repo-in-island-echo.mjs", import.me
 // Helpers
 // ---------------------------------------------------------------------------
 
-const WIKI_ID      = "lar:///ha.ka.ba/bags/@test/wiki";
-const WIKI_BAG_URI = "lar:///ha.ka.ba/bags/@test";  // wikiBagUri(slugFromUri(WIKI_ID))
+const WIKI_ID      = "lar:///ha.ka.ba/bags/test/wiki";
+const WIKI_BAG_URI = "lar:///ha.ka.ba/bags/test";  // wikiBagUri(slugFromUri(WIKI_ID))
 
 /** The isomorphic WikiMountSpec the pool now takes. Fixture workers ignore bag
  *  content; only the shape + the wiki doc URL (Repo-in-island path) matter. */
@@ -129,7 +129,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     await pool.mountWiki(WIKI_ID, spec(docHandle.url));
     await waitForSynced(all);
 
-    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@test/wiki/page-a"] = { title: "lar:///ha.ka.ba/bags/@test/wiki/page-a", text: "hello" }; });
+    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/test/wiki/page-a"] = { title: "lar:///ha.ka.ba/bags/test/wiki/page-a", text: "hello" }; });
     await waitForEvents(changes, 1);
 
     expect(changes.events.length).toBeGreaterThanOrEqual(1);
@@ -169,7 +169,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     await pool.mountWiki(WIKI_ID, spec(docHandle.url));
     await waitForSynced(all);
 
-    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@test/wiki/x"] = { title: "lar:///ha.ka.ba/bags/@test/wiki/x" }; });
+    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/test/wiki/x"] = { title: "lar:///ha.ka.ba/bags/test/wiki/x" }; });
     await waitForEvents(changes, 1);
 
     expect(changes.events.length).toBeGreaterThanOrEqual(1);
@@ -206,7 +206,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     // Mount, drive a change, unmount → cold slot.
     await pool.mountWiki(WIKI_ID, spec(docHandle.url));
     await waitForSynced(all);
-    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@test/wiki/persisted"] = { title: "lar:///ha.ka.ba/bags/@test/wiki/persisted", text: "kept" }; });
+    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/test/wiki/persisted"] = { title: "lar:///ha.ka.ba/bags/test/wiki/persisted", text: "kept" }; });
     await waitForEvents(changes, 1);
     await pool.unmountWiki(WIKI_ID);
 
@@ -222,7 +222,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     expect(pool.tier(WIKI_ID)).toBe("wela");
 
     await waitForSynced(all);
-    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@test/wiki/new"] = { title: "lar:///ha.ka.ba/bags/@test/wiki/new", text: "fresh" }; });
+    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/test/wiki/new"] = { title: "lar:///ha.ka.ba/bags/test/wiki/new", text: "fresh" }; });
     await waitForEvents(changes, 1);
 
     expect(changes.events.length).toBeGreaterThanOrEqual(1);
@@ -250,7 +250,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
 
     await expect(
-      pool.placeWikiVerb("lar:///ha.ka.ba/bags/@test/no-such-wiki", {
+      pool.placeWikiVerb("lar:///ha.ka.ba/bags/test/no-such-wiki", {
         verb:        "MOVE",
         args:        {},
         requestedBy: "test",

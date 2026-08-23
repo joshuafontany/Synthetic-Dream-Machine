@@ -17,7 +17,7 @@ import { envOf, ProbeVolume, runProbeRole } from "./probe-ceremony.js";
 
 const SHARED = envOf("LAR_KAHU_SHARED");
 const ROLE   = envOf("LAR_KAHU_ROLE", "kahu");
-const CITIZEN_BAG = "lar:///ha.ka.ba/bags/@catalog/a-citizens-private-note";
+const CITIZEN_BAG = "lar:///ha.ka.ba/bags/catalog/a-citizens-private-note";
 const SECRET = "a citizen's secret the custodian must never read";
 const seedOf = (n: number): Uint8Array => new Uint8Array(32).fill(n);
 

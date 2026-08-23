@@ -119,7 +119,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
       }
       const invocation: Verb = {
         requestId,
-        title:       `lar:///ha.ka.ba/bags/@wiki/verbs/${requestId}`,
+        title:       `lar:///ha.ka.ba/bags/wiki/verbs/${requestId}`,
         action:      msg.verb,
         args:        msg.args,
         targets:     msg.targets ?? [],

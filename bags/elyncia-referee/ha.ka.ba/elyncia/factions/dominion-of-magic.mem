@@ -1,0 +1,74 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/dominion-of-magic >>
+```toml iam
+cacheable  = true
+confidence = 12
+file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/factions/dominion-of-magic.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 15
+manaoio    = 13
+rating     = "kapu"
+register   = "Synthesis"
+retain     = true
+role       = "faction meme, referee view — the Rise of the Dominion of Magic: the public theocracy, and beneath it the sealed spine — Umvald's reaching, the hijacked rite, the puppet-state"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/factions/dominion-of-magic"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Rise of the Dominion of Magic
+
+''The public shape:'' a magiocracy grown from Byzantium — the largest of Neo-Thracia's
+subservient city-states — where the survivors' cabal ''took over the local Wizard University''
+and stood up the Empire's successor state. Four hundred years of tightening grip, hardened by
+conflict with the Lich Imperator, Grell raids off the Astral Sea, and Unseelie incursions.
+Tactics center ''magic and automatons over trained-fighting troops''; the city's magitech rides
+tightly controlled. Southern holdings anchor at ''Tharsis'' and ''the Prismatic University'' in
+the Summerlands; sky-castles patrol the annexed city-states the Dominion took the day the
+League declared itself. Technomagic mana-supremacists, by the League's reading — and the
+League's border defines them as much as their own.
+
+<<~/ahu >>
+
+<<~ ahu #the-sealed-spine >>
+
+!! The Sealed Spine (kapu — Session 1.0 intent)
+
+''The Rise began with a question about death.'' ''Umvald'' — a soul of the human-folk
+heritages, searching for answers to their mortality — ''reached out into the void… and the
+void answered'', because something in the Oort dark had spent aeons straining to see the inner
+system and had finally been ''seen back''. The reaching gave the Pale Emperor his vector home
+(operator canon, Josh & Freyja, 2026-08-15 — welds to `concepts/the-necrospire`, where the
+public meme leaves the cause sealed).
+
+''The rest stands unsealed in the campaign record'' (`lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth`
+#shadowtalk-unsealed): the "eternal life" ruse · Eris's crew tipping Umvald before the altar ·
+''the hijacked rite'' · the blood-magic fallout whose survivors became the world's Deathless ·
+the cabal taking Byzantium and institutionalizing stolen divinity into a civil service. ''The
+Dominion of Magic stands as Umvald's puppet-state'' — the Vampire Lord governing patient as
+paperwork, while his old creditor crawls south through the passes with armies.
+
+''The referee's iron:'' the Dominion's origin holds the campaign's moral weight — it began not
+in ambition but in ''grief asking the wrong door for help''. Every Deathless citizen of
+Byzantium descends from one soul's honest question about mortality, answered by the worst
+possible correspondent. Play the Dominion's agents accordingly: true believers in a state built
+on an answer their founder knows was a lie.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-necrospire >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/league-of-free-cities >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;uQKVOOKkZUxJanHm5K4lrgSbP6R7U9jGUPt8jNrDNw8
+
+<<^ code:"&#x0004;" -> ? >>

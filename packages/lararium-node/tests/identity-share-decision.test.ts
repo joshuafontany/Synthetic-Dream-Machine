@@ -24,7 +24,7 @@ import { KeyhiveProvider, KeyhiveIdentitySlot } from "@lararium/keyhive";
 
 const memStore = () => ({ put: async () => {}, list: async () => [] });
 const NX  = "abcdef0123456789";
-const BAG = "lar:///ha.ka.ba/bags/@test/identity-share-decision";
+const BAG = "lar:///ha.ka.ba/bags/test/identity-share-decision";
 const RELAY = "relay-peer" as PeerId;
 
 /** A stable AutomergeUrl + its DocumentId for the shared bag — the doc the relay asks for. */

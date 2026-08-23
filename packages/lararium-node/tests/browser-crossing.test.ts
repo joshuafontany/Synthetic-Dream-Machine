@@ -30,7 +30,7 @@ import { NodeWSServerAdapter } from "@automerge/automerge-repo-network-websocket
 import { DaemonAuthGate } from "../src/daemon-auth-gate.js";
 import type { LeafIdentity } from "../src/leaf-identity.js";
 
-const AUD = "lar:///ha.ka.ba/bags/@daemon";
+const AUD = "lar:///ha.ka.ba/bags/daemon";
 
 /** An Ed25519 keypair (the node-vessel-identity pattern): raw 32-byte seed + verifying-key hex. */
 function genKey(): { seed: Uint8Array; pub: string } {
@@ -241,7 +241,7 @@ describe("browser↔node doc replication — the mesh breathes over the crossed 
 
     // The node authors a doc — its AutomergeUrl is the capability token that crosses to the browser.
     const nodeDoc = node.repo.create<{ tiddlers: Record<string, { text: string }> }>({ tiddlers: {} });
-    nodeDoc.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@crossroads/greeting"] = { text: "the DreamNet breathes" }; });
+    nodeDoc.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/crossroads/greeting"] = { text: "the DreamNet breathes" }; });
 
     // The browser-shaped leaf crosses the armed gate, then finds + syncs the doc.
     clientAdapter = new LarWSClientAdapter({ url: `ws://127.0.0.1:${node.port}`, identity, aud: AUD, gatePubKey: gatePub });
@@ -251,13 +251,13 @@ describe("browser↔node doc replication — the mesh breathes over the crossed 
     await new Promise<void>((resolve, reject) => {
       const timer = setTimeout(() => reject(new Error("timeout: the browser leaf never synced the node's doc")), 5_000);
       const check = () => {
-        if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@crossroads/greeting"]) { clearTimeout(timer); resolve(); }
+        if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/crossroads/greeting"]) { clearTimeout(timer); resolve(); }
       };
       found.on("change", check);
       check();
     });
 
-    expect(found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@crossroads/greeting"]?.text).toBe("the DreamNet breathes");
+    expect(found.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/crossroads/greeting"]?.text).toBe("the DreamNet breathes");
   }, 8_000);
 
   test("the breath runs both ways — a browser-leaf change propagates back to the node", async () => {
@@ -273,17 +273,17 @@ describe("browser↔node doc replication — the mesh breathes over the crossed 
     await found.whenReady();
 
     // The browser writes; the node observes the change over the same crossed socket.
-    found.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@personal/reply"] = { text: "a citizen answers" }; });
+    found.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/personal/reply"] = { text: "a citizen answers" }; });
 
     await new Promise<void>((resolve, reject) => {
       const timer = setTimeout(() => reject(new Error("timeout: the node never saw the browser-leaf's change")), 5_000);
       const check = () => {
-        if (nodeDoc.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@personal/reply"]) { clearTimeout(timer); resolve(); }
+        if (nodeDoc.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/personal/reply"]) { clearTimeout(timer); resolve(); }
       };
       nodeDoc.on("change", check);
       check();
     });
 
-    expect(nodeDoc.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@personal/reply"]?.text).toBe("a citizen answers");
+    expect(nodeDoc.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/personal/reply"]?.text).toBe("a citizen answers");
   }, 8_000);
 });

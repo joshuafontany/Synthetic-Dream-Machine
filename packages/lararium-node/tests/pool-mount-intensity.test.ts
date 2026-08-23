@@ -17,7 +17,7 @@ import type { WikiMountSpec } from "@lararium/mesh";
 const SILENT_FIXTURE_URL = new URL("./fixtures/silent-island.mjs", import.meta.url);
 const ECHO_FIXTURE_URL   = new URL("./fixtures/vm-pool-echo.mjs",  import.meta.url);
 
-const WIKI_ID = "lar:///ha.ka.ba/bags/@test/wiki";
+const WIKI_ID = "lar:///ha.ka.ba/bags/test/wiki";
 
 function spec(): WikiMountSpec {
   return { coreHash: null, recipe: { wikiSlug: "test" }, grants: { islandUrl: "automerge:fixture-lararium-url", wikiUrl: null } };

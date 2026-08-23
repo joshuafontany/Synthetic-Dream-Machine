@@ -70,12 +70,12 @@ describe("installLazyResolver — rehydrate on lazyLoad", () => {
     const body = "the whole book body that left the CRDT for the cid tier";
     const cid = cidOf(body);
     const { engine, enqueued, setTiddler, fireLazyLoad } = makeFakeEngine();
-    setTiddler({ title: "lar:///ha.ka.ba/bags/@crossroads/library/book", _is_skinny: "yes", textCid: cid, size: String(body.length) });
+    setTiddler({ title: "lar:///ha.ka.ba/bags/crossroads/library/book", _is_skinny: "yes", textCid: cid, size: String(body.length) });
 
     const resolveByCid: CarrierResolver = vi.fn(async (c) => (c === cid ? bytesOf(body) : null));
     installLazyResolver(engine, resolveByCid);
 
-    fireLazyLoad("lar:///ha.ka.ba/bags/@crossroads/library/book");
+    fireLazyLoad("lar:///ha.ka.ba/bags/crossroads/library/book");
     await flush();
 
     expect(resolveByCid).toHaveBeenCalledWith(cid);
@@ -92,10 +92,10 @@ describe("installLazyResolver — rehydrate on lazyLoad", () => {
     const body = "media body under a canonical lar cid uri";
     const cid = cidOf(body);
     const { engine, enqueued, setTiddler, fireLazyLoad } = makeFakeEngine();
-    setTiddler({ title: "lar:///ha.ka.ba/bags/@crossroads/media/clip", _is_skinny: "yes", _canonical_uri: cidUri(cid) });
+    setTiddler({ title: "lar:///ha.ka.ba/bags/crossroads/media/clip", _is_skinny: "yes", _canonical_uri: cidUri(cid) });
 
     installLazyResolver(engine, async (c) => (c === cid ? bytesOf(body) : null));
-    fireLazyLoad("lar:///ha.ka.ba/bags/@crossroads/media/clip");
+    fireLazyLoad("lar:///ha.ka.ba/bags/crossroads/media/clip");
     await flush();
 
     expect(enqueued).toHaveLength(1);
@@ -104,11 +104,11 @@ describe("installLazyResolver — rehydrate on lazyLoad", () => {
 
   test("a web2 _canonical_uri is left to the native path — never resolved", async () => {
     const { engine, enqueued, setTiddler, fireLazyLoad } = makeFakeEngine();
-    setTiddler({ title: "lar:///ha.ka.ba/bags/@crossroads/media/web2", _is_skinny: "yes", _canonical_uri: "https://example.org/pic.png" });
+    setTiddler({ title: "lar:///ha.ka.ba/bags/crossroads/media/web2", _is_skinny: "yes", _canonical_uri: "https://example.org/pic.png" });
     const resolveByCid: CarrierResolver = vi.fn(async () => bytesOf("x"));
     installLazyResolver(engine, resolveByCid);
 
-    fireLazyLoad("lar:///ha.ka.ba/bags/@crossroads/media/web2");
+    fireLazyLoad("lar:///ha.ka.ba/bags/crossroads/media/web2");
     await flush();
 
     expect(resolveByCid).not.toHaveBeenCalled();
@@ -118,11 +118,11 @@ describe("installLazyResolver — rehydrate on lazyLoad", () => {
   test("an integrity fault never splices unverified bytes", async () => {
     const cid = cidOf("the-claimed-body");
     const { engine, enqueued, setTiddler, fireLazyLoad } = makeFakeEngine();
-    setTiddler({ title: "lar:///ha.ka.ba/bags/@crossroads/library/tampered", _is_skinny: "yes", textCid: cid });
+    setTiddler({ title: "lar:///ha.ka.ba/bags/crossroads/library/tampered", _is_skinny: "yes", textCid: cid });
 
     // resolver returns DIFFERENT bytes than the cid names → hash mismatch
     installLazyResolver(engine, async () => bytesOf("a-different-body"));
-    fireLazyLoad("lar:///ha.ka.ba/bags/@crossroads/library/tampered");
+    fireLazyLoad("lar:///ha.ka.ba/bags/crossroads/library/tampered");
     await flush();
 
     expect(enqueued).toHaveLength(0);
@@ -132,17 +132,17 @@ describe("installLazyResolver — rehydrate on lazyLoad", () => {
     const body = "eventually-available body";
     const cid = cidOf(body);
     const { engine, enqueued, setTiddler, fireLazyLoad } = makeFakeEngine();
-    setTiddler({ title: "lar:///ha.ka.ba/bags/@crossroads/library/pending", _is_skinny: "yes", textCid: cid });
+    setTiddler({ title: "lar:///ha.ka.ba/bags/crossroads/library/pending", _is_skinny: "yes", textCid: cid });
 
     let present = false;
     installLazyResolver(engine, async (c) => (present && c === cid ? bytesOf(body) : null));
 
-    fireLazyLoad("lar:///ha.ka.ba/bags/@crossroads/library/pending");
+    fireLazyLoad("lar:///ha.ka.ba/bags/crossroads/library/pending");
     await flush();
     expect(enqueued).toHaveLength(0);   // PENDING — the body isn't in the CAS yet
 
     present = true;
-    fireLazyLoad("lar:///ha.ka.ba/bags/@crossroads/library/pending");
+    fireLazyLoad("lar:///ha.ka.ba/bags/crossroads/library/pending");
     await flush();
     expect(enqueued).toHaveLength(1);   // the re-fire resolves it
     expect(enqueued[0]!.record?.tiddler.text).toBe(body);
@@ -150,11 +150,11 @@ describe("installLazyResolver — rehydrate on lazyLoad", () => {
 
   test("an already-hydrated tiddler never re-pulls", async () => {
     const { engine, enqueued, setTiddler, fireLazyLoad } = makeFakeEngine();
-    setTiddler({ title: "lar:///ha.ka.ba/bags/@crossroads/library/warm", _is_skinny: "yes", textCid: cidOf("b"), text: "already here" });
+    setTiddler({ title: "lar:///ha.ka.ba/bags/crossroads/library/warm", _is_skinny: "yes", textCid: cidOf("b"), text: "already here" });
     const resolveByCid: CarrierResolver = vi.fn(async () => bytesOf("b"));
     installLazyResolver(engine, resolveByCid);
 
-    fireLazyLoad("lar:///ha.ka.ba/bags/@crossroads/library/warm");
+    fireLazyLoad("lar:///ha.ka.ba/bags/crossroads/library/warm");
     await flush();
 
     expect(resolveByCid).not.toHaveBeenCalled();

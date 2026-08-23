@@ -3,7 +3,7 @@
  *
  * Proven:
  *   - DeterministicFederationGate federates ONLY the per-Nexus public boards
- *     (@crossroads + WHO board, deterministic from the gate key) + any explicit
+ *     (crossroads + WHO board, deterministic from the gate key) + any explicit
  *     extra board; a private/random doc id is DENIED.
  *   - federationShareDecision (the vessel's sharePolicy verdict): in-process peers
  *     get everything; a same-operator relay (no gate) syncs fully; a gated relay
@@ -16,7 +16,7 @@ import { DeterministicFederationGate, federationShareDecision } from "../src/fed
 
 const NX = "abcdef0123456789";
 
-/** A random-id doc URL standing for a PRIVATE plane (@catalog/@personal/@draft/wiki): its 16-byte id
+/** A random-id doc URL standing for a PRIVATE plane (catalog/@personal/@draft/wiki): its 16-byte id
  *  is unguessable and is NOT one of the deterministic public boards. */
 function randomDocId(): DocumentId {
   const bytes = new Uint8Array(16);
@@ -28,7 +28,7 @@ const docIdOf = (url: string): DocumentId => interpretAsDocumentId(url as never)
 describe("DeterministicFederationGate — the federatable surface", () => {
   const gate = new DeterministicFederationGate(NX);
 
-  test("federates the per-Nexus @crossroads + WHO board", () => {
+  test("federates the per-Nexus crossroads + WHO board", () => {
     expect(gate.mayFederate(docIdOf(crossroadsDocUrl(NX)))).toBe(true);
     expect(gate.mayFederate(docIdOf(whoBoardDocUrl(NX)))).toBe(true);
   });

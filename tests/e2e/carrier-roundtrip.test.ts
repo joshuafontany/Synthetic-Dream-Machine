@@ -24,8 +24,8 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
-const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
+const BOOT_MEME = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const LARES_URI = "lar:///ha.ka.ba/bags/lares";
 const BOOT_URI  = "lar:///ha.ka.ba/lares/api/noosphere-boot";
 
 /** Canonical render of carrier text through the membrane (the V4 law's left side). */
@@ -51,7 +51,7 @@ function walkFiles(dir: string): string[] {
 
 /** Poll the staged root's @lares mirror surface until files appear (or timeout). */
 async function awaitMirrorFiles(root: string, timeoutMs = 30_000): Promise<string[]> {
-  const mirrorRoot = join(root, "bags/@lares");
+  const mirrorRoot = join(root, "bags/lares");
   const start = Date.now();
   for (;;) {
     const files = walkFiles(mirrorRoot);

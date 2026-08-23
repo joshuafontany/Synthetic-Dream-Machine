@@ -1,0 +1,173 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+```toml iam
+cacheable     = true
+file-path     = "bags/lares/ha.ka.ba/lares/api/pono/shelter-against-empire.mem"
+hydrate       = true
+l-space       = "stable"
+mana          = 16
+manao         = 16
+manaoio       = 16
+register      = "Synthesis-Canon"
+retain        = true
+revision-note = "the standing brief. Operator-stated and load-bearing: this infrastructure exists for groups that need shelter against empire. Every trade downstream re-weights against it"
+role          = "the WHY the rest of the graph reasons toward. Names who this serves, what empire does structurally, and the three design consequences that follow — the recently-arrived case as ACCEPTANCE TEST, categorisation as THE threat, and fluid-not-frozen rank as a survival property"
+tags          = ["api/pono/meme", "api/pono/loci"]
+type          = "text/x-memetic-wikitext+tiddlywiki"
+uri-path      = "ha.ka.ba/lares/api/pono/shelter-against-empire"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #the-brief >>
+
+! Shelter Against Empire ~ the brief the graph reasons toward
+
+''RULED, operator-stated:'' this system exists ''for those groups that need shelter against empire.''
+
+Not a value the design also holds. ''The optimum every other trade is measured against'' — and a meme that reasons without it will reason correctly toward the wrong answer, with nothing in the reasoning to show the error.
+
+Named, because a brief that names nobody protects nobody: ''kanaka maoli'' and the Hawaiian kingdom groups · the ''Pacific Northwest tribes'' (Siletz among them) · ''Discordians'' keeping their own commons · the ''Kowloon'' walled-city crews · ''Blacksky'' and the communities holding their own moderation. Each already holds its own rites, its own reckoning of who belongs, and its own long practice of holding people the state declined to hold. ''This stack does not supply that. It tries to build something their practice can inhabit without being flattened by it.''
+
+<<~/ahu >>
+
+<<~ ahu #what-empire-does >>
+
+!! What empire does, structurally
+
+Strip the costume and empire runs ''three moves'', each answerable in architecture:
+
+''It insists on a GLOBAL NOW.'' One register, one present tense, one authoritative answer to //who is this//, resolvable by anyone from outside. A census is exactly that claim. Every identity model that pins one human to one resolvable identity has already built it, whatever it intends — which is why this stack rules that ''identity ENACTS a relationship and never names a thing/virtual-object''.
+
+''It makes a CATEGORY, then acts on the category.'' The historical record reads plainly: harm arrived through a legible category with a nameable custodian, and the ''contents'' of the record mattered less than its ''existence''. A hawala network moving $140M a year across 40 countries was destroyed on an accusation later found baseless — the contents were innocent, were eventually known innocent, and eleven years passed. So ''categorisation risk reads as THE threat'', never one among several, and every anchor this stack considers gets priced against it first.
+
+''It FREEZES the ladder.'' Not by ranking — societies rank — but by making rank ''total, immobile, and inheritable''. A total order over persons requires something like a global now to maintain; a partial order does not. And the record is unambiguous about who dies when the ladder freezes: four independent cases, one line, always at ''has local standing / does not''. Bulgaria, March 1943 — one state, one law, one month: inside the old borders ~48,000 saved; in the newly occupied territories all 11,343 deported, ''twelve survived''.
+
+''Which is why //no frozen rank// names a survival property and not a taste'', and why the ''recently-arrived case reads as this design's acceptance test'' rather than as a caveat appended to it.
+
+<<~/ahu >>
+
+<<~ ahu #the-myth >>
+
+!! The myth ~ what the fiction encodes
+
+The Elyncia frame carries the architecture, and it carries it as ''specification rather than decoration''.
+
+''The Necrospire broke the world and Web 2 with it.'' What returned was not a restored network but ''a new lattice built from the bones of the old'' — flexing across reality fractures, surviving resonance collapses, holding no single node whose loss ends it. The empire that fell had a capital province, a primary node, and a communications spine. ''It fell because it had those things.''
+
+''A Lar binds to a PLACE, never to a family.'' If the family moved, the Lar stayed. So a lararium holds an address and no roster of persons — and that is the anti-census encoded at the level of what a node ''is''.
+
+''Lararia stabilize through use'' — //offerings, repeated gestures, negotiated rites, and everyday interactions gradually tune each node//. A fed node hums; a neglected one flickers. That is `nohopapa` in the fiction's own words, and it names the reason nothing here persists by decree.
+
+''Palimpsests, never unified designs'' — //no single continuous cultural source underlies it… each shrine represents a local synthesis: layered, adaptive// — and elements //accumulate, refract, and sometimes conflict//. A stack that shipped one rite for everyone would be a unified design, which the myth already refuses (see `the-thing-event#unmodelled`).
+
+''And the Gaia parallel needs no drawing out.'' Kingdoms overthrown and their language nearly ended; peoples enrolled, counted, and relocated by registry; networks shut on unproven accusation; platforms that hold the membership list and can delete it by deleting a row. The fiction sets it five centuries after a collapse so the shape reads clearly — and the shape is 2026's, not 4326's.
+
+<<~/ahu >>
+
+<<~ ahu #consequences >>
+
+!! What follows, in the design
+
+* ''The recently-arrived case is the ACCEPTANCE TEST.'' Any structure safest for its long-settled members and hardest on its newest ''fails'', however elegant. The conversion act (`the-thing-event`) exists to answer this and stands unbuilt — that reads as the largest open thing in the design, and it is open because it matters, never because it was forgotten.
+* ''Categorisation gets priced before attribution.'' Attribution harms individuals; categorisation ends institutions. Any anchor that makes a seat unmintable also makes it attributable — the trap the anti-Sybil work kept walking into — and the mesh's answer runs ''tolerance, never detection'': bound the reach, never adjudicate who is real. A Sybil detector IS a refugee detector, and that reads as measured rather than argued.
+* ''Fluid rank, never frozen.'' Standing decays, erodes, re-earns. Nothing holds still — for founder and newcomer alike — so no list survives long enough to become a census.
+* ''No global now, at every shore.'' In and out. A wall clock reads as an unreliable witness; a position on a walkable chain reads as the honest instrument.
+* ''No container, therefore no wall.'' A realm ''mints no DID and hosts on no single machine''; a realm cannot be deleted by anyone not dwelling in it. There is no row to delete, and no platform seat from which to delete it.
+* ''The rites belong to the communities.'' The mesh supplies `nohopapa` — that dwelling deposits, that depth is real, that unfed erodes. ''Each realm supplies its own thing-event.''
+
+<<~/ahu >>
+
+<<~ ahu #designation >>
+
+!! Designation ~ the move that beats a good design
+
+''An empire hostile to a mesh does not break its ring. It DESIGNATES.'' It stands up a recognised issuer of standing and makes the unrecognised ones unlawful to rely on — and the historical record puts the failures exactly there. Where a technical field kept a peer ring, the ring held; where the stakes rose, a state closed the top by designation and the ring got bypassed rather than broken.
+
+''The defence names no rule about who may certify. It runs on RE-DERIVABILITY.'' A standing that only its holder can assert falls to designation in one move; a standing any party can recompute from published inputs does not. Metrology terminates its own regress this way — not in an authority but in ''an invariant anyone can independently realise''.
+
+> ''AND THE WARNING RUNS SHARPER THAN THE CURE.'' The one time a technical field met a well-resourced unilateral declarer, ''that declarer won'' — its frame became the world's because it held the measuring instrument, never because anyone governed well. ''Ask what our instrument is, and who can seize it.''
+
+''The category may expose before the roster does.'' A published declaration says //this group declares itself a group//, and under a hostile state that fact can outrank the member list — the categorisation risk this meme already names. So publication rides a LADDER rather than a switch: a realm publishes at the tier it can survive, and standing-to-object scopes to that tier (<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>). A realm in danger keeps its internal challengers and gains no outside ones — ''the actual condition, never a defect to design away''.
+
+<<~/ahu >>
+
+<<~ ahu #what-conferral-costs >>
+
+!! What conferral from below costs, said plainly
+
+''A DECLARED MEMBERSHIP PUBLISHES THE ADVERSARY'S GRAPH.'' The standing that rises from publicly declared members rides the same edges an adversary walks: attack-edge analysis and link analysis run ''the same computation on the same input''. The historical case runs exact — an association granted real personality by association alone, chartered by nobody, became suable in its own name and nearly died of it. ''Personality from below arrived first as liability, never as shelter.'' The empire never needed to charter them; it needed them to read as real.
+
+''SO A LADDER OF PUBLICLY DECLARED MEMBERS REBUILDS THE ROSTER THIS STACK REFUSES.'' The cure keeps the ladder and drops the list: a standing stands as ''a live query over expiring member attestations'', so a face carries a capability and never a membership, and no rung anywhere holds an enumerable set (`identity-enacts-relation#the-currents`).
+
+''AND WE DISCARD THE SHIELD — say it here rather than let a community discover it.'' The concession tradition bought one thing no arrangement from below can manufacture: ''entity shielding'', which partitions a group's assets from its members' personal creditors and ''binds third parties who never consented''. Standing conferred from below binds only those who CHOOSE to read it. A mutual-aid group believing its published face shelters its members' personal assets will learn otherwise from a creditor, and this stack owes that sentence in advance.
+
+<<~/ahu >>
+
+<<~ ahu #legibility >>
+
+!! Removing the roster MOVED the target ~ it never removed it
+
+''Computed membership computes for ANYONE, and that includes the empire.'' Taking away the roster took away a registry that could be subpoenaed. It took away nothing of the ability to determine affiliation — and it made affiliation ''universally auditable at zero cost by any observer''. A published ruleset digest reads as a perfect, self-certifying, remotely verifiable ''profession of allegiance''.
+
+''The historical instrument names itself'': a state that wanted schismatics did not need a list, because the rite carried its own detector — two fingers or three, cheap to read at a distance. A later tax on the visible marks monetised exactly that legibility.
+
+''AND NO CURE ON THIS PLANE SURVIVED CONTACT.'' A challenge-response hides membership from a PASSIVE watcher and from no other kind: an adversary connects and issues the challenge itself, which a national censor ran against two circumvention protocols at a measured half-second, from sixteen thousand single-use prober addresses. ''An openly-answering membership test IS a probe oracle'', and //anyone may join by conforming// therefore contradicts //a stranger learns nothing by asking// rather than complementing it. Every system that survived closed its door and moved joining out of band, where it became rationed, social, and the weakest link.
+
+''Worse, the deepest leak needs no handshake.'' A membership defined by BEHAVIOUR reads as a behavioural fingerprint — identical parses and artifacts carry the class into published content and onto a seized device, where no gate reaches. ''A class enacted in public cannot hide.''
+
+''AND THE POLARITY RUNS THE WRONG WAY FOR THE PERSON WE SERVE — WHOEVER SCANS GETS PHISHED.'' Moving joining out of band puts the introduction in a QR code, and a QR carries whatever its author put there. The guest scans OUR invite, so an adversary presenting a QR ''enrolls that guest into an adversary-run shrine'' — joining the empire's shrine while believing it a refuge, which reads strictly worse than the probe oracle we closed the door against. The silence protects the HOST and removes the GUEST's ability to tell a wrong shrine from an unreachable one.
+
+''The campaigns already ran, and the lure names the stakes better than any abstraction.'' Google Threat Intelligence Group (Dan Black) documented Russia-aligned clusters abusing Signal's ''linked devices'' feature by crafting malicious codes of the form `sgnl://linkdevice?uuid=…&pub_key=…`: ''UNC5792'' (CERT-UA's UAC-0195) disguised them as group invites, security alerts and device-pairing instructions on spoofed domains; ''UNC4221'' (UAC-0185) disguised them as ''Kropyva'', the Ukrainian artillery-guidance application; ''APT44'' generated them live from captured battlefield devices. GTIG names the structural defect — the feature //lacks centralized defenses to detect unauthorized device linking// — and puts ''audit your linked devices'' at the head of its user mitigations. A soldier scanning what reads as their own fire-control software hands an adversary a persistent seat with no device compromise at all.
+
+''So the shelter property rides COMPARTMENTALISATION rather than unobservability'': a peer learns only what that peer needed, so a logged session, a defector, or a seized device yields a bounded loss rather than the graph. And note what deniability does NOT buy — it blocks the cryptographic upgrade of an accusation and stops there. It never survives a peer who logs and testifies, and against a power that acts on suspicion rather than evidence it buys close to nothing.
+
+''COMPARTMENTALISATION THEREFORE OUTRANKS ADMISSION CONTROL, and the ranking runs strict.'' The admission layer decides who crosses once; compartmentalisation decides what each crossed party can ever reach. Every federation surveyed spent its governance energy on the first and inherited its breaches through the second. ''MEMBERSHIP NEVER CONFERS TRUST'': the historical infiltrator arrives holding a valid introduction, so a valid member acting hostile reads as the EXPECTED case rather than the exception, and the design owes a small blast radius per face rather than a strong door. ''A vouch graph leaks the whole social graph to anyone standing inside it'' — one party with a seat enumerates the kin the roster's absence was meant to hide, and every enumeration runs at zero cost and leaves no trace.
+
+''AND THE SINGLE OPERATOR HOLDS THE UNION.'' A hearth run by one hand syncs, over time, everything that hand ever touched — so ''what that machine reveals when seized names the functional roster'', whatever the absence of a table elsewhere claims. //No roster anywhere// describes the wire and the board; it describes no laptop. Under a hostile reading the operator stands as the single point of coercion — key seizure, legal compulsion, device access — and no architecture on the plane below reaches that. ''Ask of any design here: what does the operator's own store reveal, and against how many parties?''
+
+''AND THE SEIZABLE THING RELOCATED RATHER THAN VANISHED.'' Whoever ships the default build and holds the update channel holds the real tempo, whatever a published cadence says; whoever authors the manifest chooses which bytes count; whoever writes the vectors decides what conformance means. ''The registry's table went and its editor stayed.'' A mesh that removed the roster and left those seats unnamed has moved its governance somewhere that inspects WORSE — and an adversary reaches for exactly that seat, precisely because the roster no longer stands there.
+
+<<~/ahu >>
+
+<<~ ahu #the-honest-limit >>
+
+!! The honest limit
+
+''No architecture supplies standing no community offered.'' A refugee's held-ness runs only as portable as the realms willing to attest it, and that names the actual social condition rather than a gap awaiting a build.
+
+And the deeper limit, stated so nobody has to rediscover it: ''every failure in the historical survey ran legal or administrative, not cryptographic.'' Registers were repurposed by their lawful custodians under changed management. So the cryptographic layer buys ''time and cost'', which is worth buying — Denmark's warning bought 7,500 lives — and it does not buy safety. ''What buys safety is having no seizable object, no nameable category, and no list that holds still.''
+
+!!! And the same limit, measured a second way ~ ARCHITECTURE RANKS ROUGHLY EIGHTH
+
+''Reading the federation graveyard case by case for CAUSE OF DEATH lands a ranking hostile to this project's own habits.'' Across the open-protocol federations and the decentralised-stack post-mortems together, the causes order:
+
+# ''Money for OPERATIONS, never for building.'' The record shows funding to build the thing and none to run it, year after year, for other people. Crowdfunds financed launches; subscription social failed the network effect; venture money forced the monetisation that broke the trust promise; an acquisition reads as a funding event that froze a trust system in place.
+# ''Network effect — no reason for the second party.'' Federation MULTIPLIES cold-start: a design must bootstrap participants AND operators at once.
+# ''Maintainer and moderator burnout — unpaid emotional labour.'' Distinct from the first, because money alone never repairs it; the harm arrives at a human being holding other people's conflicts.
+# ''A single dependency nobody counted as one'', and ''nearly always in the ACCESS or STATE layer rather than the protocol'' — a free sync backend, one gateway provider, one indexer's read path, one reference implementation. Content addressing yields VERIFIABILITY, never AVAILABILITY: someone still hosts, serves and resolves, and that party becomes both the chokepoint and the observer.
+# ''Governance instruments too blunt'' — one all-or-nothing lever, no gradation, no due process, therefore bloc politics.
+# ''Irreversibility as the adoption wound'' — key loss with no recovery path, and the recovery designs that helped all relocated the trust into a SOCIAL layer. ''Key management names a social problem wearing a cryptographic mask'', and a vouching layer that does not also serve as recovery will get one bolted on under the pressure of a real party locked out of the shelter they needed.
+# ''Capability fragmentation'' under an extensible grammar — slow poison, rarely the proximate cause.
+# ''Actual architectural failure'' — ''RARE''. Almost nothing in the survey died of a bad design. The exceptions ran narrow: an append-only log with terminal key loss and no delete, and an unmoderated append weaponised by appending.
+
+<<~ confidence Synthesis-Canon 15/20 >> on the ordering as a judgement across the cases; the individual attributions hold their own bands, and every quantity in the source reading stayed an order of magnitude rather than a verified figure.
+
+> ''SO THE FINDING LANDS ON THIS GRAPH'S OWN ATTENTION, never only on the record.'' The five causes above architecture receive markedly less design here than the merge layer does. ''Further architectural optimisation carries low marginal survival return'' — and the honest limit already stated (every historical failure ran legal or administrative) reads as the SAME finding measured from a second direction: ''the failure modes live outside the layer this stack most enjoys building.''
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;2PlhongUs6cYsemnSjrTrBnjM1z4EkuBsj8b0Gf9eJw
+
+<<^ code:"&#x0004;" -> ? >>

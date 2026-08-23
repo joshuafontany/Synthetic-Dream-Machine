@@ -20,7 +20,7 @@ import { execSync } from "child_process";
 import { join } from "path";
 
 const REPO = process.env["REPO"] ?? process.cwd();
-const SPEC = join(REPO, "bags/@lares/ha.ka.ba/lares/api/pono/memetic-wikitext.mem");
+const SPEC = join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/memetic-wikitext.mem");
 
 /** Rows of the control-set table: `|`&#x000N;` |MARK |slots |carries |`. */
 const ROW = /^\|`(&#x[0-9A-Fa-f]{4};)`\s*\|([A-Za-z₂]+)\s*\|([^|]*)\|/gm;

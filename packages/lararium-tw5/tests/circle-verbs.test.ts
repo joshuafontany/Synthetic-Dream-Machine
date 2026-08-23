@@ -178,7 +178,7 @@ describe("circle-verbs — the per-nym follow-graph over @circles", () => {
 
     // Every title the reactors ever wrote sits under the CIRCLES INNER namespace — no board shore is
     // reachable. It folds by the inner stem, never the bag address: a title names its own record and never
-    // the entity holding it, so a check against `@circles-<tag>` would match nothing and pass by vacuity.
+    // the entity holding it, so a check against `circles-<tag>` would match nothing and pass by vacuity.
     for (const title of store._snapshot().keys()) {
       expect(title.startsWith(CIRCLES_INNER)).toBe(true);
       expect(title).not.toContain("crossroads");

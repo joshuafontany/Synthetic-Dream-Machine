@@ -157,8 +157,8 @@ export const OBSTRUCT_SEEDS: readonly FixtureTiddler[] = [
  * two substrates, proves the island-isomorphism — one hull, differ by grant not hull.
  */
 export async function runWikiConsistencyWitness(): Promise<WikiConsistencyWitness> {
-  const glueIsland = await buildFixtureIsland("lar:///ha.ka.ba/bags/@witness-glue", GLUE_SEEDS);
-  const obstructIsland = await buildFixtureIsland("lar:///ha.ka.ba/bags/@witness-obstruct", OBSTRUCT_SEEDS);
+  const glueIsland = await buildFixtureIsland("lar:///ha.ka.ba/bags/witness-glue", GLUE_SEEDS);
+  const obstructIsland = await buildFixtureIsland("lar:///ha.ka.ba/bags/witness-obstruct", OBSTRUCT_SEEDS);
   const glue = await new WikiStoreAdapter(glueIsland).consistency();
   const obstruct = await new WikiStoreAdapter(obstructIsland).consistency();
   return { glue, obstruct };

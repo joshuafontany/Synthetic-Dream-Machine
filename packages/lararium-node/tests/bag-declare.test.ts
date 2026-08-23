@@ -32,8 +32,8 @@ describe("bag-declare — the disk shore", () => {
     setEnv("XDG_STATE_HOME", join(root, "xdgstate"));
     setEnv("XDG_DATA_HOME", join(root, "xdgstate"));   // identity/seal/library answer HERE
     corpus = join(root, "corpus");
-    mkdirSync(join(corpus, "@lares"), { recursive: true });
-    mkdirSync(join(corpus, "@nexus"), { recursive: true });
+    mkdirSync(join(corpus, "lares"), { recursive: true });
+    mkdirSync(join(corpus, "nexus"), { recursive: true });
   });
   afterEach(() => {
     for (const [k, v] of Object.entries(saved)) { if (v === undefined) delete process.env[k]; else process.env[k] = v; }
@@ -41,27 +41,27 @@ describe("bag-declare — the disk shore", () => {
   });
 
   test("★ a bag with NO declaration reads the fail-closed default, never a throw ★", () => {
-    const m = readBagManifest(join(corpus, "@lares"), "@lares");
-    expect(m).toEqual({ bag: "@lares", tier: "veil", home: "hearth" });
+    const m = readBagManifest(join(corpus, "lares"), "lares");
+    expect(m).toEqual({ bag: "lares", tier: "veil", home: "hearth" });
   });
 
   test("a written declaration round-trips through the iam block", () => {
-    writeBagManifest(join(corpus, "@lares"), { bag: "@lares", tier: "public", home: "repository", repository: "canon" });
-    const back = readBagManifest(join(corpus, "@lares"), "@lares");
-    expect(back).toMatchObject({ bag: "@lares", tier: "public", home: "repository", repository: "canon" });
+    writeBagManifest(join(corpus, "lares"), { bag: "lares", tier: "public", home: "repository", repository: "canon" });
+    const back = readBagManifest(join(corpus, "lares"), "lares");
+    expect(back).toMatchObject({ bag: "lares", tier: "public", home: "repository", repository: "canon" });
   });
 
   test("★ the written declaration carries the repo ID and NO path ★", () => {
     registerRepo({ id: "canon", root: corpus, vcs: "git" });
-    writeBagManifest(join(corpus, "@lares"), { bag: "@lares", tier: "public", home: "repository", repository: "canon" });
-    const wire = readFileSync(join(corpus, "@lares", "iam.mem"), "utf8");
+    writeBagManifest(join(corpus, "lares"), { bag: "lares", tier: "public", home: "repository", repository: "canon" });
+    const wire = readFileSync(join(corpus, "lares", "iam.mem"), "utf8");
     expect(wire).toContain('repository = "canon"');
     expect(wire).not.toContain(corpus);       // the root stays local to the vessel that resolved it
   });
 
   test("a TORN iam block reads the default rather than a partial guess into a home", () => {
-    writeFileSync(join(corpus, "@lares", "iam.mem"), "```toml iam\nnot a table ][\n```\n", "utf8");
-    expect(readBagManifest(join(corpus, "@lares"), "@lares").home).toBe("hearth");
+    writeFileSync(join(corpus, "lares", "iam.mem"), "```toml iam\nnot a table ][\n```\n", "utf8");
+    expect(readBagManifest(join(corpus, "lares"), "lares").home).toBe("hearth");
   });
 
   test("the shallow iam parser reads flat scalars and ignores everything else", () => {
@@ -121,8 +121,8 @@ describe("surveyBags + moveBagHome — the drift surface and the act", () => {
     setEnv("XDG_STATE_HOME", join(root, "xdgstate"));
     setEnv("XDG_DATA_HOME", join(root, "xdgstate"));   // identity/seal/library answer HERE
     corpus = join(root, "corpus");
-    mkdirSync(join(corpus, "@lares"), { recursive: true });
-    writeFileSync(join(corpus, "@lares", "a.mem"), "content", "utf8");
+    mkdirSync(join(corpus, "lares"), { recursive: true });
+    writeFileSync(join(corpus, "lares", "a.mem"), "content", "utf8");
     registerRepo({ id: "canon", root: corpus, vcs: "git" });
   });
   afterEach(() => {
@@ -133,16 +133,16 @@ describe("surveyBags + moveBagHome — the drift surface and the act", () => {
   test("★ an UNDECLARED bag sitting in a repo reads ADRIFT — the mismatch finally has a surface ★", () => {
     // Exactly the condition that let a Nexus seal live in a repository: nothing lying, nothing checked.
     const [seen] = surveyBags(corpus);
-    expect(seen?.bag).toBe("@lares");
+    expect(seen?.bag).toBe("lares");
     expect(seen?.adrift).toBe(true);
     expect(seen?.manifest.home).toBe("hearth");   // what it defaults to, against where it sits
   });
 
   test("declaring the truth clears the drift, without moving a byte", () => {
-    writeBagManifest(join(corpus, "@lares"), { bag: "@lares", tier: "public", home: "repository", repository: "canon" });
+    writeBagManifest(join(corpus, "lares"), { bag: "lares", tier: "public", home: "repository", repository: "canon" });
     const [seen] = surveyBags(corpus);
     expect(seen?.adrift).toBe(false);
-    expect(existsSync(join(corpus, "@lares", "a.mem"))).toBe(true);
+    expect(existsSync(join(corpus, "lares", "a.mem"))).toBe(true);
   });
 
   test("★ a MOVE relocates the bytes AND re-anchors the declaration, together ★", () => {
@@ -150,9 +150,9 @@ describe("surveyBags + moveBagHome — the drift surface and the act", () => {
     const out = moveBagHome(seen!, { home: "hearth" });
     expect(out.ok).toBe(true);
     if (!out.ok) return;
-    expect(existsSync(join(corpus, "@lares"))).toBe(false);          // the bytes left
+    expect(existsSync(join(corpus, "lares"))).toBe(false);          // the bytes left
     expect(readFileSync(join(out.to, "a.mem"), "utf8")).toBe("content");
-    expect(readBagManifest(out.to, "@lares").home).toBe("hearth");   // and the declaration followed
+    expect(readBagManifest(out.to, "lares").home).toBe("hearth");   // and the declaration followed
   });
 
   test("★ an UNRESOLVABLE target never reaches the filesystem ★", () => {
@@ -160,35 +160,35 @@ describe("surveyBags + moveBagHome — the drift surface and the act", () => {
     const out = moveBagHome(seen!, { home: "repository", repository: "nowhere" });
     expect(out.ok).toBe(false);
     expect(out.ok === false && out.why).toMatch(/no repo registered/);
-    expect(existsSync(join(corpus, "@lares", "a.mem"))).toBe(true);  // untouched
+    expect(existsSync(join(corpus, "lares", "a.mem"))).toBe(true);  // untouched
   });
 
   test("★ a LEY move refuses — a plane that lives while the mesh carries it has nowhere to be put ★", () => {
     const [seen] = surveyBags(corpus);
     const out = moveBagHome(seen!, { home: "ley" });
     expect(out.ok).toBe(false);
-    expect(existsSync(join(corpus, "@lares", "a.mem"))).toBe(true);
+    expect(existsSync(join(corpus, "lares", "a.mem"))).toBe(true);
   });
 
   test("★ an OCCUPIED destination REFUSES rather than merging two bags of one name ★", () => {
     const hearthBags = bagHomeRoots().hearth;
-    mkdirSync(join(hearthBags, "@lares"), { recursive: true });
-    writeFileSync(join(hearthBags, "@lares", "other.mem"), "someone else", "utf8");
+    mkdirSync(join(hearthBags, "lares"), { recursive: true });
+    writeFileSync(join(hearthBags, "lares", "other.mem"), "someone else", "utf8");
     const [seen] = surveyBags(corpus);
     const out = moveBagHome(seen!, { home: "hearth" });
     expect(out.ok).toBe(false);
     expect(out.ok === false && out.why).toMatch(/already stands/);
-    expect(readFileSync(join(hearthBags, "@lares", "other.mem"), "utf8")).toBe("someone else");
+    expect(readFileSync(join(hearthBags, "lares", "other.mem"), "utf8")).toBe("someone else");
   });
 
   test("moving a bag already at its destination RE-ANCHORS it without touching bytes", () => {
-    writeBagManifest(join(corpus, "@lares"), { bag: "@lares", tier: "public", home: "hearth" });
+    writeBagManifest(join(corpus, "lares"), { bag: "lares", tier: "public", home: "hearth" });
     const [seen] = surveyBags(corpus);
     const out = moveBagHome(seen!, { home: "repository", repository: "canon" });
     expect(out.ok).toBe(true);
     if (!out.ok) return;
-    expect(out.to).toBe(join(corpus, "@lares"));
-    expect(readBagManifest(out.to, "@lares")).toMatchObject({ home: "repository", repository: "canon", tier: "public" });
+    expect(out.to).toBe(join(corpus, "lares"));
+    expect(readBagManifest(out.to, "lares")).toMatchObject({ home: "repository", repository: "canon", tier: "public" });
     expect(surveyBags(corpus)[0]?.adrift).toBe(false);
   });
 });

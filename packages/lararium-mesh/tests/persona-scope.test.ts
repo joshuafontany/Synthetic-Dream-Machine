@@ -7,7 +7,7 @@
  * any sibling handle.
  *
  * The one a reader should look for first: `two handles on ONE laptop share nothing in their names`. Delete
- * the derivation, hand back `@persona-<groupId>` verbatim, and every other test here still passes while the
+ * the derivation, hand back `persona-<groupId>` verbatim, and every other test here still passes while the
  * bag id becomes a re-usable group handle sitting in a log.
  */
 import { describe, expect, test } from "vitest";
@@ -27,7 +27,7 @@ describe("a holder can always find its own plane", () => {
     // The derivation takes the GROUP's material and nothing else. A device that mixed itself in would give
     // each device a different name for one handle's plane, and the fleet would sync to nowhere.
     expect(personaBagIdFor(WORK)).toBe(personaBagIdFor(WORK));
-    expect(personaBagIdFor(WORK)).toMatch(/^lar:\/\/\/.*bags\/@persona-[0-9a-f]{16}$/);
+    expect(personaBagIdFor(WORK)).toMatch(/^lar:\/\/\/.*bags\/persona-[0-9a-f]{16}$/);
   });
 });
 
@@ -58,18 +58,18 @@ describe("★ the vault property — the compartments stay unlinked ★", () => 
 
 describe("★ the guards cover the FAMILY, not a list of names ★", () => {
   test("★ a derived plane reads as sovereign to the Herm fence ★", () => {
-    // The weld test found this: a fence naming "@persona" by exact slug covers a person's planes only by
+    // The weld test found this: a fence naming "persona" by exact slug covers a person's planes only by
     // accident of how many they happen to hold. The Herm's final verdict is an allowlist, so an unmatched
     // slug already denies — but a sovereign fence must say what it means rather than lean on that.
-    expect(isSovereignBag("@persona")).toBe(true);
+    expect(isSovereignBag("persona")).toBe(true);
     expect(isSovereignBag(personaBagIdFor(WORK).split("/").pop()!)).toBe(true);
-    expect(isSovereignBag("@lares")).toBe(false);
+    expect(isSovereignBag("lares")).toBe(false);
   });
 
   test("a Herm reads no plane of any PersonaGroup, named or derived", () => {
     expect(hermCanRead(`lar:///ha.ka.ba/bags/${personaBagIdFor(WORK).split("/").pop()}/selves/h1`)).toBe(false);
-    expect(hermCanRead("lar:///ha.ka.ba/bags/@persona/selves/h1")).toBe(false);
-    expect(hermCanRead("lar:///ha.ka.ba/bags/@lares/anything")).toBe(true);   // the waymarks still cross
+    expect(hermCanRead("lar:///ha.ka.ba/bags/persona/selves/h1")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/lares/anything")).toBe(true);   // the waymarks still cross
   });
 });
 
@@ -77,18 +77,18 @@ describe("★ the family rule matches a SHAPE, not a prefix ★", () => {
   test("★ the stem plus arbitrary text names NO plane — only what the derivation can produce ★", () => {
     // A prefix test accepts strings the derivation can never emit, which invites a caller to construct a
     // plane name by hand. The tag has a fixed width, so the shape admits exactly the derived family.
-    expect(isPersonaPlaneSlug("@persona-anything")).toBe(false);
-    expect(isPersonaPlaneSlug("@persona-kel")).toBe(false);
+    expect(isPersonaPlaneSlug("persona-anything")).toBe(false);
+    expect(isPersonaPlaneSlug("persona-kel")).toBe(false);
     expect(isPersonaPlaneSlug(personaBagIdFor(WORK).split("/").pop()!)).toBe(true);
   });
 
   test("the bare namespace names no plane — nothing answers to the stem", () => {
-    expect(isPersonaPlaneSlug("@persona")).toBe(false);
+    expect(isPersonaPlaneSlug("persona")).toBe(false);
   });
 
   test("a truncated or over-long tag reads as no plane", () => {
-    expect(isPersonaPlaneSlug("@persona-b7f1c2a9d4e603")).toBe(false);     // short
-    expect(isPersonaPlaneSlug("@persona-b7f1c2a9d4e60381ab")).toBe(false); // long
-    expect(isPersonaPlaneSlug("@persona-B7F1C2A9D4E60381")).toBe(false);   // the tag lowercases
+    expect(isPersonaPlaneSlug("persona-b7f1c2a9d4e603")).toBe(false);     // short
+    expect(isPersonaPlaneSlug("persona-b7f1c2a9d4e60381ab")).toBe(false); // long
+    expect(isPersonaPlaneSlug("persona-B7F1C2A9D4E60381")).toBe(false);   // the tag lowercases
   });
 });

@@ -143,7 +143,7 @@ export async function buildWikiMountSpec(
   };
   // Designate the wiki's OWN canon (@{slug}) for disk projection alongside the
   // primaries. The pool's self-canon grant authorizes a minted user wiki to
-  // bags/@{slug}; for the system wikis (@lares/@lararium) the slug-bag already
+  // bags/{slug}; for the system wikis (@lares/@lararium) the slug-bag already
   // sits in PRIMARY via a literal grant, so resolveDiskMirrors skips the dup.
   const recipe: WikiRecipe = {
     wikiSlug: inputs.wikiSlug,

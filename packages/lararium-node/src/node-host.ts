@@ -17,9 +17,9 @@ export function bagsRoot(): string {
   return daemonBagsDir();
 }
 
-/** The `@lares` memes root beneath the bags tree — `<bags>/@lares`. Follows the bags cap. */
+/** The `lares` memes root beneath the bags tree — `<bags>/lares`. Follows the bags cap. */
 export function laresMemesRoot(): string {
-  return join(bagsRoot(), "@lares");
+  return join(bagsRoot(), "lares");
 }
 
 export interface CorpusSource {

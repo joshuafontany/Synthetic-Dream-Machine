@@ -53,7 +53,7 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
 
   test("cold-boot path mounts without docUrl and emits no fault", async () => {
     const all = eventCollector();
-    const islandId = "lar:///ha.ka.ba/bags/@test/browser-cold";
+    const islandId = "lar:///ha.ka.ba/bags/test/browser-cold";
 
     repo = new Repo({ sharePolicy: async () => true });
     repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
@@ -78,7 +78,7 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
   test("docUrl non-null path resolves via repo.find(docUrl)", async () => {
     const all     = eventCollector();
     const changes = eventCollector("repo:change");
-    const islandId = "lar:///ha.ka.ba/bags/@test/browser-docurl";
+    const islandId = "lar:///ha.ka.ba/bags/test/browser-docurl";
 
     repo = new Repo({ sharePolicy: async () => true });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
@@ -103,8 +103,8 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
     expect(synced.payload.usingDocUrl).toBe(true);
 
     docHandle.change((d) => {
-      d.tiddlers["lar:///ha.ka.ba/bags/@test/browser-docurl/page"] = {
-        title: "lar:///ha.ka.ba/bags/@test/browser-docurl/page",
+      d.tiddlers["lar:///ha.ka.ba/bags/test/browser-docurl/page"] = {
+        title: "lar:///ha.ka.ba/bags/test/browser-docurl/page",
         text:  "docurl",
       };
     });

@@ -213,7 +213,7 @@ export function makeWardAlertReactor(
     const ts     = new Date().toISOString();
 
     // (a) Durable audit in @daemon — append-only ledger, never coalesced.
-    const auditTitle = `lar:///ha.ka.ba/bags/@daemon/ledger/ward/${Date.now().toString(32)}-${Math.floor(Math.random() * 1e6).toString(32)}`;
+    const auditTitle = `lar:///ha.ka.ba/bags/daemon/ledger/ward/${Date.now().toString(32)}-${Math.floor(Math.random() * 1e6).toString(32)}`;
     await composite.put(
       { tiddler: { title: auditTitle, "alert-kind": "disk-ward", bag: bagId, uri, reason, ts }, meta: { authority: "disk-ward" } },
       { kind: "lares-verb", requestId: `ward-${ts}` },

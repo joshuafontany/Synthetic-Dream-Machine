@@ -1,0 +1,73 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/kumu >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/kumu.mem"
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "element-type declaration pragma — kumu as structural root; declares named grammar node type; English aliases: \\type \\typos"
+tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kumu"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/kumu"
+```
+
+<<~ ahu #head >>
+
+! Kumu
+
+//kumu// — Hawaiian: teacher, origin, source, trunk; the base from which things grow. In botany,
+the trunk of a tree; in cultural life, the teacher who holds the root knowledge and passes it
+forward. A kumu functions as more than a fact-holder — it grounds the structural origin of a lineage of forms.
+
+An element-type declaration pragma. Declares a new grammar node type — a named structural
+container with a body template. English aliases: `\type` (structural emphasis), `\typos`
+(from Greek //typos//: impression, mold, form).
+
+Where `wehe` / `\procedure` declares a named callable body, `kumu` declares a named
+//structural type// — a reusable container shape that carries semantic identity. The distinction:
+a procedure executes; a kumu defines a form that other nodes instantiate.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #law >>
+
+!! Law (Kānāwai)
+
+A kumu declaration MUST carry a unique type name.
+A kumu declaration body defines the template for nodes of that type.
+A kumu declaration MUST register a type definition only, producing no render output.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+!! Syntax
+
+```text
+<<~ kumu TypeName(params) >>
+  body template
+<<~/ kumu >>
+
+<<~ \type TypeName(params) >>  ...  <<~/ \type >>
+<<~ \typos TypeName(params) >>  ...  <<~/ \typos >>
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-type >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-typos >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;AkxfdQZ6447sQR4-R37qnNNT0JkxNVj6ZujreSmS5YQ
+
+<<^ code:"&#x0004;" -> ? >>

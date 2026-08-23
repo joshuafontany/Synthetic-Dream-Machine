@@ -50,7 +50,7 @@ describe("the V3 proof crux — does the card's identifier carry the signing key
     const peerPubKey = String(id).slice(-64);           // what the gate uses
     const nonce = "ab".repeat(32);
     const gatePubKey = "cd".repeat(32);
-    const aud = "lar:///ha.ka.ba/bags/@daemon";
+    const aud = "lar:///ha.ka.ba/bags/daemon";
     const ts = "2026-07-13T00:00:00.000Z";
 
     const bytes = authProofBytes({ nonce, gatePubKey, peerPubKey, aud, ts });

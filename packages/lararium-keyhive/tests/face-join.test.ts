@@ -146,13 +146,13 @@ describe("the gate — a signature, never a list", () => {
 describe("the re-grant — a seat that reaches what the group already held", () => {
   test("a fresh seat re-points the group's existing bags, AFTER the add", async () => {
     const ctx = { ...(await ctxFor()), regrant: [
-      { bagUrl: "lar:///ha.ka.ba/bags/@catalog", access: "admin" as const },
-      { bagUrl: "lar:///ha.ka.ba/bags/@persona", access: "admin" as const },
+      { bagUrl: "lar:///ha.ka.ba/bags/catalog", access: "admin" as const },
+      { bagUrl: "lar:///ha.ka.ba/bags/persona", access: "admin" as const },
     ] };
     const p   = fakeProvider();
     const out = await runFaceJoin(p, summons(await edgeFor()), ctx);
     expect(out.ok).toBe(true);
-    expect(p.calls.regranted).toEqual(["lar:///ha.ka.ba/bags/@catalog", "lar:///ha.ka.ba/bags/@persona"]);
+    expect(p.calls.regranted).toEqual(["lar:///ha.ka.ba/bags/catalog", "lar:///ha.ka.ba/bags/persona"]);
     expect(p.calls.added).toHaveLength(1);
     if (out.ok) expect(out.grant.regranted).toBe(2);   // the count rides OUT, so a caller can see reach
   });
@@ -169,14 +169,14 @@ describe("the re-grant — a seat that reaches what the group already held", () 
   });
 
   test("an already-seated device re-grants NOTHING — no seat moved, no epoch moved", async () => {
-    const ctx = { ...(await ctxFor()), regrant: [{ bagUrl: "lar:///ha.ka.ba/bags/@catalog", access: "admin" as const }] };
+    const ctx = { ...(await ctxFor()), regrant: [{ bagUrl: "lar:///ha.ka.ba/bags/catalog", access: "admin" as const }] };
     const p   = fakeProvider({ seated: true });
     await runFaceJoin(p, summons(await edgeFor()), ctx);
     expect(p.calls.regranted).toEqual([]);
   });
 
   test("a REFUSED summons re-grants nothing", async () => {
-    const ctx = { ...(await ctxFor()), regrant: [{ bagUrl: "lar:///ha.ka.ba/bags/@catalog", access: "admin" as const }] };
+    const ctx = { ...(await ctxFor()), regrant: [{ bagUrl: "lar:///ha.ka.ba/bags/catalog", access: "admin" as const }] };
     const p   = fakeProvider();
     await runFaceJoin(p, summons(await edgeFor({ seed: OTHER_SEED })), ctx);
     expect(p.calls.regranted).toEqual([]);

@@ -1,6 +1,6 @@
 /**
  * e2e/corpus-feed — vector 4's staged witness: the WHOLE @lares corpus
- * (bags/@lares/ha.ka.ba/lares, the hearth's content tree) rides one directory-batch LOAD
+ * (bags/lares/ha.ka.ba/lares, the hearth's content tree) rides one directory-batch LOAD
  * into a staged vessel, and the disk co-projection writes back carrier-whole.
  *
  * What this soaks (first contact at scale for the 2026-06-11 grain burn):
@@ -23,8 +23,8 @@ import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lara
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 // `@` marks a SURFACE (the bag), never a meme namespace — so the content tree inside the bag reads
 // bare. `BOOT_PROJ` below already carried that; this constant is the one that needed to follow.
-const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares");
-const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
+const CORPUS    = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares");
+const LARES_URI = "lar:///ha.ka.ba/bags/lares";
 const BOOT_REL  = "api/noosphere-boot.mem";
 // Projected (staged) siting under the full-path-inside-bag rule:
 const BOOT_PROJ = "ha.ka.ba/lares/api/noosphere-boot.mem";
@@ -68,7 +68,7 @@ function expectedRoots(): Set<string> {
 
 /** Poll the staged mirror until the projected file count stabilizes. */
 async function awaitStableMirror(root: string, capMs = 120_000): Promise<string[]> {
-  const mirrorRoot = join(root, "bags/@lares");
+  const mirrorRoot = join(root, "bags/lares");
   const start = Date.now();
   let last = -1;
   let stableSince = Date.now();
@@ -105,7 +105,7 @@ describe("corpus feed — the whole hearth in one gesture (staged witness)", () 
     // holds (lawful residents outside the corpus namespace included), so the
     // law reads as membership: every corpus root projects to exactly one
     // file at its full-name path; fragments never surface.
-    const mirrorRoot = join(lar.root, "bags/@lares");
+    const mirrorRoot = join(lar.root, "bags/lares");
     const fileUris = new Set(files.map((f) =>
       "lar:///" + relative(mirrorRoot, f).split(sep).join("/").replace(/\.mem$/, ""),
     ));
@@ -116,7 +116,7 @@ describe("corpus feed — the whole hearth in one gesture (staged witness)", () 
 
   test("F3 — the boot meme projects content-whole (iam framing normalizes once)", async () => {
     if (lar.mode !== "staged") return;
-    const projected = join(lar.root, "bags/@lares", BOOT_PROJ);
+    const projected = join(lar.root, "bags/lares", BOOT_PROJ);
     expect(existsSync(projected)).toBe(true);
     const iamFence = /```toml iam\n[\s\S]*?```\n/g;
     const contentView = (s: string) => s.replace(iamFence, "```toml iam\n<normalized>\n```\n");
@@ -128,7 +128,7 @@ describe("corpus feed — the whole hearth in one gesture (staged witness)", () 
 
   test("F4 — pipeline idempotence: re-feeding a projection leaves it byte-stable", async () => {
     if (lar.mode !== "staged") return;
-    const projected = join(lar.root, "bags/@lares", BOOT_PROJ);
+    const projected = join(lar.root, "bags/lares", BOOT_PROJ);
     const before = readFileSync(projected, "utf8");
     const r = await lar.cli(["act", "LOAD", "--source-uri", projected, "--to", LARES_URI, "--yes", "--json"]);
     expect(r.json?.["ok"]).toBe(true);

@@ -1,7 +1,7 @@
 /**
  * lar-uris — lar:/// URI constants and builders for the Lararium namespace.
  * Meme: lar:///ha.ka.ba/lararium/mesh/lar-uris
- * Grammar doc: lar:///ha.ka.ba/lararium/mesh/lar-uris (bags/@lararium/mesh/lar-uris.md)
+ * Grammar doc: lar:///ha.ka.ba/lararium/mesh/lar-uris (bags/lararium/mesh/lar-uris.md)
  */
 
 import type { LarDoc } from "./base-doc.js";
@@ -123,8 +123,8 @@ export function laresVerbUri(verb: string): string {
 
 // ── Bag / Wiki / Cid identity — the three kind-planes ──────────────────────
 // The KIND rides the first path segment (the heaviest-weight slot in lar: law):
-// `bags/@slug` names a composable recipe piece (mutable, the IPNS-shaped content
-// plane); `wikis/@slug` names a #has bag-stack (per-wiki layers route off it);
+// `bags/slug` names a composable recipe piece (mutable, the IPNS-shaped content
+// plane); `wikis/slug` names a #has bag-stack (per-wiki layers route off it);
 // `cid/<hash>` names a content-addressed artifact (immutable, the /ipfs/ plane).
 // Ownership never enters the address.
 //
@@ -144,11 +144,11 @@ export const CID_SEGMENT   = "cid"   as const;
 
 /** Mint the canonical URI of a BAG (a composable recipe piece; mutable, the IPNS plane). */
 export function bagUri(slug: string): string {
-  return stableLarUri(`${BAGS_SEGMENT}/@${slug.replace(/^@/, "")}`);
+  return stableLarUri(`${BAGS_SEGMENT}/${slug.replace(/^@/, "")}`);
 }
 
 /**
- * Whether a string names a BAG — the `bags/@slug` surface and nothing else.
+ * Whether a string names a BAG — the `bags/slug` surface and nothing else.
  *
  * The grammar mints first segments that name no bag: `tags/`, `state/`, the plugin memes, the bare-`@`
  * sentinel documents, the `cid/` bodies, the `wikis/` identities and their slots. A reader that walks a
@@ -158,12 +158,12 @@ export function bagUri(slug: string): string {
  * Canon: lar:///ha.ka.ba/lares/api/pono/one-name-one-relation
  */
 export function isBagId(uri: string): boolean {
-  return /^lar:\/\/\/ha\.ka\.ba\/bags\/@[^/]+$/.test(uri);
+  return /^lar:\/\/\/ha\.ka\.ba\/bags\/[^/]+$/.test(uri);
 }
 
 /** Mint the canonical URI of a WIKI (a #has bag-stack; mutable). */
 export function wikiUri(slug: string): string {
-  return stableLarUri(`${WIKIS_SEGMENT}/@${slug.replace(/^@/, "")}`);
+  return stableLarUri(`${WIKIS_SEGMENT}/${slug.replace(/^@/, "")}`);
 }
 
 /** Mint the canonical URI of a content-addressed ARTIFACT — the /ipfs/ plane. The name
@@ -190,13 +190,13 @@ export function cidFromUri(uri: string): string | null {
   return hash.length > 0 ? hash : null;
 }
 
-/** Read the identity slug off a bag or wiki URI (`bags/@x`, `wikis/@x`); null when the URI names none.
+/** Read the identity slug off a bag or wiki URI (`bags/x`, `wikis/x`); null when the URI names none.
  *
  *  `@` opens a bag DIRECTORY name, so a minted identity always carries a `bags/` or `wikis/` segment. The
  *  pattern reads a root-level `@x` too — a reader costs nothing by answering an address it can resolve, and
  *  no minter in this stack produces one. */
 export function identitySlug(uri: string): string | null {
-  const m = /^lar:\/\/\/ha\.ka\.ba\/(?:bags\/|wikis\/)?@([^/]+)$/.exec(uri);
+  const m = /^lar:\/\/\/ha\.ka\.ba\/(?:bags|wikis)\/([^/]+)$/.exec(uri);
   return m ? m[1]! : null;
 }
 
@@ -264,7 +264,7 @@ export const SESSIONS_NAMESPACE   = bagUri("sessions");
 
 /**
  * Canonical URI of a corpus bag.
- *   corpusLarUri("elyncia") → "lar:///ha.ka.ba/bags/@elyncia"
+ *   corpusLarUri("elyncia") → "lar:///ha.ka.ba/bags/elyncia"
  *
  * Every corpus is a first-class bag at child[1] under the bag-tag rule
  * (see lar:///ha.ka.ba/lares/api/pono/lar-uri#bag-tag-rule).
@@ -275,7 +275,7 @@ export function corpusLarUri(slug: string): string {
 
 /**
  * Registry-entry URI inside @catalog that points at a corpus bag.
- *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/bags/@catalog/corpus/elyncia"
+ *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/bags/catalog/corpus/elyncia"
  *
  * The tiddler at this title lives in the @catalog bag and carries the
  * corpus bag's AutomergeUrl as its `text` field. Registry pattern: catalog
@@ -339,13 +339,13 @@ export const PERSONA_NAMESPACE    = bagUri("persona");
 
 /** e.g. recipeUri("@lararium", "default") → "lar:///ha.ka.ba/lararium/recipes/default" */
 export function recipeUri(root: string, name: string): string {
-  // Root-aware: a full bag URI (`bags/@x`) passes through; a bare slug or legacy `@slug`
-  // normalizes to the bag root, so every call site follows the bags/@ move untouched.
+  // Root-aware: a full bag URI (`bags/x`) passes through; a bare slug or legacy `@slug`
+  // normalizes to the bag root, so every call site follows the bags/ move untouched.
   const base = root.startsWith("lar:") ? root : bagUri(root);
   return `${base}/recipes/${name}`;
 }
 
-/** e.g. bagDescriptorUri("lar:///ha.ka.ba/bags/@lararium") → "lar:///ha.ka.ba/lararium/descriptor" */
+/** e.g. bagDescriptorUri("lar:///ha.ka.ba/bags/lararium") → "lar:///ha.ka.ba/lararium/descriptor" */
 export function bagDescriptorUri(bagId: string): string {
   return `${bagId}/descriptor`;
 }
@@ -409,13 +409,13 @@ export function nexusTrustUri(nexusPubkey: string): string {
 /** The `@nexus` bag root — the confederation plane, one sub-tree per nexus-pubkey. */
 export const NEXUS_DOC_URI = bagUri("nexus");
 
-/** nexusRegistryUri("abcdef…") → "…/bags/@nexus/abcdef…" — the confederation's MEMBERS roster (its lararia). */
+/** nexusRegistryUri("abcdef…") → "…/bags/nexus/abcdef…" — the confederation's MEMBERS roster (its lararia). */
 export function nexusRegistryUri(nexusPubkey: string): string {
   return `${NEXUS_DOC_URI}/${nexusPubkey}`;
 }
 
 /**
- * nexusHandlesUri("abcdef…") → "…/bags/@nexus/abcdef…/handles" — the per-Nexus WHO face: the announced
+ * nexusHandlesUri("abcdef…") → "…/bags/nexus/abcdef…/handles" — the per-Nexus WHO face: the announced
  * Handles known in this confederation. A DISTINCT doc from the members registry (WHO ⊥ the lararia roster),
  * sibling to it under the same nexus-pubkey. Handle-cards ride it as tiddlers keyed by their own nym (the
  * portable identity KIND), while this doc URI carries the island-scoped REACH — so the same card re-announces
@@ -510,7 +510,7 @@ export const HEARTH_TRUE_NAME_TIDDLER      = `${PERSONA_NAMESPACE}/hearth/true-n
  *  DeterministicFederationGate never volunteers it to a cross-operator, so these labels reach the human's own
  *  devices and no stranger. */
 export const PERSONA_SELVES_PREFIX         = `${PERSONA_NAMESPACE}/selves`;
-/** personaSelfTiddlerUri(2) → "…/bags/@persona/selves/h2" — one tiddler per own persona. */
+/** personaSelfTiddlerUri(2) → "…/bags/persona/selves/h2" — one tiddler per own persona. */
 export function personaSelfTiddlerUri(handleIndex: number): string {
   return `${PERSONA_SELVES_PREFIX}/h${handleIndex}`;
 }
@@ -548,7 +548,7 @@ export const WORKING_BINDINGS_PREFIX  = `${PERSONA_NAMESPACE}/working-bindings`;
  * Vessel-wide system bag URIs. These exist once per vessel and serve all wikis.
  *
  * Per-wiki recipe slots (`@temp`, `@draft`, `@<wiki-slug>`, library bags) live
- * in `wiki-recipe.ts` — slot URIs in the same lar:///ha.ka.ba/bags/@<name>
+ * in `wiki-recipe.ts` — slot URIs in the same lar:///ha.ka.ba/bags/<name>
  * namespace. Structural slots arrive as typed IslandGrants on the manifest;
  * @lares rides the @lararium doc's well-known tiddlers; library bags resolve
  * island-side from @catalog.

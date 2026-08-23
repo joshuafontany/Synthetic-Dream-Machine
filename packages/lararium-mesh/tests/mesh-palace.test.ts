@@ -33,7 +33,7 @@ import {
 } from "../src/mesh-palace.js";
 import { deriveMeshSelf, deriveMeshLeaf, meshSelfDial, meshSelfSeed } from "../src/carriage-caps.js";
 
-const AUTH = "lar:///ha.ka.ba/bags/@meshpalace/test";
+const AUTH = "lar:///ha.ka.ba/bags/meshpalace/test";
 
 describe("MeshSelf — the leaf↔full tier is ONE field (endpoint present-vs-absent)", () => {
   test("a full node advertises a dial; a leaf carries-in but has no reachable endpoint", () => {
@@ -47,7 +47,7 @@ describe("MeshSelf — the leaf↔full tier is ONE field (endpoint present-vs-ab
     expect(leaf.coord.r).toBeGreaterThanOrEqual(0);      // …and holds a coord for the proximity re-rank
     expect(meshSelfDial(leaf)).toBeUndefined();          // no dial
     expect(meshSelfSeed(leaf)).toEqual([]);              // → no self-announce seed
-    expect(leaf.bearing).toContain("@oracle/leaf/");     // its own leaf identity
+    expect(leaf.bearing).toContain("oracle/leaf/");      // its own leaf identity
   });
 });
 
@@ -60,7 +60,7 @@ function docOf(records: LarTiddlerRecord[]): LarDoc {
 describe("mesh-palace records round-trip", () => {
   test("a dial-record survives encode → decode", () => {
     const e: DialEntry = {
-      bearing: "lar:///ha.ka.ba/bags/@daemon",
+      bearing: "lar:///ha.ka.ba/bags/daemon",
       verifyingKeyHex: "a".repeat(64),
       endpoint: "ws://127.0.0.1:8080/ws",
       scale: "dreamnet",
@@ -82,7 +82,7 @@ describe("mesh-palace records round-trip", () => {
   });
 
   test("a routing slot round-trips its (r, θ)", () => {
-    const s: RoutingSlot = { bearing: "lar:///ha.ka.ba/bags/@daemon", r: 12.5, theta: 3.14159 };
+    const s: RoutingSlot = { bearing: "lar:///ha.ka.ba/bags/daemon", r: 12.5, theta: 3.14159 };
     expect(recordToRoutingSlot(routingSlotToRecord(s, AUTH))).toEqual(s);
   });
 
@@ -96,9 +96,9 @@ describe("mesh-palace records round-trip", () => {
 
 describe("the disclosure shore", () => {
   test("keeps coarse public FLOW, drops the private territory", () => {
-    const publicDial: DialEntry  = { bearing: "lar:///ha.ka.ba/bags/@oracle",  verifyingKeyHex: "b".repeat(64), endpoint: "ws://relay/1", scale: "dreamnet" };
-    const localDial:  DialEntry  = { bearing: "lar:///ha.ka.ba/bags/@daemon",  verifyingKeyHex: "c".repeat(64), endpoint: "ws://local/2" }; // no scale → local
-    const route:      RoutingSlot = { bearing: "lar:///ha.ka.ba/bags/@oracle", r: 4, theta: 1 };
+    const publicDial: DialEntry  = { bearing: "lar:///ha.ka.ba/bags/oracle",  verifyingKeyHex: "b".repeat(64), endpoint: "ws://relay/1", scale: "dreamnet" };
+    const localDial:  DialEntry  = { bearing: "lar:///ha.ka.ba/bags/daemon",  verifyingKeyHex: "c".repeat(64), endpoint: "ws://local/2" }; // no scale → local
+    const route:      RoutingSlot = { bearing: "lar:///ha.ka.ba/bags/oracle", r: 4, theta: 1 };
     const vessel:     VesselCapStack = { vesselId: "v1", held: ["tuber"], expressed: ["tuber.author"] };
 
     const full = docOf([
@@ -123,7 +123,7 @@ describe("the disclosure shore", () => {
 describe("the public read-face (Two-Faced Substrate)", () => {
   test("the FLOW-map publishes as a content-addressed snapshot; tamper is a different name", async () => {
     const full = docOf([
-      dialEntryToRecord({ bearing: "lar:///ha.ka.ba/bags/@oracle", verifyingKeyHex: "d".repeat(64), endpoint: "ws://relay/x", scale: "nexus" }, AUTH),
+      dialEntryToRecord({ bearing: "lar:///ha.ka.ba/bags/oracle", verifyingKeyHex: "d".repeat(64), endpoint: "ws://relay/x", scale: "nexus" }, AUTH),
     ]);
     const snap = await snapshotPublicFlowMap(full);
     expect(await verifyOracleSnapshotBytes(snap.bytes, snap.cid)).toBe(true);
@@ -138,12 +138,12 @@ describe("the live MeshPalace surface", () => {
     const handle = repo.create<MeshPalaceDoc>(emptyMeshPalaceDoc());
     const palace = new MeshPalace(handle, AUTH);
 
-    palace.putDial({ bearing: "lar:///ha.ka.ba/bags/@oracle", verifyingKeyHex: "e".repeat(64), endpoint: "ws://relay/p", scale: "dreamnet" });
-    palace.putDial({ bearing: "lar:///ha.ka.ba/bags/@daemon", verifyingKeyHex: "f".repeat(64), endpoint: "ws://local/q" }); // no scale → local
+    palace.putDial({ bearing: "lar:///ha.ka.ba/bags/oracle", verifyingKeyHex: "e".repeat(64), endpoint: "ws://relay/p", scale: "dreamnet" });
+    palace.putDial({ bearing: "lar:///ha.ka.ba/bags/daemon", verifyingKeyHex: "f".repeat(64), endpoint: "ws://local/q" }); // no scale → local
     palace.putVessel({ vesselId: "v9", held: ["tuber", "rhizome"], expressed: ["rhizome.forward"] });
-    palace.putRoute({ bearing: "lar:///ha.ka.ba/bags/@oracle", r: 7, theta: 2 });
+    palace.putRoute({ bearing: "lar:///ha.ka.ba/bags/oracle", r: 7, theta: 2 });
 
-    expect(palace.getDial("lar:///ha.ka.ba/bags/@oracle")?.endpoint).toBe("ws://relay/p");
+    expect(palace.getDial("lar:///ha.ka.ba/bags/oracle")?.endpoint).toBe("ws://relay/p");
     expect(palace.dials()).toHaveLength(2);
     expect(palace.vessels()[0]?.expressed).toEqual(["rhizome.forward"]);
     expect(palace.routes()).toHaveLength(1);
@@ -189,18 +189,18 @@ describe("greedy geometric routing — the native-disk chart", () => {
     const dest: Coord = { r: 3, theta: 0 };
     const self: Coord = { r: 1, theta: 1.0 };
     const neighbors = [
-      { bearing: "lar:///ha.ka.ba/bags/@a", r: 2,   theta: 0.2 },  // toward dest
-      { bearing: "lar:///ha.ka.ba/bags/@b", r: 0.5, theta: 2.5 },  // away
+      { bearing: "lar:///ha.ka.ba/bags/a", r: 2,   theta: 0.2 },  // toward dest
+      { bearing: "lar:///ha.ka.ba/bags/b", r: 0.5, theta: 2.5 },  // away
     ];
-    expect(greedyNextHop(self, neighbors, dest)?.bearing).toBe("lar:///ha.ka.ba/bags/@a");
+    expect(greedyNextHop(self, neighbors, dest)?.bearing).toBe("lar:///ha.ka.ba/bags/a");
 
     // a neighbor sitting AT the destination wins outright
-    const atDest = { bearing: "lar:///ha.ka.ba/bags/@d", r: 3, theta: 0 };
-    expect(greedyNextHop(self, [atDest], dest)?.bearing).toBe("lar:///ha.ka.ba/bags/@d");
+    const atDest = { bearing: "lar:///ha.ka.ba/bags/d", r: 3, theta: 0 };
+    expect(greedyNextHop(self, [atDest], dest)?.bearing).toBe("lar:///ha.ka.ba/bags/d");
 
     // local minimum: self already near dest, no neighbor improves → null (caller direct-dials)
     const nearDest: Coord = { r: 3, theta: 0.01 };
-    const farOnly = [{ bearing: "lar:///ha.ka.ba/bags/@x", r: 0.1, theta: 3 }];
+    const farOnly = [{ bearing: "lar:///ha.ka.ba/bags/x", r: 0.1, theta: 3 }];
     expect(greedyNextHop(nearDest, farOnly, dest)).toBeNull();
   });
 
@@ -219,12 +219,12 @@ describe("greedy geometric routing — the native-disk chart", () => {
     const g = gravityPressureNextHop({ r: 3, theta: 0 }, "@self", [slot("@near", 1, 0), slot("@far", 5, 0)], dest, GP_GRAVITY);
     expect(g.next?.bearing).toBe("@near");
     // LOCAL MINIMUM → PRESSURE: no neighbour beats self, yet ALWAYS a hop; the valley is recorded
-    const p = gravityPressureNextHop({ r: 1, theta: 0 }, "@self", [slot("@a", 5, 0), slot("@b", 6, 0)], dest, GP_GRAVITY);
+    const p = gravityPressureNextHop({ r: 1, theta: 0 }, "@self", [slot("a", 5, 0), slot("b", 6, 0)], dest, GP_GRAVITY);
     expect(p.next).not.toBeNull();
     expect(p.state.valleyDist).toBeCloseTo(hyperbolicDistance({ r: 1, theta: 0 }, dest));
     // PRESSURE forwards to the LEAST-visited neighbour
-    const pressured: GpState = { visits: { "@a": 3, "@b": 1 }, valleyDist: 0.5 };
-    expect(gravityPressureNextHop({ r: 1, theta: 0 }, "@self", [slot("@a", 5, 0), slot("@b", 5, 0.1)], dest, pressured).next?.bearing).toBe("@b");
+    const pressured: GpState = { visits: { "a": 3, "b": 1 }, valleyDist: 0.5 };
+    expect(gravityPressureNextHop({ r: 1, theta: 0 }, "@self", [slot("a", 5, 0), slot("b", 5, 0.1)], dest, pressured).next?.bearing).toBe("b");
     // RECOVER: closer than the valley → back to gravity (greedy)
     const rec = gravityPressureNextHop({ r: 0.5, theta: 0 }, "@self", [slot("@near", 0.1, 0), slot("@far", 5, 0)], dest, { visits: {}, valleyDist: 2.0 });
     expect(rec.state.valleyDist).toBe(Infinity);
@@ -268,16 +268,16 @@ describe("greedy geometric routing — the native-disk chart", () => {
 describe("the Herm read-scope (Lares Viales) — sighted on the map, blind to the territory", () => {
   test("a Herm reads the public waymarks, never the sovereign hearths", () => {
     // sighted on the map — the public floor
-    expect(hermCanRead("lar:///ha.ka.ba/bags/@oracle/blobs/tiddlywikicore")).toBe(true);
-    expect(hermCanRead("lar:///ha.ka.ba/bags/@meshpalace/dial/x")).toBe(true);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/oracle/blobs/tiddlywikicore")).toBe(true);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/meshpalace/dial/x")).toBe(true);
     expect(hermCanRead("lar:///ha.ka.ba/lares/api/pono/has-stack")).toBe(true);
     expect(hermCanRead("lar:///ha.ka.ba/lararium/mesh/vessel-caps")).toBe(true);
     // blind to the territory — the operator's sovereign hearths
-    expect(hermCanRead("lar:///ha.ka.ba/bags/@catalog/corpus/private")).toBe(false);
-    expect(hermCanRead("lar:///ha.ka.ba/bags/@persona/binding/signer-did")).toBe(false);
-    expect(hermCanRead("lar:///ha.ka.ba/bags/@daemon/sentinel/mesh-cabal/doc-id")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/catalog/corpus/private")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/persona/binding/signer-did")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/daemon/sentinel/mesh-cabal/doc-id")).toBe(false);
     // fail-closed on the unknown / unparseable
-    expect(hermCanRead("lar:///ha.ka.ba/bags/@some-operator-bag/x")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/bags/some-operator-bag/x")).toBe(false);
     expect(hermCanRead("not-a-lar-uri")).toBe(false);
   });
 
@@ -294,13 +294,13 @@ describe("★ the classifier REFUSES what the grammar never declared ★", () =>
   // kind-segment. The reads then failed closed only because the caller's allowlist happened not to name
   // those: the right verdict by accident of a list, from a classifier giving the wrong answer.
   test("★ a bag surface names its bag ★", () => {
-    expect(bagOf("lar:///ha.ka.ba/bags/@daemon/flows/crystal")).toBe("@daemon");
-    expect(bagOf("lar:///ha.ka.ba/bags/@lares")).toBe("@lares");
+    expect(bagOf("lar:///ha.ka.ba/bags/daemon/flows/crystal")).toBe("daemon");
+    expect(bagOf("lar:///ha.ka.ba/bags/lares")).toBe("lares");
   });
 
   test("a meme namespace belongs to the bag of the same name", () => {
-    expect(bagOf("lar:///ha.ka.ba/lares/api/pono/persona-circle")).toBe("@lares");
-    expect(bagOf("lar:///ha.ka.ba/lararium/mesh/open-vessel")).toBe("@lararium");
+    expect(bagOf("lar:///ha.ka.ba/lares/api/pono/persona-circle")).toBe("lares");
+    expect(bagOf("lar:///ha.ka.ba/lararium/mesh/open-vessel")).toBe("lararium");
   });
 
   test("★ every kind that names NO bag answers undefined, never a bag it never had ★", () => {
@@ -308,7 +308,7 @@ describe("★ the classifier REFUSES what the grammar never declared ★", () =>
     expect(bagOf("lar:///ha.ka.ba/state/boot-splash/active")).toBeUndefined();  // vessel state
     expect(bagOf("lar:///ha.ka.ba/sentinel/persona-group")).toBeUndefined();   // a membership document
     expect(bagOf("lar:///ha.ka.ba/sentinel/kahu-cabal")).toBeUndefined();         // a membership document
-    expect(bagOf("lar:///ha.ka.ba/wikis/@notes")).toBeUndefined();              // a wiki identity
+    expect(bagOf("lar:///ha.ka.ba/wikis/notes")).toBeUndefined();              // a wiki identity
     expect(bagOf("lar:///ha.ka.ba/cid/abc123")).toBeUndefined();                // a content body
   });
 

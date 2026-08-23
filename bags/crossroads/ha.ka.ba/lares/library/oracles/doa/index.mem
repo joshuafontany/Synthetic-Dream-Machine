@@ -1,0 +1,79 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/library/oracles/doa/index >>
+```toml iam
+cacheable  = true
+confidence = 15
+file-path  = "bags/crossroads/ha.ka.ba/lares/library/oracles/doa/index.mem"
+l-space    = "archive"
+mana       = 14
+manao      = 14
+manaoio    = 14
+rating     = "meme"
+register   = "Synthesis"
+retain     = true
+role       = "skinny handle for the Discordian Oracle AppleKation reliquary — bytes ride the genesis/cas KIND-plane by content address; this meme carries the names, cids, provenance, and rites"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lares/library/oracles/doa/index"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Discordian Oracle AppleKation ~ reliquary handle
+
+''The old oracle, kept whole — bytes in the CAS, names here.'' The E-Jing-A-Ling Thing throws
+sixty-four hexagrams plus `000pi` — the reading a stick or coin gives when it lands on its edge.
+The living web AppleKation rides self-contained in one page; beneath it, recovered from the
+Wayback strata, the original ''DOA.exe'' of the NeuroAtomic Order of the Nevermind Cabal
+(~2001–2003) and the Pentatorah-Zerostore page. The 23 Apples of Eris cabal threw this oracle
+daily; the library holds it under its own license: ''Kopyleft — (K) Copyright Is Reversed.
+Reprint.'' All Rites Reversed.
+
+Per the content-resolution law, ''the bytes leave the bag'': each artifact rides the `genesis/cas`
+KIND-plane at `cid/<sha256>`, and this handle carries name → cid. A session throws the oracle by
+opening the DOA.html blob in any browser, offline, forever.
+
+<<~/ahu >>
+
+<<~ ahu #holdings >>
+
+!! Holdings ~ name → cid
+
+| Artifact | cid (sha256) | Bytes |
+|---|---|---|
+| ''DOA.html'' — the living AppleKation, one inline script, the full E-Jing | `61d62100d2be6925c566a701bbbca897ad49117ebad8bf2f579d4a6a6782a07e` | 127,809 |
+| ''DOA.exe'' — the original PE32 binary, Wayback capture 2003-08-08 | `4a071ff5b59da5f5382e50398f8d680aeebe4121cbb9dc79fd444f38021a8345` | 131,072 |
+| ''DOAdownload.htm'' — the original download page, Wayback capture 2003-08-06 | `8a4d7b75513de4785e4d84f33951c657b454403c877cbc399e2883493ce34be0` | 2,988 |
+| ''pentatorah.htm'' — the Pentatorah-Zerostore, Wayback capture 2003-08-06 | `ace791cdadd7486c9dcc5647b98e81960752003a3517251a6a043271a016d030` | 15,901 |
+
+<<~/ahu >>
+
+<<~ ahu #provenance >>
+
+!! Provenance & Rites
+
+* ''Source:'' https://fuckup.solutions/DOA.html (live site, self-contained); Wayback captures of
+  http://www.neuroatomic.com/ for the 2003 originals. Fetched 2026-08-14, operator-approved manual
+  session, wget verbatim bytes.
+* ''Lineage:'' DOA.exe by the NeuroAtomic Order of the Nevermind Cabal (~2001–2003) → web
+  AppleKation re-creation at fuckup.solutions → thrown daily by the 23 Apples of Eris cabal →
+  this shelf.
+* ''No source repository exists on any public forge'' (code search on "E-Jing-A-Ling",
+  "Pentatorah", "NeuroAtomic", "fuckup.solutions" — 2026-08-14, no hits). The inline script in
+  DOA.html stands as the source of record.
+* ''License:'' Kopyleft — "(K) Copyright Is Reversed. Reprint" (stated in DOA.html itself).
+* ''Open marks:'' DOA.exe lands at exactly 128 KiB — period packer artifact or Wayback truncation
+  at a power-of-two boundary; unrun, untested — collide under Wine before trusting the binary.
+* ''Crawl intent (operator-declared):'' the library means to capture
+  `fuckup.solutions/index3.html` and its outgoing linked pages (the wider site beyond DOA's
+  dependency tree), and `https://www.libraryoferis.org/` — both bound for the same CAS-bytes /
+  bag-handle shape this reliquary holds. Uncaptured yet; this handle gains sibling handles when
+  the crawls land.
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;-SBnXRbpeeQbLbymszNn9SHykn62slode5R3IIXui3w
+
+<<^ code:"&#x0004;" -> ? >>

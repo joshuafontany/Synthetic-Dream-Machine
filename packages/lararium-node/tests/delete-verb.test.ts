@@ -17,7 +17,7 @@ import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import { VerbTable } from "../../lararium-tw5/src/verb-dispatcher.js";
 import { registerActionReactors } from "../../lararium-tw5/src/action-handler.js";
 
-const BAG = "lar:///ha.ka.ba/bags/@lares";
+const BAG = "lar:///ha.ka.ba/bags/lares";
 
 function makeComposite(): CompositeStore {
   const c = new CompositeStore();

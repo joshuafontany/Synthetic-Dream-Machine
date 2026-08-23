@@ -9,7 +9,7 @@
  * Proven:
  *   · `circle add <nym> --card --to following --petname` returns 0, dispatches circle-add to the daemon (the
  *     membership lands in @circles, NOT a local `.circles-follow.json`), and writes ONLY the local handle-book
- *     — no board / announce / @crossroads artifact anywhere in the tree (never-federates),
+ *     — no board / announce / crossroads artifact anywhere in the tree (never-federates),
  *   · `circle list` reads the follow back through circle-list (@circles.memberDids) under the OWN names,
  *   · `circle remove` dispatches circle-remove (drops the @circles edge),
  *   · FAIL-CLOSED — following an UNMET nym with NO --card returns non-zero AND dispatches NO circle-add.

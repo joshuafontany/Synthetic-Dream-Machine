@@ -265,7 +265,7 @@ export type { QrImageDecoder } from "./qr-transport.js";
 // (mint/seal/open/ack composing the ceremony + the per-vessel store + the QR render).
 export { offerAdmitFlow, grantAdmitFlow, openAdmitFlow, acceptAdmitFlow, makeLocalPersonaKelHeadResolver } from "./persona-admit-flow.js";
 export type { HopRender } from "./persona-admit-flow.js";
-// The `bags/@nexus` charter DOC adapter — the antigen roster's authority home read/written on disk (#66).
+// The `bags/nexus` charter DOC adapter — the antigen roster's authority home read/written on disk (#66).
 export {
   readNexusDoc, writeNexusDoc, renderNexusDoc, writeNexusSeal, writeNexusKahu, writeNexusPractice,
   nexusCharterDocPath, nexusCharterDocRelPath,

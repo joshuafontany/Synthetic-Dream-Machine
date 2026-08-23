@@ -30,8 +30,8 @@ async function gatherRealSelfEvents(): Promise<Uint8Array[]> {
   const store = new InMemoryEventStore();
   const src = new KeyhiveProvider();
   await src.init({ seed: new Uint8Array(32).fill(1), eventStore: store });
-  await src.registerBag("lar:///ha.ka.ba/bags/@daemon/flatness-a");
-  await src.registerBag("lar:///ha.ka.ba/bags/@daemon/flatness-b");
+  await src.registerBag("lar:///ha.ka.ba/bags/daemon/flatness-a");
+  await src.registerBag("lar:///ha.ka.ba/bags/daemon/flatness-b");
   const bytes = (await store.list()).map((r) => r.bytes);
   await src.dispose();
   return bytes;

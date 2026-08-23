@@ -16,7 +16,7 @@ const OTHER = Uint8Array.from({ length: 32 }, (_, i) => 200 - i);
 const NOW   = 1_000_000;
 
 async function serve(version = 1, seed = SEED): Promise<{ snap: OracleSnapshot; ptr: OraclePointer }> {
-  const doc  = A.from({ tiddlers: { "@oracle": { text: "the constitution" }, beta: { text: "two" } } });
+  const doc  = A.from({ tiddlers: { "oracle": { text: "the constitution" }, beta: { text: "two" } } });
   const snap = await exportOracleSnapshot(doc);
   const ptr  = await buildOraclePointer({ snapshot: snap, version, prev: null, expiry: NOW + 60_000, signerSeed: seed });
   return { snap, ptr };
@@ -45,7 +45,7 @@ describe("oracle-read-client — pull, verify, load across the wire", () => {
     );
     expect(res.ok).toBe(true);
     expect(res.cid).toBe(snap.cid);
-    expect(res.doc!.tiddlers["@oracle"]!.text).toBe("the constitution");
+    expect(res.doc!.tiddlers["oracle"]!.text).toBe("the constitution");
   });
 
   test("pinned publisher: a pointer from the wrong key is refused", async () => {

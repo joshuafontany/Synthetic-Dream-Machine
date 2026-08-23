@@ -41,7 +41,7 @@ describe.skipIf(wikiSkip)(
     });
     // A skinny handle whose body left the CRDT for the cid/ tier — NO text.
     engine.setTiddler({
-      title:          "lar:///ha.ka.ba/bags/@crossroads/library/skinny-book",
+      title:          "lar:///ha.ka.ba/bags/crossroads/library/skinny-book",
       _is_skinny:     "yes",
       _canonical_uri: "lar:///ha.ka.ba/cid/deadbeef",
       _integrity:     "ni:///sha-256;deadbeef",
@@ -52,7 +52,7 @@ describe.skipIf(wikiSkip)(
     // A skinny handle the read-side resolver ALREADY rehydrated into the VM (text present) —
     // the projection MUST still write only the handle, never the whole body.
     engine.setTiddler({
-      title:          "lar:///ha.ka.ba/bags/@crossroads/library/rehydrated-book",
+      title:          "lar:///ha.ka.ba/bags/crossroads/library/rehydrated-book",
       _is_skinny:     "yes",
       _canonical_uri: "lar:///ha.ka.ba/cid/cafef00d",
       _integrity:     "ni:///sha-256;cafef00d",
@@ -91,7 +91,7 @@ describe.skipIf(wikiSkip)(
   });
 
   test("a skinny handle projects its handle alone — the pointer, never the body", () => {
-    const file = exportCarrierFile(engine, "lar:///ha.ka.ba/bags/@crossroads/library/skinny-book");
+    const file = exportCarrierFile(engine, "lar:///ha.ka.ba/bags/crossroads/library/skinny-book");
     expect(file).not.toBeNull();
     // small handle file — carries the content-address + integrity + metadata
     expect(file!.body).toContain("deadbeef");
@@ -102,7 +102,7 @@ describe.skipIf(wikiSkip)(
   });
 
   test("a rehydrated skinny handle STRIPS the body — no re-overflow to disk", () => {
-    const file = exportCarrierFile(engine, "lar:///ha.ka.ba/bags/@crossroads/library/rehydrated-book");
+    const file = exportCarrierFile(engine, "lar:///ha.ka.ba/bags/crossroads/library/rehydrated-book");
     expect(file).not.toBeNull();
     // even with `text` present in the VM, the projected handle omits the body entirely
     expect(file!.body).not.toContain("THE ENTIRE 18MB BOOK BODY");

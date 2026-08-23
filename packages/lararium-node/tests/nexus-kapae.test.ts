@@ -48,7 +48,7 @@ afterEach(() => {
   rmSync(root, { recursive: true, force: true });
 });
 
-/** Seat a legacy-inception charter DOC binding the given verifying keys at 2-of-3 into `bags/@nexus`. */
+/** Seat a legacy-inception charter DOC binding the given verifying keys at 2-of-3 into `bags/nexus`. */
 function seatCharter(keys: string[], threshold = 2): void {
   const doc: NexusDoc = {
     kind: NEXUS_DOC_DOMAIN,

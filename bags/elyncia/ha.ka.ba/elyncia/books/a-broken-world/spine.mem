@@ -1,0 +1,73 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/a-broken-world/spine >>
+```toml iam
+cacheable  = true
+confidence = 10
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/books/a-broken-world/spine.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "spine — Elyncia 01, A Broken World: the walk through the history, the Curse of Iron, and the gazetteer; chunks live at their topical addresses"
+tags       = ["ha.ka.ba/elyncia/books/index"]
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/books/a-broken-world/spine"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Elyncia 01 ~ A Broken World ~ Spine
+
+The history book: the Breakings, the Curse, the gods' changed presence, and the gazetteer of
+every Nexus. Registers braid wonder-voice over rules-voice; the terminal-fiction frames (the
+ddate login, the lares summon) bracket the book and stay with the spine as mortar.
+
+''Spine law:'' the chunks live at their topical graph addresses; this spine holds the walk (the
+reading order) and the mortar (the connective prose, written as chunks land). The kahea calls
+below activate one by one as each chunk meme seats; until then the walk reads as the cut-plan.
+''The source MD stays canonical until this spine renders the book whole.''
+
+<<~/ahu >>
+
+<<~ ahu #walk >>
+
+!! The Walk ~ reading order
+
+# `lar:///ha.ka.ba/elyncia/history/the-first-breaking` — YOLD 1, the War of the Immortals, the void flood, the Gaia portals
+# `lar:///ha.ka.ba/elyncia/history/the-timeline` — the YOLD ledger, First Breaking to present (YOLD 5492)
+# `lar:///ha.ka.ba/elyncia/history/the-second-breaking` — the Necrospire's return, the Day of Falling Stars, the Empire's fall (welds: concepts/the-necrospire)
+# `lar:///ha.ka.ba/elyncia/concepts/curse-of-iron` — the rust-blight ecology, Named iron, the practice list, the three accounts
+# `lar:///ha.ka.ba/elyncia/concepts/gods-after-the-breakings` — immanence modes: Immanent / Distributed / Demi-god agents; the embodied immortals
+# `lar:///ha.ka.ba/elyncia/concepts/magitech-age` — bronze power-armor, laser swords, the jammer taxonomy, power cores
+# `lar:///ha.ka.ba/elyncia/nexuses/` — the gazetteer walk: Eastern Net (new-delos ✓ · neo-thracia · olympian-marches · illyria ✓ · summerlands · winterlands · asgard · brimstone-mountains) then Western Net (verdant-coil · broken-isles · mu · khemet · hawaiki · the desert nexus), each a region-worksheet meme
+# `lar:///ha.ka.ba/elyncia/concepts/present-state` — New Game+: the reopened Neo-Thracia, the factions in motion
+
+//(Cut-plan Provisional; boundaries refine at the close read before each move.)//
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+!! Source Staging
+
+//(Empty by stage-law: verbatim MD blocks land here during the move — the chapter's own
+connective tissue, epigraphs, and any text whose home IS the spine. Uplift to live wikitext
+comes only after all source text reads as moved.)//
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/books/index >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;IXd7BMTfTPHbQAMV08D_q4opAYg4wuuFBpV2q_zMLD4
+
+<<^ code:"&#x0004;" -> ? >>

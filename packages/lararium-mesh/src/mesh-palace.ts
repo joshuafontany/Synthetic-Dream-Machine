@@ -89,7 +89,7 @@ export type WireCap = keyof typeof WIRE_CAPS;
 
 // ── The bag + URI builders ─────────────────────────────────────────────────
 
-/** The mesh-palace bag — `lar:///ha.ka.ba/bags/@meshpalace`. */
+/** The mesh-palace bag — `lar:///ha.ka.ba/bags/meshpalace`. */
 export const MESH_PALACE_BAG = bagUri("meshpalace");
 
 /** A bearing → a filesystem-safe slug for a dial/route tiddler title. */
@@ -412,9 +412,9 @@ export function childCone(parent: AngularCone, index: number, fanout: number): A
 export const HERM_CAPS: readonly WireCap[] = ["rhizome.forward"];
 
 /** The public-floor bags a Herm MAY read — the base ontology, the shared corpus, its own FLOW-map. */
-const HERM_READABLE_BAGS: ReadonlySet<string> = new Set(["@oracle", "@lararium", "@lares", "@meshpalace"]);
+const HERM_READABLE_BAGS: ReadonlySet<string> = new Set(["oracle", "lararium", "lares", "meshpalace"]);
 /** A local operator's sovereign bags — the hearths a Herm NEVER reads (the territory). */
-const SOVEREIGN_BAGS: ReadonlySet<string> = new Set(["@catalog", "@persona", "@daemon"]);
+const SOVEREIGN_BAGS: ReadonlySet<string> = new Set(["catalog", "persona", "daemon"]);
 
 /**
  * Whether a bag slug names a hearth this Herm must never read.
@@ -437,7 +437,7 @@ const MEME_NAMESPACES: ReadonlySet<string> = new Set(["lares", "lararium", "mesh
  * The bag a `lar:///ha.ka.ba/…` URI belongs to, or `undefined` where the URI names no bag.
  *
  * ── IT REFUSES WHAT IT CANNOT NAME ──────────────────────────────────────────────────────────────
- * A surface `…/bags/@bag/…` names its bag directly, and a meme namespace belongs to its same-named bag.
+ * A surface `…/bags/bag/…` names its bag directly, and a meme namespace belongs to its same-named bag.
  * EVERYTHING ELSE reads as `undefined`, and that refusal carries the whole point.
  *
  * The grammar mints first segments that name no bag at all — `tags/`, `state/`, the plugin memes, the
@@ -456,8 +456,8 @@ export function bagOf(uri: string): string | undefined {
   const m = /^lar:\/\/\/ha\.ka\.ba\/([^/]+)/.exec(uri);
   if (!m) return undefined;
   const seg = m[1]!;
-  if (seg === "bags") return /^lar:\/\/\/ha\.ka\.ba\/bags\/(@[^/]+)/.exec(uri)?.[1];
-  if (MEME_NAMESPACES.has(seg)) return `@${seg}`;   // a corpus meme → the bag of the same name
+  if (seg === "bags") return /^lar:\/\/\/ha\.ka\.ba\/bags\/([^/]+)/.exec(uri)?.[1];
+  if (MEME_NAMESPACES.has(seg)) return seg;          // a corpus meme → the bag of the same name
   return undefined;                                  // every other kind names no bag — say so
 }
 

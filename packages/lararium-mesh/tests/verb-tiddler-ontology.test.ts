@@ -14,12 +14,12 @@ import {
 } from "../src/verb-tiddler.js";
 import { larRoot, isStableLarUri } from "../src/lar-uris.js";
 
-const BAG = "lar:///ha.ka.ba/bags/@daemon";
+const BAG = "lar:///ha.ka.ba/bags/daemon";
 
 describe("task/receipt URI ontology (seed)", () => {
   test("taskUri / receiptUri compose bag + kind + id", () => {
-    expect(taskUri(BAG, "abc")).toBe("lar:///ha.ka.ba/bags/@daemon/task/abc");
-    expect(receiptUri(BAG, "abc")).toBe("lar:///ha.ka.ba/bags/@daemon/receipt/abc");
+    expect(taskUri(BAG, "abc")).toBe("lar:///ha.ka.ba/bags/daemon/task/abc");
+    expect(receiptUri(BAG, "abc")).toBe("lar:///ha.ka.ba/bags/daemon/receipt/abc");
     expect(TASK_KIND).toBe("task");
     expect(RECEIPT_KIND).toBe("receipt");
   });
@@ -37,7 +37,7 @@ describe("task/receipt URI ontology (seed)", () => {
     // the URI stays a stable ha.ka.ba address with the id as ONE segment (not a 5th).
     const id  = await taskContentId({ subject: BAG, command: "MOVE", args: { x: 1 } });
     const uri = receiptUri(BAG, id);
-    expect(uri).toBe(`lar:///ha.ka.ba/bags/@daemon/receipt/${id}`);
+    expect(uri).toBe(`lar:///ha.ka.ba/bags/daemon/receipt/${id}`);
     expect(larRoot(uri)).toBe("ha.ka.ba");
     expect(isStableLarUri(uri)).toBe(true);
     expect(uri.split("/").length).toBe(taskUri(BAG, "abc").split("/").length); // id = one segment, colon and all

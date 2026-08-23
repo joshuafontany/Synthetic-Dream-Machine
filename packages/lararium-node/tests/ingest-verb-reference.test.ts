@@ -6,7 +6,7 @@
  * fs-less worker's shore onto the process-shared byte plane — re-verifies cid==hash(bytes),
  * then runs the Confluence gate on the resolved body and lands it in the TARGET bag.
  *
- * This is what keeps an oversized carrier (a whole book) OUT of the @daemon command doc,
+ * This is what keeps an oversized carrier (a whole book) OUT of the daemon command doc,
  * whose automerge scalar-string value overflows past ~2^24 chars. The summons stays lean;
  * the body lands per-carrier in the target. Bag-agnostic — any bag, any oversized carrier.
  *
@@ -21,8 +21,8 @@ import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import { VerbTable } from "../../lararium-tw5/src/verb-dispatcher.js";
 import { registerActionReactors } from "../../lararium-tw5/src/action-handler.js";
 
-const BAG = "lar:///ha.ka.ba/bags/@crossroads";
-const URI = "lar:///ha.ka.ba/bags/@crossroads/library/big-book";
+const BAG = "lar:///ha.ka.ba/bags/crossroads";
+const URI = "lar:///ha.ka.ba/bags/crossroads/library/big-book";
 
 /** Hash of a body's utf8 bytes — the exact content-address `stageBodyToCas` mints and the
  *  handler re-verifies (`sha256HexBytesSync(utf8Bytes(text))`). */
@@ -55,7 +55,7 @@ function casResolver(blobs: Map<string, Uint8Array>): (cid: string) => Promise<U
 
 function ingestArgsByRef(cid: string, diskText: string): Record<string, unknown> {
   return {
-    "source-uri": "file:///corpus/@crossroads/library/big-book.txt",
+    "source-uri": "file:///corpus/crossroads/library/big-book.txt",
     "to-bag":     BAG,
     "change-id":  "chg-ref-1",
     carriers: [{ uri: URI, textCid: cid, diskHash: sha(diskText), syncedHash: null }],
@@ -143,7 +143,7 @@ describe("Stage 2 — oversized carrier → SKINNY HANDLE (body leaves the CRDT)
     const table = new VerbTable();
     registerActionReactors(table, { composite, resolveByCid: exploding });
     const args = {
-      "source-uri": "file:///corpus/@crossroads/library/big-book.txt",
+      "source-uri": "file:///corpus/crossroads/library/big-book.txt",
       "to-bag":     BAG,
       "change-id":  "chg-skinny-1",
       carriers: [{ uri: URI, textCid: cid, size, skinny: true, ext: ".txt", diskHash: sha(body), syncedHash: null }],

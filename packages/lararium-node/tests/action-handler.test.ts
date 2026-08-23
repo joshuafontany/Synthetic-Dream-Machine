@@ -32,9 +32,9 @@ import { runLocalVerb } from "../../lararium-tw5/src/verb-local-dispatch.js";
 // Fixtures
 // ---------------------------------------------------------------------------
 
-const BAG_LOW  = "lar:///ha.ka.ba/bags/@low";
-const BAG_MID  = "lar:///ha.ka.ba/bags/@mid";
-const BAG_HIGH = "lar:///ha.ka.ba/bags/@high";
+const BAG_LOW  = "lar:///ha.ka.ba/bags/low";
+const BAG_MID  = "lar:///ha.ka.ba/bags/mid";
+const BAG_HIGH = "lar:///ha.ka.ba/bags/high";
 
 function makeComposite(): CompositeStore {
   const c = new CompositeStore();
@@ -159,7 +159,7 @@ describe("ADD handler", () => {
     // (Law 4 / confused-deputy guard) and MUST NOT mount the bag ephemerally —
     // the access-reach path resolves the bag's own doc, never a standing mount.
     const handler = table.get("ADD")!;
-    const UNMOUNTED = "lar:///ha.ka.ba/bags/@unmounted-deep-bag";
+    const UNMOUNTED = "lar:///ha.ka.ba/bags/unmounted-deep-bag";
     const args = { title: "T", "from-bag": BAG_LOW, "to-bag": UNMOUNTED, "change-id": cid };
     await expect(handler(args, makeContext(composite, "ADD", args)))
       .rejects.toThrow(/unreachable|no silent fall-through/i);
@@ -211,7 +211,7 @@ describe("MOVE handler", () => {
       ...makeContext(composite, "MOVE", args),
       cap: denyCap(BAG_LOW),
     };
-    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*@low/);
+    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*low/);
   });
 });
 
@@ -303,7 +303,7 @@ describe("LOAD handler", () => {
     registerActionReactors(table, { composite });
     const handler = table.get("LOAD")!;
     const args = {
-      "source-uri": "bags/@lares/api/example.md",
+      "source-uri": "bags/lares/api/example.md",
       "to-bag": BAG_HIGH,
       "change-id": "c-load-1",
       carriers: [{ title: "lar:///ha.ka.ba/lares/example", text: "Aloha — carrier body.\n" }],
@@ -333,7 +333,7 @@ describe("cap-verify gates", () => {
       ...makeContext(composite, "ADD", args),
       cap: denyCap(BAG_HIGH),
     };
-    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*@high/);
+    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*high/);
   });
 
   test("CLEAR rejects when bag cap denied", async () => {
@@ -346,7 +346,7 @@ describe("cap-verify gates", () => {
       ...makeContext(composite, "CLEAR", args),
       cap: denyCap(BAG_MID),
     };
-    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*@mid/);
+    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*mid/);
   });
 });
 
@@ -449,7 +449,7 @@ describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () =>
     const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c" };
     await expect(
       runLocalVerb(invocation("ADD", args), { daemon: composite, registry, verifier: verifier(BAG_HIGH) }),
-    ).rejects.toThrow(/cap-denied.*@high/);
+    ).rejects.toThrow(/cap-denied.*high/);
     expect((await effectRecordsIn(composite)).length).toBe(0); // gated before mutate-then-log
   });
 

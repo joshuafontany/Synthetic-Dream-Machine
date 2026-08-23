@@ -38,7 +38,7 @@ import {
 } from "../src/lar-uris.js";
 
 describe("lar-uris petname regions", () => {
-  const stable = stableLarUri("@oracle"); // lar:///ha.ka.ba/bags/@oracle
+  const stable = stableLarUri("oracle"); // lar:///ha.ka.ba/bags/oracle
   const stableBare = `lar:///${STABLE_L_SPACE}`; // root, no trailing path
   const volatile = volatileVmUri("scratch/x"); // lar:///lararium.local.vm/scratch/x
   const unstable = "lar:///threshold.uncertain.opens/peer/handle"; // a living local petname
@@ -100,15 +100,15 @@ describe("parseMeshScale — federation scale declared on a residency entry", ()
   });
 });
 
-describe("bag / wiki identity — the two kinds the @catalog tracks", () => {
+describe("bag / wiki identity — the two kinds the catalog tracks", () => {
   test("bagUri / wikiUri mint the kind into the first path segment", () => {
-    expect(bagUri("elyncia")).toBe("lar:///ha.ka.ba/bags/@elyncia");
-    expect(wikiUri("elyncia")).toBe("lar:///ha.ka.ba/wikis/@elyncia");
+    expect(bagUri("elyncia")).toBe("lar:///ha.ka.ba/bags/elyncia");
+    expect(wikiUri("elyncia")).toBe("lar:///ha.ka.ba/wikis/elyncia");
   });
 
   test("a leading @ on the slug never doubles", () => {
-    expect(bagUri("@lares")).toBe("lar:///ha.ka.ba/bags/@lares");
-    expect(wikiUri("@lares")).toBe("lar:///ha.ka.ba/wikis/@lares");
+    expect(bagUri("lares")).toBe("lar:///ha.ka.ba/bags/lares");
+    expect(wikiUri("lares")).toBe("lar:///ha.ka.ba/wikis/lares");
   });
 
   test("the two kinds NEVER collide for one slug", () => {
@@ -116,14 +116,18 @@ describe("bag / wiki identity — the two kinds the @catalog tracks", () => {
   });
 
 
-  test("identitySlug reads the slug from all three forms", () => {
+  test("identitySlug reads the slug from BOTH kind-planes, and demands one", () => {
+    // THE SEGMENT IS THE MARKER. `bags/` and `wikis/` say what a name is; the name itself carries nothing.
+    // So the prefix is MANDATORY rather than optional — without it the pattern would match any
+    // single-segment stable address (`lar:///ha.ka.ba/state`, `…/tags`) and hand back a slug for a thing
+    // that names no entity at all.
     expect(identitySlug(bagUri("sdm"))).toBe("sdm");
     expect(identitySlug(wikiUri("sdm"))).toBe("sdm");
-    expect(identitySlug("lar:///ha.ka.ba/@sdm")).toBe("sdm");   // a store written before the rule settled
+    expect(identitySlug("lar:///ha.ka.ba/sdm")).toBeNull();   // no kind-plane, no identity
   });
 
   test("identitySlug returns null for a nested path — a bare identity carries none", () => {
-    expect(identitySlug("lar:///ha.ka.ba/wikis/@lares/drafts/did%3Aweb")).toBeNull();
+    expect(identitySlug("lar:///ha.ka.ba/wikis/lares/drafts/did%3Aweb")).toBeNull();
     expect(identitySlug("lar:///ha.ka.ba/lares/api/noosphere-boot")).toBeNull();
     expect(identitySlug("lar:///threshold.uncertain.opens")).toBeNull();
   });
@@ -176,16 +180,16 @@ describe("@nexus — the confederation plane, scoped per causal island", () => {
   });
 });
 
-describe("@crossroads — the public oracle plane (three-plane model)", () => {
+describe("crossroads — the public oracle plane (three-plane model)", () => {
   test("the three oracle planes are distinct bags — system, private, public never collapse", () => {
     expect(CROSSROADS_DOC_URI).toBe(bagUri("crossroads"));
-    // @oracle (system-island) ⊥ @catalog (private OCAP) ⊥ @crossroads (public)
+    // oracle (system-island) ⊥ catalog (private OCAP) ⊥ crossroads (public)
     expect(new Set([ORACLE_DOC_URI, CATALOG_DOC_URI, CROSSROADS_DOC_URI]).size).toBe(3);
     expect(BAG_IDS.crossroads).toBe(CROSSROADS_DOC_URI);
   });
 
   test("the WHO face's oracle-key rides a DISTINCT plane from its own doc URI (pointer ⊥ target)", () => {
-    // the per-nexus WHO doc lives under @nexus; its oracle-pointer lives under @crossroads — two planes,
+    // the per-nexus WHO doc lives under @nexus; its oracle-pointer lives under crossroads — two planes,
     // one names the doc, the other publishes where to find it to a stranger.
     expect(nexusHandlesUri("nx").startsWith(NEXUS_DOC_URI)).toBe(true);
     expect(nexusHandlesUri("nx").startsWith(CROSSROADS_DOC_URI)).toBe(false);

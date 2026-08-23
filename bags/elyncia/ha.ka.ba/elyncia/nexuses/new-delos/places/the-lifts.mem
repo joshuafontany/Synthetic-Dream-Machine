@@ -1,0 +1,42 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts >>
+```toml iam
+cacheable  = true
+confidence = 10
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "routes — the mana-lift network: the Nexus's vertical pointcrawl legs; keeper unruled"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Mana Lifts
+
+''Kind:'' Routes (the vertical pointcrawl network) · ''Scale:'' Nexus-wide.
+
+Canon: ''mana lifts near the major Lares landmarks'' join the ports of High Delos and Low
+Delos — and since the gradient left islands half-aloft ("half a town up, half at anchor"), the
+lift-traffic threads the whole constellation: sky-hub to ring-port to crater-town. On-lift
+travel runs as Route procedure — timetable and toll, no navigation.
+
+''The open ruling — who keeps the lifts:'' League charter · a Lift-Wardens' guild · the Order
+of Amaranth · or the Lares landmarks themselves as literal route-keepers. The keeper of a Route
+holds a hand on every throat in the Nexus; the referee's choice here writes half the Nexus's
+politics.
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;HnAokXHlVTsFAocqTjhZ9PmrsP6Ju0eKyh601hBU9k4
+
+<<^ code:"&#x0004;" -> ? >>

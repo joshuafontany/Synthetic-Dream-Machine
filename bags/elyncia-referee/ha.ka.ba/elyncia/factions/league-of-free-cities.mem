@@ -1,0 +1,89 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/league-of-free-cities >>
+```toml iam
+cacheable  = true
+confidence = 12
+file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/factions/league-of-free-cities.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 14
+manaoio    = 13
+rating     = "kapu"
+register   = "Synthesis"
+retain     = true
+role       = "faction meme, referee view — the League of Free Cities: the Confederation the Lindwyrm declared over the new DreamNet; structure, members, tensions, and the summit's politics"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/factions/league-of-free-cities"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The League of Free Cities ~ the Confederation
+
+> //"The people are what matter to government, and a government should aim to give all the people under its jurisdiction the best possible life."//
+>
+> — Recovered from the //Scrolls of the Great Realignment//, Circa 3101 YOLD.
+> Attributed to Perkins the Unwavering, High Warrior Queen of the Bureaucratic Grid during the War against the T.H.U.D. Realm.
+
+''The founding:'' YOLD 5002 — with the New Delos Nexus stabilized and High Delos aloft, the
+Lindwyrm transmits the ''Declaration of Confederation'' over the new DreamNet, forming the
+League of Free Cities. ''The Ouroborous and Brimstone Courts join at the founding'', along with
+''the Aliʻi of Hawaiki'' — the Nexus that drifts through the Astral Sea in an unstable orbit.
+The Dominion of Magic answers by annexing the nearest city-states and setting its sky-castles
+to patrol; the Kemetic gods pull inward and close the open routes. The League and the Dominion
+have defined each other's borders ever since.
+
+<<~/ahu >>
+
+<<~ ahu #structure >>
+
+!! Structure ~ how the Confederation runs
+
+* ''The League council'' seats at High Delos — Delian-League-style politics: a hegemonic patron
+  who insists she holds no throne, member cities that agree loudly and hedge quietly.
+* ''The Lindwyrm'' stands recorded as ruler of New Delos and founder of the League — and
+  practices patronage rather than command; the distinction does real work and the council
+  knows exactly how much.
+* ''The merchant families and High Delos naval guilds'' carry the working weight: convoys,
+  charters, tariffs, the route-prism monopolies.
+* ''Member powers'' (partial): the Free Cities of the Eastern archipelagos · the Ouroborous
+  Court (mobile, at war with the undead hordes) · the Brimstone Court (crucible steel,
+  Named firearms) · the Aliʻi of Hawaiki (drifting, sovereign, indispensable to Astral
+  navigation).
+
+<<~/ahu >>
+
+<<~ ahu #referee-tensions >>
+
+!! Referee Tensions
+
+* ''The epigraph cuts both ways.'' Perkins's recovered creed rides as the League's favorite
+  quotation — and the referee's question at every council scene: which members believe it,
+  which recite it, and which find "all the people under its jurisdiction" a phrase worth
+  lawyering. The Great Realignment scrolls predate the Second Breaking by two millennia;
+  claiming their authority costs nothing and promises everything.
+* ''Standing frictions:'' political intrigue among the Free Cities · smuggling wars in the
+  contested Astral waters · relic-hunters destabilizing the Low Delos floors the League's
+  legitimacy partly rests on guarding · the Dominion border, always.
+* ''The summit'' (House of Masks, YOLD 5492): formally an Adventurer's Guild recruitment;
+  practically a League instrument — every faction rep the Patroness feeds for a week returns
+  home carrying an impression of League hospitality, League reach, and the empty Neo-Thracian
+  seat nobody could fill. The Confederation grows the way it was founded: by broadcast,
+  generosity, and letting others notice the alternative.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier >>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;Qoj2DE2cYvxYPnq14oQgv211n1u_rqikyAmcD_E577s
+
+<<^ code:"&#x0004;" -> ? >>

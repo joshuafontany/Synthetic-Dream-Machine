@@ -31,7 +31,7 @@ const contractFixture = JSON.parse(readFileSync(
 
 describe("hasWikiSensorium — node tier", () => {
   test("contributes its own cap fragment without naming the vessel's full stack", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-contract", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/sensorium-contract", GLUE_SEEDS);
     const sense = createWikiSensorium(island);
     expect(sense.contract).toEqual(contractFixture.wiki);
     sense.dispose();
@@ -80,7 +80,7 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("content and structure tiers read the resolved corpus (title probe · sigil-head probe)", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-tiers", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/sensorium-tiers", GLUE_SEEDS);
     const sense = createWikiSensorium(island);
     try {
       const byTitle = await sense.recall({ text: "canon" });
@@ -96,7 +96,7 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("the volatile memo dies when the log moves — a write invalidates, the next read re-folds", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-memo", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/sensorium-memo", GLUE_SEEDS);
     const sense = createWikiSensorium(island);
     const origin: ChangeOrigin = { kind: "canon-hydrate", receipt: "memo-test" };
     try {
@@ -113,12 +113,12 @@ describe("hasWikiSensorium — node tier", () => {
   });
 
   test("the island cap claims the three verb signals and posts SENSORIUM_FRAME answers", async () => {
-    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/@sensorium-cap", GLUE_SEEDS);
+    const island = await buildFixtureIsland("lar:///ha.ka.ba/bags/sensorium-cap", GLUE_SEEDS);
     const posted: Array<Record<string, unknown>> = [];
     // a minimal island context — only the shores this cap touches (composite · post · wikiUri).
     const ctx = {
       composite: island,
-      wikiUri: "lar:///ha.ka.ba/bags/@sensorium-cap",
+      wikiUri: "lar:///ha.ka.ba/bags/sensorium-cap",
       post: (msg: unknown) => { posted.push(msg as Record<string, unknown>); },
     } as unknown as IslandContext;
 

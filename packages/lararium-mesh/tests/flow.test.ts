@@ -7,10 +7,10 @@ import {
 import { DAEMON_BAG_ID } from "../src/lar-uris.js";
 
 // The Flow surface: a pet-name IS the address; a flow is a composed cap-stack + targeting,
-// stored as a @daemon tiddler and called by ONE verb. These assert the schema, not a compute.
+// stored as a daemon tiddler and called by ONE verb. These assert the schema, not a compute.
 
 describe("flow — pet-named cap-stacks that kill verb sprawl", () => {
-  test("flowUri addresses a flow by its pet-name in the @daemon bag", () => {
+  test("flowUri addresses a flow by its pet-name in the daemon bag", () => {
     expect(flowUri("crystal")).toBe(`${DAEMON_BAG_ID}/flows/crystal`);
     expect(flowUri("rhythm")).toBe(`${DAEMON_BAG_ID}/flows/rhythm`);
   });
@@ -34,7 +34,7 @@ describe("flow — pet-named cap-stacks that kill verb sprawl", () => {
     expect(couple.capStack.find((s) => s.instrument === "mismatch")?.hull).toBe("daemon");
   });
 
-  test("buildFlowTiddler stamps a seed into a stored tiddler — title from the pet-name, @daemon bag", () => {
+  test("buildFlowTiddler stamps a seed into a stored tiddler — title from the pet-name, daemon bag", () => {
     const t: FlowTiddler = buildFlowTiddler(flowSeedByPetname("crystal")!, "did:key:zTest", "2026-07-24T00:00:00Z");
     expect(t.title).toBe(flowUri("crystal"));
     expect(t.bag).toBe(DAEMON_BAG_ID);

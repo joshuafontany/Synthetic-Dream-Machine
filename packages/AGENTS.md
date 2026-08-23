@@ -121,7 +121,7 @@ Runtime       openNodeVessel  /  openBrowserVessel          finds docs, wires la
 
 ### Admin VM (landed)
 
-Admin state lives in its own Automerge doc at `lar:///ha.ka.ba/bags/@admin` (bag URI; aligned to the bag-tag rule in [lar-uri.md](../bags/@lares/ha.ka.ba/lares/api/pono/lar-uri.md)). The logical room presents at `lar:///ha.ka.ba/lararium/rooms/admin` (room URI). Two URIs, one doc — the bag-as-doc invariant gives admin its own sync boundary. The admin VM hosts itself through `open-admin-vm` (node) and `open-browser-admin-vm` (browser); bag-mirror configs ride as `$:/tags/LarariumBagMirror` tiddlers inside admin.
+Admin state lives in its own Automerge doc at `lar:///ha.ka.ba/bags/admin` (bag URI; aligned to the bag-tag rule in [lar-uri.md](../bags/lares/ha.ka.ba/lares/api/pono/lar-uri.md)). The logical room presents at `lar:///ha.ka.ba/lararium/rooms/admin` (room URI). Two URIs, one doc — the bag-as-doc invariant gives admin its own sync boundary. The admin VM hosts itself through `open-admin-vm` (node) and `open-browser-admin-vm` (browser); bag-mirror configs ride as `$:/tags/LarariumBagMirror` tiddlers inside admin.
 
 Operator-private to one node, federated to the operator's own devices via `cap=admin` device delegations through `@lararium/keyhive`.
 
@@ -151,7 +151,7 @@ Projections register as kinds with `LarProjectionRegistry`. The node-scoped `dis
 
 **Capability layer is the only authority gate.** Do not invent ad-hoc auth checks; route through `@lararium/keyhive` or the `admin-auth-gate` in `@lararium/node`.
 
-**Bag URI law.** Bag tags occupy `child[1]` only. Do not promote a `child[N]` sigil to bag identity. See [lar-uri.md](../bags/@lares/ha.ka.ba/lares/api/pono/lar-uri.md).
+**Bag URI law.** Bag tags occupy `child[1]` only. Do not promote a `child[N]` sigil to bag identity. See [lar-uri.md](../bags/lares/ha.ka.ba/lares/api/pono/lar-uri.md).
 
 <<~/ahu >>
 
@@ -225,7 +225,7 @@ Watch these current weak spots:
 
 Prefer one shore per loop. Patch the package that owns the behavior. Add or update a test near the owner package. Keep canon, room, user, and session layers distinct in names and code paths.
 
-Before changing a public export, check browser and node consumers (and `@lares/cli`, which depends on both `@lararium/mesh` and `@lararium/node`). Before changing parser or carrier grammar, check `bags/@lares/ha.ka.ba/lares/api/pono/`, `bags/@lares/ha.ka.ba/lares/docs/pono/`, and core parser tests. Before changing TW5 sync, check echo-loop guards and draft guards.
+Before changing a public export, check browser and node consumers (and `@lares/cli`, which depends on both `@lararium/mesh` and `@lararium/node`). Before changing parser or carrier grammar, check `bags/lares/ha.ka.ba/lares/api/pono/`, `bags/lares/ha.ka.ba/lares/docs/pono/`, and core parser tests. Before changing TW5 sync, check echo-loop guards and draft guards.
 
 Documentation memes go to `bags/` as `.md` files. `.tid` files live in TW5 packages and carry runtime widget / procedure code only.
 

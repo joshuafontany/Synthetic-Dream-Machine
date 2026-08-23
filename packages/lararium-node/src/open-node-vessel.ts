@@ -494,7 +494,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // The node IS the confederation anchor: its own gate key IS its Nexus key (the same key browsers
   // pass as relayGatePubKey, and the deterministic antigen-board id is a pure function of it). The
   // holder resolves the always-carried antigen board, folds the quorum-signed bans against the
-  // founding-kahu roster read off `bags/@nexus` (LAR_BAGS ?? <root>/bags), and re-folds on every board
+  // founding-kahu roster read off `bags/nexus` (LAR_BAGS ?? <root>/bags), and re-folds on every board
   // change. FAILS CLOSED: an unseated charter → empty roster → nothing Kapae'd (no quorum, no bans).
   // The Nexus SEAL homes PER-OPERATOR (`<lares>/nexus`), never in the corpus bags tree: a seal sited in the
   // corpus inherits that tree's home, which on a development install sits inside the repository. The seal
@@ -510,7 +510,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   antigenRing = antigenHolder.ring;
 
   // Stand the @nexus membership consult now the operator's own verifying key is loaded — the carry-split's
-  // member gate. It reads the SAME `bags/@nexus` charter roster the antigen folds against (the seated-kahu
+  // member gate. It reads the SAME `bags/nexus` charter roster the antigen folds against (the seated-kahu
   // keys as the conservative provable-member floor; see nexus-membership for the surfaced members-registry
   // fork) and resolves a peerId → nym off the same proven `peerIdentifierMap`. FAILS CLOSED: an unseated
   // charter → empty member set → every cross-operator STRANGER (public-read only), never a false member.
@@ -1599,21 +1599,21 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
     const workerRootDir = rootDirOpt ?? repoRoot;
     const diskMirrorGrant: DiskMirrorGrant = [
-      { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares"),    scope: "@lares" },
-      { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium"), scope: "@lararium" },
+      { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/lares"),    scope: "@lares" },
+      { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/lararium"), scope: "@lararium" },
       // @crossroads = the PUBLIC plane's seed/canon bag — it holds the moved public-domain
       // library (raw .txt books + .mem memes with large source ahus). It projects to
-      // bags/@crossroads like the other seed bags. Safe to project ONLY with the skinny-handle
+      // bags/crossroads like the other seed bags. Safe to project ONLY with the skinny-handle
       // rule in place (T3): a book too big for the CRDT lands as a skinny handle, and the
       // projector writes only its handle — the body stays in the cid/ CAS, never re-overflowing.
-      { bagId: CROSSROADS_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@crossroads"), scope: "@crossroads" },
-      // working = the live write layer; projects per-wiki to wikis/@{slug} (BOTH
-      // the bag `wikis/@{slug}/working` and the leaf fill from the slug at mount —
+      { bagId: CROSSROADS_DOC_URI, mirrorRoot: join(workerRootDir, "bags/crossroads"), scope: "@crossroads" },
+      // working = the live write layer; projects per-wiki to wikis/{slug} (BOTH
+      // the bag `wikis/{slug}/working` and the leaf fill from the slug at mount —
       // wikiSlot). The authority (the wikis base) stays static here; designation
       // rides the recipe's mirrorBags.
       { bagId: "@working",       mirrorRoot: join(workerRootDir, "wikis"),          scope: "@working", wikiSlot: "working" },
       // self-canon = the per-wiki CANON authority: a minted user wiki's own
-      // @{slug} bag projects to bags/@{slug} (both bagId and leaf fill from the
+      // @{slug} bag projects to bags/{slug} (both bagId and leaf fill from the
       // slug at mount). System wikis (@lares/@lararium) carry literal grants
       // above, so resolveDiskMirrors skips this for them — no double-project.
       { bagId: "@self",          mirrorRoot: join(workerRootDir, "bags"),           scope: "@self",    perWikiSlug: true, selfCanon: true },

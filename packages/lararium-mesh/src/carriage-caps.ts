@@ -186,7 +186,7 @@ export function deriveMeshSelf(
   const label = opts.label ?? u.toString(36).slice(2, 8);
   return {
     endpoint: publicUrl,
-    bearing:  `lar:///ha.ka.ba/bags/@oracle/node/${label}`,
+    bearing:  `lar:///ha.ka.ba/bags/oracle/node/${label}`,
     // The radius arrives as a PARAMETER, never read from a host environment here. This module rides the
     // isomorphic barrel, so a global read would resolve on one platform and throw on the other — and it
     // would stay latent for exactly as long as no browser caller reached this function. The node entry
@@ -206,7 +206,7 @@ export function deriveMeshLeaf(
 ): MeshSelf {
   const u = hashUnit(coordSeed);
   return {
-    bearing: `lar:///ha.ka.ba/bags/@oracle/leaf/${u.toString(36).slice(2, 8)}`,
+    bearing: `lar:///ha.ka.ba/bags/oracle/leaf/${u.toString(36).slice(2, 8)}`,
     coord:   { theta: u * 2 * Math.PI, r: opts.radius ?? 1 },
     peers,
     // no endpoint → a LEAF (the Spore-Diver's one-field tier: carry-in only, not dial-able)

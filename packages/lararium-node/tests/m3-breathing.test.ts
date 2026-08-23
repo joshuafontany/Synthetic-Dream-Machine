@@ -48,8 +48,8 @@ const ISLAND_JS   = new URL("../dist/src/node-wiki-island.js", import.meta.url);
 const missingGenesis = !existsSync(GENESIS_BIN);
 const missingIsland  = !existsSync(fileURLToPath(ISLAND_JS));
 const skipReason =
-  missingGenesis ? "genesis/island.bin absent — run: pnpm --filter @lararium/node build:genesis" :
-  missingIsland  ? "dist/src/node-wiki-island.js absent — run: pnpm --filter @lararium/node build"  :
+  missingGenesis ? "genesis/island.bin absent — run: pnpm --filter lararium/node build:genesis" :
+  missingIsland  ? "dist/src/node-wiki-island.js absent — run: pnpm --filter lararium/node build"  :
   false;
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -75,7 +75,7 @@ function waitFor<T>(
 
 // ── Constants ──────────────────────────────────────────────────────────────
 
-const WIKI_ID    = "lar:///ha.ka.ba/bags/@test/m3-breathing";
+const WIKI_ID    = "lar:///ha.ka.ba/bags/test/m3-breathing";
 const BUTTON_URI = "lar:///test/instances/move-button-1";
 const TIMEOUT    = 30_000;
 
@@ -105,7 +105,7 @@ describe.skipIf(skipReason)(
 
         expect(coreHash, "genesis must carry ENGINE_CORE_ID coreHash").not.toBeNull();
 
-        // ── Vessel repo — imports genesis so island can sync @lararium ────
+        // ── Vessel repo — imports genesis so island can sync lararium ────
         const vesselRepo    = new Repo({ sharePolicy: async () => true });
         const laraiumHandle = vesselRepo.import<LarDoc>(genesisBytes);
 
@@ -136,7 +136,7 @@ describe.skipIf(skipReason)(
 
         try {
           // Caller hands typed grants (isomorphic with the browser vessel):
-          // @lararium (TW5 core bytes) + the wiki doc. mountWiki awaits ea.
+          // lararium (TW5 core bytes) + the wiki doc. mountWiki awaits ea.
           await pool.mountWiki(WIKI_ID, {
             coreHash,
             recipe:   { wikiSlug: "test" },

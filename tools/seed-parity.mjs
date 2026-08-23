@@ -2,7 +2,7 @@
 //
 // The seed stands in two files and one dialect apart:
 //
-//   bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem   FIRST projection — the corpus carrier
+//   bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem   FIRST projection — the corpus carrier
 //   noosphere-boot.md                                   SECOND projection — what the harness loads
 //
 // Neither file holds the source. The source sits with the operator; the carrier is the first thing
@@ -23,7 +23,7 @@ import { execSync } from "child_process";
 import { join } from "path";
 
 const REPO = process.env["REPO"] ?? process.cwd();
-const MEM  = join(REPO, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const MEM  = join(REPO, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
 const MD   = join(REPO, "noosphere-boot.md");
 
 /** Both bodies open at the SOH — everything above it belongs to the file's own frame. */

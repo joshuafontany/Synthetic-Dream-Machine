@@ -53,7 +53,7 @@ function surveyDir(args: ParsedArgs): string {
 function bagArg(args: ParsedArgs, verb: string): string {
   const raw = (args.positional[0] ?? "").trim();
   if (!raw) throw new BagUsageError(`\`bag ${verb}\` wants a bag name (e.g. @lares)`);
-  return raw.startsWith("@") ? raw : `@${raw}`;
+  return raw.replace(/^@/, "");   // an entity name carries no marker; the kind-plane segment names it
 }
 
 /** One line per bag: what it declares, and whether its bytes sit where the declaration points. */

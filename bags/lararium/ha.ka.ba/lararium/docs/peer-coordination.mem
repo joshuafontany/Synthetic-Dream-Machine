@@ -1,0 +1,209 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/peer-coordination >>
+```toml iam
+cacheable = true
+file-path = "bags/lararium/ha.ka.ba/lararium/docs/peer-coordination.mem"
+mana      = 18
+manao     = 18
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "Peer rendezvous + doc coordination doctrine — island-file model, CRDT reconcile, Keyhive path, ReactionEngine invariants"
+tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/local-first"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lararium/docs/peer-coordination"
+```
+
+<<^ code:"&#x0002;" >>
+
+! Peer Coordination — Automerge Rendezvous Doctrine
+
+!! The Yjs / Automerge Difference
+
+In Yjs, room name = doc identity. Two peers calling `new Y.Doc()` with the same
+provider room string rendezvous automatically — the provider maps name → CRDT state.
+
+In `@automerge/automerge-repo`, doc identity is a random UUID (`AutomergeUrl`).
+Two `repo.create()` calls always produce two ''separate, non-merging documents''.
+`Repo.import(binary)` does NOT produce a deterministic URL from content — it
+generates a new random UUID per import. There is no native content-addressed
+rendezvous primitive.
+
+''Corollary:'' any system that lets two peers independently create "the same wiki"
+without sharing a URL produces two hermetic worlds that never merge.
+Patching this at the ReactionEngine layer treats a coordination failure as an
+application concern — wrong layer.
+
+!! The UEFN Lesson: Author-Time Identity
+
+UEFN/Verse handles island-level shared state through ''device identity assigned''
+''at author-time (edit-time), not at boot-time''. Devices are placed in the island
+editor, receive stable UUIDs from the editor, and those IDs are checked into the
+project. The island file IS the rendezvous — runtime code never calls "create new
+device"; it calls "find device at this author-assigned ID."
+
+''This is the strongest design lesson for LarariumIsland:''  
+Wiki docUrl assignment must move from boot-time (`repo.create()`) to author-time
+(committed island definition). Peers never create predefined wikis; they join them.
+
+!! Canonical Architecture
+
+```
+lararium-island.ts  ←  committed deployment artifact (the island file)
+  ISLAND.catalogDocUrl  — automerge URL created once, committed to repo
+  ISLAND.wikis[id]      — automerge URL per wiki, created once, committed
+        │
+        ▼
+All peers: repo.find(ISLAND.wikis["garden"])  ←  join, never create
+        │
+        ▼
+AutomergeDocStore  ←  one CRDT truth per wiki
+        │
+        ├── MemeSyncAdaptor (per peer)  ←  TW5 VM is a read projection
+        └── ReactionEngine (per peer)  ←  fires locally, writes to shared store
+```
+
+The island file is the deployment's rendezvous. It lives in git. It is committed
+once by the island author and never regenerated at runtime.
+
+!! Dynamic Wiki Bootstrap Protocol
+
+For wikis NOT in the island file (user-created at runtime), the catalog-doc
+pattern handles coordination:
+
+```
+1. repo.find(ISLAND.catalogDocUrl) → catalogHandle
+   (waitHandleLocal: serve from NodeFS/IndexedDB first; merge remote opportunistically)
+
+2. canonicalUrl = catalogHandle.doc().wikis[wikiId]?.contentDocUrl
+
+3a. if present → repo.find(canonicalUrl)  [fast path, no race]
+
+3b. if absent →
+      myHandle = repo.create({})
+      catalogHandle.change(doc => {
+        doc.wikis[wikiId] = { contentDocUrl: myHandle.url }
+      })
+      await tick  // let Automerge resolve concurrent writes by actor-ID + Lamport clock
+      canonicalUrl = catalogHandle.doc().wikis[wikiId].contentDocUrl
+      if canonicalUrl !== myHandle.url →
+        // lost the CRDT race — migrate writes and discard orphan
+        Automerge.merge(canonicalDoc, myHandle.doc())  // rebase local changes
+        repo.find(canonicalUrl)                        // join canonical
+      else →
+        myHandle  // won the race
+```
+
+Automerge's LWW map resolves concurrent `wikis[wikiId]` writes deterministically
+by actor-ID + Lamport timestamp. The losing peer migrates via `Automerge.merge()`
+(valid because both docs share intended content), then discards its orphan URL.
+
+!! Keyhive Path (Sprint-future)
+
+Keyhive (Ink & Switch — Zelenka, Mumm, Good) builds Automerge-native access
+control. Correction from prior notes:
+
+* ''Doc IDs are NOT Ed25519 public keys.'' Automerge doc URLs remain random UUIDs
+  (`automerge:<base58-uuid>`). Keyhive adds an access-control layer ON TOP — it does
+  not change the URL scheme.
+* ''Individuals'' have stable Ed25519 keypairs → DIDs. ''Documents'' have their own
+  Keyhive group structure (separate from the individual's key).
+* ''"Add member"'' is a signed operation committed to the doc's Keyhive ACL log,
+  referencing the new peer's Ed25519 public key. No separate invite token — the
+  signed "add" entry IS the invitation artifact, delivered out-of-band then
+  applied when the peer connects.
+* ''Convergent Capabilities'' replace UCAN JWTs with CRDT-compatible capability
+  tokens. Concurrent delegation and revocation resolve without coordination.
+* ''Group Management CRDT'' handles wiki membership (who can write) as Automerge
+  ops — self-certifying, no server vote required.
+* ''Beelay'' (automerge/beelay) is the companion sync protocol. It operates over
+  ciphertext only (servers never see plaintext). Peers authenticate the connection
+  and advertise which docs they hold capability for — the catalog problem dissolves
+  into capability propagation.
+
+In a Keyhive-integrated system: ''only the island author creates wiki docs; all''
+''others receive a "add member" signed op referencing their Ed25519 key, then join''
+''via `repo.find(url)` where url was exchanged out-of-band (invitation link, DID''
+''service endpoint, or social graph record)''. The `sharePolicy` stub
+(`async () => true`) is replaced by a Keyhive capability check.
+
+Until Keyhive stabilizes (currently experimental/Rust-only): `sharePolicy` remains
+open, the island file provides static rendezvous, and the catalog protocol handles
+dynamic wikis.
+
+!! ReactionEngine Write-Back Invariants
+
+`ReactionEngine` runs per-peer. Some reactions write back to the shared CRDT store.
+Five invariants must hold for write-back to be safe:
+
+''1. Canonical URL confirmed before any write-back.''  
+The engine must resolve catalog consensus before accepting writes for a given wiki.
+Wikis gate on state: `BOOTSTRAPPING → RESOLVING → OPEN`. Write-back is legal only
+in `OPEN` state.
+
+''2. Outputs must be content-addressed (idempotent).''  
+`store.put(record)` only. Never `store.append()`, never counter increments.
+Two ReactionEngines firing the same reaction on the same input must produce
+identical `store.put()` calls — Automerge deduplicates naturally.
+If output depends on peer-local state (timestamp, random ID), the reaction is
+non-idempotent and must be capability-gated (see #4).
+
+''3. Orphan docUrl writes are silently dropped.''  
+After catalog resolution, any write targeted at a losing docUrl is either
+re-routed to the canonical URL or dropped with a logged error. A write to an
+orphan is invisible to the canonical doc and must never be silently accepted.
+
+''4. Non-idempotent reactions gated to authoritative peer.''  
+```typescript
+// In ReactionEngine._fireForUri:
+if (!isIdempotent(binding) && !peer.capabilities.authoritativeReactions) return;
+```
+`PEER_CAPABILITIES_NODE` sets `authoritativeReactions: true`.  
+`PEER_CAPABILITIES_BROWSER` sets `authoritativeReactions: false`.  
+Non-idempotent reactions (generate summary tiddler, send notification) fire exactly
+once — on the node peer — never N times across N browser peers.
+
+''5. Stable actorId per node, not per boot.''  
+Automerge's LWW conflict resolution uses actor IDs + Lamport timestamps. If the
+ReactionEngine writes as "the system," that actor must have a persistent identity
+derived from the node's keypair — not regenerated per boot. Unstable actor IDs
+cause spurious conflicts and make LWW resolution non-deterministic across restarts.
+
+!! Automerge-Repo: What the Official Docs Say
+
+The Automerge team's canonical pattern for multi-peer root docs
+(`automerge.org/docs/tutorial/persist-root-doc/`):
+
+```ts
+let rootDocUrl = localStorage.rootDocUrl
+if (!rootDocUrl) {
+  const handle = repo.create()
+  localStorage.rootDocUrl = rootDocUrl = handle.url
+}
+const root = repo.find(rootDocUrl)
+```
+
+`repo.import(binary, docId)` can merge orphan docs but ''only if they share''
+''history'' — the docs explicitly warn against assigning the same ID to documents
+that never shared any history. This confirms no native content-addressed
+rendezvous exists; the island file approach is the correct solution.
+
+`automerge-repo-bundles` (Repo 2.0, May 2025) allows serializing multiple docs
+with their IDs as a single import payload — relevant for shipping the initial
+island definition bundle to new nodes.
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/island >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-engine >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/keyhive >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/beelay >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;u3jZpC5qC1DyIxIUqh930pQ5mepHRQ1HZ5OguBQVtZ4
+
+<<^ code:"&#x0004;" -> ? >>

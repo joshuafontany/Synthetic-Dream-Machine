@@ -36,7 +36,7 @@ import { verifyAuthProof } from "@lararium/mesh";
 import type { AuthVerifierShore } from "@lararium/mesh";
 import { DaemonAuthGate } from "../src/daemon-auth-gate.js";
 
-const AUD = "lar:///ha.ka.ba/bags/@daemon";
+const AUD = "lar:///ha.ka.ba/bags/daemon";
 const envOf = (k: string, d = ""): string => process.env[k] ?? d;
 const PORT   = Number.parseInt(envOf("LAR_CROSSING_PORT", "8080"), 10);
 const SHARED = envOf("LAR_CROSSING_SHARED");
@@ -117,7 +117,7 @@ async function main(): Promise<void> {
   gate.arm(makeCapabilityShore(gatePubKey, admitted), AUD, gatePubKey);
 
   const doc = repo.create<{ tiddlers: Record<string, { text: string }> }>({ tiddlers: {} });
-  doc.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@crossroads/greeting"] = { text: GREET }; });
+  doc.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/crossroads/greeting"] = { text: GREET }; });
 
   await new Promise<void>((resolve, reject) => {
     http.listen(PORT, "0.0.0.0", () => resolve());
@@ -131,7 +131,7 @@ async function main(): Promise<void> {
 
   // Stay alive; watch for the client's write-back to witness the bidirectional breath.
   doc.on("change", () => {
-    if (doc.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/@personal/reply"]) {
+    if (doc.doc()?.tiddlers?.["lar:///ha.ka.ba/bags/personal/reply"]) {
       console.log(`[crossing-daemon] ✓ observed the browser leaf's write-back — the breath runs both ways`);
       writeFileSync(join(SHARED, "daemon-saw-reply"), "ok");
     }

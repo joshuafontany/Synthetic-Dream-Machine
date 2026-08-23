@@ -20,9 +20,9 @@ import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
-const BOOT_PROJ = "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem";
-const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
+const BOOT_MEME = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const BOOT_PROJ = "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem";
+const LARES_URI = "lar:///ha.ka.ba/bags/lares";
 
 let lar: LarInstance;
 let projected = "";
@@ -51,7 +51,7 @@ async function awaitSettled(quietMs = 4_000, timeoutMs = 60_000): Promise<string
 }
 
 function ingest(args: string[]): ReturnType<LarInstance["cli"]> {
-  return lar.cli(["ingest", "--source", join(lar.root, "bags/@lares"), "--to", LARES_URI, ...args, "--json"]);
+  return lar.cli(["ingest", "--source", join(lar.root, "bags/lares"), "--to", LARES_URI, ...args, "--json"]);
 }
 
 beforeAll(async () => {
@@ -112,7 +112,7 @@ describe("ingest quiescence — the composed loop holds still", () => {
 
   test("Q4 — the NFC membrane assertion refuses foreign normal forms loudly", async () => {
     if (lar.mode !== "staged") return;
-    const nfdPath = join(lar.root, "bags/@lares/ha.ka.ba/lares/api/nfd-probe.mem");
+    const nfdPath = join(lar.root, "bags/lares/ha.ka.ba/lares/api/nfd-probe.mem");
     const body = readFileSync(projected, "utf8")
       .replace(/noosphere-boot/g, "nfd-probe")
       .replace("! Entry", "! Entrée".normalize("NFD"));   // é as e + combining accent (wikitext heading)

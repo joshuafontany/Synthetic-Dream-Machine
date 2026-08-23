@@ -26,9 +26,9 @@ describe("the FLOW-map read-face — a Herm serves the public projection, shore 
 
     // a mesh-palace doc: one PUBLIC dial (dreamnet scale, crosses) + one vessel-LOCAL dial (no scale, stays).
     const pub = dialEntryToRecord(
-      { bearing: "lar:///ha.ka.ba/bags/@oracle", verifyingKeyHex: "a".repeat(64), endpoint: "ws://relay/p", scale: "dreamnet" }, "test");
+      { bearing: "lar:///ha.ka.ba/bags/oracle", verifyingKeyHex: "a".repeat(64), endpoint: "ws://relay/p", scale: "dreamnet" }, "test");
     const loc = dialEntryToRecord(
-      { bearing: "lar:///ha.ka.ba/bags/@daemon", verifyingKeyHex: "b".repeat(64), endpoint: "ws://local/q" }, "test");
+      { bearing: "lar:///ha.ka.ba/bags/daemon", verifyingKeyHex: "b".repeat(64), endpoint: "ws://local/q" }, "test");
     const handle = repo.create<MeshPalaceDoc>({
       schemaVersion: "0.1",
       tiddlers: { [pub.tiddler.title]: pub, [loc.tiddler.title]: loc },

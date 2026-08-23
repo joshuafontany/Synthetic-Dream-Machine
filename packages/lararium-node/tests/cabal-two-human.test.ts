@@ -18,7 +18,7 @@ async function makeHuman(fill: number): Promise<KeyhiveProvider> {
   await p.init({ seed: seedOf(fill), eventStore: noopStore });
   return p;
 }
-const BAG = "lar:///ha.ka.ba/bags/@cabal/shared-thread";
+const BAG = "lar:///ha.ka.ba/bags/cabal/shared-thread";
 
 describe("two humans, one cabal, no shared metal", () => {
   test("ONE-WAY: Josh founds a cabal, admits Freyja, shares content she reads", async () => {

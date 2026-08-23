@@ -1,7 +1,7 @@
 /**
  * bed-manifest-sources — every declared pour must point at ground that stands.
  *
- * WHY THIS EXISTS. Three manifests spent weeks sourcing `bags/@lares/…/library/…` after the library moved
+ * WHY THIS EXISTS. Three manifests spent weeks sourcing `bags/lares/…/library/…` after the library moved
  * home to `@crossroads` (2026-07-19 — the same day one of those manifests was authored). Nothing was lying
  * and nothing was checked, so a re-pour would have read ZERO sources and produced an empty bed that looks
  * exactly like a completed one. A pour that finds nothing and a pour that finds nothing to say generate

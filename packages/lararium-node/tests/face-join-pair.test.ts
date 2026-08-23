@@ -74,7 +74,7 @@ describe("face-join — the granting half, proven end to end", () => {
     await joinee.ingestPeerEvents(outcome.grant.capEvents.map(b64));
 
     // Seal AFTER the add, so the ciphertext keys to an epoch the joinee stands inside.
-    const BAG = "lar:///ha.ka.ba/bags/@catalog/after-the-join";
+    const BAG = "lar:///ha.ka.ba/bags/catalog/after-the-join";
     const { docId } = await founder.registerBag(BAG);
     await founder.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
     const sealed = await founder.encryptContent(BAG, new TextEncoder().encode("the face reads this"));
@@ -99,7 +99,7 @@ describe("face-join — the granting half, proven end to end", () => {
     await founder.addSentinelMember(await founder.vesselIdentifierHex(), pg.docIdHex);
 
     // Sealed FIRST — the joinee has no seat yet, so this chunk keys to an epoch it never stood in.
-    const BAG = "lar:///ha.ka.ba/bags/@catalog/before-the-join";
+    const BAG = "lar:///ha.ka.ba/bags/catalog/before-the-join";
     const { docId } = await founder.registerBag(BAG);
     await founder.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
     const sealedEarly = await founder.encryptContent(BAG, new TextEncoder().encode("sealed too soon"));
@@ -179,7 +179,7 @@ describe("face-join — the granting half, proven end to end", () => {
     expect(first.ok).toBe(true);
     if (!first.ok) return;
 
-    const BAG = "lar:///ha.ka.ba/bags/@catalog/wiped-store";
+    const BAG = "lar:///ha.ka.ba/bags/catalog/wiped-store";
     const { docId } = await founder.registerBag(BAG);
     await founder.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
     await joinee.receiveContactCard(new TextEncoder().encode(first.grant.founderCard));

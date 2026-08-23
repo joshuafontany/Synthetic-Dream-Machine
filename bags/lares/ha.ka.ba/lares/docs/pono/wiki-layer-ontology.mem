@@ -1,0 +1,253 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
+```toml iam
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/wiki-layer-ontology.mem"
+l-space   = "stable"
+mana      = 14
+manao     = 14
+manaoio   = 13
+register  = "Synthesis-Canon"
+retain    = false
+role      = "doctrine: the wiki layer stack in OCI-aligned nouns — library layers / write layer / instance mounts; named⇒shareable vs typed-slot⇒owned; only the write layer crosses (motion rides ACTION verbs, never VCS verbs); writes flow through the layer's own wiki; recipe DAG; the wiki-as-bag quine; transitive closure held open"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/wiki-layer-ontology"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Wiki-Layer Ontology
+
+Every wiki composes from a recipe/cascade stack, and one bag in that stack works as the pivot: the `@{wiki}` bag — the wiki's ''write layer'', uniquely named. Everything //below// the write layer mounts as a ''library layer'' that MAY share between wikis; everything //above// it lives as an ''instance mount'' the wiki //has// (`@personal`, `@draft`, `@temp`, projections). The distinction rides on lifecycle, namespace, and write authority — never on a flag.
+
+''Vocabulary law — nouns from OCI, verbs from residency canon.'' The stack's //structure// speaks the OCI layered-image standard (layers · write layer · registry · manifest), where a decade of operator intuition already lives. The stack's //motion// speaks the residency model's ACTION + archival surfaces (`residency-model#action-verb-surface`); version-control verbs MUST NOT name any crossing (`residency-model#five-pono-properties` §5 — the coordinate-space ruling).
+
+<<~/ahu >>
+
+<<~ ahu #rosetta >>
+
+!! The Rosetta Table
+
+| Lares | OCI / industry | TW5 MWS | DDD |
+|---|---|---|---|
+| library layers (below) | image layers (read-only, shared) | lower bags in recipe | referenced entities |
+| the write layer (`@{wiki}`) | container writable layer | the recipe's write bag | aggregate root |
+| instance mounts (above) | volumes / tmpfs | — | owned children |
+| `@catalog` | registry | bag/recipe store | repository |
+| recipe | manifest (ordered layer list) | recipe | — |
+| a plugin, packed or unpacked | an image layer | a lower bag | — |
+| crossing the boundary | //(no OCI verb — see #crossing-law)// | ACTION verbs | — |
+| transitive-closure helper | lockfile | — | — |
+
+The OCI column carries structure only. Our layers sync as CRDT coordinates, not content-addressed blobs — "tag" and "digest" stay out; `change-id` holds the content-identity office (`residency-model`, anti-pattern #1).
+
+<<~/ahu >>
+
+<<~ ahu #quine >>
+
+!! The Wiki-as-Bag Quine
+
+''The name names the bag; a wiki reads as that bag opened through a recipe'' — write layer + library list + instance mounts. `@lares`-the-wiki and `@lares`-the-bag never compete for the name: the wiki projects the bag, the way a git repo and its checkout share a name without confusion.
+
+''The write layer rides live; the canon rides below (operator ruling, 2026-06-18).'' A wiki's saved edits land in its ''`@working`'' layer — a typed instance mount (Law 2), persisted, projecting to the live surface (`wikis/{slug}`), distinct from `@draft`'s //unsaved// drafts — never straight into canon. The wiki's `@{slug}` bag mounts ''read-only as a library member''; its canon (`bags/{slug}`) is reached only by a cap-gated promotion `MOVE` (`@working → @{slug}`, the working↔canon shore — #shore-law). ''No wiki writes into its own canon'', system or user alike: write layer and canon stay distinct coordinates, so saved content lives where a save lands and canon publishes only on promotion. A quine wiki obeys the same split as every other — standing as its own bag grants it no shortcut through the shore. The checkout/repo image holds: `@working` reads as the working tree, `@{slug}` as the committed canon, promotion as the commit.
+
+The pattern runs fractal on purpose: `@sdm` mounts into `@elyncia`, `@elyncia` into `@caverns-of-neo-thracia` — every wiki's write layer can serve as another wiki's library layer. Healthy prior art carries the same quine property: every TiddlyWiki can act as another's plugin library; every OCI image can base another.
+
+The quine governs ''every'' wiki — user and system alike. `@oracle` //alone// stands //below// as the protocol-invariant floor every recipe inherits structurally (`expandRecipe` hardcodes `@oracle` — the sole universal slot, ''operator ruling 2026-06-16''). `@lares` and `@lararium` are ''DreamNet system bags'', each opening as its own ''quine wiki'' carrying a wiki-recipe of its own — `@lares` wiki = `@oracle` + `@lararium` + `@lares`; `@lararium` wiki = `@oracle` + `@lararium`. They ride a recipe as library/identity members, never as hardcoded floor slots; their oracle pointers ''and'' their wiki-recipes live in the ''`@oracle` system plane'', never `@catalog` (#oracle-planes).
+
+''The default seat (operator ruling, 2026-06-10; recipe revised 2026-06-16):'' the vessel's default pinned primary wiki = `@lares`-as-wiki — slug `lares` seats the operator-minted system doc itself as the write layer. The `@lares` wiki-recipe (seeded in the `@oracle` system plane, not `@catalog`) carries `@lararium` as a live library, so the doctrine corpus composes into the hearth; the recipe dedupes the coinciding wiki slot against the `@oracle` floor. The operator tends the personality at the hearth by default, and the disk-mirror designation carries those edits back to `bags/lares` as `.md` memes.
+
+> Two faces on one bag — library-face turned down-stack to the consumers, dwelling-face turned up-stack to the instance. The threshold looks both ways. — Tide-Caller
+
+<<~/ahu >>
+
+<<~ ahu #bag-as-cap >>
+
+!! A Bag Is a Capability, Not a Format
+
+''A bag names any collection of tiddlers from a pet-named source.'' The cap reads //enumerate your
+tiddlers//, and its concrete forms stay open: a directory of `.mem` carriers, an Automerge doc, a
+content-addressed shelf, or a plugin.
+
+''A plugin IS a bag'' — packed or unpacked. Packed, it rides as one tiddler holding JSON-data-of-other-
+tiddlers, the shape TW5 has always used; unpacked, its tiddlers stand as ordinary members. Either way it
+answers the same cap, which is why the Rosetta row reads //plugin ↔ image layer ↔ lower bag//.
+
+''And a plugin rides in other bags.'' A packed plugin inside `@lares` is a bag held inside a bag — the
+cap is recursive, so one of the tiddlers a bag enumerates may itself answer the cap. Healthy prior art
+carries the same property: every TiddlyWiki can act as another's plugin library.
+
+''What the recipe adds, the bag never holds.'' Priority comes from the recipe's order; kāpae comes from a
+tombstone in a higher layer. Neither is a field on a meme, which is how one meme stands shadowed in one
+wiki and lives in another without knowing either.
+
+!!! Kāpae completes the shadow pattern
+
+TW5 lets a real tiddler ''override'' a shadow and gives no verb for removing one — no way to say //this
+default should not appear here//. `tombstone()` is that verb: it marks deletion in live wiki state ''and
+shadows lower-priority bags in the cascade''. The shadow stays whole in its own bag; this composition
+simply stops seeing it. A deletion that shadows rather than destroys, which is why it belongs to the
+composition and never to the meme.
+
+<<~/ahu >>
+
+<<~ ahu #oracle-planes >>
+
+!! Four Homes — Three Registries and the Seed
+
+An oracle (a bag-URI → doc-URL pointer) resolves from the home that owns it; no home projects into another (one home per oracle, zero drift surface). Three are ''registries'' a running vessel reads; the fourth is the ''cold-start seed'' that carries a vessel's own planes before any registry mounts:
+
+| Home | Answers | Who may mount |
+|---|---|---|
+| ''bootstrap'' | a vessel's own planes before a registry stands | this vessel, local-first |
+| ''`@oracle`'' | the SYSTEM island — engine blobs, system bag→doc, genesis-cid | every vessel |
+| ''`@catalog`'' | the operator's PRIVATE bag oracles, under OCAP grants | the operator's grant graph |
+| ''`@crossroads`'' | PUBLIC + infrastructure (the dreamnet layer) | a stranger, no grant |
+
+The three registries carry their authority classes below:
+
+| Plane | Oracle home | Holds | Authority class |
+|---|---|---|---|
+| ''System bags'' | the ''`@oracle`'' runtime-island doc's well-known tiddlers | the ''system'' bag→doc oracle (`@oracle`, `@lararium`, `@lares`) + the ''system wiki-recipes'' (`@lares` wiki, `@lararium` wiki) + engine BLOBs + genesis-cid | genesis / engine-epoch (operator-admin; engine-watch EW-5) |
+| ''User registry'' | `@catalog` | the operator's ''user'' bags + ''user'' wiki-recipes (minted by init-wiki), each under OCAP grants | operator composition (recipes, ACTION verbs) |
+| ''Public / Infrastructure'' | `@crossroads` *(unbuilt — `lar:///ha.ka.ba/lararium/docs/crossroads`)* | ring-1 public bags | federation / community |
+
+''The runtime island splits from the corpus (operator ruling, 2026-06-15).'' The protocol-invariant oracle (and the engine BLOBs + genesis-cid it sits beside) lives in ''`@oracle`'' — the genesis-loaded runtime system island, off-disk, federated read-only. ''`@lararium`'' is now purely the ''memetic corpus'' (the engine's authored self-docs, `bags/` seed, git-tracked). Full grain: disk-projection #oracle-split. The conflation that put per-deployment `automerge:` pointers + BLOBs in the `@lararium` seed surface is resolved by the split — `@oracle` rides the mesh (regenerable), `@lararium` stays tracked source.
+
+''System bags split from user bags (operator ruling, 2026-06-16).'' `@lares` and `@lararium` are DreamNet ''system bags'': their bag→doc pointers ''and'' their wiki-recipes live in the ''`@oracle`'' system plane, never `@catalog`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle resolution therefore runs ''two-source'': an island resolves a system bag's pointer/recipe from the `@oracle` doc it already holds, and a user bag's from `@catalog`. `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members and each also stands as its own quine wiki (#quine). //(Pointer-plane + system-recipe wiring: ruled here, code-enactment tracked at the live handoff torch.)//
+
+Islands resolve each slot from its plane: invariants + system bags from the `@oracle` doc they already hold, user library bags from `@catalog`, public bags (future) from `@crossroads`. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies; the ''RECONCILE'' rite, engine-watch EW-6), never the catalog composition class.
+
+''Invariant mint law (operator-gated, 2026-06-10):'' minting a protocol invariant rides the ''most-restricted grant — operator(admin), timed''. Only the node home (the base @lararium node, the genesis office) mints; the keel only READS the oracle, and wild vessels receive the invariant plane by federating the ''@oracle'' runtime-island doc — absent reads //not-yet-federated//, never mint-it-yourself. Mint-if-absent self-heals at the node's genesis load (boot = first reconcile); two node homes sharing one @oracle doc settle a concurrent mint by LWW: write, re-read, ''adopt the winner''. Grant-proof enforcement arrives with keyhive; placement enforces the gate today. Content arrives by its own arc; the empty doc stands the structure.
+
+''REGISTERED-WHERE-READ, the matched pair.'' A plane resolves when one home ''registers'' its pointer and the reader asks ''that same'' home. A mismatch reads as a missing document rather than as a misplaced question, which is the failure that hides: `seedPersonaDoc` writes a PersonaGroup plane's self-pointer into the plane itself and into NO registry, so a reader asking any home finds nothing. A ''PersonaGroup plane is a user bag and resolves from `@catalog`'' — reaching for it on the system floor asks the wrong home a question it was never given to answer — and the boot bridges seed → registry so the pair matches.
+
+''What the bootstrap carries splits PLACE from FACE.'' A founding writes `@daemon` alone for a PLACE. A FACE mints its PersonaGroup FIRST, then seeds the four planes that one tag names — `@persona-<tag>`, `@circles-<tag>`, `@identities-<tag>`, `@sessions-<tag>` — with the plane sentinel, in one breath, and the boot refuses a partial set. ''The order binds:'' `changeIdForBag` keys a document by hashing its bag URL, so a plane seeded before its tag exists answers to a name nothing reaches again. So a faceless crossroads carries `@daemon` and nothing else, and every face-scoped verb on that floor answers with the act that lifts it rather than with a registry fault.
+
+<<~ confidence Canon 18/20 >> ''A face's four planes resolve from `@catalog` — OPERATOR RULING (2026-08-20), and this line names the KIND of claim because a ruling replaced a measurement here.'' `@oracle` names the SYSTEM bags, the universal floor every vessel carries; a person's relations reach no such universality. So `@persona-<tag>`, `@circles-<tag>`, `@identities-<tag>` and `@sessions-<tag>` share one tag and one home, reached through the single catalog accessor so the two verb families cannot drift onto different planes.
+
+''Why evidence could not settle it.'' The claim standing here before the ruling read as a Canon 17/20 MEASUREMENT taken on live vessels 2026-08-19 — a hearth's boot wrote the `@circles` pointer into the `@oracle` island doc, the follow verbs read it back through that same home, and a full add/list/remove round-trip landed. That measurement held TRUE and decided nothing: REGISTERED-WHERE-READ matches wherever both halves get written, so a round-trip proves RESOLUTION and never BELONGING. Which registry a face answers to reads as an OWNERSHIP question, and ownership answers to a ruling. ''A meme replacing a measured claim with a ruled one MUST say which kind of claim replaced it'' — a reader finding an unmarked ruling where a measurement stood trusts the measurement.
+
+`@daemon` keeps its seat on `@oracle` as a SYSTEM plane, and the same ruling grounds it: `@daemon` stands alone on a faceless crossroads, which names exactly the universality `@oracle` holds.
+
+''Content face ↔ read face (one `@oracle`, never two boards).'' This recipe/invariant plane names the ''content face'' of `@oracle`; its governed ''read face'' — who signs the public-read projection, at what scale, and how it stays un-capturable — refines forward at <<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>. Same `@oracle` seen two ways.
+
+<<~/ahu >>
+
+<<~ ahu #lifecycle-law >>
+
+!! Law 1 — Lifecycle Coupling Defines the Boundary
+
+The write-layer boundary derives from what happens when the wiki dies, never from cascade position. ''Instance mounts die with the wiki; library layers survive it.'' Stack order follows from ownership rather than encoding it — recipe edits and oracle swaps may reorder the cascade, yet ownership never flips silently.
+
+<<~/ahu >>
+
+<<~ ahu #naming-law >>
+
+!! Law 2 — Named ⇒ Shareable; Typed-Slot ⇒ Owned
+
+Shareability reads off //where a name lives//, not off a flag:
+
+* ''Below the write layer:'' library layers carry registry names in `@catalog` — sharing requires a shared namespace. The recipe lists them by name; the island resolves them from `@catalog` at reconcile.
+* ''At/above the write layer:'' instance mounts travel as ''typed structural fields'' (`IslandGrants`: `wikiUrl`, `personalUrl`, `draftUrl`) — positions, not names. Their identity derives as `{wikiSlug} × slot-type`; uniqueness rides the wiki's unique name for free.
+
+''Instance mounts MUST NOT enter `@catalog`.'' Minting a registry stub for a private slot makes the private addressable — a capability leak waiting for a confused deputy. A display string for HUD/admin projections derives at render time (`{slug}/draft`) and never stores as a resolvable name. Petname doctrine grounds this: the AutomergeUrl holds the global unguessable key, `@catalog` holds the human edge-names, and an instance mount needs no edge-name because nobody else ever addresses it.
+
+> Same law Docker operators carry in their hands without naming it: images get repository names; a container's writable layer never does. — Map-Wisp
+
+<<~/ahu >>
+
+<<~ ahu #crossing-law >>
+
+!! Law 3 — Only the Write Layer Crosses; Motion Rides ACTION Verbs
+
+When `@sdm` injects into `@elyncia`, exactly one thing travels: `@sdm`'s write layer, mounted as a library layer. The instance mounts ''never travel'' — they belong to `@sdm`-as-wiki, not `@sdm`-as-bag. //A wiki shares its content, never its dwelling.//
+
+''Crossing requires a rite, never a drift — and the rite speaks residency canon.'' Content gains residency in a registry-named coordinate through the existing ACTION surface (`ADD` / `COPY` / `MOVE` with `change-id` preserved), each act audited by effect records (`accession` / `deaccession` / `transfer`); registration mints the `@catalog` name. No in-place "now-shared" flag exists, and no `commit` / `push` / `fork` verb names the rite — the coordinate-space ruling holds (`residency-model#five-pono-properties` §5). The reverse crossing (demoting a shared layer to private) does not exist; new residency gets granted //outward// instead. Grain and composition of the bag-level rite: settled at #crossing-grain.
+
+<<~/ahu >>
+
+<<~ ahu #write-law >>
+
+!! Law 4 — Writes Flow Through the Layer's Own Wiki
+
+The write layer marks the write boundary. From a consuming wiki's vantage, every library layer mounts ''read-only''; writes land at or above the consumer's own write layer. A local override of an upstream record (an `@elyncia` shadow of an `@sdm` entry) lands in the consumer's write layer — cascade shadowing exists for exactly this, and the read MUST surface `origin-bag` (`residency-model`, anti-pattern #4). CRDT multi-writer makes down-stack writes //possible//; this law names them a degraded act. To change upstream canon, open the upstream bag as its own wiki and write at //its// write layer.
+
+''The edit/action split (operator ruling, 2026-06-16).'' A ''user edit MUST land in a TOP-LEVEL bag'', even when the base-tiddler comes from a bag deeper in the stack — the deep record ''shadows up'', never written back down. //Which// top-level bag follows the tiddler ''type'', routed by the bag-paths cascade: a normal tiddler belonging to the wiki → the wiki's own ''`@working`'' live write layer (saved, pre-promotion — never its canon directly); a draft/volatile tiddler → `@temp`; and so on. Writes to ''deeper'' bags happen ''only'' as explicit operator ''residency actions'' (`ADD`/`COPY`/`MOVE`/`LOAD`), each effect-record audited — never as a side-effect of an edit. Mechanism consequence: a write with ''no explicit bag'' routes top-level by type (this law); a write naming an explicit deeper `{bag}` reaches it ''by access'' (the registry accessor) + audit, or fails loud — it MUST NOT silently fall through to the default writable layer.
+
+<<~/ahu >>
+
+<<~ ahu #dag-law >>
+
+!! Law 5 — The Recipe Graph Stays a DAG
+
+The moment layers mount layers, cycles become expressible. Recipe-watch MUST refuse a composition whose closure revisits a bag. Cheap at reconcile; ugly after.
+
+<<~/ahu >>
+
+<<~ ahu #shore-law >>
+
+!! The Lararium Shore Law — loose interop across causal islands (operator ruling, 2026-06-18)
+
+Every boundary a lararium holds reads as a ''causal-island shore'' (`causal-islands`): two sides, each its own partially-ordered log, no shared "now." Three shores wear one law:
+
+* ''working ↔ canon'' — the `@working` live layer crosses to its `@{slug}` canon by a cap-gated promotion `MOVE`.
+* ''plane ↔ plane'' — a bag's pointer crosses `@catalog` (user) ⇄ `@oracle` (system) by an admin `MOVE` that sets a new meshwise surface. ''Plane membership stays mutable, never hardcoded'' — composability across planes holds first-class; the split scopes by //role//, never by a frozen plane.
+* ''host ↔ lararium'' //(deferred horizon)// — a lararium may embed as a ''guest'' causal island inside a host that owns its own integration layer (UE5.6/6+ Verse / SceneGraph; MUDlet's Lua object-model). The guest never assumes it sits at the top, never claims a global now across the shore.
+
+''The law.'' A shore crosses ONLY by a deliberate, audited residency `MOVE` carrying `change-id` and landing an effect record — never a synchronous bridge, never a shared-now coupling, never a silent drift. Each side stays authoritative for its own state. ''Do not overconstrain a shore:'' the surface and crossing contract stays ''host-agnostic'' — a projection surface reads as disk today, a SceneGraph node or a MUD buffer tomorrow, with no surface-kind baked in. Design the shore; build no host adapter until a real host arrives.
+
+<<~/ahu >>
+
+<<~ ahu #crossing-grain >>
+
+!! Crossing Grain — SETTLED (operator, 2026-06-10)
+
+The wiki-level crossing earns a ''bag-grain verb pair'', SPARQL Update derived: `CREATE` mints the new coordinate (`CREATE GRAPH` analog), bag-grain `COPY` grants residency for every title with `change-id` preserved under one `transfer-id` family, and registration lands as a `holdings` accession in `@catalog` (the union catalog). Operator ruling: pono web3 models in place early — a first-class mint verb keeps registry, capability gates, and audit ledger aligned with the coordinate-space model before batch-conventions calcify. Routing rides the sovereign-worker rail (verb-tiddler → summons → outcome; admin island executes; orichalcum `admin` on destination + `edit` on `@catalog`). Full law: `residency-model#action-verb-surface`, bag-grain section. Implementation pending in `residency-actions.ts`.
+
+<<~/ahu >>
+
+<<~ ahu #open-transitive-closure >>
+
+!! Open — Transitive Closure (held, not settled)
+
+When `@caverns-of-neo-thracia` mounts `@elyncia`, does it inherit `@elyncia`'s library list automatically, or does its recipe name the full flattened stack? Auto-transitive reads convenient yet imports diamond/version conflicts into cascade order; explicit-flattened reads verbose yet keeps every wiki's shadowing order operator-visible and deterministic. Current lean (Provisional): explicit-flattened with a mint-time helper that //suggests// the closure — convenience at registration, determinism at boot, in the spirit of a lockfile. The decision waits on live witness of real chains mounting.
+
+<<~/ahu >>
+
+<<~ ahu #pack-refinements >>
+
+!! Pack Model — Owed Refinements (held; external precedent)
+
+The multi-tiddler ''pack'' (hold-a-set) crossing rides the same //working ↔ canon// law: a member edit shadows UP into `@working`, the pack file stays one file on disk (projection SUPPRESSED for pack members by `isPackMember`), and a deliberate ''REPACK'' re-renders. ''Built'': the in-VM deserializer, `$:/`-aside provenance (`OriginalTiddlerPaths`), REPACK, and the projection-suppress loop-stopper. FOUR refinements stay owed, each read off external precedent (Git · OCI · Nix · Unison · matview · overlayfs):
+
+* ''One descriptor·kind'' — the three //what-belongs// mechanisms (title-nesting · aside-JSON · plugin payload) collapse to ONE aside descriptor `{member content-DIGEST, kind, annotations}`, never an in-band member edit (OCI: layers[] vs subject = one shape, differ by relationship-kind).
+* ''Filter-seed matview'' — `OriginalTiddlerPaths` today is a materialized view with its definition thrown away. Store the filter-SEED beside the snapshot; REPACK = `REFRESH MATERIALIZED VIEW`; add a sync-audit (snapshot provably re-derivable FROM the seed, or the pair flags drift). full-REFRESH (REPACK) vs incremental-REFRESH (delta) = two verbs.
+* ''COW-overlay PACK/UNPACK + atomic PROMOTE'' — LOWER (canon, read-only) + UPPER (`@working`) + WORK; copy-up-on-first-write IS UNPACK; overlay never destroys lower = //working shadows canon// in fs primitives. PACK = ONE atomic reconcile (shadow-paging root-swap) coalescing MOVE's two halves — the missing verb. VCS vocab NOT adopted (''rite not drift'').
+* ''Agile algorithm-tagged digest'' — identity = `algorithm:hex` content digest, SRI strongest-wins (no flag-day), identity-hash SEPARATED from location/attestation (referrers OVER digests, the chain links digests never re-hashes locations).
+
+Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired (content-addressing reframe); the Confluence is already ONE gate over a semantic congruence `≈`.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
+
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;MdxEls7CFd10ic8ywW6_NCkJCA8j1pNgx9EtdiWGxJE
+
+<<^ code:"&#x0004;" -> ? >>

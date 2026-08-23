@@ -1,6 +1,6 @@
 {
   "format": "lararium-genesis-seed/v1",
-  "actorSeed": "909fb947acc1f51260fe6cd0a1b6a704074aee68e04b6402ef19df4026af1b9d",
+  "actorSeed": "88dac7fe9d31c5d2c507a868b338cbfee85ea433ebf8dc212e0a9c046096b38a",
   "schemaVersion": "0.1",
   "blobs": {
     "tiddlywikicore": {
@@ -22,7 +22,7 @@
     "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext": {
       "id": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
       "version": "0.1.0",
-      "sha256": "c7291f475ced443204a258bd6797905d63713ab30bca46bca2a03adcdad600e4",
+      "sha256": "55cf317d99369f9714be3edd580d95b019651f545d6c53f857ce9f597f5f78dd",
       "mimeType": "application/json",
       "license": "MIT",
       "author": "lares"
@@ -38,79 +38,79 @@
     }
   },
   "tiddlers": {
-    "lar:///ha.ka.ba/bags/@oracle/descriptor": {
+    "lar:///ha.ka.ba/bags/oracle/descriptor": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/descriptor",
+        "title": "lar:///ha.ka.ba/bags/oracle/descriptor",
         "label": "ha — runtime system island (Oracle)",
         "readPolicy": "public",
         "writePolicy": "private",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@lararium/descriptor": {
+    "lar:///ha.ka.ba/bags/lararium/descriptor": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@lararium/descriptor",
+        "title": "lar:///ha.ka.ba/bags/lararium/descriptor",
         "label": "ha — memetic corpus (Lararium)",
         "readPolicy": "public",
         "writePolicy": "private",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@catalog/descriptor": {
+    "lar:///ha.ka.ba/bags/catalog/descriptor": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@catalog/descriptor",
+        "title": "lar:///ha.ka.ba/bags/catalog/descriptor",
         "label": "ka — corpus discovery (Catalog)",
         "readPolicy": "public",
         "writePolicy": "private",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@lares/descriptor": {
+    "lar:///ha.ka.ba/bags/lares/descriptor": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@lares/descriptor",
+        "title": "lar:///ha.ka.ba/bags/lares/descriptor",
         "label": "ba — persona & doctrine (Lares)",
         "readPolicy": "public",
         "writePolicy": "private",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@oracle/recipes/lares": {
+    "lar:///ha.ka.ba/bags/oracle/recipes/lares": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/recipes/lares",
+        "title": "lar:///ha.ka.ba/bags/oracle/recipes/lares",
         "label": "lares",
-        "bag-stack": "lar:///ha.ka.ba/bags/@oracle lar:///ha.ka.ba/bags/@lararium lar:///ha.ka.ba/bags/@lares lar:///ha.ka.ba/wikis/@lares/draft",
-        "writable-bag": "lar:///ha.ka.ba/wikis/@lares/draft"
+        "bag-stack": "lar:///ha.ka.ba/bags/oracle lar:///ha.ka.ba/bags/lararium lar:///ha.ka.ba/bags/lares lar:///ha.ka.ba/wikis/lares/draft",
+        "writable-bag": "lar:///ha.ka.ba/wikis/lares/draft"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@oracle/recipes/lararium": {
+    "lar:///ha.ka.ba/bags/oracle/recipes/lararium": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/recipes/lararium",
+        "title": "lar:///ha.ka.ba/bags/oracle/recipes/lararium",
         "label": "lararium",
-        "bag-stack": "lar:///ha.ka.ba/bags/@oracle lar:///ha.ka.ba/bags/@lararium lar:///ha.ka.ba/wikis/@lararium/draft",
-        "writable-bag": "lar:///ha.ka.ba/wikis/@lararium/draft"
+        "bag-stack": "lar:///ha.ka.ba/bags/oracle lar:///ha.ka.ba/bags/lararium lar:///ha.ka.ba/wikis/lararium/draft",
+        "writable-bag": "lar:///ha.ka.ba/wikis/lararium/draft"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@oracle/blobs/plugins/sq/streams": {
+    "lar:///ha.ka.ba/bags/oracle/blobs/plugins/sq/streams": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/blobs/plugins/sq/streams",
+        "title": "lar:///ha.ka.ba/bags/oracle/blobs/plugins/sq/streams",
         "text": "$:/plugins/sq/streams",
         "sha256": "17fcae33dc754c1535762ec4915b796410996f0ff21148ac4efcb66ac7fdf7f4",
         "version": "1.2.24",
@@ -121,17 +121,17 @@
         "pluginInstallable": "true",
         "pluginTitle": "$:/plugins/sq/streams",
         "tags": "blob-descriptor plugin-descriptor",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@oracle/blobs/lar_///ha.ka.ba/lararium/plugins/lares/memetic-wikitext": {
+    "lar:///ha.ka.ba/bags/oracle/blobs/lar_///ha.ka.ba/lararium/plugins/lares/memetic-wikitext": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/blobs/lar_///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
+        "title": "lar:///ha.ka.ba/bags/oracle/blobs/lar_///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
         "text": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
-        "sha256": "c7291f475ced443204a258bd6797905d63713ab30bca46bca2a03adcdad600e4",
+        "sha256": "55cf317d99369f9714be3edd580d95b019651f545d6c53f857ce9f597f5f78dd",
         "version": "0.1.0",
         "mimeType": "application/json",
         "author": "lares",
@@ -140,39 +140,39 @@
         "canonicalTitle": "lar:///ha.ka.ba/lararium/plugins/lares/memetic-wikitext",
         "compatibilityTitle": "$:/plugins/lares/memetic-wikitext",
         "moduleManifestPath": "dist-plugin/module-manifest.json",
-        "moduleManifestSha256": "3ba1039cc7613bb9c2520c8213c79825f6abcd6ff4d2f02d8189b9c67a687ed1",
+        "moduleManifestSha256": "884a301097fe5f6d4f26b65b869346fb12c58843180ef2277e07079e0a66f3e6",
         "sourceManifestPath": "dist-plugin/plugin-source-manifest.json",
-        "sourceManifestSha256": "1638b3066301545fa1ddda79a901fb55ab0efe2cd8796426d1dcdf373bd0e282",
+        "sourceManifestSha256": "f37be1e6c77691f3610d1bcf67923805eceb524ceb8fd16f93ee391c6d1fa058",
         "packTranscriptPath": "dist-plugin/pack-transcript.json",
-        "packTranscriptSha256": "bfe5ca818dc8eb406c48979c428168d8b1969b2add3d911e85c39693c895dd7b",
-        "moduleCount": "23",
-        "packedTiddlerCount": "123",
-        "pluginJsonSha256": "c7291f475ced443204a258bd6797905d63713ab30bca46bca2a03adcdad600e4",
+        "packTranscriptSha256": "82b1d0b23721210890e15142f4910154b2bfa89ffa76d6b48349d9c568a54f8f",
+        "moduleCount": "24",
+        "packedTiddlerCount": "124",
+        "pluginJsonSha256": "55cf317d99369f9714be3edd580d95b019651f545d6c53f857ce9f597f5f78dd",
         "tags": "blob-descriptor",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@oracle/blobs/lararium-boot-shadows": {
+    "lar:///ha.ka.ba/bags/oracle/blobs/lararium-boot-shadows": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/blobs/lararium-boot-shadows",
+        "title": "lar:///ha.ka.ba/bags/oracle/blobs/lararium-boot-shadows",
         "text": "lararium-boot-shadows",
         "sha256": "95bde4c6cc3632ae67f4ee43e1bb0bfe8ac0a17c868a202e7aab5f9469b85ccd",
         "version": "unknown",
         "mimeType": "application/json",
         "license": "MIT",
         "tags": "blob-descriptor",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@oracle/blobs/tiddlywikicore": {
+    "lar:///ha.ka.ba/bags/oracle/blobs/tiddlywikicore": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/blobs/tiddlywikicore",
+        "title": "lar:///ha.ka.ba/bags/oracle/blobs/tiddlywikicore",
         "text": "tiddlywikicore",
         "sha256": "3b08593cdfc78f0836db1513e42d4c43d6270c699d0423fb933af1dced82b4e1",
         "version": "5.5.0-prerelease",
@@ -181,31 +181,31 @@
         "source": "https://tiddlywiki.com",
         "license": "BSD-3-Clause",
         "tags": "blob-descriptor",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@oracle/genesis-cid-engine": {
+    "lar:///ha.ka.ba/bags/oracle/genesis-cid-engine": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/genesis-cid-engine",
+        "title": "lar:///ha.ka.ba/bags/oracle/genesis-cid-engine",
         "text": "",
         "cid": "bafkreift7cvcpxxqusdb4lkxsxnt3mzv5uip6tpytinrh7ibgrvu7ceqwa",
         "note": "engine content-CID (TW5 core + version) — the hearth true-name; slow ratchet",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"
       }
     },
-    "lar:///ha.ka.ba/bags/@oracle/genesis-cid-plugins": {
+    "lar:///ha.ka.ba/bags/oracle/genesis-cid-plugins": {
       "tiddler": {
-        "title": "lar:///ha.ka.ba/bags/@oracle/genesis-cid-plugins",
+        "title": "lar:///ha.ka.ba/bags/oracle/genesis-cid-plugins",
         "text": "",
-        "cid": "bafkreidhtip42gfauo3zglau2fjn6xxhh4sbv562efuhwppjs6xbxyuwty",
+        "cid": "bafkreidyhlnx2nw3j2mdzjiypitcfgskt3r4xlpbv5bluzp4gkkre4acqe",
         "note": "plugins content-CID (sorted plugin id/version/sha256) — fast ratchet",
-        "origin-bag": "lar:///ha.ka.ba/bags/@oracle"
+        "origin-bag": "lar:///ha.ka.ba/bags/oracle"
       },
       "meta": {
         "authority": "genesis"

@@ -1,6 +1,6 @@
 """The fold's gates, each over ground that only moves when someone means it.
 
-FOUR PROPERTIES, FOUR BEDS. An earlier single gate hashed 250 live memes out of `bags/@lares` and
+FOUR PROPERTIES, FOUR BEDS. An earlier single gate hashed 250 live memes out of `bags/lares` and
 called the result a parity check. Those memes are authored content under continuous revision, so the
 gate measured `f(x)` while `x` drifted: an edit and a grammar regression produced the same red. Over
 seventeen days it fired on 60 memes, every one of them a content edit, and it never once caught a
@@ -130,7 +130,7 @@ def _live_memes() -> list[str]:
 
 
 _LIVE = _live_memes()
-_no_bags = "bags/@lares absent — the living-ground smoke rides the operator's tree"
+_no_bags = "bags/lares absent — the living-ground smoke rides the operator's tree"
 
 
 @pytest.mark.skipif(not _LIVE, reason=_no_bags)

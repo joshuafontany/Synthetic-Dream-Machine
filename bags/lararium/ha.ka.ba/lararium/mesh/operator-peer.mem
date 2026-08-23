@@ -1,0 +1,251 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/operator-peer >>
+```toml iam
+cacheable = true
+file-path = "bags/lararium/ha.ka.ba/lararium/mesh/operator-peer.mem"
+hydrate   = true
+l-space   = "lararium"
+mana      = 19
+manao     = 19
+manaoio   = 18
+register  = "Synthesis"
+retain    = true
+role      = "Canonical operator-vessel contract: two-lane VM pool law, shared command/receipt surface, ea sovereignty model"
+tags      = ["mesh/lar-vessel", "mesh/causal-island"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lararium/mesh/operator-peer"
+```
+
+<<^ code:"&#x0002;" >>
+
+! Operator-Vessel Contract
+
+The shared law that governs every operator vessel — node, browser, and any future vessel type.
+Runtime affordances may differ; the authority shape does not.
+
+This document carries the load. `lar-vessel.md` and `open-vessel.md` carry
+implementation notes. The two-lane topology and ea sovereignty law described here
+sit above any single vessel implementation.
+
+<<~ ahu #vocabulary >>
+
+!! Vocabulary
+
+| Term | Meaning |
+|---|---|
+| ''Vessel'' | A lararium identity-and-runtime unit. One operator keypair. One admin VM lane. Zero or more active wiki VM lanes. |
+| ''Peer'' | An Automerge-layer sync participant. A vessel participates in the mesh as a peer; this word names only the sync role, never the vessel's identity. |
+| ''Relay / Leaf'' | Sync ROLES, held as Keyhive capability, not platform: a ''relay'' carries the canonical replica + substrate for co-located leaves; a ''leaf'' (CLI, agent) stays thin, syncing from the relay. Heavy peer = substrate, not authority. |
+| ''Actor'' | Whoever authors intent over the command surface — a ''human'' at a terminal or an ''AI agent'' acting programmatically. Both act as sovereign vessels (own keys, own replica); neither holds a privileged shape. |
+| ''Ea'' | Breath. Sovereignty. A vessel's right to hold, author, and sync its own causal state without asking permission from any authority above the operator's root key. A vessel either breathes or it does not. |
+| ''Admin lane'' | The always-present TW5 VM lane that carries command intake, receipt write-back, capability verification, and operator-private session state. |
+| ''Active wiki lane'' | A TW5 VM lane carrying a corpus-facing wiki. One or more may run concurrently; the pool manages residency. |
+| ''Command tiddler'' | The durable intent record authored by an operator ceremony (CLI, browser UX, or future surface). Lives in the admin doc. |
+| ''Receipt tiddler'' | The durable outcome record written after a ceremony resolves: accept, reject, apply, or defer. Lives in the admin doc. |
+
+<<~/ahu >>
+
+<<~ ahu #two-lane-law >>
+
+!! Two-Lane Law
+
+Every operator vessel carries one admin VM lane and zero or more active wiki VM lanes.
+
+''OP-1 — Admin lane breathes first.''
+The admin lane boots at vessel open and closes at vessel close. It does not suspend
+between ceremonies. It carries the operator's capability context continuously.
+
+''OP-2 — Active wiki lanes serve corpus work.''
+Each active wiki lane carries one wiki URI and its recipe stack. The pool manages lane
+LIFECYCLE (mount/evict/teardown); RESIDENCY itself stays ISLAND-OWNED — a bag reads
+wela/anu by reachability from a live island, never by a pool-held tier ([[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island]],
+the island-owned residency law). Active lanes may evict under memory pressure; the admin
+lane does not.
+
+''OP-3 — Each lane holds its own authority.''
+The admin lane keeps its internal state private to itself; active wiki lanes reach
+admin doc tiddlers only through the command/receipt record surface. Cross-lane
+coordination travels that surface alone.
+
+''OP-4 — VM law applies within each lane.''
+TW5 as VM applies independently inside each lane. Neither lane imports tiddlywiki
+as a TS/ESM dependency. Both lanes carry the plugin blob at boot.
+
+''OP-5 — Ceremony meaning belongs to the VM pool.''
+If a ceremony can run inside the VM (capability planning, tiddler authoring, receipt
+writing), it stays there. Edge code (filesystem, network transport, process control)
+handles only resource-local side effects.
+
+<<~/ahu >>
+
+<<~ ahu #ea-law >>
+
+!! Ea Law — Vessel Sovereignty
+
+''OP-E1 — Local keys, local truth.''
+The operator keypair lives on the vessel's local storage (disk at 0o600 for node,
+WebCrypto non-extractable for browser). It MUST stay vessel-local — held out of every
+Automerge doc, kept off the mesh. Identity derives from local keys — no server confers it.
+
+''OP-E2 — Three gates at boot.''
+Gate A: Keyhive DID matches local verifying key — throws hard on mismatch.
+Gate B: vessel ∈ PersonaGroup sentinel doc.
+Gate C: PersonaGroup ∈ MeshCabal sentinel doc.
+All three gates pass before the vessel opens its wiki VM lanes.
+
+''OP-E3 — A vessel verifies; the owner governs.''
+A vessel may verify claims made by other vessels. Membership in a causal island MUST
+be granted or revoked by that island's owner alone. Delegation flows from the operator
+root key outward, never inward from a relay or server.
+
+''OP-E4 — Ea at the admin ingress.''
+Admin-doc WebSocket ingress gates on `cap=admin` proof. Non-operator
+vessels receive no admin state. The proof check happens on the receiving vessel
+before any doc change applies.
+
+<<~/ahu >>
+
+<<~ ahu #command-receipt-surface >>
+
+!! Command / Receipt Surface
+
+CLI, browser UX, and future operator surfaces all author the same command tiddler
+records and consume the same receipt tiddler records. The surface type does not
+change the record shape.
+
+''OP-CR1 — Command tiddlers carry intent.''
+A command tiddler records what the operator intends: MOVE, admit, invite, revoke.
+It carries: `id` (lar: URI), `type`, `payload`, `authoredAt`, and a `capProof` reference
+or inline token. It lives in the admin doc. It does not disappear on receipt.
+
+''OP-CR2 — Receipt tiddlers carry outcome.''
+A receipt tiddler records what happened: accepted, rejected, applied, deferred.
+It carries: `id`, `commandId`, `outcome`, `resolvedAt`, and any error or diff reference.
+It lives in the admin doc. The mesh carries it to every operator vessel.
+
+''OP-CR3 — Bridge code transports envelopes.''
+`stdio`, Unix socket, and WebSocket carry envelopes for the command/receipt
+surface. They transport; they do not own ceremony meaning. Changing the bridge
+does not change the record contract.
+
+''OP-CR4 — Local capability check precedes edge work.''
+Before any command reaches an edge adaptor (filesystem, network, process), the
+invoking vessel verifies the capability context locally. Edge adaptors may re-check
+before side effects. No round-trip to a server gates local intent.
+
+''OP-CR5 — One surface renders for human AND machine.''
+The command surface emits to whoever reads it. On a TTY it renders prose; off a TTY
+(or under `--json`) it emits a deterministic structured payload — the same
+command/receipt record shaped as data, carrying its correlatable `requestId` and an
+`ok | error` status. One core, two projections; the command surface never forks by
+audience. (The MCP tool projection exposes the same verbs as schema-typed Tools over
+the same core — see #actor-parity.)
+
+<<~/ahu >>
+
+<<~ ahu #actor-parity >>
+
+!! Actor Parity — Human and AI Agent
+
+An operator surface serves two kinds of actor over ''one'' command/receipt surface:
+a ''human'' at an interactive terminal and an ''AI agent'' acting programmatically.
+Neither holds a privileged shape; both author intent and observe convergence.
+
+''OP-AP1 — An agent acts as a sovereign vessel, never an in-process closure.''
+An AI agent that interfaces with the mesh SHALL hold its own keys, its own replica,
+and its own causal log, reconciling over a real boundary. An agent embedded in the
+daemon's heap — a function call wearing a vessel costume — breaks the
+share-substrate-not-sovereignty law ([[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island#substrate-not-sovereignty]]).
+Co-location on one machine stays fine; a shared heap/Repo/storage-scope does not.
+
+''OP-AP2 — Identity by held keys, not account or session.''
+Human and agent alike present a keyed identity (operator keypair / agent DID) and act
+only through capabilities they hold — attenuated, travelling WITH the intent
+(UCAN-invocation shape over the verb-tiddler). No login, no session, no bearer token,
+no ambient authority. Authority that fails to ride the task imports web2 smell.
+
+''OP-AP3 — Intent travels as a content-addressed, self-authorizing fact.''
+A verb-summons carries `taskContentId({subject, command, args, nonce})` — the
+content address that doubles as the correlatable handle. Re-issuing the same logical
+intent collapses to one id; the receipt's convergence (not a server ACK) MARKS the
+outcome. Exactly-once ''effect'' rides the change-hash, never exactly-once delivery.
+
+''OP-AP4 — Eventual work returns a handle, observed by convergence.''
+No verb blocks on a synchronous return. The actor writes intent, receives the
+content-address handle, and observes the receipt fact converge in its own replica.
+Polling reads the local replica for merge arrival — convergence-observation, never
+server-state polling. (Mirrors MCP Tasks: `taskId` + receipt fetch, requestor-driven;
+status notifications accelerate but never become load-bearing.)
+
+''OP-AP5 — A leaf actor carries a LIGHT identity; the relay holds the engine.''
+A short-lived leaf (a one-shot CLI run, a single agent turn) carries only its
+Ed25519 keypair — its `did:key` — plus a ''cached, pre-minted ContactCard JSON'' on
+disk. With these it presents a self-certifying identity offline and signs the V3
+proof-of-possession with ''bare `@noble/ed25519`'' over its seed — zero keyhive on
+the leaf, honoring no-VM-on-main without a per-invocation Worker boot. The full
+keyhive engine boots ONCE, on the always-on ''relay'', which amortizes the cost and
+verifies leaf proofs in its keyholder worker. The ContactCard carries no expiry or
+nonce — mint it once (at `lares vessel found`), re-present it forever; proof FRESHNESS rides
+the per-challenge nonce + timestamp, never the cached card (never cache the nonce).
+No contradiction with [[open-vessel|lar:///ha.ka.ba/lararium/mesh/open-vessel]]'s equal-peer claim: leaf and relay share IDENTICAL
+STRUCTURE; they differ only in currently-held CAPABILITIES (the relay holds the keyhive
+engine piece; the leaf has not-yet-held it). Symmetric structure, asymmetric capabilities
+(Ink & Switch) — the one reconciled stance.
+
+''OP-AP6 — An agent holds its OWN did:key under a delegated, attenuated grant.''
+An AI agent mints its own keypair (a distinct DID) and receives a ''scoped,''
+''short-lived capability'' the operator delegates to it (device-admit-shaped: the
+operator adds the agent as a member with attenuated access). The agent signs
+invocations with its own key; authority chains back to the operator and stays
+revocable. The agent never holds the operator's key and never impersonates — effective
+authority equals the INTERSECTION of the operator's grant and the agent's attenuation
+(an agent reduces access, never expands it).
+
+<<~ confidence Synthesis-Canon 15/20 >> The leaf-identity shape (OP-AP5/6) stands
+resolved by twin scouts 2026-06-07 (light cached-card + bare-Ed25519 signer over the
+heavy worker-keyhive path; the tree's `auth-proof` tests already prove bare-Ed25519
+proofs verify). The remaining BUILD: `lares vessel found` mints + persists the operator
+ContactCard (`.operator-card.json`, 0o600); a leaf-identity provider loads
+seed+card; then V3 C (peer transport) and the writable MCP surface compose over it.
+
+<<~/ahu >>
+
+<<~ ahu #vessel-parity >>
+
+!! Vessel Parity
+
+Browser vessel and node vessel share this contract fully. Runtime differences are
+budget choices, not architectural forks.
+
+| Concern | Node vessel | Browser vessel |
+|---|---|---|
+| Storage adapter | `NodeFSStorageAdapter` (disk) | IndexedDB adapter |
+| Operator keypair | Ed25519 on disk at 0o600 | WebCrypto non-extractable |
+| VM island | `worker_threads` island | `DedicatedWorkerGlobalScope` island |
+| Tick source | `setInterval(16)` | `requestAnimationFrame` + `setTimeout(16)` fallback |
+| Admin lane | ✅ boots at open | ✅ boots at open |
+| Active wiki lanes | pool-managed, piscina for stateless parse | pool-managed, dedicated islands |
+| Founding ceremony | `runFoundingCeremony(repo, seed)` via `@lararium/keyhive` | same |
+| Ea gates A/B/C | ✅ passes at boot | ✅ same ceremony, same gates |
+
+Where the node vessel does more (disk projection, persistent relay, process control),
+that counts as edge adaptation, not authority. The browser vessel breathes with
+identical ea rights.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter >>
+<<~ loulou lar:///ha.ka.ba/lararium/keyhive/keyhive-provider >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;SrFWuiFjj2wvqNoPMy5syzboc2hdcE_XGyM4nxW9lr0
+
+<<^ code:"&#x0004;" -> ? >>

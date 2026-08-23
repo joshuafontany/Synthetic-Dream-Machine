@@ -80,7 +80,7 @@ def test_declared_manifest_matches_artifact():
     assert mf.artifact_quad()["corpusManifest"] == CORPUS_MANIFEST
 
 
-# The golden-corpus parity gate retired here. It hashed 250 memes out of `bags/@lares` — authored
+# The golden-corpus parity gate retired here. It hashed 250 memes out of `bags/lares` — authored
 # content under continuous revision — so it measured the fold against ground that moves: an edit and a
 # grammar regression produced the same red. It fired on 60 memes in seventeen days, every one a content
 # edit, and never once caught a grammar change.

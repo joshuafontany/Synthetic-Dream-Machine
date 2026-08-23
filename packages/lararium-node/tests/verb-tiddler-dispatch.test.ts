@@ -46,7 +46,7 @@ const skipReason =
 // Helpers
 // ---------------------------------------------------------------------------
 
-const WIKI_ID = "lar:///ha.ka.ba/bags/@test/verb-tiddler-dispatch";
+const WIKI_ID = "lar:///ha.ka.ba/bags/test/verb-tiddler-dispatch";
 const TIMEOUT = 30_000;
 
 /**

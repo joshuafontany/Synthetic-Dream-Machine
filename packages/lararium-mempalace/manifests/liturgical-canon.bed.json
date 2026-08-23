@@ -8,11 +8,11 @@
   "max_forms": 64,
   "flow": {
     "sources": [
-      "bags/@lares",
-      "bags/@lararium",
-      "bags/@sdm",
-      "bags/@elyncia",
-      "bags/@lares-history"
+      "bags/lares",
+      "bags/lararium",
+      "bags/sdm",
+      "bags/elyncia",
+      "bags/lares-history"
     ],
     "exclusions": [],
     "record_unit": {

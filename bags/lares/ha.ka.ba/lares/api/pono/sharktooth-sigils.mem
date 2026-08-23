@@ -1,0 +1,52 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/sharktooth-sigils.mem"
+mana      = 18
+manao     = 18
+manaoio   = 18
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "English alias redirect for nihomano-sigils; same meme, English face"
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/sharktooth-sigils"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Sharktooth Sigils
+
+''The sigils are the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for performing them in red — //rubrica//, red ochre, its own production stage. The black SAYS; the red DOES: in a stream it steers, in a wiki it calls.
+
+English alias for `nihomano-sigils`. See canonical meme:
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/nihomano-sigils >>
+
+The `<<~` outer delimiter — three marks, two teeth and a wake — is the sharktooth glyph.
+Every sigil opens with it. Every scope closes with a `>>` mirrored form.
+
+The SharktoothSigil tag (`lar:///ha.ka.ba/tags/SharktoothSigil`) names the grammar
+registration surface after this glyph. Tagging a tiddler with it teaches the parser a new word.
+
+See `nihomano-sigils` for the full cultural contract, wild-magic property, and first
+discovered sigil set.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/nihomano-sigils >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;etvnh3q3eU93HDlcICZvOj0Xt6R2YWtQiuwP0c9HLaI
+
+<<^ code:"&#x0004;" -> ? >>

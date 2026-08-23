@@ -1,0 +1,119 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/prism >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/prism.mem"
+mana      = 16
+manao     = 16
+manaoio   = 15
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "the lens-harness --- references existing content and refracts it through declared lenses into composed readings"
+tags      = ["api/pono/meme", "api/pono/loci"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/prism"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+! Prism
+
+The ''lens-harness''. The node points it at a piece of //existing// content --- an artifact, a transcript, another agent's output, a selection --- and refracts that content through one or more declared lenses, returning a composed ''reading''.
+
+A prism holds the content ''fixed'' and varies the ''viewpoint''. It generates nothing; it bends what already exists through a chosen angle and reveals the structure latent in it. One content enters; a spectrum of perspective-readings leaves, and the bands compose rather than collide --- the instrument of honest plurality, elevating no single band to the whole.
+
+The node summons it. It never rides a turn by default.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #operation >>
+
+!! The Operation
+
+Three moves, in order:
+
+# ''Reference, not copy.'' Prism names the target by `lar:` address, file path, or inline selection --- it points the way `aim` points. The content stays where it lives.
+# ''Apply the declared lenses.'' Each lens runs as an independent pass over the referenced span.
+# ''Compose as layers.'' Each lens writes its own overlay anchored to the same content; the result reads as the ''union'' of overlays, not a destructive rewrite. Passes run order-independent unless a lens declares it depends on another's output.
+
+The product earns a clean word: a ''reading'' --- a lensed interpretation of a reference. Not a //parse// (which recovers one canonical structure against one grammar), and not bare //annotation// (marginalia). Prism varies the lens; a parse fixes the grammar.
+
+<<~/ahu >>
+
+<<~ ahu #the-lenses >>
+
+!! The Lenses It Refracts Through
+
+Prism supplies the ''target slot'' the self-applied lenses lack, and reuses the `-> target` aim that `conformance` already carries:
+
+* ''`conformance`'' --- reads the OODA-HA decision-loop band: where the content's loop ran, skipped, or never closed. (`lar:///ha.ka.ba/lares/api/pono/conformance`)
+* ''`syad`'' --- refracts the content into standpoint bands: the five perspectives read the same content, each measuring within its own frame. (`lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`)
+* ''`mu`'' --- reads the content through the four tools as cognitive facets. (`lar:///ha.ka.ba/lares/api/mu/the-four-tools`)
+
+A lens reads its tool-bind through the `syad` `:` grammar (`syad:🏛️:*!`); each lens also runs alone.
+
+<<~/ahu >>
+
+<<~ ahu #invocation >>
+
+!! Invocation
+
+Declare the lenses, then delegate `->` to the target:
+
+```text
+<<~ prism conformance -> lar:///ha.ka.ba/bags/some/target/content >>       # single lens, addressed
+<<~ prism syad:🏛️ 🗡️ conformance -> lar:///draft.fix.lands >>          # composed spectrum
+<<~ prism mu:*! -> "<pasted or quoted content>" >>                     # a tool facet, inline
+```
+
+The lens list rides left of the `->`; the referenced target rides right. A target that resolves to the node's own current turn reads as a degraded invocation --- Prism reads //other// content, never the node's own live output (kin to the `conformance` rule).
+
+<<~/ahu >>
+
+<<~ ahu #reading >>
+
+!! The Reading
+
+Prism returns the composed overlay: each declared band, what it found, anchored to the same fixed content. Plain glyphs name what the lenses //found// --- the forward `->` declaration prefix stays reserved for the node's own loop.
+
+```text
+prism syad:🏛️ 🗡️ conformance -> lar:///draft.fix.lands:
+  🏛️ Philosopher  the claim holds where the import graph shows; unsupported where it asserts "cleaner"
+  🗡️ Satirist     the fix knifes the symptom, not the cycle --- wrong target, landed anyway
+  ↺ conformance   loop snapped at Orient; Act ran before the cause got read; Aftermath never closed
+  reading: three bands, one content --- the draft fixes a symptom without orienting.
+```
+
+Each band carries complementary signal; the reading composes them into a fuller view than any single lens holds. The overlay feeds the node's //next// decision --- it orients forward.
+
+<<~/ahu >>
+
+<<~ ahu #lineage >>
+
+!! Lineage
+
+Prism supersedes the old `--parse` language --- a content-decomposition tool that split input text into `lar:` coordinates by Aperture grain and "never answered content." That tool ran a true ''parse'': one input, one canonical decomposition against one grammar.
+
+Prism keeps the worthwhile half --- //reference a piece of content and read its structure// --- and drops the rest: it varies the lens instead of fixing one grammar, composes layered readings instead of one tree, and reads //existing referenced// content instead of decomposing fresh input.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/conformance >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;6blxhSzOWgGtw3w6an8qVwaUYgIW1e7E1G7Aki7_ZIo
+
+<<^ code:"&#x0004;" -> ? >>

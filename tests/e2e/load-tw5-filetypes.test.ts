@@ -21,7 +21,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
-const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
+const LARES_URI = "lar:///ha.ka.ba/bags/lares";
 
 let lar: LarInstance;
 let src = "";

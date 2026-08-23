@@ -5,15 +5,15 @@
  * "above the fold" layers are PER-WIKI (each rooted at the wiki's own identity),
  * never global singletons — the address names the wiki (see wikiSlotUri):
  *
- *   wikis/@{slug}/temp     — volatile, in-memory, $:/temp/* lives here
- *   wikis/@{slug}/draft    — "Draft of …" tiddlers, CRDT, high-churn (unsaved)
- *   wikis/@{slug}/personal — operator cross-device viewing state ($:/StoryList,
+ *   wikis/{slug}/temp     — volatile, in-memory, $:/temp/* lives here
+ *   wikis/{slug}/draft    — "Draft of …" tiddlers, CRDT, high-churn (unsaved)
+ *   wikis/{slug}/personal — operator cross-device viewing state ($:/StoryList,
  *                            $:/state/folded/*, $:/state/tab-*), CRDT. The doc a
  *                            slot binds to is keyed per (PersonaGroup × recipe-
  *                            fingerprint) by the vessel resolver; the slot URI carries
  *                            the address, the resolver hands over the per-fingerprint doc.
- *   wikis/@{slug}/working  — the SAVED live write layer, CRDT; normal edits route here
- *   bags/@{slug}           — the wiki's CANON bag (read-only from the wiki), published
+ *   wikis/{slug}/working  — the SAVED live write layer, CRDT; normal edits route here
+ *   bags/{slug}           — the wiki's CANON bag (read-only from the wiki), published
  *                            to only by a promotion MOVE (shore-law)
  *   libraryBags[]          — optional content libraries, CRDT, read-only from wiki
  *                            (the @lares wiki-recipe carries @lararium + @lares here)
@@ -40,20 +40,20 @@ export type SlotUri = string;
 
 /**
  * The live "above the fold" layers a wiki #has — each rooted at the wiki's
- * IDENTITY (`wikis/@{slug}`), never its canon bag. The binding is per-wiki
+ * IDENTITY (`wikis/{slug}`), never its canon bag. The binding is per-wiki
  * (PersonaGroup × recipe-fingerprint); the URI now names the wiki too, so which
  * wiki a layer belongs to reads from its address.
  *
- *   wikis/@{slug}/temp     — volatile, in-memory, $:/temp/* lives here
- *   wikis/@{slug}/draft    — "Draft of …" tiddlers, CRDT, high-churn (unsaved)
- *   wikis/@{slug}/working  — the SAVED live write layer, CRDT; normal edits route
+ *   wikis/{slug}/temp     — volatile, in-memory, $:/temp/* lives here
+ *   wikis/{slug}/draft    — "Draft of …" tiddlers, CRDT, high-churn (unsaved)
+ *   wikis/{slug}/working  — the SAVED live write layer, CRDT; normal edits route
  *                            here, canon publishes on a promotion MOVE (shore-law)
- *   wikis/@{slug}/personal — operator cross-device viewing state ($:/StoryList,
+ *   wikis/{slug}/personal — operator cross-device viewing state ($:/StoryList,
  *                            $:/state/folded/*), CRDT
  */
 export type WikiSlotKind = "temp" | "draft" | "working" | "personal";
 
-/** Mint a per-wiki live slot URI (`wikis/@{slug}/{kind}`). The one source both
+/** Mint a per-wiki live slot URI (`wikis/{slug}/{kind}`). The one source both
  *  `expandRecipe` (island cascade) and `recipeHostFacets` (host projection) walk,
  *  so host and island name identical layers. */
 export function wikiSlotUri(slug: string, kind: WikiSlotKind): SlotUri {
@@ -67,7 +67,7 @@ export const ORACLE_BAG   = ORACLE_DOC_URI;
 /** @crossroads — the public oracle plane; a recipe library bag whose pointer @oracle serves (public infra). */
 export const CROSSROADS_BAG = CROSSROADS_DOC_URI;
 
-/** Build a wiki's CANON BAG URI from a slug (`bags/@{slug}`) — the published,
+/** Build a wiki's CANON BAG URI from a slug (`bags/{slug}`) — the published,
  *  promotion-target content plane, read-only from the wiki. MUST agree with the
  *  doc consts (DAEMON_BAG_ID etc), which the daemon's composite mount and its
  *  event-store put both key on. */
@@ -75,13 +75,13 @@ export function wikiBagUri(slug: string): SlotUri {
   return bagUri(slug) as SlotUri;
 }
 
-/** The per-wiki draft layer (`wikis/@{slug}/draft`) — above the fold, the live
+/** The per-wiki draft layer (`wikis/{slug}/draft`) — above the fold, the live
  *  edit plane, never the canon bag. */
 export function wikiDraftBagUri(slug: string): SlotUri {
   return wikiSlotUri(slug, "draft");
 }
 
-/** The @catalog key for a per-DID draft doc (`wikis/@{slug}/drafts/{did}`) — the
+/** The @catalog key for a per-DID draft doc (`wikis/{slug}/drafts/{did}`) — the
  *  per-operator draft-doc pointer, above the fold. ONE source for the host reader
  *  (recipeHostFacets) and the mint/draft writers, so the round-trip never drifts. */
 export function wikiDraftDocKey(slug: string, identityDid: string): SlotUri {
@@ -97,13 +97,13 @@ export function wikiDraftDocKey(slug: string, identityDid: string): SlotUri {
  */
 export interface WikiHostFacets {
   readonly wikiSlug: string;
-  /** IDENTITY — `wikis/@{slug}`, the @catalog registry key for the wiki itself. */
+  /** IDENTITY — `wikis/{slug}`, the @catalog registry key for the wiki itself. */
   readonly wikiKey: string;
-  /** CANON — `bags/@{slug}`, the write/canon content doc the host resolves + registers. */
+  /** CANON — `bags/{slug}`, the write/canon content doc the host resolves + registers. */
   readonly wikiBagId: string;
-  /** The per-wiki draft layer bagId (`wikis/@{slug}/draft`). */
+  /** The per-wiki draft layer bagId (`wikis/{slug}/draft`). */
   readonly draftBagId: string;
-  /** The @catalog key for THIS operator's per-DID draft doc (`wikis/@{slug}/drafts/{did}`). */
+  /** The @catalog key for THIS operator's per-DID draft doc (`wikis/{slug}/drafts/{did}`). */
   readonly draftOracleTitle: string;
 }
 
@@ -119,12 +119,16 @@ export function recipeHostFacets(wikiSlug: string, identityDid: string): WikiHos
 }
 
 /**
- * Extract the slug from a lar URI of the form `lar:///ha.ka.ba/bags/@<slug>`.
+ * Extract the slug from a lar URI of the form `lar:///ha.ka.ba/bags/<slug>`.
  * Falls back to the input string for malformed inputs (callers can detect
  * by comparing input === slugFromUri(input) — true means malformed).
  */
 export function slugFromUri(uri: string): string {
-  const match = /^lar:\/\/\/ha\.ka\.ba\/@([^/]+)/.exec(uri);
+  // IT READS WHAT `wikiUri` AND `bagUri` MINT. Both spell the kind-plane segment — `wikis/slug`,
+  // `bags/slug` — so a pattern demanding a bare `@` at the root matches nothing either one produces, and
+  // every real address falls through to the malformed arm below and returns whole where a caller expects a
+  // bare slug. The segment is optional here because a wiki id also travels as the bare slug itself.
+  const match = /^lar:\/\/\/ha\.ka\.ba\/(?:bags\/|wikis\/)?@([^/]+)/.exec(uri);
   return match ? match[1]! : uri;
 }
 
@@ -133,10 +137,10 @@ export function slugFromUri(uri: string): string {
  *
  *   daemonRecipe: { wikiSlug: "daemon" }
  *   sdmRecipe:   { wikiSlug: "synthetic-dream-machine",
- *                  libraryBags: ["lar:///ha.ka.ba/bags/@sdm", "lar:///ha.ka.ba/bags/@ftls"] }
+ *                  libraryBags: ["lar:///ha.ka.ba/bags/sdm", "lar:///ha.ka.ba/bags/ftls"] }
  */
 export interface WikiRecipe {
-  /** Identity slug; expands to lar:///ha.ka.ba/bags/@<wikiSlug>. */
+  /** Identity slug; expands to lar:///ha.ka.ba/bags/<wikiSlug>. */
   readonly wikiSlug: string;
   /**
    * Canon content bag URIs, ordered top→bottom within the canon slot —
@@ -277,7 +281,7 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
     wikiSlotUri(slug, "draft"),
     wikiSlotUri(slug, "personal"),
     // working = the live write layer (normal edits route here via the
-    // current-wiki-bag cascade); the wiki's own bags/@{slug} canon rides BELOW as
+    // current-wiki-bag cascade); the wiki's own bags/{slug} canon rides BELOW as
     // the read-only library member, published to only by a promotion MOVE
     // (wiki-layer-ontology#shore-law). Working (live) and canon stay distinct layers.
     wikiSlotUri(slug, "working"),
@@ -310,7 +314,7 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
  * not fork operator view state across devices.
  */
 export interface RecipeFingerprintInput {
-  /** The wiki canon bag's Automerge doc URL (grants.wikiUrl = bags/@{slug}). */
+  /** The wiki canon bag's Automerge doc URL (grants.wikiUrl = bags/{slug}). */
   readonly wikiDocId: string;
   /** Library bag doc URLs in any order — sorted internally before hashing. */
   readonly libraryBagDocIds: readonly string[];

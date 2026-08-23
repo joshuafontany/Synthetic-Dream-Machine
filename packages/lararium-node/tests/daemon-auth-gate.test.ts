@@ -285,7 +285,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
 
   test("V3: armed with a gatePubKey, the challenge advertises it (gate-binding)", async () => {
     const { shore } = makeCapturingShore();
-    gate.arm(shore, "lar:///ha.ka.ba/bags/@daemon", "deadbeef".repeat(8));
+    gate.arm(shore, "lar:///ha.ka.ba/bags/daemon", "deadbeef".repeat(8));
 
     const ws  = await connect(serverInfo.port);
     const msg = await nextMessage(ws) as { nonce: string; gatePubKey?: string };
@@ -298,7 +298,7 @@ describe("DaemonAuthGate — pre-sync auth exchange", () => {
 
   test("V3: a lar:auth with sig+ts relays the proof {nonce, sig, ts} to the shore", async () => {
     const { shore, calls } = makeCapturingShore();
-    gate.arm(shore, "lar:///ha.ka.ba/bags/@daemon", "00".repeat(32));
+    gate.arm(shore, "lar:///ha.ka.ba/bags/daemon", "00".repeat(32));
 
     const ws   = await connect(serverInfo.port);
     const chal = await nextMessage(ws) as { nonce: string };

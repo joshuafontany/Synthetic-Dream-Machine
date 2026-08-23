@@ -22,7 +22,7 @@
  * gates any of those writes, and one operator command still moves kahu and seal together — so the warning
  * above stands undischarged: four amendment costs, one hand.
  *
- * The `bags/@nexus` charter DOC carries the AUTHORITY HOME (data-as-authority): the operator SEATS the roster
+ * The `bags/nexus` charter DOC carries the AUTHORITY HOME (data-as-authority): the operator SEATS the roster
  * into that doc, and the pure `kapae-antigen` fold/verify read it back through here. This file names the
  * founding quorum's SHAPE (three PersonaGroups, 2-of-3) and folds a loaded doc into the `KahuRoster`
  * the antigen consumes — FAILING CLOSED whenever the doc is absent, unseated, or short of a quorum.
@@ -63,7 +63,7 @@ export { NEXUS_DOC_DOMAIN } from "./domains.js";
 /** The charter doc's stable lar: bearing (names the doc; grants nothing — lar: NAMES, never fetches). */
 export const NEXUS_CHARTER_URI = "lar:///nexus.charter.seats" as const;
 
-/** The charter doc's uri-path — its siting inside the `bags/@nexus` residency (carrierBaseRelPath form). */
+/** The charter doc's uri-path — its siting inside the `bags/nexus` residency (carrierBaseRelPath form). */
 export const NEXUS_CHARTER_URI_PATH = "ha.ka.ba/nexus/charter/founding-roster" as const;
 
 /** One founding kahu — a display name + its ed25519 verifying key (null while unseated: the fail-closed floor). */
@@ -74,7 +74,7 @@ export interface NexusCharterKahu {
 }
 
 /**
- * The APPROVED roster the antigen reads — the exact data the `bags/@nexus` charter doc carries. The node
+ * The APPROVED roster the antigen reads — the exact data the `bags/nexus` charter doc carries. The node
  * adapter parses the doc off disk into this shape and hands it here; the DOC is the authority home, this
  * type its in-memory face.
  */

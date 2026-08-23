@@ -76,10 +76,10 @@ describe("WikiRecipe + grants — manifest payload shape", () => {
     const { port2: syncPort } = new MessageChannel();
     const recipe: WikiRecipe = {
       wikiSlug: "test",
-      libraryBags: ["lar:///ha.ka.ba/bags/@sdm"],
+      libraryBags: ["lar:///ha.ka.ba/bags/sdm"],
     };
-    // Library bags (@sdm) never ride the grants — the island resolves them
-    // from @catalog itself (boot = first reconcile).
+    // Library bags (sdm) never ride the grants — the island resolves them
+    // from catalog itself (boot = first reconcile).
     const grants = {
       islandUrl:  "automerge:abc",
       wikiUrl:    "automerge:xyz",

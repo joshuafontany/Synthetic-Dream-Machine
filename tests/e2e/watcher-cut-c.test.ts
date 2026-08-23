@@ -28,8 +28,8 @@ import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const CLI_BIN   = join(REPO_ROOT, "packages/lares-cli/dist/src/bin/lares.js");
-const TICK_TMPL = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/pono/tick.mem");
-const LARES_URI = "lar:///ha.ka.ba/bags/@lares";
+const TICK_TMPL = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/pono/tick.mem");
+const LARES_URI = "lar:///ha.ka.ba/bags/lares";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -39,7 +39,7 @@ let tickTemplate = "";
 
 /** Disk path a `cutc-<slug>` carrier projects to under the staged bags mirror. */
 function carrierPath(slug: string): string {
-  return join(lar.root, "bags/@lares/ha.ka.ba/lares/api/pono", `${slug}.mem`);
+  return join(lar.root, "bags/lares/ha.ka.ba/lares/api/pono", `${slug}.mem`);
 }
 function carrierUri(slug: string): string {
   return `lar:///ha.ka.ba/lares/api/pono/${slug}`;
@@ -112,7 +112,7 @@ const SLUGS = ["cutc-edit", "cutc-trans", "cutc-ren", "cutc-del", "cutc-brake-1"
 beforeAll(async () => {
   lar = await targetInstance();
   if (lar.mode !== "staged") return;
-  SRC = join(lar.root, "bags/@lares");
+  SRC = join(lar.root, "bags/lares");
   tickTemplate = readFileSync(TICK_TMPL, "utf8");
 
   // Write all test carriers, then land them in ONE ingest wave.

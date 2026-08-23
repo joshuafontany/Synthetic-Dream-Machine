@@ -1,0 +1,77 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/domain/divination >>
+```toml iam
+cacheable = true
+caption   = "divination"
+file-path = "bags/sdm/ha.ka.ba/sdm/components/domain/divination.mem"
+mana      = 13
+manao     = 16
+manaoio   = 13
+register  = "Synthesis"
+retain    = true
+role      = "component (domain): Divination — the school of perceiving the hidden"
+l-space   = "sdm"
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/sdm/components/domain/divination"
+```
+
+<<^ code:"&#x0002;" >>
+
+! Divination
+
+<<~ ahu #definition >>
+
+!! Definition
+
+The domain of perceiving the hidden — reading inscriptions, scrying distance, sensing patterns, presences, and intent.
+
+<<~/ahu >>
+
+<<~ ahu #activation >>
+
+!! Activation
+
+Orients a module toward ''knowing rather than changing''. It targets information, not matter — what is there, what it means, who left it. Rarely resolves as an attack.
+
+<<~/ahu >>
+
+<<~ ahu #interaction >>
+
+!! Interaction
+
+Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`. A `veil`/`spoof` effect degrades it; a `hook/dangerous` reading risks Corruption when it pierces something defended.
+
+<<~/ahu >>
+
+<<~ ahu #filters >>
+
+!! Filters
+
+```text
+[tag[lar:///ha.ka.ba/sdm/components/domain/divination]]              all divination modules
+[tag[prefix[lar:///ha.ka.ba/sdm/components/domain/]]]                all domain components
+[tag[lar:///ha.ka.ba/sdm/components/domain/divination]tag[lar:///ha.ka.ba/sdm/components/function/archive]]   divinations that archive
+```
+
+<<~/ahu >>
+
+<<~ ahu #aftermath >>
+
+!! Aftermath
+
+* Confirm whether scrying-at-range and inscription-reading want separate sub-functions or stay one domain.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;TmZLrAU4doMBMBo0HrFVG0er1WbNqGsYHlNiIy0aHy8
+
+<<^ code:"&#x0004;" -> ? >>

@@ -46,8 +46,8 @@ describe("synced-tree — observations persist atomically", () => {
 });
 
 describe("synced-tree — deleteBag/countForBag (the L4 per-bag watermark scalpel)", () => {
-  const A = "lar:///ha.ka.ba/bags/@sdm";
-  const B = "lar:///ha.ka.ba/bags/@elyncia";
+  const A = "lar:///ha.ka.ba/bags/sdm";
+  const B = "lar:///ha.ka.ba/bags/elyncia";
   const freshTree = () => new SyncedTree(join(mkdtempSync(join(tmpdir(), "synced-")), "synced-tree.json"), 0);
 
   test("forgets ONLY the target bag's observations; siblings stay put", () => {
@@ -87,8 +87,8 @@ describe("synced-tree — deleteBag/countForBag (the L4 per-bag watermark scalpe
 
   test("a bag whose id prefixes another is NOT over-matched (NUL boundary)", () => {
     const t = freshTree();
-    // @sdm and @sdm-history share a textual prefix; the NUL separator keeps them distinct
-    const SDM_HIST = "lar:///ha.ka.ba/bags/@sdm-history";
+    // sdm and sdm-history share a textual prefix; the NUL separator keeps them distinct
+    const SDM_HIST = "lar:///ha.ka.ba/bags/sdm-history";
     t.set(syncedTreeKey(A, "lar:///a.b.c"), "h1");
     t.set(syncedTreeKey(SDM_HIST, "lar:///h.i.j"), "h9");
     expect(t.deleteBag(A)).toBe(1);
@@ -97,8 +97,8 @@ describe("synced-tree — deleteBag/countForBag (the L4 per-bag watermark scalpe
 });
 
 describe("synced-tree — the R2 content-addressed rename-index", () => {
-  const BAG = "lar:///ha.ka.ba/bags/@daemon/notes";
-  const OTHER = "lar:///ha.ka.ba/bags/@daemon/other";
+  const BAG = "lar:///ha.ka.ba/bags/daemon/notes";
+  const OTHER = "lar:///ha.ka.ba/bags/daemon/other";
   const freshTree = () => new SyncedTree(join(mkdtempSync(join(tmpdir(), "synced-")), "synced-tree.json"), 0);
 
   test("resolves the UNIQUE live carrier observing a given content in a bag", () => {

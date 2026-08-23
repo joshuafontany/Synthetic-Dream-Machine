@@ -22,7 +22,7 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 // ---------------------------------------------------------------------------
 
 const FIXTURE_URL = new URL("./fixtures/event-verb-echo.mjs", import.meta.url);
-const WIKI_ID     = "lar:///ha.ka.ba/bags/@test/event-routing";
+const WIKI_ID     = "lar:///ha.ka.ba/bags/test/event-routing";
 
 // ---------------------------------------------------------------------------
 // Helpers

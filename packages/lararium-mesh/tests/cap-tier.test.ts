@@ -195,7 +195,7 @@ describe("tierPermitsRelayPeer — the holder-set chain at the wire", () => {
 // ── The GATE WIRING — the keystone enforced end-to-end at the sharePolicy shore ──────────────────────
 const NEXUS = "a".repeat(64);
 const relayGate = new DeterministicFederationGate(NEXUS);
-// The @crossroads public board is in the federatable set — grab its documentId via the gate's own membership.
+// The crossroads public board is in the federatable set — grab its documentId via the gate's own membership.
 // (federatable ids are private; we test the WITHDRAWAL through a floor oracle keyed on documentId instead.)
 const STRANGER = "peer-stranger";
 const MEMBER = "peer-member";
@@ -215,7 +215,7 @@ const noSeal: PlaneSeal = { isSealedPlane: () => false };
 
 describe("capTierShareDecision — the gate consults the declared tier, TIGHTEN-ONLY", () => {
   // A real federatable docId so `carrierShareDecision` says PUBLIC-cross; then the declared tier withdraws.
-  // The @crossroads public board is deterministically addressed from the nexus key (the gate federates it).
+  // The crossroads public board is deterministically addressed from the nexus key (the gate federates it).
   const crossroadsId = interpretAsDocumentId(crossroadsDocUrl(NEXUS)) as DocumentId;
 
   test("SETUP — a federatable doc crosses to a STRANGER at the structural floor (base allows)", async () => {

@@ -1,0 +1,220 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
+```toml iam
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/api/pono/cabal-realm.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 17
+manao             = 16
+manaoio           = 15
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Synthesis-Canon"
+retain            = true
+role              = "cabal-realm — a CabalGroup read as an IMAGINED REALM on the DreamNet: the superset of the members' shared infrastructure, imagined as one shared expanse (a hearth beside, not a category above). It carries no DID of its own — a Place bears identity, a vessel names the metal running the code, a realm names what the members jointly imagine and maintain. Named-not-ruled, alive by its epoch, dissolving to anu when unfed. The tie-break rides the realm's epoch (BeeKEM); malice rides Plane-B convergent-removal. GOVERNING A REALM ⊥ GOVERNING THE METAL (operator ruling 2026-08-09): the Ostrom principles govern the realm — the virtual relationship-place — while infrastructure authority (who runs the metal, who holds the archive passphrase, who lights a Herm, who signs a kāpae) sits on the vessel and the charter. Neither substitutes for the other"
+revised-on        = "2026-08-10"
+tags              = ["api/pono/meme"]
+type              = "text/x-memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/api/pono/cabal-realm"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Cabal-Realm ~ a hearth beside, not a category above
+
+A ''CabalGroup'' (the multi-human social tier above the PersonaGroups) reads as ''an imagined realm on the DreamNet: the superset of the members' shared infrastructure, represented as one imagined expanse.'' Not a //super-category// — a containing class with members as a subset, top-down, needing a root admitter — but ''a realm the members agree to share and maintain'': a realm ''drawn by the relationships, which dissolves if they break.'' The Crossroads shrine of the fiction (a district hearth fed by collective offering), made literal.
+
+''The word cuts three ways, and the cuts hold apart'' (operator ruling): a ''Place'' bears identity — the hearth that holds a DID. A ''vessel'' names the metal currently running the code. A ''realm'' names neither: it names ''what the members jointly imagine over their pooled vessels and Places'', a superset no single machine hosts and no single key signs. The realm never mints a DID; it composes the members' own.
+
+Triple-cruci­bled (your recorded design · the deep web · the canon). The model braids ''three shipped bodies of work'', and the braid holds: <<~ confidence Synthesis-Canon 15/20 >>
+* ''Ostrom's common-pool-resource governance'' (the social layer),
+* ''the federated shared-substrate abstraction'' — a Matrix room //runs// as a replicated event-DAG many homeservers maintain; an SSB feed lives only while followed (the systems layer),
+* ''Clark's soft-state + CRDT tombstones'' (the liveness layer).
+
+<<~/ahu >>
+
+<<~ ahu #verb-not-noun >>
+
+!! A Verb, Not a Noun (the Mu)
+
+A group never holds you the way a //container// does (a noun — a membership-list, needing a root admitter, a single point of capture). It runs as ''a thing you continuously DO'' (a verb). The commons historians name it exactly: //"there is no commons without commoning — the commons is a verb."// Members do not ''belong to'' the cabal; they ''maintain'' it. Inversion of control, reified as a commons. The realm holds imagined precisely because the maintaining, never a host, sustains it.
+
+''What the maintaining DEPOSITS'' — `nohopapa` (ʻōlelo Hawaiʻi: to dwell in one place across generations; settling into a foundation, layer, rank, structured sequence). The verb names the doing; `nohopapa` names what the doing ''accrues''. A member does not hold a grant that expires — they ''dwell in the realm, and the dwelling deposits `papa` — a settled depth''. Stop dwelling and no deed remains to lapse; the depth ''erodes''. So the model carries no lease anywhere: a lease is a substance-object you hold between exercises, and this stack retired that shape. (Refused deliberately: `hoʻolimalima`, the modern land-transaction lease-term — it entered the language through the machinery by which Hawaiian land left Hawaiian hands, and a stack whose brief reads ''shelter against empire'' does not name its primitive after that instrument.)
+
+''Composition runs BOTH ways.'' A realm holds what its dwellers dwell ''in'' — so the realm sustaining its members never reads as a second leg bolted onto the constructor; ''being-dwelt-in is what makes it a realm''. A realm that does nothing for its members' standing fails a condition the ontology imposes, never merely a courtesy it skipped.
+
+But the Mu cuts both ways: a ''verb-realm carries a defended noun-boundary.'' Drop the boundary (Ostrom P1) and the verb-realm either //starves// (false dissolution) or gets //captured//. The surviving shape: ''a verb that keeps a boundary.''
+
+<<~/ahu >>
+
+<<~ ahu #convening-and-cabal >>
+
+!! The convening ends ~ the Cabal holds
+
+''Three entities sit at three cadences, and a sentence that puts them adjacent invites a reading that fuses them'':
+
+|! |! what it holds |! how long it lasts |
+| the CONVENING | a council reaching their devices and signing | ''bounded'' — it ends |
+| the ACT | what the convening leaves: signed, attested, at a position | permanent, and never re-enacted |
+| the CABAL | the RELATIONS between those faces | ''persists between convenings'' |
+
+''A council logs into their devices, signs an Act, and disperses — and whether they sat together in one room never enters it.'' The convening dissolves by design. ''The Cabal does not dissolve with it'', because the Cabal names the relations rather than the gathering, and this meme has always said so: the relationships define the realm, and it ends ''when they break'' — never when they stop meeting.
+
+> ''SO NOBODY DISSOLVES A CABAL BY PREVENTING ITS MEETINGS.'' A community scattered, waiting out a season, or unable to gather safely holds exactly the constitution it held before. The naive reading — //a Cabal IS its gatherings// — would hand an adversary a dissolution method that does not work, and it reads plausible enough that this house made the slip once already.
+
+''LAPSE ⊥ QUIET lands here.'' Quiet names relations present and unexercised; lapse names relations gone. And the honest bound sits on the same edge: ''a relation takes two'', so no single hand ends one alone — the same shape as no-lowering-act everywhere else on this plane, where a party leaves by ceasing rather than by getting struck.
+
+''A LIVE QUERY THEREFORE READS RELATIONS, never convenings.'' Ask who dwells and the answer folds over relations that stand; a roster of past gatherings would name history rather than membership.
+
+<<~/ahu >>
+
+<<~ ahu #the-realm >>
+
+!! The Realm ~ named, ruled, lived, dissolved
+
+* ''NAMED, not ruled'' — the realm's identity rides ''content-addressed'' (its genesis CID, #GEN_2) — a name, never a DID, and never a root. The name grants no //authority// (#ISLAND_4, DocUrl-not-authority) — but, crucible-corrected, it grants no //privacy// either: a stable realm-id advanced by a same-key signed pointer carries a public ''linkability + timing surface'' — existence, version-history, activity cadence, and (via epoch-rotation timing) membership-change events leak to any reader even with the roster veiled (Pfitzmann-Hansen · PURBs). A name carries no root; it does carry a trackable handle.
+* ''RULED by the closure'' — authority runs as the ''closure of mutual maintenance edges'' (`group-as-closure`: "no central object, evaluated as a query, never instantiated"). The doc is the shared ''substrate''; the relationships are the ''authority''. Share substrate, not sovereignty (#causal-islands) — each member keeps their own vessel-key, and the realm borrows none of them.
+* ''LIVED by its epoch'' — the realm carries its ''own epoch/lease'', the collective-maintenance heartbeat.
+* ''DISSOLVED by cooling'' — break the maintenance and the realm ''cools to anu'' (the residency model) — it //never deletes// (a hard-deleted CRDT item a peer still holds flows back and resurrects); it goes cold, re-warmable. //A fed node hums, a neglected one flickers.//
+
+<<~/ahu >>
+
+<<~ ahu #the-tie-break >>
+
+!! The Tie-Break ~ the realm's epoch (BeeKEM), not a person
+
+The held multi-principal key-handover break — concurrent add-while-remove leaks a key, equal peers, no senior to order it — resolves ''in the realm, not a person'': the realm's epoch carries it, ''exactly the MLS pattern lifted to decentralized causal-order CGKA'' (DCGKA · causal TreeKEM · ''BeeKEM — already on our stack via Keyhive''). Concurrent membership ops ''converge by deterministic blank-on-merge'' — concurrent leaves sorted, racing paths blanked, replicas agree on tree //shape// — //no human adjudicates the merge.// Coordinator-free, no kahu, no smuggled root. But, crucible-corrected, ''converge ≠ heal'': after a concurrent merge the tree holds //no root secret// until a later ''non-concurrent'' commit lands — the no-root-secret window; post-compromise security is ''deferred, not delivered'', by the merge (Bienstock-Dodis-Rösler: PCS cost grows with concurrency degree).
+
+''The residuals the model OWNS (or it over-claims):''
+* ''HEAL ≠ PREVENT.'' A member who saw epoch N saw it forever; post-compromise security recovers //forward only//. The leak stays bounded, never un-shared.
+* ''No clean-winner epoch.'' Concurrent rolls ''merge by blanking'', not max-register-pick; the cost lands as weakened forward-secrecy on forked child-epochs (DMLS/BeeKEM repair it). "Coordinator-free max-register" was right about //convergence + no lockout//, wrong if it meant //one epoch wins free//. THIS IS THE AUTHORITY ON THE KEYING FOLD, and it belongs to Keyhive/BeeKEM (upstream MLS), never to us: the mesh's own fencing epoch — the `epoch-lease` max-register a grant binds with `boundEpoch` — PICKS A WINNER, and carrying that reading onto a CGKA epoch costs forward secrecy on the forked child-epochs. A word a dependency owns stays qualified and translated, never redefined: <<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+* ''The epoch guards liveness, NOT authority.'' Any member can re-key (a churn/DoS the math does not stop). Membership-//authorization// rides ''Plane B (device-admit/delegation)'', orthogonal — and ''malicious removal rides Keyhive's convergent-removal tombstone, NEVER the counter'' (a malicious re-minter rides the max-register //up// and survives). The epoch heals honest churn; the tombstone //converges// the removal — but, crucible-corrected, ''eviction is eventual, not final'': a still-authorized principal who hasn't seen the remove can issue a legitimate concurrent re-add the CGKA will not reject (the //remove-the-remover// race — adjudicated in the auth-graph, liveness-gated, never the merge). <<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
+
+<<~/ahu >>
+
+<<~ ahu #governance >>
+
+!! Governance ~ the boundary the verb must keep (Ostrom)
+
+Without these the realm becomes the //un//-governed commons that collapses (Hardin), not the Ostrom commons that endures. ''MUST ride:''
+* ''P1 — bounded, costly membership.'' Content-addressing //names// but does not make //scarce// — a keypair costs nothing, so identity ≠ Sybil-resistance. The ''voucher cost-dial'' (the held siege-gate: marginal, `rb>c`, co-pay-and-watch) puts a price on the join.
+* ''P4 — mutual monitoring.'' The maintenance edges stay observable to members, or capture hides.
+* ''P5 — graduated sanctions.'' Gossip → reminder → ''anergy-not-ban'' (already held in the network-edge doctrine).
+* ''P2 — benefit ∝ maintenance.'' The realm remembers who fed it; defeats free-riding.
+* ''Soft-state discipline'' — a generous re-warm K-factor (so a still-wanted realm doesn't falsely starve) + bounded cold-GC by causal stability (so tombstones don't bloat every replica forever).
+
+!!! ★ GOVERNING A REALM ⊥ GOVERNING THE METAL ★
+
+''Two managements wear one word, and a reading that fuses them mis-sites every seat it names'' (operator ruling). A realm is a ''virtual relationship-place'' — what the members jointly imagine over their pooled vessels; its governance is Ostrom's, and its subject is the shared expanse. ''Infrastructure management'' is a different subject entirely: who runs which metal, who holds the archive passphrase, who lights a Herm into a lararium, who signs a Nexus kāpae. Those seats sit on the vessel and the charter, never in the realm.
+
+The fusion is easy because the same person often does both, and it fails in one direction: ''a realm's members agreeing something does NOT move a key, and an operator holding the metal does NOT hold a vote in the realm.'' Where a design needs both it must name both, separately — the realm's agreement and the infrastructure's authority never substitute for each other.
+
+The Ostrom principles above still hold ''unchanged'' under the cut; they govern the realm. Read them as claims about the metal and P1's cost-dial turns into an admission fee for hardware, which no one ever ruled. <<~ confidence Synthesis-Canon 14/20 >>
+
+<<~/ahu >>
+
+<<~ ahu #the-unswept-corner >>
+
+!! The Unswept Corner ~ persistence ≠ legitimacy (OPEN)
+
+The one failure mode with ''no off-the-shelf fix'', named so it stays visible: ''liveness-by-maintenance rewards PERSISTENCE, not LEGITIMACY.'' A small hostile faction can ''out-maintain an apathetic majority and keep a captured realm as theirs'' — soft-state has no defense, it rewards whoever keeps feeding. The realm dissolves when //everyone// abandons it, never when the //wrong// hands keep it warm.
+
+The crucible (4-spirit swarm: Steem→Hive · Hirschman · Vitalik-legitimacy · SybilLimit · RFC-7282) ''bounds'' the cure rather than dissolving it — the gap survives as a genuine ''hard-bound'': //legitimacy cannot live in the join-gate.// Legitimacy reads as ''higher-order acceptance'' one level up, and any gate that tried to compute it would //become// the captured object. So the join-gate ''stays inert by design'', and the buildable answer is ''escape + sight, never prevention'':
+* ''Fork-as-exit (primary) — BUILT + witnessed'' (`fork-realm.ts` + real-Keyhive probe): the legitimate maintainers carry the realm's roster into a ''fresh sentinel realm'' that ''excludes the captors by OMISSION'' (build-corrected: a fork is a realm you LEAVE, so the captors are simply never added to the fresh sentinel — no membership key — cleaner than convergent-removal, which evicts from a realm you KEEP; the Steem→Hive airdrop-exclusion made native). Each vessel ''re-points its own petname'' to the fork (Zooko: the id changing is the feature — no global consensus, no admitter), and the fork records ''forkedFrom'' for continuity. //Witnessed: the captor's `verifySentinelMembership` reads FALSE on the fork; the survivors' TRUE.// Hirschman's bound: exit disciplines a captor //only while forking stays cheap// — so the build must lower switching cost, or the cure is theatre.
+* ''A capture-clock, not a gate — BUILT'' (`cabal-realm-clock.ts`): surface //who feeds the realm and since when// (free; the liveness signal already kept) so the majority ''sees'' a minority out-feeding them //while it happens//, while exit is still cheap. Verdict-free — the threshold is the operator's calibration.
+* ''Vouching only as an optional speed-bump'' — attack-edge-bounded (SybilLimit over the delegation graph), never a flat quorum-of-N (which just ''vouch-farms''). Price + time-for-the-fork, ''never the wall''; mandatory vouching //is// a root admitter wearing N masks.
+
+''THE CLOCK READS RIVALS, and its limit has a name.'' A single clock reports one replica's sighting; the honest instrument runs ''N independent readings over one declared realm with the spread published'', treating divergence as the signal rather than reconciling it — the shape both interlaboratory comparison and rival reference-frame realizations arrive at, neither needing a rung above. ''And no separation of roles cures a paid reader'': across seven canonical failures in a field that formalised the split for a century, six kept it perfectly and failed anyway, on the invariant that ''whoever pays the gauge bends the gauge''.
+
+''What `nohopapa` changes here, and what it does NOT.'' It does not dissolve the hard-bound — legitimacy still cannot live in the join-gate, and a captured realm still reads live to any liveness signal. What it changes is ''what the capture-clock can see''. Bare maintenance reports a rate; depth-in-a-layer reports a ''stratum'' — who has dwelt, how deep, and through how many turns of the realm's own rhythm. A faction that out-feeds an apathetic majority ''this season'' still shows shallow against dwellers who have settled through many; a faction that has genuinely dwelt long has, by the model's own lights, ''become'' maintainers. So the clock gains a second axis and the corner stays unswept — sight sharpens, prevention does not arrive.
+
+This stays ''OPEN — the operator's design seat'': the residual reads as calibration (how cheap the fork must run · how the petname re-point coordinates at scale — the Schelling-point risk), and the honest hard-bound that capture is made ''survivable + visible, never prevented''. Every shrine keeps one unswept corner; this is the cabal's.
+
+<<~/ahu >>
+
+<<~ ahu #the-seal >>
+
+!! The Seal ~ content keys to the question, not the roster (predicate-keyed, plane-collapsed)
+
+A cabal-realm shares content without materializing a reader-set. It seals each post to the ''NP-predicate'' //"holder presents a valid delegation-chain to the charter root, valid for epoch e"// — the ''same witness'' the maintenance-closure already reads (`group-as-closure`) — so ''the two planes collapse onto one cap-chain'': the chain that authorizes maintenance IS the decryption witness. No reader-object stands; //"who may read?"// reads ''unanswerable by design'' (a predicate's extension, never a list). The group-messaging trilemma (strong-PCS · efficient fan-out · no materialized set — pick two) ''dissolves as scoped'': the set never forms (horn 3), one ciphertext-trace diffuses by gossip (horn 2), and post-compromise HEALING lands at ''epoch cadence'' — the substrate ceiling, since strong-immediate healing would demand a global-now the causal-island law forbids (//you cannot lose what the substrate never permitted//). Forward-secrecy rides epoch-time; healing rides the ''same short-TTL cap + revoke-CID G-set that ages the closure'' — one evaporation-trace, both planes (Ledger-State Stigmergy). Deploy floor: ''Silent Threshold Encryption'' today, ramping to ''Witness Encryption''; never CP-ABE/IBE/DKG (a coordinator smuggles a global-now back in). <<~ confidence Synthesis 12/20 >> Five domains converged on the one attractor — witness-encryption · clonal-selection · stigmergy · CRDT-as-sheaf (`cohomological-gate`) · the color-manifold honesty-brake (//the unwrap-witness relocates, never vanishes//).
+
+<<~/ahu >>
+
+<<~ ahu #six-joints >>
+
+!! Six joints under one word ~ and the criterion that separates them
+
+''ONE WORD CARRIED SIX ENTITIES, and //different content// never separated them.'' The criterion that does: ''different ceremony, different threshold, different RATE, different authority''.
+
+|! joint |! who changes it, at what cost, how often |
+| the FOUNDING ACT | founders, ONCE, never again — its digest names the group |
+| the SEAL LINEAGE | k-of-n of current keys, a rotation ceremony, rare |
+| the COMPACT | an amendment quorum ''under its own amendment rule'' — dearer than rotation |
+| the PRACTICE | an ordinary governance act, fast, reversible |
+| the FACE | editorial, delegable to one hand, its own rate |
+| the ROSTER | each member on join/leave — ''the only one a non-founder mutates'' |
+
+''Two collapse, and the collapse reads as a gain.'' The NAME never stood separate — it reads as the content-address of the founding act. The evidentiary MUNIMENT collapses whole: the parchment, the enrolment, the confirmation reciting an earlier grant verbatim, all of it existed to make a record self-proving, ''which content-addressing does natively''. Nobody should rebuild a muniment layer.
+
+''What each fusion costs, priced elsewhere first.'' Seal ⊗ face: every rotation leaks to shelf readers, and an editor updating a display bearing writes to the object holding the pre-rotation commitment. Face ⊗ compact: a published grant that binds permanently ''freezes the group at founding'' unless it ships its own amendment rule — and fusing outward purpose into internal rules destroys //acted outside its purpose// as a nameable wrong. Compact ⊗ founding act: a founding with no amendment rule yields ''a FORK, never an amendment'', and a fork splits the shelter.
+
+''ENACTED IN CODE.'' The word retires to the FOUNDING ACT; the other joints take their own names — the seal lineage rides `SealEpoch` · `verifySealLineage` · `sealKeySetHash` (the wax-stamp already spoke //lineage// in its own prose, and only the type name had drifted); the published face rides `RealmGlamour` · `projectRealmGlamour`, seating the same //last-seen published face// the persona plane already means by glamour; the roster rides `KahuRoster`; the operator's door reads `lares nexus seal`. The DOC has since split too: seal · kahu · practice ride ''three fenced blocks at three cadences'', each narrow writer re-reading the carrier and swapping only its own fence, carrying the others through as opaque text it never deserializes — so a posture flip no longer re-emits the seal lineage's bytes on its way past, and two hands on different joints no longer clobber each other last-writer-wins. ''That makes the corruption inexpressible rather than merely discouraged.''
+
+''ONE JOINT REMAINS, and it reads as the one that mattered'': the split runs through STORAGE, never through AUTHORITY. No threshold, quorum or signature gates any of the three writes, and one operator command still moves ''kahu and seal together''. So the warning this section opens with stands undischarged — //a quorum that rotates keys can silently move the admission price// — because the costs that differ by orders still answer to one hand. Splitting the ceremony is the next act, and it waits on the FORUM below: a threshold gate names who may object, and nobody has said who holds standing.
+
+> ''AND THE FORUM STANDS UNBUILT.'' The tradition separated its instruments precisely — one ran against the INSTRUMENT, another against the EXERCISE — and standing to invoke either lay with the sovereign ALONE; members held none to challenge the forfeiture of their own charter. This stack refuses to arbitrate which fork reads legitimate, correctly. ''But refusing to arbitrate never names a forum'', and historically the forum came before the doctrine. Who may challenge a seal lineage, by what procedure, and whether a MEMBER holds that standing — unanswered, and the tradition's answer reads as the one this stack exists to refuse.
+
+<<~/ahu >>
+
+<<~ ahu #heraldry >>
+
+!! The public Face reads as HERALDRY ~ a shown device, never a muster roll
+
+''A Cabal that wants a public face declares one'' — a nickname, a device (a logo, a mark), and its own bulletin-board pointers for the content-addresses and shared docs it invites the world to read. In the older register: ''a Company shows its heraldry.''
+
+''And heraldry names the boundary better than any crypto framing managed.'' A Company displays its arms so strangers may address it, treat with it, and hold it to what it did under that mark. ''It does not publish its muster roll.'' The two acts never sat together, and a reader who confuses them mistakes an invitation for an enumeration.
+
+''So the Face carries'': a chosen name · a mark · a bearing · pointers a stranger may fetch. ''And it carries no roster, no count, and no member identity'' — the shore that projects it reads only {realm, meta} and could not carry more if a later hand wanted it to.
+
+''A private Cabal simply declares none'', and lives in its members' own address books under pet-names. ''Declaring a face reads as an ACT with a cost, never as a stage every Cabal grows into.''
+
+<<~/ahu >>
+
+<<~ ahu #two-roots >>
+
+!! Two Roots ~ a public surface may stand; a person-history may not
+
+A cabal splits at ''two roots'' (operator ruling). A ''private-held root'' — the members' own persona-clouds + private closure, causal-island-local, content predicate-keyed (#the-seal), unlinkable by the per-circle scope-pseudonym. And a ''public org root'' published to ''@crossroads'' (the public plane): a ''charter-epoch lineage'' whose ''head'' names the current co-joined membership surface (//the set is mortal// — present state), and whose ''posted data carries a wax-stamp that attests a PAST'' (#the-wax-stamp), carrying the pledged-Handle's public DID, claimed deliberately, one-way. The public reach costs ''no global-now'': the surface never composes into a per-citizen registry to scrape. This ''resolves the linkability-surface'' the stable realm-id otherwise leaks (#the-realm) — the public face shows the moment, never the trail. Kowloon Circles thus separate into private-held roots + public org roots — the veil-ladder's overlay/floor made a two-root cut (`the-veil-ladder`).
+
+<<~/ahu >>
+
+<<~ ahu #the-wax-stamp >>
+
+!! The Wax-Stamp ~ provenance of the DATA, never presence of the person (the public-plane dual)
+
+The public org root answers a ''provenance'' question, not a membership one: //"does this POST trace to the CURRENT charter, a PAST charter (authentic, older), or a SPOOF?"// — the artifact's lineage, ''never'' a person's presence. The two mechanisms stay ''orthogonal'' (operator ruling): the ''membership handshake'' answers presence, ''live + peer-to-peer'' (two nameless entities compare their #has cap-stacks right then — no registry); the ''wax-stamp'' answers provenance, ''public + on the data.'' Presence is a live verb; provenance is a frozen fact. <<~ confidence Synthesis 13/20 >>
+
+The charter reads as a ''pre-rotated, hash-linked, content-addressed epoch chain'' (TUF ≈ KERI, one shape): each epoch names its authorizing key-set/quorum AND ''pre-commits a digest of the next epoch's keys'' — so stealing today's council keys ''cannot forge tomorrow's charter.'' It lists ''keys + thresholds, never a roster.'' A wax-stamp on posted data reads `{artifact-hash · epoch-CID · sealed-at (an ITC/logical BOUND-PAST) · signature by an epoch-N key}` — inline, self-verifying ''island-locally'' (no global read, pono with #causal-islands). The reader trichotomy ''falls out mechanically'': epoch == head & sig ok → ''CURRENT'' · epoch is a prev-reachable ancestor & sig ok vs that epoch's key-state → ''PAST-authentic'' · no match / sig fails → ''SPOOF''.
+
+The ''attests-a-past discipline'' preserves no-global-now: the seal says //"sealed under epoch N, which held t0..t1"// — a past claim, ''never'' "the org endorses this now" (that reads live, on the handshake). This is the ''public-plane DUAL of #the-seal'': the private plane predicate-keys ''who may READ'' (a delegation-chain-to-charter decryption witness); the public plane epoch-cites ''which charter AUTHORED'' (a delegation-chain-to-charter provenance signature) — the ''same cap-chain'', once to gate reading, once to stamp authorship. ''Revoke the EPOCH, not the artifact'' (Sigstore stance): a compromised epoch-key gets superseded by the next rotation; old honest seals stay valid-under-their-epoch.
+
+The honest wall, kept lit: ''"valid trace to lineage L" reads as a hard crypto fact; "L is the legitimate org" does NOT'' — a fork yields two internally-valid lineages, and which counts as "the real guild" rests on ''higher-order social acceptance'' (talk-story · witness quorum), never a signature. ''Duplicity'' (two signed inconsistent events at one epoch) IS algorithmically detectable = proof-of-misbehavior; witnesses secure ''availability + first-seen, never truth.'' Never auto-arbitrate the fork (the same hard-bound as #the-unswept-corner, one level up). <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-wax-stamp >>
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cohomological-gate >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/multi-fractal >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;77Gysb1eBtZRvHOt_6fHB9AmO12xAQgd7zzR1RazGMk
+
+<<^ code:"&#x0004;" -> ? >>

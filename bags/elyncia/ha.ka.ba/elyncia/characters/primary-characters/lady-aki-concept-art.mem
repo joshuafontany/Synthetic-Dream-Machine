@@ -1,0 +1,230 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-art >>
+```toml iam
+cacheable  = true
+confidence = 13
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-art.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 13
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "Lady Aki concept-art package — true body, public glamour, threshold reveal, palette, negative directions"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-art"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Lady Aki ~ Concept Art Package
+
+//Migrated verbatim from `elyncia/Shattered Isles/Lady_Aki_Concept_Art_Package_v1.md` (2026-08-14); md→wikitext conversion mechanical — prose
+untouched; md table separator rows dropped.//
+
+<<~/ahu >>
+
+<<~ ahu #body >>
+
+! Lady Aki — Concept Art Direction Notes v1
+
+*Not final. Use as design scaffolding for FTLS / SDM+ alpha character creation.*
+
+!! Core Art Problem
+
+Aki has a true Spider Folk body, but her traveling/public silhouette is mediated by faerie glamour and shrine etiquette.
+
+The design sheet should show both:
+* the chitinous fae body truth,
+* and the socially readable wandering miko glamour.
+
+Do ''not'' collapse these into one fixed costume.
+
+---
+
+! Main Visual Modes
+
+!! 1. True Body — Spider Folk Heritage
+
+Use for anatomy studies, side callouts, and partial reveal panels.
+
+Design notes:
+* iridescent fae chitin: violet, seafoam, turquoise, moonlit green,
+* multiple arms, but elegant and ritual-useful rather than monstrous,
+* soft alien face; gentle expression allowed,
+* plate-like chitin reads as natural armor,
+* subtle web/silk organs or spinneret-tool logic can appear at wrists, hips, or back,
+* body should feel fae, mythic, and sacred rather than horror-grotesque.
+
+!! 2. Public Glamour — Traveling Miko
+
+Default table-facing Aki.
+
+Design notes:
+* red/white miko work outfit,
+* silksteel ritual robe layers,
+* purple or dark outer travel layer optional,
+* classic wide-brimmed ''ichimegasa'' with ''uchikatsugi-style veil'',
+* veil softens identity and hides chitinous silhouette,
+* extra arms may be hidden, softened, or visually interpreted as sleeve-folds / shadow / ribbon until revealed,
+* shrine bells, ofuda, sash tools, spinneret kit, and small charms at belt.
+
+!! 3. Threshold Reveal — Glamour Thins
+
+Use for dynamic action thumbnails.
+
+Design notes:
+* veil lifts or tears aside,
+* chitin catches light,
+* extra arms anchor silk lines or hold ofuda,
+* bells and ward papers multiply,
+* silk geometry defines the room,
+* Aki remains a controller / ritualist, not a front-line bruiser.
+
+---
+
+! Hat Direction
+
+Prefer the ''classic wide-brimmed traveling hat'' over the flatter hat in some reference images.
+
+Use:
+* ichimegasa silhouette,
+* broad straw/bamboo/reed brim,
+* hanging veil,
+* travel-priestess / aruki-miko energy,
+* not a tall court ritual hat.
+
+---
+
+! Ichi Direction
+
+Ichi should ''not'' have spider legs.
+
+Use Ichi's character file:
+* compact ashigaru infantry armor,
+* medium humanoid frame,
+* slightly stocky practical sergeant silhouette,
+* chitin kikko-pattern cuirass,
+* mycelium-silk backing,
+* glowing orange daemon-spore eye-orbs,
+* damaged but repaired armor with orange scar-light,
+* old soldier / guardian / living powered armor.
+
+When worn:
+* Ichi wraps Aki as armor.
+* glowing eye-spots migrate upward above Aki's brow like a guardian crest.
+* Ichi does not become a spider-legged creature.
+
+When autonomous:
+* Ichi reads as a compact humanoid armor-person, not a spider mech.
+
+---
+
+! Strandbeest-Shrine Direction
+
+The ''shrine'' is the one with articulated legs.
+
+Use:
+* compact roadside shrine / hokora,
+* strandbeest kinetic leg logic,
+* six to eight walking limbs,
+* silk-and-mycelium sails,
+* chitin/composite shrine body,
+* offering shelf and libation dish,
+* orange-glowing Mother Spore fairy ring,
+* armored wagon-bed,
+* Ephyra / spore-jelly outputs.
+
+It may feel like:
+* Shinto roadside shrine,
+* Theo Jansen strandbeest,
+* hermit crab cathedral,
+* mushroom shrine tachikoma.
+
+---
+
+! Prismatic Elf Ranger Friend
+
+For group sheets:
+* include the Prismatic Elf ranger / kaiju-stalker as Aki's expedition peer,
+* large grimalkin-lynx mount,
+* clear silhouette separation:
+** Ranger = wilderness / hunt / kaiju-scale threat reading.
+** Aki = shrine / threshold / veil / support infrastructure.
+** Shrine = logistics / camp / lararium.
+** Ichi = guardian powered armor.
+
+Do not let the ranger and Aki merge visually.
+
+---
+
+! Poster-Sized Landscape Design Sheet Brief
+
+Create a ''landscape-oriented poster concept sheet'', readable like video game design concept art, not a final polished illustration.
+
+Suggested layout:
+# Center-left: Aki in public glamour, full body, veiled ichimegasa, red/white robe.
+# Center-right: Aki with glamour thinning, chitin and extra arms partially visible.
+# Rear/right: Ichi as compact humanoid ashigaru powered armor, no spider legs.
+# Rear/left or background: Faerie-Ring Strandbeest-Shrine with articulated strandbeest legs.
+# Lower strip: detail callouts — hat, veil, spinneret kit, safety netsuke, bell-tikker, silksteel robe texture, ofuda, chitin plates.
+# Small inset: Prismatic Elf ranger and grimalkin-lynx scale reference near shrine.
+# Margin notes: rough concept labels, arrows, non-final sketch annotations.
+
+Negative direction:
+* no spider legs on Ichi,
+* no tall ritual hat,
+* no hypersexual framing,
+* no final-production polish,
+* no generic witch hat,
+* no modern sci-fi armor replacing shrine/ashigaru language.
+
+
+! Talk Story Notes — Concept Art Package v1
+
+!! What Changed
+
+The character creation package now treats Aki's concept art as a three-register design:
+
+# True Spider Folk body.
+# Public glamour / traveling miko presentation.
+# Threshold reveal / danger geometry.
+
+The concept art of Aki remains explicitly useful, but not final. It contributes scale, party ecology, and the idea that Aki's faerie glamour hides or softens her chitinous form.
+
+!! The Big Fix
+
+Ichi does not have the spider-legged silhouette.
+
+Ichi remains a compact humanoid ashigaru powered armor companion: chitin plates, mycelium-silk backing, orange daemon-spore eyes, damaged-sergeant practicality.
+
+The mobile shrine carries the articulated strandbeest legs.
+
+!! Why This Matters
+
+This prevents three visual systems from collapsing into one:
+
+* Aki's Spider Folk body = heritage truth.
+* Ichi = guardian powered armor / personhood question.
+* Strandbeest-Shrine = expedition infrastructure / mobile lararium.
+
+The concept package now gives artists a clean separation of silhouettes.
+
+!! Table Read
+
+When Aki walks into a settlement:
+* locals first see veiled miko traveler,
+* careful observers notice too many sleeve-folds,
+* hostile pressure makes chitin and extra hands appear,
+* Ichi waits as armor/person,
+* the shrine clicks behind her like a household that learned to walk.
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;5IVunyTN9TqUhoslKxwa-vfoh_Za7BM38TwiMHx0kjw
+
+<<^ code:"&#x0004;" -> ? >>

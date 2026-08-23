@@ -128,7 +128,7 @@ describe.skipIf(coreBlobSkip)(
     };
 
     const wikiBeat = JSON.parse(wiki.filterTiddlers("[wikisense:cohere:ordinary[]]")[0]!) as WikiCoherenceSummary;
-    const compositeBeat = await compositeSummary("lar:///ha.ka.ba/bags/@cross-beat-glue", [...GLUE_SEEDS, pluginDoc]);
+    const compositeBeat = await compositeSummary("lar:///ha.ka.ba/bags/cross-beat-glue", [...GLUE_SEEDS, pluginDoc]);
     // the two beats agree on the WHOLE verdict — radius, glue, vacuity, loci, gate, grain.
     expect(wikiBeat).toEqual(compositeBeat);
 
@@ -141,7 +141,7 @@ describe.skipIf(coreBlobSkip)(
     try {
       const wikiObstruct = JSON.parse(wiki.filterTiddlers("[wikisense:cohere:ordinary[]]")[0]!) as WikiCoherenceSummary;
       const compositeObstruct = await compositeSummary(
-        "lar:///ha.ka.ba/bags/@cross-beat-obstruct", [...GLUE_SEEDS, pluginDoc, ORNATE_NOVEL],
+        "lar:///ha.ka.ba/bags/cross-beat-obstruct", [...GLUE_SEEDS, pluginDoc, ORNATE_NOVEL],
       );
       expect(wikiObstruct).toEqual(compositeObstruct);
       expect(wikiObstruct.radius).toBeGreaterThan(0);

@@ -15,7 +15,7 @@ async function makeVessel(fill: number): Promise<KeyhiveProvider> {
   await p.init({ seed: seedOf(fill), eventStore: noopStore });
   return p;
 }
-const BAG = "lar:///ha.ka.ba/bags/@catalog/shared-note";
+const BAG = "lar:///ha.ka.ba/bags/catalog/shared-note";
 
 describe("persona-crossing pair — one call admits a vessel and hands it the shared content", () => {
   test("founder packs, joinee applies and reads its PersonaGroup's @catalog content", async () => {

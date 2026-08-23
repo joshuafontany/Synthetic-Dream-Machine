@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> ⚠ **STALE — FROZE 2026-06-07. The live handoff moved to `bags/@lares/ha.ka.ba/lares/docs/lares/handoff.md` (the pantjar torch).** Everything below stops at the V3-peer-auth / S9-browser state and MISSES the entire arc that landed after: LOAD verb → mint gate → F-arc → hull watchdog → genesis-intake → the INGEST gesture + watcher (~30 commits through `e38bbd22`, 2026-06-13). Real suite state 2026-06-14: mesh 275✓ · tw5 113✓ · node 124✓ · browser 13✓ (the 4 ingest RED found this session were fixture drift — fixed same day). Read the bags torch for the current vector; this file survives as git-style archaeology only.
+> ⚠ **STALE — FROZE 2026-06-07. The live handoff moved to `bags/lares/ha.ka.ba/lares/docs/lares/handoff.md` (the pantjar torch).** Everything below stops at the V3-peer-auth / S9-browser state and MISSES the entire arc that landed after: LOAD verb → mint gate → F-arc → hull watchdog → genesis-intake → the INGEST gesture + watcher (~30 commits through `e38bbd22`, 2026-06-13). Real suite state 2026-06-14: mesh 275✓ · tw5 113✓ · node 124✓ · browser 13✓ (the 4 ingest RED found this session were fixture drift — fixed same day). Read the bags torch for the current vector; this file survives as git-style archaeology only.
 
 > Updated: 2026-06-07 (task-ontology language · residency front door + V1 · V3 peer-auth halves)
 > Branch: `feature/lararium-node-4`
@@ -46,7 +46,7 @@
 
 **Open / downstream (not this campaign):** relay-access RINGS epic (`project_relay_access_rings` — anon-read is gate POLICY not a keyhive grant; tiered sharePolicy); SES/Compartment realm gate BEFORE unpinned code (mesh bags / user macros) enters the island realm (`project_headless_island_runtime`); the full keyhive-synced disk token (local fs-grant suffices today); S7.7 @personal cross-device.
 
-**Asymmetric-peer task-handoff (model: `project_asymmetric_peer_handoff`).** Keystone landed (`lar:///verb.replayed.dedups` — durable verb idempotency, the CRDT as dedup store). Design space written for the two surfaced gaps: cross-peer handoff → `bags/@lares/api/pono/federated-causal-islands.md#task-handoff`; personGroup-liveness pre-delegation → `bags/@lares/api/lararium/personal-slot.md#persongroup-liveness`. Still open: lease + fencing token for concurrent cross-vessel double-run (lives with the residency-model design).
+**Asymmetric-peer task-handoff (model: `project_asymmetric_peer_handoff`).** Keystone landed (`lar:///verb.replayed.dedups` — durable verb idempotency, the CRDT as dedup store). Design space written for the two surfaced gaps: cross-peer handoff → `bags/lares/api/pono/federated-causal-islands.md#task-handoff`; personGroup-liveness pre-delegation → `bags/lares/api/lararium/personal-slot.md#persongroup-liveness`. Still open: lease + fencing token for concurrent cross-vessel double-run (lives with the residency-model design).
 
 **Key memories:** `feedback_isomorphism_by_composition`, `project_isomorphic_vessel_epic`, `project_headless_island_runtime`, `project_relay_access_rings`.
 
@@ -168,7 +168,7 @@ Operator directive: retire the ceremony completely; no un-pono language; no depr
 
 - **Wave A (code):** Deleted `lares-cli/src/commands/promote.ts`, `lararium-node/src/promote-handler.ts`, `lararium-tw5/src/modules/lar-promote.ts`, `lararium-tw5/tiddlers/src/lar-promote.js`. Updated `bin/lares.ts` (removed cmdPromote + verb row), `island-behaviors.ts` (removed `_registry.register("promote", ...)`), `lararium-node/src/index.ts` + `lararium-tw5/src/index.ts` (removed exports), `open-node-vessel.ts` (removed orphaned `jobRegistry.register("promote", ...)` + scrubbed 4 ceremony comments), `commands/draft.ts` + `commands/wiki.ts` (scrubbed user-facing strings).
 - **Wave B (tests):** Deleted `tests/lararium-tw5/promote/` directory and `tests/lararium-tw5/sync/sync-decompose-promote.sh`. Updated `tests/lararium-tw5/vitest.config.ts` include path → `residency/**`. Rewrote `tests/bin/run-flow.sh` (removed `tw5-decompose` + `tw5-promote` subcommands). Updated `packages/lararium-node/tests/bag-paths.test.ts` (replaced lar-promote test-data URI with `nalu-engine`). Updated root `package.json` `test:tw5-flow` to a placeholder script.
-- **Wave C (memes):** Deleted `bags/@lararium/node/promote-handler.md` + `bags/@lararium/tw5/modules/lar-promote.md`. Scrubbed ceremony references in `bags/@lares/api/pono/lar-uri.md`, `bags/@lares/docs/lares/the-lares-protocols.md`, `bags/@lares/docs/lares/the-lararium-hud.md`, `bags/@lararium/node/handler-args.md`, `bags/@lararium/tw5/tw5-fields-flat.md`.
+- **Wave C (memes):** Deleted `bags/lararium/node/promote-handler.md` + `bags/lararium/tw5/modules/lar-promote.md`. Scrubbed ceremony references in `bags/lares/api/pono/lar-uri.md`, `bags/lares/docs/lares/the-lares-protocols.md`, `bags/lares/docs/lares/the-lararium-hud.md`, `bags/lararium/node/handler-args.md`, `bags/lararium/tw5/tw5-fields-flat.md`.
 - **Wave D (planning):** Updated `packages/AGENTS.md` (removed promote-handler from @lararium/node listing; removed `promote` from @lares/cli verb list; rewrote Canon promotion paragraph). Updated `packages/ROADMAP.md` (test-flow description). Rewrote `packages/TALK-STORY-NEXT.md` rules (removed deprecation-shim line, added conflict-surfacing principle). Rewrote `packages/EPIC-RESIDENCY-MODEL.md` Sprint 5 (removed S5.3 deprecation-shim story; added S5.6 `promotion-ceremony.ts` retirement as named follow-up). Updated `tests/AGENTS.md` + `tests/README.md`.
 - **Wave E (verify):** Workspace typecheck clean across 6 packages.
 
@@ -193,11 +193,11 @@ Operator directive: retire the ceremony completely; no un-pono language; no depr
 
 Floating Librarians of Mu endorse (high confidence). Pono.
 
-**Memetic intent landed:** [`bags/@lares/api/lararium/residency-model.md`](../bags/@lares/api/lararium/residency-model.md) (confidence 17, status=approved, approved-on 2026-05-30). Carries the load-bearing invariant: coordinate-first not timeline-first; Work-identity preserved across residencies (FRBR/LRM); operator-visible coordinate surface; audit-trail discipline; verb vocabulary from set-algebra + cataloging. Six named anti-patterns surfaced from research (causal-history severance, schema drift, whiteout resurrection, shadow-override confusion, recipe-drift poisoning, concurrent commits) — each gets a named defense in the sprint plan.
+**Memetic intent landed:** [`bags/lares/api/lararium/residency-model.md`](../bags/lares/api/lararium/residency-model.md) (confidence 17, status=approved, approved-on 2026-05-30). Carries the load-bearing invariant: coordinate-first not timeline-first; Work-identity preserved across residencies (FRBR/LRM); operator-visible coordinate surface; audit-trail discipline; verb vocabulary from set-algebra + cataloging. Six named anti-patterns surfaced from research (causal-history severance, schema drift, whiteout resurrection, shadow-override confusion, recipe-drift poisoning, concurrent commits) — each gets a named defense in the sprint plan.
 
 **Sprint plan authored:** [`packages/EPIC-RESIDENCY-MODEL.md`](EPIC-RESIDENCY-MODEL.md) — ten sprints in OODA-HA cycle-flow form. Sprint 1 (memetic intent + reconciliation) closed this turn. Sprints 2–10 queued: data model + URI grammar, multi-residency at recipe layer, effect-record audit, action handlers in node + CLI, browser parity, `@personal` slot enactment coordinated with the model, coordinate-inspection UI, doc meme sweep, test golden regeneration.
 
-**Reconciliation:** [`personal-slot.md`](../bags/@lares/api/lararium/personal-slot.md) (status remains `approved`) gains a `#reconciliation` ahu block clarifying that cascade rules become **first-write defaults** under the residency model, with +2 multi-bag residency tests added to the migration plan. Coordinated with Sprint 7 of the new Epic.
+**Reconciliation:** [`personal-slot.md`](../bags/lares/api/lararium/personal-slot.md) (status remains `approved`) gains a `#reconciliation` ahu block clarifying that cascade rules become **first-write defaults** under the residency model, with +2 multi-bag residency tests added to the migration plan. Coordinated with Sprint 7 of the new Epic.
 
 **Memory:** `project_residency_model_architecture.md` saved. Prior memory `project_stage_commit_push_model.md` marked SUPERSEDED with header warning; preserved for context.
 
@@ -239,11 +239,11 @@ converge on one-tick-boundary across heterogeneous sources.
 interface WikiRecipe { wikiSlug: string; canonBags?: readonly SlotUri[] }
 ```
 Expands to fixed cascade `[@temp, @draft, @<wikiSlug>, ...canon, @lares, @lararium]`.
-Slot URIs live in the `lar:///ha.ka.ba/bags/@<name>` namespace alongside content
+Slot URIs live in the `lar:///ha.ka.ba/bags/<name>` namespace alongside content
 URIs (no parallel naming system). Manifest carries `recipe: WikiRecipe +
 resolver: { slotUri → AutomergeUrl }` instead of `bagBindings[]`. `BagBinding`
 type retired; `BAG_IDS.scratch/projection/draft` deleted (slot URIs replace them).
-`ADMIN_BAG_ID` aligned to `lar:///ha.ka.ba/bags/@admin` (was nested under @lararium).
+`ADMIN_BAG_ID` aligned to `lar:///ha.ka.ba/bags/admin` (was nested under @lararium).
 `IslandBehavior.writeBagId` retired — admin/wiki behaviors share recipe shape;
 differences live in `onEa` / `onSignal`.
 
@@ -252,8 +252,8 @@ Write routing moves OUT of TS prefix-matching into the wiki itself. Default
 cascade ships as plugin tiddler `lar:///ha.ka.ba/lararium/config/bag-paths`:
 
 ```
-[prefix[$:/temp/]then[lar:///ha.ka.ba/bags/@temp]]
-[prefix[Draft of ]then[lar:///ha.ka.ba/bags/@draft]]
+[prefix[$:/temp/]then[lar:///ha.ka.ba/bags/temp]]
+[prefix[Draft of ]then[lar:///ha.ka.ba/bags/draft]]
 [prefix[$:/]then[]]
 [prefix[lar:]then{lar:///ha.ka.ba/lararium/config/current-wiki-bag}]
 ```
@@ -277,10 +277,10 @@ island-context, island-behaviors, lar-admin-island, lar-wiki-island,
 browser-sovereign-island-model, browser-wiki-worker, memory-store, tw5-vm,
 island-protocol header). 4 `$:/config/Lar*` literal refs migrated to
 `lar:///ha.ka.ba/lararium/config/*` namespace. Memes: deleted
-`bags/@lares/api/lararium/island-accumulator.md` (class retired),
-rewrote [island-adaptor.md](../bags/@lares/api/lararium/island-adaptor.md),
-updated [nalu.md](../bags/@lares/api/pono/nalu.md), wrote new
-[nalu-engine.md](../bags/@lares/api/lararium/nalu-engine.md).
+`bags/lares/api/lararium/island-accumulator.md` (class retired),
+rewrote [island-adaptor.md](../bags/lares/api/lararium/island-adaptor.md),
+updated [nalu.md](../bags/lares/api/pono/nalu.md), wrote new
+[nalu-engine.md](../bags/lares/api/lararium/nalu-engine.md).
 
 **Surfaced but not enacted (sibling sprints):**
 - Legacy `lar:///config/Lar/*` cascade-template URIs (36 refs across wikitext
@@ -439,7 +439,7 @@ Rating vs alternatives: Plan C (17/20) > Plan B URI-encodes-verb (11/20) > Plan 
 - Suite A: VesselIslandPool integration — asserts `payload.verb`, `payload.fromUri` arrive correctly
 - Suite B: M.1 handler unit — extracts verb+fromUri+listenable, calls placeVerb; ignores observation-only
 
-**Corpus — `bags/@lararium/tw5/devices/move-button.md` (new):**
+**Corpus — `bags/lararium/tw5/devices/move-button.md` (new):**
 - First kumu device type meme with `reaction:listenable` edge carrying `payload.verb = "MOVE"`
 - Documents the full dispatch chain from tiddler edge → verb dispatch → TW5 filter queries
 
@@ -486,7 +486,7 @@ now references `reaction-graph` (not `live-protocol`). 121 inner tiddlers packed
 - `subscribeOnce`: 2 tests (resolves first payload only, pending on wrong listenable).
 - Update invariant: 3 tests (handlers survive load() if key present, subscribeOnce survives updateUri(), error isolation between handlers).
 
-**`bags/@lararium/mesh/reaction-protocol.md`:** `source-file` already set to
+**`bags/lararium/mesh/reaction-protocol.md`:** `source-file` already set to
 `packages/lararium-mesh/src/reaction-graph.ts` — no edit needed. Meme coherent.
 
 **Design note — M.1 payload.verb gap:** The `onWorkerEvent` → `placeVerb` route only
@@ -856,14 +856,14 @@ Log line changed from `HTTP+WS server` to `WS relay`. Connect log changed from
 
 ### Vessel Ontology Scrub — bags docs
 
-`bags/@lararium/mesh/lar-vessel.md`:
+`bags/lararium/mesh/lar-vessel.md`:
 - TOML `role` field updated to "vessel"
 - `# Lar Peer` → `# Lar Vessel`
 - New `## Vocabulary` section: Automerge-layer "peer" vs lararium-layer "vessel" defined in two sentences
 - LP-1 renamed "Vessel before server"; body: "A Lararium vessel models itself as a participant in a causal mesh — not a server that clients connect to."
 - LP-2 through LP-5, shape section, ceremony section: "peer" → "vessel" throughout
 
-`bags/@lararium/mesh/open-vessel.md`:
+`bags/lararium/mesh/open-vessel.md`:
 - `# Operator Peer` → `# Open Vessel`
 - "operator peer" → "open vessel" / "vessel" throughout contract, invariants, flow
 
@@ -904,7 +904,7 @@ Log line changed from `HTTP+WS server` to `WS relay`. Connect log changed from
 
 ### Path K / F-arc — IslandAdaptor Save-Path Debounce
 
-**Spec meme:** `bags/@lares/api/lararium/save-path.md`
+**Spec meme:** `bags/lares/api/lararium/save-path.md`
 Invariants SP-1 through SP-5 documented. SP-3 (draft routing) deferred pending
 wiki-init flow; SP-1 (debounce) and SP-4 (ceremony routing) landed.
 
@@ -1006,7 +1006,7 @@ something mesh does not already re-export.
 
 ### lararium-mesh → lararium-mesh rename
 
-`packages/lararium-mesh` → `packages/lararium-mesh`; `bags/@lararium/mesh` → `bags/@lararium/mesh`; `@lararium/mesh` → `@lararium/mesh` everywhere (imports, package.json, vitest configs, meme corpus, docs). Mechanical sed sweep + pnpm reinstall. 167/167 tests pass; typecheck clean.
+`packages/lararium-mesh` → `packages/lararium-mesh`; `bags/lararium/mesh` → `bags/lararium/mesh`; `@lararium/mesh` → `@lararium/mesh` everywhere (imports, package.json, vitest configs, meme corpus, docs). Mechanical sed sweep + pnpm reinstall. 167/167 tests pass; typecheck clean.
 
 ---
 
@@ -1099,14 +1099,14 @@ deleted entirely. Replaced with a clean web3-native responsibility split.
   priority order), outbound guards, echo guard.
 
 **Meme corpus (bags/):**
-- `bags/@lares/docs/lararium/verse-mesh.md` — Verse polychronous CRDT mesh design:
+- `bags/lares/docs/lararium/verse-mesh.md` — Verse polychronous CRDT mesh design:
   peer-owns-bags law, N local clocks (Signal/INRIA Berry 1991 model), VM pool (live/warm
   slots), camera model (Story River first, TLDraw.js second, many more), visibility gate
   (future), tick sources by platform, wiring law (`store.addProjection` for both siblings).
-- `bags/@lares/api/lararium/island-adaptor.md` — invariant spec I-1 through I-8:
+- `bags/lares/api/lararium/island-adaptor.md` — invariant spec I-1 through I-8:
   echo-loop guard, island isolation, single transact per flush, post-sync pass-through,
   non-CRDT immediate apply, outbound guards, cross-bag tombstone resolution, child cleanup.
-- `bags/@lares/api/lararium/island-accumulator.md` — invariant spec A-1 through A-5:
+- `bags/lares/api/lararium/island-accumulator.md` — invariant spec A-1 through A-5:
   sync gate, crdt-remote filter, drain returns-and-removes, budget cap, platform-agnostic.
   Camera projection section: each camera MAY hold its own accumulator.
 
@@ -1150,7 +1150,7 @@ monolith parse path retired in full. `GRAMMAR_TAG` as the single registration su
 - `packages/lararium-tw5/tiddlers/sigil-toml.tid` — `toml` data-fence sigil as a
   SharktoothSigil tiddler (`lar-kind: data`, `lar-name: toml`). The `[[sigils]]`
   TOML block in `memetic-wikitext.tid` removed; sigil-toml.tid replaces it.
-- `bags/@lararium/tw5/lib-smol-toml.md` — bag anchor meme at the library tiddler URI.
+- `bags/lararium/tw5/lib-smol-toml.md` — bag anchor meme at the library tiddler URI.
 
 **Modified:**
 - `packages/lararium-tw5/plugin-build/vite-plugin-build.ts` — smol-toml
@@ -1202,7 +1202,7 @@ Replaced by nalu-driven TW5 startup module.
   and instance; wired `tw5.registerProjectionBus({handleLarariumEvent})` after boot;
   removed inline `re.onChangeset()` from changeset handler. island now forwards
   `tm-verse-event` wiki events → `IslandMsg_Event` to vessel.
-- `bags/@lares/api/pono/reaction-graph.md` — yin-collapse target section updated
+- `bags/lares/api/pono/reaction-graph.md` — yin-collapse target section updated
   to "Landed"; fireSync gap section updated to "CLOSED".
 
 **Metrics:** typecheck clean; 126/126 tests pass; 17 Vite plugin modules (was 16);
@@ -1214,7 +1214,7 @@ smoke boot clean. All probes pass.
 
 ### Verse Ontology + Yin-Collapse Architecture Research Sprint
 
-**New pono specs (bags/@lares/api/pono/):**
+**New pono specs (bags/lares/api/pono/):**
 - `nalu.md` — architectural invariant: nalu as changeset delivery wave; TW5 `refresh(changedTiddlers)` ↔ Verse `OnSimulate(StagedUpdates)` ↔ MemeSyncAdaptor flush; yin-collapse law; one-graph-not-two law; scale note. Infrastructure concept below grammar layer.
 - `hoolele.md` — full pono spec: unstructured escape-hatch sigil; Verse `spawn` analogue; English alias `\spawn`; six-operator concurrency table; when-to-use law; Lararium-specific use cases (CRDT flush, VmPool, Keyhive). Completes six-operator ontology.
 
@@ -1260,7 +1260,7 @@ smoke boot clean. All probes pass.
 
 **Architecture law now fully holds:** "Sigil dispatch via wikitext. JS widgets only for JS-level semantics (capability hooks, async device I/O)." No sigil has JS-level semantics today, so the plugin carries zero JS sigil widgets.
 
-**Updated docs:** `bags/@lares/api/pono/kau.md`, `bags/@lararium/tw5/widgets/kau.md`, `memetic-wikitext.tid` render-modes note, `lar-sigil-shared.ts` comment, ROADMAP.
+**Updated docs:** `bags/lares/api/pono/kau.md`, `bags/lararium/tw5/widgets/kau.md`, `memetic-wikitext.tid` render-modes note, `lar-sigil-shared.ts` comment, ROADMAP.
 
 **Build:** typecheck clean; 16 Vite modules (was 17); 114 inner tiddlers; 38 shadow tiddlers in smoke; all probes pass.
 
@@ -1270,7 +1270,7 @@ smoke boot clean. All probes pass.
 
 ### Concurrency Sigil Cluster + Grammar Self-Hosting + kumu-device UEFN Alignment
 
-**New pono specs (bags/@lares/api/pono/):**
+**New pono specs (bags/lares/api/pono/):**
 - `hui.md` — await-all sync (`sync`); MUST spawn all, MUST NOT resume until all complete.
 - `holo.md` — cancelling race (`race`); first wins, all losers cancel immediately.
   English alias: `\race`. Distinct from `puka/\rush` (no-cancel).
@@ -1524,7 +1524,7 @@ These two arcs together complete the isomorphic vessel law across all vessel typ
 - The TW5 VM pool should author, route, and write records whenever the work can stay inside that pool.
 - Bridge code transports envelopes; it does not own ceremony meaning.
 
-Reference: `wikis/@lares-history/lararium-research/LARES-CLI-DAEMON-SPRINT-PLAN.md`
+Reference: `wikis/lares-history/lararium-research/LARES-CLI-DAEMON-SPRINT-PLAN.md`
 
 ## Useful Smokes
 
@@ -1549,7 +1549,7 @@ lares reset --force
 lares serve
 lares status
 lares wiki list
-lares promote lar:///definitely-not-real --to lar:///ha.ka.ba/bags/@lares --yes
+lares promote lar:///definitely-not-real --to lar:///ha.ka.ba/bags/lares --yes
 ```
 
 ## Test Layout

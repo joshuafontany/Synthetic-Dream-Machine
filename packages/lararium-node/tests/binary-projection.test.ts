@@ -26,12 +26,12 @@ describe("binary projection — base64 body decodes to raw bytes on disk", () =>
     const b64 = rawBytes.toString("base64");
 
     const projector = new LarDiskProjector({
-      mirrors: [{ bagId: "@lares", mirrorRoot: root }],
+      mirrors: [{ bagId: "lares", mirrorRoot: root }],
       carrierFileFn: async () => ({ ext: ".png", body: b64, metaBody: "type: image/png\n", encoding: "base64" }),
       debounceMs: 1,
     });
     await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
-      .flush("@lares", "lar:///ha.ka.ba/lares/api/pic");
+      .flush("lares", "lar:///ha.ka.ba/lares/api/pic");
 
     const file = join(root, "ha.ka.ba/lares/api/pic.png");
     expect(existsSync(file)).toBe(true);

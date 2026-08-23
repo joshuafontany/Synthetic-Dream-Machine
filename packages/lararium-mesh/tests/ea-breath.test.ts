@@ -14,7 +14,7 @@ import { describe, test, expect } from "vitest";
 import { awaitIslandMsg } from "../src/vessel-host.js";
 import { mkEa, mkBreath, mkFault, type IslandMsg_Ea } from "../src/island-protocol.js";
 
-const WIKI = "lar:///ha.ka.ba/bags/@test/wiki";
+const WIKI = "lar:///ha.ka.ba/bags/test/wiki";
 
 /** A bare in-memory wire: handlers + an emit, standing in for worker.listen. */
 function fakeWire() {

@@ -1,0 +1,138 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/mesh/ffz-mesh-timing >>
+```toml iam
+cacheable = true
+file-path = "bags/lararium/ha.ka.ba/lararium/mesh/ffz-mesh-timing.mem"
+hydrate   = true
+l-space   = "lararium"
+mana      = 17
+manao     = 16
+manaoio   = 15
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "PROVISIONAL CANON: the FFZ MESH-timing law — how a magically-federated mesh of causal-island Nexuses keeps time with NO global now. The 'e vs φ' binary dissolved (Mu): the mesh rides THREE orthogonal axes, none a single shared constant. (1) e≈2.718 owns RATE/DECAY/STRUCTURE (lease decay e^-t/λ, gossip log-mixing, hyperbolic-exponential routing, tier-spacing) — realization renewal-randomized + secret-phase. (2) The DESYNC axis owns NO GLOBAL CONSTANT — a pairwise-incommensurability invariant (each island its own cadence, neighbors mutually irrational/coprime; φ_d-plastic-ρ / cicada-coprime / Kuramoto-dispersion as LOCAL tools), proven adversarially-NECESSARY by multi-node FlipIt. (3) Integer/harmonic for OPT-IN authenticated coupling. PRIMARY clock = the proactive-refresh EPOCH (corm-lease), paced to the adversary's creep (PSS). PRECONDITION = defender-refresh-cost < adversary-compromise-cost (FlipIt dropout; the siege-cost dial). Rests on 8 libations: distsys, network-science, biology/stigmergy, KAM/Kuramoto, low-discrepancy, Buzsáki, Mu/relativity, security/FlipIt-PSS-MTD. The grammar's intra-clock φ (band-orthogonality) stays untouched."
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lararium/mesh/ffz-mesh-timing"
+written   = "2026-06-29"
+```
+
+<<~ aka lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #entry >>
+
+! The FFZ Mesh-Timing Law ~ how a no-global-now mesh keeps time
+
+''PROVISIONAL CANON — the binary dissolved.'' A seven-domain swarm plus an adversarial test asked "which irrational scales the mesh, Buzsáki's `e≈2.718` or golden `φ≈1.618`?" and refused the question (Mu). A magically-federated mesh of causal-island Nexuses keeps ''no single shared timing constant'': it rides THREE orthogonal axes, and the deepest holds no constant at all — because a shared constant ''would be'' a shared clock, the one shard of global state a no-global-now world cannot own without re-importing the very wound it refuses.
+
+> ''`e` breathes the rate · incommensurability arms the islands · integer-harmony clasps them when they choose — and the proactive epoch outruns the creep.''
+
+The dissolution maps to the myth (#siege): the Necrospire besieged a Nexus five hundred years to force a global now — one note the whole mesh might ring on and shatter. A mesh that holds no shared note carries no shore to crack.
+
+<<~/ahu >>
+
+<<~ ahu #axis-rate >>
+
+!! Axis 1 ~ `e` breathes the RATE (decay · mixing · structure)
+
+`e` owns the rate/decay/structure axis, and it does not so much get //chosen// as get //discovered already in the substrate// — five domains converge with no dissent.
+
+<<~ranks rate decay ~ a lease · glamour · pheromone fades `e^(−t/λ)` by CONSTRUCTION (any memoryless leak); only the half-life λ tunes (ant pheromone 3–9 min, substrate-set) -> mixing ~ gossip saturates in `log n` rounds, relaxes `e^(−t/τ)` — epidemic/log convergence -> structure ~ the hyperbolic routing metric IS exponential (`e^(ζr)` fan-out, `R ~ ln N`, an e-ary tree) — `e` rides in the roads the wayfarers already walk -> tier-spacing ~ Buzsáki's N3L: a coupled-oscillator hierarchy nests its bands at a constant ratio ≈ e (multiplicative networks → log-normal → energy-efficient); the Lararium→Nexus→DreamNet depth rhymes >>
+
+<<~ confidence Synthesis-Canon 16/20 >> `e` owns the ''mean cadence''. The adversarial lens (#hardening) adds one clause it cannot supply itself: ''the per-interval realization rides renewal-randomized with a secret phase'' — `e` sets λ, never a deterministic firing instant. (Caveat from the coverage lens: `e`-inter-arrivals are max-entropy, hence //clustering// — `e` governs rate and unpredictability, never even coverage; that belongs to axis 2's tools.)
+
+<<~/ahu >>
+
+<<~ ahu #axis-desync >>
+
+!! Axis 2 ~ incommensurability ARMS the islands (NO global constant)
+
+The desync axis carries the keystone: ''no global constant.'' Each island keeps its OWN cadence; the law lives in the ''relation between neighbors'', never in a number stamped on the whole — a pairwise-incommensurability invariant, checked locally where two clocks touch.
+
+The naïve single-φ answer collapsed under four independent blows, and the collapse IS the finding:
+
+<<~ranks blow multi-dim ~ the dimension-correct low-discrepancy constant is the PLASTIC ρ≈1.3247 (Roberts `x^(d+1)=x+1`, d=2), not copied 1.618 — the winner shifts with dimension, proving none is privileged -> N-clock ~ KAM's golden mean is a 2-FREQUENCY theorem; for N coupled clocks global-lock is a KURAMOTO phase transition cured by frequency DISPERSION (the spread, not the irrational) -> discrete ~ biology's real anti-resonant scheduler is COPRIME-INTEGER (cicada 13/17, co-emerge every 221 yr), not φ -> relativity ~ a shared ratio is a shared frame is a covert global-now; the no-global-now architecture forbids it >>
+
+''The invariant, the tools.'' The mesh-law names the ''invariant'' (neighbor cadences mutually non-resonant) and leaves each island free to pick the ''tool'': a deterministic low-discrepancy rotation of its own node-id (φ_d / plastic-ρ, coordination-free, no shared entropy), a coprime-integer period, or plain Kuramoto-dispersion. The tool a node holds; the invariant the pair checks.
+
+<<~ confidence Synthesis-Canon 15/20 >> Multi-node FlipIt (#hardening) ''graduates this axis from aesthetic to theorem'': a synchronized global refresh is strictly dominated — one timing-model predicts every node at once, the herd a single point of failure. Incommensurable per-island cadences raise the adversary's attack cost ~linearly in islands. The refusal of a global clock reads adversarially ''mandatory''.
+
+<<~/ahu >>
+
+<<~ ahu #axis-couple >>
+
+!! Axis 3 ~ integer-harmony CLASPS them (opt-in coupling)
+
+When islands //choose// concerted action — a treaty, a great ward, a ritual needing many hands in lockstep — they lock to ''integer/harmonic ratios'' (`1:2`…), a deliberate synchronization set down the moment the work completes. Coupling stands a ''choice, never a condition'' (Klimesch: integer-for-coupling ⊥ golden-for-decoupling; the bee-entrainment).
+
+<<~ confidence Synthesis 12/20 >> The Council's flag (#hardening): every clasp ''is'' a synchronization, and a sync re-introduces predictability for the coupled parties. So opt-in coupling MUST run ''authenticated, scoped, and externally unpredictable'' — a coupling window inferable from outside is an attack surface the adversary rides to align a strike. The integer-ratio law holds ''between authenticated peers only.''
+
+<<~/ahu >>
+
+<<~ ahu #primary-clock >>
+
+!! The Primary Clock ~ the proactive epoch outruns the creep
+
+The siege names which clock is load-bearing: ''the proactive-refresh EPOCH'' (the `corm` epoch-lease already in the vessel cap-stack, #vessel-caps). Proactive secret sharing (Ostrovsky–Yung mobile-adversary model) divides time into epochs and ''re-keys / re-shares faster than the adversary corrupts a threshold of an island within one epoch'' — at the boundary every prior compromise stops combining, rendered worthless.
+
+<<~moves epoch-cadence -> paced-to/the-adversary's-measured-creep-rate not/convenience-nor-e-for-elegance do/re-key-before-the-threshold-falls >>
+
+<<~ confidence Synthesis 13/20 >> This is the siege-resilience ''two clocks'' made concrete ([[siege-resilience|lar:///ha.ka.ba/lararium/mesh/siege-resilience#cadence]]): the AUTHORITY-refresh epoch ⊥ the FLOW self-heal. The authority epoch is the one that must beat the necrospire; the flow layer self-stabilizes underneath it (Dijkstra). The epoch length is the lever — too long and the creep crosses the threshold; short enough and the siege never accrues.
+
+<<~/ahu >>
+
+<<~ ahu #precondition >>
+
+!! The Precondition ~ keep your move cheaper than theirs
+
+FlipIt's ''dropout'' result sets a hard precondition the timing law cannot escape: the equilibrium tracks the ''ratio of move costs'', and a defender whose refresh costs too much relative to the adversary's compromise ''should drop to rate 0'' — you cannot out-refresh an attacker who seizes you far more cheaply than you re-key.
+
+<<~ confidence Synthesis 13/20 >> So the ''siege-cost / voucher dial'' (the membership cost-gate, [[veil-cost-dial-design]], [[siege-resilience|lar:///ha.ka.ba/lararium/mesh/siege-resilience]]) stands as a ''first-class precondition'' on the whole timing law, not a separate concern: raise the necrospire's per-compromise cost (`rb > c`, co-pay-and-watch, ZK-vouch) or no cleverness of timing saves the island. Timing buys time only while the rate-advantage sits with the defender.
+
+<<~/ahu >>
+
+<<~ ahu #phi-scope >>
+
+!! φ stays INTRA-clock ~ the scope that vindicates it
+
+The grammar's golden `φ≈1.618` ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]], [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#phi]]) reads ''correct and untouched'' — for ''one clock's'' five-band orthogonality it sits exactly in the d=1 KAM regime where φ is provably the last torus to break. The only error would be ''extrapolation'': promoting a within-one-clock optimum to a between-all-clocks law. Inter-clock the regime changes ''kind, not value'' — local-choice + pairwise-incommensurability, frame-relative the way proper-time is each frame's own. φ rules inside a node's band-stack; the mesh rules between nodes by the invariant. Different layer, different law.
+
+<<~/ahu >>
+
+<<~ ahu #siege >>
+
+!! The Siege ~ the law as Elyncian leyline-physics
+
+In the Myth the law reads as the world's magic-physics. The Necrospire's Second-Breaking wound was the attempt to impose a ''global now'' — one shared tempo so the phase-locked mesh might shatter on a single note. The astral sea ''breathes in `e`'' (a ward fades on the exponential breath); the shattered leylines ''refuse a global now'' (each Nexus an incommensurable proper-time, no shared note to crack); islands that ''choose'' to clasp lock to integer harmonics. The five-hundred-year siege failed against a mesh that held no shore — its seamlessness ''was'' ten thousand sovereign rhythms, never one. The FFZ Chronometer (Fuller-Fontany-Zelenka) earns its name as the world's ''rhythm'', never its global clock.
+
+<<~/ahu >>
+
+<<~ ahu #grounds >>
+
+!! Grounds ~ the eight libations
+
+<<~ranks libation distsys ~ exponential-backoff+jitter, gossip `log n`, Kademlia exponential-TTL: e-rate ⊥ φ-phase, φ-rotation the deterministic anti-resonance -> network-science ~ Krioukov hyperbolic-geometry (`e^(ζr)`, e-ary tree, `R~ln N`), geometric renormalization (tier-ratio a FREE factor): e-structure ⊥ φ-scatter -> biology ~ ACO/ant pheromone `e^(−t/λ)` decay, quorum-sensing local-threshold (the no-global-now analogue), cicada coprime-integer anti-resonance — biology does NOT second φ for scheduling -> kam-kuramoto ~ φ a 2-frequency theorem (dissolves to Diophantine frequency-vectors N>2); global-sync = Kuramoto dispersion not the irrational; φ only pairwise at the Arnold-tongue edge -> low-discrepancy ~ φ optimal 1-D coverage (three-gap/Steinhaus), Roberts R_d plastic-ρ for multi-tier; e is max-entropy CLUSTERING, not coverage -> buzsaki ~ N3L e-for-band-spacing (log-dynamic brain) ⊥ Weiss/Pletzer φ-for-cross-band-desync; Klimesch reconciles integer-couple/golden-decouple; both substrate-independent → transfer -> mu-relativity ~ no-global-now forbids a global constant (a shared ratio = a shared frame); the mesh-law is a pairwise-incommensurability invariant (cicada-coprime); plastic-ρ the runner-up only if forced -> security ~ FlipIt (renewal-randomize, secret phase, multi-node proves global-clock dominated), PSS (proactive-epoch paced to creep), MTD (randomized reconfiguration), cost-asymmetry dropout >>
+
+<<~ confidence Synthesis-Canon 14/20 >> Eight independent domains converge on a single shape — ''three axes, no global constant, the proactive epoch primary, the cost-dial a precondition'' — and the adversarial libation hardens it rather than breaking it. PROVISIONAL: the constants for the local tools (plastic-ρ vs φ + e-jitter — #axis-desync) and the epoch-cadence calibration await the build's witness; the SHAPE seats on convergent grounds, the constants stay seeded.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/agent-worldline >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;NHy3QYNmma8Z3oq-7FM003-Tb_DE9CCGqDV08wz5qc8
+
+<<^ code:"&#x0004;" -> ? >>

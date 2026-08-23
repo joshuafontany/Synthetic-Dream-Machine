@@ -179,7 +179,7 @@ describe("a reference NAMES, and refuses what could walk out of the tier", () =>
   test("★ a TRAVERSING or foreign reference resolves to NULL — never to a path of its own ★", () => {
     // A caller that resolves nothing must not fall back; that fallback is how a corpus lands somewhere
     // nobody chose.
-    for (const bad of ["library:../escape", "library:a/b", "library:", "bags/@lares", "/abs/path"]) {
+    for (const bad of ["library:../escape", "library:a/b", "library:", "bags/lares", "/abs/path"]) {
       expect(resolveLibraryRef(bad), bad).toBeNull();
     }
   });

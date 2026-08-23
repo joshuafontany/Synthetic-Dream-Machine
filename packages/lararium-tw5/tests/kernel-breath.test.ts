@@ -20,7 +20,7 @@ import {
 import { runSovereignKernel, type IslandHostShore } from "../src/sovereign-kernel.js";
 import type { IslandBehavior } from "../src/island-context.js";
 
-const WIKI = "lar:///ha.ka.ba/bags/@test/wiki";
+const WIKI = "lar:///ha.ka.ba/bags/test/wiki";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 

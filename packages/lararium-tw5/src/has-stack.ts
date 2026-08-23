@@ -38,9 +38,9 @@ const KIND_PLANES = new Set(["bags", "wikis", "cid"]);
 const RELATIVE_RE = /^[\w-]+(\/[\w-]+)*$/;
 
 /**
- * Derive the bag scope (`<root>/bags/@<namespace>`) from a carrier title. A meme
+ * Derive the bag scope (`<root>/bags/<namespace>`) from a carrier title. A meme
  * addresses by its bare namespace (`lar:///ha.ka.ba/sdm/…`); its holding bag is
- * that namespace as a surface (`bags/@sdm`). Returns null when the title carries
+ * that namespace as a surface (`bags/sdm`). Returns null when the title carries
  * no scoped meme address (a kind-plane surface, bad arity, or a system title) —
  * relative tags on such a carrier stay unresolved.
  */
@@ -48,8 +48,8 @@ export function bagScopeOf(carrierTitle: string): string | null {
   const m = SCOPE_RE.exec(carrierTitle);
   if (!m) return null;
   const root = m[1]!, ns = m[2]!;
-  if (KIND_PLANES.has(ns)) return null;        // a surface (bags/@…), not a meme namespace
-  return `${root}/${BAGS_SEGMENT}/@${ns}`;
+  if (KIND_PLANES.has(ns)) return null;        // a surface (bags/…), not a meme namespace
+  return `${root}/${BAGS_SEGMENT}/${ns}`;
 }
 
 /**
@@ -61,8 +61,8 @@ export function qualifyStackTag(tag: string, scope: string | null): string | nul
   if (tag.startsWith("lar:///")) return tag;
   if (!RELATIVE_RE.test(tag)) return null;
   if (!scope) return null;
-  // scope is `<root>/bags/@<ns>`; a meme addresses bare: `<root>/<ns>/<tag>`.
-  const bare = scope.replace(`/${BAGS_SEGMENT}/@`, "/");
+  // scope is `<root>/bags/<ns>`; a meme addresses bare: `<root>/<ns>/<tag>`.
+  const bare = scope.replace(`/${BAGS_SEGMENT}/`, "/");
   return `lar:///${bare}/${tag}`;
 }
 

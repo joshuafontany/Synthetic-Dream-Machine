@@ -26,7 +26,7 @@ async function introduce(founder: KeyhiveProvider, device: KeyhiveProvider): Pro
   return deviceAgentId;
 }
 
-const BAG = "lar:///ha.ka.ba/bags/@catalog/a-note";
+const BAG = "lar:///ha.ka.ba/bags/catalog/a-note";
 
 describe("@catalog crossing — the human's second vessel reads its PersonaGroup content", () => {
   test("add-before-encrypt: the joinee vessel decrypts content, no secret in transit", async () => {
@@ -215,7 +215,7 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     const handle = await makeVessel(107);  // a Handle founder that invites the vessel to share
 
     // FLOOR: the vessel owns a bag and encrypts its own content there (anon floor, its own key).
-    const FLOOR = "lar:///ha.ka.ba/bags/@catalog/my-own-note";
+    const FLOOR = "lar:///ha.ka.ba/bags/catalog/my-own-note";
     await vessel.registerBag(FLOOR);
     const floorCt = await vessel.encryptContent(FLOOR, new TextEncoder().encode("my own floor content"));
     expect(new TextDecoder().decode(await vessel.decryptContent(FLOOR, floorCt))).toContain("floor");

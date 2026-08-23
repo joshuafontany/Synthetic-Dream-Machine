@@ -23,7 +23,7 @@ import type { TW5Engine } from "@lararium/tw5";
 let root = "";
 afterEach(() => { if (root) { rmSync(root, { recursive: true, force: true }); root = ""; } });
 
-const BAG = "@lares";
+const BAG = "lares";
 const PACK_URI_A = "lar:///ha.ka.ba/pack/alpha";
 const PACK_URI_B = "lar:///ha.ka.ba/pack/beta";
 const PACK_URI_C = "lar:///ha.ka.ba/pack/gamma";

@@ -1,0 +1,37 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/disk-projection-law >>
+```toml iam
+cacheable     = true
+file-path     = "bags/lararium/ha.ka.ba/lararium/docs/disk-projection-law.mem"
+l-space       = "stable"
+last-reviewed = "2026-07-18"
+mana          = 10
+manao         = 10
+manaoio       = 10
+register      = "Synthesis"
+retain        = true
+role          = "pointer: the disk-projection law lives at api/disk-projection — carrier-whole at rest"
+type          = "text/x-memetic-wikitext+tiddlywiki"
+uri-path      = "ha.ka.ba/lararium/docs/disk-projection-law"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #pointer >>
+
+!! Disk-projection law — see api/disk-projection
+
+The disk-projection law reads: ''a meme resides on disk as one whole carrier — one meme, one file.'' `carrierBaseRelPath` sites every carrier by its lar-URI and returns null for a fragment, so a `#slot` fragment owns no disk file; a child change re-flushes its carrier GROUP through the recompose inverse (`expandMemeRefs` / `exportMemeText`), never its own file. Fragment files MUST NOT appear on any surface a human edits (the grain-leak guard).
+
+The full, load-bearing statement — surfaces, bag roles, projection routing, the disk ward — lives at:
+
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#granularity >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#projection-law >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#projection-routing >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;H_5C4d2K73IasKTaFg-_1WjNeZJbp9m5YpYqXcmtnQo
+
+<<^ code:"&#x0004;" -> ? >>

@@ -16,7 +16,7 @@ import { mkEa, mkTeardownAck } from "../src/island-protocol.js";
 import type { VesselIslandHost, VesselWorkerHandle } from "../src/vessel-host.js";
 import type { WikiMountSpec } from "../src/wiki-recipe.js";
 
-const WIKI_ID = "lar:///ha.ka.ba/bags/@test/wiki";
+const WIKI_ID = "lar:///ha.ka.ba/bags/test/wiki";
 
 function spec(): WikiMountSpec {
   return { coreHash: null, recipe: { wikiSlug: "test" }, grants: { islandUrl: "automerge:fixture", wikiUrl: null } };

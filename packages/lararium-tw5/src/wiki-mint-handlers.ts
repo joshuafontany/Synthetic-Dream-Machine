@@ -31,7 +31,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     }
 
     const did = await opts.vesselDid();
-    const wikiKey = wikiBagUri(slug);            // canon (bags/@{slug}); identity rides wikis/@{slug}
+    const wikiKey = wikiBagUri(slug);            // canon (bags/{slug}); identity rides wikis/{slug}
     const draftBagId = wikiDraftBagUri(slug);
     const draftKey = wikiDraftDocKey(slug, did);
     // The user's wiki recipe is REGISTRY data (the user's composition choice) —
@@ -73,7 +73,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
         text: wikiHandle.url,
         kind: "oracle",
         "path-filter": "lar-bag-path[wiki-shadow]",
-        "mirror-root": `wikis/@${slug}`,
+        "mirror-root": `wikis/${slug}`,
       }, "lares-cli:wiki-init");
       tiddlers[draftKey] = mutableLarRecord(draftKey, {
         text: draftHandle.url,

@@ -140,7 +140,7 @@ class FakeTW5Engine {
 // ---------------------------------------------------------------------------
 
 const INSTANCE_ID = "test-adaptor";
-const TARGET_BAG  = "lar:///ha.ka.ba/bags/@test-wiki/draft";
+const TARGET_BAG  = "lar:///ha.ka.ba/bags/test-wiki/draft";
 const LAR_URI     = "lar:///ha.ka.ba/lares/memes/SESSION";
 
 function crdtRemote(islandId = "automerge"): ChangeOrigin {
@@ -365,11 +365,11 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     const orig = store.put.bind(store);
     store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };
 
-    const done = adaptor.saveTiddler({ fields: { title: LAR_URI, text: "saved", bag: "lar:///ha.ka.ba/bags/@lares" } });
+    const done = adaptor.saveTiddler({ fields: { title: LAR_URI, text: "saved", bag: "lar:///ha.ka.ba/bags/lares" } });
     await flush();
     await done;
 
-    expect(bags).toContain("lar:///ha.ka.ba/bags/@lares");
+    expect(bags).toContain("lar:///ha.ka.ba/bags/lares");
   });
 
   // The working/canon split (shore-law): a LIVE edit (no explicit bag) routes
@@ -388,7 +388,7 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     await done;
 
     expect(bags).toContain(workingSlot);                  // saved to the live write layer
-    expect(bags).not.toContain("lar:///ha.ka.ba/bags/@lares"); // never straight into canon
+    expect(bags).not.toContain("lar:///ha.ka.ba/bags/lares"); // never straight into canon
   });
 
   test("$:/temp/ title → cascade routes to the per-wiki temp layer", async () => {

@@ -20,9 +20,9 @@ import { personaBagIdFor } from "../src/persona-scope.js";
 import { BAG_IDS, DAEMON_BAG_ID, PERSONA_NAMESPACE } from "../src/lar-uris.js";
 import { personaScopedBagIds, personaTagFromBagId } from "../src/persona-scope.js";
 
-const WIKI = ["lar:///ha.ka.ba/bags/@my-wiki", "lar:///ha.ka.ba/bags/@my-wiki/draft"];
-const WORK = ["lar:///ha.ka.ba/bags/@elyncia", "lar:///ha.ka.ba/bags/@notes"];
-const PLAY = ["lar:///ha.ka.ba/bags/@discordia"];
+const WIKI = ["lar:///ha.ka.ba/bags/my-wiki", "lar:///ha.ka.ba/bags/my-wiki/draft"];
+const WORK = ["lar:///ha.ka.ba/bags/elyncia", "lar:///ha.ka.ba/bags/notes"];
+const PLAY = ["lar:///ha.ka.ba/bags/discordia"];
 
 const standingIn = (id: string, catalogNamed?: readonly string[]): FleetMembership =>
   ({ personaGroupId: id, ...(catalogNamed ? { catalogNamed } : {}) });
@@ -42,7 +42,7 @@ describe("the ground every vessel stands on", () => {
     // follows, where anything reading it correlates the faces a multitude exists to hold apart. So the
     // three planes that travel with a face arrive through a MEMBERSHIP, exactly as the persona plane does.
     const bags = deriveRegisterBags({ fleets: [] });
-    for (const stem of ["@circles", "@identities", "@sessions"]) {
+    for (const stem of ["circles", "identities", "sessions"]) {
       expect(bags.some((b) => b.includes(stem))).toBe(false);
     }
   });
@@ -69,7 +69,7 @@ describe("the ground every vessel stands on", () => {
 
   test("★ an anon dyad stands in no group, so it carries NO persona plane and no one's work ★", () => {
     const bags = deriveRegisterBags({ fleets: [], wikiBags: WIKI });
-    expect(bags.some((b) => b.includes("@persona"))).toBe(false);
+    expect(bags.some((b) => b.includes("persona"))).toBe(false);
     for (const b of [...WORK, ...PLAY]) expect(bags).not.toContain(b);
     expect(bags).toEqual(expect.arrayContaining(WIKI));   // its own wiki still stands
   });
@@ -110,7 +110,7 @@ describe("★ A PLANE CARRIES ONE NAME EVERYWHERE ★", () => {
 
   test("★ no plane ever carries two names — two planes, two names, never four ★", () => {
     const bags = deriveRegisterBags({ fleets: [standingIn("work"), standingIn("play")] });
-    expect(bags.filter((b) => b.includes("@persona"))).toHaveLength(2);
+    expect(bags.filter((b) => b.includes("persona"))).toHaveLength(2);
   });
 });
 
@@ -131,7 +131,7 @@ describe("★ SEVERAL groups on one vessel — a work compartment and a play com
   });
 
   test("two groups naming a bag in common register it once", () => {
-    const shared = ["lar:///ha.ka.ba/bags/@shared"];
+    const shared = ["lar:///ha.ka.ba/bags/shared"];
     const bags = deriveRegisterBags({ fleets: [standingIn("work", shared), standingIn("play", shared)] });
     expect(bags.filter((b) => b === shared[0])).toHaveLength(1);
     expect(bags.filter((b) => b === BAG_IDS.lararium)).toHaveLength(1);
@@ -156,12 +156,12 @@ describe("★ the registry admits only its OWN kind ★", () => {
   const catalog = {
     schemaVersion: "0.1",
     tiddlers: {
-      "lar:///ha.ka.ba/bags/@notes":                       rec("lar:///ha.ka.ba/bags/@notes", "automerge:aaa"),
+      "lar:///ha.ka.ba/bags/notes":                       rec("lar:///ha.ka.ba/bags/notes", "automerge:aaa"),
       // A wiki slot's per-device draft pointer: same title prefix, same automerge text, NOT a bag.
-      "lar:///ha.ka.ba/wikis/@notes/drafts/did:key:z6Mk":   rec("lar:///ha.ka.ba/wikis/@notes/drafts/did:key:z6Mk", "automerge:bbb"),
-      "lar:///ha.ka.ba/wikis/@notes":                       rec("lar:///ha.ka.ba/wikis/@notes", "automerge:ccc"),
-      "lar:///ha.ka.ba/bags/@notes/recipes/default":        rec("lar:///ha.ka.ba/bags/@notes/recipes/default", "automerge:ddd"),
-      "lar:///ha.ka.ba/bags/@never-minted":                 rec("lar:///ha.ka.ba/bags/@never-minted", ""),
+      "lar:///ha.ka.ba/wikis/notes/drafts/did:key:z6Mk":   rec("lar:///ha.ka.ba/wikis/notes/drafts/did:key:z6Mk", "automerge:bbb"),
+      "lar:///ha.ka.ba/wikis/notes":                       rec("lar:///ha.ka.ba/wikis/notes", "automerge:ccc"),
+      "lar:///ha.ka.ba/bags/notes/recipes/default":        rec("lar:///ha.ka.ba/bags/notes/recipes/default", "automerge:ddd"),
+      "lar:///ha.ka.ba/bags/never-minted":                 rec("lar:///ha.ka.ba/bags/never-minted", ""),
     },
   } as unknown as Parameters<typeof catalogNamedBags>[0];
 
@@ -169,16 +169,16 @@ describe("★ the registry admits only its OWN kind ★", () => {
     // It carries a lar title and an automerge url, indistinguishable from a bag entry by shape alone.
     // Registering it mints a Keyhive Document for a thing that is not a bag, and nothing throws.
     const named = catalogNamedBags(catalog);
-    expect(named).toContain("lar:///ha.ka.ba/bags/@notes");
-    expect(named).not.toContain("lar:///ha.ka.ba/wikis/@notes/drafts/did:key:z6Mk");
-    expect(named).not.toContain("lar:///ha.ka.ba/wikis/@notes");
+    expect(named).toContain("lar:///ha.ka.ba/bags/notes");
+    expect(named).not.toContain("lar:///ha.ka.ba/wikis/notes/drafts/did:key:z6Mk");
+    expect(named).not.toContain("lar:///ha.ka.ba/wikis/notes");
   });
 
   test("a tiddler INSIDE a bag is not a bag either — only the bag surface counts", () => {
-    expect(catalogNamedBags(catalog)).not.toContain("lar:///ha.ka.ba/bags/@notes/recipes/default");
+    expect(catalogNamedBags(catalog)).not.toContain("lar:///ha.ka.ba/bags/notes/recipes/default");
   });
 
   test("an entry that never minted stays skipped — a doc that cannot resolve is not registered", () => {
-    expect(catalogNamedBags(catalog)).not.toContain("lar:///ha.ka.ba/bags/@never-minted");
+    expect(catalogNamedBags(catalog)).not.toContain("lar:///ha.ka.ba/bags/never-minted");
   });
 });

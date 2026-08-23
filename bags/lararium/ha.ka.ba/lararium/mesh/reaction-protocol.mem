@@ -1,0 +1,174 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/mesh/reaction-protocol >>
+```toml iam
+cacheable   = true
+file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/reaction-protocol.mem"
+l-space     = "lararium"
+mana        = 17
+manao       = 17
+manaoio     = 16
+namespace   = "&#x0950; &#x0901;"
+register    = "Synthesis-Canon"
+retain      = true
+role        = "invariant: within-island reaction dispatch substrate — ReactionGraph, ReactionBinding, ReactionHandler, extractReactionBindings; scope boundary = one TW5 wiki instance"
+source-file = "packages/lararium-mesh/src/reaction-graph.ts"
+status-date = "2026-05-28"
+tags        = ["api/pono/meme"]
+type        = "text/x-memetic-wikitext+tiddlywiki"
+uri-path    = "ha.ka.ba/lararium/mesh/reaction-protocol"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Reaction Graph
+
+Within-island reaction dispatch substrate.
+Isomorphic: no Node/browser APIs. Runs in vessel, island, and browser.
+
+''Scope boundary:'' `ReactionGraph` routes within one TW5 wiki instance.
+It never addresses another island, another vessel, or the network.
+* Cross-island routing: `IslandMsg_Event` (island-protocol.ts)
+* Cross-vessel routing: CRDT convergence — write outcome tiddler, observe convergence
+
+The production dispatch path runs through `reaction-router.ts` (nalu-driven).
+`ReactionGraph` is the routing table that `reaction-router.ts` populates and queries.
+`fireSync` ships for direct test use only; production code MUST NOT call it directly.
+
+<<~/ahu >>
+
+<<~ ahu #exports >>
+
+!! Exports
+
+!!! `ReactionBinding`
+
+One papalohe instance-level wire: when `fromUri` emits `listenable`, call `toUri.subscribable`.
+
+```
+fromUri      — source device instance URI
+toUri        — target device instance URI
+listenable   — OUTPUT event pin name on fromUri (Verse OUTPUT pin)
+subscribable — INPUT fn pin name on toUri (Verse INPUT pin)
+source       — "wired" (from wiki AST) | "subscribed" (runtime Subscribe())
+```
+
+`wired` bindings derive from `family:reaction` pranala edges in the meme's carrier text.
+`subscribed` bindings form at runtime via `subscribe()`.
+
+---
+
+!!! `ReactionHandler`
+
+```typescript
+type ReactionHandler = (payload: unknown) => void
+```
+
+Called when a bound reaction fires. Payload carries the event context (GP-2 compliant: plain values only).
+
+---
+
+!!! `EdgeLike`
+
+Minimal edge shape accepted by `extractReactionBindings`. Matches `PranalaEdge` from `@lararium/mesh/ast`.
+
+---
+
+!!! `ReactionGraph`
+
+Live wiring map + handler registry.
+
+''Binding API:''
+
+| Method | Behaviour |
+|---|---|
+| `load(bindings)` | Replace entire binding set |
+| `updateUri(uri, bindings)` | Replace all bindings referencing `uri` (incremental nalu update) |
+| `removeUri(uri)` | Remove all bindings referencing `uri` (tiddler deleted) |
+| `bindings` | Flat readonly array of all current bindings |
+
+''Subscription API:''
+
+| Method | Verse analogue | `verseKind` constraint |
+|---|---|---|
+| `subscribe(fromUri, listenable, handler) → cancel` | `sourceDevice.OutputEvent.Subscribe(handler)` | ''`listenable` only'' — user `event(T)` fields lack `subscribable`; use `subscribeOnce` instead |
+| `subscribeByFn(fnName, handler) → cancel` | `@subscribes Enable()` — fires for all bindings routing to `fnName`; `"*"` = wildcard | `listenable` only |
+| `subscribeOnce(fromUri, listenable) → Promise` | `Await(event)<suspends>` — kukali primitive | ''both'' `listenable` and `event` |
+| `onFireSync(observer) → cancel` | Monitoring hook — fires before handler dispatch | both |
+
+''Verse type split:'' engine-exposed events (`button_device.InteractedWithEvent`) carry type `listenable(payload)` — supports `Subscribe()` and `Await()`. User-declared `event(T)` fields in custom Verse devices carry type `event(payload)` — supports `Signal()` and `Await()` only; `Subscribe()` is unavailable from outside the declaring class. This is a confirmed Verse language gap (acknowledged by Epic, not yet closed as of mid-2026).
+
+''Dispatch:''
+
+`fireSync(fromUri, listenable, payload)` — synchronous UEFN game-loop tick fidelity.
+
+Dispatch order:
+# `onFireSync` observers (monitoring — receive full context before any handler)
+# Direct handlers for `(fromUri, listenable)` key
+# Per-fn handlers for every binding where `fromUri+listenable` matches, via `subscribable` name
+
+---
+
+!!! `extractReactionBindings(edges) → ReactionBinding[]`
+
+Derives `ReactionBinding` records from a flat edge list.
+
+Selects edges that carry both `payload.listenable` and `payload.subscribable` (non-empty strings) — these represent instance-level papalohe wires. Edges carrying only one of the two fields declare a type-level pin, not a wire, and get ignored here.
+
+All extracted bindings carry `source: "wired"`.
+
+<<~/ahu >>
+
+<<~ ahu #update-invariant >>
+
+!! Update Invariant
+
+`load()` and `updateUri()` preserve occupied handler slots across binding rebuilds.
+
+A handler registered via `subscribe()` or `subscribeOnce()` survives graph reloads
+as long as the `(fromUri, listenable)` key still appears in the incoming binding set.
+Unoccupied slots for removed bindings drop; occupied slots persist.
+
+This preserves in-flight kukali suspensions across TW5 wiki-change events (nalu rebuilds).
+
+<<~/ahu >>
+
+<<~ ahu #production-dispatch-path >>
+
+!! Production Dispatch Path
+
+`reaction-router.ts` owns production dispatch. The path:
+
+```
+nalu arrives (wiki.addEventListener("change", handler))
+  → for each changed lar: URI:
+      updateUri(uri, extractReactionBindings(parseMemeEdges(uri, text)))
+      fireReactionsForUri(wiki, graph, uri)
+        → for each listenable in bindings for uri:
+            wiki.dispatchEvent("tm-verse-event", { uri, listenable })
+              → island-kernel.ts onVerseEvent handler
+                → posts IslandMsg_Event to vessel
+```
+
+`fireSync` on `ReactionGraph` provides synchronous dispatch for unit tests and in-memory fixtures.
+Production code calls `wiki.dispatchEvent("tm-verse-event")` only; `ReactionGraph.fireSync` never
+appears in production paths.
+
+<<!/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kukali >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-engine >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;YrHm1Hp8D9ix_Cf5sY-B31GGKD2YCckqsGIJWIHluMA
+
+<<^ code:"&#x0004;" -> ? >>

@@ -84,8 +84,8 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
   // Per-wiki cascade reference — the default `lar:///ha.ka.ba/lararium/config/bag-paths`
   // reads this value via `{lar:///ha.ka.ba/lararium/config/current-wiki-bag}` to
   // resolve `lar:` writes to the wiki's live WRITE LAYER. An operator content wiki
-  // points at its per-wiki working slot (`wikis/@{slug}/working`, the saved live
-  // layer projecting to disk wikis/@{slug}); its bags/@{slug} canon rides below as
+  // points at its per-wiki working slot (`wikis/{slug}/working`, the saved live
+  // layer projecting to disk wikis/{slug}); its bags/{slug} canon rides below as
   // read-only, published only by a promotion MOVE (wiki-layer-ontology#shore-law).
   // A grant-less mount — @daemon itself, a control plane with no working/canon
   // split — has no working layer, so it falls back to its OWN bag (wikiBagUri(slug)

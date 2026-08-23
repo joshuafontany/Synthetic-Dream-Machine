@@ -13,8 +13,8 @@ import { CompositeStore } from "../src/composite-store.js";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import type { ChangeOrigin } from "../src/tiddler-store.js";
 
-const HI = "lar:///ha.ka.ba/bags/@wiki";
-const LO = "lar:///ha.ka.ba/bags/@corpus";
+const HI = "lar:///ha.ka.ba/bags/wiki";
+const LO = "lar:///ha.ka.ba/bags/corpus";
 function origin(): ChangeOrigin { return { kind: "canon-hydrate", receipt: "test" }; }
 
 describe("CompositeStore.entries()", () => {

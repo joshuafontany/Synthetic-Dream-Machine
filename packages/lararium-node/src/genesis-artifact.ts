@@ -241,8 +241,8 @@ export function mintLaresIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): 
  * @lararium, @lares stand as three separate docs). Mirror
  * of mintLaresIfAbsent: the corpus pointer rides the @oracle system plane (the
  * island doc), never @catalog. The minted doc starts empty; corpus content fills
- * it by LOAD/ingest (`lares act LOAD … --to lar:///ha.ka.ba/bags/@lararium`) and the
- * disk mirror carries it back to `bags/@lararium`. Node genesis office only.
+ * it by LOAD/ingest (`lares act LOAD … --to lar:///ha.ka.ba/bags/lararium`) and the
+ * disk mirror carries it back to `bags/lararium`. Node genesis office only.
  */
 export function mintLarariumIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): string {
   const existing = tiddlerText(islandHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;

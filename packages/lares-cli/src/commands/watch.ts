@@ -165,7 +165,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
       const packsRecorded = recordLandedPacks(tree, toBag, candidates, carriers);
       const renamesMoved  = applyConfirmedRenames(tree, toBag, candidates, del);
       if (packsRecorded + renamesMoved > 0) tree.flush();
-      console.log(`  wave ${n}: ${candidates.length} change(s) + ${ride.length} deletion(s) submitted · audit lar:///ha.ka.ba/bags/@daemon/outcomes/${result.requestId}`);
+      console.log(`  wave ${n}: ${candidates.length} change(s) + ${ride.length} deletion(s) submitted · audit lar:///ha.ka.ba/bags/daemon/outcomes/${result.requestId}`);
       for (const c of carriers) console.log(`    ${String(c["decision"]).toUpperCase().padEnd(10)} ${c["uri"]}`);
       if (del && (del as { decision?: string })["decision"] === "suspend") {
         console.error(`    ⚠ mass-delete brake TRIPPED — ${String((del as { reason?: string })["reason"] ?? "")}; nothing applied, re-run to confirm.`);

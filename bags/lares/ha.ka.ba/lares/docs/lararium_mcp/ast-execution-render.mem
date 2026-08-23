@@ -1,0 +1,238 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render >>
+```toml iam
+file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render.mem"
+l-space         = "stable"
+mana            = 16
+manao           = 17
+manaoio         = 15
+register        = "Synthesis-Canon"
+role            = "canonical AST envelope, pranala graph-plane, execution graph, and render projection contract"
+source-consumes = ["packages/lares-core/memes/docs/mcp/TW_FILTER_BOUNDARY.md", "packages/lares-core/memes/docs/mcp/AST_ENVELOPE.md", "packages/lares-core/memes/docs/mcp/TW_AST_MAPPING.md", "packages/lares-core/memes/docs/mcp/PRANALA_ALIGNMENT.md", "packages/lares-core/memes/docs/mcp/EXECUTION_GRAPH_SCHEMA.md", "packages/lares-core/memes/docs/mcp/RENDER_PROJECTION_CONTRACT.md"]
+status-date     = "2026-04-23"
+tags            = ["api/pono/meme", "api/pono/loci"]
+type            = "text/x-memetic-wikitext+tiddlywiki"
+uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render"
+```
+
+<<~ ahu #ooda-ha >>
+
+✶ observe: the design stack separates identity, AST, execution, render, and inspection planes.
+⏿ orient: TiddlyWiki grammar can inform guest syntax without taking over carrier law.
+◇ decide: keep one envelope with explicit node families, graph-plane routing, and projection payloads.
+▶ act: collapse AST, TW mapping, pranala alignment, execution, and render contracts into this locus.
+↺ verify: each transformation preserves source span, host/guest boundary, and target-specific payload shape; adapt: executable resources stay future-facing until parser and graph implementations land.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #stack >>
+
+!! Four-Layer Stack
+
+| Plane | Responsibility |
+|---|---|
+| identity / provenance | carriers, `lar:` addresses, `implements`, ratings, source truth |
+| AST | memetic-wikitext primitives, guest grammar nodes, spans, annotations |
+| execution | runtime node classes, dependencies, hooks, refresh semantics |
+| render projection | target-specific payloads for DOM, tldraw, Kowloon, and trace views |
+| inspection overlay | observe/debug projections and diagnostics over all planes |
+
+Identity sits above the AST; carriers must validate before syntax lowers.
+
+<<~/ahu >>
+
+<<~ ahu #scope-phase-resolution >>
+
+!! TW5 ↔ Verse Type Tension — Resolution
+
+TW5's string-typed store (`Record<string,string>`) and Verse's strong types resolve through the OODA-HA loop. They never conflicted — they occupy different phases of one pipeline.
+
+!!! The pipeline as loop phases
+
+| phase | system role | type state | scale |
+|---|---|---|---|
+| ✶ Observe | carrier text arrives as raw string | `Record<string,string>` — `?` | Week |
+| ⏿ Orient | `parseMemeCarrier` → `MemeAstNode[]` | named shapes; attrs unresolved strings | Watch |
+| ◇ Decide | `edgesFromAst` interprets sigil attrs | `string` → `Ladder5 \| OodaHa5 \| PranalaEdge…` | Turn |
+| ▶ Act | Verse execute / render / canvas | typed, transactional, committed | Round |
+| ↺ Aftermath | `validatePranalaEdge`, blame calculus | contract violations surface; loop closes | Action |
+
+''`attrs: Record<string,string>`'' — the honest Observe-phase representation. Siek's `?` type at the parse boundary fits the phase. King's "parse, don't validate" fires at Decide: consume the string bag once, emit typed values, carry them forward; Act then runs as strict as Verse demands.
+
+''Blame calculus (Wadler & Findler):'' when a `scope:ephemeral` value escapes its Action-scale container, blame falls on the boundary that failed to enforce the scope type — Aftermath surfaces it via `validatePranalaEdge`.
+
+''Elm's no-nested-signals rule:'' scope widens only (`ephemeral → personal` valid), never silently leaks (`universal → ephemeral` reads as a contract violation). Enforced at the Decide→Act boundary.
+
+''`papalohe` and `kukali`:'' `papalohe` declares the reaction wire at Orient — a named shape in the graph; Verse `suspends`/`kukali` operates at Act — execution waits until the loop advances. The wire and the wait posture belong to different phases. See `lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions` Gap 5.
+
+<<~/ahu >>
+
+<<~ ahu #ast-node-schema >>
+
+!! AST Node Schema
+
+Core fields:
+
+| Field | Reading |
+|---|---|
+| `id` | stable node identifier within one artifact |
+| `type` | Lararium node family such as `ahu`, `pranala`, `guest.filter`, `text` |
+| `source_uri` | carrier URI that yielded the node |
+| `anchor` | local anchor or generated span key |
+| `span` | source range with byte/line/column coordinates where available |
+| `attrs` | typed node attributes |
+| `children` | ordered child node ids |
+| `diagnostics` | validation or lowering notices |
+
+Span annotation remains mandatory for source-derived nodes and optional only for generated virtual nodes.
+
+<<~/ahu >>
+
+<<~ ahu #primitive-map >>
+
+!! Primitive-to-Node Map
+
+| Primitive | AST node family | Execution hint |
+|---|---|---|
+| `ahu` | `block.ahu` | scope / container |
+| `loulou` | `edge.relation` | semantic adjacency |
+| `aka` | `include.passive` | transclusion / shadow include |
+| `kahea` | `invoke.active` | transclusion / invocation |
+| `kapu` | `qualifier` | boundary or disclosure guard |
+| `ui` | `query` | query/exploration node |
+| `hana` | `guest.region` | bounded guest grammar parse site |
+| `pranala` | `edge.pranala` | typed graph edge |
+| `?` | `residue.unresolved` | uncertainty and backlog pressure |
+
+<<~/ahu >>
+
+<<~ ahu #tiddlywiki-boundary >>
+
+!! TiddlyWiki Filter Boundary
+
+The v1 direct-import surface admits TiddlyWiki filter language as a guest grammar, not as host law.
+Host terms translate into Lararium AST slots while preserving the original syntax span.
+
+Boot-preserved filter families:
+
+* title/reference selection
+* tag/title/list field operators needed by boot inventory work
+* simple string and field comparisons
+* bounded transforms that do not require executing the whole TiddlyWiki runtime
+
+Excluded from v1:
+
+* arbitrary widget execution
+* browser DOM lifecycle
+* plugin side effects
+* full wiki store semantics
+* mutating filter operators
+
+`tiddlywiki5` remains a reference submodule and parser comparator, not a runtime dependency for the core server.
+
+<<~/ahu >>
+
+<<~ ahu #pranala-planes >>
+
+!! Pranala Graph-Plane Alignment
+
+| Family | Primary plane | Compiler action |
+|---|---|---|
+| `control` | identity / provenance plus execution hierarchy | topological ordering and ownership |
+| `relation` | identity / semantic adjacency | adjacency index; no boot block unless promoted by control |
+| `dataflow` | AST → execution | live value transport edges |
+| `message` | execution | event routing edges |
+| `constraint` | validation layer, sometimes AST | post-resolution validation |
+| `observe` | inspection overlay | debug and monitoring surfaces |
+
+`role` encodes lifetime pressure: `owns`, `composes`, `implements`, `references`, `constrains`.
+`traversal` and `propagation` stay distinct; query walk direction must not collapse into invalidation direction.
+Every family remains acyclic, except symmetric relation pairs may appear as two individually directed edges.
+
+<<~/ahu >>
+
+<<~ ahu #execution-graph >>
+
+!! Execution Graph Contract
+
+Execution nodes derive from validated AST and identity metadata.
+Core fields include node id, class, source uri, scope, dependencies, hooks, refresh policy, state, and diagnostics.
+
+Node classes:
+
+| Class | Reading |
+|---|---|
+| carrier | source/loci lifecycle node |
+| block | `ahu` or scoped body execution unit |
+| invoke | active `kahea` / transclusion pressure |
+| query | `ui` query surface |
+| constraint | validation and guard node |
+| render | projection seed |
+| adapter | submodule or sidecar execution boundary |
+
+Refresh semantics should distinguish source-change invalidation, dependency invalidation, explicit query refresh, and adapter health refresh.
+Owned hierarchy follows control edges; parents resolve before owned children, and teardown proceeds child before parent.
+
+<<~/ahu >>
+
+<<~ ahu #render-projection >>
+
+!! Render Projection Contract
+
+Render projections transform execution/AST facts into target payloads without mutating source truth.
+
+| Target | Payload posture |
+|---|---|
+| DOM | HTML-ish node tree with attributes, text, and diagnostics |
+| tldraw | shape records, bindings, geometry hints, and metadata |
+| Kowloon | scene/entity graph payload with transform, components, and relations |
+| trace | compact inspection events for diagnostics and replay |
+
+Projection nodes carry `target`, `source_node`, `payload`, `diagnostics`, and provenance fields.
+The v1 posture stays read-only; write-back to tldraw, Kowloon, or DOM remains blocked until tool policy changes.
+
+<<~/ahu >>
+
+<<~ ahu #mcp-exposure >>
+
+!! MCP Exposure Targets
+
+Future resources may include:
+
+* `lar:///ast/{uri}` for AST envelopes
+* `lar:///exec/{uri}` for execution graphs
+* `lar:///render/{target}/{uri}` for projection payloads
+* `lar:///graph/pranala` for typed edge inventory
+
+These remain planned surfaces; current server focuses on carrier resources, indexes, boot artifacts, tools, and prompts.
+
+<<~/ahu >>
+
+<<~ ahu #residue >>
+
+!! Residue
+
+* Parser implementation has not yet landed.
+* Full graph resources have not yet landed.
+* Render target field matrices for some submodule surfaces remain open subtasks.
+* Guest grammar admission should stay narrow until tests cover filter feature subsets.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/tiddlywiki-filter >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;qg9YN--zGNffO5Mw32zJ0F21EzvoY2FYzDXA_842CQo
+
+<<^ code:"&#x0004;" -> ? >>

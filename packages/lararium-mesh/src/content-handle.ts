@@ -125,7 +125,7 @@ export function bodyIndexBagUri(publicity: BodyPublicity): string {
  * The fail-closed guard the @cad index SITER passes before it writes a body-index: the holding bag matches
  * the body's publicity. It THROWS a named error on any mismatch — a public index off @crossroads, a private
  * index off @catalog (the load-bearing denial: a private map NEVER rides the public floor), or an unknown
- * bag. `indexHoldingBagUri` names the residency bag the siter chose (`bags/@crossroads` / `bags/@catalog`),
+ * bag. `indexHoldingBagUri` names the residency bag the siter chose (`bags/crossroads` / `bags/catalog`),
  * not the full nested index doc URI. The guard enforces canon (content-resolution.mem #cad-storage), never
  * the OPEN indirection-map placement fork (③): it fixes the TIER, never which doc inside the tier holds it.
  */

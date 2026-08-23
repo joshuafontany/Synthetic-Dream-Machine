@@ -1,0 +1,45 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves >>
+```toml iam
+cacheable  = true
+confidence = 10
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "places — the constellation's far exclaves: the Poseidon-coast crags and the Artemision's risen six miles"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Far Exclaves
+
+''Stratum:'' High Delos constellation — ''located over other Realms''. Members of New Delos by
+the morning they rose, joined to the capital by nothing but the DreamNet and shared sky.
+
+* ''The Poseidon-coast crags'' — holy sites and random cave-bearing rocks off the Athens-region
+  coast, taken by the gradient's tail. Small, scattered, mostly bare. //Prompts:// which caves
+  hold anything · who visits · what the coast below thinks of its missing stones.
+* ''The Artemision Exclave'' — ''the whole six miles around the Temple of Artemis near Izmir,
+  raised as one piece'' — a temple district aloft over a foreign coast, the gradient's most
+  distant and most deliberate-looking reach. //Prompts:// inhabited, and by whom · what the
+  Temple's keepers made of the morning · why the gradient reached HERE with such precision —
+  accident of holiness, or the Patroness's intent.
+
+''Filing law:'' exclaves file here (constellation membership) and carry a locator tag toward
+their host Realms; host-region worksheets may cross-reference.
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;ZlYeX4Jgkp0vGJ4e1XfNimh_Suetxy8woYThBxlUlK4
+
+<<^ code:"&#x0004;" -> ? >>

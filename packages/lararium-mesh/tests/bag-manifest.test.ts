@@ -29,7 +29,7 @@ describe("a bag that declares nothing still answers", () => {
 
   test("★ a TORN field fails closed ALONE — one bad value never discards the good ones ★", () => {
     // An all-or-nothing parse would throw away a correct tier because somebody mistyped a home.
-    const m = bagManifestFromIam("@lares", { "cap-tier": "public", home: "corpus" });
+    const m = bagManifestFromIam("lares", { "cap-tier": "public", home: "corpus" });
     expect(m.tier).toBe("public");     // read fine, kept
     expect(m.home).toBe("hearth");     // torn, fail-closed on its OWN axis
   });
@@ -42,22 +42,22 @@ describe("a bag that declares nothing still answers", () => {
 
 describe("★ NO PATHS, EVER — a repository home names a registered id ★", () => {
   test("the repo id rides only where a repository home does", () => {
-    const repoBag = bagManifestFromIam("@lares", { home: "repository", repository: "canon" });
+    const repoBag = bagManifestFromIam("lares", { home: "repository", repository: "canon" });
     expect(repoBag.repository).toBe("canon");
     // A hearth bag carrying a repo id would leave a stale pointer reading as intent the next time somebody
     // moved it, so the parse drops it.
-    expect(bagManifestFromIam("@nexus", { home: "hearth", repository: "canon" }).repository).toBeUndefined();
+    expect(bagManifestFromIam("nexus", { home: "hearth", repository: "canon" }).repository).toBeUndefined();
   });
 
   test("★ the rendered manifest carries the ID and never a directory ★", () => {
-    const wire = renderBagManifest(bagManifestFromIam("@lares", { home: "repository", repository: "canon", "cap-tier": "public" }));
+    const wire = renderBagManifest(bagManifestFromIam("lares", { home: "repository", repository: "canon", "cap-tier": "public" }));
     expect(wire).toContain('repository = "canon"');
     expect(wire).not.toContain("/repos/canon");     // the path stays local to the vessel that resolved it
     expect(wire).not.toContain("/state");
   });
 
   test("an unregistered id REFUSES here rather than resolving somewhere else", () => {
-    const m = bagManifestFromIam("@lares", { home: "repository", repository: "elsewhere" });
+    const m = bagManifestFromIam("lares", { home: "repository", repository: "elsewhere" });
     const p = placeBag(m, ROOTS);
     expect(p.resolution.ok).toBe(false);
     expect(p.resolution.ok === false && p.resolution.why).toMatch(/no repo registered under "elsewhere"/);
@@ -71,7 +71,7 @@ describe("★ NO PATHS, EVER — a repository home names a registered id ★", (
 
   test("★ an unregistered repo reads PLACEABLE-ELSEWHERE, never broken ★", () => {
     // The declaration travels with the bag and is fine; this vessel simply is not where it lives.
-    const m = bagManifestFromIam("@lares", { home: "repository", repository: "canon" });
+    const m = bagManifestFromIam("lares", { home: "repository", repository: "canon" });
     expect(placeBag(m, ROOTS).resolution).toEqual({ ok: true, home: "repository", dir: "/repos/canon" });
     expect(placeBag(m, NO_REPOS).resolution.ok).toBe(false);
     expect(m.repository).toBe("canon");             // unchanged — the bag still knows what it wants
@@ -80,7 +80,7 @@ describe("★ NO PATHS, EVER — a repository home names a registered id ★", (
 
 describe("planBagMove — judged before anything is written", () => {
   test("hearth → repository resolves both ends", () => {
-    const move = planBagMove(defaultBagManifest("@lares"), { home: "repository", repository: "canon" }, ROOTS);
+    const move = planBagMove(defaultBagManifest("lares"), { home: "repository", repository: "canon" }, ROOTS);
     expect(move.from.resolution).toEqual({ ok: true, home: "hearth", dir: "/state" });
     expect(move.to.resolution).toEqual({ ok: true, home: "repository", dir: "/repos/canon" });
     expect(move.noop).toBe(false);
@@ -93,7 +93,7 @@ describe("planBagMove — judged before anything is written", () => {
   });
 
   test("moving to hearth or ley DROPS a carried repo id — no stale pointer survives", () => {
-    const inRepo = bagManifestFromIam("@lares", { home: "repository", repository: "canon" });
+    const inRepo = bagManifestFromIam("lares", { home: "repository", repository: "canon" });
     expect(planBagMove(inRepo, { home: "hearth" }, ROOTS).to.manifest.repository).toBeUndefined();
     expect(planBagMove(inRepo, { home: "ley" }, ROOTS).to.manifest.repository).toBeUndefined();
   });
@@ -109,7 +109,7 @@ describe("planBagMove — judged before anything is written", () => {
   });
 
   test("the tier rides through a move untouched — a home change is not a permission change", () => {
-    const m = bagManifestFromIam("@lares", { "cap-tier": "contract", home: "hearth" });
+    const m = bagManifestFromIam("lares", { "cap-tier": "contract", home: "hearth" });
     expect(planBagMove(m, { home: "repository", repository: "canon" }, ROOTS).to.manifest.tier).toBe("contract");
   });
 });

@@ -24,7 +24,7 @@ const NOW    = 1_000_000;
 const EXPIRY = NOW + 60_000;
 
 function mkDoc() {
-  return A.from({ tiddlers: { "@oracle": { text: "the constitution" } } });
+  return A.from({ tiddlers: { "oracle": { text: "the constitution" } } });
 }
 
 describe("oracle-substrate — content-addressed read face", () => {
@@ -46,7 +46,7 @@ describe("oracle-substrate — content-addressed read face", () => {
   test("the export round-trips through Automerge.load read-only", async () => {
     const snap = await exportOracleSnapshot(mkDoc());
     const loaded = A.load<{ tiddlers: Record<string, { text: string }> }>(snap.bytes);
-    expect(loaded.tiddlers["@oracle"]!.text).toBe("the constitution");
+    expect(loaded.tiddlers["oracle"]!.text).toBe("the constitution");
   });
 });
 

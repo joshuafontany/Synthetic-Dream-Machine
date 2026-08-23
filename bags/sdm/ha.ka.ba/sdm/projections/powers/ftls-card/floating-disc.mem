@@ -1,0 +1,63 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc >>
+```toml iam
+cacheable = true
+file-path = "bags/sdm/ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc.mem"
+mana      = 14
+manao     = 17
+manaoio   = 15
+register  = "Synthesis-Canon"
+retain    = true
+role      = "FTLS card projection: Floating Disc — playable surface with clickable component pills"
+tags      = ["components/domain/stuckforce", "components/function/cargo", "components/function/barrier", "components/hook/sustained", "mount-points/trait"]
+l-space   = "sdm"
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc"
+```
+
+<<^ code:"&#x0002;" >>
+
+! Floating Disc — FTLS Card
+
+<<~ ahu #card >>
+
+!! Floating Disc
+//Mage's Mule, Shield of the Righteous//
+
+''P:'' 2 · ''R:'' 30m · ''T:'' point · ''D:'' 1 hour
+
+A concave disc of stuckforce, 1m across, hovering at waist height. It bears a load and follows or is pushed at walking pace; tilt it for a barrier — wall, bridge, roof. It veers from collisions. Vanishes past 30m, dropping its load.
+
+<<~/ahu >>
+
+<<~ ahu #overcharge >>
+
+!! Overcharge
+
+* ''x2 (P:4)'' — up to 5m across; moves at spoken command.
+* ''x4 (P:8)'' — two discs, or one that safely bears a creature.
+
+<<~/ahu >>
+
+<<~ ahu #components >>
+
+!! Components
+
+<<~ kahea lar:///ha.ka.ba/lararium/lists/components >>
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
+<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;uPBl3beLdMxvmaSzD4Kr2FDy6pxGNX-e-7gbHt3sFZQ
+
+<<^ code:"&#x0004;" -> ? >>

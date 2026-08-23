@@ -84,13 +84,13 @@ describe("bootTrustedModules — selection by worn component", () => {
   test("a module wearing tw5/tw5-module at rating passes the gate and injects", async () => {
     const body = "exports.probe = 1;";
     const { tw, tiddlers, defined } = fakeTw({
-      ["lar:///ha.ka.ba/bags/@test/modules/probe"]: moduleMeme("lar:///ha.ka.ba/bags/@test/modules/probe", body),
+      ["lar:///ha.ka.ba/bags/test/modules/probe"]: moduleMeme("lar:///ha.ka.ba/bags/test/modules/probe", body),
       [AGGREGATE_URI]: moduleMeme(AGGREGATE_URI, "exports.agg = 1;"),
     });
 
     await bootTrustedModules(tw);
 
-    const injected = tiddlers.get("lar:///ha.ka.ba/bags/@test/modules/probe")!;
+    const injected = tiddlers.get("lar:///ha.ka.ba/bags/test/modules/probe")!;
     expect(injected["type"]).toBe("application/javascript");   // rewritten = injected
     expect(defined).toContain("lararium-tw5-modules");          // aggregate defined
   });
@@ -98,15 +98,15 @@ describe("bootTrustedModules — selection by worn component", () => {
   test("low rating, missing hash, and unworn carriers all stay un-injected", async () => {
     const body = "exports.probe = 1;";
     const { tw, tiddlers } = fakeTw({
-      ["lar:///ha.ka.ba/bags/@test/modules/low"]:    moduleMeme("lar:///ha.ka.ba/bags/@test/modules/low", body, { mana: "3" }),
-      ["lar:///ha.ka.ba/bags/@test/modules/nohash"]: moduleMeme("lar:///ha.ka.ba/bags/@test/modules/nohash", body, { "body-sha256": "" }),
-      ["lar:///ha.ka.ba/bags/@test/modules/bare"]:   moduleMeme("lar:///ha.ka.ba/bags/@test/modules/bare", body, { tags: [] }),
+      ["lar:///ha.ka.ba/bags/test/modules/low"]:    moduleMeme("lar:///ha.ka.ba/bags/test/modules/low", body, { mana: "3" }),
+      ["lar:///ha.ka.ba/bags/test/modules/nohash"]: moduleMeme("lar:///ha.ka.ba/bags/test/modules/nohash", body, { "body-sha256": "" }),
+      ["lar:///ha.ka.ba/bags/test/modules/bare"]:   moduleMeme("lar:///ha.ka.ba/bags/test/modules/bare", body, { tags: [] }),
     });
 
     await bootTrustedModules(tw);
 
     for (const t of ["low", "nohash", "bare"]) {
-      expect(tiddlers.get(`lar:///ha.ka.ba/bags/@test/modules/${t}`)!["type"])
+      expect(tiddlers.get(`lar:///ha.ka.ba/bags/test/modules/${t}`)!["type"])
         .toBe(CARRIER_TYPE);
     }
   });

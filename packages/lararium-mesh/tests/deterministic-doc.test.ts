@@ -1,7 +1,7 @@
 /**
  * deterministic-doc.test.ts — per-Nexus addresses every island member computes alike.
  *
- * Proven: the same nexus-pubkey yields the same @crossroads + WHO-board URL (so no advertisement is needed);
+ * Proven: the same nexus-pubkey yields the same crossroads + WHO-board URL (so no advertisement is needed);
  * different nexuses yield different addresses (per-island sharding); and materializeSharedLarDoc lands the doc
  * under exactly the deterministic id, resolving the same handle on a second call (find-first, no re-mint).
  */
@@ -15,7 +15,7 @@ describe("deterministic per-Nexus addresses", () => {
   test("the same nexus-pubkey yields the same addresses — every island member computes them alike", () => {
     expect(crossroadsDocUrl(NX)).toBe(crossroadsDocUrl(NX));
     expect(whoBoardDocUrl(NX)).toBe(whoBoardDocUrl(NX));
-    // the @crossroads doc and the WHO board are DISTINCT addresses
+    // the crossroads doc and the WHO board are DISTINCT addresses
     expect(whoBoardDocUrl(NX)).not.toBe(crossroadsDocUrl(NX));
   });
 

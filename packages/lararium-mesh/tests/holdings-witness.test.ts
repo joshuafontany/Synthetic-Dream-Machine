@@ -9,8 +9,8 @@ import { describe, expect, test } from "vitest";
 
 import { holdingsWitnessLines, witnessHoldings, type HoldingsReading } from "../src/holdings-witness.js";
 
-const CROSSROADS = "lar:///ha.ka.ba/bags/@crossroads";
-const NOTES      = "lar:///ha.ka.ba/bags/@notes";
+const CROSSROADS = "lar:///ha.ka.ba/bags/crossroads";
+const NOTES      = "lar:///ha.ka.ba/bags/notes";
 
 const reading = (over: Partial<HoldingsReading>): HoldingsReading => ({
   onDisk:   new Map(),

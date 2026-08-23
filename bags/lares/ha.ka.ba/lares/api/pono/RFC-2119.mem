@@ -1,0 +1,67 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/RFC-2119 >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/RFC-2119.mem"
+mana      = 18
+manao     = 18
+manaoio   = 18
+namespace = "&#x2299;"
+register  = "Canon"
+retain    = true
+role      = "shared normative vocabulary law (kānāwai), modal-force registry, and cross-meme reference point"
+source    = "IETF RFC 2119 — Key words for use in RFCs to Indicate Requirement Levels"
+tags      = ["api/pono/meme", "api/pono/loci"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/RFC-2119"
+```
+
+<<~ ahu #head >>
+
+! RFC-2119 — Normative Verbs (Kānāwai)
+
+Shared modal-force vocabulary for this stack.
+Carrier laws cite this meme; they do not re-declare the list.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #ooda-ha >>
+
+✶ inventory where normative verbs appear across carrier laws in the stack.
+⏿ separate force-bearing terms from prose habits and local restatements.
+◇ fix the five-item canonical set; reject carrier-local metadata duplication when prose citation suffices.
+▶ cite this meme; do not restate the list.
+↺ verify carrier laws point here rather than duplicating or mutating the shared set; name any residue where duplication or mutation still persists.
+
+<<~/ahu >>
+
+<<~ ahu #normative-language >>
+
+!! Normative Language
+
+The canonical normative verb set for this stack, adapted from IETF RFC 2119:
+
+* `MUST` — absolute requirement
+* `MUST NOT` — absolute prohibition
+* `SHOULD` — strong recommendation; deviation requires understood and weighed justification
+* `SHOULD NOT` — strong discouragement; deviation requires understood and weighed justification
+* `MAY` — truly optional
+
+Carrier laws may explain local usage, but MUST cite this meme rather than re-declaring the list as a top-level `#iam` key.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/RFC-2119 >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;ALt3YO0ccL867YTW-NjT311jAdUAIpUGueB8zTcA27g
+
+<<^ code:"&#x0004;" -> ? >>

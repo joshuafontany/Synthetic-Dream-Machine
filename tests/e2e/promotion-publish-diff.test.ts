@@ -21,10 +21,10 @@ import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const BOOT_MEME = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
 const BOOT_URI  = "lar:///ha.ka.ba/lares/api/noosphere-boot";
-const LARES_URI    = "lar:///ha.ka.ba/bags/@lares";
-const LARARIUM_URI = "lar:///ha.ka.ba/bags/@lararium";
+const LARES_URI    = "lar:///ha.ka.ba/bags/lares";
+const LARARIUM_URI = "lar:///ha.ka.ba/bags/lararium";
 const REL = "ha.ka.ba/lares/api/noosphere-boot.mem";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -57,7 +57,7 @@ beforeAll(async () => {
   if (lar.mode !== "staged") return;          // mutating — staged only
   const r = await lar.cli(["act", "LOAD", "--source-uri", BOOT_MEME, "--to", LARES_URI, "--yes", "--json"]);
   if (r.json?.["ok"] !== true) throw new Error(`seed LOAD failed: ${JSON.stringify(r.json)}`);
-  if (!(await awaitFileState(join(lar.root, "bags/@lares", REL), true)))
+  if (!(await awaitFileState(join(lar.root, "bags/lares", REL), true)))
     throw new Error("seed: the @lares projection never materialized");
 }, 120_000);
 afterAll(async () => { await lar.stop(); });
@@ -72,13 +72,13 @@ describe("promotion publish-diff — the cap-gated carrier MOVE across a canon s
     expect(Number(data?.["moved"])).toBeGreaterThan(1);             // the WHOLE carrier group, not one title
   }, 60_000);
 
-  test("P2 — the disk publish-diff: the whole carrier moves bags/@lares → bags/@lararium", async () => {
+  test("P2 — the disk publish-diff: the whole carrier moves bags/lares → bags/lararium", async () => {
     if (lar.mode !== "staged") return;
     const { gained, lost } = await awaitPublishDiff(
-      join(lar.root, "bags/@lararium", REL),
-      join(lar.root, "bags/@lares",    REL),
+      join(lar.root, "bags/lararium", REL),
+      join(lar.root, "bags/lares",    REL),
     );
-    expect(gained, "the carrier did not publish under bags/@lararium").toBe(true);
-    expect(lost,   "the carrier still sits under bags/@lares").toBe(true);
+    expect(gained, "the carrier did not publish under bags/lararium").toBe(true);
+    expect(lost,   "the carrier still sits under bags/lares").toBe(true);
   }, 90_000);
 });

@@ -4,13 +4,13 @@
  *
  * The whole point (the cross-operator security tension two prior spirits declined to force): a peer that
  * carries a DIFFERENT operator identity must reach ONLY this vessel's deterministically-federatable planes
- * (@crossroads / WHO / kapae-antigen), NEVER a private-own plane (@catalog / @personal / home / wikis) —
+ * (crossroads / WHO / kapae-antigen), NEVER a private-own plane (catalog / @personal / home / wikis) —
  * while the operator's OWN device fleet keeps FULL sync of everything.
  *
  * Proven against REAL mesh primitives (DeterministicFederationGate + the real deterministic doc urls +
  * the real carryContractShareDecision the sharePolicy calls) — no stubs in the decision path:
  *   · a SAME-OPERATOR (device-fleet) WS peer gets full sync INCLUDING a private plane (no-break-own-sync),
- *   · a CROSS-OPERATOR WS peer gets a federatable plane but is DENIED @catalog/@personal (the no-leak),
+ *   · a CROSS-OPERATOR WS peer gets a federatable plane but is DENIED catalog/@personal (the no-leak),
  *   · an UNCLASSIFIED WS peer is treated cross-operator (private DENIED) — fail-closed,
  *   · a Kapae'd cross-operator draws Mu even for a federatable plane (the #59 antigen ahead),
  *   · an in-process island peer full-syncs (a house member),
@@ -37,7 +37,7 @@ const WHO_BOARD  = docIdOf(whoBoardDocUrl(MY_NEXUS));
 const ANTIGEN    = docIdOf(kapaeAntigenDocUrl(MY_NEXUS));
 
 // ── The PRIVATE-own planes (a cross-operator must NEVER reach these) ───────────────────────────
-// @catalog / @personal / home / wiki docs carry RANDOM automerge ids (never the deterministic set), so a
+// catalog / @personal / home / wiki docs carry RANDOM automerge ids (never the deterministic set), so a
 // fresh random doc id is the faithful stand-in — it can never collide with a federatable address.
 const randomDocId = (): DocumentId => docIdOf(stringifyAutomergeUrl({ documentId: new Uint8Array(randomBytes(16)) as BinaryDocumentId }));
 const CATALOG_LIKE  = randomDocId();
@@ -58,7 +58,7 @@ describe("no-break-own-sync — a SAME-OPERATOR device-fleet peer keeps FULL dev
     hasWsSocket: true, peerClass: "same-operator", selfSlotFedGate: fedGate, antigenRing: null, membership: null, planeSeal: null, peerId: SAME_PEER, documentId,
   });
 
-  test("a PRIVATE plane (@catalog-like) crosses to my own device", async () => {
+  test("a PRIVATE plane (catalog-like) crosses to my own device", async () => {
     expect(await same(CATALOG_LIKE)).toBe(true);
   });
   test("a PRIVATE plane (@personal-like) crosses to my own device", async () => {
@@ -74,11 +74,11 @@ describe("the no-leak — a CROSS-OPERATOR peer reaches ONLY the federatable-own
     hasWsSocket: true, peerClass: "cross-operator", selfSlotFedGate: fedGate, antigenRing: null, membership: null, planeSeal: null, peerId: CROSS_PEER, documentId,
   });
 
-  test("@crossroads crosses (federatable-own)", async () => { expect(await cross(CROSSROADS)).toBe(true); });
+  test("crossroads crosses (federatable-own)", async () => { expect(await cross(CROSSROADS)).toBe(true); });
   test("the WHO board crosses (federatable-own)", async () => { expect(await cross(WHO_BOARD)).toBe(true); });
   test("the kapae-antigen board crosses (federatable-own, MANDATORY carry)", async () => { expect(await cross(ANTIGEN)).toBe(true); });
 
-  test("a @catalog-like PRIVATE plane is DENIED", async () => { expect(await cross(CATALOG_LIKE)).toBe(false); });
+  test("a catalog-like PRIVATE plane is DENIED", async () => { expect(await cross(CATALOG_LIKE)).toBe(false); });
   test("a @personal-like PRIVATE plane is DENIED", async () => { expect(await cross(PERSONAL_LIKE)).toBe(false); });
   test("a no-doc-id decision is DENIED (deny-by-default)", async () => { expect(await cross(undefined)).toBe(false); });
 });

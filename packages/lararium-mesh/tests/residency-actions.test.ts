@@ -111,8 +111,8 @@ describe("parseResidencyAction — valid cases", () => {
   test("parses ADD with title + from-bag + to-bag + change-id", () => {
     const inv = makeInvocation("ADD", {
       title:       "MyTiddler",
-      "from-bag":  "lar:///ha.ka.ba/bags/@personal",
-      "to-bag":    "lar:///ha.ka.ba/bags/@elyncia",
+      "from-bag":  "lar:///ha.ka.ba/bags/personal",
+      "to-bag":    "lar:///ha.ka.ba/bags/elyncia",
       "change-id": "change-abc",
     });
     const action = parseResidencyAction(inv);
@@ -120,8 +120,8 @@ describe("parseResidencyAction — valid cases", () => {
     expect(action?.verb).toBe("ADD");
     const add = action as AddAction;
     expect(add.title).toBe("MyTiddler");
-    expect(add.fromBag).toBe("lar:///ha.ka.ba/bags/@personal");
-    expect(add.toBag).toBe("lar:///ha.ka.ba/bags/@elyncia");
+    expect(add.fromBag).toBe("lar:///ha.ka.ba/bags/personal");
+    expect(add.toBag).toBe("lar:///ha.ka.ba/bags/elyncia");
     expect(add.changeId).toBe("change-abc");
     expect(add.requestId).toBe("test-req-1");
     expect(add.requestedBy).toBe("test-actor");
@@ -130,19 +130,19 @@ describe("parseResidencyAction — valid cases", () => {
   test("parses COPY with full transfer args", () => {
     const inv = makeInvocation("COPY", {
       title:       "Note",
-      "from-bag":  "lar:///ha.ka.ba/bags/@draft",
-      "to-bag":    "lar:///ha.ka.ba/bags/@lares",
+      "from-bag":  "lar:///ha.ka.ba/bags/draft",
+      "to-bag":    "lar:///ha.ka.ba/bags/lares",
       "change-id": "c-1",
     });
     const action = parseResidencyAction(inv);
     expect(action?.verb).toBe("COPY");
-    expect((action as CopyAction).fromBag).toBe("lar:///ha.ka.ba/bags/@draft");
+    expect((action as CopyAction).fromBag).toBe("lar:///ha.ka.ba/bags/draft");
   });
 
   test("parses MOVE with full transfer args", () => {
     const inv = makeInvocation("MOVE", {
       title:       "Lore-Entry",
-      "from-bag":  "lar:///ha.ka.ba/bags/@personal",
+      "from-bag":  "lar:///ha.ka.ba/bags/personal",
       "to-bag":    "lar:///ha.ka.ba/elyncia/lore",
       "change-id": "c-move-1",
     });
@@ -152,43 +152,43 @@ describe("parseResidencyAction — valid cases", () => {
   });
 
   test("parses CLEAR with bag only (no title, no change-id required)", () => {
-    const inv = makeInvocation("CLEAR", { bag: "lar:///ha.ka.ba/bags/@draft" });
+    const inv = makeInvocation("CLEAR", { bag: "lar:///ha.ka.ba/bags/draft" });
     const action = parseResidencyAction(inv);
     expect(action?.verb).toBe("CLEAR");
-    expect((action as ClearAction).bag).toBe("lar:///ha.ka.ba/bags/@draft");
+    expect((action as ClearAction).bag).toBe("lar:///ha.ka.ba/bags/draft");
   });
 
   test("parses DROP with bag only", () => {
-    const inv = makeInvocation("DROP", { bag: "lar:///ha.ka.ba/bags/@retired" });
+    const inv = makeInvocation("DROP", { bag: "lar:///ha.ka.ba/bags/retired" });
     const action = parseResidencyAction(inv);
     expect(action?.verb).toBe("DROP");
-    expect((action as DropAction).bag).toBe("lar:///ha.ka.ba/bags/@retired");
+    expect((action as DropAction).bag).toBe("lar:///ha.ka.ba/bags/retired");
   });
 
   test("parses LOAD with source-uri + to-bag + change-id (no from-bag)", () => {
     const inv = makeInvocation("LOAD", {
       "source-uri": "https://example.org/seed.json",
-      "to-bag":     "lar:///ha.ka.ba/bags/@elyncia",
+      "to-bag":     "lar:///ha.ka.ba/bags/elyncia",
       "change-id":  "c-load-1",
     });
     const action = parseResidencyAction(inv);
     expect(action?.verb).toBe("LOAD");
     const load = action as LoadAction;
     expect(load.sourceUri).toBe("https://example.org/seed.json");
-    expect(load.toBag).toBe("lar:///ha.ka.ba/bags/@elyncia");
+    expect(load.toBag).toBe("lar:///ha.ka.ba/bags/elyncia");
     expect(load.changeId).toBe("c-load-1");
   });
 
   test("parses CREATE with bag, defaulting plane to catalog (household)", () => {
-    const inv = makeInvocation("CREATE", { bag: "lar:///ha.ka.ba/bags/@mybag" });
+    const inv = makeInvocation("CREATE", { bag: "lar:///ha.ka.ba/bags/mybag" });
     const action = parseResidencyAction(inv);
     expect(action?.verb).toBe("CREATE");
-    expect((action as { bag: string }).bag).toBe("lar:///ha.ka.ba/bags/@mybag");
+    expect((action as { bag: string }).bag).toBe("lar:///ha.ka.ba/bags/mybag");
     expect((action as { plane: string }).plane).toBe("catalog");
   });
 
   test("parses CREATE with an explicit oracle plane (temple)", () => {
-    const inv = makeInvocation("CREATE", { bag: "lar:///ha.ka.ba/bags/@sysbag", plane: "oracle" });
+    const inv = makeInvocation("CREATE", { bag: "lar:///ha.ka.ba/bags/sysbag", plane: "oracle" });
     const action = parseResidencyAction(inv);
     expect(action?.verb).toBe("CREATE");
     expect((action as { plane: string }).plane).toBe("oracle");
@@ -218,8 +218,8 @@ describe("parseResidencyAction — verb-set rejection", () => {
 describe("parseResidencyAction — missing-arg rejection (transfer verbs)", () => {
   const fullTransferArgs = {
     title:       "T",
-    "from-bag":  "lar:///ha.ka.ba/bags/@a",
-    "to-bag":    "lar:///ha.ka.ba/bags/@b",
+    "from-bag":  "lar:///ha.ka.ba/bags/a",
+    "to-bag":    "lar:///ha.ka.ba/bags/b",
     "change-id": "c-1",
   };
 
@@ -265,7 +265,7 @@ describe("parseResidencyAction — missing-arg rejection (bag verbs)", () => {
 describe("parseResidencyAction — missing-arg rejection (LOAD)", () => {
   const full = {
     "source-uri": "https://x",
-    "to-bag":     "lar:///ha.ka.ba/bags/@a",
+    "to-bag":     "lar:///ha.ka.ba/bags/a",
     "change-id":  "c",
   };
   test("LOAD missing source-uri returns null", () => {
@@ -296,14 +296,14 @@ describe("encodeResidencyArgs roundtrip", () => {
       requestId:   "r1",
       requestedBy: "actor",
       title:       "T",
-      fromBag:     "lar:///ha.ka.ba/bags/@a",
-      toBag:       "lar:///ha.ka.ba/bags/@b",
+      fromBag:     "lar:///ha.ka.ba/bags/a",
+      toBag:       "lar:///ha.ka.ba/bags/b",
       changeId:    "c1",
     };
     expect(encodeResidencyArgs(action)).toEqual({
       title:       "T",
-      "from-bag":  "lar:///ha.ka.ba/bags/@a",
-      "to-bag":    "lar:///ha.ka.ba/bags/@b",
+      "from-bag":  "lar:///ha.ka.ba/bags/a",
+      "to-bag":    "lar:///ha.ka.ba/bags/b",
       "change-id": "c1",
     });
   });
@@ -313,9 +313,9 @@ describe("encodeResidencyArgs roundtrip", () => {
       verb:        "CLEAR",
       requestId:   "r1",
       requestedBy: "actor",
-      bag:         "lar:///ha.ka.ba/bags/@b",
+      bag:         "lar:///ha.ka.ba/bags/b",
     };
-    expect(encodeResidencyArgs(action)).toEqual({ bag: "lar:///ha.ka.ba/bags/@b" });
+    expect(encodeResidencyArgs(action)).toEqual({ bag: "lar:///ha.ka.ba/bags/b" });
   });
 
   test("LOAD action encodes to source-uri + to-bag + change-id", () => {
@@ -324,12 +324,12 @@ describe("encodeResidencyArgs roundtrip", () => {
       requestId:   "r1",
       requestedBy: "actor",
       sourceUri:   "https://x",
-      toBag:       "lar:///ha.ka.ba/bags/@b",
+      toBag:       "lar:///ha.ka.ba/bags/b",
       changeId:    "c1",
     };
     expect(encodeResidencyArgs(action)).toEqual({
       "source-uri": "https://x",
-      "to-bag":     "lar:///ha.ka.ba/bags/@b",
+      "to-bag":     "lar:///ha.ka.ba/bags/b",
       "change-id":  "c1",
     });
   });
@@ -347,8 +347,8 @@ describe("change-id preservation (Anti-pattern #1 defense)", () => {
       requestId:   "req-1",
       requestedBy: "operator",
       title:       "MyTiddler",
-      fromBag:     "lar:///ha.ka.ba/bags/@personal",
-      toBag:       "lar:///ha.ka.ba/bags/@elyncia",
+      fromBag:     "lar:///ha.ka.ba/bags/personal",
+      toBag:       "lar:///ha.ka.ba/bags/elyncia",
       changeId:    "stable-change-id-preserved-across-bags",
     };
     const encoded = encodeResidencyArgs(original);
@@ -367,8 +367,8 @@ describe("change-id preservation (Anti-pattern #1 defense)", () => {
       requestId:   "req-move-1",
       requestedBy: "operator",
       title:       "MyTiddler",
-      fromBag:     "lar:///ha.ka.ba/bags/@personal",
-      toBag:       "lar:///ha.ka.ba/bags/@wiki",
+      fromBag:     "lar:///ha.ka.ba/bags/personal",
+      toBag:       "lar:///ha.ka.ba/bags/wiki",
       changeId:    "shared-change-id",
     };
     // Later, ADD lifts the same tiddler (same change-id) from @wiki into a canon library.
@@ -377,8 +377,8 @@ describe("change-id preservation (Anti-pattern #1 defense)", () => {
       requestId:   "req-add-1",
       requestedBy: "operator",
       title:       "MyTiddler",
-      fromBag:     "lar:///ha.ka.ba/bags/@wiki",
-      toBag:       "lar:///ha.ka.ba/bags/@lares",
+      fromBag:     "lar:///ha.ka.ba/bags/wiki",
+      toBag:       "lar:///ha.ka.ba/bags/lares",
       changeId:    "shared-change-id", // <-- preserved by caller discipline
     };
     expect(moveAction.changeId).toBe(addAction.changeId);
@@ -391,11 +391,11 @@ describe("change-id preservation (Anti-pattern #1 defense)", () => {
   test("LOAD mints fresh change-id; no preservation contract (external content)", () => {
     const a: LoadAction = {
       verb: "LOAD", requestId: "r1", requestedBy: "op",
-      sourceUri: "https://x", toBag: "lar:///ha.ka.ba/bags/@a", changeId: newChangeId(),
+      sourceUri: "https://x", toBag: "lar:///ha.ka.ba/bags/a", changeId: newChangeId(),
     };
     const b: LoadAction = {
       verb: "LOAD", requestId: "r2", requestedBy: "op",
-      sourceUri: "https://x", toBag: "lar:///ha.ka.ba/bags/@a", changeId: newChangeId(),
+      sourceUri: "https://x", toBag: "lar:///ha.ka.ba/bags/a", changeId: newChangeId(),
     };
     expect(a.changeId).not.toBe(b.changeId);
   });
@@ -459,7 +459,7 @@ describe("V1 — content-addressed residency identity (lares act placer contract
     const subject = args["to-bag"] ?? args["bag"] ?? "";
     return taskContentId({ subject, command: verb, args, nonce: "" });
   }
-  const base = { title: "M", "from-bag": "lar:///ha.ka.ba/bags/@a", "to-bag": "lar:///ha.ka.ba/bags/@b", "change-id": "chg-1" };
+  const base = { title: "M", "from-bag": "lar:///ha.ka.ba/bags/a", "to-bag": "lar:///ha.ka.ba/bags/b", "change-id": "chg-1" };
 
   test("same logical change → same id (re-issue dedups → exactly-once effect)", async () => {
     expect(await residencyId("MOVE", base)).toBe(await residencyId("MOVE", { ...base }));
@@ -471,6 +471,6 @@ describe("V1 — content-addressed residency identity (lares act placer contract
     expect(await residencyId("MOVE", base)).not.toBe(await residencyId("ADD", base));
   });
   test("distinct target bag → distinct id", async () => {
-    expect(await residencyId("MOVE", base)).not.toBe(await residencyId("MOVE", { ...base, "to-bag": "lar:///ha.ka.ba/bags/@c" }));
+    expect(await residencyId("MOVE", base)).not.toBe(await residencyId("MOVE", { ...base, "to-bag": "lar:///ha.ka.ba/bags/c" }));
   });
 });

@@ -1,0 +1,90 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heleuma >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma.mem"
+mana      = 18
+manao     = 18
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant: heleuma anchor pattern — compiled-side artifacts held in the meme graph by necessity"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/heleuma"
+```
+
+<<~ ahu #head >>
+
+! Heleuma — Anchor
+
+//Heleuma//: a stone or iron anchor used to secure a ship.
+
+A ''heleuma'' names any artifact that MUST exist outside the `lar:///` URI space — compiled TypeScript, runtime imperative registrations, build-generated assets — but that ALSO exists inside the meme graph as a self-documenting pair:
+
+* An ''API meme'' (`/api/...`) carrying the canonical source copy, contract, and thresholds. This names the graph's claim on the artifact: it names it, holds its invariants, and marks the precise boundary of what cannot move.
+* A ''doc meme'' (`/docs/...`) carrying the design rationale, the "why it stays stuck here," and the path toward eventual promotion.
+
+A heleuma does not mark failure. It marks a ''named threshold crossing'' — the meme graph asserting sovereignty over something that must, for now, be born outside.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #ooda-ha >>
+
+✶ detect compiled artifact — TypeScript module, runtime registration, or build asset outside lar:/// space
+⏿ orient heleuma tier: ha (permanent structure), ka (promotion-eligible soul/fire), ba (path marker)
+◇ ha → no promotion fields; ka → declare source-symbol; body-sha256 optional (keyhive proof is layer 3, planned); ba → source slot sufficient
+▶ pair artifact with API meme + doc meme; sync-heleuma.ts checks drift between #source slot and live TS
+↺ meme graph holds the rope; the artifact holds the anchor; drift surfaces as build warning; confirm heleuma pair complete; drift check registered; promotion path declared or ruled inapplicable
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+!! Heleuma Law (SHALL)
+
+# Every compiled-in artifact that cannot be a first-class `lar:` meme SHALL have a heleuma pair.
+# The API meme SHALL carry the actual source in a `#source` slot and SHALL declare `heleuma = "ha"`, `"ka"`, or `"ba"` in `#iam`.
+# ''ha'' — body/structure: permanent territory; it declares no `body-sha256`.
+# ''ka'' — soul/fire: promotion-eligible. SHALL declare `source-symbol`. MAY declare `body-sha256` (gate layer 2 — content integrity). Keyhive capability proof marks gate layer 3 (planned; not yet implemented).
+# ''ba'' — psyche/path: quine-only path marker. `#source` slot sufficient for reconstruction. MAY declare `source-symbol` when a clear symbol boundary exists. When `source-symbol` is declared, MAY declare `body-sha256` for build-time drift detection. A `body-sha256` SHALL accompany a declared `source-symbol`.
+# The doc meme SHALL explain why the artifact cannot be promoted and what preconditions would allow promotion (ka) or why promotion is not applicable (ha, ba).
+# The build script `sync-heleuma.ts` SHALL detect drift between `#source` slot and the live TS source for ha/ka modes. Drift MUST surface as a build warning. Staleness does not block the build but MUST stay visible.
+
+<<~/ahu >>
+
+<<~ ahu #freyja-alignment >>
+
+!! Freyja Alignment
+
+Freyja's "Reality Anchor" principle: in a local-first, island-topology system, an anchor functions as the mechanism that lets local changes earn trust and reference across the distributed sea. The heleuma carries the same role in the meme graph — it holds a fixed, named reference point for code that lives in the compiled world, so the graph never encounters surprise from what exists outside it.
+
+The heleuma does not try to absorb the anchor into the graph. It holds the rope.
+
+<<~/ahu >>
+
+<<~ ahu #promotion-path >>
+
+!! Promotion Path
+
+A heleuma API meme that acquires:
+
+* `confidence ≥ 16`, `mana ≥ 16`, `manao ≥ 16`, `manaoio ≥ 15`
+* A verified `body-sha256` hash (gate layer 2 — content integrity; written by `sync-heleuma --commit`)
+* A keyhive capability proof (gate layer 3 — operator authorization; planned)
+
+...MAY load through `_bootModules()` via the corpus gate and replace its compiled-in counterpart. At that point the heleuma pair functions as a standard meme pair and `heleuma = true` MAY be removed.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;9-u0dFyI_2Ilt4MCaSdJgQi_iFvbJTohj1_dUZ3G3r0
+
+<<^ code:"&#x0004;" -> ? >>

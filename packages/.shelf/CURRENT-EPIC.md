@@ -1,6 +1,6 @@
 # Current Epic — Lararium Genesis Artifact + Protocol Stack
 
-> ⚠ **DOUBLY STALE (design archive since 2026-05-27; the whole packages/ handoff layer froze 2026-06-07).** The live handoff is the bags pantjar torch: `bags/@lares/ha.ka.ba/lares/docs/lares/handoff.md`. Treat this file as deep design archaeology only.
+> ⚠ **DOUBLY STALE (design archive since 2026-05-27; the whole packages/ handoff layer froze 2026-06-07).** The live handoff is the bags pantjar torch: `bags/lares/ha.ka.ba/lares/docs/lares/handoff.md`. Treat this file as deep design archaeology only.
 
 > Updated: 2026-05-27
 > Branch: feature/lararium-node-4
@@ -161,12 +161,12 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 - `IdentityTiddler.verifyingKey` and `CircleTiddler.encryptedShareHint` already present as forward-compatible hooks
 
 **Tasks (requires design doc before code):**
-- [ ] Tighten `wikis/@lares-history/lararium-research/CAPABILITY-LAYER.md` as the live design doc
+- [ ] Tighten `wikis/lares-history/lararium-research/CAPABILITY-LAYER.md` as the live design doc
 - [ ] Implement device delegation chain tiddlers in `IdentitiesDoc`
 - [ ] Implement Seitan token invite flow for `CirclesDoc`
 - [ ] Introduce capability verification: any peer verifies "Device X speaks as Identity Y at level Z" serverlessly
 
-**References:** `wikis/@lares-history/lararium-research/PROTOCOL-STACK-IDENTITY-CIRCLES-SESSIONS.md`
+**References:** `wikis/lares-history/lararium-research/PROTOCOL-STACK-IDENTITY-CIRCLES-SESSIONS.md`
 
 ### S8 — Lares Command Surface + Local Intent Bridge ⬜ Deferred
 
@@ -199,7 +199,7 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 - At least one end-to-end ceremony writes both a command tiddler and a receipt tiddler.
 - The local CLI path works over `stdio` with no WebSocket requirement.
 
-**Reference:** `wikis/@lares-history/lararium-research/LARES-CLI-DAEMON-SPRINT-PLAN.md`
+**Reference:** `wikis/lares-history/lararium-research/LARES-CLI-DAEMON-SPRINT-PLAN.md`
 
 ---
 
@@ -410,17 +410,17 @@ That slice gives the architecture a concrete proof point without waiting for the
 
 | Slot | Doc | URI | Role |
 |---|---|---|---|
-| ha | `LarariumDoc` | `lar:///ha.ka.ba/bags/@lararium` | System island — genesis artifact |
-| ka | `CatalogDoc` | `lar:///ha.ka.ba/bags/@catalog` | Corpus/room index |
-| ba | `MemeStoreDoc` | `lar:///ha.ka.ba/bags/@lares` | Personal workspace |
+| ha | `LarariumDoc` | `lar:///ha.ka.ba/bags/lararium` | System island — genesis artifact |
+| ka | `CatalogDoc` | `lar:///ha.ka.ba/bags/catalog` | Corpus/room index |
+| ba | `MemeStoreDoc` | `lar:///ha.ka.ba/bags/lares` | Personal workspace |
 
 ### Social Tiga (ha-ka-ba)
 
 | Slot | Doc | URI | Role |
 |---|---|---|---|
-| ha | `IdentitiesDoc` | `lar:///ha.ka.ba/bags/@identities` | Principal records — device keys, delegation proofs |
-| ka | `CirclesDoc` | `lar:///ha.ka.ba/bags/@circles` | Circles — collective authority, Keyhive capabilities |
-| ba | `SessionsDoc` | `lar:///ha.ka.ba/bags/@sessions` | Session registry + per-session EventLog refs |
+| ha | `IdentitiesDoc` | `lar:///ha.ka.ba/bags/identities` | Principal records — device keys, delegation proofs |
+| ka | `CirclesDoc` | `lar:///ha.ka.ba/bags/circles` | Circles — collective authority, Keyhive capabilities |
+| ba | `SessionsDoc` | `lar:///ha.ka.ba/bags/sessions` | Session registry + per-session EventLog refs |
 
 Dynamic child docs (not root-tiga slots):
 - `SessionEventLog` — one per session, `AutomergeUrl` stored in session tiddler
@@ -462,7 +462,7 @@ Active pono work → packages/ROADMAP.md:
 - [Kowloon by jzellis](https://github.com/jzellis/kowloon/)
 - [Local-First Software essay — Ink & Switch](https://www.inkandswitch.com/essay/local-first/)
 - [Automerge storage compaction](https://patternist.xyz/posts/concurrent-compaction-in-automerge-repo/)
-- [Protocol Stack design doc](../wikis/@lares-history/lararium-research/PROTOCOL-STACK-IDENTITY-CIRCLES-SESSIONS.md)
-- [Lares CLI-daemon sprint plan](../wikis/@lares-history/lararium-research/LARES-CLI-DAEMON-SPRINT-PLAN.md)
-- `bags/@lararium/mesh/operator-peer.md`
-- `bags/@lares/api/lararium/save-path.md`
+- [Protocol Stack design doc](../wikis/lares-history/lararium-research/PROTOCOL-STACK-IDENTITY-CIRCLES-SESSIONS.md)
+- [Lares CLI-daemon sprint plan](../wikis/lares-history/lararium-research/LARES-CLI-DAEMON-SPRINT-PLAN.md)
+- `bags/lararium/mesh/operator-peer.md`
+- `bags/lares/api/lararium/save-path.md`

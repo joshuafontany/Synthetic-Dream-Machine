@@ -297,8 +297,8 @@ export async function mountWikiSlot(
   presetWikiHandle?: DocHandle<LarDoc>,
 ): Promise<{ wikiHandle: DocHandle<LarDoc>; draftHandle: DocHandle<LarDoc> }> {
   const { repo, catalogHandle, waitHandle } = keel;
-  // Resolve the CANON doc by its content key (bags/@{slug}) — where the mint
-  // writer keys it. The wiki IDENTITY (wikis/@{slug}, slot.wikiKey) is a separate
+  // Resolve the CANON doc by its content key (bags/{slug}) — where the mint
+  // writer keys it. The wiki IDENTITY (wikis/{slug}, slot.wikiKey) is a separate
   // registry entry, not the canon-doc lookup.
   const wikiHandle = presetWikiHandle ?? await resolveOracleDoc(
     catalogHandle, slot.wikiBagId,

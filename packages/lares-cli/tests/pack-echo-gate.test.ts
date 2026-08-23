@@ -16,7 +16,7 @@ import { scanFiles, candidatesOf, recordLandedPacks, listCarriers } from "../src
 let root = "";
 afterEach(() => { if (root) { rmSync(root, { recursive: true, force: true }); root = ""; } });
 
-const BAG = "lar:///ha.ka.ba/bags/@x";
+const BAG = "lar:///ha.ka.ba/bags/x";
 
 function seedBundle(): { root: string; treePath: string } {
   root = mkdtempSync(join(tmpdir(), "pack-echo-"));

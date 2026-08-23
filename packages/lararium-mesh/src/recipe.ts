@@ -11,7 +11,7 @@
  *
  * Recipe tiddler addressing:
  *   recipeUri("@lararium", "default")  → "lar:///ha.ka.ba/lararium/recipes/default"
- *   recipeUri("@catalog",  "elyncia")  → "lar:///ha.ka.ba/bags/@catalog/recipes/elyncia"
+ *   recipeUri("@catalog",  "elyncia")  → "lar:///ha.ka.ba/bags/catalog/recipes/elyncia"
  *
  * Bag stack order: lowest-priority first → highest-priority last (TW5 convention).
  * Each entry in `bagStack` is a well-known lar: bag ID (a root doc URI or corpusLarUri).

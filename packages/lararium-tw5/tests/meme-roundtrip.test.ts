@@ -27,7 +27,7 @@ import {
 } from "../src/deserializer.js";
 
 const REPO_ROOT = new URL("../../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const BOOT_MEME = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
 const BOOT_URI  = "lar:///ha.ka.ba/lares/api/noosphere-boot";
 
 const IAM_FENCE_RE = /```toml iam\n[\s\S]*?```\n/g;

@@ -71,11 +71,11 @@ describe("CompositeStore — layer management", () => {
     expect(store.hasBag(corpusId)).toBe(false);
   });
 
-  test("corpusBagId produces a bags/@<slug> bag URI (the split's content plane)", () => {
+  test("corpusBagId produces a bags/<slug> bag URI (the split's content plane)", () => {
     // Every corpus is a first-class bag; the KIND rides the first path segment,
-    // so a bag's canonical address is `bags/@<slug>` (bag-wiki-uri-split).
-    expect(corpusBagId("elyncia")).toBe("lar:///ha.ka.ba/bags/@elyncia");
-    expect(corpusBagId("sdm")).toBe("lar:///ha.ka.ba/bags/@sdm");
+    // so a bag's canonical address is `bags/<slug>` (bag-wiki-uri-split).
+    expect(corpusBagId("elyncia")).toBe("lar:///ha.ka.ba/bags/elyncia");
+    expect(corpusBagId("sdm")).toBe("lar:///ha.ka.ba/bags/sdm");
   });
 });
 
@@ -200,7 +200,7 @@ describe("CompositeStore — per-bag store getters", () => {
 
     expect(store.writableStoreForBag(TEST_WIKI_URI)).toBe(wiki);
     expect(store.writableStoreForBag(BAG_IDS.lararium)).toBeNull();           // read-only → no write store
-    expect(store.writableStoreForBag("lar:///ha.ka.ba/bags/@unmounted")).toBeNull();
+    expect(store.writableStoreForBag("lar:///ha.ka.ba/bags/unmounted")).toBeNull();
   });
 
   test("storeForBag returns ANY layer's store (read reaches a read-only library)", () => {
@@ -209,7 +209,7 @@ describe("CompositeStore — per-bag store getters", () => {
     store.addLayer({ bagId: BAG_IDS.lararium, store: lib, writable: false });
 
     expect(store.storeForBag(BAG_IDS.lararium)).toBe(lib);
-    expect(store.storeForBag("lar:///ha.ka.ba/bags/@unmounted")).toBeNull();
+    expect(store.storeForBag("lar:///ha.ka.ba/bags/unmounted")).toBeNull();
   });
 });
 

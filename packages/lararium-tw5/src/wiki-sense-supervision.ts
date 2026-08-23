@@ -86,12 +86,12 @@ export interface WikiSenseSupervisorOptions {
 /** Tag carried by every proof-record tiddler in the daemon's proof ledger. */
 export const LARES_PROOF_RECORD_TAG = stableTagUri("lares-proof-record");
 
-/** `lar:///ha.ka.ba/bags/@daemon/ledger/proof/` — the proof-ledger prefix for one bag. */
+/** `lar:///ha.ka.ba/bags/daemon/ledger/proof/` — the proof-ledger prefix for one bag. */
 export function proofLedgerPrefix(bagUri: string): string {
   return `${bagUri}/ledger/proof/`;
 }
 
-/** `lar:///ha.ka.ba/bags/@daemon/ledger/proof/<event-id>` — one proof-record tiddler. */
+/** `lar:///ha.ka.ba/bags/daemon/ledger/proof/<event-id>` — one proof-record tiddler. */
 export function proofRecordUri(bagUri: string, eventId: string): string {
   return `${proofLedgerPrefix(bagUri)}${eventId}`;
 }

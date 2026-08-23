@@ -1,0 +1,202 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
+```toml iam
+cacheable  = true
+confidence = 11
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "region worksheet — the New Delos Nexus in four strata: High Delos, Low Delos, the Underdark, and the outer seas/islands/shores; seeded from gazetteer canon, grown by play"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! New Delos Nexus ~ Region Worksheet
+
+''The name rides the whole Nexus'' (ruled 2026-08-15): ''New Delos'' names the Aegean sea and
+some of the coastlines surrounding it — all bordered by ''wild-magic seas and rift zones''. The
+feeds' "New Delos" means this region, not one town; districts like the Spice Quarter belong to
+the Nexus's fabric, and the ring-towns carry their own names (mostly still unwritten — see the
+places shelf).
+
+''Strata of one vertical Nexus.'' An Aegean low-sea archipelago of the Eastern Net — rocky
+coastlines, olive-grove terraces, volcanic islands, crystal-clear harbors — with a flying capital
+suspended over a megadungeon mouth, and beneath the mouth, the deep dark. Dream-mirror source:
+Delos and Thira in an Ice Age low-sea period, pre-Hellenic sacred geographies overlaid.
+
+''Timeline spine:'' YOLD 5002 — the Patroness stabilizes the Nexus, forces the arguing seas back
+to the Apophis Datum, and ''lifts the old-empire New Delos complex on a gradient'' (the full
+canon below); the craters left behind expose the megadungeon mouth. The same year she transmits
+the ''Declaration of Confederation'', founding the League of Free Cities. Mana lifts near the
+major Lares landmarks join the strata.
+
+This worksheet grows by play; each stratum carries prompts beside its canon.
+
+<<~/ahu >>
+
+<<~ ahu #the-neighborhood >>
+
+!! The Neighborhood ~ grounding the concept map (Eastern Net, from the gazetteer)
+
+''The Net's own words:'' the Eastern Net = "the heartland of Elyncia's surviving Nexus cluster,
+bound together by tenuous ley-lines and centuries-old rivalries… coastlines gnawed by the Astral
+Sea." Control of these Nexus = "the richest trade routes, the deepest dungeon mouths, the most
+stable portals in the known world, and the few surviving corridors between them." New Delos sits
+at the heart of it — ''central hub for League diplomacy'' — ringed by wild-magic seas and rift
+zones.
+
+''The compass of neighbors (for the image/concept map):''
+* ''Neo-Thracia'' — the sibling across the unstable astral leg: mountain valleys, the Hebros
+  river-gate, the lost Caverns; the campaign's destination; Lares recently reconnected after
+  489 years, archive-nodes necro-script-corrupted.
+* ''The Olympian Marches'' — the haunted corridor between Neo-Thracia and Illyria: broken
+  mountains, divine weather, the Rift of Tempes, the Ash Plains of Phlegra strewn with giant
+  bones — and the Gorgonne Diaspora among its named powers. The no-go radiance of the
+  Gigantomachy's fallout lingers over the Heights.
+* ''The Illyrian Archipelago'' — the ''sinking Illyria'' of Gaia's mythic history: the
+  Western-Balkan Adriatic realm, its Montenegro-analog mountains half-drowned into volcanic
+  isles — and ''the Necrospire impact crater sits among the Accursed Mountains'' (the
+  Prokletije-mirror; operator canon 2026-08-15, full pattern at concepts/the-necrospire). Necro-cults at the crater, undead armadas, the old ley-hub toward the Western
+  Net; the gazetteer's "off the coast near the mouth of Hebros" reads as the sea-route
+  relation, not adjacency — the wound lies west across the Marches, the corridor between.
+* ''The Summerlands'' — the breadbasket crossroads: Dominion south (Tharsis, the Prismatic
+  University), Ouroborous warcamps in the haunted heart, Seelie kingdoms on the Faewild coast,
+  Amaranth churches throughout.
+* ''The Winterlands'' — the Lich's ground: the Imperator's Southern Marches feeding his armies
+  through the Ironspine passes; the Shattered Crown of the old Winter Court.
+* ''Asgard'' — the Bifrost transit hub joining Eastern and Western Nets; the World-Root Gate;
+  the gods still face-to-face there.
+* ''The Brimstone Mountains'' — the volcanic peninsula southwest: the Brimstone Court's caldera
+  seat, Ashport's syndicates, the Hidden Crucibles, three rumored power cores.
+* ''Beyond (Western Net):'' the Broken/Shattered Isles torn from Mu's shelf (Aki's home water) ·
+  Mu · drifting Hawaiki · sealed Khemet · and the Verdant Coil shifting its astral position with
+  its blooms, seller of the cedar that wards every iron-chest.
+
+''The map's reading:'' New Delos = the calm eye of the Eastern Net — the stable center whose
+neighbors carry the campaign (Neo-Thracia, north across the unstable leg), the wound (Illyria's
+crater in the sinking Montenegro-analog mountains, west beyond the Marches), the war
+(Summerlands/Winterlands), the forge (Brimstone), and the bridge out (Asgard).
+
+<<~/ahu >>
+
+<<~ ahu #the-gradient >>
+
+!! The Levitation Gradient (operator canon, 2026-08-15)
+
+''The lift ran as a gradient, not a scoop.'' The old-empire New Delos complex — the island of
+Delos and all the islands within roughly three 30-mile nexus-scale subhexes — rose by degrees:
+
+* ''Delos itself rose entire'' — "mostly one piece," if you count the new sky bridges and
+  stuckforce connections that stitch it — ''a small constellation'' rather than a single slab.
+* ''Ninety percent of Rinia rose'' — and Rinia's departure from its bed exposed ''the dungeon
+  mouth'': Low Delos opens where Rinia used to lie.
+* ''Mykonos, Naxos, and the others rose by less, on a gradient outward'' — partial liftings,
+  shorn heights, settlements suddenly airborne while their harbors stayed wet.
+* ''Some chunks lifted from the seabed itself'' — ground that had never known air joined the sky.
+* ''The gradient's far tail reached absurdly wide:'' it took holy sites and random cave-bearing
+  crags as distant as the coast near the ''Temple of Poseidon'' in the Athens-region — and
+  raised ''the whole six miles around the Temple of Artemis near Izmir'' as one piece. High
+  Delos's constellation therefore holds ''far exclaves'': sky-fragments hanging over other
+  coasts, joined to the capital by nothing but the DreamNet and the memory of the same morning.
+
+''What the lift left below:'' the settlements that rose became ''skyports and sky-island hubs''
+— so ''new towns and ports were founded at sea level after the flight'', young by Elyncia's
+measure (490 years), ringing the crater-seas and the emptied harbors. The ring-towns carry their
+own names; "New Delos" stays the Nexus's name entire. The old megacity went ''up''.
+
+<<~/ahu >>
+
+<<~ ahu #high-delos >>
+
+!! High Delos ~ the flying capital
+
+''Canon:'' the Lindwyrm's capital and seat of the League of Free Cities — ''a small
+constellation'': Delos risen near-whole, the partial heights of its sisters, and seabed-chunks
+that never knew air, stitched by sky bridges and stuckforce connections. Cycladic marble footings
+under Neo-Thracian brick under fae-grown coral — polyglot architecture on Delian designs, arched
+walkways between raised neighborhoods, one bridge trussed with a repurposed trireme keel. The
+levitated ''Theatre Quarter'' holds the wealthiest old houses, ''the House of Masks'' among them
+(cabaret, maze-Inn, Order of Amaranth management — its own loci carry it). The ''Terrace of the
+Lions'' gazes over open cloud; the round ''Sacred Lake'' rides the island; the ''Orrery of High
+Delos'' turns somewhere near the summit of civic pride. The ''High Delos Archive'' seats the
+Floating Librarians of Mu. Archive- and Market-Lares dominate the node traffic — and above them
+all stands ''the Naxian Colossus'' (blessed canon, 2026-08-15): the nine-meter archaic Apollo,
+orichalcum-runed, ''the civic-scale ley-line node'' — the Temple-tier Lares anchoring High Delos
+to the DreamNet, the great statue whose "stone eyes flared with inner light." A Naxian
+dedication standing on risen Delos, while Naxos itself half-rose on the gradient — the givers'
+island watches its gift from a lower sky.
+
+''Prompts:'' which neighborhoods rose and which stayed? Who regulates the lift-queues? Where does
+the Orrery actually sit, and who reads it?
+
+<<~/ahu >>
+
+<<~ ahu #low-delos >>
+
+!! Low Delos ~ the megadungeon mouth
+
+''Canon:'' where ''Rinia rose from its bed'' (nine-tenths of it airborne in the gradient), the
+exposed crater opens a megadungeon ''piercing deep into the Underdark, with stabilized towns
+down to the third level''. The crater-glow brightens and dims on
+a nineteen-minute cycle that correlates with nothing and has outlasted four scholarly careers.
+Scavenger-tier salvage economy; a "soulbound lash" of Rakshasa's anger came up from here.
+Path-Lares maintain active Underdark maps. Mana lifts run between the ports of High and Low.
+
+''Prompts:'' what do the three stabilized town-levels each trade? Who holds the lift-gates at the
+bottom? What does the nineteen-minute cycle breathe FOR?
+
+<<~/ahu >>
+
+<<~ ahu #underdark >>
+
+!! The Underdark ~ below the lowest layer
+
+''Canon:'' Low Delos ranks among ''the deepest, most stable Nexus-to-Underdark routes'' in the
+known world — a strategic fact the League guards. Underdark incursions number among the Nexus's
+standing hazards; relic-hunting mercenaries destabilize dungeon floors. Past the stabilized
+levels, the layers stop pretending to be layers.
+
+''Prompts:'' which deep polities trade and which raid? What does the Menzoberranzan-shaped hole
+in Rhea's past imply about routes from HERE? Where do the whispered House-of-Masks ways come out?
+
+<<~/ahu >>
+
+<<~ ahu #outer-seas >>
+
+!! The Outer Seas, Islands & Shores
+
+''Canon:'' the sea-level ring stands ''young'' — towns and ports founded after the flight,
+where risen settlements left their harbors behind; each with its own trade goods and Lares
+shrines. The partial-lift islands (Mykonos, Naxos, the gradient's middle) carry the strangest
+skylines: half a town aloft, half at anchor, lift-traffic between. Wave-jammers skim the crystal harbors; the Astral Sea gnaws
+the coastlines; contested Astral waters carry diplomatic traffic and smuggling wars both.
+Political intrigue among the Free Cities rides every tide-table. The volcanic Thira-mirror
+islands stand in the chain; the flotilla-fresco regatta tradition dresses festival days.
+
+''Prompts:'' name five ports and their one export each. Which island keeps the oldest
+First-Breaking cult fragment? Where do the smuggling wars actually land their cargo?
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;ZBw19gPPzFFjvTXDGuJR-JRO4yWM7k4AXrYtkKzSAeY
+
+<<^ code:"&#x0004;" -> ? >>

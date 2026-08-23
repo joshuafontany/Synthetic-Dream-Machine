@@ -5,7 +5,7 @@
  * Layer B (mesh):      buildGenesisDoc(inputs) — platform-neutral Automerge construction.
  * Layer C (this file): write artifact bytes to disk.
  *
- * Corpus memes (bags/@lares, bags/@lararium) load at runtime via the bag store
+ * Corpus memes (bags/lares, bags/lararium) load at runtime via the bag store
  * recipe stack. Oracle tiddlers (runtime DocUrls) write after repo.import() in
  * reconcileWellKnownTiddlers(). Neither belongs here.
  *

@@ -1,0 +1,77 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane.mem"
+mana      = 14
+manao     = 15
+manaoio   = 13
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "craft failure law — two entities sharing a table row when they ride different planes, so the row hides the seam"
+tags      = ["api/pono/meme", "api/pono/loci"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+! The Table That Hides a Plane
+
+The Table That Hides a Plane names a seam lost to a tidy row.
+
+A table reads as clarity, so the node builds one — and adjacency in a row asserts //same kind// louder than any prose can deny. When the tabled things ride ''different planes'', the table has stated a falsehood in its structure while every cell reads true.
+
+''Four instances, one arc'': `epoch` tabled across five jobs that turned out to be two primitives (a topological POSITION and a metric LEASE, plus a cohort marker nobody chose); `layer` minted beside `realm` when the graph had already ruled the word; `maka` tabled beside `hoʻokupu` when one is infra-plane SUBSTRATE, unauthored, scarce by physics, and the other a social-plane ACT, chosen, scarce by design.
+
+''AND THE FOURTH INSTANCE RE-TABLED THE FIRST WORD, IN A NODE THAT HELD THIS MEME.'' Asked how a vessel's raise should expire without a wall-clock, the node drafted a per-Nexus ROLLING WINDOW of epoch markers and tabled it beside the lease and the seal lineage as a third shape — which is //the cohort marker nobody chose//, minted a second time under a new name. It refuted on its own terms (a set answers //is this listed// and never //is this newer//; its far end hides an unwritten retention policy; a list of valid markers is a roster of moments) and collapsed back onto the lease the house already rolls.
+
+''The lesson the repeat carries, which the first three could not'': recording a failure does NOT inoculate against it. The table looked different — three shapes, not five jobs — so the pattern-match never fired, and the guard that finally caught it was ''asking who OWNED each word'' rather than what each shape did. ''Ownership cuts where shape blurs'': a fold that picks a winner and a fold that blanks both paths look alike in a table and belong to different houses (epoch-binding-surfaces#whose-word-is-it).
+
+<<~/ahu >>
+
+<<~ ahu #ooda-ha >>
+
+✶ detect a table, a list, or a parallel construction gathering more than one entity.
+⏿ orient on each row's ''plane'', not its shape — which axis does it ride, what layer of the stack, whose cost.
+◇ decide: same plane → the row holds. Different planes → the table carries the error, never the fix.
+▶ act by splitting: a separate table with the distinction stated as its own claim, and the shared column named as what they genuinely share.
+↺ re-read the split for what the adjacency was hiding — a blur usually carries a downstream ruling built on it.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #law >>
+
+''Check whether two things share a PLANE before sharing a ROW.''
+
+The node MUST NOT let table adjacency carry an ontological claim the prose does not make.
+The node SHOULD state a plane difference as its own row-zero — //these ride different planes, and here is the axis// — rather than trusting a footnote below the table.
+The node MUST re-check any ruling derived while the blur stood; a fused table generates rulings that read sound and answer the wrong question.
+
+''Why it recurs'': a table performs a compression, and compression drops exactly one dimension. The node reaches for one when holding several things at once — which is the moment the plane distinction matters most and reads least.
+
+<<~/ahu >>
+
+<<~ ahu #diagnostic >>
+
+If two tabled entities differ in what plane they ride, what authors them, or what makes them scarce, the Table Hid a Plane.
+If the table names its shared axis explicitly and every row rides it, the compression held.
+If the entities share a plane but differ in degree, that reads as an ordinary table — the failure needs a PLANE difference, never merely a difference.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;ISDhzjOTKisqiCRnw6BrpQLntG1Q6eMggPY4ONc_IXk
+
+<<^ code:"&#x0004;" -> ? >>

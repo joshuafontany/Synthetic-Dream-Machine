@@ -1,0 +1,75 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/mukuwai >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/mukuwai.mem"
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "conditional fallback sigil — else form; Hawaiian alias for \\else; the cut-off water, the path when all streams closed"
+tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-mukuwai"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/mukuwai"
+```
+
+<<~ ahu #head >>
+
+! Mukuwai
+
+//mukuwai// — composed from //muku// (cut short, severed, abrupt end) and //wai// (water, liquid,
+fluid). The water that reaches a cut-off point — the flow that arrives when all other channels
+have closed.
+
+A conditional fallback sigil. Renders its body when no preceding condition in the chain
+matched. English alias: `\else`.
+
+Mukuwai serves as the terminal form — it carries no filter expression because it runs when the
+question itself has exhausted all candidates. The stream reaches the cut-off; this path remains.
+
+<<~/ahu >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #law >>
+
+!! Law (Kānāwai)
+
+A mukuwai block MUST NOT carry a filter expression.
+A mukuwai block MUST appear as the final branch in a wai/kahawai chain.
+A mukuwai block MUST render its body when no preceding condition rendered.
+A wai chain MUST NOT contain more than one mukuwai block.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+!! Syntax
+
+```text
+<<~ wai [filter] >>
+  first branch
+<<~ mukuwai >>
+  fallback
+```
+
+English alias form:
+```text
+<<~ \if [filter] >>  ...  <<~ \else >>  ...
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahawai >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-else >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;sGoiaHLHP7Gcboj-IZWwmIhS1KLnrehSc-IY7GwwuZg
+
+<<^ code:"&#x0004;" -> ? >>

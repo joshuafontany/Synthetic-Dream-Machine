@@ -3,7 +3,7 @@
  *
  *   1. Vite compiles plugin-owned TS sources → tiddlers/src/*.js
  *      (native TW5 header comments embedded)
- *      Anchor memes in bags/@lararium/tw5 get body-sha256 patched from those
+ *      Anchor memes in bags/lararium/tw5 get body-sha256 patched from those
  *      generated JS tiddlers, without duplicating JS bodies into bags/.
  *   2. TW5 CLI packs src/tiddlers/ into a complete plugin tiddler JSON:
  *        tiddlywiki ++./src/tiddlers \

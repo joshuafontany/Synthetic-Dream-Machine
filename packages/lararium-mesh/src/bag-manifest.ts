@@ -81,7 +81,7 @@ export function renderBagManifest(m: BagManifest): string {
   const lines = [
     DECLARATION,
     "",
-    `<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/bags/${m.bag.replace(/^@/, "")} >>`,
+    `<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/bags/${m.bag} >>`,
     "```toml iam",
     `bag       = "${m.bag}"`,
     `cap-tier  = "${m.tier}"`,

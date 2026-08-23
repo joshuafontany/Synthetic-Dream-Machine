@@ -113,7 +113,7 @@ export function personaBagIdFor(personaGroupDocIdHex: string): string {
  * copy carrying authority drifts silently.
  */
 export function isPersonaPlaneSlug(slug: string): boolean {
-  return new RegExp(`^@persona-[0-9a-f]{${PERSONA_SCOPE_TAG_HEX}}$`).test(slug);
+  return new RegExp(`^persona-[0-9a-f]{${PERSONA_SCOPE_TAG_HEX}}$`).test(slug);
 }
 
 // ── ONE TAG NAMES A WHOLE FACE ────────────────────────────────────────────────────────────────────
@@ -158,21 +158,18 @@ export function personaScopedBagIdsForTag(tag: string): PersonaScopedBags {
 /**
  * The tag a persona plane's own id carries, or null when the id names no plane.
  *
- * THE NAME IS THE INDEX. A store that already resolved `@persona-<tag>` holds the tag in that string, so a
+ * THE NAME IS THE INDEX. A store that already resolved `persona-<tag>` holds the tag in that string, so a
  * face reaches its own circles, identities and sessions without the group doc id in hand and without a
  * second copy stored anywhere to drift from. Nothing derives a tag it cannot also verify: this reads only
  * ids the derivation could have produced (`isPersonaPlaneSlug`'s shape, width and case included).
  */
 export function personaTagFromBagId(bagId: string): string | null {
-  // `identitySlug` hands back the slug WITHOUT its leading `@`, while the family rule matches the slug
-  // WITH it. Normalise to one spelling here rather than letting each caller guess which form it holds:
-  // callers hold the full bag URI far more often than a bare slug, and a reader that silently answered
-  // null for the common form would report every face as nameless.
-  const bare = bagId.startsWith("@") ? bagId.slice(1) : identitySlug(bagId);
-  if (bare === null) return null;
-  const slug = `@${bare}`;
+  // ONE SPELLING, NORMALISED HERE. A caller holds the full bag URI far more often than a bare slug, so
+  // this accepts either: `identitySlug` reduces an address to its slug, and a string that is already one
+  // passes through. A reader that answered null for the common form would report every face as nameless.
+  const slug = identitySlug(bagId) ?? bagId;
   if (!isPersonaPlaneSlug(slug)) return null;
-  return slug.slice("@persona-".length);
+  return slug.slice("persona-".length);
 }
 
 /** A persona plane's SIBLINGS — the rest of that face, off the plane id alone. Null when it names none. */

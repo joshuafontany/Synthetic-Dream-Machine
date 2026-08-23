@@ -69,10 +69,10 @@ export type DiskMirrorGrant = readonly { bagId: string; mirrorRoot: string; scop
  *
  *  Two per-wiki authorities expand BOTH bagId and leaf from the slug:
  *  - A `wikiSlot` entry names one of the live "above the fold" layers (e.g.
- *    `working` → bag `wikis/@{slug}/working`, disk `wikis/@{slug}`) — the live
+ *    `working` → bag `wikis/{slug}/working`, disk `wikis/{slug}`) — the live
  *    edit plane.
  *  - A `selfCanon` entry is the per-wiki CANON authority (the wiki's own
- *    `bags/@{slug}` bag → disk `bags/@{slug}`), yielding only when the recipe
+ *    `bags/{slug}` bag → disk `bags/{slug}`), yielding only when the recipe
  *    designates that canon AND no literal grant already covers it — so system
  *    wikis (@lares/@lararium, literal grants) keep their static roots and never
  *    double-project.
@@ -98,9 +98,9 @@ export function resolveDiskMirrors(
     })
     .map((g) =>
       (g.selfCanon || g.wikiSlot)
-        ? { ...g, bagId: perWikiBag(g), mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` }
+        ? { ...g, bagId: perWikiBag(g), mirrorRoot: `${g.mirrorRoot}/${wikiSlug}` }
         : g.perWikiSlug
-          ? { ...g, mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` }
+          ? { ...g, mirrorRoot: `${g.mirrorRoot}/${wikiSlug}` }
           : g,
     );
 }
@@ -278,7 +278,7 @@ export class VesselIslandPoolCore {
     // this pool's held grant names which it MAY write. A browser pool's empty
     // grant → never mirrors. The unforgeable authority lives in the grant.
     // Authority ∩ designation, with per-wiki-slug leaves filled from the recipe
-    // (e.g. @working → wikis/@{slug}). See resolveDiskMirrors.
+    // (e.g. @working → wikis/{slug}). See resolveDiskMirrors.
     const diskMirrors = resolveDiskMirrors(this._diskMirrorGrant, spec.recipe.mirrorBags, spec.recipe.wikiSlug);
     const storage = this._host.storage(wikiId);
 

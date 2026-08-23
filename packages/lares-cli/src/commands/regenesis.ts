@@ -13,7 +13,7 @@
  *                            wiped; genesis re-baked; init re-founds (identity
  *                            preserved, `<lares>/identity` out of every wipe)
  *   3. wake                — boot detached, vessel-ready attested from the log
- *   4. seed --apply        — plant every bags/@* holding back into the fresh docs;
+ *   4. seed --apply        — plant every bags/* holding back into the fresh docs;
  *                            the conductor OWNS the zero-new refusal here: right
  *                            after a reset the Synced tree MUST read virgin — a tree
  *                            with entries names a poisoned watermark, fail loud
@@ -40,13 +40,13 @@ function step(n: number): string { return `[regenesis ${n + 1}/${STEPS.length}] 
 
 /**
  * The bags a single-bag regenesis MUST NOT target — the social/registry plane the boot
- * contract stands on. `discoverHoldings` only ever returns `bags/@*` dirs (@daemon,
+ * contract stands on. `discoverHoldings` only ever returns `bags/*` dirs (@daemon,
  * @identities, @persona, @groups, @sessions, @catalog/@oracle live on the social plane
  * with no `bags/` dir), so a name lookup already fences them out; this set carries the
  * belt-and-braces refusal that names WHY, never the primary gate.
  */
 const PROTECTED_BAGS = new Set([
-  "@daemon", "@identities", "@persona", "@groups", "@sessions", "@catalog", "@oracle",
+  "daemon", "identities", "persona", "sessions", "catalog", "oracle",
 ]);
 
 /** A PersonaGroup plane answers to a DERIVED slug, so the refusal matches the family by shape — from
@@ -55,7 +55,7 @@ function isProtectedBag(slug: string): boolean {
   return PROTECTED_BAGS.has(slug) || isPersonaPlaneSlug(slug);
 }
 
-/** Resolve `--bag @slug` (or a full `bags/@slug` URI) to the discovered holding it names. */
+/** Resolve `--bag @slug` (or a full `bags/slug` URI) to the discovered holding it names. */
 function resolveHolding(
   bagArg: string,
   holdings: ReturnType<typeof discoverHoldings>,
@@ -65,7 +65,7 @@ function resolveHolding(
 }
 
 /**
- * L4 — targeted single-bag regenesis: rebirth ONE bag's doc from its `bags/@slug` disk
+ * L4 — targeted single-bag regenesis: rebirth ONE bag's doc from its `bags/slug` disk
  * canon WITHOUT a full-store wipe and WITHOUT stopping the vessel. The scalpel beside the
  * whole-store sledgehammer: it reaches @daemon / sibling bags / identity / genesis /
  * the mempalace NOT AT ALL. Three scoped steps, mirroring reset+seed for one holding:
@@ -91,7 +91,7 @@ export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise
     return 3;
   }
   if (isProtectedBag(h.holding)) {
-    console.error(`[regenesis --bag] REFUSED: ${h.holding} rides the social/registry plane (the boot contract) — L4 targets bags/@* content bags only.`);
+    console.error(`[regenesis --bag] REFUSED: ${h.holding} rides the social/registry plane (the boot contract) — L4 targets bags/* content bags only.`);
     return 2;
   }
 

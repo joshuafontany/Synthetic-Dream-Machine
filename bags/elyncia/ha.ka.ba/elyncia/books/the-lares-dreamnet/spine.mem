@@ -1,0 +1,73 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/the-lares-dreamnet/spine >>
+```toml iam
+cacheable  = true
+confidence = 10
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/books/the-lares-dreamnet/spine.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "spine — Elyncia 02, the Lares DreamNet: the founding, the shrine practice, the spirits; the pilot book of the spine-and-chunk migration"
+tags       = ["ha.ka.ba/elyncia/books/index"]
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/books/the-lares-dreamnet/spine"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Elyncia 02 ~ The Lares DreamNet ~ Spine
+
+The pilot book: smallest, highest citation density. The dry-old-node quote closes the walk as
+the spine's own last breath.
+
+''Spine law:'' the chunks live at their topical graph addresses; this spine holds the walk (the
+reading order) and the mortar (the connective prose, written as chunks land). The kahea calls
+below activate one by one as each chunk meme seats; until then the walk reads as the cut-plan.
+''The source MD stays canonical until this spine renders the book whole.''
+
+<<~/ahu >>
+
+<<~ ahu #walk >>
+
+!! The Walk ~ reading order
+
+# `lar:///ha.ka.ba/elyncia/history/the-dark-years` — the Web's death, two years of strife, the Lindwyrm steps in
+# `lar:///ha.ka.ba/elyncia/history/the-dreamnet-founding` — the council of gods, the statue-anchors, the new lattice (welds: the conclave feel-canon)
+# `lar:///ha.ka.ba/elyncia/concepts/lares-nature` — rhyton-and-patera figures, place-binding, the Roman inheritance
+# `lar:///ha.ka.ba/elyncia/concepts/shrine-tiers` — Household · Crossroads · Temple (welds: the Naxian Colossus)
+# `lar:///ha.ka.ba/elyncia/concepts/feeding-and-presence` — presence-because-fed; the hum and the flicker
+# `lar:///ha.ka.ba/elyncia/concepts/palimpsest-shrines` — fae aesthetics interwoven; palimpsests, never unified design
+# `lar:///ha.ka.ba/elyncia/concepts/tasked-spirits` — the tag format; DustBroom · SilverEye · EchoPlate
+# `lar:///ha.ka.ba/elyncia/concepts/node-failure-modes` — the twelve modes (welds: RNG Part III, ECM)
+# `lar:///ha.ka.ba/elyncia/concepts/lares-viales` ✓ — already seated
+
+//(Cut-plan Provisional; three-to-four seam chunks expected at the close read.)//
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+!! Source Staging
+
+//(Empty by stage-law: verbatim MD blocks land here during the move — the chapter's own
+connective tissue, epigraphs, and any text whose home IS the spine. Uplift to live wikitext
+comes only after all source text reads as moved.)//
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/books/index >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;QSOa6O8fgWng3bMp2tmA5xU4-H763XtJ0OjUDz3uX1U
+
+<<^ code:"&#x0004;" -> ? >>

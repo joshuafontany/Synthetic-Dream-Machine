@@ -1,0 +1,229 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/cli/vessel-door >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/cli/vessel-door.mem"
+l-space   = "lares"
+mana      = 15
+manao     = 15
+manaoio   = 14
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "THE SUBSTRATE COLLAPSE — performed. One namespace per causal island governs every plane in this CLI except the vessel's own, where sixteen bare verbs stand for seven primitives and their compositions. This meme carries the primitive set, the door, the rite-set, the ripples that must close with them, the verifications that prove the collapse landed, and the parts deliberately left standing. It instructs; it does not argue."
+status    = "standing"
+status-why = "the door stands, the compositions ride it as rites, every caller moved and every collapsed spelling refuses; walked by the founding + contract witnesses and the keeper rehearsal"
+tags      = ["api/pono/meme", "lararium/api/lares-lararium-binding"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/cli/vessel-door"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #the-law >>
+
+! The Vessel Door ~ a substrate collapse
+
+''ONE NAMESPACE PER CAUSAL ISLAND; THE PLANE IS A PARAMETER, NEVER A NEW VERB.'' That law already governs
+this CLI. It collapsed the sensorium surface to two doors — one sovereign, one guest — folding ten
+top-level verbs away with no legacy aliases kept.
+
+''The vessel is a causal island and speaks through sixteen names.'' Its store, its genesis artifact, its
+daemon and its corpus form one island by every test this house applies, and the law reached every other
+plane before it. That omission is why the verb count grows back after each collapse: the door absorbs new
+capability, and a plane with no door has nowhere to put it but the top level.
+
+''This meme carried the work order, and the work stands done.'' The reasoning lives elsewhere; what follows records what the collapse enacted, so a reader meets the shape rather than re-deriving it.
+
+<<~/ahu >>
+
+<<~ ahu #the-primitives >>
+
+!! What the sixteen verbs actually do — SEVEN primitives
+
+Every substrate verb in this CLI composes from these. Nothing below is new capability; each already exists
+inside one or more of the verbs being collapsed.
+
+\procedure ~Primitive(~Type:"" ~Params:"") ~Primitive <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Primitive stop "ends a running daemon by port, graceful then forced ~ never a restart in disguise" >>
+<<~Primitive wipe "pares the vessel store + the projection watermark ~ identity, seal, library and registry stand outside it" >>
+<<~Primitive build "compiles the workspace and STAMPS the source digest ~ a build that skips the stamp leaves the tree reading stale" >>
+<<~Primitive bake "re-derives the genesis island from the engine + the packed plugin ~ moves NO identity" >>
+<<~Primitive found "mints the vessel identity, the persona root, the social planes and the bootstrap ~ idempotent, skips what stands" >>
+<<~Primitive stand "brings the daemon up, foreground or detached, and reports what it found ~ attach when one already answers" >>
+<<~Primitive seed "plants every bags holding back into its doc, kind-routed, diff-gated ~ idempotent; a converged tree no-ops" >>
+
+''An eighth reads, and belongs beside them'': `read` — the pure inspection that starts nothing (bootstrap
+presence, storage size, port, seal state, personas, quorum).
+
+<<~/ahu >>
+
+<<~ ahu #the-collapse >>
+
+!! The collapse, verb by verb
+
+Each row names a CURRENT verb and the composition that replaces it. ''No aliases survive.'' A name that
+still answers teaches that both spellings stand, and the surface regrows from there.
+
+|! current |! composes |! becomes |
+| `init` | found | `vessel found` |
+| `wake` | found? · stand · read | `vessel stand` (the entry point; keeps its report) |
+| `serve` | stand (foreground) | `vessel stand --foreground` |
+| `dev` | stand · vite | `vessel stand --with-app` |
+| `stop` | stop | `vessel stop` |
+| `reset` | wipe · found | `vessel clear` |
+| `fresh` | wipe · stand | `vessel clear && vessel stand` |
+| `reconcile` | stop · wipe? · stand | `vessel stand --restart [--clear]` |
+| `refresh` | build · stop · wipe · stand | `vessel rite refresh` |
+| `rebuild` | bake · stand | `vessel rite rebuild` |
+| `build-genesis` | bake | `vessel bake` |
+| `regenesis` | stop · wipe · bake · stand · seed | `vessel rite rebirth` |
+| `seed` | seed | `vessel seed` |
+| `status` · `node status` | read | `vessel read` |
+
+''THE COMPOSITIONS RIDE AS RITES, NEVER VERBS.'' `refresh`, `rebuild` and `rebirth` are pet-named
+cap-stacks over the primitives, and this house already carries the surface for exactly that: a rite-door
+where new capability arrives as a new rite rather than another raw verb. A composition earns a pet-name;
+it never earns a top-level name.
+
+<<~ confidence Canon 17/20 >> ''The test for a rite versus a primitive'': a primitive names one motion
+and cannot be expressed as a sequence of the others. Everything else composes.
+
+<<~/ahu >>
+
+<<~ ahu #the-founding-rite >>
+
+!! ⚠ The founding rite rides the rite-door, and one movement changes
+
+The rite currently reaches its fifth movement through `regenesis`, which stops the daemon, wipes the store,
+re-bakes genesis, stands the node again and then seeds. ''On a fresh founding that tears down what the
+second movement built ninety seconds earlier.'' The only part the rite needs there is the seeding.
+
+''So the founding rite composes: found · stand · seed.'' No stop, no wipe, no second bake.
+
+''AND THAT SUBTRACTION REMOVES A TRAP RATHER THAN HIDING IT.'' Sealing the vault writes a marker the clear
+does not remove, so every later daemon boot wants the passphrase in its environment. Because the current
+fifth movement RESTARTS the daemon, it crosses that gate — and an operator who sealed by typing must carry
+the passphrase forward by hand between two movements or watch the vessel come up at the floor. ''A rite
+that never restarts never crosses the gate'', so the carry-forward step and the paragraph explaining it
+both leave the rite.
+
+''Keep `rebirth` as its own rite.'' Rebirth of a STANDING vessel is a real motion and stop-wipe-bake is
+exactly right for it. It is simply not a founding step, and its name says so.
+
+<<~/ahu >>
+
+<<~ ahu #the-ripples >>
+
+!! Every caller that must close with the collapse
+
+''A collapse that leaves callers on old names has not collapsed anything.'' These are the surfaces that
+name substrate verbs directly. Each MUST move in the same act.
+
+# ''THE GENERATED MCP MIRROR.'' The CLI↔MCP↔seat isomorphism rides a GENERATED fixture, never a
+  hand-edited one. Rebuild the CLI first, then regenerate, then confirm the isomorphism reports green.
+  A hand-edit here reads as a passing test over a surface nobody generated.
+# ''THE FRESH-BUILD GATE.'' Membership DERIVES from the door rather than from a remembered list of verb
+  names. A roster drifts the moment a surface changes — the very defect this door closes. The derived
+  test states its EXCEPTIONS instead, so it fails safe: a sub-door added later stays gated until someone
+  argues it out.
+# ''THE FOUNDING RITE.'' Its preflight, its clear, its stand, its seed and its live movements all name
+  substrate verbs directly. It is the operator-instruction source, so a stale command there fails at the
+  worst moment a command can fail.
+# ''THE KEEPER REHEARSAL HARNESS.'' It walks the rite by name. Its preflight, its per-cycle clear, its
+  founding step and its seed step all move.
+# ''THE CONTAINER BOOT + THE WITNESS SCRIPTS.'' They found and stand vessels by verb name.
+# ''THE SESSION-START HOOK.'' It calls the entry point with the observe capability. The capability must
+  survive the rename intact — a hook that gains the standing capability by accident turns looking into
+  acting.
+# ''EVERY HANDLER'S OWN HEADER.'' A moved handler whose docstring still self-names its old spelling is the
+  cosmetic residue the previous collapse left; sweep it in the same pass rather than leaving it again.
+
+<<~/ahu >>
+
+<<~ ahu #what-stands >>
+
+!! What does NOT move, and why
+
+''NOT the noun-doors.'' `nexus`, `persona`, `vault`, `library`, `circle`, `cabal`, `hooks`, `sense`,
+`mempalace`, `sensorium` already obey the law. Touching them spends risk for nothing.
+
+''NOT the content verbs.'' `bag`, `wiki`, `ingest`, `act`, `edge`, `draft`, `normalize`, `repack` name the
+corpus island rather than the vessel island. They may want their own door one day; that is a separate
+reading and it does not belong in this act.
+
+''NOT the identity verbs.'' `device-admit`, `raise`, `invite-send`, `invite-receive` name ceremonies
+between vessels, not motions of one vessel's substrate.
+
+''NOT the capabilities themselves.'' Nothing here adds or removes what the CLI can do. Every primitive
+already runs inside a verb being collapsed; this act changes only how many names reach them.
+
+<<~ confidence Canon 18/20 >> ''A collapse that also changes behaviour cannot be verified'' — a green
+suite afterward would prove neither half. Move the names; move nothing else.
+
+<<~/ahu >>
+
+<<~ ahu #the-verifications >>
+
+!! What proves it landed
+
+''Each of these fails loudly on a partial collapse.'' Run them in this order.
+
+# ''The tree typechecks.'' A green build has not typechecked: the compiler colorizes, so a reader grepping
+  for the word `error` and its code matches nothing while a package carries dozens. Use the witness that
+  reads per package and exits non-zero on any real error.
+# ''The isomorphism reports green'' after regenerating the mirror — the three surfaces name one verb set.
+# ''No old name answers.'' Every collapsed spelling MUST fail as an unknown verb. A surviving alias is the
+  failure mode this collapse exists to prevent, and it hides perfectly behind a passing suite.
+# ''The surface gets measured at the VERB, never at the door.'' Thirty doors carry a hundred and sixteen
+  addressable verbs. A door count therefore reports a collapse the operator cannot feel: the fan-out lives
+  one level below the number, so a surface that reads halved by doors may not have moved at all. Count
+  what an operator can actually type, and quote both figures — the pair is the reading, either alone
+  flatters.
+# ''The keeper rehearsal walks both cycles green'' — which also proves the founding rite composes
+  correctly, since the harness performs the rite rather than describing it.
+# ''The founding rite reads end to end'' with every command resolving to a verb that answers. A rite
+  amended by many hands drifts fastest at exactly the commands nobody re-typed.
+
+<<~/ahu >>
+
+<<~ ahu #the-order >>
+
+!! The order to work in
+
+''Land the substrate collapse only on a quiet tree.'' It touches the entry point every other thread stands
+on, so it wants to arrive between phases rather than during one.
+
+<<~loops ✶ primitives-and-door -> ⏿ rites -> ◇ ripples -> ▶ verifications -> ↺ the-rite-and-its-harness >>
+
+# ''Stand the door and the primitives first, with the old verbs still answering.'' The two surfaces
+  co-exist for exactly one commit, which keeps every caller working while the new shape gets proven.
+# ''Move the rites'' — the compositions, pet-named through the rite surface.
+# ''Close the ripples in one act'' — the generated mirror, the fresh-build gate, the rite, the harness,
+  the container boot, the witnesses, the hook, the handler headers.
+# ''Then cut the old names, all of them, in a single commit.'' No aliases, no deprecation window. A
+  half-collapse is worse than none: it doubles the surface it was meant to halve and teaches that both
+  spellings stand.
+# ''Run every verification.'' A red here names a ripple that did not close, and the list above says which.
+
+<<~ confidence Synthesis-Canon 16/20 >> ''The one-commit cut is the whole discipline.'' The previous
+collapse held to it and the surface stayed collapsed; the surface that grew back is the one the law never
+reached.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/api/lares-lararium-binding >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >> · <<~ loulou lar:///ha.ka.ba/lararium/api/sensorium-runbook >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;GUuzqYU_PCYpQy4cFoz4GT1GqHV-Un7MctqRT4coudU
+
+<<^ code:"&#x0004;" -> ? >>

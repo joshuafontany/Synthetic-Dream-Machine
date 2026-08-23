@@ -1,10 +1,10 @@
 /**
- * persona-selves.test — the per-field CRDT beneath a human's own-persona names on @persona.
+ * persona-selves.test — the per-field CRDT beneath a human's own-persona names on persona.
  *
  * The property that earns this module its existence reads as a REFUSAL TO CLOBBER: two vessels of one human
  * rename different things concurrently and BOTH edits survive, because each name carries its own value+stamp
  * pair and a write touches nothing else. These pin that, pin the stale-arrival rule, and pin what the fold
- * refuses to read (every non-selves tiddler the @persona bag carries beside these labels).
+ * refuses to read (every non-selves tiddler the persona bag carries beside these labels).
  *
  * Canon: lar:///ha.ka.ba/lares/api/pono/persona-policy
  */
@@ -62,9 +62,9 @@ describe("one self tiddler — two names, two stamps, no shared field", () => {
   });
 });
 
-describe("the multitude fold over the @persona bag", () => {
+describe("the multitude fold over the persona bag", () => {
   test("★ the fold reads ONLY selves tiddlers — the bag's identity machinery passes untouched ★", () => {
-    // @persona also carries the bindings, the sentinels and the hearth true-name. A fold that swept them in
+    // persona also carries the bindings, the sentinels and the hearth true-name. A fold that swept them in
     // would report machinery as faces.
     const rows = [
       { title: personaSelfTiddlerUri(1), fields: { petname: "veil-two", handle: "Kahu Beta" } },

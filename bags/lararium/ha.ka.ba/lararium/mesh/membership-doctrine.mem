@@ -1,0 +1,208 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⚕" ? -> lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+```toml iam
+cacheable = true
+file-path = "bags/lararium/ha.ka.ba/lararium/mesh/membership-doctrine.mem"
+l-space   = "lararium"
+mana      = 16
+manao     = 16
+manaoio   = 15
+namespace = "&#x2695;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "the membership doctrine — the privacy invariant of the whole public-facing mesh: the Nexus tracks operator CONTRACTS, never user IDENTITIES. An operator contract carries pubkey + accepts-carriage + charter-epoch and NOTHING more; users SOFT-ATTACH and leave no roster trace; invites are sealed BURNABLE capabilities spent-on-boot that leave no record. We choose to not have the user table. Operator-ruled 2026-07-21. SECOND CONDITION ruled 2026-08-09: belonging carries TWO conditions — the contract AND agreement with the grammar vectors traded on that Nexus. Agreement rides KEYED, never audited (the MLS RFC 9420 `confirmation_tag` shape): a peer that disagrees cannot produce the binding, so no roster row is needed to record who agrees — the second condition adds NO table and lands back on the no-roster ruling."
+revised-on = "2026-08-10"
+status    = "standing"
+status-why = "operator-ruled and enforced at the members-registry"
+tags      = ["mesh/carry-contract", "mesh/identity-classes", "api/pono/persona-policy", "api/pono/cabal-realm", "api/pono/causal-islands"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lararium/mesh/membership-doctrine"
+written   = "2026-07-21"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<^ code:"&#x0002;" >>
+
+! The Membership Doctrine ~ track contracts, never identities
+
+> The privacy keel of the whole mesh, held from a one-operator house to planetary
+> public infrastructure. The line it draws decides whether the DreamNet becomes a
+> commons or a panopticon. Operator-ruled 2026-07-21.
+
+<<~ ahu #the-invariant >>
+
+!! The invariant
+
+> ''The Nexus tracks operator CONTRACTS, never user IDENTITIES. The only persistent trace a human
+> leaves is (a) a carriage contract they consciously signed, or (b) a public Handle-card they
+> consciously posted to `@crossroads`. Everything else — who used the protocols, when, what they
+> read, their private data — leaves no central record.''
+
+!!! ★ BELONGING CARRIES TWO CONDITIONS — the contract, and the grammar ★
+
+''An operator belongs to a Nexus by CONTRACT and by AGREEING WITH THE GRAMMAR VECTORS traded there'' (operator-ruled). The registry records the first; the second never becomes a row, and that reads as the point rather than a gap — ''the invariant above still holds whole''. A node that cannot read what a Nexus trades cannot carry it faithfully, cannot verify what it relays, and cannot be bound by what it never parsed: //contract without grammar-agreement reads as a signature over an unread page//.
+
+''THE SECOND CONDITION IS KEYED, NEVER AUDITED, and that is what keeps it out of the registry.'' The field's one surviving instance (MLS, RFC 9420) folds the declared grammar into the key schedule — ''disagree on the grammar and you derive a different key and fail to decrypt''. It never ASKS a peer whether it understands, because you cannot detect a peer that lies about understanding; it makes the lie non-computable. Twenty-four years of the alternative stand recorded, the same declared-critical-and-not-processed bug shipping in 2002, 2011 and 2026 across three vendors.
+
+''So the check adds no trace, no roster row, and no new authority'' — it rides where the crypto already rides, bilaterally, peer-local, exactly like the rest of this doctrine.
+
+''AND ITS SCALE IS BOUNDED, which the no-roster ruling already anticipated.'' Exclusion power is bounded by the excluder's market share: three fields built this gate correctly and three retreated under open-internet pressure. The one that held gates at the ''group'' boundary, where the members are the whole relevant population and the roster stays local. ''Deployable at Lararium and Nexus scale; at DreamNet scale it predicts the same retreat'' — which is why a bilateral leased contract per operator, and never a confederation-wide roster, is the shape that survives. <<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-invariants >>
+
+<<~ confidence Synthesis-Canon 14/20 >> — the condition stands ruled; ''its mechanism stands UNBUILT'', and a prior treatment waits on another worldline to surface from the sensorium.
+
+<<~ confidence Synthesis-Canon 15/20 >> The corpo's first act stands up the user table — the row per
+human that becomes the product. This doctrine ''chooses to not have the table.'' A Nexus runs
+public infrastructure at any scale and still answers "who are your users?" with the only honest
+answer a sovereign commons holds: ''we do not hold that — ask them.'' This enacts the anti-SIN
+stance (#carry-contract, #the-frame) in the one place it would otherwise erode first.
+
+<<~/ahu >>
+
+<<~ ahu #the-two-stacks >>
+
+!! The two cap-stacks ~ operator contracts, user soft-attaches
+
+A human's posture rides the vessels in their PersonaGroup pool — a ''posture, not a caste'', chosen
+vessel by vessel (#identity-classes):
+
+\procedure ~Stack(~Type:"" ~Params:"") ~Stack <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Stack OPERATOR "runs/a node vessel does/CONTRACTS with the Nexus (owes MANDATORY carriage) trace/a wax-sealed carriage contract — consensual, minimal, revocable (Kapae)" >>
+<<~Stack USER "runs/browser-style vessels, no infra does/SOFT-ATTACHES (boot-seeded from a node on the rhizome, own cap-stack, reads/writes through blind relays) trace/NONE — no roster, no account, no user table" >>
+
+''An operator contracts because carriage is a mutual obligation the mesh must check'' — a Nexus has
+to know its infrastructure-peers to gossip the antigen and split the carry. ''A user owes nothing,
+carries nothing, so belongs in no roster'' — the node that boot-seeds a user holds no membership
+entry for it. A user turns operator by adding a node vessel and contracting; the stack shifts with
+the pool.
+
+<<~/ahu >>
+
+<<~ ahu #the-operator-contract >>
+
+!! The operator contract ~ the minimal wax-sealed payload
+
+An operator's membership entry carries the ''floor and nothing above it'' (operator-ruled):
+
+<<~ranks payload operator-pubkey -> accepts-carriage -> charter-epoch >>
+
+''No name, no email, no device list, no behavior.'' A quorum-signed `MembershipEntry` (the antigen's
+allow-twin, `blocked{}` ⊥ `members{}`, #carry-contract) — the operator signs "I accept carriage",
+≥k kahu counter-sign it against the charter epoch; per-Nexus, causal-island-local, read as-of-last-
+sync (no global now, #causal-islands), revocable by Kapae. ''This is the maximum the system ever
+holds about a contracting operator.''
+
+<<~/ahu >>
+
+<<~ ahu #the-invite >>
+
+!! The invite ~ a sealed burnable capability that leaves no record
+
+An invite rides as a ''sealed capability spent-on-boot'' (operator-ruled): peer-to-peer, sealed,
+''BURNABLE'' — consumed at boot, leaving ''no membership row, no who-invited-whom edge.'' Invite-only
+alpha changes nothing about the invariant: the invite is a ''capability the recipient RECEIVED, not
+a record the Nexus KEEPS.'' The general invite manufactures ''no social graph.''
+
+''The reputation-cost braid'' — the idea that an invite rides on the inviter's reputation as a cost
+(Sybil-resistance, accountability) — reserves to the ''Cabal tier'', never the general invite: a
+cabal is a bilateral verb two operators actively DO (#cabal-realm), and a reputation-priced admission
+lives THERE, where the graph is already mutual + consented, not on the traceless general invite.
+''The reservation runs as TWO DOMAINS, never one dial.'' `boot-invite` (`lar-boot-invite/v1`) seals
+Nexus-side, names no voucher, writes no edge, and burns locally — the general invite. `cabal-invite`
+(`lar-cabal-invite/v1`) names its `voucherDid` in the clear and feeds the vouch-DAG the lineage price
+walks. ''They never collapse'': merging them destroys the tracelessness on purpose-built ground. What
+the general invite forgoes is precisely what the Cabal tier requires — an attributable voucher to
+carry the cost (`admission-on-a-lineage#the-standing`).
+
+<<~/ahu >>
+
+<<~ ahu #the-carried-cap >>
+
+!! What a face CARRIES ~ a capability, never a standing
+
+''INVERSION OF CONTROL, at the verification surface.'' A platform holds the roster and answers //is this one a member//, which is why the centre repays capture. Inverted: ''the face carries the credential, the group holds no list, and verification runs OFFLINE against a published key''. Nobody stands home to ask, so asking seizes nothing.
+
+|! |! a CAP |! a STANDING |
+| answers | what may I do | what do I count as |
+| flows | DOWN, by delegation | UP, by conferral |
+| form | signed · scoped · EXPIRING | ''a live query, never a stored number'' |
+| carried on a device | ''yes'' | ''never'' |
+
+''That split makes a phone shelter rather than liability.'' Seizing it yields ONE capability — not a roster, and no standing, because standing never rode the device. It also closes the laundering seam: a captured key inherits no legitimacy, since legitimacy never sat on the object.
+
+''ACTING AS THE GROUP runs by attenuated delegation'' rooted in the realm's own sentinel agent — a self-certifying root with no apex above it. The delegation says //may speak for this pilina about X, until epoch N//, ''never //is this pilina//''; an unattenuated group delegation rebuilds the apex inside the group.
+
+''THE GROUP OFFERING VERIFICATION — and the mode this stack REFUSES.'' An online //is this one ours// endpoint needs reachability (dead in a cut-off mesh), logs every presentation, and ''rebuilds the roster on the group's side''. What stands instead: offline verification against the published seal, and for anything richer an ''un-thresholded attestor bundle'' where members sign independently, the count crosses, and the sufficiency rule stays structurally absent.
+
+> ''AND THE GROUP NEVER VERIFIES A HUMAN.'' It attests a RELATION — //this face holds a relation with us// — and what that relation means in the world stays the group's own rite, un-modelled. ''That refusal IS the un-confiscatability'': a state can void a card because a card claims to name a person and its issuer can un-name them. Nothing here ever claimed to name a person, so no claim stands to void. Seize the device and the relation survives to be re-attested; seize a state card and the bearer reads as nobody.
+
+<<~/ahu >>
+
+<<~ ahu #the-user-scope >>
+
+!! The user scope ~ soft-attach + inversion-of-control social graphs
+
+A user vessel-pool ''boot-seeds from a node on the rhizome'', receives its own cap-stack, and reads
+the public planes + its own private data ''through that node's blind relay'' (transit ⊥ read,
+#identity-classes). It signs no carriage contract, so it leaves no roster trace.
+
+''Users build their OWN social graphs — inversion of control.'' The user owns the graph (its own
+handle-book of others' nyms, #persona-policy), never the Nexus. The Nexus federates only the public
+Handle-cards a user consciously posts to `@crossroads`; the connections a user draws between them stay
+the user's own, off any central plane. <<~ confidence Synthesis 11/20 >> The Kowloon-submodule pattern
+carries this (partially wired, polish deferred — a 2a build).
+
+<<~/ahu >>
+
+<<~ ahu #the-publishing-surface >>
+
+!! The publishing surface ~ four acts under one word, and a ladder
+
+''//Publish// packed four distinct acts, and only one of them may never happen'':
+
+|! act |! what it exposes |! may we |
+| the DECLARATION | that a partition stands, signed | yes — at a chosen tier |
+| the METHOD | how a reading gets computed | yes — it rides as code |
+| the READING | what a reading returned | yes |
+| the INPUTS | ''who the members are'' | NEVER |
+
+Fields that manufacture standing-to-object publish all four. ''This stack publishes three and withholds the fourth'' — and that suffices, because rival readings that disagree stay checkable ''without anyone holding the member list''.
+
+''The surface already stands, tiered.'' The @crossroads / @nexus boards ride the always-carried MANDATORY tier every contracted operator carries free; a realm's charter rides veil-public; below that, content wraps in a Handle's, a persona's, or a dyad's own crypto. ''`carry ⊥ read ⊥ contract` holds at the transport'' and now reads as model law rather than a transport detail.
+
+> ''STANDING-TO-OBJECT SCOPES TO THE TIER AT WHICH A THING GETS PUBLISHED.''
+
+A realm publishing its declaration at the public tier gains outside challengers; one publishing at Handle tier keeps its challengers internal. ''Same machinery, one dial'' — and a realm under threat withdraws the tier without losing the faculty. Note what this does NOT buy: it names a procedural capacity to challenge, never an accrued position. ''Standing-to-object ⊥ `kūlana``'' (<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>).
+
+<<~/ahu >>
+
+<<~ ahu #the-transition >>
+
+!! From the house to public infrastructure ~ lock it in now
+
+The doctrine holds identically at every scale — a one-operator house, an invite-only alpha, a
+planetary public Nexus. ''Lock the minimalism in now'': a table left soft grows the first time
+someone asks for "just a little telemetry." Built as the floor, it stays the floor — the mesh
+''cannot'' surveil its users because it never stood up the surface to hold them.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;EF0-NvzKhjAbjVSOwTLEDcY1jRcjH4SqV6HtXgePNBQ
+
+<<^ code:"&#x0004;" -> ? >>

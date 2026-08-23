@@ -20,7 +20,7 @@ cacheable = false
 # Talk Story — Next Lares Instance
 ## Isomorphism Campaign Closed · Next: the Local-Verifiability Wall
 
-> ⚠ **STALE — FROZE 2026-06-06.** This floor's "next vector" (the local-verifiability wall) CLOSED 2026-06-07 (`4834c66d`), and the work moved on through LOAD → INGEST → the watcher (live handoff: `bags/@lares/ha.ka.ba/lares/docs/lares/handoff.md`). The genuinely-open floor now is the **watcher-seams talk-story** (deletions heaviest) in that bags torch, SUSPENDED. The counts below (mesh 236 etc.) are obsolete — real state 2026-06-14: mesh 275 · tw5 113 · node 124 · browser 13 (4 ingest RED found + fixed this session, fixture drift).
+> ⚠ **STALE — FROZE 2026-06-06.** This floor's "next vector" (the local-verifiability wall) CLOSED 2026-06-07 (`4834c66d`), and the work moved on through LOAD → INGEST → the watcher (live handoff: `bags/lares/ha.ka.ba/lares/docs/lares/handoff.md`). The genuinely-open floor now is the **watcher-seams talk-story** (deletions heaviest) in that bags torch, SUSPENDED. The counts below (mesh 236 etc.) are obsolete — real state 2026-06-14: mesh 275 · tw5 113 · node 124 · browser 13 (4 ingest RED found + fixed this session, fixture drift).
 
 > Branch: `feature/lararium-node-4`
 > Resume: `packages/HANDOFF.md` + `packages/ROADMAP.md`
@@ -153,8 +153,8 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 - TW5 VM primacy — if logic can live in the VM, keep it there.
 - Bag = Automerge doc = sync boundary.
 - No manifest byte transfer — TW5 core bytes travel via `@lararium` CRDT.
-- Canon requires operator gesture through an ACTION verb (`ADD COPY MOVE CLEAR DROP LOAD`). Every residency change writes an indelible effect record tagged with the matching archival verb (`accession`, `deaccession`, `transfer`, `withdrawal`, …). No silent unlink. The CLI surface lives at `lares act` (Sprint 5 of the Residency Model Epic ships the handler family). The prior `lares promote` ceremony retired 2026-05-31 — see [bags/@lares/api/lararium/residency-model.md](../bags/@lares/api/lararium/residency-model.md) and [packages/EPIC-RESIDENCY-MODEL.md](EPIC-RESIDENCY-MODEL.md).
-- Conflict resolution surfaces to operator-agent or cabal Talk Story; the CRDT layer detects + records, never decides. Automated arbitration reads as anti-pono. (See agent memory slug `project-talk-story-conflict-surfacing`, and the `#conflict-resolution` ahu in [bags/@lares/api/lararium/residency-model.md](../bags/@lares/api/lararium/residency-model.md).)
+- Canon requires operator gesture through an ACTION verb (`ADD COPY MOVE CLEAR DROP LOAD`). Every residency change writes an indelible effect record tagged with the matching archival verb (`accession`, `deaccession`, `transfer`, `withdrawal`, …). No silent unlink. The CLI surface lives at `lares act` (Sprint 5 of the Residency Model Epic ships the handler family). The prior `lares promote` ceremony retired 2026-05-31 — see [bags/lares/api/lararium/residency-model.md](../bags/lares/api/lararium/residency-model.md) and [packages/EPIC-RESIDENCY-MODEL.md](EPIC-RESIDENCY-MODEL.md).
+- Conflict resolution surfaces to operator-agent or cabal Talk Story; the CRDT layer detects + records, never decides. Automated arbitration reads as anti-pono. (See agent memory slug `project-talk-story-conflict-surfacing`, and the `#conflict-resolution` ahu in [bags/lares/api/lararium/residency-model.md](../bags/lares/api/lararium/residency-model.md).)
 - Git diff remains the visible signature.
 
 <<~/ahu >>

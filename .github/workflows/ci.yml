@@ -190,7 +190,7 @@ jobs:
         run: |
           node -e '
             const fs = require("node:fs");
-            const p = "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem";
+            const p = "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem";
             // A MISSING SEED IS ITS OWN FAULT, NEVER A BUDGET ONE. This gate read a path with a doubled
             // `lares/` segment — left behind by the ha.ka.ba reshuffle — so it threw ENOENT and reported
             // as a budget failure for two days while the seed sat 34 code points UNDER the ceiling.

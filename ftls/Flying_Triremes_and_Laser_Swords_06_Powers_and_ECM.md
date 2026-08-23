@@ -23,13 +23,13 @@ Some scholars divide powers into two categories: oldtech (*magitech)*, the techn
 - [ECM: Etheric Counter‑Magitech](#ecm-etheric-countermagitech)
     - [ECM Tags](#ecm-tags)
     - [ECM at the Table](#ecm-at-the-table)
-    - [Charms (\[charm\] \[spoof\] \[hijack\])](#charms-charm-spoof-hijack)
+    - [Charms (\[charm\] \[spoof\] \[control\])](#charms-charm-spoof-control)
     - [Glamours (\[glamour\] \[spoof\] \[veil\])](#glamours-glamour-spoof-veil)
     - [Illusions (\[illusion\]  \[figment\] \[spoof\] \[jam\] \[veil\])](#illusions-illusion--figment-spoof-jam-veil)
     - [Scrying and Anti‑Scrying (\[scan\] \[veil\] \[jam\])](#scrying-and-antiscrying-scan-veil-jam)
     - [Veiling and Revealing (\[veil\] \[reveal\])](#veiling-and-revealing-veil-reveal)
     - [Jamming Fields (\[aversion\] \[jam\] \[field\])](#jamming-fields-aversion-jam-field)
-    - [Counterspells (\[negate\] \[supress\] \[redirect\] \[capture\] \[hijack\])](#counterspells-negate-supress-redirect-capture-hijack)
+    - [Counterspells (\[negate\] \[supress\] \[redirect\] \[capture\] \[control\])](#counterspells-negate-supress-redirect-capture-control)
 - [Ritual Mechanics](#ritual-mechanics)
   - [Cross-Family Procedures](#cross-family-procedures)
     - [Doctrine](#doctrine)
@@ -383,7 +383,7 @@ Powers may be bought, salvaged, or found with one or more attributes **locked**,
 * \[**item**\]: The power locks your vital essence (life or other price paid) within an object. This is permanent, unless the item is destroyed or ritually powered down. Once an item is disabled, you can recover your locked life or ability scores.  
 * \[**guided**\]: the attack roll has Advantage as long as no targets have no Cover.  
 * \[**ward**\]: grants a bonus to Mental Defenses and Saves.  
-* \[**ecm**\]: Marks a power as targeting the noospheric substrate — active powers, activations, and etheric sensing — rather than physical targets. Combine with mode tags: `[scan]` `[veil]` `[jam]` `[spoof]` `[negate]` `[suppress]` `[redirect]` `[capture]` `[absorb]` `[hijack]`. Counterforce strength uses the caster’s **Level**, not Power Level.
+* \[**ecm**\]: Marks a power as targeting the noospheric substrate — active powers, activations, and etheric sensing — rather than physical targets. Combine with mode tags: `[scan]` `[veil]` `[jam]` `[spoof]` `[negate]` `[suppress]` `[redirect]` `[capture]` `[absorb]` `[control]`. Counterforce strength uses the caster’s **Level**, not Power Level.
 
 ### Powers by Gameplay Scale
 
@@ -415,7 +415,7 @@ Tags are independent and combinable. `[ecm]` marks a power as targeting the noos
 - `[redirect]` — shove an incoming effect sideways: left/right/up/down, ally/enemy swap, mirror back.
 - `[capture]` — intercept a power payload and store it as charge for later.
 - `[absorb]` — eat power energy, converting it to Life, Ward, heat, or a burden (referee chooses fitting currency).
-- `[hijack]` — take control of an active effect (briefly rewrite its target, parameters, or allegiance).
+- `[control]` — take control of an active effect (briefly rewrite its target, parameters, or allegiance).
 
 **Other tags that combine freely:**
 
@@ -446,7 +446,7 @@ ECM is a contest. Name your channel and your mode before declaring.
 
 Inside a Dream Realm, ECM is network security. Outside, it’s fieldcraft. Same noosphere, different density.
 
-### Charms ([charm] [spoof] [hijack])
+### Charms ([charm] [spoof] [control])
 
 Charms are **desire/obedience ECM** operating on the Ka channel:
 they inject impulses, framed certainties, cravings, taboos, and short command‑patterns.
@@ -550,7 +550,7 @@ Common field behaviors:
 Stacking rule:
 Two overlapping jamming fields do not “add.” They create pressure. Higher Level field usually dominates; otherwise, treat the overlap as Dangerous Magic.
 
-### Counterspells ([negate] [supress] [redirect] [capture] [hijack])
+### Counterspells ([negate] [supress] [redirect] [capture] [control])
 
 These are the “hard counter” ECM modes—high clarity, high stakes.
 
@@ -558,7 +558,7 @@ These are the “hard counter” ECM modes—high clarity, high stakes.
 - **Suppression** turns it off temporarily.
 - **Redirect** changes target or vector (often as a Reaction window).
 - **Capture** stores a payload at its original Power Level for later release.
-- **Hijack** steals control for one round (or one scene at high tier).
+- **Control** seizes an active effect for one round (or one scene at high tier).
 
 Referee rule for “permanent things”:
 ECM targets **active effects and power activations**. It does not erase an item’s lifelong weirdness unless the item’s weirdness is currently “running” as an effect.
@@ -17508,29 +17508,111 @@ meta:
 
 ## Radiance
 
+```memetic-wikitext+tiddlywiki
+!!!! Light and the Underworld
+
+Most dungeons are dark. A torch runs cheapest and burns for 6 turns (1 hour) —
+it cannot easily be "turned off." A lantern burns one flask of oil for 24 turns
+(4 hours) and carries shutters, which can be closed for temporary darkness. A
+torch or lantern shines 30' in all directions, and claims a hand to carry. If
+you carry a light source, other creatures will probably see the light as you
+approach, and will not be surprised.
+
+''Infravision'' names the ability to see heat (and the lack of heat) — 60' in
+the dark for most who bear it, 90' for goblins. Warm things appear red, cold
+things blue. Infravision does not work in the presence of normal or magical
+light, and it never suffices for reading.
+
+''Blindness'' catches characters through many doors: a casting of light or
+continual light pressed directly on the eyes, or an area of complete darkness
+met without infravision. A blinded creature suffers −6 to attack rolls (it
+must guess where its target stands by hearing), −4 to Saves, −4 Defense, and
+moves at one-third speed.
+
+''Daylight'' punishes some of the underworld's peoples: goblins fight at −1 in
+full daylight (hobgoblins suffer no such penalty), and magical light as bright
+as daylight imposes the same penalties within its extent.
+
+''Sunlight'' outranks all castings. A vampire exposed to direct sunlight must
+Save vs. Death Ray each round or disintegrate; a continual light casting will
+not disintegrate a vampire, but partially blinds it (−4 to all attack rolls).
+Three tiers stand: the sun above, magical light and darkness below it ranked
+against each other, and mundane sources beneath both — magical light floods
+mundane darkness of any extent, magical darkness swallows mundane light of any
+extent, and opposed castings cancel by rank. The old relics remember the
+distilled essence of sunlight — //oil of sunlight// — propelling the fabulous
+elven lightship.
+```
+
 <div class="power-card" markdown="1">
 
 ### Light
 
-> **Light**
->
-> **P:** 2 **R:** — **T:** — **D:** —  
->
-> {pending conversion}
+```memetic-wikitext+tiddlywiki
+Light refuses concealment: a light source may be veiled or made invisible, but
+the light given off always remains visible. The rules of light and the
+underworld stand at the head of ''Radiance''.
+
+<<<
+''Light''
+
+//the torchless flame, the coin that shines//
+
+''P:'' 1 &nbsp; ''R:'' 40 yd
+''T:'' area, object, or creature &nbsp; ''D:'' 1 hour + 10 min per Level
+
+You call a mote of magical light — a cold candle-point that needs no fuel,
+fears no wind, and frees the hand a torch would claim. Cast upon an object (a
+coin, a blade), the light moves with the object. A refused or missed casting
+never fizzles: the light stands where it fell. Price: 1 Life (Affinity –
+Illusion • Light • Void reduces by 1, minimum 1).
+
+Light will cancel a casting of darkness if cast upon it at equal or lesser
+rank, but may itself be cancelled by a casting of darkness. Equal ranks
+strain — the caster rolls Dangerous Magic at the contested Power. Dispel magic
+clears any rank.
+<<<
+
+Overcharge riders run independently; each costs one doubling, and riders
+combine. The classic castings name particular spends.
+
+//Overcharge — scale// (each doubling doubles the extent across):
+
+* x2 — ''the classic Light'': a large ball of light, as if a bright torch were
+  lit, filling 10 yd.
+* x4 — a globe 20 yd across, much brighter than any torch; creatures the
+  daylight punishes suffer their daylight penalties within.
+
+//Overcharge — continual// (one doubling):
+
+* The light glows forever, or until magically removed — cancelled only by an
+  equal-rank casting of darkness or by dispel magic. ''The classic Continual
+  Light'' combines this rider with one scale rung.
+
+//Overcharge — target// (one doubling, one further available):
+
+* x2 — press the shine against one creature's eyes or worn visor. The light
+  seats as a burden: the target Saves or stands ''blinded'' (−6 attack, −4
+  Saves, −4 Defense, one-third speed) until the casting ends or is cancelled.
+  On a successful Save the light stands where it fell, behind the intended
+  victim. Remove the gear, drop the burden.
+* x4 — the blind holds until dispelled; its removal demands Level equal to or
+  above the caster's.
+
+See also: `Darkness` for the reverse; `Dancing Lights` for the steered motes.
 
 tags:
->   [power]
->   [evocation]
->   [utility]
->   [light]
+> `[power]` `[light]` `[utility]` `[reversible]`
 
 meta:
 > - source:
->   - becmi:Basic Rules; spell: Light
+>   - becmi:Basic Rules; spell: Light; rules: Light (dungeon procedures)
 >   - becmi:Expert Set; spell: Light
->   - becmi:Rules Cyclopedia; spell: Light
+>   - becmi:Rules Cyclopedia; spell: Light; rules: Blindness, Infravision
 > - usage:
->   - scope: power; id: Light; note: FTLS Chapter 06 alpha power entry.
+>   - scope: power; id: Light; note: reversible kin of `Darkness`; the kin mod
+>     (mods namespace) unlocks reverse-choice at each activation.
+```
 
 osr:
 [Basic | Spell Lists and Basic Spell Descriptions]
@@ -17742,25 +17824,84 @@ spell will cancel its effects.
 
 ## Shadow
 
+```memetic-wikitext+tiddlywiki
+The rules of light and the underworld stand under ''Radiance'', above: the
+dark of dungeons, light sources and the surprise they forfeit, infravision,
+blindness, daylight, and the three tiers of the sun. Shadow castings ride the
+same laws from the other face — magical darkness swallows mundane light of any
+extent, and within it all sight fails, including infravision, which reads only
+heat and finds none to read here.
+```
+
 <div class="power-card" markdown="1">
 
 ### Darkness
 
-> **Darkness**
->
-> **P:** 4 **R:** — **T:** — **D:** —  
->
-> {pending conversion}
+```memetic-wikitext+tiddlywiki
+The things of the underworld see in the dark natively; the delvers who hunt
+them rarely do. The rules of light and the underworld stand at the head of
+''Radiance''.
+
+<<<
+''Darkness''
+
+//the palm of gloom, the unlit corner that travels//
+
+''P:'' 1 &nbsp; ''R:'' 40 yd
+''T:'' area, object, or creature &nbsp; ''D:'' 1 hour + 10 min per Level
+
+You call a mote of magical dark — a palm-sized gloom no torch crowds out. Cast
+upon an object, the darkness moves with the object. A refused or missed
+casting leaves the darkness pooled where it fell. Price: 1 Life (Affinity –
+Chaos • Dream • Shadow reduces by 1, minimum 1).
+
+Darkness will cancel a casting of light if cast upon it at equal or lesser
+rank, but may itself be cancelled by a casting of light. Equal ranks strain —
+the caster rolls Dangerous Magic at the contested Power. Dispel magic clears
+any rank.
+<<<
+
+Overcharge riders run independently; each costs one doubling, and riders
+combine. The classic castings name particular spends.
+
+//Overcharge — scale// (each doubling doubles the extent across):
+
+* x2 — ''the classic Darkness'': a circle of darkness 10 yd across, blocking
+  all sight.
+* x4 — a volume of complete darkness 20 yd across.
+
+//Overcharge — continual// (one doubling):
+
+* The darkness continues forever, or until magically removed — cancelled only
+  by an equal-rank casting of light or by dispel magic. ''The classic
+  Continual Darkness'' combines this rider with one scale rung: torches,
+  lanterns, and even an unreinforced casting of light will not affect it.
+
+//Overcharge — target// (one doubling, one further available):
+
+* x2 — press the gloom into one creature's eyes or worn visor. The darkness
+  seats as a burden: the target Saves or stands ''blinded'' (−6 attack, −4
+  Saves, −4 Defense, one-third speed) until the casting ends or is cancelled.
+  Remove the gear, drop the burden.
+* x4 — the blind holds until dispelled; its removal demands Level equal to or
+  above the caster's.
+
+See also: `Light` for the reverse; `Obscure` for the druid's mist.
 
 tags:
->   [power]
+> `[power]` `[shadow]` `[utility]` `[reversible]`
 
 meta:
 > - source:
 >   - becmi:Greyhawk; spell: Darkness
 >   - becmi:Holmes Basic; spell: Darkness
+>   - becmi:Rules Cyclopedia; spell: Darkness (reverse of Light, synthesized);
+>     rules: Blindness, Infravision
+>   - becmi:Basic Rules; rules: Light (dungeon procedures)
 > - usage:
->   - scope: power; id: Darkness; note: FTLS Chapter 06 alpha power entry.
+>   - scope: power; id: Darkness; note: reversible kin of `Light`; the kin mod
+>     (mods namespace) unlocks reverse-choice at each activation.
+```
 
 osr:
 [Greyhawk | gh-darkness]

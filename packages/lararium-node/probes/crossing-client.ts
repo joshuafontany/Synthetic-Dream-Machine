@@ -30,9 +30,9 @@ import { LarWSClientAdapter, ed25519SignerFromSeed } from "@lararium/mesh";
 import { KeyhiveProvider, InMemoryEventStore, foundCabalRealm } from "@lararium/keyhive";
 import type { LeafIdentity } from "../src/leaf-identity.js";
 
-const AUD = "lar:///ha.ka.ba/bags/@daemon";
-const WRONG_AUD = "lar:///ha.ka.ba/bags/@personal";     // a proof bound here must not cross the @daemon gate
-const GREETING_KEY = "lar:///ha.ka.ba/bags/@crossroads/greeting";
+const AUD = "lar:///ha.ka.ba/bags/daemon";
+const WRONG_AUD = "lar:///ha.ka.ba/bags/personal";     // a proof bound here must not cross the @daemon gate
+const GREETING_KEY = "lar:///ha.ka.ba/bags/crossroads/greeting";
 const envOf = (k: string, d = ""): string => process.env[k] ?? d;
 const SHARED = envOf("LAR_CROSSING_SHARED");
 const HOST   = envOf("LAR_CROSSING_DAEMON_HOST", "crossing-daemon");
@@ -116,7 +116,7 @@ async function main(): Promise<void> {
     const got = found.doc()?.tiddlers?.[GREETING_KEY]?.text;
     if (got !== GREET) { console.log(`[crossing-client] (admitted) ✗ content mismatch: "${String(got)}"`); process.exit(1); }
     console.log(`[crossing-client] (admitted) ✓ crossed + read the mesh: "${String(got)}"`);
-    found.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/@personal/reply"] = { text: "a citizen answers" }; });
+    found.change((d) => { d.tiddlers["lar:///ha.ka.ba/bags/personal/reply"] = { text: "a citizen answers" }; });
     await sleep(2_000);
     console.log(`[crossing-client] (admitted) ✓ CROSSING COMPLETE — a browser-shaped leaf breathes with the node`);
     process.exit(0);

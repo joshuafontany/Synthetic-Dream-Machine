@@ -27,8 +27,8 @@ import { BrowserVesselIslandPool } from "../src/browser-vessel-island-pool.js";
 
 const FIXTURE_URL = new URL("./fixtures/browser-sensorium-island.mjs", import.meta.url);
 
-const ISLAND_A = "lar:///ha.ka.ba/bags/@sense-worker-a";
-const STRANGER = "lar:///ha.ka.ba/bags/@sense-worker-stranger";
+const ISLAND_A = "lar:///ha.ka.ba/bags/sense-worker-a";
+const STRANGER = "lar:///ha.ka.ba/bags/sense-worker-stranger";
 
 const MOUNT_SPEC = {
   coreHash: null,

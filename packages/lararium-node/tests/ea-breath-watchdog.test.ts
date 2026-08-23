@@ -90,9 +90,9 @@ describe("openDaemonVmCore — the ea-breath watchdog", () => {
     // Breathe every 50ms for 400ms — far past the 150ms silence budget.
     for (let i = 0; i < 8; i++) {
       await sleep(50);
-      fw.emit(mkBreath("lar:///ha.ka.ba/bags/@daemon", "recipe"));
+      fw.emit(mkBreath("lar:///ha.ka.ba/bags/daemon", "recipe"));
     }
-    fw.emit(mkEa("lar:///ha.ka.ba/bags/@daemon"));
+    fw.emit(mkEa("lar:///ha.ka.ba/bags/daemon"));
 
     await expect(core.workerEa).resolves.toBeUndefined();
   });
@@ -102,7 +102,7 @@ describe("openDaemonVmCore — the ea-breath watchdog", () => {
 
     // Frozen (phase, progress) every 30ms — alive, never advancing.
     const breather = setInterval(
-      () => fw.emit(mkBreath("lar:///ha.ka.ba/bags/@daemon", "slots", 2)),
+      () => fw.emit(mkBreath("lar:///ha.ka.ba/bags/daemon", "slots", 2)),
       30,
     );
     cleanups.push(() => clearInterval(breather));
@@ -115,9 +115,9 @@ describe("openDaemonVmCore — the ea-breath watchdog", () => {
 
     for (let i = 0; i < 8; i++) {
       await sleep(40);
-      fw.emit(mkBreath("lar:///ha.ka.ba/bags/@daemon", "recipe", i + 1));
+      fw.emit(mkBreath("lar:///ha.ka.ba/bags/daemon", "recipe", i + 1));
     }
-    fw.emit(mkEa("lar:///ha.ka.ba/bags/@daemon"));
+    fw.emit(mkEa("lar:///ha.ka.ba/bags/daemon"));
 
     await expect(core.workerEa).resolves.toBeUndefined();
   });
@@ -125,8 +125,8 @@ describe("openDaemonVmCore — the ea-breath watchdog", () => {
   test("silence alone rejects, naming the last breath heard", async () => {
     const { core, fw } = openCore(120);
 
-    fw.emit(mkBreath("lar:///ha.ka.ba/bags/@daemon", "slots"));
-    fw.emit(mkBreath("lar:///ha.ka.ba/bags/@daemon", "tw5-boot"));
+    fw.emit(mkBreath("lar:///ha.ka.ba/bags/daemon", "slots"));
+    fw.emit(mkBreath("lar:///ha.ka.ba/bags/daemon", "tw5-boot"));
     // ...then breathing stops.
 
     await expect(core.workerEa).rejects.toThrow(/silence.*tw5-boot/s);

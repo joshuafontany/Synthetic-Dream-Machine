@@ -13,13 +13,13 @@ import { tmpdir } from "os";
 import { join, dirname } from "path";
 import { confineMirrorWrite } from "../src/bag-paths.js";
 
-const ROOT = "/srv/lar/bags/@lares";
+const ROOT = "/srv/lar/bags/lares";
 
 describe("disk ward — own-subdir confinement (default)", () => {
   test("a path under the mirror root passes", () => {
     const r = confineMirrorWrite(ROOT, "ha.ka.ba/lares/api/noosphere-boot.mem");
     expect(r.ok).toBe(true);
-    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+    if (r.ok) expect(r.path).toBe("/srv/lar/bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
   });
 
   test("dot-dot traversal out of the root refuses", () => {
@@ -28,7 +28,7 @@ describe("disk ward — own-subdir confinement (default)", () => {
   });
 
   test("deep traversal toward another bag refuses", () => {
-    const r = confineMirrorWrite(ROOT, "../../@lararium/poison.md");
+    const r = confineMirrorWrite(ROOT, "../../lararium/poison.md");
     expect(r.ok).toBe(false);
   });
 
@@ -39,7 +39,7 @@ describe("disk ward — own-subdir confinement (default)", () => {
 
   test("a sneaky mid-path dot-dot that stays inside passes; one that leaves refuses", () => {
     expect(confineMirrorWrite(ROOT, "api/../api/x.md").ok).toBe(true);
-    expect(confineMirrorWrite(ROOT, "api/../../../@sdm/x.md").ok).toBe(false);
+    expect(confineMirrorWrite(ROOT, "api/../../../sdm/x.md").ok).toBe(false);
   });
 
   test("writing the mirror root itself refuses", () => {
@@ -59,8 +59,8 @@ describe("disk ward — the widened grant (allowBagsRootFiles)", () => {
   });
 
   test("another bag's subdir refuses EVEN WITH the grant", () => {
-    expect(confineMirrorWrite(ROOT, "../../@lararium/poison.md", true).ok).toBe(false);
-    expect(confineMirrorWrite(ROOT, "../../@sdm/anything.md", true).ok).toBe(false);
+    expect(confineMirrorWrite(ROOT, "../../lararium/poison.md", true).ok).toBe(false);
+    expect(confineMirrorWrite(ROOT, "../../sdm/anything.md", true).ok).toBe(false);
   });
 
   test("escaping above the bags dir refuses EVEN WITH the grant", () => {
@@ -82,7 +82,7 @@ describe("disk ward — refusal signal (the alert chain's first link)", () => {
     const { LarDiskProjector } = await import("../src/disk-projector.js");
     const refusals: Array<{ bagId: string; uri: string; reason: string }> = [];
     const projector = new LarDiskProjector({
-      mirrors: [{ bagId: "@lares", mirrorRoot: "/srv/lar/bags/@lares" }],
+      mirrors: [{ bagId: "lares", mirrorRoot: "/srv/lar/bags/lares" }],
       // The ONE render shore — the ward still guards a malicious title: the path
       // derives from the URI (`carrierBaseRelPath`), so a `../`-laden title
       // escapes the root and the confinement ward refuses it.
@@ -91,9 +91,9 @@ describe("disk ward — refusal signal (the alert chain's first link)", () => {
       onRefusal: (info) => refusals.push(info),
     });
     await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
-      .flush("@lares", "lar:///ha.ka.ba/x/../../../../../../@sdm/poison");
+      .flush("lares", "lar:///ha.ka.ba/x/../../../../../../sdm/poison");
     expect(refusals).toHaveLength(1);
-    expect(refusals[0]?.bagId).toBe("@lares");
+    expect(refusals[0]?.bagId).toBe("lares");
     expect(refusals[0]?.reason).toMatch(/escapes mirror root/);
   });
 });
@@ -107,18 +107,18 @@ describe("disk ward — cross-mirror stale-unlink guards on PATH, not bag", () =
       // to the identical file (the path derives from the URI alone now). The
       // second mirror's stale-unlink must NOT delete the file the first just
       // wrote — the path guard (stale === candidate) skips it.
-      const uri = "lar:///ha.ka.ba/bags/@x/note";
-      const rel = "ha.ka.ba/bags/@x/note.mem";
+      const uri = "lar:///ha.ka.ba/bags/x/note";
+      const rel = "ha.ka.ba/bags/x/note.mem";
       const projector = new LarDiskProjector({
         mirrors: [
-          { bagId: "@a", mirrorRoot: root },
-          { bagId: "@b", mirrorRoot: root },
+          { bagId: "a", mirrorRoot: root },
+          { bagId: "b", mirrorRoot: root },
         ],
         carrierFileFn: async () => ({ ext: ".mem", body: "the carrier body" }),
         debounceMs: 1,
       });
       await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
-        .flush("@a", uri);
+        .flush("a", uri);
       expect(existsSync(join(root, rel))).toBe(true);
     } finally {
       rmSync(root, { recursive: true, force: true });
@@ -135,11 +135,11 @@ describe("disk ward — a working edit SHADOWS its canon copy, never deletes it"
       // Post-collapse the PLANE lives in the mirrorRoot (bags/ vs wikis/); the
       // relPath (the name) is identical under each root — exactly the production
       // shape. The canon root and the working root are DIFFERENT dirs.
-      const canonRoot   = join(root, "bags", "@lares");
-      const workingRoot = join(root, "wikis", "@lares");
+      const canonRoot   = join(root, "bags", "lares");
+      const workingRoot = join(root, "wikis", "lares");
       const rel         = "ha.ka.ba/lares/api/noosphere-boot.mem";
-      const CANON   = "lar:///ha.ka.ba/bags/@lares";
-      const WORKING = "lar:///ha.ka.ba/wikis/@lares/working";
+      const CANON   = "lar:///ha.ka.ba/bags/lares";
+      const WORKING = "lar:///ha.ka.ba/wikis/lares/working";
       // The canon file — the read-only boot-seed source — sits on disk.
       mkdirSync(dirname(join(canonRoot, rel)), { recursive: true });
       writeFileSync(join(canonRoot, rel), "the boot seed", "utf-8");

@@ -56,7 +56,7 @@ import { personaScopedBagIds } from "./persona-scope.js";
  * registered as a doc that cannot resolve.
  *
  * IT ADMITS ONLY BAGS. The catalog holds other kinds keyed the same way — a wiki slot's per-device draft
- * pointer is a `wikis/@slug/drafts/<did>` title whose text is an automerge url, indistinguishable from a
+ * pointer is a `wikis/slug/drafts/<did>` title whose text is an automerge url, indistinguishable from a
  * bag entry by shape alone. Registering one mints a Keyhive Document for a thing that is not a bag, and
  * nothing throws. A reader that walks a registry and takes every entry for its own kind will register
  * whatever else was written there, and something else is always written there.

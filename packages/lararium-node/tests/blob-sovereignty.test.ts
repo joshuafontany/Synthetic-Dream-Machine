@@ -29,7 +29,7 @@ const __dir       = dirname(fileURLToPath(import.meta.url));
 const GENESIS_BIN = join(__dir, "../../../genesis/island.bin");
 const ISLAND_JS   = new URL("../dist/src/node-wiki-island.js", import.meta.url);
 
-const WIKI_ID = "lar:///ha.ka.ba/bags/@test/blob-sovereignty-wiki";
+const WIKI_ID = "lar:///ha.ka.ba/bags/test/blob-sovereignty-wiki";
 const TIMEOUT = 30_000;
 
 // Skip the entire suite when build artifacts are absent rather than silently

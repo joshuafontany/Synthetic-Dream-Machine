@@ -19,8 +19,8 @@
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
-const CAT_BAG = "lar:///ha.ka.ba/bags/@witness-cat";
-const ORC_BAG = "lar:///ha.ka.ba/bags/@witness-orc";
+const CAT_BAG = "lar:///ha.ka.ba/bags/witness-cat";
+const ORC_BAG = "lar:///ha.ka.ba/bags/witness-orc";
 
 let lar: LarInstance;
 let catDocUrl = "";
@@ -60,7 +60,7 @@ describe("residency CREATE — mint + register + plane-aware gate (staged witnes
   }, 90_000);
 
   // ── --dry-run / preview: see the projected effect, commit NOTHING ──────────
-  const DRY_BAG = "lar:///ha.ka.ba/bags/@witness-dry";
+  const DRY_BAG = "lar:///ha.ka.ba/bags/witness-dry";
 
   test("D1 — CREATE --dry-run reports the projected effect (and needs no --yes)", async () => {
     if (lar.mode !== "staged") return;

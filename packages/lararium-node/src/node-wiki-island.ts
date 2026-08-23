@@ -7,11 +7,11 @@
  *
  * Recipe expansion (top wins; assembled by buildIslandRecipe) — per-wiki live
  * layers above, canon + libraries + floor below:
- *   wikis/@{slug}/temp     (volatile per-island)
- *   wikis/@{slug}/draft    (CRDT, drafts)
- *   wikis/@{slug}/personal (CRDT, cross-device view state)
- *   wikis/@{slug}/working  (CRDT, operator's saved edits route here)
- *   bags/@{slug}           (CRDT, the wiki's canon; read-only, promotion target)
+ *   wikis/{slug}/temp     (volatile per-island)
+ *   wikis/{slug}/draft    (CRDT, drafts)
+ *   wikis/{slug}/personal (CRDT, cross-device view state)
+ *   wikis/{slug}/working  (CRDT, operator's saved edits route here)
+ *   bags/{slug}           (CRDT, the wiki's canon; read-only, promotion target)
  *   libraryBags            (CRDT, optional content libraries: @lararium + @lares)
  *   @oracle                (CRDT, engine core + plugins — the universal floor)
  *

@@ -34,7 +34,7 @@ import { BrowserVesselIslandPool }   from "../src/browser-vessel-island-pool.js"
 
 const FIXTURE_WORKER_URL = new URL("./fixtures/browser-verb-island.mjs", import.meta.url);
 
-const WIKI_ID    = "lar:///ha.ka.ba/bags/@test/browser-verb-breathing";
+const WIKI_ID    = "lar:///ha.ka.ba/bags/test/browser-verb-breathing";
 const BUTTON_URI = "lar:///test/instances/move-button-1";
 
 // The shared verb→event contract — the SAME battery the node real-TW5 island runs.

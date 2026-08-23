@@ -1,0 +1,328 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+```toml iam
+cacheable  = false
+confidence = 7
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/campaign/high-delos-cabaret.mem"
+l-space    = "adjacent"
+mana       = 13
+manao      = 13
+manaoio    = 12
+rating     = "ano"
+register   = "Provisional"
+retain     = true
+role       = "actual-play locus for Session 0.1 — the High Delos cabaret scene; venue, cast, and lifepath-flow scaffold now, the played record as it lands; player-safe by construction, nothing kapu ever drafts here"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/campaign/high-delos-cabaret"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The House of Masks ~ Session 0.1 Actual Play
+
+''The actual-play locus for Session 0.1'' of the campaign arc — ''Alpha Playtest: Caverns of
+Neo-Thracia''. A flashback scene: the first meeting of the assembled company and the Lindwyrm,
+played before the departure the the Salt-Stair booth (`lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth`) reports as already
+underway. This locus holds the scaffold now — venue, cast, intent, the lifepath flows — and
+receives the played record as the table generates it, in the witness pattern the shelf already
+runs: operator turns as literal witness blocks, Lares turns verbatim, narrator segues marked
+for later fleshing.
+
+''One island of three.'' This locus serves the ''Actual-Play Lares'' — the event-voice island of
+the Session 0.1 braid. Two sibling sessions run in parallel on their own causal islands: ''the
+Referee's Second'' (prep, provisional-first) and ''the Painter of Words and Light'' (renders,
+provisional-first). Text crosses islands only in human hands; arrivals read as
+operator-introduced; the braid law rides at
+`lar:///ha.ka.ba/lares/api/pono/braided-islands` and the reds at
+[[session-0-1-handoff-prompts|session-0-1-handoff-prompts.md]]. A session standing this locus
+without its red still stands the braid.
+
+''Player-safe by construction.'' The players sit at this table, so this locus carries rating
+`ano` (the table's own collective record) and ''nothing rated `kapu` ever drafts here'' —
+referee-side threads point at their own seats without content. The spoiler-boundary sits at the
+draft, not the render, because the readers are the players.
+
+''Timeline seat.'' This scene sits ''earlier on the worldline'' than the Salt-Stair booth. The
+campaign present reads ''YOLD 5492'' (Elyncia_01 canon); the flashback's exact day and season stay
+the operator's hand, so stamps ride Provisional witness until seated. No global now — the
+flashback's stamp answers to its own log, not the booth's.
+
+<<~/ahu >>
+
+<<~ ahu #venue >>
+
+!! The Venue ~ The House of Masks
+
+''The House of Masks'' — an intimate Dionysian cabaret main room with a large stage, seated within
+a ''maze-like Inn'' near the main lifts — the magitech elevators — of ''High Delos'', one of the
+primary sky islands. The Inn stands as the levitated House of Masks of old Delos's Theatre
+Quarter: a maze-block merchant house — shops, workshops, and living quarters in one building —
+its rooms floored with theatrical-mask mosaics. Under the late Empire this room hid an illegal
+speakeasy, and when the Lindwyrm raised the holy sites in YOLD 5002 the whole house rode the
+levitation up, cellar secrets intact. The cabaret's main floor keeps the masterwork the speakeasy
+hid under boards through five centuries of Empire and flight: ''Dionysos in flowing oriental
+garb, seated on a panther''. The old trade's bones remain in the architecture — the doors that
+count their guests, the sightlines that favor the booths, the second way out of everywhere.
+(Gaia's Delos holds the same house in ruin; the resonance crossed the void intact.)
+
+''The levitation took the neighborhood whole'' — cellars, bones, smuggler-works and all; most of
+the island surfaces around Delos rose the same day, and the Patroness surprised everyone. So the
+speakeasy's Empire-cut works thread the underside of the sky-island like roots under a lifted
+lawn — and the whisper-trade holds (the house neither confirms, denies, nor stops finding useful)
+that the Masks control private lifts, passages, gates, pneumatic tubes, and other liminal ways:
+to Low Delos, to the Docks, down past the lower layers into the dungeon wilds — and some say,
+after the third cup, to nearby places in neighboring Nexuses. The rumors do half the security
+work. The old low door by stage-left stays oiled, barred, and breathing sea-air at altitude.
+
+''The management:'' Inn and Cabaret both run under the ''Order of Amaranth''. The room serves as
+trusted neutral ground for meetings between the Order's agents, the Adventurer's Guild, the
+Amorphous Dreams Cabal, ''the Lindwyrm herself-as-faction'', and the various guilds, companies,
+cabals, and independent operators of the sky city. Neutral ground under a flower that never fades:
+everyone knows whose floor it is, and that knowing keeps the peace better than any ward.
+
+!!! The Genre Compass ~ four taverns, one braid
+
+The room's tone braids four lineages, each contributing a law:
+
+| Lineage | The law it contributes |
+|---|---|
+| ''Callahan's Place'' (Spider Robinson) | Shared pain is lessened, shared joy increased — the hospitality floor; puns as liturgy; the room heals sideways, never by interrogation |
+| ''Tales From the Floating Vagabond'' | The door admits ANY genre and the bar absorbs it — gonzo arrivals normalized by staff who have seen stranger |
+| ''The Vulgar Unicorn'' (Thieves' World) | Neutral-ground-with-knives — faction intrigue runs under every table; the peace holds BECAUSE everyone came armed and everyone knows it |
+| ''The Draco Tavern'' (Niven) | Enormous things discussed calmly at small tables — the barkeep's-eye view; civilizational stakes at conversation volume |
+
+The braid, stated once: ''a warm floor over deep water.'' The cabaret entertains genuinely, the
+staff cares genuinely, the puns land genuinely — and the room also happens to hold, on any given
+night, enough faction weight to tilt the sky island. Both truths stand; neither apologizes.
+
+<<~/ahu >>
+
+<<~ ahu #summit-week >>
+
+!! The Summit Week ~ why the room is full
+
+''The broadcast.'' Two months back, the Patroness sent word out to the other Nexuses — to the
+Factions: an all-expenses-paid week's holiday at the House of Masks for any Factional
+representative willing to hear an offer of contract with the Lindwyrm's partner company, ''the
+Adventurer's Guild''. The representatives arrived this week. The cabaret's floor holds a summit
+wearing a party.
+
+''The missions fork.'' The player-daemon PCs carry the special sub-mission — Neo-Thracia. The
+other Factions' representatives receive other missions; their tables, toasts, and quiet
+negotiations dress the whole scene, and each rep in the room carries somewhere else to go.
+
+''Aki came early.'' Four weeks before the summit: the first week touring the holy sites of High
+Delos (and, by night, the vertical surfaces — chitin remembers what marble forgets), the next
+three learning the new polyglot culture. By summit week she reads as the room's most acclimated
+stranger.
+
+<<~/ahu >>
+
+<<~ ahu #cast >>
+
+!! The Cast
+
+''The house:''
+
+* ''The local Lares instances'' — serving the patrons; the room's spirits know the regulars'
+  cups and the strangers' tells. They speak in the house's manner: warm, exact, never anonymous.
+* ''The faerie-folk staff'' — various fae; ''some deep agents of the Order'', others hired staff
+  whose allegiance runs to the Order plain and shallow. Which are which stays a floor game the
+  patrons lose politely.
+* ''The patrons'' — the faction list above plus the public: guild tables, company crews, cabal
+  couriers, lift-workers off shift, and whoever the maze admitted tonight.
+
+''The principals:''
+
+* ''Telarus, KSC'' — Arch-Sorcerer & Guru, Amorphous Dreams Cabal. Present in a private booth,
+  ''waiting''. Pours before speaking, per his file.
+* ''The Lindwyrm'' — ''yet to arrive.'' Humanoid dragon-kin form, ''mana-muting glamour on'' —
+  the High Delos entrance, quiet where the Salt-Stair crossing flared the dish blue-white.
+  A Great Dragon choosing to arrive at conversation-volume: the Draco Tavern law, worn as couture.
+
+''The company (Alpha playtest PC + associated NPC cast):''
+
+* ''Aki'' and ''Ichi'' (Freyja) — Lady Aki, wizard of the Shattered Isles, and Ichi, her
+  construct-golem companion. Sheets near-final (the combat reconciliation stands enacted);
+  Ichi seated with the booth party.
+* ''The Gorgoness wave-jammer captain'' (Liv) — bard · swashbuckler · gunslinger; the paired
+  rings that drink her serpent-spirit energy and fire it as bolts. ''Seated with Telarus, the
+  PCs, and Ichi.'' Her ''gorgone(ss) crew'' holds a cluster of tables in the general audience —
+  the ship drinks together.
+* ''The prismatic elf'' (Kai) — kaiju-tracker / arcane-ranger out of the Shattered Isles'
+  mushroom jungles and other chaotic-climate regions. Quiet, reserved; glowing prismatic
+  ''softly'' as she enjoys the show — the glow answers the music before she would admit to.
+  ''Her Cat'' — fully geared for quick action — ''perches on the roof of the Inn, unnerving
+  passers-by.'' The Cat does not attend cabarets. The Cat attends the exits.
+* ''The ninja'' (Monty) — changeling-human youth, late twenties, and her ''Husky companion''.
+  ''Both start offscreen.'' The entrance belongs to the table.
+* ''Rhea the Moon Elf'' (Freyja's NPC, GM record) — Level 7 Combat-Rogue/Artificer, the
+  Dragoness's intelligence-mistress; full notes at
+  `lar:///ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf` (@elyncia-referee). Her network's Neo-Thracian intel of the last
+  two months underlies the summit's timing.
+
+<<~/ahu >>
+
+<<~ ahu #casting >>
+
+!! Casting ~ the render sheet
+
+//(Specification-grade appearance lines, carried verbatim from the heritage canon (FTLS Ch03) and
+the character packages — V8.2 wants literal materials, colors, and light. Full workflow, sources,
+and prompt anatomy: [[session-0-1-render-research|session-0-1-render-research.md]].)//
+
+''Master style clause (verbatim, use whole):'' "orichalcum mythpunk: Bronze Age prestige lacquered
+over strange telecom, divine engineering, and impossible logistics." Venue vocabulary: //salon ·
+soirée · mirrored sky-dome · voidjammer lounge · crystal ballroom//. Render laws: awe-then-deflation
+(compose grand, plant one precise mundane object) · deep time as fashion strata (décor layered like
+the fresco-over-fresco walls) · ragged edges beat machine polish · no winking, ever.
+
+''The floor and stage (staff & acts):''
+* ''Faun host'' — "goat or deer legs, small curling horns, freckles like dappled sunlight; garlands
+  of ivy, bells, or cork-wood pipes"
+* ''Cat Lord management'' — "mythic cats with jewel-bright eyes, prehensile paws, and sometimes a
+  serpent as a tail coiled like jewelry"
+* ''Pixie waitstaff'' — "wings from dragonfly-glass to neon-etched gossamer; clothes stitched from
+  leaves, circuitry, or salvaged glamour"
+* ''Glow Kin stagehands'' — "soft glow along gills and freckles; cap-crowns like mantles; filament
+  'hair'; spore halos in cold air"
+* ''Bat Folk echo-singer'' (the torch act) — "slender bodies, oversized ears, dusk-coloured fur,
+  eyes that catch stray gleams like polished stone"
+* ''Porcelain Prince chorus line'' — "multiple identical bodies in porcelain masks and lacquered
+  armor… visible cracks and kintsugi-style repairs that make them eerily beautiful" — one performer,
+  many bodies, perfectly synchronized
+* ''Frog Folk chorus'' — "pale mint to deep obsidian green… eyes reflect moonlight like still
+  ponds… skin may pulse with bioluminescence during strong emotions"
+* ''Spider Folk silk-aerialists'' — "human faces with ocular clusters shimmering like dew"
+* ''Hobgoblin door-drill'' — "riotous colours, turning drill into festival"; lacquer masks
+* ''Crystal Court goblin jugglers'' — "skin like tarnished copper or sea-glass; glitter-ink
+  tattoos that rewrite themselves when nobody looks"
+
+''The tables (patrons):''
+* ''Elf salon-goers'' — "angular beauty, void-shadowed eyes, hair like moonlit ink or starlit fire"
+* ''Spectrum Satrap emissaries'' — "bright-colored suits… glass helmets… skin and carapace shimmer
+  from mother-of-pearl to oil-slick black; eyes like cut gems"
+* ''Dragonborn envoys'' — "scales of chroma-sheen or hammered metal; ember eyes; some bear
+  wing-stubs, some spined crests"
+* ''Gorgonne crew'' (blessed canon) — beautiful-Medusa faces, serpent braids dressed with
+  coin-rings, small bronze wing-vestiges at the temples, smoked-glass gaze-spectacles
+* ''Guild navigators'' (Melantha-pattern) — "black voidsilk, saffron braid, helm-link filaments;
+  bronze-sun scales etched with tide formulae"; Ray-Bane status spectacles
+
+''Principals:''
+* ''Lady Aki'' — public glamour: "red and white shrine workwear; silksteel ritual robe layers;
+  wide-brimmed ichimegasa with uchikatsugi-style veil; shrine bells, ofuda, spinneret tools, and
+  soft faerie glamour." Palette: "red and white miko robes, purple outer cloth, iridescent chitin,
+  orange mycelium glow, blue Ephyra glass." ''Honor the written negatives'' (concept-art package):
+  no hypersexual framing, no generic witch hat, no modern sci-fi armor.
+* ''Ichi'' — "hexagonal kikko-pattern plates of alchemically treated chitin — iridescent
+  beetle-shell blues and greens… joins pulse with faint orange bioluminescent tracery"; open-faced
+  sergeant's kabuto, "two glowing yellow-orange orbs"
+* ''The Lindwyrm'' — public boards keep her ''deliberately impressionistic'' (witnesses disagree
+  by canon); any render fixing her form routes through the operator first
+* ''Telarus, KSC'' — ''no physical canon stands''; renders of him wait on the operator's hand
+* ''Kai's prismatic elf · Monty's changeling · the Cat · the Husky'' — lifepaths open; render
+  after their sheets close, not before
+
+<<~/ahu >>
+
+<<~ ahu #intent >>
+
+!! Session Intent ~ character sheets by lifepath, co-narrated
+
+''The work of Session 0.1:'' finish the character sheets for all player-daemon PCs and their
+hallmark items / companions — ''in-fiction'', by talk-story. The method: a ''lifepath-life''
+walk (the Central Casting flow-tradition, Jennell Jaquays) run as co-narration inside the scene:
+each character's history unfolds AS cabaret — a conversation in the booth, a story told over the
+rail, a number on the stage that turns out to be about someone in the audience. Operator input
+rides as ''Joshu/Telarus''; the players speak their own; the Lares co-narrate and keep the room.
+
+''Order of work:'' Ichi closes first with Freyja, then Aki; the others follow as the story calls
+them up. The session's Gaia date: 2026-08-15 (provisional) — Boomtime, Bureaucracy 8, YOLD 3192.
+The Elyncia stamp, thrown on the Discordian Oracle and riding Provisional until ratified:
+''Prickle-Prickle, Bureaucracy 50, YOLD 5492''. Session omen (E-Jing throw, no changing lines):
+''Hexagram 45 ~ Gathering Together'' — the table may re-throw live on the AppleKation.
+
+''Mechanical anchors'' (verify at table, never assume):
+
+* SDM Level 1 baselines per the Quickstart: Life 4 + 4/level · trait slots 7 + Thought ·
+  item slots 7 + Strength · Defense 7 + ability + Skill + Ward · saves on Endurance/Aura.
+* Aki L2 sheet stands reconciled; Ichi stands enacted (Life 12, THT-based defenses, flexible
+  Inner Fire slots). Confirm at table; the sheets close here.
+* The Gorgoness ''craft-sheet'' (the wave-jammer vessel) stands absent from the repo — this
+  session births it or names its debt. The Vale river-rule verification waits on it.
+* Kai's elf and Monty's ninja carry the most open lifepath: origins, capabilities, hallmarks —
+  and the two companions (''the Cat'', ''the Husky'') seat as hallmark-companions with their
+  own small statlines.
+
+!!! The Lifepath Flows ~ per character, sketched
+
+Each flow runs Central-Casting style — origin · shaping events · the turn · the reason-you-sail —
+prompted in-scene, answered in-voice, written to the sheet as it lands:
+
+* ''The Gorgoness captain:'' where the wave-jammer came from; how the crew chose her (or she
+  them); what the rings cost and what they were before; why a bard's tongue in a gunslinger's
+  holster. Her player's great-house airship history rides as resonance, never as script.
+* ''The prismatic elf:'' the mushroom jungles and the chaotic-climate ranges; the first kaiju
+  she tracked and the one she declines to speak of; where the prismatic glow entered the line;
+  how the Cat adopted her (the direction of adoption stays hers to correct); why the deep dark
+  under a Vale calls to a creature of wild light.
+* ''The ninja:'' the gentlest flow at the table — a first-time player walks it. Changeling-human,
+  late twenties, a Husky at her heel; the genre-bent Shadow seed (quiet blade, loyal dog, a past
+  that arrives in fragments only when she chooses). The flow offers doors, never demands rooms:
+  every prompt answerable with an image, a yes, or a pass.
+* ''Aki & Ichi:'' closure pass — the lifepath already lived in play; the session confirms the
+  last blanks (hallmarks, bond-details, the grimoire's fresh rites) rather than re-walking it.
+
+<<~/ahu >>
+
+<<~ ahu #format >>
+
+!! Capture Format
+
+The played record lands in this locus using the shelf's witness pattern
+([[salt-stair-booth|salt-stair-booth.md]] sets the precedent):
+
+* ''Operator/player turns'' — literal witness blocks, fenced, labeled by speaker; interpretive
+  narrator segues above them, marked for later fleshing.
+* ''Lares turns'' — verbatim as generated, frames whole.
+* ''Witness stamps'' — `YOLD 5492` Provisional (day and season per the operator), per the no-global-now law; each stamp answers
+  to its own log.
+* ''Render path'' — the DreamDeck feed law
+  (`lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture`) governs any later
+  feed render; the cabaret's open floor maps to the open stratum, the private booth to `data`.
+  Nothing here ever needs a kapu stratum — see #head.
+
+<<~/ahu >>
+
+<<~ ahu #open-forks >>
+
+!! Open Forks (operator's + table's hands)
+
+* ''The flashback's day and season'' — the oracle-thrown proposal rides the table: Bureaucracy 50,
+  YOLD 5492, Provisional until ratified. Elyncia weekday names stay open beside it (canon shows
+  ''Zaraday'' at YOLD 5002 — the Gaian five, or a local ring?).
+* ''Monty's entrance'' — played live or narrated in; the flow holds both doors open.
+* ''The Cat and the Husky'' — hallmark-companion statline shape (one shared template, or two
+  bespoke small sheets).
+* ''The wave-jammer craft-sheet'' — born this session, or seated as a named debt.
+* ''The arc's name'' — this locus and the Salt-Stair booth both stand flat on the shelf until
+  the campaign-era arc earns its room and name.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;xS164pvpX0XM-_GYCVhozyndR-Z5eDGTs9pRoAXrrdw
+
+<<^ code:"&#x0004;" -> ? >>

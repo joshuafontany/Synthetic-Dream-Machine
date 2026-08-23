@@ -6,7 +6,7 @@
  *
  * Node-specific shores (only these belong here):
  *   - Repo + NodeFSStorageAdapter over the vessel store (the offline board-doc access, mirroring device-admit)
- *   - readNexusDoc off `bags/@nexus` (the roster's authority home) → foundingRoster
+ *   - readNexusDoc off `bags/nexus` (the roster's authority home) → foundingRoster
  *   - listPersonaRoots / generateOrLoadPersonaGroupRoot / loadPersonaGroupRootSeed (founder-held signing seeds)
  *   - loadVesselVerifyingKey (the node's own gate key — the board's per-island deterministic address seed)
  *

@@ -10,7 +10,7 @@
  *
  * THE MEMBER SET = the seated-KAHU floor ∪ the folded operator MEMBERS-registry (members{}). Two sources,
  * unioned, each fail-closed:
- *   · the seated-kahu FLOOR — the founding-kahu charter ROSTER read off `bags/@nexus` (`seatedKahuKeys`).
+ *   · the seated-kahu FLOOR — the founding-kahu charter ROSTER read off `bags/nexus` (`seatedKahuKeys`).
  *     Every seated kahu IS a contracted member (a strict subset), so it stands even when the members board is
  *     empty / unsynced — the conservative floor that never over-grants.
  *   · the MEMBERS-registry — the quorum-signed, contract-in members{} board (the antigen's ALLOW-twin), folded

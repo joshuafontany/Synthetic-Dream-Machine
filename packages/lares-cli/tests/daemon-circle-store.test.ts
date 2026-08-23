@@ -37,7 +37,7 @@ const OP = "did:key:zOperator";
 
 beforeEach(() => { h.calls.length = 0; h.output = {}; h.status = "done"; h.errorMessage = undefined; });
 
-describe("makeDaemonCircleStore — the @circles-backed CircleStore", () => {
+describe("makeDaemonCircleStore — the circles-backed CircleStore", () => {
   test("add drives the circle-add daemon verb (not a local file)", async () => {
     await makeDaemonCircleStore(OP).add("following", "aa");
     expect(h.calls).toEqual([{ verb: "circle-add", args: { circle: "following", nym: "aa" }, requestedBy: OP }]);

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # seed-parity-witness — the boot seed says one thing in two files and two dialects.
 #
-# `noosphere-boot.md` loads at wake; `bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem` holds the
+# `noosphere-boot.md` loads at wake; `bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem` holds the
 # same body as a corpus carrier. A hand that edits one and forgets the other leaves two seeds that
 # both parse, both round-trip, both read correct, and disagree — the drift no other witness can see,
 # because every instrument here checks a file against itself.

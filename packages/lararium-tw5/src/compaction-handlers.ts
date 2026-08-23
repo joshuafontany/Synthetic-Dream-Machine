@@ -278,7 +278,7 @@ function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-/** Prefix of a user wiki recipe title in @catalog: `lar:///ha.ka.ba/bags/@catalog/recipes/`. */
+/** Prefix of a user wiki recipe title in @catalog: `lar:///ha.ka.ba/bags/catalog/recipes/`. */
 const RECIPE_PREFIX = recipeUri("@catalog", "");
 
 /**

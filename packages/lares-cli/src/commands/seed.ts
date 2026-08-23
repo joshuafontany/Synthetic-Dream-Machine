@@ -32,8 +32,8 @@ const SYSTEM_HOLDINGS = new Set(["@lares", "@lararium"]);
 
 export interface SeedHolding {
   readonly holding: string;               // "@lares"
-  readonly source: string;                // "<root>/bags/@lares"
-  readonly toBag: string;                 // "lar:///ha.ka.ba/bags/@lares"
+  readonly source: string;                // "<root>/bags/lares"
+  readonly toBag: string;                 // "lar:///ha.ka.ba/bags/lares"
   readonly gesture: "ingest" | "load";    // the kind-route taken
   readonly exitCode: number;              // the gesture's verdict for this holding
 }
@@ -43,12 +43,15 @@ export function discoverHoldings(root: string): Array<{ holding: string; source:
   const bagsDir = join(root, "bags");
   let names: string[] = [];
   try {
-    names = readdirSync(bagsDir).filter((n) => n.startsWith("@") && statSync(join(bagsDir, n)).isDirectory());
+    // EVERY DIRECTORY UNDER bags/ IS A HOLDING. The kind-plane segment above already says these are bags,
+    // so the entity name carries no marker of its own — and a filter demanding one matches nothing, returns
+    // an empty roster, and seeds silently with a clean exit.
+    names = readdirSync(bagsDir).filter((n) => !n.startsWith(".") && statSync(join(bagsDir, n)).isDirectory());
   } catch { return []; }
   return names.sort().map((holding) => ({
     holding,
     source: join(bagsDir, holding),
-    // The disk dir `@elyncia` names bag `bags/@elyncia` — mint through bagUri so the seed
+    // The disk dir `@elyncia` names bag `bags/elyncia` — mint through bagUri so the seed
     // targets the bag the daemon registers.
     toBag: bagUri(holding),
   }));

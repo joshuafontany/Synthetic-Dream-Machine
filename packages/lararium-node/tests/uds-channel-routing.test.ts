@@ -3,11 +3,11 @@
  *
  * The routing law (project_dreamnet_resolution_design, operator 2026-07-20): a
  * co-located `lares` invocation hands its carriers to the daemon worker over the
- * DIRECT channel (placeVerb → postMessage); the @daemon Automerge doc receives
+ * DIRECT channel (placeVerb → postMessage); the daemon Automerge doc receives
  * ONLY the durable outcome/receipt, NEVER the carrier content. This test drives a
  * real UDS socket with a spy placeVerb standing in for the worker (it lands the
- * carriers in a TARGET bag doc + writes the outcome to @daemon, exactly as the
- * dispatcher does) and asserts the content never touches @daemon.
+ * carriers in a TARGET bag doc + writes the outcome to daemon, exactly as the
+ * dispatcher does) and asserts the content never touches daemon.
  */
 
 import { describe, test, expect } from "vitest";
@@ -47,8 +47,8 @@ async function waitForSocket(path: string): Promise<void> {
   throw new Error(`socket never appeared at ${path}`);
 }
 
-describe("uds-channel — carriers bypass the @daemon doc (co-located routing)", () => {
-  test("content rides placeVerb to the target bag; @daemon holds only the outcome", async () => {
+describe("uds-channel — carriers bypass the daemon doc (co-located routing)", () => {
+  test("content rides placeVerb to the target bag; daemon holds only the outcome", async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const daemonHandle = repo.create<LarDoc>(emptyLarDoc());
     const targetHandle = repo.create<LarDoc>(emptyLarDoc());
@@ -56,15 +56,15 @@ describe("uds-channel — carriers bypass the @daemon doc (co-located routing)",
     const dir = mkdtempSync(join(tmpdir(), "uds-routing-"));
     const socketPath = join(dir, "lares.sock");
 
-    const CARRIER_URI = "lar:///ha.ka.ba/bags/@target/doc/manifesto";
-    const CARRIER_BODY = "THE-WHOLE-CARRIER-BODY-that-must-never-touch-@daemon";
+    const CARRIER_URI = "lar:///ha.ka.ba/bags/target/doc/manifesto";
+    const CARRIER_BODY = "THE-WHOLE-CARRIER-BODY-that-must-never-touch-daemon";
     const placed: Placed[] = [];
 
     const channel = startUdsChannel({
       daemonHandle,
       // Stand in for the daemon worker: land the carriers in the TARGET bag (as the
       // dispatcher's executeIngest does via access.write(destBag)), then write the
-      // durable outcome into @daemon — the ONLY thing @daemon's doc ever sees.
+      // durable outcome into daemon — the ONLY thing daemon's doc ever sees.
       placeVerb: (o) => {
         placed.push(o as Placed);
         const carriers = (o.args["carriers"] as Array<{ uri: string; text: string }> | undefined) ?? [];
@@ -100,12 +100,12 @@ describe("uds-channel — carriers bypass the @daemon doc (co-located routing)",
       expect(placed).toHaveLength(1);
       expect((placed[0].args["carriers"] as Array<{ text: string }>)[0].text).toBe(CARRIER_BODY);
 
-      // @daemon's doc carries the outcome/receipt — and NO summons.
+      // daemon's doc carries the outcome/receipt — and NO summons.
       const daemonTitles = Object.keys(daemonHandle.doc().tiddlers);
       expect(daemonTitles.some((t) => t.startsWith(SUMMONS_URI_PREFIX))).toBe(false);
       expect(daemonTitles.some((t) => t.startsWith(OUTCOME_URI_PREFIX))).toBe(true);
 
-      // The whole @daemon doc — history included via the live doc — carries ZERO carrier content.
+      // The whole daemon doc — history included via the live doc — carries ZERO carrier content.
       expect(JSON.stringify(daemonHandle.doc())).not.toContain(CARRIER_BODY);
 
       // The carrier landed in the TARGET bag exactly.

@@ -1,0 +1,245 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/company-structure >>
+```toml iam
+cacheable  = true
+confidence = 13
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/campaign/company-structure.mem"
+l-space    = "stable"
+mana       = 13
+manao      = 13
+manaoio    = 13
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "campaign sidebar — Alpha Playtest company structure and multi-PC play"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/campaign/company-structure"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Sidebar ~ Company Structure & Multi-PC Play
+
+//Migrated verbatim from `elyncia/Shattered Isles/Sidebar_Alpha_Playtest_Company_Structure_and_Multi_PC_Play.md` (2026-08-14); md→wikitext conversion mechanical — prose
+untouched; md table separator rows dropped.//
+
+<<~/ahu >>
+
+<<~ ahu #body >>
+
+! Sidebar — Alpha Playtest Company Structure and Multi-PC Play v3
+
+!! Purpose
+
+This sidebar displays the ''full player-side company'' for the FTLS/SDM+ alpha playtest in Neo-Thracia. It separates table authority, player-daemon control, primary characters, Hallmark companions, sentient infrastructure, tasked spirits, crew assets, and cargo buckets.
+
+The campaign uses an ''advanced multi-PC setup'': each player-daemon may run a Primary Character plus one or more sidekick/Hallmark assets, while Telarus referees the world, opposition, neutral parties, faction pressure, and most company-adjacent mook NPCs.
+
+---
+
+!! Telarus
+
+''Role:'' Referee, Game Designer, Wild Mage
+
+Telarus controls:
+* mook NPCs attached to the company or encountered in play,
+* factions,
+* ruins,
+* environments,
+* logistics pressure,
+* politics,
+* DreamNet pressures,
+* hostile and neutral actors,
+* ordinary reactions from Neo-Thracian locals, outsiders, cults, patrols, and institutions.
+
+Telarus does ''not'' use the player-side company to solve problems for the players. Referee-controlled allies create pressure, complications, opportunities, and continuity; player-daemons make the expedition’s load-bearing decisions.
+
+---
+
+!! Player-Side Company at a Glance
+
+| Player-Daemon / Seat | Primary Character | Hallmark / Sidekick Assets | Company-Scale Assets | Main Expedition Function |
+| ''Freyja'' | ''Lady Aki'' — wandering Spider Folk miko-wizard, mycelium-alchemist, illusionist, shrine-worker | ''Ichi'' — Ashigaru Armor Golem / powered symbiote bodyguard | ''Faerie-Ring Strandbeest-Shrine'', ''Ephyra'' tasked spirits | Threshold rites, field logistics, ritual analysis, shrine support, silk/mycelium problem-solving |
+| ''Kai'' | ''Kai ʻĀ'' — Prismatic Elf Warrior-Ranger Kaiju Stalker — Hunter / Fighter / Arcane-Archer (build approved: Elf + Affinity Illusion•Light•Void; seat: `characters/primary-characters/kai-a.mem`) | ''Patches'' the Grimalkin — large grimalkin-lynx mount (`the-grimalkin.mem`) | Hunting/scouting loadout, kaiju-stalker field expertise | Long-range scouting, overwatch, wilderness tracking, monster-scale threat assessment |
+| ''Monty'' | ''Fae-Touched Human Changeling Street Youth Ninja Girl'' — “Shadow” archetype, inspired by FF5-style ninja tools/traits/powers/gear | ''Husky dog companion'' | Infiltration kit, urban-survival contacts or habits | Stealth, intrusion, escape routes, misdirection, streetwise readings of danger |
+| ''Liv'' | ''Gorgonness Captain'' — bard / sword-mistress, Traveler path | ''Gorgonne crew/ ship pets / personal retainers as appropriate'' | ''Small ship, gorgonne crew, ship stores, company cargo space'' | Ship command, morale, negotiation, travel cadence, crew coordination, sword-and-song leadership |
+
+---
+
+!! Freyja Cluster
+
+Primary PC:
+* ''Lady Aki'', Level 2
+
+Hallmark Companion:
+* ''Ichi'', Level 2
+
+Sentient Infrastructure:
+* ''Faerie-Ring Strandbeest-Shrine'', Level 2
+
+Tasked Spirits:
+* ''Ephyra'', Level 0 - blue floating spore-jelly spirits, mostly tasked for scouting/resource finding.
+* ''Mushroom Homunculi'', Level 1, multibody - a small batch of small "fungus gumi" helpers
+
+Player control:
+* Aki,
+* Ichi when player-side action applies,
+* the shrine when spotlighted or commanded,
+* Ephyra or Mushroom homunculi as narrow-task helpers.
+
+Table note: Ichi and the Shrine must stay visually and mechanically distinct. ''Ichi is the humanoid ashigaru armor golem / powered symbiote. The Shrine is the walking lararium with strandbeest legs.''
+
+---
+
+!! Other Primary Character Clusters
+
+!!! Kai Cluster
+
+Primary PC:
+* ''Prismatic Elf Warrior-Ranger Kaiju Stalker'', Level 2
+* Path / role language: ''Hunter / Fighter / Arcane-Archer''
+
+Hallmark / sidekick:
+* ''Patches'' — large grimalkin-lynx mount, Level 2
+
+Player control:
+* the ranger,
+* the grimalkin-lynx when mounted action, scouting action, or companion spotlight applies,
+* specialist hunting / tracking procedures when the table foregrounds monster-scale threats.
+
+Company function:
+* route scouting,
+* high-ground overwatch,
+* wilderness reading,
+* kaiju-scale warning signs,
+* ranged precision threat control.
+
+!!! Monty Cluster
+
+Primary PC:
+* ''Fae-touched human changeling street youth ninja girl'', Level 2
+* Archetype language: ''“Shadow” style'', drawing from FF5-style ninja rhythm and SDM traits/powers/gear where appropriate.
+
+Hallmark / sidekick:
+* ''Husky dog companion'', Level 2
+
+Player control:
+* the changeling ninja,
+* the husky when scent, alarm, tracking, loyalty, or companion action matters,
+* stealth and infiltration kit interactions during Delve / urban / camp-pressure play.
+
+Company function:
+* stealth approach,
+* intrusion and bypass,
+* misdirection,
+* escape routes,
+* street-level threat sense,
+* quiet recovery of information.
+
+!!! Olivia Cluster
+
+Primary PC:
+* ''Gorgonness Captain'', Level 2
+* Path / role language: ''Bard / Sword-Mistress / Traveler''
+* ''Commander'' trait playtest
+* ''Friends'' trait
+
+Hallmark / sidekick / attached assets:
+* Small "ship" based on mediterrain galleys, ''Named'' Level 2
+* a ''small-ship crew of gorgonnes and pets'', Level 1 - pets or personal retainers as appropriate.
+
+Likely player control:
+* the captain,
+* named Hallmark-scale ship, commander of pets/retainers when spotlighted,
+* ship-facing decisions when the company’s movement, morale, or cargo state turns on her command.
+
+Company function:
+* ship command,
+* social leadership,
+* morale and performance,
+* sword-mistress threat response,
+* travel cadence,
+* crew and cargo accountability.
+
+---
+
+!! Company Infrastructure
+
+The company currently operates under ''Adventurer’s Guild cover'', sponsored by the Lindwyrm at ''Guild Rank 1''. The Guild cover provides basic legitimacy and prismatic ID keys, but it also creates trails: papers, recognitions, expectations, and outsider signals.
+
+Shared company assets include:
+* the small ship and working ship stores,
+* ship cargo space for company equipment,
+* Aki’s mobile shrine support platform,
+* Ichi’s repair/recharge needs,
+* Ephyra & Fungus Gumi tasking capacity,
+* sidekick/Hallmark logistics,
+* pooled expedition gear,
+* Lindwyrm credit instruments and paper trails,
+* Adventurer’s Guild credentials and rank-1 cover.
+
+Neo-Thracia has been isolated for roughly 500 years. Guild credentials may open doors with Nexus-aware outsiders, but may also mark the company as suspicious, foreign, politically useful, or dangerous to local cultures that evolved without recent Noosphere contact.
+
+---
+
+!! Cargo Buckets
+
+Aki tracks:
+* ''On Body''
+* ''In Shrine''
+* ''Company Pool / Ship Cargo''
+
+The fourth bucket belongs to the gorgonne captain or a shared company sheet:
+* ''Ship Cargo''
+
+Caveat: in Aki’s ledger, ''Company Pool / Ship Cargo'' means the company’s expedition cargo aboard the ship, not mercantile trade cargo.
+
+The gorgonne captain or shared company sheet tracks:
+* broader ship cargo,
+* crew stores,
+* ship maintenance supplies,
+* trade / mercantile cargo,
+* faction-sensitive or legally exposed cargo,
+* cargo that belongs to the ship rather than to Aki’s shrine operation.
+
+---
+
+!! Control Doctrine
+
+Use the smallest control scope that keeps play moving.
+
+* ''Primary character spotlight:'' the relevant player-daemon controls their PC.
+* ''Hallmark spotlight:'' the owning player-daemon controls the companion, mount, pet, powered symbiote, or sidekick when it performs player-side action.
+* ''Infrastructure spotlight:'' the owning player-daemon controls sentient infrastructure when commanded, spotlighted, or when its procedures matter.
+* ''Company-scale logistics:'' use the shared company sheet, with the gorgonne captain / ship player-daemon tracking ship cargo and Telarus applying pressure.
+* ''Mook NPCs and neutral allies:'' Telarus usually controls them unless a rule, scene, or explicit handoff says otherwise.
+* ''Factions and environments:'' Telarus controls them as normal.
+
+---
+
+!! Design Goal
+
+Keep Aki’s support powerful but bounded, and keep the whole company legible at the table:
+
+* tools create options,
+* rites take time,
+* Ephyra need clear tasks,
+* shrine work consumes offerings,
+* silk systems need anchors,
+* Ichi needs repair and recharge support,
+* mounts and pets need food, space, and scene logic,
+* crew assets need pay, morale, and command clarity,
+* ship cargo needs a shared ledger,
+* Guild credentials create paper trails,
+* Neo-Thracian locals may react unpredictably to Nexus-visible authority.
+
+The intended play pattern: ''the company can do more than a normal small party, but every extra capability creates a footprint, upkeep cost, vulnerability, or social signal.''
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;y07CQipU9WUSaqV7hQ_yHdFdHyA1Id9hl8WWxFEJ0ck
+
+<<^ code:"&#x0004;" -> ? >>

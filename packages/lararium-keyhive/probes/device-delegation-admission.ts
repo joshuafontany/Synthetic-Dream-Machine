@@ -44,7 +44,7 @@ import type { IslandContext } from "@lararium/tw5";
 // ── Enforcement ON — the no-proof case must actually deny ──────────────────────
 delete process.env["LAR_V3_ALLOW_UNPROVEN"];
 
-const DAEMON_BAG = "lar:///ha.ka.ba/bags/@daemon";
+const DAEMON_BAG = "lar:///ha.ka.ba/bags/daemon";
 const PLACE      = "bafkreic7r3jrao44srh5bp47uryotaqp62bnmovzpqccbfy2kclf447bra";
 const ISSUED     = "2026-06-24T00:00:00.000Z";
 const EXPIRES    = "2026-12-31T00:00:00.000Z";

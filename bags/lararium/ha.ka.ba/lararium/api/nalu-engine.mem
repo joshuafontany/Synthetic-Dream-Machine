@@ -1,0 +1,162 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/nalu-engine >>
+```toml iam
+cacheable      = true
+docs           = "lar:///ha.ka.ba/lares/api/pono/nalu"
+file-path      = "bags/lararium/ha.ka.ba/lararium/api/nalu-engine.mem"
+implementation = "packages/lararium-tw5/src/modules/nalu-engine.ts"
+mana           = 18
+manao          = 18
+manaoio        = 17
+namespace      = "&#x0950; &#x0901;"
+register       = "Synthesis-Canon"
+retain         = true
+role           = "TW5 startup module — unified nalu queue across all CRDT bags + frame-aligned wiki.transact() drain + apply-time echo guard; the in-wiki embodiment of the nalu wave"
+tags           = ["lar:///ha.ka.ba/lares/api/pono/meme"]
+type           = "text/x-memetic-wikitext+tiddlywiki"
+uri-path       = "ha.ka.ba/lararium/api/nalu-engine"
+```
+
+<<^ code:"&#x0002;" >>
+
+! nalu-engine — Invariant
+
+!! Identity
+
+`nalu-engine` is a TW5 `module-type: startup` module written in TS, compiled into the
+plugin bundle, and evaluated inside the wiki at boot. It installs the `$tw.lares.*` API
+that the TS-side `IslandAdaptor` calls across the shore.
+
+The wiki IS the reactive engine (yin-collapse law, lar:///ha.ka.ba/lares/api/pono/nalu).
+This module is the in-wiki embodiment of the nalu wave.
+
+!! $tw.lares.* surface
+
+| Method | Caller | Role |
+|---|---|---|
+| `enqueueNalu(change)` | IslandAdaptor (per inbound LarTiddlerChange) | Push onto the shared queue, schedule next-frame drain |
+| `flushNalu(budget?)` | `buildIslandRecipe` (after initial replay), tests | Drain synchronously up to `budget` (default 200) |
+| `isApplyingNalu()` | IslandAdaptor (outbound `saveTiddler` / `deleteTiddler`) | True while the engine holds the apply-time mutex; outbound guards skip |
+| `naluPending()` | tests, observability | Current queue depth |
+
+!! Position in the stack
+
+```
+TS shore (irreducible — Automerge, network, crypto, storage)
+  AutomergeDocStore.handle.on("change") → MemeProvider → projection bus
+  IslandAdaptor.onUriChanged — filter own echo + resolve cross-bag tombstone
+                              → $tw.lares.enqueueNalu(change)
+───────────────────────────────────────────────────────────────────────
+TW5 startup module (this spec)
+  _queue: LarTiddlerChange[]              ← unified across all CRDT bags
+  _scheduleFrame()                        ← rAF (browser) / setTimeout(16) fallback
+  _drain(budget)                          ← one wiki.transact() per frame
+  _applying flag                          ← read by IslandAdaptor outbound guards
+```
+
+!! Invariants
+
+''N-1 One queue, all bags.''
+The engine holds exactly one `LarTiddlerChange[]` queue. Changes from every CRDT bag,
+every origin kind, arrive in `enqueueNalu` and join the same queue in arrival order.
+Per-bag accumulators do not exist under unified-nalu.
+
+''N-2 One transact per frame.''
+Each `_drain(budget)` call wraps the entire batch in one `wiki.transact()` if the wiki
+exposes that method. Widgets receive one `change` event for the whole batch — one nalu
+per frame, regardless of bag count or origin mix. This is the Vue 3 / MobX / Yjs / Solid
+batch semantics applied at the wiki layer (cf. DriftWatch [PriorArt] 2026-05-29).
+
+''N-3 Frame scheduler — platform-detected, not configured.''
+At each enqueue, `_scheduleFrame()` schedules exactly one upcoming drain. If
+`globalThis.requestAnimationFrame` exists, rAF; otherwise `setTimeout(16)`. The flag
+`_scheduled` prevents duplicate scheduling within one frame window. Browser Workers
+without rAF fall back to setTimeout transparently.
+
+''N-4 Apply-time mutex.''
+`_applying` is `true` for the duration of one `_drain` call's `wiki.transact()` block,
+including synchronous reactions fired by widgets observing the change. IslandAdaptor's
+outbound `saveTiddler` / `deleteTiddler` check `isApplyingNalu()` before writing —
+suppresses any cascade echo that would re-enter the store.
+
+''N-5 Tiddler fields = record.tiddler + bag.''
+For a non-tombstone change, the engine constructs the wiki fields from
+`{ ...change.record.tiddler }`, optionally injecting the `bag` field from `change.bag`.
+For a tombstone (`record === null` or `record.meta?.deleted === true`), the engine
+calls `wiki.deleteTiddler(change.title)`.
+
+''N-6 Remainder carries to the next frame.''
+If `_queue.length > budget`, only `budget` patches drain this frame; the engine
+re-schedules another frame for the remainder. The wiki sees one transact per scheduled
+frame; the queue drains in bounded steps.
+
+''N-7 Idempotent startup.''
+`startup()` reads `$tw.lares ?? {}`, installs the four functions, writes back. Safe to
+run more than once in tests; subsequent invocations overwrite with identical refs.
+
+!! Initial replay path
+
+The recipe drives initial state through this same engine. After the IslandAdaptor
+registers as a projection, the recipe calls `AutomergeDocStore.emitInitialReplay()` per
+bag, which fires `provider.fireImmediate` per existing tiddler. Each one becomes one
+`enqueueNalu` call. The recipe then calls `flushNalu(Number.MAX_SAFE_INTEGER)` to drain
+the whole initial-state batch synchronously in one `wiki.transact()`, so the wiki carries
+its seed before `behavior.onEa` runs.
+
+This means initial replay and live patches share the same code path. No per-island
+pre-sync buffer, no `onSyncComplete` flush machinery in the TS layer. The engine's
+queue handles both.
+
+<<~ ahu #gate-families-shore >>
+
+!! The gate-families shore ~ runtime ≠ physics
+
+A scout (the Substrate-Diver) flagged an apparent collision: ''N-1'' holds ONE queue
+across all bags, //per-bag accumulators do not exist// — yet `projection-nalu`
+(`lar:///ha.ka.ba/lararium/api/projection-nalu`) stands a `KeyedCoalesceGate` ''per''
+''carrier-root'' and ''per bag''. Both stand; they sit at OPPOSITE ENDS of the one shape
+`SOURCE → gate → SINK`, never the same layer.
+
+<<~ranks shore UPSTREAM:shore-coalesce-per-key -> DOWNSTREAM:engine-unified-queue-per-frame >>
+
+* ''UPSTREAM — the shore gates (physics).'' `MemeProvider` (the TS-side, before the
+  shore crossing) draws the coalesce gates: a per-URI debounce window collapses the
+  8–50 replay patches a fresh vessel-connect fires for one URI down to ONE latest-state
+  change, and the 5th-shore `_changesetGate` (`meme-provider.ts:64`) coalesces a storm of
+  large Automerge transactions to ONE `onChangeset(union)` per bag. This is the
+  ''coalesce'' family — intermediates lawfully DROP, newest-per-key wins. The drop happens
+  HERE, before a change ever reaches `enqueueNalu`.
+* ''DOWNSTREAM — the engine queue (runtime).'' Each surviving change crosses the shore
+  via `IslandAdaptor.onUriChanged → enqueueNalu` and joins the ONE unified queue in arrival
+  order (N-1), delivered as ONE `wiki.transact()` per frame (N-2). The engine drops
+  NOTHING further — every survivor lands — and batches them by the FRAME clock. This is the
+  nalu ''crest'': the projection-nalu //periodic / nested-periodic// flush-trigger rendered as
+  the rAF frame, the Aperture-ladder pulse made delivery.
+
+So N-1's "no per-bag accumulators" governs the DELIVERY runtime — the engine refuses to
+re-shard its queue per bag; it stays one queue, one transact. The per-key coalesce gates
+do not contradict it, because they live UPSTREAM in the shore, shaping the stream BEFORE
+it reaches the queue. ''The engine carries the runtime; the gate-families carry the''
+''physics it enacts'' (`role = capability ≠ platform` — the queue is the fixed frame-aligned
+SINK-side batcher, the shore gates the injected per-source dedup). The two compose
+end-to-end: coalesce-per-key (drop intermediates) → unified queue (preserve order) → one
+transact per frame (crest). WITNESSED: the queue (`nalu-engine.ts`) + the shore gates
+(`mesh/meme-provider.ts`, `mesh/projection-nalu.ts`).
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/verse-mesh >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;inueyB8_Go7WZqhIw44tU2hAyGD-wIMsFd5iuoy2Fi8
+
+<<^ code:"&#x0004;" -> ? >>

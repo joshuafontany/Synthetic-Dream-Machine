@@ -81,8 +81,8 @@ describe("a Handle announces onto a synced doc and a peer recognises it", () => 
     const card = await publish(FASTJACK_SEED, "FastJack");
     let doc = from<LarDoc>(emptyLarDoc());
     doc = change(doc, (d) => {
-      d.tiddlers["lar:///ha.ka.ba/bags/@oracle/some-post"] = mutableLarRecord(
-        "lar:///ha.ka.ba/bags/@oracle/some-post", { text: "a public post, not a card" }, "author",
+      d.tiddlers["lar:///ha.ka.ba/bags/oracle/some-post"] = mutableLarRecord(
+        "lar:///ha.ka.ba/bags/oracle/some-post", { text: "a public post, not a card" }, "author",
       );
       writeHandleAnnounce(d, card);
     });

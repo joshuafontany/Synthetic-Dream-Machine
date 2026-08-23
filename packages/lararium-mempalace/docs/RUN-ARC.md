@@ -5,7 +5,7 @@
 *The handoff from the enact-flow (the instruments, built + witnessed on synthetic data) to the crossing (the RUN over real, genuinely-independent planes). Written at the S5 ruling, 2026-07-05.*
 
 > **Superseded in part (2026-07-13).** The compression re-founding
-> (`bags/@lares/ha.ka.ba/lares/api/pono/sensorium-machina.mem`) retired two
+> (`bags/lares/ha.ka.ba/lares/api/pono/sensorium-machina.mem`) retired two
 > load-bearing pieces this arc still teaches: the planes form a CHAIN of
 > coarsenings, never a product — so **dim H¹ = 0 by construction at plane
 > boundaries and the H¹-gated EFE keystone certifies nothing there** (H¹ keeps

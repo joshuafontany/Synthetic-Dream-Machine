@@ -1,7 +1,7 @@
 /**
  * bag-paths — URI → mirror-relative-path factories.
  *
- * The named-bag layout (`bags/@NAME`) makes per-scope path computation
+ * The named-bag layout (`bags/NAME`) makes per-scope path computation
  * derivable from the bag scope alone. No oracle tiddler `path-filter` field
  * needed. Factories are pure functions; no I/O, no module state.
  */
@@ -160,8 +160,8 @@ export function bagsFileToUri(instanceRoot: string, filePath: string): string | 
 /**
  * Derive the carrier-root lar: URI a wikis/ file projects — the per-wiki working
  * write-layer's disk surface run backward (the ingest-BACK leg). The working
- * layer (`wikis/@{slug}/working`) projects per-wiki to
- * `wikis/@{slug}/<full-uri-path>.mem`; the first segment under wikis/ names the
+ * layer (`wikis/{slug}/working`) projects per-wiki to
+ * `wikis/{slug}/<full-uri-path>.mem`; the first segment under wikis/ names the
  * WIKI SLUG (the write-layer instance), never the carrier name. The derived
  * records home to the working layer (the editing plane), not the named bag —
  * the ingest caller carries that designation in `--to`. Symmetric with the

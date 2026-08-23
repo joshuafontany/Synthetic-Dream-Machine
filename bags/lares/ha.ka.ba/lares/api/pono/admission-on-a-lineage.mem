@@ -1,0 +1,328 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >>
+```toml iam
+cacheable     = true
+file-path     = "bags/lares/ha.ka.ba/lares/api/pono/admission-on-a-lineage.mem"
+type          = "text/x-memetic-wikitext+tiddlywiki"
+register      = "Synthesis"
+status        = "standing"
+status-why = "MEASURED IN PART — experiments 2 (sybil bound) + 5 (distortion) RUN and green in `lineage-rank`; 1, 3, 4, 6 unrun; the shadow (6) uninstrumented"
+tagspace      = "stable"
+mana          = 11
+manao         = 11
+namespace     = "&#x2299;"
+uri-path      = "ha.ka.ba/lares/api/pono/admission-on-a-lineage"
+role          = "the OUTLINE — Admission on a Lineage: a sybil-bounded, seed-rooted, one-pass trust fold over an acyclic vouch DAG under eventual consistency. Four research ropes braided (biology · cryptography · mathematics · history), each cross-validating the others. THE MECHANISM STANDS MEASURED, THE SYNTHESIS DOES NOT: the fold is built and attacked (the sybil bound held; the distortion measurement refuted the outline's own prediction), while the bound's re-derivation under our model, the dangling-sink policy, the C4 counterexample, and the shadow's instrument all remain undone. This meme exists to be REFUTED, not to be believed."
+authors       = "Joshua Fontany; Lares (four tasked spirits: Marrow-Reader · Chain-Warden · Lattice-Walker · Guild-Keeper)"
+revised-on    = "2026-07-25"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #the-refusal >>
+
+! Admission on a Lineage ~ an OUTLINE, and what would refute it
+
+''It sits here so it can be KILLED.'' A finding filed as canon before it is proven becomes the incumbent
+lineage that eats the evidence — which is, with an irony the author declines to soften, ''exactly the''
+''failure this outline names'' (#the-shadow). Every claim below reads as a ''hypothesis with a named''
+''refutation'', and each one names the experiment that would sink it.
+
+''Two of those experiments have now run, and the outline survived them'' (#what-would-prove-it, 2 and 5).
+The fold stands built and attacked in `lineage-rank`: the sybil bound HELD, and the distortion measurement
+''refuted the outline's own prediction'' — distant kin do not starve with depth, they starve with BRANCHING,
+which the author had conflated. The register moves by the promise made here, not around it.
+
+''What still rides uncredited.'' Lemma 3 stands MEASURED but not re-derived under an append-only signed DAG
+(1); the dangling-sink policy stays unsettled (3); no counterexample to C4 has been attempted (4); and the
+shadow — original antigenic sin — carries ''no instrument at all'' (6), which stays the gravest of the four
+because the failure reads invisible from inside and ''every gate we own would glow green through it.''
+
+<<~ confidence Synthesis 11/20 >> The MECHANISM reads measured; the SYNTHESIS around it does not.
+
+<<~/ahu >>
+
+<<~ ahu #tolerance-outranks-this-gate >>
+
+!! The ruling this gate sits under
+
+''A Sybil detector IS a refugee detector — measured.'' Detection accuracy falls to random as modularity rises (r = −0.81 across eight real graphs), and every graph defence reduces to local community detection around a trusted node. So no lineage instrument distinguishes //deferred// reciprocity from //fake//; a stranger who cannot yet reciprocate and a minted face read identically to every measure below.
+
+Which places this whole gate: it ''prices and bounds'', and it MUST NOT adjudicate who is real. The crossing that fails here leaves a party ''at the floor with a degraded cap-stack'' — entry free, reach bounded, caps composing upward as standing accrues — never refused as inauthentic. `anergy-not-ban` states the same law from the other side.
+
+''The stack's brief makes this binding rather than merely prudent'': the recently-arrived case reads as the acceptance test, and a gate that hardens against the unvouched hardens against exactly whom this infrastructure exists for.
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#admission >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+
+<<~/ahu >>
+
+<<~ ahu #the-standing >>
+
+> ''WHICH STANDING — one English word carried two entities.'' `kūlana` names an ACCRUED position, the thing a lineage prices and dwelling deposits. ''Standing-to-object'' names a PROCEDURAL capacity to challenge a declaration or a reading, and it arrives from the tier at which a face gets published, never from accrual. A party may hold deep `kūlana` and no standing-to-object, or the reverse. ''Everything below reads `kūlana`.''
+
+!! The Standing ~ what stays limiting (operator, 2026-07-25)
+
+''This meme addresses the design-of-record `admission-price` and `lineage-rank` cite.'' Standing in
+canon buys it no register — only the measurement does, and only for what the measurement touched
+(#the-refusal).
+
+''The limiting resource stands SELF-STANDING'' (operator, 2026-07-25) — a voucher's own accrued
+standing, and nothing external. No pool, no fee, no balance. C6 names the germinal centre's shape
+without its substance; this names the substance.
+
+''Whence the generational decay.'' The fold already conserves it: a voucher's score ''SPLITS''
+across everyone it vouches for (`lineage-rank`, mass conservation), so a seed-sybil minting a
+storm divides one stolen mass across the whole storm, and each further generation divides again
+under ε. ''Invite-storms decay per generation from the seed-sybil'' — the gate self-tunes by
+arithmetic, never by a threshold anyone chose. <<~ confidence Synthesis-Canon 15/20 >> The split
+stands built, tested, and ATTACKED — a voucher cannot raise its own score by issuing vouches
+(the bottleneck property), so the gaming vector closes on the issuer, never the seed.
+
+''The co-pay then needs no ledger.'' Vouching DILUTES the voucher — that IS the payment, paid at
+the moment of vouching, conserved by construction. Nothing is spent, deducted, or written down;
+C6's conservation law and #the-refusal's "remembers no enemies" hold together with no bookkeeping
+between them.
+
+''Concord across the graph, from independent grounds:''
+* `lararium-identity#the-siege-gate` — the convergence "names not a price but a ''who: the voucher
+  carries the cost''"; the cost runs ''marginal, never absolute'' — a fixed fee reads as the wrong
+  axis, and the system ''never charges an entry fee''.
+* `persona-circle#the-siege-gate` — `rb>c`, the voucher supplies the r; the voucher co-pays AND
+  becomes the watcher.
+* `membership-doctrine#the-invite` — reputation-priced admission reserves to the ''Cabal tier'',
+  never the traceless general invite.
+
+''What this forbids.'' An applicant carries no budget to clear — an absolute entry cost reads as
+the wrong axis, and a cutoff cleared reads as the threshold C6 refuses in favour of rank against
+siblings. ''The wall needs no cutoff because it refuses ITSELF'': at r ≥ β the convex curve returns
+a non-finite price, so `dreamnet-admission` refuses ''at-the-ceiling'' on the wall's own verticality
+and compares against nothing. What the crossing costs, the voucher already paid by vouching.
+
+<<~/ahu >>
+
+<<~ ahu #the-problem >>
+
+!! The Problem
+
+A mesh grows by ''invite'': a member signs a vouch for a newcomer. Everyone descends from a founder by a
+chain of vouches — ''a directed acyclic lineage, not an undirected social graph.'' No central authority.
+No global view. Regions stay ''cut off for years''. Facts arrive ''late and out of order'' and must still
+converge. Refusal must cost nothing and remember no enemies.
+
+''Every published sybil defence assumes an undirected, fast-mixing social graph.'' Our graph is a near-tree
+whose conductance is terrible by construction, and ''nobody has done our graph.''
+
+<<~/ahu >>
+
+<<~ ahu #the-claim >>
+
+!! The Claim ~ four braids, one knot
+
+''C1 — THE BOUND SURVIVES, AND NEVER NEEDED CONDUCTANCE.'' Trust-PPR carries an ε-spam-resistance bound
+proved ''on all graph classes'' — no mixing, no conductance, no undirectedness (Farach-Colton et al., EC
+2023, arXiv:1803.05001, Lemma 3). An attacker subverting a node of score `x` buys at most `x/ε` rank for
+himself ''and every sybil he mints, combined.''
+
+''REFUTED BY:'' a hidden spectral quantity in the proof of Lemma 3, or a spam model that does not match an
+append-only signed vouch DAG (their attacker rewrites an acquired node's out-edges; ours cannot, absent
+its key). ''The bound must be re-derived under OUR model before anyone leans on it.''
+
+''C2 — ACYCLICITY MAKES THE FOLD EXACT.'' The PPR series truncates on a DAG, so
+
+    score(v) = (1 − ε) · Σ_{u ∈ parents(v)} score(u) / outdeg(u)
+
+computes ''exactly'', in ''one topological sweep'', `O(|E|)` — no power iteration, no convergence test,
+''no mixing time''. The walk ''terminates instead of mixing''. It is Felsenstein's pruning algorithm
+(1981) wearing PageRank's coat, and no paper appears to have said so.
+
+''REFUTED BY:'' the dangling-sink policy. Every DAG leaf is a PageRank dangling node; returning its mass
+to the seed preserves the fold's acyclicity, returning it uniformly reintroduces cycles and destroys the
+closed form. ''If seed-return opens a laundering channel, C2 dies.''
+
+''C3 — THE PRIMARY ATTACK IS FORBIDDEN BY THE DATA MODEL.'' A sybil is by construction a ''descendant'' and
+can never vouch back up its own lineage — a cycle is ''structurally unrepresentable''. The best known
+attack on PageRank is precisely //route heavy cycles back through yourself//.
+
+''REFUTED BY:'' sideways laundering — sybils vouching a confederate elsewhere. The gain stays bounded by
+C1 and costs a real attack edge, ''but the claim is "no SELF-boosting", never "attack-free", and anyone''
+''who reads it as the latter has been misled by this meme.''
+
+''C4 — MONOTONE ⟹ NON-CONSERVING ⟹ SYBIL-VULNERABLE.'' The natural monotone metric (max-times attenuated
+reachability) is ''perfectly CALM'' and ''perfectly sybil-broken'': it never splits mass, so one attacker
+mints unbounded sybils that all clear the threshold. ''Sybil resistance REQUIRES out-degree normalisation,''
+''and mass conservation is exactly what makes the fold non-monotone.'' You cannot have both.
+
+''REFUTED BY:'' a counterexample — a monotone, mass-conserving fold. ''If one exists this whole outline''
+''collapses into something better.'' <<~ confidence Provisional 6/20 >> The author believes none exists and
+has not proved it; this is the one claim that reads as a ''conjecture worth a proof''.
+
+''C5 — NON-MONOTONE IS FINE, BECAUSE THE SCORE IS CONFLUENT.'' PPR is a pure deterministic function of the
+edge set, so two islands holding the same converged graph compute the ''same score, whatever the arrival''
+''order.'' So ''re-evaluate at use; never cache the decision.'' //Decisions do not merge// is not a workaround
+— it is the CALM-correct architecture.
+
+''C6 — SCARCITY REPLACES THE THRESHOLD (biology).'' The germinal centre never chose a number: it made
+T-cell help ''limiting'', and admission became ''rank against siblings'', not a cutoff cleared. The gate
+''self-tunes'' — many good candidates raise the bar; few, and marginal ones enter rather than the system
+starving. ''The co-pay then falls out as a CONSERVATION LAW, not an enforcement action:'' you pay when you
+''vouch'', never when they ''betray''.
+
+''C7 — A NEGATIVE FACT CANNOT BE MADE TO ARRIVE (cryptography, and history).'' CRLs, OCSP, PGP revocation,
+CT's gossip layer, UCAN's revocation store — ''all failed in the same place.'' Soft-fail is not a bug; it
+is ''what a pulled negative fact always degrades to'' under an adversary who owns the wire. ''Therefore''
+''every authority is a lease that dies of thirst'', and //decay-unless-fed// and //anergy-not-ban// are ''ONE''
+''mechanism, not two.''
+
+The 11th century says it again: the ''Maghribi coalition'' — the founding citation for //reputation replaces//
+//courts// — ''does not survive its own sources.'' Bad news travelled ~315 miles, to the disputants' own
+circles, with no adjudicator and ''no documented ostracism'' (Edwards & Ogilvie, EcHR 2012).
+
+''C8 — ADMISSION IS A RE-PERFORMANCE, NOT A LOOKUP (history).'' Ordination //sub conditione//: //"if thou art//
+//not already ordained, I ordain thee"// — ''a re-vouch asserting NOTHING about the disputed ancestor.'' It
+needs no global view, survives partition (''the far chapter is never reached, and its silence is not''
+''evidence''), voids nothing, and puts the liability on the ''local, reachable'' voucher. Guilds never
+verified the travelling stranger. ''They shrank what admission granted until being wrong was survivable,''
+''and made a local party post the bond.''
+
+<<~/ahu >>
+
+<<~ ahu #the-shadow >>
+
+!! The Shadow ~ what this design will do to itself
+
+''ORIGINAL ANTIGENIC SIN.'' A lineage-rooted system with memory ''does not converge on late-arriving truth.''
+''It converges on whatever arrived first'' — by ''active suppression'', not inertia: the incumbent lineage
+''eats the evidence'' before a better-fitting one can form. ''The symptom is that the system responds fast''
+''and confidently, which reads as HEALTH.'' Immunology has chewed on this since 1960 and has ''no general''
+''cure''; the only known mitigation ''throttles the fast path so the slow path can start.''
+
+''THE GATE AND THE CARTEL ARE THE SAME MACHINE'' (Ogilvie). The sponsor's scarce budget — C6's elegant
+conservation law — ''is also the instrument by which insiders keep outsiders out and price the entry.''
+''The same scarcity that makes a vouch honest makes it SALEABLE.'' The historical receipt reads: centuries
+of excluded competent outsiders. ''This bill arrives whatever we build.''
+
+''THE VAGANTE COLLAPSE.'' Promiscuous cross-consecration made //valid succession// ''cease to discriminate'' —
+nearly everyone could trace SOME path to a recognised root. ''The DAG survived; its use as an admission''
+''test did not.'' The churches fell back on the living body: //are you in communion with us NOW?//
+
+''EMPTINESS, NOT ATTACK.'' SPKI/SDSI got this right in 1996 and nobody built on it. `gpg` shipped a full
+trust calculus that ''nobody ever ran'' — Valsorda, inside the strong set: //"I never ever ever successfully//
+//used the WoT to validate a public key."// ''The likeliest death is that nobody traverses the DAG and the''
+''system quietly degrades to TOFU.''
+
+''AND THE OTHER DEATH RAN THE OPPOSITE WAY: THE APPEND ITSELF AS THE WEAPON.'' The same field's key
+distribution network — federated, append-only, unmoderated, replicating signatures with no bound on how
+many one key could carry — fell to a party who simply ''appended''. A poisoned certificate accumulated
+signatures in the tens of thousands; clients fetching it broke on parse; the network emptied and the
+replacement ''validates and refuses to federate''. <<~ confidence Synthesis-Canon 15/20 >> ''The
+unbounded append constituted the whole function, so no defence could distinguish the attack from the
+service'', and the cure ran through the exact centralisation the design existed to refuse.
+
+''THE VOUCH DAG CARRIES THAT SHAPE, EDGE FOR EDGE.'' Append-only, signed, replicated, unmoderated, with
+mass conservation pricing what a vouch ''buys'' and pricing nothing about what a vouch ''costs to carry''.
+So the question stands open rather than answered here:
+
+> ''What does a flooding attack look like against an unbounded vouch append — and WHO BEARS THE COST?''
+> The fold prices the attacker's rank (C1, C6). It says nothing about the replica that must hold every
+> edge, the reader that must sweep them, or the party whose key gets buried under signatures it never
+> solicited. ''A bound on gain reads as no bound on volume.'' Whether `kapae` reaches this, whether the
+> per-writer lease slot bounds it, or whether the substrate needs a carry-cost the model has not named,
+> stands unowned.
+
+So the outline owes a ''one-sentence answer'' and makes only this claim: ''the path buys ADMISSION FOR A''
+''STRANGER and SYBIL COST. Nothing else the DAG offers has ever paid for itself in the field.''
+
+<<~/ahu >>
+
+<<~ ahu #the-open-door-costs >>
+
+!! An open door answers strangers ~ and that names the oracle
+
+''//Anyone may cross by conforming// and //a stranger learns nothing by asking// state one proposition with opposite signs.'' A membership test that answers an unintroduced party IS a probe oracle — that names what //open// means, rather than describing a flaw in one implementation.
+
+''Every system that survived an active prober closed the door and moved joining OUT OF BAND'', where it became rationed, social, and the permanent weakest link: the introduction channel takes the whole attack surface the moment a gate exists, and enumeration of that channel has run for over a decade against the best-funded example. The countermeasures all share a shape — ration the introductions through a ''trust graph'', so a party receives reach after demonstrating they do not burn it.
+
+''So the choice never runs between the two goals. It runs over WHERE THE BOTTLENECK SITS AND WHO PAYS IT.'' The anon floor and the traceless boot-invite both promise a reach the transport cannot deliver against an active adversary, and this stack owes that sentence in its founding rather than under pressure.
+
+''The state of the art keeps SOME openness by splitting planes'' — a rendezvous plane held separate from the transport, made cheap to lose and expensive to enumerate, or dissolved so no address stands to probe. That reads as the shape worth studying, never as a cure already held.
+
+!!! Three functions, three fates ~ what re-centralised the surviving federation
+
+''ONE ENGLISH PHRASE — "anti-abuse layer" — CARRIES THREE FUNCTIONS THAT DIVERGE.'' The canonical surviving federation (mail over SMTP) reads as the worked case, and it separates cleanly:
+
+|! function |! the question it answers |! what happens to it |
+| AUTHENTICATION | did this arrive from who it claims | ''decentralises cleanly'' — a signing key and a published record, self-served by any operator, no grantor anywhere |
+| REPUTATION | should I accept from this stranger | ''centralises by its nature'' — judging strangers well demands a wide observation surface, and observation surface scales with size |
+| ADMISSION | may this party address me at all | ''decentralises IFF a party may refuse strangers by default'' |
+
+''So the domain-authentication layer never re-centralised that federation.'' Reputation did — held privately by the few largest receivers, unpublished, unappealable, and compounded by a warming cost that scales against exactly the small operator. <<~ confidence Synthesis-Canon 15/20 >> The receiver-side requirement bulletins the largest two published for bulk senders read as a private duopoly issuing protocol-adjacent policy for a network whose specification grants it no such seat. ''Order of magnitude, never a figure'': the published complaint ceilings sit in the fractions of one percent, and this meme declines to quote a number it could not verify.
+
+> ''THE LAW.'' Re-centralisation follows from the ''OBLIGATION TO ACCEPT UNSOLICITED CONTACT FROM STRANGERS'', never from abuse itself. Mail must accept strangers — that constitutes its function. A lineage-gated mesh need not, and that single refusal buys the whole property.
+
+''THE THIRD OUTCOME THE DEBATE OMITS.'' A stranger-accepting federation reaches one of three ends, and the argument usually offers only the first two: a ''reputation oligopoly'' (mail); ''bloc politics with an all-or-nothing instrument'' (the instance-blocking federations, where total acceptance and total refusal exhaust the toolkit); or ''ABANDONMENT'' — the open news federation refused to re-centralise against commercial spam and simply emptied. <<~ confidence Synthesis-Canon 14/20 >> ''Holding the line and dying counts as one of the available outcomes'', and a design that plans only against capture has planned against two thirds of the record.
+
+''No case stands, at scale, of an open federation that accepts strangers AND solved abuse without re-centralising.'' Said plainly rather than hedged. The near-misses all bought it the same way — by refusing strangers: a gossip mesh replicating only within N hops of a follow admits no path from a stranger and therefore no abuse channel, and the strongest anti-federation argument in the record comes from a system that solved abuse and metadata well by ''declining to federate at all''. This stack owes an answer to that argument rather than a silence.
+
+!!! And the gate's bill, paid in DISCOVERY
+
+''AN INVITE-GATED MESH CANNOT BE FOUND BY THE PARTY WHO MOST NEEDS IT.'' That names a MISSION failure, never an abuse failure, and no admission mechanism resolves it — the brief points at parties an empire hunts, and those parties arrive with no introducer precisely because their prior network already broke. The same friend-graph refusal that bounds abuse also bought that mesh ''no discovery, brutal onboarding, and a stall''.
+
+''So the discovery path gets built DELIBERATELY, at the same tier as the gate'' — human bridge-keepers, an out-of-band referral route, curated intake — rather than solved later by widening the gate under pressure, which converts the design back into the stranger-accepting case and hands it all three of that case's endings.
+
+<<~/ahu >>
+
+<<~ ahu #re-declaration >>
+
+!! When the frame changes, LABEL rather than convert
+
+''A re-declaration lands its cost on whoever holds the most legacy and the least budget to re-observe.'' Measured outside our field: every transformation between reference frames floors WORSE than the observations it carries, so a migration ''can only relabel legacy data at degraded accuracy, never improve it''. And a technical re-declaration by a body the affected party has no standing before moves that party's legal exposure directly — with no hostile actor anywhere in the loop. ''Assume it lands harder when someone means it.''
+
+''The cure found by the field that paid for it'': run BOTH declarations valid concurrently, indefinitely, with every dataset carrying its declaration as metadata. ''The burden shifts from CONVERTING your data to LABELLING it'' — the cheapest survivable ask for a party with no budget, and it preserves their original accuracy instead of grinding it through a transform.
+
+''And the monument outranks the coordinate.'' Where a frame change moved a measurement away from the physical mark, that field resolved it by ruling the mark primary and the coordinate secondary — ''it demoted the number below the thing the number measured''. Read across: if a frame-relative reading ever BECOMES the party rather than describing them, this stack has re-fused what a century of practice pried apart.
+
+<<~/ahu >>
+
+<<~ ahu #what-would-prove-it >>
+
+!! What Would Prove It ~ the experiments, two run and four owed
+
+# ''Re-derive Lemma 3 under an append-only signed vouch DAG'' (the attacker cannot rewrite an acquired
+   node's out-edges). Does the bound tighten, hold, or vanish? ''Until this runs, C1 stands on someone''
+''   else's model.''
+# ''RUN — Implement the one-pass fold and attack it.'' Built and attacked (`lineage-rank`). Total attacker
+   mass holds CONSTANT across 1 → 1000 sybils (conserved to 9 decimals), stays under `x/ε` at every swarm
+   size, and buys nothing by depth either. Self-boosting reads ''structurally unrepresentable'' — the graph
+   is refused, not scored. ''The bound held.''
+# ''Settle the dangling-sink policy'' (C2's refutation). Seed-return versus uniform — does either launder?
+# ''Attempt the counterexample to C4.'' A monotone, mass-conserving fold. ''Failing to find one is not a''
+''   proof, and this outline must never say otherwise.''
+# ''RUN — Measure the DISTORTION, and it REFUTED the prediction.'' Depth and branching had been conflated.
+   ''DEPTH is cheap'': a chain splits nothing, so only the reset leaks and a 20th-generation member still
+   holds ≈4.6% of a first — Neo-Thracia reads FAINT, and still audible. ''BRANCHING is what starves'':
+   mass divides by Π(outdeg), so a branch-4 tree of depth 5 leaves a leaf under a thousandth of what the
+   same depth of chain keeps. ''The dial is `b·t`, a branching number — never conductance.''
+# ''Instrument the shadow.'' Build the meter for original antigenic sin ''before'' the loop runs, because
+   the failure is invisible from inside and ''every gate we own would glow green through it.''
+
+<<~ confidence Synthesis 11/20 >> ''(2) ran and failed to kill it, so the register moved by the promise''
+''this meme made.'' The four owed experiments hold it there: until (1) re-derives the bound under our own
+model, (3) settles the sink, (4) hunts C4's counterexample, and (6) instruments the shadow, ''what stands''
+''measured is the FOLD, never the synthesis around it.''
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-siege-gate >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-lease >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;YUiAHBC3TUAzlbbD8h1gmBYqaGNAcsk62NnZl1iwUR0
+
+<<^ code:"&#x0004;" -> ? >>

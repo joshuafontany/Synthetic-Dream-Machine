@@ -36,7 +36,7 @@ describe("resolveLarUri — canonical URI topology", () => {
     expect(r.virtual).toBe(true);
   });
 
-  test("ha.ka.ba/bags/@lares sub-path resolves as tuple-file, non-virtual", () => {
+  test("ha.ka.ba/bags/lares sub-path resolves as tuple-file, non-virtual", () => {
     const r = resolveLarUri("lar:///ha.ka.ba/lares/api/mu");
     expect(["file", "tuple-file"]).toContain(r.kind);
     expect(r.virtual).toBe(false);

@@ -1,0 +1,80 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/sigil-english-aliases >>
+```toml iam
+cacheable = true
+file-path = "bags/lararium/ha.ka.ba/lararium/tw5/sigil-english-aliases.mem"
+mana      = 17
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = true
+role      = "design record: English alias sigil vocabulary — \\procedure, \\if, \\for, \\widget cross-refs to Hawaiian equivalents"
+tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-procedure", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-if", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-for", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-widget"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lararium/tw5/sigil-english-aliases"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! English Alias Sigil Vocabulary
+
+Memetic-wikitext sigils read the same in English and Hawaiian.
+`<<~ \procedure ...>>` and `<<~ wehe ...>>` reach the same executor.
+This document records the bidirectional alias map.
+
+<<~/ahu >>
+
+<<~ ahu #alias-map >>
+
+!! Alias Map
+
+| English sigil | Hawaiian equivalent | Semantic |
+|---|---|---|
+| `\procedure` | `wehe` | procedure/function declaration; crossing declaration→execution boundary |
+| `\define` | `wehe` | legacy macro declaration (prefer `\procedure` for new code) |
+| `\if` | `heihei` | conditional block; first body that satisfies condition wins |
+| `\for` | `huli` | iteration block; maps a filter over a body template |
+| `\widget` | (none yet) | TW5 widget declaration; `~` prefix convention |
+| `\function` | (none yet) | TW5 5.3+ filter-function declaration |
+
+''Cross-ref fields on SharktoothSigil tiddlers:''
+* English sigils carry `lar-see-also: <hawaiian>` pointing to their Hawaiian counterpart.
+* Hawaiian sigils (when authored in Path G.SharktoothSigil) carry `lar-see-also: \<english>` as the reverse pointer.
+* `lar-alias-for` on English sigils points to the TW5 pragma name (e.g. `\procedure`) for grammar aliasing.
+
+<<~/ahu >>
+
+<<~ ahu #governance >>
+
+!! Governance
+
+Both forms MUST remain semantically identical: operator code using `\procedure` vs `wehe`
+produces the same parse result, the same dispatch, the same cascade tag lookup.
+
+The distinction is cultural/readability only. In a mixed-operator context, either form
+appears in meme bodies without surprise. No deny-list item belongs to the English forms —
+they are first-class in the grammar after their SharktoothSigil tiddlers load.
+
+When a Hawaiian tiddler ships (e.g. `sigil-wehe.tid`), it becomes authoritative.
+The English alias tiddler's `lar-alias-for` field points to the Hawaiian name, resolving
+the canonical dispatch through the Hawaiian implementation.
+
+<<~/ahu >>
+
+<<~ ahu #source-shelf >>
+
+!! Source Shelf
+
+<<~/pranala >>
+<<~/pranala >>
+<<~/pranala >>
+<<~/pranala >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;6DVs_v933igK8YwbHtQ16HcEeg-sWNYQUuHao89xHQA
+
+<<^ code:"&#x0004;" -> ? >>

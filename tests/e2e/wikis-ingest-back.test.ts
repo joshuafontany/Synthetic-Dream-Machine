@@ -1,6 +1,6 @@
 /**
  * wikis-ingest-back.test.ts — thread 2: the @working write-layer's disk
- * surface ingests BACK. @working projects per-wiki to wikis/@{slug}/…;
+ * surface ingests BACK. @working projects per-wiki to wikis/{slug}/…;
  * editing a projected wikis/ file and running
  * `lares ingest --source <wikis> --to @working --in-wiki` derives the carrier
  * URI off the @working plane (wikisFileToUri) and lands the edit back in
@@ -21,12 +21,12 @@ import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/lares/api/noosphere-boot.mem");
-const WORKING   = "lar:///ha.ka.ba/wikis/@lares/working";
+const BOOT_MEME = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const WORKING   = "lar:///ha.ka.ba/wikis/lares/working";
 
 let lar: LarInstance;
 let wikisDir  = "";
-let projected = "";   // the boot carrier as projected under wikis/@{slug}/
+let projected = "";   // the boot carrier as projected under wikis/{slug}/
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
