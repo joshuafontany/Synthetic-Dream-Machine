@@ -83,6 +83,10 @@
     "./carrier-type": {
       "import": "./dist/carrier-type.js",
       "types": "./dist/carrier-type.d.ts"
+    },
+    "./tiddler-store": {
+      "import": "./dist/tiddler-store.js",
+      "types": "./dist/tiddler-store.d.ts"
     }
   },
   "main": "./dist/index.js",

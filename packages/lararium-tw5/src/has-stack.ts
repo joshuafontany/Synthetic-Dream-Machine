@@ -15,7 +15,12 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/has-stack
  */
 
-import { BAGS_SEGMENT } from "@lararium/mesh";
+// A VALUE import reaches by SUBPATH; only a `import type` erases. This module bundles into a CJS plugin
+// tiddler, and the barrel's graph carries automerge's wasm shim — whose top-level await no CJS output can
+// express. A type-only barrel import survives because it vanishes at compile time; a value one does not,
+// and takes the whole plugin build with it. `carrier-filetype` keeps this law; the cold-boot mirror keeps
+// it by inlining. Reach for the module that holds what you need.
+import { BAGS_SEGMENT } from "@lararium/mesh/lar-uris";
 
 /** One stack entry: the authored tag and its qualified lar:/// uri (null = outside the stack / unresolvable). */
 export interface StackEntry {

@@ -42,7 +42,12 @@ module-type: startup
  */
 
 import type { TW5Instance, TW5Wiki } from "../types/tiddlywiki.js";
-import type { LarTiddlerChange, TW5TiddlerInputFieldsWithTitle } from "@lararium/mesh";
+// A PACKED MODULE REACHES BY SUBPATH, NEVER THE BARREL. This bundles to CJS, and the barrel's graph
+// carries automerge's wasm shim — whose top-level await no CJS output can express, so a bare
+// `@lararium/mesh` here fails the whole plugin build even for a type-only import: the specifier still
+// enters the bundler's graph. `carrier-filetype` already keeps this law; so does the cold-boot mirror,
+// by inlining. Reach for the module that holds what you need.
+import type { LarTiddlerChange, TW5TiddlerInputFieldsWithTitle } from "@lararium/mesh/tiddler-store";
 import type { LaresTw5Extension } from "../types/lares-globals.js";
 import { expandMemeRefs } from "../deserializer.js";
 import type { TiddlerFields } from "../deserializer.js";
