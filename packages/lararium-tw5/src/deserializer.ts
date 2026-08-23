@@ -249,12 +249,32 @@ function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): Tiddle
     tiddlers = splitMemeToTiddlers(uri, text, fields);
   } catch (err) {
     console.warn(`[memetic-deserializer] split failed for ${uri} — verbatim fallback (drop-honesty): ${err instanceof Error ? err.message : String(err)}`);
-    tiddlers = [{ ...fields, title: uri, text, lar_parse_degraded: "1" } as TiddlerFields];
+    tiddlers = [{ ...fields, title: uri, text } as TiddlerFields];
   }
+  let failures = 0;
   try {
-    const failures = parseMemeText(uri, text, getGrammar() ?? undefined).failures.length;
-    if (failures > 0 && tiddlers[0]) tiddlers[0]["lar_parse_failures"] = String(failures);
+    failures = parseMemeText(uri, text, getGrammar() ?? undefined).failures.length;
   } catch { /* gradient validation is best-effort (no wiki/grammar in scope) */ }
+
+  // ── SURFACE THE CHOICE; DO NOT COVER THE EDGE ───────────────────────────────────────────────────
+  //
+  // The carrier frame is the one place in this grammar where failing on a gradient has repeatedly
+  // snarled, and the reason is always the same: an edge case invites code that DECIDES for the
+  // operator. Deciding needs coverage, coverage needs maintenance, and every rule added to cover an
+  // edge becomes a rule someone must later discover before they can trust the result.
+  //
+  // So the standing preference: where a carrier reads ambiguously, SURFACE THE CONFLICT to the human
+  // who can settle it rather than resolve it quietly. It is the same law the house stands at the
+  // talk-story layer — auto-arbitration is anti-pono — arriving one altitude down, at a parse.
+  //
+  // This function honours it by ADDING NOTHING. The splitter raises an envelope where it has something
+  // to tell a person, and the grammar's count joins that envelope where one stands. Where the splitter
+  // found nothing worth a person's attention, this reader mints no record to say so: a carrier that
+  // parsed with recoveries and no advisories carries no grade, and that silence is honest. Minting one
+  // anyway put a record in front of every reader who had not asked, and moved every downstream count
+  // that the ingest merge model rests on — coverage, arriving as damage.
+  const envelope = tiddlers.find((t) => String(t["tags"] ?? "").includes(PARSE_WARNING_TAG));
+  if (envelope) envelope["failure-count"] = String(failures);
   return tiddlers;
 }
 
@@ -775,17 +795,18 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 // metadata. So `lar_*` sensorium fields (`lar_agent_handle`, `lar_ffz`,
 // `lar_root_handle`, …) round-trip WHOLE — no prefix carries a blanket denial.
 // Only two `lar_*` markers stay denied by
-// EXACT name: the transient parse-grade diagnostics `lar_parse_failures` /
-// `lar_parse_degraded`, which `parseMemeText`/`safeSplitMeme` stamp on ingest to
 // surface degradation — derived-on-read diagnostics, never authored metadata,
 // so they stay off the operator's TOML (map never fuses to territory).
 const IAM_DENY: ReadonlySet<string> = new Set([
   // envelope + record stratum — reconstructed on recompose, never authored TOML
   "title", "text", "modified", "revision",
+  // The parse-grade names stay DENIED even though nothing produces them any more. Nulling the cap
+  // stopped this reader writing them; the denial stops an OPERATOR's own field of that name leaking
+  // into a carrier's iam, which is a different guarantee and still wanted.
+  "lar_parse_failures", "lar_parse_degraded",
   "slot", "fragment-parent", "postamble", "prologue",
   "header-text", "ahu-parent", "ahu-slot", "carrier-soh",
   // transient parse-grade diagnostics — stamped on ingest, denied by exact name
-  "lar_parse_failures", "lar_parse_degraded",
   // RESIDENCY IS NOT IDENTITY. The nalu engine annotates every inbound write with `origin-bag` so the
   // READ path can surface which bag answered — that is its whole job, and it belongs on the record.
   // Serializing it into the carrier fuses two different things: `uri-path` is what the meme IS, a bag
