@@ -1348,8 +1348,8 @@ Distinct from Faerie Bodycrafts (biological) and Summoning (calling from outside
 The room's one claim: it governs **the edge of perceived reality** — spectrum, shadow, boundary, transit, and temporal exception. Time, gates, and reality-rewrites enter as sub-modules of the edge, never as a fourteenth module. Covers powers whose primary effect is light emission, darkness manipulation, prismatic spectrum effects, void transit, or void-condition effects. Distinct from Illusion and Glamour Counter-Veil (Faerie Fire routes there, not here). These are environmental and battlefield-condition powers that act on the visible spectrum, darkness, and the metaphysical edge of perceived reality — including planar apertures, dimensional transit, and reality-boundary rewrites.
 
 **Sub-modules:**
-- **Radiance** — Light, Continual Light, Dancing Lights, Illumination (deferred); `[light]`
-- **Shadow** — Darkness, Continual Darkness; `[shadow]`
+- **`[light]` tag-group** — Light, Continual Light, Dancing Lights, Illumination (deferred). The chapter runs flat: no Radiance/Shadow category headings; each face carries one metaphysics flow directly ahead of its base Power.
+- **`[shadow]` tag-group** — Darkness, Continual Darkness
 - **Prismatic** — Prismatic Wall (apex/custom); `[light][prismatic]` — *Note: Faerie Fire is in Illusion and Glamour / Counter-Veil, not here*
 - **Void** — dimensional transit, planar apertures, and reality-boundary effects (Teleport, Dimension Door, Gate, Passwall, Travel, Word of Recall, Teleport any Object, Pass Plant, Plant Door, Transport Through Plants, Magic Door, Wish, Timestop); `[void]` · `[transit]` for travel forms · `[dangerous]` at P: 12+
 
@@ -1367,7 +1367,7 @@ The room's one claim: it governs **the edge of perceived reality** — spectrum,
 
 | Classic Name | Type | Source | Notes | Mapping Status | Converted |
 | --- | --- | --- | --- | --- |  ---  |
-| Light | spell | C1/MU1 · Basic, Expert, RC | Shared cross-tradition light/darkness recognizer; Range 120', Effect volume 30' diameter; object-attachment movement; save-gated blindness when targeted at eyes. Tags `[light][imbued]`. Cancelled by `Darkness` cast upon it; countered by subsequent casting of any Light form upon the same area. | partial | no |
+| Light | spell | C1/MU1 · Basic, Expert, RC | Shared cross-tradition light/darkness recognizer; Range 120', Effect volume 30' diameter; object-attachment movement; save-gated blindness when targeted at eyes. Tags `[light][imbued]`. Cancelled by `Darkness` cast upon it; countered by subsequent casting of any Light form upon the same area. | converted | yes — three-layer memetic-wikitext card, P:1 mote base, riders scale/continual/target (2026-08-23) |
 | Continual Light | spell | C3/MU2 · Expert, RC | Permanent-form light source; object-bound or air-anchored; reverse `Continual Darkness` counters it. Tags `[light][anchored]`. | partial | no |
 | Dancing Lights | spell | MU1 · Holmes | Mobile light-decoy; 1–6 steerable lantern-like lights that can round corners within range. Tags `[light][focus][area S]`. | partial | no |
 
@@ -1375,7 +1375,7 @@ The room's one claim: it governs **the edge of perceived reality** — spectrum,
 
 | Classic Name | Type | Source | Notes | Mapping Status | Converted |
 | --- | --- | --- | --- | --- |  ---  |
-| Darkness | spell | MU2 · Greyhawk, Holmes | Visibility-denial counterpart to `Light`; total darkness, counters/is countered by Light; defeats infravision inside affected area. Tags `[shadow][imbued]`. | partial | no |
+| Darkness | spell | MU2 · Greyhawk, Holmes | Visibility-denial counterpart to `Light`; total darkness, counters/is countered by Light; defeats infravision inside affected area. Tags `[shadow][imbued]`. | converted | yes — three-layer memetic-wikitext card, P:1 mote base, riders scale/continual/target (2026-08-23) |
 | Continual Darkness | spell | C3/MU2 · Expert, RC *(rev)* | Permanent-form darkness; object-bound or air-anchored; cancelled only by `Continual Light` cast upon it; counters any Continual Light within affected area. MU2/C3 → P: 4. Tags `[shadow][anchored]`. [Canon: FTLS_06 → Light/Dark counter-push-pull doctrine] | custom | — |
 
 ##### Prismatic

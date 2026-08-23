@@ -314,13 +314,11 @@ Some scholars divide powers into two categories: oldtech (*magitech)*, the techn
     - [Animate Objects](#animate-objects)
     - [Shell Craft](#shell-craft)
 - [Light and Void](#light-and-void)
-  - [Radiance](#radiance)
-    - [Light](#light)
-    - [Dancing Lights](#dancing-lights)
-    - [Continual Light](#continual-light)
-  - [Shadow](#shadow)
-    - [Darkness](#darkness)
-    - [Continual Darkness](#continual-darkness)
+  - [Light](#light)
+  - [Dancing Lights](#dancing-lights)
+  - [Continual Light](#continual-light)
+  - [Darkness](#darkness)
+  - [Continual Darkness](#continual-darkness)
   - [Prismatic](#prismatic)
     - [Prismatic Wall](#prismatic-wall)
   - [Void](#void)
@@ -17506,42 +17504,22 @@ meta:
 
 # Light and Void
 
-## Radiance
-
 ```memetic-wikitext+tiddlywiki
-!!!! Light and the Underworld
-
-Most dungeons are dark. A torch runs cheapest and burns for 6 turns (1 hour) —
-it cannot easily be "turned off." A lantern burns one flask of oil for 24 turns
-(4 hours) and carries shutters, which can be closed for temporary darkness. A
-torch or lantern shines 30' in all directions, and claims a hand to carry. If
-you carry a light source, other creatures will probably see the light as you
-approach, and will not be surprised.
-
-''Infravision'' names the ability to see heat (and the lack of heat) — 60' in
-the dark for most who bear it, 90' for goblins. Warm things appear red, cold
-things blue. Infravision does not work in the presence of normal or magical
-light, and it never suffices for reading.
-
-''Blindness'' catches characters through many doors: a casting of light or
-continual light pressed directly on the eyes, or an area of complete darkness
-met without infravision. A blinded creature suffers −6 to attack rolls (it
-must guess where its target stands by hearing), −4 to Saves, −4 Defense, and
-moves at one-third speed.
-
-''Daylight'' punishes some of the underworld's peoples: goblins fight at −1 in
-full daylight (hobgoblins suffer no such penalty), and magical light as bright
-as daylight imposes the same penalties within its extent.
-
-''Sunlight'' outranks all castings. A vampire exposed to direct sunlight must
-Save vs. Death Ray each round or disintegrate; a continual light casting will
-not disintegrate a vampire, but partially blinds it (−4 to all attack rolls).
-Three tiers stand: the sun above, magical light and darkness below it ranked
-against each other, and mundane sources beneath both — magical light floods
-mundane darkness of any extent, magical darkness swallows mundane light of any
-extent, and opposed castings cancel by rank. The old relics remember the
-distilled essence of sunlight — //oil of sunlight// — propelling the fabulous
-elven lightship.
+Most dungeons are dark, and the dark yields only to light. Mundane light — a
+torch, a lantern — shines 30' around and burns away by the hour. Magical light
+floods mundane darkness of any extent, and opposed castings of light and
+darkness cancel by rank. Light refuses concealment: a light source may be
+veiled or made invisible, but the light given off always remains visible, and
+magic itself tends to announce in light — the glowing arrow, the blade of glow.
+Light pressed on unready eyes blinds as surely as any gloom: −6 to attack
+rolls, −4 to Saves, −4 Defense, one-third speed. Infravision fails wherever
+normal or magical light reaches. Daylight punishes some of the underworld's
+peoples — goblins fight at −1 in full daylight, and magical light as bright as
+daylight imposes the same penalties within its extent. True sunlight outranks
+every casting: a vampire in direct sun must Save vs. Death Ray each round or
+disintegrate, where even continual light merely part-blinds it. The sun above;
+magical light and darkness ranked against each other below it; mundane sources
+beneath both.
 ```
 
 <div class="power-card" markdown="1">
@@ -17549,10 +17527,6 @@ elven lightship.
 ### Light
 
 ```memetic-wikitext+tiddlywiki
-Light refuses concealment: a light source may be veiled or made invisible, but
-the light given off always remains visible. The rules of light and the
-underworld stand at the head of ''Radiance''.
-
 <<<
 ''Light''
 
@@ -17822,15 +17796,20 @@ spell will cancel its effects.
 
 </div>
 
-## Shadow
-
 ```memetic-wikitext+tiddlywiki
-The rules of light and the underworld stand under ''Radiance'', above: the
-dark of dungeons, light sources and the surprise they forfeit, infravision,
-blindness, daylight, and the three tiers of the sun. Shadow castings ride the
-same laws from the other face — magical darkness swallows mundane light of any
-extent, and within it all sight fails, including infravision, which reads only
-heat and finds none to read here.
+The things of the underworld see in the dark natively; the delvers who hunt
+them rarely do. A creature caught in complete darkness without such senses
+stands ''blinded'': −6 to attack rolls, −4 to Saves, −4 Defense, one-third
+speed. Infravision reads heat — and the lack of heat — 60' into the dark, 90'
+for goblins, warm things red and cold things blue; it never suffices for
+reading, and it fails wherever normal or magical light reaches. Magical
+darkness swallows mundane light of any extent, and within it all sight fails,
+including infravision, which reads only heat and finds none to read here.
+Opposed castings of darkness and light cancel by rank. And the dark keeps a
+people: shadows — noncorporeal, intelligent, harmed only by magical weapons,
+altering their shape at will, taking surprise more often than not. A shadow's
+touch drains Strength, and any creature drained to zero becomes a shadow
+immediately. They are not undead, and cannot be turned.
 ```
 
 <div class="power-card" markdown="1">
@@ -17838,10 +17817,6 @@ heat and finds none to read here.
 ### Darkness
 
 ```memetic-wikitext+tiddlywiki
-The things of the underworld see in the dark natively; the delvers who hunt
-them rarely do. The rules of light and the underworld stand at the head of
-''Radiance''.
-
 <<<
 ''Darkness''
 
