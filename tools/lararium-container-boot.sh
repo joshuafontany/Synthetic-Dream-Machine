@@ -36,7 +36,13 @@ if [ -n "${LAR_STAND_FACE:-}" ]; then
   # where a faceless one still carries and routes. So the lift is attempted and its refusal is named, and
   # the container serves either way; `standAs` reads whatever actually stands.
   echo "[boot] lighting the face '${LAR_STAND_FACE}' — this container serves as a hearth, never a crossroads…"
-  node packages/lares-cli/dist/src/bin/lares.js persona new 0 --name "$LAR_STAND_FACE" \
+  # LIT AGAINST THIS ISLAND'S OWN STORE, never against the mesh. Lighting a face MINTS four planes and
+  # writes the PersonaGroup id into a bootstrap this container already holds — every doc it touches lives
+  # on local disk. With LAR_PEERS set, the repo reaches for peers that have not yet stood and the mint
+  # answers `Document … is unavailable`: a resolution failure standing in for a dependency that was never
+  # real. So the lift runs peerless and the SERVER carries the peers, which also reads right — a face is
+  # what this vessel holds, never what the mesh grants it.
+  LAR_PEERS= node packages/lares-cli/dist/src/bin/lares.js persona new 0 --name "$LAR_STAND_FACE" \
     || echo "[boot] the face did NOT light (see the error above) — serving faceless, at the waking floor"
 fi
 

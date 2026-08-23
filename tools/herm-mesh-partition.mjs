@@ -27,7 +27,7 @@ const dockerRelay1 = process.env.RELAY1_SERVICE ?? "herm-relay";  // compose SER
 function dialsOf(doc) {
   const out = [];
   for (const [title, entry] of Object.entries(doc?.tiddlers ?? {})) {
-    if (title.includes("@meshpalace/dial/") && typeof entry?.tiddler?.bearing === "string") out.push(entry.tiddler.bearing);
+    if (title.includes("bags/meshpalace/dial/") && typeof entry?.tiddler?.bearing === "string") out.push(entry.tiddler.bearing);
   }
   return out;
 }

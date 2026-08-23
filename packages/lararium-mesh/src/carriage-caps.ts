@@ -177,7 +177,7 @@ export function hashUnit(s: string): number {
 /**
  * deriveMeshSelf — the ONE mesh self-dial derivation (was duplicated across main.ts's two branches).
  * Every vessel is a NODE on the chart: θ = a content-blind FNV hash of the address, r = carriage standing
- * (radius, default 1 — the node entry supplies `LAR_RADIUS`), bearing = `…/@oracle/node/<label>` (`LAR_SEED` label, else hash-derived).
+ * (radius, default 1 — the node entry supplies `LAR_RADIUS`), bearing = `…/bags/oracle/node/<label>` (`LAR_SEED` label, else hash-derived).
  */
 export function deriveMeshSelf(
   publicUrl: string, peers: readonly string[], opts: { label?: string; radius?: number } = {},

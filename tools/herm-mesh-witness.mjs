@@ -22,12 +22,12 @@ const NEEDLE = process.env.NEEDLE ?? "node/alpha";
 const ATTEMPTS = Number.parseInt(process.env.WITNESS_ATTEMPTS ?? "30", 10);
 
 // Pull the dial bearings a decoded FLOW-map carries. The map holds a TW5 tiddler store; each dial rides a
-// tiddler titled `…/@meshpalace/dial/<slug>` whose `bearing` field names the `lar:` address it resolves.
+// tiddler titled `…/bags/meshpalace/dial/<slug>` whose `bearing` field names the `lar:` address it resolves.
 function dialsOf(doc) {
   const out = [];
   const tiddlers = doc?.tiddlers ?? {};
   for (const [title, entry] of Object.entries(tiddlers)) {
-    if (!title.includes("@meshpalace/dial/")) continue;
+    if (!title.includes("bags/meshpalace/dial/")) continue;
     const bearing = entry?.tiddler?.bearing;
     if (typeof bearing === "string") out.push(bearing);
   }
