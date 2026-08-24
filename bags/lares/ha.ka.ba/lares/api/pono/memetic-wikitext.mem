@@ -15,7 +15,7 @@ revised-on    = "2026-08-15"
 revision-note = "normative half rebuilt on the TW5 macro-call production: five heads in the prefix table, ABNF derived from parseMacroInvocation, UTF-8 string-literal values, frame and host-reading in the conformance MUSTs, block check and authoring laws stated, five worksites split so every cross-reference resolves"
 role          = "submittable specification for text/x-memetic-wikitext — abstract, conformance (RFC-2119), lexical structure, ABNF surface grammar, dual-layer processing model, pranala type system, media-type registration, security. Ontology referenced, not duplicated. Sibling submission to the lar: URI spec."
 status        = "standing"
-status-why = "submission-draft"
+status-why    = "submission-draft"
 type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/memetic-wikitext"
 ```
@@ -771,7 +771,7 @@ literally.
 
 !!! Residency is not identity, and only one name carries it
 
-`origin-bag` names ''which doc answered'' — the engine writes it on the read path, and a projector
+`$origin-bag` names ''which doc answered'' — the engine writes it on the read path, and a projector
 reading it for a destination would write a meme back to its old home. It never re-emits.
 
 ''`bag` carries three senses and none of them is that.'' A ''write parameter'' naming which store
@@ -779,7 +779,8 @@ receives a put; a ''manifest's own subject''; and an ''effect record's required 
 ledger's parse refuses a record without one, so denying it does not degrade an audit trail, it makes one
 unreadable. Its siblings `source-bag` · `dest-bag` · `bag-cleared` · `bag-retired` were never in question.
 
-One name, three offices; the engine stamp is the other name.
+One name, three offices; the engine stamp is the other name, and it rides the host's shelf so the
+author's `bag` stays the author's (#the-carriage).
 
 !!! The marks held in reserve
 
@@ -1033,6 +1034,106 @@ reader, and writes with the emitter, and never composes bytes of its own.
 
 <<~/ahu >>
 
+<<~ ahu #the-carriage >>
+
+## The Carriage ~ what the grammar owns, and where it keeps it
+
+A carrier holds two strata that look alike on a record and answer to different owners. What the
+**author** wrote, and what the **frame** needs to stand the file up again. Confusing them costs in both
+directions: structure written into the declaration doubles on every projection, and an author's field
+mistaken for structure vanishes on a round trip.
+
+### The floor ~ what may be reserved at all
+
+TiddlyWiki restricts no field name — since v5.2 `isValidFieldName` accepts any string. MultiWikiServer
+restricts exactly two: its resolver reads `fields: { ...fields, title, revision }` and overwrites those,
+leaving every other name the author wrote untouched. `bag_id`, `created` and `updated` stand as columns
+beside the field map, never injected into it.
+
+So this grammar reserves those and their record-stratum siblings, and nothing else:
+
+<<~ranks reserved title ~ the host overwrites it -> revision ~ the host overwrites it -> text ~ the body rebuilds from the frame -> modified ~ the record stratum carries it >>
+
+`type` joins them for a different reason: the host reads it to CHOOSE a deserializer, exactly as
+TiddlyWiki's own filetype registry does, so a carrier IS its type and the value re-derives on every
+read rather than travelling in the bytes.
+
+**Every other name belongs to the author.** A carrier declaring `postamble`, `slot`, `prologue` or
+`block-check` reads all of them back — they are ordinary custom fields, because the grammar stopped
+standing on those words.
+
+### The host's shelf ~ `$…`
+
+The grammar's own carriage rides the `$` prefix TiddlyWiki keeps for whoever stands the wiki, and the
+emitter drops that whole namespace from the declaration.
+
+A namespace rather than a list, because a list forgets. Two carriage parts once sat in no list at all:
+they were read as structure and denied nowhere, so each emitted into the declaration AND rebuilt as
+structure — an author's value came back undefined and the projection stopped settling. A prefix cannot
+forget a member.
+
+**The exclusion states where structure lives, not what TOML permits.** A quoted key carries any
+character, `"$preamble" = "…"` parses, and a multi-line basic string carries newlines cleanly. The
+declaration stays free of carriage because identity and structure are different offices — never because
+the syntax refused.
+
+### Scalar or multi-line ~ the split that decides the shape
+
+Ask of each carriage part: **can its value hold a newline?**
+
+A TiddlyWiki `.tid` file parses its header line by line and splits the body at the first blank line
+(`boot.js`, `application/x-tiddler`). **Only `text` may carry a newline.** A value that can only survive
+inside one file format cannot travel — so a multi-line part cannot be a field anywhere, at any name.
+
+<<~ranks carriage scalar ~ `$slot` · `$fragment-parent` · `$carrier-soh` · `$carrier-sila` · `$postamble-foreign` · `$origin-bag` — a field, and a native filter surface -> multi-line ~ `$prologue` · `$preamble` · `$header-text` · `$postamble` — a record, and a `text` that can hold it >>
+
+The split runs **scalar-or-multi-line**, never reserved-or-free. A date, a slot name, a bag address:
+each stays a field, and making it a record would cost the filter surface and buy nothing.
+
+### Carriage records ~ the rails already laid
+
+A multi-line part becomes a record on the same rails that carry ahu fragments:
+
+<<~moves carriage -> a-record-of-its-own on/the-carrier's-own-address if/the-value-can-hold-a-newline do/splice-it-back-by-position >>
+
+* **The address derives.** `lar:///…#$prologue` under a carrier; `lar:///…#slot/$preamble` under a
+  fragment, extending the slot path the way a nested fragment already does. The `$` marks the host's
+  slot and keeps the address whole — a `$:/`-prefixed system title would break the carriage away from
+  the thing it belongs to.
+* **`$fragment-parent` points home**, so the projector climbs to the root and never writes a carriage
+  record as its own file. One carrier, one file, as before.
+* **No marker anywhere.** A fragment is spliced where its `<<~ kahea ahu >>` stands; carriage is spliced
+  by POSITION, which is the only signal these bytes ever carried. The frame knows the prologue precedes
+  the head and the postamble follows the release, and no mark says so.
+
+A carriage record round-trips whole in bytes and lossy in fields: re-read, a fragment's trailing bytes
+fold into the body and the record is gone. **That is correct.** The boundary lives in position, and
+reserving a field to re-state it would put a derived fact back on the record.
+
+<<~/ahu >>
+
+<<~ ahu #the-gradient >>
+
+## The Gradient ~ how far down a carrier sits
+
+Graceful parsing says NO parse breaks badly: a carrier missing its frame still yields records, a carrier
+missing its declaration still dispatches. **That mercy is load-bearing and it hides files.**
+
+A carrier that lost its address is skipped by every instrument that walks the corpus by `uri-path` — the
+check witness, the coordinate witness, the round-trip witness — each at `if (!uri) continue`. Seventeen
+carriers once sat outside all three at once while every one of them reported itself as corpus-wide.
+
+So a carrier's health reads as a **gradient**, never a verdict. A reader names the KIND a file declares
+itself to be, and the marks that kind requires and lacks. The kind reads from the DECLARATION, never
+from the path: where a file rests says where it rests, and what it IS is a thing it states.
+
+<<~ranks kind carrier ~ declares `uri-path` — a meme; wants the whole frame and a check -> descriptor ~ declares `bag` — a bag declaring itself; a body frame would claim it holds a meme's text -> shelf ~ declares neither, and its head names an address the declaration omits — the fault that makes a file invisible -> unframed ~ no head at all; bytes wearing an extension >>
+
+`lares normalize --gradient` reads it. It fails on a **fault** and never on a **kind**: a descriptor
+carrying no body frame stands exactly where it should.
+
+<<~/ahu >>
+
 <<~ ahu #carrier-bytes >>
 
 !! Carrier Bytes Law
@@ -1067,6 +1168,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;IdxldkM-2nGNTehqc8qet-IqGcEtASzBnO1RpFYE9BE
+<<^ code:"&#x0003;" >>ni:///sha-256;61ewrgWvDy9mXPZ3TUu_b2zu_XfZaqX7g4Lhp4ewakQ
 
 <<^ code:"&#x0004;" -> ? >>
