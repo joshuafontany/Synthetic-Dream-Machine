@@ -1,0 +1,76 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/period-forms >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/docs/history/period-forms.mem"
+l-space   = "archive"
+mana      = 16
+manao     = 15
+manaoio   = 14
+register  = "Synthesis-Canon"
+retain    = true
+role      = "how to read an early carrier's HUD — which instrument forms carry as testimony and MUST NOT be modernized in place"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/history/period-forms"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #law >>
+
+! Period Forms — what an early carrier's HUD says, and what it MUST NOT be made to say
+
+A history carrier records how the house read at the moment it was written. ''Its instrument forms carry
+as testimony'', so a sweep that modernized them in place would erase the evidence it walked through and
+leave a record claiming the house always read this way.
+
+''A carrier's HUD modernizes when it LIFTS INTO CANON, and not before.'' The Lindwyrm arc lifted and
+carries current forms; the genesis-arc index stands under the same constraint and has not.
+
+<<~/ahu >>
+
+<<~ ahu #aligned >>
+
+!! Aligned corpus-wide
+
+One field carries no testimony, because it names a band rather than an instrument reading:
+
+* `iam` `register` — CODE to band-word: `CS`/`SC` → Synthesis-Canon · `PS` → Provisional-Synthesis ·
+  `S` → Synthesis · `P` → Provisional · `C` → Canon
+
+<<~/ahu >>
+
+<<~ ahu #preserved >>
+
+!! Preserved as period-form
+
+These carry the early HUD verbatim. ''Read them, never rewrite them.''
+
+```text
+~:confidence[CODE],[N]   old inline confidence    → now  <<~ confidence <Register> N/20 >>
+✶ ◎ ◇ ■ ○                old OODA-HA phase glyphs → now  ✶ ⏿ ◇ ▶ ↺
+   └ ◎/■/○ also read as STATUS (Orient / active / blocked·future) — not always phase; do NOT blind-swap
+⤴  Assess / Hoʻoko       retired 6th phase        → now  folded into ↺ Hoʻoko & Aftermath
+🏛️ 🌊 🗡️ 🎭 🔮 stance rows   old un-bound stance rows → now  engaged stances bind a Mu tool (🏛️:!)
+```
+
+''The status reading is the trap.'' `◎`, `■` and `○` served two axes at once in the early HUD, so a
+table-driven swap from the phase column silently rewrites a blocked item as an act.
+
+Whole-file period-artifacts stand verbatim — definitions and instructions, never narrative: the
+glyph-definition drafts and the `lares-*.instructions` files.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/consume-archive >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;8LW4jDjFe00N8-1V49F1VYjeaCPtyinA4P2Zd7pI45M
+
+<<^ code:"&#x0004;" -> ? >>

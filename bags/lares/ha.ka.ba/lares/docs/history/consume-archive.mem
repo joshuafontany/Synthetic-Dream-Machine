@@ -1,0 +1,87 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/consume-archive >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/docs/history/consume-archive.mem"
+l-space   = "archive"
+mana      = 15
+manao     = 15
+manaoio   = 13
+register  = "Synthesis"
+retain    = true
+role      = "where the early research landed — which scratch note became which doctrine, and what the consume pass could not recover"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/history/consume-archive"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Consume Archive — where the early research landed
+
+''This is the only record of which scratch note became which doctrine.'' The research files are gone;
+what they contributed stands in the memes below, and this table is the rope between them.
+
+Read it as provenance, never as a worklist. The pass it records closed, and the sources it names were
+deleted on 2026-05-16 — so a row here answers "where did this come from", and nothing here is owed.
+
+<<~/ahu >>
+
+<<~ ahu #history >>
+
+!! Origin-story records
+
+''These three were named by an index and never carried.'' They preserved development-arc material — the
+conversations and early drafts behind current doctrine — and the 2026-05-16 pass deleted their sources
+before any carrier held them. The rows stand as a record of what the corpus does NOT hold.
+
+The arc that DID survive stands at [[lindwyrm|lar:///ha.ka.ba/lares/docs/history/lindwyrm/index]], and
+[[period-forms|lar:///ha.ka.ba/lares/docs/history/period-forms]] governs how its early HUD reads.
+
+| Named, not held | Would have preserved |
+|---|---|
+| `genesis-sharktooth-chatlog` | April 12 2026 Gemini chatlog; shark-teeth origin; Shape/Detail/Motion genesis; Wild Magic first taxonomy |
+| `prior-art-comparison` | 8-system prior-art comparison; per-system design pressure; 7 v5 spec design tests |
+| `mu-emergence-sequence` | Boot grammar emergence narrative; four-layer model origin; null-oracle first statement |
+
+<<~/ahu >>
+
+<<~ ahu #index >>
+
+!! What landed where
+
+Each row: a research file the pass consumed, and the doctrine that carries its contribution now.
+
+| Source (deleted) | Landed in | New docs created |
+|---|---|---|
+| `memetic-wikitext-v4-draft.md` | `memetic-wikitext.tid` (substantially) | — |
+| `mana-manao-manaoio-model.md` | `memetic-wikitext.tid #stances-syad-tools` | `bags/lares/docs/mu/model-agnosticism.md` (#kuka-lifecycle) |
+| `glyph-research.md` | `memetic-wikitext.tid #constitutional-root` | — |
+| `unified-five-band-v01.md` + `unified-attention-scale.md` + `chronometer-scale-mapping.md` | `memetic-wikitext.tid #law-of-5s` | `bags/lares/docs/pono/law-of-5s.md` (new) |
+| `sigil-research.md` | → | `bags/lares/docs/pono/sigil-shape-motion.md` (new) |
+| `maybe-logic.md` | `bags/lares/docs/mu/model-agnosticism.md` | (#eprime-moves, #catma added) |
+| `mu-boot.md` + `mu-meme.md` | `bags/lares/api/mu.md` | — |
+| `LOCI.md` | `bags/lares/AGENTS.md` (partial) | — |
+| `auth-research.md` | S7.1 Keyhive sprint | — |
+| `w3c-spec-research-v01.md` | `bags/lares/docs/pono/memetic-wikitext.md` | (#w3c-lineage-verdicts added) |
+| `AGENTS.md`, `memetic-wikitext-v3.md`, `memetic-wikitext.md`, `memetic-wikitext-full.md` | ''not recovered'' — deleted without read | gap noted in history/README.md |
+| [[mu-boot-research|mu-boot-research.md]] | `lares_research/memetic-wikitext/mu-boot.md` + `mu-meme.md` | `bags/lares/api/mu.md` | none |
+| [[loci-wild-magic|loci-wild-magic.md]] | `lares_research/memetic-wikitext/LOCI.md` | `bags/lares/AGENTS.md` (partial) | transclusion wild-magic grammar |
+| [[auth-research|auth-research.md]] | `lares_research/memetic-wikitext/auth-research.md` | S7.1 Keyhive sprint | none |
+| [[w3c-spec-research|w3c-spec-research.md]] | `lares_research/memetic-wikitext/w3c-spec-research-v01.md` | `memetic-wikitext.tid` (SGML header claim) | formal SGML alignment open |
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/period-forms >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;yqr3Z1fUI_6jcs0cn4NgSyCkbOMcHcftaXLA1rZYnoY
+
+<<^ code:"&#x0004;" -> ? >>
