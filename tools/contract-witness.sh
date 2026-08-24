@@ -214,7 +214,12 @@ else step "A revokes"; bad "no nym"; fi
 say "═══ RESULT ═══"
 if [ "$FAILED" -eq 0 ]; then
   echo "  the door opened for a key A never held, refused every forgery, and closed by supersession."
-  echo "  UNWALKED, by design: the network carry (herm-mesh-witness) and two machines with two clocks."
+  # THE CARRY NOW STANDS WALKED. `herm-mesh-witness` carries a dial across three hops between four
+  # containers, pointer-signed and hash-matched at the last — so naming it unwalked here would send a
+  # reader to build an instrument that already passes. What this witness still does NOT reach is the
+  # part no single machine can stage: two machines, two clocks, and a partition between them.
+  echo "  This runs in ONE process-space. WALKED ELSEWHERE: the network carry (herm-mesh-witness,"
+  echo "  three hops, verified). UNWALKED ANYWHERE: two machines with two clocks."
 else
   echo "  $FAILED check(s) failed."
 fi
