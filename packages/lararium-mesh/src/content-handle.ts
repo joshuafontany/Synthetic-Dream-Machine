@@ -133,7 +133,10 @@ export function assertBodyIndexTier(indexHoldingBagUri: string, publicity: BodyP
   const expected = bodyIndexBagUri(publicity);
   if (indexHoldingBagUri !== expected) {
     throw new Error(
-      `[content-handle] a cad ${publicity}-body index MUST ride ${expected}, not ${indexHoldingBagUri} — ` +
+      // A STACK TRACE CARRIES NO PARAGRAPH. In comments a bare `cad` borrows its name-sense from the
+      // prose around it; a thrown line arrives alone, where `cad` reads as an ordinary word. The kind
+      // rides in the one register that has no context to lean on.
+      `[content-handle] the cad store's ${publicity}-body index MUST ride ${expected}, not ${indexHoldingBagUri} — ` +
         `map-tier=body-tier (a private index on the public crossroads floor leaks existence+size+re-key cadence to a stranger)`,
     );
   }
