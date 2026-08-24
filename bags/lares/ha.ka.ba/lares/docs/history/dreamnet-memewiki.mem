@@ -1,9 +1,9 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/research/dreamnet-memewiki >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/dreamnet-memewiki >>
 ```toml iam
 confidence = 14
-file-path  = "bags/lares-history/ha.ka.ba/lares-history/research/dreamnet-memewiki.mem"
+file-path  = "bags/lares/ha.ka.ba/lares/docs/history/dreamnet-memewiki.mem"
 l-space    = "archive"
 mana       = 15
 manao      = 16
@@ -14,7 +14,7 @@ retain     = true
 role       = "the consolidation that staged the memetic-wikitext kernel — four scratch notes folded into one OODA-HA worksite, judged against what stands"
 tags       = ["api/pono/meme"]
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lares-history/research/dreamnet-memewiki"
+uri-path   = "ha.ka.ba/lares/docs/history/dreamnet-memewiki"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -463,9 +463,10 @@ Leave the unresolved items visible and bounded. Hidden residue is how architectu
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/parser >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/tw5-deserializer >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/consume-archive >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;I13tTLUCiQIv3j4huNWAaugiaGiKz9tSnVZr7xU3Hjo
+<<^ code:"&#x0003;" >>ni:///sha-256;fGJOdb9nqWr9ptK7cWBAi1O3YBPGL4jKCxJRiLdfoIE
 
 <<^ code:"&#x0004;" -> ? >>
