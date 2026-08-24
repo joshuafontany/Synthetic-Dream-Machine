@@ -130,8 +130,8 @@ export async function cmdSeed(args: ParsedArgs): Promise<number> {
   if (holdings.length === 0) {
     emit(args, {
       ok: false,
-      error: { code: "not-found", message: `no @holdings under ${join(larRoot(), "bags")}` },
-      human: () => console.error(`lares vessel seed: no @holdings under ${join(larRoot(), "bags")}`),
+      error: { code: "not-found", message: `no holdings under ${join(larRoot(), "bags")}` },
+      human: () => console.error(`lares vessel seed: no holdings under ${join(larRoot(), "bags")}`),
     });
     return 3;
   }
