@@ -32,8 +32,10 @@ wiki's recipe — an ordered #has stack of bags, the live edit layer above all �
 the answering bag surfaced on the read path (lar-uri #minting). The `ha.ka.ba`
 corpus path stands as the primary hostless root: `lar:///ha.ka.ba/...`
 
-''Hostful'' URIs (`lar://<host>/...`) are anchored to a domain. The domain IS the
-attribution and the sync scope. `lar://elyncia.social/...` and
+''Hostful'' URIs (`lar://<host>/...`) anchor to a domain, which carries the
+attribution and the sync scope — a SESSION-plane fact. A hostful URI MUST NOT
+stand as a storage title or a stable graph address (lar-uri #security); the
+domain map below names sync scopes, never places content lives. `lar://elyncia.social/...` and
 `lar://amorphousdream.com/...` are entirely distinct namespaces even if their
 paths overlap.
 
@@ -108,6 +110,6 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;k1moztXWXdFRq-fEe613nr9XyIZhtku9dUeqouJNeQQ
+<<^ code:"&#x0003;" >>ni:///sha-256;00GUFFpsd9xGDSfTM82l-sefwfrGV1T7hjuzsc0qhnA
 
 <<^ code:"&#x0004;" -> ? >>

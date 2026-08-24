@@ -173,7 +173,10 @@ export function verifyBcc(text: string): "ok" | "mismatch" | "unchecked" | "torn
   if (st.kind === "absent") return "unchecked";
   if (st.kind === "torn") return "torn";
   const span = st;
-  const trailing = /^[ \t]*(ni:\/\/\/([a-z0-9-]+);([A-Za-z0-9_-]+))/.exec(text.slice(span.end));
+  // ADJACENT, exactly. The check follows the closed sigil with nothing between — the emitter mints it
+  // so, and slack here would let two byte-different files share one verdict. A shifted check reads as
+  // postamble content: it does not verify, and the projection re-mints it adjacent.
+  const trailing = /^(ni:\/\/\/([a-z0-9-]+);([A-Za-z0-9_-]+))/.exec(text.slice(span.end));
   if (!trailing) return "unchecked";
   // The message names its algorithm; this reader decides whether to accept it.
   if (!ACCEPTED_ALGS.has(trailing[2]!)) return "mismatch";

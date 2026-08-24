@@ -288,18 +288,8 @@ Slot order carries the drift gradient: ''Ha'' drifts slowest, ''Ka'' at moderate
 
 No metric stands yet claimed. The scheme names attitude and section; it defines no distance function over roots.
 
-''Lineage and source.'' The scheme declares a palimpsest lineage for its reinterpretation of the Ha-Ka-Ba triple.
-
-* SDM (Luka Rejec) supplies the ''hakaba matrix'' itself --- the existential trinity ''Ha'' (body), ''Ka'' (soul), ''Ba'' (psyche). The lar-uri inherits it directly --- body → heading, soul → angle, psyche → carried dynamic --- and overlays the noun·adjective·verb mnemonic. (Source below.)
-* Hawaiian //hā// supplies threshold-breath resonance for `ha`.
-* Egyptian soul grammar supplies `ka`/`ba` as standing double and returning bird.
-* Flight dynamics supplies the orientation frame (yaw · pitch · roll) and keeps the reading on attitude, not mapped position.
-* what3words supplies mnemonic three-slot arity; `lar:` fills each slot with a term and forks away from geospatial metric.
-* hoʻokele supplies the wayfinding doctrine: hold bearing, infer position.
-
-Source: Luka Rejec, //Vastlands Guidebook// §"Death and Hakaba" --- //"the existential trinity of body (ha), soul (ka), and psyche (ba)"//: the soul as the motive fire of consciousness, the psyche as its unique direction, the body as its vehicle. Adapted from Ancient Egyptian person-conceptions (the //Coffin Texts// and //Book of the Dead//). Indexed in //Ultraviolet Grasslands 2e//, pp. 230–234 (//Ha, Ka, Ba// & //hakaba matrix// 230; //ha · body// 234; //ka · soul// 234; //ba · personality// 232). Hawaiian //hā// (threshold-breath) layers atop the `ha` slot as palimpsest resonance.
-
-Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
+''Lineage.'' The Ha-Ka-Ba reading carries a declared palimpsest lineage; the citation and its audit
+anchors ride the documentation companion (lar:///ha.ka.ba/lares/docs/pono/lar-uri#lineage).
 
 Fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`, `#pranala-name`.
 
@@ -311,7 +301,7 @@ BEARING (path) → SECTION (fragment).
 
 !! Conformance Classes
 
-A ''conforming parser'' MUST: accept the surface of #scheme-syntax; reject a path with fewer than three root slots (stable/unstable); reject a slot bearing an underscore, whitespace, or non-ASCII (an internal hyphen joins a compound term); reject an `@`-prefix outside `child[1]`; treat a `#fragment` as an opaque anchor.
+A ''conforming parser'' MUST: accept the surface of #scheme-syntax; reject a path with fewer than three root slots (the root arity law); reject a ROOT slot bearing an underscore, whitespace, or non-ASCII (an internal hyphen joins a compound term); treat a `#fragment` as an opaque anchor.
 
 A ''conforming resolver'' MUST: resolve against the local world graph only; map an `@`-surface (a `bags/…` or `wikis/…` segment) through the island manifest's `BagResolver`; treat the URI as the stable address and the doc as the bound house (one URI MAY bind different docs per device).
 
@@ -405,7 +395,6 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 * ''Unstable attitude-root vocabulary.'' The Ha-Ka-Ba slot discipline holds; a registry of reserved attitude roots remains open.
 * ''Multi-bag disk projection — full-path-inside-bag.'' Every file lives at its full uri-path inside its holding bag's mirror (`bags/<bag>/<full-name>.mem`): directory = residency, interior = the name, whole. Any bag holds any name losslessly.
 * ''Turn-as-meme-graph.'' Live exchange turns already carry aim/yield wires, worn voices, rating marks, hoike/moolelo children — a meme-graph awaiting ingest. The unstable URIs minted per turn stand as declared-unresolved names for session-bag memes; an INGEST organ can decompose session logs into corpus.
-* ''Lineage citation.'' Luka Rejec, //Vastlands Guidebook// §"Death and Hakaba" (the trinity body·soul·psyche), indexed in //Ultraviolet Grasslands 2e// pp. 230–234; Egyptian root: the //Coffin Texts// / //Book of the Dead//; Hawaiian //hā// as resonance.
 
 <<~/ahu >>
 
@@ -449,6 +438,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;T_SPyDgrT1x0ln8a4j09RLB8HebQ_QODHRW7GZIcpm8
+<<^ code:"&#x0003;" >>ni:///sha-256;DgaEzmd1avLs0Ih2AYreavg4bNR-l4zUx-PUu3xk-9U
 
 <<^ code:"&#x0004;" -> ? >>

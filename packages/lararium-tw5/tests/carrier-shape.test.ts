@@ -138,5 +138,16 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
     expect(shape.faults.join(" ")).toContain("2 text frames");
   });
 
+  /** ADJACENT, EXACTLY. A check shifted off its closer by even one space does not verify — slack there
+   *  would let two byte-different files share one verdict, the class the span law exists to close. */
+  test("a shifted check does not verify", () => {
+    const base = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml iam\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code:"&#x0002;" >>\n\nbody\n\n<<^ code:"&#x0003;" >>`;
+    const good = readCarrierShape(`${base}ni:///sha-256;AAAA\n\n<<^ code:"&#x0004;" -> ? >>\n`);
+    expect(good.marks.check).toBe("mismatch");   // adjacent but wrong digest — SEEN, judged
+    const shifted = readCarrierShape(`${base} ni:///sha-256;AAAA\n\n<<^ code:"&#x0004;" -> ? >>\n`);
+    expect(shifted.marks.check).toBe("unchecked"); // one space off — not a check at all
+  });
+
+
 
 });

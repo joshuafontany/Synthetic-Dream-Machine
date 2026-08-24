@@ -1112,6 +1112,18 @@ The alignment reads as presentation and acts as law: a hand-written block using 
 identically and re-emits one column wider, so the file reports as changed on every projection and its
 check disagrees with the bytes beside it. **A writer that cannot state its padding cannot federate.**
 
+### The frame's own spelling
+
+The span covers the frame sigils' bytes deliberately — the frame states how to read, so its spelling
+belongs to what the check protects — and that choice obliges a canonical spelling:
+
+* ''A control-mark reference spells `&#x`, exactly four hex digits, `;`'' — one spelling, the one the
+  recogniser reads. `&#X…;`, shortened forms (`&#1;`), and raw octets stand outside the grammar.
+* ''A frame sigil's canonical spelling = the one the emitter mints'' — `<<^ code:"&#xNNNN;" … >>`,
+  single spaces. A reader admits a spelling variant (graceful parsing); the projection re-mints
+  canonical; and the check follows the bytes, so a re-minted carrier restamps. Two spellings of one
+  sigil never share a check, and neither claims the other's.
+
 ### One mouth
 
 These laws describe what the emitter already enacts, and stating them here serves a second reader —
@@ -1273,6 +1285,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;v_99VPUC5BsGbBr6Cs0bpOvscEZH4LbJbQUwVQkyyoM
+<<^ code:"&#x0003;" >>ni:///sha-256;yV-I41Ni7pQQuNnq9XiSw02kpndC6PDeBGcFdViAAvA
 
 <<^ code:"&#x0004;" -> ? >>

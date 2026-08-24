@@ -433,6 +433,25 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 
 <<~/ahu >>
 
+<<~ ahu #lineage >>
+
+!! Lineage — the Ha-Ka-Ba palimpsest
+
+''Lineage and source.'' The scheme declares a palimpsest lineage for its reinterpretation of the Ha-Ka-Ba triple.
+
+* SDM (Luka Rejec) supplies the ''hakaba matrix'' itself --- the existential trinity ''Ha'' (body), ''Ka'' (soul), ''Ba'' (psyche). The lar-uri inherits it directly --- body → heading, soul → angle, psyche → carried dynamic --- and overlays the noun·adjective·verb mnemonic. (Source below.)
+* Hawaiian //hā// supplies threshold-breath resonance for `ha`.
+* Egyptian soul grammar supplies `ka`/`ba` as standing double and returning bird.
+* Flight dynamics supplies the orientation frame (yaw · pitch · roll) and keeps the reading on attitude, not mapped position.
+* what3words supplies mnemonic three-slot arity; `lar:` fills each slot with a term and forks away from geospatial metric.
+* hoʻokele supplies the wayfinding doctrine: hold bearing, infer position.
+
+Source: Luka Rejec, //Vastlands Guidebook// §"Death and Hakaba" --- //"the existential trinity of body (ha), soul (ka), and psyche (ba)"//: the soul as the motive fire of consciousness, the psyche as its unique direction, the body as its vehicle. Adapted from Ancient Egyptian person-conceptions (the //Coffin Texts// and //Book of the Dead//). Indexed in //Ultraviolet Grasslands 2e//, pp. 230–234 (//Ha, Ka, Ba// & //hakaba matrix// 230; //ha · body// 234; //ka · soul// 234; //ba · personality// 232). Hawaiian //hā// (threshold-breath) layers atop the `ha` slot as palimpsest resonance.
+
+Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 !! Edges
@@ -443,6 +462,6 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;L1stZaLNI-djeF--RNesl4beDbmP4moqSehi-ZBXyYc
+<<^ code:"&#x0003;" >>ni:///sha-256;s8xzJAGesaAqMtVBA4vXtym9RoKldJErg1YesOE3HDU
 
 <<^ code:"&#x0004;" -> ? >>
