@@ -28,7 +28,7 @@ uri-path  = "ha.ka.ba/lares/api/masks"
 Canonical homes for all mask definitions invokable via kahea transclusion.
 Mask definitions live here. Session invocations live in LARES.
 
-Grammar and stacking law defined in `lar:///ha.ka.ba/lares/docs/lares/voices/masks`.
+Grammar and stacking law defined in `lar:///ha.ka.ba/lares/docs/voices/masks`.
 
 <<~/ahu >>
 
@@ -111,7 +111,7 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/api/voices >>
 <<~ loulou lar:///ha.ka.ba/lares/api/masks/named/mischief-muse >>
 <<~ loulou lar:///ha.ka.ba/lares/api/masks/named/tide-caller >>
@@ -124,6 +124,6 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;o6aA1TQOfcjKcy0--kKyR0Hmg37eopdlOr8aRMLyecg
+<<^ code:"&#x0003;" >>ni:///sha-256;UGz5ysXUJsCoSORn7rOFHPQYZuyGLd20L1pginet0vA
 
 <<^ code:"&#x0004;" -> ? >>

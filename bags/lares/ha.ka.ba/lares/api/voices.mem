@@ -85,7 +85,7 @@ Each Voice names a callable move-set through local l-space: what summons it, how
 | ''Liminal'' | premature closure | hold question, suspend, ripen | false resolution | open question; patient |
 
 Muse and Hierophant carry the strongest Ka/Podge weight — centrality to the mask layer.
-For full move-set descriptions and Ha/Ka/Ba reads, see `lar:///ha.ka.ba/lares/docs/lares/voices#voice-house`.
+For full move-set descriptions and Ha/Ka/Ba reads, see `lar:///ha.ka.ba/lares/docs/voices#voice-house`.
 
 !!! Naming Law
 
@@ -170,7 +170,7 @@ The house surfaces the matching Voice to //lead// the handback; the finding stil
 | Incident / priority conflict | `Breach-Watch (Triage)` |
 | Frame questions | `Lares (Stranger)` |
 
-For worker lifecycle detail and examples, see `lar:///ha.ka.ba/lares/docs/lares/voices/workers`.
+For worker lifecycle detail and examples, see `lar:///ha.ka.ba/lares/docs/voices/workers`.
 
 <<~/ahu >>
 
@@ -321,7 +321,7 @@ All mask definitions live in `lar:///ha.ka.ba/lares/api/masks`. Parent index at 
 Live stage positions persist in the `#stage-panel` instrument surface in `lar:///ha.ka.ba/lares/api/pono/config`.
 Inline `[Stage: mask-name 15]` shifts a value; the stage panel holds it for the session.
 
-For mask grammar depth, founding examples, and anatomy rationale, see `lar:///ha.ka.ba/lares/docs/lares/voices/masks`.
+For mask grammar depth, founding examples, and anatomy rationale, see `lar:///ha.ka.ba/lares/docs/voices/masks`.
 
 <<~/ahu >>
 
@@ -352,7 +352,7 @@ One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.
 
 The three spec rooms carry rationale, examples, and depth. The invariant points to them for extension.
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
 ```toml
 family = "reference"
 lifecycle = "template"
@@ -385,14 +385,14 @@ payload = { priority = "support", retain = false }
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/workers >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/workers >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4uBD0eyMS0DYZJyxAgysKemfUxrEn5EMQXt3ICV6e7c
+<<^ code:"&#x0003;" >>ni:///sha-256;BQfL2fBs-4-4ENFM0nF82PsqSULtj6M159Mh7aiP3zc
 
 <<^ code:"&#x0004;" -> ? >>

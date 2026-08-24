@@ -2,23 +2,23 @@
 
 <<^ code:"&#x0001;" namespace:"⚕" ? -> lar:///ha.ka.ba/lararium/mesh/secure-context >>
 ```toml iam
-cacheable = true
-file-path = "bags/lararium/ha.ka.ba/lararium/mesh/secure-context.mem"
-hydrate   = true
-l-space   = "lararium"
-mana      = 15
-manao     = 15
-manaoio   = 14
-namespace = "&#x2695;"
-register  = "Synthesis"
-retain    = true
-role      = "the browser vessel's SECURE-CONTEXT WALL and the path through it: crypto.subtle + OPFS demand https/localhost, so a family phone on http://192.168.x.x cannot mint a key → the vessel never boots (dragging the relay to wss://). The prior-art answer — a Let's Encrypt DNS-01 wildcard over a zone the serving entity holds a DNS-DELEGATION CAP over, + split-horizon DNS, ZERO per-device install. SPLIT device-key TOFU (who-syncs) from real-cert TLS (the padlock). Cert-renewal = the one island-able web2 bridge, on its own clock beside registrar tenure and serve. A NAME grants RENDEZVOUS (how to reach); a KEY grants IDENTITY (who) — the ORIGIN-ATTESTATION cap composes with nothing on the spine, so revoking a name withholds a signpost and never touches sovereignty. Researched (two-lens swarm converged 2026-07-23), NOT built. AND (2026-08-09, MEASURED in Chromium 151 + Firefox 153) what a key FORMAT buys: a non-extractable handle works and survives a restart, yet the raw seed still sits CLEARTEXT ON DISK — so the win reads NON-PORTABILITY, never non-compromise; and the origin-attestation cap is untouched by it, because that entity serves the CODE. Two key classes, two cures: a device key MAY go opaque (never resurrected), a persona root STRUCTURALLY CANNOT (hierarchical derivation needs parent bytes) and wants an at-rest seal instead. Storage evicts: seven days without interaction clears an origin on WebKit, and home-screen installation is the exemption."
-status    = "designed"
+cacheable  = true
+file-path  = "bags/lararium/ha.ka.ba/lararium/mesh/secure-context.mem"
+hydrate    = true
+l-space    = "lararium"
+mana       = 15
+manao      = 15
+manaoio    = 14
+namespace  = "&#x2695;"
+register   = "Synthesis"
+retain     = true
+role       = "the browser vessel's SECURE-CONTEXT WALL and the path through it: crypto.subtle + OPFS demand https/localhost, so a family phone on http://192.168.x.x cannot mint a key → the vessel never boots (dragging the relay to wss://). The prior-art answer — a Let's Encrypt DNS-01 wildcard over a zone the serving entity holds a DNS-DELEGATION CAP over, + split-horizon DNS, ZERO per-device install. SPLIT device-key TOFU (who-syncs) from real-cert TLS (the padlock). Cert-renewal = the one island-able web2 bridge, on its own clock beside registrar tenure and serve. A NAME grants RENDEZVOUS (how to reach); a KEY grants IDENTITY (who) — the ORIGIN-ATTESTATION cap composes with nothing on the spine, so revoking a name withholds a signpost and never touches sovereignty. Researched (two-lens swarm converged 2026-07-23), NOT built. AND (2026-08-09, MEASURED in Chromium 151 + Firefox 153) what a key FORMAT buys: a non-extractable handle works and survives a restart, yet the raw seed still sits CLEARTEXT ON DISK — so the win reads NON-PORTABILITY, never non-compromise; and the origin-attestation cap is untouched by it, because that entity serves the CODE. Two key classes, two cures: a device key MAY go opaque (never resurrected), a persona root STRUCTURALLY CANNOT (hierarchical derivation needs parent bytes) and wants an at-rest seal instead. Storage evicts: seven days without interaction clears an origin on WebKit, and home-screen installation is the exemption."
+status     = "designed"
 status-why = "researched by two-lens swarm; the path NOT built"
-tags      = ["mesh/cap-tier", "mesh/carry-contract", "api/pono/lararium-identity", "api/pono/causal-islands", "api/pono/persona-circle"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lararium/mesh/secure-context"
-written   = "2026-07-23"
+tags       = ["mesh/cap-tier", "mesh/carry-contract", "api/pono/lararium-identity", "api/pono/causal-islands", "api/pono/persona-circle"]
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lararium/mesh/secure-context"
+written    = "2026-07-23"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
@@ -199,12 +199,12 @@ This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#publish-a-face >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/federation >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/federation >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;7mlbGI34g0K5UYzwM8d5zX2UWMqFK2b4bXso35JN5Kw
+<<^ code:"&#x0003;" >>ni:///sha-256;fS7C04x_JXKKvLCwoEN3ancF0zrmh41ABxo9ydzgbIw
 
 <<^ code:"&#x0004;" -> ? >>

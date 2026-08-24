@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/hud"
 
 Not invariant law. The HUD instrument's law and teaching live in the pair:
 `lar:///ha.ka.ba/lares/api/hud` (the law) and
-`lar:///ha.ka.ba/lares/docs/lares/hud` (line composition, the glyph / stance /
+`lar:///ha.ka.ba/lares/docs/hud` (line composition, the glyph / stance /
 tool / confidence-syadasti tables, field-annotation thresholds).
 
 This room frames the HUD as the ''situational-awareness surface'' within the signal branch.
@@ -55,7 +55,7 @@ The instrument grammar itself stays in the pair; this room holds only the signal
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/hud >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/hud >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/hud >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal/drift >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/signal/provenance >>
@@ -63,6 +63,6 @@ The instrument grammar itself stays in the pair; this room holds only the signal
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;slEzTDsrDybfTKewG4RBhO_xvvKwstIMz-2F2stIgvs
+<<^ code:"&#x0003;" >>ni:///sha-256;BYsHIldh50tDUhRteSF9m_yoM-N01YdWvg2uYryD21M
 
 <<^ code:"&#x0004;" -> ? >>

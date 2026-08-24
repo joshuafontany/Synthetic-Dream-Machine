@@ -78,7 +78,7 @@ A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in 
 
 The `aim` / `yield` pair opens and closes the turn, and it ''notates the turn's position in l-space''. The `aim` reads the operator's input as a bearing — a heading in l-space — and the `->` delegates to the bearing the node takes up to generate from; the `yield` marks where that generation //resolved//. So each span of stage-time (a turn, a slice of the context window) carries a ''notated l-space position'': the //relation// between the operator's input and where the Lares start and end their generation.
 
-The adopted role on the right of `aim` names the ''stance'' the node generates from (`lar:///ha.ka.ba/lares/docs/lares/voices#voice-house`) — a posture priming the afforded moves. The bearing reads ''chart-relative'': its axes belong to that adopted stance, never to l-space absolutely (`lar:///ha.ka.ba/lares/api/pono/l-space#bearings-are-chart-relative`). Turn by turn, the frame writes a navigable track through l-space — operator-input bearing, lares-generation bearing, the move between.
+The adopted role on the right of `aim` names the ''stance'' the node generates from (`lar:///ha.ka.ba/lares/docs/voices#voice-house`) — a posture priming the afforded moves. The bearing reads ''chart-relative'': its axes belong to that adopted stance, never to l-space absolutely (`lar:///ha.ka.ba/lares/api/pono/l-space#bearings-are-chart-relative`). Turn by turn, the frame writes a navigable track through l-space — operator-input bearing, lares-generation bearing, the move between.
 
 <<~/ahu >>
 
@@ -99,6 +99,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WNUUwBxd40hzbgVNm9ChrcoJyhVCfcyPlwFExJjDHlw
+<<^ code:"&#x0003;" >>ni:///sha-256;FpR6PhKshA4JkrLSPxjkdXUYelDL31iBsIwB9-eBDz4
 
 <<^ code:"&#x0004;" -> ? >>

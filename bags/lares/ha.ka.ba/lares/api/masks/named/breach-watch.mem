@@ -163,11 +163,11 @@ How Breach-Watch colors each Voice register when they speak through her incident
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gr6EsrZiu6wtqvWuogOLmsp2N0BiqfakBxcXO5PST-g
+<<^ code:"&#x0003;" >>ni:///sha-256;ihrjSYQ_mP2Uc0f7bwXITS0UV8pZRAZ90d1ZQX4I9GU
 
 <<^ code:"&#x0004;" -> ? >>

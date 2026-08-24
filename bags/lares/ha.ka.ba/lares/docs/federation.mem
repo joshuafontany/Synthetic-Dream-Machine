@@ -1,0 +1,172 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/federation >>
+```toml iam
+cacheable  = true
+confidence = 15
+file-path  = "bags/lares/ha.ka.ba/lares/docs/federation.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 14
+manaoio    = 13
+register   = "Synthesis"
+retain     = true
+role       = "operator how-to: federate a second vessel into your PersonaGroup via lares vessel stand --admit — what github carries vs what travels out-of-band, the TRUE NAME MODEL (a distinct key per vessel, delegated in at the hearth's True Name) and the retired copy-the-key stopgap it supersedes, the witnessed procedure kept as record"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lares/docs/federation"
+written    = "2026-06-21"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #what-travels >>
+
+! Federating a Vessel
+
+A Lararium runs as a ''swarm of one operator's vessels'' (a PersonaGroup) — each device an equal peer, each holding the operator's bags, syncing as a causal island. This carrier walks how a //second// vessel (say, a QA-lab box) joins the swarm.
+
+''What github carries'' (public, shared by clone):
+* the source, and
+* `genesis/island.bin` — the self-booting wiki-quine (engine + memes; no private identity).
+
+''What NEVER enters github'' (identity-bearing — gitignored):
+* `.lararium/.vessel-key-*.json` — the operator's private signing key.
+* `<lares>/vessel/social-bootstrap.json` — the PersonaGroup pointers (admin/identities/circles/sessions doc-URLs + the sentinel PersonaGroup / MeshCabal IDs).
+
+These travel ''out-of-band'' (a secure channel you control), never the public remote. A clone alone cannot join a PersonaGroup; joining requires what the founding vessel hands over deliberately.
+
+<<~/ahu >>
+
+<<~ ahu #two-models >>
+
+!! The True Name Model ~ and the stopgap it retires
+
+> ''THE TRUE NAME MODEL HOLDS; the copy-the-key stopgap is RETIRED'' (operator ruling). Copying one key across vessels names the ''antipattern'' the multi-device literature warns against — SSB-fusion and Veilid both copy-the-key and both lose per-device revocation; Keybase built its per-device model precisely to escape "one PGP key everywhere." The pono target rides the ''two-axis model'': each vessel mints its OWN distinct key — the ''user×vessel bond'' — delegated into the operator ''PersonaGroup'' by a signed edge. The signed-delegation edge composes up the ''SOCIAL axis'' `device-vessel → PersonaGroup → CabalGroup` (who reads); above it, ''NexusGroup'' and ''DreamNet'' federate across the ''INFRA axis'' by treaty / mutual carriage-contract (who relays), not by delegation-up — the two axes cross at the vessel (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>). The key is the node; the ''delegation is the relationship''. The identity model — the two axes, the per-vessel key, the delegation edge — stands whole at <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>; its mesh topology at <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>.
+
+''THE RETIRED STOPGAP — one operator identity copied across devices.'' Every vessel carries the //same// operator key, so every vessel presents the //same// DID — already a member of the PersonaGroup. The QA box receives the operator key and a device-admit payload out-of-band, loads them, and boots as the same operator on another device.
+
+''THE TRUE NAME MODEL — a distinct key per vessel, delegated in at the hearth's True Name.'' Each vessel forges its //own// key; the founder receives the joinee's contact-card and delegates that DID into the group (`runDeviceAdmitAccept` — built, founder-side correct). But a joining device needs ''two'' things to read the group, and only one reaches it from JS today:
+
+# the ''key-chain + membership'' (CGKA + delegation ops) — JS-available via `eventsForAgent` / ingest; necessary but not sufficient; and
+# the encrypted ''Document content'' itself — which Keyhive moves via ''sedimentree'' (content-addressed strata sync) under ''Beelay'' (the auth-sync RPC; zero-knowledge server). ''Both are Rust-only — not exposed in the `keyhive_wasm` JS surface'' (and the `automerge/beelay` repo is dead; the live code is `beelay-core` inside the keyhive monorepo).
+
+So a fresh-key join still fails the boot membership gate because the Document never arrives. Closing it from JS means transporting the document ourselves — ship an `Archive` (`Archive.toBytes` → `ingestArchive`) or the ciphertext blobs over our own transport — or binding Beelay to WASM. The cross-peer admit + offline-device work is ''actively in-flight'' in the keyhive repo (PRs #205 prekey-archives / offline-admit, #116 doc-sync listener, #110 reachable-docs). The grain (operator ruling 2026-06-23): ''roll our OWN per-vessel keying'' rather than wait on the pre-alpha Rust branch. A distinct per-vessel key, admitted by a signed delegation edge; the joinee then decrypts WITHOUT Beelay by ingesting only ''PUBLIC bytes'' — the CGKA / membership ops plus the ciphertext — because keyhive's add-member keys the content to the joinee's OWN leaf. <<~ confidence Synthesis-Canon 16/20 >> A running probe on `@keyhive/keyhive@0.1.0-alpha.6` proves it: a DISTINCT-identity device reads the group from public bytes + its own prekey secret, ''no sealed box, no secret in transit'' — the crossing carries transport, not crypto. keyhive read runs ''FORWARD-ONLY'' (a member reads content encrypted at or after its add), so the founder ADDs then ENCRYPTs, and grants a new member ''pre-existing'' content by RE-ENCRYPTing each chunk (route A — still public ops + ciphertext). Only the `*Keyed` shortcut (route B — hand the joinee a 32-byte application secret) ships a secret and demands a sealed channel; the default never does. All rides behind the four-port swap surface so Beelay slots in later with low churn (<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#four-port-swap >>, #encrypt-from-start). The stopgap held only until per-vessel keying landed; ''the True Name Model now holds''. Track under <<~ loulou lar:///ha.ka.ba/lares/docs/mesh-governance >>.
+
+The procedure below enacts ''the retired stopgap'' — kept as the witnessed record of how a second vessel joined before per-vessel keying, never as the path to walk now.
+
+<<~/ahu >>
+
+<<~ ahu #three-axes >>
+
+!! Three Axes ~ one inversion of control
+
+The SOCIAL/INFRA cut names two axes; a third rides beside them, and the three answer three orthogonal
+questions. ''INFRA'' asks //who RELAYS// (Nexus / DreamNet, by treaty / carriage-contract — route through,
+never trust). ''SOCIAL'' asks //who READS// (`vessel → PersonaGroup → CabalGroup`, by signed Keyhive
+delegation — boolean, present-tense, revocable). ''REPUTATION'' asks //how much you WEIGH// (the vouch-DAG,
+by a seed-rooted ε-fold — scalar, accumulated, sybil-bounded; <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-lineage-fold >>).
+
+The three never collapse into one because no axis derives another: a member READS a cabal (holds the cap)
+yet WEIGHS little (a shallow lineage), or weighs heavily yet sits revoked. Authorization runs
+forgery-resistant (a delegation never forges); reputation runs sybil-resistant (standing never forges,
+because minting keys splits mass — the bottleneck property). Different threat models, different math,
+different temporal grain.
+
+''SOCIAL splits again — self ⊥ org — and each admission runs its own flow.'' The who-reads chain
+`vessel → PersonaGroup → CabalGroup` folds TWO concerns the gate keeps apart. ''SOCIAL/self'' — a vessel
+joining its own human's PersonaGroup — runs SINGLE-principal: you admit your own device, so no vouch, no
+price, only a delegation and the sealed document handoff (the crossing). ''ORG'' — a member joining a
+shared CabalGroup — runs MULTI-principal and carries MULTIPLICITY: one member joins many cabals, each its
+own Circle with its own founders, its own invite policy, its own vouch-lineage, so your weight in cabal A
+never transfers to cabal B. Three admission flows fall out, and they stay distinct: ''(1) vessel →''
+''PersonaGroup'' (self, no vouch — the envelope handoff); ''(2) user → DreamNet'' (the outer gate,
+invite-only-at-first, vouch-seeded at the mesh root); ''(3) member → cabal(s)'' (per-cabal, multiplicity).
+Flows 2 and 3 ride the SAME instruments (`cabal-invite` + `admission-price` + `vouch-dag`) and differ ONLY
+by SCOPE — the `placeDocId` and the lineage `seed` — so the machinery composes across scales without the
+flows collapsing into one. Flow 1 stands apart: a distinct mechanism (delegation + envelope), never the
+vouch machinery.
+
+''The through-line — one move made three times: control inverts to the edge, never a root.'' A Circle "holds
+what mutual bindings declare" (the Kowloon / group-as-closure model, <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle#composition >>):
+no root grants membership (the SOCIAL graph stands up bottom-up from the vessels' own signed edges), no
+authority assigns standing (the REPUTATION graph folds from the vouches the peers themselves signed), no
+relay owns you (the INFRA graph rides mutual carriage-treaty). ''The key is the node; the delegation is the
+relationship.'' The ''Vault'' seals the inversion at the top — the collector that knows "these handles are
+one human" stays the user's private secret, never a published graph, riding no wire
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle#the-vault >>).
+
+''Two acts, not one — the vouch stays separable.'' A ''CabalGroup'' reads as a multi-principal Circle
+(several humans' PersonaGroups mutually bound). Joining it fires an AUTHORIZATION act — a Keyhive
+delegation, //"this vessel may now read the cabal."// A VOUCH — //"I stake my standing that this peer//
+//belongs"// — rides as a SEPARATE act, and the two never fuse: a member you let read may carry no stake, a
+peer you stake on may hold no cap. PGP keeps exactly this split — key-validity (public, exported) in one
+store, owner-trust (private, never exported) in another, and one signs many keys at owner-trust zero.
+Folding "I delegated to you" into "I vouch for you" names the confused-deputy bug (Miller, ocap), never a
+feature. So the REPUTATION fold (`lineage-rank`) never derives its edges from the delegation log — it folds
+the EXPLICIT vouches (the `CabalInvite` stake) alone. Storage MAY still share: a vouch MAY ride a delegation
+record as an optional stake weight, but only as a separable dimension defaulting OFF, so access stands at
+vouch=0 and the reputation read never shadows every grant. Both still invert to the user — the peers sign
+their own edges, and no registry holds them.
+
+<<~ confidence Synthesis-Canon 14/20 >> The inversion runs pure but for ONE shore: the multi-principal
+key-handover inside a CabalGroup. A single-principal me-Circle (your own devices) needs no tie-break — you
+hold the one ordering authority. A CabalGroup of several humans constitutes the smallest ordering seat for
+itself (an elected kahu, or accept-and-heal) — the one place a Circle stands up a thin constitutional core,
+and it stays the operator's seat (<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle#composition >>).
+
+<<~/ahu >>
+
+<<~ ahu #procedure >>
+
+!! The Procedure (the retired stopgap, witnessed 2026-06-21)
+
+''On the founding vessel'' — mint a clean admit payload (sentinel IDs + the group's signed cap-events):
+
+```
+lares device-admit --out admit.json
+```
+
+Transmit ''out-of-band'' to the new vessel: `admit.json`, and the operator key (`.lararium/.vessel-key-*.json`). Never the public remote.
+
+''On the new vessel'' — bootstrap the CLI once (it cannot build itself into existence), place the operator key under `<LAR_ROOT>/.lararium/`, then stand up and join:
+
+```
+pnpm install && pnpm -r build      # bootstrap the lares CLI + node
+lares vessel stand --admit admit.json      # idempotent join-standup
+```
+
+`lares vessel stand --admit` runs the same found-if-absent standup as `--install` — build, mempalace, genesis (skipped; `island.bin` rides the clone) — but the init step ''joins'' the PersonaGroup from the payload instead of founding a new one: it loads the operator key (same DID = a member), applies the cap-events, writes the local `social-bootstrap.json` into the vessel's own store, and stands the node up. The keyhive boot gates then verify membership and the vessel goes live. Re-running is a no-op (the bootstrap already lives).
+
+<<~/ahu >>
+
+<<~ ahu #the-gate >>
+
+!! The Gate, Honestly
+
+A joining vessel proves itself on every boot through three keyhive gates: its DID matches its key (A), its Individual is a member of the PersonaGroup (B), and the PersonaGroup is a member of the Nexus MeshCabal (C). Under the retired stopgap all three passed trivially because the vessel //was// the same operator — which is exactly the merge the True Name Model refuses. Under the True Name Model, gate B fails until the vessel's OWN key is delegated in, so the contact-card exchange is not a delay but ''the gate doing its work'': the vessel must be admitted as itself.
+
+A vessel never joins by pulling a repo; it joins by receiving — deliberately, out-of-band — what the founder hands it. The public clone carries the house; the operator carries the key. The founder hands more than the delegation: the ''`@cad` read-key rides the admission grant'', sealed to the joinee's ephemeral recipient and ''bound by a digest into the persona-signed transcript'' — the joinee installs it only on a signature-covered match, superseding its self-minted phantom, so same-Nexus members read each other's sealed bodies (<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier#keyring-delivery >>).
+
+A ''browser'' vessel meets one more gate before any of this — the ''secure-context wall'': `crypto.subtle` + OPFS demand `https`/`localhost`, so a phone on `http://192.168.x.x` cannot mint its key. A DNS-01 wildcard on the kahu-owned domain clears it with zero per-device install (<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>).
+
+<<~/ahu >>
+
+<<~ ahu #windows >>
+
+!! The Windows Surface
+
+A QA vessel on native Windows 11 (PowerShell, not WSL) stands up through the same `lares vessel stand --install` / `--admit`, with these surface notes:
+
+* ''`lares` global'' — `--install`/`--admit` writes a `lares.cmd` shim beside the bin (on Unix it symlinks into `~/.local/bin`). Add that directory to PATH so `lares` runs bare. The link step is self-contained — it does not depend on `pnpm setup`/`PNPM_HOME`.
+* ''Python'' — the integration check resolves `python3` → `python` → `py`, so Windows' `python`/`py` is found.
+* ''The wake hook is portable'' — it runs node exec-form (`node lares-wake-hook.mjs`), no shell, identical on Windows and Unix.
+* ''mempalace's keep-hooks are bash'' (`Stop` / `PreCompact`) — on native Windows they need ''Git for Windows'' (which Claude Code already requires for its bash tool). With Git Bash present, `lares vessel stand --claude` wires them as `bash "<path>"`; without it, the verbatim keep-leg stays dark until Git for Windows is installed.
+* ''`lares vessel stand --restart`'' (the dev restart) uses `lsof`/`ss` — Unix-only; it does not run during a normal wake, but the restart loop awaits a Windows (netstat/taskkill) path.
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;VTNKIYGr7sknlV2lLtTp59-Y6nOuZ9sC3XxieXHJaVw
+
+<<^ code:"&#x0004;" -> ? >>

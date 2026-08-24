@@ -140,10 +140,10 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/alignment-architecture >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/alignment-architecture >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Ov_nFbrCXljt9_CR77RK9SOCuFvsnGDySgWMR_9lK5M
+<<^ code:"&#x0003;" >>ni:///sha-256;PqvXYR62hw0NliMcAOdVy7SYxSRKywuwaslI3XXCdlU
 
 <<^ code:"&#x0004;" -> ? >>

@@ -25,7 +25,7 @@
  * PROJECTOR (backup-on-write) — content is gone from disk by the time a delete
  * is seen here. Tracked as a burr; the CRDT op-log covers recovery until epoch.
  *
- * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff
+ * Meme: lar:///ha.ka.ba/lares/docs/handoff
  */
 
 import { watch as fsWatch, writeFileSync, rmSync, type FSWatcher } from "node:fs";

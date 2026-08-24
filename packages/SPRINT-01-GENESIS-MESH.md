@@ -4,7 +4,7 @@
 >
 > **Method (the discipline carries the weight):** scout-before-build · surface-at-a-real-wall · YIN (clear by subtracting) · crucible-before-binding (PROPOSED until a floor passes) · prove-by-witness (strict typecheck + tests + real run) · ASK before every commit.
 >
-> Grounded by three scouts 2026-06-24. Live torch: `bags/lares/ha.ka.ba/lares/docs/lares/handoff.md`. Stale torches: `packages/.shelf/`.
+> Grounded by three scouts 2026-06-24. Live torch: `bags/lares/ha.ka.ba/lares/docs/handoff.md`. Stale torches: `packages/.shelf/`.
 
 ---
 

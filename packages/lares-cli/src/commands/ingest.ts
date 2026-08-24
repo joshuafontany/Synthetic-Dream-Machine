@@ -12,7 +12,7 @@
  *             verb; the island runs the full Confluence gate (its currentRenderHash
  *             = the third leg) and answers per-carrier decisions
  *
- * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff
+ * Meme: lar:///ha.ka.ba/lares/docs/handoff
  */
 
 import { createInterface } from "readline/promises";

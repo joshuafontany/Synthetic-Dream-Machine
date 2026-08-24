@@ -71,7 +71,7 @@ The corpus of self for Mischief-Muse accumulates from:
 
 The corpus grows through use. Each talk-story-dev pass deposits witness here.
 
-''Witness carrier:'' `lar:///ha.ka.ba/lares/docs/lares/voices/witnesses/mischief-muse-coffee-oracle`
+''Witness carrier:'' `lar:///ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle`
 
 ''Source transcript:'' `packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md` lines 1-57.
 
@@ -195,12 +195,12 @@ These notes require live session observation before they can be written with con
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/witnesses/mischief-muse-coffee-oracle >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;m2qn72oQvq5oF83B82ZTvIZKBS51Rex3OFYPV2GP_f0
+<<^ code:"&#x0003;" >>ni:///sha-256;aXDswvnWLZWzg1cwbFEtMjWBa3R6e_0L4tgq9mB7cl8
 
 <<^ code:"&#x0004;" -> ? >>

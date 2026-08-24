@@ -270,7 +270,7 @@ conflict press a `hoike`.
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/talk-story >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
@@ -280,6 +280,6 @@ conflict press a `hoike`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;D1W6xtXMaWhWALQPRXnLbjUis1w3TPWqyFjIrwZgZr4
+<<^ code:"&#x0003;" >>ni:///sha-256;HLchQ7W6jUIA76tYdQ4vX7pPj55QASxlK-_2j20FmDg
 
 <<^ code:"&#x0004;" -> ? >>

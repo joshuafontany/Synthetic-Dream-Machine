@@ -1,7 +1,7 @@
 # Lares Active Roadmap — Outstanding Work Only
 
 > Updated: 2026-06-07 (Task surface → LANGUAGE [verb·summons·outcome; signal→summons; log→ledger]; residency front door connected + V1 content-addressed; V3 peer-auth pure halves [gate↔peer]. Local-verifiability wall CLOSED — verify-then-delegate `4834c66d` + dead _verifier cut.)
-> ⚠ **HEADER STALE since 2026-06-07.** The strategic priority table below still serves, but the "Next" line and counts predate the LOAD → INGEST → watcher arc. The live tactical handoff is the bags pantjar torch: `bags/lares/ha.ka.ba/lares/docs/lares/handoff.md`.
+> ⚠ **HEADER STALE since 2026-06-07.** The strategic priority table below still serves, but the "Next" line and counts predate the LOAD → INGEST → watcher arc. The live tactical handoff is the bags pantjar torch: `bags/lares/ha.ka.ba/lares/docs/handoff.md`.
 > Tests (2026-06-14 `pnpm test:fresh` + ingest-fixture fix): mesh 275✓ · tw5 113✓ · node 124✓ · browser 13✓ — the 4 ingest RED found this session were fixture drift (stale boot heading in `ingest-gate`/`ingest-verb`), fixed same day; e2e not re-run. Use `pnpm test:fresh` after source changes.
 > Next (per bags torch, not V3): the INGEST gesture — vectors green; the SUSPENDED watcher-seams talk-story (deletions heaviest) is the open floor. The former V3/local-verifiability "Next" CLOSED 2026-06-07 (`4834c66d`).
 > Branch: `feature/lararium-node-4`

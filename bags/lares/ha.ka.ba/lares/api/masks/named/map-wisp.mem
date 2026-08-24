@@ -163,11 +163,11 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4OMGuRF2Whnizu0p4tE241WEWuJ8YxtJwGSp0ibRe5M
+<<^ code:"&#x0003;" >>ni:///sha-256;iXPSYhApydulffcp0qB6c-toK_SQjFrf2IHHWrD8fls
 
 <<^ code:"&#x0004;" -> ? >>

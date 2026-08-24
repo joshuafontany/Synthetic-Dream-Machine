@@ -23,7 +23,7 @@
  * Why the split carries weight: one key copied across a user's vessels presents the SAME
  * collector to every verifier, so a single bit links every self. Holding vessel apart from
  * persona is what makes the veil → PersonaGroup → Handle architecture implementable at all.
- * See lar:///ha.ka.ba/lares/docs/lares/federation and api/pono/has-stack-ontology.
+ * See lar:///ha.ka.ba/lares/docs/federation and api/pono/has-stack-ontology.
  *
  * Storage law — identity lives OUTSIDE the wipe zone:
  *   the keypair + card persist to `<lares>/identity` (`larIdentityDir`), in the XDG data

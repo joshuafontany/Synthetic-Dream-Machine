@@ -17,7 +17,7 @@ revised-on    = "2026-06-01"
 revision-note = "warm (mahana) tier CUT after adversarial+kupono+YIN research; two states (wela/anu) only"
 role          = "load-bearing architectural invariant — ONE island-owned residency model: two-state ʻōlelo thermal axis wela/anu + orthogonal pin-flag; bag residency DERIVED from referencing islands"
 status        = "standing"
-status-why = "rides the residency substrate; the tier read stands with it"
+status-why    = "rides the residency substrate; the tier read stands with it"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
 type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/residency-tiers"
@@ -130,7 +130,7 @@ The model holds two tiers (`wela` live / `anu` torn down). A third (warm / froze
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/alignment-architecture >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/alignment-architecture >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 
 ''Tie ~ apertures, not tiers.'' The living-grammar memory-palace ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]]) selects a
@@ -144,6 +144,6 @@ vocabularies stay distinct (they name different layers); the integrity stays leg
 reading names the rung the bag grain LACKS — a cheap read before the CRDT hydrates — which enters only
 through #third-tier-gate, and only after the research that meme charges.
 
-<<^ code:"&#x0003;" >>ni:///sha-256;D9QrlG1GxTG1R8PqW1AyfMAD3Iy4-HD5J6cZl6Sy_oE
+<<^ code:"&#x0003;" >>ni:///sha-256;SrquLSPveEAxJzisJ64q8S0U__DAyFgE5FNgW7QiSBQ
 
 <<^ code:"&#x0004;" -> ? >>

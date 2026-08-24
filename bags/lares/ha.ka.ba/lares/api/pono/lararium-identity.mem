@@ -2,23 +2,23 @@
 
 <<^ code:"&#x0001;" namespace:"⚷" ? -> lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
 ```toml iam
-cacheable = true
-file-path = "bags/lares/ha.ka.ba/lares/api/pono/lararium-identity.mem"
-hydrate   = true
-l-space   = "stable"
-mana      = 14
-manao     = 14
-manaoio   = 11
-namespace = "&#x26B7;"
-register  = "Synthesis"
-retain    = true
-role      = "the identity architecture stated whole — the two-axis split (the WHO/social axis vessel-key→PersonaGroup→CabalGroup ⊥ the INFRA/carriage axis relay→Lararium→Nexus→DreamNet), the per-vessel key as the user×vessel bond, the delegation EDGE as the relationship, and the encrypt-from-start temporary keying that mocks Keyhive/BeeKEM/Beelay with nested Automerge docs behind a four-port swap surface; PROPOSED — one dissent kept open at #provenance"
-status    = "standing"
+cacheable  = true
+file-path  = "bags/lares/ha.ka.ba/lares/api/pono/lararium-identity.mem"
+hydrate    = true
+l-space    = "stable"
+mana       = 14
+manao      = 14
+manaoio    = 11
+namespace  = "&#x26B7;"
+register   = "Synthesis"
+retain     = true
+role       = "the identity architecture stated whole — the two-axis split (the WHO/social axis vessel-key→PersonaGroup→CabalGroup ⊥ the INFRA/carriage axis relay→Lararium→Nexus→DreamNet), the per-vessel key as the user×vessel bond, the delegation EDGE as the relationship, and the encrypt-from-start temporary keying that mocks Keyhive/BeeKEM/Beelay with nested Automerge docs behind a four-port swap surface; PROPOSED — one dissent kept open at #provenance"
+status     = "standing"
 status-why = "the vessel identity core stands live on both platforms"
-tags      = ["api/pono/meme", "api/pono/causal-islands", "api/pono/orichalcum-capabilities", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lares/api/pono/lararium-identity"
-written   = "2026-06-23"
+tags       = ["api/pono/meme", "api/pono/causal-islands", "api/pono/orichalcum-capabilities", "api/pono/loci"]
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lares/api/pono/lararium-identity"
+written    = "2026-06-23"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
@@ -587,7 +587,7 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 <<~ loulou lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/S7-CIRCLES-IDENTITIES-REDESIGN >>
 <<~ loulou lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CAPABILITY-LAYER >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/federation >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/federation >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-kowloon >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
@@ -598,6 +598,6 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Creg4Iy88OAnkiVNXxkB60de00PQ8DBA8ofhs2YSYDA
+<<^ code:"&#x0003;" >>ni:///sha-256;mZfQRx-XaclWTEbyZ5VD9P9578lmgRq3tJ7k9zlvMTU
 
 <<^ code:"&#x0004;" -> ? >>

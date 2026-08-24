@@ -30,7 +30,7 @@
  * lacks. It fails on a fault, never on a kind: a bag descriptor carrying no body frame stands exactly
  * where it should.
  *
- * Meme: lar:///ha.ka.ba/lares/docs/lares/handoff
+ * Meme: lar:///ha.ka.ba/lares/docs/handoff
  */
 
 import { readFileSync, writeFileSync } from "node:fs";

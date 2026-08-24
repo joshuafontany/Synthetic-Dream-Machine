@@ -163,11 +163,11 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;yAPo1Ue_OXMgJNsjkTz5Qz_8gHS4blSNMXbNCeXUlYs
+<<^ code:"&#x0003;" >>ni:///sha-256;E099PEqXFM4BC8et3fMrqBvKAS8JN0z5nPxuVUT684o
 
 <<^ code:"&#x0004;" -> ? >>

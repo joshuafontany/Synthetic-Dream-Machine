@@ -67,7 +67,7 @@ What it lacks is exactly three: ''no allowance · no expiry · no anonymity''. A
 
 ''WHERE IT SITS: OUTSIDE THE THREAD.'' A reaction ''inside'' a thread becomes a speech act — it argues, competes with comments, addresses a person. A `hoʻokupu` ''outside'' the thread lays down at the place and replies to nobody. That is the word's semantics rendered as geometry: an offering set at the threshold, never placed on the table. It preserves ''spend-ON, never give-TO'' visually, where a rule would have to be remembered — and it refuses to nest, thread, or accumulate into conversation. It stays a margin. A shore.
 
-''THE SEAT, and it already exists.'' The DreamDeck feed architecture specs a ''JackPoint / Shadowtalk-style archive where a primary narrator posts and named handles annotate inline'', with a Kowloon / ActivityPub thread as the live social view. That is the surface a `hoʻokupu` sits ''outside'' of — the annotation layer holds speech, and the glyph rides the margin beside it, replying to nobody. Two channels, one page: ''inline handles SPEAK; margin glyphs GIVE.'' <<~ loulou lar:///ha.ka.ba/lares/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
+''THE SEAT, and it already exists.'' The DreamDeck feed architecture specs a ''JackPoint / Shadowtalk-style archive where a primary narrator posts and named handles annotate inline'', with a Kowloon / ActivityPub thread as the live social view. That is the surface a `hoʻokupu` sits ''outside'' of — the annotation layer holds speech, and the glyph rides the margin beside it, replying to nobody. Two channels, one page: ''inline handles SPEAK; margin glyphs GIVE.'' <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
 
 ''What still lacks a seat'' — the ALLOWANCE. The glyph has a home (the margin) and the giving has a home (the place), but nothing renders ''what a person holds and what they have left this turn''. That surface reads as unbuilt and unspecced, and it wants care: a visible balance is a stock rendered, and the finding says ''do not render running totals''. So the allowance may want showing as a ''pool that refills'' rather than a number that counts — the glowing-pills form rather than a ledger line. Named here as the open UX question rather than guessed at.
 
@@ -117,6 +117,6 @@ Not coincidence: the Handle already reads as ''the only one that ever federates'
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;lq9VSQlJf_A_OiP3mP8Z8EBj_bnIAz03Gke113QNwD4
+<<^ code:"&#x0003;" >>ni:///sha-256;DkzuD83DIiOjgJRa_HmjrrpQSywraDNtdtgEELYclH4
 
 <<^ code:"&#x0004;" -> ? >>

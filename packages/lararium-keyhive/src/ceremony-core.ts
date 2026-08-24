@@ -34,7 +34,7 @@
  * `runDeviceAdmitEdge` carries the same shape outward: the founder's root signs a joinee's
  * OWN vessel key into the PersonaGroup, so no seed ever crosses the wire. A single key
  * copied across vessels would present one collector to every verifier and link every self —
- * the split is what the veil rests on. See lar:///ha.ka.ba/lares/docs/lares/federation.
+ * the split is what the veil rests on. See lar:///ha.ka.ba/lares/docs/federation.
  *
  * Meme: lar:///ha.ka.ba/lararium/keyhive/ceremony-core
  */

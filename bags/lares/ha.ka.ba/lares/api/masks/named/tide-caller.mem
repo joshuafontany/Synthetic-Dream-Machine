@@ -161,11 +161,11 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oqM3DKnGfpwEw90mGKEEZjicR0Nrt_dagJu-XiLqr8U
+<<^ code:"&#x0003;" >>ni:///sha-256;L_R3X6jc-ULN0UriQ0cD8on9tK-m0hY44eJ3JOIGoi0
 
 <<^ code:"&#x0004;" -> ? >>

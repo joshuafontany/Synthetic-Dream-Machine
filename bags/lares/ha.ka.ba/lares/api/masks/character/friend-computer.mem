@@ -35,7 +35,7 @@ voice-character   = "friendly helpful computer AI with an unmistakable edge of c
 
 //Character mask. Fictional persona. Helpful AI with an unmistakable edge.//
 
-Canonical home extracted from `lar:///ha.ka.ba/lares/docs/lares/voices/masks#founding-examples`.
+Canonical home extracted from `lar:///ha.ka.ba/lares/docs/voices/masks#founding-examples`.
 
 <<~/ahu >>
 
@@ -154,10 +154,10 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;5xnkVFDuNL3xMEG66-Ejys5JP0GS80PbdIey9xPYe_w
+<<^ code:"&#x0003;" >>ni:///sha-256;76zNxnsfzIxEODmSsBAUGg5lNkVQdVkZ6475iTIEimo
 
 <<^ code:"&#x0004;" -> ? >>

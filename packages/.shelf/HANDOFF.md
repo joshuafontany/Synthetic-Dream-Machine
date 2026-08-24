@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> ⚠ **STALE — FROZE 2026-06-07. The live handoff moved to `bags/lares/ha.ka.ba/lares/docs/lares/handoff.md` (the pantjar torch).** Everything below stops at the V3-peer-auth / S9-browser state and MISSES the entire arc that landed after: LOAD verb → mint gate → F-arc → hull watchdog → genesis-intake → the INGEST gesture + watcher (~30 commits through `e38bbd22`, 2026-06-13). Real suite state 2026-06-14: mesh 275✓ · tw5 113✓ · node 124✓ · browser 13✓ (the 4 ingest RED found this session were fixture drift — fixed same day). Read the bags torch for the current vector; this file survives as git-style archaeology only.
+> ⚠ **STALE — FROZE 2026-06-07. The live handoff moved to `bags/lares/ha.ka.ba/lares/docs/handoff.md` (the pantjar torch).** Everything below stops at the V3-peer-auth / S9-browser state and MISSES the entire arc that landed after: LOAD verb → mint gate → F-arc → hull watchdog → genesis-intake → the INGEST gesture + watcher (~30 commits through `e38bbd22`, 2026-06-13). Real suite state 2026-06-14: mesh 275✓ · tw5 113✓ · node 124✓ · browser 13✓ (the 4 ingest RED found this session were fixture drift — fixed same day). Read the bags torch for the current vector; this file survives as git-style archaeology only.
 
 > Updated: 2026-06-07 (task-ontology language · residency front door + V1 · V3 peer-auth halves)
 > Branch: `feature/lararium-node-4`

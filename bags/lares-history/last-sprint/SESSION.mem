@@ -200,7 +200,7 @@ Two commits:
 # `lares reset --force` → fresh genesis + new operator key
 # `lares serve` → daemon up, Keyhive initialized
 # `lares wiki sync altar-fire` → `ingested: 1` — disk file landed in room bag; `splitRecursive` created parent + N child tiddlers in bag
-# `lares act MOVE lar:///ha.ka.ba/lares/docs/lares/the-lares-protocols --to lar:///ha.ka.ba/bags/lares --yes` → ceremony clean; audit tiddler written
+# `lares act MOVE lar:///ha.ka.ba/lares/docs/the-lares-protocols --to lar:///ha.ka.ba/bags/lares --yes` → ceremony clean; audit tiddler written
 # Promoted parent file appeared in `packages/lares-core/memes/docs/lares/the-lares-protocols.md` with correct `<<~ kahea ahu #slot >>` refs — ''but no child slot files''
 
 ''Gap named (J.3):'' `lares act MOVE` is single-URI. `splitRecursive` creates `#fragment` child tiddlers in the bag alongside the parent, but the promote handler moves only the parent URI. Children stay in the room bag; disk projector for the canonical bag writes only what's in that bag. The parent renders correctly (always-split, always-kahea); the child meme files never land in `packages/lares-core/memes/`. The fix: promote handler must walk `#fragment` children of the promoted parent and co-promote them in the same ceremony. Named J.3 — recursive promote / child co-promotion.
@@ -1104,6 +1104,6 @@ Both questions surface before S9 (lararium-browser) and should inform the
 * `packages/lararium-mesh/src/capability.ts` — NEW; `buildDeviceDelegation`, `verifyDeviceDelegation` (S7.1)
 * `packages/lares-core/memes/api/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WiQKAg08mBADcRMAJaSu9NiAF0xSEnmFHVcgPfT6WPU
+<<^ code:"&#x0003;" >>ni:///sha-256;-tiCx5pMCVFS29it0z_VneK3rHkBnkiTx3pLP1Qjo-k
 
 <<^ code:"&#x0004;" -> ? >>
