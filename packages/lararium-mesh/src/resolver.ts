@@ -22,7 +22,6 @@
  *
  * Resolution policy:
  * - AGENTS, LARES, README → virtual until expressed under the lares bag
- * - INDEXES/** and other ALL-CAPS roots → virtual namespace (caps-virtual)
  * - a stable-tuple root with a corpus scope → tuple-file (a carrier MAY back it; the host decides)
  * - any other shape → virtual (wiki-only)
  */
@@ -33,7 +32,7 @@ export interface LarResolution {
   readonly childPath: readonly string[];
   /** Composite resource path used for receipts and diagnostics. */
   readonly resourcePath: string;
-  readonly kind: "caps-file" | "caps-virtual" | "tuple-file";
+  readonly kind: "caps-virtual" | "tuple-file";
   readonly virtual: boolean;
 }
 
@@ -54,9 +53,7 @@ export interface LarHostfulResolution extends LarResolution {
   readonly virtual: true;
 }
 
-// Schema: lar:///ha.ka.ba/lares/api/lararium/lar-uri/uri-roots
-const CAPS_FILE_ROOTS = new Set<string>();
-const VIRTUAL_CAPS_ROOTS = new Set(["INDEXES"]);
+// The one root the scheme stands: lar:///ha.ka.ba/lares/api/pono/lar-uri (#scheme-syntax).
 const STABLE_TUPLE_ROOT = "ha.ka.ba";
 const LARES_SCOPE   = "lares";
 const ENGINE_SCOPE  = "lararium";
@@ -85,7 +82,7 @@ function splitLarUri(uri: string): { root: string; childPath: string[]; fragment
   const [root, ...childPath] = parts as [string, ...string[]];
   // Fragment-path (`#parent/child/grandchild`) projects onto disk as nested
   // subdirectories — `lar:///foo#a/b` → `foo/a/b.mem`. The single-hash + path
-  // invariant comes from lar-uri.md §5.6 / memetic-wikitext.md §nested-ahu.
+  // invariant comes from lar:///ha.ka.ba/lares/api/pono/lar-uri #belonging and the ahu nesting law.
   const rawHash = decodeURIComponent(url.hash.replace(/^#/, ""));
   const fragmentPath = rawHash ? rawHash.split("/").filter(Boolean) : [];
   return { root, childPath, fragmentPath };
@@ -140,10 +137,6 @@ function isTupleRoot(root: string): boolean {
   return parts.length === 3 && parts.every((p) => p.length > 0);
 }
 
-function isCapsRoot(root: string): boolean {
-  return root === root.toUpperCase() && /[A-Z]/.test(root);
-}
-
 /** Append the meme extension when the last segment carries no extension. */
 function withMemeSuffix(p: string): string {
   const lastSegment = p.slice(p.lastIndexOf("/") + 1);
@@ -161,8 +154,8 @@ export function resolveLarUri(uri: string): LarResolution {
   // `appendFragment` mounts fragment-path segments as nested subdirectories
   // on disk: `lar:///foo#a/b` → `foo/a/b.mem`. Files materialize as
   // `<dir>/index.mem` for the root + `<dir>/<segs>.mem` for each tagged-on-
-  // disk descendant. It preserves the base's extension, so a caps-file adapter
-  // (`.md`) keeps `.md` fragments while a meme (`.mem`) keeps `.mem`. The disk-
+  // disk descendant. It preserves the base extension, so an .md-carrying adapter
+  // keeps .md fragments while a meme (.mem) keeps .mem. The disk-
   // projector decides which fragment URIs become file roots via
   // `lar:///ha.ka.ba/tags/meme-root`; this just names where each URI WOULD project.
   const appendFragment = (basePath: string): string => {
@@ -173,21 +166,9 @@ export function resolveLarUri(uri: string): LarResolution {
     return `${baseNoExt}/${fragmentPath.join("/")}${ext}`;
   };
 
-  // Caps-file roots resolve only when expressed under the lares bag.
-  if (CAPS_FILE_ROOTS.has(root) && childPath.length === 0) {
-    return { uri, root, childPath, resourcePath, kind: "caps-file", virtual: false };
-  }
-
-  if (VIRTUAL_CAPS_ROOTS.has(root) || isCapsRoot(root)) {
-    return { uri, root, childPath, resourcePath, kind: "caps-virtual", virtual: true };
-  }
-
   if (isTupleRoot(root) && root === STABLE_TUPLE_ROOT) {
     if (childPath[0] === LARES_SCOPE) {
       const rest = childPath.slice(1);
-      if (rest.length === 1 && ["AGENTS", "LARES", "README"].includes(rest[0]!)) {
-        return { uri, root, childPath, resourcePath, kind: "caps-file", virtual: false };
-      }
       const joined = rest.length > 0 ? rest.join("/") : "";
       return { uri, root, childPath, resourcePath, kind: "tuple-file", virtual: false };
     }

@@ -23,17 +23,16 @@ import {
 // ---------------------------------------------------------------------------
 
 describe("resolveLarUri — canonical URI topology", () => {
-  test("AGENTS root stays virtual until expressed under the lares bag", () => {
-    const r = resolveLarUri("lar:///AGENTS");
-    expect(r.kind).toBe("caps-virtual");
-    expect(r.virtual).toBe(true);
-    expect(r.root).toBe("AGENTS");
-  });
-
-  test("LARES root stays virtual until expressed under the lares bag", () => {
-    const r = resolveLarUri("lar:///LARES");
-    expect(r.kind).toBe("caps-virtual");
-    expect(r.virtual).toBe(true);
+  /**
+   * THE ROOTLESS CLASS IS RETIRED (lar-uri #path-taxonomy: every path MUST carry a full three-slot
+   * root, no class exempt). A single ALLCAPS term once resolved as a virtual caps root — which kept
+   * the retired address form REACHABLE, so anything still minting one resolved correctly and went
+   * unnoticed. The resolver refuses now; a name that travels nowhere must not read like one that does.
+   */
+  test("a rootless single-term address refuses — the retired class resolves nowhere", () => {
+    for (const uri of ["lar:///AGENTS", "lar:///LARES", "lar:///INDEXES/carriers"]) {
+      expect(() => resolveLarUri(uri)).toThrow(/unsupported lar root/);
+    }
   });
 
   test("ha.ka.ba/bags/lares sub-path resolves as tuple-file, non-virtual", () => {
@@ -43,15 +42,11 @@ describe("resolveLarUri — canonical URI topology", () => {
     expect(r.root).toBe("ha.ka.ba");
   });
 
-  test("ha.ka.ba/lares/AGENTS shorthand resolves as caps-file", () => {
-    const r = resolveLarUri("lar:///ha.ka.ba/lares/AGENTS");
-    expect(r.kind).toBe("caps-file");
+  test("a rooted leaf under the lares scope reads as a plain tuple-file — no name carries a special arm", () => {
+    // Topology only: whether a carrier stands at the address stays the caller question.
+    const r = resolveLarUri("lar:///ha.ka.ba/lares/README");
+    expect(r.kind).toBe("tuple-file");
     expect(r.virtual).toBe(false);
-  });
-
-  test("INDEXES/* paths are virtual (cannot be materialized from disk)", () => {
-    const r = resolveLarUri("lar:///INDEXES/carriers");
-    expect(r.virtual).toBe(true);
   });
 
   test("a corpus URI reads as a tuple-file — backable, but WHERE stays the host's question", () => {
