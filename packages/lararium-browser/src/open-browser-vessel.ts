@@ -544,7 +544,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     const recipeSlug = slotActiveWikiId ? slugFromUri(slotActiveWikiId) : "";
     let recipe: string[] = [];
     if (recipeSlug) {
-      const rec = catalogHandle.doc()?.tiddlers?.[recipeUri("@catalog", recipeSlug)];
+      const rec = catalogHandle.doc()?.tiddlers?.[recipeUri("catalog", recipeSlug)];
       if (rec) recipe = bagStackFromRec(rec);
     }
     // Add-candidates: the daemon-resolvable system library bags not already in this

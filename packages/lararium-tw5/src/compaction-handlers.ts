@@ -174,7 +174,7 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     if (!slug) throw new Error("args.slug is required");
 
     const wikiKey     = wikiBagUri(slug);
-    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeTitle = recipeUri("catalog", slug);
 
     const recipeRec = await opts.catalog.recordOf(recipeTitle);
     if (!recipeRec) throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
@@ -279,7 +279,7 @@ function escapeRegExp(s: string): string {
 }
 
 /** Prefix of a user wiki recipe title in @catalog: `lar:///ha.ka.ba/bags/catalog/recipes/`. */
-const RECIPE_PREFIX = recipeUri("@catalog", "");
+const RECIPE_PREFIX = recipeUri("catalog", "");
 
 /**
  * Scan @catalog recipes for wikis whose bag-stack includes `bagUrl` and post a

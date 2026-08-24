@@ -120,7 +120,7 @@ export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: Catalo
     // `@lararium/wikis/` prefix names a pre-plane-split shape nothing writes,
     // so that path reads zero user wikis.
     const cat = await catalog.handle();
-    const userRecipePrefix = recipeUri("@catalog", "");
+    const userRecipePrefix = recipeUri("catalog", "");
     for (const [title, rec] of Object.entries((cat.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>)) {
       if (!title.startsWith(userRecipePrefix)) continue;
       if (rec.meta?.deleted) continue;               // skip tombstones (listVisible parity)
@@ -133,7 +133,7 @@ export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: Catalo
     // Their recipe lives in @oracle, the wiki bag IS the @ bag.
     if (sysPlane) {
       const sys = await sysPlane.handle();
-      const recipePrefix = recipeUri("@oracle", "");
+      const recipePrefix = recipeUri("oracle", "");
       for (const [title, rec] of Object.entries((sys.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>)) {
         if (!title.startsWith(recipePrefix)) continue;
         if (rec.meta?.deleted) continue;
@@ -159,7 +159,7 @@ export function makeWikiPinReactor(catalog: CatalogAccessor, post: ResidencyOpPo
   return async (args) => {
     const slug = typeof args["slug"] === "string" ? args["slug"] : "";
     if (!slug) throw new Error("args.slug is required");
-    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeTitle = recipeUri("catalog", slug);
     const recipeRec = await catalog.recordOf(recipeTitle);
     if (!recipeRec) throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
     const bagStack = bagStackFromRec(recipeRec);
@@ -178,7 +178,7 @@ export function makeWikiUnpinReactor(catalog: CatalogAccessor, post: ResidencyOp
   return async (args) => {
     const slug = typeof args["slug"] === "string" ? args["slug"] : "";
     if (!slug) throw new Error("args.slug is required");
-    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeTitle = recipeUri("catalog", slug);
     const recipeRec = await catalog.recordOf(recipeTitle);
     if (!recipeRec) throw new Error(`recipe not found for "${slug}"`);
     const bagStack = bagStackFromRec(recipeRec);

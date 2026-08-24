@@ -39,7 +39,7 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
     if (!bagUrl) throw new Error("args.bagUrl is required (the bag's lar: URI)");
 
     // The user recipe lives in @catalog (registry) — read + write via the accessor.
-    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeTitle = recipeUri("catalog", slug);
     const recipeRec = await opts.catalog.recordOf(recipeTitle);
     if (!recipeRec) {
       throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
@@ -103,7 +103,7 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
     if (!slug) throw new Error("args.slug is required");
     if (!bagUrl) throw new Error("args.bagUrl is required");
 
-    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeTitle = recipeUri("catalog", slug);
     const recipeRec = await opts.catalog.recordOf(recipeTitle);
     if (!recipeRec) {
       throw new Error(`recipe not found for "${slug}"`);

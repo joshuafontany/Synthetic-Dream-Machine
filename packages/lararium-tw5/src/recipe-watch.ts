@@ -60,8 +60,8 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
   const catHandle = catalog ? await catalog.handle() : null;
   const sysHandle = sysPlane ? await sysPlane.handle() : null;
 
-  const sysRecipeTitle  = recipeUri("@oracle",  slug);
-  const userRecipeTitle = recipeUri("@catalog", slug);
+  const sysRecipeTitle  = recipeUri("oracle",  slug);
+  const userRecipeTitle = recipeUri("catalog", slug);
 
   // System bags resolve from @oracle; everything else from @catalog.
   const SYSTEM_BAGS = new Set<string>([ORACLE_BAG, LARARIUM_BAG, LARES_BAG]);

@@ -188,11 +188,15 @@ export function resolveLarUri(uri: string): LarResolution {
       return { uri, root, childPath, resourcePath, kind: "tuple-file", virtual: false };
     }
 
-    // lar:///ha.ka.ba/{bags|wikis}/@{slug}[/{path}] — a CRDT surface addressed by
-    // its kind-plane. The `@`-slug names a bag or wiki identity (one canonical
-    // address); its interior is doc/registry data, not a corpus file. Resolves
-    // as virtual (doc identity, not a disk path).
-    if (childPath[0] === "bags" || childPath[0] === "wikis" || childPath[0]?.startsWith("@")) {
+    // lar:///ha.ka.ba/{bags|wikis}/{slug}[/{path}] — a CRDT surface addressed by
+    // its kind-plane. The KIND SEGMENT names it; the slug that follows carries no marker and needs
+    // none, because the segment above it already said which plane this is. Its interior is
+    // doc/registry data, never a corpus file, so it resolves virtual — doc identity, not a disk path.
+    //
+    // A third arm here matched a bare leading `@`, from when the slug carried the marker instead of the
+    // segment. Routing on it kept a retired address form REACHABLE: anything still minting one would
+    // have resolved correctly and gone unnoticed, which is how a retired form outlives its retirement.
+    if (childPath[0] === "bags" || childPath[0] === "wikis") {
       return { uri, root, childPath, resourcePath, kind: "caps-virtual", virtual: true };
     }
 

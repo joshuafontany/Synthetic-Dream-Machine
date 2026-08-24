@@ -370,7 +370,7 @@ export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): Ge
   // SYSTEM wiki-recipes — @lares + @lararium quine
   // wikis ride the @oracle system plane, never @catalog (USER recipes mint into @catalog).
   const systemRecipe = (slug: string, bagStack: string, writableBag: string) => {
-    const title = recipeUri("@oracle", slug);
+    const title = recipeUri("oracle", slug);
     tiddlers[title] = {
       tiddler: { title, label: slug, "bag-stack": bagStack, "writable-bag": writableBag },
       meta: { authority: "genesis" },

@@ -37,7 +37,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     // The user's wiki recipe is REGISTRY data (the user's composition choice) —
     // it lives in the user's @catalog, NOT @lararium (protocol substrate). Read
     // it through the accessor (access≠load), like the wiki/draft oracles.
-    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeTitle = recipeUri("catalog", slug);
 
     const existingWikiUrl = await opts.catalog.urlOf(wikiKey);
     const existingDraftUrl = await opts.catalog.urlOf(draftKey);

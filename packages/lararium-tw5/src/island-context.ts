@@ -45,7 +45,7 @@ export interface IslandContext {
    * **system** oracle plane: system bags (`@oracle`,
    * `@lararium`, `@lares`) + the system wiki-recipes resolve from here, the way
    * user bags resolve from `@catalog`. recipe-watch reads a system wiki's recipe
-   * via `recipeUri("@oracle", slug)` and resolves system bags from this doc.
+   * via `recipeUri("oracle", slug)` and resolves system bags from this doc.
    */
   oracleUrl: string | null;
   /**
