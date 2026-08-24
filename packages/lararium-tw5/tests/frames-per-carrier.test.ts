@@ -142,16 +142,22 @@ describe("what the corpus witnesses can and cannot see", () => {
    * They had never passed; they had never been LOOKED AT, and being named is what put them in front of
    * the reader for the first time.
    *
-   * So the skip gets counted rather than left implicit. This test does not demand the number be zero —
-   * a bag descriptor and a library index legitimately name no meme. It demands the number be KNOWN, so
-   * a run that reads green also says how much ground it declined to walk.
+   * So the skip gets counted rather than left implicit. The count was a ceiling of 17 while the reason
+   * for each was unknown; every one of those has since been named or retired, and what remains is a
+   * KIND rather than a residue: a bag declares itself and holds no meme's text, so it carries no
+   * `uri-path` and never should.
+   *
+   * The reading tightens to match. Not "no more than N go unwalked", but "every file a corpus walk
+   * skips is a bag declaring itself" — an invariant a new gap breaks, where a ceiling would have
+   * absorbed it silently.
    */
-  test("the carriers no corpus walk examines stay counted, never merely skipped", () => {
+  test("every carrier a corpus walk skips is a bag declaring itself", () => {
     const unnamed = carriers.filter(
       (rel) => !/^uri-path\s*=\s*"([^"]+)"/m.test(readFileSync(path.join(REPO, rel), "utf8")));
     expect(carriers.length).toBeGreaterThan(500);
-    // Raise this only alongside a reading of what was added, and never to make a run go green.
-    expect(unnamed.length, `unnamed carriers, invisible to every corpus round-trip:\n  ${unnamed.join("\n  ")}`)
-      .toBeLessThanOrEqual(17);
+    const notDescriptors = unnamed.filter(
+      (rel) => !/^bag\s*=\s*"/m.test(readFileSync(path.join(REPO, rel), "utf8")));
+    expect(notDescriptors, "carriers invisible to every corpus round-trip, and not bag descriptors")
+      .toEqual([]);
   });
 });

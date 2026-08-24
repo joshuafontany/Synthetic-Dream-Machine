@@ -1130,7 +1130,21 @@ from the path: where a file rests says where it rests, and what it IS is a thing
 <<~ranks kind carrier ~ declares `uri-path` — a meme; wants the whole frame and a check -> descriptor ~ declares `bag` — a bag declaring itself; a body frame would claim it holds a meme's text -> shelf ~ declares neither, and its head names an address the declaration omits — the fault that makes a file invisible -> unframed ~ no head at all; bytes wearing an extension >>
 
 `lares normalize --gradient` reads it. It fails on a **fault** and never on a **kind**: a descriptor
-carrying no body frame stands exactly where it should.
+carrying no body frame stands exactly where it should, and a content file declaring itself in a `.meta`
+beside it carries no frame of its own — the one kind a reader cannot name from bytes, settled where the
+file list is known.
+
+### The graph a carrier points into
+
+A carrier can be whole and point at nothing. `lares normalize --edges` takes that second reading: which
+addresses these carriers name, and which of them any carrier holds. **Run it either side of a move** —
+equal counts prove the weld held, a rise names what broke.
+
+An edge rides five spellings — `loulou`, `pranala`, `kahea`, a wikilink, and a bare wikilink — and a
+reader counting one of them reports a clean move over a broken one. A sixth form names a **file**
+rather than an address: links written before the corpus poured to `.mem`. Those carry no address at
+all, so they neither resolve nor dangle; matching one to a carrier means guessing which one it became,
+and a resolver must not guess.
 
 <<~/ahu >>
 
@@ -1168,6 +1182,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;61ewrgWvDy9mXPZ3TUu_b2zu_XfZaqX7g4Lhp4ewakQ
+<<^ code:"&#x0003;" >>ni:///sha-256;LWJPVLuXoa8E6TtNaYxJ5cHD6FbkR-1R0u_nwGpwanA
 
 <<^ code:"&#x0004;" -> ? >>
