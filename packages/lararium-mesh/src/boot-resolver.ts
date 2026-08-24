@@ -8,7 +8,9 @@
  * doc lives, read from automerge-repo's own availability signal (findWithProgress
  * state), never a blind wall-clock race used as an existence oracle:
  *   - hearth-private: never crosses the tideline (social plane, catalog) — no
- *     peer will ever carry it; UNAVAILABLE = local corruption -> FAIL LOUD.
+ *     peer will ever carry it, so an UNAVAILABLE ANSWER is terminal -> FAIL LOUD.
+ *     A DEADLINE is a separate verdict and says nothing about the store: the
+ *     library never answered, so nothing established damage (`bootFaultVerdict`).
  *   - mesh-shared: rides the magically-federated mesh (base canon, wikis) —
  *     UNAVAILABLE may just mean "not delivered yet" -> WAIT for READY up to
  *     scale-graced patience, then surface a typed StillJoining (never a blank).
