@@ -1,9 +1,9 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///README >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/README >>
 ```toml iam
 cacheable = true
-file-path = "bags/lares/README.mem"
+file-path = "bags/lares/ha.ka.ba/lares/README.mem"
 l-space   = "adjacent"
 mana      = 17
 manao     = 16
@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "identity frame and infrastructure map for the Lares node"
 type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "README"
+uri-path  = "ha.ka.ba/lares/README"
 ```
 
 <<^ code:"&#x0002;" >>
