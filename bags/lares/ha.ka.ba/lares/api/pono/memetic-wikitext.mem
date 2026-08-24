@@ -566,6 +566,8 @@ lineage; the degradation property states the warrant.
 
 ''URI handling.'' A `lar:` URI ''names''; it does not fetch ([LAR-URI]). A processor MUST resolve a `lar:` reference against the local world graph only.
 
+''Frame hazards ride their own analysis'' — #frame-security, which travels with the carrier document at the split.
+
 ''Scope leakage.'' A widening-only scope discipline (#scope-model) MUST hold at the Decide→Act boundary; an `ephemeral` value that escapes its container MUST surface as a contract violation, not silently persist.
 
 <<~/ahu >>
@@ -1302,6 +1304,57 @@ and a resolver must not guess.
 
 <<~/ahu >>
 
+<<~ ahu #frame-security >>
+
+## Frame Security Considerations
+
+The frame half carries its own analysis, apart from the language's (#security): at the split this
+section travels with the carrier document, whose registration owes one [RFC6838 §4.6].
+
+''The threat model, first.'' The frame defends one thing: ''the text span against accidental corruption
+in carriage'' — a truncated transfer, a mangled byte, a re-encoding that moved what it touched. It
+defends nothing against an adversary who can rewrite the carrier: whoever holds the bytes rewrites the
+check beside them, so the mark detects ''corruption, never forgery'', and it grants no authentication,
+no authorization, and no privacy. Authenticity belongs to an outer layer — a seal or a signature — and
+a reader that takes an `ok` for authenticity has granted the check a standing it never claimed.
+
+''What an adversary inside the model can still do, and what answers each:''
+
+* ''Rewrite the heading while the check holds.'' The span opens at STX, so the declaration, the
+  heading, and the identity block stand outside it — a carrier's address, media type, and
+  grammar-selector can all move under an `ok`. This bounds what the verdict means (did the TEXT survive
+  carriage) and stands as the design's accepted boundary: heading integrity rides the outer layer. A
+  consumer MUST NOT treat the verdict as covering bytes the span excludes.
+* ''Smuggle a second frame.'' The check covers the first STX..ETX span only, so a second framed body
+  would ride beneath a verdict computed over the first. The grammar admits one text frame per carrier
+  (#conformance), and the gradient surfaces a second as a fault rather than letting the first frame's
+  `ok` speak for bytes it never covered.
+* ''Cut the file ahead of its closer.'' Truncation removes ETX and the check with it, and a reader that
+  filed that under absence would hand the adversary the cheapest strip there is. A torn frame reads
+  ''torn'' — truncated transmission, never lawful absence — and a consumer treats torn as mismatch
+  (#the-touchstone).
+* ''Strip the check.'' Absence stays legal, so stripping costs an adversary nothing against a consumer
+  with no policy. The only defense a bare digest affords: a consumer MAY require a check, and under
+  that policy absence reads as refusal to admit. A deployment that needs stripping to fail closed
+  states that policy; the frame cannot state it for them.
+* ''Respell a sigil the span covers.'' The span binds the frame's byte spelling, so a spelling variant
+  would hash apart from the canonical form. The canonical spelling law (#canonical-form) closes the
+  surface: one spelling stands, a variant re-mints and restamps, and two spellings never share a check.
+* ''Bait a resolver with the check's own form.'' The check wears `ni:///` [RFC6920], a resolvable
+  scheme; here it names the bytes ABOVE it, never a thing to fetch. A resolver MUST NOT resolve a name
+  found after ETX — following one hands an adversary a fetch triggered by a field they control.
+
+''Out of scope, by grain.'' Stream self-synchronisation — the RFC 7464 discipline of scanning forward
+to the next mark after a failed parse — stays out of scope because this frame frames ''records, not
+streams'': a carrier travels whole, a reader that lost the frame lost the record, and recovery
+re-fetches the record. And the marks carry no reserved-alphabet warrant: a control-mark reference
+spells printable ASCII, so it CAN occur in body text, and the fence mask (#control-set) — not an
+escape discipline — keeps a quoted mark from framing. The mask therefore stands inside the trust
+boundary: a reader that drops it verifies teaching examples instead of bodies, a failure the corpus
+has met.
+
+<<~/ahu >>
+
 <<~ ahu #carrier-bytes >>
 
 !! Carrier Bytes Law
@@ -1336,6 +1389,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;U-Qrek4qhiNEJ4yug_l_FsAQlxhI6aRuRmNIo3XZcCk
+<<^ code:"&#x0003;" >>ni:///sha-256;DOM0h2NsBWWmkJf9xQiANpWbfUWdKeIUXfG8zAC7-7g
 
 <<^ code:"&#x0004;" -> ? >>
