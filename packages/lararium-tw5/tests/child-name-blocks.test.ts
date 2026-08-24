@@ -26,9 +26,10 @@ import { execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-import { expandMemeRefs, memeticWikitextDeserializer, type TiddlerFields } from "../src/deserializer.js";
+import {
+  expandMemeRefs, memeticWikitextDeserializer, fencedSpans, inMask, type TiddlerFields,
+} from "../src/deserializer.js";
 import { parseTaploFields } from "../src/toml-ast.js";
-import { fencedSpans, inMask } from "../src/meme-ast/fence-mask.js";
 import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import { REPO } from "./test-wiki.js";
 

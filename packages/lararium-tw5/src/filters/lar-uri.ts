@@ -115,3 +115,17 @@ export function larUri(source: TW5FilterSource, operator: TW5FilterOperator): st
 
   return results;
 }
+
+/**
+ * THE OPERATOR'S NAME IS ITS EXPORTED NAME, and this one cannot be an identifier.
+ *
+ * TW5 registers filter operators by walking a module's exports (`applyMethods("filteroperator", …)`),
+ * so the binding name IS the name an author types in a filter. Every operator before this one — `toml`,
+ * `wikisense`, `stack` — reads as a single word and never met the rule. `lar-uri` carries a hyphen, so
+ * a plain `export function larUri` registers `larUri` and the filter an author writes resolves to
+ * nothing: no throw, no warning, an empty result set that reads exactly like a filter matching nothing.
+ *
+ * The arbitrary-string export binds the name the grammar means. Any future operator whose name carries
+ * a hyphen needs this line too.
+ */
+export { larUri as "lar-uri" };
