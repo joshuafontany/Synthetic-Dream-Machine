@@ -48,7 +48,7 @@ Render work runs along orthogonal axes; naming them apart lets each vary without
 One surface passes through three trees:
 
 # ''parse tree'' — `text/x-memetic-wikitext` parses to `MemeAstNode[]`.
-# ''widget tree'' — the execution-bearing middle layer; `kumu` declares the widget-node types and `kahea` name-form calls resolve here (the middle layer named at `memetic-wikitext#gaps-tensions-conflicts`, Gap 8).
+# ''widget tree'' — the execution-bearing middle layer; `kumu` declares the widget-node types and `kahea` name-form calls resolve here — the render-time projection of `memetic-wikitext#processing-model`, standing between parse and document.
 # ''DOM tree'' — the widget tree renders into a document. In this stack that document reads as a //fakeDom//, not the browser's live one.
 
 !!! Surface axis — the cameras (which document the stage renders into)
@@ -255,6 +255,6 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;HhmvEFuo1ttS3Rdpo8m5VIdNw6tXK_Suwi6S6RWj-j0
+<<^ code:"&#x0003;" >>ni:///sha-256;-kaEnbFASJXrjhk45genKmw2bjlk7NcBlzkGhWDybTc
 
 <<^ code:"&#x0004;" -> ? >>

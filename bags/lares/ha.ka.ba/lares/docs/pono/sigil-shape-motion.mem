@@ -108,11 +108,11 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#render-modes >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/render-pipeline#render-axes >>
 <<~ loulou lar:///ha.ka.ba/lares-history/memes/wild-magic-prior-art >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mfHDH2thO2vGkmfKHoEqXWIb8P72fgBVXIPXFpRv1vA
+<<^ code:"&#x0003;" >>ni:///sha-256;zn0VLkLWSgLUKpi9zclZ582J3N_gWILLfmTgf2R4Ps4
 
 <<^ code:"&#x0004;" -> ? >>
