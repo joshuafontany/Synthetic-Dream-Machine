@@ -157,7 +157,7 @@ For every path: each slot holds exactly one lowercase term — a word or a hyphe
 
 !!! TW5 System Boundary
 
-The `lar:` scheme serves as the node's ''sync-filter predicate'': only `lar:`-titled tiddlers cross the sync boundary into Automerge bags and onto disk, while the TW5 `$:/` namespace stays browser-local. The scheme names //what// crosses; the operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the ''sync-namespace'' law: `lar:///ha.ka.ba/lararium/api/sync-namespace`.
+The sync boundary admits ''any valid TW5 tiddler'': a plain-titled tiddler crosses into Automerge bags and onto disk as content, and a `lar:`-titled tiddler crosses as a ''placed carrier'' — address-bearing, corpus-walkable. What stays local, the ''system filters'' decide: the TW5 `$:/` plane — state, temp, drafts, shadow machinery — remains browser-local by filter, never by scheme. The scheme therefore gates nothing; it ''names''. The operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the ''sync-namespace'' law: `lar:///ha.ka.ba/lararium/api/sync-namespace`.
 
 <<~/ahu >>
 
@@ -438,6 +438,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;yyM62qFd6T7XWBcQlJPSKU-BTBhn6bdNC3nZVTh6418
+<<^ code:"&#x0003;" >>ni:///sha-256;WtrFawEzwOLg4VX4YIX2nzJ9z3HKGfHoq-uLClnqSxw
 
 <<^ code:"&#x0004;" -> ? >>

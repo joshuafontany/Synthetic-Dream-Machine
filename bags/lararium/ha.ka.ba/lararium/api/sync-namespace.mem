@@ -13,9 +13,9 @@ namespace     = "&#x0950; &#x0901;"
 register      = "Synthesis"
 retain        = true
 revision-note = "minted 2026-06-06 — extracted from lar-uri #path-taxonomy TW5 System Boundary; lar-uri retains only the scheme-intrinsic clause + a loulou here"
-role          = "load-bearing invariant — the title-namespace sync-filter predicate: only lar:-titled tiddlers cross the lararium sync boundary; $:/ stays browser-local. The title-level companion to disk-projection's bag-level rule"
+role          = "load-bearing invariant — the sync boundary admits any valid TW5 tiddler; the $:/ system plane stays browser-local by the system filters; a lar: title marks a placed, address-bearing carrier"
 status        = "designed"
-status-why = "the namespace design; no source carries it yet"
+status-why    = "the namespace design; no source carries it yet"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme"]
 type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/sync-namespace"
@@ -27,11 +27,11 @@ uri-path      = "ha.ka.ba/lararium/api/sync-namespace"
 
 <<~ ahu #core-claim >>
 
-! Sync Namespace — The Title Predicate That Crosses the Boundary
+! Sync Namespace — What Crosses the Boundary, and What the Filters Keep
 
-The lararium sync filter selects by ''title namespace''. Only titles in the `lar:` scheme cross the sync boundary into Automerge bags and onto disk; the TW5 `$:/` namespace stays browser-local.
+The sync boundary admits ''any valid TW5 tiddler''. A plain title crosses as content; a `lar:` title crosses as a placed carrier, address-bearing and corpus-walkable. Exclusion runs by the ''system filters'', never by scheme: the `$:/` plane stays browser-local.
 
-This forms the ''title-level companion'' to disk-projection's bag-level law. Disk-projection names //which bags// mirror to disk or ride the mesh; this meme names //which titles//, within a synced bag, cross at all. The `lar:` URI scheme (governed-by lar-uri) supplies the predicate; the runtime sync filter applies it.
+This forms the ''title-level companion'' to disk-projection's bag-level law. Disk-projection names //which bags// mirror to disk or ride the mesh; this meme names //which titles//, within a synced bag, the system filters keep local. The `lar:` scheme (governed-by lar-uri) names addresses; the runtime sync filters decide locality.
 
 <<~/ahu >>
 
@@ -100,6 +100,6 @@ This dual-distribution shape names a ''packaging convention, not a namespace exc
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;HKWKflnoJdV1H8YWHCL9hjPhTmfi4KpNCmc2jUBqL5k
+<<^ code:"&#x0003;" >>ni:///sha-256;fykDK1IPErIACZkEX79i58z_42mgr9vrpoBRPiiekPE
 
 <<^ code:"&#x0004;" -> ? >>
