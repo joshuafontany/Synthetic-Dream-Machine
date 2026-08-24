@@ -121,8 +121,13 @@ epoch lineage) must travel FIRST. Holding it lets B name the epoch; it grants B 
 public charter is not a key.
 
 
-''ONE ENV VAR ISOLATES EVERYTHING.'' `LAR_ROOT` re-roots data, state, the seal, the acquired library, bags,
-genesis ''and the UDS socket'' — ''TWELVE of twelve'', re-measured after the home inversion. So a throwaway costs no containers and
+''ONE ENV VAR ISOLATES EVERYTHING.'' `LAR_ROOT` re-roots data, state, the seal, the acquired library, bags
+and genesis — eleven by re-siting, and the UDS socket ''by DERIVATION'': the rendezvous stands at
+`/tmp/lares-<uid>/<digest-of-root>.sock`, OUTSIDE every root and every login session, because a lararium
+serves as civic infrastructure and its daemon outlives the operator logging out (operator-ruled
+2026-08-23) — while the digest keeps two roots off one socket. ''TWELVE of twelve'', re-measured after
+the rendezvous re-siting: a clean `vessel stop` unlinks its socket; a hard kill leaves a dead name the
+next contact reaps. So a throwaway costs no containers and
 destroys nothing real; the container harness stays for what containers actually buy (rude sockets, real
 disks, a drop that drops). ''The count gets RE-MEASURED whenever a resolver moves, never carried forward'' —
 an isolation claim that ages is an isolation claim that lies, and the tenth resource (the TCP port) was
@@ -1370,6 +1375,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9hbPqbrWFgNx_EiITZ5kt4h-EmmUcuedgPkKlmQGRrI
+<<^ code:"&#x0003;" >>ni:///sha-256;2pv7npPVa0N7Et_fuoGRuJonEontY2mINBZpokjLjTk
 
 <<^ code:"&#x0004;" -> ? >>
