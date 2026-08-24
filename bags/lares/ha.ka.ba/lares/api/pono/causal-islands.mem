@@ -47,7 +47,7 @@ this version separates them.
 | ''Axis 1 — Access'' | monotonic, cryptographic, per-bag | "may this principal pull / read / edit / admin this bag?" | this meme + Keyhive |
 | ''Axis 2 — Scale'' | monotonic, composition | "which membership ring is this?" | Keyhive group nesting |
 | ''Axis 3 — Powers'' | functional decomposition | "which faculty does this provider hold?" | separation-of-powers doctrine |
-| ''Plane 0 — Alignment'' | NON-monotonic, subjective | "do I //choose// to sync/relay/surface/vouch for this actor?" | [[alignment-layer|alignment-layer.md]] |
+| ''Plane 0 — Alignment'' | NON-monotonic, subjective | "do I //choose// to sync/relay/surface/vouch for this actor?" | [[alignment-layer|lar:///ha.ka.ba/lares/api/pono/alignment-layer]] |
 
 ''Axis 1 — Access.'' Four levels, a 1:1 lexical mirror of Keyhive's native Access enum
 (`pull`, `read`, `edit`, `admin`). NOT a parallel Lararium-coined ladder — the live gate
@@ -63,7 +63,7 @@ delegating an operator's `@personal`/`@draft` view-state to their own PersonaGro
 homogeneous-trust (those devices already hold `admin` on `@daemon`, so marginal authority
 ≈ 0). Adopt the true `edit` grain at the delegation call sites the moment
 `CapabilityVerifier.verify` accepts it. First live call site + ocap rationale:
-[[personal-slot|../lararium/personal-slot.md]].
+[[personal-slot|lar:///ha.ka.ba/lararium/api/personal-slot]].
 
 ''Axis 2 — Scale.'' Membership nests as Keyhive groups-within-groups on the ''SOCIAL axis'':
 `Individual ⊂ PersonaGroup ⊂ Cabal`. Each social ring forms a causal island with a ''cryptographic''
@@ -89,7 +89,7 @@ Appview, their shared rotation keys each re-grew the monopoly they meant to esca
 malicious actor can hold cryptographically valid capabilities. Alignment answers
 //"do I WANT to peer with this actor?"// — non-monotonic, subjective, reputation-rooted, and
 capability structurally cannot express it. Lives in its own invariant
-([[alignment-layer.md|alignment-layer.md]]); enforced by ''withholding voluntary sync at the''
+([[alignment-layer.md|lar:///ha.ka.ba/lares/api/pono/alignment-layer]]); enforced by ''withholding voluntary sync at the''
 ''Beelay boundary'', never by reaching into another island's data. The "lemures" plane.
 
 <<~/ahu >>
@@ -120,7 +120,7 @@ dreamnet-architecture#two-axis-topology).
 ''Alignment law'' (Plane 0): trust assertions are ordinary signed content, evaluated LOCALLY
 against a per-island root. No global consensus, no central registry, no global trust score.
 A valid-capability-holding lemure is refused by being ''starved of voluntary peering'', never
-by a central ban. See [[alignment-layer.md|alignment-layer.md]].
+by a central ban. See [[alignment-layer.md|lar:///ha.ka.ba/lares/api/pono/alignment-layer]].
 
 ''Exchange-island law'': the operator↔node exchange runs as a causal island of its own ---
 two logs, no global now across the turn boundary. The turn-frame syncs it: `yield … -> ?`
@@ -370,6 +370,6 @@ meant to escape):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;eHksqOiVl4g7aZpjx4HyH7BrTihndNa-GBRnC8lsG-o
+<<^ code:"&#x0003;" >>ni:///sha-256;kIeY-DyTO3Y-kOp32itrsaz11yPHkN7RLIOBjTfoMVo
 
 <<^ code:"&#x0004;" -> ? >>

@@ -14,8 +14,8 @@ retain      = true
 role        = "source-of-truth: the Residency Model ACTION verb handler family — six verbs, withEffectRecord wrapping, cap-gate law, dispatch shore (Sprint 5)"
 source-file = "packages/lararium-tw5/src/action-handler.ts"
 status      = "standing"
-status-why = "the TW5 action handler stands live"
 status-date = "2026-06-01"
+status-why  = "the TW5 action handler stands live"
 tags        = ["api/residency-model"]
 type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/api/action-handler"
@@ -56,7 +56,7 @@ Six residency verbs (SPARQL set-algebra) + a ''non-residency tier'' (INGEST, REC
 | ''INGEST'' | disk→records through the Confluence — the three-way reconcile gate (disk · synced · records meet; replace-by-group, NFC; + whole-carrier `deletions`; surface-never-overwrite) — the non-residency precedent | accession (`to-bag`) | source-uri, to-bag, change-id, carriers |
 | ''RECONCILE'' //(design)// | fold a newer engine genesis forward into `@oracle` (operator-admin engine rite; preview → conflict-surface → confirm → idempotent) | engine-version record (`@oracle` ledger) | see residency-model #non-residency-verbs |
 
-ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''never version control''. ''INGEST + RECONCILE'' form the non-residency tier — the same VERB → SUMMONS → OUTCOME rail, `withEffectRecord` audit, and cap-gate, with no tiddler-between-bags move. See [[residency-model|residency-model.md]] `#action-verb-surface` + `#non-residency-verbs`.
+ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''never version control''. ''INGEST + RECONCILE'' form the non-residency tier — the same VERB → SUMMONS → OUTCOME rail, `withEffectRecord` audit, and cap-gate, with no tiddler-between-bags move. See [[residency-model|lar:///ha.ka.ba/lararium/api/residency-model]] `#action-verb-surface` + `#non-residency-verbs`.
 
 <<~/ahu >>
 
@@ -116,6 +116,6 @@ is shared, not duplicated (Sprint 6 parity).
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;UPct2YngYuMKOve4ENQTgFwm5HnNCdRJtPEt9GYFNtQ
+<<^ code:"&#x0003;" >>ni:///sha-256;egeBeJcVSH8kv5WMqXRPX1Yyn5ZpgXSneSYid88LEQo
 
 <<^ code:"&#x0004;" -> ? >>

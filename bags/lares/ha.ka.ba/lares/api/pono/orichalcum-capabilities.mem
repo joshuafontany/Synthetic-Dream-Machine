@@ -84,7 +84,7 @@ These are not the same object. Keep device identity below operator identity.
 
 !! Ability Ladder
 
-The ladder maps onto the ''ACCESS axis'' (Axis 1) of the [[causal-islands|causal-islands.md]]
+The ladder maps onto the ''ACCESS axis'' (Axis 1) of the [[causal-islands|lar:///ha.ka.ba/lares/api/pono/causal-islands]]
 model — a 1:1 lexical mirror of Keyhive's native Access verbs.
 
 ```
@@ -98,9 +98,15 @@ admin  — manage membership, recipe, epoch/revocation, residency actions (Keyhi
 Each ability implies all abilities below it in this ladder, EXCEPT:
 `pull` does not imply `read`. A relay may hold `pull` without `read`.
 
+''The ladder is the MODEL; the crypto gate is binary.'' `CapabilityAccess` admits `read` and `admin`
+alone, at every call site in the tree — so a reader meeting these four rungs meets doctrine, never a
+switch some handler runs. The gate proves WHO may act; the ladder says WHAT the acting would be, and
+nothing yet narrows an action by verb. ''Naming a code constant here would send a reader looking for a
+gate they cannot find'' — which is exactly what the pointer that stood in this block did, for the two
+months after the file it named was retired.
+
 ```toml
-# Ordered least → most privileged. Source of truth for ABILITY_LADDER in
-# packages/lararium-mesh/src/causal-island.ts. Keyhive-native verbs.
+# Ordered least → most privileged. Keyhive-native verbs. Doctrine, not a code constant.
 ability-ladder = [
   "pull",     # forward encrypted bytes; relay without reading (Keyhive Pull)
   "read",     # decrypt and render semantic content (Keyhive Read)
@@ -115,8 +121,8 @@ pull-implies-read = false
 # All other abilities imply every ability below them
 implication-rule = "ordered-except-pull"
 
-# Ratings eligible to federate (structural gate — stage band is NOT a gate)
-# Source: FEDERABLE_RATINGS in packages/lararium-mesh/src/causal-island.ts
+# Ratings eligible to federate (structural gate — stage band is NOT a gate). Doctrine; no code
+# constant carries it.
 federable-ratings = ["meme", "ano", "kapu"]
 ```
 
@@ -292,6 +298,6 @@ the crypto gate, not instead of it.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;x4SLMvLiKmVrM53QgNqhx1_aklUkp9vNP9Qo3KDpKz0
+<<^ code:"&#x0003;" >>ni:///sha-256;w4_M8oSqH89mX1Yk0ecZ4f36jD1NnWbMz70XXaCAcdQ
 
 <<^ code:"&#x0004;" -> ? >>

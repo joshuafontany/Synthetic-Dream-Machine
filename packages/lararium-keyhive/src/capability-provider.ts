@@ -9,15 +9,19 @@ import type {
 /**
  * CapabilityProvider — narrow interface over Keyhive's pre-alpha API.
  *
- * Two-tier policy:
- *   * Tier 1 (this interface) — Keyhive's binary access gate. read or admin.
- *     Cryptographic. Per-bag (one Keyhive Document per Lararium bag URL).
- *   * Tier 2 (application layer) — the ACCESS axis, a 1:1 lexical mirror of
- *     Keyhive's native verbs (pull, read, edit, admin), checked AFTER Keyhive's
- *     admin proof verifies. Lives in residency action handlers and friends, not
- *     here. Not rungs: `promote`/`propose`
- *     (no consumer), `sync` (pull-at-scale), `revoke` (an admin operation). See
- *     the 3-axis model in causal-island.ts + lar:///ha.ka.ba/lares/api/pono/causal-islands.
+ * WHAT THIS GATE ANSWERS, AND WHAT IT DOES NOT.
+ *
+ * This interface carries Keyhive's binary access gate — `read` or `admin`, cryptographic, one Keyhive
+ * Document per Lararium bag URL. That is the whole of what any code here checks.
+ *
+ * The ACCESS axis — `pull · read · edit · admin`, a 1:1 lexical mirror of Keyhive's native verbs — is
+ * a MODEL and not a second gate. `CapabilityAccess` admits two values at every call site in this tree,
+ * so nothing narrows an action by verb today. Naming the axis here as a checked tier would promise a
+ * reader a gate they could then fail to find. The model stands at
+ * lar:///ha.ka.ba/lares/api/pono/causal-islands, where a reader meets it as doctrine.
+ *
+ * Not rungs even in the model: `promote`/`propose` (ceremony), `sync` (pull-at-scale),
+ * `revoke` (an admin op).
  *
  * The interface is provider-shaped so implementations can swap:
  *   * KeyhiveProvider — wraps @keyhive/keyhive WASM

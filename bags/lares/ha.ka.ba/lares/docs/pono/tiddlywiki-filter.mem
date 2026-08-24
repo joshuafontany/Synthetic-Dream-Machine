@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/tiddlywiki-filter"
 ! X-TiddlyWiki-Filter — Docs
 
 This file does not bind invariant law.
-Law lives at [[tiddlywiki-filter.md|../../api/pono/tiddlywiki-filter.md]].
+Law lives at [[tiddlywiki-filter.md|lar:///ha.ka.ba/lares/docs/pono/tiddlywiki-filter]].
 Procedure lives at [[tiddlywiki-filter/SKILL.md|../../api/pono/tiddlywiki-filter/SKILL.md]].
 
 This file holds examples, explanatory guidance, reminders, and notes on deferred scope.

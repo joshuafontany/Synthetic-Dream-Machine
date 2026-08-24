@@ -9,9 +9,10 @@
  * `bag` carries TW5's meaning unchanged (bags + recipes, the upstream house's own load-bearing
  * myth), so a reader arriving from TiddlyWiki reads this surface without translation.
  *
- * The stowage runtime and the federation-authority doctrine share no types, functions, or imports,
- * so each stands in its own file. This module carries the live, widely-imported engine; the
- * authority/edge-island doctrine lives in causal-island-authority.ts.
+ * ONE FILE, ONE QUESTION. This module answers how a vessel STOWS what it holds, and nothing else. A
+ * federation-authority doctrine once shared its file and shared none of its types, functions, or
+ * imports — a single name over two unrelated questions, which is the shape that lets a reader carry an
+ * assumption from one half into the other.
  *
  * Model: a two-state thermal axis in ʻōlelo Hawaiʻi — wela (hot) / anu (cold) — plus an orthogonal
  * pin flag. The `warm` (mahana) middle tier stands cut: a suspended Worker still holds its heap, so

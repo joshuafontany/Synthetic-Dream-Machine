@@ -16,7 +16,7 @@ register    = "Synthesis"
 retain      = true
 role        = "the @personal recipe slot (cross-device viewing state, PersonaGroup × recipe-fingerprint scoped) and its admin-doc-stored binding map — one ledger"
 status      = "standing"
-status-why = "the @personal slot stands; S7.7 cross-device remains"
+status-why  = "the @personal slot stands; S7.7 cross-device remains"
 tags        = ["lar:///ha.ka.ba/lares/api/lararium/wiki-recipe"]
 type        = "text/x-memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/api/personal-slot"
@@ -347,7 +347,7 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 * ''Document-as-group is the //intended// Keyhive shape, not a workaround smell.'' A Keyhive Document //is// a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph ''orthogonal to BeeKEM key rotation''. Representing the PersonaGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: ''bind to the stable agent-id'' (never rotating key material), and ''keep that id stable for the group's whole lifetime'' (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
 * ''Group-as-audience is object-capability-idiomatic.'' Delegating to the PersonaGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, //Capability Myths Demolished//.
 * ''Access cascades transitively and retroactively'' through the membership graph: every transitive member device of the PersonaGroup gains the delegated access, including devices admitted //after// the delegation, with no per-document re-grant.
-* ''Grain debt (POLA).'' `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds ''up'' to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@daemon` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [[causal-islands|../pono/causal-islands.md]].
+* ''Grain debt (POLA).'' `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds ''up'' to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@daemon` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [[causal-islands|lar:///ha.ka.ba/lares/api/pono/causal-islands]].
 
 !!! Session-wiki path (deferred — additional hot-tier mounts)
 
@@ -422,7 +422,7 @@ The handoff names "S9 / lararium-browser S4 real boot" as still in flight (Index
 
 !! Reconciliation with the Residency Model
 
-The approved [[residency-model|residency-model.md]] coordinate-space architecture governs how the recipe walks bag manifestations for any title. This slot + its bindings sit BELOW it: they govern how the resolver builds the bag-URL map that feeds the recipe in the first place. The slot URI, the `(PersonaGroup × recipe-fingerprint)` keying, and the Yang/Yin/Chao position above the `bags/{slug}` canon all survive the residency model intact. Three layers compose, one operator gesture:
+The approved [[residency-model|lar:///ha.ka.ba/lararium/api/residency-model]] coordinate-space architecture governs how the recipe walks bag manifestations for any title. This slot + its bindings sit BELOW it: they govern how the resolver builds the bag-URL map that feeds the recipe in the first place. The slot URI, the `(PersonaGroup × recipe-fingerprint)` keying, and the Yang/Yin/Chao position above the `bags/{slug}` canon all survive the residency model intact. Three layers compose, one operator gesture:
 
 * The cascade tiddler (`lar:///ha.ka.ba/lararium/config/bag-paths`) routes `$:/StoryList` writes to the personal layer (via `current-wiki-personal`) as a ''first-write default'', not authoritative routing. Under the residency model a title MAY have residency in `wikis/{slug}/personal` AND `bags/{slug}` AND a canon library simultaneously; the recipe walks priority and surfaces the topmost Manifestation. The cascade only decides where the first-write goes when no other bag already holds the title.
 * The binding tiddler in the admin doc names which Automerge document THIS device, in THIS recipe, mounts at the `wikis/{slug}/personal` URI.
@@ -504,6 +504,6 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — ''slice
 register's lived surface — the living grammar in use before curation lifts it ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]]
 #three-registers).
 
-<<^ code:"&#x0003;" >>ni:///sha-256;CjsXEsCFOdVFto0dvkQ2nnVr4CYKAk4TXohvsNTJlgM
+<<^ code:"&#x0003;" >>ni:///sha-256;pRQzBU3aHZCO7gX23NSoNt4hLDJjR9Plc-HAexznZtw
 
 <<^ code:"&#x0004;" -> ? >>

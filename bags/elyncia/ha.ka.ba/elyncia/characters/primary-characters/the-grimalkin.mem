@@ -24,7 +24,7 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin"
 ! Patches ~ the Grimalkin, Kai ʻĀ's Lynx-Mount
 
 ''The mechanical seat'' (from `campaign/company-structure.mem`): a ''large grimalkin-lynx
-mount, Level 2'' — hallmark/sidekick asset of [[kai-a|kai-a.md]]. Player control law: Kai runs
+mount, Level 2'' — hallmark/sidekick asset of [[kai-a|lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a]]. Player control law: Kai runs
 Patches ''when mounted action, scouting action, or companion spotlight applies''.
 
 ''The true name (operator canon, 2026-08-16):'' ''Patches'' — named for Kai's real kitty at
@@ -79,6 +79,6 @@ walking. Whether hers reads as familiar, mount, partner, or all three at once be
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;lohTbzxIN-YhqT_7EchhdL03sAXa6u9gWXhOZfeGRZI
+<<^ code:"&#x0003;" >>ni:///sha-256;_XrPAvIHfEQb3UnF7ZpfjwCUfZKEOagjcYZ7z0WwL5k
 
 <<^ code:"&#x0004;" -> ? >>

@@ -35,7 +35,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/ability-implies"
 
 !! Contract
 
-`abilityImplies(have, need)` serves as the capability lattice predicate. The `ABILITY_LADDER` array defines total order from weakest (`pull`) to strongest (`admin`). The ladder is the ''ACCESS axis'' (Axis 1) of the [[causal-islands|causal-islands.md]] model — a 1:1 lexical mirror of Keyhive's native Access verbs.
+`abilityImplies(have, need)` serves as the capability lattice predicate. The `ABILITY_LADDER` array defines total order from weakest (`pull`) to strongest (`admin`). The ladder is the ''ACCESS axis'' (Axis 1) of the [[causal-islands|lar:///ha.ka.ba/lares/api/pono/causal-islands]] model — a 1:1 lexical mirror of Keyhive's native Access verbs.
 
 ''Relay-law exception'': `pull` carries without implying `read`. A shrine relay holds encrypted offerings it cannot decrypt or render. This stands as the ONLY non-monotonic case in the lattice. All other abilities imply every ability below them.
 
@@ -75,6 +75,6 @@ export function abilityImplies(have: OrichalcumAbility, need: OrichalcumAbility)
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;24etQ2XsZbIHjyxbWISBOIome_E4HN8QePpHs1k5rxc
+<<^ code:"&#x0003;" >>ni:///sha-256;0z61a0XjP2IFN_5s-ys3-rtgaWyMWpDQqa2QwyAKgF4
 
 <<^ code:"&#x0004;" -> ? >>

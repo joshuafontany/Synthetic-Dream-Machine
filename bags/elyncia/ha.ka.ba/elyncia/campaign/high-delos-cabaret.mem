@@ -37,7 +37,7 @@ Referee's Second'' (prep, provisional-first) and ''the Painter of Words and Ligh
 provisional-first). Text crosses islands only in human hands; arrivals read as
 operator-introduced; the braid law rides at
 `lar:///ha.ka.ba/lares/api/pono/braided-islands` and the reds at
-[[session-0-1-handoff-prompts|session-0-1-handoff-prompts.md]]. A session standing this locus
+[[session-0-1-handoff-prompts|lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts]]. A session standing this locus
 without its red still stands the braid.
 
 ''Player-safe by construction.'' The players sit at this table, so this locus carries rating
@@ -172,7 +172,7 @@ stranger.
 
 //(Specification-grade appearance lines, carried verbatim from the heritage canon (FTLS Ch03) and
 the character packages — V8.2 wants literal materials, colors, and light. Full workflow, sources,
-and prompt anatomy: [[session-0-1-render-research|session-0-1-render-research.md]].)//
+and prompt anatomy: [[session-0-1-render-research|lar:///ha.ka.ba/elyncia/campaign/session-0-1-render-research]].)//
 
 ''Master style clause (verbatim, use whole):'' "orichalcum mythpunk: Bronze Age prestige lacquered
 over strange telecom, divine engineering, and impossible logistics." Venue vocabulary: //salon ·
@@ -284,7 +284,7 @@ prompted in-scene, answered in-voice, written to the sheet as it lands:
 !! Capture Format
 
 The played record lands in this locus using the shelf's witness pattern
-([[salt-stair-booth|salt-stair-booth.md]] sets the precedent):
+([[salt-stair-booth|lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth]] sets the precedent):
 
 * ''Operator/player turns'' — literal witness blocks, fenced, labeled by speaker; interpretive
   narrator segues above them, marked for later fleshing.
@@ -323,6 +323,6 @@ The played record lands in this locus using the shelf's witness pattern
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kIXgKyW06Lbv3IKVhHd86hV8Tcy8pR-hKfShKReKqPw
+<<^ code:"&#x0003;" >>ni:///sha-256;gpBtZd10t-QKO5qtSjas0XwQ_tJu8u0WQjXfdFh6ty4
 
 <<^ code:"&#x0004;" -> ? >>
