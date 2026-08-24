@@ -41,7 +41,10 @@ import { tagDigest, digestsEqual } from "@lararium/mesh/agile-digest";
 const root     = repoRoot;
 const pkgsRoot = resolve(root, "packages");
 /** Canonical bag mirror for @lararium/tw5 memes. */
-const tw5MemesRoot = resolve(root, "bags", "@lararium", "tw5");
+// THE CORPUS SITS UNDER ITS NAMESPACE, not directly under the bag. A bag holds
+// `ha.ka.ba/<namespace>/…`, so `bags/lararium/tw5` names a directory that has never stood —
+// the marker retirement made that visible without causing it.
+const tw5MemesRoot = resolve(root, "bags", "lararium", "ha.ka.ba", "lararium", "tw5");
 
 const args             = process.argv.slice(2);
 const COMMIT           = args.includes("--commit");
@@ -450,7 +453,7 @@ function runSyncModules(): { drift: number; missing: number; patched: number } {
     const uriTrimmed = moduleRef.replace(/^lar:\/\/\//, "");
     const parts      = uriTrimmed.split("/");
     // Strip ha.ka.ba/lararium/tw5 prefix (4 segments)
-    const rest       = (parts[0] === "ha.ka.ba" && parts[1] === "@lararium" && parts[2] === "tw5")
+    const rest       = (parts[0] === "ha.ka.ba" && parts[1] === "lararium" && parts[2] === "tw5")
       ? parts.slice(3).join("/")
       : parts.slice(2).join("/"); // legacy fallback
     const modPath    = resolve(tw5MemesRoot, `${rest}.md`);

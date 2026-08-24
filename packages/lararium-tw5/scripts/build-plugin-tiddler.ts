@@ -50,7 +50,10 @@ const ROOT       = path.resolve(__dirname, "..");
 const REPO_ROOT  = path.resolve(ROOT, "../..");
 const OUT_DIR    = path.join(ROOT, "dist-plugin");
 const PLUGIN_DIR = path.join(ROOT, "plugins");
-const BAG_ROOT   = path.join(REPO_ROOT, "bags", "@lararium", "tw5");
+// THE CORPUS SITS UNDER ITS NAMESPACE, not directly under the bag. A bag holds
+// `ha.ka.ba/<namespace>/…`, so `bags/lararium/tw5` names a directory that has never stood —
+// the marker retirement made that visible without causing it.
+const BAG_ROOT   = path.join(REPO_ROOT, "bags", "lararium", "ha.ka.ba", "lararium", "tw5");
 
 const PLUGIN_TITLE_LAR = LARES_MEMETIC_WIKITEXT_PLUGIN_URI;
 const PLUGIN_TITLE_TW5 = "$:/plugins/lares/memetic-wikitext";

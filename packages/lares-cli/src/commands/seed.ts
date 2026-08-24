@@ -27,11 +27,19 @@ import { larRoot } from "../env.js";
 import { cmdIngest } from "./ingest.js";
 import { cmdAct } from "./act.js";
 
-/** The holdings whose docs the vessel mints at boot — fed by the diff-gated ingest gesture. */
-const SYSTEM_HOLDINGS = new Set(["@lares", "@lararium"]);
+/**
+ * The holdings whose docs the vessel mints at boot — fed by the diff-gated ingest gesture.
+ *
+ * THESE MUST SPELL WHAT `discoverHoldings` RETURNS, which reads directory names straight off
+ * `bags/`. A marked spelling here matches no directory, so the membership test answers false for
+ * every holding and the infrastructure bags take the LOAD route in silence — no error, no warning,
+ * just the diff-gate skipped. A set that can never match is worse than an absent one: the branch
+ * below still reads as reachable.
+ */
+export const SYSTEM_HOLDINGS = new Set(["lares", "lararium"]);
 
 export interface SeedHolding {
-  readonly holding: string;               // "@lares"
+  readonly holding: string;               // "lares"
   readonly source: string;                // "<root>/bags/lares"
   readonly toBag: string;                 // "lar:///ha.ka.ba/bags/lares"
   readonly gesture: "ingest" | "load";    // the kind-route taken
@@ -67,7 +75,7 @@ export async function seedHolding(
   h: { holding: string; source: string; toBag: string },
 ): Promise<SeedHolding> {
   if (SYSTEM_HOLDINGS.has(h.holding)) {
-    // Infrastructure bags (@lares/@lararium) flow as NAMELESS ENTITIES — no special auto-confirm.
+    // Infrastructure bags (lares/lararium) flow as NAMELESS ENTITIES — no special auto-confirm.
     // A converged bag submits zero (silent no-op); a bag with genuinely NEW content trips the
     // ingest gate's "confirmation required" WITHOUT `--yes` — and that is the FEATURE: new infra
     // content SURFACES for the operator to grade on a gradient (approve → re-run with --yes, or

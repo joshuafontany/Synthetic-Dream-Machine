@@ -10,7 +10,7 @@ import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { discoverHoldings } from "../src/commands/seed.js";
+import { discoverHoldings, SYSTEM_HOLDINGS } from "../src/commands/seed.js";
 
 let root: string;
 
@@ -43,6 +43,19 @@ describe("discoverHoldings — the discovered holdings map", () => {
     writeFileSync(join(root, "bags", "note.md"), "not a holding\n");
     const holdings = discoverHoldings(root);
     expect(holdings.map((h) => h.holding)).toEqual(["lares", "scratch"]);
+  });
+
+  test("★ SYSTEM_HOLDINGS spells what discoverHoldings returns ★", () => {
+    // THE GUARD THE DEAD BRANCH NEEDED. `seed.ts` gates the infrastructure bags on set membership, and
+    // membership compares against directory names read off `bags/`. When the two spellings drifted the
+    // test answered false for every holding and NOTHING said so — the diff-gate simply stopped running.
+    // Comparing the two vocabularies directly is the only reading that catches a silent miss.
+    mkdirSync(join(root, "bags", "lares"),    { recursive: true });
+    mkdirSync(join(root, "bags", "lararium"), { recursive: true });
+    const found = new Set(discoverHoldings(root).map((h) => h.holding));
+    for (const sys of SYSTEM_HOLDINGS) {
+      expect(found.has(sys), `SYSTEM_HOLDINGS names "${sys}", which no bags/ directory spells`).toBe(true);
+    }
   });
 
   test("a missing bags/ answers the empty map (no throw)", () => {

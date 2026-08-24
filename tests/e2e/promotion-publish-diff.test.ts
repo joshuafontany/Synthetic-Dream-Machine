@@ -68,7 +68,10 @@ describe("promotion publish-diff — the cap-gated carrier MOVE across a canon s
     const r = await lar.cli(["act", "MOVE", "--title", BOOT_URI, "--from", LARES_URI, "--to", LARARIUM_URI, "--yes", "--json"]);
     expect(r.json?.["ok"]).toBe(true);
     const data = r.json?.["data"] as Record<string, unknown>;
-    expect(String(data?.["audit"])).toMatch(/@daemon\/outcomes\//);  // the effect-record audit URI
+    // THE PREFIX THIS READS IS BUILT, NEVER SPELLED. `OUTCOME_URI_PREFIX = `${DAEMON_BAG_ID}/outcomes/``
+    // resolves to `lar:///ha.ka.ba/bags/daemon/outcomes/`, so a marked spelling here matched nothing the
+    // code could produce — and the staged-mode early return above kept that red from ever surfacing.
+    expect(String(data?.["audit"])).toMatch(/bags\/daemon\/outcomes\//);  // the effect-record audit URI
     expect(Number(data?.["moved"])).toBeGreaterThan(1);             // the WHOLE carrier group, not one title
   }, 60_000);
 
