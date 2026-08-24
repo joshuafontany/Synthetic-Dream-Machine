@@ -3,7 +3,7 @@
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/noosphere-project-instructions >>
 ```toml iam
 cacheable = true
-file-path = "bags/lares/ha.ka.ba/lares/docs/cloud-settings.mem"
+file-path = "bags/lares/ha.ka.ba/lares/api/noosphere-project-instructions.mem"
 hydrate   = true
 mana      = 17
 manao     = 17

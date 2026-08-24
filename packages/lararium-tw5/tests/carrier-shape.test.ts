@@ -93,11 +93,13 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
    * round-trip, and not the gradient above, which classifies whatever it is handed and was never
    * handed these.
    *
-   * Forty stand: 37 `.md` from before the corpus poured, two `.tid`, one `.py`. Two of the `.md` carry
+   * Thirty-nine stand: 36 `.md` from before the corpus poured, two `.tid`, one `.py`. Two of the `.md` carry
    * a head sigil and are the glyph-definition drafts `period-forms` keeps verbatim, so they read as
    * `shelf` rather than `unframed` — the law and the reading agree without either being told.
    *
-   * A CEILING, not a floor: converting one lowers it, and a new uncarried file raises it. The sidecar
+   * A CEILING, not a floor: converting one lowers it, and a new uncarried file raises it. ''Lower it
+   * whenever it can go lower'' — a ceiling left slack absorbs the next gap silently, which is what the
+   * unnamed-carrier count did for a corpus that had shrunk from seventeen to seven beneath it. The sidecar
    * pair is excluded the way `lares normalize --gradient` excludes it — a content file declaring
    * itself in a `.meta` beside it carries no frame of its own and never should.
    */
@@ -109,7 +111,7 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
       !f.endsWith(".mem") && !f.endsWith(".meta") && !declared.has(f));
     expect(tracked.length).toBeGreaterThan(600);
     expect(uncarried.length, `an uncarried file appeared — run \`lares normalize --gradient $(git ls-files bags)\``)
-      .toBeLessThanOrEqual(40);
+      .toBeLessThanOrEqual(39);
   });
 
 });
