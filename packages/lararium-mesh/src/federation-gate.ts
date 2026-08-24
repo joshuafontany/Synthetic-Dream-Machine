@@ -5,7 +5,7 @@
  * peer. In-process island peers (MessageChannel workers) are house members and
  * share freely; a WS *relay* peer (LarWSClientAdapter) reaches the wider Nexus,
  * so the vessel must NOT blanket-share every doc with it — the private planes
- * (@catalog, @personal, @draft, wikis, corpus bags) stay home, only the public
+ * (@catalog, personal, draft, wikis, corpus bags) stay home, only the public
  * federation surface crosses.
  *
  * This gate names that decision behind ONE narrow, deny-by-default shore, shaped

@@ -219,7 +219,7 @@ export interface DaemonVmCore {
    */
   authShore:       AuthVerifierShore;
   /**
-   * Resolve (or mint+delegate) the operator's @personal/@draft binding pair for
+   * Resolve (or mint+delegate) the operator's personal/draft binding pair for
    * a recipe fingerprint — runs island-side where keyhive lives. Common surface.
    */
   resolveBinding: (

@@ -3,7 +3,7 @@
  * `@{slug}` canon projects to `bags/{slug}`.
  *
  * The disk grant carried literal mirrors for @lares/@lararium and a per-wiki
- * @working leaf, but nothing projected a freshly-minted wiki's own canon. The
+ * working leaf, but nothing projected a freshly-minted wiki's own canon. The
  * self-canon grant (authority) + the recipe designating wikiBagUri(slug)
  * (designation) now close it: resolveDiskMirrors expands @{slug} → bags/{slug}
  * for a minted wiki, while the system wikis keep their literal roots.

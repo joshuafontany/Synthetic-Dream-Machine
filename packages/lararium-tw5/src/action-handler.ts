@@ -1194,7 +1194,7 @@ async function executeMove(action: MoveAction, access: BagAccess): Promise<Recor
   for (const t of group) {
     // RETRACT (hard-remove → ABSENT), never a kāpae tombstone: a MOVE relocates,
     // so the source falls through to wherever the carrier now lives below —
-    // promotion @working → canon reveals the canon copy, not a hide
+    // promotion working → canon reveals the canon copy, not a hide
     // (residency-model anti-pattern #3; kāpae shadows, absent falls through).
     await removeIn(access, action.fromBag, t, o);
     moved++;

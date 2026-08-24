@@ -112,7 +112,7 @@ export type IslandStorageConfig =
  * Prerequisite fields (island cannot think without these — not cargo):
  *   - `recipe` is the WikiRecipe slot structure (wikiSlug + optional libraryBags).
  *   - `grants` carries the island's typed structural capabilities (engine doc,
- *     own bag, keyhive-bound @personal/@draft, @catalog ACCESS). Library bags
+ *     own bag, keyhive-bound personal/draft, @catalog ACCESS). Library bags
  *     never ride the manifest: the island resolves them itself from @catalog
  *     (recipe-watch reconcile — boot runs the same path as live composition).
  *
@@ -136,8 +136,8 @@ export interface IslandGrants {
   /** Keyhive-bound sovereign slots (daemon resolveBinding grants). */
   personalUrl?: string | null;
   draftUrl?:    string | null;
-  /** @working — the SAVED live write layer (PersonaGroup×fingerprint-bound, like
-   *  @personal); normal edits route here, canon publishes on a promotion MOVE. */
+  /** working — the SAVED live write layer (PersonaGroup×fingerprint-bound, like
+   *  personal); normal edits route here, canon publishes on a promotion MOVE. */
   workingUrl?:  string | null;
 }
 export interface IslandMsg_Manifest {
@@ -547,13 +547,13 @@ export interface DaemonMsg_VerifyResult {
 }
 
 // ---------------------------------------------------------------------------
-// @personal / @draft binding resolution (isomorphic-vessel epic, Stage 1)
+// personal / draft binding resolution (isomorphic-vessel epic, Stage 1)
 // ---------------------------------------------------------------------------
 // resolveOrMintBinding mints + delegates via keyhive, which lives in the daemon
 // island after Stage 1. The host posts a request with the recipe fingerprint;
 // the island mints/reuses against its Repo + keyhive and returns the doc URLs.
 
-/** Vessel → island: resolve (or mint+delegate) the @personal/@draft binding pair. */
+/** Vessel → island: resolve (or mint+delegate) the personal/draft binding pair. */
 export interface DaemonMsg_ResolveBindingRequest {
   schema_version: ProtocolVersion;
   type: "daemon:resolve-binding-request";
@@ -625,7 +625,7 @@ export interface DaemonMsg_ResidencyOpResult {
 
 /**
  * Island (daemon worker) → vessel: seed a reboot-pending alert into a live wiki's
- * @temp. A reboot-requiring daemon change (recipe/oracle/active-marker edit — all in
+ * temp. A reboot-requiring daemon change (recipe/oracle/active-marker edit — all in
  * bags the wiki island doesn't load) syncs but only applies on the wiki's next boot;
  * the daemon commands main to deliver a `system-alert` verb to the affected live
  * island so the operator sees it. Fire-and-forget (best-effort UX); main skips wikis

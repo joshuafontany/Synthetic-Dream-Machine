@@ -76,7 +76,7 @@ export interface VesselKeel {
    *  Genesis REQUIRED (coreless boot deleted) — the vessel derives bootstrap from the
    *  island (or the init JSON) here, so it resolves together with genesis, not before. */
   loadGenesis:   () => Promise<{ islandHandle: DocHandle<LarDoc>; coreHash: string; bootstrap: VesselBootstrap }>;
-  /** The volatile @temp store (a LarTiddlerStore — node/browser pass MemoryTiddlerStore). */
+  /** The volatile temp store (a LarTiddlerStore — node/browser pass MemoryTiddlerStore). */
   tempStore:     () => LarTiddlerStore;
 
   // ── capability pieces (absent = not-yet-held; the shore stays open) ──

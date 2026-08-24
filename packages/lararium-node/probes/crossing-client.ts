@@ -107,7 +107,7 @@ async function main(): Promise<void> {
   const identity: LeafIdentity = {
     contactCard: JSON.stringify({ peerPubKey: own.pub }), peerPubKey: own.pub, sign: ed25519SignerFromSeed(signSeed),
   };
-  console.log(`[crossing-client] (${ROLE}) CROSSING → ${url} (aud=${aud === AUD ? "@daemon" : "@personal(wrong)"})`);
+  console.log(`[crossing-client] (${ROLE}) CROSSING → ${url} (aud=${aud === AUD ? "@daemon" : "personal(wrong)"})`);
 
   const { outcome, found, repo, adapter } = await attemptCrossing(identity, aud, coords.gatePubKey, url, coords.docUrl);
 

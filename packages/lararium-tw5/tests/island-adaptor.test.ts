@@ -428,10 +428,10 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
 // ---------------------------------------------------------------------------
 // Cascade drift guard — the outbound tests above route against an in-test copy
 // of the cascade; bind that copy to the SHIPPED lar-bag-paths.tid so the
-// "live edit → @working" witness can never silently drift from the real config.
+// "live edit → working" witness can never silently drift from the real config.
 // (The live-VM saveTiddler path is unit-witnessed only — the cascade runs in
 // the wiki VM, worker-bound in node and dropped from the browser harness, so
-// no clean e2e surface drives it; the @working→wikis/ disk leg is e2e-witnessed
+// no clean e2e surface drives it; the working→wikis/ disk leg is e2e-witnessed
 // in tests/e2e/working-loop. This guard keeps the unit witness truthful.)
 // ---------------------------------------------------------------------------
 
@@ -443,7 +443,7 @@ describe("IslandAdaptor — cascade config drift guard", () => {
   });
 
   test("the shipped cascade routes a bare lar: edit to {current-wiki-bag} (the write-layer invariant)", () => {
-    // island-recipe seeds current-wiki-bag → @working for a granted content wiki;
+    // island-recipe seeds current-wiki-bag → working for a granted content wiki;
     // this rule is what carries a live lar: edit there instead of straight to canon.
     expect(shippedCascadeBody()).toContain(`[prefix[lar:]then{${CURRENT_WIKI_BAG}}]`);
   });

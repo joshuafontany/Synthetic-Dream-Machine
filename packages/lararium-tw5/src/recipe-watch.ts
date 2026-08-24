@@ -16,7 +16,7 @@
  *
  * Pono: the daemon never reaches in — it writes the catalog and each island
  * reconciles itself. After a successful reconcile the island clears its own
- * reboot-pending alert (@temp): the alert remains the FALLBACK for islands
+ * reboot-pending alert (temp): the alert remains the FALLBACK for islands
  * that sleep through the change; the engine-epoch class keeps the alert as
  * its permanent mechanism (see engine-watch — code never live-swaps).
  *
@@ -75,8 +75,8 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
     ?? (catHandle?.doc()?.tiddlers?.[userRecipeTitle] as LarTiddlerRecord | undefined);
 
   // Slots the recipe model owns structurally — everything else in the cascade
-  // counts as a library bag for membership reconcile. @working is a per-
-  // (PersonaGroup×fingerprint) GRANT slot (peer to @personal/@draft) threaded
+  // counts as a library bag for membership reconcile. working is a per-
+  // (PersonaGroup×fingerprint) GRANT slot (peer to personal/draft) threaded
   // through the manifest, never named in a recipe's bag-stack — so it MUST be
   // exempt, else this reconcile evicts the live write layer buildIslandRecipe
   // just mounted (the OCI writable-upper-layer law: keep the scratch layer out

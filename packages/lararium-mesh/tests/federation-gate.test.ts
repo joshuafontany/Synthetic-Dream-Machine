@@ -16,7 +16,7 @@ import { DeterministicFederationGate, federationShareDecision } from "../src/fed
 
 const NX = "abcdef0123456789";
 
-/** A random-id doc URL standing for a PRIVATE plane (catalog/@personal/@draft/wiki): its 16-byte id
+/** A random-id doc URL standing for a PRIVATE plane (catalog/personal/draft/wiki): its 16-byte id
  *  is unguessable and is NOT one of the deterministic public boards. */
 function randomDocId(): DocumentId {
   const bytes = new Uint8Array(16);

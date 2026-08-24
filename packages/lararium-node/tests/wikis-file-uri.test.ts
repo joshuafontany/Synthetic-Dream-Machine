@@ -1,10 +1,10 @@
 /**
- * wikis-file-uri.test.ts — the @working write-layer's disk surface run
+ * wikis-file-uri.test.ts — the working write-layer's disk surface run
  * backward (the ingest-BACK leg, thread 2): `wikis/{slug}/<sub-path>.mem` ⇄
  * `lar:///ha.ka.ba/<sub-path>`. The first segment under wikis/ names the WIKI
  * SLUG (the write-layer instance) and never enters the name — symmetric with
  * bagsFileToUri, which strips the residency bag. The derived records home to
- * @working; the caller carries that designation in `--to`.
+ * working; the caller carries that designation in `--to`.
  */
 
 import { describe, test, expect } from "vitest";
@@ -12,13 +12,13 @@ import { wikisFileToUri, bagsFileToUri } from "../src/bag-paths.js";
 
 const ROOT = "/srv/vessel";
 
-describe("wikisFileToUri — @working ingest-back reverse-derivation", () => {
+describe("wikisFileToUri — working ingest-back reverse-derivation", () => {
   test("the wiki-slug dir strips; the interior IS the name", () => {
     expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/lares/ha.ka.ba/lares/api/pono/meme.mem"))
       .toBe("lar:///ha.ka.ba/lares/api/pono/meme");
   });
 
-  test("a minted user wiki's @working surface derives losslessly", () => {
+  test("a minted user wiki's working surface derives losslessly", () => {
     expect(wikisFileToUri(ROOT, "/srv/vessel/wikis/my-world/ha.ka.ba/lararium/tw5/recipe-watch.mem"))
       .toBe("lar:///ha.ka.ba/lararium/tw5/recipe-watch");
   });

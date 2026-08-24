@@ -531,16 +531,16 @@ export const DEVICE_DELEGATION_SELF_TIDDLER = `${PERSONA_NAMESPACE}/delegation/s
  *  the device edge against THAT head (Reading-B continuity); the raw signer-DID is provenance only. */
 export const PERSONA_KEL_PREFIX_TIDDLER     = `${PERSONA_NAMESPACE}/binding/persona-kel-prefix`;
 
-// ── @personal / @draft binding tiddler prefixes ───────────────────────────
+// ── personal / draft binding tiddler prefixes ───────────────────────────
 // The (PersonaGroup × recipe-fingerprint) → docUrl bindings live as tiddlers
 // under these prefixes (now @persona-namespaced — PersonaGroup-scoped, cross-device).
-// One fingerprint produces THREE bindings (@personal, @draft, @working) that
+// One fingerprint produces THREE bindings (personal, draft, working) that
 // share a lifecycle. The binding tiddler title is `${PREFIX}/${fingerprintHex}`;
 // its `text` carries the bound URL.
 // Canon: lar:///ha.ka.ba/lararium/api/personal-slot#core-claim
 export const PERSONAL_BINDINGS_PREFIX = `${PERSONA_NAMESPACE}/personal-bindings`;
 export const DRAFT_BINDINGS_PREFIX    = `${PERSONA_NAMESPACE}/draft-bindings`;
-// @working binds like @personal (PersonaGroup×fingerprint, cross-device) — the
+// working binds like personal (PersonaGroup×fingerprint, cross-device) — the
 // SAVED live write layer; normal edits route here, canon publishes on promotion.
 export const WORKING_BINDINGS_PREFIX  = `${PERSONA_NAMESPACE}/working-bindings`;
 
@@ -551,7 +551,7 @@ export const WORKING_BINDINGS_PREFIX  = `${PERSONA_NAMESPACE}/working-bindings`;
 /**
  * Vessel-wide system bag URIs. These exist once per vessel and serve all wikis.
  *
- * Per-wiki recipe slots (`@temp`, `@draft`, `@<wiki-slug>`, library bags) live
+ * Per-wiki recipe slots (`temp`, `draft`, `@<wiki-slug>`, library bags) live
  * in `wiki-recipe.ts` — slot URIs in the same lar:///ha.ka.ba/bags/<name>
  * namespace. Structural slots arrive as typed IslandGrants on the manifest;
  * @lares rides the @lararium doc's well-known tiddlers; library bags resolve

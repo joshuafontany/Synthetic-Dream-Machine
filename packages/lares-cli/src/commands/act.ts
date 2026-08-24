@@ -254,8 +254,8 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   // change-id (the --change-id default) means a genuinely distinct change → runs.
   const subject   = String(actionArgs["to-bag"] ?? actionArgs["bag"] ?? "");
   // --in-wiki: run the ACTION IN the active wiki island over ITS composite
-  // (where @working + canon both live) — the daemon commands via `wiki-act`,
-  // never reaching the per-fingerprint @working binding. The default path
+  // (where working + canon both live) — the daemon commands via `wiki-act`,
+  // never reaching the per-fingerprint working binding. The default path
   // executes daemon-side (write-then-sync).
   const inWiki     = Boolean(args.flags["in-wiki"]);
   const submitName = inWiki ? "wiki-act" : verb;

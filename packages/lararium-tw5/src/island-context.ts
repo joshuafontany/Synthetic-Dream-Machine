@@ -28,7 +28,7 @@ export interface IslandContext {
   post:      (msg: IslandToVesselMsg) => void;
   /**
    * The island-side Automerge Repo. Island behaviors that mint docs (e.g. the
-   * daemon island's @personal/@draft binding resolver) create them here; the docs
+   * daemon island's personal/draft binding resolver) create them here; the docs
    * sync to the host relay via the manifest syncPort. Isomorphic-vessel Stage 1.
    */
   repo:      Repo;

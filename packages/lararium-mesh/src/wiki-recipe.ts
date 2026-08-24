@@ -306,7 +306,7 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
 
 /**
  * Recipe-fingerprint input — the canonical bag-doc-id set that names "the
- * same recipe" for purposes of cross-device @personal binding.
+ * same recipe" for purposes of cross-device personal binding.
  *
  * Fingerprint algorithm (personal-slot): only the wiki bag
  * doc-id and the libraryBags doc-ids participate. @lares and @lararium
@@ -321,11 +321,11 @@ export interface RecipeFingerprintInput {
 }
 
 /**
- * Compute the recipe-fingerprint for `@personal` / `@draft` binding.
+ * Compute the recipe-fingerprint for `personal` / `draft` binding.
  *
  * SHA-256 hex over canonical JSON of `{ wikiDocId, libraryBagDocIds: sorted }`.
- * Two devices share an `@personal` binding iff their `(PersonaGroup ×
- * fingerprint)` pairs match. The vessel stores `@personal` doc URLs keyed by
+ * Two devices share an `personal` binding iff their `(PersonaGroup ×
+ * fingerprint)` pairs match. The vessel stores `personal` doc URLs keyed by
  * this fingerprint.
  *
  * Sort-stability: the doc-ids get sorted before hashing so caller ordering
@@ -358,6 +358,6 @@ export interface WikiMountSpec {
   coreHash: string | null;
   /** WikiRecipe slot structure (wikiSlug + optional libraryBags + mirrorBags). */
   recipe: WikiRecipe;
-  /** Typed structural capabilities (engine doc, own bag, @personal/@draft, @catalog access). */
+  /** Typed structural capabilities (engine doc, own bag, personal/draft, @catalog access). */
   grants: import("./island-protocol.js").IslandGrants;
 }

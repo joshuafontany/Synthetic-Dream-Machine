@@ -278,7 +278,7 @@ export class VesselIslandPoolCore {
     // this pool's held grant names which it MAY write. A browser pool's empty
     // grant → never mirrors. The unforgeable authority lives in the grant.
     // Authority ∩ designation, with per-wiki-slug leaves filled from the recipe
-    // (e.g. @working → wikis/{slug}). See resolveDiskMirrors.
+    // (e.g. working → wikis/{slug}). See resolveDiskMirrors.
     const diskMirrors = resolveDiskMirrors(this._diskMirrorGrant, spec.recipe.mirrorBags, spec.recipe.wikiSlug);
     const storage = this._host.storage(wikiId);
 

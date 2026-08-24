@@ -423,7 +423,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // Two rings: WS peers (outside) must have passed the DaemonAuthGate; the
     // vessel's OWN islands (MessageChannel peers — daemon + wiki workers) are
     // house members and share freely. Without the island ring, main never
-    // relays daemon-island-minted docs (@personal/@draft bindings) to the wiki
+    // relays daemon-island-minted docs (personal/draft bindings) to the wiki
     // island and its slot-resolve hangs at boot.
     //
     // V5 SYMMETRY: this WS ring gates at the PEER (gate-passed vs not); the browser
@@ -552,7 +552,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // pubkey the antigen board derives from. The gate's federatable surface is a PURE function of that key
   // (@crossroads · WHO · kapae-antigen board — deny-by-default for every other doc), so a cross-operator
   // peer reaches exactly the always-carried public/infra planes and nothing private. No hand-maintained
-  // allow-list; the private planes (@catalog/@personal/@daemon/home/wikis) fall outside the set → DENY.
+  // allow-list; the private planes (@catalog/personal/@daemon/home/wikis) fall outside the set → DENY.
   selfSlotFedGate = new DeterministicFederationGate(vesselIdentity.verifyingKey);
 
   // ── The CARRIAGE serve-loop (Socket B, ciphertext) — INERT until a carriage-relay URL rides the config ──────
@@ -1410,8 +1410,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     });
     // wiki-act: command a residency ACTION verb to run IN the active wiki
     // island over ITS composite (promotion executes
-    // where @working + canon both live — the island owns its composition; the
-    // daemon commands, never reaches the per-fingerprint @working binding). The
+    // where working + canon both live — the island owns its composition; the
+    // daemon commands, never reaches the per-fingerprint working binding). The
     // inner verb (MOVE/LOAD/…) routes to the island's own action reactors.
     registry.register("wiki-act", async (args, ctx) => {
       await wikiActivation.ensureActive(slotActiveWikiId);

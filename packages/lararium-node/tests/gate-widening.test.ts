@@ -10,7 +10,7 @@
  * the REAL selfSlotShareDecision over the REAL DeterministicFederationGate + deterministic doc urls, so the
  * whole braid runs live:
  *   · a valid, proof-carrying FOREIGN identity → classified cross-operator → reaches crossroads/WHO/antigen,
- *     but is DENIED catalog/@personal (the widening grants NOTHING beyond the federatable set),
+ *     but is DENIED catalog/personal (the widening grants NOTHING beyond the federatable set),
  *   · a FOREIGN identity that cannot prove possession → DENIED admission (fail-closed on the widened surface),
  *   · a SAME-OPERATOR peer keeps FULL device sync — the classifier is never reached for it (no regression),
  *   · a Kapae'd cross-operator draws Mu even for a federatable plane (the #59 antigen ahead).
@@ -79,7 +79,7 @@ describe("END-TO-END — the classified cross-operator reaches the federatable s
   test("a catalog-like PRIVATE plane is DENIED — the widening grants NOTHING beyond readcrossroads", async () => {
     expect(await share(CATALOG_LIKE)).toBe(false);
   });
-  test("a @personal-like PRIVATE plane is DENIED", async () => { expect(await share(PERSONAL_LIKE)).toBe(false); });
+  test("a personal-like PRIVATE plane is DENIED", async () => { expect(await share(PERSONAL_LIKE)).toBe(false); });
   test("a no-doc-id decision is DENIED (deny-by-default)", async () => { expect(await share(undefined)).toBe(false); });
 });
 
@@ -91,7 +91,7 @@ describe("no-same-operator-regression — a SAME-OPERATOR peer keeps FULL device
     peerId: "own-device-peer", documentId,
   });
   test("a PRIVATE plane (catalog-like) still crosses to my own device", async () => { expect(await same(CATALOG_LIKE)).toBe(true); });
-  test("a PRIVATE plane (@personal-like) still crosses to my own device", async () => { expect(await same(PERSONAL_LIKE)).toBe(true); });
+  test("a PRIVATE plane (personal-like) still crosses to my own device", async () => { expect(await same(PERSONAL_LIKE)).toBe(true); });
   test("a federatable plane crosses too", async () => { expect(await same(CROSSROADS)).toBe(true); });
 });
 

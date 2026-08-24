@@ -6,7 +6,7 @@
  * boot; when a new genesis merges in (reconcileIslandFromGenesis on a vessel
  * carrying a newer artifact), the blobs[ENGINE_CORE_ID] entry moves under the
  * running island. This watch observes that move and writes an "engine waiting"
- * alert into the island's OWN @temp — alert-only, never auto-reboot: the
+ * alert into the island's OWN temp — alert-only, never auto-reboot: the
  * update arrives as an offer; the operator holds the reboot capability, and
  * reboot re-verifies the new engine from genesis the same way the first booted.
  *
@@ -32,7 +32,7 @@ import {
 import type { IslandContext } from "./island-context.js";
 
 /** The engine-waiting alert tiddler title. Stable title = one coalesced alert;
- *  volatile (@temp) → self-clearing on the reboot that adopts the epoch. */
+ *  volatile (temp) → self-clearing on the reboot that adopts the epoch. */
 export const ENGINE_WAITING_ALERT_TITLE = "$:/temp/lares/alert/engine-waiting";
 /** TW5's built-in alert tag — tiddlers carrying it surface in the alerts area. */
 const TW5_ALERT_TAG = "$:/tags/Alert";

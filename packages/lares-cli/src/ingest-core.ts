@@ -115,13 +115,13 @@ export function listCarriers(source: string): string[] | null {
 }
 
 /** Derive a file's carrier-root URI for one mirror plane (bags/ canon vs
- *  wikis/ @working write-layer). The watcher and CLI both feed a source; this
+ *  wikis/ working write-layer). The watcher and CLI both feed a source; this
  *  names which loci reverse-derivation a row carries. */
 export type FileToUriFn = (root: string, file: string) => string | null;
 
 /**
  * Pick the loci reverse-derivation by which mirror plane the source sits in.
- * Under `<root>/wikis/` → the @working write-layer ingest-back derivation
+ * Under `<root>/wikis/` → the working write-layer ingest-back derivation
  * (the editing plane); else the bags/ canon derivation. Designation of the
  * target bag stays the caller's (`--to`); the plane only drives the URI.
  */
@@ -135,7 +135,7 @@ export function fileToUriForSource(root: string, source: string): FileToUriFn {
  * The two-leg diff over an explicit carrier list: derive uri, NFC-assert, hash,
  * compare against the Synced tree. The watcher feeds the buffered changed paths
  * here; the CLI feeds the whole walked source. `fileToUri` names the mirror
- * plane (default bags/ canon; wikis/ for @working ingest-back).
+ * plane (default bags/ canon; wikis/ for working ingest-back).
  */
 export function scanFiles(
   root:  string,
@@ -325,7 +325,7 @@ export interface SubmitIngestOpts {
   readonly massDeleteFraction?: number;
   /**
    * Run the INGEST IN the active wiki island over ITS composite — the path
-   * for `@working` (the per-fingerprint write layer the daemon never reaches).
+   * for `working` (the per-fingerprint write layer the daemon never reaches).
    * The daemon commands via `wiki-act` wrapping the INGEST; the default path
    * executes daemon-side (canon bags).
    */
@@ -365,7 +365,7 @@ export async function submitIngest(opts: SubmitIngestOpts): Promise<SubmitResult
     ...(opts.massDeleteFraction !== undefined ? { massDeleteFraction: opts.massDeleteFraction } : {}),
   };
   // --in-wiki: wrap the INGEST so it runs IN the active wiki island over its
-  // composite (where @working lives), mirroring `lares act --in-wiki`. The
+  // composite (where working lives), mirroring `lares act --in-wiki`. The
   // default submits daemon-side for canon bags.
   const submitName = opts.inWiki ? "wiki-act" : "INGEST";
   const submitArgs = opts.inWiki ? { verb: "INGEST", args: actionArgs } : actionArgs;

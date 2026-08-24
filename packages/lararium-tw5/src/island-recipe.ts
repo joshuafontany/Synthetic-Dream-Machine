@@ -3,8 +3,8 @@
  *
  * Canonical assembly:
  *   1) `expandRecipe(recipe)` → ordered slot URIs (top of array = highest priority)
- *   2) addLayer for each slot in cascade order (bottom-up): @oracle floor first, @temp last
- *   3) @temp slot uses a MemoryTiddlerStore; all other slots use AutomergeDocStore
+ *   2) addLayer for each slot in cascade order (bottom-up): @oracle floor first, temp last
+ *   3) temp slot uses a MemoryTiddlerStore; all other slots use AutomergeDocStore
  *   4) IslandAdaptor projection registers
  *   5) initial replay + sync complete + synchronous flushNalu so the wiki carries
  *      its seed state before behavior.onEa runs
@@ -38,7 +38,7 @@ export interface BuildIslandRecipeInput {
   tw5: TW5Engine;
   composite: CompositeStore;
   recipe: WikiRecipe;
-  /** Resolved CRDT handles keyed by slot URI. @temp has no entry. */
+  /** Resolved CRDT handles keyed by slot URI. temp has no entry. */
   ready: readonly RecipeReadyBinding[];
 }
 

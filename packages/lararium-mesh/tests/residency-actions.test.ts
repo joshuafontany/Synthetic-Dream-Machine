@@ -361,7 +361,7 @@ describe("change-id preservation (Anti-pattern #1 defense)", () => {
   });
 
   test("MOVE → ADD lift preserves change-id (lifting recognises 'same change, different bag')", () => {
-    // Operator MOVEs tiddler from @personal to @<wiki> — change-id stays stable.
+    // Operator MOVEs tiddler from personal to @<wiki> — change-id stays stable.
     const moveAction: MoveAction = {
       verb:        "MOVE",
       requestId:   "req-move-1",

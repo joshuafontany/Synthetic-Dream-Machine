@@ -3,11 +3,11 @@
  *
  * Two roles:
  *   1. Tests and fixtures.
- *   2. The `@temp` slot in every WikiRecipe — top of the cascade, volatile
+ *   2. The `temp` slot in every WikiRecipe — top of the cascade, volatile
  *      per-island. No I/O, no Automerge backing, no wire surface; on island
  *      restart the slot comes up empty.
  *
- * What belongs in @temp (device-vessel local, never crosses the boundary):
+ * What belongs in temp (device-vessel local, never crosses the boundary):
  *   $:/temp/*           drafts mid-typing, alerts, HTTP request trackers
  *   $:/temp/volatile/*  rAF tick markers, animation frames
  *   $:/status/*         TW5 login/identity status flags (per-device)
@@ -16,17 +16,17 @@
  *   $:/state/popup/*    sub-second UI popup state
  *   (catch-all) $:/*    anything else under TW5's system namespace
  *
- * What does NOT belong in @temp (operator's cross-device viewing state):
+ * What does NOT belong in temp (operator's cross-device viewing state):
  *   $:/StoryList         which tiddlers are open in the story river
  *   $:/state/folded/*    fold/expand state per tiddler frame
  *   $:/state/tab-*       selected tab per tiddler
  *   $:/palette           operator's chosen color palette
  *
- * The above route to the `@personal` slot — a CRDT
+ * The above route to the `personal` slot — a CRDT
  * bag scoped to the operator's Keyhive PersonaGroup (their authorised device
  * cabal), keyed per (PersonaGroup × recipe-fingerprint). The in-wiki bag-paths
  * cascade (lar:///ha.ka.ba/lararium/config/bag-paths) decides routing, not this
- * store: prefix rules send those four above the `$:/state/` → @temp catch-all.
+ * store: prefix rules send those four above the `$:/state/` → temp catch-all.
  * See:
  *   bags/lares/ha.ka.ba/lararium/api/personal-slot.md
  *

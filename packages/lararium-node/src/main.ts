@@ -393,12 +393,12 @@ async function main(): Promise<void> {
   // ── Graceful, DURABLE shutdown (flush-then-force) ────────────────────────────
   // A bare process.exit() (or a SIGKILL escalation when the handler runs too slow)
   // while an island writes DESYNCS the actively-written doc — the recurring
-  // "@working never arrived over syncPort" gap. The reliable path:
+  // "working never arrived over syncPort" gap. The reliable path:
   //   1. stop new inbound work (uds + http + read-face),
   //   2. flush the MAIN replica FIRST — the guaranteed durable floor for every doc
   //      that has already synced (this completes before any force-exit),
   //   3. tear down the wiki islands (disposeAll → each island flushes its OWN
-  //      partition, incl. @working, before it acks),
+  //      partition, incl. working, before it acks),
   //   4. tear down the daemon island gracefully (it flushes its docs + capture WAL),
   //   5. flush MAIN again to capture anything that synced during teardown.
   // A hard budget guards the whole sequence: if a worker jams in keyhive WASM

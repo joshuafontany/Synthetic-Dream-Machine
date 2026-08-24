@@ -29,7 +29,7 @@ import type { IslandBehavior, IslandContext } from "./island-context.js";
 
 /** The reboot-pending alert tiddler title. Tagged `$:/tags/Alert` so TW5's NATIVE
  *  alert area renders it (no custom banner needed). Stable title = one coalesced
- *  alert, not a pile. Volatile (@temp) → self-clearing on reboot, which is exactly
+ *  alert, not a pile. Volatile (temp) → self-clearing on reboot, which is exactly
  *  what applies the pending change; the operator may also dismiss it (TW5's close
  *  button deletes the tiddler). */
 export const REBOOT_ALERT_TITLE = "$:/temp/lares/alert/reboot-pending";
@@ -75,7 +75,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
         ...(ctx.resolveByCid ? { resolveByCid: ctx.resolveByCid } : {}),
       });
       // system-alert — the daemon worker (via main → pool.placeWikiVerb) delivers a
-      // reboot-pending notice; the island writes it into its OWN @temp (volatile,
+      // reboot-pending notice; the island writes it into its OWN temp (volatile,
       // self-clearing on reboot). The daemon never reaches into this composite directly.
       registry.register("system-alert", async (args) => {
         const message = typeof args["message"] === "string" ? args["message"] : "A change requires a reboot to apply.";

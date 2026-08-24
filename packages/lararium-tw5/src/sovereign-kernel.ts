@@ -18,8 +18,8 @@
  *   @catalog ONLY (boot = first reconcile — the same path recipe-watch walks
  *   live). `buildIslandRecipe()` lays the stack:
  *
- *     @temp        (MemoryTiddlerStore, volatile)
- *     @draft       (CRDT, high-churn drafts)
+ *     temp        (MemoryTiddlerStore, volatile)
+ *     draft       (CRDT, high-churn drafts)
  *     @<wikiSlug>  (CRDT, operator's edits)
  *     libraryBags[]  (CRDT, optional content libraries — @lares persona +
  *                     @lararium corpus ride here, resolved island-side from @catalog)
@@ -200,7 +200,7 @@ export function runSovereignKernel(
   // inferred from a fixed wall deadline: during a fresh-corpus boot both the
   // vessel main thread and this island wedge for whole seconds in synchronous
   // automerge/keyhive work, so a bare 8s `Promise.race` faulted a LIVE sync
-  // whose response sat queued behind the wedge (@personal never
+  // whose response sat queued behind the wedge (personal never
   // "arrived" while its doc sat on disk the whole time).
   // The vessel-host ea-wait carries the same law; this is its island-side twin:
   //   - the budget clocks port-silence, re-armed by ANY inbound sync traffic
@@ -235,7 +235,7 @@ export function runSovereignKernel(
     // The silence budget clocks from max(last inbound message, THIS find's start):
     // slots that resolve from the island's own storage partition move no port
     // traffic, so quiet accrued BEFORE this find says nothing about this doc's
-    // request (@draft faulted at 756ms elapsed under 9240ms of stale
+    // request (draft faulted at 756ms elapsed under 9240ms of stale
     // pre-find silence when the big bags loaded locally).
     const silence = (): number => mono() - Math.max(_lastSyncHeardAt, started);
     for (;;) {
@@ -397,7 +397,7 @@ export function runSovereignKernel(
 
     const tw5 = handler.tw5()!;
     // One recipe model — buildIslandRecipe walks expandRecipe(msg.recipe),
-    // wires @temp + every resolved CRDT slot, registers the adaptor, and ARMS
+    // wires temp + every resolved CRDT slot, registers the adaptor, and ARMS
     // the seed replay on the paced nalu rail (progressive-boot: no synchronous
     // unbounded flush). The seed then drains frame-by-frame off the critical
     // path, so this thread keeps breathing while the corpus streams in.
@@ -442,10 +442,10 @@ export function runSovereignKernel(
     handler.teardown();
 
     // DURABLE FLUSH before ack — persist this island's in-flight Automerge docs
-    // (e.g. @working) to its own storage so a graceful shutdown NEVER desyncs an
+    // (e.g. working) to its own storage so a graceful shutdown NEVER desyncs an
     // actively-written doc. Automerge-repo persists on a debounced timer; a bare
     // worker.terminate() (or SIGKILL) before that timer fires loses the write — the
-    // "@working never arrived over syncPort" gap. flush() resolves once the bytes
+    // "working never arrived over syncPort" gap. flush() resolves once the bytes
     // are durable. We await it BEFORE posting teardown:ack, so the vessel's
     // disposeAll() handshake only completes after every island's write is on disk
     // (flush-then-force; the vessel's force-timer is the only escape if THIS jams).

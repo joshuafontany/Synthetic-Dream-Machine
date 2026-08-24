@@ -84,7 +84,7 @@ export interface PrimaryMountPool {
   mountWiki(id: string, spec: WikiMountSpec, opts?: { pinned?: boolean }): Promise<void>;
 }
 
-/** Any daemon vessel that can resolve the operator's @personal/@draft/@working
+/** Any daemon vessel that can resolve the operator's personal/draft/working
  *  binding — island-side, where keyhive lives. Both vessels expose this (pair 2). */
 export interface BindingResolver {
   resolveBinding(
@@ -123,7 +123,7 @@ export async function buildWikiMountSpec(
   binding: BindingResolver,
   inputs:  PrimaryMountInputs,
 ): Promise<{ spec: WikiMountSpec; personalUrl: string; draftUrl: string; workingUrl: string }> {
-  // @personal + @draft + @working bind TOGETHER per recipe-fingerprint (Q11).
+  // personal + draft + working bind TOGETHER per recipe-fingerprint (Q11).
   // Fingerprint covers wikiDocId + libraryBags only (@lares/@lararium excluded
   // per Q4); the live wiki carries no libraryBags, so it keys on the wiki doc url alone.
   const recipeTrace = { wikiDocId: inputs.wikiUrl, libraryBagDocIds: [] as readonly string[] };
@@ -156,7 +156,7 @@ export async function buildWikiMountSpec(
 /**
  * Mount the primary wiki island — the isomorphic keystone both vessels run.
  *
- * Every keeper, on every platform, binds its sovereign @personal/@draft slots
+ * Every keeper, on every platform, binds its sovereign personal/draft slots
  * (resolved island-side per recipe-fingerprint) and mounts a pinned primary.
  * Persona/office divergence lives only in DATA + held capability: mirrorBags is
  * a universal designation a pool's disk-grant may or may not honor; pinned is a

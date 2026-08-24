@@ -1,5 +1,5 @@
 /**
- * resolve-binding.test.ts — S7.5/S7.6 @personal/@draft binding resolver.
+ * resolve-binding.test.ts — S7.5/S7.6 personal/draft binding resolver.
  *
  * Proves the host-layer mint/reuse contract for the (PersonaGroup ×
  * recipe-fingerprint) → docUrl bindings:
@@ -129,7 +129,7 @@ describe("resolveOrMintBinding", () => {
     expect(delegations).toEqual([]);    // no delegation
   });
 
-  test("@personal and @draft bind under parallel prefixes for the same fingerprint", async () => {
+  test("personal and draft bind under parallel prefixes for the same fingerprint", async () => {
     const repo = new Repo();
     const { daemonStore, daemonHandle } = makeDaemonStore(repo);
     const { provider } = makeFakeKeyhive();

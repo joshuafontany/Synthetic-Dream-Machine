@@ -1,15 +1,15 @@
 /**
- * wikis-ingest-back.test.ts — thread 2: the @working write-layer's disk
- * surface ingests BACK. @working projects per-wiki to wikis/{slug}/…;
+ * wikis-ingest-back.test.ts — thread 2: the working write-layer's disk
+ * surface ingests BACK. working projects per-wiki to wikis/{slug}/…;
  * editing a projected wikis/ file and running
- * `lares ingest --source <wikis> --to @working --in-wiki` derives the carrier
- * URI off the @working plane (wikisFileToUri) and lands the edit back in
- * @working — closing the loop the projection opened (wikis/ projected OUT
+ * `lares ingest --source <wikis> --to working --in-wiki` derives the carrier
+ * URI off the working plane (wikisFileToUri) and lands the edit back in
+ * working — closing the loop the projection opened (wikis/ projected OUT
  * only until this thread).
  *
  *   WB1 — round-trip identity: a settled wikis/ mirror scans all-unchanged
- *         through the @working plane (proves wikisFileToUri ⇄ the projector)
- *   WB2 — a disk edit on a wikis/ file ingests back to @working in one cycle
+ *         through the working plane (proves wikisFileToUri ⇄ the projector)
+ *   WB2 — a disk edit on a wikis/ file ingests back to working in one cycle
  *
  * Staged-only (mutating). Rides the live CLI + the wiki island (--in-wiki),
  * mirroring ingest-quiescence Q1/Q2 on the write-layer plane.
@@ -70,25 +70,25 @@ beforeAll(async () => {
   if (lar.mode !== "staged") return;
   wikisDir = join(lar.root, "wikis");
   const r = await lar.cli(["act", "LOAD", "--source-uri", BOOT_MEME, "--to", WORKING, "--in-wiki", "--yes", "--json"]);
-  if (r.json?.["ok"] !== true) throw new Error(`seed LOAD --to @working failed: ${JSON.stringify(r.json)}`);
+  if (r.json?.["ok"] !== true) throw new Error(`seed LOAD --to working failed: ${JSON.stringify(r.json)}`);
   projected = await awaitWikisCarrier();
   await awaitSettled();
 }, 120_000);
 afterAll(async () => { await lar.stop(); });
 
-describe("wikis ingest-back — the @working write-layer round-trips", () => {
-  test("WB1 — a settled wikis/ mirror scans all-unchanged through @working", async () => {
+describe("wikis ingest-back — the working write-layer round-trips", () => {
+  test("WB1 — a settled wikis/ mirror scans all-unchanged through working", async () => {
     if (lar.mode !== "staged") return;
     const r = await ingest([]);
     const d = r.json?.["data"] as Record<string, unknown>;
-    // the wikis/ carrier derived a URI off the @working plane — NOT skipped
+    // the wikis/ carrier derived a URI off the working plane — NOT skipped
     expect(Number(d["scanned"])).toBeGreaterThanOrEqual(1);
     expect((d["skipped"] as string[]) ?? []).toHaveLength(0);
     expect(d["new"]).toBe(0);
     expect(d["changed"]).toBe(0);
   }, 60_000);
 
-  test("WB2 — a disk edit on a wikis/ file ingests back to @working in one cycle", async () => {
+  test("WB2 — a disk edit on a wikis/ file ingests back to working in one cycle", async () => {
     if (lar.mode !== "staged") return;
     const before = readFileSync(projected, "utf8");
     // Bind to the SHAPE of a heading in the dialect the PROJECTION speaks — memetic-wikitext, where `!`
@@ -103,12 +103,12 @@ describe("wikis ingest-back — the @working write-layer round-trips", () => {
     const carriers = d["carriers"] as Array<Record<string, unknown>>;
     expect(carriers?.[0]?.["decision"]).toBe("ingest");
 
-    // the @working projection re-renders canonical, the edit preserved
+    // the working projection re-renders canonical, the edit preserved
     await sleep(2_000);
     const settled = await awaitSettled();
     expect(settled).toContain("(wikis-ingest-back-edit)");
 
-    // ONE cycle: the next scan reads the @working mirror unchanged
+    // ONE cycle: the next scan reads the working mirror unchanged
     const r2 = await ingest([]);
     const d2 = r2.json?.["data"] as Record<string, unknown>;
     expect(d2["changed"]).toBe(0);

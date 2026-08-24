@@ -80,7 +80,7 @@ export interface DaemonBehaviorOptions {
   verifyPeer?: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin", proof?: AuthProofWire, edge?: DeviceDelegationTiddler)
     => Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }>;
   /**
-   * Resolve (or mint+delegate) the @personal/@draft binding pair island-side —
+   * Resolve (or mint+delegate) the personal/draft binding pair island-side —
    * the mint needs keyhive + the island Repo. The platform entry supplies this
    * closing over the booted keyhive; it calls `resolveOrMintBinding` with
    * `ctx.repo` + `ctx.composite`. Opaque so tw5 stays keyhive-free.

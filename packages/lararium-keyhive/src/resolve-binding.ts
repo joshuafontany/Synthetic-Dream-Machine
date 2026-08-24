@@ -1,5 +1,5 @@
 /**
- * resolve-binding — resolver/minter for the `@personal` and `@draft` recipe
+ * resolve-binding — resolver/minter for the `personal` and `draft` recipe
  * slots, keyed by (PersonaGroup × recipe-fingerprint).
  *
  * Isomorphic + island-side (isomorphic-vessel epic). Lives in @lararium/keyhive
@@ -46,7 +46,7 @@ export interface DocMinter {
 export type BindingKind = "personal-binding" | "draft-binding" | "working-binding";
 
 export interface ResolveBindingArgs {
-  /** Tiddler `kind` field value — distinguishes @personal / @draft / @working bindings. */
+  /** Tiddler `kind` field value — distinguishes personal / draft / working bindings. */
   readonly kind: BindingKind;
   /** Daemon tiddler-title prefix (PERSONAL_ | DRAFT_ | WORKING_BINDINGS_PREFIX). */
   readonly prefix: string;
@@ -73,7 +73,7 @@ export interface ResolveBindingArgs {
 }
 
 export interface ResolveBindingResult {
-  /** The bound `@personal` / `@draft` Automerge doc URL. */
+  /** The bound `personal` / `draft` Automerge doc URL. */
   readonly url: string;
   /** true when this call minted a fresh doc; false on reuse-on-present. */
   readonly minted: boolean;

@@ -8,8 +8,8 @@
  * disk-mirrored) stands in for the working→canon crossing.
  *
  * THE round-trip's three once-unbuilt pieces are now CLOSED, each witnessed:
- *   - V3 (the @working disk mirror) — working-loop.test.ts
- *   - @working CLI-reachability + ingest-back — wikis-ingest-back.test.ts (--in-wiki)
+ *   - V3 (the working disk mirror) — working-loop.test.ts
+ *   - working CLI-reachability + ingest-back — wikis-ingest-back.test.ts (--in-wiki)
  *   - minted-@{slug} canon projection — minted-canon-projection.test.ts
  * This vector keeps its own focus: the MOVE gate + change-id + effect-record +
  * the disk publish-diff, with @lares→@lararium standing in for the crossing.
