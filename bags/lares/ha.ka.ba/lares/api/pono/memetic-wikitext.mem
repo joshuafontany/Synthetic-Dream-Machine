@@ -86,6 +86,49 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 
 <<~/ahu >>
 
+<<~ ahu #abstract-syntax >>
+
+!! Abstract Syntax
+
+Memetic-wikitext denotes a graph, and every concrete surface in this document encodes it. This section
+defines the graph without reference to any sigil, bracket, or byte, so the encodings that follow — the
+macro-call surface (#lexical-structure), the transmission frame (#control-set), and any serialization a
+future document defines — each read as one encoding of one structure rather than as the structure itself.
+
+''Five shapes compose the graph:''
+
+* ''meme'' — a named unit of content. A meme holds exactly one intrinsic property: its address
+  [LAR-URI]. Every other property composes: the meme WEARS components (its has-stack), each component
+  itself a meme at its own address. Authority follows what a meme holds and who granted it, never what
+  it is claimed to be.
+* ''worksite'' — a named region nested in a meme's content. Worksites nest, and a nested worksite's
+  name extends its parent's path; a worksite addresses as a fragment anchor of its meme.
+* ''edge'' — a directed relation from one address toward another. Three kinds carry every relation:
+  adjacency (a bare pointer), transclusion (renders-in-place, live or shadow), and the anchored pointer
+  (a named office aimed at a target). The edge itself carries no further vocabulary; a relation richer
+  than its kind reifies as a meme that speaks for itself.
+* ''content'' — the text a meme or worksite holds, within which further structure stands: edges, nested
+  worksites, and guest regions the host carries opaquely.
+* ''the extension point'' — the grammar's capacity to admit new named forms from its own corpus at run
+  time. The sigil registry, guest grammar (#guest-grammar), and english aliases (#english-aliases) each
+  encode this one capability. It reaches down a layer: TiddlyWiki wikitext parses an unbound macro call
+  and degrades it to inert text [TW5], the property that lets this grammar ride the host as a superset —
+  and lets any dialect ride this grammar the same way. ''Self-extension and re-mixability stand as
+  invariants of the family, never as features of one dialect.''
+
+''Document and carrier name different things.'' A ''document'' encodes one meme's structure — content,
+worksites, edges — and nothing else. A ''carrier'' wraps a document in the transmission frame
+(#control-set): a declaration naming the grammar, a heading naming the address, text bounds, a block
+check, a release. The frame belongs to the carrier and never to the document: it brackets what the
+document says without joining it, which lets one document travel under different framings and one frame
+carry any document.
+
+''One parse, two projections.'' The compile-time graph reading and the render-time projection both read
+this abstract structure and neither reads the other (#processing-model). A processor that conflates the
+projection with the structure has read an encoding as the thing encoded.
+
+<<~/ahu >>
+
 <<~ ahu #lexical-structure >>
 
 !! Lexical Structure
@@ -444,7 +487,21 @@ Applications:              lararium nodes; TiddlyWiki5 carriers; mesh tooling
 File extension:            .mem (carrier form), .tid (runtime widget/procedure)
 ```
 
-The `x-` prefix marks the subtype as unregistered with IANA; a future tree-transfer drops the prefix on registration. The `+tiddlywiki` structured syntax suffix [RFC6839] survives that transfer — it states that this syntax is BUILT ON TW5 wikitext, which stays true whatever the subtype is called.
+''The `text` tree holds on measured bytes.'' A carrier presents legibly in a plain viewer end to end:
+the frame writes every control mark as an HTML numeric character reference inside a quoted parameter
+(`&#x0002;` — seven printable ASCII characters), never as a raw octet. Measured over the corpus, zero
+carriers hold any C0 octet beyond the line feed itself. RFC 6838 §4.2.1 admits a `text` subtype where
+the content stays reasonable to present absent interpretation software — this format passes that gate on
+bytes rather than on argument, and the marks named SOH · STX · ETX · EOT (#control-set) name what a
+reference STANDS FOR, never what a file contains.
+
+The `x-` prefix reads as DEPRECATED under RFC 6838 — not as "unregistered": a type wearing it sits in no
+tree at all, and the registration path drops it (the target name `text/memetic-wikitext+tiddlywiki`, with
+the current spelling filed as a deprecated alias — the office `CARRIER_TYPE_UNSUFFIXED` already performs
+on the read side). The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 actually asks —
+generic processing: a receiver holding only a TW5 parser processes a carrier usefully, every sigil an
+unbound macro call degrading to inert text (#conformance). That the syntax builds on TW5 states the
+lineage; the degradation property states the warrant.
 
 <<~/ahu >>
 
@@ -1182,6 +1239,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;LWJPVLuXoa8E6TtNaYxJ5cHD6FbkR-1R0u_nwGpwanA
+<<^ code:"&#x0003;" >>ni:///sha-256;aYWhEKwsG7hTL-c4O9Ivm6gb0GLU6r5ONvaZPgcYgAg
 
 <<^ code:"&#x0004;" -> ? >>
