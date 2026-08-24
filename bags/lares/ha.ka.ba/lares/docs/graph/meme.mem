@@ -208,7 +208,7 @@ A JSON object mapping every indexed meme URI to its current `meme_hash`.
 
 ```json
 {
-  "lar:///AGENTS": "sha256:abc123...",
+  "lar:///ha.ka.ba/lares/api/noosphere-boot": "sha256:abc123...",
   "lar:///ha.ka.ba/lares/api/pono/config": "sha256:def456...",
   "lar:///ha.ka.ba/lares/api/mu/l-prime": "sha256:..."
 }
@@ -252,6 +252,6 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6kMHoYIoglOMQNDOsB7MG4RS8sW-RmIRDueq2x_JA3g
+<<^ code:"&#x0003;" >>ni:///sha-256;KV2WZ9A0xgw3U7D8zu5ipa7KBJAptDNAE5oU_cTvYnw
 
 <<^ code:"&#x0004;" -> ? >>

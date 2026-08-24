@@ -52,7 +52,7 @@ The v1 spine carries four promises:
 
 !!! In scope for the closed slice
 
-* `lar:///AGENTS` and `lar:///ha.ka.ba/lares/api/pono/config` root resources
+* `lar:///ha.ka.ba/lares/api/noosphere-boot` and `lar:///ha.ka.ba/lares/api/pono/config` root resources
 * `lar:///ha.ka.ba/lares/**` file-backed resources under the stable tuple root
 * virtual index resources under `lar:///INDEXES/**`
 * boot artifacts under `lar:///boot/**`
@@ -93,9 +93,9 @@ The v1 spine carries four promises:
 
 | Namespace | Resolution posture |
 |---|---|
-| `lar:///AGENTS` | all-caps file-backed threshold root |
-| `lar:///ha.ka.ba/lares/api/pono/config` | all-caps file-backed session surface root |
-| `lar:///INDEXES/**` | virtual all-caps compiler indexes |
+| `lar:///ha.ka.ba/lares/api/noosphere-boot` | the threshold constitution, at a rooted address |
+| `lar:///ha.ka.ba/lares/api/pono/config` | the session surface, at a rooted address |
+| `lar:///INDEXES/**` | virtual compiler indexes |
 | `lar:///boot/**` | virtual compiler artifact resources |
 | `lar:///ha.ka.ba/lares/**` | stable tuple root mapped into `packages/lares-core/memes/**` |
 | future `lar:///*.*.*/**` | unstable tuple roots may map into chapel-perilous paths until canon MOVE |
@@ -149,6 +149,6 @@ MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a pe
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2HDJcpnx5YK8I3wdsgVuu-5bPoIHhc9Y7vsMzuaqrN4
+<<^ code:"&#x0003;" >>ni:///sha-256;UmlkE8FbsoRy5XkYdIz1s3D0UTcK0cPBYNuypuUKQPk
 
 <<^ code:"&#x0004;" -> ? >>

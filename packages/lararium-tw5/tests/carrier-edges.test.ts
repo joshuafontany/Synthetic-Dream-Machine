@@ -18,7 +18,7 @@ import { REPO } from "./test-wiki.js";
 
 describe("carrier-edges — every address a carrier points at", () => {
   /**
-   * FIVE SPELLINGS, ONE RELATION. A reader counting only `loulou` sees 149 of the corpus's 194
+   * FIVE SPELLINGS, ONE RELATION. A reader counting only `loulou` sees 147 of the corpus's 192
    * dangling edges and reports a clean move over a broken one.
    */
   test("every form a carrier can name an address in is read", () => {
@@ -58,8 +58,9 @@ describe("carrier-edges — every address a carrier points at", () => {
   });
 
   /**
-   * THE CORPUS, AS A CEILING RATHER THAN A FLOOR. 194 edges name no carrier here — 149 `loulou`, 31 `pranala`,
-   * 14 wikilink — nearly all of them older than any instrument that could see them. This holds the line where it stands: a rename that
+   * THE CORPUS, AS A CEILING RATHER THAN A FLOOR. 192 edges name no carrier here — loulou 147 · pranala 31 · wikilink 14 — nearly all of
+   * them older than any instrument that could see them. ''Lower this whenever it can go lower'': a
+   * ceiling left slack absorbs the next break silently. This holds the line where it stands: a rename that
    * breaks edges raises the count, and that is the reading `lares normalize --edges` exists to take
    * either side of a move.
    */
@@ -78,6 +79,6 @@ describe("carrier-edges — every address a carrier points at", () => {
     const dangling = texts.flatMap(readCarrierEdges)
       .filter((e) => e.address !== null && !held.has(e.address));
     expect(files.length).toBeGreaterThan(500);
-    expect(dangling.length, "an edge broke — run `lares normalize --edges` to name it").toBeLessThanOrEqual(194);
+    expect(dangling.length, "an edge broke — run `lares normalize --edges` to name it").toBeLessThanOrEqual(192);
   });
 });

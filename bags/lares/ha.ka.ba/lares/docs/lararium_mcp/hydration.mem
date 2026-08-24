@@ -32,12 +32,16 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/hydration"
 
 !! Required-Core Closure
 
-Entry: `lar:///AGENTS`.
-All 14 memes below must resolve before threshold yield.
+''Entry is the SURFACE's seed, never one address.'' One seed per SURFACE, all of them on disk: a CLI agent takes a pointer from its instructions
+file, a browser agent takes the carrier pasted in. The re-found feeds the seed from the live wiki
+instead of a pointer, and the browser surface still takes a copy.
+
+The constitution the seed reaches is `lar:///ha.ka.ba/lares/api/noosphere-boot`; the memes below must
+resolve before threshold yield.
 
 | # | URI | File path | Hydration socket |
 |---:|---|---|---|
-| 1 | `lar:///AGENTS` | `lares/AGENTS.md` | entry |
+| 1 | `lar:///ha.ka.ba/lares/api/noosphere-boot` | `noosphere-boot.md` | entry |
 | 2 | `lar:///ha.ka.ba/lares/api/mu/l-prime` | `packages/lares-core/memes/api/pono/l-prime.md` | `AGENTS#preload-l-prime` |
 | 3 | `lar:///ha.ka.ba/lares/api/mu/ooda-ha` | `packages/lares-core/memes/api/pono/ooda-ha.md` | `AGENTS#preload-ooda-ha` |
 | 4 | `lar:///ha.ka.ba/lares/api/pono/lar-uri` | `packages/lares-core/memes/api/pono/lar-uri.md` | `AGENTS#preload-lar-uri` |
@@ -121,8 +125,8 @@ The receipt digest hashes the serialized closure JSON rather than source files; 
 
 | URI | Type | Reading |
 |---|---|---|
-| `lar:///AGENTS` | file-backed caps root | threshold constitution |
-| `lar:///ha.ka.ba/lares/api/pono/config` | file-backed caps root | session configuration surface |
+| `lar:///ha.ka.ba/lares/api/noosphere-boot` | caps root | threshold constitution |
+| `lar:///ha.ka.ba/lares/api/pono/config` | caps root | session configuration surface |
 | `lar:///ha.ka.ba/lares/**` | file-backed stable tuple root | carrier source truth |
 | `lar:///INDEXES/carriers` | virtual JSON | all carrier records |
 | `lar:///INDEXES/interfaces` | virtual JSON | interface URI → carrier URI list |
@@ -158,7 +162,7 @@ Minimal boot should remain small enough to avoid compaction.
 
 !! Edges
 
-<<~ loulou lar:///AGENTS >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
@@ -166,6 +170,6 @@ Minimal boot should remain small enough to avoid compaction.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;lHxxp0MldCQOgTa9FMLd5e52x_m9X9O-9Z5VcOy8JvI
+<<^ code:"&#x0003;" >>ni:///sha-256;n7vm_OC68BcOrFoPsRrdQMqmbheIrIcUCOPnXepO0Eo
 
 <<^ code:"&#x0004;" -> ? >>

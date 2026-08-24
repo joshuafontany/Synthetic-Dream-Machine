@@ -119,8 +119,8 @@ All tools carry `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint:
 
 | URI | Type | Content |
 |---|---|---|
-| `lar:///AGENTS` | file | threshold constitution |
-| `lar:///ha.ka.ba/lares/api/pono/config` | file | session configuration surface |
+| `lar:///ha.ka.ba/lares/api/noosphere-boot` | carrier | threshold constitution |
+| `lar:///ha.ka.ba/lares/api/pono/config` | carrier | session configuration surface |
 | `lar:///ha.ka.ba/lares/**` | file | stable source carriers under `packages/lares-core/memes/api/` |
 | `lar:///INDEXES/carriers` | virtual JSON | all carrier records |
 | `lar:///INDEXES/interfaces` | virtual JSON | interface URI → carrier URIs |
@@ -340,6 +340,6 @@ class MyAdapter:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;d8Ox9vk5QZhZ43S12yQB8aCtTX0B53kSffBD_NPbKs8
+<<^ code:"&#x0003;" >>ni:///sha-256;AFkFsIQMTgaJ-r7kGsr6Rn0x_w3URo_WJAT7IPh3Mm4
 
 <<^ code:"&#x0004;" -> ? >>

@@ -75,7 +75,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 ''Scope:'' Tier 0 declared-core closure (14 memes from control/owns edges rooted at `AGENTS`).
 ''MCP resource:'' `lar:///boot/minimal`
-''Compiler:'' `compile_minimal_boot(entry="lar:///AGENTS")`
+''Compiler:'' `compile_minimal_boot(entry="lar:///ha.ka.ba/lares/api/noosphere-boot")`
 
 ''JSON shape:''
 
@@ -83,11 +83,11 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 {
   "artifact": "minimal-boot",
   "compiled_at": "<ISO-8601 UTC>",
-  "entry": "lar:///AGENTS",
+  "entry": "lar:///ha.ka.ba/lares/api/noosphere-boot",
   "closure": [
     {
-      "uri": "lar:///AGENTS",
-      "file_path": "lares/AGENTS.md",
+      "uri": "lar:///ha.ka.ba/lares/api/noosphere-boot",
+      "file_path": "noosphere-boot.md",
       "content_hash": "<sha256>",
       "kind": "caps-file",
       "virtual": false,
@@ -129,7 +129,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 ''Scope:'' Tier 1 control closure + Tier 2 one-hop relation expansion.
 ''MCP resource:'' `lar:///boot/full`
-''Compiler:'' `compile_full_boot(entry="lar:///AGENTS")`
+''Compiler:'' `compile_full_boot(entry="lar:///ha.ka.ba/lares/api/noosphere-boot")`
 
 ''JSON shape extends minimal boot:''
 
@@ -137,14 +137,14 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 {
   "artifact": "full-boot",
   "compiled_at": "<ISO-8601 UTC>",
-  "entry": "lar:///AGENTS",
+  "entry": "lar:///ha.ka.ba/lares/api/noosphere-boot",
   "closure": [...],
   "locus_count": "<N>",
   "edge_count": "<E>",
   "pranala_edges": [
     {
-      "from_uri": "lar:///AGENTS",
-      "from_socket": "lar:///AGENTS#required-preload-l-prime",
+      "from_uri": "lar:///ha.ka.ba/lares/api/noosphere-boot",
+      "from_socket": "lar:///ha.ka.ba/lares/api/noosphere-boot#required-preload-l-prime",
       "to_uri": "lar:///ha.ka.ba/lares/api/mu/l-prime",
       "to_socket": "",
       "family": "control",
@@ -153,14 +153,14 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
       "traversal": "source-to-target",
       "propagation": "none",
       "label": "required-preload",
-      "payload": {"continue": "lar:///AGENTS#after-l-prime-preload", "backlink": "lar:///AGENTS#preload-l-prime", "priority": "core", "retain": true, "dir_hint": "both"}
+      "payload": {"continue": "lar:///ha.ka.ba/lares/api/noosphere-boot#after-l-prime-preload", "backlink": "lar:///ha.ka.ba/lares/api/noosphere-boot#preload-l-prime", "priority": "core", "retain": true, "dir_hint": "both"}
     }
   ],
   "interface_index": {
-    "lar:///ha.ka.ba/lares/api/pono/meme": ["lar:///AGENTS", "..."]
+    "lar:///ha.ka.ba/lares/api/pono/meme": ["lar:///ha.ka.ba/lares/api/noosphere-boot", "..."]
   },
   "invariant_index": {
-    "lar:///ha.ka.ba/lares/api/pono/loci": ["lar:///AGENTS", "..."]
+    "lar:///ha.ka.ba/lares/api/pono/loci": ["lar:///ha.ka.ba/lares/api/noosphere-boot", "..."]
   },
   "validation": {
     "all_resolved": true,
@@ -196,13 +196,13 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 {
   "artifact": "boot-receipt",
   "compiled_at": "<ISO-8601 UTC>",
-  "entry": "lar:///AGENTS",
+  "entry": "lar:///ha.ka.ba/lares/api/noosphere-boot",
   "mode": "minimal",
   "locus_count": 14,
   "edge_count": 13,
   "sha256": "<closure_hash — stable cache key>",
   "hash_sequence": [
-    {"uri": "lar:///AGENTS", "sha256": "<carrier_hash>", "depth": 0},
+    {"uri": "lar:///ha.ka.ba/lares/api/noosphere-boot", "sha256": "<carrier_hash>", "depth": 0},
     {"uri": "lar:///ha.ka.ba/lares/api/mu/l-prime", "sha256": "<carrier_hash>", "depth": 1}
   ],
   "validation": {
@@ -306,6 +306,6 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;i0BF8ifBwBBmaxY8vvcWhCQL5Xx6JTQ7s8ABapUX03c
+<<^ code:"&#x0003;" >>ni:///sha-256;MGycQpWDTzQTqNQCeo6pViqblXNFhjVmxx0LA5p3t9o
 
 <<^ code:"&#x0004;" -> ? >>

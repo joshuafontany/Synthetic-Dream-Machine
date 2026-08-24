@@ -123,7 +123,7 @@ lares/
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///AGENTS >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext >>
@@ -133,6 +133,6 @@ lares/
 
 <<~ ? -> lar:///README >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;edIRb8lklVGZPCxe_xZ_qM9PR2j48PwcMkXYmwzyDq8
+<<^ code:"&#x0003;" >>ni:///sha-256;RV-egz3xfR0db-t-I2nENszDBQD0RM4L_mqx7ZcWLFU
 
 <<^ code:"&#x0004;" -> ? >>
