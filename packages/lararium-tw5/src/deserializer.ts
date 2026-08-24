@@ -242,9 +242,9 @@ export function memeticWikitextDeserializer(
 // safeSplitMeme — LOSS-LESS split (Goal B): the gradient guards the write path.
 //
 // A split failure NEVER truncates — it falls back to the verbatim whole, flagged (drop-honesty): one
-// un-split tiddler holding every byte beats a silent truncation. parseMemeText (full grammar) records
-// the parse grade as `lar_parse_failures` so a meme written via CLI/import surfaces its degradation
-// instead of failing quietly. AI-session turns arrive bare (no carrier sigils) and ride this via the
+// un-split tiddler holding every byte beats a silent truncation. The grammar's own recovery count
+// joins the advisory envelope where one stands (below), so a degraded parse reaches a person at the
+// address they already query. AI-session turns arrive bare (no carrier sigils) and ride this via the
 // no-SOH fallback — they split clean (no ahu → verbatim parent) or, if malformed, degrade legibly.
 // ---------------------------------------------------------------------------
 
@@ -309,6 +309,24 @@ function stripEdgeNewlines(text: string): string {
 function parseWarningTitle(uri: string): string {
   const safeSlug = uri.replace(/[^a-zA-Z0-9._-]/g, "_");
   return stableLarUri(`lararium/parse-warning/${safeSlug}`);
+}
+
+/**
+ * The advisory envelope — one tiddler, at one address, whether the carrier arrived framed or bare.
+ *
+ * Both entry doors raise the same finding in the same shape, and a second spelling of it would drift
+ * the day one gained a field. The count of records this returns is load-bearing: the ingest merge model
+ * rests on it, so this mints nothing where a carrier had nothing to tell a person.
+ */
+function parseAdvisories(uri: string, warnings: readonly string[]): TiddlerFields[] {
+  if (warnings.length === 0) return [];
+  return [{
+    title:           parseWarningTitle(uri),
+    tags:            PARSE_WARNING_TAG,
+    "meme-uri":      uri,
+    "warning-count": String(warnings.length),
+    text:            warnings.join("\n"),
+  }];
 }
 
 function splitMemeToTiddlers(
@@ -485,21 +503,12 @@ function splitMemeToTiddlers(
   // the parser fell back to. Summing them into one count would blur a nudge to a person with a
   // recovery by a machine.
   //
-  // They belong in ONE tiddler under TWO counts, which is the host's own shape: TiddlyWiki stages many
+  // They ride ONE tiddler under TWO counts, which is the host's own shape: TiddlyWiki stages many
   // findings from one operation in a single `$:/Import` tiddler rather than scattering them, keeping a
-  // reader's query at one address. `safeSplitMeme` currently stamps the grammar count on the RECORD
-  // instead, because it runs outside this function and cannot reach here — routing it in is the owed
-  // work, and it must ENRICH this tiddler rather than push a second one. A third emitter added here
-  // moves every downstream record count.
-  if (warnings.length > 0) {
-    result.push({
-      title:         parseWarningTitle(uri),
-      tags:          PARSE_WARNING_TAG,
-      "meme-uri":    uri,
-      "warning-count": String(warnings.length),
-      text:          warnings.join("\n"),
-    });
-  }
+  // reader's query at one address. `warning-count` names the advisories raised here; `safeSplitMeme`
+  // adds `failure-count` for the grammar's recoveries by ENRICHING this tiddler, never by pushing a
+  // second one. An emitter added here would move every downstream record count.
+  result.push(...parseAdvisories(uri, warnings));
 
   return result;
 }
@@ -756,15 +765,7 @@ export function splitBodyTiddler(
 
   const parent: TiddlerFields = { ...baseFields, title: uri, text: rewrittenText };
 
-  if (warnings.length > 0) {
-    children.push({
-      title:          parseWarningTitle(uri),
-      tags:           PARSE_WARNING_TAG,
-      "meme-uri":     uri,
-      "warning-count": String(warnings.length),
-      text:           warnings.join("\n"),
-    });
-  }
+  children.push(...parseAdvisories(uri, warnings));
 
   return { parent, children };
 }
