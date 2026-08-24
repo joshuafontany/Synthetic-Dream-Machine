@@ -64,6 +64,10 @@
       "import": "./dist/reaction-graph.js",
       "types": "./dist/reaction-graph.d.ts"
     },
+    "./rendezvous-path": {
+      "import": "./dist/rendezvous-path.js",
+      "types": "./dist/rendezvous-path.d.ts"
+    },
     "./sensorium-consistency": {
       "import": "./dist/sensorium-consistency.js",
       "types": "./dist/sensorium-consistency.d.ts"

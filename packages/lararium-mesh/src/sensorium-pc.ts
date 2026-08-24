@@ -68,7 +68,7 @@ const EPS = 1e-9;
  * `π* = 1/(ε̄²+EPS_REL) ≤ PI_MAX` (a near-noiseless plane caps instead of blowing up), and the
  * π→confidence map hits the 20-ceiling as π→PI_MAX. It is RELATIVE (dimensionless) — the errors
  * are standardized (z²) before they reach here — so `ε̄²→0` never reintroduces ∞ at ANY scale.
- * Tied to machine epsilon (the old absolute `1e-9` floor was scale-blind, #crucible-tested).
+ * Tied to machine epsilon: a RELATIVE floor, because an absolute one is scale-blind (#crucible-tested).
  */
 const EPS_REL = Number.EPSILON;
 const PI_MAX = 1 / EPS_REL;

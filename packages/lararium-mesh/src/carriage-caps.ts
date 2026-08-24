@@ -152,7 +152,7 @@ export function dampedRadius(rCurrent: number, degree: number, gamma = R_DAMP): 
  * A vessel's mesh standing — the single bundle the options layer carries (was six scattered params:
  * selfCoord, selfBearing, selfEndpoint, peers, maxFanout, seed). `composeHerm`/`openNodeVessel` unpack
  * it back into the caps' granular interface; the self-announce dial DERIVES from bearing + endpoint
- * (the old `seed` dissolved). Present → self-announce + self-peer + proximity re-rank + r-drift; absent
+ * Present → self-announce + self-peer + proximity re-rank + r-drift; absent
  * → a leaf that only carries what it pulls.
  */
 export interface MeshSelf {

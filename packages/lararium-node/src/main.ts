@@ -45,12 +45,14 @@ import { faceStands } from "./commands/init.js";
 import { ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
+import { rendezvousPath, rendezvousDir } from "@lararium/mesh/rendezvous-path";
 import { mountOracleReadFace }          from "./oracle-read-face.js";
 import { loadVesselSigningSeed, generateOrLoadVesselIdentity } from "./node-vessel-identity.js";
 import { getMempalaceClient }           from "@lararium/mempalace";
 import { larDataDir }                   from "./vessel-paths.js";
 import type { AutomergeUrl }            from "@automerge/automerge-repo";
 import { join } from "path";
+import { mkdirSync } from "fs";
 import { REPO_ROOT }   from "./node-host.js";
 import { loadLaresConfig } from "./lares-config.js";
 
@@ -257,7 +259,12 @@ async function main(): Promise<void> {
     }
 
     // Co-located UDS verb-channel for the local `lares` CLI (the @daemon answers).
-    const hermSocketPath = join(storageDir, "lares.sock");
+    // THE RENDEZVOUS SITS APART FROM THE DATA. A socket answers "where do two processes meet" under a
+    // ~104-byte cap the data home has never heard of; siting it beside the substrate made it inherit the
+    // substrate's depth, and a deep root then refused to bind while everything else stood. Both sides
+    // derive from the SAME resolved dir, so the client finds what this bound.
+    const hermSocketPath = rendezvousPath({ root: storageDir, uid: process.getuid?.() ?? 0 });
+    mkdirSync(rendezvousDir(process.getuid?.() ?? 0), { recursive: true, mode: 0o700 });
     const hermUds = startUdsChannel({
       daemonHandle: herm.daemon.daemonHandle,
       placeVerb:    (o) => herm.daemon.placeVerb(o),
@@ -361,7 +368,10 @@ async function main(): Promise<void> {
   // Co-located fast path: a Unix-domain verb-channel for the local `lares` CLI —
   // no per-command leaf replica / WS handshake. The WS relay above stays the path
   // for remote mesh peers. (lar:///…/api/lares-lararium-binding)
-  const socketPath = join(storageDir, "lares.sock");
+  // Same rendezvous law as the herm branch above: derived from the resolved substrate dir, sited where a
+  // logout cannot reach it (operator ruling — a lararium serves as civic infrastructure).
+  const socketPath = rendezvousPath({ root: storageDir, uid: process.getuid?.() ?? 0 });
+  mkdirSync(rendezvousDir(process.getuid?.() ?? 0), { recursive: true, mode: 0o700 });
   const uds = startUdsChannel({
     daemonHandle: result.daemon.daemonHandle,
     placeVerb:    (o) => result.daemon.placeVerb(o),
