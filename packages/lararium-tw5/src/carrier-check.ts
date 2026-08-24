@@ -23,12 +23,12 @@
  *
  * What the check LOOKS like splits by artifact class rather than by layer.
  *
- * A CARRIER holds the hex form, `<namespace>:<16 hex>`, because a carrier travels. Bytes that never
- * move as emoji cannot be bitten by a variation selector, a zero-width joiner, a skin-tone modifier or
- * a client's own normalization, and a reader holding nothing but the file can still verify it. Keeping
- * the glyph vocabulary out of the encoding also keeps it REVISABLE: an alphabet frozen into the bytes
- * could never improve without invalidating every carrier ever written, where an alphabet used only to
- * render may be bettered in year three with every existing stamp still verifying.
+ * A CARRIER holds the `ni:///sha-256;<base64url>` form — RFC 6920, full digest, canonical-or-reject —
+ * because a carrier travels. Plain ASCII cannot be bitten by a variation selector, a zero-width joiner,
+ * a skin-tone modifier or a client's own normalization, and a reader holding nothing but the file still
+ * verifies it. Keeping every glyph vocabulary out of the encoding also keeps rendering REVISABLE: an
+ * alphabet frozen into the bytes could never improve without invalidating every carrier ever written,
+ * where an alphabet used only to render may be bettered in year three with every stamp still verifying.
  *
  * A PROJECTION carries the glyph-stamped form on disk — an FTLS Powers card, a character sheet, any
  * artifact the wiki renders for a reader rather than ships to a peer. A projection IS the rendered

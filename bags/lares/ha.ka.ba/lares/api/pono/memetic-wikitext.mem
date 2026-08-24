@@ -610,13 +610,12 @@ A canvas reaction wire (flow surface):
   which would put ETB on a carrier's text and ETX on its attestation. The frame above reads the other
   way and states why. The strict reading stays named rather than dismissed.
 * ''Transclusion family name. English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
-* ''The `+tiddlywiki` suffix, declared and not yet adopted (open).'' #media-type registers
-  `text/x-memetic-wikitext+tiddlywiki`; every carrier in the corpus, the filetype registration, and this
-  document's own iam write `text/x-memetic-wikitext`. The suffix states a true structural fact
-  [RFC6839] and the unsuffixed name states what the tree runs. Adopting the suffix means moving every
-  carrier and the registry together; dropping it means the registration section states less than the
-  syntax does. The choice belongs to the operator, and until it lands this document declares one name
-  and the corpus writes another — named here rather than resolved silently on either side.
+* ''The `+tiddlywiki` suffix — adopted, corpus-wide.'' Every carrier writes
+  `text/x-memetic-wikitext+tiddlywiki` in both its declaration and its iam; the read side keeps the
+  unsuffixed spelling as a deprecated alias (`CARRIER_TYPE_UNSUFFIXED`), the office RFC 6838 names for
+  a registration. What stays open: the suffix sits in no IANA registry, and registering it needs a
+  normative reference for TW5 wikitext that no standards track yet carries — the base-syntax document
+  this family still owes.
 
 <<~/ahu >>
 
@@ -797,9 +796,16 @@ The `bcc` slot carries a check over the framed span. Normatively:
 * ''Span:'' the first character of the STX sigil through the last character of the ETX sigil, inclusive.
   The check covers the marks that bound it and never covers itself, which is what lets it sit ''after''
   ETX with no self-exclusion rule.
-* ''Form:'' `<namespace>:<16 hex digits>` — the low 64 bits of SHA-256 over the span's UTF-8 bytes,
-  prefixed by the carrier's namespace. Sixty-four bits sit far past what a transport fault reaches and
-  short enough that a person reads the line.
+* ''Form:'' `ni:///sha-256;<base64url>` — an RFC 6920 named-information URI carrying the FULL SHA-256
+  over the span's UTF-8 bytes, base64url without padding, canonical-or-reject: a verifier re-encodes
+  what it computed and compares whole strings, so every non-canonical spelling of the final character
+  refuses for free. Full width, never truncated — a digest sized against accident meets an adversary
+  eventually, and a reader's short form derives at print time rather than living in the bytes. The
+  namespace rides the heading, never the check: the digest binds bytes, and bytes carry no vibration.
+* ''Position, not parameter.'' `bcc` names the slot AFTER the closed ETX sigil — following `>>`,
+  outside the sigil and outside the span — never a parameter within the mark. One word for where a
+  check sits has admitted two readings before (RFC 3230 fell to exactly that), so this one is pinned:
+  the check follows the closer, adjacent, on the same line.
 * ''The span binds the FRAME'S BYTE SPELLING, and that is why the check computes.'' The span opens on the
   STX sigil and closes on the ETX sigil, so those sigils' own bytes ride inside it. A frame migration —
   a mark gaining a named parameter, a spacing rule settling — moves them, and every check computed
@@ -1267,6 +1273,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Beub2DQpGhbrU2EYA5k76UUvERyi2DPc1__pD-Vn69U
+<<^ code:"&#x0003;" >>ni:///sha-256;IkMEOLZm0bFHb8rzqbBfAuZ9BxayRNhdyggUr97XyNQ
 
 <<^ code:"&#x0004;" -> ? >>
