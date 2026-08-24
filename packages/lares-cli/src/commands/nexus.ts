@@ -49,7 +49,7 @@ class UsageError extends Error {}
 function usage(): void {
   console.error("usage: lares nexus <seal | rite | kapae | un_kapae | contract | revoke | members | accept-carriage | posture>");
   console.error("");
-  console.error("  seal <seat | rotate | commit | show>      the founding-kahu roster + pre-rotated epoch chain");
+  console.error("  seal <seat | reserve | rotate | commit | show>      the founding-kahu roster + pre-rotated epoch chain");
   console.error("  kapae <nym> [--reason <text>]             raise a quorum-signed ban on a presenter nym");
   console.error("  kapae --list                              read the currently-Kapae'd set (the fold)");
   console.error("  un_kapae <nym>                            mint a quorum-signed lift at a higher version");
@@ -62,7 +62,7 @@ function usage(): void {
 }
 
 function sealUsage(): void {
-  console.error("usage: lares nexus seal <seat | rotate | commit | show>");
+  console.error("usage: lares nexus seal <seat | reserve | rotate | commit | show>");
   console.error("");
   console.error("  seat    form the roster from the personas that DECLARED a Handle + STOOD for a chair, then");
   console.error("          establish the GENESIS epoch over their verifying keys:");

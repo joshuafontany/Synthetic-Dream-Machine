@@ -380,7 +380,7 @@ differently-named set.'' Measured 2026-08-04:
   `query` `relate` `run` `search` `status` `structure`.
 * Flags an operator-facing draft named (`--surface`, `--speaker`) ''appear nowhere in the CLI source''.
 
-''This gap IS the CLI/MCP/@daemon alignment work'', and this rite cannot state a stable command sequence
+''This gap IS the CLI/MCP/daemon alignment work'', and this rite cannot state a stable command sequence
 until it closes. Until then #teardown's movement carries its shape as load-bearing and its spellings as
 claims. ''A runbook stating a command it has not run makes the same error as a comment claiming what its
 code does not do.''
@@ -422,6 +422,6 @@ absence of finding and absence of looking generate identically.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-SjhCIYrxy_X4YrDneLTC1KG9t2i7Z1qGn3BU-DwjYk
+<<^ code:"&#x0003;" >>ni:///sha-256;1N9zhbuQjwUKCNxhkqwtR_k0RBA5Tw-cPCr3porDIlI
 
 <<^ code:"&#x0004;" -> ? >>

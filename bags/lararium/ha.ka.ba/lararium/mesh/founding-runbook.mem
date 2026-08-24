@@ -129,7 +129,7 @@ an isolation claim that ages is an isolation claim that lies, and the tenth reso
 found exactly that way. The harness ''REFUSES'' any root under the operator's home, any root naming the
 repo, and any root already carrying an identity — ''a rehearsal harness that can eat the hearth is not one''.
 
-''THE SEED SET'' (operator-approved 2026-08-08): `@lares` · `@lararium` · `@crossroads` — the two system
+''THE SEED SET'' (operator-approved 2026-08-08): `lares` · `lararium` · `crossroads` — the two system
 bags plus the public floor, re-copied EACH cycle so cycle 2 tests the ''rite's'' idempotency rather than a
 warm tree's. `LAR_ROOT` isolates AND empties `bags/`, so a run that skipped this would prove less than it
 appears to.
@@ -363,7 +363,7 @@ lies passed a suite first.
 
 <<~ ahu #nexus-lifecycle >>
 
-!! The @nexus lifecycle ~ born by act, lives by traffic, quiet by absence
+!! The nexus-doc lifecycle ~ born by act, lives by traffic, quiet by absence
 
 ''THE MYTH HOLDS THE MODEL'' (operator, 2026-08-07). A Nexus names several vessels syncing across a ''ley-line
 network'' — so ''no network traffic, no live Nexus''. Liveness reads off the lines themselves; nothing
@@ -578,9 +578,9 @@ shelf after the founding rather than trusting the absence of an error:
 ''The spirits' house holds both kinds at once'' — the identity no rite re-makes, and the substrate every
 rite reforges. `<lares>/vessel` carries the CRDT
 store, the runtime CAS, and the ''social bootstrap'' — the address book naming the docs this vessel stands.
-''Only `@daemon` stands required there.'' A PLACE names `@daemon` and nothing else; a lit FACE adds its own
-four planes, each under the tag its PersonaGroup derives — `@persona-<tag>`, `@circles-<tag>`,
-`@identities-<tag>`, `@sessions-<tag>` — and the boot refuses a HALF face, some pins standing and others
+''Only the `daemon` bag stands required there.'' A PLACE names `daemon` and nothing else; a lit FACE adds its own
+four planes, each under the tag its PersonaGroup derives — `persona-<tag>`, `circles-<tag>`,
+`identities-<tag>`, `sessions-<tag>` — and the boot refuses a HALF face, some pins standing and others
 absent. `reset` removes the directory entire, so the address book dies with the docs it addresses and no
 wipe-list needs to remember it.
 
@@ -609,11 +609,11 @@ name reads as the ''operator's own hand'', never the machine's.
 
 !! ② Found ~ stand the device + the three kahu
 
-''THE RITE RUNS IN TWO MOVEMENTS, AND THE ORDER BINDS.'' A ''place-founding'' seeds `@daemon` alone — the
+''THE RITE RUNS IN TWO MOVEMENTS, AND THE ORDER BINDS.'' A ''place-founding'' seeds the `daemon` bag alone — the
 sovereign island, the vessel's own Keyhive individual, the hearth true-name — and a vessel founded to
 exactly there carries, serves the public shelf, and holds every sovereign act closed. A ''face-founding''
 lands on that standing place: it mints the PersonaGroup FIRST, then seeds the four planes that group's tag
-names (`@persona-<tag>`, `@circles-<tag>`, `@identities-<tag>`, `@sessions-<tag>`) into the SAME `@daemon`
+names (`persona-<tag>`, `circles-<tag>`, `identities-<tag>`, `sessions-<tag>`) into the SAME `daemon`
 island. Minting first carries the whole weight: `changeIdForBag` keys a document by hashing its bag URL, so
 a plane seeded before its tag exists answers to a name nothing ever reaches again.
 
@@ -633,7 +633,7 @@ lares persona list                                  # h0/h1/h2 stand: label -> d
 ''THE THREE ACTS, and why the seal reads only one of them.''
 
 * `--name` sets the ''PRIVATE label'' — what the operator calls that compartment. It rides the human's
-  own fleet (that face's `@persona-<tag>` plane) and ''never publicly federates''.
+  own fleet (that face's `persona-<tag>` plane) and ''never publicly federates''.
 * `--handle` declares the ''PUBLIC Handle'' the persona answers to. A ''local intent'', not a publish:
   only a publicly announced Handle binds a PersonaGroup to a public glamour.
 * `--seat` stands the persona for a ''Kahu chair on THIS node''. It stays local — a chair names a seat
@@ -945,7 +945,7 @@ there'' — a movement for it here would teach an irreversibility the sensorium 
 
 A family whose hearths sit behind different networks wants a ''standing'' place to meet. The Herm
 (Lares Viales) stands that crossroads: a ''wiki-LESS wayfarer'' composed up from granular caps —
-substrate + the @daemon immune keel + a writable @meshpalace FLOW-map + the read-face that serves it.
+substrate + the daemon-bag immune keel + a writable meshpalace FLOW-map + the read-face that serves it.
 ''NO wiki, NO pool.'' Pi-deployable.
 
 ```
@@ -1037,7 +1037,7 @@ no doc address, so this reads as a free move.
 ''Welcome a user'' — a user needs no contract and leaves NO roster trace. Through invite-only alpha a
 sealed BURNABLE boot-invite gates the boot (spent-on-boot, no who-invited-whom edge); a garbled or
 absent invite founds a vessel at the ''anon floor''. A user builds their OWN social graph — a follow lands as
-a LOCAL write to that face's own private `@circles-<tag>` doc, which fleet-syncs every one of their
+a LOCAL write to that face's own private `circles-<tag>` doc, which fleet-syncs every one of their
 vessels and NEVER touches the wire — one follow graph per FACE, so a multitude's compartments never share
 a document anything could read to correlate them (#identity-classes, the recognition layer gives the human their one window on the crypto):
 
@@ -1089,7 +1089,7 @@ lares persona sync                                   # carry this vessel's own l
 ```
 
 ''THE NAMES RIDE, THE CHAIR DOES NOT'' (2026-08-06). Once a joining vessel breathes, the ''private label
-and the declared Handle'' travel that face's `@persona-<tag>` bag — the self-slot FLEET-syncs it
+and the declared Handle'' travel that face's `persona-<tag>` bag — the self-slot FLEET-syncs it
 same-operator, and the
 DeterministicFederationGate never volunteers it to a cross-operator. So a persona answers to the same
 name on every device the human holds, and `persona list` on a fresh leaf reads the multitude rather than
@@ -1370,6 +1370,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sO0OKUzrvGZDGfz0zN2sbTUAIx302eb4PbgUbauRjRU
+<<^ code:"&#x0003;" >>ni:///sha-256;9hbPqbrWFgNx_EiITZ5kt4h-EmmUcuedgPkKlmQGRrI
 
 <<^ code:"&#x0004;" -> ? >>
