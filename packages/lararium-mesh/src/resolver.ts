@@ -82,7 +82,8 @@ function splitLarUri(uri: string): { root: string; childPath: string[]; fragment
   const [root, ...childPath] = parts as [string, ...string[]];
   // Fragment-path (`#parent/child/grandchild`) projects onto disk as nested
   // subdirectories — `lar:///foo#a/b` → `foo/a/b.mem`. The single-hash + path
-  // invariant comes from lar:///ha.ka.ba/lares/api/pono/lar-uri #belonging and the ahu nesting law.
+  // invariant comes from lar:///ha.ka.ba/lares/api/pono/memetic-wikitext #anchors — the media type
+  // owns fragment meaning (RFC 3986 §3.5); this resolver implements the path-shaped anchor it defines.
   const rawHash = decodeURIComponent(url.hash.replace(/^#/, ""));
   const fragmentPath = rawHash ? rawHash.split("/").filter(Boolean) : [];
   return { root, childPath, fragmentPath };

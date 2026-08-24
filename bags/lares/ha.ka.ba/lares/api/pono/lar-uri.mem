@@ -73,7 +73,7 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''namespace'' | a bare `child[1]` segment naming a meme's minting authority. |
 | ''kind-plane'' | the reserved `child[1]` word that names a resolvable surface: `bags`, `wikis`, or `cid`. |
 | ''slot'' | one lowercase term (word or hyphen-compound) in the triple. |
-| ''fragment'' | a `#`-anchor naming a section / `ahu` / pranala within an address. |
+| ''fragment'' | a `#`-anchor whose meaning belongs to the media type of the unit it anchors into [RFC3986 §3.5]; the scheme carries it opaque. |
 
 <<~/ahu >>
 
@@ -270,7 +270,7 @@ The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable na
 # Parse the URI to its form (local / session), path class, and optional fragment.
 # For a kind-plane surface (`bags/…` or `wikis/…`), map the surface identity to a live doc via the runtime manifest's resolver map.
 # Resolve the remaining path to a named unit within that bag's address space.
-# Resolve a `#fragment` to a section / `ahu` / pranala anchor within the named unit.
+# Hand a `#fragment` to the named unit's media type unread: fragment semantics belong to the representation, never to the scheme [RFC3986 §3.5] — and absent a representation, they stay unconstrained.
 
 Session form names the speaker through the authority. It MUST stay within exchange spans, away from stable graph addresses, system resource names, and other storage.
 
@@ -291,9 +291,9 @@ No metric stands yet claimed. The scheme names attitude and section; it defines 
 ''Lineage.'' The Ha-Ka-Ba reading carries a declared palimpsest lineage; the citation and its audit
 anchors ride the documentation companion (lar:///ha.ka.ba/lares/docs/pono/lar-uri#lineage).
 
-Fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`, `#pranala-name`.
+Fragment (`#`) carries an anchor whose meaning the anchored unit's media type defines; the scheme carries it opaque.
 
-BEARING (path) → SECTION (fragment).
+BEARING (path) → ANCHOR (fragment, media-type-defined).
 
 <<~/ahu >>
 
@@ -408,24 +408,6 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu >>
 
-<<~ ahu #belonging >>
-
-!! Belonging Lives in the Address
-
-''A fragment path names its own parentage.'' `root#a/b` states its parent as `root#a` by the
-fragment-path law; nothing else has to carry it. A stored field naming the same parent would stand as a second
-spelling of one fact, and a second spelling can disagree with the first the moment both become editable.
-
-''Rendering carries a different relation, and no field could hold it.'' One meme renders into many places —
-`<<~ ahu #x -> lar:///other >>` points a worksite at a full address — so the relation runs many-to-many and
-lives in the ''markers that hold it'', in the carriers that write them. A child cannot list its renderers
-without a write on every transclusion.
-
-<<~moves belonging -> rides/the-address on/every-hop if/derived do/refuse-a-second-copy >>
-<<~moves rendering -> rides/the-marker on/the-renderer if/many-to-many do/stay-out-of-the-child >>
-
-<<~/ahu >>
-
 <<~ ahu #edges >>
 
 !! Edges
@@ -438,6 +420,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WtrFawEzwOLg4VX4YIX2nzJ9z3HKGfHoq-uLClnqSxw
+<<^ code:"&#x0003;" >>ni:///sha-256;NYeLwQio9SZn7m_u-ole57f3kfNZm_CO6MaflSI2CVc
 
 <<^ code:"&#x0004;" -> ? >>

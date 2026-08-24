@@ -378,6 +378,31 @@ surfaces:
 
 <<~/ahu >>
 
+<<~ ahu #anchors >>
+
+!! Anchors and Belonging
+
+The recognized sigil types ''mint'' this media type's fragment anchors — RFC 3986 §3.5 places fragment
+semantics with the representation's media type, and this section carries them. A worksite (`ahu`) mints
+an anchor under its name; a nested worksite extends its parent's anchor with `/`, so `#a/b` names the
+worksite `b` inside the worksite `a`; an anchored pointer (`pranala #name`) mints the anchor its office
+names. An anchor no sigil minted resolves to nothing — the pattern belongs to the sigils, never to
+free-form text.
+
+''A path-shaped anchor names its own parentage.'' `root#a/b` states its parent as `root#a` by the shape
+alone; nothing else has to carry it. A stored field naming the same parent would stand as a second
+spelling of one fact, and a second spelling can disagree with the first the moment both become editable.
+
+''Rendering carries a different relation, and no field could hold it.'' One meme renders into many
+places — `<<~ ahu #x -> lar:///other >>` points a worksite at a full address — so the relation runs
+many-to-many and lives in the ''markers that hold it'', in the carriers that write them. A child cannot
+list its renderers without a write on every transclusion.
+
+<<~moves belonging -> rides/the-anchor-shape on/every-hop if/derived do/refuse-a-second-copy >>
+<<~moves rendering -> rides/the-marker on/the-renderer if/many-to-many do/stay-out-of-the-child >>
+
+<<~/ahu >>
+
 <<~ ahu #scope-model >>
 
 !! Scope Model
@@ -501,8 +526,10 @@ Subtype name:              x-memetic-wikitext+tiddlywiki
 Required parameters:       none
 Optional parameters:       charset (default UTF-8)
 Encoding considerations:   8-bit; UTF-8 REQUIRED
-Fragment identifier:       a "#name" anchor names a worksite (ahu) within the
-                           carrier; resolution defers to [LAR-URI]
+Fragment identifier:       sigil-minted anchors (#anchors): a worksite name,
+                           a nested worksite path (#a/b), a pranala office.
+                           The scheme [LAR-URI] carries fragments opaque;
+                           their meaning lives in this registration
 Security considerations:   see #security
 Interoperability:          degrades to readable text in a plain viewer;
                            sigils render inert without a conforming processor
@@ -1309,6 +1336,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Nu3_0nYmm1UDE56LikdXPb1TEU7FurIoET3s9Vk_Exs
+<<^ code:"&#x0003;" >>ni:///sha-256;U-Qrek4qhiNEJ4yug_l_FsAQlxhI6aRuRmNIo3XZcCk
 
 <<^ code:"&#x0004;" -> ? >>
