@@ -244,3 +244,5 @@ export type {
 export * from "./memetic-wikitext-sensorium.js";
 export { readCarrierShape } from "./carrier-shape.js";
 export type { CarrierShape, CarrierKind, CarrierMarks } from "./carrier-shape.js";
+export { readCarrierEdges } from "./carrier-edges.js";
+export type { CarrierEdge, EdgeForm } from "./carrier-edges.js";

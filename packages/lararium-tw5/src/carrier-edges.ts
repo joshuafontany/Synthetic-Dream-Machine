@@ -1,0 +1,72 @@
+/**
+ * carrier-edges — every address a carrier points AT, in each form the grammar spells one.
+ *
+ * ── WHY THE GRAPH NEEDS ITS OWN READING ─────────────────────────────────────────────────────────
+ * A `lar:` URI names; it does not fetch. So a carrier whose target moved keeps rendering, keeps
+ * round-tripping, and keeps passing every gate this tree stands — `carrier-shape` asks whether a file
+ * is whole, `meme-coordinates` asks whether its own two coordinates agree, `bcc` asks whether its bytes
+ * match their check. **None of them looks outward.** An edge that resolves to nothing is invisible to
+ * all three at once.
+ *
+ * Measured: retiring one carrier and moving two left 66 references naming addresses that no longer
+ * answered, across 28 carriers — found by hand, after the commit. Folding 37 carriers up one level
+ * touched 197 references and broke none, because that scan ran BEFORE the move. This is that scan,
+ * made an instrument instead of a habit.
+ *
+ * ── FIVE SPELLINGS, ONE RELATION ────────────────────────────────────────────────────────────────
+ * A reader counting only `loulou` sees 149 of the corpus's 194 dangling edges. The other 45 ride
+ * `pranala` and two wikilink forms — and an instrument that misses a form reports a clean move over a
+ * broken one. Every form a carrier can name an address in belongs here.
+ *
+ * Measured over 614 carriers: 2,197 edges — loulou 1,851 · wikilink 255 · pranala 84 · kahea 7.
+ *
+ * Meme: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext
+ */
+
+import { fencedSpans, inMask } from "./meme-ast/fence-mask.js";
+
+/** How a carrier spelled the reference. */
+export type EdgeForm = "loulou" | "pranala" | "kahea" | "wikilink";
+
+export interface CarrierEdge {
+  /** The address named, fragment stripped — what a resolver would look up. */
+  readonly address: string;
+  /** The address as written, fragment included. */
+  readonly written: string;
+  readonly form: EdgeForm;
+}
+
+const PATTERNS: ReadonlyArray<readonly [EdgeForm, RegExp]> = [
+  ["loulou",   /<<~\s*loulou\s+lar:\/\/\/(\S+?)\s*>>/g],
+  // THE BEARING ARROW CARRIES A `>`. A `pranala` states its target as `? -> lar:///…`, so a scan of
+  // `[^>]*?` stops at the arrow and the sigil never reaches its own address — silently, as a form that
+  // simply reports no edges. `(?:[^>]|->)*?` is the form every scan in this grammar uses, for this
+  // reason. Measured: without it this reader found 0 of the corpus's 84 `pranala` edges, and reported
+  // 163 dangling where 194 stand.
+  ["pranala",  /<<~\s*pranala(?:[^>]|->)*?lar:\/\/\/(\S+?)[\s>]/g],
+  ["kahea",    /<<~\s*kahea(?:[^>]|->)*?lar:\/\/\/(\S+?)[\s>]/g],
+  ["wikilink", /\[\[[^\]|]*\|lar:\/\/\/([^\]]+)\]\]/g],
+  ["wikilink", /\[\[lar:\/\/\/([^\]|]+)\]\]/g],
+];
+
+/**
+ * Every edge a carrier writes, read through the fence mask.
+ *
+ * The specification memes teach these forms by quoting them, so an unmasked scan reports a lesson's
+ * example as a broken link and sends a reader chasing an address nobody meant to stand.
+ */
+export function readCarrierEdges(text: string): CarrierEdge[] {
+  const spans = fencedSpans(text);
+  const out: CarrierEdge[] = [];
+  for (const [form, re] of PATTERNS) {
+    const g = new RegExp(re.source, re.flags);
+    let m: RegExpExecArray | null;
+    while ((m = g.exec(text)) !== null) {
+      if (inMask(spans, m.index)) continue;
+      // A trailing period or comma belongs to the prose, never to the name.
+      const written = m[1]!.replace(/[.,;]+$/, "");
+      out.push({ written, address: written.split("#")[0]!, form });
+    }
+  }
+  return out;
+}

@@ -16,6 +16,14 @@
  *   --check     report carriers that WOULD change; write nothing. Exit 1 if any
  *               drift — for CI / pre-commit gates.
  *   --gradient  read how far down the ingest gradient each file sits, and write nothing.
+ *   --edges     read the addresses these carriers point AT, and which of them answer.
+ *
+ * ── WHY `--edges` LOOKS OUTWARD ─────────────────────────────────────────────────────────────────
+ * `--gradient` asks whether a carrier is whole. Nothing asked whether the graph it points into exists,
+ * because a `lar:` URI names and does not fetch: a carrier whose target moved keeps rendering, keeps
+ * round-tripping, and passes every gate this tree stands.
+ *
+ * Run it BEFORE a move and again after. Equal counts prove the weld held; a rise names what broke.
  *
  * ── WHY `--gradient` IS A SEPARATE READING ──────────────────────────────────────────────────────
  * `--check` asks whether a carrier is CANONICAL. It cannot ask whether a carrier is WHOLE, because
@@ -36,7 +44,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { isAbsolute, join } from "node:path";
 import { normalizeMemeSource } from "@lararium/tw5/meme-normalize";
-import { readCarrierShape } from "@lararium/tw5";
+import { readCarrierShape, readCarrierEdges } from "@lararium/tw5";
 import type { ParsedArgs } from "../parse-args.js";
 
 export async function cmdNormalize(args: ParsedArgs): Promise<number> {
@@ -45,19 +53,23 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
   // check from both, and recover any file it ate, so flag position is free.
   const check = "check" in args.flags || "check" in args.options;
   const gradient = "gradient" in args.flags || "gradient" in args.options;
+  const edges = "edges" in args.flags || "edges" in args.options;
   const files = [...args.positional];
   if (typeof args.options["check"] === "string") files.push(args.options["check"]);
   if (typeof args.options["gradient"] === "string") files.push(args.options["gradient"]);
+  if (typeof args.options["edges"] === "string") files.push(args.options["edges"]);
 
   if (files.length === 0) {
     console.error("usage: lares normalize <file.mem ...> [--check]");
     console.error("  canonicalize a meme carrier's framing (embeds the iam-declared namespace into the SOH).");
     console.error("  --check     report carriers that would change; write nothing (exit 1 if any) — for CI/pre-commit.");
     console.error("  --gradient  name each file's kind and the marks that kind requires and lacks; write nothing.");
+    console.error("  --edges     name the addresses these carriers point at, and which of them answer.");
     return 2;
   }
 
   if (gradient) return surveyGradient(files);
+  if (edges) return surveyEdges(files);
 
   let drifted = 0;
   let flagged = 0;
@@ -143,4 +155,51 @@ function surveyGradient(files: string[]): number {
   }
   console.log(`${faulted} file(s) below their kind's floor.`);
   return 1;
+}
+
+/**
+ * The graph reading: which addresses these carriers name, and which of those any of them holds.
+ *
+ * The corpus passed IS the universe — an edge answers only if one of the files read declares that
+ * address. So a partial file list reads as a broken graph, and the summary always states how many
+ * carriers were read so a narrow run cannot be mistaken for a corpus-wide one.
+ */
+function surveyEdges(files: string[]): number {
+  const held = new Set<string>();
+  const texts = new Map<string, string>();
+  for (const f of files) {
+    const abs = isAbsolute(f) ? f : join(process.cwd(), f);
+    let src: string;
+    try {
+      src = readFileSync(abs, "utf8");
+    } catch {
+      console.error(`normalize: cannot read ${f}`);
+      return 2;
+    }
+    texts.set(f, src);
+    const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(readCarrierShape(src).marks.iam ? src : "")?.[1];
+    if (uri) held.add(uri);
+  }
+
+  const dangling = new Map<string, { form: string; from: string[] }>();
+  let total = 0;
+  for (const [f, src] of texts) {
+    for (const e of readCarrierEdges(src)) {
+      total++;
+      if (held.has(e.address)) continue;
+      const seen = dangling.get(e.address) ?? { form: e.form, from: [] };
+      seen.from.push(f);
+      dangling.set(e.address, seen);
+    }
+  }
+
+  const ranked = [...dangling].sort((a, b) => b[1].from.length - a[1].from.length);
+  for (const [address, { form, from }] of ranked) {
+    console.log(`${from.length}× ${form}  lar:///${address}`);
+    for (const f of from.slice(0, 3)) console.log(`     from ${f}`);
+    if (from.length > 3) console.log(`     … and ${from.length - 3} more`);
+  }
+  const n = [...dangling.values()].reduce((a, d) => a + d.from.length, 0);
+  console.log(`edges: ${files.length} carrier(s) read · ${held.size} address(es) held · ${total} edge(s) · ${n} naming nothing`);
+  return n === 0 ? 0 : 1;
 }
