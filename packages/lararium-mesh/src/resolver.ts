@@ -62,6 +62,20 @@ const LARES_SCOPE   = "lares";
 const ENGINE_SCOPE  = "lararium";
 
 function splitLarUri(uri: string): { root: string; childPath: string[]; fragmentPath: string[] } {
+  // EQUALITY RIDES THE SPELLING (lar-uri #equality): addresses compare codepoint for codepoint with no
+  // normalization, so the resolver must never manufacture an equality the author did not write. WHATWG
+  // `new URL` removes dot-segments silently (RFC 3986 §5.2.4) and the segment filter below would
+  // swallow empties — each rewrites the address before any lar-specific code reads it, which is the
+  // spoofing surface the equality law closes. Reject the raw spelling; never resolve it.
+  if (uri.startsWith("lar:///")) {
+    const rawTail = uri.slice("lar:///".length).split("#")[0] ?? "";
+    for (const seg of rawTail.split("/")) {
+      if (seg === "." || seg === "..") throw new Error(`lar URI carries a dot-segment — rejected, never resolved: ${uri}`);
+    }
+    if (rawTail.length > 0 && (rawTail.includes("//") || rawTail.endsWith("/"))) {
+      throw new Error(`lar URI carries an empty segment: ${uri}`);
+    }
+  }
   const url = new URL(uri);
   if (url.protocol !== "lar:") throw new Error(`expected lar URI, got ${uri}`);
   if (url.host) throw new Error(`expected triple-slash lar URI (hostless), got ${uri} — use parseHostfulLarUri for hostful`);

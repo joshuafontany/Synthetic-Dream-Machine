@@ -134,7 +134,7 @@ lar:///ha.ka.ba/cid/bafy…         an immutable content-addressed artifact
 
 ''Unstable'' — arbitrary three-term attitude root, session-specific bearing:
 ```
-lar:///threshold.uncertain.opens/
+lar:///threshold.uncertain.opens
 ```
 
 A rootless third class stood here for local system resources spelled in ALLCAPS. ''The root admits no
@@ -149,6 +149,35 @@ For every path: each slot holds exactly one lowercase term — a word or a hyphe
 !!! TW5 System Boundary
 
 The `lar:` scheme serves as the lararium ''sync-filter predicate'': only `lar:`-titled tiddlers cross the sync boundary into Automerge bags and onto disk, while the TW5 `$:/` namespace stays browser-local. The scheme names //what// crosses; the operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the ''sync-namespace'' law: `lar:///ha.ka.ba/lararium/api/sync-namespace`.
+
+<<~/ahu >>
+
+<<~ ahu #equality >>
+
+!! Equality
+
+Two `lar:` URIs name one address exactly when their spellings match, codepoint for codepoint. No
+normalization applies at comparison time: a comparer that transforms before comparing manufactures
+equalities the author never wrote, and every transform a comparer applies is a transform a spoofer
+aims. The precedent stands in RFC 4151 §2.4, which settles `tag:` equality the same way so that
+handling software compares without transforming.
+
+The canonical spelling therefore carries the whole burden, and a conforming producer MUST emit it:
+
+* the scheme lowercase, the local form spelled `lar:///` exactly;
+* no percent-encoding of unreserved characters — `%61` and `a` spell different names, so only the bare
+  spelling conforms;
+* no dot-segments — a URI carrying `.` or `..` as a complete segment stands INVALID, and a consumer
+  MUST reject it rather than resolve it. Resolution-time dot-segment removal (RFC 3986 §5.2.4) rewrites
+  an address silently before any comparison, which is the spoofing surface this rule closes;
+* no empty segments — `//` within a path and a trailing `/` each produce one, and neither conforms.
+
+The session form never names a stable address (#path-taxonomy), so equality across the two forms never
+holds: `lar://alias:grant@host/p` and `lar:///p` spell different strings and name different things —
+the first a speaker's span, the second a place in the graph.
+
+A resolver MAY dereference less than equality distinguishes — disk projection, for one, reads only the
+path — but it MUST NOT report two addresses equal that this rule reads apart.
 
 <<~/ahu >>
 
@@ -388,6 +417,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Z4P4LLsYygr7Ao7JXWEwqsKaiJYXsAV2JyqSvHIzoq8
+<<^ code:"&#x0003;" >>ni:///sha-256;lNclehJckqfA4Cs1YEapMwHvLZ8MkuNhw-EKOQrWtXI
 
 <<^ code:"&#x0004;" -> ? >>
