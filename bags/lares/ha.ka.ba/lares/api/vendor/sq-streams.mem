@@ -1,0 +1,76 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/vendor/sq-streams >>
+```toml iam
+cacheable          = true
+file-path          = "bags/lares/ha.ka.ba/lares/api/vendor/sq-streams.mem"
+mana               = 18
+manao              = 18
+manaoio            = 17
+register           = "Synthesis-Canon"
+retain             = true
+role               = "vendor declaration: Streams plugin by Saq Imtiaz — hierarchical tree-of-tiddlers TW5 UI"
+tags               = ["api/pono/meme"]
+tw5-plugin-id      = "$:/plugins/sq/streams"
+tw5-plugin-version = "1.2.24"
+type               = "text/x-memetic-wikitext+tiddlywiki"
+uri-path           = "ha.ka.ba/lares/api/vendor/sq-streams"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #about >>
+
+! Streams Plugin — by Saq Imtiaz
+
+A vendor declaration: this carrier names an outside artifact this tree carries, so a reader learns its
+provenance and its terms without opening it.
+
+''Author'': [[Saq Imtiaz|https://github.com/saqimtiaz/streams]]
+''License'': MIT
+''Upstream'': https://saqimtiaz.github.io/streams/
+''TW5 plugin id'': `$:/plugins/sq/streams`
+
+Streams gives TiddlyWiki a hierarchical tree-of-tiddlers surface: keyboard-driven entry, Tab to indent,
+Enter for a new node, and every node standing as an ordinary tiddler.
+
+!! Where it rests, and who reads it
+
+The packed plugin sits at `packages/lararium-tw5/plugins/sq-streams-1.2.24.json`. `build-plugin-tiddler.ts`
+writes the grammar's own plugin into that same directory, so the automerge-docs pickup carries both.
+
+!! Two vocabularies for one tree
+
+Streams and this grammar each name a tree of records, and they name it differently:
+
+| the tree's | Streams | this grammar |
+|---|---|---|
+| upward edge | `parent` | `$fragment-parent` |
+| ordered children | `stream-list` | `$slot`, in body order |
+| node marker | `stream-type` | the `<<~ ahu >>` block itself |
+
+''The correspondence holds; the projection does not enact it.'' A carrier's fragments carry the
+grammar's names alone, so a wiki wanting Streams navigation over them writes the second pair from the
+first — the shape is already there, and only the vocabulary is missing.
+
+!! Upgrade
+
+```
+git clone --depth=1 https://github.com/saqimtiaz/streams.git
+```
+
+Refresh `packages/lararium-tw5/plugins/sq-streams-<version>.json` from the clone, then state the new
+version in `tw5-plugin-version` above. ''The declaration is the record of what this tree carries'', so a
+version bumped in the file and not here leaves the tree carrying one thing and saying another.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;EQQbhNEtBnkeTlMlq__KifvWdU4xrmoZ0SO60cyK0NM
+
+<<^ code:"&#x0004;" -> ? >>

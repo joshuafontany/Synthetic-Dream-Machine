@@ -1,7 +1,10 @@
 # Local environments / dependency installs
 .venv/
 .bundle/
-vendor/
+# ROOT-ANCHORED. `bundle install --path vendor` writes here, at the repository root. Unanchored, this
+# pattern matched a directory named `vendor` at ANY depth — including `bags/…/lares/api/vendor`, where
+# it silently held a carrier out of the tree that every corpus gate walks.
+/vendor/
 
 # Generated site/build output
 _site/
