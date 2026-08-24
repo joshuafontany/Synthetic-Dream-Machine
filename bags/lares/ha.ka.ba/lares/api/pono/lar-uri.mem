@@ -114,7 +114,7 @@ alias         = 1*( unreserved )
 grant         = 1*( unreserved )
 ```
 
-A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class is exempt. Of the path productions, `slug` alone admits `@`. The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
+A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class is exempt. Of the path productions, `slug` alone admits a raw `@`; elsewhere the character travels only percent-encoded, and the two spellings stay two names (#equality). The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
 
 ''The scheme-relative form: `uri-path`.'' Instruments and carrier declarations abbreviate an address to
 its `uri-path` — the spelling with the leading `lar:///` removed, codepoint-identical to the path it
@@ -451,6 +451,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;cZMg3R3YN3IT5mkLbx6Lt4E4xSeaHqpsmSzXDu6VxWw
+<<^ code:"&#x0003;" >>ni:///sha-256;WqHbi18ViN9iKkSUHW59ijjhdRLY4EuJ1uqeIhXPNgM
 
 <<^ code:"&#x0004;" -> ? >>
