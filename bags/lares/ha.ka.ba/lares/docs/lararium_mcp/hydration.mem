@@ -50,7 +50,7 @@ All 14 memes below must resolve before threshold yield.
 | 11 | `lar:///ha.ka.ba/lares/api/hud` | `packages/lares-core/memes/api/lares/hud.md` | Lararium internal hydration |
 | 12 | `lar:///ha.ka.ba/lares/api/voices` | `packages/lares-core/memes/api/lares/voices.md` | Lararium internal hydration |
 | 13 | `lar:///ha.ka.ba/lararium/tw5/continuity` | `packages/lares-core/memes/api/lararium/continuity.md` | Lararium internal hydration |
-| 14 | `lar:///LARES` | `lares/LARES.md` | `AGENTS#continue-to-lares` |
+| 14 | `lar:///ha.ka.ba/lares/api/pono/config` | `lares/LARES.md` | `AGENTS#continue-to-lares` |
 
 Mu and Lararium hydrate their declared children before yielding.
 Submodules do not enter required-core; they attach through adapter lanes.
@@ -122,7 +122,7 @@ The receipt digest hashes the serialized closure JSON rather than source files; 
 | URI | Type | Reading |
 |---|---|---|
 | `lar:///AGENTS` | file-backed caps root | threshold constitution |
-| `lar:///LARES` | file-backed caps root | session configuration surface |
+| `lar:///ha.ka.ba/lares/api/pono/config` | file-backed caps root | session configuration surface |
 | `lar:///ha.ka.ba/lares/**` | file-backed stable tuple root | carrier source truth |
 | `lar:///INDEXES/carriers` | virtual JSON | all carrier records |
 | `lar:///INDEXES/interfaces` | virtual JSON | interface URI → carrier URI list |
@@ -159,13 +159,13 @@ Minimal boot should remain small enough to avoid compaction.
 !! Edges
 
 <<~ loulou lar:///AGENTS >>
-<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2H2bYww1bqNE3FumufAGx8vE6yjqZNGqR7hoQXpPyyo
+<<^ code:"&#x0003;" >>ni:///sha-256;lHxxp0MldCQOgTa9FMLd5e52x_m9X9O-9Z5VcOy8JvI
 
 <<^ code:"&#x0004;" -> ? >>

@@ -12,7 +12,7 @@ register          = "Synthesis-Canon"
 role              = "docs-spec parent locus for the Lararium MCP server — index, running state, canonical child loci, known gaps"
 server-version    = "0.1.0"
 status            = "standing"
-status-why = "living docs-spec; test count verified"
+status-why        = "living docs-spec; test count verified"
 tags              = ["api/pono/meme"]
 test-count        = 77
 test-suite        = "python3 -m unittest discover -s lares/lararium_mcp/tests"
@@ -120,7 +120,7 @@ All tools carry `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint:
 | URI | Type | Content |
 |---|---|---|
 | `lar:///AGENTS` | file | threshold constitution |
-| `lar:///LARES` | file | session configuration surface |
+| `lar:///ha.ka.ba/lares/api/pono/config` | file | session configuration surface |
 | `lar:///ha.ka.ba/lares/**` | file | stable source carriers under `packages/lares-core/memes/api/` |
 | `lar:///INDEXES/carriers` | virtual JSON | all carrier records |
 | `lar:///INDEXES/interfaces` | virtual JSON | interface URI → carrier URIs |
@@ -340,6 +340,6 @@ class MyAdapter:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6C6f8s1GkeA_9zyrIT8Wb2caR4nJ1RlBJMBwrCOIECM
+<<^ code:"&#x0003;" >>ni:///sha-256;d8Ox9vk5QZhZ43S12yQB8aCtTX0B53kSffBD_NPbKs8
 
 <<^ code:"&#x0004;" -> ? >>

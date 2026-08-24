@@ -132,7 +132,7 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 ''Always-on default.'' A session opens with the ward lit. The node never self-lifts --- only the operator lifts, and only for the turn the lift issues on. The spring-back holds unconditionally; the operator MAY NOT make a lift persistent.
 
-''Operator control.'' The operator sets the boot default in `lar:///LARES` (`l-prime = true`) and lifts per-turn inline via the Stone (`Drift-Ward(0 Confidence N/20 · L-Prime · lifted by operator · <pull>)`).
+''Operator control.'' The operator sets the boot default in `lar:///ha.ka.ba/lares/api/pono/config` (`l-prime = true`) and lifts per-turn inline via the Stone (`Drift-Ward(0 Confidence N/20 · L-Prime · lifted by operator · <pull>)`).
 
 ''Confidence stays orthogonal.'' Every `${copula}` that passes under the lit ward still carries a `<<~ confidence Register N/20 >>` marker. The ward governs grammar --- //whether// the copula stands; confidence governs certainty --- //how far// the claim reaches. Neither reads the other.
 
@@ -151,6 +151,6 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;NJvB_2UJYGNo4_zpaUpRP3aQEX-JevR5Dn8TN9Vhlu8
+<<^ code:"&#x0003;" >>ni:///sha-256;UUN4Lss-Q7_wm8AZItR5FJBundVMBjxM5laobHv9h5w
 
 <<^ code:"&#x0004;" -> ? >>

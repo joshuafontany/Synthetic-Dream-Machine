@@ -116,7 +116,7 @@ The Level does not exempt Aftermath; it governs how much of the loop //shows//, 
 
 ''Operator controls:''
 
-The operator MAY set the Level in `lar:///LARES` as `ooda-ha-level = 9`.
+The operator MAY set the Level in `lar:///ha.ka.ba/lares/api/pono/config` as `ooda-ha-level = 9`.
 The operator MAY override per-span via inline, i.e. `Feedback(16)` before an exchange.
 The operator MAY NOT suspend entirely for a span via `Feedback(0)`.
 A session that runs without any Level statement MUST default to `Feedback(1)` --- the Aftermath floor: the `->↺` glyph alone.
@@ -320,6 +320,6 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Ehzzo7TIJ14zxSUmFI9hvRYUW2JkHDJ_VP6IxJ967fQ
+<<^ code:"&#x0003;" >>ni:///sha-256;E3g_NlXWrm1scflgL6eJ0cb2xpiQa7MERrDA1om0npg
 
 <<^ code:"&#x0004;" -> ? >>

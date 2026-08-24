@@ -318,7 +318,7 @@ All mask definitions live in `lar:///ha.ka.ba/lares/api/masks`. Parent index at 
 
 !!! LARES Stage Panel
 
-Live stage positions persist in the `#stage-panel` instrument surface in `lar:///LARES`.
+Live stage positions persist in the `#stage-panel` instrument surface in `lar:///ha.ka.ba/lares/api/pono/config`.
 Inline `[Stage: mask-name 15]` shifts a value; the stage panel holds it for the session.
 
 For mask grammar depth, founding examples, and anatomy rationale, see `lar:///ha.ka.ba/lares/docs/lares/voices/masks`.
@@ -389,10 +389,10 @@ payload = { priority = "support", retain = false }
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/workers >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;5bQQAKdX6nFKYi-nqxfgPVN3bTNKBrh9ILkmYGeW544
+<<^ code:"&#x0003;" >>ni:///sha-256;4uBD0eyMS0DYZJyxAgysKemfUxrEn5EMQXt3ICV6e7c
 
 <<^ code:"&#x0004;" -> ? >>

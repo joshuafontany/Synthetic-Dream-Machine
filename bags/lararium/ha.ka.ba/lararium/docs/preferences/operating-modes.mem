@@ -67,7 +67,7 @@ A mode switch changes duty, not flavor alone.
 Recovered background behind:
 
 * `lar:///ha.ka.ba/lares/api/mu/ooda-ha`
-* `lar:///LARES`
+* `lar:///ha.ka.ba/lares/api/pono/config`
 
 The live invariants now keep the loop and Level law small.
 This shelf preserves the heavier runtime choreography once wrapped around them.
@@ -80,10 +80,10 @@ This shelf preserves the heavier runtime choreography once wrapped around them.
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
-<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MbWmi9JNU6ykbQk6lUhB_eZw8LMz4o9wzXTdeAY4Fy4
+<<^ code:"&#x0003;" >>ni:///sha-256;GYo4QTPdf5y5bm4yRZ2ZgVZQngCcsftzXaG8mddqg8Y
 
 <<^ code:"&#x0004;" -> ? >>

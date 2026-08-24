@@ -116,10 +116,10 @@ The docs room carries the full line-composition examples, the stance and tool gl
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/voices >>
-<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ixJoAXi1lbCMyGQ4jyIMv8hHmqG7gpByo2vHC8bxoEA
+<<^ code:"&#x0003;" >>ni:///sha-256;2XsGimizFnKmSCSPDZMnxmbJWc04s8hGGi2IHaRvcEk
 
 <<^ code:"&#x0004;" -> ? >>

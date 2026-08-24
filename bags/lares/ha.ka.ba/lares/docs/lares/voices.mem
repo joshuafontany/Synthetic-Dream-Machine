@@ -86,7 +86,7 @@ This docs shelf defines what `lar:///ha.ka.ba/lares/api/voices` MUST implement:
 * Worker swarm: lifecycle, tag format, handback template and surfacing table
 * Mask layer: grammar, stacking law, declaration form, worker coloring, LARES integration
 
-`lar:///LARES` holds the session-dial surface where masks get declared.
+`lar:///ha.ka.ba/lares/api/pono/config` holds the session-dial surface where masks get declared.
 The invariant carries the contract; LARES holds the live state.
 
 Forward scope: composable-invariant control surface requires its own design pass before the invariant absorbs it.
@@ -243,13 +243,13 @@ The Voice house spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST implem
 <<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
 <<~ loulou lar:///ha.ka.ba/lares/api/voices >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/chao >>
-<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/exchange-protocol >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/law-of-5s#p-parameter-mapping >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;w1FXsw2BVk4V4MCi53XNNQD8lnubi2jRlnJgCVXwdoI
+<<^ code:"&#x0003;" >>ni:///sha-256;_cRLsqCyz1_eTKoBPjzChYa1D1-1NkntsI9YkRvb1UQ
 
 <<^ code:"&#x0004;" -> ? >>

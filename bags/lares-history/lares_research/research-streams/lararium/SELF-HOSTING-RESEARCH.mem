@@ -8,7 +8,7 @@ uri-path = "lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 
 <<^ code:"&#x0002;" >>
 
-<<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml iam
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 file-path = "bags/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH.mem"
@@ -152,8 +152,8 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 
 <<~/ahu >>
 
-<<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;T1R3s4dqIupr5-EL1x4udfr2mS9VWz9BdiEHv2ST94Q
+<<^ code:"&#x0003;" >>ni:///sha-256;sSrDt8pU-ah7Bi55Q4F2hw5bd2C9SFM5VzJ7rnK-Dls
 
 <<^ code:"&#x0004;" -> ? >>

@@ -8,7 +8,7 @@ uri-path = "lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
 
 <<^ code:"&#x0002;" >>
 
-<<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<~ ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
 ```toml iam
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
 file-path = "bags/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS.mem"
@@ -223,8 +223,8 @@ The identity and UCAN layer is now in place:
 
 <<~/ahu >>
 
-<<~ ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<~ ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jvcyrf6RdLGsfPrORG5htPAtx6BY1_X75qxKHGKOzak
+<<^ code:"&#x0003;" >>ni:///sha-256;LJX38SMwg0wS9QWY0r71DlBBW5WFaLCVA6aEIWAmn1E
 
 <<^ code:"&#x0004;" -> ? >>

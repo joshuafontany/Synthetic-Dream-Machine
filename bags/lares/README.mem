@@ -2,16 +2,16 @@
 
 <<^ code:"&#x0001;" ? -> lar:///README >>
 ```toml iam
-uri-path     = "README"
+cacheable = true
 file-path = "bags/lares/README.mem"
-type = "text/x-memetic-wikitext+tiddlywiki"
-l-space      = "adjacent"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 16
-role         = "identity frame and infrastructure map for the Lares node"
-cacheable    = true
-retain       = true
+l-space   = "adjacent"
+mana      = 17
+manao     = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "identity frame and infrastructure map for the Lares node"
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "README"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -124,7 +124,7 @@ lares/
 <<~ ahu #edges >>
 
 <<~ loulou lar:///AGENTS >>
-<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext >>
 <<~ loulou lar:///lararium-node/ROADMAP >>
@@ -133,6 +133,6 @@ lares/
 
 <<~ ? -> lar:///README >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;vEV2vJWQW4sQKRKY4cpsZZLNzR8fSaxWXDThHWD6sgE
+<<^ code:"&#x0003;" >>ni:///sha-256;CvlT1fQy-r_RMjiT-ct9SXwOx_GSNw6kw0vsN616YGc
 
 <<^ code:"&#x0004;" -> ? >>

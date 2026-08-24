@@ -346,7 +346,7 @@ Four open questions in `voices/masks.md#mask-grammar-open-questions` resolved in
 
 Section renamed from `#mask-grammar-open-questions` to `#grammar-decisions` in `voices/masks.md`.
 LARES.md updated: `#required-handoff-masks` revised; `#session-masks` block added with default empty declaration.
-MASKS.md converted from stub to forward-route to `lar:///LARES#session-masks`.
+MASKS.md converted from stub to forward-route to `lar:///ha.ka.ba/lares/api/pono/config#session-masks`.
 
 <<~/ahu >>
 
@@ -361,6 +361,6 @@ MASKS.md converted from stub to forward-route to `lar:///LARES#session-masks`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;7aEL7zF6g98CqwH3wm42xkBSalOkSfmcSGr6Bmt3t-Y
+<<^ code:"&#x0003;" >>ni:///sha-256;uU0vu-r2Kqeo_tuR4ynA2lE58XtRuVh8FpDhk9_aEI0
 
 <<^ code:"&#x0004;" -> ? >>

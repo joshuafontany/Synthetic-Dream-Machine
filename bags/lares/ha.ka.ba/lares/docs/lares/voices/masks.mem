@@ -388,10 +388,10 @@ The mask layer spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST impleme
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/workers >>
 <<~ loulou lar:///ha.ka.ba/lares/api/voices >>
-<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;19i4fhhqWPw4uOWFc44M_fA1XHkA_EluRMH0Vk_jneY
+<<^ code:"&#x0003;" >>ni:///sha-256;Annt2hphUXZ2DBgl5fnFnR6E4uGvbbo2FkEFnlI6bQw
 
 <<^ code:"&#x0004;" -> ? >>

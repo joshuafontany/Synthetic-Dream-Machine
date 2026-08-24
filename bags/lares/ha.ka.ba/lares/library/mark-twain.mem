@@ -1,13 +1,13 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/mark-twain >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/library/mark-twain >>
 ```toml iam
 bytes      = 16715743
 collection = "mark-twain"
 entries    = 6
 namespace  = "&#x2299;"
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/library/mark-twain"
+uri-path   = "ha.ka.ba/lares/library/mark-twain"
 ```
 
 <<^ code:"&#x0002;" >>

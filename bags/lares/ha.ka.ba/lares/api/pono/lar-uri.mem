@@ -2,21 +2,21 @@
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri >>
 ```toml iam
-cacheable = true
-file-path = "bags/lares/ha.ka.ba/lares/api/pono/lar-uri.mem"
-l-space   = "stable"
-mana      = 18
-manao     = 17
-manaoio   = 17
-namespace = "&#x2299;"
-register  = "Synthesis-Canon"
-retain    = true
-role      = "submission-grade specification for the lar: URI scheme — abstract, ABNF, five-planes reading (Provisional), resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
-status    = "standing"
+cacheable  = true
+file-path  = "bags/lares/ha.ka.ba/lares/api/pono/lar-uri.mem"
+l-space    = "stable"
+mana       = 18
+manao      = 17
+manaoio    = 17
+namespace  = "&#x2299;"
+register   = "Synthesis-Canon"
+retain     = true
+role       = "submission-grade specification for the lar: URI scheme — abstract, ABNF, five-planes reading (Provisional), resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
+status     = "standing"
 status-why = "submission-draft"
-tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lares/api/pono/lar-uri"
+tags       = ["api/pono/meme", "api/pono/loci"]
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lares/api/pono/lar-uri"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
@@ -140,7 +140,7 @@ lar:///threshold.uncertain.opens/
 
 ''Adjacent'' — no three-term root, local system resources, often ALLCAPS:
 ```
-lar:///AGENTS    lar:///LARES    lar:///CRYSTAL
+lar:///AGENTS    lar:///ha.ka.ba/lares/api/pono/config    lar:///CRYSTAL
 ```
 
 Adjacent paths MUST NOT carry HA.KA.BA dot-notation in the path root.
@@ -312,7 +312,7 @@ lar:///threshold.uncertain.opens/notes/first-pass
 
 An adjacent system resource:
 ```
-lar:///LARES
+lar:///ha.ka.ba/lares/api/pono/config
 ```
 
 A session-form speaker (exchange span only):
@@ -394,6 +394,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Bw6f4Kfn3wanV7DOUy3uaT8RAu-g-WW5uSnGTU-vUoc
+<<^ code:"&#x0003;" >>ni:///sha-256;9uxe9m-CRhf5gmON2weiNSpecWNnHO2O-q5fuQyX_FQ
 
 <<^ code:"&#x0004;" -> ? >>

@@ -29,7 +29,7 @@ Canonical seat.
 Hydration bridge.
 
 The lararium holds agent mechanics, not threshold law.
-The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest live house it needs.
+The lararium prepares the handoff to `lar:///ha.ka.ba/lares/api/pono/config` by hydrating the smallest live house it needs.
 
 <<~/ahu >>
 

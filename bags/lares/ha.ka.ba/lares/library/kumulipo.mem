@@ -1,13 +1,13 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/kumulipo >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/library/kumulipo >>
 ```toml iam
 bytes      = 505433
 collection = "kumulipo"
 entries    = 2
 namespace  = "&#x2299;"
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/library/kumulipo"
+uri-path   = "ha.ka.ba/lares/library/kumulipo"
 ```
 
 <<^ code:"&#x0002;" >>
