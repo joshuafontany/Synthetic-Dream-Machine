@@ -76,7 +76,7 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''family'' | the category a pranala edge declares (#pranala). |
 | ''dual layer'' | the compile-time graph reading and render-time semantic reading of one surface (#processing-model). |
 | ''guest grammar'' | a foreign grammar admitted into a bounded worksite (#guest-grammar). |
-| ''camera'' | one render surface over the shared world graph (page or canvas). |
+| ''camera'' | a render target: one render surface over the shared graph (page or canvas). |
 | ''frame'' | the control marks bracketing a carrier: heading, text, and transmission bounds (#control-set). |
 | ''mark'' | one control character the frame stands for, named by a `code:` parameter. |
 | ''slot'' | a named parameter a given mark carries; the mark decides which slots apply. |
@@ -502,7 +502,7 @@ Security considerations:   see #security
 Interoperability:          degrades to readable text in a plain viewer;
                            sigils render inert without a conforming processor
 Published specification:   this document (lar:///…/api/pono/memetic-wikitext)
-Applications:              lararium nodes; TiddlyWiki5 carriers; mesh tooling
+Applications:              Lararium nodes (federated wiki devices); TiddlyWiki 5; mesh tooling
 File extension:            .mem (carrier form), .tid (runtime widget/procedure)
 ```
 
@@ -1304,6 +1304,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Jhe-3NHX42yoDk8fi5gktXrgUKC0phbGVSg3THuwX78
+<<^ code:"&#x0003;" >>ni:///sha-256;A4VUL8f-bzHWa8fHMh4lgA-c_Ho6ocxqI7tEpw0rNUU
 
 <<^ code:"&#x0004;" -> ? >>

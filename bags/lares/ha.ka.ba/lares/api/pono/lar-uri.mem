@@ -147,7 +147,7 @@ lar:///ha.ka.ba/cid/bafy…         an immutable content-addressed artifact
 lar:///threshold.uncertain.opens
 ```
 
-''The root admits no exception.'' A resource local to one vessel still stands at an address: an address
+''The root admits no exception.'' A resource local to one device still stands at an address: an address
 that skipped the root could not say which house it stood in, and a name that travels nowhere would then
 read the same as a name that travels, with only the reader's assumption telling them apart.
 
@@ -157,7 +157,7 @@ For every path: each slot holds exactly one lowercase term — a word or a hyphe
 
 !!! TW5 System Boundary
 
-The `lar:` scheme serves as the lararium ''sync-filter predicate'': only `lar:`-titled tiddlers cross the sync boundary into Automerge bags and onto disk, while the TW5 `$:/` namespace stays browser-local. The scheme names //what// crosses; the operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the ''sync-namespace'' law: `lar:///ha.ka.ba/lararium/api/sync-namespace`.
+The `lar:` scheme serves as the node's ''sync-filter predicate'': only `lar:`-titled tiddlers cross the sync boundary into Automerge bags and onto disk, while the TW5 `$:/` namespace stays browser-local. The scheme names //what// crosses; the operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the ''sync-namespace'' law: `lar:///ha.ka.ba/lararium/api/sync-namespace`.
 
 <<~/ahu >>
 
@@ -193,7 +193,7 @@ path — but it MUST NOT report two addresses equal that this rule reads apart.
 
 !! Minting and Collision
 
-Minting stays open: any vessel MAY mint any address, and no registry gates it — a mint authority would
+Minting stays open: any device MAY mint any address, and no registry gates it — a mint authority would
 stand as a global now, which this scheme's substrate refuses. An open mint owes a lawful answer to
 collision instead, and the substrate already carries one:
 
@@ -239,7 +239,7 @@ Law summary:
 # `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
 # `child[1]` forks: a reserved ''kind-plane'' word (`bags`, `wikis`, `cid`) opens a CRDT surface or artifact; any other bare word is a ''meme namespace'' — the minting authority. The `@`-tag rides `child[2]` of a `bags`/`wikis` surface, and nowhere else.
 # A CRDT surface carries exactly one canonical address. A wiki's per-wiki live slots extend its identity at `child[3]` (`wikis/{slug}/{kind}`).
-# Resolution: the runtime resolves a surface to an AutomergeUrl via the resolver map carried in the island manifest. The URI carries the identity; the resolver maps it to the live doc. Two devices binding one surface URI to different doc URLs (different recipes, different personal docs) run as the normal case — the URI names the address, and the doc stands as the house.
+# Resolution: the runtime resolves a surface to an AutomergeUrl via the resolver map carried in the device's runtime manifest. The URI carries the identity; the resolver maps it to the live doc. Two devices binding one surface URI to different doc URLs (different recipes, different personal docs) run as the normal case — the URI names the address, and the doc stands as the house.
 
 Registry pattern. A bag MAY hold tiddlers whose titles read as //paths inside it//, pointing at other surfaces. `bags/catalog` carries the canonical example: it tracks corpus bags via entries at `lar:///ha.ka.ba/bags/catalog/corpus/{slug}` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/bags/{slug}` bag. Catalog catalogs; it does not host.
 
@@ -268,7 +268,7 @@ The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable na
 `lar:` ''names''; it does not fetch. A processor MUST resolve a `lar:` reference against the local world graph only:
 
 # Parse the URI to its form (local / session), path class, and optional fragment.
-# For an `@`-surface (`bags/…` or `wikis/…`), map the surface identity to a live doc via the island manifest's `BagResolver`.
+# For a kind-plane surface (`bags/…` or `wikis/…`), map the surface identity to a live doc via the runtime manifest's resolver map.
 # Resolve the remaining path to a named unit within that bag's address space.
 # Resolve a `#fragment` to a section / `ahu` / pranala anchor within the named unit.
 
@@ -303,9 +303,9 @@ BEARING (path) → SECTION (fragment).
 
 A ''conforming parser'' MUST: accept the surface of #scheme-syntax; reject a path with fewer than three root slots (the root arity law); reject a ROOT slot bearing an underscore, whitespace, or non-ASCII (an internal hyphen joins a compound term); treat a `#fragment` as an opaque anchor.
 
-A ''conforming resolver'' MUST: resolve against the local world graph only; map an `@`-surface (a `bags/…` or `wikis/…` segment) through the island manifest's `BagResolver`; treat the URI as the stable address and the doc as the bound house (one URI MAY bind different docs per device).
+A ''conforming resolver'' MUST: resolve against the local graph only; map a kind-plane surface (a `bags/…` or `wikis/…` path) to its live doc through the device's runtime manifest; treat the URI as the stable address and the doc as the bound store (one URI MAY bind different docs per device).
 
-A ''conforming author'' SHOULD: use local form for stable addresses and system resource names; reserve session form for exchange spans; place the `@`-slug at `child[2]` of a `bags`/`wikis` surface, and keep a meme namespace bare at `child[1]`.
+A ''conforming author'' SHOULD: use local form for stable addresses and system resource names; reserve session form for exchange spans; place the slug at `child[2]` of a `bags`/`wikis` surface, and keep a meme namespace bare at `child[1]`.
 
 <<~/ahu >>
 
@@ -438,6 +438,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DgaEzmd1avLs0Ih2AYreavg4bNR-l4zUx-PUu3xk-9U
+<<^ code:"&#x0003;" >>ni:///sha-256;yyM62qFd6T7XWBcQlJPSKU-BTBhn6bdNC3nZVTh6418
 
 <<^ code:"&#x0004;" -> ? >>
