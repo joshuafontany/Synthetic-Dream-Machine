@@ -37,9 +37,6 @@ Exported symbols: `PaeWidget`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/pae" $mode="block"/>
 
 <<~/ahu >>
@@ -48,6 +45,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pRtQtvJMrFe73RRpjUgiTGQ7UgL8vUZ0eldusy9QPRc
+<<^ code:"&#x0003;" >>ni:///sha-256;PlZRiJD4GWO1oVfJ3utuu-K-UGXSGtwk3dldnYEnxWM
 
 <<^ code:"&#x0004;" -> ? >>

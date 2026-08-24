@@ -48,9 +48,6 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/deserializer" $mode="block"/>
 
 <<~/ahu >>
@@ -63,6 +60,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SMSldNoTZ-gBi8xVR3yT2oblPD4XZql2C37i_YOnxhc
+<<^ code:"&#x0003;" >>ni:///sha-256;XYL6EPw1bnvQPNcv9R5hciVW5X-XofSgdg5Y8EfGgD4
 
 <<^ code:"&#x0004;" -> ? >>

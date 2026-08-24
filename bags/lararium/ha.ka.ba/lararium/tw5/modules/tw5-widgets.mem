@@ -80,9 +80,6 @@ fields = [
 
 `packages/lararium-tw5/src/tw5-widgets.ts` — barrel re-export; not packageable as standalone CJS (spans multiple widget files + memetic-parser).
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets" $mode="block"/>
 
 <<~/ahu >>
@@ -94,6 +91,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;V-TcNUitqQF8NXQa1ScoeCXtAwoRz3TTI3BfA4LyqzE
+<<^ code:"&#x0003;" >>ni:///sha-256;1MfcwE0H0b5zvU2jVXbWqESXcSVxitQqLLMP_zjWvhc
 
 <<^ code:"&#x0004;" -> ? >>

@@ -37,9 +37,6 @@ Exported symbols: `LeleWidget`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/lele" $mode="block"/>
 
 <<~/ahu >>
@@ -48,6 +45,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1aD77lkcNfBVjAMISX8W9x3abUNmCuVgB-YetR5zDk4
+<<^ code:"&#x0003;" >>ni:///sha-256;xgt1WcVHDEMZM6U4N9l0zIJvPuRhwHaCsPOqldLR5Tw
 
 <<^ code:"&#x0004;" -> ? >>

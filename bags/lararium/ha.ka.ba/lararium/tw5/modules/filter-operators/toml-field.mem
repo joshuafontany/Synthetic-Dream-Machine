@@ -37,9 +37,6 @@ Exported symbols: `registerTomlField`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/toml-field" $mode="block"/>
 
 <<~/ahu >>
@@ -48,6 +45,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Z8oHOet7OfuioGQZwQJy7LRShY33xJQGXbbtEScoTOU
+<<^ code:"&#x0003;" >>ni:///sha-256;2E3-ARpKaghcbJnkX-6wCB8lFPME7-_9N1JdlJc86yY
 
 <<^ code:"&#x0004;" -> ? >>

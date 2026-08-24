@@ -31,9 +31,6 @@ Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. 
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/boot-gate" $mode="block"/>
 
 <<~/ahu >>
@@ -53,6 +50,6 @@ Plus: `body-sha256` must verify via `SubtleCrypto.digest("SHA-256")`. Gate layer
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YR7q0wO_TC2MwYTwYVXDhAchnmOXkN2YO80BbPHnOh8
+<<^ code:"&#x0003;" >>ni:///sha-256;0IgeErNG4lrWYy6T2YaFuW1T7ZhnJHhTa_qEwGK6V7g
 
 <<^ code:"&#x0004;" -> ? >>

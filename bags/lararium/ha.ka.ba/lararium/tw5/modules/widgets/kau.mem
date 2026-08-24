@@ -37,9 +37,6 @@ Exported symbols: `KauWidget`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/kau" $mode="block"/>
 
 <<~/ahu >>
@@ -48,6 +45,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ea21yrW4_UmWLm8lUcLaIAJsSGpBYpexcA_LsbMDuIQ
+<<^ code:"&#x0003;" >>ni:///sha-256;0aUr-X5ZdKkEenJKzCh2_Tv3oh6OCQpNxoBdhmthxIo
 
 <<^ code:"&#x0004;" -> ? >>

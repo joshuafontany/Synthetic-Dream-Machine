@@ -37,9 +37,6 @@ Exported symbols: `registerEdge`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/edge" $mode="block"/>
 
 <<~/ahu >>
@@ -48,6 +45,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;NlFRGTvEWNx-DQHLapy325XRL3Lnb5orSWLcMpGOycI
+<<^ code:"&#x0003;" >>ni:///sha-256;UXZbWAuWzY2crTW9AI-XJBoorgc0wL2BXeaezPEX9uo
 
 <<^ code:"&#x0004;" -> ? >>

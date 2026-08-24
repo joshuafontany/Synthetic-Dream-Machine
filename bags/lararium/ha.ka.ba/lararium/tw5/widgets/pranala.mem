@@ -29,9 +29,6 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/pranala"
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/pranala" $mode="block"/>
 
 <<~/ahu >>
@@ -42,6 +39,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1x9xNJPoeyqYv2qbWOUhhm9f_YhPCRbt3Jex2BoEqSc
+<<^ code:"&#x0003;" >>ni:///sha-256;cDani86YEfMGvI16PfQcBkL1aeubyU6FMt5HSj8dJU4
 
 <<^ code:"&#x0004;" -> ? >>

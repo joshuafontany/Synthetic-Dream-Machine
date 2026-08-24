@@ -42,13 +42,10 @@ Before this file, `wiki-handlers.ts` owned `flattenRuntimeTiddlerFields()` (skip
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/tw5-fields-flat" $mode="block"/>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;db-tMXjMjl1D4ad7NREa4B-ctSh_STnhpkQx3VvLZdc
+<<^ code:"&#x0003;" >>ni:///sha-256;GN-TS4KnLoovwshVWJhNmIjpB4uWCu2iIoaLnkJdEAE
 
 <<^ code:"&#x0004;" -> ? >>

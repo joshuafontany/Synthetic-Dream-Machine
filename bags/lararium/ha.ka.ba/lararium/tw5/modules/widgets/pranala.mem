@@ -37,9 +37,6 @@ Exported symbols: `PranalaWidget`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/pranala" $mode="block"/>
 
 <<~/ahu >>
@@ -48,6 +45,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;yObq4bw3YEt0jdbrsbA-kiiHYC8bEQlR8Ac_JrfT5os
+<<^ code:"&#x0003;" >>ni:///sha-256;mfSqPeVwPZKVEg0d3DEKNXt6hG7w7A2GFK3TkzQcM2Q
 
 <<^ code:"&#x0004;" -> ? >>

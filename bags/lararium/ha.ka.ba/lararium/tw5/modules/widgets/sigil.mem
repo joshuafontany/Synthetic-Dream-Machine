@@ -37,9 +37,6 @@ Exported symbols: `SigilWidget`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/sigil" $mode="block"/>
 
 <<~/ahu >>
@@ -48,6 +45,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;324fjMNnIhZq40lGX_HasRhwQlyM459Cx9VB2SkX77w
+<<^ code:"&#x0003;" >>ni:///sha-256;qOc64OifEY0_-sX4uGnBHfxoeVIb5uhG0uiQmr4xxpY
 
 <<^ code:"&#x0004;" -> ? >>

@@ -1,11 +1,11 @@
 /**
  * sync-heleuma.ts — drift check, patch, and corpus-promotion scan.
  *
- * THE WINDOW LAW. An anchor's `#source` slot TRANSCLUDES the code-file tiddler named by `module-ref`
- * (`<$transclude>`), never copies it. One home for the code — shipped by the plugin, ingested through
- * the TW5 filetype registry, or minted at promotion — and the anchor keeps the rope. Drift between the
- * wiki's code tiddler and the live TS belongs to --sync-modules (body-sha256 over the module body); the
- * default check asks reference integrity alone: ref declared, window standing, window facing the ref.
+ * THE WINDOW LAW. An anchor's `#source` slot holds a `<$transclude>` facing the code-file tiddler
+ * `module-ref` names — the one home for the code, shipped by the plugin, ingested through the TW5
+ * filetype registry, or minted at promotion. Drift between the wiki's code tiddler and the live TS
+ * belongs to --sync-modules (body-sha256 over the module body); the default check asks reference
+ * integrity alone: ref declared, window standing, window facing the ref.
  *
  * Modes (mutually exclusive flags):
  *   (none)            Dry-run: window integrity + module body-sha256, write nothing.
@@ -648,10 +648,6 @@ Exported symbols: \`${d.symbols.join("`, `")}\`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, ingested through the filetype registry, or minted at
-promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///${uriPath}" $mode="block"/>
 
 <<~/ahu >>
@@ -764,13 +760,11 @@ for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
   totalChecked++;
 
   // ── THE WINDOW CHECK ──────────────────────────────────────────────────────────────────────────
-  // A #source slot holds a WINDOW onto the code-file tiddler — `<$transclude>` facing `module-ref` —
-  // never a copy. Two homes for one source was the disease this checker existed to manage: the copy
-  // drifted, the checker chased it, and 31 of 32 anchors could not even be checked. With ONE home
-  // (the code-file tiddler: shipped by the plugin, ingested through the filetype registry, or minted
-  // at promotion), drift between wiki and live TS belongs to --sync-modules — body-sha256 over the
-  // module tiddler body. This check asks only REFERENCE INTEGRITY: the ref is declared, the window
-  // stands, and it faces the ref.
+  // The code-file tiddler holds the source — shipped by the plugin, ingested through the filetype
+  // registry, or minted at promotion. A #source slot holds a `<$transclude>` facing `module-ref`;
+  // a copy there makes a second home, and two homes for one source drift apart. Drift lives where the
+  // source lives — --sync-modules hashes the module tiddler body — so this check asks REFERENCE
+  // INTEGRITY alone: the ref is declared, the window stands, and it faces the ref.
   const moduleRef = toml["module-ref"];
   const slotM = SOURCE_SLOT_RE.exec(content);
 
@@ -786,7 +780,7 @@ for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
   }
   const slot = slotM[1]!;
   if (/```/.test(slot)) {
-    console.warn(`[heleuma/${mode}] COPY in #source — the retired form; the slot wants the window  ${uri}`);
+    console.warn(`[heleuma/${mode}] COPY in #source — the slot holds `+"`<$transclude>`"+` facing module-ref  ${uri}`);
     totalDrift++;
     continue;
   }
@@ -809,7 +803,7 @@ if (COMMIT) {
 } else {
   console.log(`\n[heleuma] checked ${totalChecked} — ${totalDrift} drift, ${totalMissing} missing`);
   if (totalDrift > 0 || totalMissing > 0) {
-    console.warn("[heleuma] a red above wants a hand — the slot transcludes the code-file tiddler, never copies it");
+    console.warn("[heleuma] a red above wants a hand — the slot transcludes the code-file tiddler");
   }
 }
 

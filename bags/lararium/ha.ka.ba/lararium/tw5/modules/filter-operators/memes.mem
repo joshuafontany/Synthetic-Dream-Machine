@@ -37,9 +37,6 @@ Exported symbols: `collectMemes`, `registerMemes`, `registerMemesSource`.
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/memes" $mode="block"/>
 
 <<~/ahu >>
@@ -48,6 +45,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6XVmSKVaDXC8biEW7ZFY2crJAldvKq5eh_ROjs2QDhs
+<<^ code:"&#x0003;" >>ni:///sha-256;yi9Glk-oekGf0R0V-SoXhK5D9oOhBv6B-Xz1MXU8b-4
 
 <<^ code:"&#x0004;" -> ? >>

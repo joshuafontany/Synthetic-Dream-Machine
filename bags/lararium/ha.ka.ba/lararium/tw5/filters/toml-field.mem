@@ -29,9 +29,6 @@ uri-path      = "ha.ka.ba/lararium/tw5/filters/toml-field"
 
 <<~ ahu #source >>
 
-The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
-for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
-
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/toml-field" $mode="block"/>
 
 <<~/ahu >>
@@ -42,6 +39,6 @@ for the code — shipped by the plugin, or minted at promotion — and the ancho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6WJgfKnp2JCXNsMh1BsJ6Copy9xQrCgu9_2kW8VS_P8
+<<^ code:"&#x0003;" >>ni:///sha-256;Zm3Yv96AUVVDtKa4AZXy6-N1gbiaao-HxYAO2GQu2jU
 
 <<^ code:"&#x0004;" -> ? >>
