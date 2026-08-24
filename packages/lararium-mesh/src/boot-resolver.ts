@@ -60,6 +60,47 @@ export function isStillJoining<T>(r: DocHandle<T> | StillJoining): r is StillJoi
   return (r as Partial<StillJoining>).stillJoining === true;
 }
 
+/**
+ * A boot fault's verdict — one condition, named as observed.
+ *
+ * TWO PATHS REACH A FAILED BOOT RESOLVE, and only one of them knows anything about the store. A TERMINAL
+ * answer (`unavailable`/`failed`) is the library saying no peer will ever carry this; a DEADLINE is our own
+ * patience expiring while the library said nothing at all.
+ *
+ * Reporting both as "local corruption" spends the operator's data to save a branch: that wording hands over
+ * `rite rebirth`, which composes stop · clear · bake · stand · seed — so a vessel merely SLOW to resolve
+ * under load gets told to destroy a store that was never damaged. Measured exactly so: the mesh's hearth
+ * died this way beside three siblings on a stable document id, and stood clean the moment it booted alone.
+ *
+ * A timeout's honest first cure costs nothing — read again. Keep the destructive one for the reading that
+ * actually establishes an empty store.
+ */
+export interface BootFaultVerdict {
+  /** A branch token, stable across wordings. */
+  readonly reason:  "doc-unavailable" | "resolve-timeout";
+  /** What a human reads — and the only place prose belongs. */
+  readonly message: string;
+}
+
+export function bootFaultVerdict(
+  obs: { reason: "terminal" | "deadline"; label: string; url: string; waitedMs?: number },
+): BootFaultVerdict {
+  const where = `${obs.label} (${obs.url})`;
+  if (obs.reason === "terminal") {
+    return {
+      reason:  "doc-unavailable",
+      message: `[boot] ${where} — the store holds it and no peer carries it; `
+             + "diagnose with `lares vessel read vessel`, recover with `lares vessel rite rebirth`",
+    };
+  }
+  return {
+    reason:  "resolve-timeout",
+    message: `[boot] ${where} did not resolve within ${obs.waitedMs ?? 0}ms — this names THIS BOOT'S patience, `
+           + "never the store's health, so nothing here has established damage. Stand again; a vessel under "
+           + "load from its peers commonly resolves on a second reading.",
+  };
+}
+
 // hearth-private resolves to a handle or throws (fail loud — no peer carries it);
 // mesh-shared resolves to a handle or a typed StillJoining (never throws on
 // absence). The overloads keep existing hearth-private callers on the un-widened
@@ -87,6 +128,7 @@ export async function resolveBootDoc<T>(
   // it on the ready transition). Watch BOTH: whenReady() catches an already-ready doc;
   // subscribe catches a later READY after a transient UNAVAILABLE (the mesh-shared case).
   // A doc never births here — on timeout we resolve null and branch by tideline.
+  let terminal = false;
   const handle = await new Promise<DocHandle<T> | null>((resolve) => {
     let settled = false;
     const finish = (h: DocHandle<T> | null) => { if (!settled) { settled = true; resolve(h); } };
@@ -96,6 +138,7 @@ export async function resolveBootDoc<T>(
       // answer (no peer will ever carry it), so fail FAST on the signal, not the backstop.
       // mesh-shared keeps waiting: UNAVAILABLE there is transient (the mesh may still deliver).
       if (opts.tideline === "hearth-private" && (s.state === "unavailable" || s.state === "failed")) {
+        terminal = true;   // the library ANSWERED — distinct from our patience expiring below
         unsub(); finish(null);
       }
     });
@@ -105,10 +148,13 @@ export async function resolveBootDoc<T>(
   if (handle) return handle;
 
   if (opts.tideline === "hearth-private") {
-    throw new Error(
-      `[boot] hearth-private doc unavailable — local corruption (no peer carries it); ` +
-      `diagnose with \`lares vessel read vessel\`, recover with \`lares vessel rite rebirth\`: ${opts.label} (${url})`,
-    );
+    // THE VERDICT NAMES THE PATH TAKEN. `terminal` means the library answered; otherwise the deadline
+    // expired and the store never spoke — two conditions that once shared one destructive wording.
+    const v = bootFaultVerdict({
+      reason: terminal ? "terminal" : "deadline",
+      label: opts.label, url, waitedMs: deadlineMs,
+    });
+    throw Object.assign(new Error(v.message), { reason: v.reason });
   }
   // mesh-shared: never throw, never blank — surface the typed still-joining signal
   // so the joiner proceeds and reconciles in the background.

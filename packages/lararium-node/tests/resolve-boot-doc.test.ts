@@ -23,9 +23,13 @@ describe("resolveBootDoc — tideline-class boot resolution", () => {
     const origin = new Repo();
     const url = origin.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} }).url; // lives in `origin`
     const node = new Repo();                                                                 // separate, no network
+    // THE CLAIM IS THE REFUSAL, KEYED ON ITS REASON. Grepping the prose made this test an editor of
+    // wording rather than a guard on behaviour — and the wording had to change, because one message was
+    // covering two conditions and offering a store-wiping cure for the harmless one. `reason` is the
+    // stable branch surface; the sentence beside it is free to say it better.
     await expect(
       resolveBootDoc(node, url, { tideline: "hearth-private", label: "daemon" }),
-    ).rejects.toThrow(/hearth-private doc unavailable/);
+    ).rejects.toMatchObject({ reason: "doc-unavailable" });
   });
 
   it("mesh-shared: waits scale-patience then returns a typed StillJoining — never throws, never invents", async () => {
