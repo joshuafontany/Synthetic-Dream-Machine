@@ -142,10 +142,8 @@ export const BAGS_SEGMENT  = "bags"  as const;
 export const WIKIS_SEGMENT = "wikis" as const;
 export const CID_SEGMENT   = "cid"   as const;
 
-// THE MINTERS TAKE THE NAME AS WRITTEN. They stripped a leading `@` for as long as callers still
-// sent one — and a minter that quietly repairs its input hides the caller sending the wrong thing,
-// so the wrong thing spreads while every address still looks right. The callers send plain names
-// now, so the repair has nothing left to do except conceal the next one.
+// THE MINTERS TAKE THE NAME AS WRITTEN. A minter that quietly repairs its input hides the caller
+// sending the wrong thing, so the wrong thing spreads while every address still looks right.
 /** Mint the canonical URI of a BAG (a composable recipe piece; mutable, the IPNS plane). */
 export function bagUri(slug: string): string {
   return stableLarUri(`${BAGS_SEGMENT}/${slug}`);

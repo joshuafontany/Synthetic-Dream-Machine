@@ -237,10 +237,8 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
 
 /** The surface id the daemon owns in the uniform pin-selector — distinct from any pool wiki slug. Pass it to
  *  `setActiveSurface` to summon the daemon; pass a wiki slug to surface that wiki. It's all the same VM. */
-// THE SENTINEL IS THE SLUG. Carrying a marker here bought one thing: a translation back to the slug at
-// every boundary that used it. With the marker gone the two are the same string, so the translation
-// stops existing rather than getting simpler — and a sentinel that needs no decoding cannot be decoded
-// wrongly at a call site that forgets to.
+// THE SENTINEL IS THE SLUG — one string, no decoding at any boundary, so no call site can decode it
+// wrongly. A sentinel that differs from the slug buys a translation everywhere the two must meet.
 export const DAEMON_SURFACE_ID = "daemon";
 
 /** The ONE shared VesselResult (no vessel-by-type) + browser's one substrate extra. */
