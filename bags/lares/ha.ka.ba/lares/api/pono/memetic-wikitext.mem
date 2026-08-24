@@ -166,7 +166,7 @@ Two consequences a processor MUST hold:
 # A vanilla TW5 processor reads a carrier as ''valid wikitext'', every sigil an unbound macro call. The
   reading degrades to inert text, never to a parse error.
 # A memetic processor binds those names to procedures. The DEFINITION reads native too — `\procedure ^(code)`
-  is a TW5 procedure definition TW5's own pragma parser accepts, `isProcedureDefinition` and all.
+  parses as a TW5 procedure definition under TW5's own pragma parser, `isProcedureDefinition` and all.
 
 ''The third character decides, with no lookahead.'' `<<~` opens the speaking set · `<<^` the control set ·
 `<<!` the declaration register · `<<<` a quote fence · anything else reads an inherited macro call. `!`
@@ -1309,6 +1309,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MzsdL2vpF0S1Oe4yv79QqzLDWhX2yEj_mHc7EeAbl4A
+<<^ code:"&#x0003;" >>ni:///sha-256;Nu3_0nYmm1UDE56LikdXPb1TEU7FurIoET3s9Vk_Exs
 
 <<^ code:"&#x0004;" -> ? >>
