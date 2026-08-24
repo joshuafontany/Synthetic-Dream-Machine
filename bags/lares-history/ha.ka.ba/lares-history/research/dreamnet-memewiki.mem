@@ -1,58 +1,41 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///todo/DreamNet_MemeWiki >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/research/dreamnet-memewiki >>
 ```toml iam
-file-path = "bags/lares-history/lares_research/todo/todo.DreamNet-MemeWiki.mem"
-type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "todo/DreamNet_MemeWiki"
-```
-
-<<~ ahu #iam >>
-```toml
-# <<~ ahu #iam-ha "structure" >>
-name = "DreamNet_MemeWiki"
-file-path = "todo/todo.DreamNet-MemeWiki.mem"
-content-type = "text/x-memetic-wikitext+tiddlywiki"
-version = "0.1-draft"
-tulen = 0.62
-# <<~/ahu >>
-# <<~ ahu #iam-ka "detail" >>
 confidence = 14
-mana = 15
-manao = 16
-manaoio = 12
-meme-type = "todo"
-register = "Synthesis"
-role = "research consolidation todo, architecture intake memo, and staged implementation plan"
-source-documents = [
-  "_todo/DreamNet_MemeWiki.md",
-  "_todo/DreamNet_MemeWiki_Lezer_CodeMirror.md",
-  "_todo/DreamNet_MemeWiki_ResearchSprint.md",
-  "_todo/DreamNet_MemeWiki_TLDraw_Kowloon.md"
-]
-north-star = "Boot a greenfield MemeWiki kernel in Node first, resume it in browser, and integrate it cleanly with Kowloon, TLDraw, MemPalace, and CRDT-style sync."
-# <<~/ahu >>
-# <<~ ahu #iam-ba "flow" >>
-pranala = [
-  "? -> lar:///ha.ka.ba/pono/memetic-wikitext",
-  "? -> lar:///ha.ka.ba/pono/parser",
-  "? -> lar:///ha.ka.ba/pono/render-pipeline"
-]
-# <<~/ahu >>
+file-path  = "bags/lares-history/ha.ka.ba/lares-history/research/dreamnet-memewiki.mem"
+l-space    = "archive"
+mana       = 15
+manao      = 16
+manaoio    = 12
+north-star = "Boot a memetic-wikitext kernel in Node, resume it in a browser, and bridge it to Kowloon, TLDraw and MemPalace without any of them holding authority over the memetic core."
+register   = "Synthesis"
+retain     = true
+role       = "the consolidation that staged the memetic-wikitext kernel — four scratch notes folded into one OODA-HA worksite, judged against what stands"
+tags       = ["api/pono/meme"]
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lares-history/research/dreamnet-memewiki"
 ```
-<<~/ahu >>
-
-! DreamNet MemeWiki
-
-A self-describing research consolidation and staging memo for DreamNet MemeWiki.
-
-This file replaces four scratch research notes with one routeable worksite. It keeps the same material, but arranges it in the `loci` OODA-HA flow: gather what is known, map the architecture, set the current decisions, stage the work, and leave residue named rather than blurred.
-
-This memo is not yet a binding kānāwai (law). It is a `todo` locus meant to prepare the next lawful implementation and later canon-writing passes.
 
 <<^ code:"&#x0002;" >>
 
-DreamNet MemeWiki opens the active research-consolidation stream here.
+! DreamNet MemeWiki — the consolidation that staged the kernel
+
+Four scratch research notes folded into one routeable worksite, arranged in the `loci` OODA-HA flow:
+gather what is known, map the architecture, fix the decisions, stage the work, judge the residue.
+
+''The kernel it staged now stands.'' Workstream 1 — a meme store contract, a memetic grammar subset, a
+stable parse IR, deterministic render, and a Node-first boot that round-trips — reads as
+[[memetic-wikitext|lar:///ha.ka.ba/lares/api/pono/memetic-wikitext]] and the deserializer that answers
+to it. What this memo called the first grammar subset carries the whole corpus.
+
+The later workstreams parted from the plan rather than completing it, and the parting is the finding.
+Each is judged at its own station below, so a reader meets the outcome where the plan set the
+expectation.
+
+''This memo holds no law.'' It records how a field of scattered research became an implementable
+architecture, and which of its bets the building honoured.
+
 <<~/ahu >>
 
 <<~ ahu #phase-map >>
@@ -320,51 +303,47 @@ glyph = "▶"
 
 Act stages the next implementation sequence.
 
-!!! Workstream 1: Bootable Kernel
+!!! Workstream 1: Bootable Kernel — ''standing''
 
-* define the minimum meme store contract
-* define the first memetic grammar subset
-* produce a parse IR that is stable enough for tests
-* render one document deterministically to HTML or text
-* prove Node-first boot and roundtrip
+Every line of it holds, and carries more than the plan asked. The store contract reads as the carrier
+frame; the grammar subset became the whole grammar; the parse IR is the record set a carrier splits
+into; the deterministic render is `expandMemeRefs`, which the corpus round-trip proves byte-for-byte
+over 614 carriers. Node-first boot runs, and the browser resumption the north star named runs beside
+it from one composition.
 
-!!! Workstream 2: Lezer and CodeMirror Path
+!!! Workstream 2: Editor Grammar — ''parted from the plan''
 
-* prototype a Lezer grammar for the first memetic subset
-* wire CodeMirror 6 into a React surface
-* add syntax highlighting, tree inspection, and validation hooks
-* test that editor-time structure aligns with kernel-time parsing rather than drifting from it
+The grammar landed as tree-sitter rather than Lezer, and its fixtures pin wild carriers against a
+versioned manifest. The bet underneath survived the swap: ''editor-time structure answers to
+kernel-time parsing''. What the plan set as a test, the fixture manifest enforces as a gate.
 
-!!! Workstream 3: Kowloon Bridge
+!!! Workstream 3: Kowloon Bridge — ''re-sited by a later law''
 
-* survey the server and session surfaces that matter
-* expose the kernel through a service or adapter layer
-* read via `useClient()`-compatible pathways where needed
-* route writes through `client.activities`
-* test one end-to-end read and write flow
+Kowloon stands OUTSIDE the sovereign plane now, behind a causal-island boundary, and the web3-only law
+settled why: a bridge that reads through a foreign client's session surfaces would carry that surface's
+ontology inward. The workstream's caution — no hidden authority over the memetic core — became the
+placement rather than a test inside it.
 
-!!! Workstream 4: TLDraw Collaboration Bridge
+!!! Workstream 4: Canvas Collaboration — ''unproven''
 
-* embed TLDraw as a React-native component
-* prove a minimal shared canvas around MemeWiki context
-* map ownership boundaries between document state and canvas state
-* validate sync and presence without giving the canvas hidden authority over the memetic core
+No canvas embed stands. The ownership question the plan raised — which state the document holds and
+which the canvas holds — never had to be answered, because sync landed in the mesh instead and the
+canvas never arrived to contest it. ''The bet is untested, not refuted.''
 
-!!! Workstream 5: MemPalace and CRDT Research Pass
+!!! Workstream 5: MemPalace and CRDT — ''answered from the other side''
 
-* map the MemPalace data and query contract
-* evaluate whether TLDraw sync remains sufficient or whether a second CRDT layer becomes necessary
-* define merge and conflict test vectors
-* stage only the bridge points that remain valid after the kernel tests land
+The question read "does TLDraw sync suffice, or does a second CRDT layer become necessary". The mesh
+answered by being the CRDT layer from the start, so the fork never opened. MemPalace stands as its own
+holder with its own query contract, reached over MCP rather than bridged into the kernel.
 
 !!! Milestones
 
-* [ ] consolidated research memo complete
-* [ ] minimum viable kernel boots and roundtrips
-* [ ] Lezer and CodeMirror prototype validates the first grammar subset
-* [ ] Kowloon bridge proves one lawful read and write path
-* [ ] TLDraw proof shows embed plus sync viability
-* [ ] MemPalace and CRDT decision memo written after the earlier proofs
+* [x] consolidated research memo complete — this carrier
+* [x] minimum viable kernel boots and roundtrips — and the corpus round-trip holds it there
+* [x] editor grammar validates the subset — tree-sitter, against a versioned fixture manifest
+* [~] Kowloon — re-sited outside the sovereign plane rather than bridged into it
+* [ ] canvas embed plus sync viability — unproven, and nothing now depends on it
+* [x] MemPalace and CRDT — the mesh carries the CRDT layer; MemPalace stands as its own holder
 
 <<~ ahu #act-ha >>
 
@@ -449,7 +428,9 @@ The point of this file is not permanence. The point is orderly pressure toward t
 
 Aftermath-ha holds yield and residue identity.
 
-What is clear now: the research no longer lives in four disconnected scraps. What remains unclear now: several core contracts still need proof rather than prose.
+What is clear now: the kernel this memo staged carries a corpus, and the contracts it called unproven
+are gated — the round-trip, the block check, the coordinates, the graph. What remains unclear: whether a
+collaboration canvas ever earns a place beside them, since nothing has needed one.
 
 <<~/ahu >>
 
@@ -459,7 +440,9 @@ What is clear now: the research no longer lives in four disconnected scraps. Wha
 
 Aftermath-ka governs judgment detail.
 
-A successful next pass should convert at least one residue item into a tested artifact. If the next pass only rewrites this memo at greater length, the loop has not actually advanced.
+The measure it set — convert residue into a tested artifact, or the loop has not advanced — is the one
+it is judged by here. Four of six milestones stand as gates rather than prose, and the two that do not
+are named as such rather than left to read as pending work.
 
 <<~/ahu >>
 
@@ -475,6 +458,14 @@ Leave the unresolved items visible and bounded. Hidden residue is how architectu
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;FDmJ6cyRG9Y3QJkGbsaKy0eRf1AwXBn5l9e0eCQx6z8
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/parser >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/tw5-deserializer >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;I13tTLUCiQIv3j4huNWAaugiaGiKz9tSnVZr7xU3Hjo
 
 <<^ code:"&#x0004;" -> ? >>

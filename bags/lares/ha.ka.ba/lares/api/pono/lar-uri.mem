@@ -93,10 +93,9 @@ local-form    = "///" path                 ; authority-less
 session-form  = "//" authority "/" path    ; speaker named
 authority     = alias ":" grant "@" host    ; host per RFC 3986
 
-path          = stable-path / unstable-path / adjacent-path
+path          = stable-path / unstable-path
 stable-path   = "ha.ka.ba" [ "/" child1 ] *( "/" segment )
 unstable-path = triple [ "/" child1 ] *( "/" segment )
-adjacent-path = segment                    ; no triple root, no child1
 
 triple        = word "." word "." word     ; Ha heading . Ka angle . Ba dynamic
 child1        = surface / namespace         ; the child[1] fork — the "@" lives in one branch only
@@ -112,7 +111,7 @@ alias         = 1*( unreserved )
 grant         = 1*( unreserved )
 ```
 
-A `lar:` URI MUST hold ASCII only. A slot MUST hold lowercase ASCII letters alone. A stable or unstable path MUST carry a full three-slot root. An adjacent path MUST carry a non-dotted root. The `@`-tag appears ONLY inside a CRDT `surface` (`bags/…`, `wikis/…`); a meme `namespace` carries none. The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
+A `lar:` URI MUST hold ASCII only. A slot MUST hold lowercase ASCII letters alone. EVERY path MUST carry a full three-slot root — no class is exempt. The `@`-tag appears ONLY inside a CRDT `surface` (`bags/…`, `wikis/…`); a meme `namespace` carries none. The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
 
 <<~/ahu >>
 
@@ -138,14 +137,14 @@ lar:///ha.ka.ba/cid/bafy…         an immutable content-addressed artifact
 lar:///threshold.uncertain.opens/
 ```
 
-''Adjacent'' — no three-term root, local system resources, often ALLCAPS:
-```
-lar:///AGENTS    lar:///ha.ka.ba/lares/api/pono/config    lar:///CRYSTAL
-```
+A rootless third class stood here for local system resources spelled in ALLCAPS. ''The root admits no
+exception now'': a resource local to one vessel still stands at an address, and an address that skipped
+the root could not say which house it stood in — so a name that travels nowhere reads the same as a name
+that travels, and only the reader's assumption tells them apart.
 
-Adjacent paths MUST NOT carry HA.KA.BA dot-notation in the path root.
+The `l-space` field's `adjacent` band names a different axis entirely and keeps its word.
 
-For stable and unstable paths: each slot holds exactly one lowercase term — a word or a hyphen-joined compound — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters and hyphens alone, and the root MUST carry exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named l-space address.
+For every path: each slot holds exactly one lowercase term — a word or a hyphen-joined compound — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters and hyphens alone, and the root MUST carry exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named l-space address.
 
 !!! TW5 System Boundary
 
@@ -310,11 +309,6 @@ An unstable session territory:
 lar:///threshold.uncertain.opens/notes/first-pass
 ```
 
-An adjacent system resource:
-```
-lar:///ha.ka.ba/lares/api/pono/config
-```
-
 A session-form speaker (exchange span only):
 ```
 lar://mischief-muse:agent@host/ha.ka.ba/lares/turn/current
@@ -394,6 +388,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9uxe9m-CRhf5gmON2weiNSpecWNnHO2O-q5fuQyX_FQ
+<<^ code:"&#x0003;" >>ni:///sha-256;Z4P4LLsYygr7Ao7JXWEwqsKaiJYXsAV2JyqSvHIzoq8
 
 <<^ code:"&#x0004;" -> ? >>
