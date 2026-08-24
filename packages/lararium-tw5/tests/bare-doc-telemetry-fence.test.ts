@@ -123,4 +123,32 @@ describe("iam fence — lar_* sensorium metadata round-trips; only structural/pa
     expect(String(parent.text).trim()).toBe(bigBody.trim());
     expect(parent["lar_agent_handle"]).toBe("run-1.deadbeef");
   });
+
+  /**
+   * THE CARRIER GRAIN OF THE SAME LAW `child-name-blocks` holds one level down.
+   *
+   * Ten words this grammar once stood on — the frame's carriage, the ahu structure, the block check.
+   * They belong to the author now: the carriage rides `$…`, and the check is minted rather than
+   * remembered. A carrier declaring all ten reads every one of them back.
+   *
+   * `postamble` earns its place in the list twice over. The bytes trailing a file hang on the LAST
+   * carrier's parent (`closes[closes.length - 1]`), not the first — and every carrier in the corpus
+   * holds exactly one meme, so that distribution has no live case and the word is simply free.
+   */
+  test("every name the grammar once stood on round-trips as an authored carrier field", () => {
+    const authored = [
+      "postamble", "prologue", "preamble", "header-text", "slot", "fragment-parent",
+      "carrier-soh", "carrier-sila", "block-check", "postamble-foreign",
+    ];
+    const fields: TiddlerFields = { title: URI, type: CARRIER_TYPE, text: "body line" };
+    for (const k of authored) fields[k] = `AUTHORED-${k}`;
+
+    const map = new Map([[URI, fields]]);
+    const out = expandMemeRefs((t) => map.get(t), URI)!;
+    const back = memeticWikitextDeserializer(out, { title: URI });
+    const record = back.find((r) => r["title"] === URI)!;
+
+    expect(authored.filter((k) => record[k] !== `AUTHORED-${k}`), "names the host does not reserve")
+      .toEqual([]);
+  });
 });
