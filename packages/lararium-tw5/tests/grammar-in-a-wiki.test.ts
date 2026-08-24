@@ -33,7 +33,7 @@ import { execSync } from "node:child_process";
 import path from "node:path";
 import { TW5Engine } from "../src/tw5-vm.js";
 import { bootTestWiki, wikiSkip, skipNote } from "./test-wiki.js";
-import { expandMemeRefs } from "../src/deserializer.js";
+import { expandMemeRefs, memeticWikitextDeserializer } from "../src/deserializer.js";
 import { parseTaploFields } from "../src/toml-ast.js";
 import { memeticIngestOps } from "../src/ingest-gate.js";
 import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
@@ -53,6 +53,23 @@ describe.skipIf(wikiSkip)(
 
   const deserialize = (text: string, title: string) =>
     (engine.$tw.wiki.deserializeTiddlers(CARRIER_TYPE, text, { title }) ?? []) as Array<Record<string, unknown>>;
+
+  /**
+   * ONE BUILD ON BOTH SIDES OF A ROUND TRIP.
+   *
+   * The wiki reads the PACKED plugin; `expandMemeRefs` imports from `src/`. A test that asks whether
+   * the wiki dispatches a carrier wants the packed reader, and takes it above. A test that compares
+   * what the parse PRODUCES against what the emitter WRITES wants one build on both halves — read
+   * through the bundle and written through source, it measures the distance between two builds and
+   * reports it as a property of the corpus.
+   *
+   * That reading is not hypothetical: it once named 600 carriers as a corpus-wide iam rewrite that no
+   * single build would ever perform, and the number moved whenever source moved while the bundle stood
+   * still. `plugin-artifact-parity` holds the bundle-against-source line; a round-trip gate holds the
+   * grammar's own.
+   */
+  const deserializeFromSource = (text: string, title: string) =>
+    memeticWikitextDeserializer.call({ wiki: engine.$tw.wiki } as never, text, { title }, CARRIER_TYPE) as Array<Record<string, unknown>>;
 
   test("the wiki dispatches a carrier by its type, under the name the corpus writes", () => {
     const src = readFileSync(path.join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/boot-loader.mem"), "utf8");
@@ -93,7 +110,7 @@ describe.skipIf(wikiSkip)(
       const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(disk)?.[1];
       if (!uri) continue;
       const title = `lar:///${uri}`;
-      const records = deserialize(disk, title);
+      const records = deserializeFromSource(disk, title);
       if (records.length === 0) { drift.push(`${f}: the wiki read no carrier`); continue; }
       const by = new Map(records.map((r) => [r["title"] as string, r]));
       const rendered = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, title);
@@ -156,7 +173,7 @@ describe.skipIf(wikiSkip)(
       ["an ahu slot carrying its own iam", `${IAM_NS}\n\n${BODY}\n${SLOT}\n`, "⊙"],
     ];
     const project = (src: string) => {
-      const records = deserialize(src, URI);
+      const records = deserializeFromSource(src, URI);
       const by = new Map(records.map((r) => [r["title"] as string, r]));
       return { records, by, out: expandMemeRefs((u: string) => (by.get(u) ?? null) as never, URI) };
     };
@@ -209,10 +226,16 @@ describe.skipIf(wikiSkip)(
     // in this grammar exactly as in TiddlyWiki's own filetype registry, and never stores it in the bytes
     // — a carrier IS its type, so the value is re-derived on every read rather than carried.
     const HOST_OWNED = new Set(["title", "revision", "type"]);
+    // `$…` NAMES THE HOST'S SHELF, NOT THE OPERATOR'S. TiddlyWiki hands that prefix to whatever stands
+    // the wiki, so the grammar's own carriage lives there — the prologue, the preamble, the header
+    // text, the slot a fragment fills, the bytes trailing the frame. Those rebuild from the frame on
+    // every recompose and never reach the iam, which is what keeps `postamble` and `slot` available to
+    // an author as ordinary custom fields.
+    const isCarriage = (k: string) => k.charAt(0) === "$";
     const carrier = readFileSync(path.join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/ahu.mem"), "utf8");
     const uri = `lar:///${/^uri-path\s*=\s*"([^"]+)"/m.exec(carrier)![1]!}`;
-    const base = deserialize(carrier, uri);
-    const produced = [...new Set(base.flatMap((r) => Object.keys(r)))].filter((k) => !HOST_OWNED.has(k));
+    const base = deserializeFromSource(carrier, uri);
+    const produced = [...new Set(base.flatMap((r) => Object.keys(r)))].filter((k) => !HOST_OWNED.has(k) && !isCarriage(k));
 
     const lost: string[] = [];
     for (const key of produced) {
@@ -223,7 +246,7 @@ describe.skipIf(wikiSkip)(
       const by  = new Map(records.map((r) => [r["title"] as string, r]));
       const out = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, uri);
       if (out === null) { lost.push(`${key}: projected to nothing`); continue; }
-      const back = deserialize(out, uri);
+      const back = deserializeFromSource(out, uri);
       const got  = String((back.find((r) => r["title"] === target["title"]) ?? back[0])?.[key] ?? "");
       const survived = key === "text" ? got.includes("EDITED") : got === edited;
       if (!survived) lost.push(key);
@@ -273,7 +296,7 @@ describe.skipIf(wikiSkip)(
       const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(disk)?.[1];
       if (!uri) continue;
       const title = `lar:///${uri}`;
-      const records = deserialize(disk, title);
+      const records = deserializeFromSource(disk, title);
       if (records.length === 0) continue;
       const by = new Map(records.map((r) => [r["title"] as string, r]));
       const rendered = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, title);

@@ -178,7 +178,7 @@ export function memeticWikitextDeserializer(
     const tiddlers = safeSplitMeme(uri, memeText, asStringFields(fields));
     if (prologue.length > 0 && tiddlers.length > 0 && ev === closes[0]) {
       // Copy prologue to ALL tiddlers so the template needs only `has[prologue]`.
-      for (const t of tiddlers) t["prologue"] = prologue;
+      for (const t of tiddlers) t["$prologue"] = prologue;
     }
     // Extract namespace prefix glyph(s) from SOH line (e.g. "ॐ ँ", "⊙").
     // Stored only when non-empty; template emits it before the control char.
@@ -200,7 +200,7 @@ export function memeticWikitextDeserializer(
       for (const t of tiddlers) t["namespace"] = namespace;
     }
     if (sohCode === "0011" && tiddlers.length > 0) {
-      tiddlers[0]!["carrier-soh"] = "0011";
+      tiddlers[0]!["$carrier-soh"] = "0011";
     }
     // WHAT MAY STAND BETWEEN ETX AND EOT — the BCC, and nothing else.
     //
@@ -213,14 +213,14 @@ export function memeticWikitextDeserializer(
     // would have answered with.
     if ((postamble.trim().length > 0 || slotText.trim().length > 0)
         && tiddlers.length > 0 && ev === closes[closes.length - 1]) {
+      // A block check needs no record: the emitter mints one over every framed body, so an arriving
+      // check is a fact already true of the bytes and nothing has to remember that it stood.
       const slot = classifyPostamble(slotText);
-      if (slot.kind === "bcc") {
-        tiddlers[0]!["block-check"] = slot.digest;
-      } else if (slot.kind === "foreign") {
-        tiddlers[0]!["postamble-foreign"] = String(slot.lines);
+      if (slot.kind === "foreign") {
+        tiddlers[0]!["$postamble-foreign"] = String(slot.lines);
       }
       // The raw slot rides on regardless, so a refusal can still show the operator their own bytes.
-      tiddlers[0]!["postamble"] = postamble;
+      tiddlers[0]!["$postamble"] = postamble;
     }
     result.push(...tiddlers);
   }
@@ -460,8 +460,8 @@ function splitMemeToTiddlers(
     title: uri,
     type:  CARRIER_TYPE,
     text:  normalizedBodyRewritten,
-    ...(preIamContent.trim()   ? { preamble:     preIamContent }   : {}),
-    ...(headerRewritten.trim() ? { "header-text": headerRewritten } : {}),
+    ...(preIamContent.trim()   ? { "$preamble":    preIamContent }   : {}),
+    ...(headerRewritten.trim() ? { "$header-text": headerRewritten } : {}),
   };
 
   const result: TiddlerFields[] = [parent, ...allChildren];
@@ -548,10 +548,10 @@ function splitRecursive(
       title:             childUri,
       text:              childStructure.text,
       "uri-path":        childUriPath,
-      "fragment-parent": enclosingUri,
-      slot:              block.slot,
-      ...(childStructure.preamble      ? { preamble:    childStructure.preamble }  : {}),
-      ...(childStructure.postamble     ? { postamble:   childStructure.postamble } : {}),
+      "$fragment-parent": enclosingUri,
+      "$slot":            block.slot,
+      ...(childStructure.preamble      ? { "$preamble":  childStructure.preamble }  : {}),
+      ...(childStructure.postamble     ? { "$postamble": childStructure.postamble } : {}),
     });
     allChildren.push(...inner.children);
     rewritten += `<<~ kahea ahu ${block.slot} >>`;
@@ -794,14 +794,21 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 // routes through Py on capture, and a sensorium→wiki pull MUST carry ALL its
 // metadata. So `lar_*` sensorium fields (`lar_agent_handle`, `lar_ffz`,
 // `lar_root_handle`, …) round-trip WHOLE — no prefix carries a blanket denial.
-// Only two `lar_*` markers stay denied by
-// surface degradation — derived-on-read diagnostics, never authored metadata,
-// so they stay off the operator's TOML (map never fuses to territory).
+//
+// NO OPERATOR NAME SITS HERE. TiddlyWiki restricts no field name and MultiWikiServer restricts two,
+// so this set holds those two and their record-stratum siblings and nothing else. The grammar's OWN
+// carriage — the prologue, the preamble, the header text, the slot a fragment fills, the parent it
+// hangs from, the bytes trailing the frame — rides the `$…` namespace TW5 keeps for a host, which
+// `emitIamToml` drops wholesale. An author who writes `postamble` or `slot` now gets an ordinary
+// custom field that round-trips like any other, because the grammar stopped standing on those words.
+//
+// That move also closed a hole the name-list could not: `preamble` and `carrier-sila` were read as
+// carriage and denied nowhere, so they emitted into the iam AND rebuilt as structure — an operator's
+// value came back undefined and the projection stopped settling. A namespace covers what a list
+// forgets.
 const IAM_DENY: ReadonlySet<string> = new Set([
   // envelope + record stratum — reconstructed on recompose, never authored TOML
   "title", "text", "modified", "revision",
-  "slot", "fragment-parent", "postamble", "prologue",
-  "header-text", "ahu-parent", "ahu-slot", "carrier-soh",
   // transient parse-grade diagnostics — stamped on ingest, denied by exact name
   // RESIDENCY IS NOT IDENTITY. The nalu engine annotates every inbound write with `origin-bag` so the
   // READ path can surface which bag answered — that is its whole job, and it belongs on the record.
@@ -813,8 +820,6 @@ const IAM_DENY: ReadonlySet<string> = new Set([
   // Measured: with this denied, a full re-seed rewrites 0 lines of `bags/`. Before it, 480 carriers
   // came back changed on every cycle, none of it content.
   "origin-bag",
-  // The block check attests the span it follows; it is frame, never an authored iam field.
-  "block-check", "postamble-foreign",
 ]);
 // Authored identity re-emits: the deny-set
 // holds MACHINE stamps only. `type` re-emits verbatim — the carrier
@@ -929,8 +934,8 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
     // Diff the child against ITS parent; recurse with the child as the next level's parent.
     const iam   = emitIamToml(child, CHILD_IAM_DENY, parentFields);
     const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""), child);
-    const pre   = typeof child["preamble"]  === "string" ? child["preamble"]  : "";
-    const post  = typeof child["postamble"] === "string" ? child["postamble"] : "";
+    const pre   = typeof child["$preamble"]  === "string" ? child["$preamble"]  : "";
+    const post  = typeof child["$postamble"] === "string" ? child["$postamble"] : "";
     // The iam block sits FLUSH against the ahu sigil line (mirroring the parent carrier's SOH+iam) —
     // a single newline, no blank between. A blank line then separates any content below. A preamble
     // (rare) keeps the older sigil-then-blank spacing since content precedes the iam there.
@@ -977,13 +982,13 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // The emitter reads the shared table rather than spelling the entities inline: a mark that leaves
   // the grammar leaves here too, instead of surviving as a literal no reader still scans for.
   const MARK = (name: string): string => frameMark(FRAME_BY_NAME[name]!)!.code;
-  const sohCode = f["carrier-soh"] === "0011" ? MARK("SOH2") : MARK("SOH");
+  const sohCode = f["$carrier-soh"] === "0011" ? MARK("SOH2") : MARK("SOH");
   // NAMED PARAMS RIDE IN FRONT; THE ARROW KEEPS ITS SHAPE. A parameter states a PROPERTY, the arrow
   // states a RELATION — `? -> uri` reads "this carrier resolves toward that address". Folding the
   // bearing into a quoted attribute would demote a relation to a field and break the scan that reads it.
   const ns = str("namespace").trim();
 
-  let out = str("prologue");
+  let out = str("$prologue");
   // THE DECLARATION IS THE CARRIER'S BUSINESS, exactly as the frame is. An author writes content and
   // identity; which grammar reads the result is not a question they should have to answer, and a
   // carrier that never carried a declaration would otherwise never gain one — the projection would
@@ -994,9 +999,9 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // together. What the author wrote ABOVE the declaration still rides in `prologue` and emits first.
   out += `${DECLARATION}\n\n`;
   out += `<<^ code:"${sohCode}"${ns ? ` namespace:"${ns}"` : ""} ? -> ${memeUri} >>\n`;
-  out += str("preamble");
+  out += str("$preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
-  out += expandRefs(reader, memeUri, "", str("header-text"), f);
+  out += expandRefs(reader, memeUri, "", str("$header-text"), f);
   // THE SPAN OPENS HERE. The check covers STX-open through ETX-close inclusive, so the emitter marks
   // where the body begins and computes over the bytes it has actually assembled — never over a field.
   const spanStart = out.length;
@@ -1007,12 +1012,16 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   //
   // COMPUTED HERE, NEVER READ FROM A FIELD. A stored check goes stale the moment the bytes move, and
   // the span carries the frame sigils' OWN bytes — so a frame migration would turn every stored check
-  // into a `mismatch` over a body nobody touched. The parser lands an arriving check on `block-check`;
-  // the emitter reads that field for PRESENCE alone and recomputes the value, which is what lets a
-  // stamped carrier survive a round trip at all.
-  const sila = str("carrier-sila");
+  // into a `mismatch` over a body nobody touched.
+  //
+  // MINTED UNCONDITIONALLY, on the DECLARATION's precedent. The frame owns this slot, so the parse
+  // stores no copy and nothing here asks whether one stood — a presence flag and the field it guarded,
+  // gone together. That flag was the last thing keeping a machine-derived fact on the operator's
+  // record, and a carrier that arrived unchecked gains its check on the first projection rather than
+  // staying unchecked because it always had been.
+  const sila = str("$carrier-sila");
   out += `\n\n<<^ code:"${MARK("ETX")}" >>`;
-  if (str("block-check")) out += bccOfSpan(out.slice(spanStart));
+  out += bccOfSpan(out.slice(spanStart));
   out += "\n";
   if (sila) out += `\n${sila}\n<<^ code:"${MARK("ETB")}" >>\n`;
   out += `\n<<^ code:"${MARK("EOT")}" -> ? >>\n`;
@@ -1020,7 +1029,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;
   // trailing closer).
-  out += stripLeadingNewlines(str("postamble"));
+  out += stripLeadingNewlines(str("$postamble"));
   return out;
 }
 
@@ -1045,7 +1054,7 @@ export function deserializeCarrier(
     // slot below it carries the check alone, so anything written there reaches no reader and no render
     // reproduces it. Absent this NAK the body simply vanishes: two `#edges` blocks went that way, and
     // nothing said a word.
-    const stranded = record["postamble-foreign"];
+    const stranded = record["$postamble-foreign"];
     if (stranded !== undefined) {
       diagnostics.push({
         from: 0, to: text.length, severity: "error",

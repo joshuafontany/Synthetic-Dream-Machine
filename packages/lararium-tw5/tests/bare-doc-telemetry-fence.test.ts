@@ -42,7 +42,7 @@ describe("bare doc — ALL BODY, centered between minted STX/ETX", () => {
   test("parses as one record whose text carries the whole content", () => {
     expect(records).toHaveLength(1);
     expect(records[0]!.text).toBe(bare);
-    expect(records[0]!["header-text"] ?? "").toBe("");
+    expect(records[0]!["$header-text"] ?? "").toBe("");
   });
 
   test("recompose centers the content between STX and ETX (no empty body slot)", () => {

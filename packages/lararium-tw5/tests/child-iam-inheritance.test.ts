@@ -25,7 +25,7 @@ describe("child iam inheritance (parent-diff)", () => {
     title: ROOT,
     type: CARRIER_TYPE,
     namespace: "ns",
-    "carrier-soh": "0001",
+    "$carrier-soh": "0001",
     text: "<<~ kahea ahu #kid >>",
   };
 

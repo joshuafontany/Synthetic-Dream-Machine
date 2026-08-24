@@ -29,7 +29,7 @@
  *
  * Group routing (carrier-whole at rest, disk-projection#projection-routing):
  *   memetic-wikitext records form a tiddler-group keyed by the carrier root.
- *   A child change climbs `fragment-parent` to the root; debounce keys per
+ *   A child change climbs `$fragment-parent` to the root; debounce keys per
  *   (bag, root); the flush renders the ROOT — one carrier, one file. A
  *   fragment URI never owns a disk path (bag-paths returns null for them).
  *
@@ -180,13 +180,13 @@ export class LarDiskProjector {
     this._tw5 = tw5;
     const wiki = tw5.$tw.wiki;
     // Group routing: a fragment record's change belongs to its carrier root.
-    // Climb `fragment-parent` one hop at a time (the field points one level
+    // Climb `$fragment-parent` one hop at a time (the field points one level
     // up); for a deleted record the chain is gone, so fall back to the URI
     // fragment-path law (`root#a/b` → `root`).
     const routeToRoot = (title: string): string => {
       let cur = title;
       for (let hops = 0; hops < 32; hops++) {
-        const parent = (wiki.getTiddler?.(cur)?.fields as Record<string, unknown> | undefined)?.["fragment-parent"];
+        const parent = (wiki.getTiddler?.(cur)?.fields as Record<string, unknown> | undefined)?.["$fragment-parent"];
         if (typeof parent !== "string" || parent.length === 0) break;
         cur = parent;
       }

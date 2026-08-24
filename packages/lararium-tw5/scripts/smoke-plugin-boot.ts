@@ -109,11 +109,11 @@ async function main(): Promise<void> {
   const parent = deserialized?.[0];
   if (!parent) failures.push("deserializer returned no parent tiddler");
   else {
-    if (typeof parent["prologue"] !== "string" || !(parent["prologue"] as string).includes("DOCTYPE")) {
-      failures.push(`prologue missing or wrong: ${JSON.stringify(parent["prologue"])}`);
+    if (typeof parent["$prologue"] !== "string" || !(parent["$prologue"] as string).includes("DOCTYPE")) {
+      failures.push(`prologue missing or wrong: ${JSON.stringify(parent["$prologue"])}`);
     }
-    if (typeof parent["postamble"] !== "string" || !(parent["postamble"] as string).includes("trailing prose")) {
-      failures.push(`postamble missing or wrong: ${JSON.stringify(parent["postamble"])}`);
+    if (typeof parent["$postamble"] !== "string" || !(parent["$postamble"] as string).includes("trailing prose")) {
+      failures.push(`postamble missing or wrong: ${JSON.stringify(parent["$postamble"])}`);
     }
   }
 
@@ -147,11 +147,11 @@ async function main(): Promise<void> {
     if (parentSlot["field"] !== "value") {
       failures.push(`slot iam field not parsed: ${JSON.stringify(parentSlot["field"])}`);
     }
-    if (typeof parentSlot["preamble"] !== "string" || !(parentSlot["preamble"] as string).includes("leading slot prose")) {
-      failures.push(`slot preamble missing or wrong: ${JSON.stringify(parentSlot["preamble"])}`);
+    if (typeof parentSlot["$preamble"] !== "string" || !(parentSlot["$preamble"] as string).includes("leading slot prose")) {
+      failures.push(`slot preamble missing or wrong: ${JSON.stringify(parentSlot["$preamble"])}`);
     }
-    if (typeof parentSlot["postamble"] !== "string" || !(parentSlot["postamble"] as string).includes("trailing slot prose")) {
-      failures.push(`slot postamble missing or wrong: ${JSON.stringify(parentSlot["postamble"])}`);
+    if (typeof parentSlot["$postamble"] !== "string" || !(parentSlot["$postamble"] as string).includes("trailing slot prose")) {
+      failures.push(`slot postamble missing or wrong: ${JSON.stringify(parentSlot["$postamble"])}`);
     }
   }
 
