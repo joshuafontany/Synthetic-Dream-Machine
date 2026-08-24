@@ -91,7 +91,38 @@ EXEMPT: dict[str, str] = {
 missing = [t for t in tools if not has_door(t) and t not in EXEMPT]
 exempt  = [t for t in tools if not has_door(t) and t in EXEMPT]
 
+# ── THE PORT, WHICH BOTH SURFACES ACTUALLY SPEAK THROUGH ────────────────────────────────────────────────
+# The two lists above are the THIN surfaces. Under them stands the daemon verb registry — the port a CLI
+# door and an MCP tool both reach the same reactor through — and nothing had ever counted it. A witness
+# comparing two adapters to each other reports parity while the thing they adapt goes unmeasured, and the
+# larger set is the one where a verb can stand with no way for an operator to reach it.
+#
+# So every registered verb sorts into a NAMED bucket. `orphan` is not a failure — this house builds
+# daemon-side before it builds doors — but it must be COUNTED, because an uncounted verb is a capability
+# nobody chose to leave unreachable.
+REG = re.compile(r'registry\.register\(\s*"([a-z][a-z0-9_.-]*)"')
+registered: set[str] = set()
+for f in pathlib.Path("packages").rglob("src/**/*.ts"):
+    if "/dist/" in str(f): continue
+    registered |= set(REG.findall(f.read_text(errors="ignore")))
+registered = {r.replace("_", "-") for r in registered}
+
+both      = sorted(v for v in registered if v in tools and has_door(v))
+cli_only  = sorted(v for v in registered if v not in tools and has_door(v))
+mcp_only  = sorted(v for v in registered if v in tools and not has_door(v))
+orphan    = sorted(v for v in registered if v not in tools and not has_door(v))
+
 print(f"[surface-parity] MCP tools: {len(tools)}   CLI doors reachable: {len(tools) - len(missing) - len(exempt)}")
+print(f"[surface-parity] daemon registry: {len(registered)} verbs  "
+      f"→ all-three {len(both)} · cli-only {len(cli_only)} · mcp-only {len(mcp_only)} · unreached {len(orphan)}")
+# A COUNT THAT NEVER MOVES IS A COUNT NOBODY READS. The unreached set prints in full so its growth shows.
+if orphan:
+    print(f"  UNREACHED by either surface ({len(orphan)}) — daemon-side capability with no operator door:")
+    for v in orphan: print(f"    {v}")
+if mcp_only:
+    print(f"  MCP-only ({len(mcp_only)}) — an agent may call what an operator cannot:")
+    for v in mcp_only: print(f"    {v}")
+
 for t in exempt:
     print(f"  EXEMPT  {t}")
     print(f"          {EXEMPT[t]}")
