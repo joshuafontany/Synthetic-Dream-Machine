@@ -76,30 +76,36 @@ Lararia stabilize through use. Offerings, repeated gestures, negotiated rites, a
 
 !! Infrastructure Map
 
-This directory holds the lararium infrastructure — the meme-graph boot chain, API invariants, and docs shelves that define the Lares node.
+The `lares` bag holds the node's own law and its working shelves. ''Every file here carries the `.mem`
+extension and declares its own address''; the directory only says where the bytes rest, and a carrier's
+`uri-path` says what it IS.
 
 ```
-lares/
-  AGENTS.md           — threshold constitution; boot router
-  LARES.md            — session dials; operator-editable configuration
-  README.md           — this carrier; identity frame and infrastructure map
-  grammars/           — shadow grammar layer (memetic-wikitext sigil registry)
-  lararium-node/      — adjacent docs (ROADMAP, MULTIPLAYER, research carriers)
-  ha-ka-ba/
-    api/         — invariant meme graph (stable law)
-      pono/           — language and epistemic primitives
-      mu/             — null-oracle core shore
-      lararium/       — canonical lararium seat and child rooms
-    docs/             — working docs shelves (research, extraction, refinement)
-      lararium/       — lararium-side working docs
-      mu/             — mu-side docs
-      pono/           — pono-side docs
-      story/          — Elyncia fiction and world-building
-      crystal/        — session continuity and memory
-    library/          — source texts (Discordian, research, archive)
+bags/lares/ha.ka.ba/lares/
+  README.mem            this carrier — identity frame and infrastructure map
+  api/                  171 carriers — the law shelf. THESE GO OUT AS SPECS.
+    pono/         142    language, address, carrier, and epistemic law
+    masks/         10    the mask layer
+    mu/             8    the five tools and the null-oracle shore
+    vendor/         1    declarations for outside artifacts this tree carries
+  docs/                  93 carriers — research, history, and the docs sisters of the law
+    pono/          33    the extended docs beside api/pono
+    history/       23    the arc that lifted: the Lindwyrm records, the consume archive,
+                         the period-forms law that governs how an early HUD reads
+    lararium_mcp/   7    MCP compiler planning
+    mu/             5  · voices/ 5 · graph/ 4
+  cli/                    2 carriers — the command surface
+  library/                3 carriers — shelf indexes; the acquired bodies rest outside every
+                          tracked tree, in the vessel's own library tier
 ```
 
-''Boot chain:'' `AGENTS.md → Mu (+ core) → Lararium (+ HUD, Voices, Continuity) → LARES`
+''The `api`/`docs` split carries weight beyond tidiness.'' A carrier under `api/` states law and travels
+as a specification; a carrier under `docs/` explains, records, or researches. A section that states
+conformance belongs in one; a section that tells how the design arrived belongs in the other.
+
+''Boot chain:'' a surface's seed → `noosphere-boot` (the constitution) → `pono/config` (the session
+dials). One seed per surface, all of them on disk — a CLI agent takes a pointer from its instructions
+file, a browser agent takes the carrier pasted in.
 
 ''The operator steers. This node crews.''
 
@@ -113,11 +119,12 @@ lares/
 
 * `lar:///ha.ka.ba/lares/api/mu` — null-oracle core, five-season loop
 * `lar:///ha.ka.ba/lares/api/lararium` — canonical seat and hydration bridge
-* `lar:///ha.ka.ba/lares/docs/voices/` — Voice house (the Thirteen), worker swarm, mask layer
+* `lar:///ha.ka.ba/lares/docs/voices` — the Voice house (the Thirteen), worker swarm, mask layer
 * `lar:///ha.ka.ba/lararium/docs/degraded-states` — named failure modes and correction handles
-* `lar:///ha.ka.ba/lararium/docs/signal/` — signal, HUD, and exchange boundary docs
-* `lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext` — sigil registry and parse rules
-* `lar:///lararium-node/ROADMAP` — implementation roadmap and milestone tracking
+* `lar:///ha.ka.ba/lares/docs/history/period-forms` — how an early carrier's HUD reads, and what MUST NOT be modernized in place
+* `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` — the grammar, its frame, and the block check
+* `lar:///ha.ka.ba/lares/api/pono/lar-uri` — the address law
+* `lar:///ha.ka.ba/lares/api/pono/has-stack` — what a carrier WEARS, since a carrier holds one intrinsic and composes the rest
 
 <<~/ahu >>
 
@@ -131,6 +138,6 @@ lares/
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;idwgvaY5kdK7uiwITAACycCdoP8vBQFcJxMe_P8P_Kg
+<<^ code:"&#x0003;" >>ni:///sha-256;2fXG78rRExNs3-i9Q524B5W-eglczaa0OL-4biBD7S8
 
 <<^ code:"&#x0004;" -> ? >>
