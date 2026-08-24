@@ -355,7 +355,12 @@ Edge and definition sigils carry render directives. `aka` embeds frozen content;
 
 !! Pranala — The Typed Edge System
 
-A pranala edge MUST declare a ''family'' from the canonical set. Families carry role vocabularies and contract flags; the canonical taxonomy lives at `lar:///ha.ka.ba/lares/api/pono/pranala-families`. The families align to the two render surfaces:
+An edge carries its semantics in its ''sigil'', never in an attribute: the sugar names below each bind
+one kind, and the edge law admits exactly one attributed form at rest — the code source-pointer,
+`family:code role:has` (`lar:///ha.ka.ba/lares/api/pono/pranala`). Anything richer reifies as a ''wire''
+entity wearing a family as a stack component — examples, never an enum (has-stack clause 4). The table
+maps the sugar sigils to the semantic families their wire components carry, aligned to the render
+surfaces:
 
 | family | sugar | surface | carries |
 |---|---|---|---|
@@ -461,7 +466,7 @@ leaves non-canonical.
 
 A ''conforming document'' MUST: satisfy the grammar (#lexical-structure, #grammar), every
 `block-close` matching the innermost open of the same sigil name; state `code:` as the first parameter
-of every frame sigil; declare a family from the canonical set on every pranala edge (#pranala); keep
+of every frame sigil; carry at most the one attributed pranala form at rest — the code source-pointer, `family:code role:has` (#pranala); keep
 guest regions inside their fences, host primitives intact (#guest-grammar); and carry at most one text
 frame (#the-touchstone). A document that fails a clause still parses — graceful parsing holds — and
 parses as a document in fault, the gradient naming what it lacks.
@@ -1304,6 +1309,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;A4VUL8f-bzHWa8fHMh4lgA-c_Ho6ocxqI7tEpw0rNUU
+<<^ code:"&#x0003;" >>ni:///sha-256;MzsdL2vpF0S1Oe4yv79QqzLDWhX2yEj_mHc7EeAbl4A
 
 <<^ code:"&#x0004;" -> ? >>
