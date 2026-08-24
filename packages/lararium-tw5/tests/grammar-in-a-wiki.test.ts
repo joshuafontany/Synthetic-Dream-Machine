@@ -269,7 +269,10 @@ describe.skipIf(wikiSkip)(
    * The canonical form states seven laws for this block. This is what asks whether the corpus keeps
    * them.
    */
-  test("a carrier's iam block already reads as the emitter would write it", () => {
+  // A corpus-wide walk over 600+ carriers — its cost scales with the corpus and with machine load
+  // (a parallel build once pushed it past the 5s default and flaked a green law red). The budget says
+  // what the test is: thorough, never fast.
+  test("a carrier's iam block already reads as the emitter would write it", { timeout: 30_000 }, () => {
     const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
       .split("\n").filter(Boolean);
     const iamOf = (t: string) => /```toml iam\n([\s\S]*?)\n```/.exec(t)?.[1] ?? null;
