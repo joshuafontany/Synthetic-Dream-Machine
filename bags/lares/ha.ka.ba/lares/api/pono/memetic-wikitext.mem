@@ -83,6 +83,12 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''declaration'' | a `<<!WORD >>` statement read before content, selecting or constraining the grammar. |
 | ''namespace'' | the resonance glyph a carrier's heading states, naming which layer authored it. |
 | ''block check'' | a check computed over the framed span, carried adjacent to ETX (#control-set). |
+| ''document'' | the artifact class: one meme's encoded structure (#abstract-syntax); a carrier wraps a document in the frame. |
+| ''processor'' | the umbrella product class: any software reading, transforming, or rendering memetic-wikitext. Every processor obligation binds all of the subclasses below. |
+| ''parser'' | a processor reading surface into the graph-layer AST and typed edges. |
+| ''carrier reader'' | a processor reading and minting the frame: marks, declaration, boundary normalization, the check. |
+| ''renderer'' | a processor projecting the parse into a camera. |
+| ''consumer'' | a processor admitting carriers to a bag; the verdict obligations (#the-touchstone) bind here. |
 
 <<~/ahu >>
 
@@ -446,6 +452,19 @@ without the grammar moving.)//
 <<~ ahu #conformance >>
 
 !! Conformance Classes
+
+Two kinds of thing conform: the ''document'' (the artifact) and the ''processors'' that handle it —
+''parser'', ''carrier reader'', ''renderer'', and ''consumer'' (#terminology). An obligation stated on
+''a processor'' binds every subclass; an obligation on a named subclass binds it alone. Authors carry
+SHOULD-strength guidance only: the corpus gets written by hand, and the projection re-mints what a hand
+leaves non-canonical.
+
+A ''conforming document'' MUST: satisfy the grammar (#lexical-structure, #grammar), every
+`block-close` matching the innermost open of the same sigil name; state `code:` as the first parameter
+of every frame sigil; declare a family from the canonical set on every pranala edge (#pranala); keep
+guest regions inside their fences, host primitives intact (#guest-grammar); and carry at most one text
+frame (#the-touchstone). A document that fails a clause still parses — graceful parsing holds — and
+parses as a document in fault, the gradient naming what it lacks.
 
 A ''conforming parser'' MUST: accept the surface of #grammar; read every sigil as a TW5 macro call
 (#lexical-structure); map aliases to canonicals; produce the graph-layer AST and typed edges; enforce
@@ -1285,6 +1304,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;yV-I41Ni7pQQuNnq9XiSw02kpndC6PDeBGcFdViAAvA
+<<^ code:"&#x0003;" >>ni:///sha-256;Jhe-3NHX42yoDk8fi5gktXrgUKC0phbGVSg3THuwX78
 
 <<^ code:"&#x0004;" -> ? >>
