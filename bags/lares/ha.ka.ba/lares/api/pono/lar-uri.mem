@@ -100,21 +100,20 @@ path          = triple [ "/" child1 ] *( "/" segment )
 
 triple        = word "." word "." word     ; Ha heading . Ka angle . Ba dynamic
 child1        = surface / namespace         ; the child[1] fork: a CRDT surface, or a bare namespace
-surface       = ( "bags" / "wikis" ) "/" slug      ; a CRDT surface: bags/slug · wikis/slug
+surface       = ( "bags" / "wikis" ) "/" segment   ; a CRDT surface: bags/slug · wikis/slug
               / "cid" "/" hash                     ; an immutable content-addressed artifact
-namespace     = name                       ; a bare meme minting namespace;
+namespace     = segment                    ; a bare meme minting namespace;
                                             ;   MUST NOT equal a kind-plane word (bags / wikis / cid)
-slug          = 1*( unreserved / "@" )     ; an opaque surface name
-segment       = 1*( unreserved / pct-encoded )
+segment       = 1*pchar                    ; pchar per [RFC3986] §3.3 — imported, not restated;
+                                            ;   a segment stays opaque to the generic syntax
 word          = stem *( "-" stem )         ; one slot: a word, or a hyphen-joined compound
 stem          = 1*( %x61-7A )              ; lowercase only
-name          = 1*( unreserved )
 hash          = 1*( unreserved )
 alias         = 1*( unreserved )
 grant         = 1*( unreserved )
 ```
 
-A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class is exempt. Of the path productions, `slug` alone admits a raw `@`; elsewhere the character travels only percent-encoded, and the two spellings stay two names (#equality). The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
+A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class is exempt.  The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
 
 ''The scheme-relative form: `uri-path`.'' Instruments and carrier declarations abbreviate an address to
 its `uri-path` — the spelling with the leading `lar:///` removed, codepoint-identical to the path it
@@ -451,6 +450,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WqHbi18ViN9iKkSUHW59ijjhdRLY4EuJ1uqeIhXPNgM
+<<^ code:"&#x0003;" >>ni:///sha-256;KF-sYmNGWWpth4p4HKAUwDwAoQMX9deNkpFw-I1nVPg
 
 <<^ code:"&#x0004;" -> ? >>
