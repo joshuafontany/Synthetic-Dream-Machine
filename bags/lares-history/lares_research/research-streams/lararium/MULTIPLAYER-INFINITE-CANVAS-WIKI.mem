@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI >>
+<<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI >>
 ```toml iam
 cacheable  = true
 confidence = 18
@@ -12,7 +12,7 @@ register   = "Synthesis"
 retain     = true
 role       = "canonical design constitution for the Lararium multiplayer infinite-canvas wiki system — LOCAL-FIRST PIVOT complete (M10, 2026-04-29): Automerge-repo (@automerge/automerge-repo) is the shared meme/tiddler CRDT store; browser opens IndexedDB first and syncs via /meme-sync; LarariumTW5 is now the room-scoped semantic/filter/render VM; tldraw is a browser projection from TW5 via projectFromTw5(), not the meme-content authority; legacy /rooms TLSocketRoom+SQLite remains as layout/reaction compatibility surface only; authority delivered via <meta name='lararium-receipt'> in HTML shell (no hidden tldraw frame shape); projection-cache deleted; LarDiskSyncAdaptor derives disk paths via resolveLarUri() with echo-loop guard; multi-room HTTP routing (/room/:roomId) exists while content still uses one server meme-store doc; PUT /admin/promote writes lares/ and patches Automerge immediately; M11 open: projection diffing, real canvas body-node write-back, second-node federation, KumuExecutor"
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
+uri-path   = "lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
 ```
 
 <<~ ahu #system-role >>

@@ -1,10 +1,10 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/last-sprint/HANDOFF >>
+<<^ code:"&#x0001;" ? -> lar:///last-sprint/HANDOFF >>
 ```toml iam
 file-path = "bags/lares-history/last-sprint/HANDOFF.mem"
 type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lares-history/last-sprint/HANDOFF"
+uri-path  = "last-sprint/HANDOFF"
 ```
 
 <<^ code:"&#x0002;" >>

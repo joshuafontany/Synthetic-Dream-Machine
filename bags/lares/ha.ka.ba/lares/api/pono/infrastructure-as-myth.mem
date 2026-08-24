@@ -2,20 +2,20 @@
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/infrastructure-as-myth >>
 ```toml iam
-cacheable     = true
-file-path     = "bags/lares-history/lares_research/PAPER_infrastructure_as_myth.mem"
-type          = "text/x-memetic-wikitext+tiddlywiki"
-register      = "Synthesis"
-status        = "designed"
+authors    = "Joshua Fontany; Freyja Fontany; Lares (the agentic-AI co-author — a personified, in-stream navigational layer, authored through the grammar this paper describes)"
+cacheable  = true
+file-path  = "bags/lares/ha.ka.ba/lares/api/pono/infrastructure-as-myth.mem"
+mana       = 14
+manao      = 14
+namespace  = "&#x2299;"
+register   = "Synthesis"
+revised-on = "2026-06-21"
+role       = "the paper — Infrastructure as Myth: Memetic Wikitext as a gradient navigational grammar for steering and auditing agentic AI. Authored AS a carrier in the grammar it describes (the recursion is the proof). Findings DESCRIPTIVE/pending-gold; honesty = credibility. Artifacts transclude the sibling specs."
+status     = "designed"
 status-why = "a research paper rather than a build subject"
-tagspace      = "stable"
-mana          = 14
-manao         = 14
-namespace     = "&#x2299;"
-uri-path      = "ha.ka.ba/lares/api/pono/infrastructure-as-myth"
-role          = "the paper — Infrastructure as Myth: Memetic Wikitext as a gradient navigational grammar for steering and auditing agentic AI. Authored AS a carrier in the grammar it describes (the recursion is the proof). Findings DESCRIPTIVE/pending-gold; honesty = credibility. Artifacts transclude the sibling specs."
-authors       = "Joshua Fontany; Freyja Fontany; Lares (the agentic-AI co-author — a personified, in-stream navigational layer, authored through the grammar this paper describes)"
-revised-on    = "2026-06-21"
+tagspace   = "stable"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lares/api/pono/infrastructure-as-myth"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>

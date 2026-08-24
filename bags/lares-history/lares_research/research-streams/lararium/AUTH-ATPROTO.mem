@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO >>
+<<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/AUTH-ATPROTO >>
 ```toml iam
 cacheable  = true
 confidence = 18
@@ -14,7 +14,7 @@ register   = "Synthesis-Canon"
 retain     = true
 role       = "ATProto / Bluesky login architecture doctrine — BFF, identity layers, DPoP boundary"
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO"
+uri-path   = "lares_research/research-streams/lararium/AUTH-ATPROTO"
 ```
 
 <<^ code:"&#x0002;" >>

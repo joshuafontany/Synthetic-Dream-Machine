@@ -1,18 +1,18 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES >>
+<<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/PRINCIPLES >>
 ```toml iam
-uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/PRINCIPLES"
-file-path = "bags/lares-history/lares_research/research-streams/lararium/PRINCIPLES.mem"
-type = "text/x-memetic-wikitext+tiddlywiki"
+cacheable  = true
 confidence = 20
-register = "Synthesis-Canon"
-manaoio = 18
-mana = 19
-manao = 19
-role = "foundational operating principles for the quine-like self-replicating wiki-agentic-HUD"
-cacheable = true
-retain = true
+file-path  = "bags/lares-history/lares_research/research-streams/lararium/PRINCIPLES.mem"
+mana       = 19
+manao      = 19
+manaoio    = 18
+register   = "Synthesis-Canon"
+retain     = true
+role       = "foundational operating principles for the quine-like self-replicating wiki-agentic-HUD"
+type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "lares_research/research-streams/lararium/PRINCIPLES"
 ```
 
 <<^ code:"&#x0002;" >>

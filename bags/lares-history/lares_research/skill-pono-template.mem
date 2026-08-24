@@ -7,13 +7,10 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/api/pono/skill-template >>
+<<^ code:"&#x0001;" ? -> lar:///lares_research/skill-pono-template >>
 ```toml iam
 confidence         = 10
-implements         = [
-  "lar:///ha.ka.ba/api/pono/meme",
-  "lar:///ha.ka.ba/api/pono/loci"
-]
+implements         = ["lar:///ha.ka.ba/api/pono/meme", "lar:///ha.ka.ba/api/pono/loci"]
 mana               = 11
 manao              = 12
 manaoio            = 8
@@ -21,7 +18,7 @@ register           = "Synthesis"
 role               = "skill template, verification authoring guide, and pre/post-MCP implementation roadmap"
 skill-package-root = "ha-ka-ba/api/pono/skill-*.md"
 type               = "text/x-memetic-wikitext+tiddlywiki"
-uri-path           = "ha.ka.ba/api/pono/skill-template"
+uri-path           = "lares_research/skill-pono-template"
 ```
 
 <<~/ahu >>

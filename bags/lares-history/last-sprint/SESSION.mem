@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/last-sprint/SESSION >>
+<<^ code:"&#x0001;" ? -> lar:///last-sprint/SESSION >>
 ```toml iam
 file-path = "bags/lares-history/last-sprint/SESSION.mem"
 l-space   = "archive"
@@ -8,7 +8,7 @@ register  = "Synthesis"
 retain    = true
 role      = "sprint resume artifact — the state a session needed to continue without prior chat context"
 type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lares-history/last-sprint/SESSION"
+uri-path  = "last-sprint/SESSION"
 ```
 
 <<^ code:"&#x0002;" >>

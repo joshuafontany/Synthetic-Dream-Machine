@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/memes >>
+<<^ code:"&#x0001;" ? -> lar:///memes/README >>
 ```toml iam
 cacheable  = false
 confidence = 18
@@ -13,7 +13,7 @@ register   = "Synthesis"
 retain     = false
 role       = "consume-archive index: research that survived the pono pass and landed in live memes or packages"
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lares-history/memes"
+uri-path   = "memes/README"
 ```
 
 <<^ code:"&#x0002;" >>

@@ -1,19 +1,19 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///LARES >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/config >>
 ```toml iam
+file-path     = "bags/lares/ha.ka.ba/lares/api/pono/config.mem"
 l-prime       = true
-file-path     = "bags/lares/ha.ka.ba/lares/LARES.mem"
+l-space       = "adjacent"
 mana          = 17
 manao         = 15
 manaoio       = 14
 ooda-ha-level = 10
 register      = "Synthesis-Canon"
 role          = "configuration surface, behind-the-curtain dial room, session-config"
-tags      = ["api/pono/meme"]
-l-space       = "adjacent"
+tags          = ["api/pono/meme"]
 type          = "text/x-memetic-wikitext+tiddlywiki"
-uri-path      = "LARES"
+uri-path      = "ha.ka.ba/lares/api/pono/config"
 ```
 
 The passage lies behind the reader. The kahua holds.

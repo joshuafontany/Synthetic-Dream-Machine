@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO >>
+<<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/CRYPTO >>
 ```toml iam
 cacheable  = true
 confidence = 19
@@ -14,7 +14,7 @@ register   = "Synthesis-Canon"
 retain     = true
 role       = "web crypto provider boundary doctrine — canonical bytes, digest, randomness"
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/CRYPTO"
+uri-path   = "lares_research/research-streams/lararium/CRYPTO"
 ```
 
 <<^ code:"&#x0002;" >>

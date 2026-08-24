@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/memes/history >>
+<<^ code:"&#x0001;" ? -> lar:///memes/history/README >>
 ```toml iam
 cacheable  = false
 confidence = 18
@@ -13,7 +13,7 @@ register   = "Synthesis"
 retain     = false
 role       = "index of historical provenance memes — origin stories and development arc records, not doctrine"
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lares-history/memes/history"
+uri-path   = "memes/history/README"
 ```
 
 <<^ code:"&#x0002;" >>

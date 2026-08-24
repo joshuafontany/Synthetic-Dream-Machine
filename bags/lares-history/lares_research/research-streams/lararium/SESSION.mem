@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SESSION >>
+<<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/SESSION >>
 ```toml iam
 confidence = 18
 file-path  = "bags/lares-history/lares_research/research-streams/lararium/SESSION.mem"
@@ -12,7 +12,7 @@ manaoio    = 17
 register   = "Synthesis-Canon"
 role       = "session handoff crystal — 2026-05-03 (session 10) — M25 Loop 2 (partial): node peer oracle tiddler alignment; MemeSyncAdaptor 15 tests; CompositeStore.addProjection 4 tests; 172 passing (was 153)"
 type       = "text/x-memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SESSION"
+uri-path   = "lares_research/research-streams/lararium/SESSION"
 ```
 
 <<^ code:"&#x0002;" >>

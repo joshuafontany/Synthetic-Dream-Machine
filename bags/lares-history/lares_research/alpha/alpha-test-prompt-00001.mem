@@ -1,10 +1,10 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/alpha/test-prompt-00001 >>
+<<^ code:"&#x0001;" ? -> lar:///lares_research/alpha/alpha-test-prompt-00001 >>
 ```toml iam
 file-path = "bags/lares-history/lares_research/alpha/alpha-test-prompt-00001.mem"
 type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/alpha/test-prompt-00001"
+uri-path  = "lares_research/alpha/alpha-test-prompt-00001"
 ```
 
 <<~ ahu #iam >>

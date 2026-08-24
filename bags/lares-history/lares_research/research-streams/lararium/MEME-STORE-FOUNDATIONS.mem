@@ -1,9 +1,9 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
 ```toml iam
 type     = "text/x-memetic-wikitext+tiddlywiki"
-uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
+uri-path = "lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
 ```
 
 <<^ code:"&#x0002;" >>

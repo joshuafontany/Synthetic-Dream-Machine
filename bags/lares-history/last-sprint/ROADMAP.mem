@@ -1,10 +1,10 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/last-sprint/ROADMAP >>
+<<^ code:"&#x0001;" ? -> lar:///last-sprint/ROADMAP >>
 ```toml iam
 file-path = "bags/lares-history/last-sprint/ROADMAP.mem"
 type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lares-history/last-sprint/ROADMAP"
+uri-path  = "last-sprint/ROADMAP"
 ```
 
 <<^ code:"&#x0002;" >>

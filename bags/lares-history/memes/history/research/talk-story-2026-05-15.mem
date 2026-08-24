@@ -1,19 +1,19 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/history/research/talk-story-2026-05-15 >>
+<<^ code:"&#x0001;" ? -> lar:///memes/history/research/talk-story-2026-05-15 >>
 ```toml iam
-uri-path    = "ha.ka.ba/lares-history/history/research/talk-story-2026-05-15"
-file-path   = "bags/lares-history/memes/history/research/talk-story-2026-05-15.mem"
-type        = "text/x-memetic-wikitext+tiddlywiki"
-register    = "Synthesis-Canon"
+cacheable   = true
 confidence  = 18
+file-path   = "bags/lares-history/memes/history/research/talk-story-2026-05-15.mem"
+l-space     = "stable"
 mana        = 18
 manao       = 18
-l-space     = "stable"
-role        = "session log: 13-Voice Talk Story 2026-05-15 — Verse graph ontology research, yin-collapse architecture ruling, nalu/tick semantic split, one-graph-not-two law, six-operator concurrency ontology completion"
-cacheable   = true
+register    = "Synthesis-Canon"
 retain      = true
+role        = "session log: 13-Voice Talk Story 2026-05-15 — Verse graph ontology research, yin-collapse architecture ruling, nalu/tick semantic split, one-graph-not-two law, six-operator concurrency ontology completion"
 status-date = "2026-05-15"
+type        = "text/x-memetic-wikitext+tiddlywiki"
+uri-path    = "memes/history/research/talk-story-2026-05-15"
 ```
 
 <<^ code:"&#x0002;" >>
