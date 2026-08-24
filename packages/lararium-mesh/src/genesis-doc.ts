@@ -362,7 +362,7 @@ export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): Ge
   // Bag descriptor tiddlers.
   for (const { bagId, label, readPolicy, writePolicy } of ROOT_BAGS) {
     tiddlers[bagDescriptorUri(bagId)] = {
-      tiddler: { title: bagDescriptorUri(bagId), label, readPolicy, writePolicy, "origin-bag": ORACLE_DOC_URI },
+      tiddler: { title: bagDescriptorUri(bagId), label, readPolicy, writePolicy, "$origin-bag": ORACLE_DOC_URI },
       meta: { authority: "genesis" },
     };
   }
@@ -418,7 +418,7 @@ export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): Ge
           pluginJsonSha256:   att.pluginJsonSha256,
         }),
         tags: isPlugin ? "blob-descriptor plugin-descriptor" : "blob-descriptor",
-        "origin-bag": ORACLE_DOC_URI,
+        "$origin-bag": ORACLE_DOC_URI,
       },
       meta: { authority: "genesis" },
     };
@@ -431,7 +431,7 @@ export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): Ge
     tiddler: {
       title: GENESIS_CID_ENGINE_TIDDLER, text: "", cid: engineCid,
       note:  "engine content-CID (TW5 core + version) — the hearth true-name; slow ratchet",
-      "origin-bag": ORACLE_DOC_URI,
+      "$origin-bag": ORACLE_DOC_URI,
     },
     meta: { authority: "genesis" },
   };
@@ -439,7 +439,7 @@ export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): Ge
     tiddler: {
       title: GENESIS_CID_PLUGINS_TIDDLER, text: "", cid: pluginsCid,
       note:  "plugins content-CID (sorted plugin id/version/sha256) — fast ratchet",
-      "origin-bag": ORACLE_DOC_URI,
+      "$origin-bag": ORACLE_DOC_URI,
     },
     meta: { authority: "genesis" },
   };

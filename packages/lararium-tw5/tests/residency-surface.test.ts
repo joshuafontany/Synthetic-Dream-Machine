@@ -34,19 +34,19 @@ describe("getOriginBag", () => {
       "MyTiddler": {
         title:        "MyTiddler",
         text:         "from elyncia",
-        "origin-bag": "lar:///ha.ka.ba/bags/elyncia",
+        "$origin-bag": "lar:///ha.ka.ba/bags/elyncia",
       },
     });
     expect(getOriginBag(wiki, "MyTiddler")).toBe("lar:///ha.ka.ba/bags/elyncia");
   });
 
   test("returns null for empty-string origin-bag (treated as absent)", () => {
-    const wiki = makeWiki({ "T": { title: "T", "origin-bag": "" } });
+    const wiki = makeWiki({ "T": { title: "T", "$origin-bag": "" } });
     expect(getOriginBag(wiki, "T")).toBeNull();
   });
 
   test("returns null for non-string origin-bag (treated as absent)", () => {
-    const wiki = makeWiki({ "T": { title: "T", "origin-bag": 42 } });
+    const wiki = makeWiki({ "T": { title: "T", "$origin-bag": 42 } });
     expect(getOriginBag(wiki, "T")).toBeNull();
   });
 
@@ -56,7 +56,7 @@ describe("getOriginBag", () => {
       "T": {
         title:        "T",
         bag:          "lar:///ha.ka.ba/bags/personal",
-        "origin-bag": "lar:///ha.ka.ba/bags/personal",
+        "$origin-bag": "lar:///ha.ka.ba/bags/personal",
       },
     });
     expect(getOriginBag(wiki, "T")).toBe("lar:///ha.ka.ba/bags/personal");

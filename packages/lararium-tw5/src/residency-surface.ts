@@ -26,7 +26,7 @@ interface WikiLikeForOrigin {
  * Residency Model — return the bag URI that a tiddler's current value
  * surfaced from in this wiki. TW5 `getShadowSource` analog at the residency
  * layer. Returns null when the tiddler does not exist or carries no
- * `origin-bag` annotation (the latter normally means an in-memory-only or
+ * `$origin-bag` annotation (the latter normally means an in-memory-only or
  * draft tiddler that never travelled through CRDT inbound).
  *
  * The annotation gets populated by the nalu engine on inbound CRDT writes.
@@ -37,6 +37,6 @@ export function getOriginBag(wiki: WikiLikeForOrigin, title: string): string | n
   const tiddler = wiki.getTiddler(title);
   if (!tiddler) return null;
   const fields = tiddler.fields ?? {};
-  const v = fields["origin-bag"];
+  const v = fields["$origin-bag"];
   return typeof v === "string" && v.length > 0 ? v : null;
 }

@@ -213,8 +213,6 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<~/ahu >>
 
-Alpha test prompt closes the active session stream here.
-
-<<^ code:"&#x0003;" >>ni:///sha-256;P_p38zjB52xclSd53ACRBCGQyaDR_kvGnGKClMOQjp4
+<<^ code:"&#x0003;" >>ni:///sha-256;DUO8tshm_g-6ID24uuL9tU8KZxRxc7x8ezgiG_VWs8k
 
 <<^ code:"&#x0004;" -> ? >>
