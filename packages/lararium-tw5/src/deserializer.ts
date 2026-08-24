@@ -124,7 +124,7 @@ export function memeticWikitextDeserializer(
   // (⊙, ॐ ँ, …) then the SOH control-char reference directly — the same
   // shape the namespace extractor below reads. Anchoring on the SOH/SOH2
   // codes avoids matching unrelated `<<~ !DOCTYPE … >>` comments,
-  // `<<~ ? -> uri >>` pranala-headers, or later STX/ETX sentinels — an
+  // a speaking-head sigil, or later STX/ETX sentinels — an
   // any-control-char form swallows the whole header into `prologue` whenever
   // the SOH carries a namespace it cannot see.
   const sohM = maskedExec(text, /<<\^[^&\n]*&#x(?:0001|0011);/);

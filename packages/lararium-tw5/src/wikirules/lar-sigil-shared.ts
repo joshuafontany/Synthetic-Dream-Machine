@@ -128,32 +128,6 @@ export function matchCompoundSigilAt(
 }
 
 /**
- * Pranala-header form: `<<~ ? -> uri >>` — the carrier-to-canonical edge
- * declared at the top of a meme. Distinct from URI-form aka/kahea/loulou
- * because the leading "?" is a special token (this carrier itself), not a
- * sigil keyword.
- */
-export const PRANALA_HEADER_RE = /<<~\s*\?\s*->\s*(\S+)\s*>>/g;
-
-export interface PranalaHeaderMatch {
-  readonly start: number;
-  readonly end:   number;
-  readonly uri:   string;
-}
-
-export function matchPranalaHeaderAt(source: string, start: number): PranalaHeaderMatch | null {
-  PRANALA_HEADER_RE.lastIndex = start;
-  const m = PRANALA_HEADER_RE.exec(source);
-  if (!m || m.index !== start) return null;
-  const [, uri] = m;
-  return {
-    start: m.index,
-    end:   PRANALA_HEADER_RE.lastIndex,
-    uri:   uri!,
-  };
-}
-
-/**
  * Pranala edge sigil — explicit edge with from/to and optional slot/family/role.
  *
  * Inline form:  `<<~ pranala #name? <from> -> <to> [family:f] [role:r] >>`

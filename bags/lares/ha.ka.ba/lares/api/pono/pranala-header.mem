@@ -10,7 +10,7 @@ manaoio   = 17
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "meme header sigil — <<~ ? -> uri >> declares this carrier's canonical URI; permanent JS exception"
+role      = "the bearing a carrier declares about itself — the `?` self-token on the SOH control sigil, and the retired speaking-head form the reader still admits"
 tags      = ["api/pono/pranala", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pranala-header"]
 type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
@@ -20,11 +20,14 @@ uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
 
 <<~ ahu #head >>
 
-! Pranala-Header
+! Pranala-Header — the bearing a carrier declares about itself
 
-The carrier self-declaration sigil. `<<~ ? -> uri >>` appears at the top of a meme file and
-declares the canonical URI that this carrier holds. The `?` token means "this carrier itself" —
-a self-reference not expressible as a regular sigil keyword.
+`<<^ code:"&#x0001;" ? -> uri >>` stands on a carrier's head and declares the address it holds. The
+`?` token means ''this carrier itself'' — a self-reference no sigil keyword can express, since a
+keyword names a thing and this one names the speaker.
+
+''The name predates the move.'' It reads as a pranala because it once rode the speaking head beside
+the other pointer sigils; the bearing rides the frame now, and the frame is not a pointer plane.
 
 Permanent JS exception: the `?` token and its `->` arrow require dedicated parser logic in
 `lar-sigil.ts`. No TOML entry and no wikitext body; recognition comes from `matchPranalaHeaderAt`.
@@ -35,11 +38,11 @@ Permanent JS exception: the `?` token and its `->` arrow require dedicated parse
 
 <<~ ahu #ooda-ha >>
 
-✶ sense the `?` token — this is a self-reference; the carrier declares its own canonical address
-⏿ orient: header sigil; appears once per file at the iam block; creates no edge to an external target
-◇ the uri is the canonical lar:/// address of this meme; all pranala edges source from this socket
-▶ emit PranalaHeaderNode; set `currentTiddler` equivalent to the declared URI for all edges in this meme
-↺ all `<<~ pranala ? -> target >>` edges in this meme resolve `?` to the declared canonical URI; confirm exactly one pranala-header per meme; URI matches the iam `uri-path` field
+✶ sense the `?` token — a self-reference; the carrier declares its own address, never an edge outward
+⏿ orient: the bearing rides the SOH control sigil, once per carrier, ahead of the iam block
+◇ the uri is this carrier's canonical `lar:` address; every `?` in the carrier resolves to it
+▶ read the bearing off the head; set the self-reference for all sigils in this carrier
+↺ confirm exactly one bearing per carrier and a `uri-path` that agrees with it; confirm no speaking-head header rode in behind the control head
 
 <<~/ahu >>
 
@@ -47,11 +50,19 @@ Permanent JS exception: the `?` token and its `->` arrow require dedicated parse
 
 !! Law (Kānāwai)
 
-A pranala-header MUST appear exactly once per meme, adjacent to the iam TOML block.
-A pranala-header MUST carry a `lar:///` URI.
-A pranala-header's URI MUST match the meme's `uri-path` iam field.
-A pranala-header MUST NOT appear inside an ahu slot body.
-A pranala-header's `?` token is reserved — MUST NOT be used as a sigil name elsewhere.
+''The bearing rides the CONTROL head.'' A carrier declares its own address exactly once, on its SOH
+sigil, ahead of the iam block:
+
+A bearing MUST appear exactly once per carrier, on the SOH control sigil, before the iam TOML block.
+A bearing MUST carry a `lar:///` URI.
+A bearing's URI MUST match the carrier's `uri-path` iam field.
+A bearing MUST NOT appear inside an ahu slot body, and MUST NOT repeat in the body on any head.
+The `?` token is reserved — MUST NOT be used as a sigil name elsewhere.
+
+''Why the control head and not the speaking one.'' A frame mark states what the reader must do before it
+can read anything; a speaking sigil states what a carrier says. The bearing is the first of the former —
+a reader that cannot find the address cannot resolve a single `?` in the body — so it rode to the head
+that carries the frame when the head lock landed (2026-08-15, #frame-head-lock in the carrier spec).
 
 <<~/ahu >>
 
@@ -60,14 +71,26 @@ A pranala-header's `?` token is reserved — MUST NOT be used as a sigil name el
 !! Syntax
 
 ```text
-<<~ ? -> lar:///ha.ka.ba/path/to/this-meme >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/path/to/this-carrier >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/path/to/this-carrier >>
 ```
 
-Regex (canonical):
+The bearing reads off the SOH scan, which anchors on the control code and admits the namespace slot
+ahead of it. ''The tail must tolerate the arrow'': `? ->` carries a `>`, so a scan closing on `[^>\n]*`
+stops at the bearing itself and finds no head at all. Every scan in this grammar spells it
+`(?:[^>\n]|->)*` for that reason.
+
+!!! The retired form, and the matcher that still admits it
+
+```text
+<<~ ? -> lar:///…      RETIRED — the speaking head carries no frame mark
 ```
-/<<~\s*\?\s*->\s*(\S+)\s*>>/
-```
-Groups: `[full, canonical-uri]`
+
+`PRANALA_HEADER_RE` in `lar-sigil-shared.ts` still matches this shape, and that is deliberate: a
+carrier written before the head lock renders rather than breaking (graceful parsing). ''It admits the
+form; it mints nothing.'' Ten such sigils stand in the corpus — one a duplicate bearing in a carrier
+that already declares one on its head, the rest an older inline shorthand pointing at OTHER carriers,
+which was never a bearing at all.
 
 <<~/ahu >>
 
@@ -75,16 +98,22 @@ Groups: `[full, canonical-uri]`
 
 !! Schema (machine-readable)
 
+''The bearing is read off the frame, never off a sigil pattern.'' The SOH scan finds the head; the
+bearing is what follows its `? ->`. No pattern here is a source of truth for that — `frame-marks.ts`
+carries the control set, and each reader keeps the scan its own context earned (a prefix stopping at
+`&` so an entity-written namespace never reads as the control code; a tail admitting `->`).
+
 ```toml
-sigil          = "pranala-header"
-kind           = "header"
-layer          = "block"
-js-exception   = true
+name           = "pranala-header"
+kind           = "bearing"
+rides          = "SOH control sigil"       # &#x0001; / &#x0011;
+self-token     = "?"
+once-per       = "carrier"
+agrees-with    = "uri-path"
 
-pattern = '<<~\s*\?\s*->\s*(\S+)\s*>>'
-
-[captures]
-uri = 1
+# The retired speaking-head form, admitted on read and minted never.
+retired-pattern = '<<~\s*\?\s*->\s*(\S+)\s*>>'
+retired-on      = "2026-08-15"             # the head lock
 ```
 
 <<~/ahu >>
@@ -93,8 +122,11 @@ uri = 1
 
 !! Edges
 
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
+
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;u7J7JkT9hxTWD3xEOHjnwmsQltfPTxUov4kNQeIqazg
+<<^ code:"&#x0003;" >>ni:///sha-256;A5Eli4d3B0-tWcRQ7eutIM4p4lcOlHcFknHkugZYYBI
 
 <<^ code:"&#x0004;" -> ? >>

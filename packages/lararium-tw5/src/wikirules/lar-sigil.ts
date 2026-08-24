@@ -7,12 +7,11 @@ module-type: wikirule
  * lar-sigil — unified TW5 wikirule (block + inline) for all `<<~ … >>` sigil
  * forms. Block forms (container ahu, container pranala, generic-with-closer)
  * are claimed at block parse phase. Leaf inline forms (aka, kahea, loulou,
- * pranala-header, pranala-inline, ahu/kau invocation) are claimed at inline phase.
+ * pranala-inline, ahu/kau invocation) are claimed at inline phase.
  *
  * Dispatch model:
  *   All compound + simple sigils → ~ dispatcher (name=SIGIL, p1=ARGS)
  *   pranala block/inline         → ~pranala directly (keyword args: from/to/slot/…)
- *   pranala-header               → ~ dispatcher (name="pranala-header", p1=uri)
  *   generic block-with-closer    → text literal pass-through
  *
  * Child-slot detection (ahu, kau, future) uses grammarChildSlotNames() —
@@ -30,7 +29,6 @@ import {
   matchCompoundSigilAt,
   indexOfSigilOpen,
   grammarChildSlotNames,
-  matchPranalaHeaderAt,
   matchPranalaOpenAt,
   findCloseEnd,
   findGenericOpenAt,
@@ -54,18 +52,6 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
   const childSlotNames = grammarChildSlotNames(grammar);
   let pos = indexOfSigilOpen(source, startPos);
   while (pos >= 0) {
-    // pranala-header: permanent JS exception — <<~ ? -> uri >> uses a unique
-    // self-reference token (?) that is not a sigil word. Cannot generalise into
-    // compound without losing the ? semantic. Must precede compound to prevent
-    // compound from misreading any stray <<~ ? ... >> as a sigil named "?".
-    const pranalaHeader = matchPranalaHeaderAt(source, pos);
-    if (pranalaHeader) {
-      this.matchPos = pos;
-      this.matchEnd = pranalaHeader.end;
-      this.attrs    = { __sigil__: "pranala-header", uri: pranalaHeader.uri };
-      return pos;
-    }
-
     // pranala: permanent JS exception — <<~ pranala FROM -> TO >> arrow syntax with
     // keyword attrs (from/to/slot/family/role/body) is structurally distinct from
     // <<~ WORD ARGS >>. The ~ dispatcher's p1–p5 positional interface cannot carry
@@ -232,13 +218,6 @@ export function parse(this: RuleInstance): ParseTreeNode[] {
     const sigilType = attrs["__sigil__"]!;
     delete attrs["__sigil__"];
 
-    if (sigilType === "pranala-header") {
-      return [{ type: "macrocall", attributes: {
-        "$variable": { type: "string", value: "~" },
-        "name":      { type: "string", value: "pranala-header" },
-        "p1":        { type: "string", value: attrs["uri"] ?? "" },
-      }, children: [] }];
-    }
     if (sigilType === "pranala") {
       const macroAttrs: Record<string, { type: "string"; value: string }> = {
         "$variable": { type: "string", value: "~pranala" },
