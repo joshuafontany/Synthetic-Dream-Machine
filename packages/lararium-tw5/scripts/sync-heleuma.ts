@@ -1,9 +1,15 @@
 /**
  * sync-heleuma.ts — drift check, patch, and corpus-promotion scan.
  *
+ * THE WINDOW LAW. An anchor's `#source` slot TRANSCLUDES the code-file tiddler named by `module-ref`
+ * (`<$transclude>`), never copies it. One home for the code — shipped by the plugin, ingested through
+ * the TW5 filetype registry, or minted at promotion — and the anchor keeps the rope. Drift between the
+ * wiki's code tiddler and the live TS belongs to --sync-modules (body-sha256 over the module body); the
+ * default check asks reference integrity alone: ref declared, window standing, window facing the ref.
+ *
  * Modes (mutually exclusive flags):
- *   (none)            Dry-run: report drift/missing, write nothing.
- *   --commit          Patch #source slots in-place to match live TS source.
+ *   (none)            Dry-run: window integrity + module body-sha256, write nothing.
+ *   --commit          Build plugin tiddlers, then re-check windows.
  *   --scan            Scan packages/ for exported symbols that lack a heleuma pair.
  *   --scan-promote    Scan packages/ for pure-data constants that should become
  *                     first-class corpus memes in lares/ (not heleuma anchors —
@@ -129,31 +135,11 @@ function extractSymbol(srcPath: string, symbol: string): string | null {
 // Drift check
 // ---------------------------------------------------------------------------
 
-function checkDrift(memeSlot: string, liveSource: string): string | null {
-  const fenceMatch = FENCE_RE.exec(memeSlot);
-  const stripped   = fenceMatch ? fenceMatch[1]!.trim() : memeSlot.trim();
-  const live       = liveSource.trim();
-  if (stripped === live) return null;
-  return `meme has ${stripped.split("\n").length} lines, live has ${live.split("\n").length} lines`;
-}
 
 // ---------------------------------------------------------------------------
 // Commit: patch #source slot and/or body-sha256 in one write
 // ---------------------------------------------------------------------------
 
-// Returns patched content, or null if the #source slot is missing/unparseable.
-function applySourcePatch(content: string, liveCode: string): string | null {
-  const slotM = SOURCE_SLOT_RE.exec(content);
-  if (!slotM) return null;
-  const fenceM = FENCE_RE.exec(slotM[1]!);
-  if (!fenceM) return null;
-
-  const fenceStart = content.indexOf(fenceM[0], slotM.index);
-  const fenceEnd   = fenceStart + fenceM[0].length;
-  const lang       = fenceM[0].match(/^```([^\n]*)/)![1] ?? "typescript";
-  const newFence   = "```" + lang + "\n" + liveCode + "\n```";
-  return content.slice(0, fenceStart) + newFence + content.slice(fenceEnd);
-}
 
 // Patches body-sha256 in the first ```toml block (the root toml iam prelude).
 // Adds the field if absent; replaces it if stale. The emitted value rides
@@ -456,7 +442,12 @@ function runSyncModules(): { drift: number; missing: number; patched: number } {
     const rest       = (parts[0] === "ha.ka.ba" && parts[1] === "lararium" && parts[2] === "tw5")
       ? parts.slice(3).join("/")
       : parts.slice(2).join("/"); // legacy fallback
-    const modPath    = resolve(tw5MemesRoot, `${rest}.md`);
+    // Module carriers ride the corpus as `.mem`; `.md` stays as the fallback spelling.
+    const modPathMem = resolve(tw5MemesRoot, `${rest}.mem`);
+    const modPath    = existsSync(modPathMem) ? modPathMem : resolve(tw5MemesRoot, `${rest}.md`);
+    // A SELF-SEAT — an anchor standing AT its module's own address — would hash its own body and
+    // report the tautology as health. The seat fills at promotion; until then there is nothing to diff.
+    if (resolve(modPath) === resolve(mdPath)) { console.log(`[sync-modules] seat  ${moduleRef} (anchor IS the seat — fills at promotion)`); continue; }
 
     let modContent: string;
     try {
@@ -631,6 +622,7 @@ manaoio     = 13
 l-space     = "lararium"
 role        = "${kindLabel}: ${d.slug} — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "${heleumaMode}"
+module-ref  = "lar:///${uriPath}"
 source-file = "${d.relPath}"
 source-symbol = "${srcSym}"
 body-sha256 = "${bodyHash}"
@@ -656,9 +648,11 @@ Exported symbols: \`${d.symbols.join("`, `")}\`.
 
 <<~ ahu #source >>
 
-\`\`\`typescript
-${joined}
-\`\`\`
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, ingested through the filetype registry, or minted at
+promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///${uriPath}" $mode="block"/>
 
 <<~/ahu >>
 
@@ -699,7 +693,7 @@ function runScanDecorators(): void {
   }
   console.log(`\n[heleuma/decorators] ${found} decorator file(s) — ${missing} missing`);
   if (COMMIT && scaffolded > 0) {
-    console.log(`[heleuma/decorators] scaffolded ${scaffolded} meme(s) — run build:heleuma --commit to patch #source slots`);
+    console.log(`[heleuma/decorators] scaffolded ${scaffolded} meme(s) — each #source holds a window on its module-ref`);
   } else if (!COMMIT && missing > 0) {
     console.log(`[heleuma/decorators] run with --scan-decorators --commit to scaffold missing memes`);
   }
@@ -744,7 +738,7 @@ if (COMMIT) {
   const scriptsDir = dirname(fileURLToPath(import.meta.url));
   console.log("[heleuma] --commit: building plugin CJS tiddlers and patching anchor hashes…\n");
   execSync(`tsx ${resolve(scriptsDir, "build-plugin-tiddler.ts")}`, { stdio: "inherit" });
-  console.log("\n[heleuma] --commit: patching #source slots to match live TS source\n");
+  console.log("\n[heleuma] --commit: checking #source windows (reference integrity — the code-file tiddler holds the source)\n");
 } else {
   console.log("[heleuma] dry-run (pass --commit to patch, --scan to find candidates, --scan-promote to find corpus candidates)\n");
 }
@@ -769,135 +763,45 @@ for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
 
   totalChecked++;
 
-  // ba — quine-only: verify #source slot exists.
-  // When source-symbol is declared, drift-check and hash exactly like ka.
-  if (mode === "ba") {
-    const slotM = SOURCE_SLOT_RE.exec(content);
-    if (!slotM) {
-      console.warn(`[heleuma/ba] MISSING #source slot  ${uri}`);
-      totalMissing++;
-      continue;
-    }
-
-    const baSrcFile = toml["source-file"];
-    const baSrcSym  = toml["source-symbol"];
-
-    if (!baSrcFile || !baSrcSym) {
-      // No symbol — quine-only, no drift check needed
-      console.log(`[heleuma/ba] ok   ${uri}`);
-      continue;
-    }
-
-    // ba may declare multiple space-separated symbols; extract each and join
-    const baSymbols = baSrcSym.trim().split(/\s+/);
-    const baExtracted: string[] = [];
-    for (const sym of baSymbols) {
-      const extracted = extractSymbol(baSrcFile, sym);
-      if (extracted) baExtracted.push(extracted.trim());
-    }
-    if (baExtracted.length === 0) {
-      console.warn(`[heleuma/ba] SYMBOL NOT FOUND: ${baSrcSym} in ${baSrcFile}  (${uri})`);
-      totalMissing++;
-      continue;
-    }
-
-    const baLiveCode  = baExtracted.join("\n\n");
-    const baDrift     = checkDrift(slotM[1]!, baLiveCode);
-    const baLiveHash  = createHash("sha256").update(baLiveCode, "utf8").digest("hex");
-    const baExistHash = toml["body-sha256"] ?? "";
-    const baHashDrift = !digestsEqual(baLiveHash, baExistHash);   // dual-read the tag boundary
-
-    if (COMMIT && (baDrift || baHashDrift)) {
-      let working: string = content;
-      if (baDrift) {
-        const patched = applySourcePatch(working, baLiveCode);
-        if (patched) working = patched;
-      }
-      working = applyBodySha256Patch(working, baLiveHash);
-      writeFileSync(mdPath, working, "utf8");
-
-      const parts: string[] = [];
-      if (baDrift)     parts.push(`source: ${baDrift}`);
-      if (baHashDrift) parts.push(baExistHash ? "body-sha256 updated" : "body-sha256 added");
-      console.log(`[heleuma/ba] patched  ${uri} (${baSrcSym}): ${parts.join("; ")}`);
-      totalPatched++;
-    } else if (!COMMIT && baDrift) {
-      console.warn(`[heleuma/ba] DRIFT  ${uri} (${baSrcSym}): ${baDrift}`);
-      console.warn(`           live: ${resolve(root, baSrcFile)}`);
-      totalDrift++;
-    } else {
-      console.log(`[heleuma/ba] ok   ${uri} (${baSrcSym})`);
-    }
-
-    if (!COMMIT && baHashDrift) {
-      console.log(`[heleuma/ba] body-sha256 ${baExistHash ? "stale" : "missing"}  ${uri}`);
-    }
-    continue;
-  }
-
-  // ha/ka — drift check against live source
-  const srcFile = toml["source-file"];
-  const srcSym  = toml["source-symbol"];
-
-  if (!srcFile || !srcSym) {
-    console.warn(`[heleuma/${mode}] MISSING source-file/source-symbol  ${uri}`);
-    totalMissing++;
-    continue;
-  }
-
-  const liveSource = extractSymbol(srcFile, srcSym);
-  if (!liveSource) {
-    console.warn(`[heleuma/${mode}] SYMBOL NOT FOUND: ${srcSym} in ${srcFile}  (${uri})`);
-    totalMissing++;
-    continue;
-  }
-
+  // ── THE WINDOW CHECK ──────────────────────────────────────────────────────────────────────────
+  // A #source slot holds a WINDOW onto the code-file tiddler — `<$transclude>` facing `module-ref` —
+  // never a copy. Two homes for one source was the disease this checker existed to manage: the copy
+  // drifted, the checker chased it, and 31 of 32 anchors could not even be checked. With ONE home
+  // (the code-file tiddler: shipped by the plugin, ingested through the filetype registry, or minted
+  // at promotion), drift between wiki and live TS belongs to --sync-modules — body-sha256 over the
+  // module tiddler body. This check asks only REFERENCE INTEGRITY: the ref is declared, the window
+  // stands, and it faces the ref.
+  const moduleRef = toml["module-ref"];
   const slotM = SOURCE_SLOT_RE.exec(content);
+
+  if (!moduleRef) {
+    console.warn(`[heleuma/${mode}] MISSING module-ref  ${uri}`);
+    totalMissing++;
+    continue;
+  }
   if (!slotM) {
     console.warn(`[heleuma/${mode}] MISSING #source slot  ${uri}`);
-    if (COMMIT) {
-      console.warn(`[heleuma/${mode}]   cannot patch — add <<~ ahu #source >> block first`);
-    }
     totalMissing++;
     continue;
   }
-
-  const liveCode  = liveSource.trim();
-  const drift     = checkDrift(slotM[1]!, liveCode);
-
-  // For ka memes: also track whether body-sha256 is current.
-  // sha256(liveCode) is the quine integrity anchor for DreamNet cold-boot verification.
-  const liveHash     = mode === "ka" ? createHash("sha256").update(liveCode, "utf8").digest("hex") : null;
-  const existingHash = mode === "ka" ? (toml["body-sha256"] ?? "") : null;
-  const hashDrift    = liveHash !== null && !digestsEqual(liveHash, existingHash!);   // dual-read the tag boundary
-
-  if (COMMIT && (drift || hashDrift)) {
-    let working: string = content;
-    if (drift) {
-      const patched = applySourcePatch(working, liveCode);
-      if (patched) working = patched;
-    }
-    if (liveHash !== null) {
-      working = applyBodySha256Patch(working, liveHash);
-    }
-    writeFileSync(mdPath, working, "utf8");
-
-    const parts: string[] = [];
-    if (drift)     parts.push(`source: ${drift}`);
-    if (hashDrift) parts.push(existingHash ? "body-sha256 updated" : "body-sha256 added");
-    console.log(`[heleuma/${mode}] patched  ${uri} (${srcSym}): ${parts.join("; ")}`);
-    totalPatched++;
-  } else if (!COMMIT && drift) {
-    console.warn(`[heleuma/${mode}] DRIFT  ${uri} (${srcSym}): ${drift}`);
-    console.warn(`           live: ${resolve(root, srcFile)}`);
+  const slot = slotM[1]!;
+  if (/```/.test(slot)) {
+    console.warn(`[heleuma/${mode}] COPY in #source — the retired form; the slot wants the window  ${uri}`);
     totalDrift++;
-  } else {
-    console.log(`[heleuma/${mode}] ok   ${uri} (${srcSym})`);
+    continue;
   }
-
-  if (!COMMIT && mode === "ka" && hashDrift) {
-    console.log(`[heleuma/ka] body-sha256 ${existingHash ? "stale" : "missing"}  ${uri}`);
+  const transM = /<\$transclude\s+[^>]*\$tiddler="([^"]+)"/.exec(slot);
+  if (!transM) {
+    console.warn(`[heleuma/${mode}] #source holds no <$transclude> window  ${uri}`);
+    totalMissing++;
+    continue;
   }
+  if (transM[1] !== moduleRef) {
+    console.warn(`[heleuma/${mode}] window faces ${transM[1]} but module-ref names ${moduleRef}  ${uri}`);
+    totalDrift++;
+    continue;
+  }
+  console.log(`[heleuma/${mode}] ok   ${uri} → window on ${moduleRef}`);
 }
 
 if (COMMIT) {
@@ -905,7 +809,7 @@ if (COMMIT) {
 } else {
   console.log(`\n[heleuma] checked ${totalChecked} — ${totalDrift} drift, ${totalMissing} missing`);
   if (totalDrift > 0 || totalMissing > 0) {
-    console.warn("[heleuma] run with --commit to patch #source slots");
+    console.warn("[heleuma] a red above wants a hand — the slot transcludes the code-file tiddler, never copies it");
   }
 }
 

@@ -29,53 +29,10 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/ahu"
 
 <<~ ahu #source >>
 
-!! Source
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
 
-```typescript
-function AhuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-AhuWidget.prototype.render = function (this: TW5WidgetInstance, parent: TW5FakeElement, nextSibling: TW5FakeElement | null) {
-  this.parentDomNode = parent;
-  this.computeAttributes();
-  this.execute();
-  const slot        = this.getAttribute("slot", "");
-  const renderMode  = this.getVariable?.("lar-render-mode") ?? "";
-  if (renderMode === "carrier") {
-    const parentUri   = this.getVariable?.("currentTiddler") ?? "";
-    const fragmentUri = parentUri + slot;
-    const fragFields  = this.wiki?.getTiddler?.(fragmentUri)?.fields as Record<string, unknown> | undefined;
-    const body        = typeof fragFields?.["text"] === "string" ? fragFields["text"] : "";
-    const open        = `<<~ ahu ${slot} >>`;
-    const close       = `<<~/ahu >>`;
-    const text        = this.document.createTextNode(open + body + close);
-    parent.insertBefore(text, nextSibling);
-    this.domNodes = [text as unknown as TW5FakeElement];
-  } else {
-    const el = this.document.createElement("section");
-    el.setAttribute("data-lar-kind", "ahu");
-    el.setAttribute("data-lar-slot", slot);
-    parent.appendChild(el);
-    this.domNodes = [el];
-    this.renderChildren(el, null);
-  }
-};
-AhuWidget.prototype.execute = function (this: TW5WidgetInstance) { this.makeChildWidgets(); };
-AhuWidget.prototype.refresh = function (this: TW5WidgetInstance, changedTiddlers: Record<string, TW5ChangeRecord>): boolean {
-  const slot       = this.getAttribute("slot", "");
-  const parentUri  = this.getVariable?.("currentTiddler") ?? "";
-  const fragUri    = parentUri + slot;
-  if (changedTiddlers[fragUri]) {
-    this.refreshSelf();
-    return true;
-  }
-  let changed = false;
-  for (const child of (this.children ?? [])) {
-    if (child.refresh(changedTiddlers)) changed = true;
-  }
-  return changed;
-};
-```
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/ahu" $mode="block"/>
 
 <<~/ahu >>
 
@@ -85,6 +42,6 @@ AhuWidget.prototype.refresh = function (this: TW5WidgetInstance, changedTiddlers
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SDSy1nUBqIpgjOepl0J-hVLEj95Ydia5YBSw8osBcv0
+<<^ code:"&#x0003;" >>ni:///sha-256;j0jhLGP8euc2uvnlm9oCR2SsfHvUbDQg2wal_n2GZ6I
 
 <<^ code:"&#x0004;" -> ? >>

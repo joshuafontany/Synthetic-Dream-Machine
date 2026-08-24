@@ -29,13 +29,10 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/pranala"
 
 <<~ ahu #source >>
 
-!! Source
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
 
-```typescript
-export function PranalaWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-```
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/pranala" $mode="block"/>
 
 <<~/ahu >>
 
@@ -45,6 +42,6 @@ export function PranalaWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;rTRQdhnoAEFF-zXVigAsfH_sWvjbK7Jv9JH0aEm9UVc
+<<^ code:"&#x0003;" >>ni:///sha-256;1x9xNJPoeyqYv2qbWOUhhm9f_YhPCRbt3Jex2BoEqSc
 
 <<^ code:"&#x0004;" -> ? >>

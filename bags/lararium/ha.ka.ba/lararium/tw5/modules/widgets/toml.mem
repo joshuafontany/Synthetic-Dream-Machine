@@ -6,6 +6,7 @@ body-sha256   = "e95c2d044454c5399ead0854ccecd261154f9a93250bba21edd944a7d695a02
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/widgets/toml.mem"
 heleuma       = "ka"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/widgets/toml"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
@@ -36,11 +37,10 @@ Exported symbols: `TomlWidget`.
 
 <<~ ahu #source >>
 
-```typescript
-export function TomlWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-```
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/toml" $mode="block"/>
 
 <<~/ahu >>
 
@@ -48,6 +48,6 @@ export function TomlWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pC480tp1GzEaekWqt-TMo5FpPemWiV8gZphC3MxrPKc
+<<^ code:"&#x0003;" >>ni:///sha-256;VTG3h9myBpxR4rz2IyXlHx3lidi75rTZOJlE4sesNwI
 
 <<^ code:"&#x0004;" -> ? >>

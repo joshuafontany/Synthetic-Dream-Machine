@@ -29,13 +29,10 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/dynamic"
 
 <<~ ahu #source >>
 
-!! Source
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
 
-```typescript
-export function DynamicWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-```
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/dynamic" $mode="block"/>
 
 <<~/ahu >>
 
@@ -45,6 +42,6 @@ export function DynamicWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ue3YT3_H8NIjWv1HlxfiWLNTML4TzkEzqHMGOLBWrmA
+<<^ code:"&#x0003;" >>ni:///sha-256;0VmhFqEXTUrdx_QopH4prJMBHKK3X9mvYOIkzsnrJTg
 
 <<^ code:"&#x0004;" -> ? >>

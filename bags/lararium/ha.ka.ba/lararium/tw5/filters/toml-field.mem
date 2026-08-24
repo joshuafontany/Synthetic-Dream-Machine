@@ -29,21 +29,10 @@ uri-path      = "ha.ka.ba/lararium/tw5/filters/toml-field"
 
 <<~ ahu #source >>
 
-!! Source
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
 
-```typescript
-tw.filterOperators["toml"] = function (source: TW5FilterSource, operator: TW5FilterOperator) {
-  const fieldName = operator.suffix ?? "";
-  const value     = operator.operand ?? "";
-  const results: string[] = [];
-  source(function (tiddler, title: string) {
-    if (!tiddler) return;
-    const fv: string = String(tiddler.fields?.[fieldName] ?? "");
-    if (fv === value) results.push(title);
-  });
-  return results;
-};
-```
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/toml-field" $mode="block"/>
 
 <<~/ahu >>
 
@@ -53,6 +42,6 @@ tw.filterOperators["toml"] = function (source: TW5FilterSource, operator: TW5Fil
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;p6Cpi-bPobsOICdrT8juD5yOixJH5VujDw4AUbhiVe8
+<<^ code:"&#x0003;" >>ni:///sha-256;6WJgfKnp2JCXNsMh1BsJ6Copy9xQrCgu9_2kW8VS_P8
 
 <<^ code:"&#x0004;" -> ? >>

@@ -29,13 +29,10 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/pae"
 
 <<~ ahu #source >>
 
-!! Source
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
 
-```typescript
-export function PaeWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-```
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/pae" $mode="block"/>
 
 <<~/ahu >>
 
@@ -45,6 +42,6 @@ export function PaeWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jQoWfhTGfG9Zs1gECD1fjC8Sb13dDiXMvb3Ntxr0jL4
+<<^ code:"&#x0003;" >>ni:///sha-256;weyGM2cP_08UmgKoZVdI25ZCycsQLDJAlC8ZDuZT86g
 
 <<^ code:"&#x0004;" -> ? >>

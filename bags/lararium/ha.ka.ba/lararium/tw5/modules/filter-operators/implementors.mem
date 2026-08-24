@@ -6,6 +6,7 @@ body-sha256   = "281fba79de184bd211bec73fddb08dafad85527b4c64bd91ca70824b64fd157
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/filter-operators/implementors.mem"
 heleuma       = "ka"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/filters/implementors"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
@@ -36,21 +37,10 @@ Exported symbols: `registerImplementors`.
 
 <<~ ahu #source >>
 
-```typescript
-export function registerImplementors(tw: TW5Instance): void {
-  tw.filterOperators["implementors"] = function (source: TW5FilterSource, operator: TW5FilterOperator) {
-    const target  = operator.operand ?? "";
-    const results: string[] = [];
-    source(function (tiddler, title: string) {
-      if (!tiddler) return;
-      const raw: string    = String(tiddler.fields?.["implements"] ?? "");
-      const tokens: string[] = tw.utils.parseStringArray(raw) ?? [];
-      if (tokens.includes(target)) results.push(title);
-    });
-    return results;
-  };
-}
-```
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/implementors" $mode="block"/>
 
 <<~/ahu >>
 
@@ -58,6 +48,6 @@ export function registerImplementors(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Cp-GBnuMuNyGntf1URY3Px4jj9Ou4-iWcufddCA2RuQ
+<<^ code:"&#x0003;" >>ni:///sha-256;cTkhf2I5qVU5cutVvwEwpANQZDCLACUf4Jfkgo1rf6Q
 
 <<^ code:"&#x0004;" -> ? >>

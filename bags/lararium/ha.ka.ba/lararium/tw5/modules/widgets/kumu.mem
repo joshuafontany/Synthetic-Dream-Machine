@@ -6,6 +6,7 @@ body-sha256   = "e75d894319cc697fb1bc9b63e515327e683f5c57f1b783652e5b3c9880b9a45
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/widgets/kumu.mem"
 heleuma       = "ka"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/widgets/kumu"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
@@ -36,11 +37,10 @@ Exported symbols: `KumuWidget`.
 
 <<~ ahu #source >>
 
-```typescript
-export function KumuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-```
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/kumu" $mode="block"/>
 
 <<~/ahu >>
 
@@ -48,6 +48,6 @@ export function KumuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9g5vsXPLQxrRwb-zH9O7Tq20lpXkBRSMz15JYqxWy0w
+<<^ code:"&#x0003;" >>ni:///sha-256;-ORa-dkuCO0QpfM0YTot10Ym6FwNCIVEhKVMdPDUvQI
 
 <<^ code:"&#x0004;" -> ? >>

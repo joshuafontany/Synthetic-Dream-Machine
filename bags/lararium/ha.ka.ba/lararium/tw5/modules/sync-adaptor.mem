@@ -4,6 +4,7 @@
 ```toml iam
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/sync-adaptor.mem"
 heleuma       = "ha"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -39,50 +40,10 @@ Echo-loop guard rule:
 
 <<~ ahu #source >>
 
-!! Source — `_applyChange` (TypeScript — compiled-in)
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
 
-```typescript
-private _applyChange(change: LarTiddlerChange): void {
-    // Skip echoes of our own writes.
-    if (change.origin.kind === "tw-local" && change.origin.instanceId === this.instanceId) return;
-
-    // M-bags: key becomes change.origin.edgeIsland when available.
-    const applyKey = this.instanceId;
-    this._applying.set(applyKey, change.origin);
-    try {
-      if (change.record === null || change.record.deleted) {
-        this.tw5.removeTiddler(change.title);
-        const childTitles: string[] = this.tw5.filterTiddlers(`[field:fragment-parent[${change.title}]]`);
-        for (const t of childTitles) this.tw5.removeTiddler(t);
-        this._pendingDeletions.add(change.title);
-      } else {
-        const rec = change.record;
-        const isCarrier = rec.text !== undefined &&
-          (rec.fields["type"] === "text/x-memetic-wikitext+tiddlywiki" ||
-            rec.fields["content-type"] === "text/x-memetic-wikitext+tiddlywiki" ||
-            (!(rec.fields["type"] || rec.fields["content-type"]) && change.title.startsWith("lar:")));
-
-        if (isCarrier && rec.text) {
-          const staleChildren: string[] = this.tw5.filterTiddlers(`[field:fragment-parent[${change.title}]]`);
-          for (const t of staleChildren) this.tw5.removeTiddler(t);
-          const tiddlers = this.tw5.deserializeCarrier(
-            change.title, rec.text, rec.fields as Record<string, string | string[]>,
-          );
-          for (const t of tiddlers) this.tw5.setTiddler(t as Record<string, string | string[]>);
-        } else {
-          const fields: Record<string, string | string[]> = { title: rec.title, ...rec.fields };
-          if (rec.text !== undefined) fields["text"] = rec.text;
-          this.tw5.setTiddler(fields);
-        }
-
-        this._pendingModifications.add(change.title);
-        if (change.revision) this._revisions.set(change.title, change.revision);
-      }
-    } finally {
-      this._applying.delete(applyKey);
-    }
-  }
-```
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor" $mode="block"/>
 
 <<~/ahu >>
 
@@ -93,6 +54,6 @@ private _applyChange(change: LarTiddlerChange): void {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;rs4PfxTvDKppo6mPK-EtnESubqRngFwk97k75oPUmhk
+<<^ code:"&#x0003;" >>ni:///sha-256;nhlUvyYaPJn467AuHur-Nz8ZKZIEYQdgUnsCTpXUw4g
 
 <<^ code:"&#x0004;" -> ? >>

@@ -6,6 +6,7 @@ body-sha256   = "410944ae0dd96ed55a0a91f0443532760b016f9fcbc44e0c339d74bcf97d8c3
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/filter-operators/edge.mem"
 heleuma       = "ka"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/filters/edge"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
@@ -36,26 +37,10 @@ Exported symbols: `registerEdge`.
 
 <<~ ahu #source >>
 
-```typescript
-export function registerEdge(tw: TW5Instance): void {
-  tw.filterOperators["edge"] = function (source: TW5FilterSource, operator: TW5FilterOperator) {
-    const family  = operator.suffix ?? "";
-    const role    = operator.operand ?? "";
-    const results: string[] = [];
-    source(function (tiddler, title: string) {
-      if (!tiddler) return;
-      if (role) {
-        const v = tiddler.fields?.[`edge-out-${family}-${role}`];
-        if (v !== undefined && v !== "") results.push(title);
-      } else {
-        const prefix = `edge-out-${family}-`;
-        if (Object.keys(tiddler.fields ?? {}).some((k) => k.startsWith(prefix))) results.push(title);
-      }
-    });
-    return results;
-  };
-}
-```
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/edge" $mode="block"/>
 
 <<~/ahu >>
 
@@ -63,6 +48,6 @@ export function registerEdge(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;m5i-FmdZpyXjBLbJ-ydyDp200ZNyTTjVXtMinrYT2AQ
+<<^ code:"&#x0003;" >>ni:///sha-256;NlFRGTvEWNx-DQHLapy325XRL3Lnb5orSWLcMpGOycI
 
 <<^ code:"&#x0004;" -> ? >>

@@ -6,6 +6,7 @@ body-sha256   = "56423ffb8c7522db2c9dad9d9d0ba316de67a03636c05a4be596b5d5020c88f
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/widgets/lele.mem"
 heleuma       = "ka"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/widgets/lele"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
@@ -36,11 +37,10 @@ Exported symbols: `LeleWidget`.
 
 <<~ ahu #source >>
 
-```typescript
-export function LeleWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-```
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/lele" $mode="block"/>
 
 <<~/ahu >>
 
@@ -48,6 +48,6 @@ export function LeleWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0VUqvnXeg8a1uDEXSSuKTYn6kEk5A0Fz9XZsyFm-vEA
+<<^ code:"&#x0003;" >>ni:///sha-256;1aD77lkcNfBVjAMISX8W9x3abUNmCuVgB-YetR5zDk4
 
 <<^ code:"&#x0004;" -> ? >>

@@ -6,6 +6,7 @@ body-sha256   = "0518ad22472bdea6dffd686dcd663ab93e9bbcecc3d69b54c8b49fba36aa209
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/widgets/dynamic.mem"
 heleuma       = "ka"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/widgets/dynamic"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
@@ -36,11 +37,10 @@ Exported symbols: `DynamicWidget`.
 
 <<~ ahu #source >>
 
-```typescript
-export function DynamicWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-```
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/dynamic" $mode="block"/>
 
 <<~/ahu >>
 
@@ -48,6 +48,6 @@ export function DynamicWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gD2TWiv-k2-xvH7fAiDZ8Y3gtEc8Kr8on2U9x912QkA
+<<^ code:"&#x0003;" >>ni:///sha-256;HmKB8d_c004UAB48treU43DeXfk2ZRUKlhKN5WYUQ0U
 
 <<^ code:"&#x0004;" -> ? >>

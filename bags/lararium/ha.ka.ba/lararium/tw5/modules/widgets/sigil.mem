@@ -6,6 +6,7 @@ body-sha256   = "fea43878818e50755601d9f3c2aef21be2a12a7899de63c41606a87bd2ebec1
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/widgets/sigil.mem"
 heleuma       = "ka"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/widgets/sigil"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
@@ -36,11 +37,10 @@ Exported symbols: `SigilWidget`.
 
 <<~ ahu #source >>
 
-```typescript
-export function SigilWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
-  this.initialise(parseTreeNode, options);
-}
-```
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/sigil" $mode="block"/>
 
 <<~/ahu >>
 
@@ -48,6 +48,6 @@ export function SigilWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTree
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;TNeY29q63N-uuoMTtSm7cky76BPWVgggtssqoaGOPDs
+<<^ code:"&#x0003;" >>ni:///sha-256;324fjMNnIhZq40lGX_HasRhwQlyM459Cx9VB2SkX77w
 
 <<^ code:"&#x0004;" -> ? >>

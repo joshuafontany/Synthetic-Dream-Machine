@@ -58,24 +58,10 @@ export const LARARIUM_WIDGETS_TIDDLER = {
 
 <<~ ahu #source >>
 
-!! Source (TypeScript — compiled-in, `packages/lararium-tw5/src/tw5-widgets.ts`)
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
 
-```typescript
-export function createLarariumWidgets(_tw: any): Record<string, WidgetCtor> {
-  return {
-    "lararium-worksite":  WorksiteWidget  as WidgetCtor,
-    "lararium-edge":      EdgeWidget      as WidgetCtor,
-    "lararium-toml":      TomlWidget      as WidgetCtor,
-    "lararium-sigil":     SigilWidget     as WidgetCtor,
-    "lararium-dynamic":   DynamicWidget   as WidgetCtor,
-    "lararium-header":    HeaderWidget    as WidgetCtor,
-    "lararium-dispatch":  DispatchWidget  as WidgetCtor,
-    "lararium-papalohe":  PapaloheWidget  as WidgetCtor,
-    "lararium-kukali":    KukaliWidget    as WidgetCtor,
-    "lararium-kumu":      KumuWidget      as WidgetCtor,
-  };
-}
-```
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widget-module" $mode="block"/>
 
 <<~/ahu >>
 
@@ -105,6 +91,6 @@ export function createLarariumWidgets(_tw: any): Record<string, WidgetCtor> {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ixbSH_tf3GesDEfa1pGUkBp6gicaeB02C8jgg3pcrY8
+<<^ code:"&#x0003;" >>ni:///sha-256;lK6_J7pXURxgS7xJJ1P0-dyd8a3BcjU-muYcCwPRuXw
 
 <<^ code:"&#x0004;" -> ? >>

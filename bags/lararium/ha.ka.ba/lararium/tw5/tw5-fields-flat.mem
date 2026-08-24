@@ -5,6 +5,7 @@
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/tw5-fields-flat.mem"
 heleuma   = "ka"
+module-ref = "lar:///ha.ka.ba/lararium/tw5/tw5-fields-flat"
 mana      = 17
 manao     = 17
 manaoio   = 16
@@ -39,6 +40,15 @@ Before this file, `wiki-handlers.ts` owned `flattenRuntimeTiddlerFields()` (skip
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;wPIQeSRmf_Xzwc7-Fzqoq-uIM7HgSk0k3xw_lbzDQ1o
+<<~ ahu #source >>
+
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/tw5-fields-flat" $mode="block"/>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;db-tMXjMjl1D4ad7NREa4B-ctSh_STnhpkQx3VvLZdc
 
 <<^ code:"&#x0004;" -> ? >>

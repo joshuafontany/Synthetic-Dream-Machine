@@ -6,6 +6,7 @@ body-sha256   = "cc83e7dcde3bedd78f80de35ab3b8adc8d25af6aa39d64afc348355138d957b
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/filter-operators/toml-field.mem"
 heleuma       = "ka"
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/filters/toml-field"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
@@ -36,21 +37,10 @@ Exported symbols: `registerTomlField`.
 
 <<~ ahu #source >>
 
-```typescript
-export function registerTomlField(tw: TW5Instance): void {
-  tw.filterOperators["toml"] = function (source: TW5FilterSource, operator: TW5FilterOperator) {
-    const fieldName = operator.suffix ?? "";
-    const value     = operator.operand ?? "";
-    const results: string[] = [];
-    source(function (tiddler, title: string) {
-      if (!tiddler) return;
-      const fv: string = String(tiddler.fields?.[fieldName] ?? "");
-      if (fv === value) results.push(title);
-    });
-    return results;
-  };
-}
-```
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/toml-field" $mode="block"/>
 
 <<~/ahu >>
 
@@ -58,6 +48,6 @@ export function registerTomlField(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;LEwpMrzydksznlwjIJbmy_Z9KWPtJqiQDTNh28bhwJU
+<<^ code:"&#x0003;" >>ni:///sha-256;Z8oHOet7OfuioGQZwQJy7LRShY33xJQGXbbtEScoTOU
 
 <<^ code:"&#x0004;" -> ? >>

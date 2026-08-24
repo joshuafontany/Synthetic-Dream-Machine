@@ -53,6 +53,15 @@ Per-instance capability hooks and UUID write-back surface as explicit TW5 action
 
 <<~/ahu >>
 
+<<~ ahu #source >>
+
+The code-file tiddler holds the source; this slot holds a WINDOW onto it, never a copy. One home
+for the code — shipped by the plugin, or minted at promotion — and the anchor keeps the rope.
+
+<$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/kau" $mode="block"/>
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kau >>
@@ -60,6 +69,6 @@ Per-instance capability hooks and UUID write-back surface as explicit TW5 action
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;V-zhhGSLqceJEi1YckYtdZDfMzLR5uIv-XPTeU51QxA
+<<^ code:"&#x0003;" >>ni:///sha-256;8hXFOGxfoXqmKuFrpc_dsQtS9JnQiCk3PDrY2OsNwqE
 
 <<^ code:"&#x0004;" -> ? >>
