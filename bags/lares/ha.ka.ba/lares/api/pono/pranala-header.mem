@@ -36,7 +36,7 @@ The bearing reads off the SOH frame scan (the deserializer's head recogniser).
 
 ✶ sense the `?` token — a self-reference; the carrier declares its own address, never an edge outward
 ⏿ orient: the bearing rides the SOH control sigil, once per carrier, ahead of the iam block
-◇ the uri is this carrier's canonical `lar:` address; every `?` in the carrier resolves to it
+◇ the uri names this carrier's canonical `lar:` address; every `?` in the carrier resolves to it
 ▶ read the bearing off the head; set the self-reference for all sigils in this carrier
 ↺ confirm exactly one bearing per carrier and a `uri-path` that agrees with it
 
@@ -53,7 +53,7 @@ A bearing MUST appear exactly once per carrier, on the SOH control sigil, before
 A bearing MUST carry a `lar:///` URI.
 A bearing's URI MUST match the carrier's `uri-path` iam field.
 A bearing MUST NOT appear inside an ahu slot body, and MUST NOT repeat in the body on any head.
-The `?` token is reserved — MUST NOT be used as a sigil name elsewhere.
+The `?` token stays reserved — MUST NOT be used as a sigil name elsewhere.
 
 ''Why the control head.'' A frame mark states what the reader must do before it can read anything; a
 speaking sigil states what a carrier says. The bearing stands first among the former — a reader that
@@ -82,8 +82,8 @@ stops at the bearing itself and finds no head at all. Every scan in this grammar
 
 !! Schema (machine-readable)
 
-''The bearing is read off the frame, never off a sigil pattern.'' The SOH scan finds the head; the
-bearing is what follows its `? ->`. No pattern here is a source of truth for that — `frame-marks.ts`
+''The bearing reads off the frame, never off a sigil pattern.'' The SOH scan finds the head, and the
+bearing follows its `? ->`. No pattern here holds the source of truth for that — `frame-marks.ts`
 carries the control set, and each reader keeps the scan its own context earned (a prefix stopping at
 `&` so an entity-written namespace never reads as the control code; a tail admitting `->`).
 
@@ -108,6 +108,6 @@ agrees-with    = "uri-path"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qIBSh6O_59M2PP8IWKfnfvVUpbV65MuJvzflYncwp5Q
+<<^ code:"&#x0003;" >>ni:///sha-256;E9kxBkrDIVHaOUZH8hRiezOHteHzwgg0FHK8P2eqbSY
 
 <<^ code:"&#x0004;" -> ? >>

@@ -26,7 +26,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/carrier-sigils"
 
 ! Carrier Sigils
 
-''The sigils are the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for performing them in red — //rubrica//, red ochre, its own production stage. The black SAYS; the red DOES: in a stream it steers, in a wiki it calls.
+''The sigils ride as the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for performing them in red — //rubrica//, red ochre, its own production stage. The black SAYS; the red DOES: in a stream it steers, in a wiki it calls.
 
 The carrier sigils carry the ''spine'' of every meme: the four marks that frame it. Each NAMES an ASCII transmission-control code — ''SOH, STX, ETX, EOT'' — and carries it as an HTML character reference inside a quoted parameter, seven printable characters, never a raw octet. The office those codes were cut for in 1963 — framing a heading and a body inside one transmission — transfers whole while the bytes stay text a plain viewer reads. Here the transmission carries a meme, and the Lar keeps the frame — the guardian at the threshold of the place, naming it on the way in and pouring the libation on the way out.
 
@@ -44,7 +44,7 @@ Everything else a carrier touches lives in its own meme, reached by edge: the pa
 
 !! The Carrier Spine — Four Required Sigils
 
-A carrier is a framed transmission. It opens on a heading that names the place (''SOH''), enters its text (''STX''), ends its text (''ETX''), and closes the transmission, releasing it forward (''EOT''). All four MUST appear, in this order; a carrier missing any is a malformed frame.
+A carrier travels as one framed transmission. It opens on a heading that names the place (''SOH''), enters its text (''STX''), ends its text (''ETX''), and closes the transmission, releasing it forward (''EOT''). All four MUST appear, in this order; a carrier missing any is a malformed frame.
 
 | Sigil | Form | Role | Byte | Kapu byte |
 |---|---|---|---|---|
@@ -65,13 +65,13 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 <<^ code:"&#x0004;" -> ? >>                            EOT · release
 ```
 
-''The mark is the control byte.'' Each sigil states its C0 control character as a named `code:` param; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX carry that one param and nothing else — each opens or closes the text and states no bearing.
+''The mark names the control byte.'' Each sigil states its C0 control character as a named `code:` param; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX carry that one param and nothing else — each opens or closes the text and states no bearing.
 
 ''The frame, in the transmission register and the mythic one at once:''
 
 * ''SOH'' — Start of Heading. The transmission opens on its heading; the parser reads identity before content. The Lar wakes at the doorpost and speaks the name of the place — the `lar:///` bearing the carrier will keep.
 * ''STX'' — Start of Text. The heading ends, the body begins. One steps across the threshold into the dwelling.
-* ''ETX'' — End of Text. The body is complete. The hearth is banked; the room falls quiet.
+* ''ETX'' — End of Text. The body stands complete. The hearth is banked; the room falls quiet.
 * ''EOT'' — End of Transmission. The frame closes and hands forward on `-> ?` — resumption unknown. The libation is poured at the crossroad; the message goes out to wherever the road runs. EOT is the carrier's own `yield`.
 
 ''SOH and EOT echo the bearing vectors.'' SOH opens facing a bearing (`? -> lar:///…`) as `aim` opens a turn; EOT releases to the unknown (`-> ?`) as `yield` closes one. The spine frames a meme the way the turn-frame frames an exchange.
@@ -82,7 +82,7 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 
 !! Namespace Resonance Glyphs — A Separate Mark
 
-Resonance glyphs are ''not'' spine sigils. They ride the ''SOH opener only'', as the `namespace:` param — a visible mark of which layer authored the carrier. They carry trust intent to human and machine readers; the parser takes the param as optional.
+Resonance glyphs do ''not'' join the spine. They ride the ''SOH opener only'', as the `namespace:` param — a visible mark of which layer authored the carrier. They carry trust intent to human and machine readers; the parser takes the param as optional.
 
 | Glyph | Layer | Resonance |
 |---|---|---|
@@ -101,7 +101,7 @@ Resonance glyphs are ''not'' spine sigils. They ride the ''SOH opener only'', as
 Two laws govern the namespace:
 
 # ''Opener-only.'' A resonance glyph rides SOH alone, as the `namespace:` param beside the code.
-# ''EOT is always bare.'' The resonance mark rides the heading (SOH); the release states its code and its bearing, and no namespace.
+# ''EOT rides bare, always.'' The resonance mark rides the heading (SOH); the release states its code and its bearing, and no namespace.
 
 <<~/ahu >>
 
@@ -207,6 +207,6 @@ kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elev
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;KcRyWnV2DI5BJfNN01S6fEImeeViBqpik1EIQC3fZxg
+<<^ code:"&#x0003;" >>ni:///sha-256;WNY8Ykdjc4WvFTKIlHTZY3Z1AgUS0WTblOnCV9etsaY
 
 <<^ code:"&#x0004;" -> ? >>

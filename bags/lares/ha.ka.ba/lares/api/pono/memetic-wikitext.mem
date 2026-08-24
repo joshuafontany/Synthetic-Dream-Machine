@@ -100,7 +100,7 @@ future document defines — each read as one encoding of one structure rather th
 * ''meme'' — a named unit of content. A meme holds exactly one intrinsic property: its address
   [LAR-URI]. Every other property composes: the meme WEARS components (its has-stack), each component
   itself a meme at its own address. Authority follows what a meme holds and who granted it, never what
-  it is claimed to be.
+  it claims to be.
 * ''worksite'' — a named region nested in a meme's content. Worksites nest, and a nested worksite's
   name extends its parent's path; a worksite addresses as a fragment anchor of its meme.
 * ''edge'' — a directed relation from one address toward another. Three kinds carry every relation:
@@ -173,7 +173,7 @@ facts the frame rests on, each the host's and not this grammar's:
 
 * ''The colon separator requires a strict identifier'' — TW5 tests the name against `/^[A-Za-z0-9\-_]+$/`
   before accepting `:`, so `$:/foo` never mis-reads as a named parameter. `code:` and `namespace:` pass.
-* ''A quoted value is a TW5 string literal'' — single, double, triple-double or `[[bracket]]` — and a
+* ''A quoted value reads as a TW5 string literal'' — single, double, triple-double or `[[bracket]]` — and a
   string literal carries UTF-8, so `namespace:"&#x2299;"` and `namespace:"ॐ ँ"` stand as written.
 * ''An unnamed value reads positional'', numbered in order. `?` and `->` ride as positional parameters,
   which is how the bearing arrow survives inside a macro call (#bearing-arrow).
@@ -183,7 +183,7 @@ value `///ha.ka.ba/…`, because `lar` passes the strict-identifier test and `:`
 been reading every `lar:` reference in this corpus as a `lar` parameter from the beginning; the grammar
 inherits that reading rather than declaring one.
 
-''The sigils are the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for
+''The sigils ride as the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for
 performing them in red — //rubrica//, red ochre, the practice standing in liturgical manuscripts from the
 13th century and earlier, and rubrication ran as its own production stage: the black text printed first,
 blank space left for a rubricator's hand. The two channels never compete for the same reading, because a
@@ -429,8 +429,8 @@ A sigil stands in two places and reads differently in each. In an exchange turn 
 an in-character scene, a transcript — the same glyphs read as ''content'': what was said, quoted.
 
 ''The gradient already answers this, and answers it correctly.'' A sigil resolves to whatever procedure
-its name binds; a name that binds none renders as its own text. That floor is not a fallback the
-grammar tolerates — for a quoted steering sigil it is the RIGHT render, because a transcript that
+its name binds; a name that binds none renders as its own text. That floor stands as no mere fallback the
+grammar tolerates — for a quoted steering sigil it renders RIGHT, because a transcript that
 resolved what it quotes would lie about what was said, and a record of speech survives nothing less.
 
 So no sigil declares which register it stands in, and none should: the register belongs to the CARRIER,
@@ -1273,6 +1273,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;iljONzXSeeJBRvi-uU6_MIURawoeV2kj9_ZqQJ86ZIE
+<<^ code:"&#x0003;" >>ni:///sha-256;v_99VPUC5BsGbBr6Cs0bpOvscEZH4LbJbQUwVQkyyoM
 
 <<^ code:"&#x0004;" -> ? >>

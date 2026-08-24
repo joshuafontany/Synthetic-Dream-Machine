@@ -167,8 +167,7 @@ The `lar:` scheme serves as the lararium ''sync-filter predicate'': only `lar:`-
 
 Two `lar:` URIs name one address exactly when their spellings match, codepoint for codepoint. No
 normalization applies at comparison time: a comparer that transforms before comparing manufactures
-equalities the author never wrote, and every transform a comparer applies is a transform a spoofer
-aims. The precedent stands in RFC 4151 §2.4, which settles `tag:` equality the same way so that
+equalities the author never wrote, and a spoofer aims whatever transform a comparer applies. The precedent stands in RFC 4151 §2.4, which settles `tag:` equality the same way so that
 handling software compares without transforming.
 
 The canonical spelling therefore carries the whole burden, and a conforming producer MUST emit it:
@@ -178,7 +177,7 @@ The canonical spelling therefore carries the whole burden, and a conforming prod
   spelling conforms;
 * no dot-segments — a URI carrying `.` or `..` as a complete segment stands INVALID, and a consumer
   MUST reject it rather than resolve it. Resolution-time dot-segment removal (RFC 3986 §5.2.4) rewrites
-  an address silently before any comparison, which is the spoofing surface this rule closes;
+  an address silently before any comparison — the spoofing surface this rule closes;
 * no empty segments — `//` within a path and a trailing `/` each produce one, and neither conforms.
 
 The session form never names a stable address (#path-taxonomy), so equality across the two forms never
@@ -218,7 +217,7 @@ Two consequences bind:
 
 !! Surface Designation — `@` Names a CRDT Surface
 
-The `@`-tag names a ''CRDT surface'' — a resolvable mutable doc (today an Automerge doc). It appears ONLY behind a ''kind-plane'' at `child[1]`, with the `@`-slug at `child[2]`. A meme ''namespace'' is a bare word at `child[1]` and carries no `@`. The two never collide: the `@` marks the surface, the bare word marks the namespace.
+A ''kind-plane'' segment at `child[1]` (`bags`, `wikis`, `cid`) opens a ''CRDT surface'' — a resolvable mutable doc (today an Automerge doc) — with the slug or hash at `child[2]`. A meme ''namespace'' stands as any other bare word at `child[1]`. The two never collide: the kind-plane word opens the surface, and any other word opens the namespace.
 
 * ''`bags/{slug}`'' — a bag: a mutable content surface (a composable recipe piece).
 * ''`wikis/{slug}`'' — a wiki: a `#has` bag-stack IDENTITY, distinct from its CANON (`bags/{slug}`). Its per-wiki live layers extend the identity as `wikis/{slug}/{temp,draft,working,personal}`.
@@ -240,9 +239,9 @@ Law summary:
 # `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
 # `child[1]` forks: a reserved ''kind-plane'' word (`bags`, `wikis`, `cid`) opens a CRDT surface or artifact; any other bare word is a ''meme namespace'' — the minting authority. The `@`-tag rides `child[2]` of a `bags`/`wikis` surface, and nowhere else.
 # A CRDT surface carries exactly one canonical address. A wiki's per-wiki live slots extend its identity at `child[3]` (`wikis/{slug}/{kind}`).
-# Resolution: the runtime resolves an `@`-tagged surface to an AutomergeUrl via the `BagResolver` map carried in the island manifest. The URI is the identity; the resolver maps it to the live doc. Two devices binding the same surface URI to different doc URLs (different recipes, different personal docs) is the normal case — the URI is the address, the doc is the house.
+# Resolution: the runtime resolves a surface to an AutomergeUrl via the resolver map carried in the island manifest. The URI carries the identity; the resolver maps it to the live doc. Two devices binding one surface URI to different doc URLs (different recipes, different personal docs) run as the normal case — the URI names the address, and the doc stands as the house.
 
-Registry pattern. A bag MAY hold tiddlers whose titles are //paths inside it// pointing at other surfaces. The canonical example is `bags/catalog`, which tracks corpus bags via entries at `lar:///ha.ka.ba/bags/catalog/corpus/{slug}` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/bags/{slug}` bag. Catalog catalogs; it does not host.
+Registry pattern. A bag MAY hold tiddlers whose titles read as //paths inside it//, pointing at other surfaces. `bags/catalog` carries the canonical example: it tracks corpus bags via entries at `lar:///ha.ka.ba/bags/catalog/corpus/{slug}` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/bags/{slug}` bag. Catalog catalogs; it does not host.
 
 <<~/ahu >>
 
@@ -425,11 +424,11 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 !! Belonging Lives in the Address
 
 ''A fragment path names its own parentage.'' `root#a/b` states its parent as `root#a` by the
-fragment-path law; nothing else has to carry it. A stored field naming the same parent is a second
+fragment-path law; nothing else has to carry it. A stored field naming the same parent would stand as a second
 spelling of one fact, and a second spelling can disagree with the first the moment both become editable.
 
-''Rendering is a different relation and no field could hold it.'' One meme renders into many places —
-`<<~ ahu #x -> lar:///other >>` points a worksite at a full address — so the relation is many-to-many and
+''Rendering carries a different relation, and no field could hold it.'' One meme renders into many places —
+`<<~ ahu #x -> lar:///other >>` points a worksite at a full address — so the relation runs many-to-many and
 lives in the ''markers that hold it'', in the carriers that write them. A child cannot list its renderers
 without a write on every transclusion.
 
@@ -450,6 +449,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;KF-sYmNGWWpth4p4HKAUwDwAoQMX9deNkpFw-I1nVPg
+<<^ code:"&#x0003;" >>ni:///sha-256;T_SPyDgrT1x0ln8a4j09RLB8HebQ_QODHRW7GZIcpm8
 
 <<^ code:"&#x0004;" -> ? >>
