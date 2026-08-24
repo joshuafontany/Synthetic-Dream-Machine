@@ -1,8 +1,8 @@
 /**
- * daemon-circle-tiddlers — the @daemon FOLLOW panel (the IoC social-graph surface).
+ * daemon-circle-tiddlers — the daemon FOLLOW panel (the IoC social-graph surface).
  *
  * The isomorphic sibling of daemon-persona-tiddlers' persona panel: a SMALL born-from-source surface on the
- * @daemon story river that LISTS a circle's follows (the nym under the recogniser's OWN names — private
+ * daemon story river that LISTS a circle's follows (the nym under the recogniser's OWN names — private
  * petname + last-seen glamour) and UNFOLLOWS one (a click carries the row's own nym). "Adding to a circle IS
  * the follow"; this surface reads that private graph and lets a human drop an edge.
  *
@@ -43,7 +43,7 @@ const VERB_PREFIX = "lar:///lararium.local.vm/verb/";
 // `petname-<i>`, `glamour-<i>` (positional, so a long hex nym never becomes a field name). The unfollow
 // button carries the row's `nym-<i>` + the active `circle`.
 const SURFACE_BODY = `\\whitespace trim
-! @daemon · Following
+! daemon · Following
 
 <div class="lares-circle-surface" data-lares-surface="circles">
 
@@ -61,7 +61,7 @@ const SURFACE_BODY = `\\whitespace trim
 </div>
 
 <div class="lares-circle-note">
-<p>Adding a follow needs a nym and its self-certifying card, so it rides the <code>lares circle add</code> CLI (a projected click cannot type a key). The graph is PRIVATE and LOCAL — nothing here reaches @crossroads.</p>
+<p>Adding a follow needs a nym and its self-certifying card, so it rides the <code>lares circle add</code> CLI (a projected click cannot type a key). The graph is PRIVATE and LOCAL — nothing here reaches the crossroads plane.</p>
 </div>
 
 </div>`;
@@ -71,7 +71,7 @@ const SURFACE_BODY = `\\whitespace trim
 const SUMMON_ACTION = `<$action-setfield $tiddler="${LARES_SURFACE_STATE}" text="${SURFACE_TITLE}"/>`;
 
 const PAGECTRL_BODY = `\\whitespace trim
-<$button class="tc-btn-invisible lares-pagecontrol" data-lares-summon="circles" tooltip="Open the @daemon follow surface">
+<$button class="tc-btn-invisible lares-pagecontrol" data-lares-summon="circles" tooltip="Open the daemon follow surface">
 ${SUMMON_ACTION}
 {{$:/core/images/permalink-button}} Following
 </$button>`;
@@ -79,7 +79,7 @@ ${SUMMON_ACTION}
 interface TiddlerSpec { readonly [field: string]: string }
 
 /**
- * The born-from-source @daemon follow-panel CODE tiddlers: the follow surface (tagged the shared
+ * The born-from-source daemon follow-panel CODE tiddlers: the follow surface (tagged the shared
  * Lares/Surface tag, so the switcher's wrapper transcludes it when summoned) + the $:/tags/PageControls
  * sidebar button that summons it.
  */
@@ -89,7 +89,7 @@ export const DAEMON_CIRCLE_TIDDLERS: readonly TiddlerSpec[] = [
 ];
 
 /**
- * Seed the born-from-source follow-panel tiddlers into the live @daemon TW5 wiki. Idempotent (setTiddler
+ * Seed the born-from-source follow-panel tiddlers into the live daemon TW5 wiki. Idempotent (setTiddler
  * overwrites). MUST run alongside seedDaemonUiTiddlers/seedDaemonPersonaTiddlers, BEFORE the projection
  * camera's first render (a headless node daemon simply rests these, never painting).
  */

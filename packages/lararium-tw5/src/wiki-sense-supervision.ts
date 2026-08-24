@@ -1,5 +1,5 @@
 /**
- * wiki-sense-supervision — the @daemon's supervision READ-verbs over its wiki islands + the
+ * wiki-sense-supervision — the daemon's supervision READ-verbs over its wiki islands + the
  * local proof-hold. The daemon asks a SUPERVISED island for `cohere` / `recall` by RIDING the
  * wiki-sensorium cap's signal surface ({@link SENSORIUM_SIGNAL} in, {@link SENSORIUM_FRAME} back) — this module
  * re-implements no perceiver verb; it correlates asks with answers across the worker wire.
@@ -223,7 +223,7 @@ export interface WikiSenseFederateRefusal {
   readonly status: "operator-gated";
   readonly awaits: "shore-Act";
   /** The crossing this refusal holds shut: the daemon's local proof ledger -> the peer FLOW-map. */
-  readonly crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure shore)";
+  readonly crossing: "proof-hold(local daemon ledger) -> proof-federate(disclosure shore)";
   /** The island the un-granted ask named (the designation echoes back for the audit trail). */
   readonly island: string;
 }
@@ -376,7 +376,7 @@ export function createWikiSenseSupervisor(
       return {
         status:   "operator-gated",
         awaits:   "shore-Act",
-        crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure shore)",
+        crossing: "proof-hold(local daemon ledger) -> proof-federate(disclosure shore)",
         island,
       };
     },

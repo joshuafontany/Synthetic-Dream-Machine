@@ -1,7 +1,7 @@
 /**
  * sensorium-lifecycle-verbs — the DURABLE sensorium lifecycle CAPS, run direct over the `manifest.json`
  * declaration (no store holder, no daemon — plain manifest-file I/O + the mesh reducer). The verbs the
- * `lares sense` door and the @daemon roster UX both call:
+ * `lares sense` door and the daemon roster UX both call:
  *
  *   roster · inspect          — READ (out-of-loop; agents free)               HOTL
  *   reconcile · reconcileAll  — re-settle a sensorium against its evidence     HOTL  (+ the gated cadence)

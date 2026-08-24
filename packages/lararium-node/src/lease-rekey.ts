@@ -8,7 +8,7 @@
  * lease — the lease stales, it never re-derives a secret.
  *
  * WHY A PER-WRITER SLOT, NEVER A BARE SCALAR. The epoch rides a MAX-REGISTER held as per-writer slots
- * (`epoch-lease`): each writer owns exactly one tiddler (`@daemon/lease-epoch/{resource}/{writer}`), so
+ * (`epoch-lease`): each writer owns exactly one tiddler (`bags/daemon/lease-epoch/{resource}/{writer}`), so
  * last-writer-wins WITHIN a slot stays safe (one owner holds it). The effective epoch = max over every slot.
  * Two hearths rolling the SAME resource concurrently each land effective+1 in their OWN slot, so on merge the
  * max only ever climbs. A bare shared scalar would let Automerge's LWW DROP a higher concurrent value — the

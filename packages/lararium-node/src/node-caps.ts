@@ -23,11 +23,11 @@
  * `flowMapReadFaceCap` (the http disclosure wire) + the two node cap-stacks.
  *
  * Two node stacks ride here:
- *   - composeHerm — BASE + CROSSROADS: substrate (the oracle island + social plane), the @daemon immune
- *     core, the carriage pair (a writable @meshpalace FLOW-map + the puller that fills it), the read-face
+ *   - composeHerm — BASE + CROSSROADS: substrate (the oracle island + social plane), the daemon immune
+ *     core, the carriage pair (a writable meshpalace FLOW-map + the puller that fills it), the read-face
  *     that serves that map, and — where a genesis stands to hand — the bulb. NO wiki, NO pool.
  *   - composeLararium — BASE + LIFT, wired by `composeCoreVessel` (wiki-slot, wiki, pool, mount); its
- *     opener composes the carriage pair alongside. The @daemon rides BOTH — the immune core, present
+ *     opener composes the carriage pair alongside. The daemon rides BOTH — the immune core, present
  *     from founding — and its registerBags omits the user-wiki bags where no wiki stands: the decouple.
  *
  * The carriage pair rides one shared builder (`carriageStack`, mesh floor), so the hearth, the Herm and
@@ -80,9 +80,9 @@ export const CAP = {
   bulb:       "bulb",
 } as const;
 
-// ── the node-ONLY cap: the http read-face that serves the @meshpalace FLOW-map ─────────────────────
+// ── the node-ONLY cap: the http read-face that serves the meshpalace FLOW-map ─────────────────────
 
-/** read-face — serves the @meshpalace PUBLIC FLOW-map over the HTTP server (the disclosure shore
+/** read-face — serves the meshpalace PUBLIC FLOW-map over the HTTP server (the disclosure shore
  *  at the wire). Requires substrate + meshpalace (the doc it projects). Disposes the HTTP face. */
 export function flowMapReadFaceCap(deps: {
   httpServer: Server; signerSeed: Uint8Array; storageDir: string; onLog?: (line: string) => void;
@@ -165,16 +165,16 @@ export interface ComposedHerm {
 /**
  * composeHerm — the wiki-LESS wayfarer #has-cap-stack, BASE + CROSSROADS:
  * [substrate, daemon, meshpalace, carriage, read-face, (bulb), …extraCaps].
- * No wiki, no pool — blind to sovereign content by structure. The @daemon stays (the immune core);
+ * No wiki, no pool — blind to sovereign content by structure. The daemon stays (the immune core);
  * its registerBags omits the absent user-wiki bags (the decouple the daemon-without-wiki finding
- * proved). The read-face serves the @meshpalace FLOW-map the carriage pair carries.
+ * proved). The read-face serves the meshpalace FLOW-map the carriage pair carries.
  */
 export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
   const vessel = await composeVessel([
     substrateCap(d.keel),
     daemonCap(d),
     // The carriage rides UNCONDITIONALLY here, self or no self: the read-face below REQUIRES the
-    // @meshpalace it projects, so a Herm that has met nobody still stands its map and serves an empty
+    // meshpalace doc it projects, so a Herm that has met nobody still stands its map and serves an empty
     // one. That is what a crossroads IS before anyone passes.
     ...carriageStack({
       repo:        d.repo,
@@ -189,7 +189,7 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
       ...(d.onLog ? { onLog: d.onLog } : {}),
     }),
     // The BULB face rides the SAME public floor (a distinct `/bulb/` prefix) — present only when the Herm HOLDS a
-    // bulb to hand. All-public boot material on the OPEN path; never the @cad carriage (bulb ⊥ stolon, ledger #1).
+    // bulb to hand. All-public boot material on the OPEN path; never the cad carriage (bulb ⊥ stolon, ledger #1).
     ...(d.bulb ? [bulbCap({
       httpServer: d.httpServer, bulb: d.bulb, signerSeed: d.signerSeed, storageDir: d.storageDir,
       ...(d.onLog ? { onLog: d.onLog } : {}),

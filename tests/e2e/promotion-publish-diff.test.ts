@@ -4,7 +4,7 @@
  *
  * Promotion is CARRIER-grain (operator ruling 2026-06-18): a MOVE of a carrier
  * root carries its whole group (root + #fragment + /path), so a meme publishes
- * entire and never orphans a fragment. Here @lares→@lararium (both already
+ * entire and never orphans a fragment. Here the lares bag → the lararium bag (both already
  * disk-mirrored) stands in for the working→canon crossing.
  *
  * THE round-trip's three once-unbuilt pieces are now CLOSED, each witnessed:
@@ -12,7 +12,7 @@
  *   - working CLI-reachability + ingest-back — wikis-ingest-back.test.ts (--in-wiki)
  *   - minted-@{slug} canon projection — minted-canon-projection.test.ts
  * This vector keeps its own focus: the MOVE gate + change-id + effect-record +
- * the disk publish-diff, with @lares→@lararium standing in for the crossing.
+ * the disk publish-diff, with lares→lararium standing in for the crossing.
  */
 
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
@@ -58,7 +58,7 @@ beforeAll(async () => {
   const r = await lar.cli(["act", "LOAD", "--source-uri", BOOT_MEME, "--to", LARES_URI, "--yes", "--json"]);
   if (r.json?.["ok"] !== true) throw new Error(`seed LOAD failed: ${JSON.stringify(r.json)}`);
   if (!(await awaitFileState(join(lar.root, "bags/lares", REL), true)))
-    throw new Error("seed: the @lares projection never materialized");
+    throw new Error("seed: the lares-bag projection never materialized");
 }, 120_000);
 afterAll(async () => { await lar.stop(); });
 

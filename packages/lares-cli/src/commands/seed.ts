@@ -3,9 +3,9 @@
  *
  * A nameless entity composed of #has caps: disk-grant (bags/) · synced-tree · the two
  * existing feed gestures, kind-routed per holding:
- *   - SYSTEM bags (@lares, @lararium — their docs mint at boot) → the diff-gated
+ *   - SYSTEM bags (lares, lararium — their docs mint at boot) → the diff-gated
  *     `ingest` gesture (disk-hash vs synced-hash vs island render-hash).
- *   - Every OTHER holding (@sdm, @elyncia, @lares-history, …) → the `act LOAD`
+ *   - Every OTHER holding (sdm, elyncia, lares-history, …) → the `act LOAD`
  *     gesture, whose island reactor mints the catalog-corpus entry on a virgin
  *     catalog (the ingest gate cannot).
  *
@@ -59,7 +59,7 @@ export function discoverHoldings(root: string): Array<{ holding: string; source:
   return names.sort().map((holding) => ({
     holding,
     source: join(bagsDir, holding),
-    // The disk dir `@elyncia` names bag `bags/elyncia` — mint through bagUri so the seed
+    // The disk dir `elyncia` names bag `bags/elyncia` — mint through bagUri so the seed
     // targets the bag the daemon registers.
     toBag: bagUri(holding),
   }));

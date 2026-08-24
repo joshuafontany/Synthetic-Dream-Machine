@@ -67,8 +67,8 @@ function makeCapabilityShore(opts: { gatePubKey: string; admitted: ReadonlySet<s
       });
       if (!v.ok) return { ok: false, reason: v.reason ?? "proof failed" };
       // The real barrier: a valid proof proves WHO, never WHETHER-GRANTED. A founded anon leaf holds
-      // a valid key but no delegation into @daemon → denied, exactly as a fresh browser vessel is.
-      if (!opts.admitted.has(peerPubKey)) return { ok: false, reason: "insufficient capability (not admitted to @daemon)" };
+      // a valid key but no delegation into the daemon bag → denied, exactly as a fresh browser vessel is.
+      if (!opts.admitted.has(peerPubKey)) return { ok: false, reason: "insufficient capability (not admitted to the daemon bag)" };
       return { ok: true, identifier: peerPubKey };
     },
   };
@@ -129,7 +129,7 @@ describe("browser↔node crossing — real gate · real Ed25519 · real capabili
 
     let crossed = false;
     harness.gate.once("connection", () => { crossed = true; });
-    // admitted set is EMPTY — the leaf's proof will verify, but it holds no @daemon grant.
+    // admitted set is EMPTY — the leaf's proof will verify, but it holds no daemon grant.
     harness.gate.arm(makeCapabilityShore({ gatePubKey: gatePub, admitted: new Set() }), AUD, gatePub);
 
     adapter = new LarWSClientAdapter({ url: `ws://127.0.0.1:${harness.port}`, identity, aud: AUD, gatePubKey: gatePub });

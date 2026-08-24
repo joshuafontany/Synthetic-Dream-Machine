@@ -44,7 +44,7 @@ function serveGenesis(): Plugin {
 // Browser-lararium app — Automerge WASM + module Web Workers + the genesis seed.
 // Config follows the Automerge "Vite" recipe (research-grounded 2026-06-25):
 //   - wasm()        : @automerge/automerge ships its core as .wasm
-// The genesis boot artifact is now island.genesis.json (the plain-data @oracle seed,
+// The genesis boot artifact is now island.genesis.json (the plain-data oracle seed,
 // materialize-fresh) — a native JSON import, so the old vite-plugin-arraybuffer (which
 // served the retired island.bin?uint8array binary import) is gone.
 // automerge-wasm's top-level-await is handled by the esnext target (build + dev),

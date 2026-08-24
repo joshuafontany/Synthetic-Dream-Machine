@@ -1,5 +1,5 @@
 /**
- * cas-transit — the REMOTE leg of `@cad` resolution: a member FETCHES a sealed ciphertext body it does not hold
+ * cas-transit — the REMOTE leg of `cad` resolution: a member FETCHES a sealed ciphertext body it does not hold
  * locally, across the mesh, and VERIFIES it secret-free before it ever returns.
  *
  * THE SHAPE (modeled, not libp2p). A minimal Bitswap-style exchange over our OWN member↔relay transport — the
@@ -10,7 +10,7 @@
  * DHT-FREE DISCOVERY (canon: hint → peers → bag-tracker). Discovery rides the EXISTING member↔relay connections
  * plus the relay's bag-tracker index (`cid → holders`) — NEVER a global DHT. Stock Bitswap falls to a DHT when no
  * session peer answers; HERE the bag-tracker IS that fallback authority, so the path stays inside the Nexus causal
- * island. A DHT, if ever added, sits BEHIND an `@oracle` rendezvous (its own causal-island boundary) — never this
+ * island. A DHT, if ever added, sits BEHIND an `oracle`-plane rendezvous (its own causal-island boundary) — never this
  * path.
  *
  * SECRET-FREE VERIFY (verify-cap ⊥ read-cap). The relay serving the block AND the fetcher receiving it BOTH run

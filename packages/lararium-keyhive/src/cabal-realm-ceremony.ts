@@ -60,7 +60,7 @@ import type { KeyhiveProvider } from "./keyhive-provider.js";
  *   · leaseWriterId + leaseSlots — REGISTER this writer's liveness lease slot
  *                  (cabalRealmLeaseSlot) at genesis epoch 0 in the provided
  *                  coordinator-free max-register backing store. In production the
- *                  backing store holds a set of @daemon lease-epoch tiddlers; here the
+ *                  backing store holds a set of daemon lease-epoch tiddlers; here the
  *                  caller passes a Map so the floor stays storage-blind.
  */
 export interface FoundCabalRealmOpts {
@@ -127,7 +127,7 @@ export interface FoundedCabalRealm {
  * runtime clock (the ceremony stays a deterministic, clock-free function — a test
  * passes a fixed value, a live founding passes Date.now()). The returned charter stands
  * publish-ready: hand it to mesh/realmGlamourExporter to serve it through the
- * existing @oracle read-face. This founds the charter; SERVING it (mounting the
+ * existing oracle read-face. This founds the charter; SERVING it (mounting the
  * read-face) stays the caller's separate act.
  */
 export async function foundCabalRealmWithGlamour(

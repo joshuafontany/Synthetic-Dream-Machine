@@ -1,5 +1,5 @@
 /**
- * browser-persona-panel.test.ts — the @daemon persona surface's data flow, over REAL IndexedDB.
+ * browser-persona-panel.test.ts — the daemon persona surface's data flow, over REAL IndexedDB.
  *
  * The panel is projection-rendered (a worker+camera boot vitest-browser can't easily drive), so
  * these tests stand the SHORES the panel rides: the vessel-side mint→list→wear round-trip against
@@ -47,7 +47,7 @@ async function readState(name: string): Promise<{ view: PersonaMultitudeEntry[];
   return { view, active };
 }
 
-describe("the @daemon persona surface — mint → list → wear over IndexedDB", () => {
+describe("the daemon persona surface — mint → list → wear over IndexedDB", () => {
   test("mint founds the next index with a default private label; a second mint climbs to h1", async () => {
     const name = idb();
     expect(await mintNext(name)).toBe(0);

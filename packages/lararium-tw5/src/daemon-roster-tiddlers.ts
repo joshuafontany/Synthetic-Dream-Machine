@@ -3,7 +3,7 @@
  *
  * ONE capability rendered two ways (UI ≡ API): every lifecycle button here fires the RESIDENT verb-summon
  * pattern — `$button` → `$action-setfield` on `…/verb/<verb>` carrying `verb`, the `lares-dispatch` marker,
- * and its `arg-*` fields — the SAME verb-summon a CLI `lares sense <verb>` drives through the @daemon. A
+ * and its `arg-*` fields — the SAME verb-summon a CLI `lares sense <verb>` drives through the daemon. A
  * human clicks; an agent writes the same summons; both land on ONE store. No divergent view.
  *
  * MODED AUTONOMY IN THE SURFACE (the seat grid, rendered): the reconcile button (HOTL) renders for
@@ -13,7 +13,7 @@
  * IS the authority (ocap), the TS mirror of the CLI's `--approve` and the MCP approval cap.
  *
  * The live roster LIST rides the LOCAL state slot the roster worker-verb pushes (the IN path — deferred
- * with the @daemon routed executor, F-C); the surface + its refresh button stand now, painting empty until
+ * with the daemon routed executor, F-C); the surface + its refresh button stand now, painting empty until
  * that push lands. The four seed sites collapse to ONE (seedDaemonProtocol), and this rides beside them.
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/daemon-ui-tiddlers · lar:///ha.ka.ba/lararium/api/living-grammar-palace#sensorium-lifecycle
@@ -42,7 +42,7 @@ const VERB_PREFIX = "lar:///lararium.local.vm/verb/";
  * promote/retire/purge gated behind the approval cap (HITL). The row variable `sensName` names the target.
  */
 const ROSTER_BODY = `\\whitespace trim
-! @daemon · Sensorium Roster
+! daemon · Sensorium Roster
 
 <div class="lares-daemon-surface" data-lares-surface="sensorium-roster">
 

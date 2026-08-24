@@ -289,7 +289,7 @@ describe("makeFormSearch — the form-leg policy (bearing · markers · keywords
 
 describe("makeFormSearch markers branch — the in-VM query-derive routing (one runtime, no node fallback)", () => {
   const fakeBasis = { axes: [], dimension: 12 } as SerializedBasis;
-  // The derive runs IN the @daemon VM now; the leg only sees its async result. A real derivation
+  // The derive runs IN the daemon VM now; the leg only sees its async result. A real derivation
   // carries BOTH planes — the linear stream AND the structural (graph) plane (the meme-ast TREE) —
   // so the query vector lands in the SAME full space as the corpus (capture's identical functor).
   const fakeDerivation = {

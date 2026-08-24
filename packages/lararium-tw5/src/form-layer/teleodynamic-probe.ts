@@ -50,7 +50,7 @@
  * module report; the probe defines the SHAPE of the input and leaves the
  * extraction to the caller (a synthetic sequence exercises it in tests).
  *
- * Pure + isomorphic: no fs/path/DOM imports; runs in node, browser, the @daemon
+ * Pure + isomorphic: no fs/path/DOM imports; runs in node, browser, the daemon
  * VM alike, like its form-layer siblings.
  */
 

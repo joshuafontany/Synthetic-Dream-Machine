@@ -1,13 +1,13 @@
 /**
  * oracle-read-face — the node-side wiring of the Two-Faced Substrate.
  *
- * Serves @oracle as the READ-ONLY PUBLIC substrate over the node's existing HTTP
+ * Serves the oracle doc as the READ-ONLY PUBLIC substrate over the node's existing HTTP
  * server (no new tech, no new port):
  *   GET /oracle/pointer      → the current signed monotone pointer (JSON)
  *   GET /oracle/<cid>.bin    → the content-addressed snapshot bytes (Automerge.save)
  *
  * Write-refusal is by construction: only GET is served, the bytes are named by their
- * own hash, and there is no sync session — nothing to write. On each @oracle change
+ * own hash, and there is no sync session — nothing to write. On each oracle-doc change
  * the face re-exports the snapshot and ratchets a fresh pointer (version++, prev-linked,
  * signed). The monotone counter persists to disk so it never regresses across a reboot
  * (a reset counter would read as a ROLLBACK to every reader).
@@ -46,9 +46,9 @@ export interface OracleReadFace {
 }
 
 /**
- * Mount the read-face on a running HTTP server, exporting from the @oracle handle and
+ * Mount the read-face on a running HTTP server, exporting from the oracle handle and
  * signing pointers with the node's seed. Idempotent in effect — re-exports only when
- * the @oracle content hash actually changes.
+ * the oracle doc's content hash actually changes.
  */
 export async function mountOracleReadFace(args: {
   readonly httpServer:   Server;
@@ -77,7 +77,7 @@ export async function mountOracleReadFace(args: {
 
   // Re-publish the pointer. A CONTENT change bumps the monotone version + advances the
   // lineage; an EA (the breath — force, no content change) renews the freshness lease on
-  // the SAME version+prev — the pointer is a LEASE, so a static @oracle must keep being
+  // the SAME version+prev — the pointer is a LEASE, so a static oracle doc must keep being
   // fed or readers reject it stale (the gap the first live cross-vessel read surfaced).
   async function reissue(force: boolean): Promise<void> {
     const doc = oracleHandle.doc();
@@ -98,7 +98,7 @@ export async function mountOracleReadFace(args: {
         mkdirSync(storageDir, { recursive: true });
         atomicWriteFileSync(statePath, JSON.stringify(persisted));
       } catch { /* quota — the in-memory pointer still serves this run */ }
-      onLog?.(`@oracle read-face: v${version} cid=${snap.cid.slice(0, 12)}… (${snap.bytes.byteLength}B)`);
+      onLog?.(`oracle read-face: v${version} cid=${snap.cid.slice(0, 12)}… (${snap.bytes.byteLength}B)`);
     }
   }
 
@@ -107,7 +107,7 @@ export async function mountOracleReadFace(args: {
   const onChange = (): void => { void reissue(false); };
   oracleHandle.on("change", onChange);
   // Ea — the breath that renews the lease before it lapses, even with no content change
-  // (feed-the-Lar: a static @oracle still breathes, so its pointer never reads stale).
+  // (feed-the-Lar: a static oracle doc still breathes, so its pointer never reads stale).
   const ea = setInterval(() => { void reissue(true); }, Math.floor(POINTER_TTL_MS / 2));
   ea.unref();
 

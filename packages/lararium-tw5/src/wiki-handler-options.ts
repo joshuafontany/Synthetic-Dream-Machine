@@ -12,7 +12,7 @@ import type { ResidencyOpPost } from "./worker-data-verbs.js";
 
 export interface WikiHandlerOptions {
   readonly composite: CompositeStore;
-  /** Catalog accessor — wiki oracles live in @catalog (access≠load). */
+  /** Catalog accessor — wiki oracles live in the catalog registry (access≠load). */
   readonly catalog:   CatalogAccessor;
   /** Worker→main poster — open-wiki alerts the wiki being switched away from. */
   readonly post:      ResidencyOpPost;
@@ -46,7 +46,7 @@ export interface PruneStaleOptions extends WikiMintHandlerOptions {
 }
 
 /** Options for recipe-composition operations (add-bag / remove-bag). Pono web3:
- *  the user recipe lives in @catalog (registry) — read+written via the accessor
+ *  the user recipe lives in catalog (registry) — read+written via the accessor
  *  (access≠load); residency commanded via daemon:residency-op. The daemon never
  *  mounts/unmounts a live wiki's composite layer; the recipe change syncs and each
  *  island reconciles its own mount set. */

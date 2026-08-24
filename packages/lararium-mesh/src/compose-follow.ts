@@ -5,12 +5,12 @@
  * board: it RECOGNISES a nym in the handle-book (TOFU — the recogniser's private memory of others' keys),
  * optionally SETS the recogniser's private label for it (the local petname, per-nym, never on the wire), and
  * ADDS the nym to a circle (the IoC social graph, private to the owning node). All three writes land locally;
- * NOTHING crosses to @crossroads. The ONLY federated surface a human ever presents stays the glamour they
+ * NOTHING crosses to the crossroads plane. The ONLY federated surface a human ever presents stays the glamour they
  * DELIBERATELY publish (who-face / handle-announce) — a separate, conscious act this module never performs.
  *
  * NEVER-FEDERATES, STRUCTURALLY. The proof is not a runtime check but the SHAPE of the shores: composeFollow
  * consumes a HandleBook (pure, I/O-free, holds no key and touches no network) and a `CircleStore` (a LOCAL
- * membership store — node-fs / IDB / a future PRIVATE-bag adapter). No board, announce, or @crossroads shore
+ * membership store — node-fs / IDB / a future PRIVATE-bag adapter). No board, announce, or crossroads shore
  * is injectable here, so no follow can reach the wire. `FollowResult.federated` reads the literal `false` —
  * the type says the follow left no central trace. A user leaves no roster entry; the graph stays home.
  *

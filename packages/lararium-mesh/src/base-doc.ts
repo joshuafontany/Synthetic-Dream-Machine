@@ -126,7 +126,7 @@ export const ENGINE_CORE_ID = "tiddlywikicore";
 /**
  * Stable lar: URI for a blob descriptor tiddler.
  * Each blob MUST have a descriptor tiddler at this URI carrying sha256/version/mimeType.
- * Blobs live in the runtime SYSTEM ISLAND (@oracle), beside the core engine bytes.
+ * Blobs live in the runtime SYSTEM ISLAND (oracle), beside the core engine bytes.
  * e.g. blobDescriptorUri("tiddlywikicore") → "lar:///ha.ka.ba/bags/oracle/blobs/tiddlywikicore"
  */
 export function blobDescriptorUri(blobId: string): string {

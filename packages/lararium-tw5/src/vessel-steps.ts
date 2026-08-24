@@ -45,7 +45,7 @@ export type ResolveBagHandle = (
 // sourcing etc.) stays a platform concern, passed in as the resolved handle.
 
 /**
- * Canon layer (@lararium / @lares): writable so residency actions can land
+ * Canon layer (the lararium and lares bags): writable so residency actions can land
  * tiddlers, but `defaultWritable:false` so unbagged TW5 saves keep routing to
  * the wiki — only an explicit `record.bag === bagId` write lands here.
  */
@@ -58,7 +58,7 @@ export function addSubstrateLayer(composite: CompositeStore, bagId: string, hand
   });
 }
 
-/** Read-only layer (@catalog, corpus bags): synced for reads, never written. */
+/** Read-only layer (catalog registry, corpus bags): synced for reads, never written. */
 export function addReadOnlyLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
   composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: false });
 }
@@ -124,14 +124,14 @@ export async function buildWikiMountSpec(
   inputs:  PrimaryMountInputs,
 ): Promise<{ spec: WikiMountSpec; personalUrl: string; draftUrl: string; workingUrl: string }> {
   // personal + draft + working bind TOGETHER per recipe-fingerprint (Q11).
-  // Fingerprint covers wikiDocId + libraryBags only (@lares/@lararium excluded
+  // Fingerprint covers wikiDocId + libraryBags only (the lares and lararium bags excluded
   // per Q4); the live wiki carries no libraryBags, so it keys on the wiki doc url alone.
   const recipeTrace = { wikiDocId: inputs.wikiUrl, libraryBagDocIds: [] as readonly string[] };
   const fingerprint = await computeRecipeFingerprint(recipeTrace);
   const { personalUrl, draftUrl, workingUrl } = await binding.resolveBinding(fingerprint, recipeTrace);
 
   // Typed structural grants — no slot dictionary. Library bags never ride the
-  // mount: the island resolves them from @catalog itself (boot = first reconcile),
+  // mount: the island resolves them from the catalog registry itself (boot = first reconcile),
   // so the live composition path and the boot path can never diverge.
   const grants: IslandGrants = {
     islandUrl:  inputs.islandUrl,
@@ -143,7 +143,7 @@ export async function buildWikiMountSpec(
   };
   // Designate the wiki's OWN canon (@{slug}) for disk projection alongside the
   // primaries. The pool's self-canon grant authorizes a minted user wiki to
-  // bags/{slug}; for the system wikis (@lares/@lararium) the slug-bag already
+  // bags/{slug}; for the system wikis (lares/lararium) the slug-bag already
   // sits in PRIMARY via a literal grant, so resolveDiskMirrors skips the dup.
   const recipe: WikiRecipe = {
     wikiSlug: inputs.wikiSlug,

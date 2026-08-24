@@ -222,7 +222,7 @@ export async function cmdWikiSwitch(args: ParsedArgs): Promise<number> {
 }
 
 /** `lares wiki hold <slug>` — pin a wiki as a rotatable active pin (budget-enforced:
- *  @daemon always + N rotatable; a hold past the budget releases the least-recently-held). */
+ *  The daemon bag always + N rotatable; a hold past the budget releases the least-recently-held). */
 export async function cmdWikiHold(args: ParsedArgs): Promise<number> {
   const slug = args.positional[0];
   if (!slug) {
@@ -541,7 +541,7 @@ const SUBCOMMANDS: Readonly<Record<string, { handler: WikiSubcommand; summary: s
   "init":  { handler: cmdWikiInit,  summary: "Mint a fresh wiki: wiki canonical + per-wiki draft + recipe. Idempotent." },
   "open":  { handler: cmdWikiOpen,  summary: "Set which wiki the next `lares vessel stand --foreground` boot mounts as active. Does not live-remount the current vessel." },
   "switch": { handler: cmdWikiSwitch, summary: "LIVE-activate a wiki (no reboot — the true swap; wakes it cold from its recipe). Browser flips the projection surface." },
-  "hold":    { handler: cmdWikiHold,    summary: "Pin a wiki as a rotatable active pin (@daemon always + N rotatable; a hold past budget releases the least-recently-held)." },
+  "hold":    { handler: cmdWikiHold,    summary: "Pin a wiki as a rotatable active pin (the daemon bag always + N rotatable; a hold past budget releases the least-recently-held)." },
   "release": { handler: cmdWikiRelease, summary: "Drop a wiki's rotatable pin (it stays live, becomes a cooling candidate)." },
   "active":  { handler: cmdWikiActive,  summary: "Show the live switcher state: which wikis run now + which are held + the projection surface." },
   "sync":  { handler: cmdWikiSync,  summary: "Walk wikis/<slug>/memes/** and ingest into the canonical bag. Idempotent." },

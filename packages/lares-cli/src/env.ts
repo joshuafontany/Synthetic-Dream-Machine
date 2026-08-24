@@ -1,9 +1,9 @@
 /**
  * env — the ONE environment contract every CLI command and the test harness honor.
  *
- *   LAR_ROOT  — the CORPUS/resource root of ONE @daemon's holdings (bags · wikis · genesis).
+ *   LAR_ROOT  — the CORPUS/resource root of ONE daemon's holdings (bags · wikis · genesis).
  *               Explicit siting, never a silent global-tree default: an operator points each
- *               @daemon at ITS resources. The VESSEL STATE roots separately, in the operator's
+ *               daemon at ITS resources. The VESSEL STATE roots separately, in the operator's
  *               home (~/.lares, see larHome); LAR_ROOT also isolates that state for staged pairs.
  *   LAR_BAGS · LAR_WIKIS · LAR_GENESIS · LAR_CAS — per-resource overrides. Each resource sites
  *               INDEPENDENTLY (composable #has caps); unset → it derives off LAR_ROOT.
@@ -51,16 +51,16 @@ export function resolveLarRoot(opts: {
   presetEnabled: boolean;
   repoRoot: string;
 }): string {
-  if (opts.larRootEnv) return opts.larRootEnv;      // explicit per-@daemon siting (also the ephemeral sandbox)
+  if (opts.larRootEnv) return opts.larRootEnv;      // explicit per-daemon siting (also the ephemeral sandbox)
   if (opts.presetEnabled) return opts.repoRoot;     // the named repo dev-preset opts in
   throw new Error(
-    "no corpus root sited — set LAR_ROOT to this @daemon's resource tree, or enable the repo " +
+    "no corpus root sited — set LAR_ROOT to this daemon's resource tree, or enable the repo " +
     "dev-preset (LAR_DEV_REPO_ROOT=1, or a committed lar-dev-root.json marker). No silent repo default.",
   );
 }
 
 /**
- * CORPUS/resource root — the base each @daemon sites EXPLICITLY (bags · wikis · genesis derive off
+ * CORPUS/resource root — the base each daemon sites EXPLICITLY (bags · wikis · genesis derive off
  * it unless independently overridden). LAR_ROOT sites it; the named repo dev-preset opts the checkout
  * in; unconfigured throws a CLEAN error (mirroring vesselDid — no silent global-tree fallback).
  * The vessel STATE roots separately, in the home (see larHome).
@@ -74,10 +74,10 @@ export function larRoot(): string {
 }
 
 // ── Composable resource caps ──────────────────────────────────────────────────────────────────────
-// Each resource sites INDEPENDENTLY off its own env var (a #has cap the @daemon carries), else derives
+// Each resource sites INDEPENDENTLY off its own env var (a #has cap the daemon carries), else derives
 // off the corpus root. A nameless-entity's resource cap-stack composes from these, resource by resource.
 
-/** The bags dir — `LAR_BAGS`, else `<corpus>/bags`. The @daemon's holdings tree. */
+/** The bags dir — `LAR_BAGS`, else `<corpus>/bags`. The daemon's holdings tree. */
 export function larBagsDir(): string {
   return process.env["LAR_BAGS"] ?? join(larRoot(), "bags");
 }

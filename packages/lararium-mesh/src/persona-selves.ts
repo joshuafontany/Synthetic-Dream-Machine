@@ -93,7 +93,7 @@ export function withoutPersonaSelfName(
 
 /**
  * Fold a whole persona bag's tiddlers into the multitude — `[handleIndex, PersonaSelf]` pairs ascending. Only
- * titles under the selves prefix read; every other @persona tiddler (the bindings, the sentinels, the hearth
+ * titles under the selves prefix read; every other persona-plane tiddler (the bindings, the sentinels, the hearth
  * true-name) passes by untouched, so the plane carries the identity machinery and these labels side by side.
  */
 export function foldPersonaSelves(

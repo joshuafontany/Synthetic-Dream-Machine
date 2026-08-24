@@ -3,7 +3,7 @@
  *
  * Lives in mesh (the VM-free layer, below tw5) so a tw5 plugin module — the in-VM
  * capture annotate — can import it and Vite bundles it into the plugin, running the
- * annotate INSIDE the @daemon TW5 VM (the one-runtime lock). mempalace re-exports
+ * annotate INSIDE the daemon TW5 VM (the one-runtime lock). mempalace re-exports
  * these for the node-side CLI writeback path.
  *
  * Gradient, never verdict: records 0..20 band readings, never pass/fail.

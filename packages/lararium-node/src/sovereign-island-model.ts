@@ -80,7 +80,7 @@ export function runSovereignWorker(
     // corpus CAS (staged carrier bodies). The caller re-verifies cid==hash(bytes), so a two-dir
     // lookup never widens trust.
     //
-    // THE REMOTE @cad TRANSIT LEG composes AROUND this local read at the DAEMON/RELAY tier, not here: a
+    // THE REMOTE cad TRANSIT LEG composes AROUND this local read at the DAEMON/RELAY tier, not here: a
     // sovereign WORKER holds no member↔relay transport, so its resolver stays deliberately LOCAL-FIRST
     // (the innermost layer). Where a transport DOES stand (the daemon), wrap this local read with
     // `makeCidResolver(localRead, casTransitTransport, cacheWriteThrough)` (@lararium/mesh): a local miss

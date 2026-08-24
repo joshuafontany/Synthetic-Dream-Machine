@@ -1,6 +1,6 @@
 /**
  * herm-carriage-relay-stand.test.ts — WAVE 1 of the full-pono Herm: a Herm STANDS the carriage crossroads
- * (Socket B) so a family's hearths dial IT to carry sealed @cad bodies between each other.
+ * (Socket B) so a family's hearths dial IT to carry sealed cad bodies between each other.
  *
  * This proves the boot's relay-STANDING shore (the server side), the complement to carriage-relay-serve-loop.test.ts
  * (which proves the vessel's serve-loop client side against a free-standing relay):
@@ -16,7 +16,7 @@
  *
  * The full openNodeHerm boot (genesis + identity + read-face) stays outside this headless proof — here the boot's
  * relay-standing gate + seed-resolution run VERBATIM (`resolveRelayGateSeed` + the `startCarriageRelay` ternary),
- * and every crypto piece is REAL (Ed25519 proof-of-possession, the @cad seal, secret-free verify). What only a Pi /
+ * and every crypto piece is REAL (Ed25519 proof-of-possession, the cad seal, secret-free verify). What only a Pi /
  * two-OS-process crossing proves: a stable bound port surviving a real process restart, the LAN secure-context shore.
  *
  * Gate: lar:///ha.ka.ba/lararium/node/herm-carriage-relay-stand

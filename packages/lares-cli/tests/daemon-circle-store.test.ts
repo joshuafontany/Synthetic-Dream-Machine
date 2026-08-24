@@ -1,11 +1,11 @@
 /**
- * daemon-circle-store — the CLI follow-graph adapter drives the @circles DAEMON VERBS, never a local file.
+ * daemon-circle-store — the CLI follow-graph adapter drives the circles DAEMON VERBS, never a local file.
  *
- * The source-of-truth move at the CLI shore: composeFollow's CircleStore now writes @circles (via circle-add /
+ * The source-of-truth move at the CLI shore: composeFollow's CircleStore now writes the circles doc (via circle-add /
  * circle-remove / circle-list over the sock) instead of a per-device JSON file. These hold that:
  *   · add/remove/members/circles each dispatch the matching circle-* verb, carrying the operator DID.
- *   · members / circles READ the daemon's @circles result back.
- *   · NEVER-FEDERATES: the adapter reaches ONLY circle-* verbs — no @crossroads / board / announce shore.
+ *   · members / circles READ the daemon's circles result back.
+ *   · NEVER-FEDERATES: the adapter reaches ONLY circle-* verbs — no crossroads / board / announce shore.
  *   · a daemon error surfaces as itself (never a silent local fallback — the graph's home moved).
  */
 
@@ -48,7 +48,7 @@ describe("makeDaemonCircleStore — the circles-backed CircleStore", () => {
     expect(h.calls).toEqual([{ verb: "circle-remove", args: { circle: "following", nym: "aa" }, requestedBy: OP }]);
   });
 
-  test("members READS @circles.memberDids back via circle-list", async () => {
+  test("members READS circles.memberDids back via circle-list", async () => {
     h.output = { members: ["aa", "bb"] };
     const members = await makeDaemonCircleStore(OP).members("following");
     expect(members).toEqual(["aa", "bb"]);

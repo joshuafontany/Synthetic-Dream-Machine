@@ -23,7 +23,7 @@
  * hands back names itself and its cure in the reporter line.
  *
  * ── DRIVEN FROM OUTSIDE THE LIVE VESSEL ─────────────────────────────────────────────────────────
- * This stands its own engine and never reaches for a running @daemon. A suite that asked the live
+ * This stands its own engine and never reaches for a running daemon. A suite that asked the live
  * vessel would measure whatever that vessel happens to hold — its bags, its edits, its uptime — and
  * report the operator's state as the grammar's behaviour. The wiki here boots from the same core and
  * plugins a vessel does and holds nothing else, so what a test reads, the grammar put there.

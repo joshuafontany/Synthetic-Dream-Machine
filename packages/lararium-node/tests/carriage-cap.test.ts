@@ -1,6 +1,6 @@
 /**
  * carriage-cap — the composable Herm's carriage: pull a source's public FLOW-map, merge it into the
- * @meshpalace the cap was wired to, so the Herm CARRIES (and re-serves) what it cannot author. The
+ * meshpalace doc the cap was wired to, so the Herm CARRIES (and re-serves) what it cannot author. The
  * carriage-by-aggregate-reserve half of Lares Viales, witnessed at the cap level (composeVessel wires
  * it over a meshpalace-providing cap). Supersedes the retired createHerm/startHerm unit witness; the
  * live daemon-full relay-chain rides docker-compose.mesh.yml.
@@ -29,7 +29,7 @@ const meshpalaceProviding = (handle: MeshPalaceComponent["handle"]): CapModule =
   ({ id: CAP.meshpalace, build: () => ({ handle } as MeshPalaceComponent) });
 
 describe("carriageCap — the composable Herm carries a peer's FLOW-map (pull → merge)", () => {
-  test("pullOnce merges a source's records into the @meshpalace the cap was wired to", async () => {
+  test("pullOnce merges a source's records into the meshpalace doc the cap was wired to", async () => {
     const repo = new Repo({ sharePolicy: async () => true });
 
     // SOURCE — a vessel serving one public dial over a real read-face.

@@ -9,7 +9,7 @@
  *
  * The load-bearing content-sync core: the founder vessel mints
  * the joinee into its PersonaGroup (packPersonaCrossing), ships the membership as capEvents in the admit
- * payload, the joinee applies it (runApplyAdmitPayload → @daemon), then BOOTS restoring its own Archive so
+ * payload, the joinee applies it (runApplyAdmitPayload → the daemon doc), then BOOTS restoring its own Archive so
  * its prekeys match the card the founder minted-to (bootDaemonKeyhive), hydrates, and decrypts the shared
  * content. No throwaway identity, no founder-card side channel — the crossing stands on the real path.
  */
@@ -90,7 +90,7 @@ describe("two vessels bind under one Handle", () => {
     } as Parameters<typeof runDeviceAdmitEdge>[0]);
     const payload = { ...base, capEvents: bundle.capEvents };
 
-    // Joinee applies the payload (writes the membership to its own @daemon), then BOOTS restoring its Archive.
+    // Joinee applies the payload (writes the membership to its own daemon doc), then BOOTS restoring its Archive.
     const joineeRepo = new Repo({ sharePolicy: async () => true });
     const applied = await runApplyAdmitPayload({
       repo: joineeRepo, vesselSeed: JOINEE_SEED, vesselVerifyingKey: joineeKey,

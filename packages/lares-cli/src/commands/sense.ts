@@ -15,7 +15,7 @@
  * per-palace flock makes a SECOND holder exit rather than pile up. So a process that opens a plane
  * directly cannot share the vessel's holder — it opens its own beside it, and N sessions become N
  * unsynchronized clients on one index. No lock cures that; only ONE OWNER does. Every verb here rides
- * the @daemon's composed caps, and nothing behind it opens a store.
+ * the daemon's composed caps, and nothing behind it opens a store.
  */
 
 import { openMemorySensorium, sensoriumLenses, sensoriumNames, sensoriumDir, memorySensoriumDir } from "@lararium/node";
@@ -80,7 +80,7 @@ type Verb = (typeof VERBS)[number];
  * namespace. `pour` = the sovereign harvest (content + planes + worldline in one pass), NOT the guest miner.
  * `recall` reads the verbatim drawers (the rich stamp-filter reader) over the SOVEREIGN content plane —
  * the SAME dir `sense search --lens content` opens (both derive memorySensoriumContentDir() through
- * mempalace-pool; the @daemon recall verb NAMES it, never the guest). Guest-shaped recall output means a
+ * mempalace-pool; the daemon recall verb NAMES it, never the guest). Guest-shaped recall output means a
  * stale daemon dist or a dirty sovereign store, never a wrong-store read.
  */
 const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | number>> = {

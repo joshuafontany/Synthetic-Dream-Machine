@@ -2,7 +2,7 @@
  * mine-retry — the SHARED retry-on-busy helper for every writer that drives a `mempalace mine`.
  *
  * The palace lock is the cross-process coordination: ONE held lock means another writer (a live
- * @daemon flush, a concurrent backfill, a per-spirit mine) is mid-mine. `MineAlreadyRunning` /
+ * daemon flush, a concurrent backfill, a per-spirit mine) is mid-mine. `MineAlreadyRunning` /
  * `LockHeldByOtherProcess` / `is held by PID` is a BUSY signal, not an error (exactly SQLite's
  * SQLITE_BUSY) — the caller MUST WAIT and retry, never FAIL. We back off (exponential + full
  * jitter) and re-run, so the daemon flush, the bulk backfill, and the per-spirit mine coexist

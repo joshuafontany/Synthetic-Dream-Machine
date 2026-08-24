@@ -1,6 +1,6 @@
 /**
  * carriage-serve-loop — the vessel's SERVE side of the carriage: it dials a carriage relay over an authenticated
- * WS channel and answers members' `want-block`s on a clean poll interval, so a sealed @cad body crosses hearth to
+ * WS channel and answers members' `want-block`s on a clean poll interval, so a sealed cad body crosses hearth to
  * hearth. This closes the LIVE-WIRE: a member over the relay carries a sealed ciphertext; a stranger draws Mu.
  *
  * INERT UNTIL CONFIGURED. The vessel starts NO loop when no relay URL rides the config — the caller gates the whole

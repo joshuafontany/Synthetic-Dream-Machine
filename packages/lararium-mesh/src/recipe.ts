@@ -16,8 +16,8 @@
  * Bag stack order: lowest-priority first → highest-priority last (TW5 convention).
  * Each entry in `bagStack` is a well-known lar: bag ID (a root doc URI or corpusLarUri).
  *
- * Genesis seeds NO recipes — user recipes live in the user's @catalog (registry),
- * minted per-wiki by init-wiki. @lararium stays pure protocol substrate.
+ * Genesis seeds NO recipes — user recipes live in the user's catalog registry,
+ * minted per-wiki by init-wiki. The lararium bag stays pure protocol substrate.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/recipe
  */

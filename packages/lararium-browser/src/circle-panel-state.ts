@@ -1,8 +1,8 @@
 /**
- * circle-panel-state — shape a circle's follow-view into the @daemon follow-panel's push args.
+ * circle-panel-state — shape a circle's follow-view into the daemon follow-panel's push args.
  *
  * The isomorphic sibling of persona-panel-state. The vessel HOLDS the follow-graph (main-thread IDB); the
- * @daemon follow surface RENDERS in the worker. This pure function turns a {@link FollowView} list + the
+ * daemon follow surface RENDERS in the worker. This pure function turns a {@link FollowView} list + the
  * active circle id into the flat, string-only field bag the `circle-state` worker verb writes onto
  * $:/temp/lares/circles (the surface iterates `[list[…]]` by POSITION and reads `nym-<i>` / `petname-<i>` /
  * `glamour-<i>` by interpolated field name — positional indices, so a long hex nym never becomes a field name).

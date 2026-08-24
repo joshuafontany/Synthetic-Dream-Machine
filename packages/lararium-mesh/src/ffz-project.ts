@@ -397,7 +397,7 @@ export function measureStep(
 // PURE: like the one servo, every function returns fresh state and mutates nothing.
 // This is the FUSION math over GIVEN per-plane drifts — the live 3-plane vector feed
 // (content embeddings · form/structure signals) rides the node-side orchestrator
-// (mempalace `ffz-orchestrator`), BUILT and tested; it runs live as a @daemon verb
+// (mempalace `ffz-orchestrator`), BUILT and tested; it runs live as a daemon verb
 // post-re-harvest (gated on the nuke/re-harvest), no daemon caller wired yet.
 // ───────────────────────────────────────────────────────────────────────────
 

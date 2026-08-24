@@ -1,7 +1,7 @@
 /**
- * persona-panel-state — shape a persona multitude-view into the @daemon panel's push args.
+ * persona-panel-state — shape a persona multitude-view into the daemon panel's push args.
  *
- * The vessel HOLDS the persona vault (main-thread IDB); the @daemon persona surface RENDERS in
+ * The vessel HOLDS the persona vault (main-thread IDB); the daemon persona surface RENDERS in
  * the worker. This pure function turns a {@link PersonaMultitudeEntry} list + the worn index into
  * the flat, string-only field bag the `persona-state` worker verb writes onto
  * $:/temp/lares/personas (the surface iterates `[list[…]]` and reads `petname-<idx>` by

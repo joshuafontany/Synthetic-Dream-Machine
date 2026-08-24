@@ -1,7 +1,7 @@
 /**
  * oracle-read-client — the consumer side of the Two-Faced Substrate.
  *
- * Proves the reader pulls + verifies + loads a peer's @oracle over an injected fetch,
+ * Proves the reader pulls + verifies + loads a peer's oracle doc over an injected fetch,
  * and REFUSES a lying host: a tampered snapshot (hash mismatch), a rolled-back pointer,
  * and a wrong-publisher pointer all fail closed. The first cross-vessel read, in a test.
  */

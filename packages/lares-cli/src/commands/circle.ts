@@ -11,17 +11,17 @@
  *   list [--to <circle>]         the private follow-view — nyms under the recogniser's OWN names (petname +
  *                                last-seen glamour). No --to lists every circle.
  *
- * NEVER A FEDERATED WRITE. This drives `composeFollow` over the @circles-backed CircleStore (the FOLLOW-GRAPH
+ * NEVER A FEDERATED WRITE. This drives `composeFollow` over the circles-backed CircleStore (the FOLLOW-GRAPH
  * daemon verbs — circle-add/circle-remove/circle-list — over the sovereign circles doc) + the LOCAL handle-
- * book (the recogniser's private memory, a 0o600 file under the identity home). The membership rides @circles,
+ * book (the recogniser's private memory, a 0o600 file under the identity home). The membership rides the circles doc,
  * a PRIVATE bag the self-slot FLEET-syncs same-operator (a follow lands on ALL the operator's own devices) and
- * NEVER federates to a stranger. No board, announce, or @crossroads shore is reachable here, so a follow leaves
+ * NEVER federates to a stranger. No board, announce, or crossroads shore is reachable here, so a follow leaves
  * NO central trace. Publishing a public glamour stays a SEPARATE, deliberate act (`lares persona` + a who-face
  * publish), never fired here. The default circle is `following` (the primary system circle seedCirclesDoc plants).
  *
  * Fail-closed: following an UNMET nym with no `--card` REFUSES (you cannot name-into-a-circle a handle you
  * have never met) — carry its self-certifying HandleCard to admit it first. Recognition stays CLIENT-side
- * (the local handle-book) ahead of the @circles membership write; the handle-book co-move is the open fork.
+ * (the local handle-book) ahead of the circles membership write; the handle-book co-move is the open fork.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-two-stacks
  */
@@ -125,7 +125,7 @@ async function circleAdd(args: ParsedArgs): Promise<number> {
     data: { nym: result.nym, circle: result.circleId, recognized: result.recognized, petname: result.petname, federated: result.federated },
     human: () => {
       console.log(`followed ${result.petname ? `"${result.petname}"` : nym.slice(0, 16) + "…"} into circle "${result.circleId}".`);
-      console.log(`  the follow is PRIVATE and LOCAL — nothing reached @crossroads (no central trace).`);
+      console.log(`  the follow is PRIVATE and LOCAL — nothing reached the crossroads plane (no central trace).`);
       if (!result.petname) console.log(`  name it for yourself with --petname '<label>' (private; never federates).`);
     },
   });

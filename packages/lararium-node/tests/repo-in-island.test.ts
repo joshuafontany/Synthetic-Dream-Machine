@@ -134,7 +134,7 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
 
     // Wait for the fixture's change listener to be live before mutating.
     // The fixture selects the writable relational binding (b.writable) to skip
-    // the read-only @lararium binding prepended at index 0 by VesselIslandPool.
+    // the read-only lararium-bag binding prepended at index 0 by VesselIslandPool.
     // The fixture emits repo:synced after handle.whenReady() resolves.
     await waitForSynced(all);
 

@@ -1,6 +1,6 @@
 /**
  * `lares herm` — stand a HERM (Lares Viales), the wiki-less wayfarer that STANDS the carriage crossroads
- * (Socket B) a family's hearths dial to carry sealed @cad bodies between each other.
+ * (Socket B) a family's hearths dial to carry sealed cad bodies between each other.
  *
  * This is a stand-up verb, NOT a fork of the boot: it spawns the SAME `main.js` the `lares vessel stand` path runs,
  * routed to `openNodeHerm` via `--recipe herm`, with the carriage relay standing when a relay port rides the
@@ -116,7 +116,7 @@ export async function cmdHerm(args: ParsedArgs): Promise<number> {
     human: () => {
       console.log("lares herm — the carriage crossroads (Lares Viales)");
       console.log(`  herm:        ${live ? "live" : "down"} on read-face :${port}${note ? ` — ${note}` : ""}`);
-      console.log(`  relay port:  ${relayPort}  (Socket B — hearths dial this to carry sealed @cad bodies)`);
+      console.log(`  relay port:  ${relayPort}  (Socket B — hearths dial this to carry sealed cad bodies)`);
       if (!relaySeed && ownGateKey) console.log(`  gate key:    ${ownGateKey}  (derived from this Herm's own identity — stable across restarts)`);
       if (relaySeed) console.log(`  gate key:    (pinned via --relay-seed) — see dial lines below / the node log`);
       if (dialHint.length > 0) {

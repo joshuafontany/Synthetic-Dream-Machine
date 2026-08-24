@@ -3,7 +3,7 @@
  *
  * Canonical assembly:
  *   1) `expandRecipe(recipe)` → ordered slot URIs (top of array = highest priority)
- *   2) addLayer for each slot in cascade order (bottom-up): @oracle floor first, temp last
+ *   2) addLayer for each slot in cascade order (bottom-up): oracle floor first, temp last
  *   3) temp slot uses a MemoryTiddlerStore; all other slots use AutomergeDocStore
  *   4) IslandAdaptor projection registers
  *   5) initial replay + sync complete + synchronous flushNalu so the wiki carries
@@ -46,7 +46,7 @@ export interface BuildIslandRecipeInput {
  * Build the sovereign island recipe and return the adaptor.
  *
  * Cascade layering: walks `expandRecipe()` in reverse so the lowest-priority
- * slot (@oracle, the floor) registers first via `addLayer`. CompositeStore's
+ * slot (oracle, the floor) registers first via `addLayer`. CompositeStore's
  * "first wins" read order matches the slot array's top-first orientation.
  */
 export function buildIslandRecipe(input: BuildIslandRecipeInput): {
@@ -61,7 +61,7 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
   const workingSlot  = wikiSlotUri(recipe.wikiSlug, "working");
   const stores: Array<{ slot: SlotUri; store: AutomergeDocStore | MemoryTiddlerStore }> = [];
 
-  // Bottom-up addLayer order. Slot at index slots.length-1 (@oracle, the floor) lands first.
+  // Bottom-up addLayer order. Slot at index slots.length-1 (oracle, the floor) lands first.
   let tempStore: MemoryTiddlerStore | null = null;
   for (let i = slots.length - 1; i >= 0; i--) {
     const slot = slots[i]!;
@@ -87,9 +87,9 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
   // points at its per-wiki working slot (`wikis/{slug}/working`, the saved live
   // layer projecting to disk wikis/{slug}); its bags/{slug} canon rides below as
   // read-only, published only by a promotion MOVE (wiki-layer-ontology#shore-law).
-  // A grant-less mount — @daemon itself, a control plane with no working/canon
+  // A grant-less mount — the daemon bag itself, a control plane with no working/canon
   // split — has no working layer, so it falls back to its OWN bag (wikiBagUri(slug)
-  // = @daemon, granted), keeping a writable default path instead of throwing.
+  // = the daemon bag, granted), keeping a writable default path instead of throwing.
   // Volatile (lives in the per-wiki temp), set once at boot, shadows any fallback
   // by priority. The bag-paths cascade reads these to route by prefix to the wiki's
   // OWN per-wiki live layers — the address tells the truth (no global slot names).

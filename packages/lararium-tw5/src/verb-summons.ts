@@ -1,7 +1,7 @@
 /**
  * verb-summons — CRDT verb-summons tiddler → volatile local invocation relay.
  *
- * External vessels write verb-summons tiddlers at @daemon/summons/<id> to the
+ * External vessels write verb-summons tiddlers at bags/daemon/summons/<id> to the
  * Automerge doc. The daemon island's CompositeStore subscriber calls
  * heedSummons on every change; this translates a summons tiddler into
  * a volatile local invocation and tombstones the summons entry.

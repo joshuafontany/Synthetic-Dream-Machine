@@ -2,15 +2,15 @@
  * bulb — the corm-and-rhizome BULB cap: a HELD cold-boot snapshot that carries its own next generation.
  *
  * The bulb = "seed-inside" (vessel-caps): the whole ALL-PUBLIC boot material a stranger needs to kindle their OWN
- * sovereign hearth — the genesis @oracle seed, the engine + plugin CAS bytes, the social bootstrap pointers, PINNED
+ * sovereign hearth — the genesis oracle seed, the engine + plugin CAS bytes, the social bootstrap pointers, PINNED
  * to a charter chain-head epoch. A Herm HOLDS it and serves it FROZEN offline / self-refreshed online (the oracle-
  * substrate corm-lease). It hands the FIRE (engine + genesis + grammar) — NEVER a key: the kindled hearth mints its
  * own sovereign self-certifying key from first breath (`kindleFromBulb`), so carry ⊥ read holds (the bulb carries
  * public boot material; the new hearth's keys never touch the Herm).
  *
- * ALL-PUBLIC → the PUBLIC FLOOR ONLY. The bulb rides the read-face (oracle-substrate) EXCLUSIVELY — NEVER the @cad
+ * ALL-PUBLIC → the PUBLIC FLOOR ONLY. The bulb rides the read-face (oracle-substrate) EXCLUSIVELY — NEVER the cad
  * carriage (Socket B). Routing a public artifact through the seal/keyring lane would collapse the OPEN path into
- * CLOSED (crypto-spine ledger #1: the @cad seal ⊥ the ECDH box). Bulb ⊥ stolon: the bulb is the OPEN path (a stranger
+ * CLOSED (crypto-spine ledger #1: the cad seal ⊥ the ECDH box). Bulb ⊥ stolon: the bulb is the OPEN path (a stranger
  * births their own sovereign hearth); the stolon is the CLOSED path (invite a device into YOUR fleet).
  *
  * CONTENT-ADDRESSED. Every piece (seed, bootstrap, cas-manifest, each engine/plugin blob) is named by its own
@@ -32,7 +32,7 @@ export const BULB_MANIFEST_FORMAT = "lararium-bulb-manifest/v1" as const;
 
 /** The held cold-boot snapshot — genesis seed + CAS + bootstrap, PINNED to a charter chain-head epoch. NO KEY. */
 export interface BulbArtifact {
-  /** The plain-data @oracle genesis seed — the boot MATERIALIZES the @oracle CRDT fresh from it. */
+  /** The plain-data oracle genesis seed — the boot MATERIALIZES the oracle CRDT fresh from it. */
   readonly seed:            GenesisSeed;
   /** The genesis CAS manifest — which engine/plugin blobs the seed references. */
   readonly casManifest:     GenesisCasManifest;

@@ -175,7 +175,7 @@ export interface DaemonVerbProvider {
   /** The cross-plane witness: ONE cid → presence across content · structure · form (honest nulls) — THROUGH
    *  the holder that owns the store (read-only, one shared plane-query implementation). */
   planeRecord(input: { cid: string; sensoriumRoot?: string }): Promise<Record<string, unknown>>;
-  /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the @daemon (warm holder).
+  /** REWIND (kapae) one turn's .structurepalace tally + salience down-weight, IN the daemon (warm holder).
    *  Fire-and-forget — the convergence twin of the CLI-side worldline KG valid-close. */
   placeStructurepalaceKapae(turnKey: string, ended?: string): void;
   /** Derive a session transcript's spawn/handback edges (worldline-compare's edge-DAG source). The CRUNCH
@@ -346,7 +346,7 @@ export function recallVerbCap(): CapModule {
             if (filters && query) return filteredSearch(client, filters, { query, wing, limit });
             if (filters) return filteredList(client, filters, { wing, limit });
             if (dual && query) {
-              // The form-leg construction (markers→vector derive IN the @daemon VM, content-only
+              // The form-leg construction (markers→vector derive IN the daemon VM, content-only
               // degradation on fault) + the RRF fuse ride the form provider's multiRecall impl, verbatim;
               // the body keeps the arg-coercion and hands the content leg + the assembled args across.
               const res = await form.multiRecall(
@@ -582,7 +582,7 @@ export function captureVerbCap(): CapModule {
         });
         registry.register("structurepalace-kapae", async (args) => {
           // REWIND one turn's .structurepalace tally (+ salience down-weight) — the convergence twin of the
-          // CLI-side worldline KG valid-close. Fire-and-forget through the @daemon's warm holder.
+          // CLI-side worldline KG valid-close. Fire-and-forget through the daemon's warm holder.
           const turnKey = typeof args["turnKey"] === "string" ? (args["turnKey"] as string) : "";
           if (!turnKey) throw new Error("structurepalace-kapae: args.turnKey (non-empty string) required");
           const ended = typeof args["ended"] === "string" && args["ended"] ? (args["ended"] as string) : undefined;

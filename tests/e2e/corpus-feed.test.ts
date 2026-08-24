@@ -6,7 +6,7 @@
  * What this soaks (first contact at scale for the 2026-06-11 grain burn):
  *   F1 — the batch LOAD lands (one gesture, one change-id family)
  *   F2 — group routing at scale: one file per carrier root, NO fragment
- *        files, count parity with the distinct @lares root URIs
+ *        files, count parity with the distinct lares-bag root URIs
  *   F3 — the boot meme (corpus-canonical) projects byte-exact
  *
  * The live-hearth feed stays the operator's gesture; this vector proves the
@@ -52,7 +52,7 @@ function walkFiles(dir: string): string[] {
   return out;
 }
 
-/** Distinct carrier-root URIs in the source corpus that mirror under @lares. */
+/** Distinct carrier-root URIs in the source corpus that mirror under the lares bag. */
 function expectedRoots(): Set<string> {
   // THE CORPUS CARRIES `.mem`. This hunted `*.md` — the extension the carrier convention left behind —
   // so `find` returned nothing, the staged mirror stood empty, and every read below ENOENT'd on a boot

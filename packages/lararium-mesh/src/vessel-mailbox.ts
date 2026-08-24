@@ -3,7 +3,7 @@
  * and substrate-agnostic: node and browser vessels wire the same mechanism.
  *
  * A verb addressed to an island that isn't live PARKS as a record in
- * @daemon keyed by island identity; the island's next `ea` (its own breath
+ * the daemon bag keyed by island identity; the island's next `ea` (its own breath
  * declaration) drains it — deliver-to-IDENTITY: the message survives the
  * island and arrives when the identity breathes again. The record's
  * status transition (parked → delivered) makes one artifact serve as

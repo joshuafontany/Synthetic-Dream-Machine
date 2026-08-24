@@ -1,5 +1,5 @@
 /**
- * seal-carrier-federation.test.ts — STAGE 1 (B): the @cad seal's FIRST live producer, additive to the
+ * seal-carrier-federation.test.ts — STAGE 1 (B): the cad seal's FIRST live producer, additive to the
  * cleartext-local wake.
  *
  * Proven:

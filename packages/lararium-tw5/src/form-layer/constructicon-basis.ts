@@ -20,11 +20,11 @@
  *
  * The canon axes (layers/voices/phases/wards) are FIXED in this module —
  * noosphere-boot is their source-of-truth, not a .tid. The sigil + family axes
- * derive from a `GrammarRules` the caller supplies (the @daemon loads it from
+ * derive from a `GrammarRules` the caller supplies (the daemon loads it from
  * its TW5 VM via grammar-cache; tests construct it). The basis stays the
  * grammar-SEED side of the two-planes — no store, no vector, no holder.
  *
- * Pure + isomorphic: no fs/path/DOM imports; runs in node, browser, the @daemon
+ * Pure + isomorphic: no fs/path/DOM imports; runs in node, browser, the daemon
  * VM alike.
  */
 
@@ -246,7 +246,7 @@ function canonAxes(): ConstructiconAxis[] {
  * categories, axes sort by id, so the same grammar yields the same axis-list
  * every wake — the stability the form-vector requires.
  *
- * @param grammar  the live GrammarRules (from grammar-cache in the @daemon VM,
+ * @param grammar  the live GrammarRules (from grammar-cache in the daemon VM,
  *                 or a fixture in tests). When omitted, only the canon axes ride.
  */
 export function buildConstructiconBasis(grammar?: GrammarRules): ConstructiconBasis {

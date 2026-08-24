@@ -54,10 +54,10 @@ export interface DaemonBehaviorOptions {
   /** A ready verifier (e.g. tests, or a host-provided one). */
   verifier?: CapabilityVerifier;
   /**
-   * Projection mount shore — the @daemon INHERITS the wiki's render cap (hasProjection). When the worker
-   * entry supplies onBoot (mountProjection), the @daemon becomes a surfaceable wiki like any other: the user
+   * Projection mount shore — the daemon INHERITS the wiki's render cap (hasProjection). When the worker
+   * entry supplies onBoot (mountProjection), the daemon becomes a surfaceable wiki like any other: the user
    * pins it to render, the same path any wiki takes (it's the same TW5 VM under the hood). Absent → the cap
-   * stays inert (the @daemon runs headless, its historical resting state). role = capability ≠ platform.
+   * stays inert (the daemon runs headless, its historical resting state). role = capability ≠ platform.
    */
   onBoot?: (ctx: IslandContext) => (() => void) | undefined;
   /**
@@ -99,7 +99,7 @@ export interface DaemonBehaviorOptions {
    */
   wireWorkerVerbs?: (registry: VerbTable, ctx: IslandContext) => void;
   /**
-   * The telemetry capture SINK (node: makeNodeCaptureEngine wired to the palace). Every @daemon
+   * The telemetry capture SINK (node: makeNodeCaptureEngine wired to the palace). Every daemon
    * ALWAYS carries the capture cap (idempotent — tending the bound operator's session-capture is a
    * daemon duty); this shore, when wired, makes it LIVE. Absent → the cap stays inert (sink not
    * wired, a valid resting state). The two-loop config (servo + derive) lives inside the engine the
@@ -146,7 +146,7 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
     name: "daemon-dispatch",
     async onEa(ctx: IslandContext) {
       const { tw5, composite, post } = ctx;
-      // The ONE cap-gated @daemon protocol seed (the isomorphic seed lift): Ui+Persona+Circle+Flow, once,
+      // The ONE cap-gated daemon protocol seed (the isomorphic seed lift): Ui+Persona+Circle+Flow, once,
       // on the hook BOTH boots reach — so neither entry re-seeds. Gated on `runnableHulls` (absent → skip,
       // preserving old behavior for non-operator callers). Idempotent (each seed setTiddler-overwrites).
       if (opts.runnableHulls) seedDaemonProtocol(tw5, opts.runnableHulls);
@@ -167,11 +167,11 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
         ...(verifier ? { verifier } : {}),
       });
       _dispatcher.start();
-      // The @daemon's OWN verb OUT-path (the twin of the pool island-kernel's wiring):
+      // The daemon's OWN verb OUT-path (the twin of the pool island-kernel's wiring):
       // a projected switcher click writes a verb-carrying summon tiddler, whose
       // reaction-router fires a tm-verse-event. Forward it to main as an IslandMsg_Event
       // — main's daemon-vm listener routes it to placeVerb (verify-then-delegate → the
-      // main registry, e.g. wiki-switch). Without this, @daemon-origin verbs never leave
+      // main registry, e.g. wiki-switch). Without this, daemon-origin verbs never leave
       // the worker (projection frames reach main, but verse-events had no bridge).
       const cancelVerse = tw5.onVerseEvent({
         handleVerseEvent: (uri: string, listenable: string, verb?: string, fromUri?: string, args?: Record<string, unknown>) => {
@@ -354,16 +354,16 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
     },
   };
 
-  // The @daemon's #has stack: dispatch (AUTHORITY plane) + engine-watch + the IDEMPOTENT capture
+  // The daemon's #has stack: dispatch (AUTHORITY plane) + engine-watch + the IDEMPOTENT capture
   // cap (FLOW plane — the bound operator's session-capture duty). dispatch onEa runs first (LIFO
   // teardown stops it last); the capture cap tears down first (final flush, then dispose). The
   // capture cap stays a DISTINCT #has unit — it never gates authz; the master cut holds at the cap
-  // shore, not the worker. Inert when no sink is wired (makeCaptureEngine absent) — every @daemon
+  // shore, not the worker. Inert when no sink is wired (makeCaptureEngine absent) — every daemon
   // carries the cap; whether it breathes depends on a wired sink + feed.
   return composeIsland([
     dispatchCap,
     // Inherit the wiki's render cap — inert until a worker entry wires onBoot (mountProjection), at which
-    // point the @daemon surfaces like any pinned wiki (same VM, same path).
+    // point the daemon surfaces like any pinned wiki (same VM, same path).
     hasProjection(opts.onBoot),
     hasEngineWatch(),
     hasCapture({

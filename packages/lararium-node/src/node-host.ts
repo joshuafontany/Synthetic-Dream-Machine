@@ -11,8 +11,8 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 export const LARES_ROOT       = dirname(dirname(__dirname)); // packages/lararium-node
 export const REPO_ROOT        = repoRoot;
 
-/** The @daemon's bags root — resolves through the composable bags cap (`LAR_BAGS` → config → repo-relative
- *  `<corpus>/bags`). A FUNCTION, not a const, so a per-@daemon `~/.lares/config.json` override carries. */
+/** The daemon's bags root — resolves through the composable bags cap (`LAR_BAGS` → config → repo-relative
+ *  `<corpus>/bags`). A FUNCTION, not a const, so a per-daemon `~/.lares/config.json` override carries. */
 export function bagsRoot(): string {
   return daemonBagsDir();
 }

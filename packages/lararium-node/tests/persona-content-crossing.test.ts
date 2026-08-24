@@ -1,5 +1,5 @@
 /**
- * persona-content-crossing.test.ts — the @catalog base layer: a human's second vessel reads its
+ * persona-content-crossing.test.ts — the catalog-registry base layer: a human's second vessel reads its
  * PersonaGroup content, end to end through KeyhiveProvider.
  *
  * This is the pono foundation the DreamNet human layer stands on: content encrypted into a PersonaGroup doc
@@ -28,7 +28,7 @@ async function introduce(founder: KeyhiveProvider, device: KeyhiveProvider): Pro
 
 const BAG = "lar:///ha.ka.ba/bags/catalog/a-note";
 
-describe("@catalog crossing — the human's second vessel reads its PersonaGroup content", () => {
+describe("catalog-registry crossing — the human's second vessel reads its PersonaGroup content", () => {
   test("add-before-encrypt: the joinee vessel decrypts content, no secret in transit", async () => {
     const founder = await makeVessel(1);
     const device  = await makeVessel(100);   // the human's second vessel, its own key
@@ -51,8 +51,8 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     expect(new TextDecoder().decode(recovered)).toBe(new TextDecoder().decode(PLAINTEXT));
   });
 
-  test("@daemon+hydrate routing: the joinee becomes a member via the event STORE, not a direct array", async () => {
-    // The production transport writes the founder's membership events into the joinee's @daemon and
+  test("daemon+hydrate routing: the joinee becomes a member via the event STORE, not a direct array", async () => {
+    // The production transport writes the founder's membership events into the joinee's daemon doc and
     // `hydrateFromEventStore` ingests them at boot. This proves that store-routed path establishes membership
     // exactly as the peer-to-peer shortcut did — closing the last blast-radius unknown before wiring.
     const founder = await makeVessel(5);
@@ -70,7 +70,7 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     await founder.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
     const ciphertext = await founder.encryptContent(BAG, new TextEncoder().encode("read via hydrate from the daemon store"));
 
-    // Transport: the founder's membership events land in the joinee's event STORE (the @daemon path).
+    // Transport: the founder's membership events land in the joinee's event STORE (the daemon doc path).
     const memberEvents = await founder.eventsForPeer(joineeAgentId);
     let i = 0;
     for (const bytes of memberEvents) await joineeStore.put({ hash: `evt-${i++}`, variant: "cap", bytes });

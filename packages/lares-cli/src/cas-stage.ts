@@ -6,7 +6,7 @@
  * `textCid` handle. The daemon worker resolves it back via `resolveByCid` from the SAME
  * corpus CAS dir (process-shared filesystem, no IPC) and re-verifies cid==hash(bytes).
  *
- * This keeps an oversized carrier body (a whole book) out of the @daemon command doc, whose
+ * This keeps an oversized carrier body (a whole book) out of the daemon command doc, whose
  * automerge scalar-string value overflows past ~2^24 chars — the wall that fells the seed
  * when a giant body inlines into a summons. Bag-agnostic: any carrier whose body would
  * overflow rides a reference, regardless of which bag holds it.

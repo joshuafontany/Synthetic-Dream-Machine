@@ -1,5 +1,5 @@
 /**
- * nexus-convergence-secret-store — the node CUSTODY for a vessel's per-Nexus convergence secrets (the @cad
+ * nexus-convergence-secret-store — the node CUSTODY for a vessel's per-Nexus convergence secrets (the cad
  * seal's key source). Mints a secret per charter epoch, persists the `{epoch → secret}` set locally, and stands
  * the `NexusConvergenceKeyring` the encrypt-on-CAS seal producer message-locks against.
  *

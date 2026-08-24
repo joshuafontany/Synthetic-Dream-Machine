@@ -1,7 +1,7 @@
 /**
  * mine-retry — the shared retry-on-busy helper. A palace-lock BUSY signal WAITS+retries (the two
  * contending writers both complete, none throws); a NON-busy error throws straight through (the
- * caller's own durability owns it). Proves the concurrent-mine graceful path used by the @daemon
+ * caller's own durability owns it). Proves the concurrent-mine graceful path used by the daemon
  * flush (mineWithRetryAsync) and the per-spirit mine (mineWithRetry).
  */
 
@@ -31,7 +31,7 @@ describe("isMineAlreadyRunning / MINE_BUSY_REGEX", () => {
   });
 });
 
-describe("mineWithRetryAsync — the @daemon flush path", () => {
+describe("mineWithRetryAsync — the daemon flush path", () => {
   test("a busy-then-free runner WAITS and succeeds (never throws on busy)", async () => {
     let calls = 0;
     const out = await mineWithRetryAsync(async () => {

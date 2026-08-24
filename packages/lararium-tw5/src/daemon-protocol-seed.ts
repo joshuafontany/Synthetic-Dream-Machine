@@ -1,5 +1,5 @@
 /**
- * daemon-protocol-seed — the ONE cap-gated @daemon protocol-seed site.
+ * daemon-protocol-seed — the ONE cap-gated daemon protocol-seed site.
  *
  * Before this, the two vessel boots each re-seeded the daemon bag on their own hook: the browser entry
  * seeded Ui+Persona+Circle+Flow in `onBoot`, the node entry seeded Flow again in `onEa` — two sites, one
@@ -23,7 +23,7 @@ import { seedDaemonFlowTiddlers } from "./daemon-flow-tiddlers.js";
 import { seedDaemonRosterTiddlers } from "./daemon-roster-tiddlers.js";
 
 /**
- * Seed the whole @daemon protocol surface into the live wiki, ONCE: the UI widgets, the persona circle,
+ * Seed the whole daemon protocol surface into the live wiki, ONCE: the UI widgets, the persona circle,
  * the circle-of-trust, and the cap-gated FLOW set. `runnableHulls` gates ONLY the flow seed (the flows a
  * vessel can enact); the Ui/Persona/Circle seeds are hull-blind. Idempotent (each seed setTiddler-overwrites).
  * A ts-only vessel seeds crystal alone; a full node vessel seeds all three flows.

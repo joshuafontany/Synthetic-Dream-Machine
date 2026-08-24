@@ -7,8 +7,8 @@ import type { IslandContext } from "../src/island-context.js";
 
 const BOOTED = { sha256: "aaa111", version: "5.3.6" };
 
-/** A minimal fake @oracle DocHandle: mutable doc + manual change firing.
- *  (The engine BLOBs live in @oracle since the 2026-06-16 carve.) */
+/** A minimal fake oracle DocHandle: mutable doc + manual change firing.
+ *  (The engine BLOBs live in the oracle island since the 2026-06-16 carve.) */
 function fakeLarariumHandle(initial: { sha256: string; version: string }) {
   let core = { ...initial };
   const listeners = new Set<() => void>();

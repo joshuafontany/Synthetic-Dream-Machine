@@ -1,17 +1,17 @@
 /**
- * circle-command.test.ts — the FOLLOW VERB (`lares circle`) end-to-end over the @circles SOURCE OF TRUTH.
+ * circle-command.test.ts — the FOLLOW VERB (`lares circle`) end-to-end over the circles SOURCE OF TRUTH.
  *
  * Operator intent: adding to a circle IS the follow. The MEMBERSHIP rides the sovereign circles doc (via the
  * FOLLOW-GRAPH daemon verbs — circle-add / circle-remove / circle-list), which fleet-syncs same-operator and
  * NEVER federates; only the RECOGNITION layer (the handle-book: others' nyms + private petnames) stays LOCAL,
- * gating an unknown nym fail-closed BEFORE the membership write reaches @circles.
+ * gating an unknown nym fail-closed BEFORE the membership write reaches the circles doc.
  *
  * Proven:
  *   · `circle add <nym> --card --to following --petname` returns 0, dispatches circle-add to the daemon (the
- *     membership lands in @circles, NOT a local `.circles-follow.json`), and writes ONLY the local handle-book
+ *     membership lands in the circles doc, NOT a local `.circles-follow.json`), and writes ONLY the local handle-book
  *     — no board / announce / crossroads artifact anywhere in the tree (never-federates),
- *   · `circle list` reads the follow back through circle-list (@circles.memberDids) under the OWN names,
- *   · `circle remove` dispatches circle-remove (drops the @circles edge),
+ *   · `circle list` reads the follow back through circle-list (circles.memberDids) under the OWN names,
+ *   · `circle remove` dispatches circle-remove (drops the circles edge),
  *   · FAIL-CLOSED — following an UNMET nym with NO --card returns non-zero AND dispatches NO circle-add.
  */
 import { afterEach, beforeEach, describe, test, expect, vi } from "vitest";
@@ -82,7 +82,7 @@ function identityFootprint(): string[] {
 }
 const verbsSent = (): string[] => h.calls.map((c) => c.verb);
 
-describe("lares circle — the follow verb over @circles (fleet-synced, traceless)", () => {
+describe("lares circle — the follow verb over the circles doc (fleet-synced, traceless)", () => {
   let root: string;
   beforeEach(() => {
     root = mkdtempSync(join(tmpdir(), "lares-circle-"));
@@ -97,12 +97,12 @@ describe("lares circle — the follow verb over @circles (fleet-synced, traceles
     rmSync(root, { recursive: true, force: true });
   });
 
-  test("add with a card follows: membership → @circles (daemon verb), only the handle-book lands locally", async () => {
+  test("add with a card follows: membership → the circles doc (daemon verb), only the handle-book lands locally", async () => {
     const { nym, path } = await cardFile(root, 3, "Discordia");
     const code = await cmdCircle(circleArgs(["add", nym], { to: "following", card: path, petname: "my-eris" }));
     expect(code).toBe(0);
 
-    // The membership rode the daemon (circle-add), landing in @circles — NOT a local graph file.
+    // The membership rode the daemon (circle-add), landing in the circles doc — NOT a local graph file.
     expect(h.calls).toContainEqual({ verb: "circle-add", args: { circle: "following", nym } });
     expect(h.graph.get("following")).toContain(nym);
 
@@ -116,7 +116,7 @@ describe("lares circle — the follow verb over @circles (fleet-synced, traceles
     expect(book.records.find((r: { nym: string }) => r.nym === nym)?.petname).toBe("my-eris");
   });
 
-  test("list reads the follow back from @circles; remove drops the @circles edge", async () => {
+  test("list reads the follow back from the circles doc; remove drops the circles edge", async () => {
     const { nym, path } = await cardFile(root, 7, "TheGuru");
     await cmdCircle(circleArgs(["add", nym], { to: "following", card: path, petname: "guru" }));
 

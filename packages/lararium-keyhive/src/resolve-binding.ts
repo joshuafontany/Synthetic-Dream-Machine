@@ -108,7 +108,7 @@ export async function resolveOrMintBinding(args: ResolveBindingArgs): Promise<Re
   // co-edited view-state is "edit", but the live Keyhive gate exposes only
   // read | admin, so edit-intent rounds UP to admin as documented interim debt
   // (marginal authority ≈ 0; every PersonaGroup device already holds admin on
-  // @daemon). Adopt "edit" the moment the gate accepts it. Debt: causal-islands.md.
+  // the daemon bag). Adopt "edit" the moment the gate accepts it. Debt: causal-islands.md.
   await args.keyhive.delegate({
     bagUrl:   handle.url,
     audience: args.personaGroupAgentIdHex,

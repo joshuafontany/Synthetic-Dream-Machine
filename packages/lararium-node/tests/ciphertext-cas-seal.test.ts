@@ -1,5 +1,5 @@
 /**
- * ciphertext-cas-seal.test.ts — the SEAL-PRODUCER lights the member blind-transit lane for a @cad body.
+ * ciphertext-cas-seal.test.ts — the SEAL-PRODUCER lights the member blind-transit lane for a cad body.
  *
  * The load-bearing honesty proven end-to-end against the REAL member-carry decision + the REAL federatable gate:
  *   · the encrypt-on-CAS INSTALLER registers a sealed body's docId AS A SIDE-EFFECT (encrypt → CAS-write → register),
@@ -35,7 +35,7 @@ describe("the seal-producer registers a sealed body AS A SIDE-EFFECT and lights 
   test("installing a sealed body registers its docId; a MEMBER blind-transits it, a STRANGER is denied", async () => {
     const registry = makeSealedPlaneRegistry();
     expect(registry.size).toBe(0);   // fail-closed at birth
-    const body = new TextEncoder().encode("a private @cad body that leaves the CRDT sealed");
+    const body = new TextEncoder().encode("a private cad body that leaves the CRDT sealed");
 
     const installed = installSealedBody(registry, casDir, body, epochSecret);   // encrypt → CAS-write → register
     expect(registry.size).toBe(1);                                         // the SIDE-EFFECT fired

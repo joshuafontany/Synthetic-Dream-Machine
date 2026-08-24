@@ -462,9 +462,9 @@ export function bagOf(uri: string): string | undefined {
 }
 
 /**
- * The Lares Viales read-scope: a Herm reads the public floor (`@oracle` base-ontology, the
- * `@lararium`/`lares` corpus, its own `@meshpalace` FLOW-map) and NEVER a local operator's sovereign
- * bag (`@catalog`, `@daemon`, and every PersonaGroup plane). **Fail-closed** — an unparseable or
+ * The Lares Viales read-scope: a Herm reads the public floor (the oracle floor's base-ontology, the
+ * lararium and lares corpus bags, its own meshpalace FLOW-map) and NEVER a local operator's sovereign
+ * bag (the catalog registry, the daemon bag, and every PersonaGroup plane). **Fail-closed** — an unparseable or
  * unknown bag denies.
  * Blind to the territory, sighted on the map (#lares-viales). A full Lararium reads its own sovereign
  * bags by its own caps; this gate names only what a *Herm* may see.
@@ -508,7 +508,7 @@ export function publicFlowMap(doc: LarDoc): LarDoc {
 }
 
 // ── The Two-Faced public read-face (rides oracle-substrate) ────────────────
-// The mesh-palace publishes its public FLOW-map exactly as @oracle publishes
+// The mesh-palace publishes its public FLOW-map exactly as the oracle doc publishes
 // its corpus: an immutable content-addressed snapshot + a signed monotone
 // pointer. A peer pulls the pointer, verifies (anti-rollback · anti-equivocation
 // · freshness · rehash), then fetches the snapshot by cid.

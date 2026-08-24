@@ -18,7 +18,7 @@
  *      slot structure), `grants` (IslandGrants — typed structural capabilities), and `coreHash`
  *      (content-address intent vector; null = pre-CAS). TW5 core bytes are NOT transferred
  *      in the manifest — islands read them from `LarDoc.blobs[ENGINE_CORE_ID]` on the
- *      @lararium CRDT doc after `handle.whenReady()`. Two vessels federating @lararium
+ *      lararium CRDT doc after `handle.whenReady()`. Two vessels federating the lararium doc
  *      share the engine automatically via Automerge sync.
  *   7. The vessel MUST close `mainPort` at evict/unmount time — before or after worker.terminate().
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
@@ -88,7 +88,7 @@ export type IslandStorageConfig =
 //
 // `AutomergeUrl` IS the CapTP-style capability token for each CRDT bag's doc.
 // A grant absent or null = in-memory / cold; library bags resolve island-side
-// from @catalog (boot = first reconcile), never from the manifest.
+// from the catalog registry (boot = first reconcile), never from the manifest.
 
 // ── Vessel → island ──────────────────────────────────────────────────────────
 
@@ -100,7 +100,7 @@ export type IslandStorageConfig =
  *   - The island creates its own Automerge Repo with `MessageChannelNetworkAdapter(syncPort)`.
  *   - The island calls `repo.find(docUrl)` and awaits `handle.whenReady()` before declaring `ea`.
  *   - If `docUrl` is null the island creates a fresh empty doc (cold boot).
- *   - `coreHash` carries a SHA-256 hex of the TW5 core blob stored in `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium CRDT doc; null = pre-content-addressed trust-on-delivery.
+ *   - `coreHash` carries a SHA-256 hex of the TW5 core blob stored in `LarDoc.blobs[ENGINE_CORE_ID]` on the lararium CRDT doc; null = pre-content-addressed trust-on-delivery.
  *     This field is an intent vector: once a CAS store exists, null MUST be rejected at boot.
  *
  * BA-5 (revised): TW5 core bytes live in `LarDoc.blobs[ENGINE_CORE_ID]` on the lararium doc.
@@ -112,11 +112,11 @@ export type IslandStorageConfig =
  * Prerequisite fields (island cannot think without these — not cargo):
  *   - `recipe` is the WikiRecipe slot structure (wikiSlug + optional libraryBags).
  *   - `grants` carries the island's typed structural capabilities (engine doc,
- *     own bag, keyhive-bound personal/draft, @catalog ACCESS). Library bags
- *     never ride the manifest: the island resolves them itself from @catalog
+ *     own bag, keyhive-bound personal/draft, catalog registry ACCESS). Library bags
+ *     never ride the manifest: the island resolves them itself from the catalog registry
  *     (recipe-watch reconcile — boot runs the same path as live composition).
  *
- * Plugin tiddlers travel via the @lararium CRDT blob store (application/json blobs).
+ * Plugin tiddlers travel via the lararium CRDT blob store (application/json blobs).
  * Islands read and apply them from the CRDT after `handle.whenReady()` — no manifest field needed.
  */
 
@@ -124,14 +124,14 @@ export type IslandStorageConfig =
  * IslandGrants — the typed structural capabilities a vessel HANDS an island at
  * manifest. Each names a capability granted (ocap: arrives as a grant, never
  * looked up from a main-owned dictionary). The island resolves everything else
- * — @lares, library bags, oracle moves — from @catalog itself, sovereign-side.
+ * — the lares bag, library bags, oracle moves — from the catalog registry itself, sovereign-side.
  */
 export interface IslandGrants {
-  /** @lararium engine/system doc — REQUIRED (engine bytes precede TW5 boot). */
+  /** The lararium engine/system doc — REQUIRED (engine bytes precede TW5 boot). */
   islandUrl:    string;
   /** catalog registry ACCESS (never layered; access≠load). Absent/null = no watch. */
   catalogUrl?:  string | null;
-  /** The island's OWN bag (@<wikiSlug>; @daemon under the one-recipe model). */
+  /** The island's OWN bag (<wikiSlug>; daemon under the one-recipe model). */
   wikiUrl?:     string | null;
   /** Keyhive-bound sovereign slots (daemon resolveBinding grants). */
   personalUrl?: string | null;
@@ -146,7 +146,7 @@ export interface IslandMsg_Manifest {
   wikiUri: string;
   /**
    * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
-   * null = pre-CAS trust-on-delivery. Islands verify on read from @lararium CRDT doc.
+   * null = pre-CAS trust-on-delivery. Islands verify on read from the lararium CRDT doc.
    */
   coreHash: string | null;
   /**
@@ -158,7 +158,7 @@ export interface IslandMsg_Manifest {
   pluginCids?: readonly string[];
   /** Slot structure for this wiki — wikiSlug + optional libraryBags. */
   recipe: import("./wiki-recipe.js").WikiRecipe;
-  /** Typed structural capabilities (see IslandGrants). Libraries resolve via @catalog. */
+  /** Typed structural capabilities (see IslandGrants). Libraries resolve via the catalog registry. */
   grants: IslandGrants;
   /**
    * Storage adapter configuration for the island-side Automerge Repo.
@@ -203,7 +203,7 @@ export interface IslandMsg_Manifest {
      *  Gate no longer PINS this; it pins `personaKel.prefix` and walks the KEL to the current head (no hybrid). */
     signerDid?:            string;
     /** The persona-KEL PIN + the LOCAL-replica chain the worker walks. `prefix` is the stable identifier (AID)
-     *  read from @daemon (the pin's root of trust); `chain` is the seq-sorted key-event-log the MAIN thread read
+     *  read from the daemon bag (the pin's root of trust); `chain` is the seq-sorted key-event-log the MAIN thread read
      *  from its per-Nexus KEL board replica "as of last sync" (no-global-now). The Binding Gate asserts
      *  `chain[0].prefix === prefix`, walks to the current head op-key, and verifies the edge against THAT head —
      *  fail-closed on an absent/broken chain (never a global lookup). */
@@ -211,7 +211,7 @@ export interface IslandMsg_Manifest {
     /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free binding. */
     deviceEdge?:           DeviceDelegationTiddler;
     /** A prior keyhive Archive (from the identity home) — the restore FLOOR keyhive inits from before
-     *  replaying @daemon cap-events. Absent on a first boot / a vessel that never persisted one. */
+     *  replaying daemon cap-events. Absent on a first boot / a vessel that never persisted one. */
     archiveBytes?:         Uint8Array;
   };
 }
@@ -278,7 +278,7 @@ export interface DaemonMsg_PlaceVerb {
 }
 
 /**
- * Vessel → island: FEED one captured turn to the @daemon's idempotent telemetry capture cap.
+ * Vessel → island: FEED one captured turn to the daemon's idempotent telemetry capture cap.
  * The cap (hasCapture) claims this signal type and enqueues (turnText, sourceFile) into the nalu
  * (accumulate IN → WAL → flush via `mine --source ndjson`). Distinct from daemon:place-verb (which
  * the DISPATCH cap claims for VerbDispatcher verbs) — caps are independent, so a separate signal.
@@ -313,7 +313,7 @@ export interface DaemonMsg_TelemetryPlaceVerb {
 /**
  * Vessel → island: REWIND (kapae) one turn's .structurepalace tally — the convergence twin of the KG
  * valid-close + the Measure salience down-weight. Fire-and-forget (symmetric with telemetry
- * capture): the @daemon owns the warm .structurepalace serve holder (a flock-singleton the CLI cannot
+ * capture): the daemon owns the warm .structurepalace serve holder (a flock-singleton the CLI cannot
  * re-open), so the producer routes the rewind here. The capture cap (hasCapture) holds the engine
  * that holds the holder; it set-asides the turn's tally AND down-weights the turn's content drawers.
  */
@@ -510,7 +510,7 @@ export interface DaemonMsg_VerifyRequest {
  * PeerClass — how the admitted inbound peer relates to THIS operator's identity, the signal the
  * node sharePolicy reads to arm the federatable-own/private-own self-slot split.
  *   · "same-operator" — the peer proved it carries THIS operator's identity: it holds cap=admin on
- *     @daemon (only this operator's PersonaGroup does), OR it presented a device-delegation edge that
+ *     the daemon bag (only this operator's PersonaGroup does), OR it presented a device-delegation edge that
  *     chains to this hearth's PINNED persona-root (signerDid). Either proof binds the peer to the
  *     operator's own device-fleet → it keeps FULL device sync (every private plane crosses).
  *   · "cross-operator" — the peer carries a DIFFERENT operator identity (a cabal-mate / another kahu):
@@ -930,10 +930,10 @@ export function mkTeardownAck(): IslandMsg_TeardownAck {
  *
  * The manifest carries the WikiRecipe (slot structure) + IslandGrants (typed
  * structural capabilities). The island wires granted slots to doc handles and
- * resolves library bags from @catalog itself (boot = first reconcile).
+ * resolves library bags from the catalog registry itself (boot = first reconcile).
  *
  * No blob bytes travel in the manifest — TW5 core bytes and plugin tiddlers live in
- * the @lararium CRDT doc. Islands read them from the CRDT after `handle.whenReady()`.
+ * the lararium CRDT doc. Islands read them from the CRDT after `handle.whenReady()`.
  */
 export function mkManifest(
   wikiUri:  string,

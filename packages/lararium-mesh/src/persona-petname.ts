@@ -103,7 +103,7 @@ export interface PersonaMultitudeEntry {
   readonly petname: string | null;
   /** True when THIS vessel carries the persona's sovereign root (a founder); false for a joinee-only anchor. */
   readonly heldHere: boolean;
-  /** True when the persona federates a public glamour onto @crossroads. */
+  /** True when the persona federates a public glamour onto the crossroads plane. */
   readonly hasPublicHandle: boolean;
   /** The public display glamour, or null when the persona federates none — the ONE name that reaches peers. */
   readonly glamour: string | null;

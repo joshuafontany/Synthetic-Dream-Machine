@@ -86,15 +86,15 @@ export async function importGenesisIsland(
 }
 
 /**
- * materializeGenesisIsland — the slice-2 boot intake: RELOAD-OR-MATERIALIZE the @oracle.
+ * materializeGenesisIsland — the slice-2 boot intake: RELOAD-OR-MATERIALIZE the oracle doc.
  *
- * The @oracle is a LIVE CRDT, not a shipped binary. This is the boot path that retires
+ * The oracle island is a LIVE CRDT, not a shipped binary. This is the boot path that retires
  * both the Automerge-binary boot seed AND the merge-into-stale:
  *
  *   1. find-FIRST under the DETERMINISTIC doc id (oracleGenesisDocUrl). A prior boot
- *      persisted the @oracle there → reload it with the operator's writes intact
+ *      persisted the oracle doc there → reload it with the operator's writes intact
  *      (the persist-across-restart path). NO merge, NO fresh-empty doc.
- *   2. absent (first boot) → MATERIALIZE the @oracle fresh from the plain-data seed
+ *   2. absent (first boot) → MATERIALIZE the oracle doc fresh from the plain-data seed
  *      and import it UNDER that same deterministic id, so the next boot finds it.
  *
  * Platform-blind: callers (node · browser) supply the seed from their own source
@@ -108,7 +108,7 @@ export async function materializeGenesisIsland(
 ): Promise<DocHandle<LarDoc>> {
   const url = oracleGenesisDocUrl();
 
-  // 1. find-first: a persisted @oracle re-loads under the deterministic id.
+  // 1. find-first: a persisted oracle doc re-loads under the deterministic id.
   //    hearth-private fails FAST on the unavailable signal (local-first: a missing
   //    doc is the legitimate first boot, not a mesh-delivery wait).
   let existing: DocHandle<LarDoc> | null = null;
@@ -120,7 +120,7 @@ export async function materializeGenesisIsland(
   if (existing?.doc()?.blobs?.[ENGINE_CORE_ID]) {
     const d = existing.doc()!;
     console.log(
-      `[${label}] @oracle reloaded (persisted)  url=${existing.url}  ` +
+      `[${label}] oracle doc reloaded (persisted)  url=${existing.url}  ` +
       `blobs=${Object.keys(d.blobs ?? {}).length}  tiddlers=${Object.keys(d.tiddlers ?? {}).length}`,
     );
     return existing;
@@ -135,13 +135,13 @@ export async function materializeGenesisIsland(
 
   const doc = handle.doc();
   if (!doc?.blobs?.[ENGINE_CORE_ID]) {
-    throw new Error(`[${label}] @oracle materialized but TW5 core blob absent — corrupt genesis seed`);
+    throw new Error(`[${label}] oracle doc materialized but TW5 core blob absent — corrupt genesis seed`);
   }
   if (handle.url !== url) {
-    throw new Error(`[${label}] @oracle materialized under ${handle.url}, expected deterministic ${url}`);
+    throw new Error(`[${label}] oracle doc materialized under ${handle.url}, expected deterministic ${url}`);
   }
   console.log(
-    `[${label}] @oracle materialized FRESH  url=${handle.url}  ` +
+    `[${label}] oracle doc materialized FRESH  url=${handle.url}  ` +
     `blobs=${Object.keys(doc.blobs ?? {}).length}  tiddlers=${Object.keys(doc.tiddlers ?? {}).length}`,
   );
   return handle;

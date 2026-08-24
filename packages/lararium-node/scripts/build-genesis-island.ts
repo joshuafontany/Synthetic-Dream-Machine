@@ -257,8 +257,8 @@ function main(): void {
     "utf8",
   );
 
-  // The PLAIN-DATA @oracle seed — THE boot artifact (slice 2). The boot materializes
-  // the @oracle CRDT fresh from this JSON under the deterministic doc id; island.bin
+  // The PLAIN-DATA oracle seed — THE boot artifact (slice 2). The boot materializes
+  // the oracle CRDT fresh from this JSON under the deterministic doc id; island.bin
   // above survives only as a test fixture + determinism witness, no longer read at boot.
   writeFileSync(
     join(genesisDir, "island.genesis.json"),
@@ -271,7 +271,7 @@ function main(): void {
   console.log(`[genesis] ✓ island.bin  ${(artifact.bytes.byteLength / 1024).toFixed(1)} KB  (metadata-only CRDT, bytes → CAS)`);
   console.log(`[genesis] ✓ genesis/cas  ${artifact.casEntries.length} blob file(s) by CID (${casWrote} newly written)`);
   console.log(`[genesis] ✓ island.manifest.json  ${artifact.casManifest.blobs.length} entries`);
-  console.log(`[genesis] ✓ island.genesis.json  PLAIN-DATA @oracle seed (the boot artifact)  tiddlers=${Object.keys(artifact.seed.tiddlers).length}  blobs=${Object.keys(artifact.seed.blobs).length}`);
+  console.log(`[genesis] ✓ island.genesis.json  PLAIN-DATA oracle seed (the boot artifact)  tiddlers=${Object.keys(artifact.seed.tiddlers).length}  blobs=${Object.keys(artifact.seed.blobs).length}`);
   console.log(`[genesis] ✓ blobs(meta)=${counts.blobCount}  tiddlers=${counts.tiddlerCount}`);
   console.log(`[genesis] ✓ sha256=${artifact.sha256}  cid=${artifact.cid}`);
   console.log(`[genesis] ✓ engineCid=${artifact.engineCid}  pluginsCid=${artifact.pluginsCid}`);

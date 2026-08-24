@@ -20,7 +20,7 @@
  * something to nobody. Opening returns `null` on ANY failure (wrong key, tampered ciphertext, malformed frame) —
  * withhold, never forge, and never leak WHICH check failed.
  *
- * THIS IS NOT THE @cad SEAL. `sealBodyOnCas` is DETERMINISTIC on purpose (same content + same secret ⇒ same cid,
+ * THIS IS NOT THE cad SEAL. `sealBodyOnCas` is DETERMINISTIC on purpose (same content + same secret ⇒ same cid,
  * which is the whole per-Nexus dedup property). This primitive is RANDOMIZED on purpose (a fresh ephemeral and a
  * fresh AEAD nonce every call, which is semantic security). The two must never fuse behind one flag: one wrong flag
  * would destroy dedup on one path or semantic security on the other, and a round-trip test would catch neither.

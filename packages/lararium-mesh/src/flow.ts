@@ -10,7 +10,7 @@
  *
  * A Flow tiddler lives in the sovereign `daemon` bag; the daemon dispatcher (the verb-tiddler
  * protocol) reads it, runs its `capStack` against the target(s), and lands the outcome in
- * `@daemon/outcomes/`. Composition rides the EXISTING Verb protocol — no new plumbing: a flow
+ * `bags/daemon/outcomes/`. Composition rides the EXISTING Verb protocol — no new plumbing: a flow
  * invocation is a Verb with `action="flow"`, `args.petname`, and `targets = [sensorium URIs]`.
  * The daemon is the one seat that reaches both hulls, so it routes each cap-step by its `hull`.
  *

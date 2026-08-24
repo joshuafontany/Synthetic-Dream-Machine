@@ -7,7 +7,7 @@
  * invocation and await the receipt. This Unix-domain socket carries exactly that:
  * the CLI writes one invocation line, the daemon writes the summons into its warm
  * daemon doc (the SAME tiddler the worker reacts to from a WS peer), awaits the
- * durable @daemon/outcomes/<id> receipt, and returns it over the socket.
+ * durable bags/daemon/outcomes/<id> receipt, and returns it over the socket.
  *
  *   transport  = this socket (kernel-local, authority-agnostic)
  *   authority  = the invocation's requestedBy → the worker's verify-then-delegate
@@ -16,8 +16,8 @@
  * Content routing (the co-located bypass): the CLI and the daemon worker share ONE
  * process, so the carriers (tiddler/meme/blob CONTENT in `args`) ride the DIRECT
  * worker channel (`placeVerb` → postMessage → the worker's volatile invocation),
- * NEVER the @daemon Automerge doc. @daemon's own doc carries only the VERB-record's
- * durable OUTCOME/receipt (`@daemon/outcomes/<id>`, written by the dispatcher) — the
+ * NEVER the daemon Automerge doc. The daemon's own doc carries only the VERB-record's
+ * durable OUTCOME/receipt (`bags/daemon/outcomes/<id>`, written by the dispatcher) — the
  * command's result, never its content. A remote peer that lacks the shared process
  * still writes a summons over WS sync (that path keeps content in the CRDT by
  * necessity — no channel bypasses the network); the co-located path skips it.
@@ -48,8 +48,8 @@ export interface UdsChannelOptions {
   /**
    * The DIRECT worker channel (result.daemon.placeVerb) — posts the invocation
    * (verb + `args` CONTENT) straight to the daemon worker over the MessageChannel,
-   * so the carriers reach the dispatcher WITHOUT riding the @daemon Automerge doc.
-   * The worker still writes the durable outcome to `@daemon/outcomes/<id>`, which
+   * so the carriers reach the dispatcher WITHOUT riding the daemon Automerge doc.
+   * The worker still writes the durable outcome to `bags/daemon/outcomes/<id>`, which
    * this channel awaits via `daemonHandle`.
    */
   readonly placeVerb: (o: { verb: string; args: Record<string, unknown>; requestedBy: string; requestId: string }) => void;
@@ -90,7 +90,7 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
   // Hand the invocation (verb + args CONTENT) to the daemon worker over the DIRECT
   // MessageChannel (placeVerb → the worker's volatile invocation), then await the
   // durable outcome via the daemon doc's own change event. The carriers NEVER enter
-  // @daemon's Automerge doc — only the worker-written outcome (@daemon/outcomes/<id>)
+  // The daemon's Automerge doc — only the worker-written outcome (bags/daemon/outcomes/<id>)
   // lands there. A co-located CLI shares the worker's process, so the CRDT summons
   // (the remote-peer transport) would be a pointless content-bloating round-trip.
   const runVerb = async (inv: Invocation): Promise<Record<string, unknown>> => {

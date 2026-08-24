@@ -66,7 +66,7 @@ export function makeCompactBagReactor(opts: EpochHandlerOptions): VerbReactor {
     const bagUrl = stringArg(args, "bagUrl");
     if (!bagUrl) throw new Error("args.bagUrl is required");
 
-    // Find the oracle for the bag — the bag→doc-URL mapping is a @catalog
+    // Find the oracle for the bag — the bag→doc-URL mapping is a catalog
     // registry entry, read via the accessor (access≠load), not the composite.
     const oldDocUrl = await opts.catalog.urlOf(bagUrl);
     if (!oldDocUrl) {
@@ -120,7 +120,7 @@ export function makeCompactBagReactor(opts: EpochHandlerOptions): VerbReactor {
     // No live-composite layer swap, no residency re-pin: the oracle change syncs;
     // islands reconcile on their own; the manager keys by the unchanged bag lar-URI.
 
-    // Reboot-pending: one bag → many wikis. Scan @catalog recipes for those whose
+    // Reboot-pending: one bag → many wikis. Scan the catalog registry's recipes for those whose
     // bag-stack includes this bag, and alert each (main skips unmounted ones). The
     // oracle now points at the new doc, but a live island has the OLD doc mounted.
     const alertedWikis = await alertWikisUsingBag(opts, bagUrl, "bag-compact");
@@ -179,8 +179,8 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     const recipeRec = await opts.catalog.recordOf(recipeTitle);
     if (!recipeRec) throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
 
-    // Wiki oracle lives in @catalog — accessor read (recipe above stays composite,
-    // it lives in @lararium, a real load layer).
+    // Wiki oracle lives in the catalog registry — accessor read (recipe above stays
+    // composite, it lives in the lararium bag, a real load layer).
     const oldDocUrl = await opts.catalog.urlOf(wikiKey);
     if (!oldDocUrl) throw new Error(`wiki oracle missing for "${slug}"`);
 
@@ -230,7 +230,7 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     });
 
     // Mutate recipe: insert previous-canon just BELOW the wiki slot. The recipe is
-    // user registry data — it lives in @catalog, written via the accessor.
+    // user registry data — it lives in the catalog registry, written via the accessor.
     const wikiIdx = stack.indexOf(wikiKey);
     const nextStack: string[] = wikiIdx >= 0
       ? [...stack.slice(0, wikiIdx), previousCanonUri, ...stack.slice(wikiIdx)]
@@ -278,11 +278,11 @@ function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-/** Prefix of a user wiki recipe title in @catalog: `lar:///ha.ka.ba/bags/catalog/recipes/`. */
+/** Prefix of a user wiki recipe title in the catalog registry: `lar:///ha.ka.ba/bags/catalog/recipes/`. */
 const RECIPE_PREFIX = recipeUri("catalog", "");
 
 /**
- * Scan @catalog recipes for wikis whose bag-stack includes `bagUrl` and post a
+ * Scan the catalog registry's recipes for wikis whose bag-stack includes `bagUrl` and post a
  * reboot-pending wiki-alert for each (main filters to the live ones). One bag can
  * feed many wikis — the daemon computes "affected by content", main delivers to "live".
  */

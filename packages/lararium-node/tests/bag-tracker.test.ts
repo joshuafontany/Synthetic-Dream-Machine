@@ -1,5 +1,5 @@
 /**
- * bag-tracker.test.ts — the relay-side `cid → holders` index that makes @cad discovery DHT-FREE.
+ * bag-tracker.test.ts — the relay-side `cid → holders` index that makes cad discovery DHT-FREE.
  *
  * Proofs: an installed sealed body ANNOUNCES to the tracker (the encrypt-path side-effect); `holdersOf` answers
  * the announced holders (the DHT-free discovery hint); `forget` prunes an offline holder; an empty tracker is an
@@ -29,7 +29,7 @@ describe("the bag-tracker indexes announced holders — DHT-free discovery", () 
   test("installing a sealed body announces it under the sealing member's holder handle", () => {
     const tracker = makeBagTracker();
     const registry = makeSealedPlaneRegistry();
-    const body = new TextEncoder().encode("a @cad body this member holds and announces");
+    const body = new TextEncoder().encode("a cad body this member holds and announces");
     const installed = installSealedBody(registry, casDir, body, epochSecret);
 
     noteInstalledBody(tracker, installed, "member-self");     // the side-effect off the encrypt path

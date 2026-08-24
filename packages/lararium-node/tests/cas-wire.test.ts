@@ -1,5 +1,5 @@
 /**
- * cas-wire.test.ts — WAVE 4: the @cad wire consumer (E1b member-blind-transit) + the Kapae-Mu hop (E1a), over a
+ * cas-wire.test.ts — WAVE 4: the cad wire consumer (E1b member-blind-transit) + the Kapae-Mu hop (E1a), over a
  * REAL request-response hop (the swappable MembershipChannel; the live-WS impl drops in behind the same interface).
  *
  * Proven:
@@ -11,7 +11,7 @@
  *   · the antigen is QUORUM-consulted through the gate (a lone stub cannot fabricate a ban path here — the gate
  *     folds only what the AntigenRing surfaces, and the ring folds only quorum-verified bans in production).
  *
- * SURFACED (read-path, honest): the @cad read-cap is MESSAGE-LOCKED (`readCap = BLAKE3(plaintext, secret)`) — a
+ * SURFACED (read-path, honest): the cad read-cap is MESSAGE-LOCKED (`readCap = BLAKE3(plaintext, secret)`) — a
  * confirmation-of-file convergent construction. So the keyring (per-Nexus secret) alone does NOT blind-read a
  * ciphertext-ONLY body; reading a body a member lacks the plaintext for needs the PER-BODY read-cap on the private
  * lane (the InstalledSealedBody.readCap here). The keyring re-derives the read-cap only WITH the plaintext (dedup /

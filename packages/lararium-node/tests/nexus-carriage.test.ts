@@ -1,5 +1,5 @@
 /**
- * nexus-membership.test.ts — the @nexus MEMBER-vs-STRANGER consult (the carry-split's member gate).
+ * nexus-membership.test.ts — the nexus-doc MEMBER-vs-STRANGER consult (the carry-split's member gate).
  *
  * Proven:
  *   · the PROVABLE-MEMBER FLOOR — a cross-operator whose resolved nym seats in the charter roster reads MEMBER,

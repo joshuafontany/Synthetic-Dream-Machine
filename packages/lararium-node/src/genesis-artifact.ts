@@ -56,13 +56,13 @@ function genesisArtifactPaths(genesisDir?: string): {
     cidEngine:  join(root, "island.cid-engine"),   // engine content-CID = the hearth true-name
     cidPlugins: join(root, "island.cid-plugins"),  // plugins content-CID = the fast ratchet
     manifest:   join(root, "island.manifest.json"),// the CAS manifest (engine + plugin cids)
-    seed:       join(root, "island.genesis.json"), // the PLAIN-DATA @oracle seed (the boot artifact)
+    seed:       join(root, "island.genesis.json"), // the PLAIN-DATA oracle seed (the boot artifact)
     casDir:     join(root, "cas"),                 // the byte SOURCE: genesis/cas/<cid> files
   };
 }
 
 /**
- * Read the plain-data genesis seed (island.genesis.json) — the @oracle's initial
+ * Read the plain-data genesis seed (island.genesis.json) — the oracle doc's initial
  * state the boot MATERIALIZES fresh (slice 2: the genesis is data, not a baked
  * binary). Returns null when absent or malformed (a pre-slice-2 genesis).
  */
@@ -197,7 +197,7 @@ export function hearthTrueName(genesisDir?: string): string | undefined {
 // loadOrMaterializeOracle — the slice-2 boot path (no Automerge-binary seed)
 // ---------------------------------------------------------------------------
 //
-// No island.bin import, no merge-into-stale reconcile. The @oracle is a LIVE CRDT: reload it under the
+// No island.bin import, no merge-into-stale reconcile. The oracle island is a LIVE CRDT: reload it under the
 // deterministic id when persisted, else materialize it FRESH from the plain-data
 // seed (island.genesis.json). One call, no merge.
 
@@ -213,12 +213,12 @@ export async function loadOrMaterializeOracle(repo: Repo, genesisDir?: string): 
 }
 
 // ---------------------------------------------------------------------------
-// mintLaresIfAbsent — operator(admin) mint of the @lares protocol invariant
+// mintLaresIfAbsent — operator(admin) mint of the lares protocol-invariant bag
 // ---------------------------------------------------------------------------
 
 /**
  * Gate: the most-restricted grant — operator(admin), timed. Only the node home
- * (the base @lararium node) mints protocol invariants; wild vessels receive
+ * (the base lararium node) mints protocol invariants; wild vessels receive
  * the plane by federating the lararium doc, and the keel (assembleVessel)
  * only READS the oracle. Grant-proof enforcement arrives with keyhive;
  * placement enforces the gate today — this code runs solely in the operator's
@@ -237,10 +237,10 @@ export function mintLaresIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): 
 }
 
 /**
- * mintLarariumIfAbsent — the @lararium memetic corpus as its OWN doc (@oracle,
- * @lararium, @lares stand as three separate docs). Mirror
- * of mintLaresIfAbsent: the corpus pointer rides the @oracle system plane (the
- * island doc), never @catalog. The minted doc starts empty; corpus content fills
+ * mintLarariumIfAbsent — the lararium memetic corpus as its OWN doc (the oracle,
+ * lararium and lares docs stand separate). Mirror
+ * of mintLaresIfAbsent: the corpus pointer rides the oracle plane (the
+ * island doc), never the catalog registry. The minted doc starts empty; corpus content fills
  * it by LOAD/ingest (`lares act LOAD … --to lar:///ha.ka.ba/bags/lararium`) and the
  * disk mirror carries it back to `bags/lararium`. Node genesis office only.
  */

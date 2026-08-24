@@ -140,15 +140,15 @@ export interface DaemonVmCoreOptions {
   repo:            Repo;
   /** Daemon doc handle, already resolved by the platform wrapper. */
   daemonHandle:     DocHandle<LarDoc>;
-  /** Persona (@persona PersonaGroup) doc handle, resolved by the platform wrapper the same way.
-   *  The ONE daemon VM tends BOTH bags — @daemon (sovereign) + @persona (veiled identity). */
-  /** ABSENT on a PLACE that never grew a face — the VM tends @daemon alone. */
+  /** The persona plane's doc handle (the PersonaGroup), resolved by the platform wrapper the same way.
+   *  The ONE daemon VM tends BOTH bags — the daemon bag (sovereign) + the persona plane (veiled identity). */
+  /** ABSENT on a PLACE that never grew a face — the VM tends the daemon bag alone. */
   personaHandle?:   DocHandle<LarDoc>;
   /** The mounted plane's bag id, derived from its PersonaGroup's own doc id — one name, everywhere. */
   personaBagId?:    string;
   /** One-recipe model for the daemon island. */
   recipe:          WikiRecipe;
-  /** Typed structural capabilities (engine doc, daemon bag, @lares, @catalog access). */
+  /** Typed structural capabilities (engine doc, daemon bag, the lares bag, catalog registry access). */
   grants:          IslandGrants;
   /** SHA-256 hex of the TW5 core blob. null = pre-CAS. */
   coreHash:        string | null;
@@ -185,7 +185,7 @@ export interface DaemonVmCore {
   workerEa:       Promise<void>;
   mountMainVerbs: (registry: VerbTable) => void;
   placeVerb:      (opts: VesselPlaceVerbRequest) => void;
-  /** FEED one captured turn to the @daemon's telemetry capture cap (the nalu). Fire-and-forget.
+  /** FEED one captured turn to the daemon's telemetry capture cap (the nalu). Fire-and-forget.
    *  `frontier` (optional) carries the turn-DAG fork-frontier so a same-session fork derives a
    *  distinct handle; absent on a non-forked turn. */
   placeTelemetry: (turnText: string, sourceFile: string, frontier?: readonly string[], turnKey?: string, chunkIndex?: number) => void;
@@ -260,11 +260,11 @@ export interface DaemonVmCore {
    */
   onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string, kind?: string) => void) => void;
   /**
-   * Projection surfacing — the @daemon inherits the wiki render cap (hasProjection); once a worker entry wires
-   * onBoot (mountProjection), the @daemon emits PROJECTION_FRAME like any wiki island. This forwards those
+   * Projection surfacing — the daemon inherits the wiki render cap (hasProjection); once a worker entry wires
+   * onBoot (mountProjection), the daemon emits PROJECTION_FRAME like any wiki island. This forwards those
    * frames to the boot's SHARED onProjection sink (the identical #projection surface a pinned wiki paints, so
-   * idiomorph caret-safety applies), keyed on the transport id — so a summoned @daemon surfaces uniformly.
-   * Set after the boot sink exists; absent → frames silently dropped (the @daemon renders dormant, unshown).
+   * idiomorph caret-safety applies), keyed on the transport id — so a summoned daemon surfaces uniformly.
+   * Set after the boot sink exists; absent → frames silently dropped (the daemon renders dormant, unshown).
    */
   onProjection: (fn: (frame: { html: string; css: string; rev: number }) => void) => void;
   /**
@@ -282,11 +282,11 @@ export interface DaemonVmCore {
    */
   sendDomInput: (renderId: string, eventType: string, value: string) => void;
   /**
-   * Verb OUT-path for the @daemon's OWN surface — the twin of a pool wiki's worker.event→placeVerb
-   * bridge. A DOM click in the projected @daemon writes a verb-carrying summon tiddler; its reaction-router
+   * Verb OUT-path for the daemon's OWN surface — the twin of a pool wiki's worker.event→placeVerb
+   * bridge. A DOM click in the projected daemon writes a verb-carrying summon tiddler; its reaction-router
    * fires a `tm-verse-event` that surfaces here as an IslandMsg_Event carrying {verb, uri/fromUri}. The
    * vessel wires this to placeVerb, re-entering the dispatcher's verify-then-delegate gate so the verb runs
-   * on the main registry (e.g. wiki-switch). Absent → @daemon-origin verbs are silently dropped.
+   * on the main registry (e.g. wiki-switch). Absent → daemon-origin verbs are silently dropped.
    */
   onVerbEvent: (fn: (e: { verb: string; args: Record<string, unknown>; fromUri?: string; listenable?: string }) => void) => void;
 }
@@ -316,7 +316,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   // The PersonaGroup plane this vessel stands in, tended by the SAME VM (one VM, two bags), and
   // mounted under the name its own group derives — the id the registry, the cap ring and the admit
   // payload all use for it.
-  // The persona plane layers only when a face stands; a faceless place carries @daemon and nothing of a person.
+  // The persona plane layers only when a face stands; a faceless place carries the daemon bag and nothing of a person.
   if (personaHandle && personaBagId) {
     const personaStore = new AutomergeDocStore(personaHandle, personaBagId);
     composite.addLayer({ bagId: personaBagId, store: personaStore, writable: true });
@@ -377,8 +377,8 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   worker.listen((raw: unknown) => {
     if (!isIslandToVesselMsg(raw)) return;
 
-    // Projection frames — the @daemon inherits the render cap (the KA·BA braid): forward its PROJECTION_FRAME
-    // to the boot's SHARED onProjection sink so a summoned @daemon paints the same #projection surface pool
+    // Projection frames — the daemon inherits the render cap (the KA·BA braid): forward its PROJECTION_FRAME
+    // to the boot's SHARED onProjection sink so a summoned daemon paints the same #projection surface pool
     // wikis do. The active-surface gate keys on the transport id downstream, never a payload claim.
     if (raw.type === "event") {
       const ev = raw as IslandMsg_Event;
@@ -390,7 +390,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
         });
         return;
       }
-      // Verb OUT-path: a verb-carrying verse-event from the @daemon's own surface
+      // Verb OUT-path: a verb-carrying verse-event from the daemon's own surface
       // (a projected switcher click). Forward it to the vessel's placeVerb bridge.
       // The summon's structured args ride the flat wire as a `verb-args` JSON string;
       // re-parse it (#48) — not the whole flat payload smuggling {uri,verb,fromUri}.
@@ -544,11 +544,11 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   // DROPPED, and the kernel then waits forever (no breath, no fault). So wait for ready,
   // then post; node omits ready → a short timeout proceeds. Deferred (not awaited) so the
   // synchronous return holds — workerEa resolves once the worker boots off this manifest.
-  // ISOMORPHIC @crossroads: the @daemon renders the public oracle plane on ANY vessel (node or browser). One
-  // shore, both wrappers funnel through here — so splice @crossroads into the recipe (resolves via @oracle's
+  // ISOMORPHIC crossroads plane: the daemon renders the public oracle plane on ANY vessel (node or browser). One
+  // shore, both wrappers funnel through here — so splice the crossroads bag into the recipe (resolves via the oracle plane's
   // pointer, or skips gracefully when a vessel hasn't registered it) + registerBags (so keyhive can access it).
-  // Writing the @oracle pointer rides the vessel boot (registerCrossroadsInOracle), keyed by the nexus the
-  // vessel belongs to — that value differs (a node's own key vs a browser's relay key), the @daemon code does not.
+  // Writing the oracle plane's pointer rides the vessel boot (registerCrossroadsInOracle), keyed by the nexus the
+  // vessel belongs to — that value differs (a node's own key vs a browser's relay key), the daemon code does not.
   const daemonRecipe: WikiRecipe = {
     ...recipe,
     libraryBags: [...(recipe.libraryBags ?? []), CROSSROADS_DOC_URI],

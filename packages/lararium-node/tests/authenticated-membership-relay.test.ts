@@ -67,7 +67,7 @@ describe("authenticated-membership-relay — cas-wire over a live authenticated 
     const strangerSeed = new Uint8Array(32).fill(3);
     const [holderKey, memberKey, strangerKey] = await Promise.all([pubOf(holderSeed), pubOf(memberSeed), pubOf(strangerSeed)]);
 
-    // Seal a body @cad.
+    // Seal a body into the cad store.
     const registry = makeSealedPlaneRegistry();
     const keyring = standNexusKeyring({ sealEpoch: 0, dir: idDir });
     const cadDir = cadSealDir(storageDir);

@@ -5,7 +5,7 @@
  * Proven:
  *   · the sealed envelope round-trips — a founder seals its keyring to a joinee's X25519 recipient key; the joinee
  *     opens it with its on-device secret; a WRONG recipient / tampered envelope opens to null (fail-closed),
- *   · CARRY ⊥ READ end-to-end — the founder seals a real carrier body (@cad); an ADMITTED device (keyring
+ *   · CARRY ⊥ READ end-to-end — the founder seals a real carrier body into the cad store; an ADMITTED device (keyring
  *     delivered + installed) DECRYPTS it to the plaintext; a CARRY-ONLY peer (holds the ciphertext + the secret-
  *     free verify, but no keyring) CANNOT read it,
  *   · the installed keyring is read-all — a body sealed under epoch 0 opens for a device delivered epochs {0,1}.
@@ -88,7 +88,7 @@ describe("keyring-delivery — CARRY ⊥ READ end-to-end", () => {
   });
 
   test("an ADMITTED device reads a sealed body; a CARRY-ONLY peer cannot", () => {
-    // The founder mints its keyring + seals a carrier body @cad.
+    // The founder mints its keyring + seals a carrier body into the cad store.
     const founderKeyring = standNexusKeyring({ sealEpoch: 0, dir: founderDir });
     const registry = makeSealedPlaneRegistry();
     const cadDir = cadSealDir(storageDir);
@@ -131,7 +131,7 @@ describe("keyring-delivery — CARRY ⊥ READ end-to-end", () => {
 
 describe("keyring-delivery — a founder ADMITS a joinee through the persona-admit ceremony; the joinee reads the founder's body", () => {
   // The exact gap: every vessel self-mints its OWN convergence secret at boot, so a joinee cannot read a founder-
-  // sealed @cad body. THIS proves the admission carrier (persona-admit) delivers the founder's keyring on the SAME
+  // sealed cad body. THIS proves the admission carrier (persona-admit) delivers the founder's keyring on the SAME
   // grant carriage, the joinee ADOPTS it (the delivered secret supersedes the self-minted phantom), and it READS.
   const A_PERSONA_SEED = new Uint8Array(32).fill(11);
   const B_DEVICE_SEED  = new Uint8Array(32).fill(22);
@@ -140,7 +140,7 @@ describe("keyring-delivery — a founder ADMITS a joinee through the persona-adm
 
   let aStore: string, bStore: string;         // the persona-admit stores (enrollment secret / sent memo)
   let founderId: string, joineeId: string;    // the identity homes where the convergence secrets live
-  let storageDir: string;                     // the @cad ciphertext tier
+  let storageDir: string;                     // the cad ciphertext tier
   beforeEach(() => {
     aStore    = mkdtempSync(join(tmpdir(), "lares-kr-astore-"));
     bStore    = mkdtempSync(join(tmpdir(), "lares-kr-bstore-"));
@@ -160,7 +160,7 @@ describe("keyring-delivery — a founder ADMITS a joinee through the persona-adm
     const deviceSigner  = ed25519SignerFromSeed(B_DEVICE_SEED);
     const resolveHeadOpKey = (p: string): string | null => (p === PREFIX ? personaKey : null);
 
-    // The FOUNDER stands its Nexus keyring + seals a carrier body @cad under it.
+    // The FOUNDER stands its Nexus keyring + seals a carrier body into the cad store under it.
     const founderKeyring = standNexusKeyring({ sealEpoch: 0, dir: founderId });
     const registry = makeSealedPlaneRegistry();
     const cadDir = cadSealDir(storageDir);
@@ -194,7 +194,7 @@ describe("keyring-delivery — a founder ADMITS a joinee through the persona-adm
     const adopted = loadNexusKeyring(joineeId)!;
     expect(hex(adopted.forEpoch(0)!)).toBe(hex(founderKeyring.forEpoch(0)!));
 
-    // ── AND the admitted joinee READS the founder-sealed @cad body (the exact thing that fails without delivery). ──
+    // ── AND the admitted joinee READS the founder-sealed cad body (the exact thing that fails without delivery). ──
     const readCap = readCapForEpoch(BODY, installed.epoch, adopted);
     expect([...openBodyOnCas(ciphertext, readCap)]).toEqual([...BODY]);
   });

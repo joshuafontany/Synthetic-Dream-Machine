@@ -110,13 +110,13 @@ export {
   refineBagTierWithTiddlers, mayDeclareTier, mayDeclassify, structuralFloorFor, resolveTierForDoc,
   tierPermitsRelayPeer, makeTierFloorOracle,
 } from "./cap-tier.js";
-// The @cad ENCRYPT-ON-CAS primitive — cid = BLAKE3(ciphertext), verify-cap ⊥ read-cap, per-Nexus message-lock.
+// The cad ENCRYPT-ON-CAS primitive — cid = BLAKE3(ciphertext), verify-cap ⊥ read-cap, per-Nexus message-lock.
 export {
   ciphertextCid, verifyCiphertextCid, deriveMessageKey, sealBodyOnCas, openBodyOnCas,
   CIPHERTEXT_CID_ALGO, CONVERGENCE_SECRET_LEN, require32,
 } from "./ciphertext-cas.js";
 export type { SealedBody } from "./ciphertext-cas.js";
-// The @cad REMOTE TRANSIT leg — DHT-free discovery + secret-free BLAKE3(bytes)==cid verify (verify-cap ⊥ read-cap).
+// The cad REMOTE TRANSIT leg — DHT-free discovery + secret-free BLAKE3(bytes)==cid verify (verify-cap ⊥ read-cap).
 export {
   wantHave, have, dontHave, wantBlock, block,
   fetchCidOverTransit, makeCidResolver,

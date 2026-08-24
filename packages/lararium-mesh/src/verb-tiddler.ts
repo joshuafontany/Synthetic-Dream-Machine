@@ -8,18 +8,18 @@
  *                         Automerge. Tombstoned by the dispatcher after the
  *                         outcome lands. Local intent lives here, not shared truth.
  *
- *   @daemon/outcomes/<id>  DURABLE outcome tiddler in the Automerge-backed
+ *   bags/daemon/outcomes/<id>  DURABLE outcome tiddler in the Automerge-backed
  *                         daemon bag. Written by the dispatcher on done/error.
  *                         Syncs to all vessels. CRDT convergence here IS the result.
  *                         Shared aftermath lives here.
  *
  * Verb invocation paths:
  *   Local (in-process):   placeVerb() → wiki.addTiddler() → TW5 change event
- *                         → dispatcher runs → outcome to @daemon/outcomes/
- *   Remote (CLI/vessels): vessel writes @daemon/summons/<id> to Automerge →
+ *                         → dispatcher runs → outcome to bags/daemon/outcomes/
+ *   Remote (CLI/vessels): vessel writes bags/daemon/summons/<id> to Automerge →
  *                         IslandAdaptor flows it into TW5 wiki →
  *                         dispatcher translates to volatile invocation → processes →
- *                         outcome to @daemon/outcomes/
+ *                         outcome to bags/daemon/outcomes/
  *
  * Batch contract:
  *   One invocation tiddler may carry N targets (tiddler URIs, file paths, edge resource

@@ -16,7 +16,7 @@
  *   lares sense purge    <name> --approve      the irreversible byte GC (tombstone-only)
  *
  * The MCP three-way mirror for these sub-verbs LANDS now: each mirrors as an @mcp.tool routing over the
- * @daemon wire to the house-consistent executor in open-node-vessel.ts (the pure manifest.json reducers,
+ * daemon wire to the house-consistent executor in open-node-vessel.ts (the pure manifest.json reducers,
  * the ki/li/couple_r pattern). The seat gates BOTH surfaces — the CLI's `--approve` (guardHitl below) and
  * the MCP tool's guard_hitl are the SAME reversibility×trust grid, so an HITL verb refuses on either door.
  *

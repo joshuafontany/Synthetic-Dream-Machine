@@ -43,7 +43,7 @@ function compareVersions(a: string, b: string): number {
 }
 
 /**
- * startEngineWatch — subscribe to the island's @lararium handle; on any change
+ * startEngineWatch — subscribe to the island's lararium-doc handle; on any change
  * whose core-blob sha256 differs from the booted engine, write the waiting
  * alert. Returns a cleanup (unsubscribe) for onHooAnu, or undefined when the
  * island carries no lararium slot (e.g. bare test recipes).
@@ -96,7 +96,7 @@ export function startEngineWatch(ctx: IslandContext): (() => void) | undefined {
       lastAlertedSha = prevAlerted;
       console.warn(
         `[engine-watch] FAILED to write the engine-waiting alert for ${incoming} ` +
-        `(sha ${entry.sha256}); rolled back — will retry on the next @oracle change: ${String(err)}`,
+        `(sha ${entry.sha256}); rolled back — will retry on the next oracle-doc change: ${String(err)}`,
       );
     });
   };

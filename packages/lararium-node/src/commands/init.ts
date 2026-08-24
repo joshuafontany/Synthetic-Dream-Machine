@@ -97,7 +97,7 @@ function faceTiddlers(
 ): PackedTiddlers {
   // A FACE'S PLANES ARE NAMED BY THE FACE. All four ride names derived off the one tag this
   // PersonaGroup's doc id yields, so the bootstrap that carries them says WHOSE they are; a
-  // vessel-global `@circles` would name one shelf where a multitude needs one per face.
+  // vessel-wide circles plane would name one shelf where a multitude needs one per face.
   const face = personaScopedBagIds(personaGroupDocIdHex);
   return {
     [MESH_CABAL_DOC_ID_TIDDLER]: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabalDocIdHex, kind: "sentinel-id" },
@@ -215,7 +215,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     await repo.flush();
 
     console.log(`[lares vessel found --admit] vessel ${operatorIdentity.verifyingKey.slice(0, 16)}… admitted`);
-    console.log(`  @persona      ${personaUrl}${payload.personaUrl ? " (synced from founder)" : " (fresh local — payload carried none)"}`);
+    console.log(`  persona plane ${personaUrl}${payload.personaUrl ? " (synced from founder)" : " (fresh local — payload carried none)"}`);
     console.log(`  PersonaGroup ${payload.personaGroupDocIdHex.slice(0, 20)}…`);
     console.log(`  signer pin   ${payload.signerDid.slice(0, 20)}…`);
     console.log(`  hearth-name  ${payload.hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);
@@ -248,7 +248,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   await repo.flush();
 
   console.log(`[lares vessel found] ${bootstrap} written`);
-  console.log(`  @daemon       ${place.daemonUrl}`);
+  console.log(`  daemon-doc    ${place.daemonUrl}`);
   console.log(`  hearth-name   ${hearthTrueName.slice(0, 20)}…  (the place this vessel stands at)`);
   console.log("[lares vessel found] the PLACE stands — carrying, serving the public shelf, faceless.");
   console.log("  stand it:      lares vessel stand");
@@ -309,7 +309,7 @@ export async function runFoundTheFace(opts: FoundFaceOptions = {}): Promise<Foun
 
   const daemonUrl = packed[DAEMON_BAG_ID]?.text;
   if (!daemonUrl) {
-    throw new Error("[lares persona new] the bootstrap names no @daemon — this place did not finish founding.");
+    throw new Error("[lares persona new] the bootstrap names no daemon doc — this place did not finish founding.");
   }
 
   const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);

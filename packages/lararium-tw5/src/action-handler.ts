@@ -217,7 +217,7 @@ export interface ActionHandlerOptions {
  * Read/write access to a bag's OWN store, resolved per action — never a mount.
  *
  * The reach path (the `daemon` wiki VM) reaches a deep bag's doc by ACCESS across
- * the two registry planes (system → `@oracle`, user → `@catalog`) and writes-then-
+ * the two registry planes (system → `oracle`, user → `catalog`) and writes-then-
  * syncs; it mounts nothing into a composite (access≠load; `wiki-layer-ontology#write-law`,
  * `residency-model` sovereign-worker MUST). The no-reach wiki island resolves its
  * OWN recipe-mounted layers: a source bag MAY be a read-only library layer (read),
@@ -369,7 +369,7 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
 
     // CREATE — mint a NEW bag; the destination doesn't exist yet, so it bypasses
     // the generic destBag cap + writable-store check. The cap is PLANE-AWARE
-    // @catalog (household) -> read; @oracle (temple) -> admin.
+    // the catalog plane (household) -> read; the oracle plane (temple) -> admin.
     // This is the existing-primitive expression of the user<admin ladder; tighten
     // to verifySentinelMembership / Keyhive-native membership when that surface lands.
     if (action.verb === "CREATE") {
@@ -509,7 +509,7 @@ async function resolveCarrierText(
 
 /**
  * CREATE — mint a NEW empty bag at `action.bag` and register it in the plane's
- * registry (@catalog for the household plane, @oracle for the system plane).
+ * registry (catalog for the household plane, oracle for the system plane).
  * Conflict-checks first (never double-mints a registered bag). Writes a `creation`
  * effect-record into the new bag. Requires the daemon `reach` (repo + plane registry).
  */
@@ -548,7 +548,7 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
     // Born-with-its-cap: register the new bag's Keyhive Document + delegate admin
     // in the SAME act as the mint. Without it the bag holds a catalog entry
     // (designation) but no cap (authority) — a follow-up write cap-denies until a
-    // restart re-registers it (the @elyncia seed friction). Key on the lar: bag URL
+    // restart re-registers it (the elyncia-bag seed friction). Key on the lar: bag URL
     // (`action.bag`) — the same string the cap-gate's verify() and boot-registration
     // key on; the automerge docUrl names the CONTENT doc, a different object.
     await opts.registerBag?.(action.bag);
@@ -621,7 +621,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
       titles.push(carrier.title);
       continue;
     }
-    // The ungated-large-inline wall (the second wall — the TARGET bag doc, not @daemon): past
+    // The ungated-large-inline wall (the second wall — the TARGET bag doc, not the daemon bag): past
     // the skinny paths, an oversized body that reached the inline routes WOULD materialize a
     // CRDT scalar-string past the automerge capacity. It never may. A memetic carrier decomposes
     // (Scenario A intra-ahu extraction rides a later leg), so the wall reads NON-memetic only.
@@ -742,7 +742,7 @@ async function executeIngest(action: IngestAction, access: BagAccess, tw5?: Tw5D
     }
     // The verb rode a reference, never a body: resolve the carrier body from the
     // corpus CAS (or take an inline `text`) BEFORE the Confluence gate reads it. This
-    // keeps a 16MB body out of the @daemon command doc; it lands here, per-carrier, in
+    // keeps a 16MB body out of the daemon command doc; it lands here, per-carrier, in
     // the TARGET bag doc (each scalar-string field under the automerge capacity wall).
     const carrierText = await resolveCarrierText(carrier, resolveByCid);
     // Defense in depth: an un-flagged body that STILL resolves oversized leaves the CRDT

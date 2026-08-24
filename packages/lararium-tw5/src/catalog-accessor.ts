@@ -3,7 +3,7 @@
  *
  * The bag-stack ontology splits two concerns the
  * old per-verb handle-plumbing fused: LOAD (tiddlers layered into a render
- * composite) vs ACCESS (data-plane reach to a bag's doc). `@catalog` IS the
+ * composite) vs ACCESS (data-plane reach to a bag's doc). `catalog` IS the
  * registry — a bag-URI → AutomergeUrl map. Given the catalog doc URL and a Repo,
  * any holder can `repo.find()` any registered bag ON DEMAND without layering it
  * into a composite.
@@ -11,11 +11,11 @@
  * This collapses the verb plumbing: reactors that took a bespoke `catalogHandle`
  * (and `islandHandle`, and any other specific handle) now take ONE accessor and
  * reach every bag through `find(bagUri)`. The catalog-writing verbs
- * (init-wiki / bag-compact / rotate-recipe) open `@catalog` via `handle()` — its
+ * (init-wiki / bag-compact / rotate-recipe) open the catalog registry via `handle()` — its
  * own registered URL — write, and sync; they never LOAD it as a render layer.
  *
  * Pairs with [[project_bag_stack_ontology]] (access≠load keystone) and
- * [[project_sovereign_worker_model]] (the worker reaches @catalog this way once
+ * [[project_sovereign_worker_model]] (the worker reaches the catalog registry this way once
  * the verbs land worker-side — no catalog render-layer in the daemon recipe).
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/catalog-accessor
@@ -39,7 +39,7 @@ export interface CatalogAccessor {
   /** The AutomergeUrl a registry entry points at, or null if unregistered. */
   urlOf(bagUri: string): Promise<string | null>;
   /** The full registry RECORD at a title (e.g. a user wiki recipe), or null.
-   *  @catalog holds registry data — wiki recipes, bag oracles — NOT loaded as a
+   *  The catalog plane holds registry data — wiki recipes, bag oracles — NOT loaded as a
    *  composite layer (access≠load); reads come through here. */
   recordOf(title: string): Promise<LarTiddlerRecord | null>;
   /** `repo.find()` the bag the registry maps `bagUri` to (null if unregistered). */

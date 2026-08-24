@@ -33,7 +33,7 @@ import { isCondemned, type DocLoadProbe, type ProbeResult } from "./doc-load-pro
 /**
  * The doc URLs a vessel's bootstrap resolves.
  *
- * ONLY `daemonUrl` stands required. A founding stands a PLACE first — @daemon, the vessel's own Keyhive
+ * ONLY `daemonUrl` stands required. A founding stands a PLACE first — the daemon bag, the vessel's own Keyhive
  * individual, the hearth-true-name — and the FACE lands later by an operator act, so a vessel that carries
  * and serves while holding no persona names NO social plane here. Absence reads as the waking floor, never
  * as a torn founding: the boot path refuses a HALF face (some pins standing, others absent) exactly as
@@ -44,7 +44,7 @@ export interface VesselBootstrap {
   circlesUrl?:   string;
   sessionsUrl?:  string;
   daemonUrl:      string;
-  /** The mounted PersonaGroup plane's doc URL — founded alongside @daemon. */
+  /** The mounted PersonaGroup plane's doc URL — founded alongside the daemon bag. */
   personaUrl?:    string;
   /**
    * The mounted plane's BAG ID, derived from that PersonaGroup's own doc id (`personaBagIdFor`).
@@ -125,9 +125,9 @@ export interface VesselCoreAssembly {
   /** Null until the invariant plane reaches this vessel (node home mints;
    *  wild vessels federate it in). The keel never mints. */
   laresHandle:   DocHandle<LarDoc> | null;
-  /** The @lararium memetic corpus — its OWN doc (@oracle/@lararium/@lares
-   *  are three separate docs). Pointer rides the
-   *  @oracle system plane; null until federated/minted. */
+  /** The lararium memetic corpus — its OWN doc (the oracle, lararium and lares
+   *  docs stand separate). Pointer rides the
+   *  oracle plane; null until federated/minted. */
   larariumHandle: DocHandle<LarDoc> | null;
   coreHash:      string;
   /** L2: which social planes mounted live vs degraded (read-only after a condemn). */
@@ -141,18 +141,18 @@ function documentIdFromUrl(url: string): string {
 
 const blankDoc = (repo: Repo): DocHandle<LarDoc> => repo.create<LarDoc>(emptyLarDoc());
 
-/** Canon layer (@lararium / @lares): writable, defaultWritable:false. */
+/** Canon layer (the lararium and lares bags): writable, defaultWritable:false. */
 function addSubstrateLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
   composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: true, defaultWritable: false });
 }
-/** Read-only layer (@catalog, corpus bags). */
+/** Read-only layer (catalog registry, corpus bags). */
 function addReadOnlyLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
   composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: false });
 }
 
 /**
  * Assemble the shared vessel keel: catalog floor, genesis island canon layer,
- * @lares canon, social plane, daemon doc — plus the corpus capability piece when held.
+ * the lares canon bag, social plane, daemon doc — plus the corpus capability piece when held.
  * The phase sequence holds invariant; each piece resolves its substrate via the keel.
  */
 export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssembly> {
@@ -165,7 +165,7 @@ export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssemb
   // ── genesis island (REQUIRED — coreless boot deleted) + the bootstrap it carries ──
   const { islandHandle, coreHash, bootstrap } = await loadGenesis();
   addSubstrateLayer(composite, BAG_IDS.oracle, islandHandle);
-  // @lares — the keel only READS the protocol-invariant oracle. Minting rides
+  // The lares bag — the keel only READS the protocol-invariant oracle. Minting rides
   // the most-restricted grant: operator(admin), timed — held by the node home
   // (genesis office, mintLaresIfAbsent). Wild vessels receive the invariant
   // plane by federating the lararium doc; absent here reads not-yet-federated,
@@ -173,10 +173,10 @@ export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssemb
   let laresHandle: DocHandle<LarDoc> | null = null;
   const laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
   if (laresUrl) {
-    // @lares is EXPECTED base canon (the operator's "fail gracefully but expect them"):
+    // The lares bag stands as EXPECTED base canon (the operator's "fail gracefully but expect them"):
     // resolve via the tideline resolver, NOT the blank-mint fallback the comment above
     // forbids. On the node the disk-fed doc resolves READY at once; on a wild vessel whose
-    // @lares has not yet federated, a typed StillJoining surfaces — skip the layer, never
+    // lares bag has not yet federated, a typed StillJoining surfaces — skip the layer, never
     // mint a ghost (it reconciles in the background once a peer at dreamnet-scale delivers it).
     const resolved = await resolveBootDoc<LarDoc>(repo, laresUrl as AutomergeUrl, {
       tideline: "mesh-shared", scale: "dreamnet", label: "@lares (expected base canon)",
@@ -186,15 +186,15 @@ export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssemb
       addSubstrateLayer(composite, BAG_IDS.lares, laresHandle);
     }
   }
-  // @lararium — the memetic corpus as its OWN doc (three separate docs).
-  // Its pointer rides the @oracle system plane (the island
-  // doc), resolved the same way as @lares — never the conflated island URL. The
+  // The lararium bag — the memetic corpus as its OWN doc (three separate docs).
+  // Its pointer rides the oracle plane (the island
+  // doc), resolved the same way as the lares bag — never the conflated island URL. The
   // wiki-cascade composition (corpus as a library in a recipe) rides the island
   // composite via recipe-watch; this keel layer carries vessel-level access.
   let larariumHandle: DocHandle<LarDoc> | null = null;
   const larariumUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
   if (larariumUrl) {
-    // @lararium base canon — same expected-but-graceful resolution as @lares (never mint).
+    // The lararium base canon — same expected-but-graceful resolution as the lares bag (never mint).
     const resolved = await resolveBootDoc<LarDoc>(repo, larariumUrl as AutomergeUrl, {
       tideline: "mesh-shared", scale: "dreamnet", label: "@lararium (expected base canon)",
     });
@@ -209,10 +209,10 @@ export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssemb
       doc.tiddlers[ORACLE_DOC_URI] = mutableLarRecord(ORACLE_DOC_URI, { text: islandHandle.url }, "vessel-boot");
     });
   }
-  // @lares does NOT register in @catalog: it rides the protocol-invariant
-  // plane with @lararium (DreamNet federation floor). Islands resolve it from
+  // The lares bag does NOT register in the catalog registry: it rides the protocol-invariant
+  // plane with the lararium bag (DreamNet federation floor). Islands resolve it from
   // the lararium doc's well-known tiddlers — the substrate they already hold.
-  // @catalog serves USER bag oracles (ocap grants); @crossroads (future) serves
+  // The catalog registry serves USER bag oracles (ocap grants); the crossroads plane (future) serves
   // public/infrastructure oracles. Three planes, three authorities.
   emit("island-ready");
 
@@ -291,9 +291,9 @@ export async function mountWikiSlot(
   keel: VesselKeel,
   composite: CompositeStore,
   slot: { wikiSlug: string; wikiKey: string; wikiBagId: string; draftOracleTitle: string; draftBagId: string },
-  /** Pre-resolved wiki doc — the @lares-as-wiki quine seats the operator-minted
+  /** Pre-resolved wiki doc — the lares-as-wiki quine seats the operator-minted
    *  invariant doc as the write layer (its oracle lives on the lararium doc,
-   *  never in @catalog — no cross-plane resolution, no second mint). */
+   *  never in the catalog registry — no cross-plane resolution, no second mint). */
   presetWikiHandle?: DocHandle<LarDoc>,
 ): Promise<{ wikiHandle: DocHandle<LarDoc>; draftHandle: DocHandle<LarDoc> }> {
   const { repo, catalogHandle, waitHandle } = keel;

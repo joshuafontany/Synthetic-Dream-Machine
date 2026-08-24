@@ -6,7 +6,7 @@
  * for every sealed body it still holds, and the tracker (and peers) re-learn them. The `nexus-reshare` verb drives
  * this; the carriage serve-loop's `announce` offers each `cas-have` over the live channel.
  *
- * THE HELD SET = the `@cad` ciphertext tier on disk. Each sealed body writes a `cid`-named file into the cadDir
+ * THE HELD SET = the `cad` ciphertext tier on disk. Each sealed body writes a `cid`-named file into the cadDir
  * (`installSealedBody` → `writeCasEntriesFs`), so the held cids ARE the cadDir entries whose name is a `blake3:` cid.
  * SECRET-FREE + PLAINTEXT-BLIND: this reads FILE NAMES (cids) only — never a body, never a read-cap. The re-announce
  * carries a HINT (where to ask), never the bytes; a member re-verifies `verifyCiphertextCid` before trusting any.

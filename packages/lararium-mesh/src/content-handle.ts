@@ -9,10 +9,10 @@
  * content-address + integrity, marks itself `_is_skinny`, and carries NO `text`. The read-side
  * `lazyLoad` resolver (TW5 `getTiddlerText` shore) rehydrates it on render — a later leg.
  *
- * Publicity-plane addressing: the public plane (@crossroads) rides a foreign-verifiable
+ * Publicity-plane addressing: the public plane (crossroads) rides a foreign-verifiable
  * `ni://` multihash (RFC-6920) — a stranger fetches AND verifies with no local context. The
- * private plane (@catalog) would ride a ciphertext cid; the plane sets the mode. Only the
- * public leg travels this module today (the moved library lands in @crossroads).
+ * private plane (catalog) would ride a ciphertext cid; the plane sets the mode. Only the
+ * public leg travels this module today (the moved library lands in the crossroads bag).
  *
  * Scenario A (a blob-worthy `#source-text` ahu extracted from WITHIN a pono meme) shares the
  * SAME cid/ store + resolver; it differs only in the extraction boundary and is a later leg.
@@ -103,7 +103,7 @@ export function casBackstopFires(byteLength: number, mediaType: string): boolean
  *   - `_source_ext`    the on-disk extension, so the read path recovers the projection filename.
  */
 /**
- * The publicity tier of a @cad body — the PLANE sets the addressing mode (content-resolution.mem
+ * The publicity tier of a cad body — the PLANE sets the addressing mode (content-resolution.mem
  * #cad-storage, "the publicity plane decides the addressing mode"):
  *   · "public"  — a plaintext `ni://` multihash body; a stranger fetches AND verifies foreign-legible.
  *   · "private" — a ciphertext `cid = BLAKE3(ciphertext)` body; capability-gated, member-carry only.
@@ -111,20 +111,20 @@ export function casBackstopFires(byteLength: number, mediaType: string): boolean
 export type BodyPublicity = "public" | "private";
 
 /**
- * The bag a @cad body-INDEX (the logical-name → cid indirection map) MUST ride, by publicity —
- * ''map-tier = body-tier''. A public-body index rides `@crossroads` (the public floor a stranger mounts);
- * a private-body index rides `@catalog` (the sealed / member lane). The tiers NEVER cross: a private map
+ * The bag a cad body-INDEX (the logical-name → cid indirection map) MUST ride, by publicity —
+ * ''map-tier = body-tier''. A public-body index rides `crossroads` (the public floor a stranger mounts);
+ * a private-body index rides `catalog` (the sealed / member lane). The tiers NEVER cross: a private map
  * sited on the public floor would leak the private bodies' EXISTENCE + SIZE + re-key CADENCE to any
- * stranger who reads @crossroads, breaching the read-lane denial the carry-split keeps absolute.
+ * stranger who reads the crossroads floor, breaching the read-lane denial the carry-split keeps absolute.
  */
 export function bodyIndexBagUri(publicity: BodyPublicity): string {
   return publicity === "public" ? CROSSROADS_DOC_URI : CATALOG_DOC_URI;
 }
 
 /**
- * The fail-closed guard the @cad index SITER passes before it writes a body-index: the holding bag matches
- * the body's publicity. It THROWS a named error on any mismatch — a public index off @crossroads, a private
- * index off @catalog (the load-bearing denial: a private map NEVER rides the public floor), or an unknown
+ * The fail-closed guard the cad index SITER passes before it writes a body-index: the holding bag matches
+ * the body's publicity. It THROWS a named error on any mismatch — a public index off the crossroads plane, a private
+ * index off the catalog plane (the load-bearing denial: a private map NEVER rides the public floor), or an unknown
  * bag. `indexHoldingBagUri` names the residency bag the siter chose (`bags/crossroads` / `bags/catalog`),
  * not the full nested index doc URI. The guard enforces canon (content-resolution.mem #cad-storage), never
  * the OPEN indirection-map placement fork (③): it fixes the TIER, never which doc inside the tier holds it.
@@ -133,8 +133,8 @@ export function assertBodyIndexTier(indexHoldingBagUri: string, publicity: BodyP
   const expected = bodyIndexBagUri(publicity);
   if (indexHoldingBagUri !== expected) {
     throw new Error(
-      `[content-handle] a @cad ${publicity}-body index MUST ride ${expected}, not ${indexHoldingBagUri} — ` +
-        `map-tier=body-tier (a private index on the public @crossroads floor leaks existence+size+re-key cadence to a stranger)`,
+      `[content-handle] a cad ${publicity}-body index MUST ride ${expected}, not ${indexHoldingBagUri} — ` +
+        `map-tier=body-tier (a private index on the public crossroads floor leaks existence+size+re-key cadence to a stranger)`,
     );
   }
 }

@@ -1,5 +1,5 @@
 /**
- * cas-transit.test.ts — the @cad REMOTE leg: DHT-free discovery + secret-free BLAKE3(bytes)==cid verify.
+ * cas-transit.test.ts — the cad REMOTE leg: DHT-free discovery + secret-free BLAKE3(bytes)==cid verify.
  *
  * The load-bearing proofs against the REAL seal primitive (`sealBodyOnCas`) + a MODELED member↔relay transport:
  *   · a member fetches a REMOTE-ONLY body via the transport's holder index (a bag-tracker stand-in) — no DHT,

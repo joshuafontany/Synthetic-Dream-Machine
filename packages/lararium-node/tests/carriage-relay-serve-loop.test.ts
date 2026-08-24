@@ -1,6 +1,6 @@
 /**
  * carriage-relay-serve-loop.test.ts — LIVE-WIRE B2+B3: the carriage relay capability (Socket B) + the vessel-side
- * serve-loop carry a sealed @cad body between two hearths over real sockets, and stand PROVABLY INERT when off.
+ * serve-loop carry a sealed cad body between two hearths over real sockets, and stand PROVABLY INERT when off.
  *
  * Two hearths, one carriage relay (all in-process, distinct dirs/seeds/ports):
  *   · a HOLDER hearth runs `startCarriageServeLoop` (the B3 close): it dials the carriage relay and auto-answers
@@ -13,7 +13,7 @@
  *     and ZERO when not, and `stop()` clears the timer + closes the socket cleanly (no leak, safe before connect).
  *
  * The full two-OS-process crossing (reconnection after a drop, the WSL2 secure-context shore) stays outside this
- * headless proof — here every crypto piece is REAL (Ed25519 proof-of-possession, the @cad seal, secret-free verify).
+ * headless proof — here every crypto piece is REAL (Ed25519 proof-of-possession, the cad seal, secret-free verify).
  *
  * Gate: lar:///ha.ka.ba/lararium/node/carriage-relay-serve-loop
  */
@@ -74,7 +74,7 @@ describe("carriage-relay-serve-loop — a sealed body crosses two hearths; a str
     for (const d of dirs.splice(0)) { try { rmSync(d, { recursive: true, force: true }); } catch { /* gone */ } }
   });
 
-  /** Seal a body @cad on a holder's cadDir + return the installed handle (cid / docId / per-body read-cap). */
+  /** Seal a body cad on a holder's cadDir + return the installed handle (cid / docId / per-body read-cap). */
   function sealBody(): { registry: ReturnType<typeof makeSealedPlaneRegistry>; cadDir: string; installed: ReturnType<typeof sealCarrierForFederation> } {
     const storageDir = mkDir("store");
     const idDir = mkDir("id");

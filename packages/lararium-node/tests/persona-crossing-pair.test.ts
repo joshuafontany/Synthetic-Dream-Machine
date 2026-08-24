@@ -1,5 +1,5 @@
 /**
- * persona-crossing-pair.test.ts — the @catalog admit crossing as one composable call.
+ * persona-crossing-pair.test.ts — the catalog-registry admit crossing as one composable call.
  *
  * packPersonaCrossing (founder) admits a vessel into the PersonaGroup and packs the bundle; applyPersonaCrossing
  * (joinee) ingests it and reads the shared content. Proves the pair composes the verified primitives in the
@@ -18,7 +18,7 @@ async function makeVessel(fill: number): Promise<KeyhiveProvider> {
 const BAG = "lar:///ha.ka.ba/bags/catalog/shared-note";
 
 describe("persona-crossing pair — one call admits a vessel and hands it the shared content", () => {
-  test("founder packs, joinee applies and reads its PersonaGroup's @catalog content", async () => {
+  test("founder packs, joinee applies and reads its PersonaGroup's content in the catalog registry", async () => {
     const founder = await makeVessel(7);
     const joinee  = await makeVessel(106);
 

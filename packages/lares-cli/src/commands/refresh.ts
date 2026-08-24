@@ -1,6 +1,6 @@
 /**
  * `lares sense refresh` — re-pave the in-tree mempalace projection over the sovereign content plane,
- * THROUGH the @daemon seat, ON the serialized Python capture holder's own pipe.
+ * THROUGH the daemon seat, ON the serialized Python capture holder's own pipe.
  *
  * The recall surface (lexical + entity) is a DERIVED, rebuildable view over content (the one source).
  * A refresh re-derives it. Because it rides the SAME serialized holder that owns the content store, a

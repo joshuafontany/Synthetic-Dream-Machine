@@ -9,14 +9,14 @@
  *                 change events and picks these up immediately.
  *
  *   REMOTE path — external vessels write a verb-summons tiddler at
- *                 @daemon/summons/<id> to the Automerge doc. IslandAdaptor flows
+ *                 bags/daemon/summons/<id> to the Automerge doc. IslandAdaptor flows
  *                 it into the TW5 wiki. The dispatcher's Automerge subscriber
  *                 sees the summons, calls placeVerb() to create the volatile
  *                 invocation, then tombstones the summons tiddler.
  *                 The summons carries edge transport, not durable coordination state.
  *
  * Outcome flow: handler result → concludeVerb → daemon composite store
- *   → IslandAdaptor.saveTiddler → @daemon/outcomes/<id> in Automerge → syncs.
+ *   → IslandAdaptor.saveTiddler → bags/daemon/outcomes/<id> in Automerge → syncs.
  *   Durable shared meaning begins at the outcome, not at the summons.
  *
  * Daemon-only law: ONLY the daemon VM runs a VerbDispatcher. Pinned wiki and

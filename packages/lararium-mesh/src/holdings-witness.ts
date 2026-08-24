@@ -28,7 +28,7 @@
  * ── ▶ SUSPENDED, AND ON WHAT ──────────────────────────────────────────────────────────────────
  * This fold stands complete and NOTHING CALLS IT, which reads as an unwired module and is not one. The
  * `declared` reading has no producer: `bodyIndexBagUri` is exported and called by nobody, because the
- * @cad index SITER is designed and unbuilt. Wired today, every held file would report UNDECLARED — true
+ * cad index SITER is designed and unbuilt. Wired today, every held file would report UNDECLARED — true
  * of each file and useless as a report, since the correction below already says the crossing has no verb.
  *
  * So the blocker sits OUTSIDE this module and gets named rather than left for the next reader to

@@ -144,7 +144,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
   // The nameless wiki island = a #has cap stack. Order = the original onEa order (dispatch ·
   // projection · engine-watch · recipe-watch); composeIsland's LIFO teardown reproduces the old
   // onHooAnu order (recipe · engine · projection-cleanup · registry-null) exactly. hasProjection is
-  // the SHARED render cap the @daemon also inherits — one VM, one surface path. Caller-supplied caps
+  // the SHARED render cap the daemon also inherits — one VM, one surface path. Caller-supplied caps
   // fold at the tail — added capability, never a re-ordering of the base channels.
   return composeIsland([dispatchCap, hasProjection(opts.onBoot), hasEngineWatch(), hasRecipeWatch(), ...(opts.caps ?? [])]);
 }

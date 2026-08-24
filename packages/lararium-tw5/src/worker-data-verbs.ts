@@ -20,7 +20,7 @@ import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeCatalogAccessor, type CatalogAccessor } from "./catalog-accessor.js";
 
 /** Registry options for access-based reads: the daemon reaches ANY registered bag
- *  across both oracle planes (@catalog user + @oracle system) without mounting it. */
+ *  across both oracle planes (catalog user + oracle system) without mounting it. */
 export interface RegistryReach {
   repo:       Repo;
   catalogUrl: string | null;
@@ -64,7 +64,7 @@ export const makeRegisterColdReactor = (post: ResidencyOpPost): VerbReactor => r
 
 /** `where` — global membership query: which registered bags hold a tiddler.
  *  Access≠load: the daemon reaches
- *  EVERY registered bag across both oracle planes (@catalog user + @oracle
+ *  EVERY registered bag across both oracle planes (catalog user + oracle
  *  system) plus its mounted composite — no mounting required. Returns membership.
  *  `scope` names the horizon: THIS operator's registry, never the DreamNet
  *  universe (no global now). Cascade-`primaryBag` only means something inside a
@@ -110,13 +110,13 @@ export function makeResolveReactor(composite: CompositeStore): VerbReactor {
 }
 
 /** `list-wikis` — enumerate the wikis registered in the catalog (oracle tiddlers).
- *  Reads @catalog via the accessor (access≠load) — the registry is NOT a loaded
+ *  Reads the catalog plane via the accessor (access≠load) — the registry is NOT a loaded
  *  composite layer, so the accessor reads it directly, never through the composite. */
 export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: CatalogAccessor): VerbReactor {
   return async () => {
     const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null; kind: string }> = [];
     // User wikis — read the catalog RECIPE entries `wiki init` actually writes
-    // (`@catalog/recipes/{slug}`), mirroring the system-wiki path below. The
+    // (`catalog/recipes/{slug}`), mirroring the system-wiki path below. The
     // `@lararium/wikis/` prefix names a pre-plane-split shape nothing writes,
     // so that path reads zero user wikis.
     const cat = await catalog.handle();
@@ -129,8 +129,8 @@ export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: Catalo
       const bagUri = wikiBagUri(slug);
       wikis.push({ slug, uri: bagUri, automergeUrl: await catalog.urlOf(bagUri), kind: "user" });
     }
-    // System wikis — @oracle recipes (the @lares/@lararium quine system bags).
-    // Their recipe lives in @oracle, the wiki bag IS the @ bag.
+    // System wikis — oracle-plane recipes (the lares/lararium quine system bags).
+    // Their recipe lives in the oracle plane; the wiki bag stands as the system bag itself.
     if (sysPlane) {
       const sys = await sysPlane.handle();
       const recipePrefix = recipeUri("oracle", "");
@@ -148,7 +148,7 @@ export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: Catalo
 }
 
 // ── Whole-wiki residency policy (pin-wiki / unpin-wiki) — worker-ward ──────────
-// Pure policy: read the recipe (USER registry data in @catalog, via the accessor —
+// Pure policy: read the recipe (USER registry data in the catalog plane, via the accessor —
 // access≠load), walk its bag-stack, COMMAND main's BagStowage per bag via
 // daemon:residency-op (the mechanism stays at the resource — the manager is pool-driven
 // bookkeeping). No live composite layer mutation, so unlike add-bag/remove-bag these
@@ -196,7 +196,7 @@ export function makeWikiUnpinReactor(catalog: CatalogAccessor, post: ResidencyOp
 // A wiki island's projector refused a write (sovereign-island disk ward,
 // disk-projection#write-ward). The signal rides the generic worker.event →
 // placeVerb bridge into the daemon VM, which (a) writes a DURABLE audit record
-// into @daemon — the operators-with-admin-grants surface — and (b) injects a
+// into the daemon bag — the operators-with-admin-grants surface — and (b) injects a
 // $:/tags/Alert into the operator's currently PINNED VM via the existing
 // wiki-alert rail (kind "disk-ward"). No cap-gate: the signal originates from
 // the island's own mechanism, grants nothing, and only writes audit + alert.
@@ -212,14 +212,14 @@ export function makeWardAlertReactor(
     const reason = typeof args["reason"] === "string" ? args["reason"] : "(no reason)";
     const ts     = new Date().toISOString();
 
-    // (a) Durable audit in @daemon — append-only ledger, never coalesced.
+    // (a) Durable audit in the daemon bag — append-only ledger, never coalesced.
     const auditTitle = `lar:///ha.ka.ba/bags/daemon/ledger/ward/${Date.now().toString(32)}-${Math.floor(Math.random() * 1e6).toString(32)}`;
     await composite.put(
       { tiddler: { title: auditTitle, "alert-kind": "disk-ward", bag: bagId, uri, reason, ts }, meta: { authority: "disk-ward" } },
       { kind: "lares-verb", requestId: `ward-${ts}` },
     );
 
-    // (b) Alert the operator's currently pinned VM (the active wiki marker in @daemon).
+    // (b) Alert the operator's currently pinned VM (the active wiki marker in the daemon bag).
     const marker = await composite.get(ACTIVE_WIKI_URI);
     const slug   = tiddlerText(marker) ?? null;
     if (slug) {

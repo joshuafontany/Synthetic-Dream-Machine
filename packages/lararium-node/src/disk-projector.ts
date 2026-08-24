@@ -13,8 +13,8 @@
  * BagMirrorConfig. Bags without a mirror config never write to disk. The two
  * projection surfaces split by bag role (see api/lararium/disk-projection):
  *   - wiki content (@<slug>)      → `wikis/{slug}/...`   (projection / output)
- *   - seed/canon (@lares/@lararium/@sdm) → `bags/NAME/...` (seed / canon)
- * State/runtime bags (personal/draft/temp/@daemon) carry no mirror.
+ *   - seed/canon bags (lares/lararium/sdm) → `bags/NAME/...` (seed / canon)
+ * State/runtime bags (personal/draft/temp/daemon) carry no mirror.
  * A residency MOVE (the canon ACTION verb)
  * that relocates a tiddler between bags has the disk side effect of a file move
  * between surfaces; the git diff IS the operator's signature on the change.

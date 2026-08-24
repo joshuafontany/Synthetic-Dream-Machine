@@ -124,7 +124,7 @@ export interface FoundingCeremonyResult {
   circlesUrl:            string;
   sessionsUrl:           string;
   daemonUrl:              string;
-  /** The mounted PersonaGroup plane's doc URL — founded alongside @daemon. */
+  /** The mounted PersonaGroup plane's doc URL — founded alongside the daemon bag. */
   personaUrl:             string;
   /** That plane's BAG ID, derived from the PersonaGroup's own doc id. One name, everywhere it is reached. */
   personaBagId:           string;
@@ -181,7 +181,7 @@ export interface PlaceFoundingResult {
   /** The sovereign daemon island — the immune core, standing before any face. */
   daemonUrl:            string;
   /** That island's live handle. `seedDaemonDoc` CREATES, so a face-founding must be handed this one
-   *  rather than seeding again — a second call would stand a second @daemon and orphan the first. */
+   *  rather than seeding again — a second call would stand a second daemon doc and orphan the first. */
   daemonHandle:         ReturnType<typeof seedDaemonDoc>;
   /** This vessel's own Keyhive agent — the Place DID's identifier. */
   vesselIdentifierHex:  string;
@@ -190,7 +190,7 @@ export interface PlaceFoundingResult {
 }
 
 /**
- * Found the PLACE — @daemon, the vessel's own Keyhive individual, and the hearth it stands at.
+ * Found the PLACE — the daemon bag, the vessel's own Keyhive individual, and the hearth it stands at.
  *
  * Everything here stands on the vessel's own key and asks nobody. A vessel founded to this point
  * carries, serves the public shelf, and holds every sovereign act closed: the waking floor, reached
@@ -227,10 +227,10 @@ export async function foundThePlace(input: PlaceFoundingInput): Promise<PlaceFou
   };
 }
 
-/** What a face-founding lands ON: a place that already stands, named by its own @daemon. */
+/** What a face-founding lands ON: a place that already stands, named by its own daemon bag. */
 export interface FaceFoundingInput {
   repo:               Repo;
-  /** The @daemon handle the place-founding stood. The face writes its pins into the SAME island. */
+  /** The daemon handle the place-founding stood. The face writes its pins into the SAME island. */
   daemonHandle:       ReturnType<typeof seedDaemonDoc>;
   vesselSeed:         Uint8Array;
   vesselVerifyingKey: string;
@@ -282,7 +282,7 @@ export async function foundTheFace(input: FaceFoundingInput): Promise<FaceFoundi
   // hashing its bag URL (`changeIdForBag`), so a plane seeded under one name and renamed later leaves
   // behind a document nothing can ever reach again.
   //
-  // A face's relations travel with the FACE. @circles holds who this persona follows, blocks and mutes;
+  // A face's relations travel with the FACE. The circles plane holds who this persona follows, blocks and mutes;
   // @identities holds how it recognises others; @sessions holds the sessions it wears. One vessel-global
   // set would put one persona's blocked list in the same document as another's follows, and anything
   // reading it correlates the faces a multitude exists to hold apart.
@@ -388,7 +388,7 @@ export async function foundTheFace(input: FaceFoundingInput): Promise<FaceFoundi
       tiddler: { title: SIGNER_DID_TIDDLER, text: signerDid, kind: "operator-root-did" },
       meta: { authority: "lares-init" },
     };
-    // The PINNED identifier — the pin's root of trust (the operator's own sovereign @daemon home). The boot
+    // The PINNED identifier — the pin's root of trust (the operator's own sovereign daemon home). The boot
     // path reads THIS prefix, threads it beside the local KEL chain, and the worker asserts chain[0].prefix === it.
     doc.tiddlers[PERSONA_KEL_PREFIX_TIDDLER] = {
       tiddler: { title: PERSONA_KEL_PREFIX_TIDDLER, text: personaKelPrefix, kind: "persona-kel-prefix" },
@@ -417,7 +417,7 @@ export async function foundTheFace(input: FaceFoundingInput): Promise<FaceFoundi
   };
 }
 
-/** Write an event store's cap events into @daemon in DaemonEventStore-compatible form. Idempotent. */
+/** Write an event store's cap events into the daemon doc in DaemonEventStore-compatible form. Idempotent. */
 async function flushCapEvents(
   store: InMemoryEventStore,
   daemonHandle: ReturnType<typeof seedDaemonDoc>,
@@ -444,7 +444,7 @@ async function flushCapEvents(
   }
 }
 
-/** Read @daemon's cap events back into a fresh store, so a later ceremony resumes the same lattice. */
+/** Read the daemon doc's cap events back into a fresh store, so a later ceremony resumes the same lattice. */
 async function replayCapEvents(
   daemonHandle: ReturnType<typeof seedDaemonDoc>,
 ): Promise<InMemoryEventStore> {
@@ -520,7 +520,7 @@ export interface DeviceAdmitEdgeInput {
   syncUrl:                string | null;
   /** Automerge URL of the issuing vessel's genesis island — for peer-sync delivery. */
   islandDocUrl?:          string | null;
-  /** The HEARTH's own daemon doc — the door the joinee knocks on to ask for its seat (@daemon never
+  /** The HEARTH's own daemon doc — the door the joinee knocks on to ask for its seat (the daemon plane never
    *  crosses, so a joinee's own plane reaches nobody). Mirrors islandDocUrl: a founder doc the joinee resolves. */
   hearthDaemonUrl?:       string | null;
   /** The founder's persona doc URL — the joinee receives it to SYNC the shared veiled identity
@@ -605,7 +605,7 @@ export interface ApplyAdmitResult {
   /** That plane's bag id, derived from the SAME group doc id the founder used. Both devices name one
    *  plane identically or they sync nothing — the derivation is what makes that hold without a roster. */
   personaBagId:   string;
-  /** The HEARTH's @daemon url — where this vessel asks for its seat. Null when the payload named no door;
+  /** The HEARTH's daemon url — where this vessel asks for its seat. Null when the payload named no door;
    *  the vessel then holds standing and can ask for nothing until an operator carries a route to it. */
   hearthDaemonUrl: string | null;
 }
@@ -630,13 +630,13 @@ export async function runApplyAdmitPayload(
 
   const daemonHandle = seedDaemonDoc(repo);
   // THE FOUR PLANES OF THE FACE THIS VESSEL JOINS — all named off the SAME group doc id the founder used,
-  // so the two devices name one set identically or they sync nothing. @daemon stays sovereign-per-vessel
+  // so the two devices name one set identically or they sync nothing. the daemon bag stays sovereign-per-vessel
   // and is seeded fresh above; the face's planes are shared ground reached by one derivation.
   const planes = personaScopedBagIds(payload.personaGroupDocIdHex);
   const identitiesHandle = seedIdentitiesDoc(repo, planes.identities);
   const circlesHandle    = seedCirclesDoc(repo, planes.circles);
   const sessionsHandle   = seedSessionsDoc(repo, planes.sessions);
-  // @persona: the joinee RECEIVES the founder's shared veiled-identity doc to SYNC it
+  // The persona doc: the joinee RECEIVES the founder's shared veiled-identity doc to SYNC it
   // (the membership-sync foundation). Older payloads without it fall back to a fresh local seed.
   const personaBagId = planes.persona;
   const personaUrl = payload.personaUrl ?? (seedPersonaDoc(repo, personaBagId).url as string);
@@ -707,7 +707,7 @@ export async function runApplyAdmitPayload(
       tiddler: { title: MESH_CABAL_DOC_ID_TIDDLER, text: payload.meshCabalDocIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init-admit" },
     };
-    // THE DOOR, KEPT. The payload names the hearth's own @daemon once; a joinee spends its payload and boots
+    // THE DOOR, KEPT. The payload names the hearth's own daemon doc once; a joinee spends its payload and boots
     // for years after, so the url lands on the plane the joinee always reads. Every other url here rides the
     // RESULT into one bootstrap; this one is also the only address a joinee cannot re-derive from anything it
     // holds, so it earns a tiddler beside the sentinel ids.
@@ -720,8 +720,8 @@ export async function runApplyAdmitPayload(
   });
 
   // Keyhive membership cap-events (packPersonaCrossing), when the founder packed them: write each into this
-  // vessel's @daemon in DaemonEventStore format, so boot's hydrateFromEventStore ingests them into the live
-  // keyhive — admitting this vessel into the PersonaGroup so it can decrypt shared @catalog content. Absent
+  // vessel's daemon doc in DaemonEventStore format, so boot's hydrateFromEventStore ingests them into the live
+  // keyhive — admitting this vessel into the PersonaGroup so it can decrypt content shared through the catalog registry. Absent
   // → the vessel joins by the Ed25519 edge alone. The `variant` field only needs to be PRESENT for the store
   // to read the record back; the crypto rides the bytes.
   for (const capEventB64 of payload.capEvents ?? []) {

@@ -14,7 +14,7 @@
  *      `put`, so standing them up only ensures the store directory exists.
  *   4. persistencepalace — the Testimony/witness store (the cosheaf cap every sensorium #has).
  *   5. meshpalace — stood LAST (it couples to a live node); the directory wiring is all we do here,
- *      the @meshpalace feed/federation logic lives in the mesh domain.
+ *      the meshpalace doc's feed/federation logic lives in the mesh domain.
  *
  * Per-project mining + the lar_* harvest are NOT done here (kept fast + idempotent); they accumulate
  * live via the ingest hook, or run on demand via `lares sense pour`.

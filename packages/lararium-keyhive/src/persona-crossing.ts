@@ -1,5 +1,5 @@
 /**
- * persona-crossing — the @catalog admit crossing as one composable pair: admit a vessel into the human's
+ * persona-crossing — the catalog-registry admit crossing as one composable pair: admit a vessel into the human's
  * PersonaGroup and hand it everything it needs to READ the group's shared content.
  *
  * The verified primitives live on KeyhiveProvider; this composes them in the ONE load-bearing order keyhive

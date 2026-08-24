@@ -3,7 +3,7 @@
  *
  * `openNodeVessel` composes whoFaceCap with its own gate key; a browser leaf composes the same cap with the
  * relayGatePubKey it dials. Those name the SAME string (a node anchors its confederation, so its gate key IS
- * the Nexus key its leaves pass back), and both sides reach the board through the deterministic @crossroads
+ * the Nexus key its leaves pass back), and both sides reach the board through the deterministic crossroads
  * address. This witnesses that construction end-to-end: two independently-composed vessels, wired exactly as
  * the two openers wire them, land on one board and one composite layer — and neither publishes a face.
  *
@@ -29,7 +29,7 @@ function substrateStub(composite: CompositeStore): CapModule {
   return { id: "substrate", requires: [], build: () => ({ composite }) };
 }
 
-/** Compose the WHO plane the way an opener does: materialize @crossroads deterministically, then wire the cap. */
+/** Compose the WHO plane the way an opener does: materialize the crossroads doc deterministically, then wire the cap. */
 async function composeWhoPlane(repo: Repo, nexusPubkey: string, composite: CompositeStore) {
   const crossroadsHandle = await materializeSharedLarDoc(repo, crossroadsDocUrl(nexusPubkey), "board:crossroads");
   const vessel = await composeVessel([
@@ -51,7 +51,7 @@ describe("node WHO-plane parity — anchor and leaf reach one board", () => {
     const leafComposite = new CompositeStore();
     const leaf = await composeWhoPlane(repo, ANCHOR_GATE_KEY, leafComposite);
 
-    // both reached the one deterministic @crossroads, hence the one advertised board
+    // both reached the one deterministic crossroads doc, hence the one advertised board
     expect(leaf.crossroadsHandle.url).toBe(anchor.crossroadsHandle.url);
     expect(leaf.who.handle.url).toBe(anchor.who.handle.url);
 

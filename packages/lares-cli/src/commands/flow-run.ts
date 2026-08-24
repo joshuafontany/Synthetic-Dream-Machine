@@ -7,7 +7,7 @@
  *   lares flow crystal --signal two-stratum.ndjson --names a,b   # run a flow against an explicit signal
  *
  * Bare `lares flow` lists the seeds IN-PROCESS (they ship in @lararium/mesh — no daemon needed). A named run
- * reads the NDJSON signal matrix and routes to the @daemon `flow` verb, which runs each cap-step by hull (the
+ * reads the NDJSON signal matrix and routes to the daemon `flow` verb, which runs each cap-step by hull (the
  * daemon is the one seat that reaches both). The signal rides `--signal` for now (mirrors `mismatch`); the
  * auto-extraction from a poured `--target` sensorium stays owed — `targets` ride as provenance only.
  *

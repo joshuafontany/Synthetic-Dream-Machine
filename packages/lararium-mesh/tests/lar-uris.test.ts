@@ -162,7 +162,7 @@ describe("cid — the /ipfs/ immutable-artifact plane", () => {
   });
 });
 
-describe("@nexus — the confederation plane, scoped per causal island", () => {
+describe("nexus — the confederation plane, scoped per causal island", () => {
   const NX = "abcdef0123456789";
 
   test("the registry and the handles-face are DISTINCT docs, siblings under one nexus-pubkey", () => {
@@ -189,7 +189,7 @@ describe("crossroads — the public oracle plane (three-plane model)", () => {
   });
 
   test("the WHO face's oracle-key rides a DISTINCT plane from its own doc URI (pointer ⊥ target)", () => {
-    // the per-nexus WHO doc lives under @nexus; its oracle-pointer lives under crossroads — two planes,
+    // the per-nexus WHO doc lives under the nexus plane; its oracle-pointer lives under crossroads — two planes,
     // one names the doc, the other publishes where to find it to a stranger.
     expect(nexusHandlesUri("nx").startsWith(NEXUS_DOC_URI)).toBe(true);
     expect(nexusHandlesUri("nx").startsWith(CROSSROADS_DOC_URI)).toBe(false);

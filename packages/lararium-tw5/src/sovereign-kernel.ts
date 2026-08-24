@@ -15,15 +15,15 @@
  *   Manifest carries `recipe: WikiRecipe + grants: IslandGrants`. Structural
  *   slots arrive as typed grants; the bag-oracle resolves from the oracle doc's
  *   well-known tiddlers (protocol-invariant plane); library bags resolve from
- *   @catalog ONLY (boot = first reconcile — the same path recipe-watch walks
+ *   the catalog registry ONLY (boot = first reconcile — the same path recipe-watch walks
  *   live). `buildIslandRecipe()` lays the stack:
  *
  *     temp        (MemoryTiddlerStore, volatile)
  *     draft       (CRDT, high-churn drafts)
  *     @<wikiSlug>  (CRDT, operator's edits)
- *     libraryBags[]  (CRDT, optional content libraries — @lares persona +
- *                     lararium corpus ride here, resolved island-side from @catalog)
- *     @oracle      (CRDT, required — the universal floor: engine core + grammar + bag-oracle)
+ *     libraryBags[]  (CRDT, optional content libraries — the lares persona bag +
+ *                     lararium corpus ride here, resolved island-side from the catalog registry)
+ *     oracle       (CRDT, required — the universal floor: engine core + grammar + bag-oracle)
  *
  *   Write routing happens via the in-wiki cascade
  *   (`lar:///ha.ka.ba/lararium/config/bag-paths`), not by behavior config.
@@ -285,23 +285,23 @@ export function runSovereignKernel(
 
     _composite = new CompositeStore();
 
-    // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
+    // §6 — bytes travel via the lararium CRDT; manifest carries only integrity gate.
     // The engine grant resolves FIRST (engine bytes precede TW5 boot).
     tick("slots");
     const laraiumHandle = await _resolveSlot(_repo, msg.grants.islandUrl, ORACLE_BAG, msg.wikiUri);
     if (!laraiumHandle) return;
     _handles.set(ORACLE_BAG, laraiumHandle);
 
-    // @catalog ACCESS (never layered) — the island resolves library bags from
+    // catalog registry ACCESS (never layered) — the island resolves library bags from
     // the user registry ITSELF: boot runs the same resolution path recipe-watch
     // runs live (boot = first reconcile).
     const catalogUrl = msg.grants.catalogUrl ?? null;
     const catalog    = catalogUrl ? makeCatalogAccessor(_repo, catalogUrl) : null;
 
-    // Three oracle planes, three authorities: system bags (@lares, @lararium)
+    // Three oracle planes, three authorities: system bags (lares, lararium)
     // resolve from the oracle doc's well-known tiddlers — the system plane the
-    // island already holds; user library bags resolve from @catalog; public bags
-    // will resolve from @crossroads. Structural instance slots arrive as typed
+    // island already holds; user library bags resolve from the catalog registry; public bags
+    // will resolve from the crossroads plane. Structural instance slots arrive as typed
     // grants.
     const slug = msg.recipe.wikiSlug;
     const slotUrl = async (slot: SlotUri): Promise<string | null> => {
@@ -310,13 +310,13 @@ export function runSovereignKernel(
       if (slot === wikiSlotUri(slug, "personal")) return msg.grants.personalUrl ?? null;
       if (slot === wikiBagUri(slug))              return msg.grants.wikiUrl ?? null;
       if (slot === ORACLE_BAG)                 return msg.grants.islandUrl;
-      // System bags (@lares, @lararium) resolve from the oracle doc's well-known
+      // System bags (lares, lararium) resolve from the oracle doc's well-known
       // tiddlers — the system plane the island already holds. User library
-      // bags fall through to @catalog.
+      // bags fall through to the catalog registry.
       if (slot === LARES_BAG)                    return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARES_BAG]) ?? null;
       if (slot === LARARIUM_BAG)                 return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARARIUM_BAG]) ?? null;
-      // @crossroads — the PUBLIC oracle plane; its pointer rides @oracle (public infra), resolved the same
-      // well-known-tiddler way as the system bags. Public bags in turn resolve FROM @crossroads.
+      // crossroads — the PUBLIC oracle plane; its pointer rides the oracle plane (public infra), resolved the same
+      // well-known-tiddler way as the system bags. Public bags in turn resolve FROM the crossroads plane.
       if (slot === CROSSROADS_BAG)               return tiddlerText(laraiumHandle.doc()?.tiddlers?.[CROSSROADS_BAG]) ?? null;
       return catalog ? await catalog.urlOf(slot) : null;   // user library bags
     };
@@ -382,7 +382,7 @@ export function runSovereignKernel(
     const engine = { sha256: engineSha, version: coreVersion };
 
     if (!pluginTiddlers.length) {
-      _post(mkFault(msg.wikiUri, "island cannot load plugin tiddlers — none resolved (CAS by CID, or @lararium blobs)"));
+      _post(mkFault(msg.wikiUri, "island cannot load plugin tiddlers — none resolved (CAS by CID, or lararium-doc blobs)"));
       return;
     }
 
@@ -414,8 +414,8 @@ export function runSovereignKernel(
     await (tw5 as unknown as { lares?: { whenSeedDrained?: () => Promise<void> } })
       .lares?.whenSeedDrained?.();
 
-    // Isomorphic base: the @catalog grant rides into ctx (access entry, NOT a
-    // load slot — @catalog is absent from expandRecipe). Worker behaviors build
+    // Isomorphic base: the catalog registry's grant rides into ctx (access entry, NOT a
+    // load slot — the catalog registry is absent from expandRecipe). Worker behaviors build
     // a CatalogAccessor over it to reach any registered bag; recipe-watch keeps
     // reconciling the SAME path boot just walked.
     // The CID plane the kernel already pulls engine/plugin bytes from, lifted to

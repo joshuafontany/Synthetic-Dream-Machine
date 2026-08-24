@@ -1,8 +1,8 @@
 /**
  * spawn-resolve — resolve HOW to spawn the read-only mempalace MCP holder from a
- * daemon host (the @daemon seat).
+ * daemon host (the daemon seat).
  *
- * Option D, the read shore: the @daemon host reaches mempalace THROUGH the
+ * Option D, the read shore: the daemon host reaches mempalace THROUGH the
  * seat, never a raw CLI subprocess — so the spawn knowledge lives HERE, beside
  * MempalaceClient, not in the CLI (the dependency must not point node→cli).
  *

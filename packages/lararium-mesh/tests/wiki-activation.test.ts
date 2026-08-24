@@ -159,7 +159,7 @@ describe("wiki-activation cap — rotatable pins + pin-budget (the switcher's ho
   const W1 = "lar:///wiki/one", W2 = "lar:///wiki/two", W3 = "lar:///wiki/three";
   const anySpec = async (): Promise<WikiMountSpec> => spec();
 
-  // makeVesselTrio wires pinBudget 1 (the browser gradient: @daemon always + ONE rotatable).
+  // makeVesselTrio wires pinBudget 1 (the browser gradient: the daemon bag always + ONE rotatable).
   test("hold pins a live wiki; release unpins it; held() tracks the set", async () => {
     const { residency, cap } = makeVesselTrio(4, anySpec);
     expect(cap.grant.pinBudget).toBe(1);

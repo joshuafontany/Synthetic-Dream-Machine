@@ -38,7 +38,7 @@ describe("the ground every vessel stands on", () => {
   });
 
   test("★ a face's relations are NOT ground — a vessel standing in nothing carries no one's circles ★", () => {
-    // A vessel-global @circles would put one persona's blocked list in the same document as another's
+    // A single vessel-wide circles plane would put one persona's blocked list in the same document as another's
     // follows, where anything reading it correlates the faces a multitude exists to hold apart. So the
     // three planes that travel with a face arrive through a MEMBERSHIP, exactly as the persona plane does.
     const bags = deriveRegisterBags({ fleets: [] });
@@ -97,7 +97,7 @@ describe("one PersonaGroup", () => {
 });
 
 describe("★ A PLANE CARRIES ONE NAME EVERYWHERE ★", () => {
-  // The failure this forbids: a plane registered under one spelling while the composite, the @oracle
+  // The failure this forbids: a plane registered under one spelling while the composite, the oracle
   // registry and the admit payload reach it by another. keyhive hashes the bag URL to SEED the Document
   // behind it, so a second spelling is a second document no later aliasing reconciles — and the plane a
   // vessel actually stands in would answer no cap check, with no throw and no warning.

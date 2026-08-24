@@ -200,9 +200,9 @@ export interface GenesisArtifact {
    */
   readonly casEntries:  readonly { readonly cid: string; readonly bytes: Uint8Array }[];
   /**
-   * The PLAIN-DATA genesis seed — the @oracle's initial state as JSON (no Automerge
+   * The PLAIN-DATA genesis seed — the oracle doc's initial state as JSON (no Automerge
    * bytes). The build sink writes it to `island.genesis.json`; the boot MATERIALIZES
-   * the @oracle CRDT fresh from it under the deterministic doc id (slice 2). This is
+   * the oracle CRDT fresh from it under the deterministic doc id (slice 2). This is
    * the boot artifact now — the Automerge `bytes`/island.bin survive only as a test
    * fixture + determinism witness, no longer read at boot.
    */
@@ -216,9 +216,9 @@ export interface GenesisArtifact {
 export const GENESIS_SEED_FORMAT = "lararium-genesis-seed/v1" as const;
 
 /**
- * GenesisSeed — the @oracle's initial state as PLAIN DATA (JSON-serializable).
+ * GenesisSeed — the oracle doc's initial state as PLAIN DATA (JSON-serializable).
  *
- * It carries exactly what the @oracle CRDT is seeded with: the schema version, the
+ * It carries exactly what the oracle CRDT is seeded with: the schema version, the
  * blob METADATA map (descriptors only — bytes ride the CID plane), and the system
  * tiddlers map (bag descriptors, system recipes, blob descriptors, region witnesses).
  * `actorSeed` pins the Automerge actor so `materializeGenesisDoc(seed)` is byte-stable
@@ -241,12 +241,12 @@ export const GENESIS_CID_ENGINE_TIDDLER  = `${ORACLE_DOC_URI}/genesis-cid-engine
 export const GENESIS_CID_PLUGINS_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid-plugins`;
 
 // ---------------------------------------------------------------------------
-// The @oracle deterministic doc id (slice 2: materialize-fresh, no shipped binary)
+// The oracle deterministic doc id (slice 2: materialize-fresh, no shipped binary)
 // ---------------------------------------------------------------------------
 
 /**
- * The well-known seed for the @oracle's deterministic DocumentId. STABLE FOREVER —
- * it derives from the @oracle's canonical URI alone, never from the engine/plugin
+ * The well-known seed for the oracle doc's deterministic DocumentId. STABLE FOREVER —
+ * it derives from the oracle doc's canonical URI alone, never from the engine/plugin
  * content, so the public crossroads board keeps ONE address across every engine
  * churn and every peer (churn advances the pointer, never re-genesis). A
  * content-derived id would fork the board on each rebuild — the anti-pattern.
@@ -254,11 +254,11 @@ export const GENESIS_CID_PLUGINS_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid-plugin
 export const ORACLE_GENESIS_DOC_SEED = `${ORACLE_DOC_URI}#genesis-doc-id` as const;
 
 /**
- * oracleGenesisDocUrl — the @oracle's DETERMINISTIC automerge: url.
+ * oracleGenesisDocUrl — the oracle doc's DETERMINISTIC automerge: url.
  *
  * Derived from the well-known seed: the first 16 bytes of its sha256 form the
  * BinaryDocumentId. Every vessel (this peer across reboots; future mesh peers)
- * computes the SAME url, so a freshly-materialized @oracle re-loads under one
+ * computes the SAME url, so a freshly-materialized oracle doc re-loads under one
  * stable id (persist-across-restart) and peers materialize one shared board.
  *
  * Cross-VERSION caveat (the epoch-ratchet residual): two peers that materialize
@@ -306,7 +306,7 @@ export function computePluginsCid(
 /**
  * The bags GENESIS itself stands — the universal floor every vessel carries, and nothing else.
  *
- * A FACE'S PLANES ARE NOT DECLARED HERE. @persona · @circles · @identities · @sessions each derive their id
+ * A FACE'S PLANES ARE NOT DECLARED HERE. The persona · circles · identities · sessions planes each derive their id
  * from the tag their PersonaGroup mints, so no name for them exists when this seed is built, and a genesis
  * every vessel shares can describe no plane belonging to one person. They describe themselves at founding,
  * where the knowledge lives.
@@ -323,12 +323,12 @@ const ROOT_BAGS = [
 // ---------------------------------------------------------------------------
 
 /**
- * buildGenesisSeed() — assemble the @oracle's initial state as PLAIN DATA.
+ * buildGenesisSeed() — assemble the oracle doc's initial state as PLAIN DATA.
  *
  * Platform-neutral, no Automerge: it builds the blob METADATA map (descriptors only;
  * bytes ride the CID plane) and the system tiddlers map (bag descriptors, system
  * recipes, blob descriptors, region witnesses). `materializeGenesisDoc(seed)` turns
- * it into the live @oracle CRDT at boot — the genesis is data, never a baked binary.
+ * it into the live oracle CRDT at boot — the genesis is data, never a baked binary.
  */
 export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): GenesisSeed {
   const coreSha     = coreSha256 ?? inputs.coreSha256 ?? sha256HexBytesSync(inputs.coreBlob);
@@ -367,8 +367,8 @@ export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): Ge
     };
   }
 
-  // SYSTEM wiki-recipes — @lares + @lararium quine
-  // wikis ride the @oracle system plane, never @catalog (USER recipes mint into @catalog).
+  // SYSTEM wiki-recipes — the lares + lararium quine
+  // wikis ride the oracle system plane, never the catalog registry (USER recipes mint into it).
   const systemRecipe = (slug: string, bagStack: string, writableBag: string) => {
     const title = recipeUri("oracle", slug);
     tiddlers[title] = {
@@ -448,11 +448,11 @@ export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): Ge
 }
 
 /**
- * materializeGenesisDoc() — build the @oracle Automerge bytes from the plain-data seed.
+ * materializeGenesisDoc() — build the oracle doc's Automerge bytes from the plain-data seed.
  *
  * Deterministic: pinned actor (`seed.actorSeed`), `time: 0`, sorted key order — two
  * peers materialize byte-identical history, so they may share one deterministic doc
- * id safely. Called at BOOT (open-node-vessel) to seed a fresh @oracle, and by the
+ * id safely. Called at BOOT (open-node-vessel) to seed a fresh oracle doc, and by the
  * build (back-compat island.bin + the verifier). The genesis ships as `seed`, never
  * as these bytes.
  */

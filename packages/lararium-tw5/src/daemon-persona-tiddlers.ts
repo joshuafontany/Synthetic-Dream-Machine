@@ -1,8 +1,8 @@
 /**
- * daemon-persona-tiddlers — the @daemon persona panel (the multitude-of-one surface).
+ * daemon-persona-tiddlers — the daemon persona panel (the multitude-of-one surface).
  *
  * The isomorphic sibling of daemon-ui-tiddlers' wiki-switcher: a SMALL born-from-source
- * surface on the @daemon story river that LISTS a human's held persona-roots (index +
+ * surface on the daemon story river that LISTS a human's held persona-roots (index +
  * worn marker + private pet-name), MINTS a new persona-root at the next index, and WEARS
  * one (reboot-to-switch — one-face-to-mesh). A human contains a multitude; this surface
  * lets them hold, name, and don their faces.
@@ -48,7 +48,7 @@ const VERB_PREFIX = "lar:///lararium.local.vm/verb/";
 // $:/temp/lares/personas under the field `petname-<idx>`, so `[[…]get<petField>]` (petField =
 // "petname-"+idx) fetches it. `held`/`active` ride enlist+match, exactly as the switcher's pins.
 const SURFACE_BODY = `\\whitespace trim
-! @daemon · Personas
+! daemon · Personas
 
 <div class="lares-persona-surface" data-lares-surface="personas">
 
@@ -81,7 +81,7 @@ const SURFACE_BODY = `\\whitespace trim
 const SUMMON_ACTION = `<$action-setfield $tiddler="${LARES_SURFACE_STATE}" text="${SURFACE_TITLE}"/>`;
 
 const PAGECTRL_BODY = `\\whitespace trim
-<$button class="tc-btn-invisible lares-pagecontrol" data-lares-summon="personas" tooltip="Open the @daemon persona surface">
+<$button class="tc-btn-invisible lares-pagecontrol" data-lares-summon="personas" tooltip="Open the daemon persona surface">
 ${SUMMON_ACTION}
 {{$:/core/images/permalink-button}} Personas
 </$button>`;
@@ -89,7 +89,7 @@ ${SUMMON_ACTION}
 interface TiddlerSpec { readonly [field: string]: string }
 
 /**
- * The born-from-source @daemon persona-panel CODE tiddlers: the persona surface (tagged the
+ * The born-from-source daemon persona-panel CODE tiddlers: the persona surface (tagged the
  * shared Lares/Surface tag, so the switcher's wrapper transcludes it when summoned) + the
  * $:/tags/PageControls sidebar button that summons it.
  */
@@ -99,7 +99,7 @@ export const DAEMON_PERSONA_TIDDLERS: readonly TiddlerSpec[] = [
 ];
 
 /**
- * Seed the born-from-source persona-panel tiddlers into the live @daemon TW5 wiki. Idempotent
+ * Seed the born-from-source persona-panel tiddlers into the live daemon TW5 wiki. Idempotent
  * (setTiddler overwrites). MUST run alongside seedDaemonUiTiddlers, BEFORE the projection
  * camera's first render (a headless node daemon simply rests these, never painting).
  */

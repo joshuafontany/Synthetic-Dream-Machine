@@ -11,7 +11,7 @@ import {
 // The env vars the resolvers read — saved + restored so one test never leaks into the next.
 const ENV_KEYS = ["LAR_ROOT", "LAR_GENESIS", "LAR_BAGS"] as const;
 
-describe("lares-config — the per-@daemon resource-override reader", () => {
+describe("lares-config — the per-daemon resource-override reader", () => {
   let dir: string;
   let saved: Record<string, string | undefined>;
 

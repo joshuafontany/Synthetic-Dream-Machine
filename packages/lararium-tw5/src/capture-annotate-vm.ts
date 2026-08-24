@@ -6,7 +6,7 @@ module-type: startup
 /**
  * capture-annotate-vm — TW5 startup module: the IN-VM capture annotate (the one-runtime lock).
  *
- * Publishes `$tw.lares.captureAnnotateVm(turnText, sourceFile) → lar_* patch`. The @daemon (and any
+ * Publishes `$tw.lares.captureAnnotateVm(turnText, sourceFile) → lar_* patch`. The daemon (and any
  * other VM — browser, admin) injects THIS into its capture engine as the annotate pass, so all
  * ast-parsing runs INSIDE the TW5 VM, against the FULL self-hosted grammar
  * (getGrammar reads the SharktoothSigil tiddlers present in-realm — not the node-side bootstrap subset).

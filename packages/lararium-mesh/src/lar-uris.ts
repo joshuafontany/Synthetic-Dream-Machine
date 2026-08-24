@@ -78,7 +78,7 @@ export function stableTagUri(name: string): string {
 // URI — the reaction-router lifts them into a structured args payload the verse-event
 // carries (#48). A GENUINE dispatch also sets the `lares-dispatch` marker field; the
 // router fires a verb verse-event ONLY on a marked tiddler, so the verb machinery's own
-// lar:-titled writes (`…/verbs/<id>` invocations, `@daemon/outcomes/<id>` outcomes —
+// lar:-titled writes (`…/verbs/<id>` invocations, `bags/daemon/outcomes/<id>` outcomes —
 // which carry a `verb` field but never the marker) stay router-inert BY CONSTRUCTION,
 // and no dispatch loop can form. The VOLATILE namespace keeps the summon tiddler
 // reaction-routable (lar: prefix) yet unpersisted/unsynced (isVolatileVmUri → the
@@ -172,7 +172,7 @@ export function wikiUri(slug: string): string {
 
 /** Mint the canonical URI of a content-addressed ARTIFACT — the /ipfs/ plane. The name
  *  IS the content hash, so it never changes; a frozen blob answers to it forever, and the
- *  @oracle `cid:` pointer (the /ipns/ plane) names which cid stands current. Per lar: law
+ *  oracle-plane `cid:` pointer (the /ipns/ plane) names which cid stands current. Per lar: law
  *  this NAMES the artifact; the CAS store resolves it to bytes. No `@` — a cid carries no
  *  petname, only its hash. */
 export function cidUri(cid: string): string {
@@ -206,24 +206,24 @@ export function identitySlug(uri: string): string | null {
 
 // ── Content plane ─────────────────────────────────────────────────────────
 
-// @oracle = the runtime SYSTEM ISLAND (genesis-loaded: engine BLOBs + bag→doc
+// oracle = the runtime SYSTEM ISLAND (genesis-loaded: engine BLOBs + bag→doc
 // oracle + genesis-cid); the universal floor of every wiki-recipe. Split from
-// the @lararium memetic corpus (disk-projection #oracle-split).
+// the lararium memetic corpus (disk-projection #oracle-split).
 export const ORACLE_DOC_URI    = bagUri("oracle");
-// @lararium = the engine's memetic CORPUS (authored self-doc memes; a library bag).
+// lararium = the engine's memetic CORPUS (authored self-doc memes; a library bag).
 export const LARARIUM_DOC_URI  = bagUri("lararium");
 export const CATALOG_DOC_URI   = bagUri("catalog");
 export const LARES_DOC_URI     = bagUri("lares");
-// @crossroads = the PUBLIC oracle plane (third leg of the three-plane model,
-// canon: lararium/docs/crossroads). Where @oracle carries system-bag pointers
-// and @catalog carries the operator's PRIVATE bag oracles (OCAP grants),
-// @crossroads carries oracles to PUBLIC + infrastructure bags — the layers a
+// crossroads = the PUBLIC oracle plane (third leg of the three-plane model,
+// canon: lararium/docs/crossroads). Where the oracle plane carries system-bag pointers
+// and the catalog registry carries the operator's PRIVATE bag oracles (OCAP grants),
+// the crossroads plane carries oracles to PUBLIC + infrastructure bags — the layers a
 // stranger may mount without standing in any operator's grant graph. "Public"
 // names a generous grant to an anonymous principal, never an absence of the gate
 // (pull ≠ read). The per-Nexus WHO face rides here (its oracle-key = nexusHandlesUri).
 export const CROSSROADS_DOC_URI = bagUri("crossroads");
-// The memetic-wikitext engine plugin — a named blob CARRIED IN @oracle's blobs. Its
-// title lives in the @lararium MEME NAMESPACE (not the bag doc): a meme/module address
+// The memetic-wikitext engine plugin — a named blob CARRIED IN the oracle island's blobs. Its
+// title lives in the lararium MEME NAMESPACE (not the bag doc): a meme/module address
 // the disk projector discards-from-bag, keyed on by plugin.info + the TW5 pack pipeline.
 // A meme namespace carries no relation to a bag-doc identity, so it takes no `bags/`
 // kind-segment.
@@ -255,10 +255,10 @@ export const BOOT_SPLASH_ACTIVE_URI = stableLarUri("state/boot-splash/active");
  *  id yields, and `personaSiblingBagIds` reaches the other three from any one of them: the name is the
  *  index, so nothing stores a second copy to drift from.
  *
- *  NONE OF THESE NAMES A BAG. Titles inside a plane spell `@circles/following` whichever plane holds them,
- *  exactly as every persona plane's records spell `@persona/...`; a title resolves verbatim within its own
- *  document, so one internal shape serves every face. The bag answering to it is `@circles-<tag>`, and a
- *  vessel-global `@circles` would put one persona's blocked list in the same document as another's follows
+ *  NONE OF THESE NAMES A BAG. Titles inside a plane spell `circles/following` whichever plane holds them,
+ *  exactly as every persona plane's records spell `persona/...`; a title resolves verbatim within its own
+ *  document, so one internal shape serves every face. The bag answering to it is `circles-<tag>`, and a
+ *  vessel-wide circles plane would put one persona's blocked list in the same document as another's follows
  *  — where anything reading it correlates the faces a multitude exists to hold apart. */
 export const IDENTITIES_NAMESPACE = bagUri("identities");
 export const CIRCLES_NAMESPACE    = bagUri("circles");
@@ -278,7 +278,7 @@ export function corpusLarUri(slug: string): string {
 }
 
 /**
- * Registry-entry URI inside @catalog that points at a corpus bag.
+ * Registry-entry URI inside the catalog plane that points at a corpus bag.
  *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/bags/catalog/corpus/elyncia"
  *
  * The tiddler at this title lives in the catalog bag and carries the
@@ -329,10 +329,10 @@ export function flowUri(petname: string): string {
  *  name the very thing canon forbids above a person's compartments.
  *
  *  ① The TITLE prefix every PersonaGroup plane uses INSIDE its own document: the signer pin, the KEL
- *     prefix, the selves, the binding records all spell `@persona/...` whichever plane holds them. Titles
+ *     prefix, the selves, the binding records all spell `persona/...` whichever plane holds them. Titles
  *     resolve verbatim within a document and the composite finds one by walking layers, so every plane
  *     carries the same internal shape regardless of the bag it answers to.
- *  ② The STEM a plane's own bag id extends — `personaBagIdFor` derives `@persona-<tag>` from that group's
+ *  ② The STEM a plane's own bag id extends — `personaBagIdFor` derives `persona-<tag>` from that group's
  *     doc id, and `isPersonaBagId` matches the family by that shape rather than by any fixed id.
  *
  *  It NAMES NO BAG on its own. A vessel holds one plane per PersonaGroup it stands in, each seeded,
@@ -425,9 +425,9 @@ export function nexusRegistryUri(nexusPubkey: string): string {
  * portable identity KIND), while this doc URI carries the island-scoped REACH — so the same card re-announces
  * onto another Nexus's handles-face under a stable key. Federates read-open within the island; never global.
  *
- * This URI doubles as the WHO face's ORACLE-KEY on the PUBLIC plane: a @crossroads tiddler at this key holds
+ * This URI doubles as the WHO face's ORACLE-KEY on the PUBLIC plane: a crossroads-plane tiddler at this key holds
  * the face doc's automerge: URL (resolveOracleDoc), so a stranger resolves the per-Nexus WHO board through
- * @crossroads without standing in any operator's grant graph (canon: lararium/docs/crossroads).
+ * the crossroads plane without standing in any operator's grant graph (canon: lararium/docs/crossroads).
  */
 export function nexusHandlesUri(nexusPubkey: string): string {
   return `${NEXUS_DOC_URI}/${nexusPubkey}/handles`;
@@ -468,9 +468,9 @@ export const PERSONA_GROUP_SENTINEL_URI = stableLarUri("sentinel/persona-group")
  */
 export const MESH_CABAL_SENTINEL_URI   = stableLarUri("sentinel/kahu-cabal");
 
-// PersonaGroup-identity sentinel tiddlers re-home to the @persona namespace — they name
+// PersonaGroup-identity sentinel tiddlers re-home to the `persona` namespace — they name
 // the operator's veiled identity (the PersonaGroup), the membership-sync surface. MeshCabal
-// (nexus-affiliation, NOT personGroup-identity) stays under @daemon.
+// (nexus-affiliation, NOT personGroup-identity) stays under the daemon bag.
 /**
  * One membership entry — this vessel stands in that PersonaGroup. Keyed by the plane's derived tag, text
  * carrying the group's own doc id, so the family reads back without an order or an index to maintain.
@@ -496,9 +496,9 @@ export const PERSONA_GROUP_AGENT_ID_TIDDLER = `${PERSONA_NAMESPACE}/sentinel/per
 export const MESH_CABAL_DOC_ID_TIDDLER     = `${DAEMON_BAG_ID}/sentinel/mesh-cabal/doc-id`;
 
 /**
- * The HEARTH's @daemon url — the door this vessel knocks on to ask its face for a seat.
+ * The HEARTH's daemon url — the door this vessel knocks on to ask its face for a seat.
  *
- * An admitted vessel seeds its OWN @daemon, because that plane never crosses; so the one url it cannot
+ * An admitted vessel seeds its OWN daemon bag, because that plane never crosses; so the one url it cannot
  * derive is where its hearth listens. The admit payload carries it once, and this tiddler keeps it, so a
  * joinee that has long since spent its payload still knows where to ask. Absent on a vessel that founded
  * its own face — such a vessel IS the hearth, and knocks on no one.
@@ -510,7 +510,7 @@ export const SIGNER_DID_TIDDLER            = `${PERSONA_NAMESPACE}/binding/signe
 /** Persona oracle tiddler: the hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName). */
 export const HEARTH_TRUE_NAME_TIDDLER      = `${PERSONA_NAMESPACE}/hearth/true-name`;
 /** The prefix every OWN-PERSONA self tiddler sits under — the human's labels for their own faces, one per
- *  handle-index. @persona rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator, and the
+ *  handle-index. The persona plane rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator, and the
  *  DeterministicFederationGate never volunteers it to a cross-operator, so these labels reach the human's own
  *  devices and no stranger. */
 export const PERSONA_SELVES_PREFIX         = `${PERSONA_NAMESPACE}/selves`;
@@ -533,7 +533,7 @@ export const PERSONA_KEL_PREFIX_TIDDLER     = `${PERSONA_NAMESPACE}/binding/pers
 
 // ── personal / draft binding tiddler prefixes ───────────────────────────
 // The (PersonaGroup × recipe-fingerprint) → docUrl bindings live as tiddlers
-// under these prefixes (now @persona-namespaced — PersonaGroup-scoped, cross-device).
+// under these prefixes (now persona-namespaced — PersonaGroup-scoped, cross-device).
 // One fingerprint produces THREE bindings (personal, draft, working) that
 // share a lifecycle. The binding tiddler title is `${PREFIX}/${fingerprintHex}`;
 // its `text` carries the bound URL.
@@ -554,8 +554,8 @@ export const WORKING_BINDINGS_PREFIX  = `${PERSONA_NAMESPACE}/working-bindings`;
  * Per-wiki recipe slots (`temp`, `draft`, `@<wiki-slug>`, library bags) live
  * in `wiki-recipe.ts` — slot URIs in the same lar:///ha.ka.ba/bags/<name>
  * namespace. Structural slots arrive as typed IslandGrants on the manifest;
- * @lares rides the lararium doc's well-known tiddlers; library bags resolve
- * island-side from @catalog.
+ * the lares bag rides the lararium doc's well-known tiddlers; library bags resolve
+ * island-side from the catalog registry.
  */
 export const BAG_IDS = {
   oracle:     ORACLE_DOC_URI,

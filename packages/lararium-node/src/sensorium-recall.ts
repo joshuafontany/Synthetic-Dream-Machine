@@ -288,7 +288,7 @@ export interface FormSearchConfig {
   readonly formPalace: FormSearchPalace;
   /**
    * The markers path: derive a query move-skeleton + basis to vectorize a sigil-bearing query. Runs
-   * IN the @daemon VM (the recall twin of capture — one runtime, no node-side fallback): a round-trip
+   * IN the daemon VM (the recall twin of capture — one runtime, no node-side fallback): a round-trip
    * to the warm worker where the query folds against the full grammar + live basis (the structural
    * plane present), so recall applies the IDENTICAL Move→Vec functor capture does. Absent (or resolves
    * null — the VM cold/unavailable, or no derivable move-form) → a markers query DEGRADES to the
@@ -338,7 +338,7 @@ export function makeFormSearch(
     }
 
     // 2. MARKERS — a derivable skeleton → form-vector similarity (the existing query path). The
-    //    derive round-trips the @daemon VM (one runtime); a null (VM cold / no move-form) falls to (3).
+    //    derive round-trips the daemon VM (one runtime); a null (VM cold / no move-form) falls to (3).
     if (hasMarkers && cfg.deriveSkeleton) {
       const derived = await cfg.deriveSkeleton(cfg.query);
       if (derived) {
@@ -554,7 +554,7 @@ export interface MultiGraphRecallResult {
  * `extraGraphs`), build their weighted legs, then RRF-fuse them on the verbatim_sha. The aperture
  * knobs ride here — `formWeight` tilts the form leg, `register`/`grammarLayer` scope it, and
  * `apertureGrain` (P6) re-weights the fused ranking toward the paragraph-scale basin-peak. Wired into
- * the @daemon `recall` verb (open-node-vessel) as a recall mode beside `search` / `list` / `imago`.
+ * the daemon `recall` verb (open-node-vessel) as a recall mode beside `search` / `list` / `imago`.
  */
 export async function multiGraphRecall(
   deps: MultiGraphRecallDeps,

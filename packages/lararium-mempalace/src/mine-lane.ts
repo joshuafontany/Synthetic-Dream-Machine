@@ -11,7 +11,7 @@
  * write-daemon queue — the lane keeps a process from racing ITSELF into that lock (the
  * lock-retry storm). SYNC spawns (execFileSync callers: subagent-mine, telemetry-writeback,
  * the CLI direct mine) block the thread and thus serialize by construction; the lane guards
- * the async spawns (the @daemon capture flush, any future async mine).
+ * the async spawns (the daemon capture flush, any future async mine).
  *
  * Meme: lar:///ha.ka.ba/lararium/api/capture-annotation-model#nalu-flush-hardening
  */

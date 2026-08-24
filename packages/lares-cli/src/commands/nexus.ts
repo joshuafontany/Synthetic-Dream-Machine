@@ -282,7 +282,7 @@ async function cmdAcceptCarriage(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * `lares nexus posture [private | open]` — read or flip the per-Nexus federation posture on the @nexus charter
+ * `lares nexus posture [private | open]` — read or flip the per-Nexus federation posture on the nexus charter doc
  * doc. Default PRIVATE (a Nexus develops in isolation); OPEN lets cross-Nexus foreign operators co-federate the
  * PUBLIC planes (never a private plane). No arg reads the current posture.
  */
@@ -473,7 +473,7 @@ async function seatKahuFromVault(
   // two registers: an operator could then seat only under the same string they call the compartment at home,
   // and every private label would become a public commitment by construction.
   const held = new Set(await listPersonaRoots(dataDir));
-  // The declared Handle rides the FLEET (@persona), the seat claim stays LOCAL — so the seal reads a persona's
+  // The declared Handle rides the FLEET (the persona plane), the seat claim stays LOCAL — so the seal reads a persona's
   // outward name as every device of the human knows it, and reads the chair claim as THIS node holds it.
   const localDeclarations = await makeNodePersonaDeclarationStore();
   const fleetDid = await fleetPeerDid();

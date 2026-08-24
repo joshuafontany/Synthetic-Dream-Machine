@@ -2,8 +2,8 @@
  * persona-selves-verbs — the OWN-PERSONA name verbs over the sovereign persona doc.
  *
  * A human's labels for their own faces ride the PersonaGroup's own private bag: the self-slot FLEET-syncs
- * @persona same-operator (so a rename lands on ALL the operator's own devices) and the
- * DeterministicFederationGate never volunteers it to a cross-operator (@persona sits outside its federatable
+ * the persona plane same-operator (so a rename lands on ALL the operator's own devices) and the
+ * DeterministicFederationGate never volunteers it to a cross-operator (the persona plane sits outside its federatable
  * set). One multitude, every device of the one human, no stranger.
  *
  * TWO NAMES RIDE, ONE CLAIM DOES NOT. `persona-label` carries the PRIVATE pet-name; `persona-handle` carries
@@ -84,7 +84,7 @@ function makeNameReactor(opts: PersonaSelvesVerbOptions, verb: string, name: Per
 }
 
 /**
- * persona-selves — the MULTITUDE-VIEW off @persona: every own persona this fleet has named, ascending. Reads
+ * persona-selves — the MULTITUDE-VIEW off the persona plane: every own persona this fleet has named, ascending. Reads
  * only titles under the selves prefix, so the bag's identity machinery (bindings, sentinels, the hearth
  * true-name) passes by untouched.
  */

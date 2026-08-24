@@ -16,13 +16,13 @@
  *   bags/{slug}           — the wiki's CANON bag (read-only from the wiki), published
  *                            to only by a promotion MOVE (shore-law)
  *   libraryBags[]          — optional content libraries, CRDT, read-only from wiki
- *                            (the lares wiki-recipe carries @lararium + @lares here)
- *   @oracle                — runtime system island: engine core + plugins + grammar +
+ *                            (the lares wiki-recipe carries the lararium and lares bags here)
+ *   oracle                 — runtime system island: engine core + plugins + grammar +
  *                            bag-oracle; the UNIVERSAL FLOOR of every recipe, CRDT, required
  *
- * @lares (personality) and @lararium (engine corpus) are NOT the floor — they
- * ride a wiki's libraryBags. The lares wiki-recipe = @oracle + @lararium + @lares.
- * The memetic-wikitext plugin rides @oracle (CID-frozen), so it is universal.
+ * The lares bag (personality) and the lararium bag (engine corpus) never stand as the floor — they
+ * ride a wiki's libraryBags. The lares wiki-recipe = oracle floor + lararium bag + lares bag.
+ * The memetic-wikitext plugin rides the oracle island (CID-frozen), so it is universal.
  *
  * Above-stack projections defer (separate concern). When they land they will
  * subscribe to nalu events, not participate in the cascade.
@@ -62,9 +62,9 @@ export function wikiSlotUri(slug: string, kind: WikiSlotKind): SlotUri {
 
 export const LARES_BAG    = LARES_DOC_URI;
 export const LARARIUM_BAG = LARARIUM_DOC_URI;
-/** @oracle — the runtime system island; the universal floor of every recipe. */
+/** oracle — the runtime system island; the universal floor of every recipe. */
 export const ORACLE_BAG   = ORACLE_DOC_URI;
-/** @crossroads — the public oracle plane; a recipe library bag whose pointer @oracle serves (public infra). */
+/** crossroads — the public oracle plane; a recipe library bag whose pointer the oracle plane serves (public infra). */
 export const CROSSROADS_BAG = CROSSROADS_DOC_URI;
 
 /** Build a wiki's CANON BAG URI from a slug (`bags/{slug}`) — the published,
@@ -81,7 +81,7 @@ export function wikiDraftBagUri(slug: string): SlotUri {
   return wikiSlotUri(slug, "draft");
 }
 
-/** The @catalog key for a per-DID draft doc (`wikis/{slug}/drafts/{did}`) — the
+/** The catalog registry key for a per-DID draft doc (`wikis/{slug}/drafts/{did}`) — the
  *  per-operator draft-doc pointer, above the fold. ONE source for the host reader
  *  (recipeHostFacets) and the mint/draft writers, so the round-trip never drifts. */
 export function wikiDraftDocKey(slug: string, identityDid: string): SlotUri {
@@ -103,7 +103,7 @@ export interface WikiHostFacets {
   readonly wikiBagId: string;
   /** The per-wiki draft layer bagId (`wikis/{slug}/draft`). */
   readonly draftBagId: string;
-  /** The @catalog key for THIS operator's per-DID draft doc (`wikis/{slug}/drafts/{did}`). */
+  /** The catalog registry key for THIS operator's per-DID draft doc (`wikis/{slug}/drafts/{did}`). */
   readonly draftOracleTitle: string;
 }
 
@@ -274,7 +274,7 @@ export type BagPinState =
 export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
   const slug = r.wikiSlug;
   // Deduped: when the wiki's OWN canon bag coincides with a structural slot (the
-  // @lares-as-wiki quine — slug "lares" → wikiBagUri = LARES_BAG), the slot
+  // lares-as-wiki quine — slug "lares" → wikiBagUri = LARES_BAG), the slot
   // lays ONCE, at its highest-priority position.
   return [...new Set<SlotUri>([
     wikiSlotUri(slug, "temp"),
@@ -287,9 +287,9 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
     wikiSlotUri(slug, "working"),
     wikiBagUri(slug),
     ...(r.libraryBags ?? []),
-    // @oracle = the universal floor (engine + grammar + bag-oracle). @lares and
-    // @lararium are NOT the floor — they ride a wiki's libraryBags (the @lares
-    // wiki-recipe = @oracle floor + @lararium + @lares).
+    // oracle = the universal floor (engine + grammar + bag-oracle). The lares and
+    // lararium bags never stand as the floor — they ride a wiki's libraryBags (the lares
+    // wiki-recipe = oracle floor + lararium bag + lares bag).
     ORACLE_BAG,
   ])];
 }
@@ -309,7 +309,7 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
  * same recipe" for purposes of cross-device personal binding.
  *
  * Fingerprint algorithm (personal-slot): only the wiki bag
- * doc-id and the libraryBags doc-ids participate. @lares and @lararium
+ * doc-id and the libraryBags doc-ids participate. The lares and lararium bag
  * doc-ids do NOT participate — switching personality or system bag does
  * not fork operator view state across devices.
  */
@@ -351,13 +351,13 @@ export async function computeRecipeFingerprint(
 // BrowserVesselIslandPool). Divergence rides in the DATA (the recipe's
 // `mirrorBags` designation) and in the island's held CAPABILITIES (a node
 // pool's `diskMirrorGrant`), never in the method's shape. The caller hands
-// typed structural grants; the island resolves library bags from @catalog
-// itself and reads TW5 core + plugins from the @lararium CRDT doc after sync.
+// typed structural grants; the island resolves library bags from the catalog registry
+// itself and reads TW5 core + plugins from the lararium CRDT doc after sync.
 export interface WikiMountSpec {
   /** SHA-256 hex of the TW5 core blob. null = pre-CAS; island resolves bytes from the mesh. */
   coreHash: string | null;
   /** WikiRecipe slot structure (wikiSlug + optional libraryBags + mirrorBags). */
   recipe: WikiRecipe;
-  /** Typed structural capabilities (engine doc, own bag, personal/draft, @catalog access). */
+  /** Typed structural capabilities (engine doc, own bag, personal/draft, catalog registry access). */
   grants: import("./island-protocol.js").IslandGrants;
 }

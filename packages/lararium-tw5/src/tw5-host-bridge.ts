@@ -336,7 +336,7 @@ export async function prepareHostBootInstance(
     // TW5 boots with node={} (so bootprefix loads the vm shim, not the browser DOM
     // path), so its core `$tw.utils.nextTick` binds the Node branch — a BARE
     // `setImmediate`, which the module sandbox resolves to globalThis. A browser
-    // Worker has none, so a post-mount render (a story-navigation beat — the @daemon
+    // Worker has none, so a post-mount render (a story-navigation beat — the daemon
     // switcher surfacing) threw `setImmediate is not defined`. Supply it (macrotask
     // parity, arg-forwarding), the same "last missing Node-ism" contract as global/
     // process/Buffer above. `??=` respects any the bundler already provides.

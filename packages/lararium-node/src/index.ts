@@ -35,7 +35,7 @@ export {
 } from "./library-store.js";
 export type { AcquireOutcome, AcquireOptions, LibraryVerdict } from "./library-store.js";
 
-// The per-@daemon resource-override reader + the composable daemon resource caps (`~/.lares/config.json`
+// The per-daemon resource-override reader + the composable daemon resource caps (`~/.lares/config.json`
 // sites bags/genesis/cas away from the repo-relative default; genesis artifacts stay checked-in by default).
 export {
   loadLaresConfig, laresConfigPath, daemonCorpusRoot, daemonGenesisDir, daemonBagsDir, daemonCasDir,
@@ -209,18 +209,18 @@ export {
   bootInviteBurnPath, bootInviteId,
 } from "./boot-invite-burn.js";
 
-// The @nexus MEMBERSHIP consult holder (Build-2) — the carry-split's member gate: kahu floor ∪ folded members{}.
+// The nexus-doc MEMBERSHIP consult holder (Build-2) — the carry-split's member gate: kahu floor ∪ folded members{}.
 export { makeNexusMembership } from "./nexus-carriage.js";
 export type { NexusMembershipHolder } from "./nexus-carriage.js";
 // The `nexus-refresh` LIVE-refold shore — re-reads the disk posture + re-folds the antigen / members boards from
 // storage into the live holders, so an out-of-process CLI edit reaches a running node without a bounce.
 export { runNexusRefresh } from "./nexus-refresh.js";
 export type { NexusRefreshDeps, NexusRefreshResult } from "./nexus-refresh.js";
-// The @cad seal's key custody (per-Nexus convergence secrets, minted-per-epoch, persisted read-all) + its FIRST
+// The cad seal's key custody (per-Nexus convergence secrets, minted-per-epoch, persisted read-all) + its FIRST
 // live producer (seal a staged carrier body into the ciphertext federation plane, additive to the cleartext wake).
 export { standNexusKeyring, loadNexusKeyring, installDeliveredKeyring } from "./nexus-convergence-secret-store.js";
 export { cadSealDir, sealCarrierForFederation } from "./seal-carrier-federation.js";
-// The @cad WIRE CONSUMER — a member carries a sealed body peer-to-peer over the request-response hop, gated by the
+// The cad WIRE CONSUMER — a member carries a sealed body peer-to-peer over the request-response hop, gated by the
 // member blind-transit lane; a stranger / Kapae'd presenter draws Mu (byte-identical to caught-up satiety).
 export {
   serveCasWire, decideAndServeWantBlock, fetchSealedCidOverWire, muWireBytes,
@@ -238,7 +238,7 @@ export { loadActivePersonaIndex, wearPersona, personaRootExists, listPersonaRoot
 export { generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed, loadPersonaGroupRootVerifyingKey } from "./node-vessel-identity.js";
 export type { PersonaGroupRoot } from "./node-vessel-identity.js";
 // The two-layer pet-names (#64 stage 4): the PRIVATE own-persona label map (fleet-only; never PUBLICLY
-// federates) + the PUBLIC own-published-face record (persona → @crossroads glamour, the one act that binds a
+// federates) + the PUBLIC own-published-face record (persona → crossroads-plane glamour, the one act that binds a
 // persona to a public name). Distinct stores, distinct from the handle-book.
 export { makeNodePersonaPetnameStore, makeNodePublicHandleStore } from "./node-vessel-identity.js";
 // The DECLARATION store — the Handle a persona answers to + whether it stands for a Kahu seat. Sits between
@@ -338,7 +338,7 @@ export { startMembershipRelay, WSMembershipChannel } from "./ws-membership-chann
 export { startAuthenticatedMembershipRelay, AuthenticatedWSMembershipChannel } from "./authenticated-membership-relay.js";
 export type { AuthenticatedMembershipRelay } from "./authenticated-membership-relay.js";
 // The CARRIAGE relay capability (Socket B) — the authenticated transport + the DHT-free bag-tracker, one service;
-// and the vessel-side serve-loop that carries a sealed @cad body to members (inert until a relay URL is configured).
+// and the vessel-side serve-loop that carries a sealed cad body to members (inert until a relay URL is configured).
 export { startCarriageRelay } from "./carriage-relay.js";
 export type { CarriageRelay } from "./carriage-relay.js";
 export { startCarriageServeLoop } from "./carriage-serve-loop.js";
@@ -378,7 +378,7 @@ export type {
   GraphLeg, GraphItem, ExtraGraph, ApertureWeightOptions, ShaOrGap,
   FormSearchPalace, FormSearchConfig,
 } from "./sensorium-recall.js";
-// The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it).
+// The telemetry capture cap is FOLDED into the daemon bag (idempotent: every daemon carries it).
 // node-daemon-island wires the capture SINK live (from the
 // daemon spawn's optional workerData.telemetry) or leaves the cap inert. The capture core stays
 // composable + isomorphic: @lararium/mesh capture-engine + the tw5 `hasCapture` cap; node shores via

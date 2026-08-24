@@ -5,7 +5,7 @@
  * composed flow, so new capability arrives as a new FLOW (a composed cap-stack), never another raw verb.
  *
  * ROUTING. The runner never reaches a hull itself; it calls the injected deps, each a thin handle the
- * @daemon (the one seat that reaches both hulls) wires:
+ * The daemon (the one seat that reaches both hulls) wires:
  *   - crystallize (ts)        → the mesh crystallize() over the signal-as-occurrences
  *   - phase (py)              → the capture holder's `phase` serve-op (rhythm_phase.phase_encode)
  *   - whiten/couple/gate (ts) → the coupleMesh capstone (it FOLDS whiten→couple→gate in one call), so the

@@ -94,7 +94,7 @@ export const KEYRING_ENVELOPE_DOMAIN = d("keyring-envelope");
 /** Its HKDF `info`. A NAME of its own, held apart from the signing domain above: a version digit doing a
  *  domain's job fuses the two on the first reset. */
 export const KEYRING_ENVELOPE_SEAL_INFO = d("keyring-envelope-seal");
-/** The `@cad` convergent keystream — ciphertext-addressed bodies. */
+/** The `cad` convergent keystream — ciphertext-addressed bodies. */
 export const CAD_KEYSTREAM_INFO = d("cad-keystream");
 /** The relay gate's seed derivation — the crossroads transport identity, never the vessel's own. */
 export const RELAY_GATE_INFO = d("relay-gate");
@@ -106,7 +106,7 @@ export const PERSONA_SCOPE_INFO = d("persona-scope");
 export const CIRCLE_SCOPE_INFO = d("circle-scope");
 
 // ── ARTEFACTS + BOARDS ──────────────────────────────────────────────────────────────────────────
-/** The served `@oracle` pointer doc. */
+/** The served `oracle` pointer doc. */
 export const ORACLE_POINTER_DOMAIN = d("oracle-pointer");
 /** The deterministic plugin build's provenance. */
 export const PLUGIN_ATTESTATION_DOMAIN = d("plugin-attestation");

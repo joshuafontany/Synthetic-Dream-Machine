@@ -15,7 +15,7 @@
  *
  * Environment:
  *   LAR_PORT     — server port (default 8080; docker-compose.yml overrides to 4321)
- *   LAR_WIKI     — wiki id (default lares — the @lares-as-wiki quine)
+ *   LAR_WIKI     — wiki id (default lares — the lares-as-wiki quine)
  *   LAR_CATALOG  — existing catalog automerge URL to join (optional)
  *   LAR_ROOT     — alternate repo root for all mirror paths (default: monorepo root).
  *                  Set to an isolated test dir so promote/sync writes never touch
@@ -66,7 +66,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
     const i = args.indexOf(flag);
     return (i !== -1 ? args[i + 1] : undefined) ?? process.env[env] ?? fallback;
   };
-  const cfg        = loadLaresConfig();   // per-@daemon resource overrides (~/.lares/config.json)
+  const cfg        = loadLaresConfig();   // per-daemon resource overrides (~/.lares/config.json)
   const rootDir    = resolve(get("--root", "LAR_ROOT", REPO_ROOT));   // corpus root (genesis)
   // ONE SUBSTRATE DIR, DERIVED THE SAME WAY ON BOTH SIDES. An override here moved the daemon's dir and
   // not its client's — and since the rendezvous derives FROM this dir, a caller who used it stranded the
@@ -151,7 +151,7 @@ async function main(): Promise<void> {
   });
 
   // ── THE BASE COURSE — every vessel stands as a Herm, and the hearth is what it LIFTS to ──────────────
-  // The Herm cap-stack (@daemon immune core + a served @meshpalace FLOW-map, no wiki, no pool) is the FLOOR
+  // The Herm cap-stack (daemon immune core + a served meshpalace FLOW-map, no wiki, no pool) is the FLOOR
   // of this stack rather than a sibling of it. A lararium is a herm with its hearth fire lit, so the lift
   // reads off what actually stands here, and every vessel reaches `live` through the floor first.
   //
@@ -252,7 +252,7 @@ async function main(): Promise<void> {
     // The relay binds its OWN port (SEPARATE from the /ws read-face port) on the same host every face names.
     if (herm.carriageRelayPort !== null) {
       const relayPort = herm.carriageRelayPort;
-      console.log(`[herm] carriage crossroads (Socket B) — hearths dial this to carry sealed @cad bodies:`);
+      console.log(`[herm] carriage crossroads (Socket B) — hearths dial this to carry sealed cad bodies:`);
       console.log(`[herm]   gate key: ${herm.carriageRelayGatePubKey}`);
       for (const f of reachFaces) {
         const scheme = f.origin.startsWith("https") ? "wss" : "ws";
@@ -261,7 +261,7 @@ async function main(): Promise<void> {
       }
     }
 
-    // Co-located UDS verb-channel for the local `lares` CLI (the @daemon answers).
+    // Co-located UDS verb-channel for the local `lares` CLI (the daemon answers).
     // THE RENDEZVOUS SITS APART FROM THE DATA. A socket answers "where do two processes meet" under a
     // ~104-byte cap the data home has never heard of; siting it beside the substrate made it inherit the
     // substrate's depth, and a deep root then refused to bind while everything else stood. Both sides
@@ -349,7 +349,7 @@ async function main(): Promise<void> {
     console.log(`[lararium] nexus dial-out → ${joinSync}${joinGate ? "" : "   (no LAR_JOIN_GATE — fail-closed to inert; a gate-less dial cannot bind the anti-relay proof)"}`);
   }
 
-  // The @oracle read-only PUBLIC substrate (the Two-Faced Substrate's content-addressed
+  // The oracle doc's read-only PUBLIC substrate (the Two-Faced Substrate's content-addressed
   // floor) — served over THIS http server: GET /oracle/pointer · /oracle/<cid>.bin.
   // Write-refusing by construction (GET-only, hash-named, no sync). Best-effort: a
   // read-face failure logs and never crashes boot. lar:///…/lararium-identity#the-oracle-plane.

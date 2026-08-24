@@ -1,5 +1,5 @@
 /**
- * daemon-persona-store — the @persona-backed adapters for a human's OWN-persona names, and the local-first
+ * daemon-persona-store — the persona-backed adapters for a human's OWN-persona names, and the local-first
  * floor beneath them.
  *
  * The pet-name and the declared Handle ride the sovereign persona doc, which the self-slot FLEET-syncs to the
@@ -8,15 +8,15 @@
  * keeps its own.
  *
  * LOCAL-FIRST, NOT DAEMON-REQUIRED. A vessel FOUNDS before it breathes — `lares persona new` runs while no
- * daemon listens — so every write lands on the local fs store FIRST and mirrors to @persona when the daemon
+ * daemon listens — so every write lands on the local fs store FIRST and mirrors to the persona plane when the daemon
  * answers. A read prefers the fleet (a fleet-mate's rename outranks this device's stale copy) and falls back
  * to local when the sock is quiet. That posture reads straight off the causal-islands law: a node acts on its
  * own log and reconciles when a peer appears, never blocking on one.
  *
  * A MIRROR NEVER FAILS THE ACT IT MIRRORS. The local write already landed, so an unreachable or refusing
  * fleet leaves the vessel correct and merely un-carried — and the reverse would be worse than useless: it
- * would fail `persona new` on exactly the vessels that reach no fleet. A Herm, or any vessel whose @oracle
- * registry names no @persona, never REGISTERS these verbs at all (capability-degradation by composition), so
+ * would fail `persona new` on exactly the vessels that reach no fleet. A Herm, or any vessel whose oracle
+ * registry names no persona plane, never REGISTERS these verbs at all (capability-degradation by composition), so
  * "the daemon refused" and "no daemon listening" name the same outcome for the caller: NODE-LOCAL.
  *
  * THE REASON STILL TRAVELS. A read hands back a reached/why pair rather than a bare null, so the caller can
@@ -81,7 +81,7 @@ async function callFleet(
   }
 }
 
-/** Read the whole fleet multitude off @persona, or the reason the read did not land. */
+/** Read the whole fleet multitude off the persona plane, or the reason the read did not land. */
 export async function readFleetSelves(
   requestedBy: string, opts: RunVerbOptions = {},
 ): Promise<FleetRead> {
@@ -92,7 +92,7 @@ export async function readFleetSelves(
 
 /**
  * Build the FLEET-mirroring pet-name store — every write lands locally FIRST (the floor a pre-boot founding
- * needs) and mirrors to @persona when the daemon answers; every read prefers the fleet's copy. `local` supplies
+ * needs) and mirrors to the persona plane when the daemon answers; every read prefers the fleet's copy. `local` supplies
  * the node fs store the mirror wraps.
  */
 export function makeFleetPetnameStore(
@@ -127,7 +127,7 @@ export function makeFleetPetnameStore(
 
 /**
  * Build the FLEET-mirroring declaration store — a SPLIT store, and the split is the point. The declared
- * `handle` rides @persona (a persona answers to the same name on every device of the human); the `seat` claim
+ * `handle` rides the persona plane (a persona answers to the same name on every device of the human); the `seat` claim
  * stays LOCAL (a Kahu chair belongs to the node that holds it). Reads compose the two.
  */
 export function makeFleetDeclarationStore(

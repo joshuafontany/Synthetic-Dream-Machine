@@ -57,7 +57,7 @@ describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from
     // so the worker derives the same `<storageDir>/cas` dir and pulls engine + plugins by CID.
     const cas = setupCasFromGenesis(genesisDoc);
 
-    // Seed a vessel Repo — the island needs @lararium only for its structural tiddlers;
+    // Seed a vessel Repo — the island needs the lararium doc only for its structural tiddlers;
     // the engine bytes ride the CID plane, never the doc.
     const vesselRepo    = new Repo({ sharePolicy: async () => true });
     const laraiumHandle = vesselRepo.import<LarDoc>(genesisBytes);

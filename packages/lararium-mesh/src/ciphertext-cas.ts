@@ -1,7 +1,7 @@
 /**
  * ciphertext-cas — the ENCRYPT-ON-CAS primitive: a body leaves the CRDT as CIPHERTEXT, content-addressed by
  * `cid = BLAKE3(ciphertext)`, so an untrusted member relay blind-transits + verifies it holding NO secret
- * (content-resolution.mem #cad-storage, verify-cap ⊥ read-cap). This is the @cad-private addressing mode.
+ * (content-resolution.mem #cad-storage, verify-cap ⊥ read-cap). This is the cad-private addressing mode.
  *
  * THE SELF-PROVING SEAL (verify-cap, secret-free). The address IS `BLAKE3(ciphertext)`: any relay recomputes
  * `BLAKE3(bytes) == cid` with NOTHING but the bytes — no key, no per-Nexus secret, no read-cap. That recompute

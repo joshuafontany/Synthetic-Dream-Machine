@@ -35,7 +35,7 @@ import { browserNewSyncChannel, browserSpawnWorker } from "./worker-handle.js";
 export interface BrowserDaemonVmOptions {
   repo:             Repo;
   daemonUrl:         string;
-  /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc. */
+  /** The persona plane's doc URL (the PersonaGroup veiled identity) — resolved alongside the daemon doc. */
   /** ABSENT on a place that never grew a face. */
   personaUrl?:       string;
   /** The mounted plane's bag id, resolved once at the boot path — carried, never re-derived here. */
@@ -46,7 +46,7 @@ export interface BrowserDaemonVmOptions {
   pluginCids?:      readonly string[];
   /** Canonical one-recipe model for the daemon island. */
   recipe:           WikiRecipe;
-  /** Typed structural capabilities (engine doc, daemon bag, @lares, @catalog access). */
+  /** Typed structural capabilities (engine doc, daemon bag, the lares bag, catalog registry access). */
   grants:           IslandGrants;
   /**
    * Operator authn/z material delivered to the daemon island for in-worker

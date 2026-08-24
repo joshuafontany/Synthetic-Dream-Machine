@@ -52,7 +52,7 @@ function usage(): void {
   console.error("    [--seat]                  stand it for a Kahu chair on this node (needs a Handle)");
   console.error("  wear <index>                switch the active persona (reboot-to-switch — one face to the mesh)");
   console.error("  list                        the private multitude — held indices, active marker, labels, Handles");
-  console.error("  sync                        carry this node's labels + declared Handles up to the fleet (@persona)");
+  console.error("  sync                        carry this node's labels + declared Handles up to the fleet (the persona plane)");
   console.error("  admit <offer|grant|open|accept|list>   airgapped device-to-device persona hand-off (QR 3-hop)");
   console.error("");
   console.error("  founding sequence (three symmetric commands, each declaring its Handle + standing for a chair):");
@@ -122,7 +122,7 @@ export async function cmdPersona(args: ParsedArgs): Promise<number> {
 
 /**
  * The two own-persona name stores, FLEET-MIRRORED. Each write lands on the local fs floor first (a founding
- * runs before any daemon breathes) and rides up to @persona when the sock answers; each read prefers the
+ * runs before any daemon breathes) and rides up to the persona plane when the sock answers; each read prefers the
  * fleet. The `seat` claim stays local by construction — the declaration store splits it out.
  */
 async function fleetStores(): Promise<{
@@ -267,7 +267,7 @@ async function personaList(args: ParsedArgs): Promise<number> {
 }
 
 /**
- * personaSync — carry this node's own-persona names UP to @persona, so the fleet reads what this device knows.
+ * personaSync — carry this node's own-persona names UP to the persona plane, so the fleet reads what this device knows.
  *
  * A vessel founds before it breathes, so names set pre-boot live only in the local fs floor. This walks that
  * floor and re-writes each name through the fleet-mirroring store; the verb's own stamp rule decides the rest
@@ -284,7 +284,7 @@ async function personaSync(args: ParsedArgs): Promise<number> {
   }
   const read = await readFleetSelves(did);
   if (!read.reached) {
-    throw new UsageError(`the fleet did not answer (${read.why}) — start the node (\`lares vessel stand --foreground\`) so @persona can carry these names`);
+    throw new UsageError(`the fleet did not answer (${read.why}) — start the node (\`lares vessel stand --foreground\`) so the persona plane can carry these names`);
   }
   const localPetnames     = await makeNodePersonaPetnameStore();
   const localDeclarations = await makeNodePersonaDeclarationStore();
@@ -309,7 +309,7 @@ async function personaSync(args: ParsedArgs): Promise<number> {
     data: { carried },
     human: () => {
       if (carried.length === 0) { console.log("no own-persona names held — nothing to carry."); return; }
-      console.log(`carried ${carried.length} persona name${carried.length === 1 ? "" : "s"} up to the fleet (@persona):`);
+      console.log(`carried ${carried.length} persona name${carried.length === 1 ? "" : "s"} up to the fleet (the persona plane):`);
       for (const c of carried) {
         console.log(`  h${c.handleIndex}  ${c.petname ?? "(unnamed)"}${c.handle ? `  ->  "${c.handle}"` : ""}`);
       }

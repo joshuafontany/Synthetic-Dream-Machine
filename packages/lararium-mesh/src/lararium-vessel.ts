@@ -75,13 +75,13 @@ export interface VesselResult<TPool, TDaemon> {
    * a volatile invocation and lands the outcome back on the same plane. Without it a host surface can render
    * a vessel and never call it.
    *
-   * @daemon stays SOVEREIGN-PER-VESSEL — it never fleet-syncs, because it is the PLACE's own control plane
+   * The daemon bag stays SOVEREIGN-PER-VESSEL — it never fleet-syncs, because it is the PLACE's own control plane
    * and two places sharing one would stand a global now across the fleet. A caller therefore knocks on the
-   * door of the vessel it means to summon, by that vessel's own url here; @persona is what crosses between
-   * a face's vessels, and @circles what syncs across one operator's devices.
+   * door of the vessel it means to summon, by that vessel's own url here; the persona plane is what crosses between
+   * a face's vessels, and the circles doc what syncs across one operator's devices.
    */
   daemonDocUrl:     string;
-  /** The HEARTH's @daemon — where THIS vessel asks for its seat. Null when it founded its own face and so
+  /** The HEARTH's daemon doc — where THIS vessel asks for its seat. Null when it founded its own face and so
    *  IS the hearth, knocking on no one. Distinct from `daemonDocUrl`, which names this vessel's own plane. */
   hearthDaemonUrl:  string | null;
   oracleDocUrl:     string | null;

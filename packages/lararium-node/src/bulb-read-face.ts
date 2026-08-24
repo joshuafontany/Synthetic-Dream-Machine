@@ -6,7 +6,7 @@
  *   GET /bulb/pointer     → a signed monotone pointer over the manifest cid (corm-lease freshness / anti-rollback)
  *   GET /bulb/<cid>.bin   → a content-addressed bulb blob (seed · bootstrap · cas-manifest · each engine/plugin blob)
  *
- * PUBLIC-FLOOR ONLY. The bulb carries ALL-PUBLIC boot material, so it rides THIS floor exclusively — NEVER the @cad
+ * PUBLIC-FLOOR ONLY. The bulb carries ALL-PUBLIC boot material, so it rides THIS floor exclusively — NEVER the cad
  * carriage (Socket B). Write-refusal holds by construction: only GET, bytes named by their own hash, no sync session.
  * The signed pointer is the corm-lease: served FROZEN offline (the static blob), the pointer's freshness lease
  * re-issues on the Ea breath so a live Herm advances it online (anti-rollback = the oracle-substrate max-register).

@@ -4,7 +4,7 @@
  *   lares vessel read             NODE HEALTH — bootstrap presence, storage size, port in use. Pure
  *                                 local inspection, no vm boot.
  *   lares sense status            SENSORIUM TAXONOMY — what the Memory sensorium holds; the read rides
- *                                 the sense door over the @daemon's composed caps.
+ *                                 the sense door over the daemon's composed caps.
  *   lares vessel read sensorium   ALIAS → points at `lares sense status` (the sensorium door).
  *
  * Each name resolves to ONE referent, so the isomorphism table holds no name reaching two things.
@@ -99,7 +99,7 @@ export function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Pr
 }
 
 // `lares vessel read sensorium` — an alias. The sensorium taxonomy reads through the sense door
-// (`lares sense status`, which routes to the @daemon's composed content cap); this alias points there
+// (`lares sense status`, which routes to the daemon's composed content cap); this alias points there
 // rather than opening a second path. Local organ health rides `lares vessel read --palaces`.
 const SENSORIUM_STATUS_REDIRECT =
   "the sensorium taxonomy reads at `lares sense status` (the sovereign door). For local organ health, " +

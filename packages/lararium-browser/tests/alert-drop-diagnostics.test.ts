@@ -2,7 +2,7 @@
  * The browser vessel's make-it-loud legs (open-browser-vessel):
  *  - warnDroppedBrowserAlert — a wiki-alert with no live target + no durable mailbox must SPEAK
  *    (the browser's only observability floor is the console), never vanish invisibly.
- *  - loadFoundedCatalogOrWarn — a persisted @catalog that fails to load is DATA-AMNESIA; re-founding
+ *  - loadFoundedCatalogOrWarn — a persisted catalog doc that fails to load is DATA-AMNESIA; re-founding
  *    a blank catalog must surface LOUD, never a silent discard.
  */
 import { describe, it, expect, vi } from "vitest";

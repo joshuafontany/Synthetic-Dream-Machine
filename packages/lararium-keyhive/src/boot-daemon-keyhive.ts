@@ -43,7 +43,7 @@ export interface BootDaemonKeyhiveInput {
    *  accepting both a raw op-key pin AND the prefix would open a downgrade). */
   readonly signerDid?: string;
   /** The persona-KEL PIN + the LOCAL-replica chain the gate walks (identity-classes#the-continuity-anchor).
-   *  `prefix` is the stable identifier (AID) read from @daemon (the pin's root of trust); `chain` is the
+   *  `prefix` is the stable identifier (AID) read from the daemon bag (the pin's root of trust); `chain` is the
    *  seq-sorted key-event-log the caller read from its per-Nexus KEL board replica "as of last sync". The gate
    *  asserts `chain[0].prefix === prefix`, walks to the current authoritative head op-key (structural + every
    *  rotation quorum verified), and verifies the edge against THAT head — a rotated key still binds a fresh

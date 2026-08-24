@@ -1,12 +1,12 @@
 /**
- * nexus-carriage — the node holder that answers the @nexus CARRIER-vs-STRANGER consult on the live
+ * nexus-carriage — the node holder that answers the nexus-doc CARRIER-vs-STRANGER consult on the live
  * sharePolicy path (the carry-split's carriage gate). "Carrier" names a contracted vessel, never a
  * Cabal member — the two relations run orthogonal (carriage-registry).
  *
- * The mesh breathes across a Nexus because a cross-operator the @nexus names a MEMBER blind-transits a
+ * The mesh breathes across a Nexus because a cross-operator the nexus doc names a MEMBER blind-transits a
  * sealed private plane (carry the ciphertext, never the read-cap); a STRANGER reaches only the public shelf.
  * This holder stands the `NexusMembership` the node's `carrierShareDecision` consults, reading the
- * node's OWN @nexus replica (as of last sync; no global now — never a global truth).
+ * node's OWN nexus-doc replica (as of last sync; no global now — never a global truth).
  *
  * THE MEMBER SET = the seated-KAHU floor ∪ the folded operator MEMBERS-registry (members{}). Two sources,
  * unioned, each fail-closed:
@@ -72,7 +72,7 @@ export interface NexusMembershipHolder {
 }
 
 /**
- * Stand the @nexus membership holder. Reads the seated-kahu floor SYNCHRONOUSLY at construction (the charter
+ * Stand the nexus-doc membership holder. Reads the seated-kahu floor SYNCHRONOUSLY at construction (the charter
  * doc is a disk file the operator seats, not a hot-syncing board), and — when a `repo` + `nexusPubkey` are
  * supplied — resolves the always-carried members board under its deterministic id and re-folds members{} ∪ the
  * kahu floor on every board change. `sealHome` sites the seal's authority home; `peerIdentifierMap` carries

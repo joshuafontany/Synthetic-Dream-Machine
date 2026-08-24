@@ -1,5 +1,5 @@
 /**
- * cas-wire — the @cad WIRE CONSUMER: a member CARRIES a sealed ciphertext body peer-to-peer over a real
+ * cas-wire — the cad WIRE CONSUMER: a member CARRIES a sealed ciphertext body peer-to-peer over a real
  * request-response hop, gated by the member blind-transit lane, and the immune denial draws Mu on the same hop.
  *
  * THE TRANSPORT. The request-response rides the swappable `MembershipChannel` (offer/poll, deliver-once,
@@ -49,11 +49,11 @@ export const CAS_WANT_HAVE  = "cas-want-have" as const;
 
 /** The carry-lane gate + the served bytes the server composes on each request. */
 export interface CasWireServerDeps {
-  /** The @cad ciphertext tier the server serves bytes from (readCasBlobFromFs). */
+  /** The cad ciphertext tier the server serves bytes from (readCasBlobFromFs). */
   readonly cadDir:     string;
   /** The live sealed-plane oracle — only a PROVABLY-sealed docId carries (fail-closed: unknown → deny → Mu). */
   readonly seal:       PlaneSeal;
-  /** The @nexus MEMBER consult — a STRANGER / non-member draws Mu (fail-closed: unconsultable → not a member). */
+  /** The nexus-doc MEMBER consult — a STRANGER / non-member draws Mu (fail-closed: unconsultable → not a member). */
   readonly membership: NexusMembership;
   /** The Kapae antigen — a quorum-signed-banned presenter draws Mu (never a lone-node ban). */
   readonly antigen:    AntigenRing;

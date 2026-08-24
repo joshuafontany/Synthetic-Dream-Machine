@@ -105,7 +105,7 @@ async function openStaged(): Promise<LarInstance> {
   }
 
   // ── THE RITE RUNS IN TWO STEPS, SO THE HARNESS PERFORMS BOTH ───────────────────────────────
-  // `vessel clear` re-founds a PLACE: @daemon, the vessel's own Keyhive individual, the hearth
+  // `vessel clear` re-founds a PLACE: the daemon bag, the vessel's own Keyhive individual, the hearth
   // true-name. A place stands and serves while holding no face — which is correct, and which is
   // NOT what these suites test. They exercise a hearth: personas, wiki, catalog, the pairing the
   // boot path derives. So the staged instance lights its face here, and a suite that wants the

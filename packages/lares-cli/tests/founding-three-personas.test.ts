@@ -180,7 +180,7 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
 
   test("★ a MIRROR never fails the act it mirrors — no fleet answers, and the founding still lands ★", async () => {
     // These tests run with no daemon at all, which IS the founding case: `persona new` runs before any hearth
-    // breathes, and a vessel whose @oracle names no @persona never REGISTERS the fleet verbs at all. Both read
+    // breathes, and a vessel whose oracle registry names no persona plane never REGISTERS the fleet verbs at all. Both read
     // NODE-LOCAL to the caller. A mirror that threw here would fail the founding on exactly the vessels that
     // reach no fleet.
     expect(await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }, { seat: true }))).toBe(0);

@@ -1,6 +1,6 @@
 /**
  * oracle-read-client — the CONSUMER side of the Two-Faced Substrate: pull a peer's
- * @oracle read-face over the wire, run the reader rule, and load it as a CRDT.
+ * oracle read-face over the wire, run the reader rule, and load it as a CRDT.
  *
  * This is the second-spore primitive — the first cross-vessel contact the read-only
  * substrate enables. A reader (any vessel, anon) fetches a peer node's pointer +
@@ -37,7 +37,7 @@ export interface OraclePullOpts {
 }
 
 /**
- * Pull + verify + load @oracle from a peer's read-face at `baseUrl`. Never throws;
+ * Pull + verify + load the oracle doc from a peer's read-face at `baseUrl`. Never throws;
  * a failure returns `{ ok: false, reason }` (and the pointer, when it got that far).
  * Order: fetch pointer → verify → fetch snapshot by cid → rehash → load.
  */

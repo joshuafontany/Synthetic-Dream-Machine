@@ -141,7 +141,7 @@ export interface LoadCarrier {
   /** Content-address (hex sha256) of the carrier body staged in the corpus CAS.
    *  The island resolves it via `resolveByCid` and re-verifies `cid == hash(bytes)`
    *  — content-addressed trust, no host trust. This keeps the giant Text out of the
-   *  @daemon command doc (the automerge scalar-string capacity wall). */
+   *  daemon command doc (the automerge scalar-string capacity wall). */
   readonly textCid?: string;
   /** Raw `.meta` sidecar text for a content filetype (a `.md`/image/… carrier
    *  keeps its fields beside the body). The island parses it (TW5's own field
@@ -183,7 +183,7 @@ export interface IngestCarrier {
   readonly text?:      string;
   /** Content-address (hex sha256) of the carrier body staged in the corpus CAS. The
    *  island resolves it via `resolveByCid` and re-verifies `cid == hash(bytes)`. This
-   *  keeps a 16MB carrier out of the @daemon command doc, whose automerge scalar-string
+   *  keeps a 16MB carrier out of the daemon command doc, whose automerge scalar-string
    *  value overflows past ~2^24 chars. */
   readonly textCid?:   string;
   /** Hash of text, computed gesture-side. */

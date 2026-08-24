@@ -1,5 +1,5 @@
 /**
- * wiki-sensorium-cap — the `hasWikiSensorium` cap-fold: a wiki-causal-island (and its @daemon or
+ * wiki-sensorium-cap — the `hasWikiSensorium` cap-fold: a wiki-causal-island (and its daemon or
  * any wiki-island-worker) composes a THREE-VERB PERCEIVER over its OWN tiddler corpus:
  *
  *   cohere()      — the consistency read: the corpus folds through the mesh organs (Robinson

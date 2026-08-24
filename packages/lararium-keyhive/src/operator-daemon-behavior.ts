@@ -33,8 +33,8 @@ import type { IslandBehavior, IslandContext, DaemonBehaviorOptions, VerbReactor 
 import type { IslandMsg_Manifest, AuthProofWire, DeviceDelegationTiddler } from "@lararium/mesh";
 
 /** Vessel-injected daemon shore the platform entry supplies (node folds the telemetry capture SINK here; a
- *  browser/node entry folds the projection `onBoot` mount so the @daemon inherits the wiki render cap).
- *  Forwarded straight to makeDaemonBehavior — the @daemon always carries the caps; this makes them live.
+ *  browser/node entry folds the projection `onBoot` mount so the daemon inherits the wiki render cap).
+ *  Forwarded straight to makeDaemonBehavior — the daemon always carries the caps; this makes them live.
  *  Absent → the cap stays inert (sink not wired / no projection mount).
  *
  *  `persistArchive` — the Boundary-1 inversion: keyhive stays fs-blind, so NODE injects the writer that
@@ -145,19 +145,19 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       // draft needs no catalog — register it regardless of slot.
       registry.register("draft", makeDraftReactor({ composite: ctx.composite }));
 
-      // switcher-state — the @daemon UX widget's IN path: main pushes the live
+      // switcher-state — the daemon UX widget's IN path: main pushes the live
       // activation state and this writes the LOCAL, volatile $:/temp/lares/switcher
       // tiddler so the projected switcher re-renders (reactive, never a poll).
       registry.register("switcher-state", makeSwitcherStateReactor(ctx.tw5));
 
-      // persona-state — the @daemon persona surface's IN path: main (which holds the IDB
+      // persona-state — the daemon persona surface's IN path: main (which holds the IDB
       // persona vault) pushes the live multitude-view and this writes the LOCAL, volatile
       // $:/temp/lares/personas tiddler so the projected surface re-renders. The tiddler
       // carries the PRIVATE pet-names — it stays in the temp slot, syncing to no bag. A
       // headless node daemon registers this verb but never receives a push (browser-only).
       registry.register("persona-state", makePersonaStateReactor(ctx.tw5));
 
-      // circle-state — the @daemon follow surface's IN path: main (which holds the IDB
+      // circle-state — the daemon follow surface's IN path: main (which holds the IDB
       // follow-graph) pushes the live follow-view for a circle and this writes the LOCAL,
       // volatile $:/temp/lares/circles tiddler so the projected surface re-renders. The
       // tiddler carries the PRIVATE follow-graph + petnames — it stays in the temp slot,
@@ -166,26 +166,26 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       registry.register("circle-state", makeCircleStateReactor(ctx.tw5));
 
       // The FOLLOW-GRAPH verbs — the SOURCE OF TRUTH over the sovereign circles doc. "Adding to a circle IS
-      // the follow"; circle-add/circle-remove write @circles.memberDids, circle-list reads it back. The daemon
-      // reaches this face's `@circles-<tag>` by ACCESS off the catalog registry — access≠load, write-
-      // then-sync. @circles rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator (so a follow
+      // the follow"; circle-add/circle-remove write circles.memberDids, circle-list reads it back. The daemon
+      // reaches this face's `circles-<tag>` by ACCESS off the catalog registry — access≠load, write-
+      // then-sync. The circles doc rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator (so a follow
       // lands on ALL the operator's own devices) and the DeterministicFederationGate NEVER volunteers it to a
-      // cross-operator (@circles is outside its federatable set). A follow writes ONLY @circles — no board shore
+      // cross-operator (the circles doc sits outside its federatable set). A follow writes ONLY the circles doc — no board shore
       // is reachable here, the never-federates wall made structural. `ctx.tw5` lets a mutation/list re-render
-      // the @daemon follow surface (a browser paints it; a headless node daemon rests the temp tiddler).
+      // the daemon follow surface (a browser paints it; a headless node daemon rests the temp tiddler).
       if (ctx.oracleUrl) {
         const sysPlane = makeCatalogAccessor(ctx.repo, ctx.oracleUrl);
-        // The registry a FACE's planes answer to — @persona, @circles, @identities, @sessions all share one
+        // The registry a FACE's planes answer to — the persona, circles, identities and sessions planes all share one
         // tag and one home. Built once so the two verb families below cannot drift onto different planes.
         const facePlane = ctx.catalogUrl ? makeCatalogAccessor(ctx.repo, ctx.catalogUrl) : null;
         // THE FOLLOW GRAPH BELONGS TO THE FACE THAT IS WORN, AND A FACE'S PLANES ARE USER BAGS.
         //
-        // `@circles-<tag>` names this PersonaGroup's own circles, derived off the same tag as its persona
+        // `circles-<tag>` names this PersonaGroup's own circles, derived off the same tag as its persona
         // plane, so a vessel holding a multitude reads the circles of the face it stands in and never
         // another's. The tag comes from the plane id itself — the name is the index — so nothing here holds
         // a second copy to drift from.
         //
-        // It resolves from @catalog, beside the persona plane it shares a tag with: @oracle names the SYSTEM
+        // It resolves from the catalog registry, beside the persona plane it shares a tag with: the oracle plane names the SYSTEM
         // bags, the universal floor every vessel carries, and a person's relations are not universal. Which
         // registry a face's planes answer to reads as an OWNERSHIP question rather than a measured one — the
         // pair matches wherever both halves are written, so evidence alone never settled it (canon:
@@ -195,7 +195,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           if (!face) throw new Error("circle-verb: this vessel's PersonaGroup plane names no face");
           if (!facePlane) throw new Error("circle-verb: this island carries no catalog plane — a user bag has no registry to resolve from");
           const store = await facePlane.storeOf(face.circles);
-          if (!store) throw new Error(`circle-verb: ${face.circles} unresolved — @catalog names no such plane for the face this vessel wears`);
+          if (!store) throw new Error(`circle-verb: ${face.circles} unresolved — the catalog registry names no such plane for the face this vessel wears`);
           return store;
         };
         const circleReactors = makeCircleReactors({ resolveStore: resolveCirclesStore, tw5: ctx.tw5 });
@@ -214,7 +214,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
 
         // The OWN-PERSONA name verbs over the sovereign persona doc — the human's labels for their OWN faces
         // (the private pet-name + the declared Handle), riding the same PRIVATE tier one plane over: the
-        // self-slot FLEET-syncs @persona same-operator so a rename lands on ALL the operator's own devices,
+        // self-slot FLEET-syncs the persona plane same-operator so a rename lands on ALL the operator's own devices,
         // and the DeterministicFederationGate never volunteers it to a cross-operator. The `seat` claim does
         // NOT ride — a Kahu chair names a seat on a PARTICULAR node, so each node keeps its own. No board
         // shore is reachable here: only a publicly announced Handle binds a persona to a public glamour.
@@ -230,27 +230,27 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
         // unknown verb rather than a verb that throws, which is the honest answer to "this place holds no face".
         if (daemonAuth.personaGroupDocIdHex) {
           // THE FOLLOW-GRAPH RIDES THE FACE, so it registers on the same fact the persona verbs do.
-          // Founding writes @circles in the same breath as the PersonaGroup plane and its sentinel — a
-          // PLACE bootstrap carries @daemon alone — and the boot refuses a partial set outright, so the
+          // Founding writes the circles doc in the same breath as the PersonaGroup plane and its sentinel — a
+          // PLACE bootstrap carries the daemon bag alone — and the boot refuses a partial set outright, so the
           // two stand or fall together. Registering the follow verbs on a faceless floor would answer a
-          // human "@circles-<tag> unresolved: the oracle registry names no such plane" — a true sentence
+          // human "circles-<tag> unresolved: the oracle registry names no such plane" — a true sentence
           // that reads as a broken registry, when the honest answer is that no face has been lit yet.
           registry.register("circle-add",    circleReactors.add);
           registry.register("circle-remove", circleReactors.remove);
           registry.register("circle-list",   circleReactors.list);
 
-          // A PERSONA PLANE IS A USER BAG, SO IT RESOLVES FROM @catalog.
+          // A PERSONA PLANE IS A USER BAG, SO IT RESOLVES FROM THE CATALOG REGISTRY.
           //
-          // Three registries stand and each answers its own question. @oracle names the SYSTEM bags — the
-          // universal floor every vessel carries. @catalog names the operator's own bags under their OCAP
-          // grants. @crossroads names what a stranger may mount. A PersonaGroup's plane belongs to a person,
+          // Three registries stand and each answers its own question. the oracle plane names the SYSTEM bags — the
+          // universal floor every vessel carries. the catalog registry names the operator's own bags under their OCAP
+          // grants. the crossroads plane names what a stranger may mount. A PersonaGroup's plane belongs to a person,
           // so it lives in the middle one; reaching for it on the system floor asks the wrong plane a
           // question it was never given to answer, and the refusal reads as a missing document.
           const personaBagId = personaBagIdFor(faceGroup());
           const resolvePersonaStore = async () => {
             if (!facePlane) throw new Error("persona-selves-verb: this island carries no catalog plane — a user bag has no registry to resolve from");
             const store = await facePlane.storeOf(personaBagId);
-            if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — @catalog names no ${personaBagId}`);
+            if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — the catalog registry names no ${personaBagId}`);
             return store;
           };
           const selvesReactors = makePersonaSelvesReactors({ resolveStore: resolvePersonaStore });
@@ -268,13 +268,13 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           registry.register("circle-list",    lightAFace("circle-list"));
         }
 
-        // The CABAL-REALM verbs over @daemon, where the per-writer lease slots live. `realm-feed` rolls THIS
+        // The CABAL-REALM verbs over the daemon bag, where the per-writer lease slots live. `realm-feed` rolls THIS
         // writer's own slot — the offering a realm lives by; `realm-clock` reads every slot back and reports
         // who feeds and how deep, VERDICT-FREE (what spread counts as capture stays the operator's
         // calibration, and mechanizing it here would recreate the root a realm exists without).
         const resolveDaemonStore = async () => {
           const store = await sysPlane.storeOf(DAEMON_BAG_ID);
-          if (!store) throw new Error("cabal-realm-verb: @daemon unresolved — the oracle registry names no DAEMON_BAG_ID");
+          if (!store) throw new Error("cabal-realm-verb: daemon bag unresolved — the oracle registry names no DAEMON_BAG_ID");
           return store;
         };
         const realmReactors = makeCabalRealmReactors({ resolveStore: resolveDaemonStore });
@@ -311,7 +311,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
             }
             // A HEARTH NEVER SEATS ITSELF.
             //
-            // A summons rides @daemon, and @daemon fleet-syncs across the operator's own devices — so every
+            // A summons rides the daemon doc, and the daemon doc fleet-syncs across the operator's own devices — so every
             // seated vessel sees it, and every one of them runs this verb over the SAME PersonaGroup under the
             // SAME root. The joinee's own island would pass its own gate (the edge it presents was signed by the
             // root its boot pins) and seat itself, while the hearth seats it too: two writers, one group, one
@@ -323,7 +323,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
                 reason: "this vessel IS the joinee — a summons is answered by the hearth that holds the face, never by the device asking to join it.",
               };
             }
-            // The lease read, off the live @daemon replica: every slot under this group's prefix, folded by max.
+            // The lease read, off the live daemon replica: every slot under this group's prefix, folded by max.
             const store = await resolveDaemonStore();
             const prefix = leaseEpochPrefix(faceGroup());
             const slots: string[] = [];
@@ -357,7 +357,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       }
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
-      // in @daemon + $:/tags/Alert into the operator's pinned VM.
+      // in the daemon bag + $:/tags/Alert into the operator's pinned VM.
       registry.register("ward-alert", makeWardAlertReactor(ctx.composite, ctx.post));
 
       // The at-rest seal LIFECYCLE (#60) — DAEMON-FIRST: seal/rotate/export/repair/status route THROUGH
@@ -371,15 +371,15 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
         }
       }
 
-      // Every other daemon verb reaches USER registry data in @catalog (wiki oracles,
+      // Every other daemon verb reaches USER registry data in the catalog plane (wiki oracles,
       // recipes) via the accessor over ctx.repo/ctx.catalogUrl — access≠load. The daemon
-      // recipe NEVER loads @catalog as tiddlers. All ride the verify-then-delegate gate.
+      // recipe NEVER loads the catalog registry as tiddlers. All ride the verify-then-delegate gate.
       // vesselDid reads "0x"+vesselVerifyingKey wherever a draft key derives, so those keys never drift —
       // the PLACE is what asks, never the persona root.
       if (ctx.catalogUrl) {
         const catalog = makeCatalogAccessor(ctx.repo, ctx.catalogUrl);
-        // System plane (@oracle) accessor — list-wikis reads system wiki-recipes
-        // (@lares/@lararium) from here, user recipes from @catalog (two-plane).
+        // System plane (oracle) accessor — list-wikis reads system wiki-recipes
+        // (the lares and lararium bags) from here, user recipes from the catalog registry (two-plane).
         const sysPlane = ctx.oracleUrl ? makeCatalogAccessor(ctx.repo, ctx.oracleUrl) : undefined;
         const wikiMintOpts = {
           composite:   ctx.composite,
@@ -425,7 +425,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       kh = keyhive;
       mintedByHex = did;
       // M3 — seed the on-disk archive FLOOR every boot: exportArchive() captures the founding +
-      // hydrated membership/capability DAG (+ prekey secrets) so a later torn @daemon restores from
+      // hydrated membership/capability DAG (+ prekey secrets) so a later torn daemon doc restores from
       // here instead of orphaning the veiled Handle. Best-effort — a failed export never blocks boot.
       if (persistArchive) {
         try { await persistArchive(await keyhive.exportArchive()); }
@@ -485,7 +485,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       // the early return above already guaranteed proofVerified, so this admits on cap + a
       // verified proof-of-possession exactly as before.
       //
-      // SELF-SLOT CLASS: cap=admin on @daemon is held ONLY by this operator's own PersonaGroup (the
+      // SELF-SLOT CLASS: cap=admin on the daemon bag is held ONLY by this operator's own PersonaGroup (the
       // founding delegates admin to personaGroupAgentIdHex; no foreign operator ever earns it). So an
       // admin admit PROVES same-operator — the peer keeps full device sync. This is an UNFORGEABLE
       // signal: a cross-operator cannot manufacture an admin@daemon grant it was never delegated.
@@ -536,7 +536,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       // identity (receiveContactCard) and, under enforcement, key-possession (proofVerified — the early
       // return above already guaranteed it). A DIFFERENT operator identity (a cabal-mate / another kahu)
       // earns the BOUNDED "cross-operator" class: the node sharePolicy grants it ONLY the deterministically-
-      // federatable public/infra planes (@crossroads/WHO/kapae-antigen), NEVER a private-own plane, NEVER
+      // federatable public/infra planes (crossroads/WHO/kapae-antigen), NEVER a private-own plane, NEVER
       // admin. FAIL-CLOSED on the widened surface — a foreign identity that cannot prove possession draws a
       // DENY (the classifier gates on proofVerified; the LAR_V3_ALLOW_UNPROVEN escape hatch relaxes the
       // operator's OWN device fleet above, never a foreign presenter). The #59 antigen draws Mu on a Kapae'd
@@ -553,7 +553,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
     // A HERM RESOLVES NO PERSONA-SEALED BINDINGS.
     //
     // These name a wiki's personal/draft/working layers, each keyed under a PERSONA. The floor of the cap
-    // stack carries its @daemon and no operator bag a human decrypts locally — that plane reads OPEN to its
+    // stack carries its daemon bag and no operator bag a human decrypts locally — that plane reads OPEN to its
     // founding operator rather than sealed to a group — so there is nothing here to key, and nothing to
     // resolve. Supplied only where a face stands, the gate the vault verbs already keep; a floor that offered
     // this callback would throw reaching for a face DURING BOOT and take its own standing with it.

@@ -435,8 +435,8 @@ export function larHarvestStageDir(): string {
  * The social bootstrap — `<lares>/vessel/social-bootstrap.json`. The ONE resolver; every reader and the
  * writer route through it.
  *
- * IT HOLDS AN ADDRESS BOOK: the automerge URLs of this vessel's social docs (@identities · @circles ·
- * @sessions · @daemon · @persona) plus their sentinel ids. No content, no keys — only WHERE those docs
+ * IT HOLDS AN ADDRESS BOOK: the automerge URLs of this vessel's social docs (the identities · circles ·
+ * sessions · daemon · persona docs) plus their sentinel ids. No content, no keys — only WHERE those docs
  * live. So it names one vessel, and it sits beside the store that holds what it names.
  *
  * ── WHY IT LEFT genesis/ ────────────────────────────────────────────────────────────────────────

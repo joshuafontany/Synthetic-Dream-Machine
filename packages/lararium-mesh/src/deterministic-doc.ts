@@ -10,7 +10,7 @@
  * write-back becomes idempotent: every vessel writes the same URL).
  *
  * Pure address derivation + a find-or-materialize helper. No key, no HTTP. The rare cross-version residual is
- * the same one @oracle carries (genesis-doc): a peer SYNCS an existing board far more often than it
+ * the same one the oracle doc carries (genesis-doc): a peer SYNCS an existing board far more often than it
  * re-materializes, and a blank board merges trivially.
  */
 import type { Repo, DocHandle, DocumentId } from "@automerge/automerge-repo";
@@ -41,7 +41,7 @@ export function whoBoardDocUrl(nexusPubkey: string): AutomergeUrl {
 /**
  * The Nexus's Kapae-ANTIGEN board URL — deterministic, so the quorum-signed immune antigen rides the
  * always-carried public plane every island member resolves alike (carry-contract MANDATORY tier). The
- * federation gate federates this board like @crossroads + WHO, so the antigen propagates to every honest
+ * federation gate federates this board like the crossroads doc + WHO, so the antigen propagates to every honest
  * carrier by contract — the immune system saturates the connected mesh (bounded by sync-latency, never
  * instant; siege-resilience #the-honest-edges).
  */
@@ -53,7 +53,7 @@ export function kapaeAntigenDocUrl(nexusPubkey: string): AutomergeUrl {
  * The Nexus's operator MEMBERS-registry board URL — deterministic, so the quorum-signed members{} ALLOW-set
  * rides the always-carried public plane every island member resolves alike (carry-contract MANDATORY tier).
  * The ALLOW-twin of `kapaeAntigenDocUrl` (members{} ⊥ blocked{}), a sibling under the same `nexusRegistryUri`.
- * The federation gate federates this board like @crossroads + WHO + the antigen, so an admit propagates to
+ * The federation gate federates this board like the crossroads doc + WHO + the antigen, so an admit propagates to
  * every honest carrier and the carry-split's member gate reads a live set — bounded by sync-latency, never a
  * global now. It carries operator CONTRACTS only (pubkey + charter-epoch + accepts-carriage), never a user.
  */
@@ -89,7 +89,7 @@ export function edgeKapaeBoardDocUrl(nexusPubkey: string): AutomergeUrl {
  * PUBLIC KEL head/events) rides the always-carried plane every island member resolves alike. A sibling of the
  * WHO board (both derive from `nexusHandlesUri` — the public WHO face), because the KEL PUBLICLY advertises
  * which op-key currently heads each identifier; the PRIVATE keys / recovery-commit stay in the persona bag.
- * The federation gate federates this board like @crossroads + WHO, so a rotation propagates to every honest
+ * The federation gate federates this board like the crossroads doc + WHO, so a rotation propagates to every honest
  * carrier and a stranger walks the identifier→head mapping cold — bounded by sync-latency, never a global now.
  */
 export function personaKelBoardDocUrl(nexusPubkey: string): AutomergeUrl {
@@ -98,12 +98,12 @@ export function personaKelBoardDocUrl(nexusPubkey: string): AutomergeUrl {
 
 /**
  * Find the shared doc if it's already present (a prior boot or a synced peer), else materialize a blank one
- * UNDER the deterministic id. Uses hearth-private patience (the @oracle materialize path's choice): a missing
+ * UNDER the deterministic id. Uses hearth-private patience (the oracle-doc materialize path's choice): a missing
  * doc is the legitimate first boot — the anchor materializes rather than waiting a long mesh-delivery window.
  * Two vessels racing to be first both import the SAME ambient-free blank bytes (`pinnedDoc` pins the actor AND
  * the clock — an unpinned clock alone splits one actor's seq 1 in two and automerge refuses the merge), so they
  * converge byte-identical and diverge only as each writes its own card, under the fresh actor its own handle
- * mints (the benign blank-merge the @oracle path also accepts).
+ * mints (the benign blank-merge the oracle-doc path also accepts).
  */
 /**
  * `label` names the board for a HUMAN — it rides into the boot-resolver's failure text and its

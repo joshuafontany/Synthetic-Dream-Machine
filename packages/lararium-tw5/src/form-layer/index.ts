@@ -1,5 +1,5 @@
 /**
- * form-layer — the @daemon-side living-grammar form-capture (P0·P1).
+ * form-layer — the daemon-side living-grammar form-capture (P0·P1).
  * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace
  *
  * The DISCRETE plane of the two-planes form-capture: P0 pins the constructicon
@@ -42,7 +42,7 @@ export { emitMoveSkeleton, placeholderTree } from "./move-skeleton.js";
 
 // The bearing-vector AST — the OUR-OWN licensed lar: URI parser (the RED URI,
 // descended into its 5 chunks) + its queryable facets. Pure + isomorphic; runs
-// in the @daemon sovereign-island TW5 worker VM (lar-uri).
+// in the daemon sovereign-island TW5 worker VM (lar-uri).
 export type {
   BearingAuthority,
   BearingRoot,

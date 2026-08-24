@@ -8,7 +8,7 @@
  * the diff to its own composite:
  *
  *   - bag added to the recipe   → resolve via the catalog oracle, insert the
- *     layer above @lares (library position), replay its content into the wiki.
+ *     layer above the lares bag (library position), replay its content into the wiki.
  *   - bag removed               → removeLayerLive: departed titles tombstone,
  *     unshadowed lower records resurface (no reboot).
  *   - oracle URL moved (epoch)  → swap the layer's store in place at the same
@@ -43,7 +43,7 @@ import { REBOOT_ALERT_TITLE } from "./wiki-behavior.js";
 import type { IslandContext } from "./island-context.js";
 
 /**
- * startRecipeWatch — subscribe to @catalog; reconcile this island's mounted
+ * startRecipeWatch — subscribe to the catalog registry; reconcile this island's mounted
  * layer set against its live recipe record. Returns a cleanup for onHooAnu,
  * or undefined when the island carries no catalog access.
  */
@@ -52,9 +52,9 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
   const slug        = ctx.recipe.wikiSlug;
 
   // Two registry planes (wiki-layer-ontology#oracle-planes):
-  // the @oracle SYSTEM plane carries system-bag pointers + system wiki-recipes
-  // (@lares, @lararium); @catalog carries USER bags + user recipes. A system
-  // wiki's recipe lives in @oracle; system bags resolve from @oracle.
+  // the oracle SYSTEM plane carries system-bag pointers + system wiki-recipes
+  // (lares, lararium); the catalog registry carries USER bags + user recipes. A system
+  // wiki's recipe lives in the oracle plane; system bags resolve from the oracle plane.
   const catalog   = ctx.catalogUrl ? makeCatalogAccessor(ctx.repo, ctx.catalogUrl) : null;
   const sysPlane  = ctx.oracleUrl  ? makeCatalogAccessor(ctx.repo, ctx.oracleUrl)  : null;
   const catHandle = catalog ? await catalog.handle() : null;
@@ -63,13 +63,13 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
   const sysRecipeTitle  = recipeUri("oracle",  slug);
   const userRecipeTitle = recipeUri("catalog", slug);
 
-  // System bags resolve from @oracle; everything else from @catalog.
+  // System bags resolve from the oracle plane; everything else from the catalog registry.
   const SYSTEM_BAGS = new Set<string>([ORACLE_BAG, LARARIUM_BAG, LARES_BAG]);
   const urlOfBag = async (bagId: string): Promise<string | null> =>
     (SYSTEM_BAGS.has(bagId) && sysPlane) ? sysPlane.urlOf(bagId) : (catalog ? catalog.urlOf(bagId) : null);
 
-  // The island's own recipe record: a system wiki reads it from @oracle, a user
-  // wiki from @catalog. Prefer @oracle so a system wiki composes from its plane.
+  // The island's own recipe record: a system wiki reads it from the oracle plane, a user
+  // wiki from the catalog registry. Prefer the oracle plane so a system wiki composes from its plane.
   const loadRecipeRec = (): LarTiddlerRecord | undefined =>
     (sysHandle?.doc()?.tiddlers?.[sysRecipeTitle] as LarTiddlerRecord | undefined)
     ?? (catHandle?.doc()?.tiddlers?.[userRecipeTitle] as LarTiddlerRecord | undefined);
@@ -115,7 +115,7 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
     return true;
   };
 
-  /** Library bags insert above @lares, below the wiki bag. */
+  /** Library bags insert above the lares bag, below the wiki bag. */
   const libraryInsertIndex = (): number => {
     const lares = ctx.composite.layerIndexOf(LARES_BAG);
     if (lares !== -1) return lares + 1;

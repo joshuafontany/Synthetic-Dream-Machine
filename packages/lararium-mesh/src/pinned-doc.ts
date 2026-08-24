@@ -14,7 +14,7 @@
  * (mesh-palace FLOW-map, realm-glamour charter). Pinning BOTH fields makes the seq-1 change a pure function of
  * the content, so racing peers converge byte-identical and a re-export of unchanged content keeps its cid.
  *
- * The @oracle genesis path (genesis-doc `materializeGenesisDoc`) states this contract and carries it; this
+ * The oracle-doc genesis path (genesis-doc `materializeGenesisDoc`) states this contract and carries it; this
  * module holds the same discipline for every other pinned-actor site so one fix serves them all.
  *
  * RESIDUAL — key order rides in the bytes too. `materializeGenesisDoc` sorts its keys explicitly because it

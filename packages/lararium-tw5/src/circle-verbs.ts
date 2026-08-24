@@ -1,10 +1,10 @@
 /**
  * circle-verbs — the FOLLOW-GRAPH daemon verbs over the sovereign circles doc.
  *
- * "Adding to a circle IS the follow" (social-seed). The follow-graph's SOURCE OF TRUTH rides the @circles
+ * "Adding to a circle IS the follow" (social-seed). The follow-graph's SOURCE OF TRUTH rides the circles
  * Automerge bag — a PER-NYM CRDT-set on each circle tiddler — a PRIVATE bag the self-slot FLEET-syncs
- * same-operator (so a follow lands on ALL the operator's own devices, matching @catalog) and the
- * DeterministicFederationGate NEVER volunteers to a cross-operator (@circles sits OUTSIDE its federatable set).
+ * same-operator (so a follow lands on ALL the operator's own devices, matching the catalog registry) and the
+ * DeterministicFederationGate NEVER volunteers to a cross-operator (the circles doc sits OUTSIDE its federatable set).
  * One graph, every device of the one human, no stranger — "the only surface human eyes have on the crypto
  * layer" for friends + wanderers.
  *
@@ -17,14 +17,14 @@
  * cold-boot, or an older doc) reads as a baseline add, superseded by any real remove — so an old graph folds in
  * cleanly without a migration write.
  *
- * These reactors run IN the daemon worker (verify-then-delegate gated), reaching @circles by ACCESS (the
+ * These reactors run IN the daemon worker (verify-then-delegate gated), reaching the circles doc by ACCESS (the
  * catalog registry names it) and writing-then-syncing — access≠load, never a mounted render layer. A follow
- * writes ONLY @circles; NO @crossroads / board / announce shore is reachable here, so the graph never federates
+ * writes ONLY the circles doc; NO crossroads plane / board / announce shore is reachable here, so the graph never federates
  * by SHAPE. The ONE federated surface stays the glamour a human DELIBERATELY publishes — a separate act.
  *
  * The recognition layer (the handle-book: others' nyms + private petnames) stays LOCAL for now — a follow of
  * an unknown nym fails-closed CLIENT-side (composeFollow) BEFORE the membership write reaches this verb. The
- * handle-book + petname co-move onto @circles is the operator-named fork (see the handback finding).
+ * handle-book + petname co-move onto the circles doc is the operator-named fork (see the handback finding).
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/circle-verbs
  */
@@ -38,13 +38,13 @@ import type { TW5Engine } from "./tw5-vm.js";
 import { CIRCLE_STATE_TITLE } from "./daemon-circle-tiddlers.js";
 
 /** Resolve a read+write store over the circles doc — the daemon reaches it by ACCESS (the catalog registry
- *  names this face's `@circles-<tag>`); access≠load, so no composite layer mounts. Throws LOUD when it is
+ *  names this face's `circles-<tag>`); access≠load, so no composite layer mounts. Throws LOUD when it is
  *  unresolved. Titles INSIDE the plane spell the namespace, so a circle reads the same on every face. */
 export type ResolveCirclesStore = () => Promise<LarTiddlerStore>;
 
 export interface CircleVerbOptions {
   readonly resolveStore: ResolveCirclesStore;
-  /** The daemon TW5 VM — present → a mutation/list RE-RENDERS the @daemon follow surface (a browser paints it;
+  /** The daemon TW5 VM — present → a mutation/list RE-RENDERS the daemon follow surface (a browser paints it;
    *  a headless node daemon rests the temp tiddler, never painting). Absent → pure data verbs, no render. */
   readonly tw5?: TW5Engine;
 }
@@ -104,16 +104,16 @@ export function foldMembers(fields: CircleFields): string[] {
   return present.sort();
 }
 
-/** Read one circle's record + its folded present membership from @circles. */
+/** Read one circle's record + its folded present membership from the circles doc. */
 async function readCircle(store: LarTiddlerStore, circle: string): Promise<{ record: LarTiddlerRecord | null; fields: CircleFields; members: string[] }> {
   const record = await store.get(circleTiddlerUri(circle));
   const fields = (record?.tiddler ?? {}) as CircleFields;
   return { record, fields, members: foldMembers(fields) };
 }
 
-/** Render the @daemon follow surface FROM the @circles membership (positional fields the surface iterates by
+/** Render the daemon follow surface FROM the circles membership (positional fields the surface iterates by
  *  index). Petname/glamour ride BLANK — the worker holds no handle-book (the co-move fork); the follow-graph
- *  itself lands here, which is the recognition surface the operator ruled onto @circles. */
+ *  itself lands here, which is the recognition surface the operator ruled onto the circles doc. */
 function renderCircle(tw5: TW5Engine | undefined, circle: string, members: readonly string[]): void {
   if (!tw5) return;
   const fields: Record<string, string> = {
@@ -132,8 +132,8 @@ function renderCircle(tw5: TW5Engine | undefined, circle: string, members: reado
 }
 
 /**
- * circle-add — the FOLLOW: add a nym to a circle's memberDids in @circles (idempotent — a re-add dedupes).
- * A non-system circle the operator names is BORN here (kind "Circle"). Writes ONLY @circles — never a board.
+ * circle-add — the FOLLOW: add a nym to a circle's memberDids in the circles doc (idempotent — a re-add dedupes).
+ * A non-system circle the operator names is BORN here (kind "Circle"). Writes ONLY the circles doc — never a board.
  */
 export function makeCircleAddReactor(opts: CircleVerbOptions): VerbReactor {
   return async (args) => {
@@ -169,7 +169,7 @@ export function makeCircleAddReactor(opts: CircleVerbOptions): VerbReactor {
 
 /**
  * circle-remove — the UNFOLLOW (kāpae, remove-wins): drop a nym from a circle's memberDids. Idempotent (a
- * remove of an absent nym is a no-op; an absent circle stays uncreated). LOCAL to @circles — never a board.
+ * remove of an absent nym is a no-op; an absent circle stays uncreated). LOCAL to the circles doc — never a board.
  */
 export function makeCircleRemoveReactor(opts: CircleVerbOptions): VerbReactor {
   return async (args) => {
@@ -199,8 +199,8 @@ export function makeCircleRemoveReactor(opts: CircleVerbOptions): VerbReactor {
 }
 
 /**
- * circle-list — READ the follow-view back from @circles.memberDids. `circle` given → that circle's members
- * (+ a render); absent → every circle's membership. A pure read over @circles; it announces nothing.
+ * circle-list — READ the follow-view back from circles.memberDids. `circle` given → that circle's members
+ * (+ a render); absent → every circle's membership. A pure read over the circles doc; it announces nothing.
  */
 export function makeCircleListReactor(opts: CircleVerbOptions): VerbReactor {
   return async (args) => {
@@ -212,7 +212,7 @@ export function makeCircleListReactor(opts: CircleVerbOptions): VerbReactor {
       return { verb: "circle-list", circle, members, federated: false };
     }
     // Every circle: the tiddlers under the namespace prefix. The plane's SELF-POINTER answers to that
-    // face's own `@circles-<tag>` and never carries this prefix at all, so it is skipped by shape rather
+    // face's own `circles-<tag>` and never carries this prefix at all, so it is skipped by shape rather
     // than by exclusion — as is any nested title.
     const prefix = `${CIRCLES_INNER}/`;
     const titles = (await store.listVisible()).sort();

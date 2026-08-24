@@ -21,7 +21,7 @@
  * NOTE: `lararium-mesh` stays isomorphic — no `fs`, `path`, or `process` imports. The host reads files.
  *
  * Resolution policy:
- * - AGENTS, LARES, README → virtual until expressed under @lares
+ * - AGENTS, LARES, README → virtual until expressed under the lares bag
  * - INDEXES/** and other ALL-CAPS roots → virtual namespace (caps-virtual)
  * - a stable-tuple root with a corpus scope → tuple-file (a carrier MAY back it; the host decides)
  * - any other shape → virtual (wiki-only)
@@ -159,7 +159,7 @@ export function resolveLarUri(uri: string): LarResolution {
     return `${baseNoExt}/${fragmentPath.join("/")}${ext}`;
   };
 
-  // Caps-file roots resolve only when expressed under @lares.
+  // Caps-file roots resolve only when expressed under the lares bag.
   if (CAPS_FILE_ROOTS.has(root) && childPath.length === 0) {
     return { uri, root, childPath, resourcePath, kind: "caps-file", virtual: false };
   }

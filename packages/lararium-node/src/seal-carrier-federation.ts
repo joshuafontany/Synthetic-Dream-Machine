@@ -1,11 +1,11 @@
 /**
- * seal-carrier-federation — the @cad seal's FIRST live producer: seal a staged carrier body into the ciphertext
+ * seal-carrier-federation — the cad seal's FIRST live producer: seal a staged carrier body into the ciphertext
  * federation plane, ADDITIVELY, beside the cleartext-local corpus CAS the wake path reads.
  *
  * TWO LAYERS, TWO JOBS, COMPOSED (never fused). The cas-stage shore already keeps an oversized carrier body OUT of
  * the CRDT: it writes the CLEARTEXT bytes to the corpus CAS + rides a skinny `textCid` handle, and the local wake
  * resolves it cleartext (the operator's own island holds its own read-cap — no seal needed locally). This producer
- * adds the OTHER job: it seals the SAME body's plaintext into the @cad ciphertext plane (`cid = BLAKE3(ciphertext)`)
+ * adds the OTHER job: it seals the SAME body's plaintext into the cad ciphertext plane (`cid = BLAKE3(ciphertext)`)
  * so a CROSS-OPERATOR member may blind-transit the bytes and read NOTHING (carry ⊥ read). The dual representation —
  * a cleartext-local copy + a ciphertext-federated copy — IS the carry⊥read split made concrete: two consumers
  * (local wake vs cross-operator carry), two representations. It NEVER touches the cleartext resolveByCid wake read.
@@ -29,7 +29,7 @@ import type { BagTracker } from "./bag-tracker.js";
 import type { SealedPlaneRegistry } from "./plane-seal.js";
 import type { NexusConvergenceKeyring } from "./nexus-convergence-keyring.js";
 
-/** The @cad ciphertext CAS tier — a DISTINCT dir from the cleartext `cas` tier, so the cleartext wake read
+/** The cad ciphertext CAS tier — a DISTINCT dir from the cleartext `cas` tier, so the cleartext wake read
  *  (corpus / runtime CAS) is never touched by a sealed body. A member serves + `cas-transit resolveByCid`
  *  fetches from here; the bytes are ciphertext, the cid `BLAKE3(ciphertext)`. */
 export function cadSealDir(storageDir: string): string {
@@ -37,7 +37,7 @@ export function cadSealDir(storageDir: string): string {
 }
 
 /**
- * Seal one carrier body's PLAINTEXT into the @cad federation plane. Wraps the encrypt-on-CAS installer (the SOLE
+ * Seal one carrier body's PLAINTEXT into the cad federation plane. Wraps the encrypt-on-CAS installer (the SOLE
  * door into the sealed-plane registry) + the bag-tracker announce, so a cid reaches BOTH the seal set AND the
  * discovery index ONLY through the encrypt path. Returns the installed sealed body (cid + docId + epoch + read-cap);
  * the read-cap stays with the caller (the private keyring), NEVER the relay. Additive: writes only the ciphertext

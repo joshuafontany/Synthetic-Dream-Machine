@@ -3,7 +3,7 @@
  *
  * Exports:
  *   seedLaresDoc          — create the ba satellite doc on first boot
- * A PLACE seeds `@daemon` alone. A FACE seeds its own four planes, each under the id its PersonaGroup's
+ * A PLACE seeds the daemon bag alone. A FACE seeds its own four planes, each under the id its PersonaGroup's
  * tag derives (`personaScopedBagIds`) — so the caller passes the bag id in rather than reading a constant,
  * and a vessel holding a multitude keeps one set of relations per face instead of one per machine.
  */
@@ -33,7 +33,7 @@ export function seedIdentitiesDoc(repo: Repo, bagId: string): DocHandle<LarDoc> 
 // The system circles every FACE carries — adding to a circle IS the follow (Kowloon model, jzellis).
 // Membership never federates; the graph is private to the persona that holds it, and each face carries its
 // own set under its own tag. NEXUS AUTHORIZATION RINGS ARE NOT HERE: a nexus tier names who may act at a
-// Nexus, not who a person reads, so it lives on @nexus — one ring per Nexus, never one per mask.
+// Nexus, not who a person reads, so it lives on the nexus plane — one ring per Nexus, never one per mask.
 const SYSTEM_CIRCLES: Array<{ id: string; displayName: string }> = [
   { id: "following",     displayName: "Following" },
   { id: "all-following", displayName: "All Following" },

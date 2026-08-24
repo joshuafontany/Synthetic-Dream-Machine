@@ -2,7 +2,7 @@
  * minted-canon-projection.test.ts — thread 1: a minted USER wiki's own
  * `@{slug}` canon projects to `bags/{slug}`.
  *
- * The disk grant carried literal mirrors for @lares/@lararium and a per-wiki
+ * The disk grant carried literal mirrors for the lares and lararium bags and a per-wiki
  * working leaf, but nothing projected a freshly-minted wiki's own canon. The
  * self-canon grant (authority) + the recipe designating wikiBagUri(slug)
  * (designation) now close it: resolveDiskMirrors expands @{slug} → bags/{slug}
@@ -109,7 +109,7 @@ describe("minted-canon projection — a user wiki's @{slug} canon reaches bags/{
       }, 500);
     });
 
-    // sanity: the reboot actually activated the minted wiki (not the @lares fallback)
+    // sanity: the reboot actually activated the minted wiki (not the lares-wiki fallback)
     expect(secondLog, "reboot did not activate the minted wiki").toContain(`→ ${SLUG}`);
 
     // 4) LOAD a carrier into the minted wiki's OWN canon (@{slug}), in-wiki

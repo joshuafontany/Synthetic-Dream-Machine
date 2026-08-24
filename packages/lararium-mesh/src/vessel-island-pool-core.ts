@@ -74,7 +74,7 @@ export type DiskMirrorGrant = readonly { bagId: string; mirrorRoot: string; scop
  *  - A `selfCanon` entry is the per-wiki CANON authority (the wiki's own
  *    `bags/{slug}` bag → disk `bags/{slug}`), yielding only when the recipe
  *    designates that canon AND no literal grant already covers it — so system
- *    wikis (@lares/@lararium, literal grants) keep their static roots and never
+ *    wikis (lares/lararium, literal grants) keep their static roots and never
  *    double-project.
  *
  *  OCAP-clean: authority stays in the static grant, designation in the synced

@@ -1,11 +1,11 @@
 /**
  * identity-anchors — the veiled-Handle's sentinel anchors, persisted in the sovereign
- * identity home (`<lares>/identity/anchors.json`), OUTSIDE the wiped `@daemon` substrate.
+ * identity home (`<lares>/identity/anchors.json`), OUTSIDE the wiped daemon substrate.
  *
  * The founding ceremony mints the PersonaGroup / MeshCabal sentinel doc-ids off keyhive's
  * CSPRNG — a fresh id every run, unreproducible from any seed. Those ids (and the
- * PersonaGroup agentId, which the bootstrap never carried) lived ONLY inside the @daemon
- * doc, so a torn @daemon orphaned the veiled Handle with no way back. Persisting them here,
+ * PersonaGroup agentId, which the bootstrap never carried) lived ONLY inside the daemon
+ * doc, so a torn daemon doc orphaned the veiled Handle with no way back. Persisting them here,
  * beside the sovereign keypair and out of every substrate wipe, lets a rebirth reforge the
  * daemon store while re-reading the SAME anchors — the Handle survives the substrate.
  */

@@ -57,7 +57,7 @@ function carriers(): Array<{ rel: string; src: string; uri: string }> {
   return out;
 }
 
-describe("corpus round-trip — the lens laws over every @lares carrier", () => {
+describe("corpus round-trip — the lens laws over every lares-bag carrier", () => {
   const all = carriers();
 
   test("the corpus presents carriers", () => {

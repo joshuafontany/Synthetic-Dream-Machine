@@ -395,7 +395,7 @@ export function writeManifest(sensoriumDir: string, m: SensoriumManifest): void 
 // palace-holder — the SHARED palace-instance transport cap (folded from palace-holder.ts)
 // ============================================================================
 /**
- * palace-holder — the SHARED palace-instance transport cap (the @daemon's TS side).
+ * palace-holder — the SHARED palace-instance transport cap (the daemon's TS side).
  *
  * The nameless palace-instance model, one level up from the python holder-caps collapse
  * (b18235f6): a palace client = its #has-stack of caps composed at a root, NOT a bespoke
@@ -710,13 +710,13 @@ export function livePalaceHolderCount(label: string): number {
 /**
  * MESHPALACE shape — FLAGGED, MODELED, NOT BUILT HERE.
  *
- * The meshpalace = a mempalace-instance fed by the @meshpalace Automerge doc through a FEED
+ * The meshpalace = a mempalace-instance fed by the meshpalace Automerge doc through a FEED
  * ADAPTER, AND the cross-Lararium bridge (peer Lararia federate their ≥meme memes through it).
  * As a palace-instance it #has the SAME transport cap above PLUS this feed cap — the doc→palace
  * feed adapter. The op-surface would be read-oriented (search/get over
  * the federated corpus), the FEED replacing the per-turn local `encodeStore`/`put` write path.
  *
- * The full DreamNet peer-federation wiring (the @meshpalace AutomergeDocStore FLOW-map,
+ * The full DreamNet peer-federation wiring (the meshpalace AutomergeDocStore FLOW-map,
  * mesh-memegraph, manaoio, the read-face wire) is a SEPARATE, larger mesh-domain piece and
  * is NOT implemented here. This interface only names the shore so the shape is ready.
  */

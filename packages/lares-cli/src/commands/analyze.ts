@@ -10,7 +10,7 @@
  *   lares sense analyze --span 8            context words each side of a reported boundary (human render)
  *   lares sense analyze --spectral          the embedding-geometry surface instead of boundaries
  *
- * The compute rides THROUGH the @daemon `analyze` verb so it reuses the ONE content handle the holder owns
+ * The compute rides THROUGH the daemon `analyze` verb so it reuses the ONE content handle the holder owns
  * (never a second store client). The daemon-side verb registration rides the wiki-VM TS build target (the
  * node + python halves — the capture_session `analyze` serve-op + the capture-source `analyze` op — stand
  * ready); until it lands, `lares_mcp --standalone --sensorium <root>` runs the same instrument directly.
@@ -68,7 +68,7 @@ export async function cmdAnalyze(args: ParsedArgs): Promise<number> {
     const owed = /unknown verb|no .*verb|analyze/i.test(msg);
     emit(args, {
       ok: false, requestId: result.requestId, error: { code, message: msg,
-        ...(owed ? { hint: "the @daemon `analyze` verb registration is owed on the wiki-VM TS build; run `lares_mcp --standalone --sensorium <root>` (tool `analyze`) meanwhile" } : {}) },
+        ...(owed ? { hint: "the daemon `analyze` verb registration is owed on the wiki-VM TS build; run `lares_mcp --standalone --sensorium <root>` (tool `analyze`) meanwhile" } : {}) },
       human: () => {
         console.error(`lares sense analyze failed: ${msg}`);
         if (owed) console.error("  → standalone today: lares_mcp --standalone --sensorium <root> (tool `analyze`)");

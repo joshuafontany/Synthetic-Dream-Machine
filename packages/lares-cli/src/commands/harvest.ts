@@ -263,13 +263,13 @@ function listTranscripts(target: string, depth = 0): string[] {
   return [];
 }
 
-// --- tensegrity writeback (the @daemon memory-shore) -----------------------
+// --- tensegrity writeback (the daemon memory-shore) -----------------------
 // Read mempalace drawer content, harvest it with the sovereign parser, and write
 // our domain metadata (the tension) back ONTO the drawer (the compression strut).
 
 // The writeback core (buildPatch + writebackWing + lar_hv) lives ONCE in
 // @lararium/mempalace/telemetry-writeback (the lar-telemetry shared core) — both
-// this CLI leg and the @daemon `lar-telemetry` verb call it. No local copy here.
+// this CLI leg and the daemon `lar-telemetry` verb call it. No local copy here.
 
 function runWriteback(args: ParsedArgs, wing: string): number {
   const lociIo = resolveLociIo();
@@ -296,7 +296,7 @@ function runWriteback(args: ParsedArgs, wing: string): number {
 // The bulk `--all` backfill + guest-comparator discovery/staging/mine now live in PYTHON
 // (session_discovery.py + guest_harvest.py; the sovereign sweep in capture_session.py). The python
 // guest lane owns discovery/stage/lock; `lares mempalace harvest` shells it, and `lares sense sweep`
-// routes the sovereign lane through the @daemon.
+// routes the sovereign lane through the daemon.
 
 /** Recursively collect `.jsonl` files under a root whose basename passes `match`. */
 function walkJsonl(root: string, match: (name: string) => boolean, depth = 0, out: string[] = []): string[] {
@@ -366,7 +366,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   if (roomGuard !== null) return roomGuard;
 
   // The bulk `--all` backfill ceased to exist here — the sovereign lane routes through `lares sense
-  // sweep` (the @daemon `sweep` op) and the guest comparator through `lares mempalace harvest` (the
+  // sweep` (the daemon `sweep` op) and the guest comparator through `lares mempalace harvest` (the
   // python guest_harvest lane). This command harvests one pointer's bearing gradient only.
 
   // --writeback: operate on mempalace DRAWERS (the tensegrity shore), not JSONL.
@@ -487,7 +487,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
     if (gone.length > 0) {
       // ONE gone turn-uuid → the THREE convergence effects. Leg 1 (KG valid-close) fires CLI-side
       // (the KG has no holder). Legs 2+3 (.structurepalace tally set-aside + the Measure salience
-      // down-weight) fire through the @daemon's `structurepalace-kapae` verb — the daemon owns the warm
+      // down-weight) fire through the daemon's `structurepalace-kapae` verb — the daemon owns the warm
       // .structurepalace serve holder (a flock-singleton the CLI cannot re-open), and does BOTH in the
       // worker. Every leg is best-effort: a down KG / down daemon leaves the rewind unreconciled
       // this run (re-derivable on the next harvest), never fatal.
@@ -502,7 +502,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
         const why = err instanceof KgUnavailable ? "KG unavailable" : err instanceof Error ? err.message : String(err);
         if (process.env["LARES_DEBUG"]) console.warn(`[harvest] KG kapae best-effort skipped: ${why}`);
       }
-      // Legs 2+3 — route each gone turn's rewind to the @daemon's warm holder (fire-and-forget).
+      // Legs 2+3 — route each gone turn's rewind to the daemon's warm holder (fire-and-forget).
       let did = "";
       try { did = await vesselDid(); } catch { /* un-gated verb; runVerb still reaches the daemon */ }
       let structurepalace = 0;
@@ -548,7 +548,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
  * the same pointer re-derives its ledger and lands only the new tail; the TypeScript layer neither
  * reads exchanges for capture nor holds a capture WAL.
  */
-/** `lares sense sweep` — the BULK backfill, routed to the ONE @daemon `sweep` op: the holder discovers every
+/** `lares sense sweep` — the BULK backfill, routed to the ONE daemon `sweep` op: the holder discovers every
  *  transcript and captures each on its warm stream (no per-session round-trips, no second writer). The
  *  isomorphic twin of the MCP `sweep` tool — CLI + MCP land on the SAME spine. `--surface all|claude|codex|
  *  copilot` (default all) · `--wing` (default wing_<user>) · `--project` (narrows claude) · `--limit`.

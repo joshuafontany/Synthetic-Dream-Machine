@@ -1,5 +1,5 @@
 /**
- * switcher-state — the @daemon UX widget's IN path.
+ * switcher-state — the daemon UX widget's IN path.
  *
  * Main pushes the live activation state; the `switcher-state` worker verb writes the
  * LOCAL, volatile $:/temp/lares/switcher tiddler that the projected switcher renders

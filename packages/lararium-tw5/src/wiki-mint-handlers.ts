@@ -35,7 +35,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     const draftBagId = wikiDraftBagUri(slug);
     const draftKey = wikiDraftDocKey(slug, did);
     // The user's wiki recipe is REGISTRY data (the user's composition choice) —
-    // it lives in the user's @catalog, NOT @lararium (protocol substrate). Read
+    // it lives in the user's catalog registry, NOT the lararium bag (protocol substrate). Read
     // it through the accessor (access≠load), like the wiki/draft oracles.
     const recipeTitle = recipeUri("catalog", slug);
 
@@ -64,7 +64,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     if (!existingWikiUrl) await wikiHandle.whenReady();
     if (!existingDraftUrl) await draftHandle.whenReady();
 
-    // Oracles AND the user recipe all land in @catalog (registry) — one write.
+    // Oracles AND the user recipe all land in catalog (registry) — one write.
     const catalogHandle = await opts.catalog.handle();
     const updatedAt = new Date().toISOString();
     catalogHandle.change((doc) => {
@@ -89,7 +89,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
 
     // Born-with-its-cap: register each freshly-minted wiki bag's Keyhive Document
     // + delegate admin in the same act as the mint, so the new wiki's canon and
-    // draft bags hold their cap immediately — no cap-denied window (the @elyncia
+    // draft bags hold their cap immediately — no cap-denied window (the elyncia-bag
     // friction's sibling for wiki init). Key on the lar: bag URLs (wikiKey /
     // draftBagId) — the strings the cap-gate verifies against; the automerge
     // handle.url names each bag's CONTENT doc, a different object.
@@ -114,7 +114,7 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
     if (!slug) throw new Error("args.slug is required");
 
     const wikiKey = wikiBagUri(slug);
-    // Wiki oracle lives in @catalog — read via the accessor, not the composite.
+    // Wiki oracle lives in the catalog registry — read via the accessor, not the composite.
     const wikiUrl = await opts.catalog.urlOf(wikiKey);
     if (!wikiUrl) {
       throw new Error(`wiki "${slug}" not registered — run \`lares wiki init ${slug}\` first`);
@@ -130,7 +130,7 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
     const record: LarTiddlerRecord = buildActiveWikiRecord(slug, "lares-cli:wiki-open");
     await opts.composite.put(record, origin, { bag: DAEMON_BAG_ID });
 
-    // Reboot-pending: the active-wiki marker lives in @daemon (the running wiki doesn't
+    // Reboot-pending: the active-wiki marker lives in the daemon bag (the running wiki doesn't
     // load it) — the switch only takes effect on next boot. Alert the wiki being
     // switched AWAY from (the one currently live), if any.
     if (currentSlug) {

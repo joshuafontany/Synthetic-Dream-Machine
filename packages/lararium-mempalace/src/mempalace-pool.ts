@@ -1,14 +1,14 @@
 /**
  * mempalace-pool — the warm, reused READ client: ONE python reader, held for the daemon's life.
  *
- * The store lives in py; the TS @daemon points at it and proxies, computing nothing and holding no
+ * The store lives in py; the TS daemon points at it and proxies, computing nothing and holding no
  * payload. The reader NAMES its palace (`palacePath` → `--palace <path>`): it reads the sovereign
  * `<memory>/content`, the plane the capture path fills every turn. An unnamed palace would fall back to
  * whatever `~/.mempalace/config.json` happens to name — a silent reach into the guest comparator, and
  * a store the vessel writes but never reads.
  *
  * ONE reader, pooled for the daemon's lifetime — never one per call, never one per harness session.
- * The @daemon coordinates a py reader; it never becomes one. The first recall pays the chromadb cold
+ * The daemon coordinates a py reader; it never becomes one. The first recall pays the chromadb cold
  * start; every recall after runs warm, which keeps recall-into-wake fast.
  *
  * Read-only: the pool hands back a client whose tools cover list/get/search, and nothing more.

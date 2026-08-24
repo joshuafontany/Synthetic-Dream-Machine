@@ -1,5 +1,5 @@
 /**
- * browser-circle-panel.test.ts — the @daemon follow surface's data flow, over REAL IndexedDB.
+ * browser-circle-panel.test.ts — the daemon follow surface's data flow, over REAL IndexedDB.
  *
  * The panel is projection-rendered (a worker+camera boot vitest-browser can't easily drive), so these tests
  * stand the SHORES the panel rides: the vessel-side follow→list→unfollow round-trip against the IDB

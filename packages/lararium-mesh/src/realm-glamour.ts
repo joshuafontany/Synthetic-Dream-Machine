@@ -7,7 +7,7 @@
  * "the realm's identity is content-addressed; the name grants no authority" — though
  * it does leak metadata; see THE VEIL INVARIANT below)
  * + lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture ("cabalGroup = shared
- * charter, read-scope"). The read/veil tier ALREADY EXISTS as the @oracle
+ * charter, read-scope"). The read/veil tier ALREADY EXISTS as the oracle
  * read-face (content-addressed snapshot + signed pointer, fetch-CORS, anon-read);
  * THIS cut adds NO gate-loosening. It makes a CONTENT decision: it declares WHAT a
  * ⚠ `charter` HERE NAMES THE PUBLISHED FACE — editorial, delegable, its own rate — and NOT the
@@ -160,7 +160,7 @@ export function projectRealmGlamour(state: CabalRealmPublishState): RealmGlamour
 
 /**
  * Serialize a charter into a content-addressed snapshot (the read-face artifact),
- * reusing the EXACT @oracle mechanism (`exportOracleSnapshot`) the FLOW-map serve
+ * reusing the EXACT oracle read-face mechanism (`exportOracleSnapshot`) the FLOW-map serve
  * uses — load the plain charter into an ambient-free Automerge doc (`pinnedDoc` pins
  * the actor AND the clock, both of which otherwise land in the saved bytes), export by
  * content hash. Deterministic: the same charter yields the same cid, stable until the

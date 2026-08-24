@@ -11,7 +11,7 @@
  *
  * NEXUS-SCOPED, NEVER GLOBAL (causal islands). "Public" here means public within the causal island that has
  * synced the announce doc — the largest practical such island is the Nexus (the WHO plane, sibling to the
- * @meshpalace FLOW-map's WHERE plane). There is no global DreamNet registry of Handles, because there is no
+ * meshpalace FLOW-map's WHERE plane). There is no global DreamNet registry of Handles, because there is no
  * global now: a Handle federates exactly as far as its announce doc syncs, and crossing to another Nexus
  * RE-ANNOUNCES. Re-announcement is cheap by the card's self-certifying design — the SAME signed card re-lands
  * in the target Nexus's doc with no re-sign, and the tiddler key stays stable (it names the identity KIND, so

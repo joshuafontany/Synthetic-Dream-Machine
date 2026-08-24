@@ -77,7 +77,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const meshCabalDocIdHex   = tiddlers[MESH_CABAL_DOC_ID_TIDDLER]?.text   ?? null;
   const daemonUrl            = tiddlers[DAEMON_BAG_ID]?.text                 ?? null;
   // The founder's PersonaGroup plane — carried into the payload so the joinee SYNCS the shared veiled
-  // identity (membership-sync foundation); @daemon stays sovereign (the joinee seeds its own). The entry
+  // identity (membership-sync foundation); the daemon bag stays sovereign (the joinee seeds its own). The entry
   // is keyed by the name the group's own doc id derives, which both devices compute alike.
   const personaUrl           = personaGroupDocIdHex
     ? tiddlers[personaBagIdFor(personaGroupDocIdHex)]?.text ?? null
@@ -153,7 +153,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
     meshCabalDocIdHex,
     syncUrl:      opts.syncUrl      ?? null,
     islandDocUrl: opts.islandDocUrl ?? null,
-    // THE DOOR. Defaults to this hearth's OWN @daemon, read from the same bootstrap the sentinel ids come
+    // THE DOOR. Defaults to this hearth's OWN daemon doc, read from the same bootstrap the sentinel ids come
     // from — a joinee seeds its own plane at admission, so only this url tells it where to knock.
     hearthDaemonUrl: opts.hearthDaemonUrl ?? daemonUrl,
     personaUrl,

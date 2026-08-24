@@ -31,7 +31,7 @@ import { KeyhiveProvider, InMemoryEventStore, foundCabalRealm } from "@lararium/
 import type { LeafIdentity } from "../src/leaf-identity.js";
 
 const AUD = "lar:///ha.ka.ba/bags/daemon";
-const WRONG_AUD = "lar:///ha.ka.ba/bags/personal";     // a proof bound here must not cross the @daemon gate
+const WRONG_AUD = "lar:///ha.ka.ba/bags/personal";     // a proof bound here must not cross the daemon gate
 const GREETING_KEY = "lar:///ha.ka.ba/bags/crossroads/greeting";
 const envOf = (k: string, d = ""): string => process.env[k] ?? d;
 const SHARED = envOf("LAR_CROSSING_SHARED");
@@ -101,13 +101,13 @@ async function main(): Promise<void> {
   const url = `ws://${HOST}:${String(coords.port)}/`;
 
   // Build the role's identity + binding: the impostor claims `own.pub` but signs with a foreign seed;
-  // wrong-bind signs correctly but binds the wrong audience; the rest sign truly and bind @daemon.
+  // wrong-bind signs correctly but binds the wrong audience; the rest sign truly and bind the daemon bag.
   const signSeed = ROLE === "impostor" ? genKey().seed : own.seed;         // impostor forges the signature
   const aud      = ROLE === "wrong-bind" ? WRONG_AUD : AUD;                // wrong-bind mis-binds the audience
   const identity: LeafIdentity = {
     contactCard: JSON.stringify({ peerPubKey: own.pub }), peerPubKey: own.pub, sign: ed25519SignerFromSeed(signSeed),
   };
-  console.log(`[crossing-client] (${ROLE}) CROSSING → ${url} (aud=${aud === AUD ? "@daemon" : "personal(wrong)"})`);
+  console.log(`[crossing-client] (${ROLE}) CROSSING → ${url} (aud=${aud === AUD ? "daemon" : "personal(wrong)"})`);
 
   const { outcome, found, repo, adapter } = await attemptCrossing(identity, aud, coords.gatePubKey, url, coords.docUrl);
 

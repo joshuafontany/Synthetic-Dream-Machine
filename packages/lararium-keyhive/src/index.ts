@@ -95,15 +95,15 @@ export interface DeviceAdmitPayload {
   readonly syncUrl:                string | null;
   /**
    * The founder's persona doc URL — the joinee resolves/syncs it to receive the
-   * shared veiled identity (PersonaGroup), the membership-sync foundation. @daemon
-   * stays sovereign-per-vessel (the joinee seeds its own); @persona crosses by membership.
+   * shared veiled identity (PersonaGroup), the membership-sync foundation. The daemon bag
+   * stays sovereign-per-vessel (the joinee seeds its own); the persona plane crosses by membership.
    * Absent on older payloads; the joinee then seeds a fresh local persona doc.
    */
   readonly personaUrl?:            string | null;
   /**
    * OPTIONAL keyhive membership cap-events (base64 StaticEvent bytes) — the founder's PersonaGroup ops that
-   * admit this vessel into the KEYHIVE group so it can DECRYPT shared @catalog content (packPersonaCrossing).
-   * runApplyAdmitPayload writes them to @daemon; boot's hydrateFromEventStore ingests them into the vessel's
+   * admit this vessel into the KEYHIVE group so it can DECRYPT content shared through the catalog registry (packPersonaCrossing).
+   * runApplyAdmitPayload writes them to the daemon doc; boot's hydrateFromEventStore ingests them into the vessel's
    * live keyhive. Absent → the vessel joins by the Ed25519 edge alone (plaintext-sync membership, no E2E).
    */
   readonly capEvents?:             readonly string[];
@@ -117,9 +117,9 @@ export interface DeviceAdmitPayload {
   /**
    * The HEARTH's own daemon doc — the door a joinee knocks on.
    *
-   * @daemon stays sovereign-per-vessel: this joinee seeds its OWN at admission, so a verb summons written to
+   * The daemon bag stays sovereign-per-vessel: this joinee seeds its OWN at admission, so a verb summons written to
    * its own plane reaches nobody. Asking the hearth to seat it — the keyhive half of the join — means writing
-   * onto the HEARTH's @daemon, and this names it. The joinee resolves it the way it resolves `islandDocUrl`
+   * onto the HEARTH's daemon doc, and this names it. The joinee resolves it the way it resolves `islandDocUrl`
    * and `personaUrl`: over the crossing its device edge already opened.
    *
    * The route runs both ways already: `browser-crossing` proves a leaf resolving a HEARTH-owned doc by url

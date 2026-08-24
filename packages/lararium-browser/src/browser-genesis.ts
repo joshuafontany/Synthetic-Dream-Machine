@@ -1,7 +1,7 @@
 /**
  * browser-genesis — browser genesis byte SOURCE (the OPFS CAS byte plane).
  *
- * The @oracle CRDT itself rides the ONE isomorphic intake (`materializeGenesisIsland`
+ * The oracle CRDT itself rides the ONE isomorphic intake (`materializeGenesisIsland`
  * in @lararium/mesh `genesis-intake`): the browser vessel materializes it FRESH from
  * the plain-data seed under the deterministic doc id, or reloads the persisted one by
  * find-first from IndexedDB — node-parity, no island.bin binary import, no merge-into-

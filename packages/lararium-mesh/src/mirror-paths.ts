@@ -40,11 +40,15 @@ function larTail(uri: string): string | null {
   return uri.startsWith(LAR_PREFIX) ? uri.slice(LAR_PREFIX.length) : null;
 }
 
-/** Canonical @lares mirror path. */
+/** Canonical lares-bag mirror path. */
 export function laresMirrorRelPath(uri: string): string | null {
   const rest = larTail(uri);
   if (rest === null) return null;
-  const prefix = `@lares/`;
+  // THE TAIL ARRIVES KIND-SEGMENTED. `larTail` strips `lar:///ha.ka.ba/`, so what lands here reads
+  // `bags/lares/…` — the segment names the plane and the slug carries no marker. A matcher testing the
+  // marked form answers null for every URI the minters produce, which reads identically to "this URI
+  // names no mirror" and so says nothing at all.
+  const prefix = `bags/lares/`;
   if (!rest.startsWith(prefix)) return null;
 
   const [pathPart, frag] = splitHash(rest.slice(prefix.length));
@@ -52,10 +56,10 @@ export function laresMirrorRelPath(uri: string): string | null {
   return base ? withFrag(base, frag) : null;
 }
 
-/** Canonical @lararium engine mirror path. */
+/** Canonical lararium-bag engine mirror path. */
 export function engineMirrorRelPath(uri: string): string | null {
   const rest = larTail(uri);
-  const prefix = `@lararium/`;
+  const prefix = `bags/lararium/`;
   if (rest === null || !rest.startsWith(prefix)) return null;
 
   const [pathPart, frag] = splitHash(rest.slice(prefix.length));
@@ -63,7 +67,7 @@ export function engineMirrorRelPath(uri: string): string | null {
   return base ? withFrag(base, frag) : null;
 }
 
-/** Wiki-shadow path used when one mirror contains both @lares and @lararium views. */
+/** Wiki-shadow path used when one mirror contains both lares and lararium bag views. */
 export function wikiShadowMirrorRelPath(uri: string): string | null {
   let rest = larTail(uri);
   if (rest === null) return null;

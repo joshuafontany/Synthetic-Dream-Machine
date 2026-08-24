@@ -24,7 +24,7 @@ export interface LaresNaluAPI {
   /** The recompose inverse on the VM surface — one carrier whole from its record group. */
   expandMemeRefs(memeUri: string): string | null;
   /** The IN-VM capture annotate (capture-annotate-vm startup): parse + harvest a turn IN-REALM with
-   *  the full self-hosted grammar → the lar_* patch (+ lar_ast). The @daemon wires this as the engine's
+   *  the full self-hosted grammar → the lar_* patch (+ lar_ast). The daemon wires this as the engine's
    *  annotate so all ast-parsing runs inside the TW5 engine, never the worker. */
   captureAnnotateVm(turnText: string, sourceFile?: string): Record<string, string | number>;
 }

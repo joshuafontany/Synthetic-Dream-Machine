@@ -3,7 +3,7 @@
  * WireAction vocabulary.
  *
  * A harness reaches memory through the LARES surface (`lares_mcp.py` — FastMCP over the sensorium
- * lifecycle), and that surface holds NO STORE: every verb rides the @daemon cap-wire (`lares_uds.py`)
+ * lifecycle), and that surface holds NO STORE: every verb rides the daemon cap-wire (`lares_uds.py`)
  * to the one process that owns the palace holders.
  *
  * THE TOOL LIST LIVES IN `lares_mcp.py` AND NOWHERE ELSE. This header once named nine verbs while the
@@ -19,7 +19,7 @@
  * MCP speaks stdio-per-client, so N sessions run N of these processes. A surface that opened a chroma
  * client would therefore put N unsynchronized writers on one index — and no lock cures that, because
  * the serve-holders speak NDJSON on raw stdin and answer only their spawning parent. Exactly ONE OWNER
- * holds the palace, and everyone else asks it. All the compute stays py; the @daemon only routes.
+ * holds the palace, and everyone else asks it. All the compute stays py; the daemon only routes.
  *
  * The guest `~/.mempalace` holds no seat here. An operator raises it deliberately (`lares mempalace
  * setup`) and imports FROM it (`guest-import.ts`); the vessel never binds into it.
@@ -56,7 +56,7 @@ export function resolveLaresMcp(): LaresMcpCommand | null {
   if (!existsSync(memorySensoriumDir())) return null; // no sensorium stood — `lares vessel stand --init` stands it
   return {
     command: python,
-    args: [script],   // ROUTED: no --palace. The surface opens no store; it speaks to the @daemon.
+    args: [script],   // ROUTED: no --palace. The surface opens no store; it speaks to the daemon.
     env: { PYTHONPATH: submoduleRoot },
   };
 }

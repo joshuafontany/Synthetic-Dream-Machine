@@ -1,7 +1,7 @@
 /**
  * carriage-caps — the ISOMORPHIC carriage machinery, on the mesh floor where every vessel reaches it.
  *
- * These caps wire a vessel's PUBLIC FLOW-map (@meshpalace) and the blind relay that carries it across
+ * These caps wire a vessel's PUBLIC FLOW-map (the meshpalace doc) and the blind relay that carries it across
  * the astral space — platform-blind by construction (no node http Server, no tw5 wiki). A hearth, a
  * crossroads and a browser leaf compose the SAME pair through `carriageStack` (below) and differ only
  * in the mesh standing each hands in. Serving that map over HTTP is a node-only act and lives in
@@ -29,7 +29,7 @@ import type { VesselCoreAssembly } from "./open-vessel-core.js";
 import type { BagStowage } from "./bag-residency.js";
 
 /**
- * The carriage cap-ids. A vessel's #has-cap-stack names these to wire the @meshpalace FLOW-map + carriage.
+ * The carriage cap-ids. A vessel's #has-cap-stack names these to wire the meshpalace FLOW-map + carriage.
  * The substrate dependency rides as a wire-string (below) — mesh cannot import tw5's CORE_CAP (circular),
  * so the value, not the symbol, carries the match. node-caps' `CAP` object folds these in.
  */
@@ -39,12 +39,12 @@ export const CARRIAGE_CAP = { meshpalace: "meshpalace", carriage: "carriage" } a
  *  VALUE (mesh can't import CORE_CAP — circular). cap-ids are handshake strings, matched by value. */
 const SUBSTRATE_CAP_ID = "substrate";
 
-// ── granular carriage caps (a writable @meshpalace FLOW-map + the carriage that pulls peers) ─────────
+// ── granular carriage caps (a writable meshpalace FLOW-map + the carriage that pulls peers) ─────────
 
-/** The composed @meshpalace handle a meshpalace cap exposes. */
+/** The composed meshpalace handle a meshpalace cap exposes. */
 export interface MeshPalaceComponent { readonly handle: DocHandle<MeshPalaceDoc>; }
 
-/** meshpalace — a writable @meshpalace AutomergeDocStore layer (the vessel's own public FLOW-map) +
+/** meshpalace — a writable meshpalace AutomergeDocStore layer (the vessel's own public FLOW-map) +
  *  a residency pin. Requires substrate (the composite to layer into). */
 export function meshPalaceCap(deps: { repo: Repo; residency?: BagStowage; seed?: readonly DialEntry[]; selfCoord?: Coord }): CapModule {
   return {
@@ -227,7 +227,7 @@ export function meshSelfSeed(self: MeshSelf): readonly DialEntry[] {
 }
 
 /** carriage — the blind relay: pull each PEER's PUBLIC FLOW-map (pullAndVerifyOracle) and merge it into
- *  this vessel's @meshpalace, re-served by the read-face (carry-by-aggregate-reserve). Peers are
+ *  this vessel's meshpalace doc, re-served by the read-face (carry-by-aggregate-reserve). Peers are
  *  DISCOVERED from the carried dials (self-peering) ∪ the bootstrap. A peer down is no error —
  *  feed-or-fade. Requires meshpalace (the doc to merge into + discover dials from). */
 export function carriageCap(deps: {

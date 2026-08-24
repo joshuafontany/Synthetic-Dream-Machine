@@ -120,7 +120,7 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   // and reports a healthy vessel standing over a directory that no longer exists.
   //
   // Measured: the attach succeeded, the seed then failed six-for-six with exit 3, and standing against
-  // the half-cleared store left `@catalog` unreadable — "hearth-private doc unavailable — local
+  // the half-cleared store left the `catalog` doc unreadable — "hearth-private doc unavailable — local
   // corruption". Only `rite rebirth` recovered it. None of that announced itself as a wipe/holder race.
   //
   // The clear owns this because it owns the destruction: whoever removes the store is the one who can

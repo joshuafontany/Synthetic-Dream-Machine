@@ -1,10 +1,10 @@
 /**
- * bag-tracker — the relay-side `cid → holders` index that makes @cad discovery DHT-FREE.
+ * bag-tracker — the relay-side `cid → holders` index that makes cad discovery DHT-FREE.
  *
  * THE DISCOVERY AUTHORITY (canon: hint → peers → bag-tracker). A member fetching a sealed body broadcasts
  * `want-have(cid)` to its session peers and to the relay serving its Nexus; the relay answers from THIS index —
  * which members announced they hold that cid. That index REPLACES the global DHT stock Bitswap would fall to, so
- * discovery stays inside the Nexus causal island. A DHT, if ever added, sits behind an `@oracle` rendezvous (its
+ * discovery stays inside the Nexus causal island. A DHT, if ever added, sits behind an `oracle`-plane rendezvous (its
  * own causal-island boundary) — NEVER this path.
  *
  * SECRET-FREE, PLAINTEXT-BLIND. The tracker indexes CIDS and HOLDER handles only — never a body, never a read-cap,

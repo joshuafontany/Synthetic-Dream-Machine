@@ -96,17 +96,17 @@ describe("the admit ceremony — found · admit · carry · apply · BOUND", () 
     expect(carried.signerDid).not.toBe(joineeKey);
     expect(carried.deviceEdge).toBeTruthy();
 
-    // It seeds its OWN sovereign social docs (@daemon stays sovereign-per-vessel) …
+    // It seeds its OWN sovereign social docs (the daemon bag stays sovereign-per-vessel) …
     for (const url of [applied.identitiesUrl, applied.circlesUrl, applied.sessionsUrl, applied.daemonUrl]) {
       expect(url, "the joinee seeds its own sovereign docs").toMatch(/^automerge:/);
     }
-    // … and adopts the founder's @persona — membership is what CROSSES.
+    // … and adopts the founder's persona doc — membership is what CROSSES.
     expect(applied.personaUrl).toBe(founder.f.personaUrl);
   });
 
-  test("payload capEvents land in @daemon as cap-events — ready for boot hydration into the keyhive", async () => {
+  test("payload capEvents land in the daemon doc as cap-events — ready for boot hydration into the keyhive", async () => {
     // The daemon packs these (packPersonaCrossing) to admit the vessel into the KEYHIVE PersonaGroup so it
-    // can decrypt shared @catalog content. Here dummy blobs prove the joinee-side WRITE lands them in the
+    // can decrypt content shared through the catalog registry. Here dummy blobs prove the joinee-side WRITE lands them in the
     // store format boot's hydrateFromEventStore reads (the keyhive ingestion is proven separately).
     const founder = await found();
     const joineeKey = await pubOf(JOINEE_SEED);

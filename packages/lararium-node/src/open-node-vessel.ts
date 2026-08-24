@@ -9,7 +9,7 @@
  * run it: the doors differ only in which #has-cap-stack they compose over the one preparation.
  *   - openNodeVessel → composeLararium — a hearth: the base course plus the caps a FACE lifts.
  *   - openNodeHerm   → composeHerm     — a crossroads: the base course plus the caps an HTTP floor
- *     serves. No wiki, no pool; the @daemon stays, the immune core every vessel carries, and its
+ *     serves. No wiki, no pool; the daemon stays, the immune core every vessel carries, and its
  *     registerBags omits the user-wiki bags where no wiki stands.
  * Each stack is declared at its compose site and derived by `composeVessel`; read it there.
  *
@@ -97,7 +97,7 @@ import { makeSourceCapture, type SourceCapture } from "./capture-source.js";
 import { VesselIslandPool, NODE_WIKI_ACTIVATION_CAP } from "./vessel-island-pool.js";
 import { runFlow } from "./flow-run.js";
 
-/** Node advertises a few rotatable wiki pins BESIDES @daemon (resource-rich vessel).
+/** Node advertises a few rotatable wiki pins BESIDES the daemon bag (resource-rich vessel).
  *  The user's ONE-plus rotatable pin(s) ride this budget; the surface enforces it. */
 const NODE_WIKI_PIN_BUDGET = 3;
 import { larSealHome, larStructurePalaceDir, larFormPalaceDir, memorySensoriumDir, meshSensoriumDir, larContentDir, sensoriumDir }  from "./vessel-paths.js";
@@ -241,13 +241,13 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   meshSelf?: MeshSelf;
   /** Carriage pull cadence (ms) — tuning, kept separate from membership. */
   pullIntervalMs?: number;
-  /** The CARRIAGE-relay URL (Socket B, ciphertext) the vessel dials to serve sealed @cad bodies to members.
+  /** The CARRIAGE-relay URL (Socket B, ciphertext) the vessel dials to serve sealed cad bodies to members.
    *  ABSENT (and `LAR_CARRIAGE_RELAY` unset) → NO carriage socket opens, NO serve-loop stands (provably inert). */
   carriageRelayUrl?: string;
   /** The carriage serve-loop poll cadence (ms) — how promptly a member's want-block draws a serve turn. */
   carriagePollIntervalMs?: number;
   /** STAND a carriage relay (Socket B, ciphertext CROSSROADS) so a family's hearths dial THIS vessel to carry sealed
-   *  @cad bodies between each other — the Herm's Lares-Viales role (a running Herm IS a crossroads). The port the
+   *  cad bodies between each other — the Herm's Lares-Viales role (a running Herm IS a crossroads). The port the
    *  relay BINDS (0 → an OS-assigned free port; a Pi deployment pins a stable one). ABSENT (and `LAR_HERM_RELAY_PORT`
    *  unset) → NO relay socket stands, boot behaves exactly as today (provably inert). SEPARATE from `carriageRelayUrl`
    *  (that DIALS a relay as a client; this STANDS one as the crossroads). */
@@ -274,7 +274,7 @@ export interface NodeVesselResult extends VesselResult<VesselIslandPool, DaemonV
   stopTick:  () => void;
 }
 
-/** A composed Herm (wiki-less): the @daemon immune core + a served @meshpalace FLOW-map, no pool. */
+/** A composed Herm (wiki-less): the daemon immune core + a served meshpalace FLOW-map, no pool. */
 export interface NodeHermResult {
   repo:             Repo;
   store:            CompositeStore;
@@ -321,7 +321,7 @@ interface NodeBootPrep {
    *  The two vessel entry-points fold its `stop()` into their teardown so no timer / socket leaks past close. */
   carriageLoop:     CarriageServeLoop | null;
   /** The STOOD carriage relay (Socket B CROSSROADS) — present ONLY when a relay port was configured; else null
-   *  (inert). A running crossroads a family's hearths dial to carry sealed @cad bodies between each other. The two
+   *  (inert). A running crossroads a family's hearths dial to carry sealed cad bodies between each other. The two
    *  vessel entry-points fold its `close()` into their teardown so no WS server / peer socket leaks past close. */
   carriageRelay:    CarriageRelay | null;
   /** The client dial-out (Socket A) — present ONLY when a peer sync URL + gate key were configured; else null
@@ -387,7 +387,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // below (the nexus pubkey it addresses the federatable planes from). Null keeps the pre-classification
   // boot window inert (no peer gated) — correct: no doc crosses to any WS peer until the gate arms anyway.
   let selfSlotFedGate: FederationGate | null = null;
-  // The @nexus MEMBERSHIP consult — the carry-split's member gate (a cross-operator MEMBER blind-transits a
+  // The nexus-doc MEMBERSHIP consult — the carry-split's member gate (a cross-operator MEMBER blind-transits a
   // sealed plane; a STRANGER reaches only the public shelf). Forward-declared (the sharePolicy closes over
   // it) and STOOD once the operator's own nym is loaded, below. Null keeps every cross-operator STRANGER
   // (public-read only) through the boot window — the fail-closed default (a node never assumes Nexus-pono).
@@ -398,11 +398,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   let federationPosture: FederationPosture = "private";
   // THE SEAL-PRODUCER — a LIVE sealed-plane registry, empty at boot (fail-closed: behaves EXACTLY as
   // DENY-ALL until the encrypt-on-CAS installer seals a body). `sealRegistry.seal` is the oracle the
-  // sharePolicy closes over; the moment `installSealedBody(sealRegistry, …)` seals a @cad body, its docId
+  // sharePolicy closes over; the moment `installSealedBody(sealRegistry, …)` seals a cad body, its docId
   // registers here AS A SIDE-EFFECT and the member blind-transit lane opens for that ciphertext body. A
   // cleartext body reaches no encrypt path → never registers → a doc can never self-label sealed.
   const sealRegistry = makeSealedPlaneRegistry();
-  // THE PER-NEXUS CONVERGENCE KEYRING — the SOURCE the @cad seal message-locks against (fork-② = A2, operator-
+  // THE PER-NEXUS CONVERGENCE KEYRING — the SOURCE the cad seal message-locks against (fork-② = A2, operator-
   // ruled 2026-07-21). Forward-declared null and STOOD once the operator's own nym + the charter epoch are known:
   // the private-lane admission handoff (the SAME lane the read-caps ride, below) delivers the `{epoch → secret}`
   // keyring; `makeNexusConvergenceKeyring(entries)` stands it here. A null keyring keeps the boot window — and any
@@ -445,12 +445,12 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         peerClass:       peerClassMap.get(peerId),
         selfSlotFedGate,
         antigenRing,
-        // THE CARRY-SPLIT — a cross-operator MEMBER (per the @nexus consult) blind-transits a PROVABLY-sealed
+        // THE CARRY-SPLIT — a cross-operator MEMBER (per the nexus-doc consult) blind-transits a PROVABLY-sealed
         // private plane (carry ciphertext, never the read-cap); a STRANGER reaches only the federatable shelf.
         // planeSeal is DENY-ALL today (the sync wire carries cleartext — no plane is provably sealed), so the
-        // member lane stands ready but inert; it opens the moment a sealed plane type (@cad/BeeKEM) registers.
+        // member lane stands ready but inert; it opens the moment a sealed plane type (cad/BeeKEM) registers.
         membership:      nexusMembership,
-        // THE LIVE SEAL ORACLE — reads the current sealed set (fail-closed empty ⇒ DENY-ALL). A @cad ciphertext
+        // THE LIVE SEAL ORACLE — reads the current sealed set (fail-closed empty ⇒ DENY-ALL). A cad ciphertext
         // body sealed by `installSealedBody` registers its docId here; the member lane then blind-transits it
         // (carry the ciphertext, never the read-cap — the read-cap rides the private keyhive lane).
         planeSeal:       sealRegistry.seal,
@@ -509,7 +509,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   });
   antigenRing = antigenHolder.ring;
 
-  // Stand the @nexus membership consult now the operator's own verifying key is loaded — the carry-split's
+  // Stand the nexus-doc membership consult now the operator's own verifying key is loaded — the carry-split's
   // member gate. It reads the SAME `bags/nexus` charter roster the antigen folds against (the seated-kahu
   // keys as the conservative provable-member floor; see nexus-membership for the surfaced members-registry
   // fork) and resolves a peerId → nym off the same proven `peerIdentifierMap`. FAILS CLOSED: an unseated
@@ -537,7 +537,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // genesis is absent (nothing to hand). Read once at boot; the corm-lease pointer re-issues on the read-face breath.
   const bulb: BulbArtifact | null = readBulbArtifact(genesisDir ?? defaultGenesisDir(), nexusDocForBoot?.sealEpochCid ?? null, bootstrapPath);
 
-  // STAND THE @cad CONVERGENCE KEYRING — the @cad seal's key source, minted for THIS vessel's charter-head epoch
+  // STAND THE cad CONVERGENCE KEYRING — the cad seal's key source, minted for THIS vessel's charter-head epoch
   // (genesis = 0 when unseated) and persisted local (read-all). This fills the forward-declared shore: the vessel
   // now HOLDS a keyring, so the seal producer (`cad-seal`) can message-lock a carrier body's ciphertext. It seals
   // the vessel's OWN staged bodies for the FEDERATION plane; STAGE-2 admission delivery hands this keyring to a
@@ -550,14 +550,14 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
   // Stand the self-slot federation gate now the operator's own verifying key is loaded — the SAME nexus
   // pubkey the antigen board derives from. The gate's federatable surface is a PURE function of that key
-  // (@crossroads · WHO · kapae-antigen board — deny-by-default for every other doc), so a cross-operator
+  // (crossroads plane · WHO · kapae-antigen board — deny-by-default for every other doc), so a cross-operator
   // peer reaches exactly the always-carried public/infra planes and nothing private. No hand-maintained
-  // allow-list; the private planes (@catalog/personal/@daemon/home/wikis) fall outside the set → DENY.
+  // allow-list; the private planes (catalog/personal/daemon/home/wikis) fall outside the set → DENY.
   selfSlotFedGate = new DeterministicFederationGate(vesselIdentity.verifyingKey);
 
   // ── The CARRIAGE serve-loop (Socket B, ciphertext) — INERT until a carriage-relay URL rides the config ──────
   // When configured, the vessel dials the carriage relay over an authenticated WS channel (proving `vesselSeed`)
-  // and serves members' want-blocks for sealed @cad bodies on a poll interval. The gate stays `serveCasWire`'s own
+  // and serves members' want-blocks for sealed cad bodies on a poll interval. The gate stays `serveCasWire`'s own
   // `carrierShareDecision` VERBATIM: a proven MEMBER over a provably-sealed plane carries the ciphertext; a
   // STRANGER / non-member / Kapae'd draws byte-identical Mu. Carry ⊥ read — the read-cap never rides this shore.
   // Socket B stays SEPARATE from the Automerge `/ws` relay (Socket A): cleartext CRDT never routes through here.
@@ -591,7 +591,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     : null;
 
   // ── The CARRIAGE relay (Socket B, ciphertext CROSSROADS) — INERT until a relay port rides the config ─────────
-  // A running crossroads a family's HEARTHS dial (`ws://<host>:<port>`) to carry sealed @cad bodies between each
+  // A running crossroads a family's HEARTHS dial (`ws://<host>:<port>`) to carry sealed cad bodies between each
   // other — the Herm's Lares-Viales role. The relay CARRIES opaque ciphertext envelopes, stamps each `from` with the
   // sender's PROVEN Ed25519 key, and holds the DHT-free bag-tracker HINT index — it reads NO plaintext, holds NO
   // read-cap / keyring / roster (carry ⊥ read ⊥ contract), so a compromised crossroads leaks nothing. Its gate seed
@@ -717,7 +717,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
   // The ONE residency collector + pool-wiring, composed through the SHARED factory (both vessels
   // call it). Node advertises the FULL grant (concurrent multi-wiki + rotatable pins besides
-  // @daemon) and supplies its vessel-specific hooks: it NARRATES a cool (browser stays silent),
+  // the daemon bag) and supplies its vessel-specific hooks: it NARRATES a cool (browser stays silent),
   // stamps the alert `kind`, and PARKS an undeliverable alert in the durable mailbox (a dropped
   // verb stays observable, never nowhere — the Akka /deadLetters lesson; browser has no mailbox,
   // so it warns + drops best-effort). getPool reads vmManager lazily (the forward-ref pattern);
@@ -745,16 +745,16 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
     // Genesis island (required) + the social-plane bootstrap it carries.
     loadGenesis: async () => {
-      // Slice 2: the @oracle is a LIVE CRDT under a DETERMINISTIC doc id — reload
+      // Slice 2: the oracle island is a LIVE CRDT under a DETERMINISTIC doc id — reload
       // it when persisted (operator writes intact), else MATERIALIZE it fresh from
       // the plain-data seed (island.genesis.json). No Automerge-binary boot seed,
-      // no merge-into-stale. The catalog @oracle pointer (written by assembleVessel)
+      // no merge-into-stale. The catalog registry's oracle pointer (written by assembleVessel)
       // serves as an advisory back-reference, not the identity mechanism.
       const islandHandle = await loadOrMaterializeOracle(repo, genesisDir);
 
-      // @lares + @lararium system-bag mint — operator(admin) office, node home
-      // only. Both pointers ride the @oracle system plane (the island doc);
-      // @oracle/@lararium/@lares stand as three separate docs. The corpus doc
+      // lares + lararium system-bag mint — operator(admin) office, node home
+      // only. Both pointers ride the oracle system plane (the island doc);
+      // oracle island, lararium bag and lares bag stand as three separate docs. The corpus doc
       // starts empty; LOAD/ingest fills it.
       mintLaresIfAbsent(repo, islandHandle);
       mintLarariumIfAbsent(repo, islandHandle);
@@ -823,11 +823,11 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       const circlesUrl    = readPlane(faceSiblings?.circles);
       const sessionsUrl   = readPlane(faceSiblings?.sessions);
       // ── THE PLACE STANDS ALONE; THE FACE RIDES OPTIONAL ────────────────────────────────────────
-      // Only @daemon reads required — a founding stands a PLACE first (`lares vessel found`) and a FACE
+      // Only the daemon doc reads required — a founding stands a PLACE first (`lares vessel found`) and a FACE
       // later (`lares persona new 0`), so a vessel that carries and serves while holding no persona names
       // none of the social planes here. Absence reads as the WAKING FLOOR.
       if (!daemonUrl) {
-        throw new Error(`[lararium] this vessel names no @daemon — the place never finished founding. Run \`lares vessel found\`.`);
+        throw new Error(`[lararium] this vessel names no daemon doc — the place never finished founding. Run \`lares vessel found\`.`);
       }
       // A TORN face refuses outright, mirroring `bootDaemonKeyhive`: some pins standing and others absent
       // names a half-finished founding, and guessing which half to trust is the confused-deputy error.
@@ -836,7 +836,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       if (faceHeld > 0 && faceHeld < faceParts.length) {
         throw new Error(
           `[lararium] the face this vessel carries reads TORN — some social planes stand and others do not.\n` +
-          `  missing: ${[!identitiesUrl && "@identities", !circlesUrl && "@circles", !sessionsUrl && "@sessions", !personaUrl && "the PersonaGroup plane", !personaBagId && "the PersonaGroup sentinel"].filter(Boolean).join(", ")}\n` +
+          `  missing: ${[!identitiesUrl && "the identities plane", !circlesUrl && "the circles plane", !sessionsUrl && "the sessions plane", !personaUrl && "the PersonaGroup plane", !personaBagId && "the PersonaGroup sentinel"].filter(Boolean).join(", ")}\n` +
           `  Re-light the face (\`lares persona new 0\`) rather than booting on half of one.`,
         );
       }
@@ -908,7 +908,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   };
 
   // Daemon VM — sovereign daemon island + the operator's authn/z home. `slot` ABSENT (herm) →
-  // registerBags omits the user-wiki bags (the decouple); the @daemon's OWN bag still mounts.
+  // registerBags omits the user-wiki bags (the decouple); the daemon's OWN bag still mounts.
   const openDaemon = async ({ assembly, slot }: { assembly: VesselCoreAssembly; slot?: VesselWikiSlot }): Promise<VesselDaemonVm> => {
     const daemonDoc = (await readDaemonDoc()).doc();
     const personaGroupDocIdHex   = tiddlerText(daemonDoc?.tiddlers?.[PERSONA_GROUP_DOC_ID_TIDDLER])   ?? undefined;
@@ -928,7 +928,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     const edgeRecord = daemonDoc?.tiddlers?.[DEVICE_DELEGATION_SELF_TIDDLER];
     const deviceEdge = edgeRecord?.tiddler as unknown as DeviceDelegationTiddler | undefined;
     // THE PERSONA-KEL PIN — the continuity anchor the Binding Gate walks. Read the pinned identifier PREFIX
-    // from @daemon (the pin's root of trust), then read its seq-sorted key-event-log from the per-Nexus KEL
+    // from the daemon bag (the pin's root of trust), then read its seq-sorted key-event-log from the per-Nexus KEL
     // board — this node's OWN gate key IS its Nexus key. The read runs against the LOCAL replica "as of last
     // sync" (no-global-now); FAIL-CLOSED — a missing prefix OR a chain the local replica does not carry HALTS
     // the boot (never a global lookup, never a fall-through to the raw signer pin).
@@ -946,18 +946,18 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         throw new Error(`[lararium] persona-KEL chain for the pinned identifier ${personaKelPrefix.slice(0, 20)}… absent from the local board replica — the Binding Gate cannot reach a head (fail-closed).`);
       }
     }
-    // Register the per-Nexus @crossroads into @oracle (isomorphic with the browser). The node IS the
+    // Register the per-Nexus crossroads plane into the oracle plane (isomorphic with the browser). The node IS the
     // confederation anchor, so its own gate key IS its Nexus key — the same key browsers pass as
-    // relayGatePubKey — so node + its browser leaves resolve the identical @crossroads. The @daemon core
-    // splices @crossroads into the recipe + registerBags for either vessel.
+    // relayGatePubKey — so node + its browser leaves resolve the identical crossroads doc. The daemon core
+    // splices the crossroads bag into the recipe + registerBags for either vessel.
     await registerCrossroadsInOracle(repo, assembly.islandHandle, vesselIdentity.verifyingKey);
-    // ── THE BOOTSTRAP SEEDS; @catalog REGISTERS ──────────────────────────────────────────────────
+    // ── THE BOOTSTRAP SEEDS; THE CATALOG PLANE REGISTERS ────────────────────────────────────────
     // A face is lit by `lares persona new 0` — a CLI act, on a vessel that is not running — so the plane it
     // stands lands in the BOOTSTRAP, which is this island's cold-start seed and reaches no registry. The
-    // verbs that read a persona plane resolve it the way every user bag resolves, from @catalog. This boot
+    // verbs that read a persona plane resolve it the way every user bag resolves, from the catalog registry. This boot
     // carries the seed across that gap.
     //
-    // ALL FOUR OF A FACE'S PLANES, not the persona plane alone: @circles, @identities and @sessions carry
+    // ALL FOUR OF A FACE'S PLANES, not the persona plane alone: the circles, identities and sessions planes carry
     // the same tag and answer the same ownership question, so one bridge serves the whole face and the four
     // cannot drift onto different registries.
     //
@@ -981,7 +981,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     }
     // M3 — node-main reads the persisted keyhive Archive from the identity home and passes it into the
     // worker (same custody boundary the 32-byte seed already crosses). keyhive inits from it as the
-    // restore FLOOR, then replays @daemon cap-events on top — a torn @daemon restores instead of orphaning.
+    // restore FLOOR, then replays daemon cap-events on top — a torn daemon doc restores instead of orphaning.
     // THE WAKING FLOOR (#60, superseding the boot-gate throw): when the config marks sealing expected and no
     // passphrase rides the environment, the archive stays SHUT and this daemon stands WITHOUT it. Throwing
     // here would have made the floor a lie — the boot announces that it stands faceless and carrying, then
@@ -1033,9 +1033,9 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       ...(pluginCids.length ? { pluginCids } : {}),
       grants: {
         islandUrl: assembly.islandHandle.url,
-        // The daemon island's OWN bag (@daemon = wikiBagUri("daemon"), one-recipe model).
+        // The daemon island's OWN bag (daemon = wikiBagUri("daemon"), one-recipe model).
         wikiUrl:   bootstrap.daemonUrl,
-        // ACCESS grant, not a LOAD slot — @catalog is absent from expandRecipe,
+        // ACCESS grant, not a LOAD slot — the catalog registry is absent from expandRecipe,
         // so the kernel never layers it; the worker reaches it via the accessor.
         catalogUrl: catalogHandle.url,
       },
@@ -1096,7 +1096,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
           return null;
         }
       },
-      // The dual recall fuse — the form-leg construction (markers→vector derive IN the @daemon VM, the
+      // The dual recall fuse — the form-leg construction (markers→vector derive IN the daemon VM, the
       // content-only degradation on fault) + the RRF fuse, verbatim. The markers derive round-trips the
       // warm worker (deriveSkeleton); VM cold/unavailable → resolves null → the markers leg fuses
       // content-only (graceful, no shadow derive). A form-holder rejection collapses to [] → fuse
@@ -1330,7 +1330,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       worldlineTrajectory: (input) => daemonVm.worldlineTrajectory(input),
       // ── the DURABLE sensorium-lifecycle executors ─────────────────────────────────────────────────
       // These route over manifest.json alone (no store holder, no captureFor) — the SAME pure verb
-      // functions the CLI-direct door drives, now reachable over the @daemon wire so the MCP surface
+      // functions the CLI-direct door drives, now reachable over the daemon wire so the MCP surface
       // mirrors the CLI three-way. The reversibility×trust seat rides guardHitl (the mesh grid): an
       // HITL verb (promote·retire·purge) REFUSES without an operator-approval capability — the surface
       // twin of the CLI's `--approve`, so an irreversible verb crosses the SAME gate on both surfaces.
@@ -1423,7 +1423,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     });
     registry.register("residency", makeResidencyStatsReactor({ residency }));
 
-    // nexus-refresh — the LIVE-refold of the three @nexus authorities the boot read once: the federation
+    // nexus-refresh — the LIVE-refold of the three nexus-doc authorities the boot read once: the federation
     // POSTURE (a disk-charter re-read → reassigns the sharePolicy's live `federationPosture`), the antigen
     // Kapae'd DENY set, and the contracted MEMBER set (both re-folded off freshly-materialized boards). The
     // shore an OUT-OF-PROCESS CLI edit (`lares nexus posture` / `kapae` / `admit`, each writing its own repo)
@@ -1458,7 +1458,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
     // nexus-reshare — the immune keel's RE-SHARE tooth: re-announce every sealed body this hearth HOLDS over the
     // carriage, so a relay that PRUNED this holder on a drop re-learns `cid → holder` FROM THE WIRE. The held set =
-    // the @cad ciphertext tier on disk (cid-named files); the announce carries a HINT (where to ask), never the
+    // the cad ciphertext tier on disk (cid-named files); the announce carries a HINT (where to ask), never the
     // bytes (a member re-verifies `verifyCiphertextCid`). The PUBLIC FLOOR re-announce rides the read-face's own Ea
     // breath (the signed monotone pointer re-issues each TTL/2), so a static floor never reads stale — no extra verb.
     registry.register("nexus-reshare", async () => {
@@ -1467,7 +1467,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       return { verb: "nexus-reshare", held: cids.length, announced, carriage: carriageLoop !== null };
     });
 
-    // cad-seal — the @cad seal's FIRST live producer. Seal a carrier body's PLAINTEXT into the ciphertext
+    // cad-seal — the cad seal's FIRST live producer. Seal a carrier body's PLAINTEXT into the ciphertext
     // federation plane (a distinct `cad/` tier), ADDITIVELY: the cleartext-local corpus CAS the wake reads stays
     // untouched. The body arrives as a staged `cid` (resolved cleartext from the corpus CAS) or inline `text`.
     // The seal registers the ciphertext docId into the live sealRegistry → the member blind-transit lane opens
@@ -1514,7 +1514,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       return { verb: "wiki-switch", slug, active, held: [...wikiActivation.held()] };
     });
     // wiki-hold / wiki-release — the ROTATABLE active-wiki pin (the switcher's pin
-    // control), budget-enforced by the cap (@daemon always + pinBudget rotatable).
+    // control), budget-enforced by the cap (the daemon bag always + pinBudget rotatable).
     // Distinct from the recipe-bag `pin-wiki`: this pins the wiki GRAIN in the collector.
     registry.register("wiki-hold", async (args) => {
       const slug = String(args["slug"] ?? "");
@@ -1601,7 +1601,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     const diskMirrorGrant: DiskMirrorGrant = [
       { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/lares"),    scope: "lares" },
       { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/lararium"), scope: "lararium" },
-      // @crossroads = the PUBLIC plane's seed/canon bag — it holds the moved public-domain
+      // crossroads = the PUBLIC plane's seed/canon bag — it holds the moved public-domain
       // library (raw .txt books + .mem memes with large source ahus). It projects to
       // bags/crossroads like the other seed bags. Safe to project ONLY with the skinny-handle
       // rule in place (T3): a book too big for the CRDT lands as a skinny handle, and the
@@ -1620,7 +1620,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       { bagId: "working",        mirrorRoot: join(workerRootDir, "wikis"),          scope: "working",  wikiSlot: "working" },
       // self-canon = the per-wiki CANON authority: a minted user wiki's own
       // @{slug} bag projects to bags/{slug} (both bagId and leaf fill from the
-      // slug at mount). System wikis (@lares/@lararium) carry literal grants
+      // slug at mount). System wikis (lares/lararium) carry literal grants
       // above, so resolveDiskMirrors skips this for them — no double-project.
       { bagId: "self",          mirrorRoot: join(workerRootDir, "bags"),           scope: "self",    perWikiSlug: true, selfCanon: true },
     ];
@@ -1685,8 +1685,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     );
 
     // Boot DEMOTED to a pin. The daemon island stays always-live on its own (never
-    // pooled, never collected — the "@daemon always there"). The home wiki (the ONE
-    // rotatable user pin BESIDES @daemon; a resource-rich node MAY hold up to
+    // pooled, never collected — the "daemon bag always there"). The home wiki (the ONE
+    // rotatable user pin BESIDES the daemon bag; a resource-rich node MAY hold up to
     // pinBudget more) registers in the ONE collector as a PINNED `wiki` grain —
     // exempt from collection. Everything else activates on reference through the cap.
     // mountPrimaryWiki already mounted + spec-retained it, so onHydrate → ensureWiki
@@ -1724,7 +1724,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const p = await prepareNodeBoot(opts);
   // A Lararium is a hearth that is ALSO a first-class mesh-node: when self-announce params are supplied,
   // it composes the carriage (meshpalace + carriage) ALONGSIDE the wiki-full core — it carries + navigates
-  // the FLOW-map for its own routing (carry-without-reserve; no second read-face, no @oracle conflict).
+  // the FLOW-map for its own routing (carry-without-reserve; no second read-face, no conflict over the oracle doc).
   const carriageCaps = opts.meshSelf ? carriageStack({
     repo:        p.repo,
     self:        opts.meshSelf,
@@ -1736,7 +1736,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── The WHO plane at the ANCHOR — resolve this island's own board; announce NOTHING ──
   // The identity twin of the browser leaf's whoFaceCap, the SAME cap composed by the SAME contract: the node
   // anchors the confederation, so its gate key scopes the board its leaves resolve, and both vessels layer the
-  // one @crossroads-advertised doc. The node already REGISTERS @crossroads into @oracle for its leaves to find;
+  // one crossroads-advertised doc. The node already REGISTERS the crossroads plane into the oracle plane for its leaves to find;
   // composing here makes it RESOLVE that board too, so a hearth RECOGNISES the peers it federates with instead
   // of carrying a WHO plane it can only advertise. Unconditional — an anchor always holds its own island key
   // (unlike a leaf, which needs a relay + gate before any board can sync).
@@ -1774,9 +1774,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 }
 
 /**
- * Open a node Herm (Lares Viales) — composeHerm's wiki-LESS #has-cap-stack: substrate + the @daemon
- * immune core + a writable @meshpalace FLOW-map + the read-face that serves it. No wiki, no pool. The
- * @daemon boots WITHOUT a user wiki (its own bag = bootstrap.daemonUrl); registerBags omits the
+ * Open a node Herm (Lares Viales) — composeHerm's wiki-LESS #has-cap-stack: substrate + the daemon
+ * immune core + a writable meshpalace FLOW-map + the read-face that serves it. No wiki, no pool. The
+ * The daemon boots WITHOUT a user wiki (its own bag = bootstrap.daemonUrl); registerBags omits the
  * absent wiki bags. Requires an HTTP server for the FLOW-map read-face.
  */
 export async function openNodeHerm(opts: NodeVesselOptions): Promise<NodeHermResult> {

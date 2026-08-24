@@ -30,7 +30,7 @@ module-type: startup
  *
  * The operator's vision: a future `lares` CLI read → TW5-filter-compute-on-temp-tids chain, the whole
  * stack lifting in-VM. The clean alignment with THIS module: instead of the JS reads below, write the
- * edge-DAG + the captured turns as TEMP TIDDLERS into the @daemon wikistore (titles like
+ * edge-DAG + the captured turns as TEMP TIDDLERS into the daemon wikistore (titles like
  * `$:/temp/worldline/edge/<n>` and `$:/temp/worldline/turn/<sha>`), then compute compare/trajectory
  * with TW5 filter language over them — so a CLI read could land rows as temp tids and a filter
  * pipeline could chain straight on. Why FLAGGED, not built here: the ITC partial-order (compare) and

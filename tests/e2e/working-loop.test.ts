@@ -62,10 +62,10 @@ describe("working→canon live loop (island-local, --in-wiki)", () => {
     expect(existsSync(join(lar.root, "bags/lares", REL)), "carrier reached canon without promotion").toBe(false);
   }, 90_000);
 
-  test("W2 — MOVE working→@lares --in-wiki (promotion) publishes to bags/lares + retracts wikis/", async () => {
+  test("W2 — MOVE working→lares canon --in-wiki (promotion) publishes to bags/lares + retracts wikis/", async () => {
     if (lar.mode !== "staged") return;
     const r = await lar.cli(["act", "MOVE", "--title", BOOT_URI, "--from", WORKING, "--to", LARES, "--in-wiki", "--yes", "--json"]);
-    expect(r.json?.["ok"], `MOVE working→@lares --in-wiki failed: ${JSON.stringify(r.json)}`).toBe(true);
+    expect(r.json?.["ok"], `MOVE working→lares canon --in-wiki failed: ${JSON.stringify(r.json)}`).toBe(true);
     expect(await awaitCarrier(join(lar.root, "bags/lares"), true), "carrier did not publish to bags/lares (canon)").toBe(true);
     expect(await awaitCarrier(join(lar.root, "wikis"), false), "carrier still sits in wikis/ after promotion").toBe(true);
   }, 90_000);

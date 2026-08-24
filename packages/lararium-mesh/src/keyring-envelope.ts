@@ -2,7 +2,7 @@
  * keyring-envelope — STAGE 2 (A1-①): deliver the per-Nexus convergence keyring to a newly-admitted device via a
  * SEALED ENVELOPE, reusing the persona-admit ceremony's sealed-box shape (NOT BeeKEM — ruling A1-①=sealed-envelope).
  *
- * THE READ-KEY RIDES THE PRIVATE LANE, NEVER THE RELAY. The @cad seal producer message-locks a carrier body's
+ * THE READ-KEY RIDES THE PRIVATE LANE, NEVER THE RELAY. The cad seal producer message-locks a carrier body's
  * ciphertext to the per-Nexus convergence secret; a member needs that `{epoch → secret}` keyring to READ a sealed
  * body it blind-transits. This envelope hands the keyring to a joinee at admission: an X25519 static-recipient
  * sealed box (an ephemeral sender ECDH → HKDF-SHA256 → XChaCha20-Poly1305 AEAD, the SAME construction the

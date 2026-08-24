@@ -6,7 +6,7 @@
  * near byte-identical in open-node-vessel.ts and open-browser-vessel.ts:
  *
  *   A. the BagStowage construction (onHydrate → ensureWiki; onEvict → unmountWiki),
- *   B. resolveWikiSpec (the UNKNOWN-grain branch: read a wiki's canon-doc off @catalog),
+ *   B. resolveWikiSpec (the UNKNOWN-grain branch: read a wiki's canon-doc off the catalog registry),
  *   C. makeWikiActivationCap (activation-on-reference, the vessel's grant point),
  *   D. the sovereign-worker residency binding (daemon onEvictRequest / onResidencyOp),
  *   E. wiki-alert delivery (the single-flight ensureActive → placeWikiVerb orchestration).
@@ -75,7 +75,7 @@ export interface VesselResidencyHooks {
 export interface VesselResidencyConfig {
   /** Concurrent live-wiki cap — the collector's `wiki` typeCap (node 4, browser 2). */
   wikiActivationCap: number;
-  /** Rotatable wiki-pin budget BESIDES @daemon (node 3, browser 1). */
+  /** Rotatable wiki-pin budget BESIDES the daemon bag (node 3, browser 1). */
   wikiPinBudget: number;
   /** Bag hot-cap override (default DEFAULT_HOT_CAP). */
   hotCap?: number;
@@ -98,7 +98,7 @@ export interface WireToPoolArgs {
   coreHash: string;
   /** The oracle island doc url (genesis assembly). */
   islandUrl: string;
-  /** The @catalog handle — resolveWikiSpec reads a wiki's canon-doc url off it. */
+  /** The catalog handle — resolveWikiSpec reads a wiki's canon-doc url off it. */
   catalogHandle: DocHandle<LarDoc>;
 }
 

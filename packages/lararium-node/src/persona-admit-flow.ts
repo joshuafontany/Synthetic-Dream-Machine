@@ -39,7 +39,7 @@ import { qrCarriageToTerminalResilient } from "./qr-transport.js";
 
 /**
  * The per-Nexus convergence keyring rides the SAME grant hop as the persona grant, under its OWN `&keyring=`
- * fragment on the grant carriage — the grant proves the delegation, the keyring hands the joinee the @cad READ-key.
+ * fragment on the grant carriage — the grant proves the delegation, the keyring hands the joinee the cad READ-key.
  * Both seal to the SAME recipient (the offer's ephemeral X25519 key B keeps on-device), domain-separated by their
  * HKDF `info`s (grant-seal vs keyring-envelope), so one carriage delivers BOTH with no second keypair minted. The
  * mesh grant parser already tolerates an `&`-joined fragment (`#grant=…&keyring=…`), so the grant carriage stays
@@ -189,7 +189,7 @@ export async function grantAdmitFlow(args: {
 }): Promise<({ sealed: SealedGrant; keyringDelivered: boolean } & HopRender) | { error: string }> {
   const offer = parseEnrollmentCarriage(args.offerCarriage);
   if (!offer) return { error: "not a valid enrollment offer carriage — the QR did not arrive" };
-  // Seal the founder's @cad read-key FIRST — the recipient is the offer's ephemeral pubkey (the same key B keeps
+  // Seal the founder's cad read-key FIRST — the recipient is the offer's ephemeral pubkey (the same key B keeps
   // on-device for the grant), so no second keypair mints. Its digest rides the signed transcript BELOW, so the
   // persona signature COMMITS to the exact keyring token; a founder holding no keyring delivers none (carry-only).
   const keyring = sealFounderKeyringCarriage(offer.ephemeralPubkey, args.founderKeyringDir);
@@ -241,7 +241,7 @@ export async function openAdmitFlow(args: {
     if (!verdict.ok) { lastReason = verdict.reason; continue; }
     // A matching enrollment: consume its secret (never re-usable) + record the join into the local view.
     takeEnrollmentSecret(ephemeralPubkey, args.dir);
-    // ADOPT the founder's @cad keyring riding this SAME grant carriage — but ONLY when the now-VERIFIED transcript
+    // ADOPT the founder's cad keyring riding this SAME grant carriage — but ONLY when the now-VERIFIED transcript
     // committed a digest that the arriving token matches (a substituted / stripped / unbound fragment installs
     // nothing). Opened with the SAME ephemeral secret that opened the grant, installed authoritatively (the
     // founder's secret supersedes the joinee's self-minted phantom). No bound keyring → carry-only (keyringEpochs 0).

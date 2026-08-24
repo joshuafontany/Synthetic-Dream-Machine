@@ -191,7 +191,7 @@ describe("wiki-sense supervision reads — node tier", () => {
       expect(supervisor.proofFederate(ISLAND_A)).toEqual({
         status:   "operator-gated",
         awaits:   "shore-Act",
-        crossing: "proof-hold(local @daemon ledger) -> proof-federate(disclosure shore)",
+        crossing: "proof-hold(local daemon ledger) -> proof-federate(disclosure shore)",
         island:   ISLAND_A,
       });
     } finally {

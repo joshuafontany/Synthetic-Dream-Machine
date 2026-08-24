@@ -10,7 +10,7 @@
  * to the palace; browser: an idb/relay engine), so this cap imports no substrate and the same
  * `#has capture` stacks on any vessel.
  *
- * IDEMPOTENT PRESENCE: every @daemon carries this cap. When no engine factory is wired (no sink),
+ * IDEMPOTENT PRESENCE: every daemon carries this cap. When no engine factory is wired (no sink),
  * the cap is INERT — it composes, but its onEa is a no-op and it claims no turns (honestly
  * unhandled, never a silent drop). A vessel that wires the engine (a sink) + a producer that sends
  * the feed activate it; both may be unwired, and that is a valid resting state, not an error.

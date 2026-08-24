@@ -9,7 +9,7 @@
  *
  * THE LAWS, and the guard each one gets below:
  *   ① RANDOMIZED, on purpose — a fresh ephemeral and a fresh AEAD nonce every call (semantic security). This is the
- *     half of the deterministic/randomized pair that had no guard; `ciphertext-cas.test.ts` already holds the @cad
+ *     half of the deterministic/randomized pair that had no guard; `ciphertext-cas.test.ts` already holds the cad
  *     seal's DETERMINISM. The two must never fuse behind one flag, so both ends now have a witness.
  *   ② The HKDF `info` carries the protocol domain and NEVER defaults — it alone keeps a grant-seal key and a
  *     keyring-seal key from deriving identically out of one ECDH between the same device pair at admission.
@@ -50,7 +50,7 @@ function recipient(): { secret: Uint8Array; pub: Uint8Array } {
   return { secret, pub: x25519.getPublicKey(secret) };
 }
 
-describe("① RANDOMIZED on purpose — the half of the seal pair that @cad is NOT", () => {
+describe("① RANDOMIZED on purpose — the half of the seal pair that the cad seal is NOT", () => {
   test("two seals of the SAME plaintext to the SAME recipient under the SAME info differ in EVERY field", () => {
     const r = recipient();
     const one = sealToRecipient({ recipientPub: r.pub, plaintext: PLAINTEXT, info: INFO_A });

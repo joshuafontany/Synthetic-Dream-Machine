@@ -37,7 +37,7 @@ export function spiritStageBasename(name: string, agentId: string, runId: string
 }
 
 /**
- * The `source_file` a spirit turn rides through the @daemon `capture` verb under. Two channels
+ * The `source_file` a spirit turn rides through the daemon `capture` verb under. Two channels
  * fuse in one string: a `<wing>/` PREFIX (the routing — `spiritsWing(wing)`, decoded to
  * `metadata.wing` at the node flush) and the `spiritStageBasename` (the provenance —
  * buildPatch reads `lar_surface` / `lar_agent` / `lar_sidechain` / `lar_agent_handle` off it,

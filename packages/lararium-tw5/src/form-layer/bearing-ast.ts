@@ -20,9 +20,9 @@
  *    non-3-term root grades DOWN, it never throws.
  *
  * PURE + ISOMORPHIC: string in, AST out — no fs/path/DOM/node imports, no store.
- * It runs in node, the browser, and the @daemon sovereign-island TW5 worker VM
+ * It runs in node, the browser, and the daemon sovereign-island TW5 worker VM
  * alike (the same guarantee constructicon-basis + move-skeleton carry). The
- * @daemon VM is where the form-capture runs; this parser rides inside it.
+ * daemon VM is where the form-capture runs; this parser rides inside it.
  *
  * The 5 URI chunks (noosphere-boot#lar-uri):
  *   scheme · authority(session-only: alias:grant@host) · root(w1.w2.w3) ·

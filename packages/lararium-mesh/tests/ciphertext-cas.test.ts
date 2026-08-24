@@ -1,5 +1,5 @@
 /**
- * ciphertext-cas.test.ts — the @cad ENCRYPT-ON-CAS primitive (fork-② = A, per-Nexus convergence secret).
+ * ciphertext-cas.test.ts — the cad ENCRYPT-ON-CAS primitive (fork-② = A, per-Nexus convergence secret).
  *
  * Proves the load-bearing crypto invariants, secret-free where the relay stands:
  *   · cid = BLAKE3(ciphertext), algorithm-tagged (fork-①) — round-trips through parseDigest,
@@ -17,7 +17,7 @@ import {
 
 const secretA = new Uint8Array(randomBytes(CONVERGENCE_SECRET_LEN));
 const secretB = new Uint8Array(randomBytes(CONVERGENCE_SECRET_LEN));
-const body = new TextEncoder().encode("the Twain body that leaves the CRDT — a @cad ciphertext shard");
+const body = new TextEncoder().encode("the Twain body that leaves the CRDT — a cad ciphertext shard");
 
 describe("cid = BLAKE3(ciphertext) — the self-proving verify-cap", () => {
   test("the cid is a canonical blake3: multihash (fork-①, migration in-band)", () => {

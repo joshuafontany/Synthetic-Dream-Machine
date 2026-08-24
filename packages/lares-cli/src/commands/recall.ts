@@ -1,5 +1,5 @@
 /**
- * `lares sense recall` — read the verbatim PLACE memory (mempalace) THROUGH the @daemon
+ * `lares sense recall` — read the verbatim PLACE memory (mempalace) THROUGH the daemon
  * seat (Option D, the read shore).
  *
  * The CLI never touches mempalace directly: it submits a `recall` verb-summons to

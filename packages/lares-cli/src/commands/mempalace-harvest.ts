@@ -9,7 +9,7 @@
  *     mempalace --palace <guest> mine <stage>/<wing> --mode convos --wing <wing>
  *
  * and NOTHING else — no `--source lares` (the adapter that declares the twenty `lar_*` fields), no
- * @daemon capture verb, no worldline observer, no telemetry writeback.
+ * daemon capture verb, no worldline observer, no telemetry writeback.
  *
  * A THIN coordinator: the discovery, staging, and vanilla mine all live in PYTHON
  * (`packages/lararium-sensorium/scripts/guest_harvest.py`, discovery via the shared

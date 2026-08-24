@@ -1,5 +1,5 @@
 /**
- * circle-verbs — the FOLLOW-GRAPH lands in @circles as a PER-NYM CRDT-set, reads back, and NEVER touches a board.
+ * circle-verbs — the FOLLOW-GRAPH lands in the circles doc as a PER-NYM CRDT-set, reads back, and NEVER touches a board.
  *
  * These hold the source-of-truth move (Build 2a's local file → the sovereign circles doc) + the C2 CRDT move
  * (the space-joined `memberDids` register → per-nym `mbr+:`/`mbr-:` stamps):
@@ -7,9 +7,9 @@
  *   · a circle-list FOLDS that membership back (add-stamp present, no superseding remove-stamp).
  *   · an unfollow stamps `mbr-:<nym>` (remove-wins, idempotent) — a legacy `memberDids` folds in as a baseline.
  *   · CONCURRENT-MERGE: an add on one fork + a remove on another merge to remove-wins with NO lost add.
- *   · NEVER-FEDERATES: the reactor reaches ONLY the circles store — no @crossroads / board title is ever
+ *   · NEVER-FEDERATES: the reactor reaches ONLY the circles store — no crossroads-plane / board title is ever
  *     written, and every outcome reads `federated: false`.
- *   · the @daemon follow surface renders FROM @circles (the worker owns the render).
+ *   · the daemon follow surface renders FROM the circles doc (the worker owns the render).
  */
 
 import { describe, expect, test } from "vitest";
@@ -48,7 +48,7 @@ function stampFieldsOf(store: MemoryTiddlerStore, circle: string): Record<string
   return (rec?.tiddler ?? {}) as Record<string, unknown>;
 }
 
-describe("circle-verbs — the per-nym follow-graph over @circles", () => {
+describe("circle-verbs — the per-nym follow-graph over the circles doc", () => {
   test("circle-add STAMPS the nym's own mbr+ key (never a whole-field register)", async () => {
     const store = seededCircles();
     const { add } = reactorsOver(store);
@@ -65,7 +65,7 @@ describe("circle-verbs — the per-nym follow-graph over @circles", () => {
     expect(membersOf(store, "following")).toEqual([NYM_A]);
   });
 
-  test("circle-list FOLDS the membership back from @circles", async () => {
+  test("circle-list FOLDS the membership back from the circles doc", async () => {
     const store = seededCircles();
     const { add, list } = reactorsOver(store);
     await add({ circle: "following", nym: NYM_B }, CTX);
@@ -170,7 +170,7 @@ describe("circle-verbs — the per-nym follow-graph over @circles", () => {
     expect(membersOf(store, "close-friends")).toEqual([NYM_A]);
   });
 
-  test("NEVER-FEDERATES: a follow writes ONLY @circles — no @crossroads / board title", async () => {
+  test("NEVER-FEDERATES: a follow writes ONLY the circles doc — no crossroads plane / board title", async () => {
     const store = seededCircles();
     const { add, remove } = reactorsOver(store);
     await add({ circle: "following", nym: NYM_A }, CTX);
@@ -186,7 +186,7 @@ describe("circle-verbs — the per-nym follow-graph over @circles", () => {
     }
   });
 
-  test("the @daemon follow surface renders FROM @circles (worker owns the render)", async () => {
+  test("the daemon follow surface renders FROM the circles doc (worker owns the render)", async () => {
     const store = seededCircles();
     const rendered: Array<Record<string, string>> = [];
     const fakeTw5 = { setTiddler: (f: Record<string, string>) => { rendered.push(f); } } as unknown as TW5Engine;

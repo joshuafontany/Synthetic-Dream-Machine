@@ -16,7 +16,7 @@
  * NOTE on the live daemon: a running write-daemon started under a NON-canonical
  * spelling will not be matched by the canonical one — canonicalizing while it is
  * live would spawn a SECOND daemon. The canonical spelling therefore takes effect
- * on the NEXT @daemon restart; never start a competing daemon against a running one.
+ * on the NEXT daemon restart; never start a competing daemon against a running one.
  *
  * Meme: lar:///ha.ka.ba/lararium/mempalace/palace-path
  */

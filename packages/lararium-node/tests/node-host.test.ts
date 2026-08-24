@@ -23,14 +23,14 @@ import {
 // ---------------------------------------------------------------------------
 
 describe("resolveLarUri — canonical URI topology", () => {
-  test("AGENTS root stays virtual until expressed under @lares", () => {
+  test("AGENTS root stays virtual until expressed under the lares bag", () => {
     const r = resolveLarUri("lar:///AGENTS");
     expect(r.kind).toBe("caps-virtual");
     expect(r.virtual).toBe(true);
     expect(r.root).toBe("AGENTS");
   });
 
-  test("LARES root stays virtual until expressed under @lares", () => {
+  test("LARES root stays virtual until expressed under the lares bag", () => {
     const r = resolveLarUri("lar:///LARES");
     expect(r.kind).toBe("caps-virtual");
     expect(r.virtual).toBe(true);

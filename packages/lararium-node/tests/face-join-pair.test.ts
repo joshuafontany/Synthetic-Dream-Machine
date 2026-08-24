@@ -81,7 +81,7 @@ describe("face-join — the granting half, proven end to end", () => {
 
     // THE ONGOING FLOW, stood in by hand. A grant seats the joinee in the GROUP; a bag delegated to that group
     // afterward rides its own events, and in a live vessel those reach the joinee the way every other cap-event
-    // does — the founder's event store flushes into @daemon, @daemon fleet-syncs same-operator, and the
+    // does — the founder's event store flushes into the daemon doc, the daemon doc fleet-syncs same-operator, and the
     // joinee's `hydrateFromEventStore` ingests them on its next wake. This pair holds a noop store, so the
     // sync gets enacted here rather than assumed.
     await joinee.ingestPeerEvents(await founder.eventsForPeer(joineeAgentIdHex));
@@ -252,7 +252,7 @@ describe("face-join — the granting half, proven end to end", () => {
     const first = await runFaceJoin(founder, summons, ctx);
     expect(first.ok && first.grant.reKeyed).toBe(true);
 
-    // The page reloaded, or the summons replayed off @daemon. The seat stands; nothing re-keys.
+    // The page reloaded, or the summons replayed off the daemon doc. The seat stands; nothing re-keys.
     const again = await runFaceJoin(founder, summons, ctx);
     expect(again.ok).toBe(true);
     if (!again.ok) return;
@@ -262,7 +262,7 @@ describe("face-join — the granting half, proven end to end", () => {
 });
 
 describe("the hearth's door — kept where a joinee always reads it", () => {
-  test("an applied admit lands the door on the joinee's OWN @daemon, and returns it", async () => {
+  test("an applied admit lands the door on the joinee's OWN daemon doc, and returns it", async () => {
     const { Repo } = await import("@automerge/automerge-repo");
     const { runApplyAdmitPayload } = await import("@lararium/keyhive");
     const { HEARTH_DAEMON_URL_TIDDLER } = await import("@lararium/mesh");
@@ -297,7 +297,7 @@ describe("the hearth's door — kept where a joinee always reads it", () => {
     // The RESULT carries it into this boot's bootstrap …
     expect(applied.hearthDaemonUrl).toBe(HEARTH_DOOR);
 
-    // … and the joinee's OWN @daemon keeps it for every boot after, the payload long since spent.
+    // … and the joinee's OWN daemon doc keeps it for every boot after, the payload long since spent.
     const { DocHandle } = await import("@automerge/automerge-repo");
     void DocHandle;
     const daemon = await repo.find(applied.daemonUrl as never);

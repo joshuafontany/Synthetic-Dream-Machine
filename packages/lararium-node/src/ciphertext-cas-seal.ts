@@ -1,7 +1,7 @@
 /**
  * ciphertext-cas-seal — the ENCRYPT-ON-CAS INSTALLER (the node side-effect that lights the member lane).
  *
- * The one call that seals a body @cad: it message-locks the plaintext to the per-Nexus secret, content-addresses
+ * The one call that seals a body into the cad store: it message-locks the plaintext to the per-Nexus secret, content-addresses
  * the ciphertext (`cid = BLAKE3(ciphertext)`), writes the ciphertext into the fs `cid/` CAS tier, and — AS A
  * SIDE-EFFECT — registers the body's docId into the live `SealedPlaneRegistry`. That side-effect IS the
  * seal-producer: a docId reaches the sealed set ONLY through a successful encrypt+CAS-write, so a cleartext body
@@ -27,7 +27,7 @@ import { writeCasEntriesFs } from "./node-cas.js";
 import type { SealedPlaneRegistry } from "./plane-seal.js";
 import type { NexusEpochSecret } from "./nexus-convergence-keyring.js";
 
-/** The outcome of sealing one body @cad — the public verify-cap (cid + docId + epoch) and the caller-kept read-cap. */
+/** The outcome of sealing one body into the cad store — the public verify-cap (cid + docId + epoch) and the caller-kept read-cap. */
 export interface InstalledSealedBody {
   /** `blake3:<hex>` — the ciphertext content-address a relay recomputes secret-free (verify-cap). */
   readonly cid: string;
@@ -53,7 +53,7 @@ export function docIdForCiphertextCid(cid: string): DocumentId {
 }
 
 /**
- * Seal a body @cad and REGISTER it — the load-bearing side-effect. Order is the discipline: seal (encrypt +
+ * Seal a body into the cad store and REGISTER it — the load-bearing side-effect. Order is the discipline: seal (encrypt +
  * content-address) → write the ciphertext to CAS → register the docId. A refusal (no secret, wrong-width secret)
  * throws BEFORE any registration, so a body never half-lands sealed.
  *

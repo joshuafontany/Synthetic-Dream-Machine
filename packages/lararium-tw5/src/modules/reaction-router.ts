@@ -91,7 +91,7 @@ interface Reaction {
  *   1. ReactionGraph bindings (papalohe wires) where fromUri === uri
  *   2. Tiddler `verb` field — fires verb dispatch ONLY when the tiddler ALSO carries a
  *      truthy `lares-dispatch` marker (a genuine DOM summon). The verb machinery's own
- *      lar:-titled writes (invocations `…/verbs/<id>`, outcomes `@daemon/outcomes/<id>`)
+ *      lar:-titled writes (invocations `…/verbs/<id>`, outcomes `bags/daemon/outcomes/<id>`)
  *      carry a `verb` field but NEVER the marker, so they stay router-inert and no
  *      dispatch loop forms (#48). `listenable` field names the Verse event; defaults to
  *      the verb name. The summon's per-invocation args ride `arg-<name>` fields; they are

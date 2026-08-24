@@ -7,7 +7,7 @@
  * LOAD lands record-grain content in the lares doc:
  *
  *   V1 — the doc holds record-grain (parent + ahu children) — LAWFUL
- *   V2 — the @lares disk mirror materializes some projection at all
+ *   V2 — the lares-bag disk mirror materializes some projection at all
  *   V3 — NO fragment files: no `#`-grain filename ever reaches disk
  *   V4 — the projected carrier round-trips content-whole; iam framing
  *        normalizes once (canonical-form law)
@@ -49,7 +49,7 @@ function walkFiles(dir: string): string[] {
   return out;
 }
 
-/** Poll the staged root's @lares mirror surface until files appear (or timeout). */
+/** Poll the staged root's lares-bag mirror surface until files appear (or timeout). */
 async function awaitMirrorFiles(root: string, timeoutMs = 30_000): Promise<string[]> {
   const mirrorRoot = join(root, "bags/lares");
   const start = Date.now();
@@ -74,7 +74,7 @@ describe("carrier-whole at rest — the kupono vectors", () => {
     expect(loadOk).toBe(true);               // 18 records asserted in smoke; here: the LOAD landed
   });
 
-  test("V2 — the @lares mirror materializes a disk projection after LOAD", async () => {
+  test("V2 — the lares-bag mirror materializes a disk projection after LOAD", async () => {
     if (lar.mode !== "staged") return;
     const files = await awaitMirrorFiles(lar.root);
     expect(files.length).toBeGreaterThan(0);

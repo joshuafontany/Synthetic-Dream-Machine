@@ -105,7 +105,7 @@ export class IslandAdaptor implements MemeProjection {
    * The cascade lives as a tiddler in the wiki — operator-configurable at
    * runtime. Per-wiki overlays compose naturally via the recipe cascade
    * (a `lar:///ha.ka.ba/lararium/config/bag-paths` overlaid in @<wikiSlug> wins over the
-   * default in @lararium).
+   * default in the lararium bag).
    */
   private _routeBag(title: string): SlotUri | null {
     const wiki = this.tw5.$tw.wiki;

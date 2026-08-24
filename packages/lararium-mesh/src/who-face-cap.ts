@@ -1,9 +1,9 @@
 /**
  * who-face-cap — the isomorphic vessel cap that wires the WHO plane (identity federation).
  *
- * The identity sibling of meshPalaceCap: where the carriage cap wires the @meshpalace FLOW-map (WHERE to
+ * The identity sibling of meshPalaceCap: where the carriage cap wires the meshpalace FLOW-map (WHERE to
  * dial), this wires the per-Nexus WHO board (WHO a veiled-user is) — the two-key atom's two planes, two caps.
- * A vessel composing this cap resolves its Nexus's WHO board through @crossroads (the public plane),
+ * A vessel composing this cap resolves its Nexus's WHO board through crossroads (the public plane),
  * layers the board WRITABLE so the relay syncs it, and NEVER announces a face of its own. Pulling
  * peers' cards into a HandleBook rides the returned component's `ingest`.
  *
@@ -44,7 +44,7 @@ export interface WhoFaceComponent {
 }
 
 /**
- * whoFaceCap — resolve the Nexus's WHO board through @crossroads, layer it writable (so the relay syncs it),
+ * whoFaceCap — resolve the Nexus's WHO board through the crossroads plane, layer it writable (so the relay syncs it),
  * and expose `ingest` (recognition) + `announce` (disclosure). It takes NO card and publishes NOTHING:
  * composing a cap is binding, and binding never announces. `crossroadsHandle` is the resolved public plane;
  * `nexusPubkey` scopes the board to one causal island.

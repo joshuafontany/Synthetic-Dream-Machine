@@ -10,7 +10,7 @@
  * on the sync wire). So NO private plane is provably sealed, and the correct floor is DENY-CARRY of every
  * plane: the member blind-transit lane stands ready but stays INERT until a sealed plane type lands.
  *
- * WHEN a sealed plane type stands — the `@cad` ciphertext-addressed CAS (`cid = BLAKE3(ciphertext)`, verify-
+ * WHEN a sealed plane type stands — the `cad` ciphertext-addressed CAS (`cid = BLAKE3(ciphertext)`, verify-
  * cap ⊥ read-cap) or BeeKEM-on-the-sync-wire — register its docIds here (a set / a predicate over the doc's
  * seal marker), and the carry-split blind-transits exactly those. The gate and its fail-closed discipline
  * stay put; only the oracle's affirmative set grows.
@@ -32,7 +32,7 @@ export const DENY_ALL_PLANE_SEAL: PlaneSeal = {
 };
 
 /**
- * Build a plane-seal oracle over an EXPLICIT sealed-plane doc-id set — the shape a future `@cad` / BeeKEM-
+ * Build a plane-seal oracle over an EXPLICIT sealed-plane doc-id set — the shape a future `cad` / BeeKEM-
  * on-wire plane registers through. Fail-closed by construction: a docId absent from the set reads unsealed
  * (deny-carry). An empty set is exactly `DENY_ALL_PLANE_SEAL`.
  */

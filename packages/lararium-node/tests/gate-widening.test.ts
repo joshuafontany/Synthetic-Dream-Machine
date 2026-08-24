@@ -76,7 +76,7 @@ describe("END-TO-END — the classified cross-operator reaches the federatable s
   test("the WHO board crosses", async () => { expect(await share(WHO_BOARD)).toBe(true); });
   test("the kapae-antigen board crosses (MANDATORY immune carriage)", async () => { expect(await share(ANTIGEN)).toBe(true); });
 
-  test("a catalog-like PRIVATE plane is DENIED — the widening grants NOTHING beyond readcrossroads", async () => {
+  test("a catalog-like PRIVATE plane is DENIED — the widening grants NOTHING beyond read@crossroads", async () => {
     expect(await share(CATALOG_LIKE)).toBe(false);
   });
   test("a personal-like PRIVATE plane is DENIED", async () => { expect(await share(PERSONAL_LIKE)).toBe(false); });
@@ -84,7 +84,7 @@ describe("END-TO-END — the classified cross-operator reaches the federatable s
 });
 
 describe("no-same-operator-regression — a SAME-OPERATOR peer keeps FULL device sync", () => {
-  // The classifier is only reached AFTER admindaemon fails + no valid edge, so a same-operator admit never
+  // The classifier is only reached AFTER admin@daemon fails + no valid edge, so a same-operator admit never
   // routes through it. Proven structurally here: the live self-slot decision full-syncs a same-operator peer.
   const same = (documentId: DocumentId) => selfSlotShareDecision({
     hasWsSocket: true, peerClass: "same-operator", selfSlotFedGate: fedGate, antigenRing: null,

@@ -1,5 +1,5 @@
 /**
- * cas-test-setup — the CAS-plane test spine: the CID-plane full-boot setup AND the @cad
+ * cas-test-setup — the CAS-plane test spine: the CID-plane full-boot setup AND the cad
  * carriage-wire gate stubs the wire/relay tests all carry.
  *
  * Two faces, one plane:
@@ -8,10 +8,10 @@
  *     files (genesis/cas/<cid>, indexed by island.manifest.json) into a temp fs CAS, gives the
  *     pool a storageRoot (each island's nodefs storage a child of it, deriving `<storageRoot>/cas`),
  *     and passes the plugin CIDs (from the genesis doc's blob METADATA) — the loader-path proof
- *     without the live @daemon.
- *   · membershipOf · antigenOf · sealABody — the @cad wire fixtures the carriage/relay/cas-wire
+ *     without the live daemon.
+ *   · membershipOf · antigenOf · sealABody — the cad wire fixtures the carriage/relay/cas-wire
  *     tests share: the two gate-input stubs (membership fold · antigen fold) and the one-shot
- *     seal-a-body-into-a-temp-@cad-dir fixture. One definition, imported everywhere — a copy in
+ *     seal-a-body-into-a-temp-cad-dir fixture. One definition, imported everywhere — a copy in
  *     each test file drifts under revert-verify (a stub that quietly diverges certifies nothing).
  */
 
@@ -53,7 +53,7 @@ export function setupCasFromGenesis(genesisDoc: LarDoc, genesisDir?: string): Ca
   };
 }
 
-// ── @cad carriage-wire fixtures — the gate stubs + seal fixture the wire/relay tests share ──────
+// ── cad carriage-wire fixtures — the gate stubs + seal fixture the wire/relay tests share ──────
 
 /**
  * Recover a Uint8Array a want-block/answer carried as JSON over the socket — the auth relay JSON-round-trips
@@ -75,7 +75,7 @@ export const antigenOf = (kapaed: Iterable<string>): AntigenRing => {
   return { kapaed: set, presenterNym: (peerId) => peerId };
 };
 
-/** The one-shot @cad seal fixture — the sealed body every wire test carries. */
+/** The one-shot cad seal fixture — the sealed body every wire test carries. */
 export interface SealedBodyFixture {
   readonly registry:  ReturnType<typeof makeSealedPlaneRegistry>;
   readonly cadDir:    string;
@@ -84,7 +84,7 @@ export interface SealedBodyFixture {
 }
 
 /**
- * Seal one `plaintext` into a temp @cad dir under a fresh per-Nexus keyring (sealEpoch 0) —
+ * Seal one `plaintext` into a temp cad dir under a fresh per-Nexus keyring (sealEpoch 0) —
  * the registry + cadDir + InstalledSealedBody a wire test serves, plus the temp-dir cleanup.
  */
 export function sealABody(plaintext: Uint8Array): SealedBodyFixture {

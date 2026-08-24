@@ -1,9 +1,9 @@
 /**
- * who-face — resolve the per-Nexus WHO board through the @crossroads public plane, then announce onto it.
+ * who-face — resolve the per-Nexus WHO board through the crossroads public plane, then announce onto it.
  *
- * This is the wiring glue between three pieces already built: the @crossroads public oracle plane (the
+ * This is the wiring glue between three pieces already built: the crossroads public oracle plane (the
  * pointer home, lar-uris), the satellite-pointer protocol (resolveOracleDoc, base-doc), and the card↔doc
- * bridge (handle-announce). A @crossroads tiddler at the nexusHandlesUri key holds the WHO board's automerge:
+ * bridge (handle-announce). A crossroads-plane tiddler at the nexusHandlesUri key holds the WHO board's automerge:
  * URL; a vessel resolves that pointer (open-or-mint, write-back on first mint) and gets the shared board a
  * stranger can reach without standing in any operator's grant graph.
  *
@@ -26,7 +26,7 @@ import { crossroadsDocUrl, materializeSharedLarDoc } from "./deterministic-doc.j
 import type { HandleCard } from "./handle-card.js";
 
 /**
- * Resolve the per-Nexus WHO board through @crossroads — open the board the pointer names, or mint a blank one
+ * Resolve the per-Nexus WHO board through the crossroads plane — open the board the pointer names, or mint a blank one
  * and write the pointer back on first mint. `nexusPubkey` scopes the board to one causal island; `resolve`
  * carries the platform's repo strategy; `provenance` stamps the pointer's authority.
  */
@@ -49,10 +49,10 @@ export function announceToWhoFace(whoFaceHandle: DocHandle<LarDoc>, card: Handle
 }
 
 /**
- * Register the per-Nexus @crossroads (the public oracle plane) into @oracle — the public-infra pointer plane,
- * alongside the @lares/@lararium system-bag pointers. ISOMORPHIC: node and browser boots both call this so a
- * vessel's TW5 kernel resolves @crossroads the same well-known-tiddler way (sovereign-kernel). A RUNTIME write,
- * not genesis-seeded like the static system bags — @crossroads is per-Nexus, so its address is known only once
+ * Register the per-Nexus crossroads (the public oracle plane) into the oracle plane — the public-infra pointer plane,
+ * alongside the lares/lararium system-bag pointers. ISOMORPHIC: node and browser boots both call this so a
+ * vessel's TW5 kernel resolves the crossroads plane the same well-known-tiddler way (sovereign-kernel). A RUNTIME write,
+ * not genesis-seeded like the static system bags — the crossroads plane is per-Nexus, so its address is known only once
  * the vessel holds its confederation key (the node's own gate key; the browser's relayGatePubKey). Idempotent:
  * every island member writes the same deterministic url, so re-registration never diverges. Returns the url.
  */

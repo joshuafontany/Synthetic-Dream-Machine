@@ -1,5 +1,5 @@
 /**
- * subagent-capture-route — the spirit `source_file` carries BOTH channels the @daemon capture path
+ * subagent-capture-route — the spirit `source_file` carries BOTH channels the daemon capture path
  * needs: the `__spirits` wing PREFIX (routing) and the `<surface>__<name>__agent-<id>__run-<run>`
  * BASENAME (provenance buildPatch reads — surface token first, per the main-transcript law). This
  * proves a spirit turn routed through the capture verb lands the spirits wing + spirit-keyed AST

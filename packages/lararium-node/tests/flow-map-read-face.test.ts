@@ -41,7 +41,7 @@ describe("the FLOW-map read-face — a Herm serves the public projection, shore 
 
     const face = await mountFlowMapReadFace({ httpServer: server, meshPalaceHandle: handle, signerSeed: SEED, storageDir });
 
-    // a peer pulls + verifies (pointer signature · hash · freshness) — same client as @oracle.
+    // a peer pulls + verifies (pointer signature · hash · freshness) — same client as the oracle read-face.
     const verdict = await pullAndVerifyOracle<MeshPalaceDoc>(`http://127.0.0.1:${port}`, { nowMs: Date.now() });
     expect(verdict.ok).toBe(true);
 

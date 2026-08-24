@@ -1,7 +1,7 @@
 /**
  * node-cap-stack — the node #has-cap-stack wiring, witnessed in isolation (no genesis/TW5 needed).
  *
- * Proves the load-bearing decouple the Herm rests on: the @daemon cap is the IMMUNE CORE present in
+ * Proves the load-bearing decouple the Herm rests on: the daemon cap is the IMMUNE CORE present in
  * both stacks, and it boots WITHOUT a user wiki — when no `wikislot` cap is in the stack, it calls
  * openDaemon with NO slot, so registerBags omits the absent user-wiki bags (blind by structure). And
  * the read-face cap REFUSES to boot without the meshpalace it serves (mandatory-dep, loud, not a flag).
@@ -53,8 +53,8 @@ describe("daemon cap — the immune core boots WITH or WITHOUT a wiki slot (the 
   });
 });
 
-describe("meshpalace cap — a writable @meshpalace FLOW-map layer + residency pin", () => {
-  test("adds the @meshpalace layer (writable) and pins it", async () => {
+describe("meshpalace cap — a writable meshpalace FLOW-map layer + residency pin", () => {
+  test("adds the meshpalace doc layer (writable) and pins it", async () => {
     const repo = new Repo({ sharePolicy: async () => true });
     const added: Array<{ bagId: string; writable?: boolean; defaultWritable?: boolean }> = [];
     const composite = { addLayer: (l: { bagId: string; writable?: boolean; defaultWritable?: boolean }) => added.push(l) };

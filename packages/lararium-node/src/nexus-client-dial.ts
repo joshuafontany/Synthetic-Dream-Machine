@@ -13,7 +13,7 @@
  *
  * ONE SOCKET, ITS OWN. This client dial rides the Automerge `/ws` relay (Socket A) — the SAME transport the
  * server adapter answers on, cleartext CRDT behind the gate. It NEVER touches the carriage relay (Socket B,
- * ciphertext @cad bodies); the two stay two.
+ * ciphertext cad bodies); the two stay two.
  *
  * REAL CRYPTO, NEVER FORGED. The dial carries the operator's OWN leaf identity (its cached ContactCard +
  * bare-Ed25519 signer) and binds its V3 proof-of-possession to the DIALED peer's gate key (known
@@ -49,7 +49,7 @@ export interface NexusClientDialConfig {
   readonly gatePubKey: string;
   /** This vessel's OWN leaf identity — cached ContactCard + bare-Ed25519 signer (never a forged one). */
   readonly identity:   LeafIdentity;
-  /** The target bag URI the proof seeks (`aud`) — defaults to `@daemon`, the gate's armed audience. */
+  /** The target bag URI the proof seeks (`aud`) — defaults to the daemon bag, the gate's armed audience. */
   readonly aud?:       string;
   /** OPTIONAL: an island/doc URL to `repo.find()` once mounted — pulls the peer's doc across the socket.
    *  Consumes the device-admit payload's `islandDocUrl`. Absent → the vessel syncs only docs it already knows. */

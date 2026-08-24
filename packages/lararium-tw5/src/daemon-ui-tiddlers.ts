@@ -1,8 +1,8 @@
 /**
- * daemon-ui-tiddlers — the @daemon UX widget (Layer 2 part a).
+ * daemon-ui-tiddlers — the daemon UX widget (Layer 2 part a).
  *
- * The @daemon inherits the wiki render cap (hasProjection), so it paints a real
- * TW5 story river. This module supplies the @daemon-scoped CODE tiddlers that
+ * The daemon inherits the wiki render cap (hasProjection), so it paints a real
+ * TW5 story river. This module supplies the daemon-scoped CODE tiddlers that
  * compose the wiki-SWITCHER + recipe surface ON that river, and the worker verb
  * that feeds the switcher its LIVE state.
  *
@@ -55,7 +55,7 @@ const WRAPPER_BODY = `<$transclude $tiddler={{{ [{${LARES_SURFACE_STATE}}has[tex
 /** 2. The Working Surface — composes the wiki-switcher (live list + pin flags +
  *  on-select) TOGETHER WITH the recipe view/edit surface. */
 const WORKING_BODY = `\\whitespace trim
-! @daemon · Working Surface
+! daemon · Working Surface
 
 <div class="lares-daemon-surface" data-lares-surface="working">
 
@@ -91,27 +91,27 @@ const WORKING_BODY = `\\whitespace trim
 </div>`;
 
 /** The action the sidebar button fires: name the Working Surface as the active panel.
- *  It does NOT $action-navigate — the wrapper already sits open in the @daemon story
+ *  It does NOT $action-navigate — the wrapper already sits open in the daemon story
  *  (seeded at boot), and navigation in a headless Worker references `window`. Toggling
  *  $:/lares/surface just re-transcludes the wrapper in place — no story navigation. */
 const SUMMON_ACTION = `<$action-setfield $tiddler="${LARES_SURFACE_STATE}" text="${WORKING_TITLE}"/>`;
 
 /** 3. The $:/tags/PageControls sidebar button. */
 const PAGECTRL_BODY = `\\whitespace trim
-<$button class="tc-btn-invisible lares-pagecontrol" data-lares-summon="daemon" tooltip="Open the @daemon working surface">
+<$button class="tc-btn-invisible lares-pagecontrol" data-lares-summon="daemon" tooltip="Open the daemon working surface">
 ${SUMMON_ACTION}
-{{$:/core/images/list-bullet}} @daemon
+{{$:/core/images/list-bullet}} daemon
 </$button>`;
 
 interface TiddlerSpec { readonly [field: string]: string }
 
 /**
- * The born-from-source @daemon CODE tiddlers: the parallel-cap wrapper switch, the
+ * The born-from-source daemon CODE tiddlers: the parallel-cap wrapper switch, the
  * Working Surface (switcher + recipe), and the $:/tags/PageControls sidebar button.
  *
- * The in-@daemon KEYBOARD shortcut is deliberately NOT seeded: adding a
+ * The in-daemon KEYBOARD shortcut is deliberately NOT seeded: adding a
  * $:/tags/KeyboardShortcut tiddler at runtime wakes TW5's keyboard manager, which
- * touches `window`/`document` — undefined in the @daemon's headless Worker, a fatal
+ * touches `window`/`document` — undefined in the daemon's headless Worker, a fatal
  * boot fault. The UNIVERSAL summon (the app-shell Ctrl+Shift+D, main.ts) covers the
  * keyboard affordance from EVERY wiki anyway — the reachability caveat — so the chord
  * lives on the host chrome (where `window` exists), not inside the worker-bound wiki.
@@ -122,12 +122,12 @@ export const DAEMON_UI_TIDDLERS: readonly TiddlerSpec[] = [
   // in $:/StoryList fires the navigator's scroll path, which references `window`
   // (undefined in the headless Worker). AboveStory renders like any boot content.
   { title: WRAPPER_TITLE, type: "text/vnd.tiddlywiki", tags: "$:/tags/AboveStory", text: WRAPPER_BODY },
-  { title: WORKING_TITLE, type: "text/vnd.tiddlywiki", tags: LARES_SURFACE_TAG, text: WORKING_BODY, caption: "@daemon" },
+  { title: WORKING_TITLE, type: "text/vnd.tiddlywiki", tags: LARES_SURFACE_TAG, text: WORKING_BODY, caption: "daemon" },
   { title: PAGECTRL_TITLE, type: "text/vnd.tiddlywiki", tags: "$:/tags/PageControls", text: PAGECTRL_BODY },
 ];
 
 /**
- * Seed the born-from-source @daemon UI tiddlers into the live TW5 wiki + open the
+ * Seed the born-from-source daemon UI tiddlers into the live TW5 wiki + open the
  * wrapper as the story's INITIAL content. Idempotent (addTiddler overwrites).
  *
  * MUST run BEFORE the projection camera's first render (the daemon island's onBoot,

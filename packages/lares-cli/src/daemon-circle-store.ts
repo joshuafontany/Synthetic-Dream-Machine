@@ -1,16 +1,16 @@
 /**
- * daemon-circle-store — the @circles-backed CircleStore adapter (the follow-graph's SOURCE OF TRUTH).
+ * daemon-circle-store — the circles-backed CircleStore adapter (the follow-graph's SOURCE OF TRUTH).
  *
  * The CircleStore shore composeFollow consumes (mesh/compose-follow). Where the node-fs adapter wrote a LOCAL
  * private JSON file (Build 2a — per-device, never fleet-synced), THIS adapter drives the daemon FOLLOW-GRAPH
  * verbs (circle-add / circle-remove / circle-list) over the pono sock: the follow lands in the sovereign
- * @circles Automerge doc, which the self-slot FLEET-syncs to the operator's OWN device fleet (PRIVATE-but-
- * same-operator, matching @catalog) and NEVER federates to a stranger. One graph, every device of the human.
+ * circles Automerge doc, which the self-slot FLEET-syncs to the operator's OWN device fleet (PRIVATE-but-
+ * same-operator, matching the catalog registry) and NEVER federates to a stranger. One graph, every device of the human.
  *
  * The INTERFACE never moved — composeFollow still RECOGNISES a nym in the LOCAL handle-book (fail-closed on an
- * unknown nym) BEFORE the membership write reaches @circles; only the graph's BACKING moved from a local file
+ * unknown nym) BEFORE the membership write reaches the circles doc; only the graph's BACKING moved from a local file
  * to the daemon-held circles doc. NEVER-FEDERATES, STRUCTURALLY: the adapter reaches ONLY the three circle-*
- * verbs; no @crossroads / board / announce verb is on it, so a follow leaves no central trace.
+ * verbs; no crossroads-plane / board / announce verb is on it, so a follow leaves no central trace.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-two-stacks
  */
@@ -20,8 +20,8 @@ import { runVerb, type RunVerbOptions } from "./verb-call.js";
 import { summaryOutput } from "./verb-result.js";
 
 /**
- * Build the @circles-backed CircleStore. Every op drives a daemon FOLLOW-GRAPH verb over the sock; the daemon
- * writes-then-syncs @circles. `requestedBy` (the operator DID) rides each invocation for the verify-then-
+ * Build the circles-backed CircleStore. Every op drives a daemon FOLLOW-GRAPH verb over the sock; the daemon
+ * writes-then-syncs the circles doc. `requestedBy` (the operator DID) rides each invocation for the verify-then-
  * delegate gate. A daemon error surfaces as itself (never a silent local fallback — the graph's home moved).
  */
 export function makeDaemonCircleStore(requestedBy: string, opts: RunVerbOptions = {}): CircleStore {

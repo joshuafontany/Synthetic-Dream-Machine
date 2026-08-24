@@ -38,7 +38,7 @@ const DEFAULT_ADMIN_WORKER_URL = new URL("./node-daemon-island.js", import.meta.
 export interface DaemonVmOptions {
   repo:              Repo;
   daemonUrl:          string;
-  /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc.
+  /** The persona plane's doc URL (the PersonaGroup veiled identity) — resolved alongside the daemon doc.
    *  ABSENT on a PLACE that never grew a face: there is no persona doc to resolve, and the VM
    *  stands without one rather than reaching for a document nobody founded. */
   personaUrl?:        string;
@@ -53,8 +53,8 @@ export interface DaemonVmOptions {
   /** The engine's plugin-tiddler CIDs — the daemon island pulls them by CID from the local
    *  CAS (the breath path), never CRDT-syncing the bytes over the port. */
   pluginCids?:       readonly string[];
-  /** Typed structural capabilities: @lararium engine, daemon bag, @lares,
-   *  @catalog access. Library bags resolve island-side from @catalog. */
+  /** Typed structural capabilities: the lararium engine doc, daemon bag, the lares bag,
+   *  catalog registry access. Library bags resolve island-side from the catalog registry. */
   grants:            IslandGrants;
   /** Optional canon bag URIs for the daemon recipe. Empty by default. */
   libraryBags?:        readonly string[];

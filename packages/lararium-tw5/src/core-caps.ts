@@ -15,7 +15,7 @@
  * mount — over substrate and daemon, which every vessel carries. A vessel with no face composes the
  * substrate and the daemon and none of the rest, blind to sovereign content by structure. The daemon
  * cap OPTIONALLY routes the wiki slot, so it builds with `slot` undefined where no wiki stands (the
- * @daemon decouple) and with `slot` present where one does.
+ * daemon decouple) and with `slot` present where one does.
  */
 
 import type { Repo, DocHandle, LarDoc, LarOpenPhase, VesselKeel, VesselCoreAssembly } from "@lararium/mesh";
@@ -94,15 +94,15 @@ export const CORE_CAP = {
 // ── the SHARED floor caps (both the full vessel and the Herm compose over these two) ─────────────
 
 /** substrate — the shared keel floor: assembleVessel (composite cascade → genesis oracle island →
- *  @lares/@lararium canon → social plane @identities/@groups/@sessions/@daemon/@persona + corpora).
+ *  lares/lararium canon → social plane identities/groups/sessions/daemon/persona + corpora).
  *  Emits island-ready/corpus-ready INSIDE assembleVessel. */
 export function substrateCap(keel: VesselKeel): CapModule {
   return { id: CORE_CAP.substrate, build: () => assembleVessel(keel) };
 }
 
 export interface DaemonCapDeps {
-  /** Open the platform @daemon VM. `slot` ABSENT (herm) → the builder omits the user-wiki bags from
-   *  daemonAuth.registerBags (the decouple); the @daemon's own bag (bootstrap.daemonUrl) stays. */
+  /** Open the platform daemon VM. `slot` ABSENT (herm) → the builder omits the user-wiki bags from
+   *  daemonAuth.registerBags (the decouple); the daemon's own bag (bootstrap.daemonUrl) stays. */
   readonly openDaemon:   (a: { assembly: VesselCoreAssembly; slot?: VesselWikiSlot }) => Promise<VesselDaemonVm>;
   readonly wireVerbs?:   (registry: VerbTable, assembly: VesselCoreAssembly) => void;
   readonly afterDaemon?: (daemon: VesselDaemonVm, assembly: VesselCoreAssembly) => void;
@@ -141,7 +141,7 @@ export function wikiSlotCap<TPool extends PrimaryMountPool>(o: VesselOrchestrati
   };
 }
 
-/** wiki — mount the wiki-slot layers. The @lares-as-wiki quine: when the active slug opens the
+/** wiki — mount the wiki-slot layers. The lares-as-wiki quine: when the active slug opens the
  *  invariant bag itself, seat the operator-minted doc as the write layer. Requires substrate +
  *  wikislot. Emits wiki-ready/vessel-ready. */
 export function wikiCap<TPool extends PrimaryMountPool>(o: VesselOrchestration<TPool>): CapModule {

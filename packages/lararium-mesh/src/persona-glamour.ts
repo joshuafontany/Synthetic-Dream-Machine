@@ -1,12 +1,12 @@
 /**
- * persona-glamour — the PUBLIC persona layer: a persona-index → its @crossroads face (the ONE thing that
+ * persona-glamour — the PUBLIC persona layer: a persona-index → its crossroads face (the ONE thing that
  * federates). The own side's public half, dual to persona-petname's private half.
  *
  * ZOOKO'S TRIANGLE, public side (canon: lar:///ha.ka.ba/lares/api/pono/persona-policy). A persona's GLOBAL
  * name stays its pubkey — the veiled-user key derived at its handle-index (persona-identity#deriveVeiledUserKey).
  * That key signs a `HandleCard` whose `glamour` is a chosen, memorable DISPLAY (never a legal identity); the
  * card certifies ITSELF (nym == the signing key), so a recogniser needs no registry (handle-card). The card
- * announces onto the per-Nexus WHO board through @crossroads (who-face), riding the transport the mesh already
+ * announces onto the per-Nexus WHO board through the crossroads plane (who-face), riding the transport the mesh already
  * runs. NO NEW MACHINERY — this THREADS the existing pieces: derive the veiled key → mint the card → hand it
  * to `announceToWhoFace`.
  *

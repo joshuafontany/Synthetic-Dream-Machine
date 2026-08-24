@@ -5,7 +5,7 @@
  * peer. In-process island peers (MessageChannel workers) are house members and
  * share freely; a WS *relay* peer (LarWSClientAdapter) reaches the wider Nexus,
  * so the vessel must NOT blanket-share every doc with it — the private planes
- * (@catalog, personal, draft, wikis, corpus bags) stay home, only the public
+ * (catalog, personal, draft, wikis, corpus bags) stay home, only the public
  * federation surface crosses.
  *
  * This gate names that decision behind ONE narrow, deny-by-default shore, shaped
@@ -63,7 +63,7 @@ export interface FederationGate {
  * DeterministicFederationGate — the alpha gate.
  *
  * The federatable surface is the per-Nexus PUBLIC boards, addressed
- * deterministically from the confederation (relay-gate) key: the @crossroads
+ * deterministically from the confederation (relay-gate) key: the crossroads
  * public-plane doc + the WHO board + the Kapae-ANTIGEN board (the immune antigen
  * rides the mandatory-carry plane, carry-contract MANDATORY tier). Automerge-repo
  * does NOT auto-follow doc refs (each doc syncs independently under its own
@@ -261,12 +261,12 @@ export async function carryContractShareDecision(
 }
 
 /**
- * NexusMembership — the @nexus CONSULT the carry-split gates on: is this cross-operator peer a CONTRACTED
+ * NexusMembership — the nexus-doc CONSULT the carry-split gates on: is this cross-operator peer a CONTRACTED
  * Nexus MEMBER, or a mere STRANGER (a valid identity carrying no contract)?
  *
  * The mesh breathes across a Nexus because a MEMBER relay blind-transits sealed ciphertext (carry, never
  * read); a STRANGER reaches ONLY the public shelf (the federatable set). This consult draws that line — and
- * it reads the node's OWN @nexus replica (as of last sync; no global now). It is NOT a peer-auth gate (that
+ * it reads the node's OWN nexus-doc replica (as of last sync; no global now). It is NOT a peer-auth gate (that
  * lives, live, at the DaemonAuthGate) and NOT a read-cap (the BeeKEM read-floor stays absolute). It answers
  * ONE question: MEMBER or not.
  *
@@ -289,7 +289,7 @@ export interface NexusMembership {
  *
  * FAIL-CLOSED: a plane whose seal status the oracle cannot positively affirm reads `false` (deny-carry). A
  * null `PlaneSeal` deny-carries EVERY plane — the correct floor while no sealed plane type stands (today the
- * automerge sync wire carries cleartext, so no private plane is provably sealed; the @cad ciphertext-CAS /
+ * automerge sync wire carries cleartext, so no private plane is provably sealed; the cad ciphertext-CAS /
  * BeeKEM-on-wire path is the design-north that will register the first sealed planes here).
  */
 export interface PlaneSeal {
@@ -302,10 +302,10 @@ export interface PlaneSeal {
  * 2026-07-20). It layers a MEMBER blind-transit lane ATOP the unchanged public floor, so:
  *
  *   1. antigen + the federatable-public FLOOR — `carryContractShareDecision`, VERBATIM. A Kapae'd presenter
- *      draws Mu; the federatable set (@crossroads / WHO / kapae-antigen) crosses to member AND stranger alike;
+ *      draws Mu; the federatable set (crossroads / WHO / kapae-antigen) crosses to member AND stranger alike;
  *      an in-process house member full-syncs. This is today's behavior, untouched.
  *   2. the MEMBER blind-transit — a plane the floor DENIED (a private-own plane) may STILL cross to a peer the
- *      @nexus consult names a MEMBER, but ONLY when the seal oracle proves it sealed. The member relays the
+ *      nexus-doc consult names a MEMBER, but ONLY when the seal oracle proves it sealed. The member relays the
  *      CIPHERTEXT it can never read; the read-cap (BeeKEM group key) NEVER crosses this shore — sharePolicy
  *      governs WHICH docs sync, never key material, so this adds ZERO decrypt path.
  *
@@ -361,7 +361,7 @@ export interface CrossOperatorAdmission {
  * cap=admin@daemon NOR a pinned-root operator device-edge. That peer carries a DIFFERENT operator identity
  * (a cabal-mate / another kahu), so it earns the BOUNDED "cross-operator" class and NOTHING more: the node
  * sharePolicy (selfSlotShareDecision) grants it ONLY the deterministically-federatable public/infra planes
- * (@crossroads / WHO / kapae-antigen), NEVER a private-own plane, NEVER admin. The crossroads plane reads
+ * (crossroads / WHO / kapae-antigen), NEVER a private-own plane, NEVER admin. The crossroads plane reads
  * world-public-plaintext by design (no keyhive read-cap gates it — the safety is the DeterministicFederationGate
  * volunteering ONLY the fixed public set + the BeeKEM read-floor beneath every private plane), so the proven
  * identity IS the admission floor for the mandatory public/infra carriage.
@@ -396,7 +396,7 @@ export function classifyCrossOperatorAdmission(proofVerified: boolean): CrossOpe
  *     peer — a valid, proof-carrying FOREIGN operator that this Nexus never admitted — is denied co-federation
  *     entirely (not even the public shelf crosses to it). The Nexus keeps to itself.
  *   · open    — cross-Nexus peers co-federate the PUBLIC planes: the existing bounded public/infra carry
- *     (@crossroads / WHO / kapae-antigen / members) crosses to any proof-carrying foreign operator.
+ *     (crossroads / WHO / kapae-antigen / members) crosses to any proof-carrying foreign operator.
  *
  * The posture governs the CARRY of the PUBLIC surface to FOREIGN operators. It NEVER opens a private plane: the
  * BeeKEM read-floor + the self-slot's private-plane denial hold absolute in BOTH postures. Open widens WHO may

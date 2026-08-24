@@ -151,7 +151,7 @@ describe("the unknown filter-suffix token refuses loud", () => {
 describe("a non-default proofBag round-trips", () => {
   const CUSTOM_BAG = "lar:///custom.heading.turns/proof-hold";
 
-  test("build -> parse holds under a bag outside the @daemon shape", () => {
+  test("build -> parse holds under a bag outside the daemon shape", () => {
     const proof = {
       eventId: "ev-9", island: "lar:///ha.ka.ba/bags/sense-a", requestId: "sense-r9",
       asOf: [] as readonly string[],

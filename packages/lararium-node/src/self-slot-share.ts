@@ -8,14 +8,14 @@
  *     shares FREELY too (full device sync; the operator's own fleet carries every private plane).
  *   · a CROSS-OPERATOR or UNCLASSIFIED WS peer — a singleton relay ring + the self-slot federation gate.
  *     The CARRY-SPLIT (operator-ruled 2026-07-20) lets the mesh BREATHE across a Nexus here: a cross-operator
- *     the @nexus consult names a MEMBER blind-transits a PROVABLY-SEALED private plane (carry the ciphertext,
+ *     the nexus-doc consult names a MEMBER blind-transits a PROVABLY-SEALED private plane (carry the ciphertext,
  *     never the read-cap); a STRANGER (valid identity, no contract) reaches ONLY the deterministically-
  *     federatable public shelf. The read-lane denial stays absolute — no cross-operator ever decrypts.
  *
  * FAIL-CLOSED: the class the worker could not positively vouch as same-operator arrives here `undefined`
  * and routes to the STRICTER cross-operator branch — the federatable floor crosses only if PROVABLY
  * federatable; the sealed-carry lane opens only for a PROVABLY-member peer over a PROVABLY-sealed plane
- * (absent the @nexus consult or the seal oracle, every cross-operator is treated STRANGER).
+ * (absent the nexus-doc consult or the seal oracle, every cross-operator is treated STRANGER).
  *
  * The SPLIT rides the OUTER deterministic federatable set (DeterministicFederationGate), never the INNER
  * verifyCapability-for-self ring (identity stays null) — sidestepping the allow-all self-grant trap: a
@@ -40,7 +40,7 @@ export interface SelfSlotShareInput {
   readonly selfSlotFedGate: FederationGate | null;
   /** The #59 Kapae-antigen ring (consulted AHEAD; a Kapae'd presenter draws Mu). Null denies nobody. */
   readonly antigenRing: AntigenRing | null;
-  /** The @nexus membership consult — a cross-operator MEMBER blind-transits a sealed plane. Null → every
+  /** The nexus-doc membership consult — a cross-operator MEMBER blind-transits a sealed plane. Null → every
    *  cross-operator treated STRANGER (public-read only), fail-closed. */
   readonly membership: NexusMembership | null;
   /** The plane-seal oracle — only a PROVABLY-sealed plane blind-transits. Null → deny-carry, fail-closed. */
@@ -84,7 +84,7 @@ export async function selfSlotShareDecision(input: SelfSlotShareInput): Promise<
     // DenyAllGate floor — the federatable floor reads nothing crossable (`carryContractShareDecision` reads
     // a null fed gate as "same-operator relay → full sync", a DIFFERENT case, so a gated peer MUST never
     // reach it null — that would leak every plane). The carry-split adds the MEMBER blind-transit lane atop
-    // that floor: a MEMBER (per the @nexus consult) blind-transits a PROVABLY-SEALED private plane; a
+    // that floor: a MEMBER (per the nexus-doc consult) blind-transits a PROVABLY-SEALED private plane; a
     // STRANGER reaches only the federatable floor; a Kapae'd presenter draws Mu regardless. The self-slot
     // INNER capability ring stays inert (identity = null) — the carry-split rides carriage, never a read-cap.
     const fedGate: FederationGate = input.selfSlotFedGate ?? new DenyAllGate();

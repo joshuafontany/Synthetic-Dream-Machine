@@ -7,7 +7,7 @@
  * seeds still runs every flow (the tiddlers make the flow-set ADDRESSABLE in the bag, not runnable).
  *
  * The capStack rides the COMPACT `instrument:hull …` list-string form parseCapStack reads back (never a JSON
- * blob in a tiddler field). Idempotent (setTiddler overwrites). Seed alongside the other @daemon seeds,
+ * blob in a tiddler field). Idempotent (setTiddler overwrites). Seed alongside the other daemon seeds,
  * BEFORE the projection's first render.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/flow

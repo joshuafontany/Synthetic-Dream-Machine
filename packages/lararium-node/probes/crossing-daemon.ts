@@ -50,7 +50,7 @@ class ReadyWSServerAdapter extends NodeWSServerAdapter {
 }
 
 /** The real shore: run the REAL V3 Ed25519 proof check, then the CAPABILITY decision — a leaf crosses
- *  only if its key sits in the admitted set (the @daemon grant). A valid proof proves WHO, never
+ *  only if its key sits in the admitted set (the daemon grant). A valid proof proves WHO, never
  *  WHETHER-GRANTED; the un-admitted anon leaf is turned away here. */
 function makeCapabilityShore(gatePubKey: string, admitted: ReadonlySet<string>): AuthVerifierShore {
   return {
@@ -61,7 +61,7 @@ function makeCapabilityShore(gatePubKey: string, admitted: ReadonlySet<string>):
       if (!peerPubKey) return { ok: false, reason: "no peer key in card" };
       const v = await verifyAuthProof({ nonce: proof.nonce, gatePubKey, peerPubKey, aud: bagUrl, ts: proof.ts, sig: proof.sig });
       if (!v.ok) return { ok: false, reason: v.reason ?? "proof failed" };
-      if (!admitted.has(peerPubKey)) return { ok: false, reason: "insufficient capability (not admitted to @daemon)" };
+      if (!admitted.has(peerPubKey)) return { ok: false, reason: "insufficient capability (not admitted to the daemon bag)" };
       return { ok: true, identifier: peerPubKey };
     },
   };

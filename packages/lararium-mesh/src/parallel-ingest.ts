@@ -20,7 +20,7 @@
  *     orphans), and the run rejects with the first error (structured concurrency's black-box rule).
  *
  * PURE of IO: the `embed` (parallel expensive stage) and `commit` (single-writer sink through the
- * @daemon gate) are INJECTED shores — the real ones wire to the embedder + the store; tests inject
+ * daemon gate) are INJECTED shores — the real ones wire to the embedder + the store; tests inject
  * fakes. `clock` is injected too (default Date.now) so the dial is deterministic under test.
  *
  * KAPPA: the SAME runtime serves live capture AND recovery/harvest — recovery is just this run fed
@@ -45,7 +45,7 @@ export interface IngestItem<P> {
 export interface IngestShores<P, E> {
   /** the parallel expensive stage — payload → embedded (content-embed · structure · form). */
   readonly embed: (item: IngestItem<P>) => Promise<E>;
-  /** the SINGLE-WRITER sink — commit the embedded record through the @daemon gate to the store. */
+  /** the SINGLE-WRITER sink — commit the embedded record through the daemon gate to the store. */
   readonly commit: (embedded: E, item: IngestItem<P>) => Promise<void>;
   /** the merge PROOFREAD — validate before the irreversible commit (default: accept all). A reject routes to the dead-letter lane. */
   readonly validate?: Validate<E>;
@@ -138,7 +138,7 @@ export async function runParallelIngest<P, E>(
   // credit). This ties admission to PROVEN drain (the credit-gate law), curing the one-sided AIMD
   // bullwhip: if commits stall, the backlog grows, credits fall, and the producer sheds — the
   // receiver pacing the sender. The dial's `limit` is the slow-discovered ceiling; credits are the
-  // fast per-cycle governor. (In-process, uncommitted tracks in-flight; across the @daemon shore the
+  // fast per-cycle governor. (In-process, uncommitted tracks in-flight; across the daemon shore the
   // credit source is already the drain's true committed-progress, network-ring-ready.)
   while ((cursor < items.length && firstError === null) || active.size > 0) {
     while (cursor < items.length && canAdmit(dial.limit, backlog(drain).length) && firstError === null) {

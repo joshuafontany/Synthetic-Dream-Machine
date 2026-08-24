@@ -69,7 +69,7 @@ function makeCapabilityShore(gatePubKey: string, admitted: ReadonlySet<string>):
       if (!peerPubKey) return { ok: false, reason: "no peer key in card" };
       const v = await verifyAuthProof({ nonce: proof.nonce, gatePubKey, peerPubKey, aud: bagUrl, ts: proof.ts, sig: proof.sig });
       if (!v.ok) return { ok: false, reason: v.reason ?? "proof failed" };
-      if (!admitted.has(peerPubKey)) return { ok: false, reason: "insufficient capability (not admitted to @daemon)" };
+      if (!admitted.has(peerPubKey)) return { ok: false, reason: "insufficient capability (not admitted to the daemon bag)" };
       return { ok: true, identifier: peerPubKey };
     },
   };
@@ -234,7 +234,7 @@ describe("LIVE-WIRE S1 — two NODE vessels, one dialing the other over the real
   test("an UN-admitted node's client is DENIED — it anergizes and never syncs (the barrier holds)", async () => {
     const c = makeNodeIdentity();
     const bGate = genKey().pub;
-    // B admits NOBODY. C's proof verifies, yet it holds no @daemon grant.
+    // B admits NOBODY. C's proof verifies, yet it holds no daemon grant.
     const nodeB = await standNodeVessel({ storageDir: mkStorageDir(), gatePubKey: bGate, admitted: new Set() });
     vessels.push(nodeB);
 

@@ -18,7 +18,7 @@
  * @lararium/app — the browser-lararium boot view.
  *
  * A sovereign causal island boots in the browser (its own key, IndexedDB, genesis
- * bytes) and — when a read-face is reachable — reads the public @oracle (the node-less
+ * bytes) and — when a read-face is reachable — reads the public oracle read-face (the node-less
  * path: an anon browser vessel consuming the read-only substrate, the elyncia.app
  * story). Location-agnostic: served from localhost / LAN / elyncia.app, the vessel
  * always runs here; the origin is a static host, never an authority.
@@ -31,8 +31,8 @@ import {
 import type { DeviceAdmitPayload } from "@lararium/keyhive";
 import { pullAndVerifyOracle, DOM_INPUT_MAX_CHARS, type GenesisCasManifest, type GenesisSeed } from "@lararium/mesh";
 import { Idiomorph } from "idiomorph";
-// The materialize-fresh boot artifact: the PLAIN-DATA @oracle seed (island.genesis.json).
-// The vessel materializes the @oracle CRDT fresh from it under the deterministic doc id
+// The materialize-fresh boot artifact: the PLAIN-DATA oracle seed (island.genesis.json).
+// The vessel materializes the oracle CRDT fresh from it under the deterministic doc id
 // (node-parity). Boot imports this plain-data seed alone — no Automerge binary.
 import genesisSeed from "../../../genesis/island.genesis.json";
 // The genesis CRDT carries blob METADATA only; the engine + plugin BYTES ship as
@@ -54,7 +54,7 @@ const $ = (id: string): HTMLElement => document.getElementById(id) as HTMLElemen
 
 
 /**
- * The @oracle read-face this page reads from, when no `?oracle=` names one.
+ * The oracle read-face this page reads from, when no `?oracle=` names one.
  *
  * The page is served BY the vessel it reads, so the host that delivered it is the host that answers — a
  * literal `localhost` reads true only where the browser and the node share a machine, and silently points a
@@ -77,7 +77,7 @@ function set(id: string, text: string, cls = ""): void {
   const el = $(id); el.textContent = text; el.className = "v " + cls;
 }
 
-// The @oracle read-face — the node-less anon-read path. INDEPENDENT of the vessel boot
+// The oracle read-face — the node-less anon-read path. INDEPENDENT of the vessel boot
 // (it reads a public read-face; it must not be gated behind the local vessel coming up).
 // Config-supplied via ?oracle=…, default the local dev node; elyncia.app → a public one.
 async function readOracle(): Promise<void> {
@@ -314,7 +314,7 @@ async function bootVessel(): Promise<void> {
   }
   // ?genesis=<base> → where the static host serves genesis/ (manifest + cas/). Default /genesis.
   const genesisCasBaseUrl = new URLSearchParams(location.search).get("genesis") ?? "/genesis";
-  // ?mesh=<readface,…> → carry-in as a mesh LEAF, bootstrapping the FLOW-map from peer @oracle
+  // ?mesh=<readface,…> → carry-in as a mesh LEAF, bootstrapping the FLOW-map from peer oracle
   //   read-faces (opt-in; absent = no carriage / pure local boot). Empty value defaults to the
   //   ?oracle= read-face. The browser is a LEAF (no endpoint — carries-in, not dial-able).
   const meshParam = new URLSearchParams(location.search).get("mesh");
@@ -345,9 +345,9 @@ async function bootVessel(): Promise<void> {
     _sendDomEvent = result.sendDomEvent;        // arm the interactivity RETURN leg — the click half
     _sendDomInput = result.sendDomInput;        //   … and the text half
     // The UNIVERSAL summon (the reachability affordance): host chrome overlays EVERY
-    // wiki, so this button + chord flips the projection gate to the @daemon from any
+    // wiki, so this button + chord flips the projection gate to the daemon from any
     // active surface — a pure gate flip (both surfaces already mounted), no reboot.
-    // Distinct from the @daemon-scoped $:/lares/surface toggle inside the widget.
+    // Distinct from the daemon-scoped $:/lares/surface toggle inside the widget.
     const summon = (): void => result.setActiveSurface(DAEMON_SURFACE_ID);
     const summonBtn = document.getElementById("summon-daemon") as HTMLButtonElement | null;
     if (summonBtn) { summonBtn.disabled = false; summonBtn.addEventListener("click", summon); }
@@ -365,6 +365,6 @@ async function bootVessel(): Promise<void> {
   }
 }
 
-// Run both independently — the @oracle read never waits on the vessel boot.
+// Run both independently — the read of the oracle doc never waits on the vessel boot.
 void readOracle();
 void bootVessel();

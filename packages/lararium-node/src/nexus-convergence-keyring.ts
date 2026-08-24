@@ -1,5 +1,5 @@
 /**
- * nexus-convergence-keyring — the per-Nexus convergence-secret SOURCE the @cad seal message-locks against.
+ * nexus-convergence-keyring — the per-Nexus convergence-secret SOURCE the cad seal message-locks against.
  *
  * THE SALT, NOT A CONTENT KEY. A Nexus holds ONE convergence secret per charter epoch. That secret is a
  * dedup-domain + GPA salt — it keys `messageKey = BLAKE3(plaintext, key = nexusSecret)` so (a) the same body

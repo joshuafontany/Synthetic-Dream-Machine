@@ -132,7 +132,7 @@ export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
       "verbs with the plane as a `--lens` parameter (search · relate · structure · status), so a new plane " +
       "needs no new verb. TEND the planes with the lifecycle verbs (recall · capture · pour · teardown · " +
       "worldline · telemetry · subagents · flow). `pour` is the sovereign harvest — content + planes + " +
-      "worldline in one pass — never the guest miner. Every verb rides the @daemon's composed caps (the " +
+      "worldline in one pass — never the guest miner. Every verb rides the daemon's composed caps (the " +
       "single-owner law: nothing opens a store beside the vessel's holder).",
     examples: [
       "lares sense search \"entrance block\" --lens structure   # hybrid recall over a plane",

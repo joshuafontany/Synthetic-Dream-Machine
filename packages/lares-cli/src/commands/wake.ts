@@ -53,7 +53,7 @@ interface WakeRecall {
 }
 
 /**
- * recall-into-wake — pull this project's recent journey THROUGH the @daemon seat so
+ * recall-into-wake — pull this project's recent journey THROUGH the daemon seat so
  * the woken session climbs already-remembering. Best-effort by construction: any
  * miss (no identity, daemon unreachable, recall error) returns {ok:false,note} and
  * the wake proceeds. A short timeout keeps it inside the SessionStart hook budget.
@@ -64,7 +64,7 @@ async function recallIntoWake(): Promise<WakeRecall> {
   try { did = await vesselDid(); }
   catch { return { ok: false, wing, note: "no operator identity" }; }
   try {
-    // One cold holder start can take ~8s; after that the @daemon pool is warm and
+    // One cold holder start can take ~8s; after that the daemon pool is warm and
     // recall is sub-second. Give the first wake room; warm wakes return instantly.
     const r = await runVerb("recall", { wing, limit: 5 }, did, { timeoutMs: 9000 });
     if (r.status !== "done") return { ok: false, wing, note: r.errorMessage ?? "recall error" };
@@ -192,7 +192,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       // `fatal:` on a boot fault. We read that attestation, local-first, from the byte
       // offset we start appending at.
       //   Cross-peer presence (who is breathing in the mesh) is a SEPARATE organ and
-      //   never lives in a persisted/synced doc — least of all @oracle, the cache-stable
+      //   never lives in a persisted/synced doc — least of all the oracle plane, the cache-stable
       //   federation floor. Per canon (api/pono/ea#not-a-heartbeat;
       //   DREAMNET-FEDERATION-RESEARCH "never write presence into the Automerge document"):
       //   presence rides an EPHEMERAL channel — `ea` once at establishment, then CRDT

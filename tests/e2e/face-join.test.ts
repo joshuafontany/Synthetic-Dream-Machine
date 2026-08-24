@@ -3,11 +3,11 @@
  *
  * The unit tests fence the decision against a recording fake, and the pair test proves the crypto between two
  * in-process providers holding their own bag list. Neither touches what a live vessel supplies: the group id
- * off `daemonAuth`, the lease epoch scanned from real @daemon slots, and the standing-bag set the re-grant
+ * off `daemonAuth`, the lease epoch scanned from real daemon slots, and the standing-bag set the re-grant
  * walks. A join can pass every other test and still, on a real hearth, seat a member that reaches nothing.
  *
  * So these vectors ride the daemon's own verb surface, over its UDS channel, exactly as a summons relayed from
- * @daemon would arrive:
+ * the daemon doc would arrive:
  *
  *   V1 — an edge THIS hearth's root signed admits, seats, and RE-GRANTS its standing bags (regranted > 0)
  *   V2 — a repeat hands the seat back and moves no epoch (reKeyed false, regranted 0), material still flowing
@@ -122,7 +122,7 @@ describe("e2e/face-join — the join against a live hearth", () => {
   }, 120_000);
 
   test("V5 — a hearth refuses to seat ITSELF, so one summons never draws two writers", async () => {
-    // A summons rides @daemon, and @daemon fleet-syncs across the operator's own devices — so the joinee's own
+    // A summons rides the daemon doc, and the daemon doc fleet-syncs across the operator's own devices — so the joinee's own
     // island sees it too, runs this same verb over the same group under the same root, and would pass its own
     // gate. Two writers racing to seat one member and re-key one group. The joinee knows itself by the key it
     // just presented, and stands down.

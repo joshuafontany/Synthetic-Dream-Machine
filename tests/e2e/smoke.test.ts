@@ -3,10 +3,10 @@
  * witnesses as repeatable assertions, driven through the REAL lares CLI
  * against a staged (or live) instance. Current canon only:
  *
- *   1. the vessel boots to live with the @lares hearth seated (quine default)
- *   2. the invariant plane carries the operator-minted @lares oracle
+ *   1. the vessel boots to live with the lares hearth wiki seated (quine default)
+ *   2. the invariant plane carries the operator-minted lares-bag oracle
  *   3. LOAD feeds the hearth carrier-borne (boot meme → 17 records)
- *   4. wiki init + add-bag write the user registry (@catalog composition lane)
+ *   4. wiki init + add-bag write the user registry (catalog composition lane)
  *
  * Staged-only tests guard on instance.mode — a LIVE target never gets reset,
  * re-seeded, or asserted against genesis state.
@@ -29,16 +29,16 @@ beforeAll(async () => { lar = await targetInstance(); });
 afterAll(async () => { await lar.stop(); });
 
 describe("smoke — the vessel stands", () => {
-  test("staged vessel reaches live with the @lares hearth seated", () => {
+  test("staged vessel reaches live with the lares hearth wiki seated", () => {
     if (lar.mode !== "staged") return;   // a live hearth already stands; its log is its own
     expect(lar.bootLog()).toContain("phase → live");
     expect(lar.bootLog()).toMatch(/live — wiki: lares/);
   });
 
-  test("the invariant plane carries the operator-minted @lares oracle", async () => {
+  test("the invariant plane carries the operator-minted lares-bag oracle", async () => {
     if (lar.mode !== "staged") return;   // raw-storage read assumes an owned root
-    // The @lares oracle pointer rides the @oracle system plane (operator ruling
-    // 2026-06-16: @oracle/@lararium/@lares are three separate docs).
+    // The lares-bag oracle pointer rides the oracle plane (operator ruling
+    // 2026-06-16: the oracle, lararium and lares docs stand separate).
     const oracleUrl = bootDocUrl(lar, "oracle");
     expect(oracleUrl).toBeTruthy();
     const repo = new Repo({ storage: new NodeFSStorageAdapter(vesselStorageDir(lar)) });

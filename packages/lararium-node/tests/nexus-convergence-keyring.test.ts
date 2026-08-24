@@ -18,7 +18,7 @@ import {
 } from "../src/nexus-convergence-keyring.js";
 
 const enc = (s: string) => new TextEncoder().encode(s);
-const body = enc("a private @cad body the Nexus dedups within its own epoch");
+const body = enc("a private cad body the Nexus dedups within its own epoch");
 
 // A stable two-epoch keyring — epoch 0 (genesis) + epoch 1 (a charter bump). A FULL member holds both.
 const e0 = mintNexusSecret(0);

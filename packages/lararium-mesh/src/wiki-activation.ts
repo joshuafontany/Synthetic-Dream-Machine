@@ -12,9 +12,9 @@
  *
  * ONE cap, a SPECTRUM of grants (the vessel gradient): a resource-rich vessel
  * (node) advertises a high `activationCap` + `pinBudget` (concurrent multi-wiki);
- * a constrained vessel (browser) advertises a minimal grant (@daemon always + a
+ * a constrained vessel (browser) advertises a minimal grant (the daemon bag always + a
  * small active set), degrading gracefully — the resolver honors whatever grant the
- * vessel carries. @daemon's always-there pin holds on every grant level; the user
+ * vessel carries. The daemon bag's always-there pin holds on every grant level; the user
  * MAY hold up to `pinBudget` further rotatable wiki pins (vessel-resource scaled).
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/wiki-activation
@@ -49,7 +49,7 @@ export type ResolveWikiSpec = (wikiId: string) => Promise<WikiMountSpec | null>;
 /**
  * The vessel's activation GRANT — the spectrum point this vessel advertises.
  * `activationCap` bounds the concurrent live-wiki set (the collector's `wiki`
- * typeCap); `pinBudget` bounds the user's rotatable wiki pins BESIDES @daemon.
+ * typeCap); `pinBudget` bounds the user's rotatable wiki pins BESIDES the daemon bag.
  */
 export interface WikiActivationGrant {
   readonly activationCap: number;
@@ -70,7 +70,7 @@ export interface WikiActivationCap {
    * pin control. Activates it first (a pin means nothing on a dead grain), then pins
    * it in the collector, ENFORCING the vessel's `pinBudget`: when the budget is full,
    * the LEAST-recently-held rotatable pin releases first (the rotation the grant
-   * promised — @daemon is never in this set, so it always stays). Returns true when
+   * promised — the daemon bag is never in this set, so it always stays). Returns true when
    * the grain ends held + live. Idempotent for an already-held grain (refreshes it).
    */
   hold(wikiId: string): Promise<boolean>;
@@ -94,7 +94,7 @@ export function makeWikiActivationCap(
   grant:     WikiActivationGrant,
   resolveSpec?: ResolveWikiSpec,
 ): WikiActivationCap {
-  // Rotatable pins (besides @daemon), wikiId → hold order (a monotone counter). The
+  // Rotatable pins (besides the daemon bag), wikiId → hold order (a monotone counter). The
   // budget bounds this set; the least-recently-held releases when a new hold overflows.
   const holds = new Map<string, number>();
   let holdSeq = 0;

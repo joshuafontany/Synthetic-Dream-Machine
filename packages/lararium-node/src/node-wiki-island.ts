@@ -12,8 +12,8 @@
  *   wikis/{slug}/personal (CRDT, cross-device view state)
  *   wikis/{slug}/working  (CRDT, operator's saved edits route here)
  *   bags/{slug}           (CRDT, the wiki's canon; read-only, promotion target)
- *   libraryBags            (CRDT, optional content libraries: @lararium + @lares)
- *   @oracle                (CRDT, engine core + plugins — the universal floor)
+ *   libraryBags            (CRDT, optional content libraries: the lararium and lares bags)
+ *   oracle                 (CRDT, engine core + plugins — the universal floor)
  *
  * Write routing happens via the in-wiki bag-paths cascade.
  *

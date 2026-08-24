@@ -37,7 +37,7 @@
  * not assert a motor exists.
  *
  * Pure + isomorphic: text (+ an effect list) in, deterministic facts out — no I/O,
- * no store, no LLM in the parse path; runs in node, browser, the @daemon VM alike,
+ * no store, no LLM in the parse path; runs in node, browser, the daemon VM alike,
  * like its form-layer siblings.
  */
 
