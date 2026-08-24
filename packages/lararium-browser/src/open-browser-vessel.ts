@@ -586,7 +586,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   };
   // The default circle the @daemon follow panel paints — the primary system circle seedCirclesDoc plants.
   const CIRCLE_PANEL_DEFAULT = "following";
-  // RENDER the @daemon follow surface FROM the sovereign @circles doc (the follow-graph's SOURCE OF TRUTH). The
+  // RENDER the @daemon follow surface FROM the sovereign circles doc (the follow-graph's SOURCE OF TRUTH). The
   // daemon WORKER holds @circles by access, so `circle-list` reads the membership there and writes the volatile
   // $:/temp/lares/circles itself — main only TRIGGERS. @circles is PRIVATE + fleet-synced same-operator (a follow
   // shows on ALL the operator's own devices) and NEVER federates. Petname/glamour ride blank until the handle-
@@ -640,7 +640,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     })];
   })() : [];
 
-  // ── The WHO plane as a LEAF — RESOLVE the per-Nexus @crossroads board; announce NOTHING ──
+  // ── The WHO plane as a LEAF — RESOLVE the per-Nexus crossroads board; announce NOTHING ──
   // Networked only: the board needs the relay to sync, and the confederation key (relayGatePubKey) scopes the
   // causal island so a human's two vessels resolve the SAME board. Boot composes whoFaceCap with NO card: it
   // resolves the island's WHO board through the deterministic @crossroads address and layers it writable so
@@ -718,7 +718,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
     openDaemon: async ({ assembly, slot }) => {
       if (!daemonWorkerUrl) throw new Error("[openBrowserVessel] daemonWorkerUrl REQUIRED (genesis present → sovereign daemon island)");
-      // Register the per-Nexus @crossroads (public oracle plane) into @oracle so the @daemon recipe resolves
+      // Register the per-Nexus @crossroads (public oracle plane) into @oracle so the daemon recipe resolves
       // it. Isomorphic: node + browser share registerCrossroadsInOracle, and the @daemon core splices
       // @crossroads into the recipe + registerBags for either vessel — only the nexus key differs (here the
       // relay's gate key, so a human's two vessels register the SAME @crossroads).
@@ -900,7 +900,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       });
 
       // ── The FOLLOW surface (the IoC social-graph door) ──────────────────────────
-      // The follow-graph's SOURCE OF TRUTH rides the sovereign @circles doc, held in the daemon WORKER: the
+      // The follow-graph's SOURCE OF TRUTH rides the sovereign circles doc, held in the daemon WORKER: the
       // FOLLOW-GRAPH verbs (circle-add / circle-remove / circle-list) live there (registered by the shared
       // operator-daemon-behavior), reaching @circles by access and writing-then-syncing. @circles is PRIVATE +
       // fleet-synced same-operator (a follow shows on ALL the operator's own devices) and NEVER federates. A
@@ -1050,7 +1050,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // being-as-place costs nothing civic, so a vessel key is the right thing to be seen by here.
       // Carried in the canonical DID form (`0x` + verifying key) so the field holds what it names.
       wikiHandle.broadcast({ did: `0x${vesselVerifyingKey}`, ts: Date.now() });
-      // Boot DEMOTED to a pin (browser gradient): the @daemon surface stays always-live
+      // Boot DEMOTED to a pin (browser gradient): the daemon surface stays always-live
       // on its own; the home wiki registers in the ONE collector as a PINNED `wiki` grain
       // (the single rotatable pin this constrained vessel grants besides @daemon).
       // mountPrimaryWiki already mounted + spec-retained it → onHydrate no-ops.

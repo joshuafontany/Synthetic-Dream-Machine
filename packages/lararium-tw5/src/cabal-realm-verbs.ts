@@ -1,8 +1,8 @@
 /**
- * cabal-realm-verbs — FEED a realm, and READ who feeds it, over the sovereign @daemon doc.
+ * cabal-realm-verbs — FEED a realm, and READ who feeds it, over the sovereign daemon doc.
  *
  * A cabal-realm lives by being fed. Members roll a per-realm LEASE EPOCH — one slot per writer under the
- * @daemon bag — and the realm's liveness reads off that max-register. `realm-feed` rolls this writer's own
+ * daemon bag — and the realm's liveness reads off that max-register. `realm-feed` rolls this writer's own
  * slot (the offering); `realm-clock` reads every slot back and reports who feeds and how deep.
  *
  * ONE WRITER, ONE SLOT. A writer touches only the slot it owns, so two members feeding concurrently never
@@ -31,7 +31,7 @@ import {
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 
-/** Resolve a read+write store over the @daemon doc — where the per-writer lease slots live. */
+/** Resolve a read+write store over the daemon doc — where the per-writer lease slots live. */
 export type ResolveDaemonStore = () => Promise<LarTiddlerStore>;
 
 export interface CabalRealmVerbOptions {
@@ -112,7 +112,7 @@ export function makeRealmClockReactor(opts: CabalRealmVerbOptions): VerbReactor 
   };
 }
 
-/** The two cabal-realm reactors over one @daemon store resolver — the bundle the daemon registers. */
+/** The two cabal-realm reactors over one daemon store resolver — the bundle the daemon registers. */
 export function makeCabalRealmReactors(opts: CabalRealmVerbOptions): { feed: VerbReactor; clock: VerbReactor } {
   return { feed: makeRealmFeedReactor(opts), clock: makeRealmClockReactor(opts) };
 }

@@ -1,5 +1,5 @@
 /**
- * lease-rekey — roll a resource's LEASE EPOCH forward on the live @daemon board, per-writer-slot safe.
+ * lease-rekey — roll a resource's LEASE EPOCH forward on the live daemon board, per-writer-slot safe.
  *
  * The NON-RENEWAL half of revocation (lar:///ha.ka.ba/lares/api/pono/convergent-mesh): a grant names a
  * `boundEpoch`; the grant goes cold the moment the resource's lease epoch rolls past it. Rolling the epoch

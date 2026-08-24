@@ -219,7 +219,7 @@ export async function loadOrMaterializeOracle(repo: Repo, genesisDir?: string): 
 /**
  * Gate: the most-restricted grant — operator(admin), timed. Only the node home
  * (the base @lararium node) mints protocol invariants; wild vessels receive
- * the plane by federating the @lararium doc, and the keel (assembleVessel)
+ * the plane by federating the lararium doc, and the keel (assembleVessel)
  * only READS the oracle. Grant-proof enforcement arrives with keyhive;
  * placement enforces the gate today — this code runs solely in the operator's
  * node genesis office.
@@ -231,7 +231,7 @@ export function mintLaresIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): 
   islandHandle.change((d) => {
     d.tiddlers[LARES_DOC_URI] = mutableLarRecord(LARES_DOC_URI, { text: minted.url, kind: "oracle" }, "operator-mint");
   });
-  // Two node homes federating one @oracle doc may still race; LWW settles
+  // Two node homes federating one oracle doc may still race; LWW settles
   // it — re-read and adopt the winner (an orphaned empty mint costs nothing).
   return tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? minted.url;
 }

@@ -23,7 +23,7 @@
  * `flowMapReadFaceCap` (the http disclosure wire) + the two node cap-stacks.
  *
  * Two node stacks ride here:
- *   - composeHerm — BASE + CROSSROADS: substrate (the @oracle island + social plane), the @daemon immune
+ *   - composeHerm — BASE + CROSSROADS: substrate (the oracle island + social plane), the @daemon immune
  *     core, the carriage pair (a writable @meshpalace FLOW-map + the puller that fills it), the read-face
  *     that serves that map, and — where a genesis stands to hand — the bulb. NO wiki, NO pool.
  *   - composeLararium — BASE + LIFT, wired by `composeCoreVessel` (wiki-slot, wiki, pool, mount); its

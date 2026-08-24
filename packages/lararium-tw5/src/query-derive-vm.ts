@@ -7,7 +7,7 @@ module-type: startup
  * query-derive-vm — TW5 startup module: the IN-VM recall query-derive (one-runtime lock, recall leg).
  *
  * The recall twin of {@link captureAnnotateVm}. Publishes
- * `$tw.lares.deriveQuerySkeletonVm(query) → { skeleton, basis } | null`. The @daemon island reaches
+ * `$tw.lares.deriveQuerySkeletonVm(query) → { skeleton, basis } | null`. The daemon island reaches
  * THIS over the island-protocol channel (`daemon:derive-skeleton-request`); the host's recall verb
  * round-trips a sigil-bearing query string through here, so the markers→vector recall runs the SAME
  * Move→Vec functor capture runs — parse with the FULL self-hosted grammar (getGrammar reads the

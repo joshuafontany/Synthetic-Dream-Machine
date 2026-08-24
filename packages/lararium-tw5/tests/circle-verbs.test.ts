@@ -1,13 +1,13 @@
 /**
  * circle-verbs — the FOLLOW-GRAPH lands in @circles as a PER-NYM CRDT-set, reads back, and NEVER touches a board.
  *
- * These hold the source-of-truth move (Build 2a's local file → the sovereign @circles doc) + the C2 CRDT move
+ * These hold the source-of-truth move (Build 2a's local file → the sovereign circles doc) + the C2 CRDT move
  * (the space-joined `memberDids` register → per-nym `mbr+:`/`mbr-:` stamps):
  *   · a follow STAMPS the nym's own `mbr+:<nym>` key over the daemon store (never a whole-field register write).
  *   · a circle-list FOLDS that membership back (add-stamp present, no superseding remove-stamp).
  *   · an unfollow stamps `mbr-:<nym>` (remove-wins, idempotent) — a legacy `memberDids` folds in as a baseline.
  *   · CONCURRENT-MERGE: an add on one fork + a remove on another merge to remove-wins with NO lost add.
- *   · NEVER-FEDERATES: the reactor reaches ONLY the @circles store — no @crossroads / board title is ever
+ *   · NEVER-FEDERATES: the reactor reaches ONLY the circles store — no @crossroads / board title is ever
  *     written, and every outcome reads `federated: false`.
  *   · the @daemon follow surface renders FROM @circles (the worker owns the render).
  */
@@ -23,7 +23,7 @@ const CTX = {} as VerbContext;
 const NYM_A = "aa".repeat(32);
 const NYM_B = "bb".repeat(32);
 
-/** A @circles store seeded with the "following" system circle (legacy memberDids empty), as seedCirclesDoc plants it. */
+/** A circles store seeded with the "following" system circle (legacy memberDids empty), as seedCirclesDoc plants it. */
 function seededCircles(): MemoryTiddlerStore {
   const store = new MemoryTiddlerStore(CIRCLES_INNER);
   store._seed(mutableLarRecord(circleTiddlerUri("following"), {

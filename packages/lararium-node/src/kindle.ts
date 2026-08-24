@@ -2,7 +2,7 @@
  * kindle — the cold path: pull a Herm's HELD bulb and kindle a NEW SOVEREIGN hearth, headless.
  *
  * `lares kindle <herm-url>` runs this: PULL the all-public bulb off the Herm's public floor → VALIDATE the genesis
- * bytes → MATERIALIZE the @oracle island → the DEVICE mints its OWN Ed25519 → build the cold-boot ceremony tiddlers
+ * bytes → MATERIALIZE the oracle island → the DEVICE mints its OWN Ed25519 → build the cold-boot ceremony tiddlers
  * on THAT key → seed the fresh social docs. The kindled hearth stands SOVEREIGN from first breath: it certifies
  * itself with a key IT minted, never one the Herm supplied.
  *
@@ -16,7 +16,7 @@
  * the stolon, which invites a device into YOUR fleet (the closed path). Kindle joins no fleet: it seeds a FRESH
  * social plane (its own @identities/@circles), never the Herm's.
  *
- * SCOPE. `kindleFromBulb` runs the LIGHT cold-boot ceremony — @oracle island + the device's own key + the identity/
+ * SCOPE. `kindleFromBulb` runs the LIGHT cold-boot ceremony — oracle island + the device's own key + the identity/
  * circle tiddlers. A top-level `lares kindle <herm-url>` command that yields a directly `lares vessel stand --foreground`-able hearth
  * additionally bridges `runFoundingCeremony` (the @daemon + keyhive + sentinel seeding), writes the device's own
  * the social bootstrap (the vessel's own doc-url map), and guards a fresh device (refuse when an identity already
@@ -83,17 +83,17 @@ export interface KindleResult {
   readonly did:                string;
   /** The device's own Ed25519 verifying key hex — minted on THIS device, never supplied by the Herm. */
   readonly deviceVerifyingKey: string;
-  /** The materialized @oracle island url (the engine + genesis the bulb carried). */
+  /** The materialized oracle island url (the engine + genesis the bulb carried). */
   readonly oracleUrl:          string;
   /** The fresh @identities doc url the ceremony seeded (a SOVEREIGN social plane, not the Herm's). */
   readonly identitiesUrl:      string;
-  /** The fresh @circles doc url the ceremony seeded. */
+  /** The fresh circles doc url the ceremony seeded. */
   readonly circlesUrl:         string;
 }
 
 /**
  * Kindle a sovereign hearth from a pulled bulb, headless. Validates the genesis, mirrors the FIRE bytes into the
- * device's runtime CAS, materializes the @oracle island, MINTS the device's OWN Ed25519 (never the Herm's), builds
+ * device's runtime CAS, materializes the oracle island, MINTS the device's OWN Ed25519 (never the Herm's), builds
  * the cold-boot ceremony on that key, and seeds fresh social docs. Returns the sovereign's own identity + handles.
  *
  * @param repo             the cold device's OWN repo (its OWN storage — the Herm's repo never touches this).
@@ -114,7 +114,7 @@ export async function kindleFromBulb(args: {
   // Mirror the FIRE bytes (engine + plugins) into the device's runtime CAS so its island boots on them.
   writeCasEntriesFs(bulb.casEntries, casDirForStorage(storageDir));
 
-  // 2. MATERIALIZE the @oracle island fresh from the seed, under its deterministic id (the engine + genesis).
+  // 2. MATERIALIZE the oracle island fresh from the seed, under its deterministic id (the engine + genesis).
   const island = await materializeGenesisIsland(repo, bulb.seed, "kindle");
 
   // 3. the DEVICE mints its OWN Ed25519 — HERE, on the cold device. The Herm never sees this key (serve fire, never

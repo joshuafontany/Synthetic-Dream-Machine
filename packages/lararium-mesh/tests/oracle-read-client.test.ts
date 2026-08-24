@@ -38,7 +38,7 @@ function mkFetch(ptr: OraclePointer, snap: OracleSnapshot, opts: { corruptBytes?
 }
 
 describe("oracle-read-client — pull, verify, load across the wire", () => {
-  test("a healthy peer: pull verifies + loads the @oracle doc", async () => {
+  test("a healthy peer: pull verifies + loads the oracle doc", async () => {
     const { snap, ptr } = await serve();
     const res = await pullAndVerifyOracle<{ tiddlers: Record<string, { text: string }> }>(
       "http://peer", { nowMs: NOW, fetchImpl: mkFetch(ptr, snap) },

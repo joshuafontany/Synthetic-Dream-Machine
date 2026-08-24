@@ -115,7 +115,7 @@ export function makeResolveReactor(composite: CompositeStore): VerbReactor {
 export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: CatalogAccessor): VerbReactor {
   return async () => {
     const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null; kind: string }> = [];
-    // User wikis — read the @catalog RECIPE entries `wiki init` actually writes
+    // User wikis — read the catalog RECIPE entries `wiki init` actually writes
     // (`@catalog/recipes/{slug}`), mirroring the system-wiki path below. The
     // `@lararium/wikis/` prefix names a pre-plane-split shape nothing writes,
     // so that path reads zero user wikis.

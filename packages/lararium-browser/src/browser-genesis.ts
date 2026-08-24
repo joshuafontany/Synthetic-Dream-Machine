@@ -47,7 +47,7 @@ export async function writeBlobsToCasOpfs(
     }
     console.log(`[browser-genesis] OPFS CAS: wrote ${written} blob(s) by CID`);
   } catch {
-    // OPFS unavailable — the worker falls back to @oracle-doc blobs.
+    // OPFS unavailable — the worker falls back to oracle-doc blobs.
   }
   return written;
 }

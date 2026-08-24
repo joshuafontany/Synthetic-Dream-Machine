@@ -3,7 +3,7 @@
  *
  * The composition class of change (recipe bag membership, oracle doc-URL
  * moves) rides ordinary sync — so a running island can reconcile it without
- * a reboot. This watch subscribes to the `@catalog` registry doc (access≠load:
+ * a reboot. This watch subscribes to the `catalog` registry doc (access≠load:
  * watched, never rendered), reads the island's OWN recipe record, and applies
  * the diff to its own composite:
  *

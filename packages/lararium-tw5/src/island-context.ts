@@ -33,7 +33,7 @@ export interface IslandContext {
    */
   repo:      Repo;
   /**
-   * The `@catalog` registry doc URL (null if the island carries no catalog slot).
+   * The `catalog` registry doc URL (null if the island carries no catalog slot).
    * The isomorphic base for catalog-driven reach: a worker behavior builds
    * `makeCatalogAccessor(ctx.repo, ctx.catalogUrl)` to reach ANY registered bag
    * on demand — access≠load (the catalog is NOT a render layer). Carried in the
@@ -51,13 +51,13 @@ export interface IslandContext {
   /**
    * The engine identity this island actually booted — sha256 the kernel computed
    * over the core bytes it eval'd (never the blob entry's self-claim) + the blob
-   * entry's version string. The engine-watch compares the live `@lararium` doc
+   * entry's version string. The engine-watch compares the live `lararium` doc
    * against this to detect a waiting engine epoch (alert-only; reboot adopts).
    */
   engine: { sha256: string; version: string };
   /**
    * The WikiRecipe this island mounted from (the manifest's slot structure).
-   * The recipe-watch reads `wikiSlug` to find its own `@catalog` recipe record
+   * The recipe-watch reads `wikiSlug` to find its own `catalog` recipe record
    * and reconcile composition changes live.
    */
   recipe: WikiRecipe;

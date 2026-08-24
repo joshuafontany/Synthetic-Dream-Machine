@@ -1,7 +1,7 @@
 /**
  * daemon-protocol-seed — the ONE cap-gated @daemon protocol-seed site.
  *
- * Before this, the two vessel boots each re-seeded the @daemon bag on their own hook: the browser entry
+ * Before this, the two vessel boots each re-seeded the daemon bag on their own hook: the browser entry
  * seeded Ui+Persona+Circle+Flow in `onBoot`, the node entry seeded Flow again in `onEa` — two sites, one
  * of them (node) missing the Ui/Persona/Circle seeds, the asymmetry the browser file's own comment flagged.
  *

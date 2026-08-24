@@ -107,7 +107,7 @@ export function activePersonaPlane(
  *
  * ── THE STATE THIS FUNCTION SITS IN, STATED PLAINLY ─────────────────────────────────────────────
  * The boot path still names the mounted plane by the constant, coherently: the composite layer, the
- * `@oracle` registry entry, the admit payload's read of that entry and the registration all say the same
+ * `oracle` registry entry, the admit payload's read of that entry and the registration all say the same
  * string, so nothing half-wires. This function stands as the resolution point that lets those move onto
  * absolute names together, in one pass, rather than one at a time — and the move costs least while the
  * inner capability ring stays unwired, because nothing has hashed a name into a document yet.

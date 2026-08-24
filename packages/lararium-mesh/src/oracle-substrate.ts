@@ -29,7 +29,7 @@ export { ORACLE_POINTER_DOMAIN } from "./domains.js";
 const HEX64_RE = /^[0-9a-f]{64}$/;   // sha256 hex / ed25519 verifying-key hex / automerge head
 const SIG_RE   = /^[0-9a-f]{128}$/;  // 64-byte ed25519 signature hex
 
-/** A point-in-time export of the @oracle doc — the immutable read-face artifact. */
+/** A point-in-time export of the oracle doc — the immutable read-face artifact. */
 export interface OracleSnapshot {
   /** sha256(bytes) hex — THE content address; the reader rehashes to verify. */
   readonly cid:   string;
@@ -50,7 +50,7 @@ export interface OraclePointer {
   readonly sig:     string;             // ed25519 sig over the canonical signing string
 }
 
-/** Export the @oracle doc as a content-addressed snapshot (the read-face artifact). */
+/** Export the oracle doc as a content-addressed snapshot (the read-face artifact). */
 export async function exportOracleSnapshot<T>(
   doc: Doc<T>,
   provider: DigestProvider = defaultCryptoProvider,

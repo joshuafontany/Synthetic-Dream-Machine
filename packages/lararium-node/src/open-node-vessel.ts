@@ -300,7 +300,7 @@ const blankMemeStore = (repo: Repo): (() => DocHandle<LarDoc>) =>
 interface NodeBootPrep {
   repo:             Repo;
   catalogHandle:    DocHandle<LarDoc>;
-  /** This vessel's own @daemon doc — the plane a caller writes a verb SUMMONS onto (VesselResult carries it
+  /** This vessel's own daemon doc — the plane a caller writes a verb SUMMONS onto (VesselResult carries it
    *  out, so a host surface can ask this vessel rather than only render it).
    *
    *  A THUNK, like every other late-bound member here: the bootstrap lands inside `loadGenesis`, which runs
@@ -392,7 +392,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   // it) and STOOD once the operator's own nym is loaded, below. Null keeps every cross-operator STRANGER
   // (public-read only) through the boot window — the fail-closed default (a node never assumes Nexus-pono).
   let nexusMembership: NexusMembership | null = null;
-  // The per-Nexus federation POSTURE — read as-of-last-sync off the @nexus doc. Default PRIVATE
+  // The per-Nexus federation POSTURE — read as-of-last-sync off the nexus doc. Default PRIVATE
   // (fail-closed): the pre-read boot window denies every cross-Nexus foreign operator co-federation. STOOD
   // once the operator's own nym + bags dir are known, below; a live posture-flip re-reads on membership refold.
   let federationPosture: FederationPosture = "private";
@@ -526,7 +526,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   });
   nexusMembership = nexusMembershipHolder.membership;
 
-  // Read the federation POSTURE off the @nexus doc (as-of-last-sync). Default PRIVATE (fail-closed):
+  // Read the federation POSTURE off the nexus doc (as-of-last-sync). Default PRIVATE (fail-closed):
   // a cross-Nexus foreign operator co-federates ONLY when the operator flips the Nexus open. A live flip needs
   // a re-read (surfaced gap — boot-time read for alpha; the CLI `lares nexus posture` edits the doc).
   const nexusDocForBoot = readNexusDoc(sealHome);
@@ -1444,7 +1444,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     });
 
     // nexus-rekey — the immune keel's RE-KEY tooth at the Herm's OWN tier: roll a resource's LEASE EPOCH
-    // forward on the live @daemon board, staling every grant bound below the new epoch. It writes the
+    // forward on the live daemon board, staling every grant bound below the new epoch. It writes the
     // CALLER's OWN per-writer slot only (a MAX-REGISTER, never a bare scalar — the Automerge-LWW backward-drop
     // hazard), so two hearths rekeying the same resource concurrently both climb, never drop. This is the
     // NON-RENEWAL half of revocation (a lease stales; it never re-derives a secret) — targeted key-material
@@ -1684,7 +1684,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
       },
     );
 
-    // Boot DEMOTED to a pin. The @daemon island stays always-live on its own (never
+    // Boot DEMOTED to a pin. The daemon island stays always-live on its own (never
     // pooled, never collected — the "@daemon always there"). The home wiki (the ONE
     // rotatable user pin BESIDES @daemon; a resource-rich node MAY hold up to
     // pinBudget more) registers in the ONE collector as a PINNED `wiki` grain —

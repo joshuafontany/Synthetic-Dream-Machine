@@ -13,7 +13,7 @@
  * ## Recipe law — one model across all wikis
  *
  *   Manifest carries `recipe: WikiRecipe + grants: IslandGrants`. Structural
- *   slots arrive as typed grants; the bag-oracle resolves from the @oracle doc's
+ *   slots arrive as typed grants; the bag-oracle resolves from the oracle doc's
  *   well-known tiddlers (protocol-invariant plane); library bags resolve from
  *   @catalog ONLY (boot = first reconcile — the same path recipe-watch walks
  *   live). `buildIslandRecipe()` lays the stack:
@@ -22,7 +22,7 @@
  *     draft       (CRDT, high-churn drafts)
  *     @<wikiSlug>  (CRDT, operator's edits)
  *     libraryBags[]  (CRDT, optional content libraries — @lares persona +
- *                     @lararium corpus ride here, resolved island-side from @catalog)
+ *                     lararium corpus ride here, resolved island-side from @catalog)
  *     @oracle      (CRDT, required — the universal floor: engine core + grammar + bag-oracle)
  *
  *   Write routing happens via the in-wiki cascade
@@ -88,7 +88,7 @@ export interface IslandHostShore {
    * Resolve content-addressed bytes by CID (sha256 hex) from the platform's LOCAL CAS
    * (browser OPFS · node FS). The breath path: the worker PULLS its TW5 engine + plugin
    * tiddlers by CID, never CRDT-syncing a 2.3 MB blob doc over the port. Returns null
-   * when the CID is absent. Omitted → the kernel falls back to reading @oracle-doc blobs.
+   * when the CID is absent. Omitted → the kernel falls back to reading oracle-doc blobs.
    */
   resolveByCid?(cid: string): Promise<Uint8Array | null>;
 }
@@ -299,7 +299,7 @@ export function runSovereignKernel(
     const catalog    = catalogUrl ? makeCatalogAccessor(_repo, catalogUrl) : null;
 
     // Three oracle planes, three authorities: system bags (@lares, @lararium)
-    // resolve from the @oracle doc's well-known tiddlers — the system plane the
+    // resolve from the oracle doc's well-known tiddlers — the system plane the
     // island already holds; user library bags resolve from @catalog; public bags
     // will resolve from @crossroads. Structural instance slots arrive as typed
     // grants.
@@ -310,7 +310,7 @@ export function runSovereignKernel(
       if (slot === wikiSlotUri(slug, "personal")) return msg.grants.personalUrl ?? null;
       if (slot === wikiBagUri(slug))              return msg.grants.wikiUrl ?? null;
       if (slot === ORACLE_BAG)                 return msg.grants.islandUrl;
-      // System bags (@lares, @lararium) resolve from the @oracle doc's well-known
+      // System bags (@lares, @lararium) resolve from the oracle doc's well-known
       // tiddlers — the system plane the island already holds. User library
       // bags fall through to @catalog.
       if (slot === LARES_BAG)                    return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARES_BAG]) ?? null;

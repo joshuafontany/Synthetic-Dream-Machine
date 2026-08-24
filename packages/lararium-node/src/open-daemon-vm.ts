@@ -53,7 +53,7 @@ export interface DaemonVmOptions {
   /** The engine's plugin-tiddler CIDs — the daemon island pulls them by CID from the local
    *  CAS (the breath path), never CRDT-syncing the bytes over the port. */
   pluginCids?:       readonly string[];
-  /** Typed structural capabilities: @lararium engine, @daemon bag, @lares,
+  /** Typed structural capabilities: @lararium engine, daemon bag, @lares,
    *  @catalog access. Library bags resolve island-side from @catalog. */
   grants:            IslandGrants;
   /** Optional canon bag URIs for the daemon recipe. Empty by default. */

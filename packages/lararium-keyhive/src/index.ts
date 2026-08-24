@@ -94,10 +94,10 @@ export interface DeviceAdmitPayload {
   readonly meshCabalDocIdHex:      string;
   readonly syncUrl:                string | null;
   /**
-   * The founder's @persona doc URL — the joinee resolves/syncs it to receive the
+   * The founder's persona doc URL — the joinee resolves/syncs it to receive the
    * shared veiled identity (PersonaGroup), the membership-sync foundation. @daemon
    * stays sovereign-per-vessel (the joinee seeds its own); @persona crosses by membership.
-   * Absent on older payloads; the joinee then seeds a fresh local @persona doc.
+   * Absent on older payloads; the joinee then seeds a fresh local persona doc.
    */
   readonly personaUrl?:            string | null;
   /**
@@ -115,7 +115,7 @@ export interface DeviceAdmitPayload {
    */
   readonly islandDocUrl?:          string | null;
   /**
-   * The HEARTH's own @daemon doc — the door a joinee knocks on.
+   * The HEARTH's own daemon doc — the door a joinee knocks on.
    *
    * @daemon stays sovereign-per-vessel: this joinee seeds its OWN at admission, so a verb summons written to
    * its own plane reaches nobody. Asking the hearth to seat it — the keyhive half of the join — means writing

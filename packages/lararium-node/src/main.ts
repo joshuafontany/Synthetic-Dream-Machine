@@ -217,7 +217,7 @@ async function main(): Promise<void> {
     // `personaSlotCeiling("herm") === 0` keeps that true whatever stands.
     //
     // It stands HERE rather than beside `standAs` because the fence lives on a board, and the board opens
-    // with the vessel. The door reads the lease epoch off the live @daemon doc every time it is asked —
+    // with the vessel. The door reads the lease epoch off the live daemon doc every time it is asked —
     // a remembered epoch would hold a vessel raised past the roll that should have dropped it.
     //
     // Nothing here touches disk. A reboot drops this vessel back to its floor with nothing to resume,

@@ -46,7 +46,7 @@ export interface BrowserDaemonVmOptions {
   pluginCids?:      readonly string[];
   /** Canonical one-recipe model for the daemon island. */
   recipe:           WikiRecipe;
-  /** Typed structural capabilities (engine doc, @daemon bag, @lares, @catalog access). */
+  /** Typed structural capabilities (engine doc, daemon bag, @lares, @catalog access). */
   grants:           IslandGrants;
   /**
    * Operator authn/z material delivered to the daemon island for in-worker

@@ -8,7 +8,7 @@
  * small, learnable flow-set: one verb (`lares flow <petname>`), one MCP command, each flow
  * pet-named by its own `lar:` URI tiddler-title.
  *
- * A Flow tiddler lives in the sovereign `@daemon` bag; the daemon dispatcher (the verb-tiddler
+ * A Flow tiddler lives in the sovereign `daemon` bag; the daemon dispatcher (the verb-tiddler
  * protocol) reads it, runs its `capStack` against the target(s), and lands the outcome in
  * `@daemon/outcomes/`. Composition rides the EXISTING Verb protocol — no new plumbing: a flow
  * invocation is a Verb with `action="flow"`, `args.petname`, and `targets = [sensorium URIs]`.
@@ -53,7 +53,7 @@ export interface FlowTiddler {
   readonly updatedAt: string;
   /** the authority that wrote this flow tiddler. */
   readonly authority: string;
-  /** owning bag — the sovereign `@daemon` bag. */
+  /** owning bag — the sovereign `daemon` bag. */
   readonly bag: string;
 }
 
@@ -99,7 +99,7 @@ export const FLOW_SEEDS: readonly FlowSeed[] = [
 
 // ── construction + parse (isomorphic with the tiddler storage) ──────────────────────────────
 
-/** Stamp a FlowSeed into a stored FlowTiddler — title from the pet-name, bag = the @daemon bag. */
+/** Stamp a FlowSeed into a stored FlowTiddler — title from the pet-name, bag = the daemon bag. */
 export function buildFlowTiddler(seed: FlowSeed, authority: string, updatedAt: string): FlowTiddler {
   return {
     title: flowUri(seed.petname),

@@ -5,7 +5,7 @@
  * The card + the reader rule + the recogniser book are pure and transport-blind (handle-card, handle-book).
  * This module lands a signed card in a LarDoc as a namespaced tiddler and reads cards back out — nothing more.
  * Once the card is a tiddler in a read-open doc, the EXISTING Automerge sync distributes it over the relay
- * (browser↔node↔browser) with no new channel, exactly as the @daemon doc already carries keyhive cap-events.
+ * (browser↔node↔browser) with no new channel, exactly as the daemon doc already carries keyhive cap-events.
  * Which read-open bag HOSTS the announce is the caller's wiring choice — the cards ride under their own key
  * prefix, so they coexist cleanly with whatever else the doc holds.
  *

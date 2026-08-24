@@ -103,7 +103,7 @@ export type IslandStorageConfig =
  *   - `coreHash` carries a SHA-256 hex of the TW5 core blob stored in `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium CRDT doc; null = pre-content-addressed trust-on-delivery.
  *     This field is an intent vector: once a CAS store exists, null MUST be rejected at boot.
  *
- * BA-5 (revised): TW5 core bytes live in `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium doc.
+ * BA-5 (revised): TW5 core bytes live in `LarDoc.blobs[ENGINE_CORE_ID]` on the lararium doc.
  * Islands read bytes from the CRDT after `handle.whenReady()`. The manifest carries only
  * `coreHash` (SHA-256 hex) as an integrity gate — never the raw bytes.
  * The vessel acts as courier — delivering capabilities, not raw bytes.
@@ -129,7 +129,7 @@ export type IslandStorageConfig =
 export interface IslandGrants {
   /** @lararium engine/system doc — REQUIRED (engine bytes precede TW5 boot). */
   islandUrl:    string;
-  /** @catalog registry ACCESS (never layered; access≠load). Absent/null = no watch. */
+  /** catalog registry ACCESS (never layered; access≠load). Absent/null = no watch. */
   catalogUrl?:  string | null;
   /** The island's OWN bag (@<wikiSlug>; @daemon under the one-recipe model). */
   wikiUrl?:     string | null;
@@ -153,7 +153,7 @@ export interface IslandMsg_Manifest {
    * CIDs (sha256) of the engine's plugin-tiddler blobs (application/json). The worker
    * resolves these — and the core (coreHash) — via the host's content-addressed
    * `resolveByCid` (local CAS), NOT by reading a CRDT-synced blob doc. Absent → the
-   * worker falls back to reading blobs off the @oracle doc (node / pre-CAS path).
+   * worker falls back to reading blobs off the oracle doc (node / pre-CAS path).
    */
   pluginCids?: readonly string[];
   /** Slot structure for this wiki — wikiSlug + optional libraryBags. */

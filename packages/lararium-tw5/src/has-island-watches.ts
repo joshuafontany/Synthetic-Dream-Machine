@@ -18,7 +18,7 @@ import type { IslandContext } from "./island-context.js";
 import { boundedDomInputValue, type WikiMsg_DomEvent, type WikiMsg_DomInput } from "@lararium/mesh";
 
 /** `#has` engine-epoch drift watch — self-writes the engine-waiting alert when a new genesis
- *  merges into the live @lararium doc under this running island (alert-only; reboot adopts). */
+ *  merges into the live lararium doc under this running island (alert-only; reboot adopts). */
 export function hasEngineWatch(): IslandCap {
   return { name: "engine-watch", onEa: (ctx) => startEngineWatch(ctx) };
 }

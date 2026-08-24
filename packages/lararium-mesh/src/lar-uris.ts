@@ -281,7 +281,7 @@ export function corpusLarUri(slug: string): string {
  * Registry-entry URI inside @catalog that points at a corpus bag.
  *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/bags/catalog/corpus/elyncia"
  *
- * The tiddler at this title lives in the @catalog bag and carries the
+ * The tiddler at this title lives in the catalog bag and carries the
  * corpus bag's AutomergeUrl as its `text` field. Registry pattern: catalog
  * catalogs; it does not host.
  */
@@ -312,12 +312,12 @@ export function parseMeshScale(s: string | null | undefined): MeshScale | undefi
 
 // ── Daemon bag + Persona bag ─────────────────────────────────────────────────
 
-/** Daemon wiki bag id — the lararium's own central daemon `@daemon` bag (one-recipe model).
+/** Daemon wiki bag id — the lararium's own central daemon `daemon` bag (one-recipe model).
  *  SOVEREIGN-per-vessel: this vessel's own control-plane, never shared across vessels. */
 export const DAEMON_BAG_ID    = bagUri("daemon");
 
 /** e.g. flowUri("crystal") → "lar:///ha.ka.ba/lararium/daemon/flows/crystal" — a Flow's
- *  pet-name IS its address: a callable, composed cap-stack tiddler in the @daemon bag. */
+ *  pet-name IS its address: a callable, composed cap-stack tiddler in the daemon bag. */
 export function flowUri(petname: string): string {
   return `${DAEMON_BAG_ID}/flows/${petname}`;
 }
@@ -404,13 +404,13 @@ export function nexusTrustUri(nexusPubkey: string): string {
   return `${IDENTITIES_INNER}/trust/nexus/${nexusPubkey}`;
 }
 
-// ── The @nexus plane — a confederation's per-Nexus faces (causal island) ──────
+// ── The nexus plane — a confederation's per-Nexus faces (causal island) ──────
 // A Nexus is a confederation of lararia (PersonaGroup → MeshCabal → Nexus), a causal
 // island: no global now, no global registry (canon: causal-islands, oracle-governance).
 // Each face keys by the confederation's nexus-pubkey (the MeshCabal key), so it scopes
 // to ONE island; crossing to another Nexus re-announces onto that island's own faces.
 
-/** The `@nexus` bag root — the confederation plane, one sub-tree per nexus-pubkey. */
+/** The `nexus` bag root — the confederation plane, one sub-tree per nexus-pubkey. */
 export const NEXUS_DOC_URI = bagUri("nexus");
 
 /** nexusRegistryUri("abcdef…") → "…/bags/nexus/abcdef…" — the confederation's MEMBERS roster (its lararia). */
@@ -554,7 +554,7 @@ export const WORKING_BINDINGS_PREFIX  = `${PERSONA_NAMESPACE}/working-bindings`;
  * Per-wiki recipe slots (`temp`, `draft`, `@<wiki-slug>`, library bags) live
  * in `wiki-recipe.ts` — slot URIs in the same lar:///ha.ka.ba/bags/<name>
  * namespace. Structural slots arrive as typed IslandGrants on the manifest;
- * @lares rides the @lararium doc's well-known tiddlers; library bags resolve
+ * @lares rides the lararium doc's well-known tiddlers; library bags resolve
  * island-side from @catalog.
  */
 export const BAG_IDS = {

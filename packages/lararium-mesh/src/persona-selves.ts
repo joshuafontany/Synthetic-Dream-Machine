@@ -3,7 +3,7 @@
  *
  * The pet-name and the declared Handle name a human's own faces TO THEMSELVES and to their own devices. A
  * label a human sets on one vessel and loses on the next names the compartment badly, so both ride the
- * @persona bag — the PersonaGroup's own private plane, which the self-slot FLEET-syncs same-operator and the
+ * persona bag — the PersonaGroup's own private plane, which the self-slot FLEET-syncs same-operator and the
  * DeterministicFederationGate never volunteers to a cross-operator. One multitude, every device of the one
  * human, no stranger.
  *
@@ -92,7 +92,7 @@ export function withoutPersonaSelfName(
 }
 
 /**
- * Fold a whole @persona bag's tiddlers into the multitude — `[handleIndex, PersonaSelf]` pairs ascending. Only
+ * Fold a whole persona bag's tiddlers into the multitude — `[handleIndex, PersonaSelf]` pairs ascending. Only
  * titles under the selves prefix read; every other @persona tiddler (the bindings, the sentinels, the hearth
  * true-name) passes by untouched, so the plane carries the identity machinery and these labels side by side.
  */

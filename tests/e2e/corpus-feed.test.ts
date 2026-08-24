@@ -1,5 +1,5 @@
 /**
- * e2e/corpus-feed — vector 4's staged witness: the WHOLE @lares corpus
+ * e2e/corpus-feed — vector 4's staged witness: the WHOLE lares corpus
  * (bags/lares/ha.ka.ba/lares, the hearth's content tree) rides one directory-batch LOAD
  * into a staged vessel, and the disk co-projection writes back carrier-whole.
  *

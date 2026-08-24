@@ -1,5 +1,5 @@
 /**
- * persona-selves-verbs — the OWN-PERSONA name verbs over the sovereign @persona doc.
+ * persona-selves-verbs — the OWN-PERSONA name verbs over the sovereign persona doc.
  *
  * A human's labels for their own faces ride the PersonaGroup's own private bag: the self-slot FLEET-syncs
  * @persona same-operator (so a rename lands on ALL the operator's own devices) and the
@@ -28,7 +28,7 @@ import {
 import type { VerbReactor } from "./verb-dispatcher.js";
 
 /** Resolve a read+write store over the PersonaGroup plane this vessel stands in — the daemon reaches it by
- *  ACCESS (the @oracle registry names the plane under the id its own group derives); access≠load, so no
+ *  ACCESS (the oracle registry names the plane under the id its own group derives); access≠load, so no
  *  composite layer mounts. Throws LOUD when the plane resolves to nothing. */
 export type ResolvePersonaStore = () => Promise<LarTiddlerStore>;
 
@@ -103,7 +103,7 @@ function makeSelvesReactor(opts: PersonaSelvesVerbOptions): VerbReactor {
   };
 }
 
-/** The three own-persona name reactors, built over one @persona store resolver. */
+/** The three own-persona name reactors, built over one persona store resolver. */
 export function makePersonaSelvesReactors(opts: PersonaSelvesVerbOptions): {
   label: VerbReactor; handle: VerbReactor; selves: VerbReactor;
 } {

@@ -24,7 +24,7 @@
  * `persona-planes`, and the name each plane answers to derives in `persona-scope`.
  *
  * A PLANE CARRIES ONE NAME EVERYWHERE: seeded under it, mounted under it, registered under it, named by it
- * in the `@oracle` registry and in the admit payload. The capability layer hashes a bag URL to SEED the
+ * in the `oracle` registry and in the admit payload. The capability layer hashes a bag URL to SEED the
  * Keyhive Document behind it and then looks the URL up verbatim to grant access — so two spellings of one
  * plane seed two documents that no later aliasing reconciles. Deixis resolves once, at the boot path that
  * reads a vessel's own sentinels; only absolute names reach this function (canon:
@@ -45,7 +45,7 @@ import { BAG_IDS, DAEMON_BAG_ID, isBagId } from "./lar-uris.js";
 import { personaScopedBagIds } from "./persona-scope.js";
 
 /**
- * The bag URIs the `@catalog` registry NAMES — the PersonaGroup's own work, read from the projection.
+ * The bag URIs the `catalog` registry NAMES — the PersonaGroup's own work, read from the projection.
  *
  * The catalog keys by bag URI, each entry's text carrying that bag's automerge url. `act CREATE` writes a
  * durable entry here and nothing else registers the bag with keyhive, whose bag→doc map lives in process

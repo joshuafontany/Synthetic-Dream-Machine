@@ -96,7 +96,7 @@ export interface WireToPoolArgs {
   };
   /** The engine core hash (genesis assembly). */
   coreHash: string;
-  /** The @oracle island doc url (genesis assembly). */
+  /** The oracle island doc url (genesis assembly). */
   islandUrl: string;
   /** The @catalog handle — resolveWikiSpec reads a wiki's canon-doc url off it. */
   catalogHandle: DocHandle<LarDoc>;

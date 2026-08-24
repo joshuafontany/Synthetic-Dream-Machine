@@ -1,5 +1,5 @@
 /**
- * daemon-flow-tiddlers — seed the pet-named FLOW tiddlers into the @daemon bag.
+ * daemon-flow-tiddlers — seed the pet-named FLOW tiddlers into the daemon bag.
  *
  * Each seed FLOW (crystal · rhythm · couple) lands as one tiddler addressed by its own `lar:` URI pet-name
  * (buildFlowTiddler stamps title/authority/bag). The daemon dispatcher reads them — the verb-tiddler
@@ -20,7 +20,7 @@ import type { TW5Engine } from "./tw5-vm.js";
  *  never a wall-clock stamp (a Date.now() would break the deterministic genesis quine). */
 const FLOW_SEED_STAMP = "seed";
 
-/** Seed the FLOW tiddlers this vessel CAN ENACT into the live @daemon wiki — cap-gated by `runnableHulls`
+/** Seed the FLOW tiddlers this vessel CAN ENACT into the live daemon wiki — cap-gated by `runnableHulls`
  *  (a ts-only vessel seeds crystal; a full node vessel seeds all three). The seeded set IS the vessel's
  *  advertised enactable-list: a personagroup peer reads it to know which flows to delegate here, and which
  *  to run itself (delegation rides the Verb `aud` narrowing). `authority` names the writer. */

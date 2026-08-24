@@ -97,11 +97,11 @@ export interface PrimaryMountInputs {
   activeWikiId: string;
   wikiSlug:     string;
   coreHash:     string | null;
-  /** @lararium island doc url. */
+  /** lararium island doc url. */
   islandUrl:    string;
   /** primary wiki doc url. */
   wikiUrl:      string;
-  /** @catalog registry doc url — the island's ACCESS grant (recipe-watch + library
+  /** catalog registry doc url — the island's ACCESS grant (recipe-watch + library
    *  resolution live island-side; without this the island cannot watch its recipe). */
   catalogUrl:   string;
 }

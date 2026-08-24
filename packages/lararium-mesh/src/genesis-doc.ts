@@ -236,7 +236,7 @@ export interface GenesisSeed {
 // Region content-CIDs (G-D2: one doc, two ratchets; G-D3: engineCid = true-name)
 // ---------------------------------------------------------------------------
 
-/** The two genesis witness tiddlers — one per ratchet region, both in the @oracle plane. */
+/** The two genesis witness tiddlers — one per ratchet region, both in the oracle plane. */
 export const GENESIS_CID_ENGINE_TIDDLER  = `${ORACLE_DOC_URI}/genesis-cid-engine`;
 export const GENESIS_CID_PLUGINS_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid-plugins`;
 

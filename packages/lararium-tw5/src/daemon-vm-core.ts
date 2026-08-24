@@ -148,12 +148,12 @@ export interface DaemonVmCoreOptions {
   personaBagId?:    string;
   /** One-recipe model for the daemon island. */
   recipe:          WikiRecipe;
-  /** Typed structural capabilities (engine doc, @daemon bag, @lares, @catalog access). */
+  /** Typed structural capabilities (engine doc, daemon bag, @lares, @catalog access). */
   grants:          IslandGrants;
   /** SHA-256 hex of the TW5 core blob. null = pre-CAS. */
   coreHash:        string | null;
   /** CIDs of the engine's plugin-tiddler blobs — the worker pulls them by CID from its
-   *  local CAS (the breath path). Absent → the worker reads blobs off the @oracle doc. */
+   *  local CAS (the breath path). Absent → the worker reads blobs off the oracle doc. */
   pluginCids?:     readonly string[];
   /** Operator authn/z material for in-worker keyhive boot (Stage 1). */
   daemonAuth?:      IslandMsg_Manifest["daemonAuth"];

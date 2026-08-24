@@ -361,7 +361,7 @@ export interface CrossOperatorAdmission {
  * cap=admin@daemon NOR a pinned-root operator device-edge. That peer carries a DIFFERENT operator identity
  * (a cabal-mate / another kahu), so it earns the BOUNDED "cross-operator" class and NOTHING more: the node
  * sharePolicy (selfSlotShareDecision) grants it ONLY the deterministically-federatable public/infra planes
- * (@crossroads / WHO / kapae-antigen), NEVER a private-own plane, NEVER admin. The @crossroads plane reads
+ * (@crossroads / WHO / kapae-antigen), NEVER a private-own plane, NEVER admin. The crossroads plane reads
  * world-public-plaintext by design (no keyhive read-cap gates it — the safety is the DeterministicFederationGate
  * volunteering ONLY the fixed public set + the BeeKEM read-floor beneath every private plane), so the proven
  * identity IS the admission floor for the mandatory public/infra carriage.
@@ -389,7 +389,7 @@ export function classifyCrossOperatorAdmission(proofVerified: boolean): CrossOpe
 
 /**
  * FederationPosture — a per-Nexus stance toward FOREIGN operators (cross-Nexus peers), read as-of-last-sync off
- * the @nexus doc. A Nexus develops in ISOLATION until the operator flips it open, so the default is
+ * the nexus doc. A Nexus develops in ISOLATION until the operator flips it open, so the default is
  * PRIVATE (fail-closed: an absent / unreadable posture reads PRIVATE — see `federationPostureFromDoc`).
  *
  *   · private — the node co-federates with SAME-Nexus operators only (members of THIS charter). A cross-Nexus
@@ -475,7 +475,7 @@ export function admitCrossOperatorUnderPosture(args: {
  * ── HONEST BOUND (the not-yet-wired shore) ────────────────────────────────────────────────────────
  * The `CapTierRing`'s `floor` oracle IS wired on the live path (it reads the SAME federatable-set + seal
  * oracles the carry-split consults — see cap-tier.ts `structuralFloorFor`). The `declared` source is the
- * SHORE not yet lit: no @daemon recipe / BagTiddler carries a `capTier` datum in the tree TODAY, so a live
+ * SHORE not yet lit: no daemon recipe / BagTiddler carries a `capTier` datum in the tree TODAY, so a live
  * `declaredTierForDoc` returns null for every doc → the floor governs → zero behavior change. Lighting it
  * needs the recipe surface to seat the datum + a doc→bag resolver over the bag registry (the same bridge
  * `identityShareDecision`'s bound names). This fn is that shore's tested socket; it never fakes a verdict.

@@ -190,7 +190,7 @@ function readBody(bagsDir: string): string | null {
 }
 
 /**
- * Read the `@nexus` doc into a composed `NexusDoc`, or null (FAIL CLOSED) when it stands absent, carries no
+ * Read the `nexus` doc into a composed `NexusDoc`, or null (FAIL CLOSED) when it stands absent, carries no
  * seal or kahu block, or either reads torn. The caller folds a null through `foundingRoster(null)` to the
  * empty (inert) roster — never a guess.
  */
@@ -223,12 +223,12 @@ register  = "Canon"
 mana      = 19
 cacheable = true
 retain    = true
-role      = "the @nexus doc — three joints at three cadences: the SEAL lineage (rare, a rotation ceremony), the KAHU roster (steward seats), and the PRACTICE dials (fast, one hand). Each rides its own block and its own narrow writer."
+role      = "the nexus doc — three joints at three cadences: the SEAL lineage (rare, a rotation ceremony), the KAHU roster (steward seats), and the PRACTICE dials (fast, one hand). Each rides its own block and its own narrow writer."
 \`\`\`
 
 <<~ ahu #the-three-joints >>
 
-! The @nexus Doc — seal · kahu · practice
+! The nexus Doc — seal · kahu · practice
 
 Three joints ride here at three cadences, each in its own block, because a single block forced every writer through a whole-doc rewrite: a posture flip re-emitted the seal lineage on its way past, and two hands touching different joints clobbered each other. Each narrow writer swaps ONLY its own fence and carries the rest through as opaque text.
 

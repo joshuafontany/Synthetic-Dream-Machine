@@ -1,5 +1,5 @@
 /**
- * lease-rekey.test.ts — the RE-KEY tooth: roll a resource's lease epoch on the live @daemon board, per-writer-slot safe.
+ * lease-rekey.test.ts — the RE-KEY tooth: roll a resource's lease epoch on the live daemon board, per-writer-slot safe.
  *
  * Proofs:
  *   1. A single roll reads the effective (max) epoch and writes effective+1 into the CALLER's own slot.

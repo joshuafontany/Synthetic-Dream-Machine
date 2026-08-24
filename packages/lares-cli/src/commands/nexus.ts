@@ -309,7 +309,7 @@ async function cmdPosture(args: ParsedArgs): Promise<number> {
     return 2;
   }
   if (!doc) {
-    emit(args, { ok: false, error: { code: "refused", message: "no @nexus doc — run `lares nexus seal seat` before setting a posture" }, human: () => console.error("lares nexus posture: no charter doc — seat the charter first") });
+    emit(args, { ok: false, error: { code: "refused", message: "no nexus doc — run `lares nexus seal seat` before setting a posture" }, human: () => console.error("lares nexus posture: no charter doc — seat the charter first") });
     return exitFor("error");
   }
   const posture: FederationPosture = want;

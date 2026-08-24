@@ -11,7 +11,7 @@
  *   · a SAME-OPERATOR WS peer full-syncs @circles (the device-fleet lane; empty relay ring → shared freely).
  *     (fleet-sync)
  *
- * A @circles doc from ANOTHER key models @circles's own random private doc id — NOT in the gate built for
+ * A circles doc from ANOTHER key models @circles's own random private doc id — NOT in the gate built for
  * THIS Nexus, exactly as a private bag's id is not in the deterministic public set.
  */
 

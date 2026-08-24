@@ -93,7 +93,7 @@ export const CORE_CAP = {
 
 // ── the SHARED floor caps (both the full vessel and the Herm compose over these two) ─────────────
 
-/** substrate — the shared keel floor: assembleVessel (composite cascade → genesis @oracle island →
+/** substrate — the shared keel floor: assembleVessel (composite cascade → genesis oracle island →
  *  @lares/@lararium canon → social plane @identities/@groups/@sessions/@daemon/@persona + corpora).
  *  Emits island-ready/corpus-ready INSIDE assembleVessel. */
 export function substrateCap(keel: VesselKeel): CapModule {

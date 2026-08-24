@@ -1,5 +1,5 @@
 /**
- * circle-verbs — the FOLLOW-GRAPH daemon verbs over the sovereign @circles doc.
+ * circle-verbs — the FOLLOW-GRAPH daemon verbs over the sovereign circles doc.
  *
  * "Adding to a circle IS the follow" (social-seed). The follow-graph's SOURCE OF TRUTH rides the @circles
  * Automerge bag — a PER-NYM CRDT-set on each circle tiddler — a PRIVATE bag the self-slot FLEET-syncs
@@ -18,7 +18,7 @@
  * cleanly without a migration write.
  *
  * These reactors run IN the daemon worker (verify-then-delegate gated), reaching @circles by ACCESS (the
- * @catalog registry names it) and writing-then-syncing — access≠load, never a mounted render layer. A follow
+ * catalog registry names it) and writing-then-syncing — access≠load, never a mounted render layer. A follow
  * writes ONLY @circles; NO @crossroads / board / announce shore is reachable here, so the graph never federates
  * by SHAPE. The ONE federated surface stays the glamour a human DELIBERATELY publishes — a separate act.
  *
@@ -37,7 +37,7 @@ import type { VerbReactor } from "./verb-dispatcher.js";
 import type { TW5Engine } from "./tw5-vm.js";
 import { CIRCLE_STATE_TITLE } from "./daemon-circle-tiddlers.js";
 
-/** Resolve a read+write store over the @circles doc — the daemon reaches it by ACCESS (the @catalog registry
+/** Resolve a read+write store over the circles doc — the daemon reaches it by ACCESS (the catalog registry
  *  names this face's `@circles-<tag>`); access≠load, so no composite layer mounts. Throws LOUD when it is
  *  unresolved. Titles INSIDE the plane spell the namespace, so a circle reads the same on every face. */
 export type ResolveCirclesStore = () => Promise<LarTiddlerStore>;
@@ -228,7 +228,7 @@ export function makeCircleListReactor(opts: CircleVerbOptions): VerbReactor {
   };
 }
 
-/** The three FOLLOW-GRAPH reactors over one @circles store resolver — the bundle the daemon registers. */
+/** The three FOLLOW-GRAPH reactors over one circles store resolver — the bundle the daemon registers. */
 export function makeCircleReactors(opts: CircleVerbOptions): { add: VerbReactor; remove: VerbReactor; list: VerbReactor } {
   return {
     add:    makeCircleAddReactor(opts),

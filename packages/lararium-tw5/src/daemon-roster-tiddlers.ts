@@ -1,5 +1,5 @@
 /**
- * daemon-roster-tiddlers — the SENSORIUM ROSTER @daemon surface (E4, the co-use UX).
+ * daemon-roster-tiddlers — the SENSORIUM ROSTER daemon surface (E4, the co-use UX).
  *
  * ONE capability rendered two ways (UI ≡ API): every lifecycle button here fires the RESIDENT verb-summon
  * pattern — `$button` → `$action-setfield` on `…/verb/<verb>` carrying `verb`, the `lares-dispatch` marker,

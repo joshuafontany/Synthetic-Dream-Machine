@@ -9,7 +9,7 @@
  *
  * The INTERFACE never moved — composeFollow still RECOGNISES a nym in the LOCAL handle-book (fail-closed on an
  * unknown nym) BEFORE the membership write reaches @circles; only the graph's BACKING moved from a local file
- * to the daemon-held @circles doc. NEVER-FEDERATES, STRUCTURALLY: the adapter reaches ONLY the three circle-*
+ * to the daemon-held circles doc. NEVER-FEDERATES, STRUCTURALLY: the adapter reaches ONLY the three circle-*
  * verbs; no @crossroads / board / announce verb is on it, so a follow leaves no central trace.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-two-stacks

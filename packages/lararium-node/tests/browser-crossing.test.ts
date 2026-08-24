@@ -8,7 +8,7 @@
  *   real DaemonAuthGate  ←ws←  real LarWSClientAdapter (light Ed25519 leaf, the browser's shape)
  *          │
  *   a real AuthVerifierShore that runs verifyAuthProof (V3 Ed25519 proof-of-possession) AND the
- *   CAPABILITY decision — is this leaf ADMITTED to the @daemon bag? — the real barrier a browser hits.
+ *   CAPABILITY decision — is this leaf ADMITTED to the daemon bag? — the real barrier a browser hits.
  *
  * It proves the crossing the scout found unproven: an ADMITTED leaf crosses the armed gate (the gate
  * emits its `connection` to the Automerge layer — the breath); a leaf with a valid proof but NO admit

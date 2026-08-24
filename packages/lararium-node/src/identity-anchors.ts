@@ -7,7 +7,7 @@
  * PersonaGroup agentId, which the bootstrap never carried) lived ONLY inside the @daemon
  * doc, so a torn @daemon orphaned the veiled Handle with no way back. Persisting them here,
  * beside the sovereign keypair and out of every substrate wipe, lets a rebirth reforge the
- * @daemon store while re-reading the SAME anchors — the Handle survives the substrate.
+ * daemon store while re-reading the SAME anchors — the Handle survives the substrate.
  */
 
 import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync } from "node:fs";

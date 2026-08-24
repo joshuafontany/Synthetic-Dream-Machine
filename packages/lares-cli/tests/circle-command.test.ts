@@ -1,7 +1,7 @@
 /**
  * circle-command.test.ts — the FOLLOW VERB (`lares circle`) end-to-end over the @circles SOURCE OF TRUTH.
  *
- * Operator intent: adding to a circle IS the follow. The MEMBERSHIP rides the sovereign @circles doc (via the
+ * Operator intent: adding to a circle IS the follow. The MEMBERSHIP rides the sovereign circles doc (via the
  * FOLLOW-GRAPH daemon verbs — circle-add / circle-remove / circle-list), which fleet-syncs same-operator and
  * NEVER federates; only the RECOGNITION layer (the handle-book: others' nyms + private petnames) stays LOCAL,
  * gating an unknown nym fail-closed BEFORE the membership write reaches @circles.
@@ -19,7 +19,7 @@ import { mkdtempSync, rmSync, writeFileSync, existsSync, readFileSync, readdirSy
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-// The @circles doc, mocked at the sock transport: an in-memory follow-graph the circle-* verbs round-trip.
+// The circles doc, mocked at the sock transport: an in-memory follow-graph the circle-* verbs round-trip.
 const h = vi.hoisted(() => ({
   graph: new Map<string, Set<string>>(),
   calls: [] as Array<{ verb: string; args: Record<string, unknown> }>,

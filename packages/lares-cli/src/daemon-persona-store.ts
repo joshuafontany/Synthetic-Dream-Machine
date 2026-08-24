@@ -2,7 +2,7 @@
  * daemon-persona-store — the @persona-backed adapters for a human's OWN-persona names, and the local-first
  * floor beneath them.
  *
- * The pet-name and the declared Handle ride the sovereign @persona doc, which the self-slot FLEET-syncs to the
+ * The pet-name and the declared Handle ride the sovereign persona doc, which the self-slot FLEET-syncs to the
  * operator's own device fleet and never volunteers to a stranger — so a rename lands on every device of the
  * one human. The `seat` claim does NOT ride: a Kahu chair names a seat on a PARTICULAR node, so each node
  * keeps its own.

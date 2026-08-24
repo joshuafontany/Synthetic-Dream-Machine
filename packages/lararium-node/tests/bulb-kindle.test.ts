@@ -4,7 +4,7 @@
  * End-to-end, headless, every crypto piece real:
  *   1. SERVE + PULL — a Herm serves the bulb by cid over the PUBLIC floor (`/bulb/*`); a cold device pulls it and
  *      `assembleBulb` re-verifies `sha256(bytes) == cid` on every blob (content-address integrity, secret-free).
- *   2. KINDLE — the cold device materializes the @oracle island from the bulb's genesis, mints its OWN Ed25519, and
+ *   2. KINDLE — the cold device materializes the oracle island from the bulb's genesis, mints its OWN Ed25519, and
  *      builds the ceremony on THAT key → the kindled hearth's did:key derives from the DEVICE's own key.
  *   3. SERVE FIRE, NEVER KEY (KAPU, by placement) — the bulb carries NO signing key; two devices kindling the SAME
  *      bulb become two DISTINCT sovereigns (distinct did:keys). The Herm's process never touches either identity.

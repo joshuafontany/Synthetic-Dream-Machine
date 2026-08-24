@@ -12,7 +12,7 @@
  *                                last-seen glamour). No --to lists every circle.
  *
  * NEVER A FEDERATED WRITE. This drives `composeFollow` over the @circles-backed CircleStore (the FOLLOW-GRAPH
- * daemon verbs — circle-add/circle-remove/circle-list — over the sovereign @circles doc) + the LOCAL handle-
+ * daemon verbs — circle-add/circle-remove/circle-list — over the sovereign circles doc) + the LOCAL handle-
  * book (the recogniser's private memory, a 0o600 file under the identity home). The membership rides @circles,
  * a PRIVATE bag the self-slot FLEET-syncs same-operator (a follow lands on ALL the operator's own devices) and
  * NEVER federates to a stranger. No board, announce, or @crossroads shore is reachable here, so a follow leaves

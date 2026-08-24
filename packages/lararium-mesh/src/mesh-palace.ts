@@ -4,7 +4,7 @@
  *
  * The mesh-palace is the MAP, never the territory (the private mempalace holds
  * the sealed territory; this holds the coarse public chart). It carries three
- * kinds of record, all `LarDoc` tiddlers in the `@meshpalace` bag:
+ * kinds of record, all `LarDoc` tiddlers in the `meshpalace` bag:
  *
  *   · dial-records  — a `lar:` bearing → self-certifying key + dial-able endpoint
  *                     (the SE(3) pose's translation vector; FLOW-only, WHO held off).
@@ -463,7 +463,7 @@ export function bagOf(uri: string): string | undefined {
 
 /**
  * The Lares Viales read-scope: a Herm reads the public floor (`@oracle` base-ontology, the
- * `@lararium`/`@lares` corpus, its own `@meshpalace` FLOW-map) and NEVER a local operator's sovereign
+ * `@lararium`/`lares` corpus, its own `@meshpalace` FLOW-map) and NEVER a local operator's sovereign
  * bag (`@catalog`, `@daemon`, and every PersonaGroup plane). **Fail-closed** — an unparseable or
  * unknown bag denies.
  * Blind to the territory, sighted on the map (#lares-viales). A full Lararium reads its own sovereign

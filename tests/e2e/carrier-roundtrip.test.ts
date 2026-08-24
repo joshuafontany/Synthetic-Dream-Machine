@@ -4,7 +4,7 @@
  *
  * The grain ladder: disk = whole carriers · CRDT doc = record-grain · VM =
  * decomposed. These vectors assert the DISK stratum after a carrier-borne
- * LOAD lands record-grain content in the @lares doc:
+ * LOAD lands record-grain content in the lares doc:
  *
  *   V1 — the doc holds record-grain (parent + ahu children) — LAWFUL
  *   V2 — the @lares disk mirror materializes some projection at all

@@ -165,9 +165,9 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       // verb but never receives a push (browser-only).
       registry.register("circle-state", makeCircleStateReactor(ctx.tw5));
 
-      // The FOLLOW-GRAPH verbs — the SOURCE OF TRUTH over the sovereign @circles doc. "Adding to a circle IS
+      // The FOLLOW-GRAPH verbs — the SOURCE OF TRUTH over the sovereign circles doc. "Adding to a circle IS
       // the follow"; circle-add/circle-remove write @circles.memberDids, circle-list reads it back. The daemon
-      // reaches this face's `@circles-<tag>` by ACCESS off the @catalog registry — access≠load, write-
+      // reaches this face's `@circles-<tag>` by ACCESS off the catalog registry — access≠load, write-
       // then-sync. @circles rides the PRIVATE tier: the self-slot FLEET-syncs it same-operator (so a follow
       // lands on ALL the operator's own devices) and the DeterministicFederationGate NEVER volunteers it to a
       // cross-operator (@circles is outside its federatable set). A follow writes ONLY @circles — no board shore
@@ -193,7 +193,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
         const resolveCirclesStore = async () => {
           const face = personaSiblingBagIds(personaBagIdFor(faceGroup()));
           if (!face) throw new Error("circle-verb: this vessel's PersonaGroup plane names no face");
-          if (!facePlane) throw new Error("circle-verb: this island carries no @catalog plane — a user bag has no registry to resolve from");
+          if (!facePlane) throw new Error("circle-verb: this island carries no catalog plane — a user bag has no registry to resolve from");
           const store = await facePlane.storeOf(face.circles);
           if (!store) throw new Error(`circle-verb: ${face.circles} unresolved — @catalog names no such plane for the face this vessel wears`);
           return store;
@@ -212,7 +212,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           );
         };
 
-        // The OWN-PERSONA name verbs over the sovereign @persona doc — the human's labels for their OWN faces
+        // The OWN-PERSONA name verbs over the sovereign persona doc — the human's labels for their OWN faces
         // (the private pet-name + the declared Handle), riding the same PRIVATE tier one plane over: the
         // self-slot FLEET-syncs @persona same-operator so a rename lands on ALL the operator's own devices,
         // and the DeterministicFederationGate never volunteers it to a cross-operator. The `seat` claim does
@@ -233,7 +233,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           // Founding writes @circles in the same breath as the PersonaGroup plane and its sentinel — a
           // PLACE bootstrap carries @daemon alone — and the boot refuses a partial set outright, so the
           // two stand or fall together. Registering the follow verbs on a faceless floor would answer a
-          // human "@circles-<tag> unresolved: the @oracle registry names no such plane" — a true sentence
+          // human "@circles-<tag> unresolved: the oracle registry names no such plane" — a true sentence
           // that reads as a broken registry, when the honest answer is that no face has been lit yet.
           registry.register("circle-add",    circleReactors.add);
           registry.register("circle-remove", circleReactors.remove);
@@ -248,7 +248,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
           // question it was never given to answer, and the refusal reads as a missing document.
           const personaBagId = personaBagIdFor(faceGroup());
           const resolvePersonaStore = async () => {
-            if (!facePlane) throw new Error("persona-selves-verb: this island carries no @catalog plane — a user bag has no registry to resolve from");
+            if (!facePlane) throw new Error("persona-selves-verb: this island carries no catalog plane — a user bag has no registry to resolve from");
             const store = await facePlane.storeOf(personaBagId);
             if (!store) throw new Error(`persona-selves-verb: the PersonaGroup plane is unresolved — @catalog names no ${personaBagId}`);
             return store;
@@ -274,7 +274,7 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
         // calibration, and mechanizing it here would recreate the root a realm exists without).
         const resolveDaemonStore = async () => {
           const store = await sysPlane.storeOf(DAEMON_BAG_ID);
-          if (!store) throw new Error("cabal-realm-verb: @daemon unresolved — the @oracle registry names no DAEMON_BAG_ID");
+          if (!store) throw new Error("cabal-realm-verb: @daemon unresolved — the oracle registry names no DAEMON_BAG_ID");
           return store;
         };
         const realmReactors = makeCabalRealmReactors({ resolveStore: resolveDaemonStore });
@@ -393,11 +393,11 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
         registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog, post: ctx.post }));
         registry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
         registry.register("list-wikis",  makeListWikisReactor(catalog, sysPlane));
-        // Whole-wiki residency policy — read the @catalog recipe, command main's manager
+        // Whole-wiki residency policy — read the catalog recipe, command main's manager
         // per bag via daemon:residency-op. Pure policy, no live-layer mechanism.
         registry.register("pin-wiki",      makeWikiPinReactor(catalog, ctx.post));
         registry.register("unpin-wiki",    makeWikiUnpinReactor(catalog, ctx.post));
-        // Recipe composition — write the @catalog recipe, command residency via op. NO
+        // Recipe composition — write the catalog recipe, command residency via op. NO
         // live-layer mount/unmount: the recipe syncs, islands reconcile their own stacks.
         registry.register("add-bag",       makeAddBagReactor({ catalog, post: ctx.post }));
         registry.register("remove-bag",    makeRemoveBagReactor({ catalog, post: ctx.post }));

@@ -68,7 +68,7 @@ export interface VesselResult<TPool, TDaemon> {
   wikiDocUrl:       string;
   catalogHandleUrl: string;
   /**
-   * This vessel's OWN @daemon doc — the plane a caller writes a verb SUMMONS onto.
+   * This vessel's OWN daemon doc — the plane a caller writes a verb SUMMONS onto.
    *
    * Every other url here names something a vessel reads; this one names where it is ASKED. The composite
    * store reads and never writes, so a summons rides the repo and this handle: the dispatcher relays it into

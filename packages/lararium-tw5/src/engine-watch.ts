@@ -2,7 +2,7 @@
  * engine-watch — island-side engine-epoch drift detection (isomorphic).
  *
  * The island booted an engine it witnessed (ctx.engine — sha256 the kernel
- * computed over the eval'd core bytes). The @lararium doc keeps syncing after
+ * computed over the eval'd core bytes). The lararium doc keeps syncing after
  * boot; when a new genesis merges in (reconcileIslandFromGenesis on a vessel
  * carrying a newer artifact), the blobs[ENGINE_CORE_ID] entry moves under the
  * running island. This watch observes that move and writes an "engine waiting"
@@ -16,7 +16,7 @@
  *   - ethics    — "waiting" framing (Service-Worker vocabulary): readiness, not
  *                 coercion. No enforcement lives here.
  *   - authority — deliberately ABSENT (held open until the wiki-mesh lives):
- *                 this watch trusts the @lararium doc's write-capability story.
+ *                 this watch trusts the lararium doc's write-capability story.
  *
  * Meme: lar:///ha.ka.ba/lararium/tw5/engine-watch
  */
@@ -46,7 +46,7 @@ function compareVersions(a: string, b: string): number {
  * startEngineWatch — subscribe to the island's @lararium handle; on any change
  * whose core-blob sha256 differs from the booted engine, write the waiting
  * alert. Returns a cleanup (unsubscribe) for onHooAnu, or undefined when the
- * island carries no @lararium slot (e.g. bare test recipes).
+ * island carries no lararium slot (e.g. bare test recipes).
  */
 export function startEngineWatch(ctx: IslandContext): (() => void) | undefined {
   const handle = ctx.handles.get(BAG_IDS.oracle) as DocHandle<LarDoc> | undefined;

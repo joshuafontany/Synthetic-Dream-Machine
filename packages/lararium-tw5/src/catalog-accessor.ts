@@ -34,7 +34,7 @@ import {
 } from "@lararium/mesh";
 
 export interface CatalogAccessor {
-  /** The `@catalog` registry doc itself, resolved + cached. */
+  /** The `catalog` registry doc itself, resolved + cached. */
   handle(): Promise<DocHandle<LarDoc>>;
   /** The AutomergeUrl a registry entry points at, or null if unregistered. */
   urlOf(bagUri: string): Promise<string | null>;
@@ -53,7 +53,7 @@ export interface CatalogAccessor {
 }
 
 /**
- * Build a catalog accessor over `repo`, anchored at the `@catalog` doc URL.
+ * Build a catalog accessor over `repo`, anchored at the `catalog` doc URL.
  *
  * The catalog handle is resolved once and cached; `urlOf` reads the registry
  * entry's `text` field (the bag's AutomergeUrl); `find` resolves that bag's doc.
@@ -80,7 +80,7 @@ export function makeCatalogAccessor(repo: Repo, catalogUrl: string): CatalogAcce
   let _catalog: Promise<DocHandle<LarDoc>> | null = null;
   const handle = (): Promise<DocHandle<LarDoc>> => {
     if (!_catalog) {
-      _catalog = findOrThrow(repo, catalogUrl, "@catalog registry");
+      _catalog = findOrThrow(repo, catalogUrl, "catalog registry");
       // A failed resolve must not poison the cache — the next call retries.
       _catalog.catch(() => { _catalog = null; });
     }

@@ -16,12 +16,12 @@
  *   bags/{slug}           — the wiki's CANON bag (read-only from the wiki), published
  *                            to only by a promotion MOVE (shore-law)
  *   libraryBags[]          — optional content libraries, CRDT, read-only from wiki
- *                            (the @lares wiki-recipe carries @lararium + @lares here)
+ *                            (the lares wiki-recipe carries @lararium + @lares here)
  *   @oracle                — runtime system island: engine core + plugins + grammar +
  *                            bag-oracle; the UNIVERSAL FLOOR of every recipe, CRDT, required
  *
  * @lares (personality) and @lararium (engine corpus) are NOT the floor — they
- * ride a wiki's libraryBags. The @lares wiki-recipe = @oracle + @lararium + @lares.
+ * ride a wiki's libraryBags. The lares wiki-recipe = @oracle + @lararium + @lares.
  * The memetic-wikitext plugin rides @oracle (CID-frozen), so it is universal.
  *
  * Above-stack projections defer (separate concern). When they land they will
@@ -97,7 +97,7 @@ export function wikiDraftDocKey(slug: string, identityDid: string): SlotUri {
  */
 export interface WikiHostFacets {
   readonly wikiSlug: string;
-  /** IDENTITY — `wikis/{slug}`, the @catalog registry key for the wiki itself. */
+  /** IDENTITY — `wikis/{slug}`, the catalog registry key for the wiki itself. */
   readonly wikiKey: string;
   /** CANON — `bags/{slug}`, the write/canon content doc the host resolves + registers. */
   readonly wikiBagId: string;

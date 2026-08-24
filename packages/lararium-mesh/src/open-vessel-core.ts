@@ -168,7 +168,7 @@ export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssemb
   // @lares — the keel only READS the protocol-invariant oracle. Minting rides
   // the most-restricted grant: operator(admin), timed — held by the node home
   // (genesis office, mintLaresIfAbsent). Wild vessels receive the invariant
-  // plane by federating the @lararium doc; absent here reads not-yet-federated,
+  // plane by federating the lararium doc; absent here reads not-yet-federated,
   // never mint-it-yourself.
   let laresHandle: DocHandle<LarDoc> | null = null;
   const laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
@@ -211,7 +211,7 @@ export async function assembleVessel(keel: VesselKeel): Promise<VesselCoreAssemb
   }
   // @lares does NOT register in @catalog: it rides the protocol-invariant
   // plane with @lararium (DreamNet federation floor). Islands resolve it from
-  // the @lararium doc's well-known tiddlers — the substrate they already hold.
+  // the lararium doc's well-known tiddlers — the substrate they already hold.
   // @catalog serves USER bag oracles (ocap grants); @crossroads (future) serves
   // public/infrastructure oracles. Three planes, three authorities.
   emit("island-ready");
@@ -292,7 +292,7 @@ export async function mountWikiSlot(
   composite: CompositeStore,
   slot: { wikiSlug: string; wikiKey: string; wikiBagId: string; draftOracleTitle: string; draftBagId: string },
   /** Pre-resolved wiki doc — the @lares-as-wiki quine seats the operator-minted
-   *  invariant doc as the write layer (its oracle lives on the @lararium doc,
+   *  invariant doc as the write layer (its oracle lives on the lararium doc,
    *  never in @catalog — no cross-plane resolution, no second mint). */
   presetWikiHandle?: DocHandle<LarDoc>,
 ): Promise<{ wikiHandle: DocHandle<LarDoc>; draftHandle: DocHandle<LarDoc> }> {

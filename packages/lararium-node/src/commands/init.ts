@@ -226,7 +226,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   // ── PLACE-FOUNDING — a somewhere, standing on its own key alone ─────────────────────────────
   // Canon rules the halves apart (identity-classes#herm-establishment): a vessel "boots permissionlessly
   // on its own key… it asks no blessing to exist", and NO civic identity mints into it. So founding stands
-  // the PLACE — the sovereign @daemon island, the vessel's own Keyhive individual, and the blind-carriage
+  // the PLACE — the sovereign daemon island, the vessel's own Keyhive individual, and the blind-carriage
   // cabal seated on that individual — and stops there. The vessel now carries, serves the public shelf,
   // and holds every sovereign act closed: the waking floor, reached by founding rather than by falling.
   //

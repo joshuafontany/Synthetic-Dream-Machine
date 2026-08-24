@@ -1,5 +1,5 @@
 /**
- * face-join — the keyhive half of joining an operator's own face, run INSIDE the @daemon island.
+ * face-join — the keyhive half of joining an operator's own face, run INSIDE the daemon island.
  *
  * THE SPLIT THIS FILE SERVES. A device-admit confers STANDING: the founder's persona root signs an edge naming
  * the joinee's vessel key, the joinee pins the KEL prefix, and its Binding Gate walks to the head. That edge
@@ -8,7 +8,7 @@
  * because keyhive knows no such member. This file closes that second half, and keeps the two apart: a human
  * confers standing once, by hand; the machine completes the capability over the wire.
  *
- * WHY THE @daemon ISLAND OWNS IT. The island already holds the booted provider (`operator-daemon-behavior`
+ * WHY THE daemon ISLAND OWNS IT. The island already holds the booted provider (`operator-daemon-behavior`
  * delegates every freshly minted bag through it), and the event store admits ONE writer. A second process
  * opening its own provider over the same store would stand a second holder against a single-owner store. So
  * the join rides the verb surface every other act rides — and rides it toward the HEARTH. @daemon stays

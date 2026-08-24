@@ -20,7 +20,7 @@
  * signature: re-signing the same face with a fresh expiry keeps the same lineage across heartbeats.
  *
  * Pure and isomorphic, like oracle-substrate: this module holds no I/O and no key. The vessel supplies the
- * signer; the caller carries the bytes; the read-open @oracle plane serves the published blob.
+ * signer; the caller carries the bytes; the read-open oracle plane serves the published blob.
  *
  * Design-of-record: lar:///ha.ka.ba/lares/api/pono/persona-circle#the-vault (publication model).
  */

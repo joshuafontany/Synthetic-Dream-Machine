@@ -721,7 +721,7 @@ export function livePalaceHolderCount(label: string): number {
  * is NOT implemented here. This interface only names the shore so the shape is ready.
  */
 export interface PalaceFeedCap {
-  /** Pull the next batch of source records (e.g. ≥meme drawers off the @meshpalace doc) to index. */
+  /** Pull the next batch of source records (e.g. ≥meme drawers off the meshpalace doc) to index. */
   pull(sinceWatermark?: string): Promise<{ records: readonly unknown[]; watermark: string }>;
 }
 

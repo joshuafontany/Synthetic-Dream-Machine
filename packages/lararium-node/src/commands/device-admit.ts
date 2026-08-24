@@ -41,7 +41,7 @@ export interface DeviceAdmitOptions {
   readonly joineeVerifyingKey: string;
   /** Automerge URL of this vessel's genesis island — included in payload for peer-sync delivery. */
   readonly islandDocUrl?:  string | null;
-  /** This hearth's own @daemon doc — the door the joinee knocks on for its seat. */
+  /** This hearth's own daemon doc — the door the joinee knocks on for its seat. */
   readonly hearthDaemonUrl?: string | null;
 }
 

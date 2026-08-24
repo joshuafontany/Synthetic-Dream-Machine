@@ -2,9 +2,9 @@
  * deterministic-doc — per-Nexus doc addresses every island member computes ALIKE, so a shared board needs no
  * advertisement and no mint-race.
  *
- * The @oracle plane already proves the shape (genesis-doc: oracleGenesisDocUrl derives an automerge: URL from
+ * The oracle plane already proves the shape (genesis-doc: oracleGenesisDocUrl derives an automerge: URL from
  * a well-known seed, so every vessel materializes the SAME doc under one stable id). The WHO plane reuses it:
- * a Nexus's @crossroads doc and its WHO board each derive a deterministic URL from the nexus-pubkey, so two
+ * a Nexus's crossroads doc and its WHO board each derive a deterministic URL from the nexus-pubkey, so two
  * browsers on one island resolve the identical board WITHOUT any node advertising its URL — and because the
  * board's id is a pure function of the nexus, no two vessels ever mint two competing boards (the pointer
  * write-back becomes idempotent: every vessel writes the same URL).
@@ -28,7 +28,7 @@ export function deterministicDocUrl(seed: string): AutomergeUrl {
   return stringifyAutomergeUrl({ documentId: binId });
 }
 
-/** The Nexus's @crossroads doc URL — the public plane's per-island address (deterministic). */
+/** The Nexus's crossroads doc URL — the public plane's per-island address (deterministic). */
 export function crossroadsDocUrl(nexusPubkey: string): AutomergeUrl {
   return deterministicDocUrl(`${CROSSROADS_DOC_URI}#${nexusPubkey}`);
 }
@@ -88,7 +88,7 @@ export function edgeKapaeBoardDocUrl(nexusPubkey: string): AutomergeUrl {
  * The Nexus's PERSONA-KEL board URL — deterministic, so the per-Nexus key-event-log board (every persona's
  * PUBLIC KEL head/events) rides the always-carried plane every island member resolves alike. A sibling of the
  * WHO board (both derive from `nexusHandlesUri` — the public WHO face), because the KEL PUBLICLY advertises
- * which op-key currently heads each identifier; the PRIVATE keys / recovery-commit stay in the @persona bag.
+ * which op-key currently heads each identifier; the PRIVATE keys / recovery-commit stay in the persona bag.
  * The federation gate federates this board like @crossroads + WHO, so a rotation propagates to every honest
  * carrier and a stranger walks the identifier→head mapping cold — bounded by sync-latency, never a global now.
  */

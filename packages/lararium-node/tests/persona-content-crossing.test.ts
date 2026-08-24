@@ -68,7 +68,7 @@ describe("@catalog crossing — the human's second vessel reads its PersonaGroup
     await founder.addSentinelMember(joineeAgentId, pg.docIdHex);
     const { docId } = await founder.registerBag(BAG);
     await founder.delegate({ bagUrl: BAG, audience: pg.agentIdHex, access: "read" });
-    const ciphertext = await founder.encryptContent(BAG, new TextEncoder().encode("read via hydrate from the @daemon store"));
+    const ciphertext = await founder.encryptContent(BAG, new TextEncoder().encode("read via hydrate from the daemon store"));
 
     // Transport: the founder's membership events land in the joinee's event STORE (the @daemon path).
     const memberEvents = await founder.eventsForPeer(joineeAgentId);

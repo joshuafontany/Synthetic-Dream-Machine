@@ -178,7 +178,7 @@ export interface PlaceFoundingInput {
 }
 
 export interface PlaceFoundingResult {
-  /** The sovereign @daemon island — the immune core, standing before any face. */
+  /** The sovereign daemon island — the immune core, standing before any face. */
   daemonUrl:            string;
   /** That island's live handle. `seedDaemonDoc` CREATES, so a face-founding must be handed this one
    *  rather than seeding again — a second call would stand a second @daemon and orphan the first. */
@@ -520,10 +520,10 @@ export interface DeviceAdmitEdgeInput {
   syncUrl:                string | null;
   /** Automerge URL of the issuing vessel's genesis island — for peer-sync delivery. */
   islandDocUrl?:          string | null;
-  /** The HEARTH's own @daemon doc — the door the joinee knocks on to ask for its seat (@daemon never
+  /** The HEARTH's own daemon doc — the door the joinee knocks on to ask for its seat (@daemon never
    *  crosses, so a joinee's own plane reaches nobody). Mirrors islandDocUrl: a founder doc the joinee resolves. */
   hearthDaemonUrl?:       string | null;
-  /** The founder's @persona doc URL — the joinee receives it to SYNC the shared veiled identity
+  /** The founder's persona doc URL — the joinee receives it to SYNC the shared veiled identity
    *  (the membership-sync foundation). Mirrors islandDocUrl: a founder doc the joinee syncs. */
   personaUrl?:            string | null;
 }

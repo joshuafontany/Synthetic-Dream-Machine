@@ -1,6 +1,6 @@
 /**
  * meme-corpus-roundtrip — the round-trip law swept across the WHOLE live
- * @lares corpus, not just the boot meme. Born 2026-06-11 after the live
+ * lares corpus, not just the boot meme. Born 2026-06-11 after the live
  * feed found what the single-carrier suite could not: fence-teaching docs
  * whose ambiguous fences masked their own closers (unbounded closer-doubling
  * per cycle), the Kapu SOH variant, plain-toml content swallowing.

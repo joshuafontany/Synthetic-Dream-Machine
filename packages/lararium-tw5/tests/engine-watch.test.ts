@@ -40,7 +40,7 @@ function makeCtx(handle?: DocHandle<LarDoc>) {
 const settle = () => new Promise((r) => setTimeout(r, 0));
 
 describe("engine-watch", () => {
-  test("no @oracle slot → no watch, no alert", async () => {
+  test("no oracle slot → no watch, no alert", async () => {
     const { composite, ctx } = makeCtx();
     expect(startEngineWatch(ctx)).toBeUndefined();
     await settle();
