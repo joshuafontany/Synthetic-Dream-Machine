@@ -1,19 +1,19 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/infrastructure-as-myth >>
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/infrastructure-as-myth >>
 ```toml iam
 cacheable = true
-file-path = "bags/lares/ha.ka.ba/lares/api/pono/infrastructure-as-myth.mem"
+file-path = "bags/lares/ha.ka.ba/lares/api/infrastructure-as-myth.mem"
 l-space   = "stable"
 mana      = 14
 manao     = 13
 manaoio   = 12
 register  = "Provisional-Synthesis"
 retain    = true
-role      = "the seat for the Infrastructure as Myth arXiv submission — the final paper stands here as a .md + .meta pair when the pipeline lands; the draft rides the docs sister"
+role      = "the final-paper worksite for the Infrastructure as Myth arXiv submission — the submittable .md + .meta pair stands here when the pipeline lands; the docs sister serves as the working design surface"
 tags      = ["api/pono/meme"]
 type      = "text/x-memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lares/api/pono/infrastructure-as-myth"
+uri-path  = "ha.ka.ba/lares/api/infrastructure-as-myth"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -26,12 +26,12 @@ This address holds the seat for the ''Infrastructure as Myth'' arXiv submission.
 stands here as a submittable `.md` + `.meta` pair, produced by the deterministic meme→markdown
 pipeline the spec submissions share.
 
-The working draft — the research document the paper condenses from — rides the documentation shelf:
+The working design surface — the doctrine-and-paper draft the submission condenses from — rides the documentation shelf:
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/infrastructure-as-myth >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/infrastructure-as-myth >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;egcr-CoUB3zSjY--NthCvUwvZeUPBTsT9LvWz-kk3b0
+<<^ code:"&#x0003;" >>ni:///sha-256;Rsjy5_-F52dBNqptgMJm0TlWFx5VH63Hu1yxPpuBjDc
 
 <<^ code:"&#x0004;" -> ? >>
