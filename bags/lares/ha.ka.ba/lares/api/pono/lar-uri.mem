@@ -181,6 +181,30 @@ path — but it MUST NOT report two addresses equal that this rule reads apart.
 
 <<~/ahu >>
 
+<<~ ahu #minting >>
+
+!! Minting and Collision
+
+Minting stays open: any vessel MAY mint any address, and no registry gates it — a mint authority would
+stand as a global now, which this scheme's substrate refuses. An open mint owes a lawful answer to
+collision instead, and the substrate already carries one:
+
+''An address names one place; a bag holds one testimony about it.'' Multiple bags MAY hold different
+content under one address without fault. A wiki reads through a ''recipe'' — an ordered #has stack of
+bags, the live edit layer above all — and the highest bag holding the address answers for that wiki.
+Which bag answered stays surfaced on the read path, so priority never masquerades as uniqueness.
+
+Two consequences bind:
+
+* ''Same URI, same ADDRESS, on every peer.'' What CONTENT stands at the address resolves per wiki,
+  through that wiki's own recipe. No global now stands, so no global answer stands — a claim that one
+  content reads canonical on every peer overreaches what an open mint can promise.
+* ''The immutable plane self-certifies.'' A `cid/{hash}` address binds its content by construction;
+  a collision under it names an accident of hashing, never a disagreement of testimony. Where a name
+  must mean one content everywhere, that plane carries it.
+
+<<~/ahu >>
+
 <<~ ahu #bag-surface >>
 
 !! Surface Designation — `@` Names a CRDT Surface
@@ -417,6 +441,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;lNclehJckqfA4Cs1YEapMwHvLZ8MkuNhw-EKOQrWtXI
+<<^ code:"&#x0003;" >>ni:///sha-256;v0fRo_KXQXj-BvoJMkQZbyT83rx3x7EagOgqaPyfrUY
 
 <<^ code:"&#x0004;" -> ? >>

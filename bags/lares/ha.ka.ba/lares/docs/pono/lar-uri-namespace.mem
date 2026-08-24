@@ -26,9 +26,11 @@ lar:///<path>          hostless  (three slashes, no authority component)
 lar://<host>/<path>    hostful   (two slashes, DNS-resolvable authority)
 ```
 
-''Hostless'' URIs (`lar:///...`) carry no DNS authority. They are canonical on every
-peer — same URI means same tiddler regardless of who holds it. The `ha.ka.ba`
-corpus path is the primary hostless root: `lar:///ha.ka.ba/...`
+''Hostless'' URIs (`lar:///...`) carry no DNS authority. A hostless URI names the same
+ADDRESS on every peer; which CONTENT answers there resolves per wiki, through the
+wiki's recipe — an ordered #has stack of bags, the live edit layer above all — with
+the answering bag surfaced on the read path (lar-uri #minting). The `ha.ka.ba`
+corpus path stands as the primary hostless root: `lar:///ha.ka.ba/...`
 
 ''Hostful'' URIs (`lar://<host>/...`) are anchored to a domain. The domain IS the
 attribution and the sync scope. `lar://elyncia.social/...` and
@@ -106,6 +108,6 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;zRTBQFll5OX-B8eSoGZRues4jXVC7G_e8yBMX2s75Rs
+<<^ code:"&#x0003;" >>ni:///sha-256;k1moztXWXdFRq-fEe613nr9XyIZhtku9dUeqouJNeQQ
 
 <<^ code:"&#x0004;" -> ? >>
