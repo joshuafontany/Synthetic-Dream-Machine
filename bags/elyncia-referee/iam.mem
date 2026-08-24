@@ -2,7 +2,7 @@
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/bags/elyncia-referee >>
 ```toml iam
-bag       = "@elyncia-referee"
+bag       = "elyncia-referee"
 cap-tier  = "contract"
 home      = "repository"
 repository = "synthetic-dream-machine"

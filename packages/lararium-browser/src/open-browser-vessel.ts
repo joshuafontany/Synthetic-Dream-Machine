@@ -237,7 +237,11 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
 
 /** The surface id the @daemon owns in the uniform pin-selector — distinct from any pool wiki slug. Pass it to
  *  `setActiveSurface` to summon the @daemon; pass a wiki slug to surface that wiki. It's all the same VM. */
-export const DAEMON_SURFACE_ID = "@daemon";
+// THE SENTINEL IS THE SLUG. Carrying a marker here bought one thing: a translation back to the slug at
+// every boundary that used it. With the marker gone the two are the same string, so the translation
+// stops existing rather than getting simpler — and a sentinel that needs no decoding cannot be decoded
+// wrongly at a call site that forgets to.
+export const DAEMON_SURFACE_ID = "daemon";
 
 /** The ONE shared VesselResult (no vessel-by-type) + browser's one substrate extra. */
 export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, DaemonVmCore> {
@@ -1091,7 +1095,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       activeSurfaceId = surfaceId;
       void daemon.placeVerb({
         verb: "open-wiki",
-        args: { slug: surfaceId === DAEMON_SURFACE_ID ? "daemon" : surfaceId },
+        args: { slug: surfaceId },
         requestedBy: "summon",
       });
       // Summoning the @daemon: seed its switcher list + persona multitude with the live state so

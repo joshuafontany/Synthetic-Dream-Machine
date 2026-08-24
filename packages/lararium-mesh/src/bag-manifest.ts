@@ -36,7 +36,8 @@ export const BAG_MANIFEST_FILE = "iam.mem" as const;
 
 /** What a bag declares about itself. Every field carries a fail-closed default, so a torn read stays usable. */
 export interface BagManifest {
-  /** The bag's own name, with its `@` — `@lares`, `@nexus`, `@circles`. */
+  /** The bag's own name as its directory spells it — `lares`, `nexus`, `circles`. The line below mints
+   *  `lar:///ha.ka.ba/bags/${bag}` from it, so a marker here would ride straight into the address. */
   readonly bag:  string;
   /** WHO may read it. Only ever tightens against the structural floor; a lie toward openness changes nothing. */
   readonly tier: CapTier;

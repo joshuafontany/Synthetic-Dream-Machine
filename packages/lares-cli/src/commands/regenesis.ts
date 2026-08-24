@@ -60,7 +60,10 @@ function resolveHolding(
   bagArg: string,
   holdings: ReturnType<typeof discoverHoldings>,
 ): (typeof holdings)[number] | null {
-  const slug = bagArg.startsWith("@") ? bagArg : (bagArg.replace(/\/+$/, "").split("/").pop() ?? bagArg);
+  // A HOLDING IS A DIRECTORY NAME, so the slug is whatever the last path segment spells. An earlier arm
+  // passed a marked argument through untouched, which can now match no holding at all — tolerance for
+  // a form nothing mints, quietly failing the lookup instead of finding the bag.
+  const slug = bagArg.replace(/\/+$/, "").split("/").pop() ?? bagArg;
   return holdings.find((h) => h.holding === slug || h.toBag === bagArg) ?? null;
 }
 
