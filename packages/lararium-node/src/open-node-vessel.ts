@@ -1599,24 +1599,30 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
     const workerRootDir = rootDirOpt ?? repoRoot;
     const diskMirrorGrant: DiskMirrorGrant = [
-      { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/lares"),    scope: "@lares" },
-      { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/lararium"), scope: "@lararium" },
+      { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/lares"),    scope: "lares" },
+      { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/lararium"), scope: "lararium" },
       // @crossroads = the PUBLIC plane's seed/canon bag — it holds the moved public-domain
       // library (raw .txt books + .mem memes with large source ahus). It projects to
       // bags/crossroads like the other seed bags. Safe to project ONLY with the skinny-handle
       // rule in place (T3): a book too big for the CRDT lands as a skinny handle, and the
       // projector writes only its handle — the body stays in the cid/ CAS, never re-overflowing.
-      { bagId: CROSSROADS_DOC_URI, mirrorRoot: join(workerRootDir, "bags/crossroads"), scope: "@crossroads" },
+      { bagId: CROSSROADS_DOC_URI, mirrorRoot: join(workerRootDir, "bags/crossroads"), scope: "crossroads" },
+      // VIRTUAL BAGS. `working` (and `self` below) name LAYER COORDINATES, never bags on disk — a write
+      // layer and a per-wiki canon authority the mount expands from the slug. They carry no `@` for the
+      // same reason a bag does not: the SEGMENT and the FLAGS say what a name is, so the name says only
+      // which one. `resolveDiskMirrors` branches on `selfCanon`/`wikiSlot`, never on any marker in the
+      // string — a marker here would decorate a decision two booleans already carry.
+      //
       // working = the live write layer; projects per-wiki to wikis/{slug} (BOTH
       // the bag `wikis/{slug}/working` and the leaf fill from the slug at mount —
       // wikiSlot). The authority (the wikis base) stays static here; designation
       // rides the recipe's mirrorBags.
-      { bagId: "@working",       mirrorRoot: join(workerRootDir, "wikis"),          scope: "@working", wikiSlot: "working" },
+      { bagId: "working",        mirrorRoot: join(workerRootDir, "wikis"),          scope: "working",  wikiSlot: "working" },
       // self-canon = the per-wiki CANON authority: a minted user wiki's own
       // @{slug} bag projects to bags/{slug} (both bagId and leaf fill from the
       // slug at mount). System wikis (@lares/@lararium) carry literal grants
       // above, so resolveDiskMirrors skips this for them — no double-project.
-      { bagId: "@self",          mirrorRoot: join(workerRootDir, "bags"),           scope: "@self",    perWikiSlug: true, selfCanon: true },
+      { bagId: "self",          mirrorRoot: join(workerRootDir, "bags"),           scope: "self",    perWikiSlug: true, selfCanon: true },
     ];
     // The engine's plugin-tiddler CIDs — every wiki island pulls them by CID from the local
     // CAS, the same CID plane the daemon island reads.

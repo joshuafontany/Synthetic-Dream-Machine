@@ -22,14 +22,14 @@ const LARES = "lar:///ha.ka.ba/bags/lares";
 // (lares) keeps its static root.
 const grant: DiskMirrorGrant = [
   { bagId: LARES,      mirrorRoot: "/root/bags/lares", scope: "lares" },
-  { bagId: "@working", mirrorRoot: "/root/wikis",       scope: "@working", wikiSlot: "working" },
+  { bagId: "working",  mirrorRoot: "/root/wikis",       scope: "working",  wikiSlot: "working" },
 ];
 
 // + the per-wiki CANON authority — a minted wiki's own bags/{slug} bag projects
 // to bags/{slug}; system wikis keep their literal roots.
 const canonGrant: DiskMirrorGrant = [
   ...grant,
-  { bagId: "@self", mirrorRoot: "/root/bags", scope: "@self", perWikiSlug: true, selfCanon: true },
+  { bagId: "self",  mirrorRoot: "/root/bags", scope: "self",  perWikiSlug: true, selfCanon: true },
 ];
 
 describe("resolveDiskMirrors — authority ∩ designation + per-wiki slug expansion", () => {

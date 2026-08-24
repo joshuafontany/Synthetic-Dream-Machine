@@ -59,8 +59,8 @@ describe("the summon field contract", () => {
 
   test("a bag URI carrying its own '/' and ':' survives the JSON round-trip losslessly", () => {
     const bag = "lar:///ha.ka.ba/bags/lares";
-    const wire = JSON.stringify({ slug: "@personal", bagUrl: bag });
-    expect(verbArgsFromPayload({ [LARES_VERB_ARGS_WIRE_FIELD]: wire })).toEqual({ slug: "@personal", bagUrl: bag });
+    const wire = JSON.stringify({ slug: "personal", bagUrl: bag });
+    expect(verbArgsFromPayload({ [LARES_VERB_ARGS_WIRE_FIELD]: wire })).toEqual({ slug: "personal", bagUrl: bag });
   });
 
   test("an absent or malformed payload reads as empty args (the no-arg summon is common)", () => {
