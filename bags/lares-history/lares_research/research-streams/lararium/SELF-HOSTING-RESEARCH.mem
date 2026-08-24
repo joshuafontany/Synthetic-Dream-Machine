@@ -2,7 +2,8 @@
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml iam
-type = "text/x-memetic-wikitext+tiddlywiki"
+type     = "text/x-memetic-wikitext+tiddlywiki"
+uri-path = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 ```
 
 <<^ code:"&#x0002;" >>

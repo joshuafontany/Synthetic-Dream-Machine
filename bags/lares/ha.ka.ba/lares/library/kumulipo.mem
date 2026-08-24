@@ -2,11 +2,15 @@
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/kumulipo >>
 ```toml iam
+bytes      = 505433
 collection = "kumulipo"
-entries    = "2"
-bytes      = "505433"
+entries    = 2
+namespace  = "&#x2299;"
 type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/library/kumulipo"
 ```
+
+<<^ code:"&#x0002;" >>
 
 ! Library — kumulipo
 
@@ -23,5 +27,7 @@ Each row carries the RFC-6920 anchor a stranger checks with no tooling of ours.
 | kumulipo-liliuokalani.mem | 108812 | `ni:///sha-256;FkVQ7mmsSbud5tUMKwkXwIVPK7ik9MCmhv0vHP5Mpq0` | Beckwith / Liliʻuokalani translations |
 
 Reference this collection as `library:kumulipo` — a name that travels, never a path.
+
+<<^ code:"&#x0003;" >>ni:///sha-256;HDcSo7HjjchXgRQeAIIcJ9JHnzCWWU9gah_0TtASpd4
 
 <<^ code:"&#x0004;" -> ? >>

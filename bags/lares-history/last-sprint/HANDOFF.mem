@@ -1,5 +1,14 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/last-sprint/HANDOFF >>
+```toml iam
+file-path = "bags/lares-history/last-sprint/HANDOFF.mem"
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares-history/last-sprint/HANDOFF"
+```
+
+<<^ code:"&#x0002;" >>
+
 ! Hand-off Crystal — Lares Lararium Node Branch
 
 > Forged: 2026-05-07
@@ -455,3 +464,7 @@ lares act MOVE <uri> --to <target-bag>
 ---
 
 //The crystal holds.//
+
+<<^ code:"&#x0003;" >>ni:///sha-256;x3WYHd_QhFLB9jokhKmeyZE3rHxmgSh4q9M6X9eJf9Y
+
+<<^ code:"&#x0004;" -> ? >>

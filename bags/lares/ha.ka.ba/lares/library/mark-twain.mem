@@ -2,11 +2,15 @@
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/mark-twain >>
 ```toml iam
+bytes      = 16715743
 collection = "mark-twain"
-entries    = "6"
-bytes      = "16715743"
+entries    = 6
+namespace  = "&#x2299;"
 type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/library/mark-twain"
 ```
+
+<<^ code:"&#x0002;" >>
 
 ! Library — mark-twain
 
@@ -27,5 +31,7 @@ Each row carries the RFC-6920 anchor a stranger checks with no tooling of ours.
 | WHAT IS MAN by Mark Twain.txt | 570110 | `ni:///sha-256;Jo3Gsysz8RDZlzQtINr2EJsmlI874CouHdmze_GkBSI` | Project Gutenberg |
 
 Reference this collection as `library:mark-twain` — a name that travels, never a path.
+
+<<^ code:"&#x0003;" >>ni:///sha-256;0BVNLAvLAdONhBajSNTp3ymGzHNA-r4zCC2pMQVf1yc
 
 <<^ code:"&#x0004;" -> ? >>

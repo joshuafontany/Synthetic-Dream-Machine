@@ -242,3 +242,5 @@ export type {
 } from "./verb-caps.js";
 
 export * from "./memetic-wikitext-sensorium.js";
+export { readCarrierShape } from "./carrier-shape.js";
+export type { CarrierShape, CarrierKind, CarrierMarks } from "./carrier-shape.js";

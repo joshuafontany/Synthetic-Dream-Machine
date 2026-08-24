@@ -1,5 +1,14 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/last-sprint/ROADMAP >>
+```toml iam
+file-path = "bags/lares-history/last-sprint/ROADMAP.mem"
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares-history/last-sprint/ROADMAP"
+```
+
+<<^ code:"&#x0002;" >>
+
 ! Lararium — Web3 Genesis Artifact Roadmap
 
 > Updated: 2026-05-12 (S5.9 peer boot parity: Node primary/admin/worker TW5 VMs boot from digest-checked content-addressed core blob)
@@ -714,3 +723,7 @@ calls. Separate `Piscina` instance, any-hot-VM routing, no per-wiki state.
 | Federation / multi-peer sync | Correct after genesis stabilizes; not before |
 | Grammar Invariant 4+ | Block until quine round-trip proves Invariant 3 |
 | Keyhive WASM integration | `encryptedShareHint` field is the forward-compatible hook; Keyhive WASM not yet stable |
+
+<<^ code:"&#x0003;" >>ni:///sha-256;meaIHvsl8JFghwxWVNaxo80qZv1vV9RvU8A7XRvAwSo
+
+<<^ code:"&#x0004;" -> ? >>

@@ -2,7 +2,8 @@
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 ```toml iam
-type = "text/x-memetic-wikitext+tiddlywiki"
+type     = "text/x-memetic-wikitext+tiddlywiki"
+uri-path = "ha.ka.ba/lares/api/pono/li-ki-integrities"
 ```
 
 <<^ code:"&#x0002;" >>

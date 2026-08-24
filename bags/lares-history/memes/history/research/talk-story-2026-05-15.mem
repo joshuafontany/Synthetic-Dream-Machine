@@ -3,7 +3,7 @@
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares-history/history/research/talk-story-2026-05-15 >>
 ```toml iam
 uri-path    = "ha.ka.ba/lares-history/history/research/talk-story-2026-05-15"
-file-path   = "wikis/lares-history/history/research/talk-story-2026-05-15.mem"
+file-path   = "bags/lares-history/memes/history/research/talk-story-2026-05-15.mem"
 type        = "text/x-memetic-wikitext+tiddlywiki"
 register    = "Synthesis-Canon"
 confidence  = 18

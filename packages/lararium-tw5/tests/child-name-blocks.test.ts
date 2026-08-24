@@ -172,7 +172,7 @@ describe("child name blocks — what a fragment may declare", () => {
       const text = readFileSync(path.join(REPO, f), "utf8");
       const spans = fencedSpans(text);
       for (const m of text.matchAll(/```toml iam\n([\s\S]*?)\n```/g)) {
-        if (inMask(m.index!, spans)) continue;
+        if (inMask(spans, m.index!)) continue;
         const bad = Object.keys(parseTaploFields(m[1]!)).filter((k) => k.startsWith("$"));
         if (bad.length) offenders.push(`${f}: ${bad.join(" ")}`);
       }

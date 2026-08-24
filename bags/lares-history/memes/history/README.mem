@@ -4,7 +4,7 @@
 ```toml iam
 cacheable  = false
 confidence = 18
-file-path  = "wikis/lares-history/memes/history/README.mem"
+file-path  = "bags/lares-history/memes/history/README.mem"
 l-space    = "archive"
 mana       = 18
 manao      = 17

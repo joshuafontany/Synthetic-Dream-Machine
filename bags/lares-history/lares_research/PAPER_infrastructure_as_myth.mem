@@ -3,7 +3,7 @@
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/infrastructure-as-myth >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/lares/api/pono/infrastructure-as-myth.mem"
+file-path     = "bags/lares-history/lares_research/PAPER_infrastructure_as_myth.mem"
 type          = "text/x-memetic-wikitext+tiddlywiki"
 register      = "Synthesis"
 status        = "designed"

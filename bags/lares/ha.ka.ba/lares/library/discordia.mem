@@ -2,11 +2,15 @@
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/discordia >>
 ```toml iam
+bytes      = 694457
 collection = "discordia"
-entries    = "5"
-bytes      = "694457"
+entries    = 5
+namespace  = "&#x2299;"
 type       = "text/x-memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/library/discordia"
 ```
+
+<<^ code:"&#x0002;" >>
 
 ! Library — discordia
 
@@ -26,5 +30,7 @@ Each row carries the RFC-6920 anchor a stranger checks with no tooling of ours.
 | prometheus-rising.djvu.txt | 425304 | `ni:///sha-256;2n4LFworCtd87Mf3YkEHKliJsISoc9L8T4NJBV-ZHpg` | //(unrecorded)// |
 
 Reference this collection as `library:discordia` — a name that travels, never a path.
+
+<<^ code:"&#x0003;" >>ni:///sha-256;4e6KrWTf5cBF93lCEjUUZWzah_dwrk0YPdCyk1ywRTg
 
 <<^ code:"&#x0004;" -> ? >>

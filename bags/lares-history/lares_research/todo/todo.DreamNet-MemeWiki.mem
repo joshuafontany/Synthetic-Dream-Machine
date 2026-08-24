@@ -1,6 +1,11 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///todo/DreamNet_MemeWiki >>
+```toml iam
+file-path = "bags/lares-history/lares_research/todo/todo.DreamNet-MemeWiki.mem"
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "todo/DreamNet_MemeWiki"
+```
 
 <<~ ahu #iam >>
 ```toml
@@ -45,7 +50,8 @@ This file replaces four scratch research notes with one routeable worksite. It k
 
 This memo is not yet a binding kānāwai (law). It is a `todo` locus meant to prepare the next lawful implementation and later canon-writing passes.
 
-<<^ code:"&#x0002;" ahu #meme-body-open >>
+<<^ code:"&#x0002;" >>
+
 DreamNet MemeWiki opens the active research-consolidation stream here.
 <<~/ahu >>
 
@@ -469,8 +475,8 @@ Leave the unresolved items visible and bounded. Hidden residue is how architectu
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" ahu #body-close >>ni:///sha-256;phKzOn-RW391tnF2SrMo-GktyAEnsalodExc18ARCMk
 DreamNet MemeWiki closes the active research-consolidation stream here.
-<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;e2F2LG5LMJ23qqAJwgchWFkal7jyuKecNXnAibGs534
 
 <<^ code:"&#x0004;" -> ? >>
