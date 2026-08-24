@@ -1,0 +1,83 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext >>
+```toml iam
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/tiddlywiki-wikitext.mem"
+l-space   = "stable"
+mana      = 13
+manao     = 14
+manaoio   = 11
+register  = "Provisional-Synthesis"
+retain    = true
+role      = "the base-syntax specification skeleton for TiddlyWiki 5 wikitext — the normative reference the +tiddlywiki suffix registration requires and no standards track yet carries"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/pono/tiddlywiki-wikitext"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #abstract >>
+
+! TiddlyWiki 5 Wikitext — the base syntax
+
+This document DESCRIBES an existing format: the wikitext dialect TiddlyWiki 5 parses, authored by
+Jeremy Ruston and the TiddlyWiki community, defined today by its implementation. It claims no change
+control — that belongs upstream — and it defines nothing the implementation does not already do. Its
+office follows the `text/markdown` precedent [RFC7763]: a registration-grade description of a format a
+community already writes, so that a structured-syntax suffix (`+tiddlywiki`, [RFC6839]) gains the
+normative reference every registration template demands.
+
+<<~/ahu >>
+
+<<~ ahu #status >>
+
+!! Status
+
+A skeleton. The section plan stands; the lexical inventory, grammar, and conformance material fill in
+against the implementation, and the finished draft goes to the TiddlyWiki core maintainers for review
+before any registration cites it. Nothing here binds anyone yet.
+
+<<~/ahu >>
+
+<<~ ahu #the-load-bearing-property >>
+
+!! The load-bearing property
+
+One property of this syntax carries every dialect that rides it, and this document exists first to
+state it precisely:
+
+''An unrecognised form degrades to inert text.'' A macro call whose name binds no definition parses —
+the parser accepts the surface — and renders as its own text, injuring nothing around it. Extension
+dialects (memetic-wikitext among them) ride the base as supersets BECAUSE of this: a receiver holding
+only the base parser processes a superset document usefully, every foreign sigil an unbound call. The
+`+tiddlywiki` suffix earns its RFC 6839 place — generic processing of the underlying representation —
+on this property alone.
+
+<<~/ahu >>
+
+<<~ ahu #plan >>
+
+!! Section plan
+
+# ''Terminology'' — tiddler, field, wikitext, macro, widget, filter, transclusion.
+# ''Lexical structure'' — line-mode and inline-mode rules; the pragma prologue; the macro-call token.
+# ''Block grammar'' — headings, lists, tables, code fences, block quotes, rules, style blocks.
+# ''Inline grammar'' — emphasis, links, images, transclusion braces, macro calls, HTML pass-through.
+# ''Pragmas and definitions'' — `\define`, `\procedure`, `\function`, `\widget`, `\import`, `\rules`.
+# ''The degradation rule'' — normative statement of #the-load-bearing-property.
+# ''Conformance'' — document and parser classes, on the shape the sibling specifications use.
+# ''Media type'' — the registration posture, coordinated with upstream.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;0Iu6GP3D8OnIg4iLu68-op5LBsbpBYgueNf20dlbWIM
+
+<<^ code:"&#x0004;" -> ? >>
