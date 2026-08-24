@@ -22,13 +22,14 @@ import { execSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 const { verifyBcc } = await import(pathToFileURL("packages/lararium-tw5/dist/carrier-check.js"));
 const files = execSync("find bags -name \"*.mem\"", { encoding: "utf8" }).trim().split("\n").filter(Boolean);
-let ok = 0, mismatch = 0, unchecked = 0;
+let ok = 0, mismatch = 0, unchecked = 0, torn = 0;
 for (const f of files) {
   const verdict = verifyBcc(readFileSync(f, "utf8"));
   if (verdict === "ok") ok++;
   else if (verdict === "unchecked") unchecked++;
+  else if (verdict === "torn") { torn++; console.error(`  TORN ${f}`); }
   else { mismatch++; console.log(`  MISMATCH ${f}`); }
 }
-console.log(`bcc-witness: ok ${ok} · mismatch ${mismatch} · unchecked ${unchecked} (of ${files.length})`);
-if (files.length === 0 || mismatch > 0) process.exit(1);
+console.log(`bcc-witness: ok ${ok} · mismatch ${mismatch} · unchecked ${unchecked} · torn ${torn} (of ${files.length})`);
+if (files.length === 0 || mismatch > 0 || torn > 0) process.exit(1);
 '

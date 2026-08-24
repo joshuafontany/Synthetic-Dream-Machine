@@ -1032,8 +1032,10 @@ the decade of confusion attacks that followed — begins exactly there.
 
 Ordered by scope: what tells a reader HOW to read comes first, what COVERS what precedes it comes
 last. The split follows the capability lattice onto its one non-monotonic case — `pull` carries
-without implying `read`. A check over raw bytes needs no parser and no canonicalizer, so a relay
-holding carriage and not readership verifies it over an offering it cannot open. A seal cannot travel
+without implying `read`. A check over a byte span needs no grammar, no rendering, and no canonicalizer:
+locating the span takes one lexical scan — the frame recogniser read through the fence mask, so a
+quoted mark never frames. A relay holding carriage and not readership runs that scan without opening
+what the carrier says; the scan reads the carrier's QUOTING, never its meaning. A seal cannot travel
 that way.
 
 The received framing already put the check in that slot: STX opens the text, ETX closes it, and the
@@ -1046,6 +1048,32 @@ its subject to fall out of step. A span between two markers has nothing to disag
 calling home, no authority to ask. And the cut that rides beside it: **a seal proves integrity, never
 authorship.** A valid check read as "authentic canon" has been misread into a standing it never held;
 a check published wherever the artifact lives proves nothing against anyone who can write there.
+
+### What a verdict obliges
+
+The reading names four verdicts, and each carries its consequence — a check whose failure obliges
+nothing decorates rather than protects, the standing RFC 9580 demoted OpenPGP's CRC-24 out of:
+
+* ''ok'' — the bytes match their check. The verdict certifies bytes and nothing above them: never
+  meaning, standing, or authorship.
+* ''mismatch'' — the bytes disagree with the check they carry. A verifier MUST NOT report the carrier
+  as verified, and a consumer MUST surface the mismatch to its operator before admitting the carrier to
+  any bag — admission without surfacing MUST NOT occur. The conflict belongs to the humans involved;
+  the carrier still parses, as graceful parsing requires, and parses as a carrier in fault.
+* ''torn'' — STX stands and ETX does not. A torn carrier reads as a truncated transmission and MUST NOT
+  read as unchecked: conflating the two hands an adversary the cheapest strip there is — cut a file
+  ahead of its closer and a missing check would read as lawful absence. A consumer treats torn as it
+  treats mismatch.
+* ''unchecked'' — no framed body, or a framed body carrying no check. The check stays optional and
+  absence stays legal. A consumer MAY hold a policy requiring one, and under such a policy absence
+  reads as refusal to admit — the only defense a bare digest affords against stripping, since whoever
+  can rewrite a carrier can rewrite or remove the check beside it.
+
+''What the check cannot answer.'' The span opens at STX, so the declaration, the heading, and the iam
+block stand OUTSIDE it: a carrier's address, media type, and grammar-selector can move while the check
+holds. The verdict answers one question — did the text survive carriage — and a reader MUST NOT take an
+`ok` as covering bytes the span excludes. Heading integrity belongs to an outer layer, a seal or a
+signature, never to this mark.
 
 ### What stands, and what waits
 
@@ -1239,6 +1267,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;aYWhEKwsG7hTL-c4O9Ivm6gb0GLU6r5ONvaZPgcYgAg
+<<^ code:"&#x0003;" >>ni:///sha-256;Beub2DQpGhbrU2EYA5k76UUvERyi2DPc1__pD-Vn69U
 
 <<^ code:"&#x0004;" -> ? >>

@@ -39,9 +39,10 @@
  * altitude — a private pet-name beside a declared Handle, `Aperture` beside `Focus`.
  *
  * ── WHAT A RELAY CAN DO WITH IT ─────────────────────────────────────────────────────────────────
- * Raw bytes, one scan, no parser and no canonicaliser. A Herm holding `pull` and not `read` verifies
- * this check over an offering it cannot open — the relay-law exception in `ability-implies` is exactly
- * the capability this instrument was shaped to fit.
+ * One lexical scan — the frame recogniser read through the fence mask, so a quoted mark never frames.
+ * No grammar, no rendering, no canonicaliser: the scan reads the carrier's QUOTING, never its meaning.
+ * A Herm holding `pull` and not `read` runs that scan without opening what the carrier says — the
+ * relay-law exception in `ability-implies` is exactly the capability this instrument was shaped to fit.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext
  */
@@ -92,14 +93,32 @@ function hexToB64u(hex: string): string {
  * malformed carrier in silence — and silence is this layer's whole danger, because an unmatched frame
  * reroutes to text rather than throwing.
  */
-export function checkSpan(text: string): { start: number; end: number } | null {
+/**
+ * The frame's standing, before any digest: absent, torn, or framed.
+ *
+ * TORN names STX standing without ETX — a truncated transmission. It gets its own reading because the
+ * conflation it prevents is the cheapest strip there is: cut a file ahead of its closer and a missing
+ * check would otherwise read as lawful absence. Truncation and absence name different facts, and the
+ * grammar's own bearing law spends a paragraph refusing exactly this collapse elsewhere.
+ */
+export type FrameStanding =
+  | { kind: "absent" }
+  | { kind: "torn" }
+  | { kind: "framed"; start: number; end: number };
+
+export function frameStanding(text: string): FrameStanding {
   const spans = fencedSpans(text);
   const stxM = maskedExec(text, /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g, spans);
-  if (!stxM) return null;
+  if (!stxM) return { kind: "absent" };
   const rest = text.slice(stxM.index);
   const etxM = maskedExec(rest, /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g, fencedSpans(rest));
-  if (!etxM) return null;
-  return { start: stxM.index, end: stxM.index + etxM.index + etxM[0].length };
+  if (!etxM) return { kind: "torn" };
+  return { kind: "framed", start: stxM.index, end: stxM.index + etxM.index + etxM[0].length };
+}
+
+export function checkSpan(text: string): { start: number; end: number } | null {
+  const st = frameStanding(text);
+  return st.kind === "framed" ? { start: st.start, end: st.end } : null;
 }
 
 /**
@@ -149,9 +168,11 @@ export function bccOf(text: string): string | null {
  * check are different facts, and collapsing them would make the reading useless exactly where it
  * matters. The caller decides what an unchecked carrier may do; graceful parsing says it still parses.
  */
-export function verifyBcc(text: string): "ok" | "mismatch" | "unchecked" {
-  const span = checkSpan(text);
-  if (!span) return "unchecked";
+export function verifyBcc(text: string): "ok" | "mismatch" | "unchecked" | "torn" {
+  const st = frameStanding(text);
+  if (st.kind === "absent") return "unchecked";
+  if (st.kind === "torn") return "torn";
+  const span = st;
   const trailing = /^[ \t]*(ni:\/\/\/([a-z0-9-]+);([A-Za-z0-9_-]+))/.exec(text.slice(span.end));
   if (!trailing) return "unchecked";
   // The message names its algorithm; this reader decides whether to accept it.

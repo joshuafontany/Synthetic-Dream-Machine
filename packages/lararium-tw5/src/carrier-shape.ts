@@ -27,7 +27,7 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext
  */
 
-import { fencedSpans, maskedExec } from "./meme-ast/fence-mask.js";
+import { fencedSpans, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
 import { verifyBcc } from "./carrier-check.js";
 
 /** One mark's presence, read through the fence mask so a teaching example never counts as a frame. */
@@ -41,7 +41,7 @@ export interface CarrierMarks {
   readonly stx:     boolean;
   readonly etx:     boolean;
   readonly eot:     boolean;
-  readonly check:   "ok" | "mismatch" | "unchecked";
+  readonly check:   "ok" | "mismatch" | "unchecked" | "torn";
 }
 
 export type CarrierKind = "carrier" | "descriptor" | "shelf" | "unframed";
@@ -121,6 +121,14 @@ export function readCarrierShape(text: string): CarrierShape {
   // A descriptor closes on EOT with no body between; only the release is required of it.
   if (kind === "descriptor" && !marks.eot) faults.push("no EOT — the declaration never releases");
   if (marks.check === "mismatch") faults.push("block check does not match the body it follows");
+  // A torn frame reads as a truncated transmission, never as an unchecked one — the conflation would
+  // let a file cut ahead of its closer pass as lawful absence-of-check.
+  if (marks.check === "torn") faults.push("the frame opens and never closes — STX stands without ETX; torn reads as truncated, never unchecked");
+  // ONE TEXT FRAME PER CARRIER. The check covers the first STX..ETX span and only that, so a second
+  // frame would ride beneath a verdict computed over the first — the smuggling shape. The gradient
+  // surfaces it rather than letting the first frame's `ok` speak for bytes it never covered.
+  const stxCount = maskedExecAll(text, /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g, spans).length;
+  if (stxCount > 1) faults.push(`${stxCount} text frames stand where the grammar admits one — only the first verifies`);
 
   return { kind, marks, faults };
 }

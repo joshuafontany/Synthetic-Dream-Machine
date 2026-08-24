@@ -114,4 +114,29 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
       .toBeLessThanOrEqual(39);
   });
 
+  /**
+   * TORN NEVER READS AS UNCHECKED. A file cut ahead of its closer loses its ETX and its check with it —
+   * and a reader that files that under "no check present" hands an adversary the cheapest strip there
+   * is. The frame's standing distinguishes a transmission that never carried a check from one that lost
+   * its tail, and the gradient faults the second.
+   */
+  test("a torn frame reads as truncated, never as unchecked", () => {
+    const torn = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml iam\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code:"&#x0002;" >>\n\nbody cut mid-transmissi`;
+    const shape = readCarrierShape(torn);
+    expect(shape.marks.check).toBe("torn");
+    expect(shape.faults.join(" ")).toContain("torn reads as truncated");
+  });
+
+  /**
+   * ONE TEXT FRAME PER CARRIER. The check covers the first STX..ETX span only, so a second frame would
+   * ride beneath a verdict computed over the first — the smuggling shape, surfaced as a fault rather
+   * than blessed by the first frame's `ok`.
+   */
+  test("a second text frame surfaces as a fault rather than riding beneath the first frame's verdict", () => {
+    const two = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml iam\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code:"&#x0002;" >>\n\nfirst body\n\n<<^ code:"&#x0003;" >>\n\n<<^ code:"&#x0002;" >>\n\nsmuggled body\n\n<<^ code:"&#x0003;" >>\n\n<<^ code:"&#x0004;" -> ? >>\n`;
+    const shape = readCarrierShape(two);
+    expect(shape.faults.join(" ")).toContain("2 text frames");
+  });
+
+
 });
