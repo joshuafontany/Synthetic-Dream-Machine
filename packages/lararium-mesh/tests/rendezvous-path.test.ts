@@ -67,8 +67,10 @@ describe("the rendezvous isolates by root — a shared short home would be worse
 
 describe("the siting follows the ruling: it survives a logout", () => {
   test("the path never sits under a runtime dir the session destroys", () => {
-    // Set XDG_RUNTIME_DIR as loudly as possible; the answer must not move there.
-    const p = rendezvousPath({ root: "/some/root", uid: 1000, xdgRuntimeDir: "/run/user/1000" });
+    // THE CLAIM IS THE SITING, NOT A KNOB. An earlier shape took `xdgRuntimeDir` and ignored it, so the
+    // signature advertised a choice the ruling had already closed — a parameter whose whole job was doing
+    // nothing still invites a caller to pass it and expect an effect. The siting is asserted directly.
+    const p = rendezvousPath({ root: "/some/root", uid: 1000 });
     expect(p.startsWith("/run/user/")).toBe(false);
     expect(p.startsWith("/tmp/lares-1000/")).toBe(true);
   });

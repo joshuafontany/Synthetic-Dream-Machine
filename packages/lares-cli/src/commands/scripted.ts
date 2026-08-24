@@ -47,7 +47,6 @@ export async function cmdServe(args: ParsedArgs): Promise<number> {
   const extraArgs: string[] = [];
   if (args.options["wiki"])    extraArgs.push("--wiki",    args.options["wiki"]);
   if (args.options["port"])    extraArgs.push("--port",    args.options["port"]);
-  if (args.options["storage"]) extraArgs.push("--storage", args.options["storage"]);
   if (args.options["root"])    extraArgs.push("--root",    args.options["root"]);
   if (args.flags["debug"])     extraArgs.push("--debug");
   return runCommand("node", [distMain, ...extraArgs], NODE_PKG);

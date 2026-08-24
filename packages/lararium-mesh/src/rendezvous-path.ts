@@ -57,11 +57,8 @@ export function rendezvousFits(path: string): boolean {
  * `/tmp/lares-<uid>/<root-digest>.sock` — the uid keeps two operators on one machine apart, the digest
  * keeps two roots apart, and the whole path stays a fixed 40 bytes however deep the root runs.
  *
- * `xdgRuntimeDir` rides the signature and is deliberately UNUSED for siting: a caller passing it should
- * find the answer unchanged, because the ruling settles this and no environment overrides a ruling. It
- * stays in the shape so the refusal is legible at the call site rather than invisible.
  */
-export function rendezvousPath(opts: { root: string; uid: number; xdgRuntimeDir?: string }): string {
+export function rendezvousPath(opts: { root: string; uid: number }): string {
   const digest = createHash("sha256").update(opts.root).digest("hex").slice(0, 12);
   return `/tmp/lares-${opts.uid}/${digest}.sock`;
 }

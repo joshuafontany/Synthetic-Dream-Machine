@@ -11,11 +11,10 @@
  *   http://localhost:{port}/…    → oracle read-face; federation pulls + verifies through it
  *
  * Usage:
- *   node dist/main.js [--port 8080] [--storage .lararium] [--wiki lares] [--root /alt/root]
+ *   node dist/main.js [--port 8080] [--wiki lares] [--root /alt/root]
  *
  * Environment:
  *   LAR_PORT     — server port (default 8080; docker-compose.yml overrides to 4321)
- *   LAR_STORAGE  — storage directory (default {root}/.lararium)
  *   LAR_WIKI     — wiki id (default lares — the @lares-as-wiki quine)
  *   LAR_CATALOG  — existing catalog automerge URL to join (optional)
  *   LAR_ROOT     — alternate repo root for all mirror paths (default: monorepo root).
@@ -69,7 +68,11 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
   };
   const cfg        = loadLaresConfig();   // per-@daemon resource overrides (~/.lares/config.json)
   const rootDir    = resolve(get("--root", "LAR_ROOT", REPO_ROOT));   // corpus root (genesis)
-  const storageDir = resolve(get("--storage", "LAR_STORAGE", larDataDir()));   // the vessel substrate → <lares>/vessel
+  // ONE SUBSTRATE DIR, DERIVED THE SAME WAY ON BOTH SIDES. An override here moved the daemon's dir and
+  // not its client's — and since the rendezvous derives FROM this dir, a caller who used it stranded the
+  // daemon at a socket the CLI could not compute. `LAR_ROOT` remains the way to move a whole vessel,
+  // because it moves BOTH sides at once.
+  const storageDir = larDataDir();   // the vessel substrate → <lares>/vessel
   // The composable genesis cap: --genesis flag → LAR_GENESIS env → ~/.lares/config.json → repo-relative
   // <rootDir>/genesis. Genesis stays checked-in by default, so a no-config boot lands on the repo's
   // tracked seed exactly as before; an operator sites it under ~ via config.resources.genesis.
