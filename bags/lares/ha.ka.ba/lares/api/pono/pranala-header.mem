@@ -10,7 +10,7 @@ manaoio   = 17
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the bearing a carrier declares about itself — the `?` self-token on the SOH control sigil, and the retired speaking-head form the reader still admits"
+role      = "the bearing a carrier declares about itself — the `?` self-token on the SOH control sigil"
 tags      = ["api/pono/pranala", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pranala-header"]
 type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
@@ -26,9 +26,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
 `?` token means ''this carrier itself'' — a self-reference no sigil keyword can express, since a
 keyword names a thing and this one names the speaker.
 
-The bearing reads off the SOH frame scan (the deserializer's head recogniser), never off a sigil
-pattern of its own. A `?` written on any speaking-head sigil parses as an unbound macro call and
-degrades to inert text, the way every unrecognised form does.
+The bearing reads off the SOH frame scan (the deserializer's head recogniser).
 
 <<~/ahu >>
 
@@ -40,7 +38,7 @@ degrades to inert text, the way every unrecognised form does.
 ⏿ orient: the bearing rides the SOH control sigil, once per carrier, ahead of the iam block
 ◇ the uri is this carrier's canonical `lar:` address; every `?` in the carrier resolves to it
 ▶ read the bearing off the head; set the self-reference for all sigils in this carrier
-↺ confirm exactly one bearing per carrier and a `uri-path` that agrees with it; confirm no speaking-head header rode in behind the control head
+↺ confirm exactly one bearing per carrier and a `uri-path` that agrees with it
 
 <<~/ahu >>
 
@@ -57,10 +55,10 @@ A bearing's URI MUST match the carrier's `uri-path` iam field.
 A bearing MUST NOT appear inside an ahu slot body, and MUST NOT repeat in the body on any head.
 The `?` token is reserved — MUST NOT be used as a sigil name elsewhere.
 
-''Why the control head and not the speaking one.'' A frame mark states what the reader must do before it
-can read anything; a speaking sigil states what a carrier says. The bearing is the first of the former —
-a reader that cannot find the address cannot resolve a single `?` in the body — so it rode to the head
-that carries the frame when the head lock landed (2026-08-15, #frame-head-lock in the carrier spec).
+''Why the control head.'' A frame mark states what the reader must do before it can read anything; a
+speaking sigil states what a carrier says. The bearing stands first among the former — a reader that
+cannot find the address cannot resolve a single `?` in the body — so it rides the head that carries the
+frame (#frame-head-lock in the carrier spec).
 
 <<~/ahu >>
 
@@ -77,12 +75,6 @@ The bearing reads off the SOH scan, which anchors on the control code and admits
 ahead of it. ''The tail must tolerate the arrow'': `? ->` carries a `>`, so a scan closing on `[^>\n]*`
 stops at the bearing itself and finds no head at all. Every scan in this grammar spells it
 `(?:[^>\n]|->)*` for that reason.
-
-!!! One head carries the bearing
-
-The speaking head carries no frame mark, so `<<~ ? -> uri >>` names nothing to the frame: it parses as
-an unbound macro call and degrades to inert text. A carrier declares its bearing on the SOH control
-sigil, once, and nowhere else.
 
 <<~/ahu >>
 
@@ -116,6 +108,6 @@ agrees-with    = "uri-path"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dTgrVPq1bsNOHQve47G-M0Wx3rahDHOPJRrInUw-nuY
+<<^ code:"&#x0003;" >>ni:///sha-256;qIBSh6O_59M2PP8IWKfnfvVUpbV65MuJvzflYncwp5Q
 
 <<^ code:"&#x0004;" -> ? >>
