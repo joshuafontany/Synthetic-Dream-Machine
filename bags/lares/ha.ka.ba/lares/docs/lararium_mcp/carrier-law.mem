@@ -38,9 +38,9 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 | compressed core | `invariant` | boot-priority selection, cache policy, companion-meme split validation | high-priority hydration packets |
 | surface semantics | `memetic-wikitext` | lexer/parser contracts, primitive-aware AST seeds | source resources, grammar-aware prompts |
 | stable routing | `loci` | URI resolution, carrier-tree index, declared-unresolved index | resource namespaces and templates |
-| composed capability | `implements` | interface bundle validation and routing | interface-filtered resources/tools/prompts |
+| composed capability | the has-stack | component validation and routing | family-filtered resources/tools/prompts |
 
-The compiler begins from lawful carriers plus declared interface bundles.
+The compiler begins from lawful carriers plus the components they declare wearing.
 It should not begin from markdown files plus links.
 
 <<~/ahu >>
@@ -119,19 +119,28 @@ Parser legality and render machinery stay separate.
 
 <<~ ahu #interface-bundles >>
 
-!! Implements as Composable Interface Bundles
+!! Composition as a Stack of Components
 
-`implements` must name real outward type law.
-Bundle composition stays additive; a carrier may satisfy `meme`, `loci`, `invariant`, and specific interfaces at once.
-The compiler should index interfaces, validate declared laws against actual carriers, and route capabilities by interface family.
+''A carrier is nameless but for its `lar:` address.'' Everything else it WEARS: components named in the
+iam `tags` field, each a carrier at its own address that speaks for what wearing it asks. Composition
+stays additive — a carrier may wear `meme`, `loci`, `invariant` and any family's component at once.
 
-Common patterns:
+''The stack carries no role vocabulary.'' No implements, no owns, no defines: a component means what
+its own meme says, and the edge means only that the carrier holds it. Relations richer than composition
+ride `loulou` and `kahea`, or reify as a component that speaks for itself.
 
-| Bundle | Reading |
+The compiler indexes the components carriers wear, checks each against the meme that defines it, and
+routes by what a carrier HOLDS — never by what it is. ''A fixed enum of blessed components reads as the
+interface sneaking back''; a bare entry whose definition has not landed stands declared-unresolved, a
+lawful and promotable state.
+
+Common stacks:
+
+| Stack | Reading |
 |---|---|
-| `meme + loci` | minimum typed carrier with stable address pressure |
+| `meme + loci` | minimum placed carrier with stable-address pressure |
 | `meme + loci + invariant` | boot/core pressure with stable routing |
-| `meme + loci + specific interface` | ano meme whose family extends the routing floor |
+| `meme + loci + a family's own` | a carrier whose family extends the routing floor |
 
 <<~/ahu >>
 
@@ -141,7 +150,7 @@ Common patterns:
 
 # validate `meme` copy-shape
 # validate `invariant` pressure/cacheability when declared
-# extract `implements` interface bundle
+# extract the has-stack components
 # resolve `loci` and parent/child tree
 # parse memetic-wikitext primitives
 # lower `pranala` edges
@@ -162,6 +171,6 @@ Carrier truth stays ahead of syntax swell.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;86Lk2gjOLEqTxvpdt9FhMeJZiDCjMAbsNsiiolwQ3TQ
+<<^ code:"&#x0003;" >>ni:///sha-256;IjKuRBdR5t4CXcmIorOK2IQlsvfp8RKavr6JwiuDF5E
 
 <<^ code:"&#x0004;" -> ? >>

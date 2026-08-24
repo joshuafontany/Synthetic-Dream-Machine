@@ -180,7 +180,7 @@ The durable MCP design now lives under `packages/lares-core/memes/docs/lararium_
 | Locus | Canonical role |
 |---|---|
 | `spine` | program frame, architecture contraction, namespace posture |
-| `carrier-law` | meme, invariant, memetic-wikitext, loci, and interface bundle compiler pressure |
+| `carrier-law` | meme, invariant, memetic-wikitext, loci, and has-stack compiler pressure |
 | `hydration` | required-core closure, edge taxonomy, artifact contract, resource exposure |
 | `ast-execution-render` | AST envelope, TiddlyWiki boundary, pranala planes, execution graph, render projection |
 | `adapters` | submodule adapter interface, submodule lane map, MemPalace sidecar contract (RETIRED → `adapters#contentpalace-inherits`) |
@@ -340,6 +340,6 @@ class MyAdapter:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AFkFsIQMTgaJ-r7kGsr6Rn0x_w3URo_WJAT7IPh3Mm4
+<<^ code:"&#x0003;" >>ni:///sha-256;wnK0LjiNVrkiJKC9NLA263IPfF0CCFHmSWSgQjdT-uk
 
 <<^ code:"&#x0004;" -> ? >>

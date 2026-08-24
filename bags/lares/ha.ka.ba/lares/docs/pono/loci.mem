@@ -9,7 +9,7 @@ manao     = 18
 manaoio   = 16
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
-role      = "extended docs for loci interface — evaluation guidance, canon-MOVE criteria, MCP roadmap"
+role      = "extended docs for the `loci` component — evaluation guidance, canon-MOVE criteria, MCP roadmap"
 type      = "text/x-memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/loci"
 ```
@@ -30,7 +30,7 @@ Not a law surface. Explanation, evaluation guidance, and research that belongs o
 | ''Noise'' | none or `P` | none, fragmentary, or `<<^ code:"&#x0001;" ? -> lar:///...` | URI appears as signal; convention too thin for loci authority. |
 | ''Data'' | `P` or `PS` | fragmentary or proto-meme | Detectable structure makes the signal machine-usable; not yet memetic. |
 | ''Meme'' | `PS` or `S` | `<<^ code:"&#x0001;" ? -> lar:///...` | Boot-legal meme with declared address and enough structure for rating. |
-| ''Typed Meme'' | `S` or `CS` | `<<^ code:"&#x0001;" ? -> lar:///...` | Carrier satisfies `loci` interface; routing convention surfaces or sharpens; MCP tension may remain. |
+| ''Typed Meme'' | `S` or `CS` | `<<^ code:"&#x0001;" ? -> lar:///...` | Carrier WEARS `loci`; routing convention surfaces or sharpens; MCP tension may remain. |
 | ''Canon Typed Meme'' | `C` | `<<^ code:"&#x0001;" lar:///...` | External confirmation received; live resolution substrate operates; opener uncertainty removed. |
 
 Full five-register rubric at `lar:///ha.ka.ba/lares/api/pono/meme#rating-targets`. Loci governs routing, convention, and opener changes along the climb from noise to canon.
@@ -40,13 +40,13 @@ Full five-register rubric at `lar:///ha.ka.ba/lares/api/pono/meme#rating-targets
 ''Noise → Data'' — detectable structure makes the signal machine-usable.
 
 ''Data → Meme'' requires:
-* implements `meme` interface
+* wears `meme` in its has-stack
 * declared `lar:` address
 * explicit role and function above raw data
 
-''Meme → Typed Meme'' (satisfies `loci` interface) requires:
+''Meme → Typed Meme'' (wears `loci`) requires:
 * `lar:` URI root path segment matches `\w\.\w\.\w`; stable root `ha.ka.ba`; unstable root at `lares/chapel-perilous-opens/{root}/`
-* declares stable-address intent; satisfies `loci` interface law
+* declares stable-address intent; carries what the `loci` component meme asks of a wearer
 * explicit routing convention sufficient to evaluate the stable-address claim
 * truthful derivation behavior, including honest misses
 
@@ -124,6 +124,6 @@ Hoʻoko-class file-siting repairs in this meme's history:
 
 In each case the `lar:` address held stable. File siting returned to the derived position.
 
-<<^ code:"&#x0003;" >>ni:///sha-256;5Wy_mmk79YvrnJp7ZQPQ8hps5xtWGOfGmM4h0Ip-NZ0
+<<^ code:"&#x0003;" >>ni:///sha-256;tgV9XG-e7k6ax3qTBT7dQVrn5NSob80Vz33DDGpv378
 
 <<^ code:"&#x0004;" -> ? >>

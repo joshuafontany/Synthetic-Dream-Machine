@@ -84,7 +84,7 @@ Prompt names use dash after `lararium` because MCP names here follow the same co
 | `lararium-resolve_lar_uri` | resolve a `lar:///` URI into a resolution record |
 | `lararium-read_lar_resource` | read file-backed or virtual resource text |
 | `lararium-list_lar_resources` | list all file-backed and virtual resources |
-| `lararium-inspect_carrier` | report metadata, interface bundle, diagnostics, and depth state |
+| `lararium-inspect_carrier` | report metadata, has-stack, diagnostics, and depth state |
 | `lararium-compile_minimal_boot` | compile required-core closure artifact |
 | `lararium-compile_full_boot` | compile required-core plus indexed carriers |
 | `lararium-compile_boot_receipt` | compile sha256 receipt for minimal boot |
@@ -127,6 +127,6 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Rj_rdi1K_9jc9aD8KpQyOnv1hqwgHpBC8Up4oCyk35A
+<<^ code:"&#x0003;" >>ni:///sha-256;frt2giMOGZwAxHw3U7Z_f8Je8Y_YAhA_8issVZXr1KM
 
 <<^ code:"&#x0004;" -> ? >>

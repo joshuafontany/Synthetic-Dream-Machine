@@ -74,10 +74,12 @@ Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encode
 
 `_bootModules()` requires a live `$tw` reference to call `wiki.filterTiddlers()`, `wiki.addTiddler()`, and `tw.modules.define()`. These are runtime calls against the TW5 instance created by `boot()`. The gate logic itself cannot be expressed in wikitext or loaded as a tiddler — it is the mechanism that decides which memes become executable.
 
-The ''implementors interface'' it queries IS a meme: `lar:///ha.ka.ba/lares/api/lararium/modules/tw5-module-interface`. Any meme that declares `implements = "lar:///ha.ka.ba/lares/api/lararium/modules/tw5-module-interface"` with content-type `application/javascript` and passing signal fields will be injected by the corpus path.
+''What it queries is a COMPONENT, and the component is a meme'': `lar:///ha.ka.ba/lararium/tw5/tw5-module`. The gate asks `[stack:has[…]]` — which carriers WEAR it — never which carriers ARE something. Any carrier wearing that component with content-type `application/javascript` and passing signal fields gets injected by the corpus path.
+
+The distinction is the whole gate. ''Authority is what a carrier holds and who granted it, never what it is'': a carrier cannot declare itself executable, it can only wear a component whose own meme states what wearing it costs, and the stack entry carries no verb of its own.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;vm_9HoYaAOi7p4eehJkpHHOpfekF8xqu_kJlJB5N6sI
+<<^ code:"&#x0003;" >>ni:///sha-256;gBukrx8bF3-05LFC2Jt2GJks6TW6_9KDN1LIzhKw4SE
 
 <<^ code:"&#x0004;" -> ? >>

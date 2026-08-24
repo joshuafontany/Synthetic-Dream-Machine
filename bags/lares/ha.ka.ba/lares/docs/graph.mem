@@ -35,7 +35,7 @@ uri-path         = "ha.ka.ba/lares/docs/graph"
 The pranala-edge DAG replaces static enumeration as the source of truth for boot closure.
 
 ''Terminology Note:''
-//A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme that implements the loci interface (see canonical interface at its own URI). Use "meme/memes" for general graph structure, reserving "locus/loci" for interface boundaries and in "implements" blocks as required by canonical law. This distinction is intentional and should be preserved in all design docs and specs.//
+//A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme WEARING `loci` in its has-stack — a component it holds, never a type it is.//
 
 Three structural claims drive the redesign:
 
@@ -173,6 +173,6 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gCbxTjaChrr0fAR1kVPtXC4PetauhJH07DAsl4EbFyo
+<<^ code:"&#x0003;" >>ni:///sha-256;-EePgBwsC2tkplOx0PNHxlHwezWWZLNPxFkXqNUFf0E
 
 <<^ code:"&#x0004;" -> ? >>
