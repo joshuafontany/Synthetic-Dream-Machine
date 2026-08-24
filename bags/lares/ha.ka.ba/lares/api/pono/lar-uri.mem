@@ -29,7 +29,7 @@ uri-path   = "ha.ka.ba/lares/api/pono/lar-uri"
 
 The `lar:` URI scheme names an address in a content-addressed meme graph — one parseable address per named unit. Like `tag:` (RFC 4151), a `lar:` URI ''names; it does not fetch'': resolution runs against a local world graph alone. The scheme carries two forms — a ''local form'' for stable graph addresses and system resource names, and a ''session form'' that names a speaker for exchange spans — and a three-slot attitude root carried by a Ha-Ka-Ba (heading · angle · dynamic) triple.
 
-This specification names the scheme syntax (a formal ABNF grammar), the path taxonomy, the kind-plane surface rule (`@` designates a CRDT surface — `bags/`, `wikis/` — while a meme namespace is bare), the resolution model, and the conformance, scheme-registration, and security obligations a processor MUST meet. It forms a ''sibling submission'' to the memetic-wikitext markup specification, which addresses its content by this scheme.
+This specification names the scheme syntax (a formal ABNF grammar), the path taxonomy, the kind-plane surface rule (the `bags/` and `wikis/` segments designate a CRDT surface, while a meme namespace stands bare), the resolution model, and the conformance, scheme-registration, and security obligations a processor MUST meet. It forms a ''sibling submission'' to the memetic-wikitext markup specification, which addresses its content by this scheme.
 
 <<~/ahu >>
 
@@ -45,7 +45,7 @@ This document holds ''submission-draft'' maturity. The scheme law, path taxonomy
 
 !! Introduction — Scope, Audience, and Relation to memetic-wikitext
 
-''Scope.'' This specification covers the syntax of the `lar:` URI scheme, the path taxonomy and slot discipline, the kind-plane surface rule (`@` names a CRDT surface; a bare `child[1]` names a meme namespace), and the resolution model. It governs how an address gets ''written and resolved'', and stops at identity; what the named unit ''means'' beyond its identity lives elsewhere.
+''Scope.'' This specification covers the syntax of the `lar:` URI scheme, the path taxonomy and slot discipline, the kind-plane surface rule (the kind-plane segment names a CRDT surface; a bare `child[1]` names a meme namespace), and the resolution model. It governs how an address gets ''written and resolved'', and stops at identity; what the named unit ''means'' beyond its identity lives elsewhere.
 
 ''Out of scope.'' The content carried at a `lar:` address, and the markup that authors it, ride the sibling `memetic-wikitext` specification (Normative Reference [MWT]). The typed-edge grammar rides [PRANALA]. The operational addressing discipline lives at `lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL`.
 
@@ -69,8 +69,8 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''local form'' | `lar:///path` — authority-less; for stable addresses and system resource names. |
 | ''session form'' | `lar://alias:grant@host/path` — names a speaker; exchange spans only. |
 | ''triple'' | the three-slot `w1.w2.w3` attitude root (Ha heading · Ka angle · Ba carried dynamic). |
-| ''surface'' | a CRDT surface (today an Automerge doc); designated by a kind-plane + `@`-tag (`bags/slug`, `wikis/slug`). |
-| ''namespace'' | a bare `child[1]` segment naming a meme's minting authority; carries NO `@`. |
+| ''surface'' | a CRDT surface (today an Automerge doc); designated by its kind-plane segment (`bags/slug`, `wikis/slug`). The slug reads as an opaque name in which `@` stands as an ordinary character. |
+| ''namespace'' | a bare `child[1]` segment naming a meme's minting authority. |
 | ''kind-plane'' | the reserved `child[1]` word that names a resolvable surface: `bags`, `wikis`, or `cid`. |
 | ''slot'' | one lowercase term (word or hyphen-compound) in the triple. |
 | ''fragment'' | a `#`-anchor naming a section / `ahu` / pranala within an address. |
@@ -93,25 +93,36 @@ local-form    = "///" path                 ; authority-less
 session-form  = "//" authority "/" path    ; speaker named
 authority     = alias ":" grant "@" host    ; host per RFC 3986
 
-path          = stable-path / unstable-path
-stable-path   = "ha.ka.ba" [ "/" child1 ] *( "/" segment )
-unstable-path = triple [ "/" child1 ] *( "/" segment )
+path          = triple [ "/" child1 ] *( "/" segment )
+                ; the literal triple "ha.ka.ba" names the STABLE root; any other triple, a session
+                ; root — one grammar, and the taxonomy below carries the distinction, because the
+                ; two classes differ in what they MEAN, never in how they parse.
 
 triple        = word "." word "." word     ; Ha heading . Ka angle . Ba dynamic
-child1        = surface / namespace         ; the child[1] fork — the "@" lives in one branch only
-surface       = ( "bags" / "wikis" ) "/" "@" name  ; a CRDT surface: bags/slug · wikis/slug
+child1        = surface / namespace         ; the child[1] fork: a CRDT surface, or a bare namespace
+surface       = ( "bags" / "wikis" ) "/" slug      ; a CRDT surface: bags/slug · wikis/slug
               / "cid" "/" hash                     ; an immutable content-addressed artifact
-namespace     = name                       ; a bare meme minting namespace — carries NO "@";
+namespace     = name                       ; a bare meme minting namespace;
                                             ;   MUST NOT equal a kind-plane word (bags / wikis / cid)
+slug          = 1*( unreserved / "@" )     ; opaque; "@" reads as an ordinary character, no marker office
 segment       = 1*( unreserved / pct-encoded )   ; MUST NOT carry a leading "@"
-word          = 1*( %x61-7A )              ; one slot: lowercase only
+word          = stem *( "-" stem )         ; one slot: a word, or a hyphen-joined compound
+stem          = 1*( %x61-7A )              ; lowercase only
 name          = 1*( unreserved )
 hash          = 1*( unreserved )
 alias         = 1*( unreserved )
 grant         = 1*( unreserved )
 ```
 
-A `lar:` URI MUST hold ASCII only. A slot MUST hold lowercase ASCII letters alone. EVERY path MUST carry a full three-slot root — no class is exempt. The `@`-tag appears ONLY inside a CRDT `surface` (`bags/…`, `wikis/…`); a meme `namespace` carries none. The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
+A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class is exempt. The `@` character stands lawful ONLY within a surface slug, where it reads as an ordinary character and designates nothing; a `namespace` and every other `segment` refuse it. The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
+
+''The scheme-relative form: `uri-path`.'' Instruments and carrier declarations abbreviate an address to
+its `uri-path` — the spelling with the leading `lar:///` removed, codepoint-identical to the path it
+abbreviates. A carrier's identity block declares its own address in this form, and every corpus
+instrument walks it. The abbreviation carries no semantics of its own: `uri-path = "ha.ka.ba/x/y"` and
+`lar:///ha.ka.ba/x/y` name one address, related by exactly seven leading characters, and the equality
+rule (#equality) reads through the abbreviation unchanged. Defined here and only here: substructure
+within a scheme lives in the scheme's defining document [RFC7320].
 
 <<~/ahu >>
 
@@ -441,6 +452,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;v0fRo_KXQXj-BvoJMkQZbyT83rx3x7EagOgqaPyfrUY
+<<^ code:"&#x0003;" >>ni:///sha-256;Jq-pMK_TbCqvTU3JL9iIyp_zZY8BRlQmgbyZz-uWWEI
 
 <<^ code:"&#x0004;" -> ? >>
