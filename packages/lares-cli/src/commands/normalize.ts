@@ -126,7 +126,17 @@ function surveyGradient(files: string[]): number {
   const byKind = new Map<string, number>();
   let faulted = 0;
 
+  // THE SIDECAR PAIR IS A CARRIER IN TWO FILES. A content file with a `.meta` beside it declares
+  // itself in the sidecar, so its own bytes carry no frame and never should — reading it as unframed
+  // would fault the one shape the projector mints for a non-memetic filetype. This is the one kind a
+  // reader cannot name from bytes alone, so it is settled here, where the file list is known.
+  const declared = new Set(files.filter((f) => f.endsWith(".meta")).map((f) => f.slice(0, -".meta".length)));
+
   for (const f of files) {
+    if (declared.has(f) || f.endsWith(".meta")) {
+      byKind.set("sidecar", (byKind.get("sidecar") ?? 0) + 1);
+      continue;
+    }
     const abs = isAbsolute(f) ? f : join(process.cwd(), f);
     let src: string;
     try {
@@ -182,10 +192,14 @@ function surveyEdges(files: string[]): number {
   }
 
   const dangling = new Map<string, { form: string; from: string[] }>();
-  let total = 0;
+  let total = 0, unaddressed = 0;
   for (const [f, src] of texts) {
     for (const e of readCarrierEdges(src)) {
       total++;
+      // AN EDGE WITH NO ADDRESS NAMES A FILE, not a carrier. It cannot dangle, because it never
+      // pointed at an address to begin with — it is counted apart so a sweep can find the class
+      // without a resolver guessing which carrier a file became.
+      if (e.address === null) { unaddressed++; continue; }
       if (held.has(e.address)) continue;
       const seen = dangling.get(e.address) ?? { form: e.form, from: [] };
       seen.from.push(f);
@@ -200,6 +214,7 @@ function surveyEdges(files: string[]): number {
     if (from.length > 3) console.log(`     … and ${from.length - 3} more`);
   }
   const n = [...dangling.values()].reduce((a, d) => a + d.from.length, 0);
-  console.log(`edges: ${files.length} carrier(s) read · ${held.size} address(es) held · ${total} edge(s) · ${n} naming nothing`);
+  const tail = unaddressed > 0 ? ` · ${unaddressed} naming a FILE rather than an address` : "";
+  console.log(`edges: ${files.length} carrier(s) read · ${held.size} address(es) held · ${total} edge(s) · ${n} naming nothing${tail}`);
   return n === 0 ? 0 : 1;
 }

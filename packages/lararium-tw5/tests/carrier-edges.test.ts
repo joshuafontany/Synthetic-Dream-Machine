@@ -30,7 +30,7 @@ describe("carrier-edges — every address a carrier points at", () => {
       "[[lar:///ha.ka.ba/a/five]]",
     ].join("\n\n");
     const got = readCarrierEdges(src);
-    expect(got.map((e) => e.address).sort())
+    expect(got.map((e) => e.address!).sort())
       .toEqual(["ha.ka.ba/a/five", "ha.ka.ba/a/four", "ha.ka.ba/a/one", "ha.ka.ba/a/three", "ha.ka.ba/a/two"]);
     expect(new Set(got.map((e) => e.form))).toEqual(new Set(["loulou", "pranala", "kahea", "wikilink"]));
   });
@@ -73,7 +73,10 @@ describe("carrier-edges — every address a carrier points at", () => {
       const u = /^uri-path\s*=\s*"([^"]+)"/m.exec(t)?.[1];
       if (u) held.add(u);
     }
-    const dangling = texts.flatMap(readCarrierEdges).filter((e) => !held.has(e.address));
+    // An `md-target` edge names a FILE and carries no address, so it can neither resolve nor dangle.
+    // Counting it here would fold a known, separately-gated class into this one and hide a real break.
+    const dangling = texts.flatMap(readCarrierEdges)
+      .filter((e) => e.address !== null && !held.has(e.address));
     expect(files.length).toBeGreaterThan(500);
     expect(dangling.length, "an edge broke — run `lares normalize --edges` to name it").toBeLessThanOrEqual(194);
   });
