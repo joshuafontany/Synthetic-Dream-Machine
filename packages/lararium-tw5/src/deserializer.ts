@@ -800,10 +800,6 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 const IAM_DENY: ReadonlySet<string> = new Set([
   // envelope + record stratum — reconstructed on recompose, never authored TOML
   "title", "text", "modified", "revision",
-  // The parse-grade names stay DENIED even though nothing produces them any more. Nulling the cap
-  // stopped this reader writing them; the denial stops an OPERATOR's own field of that name leaking
-  // into a carrier's iam, which is a different guarantee and still wanted.
-  "lar_parse_failures", "lar_parse_degraded",
   "slot", "fragment-parent", "postamble", "prologue",
   "header-text", "ahu-parent", "ahu-slot", "carrier-soh",
   // transient parse-grade diagnostics — stamped on ingest, denied by exact name

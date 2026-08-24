@@ -12,8 +12,7 @@
  *      worldline fields round-trip WHOLE into the iam fence; only the
  *      STRUCTURAL/ENVELOPE set stays denied (title/text/framing rebuild from
  *      the envelope + record stratum — emitting them DOUBLES the body). Two
- *      transient parse-grade markers (`lar_parse_failures` / `lar_parse_degraded`)
- *      remain denied by EXACT name (derived-on-ingest diagnostics), and
+ *      the deny-set holds ONLY what the host itself reserves, and
  *      TW5-internal `$…` fields stay off the operator's TOML.
  */
 
@@ -77,7 +76,7 @@ describe("iam fence — lar_* sensorium metadata round-trips; only structural/pa
       lar_ffz: "session/_.claude__run-abc._._.deadbeef",
       lar_root_handle: "sessABC",
       lar_x: "custom-sensor",
-      // transient parse-grade diagnostics — denied by exact name (derived-on-ingest)
+      // a field named like a former diagnostic — the operator's to write, so it round-trips
       lar_parse_failures: "3",
       lar_parse_degraded: "1",
       // TW5-internal field — never on the operator's TOML
@@ -92,9 +91,10 @@ describe("iam fence — lar_* sensorium metadata round-trips; only structural/pa
     expect(out).toContain("lar_ffz");
     expect(out).toContain("lar_root_handle");
     expect(out).toContain("lar_x");
-    // the two parse-grade markers stay denied by exact name
-    expect(out).not.toContain("lar_parse_failures");
-    expect(out).not.toContain("lar_parse_degraded");
+    // NO NAME IS RESERVED THAT THE HOST DOES NOT RESERVE. Nothing writes these any more, so a field
+    // carrying one of these names arrived from the operator's own hand and travels like any other.
+    expect(out).toContain("lar_parse_failures");
+    expect(out).toContain("lar_parse_degraded");
     // TW5-internal stays out
     expect(out).not.toContain("$internal");
   });
