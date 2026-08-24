@@ -1344,10 +1344,13 @@ a reader that takes an `ok` for authenticity has granted the check a standing it
   scheme; here it names the bytes ABOVE it, never a thing to fetch. A resolver MUST NOT resolve a name
   found after ETX — following one hands an adversary a fetch triggered by a field they control.
 
-''Out of scope, by grain.'' Stream self-synchronisation — the RFC 7464 discipline of scanning forward
-to the next mark after a failed parse — stays out of scope because this frame frames ''records, not
-streams'': a carrier travels whole, a reader that lost the frame lost the record, and recovery
-re-fetches the record. And the marks carry no reserved-alphabet warrant: a control-mark reference
+''Out of scope at this grain — reserved at the next.'' Stream self-synchronisation — the RFC 7464
+discipline of scanning forward to the next mark after a failed parse — stays out of scope because this
+frame frames ''records'': a carrier travels whole, a reader that lost the frame lost the record, and
+recovery re-fetches the record. A ''stream'' framing stands anticipated rather than precluded: the
+control set holds `SYN` (`&#x0016;`) in reserve for exactly that office, and the profile that frames a
+stream of carriers defines its own resynchronisation — and owes this section's analysis again at that
+grain, where scanning forward is the recovery and the smuggling surface returns. And the marks carry no reserved-alphabet warrant: a control-mark reference
 spells printable ASCII, so it CAN occur in body text, and the fence mask (#control-set) — not an
 escape discipline — keeps a quoted mark from framing. The mask therefore stands inside the trust
 boundary: a reader that drops it verifies teaching examples instead of bodies, a failure the corpus
@@ -1389,6 +1392,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DOM0h2NsBWWmkJf9xQiANpWbfUWdKeIUXfG8zAC7-7g
+<<^ code:"&#x0003;" >>ni:///sha-256;wD7ZdONv45msPEVOz9RyX199UmBctVrm75O5YhGpjuQ
 
 <<^ code:"&#x0004;" -> ? >>
