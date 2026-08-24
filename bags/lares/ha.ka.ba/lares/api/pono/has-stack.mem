@@ -50,7 +50,7 @@ TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter 
 # ''Bare tags read fertile.'' A stack entry whose definition meme has not landed stands ''declared-unresolved'' — a lawful, promotable state, never an error. Promotion follows the rating ladder: bare entry (data-grade) → definition lands (meme) → definition carries law (ano). Open minting, judged by the ladder — never a schema registry. A fixed enum of blessed components in any law reads as the interface sneaking back; refuse it.
 # ''Families carry exclusivity.'' Component families (the directory grain) MAY declare arity in their own family meme — "at most one of mine per stack" or "many welcome." Arity semantics live in the carried family, never in the edge.
 # ''Kapu rides as a grant.'' A stack entry whose definition wears kapu MUST NOT self-add; the write shore refuses it without the operator's mint. Authority = what a carrier holds and who granted it, never what it //is//.
-# ''Dumb edges, smart components.'' The stack edge carries no role vocabulary — no implements, no owns, no defines. Relations beyond composition ride `loulou` (adjacency) and `kahea` (transclusion); anything richer reifies as a component meme that speaks for itself.
+# ''Dumb edges, smart components.'' The stack edge carries no role vocabulary — no implements, no owns, no defines. Relations beyond composition ride `loulou` (adjacency), `kahea` (live transclusion), `aka` (shadow transclusion) and `pranala` (the anchored pointer); anything richer reifies as a component meme, or a wire entity, that speaks for itself. ''Those sigils carry no role vocabulary either'' — `pranala` retired its own on 2026-06-12, keeping one attributed form for a code source-pointer, so the ban on role-bearing edges is the law of the edge plane and not a fence around the stack alone.
 
 Runtime: `qualifyStackTag` / `stackOf` and the `stack` filter operator (`[stack[]]`, `[stack:has[<name>]]`).
 
@@ -112,6 +112,6 @@ the py caps consume.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;D5eqkhbfXgyV45lJry3ca6Fw41fWZK-kYcmyMdFNVew
+<<^ code:"&#x0003;" >>ni:///sha-256;e15edOIiojdvydeUIYGtcSTfHuCD3hf0fam0DIar810
 
 <<^ code:"&#x0004;" -> ? >>
