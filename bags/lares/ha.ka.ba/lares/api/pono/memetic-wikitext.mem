@@ -495,10 +495,10 @@ the content stays reasonable to present absent interpretation software — this 
 bytes rather than on argument, and the marks named SOH · STX · ETX · EOT (#control-set) name what a
 reference STANDS FOR, never what a file contains.
 
-The `x-` prefix reads as DEPRECATED under RFC 6838 — not as "unregistered": a type wearing it sits in no
+The `x-` prefix reads as DEPRECATED under RFC 6838: a type wearing it sits in no
 tree at all, and the registration path drops it (the target name `text/memetic-wikitext+tiddlywiki`, with
 the current spelling filed as a deprecated alias — the office `CARRIER_TYPE_UNSUFFIXED` already performs
-on the read side). The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 actually asks —
+on the read side). The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 asks —
 generic processing: a receiver holding only a TW5 parser processes a carrier usefully, every sigil an
 unbound macro call degrading to inert text (#conformance). That the syntax builds on TW5 states the
 lineage; the degradation property states the warrant.
@@ -1273,6 +1273,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;IkMEOLZm0bFHb8rzqbBfAuZ9BxayRNhdyggUr97XyNQ
+<<^ code:"&#x0003;" >>ni:///sha-256;iljONzXSeeJBRvi-uU6_MIURawoeV2kj9_ZqQJ86ZIE
 
 <<^ code:"&#x0004;" -> ? >>

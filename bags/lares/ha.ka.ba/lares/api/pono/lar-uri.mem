@@ -69,7 +69,7 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''local form'' | `lar:///path` — authority-less; for stable addresses and system resource names. |
 | ''session form'' | `lar://alias:grant@host/path` — names a speaker; exchange spans only. |
 | ''triple'' | the three-slot `w1.w2.w3` attitude root (Ha heading · Ka angle · Ba carried dynamic). |
-| ''surface'' | a CRDT surface (today an Automerge doc); designated by its kind-plane segment (`bags/slug`, `wikis/slug`). The slug reads as an opaque name in which `@` stands as an ordinary character. |
+| ''surface'' | a CRDT surface (today an Automerge doc); designated by its kind-plane segment (`bags/slug`, `wikis/slug`). The slug reads as an opaque name. |
 | ''namespace'' | a bare `child[1]` segment naming a meme's minting authority. |
 | ''kind-plane'' | the reserved `child[1]` word that names a resolvable surface: `bags`, `wikis`, or `cid`. |
 | ''slot'' | one lowercase term (word or hyphen-compound) in the triple. |
@@ -104,8 +104,8 @@ surface       = ( "bags" / "wikis" ) "/" slug      ; a CRDT surface: bags/slug �
               / "cid" "/" hash                     ; an immutable content-addressed artifact
 namespace     = name                       ; a bare meme minting namespace;
                                             ;   MUST NOT equal a kind-plane word (bags / wikis / cid)
-slug          = 1*( unreserved / "@" )     ; opaque; "@" reads as an ordinary character, no marker office
-segment       = 1*( unreserved / pct-encoded )   ; MUST NOT carry a leading "@"
+slug          = 1*( unreserved / "@" )     ; an opaque surface name
+segment       = 1*( unreserved / pct-encoded )
 word          = stem *( "-" stem )         ; one slot: a word, or a hyphen-joined compound
 stem          = 1*( %x61-7A )              ; lowercase only
 name          = 1*( unreserved )
@@ -114,7 +114,7 @@ alias         = 1*( unreserved )
 grant         = 1*( unreserved )
 ```
 
-A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class is exempt. The `@` character stands lawful ONLY within a surface slug, where it reads as an ordinary character and designates nothing; a `namespace` and every other `segment` refuse it. The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
+A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class is exempt. Of the path productions, `slug` alone admits `@`. The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
 
 ''The scheme-relative form: `uri-path`.'' Instruments and carrier declarations abbreviate an address to
 its `uri-path` — the spelling with the leading `lar:///` removed, codepoint-identical to the path it
@@ -148,12 +148,11 @@ lar:///ha.ka.ba/cid/bafy…         an immutable content-addressed artifact
 lar:///threshold.uncertain.opens
 ```
 
-A rootless third class stood here for local system resources spelled in ALLCAPS. ''The root admits no
-exception now'': a resource local to one vessel still stands at an address, and an address that skipped
-the root could not say which house it stood in — so a name that travels nowhere reads the same as a name
-that travels, and only the reader's assumption tells them apart.
+''The root admits no exception.'' A resource local to one vessel still stands at an address: an address
+that skipped the root could not say which house it stood in, and a name that travels nowhere would then
+read the same as a name that travels, with only the reader's assumption telling them apart.
 
-The `l-space` field's `adjacent` band names a different axis entirely and keeps its word.
+(The `l-space` field's `adjacent` band names an unrelated axis — a locality of meaning, never an address class.)
 
 For every path: each slot holds exactly one lowercase term — a word or a hyphen-joined compound — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters and hyphens alone, and the root MUST carry exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named l-space address.
 
@@ -452,6 +451,6 @@ without a write on every transclusion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Jq-pMK_TbCqvTU3JL9iIyp_zZY8BRlQmgbyZz-uWWEI
+<<^ code:"&#x0003;" >>ni:///sha-256;cZMg3R3YN3IT5mkLbx6Lt4E4xSeaHqpsmSzXDu6VxWw
 
 <<^ code:"&#x0004;" -> ? >>

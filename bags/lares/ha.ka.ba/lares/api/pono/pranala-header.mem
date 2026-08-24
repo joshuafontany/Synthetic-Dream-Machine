@@ -26,11 +26,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
 `?` token means ''this carrier itself'' — a self-reference no sigil keyword can express, since a
 keyword names a thing and this one names the speaker.
 
-''The name predates the move.'' It reads as a pranala because it once rode the speaking head beside
-the other pointer sigils; the bearing rides the frame now, and the frame is not a pointer plane.
-
-Permanent JS exception: the `?` token and its `->` arrow require dedicated parser logic in
-`lar-sigil.ts`. No TOML entry and no wikitext body; recognition comes from `matchPranalaHeaderAt`.
+The bearing reads off the SOH frame scan (the deserializer's head recogniser), never off a sigil
+pattern of its own. A `?` written on any speaking-head sigil parses as an unbound macro call and
+degrades to inert text, the way every unrecognised form does.
 
 <<~/ahu >>
 
@@ -80,17 +78,11 @@ ahead of it. ''The tail must tolerate the arrow'': `? ->` carries a `>`, so a sc
 stops at the bearing itself and finds no head at all. Every scan in this grammar spells it
 `(?:[^>\n]|->)*` for that reason.
 
-!!! The retired form, and the matcher that still admits it
+!!! One head carries the bearing
 
-```text
-<<~ ? -> lar:///…      RETIRED — the speaking head carries no frame mark
-```
-
-`PRANALA_HEADER_RE` in `lar-sigil-shared.ts` still matches this shape, and that is deliberate: a
-carrier written before the head lock renders rather than breaking (graceful parsing). ''It admits the
-form; it mints nothing.'' Ten such sigils stand in the corpus — one a duplicate bearing in a carrier
-that already declares one on its head, the rest an older inline shorthand pointing at OTHER carriers,
-which was never a bearing at all.
+The speaking head carries no frame mark, so `<<~ ? -> uri >>` names nothing to the frame: it parses as
+an unbound macro call and degrades to inert text. A carrier declares its bearing on the SOH control
+sigil, once, and nowhere else.
 
 <<~/ahu >>
 
@@ -111,9 +103,6 @@ self-token     = "?"
 once-per       = "carrier"
 agrees-with    = "uri-path"
 
-# The retired speaking-head form, admitted on read and minted never.
-retired-pattern = '<<~\s*\?\s*->\s*(\S+)\s*>>'
-retired-on      = "2026-08-15"             # the head lock
 ```
 
 <<~/ahu >>
@@ -127,6 +116,6 @@ retired-on      = "2026-08-15"             # the head lock
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;A5Eli4d3B0-tWcRQ7eutIM4p4lcOlHcFknHkugZYYBI
+<<^ code:"&#x0003;" >>ni:///sha-256;dTgrVPq1bsNOHQve47G-M0Wx3rahDHOPJRrInUw-nuY
 
 <<^ code:"&#x0004;" -> ? >>
