@@ -96,6 +96,9 @@ export function memeticWikitextDeserializer(
   if (text.includes("\r")) text = text.replace(/\r\n?/g, "\n");
   const baseUri = String(fields?.["title"] ?? "");
   const result: TiddlerFields[] = [];
+  // The file-level carriage — the prologue above the head and the bytes past the frame — hangs on the
+  // FIRST and LAST carrier respectively, so it is gathered here and joined once every close is read.
+  const carriage: TiddlerFields[] = [];
 
   // ✶ Scan — stream parse: handles single-meme, multi-meme, and partials.
   const parser = new MemeStreamParser();
@@ -177,8 +180,9 @@ export function memeticWikitextDeserializer(
     }
     const tiddlers = safeSplitMeme(uri, memeText, asStringFields(fields));
     if (prologue.length > 0 && tiddlers.length > 0 && ev === closes[0]) {
-      // Copy prologue to ALL tiddlers so the template needs only `has[prologue]`.
-      for (const t of tiddlers) t["$prologue"] = prologue;
+      // ONE RECORD, NOT A COPY PER TIDDLER. The prologue belongs to the carrier, and stamping it on
+      // every record of that carrier put 4,015 copies of one string in the corpus.
+      carriage.push(...carriageRecord(String(tiddlers[0]!["title"]), "prologue", prologue));
     }
     // Extract namespace prefix glyph(s) from SOH line (e.g. "ॐ ँ", "⊙").
     // Stored only when non-empty; template emits it before the control char.
@@ -220,7 +224,7 @@ export function memeticWikitextDeserializer(
         tiddlers[0]!["$postamble-foreign"] = String(slot.lines);
       }
       // The raw slot rides on regardless, so a refusal can still show the operator their own bytes.
-      tiddlers[0]!["$postamble"] = postamble;
+      carriage.push(...carriageRecord(String(tiddlers[0]!["title"]), "postamble", postamble));
     }
     result.push(...tiddlers);
   }
@@ -230,6 +234,7 @@ export function memeticWikitextDeserializer(
     result.push(...safeSplitMeme(baseUri, text, asStringFields(fields)));
   }
 
+  result.push(...carriage);
   return result;
 }
 
@@ -460,11 +465,13 @@ function splitMemeToTiddlers(
     title: uri,
     type:  CARRIER_TYPE,
     text:  normalizedBodyRewritten,
-    ...(preIamContent.trim()   ? { "$preamble":    preIamContent }   : {}),
-    ...(headerRewritten.trim() ? { "$header-text": headerRewritten } : {}),
   };
+  const parentCarriage = [
+    ...carriageRecord(uri, "preamble",    preIamContent.trim()   ? preIamContent   : ""),
+    ...carriageRecord(uri, "header-text", headerRewritten.trim() ? headerRewritten : ""),
+  ];
 
-  const result: TiddlerFields[] = [parent, ...allChildren];
+  const result: TiddlerFields[] = [parent, ...parentCarriage, ...allChildren];
 
   // ── THE WARNING TIDDLER IS THE ENVELOPE, AND IT HOLDS MORE THAN THIS ────────────────────────────
   //
@@ -550,9 +557,11 @@ function splitRecursive(
       "uri-path":        childUriPath,
       "$fragment-parent": enclosingUri,
       "$slot":            block.slot,
-      ...(childStructure.preamble      ? { "$preamble":  childStructure.preamble }  : {}),
-      ...(childStructure.postamble     ? { "$postamble": childStructure.postamble } : {}),
     });
+    allChildren.push(
+      ...carriageRecord(childUri, "preamble",  childStructure.preamble  ?? ""),
+      ...carriageRecord(childUri, "postamble", childStructure.postamble ?? ""),
+    );
     allChildren.push(...inner.children);
     rewritten += `<<~ kahea ahu ${block.slot} >>`;
     cursor = block.closeEnd;
@@ -907,6 +916,53 @@ function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>, parentFie
 // `#a/b` slot addresses a nested fragment; a `#[\w-]+`-only capture stopped at
 // the first `/`, so the ref never matched its child and the whole slot body
 // dropped from the render (the ahu-drop). The path re-composes verbatim below.
+/**
+ * CARRIAGE RIDES ITS OWN RECORD, at an address derived from the carrier's.
+ *
+ * Four parts of a carrier hold CONTENT rather than a value: the prologue above the declaration, the
+ * preamble beneath the head, the header text before STX, the bytes trailing the frame. A tiddler field
+ * cannot hold any of them across a `.tid` projection — TW5 parses a field header line by line, so only
+ * `text` may carry a newline (boot.js, `application/x-tiddler`). A field that can only survive inside
+ * one file format is a field that cannot travel.
+ *
+ * So each becomes a record with a `text`, on the rails that already carry ahu fragments: a deterministic
+ * address under the carrier's own, `$fragment-parent` set so the projector climbs to the root and never
+ * writes it as its own file, and no kahea marker anywhere — the frame splices these by POSITION, which
+ * is the only signal the bytes ever carried.
+ *
+ * The `$` marks the host's slot and keeps the address whole; a `$:/`-prefixed system title would break
+ * the carriage away from the thing it belongs to.
+ *
+ * Scalars stay fields. `$slot`, `$fragment-parent`, `$carrier-soh`, `$postamble-foreign` hold single
+ * values that never carry a newline, and a record for each would cost the native filter surface and buy
+ * nothing. The split runs scalar-or-multiline, never reserved-or-free.
+ */
+export const CARRIAGE_PARTS = ["prologue", "preamble", "header-text", "postamble"] as const;
+export type CarriagePart = (typeof CARRIAGE_PARTS)[number];
+
+/** A carriage record's address. A fragment already carries a `#`, so its carriage extends the path. */
+export function carriageUri(carrierUri: string, part: CarriagePart): string {
+  return carrierUri.includes("#") ? `${carrierUri}/$${part}` : `${carrierUri}#$${part}`;
+}
+
+/** One carriage record, or nothing where the part holds no content. */
+function carriageRecord(carrierUri: string, part: CarriagePart, text: string): TiddlerFields[] {
+  if (text === "") return [];
+  return [{
+    title:              carriageUri(carrierUri, part),
+    type:               CARRIER_TYPE,
+    text,
+    "$fragment-parent": carrierUri,
+    "$slot":            `$${part}`,
+  }];
+}
+
+/** What a carriage part holds for a carrier, read through the same reader the frame reads records by. */
+function carriageText(reader: FieldsReader, carrierUri: string, part: CarriagePart): string {
+  const r = reader(carriageUri(carrierUri, part));
+  return r && typeof r["text"] === "string" ? (r["text"] as string) : "";
+}
+
 const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#[\w-]+(?:\/[\w-]+)*)\s*>>/g;
 
 /**
@@ -924,8 +980,8 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
     // Diff the child against ITS parent; recurse with the child as the next level's parent.
     const iam   = emitIamToml(child, CHILD_IAM_DENY, parentFields);
     const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""), child);
-    const pre   = typeof child["$preamble"]  === "string" ? child["$preamble"]  : "";
-    const post  = typeof child["$postamble"] === "string" ? child["$postamble"] : "";
+    const pre   = carriageText(reader, rootUri + slotPath, "preamble");
+    const post  = carriageText(reader, rootUri + slotPath, "postamble");
     // The iam block sits FLUSH against the ahu sigil line (mirroring the parent carrier's SOH+iam) —
     // a single newline, no blank between. A blank line then separates any content below. A preamble
     // (rare) keeps the older sigil-then-blank spacing since content precedes the iam there.
@@ -978,7 +1034,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // bearing into a quoted attribute would demote a relation to a field and break the scan that reads it.
   const ns = str("namespace").trim();
 
-  let out = str("$prologue");
+  let out = carriageText(reader, memeUri, "prologue");
   // THE DECLARATION IS THE CARRIER'S BUSINESS, exactly as the frame is. An author writes content and
   // identity; which grammar reads the result is not a question they should have to answer, and a
   // carrier that never carried a declaration would otherwise never gain one — the projection would
@@ -989,9 +1045,9 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // together. What the author wrote ABOVE the declaration still rides in `prologue` and emits first.
   out += `${DECLARATION}\n\n`;
   out += `<<^ code:"${sohCode}"${ns ? ` namespace:"${ns}"` : ""} ? -> ${memeUri} >>\n`;
-  out += str("$preamble");
+  out += carriageText(reader, memeUri, "preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
-  out += expandRefs(reader, memeUri, "", str("$header-text"), f);
+  out += expandRefs(reader, memeUri, "", carriageText(reader, memeUri, "header-text"), f);
   // THE SPAN OPENS HERE. The check covers STX-open through ETX-close inclusive, so the emitter marks
   // where the body begins and computes over the bytes it has actually assembled — never over a field.
   const spanStart = out.length;
@@ -1019,7 +1075,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;
   // trailing closer).
-  out += stripLeadingNewlines(str("$postamble"));
+  out += stripLeadingNewlines(carriageText(reader, memeUri, "postamble"));
   return out;
 }
 

@@ -27,7 +27,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 
 import {
-  expandMemeRefs, memeticWikitextDeserializer, fencedSpans, inMask, type TiddlerFields,
+  expandMemeRefs, memeticWikitextDeserializer, fencedSpans, inMask, carriageUri,
+  type TiddlerFields,
 } from "../src/deserializer.js";
 import { parseTaploFields } from "../src/toml-ast.js";
 import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
@@ -102,13 +103,18 @@ describe("child name blocks — what a fragment may declare", () => {
    * and a future edit could hold the `$` rule in one and forget it in the other.
    */
   test("the grammar's own carriage never appears in a child's iam block", () => {
+    // The SCALAR carriage rides fields; the multi-line carriage rides records of its own, so both
+    // classes stand here and neither may reach the declaration.
     const kid: TiddlerFields = {
       title: KID, type: CARRIER_TYPE, text: "kid body",
-      "$preamble": "leading fragment prose\n", "$postamble": "trailing fragment prose\n",
       "$slot": "#kid", "$fragment-parent": ROOT, "$carrier-soh": "0011",
       register: "Synthesis",
     };
-    const out = project({ [ROOT]: parent, [KID]: kid });
+    const out = project({
+      [ROOT]: parent, [KID]: kid,
+      [carriageUri(KID, "preamble")]:  { title: carriageUri(KID, "preamble"),  type: CARRIER_TYPE, text: "leading fragment prose\n" },
+      [carriageUri(KID, "postamble")]: { title: carriageUri(KID, "postamble"), type: CARRIER_TYPE, text: "trailing fragment prose\n" },
+    });
     // The fragment declares one ordinary field, so a block MUST stand — without it the filter below
     // would read an absent block as a clean one.
     const block = childIamBlock(out);
@@ -195,13 +201,18 @@ describe("child name blocks — what a fragment may declare", () => {
    * carriers, and reserving a field for the boundary would put a derived fact back on the record.
    */
   test("a fragment's trailing bytes survive whole and fold into the body, and the projection settles", () => {
-    const kid: TiddlerFields = { title: KID, type: CARRIER_TYPE, text: "kid body", "$postamble": "TRAILING" };
-    const out = project({ [ROOT]: parent, [KID]: kid });
+    const post = carriageUri(KID, "postamble");
+    const out = project({
+      [ROOT]: parent,
+      [KID]: { title: KID, type: CARRIER_TYPE, text: "kid body" },
+      [post]: { title: post, type: CARRIER_TYPE, text: "TRAILING" },
+    });
     const back = parse(out);
     const readKid = back.find((r) => r["title"] === KID)!;
 
     expect(String(readKid["text"])).toContain("TRAILING");
-    expect(readKid["$postamble"], "the boundary is position, so no field survives to re-state it").toBeUndefined();
+    expect(back.find((r) => r["title"] === post),
+      "the boundary is position, so no carriage record survives to re-state it").toBeUndefined();
 
     const again = expandMemeRefs(reader(Object.fromEntries(back.map((r) => [String(r["title"]), r]))), ROOT)!;
     expect(again, "the fold must reach a fixed point on the first cycle, never keep folding").toBe(out);
