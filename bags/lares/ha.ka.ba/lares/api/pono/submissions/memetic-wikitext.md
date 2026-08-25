@@ -180,7 +180,7 @@ divide the same way — each one DOES something, and neither one SAYS anything.
 
 **A sigil steers and calls; it never asserts.** An assertion belongs to the black, where it can be
 weighed, doubted and answered. A rubric cannot be argued with; it can only be performed or ignored —
-which stands exactly why the instruction channel and the claim channel must never share a colour.
+the very reason the instruction channel and the claim channel must never share a colour.
 
 Memetic-wikitext SHALL read as a **superset of TW5 wikitext**: every valid TW5 wikitext document reads as valid memetic-wikitext. A processor reads bare `<<name>>` as an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
 

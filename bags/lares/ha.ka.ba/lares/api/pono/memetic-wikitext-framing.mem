@@ -170,7 +170,7 @@ text-close  = frame                                ; code &#x0003; — ETX
 
 ''Normative grammar rules.'' (1) A `frame` sigil MUST state `code:` as its first parameter; the
 remaining slots belong to the mark that code names (#control-set). (2) Every frame part reads optional
-at ARRIVAL — the frame mints, never gets demanded (#authoring) — and where the marks stand, spine order
+at ARRIVAL — the frame mints at projection, never as a demand on arrival (#authoring) — and where the marks stand, spine order
 MUST hold (#carrier-spine). (3) The `check` slot names a POSITION, never a parameter: adjacent after the
 closed `text-close` sigil, on the same line (#control-set). (4) The composition wraps `document`
 without entering it; everything inside defers to [MEMETIC-WIKITEXT].
@@ -270,10 +270,12 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 
 | Sigil | Form | Role | Byte | Kapu byte |
 |---|---|---|---|---|
-| ''SOH'' | `<<^ code:"&#x0001;" ? -> lar:///URI >>` | Start of Heading — the Lar takes its post; the Lar names the place with its `lar:` bearing | `0x01` | DC1 `0x11` |
+| ''SOH'' | `<<^ code:"&#x0001;" ? -> lar:///URI >>` | Start of Heading — the Lar takes its post and names the place with its `lar:` bearing | `0x01` | DC1 `0x11` |
 | ''STX'' | `<<^ code:"&#x0002;" >>` | Start of Text — cross the threshold; the body opens | `0x02` | — |
 | ''ETX'' | `<<^ code:"&#x0003;" >>ni:///sha-256;…` | End of Text — the body closes, the check follows the closer; the hearth banks | `0x03` | — |
 | ''EOT'' | `<<^ code:"&#x0004;" -> ? >>` | End of Transmission — the libation pours; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
+
+''Kapu'' names the restricted, admin-only trust tier (#trust-tiers); the kapu byte column gives each mark's substitute code in that tier.
 
 ''The frame — heading, then text.'' The protocol law pins the zones: SOH opens the ''heading'', STX opens the ''text''. The heading holds the toml iam slot and nothing else; the text holds the body.
 
@@ -322,7 +324,7 @@ A named parameter states a PROPERTY — //this carrier has a lar value//. The ar
 folding it into a quoted attribute would demote a relation to a field and break the scanner's capture
 with it. So named params ride in FRONT of the arrow and the arrow keeps its shape.
 
-!!! A declared unresolved bearing, apart from a dangling link
+!!! A declared unresolved bearing, distinct from a dangling link
 
 Nelson's indictment of embedded one-way links names the failure exactly: an address that outlived its
 target and never said so, surfacing at access time to whoever trusted it. Xanadu's cure lifts links
@@ -402,7 +404,7 @@ The `bcc` slot carries a check over the framed span. Normatively:
   outside the sigil and outside the span — never a parameter within the mark. One word for where a
   check sits has admitted two readings before (RFC 3230 fell to exactly that), so this one pins:
   the check follows the closer, adjacent, on the same line.
-* ''The span binds the FRAME'S BYTE SPELLING, and on that the check computes.'' The span opens on the
+* ''The span binds the FRAME'S BYTE SPELLING, and that binding lets the check compute.'' The span opens on the
   STX sigil and closes on the ETX sigil, so those sigils' own bytes ride inside it. A frame migration —
   a mark gaining a named parameter, a spacing rule settling — moves them, and every check computed
   before it would read `mismatch` over a body nobody touched, reporting corruption where a grammar
@@ -428,7 +430,7 @@ a check; ETX ends the final block, ETB an intermediate one. A carrier's text end
 attestation block ends at ETB, and EOT closes the transmission — so ETB's "more follows" reading holds
 literally.
 
-!!! Residency, apart from identity — and only one name carries it
+!!! Residency stands apart from identity — and only one name carries it
 
 `$origin-bag` names ''which doc answered'' — the engine writes it on the read path, and a projector
 reading it for a destination would write a meme back to its old home. It never re-emits.
@@ -577,7 +579,7 @@ declaration below a mark that says the text has begun.
 The law reaches every level. A carrier's head and an ahu slot's head answer to it identically — one rule
 rather than two spellings of a similar one.
 
-!!! Framing mints, never gets demanded
+!!! Minted at projection, never demanded on arrival
 
 A carrier MAY arrive with no frame at all — an author saving prose from an editor, a render surface
 writing a tiddler back. A conforming processor MUST accept it and MUST MINT the frame on projection:
@@ -675,7 +677,7 @@ Two rules follow, and both guard a reader that cannot parse what it carries.
 
 **A resolver MUST NOT resolve a name found after ETX.** Nothing waits to fetch: the body it names
 sits in the same file, between the marks. A relay whose instinct on meeting this vocabulary says go
-looking has been handed a request it should never make.
+looking carries a request it should never make.
 
 **A verifier MUST hold its own list of acceptable digest algorithms and refuse anything outside it.**
 The name states which algorithm produced the value so a reader can KNOW; it never chooses for the
@@ -718,7 +720,7 @@ nothing decorates rather than protects, the standing RFC 9580 demoted OpenPGP's 
   any bag — admission without surfacing MUST NOT occur. The conflict belongs to the humans involved;
   the carrier still parses, as graceful parsing requires, and parses as a carrier in fault.
 * ''torn'' — STX stands and ETX does not. A torn carrier reads as a truncated transmission and MUST NOT
-  read as unchecked: conflating the two hands an adversary the cheapest strip an adversary holds — cut a file
+  read as unchecked: conflating the two hands an adversary the cheapest strip on offer — cut a file
   ahead of its closer and a missing check would read as lawful absence. A consumer treats torn as it
   treats mismatch.
 * ''unchecked'' — no framed body, or a framed body carrying no check. The check stays optional and
@@ -822,7 +824,7 @@ The grammar's own carriage rides the `$` prefix TiddlyWiki keeps for whoever sta
 emitter drops that whole namespace from the declaration.
 
 A namespace rather than a list, because a list forgets. Two carriage parts once sat in no list at all:
-each read as structure and met denial nowhere, so each emitted into the declaration AND rebuilt as
+each one read as structure with nothing denying it, so each emitted into the declaration AND rebuilt as
 structure — an author's value came back undefined and the projection stopped settling. A prefix cannot
 forget a member.
 
@@ -861,7 +863,7 @@ A multi-line part becomes a record on the same rails that carry ahu fragments:
   the head and the postamble follows the release, and no mark says so.
 
 A carriage record round-trips whole in bytes and lossy in fields: re-read, a fragment's trailing bytes
-fold into the body and the record dissolves. **That reads correct.** The boundary lives in position, and
+fold into the body and the record dissolves. **That loss follows the design.** The boundary lives in position, and
 reserving a field to re-state it would put a derived fact back on the record.
 
 <<~/ahu >>
@@ -879,7 +881,7 @@ carriers once sat outside all three at once while every one of them reported its
 
 So a carrier's health reads as a **gradient**, never a verdict. A reader names the KIND a file declares
 itself to be, and the marks that kind requires and lacks. The kind reads from the DECLARATION, never
-from the path: where a file rests says where it rests, and what it IS rides as a thing it states.
+from the path: where a file rests says where it rests; what it IS, it states.
 
 <<~ranks kind carrier ~ declares `uri-path` — a meme; wants the whole frame and a check -> descriptor ~ declares `bag` — a bag declaring itself; a body frame would claim it holds a meme's text -> shelf ~ declares neither, and its head names an address the declaration omits — the fault that makes a file invisible -> unframed ~ no head at all; bytes wearing an extension >>
 
@@ -970,7 +972,7 @@ a reader that takes an `ok` for authenticity has granted the check a standing it
   (#conformance), and the gradient surfaces a second as a fault rather than letting the first frame's
   `ok` speak for bytes it never covered.
 * ''Cut the file ahead of its closer.'' Truncation removes ETX and the check with it, and a reader that
-  filed that under absence would hand the adversary the cheapest strip an adversary holds. A torn frame reads
+  filed that under absence would hand the adversary the cheapest strip on offer. A torn frame reads
   ''torn'' — truncated transmission, never lawful absence — and a consumer treats torn as mismatch
   (#the-touchstone).
 * ''Strip the check.'' Absence stays legal, so stripping costs an adversary nothing against a consumer
@@ -1057,6 +1059,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oVnqIG6bdpx83gIe-WaDma1DLVNwK0uOph9FPhnopHs
+<<^ code:"&#x0003;" >>ni:///sha-256;737jpJcR-lwaEZU1PGe-ps6-xttHofHP-COoPTCOCPQ
 
 <<^ code:"&#x0004;" -> ? >>

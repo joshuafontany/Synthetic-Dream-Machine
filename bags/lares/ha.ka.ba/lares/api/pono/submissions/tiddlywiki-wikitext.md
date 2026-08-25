@@ -96,11 +96,11 @@ grammar, because the grammar of any given parse follows from the rules active in
 
 ## The Extension Mechanism — the rule-object contract
 
-The grammar's openness follows from no accident of implementation; it forms the format's architecture,
-and this section states it normatively. ''The core rules and every extension rule register through one
+The grammar's openness comes by design, not by accident of implementation — it forms the format's
+architecture, and this section states it normatively. ''The core rules and every extension rule register through one
 mechanism'' — the inventory below enumerates the default registry, never the possible grammar.
 
-A rule rides as a module of type `wikirule`. It exports exactly:
+A rule ships as a module of type `wikirule`. It exports exactly:
 
 - `name` — the string `\rules` and per-wiki configuration filter by. One rule, one name.
 - `types` — which of the three classes the rule serves: `pragma`, `block`, `inline`. A rule MAY serve
