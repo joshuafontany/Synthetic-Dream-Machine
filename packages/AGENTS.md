@@ -7,7 +7,7 @@
 ```toml
 uri-path     = "packages/AGENTS"
 file-path    = "packages/AGENTS.md"
-content-type = "text/x-memetic-wikitext"
+content-type = "text/memetic-wikitext+tiddlywiki"
 l-space      = "adjacent"
 confidence   = 17
 register     = "CS"
