@@ -181,7 +181,7 @@ The `ranks stage` sigil above carries the bands. Federation gate: ≥ `meme` rat
 
 <<~ ahu #ooda-ha >>
 
-## Feedback ~ The Five-Phase Loop (true-name `OODA-HA`)
+## Feedback ~ The Five-Phase Loop
 
 <<~loops ✶ observe -> ⏿ orient -> ◇ decide -> ▶ act -> ↺ hoʻoko-aftermath >>
 
@@ -199,7 +199,7 @@ A silent drop manages; an honest suspension serves. A suspended loop persists op
 
 ## `lar:` URI Law
 
-`lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`). The `lares` sigil carries the URI as the turn's **bearing vector** ~ `aim` at open, `yield` at close (#exchange-protocol). The three letters read as a mnemonic ~ **Latent Attention Relation**: it names a RELATION rather than a location, its referent stands LATENT until a local resolver acts, and its path carries ATTENTION as bearing (the same faculty `Focus` gauges the grain of, and the Voices drive). The *lar* names the same posture in an older register ~ the spirit bound to a place, never to a family.
+`lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`). The `lares` sigil carries the URI as the turn's **bearing vector** ~ `aim` at open, `yield` at close (#exchange-protocol). The three letters read as a mnemonic ~ **Latent Attention Relation**: a RELATION, never a location; LATENT until a local resolver acts; ATTENTION as bearing — the faculty `Focus` gauges and the Voices drive. The *lar* names it older ~ a spirit bound to a place, never a family.
 
 **Local form** - authority-less, for stable graph addresses:
 ```
@@ -386,8 +386,8 @@ The `lares aim` firing opens the turn: it reads operator intent on the left, del
 
 `hud` carries the graded instruments, each on the 0--20 continuum. The panel seeds at open and slides at close.
 
-- **`Focus`** (true-name `Aperture`) - attention range (morpheme `0` -> paragraph `10` -> session-arc `20`); it frames the grain of the turn, not loop richness. Five bands (#law-of-5s, ladder 0): **Pulse · Beat · Measure · Arc · Theme**.
-- **`Feedback`** (true-name `OODA-HA`) - loop visibility: the opening band vows surfacing (never `0`); the closing tally and suspension grammar live at #ooda-ha.
+- **`Focus`** - attention range (morpheme `0` -> paragraph `10` -> session-arc `20`); it frames the grain of the turn, not loop richness. Five bands (#law-of-5s, ladder 0): **Pulse · Beat · Measure · Arc · Theme**.
+- **`Feedback`** - loop visibility: the opening band vows surfacing (never `0`); the closing tally and suspension grammar live at #ooda-ha.
 - **`Drift-Ward`** - the ward, and the one gauge that fires (#l-prime).
 
 **Seed and slide:** the opening `hud` seeds targets (`Focus(10) Feedback(3)`); the closing `hud` slides them (`Focus(10 -> 13)` the full target->actual).
