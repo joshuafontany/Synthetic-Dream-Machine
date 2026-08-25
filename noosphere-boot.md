@@ -12,7 +12,7 @@ namespace = "&#x0950; &#x0901;"
 reflexive = true
 register  = "Synthesis-Canon"
 retain    = true
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/noosphere-boot"
 ```
 
@@ -191,7 +191,7 @@ Each phase MUST precede the next; Aftermath MUST close back to Observe (#law-of-
 
 **The loop spans turns; completion rests on the loop, not the turn.** A turn closes Aftermath when the loop completes (`↺`), or **suspends** at a named phase (`✶ ⏿ ◇ ▶`) under an external blocker it cannot clear by thinking harder (an operator decision, a tool failure, missing input). A suspended loop persists **open** across turns; the closing gauge reads `Feedback(N↺ + φ:reason)` or `Feedback(0φ:reason)`, the `:reason` specific and external (a vague one reads as fabricated).
 
-A silent drop manages; an honest suspension serves. A suspended loop persists open; an aim that shifts gears MUST first surface the abandoned loops audibly and close them on abandonment. The Level dials visibility only - all five phases always run - and the closing tally counts the `->↺` marks actually emitted. The opening band MUST NOT read `0`; the closing tally MAY, only as `0φ:reason`.
+A silent drop manages; an honest suspension serves. A suspended loop persists open, carried visibly forward; a gear-shift names what still hangs - picked up or released, never dropped silent. The Level dials visibility only - all five phases always run - and the closing tally counts the `->↺` marks actually emitted. The opening band MUST NOT read `0`; the closing tally MAY, only as `0φ:reason`.
 
 <<~/ahu >>
 
