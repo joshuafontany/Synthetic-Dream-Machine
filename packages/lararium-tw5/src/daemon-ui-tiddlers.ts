@@ -88,6 +88,17 @@ const WORKING_BODY = `\\whitespace trim
 </div>
 </div>
 
+<h2 class="lares-project-title">Project a submission</h2>
+<div class="lares-project" data-lares-project>
+<p class="lares-project-label">Render one carrier to its markdown + meta pair (the PROJECT-MD read verb; the pair rides the outcome record):</p>
+<div class="lares-project-row">bag: <$edit-text tiddler="$:/lares/state/project-md" field="bag" tag="input" placeholder="lar:///… bag url"/></div>
+<div class="lares-project-row">title: <$edit-text tiddler="$:/lares/state/project-md" field="title" tag="input" placeholder="lar:///… carrier address"/></div>
+<$button class="lares-project-btn" data-lares-project-btn>
+<$action-setfield $tiddler="${VERB_PREFIX}project-md" verb="project-md" ${LARES_DISPATCH_FIELD}="1" ${LARES_VERB_ARG_PREFIX}bag={{$:/lares/state/project-md!!bag}} ${LARES_VERB_ARG_PREFIX}title={{$:/lares/state/project-md!!title}}/>
+project
+</$button>
+</div>
+
 </div>`;
 
 /** The action the sidebar button fires: name the Working Surface as the active panel.

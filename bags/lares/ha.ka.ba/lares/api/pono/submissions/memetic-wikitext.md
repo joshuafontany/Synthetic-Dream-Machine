@@ -1,0 +1,609 @@
+
+
+- `lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language`
+
+<a id="abstract"></a>
+
+# Memetic-Wikitext — A Composable Markup Language
+
+## Abstract
+
+Memetic-wikitext (`text/memetic-wikitext`) defines a composable, wikitext-derived markup in which every active construct rides one outer delimiter — the **sharktooth procedure call** `<<~ … >>` — and reads on two layers at once: a **compile-time graph** reading and a **render-time semantic** reading. Authors write content, typed graph edges, definitions, conditionals, iteration, and concurrency coordination through one uniform sigil surface. The language carries a TiddlyWiki5 and Verse heritage and addresses its content by the sibling `lar:` URI scheme.
+
+This specification names the lexical structure, a formal surface grammar, the dual-layer processing model, the typed-edge (pranala) system, and the conformance, media-type, and security obligations a processor MUST meet. It does **not** enumerate every sigil; the live sigil registry rides the runtime **kernel** face, and the epistemic ontology rides the `api/mu` canon.
+
+<a id="status"></a>
+
+## Status and Maturity
+
+This document holds **submission-draft** maturity. The lexical structure, dual-layer model, recursion guard, and pranala type system read as stable. The formal grammar, conformance classes, media-type registration, and security considerations carry RFC-2119 normative force. Items in Annex B remain open. Promotion to canon rests with the operator, not the document.
+
+<a id="introduction"></a>
+
+## Introduction — Scope, Audience, and Relation to the `lar:` Spec
+
+**Scope.** This specification covers the surface syntax of `text/memetic-wikitext`, the parse and render processing model, the typed-edge system, and processor conformance. It governs how constructs get **written and processed**, and stops there; meaning beyond the language lives in the ontology memes.
+
+**Out of scope.** The epistemic ontology (the `syad` standpoints, `saptabhaṅgī` predications, and `mu` tools) lives in `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives` and `lar:///ha.ka.ba/lares/api/mu/the-four-tools`; the Law of Fives and the attention scale live in `lar:///ha.ka.ba/lares/api/mu/the-law-of-5s` and `lar:///ha.ka.ba/lares/api/pono/attention-scale`. The operational authoring discipline lives at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL`. The live TOML sigil registry rides the runtime kernel at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel`.
+
+**Two faces of one meme.** This carrier holds the **specification face** of `memetic-wikitext`; the runtime **kernel** face (`…/memetic-wikitext/kernel`) holds the live grammar kernel, sigil registry, parse rules, and boot grammar that a node loads. The tiddler-format law keeps them distinct — this `.mem` documents the language; the kernel `.tid` runs it.
+
+**Relation to the `lar:` URI specification.** Memetic-wikitext addresses content by `lar:` URIs. The `lar:` scheme — its anatomy, path arity, and resolution discipline — forms a **separate, sibling submission**: `lar:///ha.ka.ba/lares/api/pono/lar-uri` (Normative Reference [LAR-URI]). This document treats a `lar:` URI as an opaque content identity (see `URI-ref`, #grammar) and defers its internal structure to [LAR-URI].
+
+**Relation to the framing specification.** A document travels as a **carrier**: wrapped in the
+transmission frame — declaration, control marks, block check — defined by the sibling submission
+`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing` (Normative Reference [FRAMING]). This document defines what a
+carrier CARRIES; [FRAMING] defines the wrap, and composes over this grammar's `document` production.
+
+**Audience.** Implementers of parsers and renderers; authors migrating TiddlyWiki5 or Verse content; registry maintainers.
+
+<a id="terminology"></a>
+
+## Terminology and Conformance Language
+
+The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **SHOULD**, **SHOULD NOT**, **MAY**, and **OPTIONAL** carry the meanings in RFC 2119 / RFC 8174 when, and only when, they appear in capitals.
+
+| term | meaning |
+|---|---|
+| --- | --- |
+| **carrier** | one document standing in the transmission frame; the frame vocabulary lives in [FRAMING]. |
+| **meme** | a named, addressable unit of content; a carrier names one at its identity block. |
+| **sigil** | an active construct delimited by the sharktooth `<<~ … >>`. |
+| **worksite** (`ahu`) | an addressable scope boundary inside a carrier; a child-slot mount-point. |
+| **pranala** | a typed graph edge between memes. |
+| **family** | the category a pranala edge declares (#pranala). |
+| **dual layer** | the compile-time graph reading and render-time semantic reading of one surface (#processing-model). |
+| **guest grammar** | a foreign grammar admitted into a bounded worksite (#guest-grammar). |
+| **camera** | a render target: one render surface over the shared graph (page or canvas). |
+| **document** | the artifact class: one meme's encoded structure (#abstract-syntax); a carrier wraps a document in the frame ([FRAMING]). |
+| **processor** | the umbrella product class: any software reading, transforming, or rendering memetic-wikitext. Every processor obligation binds all of its subclasses: the parser and renderer below, and the carrier reader and consumer of [FRAMING]. |
+| **parser** | a processor reading surface into the graph-layer AST and typed edges. |
+| **renderer** | a processor projecting the parse into a camera. |
+
+<a id="abstract-syntax"></a>
+
+## Abstract Syntax
+
+Memetic-wikitext denotes a graph, and every concrete surface in this document encodes it. This section
+defines the graph without reference to any sigil, bracket, or byte, so the encodings that follow — the
+macro-call surface (#lexical-structure), the transmission frame ([FRAMING] #control-set), and any serialization a
+future document defines — each read as one encoding of one structure rather than as the structure itself.
+
+**Five shapes compose the graph:**
+
+- **meme** — a named unit of content. A meme holds exactly one intrinsic property: its address
+  [LAR-URI]. Every other property composes: the meme WEARS components (its has-stack), each component
+  itself a meme at its own address. Authority follows what a meme holds and who granted it, never what
+  it claims to be.
+- **worksite** — a named region nested in a meme's content. Worksites nest, and a nested worksite's
+  name extends its parent's path; a worksite addresses as a fragment anchor of its meme.
+- **edge** — a directed relation from one address toward another. Three kinds carry every relation:
+  adjacency (a bare pointer), transclusion (renders-in-place, live or shadow), and the anchored pointer
+  (a named office aimed at a target). The edge itself carries no further vocabulary; a relation richer
+  than its kind reifies as a meme that speaks for itself.
+- **content** — the text a meme or worksite holds, within which further structure stands: edges, nested
+  worksites, and guest regions the host carries opaquely.
+- **the extension point** — the grammar's capacity to admit new named forms from its own corpus at run
+  time. The sigil registry, guest grammar (#guest-grammar), and english aliases (#english-aliases) each
+  encode this one capability. It reaches down a layer: TiddlyWiki wikitext parses an unbound macro call
+  and degrades it to inert text [TW5], the property that lets this grammar ride the host as a superset —
+  and lets any dialect ride this grammar the same way. ''Self-extension and re-mixability stand as
+  invariants of the family, never as features of one dialect.''
+
+**Document and carrier name different things.** A **document** encodes one meme's structure — content,
+worksites, edges — and nothing else. A **carrier** wraps a document in the transmission frame
+([FRAMING] #control-set): a declaration naming the grammar, a heading naming the address, text bounds, a block
+check, a release. The frame belongs to the carrier and never to the document: it brackets what the
+document says without joining it, which lets one document travel under different framings and one frame
+carry any document.
+
+**One parse, two projections.** The compile-time graph reading and the render-time projection both read
+this abstract structure and neither reads the other (#processing-model). A processor that conflates the
+projection with the structure has read an encoding as the thing encoded.
+
+<a id="lexical-structure"></a>
+
+## Lexical Structure
+
+### The sharktooth and the outer delimiter family
+
+The `<<` `>>` pair forms the outer delimiter family for every active sigil. The tilde `~` marks the Lararium sigil namespace inside that family.
+
+| Prefix | TW5 macro name | Register | Example |
+|---|---|---|---|
+| --- | --- | --- | --- |
+| `<<~` | `~` | primary sigil — the speaking set | `<<~ ahu #id >>`, `<<~ aka lar:///uri >>` |
+| `<<~/` | `~/name` | block close | `<<~/ahu >>` |
+| `<<~!` | `~!` | pragma (definition) | `<<~! wehe name(p) >>` |
+| `<<~?` | `~?` | unresolved-pressure | `<<~? #fragment >>` |
+| `<<^` | `^` | control set — the carrier frame ([FRAMING]) | `<<^ code:"&#x0002;" >>` |
+| `<<!` | `!WORD` | declaration register ([FRAMING] #declaration-register) | `<<!DOCTYPE … >>` |
+| `<<` *(bare)* | *the name itself* | inherited TW5 macro call (superset) | `<<macroName params>>` |
+
+### Every sigil IS a TiddlyWiki5 macro call
+
+The superset relation runs deeper than coexistence: ''each row above parses as a TW5 macro call under
+TW5's own `parseMacroInvocationAsTransclusion`'', with the third character standing as the macro NAME.
+TW5's macro-name token reads `/([^\s>"'=:]+)/` — any run without whitespace, `>`, quote, `=` or colon —
+so `~`, `^`, `!DOCTYPE` and `<` all name macros the host already admits. Nothing here extends the host
+parser; the grammar chooses names inside the space TW5 left open.
+
+Two consequences a processor MUST hold:
+
+1. A vanilla TW5 processor reads a carrier as **valid wikitext**, every sigil an unbound macro call. The
+  reading degrades to inert text, never to a parse error.
+1. A memetic processor binds those names to procedures. The DEFINITION reads native too — `\procedure ^(code)`
+  parses as a TW5 procedure definition under TW5's own pragma parser, `isProcedureDefinition` and all.
+
+**The third character decides, with no lookahead.** `<<~` opens the speaking set · `<<^` the control set ·
+`<<!` the declaration register · `<<<` a quote fence · anything else reads an inherited macro call. `!`
+never opens a TW5 macro name in practice, so the declaration register costs the decision nothing.
+
+### Named parameters, in the host's own calling syntax
+
+TW5 parses a macro parameter as an attribute: an optional `name` and separator, then a value. Three
+facts the frame rests on, each the host's and not this grammar's:
+
+- **The colon separator requires a strict identifier** — TW5 tests the name against `/^[A-Za-z0-9\-_]+$/`
+  before accepting `:`, so `$:/foo` never mis-reads as a named parameter. `code:` and `namespace:` pass.
+- **A quoted value reads as a TW5 string literal** — single, double, triple-double or `[[bracket]]` — and a
+  string literal carries UTF-8, so `namespace:"&#x2299;"` and `namespace:"ॐ ँ"` stand as written.
+- **An unnamed value reads positional**, numbered in order. `?` and `->` ride as positional parameters,
+  which is how the bearing arrow survives inside a macro call ([FRAMING] #bearing-arrow).
+
+**A `lar:` URI already reads as a named parameter.** TW5 takes `lar:///ha.ka.ba/…` as the name `lar` with
+value `///ha.ka.ba/…`, because `lar` passes the strict-identifier test and `:` separates. The host has
+been reading every `lar:` reference in this corpus as a `lar` parameter from the beginning; the grammar
+inherits that reading rather than declaring one.
+
+**The sigils ride as the RUBRIC.** A missal writes the words to be spoken in black and the instructions for
+performing them in red — *rubrica*, red ochre, the practice standing in liturgical manuscripts from the
+13th century and earlier, and rubrication ran as its own production stage: the black text printed first,
+blank space left for a rubricator's hand. The two channels never compete for the same reading, because a
+celebrant already knows which one to say aloud.
+
+The `<<` `>>` family lifts the same division into a context stream. The BLACK carries content — what the turn SAYS. The RED carries
+performative instruction — what the turn DOES.
+
+**The red acts in two domains, and both are acting.** In a context stream a sigil **steers**: it names
+the stance, sets the gauge, vows the confidence, marks the phase. In a live wiki the same sigil **calls**:
+it renders, transcludes, invokes a procedure, opens a widget. Steering and calling look different and
+divide the same way — each one DOES something, and neither one SAYS anything.
+
+**A sigil steers and calls; it never asserts.** An assertion belongs to the black, where it can be
+weighed, doubted and answered. A rubric cannot be argued with; it can only be performed or ignored —
+which is exactly why the instruction channel and the claim channel must never share a colour.
+
+Memetic-wikitext SHALL read as a **superset of TW5 wikitext**: every valid TW5 wikitext document reads as valid memetic-wikitext. A processor reads bare `<<name>>` as an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
+
+### Shapes
+
+- **Inline** (self-closing): `<<~ loulou lar:///uri >>`
+- **Block** (open + close): `<<~ ahu #id >>` … `<<~/ahu >>`
+- **Pragma block** (`<<~!` … `<<~/name >>`): definitions
+
+A `#fragment-id` after a sigil name names an addressable anchor. A block's close tag MUST match the innermost open of the same sigil name.
+
+<a id="grammar"></a>
+
+## Formal Grammar (ABNF)
+
+This grammar (RFC 5234) defines the **surface shape** alone: any name-token reads as a sigil command word,
+and the registry binds names to behavior. A conforming parser MUST accept exactly the surface this grammar
+describes.
+
+**The grammar builds on TW5's macro call, and adds no delimiter of its own.** `macro-call` below restates
+the host production [TW5]; every memetic form derives from it by naming a macro and shaping its
+parameters. A processor that already parses TW5 macro calls parses every sigil here. The transmission frame that
+wraps a `document` into a carrier — `frame`, `header`, `footer`, `doctype`, and the `carrier`
+composition — stands in [FRAMING] #grammar, which imports this grammar's productions and reads
+`document` opaquely.
+
+```abnf
+; ── the host production, restated ───────────────────────────
+LWSP        = *( SP / HTAB )
+macro-name  = 1*( %x21-10FFFF except SP / DQUOTE / "'" / ">" / "=" / ":" )
+macro-call  = "<<" macro-name params LWSP ">>"     ; [TW5] parseMacroInvocation
+params      = *( LWSP param )
+param       = named-param / positional
+named-param = identifier ( ":" / "=" ) value       ; ":" requires identifier
+identifier  = 1*( ALPHA / DIGIT / "-" / "_" )      ; [TW5] strict-identifier test
+positional  = value
+value       = string-literal / unquoted
+string-literal = DQUOTE *( %x00-10FFFF except DQUOTE ) DQUOTE
+               / "'" *( %x00-10FFFF except "'" ) "'"
+               / 3DQUOTE *( %x00-10FFFF ) 3DQUOTE
+               / "[[" *( %x00-10FFFF except "]]" ) "]]"
+unquoted    = 1*( %x21-10FFFF except SP / DQUOTE / "'" / ">" )   ; ">" allowed in "->"
+
+; ── the four macro names this grammar claims ────────────────
+speaking    = "~"                     ; the sigil set
+control     = "^"                     ; the carrier frame — bound by [FRAMING]
+declaration = "!" 1*ALPHA             ; !DOCTYPE and its register — bound by [FRAMING]
+pragma-name = "~!"
+unres-name  = "~?"
+
+; ── lexical primitives ──────────────────────────────────────
+name-token  = ( ALPHA / "_" ) *( ALPHA / DIGIT / "-" / "_" )
+canonical   = name-token              ; Hawaiian canonical name
+alias       = "\" name-token          ; English alias namespace
+sigil-name  = canonical / alias
+fragment    = "#" name-token
+URI-ref     = <a lar: URI or fragment, opaque here; see [LAR-URI]>
+                                      ; the host reads "lar:" as a named param
+
+; ── sigils, each a macro-call ───────────────────────────────
+block-close = "<<" "~/" sigil-name LWSP ">>"
+inline      = "<<" speaking LWSP sigil-name params LWSP ">>"
+block       = "<<" speaking LWSP sigil-name [ LWSP fragment ] params LWSP ">>"
+              content
+              block-close
+pragma      = "<<" pragma-name LWSP sigil-name [ LWSP defn-params ]
+              [ LWSP "=" LWSP filter-expr ] LWSP ">>"
+              [ content pragma-close ]
+unresolved  = "<<" unres-name LWSP [ fragment ] LWSP ">>"
+edge        = "<<" speaking LWSP sigil-name LWSP [ fragment LWSP ]
+              [ "?" LWSP "->" LWSP ] URI-ref params LWSP ">>"
+
+; ── guest grammar (opaque to the host) ─────────────────────
+filter-expr = "[" *( %x20-5C / %x5E-7E ) "]"   ; evaluated by a guest handler
+
+; ── document ────────────────────────────────────────────────
+document    = *( block / inline / pragma / unresolved / text )
+text        = 1*( <any run that does not begin a macro-call> )
+```
+
+**Normative grammar rules.** (1) An `alias` MUST map to its `canonical` before any further processing; the
+compiled tree MUST carry only canonical names. (2) A `block-close` MUST match the innermost unclosed
+`block`/`pragma` of the same name. (3) `filter-expr` content stays opaque to the host parser; only a
+registered guest handler interprets it. (4) `URI-ref` structure defers to [LAR-URI]. (5) Memetic-wikitext
+inherits the TW5 wikitext base [TW5]; bare `<<name>>` macro calls and other TW5 constructs read as
+inherited content (the `text` production), defined by [TW5] and not re-specified here. (6) Every production above stands as a
+`macro-call` IN THE HOST'S READING: a conforming TW5 processor MUST parse a carrier as valid wikitext,
+every sigil an unbound macro call, and this document's superset claim rests on that direction alone.
+**The converse does not follow.** A memetic processor MAY recognise a NARROWER set of parameter
+spellings than the host admits — it MUST NOT refuse a spelling the host accepts, and MUST degrade an
+unrecognised one to text rather than to a parse error (#lexical-structure, the gradient's floor).
+
+<a id="processing-model"></a>
+
+## Processing Model — The Dual Layer
+
+Every sigil reads on **both layers at once** — not two sigil sets, but two readings of one surface.
+
+```
+┌─ COMPILE-TIME READING (graph) ────────────────────────────┐
+│  ahu     → worksite node / fragment anchor                 │
+│  pranala/loulou/aka/kahea/pono/papalohe → PranalaEdge      │
+│  iam     → carrier metadata                                │
+│  ? ->    → document DAG socket                             │
+│  output: MemeGraph, boot artifact                          │
+└──────────────────────────┬────────────────────────────────┘
+                           │ same sigils, second reading
+┌──────────────────────────▼────────────────────────────────┐
+│  RENDER-TIME READING (projection)                          │
+│  transclusion (aka frozen / kahea live) → embed content    │
+│  definitions (wehe/helu) → named forms                     │
+│  conditionals/iteration (wai/huli) → control render     │
+│  concurrency (hui/heihei/puka/lele) → coordination         │
+│  output: a rendered surface (a camera, see render axes)    │
+└────────────────────────────────────────────────────────────┘
+```
+
+A processor MUST treat the two readings as projections of one parse — one parse, two readings. The render reading targets a **camera** — a page (DOM/story-river) or canvas (flow) surface over one shared world graph; the render-axis law lives at `lar:///ha.ka.ba/lares/api/pono/render-pipeline#render-axes`.
+
+### Graph layer
+
+The parse yields a typed AST (`MemeAstNode[]`) and typed edges (`PranalaEdge[]`). Worksites carry `uri = carrierUri + slot`; the document header/footer carry the DAG sockets. The graph layer drives boot closure and indexing; it produces no visible output of its own.
+
+### Render layer
+
+Edge and definition sigils carry render directives. `aka` embeds frozen content; `kahea` embeds live content kept fresh by subscription; `loulou` renders a navigable reference; definitions expand named forms; conditionals and iteration gate and repeat render. The render layer crosses a mutation boundary only at its commit step (write a tiddler, a cache, or a disk carrier). The parse→widget→DOM stage pipeline lives at `render-pipeline#render-axes`.
+
+<a id="pranala"></a>
+
+## Pranala — The Typed Edge System
+
+An edge carries its semantics in its **sigil**, never in an attribute: the sugar names below each bind
+one kind, and the edge law admits exactly one attributed form at rest — the code source-pointer,
+`family:code role:has` (`lar:///ha.ka.ba/lares/api/pono/pranala`). Anything richer reifies as a **wire**
+entity wearing a family as a stack component — examples, never an enum (has-stack clause 4). The table
+maps the sugar sigils to the semantic families their wire components carry, aligned to the render
+surfaces:
+
+| family | sugar | surface | carries |
+|---|---|---|---|
+| --- | --- | --- | --- |
+| `control` | *(explicit `pranala`)* | graph | structural authority (`role:has`; composition only) |
+| `constraint` | `pono` | graph | a rule that MUST hold; no execution pulse |
+| `relation` | `loulou` | page | a navigable link, no auto-embed |
+| `observe` | *(monitoring)* | page | inspection / measurement / attention; confidence-bounded |
+| **`transclusion`** | `aka`, `kahea` | **page** | a **content identity** embedded into the source — `aka` frozen, `kahea` live (subscription-fresh); confidence-bounded |
+| `dataflow` | *(value-wire)* | canvas | a typed **value** between node pins (reads/writes/streams) |
+| `reaction` | `papalohe` | canvas | an event wire — fires when the source event activates |
+| `message` | `lele` | canvas | fire-and-forget async dispatch |
+| `spatial` | *(pending)* | canvas | containment / portal / adjacency / layer |
+
+**Transclusion ≠ dataflow.** A `transclusion` edge carries a *content identity* (render-time, page surface); a `dataflow` edge carries a *computed value* (graph-execution order, canvas surface). A processor MUST route content identities through transclusion edges and computed values through dataflow wires. *(The `transclusion` family surfaces under its English name; its pono Hawaiian name stays held.)*
+
+<a id="anchors"></a>
+
+## Anchors and Belonging
+
+The recognized sigil types **mint** this media type's fragment anchors — RFC 3986 §3.5 places fragment
+semantics with the representation's media type, and this section carries them. A worksite (`ahu`) mints
+an anchor under its name; a nested worksite extends its parent's anchor with `/`, so `#a/b` names the
+worksite `b` inside the worksite `a`; an anchored pointer (`pranala #name`) mints the anchor its office
+names. An anchor no sigil minted resolves to nothing — the pattern belongs to the sigils, never to
+free-form text.
+
+**A path-shaped anchor names its own parentage.** `root#a/b` states its parent as `root#a` by the shape
+alone; nothing else has to carry it. A stored field naming the same parent would stand as a second
+spelling of one fact, and a second spelling can disagree with the first the moment both become editable.
+
+**Rendering carries a different relation, and no field could hold it.** One meme renders into many
+places — `<<~ ahu #x -> lar:///other >>` points a worksite at a full address — so the relation runs
+many-to-many and lives in the **markers that hold it**, in the carriers that write them. A child cannot
+list its renderers without a write on every transclusion.
+
+`<<~moves belonging -> rides/the-anchor-shape on/every-hop if/derived do/refuse-a-second-copy >>`
+`<<~moves rendering -> rides/the-marker on/the-renderer if/many-to-many do/stay-out-of-the-child >>`
+
+<a id="scope-model"></a>
+
+## Scope Model
+
+State carries one of five principled scopes. A `kau` binding and a `kapu` qualifier gate on them.
+
+| scope | boundary | who controls it |
+|---|---|---|
+| --- | --- | --- |
+| `ephemeral` | one turn / recipe run | nobody — evaporates |
+| `personal` | one actor, persistent | the actor |
+| `consensual` | shared by mutual choice | author gates; reader assembles |
+| `collective` | shared by group identity | group governance |
+| `universal` | no gate | no one — federated |
+
+Scope MAY widen; a narrowing MUST surface explicitly. A `<<~ kapu <scope> >>` block renders only when the active scope reads at that level or wider. Context binds **lexically** through the `meme` sigil — a template MUST take its context through `meme` alone. *(A web2.5 transport adapter MAY map these scopes to external objects behind a causal-island boundary; that mapping lives in the adapter's meme.)*
+
+<a id="recursion-guard"></a>
+
+## Recursion Guard
+
+A renderer MUST maintain a render stack per chain. When it evaluates a transclusion (`aka`/`kahea`):
+
+1. target already on the stack → **recursion**;
+2. stack depth ≥ 8 (default) → **depth exceeded**;
+3. either case → emit a visible break stub `[⬡ ∞ lar:///uri]`;
+4. otherwise → push, render, pop.
+
+The compile-time DAG guard (boot-closure cycles) and the render-time stack guard run **orthogonally**; a processor MUST hold both. A break stub MUST stay visible, non-crashing, and traceable to the URI that triggered it.
+
+<a id="guest-grammar"></a>
+
+## Guest Grammar Model — The Extension Point
+
+`hana` admits a foreign grammar into a bounded worksite, keyed by a registered grammar-key:
+
+```
+<<~ hana x-tiddlywiki-filter >>
+[tag[invariant]sort[title]]
+<<~/hana >>
+```
+
+Guest grammar MUST leave host primitives intact, and malformed guest work MUST degrade locally, keeping the host parse alive. The inline conditional / iteration / query sigils accept a `filter-expr` as shorthand for a `hana` block over the same guest grammar. The host treats `filter-expr` content as opaque (#grammar). Currently registered: `x-tiddlywiki-filter`.
+
+<a id="english-aliases"></a>
+
+## English Alias Namespace
+
+The `\` prefix marks the English alias namespace. An alias carries identical semantics to its Hawaiian canonical and MUST map to it before evaluation; the compiled tree carries only canonical names, and diagnostics MUST use the canonical name. Aliases serve onboarding and visual contrast; they introduce no separate AST node. A block alias closes with `<<~/\name >>`, which a processor MUST resolve to the canonical close before matching.
+
+### Two registers, one vocabulary
+
+A sigil stands in two places and reads differently in each. In an exchange turn `<<~ confidence Canon
+18/20 >>` **steers** — it vows a band the claim generates within. Inside a meme — a chat-history lares,
+an in-character scene, a transcript — the same glyphs read as **content**: what was said, quoted.
+
+**The gradient already answers this, and answers it correctly.** A sigil resolves to whatever procedure
+its name binds; a name that binds none renders as its own text. That floor stands as no mere fallback the
+grammar tolerates — for a quoted steering sigil it renders RIGHT, because a transcript that
+resolved what it quotes would lie about what was said, and a record of speech survives nothing less.
+
+So no sigil declares which register it stands in, and none should: the register belongs to the CARRIER,
+which knows whether it holds a turn or a quotation of one. A processor MUST NOT resolve a sigil whose
+name binds no procedure, and MUST render it as the text it is.
+
+//(A live wiki may bind such a name later — a procedure that SHOWS what was steered without performing
+it, styled as its own block. The extension point is the same one every sigil uses, so the render arrives
+without the grammar moving.)//
+
+<a id="conformance"></a>
+
+## Conformance Classes
+
+Two kinds of thing conform: the **document** (the artifact) and the **processors** that handle it —
+**parser** and **renderer** here, **carrier reader** and **consumer** in [FRAMING] (#terminology). An obligation stated on
+**a processor** binds every subclass; an obligation on a named subclass binds it alone. Authors carry
+SHOULD-strength guidance only: the corpus gets written by hand, and the projection re-mints what a hand
+leaves non-canonical.
+
+A **conforming document** MUST: satisfy the grammar (#lexical-structure, #grammar), every
+`block-close` matching the innermost open of the same sigil name; carry at most the one attributed
+pranala form at rest — the code source-pointer, `family:code role:has` (#pranala); and keep guest
+regions inside their fences, host primitives intact (#guest-grammar). A document that fails a clause
+still parses — graceful parsing holds — and parses as a document in fault, the gradient
+([FRAMING] #the-gradient) naming what it lacks. A document travelling as a carrier additionally
+answers the conforming-carrier clauses of [FRAMING].
+
+A **conforming parser** MUST: accept the surface of #grammar; read every sigil as a TW5 macro call
+(#lexical-structure); map aliases to canonicals; produce the graph-layer AST and typed edges; enforce
+close-tag matching; treat `filter-expr` as opaque.
+
+The **carrier reader** and **consumer** classes — the frame-side processors — conform to [FRAMING],
+which states their obligations beside the frame they read.
+
+**The host reading is a conformance obligation, not a courtesy.** A carrier processed by a vanilla TW5
+engine MUST parse as valid wikitext with every sigil an unbound macro call. A grammar change that breaks
+that reading breaks the superset claim this document rests on, whatever else it gains.
+
+A **conforming renderer** MUST: read the dual layer as one parse; honor transclusion fidelity (`aka` frozen, `kahea` live); maintain the render-stack recursion guard; declare its render mode before crossing a mutation boundary; target exactly one camera per pass. A renderer MAY support a subset of cameras and MUST degrade a missing camera visibly.
+
+A **conforming author** SHOULD: reserve capitalized RFC-2119 force for intended normative statements; keep guest grammar inside `hana` or the inline filter forms; pass context lexically through `meme`.
+
+<a id="media-type"></a>
+
+## Media-Type Registration (RFC 6838)
+
+```
+Type name:                 text
+Subtype name:              memetic-wikitext+tiddlywiki
+Required parameters:       none
+Optional parameters:       charset (default UTF-8)
+Encoding considerations:   8-bit; UTF-8 REQUIRED
+Fragment identifier:       sigil-minted anchors (#anchors): a worksite name,
+                           a nested worksite path (#a/b), a pranala office.
+                           The scheme [LAR-URI] carries fragments opaque;
+                           their meaning lives in this registration
+Security considerations:   see #security
+Interoperability:          degrades to readable text in a plain viewer;
+                           sigils render inert without a conforming processor
+Published specification:   this document (lar:///…/api/pono/memetic-wikitext)
+Applications:              Lararium nodes (federated wiki devices); TiddlyWiki 5; mesh tooling
+File extension:            .mem (carrier form), .tid (runtime widget/procedure)
+```
+
+**The `text` tree holds on measured bytes.** A carrier presents legibly in a plain viewer end to end:
+the frame writes every control mark as an HTML numeric character reference inside a quoted parameter
+(`&#x0002;` — seven printable ASCII characters), never as a raw octet. Measured over the corpus, zero
+carriers hold any C0 octet beyond the line feed itself. RFC 6838 §4.2.1 admits a `text` subtype where
+the content stays reasonable to present absent interpretation software — this format passes that gate on
+bytes rather than on argument, and the marks named SOH · STX · ETX · EOT ([FRAMING] #control-set) name what a
+reference STANDS FOR, never what a file contains.
+
+The subtype carries no `x-` prefix: RFC 6838 deprecates it, and a type wearing it sits in no tree at
+all. One spelling serves both directions — every writer emits it, every reader dispatches on it, and a
+`type` outside it surfaces as unadmitted, loudly, while the carrier still parses (graceful parsing
+holds). The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 asks —
+generic processing: a receiver holding only a TW5 parser processes a carrier usefully, every sigil an
+unbound macro call degrading to inert text (#conformance). That the syntax builds on TW5 states the
+lineage; the degradation property states the warrant.
+
+<a id="security"></a>
+
+## Security Considerations
+
+**Transclusion amplification.** A chain of `kahea`/`aka` embeds can expand unboundedly before output. A processor MUST enforce the render-stack guard (#recursion-guard) and the depth cap; it MUST push an embed's URI to the stack before emitting.
+
+**Guest-grammar injection.** A `hana` block admits foreign grammar. A processor MUST sandbox the guest handler, MUST keep host primitives intact, and MUST bound guest evaluation to the declared render.
+
+**URI handling.** A `lar:` URI **names**; it does not fetch ([LAR-URI]). A processor MUST resolve a `lar:` reference against the local world graph only.
+
+**Frame hazards ride their own analysis** — [FRAMING] #frame-security.
+
+**Scope leakage.** A widening-only scope discipline (#scope-model) MUST hold at the Decide→Act boundary; an `ephemeral` value that escapes its container MUST surface as a contract violation, not silently persist.
+
+<a id="examples"></a>
+
+## Worked Examples (Non-Normative)
+
+A carrier with an identity block, a worksite, and a typed edge — opening on the declaration every
+carrier states first ([FRAMING] #declaration-register):
+````
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/example >>
+```toml iam
+… bare toml-iam slot: identity payload (uri-path, type, role, register) …
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #head >>
+Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>.
+<<~ pranala #governs ? -> lar:///ha.ka.ba/lares/api/pono/loci family:control role:has >>
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;…
+
+<<^ code:"&#x0004;" -> ? >>
+````
+
+A definition summoned by name:
+```
+<<~! wehe greeting(name "World") >>Hello, <<~ kahea name >>!<<~/wehe >>
+<<~ kahea greeting(name:"Operator") >>
+```
+
+A conditional over a guest filter, and an iteration:
+```
+<<~ heihei [tag[ready-for-canon]] >>ready<<~ mukuwai >>holding<<~/heihei >>
+<<~ huli [tag[invariant]sort[title]] as item >><<~ kahea item >><<~/huli >>
+```
+
+A canvas reaction wire (flow surface):
+```
+<<~ papalohe DeviceA -> DeviceB trigger:OnEliminated fn:ShowScore >>
+```
+
+<a id="references"></a>
+
+## Normative References
+
+- **[RFC2119]** / **[RFC8174]** — conformance key words.
+- **[RFC5234]** — ABNF.
+- **[RFC6838]** — media-type registration procedures.
+- **[LAR-URI]** — the `lar:` URI specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/lar-uri`.
+- **[FRAMING]** — the carrier framing specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing`.
+- **[PRANALA]** — pranala edge law: `lar:///ha.ka.ba/lares/api/pono/pranala`.
+- **[TW5]** — TiddlyWiki5 WikiText grammar — the inherited base; memetic-wikitext reads as a superset.
+
+<a id="annex-parity"></a>
+
+## Annex A — TiddlyWiki5 / Verse Parity (Informative)
+
+| heritage construct | memetic-wikitext analog |
+|---|---|
+| --- | --- |
+| TW5 `[[Title]]` link | `<<~ loulou lar:///uri >>` |
+| TW5 `{{Title}}` transclusion | `<<~ kahea lar:///uri >>` |
+| TW5 shadow tiddler | `<<~ aka lar:///uri >>` |
+| TW5 `\procedure` / `\function` | `<<~! wehe … >>` / `<<~! helu … >>` |
+| TW5 `<$tiddler>` context | `<<~ meme lar:///uri >>` |
+| TW5 `<$list>` filter / iterate | `<<~ wai … >>` / `<<~ huli … >>` |
+| Verse `sync`/`race`/`rush`/`branch` | `<<~ hui >>` / `holo` / `puka` / `lele` |
+| Verse device event binding | `<<~ papalohe … >>` (reaction) |
+| Verse event (`listenable`/subscribe) vs expression value | `reaction` (event) vs `dataflow` (value) |
+
+<a id="annex-open"></a>
+
+## Annex B — Open Items (Informative)
+
+- **Conditional + concurrency naming (settled).** `wai` = wikispace conditional (`\if`, with `kahawai`/`mukuwai`); `heihei` = canvasspace conditional-branch (Verse `if`/`case`); `holo` = race (`\race`); `puka` = rush; `hui` = sync; `lele` = branch — settled across the per-sigil memes and `verse-task-tree`.
+- **`spatial` sugar.** Family registered; a directional sugar sigil and English alias remain pending.
+- **`kukali` (reactive wait).** Awaits an async `ReactionGraph`; the wait posture has no semantics without an async execution context.
+- **Widget-tree pass.** `resolveWidgetTree(ast, registry)` — the parse→widget→DOM middle layer — remains a pending implementation stage.
+- ''Transclusion family name. English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
+- **The `+tiddlywiki` suffix — adopted, corpus-wide.** Every carrier writes
+  `text/memetic-wikitext+tiddlywiki` in its iam, and its declaration writes the matching root name.
+  What stays open: the suffix sits in no IANA registry, and registering it needs a
+  normative reference for TW5 wikitext — the base-syntax document stands drafted
+  (`lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext`) and awaits its walk to the TW5 circle.
+
+<a id="edges"></a>
+
+## Edges
+
+- `lar:///ha.ka.ba/lares/api/pono/pranala`
+- `lar:///ha.ka.ba/lares/api/pono/lar-uri`
+- `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing`
+- `lar:///ha.ka.ba/lares/api/pono/render-pipeline`
+- `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel`
+- `lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter`
+- `lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext`
+- `lar:///ha.ka.ba/lares/api/pono/guest-grammar`
+- `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL`
+- `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
+- `lar:///ha.ka.ba/lares/api/mu/the-four-tools`
+- `lar:///ha.ka.ba/lares/api/mu/the-law-of-5s`
+- `lar:///ha.ka.ba/lares/api/pono/attention-scale`

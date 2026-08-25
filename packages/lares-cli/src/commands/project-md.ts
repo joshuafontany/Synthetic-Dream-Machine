@@ -19,9 +19,11 @@ import type { ParsedArgs } from "../parse-args.js";
 export async function cmdProjectMd(args: ParsedArgs): Promise<number> {
   const files = [...args.positional];
   const out = args.options["out"];
+  const titleBase = args.options["title-base"];
   if (files.length === 0) {
-    console.error("usage: lares project-md <file.mem ...> [--out <dir>]");
+    console.error("usage: lares project-md <file.mem ...> [--out <dir>] [--title-base <lar-uri>]");
     console.error("  render a carrier to its submission pair: <name>.md + <name>.md.meta");
+    console.error("  --title-base  the shelf address the pair mounts under; the meta title becomes <base>/<name>");
     return 1;
   }
   if (out) mkdirSync(out, { recursive: true });
@@ -29,8 +31,8 @@ export async function cmdProjectMd(args: ParsedArgs): Promise<number> {
   for (const f of files) {
     try {
       const text = readFileSync(f, "utf8");
-      const p = projectSubmission(text);
       const base = basename(f).replace(/\.mem$/, "");
+      const p = projectSubmission(text, titleBase ? { title: `${titleBase}/${base}` } : undefined);
       const dir = out ?? dirname(f);
       const mdPath = join(dir, `${base}.md`);
       writeFileSync(mdPath, p.markdown);
