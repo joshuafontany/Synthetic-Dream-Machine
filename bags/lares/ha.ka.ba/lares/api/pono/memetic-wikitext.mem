@@ -158,7 +158,7 @@ TW5's macro-name token reads `/([^\s>"'=:]+)/` — any run without whitespace, `
 so `~`, `^`, `!DOCTYPE` and `<` all name macros the host already admits. Nothing here extends the host
 parser; the grammar chooses names inside the space TW5 left open.
 
-Two consequences a processor MUST hold:
+Three consequences a processor MUST hold:
 
 # A vanilla TW5 processor reads a carrier as ''valid wikitext'', every sigil an unbound macro call. The
   reading stays total — never a parse error; the host renders an unbound call as nothing while the
@@ -166,6 +166,12 @@ Two consequences a processor MUST hold:
   without harm.
 # A memetic processor binds those names to procedures. The DEFINITION reads native too — `\procedure ^(code)`
   parses as a TW5 procedure definition under TW5's own pragma parser, `isProcedureDefinition` and all.
+# ''A memetic processor holds a STRONGER degradation law than the base:'' graceful parsing on a
+  gradient. An unrecognised or malformed construct MUST surface as visible text — never vanish
+  silently the way a base host renders an unbound call as nothing — and SHOULD carry a diagnostic
+  naming what failed to bind (#conformance, the gradient's floor). The base law makes a carrier
+  SAFE on any host; this law makes it LEGIBLE on ours: what a reader cannot execute, a reader can
+  still see.
 
 ''The third character decides, with no lookahead.'' `<<~` opens the speaking set · `<<^` the control set ·
 `<<!` the declaration register · `<<<` a quote fence · anything else reads an inherited macro call. `!`
@@ -676,6 +682,6 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qt_Nj4NInivDIOvRFMnXLKOG3WdBKQ6yvdj-2APp__Y
+<<^ code:"&#x0003;" >>ni:///sha-256;rq1T__mmPx8u0O9DiAzbMby0aMYg6bwdU2S4lR2Zjuo
 
 <<^ code:"&#x0004;" -> ? >>
