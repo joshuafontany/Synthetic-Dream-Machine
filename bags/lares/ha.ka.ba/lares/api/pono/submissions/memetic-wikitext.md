@@ -86,7 +86,7 @@ future document defines — each read as one encoding of one structure rather th
 - **the extension point** — the grammar's capacity to admit new named forms from its own corpus at run
   time. The sigil registry, guest grammar (#guest-grammar), and english aliases (#english-aliases) each
   encode this one capability. It reaches down a layer: TiddlyWiki wikitext parses an unbound macro call
-  and degrades it to inert text [TW5], the property that lets this grammar ride the host as a superset —
+  harmlessly — the parse stays total and the stored text survives verbatim [TW5] — the property that lets this grammar ride the host as a superset —
   and lets any dialect ride this grammar the same way. ''Self-extension and re-mixability stand as
   invariants of the family, never as features of one dialect.''
 
@@ -131,7 +131,9 @@ parser; the grammar chooses names inside the space TW5 left open.
 Two consequences a processor MUST hold:
 
 1. A vanilla TW5 processor reads a carrier as **valid wikitext**, every sigil an unbound macro call. The
-  reading degrades to inert text, never to a parse error.
+  reading stays total — never a parse error; the host renders an unbound call as nothing while the
+  stored text survives verbatim [TW5-WIKITEXT], so a carrier crosses a base host without loss and
+  without harm.
 1. A memetic processor binds those names to procedures. The DEFINITION reads native too — `\procedure ^(code)`
   parses as a TW5 procedure definition under TW5's own pragma parser, `isProcedureDefinition` and all.
 
@@ -489,8 +491,8 @@ The subtype carries no `x-` prefix: RFC 6838 deprecates it, and a type wearing i
 all. One spelling serves both directions — every writer emits it, every reader dispatches on it, and a
 `type` outside it surfaces as unadmitted, loudly, while the carrier still parses (graceful parsing
 holds). The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 asks —
-generic processing: a receiver holding only a TW5 parser processes a carrier usefully, every sigil an
-unbound macro call degrading to inert text (#conformance). That the syntax builds on TW5 states the
+generic processing: a receiver holding only a TW5 parser processes a carrier usefully — the parse
+total, the storage verbatim, every sigil an unbound macro call rendering harmlessly (#conformance). That the syntax builds on TW5 states the
 lineage; the degradation property states the warrant.
 
 <a id="security"></a>
@@ -561,6 +563,7 @@ A canvas reaction wire (flow surface):
 - **[FRAMING]** — the carrier framing specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing`.
 - **[PRANALA]** — pranala edge law: `lar:///ha.ka.ba/lares/api/pono/pranala`.
 - **[TW5]** — TiddlyWiki5 WikiText grammar — the inherited base; memetic-wikitext reads as a superset.
+- **[TW5-WIKITEXT]** — the base-syntax specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext`.
 
 <a id="annex-parity"></a>
 
