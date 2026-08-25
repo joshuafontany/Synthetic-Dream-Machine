@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp >>
-```toml iam
+```toml meta
 entry-point       = "python3 -m lares.lararium_mcp"
 file-path         = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp.mem"
 mana              = 16
@@ -151,7 +151,7 @@ lares/lararium_mcp/
   __init__.py       public re-exports
   __main__.py       entry point → server.main()
   resolver.py       lar:/// URI → LarResolution (file path or virtual)
-  carrier.py        carrier ingress: #iam extraction, shape validation, implements bundle
+  carrier.py        carrier ingress: #meta extraction, shape validation, implements bundle
   indexes.py        carrier index, interface index, invariant index
   compiler.py       compile_minimal_boot, compile_full_boot, compile_boot_receipt
   resources.py      ResourceEntry list, read_lar_resource_or_index
@@ -340,6 +340,6 @@ class MyAdapter:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GYUN4Lthu-5dyRNPLgoRVHeu0PDjj_in0cpdDbHS4bQ
+<<^ code:"&#x0003;" >>ni:///sha-256;NmhOSQXpwjXXfbPM1ZKIfi36j-wZaMPQOIl0DwYkbxI
 
 <<^ code:"&#x0004;" -> ? >>

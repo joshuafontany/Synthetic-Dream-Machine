@@ -31,12 +31,12 @@ import { sha256HexBytesSync, utf8Bytes, isOversizedBody, casBackstopFires, media
 import { larCasDir } from "./env.js";
 
 /** The opt-in-CAD flag. CAS-ing a body goes OPT-IN: the operator marks `_lar_cas = "yes"`
- *  in a `.meta` sidecar (`_lar_cas: yes`, TW5 field form) OR a per-ahu `toml iam`
+ *  in a `.meta` sidecar (`_lar_cas: yes`, TW5 field form) OR a per-ahu `toml meta`
  *  (`_lar_cas = "yes"`). The flag reads off text the gesture already holds — never a CAS
  *  resolve. Matches either `:` or `=`, with or without quotes. */
 const CAS_FLAG_RE = /(?:^|\n)\s*_lar_cas\s*[:=]\s*"?yes"?/i;
 
-/** Does a carrier opt IN to CAS externalization? Reads the `.meta` sidecar and the body iam
+/** Does a carrier opt IN to CAS externalization? Reads the `.meta` sidecar and the body meta
  *  (both in hand at scan time — a flag read is never a body resolve). */
 export function carrierCasFlagged(text: string, meta?: string): boolean {
   return CAS_FLAG_RE.test(meta ?? "") || CAS_FLAG_RE.test(text);

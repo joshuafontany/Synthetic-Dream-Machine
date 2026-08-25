@@ -166,7 +166,7 @@ neither invented here.
 
 **The root name carries no `text/`, and that division carries the point.** A DOCTYPE names a DOCUMENT TYPE;
 `<!DOCTYPE html>` writes `html`, never `text/html`. The media type has its own home and always has —
-the tiddler's `type:` field, and the `type` line in every carrier's iam block. One name per relation:
+the tiddler's `type:` field, and the `type` line in every carrier's meta block. One name per relation:
 the DOCTYPE says WHICH GRAMMAR READS THIS, the `type` field says WHAT THIS IS TO A TRANSPORT. Folding
 the media type into the DOCTYPE slot would put both under one name for no gain.
 
@@ -242,11 +242,11 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 
 **Kapu** names the restricted, admin-only trust tier (#trust-tiers); the kapu byte column gives each mark's substitute code in that tier.
 
-**The frame — heading, then text.** The protocol law pins the zones: SOH opens the **heading**, STX opens the **text**. The heading holds the toml iam slot and nothing else; the text holds the body.
+**The frame — heading, then text.** The protocol law pins the zones: SOH opens the **heading**, STX opens the **text**. The heading holds the toml meta slot and nothing else; the text holds the body.
 
 ```
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///URI >>   SOH · open heading
-  ‹toml iam slot — the identity heading›
+  ‹toml meta slot — the identity heading›
   <<~ aka lar:///…RFC-2119 >>                          (optional carrier-level binding)
 <<^ code:"&#x0002;" >>                                 STX · open text (body)
   # title · ## sections · #edges                       the text (body)
@@ -376,7 +376,7 @@ The `bcc` slot carries a check over the framed span. Normatively:
   recomputes it over the bytes in front of it. Two computations of one fact, never a copy of one — a
   stored derivation goes stale the moment the thing it derives from moves.
 - **The heading stays outside.** The span opens at STX, so the identity block sits above it: sorted keys,
-  aligned equals, entity-escaped glyphs and child inheritance all churn the iam without touching the
+  aligned equals, entity-escaped glyphs and child inheritance all churn the meta without touching the
   check. A carrier whose heading re-canonicalised still verifies.
 - **A carrier holding no check reads `unchecked`, never `mismatch`.** Absence of a check and a failed
   check stand as different facts (#bearing-arrow), and a reader that collapsed them would be useless exactly
@@ -479,7 +479,7 @@ processor MUST keep the division:
 
 ### The identity heading, by position
 
-A labelled ```` ```toml iam ```` fence states identity. Which identity it states reads by POSITION:
+A labelled ```` ```toml meta ```` fence states identity. Which identity it states reads by POSITION:
 
 1. The fence that OPENS a carrier heads the **carrier** — its address, its namespace, its register.
 2. Every LATER fence heads the **worksite it sits in** — that slot's own register, its own confidence —
@@ -494,7 +494,7 @@ itself on every later pass.
 
 A carrier reads in three zones, and the middle one had no name:
 
-1. **The identity heading** — the labelled `toml iam` fence. What the meme IS.
+1. **The identity heading** — the labelled `toml meta` fence. What the meme IS.
 2. **The carrier bindings** — between the heading and STX. `<<~ aka lar:///… >>` binds a reference at
   carrier level; `<<~ kahea ahu #… >>` mounts a slot. These read as AUTHORED structure, not framing:
   they state what the carrier holds before its body opens.
@@ -505,7 +505,7 @@ authored declaration below a mark that says the text has begun.
 
 ### The `register` field — band vocabulary
 
-The iam `register` field names the band a carrier's overall content stands in, on the 0--20 continuum the confidence sigil vows numerically. The sigil speaks the bare number (`<<~ confidence N/20 >>`); the band vocabulary belongs to this field alone:
+The meta `register` field names the band a carrier's overall content stands in, on the 0--20 continuum the confidence sigil vows numerically. The sigil speaks the bare number (`<<~ confidence N/20 >>`); the band vocabulary belongs to this field alone:
 
 `<<~ranks register provisional@1..4 ~ speculative opening, the play register -> provisional-synthesis@5..8 ~ forming, predication stays scoped and short -> synthesis@9..12 ~ working synthesis, process and relation dominate -> synthesis-canon@13..16 ~ near-settled, stronger declarative survives where grounds show -> canon@17..20 ~ vowed on real grounds, talk-story consensus seats it >>`
 
@@ -518,7 +518,7 @@ the tiddler.'' A promise, never a prohibition — and it replaces every list of 
 
 | class | holds | because |
 |---|---|---|
-| on the tiddler | iam fields · zone content · effect-record fields | the author sees it, so the author may edit it, from either surface |
+| on the tiddler | meta fields · zone content · effect-record fields | the author sees it, so the author may edit it, from either surface |
 | another tiddler | relations · indexes · recipes | a relation between things belongs to no one thing |
 | the envelope | kāpae · authority · change-id · schema-version · the bag cap-reference | facts about the record's replication, not its content |
 | nowhere | `slot` · `fragment-parent` · `file-path` · the block check | derived on demand; a second copy can disagree once both admit edits |
@@ -529,10 +529,10 @@ every consumer honours it without agreeing on anything else. TW5 states the same
 
 ### The fence opens its head
 
-A labelled iam fence heads the head it **opens**. Content standing before it means the fence heads
+A labelled meta fence heads the head it **opens**. Content standing before it means the fence heads
 nothing — it reads as body, exactly as a teaching example reads. Whitespace reads as spacing, never content.
 
-**Post-iam content in the head STANDS.** That zone reads as the **bindings zone** (the three-zone law, above): a carrier
+**Post-meta content in the head STANDS.** That zone reads as the **bindings zone** (the three-zone law, above): a carrier
 states what it holds before its body opens, and folding those into the body would move an authored
 declaration below a mark that says the text has begun.
 
@@ -543,7 +543,7 @@ rather than two spellings of a similar one.
 
 A carrier MAY arrive with no frame at all — an author saving prose from an editor, a render surface
 writing a tiddler back. A conforming processor MUST accept it and MUST MINT the frame on projection:
-SOH with the namespace the iam declares, STX, ETX, EOT. Refusing an unframed file makes the grammar the
+SOH with the namespace the meta declares, STX, ETX, EOT. Refusing an unframed file makes the grammar the
 author's problem; mangling one corrupts canon quietly.
 
 ### The projection settles
@@ -684,7 +684,7 @@ nothing decorates rather than protects, the standing RFC 9580 demoted OpenPGP's 
   reads as refusal to admit — the only defense a bare digest affords against stripping, since whoever
   can rewrite a carrier can rewrite or remove the check beside it.
 
-**What the check cannot answer.** The span opens at STX, so the declaration, the heading, and the iam
+**What the check cannot answer.** The span opens at STX, so the declaration, the heading, and the meta
 block stand OUTSIDE it: a carrier's address, media type, and grammar-selector can move while the check
 holds. The verdict answers one question — did the text survive carriage — and a reader MUST NOT take an
 `ok` as covering bytes the span excludes. Heading integrity belongs to an outer layer, a seal or a
@@ -709,9 +709,9 @@ reader can adjudicate and a relay holding `pull` and not `read` cannot even open
 digests its own serialization owes a canonical form; this one owes it twice, because the check rides
 in the carrier rather than beside it.
 
-### The iam block
+### The meta block
 
-A writer emitting a carrier's iam MUST:
+A writer emitting a carrier's meta MUST:
 
 <<~ranks canon sort ~ keys lexicographic, never authoring order -> omit ~ a key the envelope owns, a key opening with `$`, a value empty or absent -> inherit ~ a child writes a key ONLY where it differs from its parent -> align ~ `=` padded to the longest surviving key, one space each side -> entity ~ a `namespace` value renders as HTML entities -> silence ~ no surviving key means no block, never an empty fence >>
 

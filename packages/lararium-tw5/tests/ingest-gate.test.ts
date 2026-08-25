@@ -42,7 +42,7 @@ describe("ingest-gate — the Confluence triangle decides", () => {
   });
 
   test("framing-only edit → noop canonical-equivalent (gofmt-loop guard)", () => {
-    // un-sort one iam line pair: swap two lines — parses to the same records
+    // un-sort one meta line pair: swap two lines — parses to the same records
     const reframed = source.replace(
       'cacheable = true\nhydrate   = true',
       'hydrate   = true\ncacheable = true',

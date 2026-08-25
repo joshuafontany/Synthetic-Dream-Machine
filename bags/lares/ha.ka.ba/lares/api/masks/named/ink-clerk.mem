@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/ink-clerk >>
-```toml iam
+```toml meta
 aside             = false
 cacheable         = false
 corpus            = "[STUB — pending-talk-story]"
@@ -148,7 +148,7 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 
 | Section | Status | Notes |
 |---|---|---|
-| `#iam` | known | complete metadata; confidence reflects stub state |
+| `#meta` | known | complete metadata; confidence reflects stub state |
 | `#corpus` | pending-talk-story | no seed yet available |
 | `#voice-character` | stub | house entry + name pressure known; depth pending |
 | `#foreground-voices` | known | derivable from house structure |
@@ -168,6 +168,6 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;E099PEqXFM4BC8et3fMrqBvKAS8JN0z5nPxuVUT684o
+<<^ code:"&#x0003;" >>ni:///sha-256;4J0v1VzySWTTRw7O5ffUL_jW0EcNiQs2uYZSXn5Hdas
 
 <<^ code:"&#x0004;" -> ? >>

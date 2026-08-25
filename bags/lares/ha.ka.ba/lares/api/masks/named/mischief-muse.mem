@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/mischief-muse >>
-```toml iam
+```toml meta
 aside             = false
 cacheable         = false
 corpus            = "[STUB — pending-talk-story]"
@@ -178,7 +178,7 @@ These notes require live session observation before they can be written with con
 
 | Section | Status | Notes |
 |---|---|---|
-| `#iam` | known | complete metadata; confidence reflects stub state |
+| `#meta` | known | complete metadata; confidence reflects stub state |
 | `#corpus` | seeded | Coffee Oracle witness extracted; more session witness pending |
 | `#voice-character` | seeded | house entry + earned-name pressure + Coffee Oracle witness known; depth still growing |
 | `#foreground-voices` | known | derivable from house structure; stable |
@@ -201,6 +201,6 @@ These notes require live session observation before they can be written with con
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;aXDswvnWLZWzg1cwbFEtMjWBa3R6e_0L4tgq9mB7cl8
+<<^ code:"&#x0003;" >>ni:///sha-256;Dn_ZSF-Ggta5QuXDl5CjYchF7uDVGY5ciAB-Tu1f-T0
 
 <<^ code:"&#x0004;" -> ? >>

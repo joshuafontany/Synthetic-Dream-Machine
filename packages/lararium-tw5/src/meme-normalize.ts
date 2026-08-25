@@ -9,12 +9,12 @@
  *
  * Classes closed here (the ones a hand-authored or lifted carrier most often trips):
  *   1. **SOH opener.** The opener canonicalizes to `<<^ code:"&#x0001;" namespace:"[namespace-glyphs]" `
- *      — one space after `<<^`, then the iam-declared namespace as LITERAL glyphs
+ *      — one space after `<<^`, then the meta-declared namespace as LITERAL glyphs
  *      (or none), then the SOH char. Two drifts trip it: a missing/stale namespace
  *      (the renderer re-injects → round-trip breaks), and a missing space
  *      (`<<^ code:"&#x0001;" `, the lifted-corpus form — 10 stragglers against 102 canonical
- *      siblings). The iam field is authoritative; the SOH is derived from it.
- *   2. **Register band.** The iam `register` expands its band CODE (P · PS · S ·
+ *      siblings). The meta field is authoritative; the SOH is derived from it.
+ *   2. **Register band.** The meta `register` expands its band CODE (P · PS · S ·
  *      SC · C) to the canonical band word (Provisional … Canon). A value OFF the
  *      register ladder — a stage code like `CS` (GR/OS/US/CS/DS), a freeform
  *      phrase — is LEFT UNTOUCHED and FLAGGED: stage ≠ register (independent
@@ -55,15 +55,15 @@ function decodeEntities(s: string): string {
   return s.replace(/&#x([0-9a-fA-F]+);/g, (_m, hex: string) => String.fromCodePoint(parseInt(hex, 16)));
 }
 
-/** The toml iam fence body (between the ```toml iam fences), or null if absent. */
-function iamFence(src: string): RegExpExecResult | null {
-  return /(```toml iam\n)([\s\S]*?)(\n```)/.exec(src);
+/** The toml meta fence body (between the ```toml meta fences), or null if absent. */
+function metaFence(src: string): RegExpExecResult | null {
+  return /(```toml meta\n)([\s\S]*?)(\n```)/.exec(src);
 }
 type RegExpExecResult = RegExpExecArray;
 
-/** The iam `namespace` value (raw, possibly entity-encoded), or null if absent. */
-function iamNamespace(src: string): string | null {
-  const fence = iamFence(src);
+/** The meta `namespace` value (raw, possibly entity-encoded), or null if absent. */
+function metaNamespace(src: string): string | null {
+  const fence = metaFence(src);
   if (!fence) return null;
   const m = /^[ \t]*namespace[ \t]*=[ \t]*"([^"]*)"/m.exec(fence[2]!);
   return m ? m[1]! : null;
@@ -114,7 +114,7 @@ export function normalizeMemeSource(src: string): NormalizeResult {
   // fragments and authoring drafts that legitimately carry no head.
 
   // ── 1. SOH opener (namespace embed + spacing) ────────────────────────────
-  const nsRaw = iamNamespace(text);
+  const nsRaw = metaNamespace(text);
   const want = nsRaw === null ? "" : decodeEntities(nsRaw).trim();
   const soh = SOH_OPENER_RE.exec(text);
   if (soh) {
@@ -125,20 +125,20 @@ export function normalizeMemeSource(src: string): NormalizeResult {
     // that passes through leaves in the current one.
     const code = soh[2] ?? soh[5]!;
     const have = soh[3] ?? soh[4]?.trim() ?? "";
-    // Canonical opener: the control head, the code param, then the namespace param where the iam
+    // Canonical opener: the control head, the code param, then the namespace param where the meta
     // declares one. Comparing the WHOLE matched head rather than the namespace alone canonicalizes
     // spacing and param order together, so one rewrite settles every drift the head can carry.
     const rebuilt = `${soh[1]} code:"${code}"${want ? ` namespace:"${want}"` : ""}`;
     if (soh[0]! !== rebuilt) {
       text = text.slice(0, soh.index) + rebuilt + text.slice(soh.index + soh[0]!.length);
       notes.push(have !== want
-        ? (want ? `SOH namespace homed to "${want}" (from iam)` : `SOH namespace cleared (iam declares none)`)
+        ? (want ? `SOH namespace homed to "${want}" (from meta)` : `SOH namespace cleared (meta declares none)`)
         : `SOH opener spacing canonicalized`);
     }
   }
 
   // ── 2. Register band (code → word; off-ladder → flag) ────────────────────
-  const fence = iamFence(text);
+  const fence = metaFence(text);
   if (fence) {
     const regRe = /^([ \t]*register[ \t]*=[ \t]*")([^"]*)(")/m;
     const rm = regRe.exec(fence[2]!);

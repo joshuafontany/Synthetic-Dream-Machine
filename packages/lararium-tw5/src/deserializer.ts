@@ -287,7 +287,7 @@ function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): Tiddle
 // splitMemeToTiddlers — parse one meme (SOH→ETX span) into parent + children.
 //
 // `text` = ev.fullText from MemeStreamParser = SOH line → ETX inclusive.
-// On exit: parent.text = body proper only (SOH/iam/STX/ETX stripped).
+// On exit: parent.text = body proper only (SOH/meta/STX/ETX stripped).
 // Child tiddlers: one per non-control ahu slot; text = slot body proper.
 // ---------------------------------------------------------------------------
 
@@ -388,7 +388,7 @@ function splitMemeToTiddlers(
   // its content belongs between the minted &#x0002;/&#x0003; markers on recompose
   // (the header-routed wrap left the body slot empty
   // and stacked blank lines). A degraded SOH-carrier missing its STX keeps the
-  // header reading (its iam still parses; the gradient grades the miss).
+  // header reading (its meta still parses; the gradient grades the miss).
   // ONE MODEL FOR EVERY CARRIER: the identity heading, then the body. NO STX MEANS ALL BODY, heading or
   // no heading — a carrier stating identity and nothing framed is a meme whose body the author left
   // short, not a second kind of document. The body stands OPTIONAL and may hold prose, ahu slots, both,
@@ -399,20 +399,20 @@ function splitMemeToTiddlers(
   // that never round-tripped, in a shape nothing measured, because both witnesses skip a carrier that
   // states no `uri-path` and these were exactly the carriers that stated none.
   const bare = !stxM;
-  // AN AUTHORED IAM IS A HEADING, FRAME OR NO FRAME. The frame is the carrier's business; identity is
-  // the AUTHOR'S, and an operator who opens a file with a labelled `toml iam` fence has stated one.
+  // AN AUTHORED META IS A HEADING, FRAME OR NO FRAME. The frame is the carrier's business; identity is
+  // the AUTHOR'S, and an operator who opens a file with a labelled `toml meta` fence has stated one.
   // Reading a bare doc as ALL BODY buried that fence in the text and minted a near-empty heading beside
-  // it, so the projection wrote TWO iam blocks and dropped every field the author declared — silently,
+  // it, so the projection wrote TWO meta blocks and dropped every field the author declared — silently,
   // and stably, because the malformed result round-trips against itself.
   //
-  // THE FENCE MUST OPEN THE FILE TO COUNT, because every OTHER iam block belongs to the ahu tiddler it
+  // THE FENCE MUST OPEN THE FILE TO COUNT, because every OTHER meta block belongs to the ahu tiddler it
   // sits in. A slot's fence is that slot's own identity heading — its `register`, its `confidence`, its
   // own address — and `extractSlotStructure` lifts it onto the child record where it overrides whatever
   // the parent declared. One law, read by position: the opening fence heads the carrier, each later
   // fence heads its slot, and neither reaches into the other.
-  const leadingIam = bare ? findIamFence(stripped, false) : null;
-  const authoredHead = leadingIam && stripped.slice(0, leadingIam.start).trim() === ""
-    ? leadingIam
+  const leadingMeta = bare ? findMetaFence(stripped, false) : null;
+  const authoredHead = leadingMeta && stripped.slice(0, leadingMeta.start).trim() === ""
+    ? leadingMeta
     : null;
   const headerRegion = stxM
     ? stripped.slice(0, stxM.index)
@@ -427,49 +427,49 @@ function splitMemeToTiddlers(
       : (authoredHead ? stripped.slice(authoredHead.end) : (bare ? stripped : "")),
   );
 
-  // Parse iam fields from header region (before STX).
-  // Guard: only look for iam in the part of headerRegion before the first
-  // top-level ahu block. If the iam fence sits inside a slot body it is a
-  // slot-level iam, not a root-level one — extractSlotStructure picks it up
+  // Parse meta fields from header region (before STX).
+  // Guard: only look for meta in the part of headerRegion before the first
+  // top-level ahu block. If the meta fence sits inside a slot body it is a
+  // slot-level meta, not a root-level one — extractSlotStructure picks it up
   // when splitRecursive descends into that slot.
-  const _rootIamTopBlocks = findTopLevelAhuBlocks(headerRegion);
-  const _rootIamCutoff = _rootIamTopBlocks.length > 0
-    ? _rootIamTopBlocks[0]!.openStart
+  const _rootMetaTopBlocks = findTopLevelAhuBlocks(headerRegion);
+  const _rootMetaCutoff = _rootMetaTopBlocks.length > 0
+    ? _rootMetaTopBlocks[0]!.openStart
     : headerRegion.length;
   // THE FENCE MUST OPEN ITS HEAD, at the carrier level exactly as at the slot level. Content standing
   // between the heading sigil and a labelled fence means the fence heads nothing — it reads as body,
   // the way a teaching example does. Whitespace is spacing, never content.
-  const _iamCandidate = extractRootTomlWithPos(headerRegion.slice(0, _rootIamCutoff));
-  const iamPos = _iamCandidate && headerRegion.slice(0, _iamCandidate.start).trim() === ""
-    ? _iamCandidate
+  const _metaCandidate = extractRootTomlWithPos(headerRegion.slice(0, _rootMetaCutoff));
+  const metaPos = _metaCandidate && headerRegion.slice(0, _metaCandidate.start).trim() === ""
+    ? _metaCandidate
     : null;
-  const rootToml   = iamPos?.content ?? null;
+  const rootToml   = metaPos?.content ?? null;
   const rootFieldsRaw = rootToml ? fieldifyToml(rootToml, warnings, uri) : {};
   const { __arrayKeys: _, ...rootFields } = rootFieldsRaw as TiddlerFields & { __arrayKeys?: string[] };
 
-  // Split header into pre-iam prose and post-iam-pre-STX content.
-  // pre-iam: operator prose between SOH and the iam block (e.g. a framing note).
-  // post-iam: aka refs, header ahu slots — structure that belongs before STX on disk.
-  // When a root iam exists: preIam = prose before iam; postIam = content after iam.
-  // When no root iam but top-level ahu blocks exist: route full headerRegion through
-  // postIamContent so splitRecursive can find the blocks; preIamContent stays empty.
-  // When no root iam and no blocks: preIamContent holds the prose verbatim.
-  const preIamContent  = iamPos
-    ? headerRegion.slice(0, iamPos.start)
-    : (_rootIamTopBlocks.length > 0 ? "" : headerRegion);
-  // Strip one leading \n from post-iam content: extractRootTomlWithPos's regex
+  // Split header into pre-meta prose and post-meta-pre-STX content.
+  // pre-meta: operator prose between SOH and the meta block (e.g. a framing note).
+  // post-meta: aka refs, header ahu slots — structure that belongs before STX on disk.
+  // When a root meta exists: preMeta = prose before meta; postMeta = content after meta.
+  // When no root meta but top-level ahu blocks exist: route full headerRegion through
+  // postMetaContent so splitRecursive can find the blocks; preMetaContent stays empty.
+  // When no root meta and no blocks: preMetaContent holds the prose verbatim.
+  const preMetaContent  = metaPos
+    ? headerRegion.slice(0, metaPos.start)
+    : (_rootMetaTopBlocks.length > 0 ? "" : headerRegion);
+  // Strip one leading \n from post-meta content: extractRootTomlWithPos's regex
   // consumes the closing ``` and its \n, but the source's blank line between the
-  // iam fence and the next header content (aka/ahu refs) lives here. The template
+  // meta fence and the next header content (aka/ahu refs) lives here. The template
   // emits \n\n after the closing ```, so the stored field must not also start with \n.
-  const postIamContent = iamPos
-    ? stripLeadingNewlines(headerRegion.slice(iamPos.end))
-    : (_rootIamTopBlocks.length > 0 ? headerRegion : "");
+  const postMetaContent = metaPos
+    ? stripLeadingNewlines(headerRegion.slice(metaPos.end))
+    : (_rootMetaTopBlocks.length > 0 ? headerRegion : "");
 
   // Recurse separately so the STX boundary is preserved in the parent's fields:
-  //   header-text = post-iam pre-STX content (with ahu blocks → kahea refs)
+  //   header-text = post-meta pre-STX content (with ahu blocks → kahea refs)
   //   text        = post-STX body
   const { children: headerChildren, rewrittenText: headerRewritten } =
-    splitRecursive(uri, "", postIamContent, warnings);
+    splitRecursive(uri, "", postMetaContent, warnings);
   const { children: bodyChildren, rewrittenText: bodyRewritten } =
     splitRecursive(uri, "", bodyRegion, warnings);
 
@@ -485,7 +485,7 @@ function splitMemeToTiddlers(
     text:  normalizedBodyRewritten,
   };
   const parentCarriage = [
-    ...carriageRecord(uri, "preamble",    preIamContent.trim()   ? preIamContent   : ""),
+    ...carriageRecord(uri, "preamble",    preMetaContent.trim()   ? preMetaContent   : ""),
     ...carriageRecord(uri, "header-text", headerRewritten.trim() ? headerRewritten : ""),
   ];
 
@@ -555,7 +555,7 @@ function splitRecursive(
     // a fragment record never owns a disk file; its carrier root does.
 
     allChildren.push({
-      // Default dialect; a child slot's OWN declared iam `type` (e.g. text/markdown) rides in
+      // Default dialect; a child slot's OWN declared meta `type` (e.g. text/markdown) rides in
       // childStructure.fields and OVERRIDES this default via the spread — a typed child keeps its
       // type instead of losing it to the memetic-wikitext hardcode. (The parent carrier stays
       // memetic by construction — this deserializer runs because the carrier IS memetic.)
@@ -580,47 +580,47 @@ function splitRecursive(
 }
 
 // ---------------------------------------------------------------------------
-// findIamFence — locate a ```toml iam``` (or plain ```toml```) fence block.
+// findMetaFence — locate a ```toml meta``` (or plain ```toml```) fence block.
 // Used by both header-region and slot-body TOML extraction.
 // ---------------------------------------------------------------------------
 
-const IAM_FENCE_RE   = /```toml[ \t]+iam[ \t]*\n([\s\S]*?)```\n?/;
+const META_FENCE_RE   = /```toml[ \t]+meta[ \t]*\n([\s\S]*?)```\n?/;
 const PLAIN_FENCE_RE = /```toml[ \t]*\n([\s\S]*?)```\n?/;
 
-function findIamFence(text: string, allowPlain = false): { content: string; start: number; end: number } | null {
-  // The iam fence IS a fence — accept a match starting AT a span opener,
+function findMetaFence(text: string, allowPlain = false): { content: string; start: number; end: number } | null {
+  // The meta fence IS a fence — accept a match starting AT a span opener,
   // reject one buried inside another span (a ````-quoted teaching example).
-  const m = maskedExec(text, IAM_FENCE_RE, undefined, true)
+  const m = maskedExec(text, META_FENCE_RE, undefined, true)
     ?? (allowPlain ? maskedExec(text, PLAIN_FENCE_RE, undefined, true) : null);
   if (!m) return null;
   return { content: m[1] ?? "", start: m.index, end: m.index + m[0].length };
 }
 
-function extractRootTomlWithPos(text: string) { return findIamFence(text); }
+function extractRootTomlWithPos(text: string) { return findMetaFence(text); }
 
 // ---------------------------------------------------------------------------
-// extractSlotStructure — split a slot body into preamble + iam fields + text
+// extractSlotStructure — split a slot body into preamble + meta fields + text
 // + postamble. Same shape as the disk-version full-meme split, applied to
 // every ahu slot so each slot is itself a valid "full published meme MD
 // file" projection.
 //
 // Convention:
-//   - THE FENCE MUST OPEN ITS HEAD. A labelled iam fence heads the slot it opens; content standing
+//   - THE FENCE MUST OPEN ITS HEAD. A labelled meta fence heads the slot it opens; content standing
 //     BEFORE it means the fence heads nothing — it is body, the way a teaching example is. The parent
 //     law (memetic-wikitext-framing #authoring: the fence that OPENS a carrier heads it) reaches every slot the same way.
 //
-//     Post-iam content in the head STANDS — that is the bindings zone, authored, and it re-emits
-//     between the iam and the body. Pre-iam content does not, and `preamble` retires with it: a zone
+//     Post-meta content in the head STANDS — that is the bindings zone, authored, and it re-emits
+//     between the meta and the body. Pre-meta content does not, and `preamble` retires with it: a zone
 //     that names a shape the grammar forbids holds bytes nothing should have written.
-//   - fields    = parsed from the iam toml block (operator-authored keys).
+//   - fields    = parsed from the meta toml block (operator-authored keys).
 //   - text      = body proper — from the first inner kahea ref to the last
 //     inner kahea ref end (inclusive of refs for sub-slot reconstruction).
 //   - postamble = text AFTER the last inner kahea ref (trailing prose).
 //
 // When no inner sigils exist:
-//   - iam present: preamble holds pre-iam prose + iam marker + post-iam
+//   - meta present: preamble holds pre-meta prose + meta marker + post-meta
 //     prose; text = "".
-//   - no iam:      text = whole body, preamble = "".
+//   - no meta:      text = whole body, preamble = "".
 // ---------------------------------------------------------------------------
 
 interface SlotStructure {
@@ -635,30 +635,30 @@ function extractSlotStructure(
   warnings: string[],
   context:  string,
 ): SlotStructure {
-  // Only a LABELED ```toml iam fence carries slot identity. A plain ```toml
+  // Only a LABELED ```toml meta fence carries slot identity. A plain ```toml
   // fence is operator CONTENT (teaching matter, config examples) — swallowing
   // it into fields mutated content on round-trip (key reorder, re-alignment,
-  // the fence relabeled `toml iam`). Carrier-whole law: content bytes survive
+  // the fence relabeled `toml meta`). Carrier-whole law: content bytes survive
   // whole.
   // A fence preceded by content heads nothing. Whitespace does not count as content — a blank line
   // between the ahu sigil and the fence is spacing, not prose.
-  const iamCandidate = findIamFence(bodyText, false);
-  const iamM = iamCandidate && bodyText.slice(0, iamCandidate.start).trim() === ""
-    ? iamCandidate
+  const metaCandidate = findMetaFence(bodyText, false);
+  const metaM = metaCandidate && bodyText.slice(0, metaCandidate.start).trim() === ""
+    ? metaCandidate
     : null;
 
   let preamble = "";
   let fields: TiddlerFields = {};
   let remainder = bodyText;
 
-  if (iamM) {
+  if (metaM) {
     // A fence that OPENS its head has only spacing above it, and spacing is not content — capturing it
-    // gave `preamble` a whitespace value that re-emitted as an iam key and shrank on the next read.
+    // gave `preamble` a whitespace value that re-emitted as an meta key and shrank on the next read.
     preamble  = "";
-    const raw = fieldifyToml(iamM.content, warnings, context);
+    const raw = fieldifyToml(metaM.content, warnings, context);
     const { __arrayKeys: _, ...parsed } = raw as TiddlerFields & { __arrayKeys?: string[] };
     fields    = parsed;
-    remainder = bodyText.slice(iamM.end);
+    remainder = bodyText.slice(metaM.end);
   }
 
   // Find LAST kahea ref — trailing prose becomes postamble. Quoted refs
@@ -679,8 +679,8 @@ function extractSlotStructure(
     postamble = remainder.slice(lastEnd);
   }
 
-  // No iam, no refs: the whole body is text.
-  if (!iamM && lastEnd < 0) {
+  // No meta, no refs: the whole body is text.
+  if (!metaM && lastEnd < 0) {
     text     = bodyText;
     preamble = "";
   }
@@ -777,13 +777,13 @@ export function splitBodyTiddler(
 // function inverts the incoming shore transform above: it reads the
 // parent's normalized records, splices each `<<~ kahea ahu #slot >>` marker
 // back into its child's full definition form (recursively), and reassembles
-// the carrier envelope (prologue · SOH · preamble · iam · header · STX ·
+// the carrier envelope (prologue · SOH · preamble · meta · header · STX ·
 // body · ETX · EOT · postamble).
 //
 // Canonical-form law (handoff #pattern-integrities §2) binds the output:
 //   1. idempotent render — canonical input round-trips byte-identical
 //      (sigil spacing `<<^ code:"&#x0002;" >>`, one-blank-line block margins);
-//   2. framing normalizes once — the iam block re-emits sorted + aligned
+//   2. framing normalizes once — the meta block re-emits sorted + aligned
 //      from fields (authored key order and padding do not survive the
 //      record stratum);
 //   3. parse∘render ≡ records — proven by the round-trip harness, never
@@ -795,7 +795,7 @@ export function splitBodyTiddler(
 
 export type FieldsReader = (title: string) => TiddlerFields | undefined;
 
-// The single deny-set: STRUCTURAL / ENVELOPE fields never re-emit into the iam
+// The single deny-set: STRUCTURAL / ENVELOPE fields never re-emit into the meta
 // fence — they rebuild from the envelope + record stratum on recompose, so
 // emitting them into the TOML DOUBLES the body (title/text) or the framing.
 //
@@ -808,14 +808,14 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 // so this set holds those two and their record-stratum siblings and nothing else. The grammar's OWN
 // carriage — the prologue, the preamble, the header text, the slot a fragment fills, the parent it
 // hangs from, the bytes trailing the frame — rides the `$…` namespace TW5 keeps for a host, which
-// `emitIamToml` drops wholesale. An author who writes `postamble` or `slot` now gets an ordinary
+// `emitMetaToml` drops wholesale. An author who writes `postamble` or `slot` now gets an ordinary
 // custom field that round-trips like any other, because the grammar stopped standing on those words.
 //
 // That move also closed a hole the name-list could not: `preamble` and `carrier-sila` were read as
-// carriage and denied nowhere, so they emitted into the iam AND rebuilt as structure — an operator's
+// carriage and denied nowhere, so they emitted into the meta AND rebuilt as structure — an operator's
 // value came back undefined and the projection stopped settling. A namespace covers what a list
 // forgets.
-const IAM_DENY: ReadonlySet<string> = new Set([
+const META_DENY: ReadonlySet<string> = new Set([
   // The host's two, and the record stratum they arrive with. TiddlyWiki restricts no field name;
   // MultiWikiServer overwrites `title` and `revision` on every read. Nothing else belongs here.
   "title", "text", "modified", "revision",
@@ -839,8 +839,8 @@ const IAM_DENY: ReadonlySet<string> = new Set([
 // stamps only): `type` self-describes the child's dialect, `namespace`,
 // `created`, `source-file`, `tags` all round-trip = identity, exactly as on
 // the parent — a child that authored them keeps them.
-const CHILD_IAM_DENY: ReadonlySet<string> = new Set([
-  ...IAM_DENY, "uri-path", "file-path",
+const CHILD_META_DENY: ReadonlySet<string> = new Set([
+  ...META_DENY, "uri-path", "file-path",
 ]);
 
 function fmtTomlValue(v: string | string[]): string {
@@ -855,7 +855,7 @@ function fmtTomlValue(v: string | string[]): string {
 }
 
 /**
- * The namespace's canonical iam form: every non-ASCII codepoint as an
+ * The namespace's canonical meta form: every non-ASCII codepoint as an
  * HTML-entity hexcode — the same idiom the carrier's control sigils speak
  * (`&#x0950;` beside `&#x0004;`). The glyphs render on the SOH line; the
  * TOML lists their codes. The SOH extraction holds field authority at
@@ -873,9 +873,9 @@ function fmtNamespaceEntities(v: string): string {
   return out + '"';
 }
 
-/** Canonical iam TOML: sorted keys, equals-signs aligned to the longest key.
+/** Canonical meta TOML: sorted keys, equals-signs aligned to the longest key.
  *  `lar_*` sensorium/worldline metadata re-emits WHOLE (the telemetry fence —
- *  see IAM_DENY); the deny-set names the only
+ *  see META_DENY); the deny-set names the only
  *  denials by exact key (structural/envelope + the two parse-grade markers).
  *  TW5-internal `$…` fields stay off the operator's TOML. */
 /** Field-value equality across the string | string[] carrier shapes (undefined never matches). */
@@ -892,7 +892,7 @@ function sameFieldValue(a: TiddlerFields[string] | undefined, b: TiddlerFields[s
 // `parentFields`, when present, drives child INHERITANCE: a child writes a field ONLY when it
 // DIFFERS from the parent's (or the parent lacks it). A field that matches the parent floats down
 // silently — the author sees it once, at the level that set it, never re-stamped on every fragment.
-function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>, parentFields?: TiddlerFields): string {
+function emitMetaToml(fields: TiddlerFields, deny: ReadonlySet<string>, parentFields?: TiddlerFields): string {
   const keys = Object.keys(fields).sort().filter((k) => {
     if (deny.has(k) || k.charAt(0) === "$") return false;
     const v = fields[k];
@@ -978,23 +978,23 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
     const child = reader(rootUri + slotPath);
     if (!child) return marker;   // missing child: keep the marker — honest residue, never invented bytes
     // Diff the child against ITS parent; recurse with the child as the next level's parent.
-    const iam   = emitIamToml(child, CHILD_IAM_DENY, parentFields);
+    const meta   = emitMetaToml(child, CHILD_META_DENY, parentFields);
     const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""), child);
     const pre   = carriageText(reader, rootUri + slotPath, "preamble");
     const post  = carriageText(reader, rootUri + slotPath, "postamble");
-    // The iam block sits FLUSH against the ahu sigil line (mirroring the parent carrier's SOH+iam) —
+    // The meta block sits FLUSH against the ahu sigil line (mirroring the parent carrier's SOH+meta) —
     // a single newline, no blank between. A blank line then separates any content below. A preamble
-    // (rare) keeps the older sigil-then-blank spacing since content precedes the iam there.
-    const iamBlock = iam ? "```toml iam\n" + iam + "```" : "";
+    // (rare) keeps the older sigil-then-blank spacing since content precedes the meta there.
+    const metaBlock = meta ? "```toml meta\n" + meta + "```" : "";
     const rest     = stripEdgeNewlines(inner + post);
-    // A whitespace-only preamble (`"\n\n"`) carries no content — treat it as none so the iam
+    // A whitespace-only preamble (`"\n\n"`) carries no content — treat it as none so the meta
     // still hugs the sigil line. Only REAL preamble content routes to the sigil-then-blank form.
     const hasPre   = pre.trim() !== "";
     let opened: string;
     if (hasPre) {
-      opened = `\n\n${stripEdgeNewlines(pre + (iamBlock ? "\n\n" + iamBlock : "") + (rest ? "\n\n" + rest : ""))}`;
-    } else if (iamBlock) {
-      opened = `\n${iamBlock}${rest ? "\n\n" + rest : ""}`;
+      opened = `\n\n${stripEdgeNewlines(pre + (metaBlock ? "\n\n" + metaBlock : "") + (rest ? "\n\n" + rest : ""))}`;
+    } else if (metaBlock) {
+      opened = `\n${metaBlock}${rest ? "\n\n" + rest : ""}`;
     } else {
       // An empty child carries no body — leave `opened` bare so the fixed closer supplies
       // the single blank line; a filled one opens on the sigil-then-blank spacing.
@@ -1024,7 +1024,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   }
 
   const str = (k: string): string => (typeof f[k] === "string" ? (f[k] as string) : "");
-  const iam = emitIamToml(f, IAM_DENY);
+  const meta = emitMetaToml(f, META_DENY);
   // The emitter reads the shared table rather than spelling the entities inline: a mark that leaves
   // the grammar leaves here too, instead of surviving as a literal no reader still scans for.
   const MARK = (name: string): string => frameMark(FRAME_BY_NAME[name]!)!.code;
@@ -1046,7 +1046,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   out += `${DECLARATION}\n\n`;
   out += `<<^ code:"${sohCode}"${ns ? ` namespace:"${ns}"` : ""} ? -> ${memeUri} >>\n`;
   out += carriageText(reader, memeUri, "preamble");
-  if (iam) out += "```toml iam\n" + iam + "```\n\n";
+  if (meta) out += "```toml meta\n" + meta + "```\n\n";
   out += expandRefs(reader, memeUri, "", carriageText(reader, memeUri, "header-text"), f);
   // THE SPAN OPENS HERE. The check covers STX-open through ETX-close inclusive, so the emitter marks
   // where the body begins and computes over the bytes it has actually assembled — never over a field.

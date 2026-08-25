@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/meme-edit-children >>
-```toml iam
+```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meme-edit-children.mem"
 list-after = "$:/core/ui/EditTemplate/body"
@@ -35,7 +35,7 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-edit-children"
 <$set name="slotName" value={{{[<childUri>get[ahu-slot]]}}}>
 
 <!-- Skip #body (edited by core EditTemplate/body) and control/structural slots -->
-<$list filter="[<slotName>!matchregexp[^#(body|iam|exit|edges|stream-open|stream-close|stream-exit|body-open|body-close|meme-body-open|meme-body-close)$]]" variable="_" emptyMessage="">
+<$list filter="[<slotName>!matchregexp[^#(body|meta|exit|edges|stream-open|stream-close|stream-exit|body-open|body-close|meme-body-open|meme-body-close)$]]" variable="_" emptyMessage="">
 
 <div class="tc-lararium-ahu-edit-section">
   <div class="tc-lararium-ahu-slot-header">
@@ -59,6 +59,6 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-edit-children"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WYvQkGq2b8gKR8Co2FBX-4Zx5Wu7XK9LtHGZsDJgS0s
+<<^ code:"&#x0003;" >>ni:///sha-256;6nDz8jVJzss8a1IVv0z2Zx115IsJ6XKkKcTCQfK8E2I
 
 <<^ code:"&#x0004;" -> ? >>

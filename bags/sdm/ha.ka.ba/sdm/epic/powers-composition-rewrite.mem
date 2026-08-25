@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/epic/powers-composition-rewrite >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/epic/powers-composition-rewrite.mem"
 mana      = 19

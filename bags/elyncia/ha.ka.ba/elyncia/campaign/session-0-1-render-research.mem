@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/session-0-1-render-research >>
-```toml iam
+```toml meta
 cacheable  = false
 confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/campaign/session-0-1-render-research.mem"

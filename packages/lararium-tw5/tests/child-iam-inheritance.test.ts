@@ -1,5 +1,5 @@
 /**
- * Child iam inheritance (regression guard) — a child re-emits a field ONLY when it DIFFERS
+ * Child meta inheritance (regression guard) — a child re-emits a field ONLY when it DIFFERS
  * from its parent. An inherited-and-matching field floats down silently (no clutter); a
  * genuinely-distinct one survives (no loss); the two DERIVED coordinates (uri-path,
  * file-path) never re-emit on a child.
@@ -20,7 +20,7 @@ function reader(map: Record<string, TiddlerFields>) {
   return (t: string): TiddlerFields | undefined => map[t];
 }
 
-describe("child iam inheritance (parent-diff)", () => {
+describe("child meta inheritance (parent-diff)", () => {
   const parent: TiddlerFields = {
     title: ROOT,
     type: CARRIER_TYPE,
@@ -54,16 +54,16 @@ describe("child iam inheritance (parent-diff)", () => {
     expect(block).toMatch(/^role = /m);
   });
 
-  test("a child iam block sits FLUSH against the ahu sigil line (no blank between)", () => {
+  test("a child meta block sits FLUSH against the ahu sigil line (no blank between)", () => {
     const kid: TiddlerFields = { title: `${ROOT}#kid`, type: "text/plain", text: "content below" };
     const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
     // sigil line, then IMMEDIATELY the fence — one newline, no blank line between.
-    expect(out).toMatch(/<<~ ahu #kid >>\n```toml iam\n/);
+    expect(out).toMatch(/<<~ ahu #kid >>\n```toml meta\n/);
     // a blank line then separates the content below the fence.
     expect(out).toMatch(/```\n\ncontent below/);
   });
 
-  test("an empty child (no iam, no body) holds a SINGLE blank line, never balloons", () => {
+  test("an empty child (no meta, no body) holds a SINGLE blank line, never balloons", () => {
     const kid: TiddlerFields = { title: `${ROOT}#kid`, type: CARRIER_TYPE, text: "" };
     const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
     // sigil · one blank · closer — no three-blank bloat.

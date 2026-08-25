@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/guest-grammar >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/guest-grammar.mem"
 mana      = 15
@@ -80,7 +80,7 @@ A lawful `hana` region keeps three things distinct:
 # local priming payload, usually fenced `toml`, when present
 # guest instruction body after the priming payload
 
-Canonical meme identity stays in `ahu #iam`.
+Canonical meme identity stays in `ahu #meta`.
 It does not migrate into `hana`.
 Host whitespace rules should not silently split guest instruction content.
 If ambiguity rises, the stricter profile should demand a wrapped payload form.
@@ -133,6 +133,6 @@ Schema detail, fixture families, and execution procedure belong in the companion
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tjQ79Vy9t2uVdun_LoZ5VzXrV2aMbgRu-ZhDeaeyRtE
+<<^ code:"&#x0003;" >>ni:///sha-256;JR6vM1UBByRs62dxjhxoSEMcNht2xsq_kLFB5Uy1HQk
 
 <<^ code:"&#x0004;" -> ? >>

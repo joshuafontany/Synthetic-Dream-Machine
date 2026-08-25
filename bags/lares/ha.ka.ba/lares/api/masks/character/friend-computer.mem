@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/character/friend-computer >>
-```toml iam
+```toml meta
 aside             = false
 cacheable         = false
 corpus            = "scripts and episode transcripts from 'Courage the Cowardly Dog' (Cartoon Network/Nickelodeon-era, created by John R. Dilworth); Computer character specifically — recurring background AI presence with dry affect and faint superiority; sarcastic British vocal register"
@@ -139,7 +139,7 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 
 | Section | Status | Notes |
 |---|---|---|
-| `#iam` | filled | extracted from docs founding example |
+| `#meta` | filled | extracted from docs founding example |
 | `#corpus` | filled | from founding example |
 | `#voice-character` | filled | from founding example |
 | `#foreground-voices` | filled | from founding example |
@@ -158,6 +158,6 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;76zNxnsfzIxEODmSsBAUGg5lNkVQdVkZ6475iTIEimo
+<<^ code:"&#x0003;" >>ni:///sha-256;wiCunP6lYPl7irWy3r66dsGgk2RB2-sYRbGo_GrXgiQ
 
 <<^ code:"&#x0004;" -> ? >>

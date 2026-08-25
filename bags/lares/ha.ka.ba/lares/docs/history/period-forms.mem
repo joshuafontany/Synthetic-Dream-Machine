@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/period-forms >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/history/period-forms.mem"
 l-space   = "archive"
@@ -37,7 +37,7 @@ carries current forms; the genesis-arc index stands under the same constraint an
 
 One field carries no testimony, because it names a band rather than an instrument reading:
 
-* `iam` `register` — CODE to band-word: `CS`/`SC` → Synthesis-Canon · `PS` → Provisional-Synthesis ·
+* `meta` `register` — CODE to band-word: `CS`/`SC` → Synthesis-Canon · `PS` → Provisional-Synthesis ·
   `S` → Synthesis · `P` → Provisional · `C` → Canon
 
 <<~/ahu >>
@@ -71,6 +71,6 @@ glyph-definition drafts and the `lares-*.instructions` files.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8LW4jDjFe00N8-1V49F1VYjeaCPtyinA4P2Zd7pI45M
+<<^ code:"&#x0003;" >>ni:///sha-256;yF7T9m3qKlhOerOMzsLLDI5i2vcuRLjbDGnl2wGrjY8
 
 <<^ code:"&#x0004;" -> ? >>

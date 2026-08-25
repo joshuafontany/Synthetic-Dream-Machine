@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/library/oracles/doa/index >>
-```toml iam
+```toml meta
 cacheable  = true
 confidence = 15
 file-path  = "bags/crossroads/ha.ka.ba/lares/library/oracles/doa/index.mem"

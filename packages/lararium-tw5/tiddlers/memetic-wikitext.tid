@@ -5,7 +5,7 @@ tags:
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
 <<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel >>
-```toml iam
+```toml meta
 uri-path  = "ha.ka.ba/lares/api/pono/memetic-wikitext/kernel"
 file-path = "packages/lararium-tw5/tiddlers/memetic-wikitext.tid"
 type      = "text/memetic-wikitext+tiddlywiki"
@@ -133,7 +133,7 @@ Minimum atoms:
 - route arrow `->`
 - anchor token `#NAME`
 - unresolved token `?`
-- fenced `toml` payload inside `ahu #iam`
+- fenced `toml` payload inside `ahu #meta`
 - control sigils `&#x0001;` through `&#x0006;`
 
 Minimum constructions:
@@ -170,7 +170,7 @@ They do NOT become child tiddlers.
 
 ```toml
 [[control-slot]]
-name  = "#iam"
+name  = "#meta"
 role  = "identity block; metadata TOML; dissolves into parent fields"
 
 [[control-slot]]

@@ -7,7 +7,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>
-```toml iam
+```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant stays the semantic root; this skill does not widen or outrank it", "S2: primitive roles stay distinct — ahu, loulou, aka, kahea, kapu, ui, hana, and ? do not silently trade jobs", "S3: uncertainty stays explicit and bounded; kapu qualifies an act instead of replacing it", "S4: boot grammar stays minimal but sufficient for identity, body thresholds, relation, invocation, query, and honest residue", "S5: parse legality, normalization detail, render lowering, long examples, and archive commentary move outward when they stop earning invariant residency"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/memetic-wikitext"]
@@ -116,7 +116,7 @@ Read the target surface before changing it.
 
 Look for:
 
-* missing or weak opener and `#iam` identity
+* missing or weak opener and `#meta` identity
 * primitive list drift
 * `loulou` versus `aka` versus `kahea` confusion
 * named `pranala` sugar described as separate law instead of bounded surface sugar
@@ -222,6 +222,6 @@ If parser or render-pipeline law still lacks its own stable carrier, leave the b
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Mz_ew29nhvNnJHiAj31K6tSAT0fRBE_wl6NRHpTP4hY
+<<^ code:"&#x0003;" >>ni:///sha-256;uM4GqVhh2nmP6v93H4m6rbfVtz0oKvJFHCS606wk0h8
 
 <<^ code:"&#x0004;" -> ? >>

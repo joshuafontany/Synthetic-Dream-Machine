@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/tw5-widget-module >>
-```toml iam
+```toml meta
 file-path   = "bags/lararium/ha.ka.ba/lararium/docs/tw5-widget-module.mem"
 mana        = 17
 manao       = 17

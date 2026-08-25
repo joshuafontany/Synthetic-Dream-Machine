@@ -4,7 +4,7 @@
  * 1. Reads dist-bundle/lararium-tw5-modules.cjs.js
  * 2. Computes SHA-256 of the bundle text
  * 3. Replaces the body between STX/ETX in tw5-modules.md
- * 4. Patches the body-sha256 field in the root ```toml iam``` prelude
+ * 4. Patches the body-sha256 field in the root ```toml meta``` prelude
  *
  * Run via: tsx scripts/write-module-meme.ts
  */
@@ -50,12 +50,12 @@ if (etxStart <= stxEnd) {
 
 meme = meme.slice(0, stxEnd) + "\n\n" + bundle + "\n\n" + meme.slice(etxStart);
 
-// --- 2. Patch body-sha256 in root ```toml iam``` prelude ---------------------
+// --- 2. Patch body-sha256 in root ```toml meta``` prelude ---------------------
 const TOML_BLOCK = /(```toml[\s\S]*?```)/;
 const tomlMatch = TOML_BLOCK.exec(meme);
 
 if (!tomlMatch) {
-  console.error("write-module-meme: root toml iam prelude not found");
+  console.error("write-module-meme: root toml meta prelude not found");
   process.exit(1);
 }
 

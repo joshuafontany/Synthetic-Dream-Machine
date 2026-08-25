@@ -8,7 +8,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///lares_research/skill-pono-template >>
-```toml iam
+```toml meta
 confidence         = 10
 implements         = ["lar:///ha.ka.ba/api/pono/meme", "lar:///ha.ka.ba/api/pono/loci"]
 mana               = 11
@@ -29,7 +29,7 @@ A verification skill in this system lives at two simultaneous identity layers th
 
 The ''outer layer'' follows the [[agentskills.io open standard|https://agentskills.io/specification]] — YAML frontmatter at the very top of the file, consumed by agent runtimes at startup for progressive disclosure. Only the `name` and `description` fields load at startup (~100 tokens). The full body loads only on activation.
 
-The ''inner layer'' follows the memetic-wikitext standard — TOML `#iam` block, OODA-HA * ha.ka.ba phase structure, `content-type` above `version`, structure-side ratings in the order `manaoio`, `confidence`, detail-side ratings in the order `mana`, `manao`, plus adjacent `register` surface texture immediately below `meme-type`, supported query throats, and result locus. This layer feeds the memetic-wikitext parser and law system.
+The ''inner layer'' follows the memetic-wikitext standard — TOML `#meta` block, OODA-HA * ha.ka.ba phase structure, `content-type` above `version`, structure-side ratings in the order `manaoio`, `confidence`, detail-side ratings in the order `mana`, `manao`, plus adjacent `register` surface texture immediately below `meme-type`, supported query throats, and result locus. This layer feeds the memetic-wikitext parser and law system.
 
 `SKILL.md * OODA-HA * ha.ka.ba` names the composition: the SKILL.md container governs the outer runtime identity; the OODA-HA * ha.ka.ba governs the inner epistemic structure and execution discipline.
 
@@ -76,9 +76,9 @@ allowed-tools: Read, Grep, Glob, Bash
 
 ''`allowed-tools`:'' Verification skills in this system typically need `Read` (load target meme), `Grep` (search for invariant elements), and `Glob` (find related files). Add `Bash` if the skill runs a pre-MCP subprocess check. Add `Edit` or `Write` only for repair skills, not pure verification skills.
 
-!!! TOML `#iam` Block (memetic-wikitext inner surface)
+!!! TOML `#meta` Block (memetic-wikitext inner surface)
 
-The `#iam` block carries all memetic-wikitext identity signals. In addition to the standard typed-meme fields, a skill meme MUST carry:
+The `#meta` block carries all memetic-wikitext identity signals. In addition to the standard typed-meme fields, a skill meme MUST carry:
 
 ```toml
 covers = ["lar:///ha.ka.ba/api/[law-name]"]
@@ -89,13 +89,13 @@ invariants = ["[invariant-1]", "[invariant-2]"]
 
 Pass/fail surface belongs in the skill's prose result contract.
 
-Comment-line `ahu` markers MAY group the `#iam` TOML into agent-operator friendly sections. The canonical grouping follows `# <<~ ahu #iam-ha "structure" >>`, `# <<~ ahu #iam-ka "detail" >>`, and `# <<~ ahu #iam-ba "flow" >>`, each closed by `# <<~/ahu >>`.
+Comment-line `ahu` markers MAY group the `#meta` TOML into agent-operator friendly sections. The canonical grouping follows `# <<~ ahu #meta-ha "structure" >>`, `# <<~ ahu #meta-ka "detail" >>`, and `# <<~ ahu #meta-ba "flow" >>`, each closed by `# <<~/ahu >>`.
 
 <<~ ahu #dual-surface-ha >>
 
 !!!! Dual Surface / ha
 
-Dual-surface-ha holds the identity domain: the YAML frontmatter carries the agentskills.io runtime identity. The TOML `#iam` carries the memetic-wikitext constitutional identity. Neither replaces the other. A skill that carries only YAML lacks law standing. A skill that carries only TOML `#iam` cannot load progressively through agent runtimes. Both surfaces must appear and agree on name, role, and coverage.
+Dual-surface-ha holds the identity domain: the YAML frontmatter carries the agentskills.io runtime identity. The TOML `#meta` carries the memetic-wikitext constitutional identity. Neither replaces the other. A skill that carries only YAML lacks law standing. A skill that carries only TOML `#meta` cannot load progressively through agent runtimes. Both surfaces must appear and agree on name, role, and coverage.
 
 <<~/ahu >>
 
@@ -121,7 +121,7 @@ Dual-surface-ba governs authoring posture: write the YAML `description` first, a
 
 !! Invariant Declaration
 
-Every skill declares its invariants in `#iam` as a TOML string array. Invariants form the atomic checkable claims the skill verifies. A well-written invariant reads as:
+Every skill declares its invariants in `#meta` as a TOML string array. Invariants form the atomic checkable claims the skill verifies. A well-written invariant reads as:
 
 * ''Falsifiable'' — there exists a meme surface that would fail it
 * ''Singular'' — it checks one condition, not a compound of two
@@ -132,7 +132,7 @@ Every skill declares its invariants in `#iam` as a TOML string array. Invariants
 ```toml
 invariants = [
   "R1: HTML DOCTYPE preamble comment present on line 1",
-  "R3: #iam block places manaoio and confidence immediately below version",
+  "R3: #meta block places manaoio and confidence immediately below version",
   "R3: after the ahu close/reopen marker, canonical detail order reads mana, manao",
   "R3: register field present immediately after meme-type",
   "R6: at least one <<~STX; ui ...? -> ...#... >> query throat present",
@@ -222,10 +222,10 @@ def check-r1(lines: list[str]) -> InvariantResult:
 def check-r3-rating-fields(content: str) -> InvariantResult:
     """R3: structure ahu carries manaoio/confidence and detail ahu carries mana/manao in canonical order."""
     required = ["manaoio", "confidence", "mana", "manao"]
-    # Extract #iam TOML block
-    m = re.search(r'<<~ ahu #iam >>.*?```toml(.*?)```', content, re.DOTALL)
+    # Extract #meta TOML block
+    m = re.search(r'<<~ ahu #meta >>.*?```toml(.*?)```', content, re.DOTALL)
     if not m:
-        return InvariantResult("R3-ratings", "skip", observed="no #iam TOML block found")
+        return InvariantResult("R3-ratings", "skip", observed="no #meta TOML block found")
     toml-text = m.group(1)
     try:
         data = tomllib.loads(toml-text)
@@ -236,7 +236,7 @@ def check-r3-rating-fields(content: str) -> InvariantResult:
         return InvariantResult(
             "R3-ratings", "fail",
             observed=f"missing fields: {missing}",
-            repair=f"Add missing fields to the canonical #iam rating layout"
+            repair=f"Add missing fields to the canonical #meta rating layout"
         )
     # Check ordering
     keys = list(data.keys())
@@ -258,7 +258,7 @@ def check-r3-register(content: str) -> InvariantResult:
     return InvariantResult(
         "R3-register", "fail",
         observed="register field absent or out of position",
-        repair="Add register = \"[label]\" immediately after meme-type in #iam TOML"
+        repair="Add register = \"[label]\" immediately after meme-type in #meta TOML"
     )
 
 def check-r6(content: str) -> InvariantResult:
@@ -269,7 +269,7 @@ def check-r6(content: str) -> InvariantResult:
     return InvariantResult(
         "R6", "fail",
         observed="no query throats found",
-        repair="Add at least one <<~STX; ui meme? -> lar:///ha.ka.ba/api/NAME#iam >> query throat"
+        repair="Add at least one <<~STX; ui meme? -> lar:///ha.ka.ba/api/NAME#meta >> query throat"
     )
 
 CHECKS = [check-r1, check-r3-rating-fields, check-r3-register, check-r6]
@@ -510,6 +510,6 @@ Skill template closes the verification authoring stream here.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZxqteU4_JBx_TRg30E53-LxeYxUBb9dgtO1XOxxZHiw
+<<^ code:"&#x0003;" >>ni:///sha-256;QWSJJSI6f3662aSkx2L34J9_doRDrfVR08iUTi6Lt9Y
 
 <<^ code:"&#x0004;" -> ? >>

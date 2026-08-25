@@ -283,7 +283,7 @@ Every sigil reads on **both layers at once** — not two sigil sets, but two rea
 ┌─ COMPILE-TIME READING (graph) ────────────────────────────┐
 │  ahu     → worksite node / fragment anchor                 │
 │  pranala/loulou/aka/kahea/pono/papalohe → PranalaEdge      │
-│  iam     → carrier metadata                                │
+│  meta     → carrier metadata                                │
 │  ? ->    → document DAG socket                             │
 │  output: MemeGraph, boot artifact                          │
 └──────────────────────────┬────────────────────────────────┘
@@ -525,8 +525,8 @@ carrier states first ([FRAMING] #declaration-register):
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/example >>
-```toml iam
-… bare toml-iam slot: identity payload (uri-path, type, role, register) …
+```toml meta
+… bare toml-meta slot: identity payload (uri-path, type, role, register) …
 ```
 
 <<^ code:"&#x0002;" >>
@@ -598,7 +598,7 @@ A canvas reaction wire (flow surface):
 - **Widget-tree pass.** `resolveWidgetTree(ast, registry)` — the parse→widget→DOM middle layer — remains a pending implementation stage.
 - ''Transclusion family name. English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
 - **The `+tiddlywiki` suffix — adopted, corpus-wide.** Every carrier writes
-  `text/memetic-wikitext+tiddlywiki` in its iam, and its declaration writes the matching root name.
+  `text/memetic-wikitext+tiddlywiki` in its meta, and its declaration writes the matching root name.
   What stays open: the suffix sits in no IANA registry, and registering it needs a
   normative reference for TW5 wikitext — the base-syntax document stands drafted
   (`lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext`) and awaits its walk to the TW5 circle.

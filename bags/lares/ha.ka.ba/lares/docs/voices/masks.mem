@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/masks >>
-```toml iam
+```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/voices/masks.mem"
 l-space   = "stable"
@@ -96,7 +96,7 @@ packages/lares-core/memes/api/lares/masks/
   friend-computer.md       → lar:///ha.ka.ba/lares/api/masks/friend-computer
 ```
 
-A mask meme file carries the canonical definition in its `#iam` block:
+A mask meme file carries the canonical definition in its `#meta` block:
 
 ```toml
 uri-path = "ha.ka.ba/lares/api/masks/ghost-of-mark-twain"
@@ -392,6 +392,6 @@ The mask layer spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST impleme
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BWsShlK7jTzFkdUxF81Cv12LkwnJ3PkjDQwx4ruQMns
+<<^ code:"&#x0003;" >>ni:///sha-256;ZVFS-3xxynwBqA-f9A80JzKh9mWYqQh_PGylBZqBCl0
 
 <<^ code:"&#x0004;" -> ? >>

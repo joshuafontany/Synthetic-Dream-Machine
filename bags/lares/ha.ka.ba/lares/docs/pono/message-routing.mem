@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/message-routing >>
-```toml iam
+```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/message-routing.mem"
 l-space   = "stable"
@@ -80,7 +80,7 @@ This follows the Svelte `setContext` model: explicit, bounded, non-leaking. The 
 
 !! Filter Context Binding
 
-Filters inside `wai` / `huli` / `ui` evaluate against the ''explicit current meme context'' — set by the nearest enclosing `meme` block, or the carrier's own `#iam` URI when no `meme` runs. No ambient dynamic lookup.
+Filters inside `wai` / `huli` / `ui` evaluate against the ''explicit current meme context'' — set by the nearest enclosing `meme` block, or the carrier's own `#meta` URI when no `meme` runs. No ambient dynamic lookup.
 
 <<~/ahu >>
 
@@ -93,6 +93,6 @@ Filters inside `wai` / `huli` / `ui` evaluate against the ''explicit current mem
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OZ5orN4pdpVRONWSesce6dLqkcmPphYFVeffWjFXtIk
+<<^ code:"&#x0003;" >>ni:///sha-256;Seow0k5W-VCTqCyE7QEeHFRoRsP-yx6rGR2IkKC-32I
 
 <<^ code:"&#x0004;" -> ? >>

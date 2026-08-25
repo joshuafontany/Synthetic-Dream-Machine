@@ -19,7 +19,7 @@ from kumulipo_sections import (
 _ENVELOPE_HEAD = """<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
 <<^ &#x0001; ? -> lar:///ha.ka.ba/lares/library/hawaii/kumulipo/test >>
-```toml iam
+```toml meta
 register = "Canon"
 type     = "text/x-memetic-wikitext"
 ```
@@ -132,19 +132,19 @@ def test_extract_source_text_falls_back_whole_on_bare_file():
 # ── the sectioners over the synthetic minis ──────────────────────────────────────────────
 
 
-def test_extract_sheds_leading_slot_iam_fence():
-    """The interior's dialect declaration (slot-level `toml iam`) reads as envelope:
+def test_extract_sheds_leading_slot_meta_fence():
+    """The interior's dialect declaration (slot-level `toml meta`) reads as envelope:
     extraction hands back SOURCE alone — metadata never pollutes the beds."""
     doc = (
         "<<~ ahu #source-text >>\n"
-        "```toml iam\n"
+        "```toml meta\n"
         'type = "text/markdown"\n'
         "```\n\n"
         "## Title Page\nTHE KUMULIPO\n"
         "<<~/ahu >>\n"
     )
     out = extract_source_text(doc)
-    assert "toml iam" not in out and "text/markdown" not in out
+    assert "toml meta" not in out and "text/markdown" not in out
     assert "## Title Page" in out and "THE KUMULIPO" in out
 
 

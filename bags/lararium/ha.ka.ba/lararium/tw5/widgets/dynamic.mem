@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/dynamic >>
-```toml iam
+```toml meta
 body-sha256   = "f215c3518f1c876508cedb636c7dd2f34acd16a538248a7a28c03ed894f3e4ee"
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/widgets/dynamic.mem"

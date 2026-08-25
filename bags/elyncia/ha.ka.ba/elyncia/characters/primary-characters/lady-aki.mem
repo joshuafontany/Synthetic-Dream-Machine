@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
-```toml iam
+```toml meta
 file-path                              = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/lady-aki.mem"
 l-space                                = "stable:@elyncia"
 mana                                   = 17
@@ -534,7 +534,7 @@ Aki's support stays powerful because it asks for cost.
 This character sheet models one complete playable meme:
 
 * doctype and opener name the memetic-wikitext surface,
-* `iam` records address, type, confidence, register, and role,
+* `meta` records address, type, confidence, register, and role,
 * `ahu` blocks hold local worksite sections,
 * `kapu` callouts mark boundaries,
 * `? ->` edges hold unresolved pressure,

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/papalohe >>
-```toml iam
+```toml meta
 body-sha256   = "83587b80cdb7cd55e8b02a4034336053d5003d87a403a97c80c6f39d3ebff759"
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/widgets/papalohe.mem"

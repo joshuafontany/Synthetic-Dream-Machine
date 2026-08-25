@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/meme >>
-```toml iam
+```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/meme.mem"
 l-space   = "stable"
@@ -36,7 +36,7 @@ This surface carries examples, tables, and split residue.
 |---|---|
 | doctype | marks the carrier as memetic-wikitext before active sigils appear |
 | opener | declares the live address of the carrier |
-| `#iam` | names identity, ratings, and role |
+| `#meta` | names identity, ratings, and role |
 | title + opening scope | tells the reader what governs here and what does not |
 | body thresholds | marks active semantic span |
 | six-glyph phase map | binds the working loop compactly |
@@ -117,6 +117,6 @@ Research backlog and subtype-specific detail should deepen into their own outwar
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jmSGptGr9Xzh-IeSVK5VUol_4xzSutggRLmZvIwD5M0
+<<^ code:"&#x0003;" >>ni:///sha-256;rG1geezf8ELjZNJSEQ8nyGpL1ZkISA2snC7hTXuxBoE
 
 <<^ code:"&#x0004;" -> ? >>

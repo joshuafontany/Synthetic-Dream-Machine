@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/RFC-2119 >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/RFC-2119.mem"
 mana      = 18
@@ -50,7 +50,7 @@ The canonical normative verb set for this stack, adapted from IETF RFC 2119:
 * `SHOULD NOT` — strong discouragement; deviation requires understood and weighed justification
 * `MAY` — truly optional
 
-Carrier laws may explain local usage, but MUST cite this meme rather than re-declaring the list as a top-level `#iam` key.
+Carrier laws may explain local usage, but MUST cite this meme rather than re-declaring the list as a top-level `#meta` key.
 
 <<~/ahu >>
 
@@ -62,6 +62,6 @@ Carrier laws may explain local usage, but MUST cite this meme rather than re-dec
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ALt3YO0ccL867YTW-NjT311jAdUAIpUGueB8zTcA27g
+<<^ code:"&#x0003;" >>ni:///sha-256;XKvva3EwaiFA0ZRjiqiUOmTkzQLUhY39ZChxDGHAmD4
 
 <<^ code:"&#x0004;" -> ? >>

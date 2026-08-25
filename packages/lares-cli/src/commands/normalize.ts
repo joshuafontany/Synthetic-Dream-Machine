@@ -8,7 +8,7 @@
  * run this before committing a new carrier — the gate stays strict, the
  * authoring stays graceful.
  *
- * Two classes ride it. A carrier's iam-declared `namespace` homes into its SOH opener as literal
+ * Two classes ride it. A carrier's meta-declared `namespace` homes into its SOH opener as literal
  * glyphs — the class a hand-authored carrier most often trips. A declaration naming the grammar's
  * address and not its name takes the current one, from the authority beside the type constant. The
  * transform is pure + idempotent (`@lararium/tw5/meme-normalize`).
@@ -61,7 +61,7 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
 
   if (files.length === 0) {
     console.error("usage: lares normalize <file.mem ...> [--check]");
-    console.error("  canonicalize a meme carrier's framing (embeds the iam-declared namespace into the SOH).");
+    console.error("  canonicalize a meme carrier's framing (embeds the meta-declared namespace into the SOH).");
     console.error("  --check     report carriers that would change; write nothing (exit 1 if any) — for CI/pre-commit.");
     console.error("  --gradient  name each file's kind and the marks that kind requires and lacks; write nothing.");
     console.error("  --edges     name the addresses these carriers point at, and which of them answer.");
@@ -187,7 +187,7 @@ function surveyEdges(files: string[]): number {
       return 2;
     }
     texts.set(f, src);
-    const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(readCarrierShape(src).marks.iam ? src : "")?.[1];
+    const uri = /^uri-path\s*=\s*"([^"]+)"/m.exec(readCarrierShape(src).marks.meta ? src : "")?.[1];
     if (uri) held.add(uri);
   }
 

@@ -15,7 +15,7 @@ description: Convene a talk-story floor (kūkākūkā, talanoa) — co-narrated
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/talk-story/SKILL >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/talk-story/SKILL.mem"
 l-space   = "stable"

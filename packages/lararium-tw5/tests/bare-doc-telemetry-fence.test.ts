@@ -9,7 +9,7 @@
  *   2. TELEMETRY-FENCE SUPERSESSION (operator overrule 2026-07-20, supersedes
  *      ruling 16f4b271): telemetry routes through Py on capture, and a
  *      sensorium→wiki pull carries ALL its metadata. So `lar_*` sensorium /
- *      worldline fields round-trip WHOLE into the iam fence; only the
+ *      worldline fields round-trip WHOLE into the meta fence; only the
  *      STRUCTURAL/ENVELOPE set stays denied (title/text/framing rebuild from
  *      the envelope + record stratum — emitting them DOUBLES the body). Two
  *      the deny-set holds ONLY what the host itself reserves, and
@@ -64,7 +64,7 @@ describe("bare doc — ALL BODY, centered between minted STX/ETX", () => {
   });
 });
 
-describe("iam fence — lar_* sensorium metadata round-trips; only structural/parse-grade denied", () => {
+describe("meta fence — lar_* sensorium metadata round-trips; only structural/parse-grade denied", () => {
   test("lar_* sensorium fields re-emit; parse-grade markers + $-keys stay out; operator fields stay in", () => {
     const fields: TiddlerFields = {
       title: URI,
@@ -110,7 +110,7 @@ describe("iam fence — lar_* sensorium metadata round-trips; only structural/pa
     };
     const map = new Map([[URI, fields]]);
     const out = expandMemeRefs((t) => map.get(t), URI)!;
-    // the body appears ONCE — structural `text`/`title` never leak into the iam TOML
+    // the body appears ONCE — structural `text`/`title` never leak into the meta TOML
     const firstPara = "paragraph 0 — a line of real body content.";
     const occurrences = out.split(firstPara).length - 1;
     expect(occurrences).toBe(1);

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/meme-ast >>
-```toml iam
+```toml meta
 body-sha256   = "a31316c2e25c7209328b72006b8cfa76a65365403452a630b397508083e9a2ad"
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/meme-ast.mem"
 heleuma       = "ka"

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/loci.mem"
 mana      = 15
@@ -64,7 +64,7 @@ Five buckets mark the structural rating of a carrier (law-of-5s):
 Rating derives from structure — a predicate run against the carrier, never a class consulted.
 Promotion to lares/ canon (live session → branch commit → hostless URI) follows a separate ceremony.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/iam >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta >>
 
 <<~/ahu >>
 
@@ -136,10 +136,10 @@ Runtime: `bagScopeOf` / `qualifyStackTag` / `stackOf` and the `stack` filter ope
 | carrier form | rule | example |
 |---|---|---|
 | primary meme | derivation algorithm (step 2) | `bags/lares/ha.ka.ba/lares/api/pono/loci.md` |
-| child item | sibling directory named for parent's terminal path segment | `bags/lares/ha.ka.ba/lares/api/pono/loci/iam.md` |
+| child item | sibling directory named for parent's terminal path segment | `bags/lares/ha.ka.ba/lares/api/pono/loci/meta.md` |
 
 Any carrier outside this rule reads as repair pressure, not a second lawful siting convention.
-MIGRATION NOTE: the committed canon tree still sits at the pre-ruling layout (`bags/<sub-path>.md`); the operator's load→write wave migrates it — the projector now writes only the ruled form. The iam `file-path` field = a named dual-write of this derivable fact; it retires at the migration wave.
+MIGRATION NOTE: the committed canon tree still sits at the pre-ruling layout (`bags/<sub-path>.md`); the operator's load→write wave migrates it — the projector now writes only the ruled form. The meta `file-path` field = a named dual-write of this derivable fact; it retires at the migration wave.
 
 !!! Live Examples
 
@@ -179,9 +179,9 @@ Routing convention reads as explicit when an agent can point to the surfaces jus
 Convention surfaces:
 
 # `lar:` URI in the document opener
-# `#iam` rating cluster and `register`
+# `#meta` rating cluster and `register`
 # derivation algorithm, relative-name qualification, and file-path convention (this file)
-# canon-MOVE criteria (`lar:///ha.ka.ba/lares/api/pono/loci/iam`)
+# canon-MOVE criteria (`lar:///ha.ka.ba/lares/api/pono/loci/meta`)
 
 Convention fails when:
 
@@ -198,11 +198,11 @@ Convention fails when:
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/iam >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/SKILL >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;heBUnR9K3LMjFFkG64aTRZohZdoZsNxBM3zXgAHaWtc
+<<^ code:"&#x0003;" >>ni:///sha-256;--DRMIJR0cVsn6bCsBdM8o-CmIDxNZaX3ofy8ZdWgSE
 
 <<^ code:"&#x0004;" -> ? >>

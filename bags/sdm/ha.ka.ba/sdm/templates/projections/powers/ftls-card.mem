@@ -1,16 +1,16 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/projections/powers/ftls-card.mem"
+l-space   = "sdm"
 mana      = 14
 manao     = 17
 manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "root template meme for FTLS Power card projection memes — playable surface with clickable component pills"
-l-space   = "sdm"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/templates/projections/powers/ftls-card"
 ```
@@ -40,11 +40,11 @@ An FTLS card projection renders a Power module as one table-facing game surface.
 #edges       #projects back to module, #template
 ```
 
-''Composition is declared once, as tags.'' The card's `toml iam` carries a `tags` field that mirrors the module's `#has` — the full lar: URI of each component and mount-point (every meme's title is its lar URI; tags reference titles). The `#components` section then holds a single call:
+''Composition is declared once, as tags.'' The card's `toml meta` carries a `tags` field that mirrors the module's `#has` — the full lar: URI of each component and mount-point (every meme's title is its lar URI; tags reference titles). The `#components` section then holds a single call:
 
 `<<~ kahea lar:///ha.ka.ba/lararium/lists/components >>`
 
-That procedure reads the current tiddler's `@`-prefixed tags and renders each as a clickable `tag-pill`. No hand-listing — add or drop a tag in `iam` and the pill row follows. On screen each pill clicks through to its component tiddler and a filter of every module that shares it.
+That procedure reads the current tiddler's `@`-prefixed tags and renders each as a clickable `tag-pill`. No hand-listing — add or drop a tag in `meta` and the pill row follows. On screen each pill clicks through to its component tiddler and a filter of every module that shares it.
 
 ''Live, never fenced.'' The kahea call is live wikitext so it renders; a fenced call renders as dead literal text and the doorway never opens. (Any code fences in //this template// are illustrative only.)
 
@@ -78,6 +78,6 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jGKzdn65UgNOKz_RlPXlAgiAgIjJCETAobjx5-xt3lo
+<<^ code:"&#x0003;" >>ni:///sha-256;S2D3J6MZSJK5VLwgVQEe9O7hxC4StiewS5xj1x2WQ8Q
 
 <<^ code:"&#x0004;" -> ? >>

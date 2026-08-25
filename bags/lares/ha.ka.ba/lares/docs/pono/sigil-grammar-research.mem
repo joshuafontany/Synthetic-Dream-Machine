@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/sigil-grammar-research >>
-```toml iam
+```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/sigil-grammar-research.mem"
 l-space   = "stable"

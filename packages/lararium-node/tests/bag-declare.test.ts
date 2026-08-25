@@ -13,7 +13,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   readBagManifest, writeBagManifest, surveyBags, moveBagHome,
-  readRepoRegistry, registerRepo, unregisterRepo, bagHomeRoots, iamTableFromBody,
+  readRepoRegistry, registerRepo, unregisterRepo, bagHomeRoots, metaTableFromBody,
 } from "../src/bag-declare.js";
 import { laresDataHome } from "../src/vessel-paths.js";
 
@@ -45,7 +45,7 @@ describe("bag-declare — the disk shore", () => {
     expect(m).toEqual({ bag: "lares", tier: "veil", home: "hearth" });
   });
 
-  test("a written declaration round-trips through the iam block", () => {
+  test("a written declaration round-trips through the meta block", () => {
     writeBagManifest(join(corpus, "lares"), { bag: "lares", tier: "public", home: "repository", repository: "canon" });
     const back = readBagManifest(join(corpus, "lares"), "lares");
     expect(back).toMatchObject({ bag: "lares", tier: "public", home: "repository", repository: "canon" });
@@ -54,18 +54,18 @@ describe("bag-declare — the disk shore", () => {
   test("★ the written declaration carries the repo ID and NO path ★", () => {
     registerRepo({ id: "canon", root: corpus, vcs: "git" });
     writeBagManifest(join(corpus, "lares"), { bag: "lares", tier: "public", home: "repository", repository: "canon" });
-    const wire = readFileSync(join(corpus, "lares", "iam.mem"), "utf8");
+    const wire = readFileSync(join(corpus, "lares", "meta.mem"), "utf8");
     expect(wire).toContain('repository = "canon"');
     expect(wire).not.toContain(corpus);       // the root stays local to the vessel that resolved it
   });
 
-  test("a TORN iam block reads the default rather than a partial guess into a home", () => {
-    writeFileSync(join(corpus, "lares", "iam.mem"), "```toml iam\nnot a table ][\n```\n", "utf8");
+  test("a TORN meta block reads the default rather than a partial guess into a home", () => {
+    writeFileSync(join(corpus, "lares", "meta.mem"), "```toml meta\nnot a table ][\n```\n", "utf8");
     expect(readBagManifest(join(corpus, "lares"), "lares").home).toBe("hearth");
   });
 
-  test("the shallow iam parser reads flat scalars and ignores everything else", () => {
-    const t = iamTableFromBody('```toml iam\nhome      = "ley"\ncount = 3\n```\n');
+  test("the shallow meta parser reads flat scalars and ignores everything else", () => {
+    const t = metaTableFromBody('```toml meta\nhome      = "ley"\ncount = 3\n```\n');
     expect(t["home"]).toBe("ley");
     expect(t["count"]).toBeUndefined();       // non-string values simply do not appear
   });

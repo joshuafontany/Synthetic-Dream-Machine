@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology >>
-```toml iam
+```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology.mem"
 l-space   = "stable"
@@ -32,7 +32,7 @@ Lares fuses three traditions nobody has fused whole: a ''transclude-capable wiki
 
 !! One Model, Two Cameras
 
-The meme-graph holds composition in the has-stack (iam tags), adjacency in `loulou`, embedding in `aka`/`kahea`, and every relation that //does// something as a ''wire entity'' — a `lar:` addressed record wearing its family as a stack component (`wire`, 2026-06-12; the old families-as-edge-attributes form retired). Two cameras project that one graph (`render-pipeline#render-axes`):
+The meme-graph holds composition in the has-stack (meta tags), adjacency in `loulou`, embedding in `aka`/`kahea`, and every relation that //does// something as a ''wire entity'' — a `lar:` addressed record wearing its family as a stack component (`wire`, 2026-06-12; the old families-as-edge-attributes form retired). Two cameras project that one graph (`render-pipeline#render-axes`):
 
 * the ''Story-River camera'' — `window.document`, the page/document surface;
 * the ''TLDraw canvas camera'' — `OffscreenCanvas`, the infinite flow surface.
@@ -57,12 +57,12 @@ A reader may drag two node-shapes adjacent without intending a relation; bare pr
 
 The boundary runs not between "graph" and "not-graph" — ''both sides carry `lar:` URIs''. It runs between //which entity holds what//:
 
-* ''Model'' — a meme, its has-stack, and its wire entities: identity (`lar:` URI), the worn components, wire records (`from`/`to` / `lifecycle` / `traversal` / `propagation`), `confidence`, the `#iam` ledger (`mana` / `manao` / `manaoio`), and pin-type declarations on `kumu` node-types.
-* ''View'' — stored as ''its own lar-URI-addressed entities'', separate from any meme's `#iam`: canvas shape position / extent / z-order, camera pan+zoom, Story-River order, level-of-detail, render-template selection.
+* ''Model'' — a meme, its has-stack, and its wire entities: identity (`lar:` URI), the worn components, wire records (`from`/`to` / `lifecycle` / `traversal` / `propagation`), `confidence`, the `#meta` ledger (`mana` / `manao` / `manaoio`), and pin-type declarations on `kumu` node-types.
+* ''View'' — stored as ''its own lar-URI-addressed entities'', separate from any meme's `#meta`: canvas shape position / extent / z-order, camera pan+zoom, Story-River order, level-of-detail, render-template selection.
 
 TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette state hold view-state as system tiddlers; per `lar-uri#tw5-system-boundary`, the view-state that persists or federates carries a `lar:///` title and syncs. So a canvas node exists as a lar-URI entity (the model meme) ''and'' its canvas/camera state exists as lar-URI entities (the view tiddlers) — distinct, uniformly addressable. ''The quine reaches into the view layer.''
 
-''The one hard rule:'' a meme MUST NOT carry its own canvas coordinates in `#iam`. Position lives in a view-state entity the camera reads (the Obsidian-Canvas lesson). The meme stays surface-agnostic; the view-state tiddler holds the placement.
+''The one hard rule:'' a meme MUST NOT carry its own canvas coordinates in `#meta`. Position lives in a view-state entity the camera reads (the Obsidian-Canvas lesson). The meme stays surface-agnostic; the view-state tiddler holds the placement.
 
 <<~/ahu >>
 
@@ -124,7 +124,7 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 !! Forks — Resolved (operator 2026-06-06)
 
-* ''Canvas-position storage + `lar:` URI as shape-id — APPROVED, unified.'' A node //is// a lar-URI entity; its view-state (position, camera, z-order, LoD) lives in //separate// lar-URI-addressed view-state entities (the `$:/StoryList` pattern). Both addressed; coordinates never in the meme `#iam`.
+* ''Canvas-position storage + `lar:` URI as shape-id — APPROVED, unified.'' A node //is// a lar-URI entity; its view-state (position, camera, z-order, LoD) lives in //separate// lar-URI-addressed view-state entities (the `$:/StoryList` pattern). Both addressed; coordinates never in the meme `#meta`.
 * ''`transclusion` on canvas — APPROVED'' as one family with a content-window render template (not a `spatial:portal` split); the model-meaning stays unified.
 * ''`dataflow` / `reaction` in Story-River — APPROVED:'' they carry prose render templates where useful; an omitted wire reads as a view choice, not a model loss.
 * ''`spatial:portal` navigation payload — APPROVED.''
@@ -144,6 +144,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PqvXYR62hw0NliMcAOdVy7SYxSRKywuwaslI3XXCdlU
+<<^ code:"&#x0003;" >>ni:///sha-256;xvHb27e7iBpSwSmlZUc6CK7DWmq3ZlrgXEZt9Hgg4GQ
 
 <<^ code:"&#x0004;" -> ? >>

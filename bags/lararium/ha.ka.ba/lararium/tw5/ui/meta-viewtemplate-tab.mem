@@ -1,0 +1,35 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab >>
+```toml meta
+cacheable  = true
+file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab.mem"
+list-after = "$:/core/ui/ViewTemplate/body"
+mana       = 18
+manao      = 18
+manaoio    = 17
+register   = "Synthesis-Canon"
+retain     = true
+role       = "ViewTemplate tab: injects #meta character sheet as a Metadata tab on all lar: tiddlers"
+tags       = ["$:/tags/ViewTemplate", "lar:///ha.ka.ba/lares/api/pono/meme"]
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab"
+```
+
+<<^ code:"&#x0002;" >>
+
+<$reveal type="match" state="$:/state/tab/view-1-$(currentTiddler)$" default="meta" text="meta">
+<$list filter="[<currentTiddler>prefix[lar:]]" variable="ignore">
+<$transclude tiddler="lar:///ha.ka.ba/lararium/tw5/ui/meta-panel" mode="block" />
+</$list>
+</$reveal>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-panel >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;XeKlHtbHJg0ffIiXc-CUDcqr7h2cditpRyCj3IZq5XQ
+
+<<^ code:"&#x0004;" -> ? >>

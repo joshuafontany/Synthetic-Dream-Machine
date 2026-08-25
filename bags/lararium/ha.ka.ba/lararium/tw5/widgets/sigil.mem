@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/sigil >>
-```toml iam
+```toml meta
 body-sha256   = "466661b14ac6fd3d3b560f87f698927c6857905c5ff020e21b965a05a24cf902"
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/widgets/sigil.mem"

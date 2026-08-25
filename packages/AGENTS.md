@@ -2,7 +2,7 @@
 
 <<^ code:"&#x0001;" ? -> lar:///packages/AGENTS >>
 
-<<~ ahu #iam >>
+<<~ ahu #meta >>
 
 ```toml
 uri-path     = "packages/AGENTS"

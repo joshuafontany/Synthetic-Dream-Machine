@@ -1,21 +1,21 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/sensorium-bed-manifests >>
-```toml iam
-cacheable = true
-l-space   = "lararium"
-mana      = 14
-manao     = 13
-manaoio   = 12
-namespace = "&#x0950; &#x0901;"
-register  = "Synthesis"
-retain    = true
-role      = "Sensorium bed manifests — the IaC pattern for Sensorium Palace pours (enacting the top-level Infrastructure-as-Myth pattern integrity): a bed rises from a declared, versioned manifest the way the genesis island rises from its seed; the manifest carries flow · worldline · twins · apertures · predictions, and the trial's three confounds die in the schema rather than in vigilance"
-status    = "designed"
+```toml meta
+cacheable  = true
+l-space    = "lararium"
+mana       = 14
+manao      = 13
+manaoio    = 12
+namespace  = "&#x0950; &#x0901;"
+register   = "Synthesis"
+retain     = true
+role       = "Sensorium bed manifests — the IaC pattern for Sensorium Palace pours (enacting the top-level Infrastructure-as-Myth pattern integrity): a bed rises from a declared, versioned manifest the way the genesis island rises from its seed; the manifest carries flow · worldline · twins · apertures · predictions, and the trial's three confounds die in the schema rather than in vigilance"
+status     = "designed"
 status-why = "the bed-manifest shape; no source carries it yet"
-type      = "text/memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lararium/api/sensorium-bed-manifests"
-written   = "2026-07-15"
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lararium/api/sensorium-bed-manifests"
+written    = "2026-07-15"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -34,7 +34,7 @@ The Sensorium Palace's test beds rise from ''manifests'' the way the genesis isl
 
 !! The bed manifest ~ five members
 
-<<~ranks manifest-members flow ~ source globs + exclusions (every exclusion COUNTED at pour, never silent) + the record-unit rule per file-kind: one-file-one-record .mem · turn-per-record transcripts · tiddler-per-record .tid · module-per-record TW5 js -> worldline ~ which orderings run REAL (in-file byte order · dir-tree containment · git history · turn sequence) and which arbitrary — a corpus that lives as a PLACE declares its walk-order accidental; a transcript declares its turns sacred -> twins ~ DERIVED from the worldline: a null twin scrambles only the real orderings, at a declared grain, SIZE-MATCHED BY CONSTRUCTION — the size confound and the null-grain confound die in the schema -> apertures ~ the readings that land at pour: path-address (containment; the bags path already reads as an ultrametric prefix) · declared-fields per kind (iam blocks · .tid headers · TW5 module headers) · the plane readings · git-position where it exists — each tagged given ⊥ induced -> predictions ~ a pointer into the pre-registration sheet; a bed REFUSES to pour while its predictions entry stands absent >>
+<<~ranks manifest-members flow ~ source globs + exclusions (every exclusion COUNTED at pour, never silent) + the record-unit rule per file-kind: one-file-one-record .mem · turn-per-record transcripts · tiddler-per-record .tid · module-per-record TW5 js -> worldline ~ which orderings run REAL (in-file byte order · dir-tree containment · git history · turn sequence) and which arbitrary — a corpus that lives as a PLACE declares its walk-order accidental; a transcript declares its turns sacred -> twins ~ DERIVED from the worldline: a null twin scrambles only the real orderings, at a declared grain, SIZE-MATCHED BY CONSTRUCTION — the size confound and the null-grain confound die in the schema -> apertures ~ the readings that land at pour: path-address (containment; the bags path already reads as an ultrametric prefix) · declared-fields per kind (meta blocks · .tid headers · TW5 module headers) · the plane readings · git-position where it exists — each tagged given ⊥ induced -> predictions ~ a pointer into the pre-registration sheet; a bed REFUSES to pour while its predictions entry stands absent >>
 
 <<~/ahu >>
 
@@ -58,6 +58,6 @@ The register split rides as a ''hypothesis the harness itself tests'': liturgica
 
 <<~ ॐ ँ -> ? >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;TuIPZH0OYeEv8gWR0oy_G81Xriv9Wj6wpDr8UGuOUi4
+<<^ code:"&#x0003;" >>ni:///sha-256;zfjRNxLW2n28srjjJDMIT7CPcuf7Wl8e_XbRpCV0ZG8
 
 <<^ code:"&#x0004;" -> ? >>

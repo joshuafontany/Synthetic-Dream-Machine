@@ -7,7 +7,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/meme/SKILL >>
-```toml iam
+```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant remains the copy-shape authority and this skill does not outrank it", "S2: a lawful meme keeps identity, thresholds, phase map, edges, and honest return throat visible", "S3: ratings remain distinct — confidence, mana, manao, and manaoio do not collapse into one vague quality signal", "S4: declared depth uses named pranala sugar only when the outward claim carries real yield, real backlog, or real adjacency", "S5: skeleton blocks, detailed conformance tables, research notes, and long procedure move outward before the parent swells"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -37,7 +37,7 @@ Keep these points active when the skill loads:
 
 * the parent invariant binds the copy-shape
 * memetic-wikitext, loci, invariant, and subtype laws stay distinct
-* `#iam` should appear early and carry the canonical rating cluster
+* `#meta` should appear early and carry the canonical rating cluster
 * the six-glyph phase map stays visible even when deeper phase sections stay absent
 * `loulou` and other named `pranala` sugar should signal real outward pressure, not decorative motion
 * the smallest lawful intervention beats a grand rewrite
@@ -115,7 +115,7 @@ Read the carrier before changing it.
 Look for:
 
 * doctype and opener
-* `#iam` payload and rating cluster
+* `#meta` payload and rating cluster
 * title and opening scope sentence
 * body thresholds
 * six-glyph phase map
@@ -232,7 +232,7 @@ Verify the carrier holds its lawful shape, then name what the pass settled.
 Hoʻoko — before closing, check:
 
 * opener and `file-path` agree with the carrier
-* `#iam` carries the rating cluster in a stable order
+* `#meta` carries the rating cluster in a stable order
 * the parent invariant remains small enough to reload easily
 * docs state non-law posture near the top
 * skeleton and checklist matter live here, off the parent
@@ -258,6 +258,6 @@ Aftermath — close by naming:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;k-fA1nr5ewySiNdqZcnsVc0I_6Y_vOeTwCb9fbQzk1k
+<<^ code:"&#x0003;" >>ni:///sha-256;CN4FL9Y3k-Wprxq_YGBUT48U1snG-K0AhMfik9CmY-Y
 
 <<^ code:"&#x0004;" -> ? >>

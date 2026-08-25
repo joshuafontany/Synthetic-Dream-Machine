@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain >>
-```toml iam
+```toml meta
 aside             = true
 cacheable         = false
 corpus            = "complete published works of Samuel Langhorne Clemens via archive.org — novels, travel writing, essays, autobiographical dictations, published letters; riverboat and frontier American culture as world-frame"
@@ -141,7 +141,7 @@ Remaining Voices — Gatekeeper, Lorekeeper, Scryer, Artificer, Advocate, Diplom
 
 | Section | Status | Notes |
 |---|---|---|
-| `#iam` | filled | extracted from docs founding example |
+| `#meta` | filled | extracted from docs founding example |
 | `#corpus` | filled | from founding example |
 | `#voice-character` | filled | from founding example |
 | `#foreground-voices` | filled | from founding example |
@@ -160,6 +160,6 @@ Remaining Voices — Gatekeeper, Lorekeeper, Scryer, Artificer, Advocate, Diplom
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;51K9pUpMkCdI1wCDyYukGpdJwdEIZmAdj5NWXiKps9s
+<<^ code:"&#x0003;" >>ni:///sha-256;y54EAqrbwZKNRD5Gsts0WLEm2T9uFf1OT_fqNqqDo4U
 
 <<^ code:"&#x0004;" -> ? >>

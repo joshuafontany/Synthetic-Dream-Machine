@@ -1,16 +1,16 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/components/tag >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/components/tag.mem"
+l-space   = "sdm"
 mana      = 14
 manao     = 17
 manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "root template meme for component memes — an addressed facet a module #has (domain/function/hook/posture)"
-l-space   = "sdm"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/templates/components/tag"
 ```
@@ -43,7 +43,7 @@ A component meme gives one facet — a domain, function, hook, or posture — an
 
 ''Two tiddlers per component.''
 
-# ''The full meme'' — this carrier, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml iam`:
+# ''The full meme'' — this carrier, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml meta`:
 
 ```toml
 title   = "lar:///ha.ka.ba/sdm/components/function/ecm-scan"
@@ -70,6 +70,6 @@ A component earns its address by serving a filter query. Tags start as TOML head
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OGu5Xfc9Iob_hXQnr6tuLG1BtvOBtBiWm9MCqGO-gHw
+<<^ code:"&#x0003;" >>ni:///sha-256;1YBh5hBDij6gFEA2zkeVnNjTSi50dKWmoTHfQuKNQBo
 
 <<^ code:"&#x0004;" -> ? >>

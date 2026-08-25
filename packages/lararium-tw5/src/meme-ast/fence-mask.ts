@@ -89,8 +89,8 @@ export function inMask(spans: readonly MaskSpan[], i: number): boolean {
 /**
  * True when `i` sits strictly INSIDE a span — past its opening character.
  * A fence opener itself starts its own span; a scanner looking for real
- * fence openers (the iam finder) accepts span-start matches and rejects
- * interior ones (a ````-quoted ```toml iam example).
+ * fence openers (the meta finder) accepts span-start matches and rejects
+ * interior ones (a ````-quoted ```toml meta example).
  */
 export function inMaskInterior(spans: readonly MaskSpan[], i: number): boolean {
   let lo = 0, hi = spans.length - 1;

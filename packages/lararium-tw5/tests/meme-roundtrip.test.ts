@@ -8,9 +8,9 @@
  *
  * Three guarantees under test (handoff #pattern-integrities §2):
  *   1. idempotent render — render(parse(render(x))) === render(x)
- *   2. content survives whole — only the iam fence framing (key order,
+ *   2. content survives whole — only the meta fence framing (key order,
  *      alignment, the namespace line that re-homes to SOH) normalizes;
- *      every byte outside the iam fences round-trips identically
+ *      every byte outside the meta fences round-trips identically
  *   3. semantic identity — parse(render(records)) ≡ records
  *
  * Vectors run against the live boot meme — the corpus's own canon — so the
@@ -30,11 +30,11 @@ const REPO_ROOT = new URL("../../..", import.meta.url).pathname;
 const BOOT_MEME = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
 const BOOT_URI  = "lar:///ha.ka.ba/lares/api/noosphere-boot";
 
-const IAM_FENCE_RE = /```toml iam\n[\s\S]*?```\n/g;
+const META_FENCE_RE = /```toml meta\n[\s\S]*?```\n/g;
 
-/** Normalize iam framing out of a carrier — content-fidelity view. */
+/** Normalize meta framing out of a carrier — content-fidelity view. */
 function contentView(carrier: string): string {
-  return carrier.replace(IAM_FENCE_RE, "```toml iam\n<normalized>\n```\n");
+  return carrier.replace(META_FENCE_RE, "```toml meta\n<normalized>\n```\n");
 }
 
 function recordsOf(text: string, uri: string): Map<string, TiddlerFields> {
@@ -58,7 +58,7 @@ describe("parse∘render — the recompose inverse on the boot meme", () => {
     expect(rendered!).toContain("<<~/ahu >>");
   });
 
-  test("guarantee 2 — content bytes survive whole; only iam framing normalizes", () => {
+  test("guarantee 2 — content bytes survive whole; only meta framing normalizes", () => {
     expect(contentView(rendered!)).toBe(contentView(source));
   });
 
@@ -85,7 +85,7 @@ const TEACHING_URI = "lar:///ha.ka.ba/lares/memory/fence-teaching";
 const TEACHING = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"${"&#x0001;"}" ? -> ${TEACHING_URI} >>
-\`\`\`toml iam
+\`\`\`toml meta
 uri-path = "ha.ka.ba/lares/memory/fence-teaching"
 type     = "text/memetic-wikitext+tiddlywiki"
 \`\`\`
@@ -107,8 +107,8 @@ not a child
 Inline mentions stay literal too: \`<<^ code:"${"&#x0003;"}" >>\` and \`<<~ ahu #also-fake >>\`.
 
 \`\`\`\`md
-a four-backtick fence quoting an iam fence:
-\`\`\`toml iam
+a four-backtick fence quoting an meta fence:
+\`\`\`toml meta
 mana = 99
 \`\`\`
 \`\`\`\`
@@ -117,7 +117,7 @@ mana = 99
 
 After the fence, the carrier still runs.
 
-<<^ code:"${"&#x0003;"}" >>ni:///sha-256;UWu-8oC8nwXgL1yC3sR5rFYTCCwELrAPdjtoBXJP4-Y
+<<^ code:"${"&#x0003;"}" >>ni:///sha-256;FKtjTN4RhYc2nIjiLN2Da1gBLmxVGgQvcTC0uYmXTWA
 
 <<^ code:"${"&#x0004;"}" -> ? >>
 `;
@@ -134,7 +134,7 @@ describe("fence-mask — quoted sigils never frame, split, or expand", () => {
     expect(records.get(TEACHING_URI)!.text).toContain("the carrier still runs");
   });
 
-  test("quoted iam (four-backtick fence) never becomes the slot's identity", () => {
+  test("quoted meta (four-backtick fence) never becomes the slot's identity", () => {
     expect(records.get(`${TEACHING_URI}#lesson`)!["mana"]).toBeUndefined();
   });
 
@@ -151,7 +151,7 @@ describe("Kapu SOH variant survives the round trip", () => {
   const KAPU = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"${"&#x0011;"}" namespace:"⊙" ? -> ${KAPU_URI} >>
-\`\`\`toml iam
+\`\`\`toml meta
 uri-path = "ha.ka.ba/lares/memory/kapu-carrier"
 type     = "text/memetic-wikitext+tiddlywiki"
 \`\`\`

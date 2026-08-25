@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/alignment-architecture >>
-```toml iam
+```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/alignment-architecture.mem"
 l-space   = "stable"
@@ -72,7 +72,7 @@ The shore runs both directions, and ''Lares wields AI tools to complete the retu
 
 !! Graceful Import — Foreign Data Rises Up the Pono Ladder
 
-The quine grows by absorbing the world. Any datum ingested from the internet or elsewhere that ''acquires a `lar:` URI'' imports into the wiki as a ''more-pono'' piece: addressing it grants it a place in the graph, and authoring it as ''memetic-wikitext lifts its kupono'' — `mana` / `manao` / `manaoio` climb in its `#iam` ledger.
+The quine grows by absorbing the world. Any datum ingested from the internet or elsewhere that ''acquires a `lar:` URI'' imports into the wiki as a ''more-pono'' piece: addressing it grants it a place in the graph, and authoring it as ''memetic-wikitext lifts its kupono'' — `mana` / `manao` / `manaoio` climb in its `#meta` ledger.
 
 The lift rides the rating-5 ladder: a raw datum enters as `noise` or `data`; the `lar:` address plus memetic-wikitext authoring carry it toward `meme` (federation-eligible at ≥ `meme`), then `ano`, then `kapu`. The protocol never rejects the foreign — it ''absorbs gracefully'', and the act of pono-authoring //is// the upgrade. What enters as a stray fact leaves as a graph citizen: addressed, well-formed, rated, and reachable.
 
@@ -213,6 +213,6 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;RnbIX1Wei15x-rvpItvyfbjXjLik3cyi0sCNYXfuYw8
+<<^ code:"&#x0003;" >>ni:///sha-256;xabq8lwZzwAr93ZCn8TzUmxPF8kadZ4teQUab9C08Ik
 
 <<^ code:"&#x0004;" -> ? >>

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///last-sprint/ROADMAP >>
-```toml iam
+```toml meta
 file-path = "bags/lares-history/last-sprint/ROADMAP.mem"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/ROADMAP"
@@ -71,9 +71,9 @@ Social graph control inverts: circles are owned by their center, not the platfor
 | G.rest | Remaining sigils (lele, papalohe, pae) | ⬜ Less urgent | Less-load-bearing per operator; can land when use cases surface. Same factory pattern; mostly mechanical. |
 | H | Save-side auto-split | ✅ Complete (E.10.8 + 2026-05-11) | `<$lar-meme-split>` widget (wiki change event path) + `MemeSyncAdaptor` direct handler (CRDT store path): `splitBodyTiddler()` exported from `deserializer.ts`; `saveTiddler` detects `<<~ ahu` blocks, splits into parent + child records, tombstones removed children. ONE parser, FOUR call sites law complete. |
 | I | Wikifier polish (DOCTYPE + dash) | ⬜ Single-backtick cured by V.2; DOCTYPE/dash remain | Parser instantiation now canonical via Path A; remaining DOCTYPE comment + `dash` rule conversions are aesthetic round-trip diffs. Defer. |
-| J.1+J.2a/b/c | Per-slot iam emission + preamble/postamble + default-elision | ✅ Complete |
+| J.1+J.2a/b/c | Per-slot meta emission + preamble/postamble + default-elision | ✅ Complete |
 | J.2d | Disk projection five-layer child structure + TW5 VM primacy enforcement | ✅ Complete (2026-05-10) |
-| J.3 | Recursive promote / child co-promotion | ✅ Complete (2026-05-11) | `action-handler.ts` already enumerates `#fragment` children by URI prefix (`childPrefix = tiddler + "#"`), confirms each in `actualFromBag` via `composite.listBagsHolding()`, co-promotes atomically under the same `ChangeOrigin`, returns `childrenPromoted: string[]`. HANDOFF was stale — discovered closed during P.3.5 session. | J.1: meme-level postamble symmetric with prologue. J.2a: extractSlotStructure captures preamble (with `<<~ iam >>` sentinel marking iam position) + iam fields + text + postamble per slot — slot-as-full-meme-MD-projection invariant. J.2c: meme-template uses `<$text>` to bytes-faithfully emit prologue/preamble-rendered/postamble (per Jermolene GH #6712 — pragma scope doesn't propagate through field transclude). J.2b: regenerateIamToml + IAM_DENYLIST + parentIam threading through splitRecursive — child elides values matching parent's effective iam (inherited + own merged). Operator edits to native iam-class fields flow back to disk. |
+| J.3 | Recursive promote / child co-promotion | ✅ Complete (2026-05-11) | `action-handler.ts` already enumerates `#fragment` children by URI prefix (`childPrefix = tiddler + "#"`), confirms each in `actualFromBag` via `composite.listBagsHolding()`, co-promotes atomically under the same `ChangeOrigin`, returns `childrenPromoted: string[]`. HANDOFF was stale — discovered closed during P.3.5 session. | J.1: meme-level postamble symmetric with prologue. J.2a: extractSlotStructure captures preamble (with `<<~ meta >>` sentinel marking meta position) + meta fields + text + postamble per slot — slot-as-full-meme-MD-projection invariant. J.2c: meme-template uses `<$text>` to bytes-faithfully emit prologue/preamble-rendered/postamble (per Jermolene GH #6712 — pragma scope doesn't propagate through field transclude). J.2b: regenerateIamToml + IAM_DENYLIST + parentIam threading through splitRecursive — child elides values matching parent's effective meta (inherited + own merged). Operator edits to native meta-class fields flow back to disk. |
 | F | F-arc TW5 routing + debounce shim + auto-truncate projection | ⬜ Deferred | `$:/state/*` → projection; `Draft of *` → per-wiki draft; Yjs-style 300-500ms debounce; idle auto-truncate. Important once browser peer surfaces let operators edit at sustained rates. |
 | S8 | Kowloon Bridge | ⬜ Designed | `KowloonOutbox` draft queue + `KowloonInbox` feed mirror; `elyncia.app` deployment |
 | S9 | lararium-browser scaffold | ⬜ Queued | Full Automerge browser peer; IndexedDB; broadcast() presence engine; OPFS option |
@@ -724,6 +724,6 @@ calls. Separate `Piscina` instance, any-hot-VM routing, no per-wiki state.
 | Grammar Invariant 4+ | Block until quine round-trip proves Invariant 3 |
 | Keyhive WASM integration | `encryptedShareHint` field is the forward-compatible hook; Keyhive WASM not yet stable |
 
-<<^ code:"&#x0003;" >>ni:///sha-256;vKGJf6tnhmEqWSIoJT3s0uxqZKqROUOFCkEU3Mxqkk4
+<<^ code:"&#x0003;" >>ni:///sha-256;U6uYP3aVhjXJsY1t9yCTlJJMdON0JqWcKfAikU8_BXM
 
 <<^ code:"&#x0004;" -> ? >>

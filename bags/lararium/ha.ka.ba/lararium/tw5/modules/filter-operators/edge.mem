@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/edge >>
-```toml iam
+```toml meta
 body-sha256   = "410944ae0dd96ed55a0a91f0443532760b016f9fcbc44e0c339d74bcf97d8c37"
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/filter-operators/edge.mem"

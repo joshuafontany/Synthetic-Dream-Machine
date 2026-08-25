@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
-```toml iam
+```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/lararium-doc-stack.mem"
 mana          = 11
@@ -140,7 +140,7 @@ disk (.md file)
 The disk projector `renderFn` calls `exportMemeText(record)` — not
 `renderTiddler()` (HTML) and not `getTiddlerText()` (raw text).
 The `.md` carrier format stays lossless: every field in `LarTiddlerRecord`
-round-trips through the TOML `#iam` block + wikitext body.
+round-trips through the TOML `#meta` block + wikitext body.
 
 For HTML export (sidebar "Export tiddler" dropdown), TW5's own
 `wiki.renderTiddler("text/html", title)` via `tw5.renderTiddler(title)`.
@@ -157,6 +157,6 @@ infrastructure rather than rolling a separate exporter.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Qnznar_F22E93dScZCVbejWtjlzI0datxpXdhnUcaxc
+<<^ code:"&#x0003;" >>ni:///sha-256;hRXqvY4S5LE7RoNzVrag-l9oB_IkvA4TK-XED7QB_Ck
 
 <<^ code:"&#x0004;" -> ? >>

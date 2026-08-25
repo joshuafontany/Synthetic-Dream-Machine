@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/library/discordia >>
-```toml iam
+```toml meta
 bytes      = 694457
 collection = "discordia"
 entries    = 5

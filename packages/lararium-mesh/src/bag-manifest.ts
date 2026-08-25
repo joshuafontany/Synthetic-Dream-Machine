@@ -1,5 +1,5 @@
 /**
- * bag-manifest — a bag's own `iam` declaration: what it carries, who may read it, and where it belongs.
+ * bag-manifest — a bag's own `meta` declaration: what it carries, who may read it, and where it belongs.
  *
  * THE GAP THIS CLOSES. Three self-describing axes stood defined and none stood SPOKEN: `CapTier` shipped a
  * `DeclaredTierSource` interface that only tests ever implemented, so every bag in production declared no
@@ -7,7 +7,7 @@
  * lived purely at runtime. A bag knew nothing about itself, and every answer came from whichever call site
  * asked — which is how a Nexus seal ended up in a repository nobody chose.
  *
- * ONE MANIFEST, THREE ANSWERS, and the bag holds them. It rides the same `toml iam` block every meme already
+ * ONE MANIFEST, THREE ANSWERS, and the bag holds them. It rides the same `toml meta` block every meme already
  * carries, at the bag's own root, so a human reads it with the grammar they already read — the manifest is a
  * meme about the bag, which is what a bag's self-description should be.
  *
@@ -32,7 +32,7 @@ import { CARRIER_TYPE, DECLARATION } from "./carrier-type.js";
 import { parseBagHome, DEFAULT_BAG_HOME, resolveBagHomeDir, type BagHome, type BagHomeRoots, type BagHomeResolution } from "./bag-home.js";
 
 /** The file a bag's self-declaration rides, at the bag's own root. A meme about the bag. */
-export const BAG_MANIFEST_FILE = "iam.mem" as const;
+export const BAG_MANIFEST_FILE = "meta.mem" as const;
 
 /** What a bag declares about itself. Every field carries a fail-closed default, so a torn read stays usable. */
 export interface BagManifest {
@@ -55,14 +55,14 @@ export function defaultBagManifest(bag: string): BagManifest {
 }
 
 /**
- * Fold a parsed `iam` table into a manifest, fail-closing every field independently.
+ * Fold a parsed `meta` table into a manifest, fail-closing every field independently.
  *
  * FIELD-WISE rather than all-or-nothing: a manifest with one torn value still answers the other questions
  * correctly, and an all-or-nothing parse would throw away a good tier because somebody mistyped a home. Each
  * axis owns its own default, and each already fail-closes in its own safe direction.
  */
-export function bagManifestFromIam(bag: string, iam: Record<string, unknown> | null | undefined): BagManifest {
-  const table = iam ?? {};
+export function bagManifestFromMeta(bag: string, meta: Record<string, unknown> | null | undefined): BagManifest {
+  const table = meta ?? {};
   const home  = parseBagHome(table["home"]);
   const repo  = typeof table["repository"] === "string" ? table["repository"].trim() : "";
   const role  = typeof table["role"] === "string" ? table["role"].trim() : "";
@@ -77,13 +77,13 @@ export function bagManifestFromIam(bag: string, iam: Record<string, unknown> | n
   };
 }
 
-/** Render a manifest back to the `toml iam` body a bag's `iam.mem` carries. Stable key order — a diff reads. */
+/** Render a manifest back to the `toml meta` body a bag's `meta.mem` carries. Stable key order — a diff reads. */
 export function renderBagManifest(m: BagManifest): string {
   const lines = [
     DECLARATION,
     "",
     `<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/bags/${m.bag} >>`,
-    "```toml iam",
+    "```toml meta",
     `bag       = "${m.bag}"`,
     `cap-tier  = "${m.tier}"`,
     `home      = "${m.home}"`,
@@ -152,7 +152,7 @@ export function planBagMove(
     home: next.home,
     ...(next.home === "repository" && next.repository ? { repository: next.repository } : {}),
   };
-  // A hearth/ley target drops any repo id the bag carried — see bagManifestFromIam on stale pointers.
+  // A hearth/ley target drops any repo id the bag carried — see bagManifestFromMeta on stale pointers.
   const cleaned: BagManifest = next.home === "repository" ? target : stripRepository(target);
   const from = placeBag(current, roots);
   const to   = placeBag(cleaned, roots);

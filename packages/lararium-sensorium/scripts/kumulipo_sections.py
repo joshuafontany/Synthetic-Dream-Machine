@@ -34,7 +34,7 @@ import re
 
 # ── the #source-text carrier (the extraction shore) ──────────────────────────────────────
 # The house wraps a witness meme's bare text in ONE `<<~ ahu #source-text >> … <<~/ahu >>`
-# block; envelope matter (doctype, iam TOML, #meme-header, #provenance, #edges) rides
+# block; envelope matter (doctype, meta TOML, #meme-header, #provenance, #edges) rides
 # outside it. Extraction takes the block's interior — the cleanest mechanical shore the
 # wrapping reserves for the source text.
 
@@ -65,7 +65,7 @@ def source_text_span(lines: list) -> "tuple | None":
 def extract_source_text(text: str) -> str:
     """Pull the bare source text out of a wrapped meme: the `#source-text` ahu interior
     when one stands, else the whole text unchanged (a bare file carries no wrapping to
-    shed). A leading slot-level `toml iam` fence inside the block (the interior's
+    shed). A leading slot-level `toml meta` fence inside the block (the interior's
     dialect declaration — e.g. `type = "text/markdown"`) reads as envelope and sheds;
     the extraction hands back SOURCE alone. The general extraction rule the sectioned
     corpus cap falls back on."""
@@ -76,7 +76,7 @@ def extract_source_text(text: str) -> str:
     start, stop = span
     while start < stop and not lines[start].strip():
         start += 1
-    if start < stop and lines[start].startswith("```toml iam"):
+    if start < stop and lines[start].startswith("```toml meta"):
         for j in range(start + 1, stop):
             if lines[j].startswith("```"):
                 start = j + 1

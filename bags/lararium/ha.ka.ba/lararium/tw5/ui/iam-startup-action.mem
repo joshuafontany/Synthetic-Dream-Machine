@@ -1,9 +1,9 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/iam-startup-action >>
-```toml iam
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/meta-startup-action >>
+```toml meta
 cacheable  = true
-file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/ui/iam-startup-action.mem"
+file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meta-startup-action.mem"
 list-after = "$:/core/ui/StartupActions/DefaultTiddlers"
 mana       = 18
 manao      = 17
@@ -13,7 +13,7 @@ retain     = true
 role       = "startup action: routes lar:///...#slot URL fragments to parent tiddler + correct tab state"
 tags       = ["$:/tags/StartupAction", "lar:///ha.ka.ba/lares/api/pono/meme"]
 type       = "text/memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lararium/tw5/ui/iam-startup-action"
+uri-path   = "ha.ka.ba/lararium/tw5/ui/meta-startup-action"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -51,10 +51,10 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/iam-startup-action"
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/iam-viewtemplate-tab >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;cOWaPADdum0_-_FrLb3xSTVP1Fy0Y_wh07lMk4MwcRA
+<<^ code:"&#x0003;" >>ni:///sha-256;IMlYBXTtMvU2REXGi-Jfor8TeNRfYrt3e1H8XgSzjwA
 
 <<^ code:"&#x0004;" -> ? >>

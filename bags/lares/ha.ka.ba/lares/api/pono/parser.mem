@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/parser >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/parser.mem"
 l-space   = "stable"
@@ -189,16 +189,16 @@ Parser MUST reject ad-hoc closure spellings as canonical. A noncanonical closer 
 
 <<~/ahu >>
 
-<<~ ahu #iam-block >>
+<<~ ahu #meta-block >>
 
-!! Iam Block
+!! Meta Block
 
-The ''toml iam slot'' (`#iam`) carries the canonical identity payload for a meme — a bare `` ```toml iam `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `memetic-wikitext-framing#carrier-spine`).
+The ''toml meta slot'' (`#meta`) carries the canonical identity payload for a meme — a bare `` ```toml meta `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `memetic-wikitext-framing#carrier-spine`).
 
 Canonical form:
 ````text
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/path/to/meme >>
-```toml iam
+```toml meta
 uri-path  = "..."
 file-path = "..."
 type      = "text/memetic-wikitext+tiddlywiki"
@@ -206,11 +206,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 ```
 ````
 
-The `toml iam` fence label signals the identity block. The TOML object defines the meme's canonical metadata.
+The `toml meta` fence label signals the identity block. The TOML object defines the meme's canonical metadata.
 
-The iam slot dissolves into parent tiddler fields during deserializer expansion; it does not project as a child tiddler.
+The meta slot dissolves into parent tiddler fields during deserializer expansion; it does not project as a child tiddler.
 
-Implementation: `packages/lararium-tw5/src/macros/lar-iam-block.ts`
+Implementation: `packages/lararium-tw5/src/macros/lar-meta-block.ts`
 
 Additional ahu control slots that dissolve rather than project as children: `#exit`, `#stream-open`, `#stream-close`, `#stream-exit`, `#body-open`, `#body-close`, `#meme-body-open`, `#meme-body-close`.
 
@@ -285,6 +285,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ab7epQiD5htX6jMOcgNOIYbFOZAQWnhWm3aQytbT7iI
+<<^ code:"&#x0003;" >>ni:///sha-256;AxDST_Ed3--tbbkXd9bSLLpeZT_TG4qTSivCt5Kz9DE
 
 <<^ code:"&#x0004;" -> ? >>

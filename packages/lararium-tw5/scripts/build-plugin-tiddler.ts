@@ -70,7 +70,7 @@ const sha256 = sha256HexSync;
 
 function patchSha256(meme: string, digest: string): string {
   const tomlM = TOML_BLOCK_RE.exec(meme);
-  if (!tomlM) throw new Error("root toml iam block not found");
+  if (!tomlM) throw new Error("root toml meta block not found");
   const tomlOrig = tomlM[1]!;
   const patched  = SHA_FIELD_RE.test(tomlOrig)
     ? tomlOrig.replace(SHA_FIELD_RE, `body-sha256 = "${digest}"`)

@@ -10,7 +10,7 @@
  * can trail `src/` indefinitely with every local gate green.
  *
  * What that cost: a round-trip gate that parsed through the bundle and emitted through source reported
- * 600 carriers as a corpus-wide iam rewrite. The number was the distance between two builds, and it
+ * 600 carriers as a corpus-wide meta rewrite. The number was the distance between two builds, and it
  * moved whenever source moved while the bundle stood still — a measurement of the instrument, read as a
  * property of the corpus.
  *
@@ -33,7 +33,7 @@ describe.skipIf(wikiSkip)(`the packed plugin tracks src/${skipNote}`, () => {
   beforeAll(async () => { engine = await bootTestWiki(); });
 
   test("the packed reader and the source reader produce the same records", () => {
-    // A carrier with the shapes that exercise the carriage: a prologue, an iam, ahu fragments, a frame.
+    // A carrier with the shapes that exercise the carriage: a prologue, an meta, ahu fragments, a frame.
     const file = "bags/lares/ha.ka.ba/lares/api/pono/ahu.mem";
     const src = readFileSync(path.join(REPO, file), "utf8");
     const uri = `lar:///${/^uri-path\s*=\s*"([^"]+)"/m.exec(src)![1]!}`;

@@ -11,7 +11,7 @@ import { classifyPostamble, checkedSpan } from "../src/block-check.js";
 import { bccOfSpan } from "../src/carrier-check.js";
 
 const frame = (slot: string): string =>
-  `<<^ code:"&#x0001;" ? -> lar:///t/x >>\n\`\`\`toml iam\nuri-path = "t/x"\n\`\`\`\n\n` +
+  `<<^ code:"&#x0001;" ? -> lar:///t/x >>\n\`\`\`toml meta\nuri-path = "t/x"\n\`\`\`\n\n` +
   `<<^ code:"&#x0002;" >>\n\n<<~ ahu #a >>\n\n! Heading\n\n<<~/ahu >>\n\n<<^ code:"&#x0003;" >>\n${slot}\n<<^ code:"&#x0004;" -> ? >>\n`;
 
 const stranded = (text: string): string[] =>

@@ -1,21 +1,21 @@
 /**
  * child-name-blocks — the operator's names, at the grain where a fragment declares them.
  *
- * A carrier's own iam block is compared corpus-wide; a CHILD's is not, and cannot be: the emitter
+ * A carrier's own meta block is compared corpus-wide; a CHILD's is not, and cannot be: the emitter
  * writes a child block only where the child DIFFERS from its parent, and no carrier on disk currently
  * does. Every real child block this grammar will ever write gets written for the first time in a live
  * wiki, so the laws that govern it hold here or nowhere.
  *
  * Two laws meet on a fragment:
  *
- *   · `CHILD_IAM_DENY` extends `IAM_DENY` with the two DERIVED coordinates (`uri-path`, `file-path`) —
+ *   · `CHILD_META_DENY` extends `META_DENY` with the two DERIVED coordinates (`uri-path`, `file-path`) —
  *     a fragment's address follows from its parent and its slot, so re-stating it invites the two to
  *     disagree.
  *   · the grammar's carriage rides `$…`, which means an author may name a field `postamble` or `slot`
  *     on a fragment exactly as on a carrier. That freedom is worth a gate: the names were reserved for
  *     long enough that a future reader could re-reserve one without noticing what it costs.
  *
- * The iam-parity gate reads only the FIRST block in a file, so nothing below the parent's declaration
+ * The meta-parity gate reads only the FIRST block in a file, so nothing below the parent's declaration
  * has ever been measured. This is that measurement, taken where the blocks actually exist.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext
@@ -43,27 +43,27 @@ const parse = (text: string) =>
   memeticWikitextDeserializer.call({ wiki: {} } as never, text, { title: ROOT }, CARRIER_TYPE) as TiddlerFields[];
 
 /**
- * The child's iam block, located by REGION rather than by adjacency.
+ * The child's meta block, located by REGION rather than by adjacency.
  *
- * A fragment's iam sits flush against its ahu sigil — except where the fragment carries a preamble,
+ * A fragment's meta sits flush against its ahu sigil — except where the fragment carries a preamble,
  * which precedes it and restores the sigil-then-blank spacing. A reader keyed to the flush form finds
  * nothing on exactly the fragments that carry the most structure, and a test filtering an empty block
  * passes for the wrong reason. Measured: it did, and let a dropped `$` rule through.
  *
  * Null where the fragment declares nothing — a distinct fact from a block that declares badly.
  */
-function childIamBlock(out: string): string | null {
+function childMetaBlock(out: string): string | null {
   const start = out.indexOf("<<~ ahu #kid >>");
   if (start < 0) return null;
   const end = out.indexOf("<<~/ahu >>", start);
   const region = out.slice(start, end < 0 ? undefined : end);
-  const m = /```toml iam\n([\s\S]*?)\n```/.exec(region);
+  const m = /```toml meta\n([\s\S]*?)\n```/.exec(region);
   return m ? m[1]! : null;
 }
 
 /** The child's declaration as data — layout carries no meaning here. */
-function childIam(out: string): TiddlerFields {
-  const block = childIamBlock(out);
+function childMeta(out: string): TiddlerFields {
+  const block = childMetaBlock(out);
   return block === null ? {} : parseTaploFields(block);
 }
 
@@ -85,7 +85,7 @@ describe("child name blocks — what a fragment may declare", () => {
     for (const k of authored) kid[k] = `AUTHORED-${k}`;
 
     const out = project({ [ROOT]: parent, [KID]: kid });
-    const declared = childIam(out);
+    const declared = childMeta(out);
     const missing = authored.filter((k) => declared[k] !== `AUTHORED-${k}`);
     expect(missing, `a fragment lost authored field(s) the host does not reserve`).toEqual([]);
 
@@ -98,11 +98,11 @@ describe("child name blocks — what a fragment may declare", () => {
   /**
    * THE CARRIAGE STAYS OFF THE OPERATOR'S TOML, ON A CHILD AS ON A CARRIER.
    *
-   * `emitIamToml` drops `$…` for every block it writes, parent and fragment alike. This states that as
+   * `emitMetaToml` drops `$…` for every block it writes, parent and fragment alike. This states that as
    * a law rather than an implementation detail: the child block is assembled through a second deny-set,
    * and a future edit could hold the `$` rule in one and forget it in the other.
    */
-  test("the grammar's own carriage never appears in a child's iam block", () => {
+  test("the grammar's own carriage never appears in a child's meta block", () => {
     // The SCALAR carriage rides fields; the multi-line carriage rides records of its own, so both
     // classes stand here and neither may reach the declaration.
     const kid: TiddlerFields = {
@@ -117,7 +117,7 @@ describe("child name blocks — what a fragment may declare", () => {
     });
     // The fragment declares one ordinary field, so a block MUST stand — without it the filter below
     // would read an absent block as a clean one.
-    const block = childIamBlock(out);
+    const block = childMetaBlock(out);
     // The fragment declares one ordinary field, so a block MUST stand — without it the check below
     // would read an absent block as a clean one.
     expect(block, "the fragment declared nothing; the check below would pass vacuously").not.toBeNull();
@@ -136,7 +136,7 @@ describe("child name blocks — what a fragment may declare", () => {
 
   /**
    * A FRAGMENT'S ADDRESS FOLLOWS FROM ITS PARENT, so re-stating it invites the two to disagree. This
-   * repeats `child-iam-inheritance`'s guard on purpose: that suite proves the rule over one field pair,
+   * repeats `child-meta-inheritance`'s guard on purpose: that suite proves the rule over one field pair,
    * and this one holds it beside the freedom above, where a careless widening would land.
    */
   test("the derived coordinates stay off a child even when the child carries them", () => {
@@ -144,7 +144,7 @@ describe("child name blocks — what a fragment may declare", () => {
       title: KID, type: CARRIER_TYPE, text: "kid body",
       "uri-path": "ha.ka.ba/x/child-names#kid", "file-path": "bags/x/kid.mem",
     };
-    const declared = childIam(project({ [ROOT]: parent, [KID]: kid }));
+    const declared = childMeta(project({ [ROOT]: parent, [KID]: kid }));
     expect(declared["uri-path"]).toBeUndefined();
     expect(declared["file-path"]).toBeUndefined();
   });
@@ -155,29 +155,29 @@ describe("child name blocks — what a fragment may declare", () => {
    */
   test("a name held by both parent and child re-emits on the child only where the values part", () => {
     const p: TiddlerFields = { ...parent, postamble: "SHARED", register: "Canon" };
-    const same = childIam(project({ [ROOT]: p, [KID]: { title: KID, type: CARRIER_TYPE, text: "b", postamble: "SHARED" } }));
+    const same = childMeta(project({ [ROOT]: p, [KID]: { title: KID, type: CARRIER_TYPE, text: "b", postamble: "SHARED" } }));
     expect(same["postamble"], "an inherited-and-matching value re-stamped on the fragment").toBeUndefined();
 
-    const differs = childIam(project({ [ROOT]: p, [KID]: { title: KID, type: CARRIER_TYPE, text: "b", postamble: "OWN" } }));
+    const differs = childMeta(project({ [ROOT]: p, [KID]: { title: KID, type: CARRIER_TYPE, text: "b", postamble: "OWN" } }));
     expect(differs["postamble"]).toBe("OWN");
   });
 
   /**
-   * THE CORPUS, THROUGH THE FENCE MASK. The parity gate reads a carrier's FIRST iam block; six carriers
+   * THE CORPUS, THROUGH THE FENCE MASK. The parity gate reads a carrier's FIRST meta block; six carriers
    * hold a second, and every one of those sits inside a quote fence as a teaching example. So this asks
    * the one question that survives masking: no block a carrier really declares names the carriage.
    *
    * Read unmasked, this would fail on documents that teach the grammar — the fault that once had a
    * reader verifying a block check written inside an example.
    */
-  test("no iam block any carrier declares carries a `$` name", () => {
+  test("no meta block any carrier declares carries a `$` name", () => {
     const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
       .split("\n").filter(Boolean);
     const offenders: string[] = [];
     for (const f of carriers) {
       const text = readFileSync(path.join(REPO, f), "utf8");
       const spans = fencedSpans(text);
-      for (const m of text.matchAll(/```toml iam\n([\s\S]*?)\n```/g)) {
+      for (const m of text.matchAll(/```toml meta\n([\s\S]*?)\n```/g)) {
         if (inMask(spans, m.index!)) continue;
         const bad = Object.keys(parseTaploFields(m[1]!)).filter((k) => k.startsWith("$"));
         if (bad.length) offenders.push(`${f}: ${bad.join(" ")}`);

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/function/archive >>
-```toml iam
+```toml meta
 cacheable = true
 caption   = "archive"
 file-path = "bags/sdm/ha.ka.ba/sdm/components/function/archive.mem"

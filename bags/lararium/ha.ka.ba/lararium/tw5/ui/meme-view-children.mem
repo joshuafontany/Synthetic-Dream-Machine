@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/meme-view-children >>
-```toml iam
+```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meme-view-children.mem"
 list-after = "$:/core/ui/ViewTemplate/body"
@@ -50,7 +50,7 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-view-children"
 <$set name="slotName" value={{{[<childUri>get[ahu-slot]]}}}>
 
 <!-- Controls only for named user-facing slots (not body, not control/structural) -->
-<$list filter="[<slotName>!matchregexp[^#(body|iam|exit|edges|stream-open|stream-close|stream-exit|body-open|body-close|meme-body-open|meme-body-close)$]]" variable="_" emptyMessage="">
+<$list filter="[<slotName>!matchregexp[^#(body|meta|exit|edges|stream-open|stream-close|stream-exit|body-open|body-close|meme-body-open|meme-body-close)$]]" variable="_" emptyMessage="">
 <<ahu-slot-controls childUri:<<childUri>> slot:<<slotName>>>>
 </$list>
 
@@ -64,6 +64,6 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-view-children"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;IA8yBy22kYs6a-sBvtXfnY5s13-CnuodevWO_V26eYs
+<<^ code:"&#x0003;" >>ni:///sha-256;n0RhdJttwCieeM0qWx78HGKDc3wI-4DZ4q_YrhOeumA
 
 <<^ code:"&#x0004;" -> ? >>

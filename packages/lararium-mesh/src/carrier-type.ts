@@ -5,7 +5,7 @@
  * Four mechanisms dispatch on this string, each a different one: the TW5 parser module exports under
  * it, the deserializer module exports under it, `registerFileType` binds an extension to it, and a
  * record's stored `type` field is compared against it. A fifth reads it back off disk from a carrier's
- * own iam block.
+ * own meta block.
  *
  * They agree only by hand. Spelled five ways, a change lands in four of them and the fifth refuses
  * quietly — a record whose type does not match simply stops projecting, with no throw and no

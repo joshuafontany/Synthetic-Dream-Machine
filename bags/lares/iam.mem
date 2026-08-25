@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/bags/lares >>
-```toml iam
+```toml meta
 bag       = "lares"
 cap-tier  = "public"
 home      = "repository"

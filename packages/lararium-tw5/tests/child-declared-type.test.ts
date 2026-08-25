@@ -1,8 +1,8 @@
 /**
- * Child declared type (regression guard) — a child slot that declares its OWN iam `type`
+ * Child declared type (regression guard) — a child slot that declares its OWN meta `type`
  * (e.g. text/markdown) keeps it through deserialization; an undeclared child defaults to
  * the memetic dialect. Guards the clobber where a hardcoded memetic `type` spread AFTER the
- * parsed iam fields erased a child's declared type.
+ * parsed meta fields erased a child's declared type.
  */
 import { describe, expect, test } from "vitest";
 
@@ -17,12 +17,12 @@ function childByTitleEnd(children: TiddlerFields[], suffix: string): TiddlerFiel
   return children.find((c) => String(c.title).endsWith(suffix));
 }
 
-describe("child declared iam type (default-before-spread)", () => {
+describe("child declared meta type (default-before-spread)", () => {
   test("a child declaring type = text/markdown KEEPS it", () => {
     const body = [
       "<<~ ahu #source-text >>",
       "",
-      "```toml iam",
+      "```toml meta",
       'type = "text/markdown"',
       'role = "source-text interior"',
       "```",

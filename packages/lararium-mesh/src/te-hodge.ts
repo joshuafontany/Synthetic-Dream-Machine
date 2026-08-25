@@ -23,7 +23,7 @@
  *
  * WHAT THIS READS, PRECISELY: on the complete graph the circulation is LOCAL curl (`im δ¹`), cohomologically
  * TRIVIAL (`H¹ = ker Δ₁ = 0` — the filled clique complex of K_n is contractible; Jiang–Lim–Yao–Ye 2011,
- * arXiv:0811.1067; Lim, SIAM Review 2020, arXiv:1507.05379). So the read certifies the COUPLING signal — the
+ * arXiv:0811.1067; Lim, SMETA Review 2020, arXiv:1507.05379). So the read certifies the COUPLING signal — the
  * flow content NO lead-lag potential explains — NOT a topological cocycle. A genuine harmonic `H¹` would need
  * an INCOMPLETE flow graph (some triangles unfilled, `ker Δ₁ ≠ 0`) and a projection onto `ker Δ₁`; that is a
  * separate reading, and it stays a DIFFERENT obstruction from the li∘ki cross-cover square's sheaf `H¹` (a

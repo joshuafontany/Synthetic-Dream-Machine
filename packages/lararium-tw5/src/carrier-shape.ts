@@ -34,7 +34,7 @@ import { verifyBcc } from "./carrier-check.js";
 export interface CarrierMarks {
   readonly doctype: boolean;
   readonly head:    boolean;
-  readonly iam:     boolean;
+  readonly meta:     boolean;
   readonly uriPath: string | null;
   readonly bag:     string | null;
   readonly headUri: string | null;
@@ -58,9 +58,9 @@ function marked(text: string, re: RegExp): boolean {
   return maskedExec(text, re, fencedSpans(text)) !== null;
 }
 
-/** The first iam block's value for a key, or null. Read raw: a shape reading must not need a parser. */
-function iamValue(text: string, key: string): string | null {
-  const block = /```toml iam\n([\s\S]*?)\n```/.exec(text)?.[1];
+/** The first meta block's value for a key, or null. Read raw: a shape reading must not need a parser. */
+function metaValue(text: string, key: string): string | null {
+  const block = /```toml meta\n([\s\S]*?)\n```/.exec(text)?.[1];
   if (!block) return null;
   const m = new RegExp(`^${key}\\s*=\\s*"([^"]*)"`, "m").exec(block);
   return m ? m[1]! : null;
@@ -80,9 +80,9 @@ export function readCarrierShape(text: string): CarrierShape {
     // THE DECLARATION OPENS A FENCE OF ITS OWN, so its opener sits exactly at a mask span's start and a
     // plain masked read rejects it. `allowSpanStart` admits the boundary and still refuses a fence
     // INTERIOR — which is what separates a carrier's real declaration from one quoted in a lesson.
-    iam:     maskedExec(text, /```toml iam\n/g, spans, true) !== null,
-    uriPath: iamValue(text, "uri-path"),
-    bag:     iamValue(text, "bag"),
+    meta:     maskedExec(text, /```toml meta\n/g, spans, true) !== null,
+    uriPath: metaValue(text, "uri-path"),
+    bag:     metaValue(text, "bag"),
     headUri: headM ? (/-> (\S+) >>/.exec(headM[0])?.[1] ?? null) : null,
     stx:     marked(text, /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g),
     etx:     marked(text, /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g),
@@ -113,7 +113,7 @@ export function readCarrierShape(text: string): CarrierShape {
     );
   }
   if (kind === "carrier" || kind === "unframed") {
-    if (!marks.iam) faults.push("no iam block — the carrier declares no identity");
+    if (!marks.meta) faults.push("no meta block — the carrier declares no identity");
     for (const [have, name] of [[marks.stx, "STX"], [marks.etx, "ETX"], [marks.eot, "EOT"]] as const) {
       if (!have) faults.push(`no ${name} — the body has no ${name === "EOT" ? "release" : "bound"}`);
     }

@@ -2,7 +2,7 @@
  * bag-declare — the node-fs shore for a bag's own declaration, the operator's repo registry, and the MOVE.
  *
  * The pure half (what a bag declares, where that resolves, what a move would change) lives in
- * `@lararium/mesh`'s bag-manifest + bag-home. This is the disk: read the `iam.mem` a bag carries, read the
+ * `@lararium/mesh`'s bag-manifest + bag-home. This is the disk: read the `meta.mem` a bag carries, read the
  * repo registry the operator configured, and — under an explicit approval — relocate the bytes and rewrite
  * the declaration together.
  *
@@ -25,7 +25,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, statSync } from "node:fs";
 import { join } from "node:path";
 import {
-  BAG_MANIFEST_FILE, bagManifestFromIam, defaultBagManifest, renderBagManifest, planBagMove,
+  BAG_MANIFEST_FILE, bagManifestFromMeta, defaultBagManifest, renderBagManifest, planBagMove,
   type BagHome, type BagHomeRoots, type BagManifest, type BagMove, type RepoRegistration,
 } from "@lararium/mesh";
 import { laresDataHome } from "./vessel-paths.js";
@@ -81,14 +81,14 @@ export function bagHomeRoots(): BagHomeRoots {
 }
 
 /**
- * Pull the `toml iam` table out of a `.mem` body.
+ * Pull the `toml meta` table out of a `.mem` body.
  *
  * DELIBERATELY SHALLOW. It reads flat `key = "value"` lines inside the fenced block and nothing else, because
  * a manifest carries only flat scalars and a fuller parser would invite fuller manifests. A key it cannot
  * read simply does not appear, and every field the caller wants already fail-closes on absence.
  */
-export function iamTableFromBody(body: string): Record<string, unknown> {
-  const fence = /```toml\s+iam\s*\n([\s\S]*?)\n```/.exec(body);
+export function metaTableFromBody(body: string): Record<string, unknown> {
+  const fence = /```toml\s+meta\s*\n([\s\S]*?)\n```/.exec(body);
   const table: Record<string, unknown> = {};
   if (!fence?.[1]) return table;
   for (const line of fence[1].split("\n")) {
@@ -103,7 +103,7 @@ export function readBagManifest(bagDir: string, bag: string): BagManifest {
   const path = join(bagDir, BAG_MANIFEST_FILE);
   if (!existsSync(path)) return defaultBagManifest(bag);
   try {
-    return bagManifestFromIam(bag, iamTableFromBody(readFileSync(path, "utf8")));
+    return bagManifestFromMeta(bag, metaTableFromBody(readFileSync(path, "utf8")));
   } catch {
     return defaultBagManifest(bag);
   }

@@ -115,7 +115,7 @@ export function renderLibraryIndex(collection: string, entries: readonly Library
     DECLARATION,
     "",
     `<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/${collection} >>`,
-    "```toml iam",
+    "```toml meta",
     `collection = "${collection}"`,
     `entries    = "${rows.length}"`,
     `bytes      = "${total}"`,

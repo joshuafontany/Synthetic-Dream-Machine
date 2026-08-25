@@ -23,7 +23,7 @@ export type { DiscordianReading, DiscordianSource } from "./discordian-reader.js
 // REPO REGISTRY (ids, never paths), and the MOVE that relocates bytes and re-anchors the declaration together.
 export {
   repoRegistryPath, readRepoRegistry, registerRepo, unregisterRepo,
-  bagHomeRoots, iamTableFromBody, readBagManifest, writeBagManifest, surveyBags, moveBagHome,
+  bagHomeRoots, metaTableFromBody, readBagManifest, writeBagManifest, surveyBags, moveBagHome,
 } from "./bag-declare.js";
 export type { BagSighting, BagMoveOutcome } from "./bag-declare.js";
 

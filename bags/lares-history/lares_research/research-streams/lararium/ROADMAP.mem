@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/ROADMAP >>
-```toml iam
+```toml meta
 cacheable  = false
 confidence = 18
 file-path  = "bags/lares-history/lares_research/research-streams/lararium/ROADMAP.mem"
@@ -88,7 +88,7 @@ Three sprints enacted:
 | `@lararium/mesh` `meme-provider.ts` | `MemeProjection.onChangeset?`, `CHANGESET_THRESHOLD=10`, Scale-3 dispatch in `handleChange()` |
 | `@lararium/mesh` `meme-graph.ts` | ''Full rebuild'' — `MemeRating`, `MemeRecord`, `Meme`, `MemeGraph` class, all traversal/query/sort/cycle methods |
 | `@lararium/mesh` `compiler.ts` | Implicit-`any` params typed; now compiles clean |
-| `packages/lares-core/memes/SESSION.md` | Updated — iam block bumped; 3 new OODA-HA ahu sections |
+| `packages/lares-core/memes/SESSION.md` | Updated — meta block bumped; 3 new OODA-HA ahu sections |
 | `packages/lares-core/lararium-node/ROADMAP.md` | This section |
 
 ⤴ ''Ho'oko:''
@@ -1718,7 +1718,7 @@ Future: extract `FAMILY_CONTRACTS` to `lares/grammars/pranala-families.md` carri
 
 ''Implemented (Phase 2 scaffold — wiring deferred to Phase 2.5).''
 
-* `lares/grammars/memetic-wikitext.md` — grammar carrier meme with `[[sigils]]` and `[[families]]` TOML arrays; full sigil registry (ahu, pranala, loulou, aka, kahea, iam, header) and family contracts table
+* `lares/grammars/memetic-wikitext.md` — grammar carrier meme with `[[sigils]]` and `[[families]]` TOML arrays; full sigil registry (ahu, pranala, loulou, aka, kahea, meta, header) and family contracts table
 * `GrammarRules`, `SigilRule`, `FamilyRule` interfaces exported from `@lararium/mesh` (`pranala-parser.ts`)
 * `loadGrammarRules()` function in `node-host.ts` — reads grammar carrier from `lares/grammars/memetic-wikitext.md`, extracts `[[sigils]]` + `[[families]]` into a `GrammarRules` object, returns `null` on missing file (bootstrap safety net)
 * 85/85 tests pass
@@ -1741,7 +1741,7 @@ After M7 closed, a full grammar session substantially completed Phase 2 of the g
 
 ''Grammar meme (`lares/grammars/memetic-wikitext.md`) — sigil registry expanded from 7 → 40 entries:''
 
-* Core 7 preserved and description-updated (`ahu`, `pranala`, `loulou`, `aka`, `kahea`, `iam`, `pranala-header`)
+* Core 7 preserved and description-updated (`ahu`, `pranala`, `loulou`, `aka`, `kahea`, `meta`, `pranala-header`)
 * Conditional `[C]`: `wai` (if), `mukuwai` (else), `kahawai` (elif)
 * Iteration `[SC]`: `huli` (for/seek)
 * Context binding `[SC]`: `meme` (explicit lexical scope setter — replaces TW5 `currentTiddler` ambient leak)
@@ -1755,7 +1755,7 @@ After M7 closed, a full grammar session substantially completed Phase 2 of the g
 ''`wikitext-filter` dialect (`lares/grammars/wikitext-filter.md`) — new carrier:''
 
 Forked from `x-tiddlywiki-filter`. Key departures:
-* `[toml:key[value]]` replaces `!!field` (queries `#iam` TOML metadata by type)
+* `[toml:key[value]]` replaces `!!field` (queries `#meta` TOML metadata by type)
 * `[edge:family[X]role[Y]]` replaces `##index` (queries compiled pranala edge graph)
 * `[self[]]` replaces `+currentMeme`/`currentTiddler` ambient lookup
 * `[ahu:id[fragment]]` — queries by ahu fragment anchor
@@ -1812,7 +1812,7 @@ After the Phase 2 session documented above, a further grammar extension session 
 
 ''AST type layer (Phase 3 — compressed):''
 
-`packages/lararium-mesh/src/ast.ts` — `MemeAstNode` union compressed to ''8 node kinds''. 15 typed interfaces collapsed into `SigilNode { sigilName, attrs, body }`. `MetadataNode` removed — `toml`/`iam` are now `SigilNode`. `DynamicNode` added as grammar-meme escape hatch. `#ast-node-types` spec section updated to reflect compressed model.
+`packages/lararium-mesh/src/ast.ts` — `MemeAstNode` union compressed to ''8 node kinds''. 15 typed interfaces collapsed into `SigilNode { sigilName, attrs, body }`. `MetadataNode` removed — `toml`/`meta` are now `SigilNode`. `DynamicNode` added as grammar-meme escape hatch. `#ast-node-types` spec section updated to reflect compressed model.
 
 ''Phase 3 parser (`parseMemeCarrier`):''
 
@@ -3287,6 +3287,6 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fuI8r06JMxsjqJTgwJ4CLryXfEv9YOxVjEGMUktWod8
+<<^ code:"&#x0003;" >>ni:///sha-256;D8xisg69sl8gLmAoq1kWcw51X06aZ9EoXJ2o6rQaJME
 
 <<^ code:"&#x0004;" -> ? >>

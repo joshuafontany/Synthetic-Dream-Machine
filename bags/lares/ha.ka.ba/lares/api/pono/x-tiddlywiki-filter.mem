@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter >>
-```toml iam
+```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/x-tiddlywiki-filter.mem"
 grammar-key = "x-tiddlywiki-filter"
@@ -70,7 +70,7 @@ Lararium pranala data model. These have no TW5 equivalent.
 
 | Operator | What it queries |
 |---|---|
-| `[toml:key[value]]` | `#iam` TOML metadata fields — replaces `!!field` |
+| `[toml:key[value]]` | `#meta` TOML metadata fields — replaces `!!field` |
 | `[edge:family[X]role[Y]]` | Pranala edges by family and role — replaces `##index` |
 | `[self[]]` | URI of the current rendering context — replaces `+currentMeme` / `currentTiddler` |
 | `[ahu:id[fragment]]` | Memes that contain an ahu block with a given fragment id |
@@ -129,6 +129,6 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BL-SG1S5g2HFWk_Y90i9taJVXBRfeXeCZlkA6T1STYU
+<<^ code:"&#x0003;" >>ni:///sha-256;VsFxm-s1mTq0dgteYvAJ--0lh9NbgIvNZr-wFQzcwm0
 
 <<^ code:"&#x0004;" -> ? >>

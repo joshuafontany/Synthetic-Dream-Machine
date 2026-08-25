@@ -112,7 +112,7 @@ describe.skipIf(wikiSkip)(
     const CHUNKS = [
       "<<~", ">>", "<<~ ahu #slot >>", "<<~/ahu >>", "<<~ pranala a -> b >>", "<<~/pranala >>",
       "''", "//", "@@", "`", "```", "<<<", "\\define f()", "\\end", "{{x}}", "[[y]]",
-      "\n", "\n\n", " ", "prose", "|t|c|", "! head", "* item", "&#x0001;", "```toml iam", "type = \"x\"",
+      "\n", "\n\n", " ", "prose", "|t|c|", "! head", "* item", "&#x0001;", "```toml meta", "type = \"x\"",
     ];
     let state = 20260712;
     const next = () => (state = (state * 1664525 + 1013904223) >>> 0) / 4294967296;

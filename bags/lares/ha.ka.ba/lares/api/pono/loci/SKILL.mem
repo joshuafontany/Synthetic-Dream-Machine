@@ -7,7 +7,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/loci/SKILL >>
-```toml iam
+```toml meta
 constraints        = ["S1: the canonical loci remains the stable-address capability law", "S2: derivation algorithm runs in full step order without skipping", "S3: resolved and declared-unresolved stay distinct; neither collapses into the other", "S4: rating commitment stays truthful; a path hit never overrides honest unresolved tension", "S5: file-siting mutations and opener changes cross as distinct bounded Hoʻoko transactions", "S6: aftermath names all declared-unresolved addresses; none silently disappear"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/loci"]
 file-path          = "bags/lares/ha.ka.ba/lares/api/pono/loci/SKILL.mem"
@@ -97,7 +97,7 @@ Activate when the task concerns:
 
 Not for:
 
-* MCP server design or live-resolver research → `lar:///ha.ka.ba/lares/api/pono/loci/iam`
+* MCP server design or live-resolver research → `lar:///ha.ka.ba/lares/api/pono/loci/meta`
 * generic meme law → `lar:///ha.ka.ba/lares/api/pono/meme`
 * invariant compression or companion-meme splitting → `lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL`
 
@@ -122,7 +122,7 @@ Read the target before any decomposition.
 * the full `lar:` URI string, verbatim
 * known `meme-type`, prior rating posture, or prior canon-MOVE context if present
 * document opener form: `<<^ code:"&#x0001;" ? -> ...` (unbound) or `<<^ code:"&#x0001;" lar:///...` (confirmed canon)
-* visible convention surfaces: `#iam`, `register`, `file-path`, canon-MOVE note
+* visible convention surfaces: `#meta`, `register`, `file-path`, canon-MOVE note
 * first-pass or re-resolution of a previously declared-unresolved address
 * calling context: mid-parse urgency differs from session-load intake
 
@@ -157,7 +157,7 @@ Commit to one resolution posture, one rating posture, one canon-lifecycle stage.
 * prefer derived-path resolution when the candidate file exists
 * derivation miss → name declared-unresolved directly; do not soften to "near match"
 * lower readiness for declared-unresolved; do not pretend a missing resolver resolves
-* canon-lifecycle: a carrier may not self-MOVE to canon; all conditions in `lar:///ha.ka.ba/lares/api/pono/loci/iam` MUST hold
+* canon-lifecycle: a carrier may not self-MOVE to canon; all conditions in `lar:///ha.ka.ba/lares/api/pono/loci/meta` MUST hold
 
 Rating posture:
 
@@ -219,11 +219,11 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/iam >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;n2L1HAJJ5myDDayzDGZGQruLHVBm9k4c2ZCHd7RpUYA
+<<^ code:"&#x0003;" >>ni:///sha-256;Z6uoFfv70AbpBTb3A8e4RDyYnhaNg3_ACDV2E-BDCu4
 
 <<^ code:"&#x0004;" -> ? >>

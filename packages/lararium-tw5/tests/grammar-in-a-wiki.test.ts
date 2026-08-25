@@ -63,7 +63,7 @@ describe.skipIf(wikiSkip)(
    * through the bundle and written through source, it measures the distance between two builds and
    * reports it as a property of the corpus.
    *
-   * That reading is not hypothetical: it once named 600 carriers as a corpus-wide iam rewrite that no
+   * That reading is not hypothetical: it once named 600 carriers as a corpus-wide meta rewrite that no
    * single build would ever perform, and the number moved whenever source moved while the bundle stood
    * still. `plugin-artifact-parity` holds the bundle-against-source line; a round-trip gate holds the
    * grammar's own.
@@ -86,13 +86,13 @@ describe.skipIf(wikiSkip)(
    * `render(parse(disk))`. When the two disagree the carrier reads "changed" on every scan forever: it
    * never converges, the merge seat never settles, and a write-back rewrites the operator's source.
    *
-   * The IAM BLOCK IS EXEMPT — key realignment and added metadata are the renderer's business and the
+   * The META BLOCK IS EXEMPT — key realignment and added metadata are the renderer's business and the
    * operator has ruled them acceptable. Only BODY drift fails.
    */
   test("every carrier renders back to the bytes the WIKI parsed it from", () => {
     const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
       .split("\n").filter(Boolean);
-    const stripIam = (t: string) => t.replace(/```toml iam\n[\s\S]*?\n```\n/g, "```toml iam\n<IAM>\n```\n");
+    const stripMeta = (t: string) => t.replace(/```toml meta\n[\s\S]*?\n```\n/g, "```toml meta\n<META>\n```\n");
     const drift: string[] = [];
     for (const f of carriers) {
       const disk = readFileSync(path.join(REPO, f), "utf8");
@@ -104,7 +104,7 @@ describe.skipIf(wikiSkip)(
       const by = new Map(records.map((r) => [r["title"] as string, r]));
       const rendered = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, title);
       if (rendered === null) { drift.push(`${f}: projected to nothing`); continue; }
-      if (stripIam(rendered) !== stripIam(disk)) drift.push(`${f}: body does not render back`);
+      if (stripMeta(rendered) !== stripMeta(disk)) drift.push(`${f}: body does not render back`);
     }
     expect(carriers.length).toBeGreaterThan(500);
     expect(drift).toEqual([]);
@@ -145,19 +145,19 @@ describe.skipIf(wikiSkip)(
    */
   test("every shape an operator writes mints a schema-correct carrier, and settles", () => {
     const URI = "lar:///ha.ka.ba/lares/docs/authoring-probe";
-    const IAM = ['```toml iam', 'uri-path = "ha.ka.ba/lares/docs/authoring-probe"',
+    const META = ['```toml meta', 'uri-path = "ha.ka.ba/lares/docs/authoring-probe"',
       `type     = "${CARRIER_TYPE}"`, "```"].join("\n");
-    const IAM_NS = IAM.replace("type     =", 'namespace = "⊙"\ntype     =');
+    const META_NS = META.replace("type     =", 'namespace = "⊙"\ntype     =');
     const BODY = "! A New Thought\n\nThe operator writes a file and saves it.\n";
-    const SLOT = ["<<~ ahu #inner >>", "", "```toml iam", 'register = "Provisional"', "```", "",
+    const SLOT = ["<<~ ahu #inner >>", "", "```toml meta", 'register = "Provisional"', "```", "",
       "! Inner", "", "slot prose.", "", "<<~/ahu >>"].join("\n");
     const SHAPES: Array<[string, string, string]> = [
-      ["bare prose, no frame and no iam", BODY, ""],
-      ["iam only — identity without framing", `${IAM}\n\n${BODY}`, ""],
-      ["iam declaring a namespace, unframed", `${IAM_NS}\n\n${BODY}`, "⊙"],
+      ["bare prose, no frame and no meta", BODY, ""],
+      ["meta only — identity without framing", `${META}\n\n${BODY}`, ""],
+      ["meta declaring a namespace, unframed", `${META_NS}\n\n${BODY}`, "⊙"],
       ["a frame from before the named params",
-        `<<^ ⊙&#x0001; ? -> ${URI} >>\n${IAM_NS}\n<<^ &#x0002; >>\n\n${BODY}\n<<^ &#x0003; >>\n\n<<^ &#x0004; -> ? >>\n`, "⊙"],
-      ["an ahu slot carrying its own iam", `${IAM_NS}\n\n${BODY}\n${SLOT}\n`, "⊙"],
+        `<<^ ⊙&#x0001; ? -> ${URI} >>\n${META_NS}\n<<^ &#x0002; >>\n\n${BODY}\n<<^ &#x0003; >>\n\n<<^ &#x0004; -> ? >>\n`, "⊙"],
+      ["an ahu slot carrying its own meta", `${META_NS}\n\n${BODY}\n${SLOT}\n`, "⊙"],
     ];
     const project = (src: string) => {
       const records = deserializeFromSource(src, URI);
@@ -176,7 +176,7 @@ describe.skipIf(wikiSkip)(
       }
       if (!/^<<\^ code:"&#x(?:0004|0014);"[^>\n]*?-> \? >>/m.test(first.out)) faults.push(`${name}: EOT releases nothing`);
       const gotNs = /^<<\^ code:"&#x(?:0001|0011);" namespace:"([^"]*)"/m.exec(first.out)?.[1] ?? "";
-      if (gotNs !== wantNs) faults.push(`${name}: namespace "${gotNs}" where the iam declares "${wantNs}"`);
+      if (gotNs !== wantNs) faults.push(`${name}: namespace "${gotNs}" where the meta declares "${wantNs}"`);
       const second = project(first.out);
       if (second.out !== first.out) faults.push(`${name}: projecting the projection changed it`);
     }
@@ -216,7 +216,7 @@ describe.skipIf(wikiSkip)(
     // `$…` NAMES THE HOST'S SHELF, NOT THE OPERATOR'S. TiddlyWiki hands that prefix to whatever stands
     // the wiki, so the grammar's own carriage lives there — the prologue, the preamble, the header
     // text, the slot a fragment fills, the bytes trailing the frame. Those rebuild from the frame on
-    // every recompose and never reach the iam, which is what keeps `postamble` and `slot` available to
+    // every recompose and never reach the meta, which is what keeps `postamble` and `slot` available to
     // an author as ordinary custom fields.
     const isCarriage = (k: string) => k.charAt(0) === "$";
     const carrier = readFileSync(path.join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/ahu.mem"), "utf8");
@@ -242,9 +242,9 @@ describe.skipIf(wikiSkip)(
   });
 
   /**
-   * THE IAM BLOCK, COMPARED RAW.
+   * THE META BLOCK, COMPARED RAW.
    *
-   * The corpus round-trip above masks the iam before comparing, and the sibling suite normalizes
+   * The corpus round-trip above masks the meta before comparing, and the sibling suite normalizes
    * through its own view, so every proof this repo holds about a carrier surviving projection is a
    * proof about its BODY. Nothing has ever compared a `.mem`'s declaration bytes to what the emitter
    * would write in their place.
@@ -259,14 +259,14 @@ describe.skipIf(wikiSkip)(
   // A corpus-wide walk over 600+ carriers — its cost scales with the corpus and with machine load
   // (a parallel build once pushed it past the 5s default and flaked a green law red). The budget says
   // what the test is: thorough, never fast.
-  test("a carrier's iam block already reads as the emitter would write it", { timeout: 30_000 }, () => {
+  test("a carrier's meta block already reads as the emitter would write it", { timeout: 30_000 }, () => {
     const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
       .split("\n").filter(Boolean);
-    const iamOf = (t: string) => /```toml iam\n([\s\S]*?)\n```/.exec(t)?.[1] ?? null;
+    const metaOf = (t: string) => /```toml meta\n([\s\S]*?)\n```/.exec(t)?.[1] ?? null;
 
     // WHAT `guarantee 2` FORGIVES, AND WHAT IT DOES NOT.
     //
-    // `meme-roundtrip` licenses the iam's FRAMING to normalize: key order, the `=` column, the blank
+    // `meme-roundtrip` licenses the meta's FRAMING to normalize: key order, the `=` column, the blank
     // lines around the fence. It licenses nothing about which keys stand or what they carry. So the
     // comparison runs twice — once over the raw block, once over the block read as a key-value set —
     // and the difference between those two counts sorts a rewrite from a loss.
@@ -291,14 +291,14 @@ describe.skipIf(wikiSkip)(
       const by = new Map(records.map((r) => [r["title"] as string, r]));
       const rendered = expandMemeRefs((u: string) => (by.get(u) ?? null) as never, title);
       if (rendered === null) continue;
-      const a = iamOf(disk), b = iamOf(rendered);
+      const a = metaOf(disk), b = metaOf(rendered);
       if (a === null || b === null || a === b) continue;
       (asData(a) === asData(b) ? layout : content).push(f);
     }
     expect(carriers.length).toBeGreaterThan(500);
     // Layout drift is a rewrite the operator sees once. CONTENT drift is a key or a value the
     // projection would silently change, and no license covers it.
-    expect(content, `${content.length} carriers whose iam CONTENT the projector would change ` +
+    expect(content, `${content.length} carriers whose meta CONTENT the projector would change ` +
       `(a further ${layout.length} differ in layout alone, which guarantee 2 licenses)`).toEqual([]);
   });
 });

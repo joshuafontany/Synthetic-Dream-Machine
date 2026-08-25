@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/pranala >>
-```toml iam
+```toml meta
 body-sha256   = "34f5ea4f58ba8153be0ffd6b4d06dc7611795e8d609afc78ed0f7fa8bc7a98c1"
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/widgets/pranala.mem"

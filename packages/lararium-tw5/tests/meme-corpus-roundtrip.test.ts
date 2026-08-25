@@ -10,7 +10,7 @@
  *   1. single closer — the render emits exactly one ETX (doubling = the
  *      masked-closer degraded state; the shore also warns on it now);
  *   2. idempotent — render(parse(render(x))) === render(x);
- *   3. content-whole — outside iam framing, blank-line margins, and the
+ *   3. content-whole — outside meta framing, blank-line margins, and the
  *      law-mandated sigil normalizations (spacing; STX/ETX insertion per
  *      the glyph-ward ruling), every byte survives.
  *
@@ -33,8 +33,8 @@ import {
 const REPO_ROOT = new URL("../../..", import.meta.url).pathname;
 const CORPUS = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares");
 
-const IAM_FENCE_RE = /```toml iam\n[\s\S]*?```\n/g;
-const contentView = (s: string) => s.replace(IAM_FENCE_RE, "IAM\n");
+const META_FENCE_RE = /```toml meta\n[\s\S]*?```\n/g;
+const contentView = (s: string) => s.replace(META_FENCE_RE, "META\n");
 const squeeze = (s: string) =>
   s.replace(/\n{2,}/g, "\n").replace(/[ \t]+$/gm, "").replace(/\n+$/g, "\n");
 /** Law-mandated normalizations the render MAY apply (glyph-ward ruling). */

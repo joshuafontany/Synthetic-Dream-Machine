@@ -1,8 +1,8 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci/iam >>
-```toml iam
-file-path = "bags/lares/ha.ka.ba/lares/api/pono/loci/iam.mem"
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci/meta >>
+```toml meta
+file-path = "bags/lares/ha.ka.ba/lares/api/pono/loci/meta.mem"
 mana      = 15
 manao     = 17
 manaoio   = 14
@@ -11,12 +11,12 @@ register  = "Synthesis-Canon"
 role      = "root metadata law (kānāwai), field-set authority, and reduction charter"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lares/api/pono/loci/iam"
+uri-path  = "ha.ka.ba/lares/api/pono/loci/meta"
 ```
 
 ! IAM
 
-A self-describing, self-enacting law (kānāwai) for the root `#iam` metadata block.
+A self-describing, self-enacting law (kānāwai) for the root `#meta` metadata block.
 
 This meme freezes the surviving field surface for live carriers. It asks each field what work it actually does, then keeps, moves, merges, or cuts on that basis.
 
@@ -28,7 +28,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 <<~ ahu #ooda-ha >>
 
-✶ gather the current `#iam` field surface before proposing cuts or merges
+✶ gather the current `#meta` field surface before proposing cuts or merges
 ⏿ map each field to the work it actually performs in parse, routing, execution, or truth
 ◇ choose cuts, merges, or retentions by contract pressure rather than decoration
 ▶ prepare the reduced contract and carry it into live carriers
@@ -42,7 +42,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 !! Observe
 
-Observe inventories `#iam` by work done.
+Observe inventories `#meta` by work done.
 
 Name where a field changes parse, routing, execution, or truth. Name where a field only repeats another field, repeats nearby prose, or decorates the block without changing downstream behavior.
 
@@ -76,7 +76,7 @@ ka: role function + only the local detail keys that change parse, routing, execu
 ba: input output depends-on + next only when a real forward edge exists
 ```
 
-These field lists govern here as law prose. Live carriers should not restate them as schema-summary keys inside top-level `#iam` metadata.
+These field lists govern here as law prose. Live carriers should not restate them as schema-summary keys inside top-level `#meta` metadata.
 
 <<~/ahu >>
 
@@ -114,7 +114,7 @@ The common core:
 * `role`
 * `function`
 
-Boilerplate that merely restates `#iam` as the metadata locus should not survive here.
+Boilerplate that merely restates `#meta` as the metadata locus should not survive here.
 
 <<~/ahu >>
 
@@ -140,7 +140,7 @@ The surviving flow keys:
 
 !!! Cut And Merge Rule
 
-Top-level `#iam` should cut these keys from live carriers unless a later law re-justifies one with concrete work:
+Top-level `#meta` should cut these keys from live carriers unless a later law re-justifies one with concrete work:
 
 * `canonical-metadata-locus`
 * `canonical-metadata-payload`
@@ -194,7 +194,7 @@ The child law for `file-path` follows next because `file-path` carries the most 
 
 !! Aftermath
 
-A good `#iam` pass leaves fewer keys carrying more truth.
+A good `#meta` pass leaves fewer keys carrying more truth.
 
 Signs of gain:
 
@@ -216,6 +216,6 @@ Signs of gain:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3mfknu-3WjVab3FjNQSuM4X_LQFzX1nK8fpvRLEeukk
+<<^ code:"&#x0003;" >>ni:///sha-256;v_xI3RtyKMyihKT9q2GPvna_hN7O3vdYX0acdUxDER4
 
 <<^ code:"&#x0004;" -> ? >>

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/masks-tree-plan >>
-```toml iam
+```toml meta
 cacheable = false
 created   = "Invalid Date"
 file-path = "bags/lares/ha.ka.ba/lares/docs/voices/masks-tree-plan.mem"
@@ -101,7 +101,7 @@ The Lagrange Chorus holds a stable position between multiple lararium nodes. As 
 !!! Skeleton template pressure
 
 Every file in this tree should be a valid meme immediately — correctly addressed, structurally sound, bootstrappable. Stubs are fine but broken kaheas are not. The skeleton carries:
-* `#iam` block — complete metadata, even with low confidence (`mana = 8`)
+* `#meta` block — complete metadata, even with low confidence (`mana = 8`)
 * `#corpus` stub — placeholder with notes on what should accumulate here
 * `#voice-character` stub — placeholder with what's already known
 * `#foreground-voices` — already known from Voice house; carry through
@@ -121,7 +121,7 @@ Every file in this tree should be a valid meme immediately — correctly address
 The repeatable skeleton pattern for all nine files:
 
 ```
-#iam          — complete metadata block; confidence reflects fill state
+#meta          — complete metadata block; confidence reflects fill state
 #entry        — pranala backlink to parent index (masks.md)
 #meme-header  — name, one-line identity, "skeleton / pending fill" note where applicable
 #corpus       — [STUB] or filled
@@ -229,7 +229,7 @@ Priority order for filling stubs via talk-story-dev:
 The skeleton pass closes when:
 
 * all nine files exist with valid meme structure
-* all `#iam` blocks complete (even at low confidence)
+* all `#meta` blocks complete (even at low confidence)
 * all `#fill-status` sections present with accurate labels
 * kahea from LARES resolves cleanly for all nine addresses
 * parent index lists all children
@@ -263,6 +263,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;okJLSYwRoVb1eO3o1hKp0JiPcB__sFK9D_5FufMF_-o
+<<^ code:"&#x0003;" >>ni:///sha-256;bSXFLLAvvjGUBS-ekS9c2zhUzywJIxpQphe0OGY_vSY
 
 <<^ code:"&#x0004;" -> ? >>

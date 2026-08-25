@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/voices-review >>
-```toml iam
+```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/voices/voices-review.mem"
 l-space   = "archive"
@@ -297,7 +297,7 @@ Sections written or replaced:
 
 | Section | Action |
 |---|---|
-| `#iam` | role description updated; confidence raised to 0.82 |
+| `#meta` | role description updated; confidence raised to 0.82 |
 | `#entry` | unchanged — hydration backlink intact |
 | `#meme-header` | replaced stub with three-line framing |
 | `#house-law` | replaced five one-line principles with five normative cross-layer governing rules |
@@ -327,7 +327,7 @@ Cross-links updated: `docs/lares/voices/masks.md#founding-examples` notes canoni
 | `masks/character/friend-computer.md` | filled from docs founding example; character-notes stub |
 | `masks/chorus/lagrange-chorus.md` | concept staked; nodes stub; harmony-protocol pending-grammar |
 
-Exit criteria met: all nine files valid memes; all `#iam` blocks complete; all `#fill-status` sections accurate; parent index lists all children; Voice house backlinks in all `named/` files.
+Exit criteria met: all nine files valid memes; all `#meta` blocks complete; all `#fill-status` sections accurate; parent index lists all children; Voice house backlinks in all `named/` files.
 
 Plans filed: `docs/lares/voices/masks-tree-plan.md` (OODA-HA plan), `docs/lares/voices/invariant-plan.md` (voices invariant rewrite plan).
 
@@ -361,6 +361,6 @@ MASKS.md converted from stub to forward-route to `lar:///ha.ka.ba/lares/api/pono
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ap3oc_YOIKshDPSoDRFqWEqEVLvk_K5dzRvuGQJHvQ4
+<<^ code:"&#x0003;" >>ni:///sha-256;UzcsqyNv9HKzCtpsz23Hv8EMWBeCzNTthp87_3bUXcE
 
 <<^ code:"&#x0004;" -> ? >>

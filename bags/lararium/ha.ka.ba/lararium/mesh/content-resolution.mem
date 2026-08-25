@@ -1,22 +1,22 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/content-resolution >>
-```toml iam
-cacheable = true
-file-path = "bags/lararium/ha.ka.ba/lararium/mesh/content-resolution.mem"
-l-space   = "lararium"
-mana      = 16
-manao     = 16
-manaoio   = 14
-register  = "Synthesis"
-retain    = true
-role      = "the converged DreamNet content-resolution design — large bodies leave the CRDT: skinny TW5 handle + bytes in the cid/ KIND-plane addressed by the three-plane oracle model (public @crossroads plaintext ni:// / private @catalog ciphertext / system @oracle CID-floor) + resolveByCid over three gates + DHT-free discovery; doubly-grounded (2 research waves ∪ @oracle/convergent-mesh canon)"
-status    = "designed"
+```toml meta
+cacheable  = true
+file-path  = "bags/lararium/ha.ka.ba/lararium/mesh/content-resolution.mem"
+l-space    = "lararium"
+mana       = 16
+manao      = 16
+manaoio    = 14
+register   = "Synthesis"
+retain     = true
+role       = "the converged DreamNet content-resolution design — large bodies leave the CRDT: skinny TW5 handle + bytes in the cid/ KIND-plane addressed by the three-plane oracle model (public @crossroads plaintext ni:// / private @catalog ciphertext / system @oracle CID-floor) + resolveByCid over three gates + DHT-free discovery; doubly-grounded (2 research waves ∪ @oracle/convergent-mesh canon)"
+status     = "designed"
 status-why = "the design-north; NOT built"
-tags      = ["api/pono/convergent-mesh", "mesh/oracle-governance", "api/pono/causal-islands", "api/pono/orichalcum-capabilities"]
-type      = "text/memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lararium/mesh/content-resolution"
-written   = "2026-07-19"
+tags       = ["api/pono/convergent-mesh", "mesh/oracle-governance", "api/pono/causal-islands", "api/pono/orichalcum-capabilities"]
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lararium/mesh/content-resolution"
+written    = "2026-07-19"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
@@ -164,7 +164,7 @@ What gets content-addressed comes in ''two granularities''; the CAD mechanism ha
 differing ''only in the extraction boundary'':
 
 * ''A — a blob-worthy `#source-text` ahu inside a pono meme.'' A memetic-wikitext meme
-  (its own lar URI, `iam` header, ahu structure) holds one or more blob-worthy
+  (its own lar URI, `meta` header, ahu structure) holds one or more blob-worthy
   `#source-text` ahus — a book chapter, a full corpus. ''Sub-carrier externalization:'' the
   meme's structure + small ahus stay in the CRDT; the large ahu's content extracts to the
   `cid/` store and the ahu ''becomes a handle'' (`_canonical_uri`/cid + `_integrity`
@@ -296,6 +296,6 @@ priors decide them, and wave-3 may reopen any.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;r5lP7cf9xNWpZGUeRrBQI3ZYvxr6dVfqSIvHsCdI8b0
+<<^ code:"&#x0003;" >>ni:///sha-256;fJ5xnCQy44kb7I7NTBVKquFPiU6HcDH2vtbvet_aiuY
 
 <<^ code:"&#x0004;" -> ? >>

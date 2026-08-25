@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/tw5-deserializer >>
-```toml iam
+```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/tw5-deserializer.mem"
 last-reviewed = "2026-07-18"
 mana          = 17
@@ -31,7 +31,7 @@ The canonical source rests at `lar:///ha.ka.ba/lararium/tw5/modules/deserializer
 
 !! Split Model
 
-The entry `memeticWikitextDeserializer(text, fields)` streams the raw text through `MemeStreamParser` (single-meme, multi-meme, and partial carriers all flow), then routes each carrier-close event through `splitMemeToTiddlers` → `splitRecursive`. The parent tiddler carries all iam TOML fields merged into its TW5 fields; each `<<~ ahu #slot >>` block becomes a child tiddler holding its body bytes authoritatively, the parent keeping a `<<~ kahea ahu #slot >>` reference in its place. Prologue, preamble, header-text and postamble ride RECORDS of their own at derived addresses (`…#$prologue`, `…#slot/$preamble`) — each holds its bytes in a `text`, because a TW5 field cannot carry a newline across a `.tid` projection and a value that survives in one format only cannot travel. The frame splices them by POSITION, never by marker, so the recompose inverse (`expandMemeRefs`) round-trips the carrier byte-for-byte. Scalar carriage — `$slot`, `$fragment-parent`, `$carrier-soh` — stays on fields (see lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing#the-carriage).
+The entry `memeticWikitextDeserializer(text, fields)` streams the raw text through `MemeStreamParser` (single-meme, multi-meme, and partial carriers all flow), then routes each carrier-close event through `splitMemeToTiddlers` → `splitRecursive`. The parent tiddler carries all meta TOML fields merged into its TW5 fields; each `<<~ ahu #slot >>` block becomes a child tiddler holding its body bytes authoritatively, the parent keeping a `<<~ kahea ahu #slot >>` reference in its place. Prologue, preamble, header-text and postamble ride RECORDS of their own at derived addresses (`…#$prologue`, `…#slot/$preamble`) — each holds its bytes in a `text`, because a TW5 field cannot carry a newline across a `.tid` projection and a value that survives in one format only cannot travel. The frame splices them by POSITION, never by marker, so the recompose inverse (`expandMemeRefs`) round-trips the carrier byte-for-byte. Scalar carriage — `$slot`, `$fragment-parent`, `$carrier-soh` — stays on fields (see lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing#the-carriage).
 
 A split failure never truncates: `safeSplitMeme` falls back to one verbatim tiddler flagged `lar_parse_degraded`, and grades the parse via `parseMemeText().failures` into `lar_parse_failures` — degradation surfaces legibly rather than dropping bytes.
 
@@ -49,6 +49,6 @@ The paired `carrier-filetype` startup module registers `.mem` as `text/memetic-w
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kuvMdCLzKpqjtsxYLglhf88poVm60EfkQ8AFGK6Kzq4
+<<^ code:"&#x0003;" >>ni:///sha-256;a-3jUZNhAEzBcr5Ue4M_VCGcsI785UMM1y0j06wG0Rs
 
 <<^ code:"&#x0004;" -> ? >>

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/lists/components >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/lists/components.mem"
 mana      = 13
@@ -39,10 +39,10 @@ uri-path  = "ha.ka.ba/lararium/lists/components"
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/iam-panel >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-panel >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PN4anHmsdvbF1_iyKSh5oPsKfheFW5ihuuqCWSAdxp0
+<<^ code:"&#x0003;" >>ni:///sha-256;v0xsugAoVh9FhoOQY8Z_FCIYeYGRZe_zZl6x52T9azU
 
 <<^ code:"&#x0004;" -> ? >>

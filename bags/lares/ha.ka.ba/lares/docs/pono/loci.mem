@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/docs/pono/loci >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/loci.mem"
 mana      = 18
@@ -120,10 +120,10 @@ Hoʻoko-class file-siting repairs in this meme's history:
 
 * `ha-ka-ba/api/pono/loci/loci.md` → `ha-ka-ba/api/pono/loci.md`
 * `ha-ka-ba/api/pono/meme/meme.md` → `ha-ka-ba/api/pono/meme.md`
-* `ha-ka-ba/api/pono/loci/iam/loci-iam.md` → `ha-ka-ba/api/pono/loci/iam.md`
+* `ha-ka-ba/api/pono/loci/meta/loci-meta.md` → `ha-ka-ba/api/pono/loci/meta.md`
 
 In each case the `lar:` address held stable. File siting returned to the derived position.
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tgV9XG-e7k6ax3qTBT7dQVrn5NSob80Vz33DDGpv378
+<<^ code:"&#x0003;" >>ni:///sha-256;hLp6kUa2AQykjADlf9tPQIQkiYCZEIOrDx26JzllZJ4
 
 <<^ code:"&#x0004;" -> ? >>

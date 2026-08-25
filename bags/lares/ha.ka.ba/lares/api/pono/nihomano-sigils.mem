@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/nihomano-sigils >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/nihomano-sigils.mem"
 mana      = 18
@@ -58,7 +58,7 @@ English alias: `sharktooth-sigils` — same meme, same law, different face.
 
 <<~ confidence 15/20 >> ''THE THIRD CHARACTER STILL DECIDES'', now five ways and still with no lookahead: `<<~` opens the speaking set · `<<^` the control set · `<<!` the declaration register · `<<<` a quote fence · anything else reads a macrocall. `!` never opens a macro name, so the fifth way costs the decision nothing. A one-character decision is the property the whole carrier grammar rests on, and it is precisely why the control band took a MARK rather than moving its entity into the delimiter — an opener reading `<<&#x0001;` would land inside the macrocall token and parse as a call to a macro nobody wrote.
 
-''The namespace glyph stays where it lies'' — adjacent to its control character on the SOH opener, mirroring the `namespace` field the iam block declares two lines below. Black speaks, red steers, and the two channels say the same thing on purpose. ''Only the SOH openers carry it''; the later controls frame and name nothing.
+''The namespace glyph stays where it lies'' — adjacent to its control character on the SOH opener, mirroring the `namespace` field the meta block declares two lines below. Black speaks, red steers, and the two channels say the same thing on purpose. ''Only the SOH openers carry it''; the later controls frame and name nothing.
 
 <<~/ahu >>
 

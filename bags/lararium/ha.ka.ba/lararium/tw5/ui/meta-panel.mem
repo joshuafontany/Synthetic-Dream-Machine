@@ -1,18 +1,18 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/iam-panel >>
-```toml iam
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/meta-panel >>
+```toml meta
 cacheable = true
-file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/iam-panel.mem"
+file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meta-panel.mem"
 mana      = 18
 manao     = 18
 manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
-role      = "character sheet template: renders #iam metadata for any lar: tiddler; stat bars + progressive disclosure + arbitrary field fallback"
+role      = "character sheet template: renders #meta metadata for any lar: tiddler; stat bars + progressive disclosure + arbitrary field fallback"
 tags      = ["$:/tags/Global", "lar:///ha.ka.ba/lares/api/pono/meme"]
 type      = "text/memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lararium/tw5/ui/iam-panel"
+uri-path  = "ha.ka.ba/lararium/tw5/ui/meta-panel"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/iam-panel"
 <<~ ahu #hud-fields >>
 
 ```toml
-# Canonical field ordering for iam-panel render and MCP hud tool.
+# Canonical field ordering for meta-panel render and MCP hud tool.
 # Tier 1 — stat bars (always visible, compact)
 tier1 = ["mana", "manao", "manaoio", "confidence"]
 # Tier 2 — identity block
@@ -43,8 +43,8 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 </div>
 \end
 
-\procedure lar-iam-panel()
-<div class="lar-iam-panel">
+\procedure lar-meta-panel()
+<div class="lar-meta-panel">
 
 !! Tier 1 — Signal Strength
 
@@ -67,7 +67,7 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 !! Tier 2 — Identity
 
-<table class="lar-iam-table">
+<table class="lar-meta-table">
 <$list filter="role namespace register l-space" variable="f">
 <$set name="v" value={{{ [{!!$(f)$}] }}}>
 <$reveal type="nomatch" state="" text="">
@@ -79,9 +79,9 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 !! Tier 3 — Technical
 
-<details class="lar-iam-details">
+<details class="lar-meta-details">
 <summary>Technical fields</summary>
-<table class="lar-iam-table">
+<table class="lar-meta-table">
 <$list filter="content-type module-type tw5-module-name body-sha256 cacheable retain hydrate" variable="f">
 <$set name="v" value={{{ [{!!$(f)$}] }}}>
 <$reveal type="nomatch" state="" text="">
@@ -94,9 +94,9 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 !! Tier 4 — All Other Fields
 
-<details class="lar-iam-details">
+<details class="lar-meta-details">
 <summary>Raw fields</summary>
-<table class="lar-iam-table">
+<table class="lar-meta-table">
 <$list filter="[fields[]!match[title]!match[text]!match[tags]!match[bag]!match[revision]!match[created]!match[modified]!match[creator]!match[modifier]!match[mana]!match[manao]!match[manaoio]!match[confidence]!match[role]!match[namespace]!match[register]!match[l-space]!match[content-type]!match[module-type]!match[tw5-module-name]!match[body-sha256]!match[cacheable]!match[retain]!match[hydrate]]" variable="f">
 <$set name="v" value={{{ [{!!$(f)$}] }}}>
 <$reveal type="nomatch" state="" text="">
@@ -114,11 +114,11 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/iam-viewtemplate-tab >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/hud >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;cflpwDzhOG1e-1rBJ0rx-HWyNQ8UGQDbDHivXZiSvzc
+<<^ code:"&#x0003;" >>ni:///sha-256;Ic-SkNKrvpKkN02IrbUSNchPDK4XqHW6JhpAHZYmvvA
 
 <<^ code:"&#x0004;" -> ? >>

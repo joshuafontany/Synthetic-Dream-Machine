@@ -14,7 +14,7 @@ module-type: startup
  *
  * ── A MALFORMED CARRIER STAYS A CARRIER ─────────────────────────────────────────────────────────
  * A `.mem` whose frame does not parse reaches the carrier reader anyway, which raises
- * `carrier.iam.missing` and names the fault. That keeps the diagnostic reachable: a door that
+ * `carrier.meta.missing` and names the fault. That keeps the diagnostic reachable: a door that
  * re-types unrecognised bytes hands them to a reader with no opinion about frames, and the file
  * imports looking whole while nothing checked it.
  *

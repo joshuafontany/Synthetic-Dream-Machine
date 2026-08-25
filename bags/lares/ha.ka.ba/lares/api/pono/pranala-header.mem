@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/pranala-header >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/pranala-header.mem"
 mana      = 18
@@ -35,7 +35,7 @@ The bearing reads off the SOH frame scan (the deserializer's head recogniser).
 <<~ ahu #ooda-ha >>
 
 ✶ sense the `?` token — a self-reference; the carrier declares its own address, never an edge outward
-⏿ orient: the bearing rides the SOH control sigil, once per carrier, ahead of the iam block
+⏿ orient: the bearing rides the SOH control sigil, once per carrier, ahead of the meta block
 ◇ the uri names this carrier's canonical `lar:` address; every `?` in the carrier resolves to it
 ▶ read the bearing off the head; set the self-reference for all sigils in this carrier
 ↺ confirm exactly one bearing per carrier and a `uri-path` that agrees with it
@@ -47,11 +47,11 @@ The bearing reads off the SOH frame scan (the deserializer's head recogniser).
 !! Law (Kānāwai)
 
 ''The bearing rides the CONTROL head.'' A carrier declares its own address exactly once, on its SOH
-sigil, ahead of the iam block:
+sigil, ahead of the meta block:
 
-A bearing MUST appear exactly once per carrier, on the SOH control sigil, before the iam TOML block.
+A bearing MUST appear exactly once per carrier, on the SOH control sigil, before the meta TOML block.
 A bearing MUST carry a `lar:///` URI.
-A bearing's URI MUST match the carrier's `uri-path` iam field.
+A bearing's URI MUST match the carrier's `uri-path` meta field.
 A bearing MUST NOT appear inside an ahu slot body, and MUST NOT repeat in the body on any head.
 The `?` token stays reserved — MUST NOT be used as a sigil name elsewhere.
 
@@ -109,6 +109,6 @@ agrees-with    = "uri-path"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;G614NhVQEO1F1IXBxQSFdfoumlMn0PQ000V4y2WjJN4
+<<^ code:"&#x0003;" >>ni:///sha-256;_jCEkjoWcP-FBI2fIhquYpdxrqOqviQJtHP73hlbC-Q
 
 <<^ code:"&#x0004;" -> ? >>

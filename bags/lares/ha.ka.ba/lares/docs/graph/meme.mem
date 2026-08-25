@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/meme >>
-```toml iam
+```toml meta
 file-path                    = "bags/lares/ha.ka.ba/lares/docs/graph/meme.mem"
 l-space                      = "stable"
 mana                         = 17
@@ -118,7 +118,7 @@ The compiler adds and removes memes via `add_meme` / `dispose` semantics (childr
 | `uri` | `str` | resolver output | required |
 | `path` | `Path \| None` | resolver path | `None` for virtual |
 | `content_hash` | `str` | `SHA256(uri + ":" + file_bytes)` if file-backed, else `SHA256(uri + ":virtual")` | required |
-| `metadata` | `dict` | `#iam` TOML extraction | `{}` |
+| `metadata` | `dict` | `#meta` TOML extraction | `{}` |
 | `implements` | `tuple[str, ...]` | derived from `edges_out` where `role == "implements"` | `()` |
 | `shape` | `CarrierShape` | shape validation result from `carrier.py` | required |
 | `edges_out` | `list[PranalaEdge]` | pranala parser output from carrier text | `[]` |
@@ -252,6 +252,6 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;KV2WZ9A0xgw3U7D8zu5ipa7KBJAptDNAE5oU_cTvYnw
+<<^ code:"&#x0003;" >>ni:///sha-256;DUlkEM9Awp0YPXM3jYvTnQLX_NpwVEL_RWqXtJ61ypQ
 
 <<^ code:"&#x0004;" -> ? >>

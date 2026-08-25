@@ -3,7 +3,7 @@
  *
  * Integer Levels on the closed 0–20 range.
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/loci/iam
+ * Meme: lar:///ha.ka.ba/lares/api/pono/loci/meta
  */
 
 export type PonoLevel = number & { readonly __ponoLevel: unique symbol };

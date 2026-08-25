@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/tw5-module >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/tw5-module.mem"
 mana      = 18
@@ -24,7 +24,7 @@ kernel-injectable TW5 module. The kernel's `_bootModules()` gate queries for eve
 evaluates the capability threshold, and injects passing memes as TW5 shadow tiddlers after
 corpus load.
 
-!!! Required `#iam` Fields
+!!! Required `#meta` Fields
 
 | field | meaning |
 |---|---|
@@ -70,6 +70,6 @@ boots correctly in offline or cold-start conditions before the corpus is loaded.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YqLZdMUDi2WWO5la21ZQgqbwvXFgx3dL1Gaac218vl8
+<<^ code:"&#x0003;" >>ni:///sha-256;Ez9uI9GAp-YblM8r79QVJoDzxsfQroM3MIazAgbsDaM
 
 <<^ code:"&#x0004;" -> ? >>

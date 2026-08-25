@@ -20,7 +20,7 @@ module-type: library
  *
  * ── WHAT EACH CONSTRUCT BECOMES ─────────────────────────────────────────────────────────────────
  *   frame sigils (`<<^ …>>`) + declaration   dropped — carriage, not content; the meta records them
- *   the iam fence                            dropped from the body — provenance rides the meta
+ *   the meta fence                            dropped from the body — provenance rides the meta
  *   `<<~ ahu #name >>` / `<<~/ahu >>`        an HTML anchor `<a id="name"></a>` / dropped —
  *                                            every `#name` citation in prose keeps a target
  *   `<<~ aka … >>` `<<~ loulou … >>`         a reference bullet carrying the address as code
@@ -90,16 +90,16 @@ function tableCells(line: string): string[] | null {
 }
 
 /**
- * Transpose a memetic-wikitext body to markdown. Side-channel captures (address, check, iam)
+ * Transpose a memetic-wikitext body to markdown. Side-channel captures (address, check, meta fence)
  * ride the returned record; {@link projectSubmission} folds them into the meta.
  */
-export function transposeMarkdown(text: string): { markdown: string; uri?: string; check?: string; iam?: string } {
+export function transposeMarkdown(text: string): { markdown: string; uri?: string; check?: string; metaFence?: string } {
   const out: string[] = [];
   let fence = 0;            // open fence length in backticks; 0 = prose
   let ordinal = 0;          // position inside a `#` ordered run
-  let iam: string[] | null = null;
-  let iamDone: string | undefined;
-  let inIam = false;
+  let metaFence: string[] | null = null;
+  let metaFenceDone: string | undefined;
+  let inMetaFence = false;
   let uri: string | undefined;
   let check: string | undefined;
   let tableRow = 0;         // rows emitted in the current table run
@@ -108,15 +108,15 @@ export function transposeMarkdown(text: string): { markdown: string; uri?: strin
   for (const line of text.split("\n")) {
     const fenceMark = /^(`{3,})/.exec(line);
 
-    // ── the iam fence: captured whole, dropped from the body ──
-    if (inIam) {
-      if (fenceMark) { inIam = false; iamDone = (iam ?? []).join("\n"); iam = null; continue; }
-      (iam ?? []).push(line);
+    // ── the meta fence: captured whole, dropped from the body ──
+    if (inMetaFence) {
+      if (fenceMark) { inMetaFence = false; metaFenceDone = (metaFence ?? []).join("\n"); metaFence = null; continue; }
+      (metaFence ?? []).push(line);
       continue;
     }
     // Only the fence that OPENS the carrier heads the carrier (the position law) — every later
-    // `toml iam` fence heads a worksite and STAYS in the body as an ordinary fenced block.
-    if (fence === 0 && iamDone === undefined && /^```toml iam\s*$/.test(line)) { inIam = true; iam = []; continue; }
+    // `toml meta` fence heads a worksite and STAYS in the body as an ordinary fenced block.
+    if (fence === 0 && metaFenceDone === undefined && /^```toml meta\s*$/.test(line)) { inMetaFence = true; metaFence = []; continue; }
 
     // ── fence tracking: N backticks close only on ≥ N ──
     if (fenceMark) {
@@ -184,7 +184,7 @@ export function transposeMarkdown(text: string): { markdown: string; uri?: strin
     ));
   }
   const markdown = out.join("\n").replace(/\n{3,}/g, "\n\n").replace(/\n+$/, "\n");
-  return { markdown, ...(uri ? { uri } : {}), ...(check ? { check } : {}), ...(iamDone ? { iam: iamDone } : {}) };
+  return { markdown, ...(uri ? { uri } : {}), ...(check ? { check } : {}), ...(metaFenceDone ? { metaFence: metaFenceDone } : {}) };
 }
 
 /**

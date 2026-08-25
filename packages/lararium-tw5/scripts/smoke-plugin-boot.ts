@@ -118,13 +118,13 @@ async function main(): Promise<void> {
   }
 
   // Probe per-slot preamble/postamble capture (J.2a). Synthesize a meme
-  // whose slot body has prose before its iam toml and trailing prose
+  // whose slot body has prose before its meta toml and trailing prose
   // after its inner kahea ref.
   const slotMeme = [
     "<<^ code:\"&#x0001;\" ? -> lar:///probe-slot-meme >>",
     "<<~ ahu #parent >>",
     "leading slot prose",
-    "```toml iam",
+    "```toml meta",
     "field = \"value\"",
     "```",
     "<<~ ahu #child >>",
@@ -145,7 +145,7 @@ async function main(): Promise<void> {
     failures.push("slot-structure probe: parent slot child not found");
   } else {
     if (parentSlot["field"] !== "value") {
-      failures.push(`slot iam field not parsed: ${JSON.stringify(parentSlot["field"])}`);
+      failures.push(`slot meta field not parsed: ${JSON.stringify(parentSlot["field"])}`);
     }
     if (typeof parentSlot["$preamble"] !== "string" || !(parentSlot["$preamble"] as string).includes("leading slot prose")) {
       failures.push(`slot preamble missing or wrong: ${JSON.stringify(parentSlot["$preamble"])}`);
@@ -158,7 +158,7 @@ async function main(): Promise<void> {
   // J.2c — round-trip emission via exportMemeText (markdown-meme scope).
   // Inject the slot child fields into the wiki and render through the
   // meme-template; output should reconstruct the operator's original
-  // slot body — preamble + iam toml + postamble.
+  // slot body — preamble + meta toml + postamble.
   if (parentSlot) {
     for (const t of slotResults) {
       engine.setTiddler(t as unknown as Record<string, string | string[]>);
@@ -171,8 +171,8 @@ async function main(): Promise<void> {
       failures.push(`slot round-trip lost postamble; got: ${rendered.slice(0, 300)}`);
     }
     // the emitter may align the toml assignment — match the field through flexible spacing.
-    if (!rendered.includes("```toml iam") || !/field\s+= "value"/.test(rendered)) {
-      failures.push(`slot round-trip lost iam toml; got: ${rendered.slice(0, 300)}`);
+    if (!rendered.includes("```toml meta") || !/field\s+= "value"/.test(rendered)) {
+      failures.push(`slot round-trip lost meta toml; got: ${rendered.slice(0, 300)}`);
     }
   }
 
@@ -190,8 +190,8 @@ async function main(): Promise<void> {
   console.log(`  sigil-ahu wikitext tiddler present (~ahu + ~kahea~ahu defined)`);
   console.log(`  wikitext sigil tiddlers present; render probes live in integration flow tests`);
   console.log(`  deserializer captured prologue + postamble fields on parent`);
-  console.log(`  slot-structure split: preamble + iam fields + postamble on slot child`);
-  console.log(`  slot round-trip emission: preamble + iam toml + postamble reconstructed via meme-template`);
+  console.log(`  slot-structure split: preamble + meta fields + postamble on slot child`);
+  console.log(`  slot round-trip emission: preamble + meta toml + postamble reconstructed via meme-template`);
   process.exit(0);
 }
 

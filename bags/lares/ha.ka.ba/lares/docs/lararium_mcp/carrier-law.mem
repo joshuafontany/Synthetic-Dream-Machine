@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
-```toml iam
+```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/carrier-law.mem"
 l-space         = "stable"
 mana            = 17
@@ -52,8 +52,8 @@ It should not begin from markdown files plus links.
 | Surface | Compiler check | Artifact consequence |
 |---|---|---|
 | doctype comment | present before active sigils | carrier class gate |
-| document opener | parses and matches `#iam.uri-path` | source identity |
-| `ahu #iam` | TOML payload parses | metadata extraction |
+| document opener | parses and matches `#meta.uri-path` | source identity |
+| `ahu #meta` | TOML payload parses | metadata extraction |
 | title / opening scope | readable boundary appears early | summary and receipt text |
 | body thresholds | open/close pair present | active body span |
 | six-glyph OODA-HA | compact loop present | process metadata |
@@ -122,7 +122,7 @@ Parser legality and render machinery stay separate.
 !! Composition as a Stack of Components
 
 ''A carrier is nameless but for its `lar:` address.'' Everything else it WEARS: components named in the
-iam `tags` field, each a carrier at its own address that speaks for what wearing it asks. Composition
+meta `tags` field, each a carrier at its own address that speaks for what wearing it asks. Composition
 stays additive — a carrier may wear `meme`, `loci`, `invariant` and any family's component at once.
 
 ''The stack carries no role vocabulary.'' No implements, no owns, no defines: a component means what
@@ -171,6 +171,6 @@ Carrier truth stays ahead of syntax swell.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;IjKuRBdR5t4CXcmIorOK2IQlsvfp8RKavr6JwiuDF5E
+<<^ code:"&#x0003;" >>ni:///sha-256;4kX-Jg9F7bYRrLFz0_oNAiKcvlysYwdZEpZJuIBI25I
 
 <<^ code:"&#x0004;" -> ? >>

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heleuma/ha >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma/ha.mem"
 mana      = 18
@@ -42,7 +42,7 @@ A heleuma-ha anchor exists outside the `lar:///` corpus ''by nature, not by stag
 
 !! Required Fields (SHALL)
 
-A meme that carries `heleuma-ha` SHALL declare in `#iam` TOML:
+A meme that carries `heleuma-ha` SHALL declare in `#meta` TOML:
 
 ```toml
 heleuma      = "ha"
@@ -58,6 +58,6 @@ It SHALL NOT declare `body-sha256` — ha does not promote.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;vkjli6aqvxL8dckFTOJ1iK_HwLudqaz9SsMOtYa0Phc
+<<^ code:"&#x0003;" >>ni:///sha-256;VMHEoEjhC2RNWlCgRHciHI5gJ8-1p9etn_Iv3JSxdYk
 
 <<^ code:"&#x0004;" -> ? >>

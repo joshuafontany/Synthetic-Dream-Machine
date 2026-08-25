@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph >>
-```toml iam
+```toml meta
 file-path        = "bags/lares/ha.ka.ba/lares/docs/graph.mem"
 l-space          = "stable"
 mana             = 17
@@ -65,7 +65,7 @@ They do not require further operator input.
 | `lifecycle: template` edges count as traversable | Templates declare intended connectivity. The static compiler walks declared intent; the `template/instance/trace` distinction matters for execution runtime, not hydration compilation. Bazel BUILD declarations drive the build graph before any runtime runs. |
 | `dir = "both"` maps to `traversal: source-to-target` | "Both" means both carriers declare awareness of the edge — not that the walker traverses both directions. The walker goes source → target. `dir` becomes metadata recorded in `PranalaEdge.payload` as `dir_hint`. |
 | `payload.continue/backlink` records as metadata, not walk directives | The static compiler produces loci sets and ordered lists; it does not execute coroutines. `payload.continue` annotates where the calling carrier expects to resume — recorded in edge payload for the boot receipt, honored by a future execution-graph compiler. |
-| Tier 0 declared-core stays as fast-path validation | `#iam.required-core` gives a pre-computed "what should appear in minimal boot" check. The pranala walk produces the source-of-truth set; the declared list cross-validates it. Mismatches surface in the receipt as a `declared_vs_walked` diffset. |
+| Tier 0 declared-core stays as fast-path validation | `#meta.required-core` gives a pre-computed "what should appear in minimal boot" check. The pranala walk produces the source-of-truth set; the declared list cross-validates it. Mismatches surface in the receipt as a `declared_vs_walked` diffset. |
 | Content-addressed artifacts via SHA256(carrier bytes + edge records) | Deterministic ordering of carrier bytes plus sorted edge records produces a stable hash. This makes boot receipts valid Anthropic prompt cache keys: identical source files always produce identical receipt hashes. |
 | Declared-unresolved forward refs stay in the graph | `family: control` unresolved targets surface as `dag_violations` (boot-critical errors). `family: relation` unresolved targets surface as `declared_unresolved` warnings. Neither causes compilation to fail. |
 
@@ -173,6 +173,6 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-EePgBwsC2tkplOx0PNHxlHwezWWZLNPxFkXqNUFf0E
+<<^ code:"&#x0003;" >>ni:///sha-256;jO7YzMlvRuhlVKqiKEJlB7-zsr0JsQ-I6TlIIDPjvUk
 
 <<^ code:"&#x0004;" -> ? >>

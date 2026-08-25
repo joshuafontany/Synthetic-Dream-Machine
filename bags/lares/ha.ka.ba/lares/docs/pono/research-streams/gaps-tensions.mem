@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions >>
-```toml iam
+```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions.mem"
 l-space   = "stable"
@@ -49,7 +49,7 @@ All three register in the grammar meme (2026-04-27), alongside `meme`, `mukuwai`
 
 ''Problem:'' the grammar meme does not distinguish compile-time from render-time sigils; a naïve parser might extract `wehe`/`huli`/`heihei` as graph edges at boot.
 
-''Resolution:'' add `layer = "compile" | "render" | "both"` to each `[[sigils]]` entry. Edge sigils (`aka`, `kahea`, …) get `both`; definition / conditional sigils get `render`; `ahu`, `iam`, `? ->` get `compile`.
+''Resolution:'' add `layer = "compile" | "render" | "both"` to each `[[sigils]]` entry. Edge sigils (`aka`, `kahea`, …) get `both`; definition / conditional sigils get `render`; `ahu`, `meta`, `? ->` get `compile`.
 
 !!! Gap 4 — Pragma `<<~!` dispatch — RESOLVED
 
@@ -127,6 +127,6 @@ Simple transclusion `{{Title}}` maps to `<<~ kahea lar:///uri >>`. Template tran
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;xV2AogOFZJsY2_-pZ-oMTuVzicHM9rmQdJKtSNLhRko
+<<^ code:"&#x0003;" >>ni:///sha-256;VldY0NeZcLYEevUJuYCRrJdHi7aqm4b1V7YmPixBL6A
 
 <<^ code:"&#x0004;" -> ? >>

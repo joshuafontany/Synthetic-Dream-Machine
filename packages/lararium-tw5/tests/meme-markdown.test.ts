@@ -15,7 +15,7 @@ const REPO = new URL("../../..", import.meta.url).pathname;
 const CARRIER = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/probe >>
-\`\`\`toml iam
+\`\`\`toml meta
 register = "Synthesis-Canon"
 uri-path = "ha.ka.ba/lares/api/pono/probe"
 \`\`\`
@@ -66,7 +66,7 @@ describe("the submission projection", () => {
         expect(line).not.toMatch(/^<<!DOCTYPE/);
       }
     }
-    expect(p.markdown).not.toContain("toml iam");
+    expect(p.markdown).not.toContain("toml meta");
     expect(p.uri).toBe("lar:///ha.ka.ba/lares/api/pono/probe");
     expect(p.check).toBe("ni:///sha-256;AAAA_probe_check");
     expect(p.meta).toContain("source: lar:///ha.ka.ba/lares/api/pono/probe");

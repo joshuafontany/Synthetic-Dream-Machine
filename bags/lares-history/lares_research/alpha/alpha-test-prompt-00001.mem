@@ -1,22 +1,22 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///lares_research/alpha/alpha-test-prompt-00001 >>
-```toml iam
+```toml meta
 file-path = "bags/lares-history/lares_research/alpha/alpha-test-prompt-00001.mem"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "lares_research/alpha/alpha-test-prompt-00001"
 ```
 
-<<~ ahu #iam >>
+<<~ ahu #meta >>
 ```toml
-# <<~ ahu #iam-ha "structure" >>
+# <<~ ahu #meta-ha "structure" >>
 name = "test-prompt-00001"
 file-path = "ha-ka-ba/alpha/alpha-test-prompt-00001.mem"
 content-type = "text/memetic-wikitext+tiddlywiki"
 version = "0.1-alpha"
 tulen = 0.55
 # <<~/ahu >>
-# <<~ ahu #iam-ka "detail" >>
+# <<~ ahu #meta-ka "detail" >>
 confidence = 8
 mana = 12
 manao = 14
@@ -25,7 +25,7 @@ meme-type = "alpha"
 register = "Synthesis"
 role = "session constitutional prompt, phase narration law, memory-load instruction, and failure-state indicator"
 # <<~/ahu >>
-# <<~ ahu #iam-ba "flow" >>
+# <<~ ahu #meta-ba "flow" >>
 pranala = [
   "lar:///ha.ka.ba/pono/memetic-wikitext",
   "lar:///ha.ka.ba/pono/meme",

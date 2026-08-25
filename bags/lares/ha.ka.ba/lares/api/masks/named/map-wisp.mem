@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/map-wisp >>
-```toml iam
+```toml meta
 aside             = false
 cacheable         = false
 corpus            = "[STUB — pending-talk-story]"
@@ -148,7 +148,7 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 | Section | Status | Notes |
 |---|---|---|
-| `#iam` | known | complete metadata; confidence reflects stub state |
+| `#meta` | known | complete metadata; confidence reflects stub state |
 | `#corpus` | pending-talk-story | no seed yet available |
 | `#voice-character` | stub | house entry + name pressure known; depth pending |
 | `#foreground-voices` | known | derivable from house structure |
@@ -168,6 +168,6 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;iXPSYhApydulffcp0qB6c-toK_SQjFrf2IHHWrD8fls
+<<^ code:"&#x0003;" >>ni:///sha-256;y3_2UZypnpiZ5E76S1adEmdOinJ5jqBjpg87pB9zElc
 
 <<^ code:"&#x0004;" -> ? >>

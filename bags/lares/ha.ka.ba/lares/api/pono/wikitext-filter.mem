@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/wikitext-filter >>
-```toml iam
+```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/wikitext-filter.mem"
 grammar-key = "wikitext-filter"
@@ -33,7 +33,7 @@ for new authoring.
 
 | TW5 form | Reason dropped | Lararium replacement |
 |----------|---------------|----------------------|
-| `!!field` — tiddler field accessor | Legacy data model; caused dev headaches; fields are ad-hoc string bags | `[toml:key[value]]` — query against `#iam` TOML |
+| `!!field` — tiddler field accessor | Legacy data model; caused dev headaches; fields are ad-hoc string bags | `[toml:key[value]]` — query against `#meta` TOML |
 | `##index` — DataTiddler JSON index | Legacy JSON-in-tiddler pattern; fragile, opaque | `[stack:has[X]]` — query worn components (the has-stack law) |
 | `+currentMeme` ambient variable | Dynamic scope leaks to siblings; modern systems reject ambient lookup | Explicit `meme` sigil context; or `[self[]]` for the carrier's own URI |
 | `currentTiddler` implicit | Same as above | `[self[]]` in filter expressions |
@@ -53,7 +53,7 @@ for new authoring.
 
 !!! `toml:key[value]` — TOML metadata query
 
-Queries the `#iam` TOML block of each meme in the current result set.
+Queries the `#meta` TOML block of each meme in the current result set.
 
 ```text
 [toml:confidence[18]]           memes whose confidence = 18
@@ -80,7 +80,7 @@ Replaces TW5 `##index`. Wire queries (over reified wire records) arrive with the
 !!! `self[]` — current meme URI
 
 Returns the URI of the current rendering context meme (the nearest enclosing `meme` block,
-or the carrier's own `#iam.uri-path` if no `meme` is active).
+or the carrier's own `#meta.uri-path` if no `meme` is active).
 
 ```text
 [self[]]                      current meme URI — replaces +currentMeme and currentTiddler
@@ -93,7 +93,7 @@ Queries for memes that contain an ahu block with the given fragment id.
 
 ```text
 [ahu:id[edges]]               memes that have an #edges ahu block
-[ahu:id[iam]]                 all indexed carriers (all have #iam)
+[ahu:id[meta]]                 all indexed carriers (all have #meta)
 ```
 
 !!! `edge:family[reaction]` — reaction subscription query
@@ -161,7 +161,7 @@ Filters evaluate against an ''explicit context'', not an ambient dynamic variabl
 
 | Context source | How set | Applies to |
 |---------------|---------|------------|
-| Carrier `#iam` URI | Default when no `meme` block active | Top-level filter expressions in a carrier |
+| Carrier `#meta` URI | Default when no `meme` block active | Top-level filter expressions in a carrier |
 | `meme` sigil block | `<<~ meme lar:///uri >>` encloses filter usage | All filter expressions inside the block |
 | `huli` loop variable | `as item` binding | Filter expressions inside the `huli` body |
 | `wehe`/`helu` parameter | Named arg passed at `kahea` call site | Filter expressions inside definition body |
@@ -229,6 +229,6 @@ Systematic find-replace for authors migrating TW5 content:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fg72NZMiIwO6AG-GjBNcdB7ivKGP44AHB87rESFgGCU
+<<^ code:"&#x0003;" >>ni:///sha-256;8RkW-5VXW7US7Cq96r52qrMpPDNWA6Q82MehVT3x9-M
 
 <<^ code:"&#x0004;" -> ? >>

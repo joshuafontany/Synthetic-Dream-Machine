@@ -126,7 +126,7 @@ export interface CreateAction extends ResidencyActionBase {
 /** One carrier of external content riding a LOAD verb. The operator-side
  *  gesture (which holds the disk/fetch grant) reads the source and sends the
  *  content WITH the verb — eventual-send, no island reach-back. `title` is
- *  optional when the carrier's own iam block names its uri-path. */
+ *  optional when the carrier's own meta block names its uri-path. */
 export interface LoadCarrier {
   readonly title?: string;
   /** File extension (e.g. ".mem", ".tid", ".json") — lets the island route a

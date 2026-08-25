@@ -20,7 +20,7 @@
  *   full ruleset mangles markdown under text/plain render.
  *
  * Canonical-form law (handoff #pattern-integrities §2): idempotent render;
- * framing (iam order/alignment, sigil spacing, block margins) normalizes
+ * framing (meta order/alignment, sigil spacing, block margins) normalizes
  * once; operator content bytes survive whole.
  *
  * Schema: lar:///ha.ka.ba/lares/api/lararium/schema/meme-write

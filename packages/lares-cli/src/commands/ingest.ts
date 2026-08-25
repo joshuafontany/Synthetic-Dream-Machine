@@ -28,7 +28,7 @@ import { carrierNeedsTag, tagBlobs } from "../tag-blobs.js";
 function printUsage(): void {
   console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--tag-blobs] [--in-wiki] [--yes]");
   console.log("  default    = preview (scan + two-leg diff, no submission);");
-  console.log("  --tag-blobs writes the CAS opt-in flag (`.meta` sidecar / meme ahu iam) for the");
+  console.log("  --tag-blobs writes the CAS opt-in flag (`.meta` sidecar / meme ahu meta) for the");
   console.log("             large un-flagged carriers that would fault at regenesis; writes no records;");
   console.log("  --apply    sends NEW+CHANGED carriers through the island's INGEST gate;");
   console.log("  --in-wiki  runs the INGEST in the active wiki island (the path for the working");

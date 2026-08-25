@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
-```toml iam
+```toml meta
 type     = "text/memetic-wikitext+tiddlywiki"
 uri-path = "ha.ka.ba/lares/api/pono/li-ki-integrities"
 ```
@@ -9,7 +9,7 @@ uri-path = "ha.ka.ba/lares/api/pono/li-ki-integrities"
 <<^ code:"&#x0002;" >>
 
 <<~ ॐ ँ ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
-```toml iam
+```toml meta
 cacheable = true
 hydrate   = true
 mana      = 17
@@ -163,6 +163,6 @@ Named empty seats, held open: ''value/preference'' (nothing yet reads what the n
 
 <<~ ॐ ँ -> ? >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;njshLSO7508ys1XKXPzEzYN4nHy78foc2McXYfncaLM
+<<^ code:"&#x0003;" >>ni:///sha-256;WZ_esv99V3PRD2EPzyTju-CGQU-hNfhDOAeZIRsA6MY
 
 <<^ code:"&#x0004;" -> ? >>

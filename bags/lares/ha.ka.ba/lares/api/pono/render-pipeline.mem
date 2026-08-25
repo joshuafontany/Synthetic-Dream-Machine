@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
-```toml iam
+```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/render-pipeline.mem"
 l-space       = "stable"
@@ -183,7 +183,7 @@ Some `ahu` slots are structural, not content — they MUST NOT render as tldraw 
 
 ```toml
 # Source: packages/lararium-tldraw/src/project.ts SUPPRESSED_WORKSITES
-suppressed-worksites = ["iam", "meme-body-open", "body-close", "edges"]
+suppressed-worksites = ["meta", "meme-body-open", "body-close", "edges"]
 ```
 
 <<~/ahu >>
@@ -255,6 +255,6 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1Cru-beIuDkwA0jr9aw7L6RCngv2O7Q9x0lHBmbeUqw
+<<^ code:"&#x0003;" >>ni:///sha-256;2Fst2HStyt6kDfW6_L7SFWVHF8g3JNPmE7bE-eqc8do
 
 <<^ code:"&#x0004;" -> ? >>

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heleuma >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma.mem"
 mana      = 18
@@ -48,7 +48,7 @@ A heleuma does not mark failure. It marks a ''named threshold crossing'' — the
 !! Heleuma Law (SHALL)
 
 # Every compiled-in artifact that cannot be a first-class `lar:` meme SHALL have a heleuma pair.
-# The API meme SHALL declare `heleuma = "ha"`, `"ka"`, or `"ba"` and a `module-ref` naming the code-file tiddler in `#iam`; its `#source` slot SHALL hold a `<$transclude>` window facing `module-ref` and SHALL NOT copy the source. ''One home for the code'': a copy makes two, and two homes for one source drift apart while every check between them chases the gap.
+# The API meme SHALL declare `heleuma = "ha"`, `"ka"`, or `"ba"` and a `module-ref` naming the code-file tiddler in `#meta`; its `#source` slot SHALL hold a `<$transclude>` window facing `module-ref` and SHALL NOT copy the source. ''One home for the code'': a copy makes two, and two homes for one source drift apart while every check between them chases the gap.
 # ''ha'' — body/structure: permanent territory; it declares no `body-sha256`.
 # ''ka'' — soul/fire: promotion-eligible. SHALL declare `source-symbol`. MAY declare `body-sha256` (gate layer 2 — content integrity). Keyhive capability proof marks gate layer 3 (planned; not yet implemented).
 # ''ba'' — psyche/path: quine-only path marker. `#source` slot sufficient for reconstruction. MAY declare `source-symbol` when a clear symbol boundary exists. When `source-symbol` is declared, MAY declare `body-sha256` for build-time drift detection. A `body-sha256` SHALL accompany a declared `source-symbol`.
@@ -86,6 +86,6 @@ A heleuma API meme that acquires:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qqwwqkENERzFHBd83OEsjpuvYpZ0lgzn4k8rRcgAemk
+<<^ code:"&#x0003;" >>ni:///sha-256;cq2smHqE-uxt9fxn4fEt1a04QEr_ohZBMhl6kIP2YjA
 
 <<^ code:"&#x0004;" -> ? >>

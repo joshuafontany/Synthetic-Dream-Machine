@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
-```toml iam
+```toml meta
 body-sha256   = "19f27816a8ab295a4bb00080242f0b0592d078c3d2b514cd946da1f396a5454e"
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/mu/the-law-of-5s.mem"

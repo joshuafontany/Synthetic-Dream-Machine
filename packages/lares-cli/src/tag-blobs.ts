@@ -12,10 +12,10 @@
  *   - a STANDALONE file (`.txt`, image, raw shard) gains a `<file>.meta` sidecar —
  *     a bare TW5 field-block `_lar_cas: yes` + `type: <media-type>`.
  *   - a MEME (`.mem`) with a SINGLE dominant blob-worthy ahu gains `_lar_cas = "yes"`
- *     on THAT ahu's own `toml iam` fence.
+ *     on THAT ahu's own `toml meta` fence.
  *
  * A meme whose body chunks across many small ahus (a MIND-BUNDLE, no single blob-ahu)
- * — or one whose blob-ahu carries no `toml iam` fence to stamp, or whose largeness
+ * — or one whose blob-ahu carries no `toml meta` fence to stamp, or whose largeness
  * splits across more than one ahu — REPORTS rather than mutates. When the shape reads
  * ambiguous the shore reports and leaves the canon untouched, never guess-and-mutate.
  *
@@ -44,10 +44,10 @@ export interface TagCarrier {
 
 export type TagKind =
   | "meta-written"          // standalone: a fresh `.meta` sidecar now flags it
-  | "ahu-tagged"            // meme: the dominant blob-ahu's iam fence now flags it
+  | "ahu-tagged"            // meme: the dominant blob-ahu's meta fence now flags it
   | "mind-bundle"           // meme: body chunked across small ahus, no single blob-ahu — left inline
   | "ambiguous-meme"        // meme: largeness splits across >1 ahu — reported, not mutated
-  | "meme-no-iam"           // meme: the blob-ahu carries no `toml iam` fence to stamp — reported
+  | "meme-no-meta"           // meme: the blob-ahu carries no `toml meta` fence to stamp — reported
   | "meta-exists-unflagged"; // standalone: a `.meta` sits beside it without the flag — reported
 
 export interface TagOutcome {
@@ -72,12 +72,12 @@ export function carrierNeedsTag(c: TagCarrier): boolean {
   return casBackstopFires(size, mediaType) || isOversizedBody(size);
 }
 
-/** Find the `toml iam` fence inside an absolute `[start, end)` span; returns the
+/** Find the `toml meta` fence inside an absolute `[start, end)` span; returns the
  *  offset of its closing fence (the ``` line) so a field inserts just above it, or
- *  null when the span carries no iam fence. */
-function iamFenceCloseOffset(text: string, start: number, end: number): number | null {
+ *  null when the span carries no meta fence. */
+function metaFenceCloseOffset(text: string, start: number, end: number): number | null {
   const span = text.slice(start, end);
-  const m = /```toml\s+iam\b[^\n]*\n[\s\S]*?\n```/.exec(span);
+  const m = /```toml\s+meta\b[^\n]*\n[\s\S]*?\n```/.exec(span);
   if (!m) return null;
   // m[0] ends with "\n```" — the closing backticks sit at the last three chars.
   return start + m.index + m[0].length - 3;
@@ -85,9 +85,9 @@ function iamFenceCloseOffset(text: string, start: number, end: number): number |
 
 /**
  * Stamp a meme body: locate the single dominant blob-worthy ahu (its body over the
- * CAS backstop floor) and insert `_lar_cas = "yes"` into that ahu's iam fence.
+ * CAS backstop floor) and insert `_lar_cas = "yes"` into that ahu's meta fence.
  * Reports (mutates nothing) for a mind-bundle (zero large ahus), an ambiguous split
- * (more than one), or a blob-ahu with no iam fence.
+ * (more than one), or a blob-ahu with no meta fence.
  */
 export function tagMemeText(text: string): { text: string; kind: TagKind; detail: string } {
   const blocks = findTopLevelAhuBlocks(text);
@@ -102,9 +102,9 @@ export function tagMemeText(text: string): { text: string; kind: TagKind; detail
     return { text, kind: "ambiguous-meme", detail: `${large.length} large ahus (${slots}) — reported, not tagged` };
   }
   const ahu = large[0]!.b;
-  const closeAt = iamFenceCloseOffset(text, ahu.bodyStart, ahu.bodyEnd);
+  const closeAt = metaFenceCloseOffset(text, ahu.bodyStart, ahu.bodyEnd);
   if (closeAt === null) {
-    return { text, kind: "meme-no-iam", detail: `blob-ahu ${ahu.slot} carries no toml iam fence — reported, not tagged` };
+    return { text, kind: "meme-no-meta", detail: `blob-ahu ${ahu.slot} carries no toml meta fence — reported, not tagged` };
   }
   const stamped = text.slice(0, closeAt) + '_lar_cas = "yes"\n' + text.slice(closeAt);
   return { text: stamped, kind: "ahu-tagged", detail: `flagged ahu ${ahu.slot}` };
@@ -112,7 +112,7 @@ export function tagMemeText(text: string): { text: string; kind: TagKind; detail
 
 /**
  * Write the CAS opt-in flag for ONE carrier that needs it. Standalone files gain a
- * `<file>.meta` sidecar; memes gain the ahu iam flag. Idempotent by construction —
+ * `<file>.meta` sidecar; memes gain the ahu meta flag. Idempotent by construction —
  * an already-flagged carrier never reaches here (the caller filters on
  * `carrierNeedsTag`), and an existing-but-unflagged `.meta` reports rather than
  * clobbering the operator's fields.

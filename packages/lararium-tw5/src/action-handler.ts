@@ -683,7 +683,7 @@ async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deser
       const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
       const title = own || (carrier.title ?? "");
       if (!title) {
-        throw new Error("LOAD: carrier produced a record without a title — supply carrier.title or an iam uri-path");
+        throw new Error("LOAD: carrier produced a record without a title — supply carrier.title or an meta uri-path");
       }
       const tiddler = { ...fields, title } as LarTiddlerRecord["tiddler"];
       const record: LarTiddlerRecord = { tiddler, meta: {} };

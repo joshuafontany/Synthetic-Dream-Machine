@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///last-sprint/HANDOFF >>
-```toml iam
+```toml meta
 file-path = "bags/lares-history/last-sprint/HANDOFF.mem"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/HANDOFF"
@@ -79,24 +79,24 @@ J.1 (meme-level framing): postamble symmetric with prologue. Pre-SOH
 content captured as `prologue`, post-ETX as `postamble`. Trim duplicated
 postamble from parent's text field (MemeStreamParser fullText extends
 past ETX in single-meme files).
-J.2a (slot-level framing): per-slot preamble/postamble + iam field
+J.2a (slot-level framing): per-slot preamble/postamble + meta field
 capture. Each slot is itself a "full published meme MD file" projection
-(operator-confirmed). preamble holds prose flanking the iam toml block,
-with `<<~ iam >>` sentinel marking iam's original position so prose can
+(operator-confirmed). preamble holds prose flanking the meta toml block,
+with `<<~ meta >>` sentinel marking meta's original position so prose can
 exist on either side. postamble holds prose after the last inner kahea
-ref. iam toml content extracted to native fields + raw bytes preserved
-as `iam-source`.
+ref. meta toml content extracted to native fields + raw bytes preserved
+as `meta-source`.
 J.2c (round-trip emission): pre-computed `preamble-rendered` field
-substitutes the iam sentinel with the regenerated toml block. Meme-
+substitutes the meta sentinel with the regenerated toml block. Meme-
 template emits via `<$text>` widget (not `{{!!field}}` transclude) —
 per Jermolene GH #6712, `\rules only` pragma scope doesn't propagate
 through field transclude. Bytes survive verbatim through round-trip.
 J.2b (default-elision): regenerateIamToml(fields, parentFields) walks
-iam-class fields (denylisted against TW5 system + Lar control fields),
-elides values matching parent's effective iam, emits remainder as toml.
+meta-class fields (denylisted against TW5 system + Lar control fields),
+elides values matching parent's effective meta, emits remainder as toml.
 splitRecursive threads parentIam through recursion so deep slots elide
-against immediate parent's effective iam (= inherited + own merged).
-Operator edits to native iam-class fields flow back to disk; inherited
+against immediate parent's effective meta (= inherited + own merged).
+Operator edits to native meta-class fields flow back to disk; inherited
 values disappear from emission unless overridden.
 ARCHITECTURE INVARIANT (operator-confirmed): always-split, always-kahea.
 Deserializer + <$lar-meme-split> widget split every ahu sigil into its
@@ -111,7 +111,7 @@ TW5 wiki change events only (MemeSyncAdaptor stamps `bag` field;
 projector reads it without touching Automerge). `wikiShadowPathStrategy`
 extended with bare `lar:///ha.ka.ba/{rest}` URI fallback. `deserializer.ts`
 threads `parentSourceFile` → child `file-path`. `LARARIUM_MEME_TEMPLATE_MARKDOWN_MEME`
-emits SOH+iam+STX+body+ETX+EOT for slot children. Plugin bundle rebuilt
+emits SOH+meta+STX+body+ETX+EOT for slot children. Plugin bundle rebuilt
 (`tsx scripts/build-plugin-tiddler.ts`). Nine files verified in
 `wikis/scratch/memes/docs/lares/the-lares-protocols/`.
 Next paths: end-to-end daemon smoke with `lares serve` + CLI promote
@@ -322,7 +322,7 @@ Files: `packages/lararium-node/src/open-admin-vm.ts`
 TW5Engine boots by pushing one envelope tiddler into `preloadTiddlers`; TW5's standard plugin loader unpacks. Wikirules split into three canonical files; parser/widgets/deserializer use TW5-canonical export shapes (Path A). Namespace alignment: every Lares system title in `lar:///`. Dual-distribution emits both canonical and drag-and-drop envelopes from one Vite bundle. In-process smoke (`scripts/smoke-plugin-boot.ts`) verifies plugin loads, parsers/widgets register, ahu/aka/kahea/loulou/pranala-header/pranala render as widgets, slot bodies round-trip with default-elision.
 
 !!! Sigil family ✅ (G.1→G.5 + J.1+J.2a/b/c)
-Six sigils ride the template-cascade architecture. Five share `widgets/_cascade-sigil-base.ts::makeCascadeSigilWidget(config)` — declarative widget definition (cascadeTag + fallbackTemplate + buildBindings + setCurrentTiddler? + refreshUri? + placeholder?). ahu stays bespoke. Slot-as-full-meme-MD-projection invariant: each slot has preamble (with `<<~ iam >>` position sentinel), iam-source (raw bytes), preamble-rendered (with sentinel substituted via regenerated toml), text (body proper with kahea refs), postamble (trailing prose). regenerateIamToml default-elides against parent's effective iam (inherited + own merged through splitRecursive recursion).
+Six sigils ride the template-cascade architecture. Five share `widgets/_cascade-sigil-base.ts::makeCascadeSigilWidget(config)` — declarative widget definition (cascadeTag + fallbackTemplate + buildBindings + setCurrentTiddler? + refreshUri? + placeholder?). ahu stays bespoke. Slot-as-full-meme-MD-projection invariant: each slot has preamble (with `<<~ meta >>` position sentinel), meta-source (raw bytes), preamble-rendered (with sentinel substituted via regenerated toml), text (body proper with kahea refs), postamble (trailing prose). regenerateIamToml default-elides against parent's effective meta (inherited + own merged through splitRecursive recursion).
 
 !!! Smoke ✅ — End-to-end daemon round-trip (2026-05-10)
 In-process smoke: deserialize + render + plugin boot — clean (27 shadow tiddlers, all 6 sigils render, slot round-trip verified).
@@ -350,9 +350,9 @@ Open question per sigil: does it own a child tiddler (slot child) or fragment-re
 The fourth call site of `parseMemeText`. `MemeSyncAdaptor.saveTiddler`'s `direct` strategy detects memetic-wikitext content, runs `splitMemeToTiddlers(title, text, fields)`, writes parent + child records to the bag, tombstones removed children. Symmetric with the disk-sync path — operator edits a parent meme in TW5 UX, inserts a new `<<~ ahu #foo >>body<<~/ahu >>`, hits save, and `lar:///parent#foo` appears in the bag autonomously. Same-grammar invariant the operator named: edit on disk OR edit in UX, identical result.
 
 !!! Path I — Wikifier DOCTYPE + dash + macrocall recovery
-Three small diff items in current round-trip output: HTML comment DOCTYPE dropped; TW5's `dash` rule converts `|---|` → `|—|`; MemeticParser's prologue handling (DOCTYPE, root iam toml extraction) survives but the wikifier swallows the comment in text/plain. Fix by either disabling rules at the parent meme rendering level (via a meme-level wrapper template that pragma-disables them), or by emitting these via `<$text>` widgets carrying the literal char sequences. Aesthetic, not load-bearing — defer until G+H ship.
+Three small diff items in current round-trip output: HTML comment DOCTYPE dropped; TW5's `dash` rule converts `|---|` → `|—|`; MemeticParser's prologue handling (DOCTYPE, root meta toml extraction) survives but the wikifier swallows the comment in text/plain. Fix by either disabling rules at the parent meme rendering level (via a meme-level wrapper template that pragma-disables them), or by emitting these via `<$text>` widgets carrying the literal char sequences. Aesthetic, not load-bearing — defer until G+H ship.
 
-!!! Path J — Per-slot iam emission with default-elision + recursive promote ✅ CLOSED
+!!! Path J — Per-slot meta emission with default-elision + recursive promote ✅ CLOSED
 J.1+J.2+J.3 all complete (2026-05-11). `action-handler.ts` enumerates `#fragment` children by URI prefix, confirms each still lives in the source bag, and co-promotes in one atomic ChangeOrigin. Returns `childrenPromoted: string[]` in the ceremony result.
 
 !!! Path K — F-arc deferred (TW5 routing rule + Yjs debounce + auto-truncate projection)
@@ -425,7 +425,7 @@ lares act MOVE <uri> --to <target-bag>
 * Some legacy daemon log noise: `TimeoutNegativeWarning` from Automerge repo on attach. Cosmetic.
 * `meme-sync-adaptor.ts:129` — `targetBag` default string is `"room"` (stale from rooms→wikis rename). Cosmetic; production callers always pass an explicit bag ID.
 * Heleuma drift: `ha.ka.ba/lararium/tw5/widgets/toml` needs `tsx scripts/sync-heleuma.ts --sync-modules --commit` to resolve.
-* `file-path` absent in child iam when tiddler is authored directly in TW5 UX (not synced from disk) — `source-file` field not set → `parentSourceFile` empty. Correct by design (no disk path exists yet); J.3 MOVE (residency ACTION) will set it once children land in canonical bag.
+* `file-path` absent in child meta when tiddler is authored directly in TW5 UX (not synced from disk) — `source-file` field not set → `parentSourceFile` empty. Correct by design (no disk path exists yet); J.3 MOVE (residency ACTION) will set it once children land in canonical bag.
 
 !! Active memory pointers (claude memory system)
 
@@ -465,6 +465,6 @@ lares act MOVE <uri> --to <target-bag>
 
 //The crystal holds.//
 
-<<^ code:"&#x0003;" >>ni:///sha-256;HY2_ny3KVITQEB4PccNGuda5A5O6aJvQ8BxcP3J9o9U
+<<^ code:"&#x0003;" >>ni:///sha-256;0K9Hts8ONGuyNy9XtfPm8HHzhqFg1-hhBrpiVNzOV5Q
 
 <<^ code:"&#x0004;" -> ? >>

@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/lib-smol-toml >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/lib-smol-toml.mem"
 mana      = 17
@@ -39,7 +39,7 @@ the import to this `require()` call via `rollupOptions.output.paths`.
 
 !! Consumers
 
-* `toml-ast.ts` — `parseTaploFields` for `#iam` field extraction (deserialize-time)
+* `toml-ast.ts` — `parseTaploFields` for `#meta` field extraction (deserialize-time)
 * future `toml` data-fence widget — named TOML blocks at render-time
 * operator-authored module tiddlers that declare TOML-structured data
 
@@ -56,7 +56,7 @@ smol-toml selected over alternatives:
 * Small — ~26 kB; largest single dependency in the plugin bundle
 * `@taplo/lib` remains the write/format surface (WASM, lazy-loaded) — comment-preserving patch
 
-Named TOML blocks (profile name present, profile != `iam`) surface as data accessible to the
+Named TOML blocks (profile name present, profile != `meta`) surface as data accessible to the
 widget layer. The UEFN device / Verse work drives this: TOML blocks describe device placement,
 component properties, and tick-scoped state in a WYSIWYG-friendly field structure.
 
@@ -72,6 +72,6 @@ component properties, and tick-scoped state in a WYSIWYG-friendly field structur
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;baogy7WfENWcBgqZxk60mrdQ172AKCujMYZjFAee-U0
+<<^ code:"&#x0003;" >>ni:///sha-256;vzcGrx3uI2en6XelkYszY6hWkMfGXYbnjtbPMmsdNfU
 
 <<^ code:"&#x0004;" -> ? >>

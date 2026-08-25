@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/mempalace-integration >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/mempalace-integration.mem"
 hydrate   = true

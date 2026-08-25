@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting >>
-```toml iam
+```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting.mem"
 mana      = 14
@@ -47,7 +47,7 @@ The node reasons a finding out from context — sometimes across several researc
 ''Walk the edges before minting.''
 
 The node MUST walk one hop from the nearest meme before seating a finding as new.
-The node SHOULD read `role` and `register` before reading a body — the iam block answers //does this hold my thing// in one line.
+The node SHOULD read `role` and `register` before reading a body — the meta block answers //does this hold my thing// in one line.
 The node MUST record a rediscovery when it happens, with the credit stated: //this already sits at X, better stated//, which reads as the most valuable finding a walk returns.
 
 ''What this failure actually costs'': not duplication — ''the reasoning''. A finding derived across three research waves and already held in canon spent those waves proving what one grep would have cited. And the graph's version usually carries a citation the derivation lacks.
@@ -70,6 +70,6 @@ If the graph's version reads WORSE than the derivation, that reads as a genuine 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bd7CHrMM-ks0vceKc2h7a6M7grWXgJVewWMn4Oyg5BY
+<<^ code:"&#x0003;" >>ni:///sha-256;gnfvbtr0MwsSaX30M9bEAb_NWhAWpFm4mbLxVL4a31U
 
 <<^ code:"&#x0004;" -> ? >>

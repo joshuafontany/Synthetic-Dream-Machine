@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
-```toml iam
+```toml meta
 type     = "text/memetic-wikitext+tiddlywiki"
 uri-path = "lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 ```
@@ -9,7 +9,7 @@ uri-path = "lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 <<^ code:"&#x0002;" >>
 
 <<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
-```toml iam
+```toml meta
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 file-path = "bags/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH.mem"
 type = "text/memetic-wikitext+tiddlywiki"
@@ -154,6 +154,6 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 
 <<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GXciCX3Mdwpsoil4etvE1v8QhoVWeNSuy9M9xCcP7mk
+<<^ code:"&#x0003;" >>ni:///sha-256;FOM2hybwwFOZqpMItZHHsexzG9_KHExWdRia_iAzHEg
 
 <<^ code:"&#x0004;" -> ? >>

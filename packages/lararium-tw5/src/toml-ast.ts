@@ -1,7 +1,7 @@
 /**
  * toml-ast — two-layer TOML engine for lossless carrier round-trips.
  *
- * Read  (#iam → fields, child fences): smol-toml — sync, spec-compliant, ~26 kB,
+ * Read  (#meta → fields, child fences): smol-toml — sync, spec-compliant, ~26 kB,
  *        handles inline comments and TOML tables without a WASM init step.
  *
  * Write (patch key, normalize):        @taplo/lib — WASM, lazy-loaded on first
@@ -55,7 +55,7 @@ function flattenTomlValue(
 export function parseTaploFields(
   toml:     string,
   warnings: string[] = [],
-  context = "#iam",
+  context = "#meta",
 ): TiddlerFields {
   try {
     const decoded = smolParse(toml) as Record<string, unknown>;

@@ -32,7 +32,7 @@ export const AHU_CLOSE_RE = /<<~\/ahu\s*>>/g;
  * child tiddlers. Per memetic-wikitext.md §161 (Ahu Control Slots).
  */
 export const CONTROL_SLOTS: ReadonlySet<string> = new Set([
-  "#iam", "#exit",
+  "#meta", "#exit",
   "#stream-open", "#stream-close", "#stream-exit",
   "#body-open", "#body-close", "#meme-body-open", "#meme-body-close",
 ]);

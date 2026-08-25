@@ -141,7 +141,7 @@ function extractSymbol(srcPath: string, symbol: string): string | null {
 // ---------------------------------------------------------------------------
 
 
-// Patches body-sha256 in the first ```toml block (the root toml iam prelude).
+// Patches body-sha256 in the first ```toml block (the root toml meta prelude).
 // Adds the field if absent; replaces it if stale. The emitted value rides
 // ALGORITHM-TAGGED (`sha256:<hex>`) — `verifySha256` (the runtime cold-boot reader)
 // and this script's own drift check both dual-read via `digestsEqual`, so a field
@@ -610,7 +610,7 @@ function scaffoldDecoratorMeme(d: DecoratorFile): void {
   const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
 <<^ code:"&#x0001;" ? -> lar:///${uriPath} >>
-\`\`\`toml iam
+\`\`\`toml meta
 uri-path    = "${uriPath}"
 file-path   = "${filePath}"
 type        = "text/memetic-wikitext+tiddlywiki"

@@ -7,6 +7,6 @@ lar-pattern: ```toml(?:[ \t]+([A-Za-z0-9_-]+))?[ \t]*\n([\s\S]*?)```
 type: text/vnd.tiddlywiki
 
 <!-- toml — TOML data fence. Optional profile name in group 1.
-     Profile 'iam' = carrier identity prelude; dissolves into parent tiddler fields via parseTaploFields.
+     Profile 'meta' = carrier identity prelude; dissolves into parent tiddler fields via parseTaploFields.
      Any other profile name (or absent) = general-purpose data block; content available to widget layer.
      Parser: smol-toml via lar:///ha.ka.ba/lararium/tw5/lib/smol-toml. -->

@@ -6,7 +6,7 @@ _DOC = (
     "<<~ ahu #entry >>\n"
     "! The Hearth\n"
     "prose rides beneath the carrier\n"
-    "```toml iam\n"
+    "```toml meta\n"
     "mana = 16\n"
     "```\n"
     "<<~/ahu >>\n"
@@ -56,7 +56,7 @@ def test_document_symbols_nest_by_containment():
     syms = ml.document_symbols(_DOC)
     assert [s["name"] for s in syms] == ["ahu #entry"]
     inner = [c["name"] for c in syms[0]["children"]]
-    assert "The Hearth" in inner and "toml iam" in inner
+    assert "The Hearth" in inner and "toml meta" in inner
 
 
 def test_tw5_forms_parse_as_structure():

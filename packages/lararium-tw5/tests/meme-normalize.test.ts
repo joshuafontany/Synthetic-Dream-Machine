@@ -1,9 +1,9 @@
 /**
  * meme-normalize — the SOH-namespace canonicalization the `lares normalize`
- * gesture applies. The class oracle.md tripped: an iam that declares a
+ * gesture applies. The class oracle.md tripped: an meta that declares a
  * namespace whose SOH opener does not carry it (round-trip drift + lost
- * idempotence). The transform homes the iam-declared namespace into the SOH
- * as literal glyphs; the iam field is authoritative.
+ * idempotence). The transform homes the meta-declared namespace into the SOH
+ * as literal glyphs; the meta field is authoritative.
  */
 
 import { describe, test, expect } from "vitest";
@@ -11,13 +11,13 @@ import { normalizeMemeSource } from "../src/meme-normalize.js";
 
 const HEAD = (soh: string, ns: string) =>
   `<!-- <<~ !DOCTYPE = lar:///x >> -->\n\n${soh}\n` +
-  "```toml iam\n" +
+  "```toml meta\n" +
   `cacheable = true\n` +
   (ns === "" ? "" : `namespace = "${ns}"\n`) +
   "```\n\n<<^ code:\"&#x0002;\" >>\n\nbody\n\n<<^ code:\"&#x0003;\" >>\n";
 
 describe("normalizeMemeSource — SOH namespace embed", () => {
-  test("homes the iam-declared namespace into a bare SOH (the oracle.md class)", () => {
+  test("homes the meta-declared namespace into a bare SOH (the oracle.md class)", () => {
     const src = HEAD("<<^ code:\"&#x0001;\" ? -> lar:///x >>", "&#x2299;");
     const { text, changed, notes } = normalizeMemeSource(src);
     expect(changed).toBe(true);
@@ -41,7 +41,7 @@ describe("normalizeMemeSource — SOH namespace embed", () => {
     expect(r2.changed).toBe(false);
   });
 
-  test("re-homes a STALE SOH namespace to match iam", () => {
+  test("re-homes a STALE SOH namespace to match meta", () => {
     const src = HEAD("<<^ code:\"&#x0001;\" namespace:\"ॐ ँ\" ? -> lar:///x >>", "&#x2299;");
     const { text, changed } = normalizeMemeSource(src);
     expect(changed).toBe(true);
@@ -49,7 +49,7 @@ describe("normalizeMemeSource — SOH namespace embed", () => {
     expect(text).not.toContain("ॐ ँ&#x0001;");
   });
 
-  test("clears the SOH namespace when iam declares none", () => {
+  test("clears the SOH namespace when meta declares none", () => {
     const src = HEAD("<<^ code:\"&#x0001;\" namespace:\"⊙\" ? -> lar:///x >>", "");
     const { text, changed } = normalizeMemeSource(src);
     expect(changed).toBe(true);
@@ -78,10 +78,10 @@ describe("normalizeMemeSource — SOH opener spacing", () => {
   });
 });
 
-// iam head with a register field, for the register-band class.
+// meta head with a register field, for the register-band class.
 const REG_HEAD = (register: string) =>
   `<!-- <<~ !DOCTYPE = lar:///x >> -->\n\n<<^ code:"&#x0001;" ? -> lar:///x >>\n` +
-  "```toml iam\n" +
+  "```toml meta\n" +
   `cacheable = true\n` +
   `register = "${register}"\n` +
   "```\n\n<<^ code:\"&#x0002;\" >>\n\nbody\n\n<<^ code:\"&#x0003;\" >>\n";

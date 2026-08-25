@@ -77,7 +77,7 @@ export async function cmdBagList(args: ParsedArgs): Promise<number> {
         console.log(`  ${r.bag.padEnd(18)} ${r.tier.padEnd(13)} ${home.padEnd(22)} ${marks}`);
       }
       console.log("");
-      console.log("  undeclared = carries no iam.mem; it reads at the fail-closed default (veil / hearth).");
+      console.log("  undeclared = carries no meta.mem; it reads at the fail-closed default (veil / hearth).");
       console.log("  ADRIFT     = its bytes sit somewhere its own declaration does not point at.");
     },
   });

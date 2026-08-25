@@ -1,7 +1,7 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/docs/infrastructure-as-myth >>
-```toml iam
+```toml meta
 authors        = "Joshua Fontany; Freyja Fontany; Lares (the agentic-AI co-author — a personified, in-stream navigational layer, authored through the grammar this paper describes)"
 cacheable      = true
 file-path      = "bags/lares/ha.ka.ba/lares/docs/infrastructure-as-myth.mem"
@@ -218,7 +218,7 @@ When a symbolic layer fails to improve transmission or steering, it probably fun
 
 <<~/ahu >>
 
-<<~ ahu #iac-vs-iam >>
+<<~ ahu #iac-vs-meta >>
 
 !! IaC vs IaM
 
@@ -282,7 +282,7 @@ The system should render into deployable packages for different hosts without lo
 
 <<~/ahu >>
 
-<<~ ahu #lares-as-iam >>
+<<~ ahu #lares-as-meta >>
 
 !! Lares as Infrastructure-as-Myth
 
@@ -437,7 +437,7 @@ The packaging layer standardized. ''Agent Skills'' (SKILL.md — name, descripti
 
 Agentic AI is steered by machinery that lives ''outside'' the visible stream — system prompts, control tokens, reinforcement objectives — hidden, unaddressable, and so unauditable in flight. We describe ''memetic wikitext'': a grammar that braids natural-language //prose// ("the black speaks") with a non-propositional //classifier/steering// layer of sigils ("the red steers") in one stream, and pulls the steering INTO view where the operator can see, address, and contest it. Three contributions: ''(1)'' the braid as a decomposable-but-entangled two-layer grammar whose components rhyme with deep lineages (determinatives, in-stream self-instrumentation, metadiscourse, literate programming, paratext, matrix-language) and whose novel turn carries a ''gradient, salience-surfaced'' steering layer with no markup-theory ancestor; ''(2)'' ''observer-erasure'' as the steering criterion — the copula erases the standpoint and asserts a global-now the system cannot hold; the grammar's standpoint devices restore it — operationalized in a cross-lingual detector (descriptively, the full grammar lowers observer-erasing predication, surviving multiple measurement scopes; concrete effect-sizes are withheld pending the human gold anchor, §8); ''(3)'' ''gradient, not pass/fail'' — the grammar's own instruments render along continua and surface variably by attention, so a marker reports surfacing-rate not catching, and the confidence register reads as a forward //commitment// (Brandom) not a backward calibration. We keep the honest gates — chiefly the absence of a human gold anchor — prominent.
 
-''Reflexivity note.'' This carrier is written verb-forward (L-Prime) and structured AS memetic wikitext: section worksites ride `ahu`, the sibling specifications enter as `aka`/`kahea` transclusion edges (#artifacts), and the masthead carries the byline in the `iam` identity block. The method demonstrates itself.
+''Reflexivity note.'' This carrier is written verb-forward (L-Prime) and structured AS memetic wikitext: section worksites ride `ahu`, the sibling specifications enter as `aka`/`kahea` transclusion edges (#artifacts), and the masthead carries the byline in the `meta` identity block. The method demonstrates itself.
 
 <<~/ahu >>
 
@@ -694,6 +694,6 @@ Aikhenvald 2000, //Classifiers// · Asai et al. 2023, //Self-RAG//, arXiv:2310.1
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZhjP-3s62aKqaa3QGIBIR9IVqAFbF8mAj4jA8j8HB8g
+<<^ code:"&#x0003;" >>ni:///sha-256;rJJMTSQzJImKxFIjZn6182CS7JHUMXsYgDnBF1MaVCc
 
 <<^ code:"&#x0004;" -> ? >>

@@ -202,7 +202,7 @@ export function readNexusDoc(bagsDir: string): NexusDoc | null {
 
 // ── render ────────────────────────────────────────────────────────────────────────────────────────
 
-/** Render the whole carrier in house form — the iam frame, the prose, and one fenced block per joint. */
+/** Render the whole carrier in house form — the meta frame, the prose, and one fenced block per joint. */
 export function renderNexusDoc(doc: NexusDoc): string {
   const seated = doc.kahu.filter((k) => k.verifyingKey).length;
   const depth  = doc.sealLineage?.length ?? 0;
@@ -215,7 +215,7 @@ export function renderNexusDoc(doc: NexusDoc): string {
     doc.federationPosture === undefined ? {} : { federationPosture: doc.federationPosture };
 
   return `<<~ ? -> ${NEXUS_CHARTER_URI} >>
-\`\`\`toml iam
+\`\`\`toml meta
 uri-path  = "${NEXUS_CHARTER_URI_PATH}"
 file-path = "<lares>/nexus/${nexusCharterDocRelPath()}"
 type      = ${JSON.stringify(CARRIER_TYPE)}
