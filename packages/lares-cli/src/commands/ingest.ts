@@ -29,7 +29,7 @@ function printUsage(): void {
   console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--tag-blobs] [--in-wiki] [--yes]");
   console.log("  default    = preview (scan + two-leg diff, no submission);");
   console.log("  --tag-blobs writes the CAS opt-in flag (`.meta` sidecar / meme ahu meta) for the");
-  console.log("             large un-flagged carriers that would fault at regenesis; writes no records;");
+  console.log("             large un-flagged carriers that would fault at rebirth; writes no records;");
   console.log("  --apply    sends NEW+CHANGED carriers through the island's INGEST gate;");
   console.log("  --in-wiki  runs the INGEST in the active wiki island (the path for the working");
   console.log("             write-layer ingest-back — a wikis/ source derives its URIs off that layer).");
@@ -56,7 +56,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   // observation survives the move (see applyConfirmedRenames, post-submit).
   const renameDeletions = scan.renameDeletions ?? [];
 
-  // Carriers that would hit the ungated-large-inline wall at regenesis, still
+  // Carriers that would hit the ungated-large-inline wall at rebirth, still
   // un-flagged — the readiness law reads off text the scan already holds.
   const wouldFault = rows.filter((r) => carrierNeedsTag(r));
 
@@ -94,7 +94,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
         for (const r of rows) console.log(`  ${r.status.toUpperCase().padEnd(10)} ${r.uri}`);
         for (const f of skipped) console.log(`  SKIPPED    ${f} (no loci derivation — outside bags//wikis/, non-.md, or rootless interior)`);
         console.log(`\n  ${rows.length} scanned · ${candidates.length} would submit · preview only (pass --apply)`);
-        if (wouldFault.length > 0) console.log(`  ${wouldFault.length} large un-flagged file(s) would fault on regenesis — run \`--tag-blobs\` to flag them.`);
+        if (wouldFault.length > 0) console.log(`  ${wouldFault.length} large un-flagged file(s) would fault at rebirth — run \`--tag-blobs\` to flag them.`);
       },
     });
     return 0;

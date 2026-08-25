@@ -86,7 +86,7 @@ type Verb = (typeof VERBS)[number];
 const LIFECYCLE: Readonly<Record<string, (a: ParsedArgs) => Promise<number> | number>> = {
   // `setup` STANDS the sovereign organs, and founding never reaches it (operator ruling, 2026-08-08).
   // A vessel founds and serves without a single sensorium, so standing one rides its own act — on the
-  // door that already owns every other thing done to a sensorium. Folding it into `wake --install`
+  // door that already owns every other thing done to a sensorium. Folding it into `vessel stand --install`
   // would make the memory tooling read as part of the base install.
   setup:     cmdSenseSetup,
   recall:    cmdRecall,
@@ -260,10 +260,9 @@ export async function cmdSense(args: ParsedArgs): Promise<number> {
  * `lares sense setup` — stand the SOVEREIGN sensorium organs (content · structure · form · persistence ·
  * mesh), idempotently.
  *
- * SOVEREIGN ONLY, and the boundary is old: the guest `~/.mempalace` stands in its own lane, raised by a
- * deliberate act, because the boot must never write the comparator it measures against. What changed is
- * that FOUNDING no longer stands these either — a vessel founds and serves carrying no sensorium at all,
- * and the memory tooling arrives when the operator asks for it.
+ * SOVEREIGN ONLY. The guest `~/.mempalace` stands in its own lane, raised by a deliberate act, because
+ * the boot must never write the comparator it measures against. FOUNDING stands neither: a vessel founds
+ * and serves carrying no sensorium at all, and the memory tooling arrives when the operator asks for it.
  *
  * The py organs import the mempalace library as code, so a machine wanting these wants
  * `lares mempalace install` first; this reports rather than assumes.

@@ -259,13 +259,13 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # second rides what the first warmed, so a constant tuned on the warm case fails the cold one.
   # THE DEADLINE COMES FROM THE CLI'S OWN CONTRACT, never from a number this harness picked. `wake`
   # budgets 120s for the socket and says why in its source: the UDS binds LATER than `vessel-ready` and
-  # later than the WS port — "on a cold boot (post-regenesis), tens of seconds later". An earlier 60s here
+  # later than the WS port — "on a cold boot (post-rebirth), tens of seconds later". An earlier 60s here
   # sat at HALF that budget, so two cycles reported a dead node while the node was alive and still booting;
   # the TCP port answered the whole time, which let every movement after it pass. A harness that
   # out-waits the thing it measures reports on its own patience.
   step "the node from ② answers"
   SOCK="$ROOT/data/lares/vessel/lares.sock"
-  WAKE_LOG="$ROOT/data/lares/vessel/wake-serve.log"
+  STAND_LOG="$ROOT/data/lares/vessel/stand.log"
   WAITED=0
   while [ ! -S "$SOCK" ] && [ "$WAITED" -lt 120 ]; do sleep 1; WAITED=$((WAITED + 1)); done
   if [ -S "$SOCK" ]; then
@@ -274,11 +274,11 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
     bad "no socket after ${WAITED}s"
     # SAY WHAT THE NODE SAID. The boot log is the one artifact that answers "stalled, faulted, or slow",
     # and the burn destroys it — so it speaks HERE, while it still stands.
-    if [ -f "$WAKE_LOG" ]; then
-      printf '      ── wake-serve.log (tail) ──\n'
-      tail -12 "$WAKE_LOG" | sed 's/^/      /'
+    if [ -f "$STAND_LOG" ]; then
+      printf '      ── stand.log (tail) ──\n'
+      tail -12 "$STAND_LOG" | sed 's/^/      /'
     else
-      printf '      (no wake-serve.log at %s — the node never wrote one)\n' "$WAKE_LOG"
+      printf '      (no stand.log at %s — the node never wrote one)\n' "$STAND_LOG"
     fi
   fi
 
@@ -289,9 +289,9 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   else bad "sealed nothing"; printf '%s\n' "$out" | tail -4 | sed 's/^/      /'; fi
 
   # THE STANDING CONDITION BEGINS HERE. Sealing writes sealExpected into the config, which the clear does
-  # not remove, so every later daemon boot wants the base var. ⑤ no longer boots one — it plants content
-  # into the vessel already standing from ② — but the var still rides from this point, because that is
-  # what a sealed vessel commits its operator to and the harness walks the operator's own order.
+  # not remove, so every later daemon boot wants the base var. ⑤ boots nothing — it plants content into
+  # the vessel already standing from ② — and the var still rides from this point, because that is what a
+  # sealed vessel commits its operator to and the harness walks the operator's own order.
   export LARES_ARCHIVE_PASSPHRASE="$PASS_DRILL"
   run "④ vault status"                      lares vault status
   # ⑤ SEEDS, and does not rebirth. Rebirth composes stop · clear · bake · stand · seed, which on a fresh

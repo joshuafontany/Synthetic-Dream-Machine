@@ -415,7 +415,7 @@ function printHelp(): void {
   console.log("The SIDECAR lane. mempalace is a separate tool the vessel never assumes: founding stands the");
   console.log("VESSEL and nothing else, and both the library and the guest store arrive by a deliberate act.\n");
   console.log("Verbs:");
-  console.log("  install             the LIBRARY deps (submodule + pip). Left `wake --install` 2026-08-08 —");
+  console.log("  install             the LIBRARY deps (submodule + pip). Its own door since 2026-08-08 —");
   console.log("                      it writes OUTSIDE the vessel root, so founding could never be isolated.");
   console.log("                      The sovereign organs stand separately: `lares sense setup`.");
   console.log("  setup               raise the guest: `mempalace init` + pin hooks.auto_save=false (idempotent)");
@@ -470,7 +470,7 @@ export async function cmdMempalace(args: ParsedArgs): Promise<number> {
  *
  * FOUNDING NEVER REACHES IT (operator ruling, 2026-08-08). This writes OUTSIDE the vessel root, into the
  * operator's real Python environment — so a founding that ran it could never stay isolated, and a throwaway
- * rehearsal would touch the machine it rehearses on. `wake --install` stands the vessel; a separate tool
+ * rehearsal would touch the machine it rehearses on. `vessel stand --install` stands the vessel; a separate tool
  * answers on its own door.
  *
  * The mempalace is a READ-ONLY sidecar submodule. A vessel founds and serves without it; what it unlocks is

@@ -19,6 +19,7 @@
     "sensorium",
     "test-quine",
     "heleuma",
+    "project-md",
     "normalize",
     "vault",
     "library",
@@ -28,9 +29,7 @@
     "edge",
     "raise",
     "nexus",
-    "device-admit",
-    "invite-send",
-    "invite-receive"
+    "device-admit"
   ],
   "mirrored": [
     "pour",
@@ -107,6 +106,7 @@
     "sensorium",
     "test-quine",
     "heleuma",
+    "project-md",
     "normalize",
     "vault",
     "library",
@@ -116,8 +116,6 @@
     "edge",
     "raise",
     "nexus",
-    "device-admit",
-    "invite-send",
-    "invite-receive"
+    "device-admit"
   ]
 }

@@ -14,7 +14,7 @@
  *   pin <url> [--reason <text>]   — never evict this bag from RAM
  *   unpin <url>                   — remove the cooling exemption (bag rejoins the LRU sweep)
  *   stats                         — pinned / wela / anu residency snapshot
- *   register-cold <url>           — mark URL as known-but-not-loaded (oracle stub)
+ *   register-cold <url>           — mark URL as known-but-not-loaded (the oracle entry alone)
  *   compact <url>                 — DXOS-style snapshot-restart; bounds history
  *   list                          — every bag: declared tier + home, and whether it sits where it belongs
  *   show <bag>                    — one bag's declaration, resolved on this vessel
@@ -78,7 +78,7 @@ const SUBCOMMANDS: Readonly<Record<string, { handler: BagSubcommand; summary: st
   "pin":           { handler: cmdPin,          summary: "Pin a bag URL — daemon never evicts it. Needs `lares vessel stand --foreground`." },
   "unpin":         { handler: cmdUnpin,        summary: "Unpin a bag URL — removes the cooling exemption; the bag rejoins the LRU sweep. Needs `lares vessel stand --foreground`." },
   "stats":         { handler: cmdResidency,    summary: "Print the daemon's bag residency snapshot. Needs `lares vessel stand --foreground`." },
-  "register-cold": { handler: cmdRegisterCold, summary: "Mark a bag URL as known-but-not-loaded (oracle stub). Needs `lares vessel stand --foreground`." },
+  "register-cold": { handler: cmdRegisterCold, summary: "Mark a bag URL as known-but-not-loaded — the oracle entry alone, no tiddlers loaded. Needs `lares vessel stand --foreground`." },
   "compact":       { handler: cmdBagCompact,     summary: "DXOS-style snapshot-restart on one bag. Bounds history; lossy by design." },
   // ── The LIFECYCLE half. Everything above answers a RUNTIME question (is this doc in RAM); these answer
   // what a bag IS, who may read it, where it belongs, and how to move it — the questions a bag could not

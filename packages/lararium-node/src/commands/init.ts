@@ -48,7 +48,7 @@ export interface InitOptions {
   /**
    * Path to a device-admit/v1 JSON payload. When provided, skips the founding
    * ceremony and admits this vessel to the operator's existing PersonaGroup + MeshCabal.
-   * Use for same-operator second vessel. Multi-operator join uses invite-receive.
+   * Use for same-operator second vessel. A second OPERATOR joins by carriage contract-receive.
    */
   readonly admitPayloadPath?: string;
 }

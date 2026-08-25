@@ -25,7 +25,7 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 
 python3 - <<'PY'
-import re, pathlib, subprocess, sys
+import re, json, pathlib, subprocess, sys
 
 RITE = pathlib.Path("bags/lararium/ha.ka.ba/lararium/mesh/founding-runbook.mem")
 BIN  = "packages/lares-cli/dist/src/bin/lares.js"
@@ -47,6 +47,39 @@ cmds = sorted({m.group(1) for m in re.finditer(
 CMDS_DIR = pathlib.Path("packages/lares-cli/src/commands")
 fail, subs_checked = [], 0
 
+# ── A SUB-DOOR READS AT A DISPATCH POSITION, NEVER AS A LOOSE STRING ────────────────────────────
+# Three shapes carry every dispatch in this CLI, and the VALUE side is half of each:
+#   · a `switch` case                         — `case "seal":`
+#   · a dispatch-map entry                    — `found: { summary … }` · `refresh: cmdRiteRefresh`
+#   · a comparison against the sub-door name  — `if (sub !== "sign")`
+#
+# Matching a quoted literal ANYWHERE in the module is what a substring test does, and it passes on the
+# very line that disproves it: `case "contract": return await cmdContract(args, "admit")` carries the
+# word `admit` as an ARGUMENT, so a rite instructing `lares nexus admit` read GREEN against a door that
+# answers `unknown verb "admit"`.
+#
+# The value side matters just as much when COUNTING. `emit()` payloads write `data:`, `human:` and
+# `error:` in every module alive, so a key-shaped match with no value test reports the CLI's object
+# vocabulary and calls it a surface — 220 verbs where the doors answer far fewer. Requiring a handler
+# or a dispatch record on the right of the colon is what keeps the figure a reading rather than a proxy.
+_HANDLER = r'(?:cmd[A-Za-z]|run[A-Z]|\{\s*(?:summary|composes|run|handler)\b)'
+# The comparison form binds to the sub-door VARIABLE, never to any `=== "x"` in the file: `nexus.ts`
+# carries `action === "admit"` over an INTERNAL parameter, and a loose comparison test waved the same
+# ghost door through that the substring test did.
+_SUBVAR  = r'(?:sub|subverb|subcmd|verb|op)'
+
+def dispatches(body: str, sub: str) -> bool:
+    s = re.escape(sub)
+    return bool(re.search(rf'case\s+["\'`]{s}["\'`]\s*:', body)
+                or re.search(rf'(?m)^\s*["\'`]?{s}["\'`]?\s*:\s*{_HANDLER}', body)
+                or re.search(rf'{_SUBVAR}\s*[=!]==?\s*["\'`]{s}["\'`]', body))
+
+def dispatch_keys(body: str) -> set:
+    """Every sub-door a module answers — the same derivation the check above runs, read forward."""
+    return ({m for m in re.findall(r'case\s+["\'`]([a-z][a-z0-9_-]*)["\'`]\s*:', body)}
+            | {m for m in re.findall(rf'(?m)^\s*["\'`]?([a-z][a-z0-9_-]*)["\'`]?\s*:\s*{_HANDLER}', body)}
+            | {m for m in re.findall(rf'{_SUBVAR}\s*[=!]==?\s*["\'`]([a-z][a-z0-9_-]*)["\'`]', body)})
+
 for c in cmds:
     parts = c.split()
     verb  = parts[0]
@@ -58,14 +91,9 @@ for c in cmds:
     module = CMDS_DIR / f"{verb}.ts"
     if not module.exists():
         continue                      # the door dispatches elsewhere; the top verb already answered
-    body = module.read_text()
     subs_checked += 1
-    # A sub-door reads as a quoted literal (switch case, comparison, quoted map key) OR as a bare
-    # object key in a dispatch map — `vessel.ts` writes the latter, and demanding quotes would
-    # manufacture a finding about a door that answers.
-    if not (re.search(rf'["\'`]{re.escape(sub)}["\'`]', body)
-            or re.search(rf'(?m)^\s*{re.escape(sub)}\s*:', body)):
-        fail.append(f"{c!r} — `{sub}` names no branch in commands/{verb}.ts")
+    if not dispatches(module.read_text(), sub):
+        fail.append(f"{c!r} — `{sub}` names no dispatch branch in commands/{verb}.ts")
 
 # ── AND EVERY CODE SYMBOL THE RITE CITES MUST EXIST ─────────────────────────────────────────────
 # The rite explains itself by pointing at functions — `provisionThresholdRecoveryAtFounding`,
@@ -81,8 +109,20 @@ ghosts = [c for c in cited if c.split("#")[-1] not in blob]
 for g in ghosts:
     fail.append(f"`{g}` — cited by the rite, defined nowhere in source")
 
+# ── THE SURFACE READS AT THE VERB, NEVER AT THE DOOR ────────────────────────────────────────────
+# A door count reports a collapse an operator cannot feel: the fan-out lives one level below the
+# number, so a surface halved by doors may not have moved at all. Both figures ride together — either
+# alone flatters — and both DERIVE, so neither can go stale in a file somebody has to remember.
+doors_json = subprocess.run(["node", BIN, "help", "--json"], capture_output=True, text=True)
+doors = json.loads(doors_json.stdout)["data"]["entries"] if doors_json.returncode == 0 else []
+addressable = 0
+for d in doors:
+    module = CMDS_DIR / f"{d['name']}.ts"
+    addressable += 1 + (len(dispatch_keys(module.read_text())) if module.exists() else 0)
+
 print(f"[rite-commands] {len(cmds)} commands instructed, {subs_checked} sub-doors checked, "
       f"{len(cited)} symbols cited")
+print(f"[rite-commands] the surface: {len(doors)} doors · {addressable} addressable verbs")
 if fail:
     for f in fail: print(f"    {f}")
     print("  The rite is the operator-instruction source — fix the RITE, or restore the door.")

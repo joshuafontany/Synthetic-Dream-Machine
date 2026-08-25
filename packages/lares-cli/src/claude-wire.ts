@@ -48,7 +48,7 @@ async function acquireLock(lockPath: string): Promise<void> {
 /**
  * Reap a stale `mempalace` MCP from ~/.claude.json. A harness holding its own palace holder reaches
  * PAST the node into the store — N sessions, N writers, one Chroma index. The `lares` seat below
- * replaces it; this removes what an older wiring left, so the decouple heals on the next wake.
+ * replaces it; this removes what an older wiring left, so the decouple heals on the next stand.
  */
 function reapMempalaceMcp(): ClaudeWireStep {
   const got = spawnSync("claude", ["mcp", "get", "mempalace"], { encoding: "utf8", timeout: 10_000 });
@@ -86,7 +86,7 @@ function registerLaresMcp(): ClaudeWireStep {
   }
   // A registration STANDING never proves it points ANYWHERE real. Presence-idempotence lets a moved
   // holder script leave this seat aimed at a deleted file while the wire reports success — the harness
-  // door shuts silently and every `wake --init` after it skips the cure. So converge on the RESOLVED
+  // door shuts silently and every `vessel stand --init` after it skips the cure. So converge on the RESOLVED
   // spawn, never on mere presence: a seat whose command/script drifts from what resolves now gets
   // RE-POINTED (remove → re-add), and an aligned seat passes untouched.
   let repointed = false;
@@ -138,7 +138,7 @@ interface HookSpec {
 }
 
 const HOOK_SPECS: readonly HookSpec[] = [
-  // Our wake hook is node (exec-form) → no shell, identical on Windows + Unix.
+  // The session-start hook is node (exec-form) → no shell, identical on Windows + Unix.
   { event: "SessionStart", script: "packages/lares-cli/.claude-plugin/hooks/lares-wake-hook.mjs", timeout: 15, runner: "node" },
   // OUR two-leg ingest hook (per-project mine + lar_* declared writeback), NOT the
   // submodule's hardcoded `--wing sessions` hook. mempalace's own plugin hooks still

@@ -24,7 +24,7 @@ export interface CommandHelp {
 export const COMMAND_HELP: Readonly<Record<string, CommandHelp>> = {
   sensorium: {
     synopsis:
-      "The source-neutral sensorium surface. `run` / `open` currently ingest a path into a scratch sensorium. " +
+      "The source-neutral sensorium surface. `run` / `open` ingest a path into a scratch sensorium. " +
       "`run` is ephemeral-DEFAULT: open → ingest → analyze → DISSOLVE on exit (success OR error). `open` " +
       "leaves it live to `query` / `keep` / `dissolve`. Every scratch is leak-proofed: " +
       "`dissolve --orphans` reaps anything an interrupted run left behind. Four planes stand over the " +

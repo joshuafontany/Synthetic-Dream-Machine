@@ -8,7 +8,7 @@
  *
  * Bare `lares flow` lists the seeds IN-PROCESS (they ship in @lararium/mesh — no daemon needed). A named run
  * reads the NDJSON signal matrix and routes to the daemon `flow` verb, which runs each cap-step by hull (the
- * daemon is the one seat that reaches both). The signal rides `--signal` for now (mirrors `mismatch`); the
+ * daemon is the one seat that reaches both). The signal rides `--signal` (mirrors `mismatch`); the
  * auto-extraction from a poured `--target` sensorium stays owed — `targets` ride as provenance only.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/flow
@@ -64,7 +64,7 @@ export async function cmdFlowRun(args: ParsedArgs): Promise<number> {
     return 0;
   }
 
-  // Run mode — the signal rides `--signal` for now (the auto-extraction from a poured target is owed).
+  // Run mode — the signal rides `--signal`; auto-extraction from a poured target stands OWED.
   const signal = args.options["signal"];
   const rows = typeof signal === "string" && signal.length > 0 ? readSignalMatrix(signal) : [];
   const namesOpt = args.options["names"];

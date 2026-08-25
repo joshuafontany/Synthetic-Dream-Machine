@@ -118,7 +118,7 @@ describe("what abides stands in the shrine, and shares no prefix with what a rit
     set("LAR_LIBRARY", undefined);
     set("XDG_DATA_HOME", "/x/data");
     set("XDG_STATE_HOME", "/x/state");
-    // What `lares vessel clear` pares (scripted.ts::resetTargets) + what regenesis reforges beneath it.
+    // What `lares vessel clear` pares (scripted.ts::clearTargets) + what regenesis reforges beneath it.
     const wipeRoots = [larDataDir(), larProjectionDir()];
     const abiding   = [larariumDataHome(), larLibraryHome(), memorySensoriumDir(), meshSensoriumDir(), memeticWikitextSensoriumDir()];
     expect(wipeRoots.every((w) => w.length > 0)).toBe(true);        // the resolvers RAN

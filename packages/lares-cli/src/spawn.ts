@@ -9,7 +9,7 @@
  *   2. Composition scripts (root `pnpm dev`) already wrap concurrency
  *      orchestration; re-implementing here would duplicate config.
  *
- * Subcommands whose logic is small AND benefits from in-vm reuse (`init`,
+ * Subcommands whose logic is small AND benefits from in-vm reuse (`found`,
  * future `promote`) live as library imports instead — see commands/init.ts.
  */
 

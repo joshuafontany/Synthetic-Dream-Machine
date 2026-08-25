@@ -55,7 +55,7 @@ if proc.returncode != 0 or not doors:
     sys.exit(1)
 
 # THE SUB-VERB MAP COMES FROM SOURCE, NEVER FROM INVOKING ANYTHING. A first draft discovered sub-verbs by
-# running each parent verb with no arguments — which is both slow and RECKLESS: `wake`, `regenesis` and
+# running each parent verb with no arguments — which is both slow and RECKLESS: `vessel stand`, `vessel rite rebirth` and
 # `reset` are not questions, and a witness that mutates the vessel it audits is worse than no witness.
 # So the sub-verbs get read out of each command module's own dispatch instead.
 CMDS = pathlib.Path("packages/lares-cli/src/commands")

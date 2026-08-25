@@ -88,7 +88,7 @@ produce is indistinguishable from a real fault, which is what makes them expensi
 confidently and answers wrong. Collide the instrument before believing what it says.
 
 **`lares vessel stand` DETACHES.** The launcher prints a status line and exits while the vessel it
-started keeps running and writes `<root>/data/lares/vessel/wake-serve.log`. A harness watching the
+started keeps running and writes `<root>/data/lares/vessel/stand.log`. A harness watching the
 launcher's pipe sees a vessel that reached `live` as one that printed nothing — the floor reported
 down while it is up. *Read the vessel's own log, never the launcher's stdout.*
 

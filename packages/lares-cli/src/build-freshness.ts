@@ -16,7 +16,7 @@
  *   - Idempotent          — every verb re-runs safely (`found` skips-if-founded, `stand`
  *                           attaches-or-starts, the build no-ops when current).
  *   - Fail-loud           — a build failure ABORTS; the daemon never runs from stale code.
- *   - Composable          — install = build + init + wake + wire, each step re-runnable.
+ *   - Composable          — install = build + found + stand + wire, each step re-runnable.
  *
  * An invocation `needsFreshBuild` accepts routes through `freshBuildGate` before its handler.
  * The `--skip-build` sentinel marks the re-exec'd child (build already done) so it runs

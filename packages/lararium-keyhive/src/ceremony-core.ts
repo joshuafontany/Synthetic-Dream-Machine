@@ -20,7 +20,7 @@
  *              └─▶ MeshCabal sentinel Document (Gate C at boot)
  *
  * At t=0, founding operator's PersonaGroup is the only MeshCabal member.
- * invite-send adds co-operators. The MeshCabal grows; this path never re-runs.
+ * the carriage contract adds co-operators. The MeshCabal grows; this path never re-runs.
  *
  * The TRUE NAME MODEL the ceremony enacts — two DISTINCT keys, one signed edge:
  *   · `vesselSeed` carries the PLACE's own key — minted per-install,

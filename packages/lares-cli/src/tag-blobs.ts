@@ -4,7 +4,7 @@
  * `lares ingest` already scans a bag and weighs every carrier's size + media
  * family (exactly the knowledge a blob-readiness verdict needs). This shore turns
  * that verdict into a WRITE: for each carrier that would hit the ungated-large-inline
- * wall at regenesis (a verb rides a reference, never a body), it stamps the opt-in
+ * wall at rebirth (a verb rides a reference, never a body), it stamps the opt-in
  * `_lar_cas` flag so the body externalizes to CAS on the next INGEST.
  *
  * Two carrier shapes carry the flag differently (mirror Tagwright's verified shape,
@@ -60,7 +60,7 @@ export interface TagOutcome {
 
 /**
  * Would this carrier hit the ungated-large-inline wall (or ride the un-flagged
- * backstop) at regenesis, and NOT already carry the opt-in flag? Reuses the exact
+ * backstop) at rebirth, and NOT already carry the opt-in flag? Reuses the exact
  * in-tree readiness law — the flag decides first (already opted in → no tag), then
  * the backstop-non-text family OR the oversized-text fault elects it. A small
  * un-flagged text body inlines pono and needs no tag.

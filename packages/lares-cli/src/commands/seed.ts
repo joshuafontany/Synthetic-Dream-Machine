@@ -1,5 +1,5 @@
 /**
- * `lares vessel seed` — plant the holdings back into the docs (the regenesis re-feed entity).
+ * `lares vessel seed` — plant the holdings back into the docs (the rebirth re-feed entity).
  *
  * A nameless entity composed of #has caps: disk-grant (bags/) · synced-tree · the two
  * existing feed gestures, kind-routed per holding:
@@ -12,7 +12,7 @@
  * IDEMPOTENT (causal-island law): each run converges from whatever state it finds —
  * a virgin Synced tree reads everything NEW; a converged tree no-ops per holding.
  * No toggles: whether a zero-new wave counts as failure belongs to the CALLER's flow
- * (the regenesis conductor refuses it right after a reset; a daily seed accepts it
+ * (the rebirth conductor refuses it right after a clear; a daily seed accepts it
  * as convergence).
  *
  *   lares vessel seed [--apply] [--yes]   — preview per holding by default (the ingest posture)
@@ -68,7 +68,7 @@ export function discoverHoldings(root: string): Array<{ holding: string; source:
 /**
  * Feed ONE holding back into its doc — the kind-route (ingest for system bags, CREATE+LOAD
  * for the rest), lifted out so the whole-store `seedRun` and the targeted single-bag L4
- * regenesis share ONE spelling of the re-feed. Returns this holding's verdict row.
+ * rebirth share ONE spelling of the re-feed. Returns this holding's verdict row.
  */
 export async function seedHolding(
   args: ParsedArgs,

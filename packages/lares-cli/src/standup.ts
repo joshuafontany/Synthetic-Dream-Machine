@@ -10,16 +10,16 @@
  *  - the operator keypair is load-or-create — never wiped (node-vessel-identity.ts);
  *  - `lares vessel found` self-guards on the bootstrap (skips the ceremony if present);
  *  - genesis is BUILD-IF-ABSENT ONLY — a rebuild can shift the CID and diverge a
- *    founded identity, so re-founding stays an explicit operator act (reset), never
- *    a wake. `--install` never passes `--force`.
+ *    founded identity, so re-founding stays an explicit operator act (`vessel clear`), never
+ *    a stand. `--install` never passes `--force`.
  */
 
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
 import { runCommand } from "./spawn.js";
-import { cmdInit } from "./commands/init.js";
-import { cmdBuildGenesis } from "./commands/scripted.js";
+import { cmdFound } from "./commands/found.js";
+import { cmdBake } from "./commands/scripted.js";
 import { checkMempalaceIntegration, installMempalaceIntegration } from "./integration-check.js";
 import { linkLaresGlobal, linkMempalaceBins } from "./link-bin.js";
 import type { ParsedArgs } from "./parse-args.js";
@@ -118,13 +118,13 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
   }
 
   // 3. Init — FOUND a new PersonaGroup, or JOIN an existing one when an admit payload
-  //    is provided (--admit FILE → cmdInit routes admitPayloadPath). Self-guards on the
+  //    is provided (--admit FILE → cmdFound routes admitPayloadPath). Self-guards on the
   //    bootstrap (idempotent: already founded/joined → skip); the keypair is never wiped.
   if (present("init")) {
     steps.push({ step: "init", action: "skip", detail: "bootstrap present — already founded/joined; keypair intact" });
   } else {
     const admit = args.options["admit"];
-    const code = await cmdInit(args);
+    const code = await cmdFound(args);
     const detail =
       code !== 0
         ? `init exited ${code}`
@@ -139,7 +139,7 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
   if (present("genesis")) {
     steps.push({ step: "genesis", action: "skip", detail: "genesis present — NOT rebuilt (CID/identity preserved)" });
   } else {
-    const code = await cmdBuildGenesis(args);
+    const code = await cmdBake(args);
     steps.push({ step: "genesis", action: code === 0 ? "ran" : "failed", detail: code === 0 ? "build-genesis (founded)" : `build-genesis exited ${code}` });
   }
 

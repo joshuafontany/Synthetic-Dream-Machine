@@ -208,7 +208,7 @@ async function personaNew(args: ParsedArgs): Promise<number> {
         console.log(`  STANDS for a Kahu seat on THIS node; take the chair with: lares nexus seal seat`);
       }
       if (!fleetRead.reached) {
-        console.log(`  NODE-LOCAL for now (${fleetRead.why})`);
+        console.log(`  NODE-LOCAL — no hearth answered (${fleetRead.why})`);
         console.log(`  the name stands here regardless; carry it to your other vessels with: lares persona sync`);
       }
     },

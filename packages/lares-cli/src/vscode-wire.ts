@@ -7,7 +7,7 @@
  * itself, and Chroma tolerates one writer — N harnesses on one index is the contention that truncates
  * the HNSW segment and forces a drift-quarantine. So VS Code reaches memory THROUGH the lares house
  * (`lares_mcp.py` over the memory sensorium), and a stale mempalace entry is reaped in the same pass,
- * so a profile another wiring touched heals on the next wake.
+ * so a profile another wiring touched heals on the next stand.
  *
  * VS Code went native-MCP in v1.102. Schema (DISTINCT from Claude/Cursor's `mcpServers`): top-level
  * key is **`servers`**. Under a remote window the config lives on the remote-server side

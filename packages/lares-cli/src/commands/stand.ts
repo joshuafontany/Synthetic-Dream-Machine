@@ -10,7 +10,7 @@
  *
  * FOUNDING STANDS THE VESSEL AND NOTHING ELSE (operator ruling, 2026-08-08). The mempalace library and
  * the sensorium organs keep their own doors (`lares mempalace install`, `lares sense setup`), so a
- * founding stays isolated to the vessel root. A wake still REPORTS what stands, because naming a missing
+ * founding stays isolated to the vessel root. A stand still REPORTS what stands, because naming a missing
  * tool serves the operator and installing one behind them does not.
  *
  * The static CLAUDE.md @-import carries the canonical seed; this frame carries
@@ -29,7 +29,7 @@ import { emit } from "../render.js";
 import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { checkMempalaceIntegration } from "../integration-check.js";
-import { foundIfAbsent, type FoundStep } from "../found.js";
+import { foundIfAbsent, type FoundStep } from "../standup.js";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
 import { wireCopilotHome, type CopilotWireResult } from "../copilot-wire.js";
@@ -93,7 +93,7 @@ function fatalLine(attestation: string): string | null {
   return line.replace(/^.*?fatal:\s*/, "").replace(/^Error:\s*/, "").split("\n")[0]!.trim().slice(0, 300);
 }
 
-export async function cmdWake(args: ParsedArgs): Promise<number> {
+export async function cmdStand(args: ParsedArgs): Promise<number> {
   const port = Number(args.options["port"] ?? process.env["LAR_PORT"] ?? "8080");
   const root = larRoot();
   const bootstrap = larBootstrapPath();
@@ -186,7 +186,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     } else {
       const dataDir = larDataDir();   // runtime → <lares>/vessel
       mkdirSync(dataDir, { recursive: true });
-      const log = join(dataDir, "wake-serve.log");
+      const log = join(dataDir, "stand.log");
       // Readiness is SELF-ATTESTED, not requested (no web2 /health probe): the node
       // writes its boot phases to this log — `phase → vessel-ready` on success,
       // `fatal:` on a boot fault. We read that attestation, local-first, from the byte
@@ -242,7 +242,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
         if (/fatal:/.test(readAttestation())) phase = "fault";
       }
       // A verb rides the UDS SOCKET, which binds LATER than vessel-ready and later than the
-      // WS port — on a cold boot (post-regenesis), tens of seconds later. "Ready" must mean
+      // WS port — on a cold boot (post-rebirth), tens of seconds later. "Ready" must mean
       // the socket answers, or a caller (the seed leg, a hook recall) fires into the gap and
       // gets DaemonUnreachable. Poll the socket up to a cold-boot-generous deadline, still
       // bailing on a late fatal.

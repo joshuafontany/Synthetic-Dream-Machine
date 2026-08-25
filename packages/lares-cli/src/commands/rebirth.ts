@@ -9,13 +9,13 @@
  * A thin composer over the standing entities, ordered (invents nothing structural):
  *
  *   1. stop the incumbent  — port-control, graceful → force
- *   2. reset --force       — CRDT store + genesis artifacts + projection watermark
- *                            wiped; genesis re-baked; init re-founds (identity
+ *   2. clear --force       — CRDT store + genesis artifacts + projection watermark
+ *                            wiped; genesis re-baked; found re-runs (identity
  *                            preserved, `<lares>/identity` out of every wipe)
- *   3. wake                — boot detached, vessel-ready attested from the log
+ *   3. stand               — boot detached, vessel-ready attested from the log
  *   4. seed --apply        — plant every bags/* holding back into the fresh docs;
  *                            the conductor OWNS the zero-new refusal here: right
- *                            after a reset the Synced tree MUST read virgin — a tree
+ *                            after a clear the Synced tree MUST read virgin — a tree
  *                            with entries names a poisoned watermark, fail loud
  *
  * IDEMPOTENT from any prior state (running / stale / half-torn): every step is itself
@@ -25,21 +25,21 @@
 
 import type { ParsedArgs } from "../parse-args.js";
 import { larPort, larRoot, larIdentityDir } from "../env.js";
-import { cmdReset } from "./scripted.js";
-import { cmdWake } from "./wake.js";
+import { cmdClear } from "./scripted.js";
+import { cmdStand } from "./stand.js";
 import { seedRun, seedHolding, discoverHoldings } from "./seed.js";
 import { cmdAct } from "./act.js";
 import { isPersonaPlaneSlug } from "@lararium/mesh";
 
 const STEPS = [
-  "stop incumbent", "reset --force (store + genesis + projection watermark)",
-  "wake (vessel-ready attested)", "seed --apply (zero-new wave = FAIL, post-reset law)",
+  "stop incumbent", "clear --force (store + genesis + projection watermark)",
+  "stand (vessel-ready attested)", "seed --apply (zero-new wave = FAIL, post-clear law)",
 ] as const;
 
-function step(n: number): string { return `[regenesis ${n + 1}/${STEPS.length}] ${STEPS[n]}`; }
+function step(n: number): string { return `[vessel rite rebirth ${n + 1}/${STEPS.length}] ${STEPS[n]}`; }
 
 /**
- * The bags a single-bag regenesis MUST NOT target — the social/registry plane the boot
+ * The bags a single-bag rebirth MUST NOT target — the social/registry plane the boot
  * contract stands on. `discoverHoldings` only ever returns `bags/*` dirs (the daemon,
  * identities, persona, groups, sessions, catalog and oracle planes live on the social plane
  * with no `bags/` dir), so a name lookup already fences them out; this set carries the
@@ -68,33 +68,33 @@ function resolveHolding(
 }
 
 /**
- * L4 — targeted single-bag regenesis: rebirth ONE bag's doc from its `bags/slug` disk
+ * L4 — targeted single-bag rebirth: rebirth ONE bag's doc from its `bags/slug` disk
  * canon WITHOUT a full-store wipe and WITHOUT stopping the vessel. The scalpel beside the
  * whole-store sledgehammer: it reaches the daemon bag / sibling bags / identity / genesis /
- * the mempalace NOT AT ALL. Three scoped steps, mirroring reset+seed for one holding:
+ * the mempalace NOT AT ALL. Three scoped steps, mirroring clear+seed for one holding:
  *
  *   1. CLEAR the bag doc   — daemon-side, cap-verified, tombstone-in-place (the doc
  *                            SURVIVES; no registry repoint, no fresh mint — the re-mint
  *                            path would rewrite the pointer tiddler in the catalog and oracle planes and
  *                            reach the boot contract, out of L4-v1 scope).
  *   2. clear the watermark — forget just this bag's projection observations (the CLI owns
- *                            the synced-tree), then ASSERT virgin per-bag (regenesis's
+ *                            the synced-tree), then ASSERT virgin per-bag (the rite's
  *                            zero-check, scoped): a surviving watermark would read every
  *                            carrier "unchanged" and leave the cleared doc empty.
  *   3. re-seed one holding — the existing kind-routed seed primitive, this bag only.
  *
  * Preview by default; `--force` enacts — the same posture as the whole-store ritual.
  */
-export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise<number> {
+export async function cmdRebirthBag(args: ParsedArgs, bagArg: string): Promise<number> {
   const holdings = discoverHoldings(larRoot());
   const h = resolveHolding(bagArg, holdings);
   if (!h) {
-    console.error(`[regenesis --bag] "${bagArg}" names no @holding under ${larRoot()}/bags`);
+    console.error(`[vessel rite rebirth --bag] "${bagArg}" names no @holding under ${larRoot()}/bags`);
     console.error(`  known: ${holdings.map((x) => x.holding).join(" · ") || "(none found)"}`);
     return 3;
   }
   if (isProtectedBag(h.holding)) {
-    console.error(`[regenesis --bag] REFUSED: ${h.holding} rides the social/registry plane (the boot contract) — L4 targets bags/* content bags only.`);
+    console.error(`[vessel rite rebirth --bag] REFUSED: ${h.holding} rides the social/registry plane (the boot contract) — L4 targets bags/* content bags only.`);
     return 2;
   }
 
@@ -111,7 +111,7 @@ export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise
     return 0;
   }
 
-  // ── Enact — the vessel STAYS UP (no stop/wake): every gesture rides the live daemon sock ──
+  // ── Enact — the vessel STAYS UP (no stop/stand): every gesture rides the live daemon sock ──
 
   // 1. CLEAR the bag doc (daemon-side, cap-verified). A daemon-unreachable / cap-denied
   //    fault surfaces through cmdAct's exit code — re-run once the fault clears (idempotent).
@@ -121,7 +121,7 @@ export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise
     options: { ...args.options, bag: h.toBag },
     flags: { ...args.flags, yes: true },
   });
-  if (clearCode !== 0) { console.error("[regenesis --bag] CLEAR failed (daemon down? cap-denied?) — nothing re-seeded; re-run after the fault clears"); return clearCode; }
+  if (clearCode !== 0) { console.error("[vessel rite rebirth --bag] CLEAR failed (daemon down? cap-denied?) — nothing re-seeded; re-run after the fault clears"); return clearCode; }
 
   // 2. Forget this bag's projection observations, then assert virgin for the bag. The
   //    CLI owns the synced-tree file; the vessel's projector reacts to the CLEAR by
@@ -135,7 +135,7 @@ export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise
   tree.flush();
   const residual = tree.countForBag(h.toBag);
   if (residual > 0) {
-    console.error(`[regenesis --bag] REFUSED: ${residual} watermark entr(y/ies) for ${h.toBag} survived the clear — a stale watermark would starve the re-feed. Re-run (the projector settles), or clear projection/synced-tree.json.`);
+    console.error(`[vessel rite rebirth --bag] REFUSED: ${residual} watermark entr(y/ies) for ${h.toBag} survived the clear — a stale watermark would starve the re-feed. Re-run (the projector settles), or clear projection/synced-tree.json.`);
     return 1;
   }
   console.log(`  forgot ${removed} carrier observation(s); the bag reads virgin`);
@@ -143,16 +143,16 @@ export async function cmdRegenesisBag(args: ParsedArgs, bagArg: string): Promise
   // 3. Re-seed ONE holding — the shared kind-routed primitive, applied.
   console.log(`[L4 3/3] re-seed ${h.holding}`);
   const row = await seedHolding({ ...args, flags: { ...args.flags, apply: true, yes: true } }, h);
-  if (row.exitCode !== 0) { console.error(`[regenesis --bag] re-seed ${h.holding} (${row.gesture}) → exit ${row.exitCode}; the doc may sit part-fed — re-run (idempotent)`); return 1; }
+  if (row.exitCode !== 0) { console.error(`[vessel rite rebirth --bag] re-seed ${h.holding} (${row.gesture}) → exit ${row.exitCode}; the doc may sit part-fed — re-run (idempotent)`); return 1; }
 
-  console.log(`[regenesis --bag] ${h.holding} reborn from disk canon — the daemon bag, siblings, identity, genesis, the mempalace untouched. Witness: \`lares vessel read\`, the bag through the wiki.`);
+  console.log(`[vessel rite rebirth --bag] ${h.holding} reborn from disk canon — the daemon bag, siblings, identity, genesis, the mempalace untouched. Witness: \`lares vessel read\`, the bag through the wiki.`);
   return 0;
 }
 
-export async function cmdRegenesis(args: ParsedArgs): Promise<number> {
+export async function cmdRebirth(args: ParsedArgs): Promise<number> {
   // The scalpel forks off the sledgehammer on `--bag`: one holding, no stop, no store wipe.
   const bagArg = args.options["bag"];
-  if (bagArg) return cmdRegenesisBag(args, bagArg);
+  if (bagArg) return cmdRebirthBag(args, bagArg);
 
   if (!args.flags["force"]) {
     console.log("lares vessel rite rebirth — CRDT-layer rebirth from bags/ (preview; pass --force to enact)");
@@ -171,16 +171,16 @@ export async function cmdRegenesis(args: ParsedArgs): Promise<number> {
   console.log(r.stopped ? `  stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})` : `  :${port} already free`);
 
   console.log(step(1));
-  const resetCode = await cmdReset({ ...args, flags: { ...args.flags, force: true } });
-  if (resetCode !== 0) { console.error("[regenesis] reset failed — re-run after the fault clears"); return resetCode; }
+  const clearCode2 = await cmdClear({ ...args, flags: { ...args.flags, force: true } });
+  if (clearCode2 !== 0) { console.error("[vessel rite rebirth] clear failed — re-run after the fault clears"); return clearCode2; }
 
   console.log(step(2));
-  const wakeCode = await cmdWake({ ...args, positional: [], flags: { ...args.flags, force: false } });
-  if (wakeCode !== 0) { console.error("[regenesis] wake did not attest vessel-ready — read the wake-serve.log, then re-run (the ceremony resumes idempotently)"); return wakeCode; }
+  const standCode = await cmdStand({ ...args, positional: [], flags: { ...args.flags, force: false } });
+  if (standCode !== 0) { console.error("[vessel rite rebirth] the stand did not attest vessel-ready — read stand.log, then re-run (the ceremony resumes idempotently)"); return standCode; }
 
   console.log(step(3));
-  // The post-reset law, owned HERE (flow, not flag): the seeding must start from a
-  // virgin Synced tree — reset wiped it; a tree with entries at this moment means a
+  // The post-clear law, owned HERE (flow, not flag): the seeding must start from a
+  // virgin Synced tree — the clear wiped it; a tree with entries at this moment means a
   // stale watermark survived and would silently read every carrier "unchanged",
   // leaving the fresh docs empty. Fail loud before feeding.
   {
@@ -192,16 +192,16 @@ export async function cmdRegenesis(args: ParsedArgs): Promise<number> {
       let entries = 0;
       try { entries = Object.keys(JSON.parse(readFileSync(treePath, "utf8"))).length; } catch { /* corrupt = fresh-adoption, fine */ }
       if (entries > 0) {
-        console.error(`[regenesis] REFUSED: ${treePath} holds ${entries} entries after reset — a stale projection watermark would poison the re-feed (every carrier reads "unchanged"). Remove it and re-run.`);
+        console.error(`[vessel rite rebirth] REFUSED: ${treePath} holds ${entries} entries after the clear — a stale projection watermark would poison the re-feed (every carrier reads "unchanged"). Remove it and re-run.`);
         return 1;
       }
     }
   }
   const ledger = await seedRun({ ...args, flags: { ...args.flags, apply: true, yes: true } });
   const failed = ledger.filter((h) => h.exitCode !== 0);
-  for (const h of failed) console.error(`[regenesis] seed ${h.holding} (${h.gesture}) → exit ${h.exitCode}`);
-  if (failed.length > 0) { console.error("[regenesis] seeding failed — the docs may sit part-fed; re-run seed/regenesis (idempotent)"); return 1; }
+  for (const h of failed) console.error(`[vessel rite rebirth] seed ${h.holding} (${h.gesture}) → exit ${h.exitCode}`);
+  if (failed.length > 0) { console.error("[vessel rite rebirth] seeding failed — the docs may sit part-fed; re-run seed or the rite (idempotent)"); return 1; }
 
-  console.log("[regenesis] rebirth complete — witness: `lares vessel read`, one meme through the wiki, chunk census on the vessel store (larDataDir — <lares>/vessel)");
+  console.log("[vessel rite rebirth] rebirth complete — witness: `lares vessel read`, one meme through the wiki, chunk census on the vessel store (larDataDir — <lares>/vessel)");
   return 0;
 }

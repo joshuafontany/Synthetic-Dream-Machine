@@ -36,13 +36,13 @@
  */
 
 import type { ParsedArgs } from "../parse-args.js";
-import { cmdInit }     from "./init.js";
-import { cmdWake }     from "./wake.js";
+import { cmdFound }     from "./found.js";
+import { cmdStand }     from "./stand.js";
 import { cmdSeed }     from "./seed.js";
-import { cmdStatus, cmdNodeStop } from "./status.js";
-import { cmdRegenesis } from "./regenesis.js";
+import { cmdRead, cmdStop } from "./read.js";
+import { cmdRebirth } from "./rebirth.js";
 import {
-  cmdBuildGenesis, cmdServe, cmdDev, cmdReset, cmdReconcile, cmdRebuild, cmdRefresh,
+  cmdBake, cmdStandForeground, cmdStandWithApp, cmdClear, cmdRestart, cmdRiteRebuild, cmdRiteRefresh,
 } from "./scripted.js";
 
 type Sub = (args: ParsedArgs) => Promise<number>;
@@ -69,13 +69,13 @@ const withFlag = (args: ParsedArgs, key: string, value = true): ParsedArgs =>
  */
 async function standVessel(args: ParsedArgs): Promise<number> {
   const a = under(args);
-  if (a.flags["with-app"])    return cmdDev(a);
+  if (a.flags["with-app"])    return cmdStandWithApp(a);
   if (a.flags["restart"])     {
     // `--clear` reads as the operator's word for the wipe; the handler beneath spells it `fresh`.
-    return cmdReconcile(a.flags["clear"] ? withFlag(a, "fresh") : a);
+    return cmdRestart(a.flags["clear"] ? withFlag(a, "fresh") : a);
   }
-  if (a.flags["foreground"])  return cmdServe(a);
-  return cmdWake(a);                 // the default posture: attach-or-start, detached, and REPORT
+  if (a.flags["foreground"])  return cmdStandForeground(a);
+  return cmdStand(a);                 // the default posture: attach-or-start, detached, and REPORT
 }
 
 /**
@@ -103,11 +103,11 @@ const RITES: Readonly<Record<string, { readonly composes: string; readonly run: 
   // The rite REPORTS which one it got, because the two look identical from outside and an operator who
   // expected a hearth reads a crossroads as a broken founding rather than an unlit one.
   founding: { composes: "found · stand · seed", run: runFoundingRite },
-  refresh:  { composes: "build · stop · clear · stand", run: cmdRefresh },
-  rebuild:  { composes: "bake · stand",                 run: cmdRebuild },
+  refresh:  { composes: "build · stop · clear · stand", run: cmdRiteRefresh },
+  rebuild:  { composes: "bake · stand",                 run: cmdRiteRebuild },
   // Rebirth of a STANDING vessel names a real motion, and stop-wipe-bake carries it. A fresh founding
   // never runs it — nothing stands there to tear down.
-  rebirth:  { composes: "stop · clear · bake · stand · seed", run: cmdRegenesis },
+  rebirth:  { composes: "stop · clear · bake · stand · seed", run: cmdRebirth },
 };
 
 /**
@@ -119,7 +119,7 @@ const RITES: Readonly<Record<string, { readonly composes: string; readonly run: 
  */
 async function runFoundingRite(args: ParsedArgs): Promise<number> {
   const steps: ReadonlyArray<readonly [string, Sub]> = [
-    ["found", (a) => cmdInit(a)],
+    ["found", (a) => cmdFound(a)],
     ["stand", (a) => standVessel({ ...a, positional: ["stand"] })],
     ["seed",  (a) => cmdSeed({ ...a, flags: { ...a.flags, apply: true, yes: true } })],
   ];
@@ -159,13 +159,13 @@ async function runRite(args: ParsedArgs): Promise<number> {
 
 /** The door's map. Every entry names a primitive, a read, or the one composed sub-door. */
 const SUBS: Readonly<Record<string, { readonly summary: string; readonly run: Sub }>> = {
-  found: { summary: "mint the vessel identity, persona root, social planes and bootstrap (idempotent)", run: (a) => cmdInit(under(a)) },
+  found: { summary: "mint the vessel identity, persona root, social planes and bootstrap (idempotent)", run: (a) => cmdFound(under(a)) },
   stand: { summary: "bring the daemon up and report — [--foreground] [--with-app] [--restart [--clear]]", run: standVessel },
-  stop:  { summary: "halt the daemon on the port (graceful → forced); a free port reads as stopped",     run: (a) => cmdNodeStop(under(a)) },
-  clear: { summary: "wipe the store + projection watermark, re-bake and re-found (identity survives)",   run: (a) => cmdReset(under(a)) },
-  bake:  { summary: "re-derive the genesis island from the engine + packed plugin (moves no identity)",  run: (a) => cmdBuildGenesis(under(a)) },
+  stop:  { summary: "halt the daemon on the port (graceful → forced); a free port reads as stopped",     run: (a) => cmdStop(under(a)) },
+  clear: { summary: "wipe the store + projection watermark, re-bake and re-found (identity survives)",   run: (a) => cmdClear(under(a)) },
+  bake:  { summary: "re-derive the genesis island from the engine + packed plugin (moves no identity)",  run: (a) => cmdBake(under(a)) },
   seed:  { summary: "plant every bags/* holding back into its doc, kind-routed and diff-gated",         run: (a) => cmdSeed(under(a)) },
-  read:  { summary: "inspect and start nothing — bootstrap, storage, port, seal, personas, quorum",      run: (a) => cmdStatus(under(a)) },
+  read:  { summary: "inspect and start nothing — bootstrap, storage, port, seal, personas, quorum",      run: (a) => cmdRead(under(a)) },
   rite:  { summary: "the pet-named procedures: founding · refresh · rebuild · rebirth",                 run: runRite },
 };
 

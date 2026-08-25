@@ -313,8 +313,8 @@ async function cmdPosture(args: ParsedArgs): Promise<number> {
     return exitFor("error");
   }
   const posture: FederationPosture = want;
-  // The PRACTICE joint alone. A posture flip once re-emitted the seal lineage's bytes on its way past;
-  // the narrow writer never parses that block, so the cheapest act no longer reaches the dearest joint.
+  // The PRACTICE joint alone, and the narrowness IS the guard: this writer never parses the seal lineage
+  // block, so the cheapest act in the house cannot reach the dearest joint in it.
   const path = writeNexusPractice(sealHome, { federationPosture: posture }, doc);
   const next = { ...doc, federationPosture: posture };
   emit(args, {
@@ -735,7 +735,7 @@ async function sealShow(args: ParsedArgs): Promise<number> {
       console.log(`nexus seal (${nexusCharterDocPath(sealHome)}):`);
       for (const k of doc.kahu) console.log(`  ${k.verifyingKey ? "seated  " : "UNSEATED"} ${k.displayName}`);
       console.log(`  threshold:  ${roster.threshold} · seated keys: ${roster.keys.length}`);
-      console.log(`  chain:      ${chainDepth > 0 ? `${chainDepth} epoch(s), head at seq ${chainDepth - 1}` : "(none — legacy/unestablished)"}`);
+      console.log(`  chain:      ${chainDepth > 0 ? `${chainDepth} epoch(s), head at seq ${chainDepth - 1}` : "(none — no epoch established)"}`);
       console.log(`  head epoch: ${roster.sealEpochCid || "(unestablished)"}`);
       console.log(`  rotation:   ${head && head.nextKeyCommit.length > 0 ? "ARMED" : "UNARMED"}`);
       console.log(`  quorum:     ${quorum ? "STANDS (roster live)" : "SHORT (fail-closed — antigen inert)"}`);

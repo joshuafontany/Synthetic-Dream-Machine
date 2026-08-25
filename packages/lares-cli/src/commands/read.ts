@@ -1,23 +1,24 @@
 /**
- * `lares vessel read` — the status surface, NAMESPACED into two referents (the name-collision cure):
+ * `lares vessel read` — the inspection surface, NAMESPACED into referents that never collide:
  *
  *   lares vessel read             NODE HEALTH — bootstrap presence, storage size, port in use. Pure
  *                                 local inspection, no vm boot.
+ *   lares vessel read --palaces   PALACE ORGANS — the local organ health table.
+ *   lares vessel read vessel      THE DEEP PROBE — every Automerge doc, mounted vs condemned.
  *   lares sense status            SENSORIUM TAXONOMY — what the Memory sensorium holds; the read rides
  *                                 the sense door over the daemon's composed caps.
- *   lares vessel read sensorium   ALIAS → points at `lares sense status` (the sensorium door).
  *
  * Each name resolves to ONE referent, so the isomorphism table holds no name reaching two things.
  *
- * `lares vessel read --palaces` keeps the palace-organ health table (a third, distinct local view).
+ * `lares vessel stop` lives here beside it: both act on the same running node, one by looking and one
+ * by ending it, and neither boots a vm.
  */
 
 import { larRoot, larDataDir, larPort, vesselDid, larBootstrapPath } from "../env.js";
-import { stopIncumbent } from "../port-control.js";
+import { stopIncumbent, probePort } from "../port-control.js";
 import { udsAlive } from "../local-connector.js";
 import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { createConnection } from "node:net";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
 import { palaceOrgans, organHealthy, guestMempalaceOrgan, readMemeticWikitextCoupling, runDoctor, formatDoctorReport } from "@lararium/node";
 import { readClaudeCleanupPeriod, CLEANUP_PERIOD_DAYS_FLOOR } from "../claude-wire.js";
@@ -31,7 +32,7 @@ const CLAUDE_DEFAULT_CLEANUP_DAYS = 30; // Claude's own default when the key is 
  * `lares vessel stand --init` stands up + `lares sense teardown` removes, so the health view never drifts
  * from what setup/teardown act on. Pure inspection (each organ's cheap probe), no vm boot.
  */
-function cmdStatusPalaces(args: ParsedArgs): number {
+function cmdReadPalaces(args: ParsedArgs): number {
   const organs = palaceOrgans().map((o) => ({ name: o.name, dir: o.dir, healthy: organHealthy(o) }));
   const allHealthy = organs.every((o) => o.healthy);
   // The GUEST rides BESIDE the table, never inside it — `~/.mempalace` never stands as an organ of the
@@ -83,21 +84,6 @@ function dirSizeHint(dir: string): string {
   return `${count} files, ${(bytes / 1024).toFixed(1)} KiB`;
 }
 
-export function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Promise<boolean> {
-  return new Promise((resolveP) => {
-    const sock = createConnection({ port, host });
-    const done = (open: boolean): void => {
-      sock.removeAllListeners();
-      sock.destroy();
-      resolveP(open);
-    };
-    sock.setTimeout(timeoutMs);
-    sock.once("connect", () => done(true));
-    sock.once("error",   () => done(false));
-    sock.once("timeout", () => done(false));
-  });
-}
-
 // `lares vessel read sensorium` — an alias. The sensorium taxonomy reads through the sense door
 // (`lares sense status`, which routes to the daemon's composed content cap); this alias points there
 // rather than opening a second path. Local organ health rides `lares vessel read --palaces`.
@@ -106,22 +92,13 @@ const SENSORIUM_STATUS_REDIRECT =
   "run `lares vessel read --palaces`; for node health, `lares vessel read`.";
 
 /** `lares vessel read sensorium` (alias) — points at `lares sense status`, the sensorium taxonomy door. */
-function cmdSensoriumStatus(args: ParsedArgs): number {
+function cmdReadSensorium(args: ParsedArgs): number {
   emit(args, {
     ok: false,
     error: { code: "verb-error", message: SENSORIUM_STATUS_REDIRECT, hint: "run `lares sense status` for the taxonomy; `lares vessel read --palaces` for local organ health." },
     human: () => { console.error(`lares vessel read sensorium → ${SENSORIUM_STATUS_REDIRECT}`); },
   });
   return exitFor("verb-error");
-}
-
-/** The node sub-group — `status` reads node health, `stop` halts the daemon on the port. */
-export async function cmdNode(args: ParsedArgs): Promise<number> {
-  const sub = args.positional[0];
-  if (sub === undefined || sub === "status") return cmdNodeStatus(args);
-  if (sub === "stop") return cmdNodeStop(args);
-  console.error(`lares node: unknown subverb "${sub}". Run \`lares vessel read\` or \`lares vessel stop\`.`);
-  return 2;
 }
 
 /**
@@ -131,7 +108,7 @@ export async function cmdNode(args: ParsedArgs): Promise<number> {
  * It ENDS a vessel and nothing else — `vessel stand --restart` stops then stands, `hooks pause`
  * suppresses capture alone.
  */
-export async function cmdNodeStop(args: ParsedArgs): Promise<number> {
+export async function cmdStop(args: ParsedArgs): Promise<number> {
   const port = larPort();
   const r = await stopIncumbent(port);
   emit(args, {
@@ -146,14 +123,6 @@ export async function cmdNodeStop(args: ParsedArgs): Promise<number> {
   return 0;
 }
 
-/** `lares sense <subverb>` — the sensorium command group; `status` mirrors the MCP `status` tool. */
-export async function cmdSensorium(args: ParsedArgs): Promise<number> {
-  const sub = args.positional[0];
-  if (sub === undefined || sub === "status") return cmdSensoriumStatus(args);
-  console.error(`lares sense: unknown subverb "${sub}". Run \`lares sense status\`.`);
-  return 2;
-}
-
 /**
  * `lares vessel read vessel` — the DEEP health lens (the `git fsck` role, reached through the one
  * read door rather than a verb of its own): probes every Automerge doc in the vessel store through a
@@ -161,7 +130,7 @@ export async function cmdSensorium(args: ParsedArgs): Promise<number> {
  * abort the WASM runtime on load). Read-only; a condemned doc points at `lares vessel rite rebirth`.
  * Exits non-zero on a tear, so a boot/CI gate reads health off the exit code.
  */
-export async function cmdStatusVessel(args: ParsedArgs): Promise<number> {
+async function cmdReadVessel(args: ParsedArgs): Promise<number> {
   const storageDir = larDataDir();
   const report = await runDoctor(storageDir);
   emit(args, {
@@ -179,19 +148,18 @@ export async function cmdStatusVessel(args: ParsedArgs): Promise<number> {
   return report.degraded ? 1 : 0;
 }
 
-export async function cmdStatus(args: ParsedArgs): Promise<number> {
+export async function cmdRead(args: ParsedArgs): Promise<number> {
   // --palaces: the palace-organ health table (re-runnable; same registry as setup/teardown).
-  if (args.flags["palaces"] === true) return cmdStatusPalaces(args);
-  // Namespaced lenses reached through the alias: sensorium taxonomy · node health · deep vessel probe.
-  if (args.positional[0] === "sensorium") return cmdSensoriumStatus(args);
-  if (args.positional[0] === "node") return cmdNodeStatus(args);
-  if (args.positional[0] === "vessel") return cmdStatusVessel(args);
-  // Bare `lares vessel read` = muscle-memory alias → node health.
-  return cmdNodeStatus(args);
+  if (args.flags["palaces"] === true) return cmdReadPalaces(args);
+  // The named lenses: sensorium taxonomy (redirected to its own door) · the deep vessel probe.
+  if (args.positional[0] === "sensorium") return cmdReadSensorium(args);
+  if (args.positional[0] === "vessel") return cmdReadVessel(args);
+  // Bare `lares vessel read` — node health, the reading an operator wants most often.
+  return cmdReadNode(args);
 }
 
 /** Node health — bootstrap presence, storage size, port probe, retention. Pure local inspection. */
-async function cmdNodeStatus(args: ParsedArgs): Promise<number> {
+async function cmdReadNode(args: ParsedArgs): Promise<number> {
 
   const root      = larRoot();   // corpus root (genesis); vessel state roots in the home
   const storage   = larDataDir();   // runtime → <lares>/vessel

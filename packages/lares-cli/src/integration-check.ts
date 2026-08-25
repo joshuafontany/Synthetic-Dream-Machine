@@ -1,6 +1,6 @@
 /**
  * integration-check — verify (and, on demand, install) the mempalace integration
- * that `lares vessel stand` depends on. The CHECK is cheap and runs every wake; the
+ * that `lares vessel stand` depends on. The CHECK is cheap and runs on every stand; the
  * INSTALL is one-time, behind `--install`, and touches the foundation.
  *
  * mempalace is a READ-ONLY sidecar submodule; we never edit it, only ensure it's
@@ -36,7 +36,7 @@ export interface IntegrationReport {
   readonly checks: readonly IntegrationCheck[];
 }
 
-/** Cheap, every-wake-safe: file presence + a light `find_spec` (never a full import). */
+/** Cheap, every-stand-safe: file presence + a light `find_spec` (never a full import). */
 export function checkMempalaceIntegration(): IntegrationReport {
   const checks: IntegrationCheck[] = [];
 
@@ -54,7 +54,7 @@ export function checkMempalaceIntegration(): IntegrationReport {
     detail: pkgOk ? "@lararium/mempalace present" : "absent — the integration package is missing from packages/",
   });
 
-  // find_spec does NOT execute the module (no heavy chromadb import) — wake-cheap.
+  // find_spec does NOT execute the module (no heavy chromadb import) — stand-cheap.
   const py = resolvePython();
   let holderOk = false;
   let holderDetail = "no python (python3/python/py) on PATH — install Python to reach the holder";

@@ -11,7 +11,7 @@
  * lives in @lararium/keyhive (runDeviceAdmitCore) and runs identically in any vessel.
  *
  * Same-operator path: covers the operator's own N vessels (desktop, browser, phone).
- * Multi-operator join uses invite-send / invite-receive (ceremony.ts stubs).
+ * A second OPERATOR joins a Nexus by carriage contract (`lares nexus accept-carriage` + `lares nexus contract`) — a different axis (ceremony.ts stubs).
  */
 
 import { existsSync, readFileSync, writeFileSync } from "fs";

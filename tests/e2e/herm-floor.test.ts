@@ -81,17 +81,17 @@ function findSock(dir: string, depth = 5): string | null {
  * Stand the floor and report what it reached. Resolves the boot log either way — a fault is a result.
  *
  * READ THE VESSEL'S OWN LOG, NEVER THE LAUNCHER'S STDOUT. `lares vessel stand` DETACHES: the launcher
- * prints a status line and exits while the vessel it started writes `wake-serve.log` under its own data
+ * prints a status line and exits while the vessel it started writes `stand.log` under its own data
  * dir. A harness watching the launcher's pipe sees a vessel that reached `live` as one that printed
  * nothing, and reports the floor down while it is up — a measurement fault that reads exactly like a boot
  * fault. The log the vessel writes is the one that knows.
  */
 async function standHerm(r: string): Promise<{ live: boolean; log: string }> {
-  const wakeLog = join(r, "data/lares/vessel/wake-serve.log");
+  const standLog = join(r, "data/lares/vessel/stand.log");
   // CLEAR THE PRIOR BOOT'S LOG FIRST. The vessel APPENDS, so a `phase → live` from an earlier stand
   // answers instantly for a vessel that never came back up — the lift vector then reports a hearth that
   // stood when nothing did, and reaches for a socket no process holds.
-  rmSync(wakeLog, { force: true });
+  rmSync(standLog, { force: true });
   const child = spawn(process.execPath, [CLI, "vessel", "stand"], {
     env: { ...process.env, LAR_ROOT: r, LAR_PORT: String(PORT) }, cwd: REPO,
   });
@@ -100,7 +100,7 @@ async function standHerm(r: string): Promise<{ live: boolean; log: string }> {
   child.stderr.on("data", (b) => { launcher += String(b); });
   const deadline = Date.now() + 150_000;
   for (;;) {
-    const log = (existsSync(wakeLog) ? readFileSync(wakeLog, "utf8") : "") + launcher;
+    const log = (existsSync(standLog) ? readFileSync(standLog, "utf8") : "") + launcher;
     if (/phase → live/.test(log)) return { live: true, log };
     // FAIL FAST ONLY ON A FAULT THIS VESSEL RAISED. A bare /Error:/ also matches the keyhive wasm's own
     // DEBUG stream ("Error: Some(ReceiveCgkaOpError(UnknownInvitePrekey…))") — a line a healthy boot prints

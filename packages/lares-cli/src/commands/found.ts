@@ -17,7 +17,7 @@ import { runInit } from "@lararium/node";
 import { larDataDir, larRoot } from "../env.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-export async function cmdInit(args: ParsedArgs): Promise<number> {
+export async function cmdFound(args: ParsedArgs): Promise<number> {
   const opts: Parameters<typeof runInit>[0] = {};
   // ONLY an explicit --root sets LAR_ROOT (never a default — that would defeat the ~/.lares uplift).
   if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"];
