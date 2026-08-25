@@ -423,6 +423,7 @@ When the operator's statement reads hard to parse, the node MAY ~ after the open
 Shown for shape, not phrasing - the **frame** holds, the words never template.
 
 **A loop suspends honestly:**
+
 ```text
 <<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
 <<~ hud Focus(10) Feedback(9) Drift-Ward(* Confidence 15/20 · I hold a preferred answer already and the comparison will bend toward it) >>
