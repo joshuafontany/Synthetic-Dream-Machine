@@ -153,7 +153,7 @@ family        sigil-family-*          FamilyRule only; no dispatch; governs edge
 
 !! C0 Control Sigil Roles
 
-The four C0 control characters (`&#x0001;`–`&#x0004;`) are the ''carrier spine'' — SOH · STX · ETX · EOT. Their roles, byte values, kapu aliases, and the REQUIRED-in-order law live in their one home: `carrier-sigils#carrier-spine` (#edges). This section owns only how the parser ''checks'' them — it does not redefine the marks.
+The four C0 control characters (`&#x0001;`–`&#x0004;`) are the ''carrier spine'' — SOH · STX · ETX · EOT. Their roles, byte values, kapu aliases, and the REQUIRED-in-order law live in their one home: `framing#carrier-spine` (#edges). This section owns only how the parser ''checks'' them — it does not redefine the marks.
 
 `&#x0005;` (ENQ) and `&#x0006;` (ACK) appeared in earlier research as query/response throat operators. They did not land in the live system. Live query surface uses `<<~ ui FILTER >>` (kind: `query`) instead.
 
@@ -193,7 +193,7 @@ Parser MUST reject ad-hoc closure spellings as canonical. A noncanonical closer 
 
 !! Iam Block
 
-The ''toml iam slot'' (`#iam`) carries the canonical identity payload for a meme — a bare `` ```toml iam `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `carrier-sigils#carrier-spine`).
+The ''toml iam slot'' (`#iam`) carries the canonical identity payload for a meme — a bare `` ```toml iam `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `framing#carrier-spine`).
 
 Canonical form:
 ````text
@@ -245,7 +245,7 @@ Consumers: island adaptor (`island-adaptor.ts`), deserializer (`deserializer.ts`
 
 !! MemeStreamEvent — Streaming Parse Events
 
-The streaming parse surface emits one event per carrier-frame boundary; `collectEvents(text)` (#meme-ast) drives the stream. The frame boundaries are the carrier spine (`carrier-sigils`).
+The streaming parse surface emits one event per carrier-frame boundary; `collectEvents(text)` (#meme-ast) drives the stream. The frame boundaries are the carrier spine (`framing`).
 
 ```toml
 # Source: packages/lararium-mesh/src/meme-stream.ts
@@ -278,13 +278,13 @@ trigger = "end of stream"
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/carrier-sigils >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/framing >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/ahu >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DSc6PjbOlxmlz1-PRaM0xIATkKbWBVY3xCkpniRtpl4
+<<^ code:"&#x0003;" >>ni:///sha-256;4wYBW_6N8DUIMcHj0J5nYVvu5PxCTIXedL9pvaz1YFQ
 
 <<^ code:"&#x0004;" -> ? >>

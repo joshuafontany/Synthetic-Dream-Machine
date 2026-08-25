@@ -65,11 +65,11 @@ export function deserializeCarrier(
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/carrier-sigils >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/framing >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/projection-codec >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;77jQeRxB4SOHpGN0iWc-SjyOk4gRkHyVmXEqnbZEy70
+<<^ code:"&#x0003;" >>ni:///sha-256;kon8F7Ra6vm9wERwB9ANbeEWIx3wtd1f5AD1mGzp-LQ
 
 <<^ code:"&#x0004;" -> ? >>

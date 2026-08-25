@@ -31,7 +31,7 @@ The canonical source rests at `lar:///ha.ka.ba/lararium/tw5/modules/deserializer
 
 !! Split Model
 
-The entry `memeticWikitextDeserializer(text, fields)` streams the raw text through `MemeStreamParser` (single-meme, multi-meme, and partial carriers all flow), then routes each carrier-close event through `splitMemeToTiddlers` → `splitRecursive`. The parent tiddler carries all iam TOML fields merged into its TW5 fields; each `<<~ ahu #slot >>` block becomes a child tiddler holding its body bytes authoritatively, the parent keeping a `<<~ kahea ahu #slot >>` reference in its place. Prologue, preamble, header-text and postamble ride RECORDS of their own at derived addresses (`…#$prologue`, `…#slot/$preamble`) — each holds its bytes in a `text`, because a TW5 field cannot carry a newline across a `.tid` projection and a value that survives in one format only cannot travel. The frame splices them by POSITION, never by marker, so the recompose inverse (`expandMemeRefs`) round-trips the carrier byte-for-byte. Scalar carriage — `$slot`, `$fragment-parent`, `$carrier-soh` — stays on fields (see lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#the-carriage).
+The entry `memeticWikitextDeserializer(text, fields)` streams the raw text through `MemeStreamParser` (single-meme, multi-meme, and partial carriers all flow), then routes each carrier-close event through `splitMemeToTiddlers` → `splitRecursive`. The parent tiddler carries all iam TOML fields merged into its TW5 fields; each `<<~ ahu #slot >>` block becomes a child tiddler holding its body bytes authoritatively, the parent keeping a `<<~ kahea ahu #slot >>` reference in its place. Prologue, preamble, header-text and postamble ride RECORDS of their own at derived addresses (`…#$prologue`, `…#slot/$preamble`) — each holds its bytes in a `text`, because a TW5 field cannot carry a newline across a `.tid` projection and a value that survives in one format only cannot travel. The frame splices them by POSITION, never by marker, so the recompose inverse (`expandMemeRefs`) round-trips the carrier byte-for-byte. Scalar carriage — `$slot`, `$fragment-parent`, `$carrier-soh` — stays on fields (see lar:///ha.ka.ba/lares/api/pono/framing#the-carriage).
 
 A split failure never truncates: `safeSplitMeme` falls back to one verbatim tiddler flagged `lar_parse_degraded`, and grades the parse via `parseMemeText().failures` into `lar_parse_failures` — degradation surfaces legibly rather than dropping bytes.
 
@@ -49,6 +49,6 @@ The paired `carrier-filetype` startup module registers `.mem` as `text/x-memetic
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Qrfj7-edRwJDzLqDJYob_UMI_iaGU-V5He0KvDW4otg
+<<^ code:"&#x0003;" >>ni:///sha-256;_f6eeJs76NYiEhJ3Rh1bwvSl9ksbEcR2gTg1Te5TRmQ
 
 <<^ code:"&#x0004;" -> ? >>

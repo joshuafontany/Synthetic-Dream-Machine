@@ -89,7 +89,7 @@ export function memeticWikitextDeserializer(
   text:   string,
   fields: Record<string, unknown>,
 ): TiddlerFields[] {
-  // Carrier-bytes law (spec #carrier-bytes): carriers rest as UTF-8, LF, no
+  // Carrier-bytes law (framing #carrier-bytes): carriers rest as UTF-8, LF, no
   // BOM. The boundary normalizes foreign line endings and a leading BOM at
   // ingest — once, here, so every stratum downstream sees one byte law.
   if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
@@ -607,7 +607,7 @@ function extractRootTomlWithPos(text: string) { return findIamFence(text); }
 // Convention:
 //   - THE FENCE MUST OPEN ITS HEAD. A labelled iam fence heads the slot it opens; content standing
 //     BEFORE it means the fence heads nothing — it is body, the way a teaching example is. The parent
-//     law (#authoring: the fence that OPENS a carrier heads it) reaches every slot the same way.
+//     law (framing #authoring: the fence that OPENS a carrier heads it) reaches every slot the same way.
 //
 //     Post-iam content in the head STANDS — that is the bindings zone, authored, and it re-emits
 //     between the iam and the body. Pre-iam content does not, and `preamble` retires with it: a zone

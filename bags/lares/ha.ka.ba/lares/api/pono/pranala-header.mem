@@ -58,7 +58,7 @@ The `?` token stays reserved — MUST NOT be used as a sigil name elsewhere.
 ''Why the control head.'' A frame mark states what the reader must do before it can read anything; a
 speaking sigil states what a carrier says. The bearing stands first among the former — a reader that
 cannot find the address cannot resolve a single `?` in the body — so it rides the head that carries the
-frame (#frame-head-lock in the carrier spec).
+frame (`lar:///ha.ka.ba/lares/api/pono/framing#frame-head-lock`).
 
 <<~/ahu >>
 
@@ -104,10 +104,11 @@ agrees-with    = "uri-path"
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/framing >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;E9kxBkrDIVHaOUZH8hRiezOHteHzwgg0FHK8P2eqbSY
+<<^ code:"&#x0003;" >>ni:///sha-256;0GK87lQTQsaEURKtJIN_IYepr40KUCrY2Tl3PZ-pj9A
 
 <<^ code:"&#x0004;" -> ? >>

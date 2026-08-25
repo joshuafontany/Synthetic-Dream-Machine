@@ -174,7 +174,7 @@ kapu body.
   });
 });
 
-describe("carrier-bytes law — the boundary normalizes once (spec #carrier-bytes)", () => {
+describe("carrier-bytes law — the boundary normalizes once (framing #carrier-bytes)", () => {
   test("BOM strips and CRLF normalizes to LF; the carrier reads canonical", () => {
     const foreign = "﻿" + TEACHING.replace(/\n/g, "\r\n");
     const records = recordsOf(foreign, TEACHING_URI);

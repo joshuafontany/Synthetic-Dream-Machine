@@ -1,6 +1,6 @@
 // frame-parity — the control marks the SPEC declares against the marks the CODE recognises.
 //
-// `api/pono/memetic-wikitext` states the carrier frame: which control characters stand, what slots
+// `api/pono/framing` states the carrier frame: which control characters stand, what slots
 // each carries, which stay reserved. The parser, the deserializer and the stream framer recognise
 // their own set, written by hand, one regex at a time.
 //
@@ -20,7 +20,7 @@ import { execSync } from "child_process";
 import { join } from "path";
 
 const REPO = process.env["REPO"] ?? process.cwd();
-const SPEC = join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/memetic-wikitext.mem");
+const SPEC = join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/framing.mem");
 
 /** Rows of the control-set table: `|`&#x000N;` |MARK |slots |carries |`. */
 const ROW = /^\|`(&#x[0-9A-Fa-f]{4};)`\s*\|([A-Za-z₂]+)\s*\|([^|]*)\|/gm;

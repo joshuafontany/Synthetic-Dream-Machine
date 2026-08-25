@@ -8,6 +8,7 @@ l-space       = "adjacent"
 mana          = 17
 manao         = 17
 manaoio       = 16
+module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets"
 register      = "Synthesis-Canon"
 retain        = true
 role          = "TW5 widget registry: ten lararium widget types, widget tiddler registration, TW5ParseNode shape"
@@ -16,7 +17,6 @@ status-date   = "2026-04-30"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/papalohe", "lar:///ha.ka.ba/lares/api/pono/kukali"]
 type          = "text/x-memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/tw5-widgets"
-module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets"
 ```
 
 <<~ ahu #head >>
@@ -87,10 +87,10 @@ fields = [
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/carrier-sigils >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/framing >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1MfcwE0H0b5zvU2jVXbWqESXcSVxitQqLLMP_zjWvhc
+<<^ code:"&#x0003;" >>ni:///sha-256;tHtz0tB5EonuPmd_QsrEdgRQYxJ_RwhVP-Cvx-OtVRc
 
 <<^ code:"&#x0004;" -> ? >>

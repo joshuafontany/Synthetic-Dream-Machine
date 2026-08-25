@@ -161,7 +161,7 @@ export function scanFiles(
       else skipped.push(file);
       continue;
     }
-    // The NFC shore assertion (spec: memetic-wikitext #carrier-bytes) — foreign
+    // The NFC shore assertion (spec: framing #carrier-bytes) — foreign
     // TEXT bytes first walk in HERE; non-NFC refuses loudly, never enters. A binary
     // carrier rides base64 (pure ASCII), so the NFC law does not touch it.
     if (!binary && text !== text.normalize("NFC")) {
