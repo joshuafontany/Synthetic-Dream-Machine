@@ -1413,6 +1413,15 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // where working + canon both live — the island owns its composition; the
     // daemon commands, never reaches the per-fingerprint working binding). The
     // inner verb (MOVE/LOAD/…) routes to the island's own action reactors.
+    // project-md: the submission projection as a first-class wire verb — routes to the island's
+    // PROJECT-MD QUERY reactor (read-cap, no mutation; returns the markdown + meta pair bytes).
+    // Same mouth as `lares project-md` (files) and the wiki UI gesture: meme-markdown.
+    registry.register("project-md", async (args, ctx) => {
+      await wikiActivation.ensureActive(slotActiveWikiId);
+      return vmManager.placeWikiVerb(slotActiveWikiId, {
+        verb: "PROJECT-MD", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
+      });
+    });
     registry.register("wiki-act", async (args, ctx) => {
       await wikiActivation.ensureActive(slotActiveWikiId);
       return vmManager.placeWikiVerb(slotActiveWikiId, {

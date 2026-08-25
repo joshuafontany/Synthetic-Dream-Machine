@@ -828,6 +828,16 @@ def build_mcp(coordinator: LaresCoordinator):
         return _call("plane_record", sensorium, cid)
 
     @mcp.tool()
+    def project_md(bag: str, title: str) -> dict:
+        """Render one carrier to its SUBMISSION PAIR — markdown body + .meta sidecar — via the
+        PROJECT-MD QUERY verb in the active wiki island (read-cap only, no mutation). One mouth,
+        every door: `lares project-md` projects files, the wiki UI gesture and this tool project
+        live records. Deterministic and clockless — currency is proven by re-projecting, never by
+        a stamp. `bag` names the holding bag, `title` the carrier's lar: address; returns
+        {uri, check, markdown, meta}."""
+        return uds.output("project-md", {"bag": bag, "title": title})
+
+    @mcp.tool()
     def wiki(verb: str, slug: "str | None" = None) -> dict:
         """The wiki-SWITCHER — mirrors `lares wiki <verb>` over the @daemon activation cap:
         `switch <slug>` LIVE-activates a wiki (no reboot — the true swap; wakes it cold from its
