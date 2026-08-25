@@ -56,7 +56,7 @@ for (const f of files) {
 
   // AN OPENED BODY CLOSES — and a carrier that never opens one carries no fault. The frame acts as a
   // FIELD OF THE TEXT BODY (operator ruling), so a bag manifest or a library index whose whole content
-  // IS its iam stands with a heading and nothing to bracket. Demanding ETX there would report ten
+  // IS its meta block stands with a heading and nothing to bracket. Demanding ETX there would report ten
   // correct carriers as broken, which is how a witness teaches a reader to ignore it.
   // THE CLOSES COME IN ORDER. Three carriers stood `EOT · ETX · EOT` — an end-of-transmission before
   // the text had ended — and every other check here passed them.

@@ -8,7 +8,7 @@
 #
 # The drift does not announce itself. A carrier reads perfectly to a human and still fails to
 # round-trip, because the failure lives in the FRAME or in a fence that swallows the rest of the file.
-# The sharpest one found: a fenced EXAMPLE containing its own ```toml iam fence closed the outer block,
+# The sharpest one found: a fenced EXAMPLE containing its own ```toml meta fence closed the outer block,
 # so the example's SOH became the file's, and 965 lines of a sprint log stopped parsing.
 #
 # ── THE PARSE HAPPENS IN A LIVE WIKI ────────────────────────────────────────────────────────────

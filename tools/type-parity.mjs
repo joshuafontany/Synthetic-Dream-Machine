@@ -2,7 +2,7 @@
 //
 // FOUR MECHANISMS DISPATCH ON THIS STRING, each a different one: the TW5 parser module exports under
 // it, the deserializer module exports under it, `registerFileType` binds `.mem` to it, and a stored
-// `type` field is compared against it. A fifth reads it back off disk from a carrier's own iam.
+// `type` field is compared against it. A fifth reads it back off disk from a carrier's own meta block.
 //
 // They agree only by hand, and the failure is silent in the worst way: a record whose type no reader
 // admits simply stops projecting. No throw, no diagnostic, no file — the carrier is just absent from
@@ -68,7 +68,7 @@ for (const f of SOURCES) {
   }
 }
 
-// AND THE CORPUS. A carrier declares its own type in its iam; both spellings read, and which one a
+// AND THE CORPUS. A carrier declares its own type in its meta block; both spellings read, and which one a
 // carrier carries says when it was written — reported, never failed, because rewriting a carrier's
 // type re-addresses it wherever a store addresses carriers by their bytes.
 const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
